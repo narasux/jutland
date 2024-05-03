@@ -11,6 +11,10 @@ var (
 	Green = color.RGBA{0, 255, 0, 255}
 	// Blue 蓝色
 	Blue = color.RGBA{0, 0, 255, 255}
+	// SkyBlue 天蓝
+	SkyBlue = color.RGBA{135, 206, 235, 255}
+	// DarkBlue 暗蓝
+	DarkBlue = color.RGBA{0, 0, 139, 255}
 	// Yellow 黄色
 	Yellow = color.RGBA{255, 255, 0, 255}
 	// Black 黑色
@@ -33,8 +37,6 @@ var (
 	Purple = color.RGBA{128, 0, 128, 255}
 	// Violet 紫罗兰
 	Violet = color.RGBA{238, 130, 238, 255}
-	// SkyBlue 天蓝
-	SkyBlue = color.RGBA{135, 206, 235, 255}
 	// Gold 金色
 	Gold = color.RGBA{255, 215, 0, 255}
 	// Silver 银色

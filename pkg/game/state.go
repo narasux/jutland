@@ -15,8 +15,8 @@ type objStates struct {
 type menuButtonStates struct {
 	// 任务选择
 	MissionSelect *menuButton
-	// 战舰图鉴
-	ShipCollection *menuButton
+	// 游戏图鉴
+	Collection *menuButton
 	// 游戏设置
 	GameSetting *menuButton
 	// 退出游戏
@@ -47,7 +47,7 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
 	for idx, button := range []*menuButton{
 		s.MenuButton.MissionSelect,
-		s.MenuButton.ShipCollection,
+		s.MenuButton.Collection,
 		s.MenuButton.GameSetting,
 		s.MenuButton.ExitGame,
 	} {

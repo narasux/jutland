@@ -36,7 +36,7 @@ func (d *Drawer) drawGameTitle(screen *ebiten.Image, textStr string) {
 	fontSize := float64(128)
 	// TODO 优化居中效果
 	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 5 * 3
-	posY := float64(screen.Bounds().Dy() / 5 * 4)
+	posY := float64(screen.Bounds().Dy()) / 5 * 4
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }
 
@@ -44,12 +44,28 @@ func (d *Drawer) drawGameTitle(screen *ebiten.Image, textStr string) {
 func (d *Drawer) drawGameMenu(screen *ebiten.Image, states *menuButtonStates) {
 	for _, b := range []*menuButton{
 		states.MissionSelect,
-		states.ShipCollection,
+		states.Collection,
 		states.GameSetting,
 		states.ExitGame,
 	} {
 		d.drawText(screen, b.Text, b.PosX, b.PosY, b.FontSize, b.Font, b.Color)
 	}
+}
+
+// 绘制游戏通用提示
+func (d *Drawer) drawGameTip(screen *ebiten.Image, textStr string) {
+	fontSize := float64(64)
+	posX := float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)
+	posY := float64(screen.Bounds().Dy()) / 10 * 9
+	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
+}
+
+// 绘制任务结果
+func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textColor color.Color) {
+	fontSize := float64(96)
+	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 7
+	posY := float64(screen.Bounds().Dy() / 8 * 7)
+	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, textColor)
 }
 
 // 绘制文本
@@ -58,11 +74,11 @@ func (d *Drawer) drawText(
 	textStr string,
 	posX, posY, textSize float64,
 	textFont *text.GoTextFaceSource,
-	color color.Color,
+	textColor color.Color,
 ) {
 	op := &text.DrawOptions{}
 	op.GeoM.Translate(posX, posY)
-	op.ColorScale.ScaleWithColor(color)
+	op.ColorScale.ScaleWithColor(textColor)
 	textFace := text.GoTextFace{
 		Source: textFont,
 		Size:   textSize,

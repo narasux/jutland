@@ -10,11 +10,12 @@ import (
 func init() {
 	log.Println("testing audio resources...")
 
-	// 注：测试资源是否正确加载
+	// 测试资源是否正确加载
 	NewGameStartBackground()
 	NewGameEndBackground()
 	NewMenuBackground()
 	NewMissionsBackground()
+	NewMissionStartBackground()
 	NewMissionSuccess()
 	NewMissionFailed()
 	NewMenuButtonClick()
@@ -38,9 +39,8 @@ func NewGameStartBackground() types.AudioStream {
 }
 
 // NewGameEndBackground 游戏结束 背景音乐
-// TODO 找一首合适的 end bgm
 func NewGameEndBackground() types.AudioStream {
-	return mustNewAudio("/start_bgm.wav")
+	return mustNewAudio("/end_bgm.wav")
 }
 
 // NewMenuBackground 菜单页面 背景音乐
@@ -48,8 +48,13 @@ func NewMenuBackground() types.AudioStream {
 	return mustNewAudio("/menu_bgm.wav")
 }
 
-// NewMissionsBackground 任务选择 背景音乐
+// NewMissionsBackground 任务选择 背景音乐 TODO 更换音频
 func NewMissionsBackground() types.AudioStream {
+	return mustNewAudio("/menu_bgm.wav")
+}
+
+// NewMissionStartBackground 任务开始 背景音乐 TODO 更换音频
+func NewMissionStartBackground() types.AudioStream {
 	return mustNewAudio("/menu_bgm.wav")
 }
 

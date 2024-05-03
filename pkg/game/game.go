@@ -38,70 +38,28 @@ func New() *Game {
 }
 
 // Update 核心方法，用于更新各资源状态
-// TODO 抽象成 Updater 类?
 func (g *Game) Update() error {
-	//log.Println("In update with mode: ", g.mode)
-
 	switch g.mode {
 	case GameModeStart:
-		g.player.Play(audioRes.NewGameStartBackground())
-		if isAnyNextInput() {
-			g.mode = GameModeMenuSelect
-			g.player.Close()
-		}
+		return g.handleGameStart()
 	case GameModeMenuSelect:
-		g.player.Play(audioRes.NewMenuBackground())
-		// 对于菜单按钮，如果 hover 则展示红色，点击则切换游戏模式
-		for _, button := range []*menuButton{
-			g.objStates.MenuButton.MissionSelect,
-			g.objStates.MenuButton.ShipCollection,
-			g.objStates.MenuButton.GameSetting,
-			g.objStates.MenuButton.ExitGame,
-		} {
-			if isHoverMenuButton(button) {
-				// 仅首次移动会修改颜色 & 发声
-				if button.Color != colorx.DarkRed {
-					button.Color = colorx.DarkRed
-					PlayAudioToEnd(g.player.ctx, audioRes.NewMenuButtonHover())
-				}
-				// 点击按钮：切模式，播放音效，停止 BGM
-				if isMouseButtonLeftJustPressed() {
-					g.mode = button.Mode
-					PlayAudioToEnd(g.player.ctx, audioRes.NewMenuButtonClick())
-					g.player.Close()
-				}
-			} else {
-				button.Color = colorx.White
-			}
-		}
+		return g.handleMenuSelect()
 	case GameModeMissionSelect:
-		return nil
+		return g.handleMissionSelect()
 	case GameModeMissionStart:
-		return nil
+		return g.handleMissionStart()
 	case GameModeMissionRunning:
-		return nil
+		return g.handleMissionRunning()
 	case GameModeMissionSuccess:
-		g.player.Play(audioRes.NewMissionSuccess())
-		if isAnyNextInput() {
-			g.mode = GameModeMenuSelect
-		}
+		return g.handleMissionSuccess()
 	case GameModeMissionFailed:
-		g.player.Play(audioRes.NewMissionFailed())
-		if isAnyNextInput() {
-			g.mode = GameModeMenuSelect
-		}
-	case GameModeShipCollection:
-		// TODO 实现功能
-		return ebiten.Termination
+		return g.handleMissionFailed()
+	case GameModeCollection:
+		return g.handleGameCollection()
 	case GameModeGameSetting:
-		// TODO 实现功能
-		return ebiten.Termination
+		return g.handleGameSetting()
 	case GameModeEnd:
-		// 退出游戏
-		g.player.Play(audioRes.NewGameEndBackground())
-		if isAnyNextInput() {
-			return ebiten.Termination
-		}
+		return g.handleGameEnd()
 	default:
 		log.Fatalf("unknown game mode: %d", g.mode)
 	}
@@ -110,8 +68,6 @@ func (g *Game) Update() error {
 
 // Draw 核心方法，用于在屏幕上绘制各资源
 func (g *Game) Draw(screen *ebiten.Image) {
-	//log.Println("In draw with mode: ", g.mode)
-
 	switch g.mode {
 	case GameModeStart:
 		g.drawer.drawBackground(screen, background.GameStartImg)
@@ -121,16 +77,20 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, background.GameMenuImg)
 		g.drawer.drawGameMenu(screen, g.objStates.MenuButton)
 	case GameModeMissionSelect:
-		return
+		g.drawer.drawBackground(screen, background.MissionsMapImg)
+		g.drawer.drawGameTip(screen, "选择任务...")
 	case GameModeMissionStart:
-		return
+		g.drawer.drawBackground(screen, background.MissionStartImg)
+		g.drawer.drawGameTip(screen, "任务开始！")
 	case GameModeMissionRunning:
 		return
 	case GameModeMissionSuccess:
 		g.drawer.drawBackground(screen, background.MissionSuccessImg)
+		g.drawer.drawMissionResult(screen, "任务成功！", colorx.Green)
 	case GameModeMissionFailed:
 		g.drawer.drawBackground(screen, background.MissionFailedImg)
-	case GameModeShipCollection:
+		g.drawer.drawMissionResult(screen, "任务失败...", colorx.Red)
+	case GameModeCollection:
 		return
 	case GameModeGameSetting:
 		return
@@ -162,12 +122,12 @@ func (g *Game) init() {
 				Color:    colorx.White,
 				Mode:     GameModeMissionSelect,
 			},
-			ShipCollection: &menuButton{
-				Text:     "战舰图鉴",
+			Collection: &menuButton{
+				Text:     "游戏图鉴",
 				FontSize: fontSize,
 				Font:     font.Hang,
 				Color:    colorx.White,
-				//Mode:     GameModeShipCollection,
+				//Mode:     GameModeCollection,
 				// TODO 临时调试
 				Mode: GameModeMissionSuccess,
 			},
@@ -189,4 +149,67 @@ func (g *Game) init() {
 			},
 		},
 	}
+}
+
+// 游戏开始
+func (g *Game) handleGameStart() error {
+	// 播放游戏封面的 BGM
+	g.player.Play(audioRes.NewGameStartBackground())
+	// 任意下一按键触发后，切换模式，关闭 BGM
+	if isAnyNextInput() {
+		g.mode = GameModeMenuSelect
+		g.player.Close()
+	}
+	return nil
+}
+
+// 菜单选择
+func (g *Game) handleMenuSelect() error {
+	g.player.Play(audioRes.NewMenuBackground())
+	// 对于菜单按钮，如果 hover 则展示红色，点击则切换游戏模式
+	for _, button := range []*menuButton{
+		g.objStates.MenuButton.MissionSelect,
+		g.objStates.MenuButton.Collection,
+		g.objStates.MenuButton.GameSetting,
+		g.objStates.MenuButton.ExitGame,
+	} {
+		if isHoverMenuButton(button) {
+			// 仅首次移动会修改颜色 & 发声
+			if button.Color != colorx.DarkRed {
+				button.Color = colorx.DarkRed
+				PlayAudioToEnd(g.player.ctx, audioRes.NewMenuButtonHover())
+			}
+			// 左键点击按钮：切模式，播放音效，停止 BGM
+			if isMouseButtonLeftJustPressed() {
+				g.mode = button.Mode
+				PlayAudioToEnd(g.player.ctx, audioRes.NewMenuButtonClick())
+				g.player.Close()
+			}
+		} else {
+			button.Color = colorx.White
+		}
+	}
+	return nil
+}
+
+// 游戏图鉴 TODO 功能待实现
+func (g *Game) handleGameCollection() error {
+	log.Println("work in progress")
+	return ebiten.Termination
+}
+
+// 游戏设置 TODO 功能待实现
+func (g *Game) handleGameSetting() error {
+	log.Println("work in progress")
+	return ebiten.Termination
+}
+
+// 游戏结束
+func (g *Game) handleGameEnd() error {
+	// 播放游戏结束的 BGM
+	g.player.Play(audioRes.NewGameEndBackground())
+	if isAnyNextInput() {
+		return ebiten.Termination
+	}
+	return nil
 }

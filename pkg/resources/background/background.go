@@ -46,6 +46,7 @@ func init() {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
+	// TODO 替换该资源
 	imgPath = "/backgrounds/missions_map.png"
 	if MissionsMapImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)

@@ -17,8 +17,8 @@ const (
 	GameModeMissionSuccess
 	// 任务结束 - 失败
 	GameModeMissionFailed
-	// 战舰图鉴
-	GameModeShipCollection
+	// 游戏图鉴
+	GameModeCollection
 	// 游戏设置
 	GameModeGameSetting
 	// 游戏结束
