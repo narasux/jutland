@@ -58,33 +58,3 @@ const (
 	// SelectScreenArea 选取一个区域
 	SelectScreenArea ActionType = "selectArea"
 )
-
-type ShipType string
-
-const (
-	// 航空母舰
-	ShipTypeCarrier ShipType = "carrier"
-	// 战列舰
-	ShipTypeBattleship ShipType = "battleship"
-	// 巡洋舰
-	ShipTypeCruiser ShipType = "cruiser"
-	// 驱逐舰
-	ShipTypeDestroyer ShipType = "destroyer"
-	// 护卫舰
-	ShipTypeFrigate ShipType = "frigate"
-	// 潜艇
-	ShipTypeSubmarine ShipType = "submarine"
-)
-
-type WeaponType string
-
-const (
-	// 所有
-	WeaponTypeAll WeaponType = "all"
-	// 火炮
-	WeaponTypeGun WeaponType = "gun"
-	// 鱼雷
-	WeaponTypeTorpedo WeaponType = "torpedo"
-	// 导弹
-	WeaponTypeMissile WeaponType = "missile"
-)

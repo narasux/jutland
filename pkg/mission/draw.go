@@ -6,6 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 
+	obj "github.com/narasux/jutland/pkg/object"
 	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/mapblock"
@@ -114,6 +115,23 @@ func (d *Drawer) drawBuildings(screen *ebiten.Image, state *MissionState) {
 
 // 绘制战舰
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, state *MissionState) {
+	for _, ship := range state.Ships {
+		// 只有在屏幕中的才渲染
+		if ship.Pos.MX < state.Camera.Pos.MX ||
+			ship.Pos.MX > state.Camera.Pos.MX+state.Camera.Width ||
+			ship.Pos.MY < state.Camera.Pos.MY ||
+			ship.Pos.MY > state.Camera.Pos.MY+state.Camera.Height {
+			continue
+		}
+		shipImg := obj.GetShipImg(ship.Name)
+		opts := d.genDefaultDrawImageOptions()
+		ebutil.UpdateOptsForCenterRotate(opts, shipImg, ship.Rotate)
+		opts.GeoM.Translate(
+			float64((ship.Pos.MX-state.Camera.Pos.MX)*mapblock.BlockSize),
+			float64((ship.Pos.MY-state.Camera.Pos.MY)*mapblock.BlockSize),
+		)
+		screen.DrawImage(shipImg, opts)
+	}
 }
 
 // 绘制已发射的弹丸

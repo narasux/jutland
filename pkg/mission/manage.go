@@ -13,7 +13,7 @@ func NewManager(mission Mission) *MissionManager {
 	return &MissionManager{
 		state: NewMissionState(
 			mission,
-			missionMetadata[mission].InitPos,
+			missionMetadata[mission].InitCameraPos,
 		),
 		drawer: NewDrawer(),
 	}

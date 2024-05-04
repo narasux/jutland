@@ -4,13 +4,14 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
 
+	obj "github.com/narasux/jutland/pkg/object"
 	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
 // Camera 相机（当前视野）
 type Camera struct {
 	// 相机左上角位置
-	Pos    MapPos
+	Pos    obj.MapPos
 	Width  int
 	Height int
 }
@@ -28,18 +29,24 @@ type MissionState struct {
 	Camera Camera
 
 	// 战舰信息
-	Ships []*BattleShip
+	Ships []*obj.BattleShip
 	// 已发射的弹丸信息
-	Bullets []*Bullet
+	Bullets []*obj.Bullet
 }
 
 // NewMissionState ...
-func NewMissionState(mission Mission, initPos MapPos) *MissionState {
+func NewMissionState(mission Mission, initPos obj.MapPos) *MissionState {
 	layout := NewScreenLayout()
+	missionMD := missionMetadata[mission]
+	// 初始化战舰
+	ships := []*obj.BattleShip{}
+	for _, shipMD := range missionMD.InitShips {
+		ships = append(ships, obj.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotate))
+	}
 	return &MissionState{
 		Mission:       mission,
 		MissionStatus: MissionRunning,
-		MissionMD:     missionMetadata[mission],
+		MissionMD:     missionMD,
 		Layout:        layout,
 		Camera: Camera{
 			Pos: initPos,
@@ -47,8 +54,8 @@ func NewMissionState(mission Mission, initPos MapPos) *MissionState {
 			Width:  layout.Width/mapblock.BlockSize + 1,
 			Height: layout.Height/mapblock.BlockSize + 1,
 		},
-		Ships:   []*BattleShip{},
-		Bullets: []*Bullet{},
+		Ships:   ships,
+		Bullets: []*obj.Bullet{},
 	}
 }
 

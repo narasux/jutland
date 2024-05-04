@@ -1,10 +1,38 @@
-package mission
+package object
 
 import (
 	"slices"
 	"time"
+)
 
-	"github.com/hajimehoshi/ebiten/v2"
+type ShipType string
+
+const (
+	// 航空母舰
+	ShipTypeCarrier ShipType = "carrier"
+	// 战列舰
+	ShipTypeBattleship ShipType = "battleship"
+	// 巡洋舰
+	ShipTypeCruiser ShipType = "cruiser"
+	// 驱逐舰
+	ShipTypeDestroyer ShipType = "destroyer"
+	// 护卫舰
+	ShipTypeFrigate ShipType = "frigate"
+	// 潜艇
+	ShipTypeSubmarine ShipType = "submarine"
+)
+
+type WeaponType string
+
+const (
+	// 所有
+	WeaponTypeAll WeaponType = "all"
+	// 火炮
+	WeaponTypeGun WeaponType = "gun"
+	// 鱼雷
+	WeaponTypeTorpedo WeaponType = "torpedo"
+	// 导弹
+	WeaponTypeMissile WeaponType = "missile"
 )
 
 // MapPos 位置（地图位置）
@@ -15,23 +43,21 @@ type MapPos struct {
 
 // 火炮 / 鱼雷弹药
 type Bullet struct {
-	Img *ebiten.Image
-
 	// 固定参数
 	// 弹药名称
-	Name string
+	Name BulletName
 	// 伤害数值
 	Damage int
 
 	// 动态参数
 	// 当前位置
-	CurrentPosition MapPos
+	CurPosition MapPos
 	// 目标位置
 	TargetPosition MapPos
 	// 旋转角度
-	Rotate float64
+	Rotate int
 	// 速度
-	Speed float64
+	Speed int
 
 	// 动画（多图片）
 	// TODO 补充入水 & 爆炸动画（指针数组）
@@ -40,21 +66,21 @@ type Bullet struct {
 type Gun struct {
 	// 固定参数
 	// 火炮名称
-	Name string
+	Name GunName
 	// 百分比位置（如：0.33 -> 距离舰首 1/3)
 	PosPercent float64
 	// 炮弹类型
-	Bullet Bullet
+	BulletName BulletName
 	// 单次抛射炮弹数量
 	BulletCount int
 	// 装填时间（单位: s)
 	ReloadTime int64
 	// 射程
-	Range float64
+	Range int
 	// 炮弹散布
-	BulletSpread float64
+	BulletSpread int
 	// 炮弹速度
-	BulletSpeed float64
+	BulletSpeed int
 
 	// 动态参数
 	// 当前火炮是否可用（如战损 / 禁用）
@@ -131,11 +157,9 @@ type Weapon struct {
 
 // BattleShip 战舰
 type BattleShip struct {
-	img *ebiten.Image
-
 	// 固定参数
 	// 名称
-	Name string
+	Name ShipName
 	// 类别
 	Type ShipType
 
@@ -143,10 +167,10 @@ type BattleShip struct {
 	TotalHP int
 	// 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
 	DamageReduction float64
-	// 武器
-	Weapon Weapon
 	// 最大速度
 	MaxSpeed float64
+	// 武器
+	Weapon Weapon
 
 	// 动态参数
 	// 当前生命值
@@ -154,7 +178,7 @@ type BattleShip struct {
 	// 当前位置
 	Pos MapPos
 	// 旋转角度
-	Rotate float64
+	Rotate int
 	// 当前速度
 	CurSpeed float64
 }
