@@ -29,7 +29,7 @@ var (
 func init() {
 	var err error
 
-	log.Println("loading background resources...")
+	log.Println("loading background image resources...")
 
 	imgPath := "/backgrounds/game_start.png"
 	if GameStartImg, err = loader.LoadImage(imgPath); err != nil {
@@ -67,5 +67,5 @@ func init() {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	log.Println("background resources loaded")
+	log.Println("background image resources loaded")
 }

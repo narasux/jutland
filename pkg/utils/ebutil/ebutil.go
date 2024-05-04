@@ -1,6 +1,8 @@
 package ebutil
 
 import (
+	"math"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 
@@ -18,4 +20,12 @@ func DebugPrint(screen *ebiten.Image, str string) {
 func CalcTextWidth(text string, fontSize float64) float64 {
 	// 字体原因，宽度大致是 0.4 的文字高度
 	return fontSize * float64(len(text)) / 5 * 2
+}
+
+// UpdateOptsForCenterRotate 中心旋转
+func UpdateOptsForCenterRotate(opts *ebiten.DrawImageOptions, img *ebiten.Image, rotate int) {
+	w, h := img.Bounds().Dx(), img.Bounds().Dy()
+	opts.GeoM.Translate(-float64(w)/2, -float64(h)/2)
+	opts.GeoM.Rotate(float64(rotate) * math.Pi / 180)
+	opts.GeoM.Translate(float64(w)/2, float64(h)/2)
 }

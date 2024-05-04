@@ -15,7 +15,7 @@ var (
 func init() {
 	var err error
 
-	log.Println("loading ship resources...")
+	log.Println("loading ship image resources...")
 
 	imgPath := "/ships/default/default_0.png"
 	if ShipDefaultZeroImg, err = loader.LoadImage(imgPath); err != nil {
@@ -23,5 +23,5 @@ func init() {
 
 	}
 
-	log.Println("ship resources loaded")
+	log.Println("ship image resources loaded")
 }

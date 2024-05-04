@@ -7,10 +7,10 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-// Position 位置
-type Position struct {
-	X int
-	Y int
+// MapPos 位置（地图位置）
+type MapPos struct {
+	MX int
+	MY int
 }
 
 // 火炮 / 鱼雷弹药
@@ -25,9 +25,9 @@ type Bullet struct {
 
 	// 动态参数
 	// 当前位置
-	CurrentPosition Position
+	CurrentPosition MapPos
 	// 目标位置
-	TargetPosition Position
+	TargetPosition MapPos
 	// 旋转角度
 	Rotate float64
 	// 速度
@@ -72,7 +72,7 @@ func (g *Gun) CanFire() bool {
 }
 
 // Fire 发射
-func (g *Gun) Fire(curPos Position, targetPos Position) []*Bullet {
+func (g *Gun) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 	if !g.CanFire() {
 		return []*Bullet{}
 	}
@@ -112,7 +112,7 @@ func (t *Torpedo) CanFire() bool {
 }
 
 // Fire 发射
-func (t *Torpedo) Fire(curPos Position, targetPos Position) []*Bullet {
+func (t *Torpedo) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 	if !t.CanFire() {
 		return []*Bullet{}
 	}
@@ -152,7 +152,7 @@ type BattleShip struct {
 	// 当前生命值
 	CurHP int
 	// 当前位置
-	Pos Position
+	Pos MapPos
 	// 旋转角度
 	Rotate float64
 	// 当前速度
@@ -188,7 +188,7 @@ func (s *BattleShip) EnableWeapon(t WeaponType) {
 }
 
 // 向指定目标发射炮弹
-func (s *BattleShip) Fire(curPos Position, targetPos Position) []*Bullet {
+func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 	bullets := []*Bullet{}
 	for i := 0; i < len(s.Weapon.Guns); i++ {
 		bullets = slices.Concat(bullets, s.Weapon.Guns[i].Fire(curPos, targetPos))

@@ -72,18 +72,18 @@ func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textCol
 func (d *Drawer) drawText(
 	screen *ebiten.Image,
 	textStr string,
-	posX, posY, textSize float64,
+	posX, posY, fontSize float64,
 	textFont *text.GoTextFaceSource,
 	textColor color.Color,
 ) {
-	op := &text.DrawOptions{}
-	op.GeoM.Translate(posX, posY)
-	op.ColorScale.ScaleWithColor(textColor)
+	opts := &text.DrawOptions{}
+	opts.GeoM.Translate(posX, posY)
+	opts.ColorScale.ScaleWithColor(textColor)
 	textFace := text.GoTextFace{
 		Source: textFont,
-		Size:   textSize,
+		Size:   fontSize,
 	}
-	text.Draw(screen, textStr, &textFace, op)
+	text.Draw(screen, textStr, &textFace, opts)
 }
 
 // 默认绘制配置

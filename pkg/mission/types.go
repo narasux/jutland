@@ -16,6 +16,8 @@ const (
 	MissionSuccess MissionStatus = "success"
 	// MissionFailed 任务失败
 	MissionFailed MissionStatus = "failed"
+	// MissionPaused 任务暂停
+	MissionPaused MissionStatus = "paused"
 	// MissionError 任务错误
 	MissionError MissionStatus = "error"
 )

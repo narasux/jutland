@@ -27,7 +27,7 @@ var blocks map[string]*ebiten.Image
 func init() {
 	var err error
 
-	log.Println("loading map block resources...")
+	log.Println("loading map block image resources...")
 
 	blocks = make(map[string]*ebiten.Image)
 
@@ -64,7 +64,7 @@ func init() {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	log.Println("map block resources loaded")
+	log.Println("map block image resources loaded")
 }
 
 // GetByCharAndPos 根据指定字符 & 坐标，获取地图块资源

@@ -1,22 +1,32 @@
 package mission
 
 import (
+	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
 
-	"github.com/hajimehoshi/ebiten/v2"
-
-	"github.com/narasux/jutland/pkg/resources/mapblock"
+	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
+
+// Camera 相机（当前视野）
+type Camera struct {
+	// 相机左上角位置
+	Pos    MapPos
+	Width  int
+	Height int
+}
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）
 type MissionState struct {
-	Mission       Mission
+	Mission Mission
+	// 任务关卡状态
 	MissionStatus MissionStatus
-	MissionMD     MissionMetadata
-	// 任务暂停
-	IsPause bool
-	// 相机位置
-	CameraPos Position
+	// 任务关卡元数据
+	MissionMD MissionMetadata
+	// 屏幕布局
+	Layout ScreenLayout
+	// 相机
+	Camera Camera
+
 	// 战舰信息
 	Ships []*BattleShip
 	// 已发射的弹丸信息
@@ -24,14 +34,21 @@ type MissionState struct {
 }
 
 // NewMissionState ...
-func NewMissionState(mission Mission, initPos Position) *MissionState {
+func NewMissionState(mission Mission, initPos MapPos) *MissionState {
+	layout := NewScreenLayout()
 	return &MissionState{
 		Mission:       mission,
 		MissionStatus: MissionRunning,
 		MissionMD:     missionMetadata[mission],
-		CameraPos:     initPos,
-		Ships:         []*BattleShip{},
-		Bullets:       []*Bullet{},
+		Layout:        layout,
+		Camera: Camera{
+			Pos: initPos,
+			// 地图资源，多展示一行 & 列，避免出现黑边
+			Width:  layout.Width/mapblock.BlockSize + 1,
+			Height: layout.Height/mapblock.BlockSize + 1,
+		},
+		Ships:   []*BattleShip{},
+		Bullets: []*Bullet{},
 	}
 }
 
@@ -54,42 +71,55 @@ func (s *MissionState) updateNextBullets() {
 
 // 计算下一帧相机位置
 func (s *MissionState) updateNextCameraPosition() {
-	// TODO 限制速度，限制的镜头移动太快了
-	hover := NewActionDetector().DetectCursorHover()
-	switch hover {
+	switch detectCursorHoverOnGameMap(s.Layout) {
 	case HoverScreenLeft:
-		s.CameraPos.X -= 1
+		s.Camera.Pos.MX -= 1
 	case HoverScreenRight:
-		s.CameraPos.X += 1
+		s.Camera.Pos.MX += 1
 	case HoverScreenTop:
-		s.CameraPos.Y -= 1
+		s.Camera.Pos.MY -= 1
 	case HoverScreenBottom:
-		s.CameraPos.Y += 1
+		s.Camera.Pos.MY += 1
 	case HoverScreenTopLeft:
-		s.CameraPos.X -= 1
-		s.CameraPos.Y -= 1
+		s.Camera.Pos.MX -= 1
+		s.Camera.Pos.MY -= 1
 	case HoverScreenTopRight:
-		s.CameraPos.X += 1
-		s.CameraPos.Y -= 1
+		s.Camera.Pos.MX += 1
+		s.Camera.Pos.MY -= 1
 	case HoverScreenBottomLeft:
-		s.CameraPos.X -= 1
-		s.CameraPos.Y += 1
+		s.Camera.Pos.MX -= 1
+		s.Camera.Pos.MY += 1
 	case HoverScreenBottomRight:
-		s.CameraPos.X += 1
-		s.CameraPos.Y += 1
+		s.Camera.Pos.MX += 1
+		s.Camera.Pos.MY += 1
 	default:
 		// DoNothing
 	}
 
 	// 防止超出边界
-	screenWidth, screenHeight := ebiten.Monitor().Size()
-	s.CameraPos.X = lo.Max([]int{s.CameraPos.X, 0})
-	s.CameraPos.Y = lo.Max([]int{s.CameraPos.Y, 0})
-	s.CameraPos.X = lo.Min([]int{s.CameraPos.X, s.MissionMD.MapCfg.Width - screenWidth/mapblock.BlockSize - 1})
-	s.CameraPos.Y = lo.Min([]int{s.CameraPos.Y, s.MissionMD.MapCfg.Height - screenHeight/mapblock.BlockSize - 1})
+	s.Camera.Pos.MX = lo.Max([]int{s.Camera.Pos.MX, 0})
+	s.Camera.Pos.MY = lo.Max([]int{s.Camera.Pos.MY, 0})
+	s.Camera.Pos.MX = lo.Min([]int{s.Camera.Pos.MX, s.MissionMD.MapCfg.Width - s.Camera.Width - 1})
+	s.Camera.Pos.MY = lo.Min([]int{s.Camera.Pos.MY, s.MissionMD.MapCfg.Height - s.Camera.Height - 1})
 }
 
 // TODO 计算下一帧任务状态
 func (s *MissionState) updateNextMissionStatus() {
-	s.MissionStatus = MissionRunning
+	switch s.MissionStatus {
+	case MissionRunning:
+		if ebiten.IsKeyPressed(ebiten.KeyEscape) {
+			s.MissionStatus = MissionPaused
+			return
+		}
+	case MissionPaused:
+		if ebiten.IsKeyPressed(ebiten.KeyQ) {
+			s.MissionStatus = MissionFailed
+			return
+		} else if ebiten.IsKeyPressed(ebiten.KeyEnter) {
+			s.MissionStatus = MissionRunning
+			return
+		}
+	default:
+		s.MissionStatus = MissionRunning
+	}
 }

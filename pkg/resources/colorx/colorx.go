@@ -41,4 +41,6 @@ var (
 	Gold = color.RGBA{255, 215, 0, 255}
 	// Silver 银色
 	Silver = color.RGBA{192, 192, 192, 255}
+	// DarkSilver 暗银
+	DarkSilver = color.RGBA{105, 105, 105, 255}
 )
