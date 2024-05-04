@@ -4,11 +4,22 @@
 
 ## 如何开始
 
-...
+### 依赖环境
 
-## 开发指南
+- make
+- go 1.22 (CGO required)
 
-...
+### 服务启动命令
+
+```shell
+make build && ./jutland
+```
+
+### 调试模式
+
+```shell
+export DEBUG=true
+```
 
 ## 参考资料
 
