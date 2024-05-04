@@ -3,8 +3,7 @@ package game
 import (
 	"log"
 
-	"github.com/hajimehoshi/ebiten/v2"
-
+	"github.com/narasux/jutland/pkg/mission"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 )
 
@@ -13,6 +12,7 @@ func (g *Game) handleMissionSelect() error {
 	g.player.Play(audioRes.NewMissionsBackground())
 	// FIXME 目前没有任务可选，直接进入默认测试关卡
 	if isAnyNextInput() {
+		g.missionMgr = mission.NewManager(mission.MissionDefault)
 		g.mode = GameModeMissionStart
 		g.player.Close()
 	}
@@ -29,10 +29,18 @@ func (g *Game) handleMissionStart() error {
 	return nil
 }
 
-// 任务运行 TODO 功能待实现
+// 任务运行
 func (g *Game) handleMissionRunning() error {
-	log.Println("work in progress")
-	return ebiten.Termination
+	status, err := g.missionMgr.Update()
+	if err != nil {
+		log.Fatalf("failed to update mission: %s", err)
+	}
+	if status == mission.MissionSuccess {
+		g.mode = GameModeMissionSuccess
+	} else if status == mission.MissionFailed {
+		g.mode = GameModeMissionFailed
+	}
+	return nil
 }
 
 // 任务成功

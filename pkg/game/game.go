@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/audio"
 
+	"github.com/narasux/jutland/pkg/mission"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/background"
 	"github.com/narasux/jutland/pkg/resources/colorx"
@@ -25,13 +26,18 @@ type Game struct {
 
 	// 对象状态
 	objStates *objStates
+
+	// 任务管理
+	missionMgr *mission.MissionManager
 }
 
 func New() *Game {
 	g := &Game{
-		mode:   GameModeStart,
-		drawer: NewDrawer(),
-		player: NewAudioPlayer(audio.NewContext(SampleRate)),
+		mode:       GameModeStart,
+		drawer:     NewDrawer(),
+		player:     NewAudioPlayer(audio.NewContext(SampleRate)),
+		objStates:  nil,
+		missionMgr: nil,
 	}
 	g.init()
 	return g
@@ -83,7 +89,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, background.MissionStartImg)
 		g.drawer.drawGameTip(screen, "任务开始！")
 	case GameModeMissionRunning:
-		return
+		g.missionMgr.Draw(screen)
 	case GameModeMissionSuccess:
 		g.drawer.drawBackground(screen, background.MissionSuccessImg)
 		g.drawer.drawMissionResult(screen, "任务成功！", colorx.Green)
@@ -91,8 +97,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, background.MissionFailedImg)
 		g.drawer.drawMissionResult(screen, "任务失败...", colorx.Red)
 	case GameModeCollection:
+		// TODO 功能待实现
 		return
 	case GameModeGameSetting:
+		// TODO 功能待实现
 		return
 	case GameModeEnd:
 		g.drawer.drawBackground(screen, background.GameEndImg)

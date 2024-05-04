@@ -20,4 +20,7 @@ var (
 
 	// AudioResBaseDir 音频资源根目录
 	AudioResBaseDir = envx.Get("AUDIO_RES_BASE_DIR", filepath.Join(pathx.GetCurPKGPath(), "../../resources/audios"))
+
+	// MapResBaseDir 地图资源根目录
+	MapResBaseDir = envx.Get("MAP_RES_BASE_DIR", filepath.Join(pathx.GetCurPKGPath(), "../../resources/maps"))
 )

@@ -26,6 +26,7 @@ go.work
 
 # custom
 raw_resources/
+scripts/
 
 ideas.md
 
