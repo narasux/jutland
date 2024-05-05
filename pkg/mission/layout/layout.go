@@ -1,4 +1,4 @@
-package mission
+package layout
 
 import "github.com/hajimehoshi/ebiten/v2"
 

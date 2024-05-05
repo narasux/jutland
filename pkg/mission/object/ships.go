@@ -1,6 +1,7 @@
 package object
 
 import (
+	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
 
@@ -24,6 +25,7 @@ var shipImg = map[ShipName]*ebiten.Image{
 // NewShip 新建战舰
 func NewShip(name ShipName, pos MapPos, rotate int) *BattleShip {
 	s := deepcopy.Copy(*ships[name]).(BattleShip)
+	s.Uid = uuid.New().String()
 	s.Pos = pos
 	s.Rotate = rotate
 	return &s
@@ -40,6 +42,7 @@ var shipDefault = &BattleShip{
 	TotalHP:         1000,
 	DamageReduction: 0.5,
 	MaxSpeed:        30,
+	RotateSpeed:     5,
 	Weapon: Weapon{
 		Guns: []*Gun{
 			newGun(GunMK45, 0.2),

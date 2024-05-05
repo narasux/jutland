@@ -1,61 +1,68 @@
-package mission
+package state
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
 
-	obj "github.com/narasux/jutland/pkg/object"
+	"github.com/narasux/jutland/pkg/mission/action"
+	"github.com/narasux/jutland/pkg/mission/layout"
+	md "github.com/narasux/jutland/pkg/mission/metadata"
+	"github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
 // Camera 相机（当前视野）
 type Camera struct {
 	// 相机左上角位置
-	Pos    obj.MapPos
+	Pos    object.MapPos
 	Width  int
 	Height int
 }
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）
 type MissionState struct {
-	Mission Mission
+	Mission md.Mission
 	// 任务关卡状态
 	MissionStatus MissionStatus
 	// 任务关卡元数据
-	MissionMD MissionMetadata
+	MissionMD md.MissionMetadata
 	// 屏幕布局
-	Layout ScreenLayout
+	Layout layout.ScreenLayout
 	// 相机
 	Camera Camera
 
 	// 战舰信息
-	Ships []*obj.BattleShip
+	Ships map[string]*object.BattleShip
 	// 已发射的弹丸信息
-	Bullets []*obj.Bullet
+	Bullets map[string]*object.Bullet
+
+	// 任务日志 TODO 考虑直接用 chan ?
+	Logs []string
 }
 
 // NewMissionState ...
-func NewMissionState(mission Mission, initPos obj.MapPos) *MissionState {
-	layout := NewScreenLayout()
-	missionMD := missionMetadata[mission]
+func NewMissionState(mission md.Mission, initPos object.MapPos) *MissionState {
+	misLayout := layout.NewScreenLayout()
+	missionMD := md.Get(mission)
 	// 初始化战舰
-	ships := []*obj.BattleShip{}
+	ships := map[string]*object.BattleShip{}
 	for _, shipMD := range missionMD.InitShips {
-		ships = append(ships, obj.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotate))
+		ship := object.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotate)
+		ships[ship.Uid] = ship
 	}
 	return &MissionState{
 		Mission:       mission,
 		MissionStatus: MissionRunning,
 		MissionMD:     missionMD,
-		Layout:        layout,
+		Layout:        misLayout,
 		Camera: Camera{
 			Pos: initPos,
 			// 地图资源，多展示一行 & 列，避免出现黑边
-			Width:  layout.Width/mapblock.BlockSize + 1,
-			Height: layout.Height/mapblock.BlockSize + 1,
+			Width:  misLayout.Width/mapblock.BlockSize + 1,
+			Height: misLayout.Height/mapblock.BlockSize + 1,
 		},
 		Ships:   ships,
-		Bullets: []*obj.Bullet{},
+		Bullets: map[string]*object.Bullet{},
 	}
 }
 
@@ -78,25 +85,25 @@ func (s *MissionState) updateNextBullets() {
 
 // 计算下一帧相机位置
 func (s *MissionState) updateNextCameraPosition() {
-	switch detectCursorHoverOnGameMap(s.Layout) {
-	case HoverScreenLeft:
+	switch action.DetectCursorHoverOnGameMap(s.Layout) {
+	case action.HoverScreenLeft:
 		s.Camera.Pos.MX -= 1
-	case HoverScreenRight:
+	case action.HoverScreenRight:
 		s.Camera.Pos.MX += 1
-	case HoverScreenTop:
+	case action.HoverScreenTop:
 		s.Camera.Pos.MY -= 1
-	case HoverScreenBottom:
+	case action.HoverScreenBottom:
 		s.Camera.Pos.MY += 1
-	case HoverScreenTopLeft:
+	case action.HoverScreenTopLeft:
 		s.Camera.Pos.MX -= 1
 		s.Camera.Pos.MY -= 1
-	case HoverScreenTopRight:
+	case action.HoverScreenTopRight:
 		s.Camera.Pos.MX += 1
 		s.Camera.Pos.MY -= 1
-	case HoverScreenBottomLeft:
+	case action.HoverScreenBottomLeft:
 		s.Camera.Pos.MX -= 1
 		s.Camera.Pos.MY += 1
-	case HoverScreenBottomRight:
+	case action.HoverScreenBottomRight:
 		s.Camera.Pos.MX += 1
 		s.Camera.Pos.MY += 1
 	default:

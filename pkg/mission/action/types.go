@@ -1,26 +1,4 @@
-package mission
-
-type Mission string
-
-const (
-	// MissionDefault 默认关卡
-	MissionDefault Mission = "default"
-)
-
-type MissionStatus string
-
-const (
-	// MissionRunning 任务进行中
-	MissionRunning MissionStatus = "running"
-	// MissionSuccess 任务成功
-	MissionSuccess MissionStatus = "success"
-	// MissionFailed 任务失败
-	MissionFailed MissionStatus = "failed"
-	// MissionPaused 任务暂停
-	MissionPaused MissionStatus = "paused"
-	// MissionError 任务错误
-	MissionError MissionStatus = "error"
-)
+package action
 
 type ActionType string
 
@@ -54,7 +32,4 @@ const (
 
 	// HoverScreenBottomRight 悬停在屏幕右下角
 	HoverScreenBottomRight ActionType = "hoverScreenBottomRight"
-
-	// SelectScreenArea 选取一个区域
-	SelectScreenArea ActionType = "selectArea"
 )

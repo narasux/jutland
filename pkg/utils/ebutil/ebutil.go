@@ -22,7 +22,7 @@ func CalcTextWidth(text string, fontSize float64) float64 {
 	return fontSize * float64(len(text)) / 5 * 2
 }
 
-// UpdateOptsForCenterRotate 中心旋转
+// UpdateOptsForCenterRotate 中心旋转（需要在最后的 GeoM.Translate 前执行，即先旋转，再位移）
 func UpdateOptsForCenterRotate(opts *ebiten.DrawImageOptions, img *ebiten.Image, rotate int) {
 	w, h := img.Bounds().Dx(), img.Bounds().Dy()
 	opts.GeoM.Translate(-float64(w)/2, -float64(h)/2)

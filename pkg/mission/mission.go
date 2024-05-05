@@ -1,33 +1,37 @@
 package mission
 
 import (
-	obj "github.com/narasux/jutland/pkg/object"
-	"github.com/narasux/jutland/pkg/resources/mapcfg"
+	"github.com/hajimehoshi/ebiten/v2"
+
+	"github.com/narasux/jutland/pkg/mission/drawer"
+	md "github.com/narasux/jutland/pkg/mission/metadata"
+	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-// 任务元配置
-type MissionMetadata struct {
-	Name   string
-	MapCfg *mapcfg.MapCfg
-	// 初始位置
-	InitCameraPos obj.MapPos
-	// 初始战舰
-	InitShips []InitShipMetadata
+// MissionManager 任务管理器
+type MissionManager struct {
+	state  *state.MissionState
+	drawer *drawer.Drawer
 }
 
-type InitShipMetadata struct {
-	ShipName obj.ShipName
-	Pos      obj.MapPos
-	Rotate   int
+// NewManager ...
+func NewManager(mission md.Mission) *MissionManager {
+	return &MissionManager{
+		state: state.NewMissionState(
+			mission, md.Get(mission).InitCameraPos,
+		),
+		drawer: drawer.NewDrawer(),
+	}
 }
 
-var missionMetadata = map[Mission]MissionMetadata{
-	MissionDefault: {
-		Name:          "默认关卡",
-		InitCameraPos: obj.MapPos{MX: 32, MY: 32},
-		MapCfg:        mapcfg.GetByName(mapcfg.MapDefault),
-		InitShips: []InitShipMetadata{
-			{obj.ShipDefault, obj.MapPos{MX: 32, MY: 32}, 90},
-		},
-	},
+// Draw 绘制任务图像
+func (m *MissionManager) Draw(screen *ebiten.Image) {
+	m.drawer.Draw(screen, m.state)
+}
+
+func (m *MissionManager) Update() (state.MissionStatus, error) {
+	if err := m.state.Next(); err != nil {
+		return state.MissionError, err
+	}
+	return m.state.MissionStatus, nil
 }

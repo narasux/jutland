@@ -1,8 +1,11 @@
 package object
 
 import (
+	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
+
+	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 type BulletName string
@@ -22,11 +25,12 @@ var bulletImages = map[BulletName]*ebiten.Image{
 }
 
 // NewBullets 新建弹药
-func NewBullets(name BulletName, CurPosition, TargetPosition MapPos, Rotate int, Speed int) *Bullet {
+func NewBullets(name BulletName, CurPos, TargetPos MapPos, Speed int) *Bullet {
 	b := deepcopy.Copy(*bullets[name]).(Bullet)
-	b.CurPosition = CurPosition
-	b.TargetPosition = TargetPosition
-	b.Rotate = Rotate
+	b.Uid = uuid.New().String()
+	b.CurPosition = CurPos
+	b.TargetPosition = TargetPos
+	b.Rotate = int(geometry.CalcAngleBetweenPoints(CurPos.RX, CurPos.RY, TargetPos.RX, TargetPos.RY))
 	b.Speed = Speed
 	return &b
 }

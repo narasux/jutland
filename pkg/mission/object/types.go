@@ -35,10 +35,12 @@ const (
 	WeaponTypeMissile WeaponType = "missile"
 )
 
-// MapPos 位置（地图位置）
+// MapPos 位置
 type MapPos struct {
-	MX int
-	MY int
+	// 地图位置（用于通用计算，如小地图等）
+	MX, MY int
+	// 真实位置（用于计算屏幕位置，如不需要可不初始化）
+	RX, RY float64
 }
 
 // 火炮 / 鱼雷弹药
@@ -50,6 +52,8 @@ type Bullet struct {
 	Damage int
 
 	// 动态参数
+	// 唯一标识
+	Uid string
 	// 当前位置
 	CurPosition MapPos
 	// 目标位置
@@ -103,7 +107,7 @@ func (g *Gun) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 		return []*Bullet{}
 	}
 	g.LastFireTime = time.Now().Unix()
-	// FIXME 初始化弹药（复数，考虑当前位置，散布，curPos 是战舰位置，还要计算相对位置）
+	// FIXME 初始化弹药（复数，考虑当前位置，散布，curPos 是战舰位置，还要计算相对位置，需要 uid）
 	return []*Bullet{}
 }
 
@@ -143,7 +147,7 @@ func (t *Torpedo) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 		return []*Bullet{}
 	}
 	t.LastFireTime = time.Now().Unix()
-	// FIXME 初始化弹药（复数，考虑当前位置，curPos 是战舰位置，还要计算相对位置）
+	// FIXME 初始化弹药（复数，考虑当前位置，curPos 是战舰位置，还要计算相对位置，需要 uid）
 	return []*Bullet{}
 }
 
@@ -169,10 +173,14 @@ type BattleShip struct {
 	DamageReduction float64
 	// 最大速度
 	MaxSpeed float64
+	// 转向速度（度）
+	RotateSpeed int
 	// 武器
 	Weapon Weapon
 
 	// 动态参数
+	// 唯一标识
+	Uid string
 	// 当前生命值
 	CurHP int
 	// 当前位置
@@ -211,7 +219,7 @@ func (s *BattleShip) EnableWeapon(t WeaponType) {
 	}
 }
 
-// 向指定目标发射炮弹
+// Fire 向指定目标发射武器
 func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 	bullets := []*Bullet{}
 	for i := 0; i < len(s.Weapon.Guns); i++ {
@@ -221,4 +229,9 @@ func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 		bullets = slices.Concat(bullets, s.Weapon.Torpedoes[i].Fire(curPos, targetPos))
 	}
 	return bullets
+}
+
+func (s *BattleShip) MoveTo(targetPos MapPos) (arrive bool) {
+	// FIXME 修改自身的位置，角度，速度
+	return true
 }

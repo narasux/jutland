@@ -1,17 +1,19 @@
-package mission
+package action
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+
+	"github.com/narasux/jutland/pkg/mission/layout"
 )
 
 // 探测游戏地图上的鼠标悬停动作
-func detectCursorHoverOnGameMap(layout ScreenLayout) ActionType {
+func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) ActionType {
 	// FIXME 还没想好如何在选择的时候移动地图，先禁用
 	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 		return DoNothing
 	}
 	x, y := ebiten.CursorPosition()
-	w, h := layout.Camera.Width, layout.Camera.Height
+	w, h := misLayout.Camera.Width, misLayout.Camera.Height
 
 	// Hover 上侧
 	if 0 < y && y < h/15 {
