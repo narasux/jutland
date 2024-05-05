@@ -10,7 +10,7 @@ import (
 	"github.com/narasux/jutland/pkg/loader"
 )
 
-// 地图块尺寸
+// 地图块尺寸（可选 50 / 100）
 const BlockSize = 50
 
 const (
@@ -33,7 +33,7 @@ func init() {
 
 	// 海洋地图块（浅海）
 	for i := 0; i < seaBlockCount; i++ {
-		imgName := fmt.Sprintf("sea_%d", i)
+		imgName := fmt.Sprintf("sea_%d_%d", BlockSize, i)
 		imgPath := fmt.Sprintf("/blocks/%s.png", imgName)
 		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
@@ -42,7 +42,7 @@ func init() {
 
 	// 深海地图块（浅海）
 	for i := 0; i < deepSeaBlockCount; i++ {
-		imgName := fmt.Sprintf("deep_sea_%d", i)
+		imgName := fmt.Sprintf("deep_sea_%d_%d", BlockSize, i)
 		imgPath := fmt.Sprintf("/blocks/%s.png", imgName)
 		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
@@ -51,7 +51,7 @@ func init() {
 
 	// 陆地地图块
 	for i := 0; i < landBlockCount; i++ {
-		imgName := fmt.Sprintf("land_%d", i)
+		imgName := fmt.Sprintf("land_%d_%d", BlockSize, i)
 		imgPath := fmt.Sprintf("/blocks/%s.png", imgName)
 		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
@@ -73,15 +73,15 @@ func GetByCharAndPos(c rune, x, y int) *ebiten.Image {
 	// 字符映射关系：. 浅海 o 深海 # 陆地
 	if c == '.' {
 		index := int(hash[0]) % seaBlockCount
-		return blocks[fmt.Sprintf("sea_%d", index)]
+		return blocks[fmt.Sprintf("sea_%d_%d", BlockSize, index)]
 	}
 	if c == 'o' {
 		index := int(hash[0]) % deepSeaBlockCount
-		return blocks[fmt.Sprintf("deep_sea_%d", index)]
+		return blocks[fmt.Sprintf("deep_sea_%d_%d", BlockSize, index)]
 	}
 	if c == '#' {
 		index := int(hash[0]) % landBlockCount
-		return blocks[fmt.Sprintf("land_%d", index)]
+		return blocks[fmt.Sprintf("land_%d_%d", BlockSize, index)]
 	}
 	return blocks["blank"]
 }
