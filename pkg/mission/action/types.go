@@ -1,35 +1,50 @@
 package action
 
-type ActionType string
+import obj "github.com/narasux/jutland/pkg/mission/object"
+
+// CursorHoverType 鼠标悬停动作
+type CursorHoverType string
 
 const (
 	// 无动作
-	DoNothing ActionType = "doNothing"
+	DoNothing CursorHoverType = "doNothing"
 
 	// HoverScreenMiddle 悬停在屏幕中间
-	HoverScreenMiddle ActionType = "hoverScreenMiddle"
+	HoverScreenMiddle CursorHoverType = "hoverScreenMiddle"
 
 	// HoverScreenTop 悬停在屏幕顶部
-	HoverScreenTop ActionType = "hoverScreenTop"
+	HoverScreenTop CursorHoverType = "hoverScreenTop"
 
 	// HoverScreenBottom 悬停在屏幕底部
-	HoverScreenBottom ActionType = "hoverScreenBottom"
+	HoverScreenBottom CursorHoverType = "hoverScreenBottom"
 
 	// HoverScreenLeft 悬停在屏幕左侧
-	HoverScreenLeft ActionType = "hoverScreenLeft"
+	HoverScreenLeft CursorHoverType = "hoverScreenLeft"
 
 	// HoverScreenRight 悬停在屏幕右侧
-	HoverScreenRight ActionType = "hoverScreenRight"
+	HoverScreenRight CursorHoverType = "hoverScreenRight"
 
 	// HoverScreenTopLeft 悬停在屏幕左上角
-	HoverScreenTopLeft ActionType = "hoverScreenTopLeft"
+	HoverScreenTopLeft CursorHoverType = "hoverScreenTopLeft"
 
 	// HoverScreenTopRight 悬停在屏幕右上角
-	HoverScreenTopRight ActionType = "hoverScreenTopRight"
+	HoverScreenTopRight CursorHoverType = "hoverScreenTopRight"
 
 	// HoverScreenBottomLeft 悬停在屏幕左下角
-	HoverScreenBottomLeft ActionType = "hoverScreenBottomLeft"
+	HoverScreenBottomLeft CursorHoverType = "hoverScreenBottomLeft"
 
 	// HoverScreenBottomRight 悬停在屏幕右下角
-	HoverScreenBottomRight ActionType = "hoverScreenBottomRight"
+	HoverScreenBottomRight CursorHoverType = "hoverScreenBottomRight"
 )
+
+// SelectedArea 选中的区域
+type SelectedArea struct {
+	// 地图位置
+	TopLeft       obj.MapPos
+	Width, Height float64
+	// 屏幕位置
+	StartX, StartY int
+	CurX, CurY     int
+	// 是否正在选中
+	Selecting bool
+}

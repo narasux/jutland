@@ -1,8 +1,12 @@
 package object
 
 import (
+	"fmt"
+	"math"
 	"slices"
 	"time"
+
+	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 type ShipType string
@@ -43,6 +47,16 @@ type MapPos struct {
 	RX, RY float64
 }
 
+// Equal 判断位置是否相等（用地图位置判断，RX，RY 太准确一直没法到）
+func (p *MapPos) Equal(other MapPos) bool {
+	return p.MX == other.MX && p.MY == other.MY
+}
+
+// String ...
+func (p *MapPos) String() string {
+	return fmt.Sprintf("(%f/%d, %f/%d)", p.RX, p.MX, p.RY, p.MY)
+}
+
 // 火炮 / 鱼雷弹药
 type Bullet struct {
 	// 固定参数
@@ -59,7 +73,7 @@ type Bullet struct {
 	// 目标位置
 	TargetPosition MapPos
 	// 旋转角度
-	Rotate int
+	Rotation int
 	// 速度
 	Speed int
 
@@ -174,7 +188,7 @@ type BattleShip struct {
 	// 最大速度
 	MaxSpeed float64
 	// 转向速度（度）
-	RotateSpeed int
+	RotateSpeed float64
 	// 武器
 	Weapon Weapon
 
@@ -184,9 +198,9 @@ type BattleShip struct {
 	// 当前生命值
 	CurHP int
 	// 当前位置
-	Pos MapPos
+	CurPos MapPos
 	// 旋转角度
-	Rotate int
+	CurRotation float64
 	// 当前速度
 	CurSpeed float64
 }
@@ -231,7 +245,35 @@ func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 	return bullets
 }
 
-func (s *BattleShip) MoveTo(targetPos MapPos) (arrive bool) {
-	// FIXME 修改自身的位置，角度，速度
-	return true
+// MoveTo 移动到指定位置
+func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool) {
+	if s.CurPos.Equal(targetPos) {
+		// TODO 做出减速效果
+		s.CurSpeed = 0
+		return true
+	}
+	// 未到达目标位置，逐渐加速
+	if s.CurSpeed != s.MaxSpeed {
+		s.CurSpeed += s.MaxSpeed / 5
+	}
+	targetAngle := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
+	// 逐渐转向
+	if s.CurRotation != targetAngle {
+		if s.CurRotation > targetAngle {
+			s.CurRotation -= min(s.CurRotation-targetAngle, s.RotateSpeed)
+		} else {
+			s.CurRotation += min(targetAngle-s.CurRotation, s.RotateSpeed)
+		}
+	}
+	// 修改位置
+	s.CurPos.RX += math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed
+	s.CurPos.RY -= math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed
+	// 防止出边界
+	s.CurPos.RX = max(min(s.CurPos.RX, float64(borderX-1)), 0)
+	s.CurPos.RY = max(min(s.CurPos.RY, float64(borderY-1)), 0)
+
+	s.CurPos.MX = int(math.Floor(s.CurPos.RX))
+	s.CurPos.MY = int(math.Floor(s.CurPos.RY))
+
+	return false
 }

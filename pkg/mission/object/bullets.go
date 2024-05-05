@@ -30,7 +30,7 @@ func NewBullets(name BulletName, CurPos, TargetPos MapPos, Speed int) *Bullet {
 	b.Uid = uuid.New().String()
 	b.CurPosition = CurPos
 	b.TargetPosition = TargetPos
-	b.Rotate = int(geometry.CalcAngleBetweenPoints(CurPos.RX, CurPos.RY, TargetPos.RX, TargetPos.RY))
+	b.Rotation = int(geometry.CalcAngleBetweenPoints(CurPos.RX, CurPos.RY, TargetPos.RX, TargetPos.RY))
 	b.Speed = Speed
 	return &b
 }

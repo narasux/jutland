@@ -20,7 +20,7 @@ type MissionMetadata struct {
 type InitShipMetadata struct {
 	ShipName object.ShipName
 	Pos      object.MapPos
-	Rotate   int
+	Rotation float64
 }
 
 var missionMetadata = map[Mission]MissionMetadata{

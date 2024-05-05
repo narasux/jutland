@@ -23,11 +23,11 @@ var shipImg = map[ShipName]*ebiten.Image{
 }
 
 // NewShip 新建战舰
-func NewShip(name ShipName, pos MapPos, rotate int) *BattleShip {
+func NewShip(name ShipName, pos MapPos, rotation float64) *BattleShip {
 	s := deepcopy.Copy(*ships[name]).(BattleShip)
 	s.Uid = uuid.New().String()
-	s.Pos = pos
-	s.Rotate = rotate
+	s.CurPos = pos
+	s.CurRotation = rotation
 	return &s
 }
 
@@ -41,8 +41,8 @@ var shipDefault = &BattleShip{
 	Type:            ShipTypeDestroyer,
 	TotalHP:         1000,
 	DamageReduction: 0.5,
-	MaxSpeed:        30,
-	RotateSpeed:     5,
+	MaxSpeed:        0.1,
+	RotateSpeed:     2,
 	Weapon: Weapon{
 		Guns: []*Gun{
 			newGun(GunMK45, 0.2),
@@ -51,8 +51,8 @@ var shipDefault = &BattleShip{
 		// TODO 鱼雷先欠一下，后面再加
 		Torpedoes: []*Torpedo{},
 	},
-	CurHP:    1000,
-	Pos:      MapPos{MX: 0, MY: 0},
-	Rotate:   0,
-	CurSpeed: 0,
+	CurHP:       1000,
+	CurPos:      MapPos{MX: 0, MY: 0},
+	CurRotation: 0,
+	CurSpeed:    0,
 }

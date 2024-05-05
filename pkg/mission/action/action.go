@@ -4,10 +4,12 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/narasux/jutland/pkg/mission/layout"
+	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
 // 探测游戏地图上的鼠标悬停动作
-func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) ActionType {
+func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 	// FIXME 还没想好如何在选择的时候移动地图，先禁用
 	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 		return DoNothing
@@ -61,4 +63,31 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) ActionType {
 		return HoverScreenMiddle
 	}
 	return DoNothing
+}
+
+// 游戏地图上的选区
+var selectedArea = SelectedArea{}
+
+// 探测游戏地图上的鼠标选区
+func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
+	// 左键没有点击，直接跳过
+	if !ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
+		selectedArea.Selecting = false
+		return &selectedArea
+	}
+	if !selectedArea.Selecting {
+		sx, sy := ebiten.CursorPosition()
+		selectedArea.StartX = sx
+		selectedArea.StartY = sy
+		selectedArea.TopLeft.RX = float64(sx)/mapblock.BlockSize + float64(misState.Camera.Pos.MX)
+		selectedArea.TopLeft.RY = float64(sy)/mapblock.BlockSize + float64(misState.Camera.Pos.MY)
+		selectedArea.Selecting = true
+	}
+	sx, sy := ebiten.CursorPosition()
+	selectedArea.CurX = sx
+	selectedArea.CurY = sy
+	// FIXME 考虑各种拉取的方式，如果是右下拉左上，这里 width，height 都是负数
+	selectedArea.Width = float64(sx)/mapblock.BlockSize + float64(misState.Camera.Pos.MX) - selectedArea.TopLeft.RX
+	selectedArea.Height = float64(sy)/mapblock.BlockSize + float64(misState.Camera.Pos.MY) - selectedArea.TopLeft.RY
+	return &selectedArea
 }

@@ -72,7 +72,8 @@ func NewShipMove(shipUid string, targetPos obj.MapPos) *ShipMove {
 }
 
 func (i *ShipMove) Exec(s *state.MissionState) error {
-	if s.Ships[i.shipUid].MoveTo(i.targetPos) {
+	borderX, borderY := s.MissionMD.MapCfg.Width, s.MissionMD.MapCfg.Height
+	if s.Ships[i.shipUid].MoveTo(i.targetPos, borderX, borderY) {
 		i.executed = true
 	}
 	return nil
