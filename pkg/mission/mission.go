@@ -2,6 +2,8 @@ package mission
 
 import (
 	"log"
+	"runtime"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
@@ -28,10 +30,8 @@ type MissionManager struct {
 // NewManager ...
 func NewManager(mission md.Mission) *MissionManager {
 	return &MissionManager{
-		state: state.NewMissionState(
-			mission, md.Get(mission).InitCameraPos,
-		),
-		drawer:       drawer.NewDrawer(),
+		state:        state.NewMissionState(mission),
+		drawer:       drawer.NewDrawer(mission),
 		instructions: []instr.Instruction{},
 	}
 }
@@ -54,12 +54,19 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 			ship = s
 			break
 		}
-		tarPos := obj.MapPos{MX: 48, MY: 54, RX: 48.5, RY: 54.5}
+		tarPos := obj.MapPos{MX: 48, MY: 48, RX: 48.5, RY: 48.5}
 		if ship.CurPos.MX == 48 {
 			tarPos = obj.MapPos{MX: 36, MY: 40, RX: 36.5, RY: 40.5}
 		}
 		m.instructions = append(m.instructions, instr.NewShipMove(ship.Uid, tarPos))
 	}
+
+	// FIXME 优化 GC
+	if time.Now().Unix()%2 == 0 {
+		log.Println("GC!!!!")
+		runtime.GC()
+	}
+
 	return m.state.MissionStatus, nil
 }
 

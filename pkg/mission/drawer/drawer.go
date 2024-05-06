@@ -2,13 +2,14 @@ package drawer
 
 import (
 	"fmt"
+	"image"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 
 	"github.com/narasux/jutland/pkg/mission/action"
+	md "github.com/narasux/jutland/pkg/mission/metadata"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/colorx"
@@ -19,17 +20,33 @@ import (
 )
 
 // Drawer 任务运行中图像绘制器
-type Drawer struct{}
+type Drawer struct {
+	mapImg     *ebiten.Image
+	curViewImg *ebiten.Image
+}
 
 // NewDrawer ...
-func NewDrawer() *Drawer {
-	return &Drawer{}
+func NewDrawer(mission md.Mission) *Drawer {
+	missionMD := md.Get(mission)
+	mapW, mapH := missionMD.MapCfg.Width, missionMD.MapCfg.Height
+	// 预先渲染好整个地图，逐帧渲染的时候裁剪即可
+	mapImg := ebiten.NewImage(mapW*mapblock.BlockSize, mapH*mapblock.BlockSize)
+	for x := 0; x < mapW; x++ {
+		for y := 0; y < mapH; y++ {
+			char := missionMD.MapCfg.Map.Get(x, y)
+			opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+			opts.GeoM.Translate(float64(x)*mapblock.BlockSize, float64(y)*mapblock.BlockSize)
+			mapImg.DrawImage(mapblock.GetByCharAndPos(char, x, y), opts)
+		}
+	}
+	return &Drawer{mapImg: mapImg}
 }
 
 // Draw 绘制任务关卡图像
 func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	// 相机视野
-	d.drawCameraView(screen, misState)
+	d.drawCameraViewRealTimeRender(screen, misState)
+	d.drawDebugIndex(screen, misState)
 	// 地图元素
 	d.drawBuildings(screen, misState)
 	d.drawBattleShips(screen, misState)
@@ -43,8 +60,8 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	d.drawTips(screen, misState)
 }
 
-// 绘制相机视野
-func (d *Drawer) drawCameraView(screen *ebiten.Image, ms *state.MissionState) {
+// 绘制相机视野（实时渲染）
+func (d *Drawer) drawCameraViewRealTimeRender(screen *ebiten.Image, ms *state.MissionState) {
 	for x := 0; x < ms.Camera.Width; x++ {
 		for y := 0; y < ms.Camera.Height; y++ {
 			opts := d.genDefaultDrawImageOptions()
@@ -53,12 +70,19 @@ func (d *Drawer) drawCameraView(screen *ebiten.Image, ms *state.MissionState) {
 			mapX, mapY := ms.Camera.Pos.MX+x, ms.Camera.Pos.MY+y
 			char := ms.MissionMD.MapCfg.Map.Get(mapX, mapY)
 			screen.DrawImage(mapblock.GetByCharAndPos(char, mapX, mapY), opts)
-			// FIXME 去除该 debug
-			//ebitenutil.DebugPrintAt(
-			//	screen, fmt.Sprintf("\n(%d,%d)", mapX, mapY), x*mapblock.BlockSize, y*mapblock.BlockSize,
-			//)
 		}
 	}
+}
+
+// 绘制相机视野（裁剪的方式）FIXME 目前需要强依赖手动 GC（在 Manager 的 Update 中）
+func (d *Drawer) drawCameraViewCropSprite(screen *ebiten.Image, ms *state.MissionState) {
+	x1 := ms.Camera.Pos.MX * mapblock.BlockSize
+	y1 := ms.Camera.Pos.MY * mapblock.BlockSize
+	x2 := x1 + ms.Camera.Width*mapblock.BlockSize
+	y2 := y1 + ms.Camera.Height*mapblock.BlockSize
+	cropRect := image.Rect(x1, y1, x2, y2)
+	d.curViewImg = d.mapImg.SubImage(cropRect).(*ebiten.Image)
+	screen.DrawImage(d.curViewImg, nil)
 }
 
 // 绘制控制台
@@ -149,7 +173,7 @@ func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
 // 绘制战舰
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	for _, ship := range ms.Ships {
-		ebitenutil.DebugPrint(screen,
+		ebutil.DebugPrint(screen,
 			fmt.Sprintf("\n\nship.MX: %d, ship.MY: %d, ship.RX: %f, ship.RY: %f\nspeed: %f, rotation: %f",
 				ship.CurPos.MX, ship.CurPos.MY,
 				ship.CurPos.RX, ship.CurPos.RY,
@@ -212,5 +236,17 @@ func (d *Drawer) genDefaultDrawImageOptions() *ebiten.DrawImageOptions {
 	return &ebiten.DrawImageOptions{
 		// 线性过滤：通过计算周围像素的加权平均值来进行插值，可使得边缘 & 色彩转换更加自然
 		Filter: ebiten.FilterLinear,
+	}
+}
+
+// 绘制调试用坐标
+func (d *Drawer) drawDebugIndex(screen *ebiten.Image, ms *state.MissionState) {
+	for x := 0; x < ms.Camera.Width; x++ {
+		for y := 0; y < ms.Camera.Height; y++ {
+			mapX, mapY := ms.Camera.Pos.MX+x, ms.Camera.Pos.MY+y
+			ebutil.DebugPrintAt(
+				screen, fmt.Sprintf("\n(%d,%d)", mapX, mapY), x*mapblock.BlockSize, y*mapblock.BlockSize,
+			)
+		}
 	}
 }

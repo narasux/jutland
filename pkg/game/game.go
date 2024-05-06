@@ -6,13 +6,13 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/audio"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 
 	"github.com/narasux/jutland/pkg/mission"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/background"
-	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 type Game struct {
@@ -109,7 +109,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		log.Printf("unknown game mode: %d", g.mode)
 	}
 
-	ebutil.DebugPrint(screen, fmt.Sprintf("FPS: %0.2f GameMode: %d", ebiten.ActualFPS(), g.mode))
+	ebitenutil.DebugPrint(screen, fmt.Sprintf("FPS: %0.2f", ebiten.ActualFPS()))
 }
 
 // Layout 核心方法，用于设置窗口大小（全屏模式下无意义）

@@ -31,12 +31,14 @@ type MissionState struct {
 	Ships map[string]*object.BattleShip
 	// 已发射的弹药信息（炮弹 / 鱼雷）
 	Bullets map[string]*object.Bullet
+	// 被选中的战舰信息（Uid）
+	SelectedShips []string
 }
 
 // NewMissionState ...
-func NewMissionState(mission md.Mission, initPos object.MapPos) *MissionState {
-	misLayout := layout.NewScreenLayout()
+func NewMissionState(mission md.Mission) *MissionState {
 	missionMD := md.Get(mission)
+	misLayout := layout.NewScreenLayout()
 	// 初始化战舰
 	ships := map[string]*object.BattleShip{}
 	for _, shipMD := range missionMD.InitShips {
@@ -49,12 +51,13 @@ func NewMissionState(mission md.Mission, initPos object.MapPos) *MissionState {
 		MissionMD:     missionMD,
 		Layout:        misLayout,
 		Camera: Camera{
-			Pos: initPos,
+			Pos: missionMD.InitCameraPos,
 			// 地图资源，多展示一行 & 列，避免出现黑边
 			Width:  misLayout.Camera.Width/mapblock.BlockSize + 1,
 			Height: misLayout.Camera.Height/mapblock.BlockSize + 1,
 		},
-		Ships:   ships,
-		Bullets: map[string]*object.Bullet{},
+		Ships:         ships,
+		Bullets:       map[string]*object.Bullet{},
+		SelectedShips: []string{},
 	}
 }
