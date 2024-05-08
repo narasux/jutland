@@ -28,8 +28,8 @@ func DebugPrintAt(screen *ebiten.Image, str string, x, y int) {
 
 // CalcTextWidth 计算文本宽度
 func CalcTextWidth(text string, fontSize float64) float64 {
-	// 字体原因，宽度大致是 0.4 的文字高度
-	return fontSize * float64(len(text)) / 5 * 2
+	// 字体原因，宽度大致是 0.35 的文字高度
+	return fontSize * float64(len(text)) / 20 * 7
 }
 
 // SetOptsCenterRotation 中心旋转（需要在最后的 GeoM.Translate 前执行，即先旋转，再位移）

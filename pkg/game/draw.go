@@ -35,7 +35,7 @@ func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 func (d *Drawer) drawGameTitle(screen *ebiten.Image, textStr string) {
 	fontSize := float64(128)
 	// TODO 优化居中效果
-	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 5 * 3
+	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }

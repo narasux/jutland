@@ -2,8 +2,6 @@ package mission
 
 import (
 	"log"
-	"runtime"
-	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
@@ -59,12 +57,6 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 			tarPos = obj.MapPos{MX: 36, MY: 40, RX: 36.5, RY: 40.5}
 		}
 		m.instructions = append(m.instructions, instr.NewShipMove(ship.Uid, tarPos))
-	}
-
-	// FIXME 优化 GC
-	if time.Now().Unix()%2 == 0 {
-		log.Println("GC!!!!")
-		runtime.GC()
 	}
 
 	return m.state.MissionStatus, nil

@@ -77,7 +77,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	switch g.mode {
 	case GameModeStart:
 		g.drawer.drawBackground(screen, background.GameStartImg)
-		g.drawer.drawGameTitle(screen, "日 德 兰 海 战")
+		g.drawer.drawGameTitle(screen, "怒 海 争 锋")
 	case GameModeMenuSelect:
 		g.objStates.AutoUpdateMenuButtonStates(screen)
 		g.drawer.drawBackground(screen, background.GameMenuImg)
@@ -104,7 +104,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		return
 	case GameModeEnd:
 		g.drawer.drawBackground(screen, background.GameEndImg)
-		g.drawer.drawGameTitle(screen, "祝君武运昌隆！")
+		// 注：英文感叹号字体是一样的，但是末尾留白少一些，对齐比较好看 :D
+		g.drawer.drawGameTitle(screen, "祝君武运昌隆!")
 	default:
 		log.Printf("unknown game mode: %d", g.mode)
 	}

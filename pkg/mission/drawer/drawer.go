@@ -191,8 +191,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, shipImg, ship.CurRotation)
 		opts.GeoM.Translate(
-			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize,
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize,
+			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(shipImg.Bounds().Dx()/2),
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(shipImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(shipImg, opts)
 
