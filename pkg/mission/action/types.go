@@ -40,11 +40,20 @@ const (
 // SelectedArea 选中的区域
 type SelectedArea struct {
 	// 地图位置
-	TopLeft       obj.MapPos
-	Width, Height float64
+	StartAt, CurAt obj.MapPos
 	// 屏幕位置
-	StartX, StartY int
-	CurX, CurY     int
+	StartX, StartY, CurX, CurY int
 	// 是否正在选中
 	Selecting bool
+}
+
+// Contain 判断某个位置是否在选中区域内
+func (a *SelectedArea) Contain(pos obj.MapPos) bool {
+	if !a.Selecting {
+		return false
+	}
+	topLeftX, topLeftY := min(a.StartAt.RX, a.CurAt.RX), min(a.StartAt.RY, a.CurAt.RY)
+	bottomRightX, bottomRightY := max(a.StartAt.RX, a.CurAt.RX), max(a.StartAt.RY, a.CurAt.RY)
+
+	return pos.RX >= topLeftX && pos.RX <= bottomRightX && pos.RY >= topLeftY && pos.RY <= bottomRightY
 }

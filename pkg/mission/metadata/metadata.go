@@ -1,7 +1,7 @@
 package metadata
 
 import (
-	"github.com/narasux/jutland/pkg/mission/object"
+	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
@@ -12,25 +12,25 @@ type MissionMetadata struct {
 	// 最大战舰数量
 	MaxShipCount int
 	// 初始位置
-	InitCameraPos object.MapPos
+	InitCameraPos obj.MapPos
 	// 初始战舰
 	InitShips []InitShipMetadata
 }
 
 type InitShipMetadata struct {
-	ShipName object.ShipName
-	Pos      object.MapPos
+	ShipName obj.ShipName
+	Pos      obj.MapPos
 	Rotation float64
 }
 
 var missionMetadata = map[Mission]MissionMetadata{
 	MissionDefault: {
 		Name:          "默认关卡",
-		InitCameraPos: object.MapPos{MX: 32, MY: 32},
+		InitCameraPos: obj.NewMapPos(32, 32),
 		MapCfg:        mapcfg.GetByName(mapcfg.MapDefault),
 		MaxShipCount:  5,
 		InitShips: []InitShipMetadata{
-			{object.ShipDefault, object.MapPos{MX: 32, MY: 32, RX: 32, RY: 32}, 90},
+			{obj.ShipDefault, obj.NewMapPos(40, 36), 90},
 		},
 	},
 }

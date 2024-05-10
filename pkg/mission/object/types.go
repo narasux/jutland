@@ -47,14 +47,68 @@ type MapPos struct {
 	RX, RY float64
 }
 
-// Equal 判断位置是否相等（用地图位置判断，RX，RY 太准确一直没法到）
-func (p *MapPos) Equal(other MapPos) bool {
+// NewMapPos ...
+func NewMapPos(mx, my int) MapPos {
+	return MapPos{MX: mx, MY: my, RX: float64(mx), RY: float64(my)}
+}
+
+// MEqual 判断位置是否相等（用地图位置判断，RX，RY 太准确一直没法到）
+func (p *MapPos) MEqual(other MapPos) bool {
 	return p.MX == other.MX && p.MY == other.MY
+}
+
+// Near 判断位置是否在指定范围内
+func (p *MapPos) Near(other MapPos, distance int) bool {
+	return geometry.CalcDistance(p.RX, p.RY, other.RX, other.RY) <= float64(distance)
 }
 
 // String ...
 func (p *MapPos) String() string {
 	return fmt.Sprintf("(%f/%d, %f/%d)", p.RX, p.MX, p.RY, p.MY)
+}
+
+// AssignRxy 重新赋值 RX，RY，并计算 MX，MY
+func (p *MapPos) AssignRxy(rx, ry float64) {
+	p.RX, p.RY = rx, ry
+	p.MX, p.MY = int(math.Floor(rx)), int(math.Floor(ry))
+}
+
+// AssignMxy 重新赋值 MX，MY，同时计算 RX，RY
+func (p *MapPos) AssignMxy(mx, my int) {
+	p.MX, p.MY = mx, my
+	p.RX, p.RY = float64(mx), float64(my)
+}
+
+// AddRx 修改 Rx，同时计算 Mx
+func (p *MapPos) AddRx(rx float64) {
+	p.RX += rx
+	p.MX = int(math.Floor(p.RX))
+}
+
+// SubRx 修改 Rx，同时计算 Mx
+func (p *MapPos) SubRx(rx float64) {
+	p.RX -= rx
+	p.MX = int(math.Floor(p.RX))
+}
+
+// AddRy 修改 Ry，同时计算 My
+func (p *MapPos) AddRy(ry float64) {
+	p.RY += ry
+	p.MY = int(math.Floor(p.RY))
+}
+
+// SubRy 修改 Ry，同时计算 My
+func (p *MapPos) SubRy(ry float64) {
+	p.RY -= ry
+	p.MY = int(math.Floor(p.RY))
+}
+
+// EnsureBorder 边界检查
+func (p *MapPos) EnsureBorder(borderX, borderY float64) {
+	p.RX = max(min(p.RX, borderX), 0)
+	p.RY = max(min(p.RY, borderY), 0)
+	p.MX = int(math.Floor(p.RX))
+	p.MY = int(math.Floor(p.RY))
 }
 
 // 火炮 / 鱼雷弹药
@@ -247,14 +301,17 @@ func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 
 // MoveTo 移动到指定位置
 func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool) {
-	if s.CurPos.Equal(targetPos) {
-		// TODO 做出减速效果
+	if s.CurPos.MEqual(targetPos) {
 		s.CurSpeed = 0
 		return true
 	}
 	// 未到达目标位置，逐渐加速
-	if s.CurSpeed != s.MaxSpeed {
-		s.CurSpeed += s.MaxSpeed / 5
+	if s.CurSpeed < s.MaxSpeed {
+		s.CurSpeed = max(s.MaxSpeed, s.CurSpeed+s.MaxSpeed/5)
+	}
+	// 到目标位置附近，逐渐减速
+	if s.CurPos.Near(targetPos, 3) {
+		s.CurSpeed = min(s.MaxSpeed/5, s.CurSpeed-s.MaxSpeed/5)
 	}
 	targetAngle := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
 	// 逐渐转向
@@ -266,14 +323,11 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 		}
 	}
 	// 修改位置
-	s.CurPos.RX += math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed
-	s.CurPos.RY -= math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed
-	// 防止出边界
-	s.CurPos.RX = max(min(s.CurPos.RX, float64(borderX-1)), 0)
-	s.CurPos.RY = max(min(s.CurPos.RY, float64(borderY-1)), 0)
+	s.CurPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
+	s.CurPos.SubRy(math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed)
 
-	s.CurPos.MX = int(math.Floor(s.CurPos.RX))
-	s.CurPos.MY = int(math.Floor(s.CurPos.RY))
+	// 防止出边界
+	s.CurPos.EnsureBorder(float64(borderX-1), float64(borderY-1))
 
 	return false
 }

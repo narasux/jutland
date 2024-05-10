@@ -55,8 +55,7 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	d.drawConsole(screen, misState)
 	// 用户行为
 	d.drawArrowOnMapWhenHover(screen, misState)
-	// FIXME 绘制选择框有 bug，需要先注释掉
-	// d.drawSelectArea(screen, misState)
+	d.drawSelectedArea(screen, misState)
 	d.drawTips(screen, misState)
 }
 
@@ -152,18 +151,18 @@ func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.Mission
 }
 
 // 绘制选择框
-func (d *Drawer) drawSelectArea(screen *ebiten.Image, ms *state.MissionState) {
+func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) {
 	area := action.DetectCursorSelectArea(ms)
-	if !area.Selecting {
+	if area == nil || !area.Selecting {
 		return
 	}
 	x1, y1 := min(area.StartX, area.CurX), min(area.StartY, area.CurY)
 	x2, y2 := max(area.StartX, area.CurX), max(area.StartY, area.CurY)
 
-	ebutil.DrawLineOnScreen(screen, x1, y1, x1, y2, 2, colorx.White)
-	ebutil.DrawLineOnScreen(screen, x1, y1, x2, y1, 2, colorx.White)
-	ebutil.DrawLineOnScreen(screen, x1, y2, x2, y2, 2, colorx.White)
-	ebutil.DrawLineOnScreen(screen, x2, y1, x2, y2, 2, colorx.White)
+	ebutil.DrawVerticalLineOnScreen(screen, x1, y1, y2, 2, colorx.White)
+	ebutil.DrawVerticalLineOnScreen(screen, x2, y1, y2, 2, colorx.White)
+	ebutil.DrawHorizontalLineOnScreen(screen, x1, x2, y1, 2, colorx.White)
+	ebutil.DrawHorizontalLineOnScreen(screen, x1, x2, y2, 2, colorx.White)
 }
 
 // 绘制建筑物
@@ -196,6 +195,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		)
 		screen.DrawImage(shipImg, opts)
 
+		// TODO 如果被选中，则展示 HP 比例，选中的框
 		// TODO 绘制尾流（速度不同，尺寸不同，尾流不同？）
 	}
 }

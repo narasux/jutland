@@ -2,8 +2,11 @@ package action
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/layout"
+	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
@@ -66,28 +69,51 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 }
 
 // 游戏地图上的选区
-var selectedArea = SelectedArea{}
+var sArea = SelectedArea{}
 
 // 探测游戏地图上的鼠标选区
 func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
-	// 左键没有点击，直接跳过
+	// 左键没有被压下，直接跳过
 	if !ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
-		selectedArea.Selecting = false
-		return &selectedArea
+		sArea.Selecting = false
+		return nil
 	}
-	if !selectedArea.Selecting {
+	if !sArea.Selecting {
 		sx, sy := ebiten.CursorPosition()
-		selectedArea.StartX = sx
-		selectedArea.StartY = sy
-		selectedArea.TopLeft.RX = float64(sx)/mapblock.BlockSize + float64(misState.Camera.Pos.MX)
-		selectedArea.TopLeft.RY = float64(sy)/mapblock.BlockSize + float64(misState.Camera.Pos.MY)
-		selectedArea.Selecting = true
+		sArea.StartX, sArea.StartY = sx, sy
+		sArea.StartAt.AssignRxy(
+			float64(sx)/mapblock.BlockSize+float64(misState.Camera.Pos.MX),
+			float64(sy)/mapblock.BlockSize+float64(misState.Camera.Pos.MY),
+		)
+		sArea.Selecting = true
 	}
 	sx, sy := ebiten.CursorPosition()
-	selectedArea.CurX = sx
-	selectedArea.CurY = sy
-	// FIXME 考虑各种拉取的方式，如果是右下拉左上，这里 width，height 都是负数
-	selectedArea.Width = float64(sx)/mapblock.BlockSize + float64(misState.Camera.Pos.MX) - selectedArea.TopLeft.RX
-	selectedArea.Height = float64(sy)/mapblock.BlockSize + float64(misState.Camera.Pos.MY) - selectedArea.TopLeft.RY
-	return &selectedArea
+	sArea.CurX, sArea.CurY = sx, sy
+	sArea.CurAt.AssignRxy(
+		float64(sx)/mapblock.BlockSize+float64(misState.Camera.Pos.MX),
+		float64(sy)/mapblock.BlockSize+float64(misState.Camera.Pos.MY),
+	)
+	return &sArea
+}
+
+// 探测游戏地图上的左键点击
+func DetectMouseLeftButtonClickOnMap(misState *state.MissionState) *obj.MapPos {
+	return detectMouseButtonClickOnMap(misState, ebiten.MouseButtonLeft)
+}
+
+// 探测游戏地图上的右键点击
+func DetectMouseRightButtonClickOnMap(misState *state.MissionState) *obj.MapPos {
+	return detectMouseButtonClickOnMap(misState, ebiten.MouseButtonRight)
+}
+
+// 探测游戏地图上的鼠标按键点击
+func detectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *obj.MapPos {
+	// 鼠标按键没有点击，直接跳过
+	if !inpututil.IsMouseButtonJustPressed(button) {
+		return nil
+	}
+	sx, sy := ebiten.CursorPosition()
+	mx := misState.Camera.Pos.MX + int(float64(sx)/mapblock.BlockSize)
+	my := misState.Camera.Pos.MY + int(float64(sy)/mapblock.BlockSize)
+	return lo.ToPtr(obj.NewMapPos(mx, my))
 }

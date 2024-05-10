@@ -10,7 +10,6 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
-	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -43,21 +42,9 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	m.dropExecutedInstructions()
 	m.executeInstructions()
 	m.updateCameraPosition()
+	m.updateSelectedShips()
+	m.updateInstructions()
 	m.updateMissionStatus()
-
-	// FIXME 移除这段测试代码
-	if len(m.instructions) == 0 {
-		var ship *obj.BattleShip
-		for _, s := range m.state.Ships {
-			ship = s
-			break
-		}
-		tarPos := obj.MapPos{MX: 48, MY: 48, RX: 48.5, RY: 48.5}
-		if ship.CurPos.MX == 48 {
-			tarPos = obj.MapPos{MX: 36, MY: 40, RX: 36.5, RY: 40.5}
-		}
-		m.instructions = append(m.instructions, instr.NewShipMove(ship.Uid, tarPos))
-	}
 
 	return m.state.MissionStatus, nil
 }
@@ -109,10 +96,40 @@ func (m *MissionManager) updateCameraPosition() {
 	}
 
 	// 防止超出边界
-	s.Camera.Pos.MX = lo.Max([]int{s.Camera.Pos.MX, 0})
-	s.Camera.Pos.MY = lo.Max([]int{s.Camera.Pos.MY, 0})
-	s.Camera.Pos.MX = lo.Min([]int{s.Camera.Pos.MX, s.MissionMD.MapCfg.Width - s.Camera.Width - 1})
-	s.Camera.Pos.MY = lo.Min([]int{s.Camera.Pos.MY, s.MissionMD.MapCfg.Height - s.Camera.Height - 1})
+	s.Camera.Pos.AssignMxy(
+		lo.Max([]int{s.Camera.Pos.MX, 0}),
+		lo.Max([]int{s.Camera.Pos.MY, 0}),
+	)
+	s.Camera.Pos.AssignMxy(
+		lo.Min([]int{s.Camera.Pos.MX, s.MissionMD.MapCfg.Width - s.Camera.Width - 1}),
+		lo.Min([]int{s.Camera.Pos.MY, s.MissionMD.MapCfg.Height - s.Camera.Height - 1}),
+	)
+}
+
+// 更新选择的战舰列表
+func (m *MissionManager) updateSelectedShips() {
+	// 选择一个区域中的所有战舰
+	if area := action.DetectCursorSelectArea(m.state); area != nil {
+		m.state.SelectedShips = []string{}
+		for _, ship := range m.state.Ships {
+			if area.Contain(ship.CurPos) {
+				m.state.SelectedShips = append(m.state.SelectedShips, ship.Uid)
+			}
+		}
+		return
+	}
+}
+
+// 更新指令列表
+func (m *MissionManager) updateInstructions() {
+	// 战舰移动指令（鼠标右键点击确定目标位置）
+	if pos := action.DetectMouseRightButtonClickOnMap(m.state); pos != nil {
+		if len(m.state.SelectedShips) != 0 {
+			for _, shipUid := range m.state.SelectedShips {
+				m.instructions = append(m.instructions, instr.NewShipMove(shipUid, *pos))
+			}
+		}
+	}
 }
 
 // TODO 计算下一帧任务状态
