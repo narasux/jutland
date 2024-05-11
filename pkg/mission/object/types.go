@@ -225,6 +225,9 @@ type Weapon struct {
 	Guns []*Gun
 	// 鱼雷
 	Torpedoes []*Torpedo
+	// 武器禁用情况
+	GunDisabled     bool
+	TorpedoDisabled bool
 }
 
 // BattleShip 战舰
@@ -265,11 +268,13 @@ func (s *BattleShip) DisableWeapon(t WeaponType) {
 		for i := 0; i < len(s.Weapon.Guns); i++ {
 			s.Weapon.Guns[i].Disable = true
 		}
+		s.Weapon.GunDisabled = true
 	}
 	if t == WeaponTypeAll || t == WeaponTypeTorpedo {
 		for i := 0; i < len(s.Weapon.Torpedoes); i++ {
 			s.Weapon.Torpedoes[i].Disable = true
 		}
+		s.Weapon.TorpedoDisabled = true
 	}
 }
 
@@ -279,11 +284,13 @@ func (s *BattleShip) EnableWeapon(t WeaponType) {
 		for i := 0; i < len(s.Weapon.Guns); i++ {
 			s.Weapon.Guns[i].Disable = false
 		}
+		s.Weapon.GunDisabled = false
 	}
 	if t == WeaponTypeAll || t == WeaponTypeTorpedo {
 		for i := 0; i < len(s.Weapon.Torpedoes); i++ {
 			s.Weapon.Torpedoes[i].Disable = false
 		}
+		s.Weapon.TorpedoDisabled = false
 	}
 }
 
@@ -310,7 +317,7 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 		s.CurSpeed = max(s.MaxSpeed, s.CurSpeed+s.MaxSpeed/5)
 	}
 	// 到目标位置附近，逐渐减速
-	if s.CurPos.Near(targetPos, 3) {
+	if s.CurPos.Near(targetPos, 2) {
 		s.CurSpeed = min(s.MaxSpeed/5, s.CurSpeed-s.MaxSpeed/5)
 	}
 	targetAngle := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
@@ -321,6 +328,7 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 		} else {
 			s.CurRotation += min(targetAngle-s.CurRotation, s.RotateSpeed)
 		}
+		s.CurRotation = math.Mod(s.CurRotation, 360)
 	}
 	// 修改位置
 	s.CurPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
