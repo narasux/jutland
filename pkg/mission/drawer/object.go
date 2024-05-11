@@ -2,9 +2,12 @@ package drawer
 
 import (
 	"fmt"
+	"image/color"
 	"slices"
+	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
 	obj "github.com/narasux/jutland/pkg/mission/object"
@@ -18,9 +21,31 @@ import (
 func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
 }
 
+// 绘制战舰尾流
+func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
+	for _, trail := range ms.ShipTrails {
+		// 只有在屏幕中的才渲染
+		if !ms.Camera.Contains(trail.Pos) {
+			continue
+		}
+
+		cx := (trail.Pos.RX - float64(ms.Camera.Pos.MX)) * mapblock.BlockSize
+		cy := (trail.Pos.RY - float64(ms.Camera.Pos.MY)) * mapblock.BlockSize
+		// FIXME 处理尾流不是半透明的问题
+		clr := color.RGBA{255, 255, 255, uint8(trail.Life)}
+		vector.DrawFilledCircle(screen, float32(cx), float32(cy), float32(trail.Size), clr, false)
+	}
+}
+
 // 绘制战舰
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
-	for _, ship := range ms.Ships {
+	// 战舰排序，确保渲染顺序是一致的（否则重叠战舰会出现问题）
+	ships := lo.Values(ms.Ships)
+	slices.SortFunc(ships, func(a, b *obj.BattleShip) int {
+		return strings.Compare(a.Uid, b.Uid)
+	})
+
+	for _, ship := range ships {
 		ebutil.DebugPrint(screen,
 			fmt.Sprintf("\n\nship.MX: %d, ship.MY: %d, ship.RX: %f, ship.RY: %f\nspeed: %f, rotation: %f",
 				ship.CurPos.MX, ship.CurPos.MY,
@@ -28,25 +53,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				ship.CurSpeed, ship.CurRotation,
 			))
 		// 只有在屏幕中的才渲染
-		if ship.CurPos.MX < ms.Camera.Pos.MX ||
-			ship.CurPos.MX > ms.Camera.Pos.MX+ms.Camera.Width ||
-			ship.CurPos.MY < ms.Camera.Pos.MY ||
-			ship.CurPos.MY > ms.Camera.Pos.MY+ms.Camera.Height {
+		if !ms.Camera.Contains(ship.CurPos) {
 			continue
-		}
-
-		isShipSelected := slices.Contains(ms.SelectedShips, ship.Uid)
-
-		// 如果战舰被选中，则需要绘制选中框
-		if isShipSelected {
-			// 绘制选中框
-			selectBoxImg := texture.SelectBoxWhiteImg
-			opts := d.genDefaultDrawImageOptions()
-			opts.GeoM.Translate(
-				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(selectBoxImg.Bounds().Dx()/2),
-				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(selectBoxImg.Bounds().Dy()/2),
-			)
-			screen.DrawImage(selectBoxImg, opts)
 		}
 
 		shipImg := obj.GetShipImg(ship.Name)
@@ -59,30 +67,28 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		screen.DrawImage(shipImg, opts)
 
 		// 如果战舰被选中，则需要绘制 HP，武器状态 TODO 如果全局启用状态展示，也要绘制
-		isDisplayShipState := false
-		if isShipSelected || isDisplayShipState {
+		isShipSelected := slices.Contains(ms.SelectedShips, ship.Uid)
+		if isShipSelected {
 			opts = d.genDefaultDrawImageOptions()
 			opts.GeoM.Translate(
 				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-25,
-				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-30,
+				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-85,
 			)
-
-			// 绘制当前生命值
-			hpImg := texture.GetHpImg(ship.CurHP, ship.TotalHP)
-			screen.DrawImage(hpImg, opts)
-
 			// 绘制武器状态
 			gunImg := lo.Ternary(ship.Weapon.GunDisabled, texture.GunDisableImg, texture.GunEnableImg)
-			opts.GeoM.Translate(-10, -30)
 			screen.DrawImage(gunImg, opts)
 
 			torpedoImg := lo.Ternary(ship.Weapon.TorpedoDisabled, texture.TorpedoDisableImg, texture.TorpedoEnableImg)
-			opts.GeoM.Translate(40, 0)
+			opts.GeoM.Translate(0, 25)
 			screen.DrawImage(torpedoImg, opts)
+
+			// 绘制当前生命值
+			opts.GeoM.Translate(40, -22)
+			hpImg := texture.GetHpImg(ship.CurHP, ship.TotalHP)
+			screen.DrawImage(hpImg, opts)
 		}
 
 		// TODO 绘制战损情况，开火情况
-		// TODO 绘制尾流（速度不同，尺寸不同，尾流不同？）
 	}
 }
 

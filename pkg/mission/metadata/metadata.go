@@ -31,6 +31,7 @@ var missionMetadata = map[Mission]MissionMetadata{
 		MaxShipCount:  5,
 		InitShips: []InitShipMetadata{
 			{obj.ShipDefault, obj.NewMapPos(40, 36), 90},
+			{obj.ShipDefault, obj.NewMapPos(50, 50), 0},
 		},
 	},
 }

@@ -38,6 +38,8 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	d.drawDebugIndex(screen, misState)
 	// 地图元素
 	d.drawBuildings(screen, misState)
+	// FIXME 绘制战舰尾流
+	// d.drawShipTrails(screen, misState)
 	d.drawBattleShips(screen, misState)
 	d.drawShotBullets(screen, misState)
 	// 控制台

@@ -10,6 +10,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
+	"github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -44,6 +45,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	m.updateCameraPosition()
 	m.updateSelectedShips()
 	m.updateInstructions()
+	m.updateShipTrails()
 	m.updateMissionStatus()
 
 	return m.state.MissionStatus, nil
@@ -128,6 +130,25 @@ func (m *MissionManager) updateInstructions() {
 			for _, shipUid := range m.state.SelectedShips {
 				m.instructions = append(m.instructions, instr.NewShipMove(shipUid, *pos))
 			}
+		}
+	}
+}
+
+// 更新战舰尾流状态
+func (m *MissionManager) updateShipTrails() {
+	for i := 0; i < len(m.state.ShipTrails); i++ {
+		// 尾流尺寸越来越大，但是留存时间越来越短
+		m.state.ShipTrails[i].Size += 0.2
+		m.state.ShipTrails[i].Life -= 1
+	}
+	// 生命周期结束的，不再需要
+	m.state.ShipTrails = lo.Filter(m.state.ShipTrails, func(t *object.ShipTrail, _ int) bool {
+		return t.Life > 0
+	})
+	for _, ship := range m.state.Ships {
+		if ship.CurSpeed > 0 {
+			// TODO 考虑下这里的 size 要不要是战舰图片的 size ？好像不是很有必要？
+			m.state.ShipTrails = append(m.state.ShipTrails, object.NewShipTrail(ship.CurPos, ship.CurRotation, 20))
 		}
 	}
 }

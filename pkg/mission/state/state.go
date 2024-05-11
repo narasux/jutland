@@ -15,6 +15,11 @@ type Camera struct {
 	Height int
 }
 
+// Contains 判断坐标是否在视野内
+func (c *Camera) Contains(pos object.MapPos) bool {
+	return !(pos.MX < c.Pos.MX || pos.MX > c.Pos.MX+c.Width || pos.MY < c.Pos.MY || pos.MY > c.Pos.MY+c.Height)
+}
+
 // MissionState 任务状态（包含地图，资源，进度，对象等）
 type MissionState struct {
 	Mission md.Mission
@@ -33,6 +38,8 @@ type MissionState struct {
 	Bullets map[string]*object.Bullet
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
+	// 战舰尾流
+	ShipTrails []*object.ShipTrail
 }
 
 // NewMissionState ...

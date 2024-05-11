@@ -2,6 +2,7 @@ package drawer
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/vector"
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -47,11 +48,8 @@ func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) 
 	if area == nil || !area.Selecting {
 		return
 	}
-	x1, y1 := min(area.StartX, area.CurX), min(area.StartY, area.CurY)
-	x2, y2 := max(area.StartX, area.CurX), max(area.StartY, area.CurY)
+	x1, y1 := float32(min(area.StartX, area.CurX)), float32(min(area.StartY, area.CurY))
+	x2, y2 := float32(max(area.StartX, area.CurX)), float32(max(area.StartY, area.CurY))
 
-	ebutil.DrawVerticalLineOnScreen(screen, x1, y1, y2, 2, colorx.White)
-	ebutil.DrawVerticalLineOnScreen(screen, x2, y1, y2, 2, colorx.White)
-	ebutil.DrawHorizontalLineOnScreen(screen, x1, x2, y1, 2, colorx.White)
-	ebutil.DrawHorizontalLineOnScreen(screen, x1, x2, y2, 2, colorx.White)
+	vector.StrokeRect(screen, x1, y1, x2-x1, y2-y1, 2, colorx.White, false)
 }

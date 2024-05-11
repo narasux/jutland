@@ -339,3 +339,16 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 
 	return false
 }
+
+// ShipTrail 战舰尾流
+type ShipTrail struct {
+	Pos      MapPos
+	Rotation float64
+	Size     float64
+	Life     int
+}
+
+// NewShipTrail ...
+func NewShipTrail(pos MapPos, rotation, size float64) *ShipTrail {
+	return &ShipTrail{Pos: pos, Rotation: rotation, Size: size, Life: 100}
+}
