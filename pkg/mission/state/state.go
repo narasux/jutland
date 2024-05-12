@@ -21,6 +21,14 @@ func (c *Camera) Contains(pos object.MapPos) bool {
 	return !(pos.MX < c.Pos.MX || pos.MX > c.Pos.MX+c.Width || pos.MY < c.Pos.MY || pos.MY > c.Pos.MY+c.Height)
 }
 
+// GameOptions 游戏选项
+type GameOptions struct {
+	// 友军伤害
+	FriendlyFire bool
+	// 展示状态（HP / 武器禁用）
+	ForceDisplayState bool
+}
+
 // MissionState 任务状态（包含地图，资源，进度，对象等）
 type MissionState struct {
 	Mission md.Mission
@@ -32,10 +40,12 @@ type MissionState struct {
 	Layout layout.ScreenLayout
 	// 相机
 	Camera Camera
+
 	// 当前玩家
 	CurPlayer faction.Player
-	// 友军伤害
-	FriendlyFire bool
+	// 游戏选项
+	GameOpts GameOptions
+
 	// 战舰信息
 	Ships map[string]*object.BattleShip
 	// 已发射的弹药信息（炮弹 / 鱼雷）
@@ -53,7 +63,7 @@ func NewMissionState(mission md.Mission) *MissionState {
 	// 初始化战舰
 	ships := map[string]*object.BattleShip{}
 	for _, shipMD := range missionMD.InitShips {
-		ship := object.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotation, faction.HumanAlpha)
+		ship := object.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotation, shipMD.BelongPlayer)
 		ships[ship.Uid] = ship
 	}
 	return &MissionState{
@@ -68,8 +78,11 @@ func NewMissionState(mission md.Mission) *MissionState {
 			Height: misLayout.Camera.Height/mapblock.BlockSize + 1,
 		},
 		CurPlayer: faction.HumanAlpha,
-		// TODO 后续允许设置开启友军伤害，游戏性 up！
-		FriendlyFire:  false,
+		GameOpts: GameOptions{
+			ForceDisplayState: false,
+			// TODO 后续允许设置开启友军伤害，游戏性 up！
+			FriendlyFire: false,
+		},
 		Ships:         ships,
 		Bullets:       map[string]*object.Bullet{},
 		SelectedShips: []string{},

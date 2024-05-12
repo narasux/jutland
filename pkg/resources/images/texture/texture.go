@@ -27,7 +27,10 @@ var (
 	TorpedoDisableImg *ebiten.Image
 )
 
-var hpImgMap = map[int]*ebiten.Image{}
+var (
+	hpImgMap      = map[int]*ebiten.Image{}
+	enemyHpImgMap = map[int]*ebiten.Image{}
+)
 
 func init() {
 	var err error
@@ -52,6 +55,12 @@ func init() {
 			log.Fatalf("missing %s: %s", imgPath, err)
 		}
 		hpImgMap[hp/10] = img
+
+		imgPath = fmt.Sprintf("/textures/hp/enemy_hp_%d.png", hp)
+		if img, err = loader.LoadImage(imgPath); err != nil {
+			log.Fatalf("missing %s: %s", imgPath, err)
+		}
+		enemyHpImgMap[hp/10] = img
 	}
 
 	// 加载火炮启停用图标
@@ -82,4 +91,9 @@ func init() {
 // GetHpImg 获取生命值图片
 func GetHpImg(curHp, maxHp int) *ebiten.Image {
 	return hpImgMap[int(math.Floor(float64(curHp)/float64(maxHp)*10))]
+}
+
+// GetEnemyHpImg 获取敌人生命值图片
+func GetEnemyHpImg(curHp, maxHp int) *ebiten.Image {
+	return enemyHpImgMap[int(math.Floor(float64(curHp)/float64(maxHp)*10))]
 }

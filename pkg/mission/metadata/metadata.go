@@ -1,6 +1,7 @@
 package metadata
 
 import (
+	"github.com/narasux/jutland/pkg/mission/faction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
@@ -18,9 +19,10 @@ type MissionMetadata struct {
 }
 
 type InitShipMetadata struct {
-	ShipName obj.ShipName
-	Pos      obj.MapPos
-	Rotation float64
+	ShipName     obj.ShipName
+	Pos          obj.MapPos
+	Rotation     float64
+	BelongPlayer faction.Player
 }
 
 var missionMetadata = map[Mission]MissionMetadata{
@@ -30,8 +32,9 @@ var missionMetadata = map[Mission]MissionMetadata{
 		MapCfg:        mapcfg.GetByName(mapcfg.MapDefault),
 		MaxShipCount:  5,
 		InitShips: []InitShipMetadata{
-			{obj.ShipDefault, obj.NewMapPos(40, 36), 90},
-			{obj.ShipDefault, obj.NewMapPos(50, 50), 0},
+			{obj.ShipDefault, obj.NewMapPos(40, 35), 90, faction.HumanAlpha},
+			{obj.ShipDefault, obj.NewMapPos(40, 50), 0, faction.HumanAlpha},
+			{obj.ShipDefault, obj.NewMapPos(60, 35), 270, faction.ComputerAlpha},
 		},
 	},
 }

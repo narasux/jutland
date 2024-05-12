@@ -69,9 +69,9 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		)
 		screen.DrawImage(shipImg, opts)
 
-		// 如果战舰被选中，则需要绘制 HP，武器状态 TODO 如果全局启用状态展示，也要绘制
+		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP，武器状态
 		isShipSelected := slices.Contains(ms.SelectedShips, ship.Uid)
-		if isShipSelected {
+		if (ms.GameOpts.ForceDisplayState || isShipSelected) && ship.BelongPlayer == ms.CurPlayer {
 			opts = d.genDefaultDrawImageOptions()
 			opts.GeoM.Translate(
 				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-25,
@@ -88,6 +88,17 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			// 绘制当前生命值
 			opts.GeoM.Translate(40, -22)
 			hpImg := texture.GetHpImg(ship.CurHP, ship.TotalHP)
+			screen.DrawImage(hpImg, opts)
+		}
+
+		// 如果全局启用状态展示，则敌方战舰也要绘制 HP 值
+		if ms.GameOpts.ForceDisplayState && ship.BelongPlayer != ms.CurPlayer {
+			opts = d.genDefaultDrawImageOptions()
+			opts.GeoM.Translate(
+				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-25,
+				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-30,
+			)
+			hpImg := texture.GetEnemyHpImg(ship.CurHP, ship.TotalHP)
 			screen.DrawImage(hpImg, opts)
 		}
 

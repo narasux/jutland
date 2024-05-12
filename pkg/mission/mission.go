@@ -12,7 +12,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
-	"github.com/narasux/jutland/pkg/mission/object"
+	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -81,13 +81,87 @@ func (m *MissionManager) updateInstructions() {
 				x, y := rand.Intn(5)-2, rand.Intn(5)-2
 				// 通过
 				m.instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(
-					shipUid, object.NewMapPos(
+					shipUid, obj.NewMapPos(
 						m.state.Ships[shipUid].CurPos.MX+x,
 						m.state.Ships[shipUid].CurPos.MY+y,
 					),
 				)
 			}
 		}
+	}
+
+	// 按下 w 键，如果任意选中战舰任意武器被禁用，则启用所有，否则禁用所有
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyW) {
+		if len(m.state.SelectedShips) != 0 {
+			anyWeaponDisabled := false
+			for _, shipUid := range m.state.SelectedShips {
+				ship := m.state.Ships[shipUid]
+				if ship.Weapon.GunDisabled || ship.Weapon.TorpedoDisabled {
+					anyWeaponDisabled = true
+					break
+				}
+			}
+			for _, shipUid := range m.state.SelectedShips {
+				if anyWeaponDisabled {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
+					m.instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeAll)
+				} else {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
+					m.instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeAll)
+				}
+			}
+		}
+	}
+
+	// 按下 g 键，如果任意选中战舰任意火炮被禁用，则启用所有，否则禁用所有
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyG) {
+		if len(m.state.SelectedShips) != 0 {
+			anyGunDisabled := false
+			for _, shipUid := range m.state.SelectedShips {
+				ship := m.state.Ships[shipUid]
+				if ship.Weapon.GunDisabled {
+					anyGunDisabled = true
+					break
+				}
+			}
+			for _, shipUid := range m.state.SelectedShips {
+				if anyGunDisabled {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
+					m.instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeGun)
+				} else {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
+					m.instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeGun)
+				}
+			}
+		}
+	}
+
+	// 按下 t 键，如果任意选中战舰任意鱼雷被禁用，则启用所有，否则禁用所有
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyT) {
+		if len(m.state.SelectedShips) != 0 {
+			anyTorpedoDisabled := false
+			for _, shipUid := range m.state.SelectedShips {
+				ship := m.state.Ships[shipUid]
+				if ship.Weapon.TorpedoDisabled {
+					anyTorpedoDisabled = true
+					break
+				}
+			}
+			for _, shipUid := range m.state.SelectedShips {
+				if anyTorpedoDisabled {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
+					m.instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeTorpedo)
+				} else {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
+					m.instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeTorpedo)
+				}
+			}
+		}
+	}
+
+	// 按下 d 键，全局展示 / 不展示所有战舰状态
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
+		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
 	}
 }
 
@@ -147,7 +221,8 @@ func (m *MissionManager) updateSelectedShips() {
 	if area := action.DetectCursorSelectArea(m.state); area != nil {
 		m.state.SelectedShips = []string{}
 		for _, ship := range m.state.Ships {
-			if area.Contain(ship.CurPos) {
+			// 被鼠标划区区域选中的我方战舰
+			if ship.BelongPlayer == m.state.CurPlayer && area.Contain(ship.CurPos) {
 				m.state.SelectedShips = append(m.state.SelectedShips, ship.Uid)
 			}
 		}
@@ -163,14 +238,14 @@ func (m *MissionManager) updateShipTrails() {
 		m.state.ShipTrails[i].Life -= 1
 	}
 	// 生命周期结束的，不再需要
-	m.state.ShipTrails = lo.Filter(m.state.ShipTrails, func(t *object.ShipTrail, _ int) bool {
+	m.state.ShipTrails = lo.Filter(m.state.ShipTrails, func(t *obj.ShipTrail, _ int) bool {
 		return t.Life > 0
 	})
 	for _, ship := range m.state.Ships {
 		if ship.CurSpeed > 0 {
 			// TODO 考虑下这里的 size 要不要是战舰图片的 size ？好像不是很有必要？
 			// TODO 尾流的 Life 应该和速度相关，是否和战舰类型相关？
-			m.state.ShipTrails = append(m.state.ShipTrails, object.NewShipTrail(ship.CurPos, ship.CurRotation, 20, 60))
+			m.state.ShipTrails = append(m.state.ShipTrails, obj.NewShipTrail(ship.CurPos, ship.CurRotation, 20, 60))
 		}
 	}
 }
