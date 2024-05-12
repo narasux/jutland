@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	_ "github.com/silbinarywolf/preferdiscretegpu"
 
 	"github.com/narasux/jutland/pkg/game"
 )
