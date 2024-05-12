@@ -19,6 +19,8 @@ func NewEnableWeapon(shipUid string, weaponType obj.WeaponType) *EnableWeapon {
 	return &EnableWeapon{shipUid: shipUid, weaponType: weaponType}
 }
 
+var _ Instruction = (*EnableWeapon)(nil)
+
 func (i *EnableWeapon) Exec(s *state.MissionState) error {
 	s.Ships[i.shipUid].EnableWeapon(i.weaponType)
 	i.executed = true
@@ -53,6 +55,8 @@ func NewDisableWeapon(shipUid string, weaponType obj.WeaponType) *DisableWeapon 
 	return &DisableWeapon{shipUid: shipUid, weaponType: weaponType}
 }
 
+var _ Instruction = (*DisableWeapon)(nil)
+
 func (i *DisableWeapon) Exec(s *state.MissionState) error {
 	s.Ships[i.shipUid].DisableWeapon(i.weaponType)
 	i.executed = true
@@ -86,6 +90,8 @@ type ShipMove struct {
 func NewShipMove(shipUid string, targetPos obj.MapPos) *ShipMove {
 	return &ShipMove{shipUid: shipUid, targetPos: targetPos}
 }
+
+var _ Instruction = (*ShipMove)(nil)
 
 func (i *ShipMove) Exec(s *state.MissionState) error {
 	borderX, borderY := s.MissionMD.MapCfg.Width, s.MissionMD.MapCfg.Height

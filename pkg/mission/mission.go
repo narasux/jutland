@@ -1,14 +1,15 @@
 package mission
 
 import (
-	"fmt"
 	"log"
-	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/action"
+	"github.com/narasux/jutland/pkg/mission/controller"
+	"github.com/narasux/jutland/pkg/mission/controller/computer"
+	"github.com/narasux/jutland/pkg/mission/controller/human"
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
@@ -18,22 +19,24 @@ import (
 
 // MissionManager 任务管理器
 type MissionManager struct {
-	state  *state.MissionState
-	drawer *drawer.Drawer
-	// 指令集合 key 为 objUid + instrName
-	// 注：同一对象，只能有一个同名指令（如：战舰不能有两个目标位置）
-	instructions map[string]instr.Instruction
-
-	// 任务日志 TODO 考虑直接用 chan ? 或者抽成 logger 包？
-	// Logs []string
+	state              *state.MissionState
+	drawer             *drawer.Drawer
+	instructions       map[string]instr.Instruction
+	playerAlphaHandler controller.InputHandler
+	playerBetaHandler  controller.InputHandler
 }
 
 // NewManager ...
 func NewManager(mission md.Mission) *MissionManager {
 	return &MissionManager{
-		state:        state.NewMissionState(mission),
-		drawer:       drawer.NewDrawer(mission),
+		state:  state.NewMissionState(mission),
+		drawer: drawer.NewDrawer(mission),
+		// 指令集合 key 为 objUid + instrName
+		// 注：同一对象，只能有一个同名指令（如：战舰不能有两个目标位置）
 		instructions: map[string]instr.Instruction{},
+		// 目前用户一只能是人类，用户二是电脑 TODO 支持多人远程联机
+		playerAlphaHandler: human.NewHandler(),
+		playerBetaHandler:  computer.NewHandler(),
 	}
 }
 
@@ -47,6 +50,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	m.executeInstructions()
 	m.updateCameraPosition()
 	m.updateSelectedShips()
+	m.updateGameOptions()
 	m.updateShipTrails()
 	m.updateMissionStatus()
 
@@ -59,110 +63,9 @@ func (m *MissionManager) updateInstructions() {
 	m.instructions = lo.PickBy(m.instructions, func(key string, instruction instr.Instruction) bool {
 		return !instruction.IsExecuted()
 	})
-
-	// 战舰移动指令（鼠标右键点击确定目标位置）
-	if pos := action.DetectMouseButtonClickOnMap(m.state, ebiten.MouseButtonRight); pos != nil {
-		if len(m.state.SelectedShips) != 0 {
-			for _, shipUid := range m.state.SelectedShips {
-				m.instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(shipUid, *pos)
-			}
-		}
-	}
-
-	// 随机散开，用于战舰重叠的情况（按下 X 键）
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyX) {
-		if len(m.state.SelectedShips) != 0 {
-			for _, shipUid := range m.state.SelectedShips {
-				// 如果战舰不是静止状态，则散开指令无效
-				if m.state.Ships[shipUid].CurSpeed != 0 {
-					continue
-				}
-				// 随机散开 [-2, 2] 的范围
-				x, y := rand.Intn(5)-2, rand.Intn(5)-2
-				// 通过
-				m.instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(
-					shipUid, obj.NewMapPos(
-						m.state.Ships[shipUid].CurPos.MX+x,
-						m.state.Ships[shipUid].CurPos.MY+y,
-					),
-				)
-			}
-		}
-	}
-
-	// 按下 w 键，如果任意选中战舰任意武器被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyW) {
-		if len(m.state.SelectedShips) != 0 {
-			anyWeaponDisabled := false
-			for _, shipUid := range m.state.SelectedShips {
-				ship := m.state.Ships[shipUid]
-				if ship.Weapon.GunDisabled || ship.Weapon.TorpedoDisabled {
-					anyWeaponDisabled = true
-					break
-				}
-			}
-			for _, shipUid := range m.state.SelectedShips {
-				if anyWeaponDisabled {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					m.instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeAll)
-				} else {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					m.instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeAll)
-				}
-			}
-		}
-	}
-
-	// 按下 g 键，如果任意选中战舰任意火炮被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyG) {
-		if len(m.state.SelectedShips) != 0 {
-			anyGunDisabled := false
-			for _, shipUid := range m.state.SelectedShips {
-				ship := m.state.Ships[shipUid]
-				if ship.Weapon.GunDisabled {
-					anyGunDisabled = true
-					break
-				}
-			}
-			for _, shipUid := range m.state.SelectedShips {
-				if anyGunDisabled {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					m.instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeGun)
-				} else {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					m.instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeGun)
-				}
-			}
-		}
-	}
-
-	// 按下 t 键，如果任意选中战舰任意鱼雷被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyT) {
-		if len(m.state.SelectedShips) != 0 {
-			anyTorpedoDisabled := false
-			for _, shipUid := range m.state.SelectedShips {
-				ship := m.state.Ships[shipUid]
-				if ship.Weapon.TorpedoDisabled {
-					anyTorpedoDisabled = true
-					break
-				}
-			}
-			for _, shipUid := range m.state.SelectedShips {
-				if anyTorpedoDisabled {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					m.instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeTorpedo)
-				} else {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					m.instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeTorpedo)
-				}
-			}
-		}
-	}
-
-	// 按下 d 键，全局展示 / 不展示所有战舰状态
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
-		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
-	}
+	// 逐个读取各个用户的输入，更新指令
+	m.instructions = lo.Assign(m.instructions, m.playerAlphaHandler.Handle(m.state))
+	m.instructions = lo.Assign(m.instructions, m.playerBetaHandler.Handle(m.state))
 }
 
 // 逐条执行指令（移动/炮击/雷击/建造）
@@ -227,6 +130,14 @@ func (m *MissionManager) updateSelectedShips() {
 			}
 		}
 		return
+	}
+}
+
+// 更新游戏选项
+func (m *MissionManager) updateGameOptions() {
+	// 按下 d 键，全局展示 / 不展示所有战舰状态
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
+		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
 	}
 }
 
