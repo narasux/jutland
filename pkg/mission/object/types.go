@@ -39,6 +39,13 @@ const (
 	WeaponTypeMissile WeaponType = "missile"
 )
 
+const (
+	// 顺时针
+	RotateFlagClockwise = 1
+	// 逆时针
+	RotateFlagAnticlockwise = -1
+)
+
 // MapPos 位置
 type MapPos struct {
 	// 地图位置（用于通用计算，如小地图等）
@@ -326,19 +333,21 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 	if s.CurPos.Near(targetPos, 2) {
 		s.CurSpeed = max(s.MaxSpeed/5, s.CurSpeed-s.MaxSpeed/5)
 	}
-	targetAngle := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
+	targetRotation := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
 	// 逐渐转向
-	if s.CurRotation != targetAngle {
+	if s.CurRotation != targetRotation {
+		// 默认顺时针旋转
+		rotateFlag := RotateFlagClockwise
+		// 如果逆时针夹角小于顺时针夹角，则需要逆时针旋转
+		if math.Mod(targetRotation-s.CurRotation+360, 360) > 180 {
+			rotateFlag = RotateFlagAnticlockwise
+		}
+		s.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-s.CurRotation), s.RotateSpeed)
+		s.CurRotation = math.Mod(s.CurRotation+360, 360)
 		// 原地旋转到差不多角度，才开始移动
-		if math.Abs(s.CurRotation-targetAngle) > 2 {
+		if math.Abs(s.CurRotation-targetRotation) > 1 {
 			s.CurSpeed = 0
 		}
-		if s.CurRotation > targetAngle {
-			s.CurRotation -= min(s.CurRotation-targetAngle, s.RotateSpeed)
-		} else {
-			s.CurRotation += min(targetAngle-s.CurRotation, s.RotateSpeed)
-		}
-		s.CurRotation = math.Mod(s.CurRotation, 360)
 	}
 	// 修改位置
 	s.CurPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
