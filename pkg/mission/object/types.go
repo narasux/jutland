@@ -307,22 +307,32 @@ func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 }
 
 // MoveTo 移动到指定位置
+// Q: 为什么不是移动的同时进行转向，而是原地转向后再移动？
+// A：边移动边转向对实时计算的要求较高，且不利于后续的路线规划设计，
+// 尾流渲染也不好做，先从简单的上手，后面有条件再搞，毕竟摊煎饼谁不喜欢呢？
+//
+// TODO 路线规划 -> 绕过陆地
 func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool) {
-	if s.CurPos.MEqual(targetPos) {
+	// 差不多到目标位置即可，不要强求准确，否则需要微调，视觉效果不佳
+	if s.CurPos.Near(targetPos, 1) {
 		s.CurSpeed = 0
 		return true
 	}
 	// 未到达目标位置，逐渐加速
 	if s.CurSpeed < s.MaxSpeed {
-		s.CurSpeed = max(s.MaxSpeed, s.CurSpeed+s.MaxSpeed/5)
+		s.CurSpeed = min(s.MaxSpeed, s.CurSpeed+s.MaxSpeed/5)
 	}
 	// 到目标位置附近，逐渐减速
 	if s.CurPos.Near(targetPos, 2) {
-		s.CurSpeed = min(s.MaxSpeed/5, s.CurSpeed-s.MaxSpeed/5)
+		s.CurSpeed = max(s.MaxSpeed/5, s.CurSpeed-s.MaxSpeed/5)
 	}
 	targetAngle := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
 	// 逐渐转向
 	if s.CurRotation != targetAngle {
+		// 原地旋转到差不多角度，才开始移动
+		if math.Abs(s.CurRotation-targetAngle) > 2 {
+			s.CurSpeed = 0
+		}
 		if s.CurRotation > targetAngle {
 			s.CurRotation -= min(s.CurRotation-targetAngle, s.RotateSpeed)
 		} else {
@@ -350,5 +360,5 @@ type ShipTrail struct {
 
 // NewShipTrail ...
 func NewShipTrail(pos MapPos, rotation, size float64) *ShipTrail {
-	return &ShipTrail{Pos: pos, Rotation: rotation, Size: size, Life: 100}
+	return &ShipTrail{Pos: pos, Rotation: rotation, Size: size, Life: 110}
 }

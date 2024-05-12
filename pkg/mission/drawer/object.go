@@ -28,11 +28,14 @@ func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
 		if !ms.Camera.Contains(trail.Pos) {
 			continue
 		}
+		// 尾流太近 / 太远则不渲染
+		if trail.Life > 100 || trail.Life < 0 {
+			continue
+		}
 
 		cx := (trail.Pos.RX - float64(ms.Camera.Pos.MX)) * mapblock.BlockSize
 		cy := (trail.Pos.RY - float64(ms.Camera.Pos.MY)) * mapblock.BlockSize
-		// FIXME 处理尾流不是半透明的问题
-		clr := color.RGBA{255, 255, 255, uint8(trail.Life)}
+		clr := color.NRGBA{255, 255, 255, uint8(trail.Life)}
 		vector.DrawFilledCircle(screen, float32(cx), float32(cy), float32(trail.Size), clr, false)
 	}
 }

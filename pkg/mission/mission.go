@@ -1,6 +1,7 @@
 package mission
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -18,8 +19,9 @@ import (
 type MissionManager struct {
 	state  *state.MissionState
 	drawer *drawer.Drawer
-	// 指令集合
-	instructions []instr.Instruction
+	// 指令集合 key 为 objUid + instrName
+	// 注：同一对象，只能有一个同名指令（如：战舰不能有两个目标位置）
+	instructions map[string]instr.Instruction
 
 	// 任务日志 TODO 考虑直接用 chan ? 或者抽成 logger 包？
 	// Logs []string
@@ -30,7 +32,7 @@ func NewManager(mission md.Mission) *MissionManager {
 	return &MissionManager{
 		state:        state.NewMissionState(mission),
 		drawer:       drawer.NewDrawer(mission),
-		instructions: []instr.Instruction{},
+		instructions: map[string]instr.Instruction{},
 	}
 }
 
@@ -40,22 +42,31 @@ func (m *MissionManager) Draw(screen *ebiten.Image) {
 }
 
 func (m *MissionManager) Update() (state.MissionStatus, error) {
-	m.dropExecutedInstructions()
+	m.updateInstructions()
 	m.executeInstructions()
 	m.updateCameraPosition()
 	m.updateSelectedShips()
-	m.updateInstructions()
 	m.updateShipTrails()
 	m.updateMissionStatus()
 
 	return m.state.MissionStatus, nil
 }
 
-// 已经执行完的指令不需要重复执行
-func (m *MissionManager) dropExecutedInstructions() {
-	m.instructions = lo.Filter(m.instructions, func(i instr.Instruction, _ int) bool {
-		return !i.IsExecuted()
+// 更新指令集合
+func (m *MissionManager) updateInstructions() {
+	// 已经执行完的指令，就不再需要
+	m.instructions = lo.PickBy(m.instructions, func(key string, instruction instr.Instruction) bool {
+		return !instruction.IsExecuted()
 	})
+
+	// 战舰移动指令（鼠标右键点击确定目标位置）
+	if pos := action.DetectMouseRightButtonClickOnMap(m.state); pos != nil {
+		if len(m.state.SelectedShips) != 0 {
+			for _, shipUid := range m.state.SelectedShips {
+				m.instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(shipUid, *pos)
+			}
+		}
+	}
 }
 
 // 逐条执行指令（移动/炮击/雷击/建造）
@@ -119,18 +130,6 @@ func (m *MissionManager) updateSelectedShips() {
 			}
 		}
 		return
-	}
-}
-
-// 更新指令列表
-func (m *MissionManager) updateInstructions() {
-	// 战舰移动指令（鼠标右键点击确定目标位置）
-	if pos := action.DetectMouseRightButtonClickOnMap(m.state); pos != nil {
-		if len(m.state.SelectedShips) != 0 {
-			for _, shipUid := range m.state.SelectedShips {
-				m.instructions = append(m.instructions, instr.NewShipMove(shipUid, *pos))
-			}
-		}
 	}
 }
 

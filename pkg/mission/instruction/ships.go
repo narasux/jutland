@@ -25,12 +25,20 @@ func (i *EnableWeapon) Exec(s *state.MissionState) error {
 	return nil
 }
 
+func (i *EnableWeapon) IsExecuted() bool {
+	return i.executed
+}
+
+func (i *EnableWeapon) GetObjUid() string {
+	return i.shipUid
+}
+
 func (i *EnableWeapon) String() string {
 	return fmt.Sprintf("Enable ship %s weapon %s", i.shipUid, string(i.weaponType))
 }
 
-func (i *EnableWeapon) IsExecuted() bool {
-	return i.executed
+func (i *EnableWeapon) Name() string {
+	return NameEnableWeapon
 }
 
 // DisableWeapon 禁用武器
@@ -51,12 +59,20 @@ func (i *DisableWeapon) Exec(s *state.MissionState) error {
 	return nil
 }
 
+func (i *DisableWeapon) IsExecuted() bool {
+	return i.executed
+}
+
+func (i *DisableWeapon) GetObjUid() string {
+	return i.shipUid
+}
+
 func (i *DisableWeapon) String() string {
 	return fmt.Sprintf("Disable ship %s weapon %s", i.shipUid, string(i.weaponType))
 }
 
-func (i *DisableWeapon) IsExecuted() bool {
-	return i.executed
+func (i *DisableWeapon) Name() string {
+	return NameDisableWeapon
 }
 
 // ShipMove 移动
@@ -79,10 +95,18 @@ func (i *ShipMove) Exec(s *state.MissionState) error {
 	return nil
 }
 
+func (i *ShipMove) IsExecuted() bool {
+	return i.executed
+}
+
+func (i *ShipMove) GetObjUid() string {
+	return i.shipUid
+}
+
 func (i *ShipMove) String() string {
 	return fmt.Sprintf("Ship %s move to %s", i.shipUid, i.targetPos)
 }
 
-func (i *ShipMove) IsExecuted() bool {
-	return i.executed
+func (i *ShipMove) Name() string {
+	return NameShipMove
 }
