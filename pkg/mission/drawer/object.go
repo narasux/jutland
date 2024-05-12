@@ -29,7 +29,7 @@ func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 		// 尾流太近 / 太远则不渲染
-		if trail.Life > 100 || trail.Life < 0 {
+		if trail.Life > 50 || trail.Life < 0 {
 			continue
 		}
 

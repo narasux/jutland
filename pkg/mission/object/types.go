@@ -6,6 +6,7 @@ import (
 	"slices"
 	"time"
 
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -138,6 +139,11 @@ type Bullet struct {
 	// 速度
 	Speed int
 
+	// 所属战舰
+	BelongShip string
+	// 所属阵营（玩家）
+	BelongPlayer faction.Player
+
 	// 动画（多图片）
 	// TODO 补充入水 & 爆炸动画（指针数组）
 }
@@ -267,6 +273,9 @@ type BattleShip struct {
 	CurRotation float64
 	// 当前速度
 	CurSpeed float64
+
+	// 所属阵营（玩家）
+	BelongPlayer faction.Player
 }
 
 // DisableWeapon 禁用武器
@@ -368,6 +377,6 @@ type ShipTrail struct {
 }
 
 // NewShipTrail ...
-func NewShipTrail(pos MapPos, rotation, size float64) *ShipTrail {
-	return &ShipTrail{Pos: pos, Rotation: rotation, Size: size, Life: 110}
+func NewShipTrail(pos MapPos, rotation, size float64, life int) *ShipTrail {
+	return &ShipTrail{Pos: pos, Rotation: rotation, Size: size, Life: life}
 }

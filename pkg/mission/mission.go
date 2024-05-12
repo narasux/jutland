@@ -3,6 +3,7 @@ package mission
 import (
 	"fmt"
 	"log"
+	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
@@ -60,10 +61,31 @@ func (m *MissionManager) updateInstructions() {
 	})
 
 	// 战舰移动指令（鼠标右键点击确定目标位置）
-	if pos := action.DetectMouseRightButtonClickOnMap(m.state); pos != nil {
+	if pos := action.DetectMouseButtonClickOnMap(m.state, ebiten.MouseButtonRight); pos != nil {
 		if len(m.state.SelectedShips) != 0 {
 			for _, shipUid := range m.state.SelectedShips {
 				m.instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(shipUid, *pos)
+			}
+		}
+	}
+
+	// 随机散开，用于战舰重叠的情况（按下 X 键）
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyX) {
+		if len(m.state.SelectedShips) != 0 {
+			for _, shipUid := range m.state.SelectedShips {
+				// 如果战舰不是静止状态，则散开指令无效
+				if m.state.Ships[shipUid].CurSpeed != 0 {
+					continue
+				}
+				// 随机散开 [-2, 2] 的范围
+				x, y := rand.Intn(5)-2, rand.Intn(5)-2
+				// 通过
+				m.instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(
+					shipUid, object.NewMapPos(
+						m.state.Ships[shipUid].CurPos.MX+x,
+						m.state.Ships[shipUid].CurPos.MY+y,
+					),
+				)
 			}
 		}
 	}
@@ -147,7 +169,8 @@ func (m *MissionManager) updateShipTrails() {
 	for _, ship := range m.state.Ships {
 		if ship.CurSpeed > 0 {
 			// TODO 考虑下这里的 size 要不要是战舰图片的 size ？好像不是很有必要？
-			m.state.ShipTrails = append(m.state.ShipTrails, object.NewShipTrail(ship.CurPos, ship.CurRotation, 20))
+			// TODO 尾流的 Life 应该和速度相关，是否和战舰类型相关？
+			m.state.ShipTrails = append(m.state.ShipTrails, object.NewShipTrail(ship.CurPos, ship.CurRotation, 20, 60))
 		}
 	}
 }

@@ -96,18 +96,8 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 	return &sArea
 }
 
-// 探测游戏地图上的左键点击
-func DetectMouseLeftButtonClickOnMap(misState *state.MissionState) *obj.MapPos {
-	return detectMouseButtonClickOnMap(misState, ebiten.MouseButtonLeft)
-}
-
-// 探测游戏地图上的右键点击
-func DetectMouseRightButtonClickOnMap(misState *state.MissionState) *obj.MapPos {
-	return detectMouseButtonClickOnMap(misState, ebiten.MouseButtonRight)
-}
-
 // 探测游戏地图上的鼠标按键点击
-func detectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *obj.MapPos {
+func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *obj.MapPos {
 	// 鼠标按键没有点击，直接跳过
 	if !inpututil.IsMouseButtonJustPressed(button) {
 		return nil
@@ -116,4 +106,9 @@ func detectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 	mx := misState.Camera.Pos.MX + int(float64(sx)/mapblock.BlockSize)
 	my := misState.Camera.Pos.MY + int(float64(sy)/mapblock.BlockSize)
 	return lo.ToPtr(obj.NewMapPos(mx, my))
+}
+
+// 探测键盘按键被压下
+func DetectKeyboardKeyJustPressed(key ebiten.Key) bool {
+	return inpututil.IsKeyJustPressed(key)
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -25,13 +26,21 @@ var bulletImages = map[BulletName]*ebiten.Image{
 }
 
 // NewBullets 新建弹药
-func NewBullets(name BulletName, CurPos, TargetPos MapPos, Speed int) *Bullet {
+func NewBullets(
+	name BulletName,
+	CurPos, TargetPos MapPos,
+	Speed int,
+	shipUid string,
+	player faction.Player,
+) *Bullet {
 	b := deepcopy.Copy(*bullets[name]).(Bullet)
 	b.Uid = uuid.New().String()
 	b.CurPosition = CurPos
 	b.TargetPosition = TargetPos
 	b.Rotation = int(geometry.CalcAngleBetweenPoints(CurPos.RX, CurPos.RY, TargetPos.RX, TargetPos.RY))
 	b.Speed = Speed
+	b.BelongShip = shipUid
+	b.BelongPlayer = player
 	return &b
 }
 
@@ -40,5 +49,5 @@ func GetBulletImg(name BulletName) *ebiten.Image {
 	return bulletImages[name]
 }
 
-// gb 表示是火炮弹药，tb 表示鱼雷弹药
+// gb (gun bullet) 表示是火炮弹药，tb (torpedo bullet) 表示鱼雷弹药
 var gb127T1 = &Bullet{Name: Gb127T1, Damage: 100}

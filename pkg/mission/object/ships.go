@@ -5,6 +5,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/resources/images/ship"
 )
 
@@ -23,11 +24,12 @@ var shipImg = map[ShipName]*ebiten.Image{
 }
 
 // NewShip 新建战舰
-func NewShip(name ShipName, pos MapPos, rotation float64) *BattleShip {
+func NewShip(name ShipName, pos MapPos, rotation float64, player faction.Player) *BattleShip {
 	s := deepcopy.Copy(*ships[name]).(BattleShip)
 	s.Uid = uuid.New().String()
 	s.CurPos = pos
 	s.CurRotation = rotation
+	s.BelongPlayer = player
 	return &s
 }
 
