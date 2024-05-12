@@ -22,6 +22,7 @@ func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
 }
 
 // 绘制战舰尾流
+// TODO 待优化，如果屏幕中战舰比较多，应该减少尾流的渲染
 func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
 	for _, trail := range ms.ShipTrails {
 		// 只有在屏幕中的才渲染

@@ -11,6 +11,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
 	"github.com/narasux/jutland/pkg/mission/controller/human"
 	"github.com/narasux/jutland/pkg/mission/drawer"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	obj "github.com/narasux/jutland/pkg/mission/object"
@@ -35,8 +36,8 @@ func NewManager(mission md.Mission) *MissionManager {
 		// 注：同一对象，只能有一个同名指令（如：战舰不能有两个目标位置）
 		instructions: map[string]instr.Instruction{},
 		// 目前用户一只能是人类，用户二是电脑 TODO 支持多人远程联机
-		playerAlphaHandler: human.NewHandler(),
-		playerBetaHandler:  computer.NewHandler(),
+		playerAlphaHandler: human.NewHandler(faction.HumanAlpha),
+		playerBetaHandler:  computer.NewHandler(faction.ComputerAlpha),
 	}
 }
 

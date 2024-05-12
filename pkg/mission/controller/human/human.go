@@ -8,17 +8,20 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
 // HumanInputHandler 人类输入处理器
-type HumanInputHandler struct{}
+type HumanInputHandler struct {
+	player faction.Player
+}
 
 // NewHandler ...
-func NewHandler() *HumanInputHandler {
-	return &HumanInputHandler{}
+func NewHandler(player faction.Player) *HumanInputHandler {
+	return &HumanInputHandler{player: player}
 }
 
 var _ controller.InputHandler = (*HumanInputHandler)(nil)
