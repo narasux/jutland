@@ -26,7 +26,7 @@ var gunMK45 = &Gun{
 	BulletName:   Gb127T1,
 	BulletCount:  1,
 	ReloadTime:   1,
-	Range:        100,
+	Range:        20,
 	BulletSpread: 1,
-	BulletSpeed:  100,
+	BulletSpeed:  0.1,
 }

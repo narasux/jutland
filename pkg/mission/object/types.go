@@ -131,21 +131,25 @@ type Bullet struct {
 	// 唯一标识
 	Uid string
 	// 当前位置
-	CurPosition MapPos
+	CurPos MapPos
 	// 目标位置
-	TargetPosition MapPos
+	TargetPos MapPos
 	// 旋转角度
-	Rotation int
+	Rotation float64
 	// 速度
-	Speed int
+	Speed float64
 
 	// 所属战舰
 	BelongShip string
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
+}
 
-	// 动画（多图片）
-	// TODO 补充入水 & 爆炸动画（指针数组）
+// Forward 弹药前进
+func (b *Bullet) Forward() {
+	// 修改位置
+	b.CurPos.AddRx(math.Sin(b.Rotation*math.Pi/180) * b.Speed)
+	b.CurPos.SubRy(math.Cos(b.Rotation*math.Pi/180) * b.Speed)
 }
 
 type Gun struct {
@@ -161,11 +165,11 @@ type Gun struct {
 	// 装填时间（单位: s)
 	ReloadTime int64
 	// 射程
-	Range int
+	Range float64
 	// 炮弹散布
 	BulletSpread int
 	// 炮弹速度
-	BulletSpeed int
+	BulletSpeed float64
 
 	// 动态参数
 	// 当前火炮是否可用（如战损 / 禁用）
@@ -175,21 +179,43 @@ type Gun struct {
 }
 
 // CanFire 是否可发射
-func (g *Gun) CanFire() bool {
+func (g *Gun) CanFire(curPos, targetPos MapPos) bool {
+	// 未启用，不可发射
 	if g.Disable {
 		return false
 	}
-	return g.LastFireTime+g.ReloadTime <= time.Now().Unix()
+	// 在重新装填，不可发射
+	if g.LastFireTime+g.ReloadTime > time.Now().Unix() {
+		return false
+	}
+	// 不在射程内，不可发射
+	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	if distance > g.Range {
+		return false
+	}
+	return true
 }
 
 // Fire 发射
-func (g *Gun) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
-	if !g.CanFire() {
-		return []*Bullet{}
+func (g *Gun) Fire(shipUid string, player faction.Player, curPos, targetPos MapPos) []*Bullet {
+	shotBullets := []*Bullet{}
+	if !g.CanFire(curPos, targetPos) {
+		return shotBullets
 	}
 	g.LastFireTime = time.Now().Unix()
-	// FIXME 初始化弹药（复数，考虑当前位置，散布，curPos 是战舰位置，还要计算相对位置，需要 uid）
-	return []*Bullet{}
+	for i := 0; i < g.BulletCount; i++ {
+		shotBullets = append(shotBullets, NewBullets(
+			g.BulletName,
+			// FIXME 这里要考虑火炮的位置，cusPos 需要修改
+			// FIXME 这里需要考虑炮弹散布，targetPos 需要修改
+			curPos, targetPos,
+			g.BulletSpeed,
+			shipUid,
+			player,
+		))
+	}
+
+	return shotBullets
 }
 
 type Torpedo struct {
@@ -215,16 +241,25 @@ type Torpedo struct {
 }
 
 // CanFire 是否可发射
-func (t *Torpedo) CanFire() bool {
+func (t *Torpedo) CanFire(curPos, targetPos MapPos) bool {
+	// 未启用，不可发射
 	if t.Disable {
 		return false
 	}
-	return t.LastFireTime+t.ReloadTime <= time.Now().Unix()
+	// 在重新装填，不可发射
+	if t.LastFireTime+t.ReloadTime > time.Now().Unix() {
+		return false
+	}
+	// 不在射程内，不可发射
+	if geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY) > t.Range {
+		return false
+	}
+	return true
 }
 
 // Fire 发射
-func (t *Torpedo) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
-	if !t.CanFire() {
+func (t *Torpedo) Fire(shipUid string, player faction.Player, curPos, targetPos MapPos) []*Bullet {
+	if !t.CanFire(curPos, targetPos) {
 		return []*Bullet{}
 	}
 	t.LastFireTime = time.Now().Unix()
@@ -238,6 +273,8 @@ type Weapon struct {
 	Guns []*Gun
 	// 鱼雷
 	Torpedoes []*Torpedo
+	// 最大射程（各类武器射程最大值）
+	MaxRange float64
 	// 武器禁用情况
 	GunDisabled     bool
 	TorpedoDisabled bool
@@ -310,16 +347,25 @@ func (s *BattleShip) EnableWeapon(t WeaponType) {
 	}
 }
 
+// InMaxRange 是否在最大射程内
+func (s *BattleShip) InMaxRange(targetPos MapPos) bool {
+	return geometry.CalcDistance(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY) <= s.Weapon.MaxRange
+}
+
 // Fire 向指定目标发射武器
-func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
-	bullets := []*Bullet{}
+func (s *BattleShip) Fire(targetPos MapPos) []*Bullet {
+	shotBullets := []*Bullet{}
+	// 如果生命值为 0，那还 Fire 个锤子，直接返回
+	if s.CurHP <= 0 {
+		return shotBullets
+	}
 	for i := 0; i < len(s.Weapon.Guns); i++ {
-		bullets = slices.Concat(bullets, s.Weapon.Guns[i].Fire(curPos, targetPos))
+		shotBullets = slices.Concat(shotBullets, s.Weapon.Guns[i].Fire(s.Uid, s.BelongPlayer, s.CurPos, targetPos))
 	}
 	for i := 0; i < len(s.Weapon.Torpedoes); i++ {
-		bullets = slices.Concat(bullets, s.Weapon.Torpedoes[i].Fire(curPos, targetPos))
+		shotBullets = slices.Concat(shotBullets, s.Weapon.Torpedoes[i].Fire(s.Uid, s.BelongPlayer, s.CurPos, targetPos))
 	}
-	return bullets
+	return shotBullets
 }
 
 // MoveTo 移动到指定位置
@@ -329,6 +375,10 @@ func (s *BattleShip) Fire(curPos MapPos, targetPos MapPos) []*Bullet {
 //
 // TODO 路线规划 -> 绕过陆地
 func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool) {
+	// 如果生命值为 0，肯定是走不动，直接返回
+	if s.CurHP <= 0 {
+		return true
+	}
 	// 差不多到目标位置即可，不要强求准确，否则需要微调，视觉效果不佳
 	if s.CurPos.Near(targetPos, 1) {
 		s.CurSpeed = 0

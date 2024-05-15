@@ -109,4 +109,15 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
+	for _, bullet := range ms.ShotBullets {
+		img := obj.GetBulletImg(bullet.Name)
+
+		opts := d.genDefaultDrawImageOptions()
+		ebutil.SetOptsCenterRotation(opts, img, bullet.Rotation)
+		opts.GeoM.Translate(
+			(bullet.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(img.Bounds().Dx()/2),
+			(bullet.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(img.Bounds().Dy()/2),
+		)
+		screen.DrawImage(img, opts)
+	}
 }

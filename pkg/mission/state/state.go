@@ -49,7 +49,7 @@ type MissionState struct {
 	// 战舰信息
 	Ships map[string]*object.BattleShip
 	// 已发射的弹药信息（炮弹 / 鱼雷）
-	Bullets map[string]*object.Bullet
+	ShotBullets []*object.Bullet
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
 	// 战舰尾流
@@ -84,7 +84,7 @@ func NewMissionState(mission md.Mission) *MissionState {
 			FriendlyFire: false,
 		},
 		Ships:         ships,
-		Bullets:       map[string]*object.Bullet{},
+		ShotBullets:   []*object.Bullet{},
 		SelectedShips: []string{},
 	}
 }

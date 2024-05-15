@@ -4,8 +4,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
-
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -21,24 +21,30 @@ var bullets = map[BulletName]*Bullet{
 }
 
 // FIXME 补充火炮弹药图片素材
+var defaultBulletImg = ebiten.NewImage(2, 4)
+
+func init() {
+	defaultBulletImg.Fill(colorx.White)
+}
+
 var bulletImages = map[BulletName]*ebiten.Image{
-	Gb127T1: ebiten.NewImage(2, 4),
+	Gb127T1: defaultBulletImg,
 }
 
 // NewBullets 新建弹药
 func NewBullets(
 	name BulletName,
-	CurPos, TargetPos MapPos,
-	Speed int,
+	curPos, targetPos MapPos,
+	speed float64,
 	shipUid string,
 	player faction.Player,
 ) *Bullet {
 	b := deepcopy.Copy(*bullets[name]).(Bullet)
 	b.Uid = uuid.New().String()
-	b.CurPosition = CurPos
-	b.TargetPosition = TargetPos
-	b.Rotation = int(geometry.CalcAngleBetweenPoints(CurPos.RX, CurPos.RY, TargetPos.RX, TargetPos.RY))
-	b.Speed = Speed
+	b.CurPos = curPos
+	b.TargetPos = targetPos
+	b.Rotation = geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	b.Speed = speed
 	b.BelongShip = shipUid
 	b.BelongPlayer = player
 	return &b

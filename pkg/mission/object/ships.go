@@ -51,7 +51,10 @@ var shipDefault = &BattleShip{
 			newGun(GunMK45, 0.7),
 		},
 		// TODO 鱼雷先欠一下，后面再加
-		Torpedoes: []*Torpedo{},
+		Torpedoes:       []*Torpedo{},
+		MaxRange:        20,
+		GunDisabled:     false,
+		TorpedoDisabled: false,
 	},
 	CurHP:       1000,
 	CurPos:      MapPos{MX: 0, MY: 0},

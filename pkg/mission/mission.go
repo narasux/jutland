@@ -2,6 +2,7 @@ package mission
 
 import (
 	"log"
+	"slices"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
@@ -50,9 +51,11 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	m.updateInstructions()
 	m.executeInstructions()
 	m.updateCameraPosition()
-	m.updateSelectedShips()
 	m.updateGameOptions()
+	m.updateSelectedShips()
+	m.updateWeaponFire()
 	m.updateShipTrails()
+	m.updateShotBullets()
 	m.updateMissionStatus()
 
 	return m.state.MissionStatus, nil
@@ -119,6 +122,14 @@ func (m *MissionManager) updateCameraPosition() {
 	)
 }
 
+// 更新游戏选项
+func (m *MissionManager) updateGameOptions() {
+	// 按下 d 键，全局展示 / 不展示所有战舰状态
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
+		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
+	}
+}
+
 // 更新选择的战舰列表
 func (m *MissionManager) updateSelectedShips() {
 	// 选择一个区域中的所有战舰
@@ -134,11 +145,19 @@ func (m *MissionManager) updateSelectedShips() {
 	}
 }
 
-// 更新游戏选项
-func (m *MissionManager) updateGameOptions() {
-	// 按下 d 键，全局展示 / 不展示所有战舰状态
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
-		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
+func (m *MissionManager) updateWeaponFire() {
+	for shipUid, ship := range m.state.Ships {
+		for targetShipUid, targetShip := range m.state.Ships {
+			// 不能炮击自己，也不能主动炮击己方的战舰
+			if shipUid == targetShipUid || ship.BelongPlayer == targetShip.BelongPlayer {
+				continue
+			}
+			// 如果在最大射程内，立刻开火（只对该目标开火）
+			if ship.InMaxRange(targetShip.CurPos) {
+				m.state.ShotBullets = slices.Concat(m.state.ShotBullets, ship.Fire(targetShip.CurPos))
+				break
+			}
+		}
 	}
 }
 
@@ -160,6 +179,21 @@ func (m *MissionManager) updateShipTrails() {
 			m.state.ShipTrails = append(m.state.ShipTrails, obj.NewShipTrail(ship.CurPos, ship.CurRotation, 20, 60))
 		}
 	}
+}
+
+// 更新弹药状态
+func (m *MissionManager) updateShotBullets() {
+	for i := 0; i < len(m.state.ShotBullets); i++ {
+		m.state.ShotBullets[i].Forward()
+	}
+	m.state.ShotBullets = lo.Filter(m.state.ShotBullets, func(b *obj.Bullet, _ int) bool {
+		// 如果已经到达目标地点，则不再需要保留
+		if b.CurPos.MEqual(b.TargetPos) {
+			// TODO 伤害结算
+			return false
+		}
+		return true
+	})
 }
 
 // TODO 计算下一帧任务状态
