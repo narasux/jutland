@@ -35,6 +35,7 @@ var missionMetadata = map[Mission]MissionMetadata{
 			{obj.ShipDefault, obj.NewMapPos(40, 35), 90, faction.HumanAlpha},
 			{obj.ShipDefault, obj.NewMapPos(40, 50), 0, faction.HumanAlpha},
 			{obj.ShipDefault, obj.NewMapPos(60, 35), 270, faction.ComputerAlpha},
+			{obj.ShipDefault, obj.NewMapPos(65, 40), 180, faction.ComputerAlpha},
 		},
 	},
 }

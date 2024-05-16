@@ -77,3 +77,8 @@ func NewMissionSuccess() types.AudioStream {
 func NewMissionFailed() types.AudioStream {
 	return mustNewAudio("/mission_failed.wav")
 }
+
+// NewGunMK45 MK45 炮开火
+func NewGunMK45() types.AudioStream {
+	return mustNewAudio("/gun_mk_45.wav")
+}

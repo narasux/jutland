@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
@@ -17,6 +18,7 @@ import (
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
+	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 )
 
 // MissionManager 任务管理器
@@ -147,14 +149,25 @@ func (m *MissionManager) updateSelectedShips() {
 
 func (m *MissionManager) updateWeaponFire() {
 	for shipUid, ship := range m.state.Ships {
-		for targetShipUid, targetShip := range m.state.Ships {
+		for enemyUid, enemy := range m.state.Ships {
 			// 不能炮击自己，也不能主动炮击己方的战舰
-			if shipUid == targetShipUid || ship.BelongPlayer == targetShip.BelongPlayer {
+			if shipUid == enemyUid || ship.BelongPlayer == enemy.BelongPlayer {
 				continue
 			}
 			// 如果在最大射程内，立刻开火（只对该目标开火）
-			if ship.InMaxRange(targetShip.CurPos) {
-				m.state.ShotBullets = slices.Concat(m.state.ShotBullets, ship.Fire(targetShip.CurPos))
+			if ship.InMaxRange(enemy.CurPos) {
+				bullets := ship.Fire(enemy.CurPos)
+				if len(bullets) == 0 {
+					continue
+				}
+				// 炮击声音（只有战舰在视野内才播放声音）
+				// FIXME 需要修复声音重叠变大声的问题
+				if m.state.Camera.Contains(ship.CurPos) {
+					for _, _ = range bullets {
+						audio.PlayAudioToEnd(audioRes.NewGunMK45())
+					}
+				}
+				m.state.ShotBullets = slices.Concat(m.state.ShotBullets, bullets)
 				break
 			}
 		}

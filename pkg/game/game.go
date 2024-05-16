@@ -5,9 +5,9 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/audio"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 
+	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/mission"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/colorx"
@@ -22,7 +22,7 @@ type Game struct {
 	// 图像绘制器
 	drawer *Drawer
 	// 音频播放器
-	player *AudioPlayer
+	player *audio.Player
 
 	// 对象状态
 	objStates *objStates
@@ -35,7 +35,7 @@ func New() *Game {
 	g := &Game{
 		mode:       GameModeStart,
 		drawer:     NewDrawer(),
-		player:     NewAudioPlayer(audio.NewContext(SampleRate)),
+		player:     audio.NewPlayer(audio.Context),
 		objStates:  nil,
 		missionMgr: nil,
 	}
@@ -185,12 +185,12 @@ func (g *Game) handleMenuSelect() error {
 			// 仅首次移动会修改颜色 & 发声
 			if button.Color != colorx.DarkRed {
 				button.Color = colorx.DarkRed
-				PlayAudioToEnd(g.player.ctx, audioRes.NewMenuButtonHover())
+				audio.PlayAudioToEnd(audioRes.NewMenuButtonHover())
 			}
 			// 左键点击按钮：切模式，播放音效，停止 BGM
 			if isMouseButtonLeftJustPressed() {
 				g.mode = button.Mode
-				PlayAudioToEnd(g.player.ctx, audioRes.NewMenuButtonClick())
+				audio.PlayAudioToEnd(audioRes.NewMenuButtonClick())
 				g.player.Close()
 			}
 		} else {
