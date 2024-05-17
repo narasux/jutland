@@ -89,11 +89,11 @@ func init() {
 }
 
 // GetHpImg 获取生命值图片
-func GetHpImg(curHp, maxHp int) *ebiten.Image {
-	return hpImgMap[int(math.Floor(float64(curHp)/float64(maxHp)*10))]
+func GetHpImg(curHp, maxHp float64) *ebiten.Image {
+	return hpImgMap[int(math.Floor(curHp/maxHp*10))]
 }
 
 // GetEnemyHpImg 获取敌人生命值图片
-func GetEnemyHpImg(curHp, maxHp int) *ebiten.Image {
-	return enemyHpImgMap[int(math.Floor(float64(curHp)/float64(maxHp)*10))]
+func GetEnemyHpImg(curHp, maxHp float64) *ebiten.Image {
+	return enemyHpImgMap[int(math.Floor(curHp/maxHp*10))]
 }

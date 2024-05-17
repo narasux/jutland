@@ -45,10 +45,12 @@ var shipDefault = &BattleShip{
 	DamageReduction: 0.5,
 	MaxSpeed:        0.1,
 	RotateSpeed:     2,
+	Length:          370,
+	Width:           38,
 	Weapon: Weapon{
 		Guns: []*Gun{
-			newGun(GunMK45, 0.2),
-			newGun(GunMK45, 0.7),
+			newGun(GunMK45, 0.3),
+			newGun(GunMK45, -0.3),
 		},
 		// TODO 鱼雷先欠一下，后面再加
 		Torpedoes:       []*Torpedo{},

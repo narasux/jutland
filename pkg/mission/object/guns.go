@@ -27,6 +27,6 @@ var gunMK45 = &Gun{
 	BulletCount:  1,
 	ReloadTime:   1,
 	Range:        20,
-	BulletSpread: 1,
-	BulletSpeed:  0.1,
+	BulletSpread: 50,
+	BulletSpeed:  0.5,
 }

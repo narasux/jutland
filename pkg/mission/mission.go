@@ -148,6 +148,9 @@ func (m *MissionManager) updateSelectedShips() {
 }
 
 func (m *MissionManager) updateWeaponFire() {
+	// 限制单次循环内的开火声音次数，避免过于嘈杂
+	audioPlayQuota := 3
+
 	for shipUid, ship := range m.state.Ships {
 		for enemyUid, enemy := range m.state.Ships {
 			// 不能炮击自己，也不能主动炮击己方的战舰
@@ -162,10 +165,9 @@ func (m *MissionManager) updateWeaponFire() {
 				}
 				// 炮击声音（只有战舰在视野内才播放声音）
 				// FIXME 需要修复声音重叠变大声的问题
-				if m.state.Camera.Contains(ship.CurPos) {
-					for _, _ = range bullets {
-						audio.PlayAudioToEnd(audioRes.NewGunMK45())
-					}
+				if audioPlayQuota > 0 && m.state.Camera.Contains(ship.CurPos) {
+					audio.PlayAudioToEnd(audioRes.NewGunMK45())
+					audioPlayQuota--
 				}
 				m.state.ShotBullets = slices.Concat(m.state.ShotBullets, bullets)
 				break

@@ -3,10 +3,14 @@ package object
 import (
 	"fmt"
 	"math"
+	"math/rand"
 	"slices"
 	"time"
 
+	"github.com/mohae/deepcopy"
+
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -156,7 +160,9 @@ type Gun struct {
 	// 固定参数
 	// 火炮名称
 	Name GunName
-	// 百分比位置（如：0.33 -> 距离舰首 1/3)
+	// 相对位置
+	// 0.35 -> 从中心往舰首 35% 舰体长度
+	// -0.3 -> 从中心往舰尾 30% 舰体长度
 	PosPercent float64
 	// 炮弹类型
 	BulletName BulletName
@@ -197,22 +203,33 @@ func (g *Gun) CanFire(curPos, targetPos MapPos) bool {
 }
 
 // Fire 发射
-func (g *Gun) Fire(shipUid string, player faction.Player, curPos, targetPos MapPos) []*Bullet {
+func (g *Gun) Fire(
+	shipUid string,
+	player faction.Player,
+	shipLength, shipRotation float64,
+	curPos, targetPos MapPos,
+) []*Bullet {
 	shotBullets := []*Bullet{}
 	if !g.CanFire(curPos, targetPos) {
 		return shotBullets
 	}
 	g.LastFireTime = time.Now().Unix()
+
+	// 炮塔距离战舰中心的距离
+	distance := g.PosPercent * shipLength / mapblock.BlockSize
+	curPos.AddRx(math.Sin(shipRotation*math.Pi/180) * distance)
+	curPos.SubRy(math.Cos(shipRotation*math.Pi/180) * distance)
+
+	// FIXME 其实还要考虑提前量（依赖敌舰速度，角度），除此之外，散布应该随着距离减小而减小
 	for i := 0; i < g.BulletCount; i++ {
-		shotBullets = append(shotBullets, NewBullets(
-			g.BulletName,
-			// FIXME 这里要考虑火炮的位置，cusPos 需要修改
-			// FIXME 这里需要考虑炮弹散布，targetPos 需要修改
-			curPos, targetPos,
-			g.BulletSpeed,
-			shipUid,
-			player,
-		))
+		pos := deepcopy.Copy(targetPos).(MapPos)
+		// 炮弹散布的半径
+		radius := float64(g.BulletSpread) / mapblock.BlockSize
+		// rand.Intn(3) - 1 算方向，rand.Float64() 算距离
+		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
+		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
+
+		shotBullets = append(shotBullets, NewBullets(g.BulletName, curPos, pos, g.BulletSpeed, shipUid, player))
 	}
 
 	return shotBullets
@@ -258,7 +275,12 @@ func (t *Torpedo) CanFire(curPos, targetPos MapPos) bool {
 }
 
 // Fire 发射
-func (t *Torpedo) Fire(shipUid string, player faction.Player, curPos, targetPos MapPos) []*Bullet {
+func (t *Torpedo) Fire(
+	shipUid string,
+	player faction.Player,
+	shipLength, shipRotation float64,
+	curPos, targetPos MapPos,
+) []*Bullet {
 	if !t.CanFire(curPos, targetPos) {
 		return []*Bullet{}
 	}
@@ -289,13 +311,17 @@ type BattleShip struct {
 	Type ShipType
 
 	// 初始生命值
-	TotalHP int
+	TotalHP float64
 	// 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
 	DamageReduction float64
 	// 最大速度
 	MaxSpeed float64
 	// 转向速度（度）
 	RotateSpeed float64
+	// 战舰长度
+	Length float64
+	// 战舰宽度
+	Width float64
 	// 武器
 	Weapon Weapon
 
@@ -303,7 +329,7 @@ type BattleShip struct {
 	// 唯一标识
 	Uid string
 	// 当前生命值
-	CurHP int
+	CurHP float64
 	// 当前位置
 	CurPos MapPos
 	// 旋转角度
@@ -360,10 +386,14 @@ func (s *BattleShip) Fire(targetPos MapPos) []*Bullet {
 		return shotBullets
 	}
 	for i := 0; i < len(s.Weapon.Guns); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.Guns[i].Fire(s.Uid, s.BelongPlayer, s.CurPos, targetPos))
+		shotBullets = slices.Concat(shotBullets, s.Weapon.Guns[i].Fire(
+			s.Uid, s.BelongPlayer, s.Length, s.CurRotation, s.CurPos, targetPos,
+		))
 	}
 	for i := 0; i < len(s.Weapon.Torpedoes); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.Torpedoes[i].Fire(s.Uid, s.BelongPlayer, s.CurPos, targetPos))
+		shotBullets = slices.Concat(shotBullets, s.Weapon.Torpedoes[i].Fire(
+			s.Uid, s.BelongPlayer, s.Length, s.CurRotation, s.CurPos, targetPos,
+		))
 	}
 	return shotBullets
 }
