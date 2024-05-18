@@ -1,10 +1,20 @@
 package envs
 
 import (
+	"os"
 	"path/filepath"
+	"strings"
+
+	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/utils/envx"
-	"github.com/narasux/jutland/pkg/utils/pathx"
+)
+
+var (
+	pwd, _     = os.Getwd()
+	exePath, _ = os.Executable()
+	exeDir     = filepath.Dir(exePath)
+	baseDir    = lo.Ternary(strings.Contains(exeDir, pwd), exeDir, pwd)
 )
 
 // 以下变量值可通过环境变量指定
@@ -13,14 +23,14 @@ var (
 	Debug = envx.Get("DEBUG", "false") == "true"
 
 	// ImgResBaseDir 图片资源根目录
-	ImgResBaseDir = envx.Get("IMG_RES_BASE_DIR", filepath.Join(pathx.GetCurPKGPath(), "../../resources/images"))
+	ImgResBaseDir = envx.Get("IMG_RES_BASE_DIR", filepath.Join(baseDir, "resources/images"))
 
 	// FontResBaseDir 字体资源根目录
-	FontResBaseDir = envx.Get("FONT_RES_BASE_DIR", filepath.Join(pathx.GetCurPKGPath(), "../../resources/fonts"))
+	FontResBaseDir = envx.Get("FONT_RES_BASE_DIR", filepath.Join(baseDir, "resources/fonts"))
 
 	// AudioResBaseDir 音频资源根目录
-	AudioResBaseDir = envx.Get("AUDIO_RES_BASE_DIR", filepath.Join(pathx.GetCurPKGPath(), "../../resources/audios"))
+	AudioResBaseDir = envx.Get("AUDIO_RES_BASE_DIR", filepath.Join(baseDir, "resources/audios"))
 
 	// MapResBaseDir 地图资源根目录
-	MapResBaseDir = envx.Get("MAP_RES_BASE_DIR", filepath.Join(pathx.GetCurPKGPath(), "../../resources/maps"))
+	MapResBaseDir = envx.Get("MAP_RES_BASE_DIR", filepath.Join(baseDir, "resources/maps"))
 )

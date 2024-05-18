@@ -129,7 +129,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 		opts = d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(
 			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(explodeImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(explodeImg.Bounds().Dy()/2-10),
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(explodeImg.Bounds().Dy()/2)-50,
 		)
 		screen.DrawImage(explodeImg, opts)
 	}
