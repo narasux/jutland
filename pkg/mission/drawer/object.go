@@ -107,9 +107,37 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	}
 }
 
+// 绘制消亡中的战舰
+func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState) {
+	for _, ship := range ms.DestroyedShips {
+		// 只有在屏幕中的才渲染
+		if !ms.Camera.Contains(ship.CurPos) {
+			continue
+		}
+
+		shipImg := obj.GetShipImg(ship.Name)
+		opts := d.genDefaultDrawImageOptions()
+		ebutil.SetOptsCenterRotation(opts, shipImg, ship.CurRotation)
+		opts.GeoM.Translate(
+			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(shipImg.Bounds().Dx()/2),
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(shipImg.Bounds().Dy()/2),
+		)
+		screen.DrawImage(shipImg, opts)
+
+		// 绘制爆炸效果
+		explodeImg := texture.GetExplodeImg(ship.CurHP)
+		opts = d.genDefaultDrawImageOptions()
+		opts.GeoM.Translate(
+			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(explodeImg.Bounds().Dx()/2),
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(explodeImg.Bounds().Dy()/2-10),
+		)
+		screen.DrawImage(explodeImg, opts)
+	}
+}
+
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
-	for _, bullet := range ms.ShotBullets {
+	for _, bullet := range ms.ForwardingBullets {
 		img := obj.GetBulletImg(bullet.Name)
 
 		opts := d.genDefaultDrawImageOptions()

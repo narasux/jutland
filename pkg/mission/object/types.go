@@ -7,8 +7,6 @@ import (
 	"slices"
 	"time"
 
-	"github.com/mohae/deepcopy"
-
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 	"github.com/narasux/jutland/pkg/utils/geometry"
@@ -123,17 +121,22 @@ func (p *MapPos) EnsureBorder(borderX, borderY float64) {
 	p.MY = int(math.Floor(p.RY))
 }
 
+// Copy 复制 MapPos 对象
+func (p *MapPos) Copy() MapPos {
+	return MapPos{MX: p.MX, MY: p.MY, RX: p.RX, RY: p.RY}
+}
+
 // 火炮 / 鱼雷弹药
 type Bullet struct {
-	// 固定参数
 	// 弹药名称
 	Name BulletName
 	// 伤害数值
-	Damage int
+	Damage float64
 
-	// 动态参数
 	// 唯一标识
 	Uid string
+	// 生命（前进太多要消亡）
+	Life int
 	// 当前位置
 	CurPos MapPos
 	// 目标位置
@@ -147,6 +150,11 @@ type Bullet struct {
 	BelongShip string
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
+
+	// 是否命中战舰/水面/陆地
+	HitShip  bool
+	HitWater bool
+	HitLand  bool
 }
 
 // Forward 弹药前进
@@ -154,6 +162,8 @@ func (b *Bullet) Forward() {
 	// 修改位置
 	b.CurPos.AddRx(math.Sin(b.Rotation*math.Pi/180) * b.Speed)
 	b.CurPos.SubRy(math.Cos(b.Rotation*math.Pi/180) * b.Speed)
+	// 修改生命
+	b.Life--
 }
 
 type Gun struct {
@@ -203,33 +213,35 @@ func (g *Gun) CanFire(curPos, targetPos MapPos) bool {
 }
 
 // Fire 发射
-func (g *Gun) Fire(
-	shipUid string,
-	player faction.Player,
-	shipLength, shipRotation float64,
-	curPos, targetPos MapPos,
-) []*Bullet {
+func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	shotBullets := []*Bullet{}
+
+	curPos, targetPos := ship.CurPos.Copy(), enemy.CurPos.Copy()
+	// 炮塔距离战舰中心的距离
+	gunOffset := g.PosPercent * ship.Length / mapblock.BlockSize
+	curPos.AddRx(math.Sin(ship.CurRotation*math.Pi/180) * gunOffset)
+	curPos.SubRy(math.Cos(ship.CurRotation*math.Pi/180) * gunOffset)
+	// FIXME 其实还要考虑提前量（依赖敌舰速度，角度）
+
 	if !g.CanFire(curPos, targetPos) {
 		return shotBullets
 	}
 	g.LastFireTime = time.Now().Unix()
 
-	// 炮塔距离战舰中心的距离
-	distance := g.PosPercent * shipLength / mapblock.BlockSize
-	curPos.AddRx(math.Sin(shipRotation*math.Pi/180) * distance)
-	curPos.SubRy(math.Cos(shipRotation*math.Pi/180) * distance)
+	// 散布应该随着距离减小而减小
+	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	rangePercent := distance / g.Range
+	// 炮弹散布的半径
+	radius := float64(g.BulletSpread) / mapblock.BlockSize * rangePercent
 
-	// FIXME 其实还要考虑提前量（依赖敌舰速度，角度），除此之外，散布应该随着距离减小而减小
 	for i := 0; i < g.BulletCount; i++ {
-		pos := deepcopy.Copy(targetPos).(MapPos)
-		// 炮弹散布的半径
-		radius := float64(g.BulletSpread) / mapblock.BlockSize
+		pos := targetPos.Copy()
 		// rand.Intn(3) - 1 算方向，rand.Float64() 算距离
 		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
-
-		shotBullets = append(shotBullets, NewBullets(g.BulletName, curPos, pos, g.BulletSpeed, shipUid, player))
+		shotBullets = append(shotBullets, NewBullets(
+			g.BulletName, curPos, pos, g.BulletSpeed, ship.Uid, ship.BelongPlayer,
+		))
 	}
 
 	return shotBullets
@@ -275,13 +287,8 @@ func (t *Torpedo) CanFire(curPos, targetPos MapPos) bool {
 }
 
 // Fire 发射
-func (t *Torpedo) Fire(
-	shipUid string,
-	player faction.Player,
-	shipLength, shipRotation float64,
-	curPos, targetPos MapPos,
-) []*Bullet {
-	if !t.CanFire(curPos, targetPos) {
+func (t *Torpedo) Fire(ship, enemy *BattleShip) []*Bullet {
+	if !t.CanFire(ship.CurPos, enemy.CurPos) {
 		return []*Bullet{}
 	}
 	t.LastFireTime = time.Now().Unix()
@@ -379,30 +386,27 @@ func (s *BattleShip) InMaxRange(targetPos MapPos) bool {
 }
 
 // Fire 向指定目标发射武器
-func (s *BattleShip) Fire(targetPos MapPos) []*Bullet {
+func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
 	shotBullets := []*Bullet{}
 	// 如果生命值为 0，那还 Fire 个锤子，直接返回
 	if s.CurHP <= 0 {
 		return shotBullets
 	}
 	for i := 0; i < len(s.Weapon.Guns); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.Guns[i].Fire(
-			s.Uid, s.BelongPlayer, s.Length, s.CurRotation, s.CurPos, targetPos,
-		))
+		shotBullets = slices.Concat(shotBullets, s.Weapon.Guns[i].Fire(s, enemy))
 	}
 	for i := 0; i < len(s.Weapon.Torpedoes); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.Torpedoes[i].Fire(
-			s.Uid, s.BelongPlayer, s.Length, s.CurRotation, s.CurPos, targetPos,
-		))
+		shotBullets = slices.Concat(shotBullets, s.Weapon.Torpedoes[i].Fire(s, enemy))
 	}
 	return shotBullets
 }
 
+// Hurt 收到伤害
+func (s *BattleShip) Hurt(damage float64) {
+	s.CurHP = max(0, s.CurHP-damage*s.DamageReduction)
+}
+
 // MoveTo 移动到指定位置
-// Q: 为什么不是移动的同时进行转向，而是原地转向后再移动？
-// A：边移动边转向对实时计算的要求较高，且不利于后续的路线规划设计，
-// 尾流渲染也不好做，先从简单的上手，后面有条件再搞，毕竟摊煎饼谁不喜欢呢？
-//
 // TODO 路线规划 -> 绕过陆地
 func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool) {
 	// 如果生命值为 0，肯定是走不动，直接返回
@@ -433,8 +437,8 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 		}
 		s.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-s.CurRotation), s.RotateSpeed)
 		s.CurRotation = math.Mod(s.CurRotation+360, 360)
-		// 原地旋转到差不多角度，才开始移动
-		if math.Abs(s.CurRotation-targetRotation) > 1 {
+		// 如果距离太近，则原地旋转到差不多角度，才开始移动
+		if s.CurPos.Near(targetPos, 3) && math.Abs(s.CurRotation-targetRotation) > 1 {
 			s.CurSpeed = 0
 		}
 	}

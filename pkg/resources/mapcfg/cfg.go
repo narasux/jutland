@@ -70,7 +70,7 @@ func loadMapCfg(name MapName) *MapCfg {
 		cfg.Map = append(cfg.Map, scanner.Text())
 	}
 	if err = scanner.Err(); err != nil {
-		log.Fatal("error when load map %s: %s", name, err)
+		log.Fatalf("error when load map %s: %s", name, err)
 	}
 
 	cfg.Width = len(cfg.Map[0])

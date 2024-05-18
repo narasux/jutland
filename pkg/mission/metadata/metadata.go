@@ -28,14 +28,22 @@ type InitShipMetadata struct {
 var missionMetadata = map[Mission]MissionMetadata{
 	MissionDefault: {
 		Name:          "默认关卡",
-		InitCameraPos: obj.NewMapPos(32, 32),
+		InitCameraPos: obj.NewMapPos(30, 30),
 		MapCfg:        mapcfg.GetByName(mapcfg.MapDefault),
 		MaxShipCount:  5,
 		InitShips: []InitShipMetadata{
-			{obj.ShipDefault, obj.NewMapPos(40, 35), 90, faction.HumanAlpha},
-			{obj.ShipDefault, obj.NewMapPos(40, 50), 0, faction.HumanAlpha},
-			{obj.ShipDefault, obj.NewMapPos(60, 35), 270, faction.ComputerAlpha},
-			{obj.ShipDefault, obj.NewMapPos(65, 40), 180, faction.ComputerAlpha},
+			// 第一舰队
+			{obj.ShipDefault, obj.NewMapPos(40, 33), 90, faction.HumanAlpha},
+			{obj.ShipDefault, obj.NewMapPos(42, 35), 90, faction.HumanAlpha},
+			{obj.ShipDefault, obj.NewMapPos(40, 37), 90, faction.HumanAlpha},
+			// 第二舰队
+			{obj.ShipDefault, obj.NewMapPos(40, 48), 90, faction.HumanAlpha},
+			{obj.ShipDefault, obj.NewMapPos(42, 50), 90, faction.HumanAlpha},
+			{obj.ShipDefault, obj.NewMapPos(40, 52), 90, faction.HumanAlpha},
+			// 敌人舰队
+			{obj.ShipDefault, obj.NewMapPos(70, 35), 90, faction.ComputerAlpha},
+			{obj.ShipDefault, obj.NewMapPos(65, 42), 215, faction.ComputerAlpha},
+			{obj.ShipDefault, obj.NewMapPos(70, 50), 270, faction.ComputerAlpha},
 		},
 	},
 }

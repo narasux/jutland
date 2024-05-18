@@ -1,6 +1,6 @@
 # Jutland
 
-怒海争锋（Jutland）是一款 2D 海战类游戏，基于 golang 游戏引擎 ebiten 实现。
+怒海争锋（Jutland）是一款 2D 海战即时策略类游戏，基于 golang 游戏引擎 ebiten 实现。
 
 ## 如何开始
 
@@ -12,6 +12,8 @@
 ### 服务启动命令
 
 ```shell
+export GOGC=50
+
 make build && ./jutland
 ```
 

@@ -48,8 +48,12 @@ type MissionState struct {
 
 	// 战舰信息
 	Ships map[string]*object.BattleShip
-	// 已发射的弹药信息（炮弹 / 鱼雷）
-	ShotBullets []*object.Bullet
+	// 被摧毁的战舰
+	DestroyedShips []*object.BattleShip
+	// 正在前进的弹药信息（炮弹 / 鱼雷）
+	ForwardingBullets []*object.Bullet
+	// 已到达预期位置的弹药信息（炮弹 / 鱼雷）
+	ArrivedBullets []*object.Bullet
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
 	// 战舰尾流
@@ -83,8 +87,9 @@ func NewMissionState(mission md.Mission) *MissionState {
 			// TODO 后续允许设置开启友军伤害，游戏性 up！
 			FriendlyFire: false,
 		},
-		Ships:         ships,
-		ShotBullets:   []*object.Bullet{},
-		SelectedShips: []string{},
+		Ships:             ships,
+		ForwardingBullets: []*object.Bullet{},
+		ArrivedBullets:    []*object.Bullet{},
+		SelectedShips:     []string{},
 	}
 }

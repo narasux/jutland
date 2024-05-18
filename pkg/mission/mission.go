@@ -1,6 +1,9 @@
 package mission
 
 import (
+	"github.com/narasux/jutland/pkg/resources/images/mapblock"
+	"github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/geometry"
 	"log"
 	"slices"
 
@@ -58,6 +61,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	m.updateWeaponFire()
 	m.updateShipTrails()
 	m.updateShotBullets()
+	m.updateMissionShips()
 	m.updateMissionStatus()
 
 	return m.state.MissionStatus, nil
@@ -145,8 +149,14 @@ func (m *MissionManager) updateSelectedShips() {
 		}
 		return
 	}
+	// 检查选中的战舰，如果已经被摧毁，则要去掉
+	m.state.SelectedShips = lo.Filter(m.state.SelectedShips, func(uid string, _ int) bool {
+		ship, ok := m.state.Ships[uid]
+		return ok && ship != nil && ship.CurHP > 0
+	})
 }
 
+// 更新武器开火相关状态
 func (m *MissionManager) updateWeaponFire() {
 	// 限制单次循环内的开火声音次数，避免过于嘈杂
 	audioPlayQuota := 3
@@ -159,7 +169,7 @@ func (m *MissionManager) updateWeaponFire() {
 			}
 			// 如果在最大射程内，立刻开火（只对该目标开火）
 			if ship.InMaxRange(enemy.CurPos) {
-				bullets := ship.Fire(enemy.CurPos)
+				bullets := ship.Fire(enemy)
 				if len(bullets) == 0 {
 					continue
 				}
@@ -169,7 +179,7 @@ func (m *MissionManager) updateWeaponFire() {
 					audio.PlayAudioToEnd(audioRes.NewGunMK45())
 					audioPlayQuota--
 				}
-				m.state.ShotBullets = slices.Concat(m.state.ShotBullets, bullets)
+				m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
 				break
 			}
 		}
@@ -198,25 +208,107 @@ func (m *MissionManager) updateShipTrails() {
 
 // 更新弹药状态
 func (m *MissionManager) updateShotBullets() {
-	for i := 0; i < len(m.state.ShotBullets); i++ {
-		m.state.ShotBullets[i].Forward()
+	for i := 0; i < len(m.state.ForwardingBullets); i++ {
+		m.state.ForwardingBullets[i].Forward()
 	}
-	m.state.ShotBullets = lo.Filter(m.state.ShotBullets, func(b *obj.Bullet, _ int) bool {
-		// 如果已经到达目标地点，则不再需要保留
-		if b.CurPos.MEqual(b.TargetPos) {
-			// TODO 伤害结算
-			return false
+
+	arrivedBullets, forwardingBullets := []*obj.Bullet{}, []*obj.Bullet{}
+	for _, bullet := range m.state.ForwardingBullets {
+		// 迷失的弹药，要及时消亡（如鱼雷没命中）
+		if bullet.Life <= 0 {
+			continue
 		}
-		return true
+		if bullet.CurPos.MEqual(bullet.TargetPos) {
+			arrivedBullets = append(arrivedBullets, bullet)
+		} else {
+			forwardingBullets = append(forwardingBullets, bullet)
+		}
+	}
+
+	// 继续塔塔开的，保留
+	m.state.ForwardingBullets = forwardingBullets
+	// 已经到达目标地点的，存起来绘图用 FIXME 这里有个问题，自己赋值，会不会把正在绘制动画的搞没了
+	m.state.ArrivedBullets = arrivedBullets
+	// 尝试结算伤害
+	for _, bt := range m.state.ArrivedBullets {
+		for _, ship := range m.state.Ships {
+			// 如果友军伤害没启用，则不对己方战舰造成伤害
+			if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
+				continue
+			}
+
+			// 判定命中，扣除战舰生命值，标记命中战舰
+			if geometry.IsPointInRotatedRectangle(
+				bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY,
+				ship.Length/mapblock.BlockSize, ship.Width/mapblock.BlockSize,
+				ship.CurRotation,
+			) {
+				ship.Hurt(bt.Damage)
+				bt.HitShip = true
+			} else {
+				// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
+				bt.HitWater = true
+			}
+		}
+	}
+}
+
+// 更新局内战舰
+func (m *MissionManager) updateMissionShips() {
+	audioPlayQuota := 2
+	// 如果战舰 HP 为 0，则需要走消亡流程
+	for uid, ship := range m.state.Ships {
+		if ship.CurHP <= 0 {
+			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
+			ship.CurHP = texture.MaxExplodeState
+			ship.CurSpeed = 0
+
+			if audioPlayQuota > 0 && m.state.Camera.Contains(ship.CurPos) {
+				audio.PlayAudioToEnd(audioRes.NewShipExplode())
+				audioPlayQuota--
+			}
+
+			m.state.DestroyedShips = append(m.state.DestroyedShips, ship)
+			delete(m.state.Ships, uid)
+		}
+	}
+
+	// 消亡中的战舰会逐渐掉血到 0
+	for _, ship := range m.state.DestroyedShips {
+		ship.CurHP -= 0.5
+	}
+
+	// 移除已经完全消亡的战舰
+	m.state.DestroyedShips = lo.Filter(m.state.DestroyedShips, func(ship *obj.BattleShip, _ int) bool {
+		return ship.CurHP > 0
 	})
 }
 
-// TODO 计算下一帧任务状态
+// 计算下一帧任务状态
 func (m *MissionManager) updateMissionStatus() {
 	switch m.state.MissionStatus {
 	case state.MissionRunning:
 		if ebiten.IsKeyPressed(ebiten.KeyEscape) {
 			m.state.MissionStatus = state.MissionPaused
+			return
+		}
+		// 检查所有战舰，判定胜利 / 失败
+		anySelfShip, anyEnemyShip := false, false
+		for _, ship := range m.state.Ships {
+			if ship.BelongPlayer == m.state.CurPlayer {
+				anySelfShip = true
+			} else {
+				anyEnemyShip = true
+			}
+		}
+		// 自己的船都没了，失败
+		if !anySelfShip && len(m.state.DestroyedShips) == 0 {
+			m.state.MissionStatus = state.MissionFailed
+			return
+		}
+		// 敌人都不存在，胜利
+		if !anyEnemyShip && len(m.state.DestroyedShips) == 0 {
+			m.state.MissionStatus = state.MissionSuccess
 			return
 		}
 	case state.MissionPaused:

@@ -14,7 +14,7 @@ var Context = audio.NewContext(sampleRate)
 
 // PlayAudioToEnd 音频播放（一次性使用，可并发，播放到完成，只能用于短音频）
 func PlayAudioToEnd(ads types.AudioStream) {
-	if ads.Length() > sampleRate*5 {
+	if ads.Length() > sampleRate*30 {
 		log.Fatalf("audio too long for PlayAudioToEnd: %d", ads.Length())
 	}
 	go func() {

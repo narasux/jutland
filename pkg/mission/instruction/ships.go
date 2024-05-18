@@ -22,7 +22,14 @@ func NewEnableWeapon(shipUid string, weaponType obj.WeaponType) *EnableWeapon {
 var _ Instruction = (*EnableWeapon)(nil)
 
 func (i *EnableWeapon) Exec(s *state.MissionState) error {
-	s.Ships[i.shipUid].EnableWeapon(i.weaponType)
+	// 战舰如果被摧毁了，直接修改指令为已完成
+	ship, ok := s.Ships[i.shipUid]
+	if !ok {
+		i.executed = true
+		return nil
+	}
+
+	ship.EnableWeapon(i.weaponType)
 	i.executed = true
 	return nil
 }
@@ -58,7 +65,14 @@ func NewDisableWeapon(shipUid string, weaponType obj.WeaponType) *DisableWeapon 
 var _ Instruction = (*DisableWeapon)(nil)
 
 func (i *DisableWeapon) Exec(s *state.MissionState) error {
-	s.Ships[i.shipUid].DisableWeapon(i.weaponType)
+	// 战舰如果被摧毁了，直接修改指令为已完成
+	ship, ok := s.Ships[i.shipUid]
+	if !ok {
+		i.executed = true
+		return nil
+	}
+
+	ship.DisableWeapon(i.weaponType)
 	i.executed = true
 	return nil
 }
@@ -94,8 +108,15 @@ func NewShipMove(shipUid string, targetPos obj.MapPos) *ShipMove {
 var _ Instruction = (*ShipMove)(nil)
 
 func (i *ShipMove) Exec(s *state.MissionState) error {
+	// 战舰如果被摧毁了，直接修改指令为已完成
+	ship, ok := s.Ships[i.shipUid]
+	if !ok {
+		i.executed = true
+		return nil
+	}
+
 	borderX, borderY := s.MissionMD.MapCfg.Width, s.MissionMD.MapCfg.Height
-	if s.Ships[i.shipUid].MoveTo(i.targetPos, borderX, borderY) {
+	if ship.MoveTo(i.targetPos, borderX, borderY) {
 		i.executed = true
 	}
 	return nil
@@ -110,7 +131,7 @@ func (i *ShipMove) GetObjUid() string {
 }
 
 func (i *ShipMove) String() string {
-	return fmt.Sprintf("Ship %s move to %s", i.shipUid, i.targetPos)
+	return fmt.Sprintf("Ship %s move to %s", i.shipUid, i.targetPos.String())
 }
 
 func (i *ShipMove) Name() string {

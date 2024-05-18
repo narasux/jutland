@@ -56,4 +56,4 @@ func GetBulletImg(name BulletName) *ebiten.Image {
 }
 
 // gb (gun bullet) 表示是火炮弹药，tb (torpedo bullet) 表示鱼雷弹药
-var gb127T1 = &Bullet{Name: Gb127T1, Damage: 100}
+var gb127T1 = &Bullet{Name: Gb127T1, Life: 150, Damage: 100}

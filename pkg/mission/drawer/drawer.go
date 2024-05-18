@@ -40,6 +40,7 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	d.drawBuildings(screen, misState)
 	d.drawShipTrails(screen, misState)
 	d.drawBattleShips(screen, misState)
+	d.drawDestroyedShips(screen, misState)
 	d.drawShotBullets(screen, misState)
 	// 控制台
 	d.drawConsole(screen, misState)
