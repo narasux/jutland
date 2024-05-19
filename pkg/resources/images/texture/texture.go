@@ -26,6 +26,9 @@ var (
 
 	// ShipSelectedImg 选中战舰标志图片
 	ShipSelectedImg *ebiten.Image
+
+	// TargetPosImg 目标位置标志图片
+	TargetPosImg *ebiten.Image
 )
 
 func init() {
@@ -68,6 +71,12 @@ func init() {
 	// 加载选中战舰标志
 	imgPath = "/textures/flag/ship_selected.png"
 	if ShipSelectedImg, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	// 加载目标位置标志
+	imgPath = "/textures/flag/target_pos.png"
+	if TargetPosImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

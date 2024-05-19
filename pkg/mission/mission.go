@@ -59,6 +59,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.executeInstructions()
 		m.updateCameraPosition()
 		m.updateGameOptions()
+		m.updateGameMarks()
 		m.updateSelectedShips()
 		m.updateShipGroups()
 		m.updateWeaponFire()
@@ -137,6 +138,18 @@ func (m *MissionManager) updateGameOptions() {
 	// 按下 d 键，全局展示 / 不展示所有战舰状态
 	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
 		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
+	}
+}
+
+// 更新游戏标识
+func (m *MissionManager) updateGameMarks() {
+	for markType, mark := range m.state.GameMarks {
+		mark.Life--
+
+		// 检查游戏标识，如果生命值为 0，则删除
+		if mark.Life <= 0 {
+			delete(m.state.GameMarks, markType)
+		}
 	}
 }
 

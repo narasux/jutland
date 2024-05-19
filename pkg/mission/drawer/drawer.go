@@ -48,6 +48,7 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	// 用户行为
 	d.drawArrowOnMapWhenHover(screen, misState)
 	d.drawSelectedArea(screen, misState)
+	d.drawMarks(screen, misState)
 	d.drawTips(screen, misState)
 }
 

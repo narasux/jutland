@@ -43,6 +43,8 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 				// 通过 ShipMove 指令实现移动行为
 				instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(shipUid, targetPos)
 			}
+			// 有战舰被选中的情况下，标记目标位置
+			misState.GameMarks[obj.MarkTypeTargetPos] = obj.NewMark(obj.MarkTypeTargetPos, *pos)
 		}
 	}
 

@@ -53,16 +53,18 @@ type MissionState struct {
 
 	// 战舰信息
 	Ships map[string]*object.BattleShip
+	// 被选中的战舰信息（Uid）
+	SelectedShips []string
 	// 被摧毁的战舰
 	DestroyedShips []*object.BattleShip
+	// 战舰尾流
+	ShipTrails []*object.ShipTrail
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*object.Bullet
 	// 已到达预期位置的弹药信息（炮弹 / 鱼雷）
 	ArrivedBullets []*object.Bullet
-	// 被选中的战舰信息（Uid）
-	SelectedShips []string
-	// 战舰尾流
-	ShipTrails []*object.ShipTrail
+	// 游戏标识
+	GameMarks map[object.MarkType]*object.Mark
 }
 
 // NewMissionState ...
@@ -94,8 +96,11 @@ func NewMissionState(mission md.Mission) *MissionState {
 			FriendlyFire: false,
 		},
 		Ships:             ships,
+		SelectedShips:     []string{},
+		DestroyedShips:    []*object.BattleShip{},
+		ShipTrails:        []*object.ShipTrail{},
 		ForwardingBullets: []*object.Bullet{},
 		ArrivedBullets:    []*object.Bullet{},
-		SelectedShips:     []string{},
+		GameMarks:         map[object.MarkType]*object.Mark{},
 	}
 }

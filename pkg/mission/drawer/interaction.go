@@ -4,6 +4,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/colorx"
@@ -52,4 +53,16 @@ func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) 
 	x2, y2 := float32(max(area.StartX, area.CurX)), float32(max(area.StartY, area.CurY))
 
 	vector.StrokeRect(screen, x1, y1, x2-x1, y2-y1, 2, colorx.White, false)
+}
+
+// 绘制标识
+func (d *Drawer) drawMarks(screen *ebiten.Image, ms *state.MissionState) {
+	for _, mark := range ms.GameMarks {
+		opts := d.genDefaultDrawImageOptions()
+		opts.GeoM.Translate(
+			(mark.Pos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(mark.Img.Bounds().Dx()/2),
+			(mark.Pos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(mark.Img.Bounds().Dy()/2),
+		)
+		screen.DrawImage(mark.Img, opts)
+	}
 }
