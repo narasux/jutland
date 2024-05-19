@@ -23,6 +23,9 @@ var (
 	TorpedoEnableImg *ebiten.Image
 	// TorpedoDisableImg 鱼雷禁用图片
 	TorpedoDisableImg *ebiten.Image
+
+	// ShipSelectedImg 选中战舰标志图片
+	ShipSelectedImg *ebiten.Image
 )
 
 func init() {
@@ -30,35 +33,41 @@ func init() {
 
 	log.Println("loading texture image resources...")
 
-	imgPath := "/textures/arrow_white.png"
+	imgPath := "/textures/flag/arrow_white.png"
 	if ArrowWhiteImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	imgPath = "/textures/select_box_white.png"
+	imgPath = "/textures/flag/select_box_white.png"
 	if SelectBoxWhiteImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	// 加载火炮启停用图标
-	imgPath = "/textures/gun_enable.png"
+	imgPath = "/textures/flag/gun_enable.png"
 	if GunEnableImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	imgPath = "/textures/gun_disable.png"
+	imgPath = "/textures/flag/gun_disable.png"
 	if GunDisableImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	// 加载鱼雷启停用图标
-	imgPath = "/textures/torpedo_enable.png"
+	imgPath = "/textures/flag/torpedo_enable.png"
 	if TorpedoEnableImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	imgPath = "/textures/torpedo_disable.png"
+	imgPath = "/textures/flag/torpedo_disable.png"
 	if TorpedoDisableImg, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	// 加载选中战舰标志
+	imgPath = "/textures/flag/ship_selected.png"
+	if ShipSelectedImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

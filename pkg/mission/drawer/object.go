@@ -95,11 +95,16 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			opts.GeoM.Translate(0, 25)
 			screen.DrawImage(torpedoImg, opts)
 
+			if isShipSelected {
+				opts.GeoM.Translate(-55, 5)
+				screen.DrawImage(texture.ShipSelectedImg, opts)
+			}
+
 			// 如果被编组，需要标记出来
 			if ship.GroupID != obj.GroupIDNone {
 				textStr, fontSize := strconv.Itoa(int(ship.GroupID)), float64(30)
-				posX := (ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 25
-				posY := (ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 85
+				posX := (ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 30
+				posY := (ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 90
 				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 			}
 		}

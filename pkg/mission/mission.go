@@ -53,16 +53,19 @@ func (m *MissionManager) Draw(screen *ebiten.Image) {
 }
 
 func (m *MissionManager) Update() (state.MissionStatus, error) {
-	m.updateInstructions()
-	m.executeInstructions()
-	m.updateCameraPosition()
-	m.updateGameOptions()
-	m.updateSelectedShips()
-	m.updateShipGroups()
-	m.updateWeaponFire()
-	m.updateShipTrails()
-	m.updateShotBullets()
-	m.updateMissionShips()
+	// 如果是暂停，不要继续刷新
+	if m.state.MissionStatus == state.MissionRunning {
+		m.updateInstructions()
+		m.executeInstructions()
+		m.updateCameraPosition()
+		m.updateGameOptions()
+		m.updateSelectedShips()
+		m.updateShipGroups()
+		m.updateWeaponFire()
+		m.updateShipTrails()
+		m.updateShotBullets()
+		m.updateMissionShips()
+	}
 	m.updateMissionStatus()
 
 	return m.state.MissionStatus, nil
