@@ -45,7 +45,7 @@ func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.Mission
 // 绘制选择框
 func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) {
 	area := action.DetectCursorSelectArea(ms)
-	if area == nil || !area.Selecting {
+	if area == nil || !ms.IsAreaSelecting {
 		return
 	}
 	x1, y1 := float32(min(area.StartX, area.CurX)), float32(min(area.StartY, area.CurY))

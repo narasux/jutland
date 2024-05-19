@@ -311,7 +311,6 @@ type Weapon struct {
 
 // BattleShip 战舰
 type BattleShip struct {
-	// 固定参数
 	// 名称
 	Name ShipName
 	// 类别
@@ -332,7 +331,6 @@ type BattleShip struct {
 	// 武器
 	Weapon Weapon
 
-	// 动态参数
 	// 唯一标识
 	Uid string
 	// 当前生命值
@@ -343,6 +341,8 @@ type BattleShip struct {
 	CurRotation float64
 	// 当前速度
 	CurSpeed float64
+	// 分组ID
+	GroupID GroupID
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player

@@ -43,15 +43,10 @@ type SelectedArea struct {
 	StartAt, CurAt obj.MapPos
 	// 屏幕位置
 	StartX, StartY, CurX, CurY int
-	// 是否正在选中
-	Selecting bool
 }
 
 // Contain 判断某个位置是否在选中区域内
 func (a *SelectedArea) Contain(pos obj.MapPos) bool {
-	if !a.Selecting {
-		return false
-	}
 	topLeftX, topLeftY := min(a.StartAt.RX, a.CurAt.RX), min(a.StartAt.RY, a.CurAt.RY)
 	bottomRightX, bottomRightY := max(a.StartAt.RX, a.CurAt.RX), max(a.StartAt.RY, a.CurAt.RY)
 

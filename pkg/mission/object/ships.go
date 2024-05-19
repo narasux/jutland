@@ -30,6 +30,8 @@ func NewShip(name ShipName, pos MapPos, rotation float64, player faction.Player)
 	s.CurPos = pos
 	s.CurRotation = rotation
 	s.BelongPlayer = player
+	// 战舰默认不编组
+	s.GroupID = GroupIDNone
 	return &s
 }
 

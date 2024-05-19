@@ -46,6 +46,11 @@ type MissionState struct {
 	// 游戏选项
 	GameOpts GameOptions
 
+	// 是否正在选择区域
+	IsAreaSelecting bool
+	// 是否正在编组
+	IsGrouping bool
+
 	// 战舰信息
 	Ships map[string]*object.BattleShip
 	// 被摧毁的战舰

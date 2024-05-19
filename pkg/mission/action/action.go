@@ -71,17 +71,17 @@ var sArea = SelectedArea{}
 func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 	// 左键没有被压下，直接跳过
 	if !ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
-		sArea.Selecting = false
+		misState.IsAreaSelecting = false
 		return nil
 	}
-	if !sArea.Selecting {
+	if !misState.IsAreaSelecting {
 		sx, sy := ebiten.CursorPosition()
 		sArea.StartX, sArea.StartY = sx, sy
 		sArea.StartAt.AssignRxy(
 			float64(sx)/constants.MapBlockSize+float64(misState.Camera.Pos.MX),
 			float64(sy)/constants.MapBlockSize+float64(misState.Camera.Pos.MY),
 		)
-		sArea.Selecting = true
+		misState.IsAreaSelecting = true
 	}
 	sx, sy := ebiten.CursorPosition()
 	sArea.CurX, sArea.CurY = sx, sy
@@ -107,4 +107,38 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 // 探测键盘按键被压下
 func DetectKeyboardKeyJustPressed(key ebiten.Key) bool {
 	return inpututil.IsKeyJustPressed(key)
+}
+
+// 探测键盘按键被释放
+func DetectKeyboardKeyJustReleased(key ebiten.Key) bool {
+	return inpututil.IsKeyJustReleased(key)
+}
+
+// 键盘按键与组 ID 的映射关系
+type KeyGroupIDMapping struct {
+	Key     ebiten.Key
+	GroupID obj.GroupID
+}
+
+var keyGroupIDMappings = []KeyGroupIDMapping{
+	{Key: ebiten.KeyDigit1, GroupID: obj.GroupID1},
+	{Key: ebiten.KeyDigit2, GroupID: obj.GroupID2},
+	{Key: ebiten.KeyDigit3, GroupID: obj.GroupID3},
+	{Key: ebiten.KeyDigit4, GroupID: obj.GroupID4},
+	{Key: ebiten.KeyDigit5, GroupID: obj.GroupID5},
+	{Key: ebiten.KeyDigit6, GroupID: obj.GroupID6},
+	{Key: ebiten.KeyDigit7, GroupID: obj.GroupID7},
+	{Key: ebiten.KeyDigit8, GroupID: obj.GroupID8},
+	{Key: ebiten.KeyDigit9, GroupID: obj.GroupID9},
+	{Key: ebiten.KeyDigit0, GroupID: obj.GroupID0},
+}
+
+// GetGroupIDByPressedKey 探测按键对应的组 ID
+func GetGroupIDByPressedKey() obj.GroupID {
+	for _, mapping := range keyGroupIDMappings {
+		if inpututil.IsKeyJustPressed(mapping.Key) {
+			return mapping.GroupID
+		}
+	}
+	return obj.GroupIDNone
 }

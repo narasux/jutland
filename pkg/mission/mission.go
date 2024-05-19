@@ -58,6 +58,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	m.updateCameraPosition()
 	m.updateGameOptions()
 	m.updateSelectedShips()
+	m.updateShipGroups()
 	m.updateWeaponFire()
 	m.updateShipTrails()
 	m.updateShotBullets()
@@ -147,13 +148,56 @@ func (m *MissionManager) updateSelectedShips() {
 				m.state.SelectedShips = append(m.state.SelectedShips, ship.Uid)
 			}
 		}
-		return
 	}
+	// 正在分组中，不可用
+	if !m.state.IsGrouping {
+		// 通过分组选中战舰
+		groupID := action.GetGroupIDByPressedKey()
+		if groupID != obj.GroupIDNone {
+			shipInGroup := lo.Filter(lo.Values(m.state.Ships), func(ship *obj.BattleShip, _ int) bool {
+				return ship.BelongPlayer == m.state.CurPlayer && ship.GroupID == groupID
+			})
+			m.state.SelectedShips = lo.Map(shipInGroup, func(ship *obj.BattleShip, _ int) string {
+				return ship.Uid
+			})
+		}
+	}
+
 	// 检查选中的战舰，如果已经被摧毁，则要去掉
 	m.state.SelectedShips = lo.Filter(m.state.SelectedShips, func(uid string, _ int) bool {
 		ship, ok := m.state.Ships[uid]
 		return ok && ship != nil && ship.CurHP > 0
 	})
+}
+
+// 更新舰队编组状态（左 Ctrl + 0-9 编组）
+func (m *MissionManager) updateShipGroups() {
+	// 按下左边的 ctrl 键：进入 / 退出编组模式
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyControlLeft) {
+		m.state.IsGrouping = !m.state.IsGrouping
+	}
+	// 设置编组后，如果松开 ctrl，则退出编组模式
+	if action.DetectKeyboardKeyJustReleased(ebiten.KeyControlLeft) {
+		m.state.IsGrouping = false
+	}
+	// 没有在编组模式，直接返回
+	if !m.state.IsGrouping {
+		return
+	}
+	groupID := action.GetGroupIDByPressedKey()
+	// 没有设置合法的编组
+	if groupID == obj.GroupIDNone {
+		return
+	}
+	// 重新编组，只有当前选中的拥有这个编组
+	for _, ship := range m.state.Ships {
+		if ship.GroupID == groupID {
+			ship.GroupID = obj.GroupIDNone
+		}
+	}
+	for _, shipUid := range m.state.SelectedShips {
+		m.state.Ships[shipUid].GroupID = groupID
+	}
 }
 
 // 更新武器开火相关状态

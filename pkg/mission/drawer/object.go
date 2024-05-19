@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image/color"
 	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -13,6 +14,8 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/colorx"
+	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
@@ -74,10 +77,16 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		isShipSelected := slices.Contains(ms.SelectedShips, ship.Uid)
 		if (ms.GameOpts.ForceDisplayState || isShipSelected) && ship.BelongPlayer == ms.CurPlayer {
 			opts = d.genDefaultDrawImageOptions()
+
+			// 绘制当前生命值
 			opts.GeoM.Translate(
-				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-25,
+				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize,
 				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-85,
 			)
+			hpImg := texture.GetHpImg(ship.CurHP, ship.TotalHP)
+			screen.DrawImage(hpImg, opts)
+
+			opts.GeoM.Translate(20, 0)
 			// 绘制武器状态
 			gunImg := lo.Ternary(ship.Weapon.GunDisabled, texture.GunDisableImg, texture.GunEnableImg)
 			screen.DrawImage(gunImg, opts)
@@ -86,10 +95,13 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			opts.GeoM.Translate(0, 25)
 			screen.DrawImage(torpedoImg, opts)
 
-			// 绘制当前生命值
-			opts.GeoM.Translate(40, -22)
-			hpImg := texture.GetHpImg(ship.CurHP, ship.TotalHP)
-			screen.DrawImage(hpImg, opts)
+			// 如果被编组，需要标记出来
+			if ship.GroupID != obj.GroupIDNone {
+				textStr, fontSize := strconv.Itoa(int(ship.GroupID)), float64(30)
+				posX := (ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 25
+				posY := (ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 85
+				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
+			}
 		}
 
 		// 如果全局启用状态展示，则敌方战舰也要绘制 HP 值
