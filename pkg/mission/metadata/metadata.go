@@ -32,14 +32,11 @@ var missionMetadata = map[Mission]MissionMetadata{
 		MapCfg:        mapcfg.GetByName(mapcfg.MapDefault),
 		MaxShipCount:  5,
 		InitShips: []InitShipMetadata{
-			// 第一舰队
+			// 己方舰队
 			{obj.ShipDefault, obj.NewMapPos(40, 33), 90, faction.HumanAlpha},
 			{obj.ShipDefault, obj.NewMapPos(42, 35), 90, faction.HumanAlpha},
-			{obj.ShipDefault, obj.NewMapPos(40, 37), 90, faction.HumanAlpha},
-			// 第二舰队
 			{obj.ShipDefault, obj.NewMapPos(40, 48), 90, faction.HumanAlpha},
 			{obj.ShipDefault, obj.NewMapPos(42, 50), 90, faction.HumanAlpha},
-			{obj.ShipDefault, obj.NewMapPos(40, 52), 90, faction.HumanAlpha},
 			// 敌人舰队
 			{obj.ShipDefault, obj.NewMapPos(70, 35), 90, faction.ComputerAlpha},
 			{obj.ShipDefault, obj.NewMapPos(65, 42), 215, faction.ComputerAlpha},
