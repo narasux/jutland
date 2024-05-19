@@ -21,7 +21,7 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 	w, h := misLayout.Camera.Width, misLayout.Camera.Height
 
 	// Hover 上侧
-	if 0 < y && y < h/15 {
+	if y < h/40 {
 		// Hover 左侧 3/10
 		if 0 < x && x < w/10*3 {
 			return HoverScreenTopLeft
@@ -31,33 +31,29 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 			return HoverScreenTopRight
 		}
 		// Hover 中间 4/10
-		if w/10*3 < x && x < w/10*7 {
-			return HoverScreenTop
-		}
+		return HoverScreenTop
 	}
 
 	// Hover 下侧
-	if h/15*14 < y && y < h {
+	if h/40*39 < y {
 		// Hover 左侧 3/10
-		if 0 < x && x < w/10*3 {
+		if x < w/10*3 {
 			return HoverScreenBottomLeft
 		}
 		// Hover 右侧 3/10
-		if w/10*7 < x && x < w {
+		if w/10*7 < x {
 			return HoverScreenBottomRight
 		}
 		// Hover 中间 4/10
-		if w/10*4 < x && x < w/10*6 {
-			return HoverScreenBottom
-		}
+		return HoverScreenBottom
 	}
 
 	// Hover 左侧
-	if 0 < x && x < w/20 {
+	if x < w/50 {
 		return HoverScreenLeft
 	}
 	// Hover 右侧
-	if w/20*19 < x && x < w {
+	if w/50*49 < x && x < w {
 		return HoverScreenRight
 	}
 
