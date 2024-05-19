@@ -7,8 +7,8 @@ import (
 	"slices"
 	"time"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
-	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -218,7 +218,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 
 	curPos, targetPos := ship.CurPos.Copy(), enemy.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
-	gunOffset := g.PosPercent * ship.Length / mapblock.BlockSize
+	gunOffset := g.PosPercent * ship.Length / constants.MapBlockSize
 	curPos.AddRx(math.Sin(ship.CurRotation*math.Pi/180) * gunOffset)
 	curPos.SubRy(math.Cos(ship.CurRotation*math.Pi/180) * gunOffset)
 	// FIXME 其实还要考虑提前量（依赖敌舰速度，角度）
@@ -232,7 +232,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
 	rangePercent := distance / g.Range
 	// 炮弹散布的半径
-	radius := float64(g.BulletSpread) / mapblock.BlockSize * rangePercent
+	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
 	for i := 0; i < g.BulletCount; i++ {
 		pos := targetPos.Copy()

@@ -10,9 +10,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
@@ -34,8 +34,8 @@ func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
-		cx := (trail.Pos.RX - float64(ms.Camera.Pos.MX)) * mapblock.BlockSize
-		cy := (trail.Pos.RY - float64(ms.Camera.Pos.MY)) * mapblock.BlockSize
+		cx := (trail.Pos.RX - float64(ms.Camera.Pos.MX)) * constants.MapBlockSize
+		cy := (trail.Pos.RY - float64(ms.Camera.Pos.MY)) * constants.MapBlockSize
 		clr := color.NRGBA{255, 255, 255, uint8(trail.Life)}
 		vector.DrawFilledCircle(screen, float32(cx), float32(cy), float32(trail.Size), clr, false)
 	}
@@ -65,8 +65,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, shipImg, ship.CurRotation)
 		opts.GeoM.Translate(
-			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(shipImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(shipImg.Bounds().Dy()/2),
+			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(shipImg, opts)
 
@@ -75,8 +75,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		if (ms.GameOpts.ForceDisplayState || isShipSelected) && ship.BelongPlayer == ms.CurPlayer {
 			opts = d.genDefaultDrawImageOptions()
 			opts.GeoM.Translate(
-				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-25,
-				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-85,
+				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-25,
+				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-85,
 			)
 			// 绘制武器状态
 			gunImg := lo.Ternary(ship.Weapon.GunDisabled, texture.GunDisableImg, texture.GunEnableImg)
@@ -96,8 +96,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		if ms.GameOpts.ForceDisplayState && ship.BelongPlayer != ms.CurPlayer {
 			opts = d.genDefaultDrawImageOptions()
 			opts.GeoM.Translate(
-				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-25,
-				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-30,
+				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-25,
+				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-30,
 			)
 			hpImg := texture.GetEnemyHpImg(ship.CurHP, ship.TotalHP)
 			screen.DrawImage(hpImg, opts)
@@ -119,8 +119,8 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, shipImg, ship.CurRotation)
 		opts.GeoM.Translate(
-			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(shipImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(shipImg.Bounds().Dy()/2),
+			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(shipImg, opts)
 
@@ -128,8 +128,8 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 		explodeImg := texture.GetExplodeImg(ship.CurHP)
 		opts = d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(
-			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(explodeImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(explodeImg.Bounds().Dy()/2)-50,
+			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-50,
 		)
 		screen.DrawImage(explodeImg, opts)
 	}
@@ -143,8 +143,8 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, img, bullet.Rotation)
 		opts.GeoM.Translate(
-			(bullet.CurPos.RX-float64(ms.Camera.Pos.MX))*mapblock.BlockSize-float64(img.Bounds().Dx()/2),
-			(bullet.CurPos.RY-float64(ms.Camera.Pos.MY))*mapblock.BlockSize-float64(img.Bounds().Dy()/2),
+			(bullet.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
+			(bullet.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
 		)
 		screen.DrawImage(img, opts)
 	}

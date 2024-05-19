@@ -5,10 +5,10 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
 // 探测游戏地图上的鼠标悬停动作
@@ -78,16 +78,16 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 		sx, sy := ebiten.CursorPosition()
 		sArea.StartX, sArea.StartY = sx, sy
 		sArea.StartAt.AssignRxy(
-			float64(sx)/mapblock.BlockSize+float64(misState.Camera.Pos.MX),
-			float64(sy)/mapblock.BlockSize+float64(misState.Camera.Pos.MY),
+			float64(sx)/constants.MapBlockSize+float64(misState.Camera.Pos.MX),
+			float64(sy)/constants.MapBlockSize+float64(misState.Camera.Pos.MY),
 		)
 		sArea.Selecting = true
 	}
 	sx, sy := ebiten.CursorPosition()
 	sArea.CurX, sArea.CurY = sx, sy
 	sArea.CurAt.AssignRxy(
-		float64(sx)/mapblock.BlockSize+float64(misState.Camera.Pos.MX),
-		float64(sy)/mapblock.BlockSize+float64(misState.Camera.Pos.MY),
+		float64(sx)/constants.MapBlockSize+float64(misState.Camera.Pos.MX),
+		float64(sy)/constants.MapBlockSize+float64(misState.Camera.Pos.MY),
 	)
 	return &sArea
 }
@@ -99,8 +99,8 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 		return nil
 	}
 	sx, sy := ebiten.CursorPosition()
-	mx := misState.Camera.Pos.MX + int(float64(sx)/mapblock.BlockSize)
-	my := misState.Camera.Pos.MY + int(float64(sy)/mapblock.BlockSize)
+	mx := misState.Camera.Pos.MX + int(float64(sx)/constants.MapBlockSize)
+	my := misState.Camera.Pos.MY + int(float64(sy)/constants.MapBlockSize)
 	return lo.ToPtr(obj.NewMapPos(mx, my))
 }
 

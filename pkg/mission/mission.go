@@ -1,9 +1,6 @@
 package mission
 
 import (
-	"github.com/narasux/jutland/pkg/resources/images/mapblock"
-	"github.com/narasux/jutland/pkg/resources/images/texture"
-	"github.com/narasux/jutland/pkg/utils/geometry"
 	"log"
 	"slices"
 
@@ -11,6 +8,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
@@ -22,6 +20,8 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
+	"github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 // MissionManager 任务管理器
@@ -240,7 +240,7 @@ func (m *MissionManager) updateShotBullets() {
 			// 判定命中，扣除战舰生命值，标记命中战舰
 			if geometry.IsPointInRotatedRectangle(
 				bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY,
-				ship.Length/mapblock.BlockSize, ship.Width/mapblock.BlockSize,
+				ship.Length/constants.MapBlockSize, ship.Width/constants.MapBlockSize,
 				ship.CurRotation,
 			) {
 				ship.Hurt(bt.Damage)

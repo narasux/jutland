@@ -1,11 +1,11 @@
 package state
 
 import (
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/object"
-	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
 // Camera 相机（当前视野）
@@ -78,12 +78,13 @@ func NewMissionState(mission md.Mission) *MissionState {
 		Camera: Camera{
 			Pos: missionMD.InitCameraPos,
 			// 地图资源，多展示一行 & 列，避免出现黑边
-			Width:  misLayout.Camera.Width/mapblock.BlockSize + 1,
-			Height: misLayout.Camera.Height/mapblock.BlockSize + 1,
+			Width:  misLayout.Camera.Width/constants.MapBlockSize + 1,
+			Height: misLayout.Camera.Height/constants.MapBlockSize + 1,
 		},
 		CurPlayer: faction.HumanAlpha,
 		GameOpts: GameOptions{
-			ForceDisplayState: false,
+			// 默认展示游戏单位的状态
+			ForceDisplayState: true,
 			// TODO 后续允许设置开启友军伤害，游戏性 up！
 			FriendlyFire: false,
 		},

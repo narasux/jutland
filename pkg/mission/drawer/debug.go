@@ -5,8 +5,8 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
@@ -16,7 +16,7 @@ func (d *Drawer) drawDebugIndex(screen *ebiten.Image, ms *state.MissionState) {
 		for y := 0; y < ms.Camera.Height; y++ {
 			mapX, mapY := ms.Camera.Pos.MX+x, ms.Camera.Pos.MY+y
 			ebutil.DebugPrintAt(
-				screen, fmt.Sprintf("\n(%d,%d)", mapX, mapY), x*mapblock.BlockSize, y*mapblock.BlockSize,
+				screen, fmt.Sprintf("\n(%d,%d)", mapX, mapY), x*constants.MapBlockSize, y*constants.MapBlockSize,
 			)
 		}
 	}

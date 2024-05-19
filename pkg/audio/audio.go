@@ -4,17 +4,15 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2/audio"
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/common/types"
 )
 
-// 音频采样率
-const sampleRate = 48000
-
-var Context = audio.NewContext(sampleRate)
+var Context = audio.NewContext(constants.AudioSampleRate)
 
 // PlayAudioToEnd 音频播放（一次性使用，可并发，播放到完成，只能用于短音频）
 func PlayAudioToEnd(ads types.AudioStream) {
-	if ads.Length() > sampleRate*30 {
+	if ads.Length() > constants.AudioSampleRate*30 {
 		log.Fatalf("audio too long for PlayAudioToEnd: %d", ads.Length())
 	}
 	go func() {
