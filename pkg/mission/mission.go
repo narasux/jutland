@@ -248,7 +248,7 @@ func (m *MissionManager) updateShipTrails() {
 		if ship.CurSpeed > 0 {
 			// TODO 考虑下这里的 size 要不要是战舰图片的 size ？好像不是很有必要？
 			// TODO 尾流的 Life 应该和速度相关，是否和战舰类型相关？
-			m.state.ShipTrails = append(m.state.ShipTrails, obj.NewShipTrail(ship.CurPos, ship.CurRotation, 20, 60))
+			m.state.ShipTrails = append(m.state.ShipTrails, obj.NewShipTrail(ship.CurPos, ship.Width/2, 60))
 		}
 	}
 }

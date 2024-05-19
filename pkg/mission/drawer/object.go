@@ -1,7 +1,6 @@
 package drawer
 
 import (
-	"fmt"
 	"image/color"
 	"slices"
 	"strconv"
@@ -53,12 +52,6 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	})
 
 	for _, ship := range ships {
-		ebutil.DebugPrint(screen,
-			fmt.Sprintf("\n\nship.MX: %d, ship.MY: %d, ship.RX: %f, ship.RY: %f\nspeed: %f, rotation: %f",
-				ship.CurPos.MX, ship.CurPos.MY,
-				ship.CurPos.RX, ship.CurPos.RY,
-				ship.CurSpeed, ship.CurRotation,
-			))
 		// 只有在屏幕中的才渲染
 		if !ms.Camera.Contains(ship.CurPos) {
 			continue
