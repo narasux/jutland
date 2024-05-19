@@ -74,7 +74,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			// 绘制当前生命值
 			opts.GeoM.Translate(
 				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize,
-				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-85,
+				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-80,
 			)
 			hpImg := texture.GetHpImg(ship.CurHP, ship.TotalHP)
 			screen.DrawImage(hpImg, opts)
@@ -97,7 +97,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			if ship.GroupID != obj.GroupIDNone {
 				textStr, fontSize := strconv.Itoa(int(ship.GroupID)), float64(30)
 				posX := (ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 30
-				posY := (ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 90
+				posY := (ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 85
 				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 			}
 		}
@@ -139,7 +139,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 		opts = d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(
 			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-50,
+			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-30,
 		)
 		screen.DrawImage(explodeImg, opts)
 	}

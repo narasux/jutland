@@ -243,8 +243,8 @@ var shipDefault = &BattleShip{
 	DamageReduction: 0.5,
 	MaxSpeed:        0.1,
 	RotateSpeed:     2,
-	Length:          370,
-	Width:           38,
+	Length:          220,
+	Width:           22,
 	Weapon: Weapon{
 		Guns: []*Gun{
 			newGun(GunMK45, 0.3),
