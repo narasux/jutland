@@ -33,7 +33,7 @@ func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 
 // 绘制游戏标题
 func (d *Drawer) drawGameTitle(screen *ebiten.Image) {
-	textStr := "怒 海 争 锋"
+	textStr := "怒 海 激 战"
 	fontSize := float64(128)
 	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
