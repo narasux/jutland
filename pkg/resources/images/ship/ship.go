@@ -8,9 +8,7 @@ import (
 	"github.com/narasux/jutland/pkg/loader"
 )
 
-var (
-	ShipDefaultZeroImg *ebiten.Image
-)
+var ShipDefaultZeroImg *ebiten.Image
 
 func init() {
 	var err error
@@ -20,7 +18,6 @@ func init() {
 	imgPath := "/ships/default/default_0.png"
 	if ShipDefaultZeroImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
-
 	}
 
 	log.Println("ship image resources loaded")

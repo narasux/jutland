@@ -25,6 +25,11 @@ tidy:
 build: tidy
 	go build -ldflags ${LDFLAGS} -o jutland ./main.go
 
+# format code style
+fmt:
+	golines ./ -m 120 -w --base-formatter gofmt --no-reformat-tags
+	gofumpt -l -w .
+
 # run unittest
 test: tidy
 	go test ./...

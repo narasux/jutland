@@ -136,7 +136,7 @@ func (g *Game) init() {
 				FontSize: fontSize,
 				Font:     font.Hang,
 				Color:    colorx.White,
-				//Mode:     GameModeCollection,
+				// Mode:     GameModeCollection,
 				// TODO 临时调试
 				Mode: GameModeMissionSuccess,
 			},
@@ -145,7 +145,7 @@ func (g *Game) init() {
 				FontSize: fontSize,
 				Font:     font.Hang,
 				Color:    colorx.White,
-				//Mode:     GameModeGameSetting,
+				// Mode:     GameModeGameSetting,
 				// TODO 临时调试
 				Mode: GameModeMissionFailed,
 			},

@@ -2,8 +2,9 @@ package computer
 
 import (
 	"fmt"
-	obj "github.com/narasux/jutland/pkg/mission/object"
 	"math/rand"
+
+	obj "github.com/narasux/jutland/pkg/mission/object"
 
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"

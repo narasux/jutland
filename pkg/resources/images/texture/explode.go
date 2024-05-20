@@ -12,9 +12,7 @@ import (
 // MaxExplodeState 最大爆炸图片状态
 const MaxExplodeState = 60
 
-var (
-	explodeImgMap = map[int]*ebiten.Image{}
-)
+var explodeImgMap = map[int]*ebiten.Image{}
 
 func init() {
 	var err error
