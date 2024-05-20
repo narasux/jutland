@@ -13,6 +13,7 @@ import (
 	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/background"
+	"github.com/narasux/jutland/pkg/version"
 )
 
 type Game struct {
@@ -109,7 +110,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		log.Printf("unknown game mode: %d", g.mode)
 	}
 
-	ebitenutil.DebugPrint(screen, fmt.Sprintf("FPS: %0.2f", ebiten.ActualFPS()))
+	ebitenutil.DebugPrint(screen, fmt.Sprintf("VER %s FPS %0.2f", version.Version, ebiten.ActualFPS()))
 }
 
 // Layout 核心方法，用于设置窗口大小（全屏模式下无意义）

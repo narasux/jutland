@@ -99,9 +99,9 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 		return nil
 	}
 	sx, sy := ebiten.CursorPosition()
-	mx := misState.Camera.Pos.MX + int(float64(sx)/constants.MapBlockSize)
-	my := misState.Camera.Pos.MY + int(float64(sy)/constants.MapBlockSize)
-	return lo.ToPtr(obj.NewMapPos(mx, my))
+	rx := float64(misState.Camera.Pos.MX) + float64(sx)/constants.MapBlockSize
+	ry := float64(misState.Camera.Pos.MY) + float64(sy)/constants.MapBlockSize
+	return lo.ToPtr(obj.NewMapPosR(rx, ry))
 }
 
 // 探测键盘按键被压下

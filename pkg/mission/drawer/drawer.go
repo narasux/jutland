@@ -36,7 +36,6 @@ func NewDrawer(mission md.Mission) *Drawer {
 func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	// 相机视野
 	d.drawCameraViewRealTimeRender(screen, misState)
-	d.drawDebugIndex(screen, misState)
 	// 地图元素
 	d.drawBuildings(screen, misState)
 	d.drawShipTrails(screen, misState)

@@ -5,19 +5,19 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
-	"github.com/narasux/jutland/pkg/mission/object"
+	obj "github.com/narasux/jutland/pkg/mission/object"
 )
 
 // Camera 相机（当前视野）
 type Camera struct {
 	// 相机左上角位置
-	Pos    object.MapPos
+	Pos    obj.MapPos
 	Width  int
 	Height int
 }
 
 // Contains 判断坐标是否在视野内
-func (c *Camera) Contains(pos object.MapPos) bool {
+func (c *Camera) Contains(pos obj.MapPos) bool {
 	return !(pos.MX < c.Pos.MX || pos.MX > c.Pos.MX+c.Width || pos.MY < c.Pos.MY || pos.MY > c.Pos.MY+c.Height)
 }
 
@@ -52,19 +52,21 @@ type MissionState struct {
 	IsGrouping bool
 
 	// 战舰信息
-	Ships map[string]*object.BattleShip
+	Ships map[string]*obj.BattleShip
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
+	// 当前被选中的编组
+	SelectedGroupID obj.GroupID
 	// 被摧毁的战舰
-	DestroyedShips []*object.BattleShip
+	DestroyedShips []*obj.BattleShip
 	// 战舰尾流
-	ShipTrails []*object.ShipTrail
+	ShipTrails []*obj.ShipTrail
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
-	ForwardingBullets []*object.Bullet
+	ForwardingBullets []*obj.Bullet
 	// 已到达预期位置的弹药信息（炮弹 / 鱼雷）
-	ArrivedBullets []*object.Bullet
+	ArrivedBullets []*obj.Bullet
 	// 游戏标识
-	GameMarks map[object.MarkType]*object.Mark
+	GameMarks map[obj.MarkType]*obj.Mark
 }
 
 // NewMissionState ...
@@ -72,9 +74,9 @@ func NewMissionState(mission md.Mission) *MissionState {
 	missionMD := md.Get(mission)
 	misLayout := layout.NewScreenLayout()
 	// 初始化战舰
-	ships := map[string]*object.BattleShip{}
+	ships := map[string]*obj.BattleShip{}
 	for _, shipMD := range missionMD.InitShips {
-		ship := object.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotation, shipMD.BelongPlayer)
+		ship := obj.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotation, shipMD.BelongPlayer)
 		ships[ship.Uid] = ship
 	}
 	return &MissionState{
@@ -95,12 +97,15 @@ func NewMissionState(mission md.Mission) *MissionState {
 			// TODO 后续允许设置开启友军伤害，游戏性 up！
 			FriendlyFire: false,
 		},
+		IsAreaSelecting:   false,
+		IsGrouping:        false,
 		Ships:             ships,
 		SelectedShips:     []string{},
-		DestroyedShips:    []*object.BattleShip{},
-		ShipTrails:        []*object.ShipTrail{},
-		ForwardingBullets: []*object.Bullet{},
-		ArrivedBullets:    []*object.Bullet{},
-		GameMarks:         map[object.MarkType]*object.Mark{},
+		SelectedGroupID:   obj.GroupIDNone,
+		DestroyedShips:    []*obj.BattleShip{},
+		ShipTrails:        []*obj.ShipTrail{},
+		ForwardingBullets: []*obj.Bullet{},
+		ArrivedBullets:    []*obj.Bullet{},
+		GameMarks:         map[obj.MarkType]*obj.Mark{},
 	}
 }

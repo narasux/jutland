@@ -15,9 +15,14 @@ type MapPos struct {
 	RX, RY float64
 }
 
-// NewMapPos ...
+// NewMapPos 使用 MX，MY 新建 MapPos
 func NewMapPos(mx, my int) MapPos {
 	return MapPos{MX: mx, MY: my, RX: float64(mx), RY: float64(my)}
+}
+
+// NewMapPosR 使用 RX，RY 新建 MapPos
+func NewMapPosR(rx, ry float64) MapPos {
+	return MapPos{MX: int(math.Floor(rx)), MY: int(math.Floor(ry)), RX: rx, RY: ry}
 }
 
 // MEqual 判断位置是否相等（用地图位置判断，RX，RY 太准确一直没法到）
@@ -57,6 +62,8 @@ func (p *MapPos) AddRx(rx float64) {
 func (p *MapPos) SubRx(rx float64) {
 	p.RX -= rx
 	p.MX = int(math.Floor(p.RX))
+	p.MX = max(p.MX, 0)
+	p.RX = max(p.RX, 0)
 }
 
 // AddRy 修改 Ry，同时计算 My
@@ -69,6 +76,36 @@ func (p *MapPos) AddRy(ry float64) {
 func (p *MapPos) SubRy(ry float64) {
 	p.RY -= ry
 	p.MY = int(math.Floor(p.RY))
+	p.MY = max(p.MY, 0)
+	p.RY = max(p.RY, 0)
+}
+
+// AddMx 修改 Rx，同时计算 Mx
+func (p *MapPos) AddMx(mx int) {
+	p.MX += mx
+	p.RX += float64(mx)
+}
+
+// SubMx 修改 Rx，同时计算 Mx
+func (p *MapPos) SubMx(mx int) {
+	p.MX -= mx
+	p.RX -= float64(mx)
+	p.MX = max(p.MX, 0)
+	p.RX = max(p.RX, 0)
+}
+
+// AddMy 修改 Ry，同时计算 My
+func (p *MapPos) AddMy(my int) {
+	p.MY += my
+	p.RY += float64(my)
+}
+
+// SubMy 修改 My，同时计算 Ry
+func (p *MapPos) SubMy(my int) {
+	p.MY -= my
+	p.RY -= float64(my)
+	p.MY = max(p.MY, 0)
+	p.RY = max(p.RY, 0)
 }
 
 // EnsureBorder 边界检查

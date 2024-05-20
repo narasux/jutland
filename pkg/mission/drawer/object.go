@@ -16,7 +16,6 @@ import (
 	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
-	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 // 绘制建筑物
@@ -59,7 +58,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 		shipImg := obj.GetShipImg(ship.Name)
 		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, shipImg, ship.CurRotation)
+		setOptsCenterRotation(opts, shipImg, ship.CurRotation)
 		opts.GeoM.Translate(
 			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
 			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
@@ -127,7 +126,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 
 		shipImg := obj.GetShipImg(ship.Name)
 		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, shipImg, ship.CurRotation)
+		setOptsCenterRotation(opts, shipImg, ship.CurRotation)
 		opts.GeoM.Translate(
 			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
 			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
@@ -151,7 +150,7 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		img := obj.GetBulletImg(bullet.Name)
 
 		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, img, bullet.Rotation)
+		setOptsCenterRotation(opts, img, bullet.Rotation)
 		opts.GeoM.Translate(
 			(bullet.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
 			(bullet.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(img.Bounds().Dy()/2),

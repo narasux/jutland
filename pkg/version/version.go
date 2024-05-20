@@ -7,10 +7,10 @@ import (
 
 var (
 	// Version 版本号
-	Version = ""
+	Version = "main"
 	// GitCommit CommitID
 	GitCommit = ""
-	// BuildTime 二进制构建事件
+	// BuildTime 二进制构建时间
 	BuildTime = ""
 	// GoVersion Go 版本号
 	GoVersion = runtime.Version()

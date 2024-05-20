@@ -176,6 +176,18 @@ func (m *MissionManager) updateSelectedShips() {
 			m.state.SelectedShips = lo.Map(shipInGroup, func(ship *obj.BattleShip, _ int) string {
 				return ship.Uid
 			})
+
+			// 如果当前选中的分组不是当前按键的分组，则更新记录
+			if m.state.SelectedGroupID != groupID {
+				m.state.SelectedGroupID = groupID
+			} else {
+				// 如果当前选中的分组再次被选中，移动相机中心位置到当前分组的第一艘战舰处
+				if len(m.state.SelectedShips) > 0 {
+					m.state.Camera.Pos = m.state.Ships[m.state.SelectedShips[0]].CurPos.Copy()
+					m.state.Camera.Pos.SubMx(m.state.Camera.Width / 2)
+					m.state.Camera.Pos.SubMy(m.state.Camera.Height / 2)
+				}
+			}
 		}
 	}
 
@@ -184,6 +196,10 @@ func (m *MissionManager) updateSelectedShips() {
 		ship, ok := m.state.Ships[uid]
 		return ok && ship != nil && ship.CurHP > 0
 	})
+	// 没有战舰被选中，应该重置 SelectedGroupID
+	if m.state.SelectedGroupID != obj.GroupIDNone && len(m.state.SelectedShips) == 0 {
+		m.state.SelectedGroupID = obj.GroupIDNone
+	}
 }
 
 // 更新舰队编组状态（左 Ctrl + 0-9 编组）
