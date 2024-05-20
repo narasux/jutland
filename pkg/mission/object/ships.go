@@ -1,39 +1,22 @@
 package object
 
 import (
+	"encoding/json"
+	"io"
+	"log"
 	"math"
+	"os"
+	"path/filepath"
 	"slices"
 
 	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/envs"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/utils/geometry"
-)
-
-type ShipName string
-
-const (
-	ShipDefault ShipName = "默认战舰"
-)
-
-type ShipType string
-
-const (
-	// 航空母舰
-	ShipTypeCarrier ShipType = "carrier"
-	// 战列舰
-	ShipTypeBattleship ShipType = "battleship"
-	// 巡洋舰
-	ShipTypeCruiser ShipType = "cruiser"
-	// 驱逐舰
-	ShipTypeDestroyer ShipType = "destroyer"
-	// 护卫舰
-	ShipTypeFrigate ShipType = "frigate"
-	// 潜艇
-	ShipTypeSubmarine ShipType = "submarine"
 )
 
 type WeaponType string
@@ -56,8 +39,20 @@ const (
 	RotateFlagAnticlockwise = -1
 )
 
+type WeaponMetadata struct {
+	Name string
+	// 相对位置
+	// 0.35 -> 从中心往舰首 35% 舰体长度
+	// -0.3 -> 从中心往舰尾 30% 舰体长度
+	PosPercent float64
+}
+
 // Weapon 武器系统
 type Weapon struct {
+	// 火炮元数据
+	GunsMD []WeaponMetadata `json:"guns"`
+	// 鱼雷元数据
+	TorpedoesMD []WeaponMetadata `json:"torpedoes"`
 	// 火炮
 	Guns []*Gun
 	// 鱼雷
@@ -72,24 +67,24 @@ type Weapon struct {
 // BattleShip 战舰
 type BattleShip struct {
 	// 名称
-	Name ShipName
+	Name string `json:"name"`
 	// 类别
-	Type ShipType
+	Type string `json:"type"`
 
 	// 初始生命值
-	TotalHP float64
+	TotalHP float64 `json:"totalHP"`
 	// 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
-	DamageReduction float64
+	DamageReduction float64 `json:"damageReduction"`
 	// 最大速度
-	MaxSpeed float64
+	MaxSpeed float64 `json:"maxSpeed"`
 	// 转向速度（度）
-	RotateSpeed float64
+	RotateSpeed float64 `json:"rotateSpeed"`
 	// 战舰长度
-	Length float64
+	Length float64 `json:"length"`
 	// 战舰宽度
-	Width float64
+	Width float64 `json:"width"`
 	// 武器
-	Weapon Weapon
+	Weapon Weapon `json:"weapon"`
 
 	// 唯一标识
 	Uid string
@@ -212,9 +207,11 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 	return false
 }
 
+var shipMap = map[string]*BattleShip{}
+
 // NewShip 新建战舰
-func NewShip(name ShipName, pos MapPos, rotation float64, player faction.Player) *BattleShip {
-	s := deepcopy.Copy(*ships[name]).(BattleShip)
+func NewShip(name string, pos MapPos, rotation float64, player faction.Player) *BattleShip {
+	s := deepcopy.Copy(*shipMap[name]).(BattleShip)
 	s.Uid = uuid.New().String()
 	s.CurPos = pos
 	s.CurRotation = rotation
@@ -236,41 +233,44 @@ func NewShipTrail(pos MapPos, size float64, life int) *ShipTrail {
 	return &ShipTrail{Pos: pos, Size: size, Life: life}
 }
 
-var shipDefault = &BattleShip{
-	Name:            ShipDefault,
-	Type:            ShipTypeCruiser,
-	TotalHP:         1000,
-	DamageReduction: 0.5,
-	MaxSpeed:        0.1,
-	RotateSpeed:     2,
-	Length:          220,
-	Width:           22,
-	Weapon: Weapon{
-		Guns: []*Gun{
-			newGun(GunMK45, 0.3),
-			newGun(GunMK45, -0.3),
-		},
-		// TODO 鱼雷先欠一下，后面再加
-		Torpedoes:       []*Torpedo{},
-		MaxRange:        20,
-		GunDisabled:     false,
-		TorpedoDisabled: false,
-	},
-	CurHP:       1000,
-	CurPos:      MapPos{MX: 0, MY: 0},
-	CurRotation: 0,
-	CurSpeed:    0,
-}
-
-var ships = map[ShipName]*BattleShip{
-	ShipDefault: shipDefault,
-}
-
-var shipImg = map[ShipName]*ebiten.Image{
-	ShipDefault: ship.ShipDefaultZeroImg,
-}
-
 // GetShipImg 获取战舰图片
-func GetShipImg(name ShipName) *ebiten.Image {
-	return shipImg[name]
+func GetShipImg(name string) *ebiten.Image {
+	// FIXME 应该加载正确的图片，该方法移动到 resources/ship
+	return ship.ShipDefaultZeroImg
+}
+
+func init() {
+	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "ships.json"))
+	if err != nil {
+		log.Fatalf("failed to open ships.json: %s", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var ships []BattleShip
+	if err = json.Unmarshal(bytes, &ships); err != nil {
+		log.Fatalf("failed to unmarshal ships.json: %s", err)
+	}
+
+	for _, s := range ships {
+		for _, gunMD := range s.Weapon.GunsMD {
+			s.Weapon.Guns = append(s.Weapon.Guns, newGun(gunMD.Name, gunMD.PosPercent))
+		}
+		for _, torpedoMD := range s.Weapon.TorpedoesMD {
+			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, newTorpedo(torpedoMD.Name, torpedoMD.PosPercent))
+		}
+		for _, gun := range s.Weapon.Guns {
+			if s.Weapon.MaxRange < gun.Range {
+				s.Weapon.MaxRange = gun.Range
+			}
+		}
+		for _, torpedo := range s.Weapon.Torpedoes {
+			if s.Weapon.MaxRange < torpedo.Range {
+				s.Weapon.MaxRange = torpedo.Range
+			}
+		}
+		s.CurHP = s.TotalHP
+		shipMap[s.Name] = &s
+	}
 }

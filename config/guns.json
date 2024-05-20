@@ -1,0 +1,11 @@
+[
+  {
+    "name": "MK45",
+    "bulletName": "Gb127T1",
+    "bulletCount": 1,
+    "reloadTime": 1,
+    "range": 20,
+    "bulletSpread": 50,
+    "bulletSpeed": 0.5
+  }
+]

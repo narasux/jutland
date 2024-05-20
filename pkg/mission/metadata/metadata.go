@@ -19,12 +19,13 @@ type MissionMetadata struct {
 }
 
 type InitShipMetadata struct {
-	ShipName     obj.ShipName
+	ShipName     string
 	Pos          obj.MapPos
 	Rotation     float64
 	BelongPlayer faction.Player
 }
 
+// TODO: 任务元配置改成从配置文件读取
 var missionMetadata = map[Mission]MissionMetadata{
 	MissionDefault: {
 		Name:          "默认关卡",
@@ -33,14 +34,14 @@ var missionMetadata = map[Mission]MissionMetadata{
 		MaxShipCount:  5,
 		InitShips: []InitShipMetadata{
 			// 己方舰队
-			{obj.ShipDefault, obj.NewMapPos(40, 33), 90, faction.HumanAlpha},
-			{obj.ShipDefault, obj.NewMapPos(42, 35), 90, faction.HumanAlpha},
-			{obj.ShipDefault, obj.NewMapPos(40, 48), 90, faction.HumanAlpha},
-			{obj.ShipDefault, obj.NewMapPos(42, 50), 90, faction.HumanAlpha},
+			{"default", obj.NewMapPos(40, 33), 90, faction.HumanAlpha},
+			{"default", obj.NewMapPos(42, 35), 90, faction.HumanAlpha},
+			{"default", obj.NewMapPos(40, 48), 90, faction.HumanAlpha},
+			{"default", obj.NewMapPos(42, 50), 90, faction.HumanAlpha},
 			// 敌人舰队
-			{obj.ShipDefault, obj.NewMapPos(70, 35), 90, faction.ComputerAlpha},
-			{obj.ShipDefault, obj.NewMapPos(65, 42), 215, faction.ComputerAlpha},
-			{obj.ShipDefault, obj.NewMapPos(70, 50), 270, faction.ComputerAlpha},
+			{"default", obj.NewMapPos(70, 35), 90, faction.ComputerAlpha},
+			{"default", obj.NewMapPos(65, 42), 215, faction.ComputerAlpha},
+			{"default", obj.NewMapPos(70, 50), 270, faction.ComputerAlpha},
 		},
 	},
 }

@@ -3,23 +3,24 @@ package object
 import (
 	"time"
 
+	"github.com/mohae/deepcopy"
+
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 type Torpedo struct {
-	// 固定参数
-	// 百分比位置（如：0.33 -> 距离舰首 1/3)
-	PosPercent float64
 	// 鱼雷类型
-	Bullet Bullet
+	BulletName string `json:"bulletName"`
 	// 单次发射鱼雷数量
-	BulletCount int
+	BulletCount int `json:"bulletCount"`
 	// 装填时间（单位: s)
-	ReloadTime int64
+	ReloadTime int64 `json:"reloadTime"`
 	// 射程
-	Range float64
+	Range float64 `json:"range"`
 	// 鱼雷速度
-	BulletSpeed float64
+	BulletSpeed float64 `json:"bulletSpeed"`
+	// 百分比位置
+	PosPercent float64
 
 	// 动态参数
 	// 当前鱼雷是否可用（如战损 / 禁用）
@@ -53,4 +54,16 @@ func (t *Torpedo) Fire(ship, enemy *BattleShip) []*Bullet {
 	t.LastFireTime = time.Now().Unix()
 	// FIXME 初始化弹药（复数，考虑当前位置，curPos 是战舰位置，还要计算相对位置，需要 uid）
 	return []*Bullet{}
+}
+
+var torpedoMap = map[string]*Torpedo{}
+
+func newTorpedo(name string, posPercent float64) *Torpedo {
+	t := deepcopy.Copy(*torpedoMap[name]).(Torpedo)
+	t.PosPercent = posPercent
+	return &t
+}
+
+func init() {
+	// TODO 支持鱼雷配置加载
 }

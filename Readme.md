@@ -29,12 +29,6 @@ export GOGC=50
 make build && ./jutland
 ```
 
-### 调试模式
-
-```shell
-export DEBUG=true
-```
-
 ## 参考资料
 
 - [Ebiten Engine](https://ebitengine.org/)

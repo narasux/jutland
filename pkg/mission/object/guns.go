@@ -1,44 +1,42 @@
 package object
 
 import (
+	"encoding/json"
+	"io"
+	"log"
 	"math"
 	"math/rand"
+	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/envs"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
-type GunName string
-
-const (
-	GunMK45 GunName = "MK45"
-)
-
 type Gun struct {
-	// 固定参数
 	// 火炮名称
-	Name GunName
+	Name string `json:"name"`
+	// 炮弹类型
+	BulletName string `json:"bulletName"`
+	// 单次抛射炮弹数量
+	BulletCount int `json:"bulletCount"`
+	// 装填时间（单位: s)
+	ReloadTime int64 `json:"reloadTime"`
+	// 射程
+	Range float64 `json:"range"`
+	// 炮弹散布
+	BulletSpread int `json:"bulletSpread"`
+	// 炮弹速度
+	BulletSpeed float64 `json:"bulletSpeed"`
 	// 相对位置
 	// 0.35 -> 从中心往舰首 35% 舰体长度
 	// -0.3 -> 从中心往舰尾 30% 舰体长度
 	PosPercent float64
-	// 炮弹类型
-	BulletName BulletName
-	// 单次抛射炮弹数量
-	BulletCount int
-	// 装填时间（单位: s)
-	ReloadTime int64
-	// 射程
-	Range float64
-	// 炮弹散布
-	BulletSpread int
-	// 炮弹速度
-	BulletSpeed float64
 
-	// 动态参数
 	// 当前火炮是否可用（如战损 / 禁用）
 	Disable bool
 	// 最后一次射击时间（时间戳)
@@ -98,23 +96,29 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	return shotBullets
 }
 
-var guns = map[GunName]*Gun{
-	GunMK45: gunMK45,
-}
+var gunMap = map[string]*Gun{}
 
-func newGun(name GunName, posPercent float64) *Gun {
-	g := deepcopy.Copy(*guns[name]).(Gun)
+func newGun(name string, posPercent float64) *Gun {
+	g := deepcopy.Copy(*gunMap[name]).(Gun)
 	g.PosPercent = posPercent
 	return &g
 }
 
-var gunMK45 = &Gun{
-	Name:         GunMK45,
-	PosPercent:   0,
-	BulletName:   Gb127T1,
-	BulletCount:  1,
-	ReloadTime:   1,
-	Range:        20,
-	BulletSpread: 50,
-	BulletSpeed:  0.5,
+func init() {
+	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "guns.json"))
+	if err != nil {
+		log.Fatalf("failed to open guns.json: %s", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var guns []Gun
+	if err = json.Unmarshal(bytes, &guns); err != nil {
+		log.Fatalf("failed to unmarshal guns.json: %s", err)
+	}
+
+	for _, g := range guns {
+		gunMap[g.Name] = &g
+	}
 }

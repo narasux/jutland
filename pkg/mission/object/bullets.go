@@ -1,35 +1,34 @@
 package object
 
 import (
+	"encoding/json"
+	"io"
+	"log"
 	"math"
+	"os"
+	"path/filepath"
 
 	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/envs"
 	"github.com/narasux/jutland/pkg/mission/faction"
-	"github.com/narasux/jutland/pkg/resources/colorx"
+	"github.com/narasux/jutland/pkg/resources/images/bullet"
 	"github.com/narasux/jutland/pkg/utils/geometry"
-)
-
-type BulletName string
-
-const (
-	// 火炮弹药 130mm 类型一
-	Gb127T1 BulletName = "Gb127T1"
 )
 
 // 火炮 / 鱼雷弹药
 type Bullet struct {
 	// 弹药名称
-	Name BulletName
+	Name string `json:"name"`
 	// 伤害数值
-	Damage float64
+	Damage float64 `json:"damage"`
+	// 生命（前进太多要消亡）
+	Life int `json:"life"`
 
 	// 唯一标识
 	Uid string
-	// 生命（前进太多要消亡）
-	Life int
 	// 当前位置
 	CurPos MapPos
 	// 目标位置
@@ -59,30 +58,17 @@ func (b *Bullet) Forward() {
 	b.Life--
 }
 
-var bullets = map[BulletName]*Bullet{
-	Gb127T1: gb127T1,
-}
-
-// FIXME 补充火炮弹药图片素材
-var defaultBulletImg = ebiten.NewImage(2, 4)
-
-func init() {
-	defaultBulletImg.Fill(colorx.White)
-}
-
-var bulletImages = map[BulletName]*ebiten.Image{
-	Gb127T1: defaultBulletImg,
-}
+var bulletMap = map[string]*Bullet{}
 
 // NewBullets 新建弹药
 func NewBullets(
-	name BulletName,
+	name string,
 	curPos, targetPos MapPos,
 	speed float64,
 	shipUid string,
 	player faction.Player,
 ) *Bullet {
-	b := deepcopy.Copy(*bullets[name]).(Bullet)
+	b := deepcopy.Copy(*bulletMap[name]).(Bullet)
 	b.Uid = uuid.New().String()
 	b.CurPos = curPos
 	b.TargetPos = targetPos
@@ -94,9 +80,26 @@ func NewBullets(
 }
 
 // GetBulletImg 获取弹药图片
-func GetBulletImg(name BulletName) *ebiten.Image {
-	return bulletImages[name]
+func GetBulletImg(name string) *ebiten.Image {
+	// FIXME 应该加载正确的图片，该方法移动到 resources/bullet
+	return bullet.DefaultBulletImg
 }
 
-// gb (gun bullet) 表示是火炮弹药，tb (torpedo bullet) 表示鱼雷弹药
-var gb127T1 = &Bullet{Name: Gb127T1, Life: 150, Damage: 100}
+func init() {
+	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "bullets.json"))
+	if err != nil {
+		log.Fatalf("failed to open bullets.json: %s", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var bullets []Bullet
+	if err = json.Unmarshal(bytes, &bullets); err != nil {
+		log.Fatalf("failed to unmarshal bullets.json: %s", err)
+	}
+
+	for _, b := range bullets {
+		bulletMap[b.Name] = &b
+	}
+}
