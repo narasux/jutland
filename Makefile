@@ -36,11 +36,17 @@ test: tidy
 
 # build game package
 pack:
+	# clean pack dir
+	rm -rf ./jutland-${VERSION}
+
 	# init pack dir
 	mkdir ./jutland-${VERSION}
 
 	# copy resource files
 	cp -r ./resources ./jutland-${VERSION}/resources
+
+	# copy configs files
+	cp -r ./configs ./jutland-${VERSION}/configs
 
 	# build executable binary
 	GOOS=${GOOS} GOARCH=${GOARCH} go build -ldflags ${LDFLAGS} -o ./jutland-${VERSION}/${BINARY_NAME} ./main.go

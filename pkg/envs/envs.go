@@ -32,5 +32,5 @@ var (
 	MapResBaseDir = envx.Get("MAP_RES_BASE_DIR", filepath.Join(baseDir, "resources/maps"))
 
 	// ConfigBaseDir 配置文件根目录
-	ConfigBaseDir = envx.Get("CONFIG_BASE_DIR", filepath.Join(baseDir, "config"))
+	ConfigBaseDir = envx.Get("CONFIG_BASE_DIR", filepath.Join(baseDir, "configs"))
 )
