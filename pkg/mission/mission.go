@@ -16,7 +16,6 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
-	md "github.com/narasux/jutland/pkg/mission/metadata"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -34,7 +33,7 @@ type MissionManager struct {
 }
 
 // NewManager ...
-func NewManager(mission md.Mission) *MissionManager {
+func NewManager(mission string) *MissionManager {
 	return &MissionManager{
 		state:  state.NewMissionState(mission),
 		drawer: drawer.NewDrawer(mission),

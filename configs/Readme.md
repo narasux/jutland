@@ -5,11 +5,11 @@
 ```json5
 [
   {
-    // 弹药名称
-    // gb (gun bullet) 表示是火炮弹药
-    // tb (torpedo bullet) 表示鱼雷弹药
+    // 弹药名称（不可重复）
+    // GB (gun bullet) 表示是火炮弹药
+    // TB (torpedo bullet) 表示鱼雷弹药
     // 127 表示口径 127mm，T1 表示 Type1
-    "name": "Gb127T1",
+    "name": "GB127T1",
     // 弹药命中伤害值
     "damage": 100,
     // 弹药生命期，过期后失效
@@ -24,10 +24,10 @@
 ```json5
 [
   {
-    // 舰炮名称
+    // 舰炮名称（不可重复）
     "name": "MK45",
     // 弹药名称（需确保一定存在）
-    "bulletName": "Gb127T1",
+    "bulletName": "GB127T1",
     // 炮管数量
     "bulletCount": 1,
     // 装填时间（单位：秒）
@@ -52,7 +52,7 @@ TODO 待补充
 ```json5
 [
   {
-    // 战舰名称
+    // 战舰名称（不可重复）
     "name": "default",
     // 战舰类型，可选值：
     // carrier 航空母舰（未来可期）
@@ -96,6 +96,40 @@ TODO 待补充
       // 鱼雷
       "torpedoes": []
     }
+  }
+]
+```
+
+## 任务关卡配置（missions.json）
+
+```json5
+[
+  {
+    // 任务关卡名称（不可重复）
+    "name": "default",
+    // 初始相机视角位置（需在地图范围内）
+    "initCameraPos": [30, 30],
+    // 地图名称（需确保存在）
+    "mapName": "default",
+    // 最大战舰数量（目前不生效）
+    "maxShipCount": 5,
+    "initShips": [
+      // 己方初始战舰
+      {
+        "name": "default",
+        "pos": [40, 33],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      // 敌人初始战舰
+      {
+        "name": "default",
+        "pos": [70, 35],
+        "rotation": 90,
+        // 指定所属玩家为电脑       
+        "belongPlayer": "computerAlpha"
+      }
+    ]
   }
 ]
 ```

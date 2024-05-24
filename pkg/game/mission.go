@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/narasux/jutland/pkg/mission"
-	"github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 )
@@ -14,7 +13,7 @@ func (g *Game) handleMissionSelect() error {
 	g.player.Play(audioRes.NewMissionsBackground())
 	// FIXME 目前没有任务可选，直接进入默认测试关卡
 	if isAnyNextInput() {
-		g.missionMgr = mission.NewManager(metadata.MissionDefault)
+		g.missionMgr = mission.NewManager("default")
 		g.mode = GameModeMissionStart
 		g.player.Close()
 	}

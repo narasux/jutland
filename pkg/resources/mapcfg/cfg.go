@@ -9,9 +9,6 @@ import (
 	"github.com/narasux/jutland/pkg/envs"
 )
 
-// 地图名称
-type MapName string
-
 // 地图数据
 type MapData []string
 
@@ -25,7 +22,7 @@ func (m *MapData) Get(x, y int) rune {
 // 地图配置
 type MapCfg struct {
 	// 地图名称
-	Name MapName
+	Name string
 	// 地图数据
 	Map MapData
 	// 地图宽度
@@ -34,27 +31,9 @@ type MapCfg struct {
 	Height int
 }
 
-var maps = map[MapName]*MapCfg{}
+var maps map[string]*MapCfg
 
-const (
-	// 默认地图（128 * 128）
-	MapDefault MapName = "default"
-	// 海洋地图（128 * 128）
-	MapAllSea128 MapName = "allSea128"
-)
-
-func init() {
-	log.Println("loading map config...")
-
-	maps = make(map[MapName]*MapCfg)
-
-	maps[MapDefault] = loadMapCfg(MapDefault)
-	maps[MapAllSea128] = loadMapCfg(MapAllSea128)
-
-	log.Println("map config loaded")
-}
-
-func loadMapCfg(name MapName) *MapCfg {
+func loadMapCfg(name string) *MapCfg {
 	mapPath := fmt.Sprintf("%s/%s.map", envs.MapResBaseDir, name)
 
 	file, err := os.Open(mapPath)
@@ -78,7 +57,19 @@ func loadMapCfg(name MapName) *MapCfg {
 	return &cfg
 }
 
+func init() {
+	log.Println("loading map config...")
+
+	maps = make(map[string]*MapCfg)
+
+	// TODO 这里也改成从配置文件加载
+	maps["default"] = loadMapCfg("default")
+	maps["allSea128"] = loadMapCfg("allSea128")
+
+	log.Println("map config loaded")
+}
+
 // GetByName 获取地图配置
-func GetByName(name MapName) *MapCfg {
+func GetByName(name string) *MapCfg {
 	return maps[name]
 }

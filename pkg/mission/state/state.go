@@ -31,7 +31,7 @@ type GameOptions struct {
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）
 type MissionState struct {
-	Mission md.Mission
+	Mission string
 	// 任务关卡状态
 	MissionStatus MissionStatus
 	// 任务关卡元数据
@@ -70,7 +70,7 @@ type MissionState struct {
 }
 
 // NewMissionState ...
-func NewMissionState(mission md.Mission) *MissionState {
+func NewMissionState(mission string) *MissionState {
 	missionMD := md.Get(mission)
 	misLayout := layout.NewScreenLayout()
 	// 初始化战舰

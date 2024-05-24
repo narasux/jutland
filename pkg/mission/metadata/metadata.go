@@ -1,6 +1,13 @@
 package metadata
 
 import (
+	"encoding/json"
+	"io"
+	"log"
+	"os"
+	"path/filepath"
+
+	"github.com/narasux/jutland/pkg/envs"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
@@ -25,28 +32,60 @@ type InitShipMetadata struct {
 	BelongPlayer faction.Player
 }
 
-// TODO: 任务元配置改成从配置文件读取
-var missionMetadata = map[Mission]MissionMetadata{
-	MissionDefault: {
-		Name:          "默认关卡",
-		InitCameraPos: obj.NewMapPos(30, 30),
-		MapCfg:        mapcfg.GetByName(mapcfg.MapDefault),
-		MaxShipCount:  5,
-		InitShips: []InitShipMetadata{
-			// 己方舰队
-			{"default", obj.NewMapPos(40, 33), 90, faction.HumanAlpha},
-			{"default", obj.NewMapPos(42, 35), 90, faction.HumanAlpha},
-			{"default", obj.NewMapPos(40, 48), 90, faction.HumanAlpha},
-			{"default", obj.NewMapPos(42, 50), 90, faction.HumanAlpha},
-			// 敌人舰队
-			{"default", obj.NewMapPos(70, 35), 90, faction.ComputerAlpha},
-			{"default", obj.NewMapPos(65, 42), 215, faction.ComputerAlpha},
-			{"default", obj.NewMapPos(70, 50), 270, faction.ComputerAlpha},
-		},
-	},
-}
+var missionMetadata map[string]MissionMetadata
 
 // Get 获取任务元配置
-func Get(mission Mission) MissionMetadata {
+func Get(mission string) MissionMetadata {
 	return missionMetadata[mission]
+}
+
+type rawInitShipMetadata struct {
+	Name         string `json:"name"`
+	Pos          []int  `json:"pos"`
+	Rotation     int    `json:"rotation"`
+	BelongPlayer string `json:"belongPlayer"`
+}
+
+type rawMissionMetadata struct {
+	Name          string                `json:"name"`
+	InitCameraPos []int                 `json:"initCameraPos"`
+	MapName       string                `json:"mapName"`
+	MaxShipCount  int                   `json:"maxShipCount"`
+	InitShips     []rawInitShipMetadata `json:"initShips"`
+}
+
+func init() {
+	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "missions.json"))
+	if err != nil {
+		log.Fatalf("failed to open ships.json: %s", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var misMDs []rawMissionMetadata
+	if err = json.Unmarshal(bytes, &misMDs); err != nil {
+		log.Fatalf("failed to unmarshal missions.json: %s", err)
+	}
+
+	missionMetadata = make(map[string]MissionMetadata)
+
+	for _, md := range misMDs {
+		initShips := []InitShipMetadata{}
+		for _, shipMD := range md.InitShips {
+			initShips = append(initShips, InitShipMetadata{
+				ShipName:     shipMD.Name,
+				Pos:          obj.NewMapPos(shipMD.Pos[0], shipMD.Pos[1]),
+				Rotation:     float64(shipMD.Rotation),
+				BelongPlayer: faction.Player(shipMD.BelongPlayer),
+			})
+		}
+		missionMetadata[md.Name] = MissionMetadata{
+			Name:          md.Name,
+			InitCameraPos: obj.NewMapPos(md.InitCameraPos[0], md.InitCameraPos[1]),
+			MapCfg:        mapcfg.GetByName(md.MapName),
+			MaxShipCount:  md.MaxShipCount,
+			InitShips:     initShips,
+		}
+	}
 }

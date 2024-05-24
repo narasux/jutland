@@ -16,7 +16,7 @@ type Drawer struct {
 }
 
 // NewDrawer ...
-func NewDrawer(mission md.Mission) *Drawer {
+func NewDrawer(mission string) *Drawer {
 	missionMD := md.Get(mission)
 	mapW, mapH := missionMD.MapCfg.Width, missionMD.MapCfg.Height
 	// 预先渲染好整个地图，逐帧渲染的时候裁剪即可
