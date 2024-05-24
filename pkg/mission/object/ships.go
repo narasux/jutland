@@ -10,12 +10,10 @@ import (
 	"slices"
 
 	"github.com/google/uuid"
-	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/envs"
 	"github.com/narasux/jutland/pkg/mission/faction"
-	"github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -231,12 +229,6 @@ type ShipTrail struct {
 // NewShipTrail ...
 func NewShipTrail(pos MapPos, size float64, life int) *ShipTrail {
 	return &ShipTrail{Pos: pos, Size: size, Life: life}
-}
-
-// GetShipImg 获取战舰图片
-func GetShipImg(name string) *ebiten.Image {
-	// FIXME 应该加载正确的图片，该方法移动到 resources/ship
-	return ship.ShipDefaultZeroImg
 }
 
 func init() {

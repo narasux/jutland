@@ -22,3 +22,9 @@ func init() {
 
 	log.Println("ship image resources loaded")
 }
+
+// GetImg 获取战舰图片
+func GetImg(name string) *ebiten.Image {
+	// FIXME 应该加载正确的图片
+	return ShipDefaultZeroImg
+}

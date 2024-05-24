@@ -15,6 +15,8 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
+	"github.com/narasux/jutland/pkg/resources/images/bullet"
+	"github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
@@ -50,40 +52,40 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		return strings.Compare(a.Uid, b.Uid)
 	})
 
-	for _, ship := range ships {
+	for _, s := range ships {
 		// 只有在屏幕中的才渲染
-		if !ms.Camera.Contains(ship.CurPos) {
+		if !ms.Camera.Contains(s.CurPos) {
 			continue
 		}
 
-		shipImg := obj.GetShipImg(ship.Name)
+		shipImg := ship.GetImg(s.Name)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, shipImg, ship.CurRotation)
+		setOptsCenterRotation(opts, shipImg, s.CurRotation)
 		opts.GeoM.Translate(
-			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
+			(s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
+			(s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(shipImg, opts)
 
 		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP，武器状态
-		isShipSelected := slices.Contains(ms.SelectedShips, ship.Uid)
-		if (ms.GameOpts.ForceDisplayState || isShipSelected) && ship.BelongPlayer == ms.CurPlayer {
+		isShipSelected := slices.Contains(ms.SelectedShips, s.Uid)
+		if (ms.GameOpts.ForceDisplayState || isShipSelected) && s.BelongPlayer == ms.CurPlayer {
 			opts = d.genDefaultDrawImageOptions()
 
 			// 绘制当前生命值
 			opts.GeoM.Translate(
-				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize,
-				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-80,
+				(s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize,
+				(s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-80,
 			)
-			hpImg := texture.GetHpImg(ship.CurHP, ship.TotalHP)
+			hpImg := texture.GetHpImg(s.CurHP, s.TotalHP)
 			screen.DrawImage(hpImg, opts)
 
 			opts.GeoM.Translate(20, 0)
 			// 绘制武器状态
-			gunImg := lo.Ternary(ship.Weapon.GunDisabled, texture.GunDisableImg, texture.GunEnableImg)
+			gunImg := lo.Ternary(s.Weapon.GunDisabled, texture.GunDisableImg, texture.GunEnableImg)
 			screen.DrawImage(gunImg, opts)
 
-			torpedoImg := lo.Ternary(ship.Weapon.TorpedoDisabled, texture.TorpedoDisableImg, texture.TorpedoEnableImg)
+			torpedoImg := lo.Ternary(s.Weapon.TorpedoDisabled, texture.TorpedoDisableImg, texture.TorpedoEnableImg)
 			opts.GeoM.Translate(0, 25)
 			screen.DrawImage(torpedoImg, opts)
 
@@ -93,22 +95,22 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			}
 
 			// 如果被编组，需要标记出来
-			if ship.GroupID != obj.GroupIDNone {
-				textStr, fontSize := strconv.Itoa(int(ship.GroupID)), float64(30)
-				posX := (ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 30
-				posY := (ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 85
+			if s.GroupID != obj.GroupIDNone {
+				textStr, fontSize := strconv.Itoa(int(s.GroupID)), float64(30)
+				posX := (s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 30
+				posY := (s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 85
 				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 			}
 		}
 
 		// 如果全局启用状态展示，则敌方战舰也要绘制 HP 值
-		if ms.GameOpts.ForceDisplayState && ship.BelongPlayer != ms.CurPlayer {
+		if ms.GameOpts.ForceDisplayState && s.BelongPlayer != ms.CurPlayer {
 			opts = d.genDefaultDrawImageOptions()
 			opts.GeoM.Translate(
-				(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-25,
-				(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-30,
+				(s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-25,
+				(s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-30,
 			)
-			hpImg := texture.GetEnemyHpImg(ship.CurHP, ship.TotalHP)
+			hpImg := texture.GetEnemyHpImg(s.CurHP, s.TotalHP)
 			screen.DrawImage(hpImg, opts)
 		}
 
@@ -118,27 +120,27 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 // 绘制消亡中的战舰
 func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState) {
-	for _, ship := range ms.DestroyedShips {
+	for _, s := range ms.DestroyedShips {
 		// 只有在屏幕中的才渲染
-		if !ms.Camera.Contains(ship.CurPos) {
+		if !ms.Camera.Contains(s.CurPos) {
 			continue
 		}
 
-		shipImg := obj.GetShipImg(ship.Name)
+		shipImg := ship.GetImg(s.Name)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, shipImg, ship.CurRotation)
+		setOptsCenterRotation(opts, shipImg, s.CurRotation)
 		opts.GeoM.Translate(
-			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
+			(s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
+			(s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(shipImg, opts)
 
 		// 绘制爆炸效果
-		explodeImg := texture.GetExplodeImg(ship.CurHP)
+		explodeImg := texture.GetExplodeImg(s.CurHP)
 		opts = d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(
-			(ship.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
-			(ship.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-30,
+			(s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
+			(s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-30,
 		)
 		screen.DrawImage(explodeImg, opts)
 	}
@@ -146,14 +148,14 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
-	for _, bullet := range ms.ForwardingBullets {
-		img := obj.GetBulletImg(bullet.Name)
+	for _, b := range ms.ForwardingBullets {
+		img := bullet.GetImg(b.Name)
 
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, img, bullet.Rotation)
+		setOptsCenterRotation(opts, img, b.Rotation)
 		opts.GeoM.Translate(
-			(bullet.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
-			(bullet.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
+			(b.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
+			(b.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
 		)
 		screen.DrawImage(img, opts)
 	}
