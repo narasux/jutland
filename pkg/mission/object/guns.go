@@ -78,7 +78,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 
 	curPos, targetPos := ship.CurPos.Copy(), enemy.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
-	gunOffset := g.PosPercent * ship.Length / constants.MapBlockSize
+	gunOffset := g.PosPercent * ship.Length / constants.MapBlockSize / 2
 	curPos.AddRx(math.Sin(ship.CurRotation*math.Pi/180) * gunOffset)
 	curPos.SubRy(math.Cos(ship.CurRotation*math.Pi/180) * gunOffset)
 	// FIXME 其实还要考虑提前量（依赖敌舰速度，角度）

@@ -15,7 +15,7 @@
       "guns": [
         {
           "name": "MK45/38",
-          "posPercent": 0.3,
+          "posPercent": 0.5,
           "leftFiringArc": {
             "start": 0,
             "end": 150
@@ -27,7 +27,7 @@
         },
         {
           "name": "MK45/38",
-          "posPercent": -0.3,
+          "posPercent": -0.5,
           "leftFiringArc": {
             "start": 30,
             "end": 180
@@ -59,7 +59,7 @@
         // 前主炮 A
         {
           "name": "MK7/50",
-          "posPercent": 0.5,
+          "posPercent": 0.45,
           "leftFiringArc": {
             "start": 0,
             "end": 130
@@ -272,7 +272,7 @@
         // 后主炮 C
         {
           "name": "JP356/45",
-          "posPercent": 0.4,
+          "posPercent": -0.2,
           "leftFiringArc": {
             "start": 50,
             "end": 180
@@ -285,7 +285,7 @@
         // 后主炮 D
         {
           "name": "JP356/45",
-          "posPercent": 0.8,
+          "posPercent": -0.6,
           "leftFiringArc": {
             "start": 50,
             "end": 180
