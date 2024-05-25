@@ -12,7 +12,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
-	"github.com/narasux/jutland/pkg/envs"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -232,7 +232,7 @@ func NewShipTrail(pos MapPos, size float64, life int) *ShipTrail {
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "ships.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "ships.json"))
 	if err != nil {
 		log.Fatalf("failed to open ships.json: %s", err)
 	}

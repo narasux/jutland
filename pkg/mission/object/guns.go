@@ -13,7 +13,7 @@ import (
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	"github.com/narasux/jutland/pkg/envs"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -105,7 +105,7 @@ func newGun(name string, posPercent float64) *Gun {
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "guns.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "guns.json"))
 	if err != nil {
 		log.Fatalf("failed to open guns.json: %s", err)
 	}

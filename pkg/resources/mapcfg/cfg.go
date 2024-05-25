@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/narasux/jutland/pkg/envs"
+	"github.com/narasux/jutland/pkg/config"
 )
 
 // 地图数据
@@ -34,7 +34,7 @@ type MapCfg struct {
 var maps map[string]*MapCfg
 
 func loadMapCfg(name string) *MapCfg {
-	mapPath := fmt.Sprintf("%s/%s.map", envs.MapResBaseDir, name)
+	mapPath := fmt.Sprintf("%s/%s.map", config.MapResBaseDir, name)
 
 	file, err := os.Open(mapPath)
 	if err != nil {

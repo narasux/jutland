@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/narasux/jutland/pkg/envs"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
@@ -55,7 +55,7 @@ type rawMissionMetadata struct {
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "missions.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "missions.json"))
 	if err != nil {
 		log.Fatalf("failed to open ships.json: %s", err)
 	}

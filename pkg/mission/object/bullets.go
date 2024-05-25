@@ -11,7 +11,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
-	"github.com/narasux/jutland/pkg/envs"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -78,7 +78,7 @@ func NewBullets(
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(envs.ConfigBaseDir, "bullets.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "bullets.json"))
 	if err != nil {
 		log.Fatalf("failed to open bullets.json: %s", err)
 	}

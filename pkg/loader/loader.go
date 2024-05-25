@@ -16,12 +16,12 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/narasux/jutland/pkg/common/types"
-	"github.com/narasux/jutland/pkg/envs"
+	"github.com/narasux/jutland/pkg/config"
 )
 
 // LoadImage 加载图片资源
 func LoadImage(path string) (*ebiten.Image, error) {
-	imgData, err := os.ReadFile(envs.ImgResBaseDir + path)
+	imgData, err := os.ReadFile(config.ImgResBaseDir + path)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ func LoadImage(path string) (*ebiten.Image, error) {
 
 // LoadFont 加载字体资源
 func LoadFont(path string) (*text.GoTextFaceSource, error) {
-	fontData, err := os.ReadFile(envs.FontResBaseDir + path)
+	fontData, err := os.ReadFile(config.FontResBaseDir + path)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func LoadFont(path string) (*text.GoTextFaceSource, error) {
 
 // LoadAudio 加载音频资源
 func LoadAudio(path string) (types.AudioStream, error) {
-	audioData, err := os.ReadFile(envs.AudioResBaseDir + path)
+	audioData, err := os.ReadFile(config.AudioResBaseDir + path)
 	if err != nil {
 		return nil, err
 	}
