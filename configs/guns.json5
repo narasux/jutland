@@ -1,0 +1,57 @@
+[
+  // 美国海军 MK45/38
+  // longBeach（长滩）
+  {
+    "name": "MK45/38",
+    "bulletName": "GB127T1",
+    "bulletCount": 1,
+    "reloadTime": 1.5,
+    "range": 22,
+    "bulletSpread": 50,
+    "bulletSpeed": 0.8
+  },
+  // 美国海军 MK12/38
+  // lowa（衣阿华）
+  {
+    "name": "MK7/50",
+    "bulletName": "GB406T1",
+    "bulletCount": 3,
+    "reloadTime": 15,
+    "range": 38,
+    "bulletSpread": 200,
+    "bulletSpeed": 0.7
+  },
+  // 美国海军 MK12/38
+  // lowa（衣阿华）
+  {
+    "name": "MK12/38",
+    "bulletName": "GB127T1",
+    "bulletCount": 2,
+    "reloadTime": 1.5,
+    "range": 18,
+    "bulletSpread": 100,
+    "bulletSpeed": 0.8
+  },
+  // 日本海军 双联装 35.6 厘米 45 倍口径
+  // kongo（金刚）
+  {
+    "name": "JP356/45",
+    "bulletName": "GB356T1",
+    "bulletCount": 2,
+    "reloadTime": 25,
+    "range": 35,
+    "bulletSpread": 200,
+    "bulletSpeed": 0.78
+  },
+  // 日本海军 双联装 35.6 厘米 45 倍口径
+  // kongo（金刚）
+  {
+    "name": "JP152/50",
+    "bulletName": "GB152T1",
+    "bulletCount": 1,
+    "reloadTime": 5,
+    "range": 18,
+    "bulletSpread": 100,
+    "bulletSpeed": 0.85
+  }
+]

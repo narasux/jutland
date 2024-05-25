@@ -1,11 +1,12 @@
 package metadata
 
 import (
-	"encoding/json"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -55,17 +56,17 @@ type rawMissionMetadata struct {
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "missions.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "missions.json5"))
 	if err != nil {
-		log.Fatalf("failed to open ships.json: %s", err)
+		log.Fatalf("failed to open missions.json5: %s", err)
 	}
 	defer file.Close()
 
 	bytes, _ := io.ReadAll(file)
 
 	var misMDs []rawMissionMetadata
-	if err = json.Unmarshal(bytes, &misMDs); err != nil {
-		log.Fatalf("failed to unmarshal missions.json: %s", err)
+	if err = json5.Unmarshal(bytes, &misMDs); err != nil {
+		log.Fatalf("failed to unmarshal missions.json5: %s", err)
 	}
 
 	missionMetadata = make(map[string]MissionMetadata)

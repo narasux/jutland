@@ -6,43 +6,43 @@
     "maxShipCount": 5,
     "initShips": [
       {
-        "name": "default",
+        "name": "longBeach",
         "pos": [40, 33],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "default",
+        "name": "lowa",
         "pos": [42, 35],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "default",
+        "name": "longBeach",
         "pos": [40, 48],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "default",
+        "name": "lowa",
         "pos": [42, 50],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "default",
+        "name": "kongo",
         "pos": [70, 35],
         "rotation": 90,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "default",
+        "name": "longBeach",
         "pos": [65, 42],
         "rotation": 215,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "default",
+        "name": "kongo",
         "pos": [70, 50],
         "rotation": 270,
         "belongPlayer": "computerAlpha"

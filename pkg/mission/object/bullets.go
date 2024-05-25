@@ -1,7 +1,6 @@
 package object
 
 import (
-	"encoding/json"
 	"io"
 	"log"
 	"math"
@@ -10,6 +9,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -78,17 +78,17 @@ func NewBullets(
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "bullets.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "bullets.json5"))
 	if err != nil {
-		log.Fatalf("failed to open bullets.json: %s", err)
+		log.Fatalf("failed to open bullets.json5: %s", err)
 	}
 	defer file.Close()
 
 	bytes, _ := io.ReadAll(file)
 
 	var bullets []Bullet
-	if err = json.Unmarshal(bytes, &bullets); err != nil {
-		log.Fatalf("failed to unmarshal bullets.json: %s", err)
+	if err = json5.Unmarshal(bytes, &bullets); err != nil {
+		log.Fatalf("failed to unmarshal bullets.json5: %s", err)
 	}
 
 	for _, b := range bullets {

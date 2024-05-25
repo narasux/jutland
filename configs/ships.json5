@@ -1,0 +1,140 @@
+[
+  // 默认分类（测试用）
+  {
+    "name": "longBeach",
+    "displayName": "长滩",
+    "type": "default",
+    "totalHP": 12000,
+    "damageReduction": 0.9,
+    "maxSpeed": 0.1,
+    "rotateSpeed": 2,
+    "length": 220,
+    "width": 22,
+    "weapon": {
+      "guns": [
+        {
+          "name": "MK45/38",
+          "posPercent": 0.3
+        },
+        {
+          "name": "MK45/38",
+          "posPercent": -0.3
+        }
+      ],
+      "torpedoes": []
+    }
+  },
+  // 战列舰
+  // 美国海军
+  {
+    "name": "lowa",
+    "displayName": "衣阿华",
+    "type": "battleship",
+    "totalHP": 58000,
+    "damageReduction": 0.5,
+    "maxSpeed": 0.11,
+    "rotateSpeed": 1.5,
+    "length": 270,
+    "width": 33,
+    "weapon": {
+      "guns": [
+        {
+          "name": "MK7/50",
+          "posPercent": 0.5
+        },
+        {
+          "name": "MK7/50",
+          "posPercent": 0.25
+        },
+        {
+          "name": "MK7/50",
+          "posPercent": -0.5
+        },
+        // 副炮组（其实衣阿华是左右舷各五座，目前还没射界概念，先只放五座）
+        {
+          "name": "MK12/38",
+          "posPercent": 0.05
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": 0
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.05
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.1
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.15
+        },
+      ],
+      "torpedoes": []
+    }
+  },
+  // 日本海军
+  {
+    "name": "kongo",
+    "displayName": "金刚",
+    "type": "battleship",
+    "totalHP": 36000,
+    "damageReduction": 0.7,
+    "maxSpeed": 0.1,
+    "rotateSpeed": 1.5,
+    "length": 220,
+    "width": 31,
+    "weapon": {
+      "guns": [
+        {
+          "name": "JP356/45",
+          "posPercent": 0.6
+        },
+        {
+          "name": "JP356/45",
+          "posPercent": 0.5
+        },
+        {
+          "name": "JP356/45",
+          "posPercent": 0.4
+        },
+        {
+          "name": "JP356/45",
+          "posPercent": 0.8
+        },
+        // 副炮组（其实金刚是左右舷各七座，目前还没射界概念，先只放六座）
+        {
+          "name": "JP152/50",
+          "posPercent": 0.6
+        },
+        {
+          "name": "JP152/50",
+          "posPercent": 0.4
+        },
+        {
+          "name": "JP152/50",
+          "posPercent": 0.2
+        },
+        {
+          "name": "JP152/50",
+          "posPercent": 0
+        },
+        {
+          "name": "JP152/50",
+          "posPercent": -0.2
+        },
+        {
+          "name": "JP152/50",
+          "posPercent": -0.4
+        },
+        {
+          "name": "JP152/50",
+          "posPercent": -0.6
+        }
+      ],
+      "torpedoes": []
+    }
+  }
+]

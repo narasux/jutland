@@ -1,7 +1,6 @@
 package object
 
 import (
-	"encoding/json"
 	"io"
 	"log"
 	"math"
@@ -11,6 +10,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -66,6 +66,8 @@ type Weapon struct {
 type BattleShip struct {
 	// 名称
 	Name string `json:"name"`
+	// 展示用名称
+	DisplayName string `json:"displayName"`
 	// 类别
 	Type string `json:"type"`
 
@@ -232,17 +234,17 @@ func NewShipTrail(pos MapPos, size float64, life int) *ShipTrail {
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "ships.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "ships.json5"))
 	if err != nil {
-		log.Fatalf("failed to open ships.json: %s", err)
+		log.Fatalf("failed to open ships.json5: %s", err)
 	}
 	defer file.Close()
 
 	bytes, _ := io.ReadAll(file)
 
 	var ships []BattleShip
-	if err = json.Unmarshal(bytes, &ships); err != nil {
-		log.Fatalf("failed to unmarshal ships.json: %s", err)
+	if err = json5.Unmarshal(bytes, &ships); err != nil {
+		log.Fatalf("failed to unmarshal ships.json5: %s", err)
 	}
 
 	for _, s := range ships {

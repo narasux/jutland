@@ -1,7 +1,6 @@
 package object
 
 import (
-	"encoding/json"
 	"io"
 	"log"
 	"math"
@@ -11,6 +10,7 @@ import (
 	"time"
 
 	"github.com/mohae/deepcopy"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
@@ -25,7 +25,7 @@ type Gun struct {
 	// 单次抛射炮弹数量
 	BulletCount int `json:"bulletCount"`
 	// 装填时间（单位: s)
-	ReloadTime int64 `json:"reloadTime"`
+	ReloadTime float64 `json:"reloadTime"`
 	// 射程
 	Range float64 `json:"range"`
 	// 炮弹散布
@@ -39,7 +39,7 @@ type Gun struct {
 
 	// 当前火炮是否可用（如战损 / 禁用）
 	Disable bool
-	// 最后一次射击时间（时间戳)
+	// 最后一次射击时间（毫秒时间戳)
 	LastFireTime int64
 }
 
@@ -50,7 +50,7 @@ func (g *Gun) CanFire(curPos, targetPos MapPos) bool {
 		return false
 	}
 	// 在重新装填，不可发射
-	if g.LastFireTime+g.ReloadTime > time.Now().Unix() {
+	if g.LastFireTime+int64(g.ReloadTime*1e3) > time.Now().UnixMilli() {
 		return false
 	}
 	// 不在射程内，不可发射
@@ -75,7 +75,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	if !g.CanFire(curPos, targetPos) {
 		return shotBullets
 	}
-	g.LastFireTime = time.Now().Unix()
+	g.LastFireTime = time.Now().UnixMilli()
 
 	// 散布应该随着距离减小而减小
 	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
@@ -105,17 +105,17 @@ func newGun(name string, posPercent float64) *Gun {
 }
 
 func init() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "guns.json"))
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "guns.json5"))
 	if err != nil {
-		log.Fatalf("failed to open guns.json: %s", err)
+		log.Fatalf("failed to open guns.json5: %s", err)
 	}
 	defer file.Close()
 
 	bytes, _ := io.ReadAll(file)
 
 	var guns []Gun
-	if err = json.Unmarshal(bytes, &guns); err != nil {
-		log.Fatalf("failed to unmarshal guns.json: %s", err)
+	if err = json5.Unmarshal(bytes, &guns); err != nil {
+		log.Fatalf("failed to unmarshal guns.json5: %s", err)
 	}
 
 	for _, g := range guns {

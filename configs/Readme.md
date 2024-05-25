@@ -1,6 +1,6 @@
 # 配置文件说明
 
-## 弹药配置（bullets.json）
+## 弹药配置（bullets.json5）
 
 ```json5
 [
@@ -11,43 +11,48 @@
     // 127 表示口径 127mm，T1 表示 Type1
     "name": "GB127T1",
     // 弹药命中伤害值
+    // 推荐公式：现实炮弹重量（kg) * 3
     "damage": 100,
     // 弹药生命期，过期后失效
-    // TODO 提供折算公式
+    // 推荐值：150-200，射程越远越大
     "life": 150
   }
 ]
 ```
 
-## 舰炮配置（guns.json）
+## 舰炮配置（guns.json5）
 
 ```json5
 [
   {
     // 舰炮名称（不可重复）
-    "name": "MK45",
+    // MK45 是型号，38 是倍径
+    "name": "MK45/38",
     // 弹药名称（需确保一定存在）
     "bulletName": "GB127T1",
     // 炮管数量
     "bulletCount": 1,
     // 装填时间（单位：秒）
+    // 推荐值：现实装填速度 / 2
     "reloadTime": 1,
     // 射程（地图格数）
+    // 推荐值：现实射程（km）
     "range": 20,
     // 散布半径
+    // TODO 提供折算公式
     "bulletSpread": 50,
     // 炮弹速度
-    // TODO 提供折算公式
+    // 推荐值：1km/s -> 1
     "bulletSpeed": 0.5
   }
 ]
 ```
 
-## 鱼雷配置（torpedoes.json）
+## 鱼雷配置（torpedoes.json5）
 
 TODO 待补充
 
-## 战舰配置（ships.json）
+## 战舰配置（ships.json5）
 
 ```json5
 [
@@ -64,11 +69,12 @@ TODO 待补充
     // submarine 潜艇（未来可期）
     "type": "cruiser",
     // 初始生命值
+    // 推荐值：满载排水量（单位：吨）
     "totalHP": 1000,
     // 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
-    "damageReduction": 0.5,
+    "damageReduction": 0.7,
     // 最大速度
-    // TODO 提供折算公式
+    // 推荐值：30 节是 0.1，其他以此类推
     "maxSpeed": 0.1,
     // 转向速度（度）
     "rotateSpeed": 2,
@@ -100,7 +106,7 @@ TODO 待补充
 ]
 ```
 
-## 任务关卡配置（missions.json）
+## 任务关卡配置（missions.json5）
 
 ```json5
 [

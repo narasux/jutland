@@ -1,0 +1,22 @@
+[
+  {
+    "name": "GB406T1",
+    "damage": 3500,
+    "life": 200
+  },
+  {
+    "name": "GB356T1",
+    "damage": 2040,
+    "life": 200
+  },
+  {
+    "name": "GB152T1",
+    "damage": 135,
+    "life": 150
+  },
+  {
+    "name": "GB127T1",
+    "damage": 100,
+    "life": 150
+  }
+]
