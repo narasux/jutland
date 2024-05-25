@@ -1,13 +1,13 @@
 [
   {
     "name": "default",
-    "initCameraPos": [30, 30],
+    "initCameraPos": [28, 28],
     "mapName": "default",
     "maxShipCount": 5,
     "initShips": [
       {
         "name": "longBeach",
-        "pos": [40, 33],
+        "pos": [40, 30],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
@@ -19,7 +19,13 @@
       },
       {
         "name": "atlanta",
-        "pos": [40, 37],
+        "pos": [40, 40],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "porter",
+        "pos": [38, 45],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
@@ -39,6 +45,12 @@
         "name": "kongo",
         "pos": [70, 50],
         "rotation": 270,
+        "belongPlayer": "computerAlpha"
+      },
+      {
+        "name": "asashio",
+        "pos": [72, 42],
+        "rotation": 45,
         "belongPlayer": "computerAlpha"
       }
     ]

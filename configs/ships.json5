@@ -236,5 +236,72 @@
       // TODO 最上左右舷各两组 610 3 联装鱼雷
       "torpedoes": []
     }
+  },
+  // 驱逐舰
+  // 美国海军
+  {
+    "name": "porter",
+    "displayName": "波特",
+    "type": "destroyer",
+    "totalHP": 1850,
+    "damageReduction": 1,
+    "maxSpeed": 0.12,
+    "acceleration": 0.004,
+    "rotateSpeed": 3.5,
+    "length": 116,
+    "width": 11,
+    "weapon": {
+      "guns": [
+        {
+          "name": "MK12/38",
+          "posPercent": 0.7
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": 0.6
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.6
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.7
+        },
+      ],
+      // TODO 波特中轴两组 533 4 联装鱼雷
+      "torpedoes": []
+    },
+  },
+  // 日本海军
+  {
+    "name": "asashio",
+    "displayName": "朝潮",
+    "type": "destroyer",
+    "totalHP": 2635,
+    "damageReduction": 1,
+    "maxSpeed": 0.12,
+    "acceleration": 0.004,
+    "rotateSpeed": 3.5,
+    "length": 118,
+    "width": 11,
+    "weapon": {
+      "guns": [
+        {
+          "name": "MK12/38",
+          "posPercent": 0.8
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.5
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.6
+        },
+      ],
+      // TODO 朝潮中轴两组 610 4 联装鱼雷
+      "torpedoes": []
+    }
   }
 ]
