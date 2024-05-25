@@ -35,7 +35,7 @@
     "damageReduction": 0.5,
     "maxSpeed": 0.11,
     "acceleration": 0.001,
-    "rotateSpeed": 2,
+    "rotateSpeed": 1.5,
     "length": 270,
     "width": 33,
     "weapon": {
@@ -86,7 +86,7 @@
     "damageReduction": 0.7,
     "maxSpeed": 0.1,
     "acceleration": 0.001,
-    "rotateSpeed": 2,
+    "rotateSpeed": 1.5,
     "length": 220,
     "width": 31,
     "weapon": {

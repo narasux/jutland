@@ -10,13 +10,13 @@
     "bulletSpread": 50,
     "bulletSpeed": 0.4
   },
-  // 美国海军 MK12/38
+  // 美国海军 MK7/50
   // lowa（衣阿华）
   {
     "name": "MK7/50",
     "bulletName": "GB406T1",
     "bulletCount": 3,
-    "reloadTime": 15,
+    "reloadTime": 13,
     "range": 38,
     "bulletSpread": 200,
     "bulletSpeed": 0.4
@@ -38,12 +38,12 @@
     "name": "JP356/45",
     "bulletName": "GB356T1",
     "bulletCount": 2,
-    "reloadTime": 25,
+    "reloadTime": 20,
     "range": 35,
     "bulletSpread": 200,
     "bulletSpeed": 0.4
   },
-  // 日本海军 双联装 35.6 厘米 45 倍口径
+  // 日本海军 单装 15.2 厘米 50 倍口径
   // kongo（金刚）
   {
     "name": "JP152/50",

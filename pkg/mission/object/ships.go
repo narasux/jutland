@@ -180,8 +180,8 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 		s.CurSpeed = min(s.MaxSpeed, s.CurSpeed+s.Acceleration)
 	}
 	// 到目标位置附近，逐渐减速
-	if s.CurPos.Near(targetPos, 3) {
-		s.CurSpeed = max(s.Acceleration, s.CurSpeed-s.Acceleration)
+	if s.CurPos.Near(targetPos, 4) {
+		s.CurSpeed = max(s.Acceleration*20, s.CurSpeed-s.Acceleration*10)
 	}
 	targetRotation := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
 	// 逐渐转向

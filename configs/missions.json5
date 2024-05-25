@@ -19,24 +19,18 @@
       },
       {
         "name": "longBeach",
-        "pos": [40, 48],
-        "rotation": 90,
-        "belongPlayer": "humanAlpha"
-      },
-      {
-        "name": "lowa",
-        "pos": [42, 50],
+        "pos": [40, 37],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
         "name": "kongo",
         "pos": [70, 35],
-        "rotation": 90,
+        "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "longBeach",
+        "name": "kongo",
         "pos": [65, 42],
         "rotation": 215,
         "belongPlayer": "computerAlpha"
