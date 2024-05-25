@@ -17,6 +17,7 @@ import (
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
+// Gun 火炮
 type Gun struct {
 	// 火炮名称
 	Name string `json:"name"`
@@ -36,6 +37,10 @@ type Gun struct {
 	// 0.35 -> 从中心往舰首 35% 舰体长度
 	// -0.3 -> 从中心往舰尾 30% 舰体长度
 	PosPercent float64
+	// 左射界 (180, 360]
+	LeftFiringArc FiringArc
+	// 右射界 (0, 180]
+	RightFiringArc FiringArc
 
 	// 当前火炮是否可用（如战损 / 禁用）
 	Disable bool
@@ -44,7 +49,7 @@ type Gun struct {
 }
 
 // CanFire 是否可发射
-func (g *Gun) CanFire(curPos, targetPos MapPos) bool {
+func (g *Gun) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 	// 未启用，不可发射
 	if g.Disable {
 		return false
@@ -56,6 +61,12 @@ func (g *Gun) CanFire(curPos, targetPos MapPos) bool {
 	// 不在射程内，不可发射
 	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
 	if distance > g.Range {
+		return false
+	}
+	// 不在射界范围内，不可发射
+	rotation := geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	rotation = math.Mod(rotation-shipCurRotation+360, 360)
+	if !g.LeftFiringArc.Contains(rotation) && !g.RightFiringArc.Contains(rotation) {
 		return false
 	}
 	return true
@@ -72,7 +83,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	curPos.SubRy(math.Cos(ship.CurRotation*math.Pi/180) * gunOffset)
 	// FIXME 其实还要考虑提前量（依赖敌舰速度，角度）
 
-	if !g.CanFire(curPos, targetPos) {
+	if !g.CanFire(ship.CurRotation, curPos, targetPos) {
 		return shotBullets
 	}
 	g.LastFireTime = time.Now().UnixMilli()
@@ -98,9 +109,11 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 
 var gunMap = map[string]*Gun{}
 
-func newGun(name string, posPercent float64) *Gun {
+func newGun(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Gun {
 	g := deepcopy.Copy(*gunMap[name]).(Gun)
 	g.PosPercent = posPercent
+	g.LeftFiringArc = leftFireArc
+	g.RightFiringArc = rightFireArc
 	return &g
 }
 

@@ -38,11 +38,15 @@ const (
 )
 
 type WeaponMetadata struct {
-	Name string
+	Name string `json:"name"`
 	// 相对位置
 	// 0.35 -> 从中心往舰首 35% 舰体长度
 	// -0.3 -> 从中心往舰尾 30% 舰体长度
-	PosPercent float64
+	PosPercent float64 `json:"posPercent"`
+	// 左射界
+	LeftFiringArc FiringArc `json:"leftFiringArc"`
+	// 右射界
+	RightFiringArc FiringArc `json:"rightFiringArc"`
 }
 
 // Weapon 武器系统
@@ -251,7 +255,9 @@ func init() {
 
 	for _, s := range ships {
 		for _, gunMD := range s.Weapon.GunsMD {
-			s.Weapon.Guns = append(s.Weapon.Guns, newGun(gunMD.Name, gunMD.PosPercent))
+			s.Weapon.Guns = append(s.Weapon.Guns, newGun(
+				gunMD.Name, gunMD.PosPercent, gunMD.LeftFiringArc, gunMD.RightFiringArc,
+			))
 		}
 		for _, torpedoMD := range s.Weapon.TorpedoesMD {
 			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, newTorpedo(torpedoMD.Name, torpedoMD.PosPercent))
