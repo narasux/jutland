@@ -18,7 +18,7 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 		return DoNothing
 	}
 	x, y := ebiten.CursorPosition()
-	w, h := misLayout.Camera.Width, misLayout.Camera.Height
+	w, h := misLayout.Width, misLayout.Height
 
 	// Hover 上侧
 	if y < h/40 {

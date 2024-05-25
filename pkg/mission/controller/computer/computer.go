@@ -41,7 +41,7 @@ func (h *ComputerDecisionHandler) Handle(misState *state.MissionState) map[strin
 			}
 			distance := geometry.CalcDistance(ship.CurPos.RX, ship.CurPos.RY, enemy.CurPos.RX, enemy.CurPos.RY)
 			if distance < 20 && ship.CurSpeed == 0 && enemy.CurSpeed != 0 {
-				x, y := rand.Intn(9)-4, rand.Intn(9)-4
+				x, y := rand.Intn(11)-5, rand.Intn(11)-5
 				instructions[fmt.Sprintf("%s-%s", ship.Uid, instr.NameShipMove)] = instr.NewShipMove(
 					ship.Uid, obj.NewMapPos(
 						misState.Ships[ship.Uid].CurPos.MX+x,

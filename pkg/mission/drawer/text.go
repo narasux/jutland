@@ -16,7 +16,7 @@ import (
 func (d *Drawer) drawTips(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.MissionStatus == state.MissionPaused {
 		textStr, fontSize := "按下 Q 退出，按下 Enter 继续", float64(64)
-		posX := (float64(ms.Layout.Camera.Width) - ebutil.CalcTextWidth(textStr, fontSize)) / 2
+		posX := (float64(ms.Layout.Width) - ebutil.CalcTextWidth(textStr, fontSize)) / 2
 		posY := float64(ms.Layout.Height) / 2
 		d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 	}

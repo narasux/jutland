@@ -8,7 +8,7 @@
     "reloadTime": 1.5,
     "range": 22,
     "bulletSpread": 50,
-    "bulletSpeed": 0.8
+    "bulletSpeed": 0.4
   },
   // 美国海军 MK12/38
   // lowa（衣阿华）
@@ -19,7 +19,7 @@
     "reloadTime": 15,
     "range": 38,
     "bulletSpread": 200,
-    "bulletSpeed": 0.7
+    "bulletSpeed": 0.4
   },
   // 美国海军 MK12/38
   // lowa（衣阿华）
@@ -30,7 +30,7 @@
     "reloadTime": 1.5,
     "range": 18,
     "bulletSpread": 100,
-    "bulletSpeed": 0.8
+    "bulletSpeed": 0.4
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径
   // kongo（金刚）
@@ -41,7 +41,7 @@
     "reloadTime": 25,
     "range": 35,
     "bulletSpread": 200,
-    "bulletSpeed": 0.78
+    "bulletSpeed": 0.4
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径
   // kongo（金刚）
@@ -52,6 +52,6 @@
     "reloadTime": 5,
     "range": 18,
     "bulletSpread": 100,
-    "bulletSpeed": 0.85
+    "bulletSpeed": 0.42
   }
 ]

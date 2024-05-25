@@ -42,8 +42,6 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	d.drawBattleShips(screen, misState)
 	d.drawDestroyedShips(screen, misState)
 	d.drawShotBullets(screen, misState)
-	// 控制台
-	d.drawConsole(screen, misState)
 	// 用户行为
 	d.drawArrowOnMapWhenHover(screen, misState)
 	d.drawSelectedArea(screen, misState)

@@ -56,8 +56,8 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 				if misState.Ships[shipUid].CurSpeed != 0 {
 					continue
 				}
-				// 随机散开 [-2, 2] 的范围
-				x, y := rand.Intn(5)-2, rand.Intn(5)-2
+				// 随机散开 [-3, 3] 的范围
+				x, y := rand.Intn(7)-3, rand.Intn(7)-3
 				// 通过 ShipMove 指令实现散开行为
 				instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(
 					shipUid, obj.NewMapPos(

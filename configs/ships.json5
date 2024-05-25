@@ -7,7 +7,8 @@
     "totalHP": 12000,
     "damageReduction": 0.9,
     "maxSpeed": 0.1,
-    "rotateSpeed": 2,
+    "acceleration": 0.002,
+    "rotateSpeed": 2.5,
     "length": 220,
     "width": 22,
     "weapon": {
@@ -33,7 +34,8 @@
     "totalHP": 58000,
     "damageReduction": 0.5,
     "maxSpeed": 0.11,
-    "rotateSpeed": 1.5,
+    "acceleration": 0.001,
+    "rotateSpeed": 2,
     "length": 270,
     "width": 33,
     "weapon": {
@@ -83,7 +85,8 @@
     "totalHP": 36000,
     "damageReduction": 0.7,
     "maxSpeed": 0.1,
-    "rotateSpeed": 1.5,
+    "acceleration": 0.001,
+    "rotateSpeed": 2,
     "length": 220,
     "width": 31,
     "weapon": {

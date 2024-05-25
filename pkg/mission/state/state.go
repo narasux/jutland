@@ -87,8 +87,8 @@ func NewMissionState(mission string) *MissionState {
 		Camera: Camera{
 			Pos: missionMD.InitCameraPos,
 			// 地图资源，多展示一行 & 列，避免出现黑边
-			Width:  misLayout.Camera.Width/constants.MapBlockSize + 1,
-			Height: misLayout.Camera.Height/constants.MapBlockSize + 1,
+			Width:  misLayout.Width/constants.MapBlockSize + 1,
+			Height: misLayout.Height/constants.MapBlockSize + 1,
 		},
 		CurPlayer: faction.HumanAlpha,
 		GameOpts: GameOptions{

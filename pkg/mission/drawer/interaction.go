@@ -17,21 +17,21 @@ func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.Mission
 	imgW, imgH := texture.ArrowWhiteImg.Bounds().Dx(), texture.ArrowWhiteImg.Bounds().Dy()
 	switch action.DetectCursorHoverOnGameMap(ms.Layout) {
 	case action.HoverScreenLeft:
-		posX, posY, rotation = padding, ms.Layout.Camera.Height/2, 180
+		posX, posY, rotation = padding, ms.Layout.Height/2, 180
 	case action.HoverScreenRight:
-		posX, posY, rotation = ms.Layout.Camera.Width-imgW-padding, ms.Layout.Camera.Height/2, 0
+		posX, posY, rotation = ms.Layout.Width-imgW-padding, ms.Layout.Height/2, 0
 	case action.HoverScreenTop:
-		posX, posY, rotation = ms.Layout.Camera.Width/2, padding, 270
+		posX, posY, rotation = ms.Layout.Width/2, padding, 270
 	case action.HoverScreenBottom:
-		posX, posY, rotation = ms.Layout.Camera.Width/2, ms.Layout.Camera.Height-imgH-padding, 90
+		posX, posY, rotation = ms.Layout.Width/2, ms.Layout.Height-imgH-padding, 90
 	case action.HoverScreenTopLeft:
 		posX, posY, rotation = padding, padding, 225
 	case action.HoverScreenTopRight:
-		posX, posY, rotation = ms.Layout.Camera.Width-imgW-padding, padding, 315
+		posX, posY, rotation = ms.Layout.Width-imgW-padding, padding, 315
 	case action.HoverScreenBottomLeft:
-		posX, posY, rotation = padding, ms.Layout.Camera.Height-imgH-padding, 135
+		posX, posY, rotation = padding, ms.Layout.Height-imgH-padding, 135
 	case action.HoverScreenBottomRight:
-		posX, posY, rotation = ms.Layout.Camera.Width-imgW-padding, ms.Layout.Camera.Height-imgH-padding, 45
+		posX, posY, rotation = ms.Layout.Width-imgW-padding, ms.Layout.Height-imgH-padding, 45
 	default:
 		return
 	}

@@ -77,6 +77,8 @@ type BattleShip struct {
 	DamageReduction float64 `json:"damageReduction"`
 	// 最大速度
 	MaxSpeed float64 `json:"maxSpeed"`
+	// 加速度
+	Acceleration float64 `json:"acceleration"`
 	// 转向速度（度）
 	RotateSpeed float64 `json:"rotateSpeed"`
 	// 战舰长度
@@ -175,11 +177,11 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 	}
 	// 未到达目标位置，逐渐加速
 	if s.CurSpeed < s.MaxSpeed {
-		s.CurSpeed = min(s.MaxSpeed, s.CurSpeed+s.MaxSpeed/5)
+		s.CurSpeed = min(s.MaxSpeed, s.CurSpeed+s.Acceleration)
 	}
 	// 到目标位置附近，逐渐减速
-	if s.CurPos.Near(targetPos, 2) {
-		s.CurSpeed = max(s.MaxSpeed/5, s.CurSpeed-s.MaxSpeed/5)
+	if s.CurPos.Near(targetPos, 3) {
+		s.CurSpeed = max(s.Acceleration, s.CurSpeed-s.Acceleration)
 	}
 	targetRotation := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
 	// 逐渐转向
