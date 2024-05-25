@@ -18,7 +18,7 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "longBeach",
+        "name": "atlanta",
         "pos": [40, 37],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
@@ -30,7 +30,7 @@
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "kongo",
+        "name": "mogami",
         "pos": [65, 42],
         "rotation": 215,
         "belongPlayer": "computerAlpha"

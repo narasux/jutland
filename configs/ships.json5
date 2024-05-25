@@ -52,7 +52,7 @@
           "name": "MK7/50",
           "posPercent": -0.5
         },
-        // 副炮组（其实衣阿华是左右舷各五座，目前还没射界概念，先只放五座）
+        // TODO 副炮组（其实衣阿华是左右舷各五座，目前还没射界概念，先只放五座）
         {
           "name": "MK12/38",
           "posPercent": 0.05
@@ -107,7 +107,7 @@
           "name": "JP356/45",
           "posPercent": 0.8
         },
-        // 副炮组（其实金刚是左右舷各七座，目前还没射界概念，先只放六座）
+        // TODO 副炮组（其实金刚是左右舷各七座，目前还没射界概念，先只放六座）
         {
           "name": "JP152/50",
           "posPercent": 0.6
@@ -137,6 +137,103 @@
           "posPercent": -0.6
         }
       ],
+      "torpedoes": []
+    }
+  },
+  // 巡洋舰
+  // 美国海军
+  {
+    "name": "atlanta",
+    "displayName": "亚特兰大",
+    "type": "cruiser",
+    "totalHP": 7400,
+    "damageReduction": 0.8,
+    "maxSpeed": 0.11,
+    "acceleration": 0.002,
+    "rotateSpeed": 2.5,
+    "length": 165,
+    "width": 16,
+    "weapon": {
+      "guns": [
+        {
+          "name": "MK12/38",
+          "posPercent": 0.7
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": 0.6
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": 0.5
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.5
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.6
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.7
+        },
+        // TODO 其实亚特兰大有一对主炮是是左右舷，目前还没射界概念，认为一座
+        {
+          "name": "MK12/38",
+          "posPercent": -0.3
+        }
+      ],
+      // TODO 亚特兰大左右舷各一组 533 4 联装鱼雷
+      "torpedoes": []
+    },
+  },
+  // 日本海军
+  {
+    "name": "mogami",
+    "displayName": "最上",
+    "type": "cruiser",
+    "totalHP": 12200,
+    "damageReduction": 0.7,
+    "maxSpeed": 0.12,
+    "acceleration": 0.002,
+    "rotateSpeed": 2.5,
+    "length": 201,
+    "width": 21,
+    "weapon": {
+      "guns": [
+        {
+          "name": "MK12/38",
+          "posPercent": 0.7
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": 0.6
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": 0.5
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.5
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.6
+        },
+        {
+          "name": "MK12/38",
+          "posPercent": -0.7
+        },
+        // TODO 其实亚特兰大有一对主炮是是左右舷，目前还没射界概念，认为一座
+        {
+          "name": "MK12/38",
+          "posPercent": -0.3
+        }
+      ],
+      // TODO 最上左右舷各两组 610 3 联装鱼雷
       "torpedoes": []
     }
   }

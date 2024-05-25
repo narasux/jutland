@@ -23,6 +23,7 @@
   },
   // 美国海军 MK12/38
   // lowa（衣阿华）
+  // atlanta（亚特兰大）
   {
     "name": "MK12/38",
     "bulletName": "GB127T1",
@@ -53,5 +54,16 @@
     "range": 18,
     "bulletSpread": 100,
     "bulletSpeed": 0.42
+  },
+  // 日本海军 双联装 20.3 厘米 50 倍口径
+  // mogami（最上）
+  {
+    "name": "JP203/50",
+    "bulletName": "GB203T1",
+    "bulletCount": 2,
+    "reloadTime": 10,
+    "range": 24,
+    "bulletSpread": 120,
+    "bulletSpeed": 0.44
   }
 ]

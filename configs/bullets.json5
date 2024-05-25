@@ -10,13 +10,18 @@
     "life": 200
   },
   {
+    "name": "GB203T1",
+    "damage": 330,
+    "life": 180
+  },
+  {
     "name": "GB152T1",
-    "damage": 135,
+    "damage": 160,
     "life": 150
   },
   {
     "name": "GB127T1",
-    "damage": 100,
+    "damage": 120,
     "life": 150
   }
 ]
