@@ -1,7 +1,9 @@
 package audio
 
 import (
+	"fmt"
 	"log"
+	"slices"
 
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/loader"
@@ -35,27 +37,27 @@ func mustNewAudio(audioPath string) types.AudioStream {
 
 // NewGameStartBackground 游戏开始 背景音乐
 func NewGameStartBackground() types.AudioStream {
-	return mustNewAudio("/start_bgm.wav")
+	return mustNewAudio("/bgm/start_bgm.wav")
 }
 
 // NewGameEndBackground 游戏结束 背景音乐
 func NewGameEndBackground() types.AudioStream {
-	return mustNewAudio("/end_bgm.wav")
+	return mustNewAudio("/bgm/end_bgm.wav")
 }
 
 // NewMenuBackground 菜单页面 背景音乐
 func NewMenuBackground() types.AudioStream {
-	return mustNewAudio("/menu_bgm.wav")
+	return mustNewAudio("/bgm/menu_bgm.wav")
 }
 
 // NewMissionsBackground 任务选择 背景音乐 TODO 更换音频
 func NewMissionsBackground() types.AudioStream {
-	return mustNewAudio("/menu_bgm.wav")
+	return mustNewAudio("/bgm/menu_bgm.wav")
 }
 
 // NewMissionStartBackground 任务开始 背景音乐 TODO 更换音频
 func NewMissionStartBackground() types.AudioStream {
-	return mustNewAudio("/menu_bgm.wav")
+	return mustNewAudio("/bgm/menu_bgm.wav")
 }
 
 // NewMenuButtonHover 鼠标悬停菜单按钮
@@ -70,12 +72,12 @@ func NewMenuButtonClick() types.AudioStream {
 
 // NewMissionSuccess 任务成功
 func NewMissionSuccess() types.AudioStream {
-	return mustNewAudio("/mission_success.wav")
+	return mustNewAudio("/bgm/mission_success.wav")
 }
 
 // NewMissionFailed 任务失败
 func NewMissionFailed() types.AudioStream {
-	return mustNewAudio("/mission_failed.wav")
+	return mustNewAudio("/bgm/mission_failed.wav")
 }
 
 // NewShipExplode 战舰爆炸
@@ -83,7 +85,26 @@ func NewShipExplode() types.AudioStream {
 	return mustNewAudio("/ship_explode.wav")
 }
 
-// NewGunMK45 MK45 炮开火
-func NewGunMK45() types.AudioStream {
-	return mustNewAudio("/gun_mk_45.wav")
+// 大口径炮弹
+var largeGunBulletDiameter = []int{460, 406, 381, 356, 305}
+
+// 中口径炮弹
+var mediumGunBulletDiameter = []int{203, 152}
+
+// 小口径炮弹
+var smallGunBulletDiameter = []int{127}
+
+// NewGunFire 火炮开火
+func NewGunFire(bulletDiameter int) types.AudioStream {
+	// TODO 目前只按照大中小口径区分
+	// FIXME 中小口径的火炮开火声音需要重录
+	audioType := "not_found"
+	if slices.Contains(largeGunBulletDiameter, bulletDiameter) {
+		audioType = "large"
+	} else if slices.Contains(mediumGunBulletDiameter, bulletDiameter) {
+		audioType = "medium"
+	} else if slices.Contains(smallGunBulletDiameter, bulletDiameter) {
+		audioType = "small"
+	}
+	return mustNewAudio(fmt.Sprintf("/gunfire/%s.wav", audioType))
 }

@@ -233,9 +233,7 @@ func (m *MissionManager) updateShipGroups() {
 
 // 更新武器开火相关状态
 func (m *MissionManager) updateWeaponFire() {
-	// 限制单次循环内的开火声音次数，避免过于嘈杂
-	audioPlayQuota := 3
-
+	maxBulletDiameter := 0
 	for shipUid, ship := range m.state.Ships {
 		for enemyUid, enemy := range m.state.Ships {
 			// 不能炮击自己，也不能主动炮击己方的战舰
@@ -248,16 +246,21 @@ func (m *MissionManager) updateWeaponFire() {
 				if len(bullets) == 0 {
 					continue
 				}
-				// 炮击声音（只有战舰在视野内才播放声音）
-				// FIXME 需要修复声音重叠变大声的问题
-				if audioPlayQuota > 0 && m.state.Camera.Contains(ship.CurPos) {
-					audio.PlayAudioToEnd(audioRes.NewGunMK45())
-					audioPlayQuota--
+				// 镜头内的才统计
+				if m.state.Camera.Contains(ship.CurPos) {
+					for _, bt := range bullets {
+						maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
+					}
 				}
 				m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
 				break
 			}
 		}
+	}
+
+	// 口径即是真理，只有最大的才能在本轮说话
+	if maxBulletDiameter > 0 {
+		audio.PlayAudioToEnd(audioRes.NewGunFire(maxBulletDiameter))
 	}
 }
 

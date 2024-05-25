@@ -1,31 +1,37 @@
 [
   {
     "name": "US/GB406T1",
+    "diameter": 406,
     "damage": 3500,
     "life": 200
   },
   {
     "name": "US/GB127T1",
+    "diameter": 127,
     "damage": 120,
     "life": 150
   },
   {
     "name": "JP/GB356T1",
+    "diameter": 356,
     "damage": 2040,
     "life": 200
   },
   {
     "name": "JP/GB203T1",
+    "diameter": 203,
     "damage": 330,
     "life": 180
   },
   {
     "name": "JP/GB152T1",
+    "diameter": 152,
     "damage": 180,
     "life": 150
   },
   {
     "name": "JP/GB127T1",
+    "diameter": 127,
     "damage": 140,
     "life": 150
   }

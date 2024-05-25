@@ -20,6 +20,8 @@ import (
 type Bullet struct {
 	// 弹药名称
 	Name string `json:"name"`
+	// 口径
+	Diameter int `json:"diameter"`
 	// 伤害数值
 	Damage float64 `json:"damage"`
 	// 生命（前进太多要消亡）

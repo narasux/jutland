@@ -16,7 +16,7 @@
     "name": "MK7/50",
     "bulletName": "US/GB406T1",
     "bulletCount": 3,
-    "reloadTime": 13,
+    "reloadTime": 12,
     "range": 38,
     "bulletSpread": 200,
     "bulletSpeed": 0.4
