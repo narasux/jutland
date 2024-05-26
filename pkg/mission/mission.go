@@ -235,26 +235,38 @@ func (m *MissionManager) updateShipGroups() {
 func (m *MissionManager) updateWeaponFire() {
 	maxBulletDiameter := 0
 	for shipUid, ship := range m.state.Ships {
+		var nearestEnemy *obj.BattleShip
+		var nearestEnemyDistance float64 = 0
+
 		for enemyUid, enemy := range m.state.Ships {
 			// 不能炮击自己，也不能主动炮击己方的战舰
 			if shipUid == enemyUid || ship.BelongPlayer == enemy.BelongPlayer {
 				continue
 			}
-			// 如果在最大射程内，立刻开火（只对该目标开火）
-			if ship.InMaxRange(enemy.CurPos) {
-				bullets := ship.Fire(enemy)
-				if len(bullets) == 0 {
-					continue
-				}
-				// 镜头内的才统计
-				if m.state.Camera.Contains(ship.CurPos) {
-					for _, bt := range bullets {
-						maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
-					}
-				}
-				m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
-				break
+			// 如果不在最大射程内，跳过
+			distance := geometry.CalcDistance(ship.CurPos.RX, ship.CurPos.RY, enemy.CurPos.RX, enemy.CurPos.RY)
+			if distance > ship.Weapon.MaxRange {
+				continue
 			}
+			// 找到最近的敌人
+			if nearestEnemy == nil || distance < nearestEnemyDistance {
+				nearestEnemy = enemy
+				nearestEnemyDistance = distance
+			}
+		}
+		if nearestEnemy != nil {
+			bullets := ship.Fire(nearestEnemy)
+			if len(bullets) == 0 {
+				continue
+			}
+			// 镜头内的才统计
+			if m.state.Camera.Contains(ship.CurPos) {
+				for _, bt := range bullets {
+					maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
+				}
+			}
+			m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
+			break
 		}
 	}
 
@@ -304,7 +316,7 @@ func (m *MissionManager) updateShotBullets() {
 
 	// 继续塔塔开的，保留
 	m.state.ForwardingBullets = forwardingBullets
-	// 已经到达目标地点的，存起来绘图用 FIXME 这里有个问题，自己赋值，会不会把正在绘制动画的搞没了
+	// 已经到达目标地点的，存起来绘图用
 	m.state.ArrivedBullets = arrivedBullets
 	// 尝试结算伤害
 	for _, bt := range m.state.ArrivedBullets {

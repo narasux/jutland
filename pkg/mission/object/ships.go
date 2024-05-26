@@ -141,11 +141,6 @@ func (s *BattleShip) EnableWeapon(t WeaponType) {
 	}
 }
 
-// InMaxRange 是否在最大射程内
-func (s *BattleShip) InMaxRange(targetPos MapPos) bool {
-	return geometry.CalcDistance(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY) <= s.Weapon.MaxRange
-}
-
 // Fire 向指定目标发射武器
 func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
 	shotBullets := []*Bullet{}
@@ -164,6 +159,7 @@ func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
 
 // Hurt 收到伤害
 func (s *BattleShip) Hurt(damage float64) {
+	// TODO 加入暴击伤害的机制？比如一发大口径直接起飞（此处 @ 胡德）
 	s.CurHP = max(0, s.CurHP-damage*s.DamageReduction)
 }
 

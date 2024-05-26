@@ -56,3 +56,34 @@ func IsPointInRotatedRectangle(x, y, cx, cy, length, width, angle float64) bool 
 
 	return -halfWidth < rotatedX && rotatedX < halfWidth && -halfLength < rotatedY && rotatedY < halfLength
 }
+
+// 迭代法求解弹药前进时间
+func solveBulletForwardTime(curX, curY, bulletSpeed, enemyX, enemyY, enemySpeed, enemyRotation float64) float64 {
+	time := 0.0
+	for i := 0; i < 100; i++ { // Perform 100 iterations
+		rad := enemyRotation * math.Pi / 180
+		targetX := enemyX + enemySpeed*time*math.Sin(rad)
+		targetY := enemyY - enemySpeed*time*math.Cos(rad)
+		distance := math.Hypot(targetX-curX, targetY-curY)
+		actualTime := distance / bulletSpeed
+		if math.Abs(actualTime-time) < 0.0001 {
+			break
+		}
+		time = actualTime
+	}
+	return time
+}
+
+// CalcWeaponFireAngle 计算武器发射角度
+func CalcWeaponFireAngle(
+	curX, curY, bulletSpeed, enemyX, enemyY, enemySpeed, enemyRotation float64,
+) (angle float64, targetX float64, targetY float64) {
+	time := solveBulletForwardTime(curX, curY, bulletSpeed, enemyX, enemyY, enemySpeed, enemyRotation)
+
+	rad := enemyRotation * math.Pi / 180
+	targetX = enemyX + enemySpeed*time*math.Sin(rad)
+	targetY = enemyY - enemySpeed*time*math.Cos(rad)
+	angleRad := math.Atan2(targetY-curY, targetX-curX)
+
+	return math.Mod(angleRad*180/math.Pi+90+360, 360), targetX, targetY
+}

@@ -75,3 +75,38 @@ func TestIsPointInRotatedRect(t *testing.T) {
 	assert.False(t, geometry.IsPointInRotatedRectangle(5.0, -1.0, cx, cy, 10.0, 4.0, 90.0))
 	assert.True(t, geometry.IsPointInRotatedRectangle(2.0, 2.0, cx, cy, 10.0, 4.0, 135.0))
 }
+
+func TestCalcWeaponFireAngle(t *testing.T) {
+	// 追击（斜边）
+	angle, _, _ := geometry.CalcWeaponFireAngle(0, 0, 1, 10, -10, 1, 45)
+	assert.Equal(t, float64(45), angle)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 10, 10, 1, 135)
+	assert.Equal(t, float64(135), angle)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, -10, 10, 1, 225)
+	assert.Equal(t, float64(225), angle)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, -10, -10, 1, 315)
+	assert.Equal(t, float64(315), angle)
+
+	// 追击（轴向）
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 0, -10, 1, 0)
+	assert.Equal(t, float64(0), angle)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 10, 0, 1, 90)
+	assert.Equal(t, float64(90), angle)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 0, 10, 1, 180)
+	assert.Equal(t, float64(180), angle)
+
+	// 迎头
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 0, -10, 1, 180)
+	assert.Equal(t, float64(0), angle)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 10, 0, 1, 270)
+	assert.Equal(t, float64(90), angle)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 0, 10, 1, 0)
+	assert.Equal(t, float64(180), angle)
+
+	// 三角形
+	epsilon := 0.01
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 1, 10, 10, 1, 45)
+	assert.InEpsilon(t, float64(50.71), angle, epsilon)
+	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 100, 100, 10, 20, 45)
+	assert.InEpsilon(t, float64(86.81), angle, epsilon)
+}
