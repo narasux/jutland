@@ -1,19 +1,12 @@
 package object
 
 import (
-	"io"
-	"log"
 	"math"
 	"math/rand"
-	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/mohae/deepcopy"
-	"github.com/yosuke-furukawa/json5/encoding/json5"
-
 	"github.com/narasux/jutland/pkg/common/constants"
-	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -44,8 +37,8 @@ type Gun struct {
 
 	// 当前火炮是否可用（如战损 / 禁用）
 	Disable bool
-	// 最后一次射击时间（毫秒时间戳)
-	LastFireTime int64
+	// 装填开始时间（毫秒时间戳)
+	ReloadStartAt int64
 }
 
 // CanFire 是否可发射
@@ -55,7 +48,7 @@ func (g *Gun) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 		return false
 	}
 	// 在重新装填，不可发射
-	if g.LastFireTime+int64(g.ReloadTime*1e3) > time.Now().UnixMilli() {
+	if g.ReloadStartAt+int64(g.ReloadTime*1e3) > time.Now().UnixMilli() {
 		return false
 	}
 	// 不在射程内，不可发射
@@ -74,8 +67,6 @@ func (g *Gun) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 
 // Fire 发射
 func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
-	shotBullets := []*Bullet{}
-
 	curPos := ship.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
 	gunOffset := g.PosPercent * ship.Length / constants.MapBlockSize / 2
@@ -90,9 +81,9 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	targetPos := NewMapPosR(targetRx, targetRY)
 
 	if !g.CanFire(ship.CurRotation, curPos, targetPos) {
-		return shotBullets
+		return []*Bullet{}
 	}
-	g.LastFireTime = time.Now().UnixMilli()
+	g.ReloadStartAt = time.Now().UnixMilli()
 
 	// 散布应该随着距离减小而减小
 	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
@@ -100,6 +91,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	// 炮弹散布的半径
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
+	shotBullets := []*Bullet{}
 	for i := 0; i < g.BulletCount; i++ {
 		pos := targetPos.Copy()
 		// rand.Intn(3) - 1 算方向，rand.Float64() 算距离
@@ -121,23 +113,4 @@ func newGun(name string, posPercent float64, leftFireArc, rightFireArc FiringArc
 	g.LeftFiringArc = leftFireArc
 	g.RightFiringArc = rightFireArc
 	return &g
-}
-
-func init() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "guns.json5"))
-	if err != nil {
-		log.Fatalf("failed to open guns.json5: %s", err)
-	}
-	defer file.Close()
-
-	bytes, _ := io.ReadAll(file)
-
-	var guns []Gun
-	if err = json5.Unmarshal(bytes, &guns); err != nil {
-		log.Fatalf("failed to unmarshal guns.json5: %s", err)
-	}
-
-	for _, g := range guns {
-		gunMap[g.Name] = &g
-	}
 }

@@ -4,7 +4,7 @@
     "name": "longBeach",
     "displayName": "长滩",
     "type": "default",
-    "totalHP": 12000,
+    "totalHP": 120000,
     "damageReduction": 0.9,
     "maxSpeed": 0.1,
     "acceleration": 0.002,
@@ -13,32 +13,61 @@
     "width": 22,
     "weapon": {
       "guns": [
+        // 前主炮 A
         {
           "name": "MK45/38",
           "posPercent": 0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 150
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 210,
             "end": 360
           }
         },
+        // 后主炮 B
         {
           "name": "MK45/38",
           "posPercent": -0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 30,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 330
           }
         }
       ],
-      "torpedoes": []
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "US533/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "US533/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        }
+      ]
     }
   },
   // 战列舰
@@ -60,11 +89,11 @@
         {
           "name": "MK7/50",
           "posPercent": 0.45,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 130
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 230,
             "end": 360
           }
@@ -73,11 +102,11 @@
         {
           "name": "MK7/50",
           "posPercent": 0.25,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 130
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 230,
             "end": 360
           }
@@ -86,11 +115,11 @@
         {
           "name": "MK7/50",
           "posPercent": -0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 50,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 310
           }
@@ -99,11 +128,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0.05,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -112,11 +141,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0.05,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -125,11 +154,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -138,11 +167,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -151,11 +180,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.05,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -164,11 +193,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.05,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -177,11 +206,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.1,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -190,11 +219,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.1,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -203,11 +232,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.15,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -216,11 +245,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.15,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -247,11 +276,11 @@
         {
           "name": "JP356/45",
           "posPercent": 0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 130
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 230,
             "end": 360
           }
@@ -260,11 +289,11 @@
         {
           "name": "JP356/45",
           "posPercent": 0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 130
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 230,
             "end": 360
           }
@@ -273,11 +302,11 @@
         {
           "name": "JP356/45",
           "posPercent": -0.2,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 50,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 310
           }
@@ -286,11 +315,11 @@
         {
           "name": "JP356/45",
           "posPercent": -0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 50,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 310
           }
@@ -299,11 +328,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -312,11 +341,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -325,11 +354,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0.4,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -338,11 +367,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0.4,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -351,11 +380,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0.2,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -364,11 +393,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0.2,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -377,11 +406,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -390,11 +419,11 @@
         {
           "name": "JP152/50",
           "posPercent": 0,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -403,11 +432,11 @@
         {
           "name": "JP152/50",
           "posPercent": -0.2,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -416,11 +445,11 @@
         {
           "name": "JP152/50",
           "posPercent": -0.2,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -429,11 +458,11 @@
         {
           "name": "JP152/50",
           "posPercent": -0.4,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -442,11 +471,11 @@
         {
           "name": "JP152/50",
           "posPercent": -0.4,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -455,11 +484,11 @@
         {
           "name": "JP152/50",
           "posPercent": -0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -468,11 +497,11 @@
         {
           "name": "JP152/50",
           "posPercent": -0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -500,11 +529,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0.7,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -513,11 +542,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -526,11 +555,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -539,11 +568,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -552,11 +581,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -565,11 +594,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.7,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -578,11 +607,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.3,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 10,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 360,
             "end": 360
           }
@@ -591,18 +620,44 @@
         {
           "name": "MK12/38",
           "posPercent": -0.3,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 0
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 350
           }
         }
       ],
-      // TODO 亚特兰大左右舷各一组 533 4 联装鱼雷
-      "torpedoes": []
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "US533/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "US533/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        }
+      ]
     },
   },
   // 日本海军
@@ -623,11 +678,11 @@
         {
           "name": "JP203/50",
           "posPercent": 0.7,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -636,11 +691,11 @@
         {
           "name": "JP203/50",
           "posPercent": 0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -649,11 +704,11 @@
         {
           "name": "JP203/50",
           "posPercent": 0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -662,11 +717,11 @@
         {
           "name": "JP203/50",
           "posPercent": -0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -675,18 +730,70 @@
         {
           "name": "JP203/50",
           "posPercent": -0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
         },
       ],
-      // TODO 最上左右舷各两组 610 3 联装鱼雷
-      "torpedoes": []
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "JP610/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "JP610/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        },
+        // 右舷鱼雷 B
+        {
+          "name": "JP610/4",
+          "posPercent": -0.4,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "JP610/4",
+          "posPercent": -0.4,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        }
+      ]
     }
   },
   // 驱逐舰
@@ -708,11 +815,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0.7,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -721,11 +828,11 @@
         {
           "name": "MK12/38",
           "posPercent": 0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -734,11 +841,11 @@
         {
           "name": "MK12/38",
           "posPercent": -0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -747,18 +854,44 @@
         {
           "name": "MK12/38",
           "posPercent": -0.7,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
         },
       ],
-      // TODO 波特中轴两组 533 4 联装鱼雷
-      "torpedoes": []
+      "torpedoes": [
+        // 中轴鱼雷 A
+        {
+          "name": "US533/4",
+          "posPercent": 0,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        },
+        // 中轴鱼雷 B
+        {
+          "name": "US533/4",
+          "posPercent": -0.1,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        }
+      ]
     },
   },
   // 日本海军
@@ -779,11 +912,11 @@
         {
           "name": "JP127/50",
           "posPercent": 0.8,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 0,
             "end": 160
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 200,
             "end": 360
           }
@@ -792,11 +925,11 @@
         {
           "name": "JP127/50",
           "posPercent": -0.5,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
@@ -805,18 +938,44 @@
         {
           "name": "JP127/50",
           "posPercent": -0.6,
-          "leftFiringArc": {
+          "rightFiringArc": {
             "start": 20,
             "end": 180
           },
-          "rightFiringArc": {
+          "leftFiringArc": {
             "start": 180,
             "end": 340
           }
         },
       ],
-      // TODO 朝潮中轴两组 610 4 联装鱼雷
-      "torpedoes": []
+      "torpedoes": [
+        // 中轴鱼雷 A
+        {
+          "name": "JP610/4",
+          "posPercent": 0.1,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        },
+        // 中轴鱼雷 B
+        {
+          "name": "JP610/4",
+          "posPercent": -0.1,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        }
+      ]
     }
   }
 ]

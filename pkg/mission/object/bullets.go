@@ -1,25 +1,30 @@
 package object
 
 import (
-	"io"
-	"log"
 	"math"
-	"os"
-	"path/filepath"
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
-	"github.com/yosuke-furukawa/json5/encoding/json5"
 
-	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
+)
+
+type BulletType string
+
+const (
+	// BulletTypeShell 火炮炮弹
+	BulletTypeShell BulletType = "shell"
+	// BulletTypeTorpedo 鱼雷
+	BulletTypeTorpedo BulletType = "torpedo"
 )
 
 // 火炮 / 鱼雷弹药
 type Bullet struct {
 	// 弹药名称
 	Name string `json:"name"`
+	// 弹药类型
+	Type BulletType `json:"type"`
 	// 口径
 	Diameter int `json:"diameter"`
 	// 伤害数值
@@ -77,23 +82,4 @@ func NewBullets(
 	b.BelongShip = shipUid
 	b.BelongPlayer = player
 	return &b
-}
-
-func init() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "bullets.json5"))
-	if err != nil {
-		log.Fatalf("failed to open bullets.json5: %s", err)
-	}
-	defer file.Close()
-
-	bytes, _ := io.ReadAll(file)
-
-	var bullets []Bullet
-	if err = json5.Unmarshal(bytes, &bullets); err != nil {
-		log.Fatalf("failed to unmarshal bullets.json5: %s", err)
-	}
-
-	for _, b := range bullets {
-		bulletMap[b.Name] = &b
-	}
 }

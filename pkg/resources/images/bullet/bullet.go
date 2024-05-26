@@ -13,8 +13,15 @@ var (
 	GB203BulletImg = ebiten.NewImage(3, 4)
 	GB152BulletImg = ebiten.NewImage(2, 3)
 	GB127BulletImg = ebiten.NewImage(2, 3)
-	NotFountImg    = ebiten.NewImage(10, 20)
 )
+
+// FIXME 补充鱼雷弹药图片素材
+var (
+	TB533BulletImg = ebiten.NewImage(3, 20)
+	TB610BulletImg = ebiten.NewImage(4, 24)
+)
+
+var NotFountImg = ebiten.NewImage(10, 20)
 
 func init() {
 	GB406BulletImg.Fill(colorx.Silver)
@@ -22,6 +29,10 @@ func init() {
 	GB203BulletImg.Fill(colorx.Gold)
 	GB152BulletImg.Fill(colorx.Gold)
 	GB127BulletImg.Fill(colorx.Silver)
+
+	TB533BulletImg.Fill(colorx.DarkSilver)
+	TB610BulletImg.Fill(colorx.Silver)
+
 	NotFountImg.Fill(colorx.Green)
 }
 
@@ -41,6 +52,10 @@ func GetImg(name string) *ebiten.Image {
 		return GB152BulletImg
 	case "GB127":
 		return GB127BulletImg
+	case "TB533":
+		return TB533BulletImg
+	case "TB610":
+		return TB610BulletImg
 	}
 	// 找不到就暴露出来
 	return NotFountImg

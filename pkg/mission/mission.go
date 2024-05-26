@@ -234,6 +234,8 @@ func (m *MissionManager) updateShipGroups() {
 // 更新武器开火相关状态
 func (m *MissionManager) updateWeaponFire() {
 	maxBulletDiameter := 0
+	isTorpedoLaunched := false
+
 	for shipUid, ship := range m.state.Ships {
 		var nearestEnemy *obj.BattleShip
 		var nearestEnemyDistance float64 = 0
@@ -262,7 +264,12 @@ func (m *MissionManager) updateWeaponFire() {
 			// 镜头内的才统计
 			if m.state.Camera.Contains(ship.CurPos) {
 				for _, bt := range bullets {
-					maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
+					if bt.Type == obj.BulletTypeTorpedo {
+						isTorpedoLaunched = true
+					} else {
+						// 只有炮弹才计算口径，鱼雷发射都是一个声音
+						maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
+					}
 				}
 			}
 			m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
@@ -273,6 +280,8 @@ func (m *MissionManager) updateWeaponFire() {
 	// 口径即是真理，只有最大的才能在本轮说话
 	if maxBulletDiameter > 0 {
 		audio.PlayAudioToEnd(audioRes.NewGunFire(maxBulletDiameter))
+	} else if isTorpedoLaunched {
+		audio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
 	}
 }
 
@@ -301,25 +310,8 @@ func (m *MissionManager) updateShotBullets() {
 		m.state.ForwardingBullets[i].Forward()
 	}
 
-	arrivedBullets, forwardingBullets := []*obj.Bullet{}, []*obj.Bullet{}
-	for _, bullet := range m.state.ForwardingBullets {
-		// 迷失的弹药，要及时消亡（如鱼雷没命中）
-		if bullet.Life <= 0 {
-			continue
-		}
-		if bullet.CurPos.MEqual(bullet.TargetPos) {
-			arrivedBullets = append(arrivedBullets, bullet)
-		} else {
-			forwardingBullets = append(forwardingBullets, bullet)
-		}
-	}
-
-	// 继续塔塔开的，保留
-	m.state.ForwardingBullets = forwardingBullets
-	// 已经到达目标地点的，存起来绘图用
-	m.state.ArrivedBullets = arrivedBullets
-	// 尝试结算伤害
-	for _, bt := range m.state.ArrivedBullets {
+	// 结算伤害
+	resolveDamage := func(bt *obj.Bullet) bool {
 		for _, ship := range m.state.Ships {
 			// 如果友军伤害没启用，则不对己方战舰造成伤害
 			if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
@@ -334,12 +326,42 @@ func (m *MissionManager) updateShotBullets() {
 			) {
 				ship.Hurt(bt.Damage)
 				bt.HitShip = true
+				return true
+			}
+		}
+		// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
+		bt.HitWater = true
+		return false
+	}
+
+	arrivedBullets, forwardingBullets := []*obj.Bullet{}, []*obj.Bullet{}
+	for _, bullet := range m.state.ForwardingBullets {
+		// 迷失的弹药，要及时消亡（如鱼雷没命中）
+		if bullet.Life <= 0 {
+			continue
+		}
+		if bullet.Type == obj.BulletTypeShell {
+			// 炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
+			if bullet.CurPos.MEqual(bullet.TargetPos) {
+				resolveDamage(bullet)
+				arrivedBullets = append(arrivedBullets, bullet)
 			} else {
-				// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-				bt.HitWater = true
+				forwardingBullets = append(forwardingBullets, bullet)
+			}
+		} else if bullet.Type == obj.BulletTypeTorpedo {
+			// 鱼雷没有目的地的说法，碰到就爆炸
+			if resolveDamage(bullet) {
+				arrivedBullets = append(arrivedBullets, bullet)
+			} else {
+				forwardingBullets = append(forwardingBullets, bullet)
 			}
 		}
 	}
+
+	// 继续塔塔开的，保留
+	m.state.ForwardingBullets = forwardingBullets
+	// 已经到达目标地点的，存起来绘图用
+	m.state.ArrivedBullets = arrivedBullets
 }
 
 // 更新局内战舰

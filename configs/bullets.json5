@@ -1,38 +1,60 @@
 [
+  // 炮弹
   {
     "name": "US/GB406T1",
+    "type": "shell",
     "diameter": 406,
     "damage": 3500,
     "life": 200
   },
   {
     "name": "US/GB127T1",
+    "type": "shell",
     "diameter": 127,
     "damage": 120,
     "life": 150
   },
   {
     "name": "JP/GB356T1",
+    "type": "shell",
     "diameter": 356,
     "damage": 2040,
     "life": 200
   },
   {
     "name": "JP/GB203T1",
+    "type": "shell",
     "diameter": 203,
     "damage": 330,
     "life": 180
   },
   {
     "name": "JP/GB152T1",
+    "type": "shell",
     "diameter": 152,
     "damage": 180,
     "life": 150
   },
   {
     "name": "JP/GB127T1",
+    "type": "shell",
     "diameter": 127,
     "damage": 140,
     "life": 150
+  },
+  // 鱼雷
+  {
+    "name": "US/TB533T1",
+    "type": "torpedo",
+    "diameter": 533,
+    "damage": 5300,
+    "life": 200
+  },
+  {
+    "name": "JP/TB610T1",
+    "type": "torpedo",
+    "diameter": 610,
+    "damage": 7000,
+    "life": 230
   }
 ]

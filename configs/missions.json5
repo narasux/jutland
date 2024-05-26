@@ -1,7 +1,7 @@
 [
   {
     "name": "default",
-    "initCameraPos": [28, 28],
+    "initCameraPos": [35, 28],
     "mapName": "default",
     "maxShipCount": 5,
     "initShips": [
@@ -13,43 +13,61 @@
       },
       {
         "name": "lowa",
-        "pos": [42, 35],
+        "pos": [38, 34],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
         "name": "atlanta",
-        "pos": [40, 40],
+        "pos": [40, 38],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
         "name": "porter",
-        "pos": [38, 45],
+        "pos": [38, 42],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
         "name": "kongo",
-        "pos": [70, 35],
+        "pos": [40, 46],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "mogami",
+        "pos": [38, 50],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "asashio",
+        "pos": [38, 54],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "kongo",
+        "pos": [80, 35],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "mogami",
-        "pos": [65, 42],
+        "pos": [80, 42],
         "rotation": 215,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "kongo",
-        "pos": [70, 50],
+        "pos": [80, 50],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [72, 42],
+        "pos": [85, 42],
         "rotation": 45,
         "belongPlayer": "computerAlpha"
       }

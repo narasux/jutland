@@ -1,69 +1,118 @@
 package object
 
 import (
+	"math"
 	"time"
 
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
-type Torpedo struct {
+type TorpedoLauncher struct {
+	// 发射器名称
+	Name string `json:"name"`
 	// 鱼雷类型
 	BulletName string `json:"bulletName"`
-	// 单次发射鱼雷数量
+	// 鱼雷数量
 	BulletCount int `json:"bulletCount"`
+	// 发射间隔（单位: s)
+	ShotInterval float64 `json:"shotInterval"`
 	// 装填时间（单位: s)
-	ReloadTime int64 `json:"reloadTime"`
+	ReloadTime float64 `json:"reloadTime"`
 	// 射程
 	Range float64 `json:"range"`
 	// 鱼雷速度
 	BulletSpeed float64 `json:"bulletSpeed"`
-	// 百分比位置
+	// 相对位置
+	// 0.35 -> 从中心往舰首 35% 舰体长度
+	// -0.3 -> 从中心往舰尾 30% 舰体长度
 	PosPercent float64
+	// 左射界 (180, 360]
+	LeftFiringArc FiringArc
+	// 右射界 (0, 180]
+	RightFiringArc FiringArc
 
 	// 动态参数
 	// 当前鱼雷是否可用（如战损 / 禁用）
 	Disable bool
-	// 最后一次发射时间（时间戳)
-	LastFireTime int64
+	// 开始装填时间（时间戳)
+	ReloadStartAt int64
+	// 最近发射时间（时间戳）
+	LatestFireAt int64
+	// 本次装填鱼雷已发射数量
+	ShotCountBeforeReload int
 }
 
 // CanFire 是否可发射
-func (t *Torpedo) CanFire(curPos, targetPos MapPos) bool {
+func (lc *TorpedoLauncher) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 	// 未启用，不可发射
-	if t.Disable {
-		return false
-	}
-	// 在重新装填，不可发射
-	if t.LastFireTime+t.ReloadTime > time.Now().Unix() {
+	if lc.Disable {
 		return false
 	}
 	// 不在射程内，不可发射
-	if geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY) > t.Range {
+	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	if distance > lc.Range {
+		return false
+	}
+	// 不在射界范围内，不可发射
+	rotation := geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	rotation = math.Mod(rotation-shipCurRotation+360, 360)
+	if !lc.LeftFiringArc.Contains(rotation) && !lc.RightFiringArc.Contains(rotation) {
+		return false
+	}
+	// 注：鱼雷是需要考虑发射间隔的，比如每秒一发之类，全部打完才是重新装填
+	timeNow := time.Now().UnixMilli()
+	// 在重新装填，不可发射
+	if timeNow < lc.ReloadStartAt+int64(lc.ReloadTime*1e3) {
+		return false
+	}
+	// 小于发射间隔也是不行的
+	if timeNow < lc.LatestFireAt+int64(lc.ShotInterval*1e3) {
 		return false
 	}
 	return true
 }
 
 // Fire 发射
-func (t *Torpedo) Fire(ship, enemy *BattleShip) []*Bullet {
-	if !t.CanFire(ship.CurPos, enemy.CurPos) {
+func (lc *TorpedoLauncher) Fire(ship, enemy *BattleShip) []*Bullet {
+	curPos := ship.CurPos.Copy()
+	// 炮塔距离战舰中心的距离
+	gunOffset := lc.PosPercent * ship.Length / constants.MapBlockSize / 2
+	curPos.AddRx(math.Sin(ship.CurRotation*math.Pi/180) * gunOffset)
+	curPos.SubRy(math.Cos(ship.CurRotation*math.Pi/180) * gunOffset)
+
+	// 考虑提前量（依赖敌舰速度，角度）
+	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
+		ship.CurPos.RX, ship.CurPos.RY, lc.BulletSpeed,
+		enemy.CurPos.RX, enemy.CurPos.RY, enemy.CurSpeed, enemy.CurRotation,
+	)
+	targetPos := NewMapPosR(targetRx, targetRY)
+
+	if !lc.CanFire(ship.CurRotation, curPos, targetPos) {
 		return []*Bullet{}
 	}
-	t.LastFireTime = time.Now().Unix()
-	// FIXME 初始化弹药（复数，考虑当前位置，curPos 是战舰位置，还要计算相对位置，需要 uid）
-	return []*Bullet{}
+	timeNow := time.Now().UnixMilli()
+	// 弹药打完了，重新装填
+	if lc.ShotCountBeforeReload == lc.BulletCount {
+		lc.ShotCountBeforeReload = 0
+		lc.ReloadStartAt = timeNow
+		return []*Bullet{}
+	}
+	// 鱼雷不是齐射的，是一个一个来的
+	lc.LatestFireAt = time.Now().UnixMilli()
+	lc.ShotCountBeforeReload++
+
+	return []*Bullet{NewBullets(lc.BulletName, curPos, targetPos, lc.BulletSpeed, ship.Uid, ship.BelongPlayer)}
 }
 
-var torpedoMap = map[string]*Torpedo{}
+var torpedoLauncherMap = map[string]*TorpedoLauncher{}
 
-func newTorpedo(name string, posPercent float64) *Torpedo {
-	t := deepcopy.Copy(*torpedoMap[name]).(Torpedo)
-	t.PosPercent = posPercent
-	return &t
-}
-
-func init() {
-	// TODO 支持鱼雷配置加载
+func newTorpedoLauncher(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *TorpedoLauncher {
+	lc := deepcopy.Copy(*torpedoLauncherMap[name]).(TorpedoLauncher)
+	lc.PosPercent = posPercent
+	lc.LeftFiringArc = leftFireArc
+	lc.RightFiringArc = rightFireArc
+	return &lc
 }

@@ -1,18 +1,12 @@
 package object
 
 import (
-	"io"
-	"log"
 	"math"
-	"os"
-	"path/filepath"
 	"slices"
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
-	"github.com/yosuke-furukawa/json5/encoding/json5"
 
-	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -58,7 +52,7 @@ type Weapon struct {
 	// 火炮
 	Guns []*Gun
 	// 鱼雷
-	Torpedoes []*Torpedo
+	Torpedoes []*TorpedoLauncher
 	// 最大射程（各类武器射程最大值）
 	MaxRange float64
 	// 武器禁用情况
@@ -233,42 +227,4 @@ type ShipTrail struct {
 // NewShipTrail ...
 func NewShipTrail(pos MapPos, size float64, life int) *ShipTrail {
 	return &ShipTrail{Pos: pos, Size: size, Life: life}
-}
-
-func init() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "ships.json5"))
-	if err != nil {
-		log.Fatalf("failed to open ships.json5: %s", err)
-	}
-	defer file.Close()
-
-	bytes, _ := io.ReadAll(file)
-
-	var ships []BattleShip
-	if err = json5.Unmarshal(bytes, &ships); err != nil {
-		log.Fatalf("failed to unmarshal ships.json5: %s", err)
-	}
-
-	for _, s := range ships {
-		for _, gunMD := range s.Weapon.GunsMD {
-			s.Weapon.Guns = append(s.Weapon.Guns, newGun(
-				gunMD.Name, gunMD.PosPercent, gunMD.LeftFiringArc, gunMD.RightFiringArc,
-			))
-		}
-		for _, torpedoMD := range s.Weapon.TorpedoesMD {
-			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, newTorpedo(torpedoMD.Name, torpedoMD.PosPercent))
-		}
-		for _, gun := range s.Weapon.Guns {
-			if s.Weapon.MaxRange < gun.Range {
-				s.Weapon.MaxRange = gun.Range
-			}
-		}
-		for _, torpedo := range s.Weapon.Torpedoes {
-			if s.Weapon.MaxRange < torpedo.Range {
-				s.Weapon.MaxRange = torpedo.Range
-			}
-		}
-		s.CurHP = s.TotalHP
-		shipMap[s.Name] = &s
-	}
 }
