@@ -12,6 +12,7 @@ var (
 	GB356BulletImg = ebiten.NewImage(4, 6)
 	GB203BulletImg = ebiten.NewImage(3, 4)
 	GB152BulletImg = ebiten.NewImage(2, 3)
+	GB140BulletImg = ebiten.NewImage(2, 3)
 	GB127BulletImg = ebiten.NewImage(2, 3)
 )
 
@@ -28,6 +29,7 @@ func init() {
 	GB356BulletImg.Fill(colorx.Gold)
 	GB203BulletImg.Fill(colorx.Gold)
 	GB152BulletImg.Fill(colorx.Gold)
+	GB140BulletImg.Fill(colorx.Silver)
 	GB127BulletImg.Fill(colorx.Silver)
 
 	TB533BulletImg.Fill(colorx.DarkSilver)
@@ -50,6 +52,8 @@ func GetImg(name string) *ebiten.Image {
 		return GB203BulletImg
 	case "GB152":
 		return GB152BulletImg
+	case "GB140":
+		return GB140BulletImg
 	case "GB127":
 		return GB127BulletImg
 	case "TB533":

@@ -5,9 +5,9 @@
     "name": "MK45/38",
     "bulletName": "US/GB127T1",
     "bulletCount": 1,
-    "reloadTime": 1.5,
+    "reloadTime": 0.5,
     "range": 22,
-    "bulletSpread": 50,
+    "bulletSpread": 0,
     "bulletSpeed": 0.4
   },
   // 美国海军 MK7/50
@@ -65,6 +65,17 @@
     "range": 24,
     "bulletSpread": 120,
     "bulletSpeed": 0.44
+  },
+  // 日本海军 单装 14.0 厘米 50 倍口径
+  // kuma（球磨）
+  {
+    "name": "JP140/50",
+    "bulletName": "JP/GB140T1",
+    "bulletCount": 1,
+    "reloadTime": 4,
+    "range": 18,
+    "bulletSpread": 70,
+    "bulletSpeed": 0.42
   },
   // 日本海军 双联装 12.7 厘米 50 倍口径
   // asashio（朝潮）

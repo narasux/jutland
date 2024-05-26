@@ -92,7 +92,7 @@ var largeGunBulletDiameter = []int{460, 406, 381, 356, 305}
 var mediumGunBulletDiameter = []int{203, 152}
 
 // 小口径炮弹
-var smallGunBulletDiameter = []int{127}
+var smallGunBulletDiameter = []int{140, 127}
 
 // NewGunFire 火炮开火
 func NewGunFire(bulletDiameter int) types.AudioStream {

@@ -24,26 +24,14 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "porter",
+        "name": "kuma",
         "pos": [38, 42],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "kongo",
-        "pos": [40, 46],
-        "rotation": 90,
-        "belongPlayer": "humanAlpha"
-      },
-      {
         "name": "mogami",
-        "pos": [38, 50],
-        "rotation": 90,
-        "belongPlayer": "humanAlpha"
-      },
-      {
-        "name": "asashio",
-        "pos": [38, 54],
+        "pos": [40, 46],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },

@@ -796,6 +796,206 @@
       ]
     }
   },
+  {
+    "name": "kuma",
+    "displayName": "球磨",
+    "type": "cruiser",
+    "totalHP": 5500,
+    "damageReduction": 0.9,
+    "maxSpeed": 0.12,
+    "acceleration": 0.002,
+    "rotateSpeed": 3,
+    "length": 162,
+    "width": 14,
+    "weapon": {
+      "guns": [
+        // 前主炮 A
+        {
+          "name": "JP140/50",
+          "posPercent": 0.8,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 360
+          }
+        },
+        // 前主炮 B
+        {
+          "name": "JP140/50",
+          "posPercent": 0.75,
+          "rightFiringArc": {
+            "start": 60,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 300
+          }
+        },
+        // 右前主炮 C
+        {
+          "name": "JP140/50",
+          "posPercent": 0.65,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 160
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左前主炮 C
+        {
+          "name": "JP140/50",
+          "posPercent": 0.65,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 200,
+            "end": 360
+          }
+        },
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "JP610/4",
+          "posPercent": 0.2,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "JP610/4",
+          "posPercent": 0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        },
+        // 右舷鱼雷 B
+        {
+          "name": "JP610/4",
+          "posPercent": 0,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "JP610/4",
+          "posPercent": 0,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        },
+        // 右舷鱼雷 C
+        {
+          "name": "JP610/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 C
+        {
+          "name": "JP610/4",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        },
+        // 右舷鱼雷 D
+        {
+          "name": "JP610/4",
+          "posPercent": -0.4,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 D
+        {
+          "name": "JP610/4",
+          "posPercent": -0.4,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        },
+        // 右舷鱼雷 E
+        {
+          "name": "JP610/4",
+          "posPercent": -0.6,
+          "rightFiringArc": {
+            "start": 30,
+            "end": 150
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左舷鱼雷 E
+        {
+          "name": "JP610/4",
+          "posPercent": -0.6,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 210,
+            "end": 330
+          }
+        }
+      ]
+    }
+  },
   // 驱逐舰
   // 美国海军
   {

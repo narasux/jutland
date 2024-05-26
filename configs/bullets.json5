@@ -36,6 +36,13 @@
     "life": 150
   },
   {
+    "name": "JP/GB140T1",
+    "type": "shell",
+    "diameter": 140,
+    "damage": 145,
+    "life": 150
+  },
+  {
     "name": "JP/GB127T1",
     "type": "shell",
     "diameter": 127,
