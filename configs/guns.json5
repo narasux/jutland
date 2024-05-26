@@ -5,9 +5,9 @@
     "name": "MK45/38",
     "bulletName": "US/GB127T1",
     "bulletCount": 1,
-    "reloadTime": 0.5,
+    "reloadTime": 1,
     "range": 22,
-    "bulletSpread": 0,
+    "bulletSpread": 50,
     "bulletSpeed": 0.4
   },
   // 美国海军 MK7/50
@@ -18,7 +18,7 @@
     "bulletCount": 3,
     "reloadTime": 12,
     "range": 38,
-    "bulletSpread": 200,
+    "bulletSpread": 150,
     "bulletSpeed": 0.4
   },
   // 美国海军 MK12/38
@@ -30,7 +30,7 @@
     "bulletCount": 2,
     "reloadTime": 1.5,
     "range": 18,
-    "bulletSpread": 100,
+    "bulletSpread": 80,
     "bulletSpeed": 0.4
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径
@@ -41,7 +41,7 @@
     "bulletCount": 2,
     "reloadTime": 20,
     "range": 35,
-    "bulletSpread": 200,
+    "bulletSpread": 150,
     "bulletSpeed": 0.4
   },
   // 日本海军 单装 15.2 厘米 50 倍口径

@@ -4,11 +4,10 @@ import (
 	"fmt"
 	"math/rand"
 
-	obj "github.com/narasux/jutland/pkg/mission/object"
-
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
+	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )

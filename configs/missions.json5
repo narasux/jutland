@@ -7,25 +7,25 @@
     "initShips": [
       {
         "name": "longBeach",
-        "pos": [40, 30],
+        "pos": [40, 33],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
         "name": "lowa",
-        "pos": [38, 34],
+        "pos": [38, 37],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
         "name": "atlanta",
-        "pos": [40, 38],
+        "pos": [40, 40],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
         "name": "kuma",
-        "pos": [38, 42],
+        "pos": [38, 43],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
@@ -43,20 +43,20 @@
       },
       {
         "name": "mogami",
-        "pos": [80, 42],
-        "rotation": 215,
+        "pos": [78, 40],
+        "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "kongo",
-        "pos": [80, 50],
+        "name": "kuma",
+        "pos": [80, 45],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [85, 42],
-        "rotation": 45,
+        "pos": [78, 50],
+        "rotation": 270,
         "belongPlayer": "computerAlpha"
       }
     ]
