@@ -54,14 +54,14 @@
     "name": "US/TB533T1",
     "type": "torpedo",
     "diameter": 533,
-    "damage": 5300,
+    "damage": 3800,
     "life": 200
   },
   {
     "name": "JP/TB610T1",
     "type": "torpedo",
     "diameter": 610,
-    "damage": 7000,
+    "damage": 5000,
     "life": 230
   }
 ]

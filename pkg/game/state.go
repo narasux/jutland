@@ -5,7 +5,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
-	"github.com/narasux/jutland/pkg/utils/ebutil"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 type objStates struct {
@@ -51,9 +51,9 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 		s.MenuButton.GameSetting,
 		s.MenuButton.ExitGame,
 	} {
-		button.PosX = (float64(screenWidth) - ebutil.CalcTextWidth(button.Text, button.FontSize)) * 0.2 * float64(idx+1)
+		button.PosX = (float64(screenWidth) - layout.CalcTextWidth(button.Text, button.FontSize)) * 0.2 * float64(idx+1)
 		button.PosY = float64(screenHeight / 5 * 4)
-		button.Width = ebutil.CalcTextWidth(button.Text, button.FontSize)
+		button.Width = layout.CalcTextWidth(button.Text, button.FontSize)
 		button.Height = button.FontSize
 	}
 }

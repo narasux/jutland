@@ -4,39 +4,26 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/narasux/jutland/pkg/resources/colorx"
+	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 // FIXME 补充火炮弹药图片素材
 var (
-	GB406BulletImg = ebiten.NewImage(4, 8)
-	GB356BulletImg = ebiten.NewImage(4, 6)
-	GB203BulletImg = ebiten.NewImage(3, 4)
-	GB152BulletImg = ebiten.NewImage(2, 3)
-	GB140BulletImg = ebiten.NewImage(2, 3)
-	GB127BulletImg = ebiten.NewImage(2, 3)
+	GB406BulletImg = ebutil.NewImageWithColor(4, 8, colorx.Silver)
+	GB356BulletImg = ebutil.NewImageWithColor(4, 6, colorx.Gold)
+	GB203BulletImg = ebutil.NewImageWithColor(3, 5, colorx.Gold)
+	GB152BulletImg = ebutil.NewImageWithColor(2, 4, colorx.Gold)
+	GB140BulletImg = ebutil.NewImageWithColor(2, 3, colorx.Silver)
+	GB127BulletImg = ebutil.NewImageWithColor(2, 3, colorx.Silver)
 )
 
 // FIXME 补充鱼雷弹药图片素材
 var (
-	TB533BulletImg = ebiten.NewImage(3, 20)
-	TB610BulletImg = ebiten.NewImage(4, 24)
+	TB533BulletImg = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
+	TB610BulletImg = ebutil.NewImageWithColor(4, 24, colorx.Silver)
 )
 
-var NotFountImg = ebiten.NewImage(10, 20)
-
-func init() {
-	GB406BulletImg.Fill(colorx.Silver)
-	GB356BulletImg.Fill(colorx.Gold)
-	GB203BulletImg.Fill(colorx.Gold)
-	GB152BulletImg.Fill(colorx.Gold)
-	GB140BulletImg.Fill(colorx.Silver)
-	GB127BulletImg.Fill(colorx.Silver)
-
-	TB533BulletImg.Fill(colorx.DarkSilver)
-	TB610BulletImg.Fill(colorx.Silver)
-
-	NotFountImg.Fill(colorx.Green)
-}
+var NotFountImg = ebutil.NewImageWithColor(10, 20, colorx.Red)
 
 // GetImg 获取弹药图片
 func GetImg(name string) *ebiten.Image {

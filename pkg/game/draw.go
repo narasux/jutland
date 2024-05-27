@@ -8,7 +8,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
-	"github.com/narasux/jutland/pkg/utils/ebutil"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 // Drawer 图像绘制工具
@@ -35,7 +35,7 @@ func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 func (d *Drawer) drawGameTitle(screen *ebiten.Image) {
 	textStr := "怒 海 激 战"
 	fontSize := float64(128)
-	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 2
+	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }
@@ -55,7 +55,7 @@ func (d *Drawer) drawGameMenu(screen *ebiten.Image, states *menuButtonStates) {
 // 绘制游戏通用提示
 func (d *Drawer) drawGameTip(screen *ebiten.Image, textStr string) {
 	fontSize := float64(64)
-	posX := float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)
+	posX := float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)
 	posY := float64(screen.Bounds().Dy()) / 10 * 9
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }
@@ -63,7 +63,7 @@ func (d *Drawer) drawGameTip(screen *ebiten.Image, textStr string) {
 // 绘制任务结果
 func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textColor color.Color) {
 	fontSize := float64(96)
-	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 7
+	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 7
 	posY := float64(screen.Bounds().Dy() / 8 * 7)
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, textColor)
 }
@@ -73,13 +73,13 @@ func (d *Drawer) drawCredits(screen *ebiten.Image) {
 	// 注：英文感叹号字体是一样的，但是末尾留白少一些，对齐比较好看 :D
 	textStr := "祝君武运昌隆!"
 	fontSize := float64(128)
-	posX := (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 2
+	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 
 	textStr = "制作团队：Schnee（策划，程序，素材），Kiwi（讨论，测试）"
 	fontSize = float64(28)
-	posX = (float64(screen.Bounds().Dx()) - ebutil.CalcTextWidth(textStr, fontSize)) / 2
+	posX = (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
 	posY += float64(155)
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }
