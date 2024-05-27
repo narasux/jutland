@@ -1,13 +1,11 @@
 package drawer
 
 import (
-	"image/color"
 	"slices"
 	"strconv"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -25,7 +23,6 @@ func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
 }
 
 // 绘制战舰尾流
-// TODO 待优化，如果屏幕中战舰比较多，应该减少尾流的渲染
 func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
 	for _, trail := range ms.ShipTrails {
 		// 只有在屏幕中的才渲染
@@ -37,10 +34,13 @@ func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
-		cx := (trail.Pos.RX - float64(ms.Camera.Pos.MX)) * constants.MapBlockSize
-		cy := (trail.Pos.RY - float64(ms.Camera.Pos.MY)) * constants.MapBlockSize
-		clr := color.NRGBA{255, 255, 255, uint8(trail.Life)}
-		vector.DrawFilledCircle(screen, float32(cx), float32(cy), float32(trail.Size), clr, false)
+		trailImg := texture.GetTrailImg(trail.Size, trail.Life)
+		opts := d.genDefaultDrawImageOptions()
+		opts.GeoM.Translate(
+			(trail.Pos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-trail.Size,
+			(trail.Pos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-trail.Size,
+		)
+		screen.DrawImage(trailImg, opts)
 	}
 }
 
