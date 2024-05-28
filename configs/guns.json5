@@ -33,6 +33,17 @@
     "bulletSpread": 80,
     "bulletSpeed": 0.4
   },
+  // 美国海军 MK39/54
+  // montana（蒙大拿）
+  {
+    "name": "MK39/54",
+    "bulletName": "US/GB127T1",
+    "bulletCount": 2,
+    "reloadTime": 1.3,
+    "range": 24,
+    "bulletSpread": 80,
+    "bulletSpeed": 0.4
+  },
   // 日本海军 双联装 35.6 厘米 45 倍口径
   // kongo（金刚）
   {

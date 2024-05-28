@@ -258,6 +258,205 @@
       "torpedoes": []
     }
   },
+  {
+    "name": "montana",
+    "displayName": "蒙大拿",
+    "type": "battleship",
+    "totalHP": 70500,
+    "damageReduction": 0.4,
+    "maxSpeed": 0.09,
+    "acceleration": 0.001,
+    "rotateSpeed": 1.3,
+    "length": 282,
+    "width": 37,
+    "weapon": {
+      "guns": [
+        // 前主炮 A
+        {
+          "name": "MK7/50",
+          "posPercent": 0.55,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 130
+          },
+          "leftFiringArc": {
+            "start": 230,
+            "end": 360
+          }
+        },
+        // 前主炮 B
+        {
+          "name": "MK7/50",
+          "posPercent": 0.45,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 130
+          },
+          "leftFiringArc": {
+            "start": 230,
+            "end": 360
+          }
+        },
+        // 后主炮 C
+        {
+          "name": "MK7/50",
+          "posPercent": -0.4,
+          "rightFiringArc": {
+            "start": 50,
+            "end": 180
+          },
+          "leftFiringArc": {
+            "start": 180,
+            "end": 310
+          }
+        },
+        // 后主炮 D
+        {
+          "name": "MK7/50",
+          "posPercent": -0.5,
+          "rightFiringArc": {
+            "start": 50,
+            "end": 180
+          },
+          "leftFiringArc": {
+            "start": 180,
+            "end": 310
+          }
+        },
+        // 右前副炮 A
+        {
+          "name": "MK39/54",
+          "posPercent": 0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 160
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左前副炮 A
+        {
+          "name": "MK39/54",
+          "posPercent": 0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 200,
+            "end": 360
+          }
+        },
+        // 右前副炮 B
+        {
+          "name": "MK39/54",
+          "posPercent": 0.1,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 160
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左前副炮 B
+        {
+          "name": "MK39/54",
+          "posPercent": 0.1,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 200,
+            "end": 360
+          }
+        },
+        // 右前副炮 C
+        {
+          "name": "MK39/54",
+          "posPercent": 0,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 160
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左前副炮 C
+        {
+          "name": "MK39/54",
+          "posPercent": 0,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 200,
+            "end": 360
+          }
+        },
+        // 右后副炮 D
+        {
+          "name": "MK39/54",
+          "posPercent": -0.1,
+          "rightFiringArc": {
+            "start": 20,
+            "end": 180
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左后副炮 D
+        {
+          "name": "MK39/54",
+          "posPercent": -0.1,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 180,
+            "end": 340
+          }
+        },
+        // 右后副炮 E
+        {
+          "name": "MK39/54",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 20,
+            "end": 180
+          },
+          "leftFiringArc": {
+            "start": 360,
+            "end": 360
+          }
+        },
+        // 左后副炮 E
+        {
+          "name": "MK39/54",
+          "posPercent": -0.2,
+          "rightFiringArc": {
+            "start": 0,
+            "end": 0
+          },
+          "leftFiringArc": {
+            "start": 180,
+            "end": 340
+          }
+        }
+      ],
+      "torpedoes": []
+    }
+  },
   // 日本海军
   {
     "name": "kongo",
