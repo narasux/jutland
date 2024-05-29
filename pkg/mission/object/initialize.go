@@ -93,12 +93,16 @@ func initShipMap() {
 	for _, s := range ships {
 		for _, gunMD := range s.Weapon.GunsMD {
 			s.Weapon.Guns = append(s.Weapon.Guns, newGun(
-				gunMD.Name, gunMD.PosPercent, gunMD.LeftFiringArc, gunMD.RightFiringArc,
+				gunMD.Name, gunMD.PosPercent,
+				FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
 		for _, torpedoMD := range s.Weapon.TorpedoesMD {
 			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, newTorpedoLauncher(
-				torpedoMD.Name, torpedoMD.PosPercent, torpedoMD.LeftFiringArc, torpedoMD.RightFiringArc,
+				torpedoMD.Name, torpedoMD.PosPercent,
+				FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
+				FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
 			))
 		}
 		for _, gun := range s.Weapon.Guns {

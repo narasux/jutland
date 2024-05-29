@@ -49,7 +49,7 @@ type rawInitShipMetadata struct {
 
 type rawMissionMetadata struct {
 	Name          string                `json:"name"`
-	InitCameraPos []int                 `json:"initCameraPos"`
+	InitCameraPos [2]int                `json:"initCameraPos"`
 	MapName       string                `json:"mapName"`
 	MaxShipCount  int                   `json:"maxShipCount"`
 	InitShips     []rawInitShipMetadata `json:"initShips"`

@@ -38,9 +38,9 @@ type WeaponMetadata struct {
 	// -0.3 -> 从中心往舰尾 30% 舰体长度
 	PosPercent float64 `json:"posPercent"`
 	// 左射界
-	LeftFiringArc FiringArc `json:"leftFiringArc"`
+	LeftFiringArc [2]float64 `json:"leftFiringArc"`
 	// 右射界
-	RightFiringArc FiringArc `json:"rightFiringArc"`
+	RightFiringArc [2]float64 `json:"rightFiringArc"`
 }
 
 // Weapon 武器系统

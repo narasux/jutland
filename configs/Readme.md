@@ -113,17 +113,25 @@
     "weapon": {
       // 舰炮
       "guns": [
+        // 前主炮 A
         {
           // 舰炮名称，需保证存在
           "name": "MK45",
           // 相对位置
           // 0.35 -> 从中心往舰首 35% 舰体长度
           // -0.3 -> 从中心往舰尾 30% 舰体长度
-          "posPercent": 0.3
+          "posPercent": 0.3,
+          // 右侧射界（顺时针，12 点钟为 0，3 点钟为 90，6 点钟为 180，以此类推）
+          "rightFiringArc": [0, 150],
+          // 左侧射界（若某侧射界不存在，则使用 right: [0, 0] 或 left: [360, 360]）
+          "leftFiringArc": [210, 360]
         },
+        // 后主炮 B
         {
-          "name": "MK45",
-          "posPercent": -0.3
+          "name": "MK45/38",
+          "posPercent": -0.5,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
         }
       ],
       // 鱼雷
