@@ -104,7 +104,9 @@ func (lc *TorpedoLauncher) Fire(ship, enemy *BattleShip) []*Bullet {
 	lc.LatestFireAt = time.Now().UnixMilli()
 	lc.ShotCountBeforeReload++
 
-	return []*Bullet{NewBullets(lc.BulletName, curPos, targetPos, lc.BulletSpeed, ship.Uid, ship.BelongPlayer)}
+	return []*Bullet{NewBullets(
+		lc.BulletName, curPos, targetPos, lc.BulletSpeed, BulletShotTypeDirect, ship.Uid, ship.BelongPlayer,
+	)}
 }
 
 var torpedoLauncherMap = map[string]*TorpedoLauncher{}

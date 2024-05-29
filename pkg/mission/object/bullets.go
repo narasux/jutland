@@ -19,6 +19,15 @@ const (
 	BulletTypeTorpedo BulletType = "torpedo"
 )
 
+type BulletShotType string
+
+const (
+	// BulletShotTypeDirect 直射
+	BulletShotTypeDirect BulletShotType = "direct"
+	// BulletShotTypeArcing 曲射（抛物线射击）
+	BulletShotTypeArcing BulletShotType = "arcing"
+)
+
 // 火炮 / 鱼雷弹药
 type Bullet struct {
 	// 弹药名称
@@ -43,6 +52,8 @@ type Bullet struct {
 	Rotation float64
 	// 速度
 	Speed float64
+	// 射击方式
+	ShotType BulletShotType
 
 	// 所属战舰
 	BelongShip string
@@ -71,6 +82,7 @@ func NewBullets(
 	name string,
 	curPos, targetPos MapPos,
 	speed float64,
+	shotType BulletShotType,
 	shipUid string,
 	player faction.Player,
 ) *Bullet {
@@ -80,6 +92,7 @@ func NewBullets(
 	b.TargetPos = targetPos
 	b.Rotation = geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
 	b.Speed = speed
+	b.ShotType = shotType
 	b.BelongShip = shipUid
 	b.BelongPlayer = player
 	return &b

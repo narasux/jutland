@@ -30,31 +30,25 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "yamato",
-        "pos": [40, 46],
-        "rotation": 90,
-        "belongPlayer": "humanAlpha"
-      },
-      {
         "name": "kongo",
         "pos": [80, 35],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "mogami",
+        "name": "kongo",
         "pos": [78, 40],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "kuma",
+        "name": "kongo",
         "pos": [80, 45],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "asashio",
+        "name": "kongo",
         "pos": [78, 50],
         "rotation": 270,
         "belongPlayer": "computerAlpha"

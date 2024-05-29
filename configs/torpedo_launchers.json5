@@ -4,7 +4,7 @@
     "bulletName": "US/TB533T1",
     "bulletCount": 4,
     "shotInterval": 1,
-    "reloadTime": 60,
+    "reloadTime": 75,
     "range": 12,
     "bulletSpeed": 0.15,
   },
@@ -13,7 +13,7 @@
     "bulletName": "JP/TB610T1",
     "bulletCount": 4,
     "shotInterval": 0.8,
-    "reloadTime": 45,
+    "reloadTime": 70,
     "range": 20,
     "bulletSpeed": 0.20,
   }

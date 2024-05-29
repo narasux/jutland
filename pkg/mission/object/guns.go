@@ -91,6 +91,12 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	// 炮弹散布的半径
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
+	// 如果小于射程的 1/4，则平射干他丫的 TODO 考虑不同火炮平射距离不同？
+	shotType := BulletShotTypeArcing
+	if rangePercent < 0.25 {
+		shotType = BulletShotTypeDirect
+	}
+
 	shotBullets := []*Bullet{}
 	for i := 0; i < g.BulletCount; i++ {
 		pos := targetPos.Copy()
@@ -98,7 +104,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		shotBullets = append(shotBullets, NewBullets(
-			g.BulletName, curPos, pos, g.BulletSpeed, ship.Uid, ship.BelongPlayer,
+			g.BulletName, curPos, pos, g.BulletSpeed, shotType, ship.Uid, ship.BelongPlayer,
 		))
 	}
 

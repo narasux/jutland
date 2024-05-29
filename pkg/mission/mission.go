@@ -340,16 +340,16 @@ func (m *MissionManager) updateShotBullets() {
 		if bullet.Life <= 0 {
 			continue
 		}
-		if bullet.Type == obj.BulletTypeShell {
-			// 炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
+		if bullet.ShotType == obj.BulletShotTypeArcing {
+			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
 			if bullet.CurPos.MEqual(bullet.TargetPos) {
 				resolveDamage(bullet)
 				arrivedBullets = append(arrivedBullets, bullet)
 			} else {
 				forwardingBullets = append(forwardingBullets, bullet)
 			}
-		} else if bullet.Type == obj.BulletTypeTorpedo {
-			// 鱼雷没有目的地的说法，碰到就爆炸
+		} else if bullet.ShotType == obj.BulletShotTypeDirect {
+			// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
 			if resolveDamage(bullet) {
 				arrivedBullets = append(arrivedBullets, bullet)
 			} else {
