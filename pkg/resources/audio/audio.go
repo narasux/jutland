@@ -89,7 +89,7 @@ func NewShipExplode() types.AudioStream {
 var largeGunBulletDiameter = []int{460, 406, 381, 356, 305}
 
 // 中口径炮弹
-var mediumGunBulletDiameter = []int{203, 152}
+var mediumGunBulletDiameter = []int{203, 155, 152}
 
 // 小口径炮弹
 var smallGunBulletDiameter = []int{140, 127}

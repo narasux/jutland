@@ -276,7 +276,7 @@
     "name": "kongo",
     "displayName": "金刚",
     "type": "battleship",
-    "totalHP": 36000,
+    "totalHP": 36600,
     "damageReduction": 0.7,
     "maxSpeed": 0.1,
     "acceleration": 0.001,
@@ -410,6 +410,156 @@
           "posPercent": -0.6,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
+        }
+      ],
+      "torpedoes": []
+    }
+  },
+  {
+    "name": "yamato",
+    "displayName": "大和（改）",
+    "type": "battleship",
+    "totalHP": 72800,
+    "damageReduction": 0.45,
+    "maxSpeed": 0.09,
+    "acceleration": 0.001,
+    "rotateSpeed": 1.2,
+    "length": 263,
+    "width": 39,
+    "weapon": {
+      "guns": [
+        // 前主炮 A
+        {
+          "name": "JP460/45",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "JP460/45",
+          "posPercent": 0.25,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "JP460/45",
+          "posPercent": -0.5,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        },
+        // 前副炮 A
+        {
+          "name": "JP155/60",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 120],
+          "leftFiringArc": [240, 360]
+        },
+        // 右前副炮 B
+        {
+          "name": "JP155/60",
+          "posPercent": -0.15,
+          "rightFiringArc": [0, 120],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 B
+        {
+          "name": "JP155/60",
+          "posPercent": -0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [240, 360]
+        },
+        // 右后副炮 C
+        {
+          "name": "JP155/60",
+          "posPercent": -0.3,
+          "rightFiringArc": [60, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后副炮 C
+        {
+          "name": "JP155/60",
+          "posPercent": -0.3,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 300]
+        },
+        // 后副炮 D
+        {
+          "name": "JP155/60",
+          "posPercent": -0.4,
+          "rightFiringArc": [60, 180],
+          "leftFiringArc": [180, 300]
+        },
+        // 右高平两用炮 A
+        {
+          "name": "JP127/40",
+          "posPercent": 0,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 A
+        {
+          "name": "JP127/40",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [225, 360]
+        },
+        // 右高平两用炮 B
+        {
+          "name": "JP127/40",
+          "posPercent": -0.16,
+          "rightFiringArc": [45, 120],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 B
+        {
+          "name": "JP127/40",
+          "posPercent": -0.16,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [240, 315]
+        },
+        // 右高平两用炮 C
+        {
+          "name": "JP127/40",
+          "posPercent": -0.18,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 C
+        {
+          "name": "JP127/40",
+          "posPercent": -0.18,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右高平两用炮 D
+        {
+          "name": "JP127/40",
+          "posPercent": -0.2,
+          "rightFiringArc": [60, 135],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 D
+        {
+          "name": "JP127/40",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [225, 300]
+        },
+        // 右高平两用炮 E
+        {
+          "name": "JP127/40",
+          "posPercent": -0.22,
+          "rightFiringArc": [90, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 E
+        {
+          "name": "JP127/40",
+          "posPercent": -0.22,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 270]
         }
       ],
       "torpedoes": []

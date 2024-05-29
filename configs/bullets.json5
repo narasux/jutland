@@ -15,6 +15,13 @@
     "life": 150
   },
   {
+    "name": "JP/GB460T1",
+    "type": "shell",
+    "diameter": 460,
+    "damage": 4500,
+    "life": 200
+  },
+  {
     "name": "JP/GB356T1",
     "type": "shell",
     "diameter": 356,
@@ -26,6 +33,13 @@
     "type": "shell",
     "diameter": 203,
     "damage": 330,
+    "life": 180
+  },
+  {
+    "name": "JP/GB155T1",
+    "type": "shell",
+    "diameter": 155,
+    "damage": 200,
     "life": 180
   },
   {
@@ -47,6 +61,13 @@
     "type": "shell",
     "diameter": 127,
     "damage": 140,
+    "life": 150
+  },
+  {
+    "name": "JP/GB127T2",
+    "type": "shell",
+    "diameter": 127,
+    "damage": 100,
     "life": 150
   },
   // 鱼雷

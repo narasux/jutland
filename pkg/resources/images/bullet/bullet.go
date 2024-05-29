@@ -9,9 +9,11 @@ import (
 
 // FIXME 补充火炮弹药图片素材
 var (
+	GB460BulletImg = ebutil.NewImageWithColor(4, 9, colorx.Gold)
 	GB406BulletImg = ebutil.NewImageWithColor(4, 8, colorx.Silver)
 	GB356BulletImg = ebutil.NewImageWithColor(4, 6, colorx.Gold)
 	GB203BulletImg = ebutil.NewImageWithColor(3, 5, colorx.Gold)
+	GB155BulletImg = ebutil.NewImageWithColor(2, 4, colorx.Gold)
 	GB152BulletImg = ebutil.NewImageWithColor(2, 4, colorx.Gold)
 	GB140BulletImg = ebutil.NewImageWithColor(2, 3, colorx.Silver)
 	GB127BulletImg = ebutil.NewImageWithColor(2, 3, colorx.Silver)
@@ -31,12 +33,16 @@ func GetImg(name string) *ebiten.Image {
 	name = name[3:8]
 
 	switch name {
+	case "GB460":
+		return GB460BulletImg
 	case "GB406":
 		return GB406BulletImg
 	case "GB356":
 		return GB356BulletImg
 	case "GB203":
 		return GB203BulletImg
+	case "GB155":
+		return GB155BulletImg
 	case "GB152":
 		return GB152BulletImg
 	case "GB140":

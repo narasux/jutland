@@ -30,6 +30,7 @@ type Bullet struct {
 	// 伤害数值
 	Damage float64 `json:"damage"`
 	// 生命（前进太多要消亡）
+	// FIXME Life 根据实时的距离计算
 	Life int `json:"life"`
 
 	// 唯一标识
