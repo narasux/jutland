@@ -12,6 +12,7 @@ var (
 	GB460BulletImg = ebutil.NewImageWithColor(4, 9, colorx.Gold)
 	GB406BulletImg = ebutil.NewImageWithColor(4, 8, colorx.Silver)
 	GB356BulletImg = ebutil.NewImageWithColor(4, 6, colorx.Gold)
+	GB305BulletImg = ebutil.NewImageWithColor(3, 5, colorx.Silver)
 	GB203BulletImg = ebutil.NewImageWithColor(3, 5, colorx.Gold)
 	GB155BulletImg = ebutil.NewImageWithColor(2, 4, colorx.Gold)
 	GB152BulletImg = ebutil.NewImageWithColor(2, 4, colorx.Gold)
@@ -39,6 +40,8 @@ func GetImg(name string) *ebiten.Image {
 		return GB406BulletImg
 	case "GB356":
 		return GB356BulletImg
+	case "GB305":
+		return GB305BulletImg
 	case "GB203":
 		return GB203BulletImg
 	case "GB155":

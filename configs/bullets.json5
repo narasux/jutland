@@ -8,6 +8,13 @@
     "life": 200
   },
   {
+    "name": "US/GB305T1",
+    "type": "shell",
+    "diameter": 305,
+    "damage": 1600,
+    "life": 200
+  },
+  {
     "name": "US/GB127T1",
     "type": "shell",
     "diameter": 127,

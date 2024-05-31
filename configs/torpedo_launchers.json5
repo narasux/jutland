@@ -1,6 +1,6 @@
 [
   {
-    "name": "US533/4",
+    "name": "US/533/4",
     "bulletName": "US/TB533T1",
     "bulletCount": 4,
     "shotInterval": 1,
@@ -9,7 +9,7 @@
     "bulletSpeed": 0.15,
   },
   {
-    "name": "JP610/4",
+    "name": "JP/610/4",
     "bulletName": "JP/TB610T1",
     "bulletCount": 4,
     "shotInterval": 0.8,

@@ -1,7 +1,7 @@
 [
   // 默认分类（测试用）
   {
-    "name": "longBeach",
+    "name": "long_beach",
     "displayName": "长滩",
     "type": "default",
     "totalHP": 120000,
@@ -15,14 +15,14 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "MK45/38",
+          "name": "US/127/38/MK45",
           "posPercent": 0.5,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 B
         {
-          "name": "MK45/38",
+          "name": "US/127/38/MK45",
           "posPercent": -0.5,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -31,14 +31,14 @@
       "torpedoes": [
         // 右舷鱼雷 A
         {
-          "name": "US533/4",
+          "name": "US/533/4",
           "posPercent": -0.2,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 A
         {
-          "name": "US533/4",
+          "name": "US/533/4",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
@@ -63,91 +63,91 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "MK7/50",
+          "name": "US/406/50/MK7",
           "posPercent": 0.45,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "MK7/50",
+          "name": "US/406/50/MK7",
           "posPercent": 0.25,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "MK7/50",
+          "name": "US/406/50/MK7",
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 右前副炮 A
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0.05,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 A
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 B
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 C
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.05,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 C
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右后副炮 D
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.1,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 D
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 E
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.15,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 E
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
@@ -171,98 +171,98 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "MK7/50",
+          "name": "US/406/50/MK7",
           "posPercent": 0.55,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "MK7/50",
+          "name": "US/406/50/MK7",
           "posPercent": 0.45,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "MK7/50",
+          "name": "US/406/50/MK7",
           "posPercent": -0.4,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 后主炮 D
         {
-          "name": "MK7/50",
+          "name": "US/406/50/MK7",
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 右前副炮 A
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": 0.2,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 A
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": 0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 B
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": 0.1,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": 0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 C
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": 0,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 C
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右后副炮 D
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": -0.1,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 D
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": -0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 E
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": -0.2,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 E
         {
-          "name": "MK39/54",
+          "name": "US/127/54/MK39",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
@@ -287,126 +287,126 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "JP356/45",
+          "name": "JP/356/45",
           "posPercent": 0.6,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "JP356/45",
+          "name": "JP/356/45",
           "posPercent": 0.5,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "JP356/45",
+          "name": "JP/356/45",
           "posPercent": -0.2,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 后主炮 D
         {
-          "name": "JP356/45",
+          "name": "JP/356/45",
           "posPercent": -0.6,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 右前副炮 A
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0.6,
           "rightFiringArc": [0, 90],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 A
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0.6,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [270, 360]
         },
         // 右前副炮 B
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0.4,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0.4,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 C
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0.2,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 C
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右后副炮 D
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 D
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 E
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": -0.2,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 E
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 F
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": -0.4,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 F
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": -0.4,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 G
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 G
         {
-          "name": "JP152/50",
+          "name": "JP/152/50",
           "posPercent": -0.6,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
@@ -416,7 +416,7 @@
     }
   },
   {
-    "name": "yamato",
+    "name": "yamato_plus",
     "displayName": "大和（改）",
     "type": "battleship",
     "totalHP": 72800,
@@ -430,133 +430,133 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "JP460/45",
+          "name": "JP/460/45",
           "posPercent": 0.5,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "JP460/45",
+          "name": "JP/460/45",
           "posPercent": 0.25,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "JP460/45",
+          "name": "JP/460/45",
           "posPercent": -0.5,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
         },
         // 前副炮 A
         {
-          "name": "JP155/60",
+          "name": "JP/155/60",
           "posPercent": 0.15,
           "rightFiringArc": [0, 120],
           "leftFiringArc": [240, 360]
         },
         // 右前副炮 B
         {
-          "name": "JP155/60",
+          "name": "JP/155/60",
           "posPercent": -0.15,
           "rightFiringArc": [0, 120],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "JP155/60",
+          "name": "JP/155/60",
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [240, 360]
         },
         // 右后副炮 C
         {
-          "name": "JP155/60",
+          "name": "JP/155/60",
           "posPercent": -0.3,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 C
         {
-          "name": "JP155/60",
+          "name": "JP/155/60",
           "posPercent": -0.3,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 300]
         },
         // 后副炮 D
         {
-          "name": "JP155/60",
+          "name": "JP/155/60",
           "posPercent": -0.4,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [180, 300]
         },
         // 右高平两用炮 A
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 360]
         },
         // 右高平两用炮 B
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.16,
           "rightFiringArc": [45, 120],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 B
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.16,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [240, 315]
         },
         // 右高平两用炮 C
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.18,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 C
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.18,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 D
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.2,
           "rightFiringArc": [60, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 D
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 300]
         },
         // 右高平两用炮 E
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.22,
           "rightFiringArc": [90, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 E
         {
-          "name": "JP127/40",
+          "name": "JP/127/40/DP",
           "posPercent": -0.22,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 270]
@@ -582,56 +582,56 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0.7,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 前主炮 B
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0.6,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 前主炮 C
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0.5,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 D
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.5,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 E
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 F
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.7,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 右后舰炮 A
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.3,
           "rightFiringArc": [10, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后舰炮 A
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.3,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 350]
@@ -640,20 +640,107 @@
       "torpedoes": [
         // 右舷鱼雷 A
         {
-          "name": "US533/4",
+          "name": "US/533/4",
           "posPercent": -0.2,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 A
         {
-          "name": "US533/4",
+          "name": "US/533/4",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         }
       ]
     },
+  },
+  {
+    "name": "alaska_plus",
+    "displayName": "阿拉斯加（改）",
+    "type": "cruiser",
+    "totalHP": 39800,
+    "damageReduction": 0.65,
+    "maxSpeed": 0.11,
+    "acceleration": 0.002,
+    "rotateSpeed": 2.2,
+    "length": 256,
+    "width": 28,
+    "weapon": {
+      "guns": [
+        // 前主炮 A
+        {
+          "name": "US/305/50/MK8",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 130],
+          "leftFiringArc": [230, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "US/305/50/MK8",
+          "posPercent": 0.4,
+          "rightFiringArc": [0, 130],
+          "leftFiringArc": [230, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "US/305/50/MK8",
+          "posPercent": -0.4,
+          "rightFiringArc": [50, 180],
+          "leftFiringArc": [180, 310]
+        },
+        // 后主炮 D
+        {
+          "name": "US/305/50/MK8",
+          "posPercent": -0.5,
+          "rightFiringArc": [50, 180],
+          "leftFiringArc": [180, 310]
+        },
+        // 右前副炮 A
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 160],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 A
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [200, 360]
+        },
+        // 右前副炮 B
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": 0,
+          "rightFiringArc": [0, 160],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 B
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [200, 360]
+        },
+        // 右后副炮 C
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.15,
+          "rightFiringArc": [20, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后副炮 C
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 340]
+        }
+      ],
+      "torpedoes": []
+    }
   },
   // 日本海军
   {
@@ -671,7 +758,7 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "JP203/50",
+          "name": "JP/203/50",
           "posPercent": 0.7,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
@@ -679,28 +766,28 @@
         },
         // 前主炮 B
         {
-          "name": "JP203/50",
+          "name": "JP/203/50",
           "posPercent": 0.6,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 前主炮 C
         {
-          "name": "JP203/50",
+          "name": "JP/203/50",
           "posPercent": 0.5,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 D
         {
-          "name": "JP203/50",
+          "name": "JP/203/50",
           "posPercent": -0.5,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 E
         {
-          "name": "JP203/50",
+          "name": "JP/203/50",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
@@ -709,28 +796,28 @@
       "torpedoes": [
         // 右舷鱼雷 A
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.2,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 A
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         },
         // 右舷鱼雷 B
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.4,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 B
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.4,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
@@ -753,28 +840,28 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "JP140/50",
+          "name": "JP/140/50",
           "posPercent": 0.8,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "JP140/50",
+          "name": "JP/140/50",
           "posPercent": 0.75,
           "rightFiringArc": [60, 150],
           "leftFiringArc": [210, 300]
         },
         // 右前主炮 C
         {
-          "name": "JP140/50",
+          "name": "JP/140/50",
           "posPercent": 0.65,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前主炮 C
         {
-          "name": "JP140/50",
+          "name": "JP/140/50",
           "posPercent": 0.65,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
@@ -783,70 +870,70 @@
       "torpedoes": [
         // 右舷鱼雷 A
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": 0.2,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 A
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": 0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         },
         // 右舷鱼雷 B
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": 0,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 B
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         },
         // 右舷鱼雷 C
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.2,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 C
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         },
         // 右舷鱼雷 D
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.4,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 D
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.4,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         },
         // 右舷鱼雷 E
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.6,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 E
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.6,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
@@ -871,28 +958,28 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0.7,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 前主炮 B
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": 0.6,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 C
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 D
         {
-          "name": "MK12/38",
+          "name": "US/127/38/MK12",
           "posPercent": -0.7,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
@@ -901,14 +988,14 @@
       "torpedoes": [
         // 中轴鱼雷 A
         {
-          "name": "US533/4",
+          "name": "US/533/4",
           "posPercent": 0,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [210, 330]
         },
         // 中轴鱼雷 B
         {
-          "name": "US533/4",
+          "name": "US/533/4",
           "posPercent": -0.1,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [210, 330]
@@ -932,21 +1019,21 @@
       "guns": [
         // 前主炮 A
         {
-          "name": "JP127/50",
+          "name": "JP/127/50",
           "posPercent": 0.8,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 B
         {
-          "name": "JP127/50",
+          "name": "JP/127/50",
           "posPercent": -0.5,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 C
         {
-          "name": "JP127/50",
+          "name": "JP/127/50",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
@@ -955,14 +1042,14 @@
       "torpedoes": [
         // 中轴鱼雷 A
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": 0.1,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [210, 330]
         },
         // 中轴鱼雷 B
         {
-          "name": "JP610/4",
+          "name": "JP/610/4",
           "posPercent": -0.1,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [210, 330]

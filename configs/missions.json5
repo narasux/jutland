@@ -6,7 +6,7 @@
     "maxShipCount": 5,
     "initShips": [
       {
-        "name": "longBeach",
+        "name": "long_beach",
         "pos": [40, 33],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
@@ -18,7 +18,7 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "atlanta",
+        "name": "alaska_plus",
         "pos": [40, 40],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
@@ -30,7 +30,7 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "kongo",
+        "name": "yamato_plus",
         "pos": [80, 35],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
@@ -42,13 +42,13 @@
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "kongo",
+        "name": "kuma",
         "pos": [80, 45],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "kongo",
+        "name": "asashio",
         "pos": [78, 50],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
