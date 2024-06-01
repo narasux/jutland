@@ -1,13 +1,23 @@
 [
-  // 鸭子水枪
+  // 主鸭炮
   {
-    "name": "DuckGun",
+    "name": "DuckMainGun",
     "bulletName": "US/GB406T1",
-    "bulletCount": 10,
+    "bulletCount": 8,
     "reloadTime": 1,
     "range": 30,
     "bulletSpread": 100,
-    "bulletSpeed": 1.0
+    "bulletSpeed": 0.4
+  },
+  // 副鸭炮
+  {
+    "name": "DuckSecondaryGun",
+    "bulletName": "JP/GB155T1",
+    "bulletCount": 15,
+    "reloadTime": 0.5,
+    "range": 20,
+    "bulletSpread": 100,
+    "bulletSpeed": 0.5
   },
   // 美国海军 US/127/38/MK45 舰炮
   // long_beach（长滩）

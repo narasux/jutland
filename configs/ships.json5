@@ -12,15 +12,30 @@
     "length": 120,
     "width": 100,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         {
-          "name": "DuckGun",
+          "name": "DuckMainGun",
           "posPercent": 0,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [180, 360]
         }
       ],
-      "torpedoes": []
+      "secondaryGuns": [
+        {
+          "name": "DuckSecondaryGun",
+          "posPercent": 0,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        }
+      ],
+      "torpedoes": [
+        {
+          "name": "DuckTorpedoLauncher",
+          "posPercent": 0,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        }
+      ]
     }
   },
   // 战列舰
@@ -37,7 +52,7 @@
     "length": 270,
     "width": 33,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "US/406/50/MK7",
@@ -58,7 +73,9 @@
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
-        },
+        }
+      ],
+      "secondaryGuns": [
         // 右前副炮 A
         {
           "name": "US/127/38/MK12",
@@ -145,7 +162,7 @@
     "length": 282,
     "width": 37,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "US/406/50/MK7",
@@ -173,7 +190,9 @@
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
-        },
+        }
+      ],
+      "secondaryGuns": [
         // 右前副炮 A
         {
           "name": "US/127/54/MK39",
@@ -261,7 +280,7 @@
     "length": 220,
     "width": 31,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "JP/356/45",
@@ -289,7 +308,9 @@
           "posPercent": -0.6,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
-        },
+        }
+      ],
+      "secondaryGuns": [
         // 右前副炮 A
         {
           "name": "JP/152/50",
@@ -404,7 +425,7 @@
     "length": 263,
     "width": 39,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "JP/460/45",
@@ -425,7 +446,9 @@
           "posPercent": -0.5,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
-        },
+        }
+      ],
+      "secondaryGuns": [
         // 前副炮 A
         {
           "name": "JP/155/60",
@@ -556,7 +579,7 @@
     "length": 165,
     "width": 16,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "US/127/38/MK12",
@@ -614,6 +637,7 @@
           "leftFiringArc": [180, 350]
         }
       ],
+      "secondaryGuns": [],
       "torpedoes": [
         // 右舷鱼雷 A
         {
@@ -644,7 +668,7 @@
     "length": 256,
     "width": 28,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "US/305/50/MK8",
@@ -672,7 +696,9 @@
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
-        },
+        }
+      ],
+      "secondaryGuns": [
         // 右前副炮 A
         {
           "name": "US/127/38/MK12",
@@ -731,7 +757,7 @@
     "length": 220,
     "width": 22,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "US/127/38/MK45",
@@ -747,6 +773,7 @@
           "leftFiringArc": [180, 330]
         }
       ],
+      "secondaryGuns": [],
       "torpedoes": []
     }
   },
@@ -763,7 +790,7 @@
     "length": 201,
     "width": 21,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "JP/203/50",
@@ -799,7 +826,37 @@
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
+        }
+      ],
+      "secondaryGuns": [
+        // 右高平两用炮 A
+        {
+          "name": "JP/127/40/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [360, 360]
         },
+        // 左高平两用炮 A
+        {
+          "name": "JP/127/40/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [225, 360]
+        },
+        // 右高平两用炮 B
+        {
+          "name": "JP/127/40/DP",
+          "posPercent": 0,
+          "rightFiringArc": [45, 120],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 B
+        {
+          "name": "JP/127/40/DP",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [240, 315]
+        }
       ],
       "torpedoes": [
         // 右舷鱼雷 A
@@ -845,7 +902,7 @@
     "length": 162,
     "width": 14,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "JP/140/50",
@@ -873,8 +930,9 @@
           "posPercent": 0.65,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
-        },
+        }
       ],
+      "secondaryGuns": [],
       "torpedoes": [
         // 右舷鱼雷 A
         {
@@ -963,7 +1021,7 @@
     "length": 116,
     "width": 11,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "US/127/38/MK12",
@@ -991,8 +1049,9 @@
           "posPercent": -0.7,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
-        },
+        }
       ],
+      "secondaryGuns": [],
       "torpedoes": [
         // 中轴鱼雷 A
         {
@@ -1024,7 +1083,7 @@
     "length": 118,
     "width": 11,
     "weapon": {
-      "guns": [
+      "mainGuns": [
         // 前主炮 A
         {
           "name": "JP/127/50",
@@ -1045,8 +1104,9 @@
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
-        },
+        }
       ],
+      "secondaryGuns": [],
       "torpedoes": [
         // 中轴鱼雷 A
         {

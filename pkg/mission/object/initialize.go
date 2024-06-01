@@ -91,13 +91,23 @@ func initShipMap() {
 	}
 
 	for _, s := range ships {
-		for _, gunMD := range s.Weapon.GunsMD {
-			s.Weapon.Guns = append(s.Weapon.Guns, newGun(
+		// 主炮
+		for _, gunMD := range s.Weapon.MainGunsMD {
+			s.Weapon.MainGuns = append(s.Weapon.MainGuns, newGun(
 				gunMD.Name, gunMD.PosPercent,
 				FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
 				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
+		// 副炮
+		for _, gunMD := range s.Weapon.SecondaryGunsMD {
+			s.Weapon.SecondaryGuns = append(s.Weapon.SecondaryGuns, newGun(
+				gunMD.Name, gunMD.PosPercent,
+				FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
+			))
+		}
+		// 鱼雷发射器
 		for _, torpedoMD := range s.Weapon.TorpedoesMD {
 			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, newTorpedoLauncher(
 				torpedoMD.Name, torpedoMD.PosPercent,
@@ -105,7 +115,14 @@ func initShipMap() {
 				FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
 			))
 		}
-		for _, gun := range s.Weapon.Guns {
+		// 计算最大射程
+		for _, gun := range s.Weapon.MainGuns {
+			if s.Weapon.MaxRange < gun.Range {
+				s.Weapon.MaxRange = gun.Range
+			}
+		}
+		// 虽然副炮射程比主炮远不太可能，不过还是加上吧
+		for _, gun := range s.Weapon.SecondaryGuns {
 			if s.Weapon.MaxRange < gun.Range {
 				s.Weapon.MaxRange = gun.Range
 			}

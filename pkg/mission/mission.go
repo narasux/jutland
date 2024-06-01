@@ -231,7 +231,8 @@ func (m *MissionManager) updateShipGroups() {
 	}
 }
 
-// 更新武器开火相关状态
+// 更新武器开火相关状态，目前是攻击最近的目标
+// TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
 func (m *MissionManager) updateWeaponFire() {
 	maxBulletDiameter := 0
 	isTorpedoLaunched := false

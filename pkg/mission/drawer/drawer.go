@@ -38,10 +38,10 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	d.drawCameraViewRealTimeRender(screen, misState)
 	// 地图元素
 	d.drawBuildings(screen, misState)
+	d.drawShotBullets(screen, misState)
 	d.drawShipTrails(screen, misState)
 	d.drawBattleShips(screen, misState)
 	d.drawDestroyedShips(screen, misState)
-	d.drawShotBullets(screen, misState)
 	// 用户行为
 	d.drawArrowOnMapWhenHover(screen, misState)
 	d.drawSelectedArea(screen, misState)

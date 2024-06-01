@@ -1,4 +1,15 @@
 [
+  // 鸭雷山大
+  {
+    "name": "DuckTorpedoLauncher",
+    "bulletName": "JP/TB610T1",
+    "bulletCount": 20,
+    "shotInterval": 0.3,
+    "reloadTime": 5,
+    "range": 20,
+    "bulletSpeed": 0.2,
+  },
+  // 美国海军 533mm 4联装 鱼雷
   {
     "name": "US/533/4",
     "bulletName": "US/TB533T1",
@@ -8,6 +19,7 @@
     "range": 12,
     "bulletSpeed": 0.15,
   },
+  // 日本海军 610mm 4联装 酸素鱼雷
   {
     "name": "JP/610/4",
     "bulletName": "JP/TB610T1",
@@ -15,6 +27,6 @@
     "shotInterval": 0.8,
     "reloadTime": 70,
     "range": 20,
-    "bulletSpeed": 0.20,
+    "bulletSpeed": 0.2,
   }
 ]

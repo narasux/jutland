@@ -82,11 +82,16 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 			opts.GeoM.Translate(20, 0)
 			// 绘制武器状态
-			gunImg := lo.Ternary(s.Weapon.GunDisabled, texture.GunDisableImg, texture.GunEnableImg)
+			gunImg := lo.Ternary(s.Weapon.MainGunDisabled, texture.GunDisableImg, texture.GunEnableImg)
+			screen.DrawImage(gunImg, opts)
+
+			opts.GeoM.Translate(35, 0)
+			// 绘制武器状态 FIXME 这里用的图片是主炮启用/禁用，晚些替换一下
+			gunImg = lo.Ternary(s.Weapon.SecondaryGunDisabled, texture.GunDisableImg, texture.GunEnableImg)
 			screen.DrawImage(gunImg, opts)
 
 			torpedoImg := lo.Ternary(s.Weapon.TorpedoDisabled, texture.TorpedoDisableImg, texture.TorpedoEnableImg)
-			opts.GeoM.Translate(0, 25)
+			opts.GeoM.Translate(-35, 25)
 			screen.DrawImage(torpedoImg, opts)
 
 			if isShipSelected {

@@ -27,6 +27,7 @@ func NewHandler(player faction.Player) *HumanInputHandler {
 var _ controller.InputHandler = (*HumanInputHandler)(nil)
 
 // Handle 处理用户输入，更新指令集
+// TODO 这个函数应该拆分一下，然后重复代码有点多，可以考虑复用一下
 func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 
@@ -75,7 +76,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 			anyWeaponDisabled := false
 			for _, shipUid := range misState.SelectedShips {
 				ship := misState.Ships[shipUid]
-				if ship.Weapon.GunDisabled || ship.Weapon.TorpedoDisabled {
+				if ship.Weapon.MainGunDisabled || ship.Weapon.TorpedoDisabled {
 					anyWeaponDisabled = true
 					break
 				}
@@ -92,13 +93,13 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 		}
 	}
 
-	// 按下 g 键，如果任意选中战舰任意火炮被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyG) {
+	// 按下 e 键，如果任意选中战舰任意主炮被禁用，则启用所有，否则禁用所有
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyE) {
 		if len(misState.SelectedShips) != 0 {
 			anyGunDisabled := false
 			for _, shipUid := range misState.SelectedShips {
 				ship := misState.Ships[shipUid]
-				if ship.Weapon.GunDisabled {
+				if ship.Weapon.MainGunDisabled {
 					anyGunDisabled = true
 					break
 				}
@@ -106,10 +107,33 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 			for _, shipUid := range misState.SelectedShips {
 				if anyGunDisabled {
 					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeGun)
+					instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeMainGun)
 				} else {
 					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeGun)
+					instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeMainGun)
+				}
+			}
+		}
+	}
+
+	// 按下 r 键，如果任意选中战舰任意副炮被禁用，则启用所有，否则禁用所有
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyR) {
+		if len(misState.SelectedShips) != 0 {
+			anyGunDisabled := false
+			for _, shipUid := range misState.SelectedShips {
+				ship := misState.Ships[shipUid]
+				if ship.Weapon.SecondaryGunDisabled {
+					anyGunDisabled = true
+					break
+				}
+			}
+			for _, shipUid := range misState.SelectedShips {
+				if anyGunDisabled {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
+					instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
+				} else {
+					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
+					instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
 				}
 			}
 		}

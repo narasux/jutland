@@ -16,8 +16,10 @@ type WeaponType string
 const (
 	// 所有
 	WeaponTypeAll WeaponType = "all"
-	// 火炮
-	WeaponTypeGun WeaponType = "gun"
+	// 主炮
+	WeaponTypeMainGun WeaponType = "mainGun"
+	// 副炮
+	WeaponTypeSecondaryGun WeaponType = "secondaryGun"
 	// 鱼雷
 	WeaponTypeTorpedo WeaponType = "torpedo"
 	// 导弹
@@ -45,19 +47,24 @@ type WeaponMetadata struct {
 
 // Weapon 武器系统
 type Weapon struct {
-	// 火炮元数据
-	GunsMD []WeaponMetadata `json:"guns"`
+	// 主炮元数据
+	MainGunsMD []WeaponMetadata `json:"mainGuns"`
+	// 副炮元数据
+	SecondaryGunsMD []WeaponMetadata `json:"secondaryGuns"`
 	// 鱼雷元数据
 	TorpedoesMD []WeaponMetadata `json:"torpedoes"`
-	// 火炮
-	Guns []*Gun
+	// 主炮
+	MainGuns []*Gun
+	// 副炮
+	SecondaryGuns []*Gun
 	// 鱼雷
 	Torpedoes []*TorpedoLauncher
 	// 最大射程（各类武器射程最大值）
 	MaxRange float64
 	// 武器禁用情况
-	GunDisabled     bool
-	TorpedoDisabled bool
+	MainGunDisabled      bool
+	SecondaryGunDisabled bool
+	TorpedoDisabled      bool
 }
 
 // BattleShip 战舰
@@ -105,11 +112,17 @@ type BattleShip struct {
 
 // DisableWeapon 禁用武器
 func (s *BattleShip) DisableWeapon(t WeaponType) {
-	if t == WeaponTypeAll || t == WeaponTypeGun {
-		for i := 0; i < len(s.Weapon.Guns); i++ {
-			s.Weapon.Guns[i].Disable = true
+	if t == WeaponTypeAll || t == WeaponTypeMainGun {
+		for i := 0; i < len(s.Weapon.MainGuns); i++ {
+			s.Weapon.MainGuns[i].Disable = true
 		}
-		s.Weapon.GunDisabled = true
+		s.Weapon.MainGunDisabled = true
+	}
+	if t == WeaponTypeAll || t == WeaponTypeSecondaryGun {
+		for i := 0; i < len(s.Weapon.SecondaryGuns); i++ {
+			s.Weapon.SecondaryGuns[i].Disable = true
+		}
+		s.Weapon.SecondaryGunDisabled = true
 	}
 	if t == WeaponTypeAll || t == WeaponTypeTorpedo {
 		for i := 0; i < len(s.Weapon.Torpedoes); i++ {
@@ -121,11 +134,17 @@ func (s *BattleShip) DisableWeapon(t WeaponType) {
 
 // EnableWeapon 启用武器
 func (s *BattleShip) EnableWeapon(t WeaponType) {
-	if t == WeaponTypeAll || t == WeaponTypeGun {
-		for i := 0; i < len(s.Weapon.Guns); i++ {
-			s.Weapon.Guns[i].Disable = false
+	if t == WeaponTypeAll || t == WeaponTypeMainGun {
+		for i := 0; i < len(s.Weapon.MainGuns); i++ {
+			s.Weapon.MainGuns[i].Disable = false
 		}
-		s.Weapon.GunDisabled = false
+		s.Weapon.MainGunDisabled = false
+	}
+	if t == WeaponTypeAll || t == WeaponTypeSecondaryGun {
+		for i := 0; i < len(s.Weapon.SecondaryGuns); i++ {
+			s.Weapon.SecondaryGuns[i].Disable = false
+		}
+		s.Weapon.SecondaryGunDisabled = false
 	}
 	if t == WeaponTypeAll || t == WeaponTypeTorpedo {
 		for i := 0; i < len(s.Weapon.Torpedoes); i++ {
@@ -142,8 +161,11 @@ func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
 	if s.CurHP <= 0 {
 		return shotBullets
 	}
-	for i := 0; i < len(s.Weapon.Guns); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.Guns[i].Fire(s, enemy))
+	for i := 0; i < len(s.Weapon.MainGuns); i++ {
+		shotBullets = slices.Concat(shotBullets, s.Weapon.MainGuns[i].Fire(s, enemy))
+	}
+	for i := 0; i < len(s.Weapon.SecondaryGuns); i++ {
+		shotBullets = slices.Concat(shotBullets, s.Weapon.SecondaryGuns[i].Fire(s, enemy))
 	}
 	for i := 0; i < len(s.Weapon.Torpedoes); i++ {
 		shotBullets = slices.Concat(shotBullets, s.Weapon.Torpedoes[i].Fire(s, enemy))
