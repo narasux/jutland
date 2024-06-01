@@ -7,8 +7,8 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
 // 绘制箭头（当鼠标悬浮触发镜头移动时）

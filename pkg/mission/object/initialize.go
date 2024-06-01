@@ -99,6 +99,7 @@ func initShipMap() {
 				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
+		s.Weapon.HasMainGun = len(s.Weapon.MainGuns) > 0
 		// 副炮
 		for _, gunMD := range s.Weapon.SecondaryGunsMD {
 			s.Weapon.SecondaryGuns = append(s.Weapon.SecondaryGuns, newGun(
@@ -107,6 +108,7 @@ func initShipMap() {
 				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
+		s.Weapon.HasSecondaryGun = len(s.Weapon.SecondaryGuns) > 0
 		// 鱼雷发射器
 		for _, torpedoMD := range s.Weapon.TorpedoesMD {
 			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, newTorpedoLauncher(
@@ -115,6 +117,7 @@ func initShipMap() {
 				FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
 			))
 		}
+		s.Weapon.HasTorpedo = len(s.Weapon.Torpedoes) > 0
 		// 计算最大射程
 		for _, gun := range s.Weapon.MainGuns {
 			if s.Weapon.MaxRange < gun.Range {

@@ -6,8 +6,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 
-	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 

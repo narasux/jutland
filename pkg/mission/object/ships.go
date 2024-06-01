@@ -61,6 +61,10 @@ type Weapon struct {
 	Torpedoes []*TorpedoLauncher
 	// 最大射程（各类武器射程最大值）
 	MaxRange float64
+	// 拥有的武器情况
+	HasMainGun      bool
+	HasSecondaryGun bool
+	HasTorpedo      bool
 	// 武器禁用情况
 	MainGunDisabled      bool
 	SecondaryGunDisabled bool

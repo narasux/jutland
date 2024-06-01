@@ -32,7 +32,7 @@ func init() {
 	// 海洋地图块（浅海）
 	for i := 0; i < seaBlockCount; i++ {
 		imgName := fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, i)
-		imgPath := fmt.Sprintf("/blocks/%s.png", imgName)
+		imgPath := fmt.Sprintf("/map/blocks/%s.png", imgName)
 		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
 		}
@@ -41,7 +41,7 @@ func init() {
 	// 深海地图块（浅海）
 	for i := 0; i < deepSeaBlockCount; i++ {
 		imgName := fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, i)
-		imgPath := fmt.Sprintf("/blocks/%s.png", imgName)
+		imgPath := fmt.Sprintf("/map/blocks/%s.png", imgName)
 		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
 		}
@@ -50,14 +50,14 @@ func init() {
 	// 陆地地图块
 	for i := 0; i < landBlockCount; i++ {
 		imgName := fmt.Sprintf("land_%d_%d", constants.MapBlockSize, i)
-		imgPath := fmt.Sprintf("/blocks/%s.png", imgName)
+		imgPath := fmt.Sprintf("/map/blocks/%s.png", imgName)
 		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
 		}
 	}
 
 	// 空白地图块
-	imgPath := "/blocks/white.png"
+	imgPath := "/map/blocks/white.png"
 	if blocks["blank"], err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}

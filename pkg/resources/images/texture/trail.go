@@ -7,7 +7,8 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
-	"github.com/narasux/jutland/pkg/resources/colorx"
+
+	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 

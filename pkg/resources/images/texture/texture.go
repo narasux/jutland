@@ -14,15 +14,20 @@ var (
 	// SelectBox 选择框图片
 	SelectBoxWhiteImg *ebiten.Image
 
-	// GunEnableImg 火炮启用图片
-	GunEnableImg *ebiten.Image
-	// GunDisableImg 火炮禁用图片
-	GunDisableImg *ebiten.Image
+	// MainGunEnabledImg 主炮启用图片
+	MainGunEnabledImg *ebiten.Image
+	// MainGunDisabledImg 主炮禁用图片
+	MainGunDisabledImg *ebiten.Image
 
-	// TorpedoEnableImg 鱼雷启用图片
-	TorpedoEnableImg *ebiten.Image
-	// TorpedoDisableImg 鱼雷禁用图片
-	TorpedoDisableImg *ebiten.Image
+	// SecondaryGunEnabledImg 副炮启用图片
+	SecondaryGunEnabledImg *ebiten.Image
+	// SecondaryGunDisabledImg 副炮禁用图片
+	SecondaryGunDisabledImg *ebiten.Image
+
+	// TorpedoEnabledImg 鱼雷启用图片
+	TorpedoEnabledImg *ebiten.Image
+	// TorpedoDisabledImg 鱼雷禁用图片
+	TorpedoDisabledImg *ebiten.Image
 
 	// ShipSelectedImg 选中战舰标志图片
 	ShipSelectedImg *ebiten.Image
@@ -46,25 +51,36 @@ func init() {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	// 加载火炮启停用图标
-	imgPath = "/textures/flag/gun_enable.png"
-	if GunEnableImg, err = loader.LoadImage(imgPath); err != nil {
+	// 加载主炮启停用图标
+	imgPath = "/textures/flag/main_gun_enabled.png"
+	if MainGunEnabledImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	imgPath = "/textures/flag/gun_disable.png"
-	if GunDisableImg, err = loader.LoadImage(imgPath); err != nil {
+	imgPath = "/textures/flag/main_gun_disabled.png"
+	if MainGunDisabledImg, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	// 加载副炮启停用图标
+	imgPath = "/textures/flag/secondary_gun_enabled.png"
+	if SecondaryGunEnabledImg, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/textures/flag/secondary_gun_disabled.png"
+	if SecondaryGunDisabledImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	// 加载鱼雷启停用图标
-	imgPath = "/textures/flag/torpedo_enable.png"
-	if TorpedoEnableImg, err = loader.LoadImage(imgPath); err != nil {
+	imgPath = "/textures/flag/torpedo_enabled.png"
+	if TorpedoEnabledImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	imgPath = "/textures/flag/torpedo_disable.png"
-	if TorpedoDisableImg, err = loader.LoadImage(imgPath); err != nil {
+	imgPath = "/textures/flag/torpedo_disabled.png"
+	if TorpedoDisabledImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

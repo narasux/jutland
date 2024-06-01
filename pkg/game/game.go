@@ -10,9 +10,9 @@ import (
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/mission"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
-	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/background"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/version"
 )
 

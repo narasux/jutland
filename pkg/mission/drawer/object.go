@@ -11,11 +11,11 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/colorx"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/bullet"
 	"github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
 // 绘制建筑物
@@ -74,35 +74,70 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 			// 绘制当前生命值
 			opts.GeoM.Translate(
-				(s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize,
-				(s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-80,
+				(s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-25,
+				(s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-30,
 			)
 			hpImg := texture.GetHpImg(s.CurHP, s.TotalHP)
 			screen.DrawImage(hpImg, opts)
 
-			opts.GeoM.Translate(20, 0)
-			// 绘制武器状态
-			gunImg := lo.Ternary(s.Weapon.MainGunDisabled, texture.GunDisableImg, texture.GunEnableImg)
-			screen.DrawImage(gunImg, opts)
-
-			opts.GeoM.Translate(35, 0)
-			// 绘制武器状态 FIXME 这里用的图片是主炮启用/禁用，晚些替换一下
-			gunImg = lo.Ternary(s.Weapon.SecondaryGunDisabled, texture.GunDisableImg, texture.GunEnableImg)
-			screen.DrawImage(gunImg, opts)
-
-			torpedoImg := lo.Ternary(s.Weapon.TorpedoDisabled, texture.TorpedoDisableImg, texture.TorpedoEnableImg)
-			opts.GeoM.Translate(-35, 25)
-			screen.DrawImage(torpedoImg, opts)
-
 			if isShipSelected {
-				opts.GeoM.Translate(-55, 5)
+				opts.GeoM.Translate(-35, -10)
 				screen.DrawImage(texture.ShipSelectedImg, opts)
+				opts.GeoM.Translate(35, 10)
+			}
+			opts.GeoM.Translate(-20, 0)
+
+			// 渲染武器状态时候的 X 方向间隙大小
+			weaponInterstitialSpacing := 30.0
+			if lo.EveryBy(
+				[]bool{s.Weapon.HasMainGun, s.Weapon.HasSecondaryGun, s.Weapon.HasTorpedo},
+				func(b bool) bool {
+					return b
+				},
+			) {
+				weaponInterstitialSpacing = 20.0
+			}
+
+			// 绘制主炮状态
+			if s.Weapon.HasMainGun {
+				opts.GeoM.Translate(20, -45)
+				gunImg := lo.Ternary(
+					s.Weapon.MainGunDisabled,
+					texture.MainGunDisabledImg,
+					texture.MainGunEnabledImg,
+				)
+				screen.DrawImage(gunImg, opts)
+				opts.GeoM.Translate(0, 45)
+			}
+
+			// 绘制副炮状态
+			if s.Weapon.HasSecondaryGun {
+				opts.GeoM.Translate(weaponInterstitialSpacing, -45)
+				gunImg := lo.Ternary(
+					s.Weapon.SecondaryGunDisabled,
+					texture.SecondaryGunDisabledImg,
+					texture.SecondaryGunEnabledImg,
+				)
+				screen.DrawImage(gunImg, opts)
+				opts.GeoM.Translate(0, 45)
+			}
+
+			// 绘制鱼雷发射器状态
+			if s.Weapon.HasTorpedo {
+				opts.GeoM.Translate(weaponInterstitialSpacing, -45)
+				torpedoImg := lo.Ternary(
+					s.Weapon.TorpedoDisabled,
+					texture.TorpedoDisabledImg,
+					texture.TorpedoEnabledImg,
+				)
+				screen.DrawImage(torpedoImg, opts)
+				opts.GeoM.Translate(0, 45)
 			}
 
 			// 如果被编组，需要标记出来
 			if s.GroupID != obj.GroupIDNone {
 				textStr, fontSize := strconv.Itoa(int(s.GroupID)), float64(30)
-				posX := (s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 30
+				posX := (s.CurPos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize - 55
 				posY := (s.CurPos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize - 85
 				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 			}
