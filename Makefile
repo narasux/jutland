@@ -42,6 +42,10 @@ pack:
 	# init pack dir
 	mkdir ./jutland-${VERSION}
 
+	# copy Readme.md
+	# TODO Readme.pdf maybe better?
+	cp ./Readme.md ./jutland-${VERSION}/Readme.md
+
 	# copy resource files
 	cp -r ./resources ./jutland-${VERSION}/resources
 
