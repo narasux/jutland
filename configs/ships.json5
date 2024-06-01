@@ -1,49 +1,26 @@
 [
   // 默认分类（测试用）
   {
-    "name": "long_beach",
-    "displayName": "长滩",
+    "name": "duck",
+    "displayName": "Duck",
     "type": "default",
-    "totalHP": 120000,
-    "damageReduction": 0.9,
-    "maxSpeed": 0.1,
-    "acceleration": 0.002,
-    "rotateSpeed": 2.5,
-    "length": 220,
-    "width": 22,
+    "totalHP": 150000,
+    "damageReduction": 0.25,
+    "maxSpeed": 0.15,
+    "acceleration": 0.003,
+    "rotateSpeed": 5,
+    "length": 120,
+    "width": 100,
     "weapon": {
       "guns": [
-        // 前主炮 A
         {
-          "name": "US/127/38/MK45",
-          "posPercent": 0.5,
-          "rightFiringArc": [0, 150],
-          "leftFiringArc": [210, 360]
-        },
-        // 后主炮 B
-        {
-          "name": "US/127/38/MK45",
-          "posPercent": -0.5,
-          "rightFiringArc": [30, 180],
-          "leftFiringArc": [180, 330]
+          "name": "DuckGun",
+          "posPercent": 0,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
         }
       ],
-      "torpedoes": [
-        // 右舷鱼雷 A
-        {
-          "name": "US/533/4",
-          "posPercent": -0.2,
-          "rightFiringArc": [30, 150],
-          "leftFiringArc": [360, 360]
-        },
-        // 左舷鱼雷 A
-        {
-          "name": "US/533/4",
-          "posPercent": -0.2,
-          "rightFiringArc": [0, 0],
-          "leftFiringArc": [210, 330]
-        }
-      ]
+      "torpedoes": []
     }
   },
   // 战列舰
@@ -737,6 +714,37 @@
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
+        }
+      ],
+      "torpedoes": []
+    }
+  },
+  {
+    "name": "long_beach",
+    "displayName": "长滩",
+    "type": "default",
+    "totalHP": 12000,
+    "damageReduction": 0.9,
+    "maxSpeed": 0.1,
+    "acceleration": 0.002,
+    "rotateSpeed": 2.5,
+    "length": 220,
+    "width": 22,
+    "weapon": {
+      "guns": [
+        // 前主炮 A
+        {
+          "name": "US/127/38/MK45",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 B
+        {
+          "name": "US/127/38/MK45",
+          "posPercent": -0.5,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
         }
       ],
       "torpedoes": []

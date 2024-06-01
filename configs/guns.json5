@@ -1,4 +1,14 @@
 [
+  // 鸭子水枪
+  {
+    "name": "DuckGun",
+    "bulletName": "US/GB406T1",
+    "bulletCount": 10,
+    "reloadTime": 1,
+    "range": 30,
+    "bulletSpread": 100,
+    "bulletSpeed": 1.0
+  },
   // 美国海军 US/127/38/MK45 舰炮
   // long_beach（长滩）
   {

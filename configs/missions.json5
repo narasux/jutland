@@ -6,7 +6,7 @@
     "maxShipCount": 5,
     "initShips": [
       {
-        "name": "long_beach",
+        "name": "duck",
         "pos": [40, 33],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
@@ -18,13 +18,13 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "alaska_plus",
+        "name": "kuma",
         "pos": [40, 40],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "montana",
+        "name": "kuma",
         "pos": [38, 43],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
@@ -32,25 +32,25 @@
       {
         "name": "yamato_plus",
         "pos": [80, 35],
-        "rotation": 270,
+        "rotation": 0,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "kongo",
+        "name": "yamato_plus",
         "pos": [78, 40],
-        "rotation": 270,
+        "rotation": 0,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "kuma",
+        "name": "yamato_plus",
         "pos": [80, 45],
-        "rotation": 270,
+        "rotation": 0,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "asashio",
+        "name": "yamato_plus",
         "pos": [78, 50],
-        "rotation": 270,
+        "rotation": 0,
         "belongPlayer": "computerAlpha"
       }
     ]
