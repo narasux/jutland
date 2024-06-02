@@ -60,3 +60,15 @@ func GetImg(name string) *ebiten.Image {
 	// 找不到就暴露出来
 	return NotFountImg
 }
+
+var BulletImgWidthMap = map[string]int{}
+
+// GetImgWidth 获取弹药图片宽度（虽然可能价值不大，总之先加一点缓存 :）
+func GetImgWidth(name string) int {
+	if width, ok := BulletImgWidthMap[name]; ok {
+		return width
+	}
+	width := GetImg(name).Bounds().Dx()
+	BulletImgWidthMap[name] = width
+	return width
+}

@@ -268,15 +268,3 @@ func NewShip(name string, pos MapPos, rotation float64, player faction.Player) *
 	s.GroupID = GroupIDNone
 	return &s
 }
-
-// ShipTrail 战舰尾流
-type ShipTrail struct {
-	Pos  MapPos
-	Size float64
-	Life int
-}
-
-// NewShipTrail ...
-func NewShipTrail(pos MapPos, size float64, life int) *ShipTrail {
-	return &ShipTrail{Pos: pos, Size: size, Life: life}
-}

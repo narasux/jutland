@@ -3,7 +3,6 @@ package texture
 import (
 	"fmt"
 	"image/color"
-	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -23,25 +22,49 @@ var trailImgCache = map[string]*ebiten.Image{}
 // 不合法的尾流应该直接暴露出来
 var InvalidTrailImg = ebutil.NewImageWithColor(25, 25, colorx.Red)
 
+type TrailShape int
+
+const (
+	// 圆形尾流
+	TrailShapeCircle TrailShape = iota
+	// 矩形尾流（长度 = 宽度 15 倍，折半）
+	TrailShapeRect
+)
+
 // GetTrailImg 获取尾流图片
-func GetTrailImg(size float64, life int) *ebiten.Image {
+func GetTrailImg(shape TrailShape, size, life float64) *ebiten.Image {
 	if size < 0 || life < 0 {
 		return InvalidTrailImg
 	}
 
-	key := fmt.Sprintf("%.2f:%d", size, life)
+	key := fmt.Sprintf("%d:%.2f:%.2f", shape, size, life)
 	// 尝试从缓存取
 	if img, ok := trailImgCache[key]; ok {
 		return img
 	}
 
-	// 缓存取不到，则重新生成
-	sideLength := int(math.Floor(size * 2))
-	trailImg := ebiten.NewImage(sideLength, sideLength)
-	clr := color.NRGBA{255, 255, 255, uint8(life)}
-	vector.DrawFilledCircle(trailImg, float32(size), float32(size), float32(size), clr, false)
+	// 缓存取不到，则重新生成并且加入到缓存
+	if shape == TrailShapeCircle {
+		trailImgCache[key] = getCircleImg(size, life)
+	} else if shape == TrailShapeRect {
+		trailImgCache[key] = getHalfRectImg(size, 15, life)
+	}
 
-	// 加入到缓存
-	trailImgCache[key] = trailImg
+	return trailImgCache[key]
+}
+
+func getCircleImg(diameter, life float64) *ebiten.Image {
+	radius := float32(diameter / 2)
+	trailImg := ebiten.NewImage(int(diameter), int(diameter))
+	clr := color.NRGBA{255, 255, 255, uint8(life)}
+	vector.DrawFilledCircle(trailImg, radius, radius, radius, clr, false)
+	return trailImg
+}
+
+func getHalfRectImg(width, multipleWidthAsHeight, life float64) *ebiten.Image {
+	height := int(width * multipleWidthAsHeight)
+	trailImg := ebiten.NewImage(int(width), height*2)
+	clr := color.NRGBA{255, 255, 255, uint8(life)}
+	vector.DrawFilledRect(trailImg, 0, float32(height), float32(width), float32(height), clr, false)
 	return trailImg
 }

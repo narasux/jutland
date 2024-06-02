@@ -12,44 +12,44 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "lowa",
+        "name": "montana",
         "pos": [38, 37],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "kuma",
+        "name": "montana",
         "pos": [40, 40],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "kuma",
+        "name": "montana",
         "pos": [38, 43],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "yamato_plus",
+        "name": "kongo",
         "pos": [80, 35],
         "rotation": 0,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "yamato_plus",
-        "pos": [78, 40],
+        "pos": [88, 40],
         "rotation": 0,
         "belongPlayer": "computerAlpha"
       },
       {
-        "name": "yamato_plus",
+        "name": "kongo",
         "pos": [80, 45],
         "rotation": 0,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "yamato_plus",
-        "pos": [78, 50],
+        "pos": [88, 50],
         "rotation": 0,
         "belongPlayer": "computerAlpha"
       }

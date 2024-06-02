@@ -60,7 +60,7 @@ type MissionState struct {
 	// 被摧毁的战舰
 	DestroyedShips []*obj.BattleShip
 	// 战舰尾流
-	ShipTrails []*obj.ShipTrail
+	Trails []*obj.Trail
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*obj.Bullet
 	// 已到达预期位置的弹药信息（炮弹 / 鱼雷）
@@ -103,7 +103,7 @@ func NewMissionState(mission string) *MissionState {
 		SelectedShips:     []string{},
 		SelectedGroupID:   obj.GroupIDNone,
 		DestroyedShips:    []*obj.BattleShip{},
-		ShipTrails:        []*obj.ShipTrail{},
+		Trails:            []*obj.Trail{},
 		ForwardingBullets: []*obj.Bullet{},
 		ArrivedBullets:    []*obj.Bullet{},
 		GameMarks:         map[obj.MarkType]*obj.Mark{},

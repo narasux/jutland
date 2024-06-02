@@ -22,23 +22,20 @@ import (
 func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
 }
 
-// 绘制战舰尾流
-func (d *Drawer) drawShipTrails(screen *ebiten.Image, ms *state.MissionState) {
-	for _, trail := range ms.ShipTrails {
-		// 只有在屏幕中的才渲染
-		if !ms.Camera.Contains(trail.Pos) {
-			continue
-		}
-		// 尾流太近 / 太远则不渲染
-		if trail.Life > 50 || trail.Life < 0 {
+// 绘制尾流（战舰，鱼雷，炮弹）
+func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) {
+	for _, trail := range ms.Trails {
+		// 只有在屏幕中，且不处于延迟/消亡的尾流才渲染
+		if !(ms.Camera.Contains(trail.Pos) && trail.IsActive()) {
 			continue
 		}
 
-		trailImg := texture.GetTrailImg(trail.Size, trail.Life)
+		trailImg := texture.GetTrailImg(trail.Shape, trail.CurSize, trail.CurLife)
 		opts := d.genDefaultDrawImageOptions()
+		setOptsCenterRotation(opts, trailImg, trail.Rotation)
 		opts.GeoM.Translate(
-			(trail.Pos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-trail.Size,
-			(trail.Pos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-trail.Size,
+			(trail.Pos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(trailImg.Bounds().Dx()/2),
+			(trail.Pos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(trailImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(trailImg, opts)
 	}

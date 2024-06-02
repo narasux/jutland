@@ -19,6 +19,7 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
+	"github.com/narasux/jutland/pkg/resources/images/bullet"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -62,7 +63,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateSelectedShips()
 		m.updateShipGroups()
 		m.updateWeaponFire()
-		m.updateShipTrails()
+		m.updateObjectTrails()
 		m.updateShotBullets()
 		m.updateMissionShips()
 	}
@@ -286,21 +287,31 @@ func (m *MissionManager) updateWeaponFire() {
 	}
 }
 
-// 更新战舰尾流状态
-func (m *MissionManager) updateShipTrails() {
-	for i := 0; i < len(m.state.ShipTrails); i++ {
-		// 尾流尺寸越来越大，但是留存时间越来越短
-		m.state.ShipTrails[i].Size += 0.2
-		m.state.ShipTrails[i].Life -= 1
+// 更新尾流状态（战舰，鱼雷，炮弹）
+func (m *MissionManager) updateObjectTrails() {
+	for i := 0; i < len(m.state.Trails); i++ {
+		m.state.Trails[i].Update()
 	}
 	// 生命周期结束的，不再需要
-	m.state.ShipTrails = lo.Filter(m.state.ShipTrails, func(t *obj.ShipTrail, _ int) bool {
-		return t.Life > 0
+	m.state.Trails = lo.Filter(m.state.Trails, func(t *obj.Trail, _ int) bool {
+		return t.IsAlive()
 	})
 	for _, ship := range m.state.Ships {
 		if ship.CurSpeed > 0 {
-			// TODO 尾流的 Life 应该和速度相关，是否和战舰类型相关？
-			m.state.ShipTrails = append(m.state.ShipTrails, obj.NewShipTrail(ship.CurPos, ship.Width/2, 60))
+			m.state.Trails = append(
+				m.state.Trails,
+				obj.NewTrail(ship.CurPos, texture.TrailShapeCircle, ship.Width, 0.2, 60*10*ship.CurSpeed, 1, 10, 0),
+			)
+		}
+	}
+	for _, bt := range m.state.ForwardingBullets {
+		if bt.HitObjectType == obj.HitObjectTypeNone && bt.ForwardAge > 10 {
+			diffusionRate := lo.Ternary(bt.Type == obj.BulletTypeTorpedo, 0.3, 0.1)
+			size := float64(bullet.GetImgWidth(bt.Name))
+			m.state.Trails = append(
+				m.state.Trails,
+				obj.NewTrail(bt.CurPos, texture.TrailShapeRect, size, diffusionRate, size*7, 1, 0, bt.Rotation),
+			)
 		}
 	}
 }
@@ -331,30 +342,35 @@ func (m *MissionManager) updateShotBullets() {
 			}
 		}
 		// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-		bt.HitObjectType = obj.HitObjectTypeWater
+		// 曲射的，才需要在结算伤害后标记成命中水面
+		if bt.ShotType == obj.BulletShotTypeArcing {
+			bt.HitObjectType = obj.HitObjectTypeWater
+		}
 		return false
 	}
 
 	arrivedBullets, forwardingBullets := []*obj.Bullet{}, []*obj.Bullet{}
-	for _, bullet := range m.state.ForwardingBullets {
+	for _, bt := range m.state.ForwardingBullets {
 		// 迷失的弹药，要及时消亡（如鱼雷没命中）
-		if bullet.Life <= 0 {
+		if bt.Life <= 0 {
+			// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
+			bt.HitObjectType = obj.HitObjectTypeWater
 			continue
 		}
-		if bullet.ShotType == obj.BulletShotTypeArcing {
+		if bt.ShotType == obj.BulletShotTypeArcing {
 			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
-			if bullet.CurPos.MEqual(bullet.TargetPos) {
-				resolveDamage(bullet)
-				arrivedBullets = append(arrivedBullets, bullet)
+			if bt.CurPos.MEqual(bt.TargetPos) {
+				resolveDamage(bt)
+				arrivedBullets = append(arrivedBullets, bt)
 			} else {
-				forwardingBullets = append(forwardingBullets, bullet)
+				forwardingBullets = append(forwardingBullets, bt)
 			}
-		} else if bullet.ShotType == obj.BulletShotTypeDirect {
+		} else if bt.ShotType == obj.BulletShotTypeDirect {
 			// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
-			if resolveDamage(bullet) {
-				arrivedBullets = append(arrivedBullets, bullet)
+			if resolveDamage(bt) {
+				arrivedBullets = append(arrivedBullets, bt)
 			} else {
-				forwardingBullets = append(forwardingBullets, bullet)
+				forwardingBullets = append(forwardingBullets, bt)
 			}
 		}
 	}

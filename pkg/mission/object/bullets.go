@@ -79,6 +79,8 @@ type Bullet struct {
 	Speed float64
 	// 射击方式
 	ShotType BulletShotType
+	// 前进周期数
+	ForwardAge int
 
 	// 所属战舰
 	BelongShip string
@@ -98,8 +100,9 @@ func (b *Bullet) Forward() {
 	// 修改位置
 	b.CurPos.AddRx(math.Sin(b.Rotation*math.Pi/180) * b.Speed)
 	b.CurPos.SubRy(math.Cos(b.Rotation*math.Pi/180) * b.Speed)
-	// 修改生命
+	// 修改生命 & 前进周期数
 	b.Life--
+	b.ForwardAge++
 }
 
 var bulletMap = map[string]*Bullet{}

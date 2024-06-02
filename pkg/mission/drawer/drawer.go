@@ -39,7 +39,7 @@ func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	// 地图元素
 	d.drawBuildings(screen, misState)
 	d.drawShotBullets(screen, misState)
-	d.drawShipTrails(screen, misState)
+	d.drawObjectTrails(screen, misState)
 	d.drawBattleShips(screen, misState)
 	d.drawDestroyedShips(screen, misState)
 	// 用户行为
