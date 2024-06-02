@@ -4,78 +4,78 @@
     "name": "US/GB406T1",
     "type": "shell",
     "diameter": 406,
-    "damage": 3500,
-    "life": 200
+    "damage": 3600,
+    "criticalRate": 0.025
   },
   {
     "name": "US/GB305T1",
     "type": "shell",
     "diameter": 305,
     "damage": 1600,
-    "life": 200
+    "criticalRate": 0.01
   },
   {
     "name": "US/GB127T1",
     "type": "shell",
     "diameter": 127,
     "damage": 120,
-    "life": 150
+    "criticalRate": 0.002
   },
   {
     "name": "JP/GB460T1",
     "type": "shell",
     "diameter": 460,
     "damage": 4500,
-    "life": 200
+    "criticalRate": 0.03
   },
   {
     "name": "JP/GB356T1",
     "type": "shell",
     "diameter": 356,
     "damage": 2040,
-    "life": 200
+    "criticalRate": 0.01
   },
   {
     "name": "JP/GB203T1",
     "type": "shell",
     "diameter": 203,
     "damage": 330,
-    "life": 180
+    "criticalRate": 0.007
   },
   {
     "name": "JP/GB155T1",
     "type": "shell",
     "diameter": 155,
     "damage": 200,
-    "life": 180
+    "criticalRate": 0.004
   },
   {
     "name": "JP/GB152T1",
     "type": "shell",
     "diameter": 152,
     "damage": 180,
-    "life": 150
+    "criticalRate": 0.004
   },
   {
     "name": "JP/GB140T1",
     "type": "shell",
     "diameter": 140,
     "damage": 145,
-    "life": 150
+    "criticalRate": 0.003
   },
   {
     "name": "JP/GB127T1",
     "type": "shell",
     "diameter": 127,
     "damage": 140,
-    "life": 150
+    "criticalRate": 0.002
   },
   {
     "name": "JP/GB127T2",
     "type": "shell",
     "diameter": 127,
     "damage": 100,
-    "life": 150
+    "criticalRate": 0.002
   },
   // 鱼雷
   {
@@ -83,13 +83,13 @@
     "type": "torpedo",
     "diameter": 533,
     "damage": 4300,
-    "life": 200
+    "criticalRate": 0.01
   },
   {
     "name": "JP/TB610T1",
     "type": "torpedo",
     "diameter": 610,
     "damage": 6250,
-    "life": 230
+    "criticalRate": 0.015
   }
 ]

@@ -19,13 +19,37 @@ const (
 	BulletTypeTorpedo BulletType = "torpedo"
 )
 
-type BulletShotType string
+type BulletShotType int
 
 const (
 	// BulletShotTypeDirect 直射
-	BulletShotTypeDirect BulletShotType = "direct"
+	BulletShotTypeDirect BulletShotType = iota
 	// BulletShotTypeArcing 曲射（抛物线射击）
-	BulletShotTypeArcing BulletShotType = "arcing"
+	BulletShotTypeArcing
+)
+
+type CriticalType int
+
+const (
+	// CriticalTypeNone 没有暴击
+	CriticalTypeNone CriticalType = iota
+	// CriticalTypeThreeTimes 三倍暴击
+	CriticalTypeThreeTimes
+	// CriticalTypeTenTimes 十倍暴击
+	CriticalTypeTenTimes
+)
+
+type HitObjectType int
+
+const (
+	// HitObjectTypeNone 无
+	HitObjectTypeNone HitObjectType = iota
+	// HitObjectTypeShip 战舰
+	HitObjectTypeShip
+	// HitObjectTypeWater 水面
+	HitObjectTypeWater
+	// HitObjectTypeLand 陆地
+	HitObjectTypeLand
 )
 
 // 火炮 / 鱼雷弹药
@@ -38,9 +62,10 @@ type Bullet struct {
 	Diameter int `json:"diameter"`
 	// 伤害数值
 	Damage float64 `json:"damage"`
+	// 暴击概率（理论上口径越大越容易被暴击，但是暴击率不应该太高）
+	CriticalRate float64 `json:"criticalRate"`
 	// 生命（前进太多要消亡）
-	// FIXME Life 根据实时的距离计算
-	Life int `json:"life"`
+	Life int
 
 	// 唯一标识
 	Uid string
@@ -60,10 +85,12 @@ type Bullet struct {
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 
-	// 是否命中战舰/水面/陆地
-	HitShip  bool
-	HitWater bool
-	HitLand  bool
+	// 实际造成的伤害
+	RealDamage float64
+	// 造成暴击类型
+	CriticalType CriticalType
+	// 击中的对象类型
+	HitObjectType HitObjectType
 }
 
 // Forward 弹药前进
@@ -81,19 +108,27 @@ var bulletMap = map[string]*Bullet{}
 func NewBullets(
 	name string,
 	curPos, targetPos MapPos,
-	speed float64,
 	shotType BulletShotType,
+	speed float64,
+	life int,
 	shipUid string,
 	player faction.Player,
 ) *Bullet {
 	b := deepcopy.Copy(*bulletMap[name]).(Bullet)
+
 	b.Uid = uuid.New().String()
 	b.CurPos = curPos
 	b.TargetPos = targetPos
+	b.ShotType = shotType
+
 	b.Rotation = geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
 	b.Speed = speed
-	b.ShotType = shotType
+	b.Life = life
+
 	b.BelongShip = shipUid
 	b.BelongPlayer = player
+
+	b.CriticalType = CriticalTypeNone
+	b.HitObjectType = HitObjectTypeNone
 	return &b
 }

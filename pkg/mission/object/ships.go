@@ -2,6 +2,7 @@ package object
 
 import (
 	"math"
+	"math/rand"
 	"slices"
 
 	"github.com/google/uuid"
@@ -82,8 +83,10 @@ type BattleShip struct {
 
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`
-	// 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
-	DamageReduction float64 `json:"damageReduction"`
+	// 水平伤害减免（0.7 -> 仅受到击中的 70% 伤害)
+	HorizontalDamageReduction float64 `json:"horizontalDamageReduction"`
+	// 垂直伤害减免
+	VerticalDamageReduction float64 `json:"verticalDamageReduction"`
 	// 最大速度
 	MaxSpeed float64 `json:"maxSpeed"`
 	// 加速度
@@ -178,9 +181,32 @@ func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
 }
 
 // Hurt 收到伤害
-func (s *BattleShip) Hurt(damage float64) {
-	// TODO 加入暴击伤害的机制？比如一发大口径直接起飞（此处 @ 胡德）
-	s.CurHP = max(0, s.CurHP-damage*s.DamageReduction)
+func (s *BattleShip) Hurt(bullet *Bullet) {
+	realDamage := 0.0
+	if bullet.ShotType == BulletShotTypeDirect {
+		// 平射打击水平装甲带
+		realDamage = bullet.Damage * s.HorizontalDamageReduction
+	} else {
+		// 曲射打击垂直装甲带
+		realDamage = bullet.Damage * s.VerticalDamageReduction
+	}
+
+	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
+	criticalType := CriticalTypeNone
+	randVal := rand.Float64()
+	if randVal < bullet.CriticalRate/10 {
+		realDamage *= 10
+		criticalType = CriticalTypeTenTimes
+	} else if randVal < bullet.CriticalRate {
+		realDamage *= 3
+		criticalType = CriticalTypeThreeTimes
+	}
+
+	// 计算生命值 & 累计伤害
+	s.CurHP = max(0, s.CurHP-realDamage)
+	// 弹药是可以造成重复伤害的，这里需要计算累计值，暴击类型统计，只统计最高倍数
+	bullet.RealDamage += realDamage
+	bullet.CriticalType = max(criticalType, bullet.CriticalType)
 }
 
 // MoveTo 移动到指定位置

@@ -104,8 +104,12 @@ func (lc *TorpedoLauncher) Fire(ship, enemy *BattleShip) []*Bullet {
 	lc.LatestFireAt = time.Now().UnixMilli()
 	lc.ShotCountBeforeReload++
 
+	// 鱼雷的生命值就是最大射程（+5 预留）
+	life := int(lc.Range/lc.BulletSpeed) + 5
+
+	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*Bullet{NewBullets(
-		lc.BulletName, curPos, targetPos, lc.BulletSpeed, BulletShotTypeDirect, ship.Uid, ship.BelongPlayer,
+		lc.BulletName, curPos, targetPos, BulletShotTypeDirect, lc.BulletSpeed, life, ship.Uid, ship.BelongPlayer,
 	)}
 }
 

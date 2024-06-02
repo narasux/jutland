@@ -325,13 +325,13 @@ func (m *MissionManager) updateShotBullets() {
 				ship.Length/constants.MapBlockSize, ship.Width/constants.MapBlockSize,
 				ship.CurRotation,
 			) {
-				ship.Hurt(bt.Damage)
-				bt.HitShip = true
+				ship.Hurt(bt)
+				bt.HitObjectType = obj.HitObjectTypeShip
 				return true
 			}
 		}
 		// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-		bt.HitWater = true
+		bt.HitObjectType = obj.HitObjectTypeWater
 		return false
 	}
 

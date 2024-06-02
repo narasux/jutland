@@ -97,6 +97,9 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 		shotType = BulletShotTypeDirect
 	}
 
+	// 火炮炮弹生命值与目标距离相关，15 对于 0.4 速度的炮弹来说，相当于 6 格地图，在大多数火炮散布范围之内
+	life := int(distance/g.BulletSpeed) + 15
+
 	shotBullets := []*Bullet{}
 	for i := 0; i < g.BulletCount; i++ {
 		pos := targetPos.Copy()
@@ -104,7 +107,7 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		shotBullets = append(shotBullets, NewBullets(
-			g.BulletName, curPos, pos, g.BulletSpeed, shotType, ship.Uid, ship.BelongPlayer,
+			g.BulletName, curPos, pos, shotType, g.BulletSpeed, life, ship.Uid, ship.BelongPlayer,
 		))
 	}
 
