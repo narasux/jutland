@@ -1,77 +1,77 @@
 [
   // 炮弹
   {
-    "name": "US/GB406T1",
+    "name": "US/GB/406/1944",
     "type": "shell",
     "diameter": 406,
     "damage": 3600,
     "criticalRate": 0.025
   },
   {
-    "name": "US/GB305T1",
+    "name": "US/GB/305/1942",
     "type": "shell",
     "diameter": 305,
     "damage": 1600,
     "criticalRate": 0.01
   },
   {
-    "name": "US/GB127T1",
+    "name": "US/GB/127/1932",
     "type": "shell",
     "diameter": 127,
     "damage": 120,
     "criticalRate": 0.002
   },
   {
-    "name": "JP/GB460T1",
+    "name": "JP/GB/460/1942",
     "type": "shell",
     "diameter": 460,
     "damage": 4500,
     "criticalRate": 0.03
   },
   {
-    "name": "JP/GB356T1",
+    "name": "JP/GB/356/1935",
     "type": "shell",
     "diameter": 356,
     "damage": 2040,
     "criticalRate": 0.01
   },
   {
-    "name": "JP/GB203T1",
+    "name": "JP/GB/203/1937",
     "type": "shell",
     "diameter": 203,
     "damage": 330,
     "criticalRate": 0.007
   },
   {
-    "name": "JP/GB155T1",
+    "name": "JP/GB/155/1934",
     "type": "shell",
     "diameter": 155,
     "damage": 200,
     "criticalRate": 0.004
   },
   {
-    "name": "JP/GB152T1",
+    "name": "JP/GB/152/1912",
     "type": "shell",
     "diameter": 152,
     "damage": 180,
     "criticalRate": 0.004
   },
   {
-    "name": "JP/GB140T1",
+    "name": "JP/GB/140/1914",
     "type": "shell",
     "diameter": 140,
     "damage": 145,
     "criticalRate": 0.003
   },
   {
-    "name": "JP/GB127T1",
+    "name": "JP/GB/127/1926",
     "type": "shell",
     "diameter": 127,
     "damage": 140,
     "criticalRate": 0.002
   },
   {
-    "name": "JP/GB127T2",
+    "name": "JP/GB/127/1929",
     "type": "shell",
     "diameter": 127,
     "damage": 100,
@@ -79,14 +79,14 @@
   },
   // 鱼雷
   {
-    "name": "US/TB533T1",
+    "name": "US/TB/533/1931",
     "type": "torpedo",
     "diameter": 533,
     "damage": 4300,
     "criticalRate": 0.01
   },
   {
-    "name": "JP/TB610T1",
+    "name": "JP/TB/610/1933",
     "type": "torpedo",
     "diameter": 610,
     "damage": 6250,

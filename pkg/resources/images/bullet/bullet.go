@@ -31,30 +31,30 @@ var NotFountImg = ebutil.NewImageWithColor(10, 20, colorx.Red)
 // GetImg 获取弹药图片
 func GetImg(name string) *ebiten.Image {
 	// FIXME 更合理的方式获取
-	name = name[3:8]
+	name = name[3:9]
 
 	switch name {
-	case "GB460":
+	case "GB/460":
 		return GB460BulletImg
-	case "GB406":
+	case "GB/406":
 		return GB406BulletImg
-	case "GB356":
+	case "GB/356":
 		return GB356BulletImg
-	case "GB305":
+	case "GB/305":
 		return GB305BulletImg
-	case "GB203":
+	case "GB/203":
 		return GB203BulletImg
-	case "GB155":
+	case "GB/155":
 		return GB155BulletImg
-	case "GB152":
+	case "GB/152":
 		return GB152BulletImg
-	case "GB140":
+	case "GB/140":
 		return GB140BulletImg
-	case "GB127":
+	case "GB/127":
 		return GB127BulletImg
-	case "TB533":
+	case "TB/533":
 		return TB533BulletImg
-	case "TB610":
+	case "TB/610":
 		return TB610BulletImg
 	}
 	// 找不到就暴露出来

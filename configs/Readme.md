@@ -9,8 +9,9 @@
     // US 表示所属阵营
     // GB (gun bullet) 表示是火炮弹药
     // TB (torpedo bullet) 表示鱼雷弹药
-    // 127 表示口径 127mm，T1 表示 Type1
-    "name": "US/GB127T1",
+    // 127 表示口径 127mm
+    // 1932 表示 1932 年研制（不一定准确，主要是做区分）
+    "name": "US/GB/127/1932",
     // 弹药类型
     // shell 炮弹
     // torpedo 鱼雷
@@ -36,7 +37,7 @@
     // US 是所属阵营，127 是口径，38 是倍径，MK45 是型号
     "name": "US/127/38/MK45",
     // 弹药名称（需确保一定存在）
-    "bulletName": "GB127T1",
+    "bulletName": "US/GB/127/1932",
     // 炮管数量
     "bulletCount": 1,
     // 装填时间（单位：秒）
@@ -64,7 +65,7 @@
     // US 是所属阵营，533 表示口径，4 表示管数
     "name": "US/533/4",
     // 鱼雷名称
-    "bulletName": "US/TB533T1",
+    "bulletName": "US/TB/533/1931",
     // 发射器管数
     "bulletCount": 4,
     // 发射间隔（单位：秒）

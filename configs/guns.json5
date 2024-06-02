@@ -2,7 +2,7 @@
   // 主鸭炮
   {
     "name": "DuckMainGun",
-    "bulletName": "US/GB406T1",
+    "bulletName": "US/GB/406/1944",
     "bulletCount": 8,
     "reloadTime": 1,
     "range": 30,
@@ -12,7 +12,7 @@
   // 副鸭炮
   {
     "name": "DuckSecondaryGun",
-    "bulletName": "JP/GB155T1",
+    "bulletName": "JP/GB/155/1934",
     "bulletCount": 15,
     "reloadTime": 0.5,
     "range": 20,
@@ -23,7 +23,7 @@
   // long_beach（长滩）
   {
     "name": "US/127/38/MK45",
-    "bulletName": "US/GB127T1",
+    "bulletName": "US/GB/127/1932",
     "bulletCount": 1,
     "reloadTime": 1,
     "range": 22,
@@ -35,7 +35,7 @@
   // montana（蒙大拿）
   {
     "name": "US/406/50/MK7",
-    "bulletName": "US/GB406T1",
+    "bulletName": "US/GB/406/1944",
     "bulletCount": 3,
     "reloadTime": 12,
     "range": 38,
@@ -46,7 +46,7 @@
   // alaska_plus（阿拉斯加-改）
   {
     "name": "US/305/50/MK8",
-    "bulletName": "US/GB305T1",
+    "bulletName": "US/GB/305/1942",
     "bulletCount": 3,
     "reloadTime": 10,
     "range": 35,
@@ -56,9 +56,10 @@
   // 美国海军 US/127/38/MK12 舰炮
   // lowa（衣阿华）
   // atlanta（亚特兰大）
+  // porter（波特）
   {
     "name": "US/127/38/MK12",
-    "bulletName": "US/GB127T1",
+    "bulletName": "US/GB/127/1932",
     "bulletCount": 2,
     "reloadTime": 1.5,
     "range": 18,
@@ -69,7 +70,7 @@
   // montana（蒙大拿）
   {
     "name": "US/127/54/MK39",
-    "bulletName": "US/GB127T1",
+    "bulletName": "US/GB/127/1932",
     "bulletCount": 2,
     "reloadTime": 1.4,
     "range": 24,
@@ -80,7 +81,7 @@
   // yamato_plus（大和-改）
   {
     "name": "JP/460/45",
-    "bulletName": "JP/GB460T1",
+    "bulletName": "JP/GB/460/1942",
     "bulletCount": 3,
     "reloadTime": 20,
     "range": 42,
@@ -91,7 +92,7 @@
   // kongo（金刚）
   {
     "name": "JP/356/45",
-    "bulletName": "JP/GB356T1",
+    "bulletName": "JP/GB/356/1935",
     "bulletCount": 2,
     "reloadTime": 20,
     "range": 35,
@@ -102,7 +103,7 @@
   // mogami（最上）
   {
     "name": "JP/203/50",
-    "bulletName": "JP/GB203T1",
+    "bulletName": "JP/GB/203/1937",
     "bulletCount": 2,
     "reloadTime": 10,
     "range": 24,
@@ -113,7 +114,7 @@
   // yamato_plus（大和-改）
   {
     "name": "JP/155/60",
-    "bulletName": "JP/GB155T1",
+    "bulletName": "JP/GB/155/1934",
     "bulletCount": 2,
     "reloadTime": 3.5,
     "range": 27,
@@ -124,7 +125,7 @@
   // kongo（金刚）
   {
     "name": "JP/152/50",
-    "bulletName": "JP/GB152T1",
+    "bulletName": "JP/GB/152/1912",
     "bulletCount": 1,
     "reloadTime": 5,
     "range": 18,
@@ -135,7 +136,7 @@
   // kuma（球磨）
   {
     "name": "JP/140/50",
-    "bulletName": "JP/GB140T1",
+    "bulletName": "JP/GB/140/1914",
     "bulletCount": 1,
     "reloadTime": 4,
     "range": 18,
@@ -146,7 +147,7 @@
   // asashio（朝潮）
   {
     "name": "JP/127/50",
-    "bulletName": "JP/GB127T1",
+    "bulletName": "JP/GB/127/1926",
     "bulletCount": 2,
     "reloadTime": 2.5,
     "range": 18,
@@ -157,7 +158,7 @@
   // yamato_plus（大和-改）
   {
     "name": "JP/127/40/DP",
-    "bulletName": "JP/GB127T2",
+    "bulletName": "JP/GB/127/1929",
     "bulletCount": 2,
     "reloadTime": 3.5,
     "range": 14,
