@@ -3,6 +3,7 @@ package mission
 import (
 	"log"
 	"slices"
+	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
@@ -21,6 +22,7 @@ import (
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/images/bullet"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -139,16 +141,21 @@ func (m *MissionManager) updateGameOptions() {
 	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
 		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
 	}
+
+	// 按下 n 键，全局展示 / 不展示所有伤害数字
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyN) {
+		m.state.GameOpts.DisplayDamageNumber = !m.state.GameOpts.DisplayDamageNumber
+	}
 }
 
 // 更新游戏标识
 func (m *MissionManager) updateGameMarks() {
-	for markType, mark := range m.state.GameMarks {
+	for markID, mark := range m.state.GameMarks {
 		mark.Life--
 
 		// 检查游戏标识，如果生命值为 0，则删除
 		if mark.Life <= 0 {
-			delete(m.state.GameMarks, markType)
+			delete(m.state.GameMarks, markID)
 		}
 	}
 }
@@ -389,8 +396,27 @@ func (m *MissionManager) updateShotBullets() {
 
 	// 继续塔塔开的，保留
 	m.state.ForwardingBullets = forwardingBullets
-	// 已经到达目标地点的，存起来绘图用
-	m.state.ArrivedBullets = arrivedBullets
+	// 已经到达目标地点的，转换成爆炸 & 伤害数值
+	// TODO 支持命中爆炸
+	for _, bt := range arrivedBullets {
+		if bt.HitObjectType != obj.HitObjectTypeShip {
+			continue
+		}
+
+		if m.state.GameOpts.DisplayDamageNumber {
+			fontSize, clr := 0.0, colorx.White
+			switch bt.CriticalType {
+			case obj.CriticalTypeNone:
+				fontSize, clr = float64(16), colorx.White
+			case obj.CriticalTypeThreeTimes:
+				fontSize, clr = float64(20), colorx.Yellow
+			case obj.CriticalTypeTenTimes:
+				fontSize, clr = float64(24), colorx.Red
+			}
+			mark := obj.NewTextMark(bt.CurPos, strconv.Itoa(int(bt.RealDamage)), fontSize, clr, 20)
+			m.state.GameMarks[mark.ID] = mark
+		}
+	}
 }
 
 // 更新局内战舰

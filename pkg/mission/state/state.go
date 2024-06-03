@@ -27,6 +27,8 @@ type GameOptions struct {
 	FriendlyFire bool
 	// 展示状态（HP / 武器禁用）
 	ForceDisplayState bool
+	// 展示伤害数值
+	DisplayDamageNumber bool
 }
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）
@@ -63,10 +65,8 @@ type MissionState struct {
 	Trails []*obj.Trail
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*obj.Bullet
-	// 已到达预期位置的弹药信息（炮弹 / 鱼雷）
-	ArrivedBullets []*obj.Bullet
 	// 游戏标识
-	GameMarks map[obj.MarkType]*obj.Mark
+	GameMarks map[obj.MarkID]*obj.Mark
 }
 
 // NewMissionState ...
@@ -105,7 +105,6 @@ func NewMissionState(mission string) *MissionState {
 		DestroyedShips:    []*obj.BattleShip{},
 		Trails:            []*obj.Trail{},
 		ForwardingBullets: []*obj.Bullet{},
-		ArrivedBullets:    []*obj.Bullet{},
-		GameMarks:         map[obj.MarkType]*obj.Mark{},
+		GameMarks:         map[obj.MarkID]*obj.Mark{},
 	}
 }

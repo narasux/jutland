@@ -12,6 +12,7 @@ import (
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
 // HumanInputHandler 人类输入处理器
@@ -45,7 +46,8 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 				instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(shipUid, targetPos)
 			}
 			// 有战舰被选中的情况下，标记目标位置
-			misState.GameMarks[obj.MarkTypeTargetPos] = obj.NewMark(obj.MarkTypeTargetPos, *pos)
+			mark := obj.NewImgMark(*pos, texture.TargetPosImg, 20)
+			misState.GameMarks[mark.ID] = mark
 		}
 	}
 
