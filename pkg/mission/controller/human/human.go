@@ -76,7 +76,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 			anyWeaponDisabled := false
 			for _, shipUid := range misState.SelectedShips {
 				ship := misState.Ships[shipUid]
-				if ship.Weapon.MainGunDisabled || ship.Weapon.TorpedoDisabled {
+				if ship.Weapon.MainGunDisabled || ship.Weapon.SecondaryGunDisabled || ship.Weapon.TorpedoDisabled {
 					anyWeaponDisabled = true
 					break
 				}

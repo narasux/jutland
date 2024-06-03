@@ -300,17 +300,29 @@ func (m *MissionManager) updateObjectTrails() {
 		if ship.CurSpeed > 0 {
 			m.state.Trails = append(
 				m.state.Trails,
-				obj.NewTrail(ship.CurPos, texture.TrailShapeCircle, ship.Width, 0.2, 60*10*ship.CurSpeed, 1, 10, 0),
+				obj.NewTrail(ship.CurPos, texture.TrailShapeCircle, ship.Width, 0.3, 60*15*ship.CurSpeed, 1.5, 8, 0),
 			)
 		}
 	}
 	for _, bt := range m.state.ForwardingBullets {
 		if bt.HitObjectType == obj.HitObjectTypeNone && bt.ForwardAge > 10 {
-			diffusionRate := lo.Ternary(bt.Type == obj.BulletTypeTorpedo, 0.3, 0.1)
+			diffusionRate, multipleSizeAsLife, lifeReductionRate := 0.1, 7.0, 2.0
+			if bt.Type == obj.BulletTypeTorpedo {
+				diffusionRate, multipleSizeAsLife, lifeReductionRate = 0.5, 8.0, 3.0
+			}
 			size := float64(bullet.GetImgWidth(bt.Name))
 			m.state.Trails = append(
 				m.state.Trails,
-				obj.NewTrail(bt.CurPos, texture.TrailShapeRect, size, diffusionRate, size*7, 1, 0, bt.Rotation),
+				obj.NewTrail(
+					bt.CurPos,
+					texture.TrailShapeRect,
+					size,
+					diffusionRate,
+					size*multipleSizeAsLife,
+					lifeReductionRate,
+					0,
+					bt.Rotation,
+				),
 			)
 		}
 	}
