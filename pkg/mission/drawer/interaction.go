@@ -6,9 +6,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
-	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
@@ -59,17 +57,11 @@ func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) 
 // 绘制标识
 func (d *Drawer) drawMarks(screen *ebiten.Image, ms *state.MissionState) {
 	for _, mark := range ms.GameMarks {
-		if mark.Type == obj.MarkTypeImg {
-			opts := d.genDefaultDrawImageOptions()
-			opts.GeoM.Translate(
-				(mark.Pos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(mark.Img.Bounds().Dx()/2),
-				(mark.Pos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(mark.Img.Bounds().Dy()/2),
-			)
-			screen.DrawImage(mark.Img, opts)
-		} else if mark.Type == obj.MarkTypeText {
-			posX := (mark.Pos.RX - float64(ms.Camera.Pos.MX)) * constants.MapBlockSize
-			posY := (mark.Pos.RY - float64(ms.Camera.Pos.MY)) * constants.MapBlockSize
-			d.drawText(screen, mark.Text, posX, posY, mark.FontSize, font.Hang, mark.Color)
-		}
+		opts := d.genDefaultDrawImageOptions()
+		opts.GeoM.Translate(
+			(mark.Pos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(mark.Img.Bounds().Dx()/2),
+			(mark.Pos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(mark.Img.Bounds().Dy()/2),
+		)
+		screen.DrawImage(mark.Img, opts)
 	}
 }
