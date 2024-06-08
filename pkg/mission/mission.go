@@ -306,10 +306,15 @@ func (m *MissionManager) updateObjectTrails() {
 	})
 	for _, ship := range m.state.Ships {
 		if ship.CurSpeed > 0 {
-			frontPos := ship.CurPos.Copy()
-			offset := 0.5 * ship.Length / constants.MapBlockSize / 2
-			frontPos.AddRx(math.Sin(ship.CurRotation*math.Pi/180) * offset)
-			frontPos.SubRy(math.Cos(ship.CurRotation*math.Pi/180) * offset)
+			offset := ship.Length / constants.MapBlockSize
+			sinVal := math.Sin(ship.CurRotation * math.Pi / 180)
+			cosVal := math.Cos(ship.CurRotation * math.Pi / 180)
+
+			frontPos, backPos := ship.CurPos.Copy(), ship.CurPos.Copy()
+			frontPos.AddRx(sinVal * offset * 0.25)
+			frontPos.SubRy(cosVal * offset * 0.25)
+			backPos.SubRx(sinVal * offset * 0.2)
+			backPos.AddRy(cosVal * offset * 0.2)
 
 			m.state.Trails = append(
 				m.state.Trails,
@@ -317,20 +322,20 @@ func (m *MissionManager) updateObjectTrails() {
 					frontPos,
 					texture.TrailShapeCircle,
 					ship.Width*0.6,
-					1,
+					1.2,
 					ship.Length/6+150*ship.CurSpeed,
 					1,
 					0,
 					0,
 				),
 				obj.NewTrail(
-					ship.CurPos,
+					backPos,
 					texture.TrailShapeCircle,
 					ship.Width,
 					0.4,
-					ship.Length/7+150*ship.CurSpeed,
+					ship.Length/7+155*ship.CurSpeed,
 					1.5,
-					8,
+					0,
 					0,
 				),
 			)

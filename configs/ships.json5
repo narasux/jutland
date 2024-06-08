@@ -1028,7 +1028,7 @@
     "verticalDamageReduction": 1.5,
     "maxSpeed": 0.12,
     "acceleration": 0.004,
-    "rotateSpeed": 2.5,
+    "rotateSpeed": 2.2,
     "length": 116,
     "width": 11,
     "weapon": {
@@ -1091,7 +1091,7 @@
     "verticalDamageReduction": 1.5,
     "maxSpeed": 0.12,
     "acceleration": 0.004,
-    "rotateSpeed": 2.5,
+    "rotateSpeed": 2.2,
     "length": 118,
     "width": 11,
     "weapon": {
