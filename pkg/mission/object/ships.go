@@ -8,6 +8,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -226,7 +227,7 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 		s.CurSpeed = min(s.MaxSpeed, s.CurSpeed+s.Acceleration)
 	}
 	// 到目标位置附近，逐渐减速
-	if s.CurPos.Near(targetPos, 4) {
+	if s.CurPos.Near(targetPos, s.Length/constants.MapBlockSize*1.5) {
 		s.CurSpeed = max(s.Acceleration*20, s.CurSpeed-s.Acceleration*10)
 	}
 	targetRotation := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
@@ -241,7 +242,7 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 		s.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-s.CurRotation), s.RotateSpeed)
 		s.CurRotation = math.Mod(s.CurRotation+360, 360)
 		// 如果距离太近，则原地旋转到差不多角度，才开始移动
-		if s.CurPos.Near(targetPos, 3) && math.Abs(s.CurRotation-targetRotation) > 1 {
+		if s.CurPos.Near(targetPos, 4) && math.Abs(s.CurRotation-targetRotation) > 1 {
 			s.CurSpeed = 0
 		}
 	}

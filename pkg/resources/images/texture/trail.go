@@ -37,7 +37,7 @@ func GetTrailImg(shape TrailShape, size, life float64) *ebiten.Image {
 		return InvalidTrailImg
 	}
 
-	key := fmt.Sprintf("%d:%.2f:%.2f", shape, size, life)
+	key := fmt.Sprintf("%d:%d:%d", shape, int(size), int(life))
 	// 尝试从缓存取
 	if img, ok := trailImgCache[key]; ok {
 		return img

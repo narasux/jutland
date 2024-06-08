@@ -31,8 +31,8 @@ func (p *MapPos) MEqual(other MapPos) bool {
 }
 
 // Near 判断位置是否在指定范围内
-func (p *MapPos) Near(other MapPos, distance int) bool {
-	return geometry.CalcDistance(p.RX, p.RY, other.RX, other.RY) <= float64(distance)
+func (p *MapPos) Near(other MapPos, distance float64) bool {
+	return geometry.CalcDistance(p.RX, p.RY, other.RX, other.RY) <= distance
 }
 
 // String ...

@@ -12,7 +12,7 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "montana",
+        "name": "lowa",
         "pos": [38, 37],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
@@ -24,8 +24,56 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "montana",
+        "name": "yamato_plus",
         "pos": [38, 43],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "kongo",
+        "pos": [40, 46],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "atlanta",
+        "pos": [38, 49],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "alaska_plus",
+        "pos": [40, 52],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "long_beach",
+        "pos": [38, 55],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "mogami",
+        "pos": [40, 58],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "kuma",
+        "pos": [38, 61],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "porter",
+        "pos": [40, 64],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "asashio",
+        "pos": [38, 67],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
