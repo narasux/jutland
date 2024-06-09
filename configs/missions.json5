@@ -36,13 +36,13 @@
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "atlanta",
+        "name": "alaska_plus",
         "pos": [38, 49],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
       },
       {
-        "name": "alaska_plus",
+        "name": "atlanta",
         "pos": [40, 52],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
