@@ -83,22 +83,32 @@ func LoadMapSceneRes(mission string) {
 }
 
 // GetByCharAndPos 根据指定字符 & 坐标，获取地图块资源
-func GetByCharAndPos(c rune, x, y int) *ebiten.Image {
+func GetByCharAndPos(c rune, x, y int) []*ebiten.Image {
 	hash := sha256.Sum256([]byte(fmt.Sprintf("%d:%d", x, y)))
+
+	posBlocks := []*ebiten.Image{}
 	// 字符映射关系：. 浅海 o 深海 # 陆地
-	if c == '.' {
+	switch c {
+	case '.':
 		index := int(hash[0]) % seaBlockCount
-		return blocks[fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-	}
-	if c == 'o' {
+		img := blocks[fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
+		posBlocks = append(posBlocks, img)
+	case 'o':
 		index := int(hash[0]) % deepSeaBlockCount
-		return blocks[fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
-	}
-	if c == '#' {
+		img := blocks[fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
+		posBlocks = append(posBlocks, img)
+	case 'L':
 		key := fmt.Sprintf("%d:%d", x, y)
-		if img, ok := sceneBlockMap[key]; ok {
-			return img
-		}
+		posBlocks = append(posBlocks, sceneBlockMap[key])
+	case 'S':
+		// 浅滩/沙滩需要现有海洋贴图，再贴陆地/沙滩贴图
+		index := int(hash[0]) % seaBlockCount
+		img := blocks[fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
+		posBlocks = append(posBlocks, img)
+
+		key := fmt.Sprintf("%d:%d", x, y)
+		posBlocks = append(posBlocks, sceneBlockMap[key])
 	}
-	return blocks["blank"]
+
+	return posBlocks
 }

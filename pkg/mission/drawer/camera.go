@@ -17,7 +17,10 @@ func (d *Drawer) drawCameraViewRealTimeRender(screen *ebiten.Image, ms *state.Mi
 
 			mapX, mapY := ms.Camera.Pos.MX+x, ms.Camera.Pos.MY+y
 			char := ms.MissionMD.MapCfg.Map.Get(mapX, mapY)
-			screen.DrawImage(mapblock.GetByCharAndPos(char, mapX, mapY), opts)
+			images := mapblock.GetByCharAndPos(char, mapX, mapY)
+			for _, img := range images {
+				screen.DrawImage(img, opts)
+			}
 		}
 	}
 }
