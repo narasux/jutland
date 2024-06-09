@@ -83,13 +83,13 @@
     "type": "torpedo",
     "diameter": 533,
     "damage": 4300,
-    "criticalRate": 0.01
+    "criticalRate": 0.05
   },
   {
     "name": "JP/TB/610/1933",
     "type": "torpedo",
     "diameter": 610,
     "damage": 6250,
-    "criticalRate": 0.015
+    "criticalRate": 0.1
   }
 ]

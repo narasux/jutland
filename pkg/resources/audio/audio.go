@@ -96,8 +96,6 @@ var smallGunBulletDiameter = []int{140, 127}
 
 // NewGunFire 火炮开火
 func NewGunFire(bulletDiameter int) types.AudioStream {
-	// TODO 目前只按照大中小口径区分
-	// FIXME 中小口径的火炮开火声音需要重录
 	audioType := "not_found"
 	if slices.Contains(largeGunBulletDiameter, bulletDiameter) {
 		audioType = "large"
