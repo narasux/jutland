@@ -374,6 +374,10 @@ func (m *MissionManager) updateShotBullets() {
 	// 结算伤害
 	resolveDamage := func(bt *obj.Bullet) bool {
 		for _, ship := range m.state.Ships {
+			// 总不能不小心打死自己吧，真是不应该 :D
+			if bt.BelongShip == ship.Uid {
+				continue
+			}
 			// 如果友军伤害没启用，则不对己方战舰造成伤害
 			if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
 				continue

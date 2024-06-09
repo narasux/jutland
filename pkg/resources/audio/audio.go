@@ -104,7 +104,7 @@ func NewGunFire(bulletDiameter int) types.AudioStream {
 	} else if slices.Contains(smallGunBulletDiameter, bulletDiameter) {
 		audioType = "small"
 	}
-	return mustNewAudio(fmt.Sprintf("/fire/%s.wav", audioType))
+	return mustNewAudio(fmt.Sprintf("/fire/gun_%s.wav", audioType))
 }
 
 // NewTorpedoLaunch 鱼雷发射
