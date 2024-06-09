@@ -3,6 +3,7 @@ package mapblock
 import (
 	"crypto/sha256"
 	"fmt"
+	"image"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -31,38 +32,54 @@ func init() {
 
 	// 海洋地图块（浅海）
 	for i := 0; i < seaBlockCount; i++ {
-		imgName := fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, i)
-		imgPath := fmt.Sprintf("/map/blocks/%s.png", imgName)
-		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
+		imgName := fmt.Sprintf("%d_%d", constants.MapBlockSize, i)
+		imgPath := fmt.Sprintf("/map/blocks/sea/%s.png", imgName)
+		if blocks["sea_"+imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
 		}
 	}
 
 	// 深海地图块（浅海）
 	for i := 0; i < deepSeaBlockCount; i++ {
-		imgName := fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, i)
-		imgPath := fmt.Sprintf("/map/blocks/%s.png", imgName)
-		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
-			log.Fatalf("missing %s: %s", imgPath, err)
-		}
-	}
-
-	// 陆地地图块
-	for i := 0; i < landBlockCount; i++ {
-		imgName := fmt.Sprintf("land_%d_%d", constants.MapBlockSize, i)
-		imgPath := fmt.Sprintf("/map/blocks/%s.png", imgName)
-		if blocks[imgName], err = loader.LoadImage(imgPath); err != nil {
+		imgName := fmt.Sprintf("%d_%d", constants.MapBlockSize, i)
+		imgPath := fmt.Sprintf("/map/blocks/deep_sea/%s.png", imgName)
+		if blocks["deep_sea_"+imgName], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
 		}
 	}
 
 	// 空白地图块
-	imgPath := "/map/blocks/white.png"
+	imgPath := "/map/blocks/common/white.png"
 	if blocks["blank"], err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	log.Println("map block image resources loaded")
+}
+
+var sceneBlockMap map[string]*ebiten.Image
+
+// LoadMapSceneRes 加载地图场景资源
+func LoadMapSceneRes(mission string) {
+	sceneBlockMap = map[string]*ebiten.Image{}
+
+	imgPath := fmt.Sprintf("/map/scenes/%s.png", mission)
+	missionImg, err := loader.LoadImage(imgPath)
+	if err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	blockSize := constants.MapBlockSize
+	w, h := missionImg.Bounds().Dx()/blockSize, missionImg.Bounds().Dy()/blockSize
+	for x := 0; x < w; x++ {
+		for y := 0; y < h; y++ {
+			topLeftX, topLeftY := x*blockSize, y*blockSize
+			cropRect := image.Rect(topLeftX, topLeftY, topLeftX+blockSize, topLeftY+blockSize)
+
+			key := fmt.Sprintf("%d:%d", x, y)
+			sceneBlockMap[key] = missionImg.SubImage(cropRect).(*ebiten.Image)
+		}
+	}
 }
 
 // GetByCharAndPos 根据指定字符 & 坐标，获取地图块资源
@@ -78,8 +95,10 @@ func GetByCharAndPos(c rune, x, y int) *ebiten.Image {
 		return blocks[fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
 	}
 	if c == '#' {
-		index := int(hash[0]) % landBlockCount
-		return blocks[fmt.Sprintf("land_%d_%d", constants.MapBlockSize, index)]
+		key := fmt.Sprintf("%d:%d", x, y)
+		if img, ok := sceneBlockMap[key]; ok {
+			return img
+		}
 	}
 	return blocks["blank"]
 }

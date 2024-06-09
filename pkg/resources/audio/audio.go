@@ -55,6 +55,11 @@ func NewMissionsBackground() types.AudioStream {
 	return mustNewAudio("/bgm/menu_bgm.wav")
 }
 
+// NewMissionLoadingBackground 任务加载中 背景音乐 TODO 更换音频
+func NewMissionLoadingBackground() types.AudioStream {
+	return mustNewAudio("/bgm/menu_bgm.wav")
+}
+
 // NewMissionStartBackground 任务开始 背景音乐 TODO 更换音频
 func NewMissionStartBackground() types.AudioStream {
 	return mustNewAudio("/bgm/menu_bgm.wav")

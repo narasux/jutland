@@ -2,7 +2,7 @@
   {
     "name": "default",
     "initCameraPos": [35, 28],
-    "mapName": "default",
+    "mapName": "darwin",
     "maxShipCount": 5,
     "initShips": [
       {
@@ -79,55 +79,55 @@
       },
       {
         "name": "asashio",
-        "pos": [82, 36],
+        "pos": [82, 40],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [80, 45],
+        "pos": [80, 49],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [88, 36],
+        "pos": [88, 40],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [83, 48],
+        "pos": [83, 52],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "mogami",
-        "pos": [82, 42],
+        "pos": [80, 46],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "mogami",
-        "pos": [80, 39],
+        "pos": [81, 43],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "yamato_plus",
-        "pos": [88, 45],
+        "pos": [88, 48],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "kongo",
-        "pos": [88, 39],
+        "pos": [88, 43],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "kuma",
-        "pos": [88, 50],
+        "pos": [88, 54],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       }

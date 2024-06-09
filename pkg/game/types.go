@@ -9,6 +9,8 @@ const (
 	GameModeMenuSelect
 	// 任务选择
 	GameModeMissionSelect
+	// 任务加载
+	GameModeMissionLoading
 	// 任务开始
 	GameModeMissionStart
 	// 任务进行中

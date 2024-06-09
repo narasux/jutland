@@ -28,6 +28,7 @@ type Game struct {
 	// 对象状态
 	objStates *objStates
 
+	curMission string
 	// 任务管理
 	missionMgr *mission.MissionManager
 }
@@ -38,6 +39,7 @@ func New() *Game {
 		drawer:     NewDrawer(),
 		player:     audio.NewPlayer(audio.Context),
 		objStates:  nil,
+		curMission: "default",
 		missionMgr: nil,
 	}
 	g.init()
@@ -53,6 +55,8 @@ func (g *Game) Update() error {
 		return g.handleMenuSelect()
 	case GameModeMissionSelect:
 		return g.handleMissionSelect()
+	case GameModeMissionLoading:
+		return g.handleMissionLoading()
 	case GameModeMissionStart:
 		return g.handleMissionStart()
 	case GameModeMissionRunning:
@@ -86,6 +90,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case GameModeMissionSelect:
 		g.drawer.drawBackground(screen, background.MissionsMapImg)
 		g.drawer.drawGameTip(screen, "选择任务...")
+	case GameModeMissionLoading:
+		g.drawer.drawBackground(screen, background.MissionStartImg)
+		g.drawer.drawGameTip(screen, "任务加载中...")
 	case GameModeMissionStart:
 		g.drawer.drawBackground(screen, background.MissionStartImg)
 		g.drawer.drawGameTip(screen, "任务开始！")

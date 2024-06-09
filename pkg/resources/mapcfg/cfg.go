@@ -64,6 +64,7 @@ func init() {
 
 	// TODO 这里也改成从配置文件加载
 	maps["default"] = loadMapCfg("default")
+	maps["darwin"] = loadMapCfg("darwin")
 	maps["allSea128"] = loadMapCfg("allSea128")
 
 	log.Println("map config loaded")

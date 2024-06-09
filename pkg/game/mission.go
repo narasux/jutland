@@ -11,12 +11,20 @@ import (
 // 任务选择
 func (g *Game) handleMissionSelect() error {
 	g.player.Play(audioRes.NewMissionsBackground())
-	// FIXME 目前没有任务可选，直接进入默认测试关卡
 	if isAnyNextInput() {
-		g.missionMgr = mission.NewManager("default")
-		g.mode = GameModeMissionStart
+		// FIXME 目前没有任务可选，直接点击进入默认关卡
+		g.curMission = "default"
+		g.mode = GameModeMissionLoading
 		g.player.Close()
 	}
+	return nil
+}
+
+// 任务加载
+func (g *Game) handleMissionLoading() error {
+	g.player.Play(audioRes.NewMissionLoadingBackground())
+	g.missionMgr = mission.NewManager(g.curMission)
+	g.mode = GameModeMissionStart
 	return nil
 }
 
