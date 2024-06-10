@@ -18,7 +18,7 @@ type Drawer struct {
 // NewDrawer ...
 func NewDrawer(mission string) *Drawer {
 	missionMD := md.Get(mission)
-	if err := mapblock.SceneBlockCache.Init(missionMD.MapCfg.Name); err != nil {
+	if err := mapblock.SceneBlockCache.Init(missionMD.MapCfg); err != nil {
 		log.Fatal("failed to load map scene blocks: ", err)
 	}
 	return &Drawer{mission: mission}

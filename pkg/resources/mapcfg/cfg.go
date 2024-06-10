@@ -9,6 +9,17 @@ import (
 	"github.com/narasux/jutland/pkg/config"
 )
 
+const (
+	// 海洋
+	ChrSea = '.'
+	// 深海
+	ChrDeepSea = 'O'
+	// 海陆交界（TODO 后续区分浅海 & 沙滩）
+	ChrSeaLand = 'S'
+	// 陆地
+	ChrLand = 'L'
+)
+
 // 地图数据
 type MapData []string
 
@@ -17,6 +28,18 @@ func (m *MapData) Get(x, y int) rune {
 		return ' '
 	}
 	return rune((*m)[y][x])
+}
+
+// IsSea ...
+func (m *MapData) IsSea(x, y int) bool {
+	chr := m.Get(x, y)
+	return chr == ChrSea || chr == ChrDeepSea
+}
+
+// IsLand ...
+func (m *MapData) IsLand(x, y int) bool {
+	chr := m.Get(x, y)
+	return chr == ChrSeaLand || chr == ChrLand
 }
 
 // 地图配置
