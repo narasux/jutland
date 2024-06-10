@@ -41,7 +41,7 @@ func (p *Player) Play(ads types.AudioStream) {
 	var err error
 	p.player, err = p.ctx.NewPlayer(ads)
 	if err != nil {
-		log.Fatalf("failed to play audio: %s", err)
+		log.Fatal("failed to play audio: ", err)
 	}
 	p.player.Play()
 }
@@ -57,7 +57,7 @@ func (p *Player) Close() {
 		return
 	}
 	if err := p.player.Close(); err != nil {
-		log.Fatalf("failed to close audio: %s", err)
+		log.Fatal("failed to close audio: ", err)
 	}
 	p.player = nil
 }

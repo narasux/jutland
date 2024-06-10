@@ -58,7 +58,7 @@ type rawMissionMetadata struct {
 func init() {
 	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "missions.json5"))
 	if err != nil {
-		log.Fatalf("failed to open missions.json5: %s", err)
+		log.Fatal("failed to open missions.json5: ", err)
 	}
 	defer file.Close()
 
@@ -66,7 +66,7 @@ func init() {
 
 	var misMDs []rawMissionMetadata
 	if err = json5.Unmarshal(bytes, &misMDs); err != nil {
-		log.Fatalf("failed to unmarshal missions.json5: %s", err)
+		log.Fatal("failed to unmarshal missions.json5: ", err)
 	}
 
 	missionMetadata = make(map[string]MissionMetadata)

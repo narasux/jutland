@@ -1,14 +1,18 @@
 package mapblock
 
 import (
+	"bytes"
 	"crypto/md5"
 	"fmt"
 	"image"
 	"log"
+	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/pkg/errors"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/loader"
 )
 
@@ -17,8 +21,6 @@ const (
 	seaBlockCount = 7
 	// 深海地图块数量
 	deepSeaBlockCount = 3
-	// 陆地地图块数量
-	landBlockCount = 5
 )
 
 var blocks map[string]*ebiten.Image
@@ -57,56 +59,65 @@ func init() {
 	log.Println("map block image resources loaded")
 }
 
-var sceneBlockMap map[string]*ebiten.Image
+var sceneBlockMap map[int]map[int]*ebiten.Image
 
-// LoadMapSceneRes 加载地图场景资源
-func LoadMapSceneRes(mission string) {
-	sceneBlockMap = map[string]*ebiten.Image{}
+// LoadMapSceneBlocks 加载地图贴图数据
+// 注：不要使用 ebiten.Image.SubImage() 来裁剪图片，有性能问题
+func LoadMapSceneBlocks(mission string) error {
+	// 丢弃上一个关卡的地图贴图数据
+	sceneBlockMap = map[int]map[int]*ebiten.Image{}
 
 	imgPath := fmt.Sprintf("/map/scenes/%s.png", mission)
-	missionImg, err := loader.LoadImage(imgPath)
+	imgData, err := os.ReadFile(config.ImgResBaseDir + imgPath)
 	if err != nil {
-		log.Fatalf("missing %s: %s", imgPath, err)
+		return err
+	}
+	img, _, err := image.Decode(bytes.NewReader(imgData))
+	if err != nil {
+		return err
+	}
+	missionImg, ok := img.(*image.NRGBA)
+	if !ok {
+		return errors.New("mission image isn't image.NRGBA type")
 	}
 
 	blockSize := constants.MapBlockSize
-	w, h := missionImg.Bounds().Dx()/blockSize, missionImg.Bounds().Dy()/blockSize
+	w, h := (missionImg.Bounds().Dx()+2)/blockSize, (missionImg.Bounds().Dy()+2)/blockSize
 	for x := 0; x < w; x++ {
+		mp := map[int]*ebiten.Image{}
 		for y := 0; y < h; y++ {
 			topLeftX, topLeftY := x*blockSize, y*blockSize
 			cropRect := image.Rect(topLeftX, topLeftY, topLeftX+blockSize, topLeftY+blockSize)
-
-			key := fmt.Sprintf("%d:%d", x, y)
-			sceneBlockMap[key] = missionImg.SubImage(cropRect).(*ebiten.Image)
+			mp[y] = ebiten.NewImageFromImage(missionImg.SubImage(cropRect))
 		}
+		sceneBlockMap[x] = mp
 	}
+	log.Println("mission %s map scene blocks loaded", mission)
+	return nil
 }
 
 // GetByCharAndPos 根据指定字符 & 坐标，获取地图块资源
 func GetByCharAndPos(c rune, x, y int) []*ebiten.Image {
 	hash := md5.Sum([]byte(fmt.Sprintf("%d:%d", x, y)))
-	index := int(hash[0]) % seaBlockCount
 
 	posBlocks := []*ebiten.Image{}
 	// 字符映射关系：. 浅海 o 深海 # 陆地
 	switch c {
 	case '.':
+		index := int(hash[0]) % seaBlockCount
 		img := blocks[fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
 		posBlocks = append(posBlocks, img)
 	case 'o':
+		index := int(hash[0]) % deepSeaBlockCount
 		img := blocks[fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
 		posBlocks = append(posBlocks, img)
 	case 'L':
-		key := fmt.Sprintf("%d:%d", x, y)
-		posBlocks = append(posBlocks, sceneBlockMap[key])
+		posBlocks = append(posBlocks, sceneBlockMap[x][y])
 	case 'S':
-		// FIXME 目前似乎存在一个问题，刚刚移动相机到陆地边缘的时候会卡顿？
 		// 浅滩/沙滩需要现有海洋贴图，再贴陆地/沙滩贴图
+		index := int(hash[0]) % seaBlockCount
 		img := blocks[fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks, img)
-
-		key := fmt.Sprintf("%d:%d", x, y)
-		posBlocks = append(posBlocks, sceneBlockMap[key])
+		posBlocks = append(posBlocks, img, sceneBlockMap[x][y])
 	}
 
 	return posBlocks

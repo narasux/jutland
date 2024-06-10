@@ -39,8 +39,8 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 				// 如果是多艘战舰，则需要区分下终点位置，不要聚在一起挨揍 TODO 更好的分散策略？
 				targetPos := pos.Copy()
 				if selectedShipCount > 1 {
-					targetPos.AddRx(float64(rand.Intn(7) - 3))
-					targetPos.AddRy(float64(rand.Intn(7) - 3))
+					targetPos.AddRx(float64(rand.Intn(5) - 2))
+					targetPos.AddRy(float64(rand.Intn(5) - 2))
 				}
 				// 通过 ShipMove 指令实现移动行为
 				instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(shipUid, targetPos)

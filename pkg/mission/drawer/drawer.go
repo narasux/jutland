@@ -1,6 +1,8 @@
 package drawer
 
 import (
+	"log"
+
 	"github.com/hajimehoshi/ebiten/v2"
 
 	md "github.com/narasux/jutland/pkg/mission/metadata"
@@ -16,14 +18,16 @@ type Drawer struct {
 // NewDrawer ...
 func NewDrawer(mission string) *Drawer {
 	missionMD := md.Get(mission)
-	mapblock.LoadMapSceneRes(missionMD.MapCfg.Name)
+	if err := mapblock.LoadMapSceneBlocks(missionMD.MapCfg.Name); err != nil {
+		log.Fatal("failed to load map scene blocks: ", err)
+	}
 	return &Drawer{mission: mission}
 }
 
 // Draw 绘制任务关卡图像
 func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
 	// 相机视野
-	d.drawCameraViewRealTimeRender(screen, misState)
+	d.drawCameraView(screen, misState)
 	// 地图元素
 	d.drawBuildings(screen, misState)
 	d.drawShotBullets(screen, misState)

@@ -9,7 +9,7 @@ import (
 )
 
 // 绘制相机视野（实时渲染）
-func (d *Drawer) drawCameraViewRealTimeRender(screen *ebiten.Image, ms *state.MissionState) {
+func (d *Drawer) drawCameraView(screen *ebiten.Image, ms *state.MissionState) {
 	for x := 0; x < ms.Camera.Width; x++ {
 		for y := 0; y < ms.Camera.Height; y++ {
 			opts := d.genDefaultDrawImageOptions()

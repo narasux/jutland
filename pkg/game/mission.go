@@ -23,8 +23,8 @@ func (g *Game) handleMissionSelect() error {
 // 任务加载
 func (g *Game) handleMissionLoading() error {
 	g.missionMgr = mission.NewManager(g.curMission)
-	audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
 	g.mode = GameModeMissionStart
+	audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
 	return nil
 }
 
@@ -41,7 +41,7 @@ func (g *Game) handleMissionStart() error {
 func (g *Game) handleMissionRunning() error {
 	status, err := g.missionMgr.Update()
 	if err != nil {
-		log.Fatalf("failed to update mission: %s", err)
+		log.Fatal("failed to update mission: ", err)
 	}
 	if status == state.MissionSuccess {
 		g.mode = GameModeMissionSuccess

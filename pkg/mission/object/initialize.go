@@ -22,7 +22,7 @@ func init() {
 func initBulletMap() {
 	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "bullets.json5"))
 	if err != nil {
-		log.Fatalf("failed to open bullets.json5: %s", err)
+		log.Fatal("failed to open bullets.json5: ", err)
 	}
 	defer file.Close()
 
@@ -30,7 +30,7 @@ func initBulletMap() {
 
 	var bullets []Bullet
 	if err = json5.Unmarshal(bytes, &bullets); err != nil {
-		log.Fatalf("failed to unmarshal bullets.json5: %s", err)
+		log.Fatal("failed to unmarshal bullets.json5: ", err)
 	}
 
 	for _, b := range bullets {
@@ -41,7 +41,7 @@ func initBulletMap() {
 func initGunMap() {
 	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "guns.json5"))
 	if err != nil {
-		log.Fatalf("failed to open guns.json5: %s", err)
+		log.Fatal("failed to open guns.json5: ", err)
 	}
 	defer file.Close()
 
@@ -49,10 +49,11 @@ func initGunMap() {
 
 	var guns []Gun
 	if err = json5.Unmarshal(bytes, &guns); err != nil {
-		log.Fatalf("failed to unmarshal guns.json5: %s", err)
+		log.Fatal("failed to unmarshal guns.json5: ", err)
 	}
 
 	for _, g := range guns {
+		g.Range /= 2
 		g.BulletSpeed /= 4000
 		gunMap[g.Name] = &g
 	}
@@ -61,7 +62,7 @@ func initGunMap() {
 func initTorpedoLauncherMap() {
 	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "torpedo_launchers.json5"))
 	if err != nil {
-		log.Fatalf("failed to open torpedo_launchers.json5: %s", err)
+		log.Fatal("failed to open torpedo_launchers.json5: ", err)
 	}
 	defer file.Close()
 
@@ -69,10 +70,11 @@ func initTorpedoLauncherMap() {
 
 	var torpedoLaunchers []TorpedoLauncher
 	if err = json5.Unmarshal(bytes, &torpedoLaunchers); err != nil {
-		log.Fatalf("failed to unmarshal torpedo_launchers.json5: %s", err)
+		log.Fatal("failed to unmarshal torpedo_launchers.json5: ", err)
 	}
 
 	for _, lc := range torpedoLaunchers {
+		lc.Range /= 2
 		lc.BulletSpeed /= 600
 		torpedoLauncherMap[lc.Name] = &lc
 	}
@@ -81,7 +83,7 @@ func initTorpedoLauncherMap() {
 func initShipMap() {
 	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "ships.json5"))
 	if err != nil {
-		log.Fatalf("failed to open ships.json5: %s", err)
+		log.Fatal("failed to open ships.json5: ", err)
 	}
 	defer file.Close()
 
@@ -89,7 +91,7 @@ func initShipMap() {
 
 	var ships []BattleShip
 	if err = json5.Unmarshal(bytes, &ships); err != nil {
-		log.Fatalf("failed to unmarshal ships.json5: %s", err)
+		log.Fatal("failed to unmarshal ships.json5: ", err)
 	}
 
 	for _, s := range ships {
