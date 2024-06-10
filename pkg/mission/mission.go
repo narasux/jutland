@@ -91,7 +91,7 @@ func (m *MissionManager) executeInstructions() {
 	for _, i := range m.instructions {
 		if err := i.Exec(m.state); err != nil {
 			// TODO 某个指令执行失败，不影响流程，但是应该有错误信息输出到游戏界面？
-			log.Printf("Instruction %s exec error: %s", i.String(), err)
+			log.Printf("Instruction %s exec error: %s\n", i.String(), err)
 			continue
 		}
 	}
@@ -347,7 +347,7 @@ func (m *MissionManager) updateObjectTrails() {
 			if bt.Type == obj.BulletTypeTorpedo {
 				diffusionRate, multipleSizeAsLife, lifeReductionRate = 0.5, 8.0, 3.0
 			}
-			size := float64(bullet.GetImgWidth(bt.Name))
+			size := float64(bullet.GetImgWidth(bt.Name, bt.Type, bt.Diameter))
 			m.state.Trails = append(
 				m.state.Trails,
 				obj.NewTrail(
@@ -383,15 +383,27 @@ func (m *MissionManager) updateShotBullets() {
 				continue
 			}
 
-			// 判定命中，扣除战舰生命值，标记命中战舰
-			if geometry.IsPointInRotatedRectangle(
-				bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY,
-				ship.Length/constants.MapBlockSize, ship.Width/constants.MapBlockSize,
-				ship.CurRotation,
-			) {
-				ship.Hurt(bt)
-				bt.HitObjectType = obj.HitObjectTypeShip
-				return true
+			// 如果是直射弹药，要检查多个等分点，避免速度过快，只在终点算伤害（虚空过穿）
+			// 以最小宽度 10 计算，速度在 0.3125 内时，4 个等分点内不会丢失伤害，超过则需要倍增
+			speedInterval := 0.3125
+			checkPoint := lo.Ternary(
+				bt.ShotType == obj.BulletShotTypeDirect, 4*int(math.Ceil(bt.Speed/speedInterval)), 1,
+			)
+			for cp := 0; cp < checkPoint; cp++ {
+				pos := bt.CurPos.Copy()
+				pos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed / float64(checkPoint) * float64(cp))
+				pos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed / float64(checkPoint) * float64(cp))
+
+				// 判定命中，扣除战舰生命值，标记命中战舰
+				if geometry.IsPointInRotatedRectangle(
+					pos.RX, pos.RY, ship.CurPos.RX, ship.CurPos.RY,
+					ship.Length/constants.MapBlockSize, ship.Width/constants.MapBlockSize,
+					ship.CurRotation,
+				) {
+					ship.Hurt(bt)
+					bt.HitObjectType = obj.HitObjectTypeShip
+					return true
+				}
 			}
 		}
 		// TODO 其实还应该判断下，可能是 HitLand，后面再做吧

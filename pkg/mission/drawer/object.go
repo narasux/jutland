@@ -186,7 +186,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.ForwardingBullets {
-		img := bullet.GetImg(b.Name)
+		img := bullet.GetImg(b.Type, b.Diameter)
 
 		opts := d.genDefaultDrawImageOptions()
 		setOptsCenterRotation(opts, img, b.Rotation)

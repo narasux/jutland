@@ -95,6 +95,9 @@ func NewMissionLoaded() types.AudioStream {
 	return mustNewAudio("/loaded.wav")
 }
 
+// 轨道炮
+const railGunBulletDiameter = 1024
+
 // 大口径炮弹
 var largeGunBulletDiameter = []int{460, 406, 381, 356, 305}
 
@@ -107,7 +110,9 @@ var smallGunBulletDiameter = []int{140, 127}
 // NewGunFire 火炮开火
 func NewGunFire(bulletDiameter int) types.AudioStream {
 	audioType := "not_found"
-	if slices.Contains(largeGunBulletDiameter, bulletDiameter) {
+	if bulletDiameter == railGunBulletDiameter {
+		audioType = "rail"
+	} else if slices.Contains(largeGunBulletDiameter, bulletDiameter) {
 		audioType = "large"
 	} else if slices.Contains(mediumGunBulletDiameter, bulletDiameter) {
 		audioType = "medium"

@@ -19,6 +19,16 @@
     "bulletSpread": 100,
     "bulletSpeed": 1000
   },
+  // 超电磁炮
+  {
+    "name": "RailGun",
+    "bulletName": "SE/GB/1024/2048",
+    "bulletCount": 1,
+    "reloadTime": 3,
+    "range": 128,
+    "bulletSpread": 10,
+    "bulletSpeed": 2300
+  },
   // 美国海军 US/127/38/MK45 舰炮
   // long_beach（长滩）
   {

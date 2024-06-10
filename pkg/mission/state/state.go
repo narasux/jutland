@@ -94,8 +94,10 @@ func NewMissionState(mission string) *MissionState {
 		GameOpts: GameOptions{
 			// 默认展示游戏单位的状态
 			ForceDisplayState: true,
-			// TODO 后续允许设置开启友军伤害，游戏性 up！
+			// TODO 后续允许设置开启友军伤害，游戏性 up！但是如何解决敌人打死自己人？
 			FriendlyFire: false,
+			// 默认展示伤害数值
+			DisplayDamageNumber: true,
 		},
 		IsAreaSelecting:   false,
 		IsGrouping:        false,

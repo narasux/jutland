@@ -114,7 +114,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, background.GameEndImg)
 		g.drawer.drawCredits(screen)
 	default:
-		log.Printf("unknown game mode: %d", g.mode)
+		log.Println("unknown game mode:", g.mode)
 	}
 
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("VER %s FPS %0.2f", version.Version, ebiten.ActualFPS()))

@@ -1,6 +1,13 @@
 [
   // 炮弹
   {
+    "name": "SE/GB/1024/2048",
+    "type": "shell",
+    "diameter": 1024,
+    "damage": 81000,
+    "criticalRate": 0.25
+  },
+  {
     "name": "US/GB/406/1944",
     "type": "shell",
     "diameter": 406,

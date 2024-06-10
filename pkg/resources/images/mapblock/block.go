@@ -59,13 +59,24 @@ func init() {
 	log.Println("map block image resources loaded")
 }
 
-var sceneBlockMap map[int]map[int]*ebiten.Image
+type sceneBlockCache struct {
+	mission string
+	data    map[int]map[int]*ebiten.Image
+}
 
-// LoadMapSceneBlocks 加载地图贴图数据
+// SceneBlockCache 场景地图块缓存
+var SceneBlockCache = sceneBlockCache{}
+
+// Init 加载地图贴图数据
 // 注：不要使用 ebiten.Image.SubImage() 来裁剪图片，有性能问题
-func LoadMapSceneBlocks(mission string) error {
+func (c *sceneBlockCache) Init(mission string) error {
+	// 避免重复加载
+	if c.mission == mission {
+		return nil
+	}
+	c.mission = mission
 	// 丢弃上一个关卡的地图贴图数据
-	sceneBlockMap = map[int]map[int]*ebiten.Image{}
+	c.data = map[int]map[int]*ebiten.Image{}
 
 	imgPath := fmt.Sprintf("/map/scenes/%s.png", mission)
 	imgData, err := os.ReadFile(config.ImgResBaseDir + imgPath)
@@ -90,10 +101,15 @@ func LoadMapSceneBlocks(mission string) error {
 			cropRect := image.Rect(topLeftX, topLeftY, topLeftX+blockSize, topLeftY+blockSize)
 			mp[y] = ebiten.NewImageFromImage(missionImg.SubImage(cropRect))
 		}
-		sceneBlockMap[x] = mp
+		c.data[x] = mp
 	}
-	log.Println("mission %s map scene blocks loaded", mission)
+	log.Printf("mission %s map scene blocks loaded\n", mission)
 	return nil
+}
+
+// Get 根据坐标获取地图块
+func (c *sceneBlockCache) Get(x, y int) *ebiten.Image {
+	return c.data[x][y]
 }
 
 // GetByCharAndPos 根据指定字符 & 坐标，获取地图块资源
@@ -112,12 +128,12 @@ func GetByCharAndPos(c rune, x, y int) []*ebiten.Image {
 		img := blocks[fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
 		posBlocks = append(posBlocks, img)
 	case 'L':
-		posBlocks = append(posBlocks, sceneBlockMap[x][y])
+		posBlocks = append(posBlocks, SceneBlockCache.Get(x, y))
 	case 'S':
 		// 浅滩/沙滩需要现有海洋贴图，再贴陆地/沙滩贴图
 		index := int(hash[0]) % seaBlockCount
 		img := blocks[fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks, img, sceneBlockMap[x][y])
+		posBlocks = append(posBlocks, img, SceneBlockCache.Get(x, y))
 	}
 
 	return posBlocks

@@ -91,9 +91,11 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	// 炮弹散布的半径
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
-	// 如果小于射程的 1/4，则平射干他丫的 TODO 考虑不同火炮平射距离不同？
 	shotType := BulletShotTypeArcing
-	if rangePercent < 0.25 {
+	// 如果小于射程的 1/4，则平射干他丫的
+	// TODO 考虑不同火炮平射距离不同？
+	// FIXME 这里粗暴了一点，直接指定电磁炮直射，应该使用配置的
+	if g.Name == "RailGun" || rangePercent < 0.25 {
 		shotType = BulletShotTypeDirect
 	}
 

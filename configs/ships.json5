@@ -14,14 +14,23 @@
     "width": 100,
     "weapon": {
       "mainGuns": [
+        // 鸭子大炮
         {
           "name": "DuckMainGun",
           "posPercent": 0,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [180, 360]
+        },
+        // 板鸭屁股是块宝（朝后的电磁炮）
+        {
+          "name": "RailGun",
+          "posPercent": 0,
+          "rightFiringArc": [160, 180],
+          "leftFiringArc": [180, 200]
         }
       ],
       "secondaryGuns": [
+        // 鸭子水枪
         {
           "name": "DuckSecondaryGun",
           "posPercent": 0,
@@ -30,6 +39,7 @@
         }
       ],
       "torpedoes": [
+        // 鸭雷山大
         {
           "name": "DuckTorpedoLauncher",
           "posPercent": 0,
