@@ -7,4 +7,4 @@ const MaxTPS = 60
 const AudioSampleRate = 44100
 
 // MapBlockSize 地图块大小
-const MapBlockSize = 64
+const MapBlockSize = 128

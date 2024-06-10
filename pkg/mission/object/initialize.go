@@ -53,6 +53,7 @@ func initGunMap() {
 	}
 
 	for _, g := range guns {
+		g.BulletSpeed /= 4000
 		gunMap[g.Name] = &g
 	}
 }
@@ -72,6 +73,7 @@ func initTorpedoLauncherMap() {
 	}
 
 	for _, lc := range torpedoLaunchers {
+		lc.BulletSpeed /= 600
 		torpedoLauncherMap[lc.Name] = &lc
 	}
 }
@@ -136,6 +138,9 @@ func initShipMap() {
 			}
 		}
 		s.CurHP = s.TotalHP
+		// 折算速度
+		s.MaxSpeed /= 600
+		s.Acceleration /= 600
 		shipMap[s.Name] = &s
 	}
 }

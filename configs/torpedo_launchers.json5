@@ -7,7 +7,7 @@
     "shotInterval": 0.3,
     "reloadTime": 5,
     "range": 20,
-    "bulletSpeed": 0.2,
+    "bulletSpeed": 54,
   },
   // 美国海军 533mm 4联装 鱼雷
   {
@@ -17,7 +17,7 @@
     "shotInterval": 1,
     "reloadTime": 75,
     "range": 12,
-    "bulletSpeed": 0.15,
+    "bulletSpeed": 45,
   },
   // 日本海军 610mm 4联装 酸素鱼雷
   {
@@ -27,6 +27,6 @@
     "shotInterval": 0.8,
     "reloadTime": 70,
     "range": 22,
-    "bulletSpeed": 0.18,
+    "bulletSpeed": 54,
   }
 ]

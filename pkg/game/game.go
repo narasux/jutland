@@ -92,7 +92,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawGameTip(screen, "选择任务...")
 	case GameModeMissionLoading:
 		g.drawer.drawBackground(screen, background.MissionStartImg)
-		g.drawer.drawGameTip(screen, "任务加载中...")
+		g.drawer.drawGameTip(screen, "加载中...")
 	case GameModeMissionStart:
 		g.drawer.drawBackground(screen, background.MissionStartImg)
 		g.drawer.drawGameTip(screen, "任务开始！")

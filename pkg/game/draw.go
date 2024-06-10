@@ -55,7 +55,7 @@ func (d *Drawer) drawGameMenu(screen *ebiten.Image, states *menuButtonStates) {
 // 绘制游戏通用提示
 func (d *Drawer) drawGameTip(screen *ebiten.Image, textStr string) {
 	fontSize := float64(64)
-	posX := float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)
+	posX := float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize) - 50
 	posY := float64(screen.Bounds().Dy()) / 10 * 9
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }

@@ -7,7 +7,7 @@
     "reloadTime": 1,
     "range": 30,
     "bulletSpread": 100,
-    "bulletSpeed": 0.4
+    "bulletSpeed": 800
   },
   // 副鸭炮
   {
@@ -17,7 +17,7 @@
     "reloadTime": 0.5,
     "range": 20,
     "bulletSpread": 100,
-    "bulletSpeed": 0.5
+    "bulletSpeed": 1000
   },
   // 美国海军 US/127/38/MK45 舰炮
   // long_beach（长滩）
@@ -28,7 +28,7 @@
     "reloadTime": 1,
     "range": 22,
     "bulletSpread": 50,
-    "bulletSpeed": 0.4
+    "bulletSpeed": 800
   },
   // 美国海军 US/406/50/MK7 舰炮
   // lowa（衣阿华）
@@ -40,7 +40,7 @@
     "reloadTime": 12,
     "range": 38,
     "bulletSpread": 150,
-    "bulletSpeed": 0.4
+    "bulletSpeed": 800
   },
   // 美国海军 US/305/50/MK8 舰炮
   // alaska_plus（阿拉斯加-改）
@@ -51,7 +51,7 @@
     "reloadTime": 10,
     "range": 35,
     "bulletSpread": 100,
-    "bulletSpeed": 0.42
+    "bulletSpeed": 840
   },
   // 美国海军 US/127/38/MK12 舰炮
   // lowa（衣阿华）
@@ -64,7 +64,7 @@
     "reloadTime": 1.5,
     "range": 18,
     "bulletSpread": 80,
-    "bulletSpeed": 0.4
+    "bulletSpeed": 800
   },
   // 美国海军 US/127/54/MK39 舰炮
   // montana（蒙大拿）
@@ -75,7 +75,7 @@
     "reloadTime": 1.4,
     "range": 24,
     "bulletSpread": 80,
-    "bulletSpeed": 0.4
+    "bulletSpeed": 800
   },
   // 日本海军 三联装 46.0 厘米 45 倍口径舰炮
   // yamato_plus（大和-改）
@@ -86,7 +86,7 @@
     "reloadTime": 20,
     "range": 42,
     "bulletSpread": 200,
-    "bulletSpeed": 0.39
+    "bulletSpeed": 780
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径舰炮
   // kongo（金刚）
@@ -97,7 +97,7 @@
     "reloadTime": 20,
     "range": 35,
     "bulletSpread": 150,
-    "bulletSpeed": 0.4
+    "bulletSpeed": 800
   },
   // 日本海军 双联装 20.3 厘米 50 倍口径舰炮
   // mogami（最上）
@@ -108,7 +108,7 @@
     "reloadTime": 10,
     "range": 24,
     "bulletSpread": 120,
-    "bulletSpeed": 0.44
+    "bulletSpeed": 880
   },
   // 日本海军 双联装 15.5 厘米 60 倍口径舰炮
   // yamato_plus（大和-改）
@@ -119,7 +119,7 @@
     "reloadTime": 3.5,
     "range": 27,
     "bulletSpread": 100,
-    "bulletSpeed": 0.46
+    "bulletSpeed": 920
   },
   // 日本海军 单装 15.2 厘米 50 倍口径舰炮
   // kongo（金刚）
@@ -130,7 +130,7 @@
     "reloadTime": 5,
     "range": 18,
     "bulletSpread": 100,
-    "bulletSpeed": 0.42
+    "bulletSpeed": 840
   },
   // 日本海军 单装 14.0 厘米 50 倍口径舰炮
   // kuma（球磨）
@@ -141,7 +141,7 @@
     "reloadTime": 4,
     "range": 18,
     "bulletSpread": 70,
-    "bulletSpeed": 0.42
+    "bulletSpeed": 840
   },
   // 日本海军 双联装 12.7 厘米 50 倍口径舰炮
   // asashio（朝潮）
@@ -152,7 +152,7 @@
     "reloadTime": 2.5,
     "range": 18,
     "bulletSpread": 70,
-    "bulletSpeed": 0.46
+    "bulletSpeed": 920
   },
   // 日本海军 双联装 12.7 厘米 40 倍口径高平两用炮
   // yamato_plus（大和-改）
@@ -163,6 +163,6 @@
     "reloadTime": 3.5,
     "range": 14,
     "bulletSpread": 80,
-    "bulletSpeed": 0.36
+    "bulletSpeed": 720
   }
 ]

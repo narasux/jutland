@@ -3,6 +3,7 @@ package game
 import (
 	"log"
 
+	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/mission"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -15,22 +16,20 @@ func (g *Game) handleMissionSelect() error {
 		// FIXME 目前没有任务可选，直接点击进入默认关卡
 		g.curMission = "default"
 		g.mode = GameModeMissionLoading
-		g.player.Close()
 	}
 	return nil
 }
 
 // 任务加载
 func (g *Game) handleMissionLoading() error {
-	g.player.Play(audioRes.NewMissionLoadingBackground())
 	g.missionMgr = mission.NewManager(g.curMission)
+	audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
 	g.mode = GameModeMissionStart
 	return nil
 }
 
-// 任务启动
+// 任务开始
 func (g *Game) handleMissionStart() error {
-	g.player.Play(audioRes.NewMissionStartBackground())
 	if isAnyNextInput() {
 		g.mode = GameModeMissionRunning
 		g.player.Close()

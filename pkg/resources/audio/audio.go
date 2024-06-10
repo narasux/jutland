@@ -90,6 +90,11 @@ func NewShipExplode() types.AudioStream {
 	return mustNewAudio("/ship_explode.wav")
 }
 
+// NewMissionLoaded 关卡加载完成
+func NewMissionLoaded() types.AudioStream {
+	return mustNewAudio("/loaded.wav")
+}
+
 // 大口径炮弹
 var largeGunBulletDiameter = []int{460, 406, 381, 356, 305}
 
