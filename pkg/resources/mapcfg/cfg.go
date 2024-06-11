@@ -14,8 +14,10 @@ const (
 	ChrSea = '.'
 	// 深海
 	ChrDeepSea = 'O'
-	// 海陆交界（TODO 后续区分浅海 & 沙滩）
-	ChrSeaLand = 'S'
+	// 浅海（可航行）
+	ChrShallow = 'S'
+	// 海岸（沙滩/崖壁/码头...）
+	ChrCoast = 'C'
 	// 陆地
 	ChrLand = 'L'
 )
@@ -33,13 +35,13 @@ func (m *MapData) Get(x, y int) rune {
 // IsSea ...
 func (m *MapData) IsSea(x, y int) bool {
 	chr := m.Get(x, y)
-	return chr == ChrSea || chr == ChrDeepSea
+	return chr == ChrSea || chr == ChrDeepSea || chr == ChrShallow
 }
 
 // IsLand ...
 func (m *MapData) IsLand(x, y int) bool {
 	chr := m.Get(x, y)
-	return chr == ChrSeaLand || chr == ChrLand
+	return chr == ChrCoast || chr == ChrLand
 }
 
 // 地图配置

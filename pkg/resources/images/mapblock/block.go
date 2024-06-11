@@ -56,6 +56,16 @@ func init() {
 	if blocks["blank"], err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
+	// S 符号块（调试用）
+	imgPath = "/map/blocks/common/char_s.png"
+	if blocks["char_s"], err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+	// C 符号块（调试用）
+	imgPath = "/map/blocks/common/char_c.png"
+	if blocks["char_c"], err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
 
 	log.Println("map block image resources loaded")
 }
@@ -98,8 +108,9 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 	w, h := (missionImg.Bounds().Dx()+2)/blockSize, (missionImg.Bounds().Dy()+2)/blockSize
 	for x := 0; x < w; x++ {
 		for y := 0; y < h; y++ {
-			// 海洋不需要贴图，可以跳过
-			if cfg.Map.IsSea(x, y) {
+			// 纯海洋（不含浅滩）不需要贴图，可以跳过
+			chr := cfg.Map.Get(x, y)
+			if chr == mapcfg.ChrSea || chr == mapcfg.ChrDeepSea {
 				continue
 			}
 			topLeftX, topLeftY := x*blockSize, y*blockSize
@@ -138,11 +149,15 @@ func GetByCharAndPos(c rune, x, y int) []*ebiten.Image {
 		posBlocks = append(posBlocks, img)
 	case mapcfg.ChrLand:
 		posBlocks = append(posBlocks, SceneBlockCache.Get(x, y))
-	case mapcfg.ChrSeaLand:
-		// 浅滩/沙滩需要现有海洋贴图，再贴陆地/沙滩贴图
+	case mapcfg.ChrShallow:
+		fallthrough
+	case mapcfg.ChrCoast:
+		// 浅滩/海岸需要现有海洋贴图，再贴陆地/沙滩贴图
 		index := int(hash[0]) % seaBlockCount
 		img := blocks[fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
 		posBlocks = append(posBlocks, img, SceneBlockCache.Get(x, y))
+		// 调试地图浅海/海岸用（人工标记法 orz）
+		// posBlocks = append(posBlocks, blocks[fmt.Sprintf("char_%s", strings.ToLower(string(c)))])
 	}
 
 	return posBlocks

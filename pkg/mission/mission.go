@@ -406,11 +406,6 @@ func (m *MissionManager) updateShotBullets() {
 				}
 			}
 		}
-		// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-		// 曲射的，才需要在结算伤害后标记成命中水面
-		if bt.ShotType == obj.BulletShotTypeArcing {
-			bt.HitObjectType = obj.HitObjectTypeWater
-		}
 		return false
 	}
 
@@ -424,15 +419,25 @@ func (m *MissionManager) updateShotBullets() {
 		}
 		if bt.ShotType == obj.BulletShotTypeArcing {
 			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
+			// FIXME 这里可能会有问题，MEqual 太粗略了，可能会结算异常
 			if bt.CurPos.MEqual(bt.TargetPos) {
-				resolveDamage(bt)
+				if resolveDamage(bt) {
+					bt.HitObjectType = obj.HitObjectTypeShip
+				} else {
+					// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
+					bt.HitObjectType = obj.HitObjectTypeWater
+				}
 				arrivedBullets = append(arrivedBullets, bt)
 			} else {
 				forwardingBullets = append(forwardingBullets, bt)
 			}
 		} else if bt.ShotType == obj.BulletShotTypeDirect {
-			// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
-			if resolveDamage(bt) {
+			// 鱼雷碰撞到陆地，应该不再前进
+			if bt.Type == obj.BulletTypeTorpedo && m.state.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
+				bt.HitObjectType = obj.HitObjectTypeLand
+				arrivedBullets = append(arrivedBullets, bt)
+			} else if resolveDamage(bt) {
+				// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
 				arrivedBullets = append(arrivedBullets, bt)
 			} else {
 				forwardingBullets = append(forwardingBullets, bt)

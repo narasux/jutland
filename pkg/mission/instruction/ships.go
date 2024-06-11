@@ -115,8 +115,7 @@ func (i *ShipMove) Exec(s *state.MissionState) error {
 		return nil
 	}
 
-	borderX, borderY := s.MissionMD.MapCfg.Width, s.MissionMD.MapCfg.Height
-	if ship.MoveTo(i.targetPos, borderX, borderY) {
+	if ship.MoveTo(s.MissionMD.MapCfg, i.targetPos) {
 		i.executed = true
 	}
 	return nil

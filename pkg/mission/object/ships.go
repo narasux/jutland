@@ -10,6 +10,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -212,7 +213,7 @@ func (s *BattleShip) Hurt(bullet *Bullet) {
 
 // MoveTo 移动到指定位置
 // TODO 路线规划 -> 绕过陆地
-func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool) {
+func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive bool) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if s.CurHP <= 0 {
 		return true
@@ -246,12 +247,19 @@ func (s *BattleShip) MoveTo(targetPos MapPos, borderX, borderY int) (arrive bool
 			s.CurSpeed = 0
 		}
 	}
+	nextPos := s.CurPos.Copy()
 	// 修改位置
-	s.CurPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
-	s.CurPos.SubRy(math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed)
-
+	nextPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
+	nextPos.SubRy(math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed)
+	// FIXME 这里先粗暴点，直接停船，假装到目的地，后面再搞定路线规划
+	if mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) {
+		s.CurSpeed = 0
+		return true
+	}
 	// 防止出边界
-	s.CurPos.EnsureBorder(float64(borderX-1), float64(borderY-1))
+	nextPos.EnsureBorder(float64(mapCfg.Width-1), float64(mapCfg.Height-1))
+	// 移动到新位置
+	s.CurPos = nextPos
 
 	return false
 }
