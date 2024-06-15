@@ -419,8 +419,7 @@ func (m *MissionManager) updateShotBullets() {
 		}
 		if bt.ShotType == obj.BulletShotTypeArcing {
 			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
-			// FIXME 这里可能会有问题，MEqual 太粗略了，会结算异常
-			if bt.CurPos.MEqual(bt.TargetPos) {
+			if bt.CurPos.Near(bt.TargetPos, 0.05) {
 				if resolveDamage(bt) {
 					bt.HitObjectType = obj.HitObjectTypeShip
 				} else {

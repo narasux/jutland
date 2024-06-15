@@ -1,10 +1,12 @@
 package object
 
 import (
+	"log"
 	"math"
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
+	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/utils/geometry"
@@ -98,8 +100,22 @@ type Bullet struct {
 // Forward 弹药前进
 func (b *Bullet) Forward() {
 	// 修改位置
-	b.CurPos.AddRx(math.Sin(b.Rotation*math.Pi/180) * b.Speed)
-	b.CurPos.SubRy(math.Cos(b.Rotation*math.Pi/180) * b.Speed)
+	nextPos := b.CurPos.Copy()
+	nextPos.AddRx(math.Sin(b.Rotation*math.Pi/180) * b.Speed)
+	nextPos.SubRy(math.Cos(b.Rotation*math.Pi/180) * b.Speed)
+
+	// 直射的弹药只要一直塔塔开就好了，曲射的要考虑的就多了去了 :）
+	if b.ShotType == BulletShotTypeDirect {
+		b.CurPos = nextPos
+	} else if b.ShotType == BulletShotTypeArcing {
+		curDist := geometry.CalcDistance(b.CurPos.RX, b.CurPos.RY, b.TargetPos.RX, b.TargetPos.RY)
+		nextDist := geometry.CalcDistance(nextPos.RX, nextPos.RY, b.TargetPos.RX, b.TargetPos.RY)
+		// 离目标地点越来越远，说明下一个位置已经过了，曲射就是已经命中
+		b.CurPos = lo.Ternary(nextDist > curDist, b.TargetPos, nextPos)
+	} else {
+		log.Fatal("unknown bullet shot type: ", b.ShotType)
+	}
+
 	// 修改生命 & 前进周期数
 	b.Life--
 	b.ForwardAge++
