@@ -63,6 +63,17 @@
     "bulletSpread": 100,
     "bulletSpeed": 840
   },
+  // 美国海军 US/203/55/MK14 舰炮
+  // new_orleans（新奥尔良）
+  {
+    "name": "US/203/55/MK14",
+    "bulletName": "US/GB/203/1939",
+    "bulletCount": 3,
+    "reloadTime": 7,
+    "range": 26,
+    "bulletSpread": 100,
+    "bulletSpeed": 820
+  },
   // 美国海军 US/127/38/MK12 舰炮
   // lowa（衣阿华）
   // atlanta（亚特兰大）
@@ -75,6 +86,17 @@
     "range": 18,
     "bulletSpread": 80,
     "bulletSpeed": 800
+  },
+  // 美国海军 US/127/25/MK10 高平两用炮
+  // new_orleans（新奥尔良）
+  {
+    "name": "US/127/25/MK10",
+    "bulletName": "US/GB/127/1932",
+    "bulletCount": 1,
+    "reloadTime": 1.3,
+    "range": 15,
+    "bulletSpread": 120,
+    "bulletSpeed": 650
   },
   // 美国海军 US/127/54/MK39 舰炮
   // montana（蒙大拿）

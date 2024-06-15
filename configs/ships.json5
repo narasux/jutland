@@ -590,7 +590,7 @@
     "horizontalDamageReduction": 0.8,
     "verticalDamageReduction": 0.95,
     "maxSpeed": 33,
-    "acceleration": 0.6,
+    "acceleration": 0.7,
     "rotateSpeed": 1.8,
     "length": 165,
     "width": 16,
@@ -765,7 +765,7 @@
   {
     "name": "long_beach",
     "displayName": "长滩",
-    "type": "default",
+    "type": "cruiser",
     "totalHP": 12000,
     "horizontalDamageReduction": 0.9,
     "verticalDamageReduction": 0.9,
@@ -792,6 +792,103 @@
         }
       ],
       "secondaryGuns": [],
+      "torpedoes": []
+    }
+  },
+  {
+    "name": "new_orleans",
+    "displayName": "新奥尔良",
+    "type": "cruiser",
+    "totalHP": 12663,
+    "horizontalDamageReduction": 0.75,
+    "verticalDamageReduction": 0.85,
+    "maxSpeed": 33,
+    "acceleration": 0.6,
+    "rotateSpeed": 1.6,
+    "length": 180,
+    "width": 19,
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "US/203/55/MK14",
+          "posPercent": 0.55,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "US/203/55/MK14",
+          "posPercent": 0.45,
+          "rightFiringArc": [0, 120],
+          "leftFiringArc": [240, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "US/203/55/MK14",
+          "posPercent": -0.55,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [
+        // 右舷副炮 A
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": 0.25,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷副炮 A
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": 0.25,
+          "rightFiringArc": [180, 180],
+          "leftFiringArc": [180, 360]
+        },
+        // 右舷副炮 B
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷副炮 B
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": 0.15,
+          "rightFiringArc": [180, 180],
+          "leftFiringArc": [180, 360]
+        },
+        // 右舷副炮 C
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": 0,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷副炮 C
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": 0,
+          "rightFiringArc": [180, 180],
+          "leftFiringArc": [180, 360]
+        },
+        // 右舷副炮 D
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": -0.1,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷副炮 D
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": -0.1,
+          "rightFiringArc": [180, 180],
+          "leftFiringArc": [180, 360]
+        }
+      ],
       "torpedoes": []
     }
   },
