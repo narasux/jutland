@@ -1243,5 +1243,60 @@
         }
       ]
     }
+  },
+  {
+    "name": "yugumo",
+    "displayName": "夕云",
+    "type": "destroyer",
+    "totalHP": 2520,
+    "horizontalDamageReduction": 1,
+    "verticalDamageReduction": 1.5,
+    "maxSpeed": 35.5,
+    "acceleration": 1.2,
+    "rotateSpeed": 2.2,
+    "length": 119,
+    "width": 11,
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "JP/127/50",
+          "posPercent": 0.8,
+          "rightFiringArc": [0, 160],
+          "leftFiringArc": [200, 360]
+        },
+        // 后主炮 B
+        {
+          "name": "JP/127/50",
+          "posPercent": -0.5,
+          "rightFiringArc": [20, 180],
+          "leftFiringArc": [180, 340]
+        },
+        // 后主炮 C
+        {
+          "name": "JP/127/50",
+          "posPercent": -0.6,
+          "rightFiringArc": [20, 180],
+          "leftFiringArc": [180, 340]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 中轴鱼雷 A
+        {
+          "name": "JP/610/4",
+          "posPercent": 0.1,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          "name": "JP/610/4",
+          "posPercent": -0.1,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        }
+      ]
+    }
   }
 ]

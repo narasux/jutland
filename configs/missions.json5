@@ -67,12 +67,6 @@
       },
       {
         "name": "mogami",
-        "pos": [60, 42],
-        "rotation": 270,
-        "belongPlayer": "computerAlpha"
-      },
-      {
-        "name": "mogami",
         "pos": [40, 43],
         "rotation": 90,
         "belongPlayer": "humanAlpha"
@@ -96,56 +90,86 @@
         "belongPlayer": "humanAlpha"
       },
       {
+        "name": "yugumo",
+        "pos": [40, 47],
+        "rotation": 90,
+        "belongPlayer": "humanAlpha"
+      },
+      {
+        "name": "yugumo",
+        "pos": [80, 42],
+        "rotation": 180,
+        "belongPlayer": "computerAlpha"
+      },
+      {
+        "name": "yugumo",
+        "pos": [76, 56],
+        "rotation": 0,
+        "belongPlayer": "computerAlpha"
+      },
+      {
+        "name": "yamato_plus",
+        "pos": [75, 58],
+        "rotation": 0,
+        "belongPlayer": "computerAlpha"
+      },
+      {
+        "name": "mogami",
+        "pos": [77, 59],
+        "rotation": 0,
+        "belongPlayer": "computerAlpha"
+      },
+      {
         "name": "asashio",
-        "pos": [88, 42],
+        "pos": [103, 42],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [86, 47],
+        "pos": [101, 47],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [93, 42],
+        "pos": [108, 42],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "asashio",
-        "pos": [89, 48],
+        "pos": [104, 48],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "mogami",
-        "pos": [86, 45],
+        "pos": [101, 45],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "mogami",
-        "pos": [87, 43],
+        "pos": [102, 43],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "yamato_plus",
-        "pos": [90, 46],
+        "pos": [105, 46],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "kongo",
-        "pos": [92, 44],
+        "pos": [107, 44],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       },
       {
         "name": "kuma",
-        "pos": [92, 48],
+        "pos": [107, 48],
         "rotation": 270,
         "belongPlayer": "computerAlpha"
       }
