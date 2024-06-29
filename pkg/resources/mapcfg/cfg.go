@@ -3,8 +3,12 @@ package mapcfg
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"log"
 	"os"
+	"path/filepath"
+
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
 )
@@ -87,10 +91,22 @@ func init() {
 
 	maps = make(map[string]*MapCfg)
 
-	// TODO 这里也改成从配置文件加载
-	maps["default"] = loadMapCfg("default")
-	maps["darwin"] = loadMapCfg("darwin")
-	maps["allSea128"] = loadMapCfg("allSea128")
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "maps.json5"))
+	if err != nil {
+		log.Fatal("failed to open maps.json5: ", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var mapConfigs []MapCfg
+	if err = json5.Unmarshal(bytes, &mapConfigs); err != nil {
+		log.Fatal("failed to unmarshal maps.json5: ", err)
+	}
+
+	for _, cfg := range mapConfigs {
+		maps[cfg.Name] = loadMapCfg(cfg.Name)
+	}
 
 	log.Println("map config loaded")
 }
