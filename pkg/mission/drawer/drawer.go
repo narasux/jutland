@@ -5,14 +5,17 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	"github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
 // Drawer 任务运行中图像绘制器
 type Drawer struct {
 	mission string
+	abbrMap *ebiten.Image
 }
 
 // NewDrawer ...
@@ -21,11 +24,32 @@ func NewDrawer(mission string) *Drawer {
 	if err := mapblock.SceneBlockCache.Init(missionMD.MapCfg); err != nil {
 		log.Fatal("failed to load map scene blocks: ", err)
 	}
-	return &Drawer{mission: mission}
+
+	misLayout := layout.NewScreenLayout()
+	abbrMap := ebiten.NewImage(misLayout.Height, misLayout.Height)
+
+	bg := abbrmap.BackgroundImg
+	w, h := bg.Bounds().Dx(), bg.Bounds().Dy()
+
+	scaleX := float64(misLayout.Height) / float64(w)
+	scaleY := float64(misLayout.Height) / float64(h)
+
+	opts := &ebiten.DrawImageOptions{}
+	opts.GeoM.Scale(scaleX, scaleY)
+
+	abbrMap.DrawImage(abbrmap.BackgroundImg, opts)
+	abbrMap.DrawImage(abbrmap.Get(missionMD.MapCfg.Name), opts)
+
+	return &Drawer{mission: mission, abbrMap: abbrMap}
 }
 
 // Draw 绘制任务关卡图像
 func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
+	// 全屏展示地图模式，不需要绘制地图外的对象
+	if misState.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
+		d.drawAbbreviationMap(screen, misState)
+		return
+	}
 	// 相机视野
 	d.drawCameraView(screen, misState)
 	// 地图元素

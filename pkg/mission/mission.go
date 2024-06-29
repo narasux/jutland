@@ -147,6 +147,11 @@ func (m *MissionManager) updateGameOptions() {
 	if action.DetectKeyboardKeyJustPressed(ebiten.KeyN) {
 		m.state.GameOpts.DisplayDamageNumber = !m.state.GameOpts.DisplayDamageNumber
 	}
+
+	// 按下 m 键，切换地图展示模式
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyM) {
+		m.state.GameOpts.MapDisplayMode = (m.state.GameOpts.MapDisplayMode + 1) % 2
+	}
 }
 
 // 更新游戏标识

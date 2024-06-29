@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/samber/lo"
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
@@ -114,4 +115,9 @@ func init() {
 // GetByName 获取地图配置
 func GetByName(name string) *MapCfg {
 	return maps[name]
+}
+
+// GetAllMapNames 获取所有地图名称
+func GetAllMapNames() []string {
+	return lo.Keys(maps)
 }

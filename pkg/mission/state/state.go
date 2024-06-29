@@ -29,6 +29,8 @@ type GameOptions struct {
 	ForceDisplayState bool
 	// 展示伤害数值
 	DisplayDamageNumber bool
+	// 地图展示模式
+	MapDisplayMode MapDisplayMode
 }
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）
@@ -98,6 +100,8 @@ func NewMissionState(mission string) *MissionState {
 			FriendlyFire: false,
 			// 默认展示伤害数值
 			DisplayDamageNumber: true,
+			// 默认不展示地图
+			MapDisplayMode: MapDisplayModeNone,
 		},
 		IsAreaSelecting:   false,
 		IsGrouping:        false,

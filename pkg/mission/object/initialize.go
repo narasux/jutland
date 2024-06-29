@@ -140,6 +140,7 @@ func initShipMap() {
 			}
 		}
 		s.CurHP = s.TotalHP
+		s.Tonnage = s.TotalHP
 		// 折算速度
 		s.MaxSpeed /= 600
 		s.Acceleration /= 600

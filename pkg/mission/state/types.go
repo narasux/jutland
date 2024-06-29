@@ -14,3 +14,12 @@ const (
 	// MissionError 任务错误
 	MissionError MissionStatus = "error"
 )
+
+type MapDisplayMode int
+
+const (
+	// MapDisplayModeNone 不显示
+	MapDisplayModeNone MapDisplayMode = iota
+	// MapDisplayModeFull 全屏现实
+	MapDisplayModeFull
+)
