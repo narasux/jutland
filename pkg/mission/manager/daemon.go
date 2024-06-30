@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
@@ -307,8 +308,14 @@ func (m *MissionManager) updateMissionShips() {
 func (m *MissionManager) updateMissionStatus() {
 	switch m.state.MissionStatus {
 	case state.MissionRunning:
-		if ebiten.IsKeyPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionPaused
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			if m.state.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
+				// 如果是在全屏查看地图模式，退出查看
+				m.state.GameOpts.MapDisplayMode = state.MapDisplayModeNone
+			} else {
+				// 否则暂停游戏
+				m.state.MissionStatus = state.MissionPaused
+			}
 			return
 		}
 		// 检查所有战舰，判定胜利 / 失败
