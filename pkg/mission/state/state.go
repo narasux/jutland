@@ -33,6 +33,11 @@ type GameOptions struct {
 	MapDisplayMode MapDisplayMode
 }
 
+// UserInputBlocked 特定情况下，屏蔽用户输入
+func (opts *GameOptions) UserInputBlocked() bool {
+	return opts.MapDisplayMode == MapDisplayModeFull
+}
+
 // MissionState 任务状态（包含地图，资源，进度，对象等）
 type MissionState struct {
 	Mission string

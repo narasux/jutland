@@ -8,7 +8,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 
 	"github.com/narasux/jutland/pkg/audio"
-	"github.com/narasux/jutland/pkg/mission"
+	"github.com/narasux/jutland/pkg/mission/manager"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/resources/images/background"
@@ -30,7 +30,7 @@ type Game struct {
 
 	curMission string
 	// 任务管理
-	missionMgr *mission.MissionManager
+	missionMgr *manager.MissionManager
 }
 
 func New() *Game {

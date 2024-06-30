@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/narasux/jutland/pkg/audio"
-	"github.com/narasux/jutland/pkg/mission"
+	"github.com/narasux/jutland/pkg/mission/manager"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 )
@@ -22,7 +22,7 @@ func (g *Game) handleMissionSelect() error {
 
 // 任务加载
 func (g *Game) handleMissionLoading() error {
-	g.missionMgr = mission.NewManager(g.curMission)
+	g.missionMgr = manager.New(g.curMission)
 	g.mode = GameModeMissionStart
 	audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
 	return nil

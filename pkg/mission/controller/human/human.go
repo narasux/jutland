@@ -32,6 +32,11 @@ var _ controller.InputHandler = (*HumanInputHandler)(nil)
 func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 
+	// 部分场景需要屏蔽用户输入
+	if misState.GameOpts.UserInputBlocked() {
+		return instructions
+	}
+
 	if pos := action.DetectMouseButtonClickOnMap(misState, ebiten.MouseButtonRight); pos != nil {
 		selectedShipCount := len(misState.SelectedShips)
 		if selectedShipCount != 0 {

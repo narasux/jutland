@@ -22,7 +22,7 @@ func (d *Drawer) drawAbbreviationMap(screen *ebiten.Image, ms *state.MissionStat
 	for _, ship := range ms.Ships {
 		shipImg := texture.GetAbbrShipImg(ship.Tonnage, ship.BelongPlayer != ms.CurPlayer)
 		opts = d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, shipImg, ship.CurRotation+90)
+		setOptsCenterRotation(opts, shipImg, ship.CurRotation)
 
 		xIndex := ship.CurPos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
 		yIndex := ship.CurPos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
