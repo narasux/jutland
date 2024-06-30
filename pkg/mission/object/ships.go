@@ -1,11 +1,11 @@
 package object
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 	"slices"
 
-	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -82,6 +82,8 @@ type BattleShip struct {
 	DisplayName string `json:"displayName"`
 	// 类别
 	Type string `json:"type"`
+	// 类别缩写
+	TypeAbbr string `json:"typeAbbr"`
 
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`
@@ -269,13 +271,39 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive boo
 var shipMap = map[string]*BattleShip{}
 
 // NewShip 新建战舰
-func NewShip(name string, pos MapPos, rotation float64, player faction.Player) *BattleShip {
+func NewShip(
+	uidGenerator *ShipUidGenerator, name string, pos MapPos, rotation float64, player faction.Player,
+) *BattleShip {
 	s := deepcopy.Copy(*shipMap[name]).(BattleShip)
-	s.Uid = uuid.New().String()
+	s.Uid = uidGenerator.Gen(s.TypeAbbr)
 	s.CurPos = pos
 	s.CurRotation = rotation
 	s.BelongPlayer = player
 	// 战舰默认不编组
 	s.GroupID = GroupIDNone
 	return &s
+}
+
+// ShipUidGenerator 战舰 Uid 生成器
+type ShipUidGenerator struct {
+	player  faction.Player
+	counter map[string]int
+}
+
+// NewShipUidGenerator ...
+func NewShipUidGenerator(player faction.Player) *ShipUidGenerator {
+	return &ShipUidGenerator{
+		player:  player,
+		counter: map[string]int{},
+	}
+}
+
+// Gen 生成战舰 Uid
+func (g *ShipUidGenerator) Gen(typeAbbr string) string {
+	if _, ok := g.counter[typeAbbr]; !ok {
+		g.counter[typeAbbr] = 1
+	} else {
+		g.counter[typeAbbr]++
+	}
+	return fmt.Sprintf("%s/%s-%d", g.player, typeAbbr, g.counter[typeAbbr])
 }

@@ -62,6 +62,8 @@ type MissionState struct {
 
 	// 战舰信息
 	Ships map[string]*obj.BattleShip
+	// 战舰 Uid 生成器
+	ShipUidGenerators map[faction.Player]*obj.ShipUidGenerator
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
 	// 当前被选中的编组
@@ -80,10 +82,21 @@ type MissionState struct {
 func NewMissionState(mission string) *MissionState {
 	missionMD := md.Get(mission)
 	misLayout := layout.NewScreenLayout()
+	// 初始化战舰 Uid 生成器
+	shipUidGenerators := map[faction.Player]*obj.ShipUidGenerator{
+		faction.HumanAlpha:    obj.NewShipUidGenerator(faction.HumanAlpha),
+		faction.ComputerAlpha: obj.NewShipUidGenerator(faction.ComputerAlpha),
+	}
 	// 初始化战舰
 	ships := map[string]*obj.BattleShip{}
 	for _, shipMD := range missionMD.InitShips {
-		ship := obj.NewShip(shipMD.ShipName, shipMD.Pos, shipMD.Rotation, shipMD.BelongPlayer)
+		ship := obj.NewShip(
+			shipUidGenerators[shipMD.BelongPlayer],
+			shipMD.ShipName,
+			shipMD.Pos,
+			shipMD.Rotation,
+			shipMD.BelongPlayer,
+		)
 		ships[ship.Uid] = ship
 	}
 	return &MissionState{
@@ -110,6 +123,7 @@ func NewMissionState(mission string) *MissionState {
 		},
 		IsAreaSelecting:   false,
 		IsGrouping:        false,
+		ShipUidGenerators: shipUidGenerators,
 		Ships:             ships,
 		SelectedShips:     []string{},
 		SelectedGroupID:   obj.GroupIDNone,

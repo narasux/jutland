@@ -175,15 +175,16 @@
         "name": "default",
         "pos": [40, 33],
         "rotation": 90,
-        "belongPlayer": "humanAlpha"
+        // 指定所属玩家为本人（humanAlpha）
+        "belongPlayer": "HA"
       },
       // 敌人初始战舰
       {
         "name": "default",
         "pos": [70, 35],
         "rotation": 90,
-        // 指定所属玩家为电脑       
-        "belongPlayer": "computerAlpha"
+        // 指定所属玩家为电脑（computerAlpha）      
+        "belongPlayer": "CA"
       }
     ]
   }
