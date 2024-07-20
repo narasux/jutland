@@ -7,11 +7,11 @@ import (
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/mission/action"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -308,7 +308,7 @@ func (m *MissionManager) updateMissionShips() {
 func (m *MissionManager) updateMissionStatus() {
 	switch m.state.MissionStatus {
 	case state.MissionRunning:
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		if action.DetectKeyboardKeyJustPressed(ebiten.KeyEscape) {
 			if m.state.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
 				// 如果是在全屏查看地图模式，退出查看
 				m.state.GameOpts.MapDisplayMode = state.MapDisplayModeNone

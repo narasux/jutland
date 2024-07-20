@@ -45,39 +45,41 @@ func (m *MissionManager) updateCameraPosition() {
 	}
 
 	s := m.state
+	// TODO 支持在游戏设置内修改相机移动速度
+	offsetPerFrame := 0.25
 	switch action.DetectCursorHoverOnGameMap(s.Layout) {
 	case action.HoverScreenLeft:
-		s.Camera.Pos.MX -= 1
+		s.Camera.Pos.SubRx(offsetPerFrame)
 	case action.HoverScreenRight:
-		s.Camera.Pos.MX += 1
+		s.Camera.Pos.AddRx(offsetPerFrame)
 	case action.HoverScreenTop:
-		s.Camera.Pos.MY -= 1
+		s.Camera.Pos.SubRy(offsetPerFrame)
 	case action.HoverScreenBottom:
-		s.Camera.Pos.MY += 1
+		s.Camera.Pos.AddRy(offsetPerFrame)
 	case action.HoverScreenTopLeft:
-		s.Camera.Pos.MX -= 1
-		s.Camera.Pos.MY -= 1
+		s.Camera.Pos.SubRx(offsetPerFrame)
+		s.Camera.Pos.SubRy(offsetPerFrame)
 	case action.HoverScreenTopRight:
-		s.Camera.Pos.MX += 1
-		s.Camera.Pos.MY -= 1
+		s.Camera.Pos.AddRx(offsetPerFrame)
+		s.Camera.Pos.SubRy(offsetPerFrame)
 	case action.HoverScreenBottomLeft:
-		s.Camera.Pos.MX -= 1
-		s.Camera.Pos.MY += 1
+		s.Camera.Pos.SubRx(offsetPerFrame)
+		s.Camera.Pos.AddRy(offsetPerFrame)
 	case action.HoverScreenBottomRight:
-		s.Camera.Pos.MX += 1
-		s.Camera.Pos.MY += 1
+		s.Camera.Pos.AddRx(offsetPerFrame)
+		s.Camera.Pos.AddRy(offsetPerFrame)
 	default:
 		// DoNothing
 	}
 
 	// 防止超出边界
-	s.Camera.Pos.AssignMxy(
-		lo.Max([]int{s.Camera.Pos.MX, 0}),
-		lo.Max([]int{s.Camera.Pos.MY, 0}),
+	s.Camera.Pos.AssignRxy(
+		lo.Max([]float64{s.Camera.Pos.RX, 0}),
+		lo.Max([]float64{s.Camera.Pos.RY, 0}),
 	)
-	s.Camera.Pos.AssignMxy(
-		lo.Min([]int{s.Camera.Pos.MX, s.MissionMD.MapCfg.Width - s.Camera.Width - 1}),
-		lo.Min([]int{s.Camera.Pos.MY, s.MissionMD.MapCfg.Height - s.Camera.Height - 1}),
+	s.Camera.Pos.AssignRxy(
+		lo.Min([]float64{s.Camera.Pos.RX, float64(s.MissionMD.MapCfg.Width - s.Camera.Width - 1)}),
+		lo.Min([]float64{s.Camera.Pos.RY, float64(s.MissionMD.MapCfg.Height - s.Camera.Height - 1)}),
 	)
 }
 

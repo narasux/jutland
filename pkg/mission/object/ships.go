@@ -255,13 +255,13 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive boo
 	// 修改位置
 	nextPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
 	nextPos.SubRy(math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed)
+	// 防止出边界
+	nextPos.EnsureBorder(float64(mapCfg.Width-1), float64(mapCfg.Height-1))
 	// FIXME 这里先粗暴点，直接停船，假装到目的地，后面再搞定路线规划
 	if mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) {
 		s.CurSpeed = 0
 		return true
 	}
-	// 防止出边界
-	nextPos.EnsureBorder(float64(mapCfg.Width-1), float64(mapCfg.Height-1))
 	// 移动到新位置
 	s.CurPos = nextPos
 
