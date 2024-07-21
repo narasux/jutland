@@ -2,11 +2,13 @@ package manager
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
+	"github.com/narasux/jutland/pkg/mission/state"
 )
 
 // 更新游戏选项
@@ -40,53 +42,61 @@ func (m *MissionManager) updateInstructions() {
 
 // 计算下一帧相机位置
 func (m *MissionManager) updateCameraPosition() {
-	if m.state.GameOpts.UserInputBlocked() {
-		return
-	}
-
 	pos := m.state.Camera.Pos.Copy()
-	// TODO 支持在游戏设置内修改相机移动速度
-	offsetPerFrame := 0.25
 
-	// 剪掉小尾巴，避免出现黑边
-	rx := float64(int(pos.RX/offsetPerFrame)) * offsetPerFrame
-	ry := float64(int(pos.RY/offsetPerFrame)) * offsetPerFrame
-	pos.AssignRxy(rx, ry)
+	if m.state.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
+		// 全屏模式，鼠标点击可以移动相机位置（点击位置居中）
+		if !inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+			return
+		}
+		sx, sy := ebiten.CursorPosition()
+		xOffset := float64(m.state.Layout.Width-m.state.Layout.Height) / 2
 
-	switch action.DetectCursorHoverOnGameMap(m.state.Layout) {
-	case action.HoverScreenLeft:
-		pos.SubRx(offsetPerFrame)
-	case action.HoverScreenRight:
-		pos.AddRx(offsetPerFrame)
-	case action.HoverScreenTop:
-		pos.SubRy(offsetPerFrame)
-	case action.HoverScreenBottom:
-		pos.AddRy(offsetPerFrame)
-	case action.HoverScreenTopLeft:
-		pos.SubRx(offsetPerFrame)
-		pos.SubRy(offsetPerFrame)
-	case action.HoverScreenTopRight:
-		pos.AddRx(offsetPerFrame)
-		pos.SubRy(offsetPerFrame)
-	case action.HoverScreenBottomLeft:
-		pos.SubRx(offsetPerFrame)
-		pos.AddRy(offsetPerFrame)
-	case action.HoverScreenBottomRight:
-		pos.AddRx(offsetPerFrame)
-		pos.AddRy(offsetPerFrame)
-	default:
-		// DoNothing
+		abbrMapWidth, abbrMapHeight := float64(m.state.Layout.Height), float64(m.state.Layout.Height)
+		mapWidth, mapHeight := float64(m.state.MissionMD.MapCfg.Width), float64(m.state.MissionMD.MapCfg.Height)
+
+		rx := (float64(sx) - xOffset) / abbrMapWidth * mapWidth
+		ry := float64(sy) / abbrMapHeight * mapHeight
+
+		pos.AssignRxy(rx-float64(m.state.Camera.Width)/2, ry-float64(m.state.Camera.Height)/2)
+	} else {
+		// 游戏模式，可以通过 hover 鼠标在边缘上，移动相机
+		// TODO 支持在游戏设置内修改相机移动速度
+		offsetPerFrame := 0.25
+
+		// 剪掉小尾巴，避免出现黑边
+		rx := float64(int(pos.RX/offsetPerFrame)) * offsetPerFrame
+		ry := float64(int(pos.RY/offsetPerFrame)) * offsetPerFrame
+		pos.AssignRxy(rx, ry)
+
+		switch action.DetectCursorHoverOnGameMap(m.state.Layout) {
+		case action.HoverScreenLeft:
+			pos.SubRx(offsetPerFrame)
+		case action.HoverScreenRight:
+			pos.AddRx(offsetPerFrame)
+		case action.HoverScreenTop:
+			pos.SubRy(offsetPerFrame)
+		case action.HoverScreenBottom:
+			pos.AddRy(offsetPerFrame)
+		case action.HoverScreenTopLeft:
+			pos.SubRx(offsetPerFrame)
+			pos.SubRy(offsetPerFrame)
+		case action.HoverScreenTopRight:
+			pos.AddRx(offsetPerFrame)
+			pos.SubRy(offsetPerFrame)
+		case action.HoverScreenBottomLeft:
+			pos.SubRx(offsetPerFrame)
+			pos.AddRy(offsetPerFrame)
+		case action.HoverScreenBottomRight:
+			pos.AddRx(offsetPerFrame)
+			pos.AddRy(offsetPerFrame)
+		default:
+			// DoNothing
+		}
 	}
 
 	// 防止超出边界
-	pos.AssignRxy(
-		lo.Max([]float64{pos.RX, 0}),
-		lo.Max([]float64{pos.RY, 0}),
-	)
-	pos.AssignRxy(
-		lo.Min([]float64{pos.RX, float64(m.state.MissionMD.MapCfg.Width - m.state.Camera.Width - 1)}),
-		lo.Min([]float64{pos.RY, float64(m.state.MissionMD.MapCfg.Height - m.state.Camera.Height - 1)}),
-	)
+	pos.EnsureBorder(m.state.CameraPosBorder())
 
 	// 更新相机位置
 	m.state.Camera.Pos = pos

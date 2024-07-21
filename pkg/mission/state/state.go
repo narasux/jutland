@@ -78,6 +78,13 @@ type MissionState struct {
 	GameMarks map[obj.MarkID]*obj.Mark
 }
 
+// CameraPosBorder 获取相机视野边界
+func (s *MissionState) CameraPosBorder() (w float64, h float64) {
+	w = float64(s.MissionMD.MapCfg.Width - s.Camera.Width - 1)
+	h = float64(s.MissionMD.MapCfg.Height - s.Camera.Height - 1)
+	return w, h
+}
+
 // NewMissionState ...
 func NewMissionState(mission string) *MissionState {
 	missionMD := md.Get(mission)
