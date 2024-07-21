@@ -11,9 +11,10 @@ import (
 // Camera 相机（当前视野）
 type Camera struct {
 	// 相机左上角位置
-	Pos    obj.MapPos
-	Width  int
-	Height int
+	Pos           obj.MapPos
+	Width         int
+	Height        int
+	BaseMoveSpeed float64
 }
 
 // Contains 判断坐标是否在视野内
@@ -116,6 +117,8 @@ func NewMissionState(mission string) *MissionState {
 			// 地图资源，多展示一行 & 列，避免出现黑边
 			Width:  misLayout.Width/constants.MapBlockSize + 1,
 			Height: misLayout.Height/constants.MapBlockSize + 1,
+			// 默认移动速度
+			BaseMoveSpeed: 0.25,
 		},
 		CurPlayer: faction.HumanAlpha,
 		GameOpts: GameOptions{

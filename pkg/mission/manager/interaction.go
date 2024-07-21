@@ -42,64 +42,92 @@ func (m *MissionManager) updateInstructions() {
 
 // 计算下一帧相机位置
 func (m *MissionManager) updateCameraPosition() {
-	pos := m.state.Camera.Pos.Copy()
-
+	var nextPos *obj.MapPos
+	// 游戏模式 / 全屏地图模式走不同的相机位置更新模式
 	if m.state.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
-		// 全屏模式，鼠标点击可以移动相机位置（点击位置居中）
-		if !inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
-			return
-		}
-		sx, sy := ebiten.CursorPosition()
-		xOffset := float64(m.state.Layout.Width-m.state.Layout.Height) / 2
-
-		abbrMapWidth, abbrMapHeight := float64(m.state.Layout.Height), float64(m.state.Layout.Height)
-		mapWidth, mapHeight := float64(m.state.MissionMD.MapCfg.Width), float64(m.state.MissionMD.MapCfg.Height)
-
-		rx := (float64(sx) - xOffset) / abbrMapWidth * mapWidth
-		ry := float64(sy) / abbrMapHeight * mapHeight
-
-		pos.AssignRxy(rx-float64(m.state.Camera.Width)/2, ry-float64(m.state.Camera.Height)/2)
+		nextPos = m.getNextCameraPosInFullMapMode()
 	} else {
-		// 游戏模式，可以通过 hover 鼠标在边缘上，移动相机
-		// TODO 支持在游戏设置内修改相机移动速度
-		offsetPerFrame := 0.25
+		nextPos = m.getNextCameraPosInGameMode()
+	}
 
-		// 剪掉小尾巴，避免出现黑边
-		rx := float64(int(pos.RX/offsetPerFrame)) * offsetPerFrame
-		ry := float64(int(pos.RY/offsetPerFrame)) * offsetPerFrame
-		pos.AssignRxy(rx, ry)
+	// 无法获取下一帧相机位置，不更新
+	if nextPos == nil {
+		return
+	}
 
-		switch action.DetectCursorHoverOnGameMap(m.state.Layout) {
-		case action.HoverScreenLeft:
-			pos.SubRx(offsetPerFrame)
-		case action.HoverScreenRight:
-			pos.AddRx(offsetPerFrame)
-		case action.HoverScreenTop:
-			pos.SubRy(offsetPerFrame)
-		case action.HoverScreenBottom:
-			pos.AddRy(offsetPerFrame)
-		case action.HoverScreenTopLeft:
-			pos.SubRx(offsetPerFrame)
-			pos.SubRy(offsetPerFrame)
-		case action.HoverScreenTopRight:
-			pos.AddRx(offsetPerFrame)
-			pos.SubRy(offsetPerFrame)
-		case action.HoverScreenBottomLeft:
-			pos.SubRx(offsetPerFrame)
-			pos.AddRy(offsetPerFrame)
-		case action.HoverScreenBottomRight:
-			pos.AddRx(offsetPerFrame)
-			pos.AddRy(offsetPerFrame)
-		default:
-			// DoNothing
-		}
+	// 剪掉小尾巴，避免出现黑边
+	moveSpeed := m.state.Camera.BaseMoveSpeed
+	rx := float64(int(nextPos.RX/moveSpeed)) * moveSpeed
+	ry := float64(int(nextPos.RY/moveSpeed)) * moveSpeed
+	m.state.Camera.Pos.AssignRxy(rx, ry)
+}
+
+// 计算下一帧相机位置（全屏地图模式）
+// 全屏模式，鼠标点击可以移动相机位置（点击位置居中）
+func (m *MissionManager) getNextCameraPosInFullMapMode() *obj.MapPos {
+	if !inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+		return nil
+	}
+
+	sx, sy := ebiten.CursorPosition()
+	xOffset := float64(m.state.Layout.Width-m.state.Layout.Height) / 2
+
+	abbrMapWidth, abbrMapHeight := float64(m.state.Layout.Height), float64(m.state.Layout.Height)
+	mapWidth, mapHeight := float64(m.state.MissionMD.MapCfg.Width), float64(m.state.MissionMD.MapCfg.Height)
+
+	rx := (float64(sx) - xOffset) / abbrMapWidth * mapWidth
+	ry := float64(sy) / abbrMapHeight * mapHeight
+
+	pos := m.state.Camera.Pos.Copy()
+	pos.AssignRxy(rx-float64(m.state.Camera.Width)/2, ry-float64(m.state.Camera.Height)/2)
+	// 防止超出边界
+	pos.EnsureBorder(m.state.CameraPosBorder())
+
+	// 如果是全屏地图模式，且点击位置相同，则退出全屏（模拟双击效果）
+	if m.state.Camera.Pos.MEqual(pos) {
+		m.state.GameOpts.MapDisplayMode = state.MapDisplayModeNone
+	}
+
+	return &pos
+}
+
+// 计算下一帧相机位置（游戏模式）
+// 游戏模式，可以通过 hover 鼠标在边缘上，移动相机
+func (m *MissionManager) getNextCameraPosInGameMode() *obj.MapPos {
+	pos := m.state.Camera.Pos.Copy()
+	// TODO 支持在游戏设置内修改相机移动速度
+	moveSpeed := m.state.Camera.BaseMoveSpeed
+
+	switch action.DetectCursorHoverOnGameMap(m.state.Layout) {
+	case action.HoverScreenLeft:
+		pos.SubRx(moveSpeed)
+	case action.HoverScreenRight:
+		pos.AddRx(moveSpeed)
+	case action.HoverScreenTop:
+		pos.SubRy(moveSpeed)
+	case action.HoverScreenBottom:
+		pos.AddRy(moveSpeed)
+	case action.HoverScreenTopLeft:
+		pos.SubRx(moveSpeed)
+		pos.SubRy(moveSpeed)
+	case action.HoverScreenTopRight:
+		pos.AddRx(moveSpeed)
+		pos.SubRy(moveSpeed)
+	case action.HoverScreenBottomLeft:
+		pos.SubRx(moveSpeed)
+		pos.AddRy(moveSpeed)
+	case action.HoverScreenBottomRight:
+		pos.AddRx(moveSpeed)
+		pos.AddRy(moveSpeed)
+	default:
+		// DoNothing
+		return nil
 	}
 
 	// 防止超出边界
 	pos.EnsureBorder(m.state.CameraPosBorder())
 
-	// 更新相机位置
-	m.state.Camera.Pos = pos
+	return &pos
 }
 
 // 更新选择的战舰列表
