@@ -78,16 +78,16 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 		sx, sy := ebiten.CursorPosition()
 		sArea.StartX, sArea.StartY = sx, sy
 		sArea.StartAt.AssignRxy(
-			float64(sx)/constants.MapBlockSize+float64(misState.Camera.Pos.MX),
-			float64(sy)/constants.MapBlockSize+float64(misState.Camera.Pos.MY),
+			misState.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
+			misState.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
 		)
 		misState.IsAreaSelecting = true
 	}
 	sx, sy := ebiten.CursorPosition()
 	sArea.CurX, sArea.CurY = sx, sy
 	sArea.CurAt.AssignRxy(
-		float64(sx)/constants.MapBlockSize+float64(misState.Camera.Pos.MX),
-		float64(sy)/constants.MapBlockSize+float64(misState.Camera.Pos.MY),
+		misState.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
+		misState.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
 	)
 	return &sArea
 }
@@ -99,8 +99,8 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 		return nil
 	}
 	sx, sy := ebiten.CursorPosition()
-	rx := float64(misState.Camera.Pos.MX) + float64(sx)/constants.MapBlockSize
-	ry := float64(misState.Camera.Pos.MY) + float64(sy)/constants.MapBlockSize
+	rx := misState.Camera.Pos.RX + float64(sx)/constants.MapBlockSize
+	ry := misState.Camera.Pos.RY + float64(sy)/constants.MapBlockSize
 	return lo.ToPtr(obj.NewMapPosR(rx, ry))
 }
 

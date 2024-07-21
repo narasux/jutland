@@ -44,43 +44,52 @@ func (m *MissionManager) updateCameraPosition() {
 		return
 	}
 
-	s := m.state
+	pos := m.state.Camera.Pos.Copy()
 	// TODO 支持在游戏设置内修改相机移动速度
 	offsetPerFrame := 0.25
-	switch action.DetectCursorHoverOnGameMap(s.Layout) {
+
+	// 剪掉小尾巴，避免出现黑边
+	rx := float64(int(pos.RX/offsetPerFrame)) * offsetPerFrame
+	ry := float64(int(pos.RY/offsetPerFrame)) * offsetPerFrame
+	pos.AssignRxy(rx, ry)
+
+	switch action.DetectCursorHoverOnGameMap(m.state.Layout) {
 	case action.HoverScreenLeft:
-		s.Camera.Pos.SubRx(offsetPerFrame)
+		pos.SubRx(offsetPerFrame)
 	case action.HoverScreenRight:
-		s.Camera.Pos.AddRx(offsetPerFrame)
+		pos.AddRx(offsetPerFrame)
 	case action.HoverScreenTop:
-		s.Camera.Pos.SubRy(offsetPerFrame)
+		pos.SubRy(offsetPerFrame)
 	case action.HoverScreenBottom:
-		s.Camera.Pos.AddRy(offsetPerFrame)
+		pos.AddRy(offsetPerFrame)
 	case action.HoverScreenTopLeft:
-		s.Camera.Pos.SubRx(offsetPerFrame)
-		s.Camera.Pos.SubRy(offsetPerFrame)
+		pos.SubRx(offsetPerFrame)
+		pos.SubRy(offsetPerFrame)
 	case action.HoverScreenTopRight:
-		s.Camera.Pos.AddRx(offsetPerFrame)
-		s.Camera.Pos.SubRy(offsetPerFrame)
+		pos.AddRx(offsetPerFrame)
+		pos.SubRy(offsetPerFrame)
 	case action.HoverScreenBottomLeft:
-		s.Camera.Pos.SubRx(offsetPerFrame)
-		s.Camera.Pos.AddRy(offsetPerFrame)
+		pos.SubRx(offsetPerFrame)
+		pos.AddRy(offsetPerFrame)
 	case action.HoverScreenBottomRight:
-		s.Camera.Pos.AddRx(offsetPerFrame)
-		s.Camera.Pos.AddRy(offsetPerFrame)
+		pos.AddRx(offsetPerFrame)
+		pos.AddRy(offsetPerFrame)
 	default:
 		// DoNothing
 	}
 
 	// 防止超出边界
-	s.Camera.Pos.AssignRxy(
-		lo.Max([]float64{s.Camera.Pos.RX, 0}),
-		lo.Max([]float64{s.Camera.Pos.RY, 0}),
+	pos.AssignRxy(
+		lo.Max([]float64{pos.RX, 0}),
+		lo.Max([]float64{pos.RY, 0}),
 	)
-	s.Camera.Pos.AssignRxy(
-		lo.Min([]float64{s.Camera.Pos.RX, float64(s.MissionMD.MapCfg.Width - s.Camera.Width - 1)}),
-		lo.Min([]float64{s.Camera.Pos.RY, float64(s.MissionMD.MapCfg.Height - s.Camera.Height - 1)}),
+	pos.AssignRxy(
+		lo.Min([]float64{pos.RX, float64(m.state.MissionMD.MapCfg.Width - m.state.Camera.Width - 1)}),
+		lo.Min([]float64{pos.RY, float64(m.state.MissionMD.MapCfg.Height - m.state.Camera.Height - 1)}),
 	)
+
+	// 更新相机位置
+	m.state.Camera.Pos = pos
 }
 
 // 更新选择的战舰列表

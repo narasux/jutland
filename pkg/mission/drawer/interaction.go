@@ -59,8 +59,8 @@ func (d *Drawer) drawMarks(screen *ebiten.Image, ms *state.MissionState) {
 	for _, mark := range ms.GameMarks {
 		opts := d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(
-			(mark.Pos.RX-float64(ms.Camera.Pos.MX))*constants.MapBlockSize-float64(mark.Img.Bounds().Dx()/2),
-			(mark.Pos.RY-float64(ms.Camera.Pos.MY))*constants.MapBlockSize-float64(mark.Img.Bounds().Dy()/2),
+			(mark.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(mark.Img.Bounds().Dx()/2),
+			(mark.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(mark.Img.Bounds().Dy()/2),
 		)
 		screen.DrawImage(mark.Img, opts)
 	}
