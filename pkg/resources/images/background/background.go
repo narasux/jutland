@@ -24,6 +24,8 @@ var (
 	MissionSuccessImg *ebiten.Image
 	// MissionFailedImg 任务失败
 	MissionFailedImg *ebiten.Image
+	// MissionWindowImg 任务窗口（设置，配置等背景）
+	MissionWindowImg *ebiten.Image
 )
 
 func init() {
@@ -64,6 +66,11 @@ func init() {
 
 	imgPath = "/backgrounds/mission_failed.png"
 	if MissionFailedImg, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/backgrounds/mission_window.png"
+	if MissionWindowImg, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

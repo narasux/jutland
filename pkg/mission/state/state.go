@@ -1,6 +1,10 @@
 package state
 
 import (
+	"sort"
+
+	"github.com/samber/lo"
+
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/layout"
@@ -53,6 +57,9 @@ type MissionState struct {
 
 	// 当前玩家
 	CurPlayer faction.Player
+	// 当前敌人
+	// TODO 支持多个敌对势力
+	CurEnemy faction.Player
 	// 游戏选项
 	GameOpts GameOptions
 
@@ -84,6 +91,43 @@ func (s *MissionState) CameraPosBorder() (w float64, h float64) {
 	w = float64(s.MissionMD.MapCfg.Width - s.Camera.Width - 1)
 	h = float64(s.MissionMD.MapCfg.Height - s.Camera.Height - 1)
 	return w, h
+}
+
+// ShipClass 同级战舰
+type ShipClass struct {
+	Total int
+	Kind  *obj.BattleShip
+}
+
+// Fleet 舰队
+type Fleet struct {
+	Player  faction.Player
+	Total   int
+	Classes []ShipClass
+}
+
+// CountShips 对同类战舰进行计数
+func (s *MissionState) Fleet(player faction.Player) Fleet {
+	ships := lo.Filter(lo.Values(s.Ships), func(ship *obj.BattleShip, _ int) bool {
+		return ship.BelongPlayer == player
+	})
+
+	classMap := map[string]ShipClass{}
+	for _, ship := range ships {
+		if cls, ok := classMap[ship.Name]; ok {
+			cls.Total++
+			classMap[ship.Name] = cls
+		} else {
+			classMap[ship.Name] = ShipClass{Total: 1, Kind: ship}
+		}
+	}
+
+	classes := lo.Values(classMap)
+	// 按照吨位从大到小排列
+	sort.Slice(classes, func(i, j int) bool {
+		return classes[i].Kind.Tonnage > classes[j].Kind.Tonnage
+	})
+	return Fleet{Player: player, Total: len(ships), Classes: classes}
 }
 
 // NewMissionState ...
@@ -121,6 +165,7 @@ func NewMissionState(mission string) *MissionState {
 			BaseMoveSpeed: 0.25,
 		},
 		CurPlayer: faction.HumanAlpha,
+		CurEnemy:  faction.ComputerAlpha,
 		GameOpts: GameOptions{
 			// 默认展示游戏单位的状态
 			ForceDisplayState: true,

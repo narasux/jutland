@@ -17,6 +17,8 @@ func PlayAudioToEnd(ads types.AudioStream) {
 	}
 	go func() {
 		p, _ := Context.NewPlayer(ads)
+		// FIXME 支持设置音量大小
+		p.SetVolume(0.3)
 		p.Play()
 	}()
 }
@@ -43,6 +45,8 @@ func (p *Player) Play(ads types.AudioStream) {
 	if err != nil {
 		log.Fatal("failed to play audio: ", err)
 	}
+	// FIXME 支持设置音量大小
+	p.player.SetVolume(0.3)
 	p.player.Play()
 }
 
