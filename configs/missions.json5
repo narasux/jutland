@@ -72,7 +72,7 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "kuma",
+        "name": "kitakami",
         "pos": [38, 44],
         "rotation": 90,
         "belongPlayer": "HA"
@@ -168,7 +168,7 @@
         "belongPlayer": "CA"
       },
       {
-        "name": "kuma",
+        "name": "kitakami",
         "pos": [107, 48],
         "rotation": 270,
         "belongPlayer": "CA"

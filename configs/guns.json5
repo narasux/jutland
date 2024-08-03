@@ -165,7 +165,7 @@
     "bulletSpeed": 840
   },
   // 日本海军 单装 14.0 厘米 50 倍口径舰炮
-  // kuma（球磨）
+  // kitakami（北上）
   {
     "name": "JP/140/50",
     "bulletName": "JP/GB/140/1914",
