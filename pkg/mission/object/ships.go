@@ -186,7 +186,7 @@ func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
 	return shotBullets
 }
 
-// Hurt 收到伤害
+// Hurt 受到伤害
 func (s *BattleShip) Hurt(bullet *Bullet) {
 	realDamage := 0.0
 	if bullet.ShotType == BulletShotTypeDirect {
@@ -213,6 +213,16 @@ func (s *BattleShip) Hurt(bullet *Bullet) {
 	// 弹药是可以造成重复伤害的，这里需要计算累计值，暴击类型统计，只统计最高倍数
 	bullet.RealDamage += realDamage
 	bullet.CriticalType = max(criticalType, bullet.CriticalType)
+}
+
+// CanGenTail 有尾流
+func (s *BattleShip) CanGenTail() bool {
+	return s.Name != "waterdrop"
+}
+
+// CanOnLand 能在陆地上
+func (s *BattleShip) CanOnLand() bool {
+	return s.Name == "waterdrop"
 }
 
 // MoveTo 移动到指定位置
@@ -258,7 +268,8 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive boo
 	// 防止出边界
 	nextPos.EnsureBorder(float64(mapCfg.Width-1), float64(mapCfg.Height-1))
 	// FIXME 这里先粗暴点，直接停船，假装到目的地，后面再搞定路线规划
-	if mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) {
+	// 特殊船舶是可以在陆地上的（飞起来的那些）
+	if mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) && !s.CanOnLand() {
 		s.CurSpeed = 0
 		return true
 	}

@@ -109,7 +109,7 @@ var smallGunBulletDiameter = []int{140, 127}
 
 // NewGunFire 火炮开火
 func NewGunFire(bulletDiameter int) types.AudioStream {
-	audioType := "not_found"
+	audioType := "silent"
 	if bulletDiameter == railGunBulletDiameter {
 		audioType = "rail"
 	} else if slices.Contains(largeGunBulletDiameter, bulletDiameter) {

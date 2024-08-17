@@ -1,5 +1,5 @@
 [
-  // 炮弹
+  // 电磁轨道炮 炮弹
   {
     "name": "SE/GB/1024/2048",
     "type": "shell",
@@ -7,6 +7,15 @@
     "damage": 81000,
     "criticalRate": 0.25
   },
+  // 撞击专用（用炮弹模拟）
+  {
+    "name": "SE/GB/1/2048",
+    "type": "shell",
+    "diameter": 1,
+    "damage": 99999,
+    "criticalRate": 0.5
+  },
+  // 常规炮弹
   {
     "name": "US/GB/406/1944",
     "type": "shell",

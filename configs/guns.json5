@@ -29,6 +29,16 @@
     "bulletSpread": 10,
     "bulletSpeed": 2300
   },
+  // 水滴撞击
+  {
+    "name": "Impact",
+    "bulletName": "SE/GB/1/2048",
+    "bulletCount": 3,
+    "reloadTime": 0.001,
+    "range": 1.5,
+    "bulletSpread": 0,
+    "bulletSpeed": 3000
+  },
   // 美国海军 US/127/38/MK45 舰炮
   // long_beach（长滩）
   {

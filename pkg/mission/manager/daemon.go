@@ -109,7 +109,7 @@ func (m *MissionManager) updateObjectTrails() {
 		return t.IsAlive()
 	})
 	for _, ship := range m.state.Ships {
-		if ship.CurSpeed > 0 {
+		if ship.CurSpeed > 0 && ship.CanGenTail() {
 			offset := ship.Length / constants.MapBlockSize
 			sinVal := math.Sin(ship.CurRotation * math.Pi / 180)
 			cosVal := math.Cos(ship.CurRotation * math.Pi / 180)
