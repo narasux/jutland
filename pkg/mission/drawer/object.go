@@ -29,7 +29,7 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 			continue
 		}
 
-		trailImg := texture.GetTrailImg(trail.Shape, trail.CurSize, trail.CurLife)
+		trailImg := texture.GetTrailImg(trail.Shape, trail.CurSize, trail.CurLife, trail.Color)
 		opts := d.genDefaultDrawImageOptions()
 		setOptsCenterRotation(opts, trailImg, trail.Rotation)
 		opts.GeoM.Translate(

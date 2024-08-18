@@ -32,12 +32,16 @@ const (
 )
 
 // GetTrailImg 获取尾流图片
-func GetTrailImg(shape TrailShape, size, life float64) *ebiten.Image {
+func GetTrailImg(shape TrailShape, size, life float64, clr color.Color) *ebiten.Image {
 	if size < 0 || life < 0 {
 		return InvalidTrailImg
 	}
 
 	key := fmt.Sprintf("%d:%d:%d", shape, int(size), int(life))
+	if clr != nil {
+		r, g, b, _ := clr.RGBA()
+		key += fmt.Sprintf(":%d:%d:%d", r, g, b)
+	}
 	// 尝试从缓存取
 	if img, ok := trailImgCache[key]; ok {
 		return img
@@ -45,26 +49,40 @@ func GetTrailImg(shape TrailShape, size, life float64) *ebiten.Image {
 
 	// 缓存取不到，则重新生成并且加入到缓存
 	if shape == TrailShapeCircle {
-		trailImgCache[key] = getCircleImg(size, life)
+		trailImgCache[key] = getCircleImg(size, life, clr)
 	} else if shape == TrailShapeRect {
-		trailImgCache[key] = getHalfRectImg(size, 15, life)
+		trailImgCache[key] = getHalfRectImg(size, 15, life, clr)
 	}
 
 	return trailImgCache[key]
 }
 
-func getCircleImg(diameter, life float64) *ebiten.Image {
+func getCircleImg(diameter, life float64, clr color.Color) *ebiten.Image {
 	radius := float32(diameter / 2)
 	trailImg := ebiten.NewImage(int(diameter), int(diameter))
-	clr := color.NRGBA{255, 255, 255, uint8(life)}
+	// 默认颜色
+	if clr == nil {
+		clr = colorx.White
+	}
+	// 基于基础颜色，添加透明度
+	r, g, b, _ := clr.RGBA()
+	clr = color.NRGBA{uint8(r), uint8(g), uint8(b), uint8(life)}
+	// 绘制圆形
 	vector.DrawFilledCircle(trailImg, radius, radius, radius, clr, false)
 	return trailImg
 }
 
-func getHalfRectImg(width, multipleWidthAsHeight, life float64) *ebiten.Image {
+func getHalfRectImg(width, multipleWidthAsHeight, life float64, clr color.Color) *ebiten.Image {
 	height := int(width * multipleWidthAsHeight)
 	trailImg := ebiten.NewImage(int(width), height*2)
-	clr := color.NRGBA{255, 255, 255, uint8(life)}
+	// 默认颜色
+	if clr == nil {
+		clr = colorx.White
+	}
+	// 基于基础颜色，添加透明度
+	r, g, b, _ := clr.RGBA()
+	clr = color.NRGBA{uint8(r), uint8(g), uint8(b), uint8(life)}
+	// 绘制矩形
 	vector.DrawFilledRect(trailImg, 0, float32(height), float32(width), float32(height), clr, false)
 	return trailImg
 }

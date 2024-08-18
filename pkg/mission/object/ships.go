@@ -12,6 +12,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -221,9 +222,16 @@ func (s *BattleShip) GenTrails() []*Trail {
 	if s.CurSpeed <= 0 {
 		return nil
 	}
-	// FIXME 水滴应该是特殊的尾流（蓝色光尾流，不扩散）
+	// 水滴应该是特殊的尾流（蓝色光尾流，负扩散）
 	if s.TypeAbbr == "WaterDrop" {
-		return nil
+		return []*Trail{
+			newTrail(
+				s.CurPos, texture.TrailShapeRect,
+				s.Width*0.5, -2,
+				s.Length/6+150*s.CurSpeed, 5,
+				0, s.CurRotation, colorx.SkyBlue,
+			),
+		}
 	}
 
 	offset := s.Length / constants.MapBlockSize
@@ -238,24 +246,16 @@ func (s *BattleShip) GenTrails() []*Trail {
 
 	return []*Trail{
 		newTrail(
-			frontPos,
-			texture.TrailShapeCircle,
-			s.Width*0.6,
-			1.2,
-			s.Length/6+150*s.CurSpeed,
-			1,
-			0,
-			0,
+			frontPos, texture.TrailShapeCircle,
+			s.Width*0.6, 1.2,
+			s.Length/6+150*s.CurSpeed, 1,
+			0, 0, nil,
 		),
 		newTrail(
-			backPos,
-			texture.TrailShapeCircle,
-			s.Width,
-			0.4,
-			s.Length/7+155*s.CurSpeed,
-			1.5,
-			0,
-			0,
+			backPos, texture.TrailShapeCircle,
+			s.Width, 0.4,
+			s.Length/7+155*s.CurSpeed, 1.5,
+			0, 0, nil,
 		),
 	}
 }

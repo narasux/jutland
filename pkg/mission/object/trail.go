@@ -1,6 +1,10 @@
 package object
 
-import "github.com/narasux/jutland/pkg/resources/images/texture"
+import (
+	"image/color"
+
+	"github.com/narasux/jutland/pkg/resources/images/texture"
+)
 
 // Trail 尾流（战舰，鱼雷，炮弹）
 type Trail struct {
@@ -16,6 +20,8 @@ type Trail struct {
 	Delay float64
 	// 旋转角度
 	Rotation float64
+	// 颜色（nil 为默认白色）
+	Color color.Color
 }
 
 // 创建尾流对象
@@ -25,6 +31,7 @@ func newTrail(
 	size, diffusionRate float64,
 	life, lifeReductionRate float64,
 	delay, rotation float64,
+	clr color.Color,
 ) *Trail {
 	return &Trail{
 		Pos:               pos,
@@ -35,6 +42,7 @@ func newTrail(
 		LifeReductionRate: lifeReductionRate,
 		Delay:             delay,
 		Rotation:          rotation,
+		Color:             clr,
 	}
 }
 
@@ -50,7 +58,7 @@ func (t *Trail) Update() {
 
 // IsAlive ...
 func (t *Trail) IsAlive() bool {
-	return t.CurLife > 0
+	return t.CurLife > 0 && t.CurSize >= 1
 }
 
 // IsActive ...

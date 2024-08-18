@@ -140,14 +140,10 @@ func (b *Bullet) GenTrails() []*Trail {
 	size := float64(GetImgWidth(b.Name, b.Type, b.Diameter))
 	return []*Trail{
 		newTrail(
-			b.CurPos,
-			texture.TrailShapeRect,
-			size,
-			diffusionRate,
-			size*multipleSizeAsLife,
-			lifeReductionRate,
-			0,
-			b.Rotation,
+			b.CurPos, texture.TrailShapeRect,
+			size, diffusionRate,
+			size*multipleSizeAsLife, lifeReductionRate,
+			0, b.Rotation, nil,
 		),
 	}
 }
