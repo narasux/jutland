@@ -217,12 +217,12 @@ func (s *BattleShip) Hurt(bullet *Bullet) {
 
 // CanGenTail 有尾流
 func (s *BattleShip) CanGenTail() bool {
-	return s.Name != "waterdrop"
+	return s.TypeAbbr != "WaterDrop"
 }
 
 // CanOnLand 能在陆地上
 func (s *BattleShip) CanOnLand() bool {
-	return s.Name == "waterdrop"
+	return s.TypeAbbr == "WaterDrop"
 }
 
 // MoveTo 移动到指定位置

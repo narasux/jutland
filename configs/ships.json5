@@ -78,6 +78,34 @@
       "torpedoes": []
     }
   },
+  // 水滴！还是 TM 的水滴！
+  {
+    "name": "droplet",
+    "displayName": "droplet",
+    "type": "default",
+    "typeAbbr": "WaterDrop",
+    "totalHP": 1,
+    "horizontalDamageReduction": 0,
+    "verticalDamageReduction": 0,
+    "maxSpeed": 1000,
+    "acceleration": 10,
+    "rotateSpeed": 360,
+    "length": 128,
+    "width": 36,
+    "weapon": {
+      "mainGuns": [
+        // 前半球朝向但射程极短的炮模拟撞击
+        {
+          "name": "Impact",
+          "posPercent": 0,
+          "rightFiringArc": [0, 90],
+          "leftFiringArc": [270, 360]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": []
+    }
+  },
   // 战列舰
   // 美国海军
   {
