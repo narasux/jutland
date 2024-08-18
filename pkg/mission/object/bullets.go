@@ -9,6 +9,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -119,6 +120,36 @@ func (b *Bullet) Forward() {
 	// 修改生命 & 前进周期数
 	b.Life--
 	b.ForwardAge++
+}
+
+// GenTrail 生成尾流
+func (b *Bullet) GenTrails() []*Trail {
+	// 已经命中的没有尾流
+	if b.HitObjectType != HitObjectTypeNone {
+		return nil
+	}
+	// 刚刚发射的不添加尾流
+	if b.ForwardAge <= 10 {
+		return nil
+	}
+	// 不同类型的尾流特性不同
+	diffusionRate, multipleSizeAsLife, lifeReductionRate := 0.1, 7.0, 2.0
+	if b.Type == BulletTypeTorpedo {
+		diffusionRate, multipleSizeAsLife, lifeReductionRate = 0.5, 8.0, 3.0
+	}
+	size := float64(GetImgWidth(b.Name, b.Type, b.Diameter))
+	return []*Trail{
+		newTrail(
+			b.CurPos,
+			texture.TrailShapeRect,
+			size,
+			diffusionRate,
+			size*multipleSizeAsLife,
+			lifeReductionRate,
+			0,
+			b.Rotation,
+		),
+	}
 }
 
 var bulletMap = map[string]*Bullet{}

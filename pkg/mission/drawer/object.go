@@ -12,7 +12,6 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
-	"github.com/narasux/jutland/pkg/resources/images/bullet"
 	"github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -186,7 +185,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.ForwardingBullets {
-		img := bullet.GetImg(b.Type, b.Diameter)
+		img := obj.GetBulletImg(b.Type, b.Diameter)
 
 		opts := d.genDefaultDrawImageOptions()
 		setOptsCenterRotation(opts, img, b.Rotation)

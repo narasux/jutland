@@ -18,8 +18,8 @@ type Trail struct {
 	Rotation float64
 }
 
-// NewTrail ...
-func NewTrail(
+// 创建尾流对象
+func newTrail(
 	pos MapPos,
 	Shape texture.TrailShape,
 	size, diffusionRate float64,

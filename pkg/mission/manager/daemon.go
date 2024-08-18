@@ -15,7 +15,6 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
-	"github.com/narasux/jutland/pkg/resources/images/bullet"
 	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
@@ -109,62 +108,13 @@ func (m *MissionManager) updateObjectTrails() {
 		return t.IsAlive()
 	})
 	for _, ship := range m.state.Ships {
-		if ship.CurSpeed > 0 && ship.CanGenTail() {
-			offset := ship.Length / constants.MapBlockSize
-			sinVal := math.Sin(ship.CurRotation * math.Pi / 180)
-			cosVal := math.Cos(ship.CurRotation * math.Pi / 180)
-
-			frontPos, backPos := ship.CurPos.Copy(), ship.CurPos.Copy()
-			frontPos.AddRx(sinVal * offset * 0.25)
-			frontPos.SubRy(cosVal * offset * 0.25)
-			backPos.SubRx(sinVal * offset * 0.2)
-			backPos.AddRy(cosVal * offset * 0.2)
-
-			m.state.Trails = append(
-				m.state.Trails,
-				obj.NewTrail(
-					frontPos,
-					texture.TrailShapeCircle,
-					ship.Width*0.6,
-					1.2,
-					ship.Length/6+150*ship.CurSpeed,
-					1,
-					0,
-					0,
-				),
-				obj.NewTrail(
-					backPos,
-					texture.TrailShapeCircle,
-					ship.Width,
-					0.4,
-					ship.Length/7+155*ship.CurSpeed,
-					1.5,
-					0,
-					0,
-				),
-			)
+		if trails := ship.GenTrails(); trails != nil {
+			m.state.Trails = append(m.state.Trails, trails...)
 		}
 	}
 	for _, bt := range m.state.ForwardingBullets {
-		if bt.HitObjectType == obj.HitObjectTypeNone && bt.ForwardAge > 10 {
-			diffusionRate, multipleSizeAsLife, lifeReductionRate := 0.1, 7.0, 2.0
-			if bt.Type == obj.BulletTypeTorpedo {
-				diffusionRate, multipleSizeAsLife, lifeReductionRate = 0.5, 8.0, 3.0
-			}
-			size := float64(bullet.GetImgWidth(bt.Name, bt.Type, bt.Diameter))
-			m.state.Trails = append(
-				m.state.Trails,
-				obj.NewTrail(
-					bt.CurPos,
-					texture.TrailShapeRect,
-					size,
-					diffusionRate,
-					size*multipleSizeAsLife,
-					lifeReductionRate,
-					0,
-					bt.Rotation,
-				),
-			)
+		if trails := bt.GenTrails(); trails != nil {
+			m.state.Trails = append(m.state.Trails, trails...)
 		}
 	}
 }
@@ -204,7 +154,7 @@ func (m *MissionManager) updateShotBullets() {
 					ship.Length/constants.MapBlockSize, ship.Width/constants.MapBlockSize,
 					ship.CurRotation,
 				) {
-					ship.Hurt(bt)
+					ship.HurtBy(bt)
 					bt.HitObjectType = obj.HitObjectTypeShip
 					return true
 				}

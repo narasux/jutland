@@ -10,6 +10,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -186,8 +187,8 @@ func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
 	return shotBullets
 }
 
-// Hurt 受到伤害
-func (s *BattleShip) Hurt(bullet *Bullet) {
+// HurtBy 受到伤害
+func (s *BattleShip) HurtBy(bullet *Bullet) {
 	realDamage := 0.0
 	if bullet.ShotType == BulletShotTypeDirect {
 		// 平射打击水平装甲带
@@ -215,9 +216,48 @@ func (s *BattleShip) Hurt(bullet *Bullet) {
 	bullet.CriticalType = max(criticalType, bullet.CriticalType)
 }
 
-// CanGenTail 有尾流
-func (s *BattleShip) CanGenTail() bool {
-	return s.TypeAbbr != "WaterDrop"
+// GenTrails 生成尾流
+func (s *BattleShip) GenTrails() []*Trail {
+	if s.CurSpeed <= 0 {
+		return nil
+	}
+	// FIXME 水滴应该是特殊的尾流（蓝色光尾流，不扩散）
+	if s.TypeAbbr == "WaterDrop" {
+		return nil
+	}
+
+	offset := s.Length / constants.MapBlockSize
+	sinVal := math.Sin(s.CurRotation * math.Pi / 180)
+	cosVal := math.Cos(s.CurRotation * math.Pi / 180)
+
+	frontPos, backPos := s.CurPos.Copy(), s.CurPos.Copy()
+	frontPos.AddRx(sinVal * offset * 0.25)
+	frontPos.SubRy(cosVal * offset * 0.25)
+	backPos.SubRx(sinVal * offset * 0.2)
+	backPos.AddRy(cosVal * offset * 0.2)
+
+	return []*Trail{
+		newTrail(
+			frontPos,
+			texture.TrailShapeCircle,
+			s.Width*0.6,
+			1.2,
+			s.Length/6+150*s.CurSpeed,
+			1,
+			0,
+			0,
+		),
+		newTrail(
+			backPos,
+			texture.TrailShapeCircle,
+			s.Width,
+			0.4,
+			s.Length/7+155*s.CurSpeed,
+			1.5,
+			0,
+			0,
+		),
+	}
 }
 
 // CanOnLand 能在陆地上
