@@ -193,10 +193,10 @@ func (s *BattleShip) HurtBy(bullet *Bullet) {
 	realDamage := 0.0
 	if bullet.ShotType == BulletShotTypeDirect {
 		// 平射打击水平装甲带
-		realDamage = bullet.Damage * s.HorizontalDamageReduction
+		realDamage = bullet.Damage * (1 - s.HorizontalDamageReduction)
 	} else {
 		// 曲射打击垂直装甲带
-		realDamage = bullet.Damage * s.VerticalDamageReduction
+		realDamage = bullet.Damage * (1 - s.VerticalDamageReduction)
 	}
 
 	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击

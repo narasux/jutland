@@ -144,6 +144,10 @@ func initShipMap() {
 		// 折算速度
 		s.MaxSpeed /= 600
 		s.Acceleration /= 600
+		// 检查伤害减免值不能超过 1
+		s.HorizontalDamageReduction = min(1, s.HorizontalDamageReduction)
+		s.VerticalDamageReduction = min(1, s.VerticalDamageReduction)
+
 		shipMap[s.Name] = &s
 	}
 }
