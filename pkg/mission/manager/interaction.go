@@ -163,9 +163,14 @@ func (m *MissionManager) updateSelectedShips() {
 			} else {
 				// 如果当前选中的分组再次被选中，移动相机中心位置到当前分组的第一艘战舰处
 				if len(m.state.SelectedShips) > 0 {
-					m.state.Camera.Pos = m.state.Ships[m.state.SelectedShips[0]].CurPos.Copy()
-					m.state.Camera.Pos.SubMx(m.state.Camera.Width / 2)
-					m.state.Camera.Pos.SubMy(m.state.Camera.Height / 2)
+					nextPos := m.state.Ships[m.state.SelectedShips[0]].CurPos.Copy()
+					nextPos.SubMx(m.state.Camera.Width / 2)
+					nextPos.SubMy(m.state.Camera.Height / 2)
+
+					moveSpeed := m.state.Camera.BaseMoveSpeed
+					rx := float64(int(nextPos.RX/moveSpeed)) * moveSpeed
+					ry := float64(int(nextPos.RY/moveSpeed)) * moveSpeed
+					m.state.Camera.Pos.AssignRxy(rx, ry)
 				}
 			}
 		}
