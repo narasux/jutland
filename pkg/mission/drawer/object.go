@@ -12,8 +12,8 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
-	"github.com/narasux/jutland/pkg/resources/images/ship"
-	"github.com/narasux/jutland/pkg/resources/images/texture"
+	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
+	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
@@ -29,7 +29,7 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 			continue
 		}
 
-		trailImg := texture.GetTrailImg(trail.Shape, trail.CurSize, trail.CurLife, trail.Color)
+		trailImg := textureImg.GetTrail(trail.Shape, trail.CurSize, trail.CurLife, trail.Color)
 		opts := d.genDefaultDrawImageOptions()
 		setOptsCenterRotation(opts, trailImg, trail.Rotation)
 		opts.GeoM.Translate(
@@ -54,14 +54,14 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
-		shipImg := ship.GetImg(s.Name)
+		sImg := shipImg.Get(s.Name)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, shipImg, s.CurRotation)
+		setOptsCenterRotation(opts, sImg, s.CurRotation)
 		opts.GeoM.Translate(
-			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
-			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
+			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(sImg.Bounds().Dx()/2),
+			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(sImg.Bounds().Dy()/2),
 		)
-		screen.DrawImage(shipImg, opts)
+		screen.DrawImage(sImg, opts)
 
 		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP，武器状态
 		isShipSelected := slices.Contains(ms.SelectedShips, s.Uid)
@@ -73,12 +73,12 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-25,
 				(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-30,
 			)
-			hpImg := texture.GetHpImg(s.CurHP, s.TotalHP)
+			hpImg := textureImg.GetHP(s.CurHP, s.TotalHP)
 			screen.DrawImage(hpImg, opts)
 
 			if isShipSelected {
 				opts.GeoM.Translate(-35, -10)
-				screen.DrawImage(texture.ShipSelectedImg, opts)
+				screen.DrawImage(textureImg.ShipSelected, opts)
 				opts.GeoM.Translate(35, 10)
 			}
 			opts.GeoM.Translate(-20, 0)
@@ -99,8 +99,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				opts.GeoM.Translate(20, -45)
 				gunImg := lo.Ternary(
 					s.Weapon.MainGunDisabled,
-					texture.MainGunDisabledImg,
-					texture.MainGunEnabledImg,
+					textureImg.MainGunDisabled,
+					textureImg.MainGunEnabled,
 				)
 				screen.DrawImage(gunImg, opts)
 				opts.GeoM.Translate(0, 45)
@@ -111,8 +111,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				opts.GeoM.Translate(weaponInterstitialSpacing, -45)
 				gunImg := lo.Ternary(
 					s.Weapon.SecondaryGunDisabled,
-					texture.SecondaryGunDisabledImg,
-					texture.SecondaryGunEnabledImg,
+					textureImg.SecondaryGunDisabled,
+					textureImg.SecondaryGunEnabled,
 				)
 				screen.DrawImage(gunImg, opts)
 				opts.GeoM.Translate(0, 45)
@@ -123,8 +123,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				opts.GeoM.Translate(weaponInterstitialSpacing, -45)
 				torpedoImg := lo.Ternary(
 					s.Weapon.TorpedoDisabled,
-					texture.TorpedoDisabledImg,
-					texture.TorpedoEnabledImg,
+					textureImg.TorpedoDisabled,
+					textureImg.TorpedoEnabled,
 				)
 				screen.DrawImage(torpedoImg, opts)
 				opts.GeoM.Translate(0, 45)
@@ -146,7 +146,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-25,
 				(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-30,
 			)
-			hpImg := texture.GetEnemyHpImg(s.CurHP, s.TotalHP)
+			hpImg := textureImg.GetEnemyHP(s.CurHP, s.TotalHP)
 			screen.DrawImage(hpImg, opts)
 		}
 
@@ -162,17 +162,17 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 			continue
 		}
 
-		shipImg := ship.GetImg(s.Name)
+		sImg := shipImg.Get(s.Name)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, shipImg, s.CurRotation)
+		setOptsCenterRotation(opts, sImg, s.CurRotation)
 		opts.GeoM.Translate(
-			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(shipImg.Bounds().Dx()/2),
-			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(shipImg.Bounds().Dy()/2),
+			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(sImg.Bounds().Dx()/2),
+			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(sImg.Bounds().Dy()/2),
 		)
-		screen.DrawImage(shipImg, opts)
+		screen.DrawImage(sImg, opts)
 
 		// 绘制爆炸效果
-		explodeImg := texture.GetExplodeImg(s.CurHP)
+		explodeImg := textureImg.GetExplode(s.CurHP)
 		opts = d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(
 			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),

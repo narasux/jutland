@@ -9,7 +9,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
-	"github.com/narasux/jutland/pkg/resources/images/texture"
+	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -140,7 +140,7 @@ func (b *Bullet) GenTrails() []*Trail {
 	size := float64(GetImgWidth(b.Name, b.Type, b.Diameter))
 	return []*Trail{
 		newTrail(
-			b.CurPos, texture.TrailShapeRect,
+			b.CurPos, textureImg.TrailShapeRect,
 			size, diffusionRate,
 			size*multipleSizeAsLife, lifeReductionRate,
 			0, b.Rotation, nil,

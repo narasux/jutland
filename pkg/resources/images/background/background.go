@@ -9,23 +9,23 @@ import (
 )
 
 var (
-	// GameStartImg 游戏开始
-	GameStartImg *ebiten.Image
-	// GameMenuImg 游戏菜单
-	GameMenuImg *ebiten.Image
-	// GameEndImg 游戏结束
-	GameEndImg *ebiten.Image
+	// GameStart 游戏开始
+	GameStart *ebiten.Image
+	// GameMenu 游戏菜单
+	GameMenu *ebiten.Image
+	// GameEnd 游戏结束
+	GameEnd *ebiten.Image
 
-	// MissionsMapImg 任务地图
-	MissionsMapImg *ebiten.Image
-	// MissionStartImg 任务开始
-	MissionStartImg *ebiten.Image
-	// MissionSuccessImg 任务成功
-	MissionSuccessImg *ebiten.Image
-	// MissionFailedImg 任务失败
-	MissionFailedImg *ebiten.Image
-	// MissionWindowImg 任务窗口（设置，配置等背景）
-	MissionWindowImg *ebiten.Image
+	// MissionsMap 任务地图
+	MissionsMap *ebiten.Image
+	// MissionStart 任务开始
+	MissionStart *ebiten.Image
+	// MissionSuccess 任务成功
+	MissionSuccess *ebiten.Image
+	// MissionFailed 任务失败
+	MissionFailed *ebiten.Image
+	// MissionWindow 任务窗口（设置，配置等背景）
+	MissionWindow *ebiten.Image
 )
 
 func init() {
@@ -34,43 +34,43 @@ func init() {
 	log.Println("loading background image resources...")
 
 	imgPath := "/backgrounds/game_start.png"
-	if GameStartImg, err = loader.LoadImage(imgPath); err != nil {
+	if GameStart, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/backgrounds/game_menu.png"
-	if GameMenuImg, err = loader.LoadImage(imgPath); err != nil {
+	if GameMenu, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/backgrounds/game_end.png"
-	if GameEndImg, err = loader.LoadImage(imgPath); err != nil {
+	if GameEnd, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	// TODO 替换该资源
 	imgPath = "/backgrounds/missions_map.png"
-	if MissionsMapImg, err = loader.LoadImage(imgPath); err != nil {
+	if MissionsMap, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/backgrounds/mission_start.png"
-	if MissionStartImg, err = loader.LoadImage(imgPath); err != nil {
+	if MissionStart, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/backgrounds/mission_success.png"
-	if MissionSuccessImg, err = loader.LoadImage(imgPath); err != nil {
+	if MissionSuccess, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/backgrounds/mission_failed.png"
-	if MissionFailedImg, err = loader.LoadImage(imgPath); err != nil {
+	if MissionFailed, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/backgrounds/mission_window.png"
-	if MissionWindowImg, err = loader.LoadImage(imgPath); err != nil {
+	if MissionWindow, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

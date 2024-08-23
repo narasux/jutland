@@ -10,19 +10,19 @@ import (
 )
 
 var (
-	// AbbrShipLightImg 轻型战舰缩略图（< 1w ton）
-	AbbrShipLightImg *ebiten.Image
-	// AbbrShipMediumImg 中型战舰缩略图（1w-3w ton)
-	AbbrShipMediumImg *ebiten.Image
-	// AbbrShipHeavyImg 重型战舰缩略图（> 3w ton）
-	AbbrShipHeavyImg *ebiten.Image
+	// AbbrShipLight 轻型战舰缩略图（< 1w ton）
+	AbbrShipLight *ebiten.Image
+	// AbbrShipMedium 中型战舰缩略图（1w-3w ton)
+	AbbrShipMedium *ebiten.Image
+	// AbbrShipHeavy 重型战舰缩略图（> 3w ton）
+	AbbrShipHeavy *ebiten.Image
 
-	// AbbrEnemyLightImg 轻型战舰缩略图
-	AbbrEnemyLightImg *ebiten.Image
-	// AbbrEnemyMediumImg 中型战舰缩略图
-	AbbrEnemyMediumImg *ebiten.Image
-	// AbbrEnemyHeavyImg 重型战舰缩略图
-	AbbrEnemyHeavyImg *ebiten.Image
+	// AbbrEnemyLight 轻型战舰缩略图
+	AbbrEnemyLight *ebiten.Image
+	// AbbrEnemyMedium 中型战舰缩略图
+	AbbrEnemyMedium *ebiten.Image
+	// AbbrEnemyHeavy 重型战舰缩略图
+	AbbrEnemyHeavy *ebiten.Image
 )
 
 func init() {
@@ -31,45 +31,45 @@ func init() {
 	log.Println("loading abbreviation object image resources...")
 
 	imgPath := "/textures/abbr_obj/light.png"
-	if AbbrShipLightImg, err = loader.LoadImage(imgPath); err != nil {
+	if AbbrShipLight, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/textures/abbr_obj/medium.png"
-	if AbbrShipMediumImg, err = loader.LoadImage(imgPath); err != nil {
+	if AbbrShipMedium, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/textures/abbr_obj/heavy.png"
-	if AbbrShipHeavyImg, err = loader.LoadImage(imgPath); err != nil {
+	if AbbrShipHeavy, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/textures/abbr_obj/enemy_light.png"
-	if AbbrEnemyLightImg, err = loader.LoadImage(imgPath); err != nil {
+	if AbbrEnemyLight, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/textures/abbr_obj/enemy_medium.png"
-	if AbbrEnemyMediumImg, err = loader.LoadImage(imgPath); err != nil {
+	if AbbrEnemyMedium, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	imgPath = "/textures/abbr_obj/enemy_heavy.png"
-	if AbbrEnemyHeavyImg, err = loader.LoadImage(imgPath); err != nil {
+	if AbbrEnemyHeavy, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
 	log.Println("abbreviation object image resources loaded")
 }
 
-// GetAbbrShipImg 获取缩略图
-func GetAbbrShipImg(ton float64, isEnemy bool) *ebiten.Image {
+// GetAbbrShip 获取缩略图
+func GetAbbrShip(ton float64, isEnemy bool) *ebiten.Image {
 	if ton < 10000 {
-		return lo.Ternary(isEnemy, AbbrEnemyLightImg, AbbrShipLightImg)
+		return lo.Ternary(isEnemy, AbbrEnemyLight, AbbrShipLight)
 	} else if ton < 30000 {
-		return lo.Ternary(isEnemy, AbbrEnemyMediumImg, AbbrShipMediumImg)
+		return lo.Ternary(isEnemy, AbbrEnemyMedium, AbbrShipMedium)
 	} else {
-		return lo.Ternary(isEnemy, AbbrEnemyHeavyImg, AbbrShipHeavyImg)
+		return lo.Ternary(isEnemy, AbbrEnemyHeavy, AbbrShipHeavy)
 	}
 }

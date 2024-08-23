@@ -7,14 +7,14 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/images/texture"
+	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
 // 绘制箭头（当鼠标悬浮触发镜头移动时）
 func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.MissionState) {
 	posX, posY, rotation, padding := 0, 0, 0.0, 10
-	imgW, imgH := texture.ArrowWhiteImg.Bounds().Dx(), texture.ArrowWhiteImg.Bounds().Dy()
+	imgW, imgH := textureImg.ArrowWhite.Bounds().Dx(), textureImg.ArrowWhite.Bounds().Dy()
 	switch action.DetectCursorHoverOnGameMap(ms.Layout) {
 	case action.HoverScreenLeft:
 		posX, posY, rotation = padding, ms.Layout.Height/2, 180
@@ -37,9 +37,9 @@ func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.Mission
 	}
 
 	opts := d.genDefaultDrawImageOptions()
-	setOptsCenterRotation(opts, texture.ArrowWhiteImg, rotation)
+	setOptsCenterRotation(opts, textureImg.ArrowWhite, rotation)
 	opts.GeoM.Translate(float64(posX), float64(posY))
-	screen.DrawImage(texture.ArrowWhiteImg, opts)
+	screen.DrawImage(textureImg.ArrowWhite, opts)
 }
 
 // 绘制选择框

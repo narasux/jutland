@@ -11,7 +11,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/manager"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/font"
-	"github.com/narasux/jutland/pkg/resources/images/background"
+	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/version"
 )
@@ -81,28 +81,28 @@ func (g *Game) Update() error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	switch g.mode {
 	case GameModeStart:
-		g.drawer.drawBackground(screen, background.GameStartImg)
+		g.drawer.drawBackground(screen, bgImg.GameStart)
 		g.drawer.drawGameTitle(screen)
 	case GameModeMenuSelect:
 		g.objStates.AutoUpdateMenuButtonStates(screen)
-		g.drawer.drawBackground(screen, background.GameMenuImg)
+		g.drawer.drawBackground(screen, bgImg.GameMenu)
 		g.drawer.drawGameMenu(screen, g.objStates.MenuButton)
 	case GameModeMissionSelect:
-		g.drawer.drawBackground(screen, background.MissionsMapImg)
+		g.drawer.drawBackground(screen, bgImg.MissionsMap)
 		g.drawer.drawGameTip(screen, "选择任务...")
 	case GameModeMissionLoading:
-		g.drawer.drawBackground(screen, background.MissionStartImg)
+		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, "加载中...")
 	case GameModeMissionStart:
-		g.drawer.drawBackground(screen, background.MissionStartImg)
+		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, "任务开始！")
 	case GameModeMissionRunning:
 		g.missionMgr.Draw(screen)
 	case GameModeMissionSuccess:
-		g.drawer.drawBackground(screen, background.MissionSuccessImg)
+		g.drawer.drawBackground(screen, bgImg.MissionSuccess)
 		g.drawer.drawMissionResult(screen, "任务成功！", colorx.Green)
 	case GameModeMissionFailed:
-		g.drawer.drawBackground(screen, background.MissionFailedImg)
+		g.drawer.drawBackground(screen, bgImg.MissionFailed)
 		g.drawer.drawMissionResult(screen, "任务失败...", colorx.Red)
 	case GameModeCollection:
 		// TODO 功能待实现
@@ -111,7 +111,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		// TODO 功能待实现
 		return
 	case GameModeEnd:
-		g.drawer.drawBackground(screen, background.GameEndImg)
+		g.drawer.drawBackground(screen, bgImg.GameEnd)
 		g.drawer.drawCredits(screen)
 	default:
 		log.Println("unknown game mode:", g.mode)

@@ -39,8 +39,8 @@ func init() {
 	log.Println("hp image resources loaded")
 }
 
-// GetHpImg 获取生命值图片
-func GetHpImg(curHp, maxHp float64) *ebiten.Image {
+// GetHP 获取生命值图片
+func GetHP(curHp, maxHp float64) *ebiten.Image {
 	idx := int(math.Ceil(curHp / maxHp * 10))
 	// 虽然是向上取整，但是受伤就不要展示成满血
 	if idx == 10 && curHp < maxHp {
@@ -49,8 +49,8 @@ func GetHpImg(curHp, maxHp float64) *ebiten.Image {
 	return hpImgMap[idx]
 }
 
-// GetEnemyHpImg 获取敌人生命值图片
-func GetEnemyHpImg(curHp, maxHp float64) *ebiten.Image {
+// GetEnemyHP 获取敌人生命值图片
+func GetEnemyHP(curHp, maxHp float64) *ebiten.Image {
 	idx := int(math.Ceil(curHp / maxHp * 10))
 	// 虽然是向上取整，但是受伤就不要展示成满血
 	if idx == 10 && curHp < maxHp {

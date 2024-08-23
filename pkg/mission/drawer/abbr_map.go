@@ -10,9 +10,9 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
-	"github.com/narasux/jutland/pkg/resources/images/background"
-	"github.com/narasux/jutland/pkg/resources/images/ship"
-	"github.com/narasux/jutland/pkg/resources/images/texture"
+	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
+	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
+	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
@@ -30,7 +30,7 @@ func (d *Drawer) drawAbbreviationMap(screen *ebiten.Image, ms *state.MissionStat
 
 // 绘制左右背景 + 居中展示缩略地图
 func (d *Drawer) drawAbbrMapAndBackground(screen *ebiten.Image, ms *state.MissionState) {
-	window := background.MissionWindowImg
+	window := bgImg.MissionWindow
 	windowWidth, windowHeight := window.Bounds().Dx(), window.Bounds().Dy()
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
 
@@ -85,12 +85,12 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 			}
 
 			opts := d.genDefaultDrawImageOptions()
-			shipImg := ship.GetImg(cls.Kind.Name)
-			shipWidth, shipLength := shipImg.Bounds().Dx(), shipImg.Bounds().Dy()
+			sImg := shipImg.Get(cls.Kind.Name)
+			shipWidth, shipLength := sImg.Bounds().Dx(), sImg.Bounds().Dy()
 
-			setOptsCenterRotation(opts, shipImg, rotation)
+			setOptsCenterRotation(opts, sImg, rotation)
 			opts.GeoM.Translate(xOffset, yOffset-float64(shipLength-shipWidth)/2)
-			screen.DrawImage(shipImg, opts)
+			screen.DrawImage(sImg, opts)
 			yOffset += float64(shipWidth) + 15
 
 			d.drawText(
@@ -130,14 +130,14 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
 
 	for _, s := range ms.Ships {
-		shipImg := texture.GetAbbrShipImg(s.Tonnage, s.BelongPlayer != ms.CurPlayer)
+		sImg := textureImg.GetAbbrShip(s.Tonnage, s.BelongPlayer != ms.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, shipImg, s.CurRotation)
+		setOptsCenterRotation(opts, sImg, s.CurRotation)
 
 		xIndex := s.CurPos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
 		yIndex := s.CurPos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex)
-		screen.DrawImage(shipImg, opts)
+		screen.DrawImage(sImg, opts)
 	}
 }

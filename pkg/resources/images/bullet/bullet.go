@@ -8,61 +8,61 @@ import (
 )
 
 var (
-	GB1024BulletImg = ebutil.NewImageWithColor(6, 14, colorx.DarkRed)
-	GB460BulletImg  = ebutil.NewImageWithColor(4, 9, colorx.Gold)
-	GB406BulletImg  = ebutil.NewImageWithColor(4, 8, colorx.Silver)
-	GB356BulletImg  = ebutil.NewImageWithColor(4, 6, colorx.Gold)
-	GB305BulletImg  = ebutil.NewImageWithColor(3, 5, colorx.Silver)
-	GB203BulletImg  = ebutil.NewImageWithColor(3, 5, colorx.Gold)
-	GB155BulletImg  = ebutil.NewImageWithColor(2, 4, colorx.Gold)
-	GB152BulletImg  = ebutil.NewImageWithColor(2, 4, colorx.Gold)
-	GB140BulletImg  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
-	GB127BulletImg  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
+	GB1024 = ebutil.NewImageWithColor(6, 14, colorx.DarkRed)
+	GB460  = ebutil.NewImageWithColor(4, 9, colorx.Gold)
+	GB406  = ebutil.NewImageWithColor(4, 8, colorx.Silver)
+	GB356  = ebutil.NewImageWithColor(4, 6, colorx.Gold)
+	GB305  = ebutil.NewImageWithColor(3, 5, colorx.Silver)
+	GB203  = ebutil.NewImageWithColor(3, 5, colorx.Gold)
+	GB155  = ebutil.NewImageWithColor(2, 4, colorx.Gold)
+	GB152  = ebutil.NewImageWithColor(2, 4, colorx.Gold)
+	GB140  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
+	GB127  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
 )
 
 var (
-	TB533BulletImg = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
-	TB610BulletImg = ebutil.NewImageWithColor(4, 24, colorx.Silver)
+	TB533 = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
+	TB610 = ebutil.NewImageWithColor(4, 24, colorx.Silver)
 )
 
-var NotFountImg = ebutil.NewImageWithColor(10, 20, colorx.Red)
+var NotFount = ebutil.NewImageWithColor(10, 20, colorx.Red)
 
-// GetShellBulletImg 获取炮弹弹药图片
-func GetShellBulletImg(diameter int) *ebiten.Image {
+// GetShell 获取炮弹弹药图片
+func GetShell(diameter int) *ebiten.Image {
 	switch diameter {
 	case 1024:
-		return GB1024BulletImg
+		return GB1024
 	case 460:
-		return GB460BulletImg
+		return GB460
 	case 406:
-		return GB406BulletImg
+		return GB406
 	case 356:
-		return GB356BulletImg
+		return GB356
 	case 305:
-		return GB305BulletImg
+		return GB305
 	case 203:
-		return GB203BulletImg
+		return GB203
 	case 155:
-		return GB155BulletImg
+		return GB155
 	case 152:
-		return GB152BulletImg
+		return GB152
 	case 140:
-		return GB140BulletImg
+		return GB140
 	case 127:
-		return GB127BulletImg
+		return GB127
 	}
 	// 找不到就暴露出来
-	return NotFountImg
+	return NotFount
 }
 
-// GetTorpedoBulletImg 获取鱼雷弹药图片
-func GetTorpedoBulletImg(diameter int) *ebiten.Image {
+// GetTorpedo 获取鱼雷弹药图片
+func GetTorpedo(diameter int) *ebiten.Image {
 	switch diameter {
 	case 533:
-		return TB533BulletImg
+		return TB533
 	case 610:
-		return TB610BulletImg
+		return TB610
 	}
 	// 找不到就暴露出来
-	return NotFountImg
+	return NotFount
 }

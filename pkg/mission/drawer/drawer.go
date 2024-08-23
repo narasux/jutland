@@ -8,8 +8,8 @@ import (
 	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/images/abbrmap"
-	"github.com/narasux/jutland/pkg/resources/images/mapblock"
+	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
+	mapBlockImg "github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
 // Drawer 任务运行中图像绘制器
@@ -21,14 +21,14 @@ type Drawer struct {
 // NewDrawer ...
 func NewDrawer(mission string) *Drawer {
 	missionMD := md.Get(mission)
-	if err := mapblock.SceneBlockCache.Init(missionMD.MapCfg); err != nil {
+	if err := mapBlockImg.SceneBlockCache.Init(missionMD.MapCfg); err != nil {
 		log.Fatal("failed to load map scene blocks: ", err)
 	}
 
 	misLayout := layout.NewScreenLayout()
 	abbrMap := ebiten.NewImage(misLayout.Height, misLayout.Height)
 
-	bg := abbrmap.BackgroundImg
+	bg := abbrMapImg.Background
 	w, h := bg.Bounds().Dx(), bg.Bounds().Dy()
 
 	scaleX := float64(misLayout.Height) / float64(w)
@@ -37,8 +37,8 @@ func NewDrawer(mission string) *Drawer {
 	opts := &ebiten.DrawImageOptions{}
 	opts.GeoM.Scale(scaleX, scaleY)
 
-	abbrMap.DrawImage(abbrmap.BackgroundImg, opts)
-	abbrMap.DrawImage(abbrmap.Get(missionMD.MapCfg.Name), opts)
+	abbrMap.DrawImage(abbrMapImg.Background, opts)
+	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Name), opts)
 
 	return &Drawer{mission: mission, abbrMap: abbrMap}
 }

@@ -3,18 +3,18 @@ package object
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
-	"github.com/narasux/jutland/pkg/resources/images/bullet"
+	bulletImg "github.com/narasux/jutland/pkg/resources/images/bullet"
 )
 
 // GetBulletImg 获取弹药图片
 func GetBulletImg(btType BulletType, diameter int) *ebiten.Image {
 	switch btType {
 	case BulletTypeShell:
-		return bullet.GetShellBulletImg(diameter)
+		return bulletImg.GetShell(diameter)
 	case BulletTypeTorpedo:
-		return bullet.GetTorpedoBulletImg(diameter)
+		return bulletImg.GetTorpedo(diameter)
 	}
-	return bullet.NotFountImg
+	return bulletImg.NotFount
 }
 
 var BulletImgWidthMap = map[string]int{}

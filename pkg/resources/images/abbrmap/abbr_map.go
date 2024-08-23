@@ -10,8 +10,8 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
-// BackgroundImg 地图缩略图背景
-var BackgroundImg *ebiten.Image
+// Background 地图缩略图背景
+var Background *ebiten.Image
 
 // abbrMapImgMap 地图缩略图
 var abbrMapImgMap map[string]*ebiten.Image
@@ -22,7 +22,7 @@ func init() {
 	log.Println("loading background image resources...")
 
 	imgPath := "/map/abbrs/background.png"
-	if BackgroundImg, err = loader.LoadImage(imgPath); err != nil {
+	if Background, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

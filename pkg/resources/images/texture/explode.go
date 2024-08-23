@@ -32,7 +32,7 @@ func init() {
 	log.Println("explode image resources loaded")
 }
 
-// GetExplodeImg 根据残留的生命值，获取爆炸图片
-func GetExplodeImg(curHp float64) *ebiten.Image {
+// GetExplode 根据残留的生命值，获取爆炸图片
+func GetExplode(curHp float64) *ebiten.Image {
 	return explodeImgMap[int(math.Floor(curHp))]
 }

@@ -43,7 +43,7 @@ func init() {
 
 var ShipImgMap = map[string]*ebiten.Image{}
 
-// GetImg 获取战舰图片
-func GetImg(name string) *ebiten.Image {
+// Get 获取战舰图片
+func Get(name string) *ebiten.Image {
 	return ShipImgMap[name]
 }

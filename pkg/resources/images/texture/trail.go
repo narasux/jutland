@@ -20,7 +20,7 @@ import (
 var trailImgCache = map[string]*ebiten.Image{}
 
 // 不合法的尾流应该直接暴露出来
-var InvalidTrailImg = ebutil.NewImageWithColor(25, 25, colorx.Red)
+var invalidTrail = ebutil.NewImageWithColor(25, 25, colorx.Red)
 
 type TrailShape int
 
@@ -31,10 +31,10 @@ const (
 	TrailShapeRect
 )
 
-// GetTrailImg 获取尾流图片
-func GetTrailImg(shape TrailShape, size, life float64, clr color.Color) *ebiten.Image {
+// GetTrail 获取尾流图片
+func GetTrail(shape TrailShape, size, life float64, clr color.Color) *ebiten.Image {
 	if size < 0 || life < 0 {
-		return InvalidTrailImg
+		return invalidTrail
 	}
 
 	key := fmt.Sprintf("%d:%d:%d", shape, int(size), int(life))
@@ -49,15 +49,15 @@ func GetTrailImg(shape TrailShape, size, life float64, clr color.Color) *ebiten.
 
 	// 缓存取不到，则重新生成并且加入到缓存
 	if shape == TrailShapeCircle {
-		trailImgCache[key] = getCircleImg(size, life, clr)
+		trailImgCache[key] = getCircle(size, life, clr)
 	} else if shape == TrailShapeRect {
-		trailImgCache[key] = getHalfRectImg(size, 15, life, clr)
+		trailImgCache[key] = getHalfRect(size, 15, life, clr)
 	}
 
 	return trailImgCache[key]
 }
 
-func getCircleImg(diameter, life float64, clr color.Color) *ebiten.Image {
+func getCircle(diameter, life float64, clr color.Color) *ebiten.Image {
 	radius := float32(diameter / 2)
 	trailImg := ebiten.NewImage(int(diameter), int(diameter))
 	// 默认颜色
@@ -72,7 +72,7 @@ func getCircleImg(diameter, life float64, clr color.Color) *ebiten.Image {
 	return trailImg
 }
 
-func getHalfRectImg(width, multipleWidthAsHeight, life float64, clr color.Color) *ebiten.Image {
+func getHalfRect(width, multipleWidthAsHeight, life float64, clr color.Color) *ebiten.Image {
 	height := int(width * multipleWidthAsHeight)
 	trailImg := ebiten.NewImage(int(width), height*2)
 	// 默认颜色

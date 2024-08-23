@@ -15,7 +15,7 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
-	"github.com/narasux/jutland/pkg/resources/images/texture"
+	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -230,7 +230,7 @@ func (m *MissionManager) updateMissionShips() {
 	for uid, ship := range m.state.Ships {
 		if ship.CurHP <= 0 {
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
-			ship.CurHP = texture.MaxExplodeState
+			ship.CurHP = textureImg.MaxExplodeState
 			ship.CurSpeed = 0
 
 			if audioPlayQuota > 0 && m.state.Camera.Contains(ship.CurPos) {
@@ -249,9 +249,9 @@ func (m *MissionManager) updateMissionShips() {
 	}
 
 	// 移除已经完全消亡的战舰
-	m.state.DestroyedShips = lo.Filter(m.state.DestroyedShips, func(ship *obj.BattleShip, _ int) bool {
-		return ship.CurHP > 0
-	})
+	m.state.DestroyedShips = lo.Filter(
+		m.state.DestroyedShips, func(ship *obj.BattleShip, _ int) bool { return ship.CurHP > 0 },
+	)
 }
 
 // 计算下一帧任务状态
