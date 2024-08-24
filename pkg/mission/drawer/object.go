@@ -37,6 +37,17 @@ func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
 			(rp.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
 		)
 		screen.DrawImage(img, opts)
+
+		if process := rp.Progress(); process > 0 {
+			d.drawText(
+				screen, strconv.Itoa(process),
+				(rp.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-10,
+				(rp.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-12,
+				20,
+				font.Hang,
+				colorx.White,
+			)
+		}
 	}
 }
 

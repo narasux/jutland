@@ -24,6 +24,8 @@ func (d *Drawer) drawAbbreviationMap(screen *ebiten.Image, ms *state.MissionStat
 	d.drawAbbrFleetOverview(screen, ms)
 	// 绘制当前视野范围
 	d.drawAbbrCameraBox(screen, ms)
+	// 绘制建筑物
+	d.drawAbbrBuildings(screen, ms)
 	// 绘制敌我战舰
 	d.drawAbbrShips(screen, ms)
 }
@@ -122,6 +124,28 @@ func (d *Drawer) drawAbbrCameraBox(screen *ebiten.Image, ms *state.MissionState)
 	x2 := (rx + cameraWidth) / mapWidth * float32(abbrMapWidth)
 	y2 := (ry + cameraHeight) / mapHeight * float32(abbrMapHeight)
 	vector.StrokeRect(screen, x1+float32(xOffset), y1, x2-x1, y2-y1, 2, colorx.White, false)
+}
+
+// 绘制建筑物
+func (d *Drawer) drawAbbrBuildings(screen *ebiten.Image, ms *state.MissionState) {
+	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
+	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
+
+	for _, rp := range ms.ReinforcePoints {
+		img := lo.Ternary(
+			rp.BelongPlayer == ms.CurPlayer,
+			textureImg.AbbrReinforcePoint,
+			textureImg.AbbrEnemyReinforcePoint,
+		)
+		opts := d.genDefaultDrawImageOptions()
+		setOptsCenterRotation(opts, img, rp.Rotation)
+
+		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+
+		opts.GeoM.Translate(xIndex+xOffset, yIndex)
+		screen.DrawImage(img, opts)
+	}
 }
 
 // 绘制敌我战舰

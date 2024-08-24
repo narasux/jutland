@@ -15,7 +15,7 @@ type OncomingShip struct {
 	// 开始的时间戳
 	StartedAt int64
 	// 进度
-	Process float64
+	Progress float64
 }
 
 // Update ...
@@ -24,8 +24,8 @@ func (s *OncomingShip) Update() (finished bool) {
 		s.StartedAt = time.Now().UnixMilli()
 		return false
 	}
-	s.Process = float64(time.Now().UnixMilli()-s.StartedAt) / float64(s.TimeCost) * 1e3
-	return s.Process >= 100
+	s.Progress = float64(time.Now().UnixMilli()-s.StartedAt) / float64(s.TimeCost) / 10
+	return s.Progress >= 100
 }
 
 // ReinforcePoint 增援点
@@ -45,7 +45,7 @@ type ReinforcePoint struct {
 
 // Summon 召唤增援
 func (p *ReinforcePoint) Summon(shipName string) {
-	if len(p.ProvidedShipNames) >= p.MaxOncomingShip {
+	if len(p.OncomingShips) >= p.MaxOncomingShip {
 		return
 	}
 	if !slices.Contains(p.ProvidedShipNames, shipName) {
@@ -83,6 +83,14 @@ func (p *ReinforcePoint) Update(shipUidGenerator *ShipUidGenerator, curFunds int
 		)
 	}
 	return nil
+}
+
+// Progress 获取进度
+func (p *ReinforcePoint) Progress() int {
+	if len(p.OncomingShips) == 0 {
+		return 0
+	}
+	return min(int(p.OncomingShips[0].Progress), 100)
 }
 
 // NewReinforcePoint ...

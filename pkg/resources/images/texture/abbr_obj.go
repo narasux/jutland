@@ -16,6 +16,8 @@ var (
 	AbbrShipMedium *ebiten.Image
 	// AbbrShipHeavy 重型战舰缩略图（> 3w ton）
 	AbbrShipHeavy *ebiten.Image
+	// AbbrReinforcePoint 增援点
+	AbbrReinforcePoint *ebiten.Image
 
 	// AbbrEnemyLight 轻型战舰缩略图
 	AbbrEnemyLight *ebiten.Image
@@ -23,6 +25,8 @@ var (
 	AbbrEnemyMedium *ebiten.Image
 	// AbbrEnemyHeavy 重型战舰缩略图
 	AbbrEnemyHeavy *ebiten.Image
+	// AbbrEnemyReinforcePoint 敌方增援点
+	AbbrEnemyReinforcePoint *ebiten.Image
 )
 
 func init() {
@@ -45,6 +49,11 @@ func init() {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
+	imgPath = "/textures/abbr_obj/reinforce_point.png"
+	if AbbrReinforcePoint, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
 	imgPath = "/textures/abbr_obj/enemy_light.png"
 	if AbbrEnemyLight, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
@@ -57,6 +66,11 @@ func init() {
 
 	imgPath = "/textures/abbr_obj/enemy_heavy.png"
 	if AbbrEnemyHeavy, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/textures/abbr_obj/enemy_reinforce_point.png"
+	if AbbrEnemyReinforcePoint, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
