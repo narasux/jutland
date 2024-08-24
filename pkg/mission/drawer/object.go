@@ -12,6 +12,7 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
+	buildingImg "github.com/narasux/jutland/pkg/resources/images/building"
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -19,6 +20,24 @@ import (
 
 // 绘制建筑物
 func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
+	// 增援点（只有在屏幕中的才渲染）
+	for _, rp := range ms.ReinforcePoints {
+		if !ms.Camera.Contains(rp.Pos) {
+			continue
+		}
+		img := lo.Ternary(
+			rp.BelongPlayer == ms.CurPlayer,
+			buildingImg.ReinforcePoint,
+			buildingImg.EnemyReinforcePoint,
+		)
+		opts := d.genDefaultDrawImageOptions()
+		setOptsCenterRotation(opts, img, rp.Rotation)
+		opts.GeoM.Translate(
+			(rp.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
+			(rp.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
+		)
+		screen.DrawImage(img, opts)
+	}
 }
 
 // 绘制尾流（战舰，鱼雷，炮弹）

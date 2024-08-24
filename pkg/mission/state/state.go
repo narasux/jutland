@@ -57,6 +57,8 @@ type MissionState struct {
 
 	// 当前玩家
 	CurPlayer faction.Player
+	// 当前资金
+	CurFunds int64
 	// 当前敌人
 	// TODO 支持多个敌对势力
 	CurEnemy faction.Player
@@ -68,7 +70,9 @@ type MissionState struct {
 	// 是否正在编组
 	IsGrouping bool
 
-	// 战舰信息
+	// 增援点信息
+	ReinforcePoints []*obj.ReinforcePoint
+	// 战舰信息（Key: Uid）
 	Ships map[string]*obj.BattleShip
 	// 战舰 Uid 生成器
 	ShipUidGenerators map[faction.Player]*obj.ShipUidGenerator
@@ -151,6 +155,20 @@ func NewMissionState(mission string) *MissionState {
 		)
 		ships[ship.Uid] = ship
 	}
+	// 初始化增援点
+	reinforcePoints := []*obj.ReinforcePoint{}
+	for _, rpMD := range missionMD.InitReinforcePoints {
+		reinforcePoints = append(
+			reinforcePoints,
+			obj.NewReinforcePoint(
+				rpMD.Pos,
+				rpMD.Rotation,
+				rpMD.BelongPlayer,
+				rpMD.MaxOncomingShip,
+				rpMD.ProvidedShipNames,
+			),
+		)
+	}
 	return &MissionState{
 		Mission:       mission,
 		MissionStatus: MissionRunning,
@@ -165,6 +183,7 @@ func NewMissionState(mission string) *MissionState {
 			BaseMoveSpeed: 0.25,
 		},
 		CurPlayer: faction.HumanAlpha,
+		CurFunds:  missionMD.InitFunds,
 		CurEnemy:  faction.ComputerAlpha,
 		GameOpts: GameOptions{
 			// 默认展示游戏单位的状态
@@ -178,6 +197,7 @@ func NewMissionState(mission string) *MissionState {
 		},
 		IsAreaSelecting:   false,
 		IsGrouping:        false,
+		ReinforcePoints:   reinforcePoints,
 		ShipUidGenerators: shipUidGenerators,
 		Ships:             ships,
 		SelectedShips:     []string{},

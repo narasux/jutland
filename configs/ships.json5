@@ -13,6 +13,8 @@
     "rotateSpeed": 3,
     "length": 120,
     "width": 100,
+    "fundsCost": 0,
+    "timeCost": 5,
     "weapon": {
       "mainGuns": [
         // 鸭子大炮
@@ -64,6 +66,8 @@
     "rotateSpeed": 360,
     "length": 128,
     "width": 36,
+    "fundsCost": 0,
+    "timeCost": 5,
     "weapon": {
       "mainGuns": [
         // 前半球朝向但射程极短的炮模拟撞击
@@ -93,6 +97,8 @@
     "rotateSpeed": 0.85,
     "length": 270,
     "width": 33,
+    "fundsCost": 580,
+    "timeCost": 60,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -205,6 +211,8 @@
     "rotateSpeed": 0.8,
     "length": 282,
     "width": 37,
+    "fundsCost": 705,
+    "timeCost": 65,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -325,6 +333,8 @@
     "rotateSpeed": 0.8,
     "length": 220,
     "width": 31,
+    "fundsCost": 380,
+    "timeCost": 48,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -472,6 +482,8 @@
     "rotateSpeed": 0.8,
     "length": 263,
     "width": 39,
+    "fundsCost": 750,
+    "timeCost": 75,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -628,6 +640,8 @@
     "rotateSpeed": 1.8,
     "length": 165,
     "width": 16,
+    "fundsCost": 70,
+    "timeCost": 8,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -719,6 +733,8 @@
     "rotateSpeed": 1.5,
     "length": 256,
     "width": 28,
+    "fundsCost": 420,
+    "timeCost": 40,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -810,6 +826,8 @@
     "rotateSpeed": 1.8,
     "length": 220,
     "width": 22,
+    "fundsCost": 150,
+    "timeCost": 12,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -844,6 +862,8 @@
     "rotateSpeed": 1.6,
     "length": 180,
     "width": 19,
+    "fundsCost": 120,
+    "timeCost": 12,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -943,6 +963,8 @@
     "rotateSpeed": 1.6,
     "length": 201,
     "width": 21,
+    "fundsCost": 130,
+    "timeCost": 13,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1057,6 +1079,8 @@
     "rotateSpeed": 2,
     "length": 162,
     "width": 14,
+    "fundsCost": 80,
+    "timeCost": 15,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1178,6 +1202,8 @@
     "rotateSpeed": 2.2,
     "length": 116,
     "width": 11,
+    "fundsCost": 16,
+    "timeCost": 6,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1242,6 +1268,8 @@
     "rotateSpeed": 2.2,
     "length": 118,
     "width": 11,
+    "fundsCost": 26,
+    "timeCost": 8,
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1298,6 +1326,8 @@
     "rotateSpeed": 2.2,
     "length": 119,
     "width": 11,
+    "fundsCost": 26,
+    "timeCost": 8,
     "weapon": {
       "mainGuns": [
         // 前主炮 A

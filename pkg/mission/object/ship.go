@@ -103,10 +103,14 @@ type BattleShip struct {
 	Length float64 `json:"length"`
 	// 战舰宽度
 	Width float64 `json:"width"`
-	// 武器
-	Weapon Weapon `json:"weapon"`
+	// 造价
+	FundsCost int64 `json:"fundsCost"`
+	// 耗时
+	TimeCost int64 `json:"timeCost"`
 	// 吨位
 	Tonnage float64 `json:"tonnage"`
+	// 武器
+	Weapon Weapon `json:"weapon"`
 
 	// 唯一标识
 	Uid string

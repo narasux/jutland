@@ -1,9 +1,45 @@
 [
   {
     "name": "default",
+    "initFunds": 100000,
     "initCameraPos": [35, 28],
     "mapName": "darwin",
-    "maxShipCount": 5,
+    "maxShipCount": 30,
+    "initReinforcePoints": [
+      {
+        "pos": [1, 20],
+        "rotation": 90,
+        "belongPlayer": "HA",
+        "maxOncomingShip": 5,
+        "providedShipNames": [
+          "duck",
+          "lowa",
+          "montana",
+          "yamato_plus",
+          "kongo",
+          "alaska_plus",
+          "atlanta",
+          "long_beach",
+          "new_orleans",
+          "mogami",
+          "kitakami",
+          "porter",
+          "asashio",
+          "yugumo",
+        ],
+      },
+      {
+        "pos": [125, 20],
+        "rotation": 270,
+        "belongPlayer": "CA",
+        "maxOncomingShip": 5,
+        "providedShipNames": [
+          "kongo",
+          "mogami",
+          "asashio",
+        ],
+      }
+    ],
     "initShips": [
       {
         "name": "duck",
@@ -173,6 +209,6 @@
         "rotation": 270,
         "belongPlayer": "CA"
       }
-    ]
+    ],
   }
 ]

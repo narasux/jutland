@@ -43,6 +43,21 @@ func (m *MissionManager) updateGameMarks() {
 	}
 }
 
+// 更新建筑物
+func (m *MissionManager) updateBuildings() {
+	// 增援点当然算是建筑物！
+	for _, rp := range m.state.ReinforcePoints {
+		if ship := rp.Update(
+			m.state.ShipUidGenerators[rp.BelongPlayer],
+			// FIXME 目前电脑玩家先不限制金钱
+			lo.Ternary(rp.BelongPlayer == m.state.CurPlayer, m.state.CurFunds, 50000),
+		); ship != nil {
+			m.state.Ships[ship.Uid] = ship
+			m.state.CurFunds -= ship.FundsCost
+		}
+	}
+}
+
 // 更新武器开火相关状态，目前是攻击最近的目标
 // TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
 func (m *MissionManager) updateWeaponFire() {
