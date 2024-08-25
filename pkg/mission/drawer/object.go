@@ -40,7 +40,8 @@ func (d *Drawer) drawBuildings(screen *ebiten.Image, ms *state.MissionState) {
 
 		if process := rp.Progress(); process > 0 {
 			d.drawText(
-				screen, strconv.Itoa(process),
+				screen,
+				strconv.Itoa(process),
 				(rp.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-10,
 				(rp.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-12,
 				20,

@@ -310,7 +310,7 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive boo
 	nextPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
 	nextPos.SubRy(math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed)
 	// 防止出边界
-	nextPos.EnsureBorder(float64(mapCfg.Width-1), float64(mapCfg.Height-1))
+	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
 	// FIXME 这里先粗暴点，直接停船，假装到目的地，后面再搞定路线规划
 	// 特殊船舶是可以在陆地上的（飞起来的那些）
 	if mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) && !s.CanOnLand() {

@@ -45,24 +45,27 @@ func NewDrawer(mission string) *Drawer {
 
 // Draw 绘制任务关卡图像
 func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
-	// 全屏展示地图模式，不需要绘制地图外的对象
-	if misState.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
+	if misState.GameOpts.DisplayTerminal {
+		// 绘制终端模式，不需要绘制其他对象
+		d.drawTerminal(screen, misState)
+	} else if misState.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
+		// 全屏展示地图模式，不需要绘制地图外的对象
 		d.drawAbbreviationMap(screen, misState)
-		return
+	} else {
+		// 相机视野
+		d.drawCameraView(screen, misState)
+		// 地图元素
+		d.drawBuildings(screen, misState)
+		d.drawShotBullets(screen, misState)
+		d.drawObjectTrails(screen, misState)
+		d.drawBattleShips(screen, misState)
+		d.drawDestroyedShips(screen, misState)
+		// 用户行为
+		d.drawArrowOnMapWhenHover(screen, misState)
+		d.drawSelectedArea(screen, misState)
+		d.drawMarks(screen, misState)
+		d.drawTips(screen, misState)
 	}
-	// 相机视野
-	d.drawCameraView(screen, misState)
-	// 地图元素
-	d.drawBuildings(screen, misState)
-	d.drawShotBullets(screen, misState)
-	d.drawObjectTrails(screen, misState)
-	d.drawBattleShips(screen, misState)
-	d.drawDestroyedShips(screen, misState)
-	// 用户行为
-	d.drawArrowOnMapWhenHover(screen, misState)
-	d.drawSelectedArea(screen, misState)
-	d.drawMarks(screen, misState)
-	d.drawTips(screen, misState)
 }
 
 func (d *Drawer) genDefaultDrawImageOptions() *ebiten.DrawImageOptions {

@@ -36,11 +36,13 @@ type GameOptions struct {
 	DisplayDamageNumber bool
 	// 地图展示模式
 	MapDisplayMode MapDisplayMode
+	// 是否展示终端
+	DisplayTerminal bool
 }
 
 // UserInputBlocked 特定情况下，屏蔽用户输入
 func (opts *GameOptions) UserInputBlocked() bool {
-	return opts.MapDisplayMode == MapDisplayModeFull
+	return opts.MapDisplayMode == MapDisplayModeFull || opts.DisplayTerminal
 }
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）

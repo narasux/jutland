@@ -27,6 +27,27 @@ func (m *MissionManager) updateGameOptions() {
 	if action.DetectKeyboardKeyJustPressed(ebiten.KeyM) {
 		m.state.GameOpts.MapDisplayMode = (m.state.GameOpts.MapDisplayMode + 1) % 2
 	}
+
+	// 同时按下 - 和 + 键，开启终端
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyMinus) &&
+		action.DetectKeyboardKeyJustPressed(ebiten.KeyEqual) {
+		m.state.GameOpts.DisplayTerminal = !m.state.GameOpts.DisplayTerminal
+	}
+
+	// 按下 b 键，开启查看增援点模式
+	// FIXME 移除该测试用逻辑
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyB) {
+		m.state.ReinforcePoints[0].Summon("montana")
+	}
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyV) {
+		m.state.ReinforcePoints[0].Summon("alaska_plus")
+	}
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyC) {
+		m.state.ReinforcePoints[0].Summon("new_orleans")
+	}
+	if action.DetectKeyboardKeyJustPressed(ebiten.KeyX) {
+		m.state.ReinforcePoints[0].Summon("porter")
+	}
 }
 
 // 更新指令集合

@@ -68,19 +68,13 @@ func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textCol
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, textColor)
 }
 
-// 绘制制作团队 & 鸣谢
+// 绘制鸣谢
 func (d *Drawer) drawCredits(screen *ebiten.Image) {
 	// 注：英文感叹号字体是一样的，但是末尾留白少一些，对齐比较好看 :D
 	textStr := "祝君武运昌隆!"
 	fontSize := float64(128)
 	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
-	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
-
-	textStr = "制作团队：Schnee（策划，程序，素材），Kiwi（讨论，测试）"
-	fontSize = float64(28)
-	posX = (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
-	posY += float64(155)
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }
 

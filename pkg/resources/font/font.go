@@ -14,6 +14,8 @@ var (
 
 	// FontKai 楷体字体
 	Kai *text.GoTextFaceSource
+
+	OpenSans *text.GoTextFaceSource
 )
 
 func init() {
@@ -28,6 +30,11 @@ func init() {
 
 	fontPath = "/kai.ttf"
 	if Kai, err = loader.LoadFont(fontPath); err != nil {
+		log.Fatalf("missing %s: %s", fontPath, err)
+	}
+
+	fontPath = "/open_sans.ttf"
+	if OpenSans, err = loader.LoadFont(fontPath); err != nil {
 		log.Fatalf("missing %s: %s", fontPath, err)
 	}
 
