@@ -9,7 +9,7 @@ import (
 
 // 绘制终端
 func (d *Drawer) drawTerminal(screen *ebiten.Image, ms *state.MissionState) {
-	if !ms.GameOpts.DisplayTerminal {
+	if ms.MissionStatus != state.MissionInTerminal {
 		return
 	}
 	terminal := bgImg.MissionTerminal

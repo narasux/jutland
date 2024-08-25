@@ -14,38 +14,40 @@ import (
 // 更新游戏选项
 func (m *MissionManager) updateGameOptions() {
 	// 按下 d 键，全局展示 / 不展示所有战舰状态
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyD) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyD) {
 		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
 	}
 
 	// 按下 n 键，全局展示 / 不展示所有伤害数字
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyN) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyN) {
 		m.state.GameOpts.DisplayDamageNumber = !m.state.GameOpts.DisplayDamageNumber
 	}
 
 	// 按下 m 键，切换地图展示模式
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyM) {
-		m.state.GameOpts.MapDisplayMode = (m.state.GameOpts.MapDisplayMode + 1) % 2
+	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
+		m.state.MissionStatus = lo.Ternary(
+			m.state.MissionStatus == state.MissionInMap, state.MissionRunning, state.MissionInMap,
+		)
 	}
 
 	// 同时按下 - 和 + 键，开启终端
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyMinus) &&
-		action.DetectKeyboardKeyJustPressed(ebiten.KeyEqual) {
-		m.state.GameOpts.DisplayTerminal = !m.state.GameOpts.DisplayTerminal
+	if inpututil.IsKeyJustPressed(ebiten.KeyMinus) &&
+		inpututil.IsKeyJustPressed(ebiten.KeyEqual) {
+		m.state.MissionStatus = state.MissionInTerminal
 	}
 
 	// 按下 b 键，开启查看增援点模式
 	// FIXME 移除该测试用逻辑
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyB) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
 		m.state.ReinforcePoints[0].Summon("montana")
 	}
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyV) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyV) {
 		m.state.ReinforcePoints[0].Summon("alaska_plus")
 	}
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyC) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyC) {
 		m.state.ReinforcePoints[0].Summon("new_orleans")
 	}
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyX) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
 		m.state.ReinforcePoints[0].Summon("porter")
 	}
 }
@@ -65,8 +67,12 @@ func (m *MissionManager) updateInstructions() {
 func (m *MissionManager) updateCameraPosition() {
 	var nextPos *obj.MapPos
 	// 游戏模式 / 全屏地图模式走不同的相机位置更新模式
-	if m.state.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
+	if m.state.MissionStatus == state.MissionInMap {
 		nextPos = m.getNextCameraPosInFullMapMode()
+		// 如果是全屏地图模式，且点击位置相同，则退出全屏（模拟双击效果）
+		if nextPos != nil && m.state.Camera.Pos.MEqual(*nextPos) {
+			m.state.MissionStatus = state.MissionRunning
+		}
 	} else {
 		nextPos = m.getNextCameraPosInGameMode()
 	}
@@ -103,11 +109,6 @@ func (m *MissionManager) getNextCameraPosInFullMapMode() *obj.MapPos {
 	pos.AssignRxy(rx-float64(m.state.Camera.Width)/2, ry-float64(m.state.Camera.Height)/2)
 	// 防止超出边界
 	pos.EnsureBorder(m.state.CameraPosBorder())
-
-	// 如果是全屏地图模式，且点击位置相同，则退出全屏（模拟双击效果）
-	if m.state.Camera.Pos.MEqual(pos) {
-		m.state.GameOpts.MapDisplayMode = state.MapDisplayModeNone
-	}
 
 	return &pos
 }
@@ -153,7 +154,7 @@ func (m *MissionManager) getNextCameraPosInGameMode() *obj.MapPos {
 
 // 更新选择的战舰列表
 func (m *MissionManager) updateSelectedShips() {
-	if m.state.GameOpts.UserInputBlocked() {
+	if m.state.MissionStatus != state.MissionRunning {
 		return
 	}
 	// 选择一个区域中的所有战舰
@@ -210,15 +211,15 @@ func (m *MissionManager) updateSelectedShips() {
 
 // 更新舰队编组状态（左 Ctrl + 0-9 编组）
 func (m *MissionManager) updateShipGroups() {
-	if m.state.GameOpts.UserInputBlocked() {
+	if m.state.MissionStatus != state.MissionRunning {
 		return
 	}
 	// 按下左边的 ctrl 键：进入 / 退出编组模式
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyControlLeft) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyControlLeft) {
 		m.state.IsGrouping = !m.state.IsGrouping
 	}
 	// 设置编组后，如果松开 ctrl，则退出编组模式
-	if action.DetectKeyboardKeyJustReleased(ebiten.KeyControlLeft) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyControlLeft) {
 		m.state.IsGrouping = false
 	}
 	// 没有在编组模式，直接返回
@@ -239,4 +240,9 @@ func (m *MissionManager) updateShipGroups() {
 	for _, shipUid := range m.state.SelectedShips {
 		m.state.Ships[shipUid].GroupID = groupID
 	}
+}
+
+// 更新终端
+func (m *MissionManager) updateTerminal() {
+	m.state.Terminal.Update()
 }

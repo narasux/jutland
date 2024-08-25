@@ -12,8 +12,8 @@ import (
 func (d *Drawer) drawCameraView(screen *ebiten.Image, ms *state.MissionState) {
 	xAccOffset := ms.Camera.Pos.RX - float64(ms.Camera.Pos.MX)
 	yAccOffset := ms.Camera.Pos.RY - float64(ms.Camera.Pos.MY)
-	for x := 0; x < ms.Camera.Width; x++ {
-		for y := 0; y < ms.Camera.Height; y++ {
+	for x := 0; x <= ms.Camera.Width; x++ {
+		for y := 0; y <= ms.Camera.Height; y++ {
 			opts := d.genDefaultDrawImageOptions()
 			opts.GeoM.Translate(
 				(float64(x)-xAccOffset)*constants.MapBlockSize,

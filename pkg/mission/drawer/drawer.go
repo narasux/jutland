@@ -45,13 +45,14 @@ func NewDrawer(mission string) *Drawer {
 
 // Draw 绘制任务关卡图像
 func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
-	if misState.GameOpts.DisplayTerminal {
+	switch misState.MissionStatus {
+	case state.MissionInTerminal:
 		// 绘制终端模式，不需要绘制其他对象
 		d.drawTerminal(screen, misState)
-	} else if misState.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
+	case state.MissionInMap:
 		// 全屏展示地图模式，不需要绘制地图外的对象
 		d.drawAbbreviationMap(screen, misState)
-	} else {
+	default:
 		// 相机视野
 		d.drawCameraView(screen, misState)
 		// 地图元素

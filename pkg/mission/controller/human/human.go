@@ -6,6 +6,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -33,7 +34,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 	instructions := map[string]instr.Instruction{}
 
 	// 部分场景需要屏蔽用户输入
-	if misState.GameOpts.UserInputBlocked() {
+	if misState.MissionStatus != state.MissionRunning {
 		return instructions
 	}
 
@@ -57,7 +58,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 	}
 
 	// 随机散开，用于战舰重叠的情况（按下 X 键）
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyX) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
 		if len(misState.SelectedShips) != 0 {
 			for _, shipUid := range misState.SelectedShips {
 				// 如果战舰不是静止状态，则散开指令无效
@@ -78,7 +79,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 	}
 
 	// 按下 w 键，如果任意选中战舰任意武器被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyW) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyW) {
 		if len(misState.SelectedShips) != 0 {
 			anyWeaponDisabled := false
 			for _, shipUid := range misState.SelectedShips {
@@ -101,7 +102,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 	}
 
 	// 按下 e 键，如果任意选中战舰任意主炮被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyE) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyE) {
 		if len(misState.SelectedShips) != 0 {
 			anyGunDisabled := false
 			for _, shipUid := range misState.SelectedShips {
@@ -124,7 +125,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 	}
 
 	// 按下 r 键，如果任意选中战舰任意副炮被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyR) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyR) {
 		if len(misState.SelectedShips) != 0 {
 			anyGunDisabled := false
 			for _, shipUid := range misState.SelectedShips {
@@ -147,7 +148,7 @@ func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]inst
 	}
 
 	// 按下 t 键，如果任意选中战舰任意鱼雷被禁用，则启用所有，否则禁用所有
-	if action.DetectKeyboardKeyJustPressed(ebiten.KeyT) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyT) {
 		if len(misState.SelectedShips) != 0 {
 			anyTorpedoDisabled := false
 			for _, shipUid := range misState.SelectedShips {

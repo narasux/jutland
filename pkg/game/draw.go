@@ -74,7 +74,7 @@ func (d *Drawer) drawCredits(screen *ebiten.Image) {
 	textStr := "祝君武运昌隆!"
 	fontSize := float64(128)
 	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
-	posY := float64(screen.Bounds().Dy()) / 5 * 4
+	posY := float64(screen.Bounds().Dy()) / 6 * 5
 	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 }
 

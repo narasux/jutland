@@ -9,9 +9,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/samber/lo"
 
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
-	"github.com/narasux/jutland/pkg/mission/action"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -271,18 +271,7 @@ func (m *MissionManager) updateMissionShips() {
 
 // 计算下一帧任务状态
 func (m *MissionManager) updateMissionStatus() {
-	switch m.state.MissionStatus {
-	case state.MissionRunning:
-		if action.DetectKeyboardKeyJustPressed(ebiten.KeyEscape) {
-			if m.state.GameOpts.MapDisplayMode == state.MapDisplayModeFull {
-				// 如果是在全屏查看地图模式，退出查看
-				m.state.GameOpts.MapDisplayMode = state.MapDisplayModeNone
-			} else {
-				// 否则暂停游戏
-				m.state.MissionStatus = state.MissionPaused
-			}
-			return
-		}
+	checkSuccessOrFailed := func() {
 		// 检查所有战舰，判定胜利 / 失败
 		anySelfShip, anyEnemyShip := false, false
 		for _, ship := range m.state.Ships {
@@ -295,20 +284,36 @@ func (m *MissionManager) updateMissionStatus() {
 		// 自己的船都没了，失败
 		if !anySelfShip && len(m.state.DestroyedShips) == 0 {
 			m.state.MissionStatus = state.MissionFailed
-			return
 		}
 		// 敌人都不存在，胜利
 		if !anyEnemyShip && len(m.state.DestroyedShips) == 0 {
 			m.state.MissionStatus = state.MissionSuccess
-			return
 		}
+	}
+
+	switch m.state.MissionStatus {
+	case state.MissionRunning:
+		// 暂停游戏
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionPaused
+		}
+		checkSuccessOrFailed()
 	case state.MissionPaused:
-		if ebiten.IsKeyPressed(ebiten.KeyQ) {
+		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 			m.state.MissionStatus = state.MissionFailed
-			return
-		} else if ebiten.IsKeyPressed(ebiten.KeyEnter) {
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 			m.state.MissionStatus = state.MissionRunning
-			return
+		}
+	case state.MissionInMap:
+		// 退出全屏地图模式
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionRunning
+		}
+		checkSuccessOrFailed()
+	case state.MissionInTerminal:
+		// 退出终端模式
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionRunning
 		}
 	default:
 		m.state.MissionStatus = state.MissionRunning

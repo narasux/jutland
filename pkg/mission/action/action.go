@@ -104,23 +104,13 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 	return lo.ToPtr(obj.NewMapPosR(rx, ry))
 }
 
-// 探测键盘按键被压下
-func DetectKeyboardKeyJustPressed(key ebiten.Key) bool {
-	return inpututil.IsKeyJustPressed(key)
-}
-
-// 探测键盘按键被释放
-func DetectKeyboardKeyJustReleased(key ebiten.Key) bool {
-	return inpututil.IsKeyJustReleased(key)
-}
-
 // 键盘按键与组 ID 的映射关系
 type KeyGroupIDMapping struct {
 	Key     ebiten.Key
 	GroupID obj.GroupID
 }
 
-var keyGroupIDMappings = []KeyGroupIDMapping{
+var keyGroupIDMap = []KeyGroupIDMapping{
 	{Key: ebiten.KeyDigit1, GroupID: obj.GroupID1},
 	{Key: ebiten.KeyDigit2, GroupID: obj.GroupID2},
 	{Key: ebiten.KeyDigit3, GroupID: obj.GroupID3},
@@ -135,7 +125,7 @@ var keyGroupIDMappings = []KeyGroupIDMapping{
 
 // GetGroupIDByPressedKey 探测按键对应的组 ID
 func GetGroupIDByPressedKey() obj.GroupID {
-	for _, mapping := range keyGroupIDMappings {
+	for _, mapping := range keyGroupIDMap {
 		if inpututil.IsKeyJustPressed(mapping.Key) {
 			return mapping.GroupID
 		}

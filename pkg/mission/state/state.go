@@ -6,44 +6,29 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/mission/controller/cheat"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 )
 
-// Camera 相机（当前视野）
-type Camera struct {
-	// 相机左上角位置
-	Pos           obj.MapPos
-	Width         int
-	Height        int
-	BaseMoveSpeed float64
-}
+type MissionStatus string
 
-// Contains 判断坐标是否在视野内
-func (c *Camera) Contains(pos obj.MapPos) bool {
-	return !(pos.MX < c.Pos.MX || pos.MX > c.Pos.MX+c.Width || pos.MY < c.Pos.MY || pos.MY > c.Pos.MY+c.Height)
-}
-
-// GameOptions 游戏选项
-type GameOptions struct {
-	// 友军伤害
-	FriendlyFire bool
-	// 展示状态（HP / 武器禁用）
-	ForceDisplayState bool
-	// 展示伤害数值
-	DisplayDamageNumber bool
-	// 地图展示模式
-	MapDisplayMode MapDisplayMode
-	// 是否展示终端
-	DisplayTerminal bool
-}
-
-// UserInputBlocked 特定情况下，屏蔽用户输入
-func (opts *GameOptions) UserInputBlocked() bool {
-	return opts.MapDisplayMode == MapDisplayModeFull || opts.DisplayTerminal
-}
+const (
+	// MissionRunning 任务进行中
+	MissionRunning MissionStatus = "running"
+	// MissionSuccess 任务成功
+	MissionSuccess MissionStatus = "success"
+	// MissionFailed 任务失败
+	MissionFailed MissionStatus = "failed"
+	// MissionPaused 任务暂停
+	MissionPaused MissionStatus = "paused"
+	// MissionInMap 任务地图
+	MissionInMap MissionStatus = "inMap"
+	// MissionInTerminal 任务终端
+	MissionInTerminal MissionStatus = "inTerminal"
+)
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）
 type MissionState struct {
@@ -56,6 +41,8 @@ type MissionState struct {
 	Layout layout.ScreenLayout
 	// 相机
 	Camera Camera
+	// 终端（不是外挂是秘籍～）
+	Terminal *cheat.Terminal
 
 	// 当前玩家
 	CurPlayer faction.Player
@@ -97,19 +84,6 @@ func (s *MissionState) CameraPosBorder() (w float64, h float64) {
 	w = float64(s.MissionMD.MapCfg.Width - s.Camera.Width - 1)
 	h = float64(s.MissionMD.MapCfg.Height - s.Camera.Height - 1)
 	return w, h
-}
-
-// ShipClass 同级战舰
-type ShipClass struct {
-	Total int
-	Kind  *obj.BattleShip
-}
-
-// Fleet 舰队
-type Fleet struct {
-	Player  faction.Player
-	Total   int
-	Classes []ShipClass
 }
 
 // CountShips 对同类战舰进行计数
@@ -184,6 +158,7 @@ func NewMissionState(mission string) *MissionState {
 			// 默认移动速度
 			BaseMoveSpeed: 0.25,
 		},
+		Terminal:  cheat.NewTerminal(),
 		CurPlayer: faction.HumanAlpha,
 		CurFunds:  missionMD.InitFunds,
 		CurEnemy:  faction.ComputerAlpha,
@@ -194,8 +169,6 @@ func NewMissionState(mission string) *MissionState {
 			FriendlyFire: false,
 			// 默认展示伤害数值
 			DisplayDamageNumber: true,
-			// 默认不展示地图
-			MapDisplayMode: MapDisplayModeNone,
 		},
 		IsAreaSelecting:   false,
 		IsGrouping:        false,
