@@ -9,13 +9,17 @@ import (
 )
 
 var (
-	// FontHang 行书字体
+	// Hang 行书字体
 	Hang *text.GoTextFaceSource
 
-	// FontKai 楷体字体
+	// Kai 楷体字体
 	Kai *text.GoTextFaceSource
 
+	// OpenSans OpenSans 字体
 	OpenSans *text.GoTextFaceSource
+
+	// OpenSansItalic OpenSans 斜体
+	OpenSansItalic *text.GoTextFaceSource
 )
 
 func init() {
@@ -35,6 +39,11 @@ func init() {
 
 	fontPath = "/open_sans.ttf"
 	if OpenSans, err = loader.LoadFont(fontPath); err != nil {
+		log.Fatalf("missing %s: %s", fontPath, err)
+	}
+
+	fontPath = "/open_sans_italic.ttf"
+	if OpenSansItalic, err = loader.LoadFont(fontPath); err != nil {
 		log.Fatalf("missing %s: %s", fontPath, err)
 	}
 

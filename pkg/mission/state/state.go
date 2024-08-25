@@ -158,7 +158,7 @@ func NewMissionState(mission string) *MissionState {
 			// 默认移动速度
 			BaseMoveSpeed: 0.25,
 		},
-		Terminal:  cheat.NewTerminal(),
+		Terminal:  cheat.NewTerminal(misLayout.Height),
 		CurPlayer: faction.HumanAlpha,
 		CurFunds:  missionMD.InitFunds,
 		CurEnemy:  faction.ComputerAlpha,

@@ -271,7 +271,11 @@ func (m *MissionManager) updateMissionShips() {
 
 // 计算下一帧任务状态
 func (m *MissionManager) updateMissionStatus() {
-	checkSuccessOrFailed := func() {
+	calcNextStatusByShips := func(curStatus state.MissionStatus) state.MissionStatus {
+		// 还有战舰在沉没，游戏继续
+		if len(m.state.DestroyedShips) != 0 {
+			return curStatus
+		}
 		// 检查所有战舰，判定胜利 / 失败
 		anySelfShip, anyEnemyShip := false, false
 		for _, ship := range m.state.Ships {
@@ -283,12 +287,13 @@ func (m *MissionManager) updateMissionStatus() {
 		}
 		// 自己的船都没了，失败
 		if !anySelfShip && len(m.state.DestroyedShips) == 0 {
-			m.state.MissionStatus = state.MissionFailed
+			return state.MissionFailed
 		}
 		// 敌人都不存在，胜利
 		if !anyEnemyShip && len(m.state.DestroyedShips) == 0 {
-			m.state.MissionStatus = state.MissionSuccess
+			return state.MissionSuccess
 		}
+		return curStatus
 	}
 
 	switch m.state.MissionStatus {
@@ -297,7 +302,7 @@ func (m *MissionManager) updateMissionStatus() {
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.MissionStatus = state.MissionPaused
 		}
-		checkSuccessOrFailed()
+		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
 	case state.MissionPaused:
 		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 			m.state.MissionStatus = state.MissionFailed
@@ -309,7 +314,7 @@ func (m *MissionManager) updateMissionStatus() {
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.MissionStatus = state.MissionRunning
 		}
-		checkSuccessOrFailed()
+		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
 	case state.MissionInTerminal:
 		// 退出终端模式
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
