@@ -6,7 +6,6 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	"github.com/narasux/jutland/pkg/mission/controller/cheat"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
@@ -41,8 +40,6 @@ type MissionState struct {
 	Layout layout.ScreenLayout
 	// 相机
 	Camera Camera
-	// 终端（不是外挂是秘籍～）
-	Terminal *cheat.Terminal
 
 	// 当前玩家
 	CurPlayer faction.Player
@@ -158,7 +155,6 @@ func NewMissionState(mission string) *MissionState {
 			// 默认移动速度
 			BaseMoveSpeed: 0.25,
 		},
-		Terminal:  cheat.NewTerminal(misLayout.Height),
 		CurPlayer: faction.HumanAlpha,
 		CurFunds:  missionMD.InitFunds,
 		CurEnemy:  faction.ComputerAlpha,

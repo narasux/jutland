@@ -5,6 +5,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/narasux/jutland/pkg/mission/controller/cheat"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -44,11 +45,15 @@ func NewDrawer(mission string) *Drawer {
 }
 
 // Draw 绘制任务关卡图像
-func (d *Drawer) Draw(screen *ebiten.Image, misState *state.MissionState) {
+func (d *Drawer) Draw(
+	screen *ebiten.Image,
+	misState *state.MissionState,
+	terminal *cheat.Terminal,
+) {
 	switch misState.MissionStatus {
 	case state.MissionInTerminal:
 		// 绘制终端模式，不需要绘制其他对象
-		d.drawTerminal(screen, misState)
+		d.drawTerminal(screen, misState, terminal)
 	case state.MissionInMap:
 		// 全屏展示地图模式，不需要绘制地图外的对象
 		d.drawAbbreviationMap(screen, misState)

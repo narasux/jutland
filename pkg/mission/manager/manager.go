@@ -4,6 +4,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/narasux/jutland/pkg/mission/controller"
+	"github.com/narasux/jutland/pkg/mission/controller/cheat"
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
 	"github.com/narasux/jutland/pkg/mission/controller/human"
 	"github.com/narasux/jutland/pkg/mission/drawer"
@@ -16,6 +17,7 @@ import (
 type MissionManager struct {
 	state              *state.MissionState
 	drawer             *drawer.Drawer
+	terminal           *cheat.Terminal
 	instructions       map[string]instr.Instruction
 	playerAlphaHandler controller.InputHandler
 	playerBetaHandler  controller.InputHandler
@@ -24,8 +26,9 @@ type MissionManager struct {
 // NewManager ...
 func New(mission string) *MissionManager {
 	return &MissionManager{
-		state:  state.NewMissionState(mission),
-		drawer: drawer.NewDrawer(mission),
+		state:    state.NewMissionState(mission),
+		drawer:   drawer.NewDrawer(mission),
+		terminal: cheat.NewTerminal(),
 		// 指令集合 key 为 objUid + instrName
 		// 注：同一对象，只能有一个同名指令（如：战舰不能有两个目标位置）
 		instructions: map[string]instr.Instruction{},
@@ -37,7 +40,7 @@ func New(mission string) *MissionManager {
 
 // Draw 绘制任务图像
 func (m *MissionManager) Draw(screen *ebiten.Image) {
-	m.drawer.Draw(screen, m.state)
+	m.drawer.Draw(screen, m.state, m.terminal)
 }
 
 func (m *MissionManager) Update() (state.MissionStatus, error) {

@@ -10,6 +10,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/mission/layout"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
@@ -64,9 +65,11 @@ type Terminal struct {
 }
 
 // NewTerminal 新建终端
-func NewTerminal(windowHeight int) *Terminal {
+func NewTerminal() *Terminal {
+	misLayout := layout.NewScreenLayout()
+
 	return &Terminal{
-		ReservedLines: windowHeight / (terminalLineSpacing + terminalFontSize) / 5 * 4,
+		ReservedLines: misLayout.Height / (terminalLineSpacing + terminalFontSize) / 5 * 4,
 		LineSpacing:   terminalLineSpacing,
 		FontSize:      terminalFontSize,
 		Font:          font.OpenSansItalic,
@@ -88,13 +91,17 @@ func (t *Terminal) Update() {
 	for _, k := range keys {
 		switch k {
 		case ebiten.KeyEnter:
-			// 回车换行 & 执行命令
 			cmd := t.Input.String()
+			// 记录历史 & 缓冲区
 			t.History = append(t.History, cmd)
 			t.Buffer = append(t.Buffer, Line{Text: cmd, Type: LineTypeInput})
+			// 执行命令
 			t.exec(cmd)
+			// 清理过长的缓冲区
 			t.cleanBuffer()
+			// 重置输入行
 			t.Input.Reset()
+			t.HistoryIndex = 0
 		case ebiten.KeyBackspace:
 			if t.Input.Len() > 0 {
 				str := t.Input.String()

@@ -30,9 +30,9 @@ func (m *MissionManager) updateGameOptions() {
 		)
 	}
 
-	// 同时按下 - 和 + 键，开启终端
-	if inpututil.IsKeyJustPressed(ebiten.KeyMinus) &&
-		inpututil.IsKeyJustPressed(ebiten.KeyEqual) {
+	// 按下 LeftCtrl 的同时按下 ` 键，开启终端（vscode 风格）
+	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
+		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
 		m.state.MissionStatus = state.MissionInTerminal
 	}
 
@@ -244,5 +244,5 @@ func (m *MissionManager) updateShipGroups() {
 
 // 更新终端
 func (m *MissionManager) updateTerminal() {
-	m.state.Terminal.Update()
+	m.terminal.Update()
 }

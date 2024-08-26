@@ -3,17 +3,23 @@ package drawer
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/narasux/jutland/pkg/mission/controller/cheat"
 	"github.com/narasux/jutland/pkg/mission/state"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 )
 
 // 绘制终端
-func (d *Drawer) drawTerminal(screen *ebiten.Image, ms *state.MissionState) {
+func (d *Drawer) drawTerminal(
+	screen *ebiten.Image,
+	ms *state.MissionState,
+	terminal *cheat.Terminal,
+) {
 	if ms.MissionStatus != state.MissionInTerminal {
 		return
 	}
 	terminalImg := bgImg.MissionTerminal
-	terminalWidth, terminalHeight := terminalImg.Bounds().Dx(), terminalImg.Bounds().Dy()
+	terminalWidth := terminalImg.Bounds().Dx()
+	terminalHeight := terminalImg.Bounds().Dy()
 
 	opts := d.genDefaultDrawImageOptions()
 	opts.GeoM.Scale(
@@ -23,22 +29,22 @@ func (d *Drawer) drawTerminal(screen *ebiten.Image, ms *state.MissionState) {
 	screen.DrawImage(terminalImg, opts)
 
 	xOffset, yOffset := float64(150), float64(170)
-	for _, line := range ms.Terminal.Buffer {
+	for _, line := range terminal.Buffer {
 		d.drawText(
 			screen, line.String(),
 			xOffset, yOffset,
-			ms.Terminal.FontSize,
-			ms.Terminal.Font,
-			ms.Terminal.Color,
+			terminal.FontSize,
+			terminal.Font,
+			terminal.Color,
 		)
-		yOffset += ms.Terminal.FontSize + ms.Terminal.LineSpacing
+		yOffset += terminal.FontSize + terminal.LineSpacing
 	}
 	d.drawText(
 		screen,
-		ms.Terminal.CurInputString(),
+		terminal.CurInputString(),
 		xOffset, yOffset,
-		ms.Terminal.FontSize,
-		ms.Terminal.Font,
-		ms.Terminal.Color,
+		terminal.FontSize,
+		terminal.Font,
+		terminal.Color,
 	)
 }
