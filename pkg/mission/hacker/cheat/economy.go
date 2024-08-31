@@ -13,6 +13,10 @@ func (c *ShowMeTheMoney) String() string {
 	return "show me the money"
 }
 
+func (c *ShowMeTheMoney) Desc() string {
+	return "Grants the player 10,000 funds."
+}
+
 func (c *ShowMeTheMoney) Match(cmd string) bool {
 	return isCommandEqual(c.String(), cmd)
 }

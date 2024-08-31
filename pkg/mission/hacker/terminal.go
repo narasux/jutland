@@ -1,16 +1,18 @@
 package hacker
 
 import (
+	"fmt"
 	"image/color"
 	"strings"
 	"time"
+
+	"github.com/narasux/jutland/pkg/mission/hacker/cheat"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/samber/lo"
 
-	"github.com/narasux/jutland/pkg/mission/controller/hacker/cheat"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -100,7 +102,9 @@ func (t *Terminal) Update(misState *state.MissionState) {
 			// 执行命令
 			t.execCommand(misState, cmd)
 			// 清理过长的缓冲区
-			t.cleanBuffer()
+			if len(t.Buffer) > t.ReservedLines {
+				t.Buffer = t.Buffer[len(t.Buffer)-t.ReservedLines:]
+			}
 			// 重置输入行
 			t.Input.Reset()
 			t.HistoryIndex = 0
@@ -143,20 +147,33 @@ func (t *Terminal) fillHistory() {
 	t.Input.WriteString(t.History[historyLength-t.HistoryIndex])
 }
 
-// 清理过多的缓冲区行
-func (t *Terminal) cleanBuffer() {
-	if len(t.Buffer) > t.ReservedLines {
-		t.Buffer = t.Buffer[len(t.Buffer)-t.ReservedLines:]
-	}
-}
-
 // 执行命令
 func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
-	for _, c := range cheat.Cheats {
-		if c.Match(cmd) {
-			log := c.Exec(misState)
-			t.Buffer = append(t.Buffer, Line{Text: log, Type: LineTypeOutput})
-			break
+	switch cmd {
+	case ":q", ":wq", "exit", "quit":
+		misState.MissionStatus = state.MissionRunning
+		return
+	case "clear":
+		t.Buffer = t.Buffer[:0]
+		return
+	case "help":
+		for _, c := range cheat.Cheats {
+			t.Buffer = append(
+				t.Buffer, Line{Text: fmt.Sprintf("%s: %s", c.String(), c.Desc()), Type: LineTypeOutput},
+			)
+		}
+		return
+	default:
+		for _, c := range cheat.Cheats {
+			if c.Match(cmd) {
+				log := c.Exec(misState)
+				t.Buffer = append(t.Buffer, Line{Text: log, Type: LineTypeOutput})
+				return
+			}
 		}
 	}
+	// 还没有被执行的命令认为是无效的
+	t.Buffer = append(
+		t.Buffer, Line{Text: fmt.Sprintf("Command `%s` Not Effect", cmd), Type: LineTypeOutput},
+	)
 }

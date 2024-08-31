@@ -5,10 +5,10 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
-	"github.com/narasux/jutland/pkg/mission/controller/hacker"
 	"github.com/narasux/jutland/pkg/mission/controller/human"
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/mission/hacker"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/state"
 )

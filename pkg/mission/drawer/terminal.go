@@ -3,7 +3,7 @@ package drawer
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
-	"github.com/narasux/jutland/pkg/mission/controller/hacker"
+	"github.com/narasux/jutland/pkg/mission/hacker"
 	"github.com/narasux/jutland/pkg/mission/state"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 )

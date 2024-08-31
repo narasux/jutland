@@ -13,6 +13,10 @@ func (c *ShowMeTheDuck) String() string {
 	return "show me the duck"
 }
 
+func (c *ShowMeTheDuck) Desc() string {
+	return "Create a duck at current cursor position"
+}
+
 func (c *ShowMeTheDuck) Match(cmd string) bool {
 	return isCommandEqual(c.String(), cmd)
 }
@@ -36,6 +40,10 @@ type ShowMeTheWaterdrop struct{}
 
 func (c *ShowMeTheWaterdrop) String() string {
 	return "show me the waterdrop"
+}
+
+func (c *ShowMeTheWaterdrop) Desc() string {
+	return "Create a waterdrop at current cursor position"
 }
 
 func (c *ShowMeTheWaterdrop) Match(cmd string) bool {

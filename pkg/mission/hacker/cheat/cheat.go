@@ -10,6 +10,4 @@ var Cheats = []Cheat{
 	// 效果类
 	&BathtubWar{},
 	&BlackSheepWall{},
-	// 兜底
-	&NotEffect{},
 }

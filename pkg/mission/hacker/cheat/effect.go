@@ -14,6 +14,10 @@ func (c *BlackSheepWall) String() string {
 	return "black sheep wall"
 }
 
+func (c *BlackSheepWall) Desc() string {
+	return "Removing the fog of war and allowing players to see all enemy units."
+}
+
 func (c *BlackSheepWall) Match(cmd string) bool {
 	return isCommandEqual(c.String(), cmd)
 }
@@ -29,6 +33,10 @@ type BathtubWar struct{}
 
 func (c *BathtubWar) String() string {
 	return "bathtub war"
+}
+
+func (c *BathtubWar) Desc() string {
+	return "Turn every ship into a duck for a quacking good time!"
 }
 
 func (c *BathtubWar) Match(cmd string) bool {
