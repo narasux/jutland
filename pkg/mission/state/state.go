@@ -27,6 +27,8 @@ const (
 	MissionInMap MissionStatus = "inMap"
 	// MissionInTerminal 任务终端
 	MissionInTerminal MissionStatus = "inTerminal"
+	// MissionInReinforcePoint 任务增援点
+	MissionInReinforcePoint MissionStatus = "inReinforcePoint"
 )
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）

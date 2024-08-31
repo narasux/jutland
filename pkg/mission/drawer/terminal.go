@@ -3,7 +3,7 @@ package drawer
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
-	"github.com/narasux/jutland/pkg/mission/controller/cheat"
+	"github.com/narasux/jutland/pkg/mission/controller/hacker"
 	"github.com/narasux/jutland/pkg/mission/state"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 )
@@ -12,7 +12,7 @@ import (
 func (d *Drawer) drawTerminal(
 	screen *ebiten.Image,
 	ms *state.MissionState,
-	terminal *cheat.Terminal,
+	terminal *hacker.Terminal,
 ) {
 	if ms.MissionStatus != state.MissionInTerminal {
 		return

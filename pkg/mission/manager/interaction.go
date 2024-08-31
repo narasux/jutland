@@ -26,21 +26,33 @@ func (m *MissionManager) updateGameOptions() {
 	// 按下 m 键，切换地图展示模式
 	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
 		m.state.MissionStatus = lo.Ternary(
-			m.state.MissionStatus == state.MissionInMap, state.MissionRunning, state.MissionInMap,
+			m.state.MissionStatus == state.MissionRunning,
+			state.MissionInMap,
+			state.MissionRunning,
 		)
 	}
 
-	// 按下 LeftCtrl 的同时按下 ` 键，开启终端（vscode 风格）
-	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
-		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
-		m.state.MissionStatus = state.MissionInTerminal
+	// 按下 b 键，开启查看增援点模式
+	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
+		m.state.MissionStatus = lo.Ternary(
+			m.state.MissionStatus == state.MissionRunning,
+			state.MissionInReinforcePoint,
+			state.MissionRunning,
+		)
 	}
 
-	// 按下 b 键，开启查看增援点模式
-	// FIXME 移除该测试用逻辑
-	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
-		m.state.ReinforcePoints[0].Summon("montana")
+	// 按下 LeftCtrl，LeftShift 的同时按下 ` 键开启终端
+	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
+		ebiten.IsKeyPressed(ebiten.KeyShiftLeft) &&
+		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
+		m.state.MissionStatus = lo.Ternary(
+			m.state.MissionStatus == state.MissionRunning,
+			state.MissionInTerminal,
+			state.MissionRunning,
+		)
 	}
+
+	// FIXME 移除该测试用逻辑
 	if inpututil.IsKeyJustPressed(ebiten.KeyV) {
 		m.state.ReinforcePoints[0].Summon("alaska_plus")
 	}
@@ -244,5 +256,5 @@ func (m *MissionManager) updateShipGroups() {
 
 // 更新终端
 func (m *MissionManager) updateTerminal() {
-	m.terminal.Update()
+	m.terminal.Update(m.state)
 }

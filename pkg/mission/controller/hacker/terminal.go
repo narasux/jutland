@@ -1,4 +1,4 @@
-package cheat
+package hacker
 
 import (
 	"image/color"
@@ -10,7 +10,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/mission/controller/hacker/cheat"
 	"github.com/narasux/jutland/pkg/mission/layout"
+	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
@@ -83,7 +85,7 @@ func (t *Terminal) CurInputString() string {
 }
 
 // Update ...
-func (t *Terminal) Update() {
+func (t *Terminal) Update(misState *state.MissionState) {
 	keys := inpututil.AppendJustPressedKeys(nil)
 	if len(keys) == 0 {
 		return
@@ -96,7 +98,7 @@ func (t *Terminal) Update() {
 			t.History = append(t.History, cmd)
 			t.Buffer = append(t.Buffer, Line{Text: cmd, Type: LineTypeInput})
 			// 执行命令
-			t.exec(cmd)
+			t.execCommand(misState, cmd)
 			// 清理过长的缓冲区
 			t.cleanBuffer()
 			// 重置输入行
@@ -148,7 +150,13 @@ func (t *Terminal) cleanBuffer() {
 	}
 }
 
-// FIXME 执行命令
-func (t *Terminal) exec(cmd string) {
-	t.Buffer = append(t.Buffer, Line{Text: "echo -> " + cmd, Type: LineTypeOutput})
+// 执行命令
+func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
+	for _, c := range cheat.Cheats {
+		if c.Match(cmd) {
+			log := c.Exec(misState)
+			t.Buffer = append(t.Buffer, Line{Text: log, Type: LineTypeOutput})
+			break
+		}
+	}
 }

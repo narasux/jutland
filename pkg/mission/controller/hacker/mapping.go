@@ -1,4 +1,4 @@
-package cheat
+package hacker
 
 import "github.com/hajimehoshi/ebiten/v2"
 

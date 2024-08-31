@@ -37,7 +37,7 @@ func (p *MapPos) Near(other MapPos, distance float64) bool {
 
 // String ...
 func (p *MapPos) String() string {
-	return fmt.Sprintf("(%f/%d, %f/%d)", p.RX, p.MX, p.RY, p.MY)
+	return fmt.Sprintf("(%d, %d)", p.MX, p.MY)
 }
 
 // AssignRxy 重新赋值 RX，RY，并计算 MX，MY

@@ -98,6 +98,11 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 	if !inpututil.IsMouseButtonJustPressed(button) {
 		return nil
 	}
+	return DetectCursorPosOnMap(misState)
+}
+
+// 探测当前鼠标在地图上的位置
+func DetectCursorPosOnMap(misState *state.MissionState) *obj.MapPos {
 	sx, sy := ebiten.CursorPosition()
 	rx := misState.Camera.Pos.RX + float64(sx)/constants.MapBlockSize
 	ry := misState.Camera.Pos.RY + float64(sy)/constants.MapBlockSize

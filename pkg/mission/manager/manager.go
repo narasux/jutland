@@ -4,8 +4,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/narasux/jutland/pkg/mission/controller"
-	"github.com/narasux/jutland/pkg/mission/controller/cheat"
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
+	"github.com/narasux/jutland/pkg/mission/controller/hacker"
 	"github.com/narasux/jutland/pkg/mission/controller/human"
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -17,7 +17,7 @@ import (
 type MissionManager struct {
 	state              *state.MissionState
 	drawer             *drawer.Drawer
-	terminal           *cheat.Terminal
+	terminal           *hacker.Terminal
 	instructions       map[string]instr.Instruction
 	playerAlphaHandler controller.InputHandler
 	playerBetaHandler  controller.InputHandler
@@ -28,7 +28,7 @@ func New(mission string) *MissionManager {
 	return &MissionManager{
 		state:    state.NewMissionState(mission),
 		drawer:   drawer.NewDrawer(mission),
-		terminal: cheat.NewTerminal(),
+		terminal: hacker.NewTerminal(),
 		// 指令集合 key 为 objUid + instrName
 		// 注：同一对象，只能有一个同名指令（如：战舰不能有两个目标位置）
 		instructions: map[string]instr.Instruction{},
