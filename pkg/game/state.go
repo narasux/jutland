@@ -31,7 +31,7 @@ type menuButton struct {
 	// top-left 位置
 	PosX float64
 	PosY float64
-	// 文本尺寸，有默认值，鼠标 hover 会改变
+	// 文本尺寸
 	FontSize float64
 	// 文本字体
 	Font *text.GoTextFaceSource

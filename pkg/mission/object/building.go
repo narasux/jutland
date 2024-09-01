@@ -4,6 +4,8 @@ import (
 	"slices"
 	"time"
 
+	"github.com/google/uuid"
+
 	"github.com/narasux/jutland/pkg/mission/faction"
 )
 
@@ -30,10 +32,13 @@ func (s *OncomingShip) Update() (finished bool) {
 
 // ReinforcePoint 增援点
 type ReinforcePoint struct {
+	Uid      string
 	Pos      MapPos
 	Rotation float64
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
+	// 当前被选中的战舰索引
+	CurSelectedShipIndex int
 	// 提供的战舰类型
 	ProvidedShipNames []string
 	// 最大增援进度数量
@@ -51,16 +56,17 @@ func (p *ReinforcePoint) Summon(shipName string) {
 	if !slices.Contains(p.ProvidedShipNames, shipName) {
 		return
 	}
-	ship := shipMap[shipName]
+
+	fundsCost, timeCost := GetShipCost(shipName)
 	p.OncomingShips = append(p.OncomingShips, &OncomingShip{
-		Name:      shipName,
-		FundsCost: ship.FundsCost,
-		TimeCost:  ship.TimeCost,
+		Name: shipName, FundsCost: fundsCost, TimeCost: timeCost,
 	})
 }
 
 // Update ...
-func (p *ReinforcePoint) Update(shipUidGenerator *ShipUidGenerator, curFunds int64) *BattleShip {
+func (p *ReinforcePoint) Update(
+	shipUidGenerator *ShipUidGenerator, curFunds int64,
+) *BattleShip {
 	if len(p.OncomingShips) == 0 {
 		return nil
 	}
@@ -102,6 +108,7 @@ func NewReinforcePoint(
 	providedShipNames []string,
 ) *ReinforcePoint {
 	return &ReinforcePoint{
+		Uid:               uuid.NewString(),
 		Pos:               pos,
 		Rotation:          rotation,
 		BelongPlayer:      belongPlayer,

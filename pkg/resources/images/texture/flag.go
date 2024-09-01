@@ -42,7 +42,7 @@ var (
 func init() {
 	var err error
 
-	log.Println("loading texture image resources...")
+	log.Println("loading flag image resources...")
 
 	imgPath := "/textures/flag/arrow_white.png"
 	if ArrowWhite, err = loader.LoadImage(imgPath); err != nil {
@@ -94,7 +94,7 @@ func init() {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
-	log.Println("texture image resources loaded")
+	log.Println("flag image resources loaded")
 }
 
 var textImages = map[string]*ebiten.Image{}
@@ -102,7 +102,7 @@ var textImages = map[string]*ebiten.Image{}
 // GetHangText 获取行书文本图像（支持缓存）
 func GetHangText(textStr string, fontSize float64, clr color.Color) *ebiten.Image {
 	r, g, b, a := clr.RGBA()
-	key := fmt.Sprintf("%s:size:%d:clr:%d:%d:%d:%d", textStr, fontSize, r, g, b, a)
+	key := fmt.Sprintf("%s:size:%.0f:clr:%d:%d:%d:%d", textStr, fontSize, r, g, b, a)
 	if img, ok := textImages[key]; ok {
 		return img
 	}

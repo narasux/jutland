@@ -24,8 +24,12 @@ var (
 	MissionSuccess *ebiten.Image
 	// MissionFailed 任务失败
 	MissionFailed *ebiten.Image
-	// MissionWindow 任务窗口（设置，配置等背景）
+	// MissionWindow 任务窗口
 	MissionWindow *ebiten.Image
+	// MissionWindowIronWall 任务窗口 - 钢铁墙面（灰色）
+	MissionWindowIronWall *ebiten.Image
+	// MissionWindowParchment 任务窗口 - 羊皮纸（浅黄）
+	MissionWindowParchment *ebiten.Image
 	// MissionTerminal 任务终端
 	MissionTerminal *ebiten.Image
 )
@@ -73,6 +77,16 @@ func init() {
 
 	imgPath = "/backgrounds/mission_window.png"
 	if MissionWindow, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/backgrounds/mission_window_iron_wall.png"
+	if MissionWindowIronWall, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/backgrounds/mission_window_parchment.png"
+	if MissionWindowParchment, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

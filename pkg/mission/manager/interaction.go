@@ -36,7 +36,7 @@ func (m *MissionManager) updateGameOptions() {
 	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
 		m.state.MissionStatus = lo.Ternary(
 			m.state.MissionStatus == state.MissionRunning,
-			state.MissionInReinforcePoint,
+			state.MissionInBuilding,
 			state.MissionRunning,
 		)
 	}
@@ -50,17 +50,6 @@ func (m *MissionManager) updateGameOptions() {
 			state.MissionInTerminal,
 			state.MissionRunning,
 		)
-	}
-
-	// FIXME 移除该测试用逻辑
-	if inpututil.IsKeyJustPressed(ebiten.KeyV) {
-		m.state.ReinforcePoints[0].Summon("alaska_plus")
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyC) {
-		m.state.ReinforcePoints[0].Summon("new_orleans")
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
-		m.state.ReinforcePoints[0].Summon("porter")
 	}
 }
 
@@ -257,4 +246,9 @@ func (m *MissionManager) updateShipGroups() {
 // 更新终端
 func (m *MissionManager) updateTerminal() {
 	m.terminal.Update(m.state)
+}
+
+// 更新被选中的待增援战舰
+func (m *MissionManager) updateSelectedSummonShip() {
+	// FIXME 实现逻辑
 }

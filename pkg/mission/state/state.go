@@ -27,8 +27,8 @@ const (
 	MissionInMap MissionStatus = "inMap"
 	// MissionInTerminal 任务终端
 	MissionInTerminal MissionStatus = "inTerminal"
-	// MissionInReinforcePoint 任务增援点
-	MissionInReinforcePoint MissionStatus = "inReinforcePoint"
+	// MissionInBuilding 任务建筑（增援点等）
+	MissionInBuilding MissionStatus = "inBuilding"
 )
 
 // MissionState 任务状态（包含地图，资源，进度，对象等）
@@ -58,8 +58,12 @@ type MissionState struct {
 	// 是否正在编组
 	IsGrouping bool
 
+	// 被选中的增援点
+	SelectedReinforcePointUid string
 	// 增援点信息
-	ReinforcePoints []*obj.ReinforcePoint
+	ReinforcePoints map[string]*obj.ReinforcePoint
+	// 被选中的增援战舰名称
+	SelectedSummonShipName string
 	// 战舰信息（Key: Uid）
 	Ships map[string]*obj.BattleShip
 	// 战舰 Uid 生成器
@@ -131,18 +135,16 @@ func NewMissionState(mission string) *MissionState {
 		ships[ship.Uid] = ship
 	}
 	// 初始化增援点
-	reinforcePoints := []*obj.ReinforcePoint{}
+	reinforcePoints := map[string]*obj.ReinforcePoint{}
 	for _, rpMD := range missionMD.InitReinforcePoints {
-		reinforcePoints = append(
-			reinforcePoints,
-			obj.NewReinforcePoint(
-				rpMD.Pos,
-				rpMD.Rotation,
-				rpMD.BelongPlayer,
-				rpMD.MaxOncomingShip,
-				rpMD.ProvidedShipNames,
-			),
+		rfp := obj.NewReinforcePoint(
+			rpMD.Pos,
+			rpMD.Rotation,
+			rpMD.BelongPlayer,
+			rpMD.MaxOncomingShip,
+			rpMD.ProvidedShipNames,
 		)
+		reinforcePoints[rfp.Uid] = rfp
 	}
 	return &MissionState{
 		Mission:       mission,

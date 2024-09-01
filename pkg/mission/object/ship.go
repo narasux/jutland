@@ -86,6 +86,8 @@ type BattleShip struct {
 	Type string `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
+	// 描述
+	Description []string `json:"description"`
 
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`
@@ -337,6 +339,33 @@ func NewShip(
 	// 战舰默认不编组
 	s.GroupID = GroupIDNone
 	return &s
+}
+
+// GetShipDisplayName 获取战舰展示用名称
+func GetShipDisplayName(name string) string {
+	ship, ok := shipMap[name]
+	if !ok {
+		return name
+	}
+	return ship.DisplayName
+}
+
+// GetShipCost 获取战舰成本
+func GetShipCost(name string) (fundsCost int64, timeCost int64) {
+	ship, ok := shipMap[name]
+	if !ok {
+		return 0, 0
+	}
+	return ship.FundsCost, ship.TimeCost
+}
+
+// GetShipDesc 获取战舰描述
+func GetShipDesc(name string) []string {
+	ship, ok := shipMap[name]
+	if !ok {
+		return []string{}
+	}
+	return ship.Description
 }
 
 // ShipUidGenerator 战舰 Uid 生成器

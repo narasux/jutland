@@ -6,13 +6,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/narasux/jutland/pkg/mission/hacker/cheat"
-
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/mission/hacker/cheat"
 	"github.com/narasux/jutland/pkg/mission/layout"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"

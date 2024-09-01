@@ -320,6 +320,11 @@ func (m *MissionManager) updateMissionStatus() {
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.MissionStatus = state.MissionRunning
 		}
+	case state.MissionInBuilding:
+		// 退出建筑物交互模式
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionRunning
+		}
 	default:
 		m.state.MissionStatus = state.MissionRunning
 	}

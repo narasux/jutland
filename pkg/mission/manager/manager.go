@@ -61,6 +61,8 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateMissionShips()
 	case state.MissionInTerminal:
 		m.updateTerminal()
+	case state.MissionInBuilding:
+		m.updateBuildings()
 	}
 	m.updateMissionStatus()
 
