@@ -22,35 +22,6 @@ func (m *MissionManager) updateGameOptions() {
 	if inpututil.IsKeyJustPressed(ebiten.KeyN) {
 		m.state.GameOpts.DisplayDamageNumber = !m.state.GameOpts.DisplayDamageNumber
 	}
-
-	// 按下 m 键，切换地图展示模式
-	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
-		m.state.MissionStatus = lo.Ternary(
-			m.state.MissionStatus == state.MissionRunning,
-			state.MissionInMap,
-			state.MissionRunning,
-		)
-	}
-
-	// 按下 b 键，开启查看增援点模式
-	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
-		m.state.MissionStatus = lo.Ternary(
-			m.state.MissionStatus == state.MissionRunning,
-			state.MissionInBuilding,
-			state.MissionRunning,
-		)
-	}
-
-	// 按下 LeftCtrl，LeftShift 的同时按下 ` 键开启终端
-	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
-		ebiten.IsKeyPressed(ebiten.KeyShiftLeft) &&
-		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
-		m.state.MissionStatus = lo.Ternary(
-			m.state.MissionStatus == state.MissionRunning,
-			state.MissionInTerminal,
-			state.MissionRunning,
-		)
-	}
 }
 
 // 更新指令集合

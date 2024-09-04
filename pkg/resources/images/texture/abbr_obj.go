@@ -18,6 +18,8 @@ var (
 	AbbrShipHeavy *ebiten.Image
 	// AbbrReinforcePoint 增援点
 	AbbrReinforcePoint *ebiten.Image
+	// AbbrSelectedReinforcePoint 选中的增援点
+	AbbrSelectedReinforcePoint *ebiten.Image
 
 	// AbbrEnemyLight 轻型战舰缩略图
 	AbbrEnemyLight *ebiten.Image
@@ -51,6 +53,11 @@ func init() {
 
 	imgPath = "/textures/abbr_obj/reinforce_point.png"
 	if AbbrReinforcePoint, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/textures/abbr_obj/selected_reinforce_point.png"
+	if AbbrSelectedReinforcePoint, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

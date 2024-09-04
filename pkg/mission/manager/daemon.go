@@ -296,6 +296,35 @@ func (m *MissionManager) updateMissionStatus() {
 		return curStatus
 	}
 
+	// 按下 m 键，切换地图展示模式
+	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
+		m.state.MissionStatus = lo.Ternary(
+			m.state.MissionStatus != state.MissionInMap,
+			state.MissionInMap,
+			state.MissionRunning,
+		)
+	}
+
+	// 按下 b 键，开启查看增援点模式
+	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
+		m.state.MissionStatus = lo.Ternary(
+			m.state.MissionStatus != state.MissionInBuilding,
+			state.MissionInBuilding,
+			state.MissionRunning,
+		)
+	}
+
+	// 按下 LeftCtrl，LeftShift 的同时按下 ` 键开启终端
+	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
+		ebiten.IsKeyPressed(ebiten.KeyShiftLeft) &&
+		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
+		m.state.MissionStatus = lo.Ternary(
+			m.state.MissionStatus != state.MissionInTerminal,
+			state.MissionInTerminal,
+			state.MissionRunning,
+		)
+	}
+
 	switch m.state.MissionStatus {
 	case state.MissionRunning:
 		// 暂停游戏

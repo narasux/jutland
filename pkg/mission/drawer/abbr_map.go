@@ -49,7 +49,7 @@ func (d *Drawer) drawAbbrMapAndBackground(screen *ebiten.Image, ms *state.Missio
 	opts.GeoM.Translate(xOffset, 0)
 	screen.DrawImage(d.abbrMap, opts)
 	// 缩略地图添加银色边框
-	strokeWidth := float32(2)
+	strokeWidth := float32(4)
 	vector.StrokeRect(
 		screen,
 		float32(xOffset),
