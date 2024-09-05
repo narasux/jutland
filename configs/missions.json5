@@ -29,6 +29,17 @@
         ],
       },
       {
+        "pos": [1, 65],
+        "rotation": 90,
+        "belongPlayer": "HA",
+        "maxOncomingShip": 5,
+        "providedShipNames": [
+          "atlanta",
+          "new_orleans",
+          "porter",
+        ],
+      },
+      {
         "pos": [125, 20],
         "rotation": 270,
         "belongPlayer": "CA",

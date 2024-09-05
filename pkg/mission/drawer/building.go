@@ -2,7 +2,6 @@ package drawer
 
 import (
 	"fmt"
-	"slices"
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -116,8 +115,8 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 		opts = d.genDefaultDrawImageOptions()
 		setOptsCenterRotation(opts, img, rp.Rotation)
 
-		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
-		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(exceptedWidth)
+		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(exceptedHeight)
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex+yOffset)
 		screen.DrawImage(img, opts)
@@ -154,11 +153,6 @@ func (d *Drawer) drawShipDesignGraph(screen *ebiten.Image, ms *state.MissionStat
 }
 
 func (d *Drawer) drawProvidedShips(screen *ebiten.Image, ms *state.MissionState) {
-	// FIXME 移除这段测试逻辑
-	keys := lo.Keys(ms.ReinforcePoints)
-	slices.Sort(keys)
-	ms.SelectedReinforcePointUid = keys[0]
-
 	rp, ok := ms.ReinforcePoints[ms.SelectedReinforcePointUid]
 	if !ok {
 		return

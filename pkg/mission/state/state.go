@@ -8,7 +8,7 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/layout"
-	md "github.com/narasux/jutland/pkg/mission/metadata"
+	"github.com/narasux/jutland/pkg/mission/metadata"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 )
 
@@ -37,7 +37,7 @@ type MissionState struct {
 	// 任务关卡状态
 	MissionStatus MissionStatus
 	// 任务关卡元数据
-	MissionMD md.MissionMetadata
+	MissionMD metadata.MissionMetadata
 	// 屏幕布局
 	Layout layout.ScreenLayout
 	// 相机
@@ -115,7 +115,7 @@ func (s *MissionState) Fleet(player faction.Player) Fleet {
 
 // NewMissionState ...
 func NewMissionState(mission string) *MissionState {
-	missionMD := md.Get(mission)
+	missionMD := metadata.Get(mission)
 	misLayout := layout.NewScreenLayout()
 	// 初始化战舰 Uid 生成器
 	shipUidGenerators := map[faction.Player]*obj.ShipUidGenerator{
@@ -124,27 +124,31 @@ func NewMissionState(mission string) *MissionState {
 	}
 	// 初始化战舰
 	ships := map[string]*obj.BattleShip{}
-	for _, shipMD := range missionMD.InitShips {
+	for _, md := range missionMD.InitShips {
 		ship := obj.NewShip(
-			shipUidGenerators[shipMD.BelongPlayer],
-			shipMD.ShipName,
-			shipMD.Pos,
-			shipMD.Rotation,
-			shipMD.BelongPlayer,
+			shipUidGenerators[md.BelongPlayer],
+			md.ShipName,
+			md.Pos,
+			md.Rotation,
+			md.BelongPlayer,
 		)
 		ships[ship.Uid] = ship
 	}
 	// 初始化增援点
+	selectedReinforcePointUid := ""
 	reinforcePoints := map[string]*obj.ReinforcePoint{}
-	for _, rpMD := range missionMD.InitReinforcePoints {
-		rfp := obj.NewReinforcePoint(
-			rpMD.Pos,
-			rpMD.Rotation,
-			rpMD.BelongPlayer,
-			rpMD.MaxOncomingShip,
-			rpMD.ProvidedShipNames,
+	for _, md := range missionMD.InitReinforcePoints {
+		rp := obj.NewReinforcePoint(
+			md.Pos,
+			md.Rotation,
+			md.BelongPlayer,
+			md.MaxOncomingShip,
+			md.ProvidedShipNames,
 		)
-		reinforcePoints[rfp.Uid] = rfp
+		reinforcePoints[rp.Uid] = rp
+		if rp.BelongPlayer == faction.HumanAlpha {
+			selectedReinforcePointUid = rp.Uid
+		}
 	}
 	return &MissionState{
 		Mission:       mission,
@@ -170,16 +174,17 @@ func NewMissionState(mission string) *MissionState {
 			// 默认展示伤害数值
 			DisplayDamageNumber: true,
 		},
-		IsAreaSelecting:   false,
-		IsGrouping:        false,
-		ReinforcePoints:   reinforcePoints,
-		ShipUidGenerators: shipUidGenerators,
-		Ships:             ships,
-		SelectedShips:     []string{},
-		SelectedGroupID:   obj.GroupIDNone,
-		DestroyedShips:    []*obj.BattleShip{},
-		Trails:            []*obj.Trail{},
-		ForwardingBullets: []*obj.Bullet{},
-		GameMarks:         map[obj.MarkID]*obj.Mark{},
+		IsAreaSelecting:           false,
+		IsGrouping:                false,
+		SelectedReinforcePointUid: selectedReinforcePointUid,
+		ReinforcePoints:           reinforcePoints,
+		ShipUidGenerators:         shipUidGenerators,
+		Ships:                     ships,
+		SelectedShips:             []string{},
+		SelectedGroupID:           obj.GroupIDNone,
+		DestroyedShips:            []*obj.BattleShip{},
+		Trails:                    []*obj.Trail{},
+		ForwardingBullets:         []*obj.Bullet{},
+		GameMarks:                 map[obj.MarkID]*obj.Mark{},
 	}
 }

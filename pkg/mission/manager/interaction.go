@@ -1,6 +1,8 @@
 package manager
 
 import (
+	"slices"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
@@ -220,6 +222,48 @@ func (m *MissionManager) updateTerminal() {
 }
 
 // 更新被选中的待增援战舰
-func (m *MissionManager) updateSelectedSummonShip() {
-	// FIXME 实现逻辑
+func (m *MissionManager) updateReinforcePoints() {
+	if m.state.MissionStatus != state.MissionInBuilding {
+		return
+	}
+
+	reinforcePointUIDs := []string{}
+	for uid, rp := range m.state.ReinforcePoints {
+		if rp.BelongPlayer == m.state.CurPlayer {
+			reinforcePointUIDs = append(reinforcePointUIDs, uid)
+		}
+	}
+	slices.Sort(reinforcePointUIDs)
+	rpIndex := lo.IndexOf(reinforcePointUIDs, m.state.SelectedReinforcePointUid)
+
+	// 上下方向键选择增援点
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
+		rpIndex++
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
+		rpIndex--
+	}
+	uidCount := len(reinforcePointUIDs)
+	rpIndex = (rpIndex + uidCount) % uidCount
+
+	rpUID := reinforcePointUIDs[rpIndex]
+	m.state.SelectedReinforcePointUid = rpUID
+
+	rp := m.state.ReinforcePoints[rpUID]
+
+	// 左右方向键选择战舰
+	shipIndex := rp.CurSelectedShipIndex
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) {
+		shipIndex++
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) {
+		shipIndex--
+	}
+	shipCount := len(rp.ProvidedShipNames)
+	shipIndex = (shipIndex + shipCount) % shipCount
+
+	rp.CurSelectedShipIndex = shipIndex
+
+	// 确定增援的战舰
+	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+		rp.Summon(rp.ProvidedShipNames[shipIndex])
+	}
 }
