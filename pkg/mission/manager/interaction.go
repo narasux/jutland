@@ -253,9 +253,9 @@ func (m *MissionManager) updateReinforcePoints() {
 	// 左右方向键选择战舰
 	shipIndex := rp.CurSelectedShipIndex
 	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) {
-		shipIndex++
-	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) {
 		shipIndex--
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) {
+		shipIndex++
 	}
 	shipCount := len(rp.ProvidedShipNames)
 	shipIndex = (shipIndex + shipCount) % shipCount
@@ -265,5 +265,10 @@ func (m *MissionManager) updateReinforcePoints() {
 	// 确定增援的战舰
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		rp.Summon(rp.ProvidedShipNames[shipIndex])
+	}
+
+	// 退格键取消最后增援的战舰
+	if inpututil.IsKeyJustPressed(ebiten.KeyBackspace) {
+		rp.OncomingShips = rp.OncomingShips[:len(rp.OncomingShips)-1]
 	}
 }

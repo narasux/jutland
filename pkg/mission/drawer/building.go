@@ -14,6 +14,7 @@ import (
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 	buildingImg "github.com/narasux/jutland/pkg/resources/images/building"
+	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
@@ -57,8 +58,9 @@ func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionSt
 	}
 	d.drawBuildingBackground(screen, ms)
 	d.drawAbbrMapInRPInterface(screen, ms)
-	d.drawShipDesignGraph(screen, ms)
-	d.drawProvidedShips(screen, ms)
+	d.drawShipDesignGraphBackground(screen, ms)
+	d.drawSelectedProvidedShips(screen, ms)
+	d.drawSummonOperationTips(screen, ms)
 }
 
 func (d *Drawer) drawBuildingBackground(screen *ebiten.Image, ms *state.MissionState) {
@@ -123,7 +125,7 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 	}
 }
 
-func (d *Drawer) drawShipDesignGraph(screen *ebiten.Image, ms *state.MissionState) {
+func (d *Drawer) drawShipDesignGraphBackground(screen *ebiten.Image, ms *state.MissionState) {
 	designGraphImg := bgImg.MissionWindowParchment
 	designGraphImgWidth, designGraphImgHeight := designGraphImg.Bounds().Dx(), designGraphImg.Bounds().Dy()
 	exceptedWidth, exceptedHeight := float64(ms.Layout.Width)/5*3, float64(ms.Layout.Height)/5*3
@@ -152,14 +154,21 @@ func (d *Drawer) drawShipDesignGraph(screen *ebiten.Image, ms *state.MissionStat
 	)
 }
 
-func (d *Drawer) drawProvidedShips(screen *ebiten.Image, ms *state.MissionState) {
+func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.MissionState) {
 	rp, ok := ms.ReinforcePoints[ms.SelectedReinforcePointUid]
 	if !ok {
 		return
 	}
 
 	selectedShipName := rp.ProvidedShipNames[rp.CurSelectedShipIndex]
-	xOffset, yOffset := float64(75), float64(ms.Layout.Height)/5*3+120
+
+	img := shipImg.Get(selectedShipName)
+	opts := d.genDefaultDrawImageOptions()
+	setOptsCenterRotation(opts, img, 90)
+	opts.GeoM.Translate(float64(ms.Layout.Width/3), float64(ms.Layout.Height/3))
+	screen.DrawImage(img, opts)
+
+	xOffset, yOffset := float64(75), float64(ms.Layout.Height)/3*2
 
 	text := fmt.Sprintf(
 		"战舰：%s (%d/%d)",
@@ -169,12 +178,48 @@ func (d *Drawer) drawProvidedShips(screen *ebiten.Image, ms *state.MissionState)
 	)
 	d.drawText(screen, text, xOffset, yOffset, 40, font.Hang, colorx.White)
 
+	yOffset += 80
+	for idx, line := range object.GetShipDesc(selectedShipName) {
+		d.drawText(screen, line, xOffset, yOffset+float64(idx)*60, 24, font.Hang, colorx.White)
+	}
+
+	xOffset, yOffset = float64(ms.Layout.Width)/3+float64(75), float64(ms.Layout.Height)/3*2
 	text = fmt.Sprintf("当前资金：%d", ms.CurFunds)
-	d.drawText(screen, text, xOffset+1000, yOffset, 40, font.Hang, colorx.White)
+	d.drawText(screen, text, xOffset, yOffset, 40, font.Hang, colorx.White)
 
 	yOffset += 80
-	for _, line := range object.GetShipDesc(selectedShipName) {
-		d.drawText(screen, line, xOffset, yOffset, 24, font.Hang, colorx.White)
-		yOffset += 60
+	for idx, ship := range rp.OncomingShips {
+		text = object.GetShipDisplayName(ship.Name)
+		if idx == 0 {
+			text = fmt.Sprintf("%s %.0f%%", text, ship.Progress)
+		}
+		d.drawText(screen, text, xOffset, yOffset+float64(idx)*60, 24, font.Hang, colorx.White)
 	}
+}
+
+func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ms *state.MissionState) {
+	x, y := float64(ms.Layout.Width)/5*4, float64(ms.Layout.Height)/4*3
+
+	// 方向键 + 提示
+	drawArrowKey := func(xOffset, yOffset, rotation float64) {
+		opts := d.genDefaultDrawImageOptions()
+		setOptsCenterRotation(opts, textureImg.ArrowKey, rotation)
+		opts.GeoM.Translate(x+xOffset, y+yOffset)
+		screen.DrawImage(textureImg.ArrowKey, opts)
+	}
+	drawArrowKey(0, 0, 0)
+	drawArrowKey(90, 90, 90)
+	drawArrowKey(0, 90, 180)
+	drawArrowKey(-90, 90, 270)
+
+	d.drawText(screen, "选择", x+15, y+200, 24, font.Hang, colorx.White)
+
+	opts := d.genDefaultDrawImageOptions()
+	opts.GeoM.Translate(x+220, y+20)
+	screen.DrawImage(textureImg.BackspaceKey, opts)
+
+	opts.GeoM.Translate(-10, 60)
+	screen.DrawImage(textureImg.EnterKey, opts)
+
+	d.drawText(screen, "确定 / 取消", x+200, y+200, 24, font.Hang, colorx.White)
 }

@@ -296,6 +296,40 @@ func (m *MissionManager) updateMissionStatus() {
 		return curStatus
 	}
 
+	switch m.state.MissionStatus {
+	case state.MissionRunning:
+		// 暂停游戏
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionPaused
+		}
+		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
+	case state.MissionPaused:
+		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
+			m.state.MissionStatus = state.MissionFailed
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+			m.state.MissionStatus = state.MissionRunning
+		}
+	case state.MissionInMap:
+		// 退出全屏地图模式
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionRunning
+		}
+		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
+	case state.MissionInTerminal:
+		// 退出终端模式
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionRunning
+		}
+		return
+	case state.MissionInBuilding:
+		// 退出建筑物交互模式
+		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			m.state.MissionStatus = state.MissionRunning
+		}
+	default:
+		m.state.MissionStatus = state.MissionRunning
+	}
+
 	// 按下 m 键，切换地图展示模式
 	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
 		m.state.MissionStatus = lo.Ternary(
@@ -323,38 +357,5 @@ func (m *MissionManager) updateMissionStatus() {
 			state.MissionInTerminal,
 			state.MissionRunning,
 		)
-	}
-
-	switch m.state.MissionStatus {
-	case state.MissionRunning:
-		// 暂停游戏
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionPaused
-		}
-		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
-	case state.MissionPaused:
-		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
-			m.state.MissionStatus = state.MissionFailed
-		} else if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
-			m.state.MissionStatus = state.MissionRunning
-		}
-	case state.MissionInMap:
-		// 退出全屏地图模式
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionRunning
-		}
-		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
-	case state.MissionInTerminal:
-		// 退出终端模式
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionRunning
-		}
-	case state.MissionInBuilding:
-		// 退出建筑物交互模式
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionRunning
-		}
-	default:
-		m.state.MissionStatus = state.MissionRunning
 	}
 }

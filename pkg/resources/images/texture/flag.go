@@ -17,6 +17,13 @@ var (
 	// ArrowWhite 箭头图片（白）
 	ArrowWhite *ebiten.Image
 
+	// ArrowKey 方向键
+	ArrowKey *ebiten.Image
+	// EnterKey 回车键
+	EnterKey *ebiten.Image
+	// BackspaceKey 退格键
+	BackspaceKey *ebiten.Image
+
 	// MainGunEnabled 主炮启用图片
 	MainGunEnabled *ebiten.Image
 	// MainGunDisabled 主炮禁用图片
@@ -46,6 +53,18 @@ func init() {
 
 	imgPath := "/textures/flag/arrow_white.png"
 	if ArrowWhite, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+	imgPath = "/textures/flag/arrow_key.png"
+	if ArrowKey, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+	imgPath = "/textures/flag/enter_key.png"
+	if EnterKey, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+	imgPath = "/textures/flag/backspace_key.png"
+	if BackspaceKey, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
