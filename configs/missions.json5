@@ -1,7 +1,7 @@
 [
   {
     "name": "default",
-    "initFunds": 100000,
+    "initFunds": 10000,
     "initCameraPos": [35, 28],
     "mapName": "darwin",
     "maxShipCount": 30,
@@ -15,9 +15,9 @@
           "duck",
           "lowa",
           "montana",
-          "yamato_plus",
+          "yamato_beta",
           "kongo",
-          "alaska_plus",
+          "alaska_beta",
           "atlanta",
           "long_beach",
           "new_orleans",
@@ -71,7 +71,7 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "yamato_plus",
+        "name": "yamato_beta",
         "pos": [38, 36],
         "rotation": 90,
         "belongPlayer": "HA"
@@ -83,7 +83,7 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "alaska_plus",
+        "name": "alaska_beta",
         "pos": [38, 38],
         "rotation": 90,
         "belongPlayer": "HA"
@@ -155,7 +155,7 @@
         "belongPlayer": "CA"
       },
       {
-        "name": "yamato_plus",
+        "name": "yamato_beta",
         "pos": [75, 58],
         "rotation": 0,
         "belongPlayer": "CA"
@@ -203,7 +203,7 @@
         "belongPlayer": "CA"
       },
       {
-        "name": "yamato_plus",
+        "name": "yamato_beta",
         "pos": [105, 46],
         "rotation": 270,
         "belongPlayer": "CA"

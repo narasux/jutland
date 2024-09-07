@@ -63,7 +63,7 @@
     "bulletSpeed": 800
   },
   // 美国海军 US/305/50/MK8 舰炮
-  // alaska_plus（阿拉斯加-改）
+  // alaska_beta（阿拉斯加 II 型）
   {
     "name": "US/305/50/MK8",
     "bulletName": "US/GB/305/1942",
@@ -120,7 +120,7 @@
     "bulletSpeed": 800
   },
   // 日本海军 三联装 46.0 厘米 45 倍口径舰炮
-  // yamato_plus（大和-改）
+  // yamato_beta（大和 II 型）
   {
     "name": "JP/460/45",
     "bulletName": "JP/GB/460/1942",
@@ -153,7 +153,7 @@
     "bulletSpeed": 880
   },
   // 日本海军 双联装 15.5 厘米 60 倍口径舰炮
-  // yamato_plus（大和-改）
+  // yamato_beta（大和 II 型）
   {
     "name": "JP/155/60",
     "bulletName": "JP/GB/155/1934",
@@ -197,7 +197,7 @@
     "bulletSpeed": 920
   },
   // 日本海军 双联装 12.7 厘米 40 倍口径高平两用炮
-  // yamato_plus（大和-改）
+  // yamato_beta（大和 II 型）
   {
     "name": "JP/127/40/DP",
     "bulletName": "JP/GB/127/1929",

@@ -17,8 +17,8 @@
     "timeCost": 5,
     "description": [
       "特殊战舰，只能通过秘籍获取，感受鸭力吧！",
-      "主炮：单装 1024mm 电磁炮 * 1，8 联装 406mm * 1",
-      "副炮：15 联装 155mm * 1，鱼雷: 20 联装 610mm * 1",
+      "主炮：单装 1024mm 电磁炮，八联装 406mm",
+      "副炮：十五联装 155mm，鱼雷: 二十联装 610mm",
     ],
     "weapon": {
       "mainGuns": [
@@ -73,6 +73,9 @@
     "width": 36,
     "fundsCost": 0,
     "timeCost": 5,
+    "description": [
+      "水滴！攻击物是水滴！",
+    ],
     "weapon": {
       "mainGuns": [
         // 前半球朝向但射程极短的炮模拟撞击
@@ -104,6 +107,11 @@
     "width": 33,
     "fundsCost": 580,
     "timeCost": 60,
+    "description": [
+      "战列舰（美）",
+      "主炮：3 座三联装 406mm/50",
+      "副炮：10 座双联装 155mm/38",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -218,6 +226,11 @@
     "width": 37,
     "fundsCost": 705,
     "timeCost": 65,
+    "description": [
+      "战列舰（美）",
+      "主炮：4 座三联装 406mm/50",
+      "副炮：10 座双联装 155mm/54",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -340,6 +353,11 @@
     "width": 31,
     "fundsCost": 380,
     "timeCost": 48,
+    "description": [
+      "战列舰（日）",
+      "主炮：4 座双联装 356mm/45",
+      "副炮：14 座单装 152mm/50",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -475,8 +493,8 @@
     }
   },
   {
-    "name": "yamato_plus",
-    "displayName": "大和（改）",
+    "name": "yamato_beta",
+    "displayName": "大和 II 型",
     "type": "battleship",
     "typeAbbr": "BB",
     "totalHP": 72800,
@@ -489,6 +507,12 @@
     "width": 39,
     "fundsCost": 750,
     "timeCost": 75,
+    "description": [
+      "战列舰（日）",
+      "主炮：3 座双联装 460mm/45",
+      "副炮：6 座双联装 155mm/60",
+      "高平炮：10 座双联装 127mm/40",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -647,6 +671,11 @@
     "width": 16,
     "fundsCost": 70,
     "timeCost": 8,
+    "description": [
+      "轻巡洋舰（美）",
+      "主炮：8 座双联装 127mm/38",
+      "鱼雷：2 座四联装直航 533mm",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -726,8 +755,8 @@
     },
   },
   {
-    "name": "alaska_plus",
-    "displayName": "阿拉斯加（改）",
+    "name": "alaska_beta",
+    "displayName": "阿拉斯加 II 型",
     "type": "cruiser",
     "typeAbbr": "CB",
     "totalHP": 39800,
@@ -740,6 +769,11 @@
     "width": 28,
     "fundsCost": 420,
     "timeCost": 40,
+    "description": [
+      "大型巡洋舰（美）",
+      "主炮：4 座三联装 305mm/50",
+      "副炮：6 座双联装 127mm/38",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -833,6 +867,10 @@
     "width": 22,
     "fundsCost": 150,
     "timeCost": 12,
+    "description": [
+      "导弹巡洋舰（美）",
+      "主炮：2 座单装 127mm/38",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -869,6 +907,11 @@
     "width": 19,
     "fundsCost": 120,
     "timeCost": 12,
+    "description": [
+      "重巡洋舰（美）",
+      "主炮：3 座三联装 203mm/55",
+      "副炮：8 座单联装 127mm/25",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -970,6 +1013,12 @@
     "width": 21,
     "fundsCost": 130,
     "timeCost": 13,
+    "description": [
+      "重巡洋舰（日）",
+      "主炮：5 座双联装 203mm/50",
+      "高平炮：4 座双联装 127mm/40",
+      "鱼雷：4 座四联装直航 610mm",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1086,6 +1135,11 @@
     "width": 14,
     "fundsCost": 80,
     "timeCost": 15,
+    "description": [
+      "雷击巡洋舰（日）",
+      "主炮：4 座单装 140mm/50",
+      "鱼雷：10 座四联装直航 610mm",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1209,6 +1263,11 @@
     "width": 11,
     "fundsCost": 16,
     "timeCost": 6,
+    "description": [
+      "驱逐舰（美）",
+      "主炮：4 座双联装 127mm/38",
+      "鱼雷：2 座四联装直航 533mm",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1275,6 +1334,11 @@
     "width": 11,
     "fundsCost": 26,
     "timeCost": 8,
+    "description": [
+      "驱逐舰（日）",
+      "主炮：3 座双联装 127mm/50",
+      "鱼雷：2 座四联装直航 610mm",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
@@ -1333,6 +1397,11 @@
     "width": 11,
     "fundsCost": 26,
     "timeCost": 8,
+    "description": [
+      "驱逐舰（日）",
+      "主炮：3 座双联装 127mm/50",
+      "鱼雷：2 座四联装直航 610mm",
+    ],
     "weapon": {
       "mainGuns": [
         // 前主炮 A
