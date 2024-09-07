@@ -31,7 +31,7 @@ const (
 type MapData []string
 
 func (m *MapData) Get(x, y int) rune {
-	if y < 0 || y >= len(*m) {
+	if x < 0 || x >= len(*m) || y < 0 || y >= len(*m) {
 		return ' '
 	}
 	return rune((*m)[y][x])

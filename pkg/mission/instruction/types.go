@@ -9,6 +9,7 @@ const (
 	NameEnableWeapon  = "EnableWeapon"
 	NameDisableWeapon = "DisableWeapon"
 	NameShipMove      = "ShipMove"
+	NameShipSummon    = "ShipSummon"
 )
 
 // Instruction 指令

@@ -1,8 +1,10 @@
 package manager
 
 import (
+	"fmt"
 	"log"
 	"math"
+	"math/rand"
 	"slices"
 	"strconv"
 
@@ -12,6 +14,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
+	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -54,6 +57,11 @@ func (m *MissionManager) updateBuildings() {
 		); ship != nil {
 			m.state.Ships[ship.Uid] = ship
 			m.state.CurFunds -= ship.FundsCost
+			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
+			x, y := rand.Intn(7)-3, rand.Intn(7)-3
+			m.instructions[fmt.Sprintf("%s-%s", ship.Uid, instr.NameShipMove)] = instr.NewShipMove(
+				ship.Uid, obj.NewMapPos(rp.RallyPos.MX+x, rp.RallyPos.MY+y),
+			)
 		}
 	}
 }

@@ -34,6 +34,7 @@ type rawInitShipMetadata struct {
 type rawInitReinforcePointMetadata struct {
 	Pos               [2]int   `json:"pos"`
 	Rotation          int      `json:"rotation"`
+	RallyPos          [2]int   `json:"rallyPos"`
 	BelongPlayer      string   `json:"belongPlayer"`
 	MaxOncomingShip   int      `json:"maxOncomingShip"`
 	ProvidedShipNames []string `json:"providedShipNames"`
@@ -72,6 +73,7 @@ func init() {
 			initReinforcePoints = append(initReinforcePoints, InitReinforcePointMetadata{
 				Pos:               obj.NewMapPos(rpMD.Pos[0], rpMD.Pos[1]),
 				Rotation:          float64(rpMD.Rotation),
+				RallyPos:          obj.NewMapPos(rpMD.RallyPos[0], rpMD.RallyPos[1]),
 				BelongPlayer:      faction.Player(rpMD.BelongPlayer),
 				MaxOncomingShip:   rpMD.MaxOncomingShip,
 				ProvidedShipNames: rpMD.ProvidedShipNames,

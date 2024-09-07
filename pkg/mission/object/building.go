@@ -35,6 +35,8 @@ type ReinforcePoint struct {
 	Uid      string
 	Pos      MapPos
 	Rotation float64
+	// 集结点 FIXME 支持自定义集结点
+	RallyPos MapPos
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 	// 当前被选中的战舰索引
@@ -103,6 +105,7 @@ func (p *ReinforcePoint) Progress() int {
 func NewReinforcePoint(
 	pos MapPos,
 	rotation float64,
+	rallyPos MapPos,
 	belongPlayer faction.Player,
 	maxOncomingShip int,
 	providedShipNames []string,
@@ -111,6 +114,7 @@ func NewReinforcePoint(
 		Uid:               uuid.NewString(),
 		Pos:               pos,
 		Rotation:          rotation,
+		RallyPos:          rallyPos,
 		BelongPlayer:      belongPlayer,
 		MaxOncomingShip:   maxOncomingShip,
 		ProvidedShipNames: providedShipNames,

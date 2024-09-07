@@ -141,6 +141,7 @@ func NewMissionState(mission string) *MissionState {
 		rp := obj.NewReinforcePoint(
 			md.Pos,
 			md.Rotation,
+			md.RallyPos,
 			md.BelongPlayer,
 			md.MaxOncomingShip,
 			md.ProvidedShipNames,

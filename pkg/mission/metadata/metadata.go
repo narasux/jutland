@@ -34,6 +34,7 @@ type InitShipMetadata struct {
 type InitReinforcePointMetadata struct {
 	Pos               obj.MapPos
 	Rotation          float64
+	RallyPos          obj.MapPos
 	BelongPlayer      faction.Player
 	MaxOncomingShip   int
 	ProvidedShipNames []string

@@ -52,5 +52,15 @@ func (h *ComputerDecisionHandler) Handle(misState *state.MissionState) map[strin
 		}
 	}
 
+	// TODO 移除 测试 AI 指令：扫描所有增援点，只要可用，就随机召唤增援
+	for _, rp := range misState.ReinforcePoints {
+		if rp.BelongPlayer != h.player {
+			continue
+		}
+		if len(rp.OncomingShips) < rp.MaxOncomingShip {
+			instructions[fmt.Sprintf("%s-%s", rp.Uid, instr.NameShipSummon)] = instr.NewShipSummon(rp.Uid, "")
+		}
+	}
+
 	return instructions
 }

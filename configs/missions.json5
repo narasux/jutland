@@ -9,6 +9,7 @@
       {
         "pos": [1, 20],
         "rotation": 90,
+        "rallyPos": [30, 35],
         "belongPlayer": "HA",
         "maxOncomingShip": 5,
         "providedShipNames": [
@@ -31,6 +32,7 @@
       {
         "pos": [1, 65],
         "rotation": 90,
+        "rallyPos": [30, 50],
         "belongPlayer": "HA",
         "maxOncomingShip": 5,
         "providedShipNames": [
@@ -42,12 +44,25 @@
       {
         "pos": [125, 20],
         "rotation": 270,
+        "rallyPos": [90, 50],
         "belongPlayer": "CA",
         "maxOncomingShip": 5,
         "providedShipNames": [
           "kongo",
           "mogami",
           "asashio",
+        ],
+      },
+      {
+        "pos": [125, 90],
+        "rotation": 270,
+        "rallyPos": [100, 80],
+        "belongPlayer": "CA",
+        "maxOncomingShip": 5,
+        "providedShipNames": [
+          "mogami",
+          "asashio",
+          "yugumo",
         ],
       }
     ],
