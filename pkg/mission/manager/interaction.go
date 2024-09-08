@@ -33,8 +33,8 @@ func (m *MissionManager) updateInstructions() {
 		return !instruction.IsExecuted()
 	})
 	// 逐个读取各个用户的输入，更新指令
-	m.instructions = lo.Assign(m.instructions, m.playerAlphaHandler.Handle(m.state))
-	m.instructions = lo.Assign(m.instructions, m.playerBetaHandler.Handle(m.state))
+	m.instructions = lo.Assign(m.instructions, m.playerAlphaHandler.Handle(m.instructions, m.state))
+	m.instructions = lo.Assign(m.instructions, m.playerBetaHandler.Handle(m.instructions, m.state))
 }
 
 // 计算下一帧相机位置

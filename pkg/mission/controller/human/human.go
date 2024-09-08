@@ -5,8 +5,8 @@ import (
 	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
-
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
+
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -30,7 +30,9 @@ var _ controller.InputHandler = (*HumanInputHandler)(nil)
 
 // Handle 处理用户输入，更新指令集
 // TODO 这个函数应该拆分一下，然后重复代码有点多，可以考虑复用一下
-func (h *HumanInputHandler) Handle(misState *state.MissionState) map[string]instr.Instruction {
+func (h *HumanInputHandler) Handle(
+	_ map[string]instr.Instruction, misState *state.MissionState,
+) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 
 	// 部分场景需要屏蔽用户输入

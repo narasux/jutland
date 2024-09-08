@@ -56,7 +56,9 @@ func (m *MissionManager) updateBuildings() {
 			lo.Ternary(rp.BelongPlayer == m.state.CurPlayer, m.state.CurFunds, 50000),
 		); ship != nil {
 			m.state.Ships[ship.Uid] = ship
-			m.state.CurFunds -= ship.FundsCost
+			if rp.BelongPlayer == m.state.CurPlayer {
+				m.state.CurFunds -= ship.FundsCost
+			}
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3
 			m.instructions[fmt.Sprintf("%s-%s", ship.Uid, instr.NameShipMove)] = instr.NewShipMove(

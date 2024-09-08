@@ -7,5 +7,5 @@ import (
 
 // 输入处理器
 type InputHandler interface {
-	Handle(misState *state.MissionState) map[string]instr.Instruction
+	Handle(curInstructions map[string]instr.Instruction, misState *state.MissionState) map[string]instr.Instruction
 }

@@ -56,7 +56,7 @@
       {
         "pos": [125, 90],
         "rotation": 270,
-        "rallyPos": [100, 80],
+        "rallyPos": [100, 60],
         "belongPlayer": "CA",
         "maxOncomingShip": 5,
         "providedShipNames": [

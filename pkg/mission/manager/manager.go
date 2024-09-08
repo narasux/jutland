@@ -59,11 +59,17 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateObjectTrails()
 		m.updateShotBullets()
 		m.updateMissionShips()
-	case state.MissionInTerminal:
-		m.updateTerminal()
 	case state.MissionInBuilding:
+		m.updateInstructions()
+		m.executeInstructions()
 		m.updateReinforcePoints()
 		m.updateBuildings()
+		m.updateWeaponFire()
+		m.updateObjectTrails()
+		m.updateShotBullets()
+		m.updateMissionShips()
+	case state.MissionInTerminal:
+		m.updateTerminal()
 	}
 	m.updateMissionStatus()
 
