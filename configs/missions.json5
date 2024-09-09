@@ -11,11 +11,12 @@
         "rotation": 90,
         "rallyPos": [30, 35],
         "belongPlayer": "HA",
-        "maxOncomingShip": 5,
+        "maxOncomingShip": 10,
         "providedShipNames": [
           "duck",
           "lowa",
           "montana",
+          "yamato",
           "yamato_beta",
           "kongo",
           "alaska_beta",
@@ -34,7 +35,7 @@
         "rotation": 90,
         "rallyPos": [30, 50],
         "belongPlayer": "HA",
-        "maxOncomingShip": 5,
+        "maxOncomingShip": 10,
         "providedShipNames": [
           "atlanta",
           "new_orleans",
@@ -86,31 +87,31 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "yamato_beta",
+        "name": "yamato",
         "pos": [38, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "kongo",
+        "name": "yamato_beta",
         "pos": [40, 37],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "alaska_beta",
+        "name": "kongo",
         "pos": [38, 38],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "atlanta",
+        "name": "alaska_beta",
         "pos": [40, 39],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "long_beach",
+        "name": "atlanta",
         "pos": [38, 40],
         "rotation": 90,
         "belongPlayer": "HA"

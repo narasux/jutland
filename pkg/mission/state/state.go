@@ -174,6 +174,8 @@ func NewMissionState(mission string) *MissionState {
 			FriendlyFire: false,
 			// 默认展示伤害数值
 			DisplayDamageNumber: true,
+			// 默认缩放 1 倍
+			Zoom: 1,
 		},
 		IsAreaSelecting:           false,
 		IsGrouping:                false,

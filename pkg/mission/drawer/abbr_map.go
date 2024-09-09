@@ -87,7 +87,7 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 			}
 
 			opts := d.genDefaultDrawImageOptions()
-			sImg := shipImg.Get(cls.Kind.Name)
+			sImg := shipImg.GetTop(cls.Kind.Name, ms.GameOpts.Zoom)
 			shipWidth, shipLength := sImg.Bounds().Dx(), sImg.Bounds().Dy()
 
 			setOptsCenterRotation(opts, sImg, rotation)

@@ -141,6 +141,17 @@
     "bulletSpread": 150,
     "bulletSpeed": 800
   },
+  // 日本海军 双联装 20.3 厘米 60 倍口径舰炮
+  // yamato_beta（大和 II 型）
+  {
+    "name": "JP/203/60",
+    "bulletName": "JP/GB/203/1937",
+    "bulletCount": 2,
+    "reloadTime": 8,
+    "range": 30,
+    "bulletSpread": 120,
+    "bulletSpeed": 920
+  },
   // 日本海军 双联装 20.3 厘米 50 倍口径舰炮
   // mogami（最上）
   {
@@ -152,12 +163,12 @@
     "bulletSpread": 120,
     "bulletSpeed": 880
   },
-  // 日本海军 双联装 15.5 厘米 60 倍口径舰炮
-  // yamato_beta（大和 II 型）
+  // 日本海军 三联装 15.5 厘米 60 倍口径舰炮
+  // yamato（大和）
   {
     "name": "JP/155/60",
     "bulletName": "JP/GB/155/1934",
-    "bulletCount": 2,
+    "bulletCount": 3,
     "reloadTime": 3.5,
     "range": 27,
     "bulletSpread": 100,

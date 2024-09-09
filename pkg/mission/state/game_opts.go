@@ -8,4 +8,6 @@ type GameOptions struct {
 	ForceDisplayState bool
 	// 展示伤害数值
 	DisplayDamageNumber bool
+	// 视野缩放倍数
+	Zoom int
 }

@@ -50,7 +50,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
-		sImg := shipImg.Get(s.Name)
+		sImg := shipImg.GetTop(s.Name, ms.GameOpts.Zoom)
 		opts := d.genDefaultDrawImageOptions()
 		setOptsCenterRotation(opts, sImg, s.CurRotation)
 		opts.GeoM.Translate(
@@ -158,7 +158,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 			continue
 		}
 
-		sImg := shipImg.Get(s.Name)
+		sImg := shipImg.GetTop(s.Name, ms.GameOpts.Zoom)
 		opts := d.genDefaultDrawImageOptions()
 		setOptsCenterRotation(opts, sImg, s.CurRotation)
 		opts.GeoM.Translate(

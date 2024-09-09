@@ -162,7 +162,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 
 	selectedShipName := rp.ProvidedShipNames[rp.CurSelectedShipIndex]
 
-	img := shipImg.Get(selectedShipName)
+	img := shipImg.GetTop(selectedShipName, ms.GameOpts.Zoom)
 	opts := d.genDefaultDrawImageOptions()
 	setOptsCenterRotation(opts, img, 90)
 	opts.GeoM.Translate(float64(ms.Layout.Width/3), float64(ms.Layout.Height/3))
@@ -192,6 +192,9 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 		text = object.GetShipDisplayName(ship.Name)
 		if idx == 0 {
 			text = fmt.Sprintf("%s %.0f%%", text, ship.Progress)
+		} else if idx%5 == 0 {
+			xOffset += 300
+			yOffset -= 5 * 60
 		}
 		d.drawText(screen, text, xOffset, yOffset+float64(idx)*60, 24, font.Hang, colorx.White)
 	}

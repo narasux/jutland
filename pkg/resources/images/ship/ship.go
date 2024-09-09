@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -19,8 +20,20 @@ func init() {
 	// TODO 航母，鱼雷艇待支持
 	shipTypes := []string{"battleship", "cruiser", "default", "destroyer"}
 
+	loadShipImages(topShipZoom4ImgMap, shipTypes, "top")
+	genZoomShipImages(topShipZoom4ImgMap, topShipZoom2ImgMap, 2)
+	genZoomShipImages(topShipZoom4ImgMap, topShipZoom1ImgMap, 4)
+
+	loadShipImages(sideShipZoom4ImgMap, shipTypes, "side")
+	genZoomShipImages(sideShipZoom4ImgMap, sideShipZoom2ImgMap, 2)
+	genZoomShipImages(sideShipZoom4ImgMap, sideShipZoom1ImgMap, 4)
+
+	log.Println("ship image resources loaded")
+}
+
+func loadShipImages(cache map[string]*ebiten.Image, shipTypes []string, direction string) {
 	for _, shipType := range shipTypes {
-		entries, err := os.ReadDir(filepath.Join(config.ImgResBaseDir, "ships", shipType))
+		entries, err := os.ReadDir(filepath.Join(config.ImgResBaseDir, "ships", direction, shipType))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -29,21 +42,61 @@ func init() {
 			if !strings.HasSuffix(entry.Name(), ".png") {
 				continue
 			}
-			imgPath := fmt.Sprintf("/ships/%s/%s", shipType, entry.Name())
+			imgPath := fmt.Sprintf("/ships/%s/%s/%s", direction, shipType, entry.Name())
 			shipImg, loadImgErr := loader.LoadImage(imgPath)
 			if loadImgErr != nil {
 				log.Fatalf("missing %s: %s", imgPath, loadImgErr)
 			}
-			ShipImgMap[strings.TrimSuffix(entry.Name(), ".png")] = shipImg
+			cache[strings.TrimSuffix(entry.Name(), ".png")] = shipImg
 		}
 	}
-
-	log.Println("ship image resources loaded")
 }
 
-var ShipImgMap = map[string]*ebiten.Image{}
+func genZoomShipImages(
+	source map[string]*ebiten.Image, target map[string]*ebiten.Image, arcZoom int,
+) {
+	for name, img := range source {
+		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+		opts.GeoM.Scale(1/float64(arcZoom), 1/float64(arcZoom))
 
-// Get 获取战舰图片
-func Get(name string) *ebiten.Image {
-	return ShipImgMap[name]
+		zoomImg := ebiten.NewImage(img.Bounds().Dx()/arcZoom, img.Bounds().Dy()/arcZoom)
+		zoomImg.DrawImage(img, opts)
+		target[name] = zoomImg
+	}
+}
+
+var (
+	topShipZoom4ImgMap = map[string]*ebiten.Image{}
+	topShipZoom2ImgMap = map[string]*ebiten.Image{}
+	topShipZoom1ImgMap = map[string]*ebiten.Image{}
+)
+
+var (
+	sideShipZoom4ImgMap = map[string]*ebiten.Image{}
+	sideShipZoom2ImgMap = map[string]*ebiten.Image{}
+	sideShipZoom1ImgMap = map[string]*ebiten.Image{}
+)
+
+// GetTop 获取战舰顶部图片
+func GetTop(name string, zoom int) *ebiten.Image {
+	// FIXME 移除该逻辑，目前只处理了战列舰的大尺寸素材
+	if !slices.Contains([]string{"lowa", "montana", "kongo", "yamato", "yamato_beta"}, name) {
+		return topShipZoom4ImgMap[name]
+	}
+	if zoom == 1 {
+		return topShipZoom1ImgMap[name]
+	} else if zoom == 2 {
+		return topShipZoom2ImgMap[name]
+	}
+	return topShipZoom4ImgMap[name]
+}
+
+// GetSide 获取战舰侧面图片
+func GetSide(name string, zoom int) *ebiten.Image {
+	if zoom == 1 {
+		return sideShipZoom1ImgMap[name]
+	} else if zoom == 2 {
+		return sideShipZoom2ImgMap[name]
+	}
+	return sideShipZoom4ImgMap[name]
 }
