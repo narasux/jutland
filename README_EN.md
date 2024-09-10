@@ -20,6 +20,7 @@
 - Press the <kbd>R</kbd> key. If any **secondary gun** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
 - Press the <kbd>T</kbd> key. If any **torpedo** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
 - Press the <kbd>D</kbd> key to forcefully display the status of all warships (HP, whether weapons are enabled, etc.).
+- Press the <kbd>B</kbd> key to view the reinforcement point information, consume funds and time, and summon warships to join the battlefield.
 - Press the <kbd>N</kbd> key to display damage values caused by ammunition hits (white/yellow/red: standard/triple/tenfold critical hits).
 - Press the <kbd>M</kbd> key to view the full thumbnail mode of the current level map (including both friendly and enemy warships).
 - Press the <kbd>ESC</kbd> key to pause the game. At this point, press <kbd>Q</kbd> to exit the game, or press <kbd>Enter</kbd> to continue the game.
@@ -27,6 +28,15 @@
 #### Full-screen Map Mode
 
 - Left-click on a location to move the camera center to that location (double-click to exit full-screen map mode).
+
+#### Hacker
+
+What to do if the computer is too powerful?
+
+1. <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`</kbd> to enter Terminal
+2. `help` to view cheats, input & <kbd>Enter</kbd> to teach TA how to behave
+
+Yes, this game has built-in plug-ins :D
 
 ## Development Guide
 
