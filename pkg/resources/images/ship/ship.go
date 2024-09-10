@@ -56,6 +56,11 @@ func genZoomShipImages(
 	source map[string]*ebiten.Image, target map[string]*ebiten.Image, arcZoom int,
 ) {
 	for name, img := range source {
+		// 小黄鸭 & 水滴比较特殊，不提供缩放，只有一个尺寸
+		if name == "duck" || name == "waterdrop" {
+			target[name] = img
+			continue
+		}
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		opts.GeoM.Scale(1/float64(arcZoom), 1/float64(arcZoom))
 
@@ -79,10 +84,14 @@ var (
 
 // GetTop 获取战舰顶部图片
 func GetTop(name string, zoom int) *ebiten.Image {
-	// FIXME 移除该逻辑，目前只处理了战列舰的大尺寸素材
-	if !slices.Contains([]string{"lowa", "montana", "kongo", "yamato", "yamato_beta"}, name) {
+	// FIXME 目前只处理了一部分素材，后续要移除该逻辑
+	if !slices.Contains([]string{
+		"lowa", "montana", "kongo", "yamato", "yamato_beta",
+		"porter", "asashio", "yugumo", "alaska_beta",
+	}, name) {
 		return topShipZoom4ImgMap[name]
 	}
+
 	if zoom == 1 {
 		return topShipZoom1ImgMap[name]
 	} else if zoom == 2 {
