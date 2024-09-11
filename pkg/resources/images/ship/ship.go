@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"slices"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -84,14 +83,6 @@ var (
 
 // GetTop 获取战舰顶部图片
 func GetTop(name string, zoom int) *ebiten.Image {
-	// FIXME 目前只处理了一部分素材，后续要移除该逻辑
-	if !slices.Contains([]string{
-		"lowa", "montana", "kongo", "yamato", "yamato_beta",
-		"porter", "asashio", "yugumo", "alaska_beta",
-	}, name) {
-		return topShipZoom4ImgMap[name]
-	}
-
 	if zoom == 1 {
 		return topShipZoom1ImgMap[name]
 	} else if zoom == 2 {

@@ -1043,8 +1043,8 @@
     }
   },
   {
-    "name": "long_beach",
-    "displayName": "长滩",
+    "name": "long_beach_beta",
+    "displayName": "长滩 II 型",
     "type": "cruiser",
     "typeAbbr": "CGN",
     "totalHP": 12000,
@@ -1066,14 +1066,14 @@
         // 前主炮 A
         {
           "name": "US/127/38/MK45",
-          "posPercent": 0.5,
+          "posPercent": 0.6,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 B
         {
           "name": "US/127/38/MK45",
-          "posPercent": -0.5,
+          "posPercent": -0.6,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
         }
@@ -1223,8 +1223,8 @@
         {
           "name": "JP/203/50",
           "posPercent": 0.6,
-          "rightFiringArc": [0, 160],
-          "leftFiringArc": [200, 360]
+          "rightFiringArc": [45, 160],
+          "leftFiringArc": [200, 315]
         },
         // 前主炮 C
         {

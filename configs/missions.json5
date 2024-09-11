@@ -21,7 +21,7 @@
           "kongo",
           "alaska_beta",
           "atlanta",
-          "long_beach",
+          "long_beach_beta",
           "new_orleans",
           "mogami",
           "kitakami",
@@ -117,7 +117,7 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "long_beach",
+        "name": "long_beach_beta",
         "pos": [40, 41],
         "rotation": 90,
         "belongPlayer": "HA"

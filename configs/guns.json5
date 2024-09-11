@@ -40,7 +40,7 @@
     "bulletSpeed": 3000
   },
   // 美国海军 US/127/38/MK45 舰炮
-  // long_beach（长滩）
+  // long_beach_beta（长滩 II 型）
   {
     "name": "US/127/38/MK45",
     "bulletName": "US/GB/127/1932",
