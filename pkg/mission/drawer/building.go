@@ -162,14 +162,32 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 
 	selectedShipName := rp.ProvidedShipNames[rp.CurSelectedShipIndex]
 
-	img := shipImg.GetTop(selectedShipName, ms.GameOpts.Zoom)
+	// 侧视图 & 俯视图
+	bgWidth, bgHeight := ms.Layout.Width/5*3, ms.Layout.Height/5*3
+	zoom := lo.Ternary(bgWidth > 1200, 4, 2)
+	sideImg := shipImg.GetSide(selectedShipName, zoom)
+	sideImgDx, sideImgDy := sideImg.Bounds().Dx(), sideImg.Bounds().Dy()
+
+	topImg := shipImg.GetTop(selectedShipName, zoom)
+	// x, y 互换，因为需要顺时针旋转 90 度
+	topImgDx, topImgDy := topImg.Bounds().Dy(), topImg.Bounds().Dx()
+
+	paddingX := float64(bgWidth-sideImgDx) / 2
+	paddingY := float64(bgHeight-topImgDy-sideImgDy) / 3
+
+	xOffset, yOffset := float64(ms.Layout.Width/5*2-ms.Layout.Height/5*3)/3, float64(50)
 	opts := d.genDefaultDrawImageOptions()
-	setOptsCenterRotation(opts, img, 90)
-	opts.GeoM.Translate(float64(ms.Layout.Width/3), float64(ms.Layout.Height/3))
-	screen.DrawImage(img, opts)
+	opts.GeoM.Translate(xOffset+paddingX, yOffset+paddingY)
+	screen.DrawImage(sideImg, opts)
 
-	xOffset, yOffset := float64(75), float64(ms.Layout.Height)/3*2
+	opts = d.genDefaultDrawImageOptions()
+	setOptsCenterRotation(opts, topImg, 90)
+	opts.GeoM.Translate(xOffset+paddingX, yOffset+2*paddingY+float64(sideImgDy))
+	opts.GeoM.Translate(float64(topImgDx-topImgDy)/2, float64(topImgDy-topImgDx)/2)
+	screen.DrawImage(topImg, opts)
 
+	// 战舰信息
+	xOffset, yOffset = float64(75), float64(ms.Layout.Height)/3*2
 	text := fmt.Sprintf(
 		"战舰：%s (%d/%d)",
 		object.GetShipDisplayName(selectedShipName),
@@ -183,6 +201,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 		d.drawText(screen, line, xOffset, yOffset+float64(idx)*60, 24, font.Hang, colorx.White)
 	}
 
+	// 资金 & 增援队列
 	xOffset, yOffset = float64(ms.Layout.Width)/3+float64(75), float64(ms.Layout.Height)/3*2
 	text = fmt.Sprintf("当前资金：%d", ms.CurFunds)
 	d.drawText(screen, text, xOffset, yOffset, 40, font.Hang, colorx.White)
