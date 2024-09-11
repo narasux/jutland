@@ -4,7 +4,15 @@
 
 **Jutland** is a 2D real-time naval strategy game implemented using the Golang game engine Ebiten.
 
+> The project is currently being updated irregularly. A release will be released after it is completed. To experience it first, you need to prepare your own Golang development environment.
+
 ## How to Start
+
+### Recommended devices
+
+Currently, the screen compatibility has only been tested for 16" / 27" screens. It is recommended to use these two sizes of screens for experience :)
+
+CPU / graphics card requirements are not very high, but too low will probably cause frame jams (because some optimizations are not done well at present orz)
 
 ### Game Guide
 
