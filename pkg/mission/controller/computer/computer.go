@@ -1,7 +1,6 @@
 package computer
 
 import (
-	"fmt"
 	"math/rand"
 
 	"github.com/samber/lo"
@@ -47,12 +46,12 @@ func (h *ComputerDecisionHandler) Handle(
 
 	for _, ship := range ships {
 		if isAttackMode {
-			instrKey := fmt.Sprintf("%s-%s", ship.Uid, instr.NameShipMove)
+			instrUid := instr.GenInstrUid(instr.NameShipMove, ship.Uid)
 			// 如果战舰已经在移动了，则跳过
-			if _, ok := curInstructions[instrKey]; !ok {
+			if _, ok := curInstructions[instrUid]; !ok {
 				// 进攻模式，随机选一个敌人冲上去
 				enemy := enemyShips[rand.Intn(len(enemyShips))]
-				instructions[instrKey] = instr.NewShipMove(ship.Uid, enemy.CurPos)
+				instructions[instrUid] = instr.NewShipMove(ship.Uid, enemy.CurPos)
 			}
 		} else {
 			// 防御模式，如果附近有敌人在移动，则自己在附近随机移动
@@ -60,12 +59,13 @@ func (h *ComputerDecisionHandler) Handle(
 				distance := geometry.CalcDistance(ship.CurPos.RX, ship.CurPos.RY, enemy.CurPos.RX, enemy.CurPos.RY)
 				if distance < 20 && ship.CurSpeed == 0 && enemy.CurSpeed != 0 {
 					x, y := rand.Intn(11)-5, rand.Intn(11)-5
-					instructions[fmt.Sprintf("%s-%s", ship.Uid, instr.NameShipMove)] = instr.NewShipMove(
+					moveInstr := instr.NewShipMove(
 						ship.Uid, obj.NewMapPos(
 							misState.Ships[ship.Uid].CurPos.MX+x,
 							misState.Ships[ship.Uid].CurPos.MY+y,
 						),
 					)
+					instructions[moveInstr.Uid()] = moveInstr
 					break
 				}
 			}
@@ -78,8 +78,8 @@ func (h *ComputerDecisionHandler) Handle(
 			continue
 		}
 		if len(rp.OncomingShips) < rp.MaxOncomingShip {
-			instrKey := fmt.Sprintf("%s-%s", rp.Uid, instr.NameShipSummon)
-			instructions[instrKey] = instr.NewShipSummon(rp.Uid, "")
+			summonInstr := instr.NewShipSummon(rp.Uid, "")
+			instructions[summonInstr.Uid()] = summonInstr
 		}
 	}
 

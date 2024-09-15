@@ -9,6 +9,7 @@ const (
 	NameEnableWeapon  = "EnableWeapon"
 	NameDisableWeapon = "DisableWeapon"
 	NameShipMove      = "ShipMove"
+	NameShipMovePath  = "ShipMovePath"
 	NameShipSummon    = "ShipSummon"
 )
 
@@ -16,12 +17,10 @@ const (
 type Instruction interface {
 	// Exec 指令执行
 	Exec(*state.MissionState) error
-	// IsExecuted 是否已执行完成
-	IsExecuted() bool
-	// GetObjUid 获取指令关联的对象 UID
-	GetObjUid() string
-	// Name 指令名称
-	Name() string
+	// Executed 是否已执行完成
+	Executed() bool
+	// Uid 获取指令 UID
+	Uid() string
 	// String 指令描述
 	String() string
 }

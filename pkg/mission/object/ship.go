@@ -279,7 +279,7 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive boo
 		return true
 	}
 	// 差不多到目标位置即可，不要强求准确，否则需要微调，视觉效果不佳
-	if s.CurPos.Near(targetPos, 1) {
+	if s.CurPos.Near(targetPos, 0.6) {
 		s.CurSpeed = 0
 		return true
 	}

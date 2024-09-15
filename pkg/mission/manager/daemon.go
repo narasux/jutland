@@ -1,7 +1,6 @@
 package manager
 
 import (
-	"fmt"
 	"log"
 	"math"
 	"math/rand"
@@ -61,9 +60,8 @@ func (m *MissionManager) updateBuildings() {
 			}
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3
-			m.instructions[fmt.Sprintf("%s-%s", ship.Uid, instr.NameShipMove)] = instr.NewShipMove(
-				ship.Uid, obj.NewMapPos(rp.RallyPos.MX+x, rp.RallyPos.MY+y),
-			)
+			moveInstr := instr.NewShipMove(ship.Uid, obj.NewMapPos(rp.RallyPos.MX+x, rp.RallyPos.MY+y))
+			m.instructions[moveInstr.Uid()] = moveInstr
 		}
 	}
 }

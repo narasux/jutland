@@ -1,11 +1,11 @@
 package human
 
 import (
-	"fmt"
 	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
@@ -40,6 +40,16 @@ func (h *HumanInputHandler) Handle(
 		return instructions
 	}
 
+	instructions = lo.Assign(instructions, h.handleShipMove(misState))
+	instructions = lo.Assign(instructions, h.handleWeapon(misState))
+
+	return instructions
+}
+
+func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[string]instr.Instruction {
+	instructions := map[string]instr.Instruction{}
+
+	// 按下鼠标右键，如果有选中战舰，则移动选中战舰到指定位置
 	if pos := action.DetectMouseButtonClickOnMap(misState, ebiten.MouseButtonRight); pos != nil {
 		selectedShipCount := len(misState.SelectedShips)
 		if selectedShipCount != 0 {
@@ -51,7 +61,8 @@ func (h *HumanInputHandler) Handle(
 					targetPos.AddRy(float64(rand.Intn(5) - 2))
 				}
 				// 通过 ShipMove 指令实现移动行为
-				instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(shipUid, targetPos)
+				moveInstr := instr.NewShipMove(shipUid, targetPos)
+				instructions[moveInstr.Uid()] = moveInstr
 			}
 			// 有战舰被选中的情况下，标记目标位置
 			mark := obj.NewImgMark(*pos, textureImg.TargetPos, 20)
@@ -70,15 +81,21 @@ func (h *HumanInputHandler) Handle(
 				// 随机散开 [-3, 3] 的范围
 				x, y := rand.Intn(7)-3, rand.Intn(7)-3
 				// 通过 ShipMove 指令实现散开行为
-				instructions[fmt.Sprintf("%s-%s", shipUid, instr.NameShipMove)] = instr.NewShipMove(
+				moveInstr := instr.NewShipMove(
 					shipUid, obj.NewMapPos(
 						misState.Ships[shipUid].CurPos.MX+x,
 						misState.Ships[shipUid].CurPos.MY+y,
 					),
 				)
+				instructions[moveInstr.Uid()] = moveInstr
 			}
 		}
 	}
+	return instructions
+}
+
+func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[string]instr.Instruction {
+	instructions := map[string]instr.Instruction{}
 
 	// 按下 w 键，如果任意选中战舰任意武器被禁用，则启用所有，否则禁用所有
 	if inpututil.IsKeyJustPressed(ebiten.KeyW) {
@@ -93,11 +110,11 @@ func (h *HumanInputHandler) Handle(
 			}
 			for _, shipUid := range misState.SelectedShips {
 				if anyWeaponDisabled {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeAll)
+					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeAll)
+					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
 				} else {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeAll)
+					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeAll)
+					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
 				}
 			}
 		}
@@ -116,11 +133,11 @@ func (h *HumanInputHandler) Handle(
 			}
 			for _, shipUid := range misState.SelectedShips {
 				if anyGunDisabled {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeMainGun)
+					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeMainGun)
+					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
 				} else {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeMainGun)
+					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeMainGun)
+					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
 				}
 			}
 		}
@@ -139,11 +156,11 @@ func (h *HumanInputHandler) Handle(
 			}
 			for _, shipUid := range misState.SelectedShips {
 				if anyGunDisabled {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
+					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
+					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
 				} else {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
+					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
+					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
 				}
 			}
 		}
@@ -162,11 +179,11 @@ func (h *HumanInputHandler) Handle(
 			}
 			for _, shipUid := range misState.SelectedShips {
 				if anyTorpedoDisabled {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameEnableWeapon)
-					instructions[instrKey] = instr.NewEnableWeapon(shipUid, obj.WeaponTypeTorpedo)
+					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeTorpedo)
+					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
 				} else {
-					instrKey := fmt.Sprintf("%s-%s", shipUid, instr.NameDisableWeapon)
-					instructions[instrKey] = instr.NewDisableWeapon(shipUid, obj.WeaponTypeTorpedo)
+					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeTorpedo)
+					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
 				}
 			}
 		}

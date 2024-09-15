@@ -30,7 +30,7 @@ func (m *MissionManager) updateGameOptions() {
 func (m *MissionManager) updateInstructions() {
 	// 已经执行完的指令，就不再需要
 	m.instructions = lo.PickBy(m.instructions, func(key string, instruction instr.Instruction) bool {
-		return !instruction.IsExecuted()
+		return !instruction.Executed()
 	})
 	// 逐个读取各个用户的输入，更新指令
 	m.instructions = lo.Assign(m.instructions, m.playerAlphaHandler.Handle(m.instructions, m.state))
