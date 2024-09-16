@@ -12,6 +12,7 @@ import (
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
 const (
@@ -49,16 +50,43 @@ func (m *MapData) IsLand(x, y int) bool {
 	return chr == ChrCoast || chr == ChrLand
 }
 
+// ToGridCells 转换成网格（路径计算用）
+func (m *MapData) ToGridCells() grid.Cells {
+	cells := grid.Cells{}
+	for y := 0; y < len(*m); y++ {
+		line := []int{}
+		for x := 0; x < len((*m)[y]); x++ {
+			switch (*m)[y][x] {
+			case ChrShallow:
+				line = append(line, grid.SD)
+			case ChrSea, ChrDeepSea:
+				line = append(line, grid.O)
+			case ChrCoast, ChrLand:
+				line = append(line, grid.W)
+			}
+		}
+		cells = append(cells, line)
+	}
+	return cells
+}
+
 // 地图配置
 type MapCfg struct {
 	// 地图名称
 	Name string
 	// 地图数据
 	Map MapData
+	// 地图网格数据
+	Cells grid.Cells
 	// 地图宽度
 	Width int
 	// 地图高度
 	Height int
+}
+
+// GenPath 生成路径
+func (cfg *MapCfg) GenPath(start, end grid.Point) []grid.Point {
+	return grid.NewGrid(cfg.Cells).Search(start, end)
 }
 
 var maps map[string]*MapCfg
@@ -82,6 +110,7 @@ func loadMapCfg(name string) *MapCfg {
 		log.Fatalf("error when load map %s: %s", name, err)
 	}
 
+	cfg.Cells = cfg.Map.ToGridCells()
 	cfg.Width = len(cfg.Map[0])
 	cfg.Height = len(cfg.Map)
 	return &cfg

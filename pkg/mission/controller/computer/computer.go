@@ -11,6 +11,7 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/geometry"
+	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
 // ComputerDecisionHandler 电脑决策处理器
@@ -46,12 +47,20 @@ func (h *ComputerDecisionHandler) Handle(
 
 	for _, ship := range ships {
 		if isAttackMode {
-			instrUid := instr.GenInstrUid(instr.NameShipMove, ship.Uid)
+			instrUid := instr.GenInstrUid(instr.NameShipMovePath, ship.Uid)
 			// 如果战舰已经在移动了，则跳过
 			if _, ok := curInstructions[instrUid]; !ok {
 				// 进攻模式，随机选一个敌人冲上去
 				enemy := enemyShips[rand.Intn(len(enemyShips))]
-				instructions[instrUid] = instr.NewShipMove(ship.Uid, enemy.CurPos)
+				points := misState.MissionMD.MapCfg.GenPath(
+					grid.Point{ship.CurPos.MX, ship.CurPos.MY},
+					grid.Point{enemy.CurPos.MX, enemy.CurPos.MY},
+				)
+				path := []obj.MapPos{}
+				for _, p := range points {
+					path = append(path, obj.NewMapPos(p.X, p.Y))
+				}
+				instructions[instrUid] = instr.NewShipMovePath(ship.Uid, path)
 			}
 		} else {
 			// 防御模式，如果附近有敌人在移动，则自己在附近随机移动

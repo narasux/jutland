@@ -107,7 +107,7 @@ func (i *ShipMove) Exec(s *state.MissionState) error {
 		return nil
 	}
 
-	if ship.MoveTo(s.MissionMD.MapCfg, i.targetPos) {
+	if ship.MoveTo(s.MissionMD.MapCfg, i.targetPos, true) {
 		i.executed = true
 	}
 	return nil
@@ -129,6 +129,7 @@ func (i *ShipMove) String() string {
 type ShipMovePath struct {
 	shipUid  string
 	path     []obj.MapPos
+	curIdx   int
 	executed bool
 }
 
@@ -147,9 +148,12 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 		return nil
 	}
 
-	// FIXME 实现 ShipMovePath 逻辑
-	if ship.MoveTo(s.MissionMD.MapCfg, i.path[0]) {
+	if i.curIdx >= len(i.path) {
 		i.executed = true
+		return nil
+	}
+	if ship.MoveTo(s.MissionMD.MapCfg, i.path[i.curIdx], i.curIdx == len(i.path)-1) {
+		i.curIdx++
 	}
 	return nil
 }

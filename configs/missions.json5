@@ -237,5 +237,202 @@
         "belongPlayer": "CA"
       }
     ],
+  },
+  {
+    "name": "speckisland",
+    "initFunds": 10000,
+    "initCameraPos": [35, 28],
+    "mapName": "speckisland",
+    "maxShipCount": 30,
+    "initReinforcePoints": [
+      {
+        "pos": [1, 20],
+        "rotation": 90,
+        "rallyPos": [30, 35],
+        "belongPlayer": "HA",
+        "maxOncomingShip": 10,
+        "providedShipNames": [
+          "duck",
+          "lowa",
+          "montana",
+          "yamato",
+          "yamato_beta",
+          "kongo",
+          "alaska_beta",
+          "atlanta",
+          "long_beach_beta",
+          "new_orleans",
+          "mogami",
+          "kitakami",
+          "porter",
+          "asashio",
+          "yugumo",
+        ],
+      },
+      {
+        "pos": [1, 65],
+        "rotation": 90,
+        "rallyPos": [30, 50],
+        "belongPlayer": "HA",
+        "maxOncomingShip": 10,
+        "providedShipNames": [
+          "atlanta",
+          "new_orleans",
+          "porter",
+        ],
+      },
+      {
+        "pos": [125, 20],
+        "rotation": 270,
+        "rallyPos": [105, 50],
+        "belongPlayer": "CA",
+        "maxOncomingShip": 5,
+        "providedShipNames": [
+          "kongo",
+          "mogami",
+          "asashio",
+        ],
+      },
+      {
+        "pos": [125, 90],
+        "rotation": 270,
+        "rallyPos": [100, 100],
+        "belongPlayer": "CA",
+        "maxOncomingShip": 5,
+        "providedShipNames": [
+          "mogami",
+          "asashio",
+          "yugumo",
+        ],
+      }
+    ],
+    "initShips": [
+      {
+        "name": "duck",
+        "pos": [40, 33],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "lowa",
+        "pos": [38, 34],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "montana",
+        "pos": [40, 35],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "yamato",
+        "pos": [38, 36],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "yamato_beta",
+        "pos": [40, 37],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "kongo",
+        "pos": [38, 38],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "alaska_beta",
+        "pos": [40, 39],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "atlanta",
+        "pos": [38, 40],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "long_beach_beta",
+        "pos": [40, 41],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "new_orleans",
+        "pos": [38, 42],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "mogami",
+        "pos": [40, 43],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "kitakami",
+        "pos": [38, 44],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "porter",
+        "pos": [40, 45],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "asashio",
+        "pos": [38, 46],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "yugumo",
+        "pos": [40, 47],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "yamato",
+        "pos": [102, 90],
+        "rotation": 270,
+        "belongPlayer": "CA"
+      },
+      {
+        "name": "yamato",
+        "pos": [101, 91],
+        "rotation": 270,
+        "belongPlayer": "CA"
+      },
+      {
+        "name": "yamato",
+        "pos": [102, 92],
+        "rotation": 270,
+        "belongPlayer": "CA"
+      },
+      {
+        "name": "yamato_beta",
+        "pos": [100, 93],
+        "rotation": 270,
+        "belongPlayer": "CA"
+      },
+      {
+        "name": "yamato_beta",
+        "pos": [101, 94],
+        "rotation": 270,
+        "belongPlayer": "CA"
+      },
+      {
+        "name": "yamato_beta",
+        "pos": [100, 95],
+        "rotation": 270,
+        "belongPlayer": "CA"
+      }
+    ],
   }
 ]

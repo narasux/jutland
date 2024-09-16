@@ -14,6 +14,7 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
 // HumanInputHandler 人类输入处理器
@@ -60,8 +61,25 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 					targetPos.AddRx(float64(rand.Intn(5) - 2))
 					targetPos.AddRy(float64(rand.Intn(5) - 2))
 				}
-				// 通过 ShipMove 指令实现移动行为
-				moveInstr := instr.NewShipMove(shipUid, targetPos)
+				// 通过 ShipMovePath 指令实现移动行为
+				ship, ok := misState.Ships[shipUid]
+				if !ok {
+					continue
+				}
+				points := misState.MissionMD.MapCfg.GenPath(
+					grid.Point{ship.CurPos.MX, ship.CurPos.MY},
+					grid.Point{targetPos.MX, targetPos.MY},
+				)
+				if len(points) < 2 {
+					continue
+				}
+				path := []obj.MapPos{ship.CurPos}
+				for _, p := range points[1 : len(points)-1] {
+					path = append(path, obj.NewMapPos(p.X, p.Y))
+				}
+				path = append(path, targetPos)
+
+				moveInstr := instr.NewShipMovePath(ship.Uid, path)
 				instructions[moveInstr.Uid()] = moveInstr
 			}
 			// 有战舰被选中的情况下，标记目标位置
