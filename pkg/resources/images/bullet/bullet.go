@@ -13,11 +13,14 @@ var (
 	GB406  = ebutil.NewImageWithColor(4, 8, colorx.Silver)
 	GB356  = ebutil.NewImageWithColor(4, 6, colorx.Gold)
 	GB305  = ebutil.NewImageWithColor(3, 5, colorx.Silver)
-	GB203  = ebutil.NewImageWithColor(3, 5, colorx.Gold)
+	GB283  = ebutil.NewImageWithColor(3, 5, colorx.Gray)
+	GB203  = ebutil.NewImageWithColor(3, 4, colorx.Gold)
 	GB155  = ebutil.NewImageWithColor(2, 4, colorx.Gold)
 	GB152  = ebutil.NewImageWithColor(2, 4, colorx.Gold)
+	GB150  = ebutil.NewImageWithColor(2, 4, colorx.Gray)
 	GB140  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
 	GB127  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
+	GB105  = ebutil.NewImageWithColor(2, 2, colorx.Gray)
 )
 
 var (
@@ -40,16 +43,22 @@ func GetShell(diameter int) *ebiten.Image {
 		return GB356
 	case 305:
 		return GB305
+	case 283:
+		return GB283
 	case 203:
 		return GB203
 	case 155:
 		return GB155
 	case 152:
 		return GB152
+	case 150:
+		return GB150
 	case 140:
 		return GB140
 	case 127:
 		return GB127
+	case 105:
+		return GB105
 	}
 	// 找不到就暴露出来
 	return NotFount

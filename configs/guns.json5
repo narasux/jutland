@@ -40,7 +40,6 @@
     "bulletSpeed": 3000
   },
   // 美国海军 US/127/38/MK45 舰炮
-  // long_beach_beta（长滩 II 型）
   {
     "name": "US/127/38/MK45",
     "bulletName": "US/GB/127/1932",
@@ -51,8 +50,6 @@
     "bulletSpeed": 800
   },
   // 美国海军 US/406/50/MK7 舰炮
-  // lowa（衣阿华）
-  // montana（蒙大拿）
   {
     "name": "US/406/50/MK7",
     "bulletName": "US/GB/406/1944",
@@ -63,7 +60,6 @@
     "bulletSpeed": 800
   },
   // 美国海军 US/305/50/MK8 舰炮
-  // alaska_beta（阿拉斯加 II 型）
   {
     "name": "US/305/50/MK8",
     "bulletName": "US/GB/305/1942",
@@ -74,7 +70,6 @@
     "bulletSpeed": 840
   },
   // 美国海军 US/203/55/MK14 舰炮
-  // new_orleans（新奥尔良）
   {
     "name": "US/203/55/MK14",
     "bulletName": "US/GB/203/1939",
@@ -85,9 +80,6 @@
     "bulletSpeed": 820
   },
   // 美国海军 US/127/38/MK12 舰炮
-  // lowa（衣阿华）
-  // atlanta（亚特兰大）
-  // porter（波特）
   {
     "name": "US/127/38/MK12",
     "bulletName": "US/GB/127/1932",
@@ -98,7 +90,6 @@
     "bulletSpeed": 800
   },
   // 美国海军 US/127/25/MK10 高平两用炮
-  // new_orleans（新奥尔良）
   {
     "name": "US/127/25/MK10",
     "bulletName": "US/GB/127/1932",
@@ -109,7 +100,6 @@
     "bulletSpeed": 650
   },
   // 美国海军 US/127/54/MK39 舰炮
-  // montana（蒙大拿）
   {
     "name": "US/127/54/MK39",
     "bulletName": "US/GB/127/1932",
@@ -120,7 +110,6 @@
     "bulletSpeed": 800
   },
   // 日本海军 三联装 46.0 厘米 45 倍口径舰炮
-  // yamato_beta（大和 II 型）
   {
     "name": "JP/460/45",
     "bulletName": "JP/GB/460/1942",
@@ -131,7 +120,6 @@
     "bulletSpeed": 780
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径舰炮
-  // kongo（金刚）
   {
     "name": "JP/356/45",
     "bulletName": "JP/GB/356/1935",
@@ -142,7 +130,6 @@
     "bulletSpeed": 800
   },
   // 日本海军 双联装 20.3 厘米 60 倍口径舰炮
-  // yamato_beta（大和 II 型）
   {
     "name": "JP/203/60",
     "bulletName": "JP/GB/203/1937",
@@ -153,7 +140,6 @@
     "bulletSpeed": 920
   },
   // 日本海军 双联装 20.3 厘米 50 倍口径舰炮
-  // mogami（最上）
   {
     "name": "JP/203/50",
     "bulletName": "JP/GB/203/1937",
@@ -164,7 +150,6 @@
     "bulletSpeed": 880
   },
   // 日本海军 三联装 15.5 厘米 60 倍口径舰炮
-  // yamato（大和）
   {
     "name": "JP/155/60",
     "bulletName": "JP/GB/155/1934",
@@ -175,7 +160,6 @@
     "bulletSpeed": 920
   },
   // 日本海军 单装 15.2 厘米 50 倍口径舰炮
-  // kongo（金刚）
   {
     "name": "JP/152/50",
     "bulletName": "JP/GB/152/1912",
@@ -186,7 +170,6 @@
     "bulletSpeed": 840
   },
   // 日本海军 单装 14.0 厘米 50 倍口径舰炮
-  // kitakami（北上）
   {
     "name": "JP/140/50",
     "bulletName": "JP/GB/140/1914",
@@ -197,7 +180,6 @@
     "bulletSpeed": 840
   },
   // 日本海军 双联装 12.7 厘米 50 倍口径舰炮
-  // asashio（朝潮）
   {
     "name": "JP/127/50",
     "bulletName": "JP/GB/127/1926",
@@ -208,7 +190,6 @@
     "bulletSpeed": 920
   },
   // 日本海军 双联装 12.7 厘米 40 倍口径高平两用炮
-  // yamato_beta（大和 II 型）
   {
     "name": "JP/127/40/DP",
     "bulletName": "JP/GB/127/1929",
@@ -217,5 +198,35 @@
     "range": 14,
     "bulletSpread": 80,
     "bulletSpeed": 720
+  },
+  // 德国海军 GER/283/52 舰炮
+  {
+    "name": "GER/283/52",
+    "bulletName": "GER/GB/283/1925",
+    "bulletCount": 3,
+    "reloadTime": 12,
+    "range": 26,
+    "bulletSpread": 100,
+    "bulletSpeed": 800
+  },
+  // 德国海军 GER/150/60 舰炮
+  {
+    "name": "GER/150/60",
+    "bulletName": "GER/GB/150/1932",
+    "bulletCount": 1,
+    "reloadTime": 1.5,
+    "range": 16,
+    "bulletSpread": 80,
+    "bulletSpeed": 900
+  },
+  // 德国海军 GER/105/65 高平两用炮
+  {
+    "name": "GER/105/65/DP",
+    "bulletName": "GER/GB/105/1937",
+    "bulletCount": 2,
+    "reloadTime": 1,
+    "range": 16,
+    "bulletSpread": 50,
+    "bulletSpeed": 1000
   }
 ]

@@ -100,6 +100,27 @@
     "damage": 100,
     "criticalRate": 0.002
   },
+  {
+    "name": "GER/GB/283/1925",
+    "type": "shell",
+    "diameter": 283,
+    "damage": 1250,
+    "criticalRate": 0.01
+  },
+  {
+    "name": "GER/GB/150/1932",
+    "type": "shell",
+    "diameter": 150,
+    "damage": 200,
+    "criticalRate": 0.005
+  },
+  {
+    "name": "GER/GB/105/1937",
+    "type": "shell",
+    "diameter": 105,
+    "damage": 85,
+    "criticalRate": 0.002
+  },
   // 鱼雷
   {
     "name": "US/TB/533/1931",
@@ -114,5 +135,12 @@
     "diameter": 610,
     "damage": 6250,
     "criticalRate": 0.1
-  }
+  },
+  {
+    "name": "GER/TB/533/1940",
+    "type": "torpedo",
+    "diameter": 533,
+    "damage": 4750,
+    "criticalRate": 0.07
+  },
 ]
