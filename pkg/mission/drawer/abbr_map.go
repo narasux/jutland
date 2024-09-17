@@ -66,14 +66,14 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
 	windowWidth := float64(ms.Layout.Width-abbrMapWidth) / 2
 
-	drawShips := func(player faction.Player, xOffset, yOffset, rotation float64) {
+	drawShips := func(player faction.Player, xOffset, yOffset, scaleX float64) {
 		fleet := ms.Fleet(player)
 
 		// 绘制敌我标识
 		d.drawText(
 			screen,
 			fmt.Sprintf("%s（%d）", lo.Ternary(player == ms.CurPlayer, "我", "敌"), fleet.Total),
-			xOffset-float64(windowWidth)/2+25, 20, 48, font.Hang, colorx.White,
+			xOffset-50, 20, 48, font.Hang, colorx.White,
 		)
 
 		for idx, cls := range fleet.Classes {
@@ -87,13 +87,13 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 			}
 
 			opts := d.genDefaultDrawImageOptions()
-			sImg := shipImg.GetTop(cls.Kind.Name, ms.GameOpts.Zoom)
-			shipWidth, shipLength := sImg.Bounds().Dx(), sImg.Bounds().Dy()
+			sImg := shipImg.GetSide(cls.Kind.Name, 1)
+			_, shipHeight := sImg.Bounds().Dx(), sImg.Bounds().Dy()
 
-			setOptsCenterRotation(opts, sImg, rotation)
-			opts.GeoM.Translate(xOffset, yOffset-float64(shipLength-shipWidth)/2)
+			opts.GeoM.Scale(scaleX, 1)
+			opts.GeoM.Translate(xOffset-65*scaleX, yOffset)
 			screen.DrawImage(sImg, opts)
-			yOffset += float64(shipWidth) + 15
+			yOffset += float64(shipHeight) + 15
 
 			d.drawText(
 				screen,
@@ -105,9 +105,9 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 	}
 
 	// 己方舰队概览
-	drawShips(ms.CurPlayer, float64(windowWidth)/2, 80, 90)
+	drawShips(ms.CurPlayer, float64(windowWidth)/4, 80, 1)
 	// 敌方舰队概览
-	drawShips(ms.CurEnemy, float64(abbrMapWidth)+float64(windowWidth)*1.5, 80, 270)
+	drawShips(ms.CurEnemy, float64(abbrMapWidth)+float64(windowWidth)*1.6, 80, -1)
 }
 
 // 绘制当前视野范围
