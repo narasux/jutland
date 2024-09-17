@@ -229,6 +229,16 @@
     "bulletSpread": 80,
     "bulletSpeed": 900
   },
+  // 德国海军 GER/127/45 舰炮
+  {
+    "name": "GER/127/45",
+    "bulletName": "GER/GB/127/1924",
+    "bulletCount": 1,
+    "reloadTime": 1,
+    "range": 16,
+    "bulletSpread": 80,
+    "bulletSpeed": 830
+  },
   // 德国海军 GER/105/65 高平两用炮
   {
     "name": "GER/105/65/DP",

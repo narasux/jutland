@@ -122,6 +122,13 @@
     "criticalRate": 0.005
   },
   {
+    "name": "GER/GB/127/1924",
+    "type": "shell",
+    "diameter": 127,
+    "damage": 120,
+    "criticalRate": 0.003
+  },
+  {
     "name": "GER/GB/105/1937",
     "type": "shell",
     "diameter": 105,

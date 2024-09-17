@@ -1898,5 +1898,83 @@
         }
       ]
     }
+  },
+  // 德国海军
+  {
+    "name": "z_11",
+    "displayName": "Z-11",
+    "type": "destroyer",
+    "typeAbbr": "DD",
+    "totalHP": 3190,
+    "horizontalDamageReduction": 0,
+    "verticalDamageReduction": -0.5,
+    "maxSpeed": 36,
+    "acceleration": 1.2,
+    "rotateSpeed": 2.2,
+    "length": 119,
+    "width": 11,
+    "fundsCost": 31,
+    "timeCost": 10,
+    "description": [
+      "驱逐舰（德）",
+      "主炮：5 座单装 127mm/45",
+      "鱼雷：2 座四联装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "GER/127/45",
+          "posPercent": 0.7,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "GER/127/45",
+          "posPercent": 0.6,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "GER/127/45",
+          "posPercent": -0.45,
+          "rightFiringArc": [45, 120],
+          "leftFiringArc": [240, 360]
+        },
+        // 后主炮 D
+        {
+          "name": "GER/127/45",
+          "posPercent": -0.6,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        },
+        // 后主炮 E
+        {
+          "name": "GER/127/45",
+          "posPercent": -0.75,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 中轴鱼雷 A
+        {
+          "name": "GER/533/4",
+          "posPercent": 0.1,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        },
+        // 中轴鱼雷 A
+        {
+          "name": "GER/533/4",
+          "posPercent": -0.3,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        },
+      ]
+    }
   }
 ]
