@@ -1,6 +1,7 @@
 package object
 
 import (
+	"log"
 	"math"
 	"time"
 
@@ -116,7 +117,11 @@ func (lc *TorpedoLauncher) Fire(ship, enemy *BattleShip) []*Bullet {
 var torpedoLauncherMap = map[string]*TorpedoLauncher{}
 
 func newTorpedoLauncher(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *TorpedoLauncher {
-	lc := deepcopy.Copy(*torpedoLauncherMap[name]).(TorpedoLauncher)
+	launcher, ok := torpedoLauncherMap[name]
+	if !ok {
+		log.Fatalf("torpedo launcher %s no found", name)
+	}
+	lc := deepcopy.Copy(*launcher).(TorpedoLauncher)
 	lc.PosPercent = posPercent
 	lc.LeftFiringArc = leftFireArc
 	lc.RightFiringArc = rightFireArc

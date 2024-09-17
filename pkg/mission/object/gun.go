@@ -1,6 +1,7 @@
 package object
 
 import (
+	"log"
 	"math"
 	"math/rand"
 	"time"
@@ -119,7 +120,11 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 var gunMap = map[string]*Gun{}
 
 func newGun(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Gun {
-	g := deepcopy.Copy(*gunMap[name]).(Gun)
+	gun, ok := gunMap[name]
+	if !ok {
+		log.Fatalf("gun %s no found", name)
+	}
+	g := deepcopy.Copy(*gun).(Gun)
 	g.PosPercent = posPercent
 	g.LeftFiringArc = leftFireArc
 	g.RightFiringArc = rightFireArc

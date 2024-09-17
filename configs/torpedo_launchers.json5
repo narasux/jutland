@@ -38,5 +38,15 @@
     "reloadTime": 70,
     "range": 15,
     "bulletSpeed": 50,
+  },
+  // 德国海军 533mm 3联装 鱼雷
+  {
+    "name": "GER/533/3",
+    "bulletName": "GER/TB/533/1940",
+    "bulletCount": 3,
+    "shotInterval": 1,
+    "reloadTime": 52,
+    "range": 15,
+    "bulletSpeed": 50,
   }
 ]

@@ -209,6 +209,16 @@
     "bulletSpread": 100,
     "bulletSpeed": 800
   },
+  // 德国海军 GER/203/60 舰炮
+  {
+    "name": "GER/203/60",
+    "bulletName": "GER/GB/203/1939",
+    "bulletCount": 2,
+    "reloadTime": 6,
+    "range": 34,
+    "bulletSpread": 80,
+    "bulletSpeed": 925
+  },
   // 德国海军 GER/150/60 舰炮
   {
     "name": "GER/150/60",
