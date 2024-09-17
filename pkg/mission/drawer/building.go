@@ -198,7 +198,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 
 	yOffset += 80
 	for idx, line := range object.GetShipDesc(selectedShipName) {
-		d.drawText(screen, line, xOffset, yOffset+float64(idx)*60, 24, font.Hang, colorx.White)
+		d.drawText(screen, line, xOffset, yOffset+float64(idx)*50, 24, font.Hang, colorx.White)
 	}
 
 	// 资金 & 增援队列

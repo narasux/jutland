@@ -832,6 +832,177 @@
   },
   // 德国海军
   {
+    "name": "scharnhorst",
+    "displayName": "沙恩霍特斯",
+    "type": "battleship",
+    "typeAbbr": "BC",
+    "totalHP": 38100,
+    "horizontalDamageReduction": 0.4,
+    "verticalDamageReduction": 0.25,
+    "maxSpeed": 31,
+    "acceleration": 0.35,
+    "rotateSpeed": 1,
+    "length": 235,
+    "width": 30,
+    "fundsCost": 385,
+    "timeCost": 36,
+    "description": [
+      "战列巡洋舰（德）",
+      "主炮：3 座三联装 283mm/55",
+      "副炮：4 座双联装，4 座单装 150mm/60",
+      "高平炮：7 座双联装 105mm/65",
+      "鱼雷：2 座三联装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "GER/283/55",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "GER/283/55",
+          "posPercent": 0.35,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "GER/283/55",
+          "posPercent": -0.6,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        },
+      ],
+      "secondaryGuns": [
+        // 右前副炮 A
+        {
+          "name": "GER/150/60/2",
+          "posPercent": 0.13,
+          "rightFiringArc": [0, 120],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 A
+        {
+          "name": "GER/150/60/2",
+          "posPercent": 0.13,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [240, 360]
+        },
+        // 右前副炮 B
+        {
+          "name": "GER/150/60",
+          "posPercent": 0,
+          "rightFiringArc": [0, 120],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 B
+        {
+          "name": "GER/150/60",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [240, 360]
+        },
+        // 右后副炮 C
+        {
+          "name": "GER/150/60",
+          "posPercent": -0.1,
+          "rightFiringArc": [60, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后副炮 C
+        {
+          "name": "GER/150/60",
+          "posPercent": -0.1,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 300]
+        },
+        // 右前副炮 D
+        {
+          "name": "GER/150/60/2",
+          "posPercent": -0.36,
+          "rightFiringArc": [60, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 D
+        {
+          "name": "GER/150/60/2",
+          "posPercent": -0.36,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 300]
+        },
+        // 右高平两用炮 A
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0.03,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 A
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0.03,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右高平两用炮 B
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 B
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右高平两用炮 C
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": -0.15,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 C
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": -0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 后高平两用炮 D
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": -0.5,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        },
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "GER/533/3",
+          "posPercent": -0.2,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "GER/533/3",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 330]
+        }
+      ]
+    }
+  },
+  {
     "name": "lutzow",
     "displayName": "吕佐",
     "type": "battleship",
@@ -948,6 +1119,13 @@
         },
       ],
       "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "GER/533/4",
+          "posPercent": -0.8,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
         // 左舷鱼雷 A
         {
           "name": "GER/533/4",
@@ -955,13 +1133,6 @@
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         },
-        // 右舷鱼雷 A
-        {
-          "name": "GER/533/4",
-          "posPercent": -0.8,
-          "rightFiringArc": [30, 150],
-          "leftFiringArc": [360, 360]
-        }
       ]
     }
   },

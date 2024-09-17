@@ -199,6 +199,16 @@
     "bulletSpread": 80,
     "bulletSpeed": 720
   },
+  // 德国海军 GER/283/55 舰炮
+  {
+    "name": "GER/283/55",
+    "bulletName": "GER/GB/283/1937",
+    "bulletCount": 3,
+    "reloadTime": 9,
+    "range": 38,
+    "bulletSpread": 100,
+    "bulletSpeed": 900
+  },
   // 德国海军 GER/283/52 舰炮
   {
     "name": "GER/283/52",
@@ -218,6 +228,16 @@
     "range": 34,
     "bulletSpread": 80,
     "bulletSpeed": 925
+  },
+  // 德国海军 GER/150/60 双联装舰炮
+  {
+    "name": "GER/150/60/2",
+    "bulletName": "GER/GB/150/1932",
+    "bulletCount": 2,
+    "reloadTime": 1.5,
+    "range": 16,
+    "bulletSpread": 90,
+    "bulletSpeed": 900
   },
   // 德国海军 GER/150/60 舰炮
   {

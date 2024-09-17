@@ -101,6 +101,13 @@
     "criticalRate": 0.002
   },
   {
+    "name": "GER/GB/283/1937",
+    "type": "shell",
+    "diameter": 283,
+    "damage": 1380,
+    "criticalRate": 0.01
+  },
+  {
     "name": "GER/GB/283/1925",
     "type": "shell",
     "diameter": 283,

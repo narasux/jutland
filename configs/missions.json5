@@ -19,6 +19,7 @@
           "yamato",
           "yamato_beta",
           "kongo",
+          "scharnhorst",
           "lutzow",
           "alaska_beta",
           "atlanta",
@@ -73,91 +74,109 @@
     "initShips": [
       {
         "name": "duck",
-        "pos": [40, 33],
+        "pos": [37, 33],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "lowa",
-        "pos": [38, 34],
+        "pos": [35, 34],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "montana",
-        "pos": [40, 35],
+        "pos": [37, 35],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "yamato",
-        "pos": [38, 36],
+        "pos": [35, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "yamato_beta",
-        "pos": [40, 37],
+        "pos": [37, 37],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "kongo",
-        "pos": [38, 38],
+        "pos": [35, 38],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "scharnhorst",
+        "pos": [37, 39],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "lutzow",
+        "pos": [35, 40],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "alaska_beta",
-        "pos": [40, 39],
+        "pos": [40, 33],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "atlanta",
-        "pos": [38, 40],
+        "pos": [39, 34],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "long_beach_beta",
-        "pos": [40, 41],
+        "pos": [40, 35],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "new_orleans",
-        "pos": [38, 42],
+        "pos": [39, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "mogami",
-        "pos": [40, 43],
+        "pos": [40, 37],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "kitakami",
-        "pos": [38, 44],
+        "pos": [39, 38],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "porter",
-        "pos": [40, 45],
+        "pos": [42, 33],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "asashio",
-        "pos": [38, 46],
+        "pos": [41, 34],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "yugumo",
-        "pos": [40, 47],
+        "pos": [42, 35],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "z_11",
+        "pos": [41, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
