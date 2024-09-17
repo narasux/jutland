@@ -832,6 +832,161 @@
   },
   // 德国海军
   {
+    "name": "bismarck",
+    "displayName": "俾斯麦",
+    "type": "battleship",
+    "typeAbbr": "BB",
+    "totalHP": 52600,
+    "horizontalDamageReduction": 0.55,
+    "verticalDamageReduction": 0.35,
+    "maxSpeed": 30,
+    "acceleration": 0.35,
+    "rotateSpeed": 0.8,
+    "length": 251,
+    "width": 36,
+    "fundsCost": 550,
+    "timeCost": 50,
+    "description": [
+      "战列舰（德）",
+      "主炮：4 座双联装 381mm/52",
+      "副炮：6 座双联装 150mm/60",
+      "高平炮：8 座双联装 105mm/65"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "GER/381/52",
+          "posPercent": 0.55,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "GER/381/52",
+          "posPercent": 0.4,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "GER/381/52",
+          "posPercent": -0.45,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        },
+        // 后主炮 D
+        {
+          "name": "GER/381/52",
+          "posPercent": -0.6,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        }
+      ],
+      "secondaryGuns": [
+        // 右前副炮 A
+        {
+          "name": "GER/150/60/2",
+          "posPercent": 0.23,
+          "rightFiringArc": [0, 120],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 A
+        {
+          "name": "GER/150/60/2",
+          "posPercent": 0.23,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [240, 360]
+        },
+        // 右前副炮 B
+        {
+          "name": "GER/150/60/2",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 B
+        {
+          "name": "GER/150/60/2",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 C
+        {
+          "name": "GER/150/60/2",
+          "posPercent": -0.2,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 C
+        {
+          "name": "GER/150/60/2",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 315]
+        },
+        // 右高平两用炮 A
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 A
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右高平两用炮 B
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 B
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右高平两用炮 C
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": -0.12,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 C
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": -0.12,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右高平两用炮 D
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": -0.25,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 D
+        {
+          "name": "GER/105/65/DP",
+          "posPercent": -0.25,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+      ],
+      "torpedoes": []
+    }
+  },
+  {
     "name": "scharnhorst",
     "displayName": "沙恩霍特斯",
     "type": "battleship",

@@ -101,6 +101,14 @@
     "criticalRate": 0.002
   },
   {
+    "name": "GER/GB/381/1939",
+    "type": "shell",
+    "diameter": 381,
+    "damage": 2800,
+    // 此处 @ 胡德，战绩可查～
+    "criticalRate": 0.08
+  },
+  {
     "name": "GER/GB/283/1937",
     "type": "shell",
     "diameter": 283,

@@ -19,6 +19,7 @@
           "yamato",
           "yamato_beta",
           "kongo",
+          "bismarck",
           "scharnhorst",
           "lutzow",
           "alaska_beta",
@@ -109,14 +110,20 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "scharnhorst",
+        "name": "bismarck",
         "pos": [37, 39],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "lutzow",
+        "name": "scharnhorst",
         "pos": [35, 40],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "lutzow",
+        "pos": [37, 41],
         "rotation": 90,
         "belongPlayer": "HA"
       },
@@ -153,6 +160,12 @@
       {
         "name": "kitakami",
         "pos": [39, 38],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "prinz_eugen",
+        "pos": [40, 39],
         "rotation": 90,
         "belongPlayer": "HA"
       },

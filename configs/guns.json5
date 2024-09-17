@@ -114,7 +114,7 @@
     "name": "JP/460/45",
     "bulletName": "JP/GB/460/1942",
     "bulletCount": 3,
-    "reloadTime": 20,
+    "reloadTime": 18,
     "range": 42,
     "bulletSpread": 200,
     "bulletSpeed": 780
@@ -199,12 +199,22 @@
     "bulletSpread": 80,
     "bulletSpeed": 720
   },
+  // 德国海军 GER/381/52 舰炮
+  {
+    "name": "GER/381/52",
+    "bulletName": "GER/GB/381/1939",
+    "bulletCount": 2,
+    "reloadTime": 10,
+    "range": 38,
+    "bulletSpread": 100,
+    "bulletSpeed": 820
+  },
   // 德国海军 GER/283/55 舰炮
   {
     "name": "GER/283/55",
     "bulletName": "GER/GB/283/1937",
     "bulletCount": 3,
-    "reloadTime": 9,
+    "reloadTime": 8,
     "range": 38,
     "bulletSpread": 100,
     "bulletSpeed": 900
@@ -235,7 +245,7 @@
     "bulletName": "GER/GB/150/1932",
     "bulletCount": 2,
     "reloadTime": 1.5,
-    "range": 16,
+    "range": 17,
     "bulletSpread": 90,
     "bulletSpeed": 900
   },
@@ -245,7 +255,7 @@
     "bulletName": "GER/GB/150/1932",
     "bulletCount": 1,
     "reloadTime": 1.5,
-    "range": 16,
+    "range": 17,
     "bulletSpread": 80,
     "bulletSpeed": 900
   },
