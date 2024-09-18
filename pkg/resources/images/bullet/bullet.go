@@ -22,6 +22,7 @@ var (
 	GB140  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
 	GB127  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
 	GB105  = ebutil.NewImageWithColor(2, 2, colorx.Gray)
+	GB88   = ebutil.NewImageWithColor(2, 2, colorx.Gold)
 )
 
 var (
@@ -62,6 +63,8 @@ func GetShell(diameter int) *ebiten.Image {
 		return GB127
 	case 105:
 		return GB105
+	case 88:
+		return GB88
 	}
 	// 找不到就暴露出来
 	return NotFount

@@ -1549,7 +1549,7 @@
     "type": "cruiser",
     "typeAbbr": "CA",
     "totalHP": 12663,
-    "horizontalDamageReduction": 0.25,
+    "horizontalDamageReduction": 0.3,
     "verticalDamageReduction": 0.15,
     "maxSpeed": 33,
     "acceleration": 0.6,
@@ -1655,7 +1655,7 @@
     "type": "cruiser",
     "typeAbbr": "CA",
     "totalHP": 12200,
-    "horizontalDamageReduction": 0.3,
+    "horizontalDamageReduction": 0.25,
     "verticalDamageReduction": 0.2,
     "maxSpeed": 36,
     "acceleration": 0.6,
@@ -1904,8 +1904,8 @@
     "type": "cruiser",
     "typeAbbr": "CA",
     "totalHP": 18400,
-    "horizontalDamageReduction": 0.25,
-    "verticalDamageReduction": 0.15,
+    "horizontalDamageReduction": 0.32,
+    "verticalDamageReduction": 0.2,
     "maxSpeed": 33.5,
     "acceleration": 0.6,
     "rotateSpeed": 1.6,
@@ -2020,6 +2020,106 @@
         {
           "name": "GER/533/3",
           "posPercent": -0.2,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        }
+      ]
+    }
+  },
+  {
+    "name": "leipzig",
+    "displayName": "莱比锡",
+    "type": "cruiser",
+    "typeAbbr": "CL",
+    "totalHP": 8680,
+    "horizontalDamageReduction": 0.22,
+    "verticalDamageReduction": 0.13,
+    "maxSpeed": 32,
+    "acceleration": 0.7,
+    "rotateSpeed": 2,
+    "length": 177,
+    "width": 16,
+    "fundsCost": 90,
+    "timeCost": 8,
+    "description": [
+      "轻巡洋舰（德）",
+      "主炮：3 座三联装 150mm/60",
+      "高平炮：6 座单装 88mm/56",
+      "鱼雷：4 座三联装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "GER/150/60/3",
+          "posPercent": 0.7,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "GER/150/60/3",
+          "posPercent": -0.45,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "GER/150/60/3",
+          "posPercent": -0.62,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        },
+      ],
+      "secondaryGuns": [
+        // 右高平两用炮 A
+        {
+          "name": "GER/88/56/DP",
+          "posPercent": -0.1,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左高平两用炮 A
+        {
+          "name": "GER/88/56/DP",
+          "posPercent": -0.1,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 后高平两用炮 B
+        {
+          "name": "GER/88/56/DP",
+          "posPercent": -0.13,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        },
+      ],
+      "torpedoes": [
+        // 左舷鱼雷 A
+        {
+          "name": "GER/533/3",
+          "posPercent": 0.42,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 330]
+        },
+        // 右舷鱼雷 A
+        {
+          "name": "GER/533/3",
+          "posPercent": 0.42,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "GER/533/3",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 330]
+        },
+        // 右舷鱼雷 A
+        {
+          "name": "GER/533/3",
+          "posPercent": 0,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         }

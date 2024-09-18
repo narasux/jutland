@@ -150,6 +150,13 @@
     "damage": 85,
     "criticalRate": 0.002
   },
+  {
+    "name": "GER/GB/88/1935",
+    "type": "shell",
+    "diameter": 88,
+    "damage": 40,
+    "criticalRate": 0.001
+  },
   // 鱼雷
   {
     "name": "US/TB/533/1931",

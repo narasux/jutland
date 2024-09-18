@@ -29,6 +29,7 @@
           "mogami",
           "kitakami",
           "prinz_eugen",
+          "leipzig",
           "porter",
           "asashio",
           "yugumo",
@@ -166,6 +167,12 @@
       {
         "name": "prinz_eugen",
         "pos": [40, 39],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "leipzig",
+        "pos": [39, 40],
         "rotation": 90,
         "belongPlayer": "HA"
       },
