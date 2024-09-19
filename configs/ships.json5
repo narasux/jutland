@@ -106,11 +106,11 @@
     "length": 270,
     "width": 33,
     "fundsCost": 580,
-    "timeCost": 60,
+    "timeCost": 54,
     "description": [
       "战列舰（美）",
       "主炮：3 座三联装 406mm/50",
-      "副炮：10 座双联装 155mm/38",
+      "副炮：10 座双联装 127mm/38",
     ],
     "weapon": {
       "mainGuns": [
@@ -229,7 +229,7 @@
     "description": [
       "战列舰（美）",
       "主炮：4 座三联装 406mm/50",
-      "副炮：10 座双联装 155mm/54",
+      "副炮：10 座双联装 127mm/54",
     ],
     "weapon": {
       "mainGuns": [
@@ -330,6 +330,111 @@
         {
           "name": "US/127/54/MK39",
           "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 340]
+        }
+      ],
+      "torpedoes": []
+    }
+  },
+  {
+    "name": "south_dakota",
+    "displayName": "南达科他",
+    "type": "battleship",
+    "typeAbbr": "BB",
+    "totalHP": 46000,
+    "horizontalDamageReduction": 0.45,
+    "verticalDamageReduction": 0.3,
+    "maxSpeed": 28,
+    "acceleration": 0.28,
+    "rotateSpeed": 0.75,
+    "length": 207,
+    "width": 33,
+    "fundsCost": 445,
+    "timeCost": 40,
+    "description": [
+      "战列舰（美）",
+      "主炮：3 座三联装 406mm/45",
+      "副炮：8 座双联装 127mm/38",
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "US/406/45/MK6",
+          "posPercent": 0.45,
+          "rightFiringArc": [0, 130],
+          "leftFiringArc": [230, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "US/406/45/MK6",
+          "posPercent": 0.25,
+          "rightFiringArc": [0, 130],
+          "leftFiringArc": [230, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "US/406/45/MK6",
+          "posPercent": -0.5,
+          "rightFiringArc": [50, 180],
+          "leftFiringArc": [180, 310]
+        }
+      ],
+      "secondaryGuns": [
+        // 右前副炮 A
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 160],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 A
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [200, 360]
+        },
+        // 右前副炮 B
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.5,
+          "rightFiringArc": [0, 160],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 B
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.5,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [200, 360]
+        },
+        // 右后副炮 C
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.18,
+          "rightFiringArc": [20, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后副炮 C
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.18,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 340]
+        },
+        // 右后副炮 D
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.24,
+          "rightFiringArc": [20, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后副炮 D
+        {
+          "name": "US/127/38/MK12",
+          "posPercent": -0.24,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         }

@@ -16,6 +16,7 @@
           "duck",
           "lowa",
           "montana",
+          "south_dakota",
           "yamato",
           "yamato_beta",
           "kongo",
@@ -93,38 +94,44 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "yamato",
+        "name": "south_dakota",
         "pos": [35, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "yamato_beta",
+        "name": "yamato",
         "pos": [37, 37],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "kongo",
+        "name": "yamato_beta",
         "pos": [35, 38],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "bismarck",
+        "name": "kongo",
         "pos": [37, 39],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "scharnhorst",
+        "name": "bismarck",
         "pos": [35, 40],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
-        "name": "lutzow",
+        "name": "scharnhorst",
         "pos": [37, 41],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "lutzow",
+        "pos": [35, 42],
         "rotation": 90,
         "belongPlayer": "HA"
       },

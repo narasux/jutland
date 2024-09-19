@@ -59,6 +59,16 @@
     "bulletSpread": 150,
     "bulletSpeed": 800
   },
+  // 美国海军 US/406/45/MK6 舰炮
+  {
+    "name": "US/406/45/MK6",
+    "bulletName": "US/GB/406/1944",
+    "bulletCount": 3,
+    "reloadTime": 12,
+    "range": 37,
+    "bulletSpread": 160,
+    "bulletSpeed": 760
+  },
   // 美国海军 US/305/50/MK8 舰炮
   {
     "name": "US/305/50/MK8",
@@ -66,7 +76,7 @@
     "bulletCount": 3,
     "reloadTime": 10,
     "range": 35,
-    "bulletSpread": 100,
+    "bulletSpread": 120,
     "bulletSpeed": 840
   },
   // 美国海军 US/203/55/MK14 舰炮
@@ -116,7 +126,7 @@
     "bulletCount": 3,
     "reloadTime": 18,
     "range": 42,
-    "bulletSpread": 200,
+    "bulletSpread": 180,
     "bulletSpeed": 780
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径舰炮
