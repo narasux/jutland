@@ -61,3 +61,34 @@ func (c *BathtubWar) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*BathtubWar)(nil)
+
+// WhoIsCallingTheFleet 谁在呼叫舰队 -> 所有增援点队列耗时修改为 1s（但是没钱就没办法）
+type WhoIsCallingTheFleet struct{}
+
+func (c *WhoIsCallingTheFleet) String() string {
+	return "who is calling the fleet"
+}
+
+func (c *WhoIsCallingTheFleet) Desc() string {
+	return "Turn every reinforce time cost to 1s"
+}
+
+func (c *WhoIsCallingTheFleet) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *WhoIsCallingTheFleet) Exec(misState *state.MissionState) string {
+	for _, rfp := range misState.ReinforcePoints {
+		// 只有自己的会生效
+		if rfp.BelongPlayer != misState.CurPlayer {
+			continue
+		}
+		for _, ship := range rfp.OncomingShips {
+			ship.TimeCost = 1
+		}
+	}
+
+	return "Reinforce ships oncoming! Who is calling the fleet!"
+}
+
+var _ Cheat = (*WhoIsCallingTheFleet)(nil)

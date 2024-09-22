@@ -8,6 +8,7 @@ var Cheats = []Cheat{
 	// 经济类
 	&ShowMeTheMoney{},
 	// 效果类
-	&BathtubWar{},
 	&BlackSheepWall{},
+	&BathtubWar{},
+	&WhoIsCallingTheFleet{},
 }
