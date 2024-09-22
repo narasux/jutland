@@ -1,6 +1,8 @@
 package cheat
 
 import (
+	"fmt"
+
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/object"
@@ -88,7 +90,35 @@ func (c *WhoIsCallingTheFleet) Exec(misState *state.MissionState) string {
 		}
 	}
 
-	return "Reinforce ships oncoming! Who is calling the fleet!"
+	return "Reinforce ships oncoming!"
 }
 
 var _ Cheat = (*WhoIsCallingTheFleet)(nil)
+
+// DoNotDie 不要死 -> 选中的战舰修改为满血
+type DoNotDie struct{}
+
+func (c *DoNotDie) String() string {
+	return "do not die"
+}
+
+func (c *DoNotDie) Desc() string {
+	return "Turn every selected ship to full hp"
+}
+
+func (c *DoNotDie) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *DoNotDie) Exec(misState *state.MissionState) string {
+	for _, shipUid := range misState.SelectedShips {
+		// 满血数值其实就是吨位
+		if ship, ok := misState.Ships[shipUid]; ok {
+			ship.CurHP = ship.Tonnage
+		}
+	}
+
+	return fmt.Sprintf("Change %d ships to full hp.", len(misState.SelectedShips))
+}
+
+var _ Cheat = (*DoNotDie)(nil)

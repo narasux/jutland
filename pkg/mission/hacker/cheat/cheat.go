@@ -11,4 +11,5 @@ var Cheats = []Cheat{
 	&BlackSheepWall{},
 	&BathtubWar{},
 	&WhoIsCallingTheFleet{},
+	&DoNotDie{},
 }
