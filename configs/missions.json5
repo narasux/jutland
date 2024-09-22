@@ -23,6 +23,7 @@
           "bismarck",
           "scharnhorst",
           "lutzow",
+          "hood",
           "alaska_beta",
           "atlanta",
           "long_beach_beta",
@@ -132,6 +133,12 @@
       {
         "name": "lutzow",
         "pos": [35, 42],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "hood",
+        "pos": [37, 43],
         "rotation": 90,
         "belongPlayer": "HA"
       },

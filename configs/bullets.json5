@@ -83,7 +83,7 @@
     "name": "JP/GB/140/1914",
     "type": "shell",
     "diameter": 140,
-    "damage": 145,
+    "damage": 140,
     "criticalRate": 0.003
   },
   {
@@ -157,6 +157,27 @@
     "damage": 40,
     "criticalRate": 0.001
   },
+  {
+    "name": "UK/GB/381/1918",
+    "type": "shell",
+    "diameter": 381,
+    "damage": 2750,
+    "criticalRate": 0.02
+  },
+  {
+    "name": "UK/GB/140/1935",
+    "type": "shell",
+    "diameter": 140,
+    "damage": 145,
+    "criticalRate": 0.003
+  },
+  {
+    "name": "UK/GB/102/1930",
+    "type": "shell",
+    "diameter": 102,
+    "damage": 55,
+    "criticalRate": 0.001
+  },
   // 鱼雷
   {
     "name": "US/TB/533/1931",
@@ -179,4 +200,11 @@
     "damage": 4750,
     "criticalRate": 0.07
   },
+  {
+    "name": "UK/TB/533/1928",
+    "type": "torpedo",
+    "diameter": 533,
+    "damage": 4600,
+    "criticalRate": 0.07
+  }
 ]

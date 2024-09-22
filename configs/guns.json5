@@ -304,9 +304,39 @@
     "name": "GER/88/56/DP",
     "bulletName": "GER/GB/88/1935",
     "bulletCount": 2,
-    "reloadTime": 0.15,
+    "reloadTime": 0.2,
     "range": 12,
     "bulletSpread": 30,
     "bulletSpeed": 800
+  },
+  // 英国海军 UK/381/42 舰炮
+  {
+    "name": "UK/381/42",
+    "bulletName": "UK/GB/381/1918",
+    "bulletCount": 2,
+    "reloadTime": 14,
+    "range": 31,
+    "bulletSpread": 120,
+    "bulletSpeed": 740
+  },
+  // 英国海军 UK/140/50 舰炮
+  {
+    "name": "UK/140/50",
+    "bulletName": "UK/GB/140/1935",
+    "bulletCount": 1,
+    "reloadTime": 4,
+    "range": 18,
+    "bulletSpread": 70,
+    "bulletSpeed": 840
+  },
+  // 英国海军 UK/102/45 高平两用炮
+  {
+    "name": "UK/102/45",
+    "bulletName": "UK/GB/102/1930",
+    "bulletCount": 1,
+    "reloadTime": 1,
+    "range": 16,
+    "bulletSpread": 60,
+    "bulletSpeed": 810
   }
 ]
