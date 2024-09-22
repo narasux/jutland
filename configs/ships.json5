@@ -774,8 +774,8 @@
     }
   },
   {
-    "name": "yamato_beta",
-    "displayName": "大和 II 型",
+    "name": "yamato_II",
+    "displayName": "大和 II",
     "type": "battleship",
     "typeAbbr": "BB",
     "totalHP": 72900,
@@ -1684,7 +1684,6 @@
         }
       ],
       "secondaryGuns": [
-
         // 右前副炮 A
         {
           "name": "UK/152/50",
@@ -1788,6 +1787,260 @@
       ]
     }
   },
+  {
+    "name": "lion",
+    "displayName": "狮",
+    "type": "battleship",
+    "typeAbbr": "BB",
+    "totalHP": 49050,
+    "horizontalDamageReduction": 0.45,
+    "verticalDamageReduction": 0.3,
+    "maxSpeed": 30,
+    "acceleration": 0.35,
+    "rotateSpeed": 0.8,
+    "length": 242,
+    "width": 33,
+    "fundsCost": 480,
+    "timeCost": 45,
+    "description": [
+      "战列舰（英）",
+      "主炮：3 座三联装 406mm/45",
+      "副炮：8 座双联装 133mm/50",
+      "鱼雷：2 座三联装直航 533mm",
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "UK/406/45",
+          "posPercent": 0.37,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "UK/406/45",
+          "posPercent": 0.25,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [225, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "UK/406/45",
+          "posPercent": -0.58,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        }
+      ],
+      "secondaryGuns": [
+        // 右前高平两用炮 A
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 A
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [225, 360]
+        },
+        // 右前高平两用炮 B
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.04,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 B
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.04,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前高平两用炮 C
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.26,
+          "rightFiringArc": [60, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 C
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.26,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 300]
+        },
+        // 右后高平两用炮 D
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.35,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 D
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.35,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 315]
+        },
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "UK/533/4",
+          "posPercent": -0.15,
+          "rightFiringArc": [45, 135],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "UK/533/4",
+          "posPercent": -0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [225, 315]
+        }
+      ]
+    }
+  },
+  {
+    "name": "lion_II",
+    "displayName": "狮 II",
+    "type": "battleship",
+    "typeAbbr": "BB",
+    "totalHP": 52150,
+    "horizontalDamageReduction": 0.45,
+    "verticalDamageReduction": 0.3,
+    "maxSpeed": 29,
+    "acceleration": 0.35,
+    "rotateSpeed": 0.8,
+    "length": 242,
+    "width": 35,
+    "fundsCost": 515,
+    "timeCost": 47,
+    "description": [
+      "战列舰（英）",
+      "主炮：3 座三联装 406mm/45",
+      "副炮：12 座双联装 114mm/45",
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "UK/406/45",
+          "posPercent": 0.42,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "UK/406/45",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [225, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "UK/406/45",
+          "posPercent": -0.55,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        }
+      ],
+      "secondaryGuns": [
+        // 右前高平两用炮 A
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 A
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前高平两用炮 B
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": 0.07,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 B
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": 0.07,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前高平两用炮 C
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": 0,
+          "rightFiringArc": [60, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 C
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 300]
+        },
+        // 右后高平两用炮 D
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 D
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右后高平两用炮 E
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": -0.28,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 E
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": -0.28,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 330]
+        },
+        // 右后高平两用炮 F
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": -0.35,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 F
+        {
+          "name": "UK/114/45/DP",
+          "posPercent": -0.35,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 330]
+        },
+      ],
+      "torpedoes": []
+    }
+  },
   // 巡洋舰
   // 美国海军
   {
@@ -1889,8 +2142,8 @@
     },
   },
   {
-    "name": "alaska_beta",
-    "displayName": "阿拉斯加 II 型",
+    "name": "alaska_II",
+    "displayName": "阿拉斯加 II",
     "type": "cruiser",
     "typeAbbr": "CB",
     "totalHP": 39800,
@@ -2001,8 +2254,8 @@
     }
   },
   {
-    "name": "long_beach_beta",
-    "displayName": "长滩 II 型",
+    "name": "long_beach_II",
+    "displayName": "长滩 II",
     "type": "cruiser",
     "typeAbbr": "CGN",
     "totalHP": 12000,
