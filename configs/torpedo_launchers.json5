@@ -58,5 +58,15 @@
     "reloadTime": 16,
     "range": 13,
     "bulletSpeed": 50,
+  },
+  // 英国海军 622mm 单装 鱼雷
+  {
+    "name": "UK/622/1",
+    "bulletName": "UK/TB/622/1925",
+    "bulletCount": 1,
+    "shotInterval": 1,
+    "reloadTime": 20,
+    "range": 18,
+    "bulletSpeed": 50,
   }
 ]

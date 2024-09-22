@@ -24,6 +24,7 @@
           "scharnhorst",
           "lutzow",
           "hood",
+          "nelson",
           "alaska_beta",
           "atlanta",
           "long_beach_beta",
@@ -139,6 +140,12 @@
       {
         "name": "hood",
         "pos": [37, 43],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "nelson",
+        "pos": [35, 44],
         "rotation": 90,
         "belongPlayer": "HA"
       },

@@ -21,6 +21,7 @@ var (
 	GB150  = ebutil.NewImageWithColor(2, 4, colorx.Gray)
 	GB140  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
 	GB127  = ebutil.NewImageWithColor(2, 3, colorx.Silver)
+	GB120  = ebutil.NewImageWithColor(2, 3, colorx.DarkBlue)
 	GB105  = ebutil.NewImageWithColor(2, 2, colorx.Gray)
 	GB102  = ebutil.NewImageWithColor(2, 2, colorx.Silver)
 	GB88   = ebutil.NewImageWithColor(2, 2, colorx.Gold)
@@ -29,6 +30,7 @@ var (
 var (
 	TB533 = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
 	TB610 = ebutil.NewImageWithColor(4, 24, colorx.Silver)
+	TB622 = ebutil.NewImageWithColor(4, 25, colorx.Gray)
 )
 
 var NotFount = ebutil.NewImageWithColor(10, 20, colorx.Red)
@@ -62,6 +64,8 @@ func GetShell(diameter int) *ebiten.Image {
 		return GB140
 	case 127:
 		return GB127
+	case 120:
+		return GB120
 	case 105:
 		return GB105
 	case 102:
@@ -80,6 +84,8 @@ func GetTorpedo(diameter int) *ebiten.Image {
 		return TB533
 	case 610:
 		return TB610
+	case 622:
+		return TB622
 	}
 	// 找不到就暴露出来
 	return NotFount

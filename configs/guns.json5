@@ -309,6 +309,16 @@
     "bulletSpread": 30,
     "bulletSpeed": 800
   },
+  // 英国海军 UK/406/45 舰炮
+  {
+    "name": "UK/406/45",
+    "bulletName": "UK/GB/406/1922",
+    "bulletCount": 3,
+    "reloadTime": 18,
+    "range": 36,
+    "bulletSpread": 140,
+    "bulletSpeed": 790
+  },
   // 英国海军 UK/381/42 舰炮
   {
     "name": "UK/381/42",
@@ -318,6 +328,16 @@
     "range": 31,
     "bulletSpread": 120,
     "bulletSpeed": 740
+  },
+  // 英国海军 UK/152/50 舰炮
+  {
+    "name": "UK/152/50",
+    "bulletName": "UK/GB/152/1935",
+    "bulletCount": 2,
+    "reloadTime": 4,
+    "range": 23,
+    "bulletSpread": 100,
+    "bulletSpeed": 840
   },
   // 英国海军 UK/140/50 舰炮
   {
@@ -329,9 +349,19 @@
     "bulletSpread": 70,
     "bulletSpeed": 840
   },
+  // 英国海军 UK/120/45 高平两用炮
+  {
+    "name": "UK/120/45/DP",
+    "bulletName": "UK/GB/120/1932",
+    "bulletCount": 1,
+    "reloadTime": 1,
+    "range": 17,
+    "bulletSpread": 65,
+    "bulletSpeed": 770
+  },
   // 英国海军 UK/102/45 高平两用炮
   {
-    "name": "UK/102/45",
+    "name": "UK/102/45/DP",
     "bulletName": "UK/GB/102/1930",
     "bulletCount": 1,
     "reloadTime": 1,
