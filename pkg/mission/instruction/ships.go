@@ -167,5 +167,5 @@ func (i *ShipMovePath) Uid() string {
 }
 
 func (i *ShipMovePath) String() string {
-	return fmt.Sprintf("Ship %s move with path %s", i.shipUid, i.path)
+	return fmt.Sprintf("Ship %s move with path %v", i.shipUid, i.path)
 }
