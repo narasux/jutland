@@ -2876,6 +2876,112 @@
       ]
     }
   },
+  // 英国海军
+  {
+    "name": "cheshire",
+    "displayName": "柴郡",
+    "type": "cruiser",
+    "typeAbbr": "CA",
+    "totalHP": 20100,
+    "horizontalDamageReduction": 0.34,
+    "verticalDamageReduction": 0.22,
+    "maxSpeed": 31.5,
+    "acceleration": 0.35,
+    "rotateSpeed": 0.8,
+    "length": 201,
+    "width": 25,
+    "fundsCost": 195,
+    "timeCost": 18,
+    "description": [
+      "重巡洋舰（英）",
+      "主炮：3 座三联装 203mm/50",
+      "副炮：8 座双联装 102mm/45",
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "UK/203/50",
+          "posPercent": 0.65,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "UK/203/50",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [225, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "UK/203/50",
+          "posPercent": -0.7,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        }
+      ],
+      "secondaryGuns": [
+        // 右前高平两用炮 A
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 A
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右后高平两用炮 B
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 B
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+        // 右前高平两用炮 C
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": -0.24,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前高平两用炮 C
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": -0.24,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 300]
+        },
+        // 右后高平两用炮 D
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": -0.38,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 D
+        {
+          "name": "UK/102/45/DP",
+          "posPercent": -0.38,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 360]
+        },
+      ],
+      "torpedoes": []
+    }
+  },
   // 驱逐舰
   // 美国海军
   {

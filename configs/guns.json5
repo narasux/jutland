@@ -154,7 +154,7 @@
     "name": "JP/203/50",
     "bulletName": "JP/GB/203/1937",
     "bulletCount": 2,
-    "reloadTime": 10,
+    "reloadTime": 8,
     "range": 24,
     "bulletSpread": 120,
     "bulletSpeed": 880
@@ -328,6 +328,16 @@
     "range": 31,
     "bulletSpread": 120,
     "bulletSpeed": 740
+  },
+  // 英国海军 UK/203/50 舰炮
+  {
+    "name": "UK/203/50",
+    "bulletName": "UK/GB/203/1940",
+    "bulletCount": 3,
+    "reloadTime": 7,
+    "range": 27,
+    "bulletSpread": 100,
+    "bulletSpeed": 780
   },
   // 英国海军 UK/152/50 舰炮
   {
