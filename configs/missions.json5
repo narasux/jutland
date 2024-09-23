@@ -36,6 +36,7 @@
           "prinz_eugen",
           "leipzig",
           "cheshire",
+          "vickers",
           "porter",
           "asashio",
           "yugumo",
@@ -215,6 +216,12 @@
       {
         "name": "cheshire",
         "pos": [40, 35],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "vickers",
+        "pos": [39, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
