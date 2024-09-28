@@ -116,6 +116,11 @@ func (p *MapPos) EnsureBorder(borderX, borderY float64) {
 	p.MY = int(math.Floor(p.RY))
 }
 
+// OnBorder 判断是否在边界上
+func (p *MapPos) OnBorder(borderX, borderY float64) bool {
+	return p.RX == 0 || p.RX == borderX || p.RY == 0 || p.RY == borderY
+}
+
 // Copy 复制 MapPos 对象
 func (p *MapPos) Copy() MapPos {
 	return MapPos{MX: p.MX, MY: p.MY, RX: p.RX, RY: p.RY}

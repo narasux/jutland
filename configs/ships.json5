@@ -2165,6 +2165,7 @@
       "战列舰（英）",
       "主炮：4 座双联装 381mm/42",
       "副炮：8 座双联装 152mm/45",
+      "鱼雷：4 座单装直航 533mm"
     ],
     "weapon": {
       "mainGuns": [
@@ -2254,6 +2255,176 @@
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 360]
         },
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [30, 60],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [300, 330]
+        },
+        // 右舷鱼雷 B
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [30, 60],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [300, 330]
+        },
+      ]
+    }
+  },
+  {
+    "name": "tiger",
+    "displayName": "虎",
+    "type": "battleship",
+    "typeAbbr": "BC",
+    "totalHP": 33600,
+    "horizontalDamageReduction": 0.26,
+    "verticalDamageReduction": 0.2,
+    "maxSpeed": 28,
+    "acceleration": 0.3,
+    "rotateSpeed": 0.8,
+    "length": 215,
+    "width": 28,
+    "fundsCost": 300,
+    "timeCost": 28,
+    "description": [
+      "战列巡洋舰（英）",
+      "主炮：4 座双联装 343mm/45",
+      "副炮：12 座双联装 152mm/45",
+      "鱼雷：4 座单装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "UK/343/45",
+          "posPercent": 0.54,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "UK/343/45",
+          "posPercent": 0.4,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "UK/343/45",
+          "posPercent": -0.2,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        },
+        // 后主炮 D
+        {
+          "name": "UK/343/45",
+          "posPercent": -0.6,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [
+        // 右前副炮 A
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 A
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 B
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.22,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 B
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.22,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 C
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 C
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.15,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 D
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 D
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.05,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 E
+        {
+          "name": "UK/152/45",
+          "posPercent": -0.05,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 E
+        {
+          "name": "UK/152/45",
+          "posPercent": -0.05,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 F
+        {
+          "name": "UK/152/45",
+          "posPercent": -0.3,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 F
+        {
+          "name": "UK/152/45",
+          "posPercent": -0.3,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 330]
+        }
       ],
       "torpedoes": [
         // 右舷鱼雷 A

@@ -179,6 +179,13 @@
     "criticalRate": 0.02
   },
   {
+    "name": "UK/GB/343/1910",
+    "type": "shell",
+    "diameter": 343,
+    "damage": 1800,
+    "criticalRate": 0.015
+  },
+  {
     "name": "UK/GB/203/1940",
     "type": "shell",
     "diameter": 203,

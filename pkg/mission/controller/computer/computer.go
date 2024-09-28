@@ -33,6 +33,19 @@ func (h *ComputerDecisionHandler) Handle(
 ) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 
+	// AI 指令：扫描所有增援点，只要可用，就随机召唤增援
+	reinforcePointUid := ""
+	for _, rp := range misState.ReinforcePoints {
+		if rp.BelongPlayer != h.player {
+			continue
+		}
+		reinforcePointUid = rp.Uid
+		if len(rp.OncomingShips) < rp.MaxOncomingShip {
+			summonInstr := instr.NewShipSummon(rp.Uid, "")
+			instructions[summonInstr.Uid()] = summonInstr
+		}
+	}
+
 	var ships, enemyShips []*obj.BattleShip
 	for _, s := range misState.Ships {
 		if s.BelongPlayer == h.player {
@@ -62,6 +75,15 @@ func (h *ComputerDecisionHandler) Handle(
 				}
 				instructions[instrUid] = instr.NewShipMovePath(ship.Uid, path)
 			}
+		} else if ship.CurPos.OnBorder(
+			float64(misState.MissionMD.MapCfg.Width-2),
+			float64(misState.MissionMD.MapCfg.Height-2),
+		) {
+			// 如果到了边界，就往自己的增援点的集结点走
+			moveInstr := instr.NewShipMove(
+				ship.Uid, misState.ReinforcePoints[reinforcePointUid].RallyPos,
+			)
+			instructions[moveInstr.Uid()] = moveInstr
 		} else {
 			// 防御模式，如果附近有敌人在移动，则自己在附近随机移动
 			for _, enemy := range enemyShips {
@@ -78,17 +100,6 @@ func (h *ComputerDecisionHandler) Handle(
 					break
 				}
 			}
-		}
-	}
-
-	// AI 指令：扫描所有增援点，只要可用，就随机召唤增援
-	for _, rp := range misState.ReinforcePoints {
-		if rp.BelongPlayer != h.player {
-			continue
-		}
-		if len(rp.OncomingShips) < rp.MaxOncomingShip {
-			summonInstr := instr.NewShipSummon(rp.Uid, "")
-			instructions[summonInstr.Uid()] = summonInstr
 		}
 	}
 

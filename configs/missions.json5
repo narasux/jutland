@@ -29,6 +29,7 @@
           "lion_II",
           "king_george_v",
           "warspite",
+          "tiger",
           "alaska_II",
           "atlanta",
           "long_beach_II",
@@ -85,97 +86,103 @@
     "initShips": [
       {
         "name": "duck",
-        "pos": [37, 33],
+        "pos": [37, 32],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "lowa",
-        "pos": [35, 34],
+        "pos": [35, 33],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "montana",
-        "pos": [37, 35],
+        "pos": [37, 34],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "south_dakota",
-        "pos": [35, 36],
+        "pos": [35, 35],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "yamato",
-        "pos": [37, 37],
+        "pos": [37, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "yamato_II",
-        "pos": [35, 38],
+        "pos": [35, 37],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "kongo",
-        "pos": [37, 39],
+        "pos": [37, 38],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "bismarck",
-        "pos": [33, 33],
+        "pos": [33, 32],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "scharnhorst",
-        "pos": [31, 34],
+        "pos": [31, 33],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "lutzow",
-        "pos": [33, 35],
+        "pos": [33, 34],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "hood",
-        "pos": [31, 36],
+        "pos": [31, 35],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "nelson",
-        "pos": [33, 37],
+        "pos": [33, 36],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "lion",
-        "pos": [31, 38],
+        "pos": [31, 37],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "lion_II",
-        "pos": [33, 39],
+        "pos": [33, 38],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "king_george_v",
-        "pos": [31, 40],
+        "pos": [31, 39],
         "rotation": 90,
         "belongPlayer": "HA"
       },
       {
         "name": "warspite",
-        "pos": [33, 41],
+        "pos": [33, 40],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "tiger",
+        "pos": [31, 41],
         "rotation": 90,
         "belongPlayer": "HA"
       },
