@@ -329,6 +329,26 @@
     "bulletSpread": 120,
     "bulletSpeed": 740
   },
+  // 英国海军 UK/356/45 四联装舰炮
+  {
+    "name": "UK/356/45/4",
+    "bulletName": "UK/GB/356/1933",
+    "bulletCount": 4,
+    "reloadTime": 13,
+    "range": 33,
+    "bulletSpread": 120,
+    "bulletSpeed": 800
+  },
+  // 英国海军 UK/356/45 双联装舰炮
+  {
+    "name": "UK/356/45/2",
+    "bulletName": "UK/GB/356/1933",
+    "bulletCount": 2,
+    "reloadTime": 13,
+    "range": 33,
+    "bulletSpread": 120,
+    "bulletSpeed": 800
+  },
   // 英国海军 UK/203/50 舰炮
   {
     "name": "UK/203/50",
