@@ -2146,6 +2146,147 @@
       "torpedoes": []
     }
   },
+  {
+    "name": "warspite",
+    "displayName": "厌战",
+    "type": "battleship",
+    "typeAbbr": "BB",
+    "totalHP": 37000,
+    "horizontalDamageReduction": 0.3,
+    "verticalDamageReduction": 0.2,
+    "maxSpeed": 24,
+    "acceleration": 0.25,
+    "rotateSpeed": 0.7,
+    "length": 197,
+    "width": 28,
+    "fundsCost": 340,
+    "timeCost": 33,
+    "description": [
+      "战列舰（英）",
+      "主炮：4 座双联装 381mm/42",
+      "副炮：8 座双联装 152mm/45",
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "UK/381/42",
+          "posPercent": 0.55,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "UK/381/42",
+          "posPercent": 0.4,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "UK/381/42",
+          "posPercent": -0.45,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        },
+        // 后主炮 D
+        {
+          "name": "UK/381/42",
+          "posPercent": -0.6,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [
+        // 右前副炮 A
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 A
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 B
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.22,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 B
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.22,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 C
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.16,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 C
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.16,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+        // 右前副炮 D
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.1,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左前副炮 D
+        {
+          "name": "UK/152/45",
+          "posPercent": 0.1,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 360]
+        },
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [30, 60],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [300, 330]
+        },
+        // 右舷鱼雷 B
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [30, 60],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "UK/533/1",
+          "posPercent": -0.2,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [300, 330]
+        },
+      ]
+    }
+  },
   // 巡洋舰
   // 美国海军
   {

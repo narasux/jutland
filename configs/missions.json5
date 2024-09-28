@@ -28,6 +28,7 @@
           "lion",
           "lion_II",
           "king_george_v",
+          "warspite",
           "alaska_II",
           "atlanta",
           "long_beach_II",
@@ -169,6 +170,12 @@
       {
         "name": "king_george_v",
         "pos": [31, 40],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "warspite",
+        "pos": [33, 41],
         "rotation": 90,
         "belongPlayer": "HA"
       },

@@ -193,6 +193,13 @@
     "criticalRate": 0.005
   },
   {
+    "name": "UK/GB/152/1910",
+    "type": "shell",
+    "diameter": 152,
+    "damage": 130,
+    "criticalRate": 0.003
+  },
+  {
     "name": "UK/GB/140/1935",
     "type": "shell",
     "diameter": 140,
@@ -254,7 +261,7 @@
     "type": "torpedo",
     "diameter": 622,
     "damage": 5450,
-    "criticalRate": 0.07
+    "criticalRate": 0.08
   },
   {
     "name": "UK/TB/533/1928",
@@ -262,5 +269,12 @@
     "diameter": 533,
     "damage": 4600,
     "criticalRate": 0.07
+  },
+  {
+    "name": "UK/TB/533/1918",
+    "type": "torpedo",
+    "diameter": 533,
+    "damage": 4000,
+    "criticalRate": 0.04
   }
 ]

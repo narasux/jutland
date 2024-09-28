@@ -369,6 +369,16 @@
     "bulletSpread": 100,
     "bulletSpeed": 840
   },
+  // 英国海军 UK/152/45 单装舰炮
+  {
+    "name": "UK/152/45",
+    "bulletName": "UK/GB/152/1910",
+    "bulletCount": 1,
+    "reloadTime": 6,
+    "range": 17,
+    "bulletSpread": 120,
+    "bulletSpeed": 750
+  },
   // 英国海军 UK/140/50 舰炮
   {
     "name": "UK/140/50",
