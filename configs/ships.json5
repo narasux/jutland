@@ -2474,7 +2474,7 @@
     "length": 165,
     "width": 16,
     "fundsCost": 70,
-    "timeCost": 8,
+    "timeCost": 10,
     "description": [
       "轻巡洋舰（美）",
       "主炮：8 座双联装 127mm/38",
@@ -2830,7 +2830,7 @@
     "length": 201,
     "width": 21,
     "fundsCost": 130,
-    "timeCost": 13,
+    "timeCost": 15,
     "description": [
       "重巡洋舰（日）",
       "主炮：5 座双联装 203mm/50",
@@ -2951,8 +2951,8 @@
     "rotateSpeed": 2,
     "length": 162,
     "width": 14,
-    "fundsCost": 80,
-    "timeCost": 15,
+    "fundsCost": 100,
+    "timeCost": 20,
     "description": [
       "雷击巡洋舰（日）",
       "主炮：4 座单装 140mm/50",
@@ -3207,7 +3207,7 @@
     "length": 177,
     "width": 16,
     "fundsCost": 90,
-    "timeCost": 8,
+    "timeCost": 14,
     "description": [
       "轻巡洋舰（德）",
       "主炮：3 座三联装 150mm/60",
@@ -3413,11 +3413,12 @@
     "length": 160,
     "width": 16,
     "fundsCost": 76,
-    "timeCost": 9,
+    "timeCost": 12,
     "description": [
       "轻巡洋舰（英）",
       "主炮：4 座双联装 152mm/50",
       "副炮：2 座单装 102mm/45",
+      "鱼雷：4 座三联装直航 533mm"
     ],
     "weapon": {
       "mainGuns": [
@@ -3492,6 +3493,104 @@
         {
           "name": "UK/533/3",
           "posPercent": -0.24,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 330]
+        }
+      ]
+    }
+  },
+  {
+    "name": "k_25",
+    "displayName": "K-25",
+    "type": "cruiser",
+    "typeAbbr": "CL",
+    "totalHP": 8500,
+    "horizontalDamageReduction": 0.2,
+    "verticalDamageReduction": 0.1,
+    "maxSpeed": 32,
+    "acceleration": 0.6,
+    "rotateSpeed": 2,
+    "length": 169,
+    "width": 19,
+    "fundsCost": 80,
+    "timeCost": 14,
+    "description": [
+      "防空巡洋舰（英）",
+      "主炮：8 座双联装 133mm/50",
+      "鱼雷：2 座四联装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.67,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.52,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [270, 360]
+        },
+        // 前主炮 C
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.52,
+          "rightFiringArc": [0, 90],
+          "leftFiringArc": [225, 360]
+        },
+        // 前主炮 D
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.45,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 E
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.5,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        },
+        // 后主炮 F
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": 0.6,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 300]
+        },
+        // 后主炮 G
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.6,
+          "rightFiringArc": [60, 180],
+          "leftFiringArc": [180, 330]
+        },
+        // 后主炮 H
+        {
+          "name": "UK/133/50/DP",
+          "posPercent": -0.72,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "UK/533/4",
+          "posPercent": -0.34,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "UK/533/4",
+          "posPercent": -0.34,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         }
@@ -3585,7 +3684,7 @@
     "length": 118,
     "width": 11,
     "fundsCost": 26,
-    "timeCost": 8,
+    "timeCost": 10,
     "description": [
       "驱逐舰（日）",
       "主炮：3 座双联装 127mm/50",
@@ -3648,7 +3747,7 @@
     "length": 119,
     "width": 11,
     "fundsCost": 26,
-    "timeCost": 8,
+    "timeCost": 10,
     "description": [
       "驱逐舰（日）",
       "主炮：3 座双联装 127mm/50",
@@ -3712,7 +3811,7 @@
     "length": 119,
     "width": 11,
     "fundsCost": 31,
-    "timeCost": 10,
+    "timeCost": 12,
     "description": [
       "驱逐舰（德）",
       "主炮：5 座单装 127mm/45",
@@ -3792,7 +3891,6 @@
     "fundsCost": 22,
     "timeCost": 10,
     "description": [
-      "驱逐领舰（英）",
       "主炮：5 座双联装 120mm/45",
       "鱼雷：1 座五联装直航 533mm"
     ],
@@ -3858,7 +3956,7 @@
     "acceleration": 1.1,
     "rotateSpeed": 2.2,
     "length": 121,
-    "width": 13,
+    "width": 12,
     "fundsCost": 20,
     "timeCost": 10,
     "description": [

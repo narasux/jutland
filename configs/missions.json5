@@ -40,6 +40,7 @@
           "leipzig",
           "cheshire",
           "vickers",
+          "k_25",
           "porter",
           "asashio",
           "yugumo",
@@ -245,6 +246,12 @@
       {
         "name": "vickers",
         "pos": [39, 36],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "k_25",
+        "pos": [40, 37],
         "rotation": 90,
         "belongPlayer": "HA"
       },
