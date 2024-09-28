@@ -59,6 +59,16 @@
     "range": 18,
     "bulletSpeed": 45,
   },
+  // 英国海军 533mm 五联装 鱼雷
+  {
+    "name": "UK/533/5",
+    "bulletName": "UK/TB/533/1928",
+    "bulletCount": 5,
+    "shotInterval": 1,
+    "reloadTime": 88,
+    "range": 14,
+    "bulletSpeed": 50,
+  },
   // 英国海军 533mm 四联装 鱼雷
   {
     "name": "UK/533/4",

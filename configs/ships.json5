@@ -3765,10 +3765,81 @@
           "rightFiringArc": [30, 150],
           "leftFiringArc": [210, 330]
         },
-        // 中轴鱼雷 A
+        // 中轴鱼雷 B
         {
           "name": "GER/533/4",
           "posPercent": -0.3,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        },
+      ]
+    }
+  },
+  // 英国海军
+  {
+    "name": "v",
+    "displayName": "V",
+    "type": "destroyer",
+    "typeAbbr": "DD",
+    "totalHP": 2200,
+    "horizontalDamageReduction": 0,
+    "verticalDamageReduction": -0.5,
+    "maxSpeed": 36,
+    "acceleration": 1.2,
+    "rotateSpeed": 2.3,
+    "length": 111,
+    "width": 12,
+    "fundsCost": 22,
+    "timeCost": 10,
+    "description": [
+      "驱逐领舰（英）",
+      "主炮：5 座双联装 120mm/45",
+      "鱼雷：1 座五联装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "UK/120/45/DP",
+          "posPercent": 0.68,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "UK/120/45/DP",
+          "posPercent": 0.57,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "UK/120/45/DP",
+          "posPercent": 0.42,
+          "rightFiringArc": [45, 120],
+          "leftFiringArc": [240, 360]
+        },
+        // 后主炮 D
+        {
+          "name": "UK/120/45/DP",
+          "posPercent": -0.63,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        },
+        // 后主炮 E
+        {
+          "name": "UK/120/45/DP",
+          "posPercent": -0.81,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 中轴鱼雷 A
+        {
+          "name": "UK/533/5",
+          "posPercent": -0.25,
           "rightFiringArc": [30, 150],
           "leftFiringArc": [210, 330]
         },
