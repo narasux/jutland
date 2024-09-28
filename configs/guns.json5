@@ -448,5 +448,15 @@
     "range": 16,
     "bulletSpread": 60,
     "bulletSpeed": 810
+  },
+  // 苏联海军 SU/130/58 舰炮
+  {
+    "name": "SU/130/58",
+    "bulletName": "SU/GB/130/1935",
+    "bulletCount": 2,
+    "reloadTime": 1.8,
+    "range": 27,
+    "bulletSpread": 50,
+    "bulletSpeed": 940
   }
 ]

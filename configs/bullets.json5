@@ -241,6 +241,13 @@
     "damage": 55,
     "criticalRate": 0.001
   },
+  {
+    "name": "SU/GB/130/1935",
+    "type": "shell",
+    "diameter": 130,
+    "damage": 125,
+    "criticalRate": 0.002
+  },
   // 鱼雷
   {
     "name": "US/TB/533/1931",
@@ -283,5 +290,12 @@
     "diameter": 533,
     "damage": 4000,
     "criticalRate": 0.04
+  },
+  {
+    "name": "SU/TB/533/1932",
+    "type": "torpedo",
+    "diameter": 533,
+    "damage": 4800,
+    "criticalRate": 0.08
   }
 ]

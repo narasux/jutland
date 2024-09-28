@@ -3999,5 +3999,62 @@
         },
       ]
     }
+  },
+  // 苏联海军
+  {
+    "name": "30bis",
+    "displayName": "快速",
+    "type": "destroyer",
+    "typeAbbr": "DD",
+    "totalHP": 3230,
+    "horizontalDamageReduction": 0,
+    "verticalDamageReduction": -0.4,
+    "maxSpeed": 38.5,
+    "acceleration": 1.3,
+    "rotateSpeed": 2.4,
+    "length": 126,
+    "width": 13,
+    "fundsCost": 30,
+    "timeCost": 13,
+    "description": [
+      "驱逐舰（苏）",
+      "主炮：2 座双联装 130mm/58",
+      "鱼雷：2 座五联装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "SU/130/58",
+          "posPercent": 0.65,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 B
+        {
+          "name": "SU/130/58",
+          "posPercent": -0.65,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [210, 360]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 中轴鱼雷 A
+        {
+          "name": "SU/533/5",
+          "posPercent": 0.1,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          "name": "SU/533/5",
+          "posPercent": -0.26,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        }
+      ]
+    }
   }
 ]
