@@ -44,7 +44,8 @@
           "asashio",
           "yugumo",
           "z_11",
-          "v"
+          "v",
+          "y"
         ],
       },
       {
@@ -274,6 +275,12 @@
       {
         "name": "v",
         "pos": [44, 37],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "y",
+        "pos": [43, 38],
         "rotation": 90,
         "belongPlayer": "HA"
       },
