@@ -459,14 +459,24 @@
     "bulletSpread": 180,
     "bulletSpeed": 870
   },
-  // 苏联海军 SU/152/57 舰炮
+  // 苏联海军 SU/152/57 三联装舰炮
+  {
+    "name": "SU/152/57/3",
+    "bulletName": "SU/GB/152/1938",
+    "bulletCount": 3,
+    "reloadTime": 4.5,
+    "range": 32,
+    "bulletSpread": 100,
+    "bulletSpeed": 950
+  },
+  // 苏联海军 SU/152/57 双联装舰炮
   {
     "name": "SU/152/57/2",
     "bulletName": "SU/GB/152/1938",
     "bulletCount": 2,
     "reloadTime": 4.5,
     "range": 32,
-    "bulletSpread": 50,
+    "bulletSpread": 100,
     "bulletSpeed": 950
   },
   // 苏联海军 SU/130/58 舰炮
@@ -476,7 +486,7 @@
     "bulletCount": 2,
     "reloadTime": 1.8,
     "range": 27,
-    "bulletSpread": 50,
+    "bulletSpread": 70,
     "bulletSpeed": 940
   },
   // 苏联海军 SU/100/56 高平两用炮

@@ -21,6 +21,7 @@
           "yamato_II",
           "kongo",
           "sovetsky_soyuz",
+          "sovetsky_soyuz_II",
           "bismarck",
           "scharnhorst",
           "lutzow",
@@ -134,6 +135,12 @@
       {
         "name": "sovetsky_soyuz",
         "pos": [35, 39],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "sovetsky_soyuz_II",
+        "pos": [37, 40],
         "rotation": 90,
         "belongPlayer": "HA"
       },
