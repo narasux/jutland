@@ -242,11 +242,32 @@
     "criticalRate": 0.001
   },
   {
+    "name": "SU/GB/406/1939",
+    "type": "shell",
+    "diameter": 406,
+    "damage": 3750,
+    "criticalRate": 0.03
+  },
+  {
+    "name": "SU/GB/152/1938",
+    "type": "shell",
+    "diameter": 152,
+    "damage": 180,
+    "criticalRate": 0.005
+  },
+  {
     "name": "SU/GB/130/1935",
     "type": "shell",
     "diameter": 130,
     "damage": 125,
     "criticalRate": 0.002
+  },
+  {
+    "name": "SU/GB/100/1940",
+    "type": "shell",
+    "diameter": 100,
+    "damage": 55,
+    "criticalRate": 0.001
   },
   // 鱼雷
   {

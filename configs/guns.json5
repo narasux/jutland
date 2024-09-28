@@ -449,6 +449,26 @@
     "bulletSpread": 60,
     "bulletSpeed": 810
   },
+  // 苏联海军 SU/406/50 舰炮
+  {
+    "name": "SU/406/50",
+    "bulletName": "SU/GB/406/1939",
+    "bulletCount": 3,
+    "reloadTime": 12,
+    "range": 45,
+    "bulletSpread": 180,
+    "bulletSpeed": 870
+  },
+  // 苏联海军 SU/152/57 舰炮
+  {
+    "name": "SU/152/57/2",
+    "bulletName": "SU/GB/152/1938",
+    "bulletCount": 2,
+    "reloadTime": 4.5,
+    "range": 32,
+    "bulletSpread": 50,
+    "bulletSpeed": 950
+  },
   // 苏联海军 SU/130/58 舰炮
   {
     "name": "SU/130/58",
@@ -458,5 +478,15 @@
     "range": 27,
     "bulletSpread": 50,
     "bulletSpeed": 940
+  },
+  // 苏联海军 SU/100/56 高平两用炮
+  {
+    "name": "SU/100/56/DP",
+    "bulletName": "SU/GB/100/1940",
+    "bulletCount": 2,
+    "reloadTime": 1,
+    "range": 18,
+    "bulletSpread": 50,
+    "bulletSpeed": 900
   }
 ]
