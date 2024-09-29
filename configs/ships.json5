@@ -67,7 +67,7 @@
     "horizontalDamageReduction": 1,
     "verticalDamageReduction": 1,
     "maxSpeed": 1000,
-    "acceleration": 10,
+    "acceleration": 25,
     "rotateSpeed": 360,
     "length": 128,
     "width": 36,
@@ -3847,6 +3847,121 @@
         {
           "name": "UK/533/4",
           "posPercent": -0.34,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 330]
+        }
+      ]
+    }
+  },
+  // 苏联海军
+  {
+    "name": "sverdlov",
+    "displayName": "斯维尔德洛夫",
+    "type": "cruiser",
+    "typeAbbr": "CL",
+    "totalHP": 16640,
+    "horizontalDamageReduction": 0.26,
+    "verticalDamageReduction": 0.15,
+    "maxSpeed": 34,
+    "acceleration": 0.6,
+    "rotateSpeed": 1.5,
+    "length": 210,
+    "width": 22,
+    "fundsCost": 170,
+    "timeCost": 18,
+    "description": [
+      "轻巡洋舰（苏）",
+      "主炮：4 座三联装 152mm/57",
+      "高平炮：6 座双联装 100mm/70",
+      "鱼雷：2 座五联装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 前主炮 A
+        {
+          "name": "SU/152/57/3",
+          "posPercent": 0.6,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 前主炮 B
+        {
+          "name": "SU/152/57/3",
+          "posPercent": 0.47,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 后主炮 C
+        {
+          "name": "SU/152/57/3",
+          "posPercent": -0.5,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        },
+        // 后主炮 D
+        {
+          "name": "SU/152/57/3",
+          "posPercent": -0.63,
+          "rightFiringArc": [45, 180],
+          "leftFiringArc": [180, 315]
+        }
+      ],
+      "secondaryGuns": [
+        // 右后高平两用炮 A
+        {
+          "name": "SU/100/70/2/DP",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 135],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 A
+        {
+          "name": "SU/100/70/2/DP",
+          "posPercent": 0.3,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [225, 360]
+        },
+        // 右后高平两用炮 B
+        {
+          "name": "SU/100/70/2/DP",
+          "posPercent": -0.09,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 B
+        {
+          "name": "SU/100/70/2/DP",
+          "posPercent": -0.09,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 330]
+        },
+        // 右后高平两用炮 C
+        {
+          "name": "SU/100/70/2/DP",
+          "posPercent": -0.25,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [360, 360]
+        },
+        // 左后高平两用炮 C
+        {
+          "name": "SU/100/70/2/DP",
+          "posPercent": -0.25,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "SU/533/5",
+          "posPercent": 0.05,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          "name": "SU/533/5",
+          "posPercent": 0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         }

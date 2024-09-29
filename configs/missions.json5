@@ -43,6 +43,7 @@
           "cheshire",
           "vickers",
           "k_25",
+          "sverdlov",
           "porter",
           "asashio",
           "yugumo",
@@ -267,6 +268,12 @@
       {
         "name": "k_25",
         "pos": [40, 37],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "sverdlov",
+        "pos": [39, 38],
         "rotation": 90,
         "belongPlayer": "HA"
       },

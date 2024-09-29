@@ -489,6 +489,16 @@
     "bulletSpread": 70,
     "bulletSpeed": 940
   },
+  // 苏联海军 SU/100/70/2 高平两用炮
+  {
+    "name": "SU/100/70/2/DP",
+    "bulletName": "SU/GB/100/1940",
+    "bulletCount": 2,
+    "reloadTime": 0.8,
+    "range": 24,
+    "bulletSpread": 35,
+    "bulletSpeed": 1100
+  },
   // 苏联海军 SU/100/56 高平两用炮
   {
     "name": "SU/100/56/DP",
