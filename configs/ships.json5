@@ -4767,5 +4767,62 @@
         }
       ]
     }
+  },
+  // 苏联海军
+  {
+    "name": "P_6",
+    "displayName": "P-6",
+    "type": "torpedo_boat",
+    "typeAbbr": "TB",
+    "totalHP": 66,
+    "horizontalDamageReduction": -0.25,
+    "verticalDamageReduction": -1,
+    "maxSpeed": 45,
+    "acceleration": 3,
+    "rotateSpeed": 6,
+    "length": 25,
+    "width": 6,
+    "fundsCost": 5,
+    "timeCost": 4,
+    "description": [
+      "鱼雷艇（苏）",
+      "主炮：2 座双联装 25mm",
+      "鱼雷：2 座单装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 主炮 A
+        {
+          "name": "SU/25/65/2",
+          "posPercent": 0.67,
+          "rightFiringArc": [0, 90],
+          "leftFiringArc": [170, 360]
+        },
+        // 主炮 B
+        {
+          "name": "SU/25/65/2",
+          "posPercent": -0.72,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "SU/533/1",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 30],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "SU/533/1",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [330, 360]
+        }
+      ]
+    }
   }
 ]

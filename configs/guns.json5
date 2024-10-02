@@ -588,5 +588,15 @@
     "range": 18,
     "bulletSpread": 50,
     "bulletSpeed": 900
+  },
+  // 苏联海军 SU/25/65/2 双联装高炮
+  {
+    "name": "SU/25/65/2",
+    "bulletName": "SU/GB/25/1940",
+    "bulletCount": 2,
+    "reloadTime": 0.2,
+    "range": 4,
+    "bulletSpread": 30,
+    "bulletSpeed": 950
   }
 ]
