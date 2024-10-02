@@ -119,6 +119,16 @@
     "bulletSpread": 80,
     "bulletSpeed": 800
   },
+  // 美国海军 US/76/50 单装舰炮
+  {
+    "name": "US/76/50",
+    "bulletName": "US/GB/76/1910",
+    "bulletCount": 1,
+    "reloadTime": 1,
+    "range": 13,
+    "bulletSpread": 100,
+    "bulletSpeed": 820
+  },
   // 美国海军 US/40/60 单装高炮
   {
     "name": "US/40/60",

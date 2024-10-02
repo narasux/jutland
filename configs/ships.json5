@@ -90,6 +90,96 @@
       "torpedoes": []
     }
   },
+  // 自由轮
+  {
+    "name": "liberty",
+    "displayName": "自由轮",
+    "type": "default",
+    "typeAbbr": "Cargo",
+    "totalHP": 7500,
+    "horizontalDamageReduction": 0,
+    "verticalDamageReduction": 0,
+    "maxSpeed": 11,
+    "acceleration": 0.1,
+    "rotateSpeed": 0.6,
+    "length": 135,
+    "width": 17,
+    "fundsCost": 50,
+    "timeCost": 15,
+    "description": [
+      "自由轮",
+      "主炮：1 座单裝 127mm/25",
+      "主炮：1 座单裝 76mm/50",
+      "副炮：8 座单裝 20mm/70",
+    ],
+    "weapon": {
+      "mainGuns": [
+        {
+          "name": "US/127/25/MK10",
+          "posPercent": 0.91,
+          "rightFiringArc": [0, 160],
+          "leftFiringArc": [200, 360]
+        },
+        {
+          "name": "US/76/50",
+          "posPercent": -0.94,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [
+        {
+          "name": "US/20/70",
+          "posPercent": 0.8,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        },
+        {
+          "name": "US/20/70",
+          "posPercent": 0.8,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        },
+        {
+          "name": "US/20/70",
+          "posPercent": 0.08,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        },
+        {
+          "name": "US/20/70",
+          "posPercent": 0.08,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        },
+        {
+          "name": "US/20/70",
+          "posPercent": -0.1,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        },
+        {
+          "name": "US/20/70",
+          "posPercent": -0.1,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        },
+        {
+          "name": "US/20/70",
+          "posPercent": -0.58,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        },
+        {
+          "name": "US/20/70",
+          "posPercent": -0.58,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        }
+      ],
+      "torpedoes": []
+    }
+  },
   // 战列舰
   // 美国海军
   {

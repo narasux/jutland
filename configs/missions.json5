@@ -14,6 +14,7 @@
         "maxOncomingShip": 10,
         "providedShipNames": [
           "duck",
+          "liberty",
           "lowa",
           "montana",
           "south_dakota",
@@ -360,6 +361,30 @@
         "pos": [45, 41],
         "rotation": 90,
         "belongPlayer": "HA"
+      },
+      {
+        "name": "liberty",
+        "pos": [45, 40],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "liberty",
+        "pos": [45, 70],
+        "rotation":270,
+        "belongPlayer": "CA"
+      },
+      {
+        "name": "liberty",
+        "pos": [44, 70],
+        "rotation":270,
+        "belongPlayer": "CA"
+      },
+      {
+        "name": "liberty",
+        "pos": [43, 70],
+        "rotation":270,
+        "belongPlayer": "CA"
       },
       {
         "name": "yugumo",

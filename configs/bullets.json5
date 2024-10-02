@@ -45,6 +45,13 @@
     "criticalRate": 0.002
   },
   {
+    "name": "US/GB/76/1910",
+    "type": "shell",
+    "diameter": 76,
+    "damage": 35,
+    "criticalRate": 0.001
+  },
+  {
     "name": "US/GB/40/1930",
     "type": "shell",
     "diameter": 40,
@@ -317,6 +324,13 @@
     "diameter": 100,
     "damage": 55,
     "criticalRate": 0.001
+  },
+  {
+    "name": "SU/GB/25/1940",
+    "type": "shell",
+    "diameter": 25,
+    "damage": 2,
+    "criticalRate": 0.0005
   },
   // 鱼雷
   {
