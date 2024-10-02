@@ -339,6 +339,26 @@
     "bulletSpread": 30,
     "bulletSpeed": 800
   },
+  // 德国海军 GER/37/57 高炮
+  {
+    "name": "GER/37/57",
+    "bulletName": "GER/GB/37/1935",
+    "bulletCount": 1,
+    "reloadTime": 0.6,
+    "range": 6,
+    "bulletSpread": 20,
+    "bulletSpeed": 820
+  },
+  // 德国海军 GER/20/70 单装高炮
+  {
+    "name": "GER/20/70",
+    "bulletName": "GER/GB/20/1940",
+    "bulletCount": 1,
+    "reloadTime": 0.2,
+    "range": 2,
+    "bulletSpread": 20,
+    "bulletSpeed": 910
+  },
   // 英国海军 UK/406/45 三联装舰炮
   {
     "name": "UK/406/45/3",

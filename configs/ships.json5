@@ -4589,7 +4589,7 @@
         {
           "name": "US/533/1",
           "posPercent": 0,
-          "rightFiringArc": [30, 150],
+          "rightFiringArc": [0, 30],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 B
@@ -4597,7 +4597,7 @@
           "name": "US/533/1",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
-          "leftFiringArc": [210, 330]
+          "leftFiringArc": [330, 360]
         }
       ]
     }
@@ -4639,7 +4639,7 @@
         {
           "name": "JP/450/1",
           "posPercent": -0.7,
-          "rightFiringArc": [30, 150],
+          "rightFiringArc": [0, 30],
           "leftFiringArc": [360, 360]
         },
         // 左舷鱼雷 B
@@ -4647,7 +4647,73 @@
           "name": "JP/450/1",
           "posPercent": -0.7,
           "rightFiringArc": [0, 0],
-          "leftFiringArc": [210, 330]
+          "leftFiringArc": [330, 360]
+        }
+      ]
+    }
+  },
+  // 德国海军
+  {
+    "name": "S_100",
+    "displayName": "S-100",
+    "type": "torpedo_boat",
+    "typeAbbr": "TB",
+    "totalHP": 95,
+    "horizontalDamageReduction": -0.2,
+    "verticalDamageReduction": -1,
+    "maxSpeed": 43,
+    "acceleration": 3,
+    "rotateSpeed": 6,
+    "length": 33,
+    "width": 5,
+    "fundsCost": 7,
+    "timeCost": 6,
+    "description": [
+      "鱼雷艇（德）",
+      "主炮：1 座单装 37mm",
+      "副炮：2 座单裝 20mm",
+      "鱼雷：2 座单装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 主炮 A
+        {
+          "name": "GER/37/57",
+          "posPercent": -0.55,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [
+        // 副炮 A
+        {
+          "name": "GER/20/70",
+          "posPercent": 0.75,
+          "rightFiringArc": [0, 150],
+          "leftFiringArc": [210, 360]
+        },
+        // 副炮 B
+        {
+          "name": "GER/20/70",
+          "posPercent": 0.1,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "GER/533/1",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 30],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "GER/533/1",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [330, 360]
         }
       ]
     }

@@ -54,6 +54,7 @@
           "30bis",
           "PT_791",
           "T_14",
+          "S_100"
         ],
       },
       {
@@ -331,6 +332,18 @@
       {
         "name": "PT_791",
         "pos": [43, 40],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "S_100",
+        "pos": [44, 40],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "S_100",
+        "pos": [43, 41],
         "rotation": 90,
         "belongPlayer": "HA"
       },
