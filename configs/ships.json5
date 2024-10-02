@@ -4717,5 +4717,55 @@
         }
       ]
     }
+  },
+  // 英国海军
+  {
+    "name": "MTB_77",
+    "displayName": "MTB-77",
+    "type": "torpedo_boat",
+    "typeAbbr": "TB",
+    "totalHP": 45,
+    "horizontalDamageReduction": -0.3,
+    "verticalDamageReduction": -1,
+    "maxSpeed": 39,
+    "acceleration": 2.5,
+    "rotateSpeed": 5,
+    "length": 22,
+    "width": 7,
+    "fundsCost": 4,
+    "timeCost": 4,
+    "description": [
+      "鱼雷艇（英）",
+      "主炮：1 座双联装 12.7mm",
+      "鱼雷：2 座单装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 主炮 A
+        {
+          "name": "UK/12.7/2",
+          "posPercent": -0.4,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "UK/533/1",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 30],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "UK/533/1",
+          "posPercent": 0.5,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [330, 360]
+        }
+      ]
+    }
   }
 ]

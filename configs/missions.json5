@@ -9,7 +9,7 @@
       {
         "pos": [1, 20],
         "rotation": 90,
-        "rallyPos": [30, 35],
+        "rallyPos": [25, 35],
         "belongPlayer": "HA",
         "maxOncomingShip": 10,
         "providedShipNames": [
@@ -54,7 +54,8 @@
           "30bis",
           "PT_791",
           "T_14",
-          "S_100"
+          "S_100",
+          "MTB_77",
         ],
       },
       {
@@ -342,7 +343,7 @@
         "belongPlayer": "HA"
       },
       {
-        "name": "S_100",
+        "name": "MTB_77",
         "pos": [43, 41],
         "rotation": 90,
         "belongPlayer": "HA"
