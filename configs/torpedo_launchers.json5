@@ -39,6 +39,16 @@
     "range": 22,
     "bulletSpeed": 54,
   },
+  // 日本海军 450mm 单装鱼雷
+  {
+    "name": "JP/450/1",
+    "bulletName": "JP/TB/450/1928",
+    "bulletCount": 1,
+    "shotInterval": 1,
+    "reloadTime": 30,
+    "range": 12,
+    "bulletSpeed": 45,
+  },
   // 德国海军 533mm 4联装 鱼雷
   {
     "name": "GER/533/4",

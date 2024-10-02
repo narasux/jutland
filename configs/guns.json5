@@ -229,6 +229,16 @@
     "bulletSpread": 80,
     "bulletSpeed": 720
   },
+  // 日本海军 单装 13 毫米机枪
+  {
+    "name": "JP/13",
+    "bulletName": "JP/GB/13/1935",
+    "bulletCount": 1,
+    "reloadTime": 0.05,
+    "range": 1,
+    "bulletSpread": 20,
+    "bulletSpeed": 800
+  },
   // 德国海军 GER/381/52 双联装舰炮
   {
     "name": "GER/381/52/2",

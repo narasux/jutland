@@ -33,9 +33,11 @@ var (
 	GB88   = ebutil.NewImageWithColor(2, 2, colorx.Gold)
 	GB40   = ebutil.NewImageWithColor(1, 1, colorx.Gold)
 	GB20   = ebutil.NewImageWithColor(1, 1, colorx.White)
+	GB13   = ebutil.NewImageWithColor(1, 1, colorx.Gray)
 )
 
 var (
+	TB450 = ebutil.NewImageWithColor(3, 16, colorx.Silver)
 	TB533 = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
 	TB610 = ebutil.NewImageWithColor(4, 24, colorx.Silver)
 	TB622 = ebutil.NewImageWithColor(4, 25, colorx.Gray)
@@ -96,6 +98,8 @@ func GetShell(diameter int) *ebiten.Image {
 		return GB40
 	case 20:
 		return GB20
+	case 13:
+		return GB13
 	}
 	// 找不到就暴露出来
 	return NotFount
@@ -104,6 +108,8 @@ func GetShell(diameter int) *ebiten.Image {
 // GetTorpedo 获取鱼雷弹药图片
 func GetTorpedo(diameter int) *ebiten.Image {
 	switch diameter {
+	case 540:
+		return TB450
 	case 533:
 		return TB533
 	case 610:

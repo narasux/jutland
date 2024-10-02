@@ -115,6 +115,13 @@
     "criticalRate": 0.002
   },
   {
+    "name": "JP/GB/13/1935",
+    "type": "shell",
+    "diameter": 13,
+    "damage": 0.2,
+    "criticalRate": 0
+  },
+  {
     "name": "GER/GB/381/1939",
     "type": "shell",
     "diameter": 381,
@@ -304,6 +311,13 @@
     "diameter": 610,
     "damage": 6250,
     "criticalRate": 0.1
+  },
+  {
+    "name": "JP/TB/450/1928",
+    "type": "torpedo",
+    "diameter": 450,
+    "damage": 2500,
+    "criticalRate": 0.02
   },
   {
     "name": "GER/TB/533/1940",

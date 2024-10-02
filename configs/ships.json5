@@ -4536,6 +4536,7 @@
     }
   },
   // 鱼雷艇
+  // 美国海军
   {
     "name": "PT_791",
     "displayName": "PT-791",
@@ -4591,10 +4592,60 @@
           "rightFiringArc": [30, 150],
           "leftFiringArc": [360, 360]
         },
-        // 中轴鱼雷 B
+        // 左舷鱼雷 B
         {
           "name": "US/533/1",
           "posPercent": 0,
+          "rightFiringArc": [0, 0],
+          "leftFiringArc": [210, 330]
+        }
+      ]
+    }
+  },
+  // 日本海军
+  {
+    "name": "T_14",
+    "displayName": "T-14",
+    "type": "torpedo_boat",
+    "typeAbbr": "TB",
+    "totalHP": 18,
+    "horizontalDamageReduction": -0.3,
+    "verticalDamageReduction": -1,
+    "maxSpeed": 33,
+    "acceleration": 2,
+    "rotateSpeed": 5,
+    "length": 15,
+    "width": 4,
+    "fundsCost": 3,
+    "timeCost": 3,
+    "description": [
+      "鱼雷艇（日）",
+      "主炮：1 座单装 13mm",
+      "鱼雷：2 座单装直航 450mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 主炮 A
+        {
+          "name": "JP/13",
+          "posPercent": 0.25,
+          "rightFiringArc": [0, 180],
+          "leftFiringArc": [180, 360]
+        }
+      ],
+      "secondaryGuns": [],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "JP/450/1",
+          "posPercent": -0.7,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          "name": "JP/450/1",
+          "posPercent": -0.7,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         }
