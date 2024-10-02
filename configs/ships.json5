@@ -116,21 +116,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "US/406/50/MK7",
+          "name": "US/406/50/3/MK7",
           "posPercent": 0.45,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "US/406/50/MK7",
+          "name": "US/406/50/3/MK7",
           "posPercent": 0.25,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "US/406/50/MK7",
+          "name": "US/406/50/3/MK7",
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
@@ -139,70 +139,70 @@
       "secondaryGuns": [
         // 右前副炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.05,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.05,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右后副炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.1,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 E
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.15,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 E
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
@@ -235,28 +235,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "US/406/50/MK7",
+          "name": "US/406/50/3/MK7",
           "posPercent": 0.55,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "US/406/50/MK7",
+          "name": "US/406/50/3/MK7",
           "posPercent": 0.45,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "US/406/50/MK7",
+          "name": "US/406/50/3/MK7",
           "posPercent": -0.4,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 后主炮 D
         {
-          "name": "US/406/50/MK7",
+          "name": "US/406/50/3/MK7",
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
@@ -265,70 +265,70 @@
       "secondaryGuns": [
         // 右前副炮 A
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": 0.2,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 A
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": 0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 B
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": 0.1,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": 0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 C
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": 0,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 C
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右后副炮 D
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": -0.1,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 D
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": -0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 E
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": -0.2,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 E
         {
-          "name": "US/127/54/MK39",
+          "name": "US/127/54/2/MK39",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
@@ -361,21 +361,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "US/406/45/MK6",
+          "name": "US/406/45/3/MK6",
           "posPercent": 0.45,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "US/406/45/MK6",
+          "name": "US/406/45/3/MK6",
           "posPercent": 0.25,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "US/406/45/MK6",
+          "name": "US/406/45/3/MK6",
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
@@ -384,56 +384,56 @@
       "secondaryGuns": [
         // 右前副炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.05,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.5,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.5,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右后副炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.18,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.18,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 右后副炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.24,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.24,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
@@ -467,28 +467,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "JP/356/45",
+          "name": "JP/356/45/2",
           "posPercent": 0.6,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "JP/356/45",
+          "name": "JP/356/45/2",
           "posPercent": 0.5,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "JP/356/45",
+          "name": "JP/356/45/2",
           "posPercent": -0.2,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 后主炮 D
         {
-          "name": "JP/356/45",
+          "name": "JP/356/45/2",
           "posPercent": -0.6,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
@@ -622,21 +622,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "JP/460/45",
+          "name": "JP/460/45/3",
           "posPercent": 0.5,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "JP/460/45",
+          "name": "JP/460/45/3",
           "posPercent": 0.25,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "JP/460/45",
+          "name": "JP/460/45/3",
           "posPercent": -0.5,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -645,126 +645,126 @@
       "secondaryGuns": [
         // 前副炮 A
         {
-          "name": "JP/155/60",
+          "name": "JP/155/60/3",
           "posPercent": 0.1,
           "rightFiringArc": [0, 120],
           "leftFiringArc": [240, 360]
         },
         // 后副炮 D
         {
-          "name": "JP/155/60",
+          "name": "JP/155/60/3",
           "posPercent": -0.2,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [180, 300]
         },
         // 右高平两用炮 A
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 360]
         },
         // 右高平两用炮 B
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.02,
           "rightFiringArc": [45, 120],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 B
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.02,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [240, 315]
         },
         // 右高平两用炮 C
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.05,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 C
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 D
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.07,
           "rightFiringArc": [60, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 D
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.07,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 300]
         },
         // 右高平两用炮 E
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.09,
           "rightFiringArc": [60, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 E
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.09,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 300]
         },
         // 右高平两用炮 F
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.11,
           "rightFiringArc": [60, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 F
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.11,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 300]
         },
         // 右高平两用炮 G
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.13,
           "rightFiringArc": [60, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 G
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.13,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 300]
         },
         // 右高平两用炮 H
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.15,
           "rightFiringArc": [90, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 H
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 270]
@@ -798,21 +798,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "JP/460/45",
+          "name": "JP/460/45/3",
           "posPercent": 0.5,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "JP/460/45",
+          "name": "JP/460/45/3",
           "posPercent": 0.25,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "JP/460/45",
+          "name": "JP/460/45/3",
           "posPercent": -0.5,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -821,112 +821,112 @@
       "secondaryGuns": [
         // 前副炮 A
         {
-          "name": "JP/203/60",
+          "name": "JP/203/60/2",
           "posPercent": 0.15,
           "rightFiringArc": [0, 120],
           "leftFiringArc": [240, 360]
         },
         // 右前副炮 B
         {
-          "name": "JP/203/60",
+          "name": "JP/203/60/2",
           "posPercent": -0.15,
           "rightFiringArc": [0, 120],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "JP/203/60",
+          "name": "JP/203/60/2",
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [240, 360]
         },
         // 右后副炮 C
         {
-          "name": "JP/203/60",
+          "name": "JP/203/60/2",
           "posPercent": -0.3,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 C
         {
-          "name": "JP/203/60",
+          "name": "JP/203/60/2",
           "posPercent": -0.3,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 300]
         },
         // 后副炮 D
         {
-          "name": "JP/203/60",
+          "name": "JP/203/60/2",
           "posPercent": -0.4,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [180, 300]
         },
         // 右高平两用炮 A
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 360]
         },
         // 右高平两用炮 B
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.16,
           "rightFiringArc": [45, 120],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 B
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.16,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [240, 315]
         },
         // 右高平两用炮 C
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.18,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 C
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.18,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 D
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.2,
           "rightFiringArc": [60, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 D
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 300]
         },
         // 右高平两用炮 E
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.22,
           "rightFiringArc": [90, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 E
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": -0.22,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 270]
@@ -961,28 +961,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "GER/381/52",
+          "name": "GER/381/52/2",
           "posPercent": 0.55,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "GER/381/52",
+          "name": "GER/381/52/2",
           "posPercent": 0.4,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "GER/381/52",
+          "name": "GER/381/52/2",
           "posPercent": -0.45,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
         },
         // 后主炮 D
         {
-          "name": "GER/381/52",
+          "name": "GER/381/52/2",
           "posPercent": -0.6,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -1033,56 +1033,56 @@
         },
         // 右高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.15,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 360]
         },
         // 右高平两用炮 B
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 B
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 C
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.12,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 C
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.12,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 D
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.25,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 D
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.25,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 360]
@@ -1117,21 +1117,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "GER/283/55",
+          "name": "GER/283/55/3",
           "posPercent": 0.5,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "GER/283/55",
+          "name": "GER/283/55/3",
           "posPercent": 0.35,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "GER/283/55",
+          "name": "GER/283/55/3",
           "posPercent": -0.6,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -1196,49 +1196,49 @@
         },
         // 右高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.03,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.03,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 B
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.05,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 B
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 C
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.15,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 C
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 后高平两用炮 D
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.5,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -1286,14 +1286,14 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "GER/283/52",
+          "name": "GER/283/52/3",
           "posPercent": 0.6,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 B
         {
-          "name": "GER/283/52",
+          "name": "GER/283/52/3",
           "posPercent": -0.55,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -1358,21 +1358,21 @@
         },
         // 右高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [180, 210]
         },
         // 左高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0,
           "rightFiringArc": [150, 180],
           "leftFiringArc": [180, 360]
         },
         // 后高平两用炮 B
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.45,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -1423,28 +1423,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": 0.58,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": 0.45,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": -0.53,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
         },
         // 后主炮 D
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": -0.65,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -1664,21 +1664,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": 0.4,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": 0.2,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 C
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": 0,
           "rightFiringArc": [45, 120],
           "leftFiringArc": [240, 315]
@@ -1687,42 +1687,42 @@
       "secondaryGuns": [
         // 右前副炮 A
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.5,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 A
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.5,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 360]
         },
         // 右前副炮 B
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.58,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.58,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右后副炮 C
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.65,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 C
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.65,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 300]
@@ -1813,21 +1813,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": 0.37,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": 0.25,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [225, 360]
         },
         // 后主炮 C
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": -0.58,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -1836,56 +1836,56 @@
       "secondaryGuns": [
         // 右前高平两用炮 A
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.05,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 A
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.05,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 360]
         },
         // 右前高平两用炮 B
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.04,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 B
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.04,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 360]
         },
         // 右前高平两用炮 C
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.26,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 C
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.26,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 300]
         },
         // 右后高平两用炮 D
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.35,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后高平两用炮 D
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.35,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 315]
@@ -1933,21 +1933,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": 0.42,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": 0.3,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [225, 360]
         },
         // 后主炮 C
         {
-          "name": "UK/406/45",
+          "name": "UK/406/45/3",
           "posPercent": -0.55,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -1956,84 +1956,84 @@
       "secondaryGuns": [
         // 右前高平两用炮 A
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": 0.15,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 A
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": 0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 360]
         },
         // 右前高平两用炮 B
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": 0.07,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 B
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": 0.07,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 360]
         },
         // 右前高平两用炮 C
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": 0,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 C
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 300]
         },
         // 右后高平两用炮 D
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": -0.2,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后高平两用炮 D
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右后高平两用炮 E
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": -0.28,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后高平两用炮 E
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": -0.28,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 330]
         },
         // 右后高平两用炮 F
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": -0.35,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后高平两用炮 F
         {
-          "name": "UK/114/45/DP",
+          "name": "UK/114/45/2/DP",
           "posPercent": -0.35,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 330]
@@ -2089,56 +2089,56 @@
       "secondaryGuns": [
         // 右前高平两用炮 A
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.1,
           "rightFiringArc": [0, 120],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 A
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [240, 360]
         },
         // 右前高平两用炮 B
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左前高平两用炮 B
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右后高平两用炮 C
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.2,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后高平两用炮 C
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.2,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右后高平两用炮 D
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.3,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后高平两用炮 D
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.3,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 300]
@@ -2172,28 +2172,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": 0.55,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": 0.4,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": -0.45,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
         },
         // 后主炮 D
         {
-          "name": "UK/381/42",
+          "name": "UK/381/42/2",
           "posPercent": -0.6,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -2314,28 +2314,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/343/45",
+          "name": "UK/343/45/2",
           "posPercent": 0.54,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/343/45",
+          "name": "UK/343/45/2",
           "posPercent": 0.4,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "UK/343/45",
+          "name": "UK/343/45/2",
           "posPercent": -0.2,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
         },
         // 后主炮 D
         {
-          "name": "UK/343/45",
+          "name": "UK/343/45/2",
           "posPercent": -0.6,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -2485,21 +2485,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "SU/406/50",
+          "name": "SU/406/50/3",
           "posPercent": 0.3,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [225, 360]
         },
         // 前主炮 B
         {
-          "name": "SU/406/50",
+          "name": "SU/406/50/3",
           "posPercent": 0.12,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [225, 360]
         },
         // 后主炮 C
         {
-          "name": "SU/406/50",
+          "name": "SU/406/50/3",
           "posPercent": -0.53,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -2619,21 +2619,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "SU/406/50",
+          "name": "SU/406/50/3",
           "posPercent": 0.44,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "SU/406/50",
+          "name": "SU/406/50/3",
           "posPercent": 0.24,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 C
         {
-          "name": "SU/406/50",
+          "name": "SU/406/50/3",
           "posPercent": 0.02,
           "rightFiringArc": [45, 150],
           "leftFiringArc": [210, 315]
@@ -2740,56 +2740,56 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.7,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 前主炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.6,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 前主炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.5,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.5,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 E
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 F
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.7,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 右后舰炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.3,
           "rightFiringArc": [10, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后舰炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.3,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 350]
@@ -2838,28 +2838,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "US/305/50/MK8",
+          "name": "US/305/50/3/MK8",
           "posPercent": 0.5,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 前主炮 B
         {
-          "name": "US/305/50/MK8",
+          "name": "US/305/50/3/MK8",
           "posPercent": 0.4,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 后主炮 C
         {
-          "name": "US/305/50/MK8",
+          "name": "US/305/50/3/MK8",
           "posPercent": -0.4,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
         },
         // 后主炮 D
         {
-          "name": "US/305/50/MK8",
+          "name": "US/305/50/3/MK8",
           "posPercent": -0.5,
           "rightFiringArc": [50, 180],
           "leftFiringArc": [180, 310]
@@ -2868,56 +2868,56 @@
       "secondaryGuns": [
         // 前副炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.3,
           "rightFiringArc": [0, 130],
           "leftFiringArc": [230, 360]
         },
         // 右前副炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.15,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右前副炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [360, 360]
         },
         // 左前副炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [200, 360]
         },
         // 右后副炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.15,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [360, 360]
         },
         // 左后副炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 340]
         },
         // 后副炮 E
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.45,
           "rightFiringArc": [80, 180],
           "leftFiringArc": [180, 280]
@@ -2990,21 +2990,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "US/203/55/MK14",
+          "name": "US/203/55/3/MK14",
           "posPercent": 0.55,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "US/203/55/MK14",
+          "name": "US/203/55/3/MK14",
           "posPercent": 0.45,
           "rightFiringArc": [0, 120],
           "leftFiringArc": [240, 360]
         },
         // 后主炮 C
         {
-          "name": "US/203/55/MK14",
+          "name": "US/203/55/3/MK14",
           "posPercent": -0.55,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -3097,7 +3097,7 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "JP/203/50",
+          "name": "JP/203/50/2",
           "posPercent": 0.7,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
@@ -3105,28 +3105,28 @@
         },
         // 前主炮 B
         {
-          "name": "JP/203/50",
+          "name": "JP/203/50/2",
           "posPercent": 0.6,
           "rightFiringArc": [45, 160],
           "leftFiringArc": [200, 315]
         },
         // 前主炮 C
         {
-          "name": "JP/203/50",
+          "name": "JP/203/50/2",
           "posPercent": 0.5,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 D
         {
-          "name": "JP/203/50",
+          "name": "JP/203/50/2",
           "posPercent": -0.5,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 E
         {
-          "name": "JP/203/50",
+          "name": "JP/203/50/2",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
@@ -3135,28 +3135,28 @@
       "secondaryGuns": [
         // 右高平两用炮 A
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0.15,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0.15,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [225, 360]
         },
         // 右高平两用炮 B
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0,
           "rightFiringArc": [45, 120],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 B
         {
-          "name": "JP/127/40/DP",
+          "name": "JP/127/40/2/DP",
           "posPercent": 0,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [240, 315]
@@ -3346,28 +3346,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "GER/203/60",
+          "name": "GER/203/60/2",
           "posPercent": 0.55,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "GER/203/60",
+          "name": "GER/203/60/2",
           "posPercent": 0.45,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 C
         {
-          "name": "GER/203/60",
+          "name": "GER/203/60/2",
           "posPercent": -0.5,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
         },
         // 后主炮 D
         {
-          "name": "GER/203/60",
+          "name": "GER/203/60/2",
           "posPercent": -0.6,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -3376,42 +3376,42 @@
       "secondaryGuns": [
         // 右高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.3,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": 0.3,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 右高平两用炮 B
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.1,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 B
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 330]
         },
         // 右高平两用炮 C
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.3,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 C
         {
-          "name": "GER/105/65/DP",
+          "name": "GER/105/65/2/DP",
           "posPercent": -0.3,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 330]
@@ -3497,21 +3497,21 @@
       "secondaryGuns": [
         // 右高平两用炮 A
         {
-          "name": "GER/88/56/DP",
+          "name": "GER/88/56/2/DP",
           "posPercent": -0.1,
           "rightFiringArc": [0, 180],
           "leftFiringArc": [360, 360]
         },
         // 左高平两用炮 A
         {
-          "name": "GER/88/56/DP",
+          "name": "GER/88/56/2/DP",
           "posPercent": -0.1,
           "rightFiringArc": [0, 0],
           "leftFiringArc": [180, 360]
         },
         // 后高平两用炮 B
         {
-          "name": "GER/88/56/DP",
+          "name": "GER/88/56/2/DP",
           "posPercent": -0.13,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -3574,21 +3574,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/203/50",
+          "name": "UK/203/50/3",
           "posPercent": 0.65,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/203/50",
+          "name": "UK/203/50/3",
           "posPercent": 0.5,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [225, 360]
         },
         // 后主炮 C
         {
-          "name": "UK/203/50",
+          "name": "UK/203/50/3",
           "posPercent": -0.7,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
@@ -3680,28 +3680,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": 0.68,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": 0.55,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [225, 360]
         },
         // 后主炮 C
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.34,
           "rightFiringArc": [45, 180],
           "leftFiringArc": [180, 315]
         },
         // 后主炮 D
         {
-          "name": "UK/152/50",
+          "name": "UK/152/50/2",
           "posPercent": -0.69,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -3779,56 +3779,56 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.67,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 前主炮 B
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.52,
           "rightFiringArc": [0, 135],
           "leftFiringArc": [270, 360]
         },
         // 前主炮 C
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.52,
           "rightFiringArc": [0, 90],
           "leftFiringArc": [225, 360]
         },
         // 前主炮 D
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.45,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 E
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.5,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
         },
         // 后主炮 F
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": 0.6,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 300]
         },
         // 后主炮 G
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.6,
           "rightFiringArc": [60, 180],
           "leftFiringArc": [180, 330]
         },
         // 后主炮 H
         {
-          "name": "UK/133/50/DP",
+          "name": "UK/133/50/2/DP",
           "posPercent": -0.72,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [180, 330]
@@ -4101,28 +4101,28 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.7,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 前主炮 B
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": 0.6,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 C
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 D
         {
-          "name": "US/127/38/MK12",
+          "name": "US/127/38/2/MK12",
           "posPercent": -0.7,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
@@ -4172,21 +4172,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "JP/127/50",
+          "name": "JP/127/50/2",
           "posPercent": 0.8,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 B
         {
-          "name": "JP/127/50",
+          "name": "JP/127/50/2",
           "posPercent": -0.5,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 C
         {
-          "name": "JP/127/50",
+          "name": "JP/127/50/2",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
@@ -4235,21 +4235,21 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "JP/127/50",
+          "name": "JP/127/50/2",
           "posPercent": 0.8,
           "rightFiringArc": [0, 160],
           "leftFiringArc": [200, 360]
         },
         // 后主炮 B
         {
-          "name": "JP/127/50",
+          "name": "JP/127/50/2",
           "posPercent": -0.5,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
         },
         // 后主炮 C
         {
-          "name": "JP/127/50",
+          "name": "JP/127/50/2",
           "posPercent": -0.6,
           "rightFiringArc": [20, 180],
           "leftFiringArc": [180, 340]
@@ -4503,14 +4503,14 @@
       "mainGuns": [
         // 前主炮 A
         {
-          "name": "SU/130/58",
+          "name": "SU/130/58/2",
           "posPercent": 0.65,
           "rightFiringArc": [0, 150],
           "leftFiringArc": [210, 360]
         },
         // 后主炮 B
         {
-          "name": "SU/130/58",
+          "name": "SU/130/58/2",
           "posPercent": -0.65,
           "rightFiringArc": [30, 180],
           "leftFiringArc": [210, 360]
