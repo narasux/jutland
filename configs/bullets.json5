@@ -45,6 +45,20 @@
     "criticalRate": 0.002
   },
   {
+    "name": "US/GB/40/1930",
+    "type": "shell",
+    "diameter": 40,
+    "damage": 4,
+    "criticalRate": 0
+  },
+  {
+    "name": "US/GB/20/1940",
+    "type": "shell",
+    "diameter": 20,
+    "damage": 1.2,
+    "criticalRate": 0
+  },
+  {
     "name": "JP/GB/460/1942",
     "type": "shell",
     "diameter": 460,

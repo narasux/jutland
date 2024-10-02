@@ -52,6 +52,7 @@
           "v",
           "y",
           "30bis",
+          "PT_791",
         ],
       },
       {
@@ -323,6 +324,12 @@
       {
         "name": "30bis",
         "pos": [44, 39],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "PT_791",
+        "pos": [43, 40],
         "rotation": 90,
         "belongPlayer": "HA"
       },

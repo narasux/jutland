@@ -4513,7 +4513,7 @@
           "name": "SU/130/58/2",
           "posPercent": -0.65,
           "rightFiringArc": [30, 180],
-          "leftFiringArc": [210, 360]
+          "leftFiringArc": [180, 330]
         }
       ],
       "secondaryGuns": [],
@@ -4530,6 +4530,72 @@
           "name": "SU/533/5",
           "posPercent": -0.26,
           "rightFiringArc": [30, 150],
+          "leftFiringArc": [210, 330]
+        }
+      ]
+    }
+  },
+  // 鱼雷艇
+  {
+    "name": "PT_791",
+    "displayName": "PT-791",
+    "type": "torpedo_boat",
+    "typeAbbr": "TB",
+    "totalHP": 48,
+    "horizontalDamageReduction": -0.3,
+    "verticalDamageReduction": -1,
+    "maxSpeed": 41,
+    "acceleration": 2.5,
+    "rotateSpeed": 6,
+    "length": 24,
+    "width": 7,
+    "fundsCost": 5,
+    "timeCost": 3,
+    "description": [
+      "鱼雷艇（美）",
+      "主炮：1 座单装 40mm/60",
+      "副炮：2 座单装 20mm/70",
+      "鱼雷：2 座单装直航 533mm"
+    ],
+    "weapon": {
+      "mainGuns": [
+        // 后主炮 A
+        {
+          "name": "US/40/60",
+          "posPercent": -0.75,
+          "rightFiringArc": [30, 180],
+          "leftFiringArc": [180, 330]
+        }
+      ],
+      "secondaryGuns": [
+        // 前副炮 A
+        {
+          "name": "US/20/70",
+          "posPercent": 0.7,
+          "rightFiringArc": [0, 160],
+          "leftFiringArc": [200, 360]
+        },
+        // 后副炮 B
+        {
+          "name": "US/20/70",
+          "posPercent": -0.63,
+          "rightFiringArc": [30, 160],
+          "leftFiringArc": [200, 330]
+        }
+      ],
+      "torpedoes": [
+        // 右舷鱼雷 A
+        {
+          "name": "US/533/1",
+          "posPercent": 0,
+          "rightFiringArc": [30, 150],
+          "leftFiringArc": [360, 360]
+        },
+        // 中轴鱼雷 B
+        {
+          "name": "US/533/1",
+          "posPercent": 0,
+          "rightFiringArc": [0, 0],
           "leftFiringArc": [210, 330]
         }
       ]

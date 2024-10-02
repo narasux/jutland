@@ -119,6 +119,26 @@
     "bulletSpread": 80,
     "bulletSpeed": 800
   },
+  // 美国海军 US/40/60 单装高炮
+  {
+    "name": "US/40/60",
+    "bulletName": "US/GB/40/1930",
+    "bulletCount": 1,
+    "reloadTime": 0.5,
+    "range": 7,
+    "bulletSpread": 20,
+    "bulletSpeed": 880
+  },
+  // 美国海军 US/20/70 单装高炮
+  {
+    "name": "US/20/70",
+    "bulletName": "US/GB/20/1940",
+    "bulletCount": 1,
+    "reloadTime": 0.2,
+    "range": 2,
+    "bulletSpread": 20,
+    "bulletSpeed": 910
+  },
   // 日本海军 三联装 46.0 厘米 45 倍口径舰炮
   {
     "name": "JP/460/45/3",

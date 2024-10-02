@@ -17,7 +17,7 @@ func init() {
 	log.Println("loading ship image resources...")
 
 	// TODO 航母，鱼雷艇待支持
-	shipTypes := []string{"battleship", "cruiser", "default", "destroyer"}
+	shipTypes := []string{"battleship", "cruiser", "default", "destroyer", "torpedo_boat"}
 
 	loadShipImages(topShipZoom4ImgMap, shipTypes, "top")
 	genZoomShipImages(topShipZoom4ImgMap, topShipZoom2ImgMap, 2)
