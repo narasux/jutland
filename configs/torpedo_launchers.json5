@@ -108,5 +108,15 @@
     "reloadTime": 80,
     "range": 18,
     "bulletSpeed": 50,
+  },
+  // 苏联海军 533mm 三联装 鱼雷
+  {
+    "name": "SU/533/3",
+    "bulletName": "SU/TB/533/1932",
+    "bulletCount": 3,
+    "shotInterval": 1,
+    "reloadTime": 56,
+    "range": 18,
+    "bulletSpeed": 50,
   }
 ]

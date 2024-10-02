@@ -461,6 +461,16 @@
   },
   // 苏联海军 SU/152/57 三联装舰炮
   {
+    "name": "SU/180/57/3",
+    "bulletName": "SU/GB/180/1935",
+    "bulletCount": 3,
+    "reloadTime": 6,
+    "range": 38,
+    "bulletSpread": 100,
+    "bulletSpeed": 920
+  },
+  // 苏联海军 SU/152/57 三联装舰炮
+  {
     "name": "SU/152/57/3",
     "bulletName": "SU/GB/152/1938",
     "bulletCount": 3,
@@ -499,11 +509,21 @@
     "bulletSpread": 35,
     "bulletSpeed": 1100
   },
-  // 苏联海军 SU/100/56 高平两用炮
+  // 苏联海军 SU/100/56 二联装高平两用炮
+  {
+    "name": "SU/100/56/2/DP",
+    "bulletName": "SU/GB/100/1940",
+    "bulletCount": 2,
+    "reloadTime": 1,
+    "range": 18,
+    "bulletSpread": 50,
+    "bulletSpeed": 900
+  },
+  // 苏联海军 SU/100/56 单装高平两用炮
   {
     "name": "SU/100/56/DP",
     "bulletName": "SU/GB/100/1940",
-    "bulletCount": 2,
+    "bulletCount": 1,
     "reloadTime": 1,
     "range": 18,
     "bulletSpread": 50,

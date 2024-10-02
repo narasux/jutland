@@ -44,6 +44,7 @@
           "vickers",
           "k_25",
           "sverdlov",
+          "kirov",
           "porter",
           "asashio",
           "yugumo",
@@ -274,6 +275,12 @@
       {
         "name": "sverdlov",
         "pos": [39, 38],
+        "rotation": 90,
+        "belongPlayer": "HA"
+      },
+      {
+        "name": "kirov",
+        "pos": [40, 39],
         "rotation": 90,
         "belongPlayer": "HA"
       },

@@ -249,6 +249,13 @@
     "criticalRate": 0.03
   },
   {
+    "name": "SU/GB/180/1935",
+    "type": "shell",
+    "diameter": 180,
+    "damage": 320,
+    "criticalRate": 0.01
+  },
+  {
     "name": "SU/GB/152/1938",
     "type": "shell",
     "diameter": 152,
