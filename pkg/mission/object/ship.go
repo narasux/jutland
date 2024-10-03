@@ -253,14 +253,14 @@ func (s *BattleShip) GenTrails() []*Trail {
 	return []*Trail{
 		newTrail(
 			frontPos, textureImg.TrailShapeCircle,
-			s.Width*0.6, 1.2,
-			s.Length/6+150*s.CurSpeed, 1,
+			s.Width*0.6, 1.1,
+			s.Length/8+655*s.CurSpeed, 1,
 			0, 0, nil,
 		),
 		newTrail(
 			backPos, textureImg.TrailShapeCircle,
-			s.Width, 0.4,
-			s.Length/7+155*s.CurSpeed, 1.5,
+			s.Width, 0.6,
+			s.Length/9+480*s.CurSpeed, 1.5,
 			0, 0, nil,
 		),
 	}
