@@ -88,25 +88,45 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 		}
 	}
 
+	// 通过 ShipMove 指令实现移动
+	handleMove := func(shipUid string, curPos obj.MapPos, dx, dy int) {
+		moveInstr := instr.NewShipMove(
+			shipUid,
+			obj.NewMapPosR(
+				curPos.RX+float64(dx),
+				curPos.RY+float64(dy),
+			),
+		)
+		instructions[moveInstr.Uid()] = moveInstr
+	}
+
 	// 随机散开，用于战舰重叠的情况（按下 X 键）
 	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
-		if len(misState.SelectedShips) != 0 {
-			for _, shipUid := range misState.SelectedShips {
-				// 如果战舰不是静止状态，则散开指令无效
-				if misState.Ships[shipUid].CurSpeed != 0 {
-					continue
-				}
-				// 随机散开 [-3, 3] 的范围
-				x, y := rand.Intn(7)-3, rand.Intn(7)-3
-				// 通过 ShipMove 指令实现散开行为
-				moveInstr := instr.NewShipMove(
-					shipUid, obj.NewMapPos(
-						misState.Ships[shipUid].CurPos.MX+x,
-						misState.Ships[shipUid].CurPos.MY+y,
-					),
-				)
-				instructions[moveInstr.Uid()] = moveInstr
+		for _, shipUid := range misState.SelectedShips {
+			// 如果战舰不是静止状态，则散开指令无效
+			if misState.Ships[shipUid].CurSpeed != 0 {
+				continue
 			}
+			// 随机散开 [-3, 3] 的范围
+			dx, dy := rand.Intn(7)-3, rand.Intn(7)-3
+			// 通过 ShipMove 指令实现散开行为
+			handleMove(shipUid, misState.Ships[shipUid].CurPos, dx, dy)
+		}
+	}
+
+	dx, dy := 0, 0
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
+		dx, dy = 0, -1
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
+		dx, dy = 0, 1
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) {
+		dx, dy = -1, 0
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) {
+		dx, dy = 1, 0
+	}
+	if dx != 0 || dy != 0 {
+		for _, shipUid := range misState.SelectedShips {
+			handleMove(shipUid, misState.Ships[shipUid].CurPos, dx, dy)
 		}
 	}
 	return instructions

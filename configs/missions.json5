@@ -383,19 +383,19 @@
       {
         "name": "liberty",
         "pos": [45, 70],
-        "rotation":270,
+        "rotation": 270,
         "belongPlayer": "CA"
       },
       {
         "name": "liberty",
         "pos": [44, 70],
-        "rotation":270,
+        "rotation": 270,
         "belongPlayer": "CA"
       },
       {
         "name": "liberty",
         "pos": [43, 70],
-        "rotation":270,
+        "rotation": 270,
         "belongPlayer": "CA"
       },
       {

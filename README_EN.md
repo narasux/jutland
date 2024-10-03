@@ -28,9 +28,11 @@ CPU / graphics card requirements are not very high, but too low will probably ca
 - Press the <kbd>R</kbd> key. If any **secondary gun** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
 - Press the <kbd>T</kbd> key. If any **torpedo** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
 - Press the <kbd>D</kbd> key to forcefully display the status of all warships (HP, whether weapons are enabled, etc.).
+- Press the <kbd>X</kbd> key to move the **currently selected ship** to a random direction by a certain number of units (disperse).
 - Press the <kbd>B</kbd> key to view the reinforcement point information, consume funds and time, and summon warships to join the battlefield.
 - Press the <kbd>N</kbd> key to display damage values caused by ammunition hits (white/yellow/red: standard/triple/tenfold critical hits).
 - Press the <kbd>M</kbd> key to view the full thumbnail mode of the current level map (including both friendly and enemy warships).
+- Press the <kbd>←</kbd> <kbd>→</kbd> <kbd>↓</kbd> <kbd>↑</kbd> keys to move the **currently selected ship** one unit in the corresponding direction.
 - Press the <kbd>ESC</kbd> key to pause the game. At this point, press <kbd>Q</kbd> to exit the game, or press <kbd>Enter</kbd> to continue the game.
 
 #### Full-screen Map Mode
