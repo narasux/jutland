@@ -31,6 +31,23 @@ const (
 	WeaponTypeMissile WeaponType = "missile"
 )
 
+type ShipType string
+
+const (
+	// ShipTypeDefault 默认
+	ShipTypeDefault ShipType = "default"
+	// ShipTypeBattleShip 战列舰
+	ShipTypeBattleShip ShipType = "battleship"
+	// ShipTypeCruiser 巡洋舰
+	ShipTypeCruiser ShipType = "cruiser"
+	// ShipTypeDestroyer 驱逐舰
+	ShipTypeDestroyer ShipType = "destroyer"
+	// ShipTypeTorpedoBoat 鱼雷艇
+	ShipTypeTorpedoBoat ShipType = "torpedo_boat"
+	// ShipTypeCargo 货轮
+	ShipTypeCargo ShipType = "cargo"
+)
+
 const (
 	// 顺时针
 	RotateFlagClockwise = 1
@@ -83,7 +100,7 @@ type BattleShip struct {
 	// 展示用名称
 	DisplayName string `json:"displayName"`
 	// 类别
-	Type string `json:"type"`
+	Type ShipType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
 	// 描述
@@ -254,13 +271,13 @@ func (s *BattleShip) GenTrails() []*Trail {
 		newTrail(
 			frontPos, textureImg.TrailShapeCircle,
 			s.Width*0.6, 1.1,
-			s.Length/8+655*s.CurSpeed, 1,
+			s.Length/8+555*s.CurSpeed, 1,
 			0, 0, nil,
 		),
 		newTrail(
 			backPos, textureImg.TrailShapeCircle,
 			s.Width, 0.6,
-			s.Length/9+480*s.CurSpeed, 1.5,
+			s.Length/9+380*s.CurSpeed, 1.5,
 			0, 0, nil,
 		),
 	}

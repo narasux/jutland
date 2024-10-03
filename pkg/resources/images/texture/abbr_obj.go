@@ -22,6 +22,8 @@ var (
 	AbbrReinforcePoint *ebiten.Image
 	// AbbrSelectedReinforcePoint 选中的增援点
 	AbbrSelectedReinforcePoint *ebiten.Image
+	// AbbrOilPlatform 油井
+	AbbrOilPlatform *ebiten.Image
 
 	// AbbrEnemyMini 微型战舰缩略图
 	AbbrEnemyMini *ebiten.Image
@@ -67,6 +69,11 @@ func init() {
 
 	imgPath = "/textures/abbr_obj/selected_reinforce_point.png"
 	if AbbrSelectedReinforcePoint, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/textures/abbr_obj/oil_platform.png"
+	if AbbrOilPlatform, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

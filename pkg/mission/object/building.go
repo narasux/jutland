@@ -121,3 +121,70 @@ func NewReinforcePoint(
 		OncomingShips:     []*OncomingShip{},
 	}
 }
+
+// LoadingOilShip 装载石油的货轮
+type LoadingOilShip struct {
+	CurPos MapPos
+	// 资金产量
+	FundYield int
+	// 装载耗时
+	TimeCost int64
+	// 开始的时间戳
+	StartedAt int64
+	// 进度
+	Progress float64
+}
+
+// Update ...
+func (s *LoadingOilShip) Update() (finished bool) {
+	if s.StartedAt == 0 {
+		s.StartedAt = time.Now().UnixMilli()
+		return false
+	}
+	s.Progress = float64(time.Now().UnixMilli()-s.StartedAt) / float64(s.TimeCost) / 10
+
+	// 如果进度到达 100，重置并返回 true
+	if s.Progress >= 100 {
+		s.StartedAt = 0
+		s.Progress = 0
+		return true
+	}
+	return false
+}
+
+// OilPlatform 油井
+type OilPlatform struct {
+	Uid             string
+	Pos             MapPos
+	Radius          int
+	Yield           int
+	LoadingOilShips map[string]*LoadingOilShip
+}
+
+// AddShip 添加货轮
+func (p *OilPlatform) AddShip(ship *BattleShip) {
+	if _, ok := p.LoadingOilShips[ship.Uid]; !ok {
+		// TODO 目前装载耗时固定为 5s
+		p.LoadingOilShips[ship.Uid] = &LoadingOilShip{
+			CurPos: ship.CurPos, FundYield: p.Yield, TimeCost: 5,
+		}
+	}
+}
+
+// RemoveShip 移除货轮
+func (p *OilPlatform) RemoveShip(ship *BattleShip) {
+	if _, ok := p.LoadingOilShips[ship.Uid]; ok {
+		delete(p.LoadingOilShips, ship.Uid)
+	}
+}
+
+// NewOilPlatform ...
+func NewOilPlatform(pos MapPos, radius int, yield int) *OilPlatform {
+	return &OilPlatform{
+		Uid:             uuid.NewString(),
+		Pos:             pos,
+		Radius:          radius,
+		Yield:           yield,
+		LoadingOilShips: map[string]*LoadingOilShip{},
+	}
+}

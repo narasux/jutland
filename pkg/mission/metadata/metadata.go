@@ -20,6 +20,8 @@ type MissionMetadata struct {
 	InitShips []InitShipMetadata
 	// 初始增援点
 	InitReinforcePoints []InitReinforcePointMetadata
+	// 初始油井
+	InitOilPlatforms []InitOilPlatformMetadata
 }
 
 // InitShipMetadata ...
@@ -38,6 +40,13 @@ type InitReinforcePointMetadata struct {
 	BelongPlayer      faction.Player
 	MaxOncomingShip   int
 	ProvidedShipNames []string
+}
+
+// InitOilPlatformMetadata ...
+type InitOilPlatformMetadata struct {
+	Pos    obj.MapPos
+	Radius int
+	Yield  int
 }
 
 var missionMetadata map[string]MissionMetadata

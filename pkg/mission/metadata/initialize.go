@@ -22,6 +22,7 @@ type rawMissionMetadata struct {
 	MaxShipCount        int                             `json:"maxShipCount"`
 	InitShips           []rawInitShipMetadata           `json:"initShips"`
 	InitReinforcePoints []rawInitReinforcePointMetadata `json:"initReinforcePoints"`
+	InitOilPlatforms    []rawInitOilPlatformMetadata    `json:"initOilPlatforms"`
 }
 
 type rawInitShipMetadata struct {
@@ -38,6 +39,12 @@ type rawInitReinforcePointMetadata struct {
 	BelongPlayer      string   `json:"belongPlayer"`
 	MaxOncomingShip   int      `json:"maxOncomingShip"`
 	ProvidedShipNames []string `json:"providedShipNames"`
+}
+
+type rawInitOilPlatformMetadata struct {
+	Pos    [2]int `json:"pos"`
+	Radius int    `json:"radius"`
+	Yield  int    `json:"yield"`
 }
 
 func init() {
@@ -79,6 +86,15 @@ func init() {
 				ProvidedShipNames: rpMD.ProvidedShipNames,
 			})
 		}
+		// 油井
+		initOilPlatforms := []InitOilPlatformMetadata{}
+		for _, opMD := range md.InitOilPlatforms {
+			initOilPlatforms = append(initOilPlatforms, InitOilPlatformMetadata{
+				Pos:    obj.NewMapPos(opMD.Pos[0], opMD.Pos[1]),
+				Radius: opMD.Radius,
+				Yield:  opMD.Yield,
+			})
+		}
 		// 元数据
 		missionMetadata[md.Name] = MissionMetadata{
 			Name:                md.Name,
@@ -88,6 +104,7 @@ func init() {
 			MapCfg:              mapcfg.GetByName(md.MapName),
 			InitShips:           initShips,
 			InitReinforcePoints: initReinforcePoints,
+			InitOilPlatforms:    initOilPlatforms,
 		}
 	}
 }

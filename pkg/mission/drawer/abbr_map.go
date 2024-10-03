@@ -146,6 +146,14 @@ func (d *Drawer) drawAbbrBuildings(screen *ebiten.Image, ms *state.MissionState)
 		opts.GeoM.Translate(xIndex+xOffset, yIndex)
 		screen.DrawImage(img, opts)
 	}
+
+	for _, op := range ms.OilPlatforms {
+		opts := d.genDefaultDrawImageOptions()
+		xIndex := op.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+		yIndex := op.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+		opts.GeoM.Translate(xIndex+xOffset, yIndex)
+		screen.DrawImage(textureImg.AbbrOilPlatform, opts)
+	}
 }
 
 // 绘制敌我战舰

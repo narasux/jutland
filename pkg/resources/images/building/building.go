@@ -14,6 +14,9 @@ var (
 
 	// EnemyReinforcePoint 敌方增援点
 	EnemyReinforcePoint *ebiten.Image
+
+	// OilPlatform 油井
+	OilPlatform *ebiten.Image
 )
 
 func init() {
@@ -28,6 +31,11 @@ func init() {
 
 	imgPath = "/buildings/enemy_reinforce_point.png"
 	if EnemyReinforcePoint, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/buildings/oil_platform.png"
+	if OilPlatform, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

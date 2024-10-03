@@ -94,7 +94,7 @@
   {
     "name": "liberty",
     "displayName": "自由轮",
-    "type": "default",
+    "type": "cargo",
     "typeAbbr": "Cargo",
     "totalHP": 7500,
     "horizontalDamageReduction": 0,
@@ -4459,6 +4459,7 @@
     "fundsCost": 22,
     "timeCost": 10,
     "description": [
+      "驱逐舰（英）",
       "主炮：5 座双联装 120mm/45",
       "鱼雷：1 座五联装直航 533mm"
     ],

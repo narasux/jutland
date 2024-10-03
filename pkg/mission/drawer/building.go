@@ -50,6 +50,28 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 			)
 		}
 	}
+	// 油井
+	for _, op := range ms.OilPlatforms {
+		if !ms.Camera.Contains(op.Pos) {
+			continue
+		}
+		img := buildingImg.OilPlatform
+		x := (op.Pos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize
+		y := (op.Pos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize
+		opts := d.genDefaultDrawImageOptions()
+		opts.GeoM.Translate(x-float64(img.Bounds().Dx()/2), y-float64(img.Bounds().Dy()/2))
+		screen.DrawImage(img, opts)
+		// 绘制范围圈
+		vector.StrokeCircle(
+			screen,
+			float32(x),
+			float32(y),
+			float32(op.Radius*constants.MapBlockSize),
+			2,
+			colorx.Green,
+			false,
+		)
+	}
 }
 
 func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionState) {

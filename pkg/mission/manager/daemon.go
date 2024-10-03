@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"math/rand"
@@ -62,6 +63,33 @@ func (m *MissionManager) updateBuildings() {
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3
 			moveInstr := instr.NewShipMove(ship.Uid, obj.NewMapPos(rp.RallyPos.MX+x, rp.RallyPos.MY+y))
 			m.instructions[moveInstr.Uid()] = moveInstr
+		}
+	}
+
+	// 油井当然算是建筑物！
+	fontSize := float64(24)
+	for _, op := range m.state.OilPlatforms {
+		text := fmt.Sprintf("+%d $", op.Yield)
+		for _, ship := range m.state.Ships {
+			if ship.Type != obj.ShipTypeCargo || ship.BelongPlayer != m.state.CurPlayer {
+				continue
+			}
+
+			// TODO 目前是只要货轮在油井附近就给钱，后续考虑开采 & 存储 & 货轮容量的设计
+			if ship.CurPos.Near(op.Pos, float64(op.Radius)) {
+				op.AddShip(ship)
+			} else {
+				op.RemoveShip(ship)
+			}
+		}
+
+		for uid, ship := range op.LoadingOilShips {
+			if ship.Update() {
+				m.state.CurFunds += int64(ship.FundYield)
+				pos := m.state.Ships[uid].CurPos
+				mark := obj.NewTextMark(pos, text, fontSize, colorx.Gold, 50)
+				m.state.GameMarks[mark.ID] = mark
+			}
 		}
 	}
 }

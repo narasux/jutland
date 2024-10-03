@@ -64,6 +64,8 @@ type MissionState struct {
 	ReinforcePoints map[string]*obj.ReinforcePoint
 	// 被选中的增援战舰名称
 	SelectedSummonShipName string
+	// 油井信息
+	OilPlatforms map[string]*obj.OilPlatform
 	// 战舰信息（Key: Uid）
 	Ships map[string]*obj.BattleShip
 	// 战舰 Uid 生成器
@@ -151,6 +153,12 @@ func NewMissionState(mission string) *MissionState {
 			selectedReinforcePointUid = rp.Uid
 		}
 	}
+	// 初始化油井
+	oilPlatforms := map[string]*obj.OilPlatform{}
+	for _, md := range missionMD.InitOilPlatforms {
+		rp := obj.NewOilPlatform(md.Pos, md.Radius, md.Yield)
+		oilPlatforms[rp.Uid] = rp
+	}
 	return &MissionState{
 		Mission:       mission,
 		MissionStatus: MissionRunning,
@@ -181,6 +189,7 @@ func NewMissionState(mission string) *MissionState {
 		IsGrouping:                false,
 		SelectedReinforcePointUid: selectedReinforcePointUid,
 		ReinforcePoints:           reinforcePoints,
+		OilPlatforms:              oilPlatforms,
 		ShipUidGenerators:         shipUidGenerators,
 		Ships:                     ships,
 		SelectedShips:             []string{},

@@ -97,6 +97,18 @@
         ],
       }
     ],
+    initOilPlatforms: [
+      {
+        "pos": [10, 10],
+        "radius": 3,
+        "yield": 10
+      },
+      {
+        "pos": [43, 68],
+        "radius": 4,
+        "yield": 25
+      }
+    ],
     "initShips": [
       {
         "name": "duck",
@@ -364,7 +376,7 @@
       },
       {
         "name": "liberty",
-        "pos": [45, 40],
+        "pos": [12, 12],
         "rotation": 90,
         "belongPlayer": "HA"
       },
