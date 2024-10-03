@@ -6,6 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/narasux/jutland/pkg/resources/font"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
@@ -31,6 +32,6 @@ func NewImgMark(pos MapPos, img *ebiten.Image, life int) *Mark {
 
 // NewTextMark ...
 func NewTextMark(pos MapPos, text string, fontSize float64, clr color.Color, life int) *Mark {
-	img := textureImg.GetHangText(text, fontSize, clr)
+	img := textureImg.GetText(text, font.Hang, fontSize, clr)
 	return &Mark{ID: MarkID(uuid.New().String()), Pos: pos, Img: img, Life: life}
 }

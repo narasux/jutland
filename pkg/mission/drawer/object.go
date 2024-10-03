@@ -80,7 +80,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			opts.GeoM.Translate(-20, 0)
 
 			// 渲染武器状态时候的 X 方向间隙大小
-			weaponInterstitialSpacing := 30.0
+			weaponInterstitialSpacing := 35.0
 			if lo.EveryBy(
 				[]bool{s.Weapon.HasMainGun, s.Weapon.HasSecondaryGun, s.Weapon.HasTorpedo},
 				func(b bool) bool {
@@ -92,38 +92,44 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 			// 绘制主炮状态
 			if s.Weapon.HasMainGun {
-				opts.GeoM.Translate(20, -45)
-				gunImg := lo.Ternary(
-					s.Weapon.MainGunDisabled,
-					textureImg.MainGunDisabled,
-					textureImg.MainGunEnabled,
-				)
-				screen.DrawImage(gunImg, opts)
-				opts.GeoM.Translate(0, 45)
+				clr := colorx.Yellow
+				if s.Weapon.MainGunDisabled {
+					clr = colorx.Red
+				} else if s.Weapon.MainGunReloaded() {
+					clr = colorx.Green
+				}
+				opts.GeoM.Translate(20, -25)
+				img := textureImg.GetText("M", font.Hang, 16, clr)
+				screen.DrawImage(img, opts)
+				opts.GeoM.Translate(0, 25)
 			}
 
 			// 绘制副炮状态
 			if s.Weapon.HasSecondaryGun {
-				opts.GeoM.Translate(weaponInterstitialSpacing, -45)
-				gunImg := lo.Ternary(
-					s.Weapon.SecondaryGunDisabled,
-					textureImg.SecondaryGunDisabled,
-					textureImg.SecondaryGunEnabled,
-				)
-				screen.DrawImage(gunImg, opts)
-				opts.GeoM.Translate(0, 45)
+				clr := colorx.Yellow
+				if s.Weapon.SecondaryGunDisabled {
+					clr = colorx.Red
+				} else if s.Weapon.SecondaryGunReloaded() {
+					clr = colorx.Green
+				}
+				opts.GeoM.Translate(weaponInterstitialSpacing, -25)
+				img := textureImg.GetText("S", font.Hang, 16, clr)
+				screen.DrawImage(img, opts)
+				opts.GeoM.Translate(0, 25)
 			}
 
 			// 绘制鱼雷发射器状态
 			if s.Weapon.HasTorpedo {
-				opts.GeoM.Translate(weaponInterstitialSpacing, -45)
-				torpedoImg := lo.Ternary(
-					s.Weapon.TorpedoDisabled,
-					textureImg.TorpedoDisabled,
-					textureImg.TorpedoEnabled,
-				)
-				screen.DrawImage(torpedoImg, opts)
-				opts.GeoM.Translate(0, 45)
+				clr := colorx.Yellow
+				if s.Weapon.TorpedoDisabled {
+					clr = colorx.Red
+				} else if s.Weapon.TorpedoLauncherReloaded() {
+					clr = colorx.Green
+				}
+				opts.GeoM.Translate(weaponInterstitialSpacing, -25)
+				img := textureImg.GetText("T", font.Hang, 16, clr)
+				screen.DrawImage(img, opts)
+				opts.GeoM.Translate(0, 25)
 			}
 
 			// 如果被编组，需要标记出来

@@ -376,7 +376,7 @@
       },
       {
         "name": "liberty",
-        "pos": [12, 12],
+        "pos": [10, 12],
         "rotation": 90,
         "belongPlayer": "HA"
       },

@@ -93,6 +93,36 @@ type Weapon struct {
 	TorpedoDisabled      bool
 }
 
+// MainGunReloaded 主炮是否已装填
+func (w *Weapon) MainGunReloaded() bool {
+	for _, g := range w.MainGuns {
+		if g.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
+// SecondaryGunReloaded 副炮是否已装填
+func (w *Weapon) SecondaryGunReloaded() bool {
+	for _, g := range w.SecondaryGuns {
+		if g.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
+// TorpedoLauncherReloaded 鱼雷是否已装填
+func (w *Weapon) TorpedoLauncherReloaded() bool {
+	for _, t := range w.Torpedoes {
+		if t.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
 // BattleShip 战舰
 type BattleShip struct {
 	// 名称

@@ -63,6 +63,12 @@ func (lc *TorpedoLauncher) CanFire(shipCurRotation float64, curPos, targetPos Ma
 	if !lc.LeftFiringArc.Contains(rotation) && !lc.RightFiringArc.Contains(rotation) {
 		return false
 	}
+	// 检查是否已经重新装填完成
+	return lc.Reloaded()
+}
+
+// Reloaded 是否在重新装填 / 发射间隔
+func (lc *TorpedoLauncher) Reloaded() bool {
 	// 注：鱼雷是需要考虑发射间隔的，比如每秒一发之类，全部打完才是重新装填
 	timeNow := time.Now().UnixMilli()
 	// 在重新装填，不可发射
@@ -73,7 +79,7 @@ func (lc *TorpedoLauncher) CanFire(shipCurRotation float64, curPos, targetPos Ma
 	if timeNow < lc.LatestFireAt+int64(lc.ShotInterval*1e3) {
 		return false
 	}
-	return true
+	return lc.ShotCountBeforeReload < lc.BulletCount
 }
 
 // Fire 发射
@@ -94,20 +100,19 @@ func (lc *TorpedoLauncher) Fire(ship, enemy *BattleShip) []*Bullet {
 	if !lc.CanFire(ship.CurRotation, curPos, targetPos) {
 		return []*Bullet{}
 	}
+	// 鱼雷不是齐射的，是一个一个来的
+	lc.ShotCountBeforeReload++
+
 	timeNow := time.Now().UnixMilli()
+	lc.LatestFireAt = timeNow
 	// 弹药打完了，重新装填
-	if lc.ShotCountBeforeReload == lc.BulletCount {
+	if lc.ShotCountBeforeReload >= lc.BulletCount {
 		lc.ShotCountBeforeReload = 0
 		lc.ReloadStartAt = timeNow
-		return []*Bullet{}
 	}
-	// 鱼雷不是齐射的，是一个一个来的
-	lc.LatestFireAt = time.Now().UnixMilli()
-	lc.ShotCountBeforeReload++
 
 	// 鱼雷的生命值就是最大射程（+5 预留）
 	life := int(lc.Range/lc.BulletSpeed) + 5
-
 	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*Bullet{NewBullets(
 		lc.BulletName, curPos, targetPos, BulletShotTypeDirect, lc.BulletSpeed, life, ship.Uid, ship.BelongPlayer,

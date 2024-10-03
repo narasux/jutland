@@ -22,6 +22,13 @@ var (
 	OpenSansItalic *text.GoTextFaceSource
 )
 
+var fontStrMap map[*text.GoTextFaceSource]string
+
+// FontToStr 字体转名称字符串
+func FontToStr(f *text.GoTextFaceSource) string {
+	return fontStrMap[f]
+}
+
 func init() {
 	var err error
 
@@ -45,6 +52,10 @@ func init() {
 	fontPath = "/open_sans_italic.ttf"
 	if OpenSansItalic, err = loader.LoadFont(fontPath); err != nil {
 		log.Fatalf("missing %s: %s", fontPath, err)
+	}
+
+	fontStrMap = map[*text.GoTextFaceSource]string{
+		Hang: "hang", Kai: "kai", OpenSans: "open_sans", OpenSansItalic: "open_sans_italic",
 	}
 
 	log.Println("font resources loaded")

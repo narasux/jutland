@@ -118,19 +118,27 @@ func init() {
 
 var textImages = map[string]*ebiten.Image{}
 
-// GetHangText 获取行书文本图像（支持缓存）
-func GetHangText(textStr string, fontSize float64, clr color.Color) *ebiten.Image {
+// GetText 获取文本图像（支持缓存）
+func GetText(
+	textStr string,
+	textFont *text.GoTextFaceSource,
+	fontSize float64,
+	clr color.Color,
+) *ebiten.Image {
 	r, g, b, a := clr.RGBA()
-	key := fmt.Sprintf("%s:size:%.0f:clr:%d:%d:%d:%d", textStr, fontSize, r, g, b, a)
+	key := fmt.Sprintf(
+		"%s:size:%.0f:clr:%d:%d:%d:%d:%s",
+		textStr, fontSize, r, g, b, a, font.FontToStr(textFont),
+	)
 	if img, ok := textImages[key]; ok {
 		return img
 	}
 
-	img := ebiten.NewImage(int(layout.CalcTextWidth(textStr, fontSize)*1.5), int(fontSize))
+	img := ebiten.NewImage(int(layout.CalcTextWidth(textStr, fontSize)*3), int(fontSize)+3)
 	opts := &text.DrawOptions{}
 	opts.ColorScale.ScaleWithColor(clr)
 	textFace := text.GoTextFace{
-		Source: font.Hang,
+		Source: textFont,
 		Size:   fontSize,
 	}
 	text.Draw(img, textStr, &textFace, opts)

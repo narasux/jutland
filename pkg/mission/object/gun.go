@@ -49,7 +49,7 @@ func (g *Gun) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 		return false
 	}
 	// 在重新装填，不可发射
-	if g.ReloadStartAt+int64(g.ReloadTime*1e3) > time.Now().UnixMilli() {
+	if !g.Reloaded() {
 		return false
 	}
 	// 不在射程内，不可发射
@@ -64,6 +64,11 @@ func (g *Gun) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 		return false
 	}
 	return true
+}
+
+// Reloaded 是否已装填完成
+func (g *Gun) Reloaded() bool {
+	return g.ReloadStartAt+int64(g.ReloadTime*1e3) <= time.Now().UnixMilli()
 }
 
 // Fire 发射
