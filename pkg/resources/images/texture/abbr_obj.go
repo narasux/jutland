@@ -10,6 +10,8 @@ import (
 )
 
 var (
+	// AbbrShipMini 微型战舰缩略图（< 1k ton）
+	AbbrShipMini *ebiten.Image
 	// AbbrShipLight 轻型战舰缩略图（< 1w ton）
 	AbbrShipLight *ebiten.Image
 	// AbbrShipMedium 中型战舰缩略图（1w-3w ton)
@@ -21,6 +23,8 @@ var (
 	// AbbrSelectedReinforcePoint 选中的增援点
 	AbbrSelectedReinforcePoint *ebiten.Image
 
+	// AbbrEnemyMini 微型战舰缩略图
+	AbbrEnemyMini *ebiten.Image
 	// AbbrEnemyLight 轻型战舰缩略图
 	AbbrEnemyLight *ebiten.Image
 	// AbbrEnemyMedium 中型战舰缩略图
@@ -36,7 +40,12 @@ func init() {
 
 	log.Println("loading abbreviation object image resources...")
 
-	imgPath := "/textures/abbr_obj/light.png"
+	imgPath := "/textures/abbr_obj/mini.png"
+	if AbbrShipMini, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/textures/abbr_obj/light.png"
 	if AbbrShipLight, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
@@ -58,6 +67,11 @@ func init() {
 
 	imgPath = "/textures/abbr_obj/selected_reinforce_point.png"
 	if AbbrSelectedReinforcePoint, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/textures/abbr_obj/enemy_mini.png"
+	if AbbrEnemyMini, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 
@@ -86,7 +100,9 @@ func init() {
 
 // GetAbbrShip 获取缩略图
 func GetAbbrShip(ton float64, isEnemy bool) *ebiten.Image {
-	if ton < 10000 {
+	if ton < 1000 {
+		return lo.Ternary(isEnemy, AbbrEnemyMini, AbbrShipMini)
+	} else if ton < 10000 {
 		return lo.Ternary(isEnemy, AbbrEnemyLight, AbbrShipLight)
 	} else if ton < 30000 {
 		return lo.Ternary(isEnemy, AbbrEnemyMedium, AbbrShipMedium)
