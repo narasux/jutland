@@ -5,37 +5,37 @@ import (
 
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
 // EnableWeapon 启用武器
 type EnableWeapon struct {
 	shipUid    string
 	weaponType obj.WeaponType
-	executed   bool
+	status     InstrStatus
 }
 
 // NewEnableWeapon ...
 func NewEnableWeapon(shipUid string, weaponType obj.WeaponType) *EnableWeapon {
-	return &EnableWeapon{shipUid: shipUid, weaponType: weaponType}
+	return &EnableWeapon{shipUid: shipUid, weaponType: weaponType, status: Ready}
 }
 
 var _ Instruction = (*EnableWeapon)(nil)
 
 func (i *EnableWeapon) Exec(s *state.MissionState) error {
-	// 战舰如果被摧毁了，直接修改指令为已完成
+	i.status = Executed
+	// 战舰如果不存在（被摧毁），直跳过
 	ship, ok := s.Ships[i.shipUid]
 	if !ok {
-		i.executed = true
 		return nil
 	}
 
 	ship.EnableWeapon(i.weaponType)
-	i.executed = true
 	return nil
 }
 
 func (i *EnableWeapon) Executed() bool {
-	return i.executed
+	return i.status == Executed
 }
 
 func (i *EnableWeapon) Uid() string {
@@ -50,31 +50,30 @@ func (i *EnableWeapon) String() string {
 type DisableWeapon struct {
 	shipUid    string
 	weaponType obj.WeaponType
-	executed   bool
+	status     InstrStatus
 }
 
 // NewDisableWeapon ...
 func NewDisableWeapon(shipUid string, weaponType obj.WeaponType) *DisableWeapon {
-	return &DisableWeapon{shipUid: shipUid, weaponType: weaponType}
+	return &DisableWeapon{shipUid: shipUid, weaponType: weaponType, status: Ready}
 }
 
 var _ Instruction = (*DisableWeapon)(nil)
 
 func (i *DisableWeapon) Exec(s *state.MissionState) error {
-	// 战舰如果被摧毁了，直接修改指令为已完成
+	i.status = Executed
+	// 战舰如果不存在（被摧毁），直跳过
 	ship, ok := s.Ships[i.shipUid]
 	if !ok {
-		i.executed = true
 		return nil
 	}
 
 	ship.DisableWeapon(i.weaponType)
-	i.executed = true
 	return nil
 }
 
 func (i *DisableWeapon) Executed() bool {
-	return i.executed
+	return i.status == Executed
 }
 
 func (i *DisableWeapon) Uid() string {
@@ -89,32 +88,32 @@ func (i *DisableWeapon) String() string {
 type ShipMove struct {
 	shipUid   string
 	targetPos obj.MapPos
-	executed  bool
+	status    InstrStatus
 }
 
 // NewShipMove ...
 func NewShipMove(shipUid string, targetPos obj.MapPos) *ShipMove {
-	return &ShipMove{shipUid: shipUid, targetPos: targetPos}
+	return &ShipMove{shipUid: shipUid, targetPos: targetPos, status: Ready}
 }
 
 var _ Instruction = (*ShipMove)(nil)
 
 func (i *ShipMove) Exec(s *state.MissionState) error {
-	// 战舰如果被摧毁了，直接修改指令为已完成
+	// 战舰如果不存在（被摧毁），直接修改指令为已完成
 	ship, ok := s.Ships[i.shipUid]
 	if !ok {
-		i.executed = true
+		i.status = Executed
 		return nil
 	}
 
 	if ship.MoveTo(s.MissionMD.MapCfg, i.targetPos, true) {
-		i.executed = true
+		i.status = Executed
 	}
 	return nil
 }
 
 func (i *ShipMove) Executed() bool {
-	return i.executed
+	return i.status == Executed
 }
 
 func (i *ShipMove) Uid() string {
@@ -127,39 +126,71 @@ func (i *ShipMove) String() string {
 
 // ShipMovePath 按照指定路径移动
 type ShipMovePath struct {
-	shipUid  string
-	path     []obj.MapPos
-	curIdx   int
-	executed bool
+	shipUid   string
+	curPos    obj.MapPos
+	targetPos obj.MapPos
+	path      []obj.MapPos
+	curIdx    int
+	status    InstrStatus
 }
 
 // NewShipMovePath ...
-func NewShipMovePath(shipUid string, path []obj.MapPos) *ShipMovePath {
-	return &ShipMovePath{shipUid: shipUid, path: path}
+func NewShipMovePath(shipUid string, curPos, targetPos obj.MapPos) *ShipMovePath {
+	return &ShipMovePath{shipUid: shipUid, curPos: curPos, targetPos: targetPos, status: Pending}
 }
 
 var _ Instruction = (*ShipMovePath)(nil)
 
 func (i *ShipMovePath) Exec(s *state.MissionState) error {
-	// 战舰如果被摧毁了，直接修改指令为已完成
-	ship, ok := s.Ships[i.shipUid]
-	if !ok {
-		i.executed = true
+	if i.status != Ready {
+		if i.status != Preparing {
+			i.status = Preparing
+			go i.genPath(s)
+		}
 		return nil
 	}
 
 	if i.curIdx >= len(i.path) {
-		i.executed = true
+		i.status = Executed
 		return nil
 	}
-	if ship.MoveTo(s.MissionMD.MapCfg, i.path[i.curIdx], i.curIdx == len(i.path)-1) {
+
+	// 战舰如果不存在（被摧毁），直接修改指令为已完成
+	ship, ok := s.Ships[i.shipUid]
+	if !ok {
+		i.status = Executed
+		return nil
+	}
+	if ship.MoveTo(
+		s.MissionMD.MapCfg,
+		i.path[i.curIdx],
+		i.curIdx == len(i.path)-1,
+	) {
 		i.curIdx++
 	}
 	return nil
 }
 
+func (i *ShipMovePath) genPath(misState *state.MissionState) {
+	points := misState.MissionMD.MapCfg.GenPath(
+		grid.Point{i.curPos.MX, i.curPos.MY},
+		grid.Point{i.targetPos.MX, i.targetPos.MY},
+	)
+	// 无需执行的路径（如寻路失败，直接算指令执行成功）
+	if len(points) < 2 {
+		i.status = Executed
+		return
+	}
+	i.path = []obj.MapPos{i.curPos}
+	for _, p := range points[1 : len(points)-1] {
+		i.path = append(i.path, obj.NewMapPos(p.X, p.Y))
+	}
+	i.path = append(i.path, i.targetPos)
+	i.status = Ready
+}
+
 func (i *ShipMovePath) Executed() bool {
-	return i.executed
+	return i.status == Executed
 }
 
 func (i *ShipMovePath) Uid() string {

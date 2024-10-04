@@ -13,6 +13,22 @@ const (
 	NameShipSummon    = "ShipSummon"
 )
 
+// InstrStatus 指令状态
+type InstrStatus int
+
+const (
+	// Pending 待执行
+	Pending InstrStatus = iota
+	// Preparing 准备中
+	Preparing
+	// Ready 已就绪
+	Ready
+	// Executing 执行中
+	Executing
+	// Executed 执行完成
+	Executed
+)
+
 // Instruction 指令
 type Instruction interface {
 	// Exec 指令执行

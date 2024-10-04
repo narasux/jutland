@@ -13,12 +13,12 @@ import (
 type ShipSummon struct {
 	reinforcePointUid string
 	shipName          string
-	executed          bool
+	status            InstrStatus
 }
 
 // NewShipSummon ...
 func NewShipSummon(reinforcePointUid string, shipName string) *ShipSummon {
-	return &ShipSummon{reinforcePointUid: reinforcePointUid, shipName: shipName}
+	return &ShipSummon{reinforcePointUid: reinforcePointUid, shipName: shipName, status: Ready}
 }
 
 var _ Instruction = (*ShipSummon)(nil)
@@ -37,12 +37,12 @@ func (i *ShipSummon) Exec(s *state.MissionState) error {
 		i.shipName = rp.ProvidedShipNames[idx]
 	}
 	rp.Summon(i.shipName)
-	i.executed = true
+	i.status = Executed
 	return nil
 }
 
 func (i *ShipSummon) Executed() bool {
-	return i.executed
+	return i.status == Executed
 }
 
 func (i *ShipSummon) Uid() string {

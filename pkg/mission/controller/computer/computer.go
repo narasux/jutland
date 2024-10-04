@@ -11,7 +11,6 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/geometry"
-	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
 // ComputerDecisionHandler 电脑决策处理器
@@ -65,15 +64,7 @@ func (h *ComputerDecisionHandler) Handle(
 			if _, ok := curInstructions[instrUid]; !ok {
 				// 进攻模式，随机选一个敌人冲上去
 				enemy := enemyShips[rand.Intn(len(enemyShips))]
-				points := misState.MissionMD.MapCfg.GenPath(
-					grid.Point{ship.CurPos.MX, ship.CurPos.MY},
-					grid.Point{enemy.CurPos.MX, enemy.CurPos.MY},
-				)
-				path := []obj.MapPos{}
-				for _, p := range points {
-					path = append(path, obj.NewMapPos(p.X, p.Y))
-				}
-				instructions[instrUid] = instr.NewShipMovePath(ship.Uid, path)
+				instructions[instrUid] = instr.NewShipMovePath(ship.Uid, ship.CurPos, enemy.CurPos)
 			}
 		} else if ship.CurPos.OnBorder(
 			float64(misState.MissionMD.MapCfg.Width-2),
