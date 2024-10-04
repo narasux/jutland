@@ -8,7 +8,6 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/action"
-	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
@@ -29,12 +28,10 @@ func (m *MissionManager) updateGameOptions() {
 // 更新指令集合
 func (m *MissionManager) updateInstructions() {
 	// 已经执行完的指令，就不再需要
-	m.instructions = lo.PickBy(m.instructions, func(key string, instruction instr.Instruction) bool {
-		return !instruction.Executed()
-	})
+	m.instructionSet.RemoveExecuted()
 	// 逐个读取各个用户的输入，更新指令
-	m.instructions = lo.Assign(m.instructions, m.playerAlphaHandler.Handle(m.instructions, m.state))
-	m.instructions = lo.Assign(m.instructions, m.playerBetaHandler.Handle(m.instructions, m.state))
+	m.instructionSet.Assign(m.playerAlphaHandler.Handle(m.instructionSet.Items(), m.state))
+	m.instructionSet.Assign(m.playerBetaHandler.Handle(m.instructionSet.Items(), m.state))
 }
 
 // 计算下一帧相机位置

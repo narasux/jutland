@@ -2,7 +2,6 @@ package manager
 
 import (
 	"fmt"
-	"log"
 	"math"
 	"math/rand"
 	"slices"
@@ -25,13 +24,7 @@ import (
 
 // 逐条执行指令（移动/炮击/雷击/建造）
 func (m *MissionManager) executeInstructions() {
-	for _, i := range m.instructions {
-		if err := i.Exec(m.state); err != nil {
-			// TODO 某个指令执行失败，不影响流程，但是应该有错误信息输出到游戏界面？
-			log.Printf("Instruction %s exec error: %s\n", i.String(), err)
-			continue
-		}
-	}
+	m.instructionSet.ExecAll(m.state)
 }
 
 // 更新游戏标识
@@ -61,8 +54,8 @@ func (m *MissionManager) updateBuildings() {
 			}
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3
-			moveInstr := instr.NewShipMove(ship.Uid, obj.NewMapPos(rp.RallyPos.MX+x, rp.RallyPos.MY+y))
-			m.instructions[moveInstr.Uid()] = moveInstr
+			targetPos := obj.NewMapPos(rp.RallyPos.MX+x, rp.RallyPos.MY+y)
+			m.instructionSet.Add(instr.NewShipMove(ship.Uid, targetPos))
 		}
 	}
 

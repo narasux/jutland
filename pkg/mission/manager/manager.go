@@ -9,7 +9,6 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/hacker"
-	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -18,7 +17,7 @@ type MissionManager struct {
 	state              *state.MissionState
 	drawer             *drawer.Drawer
 	terminal           *hacker.Terminal
-	instructions       map[string]instr.Instruction
+	instructionSet     *InstructionSet
 	playerAlphaHandler controller.InputHandler
 	playerBetaHandler  controller.InputHandler
 }
@@ -26,12 +25,10 @@ type MissionManager struct {
 // NewManager ...
 func New(mission string) *MissionManager {
 	return &MissionManager{
-		state:    state.NewMissionState(mission),
-		drawer:   drawer.NewDrawer(mission),
-		terminal: hacker.NewTerminal(),
-		// 指令集合 key 为 objUid + instrName
-		// 注：同一对象，只能有一个同名指令（如：战舰不能有两个目标位置）
-		instructions: map[string]instr.Instruction{},
+		state:          state.NewMissionState(mission),
+		drawer:         drawer.NewDrawer(mission),
+		terminal:       hacker.NewTerminal(),
+		instructionSet: NewInstructionSet(),
 		// 目前用户一只能是人类，用户二是电脑 TODO 支持多人远程联机
 		playerAlphaHandler: human.NewHandler(faction.HumanAlpha),
 		playerBetaHandler:  computer.NewHandler(faction.ComputerAlpha),
