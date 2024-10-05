@@ -73,7 +73,7 @@ func (c *WhoIsCallingTheFleet) String() string {
 }
 
 func (c *WhoIsCallingTheFleet) Desc() string {
-	return "Turn every reinforce time cost to 1s"
+	return "Turn every reinforce time cost to 1s."
 }
 
 func (c *WhoIsCallingTheFleet) Match(cmd string) bool {
@@ -104,7 +104,7 @@ func (c *DoNotDie) String() string {
 }
 
 func (c *DoNotDie) Desc() string {
-	return "Turn every selected ship to full hp"
+	return "Turn every selected ship to full HP."
 }
 
 func (c *DoNotDie) Match(cmd string) bool {
@@ -124,16 +124,16 @@ func (c *DoNotDie) Exec(misState *state.MissionState) string {
 
 var _ Cheat = (*DoNotDie)(nil)
 
-// YouHaveBetrayedTheWorkingClass -> 标记选中的战舰成为敌人（你背叛了工人阶级，XXX）
+// YouHaveBetrayedTheWorkingClass 你背叛了工人阶级，XXX -> 标记选中的战舰成为敌人
 type YouHaveBetrayedTheWorkingClass struct{}
 
 func (c *YouHaveBetrayedTheWorkingClass) String() string {
-	// 原剧是德语：du hast die arbeiterklasse verraten verdammt
+	// 原剧是德语：Du, Verräter der Arbeiterklasse, Verpfeif dich!
 	return "you have betrayed the working class"
 }
 
 func (c *YouHaveBetrayedTheWorkingClass) Desc() string {
-	return "Mark selected ships as enemy"
+	return "Mark selected ships as enemy."
 }
 
 func (c *YouHaveBetrayedTheWorkingClass) Match(cmd string) bool {
@@ -150,3 +150,29 @@ func (c *YouHaveBetrayedTheWorkingClass) Exec(misState *state.MissionState) stri
 }
 
 var _ Cheat = (*YouHaveBetrayedTheWorkingClass)(nil)
+
+// AbandonDarknessAndEmbraceTheLight 弃暗投明 -> 视野范围内的敌人变成自己人
+type AbandonDarknessAndEmbraceTheLight struct{}
+
+func (c *AbandonDarknessAndEmbraceTheLight) String() string {
+	return "abandon darkness and embrace the light"
+}
+
+func (c *AbandonDarknessAndEmbraceTheLight) Desc() string {
+	return "Turn enemy ship in camera belong to self."
+}
+
+func (c *AbandonDarknessAndEmbraceTheLight) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *AbandonDarknessAndEmbraceTheLight) Exec(misState *state.MissionState) string {
+	for _, ship := range misState.Ships {
+		if misState.Camera.Contains(ship.CurPos) {
+			ship.BelongPlayer = misState.CurPlayer
+		}
+	}
+	return "Thank you, you are both good man."
+}
+
+var _ Cheat = (*AbandonDarknessAndEmbraceTheLight)(nil)

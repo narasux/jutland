@@ -16,7 +16,7 @@ func (c *ShowMeTheDuck) String() string {
 }
 
 func (c *ShowMeTheDuck) Desc() string {
-	return "Create a duck at current cursor position"
+	return "Create a duck at current cursor position."
 }
 
 func (c *ShowMeTheDuck) Match(cmd string) bool {
@@ -45,7 +45,7 @@ func (c *ShowMeTheWaterdrop) String() string {
 }
 
 func (c *ShowMeTheWaterdrop) Desc() string {
-	return "Create a waterdrop at current cursor position"
+	return "Create a waterdrop at current cursor position."
 }
 
 func (c *ShowMeTheWaterdrop) Match(cmd string) bool {
@@ -70,7 +70,7 @@ func (c *BlackGoldRush) String() string {
 }
 
 func (c *BlackGoldRush) Desc() string {
-	return "Create a oil platform at current cursor position"
+	return "Create a oil platform at current cursor position."
 }
 
 func (c *BlackGoldRush) Match(cmd string) bool {
@@ -84,7 +84,7 @@ func (c *BlackGoldRush) Exec(misState *state.MissionState) string {
 	}
 	op := object.NewOilPlatform(*pos, 5, 100)
 	misState.OilPlatforms[op.Uid] = op
-	return fmt.Sprintf("Oil platform created at %s, Be careful, oil can breed mold!", pos.String())
+	return fmt.Sprintf("Oil platform created at %s. Be careful, oil can breed mold!", pos.String())
 }
 
 var _ Cheat = (*BlackGoldRush)(nil)
