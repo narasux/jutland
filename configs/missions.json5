@@ -104,7 +104,7 @@
         "yield": 10
       },
       {
-        "pos": [43, 68],
+        "pos": [40, 68],
         "radius": 4,
         "yield": 25
       }
@@ -382,19 +382,19 @@
       },
       {
         "name": "liberty",
-        "pos": [45, 70],
+        "pos": [38, 70],
         "rotation": 270,
         "belongPlayer": "CA"
       },
       {
         "name": "liberty",
-        "pos": [44, 70],
+        "pos": [40, 70],
         "rotation": 270,
         "belongPlayer": "CA"
       },
       {
         "name": "liberty",
-        "pos": [43, 70],
+        "pos": [42, 70],
         "rotation": 270,
         "belongPlayer": "CA"
       },
@@ -406,19 +406,19 @@
       },
       {
         "name": "yugumo",
-        "pos": [76, 56],
+        "pos": [85, 58],
         "rotation": 0,
         "belongPlayer": "CA"
       },
       {
         "name": "yamato",
-        "pos": [75, 58],
+        "pos": [75, 59],
         "rotation": 0,
         "belongPlayer": "CA"
       },
       {
         "name": "mogami",
-        "pos": [77, 59],
+        "pos": [76, 58],
         "rotation": 0,
         "belongPlayer": "CA"
       },
