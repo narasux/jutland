@@ -5,6 +5,7 @@ import (
 
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
@@ -122,3 +123,30 @@ func (c *DoNotDie) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*DoNotDie)(nil)
+
+// YouHaveBetrayedTheWorkingClass -> 标记选中的战舰成为敌人（你背叛了工人阶级，XXX）
+type YouHaveBetrayedTheWorkingClass struct{}
+
+func (c *YouHaveBetrayedTheWorkingClass) String() string {
+	// 原剧是德语：du hast die arbeiterklasse verraten verdammt
+	return "you have betrayed the working class"
+}
+
+func (c *YouHaveBetrayedTheWorkingClass) Desc() string {
+	return "Mark selected ships as enemy"
+}
+
+func (c *YouHaveBetrayedTheWorkingClass) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *YouHaveBetrayedTheWorkingClass) Exec(misState *state.MissionState) string {
+	for _, shipUid := range misState.SelectedShips {
+		if ship, ok := misState.Ships[shipUid]; ok {
+			ship.BelongPlayer = faction.ComputerAlpha
+		}
+	}
+	return "It's time to clean up the house!"
+}
+
+var _ Cheat = (*YouHaveBetrayedTheWorkingClass)(nil)

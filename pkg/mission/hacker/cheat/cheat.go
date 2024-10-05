@@ -5,6 +5,7 @@ var Cheats = []Cheat{
 	// 对象类
 	&ShowMeTheDuck{},
 	&ShowMeTheWaterdrop{},
+	&BlackGoldRush{},
 	// 经济类
 	&ShowMeTheMoney{},
 	// 效果类
@@ -12,4 +13,5 @@ var Cheats = []Cheat{
 	&BathtubWar{},
 	&WhoIsCallingTheFleet{},
 	&DoNotDie{},
+	&YouHaveBetrayedTheWorkingClass{},
 }

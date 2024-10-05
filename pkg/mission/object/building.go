@@ -172,9 +172,9 @@ func (p *OilPlatform) AddShip(ship *BattleShip) {
 }
 
 // RemoveShip 移除货轮
-func (p *OilPlatform) RemoveShip(ship *BattleShip) {
-	if _, ok := p.LoadingOilShips[ship.Uid]; ok {
-		delete(p.LoadingOilShips, ship.Uid)
+func (p *OilPlatform) RemoveShip(shipUid string) {
+	if _, ok := p.LoadingOilShips[shipUid]; ok {
+		delete(p.LoadingOilShips, shipUid)
 	}
 }
 

@@ -58,7 +58,7 @@ func (h *ComputerDecisionHandler) Handle(
 	isAttackMode := lo.Ternary(len(ships) >= 25, true, false)
 
 	for _, ship := range ships {
-		if isAttackMode {
+		if isAttackMode && len(enemyShips) != 0 {
 			instrUid := instr.GenInstrUid(instr.NameShipMovePath, ship.Uid)
 			// 如果战舰已经在移动了，则跳过
 			if _, ok := curInstructions[instrUid]; !ok {

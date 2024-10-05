@@ -1,6 +1,8 @@
 package cheat
 
 import (
+	"fmt"
+
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -59,3 +61,30 @@ func (c *ShowMeTheWaterdrop) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*ShowMeTheWaterdrop)(nil)
+
+// BlackGoldRush -> 在指定地点生成一个油井
+type BlackGoldRush struct{}
+
+func (c *BlackGoldRush) String() string {
+	return "black gold rush"
+}
+
+func (c *BlackGoldRush) Desc() string {
+	return "Create a oil platform at current cursor position"
+}
+
+func (c *BlackGoldRush) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *BlackGoldRush) Exec(misState *state.MissionState) string {
+	pos := action.DetectCursorPosOnMap(misState)
+	if misState.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
+		return "Current cursor position on land, can't create oil platform"
+	}
+	op := object.NewOilPlatform(*pos, 5, 100)
+	misState.OilPlatforms[op.Uid] = op
+	return fmt.Sprintf("Oil platform created at %s, Be careful, oil can breed mold!", pos.String())
+}
+
+var _ Cheat = (*BlackGoldRush)(nil)

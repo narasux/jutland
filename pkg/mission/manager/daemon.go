@@ -72,15 +72,18 @@ func (m *MissionManager) updateBuildings() {
 			if ship.CurPos.Near(op.Pos, float64(op.Radius)) {
 				op.AddShip(ship)
 			} else {
-				op.RemoveShip(ship)
+				op.RemoveShip(ship.Uid)
 			}
 		}
 
 		for uid, ship := range op.LoadingOilShips {
-			if ship.Update() {
+			// 如果货轮不在了，需要及时移除掉
+			cargo, ok := m.state.Ships[uid]
+			if !ok {
+				op.RemoveShip(uid)
+			} else if cargo.BelongPlayer == m.state.CurPlayer && ship.Update() {
 				m.state.CurFunds += int64(ship.FundYield)
-				pos := m.state.Ships[uid].CurPos
-				mark := obj.NewTextMark(pos, text, fontSize, colorx.Gold, 50)
+				mark := obj.NewTextMark(cargo.CurPos, text, fontSize, colorx.Gold, 50)
 				m.state.GameMarks[mark.ID] = mark
 			}
 		}

@@ -266,6 +266,8 @@ func (m *MissionManager) updateReinforcePoints() {
 
 	// 退格键取消最后增援的战舰
 	if inpututil.IsKeyJustPressed(ebiten.KeyBackspace) {
-		rp.OncomingShips = rp.OncomingShips[:len(rp.OncomingShips)-1]
+		if len(rp.OncomingShips) > 0 {
+			rp.OncomingShips = rp.OncomingShips[:len(rp.OncomingShips)-1]
+		}
 	}
 }

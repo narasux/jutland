@@ -156,8 +156,8 @@ func NewMissionState(mission string) *MissionState {
 	// 初始化油井
 	oilPlatforms := map[string]*obj.OilPlatform{}
 	for _, md := range missionMD.InitOilPlatforms {
-		rp := obj.NewOilPlatform(md.Pos, md.Radius, md.Yield)
-		oilPlatforms[rp.Uid] = rp
+		op := obj.NewOilPlatform(md.Pos, md.Radius, md.Yield)
+		oilPlatforms[op.Uid] = op
 	}
 	return &MissionState{
 		Mission:       mission,
