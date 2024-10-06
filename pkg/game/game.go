@@ -39,7 +39,7 @@ func New() *Game {
 		drawer:     NewDrawer(),
 		player:     audio.NewPlayer(audio.Context),
 		objStates:  nil,
-		curMission: "default",
+		curMission: "Alpha",
 		missionMgr: nil,
 	}
 	g.init()

@@ -112,7 +112,9 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	}
 	if dx != 0 || dy != 0 {
 		for _, shipUid := range misState.SelectedShips {
-			handleMove(shipUid, misState.Ships[shipUid].CurPos, dx, dy)
+			if ship, ok := misState.Ships[shipUid]; ok {
+				handleMove(shipUid, ship.CurPos, dx, dy)
+			}
 		}
 	}
 	return instructions

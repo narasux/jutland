@@ -74,6 +74,8 @@ func (m *MapData) ToGridCells() grid.Cells {
 type MapCfg struct {
 	// 地图名称
 	Name string
+	// 展示名称
+	DisplayName string
 	// 地图数据
 	Map MapData
 	// 地图网格数据

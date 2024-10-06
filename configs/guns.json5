@@ -1,612 +1,612 @@
 [
   // 主鸭炮
   {
-    "name": "DuckMainGun",
-    "bulletName": "US/GB/406/1944",
-    "bulletCount": 8,
-    "reloadTime": 1,
-    "range": 36,
-    "bulletSpread": 100,
-    "bulletSpeed": 800
+    name: "DuckMainGun",
+    bulletName: "US/GB/406/1944",
+    bulletCount: 8,
+    reloadTime: 1,
+    range: 36,
+    bulletSpread: 100,
+    bulletSpeed: 800
   },
   // 副鸭炮
   {
-    "name": "DuckSecondaryGun",
-    "bulletName": "JP/GB/155/1934",
-    "bulletCount": 15,
-    "reloadTime": 0.5,
-    "range": 20,
-    "bulletSpread": 100,
-    "bulletSpeed": 1000
+    name: "DuckSecondaryGun",
+    bulletName: "JP/GB/155/1934",
+    bulletCount: 15,
+    reloadTime: 0.5,
+    range: 20,
+    bulletSpread: 100,
+    bulletSpeed: 1000
   },
   // 超电磁炮
   {
-    "name": "RailGun",
-    "bulletName": "SE/GB/1024/2048",
-    "bulletCount": 1,
-    "reloadTime": 3,
-    "range": 128,
-    "bulletSpread": 10,
-    "bulletSpeed": 2300
+    name: "RailGun",
+    bulletName: "SE/GB/1024/2048",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 128,
+    bulletSpread: 10,
+    bulletSpeed: 2300
   },
   // 水滴撞击
   {
-    "name": "Impact",
-    "bulletName": "SE/GB/1/2048",
-    "bulletCount": 3,
-    "reloadTime": 0.001,
-    "range": 1.5,
-    "bulletSpread": 0,
-    "bulletSpeed": 3000
+    name: "Impact",
+    bulletName: "SE/GB/1/2048",
+    bulletCount: 3,
+    reloadTime: 0.001,
+    range: 1.5,
+    bulletSpread: 0,
+    bulletSpeed: 3000
   },
   // 美国海军 US/127/38/MK45 单裝舰炮
   {
-    "name": "US/127/38/MK45",
-    "bulletName": "US/GB/127/1932",
-    "bulletCount": 1,
-    "reloadTime": 1,
-    "range": 22,
-    "bulletSpread": 50,
-    "bulletSpeed": 800
+    name: "US/127/38/MK45",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 22,
+    bulletSpread: 50,
+    bulletSpeed: 800
   },
   // 美国海军 US/406/50/MK7 三联装舰炮
   {
-    "name": "US/406/50/3/MK7",
-    "bulletName": "US/GB/406/1944",
-    "bulletCount": 3,
-    "reloadTime": 12,
-    "range": 38,
-    "bulletSpread": 150,
-    "bulletSpeed": 800
+    name: "US/406/50/3/MK7",
+    bulletName: "US/GB/406/1944",
+    bulletCount: 3,
+    reloadTime: 12,
+    range: 38,
+    bulletSpread: 150,
+    bulletSpeed: 800
   },
   // 美国海军 US/406/45/MK6 三联装舰炮
   {
-    "name": "US/406/45/3/MK6",
-    "bulletName": "US/GB/406/1944",
-    "bulletCount": 3,
-    "reloadTime": 12,
-    "range": 37,
-    "bulletSpread": 160,
-    "bulletSpeed": 760
+    name: "US/406/45/3/MK6",
+    bulletName: "US/GB/406/1944",
+    bulletCount: 3,
+    reloadTime: 12,
+    range: 37,
+    bulletSpread: 160,
+    bulletSpeed: 760
   },
   // 美国海军 US/305/50/MK8 三联装舰炮
   {
-    "name": "US/305/50/3/MK8",
-    "bulletName": "US/GB/305/1942",
-    "bulletCount": 3,
-    "reloadTime": 10,
-    "range": 35,
-    "bulletSpread": 120,
-    "bulletSpeed": 840
+    name: "US/305/50/3/MK8",
+    bulletName: "US/GB/305/1942",
+    bulletCount: 3,
+    reloadTime: 10,
+    range: 35,
+    bulletSpread: 120,
+    bulletSpeed: 840
   },
   // 美国海军 US/203/55/MK14 三联装舰炮
   {
-    "name": "US/203/55/3/MK14",
-    "bulletName": "US/GB/203/1939",
-    "bulletCount": 3,
-    "reloadTime": 7,
-    "range": 26,
-    "bulletSpread": 100,
-    "bulletSpeed": 820
+    name: "US/203/55/3/MK14",
+    bulletName: "US/GB/203/1939",
+    bulletCount: 3,
+    reloadTime: 7,
+    range: 26,
+    bulletSpread: 100,
+    bulletSpeed: 820
   },
   // 美国海军 US/127/38/MK12 双联装舰炮
   {
-    "name": "US/127/38/2/MK12",
-    "bulletName": "US/GB/127/1932",
-    "bulletCount": 2,
-    "reloadTime": 1.5,
-    "range": 18,
-    "bulletSpread": 80,
-    "bulletSpeed": 800
+    name: "US/127/38/2/MK12",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 2,
+    reloadTime: 1.5,
+    range: 18,
+    bulletSpread: 80,
+    bulletSpeed: 800
   },
   // 美国海军 US/127/25/MK10 单裝高平两用炮
   {
-    "name": "US/127/25/MK10",
-    "bulletName": "US/GB/127/1932",
-    "bulletCount": 1,
-    "reloadTime": 1.3,
-    "range": 15,
-    "bulletSpread": 120,
-    "bulletSpeed": 650
+    name: "US/127/25/MK10",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 1,
+    reloadTime: 1.3,
+    range: 15,
+    bulletSpread: 120,
+    bulletSpeed: 650
   },
   // 美国海军 US/127/54/MK39 双联装舰炮
   {
-    "name": "US/127/54/2/MK39",
-    "bulletName": "US/GB/127/1932",
-    "bulletCount": 2,
-    "reloadTime": 1.4,
-    "range": 24,
-    "bulletSpread": 80,
-    "bulletSpeed": 800
+    name: "US/127/54/2/MK39",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 2,
+    reloadTime: 1.4,
+    range: 24,
+    bulletSpread: 80,
+    bulletSpeed: 800
   },
   // 美国海军 US/76/50 单装舰炮
   {
-    "name": "US/76/50",
-    "bulletName": "US/GB/76/1910",
-    "bulletCount": 1,
-    "reloadTime": 1,
-    "range": 13,
-    "bulletSpread": 100,
-    "bulletSpeed": 820
+    name: "US/76/50",
+    bulletName: "US/GB/76/1910",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 13,
+    bulletSpread: 100,
+    bulletSpeed: 820
   },
   // 美国海军 US/40/60 单装高炮
   {
-    "name": "US/40/60",
-    "bulletName": "US/GB/40/1930",
-    "bulletCount": 1,
-    "reloadTime": 0.5,
-    "range": 7,
-    "bulletSpread": 20,
-    "bulletSpeed": 880
+    name: "US/40/60",
+    bulletName: "US/GB/40/1930",
+    bulletCount: 1,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 880
   },
   // 美国海军 US/20/70 单装高炮
   {
-    "name": "US/20/70",
-    "bulletName": "US/GB/20/1940",
-    "bulletCount": 1,
-    "reloadTime": 0.2,
-    "range": 2,
-    "bulletSpread": 20,
-    "bulletSpeed": 910
+    name: "US/20/70",
+    bulletName: "US/GB/20/1940",
+    bulletCount: 1,
+    reloadTime: 0.2,
+    range: 2,
+    bulletSpread: 20,
+    bulletSpeed: 910
   },
   // 日本海军 三联装 46.0 厘米 45 倍口径舰炮
   {
-    "name": "JP/460/45/3",
-    "bulletName": "JP/GB/460/1942",
-    "bulletCount": 3,
-    "reloadTime": 18,
-    "range": 42,
-    "bulletSpread": 180,
-    "bulletSpeed": 780
+    name: "JP/460/45/3",
+    bulletName: "JP/GB/460/1942",
+    bulletCount: 3,
+    reloadTime: 18,
+    range: 42,
+    bulletSpread: 180,
+    bulletSpeed: 780
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径舰炮
   {
-    "name": "JP/356/45/2",
-    "bulletName": "JP/GB/356/1935",
-    "bulletCount": 2,
-    "reloadTime": 20,
-    "range": 35,
-    "bulletSpread": 150,
-    "bulletSpeed": 800
+    name: "JP/356/45/2",
+    bulletName: "JP/GB/356/1935",
+    bulletCount: 2,
+    reloadTime: 20,
+    range: 35,
+    bulletSpread: 150,
+    bulletSpeed: 800
   },
   // 日本海军 双联装 20.3 厘米 60 倍口径舰炮
   {
-    "name": "JP/203/60/2",
-    "bulletName": "JP/GB/203/1937",
-    "bulletCount": 2,
-    "reloadTime": 8,
-    "range": 30,
-    "bulletSpread": 120,
-    "bulletSpeed": 920
+    name: "JP/203/60/2",
+    bulletName: "JP/GB/203/1937",
+    bulletCount: 2,
+    reloadTime: 8,
+    range: 30,
+    bulletSpread: 120,
+    bulletSpeed: 920
   },
   // 日本海军 双联装 20.3 厘米 50 倍口径舰炮
   {
-    "name": "JP/203/50/2",
-    "bulletName": "JP/GB/203/1937",
-    "bulletCount": 2,
-    "reloadTime": 8,
-    "range": 24,
-    "bulletSpread": 120,
-    "bulletSpeed": 880
+    name: "JP/203/50/2",
+    bulletName: "JP/GB/203/1937",
+    bulletCount: 2,
+    reloadTime: 8,
+    range: 24,
+    bulletSpread: 120,
+    bulletSpeed: 880
   },
   // 日本海军 三联装 15.5 厘米 60 倍口径舰炮
   {
-    "name": "JP/155/60/3",
-    "bulletName": "JP/GB/155/1934",
-    "bulletCount": 3,
-    "reloadTime": 3.5,
-    "range": 27,
-    "bulletSpread": 100,
-    "bulletSpeed": 920
+    name: "JP/155/60/3",
+    bulletName: "JP/GB/155/1934",
+    bulletCount: 3,
+    reloadTime: 3.5,
+    range: 27,
+    bulletSpread: 100,
+    bulletSpeed: 920
   },
   // 日本海军 单装 15.2 厘米 50 倍口径舰炮
   {
-    "name": "JP/152/50",
-    "bulletName": "JP/GB/152/1912",
-    "bulletCount": 1,
-    "reloadTime": 5,
-    "range": 18,
-    "bulletSpread": 100,
-    "bulletSpeed": 840
+    name: "JP/152/50",
+    bulletName: "JP/GB/152/1912",
+    bulletCount: 1,
+    reloadTime: 5,
+    range: 18,
+    bulletSpread: 100,
+    bulletSpeed: 840
   },
   // 日本海军 单装 14.0 厘米 50 倍口径舰炮
   {
-    "name": "JP/140/50",
-    "bulletName": "JP/GB/140/1914",
-    "bulletCount": 1,
-    "reloadTime": 4,
-    "range": 18,
-    "bulletSpread": 70,
-    "bulletSpeed": 840
+    name: "JP/140/50",
+    bulletName: "JP/GB/140/1914",
+    bulletCount: 1,
+    reloadTime: 4,
+    range: 18,
+    bulletSpread: 70,
+    bulletSpeed: 840
   },
   // 日本海军 双联装 12.7 厘米 50 倍口径舰炮
   {
-    "name": "JP/127/50/2",
-    "bulletName": "JP/GB/127/1926",
-    "bulletCount": 2,
-    "reloadTime": 2.5,
-    "range": 18,
-    "bulletSpread": 70,
-    "bulletSpeed": 920
+    name: "JP/127/50/2",
+    bulletName: "JP/GB/127/1926",
+    bulletCount: 2,
+    reloadTime: 2.5,
+    range: 18,
+    bulletSpread: 70,
+    bulletSpeed: 920
   },
   // 日本海军 双联装 12.7 厘米 40 倍口径高平两用炮
   {
-    "name": "JP/127/40/2/DP",
-    "bulletName": "JP/GB/127/1929",
-    "bulletCount": 2,
-    "reloadTime": 3.5,
-    "range": 14,
-    "bulletSpread": 80,
-    "bulletSpeed": 720
+    name: "JP/127/40/2/DP",
+    bulletName: "JP/GB/127/1929",
+    bulletCount: 2,
+    reloadTime: 3.5,
+    range: 14,
+    bulletSpread: 80,
+    bulletSpeed: 720
   },
   // 日本海军 单装 13 毫米机枪
   {
-    "name": "JP/13",
-    "bulletName": "JP/GB/13/1935",
-    "bulletCount": 1,
-    "reloadTime": 0.05,
-    "range": 1,
-    "bulletSpread": 20,
-    "bulletSpeed": 800
+    name: "JP/13",
+    bulletName: "JP/GB/13/1935",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 1,
+    bulletSpread: 20,
+    bulletSpeed: 800
   },
   // 德国海军 GER/381/52 双联装舰炮
   {
-    "name": "GER/381/52/2",
-    "bulletName": "GER/GB/381/1939",
-    "bulletCount": 2,
-    "reloadTime": 10,
-    "range": 38,
-    "bulletSpread": 100,
-    "bulletSpeed": 820
+    name: "GER/381/52/2",
+    bulletName: "GER/GB/381/1939",
+    bulletCount: 2,
+    reloadTime: 10,
+    range: 38,
+    bulletSpread: 100,
+    bulletSpeed: 820
   },
   // 德国海军 GER/283/55 三联装舰炮
   {
-    "name": "GER/283/55/3",
-    "bulletName": "GER/GB/283/1937",
-    "bulletCount": 3,
-    "reloadTime": 8,
-    "range": 38,
-    "bulletSpread": 100,
-    "bulletSpeed": 900
+    name: "GER/283/55/3",
+    bulletName: "GER/GB/283/1937",
+    bulletCount: 3,
+    reloadTime: 8,
+    range: 38,
+    bulletSpread: 100,
+    bulletSpeed: 900
   },
   // 德国海军 GER/283/52 三联装舰炮
   {
-    "name": "GER/283/52/3",
-    "bulletName": "GER/GB/283/1925",
-    "bulletCount": 3,
-    "reloadTime": 12,
-    "range": 26,
-    "bulletSpread": 100,
-    "bulletSpeed": 800
+    name: "GER/283/52/3",
+    bulletName: "GER/GB/283/1925",
+    bulletCount: 3,
+    reloadTime: 12,
+    range: 26,
+    bulletSpread: 100,
+    bulletSpeed: 800
   },
   // 德国海军 GER/203/60 双联装舰炮
   {
-    "name": "GER/203/60/2",
-    "bulletName": "GER/GB/203/1939",
-    "bulletCount": 2,
-    "reloadTime": 6,
-    "range": 34,
-    "bulletSpread": 80,
-    "bulletSpeed": 925
+    name: "GER/203/60/2",
+    bulletName: "GER/GB/203/1939",
+    bulletCount: 2,
+    reloadTime: 6,
+    range: 34,
+    bulletSpread: 80,
+    bulletSpeed: 925
   },
   // 德国海军 GER/150/60 三联装舰炮
   {
-    "name": "GER/150/60/3",
-    "bulletName": "GER/GB/150/1932",
-    "bulletCount": 3,
-    "reloadTime": 1.3,
-    "range": 18,
-    "bulletSpread": 90,
-    "bulletSpeed": 900
+    name: "GER/150/60/3",
+    bulletName: "GER/GB/150/1932",
+    bulletCount: 3,
+    reloadTime: 1.3,
+    range: 18,
+    bulletSpread: 90,
+    bulletSpeed: 900
   },
   // 德国海军 GER/150/60 双联装舰炮
   {
-    "name": "GER/150/60/2",
-    "bulletName": "GER/GB/150/1932",
-    "bulletCount": 2,
-    "reloadTime": 1.4,
-    "range": 17,
-    "bulletSpread": 80,
-    "bulletSpeed": 900
+    name: "GER/150/60/2",
+    bulletName: "GER/GB/150/1932",
+    bulletCount: 2,
+    reloadTime: 1.4,
+    range: 17,
+    bulletSpread: 80,
+    bulletSpeed: 900
   },
   // 德国海军 GER/150/60 单裝舰炮
   {
-    "name": "GER/150/60",
-    "bulletName": "GER/GB/150/1932",
-    "bulletCount": 1,
-    "reloadTime": 1.5,
-    "range": 17,
-    "bulletSpread": 90,
-    "bulletSpeed": 900
+    name: "GER/150/60",
+    bulletName: "GER/GB/150/1932",
+    bulletCount: 1,
+    reloadTime: 1.5,
+    range: 17,
+    bulletSpread: 90,
+    bulletSpeed: 900
   },
   // 德国海军 GER/127/45 单裝舰炮
   {
-    "name": "GER/127/45",
-    "bulletName": "GER/GB/127/1924",
-    "bulletCount": 1,
-    "reloadTime": 1,
-    "range": 16,
-    "bulletSpread": 80,
-    "bulletSpeed": 830
+    name: "GER/127/45",
+    bulletName: "GER/GB/127/1924",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 16,
+    bulletSpread: 80,
+    bulletSpeed: 830
   },
   // 德国海军 GER/105/65 双联装高平两用炮
   {
-    "name": "GER/105/65/2/DP",
-    "bulletName": "GER/GB/105/1937",
-    "bulletCount": 2,
-    "reloadTime": 1,
-    "range": 16,
-    "bulletSpread": 50,
-    "bulletSpeed": 1000
+    name: "GER/105/65/2/DP",
+    bulletName: "GER/GB/105/1937",
+    bulletCount: 2,
+    reloadTime: 1,
+    range: 16,
+    bulletSpread: 50,
+    bulletSpeed: 1000
   },
   // 德国海军 GER/88/56 双联装高平两用炮
   {
-    "name": "GER/88/56/2/DP",
-    "bulletName": "GER/GB/88/1935",
-    "bulletCount": 2,
-    "reloadTime": 0.5,
-    "range": 12,
-    "bulletSpread": 30,
-    "bulletSpeed": 800
+    name: "GER/88/56/2/DP",
+    bulletName: "GER/GB/88/1935",
+    bulletCount: 2,
+    reloadTime: 0.5,
+    range: 12,
+    bulletSpread: 30,
+    bulletSpeed: 800
   },
   // 德国海军 GER/37/57 高炮
   {
-    "name": "GER/37/57",
-    "bulletName": "GER/GB/37/1935",
-    "bulletCount": 1,
-    "reloadTime": 0.6,
-    "range": 6,
-    "bulletSpread": 20,
-    "bulletSpeed": 820
+    name: "GER/37/57",
+    bulletName: "GER/GB/37/1935",
+    bulletCount: 1,
+    reloadTime: 0.6,
+    range: 6,
+    bulletSpread: 20,
+    bulletSpeed: 820
   },
   // 德国海军 GER/20/70 单装高炮
   {
-    "name": "GER/20/70",
-    "bulletName": "GER/GB/20/1940",
-    "bulletCount": 1,
-    "reloadTime": 0.2,
-    "range": 2,
-    "bulletSpread": 20,
-    "bulletSpeed": 910
+    name: "GER/20/70",
+    bulletName: "GER/GB/20/1940",
+    bulletCount: 1,
+    reloadTime: 0.2,
+    range: 2,
+    bulletSpread: 20,
+    bulletSpeed: 910
   },
   // 英国海军 UK/406/45 三联装舰炮
   {
-    "name": "UK/406/45/3",
-    "bulletName": "UK/GB/406/1922",
-    "bulletCount": 3,
-    "reloadTime": 18,
-    "range": 36,
-    "bulletSpread": 140,
-    "bulletSpeed": 790
+    name: "UK/406/45/3",
+    bulletName: "UK/GB/406/1922",
+    bulletCount: 3,
+    reloadTime: 18,
+    range: 36,
+    bulletSpread: 140,
+    bulletSpeed: 790
   },
   // 英国海军 UK/381/42 双联装舰炮
   {
-    "name": "UK/381/42/2",
-    "bulletName": "UK/GB/381/1918",
-    "bulletCount": 2,
-    "reloadTime": 14,
-    "range": 31,
-    "bulletSpread": 120,
-    "bulletSpeed": 740
+    name: "UK/381/42/2",
+    bulletName: "UK/GB/381/1918",
+    bulletCount: 2,
+    reloadTime: 14,
+    range: 31,
+    bulletSpread: 120,
+    bulletSpeed: 740
   },
   // 英国海军 UK/356/45 四联装舰炮
   {
-    "name": "UK/356/45/4",
-    "bulletName": "UK/GB/356/1933",
-    "bulletCount": 4,
-    "reloadTime": 13,
-    "range": 33,
-    "bulletSpread": 120,
-    "bulletSpeed": 800
+    name: "UK/356/45/4",
+    bulletName: "UK/GB/356/1933",
+    bulletCount: 4,
+    reloadTime: 13,
+    range: 33,
+    bulletSpread: 120,
+    bulletSpeed: 800
   },
   // 英国海军 UK/356/45 双联装舰炮
   {
-    "name": "UK/356/45/2",
-    "bulletName": "UK/GB/356/1933",
-    "bulletCount": 2,
-    "reloadTime": 13,
-    "range": 33,
-    "bulletSpread": 120,
-    "bulletSpeed": 800
+    name: "UK/356/45/2",
+    bulletName: "UK/GB/356/1933",
+    bulletCount: 2,
+    reloadTime: 13,
+    range: 33,
+    bulletSpread: 120,
+    bulletSpeed: 800
   },
   // 英国海军 UK/343/45 双联装舰炮
   {
-    "name": "UK/343/45/2",
-    "bulletName": "UK/GB/343/1910",
-    "bulletCount": 2,
-    "reloadTime": 15,
-    "range": 26,
-    "bulletSpread": 130,
-    "bulletSpeed": 750
+    name: "UK/343/45/2",
+    bulletName: "UK/GB/343/1910",
+    bulletCount: 2,
+    reloadTime: 15,
+    range: 26,
+    bulletSpread: 130,
+    bulletSpeed: 750
   },
   // 英国海军 UK/203/50 三联装舰炮
   {
-    "name": "UK/203/50/3",
-    "bulletName": "UK/GB/203/1940",
-    "bulletCount": 3,
-    "reloadTime": 7,
-    "range": 27,
-    "bulletSpread": 100,
-    "bulletSpeed": 780
+    name: "UK/203/50/3",
+    bulletName: "UK/GB/203/1940",
+    bulletCount: 3,
+    reloadTime: 7,
+    range: 27,
+    bulletSpread: 100,
+    bulletSpeed: 780
   },
   // 英国海军 UK/152/50 双联装舰炮
   {
-    "name": "UK/152/50/2",
-    "bulletName": "UK/GB/152/1935",
-    "bulletCount": 2,
-    "reloadTime": 4,
-    "range": 23,
-    "bulletSpread": 100,
-    "bulletSpeed": 840
+    name: "UK/152/50/2",
+    bulletName: "UK/GB/152/1935",
+    bulletCount: 2,
+    reloadTime: 4,
+    range: 23,
+    bulletSpread: 100,
+    bulletSpeed: 840
   },
   // 英国海军 UK/152/45 单装舰炮
   {
-    "name": "UK/152/45",
-    "bulletName": "UK/GB/152/1910",
-    "bulletCount": 1,
-    "reloadTime": 6,
-    "range": 17,
-    "bulletSpread": 120,
-    "bulletSpeed": 750
+    name: "UK/152/45",
+    bulletName: "UK/GB/152/1910",
+    bulletCount: 1,
+    reloadTime: 6,
+    range: 17,
+    bulletSpread: 120,
+    bulletSpeed: 750
   },
   // 英国海军 UK/140/50 单装舰炮
   {
-    "name": "UK/140/50",
-    "bulletName": "UK/GB/140/1935",
-    "bulletCount": 1,
-    "reloadTime": 4,
-    "range": 18,
-    "bulletSpread": 70,
-    "bulletSpeed": 840
+    name: "UK/140/50",
+    bulletName: "UK/GB/140/1935",
+    bulletCount: 1,
+    reloadTime: 4,
+    range: 18,
+    bulletSpread: 70,
+    bulletSpeed: 840
   },
   // 英国海军 UK/133/50 双联装高平两用炮
   {
-    "name": "UK/133/50/2/DP",
-    "bulletName": "UK/GB/133/1935",
-    "bulletCount": 2,
-    "reloadTime": 2.4,
-    "range": 21,
-    "bulletSpread": 70,
-    "bulletSpeed": 810
+    name: "UK/133/50/2/DP",
+    bulletName: "UK/GB/133/1935",
+    bulletCount: 2,
+    reloadTime: 2.4,
+    range: 21,
+    bulletSpread: 70,
+    bulletSpeed: 810
   },
   // 英国海军 UK/120/45 单裝高平两用炮
   {
-    "name": "UK/120/45/DP",
-    "bulletName": "UK/GB/120/1932",
-    "bulletCount": 1,
-    "reloadTime": 1,
-    "range": 17,
-    "bulletSpread": 65,
-    "bulletSpeed": 770
+    name: "UK/120/45/DP",
+    bulletName: "UK/GB/120/1932",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 17,
+    bulletSpread: 65,
+    bulletSpeed: 770
   },
   // 英国海军 UK/114/45 双联装高平两用炮
   {
-    "name": "UK/114/45/2/DP",
-    "bulletName": "UK/GB/114/1940",
-    "bulletCount": 2,
-    "reloadTime": 1,
-    "range": 16,
-    "bulletSpread": 65,
-    "bulletSpeed": 820
+    name: "UK/114/45/2/DP",
+    bulletName: "UK/GB/114/1940",
+    bulletCount: 2,
+    reloadTime: 1,
+    range: 16,
+    bulletSpread: 65,
+    bulletSpeed: 820
   },
   // 英国海军 UK/102/45 双联装高平两用炮
   {
-    "name": "UK/102/45/2/DP",
-    "bulletName": "UK/GB/102/1930",
-    "bulletCount": 2,
-    "reloadTime": 1,
-    "range": 16,
-    "bulletSpread": 60,
-    "bulletSpeed": 810
+    name: "UK/102/45/2/DP",
+    bulletName: "UK/GB/102/1930",
+    bulletCount: 2,
+    reloadTime: 1,
+    range: 16,
+    bulletSpread: 60,
+    bulletSpeed: 810
   },
   // 英国海军 UK/102/45 单装高平两用炮
   {
-    "name": "UK/102/45/DP",
-    "bulletName": "UK/GB/102/1930",
-    "bulletCount": 1,
-    "reloadTime": 1,
-    "range": 16,
-    "bulletSpread": 60,
-    "bulletSpeed": 810
+    name: "UK/102/45/DP",
+    bulletName: "UK/GB/102/1930",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 16,
+    bulletSpread: 60,
+    bulletSpeed: 810
   },
   // 英国海军 UK/12.7 双联装机枪
   {
-    "name": "UK/12.7/2",
-    "bulletName": "UK/GB/12.7/1910",
-    "bulletCount": 2,
-    "reloadTime": 0.02,
-    "range": 1,
-    "bulletSpread": 10,
-    "bulletSpeed": 900
+    name: "UK/12.7/2",
+    bulletName: "UK/GB/12.7/1910",
+    bulletCount: 2,
+    reloadTime: 0.02,
+    range: 1,
+    bulletSpread: 10,
+    bulletSpeed: 900
   },
   // 苏联海军 SU/406/50 三联装舰炮
   {
-    "name": "SU/406/50/3",
-    "bulletName": "SU/GB/406/1939",
-    "bulletCount": 3,
-    "reloadTime": 12,
-    "range": 45,
-    "bulletSpread": 180,
-    "bulletSpeed": 870
+    name: "SU/406/50/3",
+    bulletName: "SU/GB/406/1939",
+    bulletCount: 3,
+    reloadTime: 12,
+    range: 45,
+    bulletSpread: 180,
+    bulletSpeed: 870
   },
   // 苏联海军 SU/180/57 三联装舰炮
   {
-    "name": "SU/180/57/3",
-    "bulletName": "SU/GB/180/1935",
-    "bulletCount": 3,
-    "reloadTime": 6,
-    "range": 38,
-    "bulletSpread": 100,
-    "bulletSpeed": 920
+    name: "SU/180/57/3",
+    bulletName: "SU/GB/180/1935",
+    bulletCount: 3,
+    reloadTime: 6,
+    range: 38,
+    bulletSpread: 100,
+    bulletSpeed: 920
   },
   // 苏联海军 SU/152/57 三联装舰炮
   {
-    "name": "SU/152/57/3",
-    "bulletName": "SU/GB/152/1938",
-    "bulletCount": 3,
-    "reloadTime": 4.5,
-    "range": 32,
-    "bulletSpread": 100,
-    "bulletSpeed": 950
+    name: "SU/152/57/3",
+    bulletName: "SU/GB/152/1938",
+    bulletCount: 3,
+    reloadTime: 4.5,
+    range: 32,
+    bulletSpread: 100,
+    bulletSpeed: 950
   },
   // 苏联海军 SU/152/57 双联装舰炮
   {
-    "name": "SU/152/57/2",
-    "bulletName": "SU/GB/152/1938",
-    "bulletCount": 2,
-    "reloadTime": 4.5,
-    "range": 32,
-    "bulletSpread": 100,
-    "bulletSpeed": 950
+    name: "SU/152/57/2",
+    bulletName: "SU/GB/152/1938",
+    bulletCount: 2,
+    reloadTime: 4.5,
+    range: 32,
+    bulletSpread: 100,
+    bulletSpeed: 950
   },
   // 苏联海军 SU/130/58 双联装舰炮
   {
-    "name": "SU/130/58/2",
-    "bulletName": "SU/GB/130/1935",
-    "bulletCount": 2,
-    "reloadTime": 1.8,
-    "range": 27,
-    "bulletSpread": 70,
-    "bulletSpeed": 940
+    name: "SU/130/58/2",
+    bulletName: "SU/GB/130/1935",
+    bulletCount: 2,
+    reloadTime: 1.8,
+    range: 27,
+    bulletSpread: 70,
+    bulletSpeed: 940
   },
   // 苏联海军 SU/100/70 双联装高平两用炮
   {
-    "name": "SU/100/70/2/DP",
-    "bulletName": "SU/GB/100/1940",
-    "bulletCount": 2,
-    "reloadTime": 0.8,
-    "range": 24,
-    "bulletSpread": 35,
-    "bulletSpeed": 1100
+    name: "SU/100/70/2/DP",
+    bulletName: "SU/GB/100/1940",
+    bulletCount: 2,
+    reloadTime: 0.8,
+    range: 24,
+    bulletSpread: 35,
+    bulletSpeed: 1100
   },
   // 苏联海军 SU/100/56 二联装高平两用炮
   {
-    "name": "SU/100/56/2/DP",
-    "bulletName": "SU/GB/100/1940",
-    "bulletCount": 2,
-    "reloadTime": 1,
-    "range": 18,
-    "bulletSpread": 50,
-    "bulletSpeed": 900
+    name: "SU/100/56/2/DP",
+    bulletName: "SU/GB/100/1940",
+    bulletCount: 2,
+    reloadTime: 1,
+    range: 18,
+    bulletSpread: 50,
+    bulletSpeed: 900
   },
   // 苏联海军 SU/100/56 单装高平两用炮
   {
-    "name": "SU/100/56/DP",
-    "bulletName": "SU/GB/100/1940",
-    "bulletCount": 1,
-    "reloadTime": 1,
-    "range": 18,
-    "bulletSpread": 50,
-    "bulletSpeed": 900
+    name: "SU/100/56/DP",
+    bulletName: "SU/GB/100/1940",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 18,
+    bulletSpread: 50,
+    bulletSpeed: 900
   },
   // 苏联海军 SU/25/65/2 双联装高炮
   {
-    "name": "SU/25/65/2",
-    "bulletName": "SU/GB/25/1940",
-    "bulletCount": 2,
-    "reloadTime": 0.2,
-    "range": 4,
-    "bulletSpread": 30,
-    "bulletSpeed": 950
+    name: "SU/25/65/2",
+    bulletName: "SU/GB/25/1940",
+    bulletCount: 2,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 30,
+    bulletSpeed: 950
   }
 ]

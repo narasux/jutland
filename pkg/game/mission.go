@@ -14,7 +14,7 @@ func (g *Game) handleMissionSelect() error {
 	g.player.Play(audioRes.NewMissionsBackground())
 	if isAnyNextInput() {
 		// FIXME 目前没有任务可选，直接点击进入默认关卡
-		g.curMission = "default"
+		g.curMission = "Alpha"
 		g.mode = GameModeMissionLoading
 	}
 	return nil

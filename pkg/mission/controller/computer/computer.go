@@ -55,7 +55,7 @@ func (h *ComputerDecisionHandler) Handle(
 	}
 
 	// AI 战舰够多，就开始莽一波
-	isAttackMode := lo.Ternary(len(ships) >= 25, true, false)
+	isAttackMode := lo.Ternary(len(ships) >= 20, true, false)
 
 	for _, ship := range ships {
 		if isAttackMode && len(enemyShips) != 0 {

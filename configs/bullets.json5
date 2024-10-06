@@ -1,392 +1,392 @@
 [
   // 电磁轨道炮 炮弹
   {
-    "name": "SE/GB/1024/2048",
-    "type": "shell",
-    "diameter": 1024,
-    "damage": 81000,
-    "criticalRate": 0.25
+    name: "SE/GB/1024/2048",
+    type: "shell",
+    diameter: 1024,
+    damage: 81000,
+    criticalRate: 0.25
   },
   // 撞击专用（用炮弹模拟）
   {
-    "name": "SE/GB/1/2048",
-    "type": "shell",
-    "diameter": 1,
-    "damage": 99999,
-    "criticalRate": 0.5
+    name: "SE/GB/1/2048",
+    type: "shell",
+    diameter: 1,
+    damage: 99999,
+    criticalRate: 0.5
   },
   // 常规炮弹
   {
-    "name": "US/GB/406/1944",
-    "type": "shell",
-    "diameter": 406,
-    "damage": 3600,
-    "criticalRate": 0.025
+    name: "US/GB/406/1944",
+    type: "shell",
+    diameter: 406,
+    damage: 3600,
+    criticalRate: 0.025
   },
   {
-    "name": "US/GB/305/1942",
-    "type": "shell",
-    "diameter": 305,
-    "damage": 1600,
-    "criticalRate": 0.01
+    name: "US/GB/305/1942",
+    type: "shell",
+    diameter: 305,
+    damage: 1600,
+    criticalRate: 0.01
   },
   {
-    "name": "US/GB/203/1939",
-    "type": "shell",
-    "diameter": 203,
-    "damage": 450,
-    "criticalRate": 0.01
+    name: "US/GB/203/1939",
+    type: "shell",
+    diameter: 203,
+    damage: 450,
+    criticalRate: 0.01
   },
   {
-    "name": "US/GB/127/1932",
-    "type": "shell",
-    "diameter": 127,
-    "damage": 120,
-    "criticalRate": 0.002
+    name: "US/GB/127/1932",
+    type: "shell",
+    diameter: 127,
+    damage: 120,
+    criticalRate: 0.002
   },
   {
-    "name": "US/GB/76/1910",
-    "type": "shell",
-    "diameter": 76,
-    "damage": 35,
-    "criticalRate": 0.001
+    name: "US/GB/76/1910",
+    type: "shell",
+    diameter: 76,
+    damage: 35,
+    criticalRate: 0.001
   },
   {
-    "name": "US/GB/40/1930",
-    "type": "shell",
-    "diameter": 40,
-    "damage": 4,
-    "criticalRate": 0
+    name: "US/GB/40/1930",
+    type: "shell",
+    diameter: 40,
+    damage: 4,
+    criticalRate: 0
   },
   {
-    "name": "US/GB/20/1940",
-    "type": "shell",
-    "diameter": 20,
-    "damage": 1.2,
-    "criticalRate": 0
+    name: "US/GB/20/1940",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0
   },
   {
-    "name": "JP/GB/460/1942",
-    "type": "shell",
-    "diameter": 460,
-    "damage": 4500,
-    "criticalRate": 0.03
+    name: "JP/GB/460/1942",
+    type: "shell",
+    diameter: 460,
+    damage: 4500,
+    criticalRate: 0.03
   },
   {
-    "name": "JP/GB/356/1935",
-    "type": "shell",
-    "diameter": 356,
-    "damage": 2040,
-    "criticalRate": 0.01
+    name: "JP/GB/356/1935",
+    type: "shell",
+    diameter: 356,
+    damage: 2040,
+    criticalRate: 0.01
   },
   {
-    "name": "JP/GB/203/1937",
-    "type": "shell",
-    "diameter": 203,
-    "damage": 380,
-    "criticalRate": 0.007
+    name: "JP/GB/203/1937",
+    type: "shell",
+    diameter: 203,
+    damage: 380,
+    criticalRate: 0.007
   },
   {
-    "name": "JP/GB/155/1934",
-    "type": "shell",
-    "diameter": 155,
-    "damage": 200,
-    "criticalRate": 0.004
+    name: "JP/GB/155/1934",
+    type: "shell",
+    diameter: 155,
+    damage: 200,
+    criticalRate: 0.004
   },
   {
-    "name": "JP/GB/152/1912",
-    "type": "shell",
-    "diameter": 152,
-    "damage": 180,
-    "criticalRate": 0.004
+    name: "JP/GB/152/1912",
+    type: "shell",
+    diameter: 152,
+    damage: 180,
+    criticalRate: 0.004
   },
   {
-    "name": "JP/GB/140/1914",
-    "type": "shell",
-    "diameter": 140,
-    "damage": 140,
-    "criticalRate": 0.003
+    name: "JP/GB/140/1914",
+    type: "shell",
+    diameter: 140,
+    damage: 140,
+    criticalRate: 0.003
   },
   {
-    "name": "JP/GB/127/1926",
-    "type": "shell",
-    "diameter": 127,
-    "damage": 140,
-    "criticalRate": 0.002
+    name: "JP/GB/127/1926",
+    type: "shell",
+    diameter: 127,
+    damage: 140,
+    criticalRate: 0.002
   },
   {
-    "name": "JP/GB/127/1929",
-    "type": "shell",
-    "diameter": 127,
-    "damage": 100,
-    "criticalRate": 0.002
+    name: "JP/GB/127/1929",
+    type: "shell",
+    diameter: 127,
+    damage: 100,
+    criticalRate: 0.002
   },
   {
-    "name": "JP/GB/13/1935",
-    "type": "shell",
-    "diameter": 13,
-    "damage": 0.2,
-    "criticalRate": 0
+    name: "JP/GB/13/1935",
+    type: "shell",
+    diameter: 13,
+    damage: 0.2,
+    criticalRate: 0
   },
   {
-    "name": "GER/GB/381/1939",
-    "type": "shell",
-    "diameter": 381,
-    "damage": 2800,
+    name: "GER/GB/381/1939",
+    type: "shell",
+    diameter: 381,
+    damage: 2800,
     // 此处 @ 胡德，战绩可查～
-    "criticalRate": 0.08
+    criticalRate: 0.08
   },
   {
-    "name": "GER/GB/283/1937",
-    "type": "shell",
-    "diameter": 283,
-    "damage": 1380,
-    "criticalRate": 0.01
+    name: "GER/GB/283/1937",
+    type: "shell",
+    diameter: 283,
+    damage: 1380,
+    criticalRate: 0.01
   },
   {
-    "name": "GER/GB/283/1925",
-    "type": "shell",
-    "diameter": 283,
-    "damage": 1250,
-    "criticalRate": 0.01
+    name: "GER/GB/283/1925",
+    type: "shell",
+    diameter: 283,
+    damage: 1250,
+    criticalRate: 0.01
   },
   {
-    "name": "GER/GB/203/1939",
-    "type": "shell",
-    "diameter": 203,
-    "damage": 430,
-    "criticalRate": 0.01
+    name: "GER/GB/203/1939",
+    type: "shell",
+    diameter: 203,
+    damage: 430,
+    criticalRate: 0.01
   },
   {
-    "name": "GER/GB/150/1932",
-    "type": "shell",
-    "diameter": 150,
-    "damage": 200,
-    "criticalRate": 0.005
+    name: "GER/GB/150/1932",
+    type: "shell",
+    diameter: 150,
+    damage: 200,
+    criticalRate: 0.005
   },
   {
-    "name": "GER/GB/127/1924",
-    "type": "shell",
-    "diameter": 127,
-    "damage": 120,
-    "criticalRate": 0.003
+    name: "GER/GB/127/1924",
+    type: "shell",
+    diameter: 127,
+    damage: 120,
+    criticalRate: 0.003
   },
   {
-    "name": "GER/GB/105/1937",
-    "type": "shell",
-    "diameter": 105,
-    "damage": 85,
-    "criticalRate": 0.002
+    name: "GER/GB/105/1937",
+    type: "shell",
+    diameter: 105,
+    damage: 85,
+    criticalRate: 0.002
   },
   {
-    "name": "GER/GB/88/1935",
-    "type": "shell",
-    "diameter": 88,
-    "damage": 40,
-    "criticalRate": 0.001
+    name: "GER/GB/88/1935",
+    type: "shell",
+    diameter: 88,
+    damage: 40,
+    criticalRate: 0.001
   },
   {
-    "name": "GER/GB/37/1935",
-    "type": "shell",
-    "diameter": 37,
-    "damage": 4,
-    "criticalRate": 0.001
+    name: "GER/GB/37/1935",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
+    criticalRate: 0.001
   },
   {
-    "name": "GER/GB/20/1940",
-    "type": "shell",
-    "diameter": 20,
-    "damage": 1.2,
-    "criticalRate": 0
+    name: "GER/GB/20/1940",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0
   },
   {
-    "name": "UK/GB/406/1922",
-    "type": "shell",
-    "diameter": 406,
-    "damage": 3250,
-    "criticalRate": 0.025
+    name: "UK/GB/406/1922",
+    type: "shell",
+    diameter: 406,
+    damage: 3250,
+    criticalRate: 0.025
   },
   {
-    "name": "UK/GB/381/1918",
-    "type": "shell",
-    "diameter": 381,
-    "damage": 2750,
-    "criticalRate": 0.02
+    name: "UK/GB/381/1918",
+    type: "shell",
+    diameter: 381,
+    damage: 2750,
+    criticalRate: 0.02
   },
   {
-    "name": "UK/GB/356/1933",
-    "type": "shell",
-    "diameter": 356,
-    "damage": 2250,
-    "criticalRate": 0.02
+    name: "UK/GB/356/1933",
+    type: "shell",
+    diameter: 356,
+    damage: 2250,
+    criticalRate: 0.02
   },
   {
-    "name": "UK/GB/343/1910",
-    "type": "shell",
-    "diameter": 343,
-    "damage": 1800,
-    "criticalRate": 0.015
+    name: "UK/GB/343/1910",
+    type: "shell",
+    diameter: 343,
+    damage: 1800,
+    criticalRate: 0.015
   },
   {
-    "name": "UK/GB/203/1940",
-    "type": "shell",
-    "diameter": 203,
-    "damage": 370,
-    "criticalRate": 0.01
+    name: "UK/GB/203/1940",
+    type: "shell",
+    diameter: 203,
+    damage: 370,
+    criticalRate: 0.01
   },
   {
-    "name": "UK/GB/152/1935",
-    "type": "shell",
-    "diameter": 152,
-    "damage": 155,
-    "criticalRate": 0.005
+    name: "UK/GB/152/1935",
+    type: "shell",
+    diameter: 152,
+    damage: 155,
+    criticalRate: 0.005
   },
   {
-    "name": "UK/GB/152/1910",
-    "type": "shell",
-    "diameter": 152,
-    "damage": 130,
-    "criticalRate": 0.003
+    name: "UK/GB/152/1910",
+    type: "shell",
+    diameter: 152,
+    damage: 130,
+    criticalRate: 0.003
   },
   {
-    "name": "UK/GB/140/1935",
-    "type": "shell",
-    "diameter": 140,
-    "damage": 145,
-    "criticalRate": 0.003
+    name: "UK/GB/140/1935",
+    type: "shell",
+    diameter: 140,
+    damage: 145,
+    criticalRate: 0.003
   },
   {
-    "name": "UK/GB/133/1935",
-    "type": "shell",
-    "diameter": 133,
-    "damage": 120,
-    "criticalRate": 0.002
+    name: "UK/GB/133/1935",
+    type: "shell",
+    diameter: 133,
+    damage: 120,
+    criticalRate: 0.002
   },
   {
-    "name": "UK/GB/120/1932",
-    "type": "shell",
-    "diameter": 120,
-    "damage": 90,
-    "criticalRate": 0.001
+    name: "UK/GB/120/1932",
+    type: "shell",
+    diameter: 120,
+    damage: 90,
+    criticalRate: 0.001
   },
   {
-    "name": "UK/GB/114/1940",
-    "type": "shell",
-    "diameter": 114,
-    "damage": 78,
-    "criticalRate": 0.001
+    name: "UK/GB/114/1940",
+    type: "shell",
+    diameter: 114,
+    damage: 78,
+    criticalRate: 0.001
   },
   {
-    "name": "UK/GB/102/1930",
-    "type": "shell",
-    "diameter": 102,
-    "damage": 55,
-    "criticalRate": 0.001
+    name: "UK/GB/102/1930",
+    type: "shell",
+    diameter: 102,
+    damage: 55,
+    criticalRate: 0.001
   },
   {
-    "name": "UK/GB/12.7/1910",
-    "type": "shell",
-    "diameter": 12,
-    "damage": 0.2,
-    "criticalRate": 0
+    name: "UK/GB/12.7/1910",
+    type: "shell",
+    diameter: 12,
+    damage: 0.2,
+    criticalRate: 0
   },
   {
-    "name": "SU/GB/406/1939",
-    "type": "shell",
-    "diameter": 406,
-    "damage": 3750,
-    "criticalRate": 0.03
+    name: "SU/GB/406/1939",
+    type: "shell",
+    diameter: 406,
+    damage: 3750,
+    criticalRate: 0.03
   },
   {
-    "name": "SU/GB/180/1935",
-    "type": "shell",
-    "diameter": 180,
-    "damage": 320,
-    "criticalRate": 0.01
+    name: "SU/GB/180/1935",
+    type: "shell",
+    diameter: 180,
+    damage: 320,
+    criticalRate: 0.01
   },
   {
-    "name": "SU/GB/152/1938",
-    "type": "shell",
-    "diameter": 152,
-    "damage": 180,
-    "criticalRate": 0.005
+    name: "SU/GB/152/1938",
+    type: "shell",
+    diameter: 152,
+    damage: 180,
+    criticalRate: 0.005
   },
   {
-    "name": "SU/GB/130/1935",
-    "type": "shell",
-    "diameter": 130,
-    "damage": 125,
-    "criticalRate": 0.002
+    name: "SU/GB/130/1935",
+    type: "shell",
+    diameter: 130,
+    damage: 125,
+    criticalRate: 0.002
   },
   {
-    "name": "SU/GB/100/1940",
-    "type": "shell",
-    "diameter": 100,
-    "damage": 55,
-    "criticalRate": 0.001
+    name: "SU/GB/100/1940",
+    type: "shell",
+    diameter: 100,
+    damage: 55,
+    criticalRate: 0.001
   },
   {
-    "name": "SU/GB/25/1940",
-    "type": "shell",
-    "diameter": 25,
-    "damage": 2,
-    "criticalRate": 0.0005
+    name: "SU/GB/25/1940",
+    type: "shell",
+    diameter: 25,
+    damage: 2,
+    criticalRate: 0.0005
   },
   // 鱼雷
   {
-    "name": "US/TB/533/1931",
-    "type": "torpedo",
-    "diameter": 533,
-    "damage": 4300,
-    "criticalRate": 0.05
+    name: "US/TB/533/1931",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4300,
+    criticalRate: 0.05
   },
   {
-    "name": "JP/TB/610/1933",
-    "type": "torpedo",
-    "diameter": 610,
-    "damage": 6250,
-    "criticalRate": 0.1
+    name: "JP/TB/610/1933",
+    type: "torpedo",
+    diameter: 610,
+    damage: 6250,
+    criticalRate: 0.1
   },
   {
-    "name": "JP/TB/450/1928",
-    "type": "torpedo",
-    "diameter": 450,
-    "damage": 2500,
-    "criticalRate": 0.02
+    name: "JP/TB/450/1928",
+    type: "torpedo",
+    diameter: 450,
+    damage: 2500,
+    criticalRate: 0.02
   },
   {
-    "name": "GER/TB/533/1940",
-    "type": "torpedo",
-    "diameter": 533,
-    "damage": 4750,
-    "criticalRate": 0.07
+    name: "GER/TB/533/1940",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4750,
+    criticalRate: 0.07
   },
   {
-    "name": "UK/TB/622/1925",
-    "type": "torpedo",
-    "diameter": 622,
-    "damage": 5450,
-    "criticalRate": 0.08
+    name: "UK/TB/622/1925",
+    type: "torpedo",
+    diameter: 622,
+    damage: 5450,
+    criticalRate: 0.08
   },
   {
-    "name": "UK/TB/533/1928",
-    "type": "torpedo",
-    "diameter": 533,
-    "damage": 4600,
-    "criticalRate": 0.07
+    name: "UK/TB/533/1928",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4600,
+    criticalRate: 0.07
   },
   {
-    "name": "UK/TB/533/1918",
-    "type": "torpedo",
-    "diameter": 533,
-    "damage": 4000,
-    "criticalRate": 0.04
+    name: "UK/TB/533/1918",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4000,
+    criticalRate: 0.04
   },
   {
-    "name": "SU/TB/533/1932",
-    "type": "torpedo",
-    "diameter": 533,
-    "damage": 4800,
-    "criticalRate": 0.08
+    name: "SU/TB/533/1932",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4800,
+    criticalRate: 0.08
   }
 ]

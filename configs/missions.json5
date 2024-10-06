@@ -1,18 +1,330 @@
 [
   {
-    "name": "default",
-    "initFunds": 10000,
-    "initCameraPos": [28, 30],
-    "mapName": "darwin",
-    "maxShipCount": 30,
-    "initReinforcePoints": [
+    name: "Alpha",
+    displayName: "达尔文港-1942",
+    initFunds: 4600,
+    initCameraPos: [28, 30],
+    mapName: "darwin",
+    maxShipCount: 30,
+    initReinforcePoints: [
       {
-        "pos": [1, 20],
-        "rotation": 90,
-        "rallyPos": [25, 35],
-        "belongPlayer": "HA",
-        "maxOncomingShip": 10,
-        "providedShipNames": [
+        pos: [1, 20],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "south_dakota",
+          "new_orleans",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [1, 65],
+        rotation: 90,
+        rallyPos: [30, 50],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "new_orleans",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [125, 20],
+        rotation: 270,
+        rallyPos: [90, 50],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
+          "kongo",
+          "mogami",
+          "asashio",
+          "yugumo",
+        ],
+      },
+      {
+        pos: [125, 90],
+        rotation: 270,
+        rallyPos: [100, 60],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
+          "mogami",
+          "asashio",
+          "yugumo",
+          "T_14"
+        ],
+      }
+    ],
+    initOilPlatforms: [
+      {
+        pos: [10, 10],
+        radius: 3,
+        yield: 10
+      },
+      {
+        pos: [40, 68],
+        radius: 4,
+        yield: 25
+      }
+    ],
+    initShips: [
+      {
+        name: "south_dakota",
+        pos: [31, 35],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_dakota",
+        pos: [32, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_dakota",
+        pos: [21, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_dakota",
+        pos: [22, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "new_orleans",
+        pos: [22, 23],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "new_orleans",
+        pos: [24, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "new_orleans",
+        pos: [32, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "new_orleans",
+        pos: [34, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [29, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [30, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [24, 24],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [25, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [26, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [35, 35],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [36, 36],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [34, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [35, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "PT_791",
+        pos: [37, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "PT_791",
+        pos: [32, 39],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "liberty",
+        pos: [10, 12],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "liberty",
+        pos: [38, 70],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "liberty",
+        pos: [40, 70],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "liberty",
+        pos: [42, 70],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yugumo",
+        pos: [80, 42],
+        rotation: 180,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yugumo",
+        pos: [77, 58],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      {
+        name: "mogami",
+        pos: [76, 58],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      {
+        name: "asashio",
+        pos: [103, 42],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "asashio",
+        pos: [101, 47],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "asashio",
+        pos: [108, 42],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "asashio",
+        pos: [104, 48],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "mogami",
+        pos: [101, 45],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "mogami",
+        pos: [102, 43],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kongo",
+        pos: [105, 46],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kongo",
+        pos: [107, 44],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kitakami",
+        pos: [107, 48],
+        rotation: 270,
+        belongPlayer: "CA"
+      }
+    ],
+  },
+  {
+    name: "Beta",
+    displayName: "帕劳群岛-1944",
+    initFunds: 5000,
+    initCameraPos: [20, 100],
+    mapName: "peleliu",
+    maxShipCount: 30,
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [],
+  },
+  {
+    name: "Gamma",
+    displayName: "威克岛-1941",
+    initFunds: 10000,
+    initCameraPos: [28, 30],
+    mapName: "wake",
+    maxShipCount: 30,
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [],
+  },
+  {
+    name: "Test",
+    displayName: "测试-1941",
+    initFunds: 10000,
+    initCameraPos: [28, 30],
+    mapName: "darwin",
+    maxShipCount: 30,
+    initReinforcePoints: [
+      {
+        pos: [1, 20],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
           "duck",
           "liberty",
           "lowa",
@@ -61,36 +373,36 @@
         ],
       },
       {
-        "pos": [1, 65],
-        "rotation": 90,
-        "rallyPos": [30, 50],
-        "belongPlayer": "HA",
-        "maxOncomingShip": 10,
-        "providedShipNames": [
+        pos: [1, 65],
+        rotation: 90,
+        rallyPos: [30, 50],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
           "atlanta",
           "new_orleans",
           "porter",
         ],
       },
       {
-        "pos": [125, 20],
-        "rotation": 270,
-        "rallyPos": [90, 50],
-        "belongPlayer": "CA",
-        "maxOncomingShip": 5,
-        "providedShipNames": [
+        pos: [125, 20],
+        rotation: 270,
+        rallyPos: [90, 50],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
           "kongo",
           "mogami",
           "asashio",
         ],
       },
       {
-        "pos": [125, 90],
-        "rotation": 270,
-        "rallyPos": [100, 60],
-        "belongPlayer": "CA",
-        "maxOncomingShip": 5,
-        "providedShipNames": [
+        pos: [125, 90],
+        rotation: 270,
+        rallyPos: [100, 60],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
           "mogami",
           "asashio",
           "yugumo",
@@ -99,383 +411,383 @@
     ],
     initOilPlatforms: [
       {
-        "pos": [10, 10],
-        "radius": 3,
-        "yield": 10
+        pos: [10, 10],
+        radius: 3,
+        yield: 10
       },
       {
-        "pos": [40, 68],
-        "radius": 4,
-        "yield": 25
+        pos: [40, 68],
+        radius: 4,
+        yield: 25
       }
     ],
-    "initShips": [
+    initShips: [
       {
-        "name": "duck",
-        "pos": [37, 32],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "duck",
+        pos: [37, 32],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "lowa",
-        "pos": [35, 33],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "lowa",
+        pos: [35, 33],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "montana",
-        "pos": [37, 34],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "montana",
+        pos: [37, 34],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "south_dakota",
-        "pos": [35, 35],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "south_dakota",
+        pos: [35, 35],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "yamato",
-        "pos": [37, 36],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "yamato",
+        pos: [37, 36],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "yamato_II",
-        "pos": [35, 37],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "yamato_II",
+        pos: [35, 37],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "kongo",
-        "pos": [37, 38],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "kongo",
+        pos: [37, 38],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "sovetsky_soyuz",
-        "pos": [35, 39],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "sovetsky_soyuz",
+        pos: [35, 39],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "sovetsky_soyuz_II",
-        "pos": [37, 40],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "sovetsky_soyuz_II",
+        pos: [37, 40],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "bismarck",
-        "pos": [33, 32],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "bismarck",
+        pos: [33, 32],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "scharnhorst",
-        "pos": [31, 33],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "scharnhorst",
+        pos: [31, 33],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "lutzow",
-        "pos": [33, 34],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "lutzow",
+        pos: [33, 34],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "hood",
-        "pos": [31, 35],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "hood",
+        pos: [31, 35],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "nelson",
-        "pos": [33, 36],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "nelson",
+        pos: [33, 36],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "lion",
-        "pos": [31, 37],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "lion",
+        pos: [31, 37],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "lion_II",
-        "pos": [33, 38],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "lion_II",
+        pos: [33, 38],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "king_george_v",
-        "pos": [31, 39],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "king_george_v",
+        pos: [31, 39],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "warspite",
-        "pos": [33, 40],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "warspite",
+        pos: [33, 40],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "tiger",
-        "pos": [31, 41],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "tiger",
+        pos: [31, 41],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "alaska_II",
-        "pos": [42, 33],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "alaska_II",
+        pos: [42, 33],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "atlanta",
-        "pos": [41, 34],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "atlanta",
+        pos: [41, 34],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "long_beach_II",
-        "pos": [42, 35],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "long_beach_II",
+        pos: [42, 35],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "new_orleans",
-        "pos": [41, 36],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "new_orleans",
+        pos: [41, 36],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "mogami",
-        "pos": [42, 37],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "mogami",
+        pos: [42, 37],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "kitakami",
-        "pos": [41, 38],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "kitakami",
+        pos: [41, 38],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "prinz_eugen",
-        "pos": [40, 33],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "prinz_eugen",
+        pos: [40, 33],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "leipzig",
-        "pos": [39, 34],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "leipzig",
+        pos: [39, 34],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "cheshire",
-        "pos": [40, 35],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "cheshire",
+        pos: [40, 35],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "vickers",
-        "pos": [39, 36],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "vickers",
+        pos: [39, 36],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "k_25",
-        "pos": [40, 37],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "k_25",
+        pos: [40, 37],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "sverdlov",
-        "pos": [39, 38],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "sverdlov",
+        pos: [39, 38],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "kirov",
-        "pos": [40, 39],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "kirov",
+        pos: [40, 39],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "porter",
-        "pos": [44, 33],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "porter",
+        pos: [44, 33],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "asashio",
-        "pos": [43, 34],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "asashio",
+        pos: [43, 34],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "yugumo",
-        "pos": [44, 35],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "yugumo",
+        pos: [44, 35],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "z_11",
-        "pos": [43, 36],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "z_11",
+        pos: [43, 36],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "v",
-        "pos": [44, 37],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "v",
+        pos: [44, 37],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "y",
-        "pos": [43, 38],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "y",
+        pos: [43, 38],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "30bis",
-        "pos": [44, 39],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "30bis",
+        pos: [44, 39],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "PT_791",
-        "pos": [43, 40],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "PT_791",
+        pos: [43, 40],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "S_100",
-        "pos": [44, 40],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "S_100",
+        pos: [44, 40],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "MTB_77",
-        "pos": [43, 41],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "MTB_77",
+        pos: [43, 41],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "T_14",
-        "pos": [44, 41],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "T_14",
+        pos: [44, 41],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "P_6",
-        "pos": [45, 41],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "P_6",
+        pos: [45, 41],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "liberty",
-        "pos": [10, 12],
-        "rotation": 90,
-        "belongPlayer": "HA"
+        name: "liberty",
+        pos: [10, 12],
+        rotation: 90,
+        belongPlayer: "HA"
       },
       {
-        "name": "liberty",
-        "pos": [38, 70],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "liberty",
+        pos: [38, 70],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "liberty",
-        "pos": [40, 70],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "liberty",
+        pos: [40, 70],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "liberty",
-        "pos": [42, 70],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "liberty",
+        pos: [42, 70],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "yugumo",
-        "pos": [80, 42],
-        "rotation": 180,
-        "belongPlayer": "CA"
+        name: "yugumo",
+        pos: [80, 42],
+        rotation: 180,
+        belongPlayer: "CA"
       },
       {
-        "name": "yugumo",
-        "pos": [77, 58],
-        "rotation": 0,
-        "belongPlayer": "CA"
+        name: "yugumo",
+        pos: [77, 58],
+        rotation: 0,
+        belongPlayer: "CA"
       },
       {
-        "name": "yamato",
-        "pos": [75, 59],
-        "rotation": 0,
-        "belongPlayer": "CA"
+        name: "yamato",
+        pos: [75, 59],
+        rotation: 0,
+        belongPlayer: "CA"
       },
       {
-        "name": "mogami",
-        "pos": [76, 58],
-        "rotation": 0,
-        "belongPlayer": "CA"
+        name: "mogami",
+        pos: [76, 58],
+        rotation: 0,
+        belongPlayer: "CA"
       },
       {
-        "name": "asashio",
-        "pos": [103, 42],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "asashio",
+        pos: [103, 42],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "asashio",
-        "pos": [101, 47],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "asashio",
+        pos: [101, 47],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "asashio",
-        "pos": [108, 42],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "asashio",
+        pos: [108, 42],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "asashio",
-        "pos": [104, 48],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "asashio",
+        pos: [104, 48],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "mogami",
-        "pos": [101, 45],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "mogami",
+        pos: [101, 45],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "mogami",
-        "pos": [102, 43],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "mogami",
+        pos: [102, 43],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "yamato",
-        "pos": [105, 46],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "yamato",
+        pos: [105, 46],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "kongo",
-        "pos": [107, 44],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "kongo",
+        pos: [107, 44],
+        rotation: 270,
+        belongPlayer: "CA"
       },
       {
-        "name": "kitakami",
-        "pos": [107, 48],
-        "rotation": 270,
-        "belongPlayer": "CA"
+        name: "kitakami",
+        pos: [107, 48],
+        rotation: 270,
+        belongPlayer: "CA"
       }
     ],
-  },
+  }
 ]
