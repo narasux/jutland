@@ -60,6 +60,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateInstructions()
 		m.executeInstructions()
 		m.updateCameraPosition()
+		m.updateGameMarks()
 		m.updateBuildings()
 		m.updateWeaponFire()
 		m.updateObjectTrails()

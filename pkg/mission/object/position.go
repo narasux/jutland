@@ -118,7 +118,7 @@ func (p *MapPos) EnsureBorder(borderX, borderY float64) {
 
 // OnBorder 判断是否在边界上
 func (p *MapPos) OnBorder(borderX, borderY float64) bool {
-	return p.RX == 0 || p.RX == borderX || p.RY == 0 || p.RY == borderY
+	return p.RX <= 0 || p.RX >= borderX || p.RY <= 0 || p.RY >= borderY
 }
 
 // Copy 复制 MapPos 对象

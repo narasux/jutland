@@ -280,7 +280,7 @@ func (s *BattleShip) GenTrails() []*Trail {
 		return []*Trail{
 			newTrail(
 				s.CurPos, textureImg.TrailShapeRect,
-				s.Width*0.5, -2,
+				(0.4+(s.CurSpeed/s.MaxSpeed))*s.Width*0.5, -2,
 				s.Length/6+150*s.CurSpeed, 5,
 				0, s.CurRotation, colorx.SkyBlue,
 			),
