@@ -48,6 +48,8 @@ func New() *Game {
 
 // Update 核心方法，用于更新各资源状态
 func (g *Game) Update() error {
+	defer recoverAndLogThenExit()
+
 	switch g.mode {
 	case GameModeStart:
 		return g.handleGameStart()
@@ -79,6 +81,8 @@ func (g *Game) Update() error {
 
 // Draw 核心方法，用于在屏幕上绘制各资源
 func (g *Game) Draw(screen *ebiten.Image) {
+	defer recoverAndLogThenExit()
+
 	switch g.mode {
 	case GameModeStart:
 		g.drawer.drawBackground(screen, bgImg.GameStart)

@@ -23,6 +23,7 @@ func main() {
 	ebiten.SetTPS(constants.MaxTPS)
 	ebiten.SetFullscreen(true)
 	ebiten.SetWindowTitle("Jutland - Powered by Ebitengine")
+
 	if err := ebiten.RunGame(game.New()); err != nil {
 		log.Fatal(err)
 	}
