@@ -389,5 +389,7 @@ func (m *MissionManager) updateMissionStatus() {
 			state.MissionInTerminal,
 			state.MissionRunning,
 		)
+		// 进入终端会按下 ctrl，此时会导致进入编组模式，需要强制退出下
+		m.state.IsGrouping = false
 	}
 }
