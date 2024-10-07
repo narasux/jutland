@@ -6,11 +6,11 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/narasux/jutland/pkg/mission/hacker"
-	"github.com/narasux/jutland/pkg/mission/layout"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/state"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	mapBlockImg "github.com/narasux/jutland/pkg/resources/images/mapblock"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 // Drawer 任务运行中图像绘制器

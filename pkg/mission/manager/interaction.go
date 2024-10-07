@@ -230,6 +230,10 @@ func (m *MissionManager) updateReinforcePoints() {
 			reinforcePointUIDs = append(reinforcePointUIDs, uid)
 		}
 	}
+	if len(reinforcePointUIDs) == 0 {
+		return
+	}
+
 	slices.Sort(reinforcePointUIDs)
 	rpIndex := lo.IndexOf(reinforcePointUIDs, m.state.SelectedReinforcePointUid)
 

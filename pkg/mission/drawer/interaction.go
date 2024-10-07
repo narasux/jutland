@@ -9,6 +9,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
+	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 // 绘制箭头（当鼠标悬浮触发镜头移动时）
@@ -37,7 +38,7 @@ func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.Mission
 	}
 
 	opts := d.genDefaultDrawImageOptions()
-	setOptsCenterRotation(opts, textureImg.ArrowWhite, rotation)
+	ebutil.SetOptsCenterRotation(opts, textureImg.ArrowWhite, rotation)
 	opts.GeoM.Translate(float64(posX), float64(posY))
 	screen.DrawImage(textureImg.ArrowWhite, opts)
 }

@@ -16,10 +16,12 @@ import (
 
 type rawMissionMetadata struct {
 	Name                string                          `json:"name"`
+	DisplayName         string                          `json:"displayName"`
 	InitFunds           int64                           `json:"initFunds"`
 	InitCameraPos       [2]int                          `json:"initCameraPos"`
 	MapName             string                          `json:"mapName"`
 	MaxShipCount        int                             `json:"maxShipCount"`
+	Description         []string                        `json:"description"`
 	InitShips           []rawInitShipMetadata           `json:"initShips"`
 	InitReinforcePoints []rawInitReinforcePointMetadata `json:"initReinforcePoints"`
 	InitOilPlatforms    []rawInitOilPlatformMetadata    `json:"initOilPlatforms"`
@@ -98,10 +100,12 @@ func init() {
 		// 元数据
 		missionMetadata[md.Name] = MissionMetadata{
 			Name:                md.Name,
+			DisplayName:         md.DisplayName,
 			MaxShipCount:        md.MaxShipCount,
 			InitFunds:           md.InitFunds,
 			InitCameraPos:       obj.NewMapPos(md.InitCameraPos[0], md.InitCameraPos[1]),
 			MapCfg:              mapcfg.GetByName(md.MapName),
+			Description:         md.Description,
 			InitShips:           initShips,
 			InitReinforcePoints: initReinforcePoints,
 			InitOilPlatforms:    initOilPlatforms,

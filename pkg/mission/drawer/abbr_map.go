@@ -14,6 +14,7 @@ import (
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
+	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 // 绘制缩略地图
@@ -138,7 +139,7 @@ func (d *Drawer) drawAbbrBuildings(screen *ebiten.Image, ms *state.MissionState)
 			textureImg.AbbrEnemyReinforcePoint,
 		)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, img, rp.Rotation)
+		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
 
 		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
 		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
@@ -164,7 +165,7 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 	for _, s := range ms.Ships {
 		sImg := textureImg.GetAbbrShip(s.Tonnage, s.BelongPlayer != ms.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, sImg, s.CurRotation)
+		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
 
 		xIndex := s.CurPos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
 		yIndex := s.CurPos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)

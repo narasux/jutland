@@ -15,6 +15,7 @@ import (
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
+	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 // 绘制尾流（战舰，鱼雷，炮弹）
@@ -27,7 +28,7 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 
 		trailImg := textureImg.GetTrail(trail.Shape, trail.CurSize, trail.CurLife, trail.Color)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, trailImg, trail.Rotation)
+		ebutil.SetOptsCenterRotation(opts, trailImg, trail.Rotation)
 		opts.GeoM.Translate(
 			(trail.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(trailImg.Bounds().Dx()/2),
 			(trail.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(trailImg.Bounds().Dy()/2),
@@ -52,7 +53,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 		sImg := shipImg.GetTop(s.Name, ms.GameOpts.Zoom)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, sImg, s.CurRotation)
+		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
 		opts.GeoM.Translate(
 			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(sImg.Bounds().Dx()/2),
 			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(sImg.Bounds().Dy()/2),
@@ -166,7 +167,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 
 		sImg := shipImg.GetTop(s.Name, ms.GameOpts.Zoom)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, sImg, s.CurRotation)
+		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
 		opts.GeoM.Translate(
 			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(sImg.Bounds().Dx()/2),
 			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(sImg.Bounds().Dy()/2),
@@ -190,7 +191,7 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		img := obj.GetBulletImg(b.Type, b.Diameter)
 
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, img, b.Rotation)
+		ebutil.SetOptsCenterRotation(opts, img, b.Rotation)
 		opts.GeoM.Translate(
 			(b.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
 			(b.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),

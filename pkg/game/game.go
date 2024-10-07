@@ -92,11 +92,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, bgImg.GameMenu)
 		g.drawer.drawGameMenu(screen, g.objStates.MenuButton)
 	case GameModeMissionSelect:
-		g.drawer.drawBackground(screen, bgImg.MissionsMap)
+		g.drawer.drawMissionSelect(screen, g.curMission)
 		g.drawer.drawGameTip(screen, "选择任务...")
 	case GameModeMissionLoading:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, "加载中...")
+		g.objStates.LoadingInterface.Ready = true
 	case GameModeMissionStart:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, "任务开始！")
@@ -167,6 +168,9 @@ func (g *Game) init() {
 				Color:    colorx.White,
 				Mode:     GameModeEnd,
 			},
+		},
+		LoadingInterface: &loadingInterface{
+			Ready: false,
 		},
 	}
 }

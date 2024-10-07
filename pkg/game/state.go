@@ -9,7 +9,8 @@ import (
 )
 
 type objStates struct {
-	MenuButton *menuButtonStates
+	MenuButton       *menuButtonStates
+	LoadingInterface *loadingInterface
 }
 
 type menuButtonStates struct {
@@ -56,4 +57,9 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 		button.Width = layout.CalcTextWidth(button.Text, button.FontSize)
 		button.Height = button.FontSize
 	}
+}
+
+// 任务加载界面
+type loadingInterface struct {
+	Ready bool
 }

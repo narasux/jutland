@@ -7,9 +7,9 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
-	"github.com/narasux/jutland/pkg/mission/layout"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	obj "github.com/narasux/jutland/pkg/mission/object"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 type MissionStatus string

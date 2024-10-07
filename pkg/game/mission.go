@@ -3,8 +3,13 @@ package game
 import (
 	"log"
 
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/samber/lo"
+
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/mission/manager"
+	"github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 )
@@ -12,9 +17,22 @@ import (
 // 任务选择
 func (g *Game) handleMissionSelect() error {
 	g.player.Play(audioRes.NewMissionsBackground())
-	if isAnyNextInput() {
-		// FIXME 目前没有任务可选，直接点击进入默认关卡
-		g.curMission = "Alpha"
+
+	missions := metadata.AvailableMissions()
+	curIndex := lo.IndexOf(missions, g.curMission)
+
+	// 左右方向键选择关卡
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) ||
+		inpututil.IsKeyJustReleased(ebiten.KeyArrowUp) {
+		curIndex--
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) ||
+		inpututil.IsKeyJustReleased(ebiten.KeyArrowDown) {
+		curIndex++
+	}
+	curIndex = (curIndex + len(missions)) % len(missions)
+	g.curMission = missions[curIndex]
+
+	if isKeyEnterJustPressed() {
 		g.mode = GameModeMissionLoading
 	}
 	return nil
@@ -22,6 +40,10 @@ func (g *Game) handleMissionSelect() error {
 
 // 任务加载
 func (g *Game) handleMissionLoading() error {
+	// 确保先展示加载中的界面，再加载地图数据
+	if !g.objStates.LoadingInterface.Ready {
+		return nil
+	}
 	g.missionMgr = manager.New(g.curMission)
 	g.mode = GameModeMissionStart
 	audio.PlayAudioToEnd(audioRes.NewMissionLoaded())

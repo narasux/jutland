@@ -17,6 +17,7 @@ import (
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
+	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionState) {
@@ -31,7 +32,7 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 			buildingImg.EnemyReinforcePoint,
 		)
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, img, rp.Rotation)
+		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
 		opts.GeoM.Translate(
 			(rp.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
 			(rp.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
@@ -137,7 +138,7 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 		)
 
 		opts = d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, img, rp.Rotation)
+		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
 
 		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(exceptedWidth)
 		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(exceptedHeight)
@@ -203,7 +204,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 	screen.DrawImage(sideImg, opts)
 
 	opts = d.genDefaultDrawImageOptions()
-	setOptsCenterRotation(opts, topImg, 90)
+	ebutil.SetOptsCenterRotation(opts, topImg, 90)
 	opts.GeoM.Translate(xOffset+paddingX, yOffset+2*paddingY+float64(sideImgDy))
 	opts.GeoM.Translate(float64(topImgDx-topImgDy)/2, float64(topImgDy-topImgDx)/2)
 	screen.DrawImage(topImg, opts)
@@ -247,7 +248,7 @@ func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ms *state.Mission
 	// 方向键 + 提示
 	drawArrowKey := func(xOffset, yOffset, rotation float64) {
 		opts := d.genDefaultDrawImageOptions()
-		setOptsCenterRotation(opts, textureImg.ArrowKey, rotation)
+		ebutil.SetOptsCenterRotation(opts, textureImg.ArrowKey, rotation)
 		opts.GeoM.Translate(x+xOffset, y+yOffset)
 		screen.DrawImage(textureImg.ArrowKey, opts)
 	}
