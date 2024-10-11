@@ -98,11 +98,16 @@ func (g *Gun) Fire(ship, enemy *BattleShip) []*Bullet {
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
 	shotType := BulletShotTypeArcing
-	// 如果小于射程的 1/4，则平射干他丫的
-	// TODO 考虑不同火炮平射距离不同？
-	// FIXME 这里粗暴了一点，直接指定电磁炮直射，应该使用配置的
-	if g.Name == "RailGun" || rangePercent < 0.25 {
+	// 某些情况下使用直射
+	if g.Name == "RailGun" {
 		shotType = BulletShotTypeDirect
+	} else {
+		diameter := bulletMap[g.BulletName].Diameter
+		if rangePercent < 0.65 || diameter <= 100 ||
+			(diameter <= 200 && rangePercent < 0.8) ||
+			(diameter <= 300 && rangePercent < 0.65) {
+			shotType = BulletShotTypeDirect
+		}
 	}
 
 	// 火炮炮弹生命值与目标距离相关，15 对于 0.4 速度的炮弹来说，相当于 6 格地图，在大多数火炮散布范围之内
