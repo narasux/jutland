@@ -4263,7 +4263,7 @@
         // 前主炮 A
         {
           name: "JP/127/50/2",
-          posPercent: 0.8,
+          posPercent: 0.71,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
         },
@@ -4294,7 +4294,7 @@
         // 中轴鱼雷 B
         {
           name: "JP/610/4",
-          posPercent: -0.1,
+          posPercent: -0.2,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
@@ -4326,7 +4326,7 @@
         // 前主炮 A
         {
           name: "JP/127/50/2",
-          posPercent: 0.8,
+          posPercent: 0.71,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
         },
@@ -4357,7 +4357,70 @@
         // 中轴鱼雷 B
         {
           name: "JP/610/4",
-          posPercent: -0.1,
+          posPercent: -0.2,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
+  {
+    name: "yukikaze",
+    displayName: "雪风",
+    type: "destroyer",
+    typeAbbr: "DD",
+    totalHP: 2490,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: -0.5,
+    maxSpeed: 35.5,
+    acceleration: 1.2,
+    rotateSpeed: 2.2,
+    length: 119,
+    width: 11,
+    fundsCost: 25,
+    timeCost: 10,
+    description: [
+      "驱逐舰（日）",
+      "主炮：3 座双联装 127mm/50",
+      "鱼雷：2 座四联装直航 610mm",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/127/50/2",
+          posPercent: 0.71,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 B
+        {
+          name: "JP/127/50/2",
+          posPercent: -0.5,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 C
+        {
+          name: "JP/127/50/2",
+          posPercent: -0.63,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "JP/610/4",
+          posPercent: 0.1,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "JP/610/4",
+          posPercent: -0.2,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }

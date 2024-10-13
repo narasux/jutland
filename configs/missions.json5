@@ -248,13 +248,13 @@
         belongPlayer: "CA"
       },
       {
-        name: "asashio",
+        name: "yukikaze",
         pos: [108, 42],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
-        name: "asashio",
+        name: "yukikaze",
         pos: [104, 48],
         rotation: 270,
         belongPlayer: "CA"
@@ -426,6 +426,7 @@
           "porter",
           "asashio",
           "yugumo",
+          "yukikaze",
           "z_11",
           "v",
           "y",
@@ -698,56 +699,62 @@
         belongPlayer: "HA"
       },
       {
-        name: "z_11",
+        name: "yukikaze",
         pos: [43, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "v",
+        name: "z_11",
         pos: [44, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "y",
+        name: "v",
         pos: [43, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "30bis",
+        name: "y",
         pos: [44, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "PT_791",
+        name: "30bis",
         pos: [43, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
+        name: "PT_791",
+        pos: [45, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "S_100",
-        pos: [44, 40],
+        pos: [45, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "MTB_77",
-        pos: [43, 41],
+        pos: [45, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "T_14",
-        pos: [44, 41],
+        pos: [45, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "P_6",
-        pos: [45, 41],
+        pos: [45, 37],
         rotation: 90,
         belongPlayer: "HA"
       },

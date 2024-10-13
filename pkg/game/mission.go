@@ -32,8 +32,10 @@ func (g *Game) handleMissionSelect() error {
 	curIndex = (curIndex + len(missions)) % len(missions)
 	g.curMission = missions[curIndex]
 
-	if isKeyEnterJustPressed() {
+	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		g.mode = GameModeMissionLoading
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		g.mode = GameModeMenuSelect
 	}
 	return nil
 }
