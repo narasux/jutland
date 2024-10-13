@@ -415,6 +415,7 @@
           "long_beach_II",
           "new_orleans",
           "mogami",
+          "tone",
           "kitakami",
           "nagara",
           "prinz_eugen",
@@ -634,14 +635,20 @@
         belongPlayer: "HA"
       },
       {
-        name: "kitakami",
+        name: "tone",
         pos: [41, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "nagara",
+        name: "kitakami",
         pos: [42, 39],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagara",
+        pos: [41, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
