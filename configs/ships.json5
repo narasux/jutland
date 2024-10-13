@@ -4459,14 +4459,14 @@
         // 中轴鱼雷 A
         {
           name: "US/533/4",
-          posPercent: 0,
+          posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
           name: "US/533/4",
-          posPercent: -0.1,
+          posPercent: -0.15,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
@@ -4552,6 +4552,76 @@
           name: "US/533/4",
           posPercent: -0.35,
           rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    },
+  },
+  {
+    name: "hammann",
+    displayName: "哈曼",
+    type: "destroyer",
+    typeAbbr: "DD",
+    totalHP: 2246,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: -0.5,
+    maxSpeed: 37,
+    acceleration: 1.2,
+    rotateSpeed: 2.2,
+    length: 106,
+    width: 11,
+    fundsCost: 19,
+    timeCost: 8,
+    description: [
+      "驱逐舰（美）",
+      "主炮：4 座单装 127mm/38",
+      "鱼雷：2 座四联装直航 533mm",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.68,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.55,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.55,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 D
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.7,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "US/533/4",
+          posPercent: 0,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "US/533/4",
+          posPercent: -0.16,
+          rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
       ]

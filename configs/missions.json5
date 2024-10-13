@@ -374,7 +374,7 @@
     name: "Test",
     displayName: "测试-1941",
     initFunds: 10000,
-    initCameraPos: [28, 30],
+    initCameraPos: [28, 32],
     mapName: "darwin",
     maxShipCount: 30,
     description: [
@@ -427,6 +427,7 @@
           "kirov",
           "porter",
           "maury",
+          "hammann",
           "asashio",
           "yugumo",
           "yukikaze",
@@ -493,7 +494,7 @@
     initShips: [
       {
         name: "duck",
-        pos: [37, 32],
+        pos: [38, 33],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -547,61 +548,61 @@
       },
       {
         name: "bismarck",
-        pos: [33, 32],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "scharnhorst",
         pos: [31, 33],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "lutzow",
+        name: "scharnhorst",
         pos: [33, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "hood",
+        name: "lutzow",
         pos: [31, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "nelson",
+        name: "hood",
         pos: [33, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "lion",
+        name: "nelson",
         pos: [31, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "lion_II",
+        name: "lion",
         pos: [33, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "king_george_v",
+        name: "lion_II",
         pos: [31, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "warspite",
+        name: "king_george_v",
         pos: [33, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "tiger",
+        name: "warspite",
         pos: [31, 41],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "tiger",
+        pos: [33, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -708,44 +709,50 @@
         belongPlayer: "HA"
       },
       {
-        name: "asashio",
+        name: "hammann",
         pos: [44, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yugumo",
+        name: "asashio",
         pos: [43, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yukikaze",
+        name: "yugumo",
         pos: [44, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "z_11",
+        name: "yukikaze",
         pos: [43, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "v",
+        name: "z_11",
         pos: [44, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "y",
+        name: "v",
         pos: [43, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "30bis",
+        name: "y",
         pos: [44, 41],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "30bis",
+        pos: [43, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
