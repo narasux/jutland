@@ -416,6 +416,7 @@
           "new_orleans",
           "mogami",
           "kitakami",
+          "nagara",
           "prinz_eugen",
           "leipzig",
           "cheshire",
@@ -635,6 +636,12 @@
       {
         name: "kitakami",
         pos: [41, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagara",
+        pos: [42, 39],
         rotation: 90,
         belongPlayer: "HA"
       },

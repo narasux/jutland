@@ -126,7 +126,7 @@
     bulletCount: 1,
     reloadTime: 1,
     range: 13,
-    bulletSpread: 100,
+    bulletSpread: 70,
     bulletSpeed: 820
   },
   // 美国海军 US/40/60 单装高炮
@@ -237,6 +237,16 @@
     reloadTime: 3.5,
     range: 14,
     bulletSpread: 80,
+    bulletSpeed: 720
+  },
+  // 日本海军 76/40 单装舰炮
+  {
+    name: "JP/76/40",
+    bulletName: "JP/GB/76/1936",
+    bulletCount: 1,
+    reloadTime: 1.8,
+    range: 9,
+    bulletSpread: 70,
     bulletSpeed: 720
   },
   // 日本海军 单装 13 毫米机枪

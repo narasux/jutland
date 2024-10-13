@@ -39,6 +39,16 @@
     range: 22,
     bulletSpeed: 54,
   },
+  // 日本海军 610mm 2联装 酸素鱼雷
+  {
+    name: "JP/610/2",
+    bulletName: "JP/TB/610/1933",
+    bulletCount: 2,
+    shotInterval: 0.8,
+    reloadTime: 33,
+    range: 22,
+    bulletSpeed: 54,
+  },
   // 日本海军 450mm 单装鱼雷
   {
     name: "JP/450/1",
