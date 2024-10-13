@@ -97,8 +97,7 @@ func (m *MissionManager) updateWeaponFire() {
 	isTorpedoLaunched := false
 
 	for shipUid, ship := range m.state.Ships {
-		var nearestEnemy *obj.BattleShip
-		var nearestEnemyDistance float64 = 0
+		inRangeEnemies := []*obj.BattleShip{}
 
 		for enemyUid, enemy := range m.state.Ships {
 			// 不能炮击自己，也不能主动炮击己方的战舰
@@ -110,14 +109,12 @@ func (m *MissionManager) updateWeaponFire() {
 			if distance > ship.Weapon.MaxRange {
 				continue
 			}
-			// 找到最近的敌人
-			if nearestEnemy == nil || distance < nearestEnemyDistance {
-				nearestEnemy = enemy
-				nearestEnemyDistance = distance
-			}
+			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
-		if nearestEnemy != nil {
-			bullets := ship.Fire(nearestEnemy)
+		if total := len(inRangeEnemies); total != 0 {
+			// 射程内的敌人都会被攻击
+			enemy := inRangeEnemies[rand.Intn(total)]
+			bullets := ship.Fire(enemy)
 			if len(bullets) == 0 {
 				continue
 			}
