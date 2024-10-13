@@ -426,6 +426,7 @@
           "sverdlov",
           "kirov",
           "porter",
+          "maury",
           "asashio",
           "yugumo",
           "yukikaze",
@@ -701,44 +702,50 @@
         belongPlayer: "HA"
       },
       {
-        name: "asashio",
+        name: "maury",
         pos: [43, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yugumo",
+        name: "asashio",
         pos: [44, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yukikaze",
+        name: "yugumo",
         pos: [43, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "z_11",
+        name: "yukikaze",
         pos: [44, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "v",
+        name: "z_11",
         pos: [43, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "y",
+        name: "v",
         pos: [44, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "30bis",
+        name: "y",
         pos: [43, 40],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "30bis",
+        pos: [44, 41],
         rotation: 90,
         belongPlayer: "HA"
       },

@@ -99,6 +99,16 @@
     bulletSpread: 80,
     bulletSpeed: 800
   },
+  // 美国海军 US/127/38/MK12 单装舰炮
+  {
+    name: "US/127/38/MK12",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 1,
+    reloadTime: 1.4,
+    range: 18,
+    bulletSpread: 80,
+    bulletSpeed: 800
+  },
   // 美国海军 US/127/25/MK10 单裝高平两用炮
   {
     name: "US/127/25/MK10",
