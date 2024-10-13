@@ -414,6 +414,7 @@
           "atlanta",
           "long_beach_II",
           "new_orleans",
+          "pensacola",
           "mogami",
           "tone",
           "kitakami",
@@ -631,26 +632,32 @@
         belongPlayer: "HA"
       },
       {
-        name: "mogami",
+        name: "pensacola",
         pos: [42, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "tone",
+        name: "mogami",
         pos: [41, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kitakami",
+        name: "tone",
         pos: [42, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "nagara",
+        name: "kitakami",
         pos: [41, 40],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagara",
+        pos: [42, 41],
         rotation: 90,
         belongPlayer: "HA"
       },

@@ -3080,21 +3080,21 @@
       mainGuns: [
         // 前主炮 A
         {
-          name: "US/203/55/3/MK14",
+          name: "US/203/55/3",
           posPercent: 0.55,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
         // 前主炮 B
         {
-          name: "US/203/55/3/MK14",
+          name: "US/203/55/3",
           posPercent: 0.45,
           rightFiringArc: [0, 120],
           leftFiringArc: [240, 360]
         },
         // 后主炮 C
         {
-          name: "US/203/55/3/MK14",
+          name: "US/203/55/3",
           posPercent: -0.55,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
@@ -3154,6 +3154,118 @@
         {
           name: "US/127/25/MK10",
           posPercent: -0.1,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: []
+    }
+  },
+  {
+    name: "pensacola",
+    displayName: "彭萨科拉",
+    type: "cruiser",
+    typeAbbr: "CA",
+    totalHP: 11696,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 32.5,
+    acceleration: 0.6,
+    rotateSpeed: 1.6,
+    length: 180,
+    width: 19,
+    fundsCost: 120,
+    timeCost: 12,
+    description: [
+      "重巡洋舰（美）",
+      "主炮：2 座三联装，2 座双联装 203mm/55",
+      "副炮：8 座单联装 127mm/25",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/203/55/2",
+          posPercent: 0.63,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/203/55/3",
+          posPercent: 0.48,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/203/55/3",
+          posPercent: -0.55,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 D
+        {
+          name: "US/203/55/2",
+          posPercent: -0.69,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 右舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.35,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.2,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.3,
           rightFiringArc: [180, 180],
           leftFiringArc: [180, 360]
         }
