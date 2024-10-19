@@ -400,6 +400,7 @@
           "kongo",
           "sovetsky_soyuz",
           "sovetsky_soyuz_II",
+          "slava",
           "bismarck",
           "scharnhorst",
           "lutzow",
@@ -544,6 +545,12 @@
       {
         name: "sovetsky_soyuz_II",
         pos: [37, 40],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "slava",
+        pos: [35, 41],
         rotation: 90,
         belongPlayer: "HA"
       },

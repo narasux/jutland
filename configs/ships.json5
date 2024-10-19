@@ -2804,6 +2804,315 @@
       torpedoes: []
     }
   },
+  {
+    name: "slava",
+    displayName: "光荣",
+    type: "battleship",
+    typeAbbr: "BB",
+    totalHP: 105300,
+    horizontalDamageReduction: 0.6,
+    verticalDamageReduction: 0.4,
+    maxSpeed: 30,
+    acceleration: 0.35,
+    rotateSpeed: 0.8,
+    length: 324,
+    width: 36,
+    fundsCost: 1170,
+    timeCost: 105,
+    description: [
+      "战列舰（苏）",
+      "主炮：4 座双联装 500mm/50，副炮：8 座双联装 130mm/58",
+      "高炮：8 座四联装 57mm/56，12 座四联装 37mm，8 座双联装 37mm",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "SU/500/50/2",
+          posPercent: 0.45,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "SU/500/50/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "SU/500/50/2",
+          posPercent: -0.38,
+          rightFiringArc: [45, 150],
+          leftFiringArc: [210, 315]
+        },
+        // 后主炮 D
+        {
+          name: "SU/500/50/2",
+          posPercent: -0.52,
+          rightFiringArc: [45, 150],
+          leftFiringArc: [210, 315]
+        }
+      ],
+      secondaryGuns: [
+        // 右前副炮 A
+        {
+          name: "SU/130/58/2",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副炮 A
+        {
+          name: "SU/130/58/2",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副炮 B
+        {
+          name: "SU/130/58/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副炮 B
+        {
+          name: "SU/130/58/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后副炮 C
+        {
+          name: "SU/130/58/2",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后副炮 C
+        {
+          name: "SU/130/58/2",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后副炮 D
+        {
+          name: "SU/130/58/2",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后副炮 D
+        {
+          name: "SU/130/58/2",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // TODO 高炮不应该放在副炮属性里面，后续挪走
+        // 右前主高炮 A
+        {
+          name: "SU/57/72/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前主高炮 A
+        {
+          name: "SU/57/72/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前主高炮 B
+        {
+          name: "SU/57/72/4",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前主高炮 B
+        {
+          name: "SU/57/72/4",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后主高炮 C
+        {
+          name: "SU/57/72/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后主高炮 C
+        {
+          name: "SU/57/72/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后主高炮 D
+        {
+          name: "SU/57/72/4",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后主高炮 D
+        {
+          name: "SU/57/72/4",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（四联） A
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（四联） A
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（四联） B
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（四联） B
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（四联） C
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（四联） C
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（四联） D
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（四联） D
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（四联） E
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（四联） E
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（四联） F
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.94,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（四联） F
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.94,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（双联） A
+        {
+          name: "SU/37/57/2",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（双联） A
+        {
+          name: "SU/37/57/2",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（双联） B
+        {
+          name: "SU/37/57/2",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（双联） B
+        {
+          name: "SU/37/57/2",
+          posPercent: 0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（双联） C
+        {
+          name: "SU/37/57/2",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（双联） C
+        {
+          name: "SU/37/57/2",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副高炮（双联） D
+        {
+          name: "SU/37/57/2",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副高炮（双联） D
+        {
+          name: "SU/37/57/2",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: []
+    }
+  },
   // 巡洋舰
   // 美国海军
   {

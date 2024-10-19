@@ -298,6 +298,13 @@
     criticalRate: 0
   },
   {
+    name: "SU/GB/500/1945",
+    type: "shell",
+    diameter: 500,
+    damage: 6500,
+    criticalRate: 0.05
+  },
+  {
     name: "SU/GB/406/1939",
     type: "shell",
     diameter: 406,
@@ -330,6 +337,20 @@
     type: "shell",
     diameter: 100,
     damage: 55,
+    criticalRate: 0.001
+  },
+  {
+    name: "SU/GB/57/1945",
+    type: "shell",
+    diameter: 100,
+    damage: 14,
+    criticalRate: 0.001
+  },
+  {
+    name: "SU/GB/37/1946",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
     criticalRate: 0.001
   },
   {

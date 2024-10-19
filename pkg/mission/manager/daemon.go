@@ -130,7 +130,6 @@ func (m *MissionManager) updateWeaponFire() {
 				}
 			}
 			m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
-			break
 		}
 	}
 
