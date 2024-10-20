@@ -49,6 +49,16 @@
     bulletSpread: 50,
     bulletSpeed: 800
   },
+  // 美国海军 US/457/45 三联装舰炮
+  {
+    name: "US/457/45/3",
+    bulletName: "US/GB/457/1922",
+    bulletCount: 3,
+    reloadTime: 17,
+    range: 36,
+    bulletSpread: 180,
+    bulletSpeed: 780
+  },
   // 美国海军 US/406/50/MK7 三联装舰炮
   {
     name: "US/406/50/3/MK7",

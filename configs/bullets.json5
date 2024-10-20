@@ -17,6 +17,13 @@
   },
   // 常规炮弹
   {
+    name: "US/GB/457/1922",
+    type: "shell",
+    diameter: 457,
+    damage: 4600,
+    criticalRate: 0.02
+  },
+  {
     name: "US/GB/406/1944",
     type: "shell",
     diameter: 406,
