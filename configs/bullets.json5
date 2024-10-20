@@ -291,6 +291,13 @@
     criticalRate: 0.001
   },
   {
+    name: "UK/GB/40/1930",
+    type: "shell",
+    diameter: 40,
+    damage: 4,
+    criticalRate: 0
+  },
+  {
     name: "UK/GB/12.7/1910",
     type: "shell",
     diameter: 12,

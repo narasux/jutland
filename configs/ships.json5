@@ -5443,6 +5443,92 @@
       ]
     }
   },
+  {
+    name: "ardent",
+    displayName: "热心",
+    type: "destroyer",
+    typeAbbr: "DD",
+    totalHP: 1810,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: -0.5,
+    maxSpeed: 35,
+    acceleration: 1,
+    rotateSpeed: 2.5,
+    length: 99,
+    width: 10,
+    fundsCost: 12,
+    timeCost: 7,
+    description: [
+      "驱逐舰（英）",
+      "主炮：4 座单装 120mm/45",
+      "高炮：2 座单裝 40mm/60",
+      "鱼雷：2 座四联装直航 533mm"
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "UK/120/45/DP",
+          posPercent: 0.68,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "UK/120/45/DP",
+          posPercent: 0.54,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "UK/120/45/DP",
+          posPercent: -0.65,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 D
+        {
+          name: "UK/120/45/DP",
+          posPercent: -0.8,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [210, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 高炮 A
+        {
+          name: "UK/40/60",
+          posPercent: 0.04,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [210, 270]
+        },
+        // 高炮 B
+        {
+          name: "UK/40/60",
+          posPercent: 0,
+          rightFiringArc: [90, 150],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "UK/533/4",
+          posPercent: -0.25,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "UK/533/4",
+          posPercent: -0.45,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
   // 苏联海军
   {
     name: "30bis",

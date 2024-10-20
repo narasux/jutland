@@ -539,6 +539,16 @@
     bulletSpread: 60,
     bulletSpeed: 810
   },
+  // 英国海军 UK/40/60 单装高炮
+  {
+    name: "UK/40/60",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 1,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 880
+  },
   // 英国海军 UK/12.7 双联装机枪
   {
     name: "UK/12.7/2",

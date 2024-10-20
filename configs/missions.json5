@@ -436,6 +436,7 @@
           "z_11",
           "v",
           "y",
+          "ardent",
           "30bis",
           "PT_791",
           "T_14",
@@ -765,8 +766,14 @@
         belongPlayer: "HA"
       },
       {
-        name: "30bis",
+        name: "ardent",
         pos: [43, 42],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "30bis",
+        pos: [44, 43],
         rotation: 90,
         belongPlayer: "HA"
       },
