@@ -821,6 +821,12 @@
         belongPlayer: "HA"
       },
       {
+        name: "molamola",
+        pos: [28, 70],
+        rotation: 90,
+        belongPlayer: "CA"
+      },
+      {
         name: "liberty",
         pos: [38, 70],
         rotation: 270,

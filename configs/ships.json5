@@ -90,6 +90,31 @@
       torpedoes: []
     }
   },
+  // 翻车鱼，好吃的翻车鱼！
+  {
+    name: "molamola",
+    displayName: "翻车鱼",
+    type: "default",
+    typeAbbr: "Molamola",
+    totalHP: 1000000,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 5,
+    acceleration: 0.2,
+    rotateSpeed: 1,
+    length: 373,
+    width: 280,
+    fundsCost: 10,
+    timeCost: 10,
+    description: [
+      "翻车鱼，好吃的翻车鱼！",
+    ],
+    weapon: {
+      mainGuns: [],
+      secondaryGuns: [],
+      torpedoes: []
+    }
+  },
   // 自由轮
   {
     name: "liberty",

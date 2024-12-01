@@ -55,8 +55,8 @@ func genZoomShipImages(
 	source map[string]*ebiten.Image, target map[string]*ebiten.Image, arcZoom int,
 ) {
 	for name, img := range source {
-		// 小黄鸭 & 水滴比较特殊，不提供缩放，只有一个尺寸
-		if name == "duck" || name == "waterdrop" {
+		// 小黄鸭 & 水滴 & 翻车鱼比较特殊，不提供缩放，只有一个尺寸
+		if name == "duck" || name == "waterdrop" || name == "molamola" {
 			target[name] = img
 			continue
 		}

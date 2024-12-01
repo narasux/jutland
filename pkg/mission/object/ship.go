@@ -292,6 +292,9 @@ func (s *BattleShip) GenTrails() []*Trail {
 				0, s.CurRotation, colorx.SkyBlue,
 			),
 		}
+	} else if s.TypeAbbr == "Molamola" {
+		// 翻车鱼暂时不提供尾流
+		return []*Trail{}
 	}
 
 	offset := s.Length / constants.MapBlockSize

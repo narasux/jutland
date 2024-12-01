@@ -32,7 +32,7 @@ func (c *ShowMeTheDuck) Exec(misState *state.MissionState) string {
 	uidGenerator := misState.ShipUidGenerators[misState.CurPlayer]
 	ship := object.NewShip(uidGenerator, "duck", *pos, 0, misState.CurPlayer)
 	misState.Ships[ship.Uid] = ship
-	return "Battle ship duck ready at " + ship.CurPos.String()
+	return "Duck ready at " + ship.CurPos.String()
 }
 
 var _ Cheat = (*ShowMeTheDuck)(nil)
@@ -57,10 +57,38 @@ func (c *ShowMeTheWaterdrop) Exec(misState *state.MissionState) string {
 	pos := action.DetectCursorPosOnMap(misState)
 	ship := object.NewShip(uidGenerator, "waterdrop", *pos, 0, misState.CurPlayer)
 	misState.Ships[ship.Uid] = ship
-	return "Battle ship waterdrop ready at " + ship.CurPos.String()
+	return "Waterdrop ready at " + ship.CurPos.String()
 }
 
 var _ Cheat = (*ShowMeTheWaterdrop)(nil)
+
+// ShowMeTheMolaMola -> 在鼠标当前位置初始化一个翻车鱼
+type ShowMeTheMolaMola struct{}
+
+func (c *ShowMeTheMolaMola) String() string {
+	return "show me the molamola"
+}
+
+func (c *ShowMeTheMolaMola) Desc() string {
+	return "Create a molamola at current cursor position."
+}
+
+func (c *ShowMeTheMolaMola) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *ShowMeTheMolaMola) Exec(misState *state.MissionState) string {
+	uidGenerator := misState.ShipUidGenerators[misState.CurPlayer]
+	pos := action.DetectCursorPosOnMap(misState)
+	if misState.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
+		return "Current cursor position on land, can't create molamola"
+	}
+	ship := object.NewShip(uidGenerator, "molamola", *pos, 0, misState.CurPlayer)
+	misState.Ships[ship.Uid] = ship
+	return "MolaMola ready at " + ship.CurPos.String()
+}
+
+var _ Cheat = (*ShowMeTheMolaMola)(nil)
 
 // BlackGoldRush -> 在指定地点生成一个油井
 type BlackGoldRush struct{}
