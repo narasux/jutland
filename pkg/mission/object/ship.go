@@ -173,6 +173,8 @@ type BattleShip struct {
 	CurSpeed float64
 	// 分组ID
 	GroupID GroupID
+	// 攻击目标（敌舰 Uid）
+	AttackTarget string
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
@@ -220,6 +222,11 @@ func (s *BattleShip) EnableWeapon(t WeaponType) {
 		}
 		s.Weapon.TorpedoDisabled = false
 	}
+}
+
+// Attack 攻击指定目标
+func (s *BattleShip) Attack(shipUid string) {
+	s.AttackTarget = shipUid
 }
 
 // Fire 向指定目标发射武器

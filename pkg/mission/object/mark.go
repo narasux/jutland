@@ -15,6 +15,10 @@ type MarkID string
 const (
 	// MarkIDTarget 目标标记
 	MarkIDTarget MarkID = "target"
+	// MarkIDLockOn 锁定标记
+	MarkIDLockOn MarkID = "lockOn"
+	// MarkIDAttack 攻击标记
+	MarkIDAttack MarkID = "attack"
 )
 
 // Mark 标记（如目标地点等，会存在一定时间后消失）
@@ -26,8 +30,8 @@ type Mark struct {
 }
 
 // NewImgMark ...
-func NewImgMark(pos MapPos, img *ebiten.Image, life int) *Mark {
-	return &Mark{ID: MarkIDTarget, Pos: pos, Img: img, Life: life}
+func NewImgMark(id MarkID, pos MapPos, img *ebiten.Image, life int) *Mark {
+	return &Mark{ID: id, Pos: pos, Img: img, Life: life}
 }
 
 // NewTextMark ...

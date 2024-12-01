@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -14,6 +15,7 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 // HumanInputHandler 人类输入处理器
@@ -29,7 +31,6 @@ func NewHandler(player faction.Player) *HumanInputHandler {
 var _ controller.InputHandler = (*HumanInputHandler)(nil)
 
 // Handle 处理用户输入，更新指令集
-// TODO 这个函数应该拆分一下，然后重复代码有点多，可以考虑复用一下
 func (h *HumanInputHandler) Handle(
 	_ map[string]instr.Instruction, misState *state.MissionState,
 ) map[string]instr.Instruction {
@@ -49,29 +50,74 @@ func (h *HumanInputHandler) Handle(
 func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 
-	// 按下鼠标右键，如果有选中战舰，则移动选中战舰到指定位置
-	if pos := action.DetectMouseButtonClickOnMap(misState, ebiten.MouseButtonRight); pos != nil {
-		selectedShipCount := len(misState.SelectedShips)
-		if selectedShipCount != 0 {
-			for _, shipUid := range misState.SelectedShips {
-				// 如果是多艘战舰，则需要区分下终点位置，不要聚在一起挨揍 TODO 更好的分散策略？
-				targetPos := pos.Copy()
-				if selectedShipCount > 1 {
-					targetPos.AddRx(float64(rand.Intn(5) - 2))
-					targetPos.AddRy(float64(rand.Intn(5) - 2))
-				}
-				// 通过 ShipMovePath 指令实现移动行为
-				ship, ok := misState.Ships[shipUid]
-				if !ok {
-					continue
-				}
-				moveInstr := instr.NewShipMovePath(ship.Uid, ship.CurPos, targetPos)
-				instructions[moveInstr.Uid()] = moveInstr
+	// 当前选中的战舰数量
+	selectedShipCount := len(misState.SelectedShips)
+
+	// 检查鼠标是否在某个敌方战舰上，需要显示锁定
+	var lockOnEnemy *obj.BattleShip
+	if selectedShipCount != 0 {
+		pos := action.DetectCursorPosOnMap(misState)
+		for _, ship := range misState.Ships {
+			if ship.BelongPlayer == misState.CurPlayer {
+				continue
 			}
-			// 有战舰被选中的情况下，标记目标位置
-			mark := obj.NewImgMark(*pos, textureImg.TargetPos, 20)
-			misState.GameMarks[mark.ID] = mark
+			if geometry.IsPointInRotatedRectangle(
+				pos.RX, pos.RY,
+				ship.CurPos.RX, ship.CurPos.RY,
+				ship.Length/constants.MapBlockSize,
+				ship.Width/constants.MapBlockSize,
+				ship.CurRotation,
+			) {
+				lockOnEnemy = ship
+
+				// 默认为锁定标志
+				markID, markImg := obj.MarkIDLockOn, textureImg.LockOnTarget
+				// 如果选中战舰中某艘已经设置该战舰为攻击目标，则应显示攻击标志而非锁定标志
+				for _, shipUid := range misState.SelectedShips {
+					if s, ok := misState.Ships[shipUid]; ok {
+						if s.AttackTarget == lockOnEnemy.Uid {
+							markID, markImg = obj.MarkIDAttack, textureImg.AttackTarget
+							break
+						}
+					}
+				}
+				mark := obj.NewImgMark(markID, *pos, markImg, 2)
+				misState.GameMarks[mark.ID] = mark
+				break
+			}
 		}
+	}
+
+	// 按下鼠标右键，如果有选中战舰，则移动选中战舰到指定位置
+	if pos := action.DetectMouseButtonClickOnMap(
+		misState, ebiten.MouseButtonRight,
+	); pos != nil && selectedShipCount != 0 {
+		for _, shipUid := range misState.SelectedShips {
+			// 如果是多艘战舰，则需要区分下终点位置，不要聚在一起挨揍
+			targetPos := pos.Copy()
+			if selectedShipCount > 1 {
+				targetPos.AddRx(float64(rand.Intn(5) - 2))
+				targetPos.AddRy(float64(rand.Intn(5) - 2))
+			}
+			// 通过 ShipMovePath 指令实现移动行为
+			ship, ok := misState.Ships[shipUid]
+			if !ok {
+				continue
+			}
+			// 右键点击前往并攻击指定目标
+			if lockOnEnemy != nil {
+				ship.Attack(lockOnEnemy.Uid)
+			}
+			moveInstr := instr.NewShipMovePath(ship.Uid, ship.CurPos, targetPos)
+			instructions[moveInstr.Uid()] = moveInstr
+		}
+		// 有战舰被选中的情况下，标记目标位置
+		markID, markImg := obj.MarkIDTarget, textureImg.TargetPos
+		if lockOnEnemy != nil {
+			markID, markImg = obj.MarkIDAttack, textureImg.AttackTarget
+		}
+		mark := obj.NewImgMark(markID, *pos, markImg, 20)
+		misState.GameMarks[markID] = mark
 	}
 
 	// 通过 ShipMove 指令实现移动
@@ -100,6 +146,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 		}
 	}
 
+	// 方向键，让选中的战舰往对应方向移动一个单位
 	dx, dy := 0, 0
 	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
 		dx, dy = 0, -1
@@ -120,6 +167,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	return instructions
 }
 
+// TODO 这个函数应该拆分一下，然后重复代码有点多，可以考虑复用一下
 func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 

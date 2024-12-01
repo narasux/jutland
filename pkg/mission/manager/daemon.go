@@ -109,6 +109,11 @@ func (m *MissionManager) updateWeaponFire() {
 			if distance > ship.Weapon.MaxRange {
 				continue
 			}
+			// 如果是选定的攻击目标，还在最大射程内，不用选，干他就完事了
+			if enemy.Uid == ship.AttackTarget {
+				inRangeEnemies = []*obj.BattleShip{enemy}
+				break
+			}
 			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
 		if total := len(inRangeEnemies); total != 0 {
@@ -193,8 +198,10 @@ func (m *MissionManager) updateShotBullets() {
 
 				// 判定命中，扣除战舰生命值，标记命中战舰
 				if geometry.IsPointInRotatedRectangle(
-					pos.RX, pos.RY, ship.CurPos.RX, ship.CurPos.RY,
-					ship.Length/constants.MapBlockSize, ship.Width/constants.MapBlockSize,
+					pos.RX, pos.RY,
+					ship.CurPos.RX, ship.CurPos.RY,
+					ship.Length/constants.MapBlockSize,
+					ship.Width/constants.MapBlockSize,
 					ship.CurRotation,
 				) {
 					ship.HurtBy(bt)
