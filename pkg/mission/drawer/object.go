@@ -175,8 +175,9 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 		screen.DrawImage(sImg, opts)
 
 		// 绘制爆炸效果
-		explodeImg := textureImg.GetExplode(s.CurHP)
+		explodeImg := textureImg.GetShipExplode(s.CurHP)
 		opts = d.genDefaultDrawImageOptions()
+		ebutil.SetOptsCenterRotation(opts, explodeImg, s.CurRotation)
 		opts.GeoM.Translate(
 			(s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
 			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-30,

@@ -273,7 +273,7 @@ func (m *MissionManager) updateMissionShips() {
 	for uid, ship := range m.state.Ships {
 		if ship.CurHP <= 0 {
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
-			ship.CurHP = textureImg.MaxExplodeState
+			ship.CurHP = textureImg.MaxShipExplodeState
 			ship.CurSpeed = 0
 
 			if audioPlayQuota > 0 && m.state.Camera.Contains(ship.CurPos) {
