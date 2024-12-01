@@ -48,6 +48,18 @@ What to do if the computer is too powerful?
 
 Yes, this game has built-in plug-ins :D
 
+## Special Notice
+
+This project is for educational purposes only and must not be used for any commercial purposes!
+
+The map materials are sourced from the single-player game "Attack On Pearl Harbor" (2008).
+
+The sound materials are sourced from the single-player game "Kurogane No Houkou 3" (2004).
+
+The battleship images are sourced from [Tzoli](https://www.deviantart.com/tzoli/gallery), [midnike](https://www.deviantart.com/midnike/gallery), [shipbucket](https://www.deviantart.com/shipbucket/gallery), [pinterest](https://jp.pinterest.com/FCZ_NN/pins/), [bilibili](https://space.bilibili.com/650338906), and others.
+
+If any of the above materials infringe upon your rights, please contact me for removal. Thank you very much!
+
 ## Development Guide
 
 ### Dependencies
