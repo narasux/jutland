@@ -129,11 +129,25 @@
     criticalRate: 0.002
   },
   {
+    name: "JP/GB/100/1933",
+    type: "shell",
+    diameter: 100,
+    damage: 55,
+    criticalRate: 0.002
+  },
+  {
     name: "JP/GB/76/1936",
     type: "shell",
     diameter: 76,
     damage: 32,
     criticalRate: 0.001
+  },
+  {
+    name: "JP/GB/25/1936",
+    type: "shell",
+    diameter: 25,
+    damage: 1.8,
+    criticalRate: 0.0003
   },
   {
     name: "JP/GB/13/1935",

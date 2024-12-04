@@ -374,7 +374,7 @@
     name: "Test",
     displayName: "测试-1941",
     initFunds: 10000,
-    initCameraPos: [28, 32],
+    initCameraPos: [26, 32],
     mapName: "darwin",
     maxShipCount: 30,
     description: [
@@ -392,6 +392,7 @@
         providedShipNames: [
           "duck",
           "liberty",
+          "taiho",
           "lowa",
           "montana",
           "south_dakota",
@@ -499,6 +500,12 @@
       {
         name: "duck",
         pos: [38, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "taiho",
+        pos: [28, 33],
         rotation: 90,
         belongPlayer: "HA"
       },

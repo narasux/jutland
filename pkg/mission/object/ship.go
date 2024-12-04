@@ -36,6 +36,8 @@ type ShipType string
 const (
 	// ShipTypeDefault 默认
 	ShipTypeDefault ShipType = "default"
+	// ShipTypeAircraftCarrier 航空母舰
+	ShipTypeAircraftCarrier ShipType = "aircraft_carrier"
 	// ShipTypeBattleShip 战列舰
 	ShipTypeBattleShip ShipType = "battleship"
 	// ShipTypeCruiser 巡洋舰

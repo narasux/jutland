@@ -269,6 +269,16 @@
     bulletSpread: 80,
     bulletSpeed: 720
   },
+  // 日本海军 双联装 10 厘米 65 倍口径高平两用炮
+  {
+    name: "JP/100/65/2/DP",
+    bulletName: "JP/GB/100/1933",
+    bulletCount: 2,
+    reloadTime: 2.3,
+    range: 19,
+    bulletSpread: 60,
+    bulletSpeed: 1000
+  },
   // 日本海军 76/40 单装舰炮
   {
     name: "JP/76/40",
@@ -278,6 +288,16 @@
     range: 9,
     bulletSpread: 70,
     bulletSpeed: 720
+  },
+  // 日本海军 三联装 25 毫米机枪
+  {
+    name: "JP/25/3",
+    bulletName: "JP/GB/25/1936",
+    bulletCount: 3,
+    reloadTime: 0.05,
+    range: 2,
+    bulletSpread: 25,
+    bulletSpeed: 900
   },
   // 日本海军 单装 13 毫米机枪
   {
