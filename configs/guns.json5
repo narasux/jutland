@@ -159,6 +159,16 @@
     bulletSpread: 70,
     bulletSpeed: 820
   },
+  // 美国海军 US/40/60/4 四联装装高炮
+  {
+    name: "US/40/60/4",
+    bulletName: "US/GB/40/1930",
+    bulletCount: 4,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 880
+  },
   // 美国海军 US/40/60 单装高炮
   {
     name: "US/40/60",
@@ -168,6 +178,16 @@
     range: 7,
     bulletSpread: 20,
     bulletSpeed: 880
+  },
+  // 美国海军 US/20/70/2 双装高炮
+  {
+    name: "US/20/70/2",
+    bulletName: "US/GB/20/1940",
+    bulletCount: 2,
+    reloadTime: 0.2,
+    range: 2,
+    bulletSpread: 20,
+    bulletSpeed: 910
   },
   // 美国海军 US/20/70 单装高炮
   {

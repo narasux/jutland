@@ -392,6 +392,7 @@
         providedShipNames: [
           "duck",
           "liberty",
+          "yorktown",
           "taiho",
           "lowa",
           "montana",
@@ -504,8 +505,14 @@
         belongPlayer: "HA"
       },
       {
-        name: "taiho",
+        name: "yorktown",
         pos: [28, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "taiho",
+        pos: [29, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
