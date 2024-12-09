@@ -393,7 +393,17 @@
           "duck",
           "liberty",
           "yorktown",
+          "saratoga",
           "taiho",
+        ],
+      },
+      {
+        pos: [1, 35],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
           "lowa",
           "montana",
           "south_dakota",
@@ -414,6 +424,15 @@
           "king_george_v",
           "warspite",
           "tiger",
+        ],
+      },
+      {
+        pos: [1, 50],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
           "alaska_II",
           "atlanta",
           "long_beach_II",
@@ -430,6 +449,15 @@
           "k_25",
           "sverdlov",
           "kirov",
+        ],
+      },
+      {
+        pos: [1, 65],
+        rotation: 90,
+        rallyPos: [30, 50],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
           "porter",
           "maury",
           "hammann",
@@ -440,24 +468,21 @@
           "v",
           "y",
           "ardent",
-          "30bis",
+          "30bis"
+        ],
+      },
+      {
+        pos: [1, 80],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
           "PT_791",
           "T_14",
           "S_100",
           "MTB_77",
           "P_6",
-        ],
-      },
-      {
-        pos: [1, 65],
-        rotation: 90,
-        rallyPos: [30, 50],
-        belongPlayer: "HA",
-        maxOncomingShip: 10,
-        providedShipNames: [
-          "atlanta",
-          "new_orleans",
-          "porter",
         ],
       },
       {
@@ -511,8 +536,14 @@
         belongPlayer: "HA"
       },
       {
-        name: "taiho",
+        name: "saratoga",
         pos: [29, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "taiho",
+        pos: [28, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
