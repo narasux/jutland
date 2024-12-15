@@ -171,97 +171,73 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 
+	type op struct {
+		key        ebiten.Key
+		weaponType obj.WeaponType
+		isDisabled func(s *obj.BattleShip) bool
+	}
+
 	// 按下 w 键，如果任意选中战舰任意武器被禁用，则启用所有，否则禁用所有
-	if inpututil.IsKeyJustPressed(ebiten.KeyW) {
-		if len(misState.SelectedShips) != 0 {
-			anyWeaponDisabled := false
-			for _, shipUid := range misState.SelectedShips {
-				ship := misState.Ships[shipUid]
-				if ship.Weapon.MainGunDisabled || ship.Weapon.SecondaryGunDisabled || ship.Weapon.TorpedoDisabled {
-					anyWeaponDisabled = true
-					break
-				}
-			}
-			for _, shipUid := range misState.SelectedShips {
-				if anyWeaponDisabled {
-					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeAll)
-					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
-				} else {
-					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeAll)
-					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
-				}
-			}
-		}
-	}
-
 	// 按下 e 键，如果任意选中战舰任意主炮被禁用，则启用所有，否则禁用所有
-	if inpututil.IsKeyJustPressed(ebiten.KeyE) {
-		if len(misState.SelectedShips) != 0 {
-			anyGunDisabled := false
-			for _, shipUid := range misState.SelectedShips {
-				ship := misState.Ships[shipUid]
-				if ship.Weapon.MainGunDisabled {
-					anyGunDisabled = true
-					break
-				}
-			}
-			for _, shipUid := range misState.SelectedShips {
-				if anyGunDisabled {
-					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeMainGun)
-					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
-				} else {
-					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeMainGun)
-					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
-				}
-			}
-		}
-	}
-
 	// 按下 r 键，如果任意选中战舰任意副炮被禁用，则启用所有，否则禁用所有
-	if inpututil.IsKeyJustPressed(ebiten.KeyR) {
-		if len(misState.SelectedShips) != 0 {
-			anyGunDisabled := false
-			for _, shipUid := range misState.SelectedShips {
-				ship := misState.Ships[shipUid]
-				if ship.Weapon.SecondaryGunDisabled {
-					anyGunDisabled = true
-					break
-				}
-			}
-			for _, shipUid := range misState.SelectedShips {
-				if anyGunDisabled {
-					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
-					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
-				} else {
-					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeSecondaryGun)
-					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
-				}
-			}
-		}
-	}
-
 	// 按下 t 键，如果任意选中战舰任意鱼雷被禁用，则启用所有，否则禁用所有
-	if inpututil.IsKeyJustPressed(ebiten.KeyT) {
-		if len(misState.SelectedShips) != 0 {
-			anyTorpedoDisabled := false
-			for _, shipUid := range misState.SelectedShips {
-				ship := misState.Ships[shipUid]
-				if ship.Weapon.TorpedoDisabled {
-					anyTorpedoDisabled = true
-					break
+	// 按下 a 键，如果任意选中战舰任意防空炮被禁用，则启用所有，否则禁用所有
+	ops := []op{
+		{
+			ebiten.KeyQ,
+			obj.WeaponTypeAll,
+			func(s *obj.BattleShip) bool {
+				return s.Weapon.MainGunDisabled ||
+					s.Weapon.SecondaryGunDisabled ||
+					s.Weapon.AntiAircraftGunDisabled ||
+					s.Weapon.TorpedoDisabled
+			},
+		},
+		{
+			ebiten.KeyW,
+			obj.WeaponTypeMainGun,
+			func(s *obj.BattleShip) bool { return s.Weapon.MainGunDisabled },
+		},
+		{
+			ebiten.KeyE,
+			obj.WeaponTypeSecondaryGun,
+			func(s *obj.BattleShip) bool { return s.Weapon.SecondaryGunDisabled },
+		},
+		{
+			ebiten.KeyR,
+			obj.WeaponTypeAntiAircraftGun,
+			func(s *obj.BattleShip) bool { return s.Weapon.AntiAircraftGunDisabled },
+		},
+		{
+			ebiten.KeyT,
+			obj.WeaponTypeTorpedo,
+			func(s *obj.BattleShip) bool { return s.Weapon.TorpedoDisabled },
+		},
+	}
+
+	if len(misState.Ships) > 0 {
+		for _, op := range ops {
+			if inpututil.IsKeyJustPressed(op.key) {
+				anyDisabled := false
+				for _, shipUid := range misState.SelectedShips {
+					ship := misState.Ships[shipUid]
+					if op.isDisabled(ship) {
+						anyDisabled = true
+						break
+					}
 				}
-			}
-			for _, shipUid := range misState.SelectedShips {
-				if anyTorpedoDisabled {
-					enableWeaponInstr := instr.NewEnableWeapon(shipUid, obj.WeaponTypeTorpedo)
-					instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
-				} else {
-					disableWeaponInstr := instr.NewDisableWeapon(shipUid, obj.WeaponTypeTorpedo)
-					instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
+
+				for _, shipUid := range misState.SelectedShips {
+					if anyDisabled {
+						enableWeaponInstr := instr.NewEnableWeapon(shipUid, op.weaponType)
+						instructions[enableWeaponInstr.Uid()] = enableWeaponInstr
+					} else {
+						disableWeaponInstr := instr.NewDisableWeapon(shipUid, op.weaponType)
+						instructions[disableWeaponInstr.Uid()] = disableWeaponInstr
+					}
 				}
 			}
 		}
 	}
-
 	return instructions
 }

@@ -81,14 +81,25 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			opts.GeoM.Translate(-20, 0)
 
 			// 渲染武器状态时候的 X 方向间隙大小
-			weaponInterstitialSpacing := 35.0
-			if lo.EveryBy(
-				[]bool{s.Weapon.HasMainGun, s.Weapon.HasSecondaryGun, s.Weapon.HasTorpedo},
-				func(b bool) bool {
+			var weaponInterstitialSpacing float64
+			weaponCnt := len(lo.Filter(
+				[]bool{
+					s.Weapon.HasMainGun,
+					s.Weapon.HasSecondaryGun,
+					s.Weapon.HasAntiAircraftGun,
+					s.Weapon.HasTorpedo,
+				},
+				func(b bool, _ int) bool {
 					return b
 				},
-			) {
+			))
+			switch weaponCnt {
+			case 4:
+				weaponInterstitialSpacing = 15.0
+			case 3:
 				weaponInterstitialSpacing = 20.0
+			default:
+				weaponInterstitialSpacing = 35.0
 			}
 
 			// 绘制主炮状态
@@ -115,6 +126,15 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				}
 				opts.GeoM.Translate(weaponInterstitialSpacing, -25)
 				img := textureImg.GetText("S", font.Hang, 16, clr)
+				screen.DrawImage(img, opts)
+				opts.GeoM.Translate(0, 25)
+			}
+
+			// 绘制防空炮状态（注：由于防空炮装填速度很快，所以不需要绘制装填中的状态，即只有红绿两种）
+			if s.Weapon.HasAntiAircraftGun {
+				clr := lo.Ternary(s.Weapon.AntiAircraftGunDisabled, colorx.Red, colorx.Green)
+				opts.GeoM.Translate(weaponInterstitialSpacing, -25)
+				img := textureImg.GetText("A", font.Hang, 16, clr)
 				screen.DrawImage(img, opts)
 				opts.GeoM.Translate(0, 25)
 			}

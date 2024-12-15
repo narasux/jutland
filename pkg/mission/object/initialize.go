@@ -114,6 +114,15 @@ func initShipMap() {
 			))
 		}
 		s.Weapon.HasSecondaryGun = len(s.Weapon.SecondaryGuns) > 0
+		// 防空炮
+		for _, gunMD := range s.Weapon.AntiAircraftGunsMD {
+			s.Weapon.AntiAircraftGuns = append(s.Weapon.AntiAircraftGuns, newGun(
+				gunMD.Name, gunMD.PosPercent,
+				FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
+			))
+		}
+		s.Weapon.HasAntiAircraftGun = len(s.Weapon.AntiAircraftGuns) > 0
 		// 鱼雷发射器
 		for _, torpedoMD := range s.Weapon.TorpedoesMD {
 			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, newTorpedoLauncher(
