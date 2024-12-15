@@ -23,9 +23,10 @@ CPU / graphics card requirements are not very high, but too low will probably ca
 - Hold down <kbd>Ctrl</kbd> to enter formation mode, then press numbers <kbd>0-9</kbd> to form a group with the currently selected warships.
 - Press numbers <kbd>0-9</kbd> to quickly select an already grouped fleet. If a fleet is already selected, pressing the grouping key again will move the camera to the location of that fleet.
 - If the **selected warships** are stationary, press the <kbd>X</kbd> key to disperse them (useful for overlapping ships).
-- Press the <kbd>W</kbd> key. If any weapon of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
-- Press the <kbd>E</kbd> key. If any **main gun** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
-- Press the <kbd>R</kbd> key. If any **secondary gun** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
+- Press the <kbd>Q</kbd> key. If any weapon of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
+- Press the <kbd>W</kbd> key. If any **main gun** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
+- Press the <kbd>E</kbd> key. If any **secondary gun** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
+- Press the <kbd>R</kbd> key. If any **anti-aircraft gun** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
 - Press the <kbd>T</kbd> key. If any **torpedo** of any selected warship is disabled, all will be enabled; otherwise, all will be disabled.
 - Press the <kbd>D</kbd> key to forcefully display the status of all warships (HP, whether weapons are enabled, etc.).
 - Press the <kbd>X</kbd> key to move the **currently selected ship** to a random direction by a certain number of units (disperse).

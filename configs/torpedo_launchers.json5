@@ -1,13 +1,22 @@
 [
   // 鸭雷山大
   {
-    name: "DuckTorpedoLauncher",
+    name: "YaLei",
     bulletName: "JP/TB/610/1933",
-    bulletCount: 20,
+    bulletCount: 15,
     shotInterval: 0.3,
     reloadTime: 5,
     range: 20,
     bulletSpeed: 54,
+  },
+  {
+    name: "ShanDa",
+    bulletName: "US/TB/533/1931",
+    bulletCount: 20,
+    shotInterval: 0.5,
+    reloadTime: 5,
+    range: 12,
+    bulletSpeed: 45,
   },
   // 美国海军 533mm 4联装 鱼雷
   {
