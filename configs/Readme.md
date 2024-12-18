@@ -34,7 +34,8 @@
 [
   {
     // 舰炮名称（不可重复）
-    // US 是所属阵营，127 是口径，38 是倍径，MK45 是型号
+    // US 是所属阵营，127 是口径，38 是倍径，MK45 是型号（可选）
+    // 注：如果是多管炮，则追加炮管数量，如：UK/152/50/2
     name: "US/127/38/MK45",
     // 弹药名称（需确保一定存在）
     bulletName: "US/GB/127/1932",
@@ -89,16 +90,20 @@
 [
   {
     // 战舰名称（不可重复）
-    name: "default",
+    name: "atlanta",
+    // 展示用名称
+    displayName: "亚特兰大",
     // 战舰类型，可选值：
-    // carrier 航空母舰（未来可期）
+    // aircraft_carrier 航空母舰
     // battleship 战列舰
     // cruiser 巡洋舰
     // destroyer 驱逐舰
-    // frigate 护卫舰
-    // speedboat 快艇
+    // cargo 货轮
+    // torpedo_boat 快艇
     // submarine 潜艇（未来可期）
     type: "cruiser",
+    // 类型缩写
+    typeAbbr: "CL",
     // 初始生命值
     // 推荐值：满载排水量（单位：吨）
     totalHP: 1000,
@@ -156,9 +161,35 @@
         }
       ],
       // 副炮（参数与主炮相同）
-      secondaryGuns: [],
+      secondaryGuns: [
+        // 副炮 A
+        {
+          name: "US/76/50",
+          posPercent: 0.3,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+      ],
+      // 防空炮（参数与主炮相同）
+      antiAircraftGuns: [
+        // 防空炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+      ],
       // 鱼雷发射器（参数与主炮相同）
-      torpedoes: []
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "US/533/4",
+          posPercent: 0.1,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+      ]
     }
   }
 ]
@@ -171,6 +202,8 @@
   {
     // 任务关卡名称（不可重复）
     name: "default",
+    // 展示用名称
+    displayName: "默认",
     // 初始资金
     initFunds: 10000,
     // 初始相机视角位置（需在地图范围内）
@@ -179,6 +212,50 @@
     mapName: "default",
     // 最大战舰数量（目前不生效）
     maxShipCount: 5,
+    // 关卡描述
+    description: [
+      "默认关卡"
+    ],
+    // 增援点信息
+    initReinforcePoints: [
+      {
+        // 位置
+        pos: [1, 20],
+        // 方向
+        rotation: 90,
+        // 集结点
+        rallyPos: [25, 35],
+        // 所属方
+        belongPlayer: "HA",
+        // 最大队列数量
+        maxOncomingShip: 10,
+        // 可选择的战舰名称
+        providedShipNames: [
+          "south_dakota",
+          "new_orleans",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+    ],
+    // 石油平台
+    initOilPlatforms: [
+      {
+        // 位置
+        pos: [10, 10],
+        // 半径
+        radius: 3,
+        // 单次产生资金
+        yield: 10
+      },
+      {
+        pos: [40, 68],
+        radius: 4,
+        yield: 25
+      }
+    ],
     initShips: [
       // 己方初始战舰
       {

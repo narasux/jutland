@@ -47,7 +47,7 @@
           leftFiringArc: [180, 360]
         }
       ],
-      antiaircraftGuns: [
+      antiAircraftGuns: [
         // 鸭子防空炮
         {
           name: "FlyYa",
@@ -170,7 +170,7 @@
           leftFiringArc: [180, 330]
         },
       ],
-      antiaircraftGuns: [
+      antiAircraftGuns: [
         {
           name: "US/20/70",
           posPercent: 0.8,
@@ -335,7 +335,7 @@
           leftFiringArc: [180, 315]
         },
       ],
-      antiaircraftGuns: [
+      antiAircraftGuns: [
         // 前高炮 A
         {
           name: "US/20/70/2",
@@ -977,7 +977,7 @@
         }
       ],
       secondaryGuns: [],
-      antiaircraftGuns: [
+      antiAircraftGuns: [
         // 右前副炮 A
         {
           name: "JP/25/3",
@@ -1240,7 +1240,7 @@
           leftFiringArc: [180, 340]
         }
       ],
-      antiaircraftGuns: [
+      antiAircraftGuns: [
         // 主炮顶高炮 A
         {
           name: "US/40/60/4",
