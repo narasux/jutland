@@ -15,5 +15,6 @@ var Cheats = []Cheat{
 	&WhoIsCallingTheFleet{},
 	&DoNotDie{},
 	&YouHaveBetrayedTheWorkingClass{},
-	&AbandonDarknessAndEmbraceTheLight{},
+	&AbandonDarkness{},
+	&Expelliarmus{},
 }

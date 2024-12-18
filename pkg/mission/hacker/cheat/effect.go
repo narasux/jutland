@@ -151,22 +151,22 @@ func (c *YouHaveBetrayedTheWorkingClass) Exec(misState *state.MissionState) stri
 
 var _ Cheat = (*YouHaveBetrayedTheWorkingClass)(nil)
 
-// AbandonDarknessAndEmbraceTheLight 弃暗投明 -> 视野范围内的敌人变成自己人
-type AbandonDarknessAndEmbraceTheLight struct{}
+// AbandonDarkness 弃暗投明 -> 视野范围内的敌人变成自己人
+type AbandonDarkness struct{}
 
-func (c *AbandonDarknessAndEmbraceTheLight) String() string {
-	return "abandon darkness and embrace the light"
+func (c *AbandonDarkness) String() string {
+	return "abandon darkness"
 }
 
-func (c *AbandonDarknessAndEmbraceTheLight) Desc() string {
+func (c *AbandonDarkness) Desc() string {
 	return "Turn enemy ship in camera belong to self."
 }
 
-func (c *AbandonDarknessAndEmbraceTheLight) Match(cmd string) bool {
+func (c *AbandonDarkness) Match(cmd string) bool {
 	return isCommandEqual(c.String(), cmd)
 }
 
-func (c *AbandonDarknessAndEmbraceTheLight) Exec(misState *state.MissionState) string {
+func (c *AbandonDarkness) Exec(misState *state.MissionState) string {
 	for _, ship := range misState.Ships {
 		if misState.Camera.Contains(ship.CurPos) {
 			ship.BelongPlayer = misState.CurPlayer
@@ -175,4 +175,30 @@ func (c *AbandonDarknessAndEmbraceTheLight) Exec(misState *state.MissionState) s
 	return "Thank you, you are both good man."
 }
 
-var _ Cheat = (*AbandonDarknessAndEmbraceTheLight)(nil)
+var _ Cheat = (*AbandonDarkness)(nil)
+
+// Expelliarmus 除你武器
+type Expelliarmus struct{}
+
+func (c *Expelliarmus) String() string {
+	return "expelliarmus"
+}
+
+func (c *Expelliarmus) Desc() string {
+	return "Remove all enemy ship's weapons in camera."
+}
+
+func (c *Expelliarmus) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *Expelliarmus) Exec(misState *state.MissionState) string {
+	for _, ship := range misState.Ships {
+		if misState.Camera.Contains(ship.CurPos) && ship.BelongPlayer != misState.CurPlayer {
+			ship.Weapon = object.Weapon{}
+		}
+	}
+	return "Expelliarmus! (>.>)-o------(QAQ)"
+}
+
+var _ Cheat = (*Expelliarmus)(nil)
