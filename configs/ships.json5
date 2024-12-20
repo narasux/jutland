@@ -605,7 +605,7 @@
         {
           name: "US/127/38/MK12",
           posPercent: 0.52,
-            rightFiringArc: [0, 160],
+          rightFiringArc: [0, 160],
           leftFiringArc: [360, 360]
         },
         // 右后主炮 D
@@ -1149,7 +1149,7 @@
         // 前主炮 A
         {
           name: "US/406/50/3/MK7",
-          posPercent: 0.45,
+          posPercent: 0.4,
           rightFiringArc: [0, 130],
           leftFiringArc: [230, 360]
         },
@@ -1386,7 +1386,7 @@
           name: "US/20/70",
           posPercent: 0.73,
           rightFiringArc: [0, 180],
-          leftFiringArc: [150, 360]
+          leftFiringArc: [210, 360]
         },
         // 左高炮 A
         {
@@ -1400,7 +1400,7 @@
           name: "US/20/70",
           posPercent: 0.71,
           rightFiringArc: [0, 180],
-          leftFiringArc: [150, 360]
+          leftFiringArc: [210, 360]
         },
         // 左高炮 B
         {
@@ -1414,7 +1414,7 @@
           name: "US/20/70",
           posPercent: 0.69,
           rightFiringArc: [0, 180],
-          leftFiringArc: [150, 360]
+          leftFiringArc: [210, 360]
         },
         // 左高炮 C
         {
@@ -1428,7 +1428,7 @@
           name: "US/20/70",
           posPercent: 0.67,
           rightFiringArc: [0, 180],
-          leftFiringArc: [150, 360]
+          leftFiringArc: [210, 360]
         },
         // 左高炮 D
         {
@@ -1710,36 +1710,36 @@
     timeCost: 65,
     description: [
       "战列舰（美）",
-      "主炮：4 座三联装 406mm/50",
-      "副炮：10 座双联装 127mm/54",
+      "主炮：4 座三联装 406mm/50，副炮：10 座双联装 127mm/54",
+      "防空炮：20 座四联装 40mm/60，72 座单装 20mm/70",
     ],
     weapon: {
       mainGuns: [
         // 前主炮 A
         {
           name: "US/406/50/3/MK7",
-          posPercent: 0.55,
+          posPercent: 0.49,
           rightFiringArc: [0, 130],
           leftFiringArc: [230, 360]
         },
         // 前主炮 B
         {
           name: "US/406/50/3/MK7",
-          posPercent: 0.45,
+          posPercent: 0.36,
           rightFiringArc: [0, 130],
           leftFiringArc: [230, 360]
         },
         // 后主炮 C
         {
           name: "US/406/50/3/MK7",
-          posPercent: -0.4,
+          posPercent: -0.35,
           rightFiringArc: [50, 180],
           leftFiringArc: [180, 310]
         },
         // 后主炮 D
         {
           name: "US/406/50/3/MK7",
-          posPercent: -0.5,
+          posPercent: -0.48,
           rightFiringArc: [50, 180],
           leftFiringArc: [180, 310]
         }
@@ -1748,28 +1748,28 @@
         // 右前副炮 A
         {
           name: "US/127/54/2/MK39",
-          posPercent: 0.2,
+          posPercent: 0.16,
           rightFiringArc: [0, 160],
           leftFiringArc: [360, 360]
         },
         // 左前副炮 A
         {
           name: "US/127/54/2/MK39",
-          posPercent: 0.2,
+          posPercent: 0.16,
           rightFiringArc: [0, 0],
           leftFiringArc: [200, 360]
         },
         // 右前副炮 B
         {
           name: "US/127/54/2/MK39",
-          posPercent: 0.1,
+          posPercent: 0.07,
           rightFiringArc: [0, 160],
           leftFiringArc: [360, 360]
         },
         // 左前副炮 B
         {
           name: "US/127/54/2/MK39",
-          posPercent: 0.1,
+          posPercent: 0.07,
           rightFiringArc: [0, 0],
           leftFiringArc: [200, 360]
         },
@@ -1790,30 +1790,676 @@
         // 右后副炮 D
         {
           name: "US/127/54/2/MK39",
-          posPercent: -0.1,
+          posPercent: -0.09,
           rightFiringArc: [20, 180],
           leftFiringArc: [360, 360]
         },
         // 左后副炮 D
         {
           name: "US/127/54/2/MK39",
-          posPercent: -0.1,
+          posPercent: -0.09,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 340]
         },
         // 右后副炮 E
         {
           name: "US/127/54/2/MK39",
-          posPercent: -0.2,
+          posPercent: -0.18,
           rightFiringArc: [20, 180],
           leftFiringArc: [360, 360]
         },
         // 左后副炮 E
         {
           name: "US/127/54/2/MK39",
-          posPercent: -0.2,
+          posPercent: -0.18,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 主炮顶高炮 A
+        {
+          name: "US/40/60/4",
+          posPercent: 0.34,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 主炮顶高炮 B
+        {
+          name: "US/40/60/4",
+          posPercent: -0.32,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 右高炮 A
+        {
+          name: "US/40/60/4",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "US/40/60/4",
+          posPercent: 0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "US/40/60/4",
+          posPercent: 0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "US/40/60/4",
+          posPercent: 0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "US/40/60/4",
+          posPercent: 0.22,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 C
+        {
+          name: "US/40/60/4",
+          posPercent: 0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        // 右高炮 D
+        {
+          name: "US/40/60/4",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 D
+        {
+          name: "US/40/60/4",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "US/40/60/4",
+          posPercent: -0.02,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 左高炮 E
+        {
+          name: "US/40/60/4",
+          posPercent: -0.02,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 F
+        {
+          name: "US/40/60/4",
+          posPercent: -0.04,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 左高炮 F
+        {
+          name: "US/40/60/4",
+          posPercent: -0.04,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 G
+        {
+          name: "US/40/60/4",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 G
+        {
+          name: "US/40/60/4",
+          posPercent: -0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 H
+        {
+          name: "US/40/60/4",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 H
+        {
+          name: "US/40/60/4",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 I
+        {
+          name: "US/40/60/4",
+          posPercent: -0.96,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 I
+        {
+          name: "US/40/60/4",
+          posPercent: -0.96,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [210, 360]
+        },
+        // 左高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.76,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [210, 360]
+        },
+        // 左高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.74,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "US/20/70",
+          posPercent: 0.71,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [210, 360]
+        },
+        // 左高炮 C
+        {
+          name: "US/20/70",
+          posPercent: 0.71,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "US/20/70",
+          posPercent: 0.69,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [210, 360]
+        },
+        // 左高炮 D
+        {
+          name: "US/20/70",
+          posPercent: 0.69,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "US/20/70",
+          posPercent: 0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 E
+        {
+          name: "US/20/70",
+          posPercent: 0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 F
+        {
+          name: "US/20/70",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 F
+        {
+          name: "US/20/70",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 G
+        {
+          name: "US/20/70",
+          posPercent: 0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 G
+        {
+          name: "US/20/70",
+          posPercent: 0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 H
+        {
+          name: "US/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 H
+        {
+          name: "US/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 I
+        {
+          name: "US/20/70",
+          posPercent: 0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 I
+        {
+          name: "US/20/70",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 J
+        {
+          name: "US/20/70",
+          posPercent: 0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 J
+        {
+          name: "US/20/70",
+          posPercent: 0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 K
+        {
+          name: "US/20/70",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 K
+        {
+          name: "US/20/70",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 L
+        {
+          name: "US/20/70",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 L
+        {
+          name: "US/20/70",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 M
+        {
+          name: "US/20/70",
+          posPercent: -0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 M
+        {
+          name: "US/20/70",
+          posPercent: -0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 N
+        {
+          name: "US/20/70",
+          posPercent: -0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 N
+        {
+          name: "US/20/70",
+          posPercent: -0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 O
+        {
+          name: "US/20/70",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 O
+        {
+          name: "US/20/70",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 P
+        {
+          name: "US/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 P
+        {
+          name: "US/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 Q
+        {
+          name: "US/20/70",
+          posPercent: -0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 Q
+        {
+          name: "US/20/70",
+          posPercent: -0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 R
+        {
+          name: "US/20/70",
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 R
+        {
+          name: "US/20/70",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 S
+        {
+          name: "US/20/70",
+          posPercent: -0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 S
+        {
+          name: "US/20/70",
+          posPercent: -0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 T
+        {
+          name: "US/20/70",
+          posPercent: -0.44,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 T
+        {
+          name: "US/20/70",
+          posPercent: -0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 U
+        {
+          name: "US/20/70",
+          posPercent: -0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 U
+        {
+          name: "US/20/70",
+          posPercent: -0.5,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 V
+        {
+          name: "US/20/70",
+          posPercent: -0.52,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 V
+        {
+          name: "US/20/70",
+          posPercent: -0.52,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 W
+        {
+          name: "US/20/70",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 W
+        {
+          name: "US/20/70",
+          posPercent: -0.55,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 X
+        {
+          name: "US/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 X
+        {
+          name: "US/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 Y
+        {
+          name: "US/20/70",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 左高炮 Y
+        {
+          name: "US/20/70",
+          posPercent: -0.64,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 Z
+        {
+          name: "US/20/70",
+          posPercent: -0.66,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 左高炮 Z
+        {
+          name: "US/20/70",
+          posPercent: -0.66,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 AA
+        {
+          name: "US/20/70",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 AA
+        {
+          name: "US/20/70",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 BB
+        {
+          name: "US/20/70",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 BB
+        {
+          name: "US/20/70",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 C
+        {
+          name: "US/20/70",
+          posPercent: 0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 C
+        {
+          name: "US/20/70",
+          posPercent: 0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 D
+        {
+          name: "US/20/70",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 D
+        {
+          name: "US/20/70",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 E
+        {
+          name: "US/20/70",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 E
+        {
+          name: "US/20/70",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 F
+        {
+          name: "US/20/70",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 F
+        {
+          name: "US/20/70",
+          posPercent: -0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 G
+        {
+          name: "US/20/70",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 G
+        {
+          name: "US/20/70",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右高炮 H
+        {
+          name: "US/20/70",
+          posPercent: -0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左高炮 H
+        {
+          name: "US/20/70",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
         }
       ],
       torpedoes: []
@@ -5123,7 +5769,6 @@
           posPercent: 0.7,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
-
         },
         // 前主炮 B
         {
@@ -5245,7 +5890,6 @@
           posPercent: 0.65,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
-
         },
         // 前主炮 B
         {
