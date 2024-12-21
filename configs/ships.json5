@@ -5803,7 +5803,8 @@
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
-        // TODO 高炮不应该放在副炮属性里面，后续挪走
+      ],
+      antiAircraftGuns: [
         // 右前主高炮 A
         {
           name: "SU/57/72/4",
