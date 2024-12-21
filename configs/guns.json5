@@ -195,7 +195,7 @@
     bulletName: "US/GB/20/1940",
     bulletCount: 2,
     reloadTime: 0.2,
-    range: 2,
+    range: 4,
     bulletSpread: 20,
     bulletSpeed: 910
   },
@@ -205,7 +205,7 @@
     bulletName: "US/GB/20/1940",
     bulletCount: 1,
     reloadTime: 0.2,
-    range: 2,
+    range: 4,
     bulletSpread: 20,
     bulletSpeed: 910
   },
@@ -319,13 +319,23 @@
     bulletSpread: 70,
     bulletSpeed: 720
   },
-  // 日本海军 三联装 25 毫米机枪
+  // 日本海军 三联装 25 毫米机炮
   {
-    name: "JP/25/3",
+    name: "JP/25/60/3",
     bulletName: "JP/GB/25/1936",
     bulletCount: 3,
     reloadTime: 0.05,
-    range: 2,
+    range: 5,
+    bulletSpread: 25,
+    bulletSpeed: 900
+  },
+  // 日本海军 双联装 25 毫米机炮
+  {
+    name: "JP/25/60/2",
+    bulletName: "JP/GB/25/1936",
+    bulletCount: 2,
+    reloadTime: 0.05,
+    range: 5,
     bulletSpread: 25,
     bulletSpeed: 900
   },
@@ -335,7 +345,7 @@
     bulletName: "JP/GB/13/1935",
     bulletCount: 1,
     reloadTime: 0.05,
-    range: 1,
+    range: 2,
     bulletSpread: 20,
     bulletSpeed: 800
   },
@@ -455,7 +465,7 @@
     bulletName: "GER/GB/20/1940",
     bulletCount: 1,
     reloadTime: 0.2,
-    range: 2,
+    range: 4,
     bulletSpread: 20,
     bulletSpeed: 910
   },
@@ -745,7 +755,7 @@
     bulletName: "SU/GB/25/1940",
     bulletCount: 2,
     reloadTime: 0.2,
-    range: 4,
+    range: 5,
     bulletSpread: 30,
     bulletSpeed: 950
   }
