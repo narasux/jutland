@@ -63,14 +63,21 @@
     type: "shell",
     diameter: 40,
     damage: 4,
-    criticalRate: 0
+    criticalRate: 0.0005
   },
   {
     name: "US/GB/20/1940",
     type: "shell",
     diameter: 20,
     damage: 1.2,
-    criticalRate: 0
+    criticalRate: 0.0001
+  },
+  {
+    name: "JP/GB/510/1945",
+    type: "shell",
+    diameter: 510,
+    damage: 6600,
+    criticalRate: 0.05
   },
   {
     name: "JP/GB/460/1942",
@@ -91,6 +98,13 @@
     type: "shell",
     diameter: 203,
     damage: 380,
+    criticalRate: 0.007
+  },
+  {
+    name: "JP/GB/200/1944",
+    type: "shell",
+    diameter: 200,
+    damage: 375,
     criticalRate: 0.007
   },
   {
@@ -141,6 +155,13 @@
     diameter: 76,
     damage: 32,
     criticalRate: 0.001
+  },
+  {
+    name: "JP/GB/40/1936",
+    type: "shell",
+    diameter: 40,
+    damage: 4,
+    criticalRate: 0.0005
   },
   {
     name: "JP/GB/25/1936",

@@ -9,7 +9,8 @@ import (
 
 var (
 	gb1024 = ebutil.NewImageWithColor(6, 14, colorx.DarkRed)
-	gb500  = ebutil.NewImageWithColor(5, 10, colorx.Gold)
+	gb510  = ebutil.NewImageWithColor(5, 10, colorx.Gold)
+	gb500  = ebutil.NewImageWithColor(5, 10, colorx.Yellow)
 	gb460  = ebutil.NewImageWithColor(4, 9, colorx.Gold)
 	gb457  = ebutil.NewImageWithColor(4, 9, colorx.Silver)
 	gb406  = ebutil.NewImageWithColor(4, 8, colorx.Silver)
@@ -19,6 +20,7 @@ var (
 	gb305  = ebutil.NewImageWithColor(3, 5, colorx.Silver)
 	gb283  = ebutil.NewImageWithColor(3, 5, colorx.Gray)
 	gb203  = ebutil.NewImageWithColor(3, 4, colorx.White)
+	gb200  = ebutil.NewImageWithColor(3, 4, colorx.Gold)
 	gb180  = ebutil.NewImageWithColor(2, 4, colorx.Gray)
 	gb155  = ebutil.NewImageWithColor(2, 4, colorx.Gold)
 	gb152  = ebutil.NewImageWithColor(2, 4, colorx.White)
@@ -58,6 +60,8 @@ func GetShell(diameter int) *ebiten.Image {
 	switch diameter {
 	case 1024:
 		return gb1024
+	case 510:
+		return gb510
 	case 500:
 		return gb500
 	case 460:
@@ -78,6 +82,8 @@ func GetShell(diameter int) *ebiten.Image {
 		return gb283
 	case 203:
 		return gb203
+	case 200:
+		return gb200
 	case 180:
 		return gb180
 	case 155:

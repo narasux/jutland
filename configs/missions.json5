@@ -409,7 +409,7 @@
           "south_dakota",
           "lexington",
           "yamato",
-          "yamato_II",
+          "satsuma",
           "kongo",
           "sovetsky_soyuz",
           "sovetsky_soyuz_II",
@@ -578,7 +578,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "yamato_II",
+        name: "satsuma",
         pos: [37, 38],
         rotation: 90,
         belongPlayer: "HA"

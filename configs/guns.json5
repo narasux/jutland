@@ -219,7 +219,27 @@
     bulletSpread: 20,
     bulletSpeed: 910
   },
-  // 日本海军 三联装 46.0 厘米 45 倍口径舰炮
+  // 日本海军 三联装 51 厘米 45 倍口径舰炮
+  {
+    name: "JP/510/45/3",
+    bulletName: "JP/GB/510/1945",
+    bulletCount: 3,
+    reloadTime: 26,
+    range: 50,
+    bulletSpread: 180,
+    bulletSpeed: 750
+  },
+  // 日本海军 双联装 51 厘米 45 倍口径舰炮
+  {
+    name: "JP/510/45/2",
+    bulletName: "JP/GB/510/1945",
+    bulletCount: 2,
+    reloadTime: 26,
+    range: 50,
+    bulletSpread: 180,
+    bulletSpeed: 750
+  },
+  // 日本海军 三联装 46 厘米 45 倍口径舰炮
   {
     name: "JP/460/45/3",
     bulletName: "JP/GB/460/1942",
@@ -239,16 +259,6 @@
     bulletSpread: 150,
     bulletSpeed: 800
   },
-  // 日本海军 双联装 20.3 厘米 60 倍口径舰炮
-  {
-    name: "JP/203/60/2",
-    bulletName: "JP/GB/203/1937",
-    bulletCount: 2,
-    reloadTime: 8,
-    range: 30,
-    bulletSpread: 120,
-    bulletSpeed: 920
-  },
   // 日本海军 双联装 20.3 厘米 50 倍口径舰炮
   {
     name: "JP/203/50/2",
@@ -258,6 +268,16 @@
     range: 24,
     bulletSpread: 120,
     bulletSpeed: 880
+  },
+  // 日本海军 双联装 20 厘米 60 倍口径舰炮
+  {
+    name: "JP/200/60/2",
+    bulletName: "JP/GB/200/1944",
+    bulletCount: 2,
+    reloadTime: 7,
+    range: 30,
+    bulletSpread: 120,
+    bulletSpeed: 920
   },
   // 日本海军 三联装 15.5 厘米 60 倍口径舰炮
   {
@@ -319,7 +339,7 @@
     bulletSpread: 60,
     bulletSpeed: 1000
   },
-  // 日本海军 76/40 单装舰炮
+  // 日本海军 单装 7.6 厘米 40 倍径舰炮
   {
     name: "JP/76/40",
     bulletName: "JP/GB/76/1936",
@@ -328,6 +348,16 @@
     range: 9,
     bulletSpread: 70,
     bulletSpeed: 720
+  },
+  // 日本海军 双联装 4 厘米高炮
+  {
+    name: "JP/40/60/2",
+    bulletName: "JP/GB/40/1936",
+    bulletCount: 2,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 25,
+    bulletSpeed: 850
   },
   // 日本海军 三联装 25 毫米机炮
   {
