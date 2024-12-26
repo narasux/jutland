@@ -30,9 +30,14 @@ func (p *MapPos) MEqual(other MapPos) bool {
 	return p.MX == other.MX && p.MY == other.MY
 }
 
+// Distance 计算距离
+func (p *MapPos) Distance(other MapPos) float64 {
+	return geometry.CalcDistance(p.RX, p.RY, other.RX, other.RY)
+}
+
 // Near 判断位置是否在指定范围内
 func (p *MapPos) Near(other MapPos, distance float64) bool {
-	return geometry.CalcDistance(p.RX, p.RY, other.RX, other.RY) <= distance
+	return p.Distance(other) <= distance
 }
 
 // String ...

@@ -264,7 +264,6 @@ func (s *BattleShip) CanOnLand() bool {
 }
 
 // MoveTo 移动到指定位置
-// TODO 路线规划 -> 绕过陆地
 func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos, nearGoal bool) (arrive bool) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if s.CurHP <= 0 {

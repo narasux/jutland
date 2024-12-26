@@ -167,11 +167,10 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	return instructions
 }
 
-// TODO 这个函数应该拆分一下，然后重复代码有点多，可以考虑复用一下
 func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
 
-	type op struct {
+	type operation struct {
 		key        ebiten.Key
 		weaponType obj.WeaponType
 		isDisabled func(s *obj.BattleShip) bool
@@ -182,7 +181,7 @@ func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[strin
 	// 按下 r 键，如果任意选中战舰任意副炮被禁用，则启用所有，否则禁用所有
 	// 按下 t 键，如果任意选中战舰任意鱼雷被禁用，则启用所有，否则禁用所有
 	// 按下 a 键，如果任意选中战舰任意防空炮被禁用，则启用所有，否则禁用所有
-	ops := []op{
+	ops := []operation{
 		{
 			ebiten.KeyQ,
 			obj.WeaponTypeAll,
