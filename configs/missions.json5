@@ -412,6 +412,7 @@
           "satsuma",
           "yamato",
           "kongo",
+          "fuso",
           "sovetsky_soyuz",
           "sovetsky_soyuz_II",
           "slava",
@@ -597,20 +598,26 @@
         belongPlayer: "HA"
       },
       {
-        name: "sovetsky_soyuz",
+        name: "fuso",
         pos: [35, 41],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "sovetsky_soyuz_II",
+        name: "sovetsky_soyuz",
         pos: [37, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "slava",
+        name: "sovetsky_soyuz_II",
         pos: [35, 43],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "slava",
+        pos: [37, 44],
         rotation: 90,
         belongPlayer: "HA"
       },
