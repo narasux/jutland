@@ -66,6 +66,13 @@
     criticalRate: 0.0005
   },
   {
+    name: "US/GB/28/1928",
+    type: "shell",
+    diameter: 28,
+    damage: 2,
+    criticalRate: 0.0002
+  },
+  {
     name: "US/GB/20/1940",
     type: "shell",
     diameter: 20,

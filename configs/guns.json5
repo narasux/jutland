@@ -199,6 +199,16 @@
     bulletSpread: 20,
     bulletSpeed: 880
   },
+  // 美国海军 US/28/75 四联装高炮
+  {
+    name: "US/28/75/4",
+    bulletName: "US/GB/28/1928",
+    bulletCount: 4,
+    reloadTime: 0.4,
+    range: 6,
+    bulletSpread: 25,
+    bulletSpeed: 820
+  },
   // 美国海军 US/20/70/2 双装高炮
   {
     name: "US/20/70/2",
