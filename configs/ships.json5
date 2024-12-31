@@ -7208,6 +7208,7 @@
       "主炮：3 座三联装 406mm/50",
       "副炮：6 座双联装 152mm/57",
       "高平炮：6 座双联装 100mm/56",
+      "防空炮：10 座四联装 37mm/57",
     ],
     weapon: {
       mainGuns: [
@@ -7276,6 +7277,8 @@
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
+      ],
+      antiAircraftGuns: [
         // 右前高平两用炮 A
         {
           name: "SU/100/56/2/DP",
@@ -7317,6 +7320,76 @@
           posPercent: -0.82,
           rightFiringArc: [30, 180],
           leftFiringArc: [210, 360]
+        },
+        // 右前高炮 A
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.54,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [225, 360]
+        },
+        // 左前高炮 A
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.54,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [220, 360]
+        },
+        // 右前高炮 B
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.48,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [225, 360]
+        },
+        // 左前高炮 B
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.48,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [220, 360]
+        },
+        // 右前高炮 C
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 C
+        {
+          name: "SU/37/57/4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后高炮 D
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后高炮 D
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后高炮 E
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 225]
+        },
+        // 左后高炮 E
+        {
+          name: "SU/37/57/4",
+          posPercent: -0.55,
+          rightFiringArc: [135, 180],
+          leftFiringArc: [180, 360]
         }
       ],
       torpedoes: []
