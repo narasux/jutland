@@ -6638,8 +6638,8 @@
     }
   },
   {
-    name: "lion_II",
-    displayName: "狮 II",
+    name: "lion_kai",
+    displayName: "狮（改）",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 52150,
@@ -7396,8 +7396,8 @@
     }
   },
   {
-    name: "sovetsky_soyuz_II",
-    displayName: "苏维埃联盟 II",
+    name: "sovetsky_soyuz_kai",
+    displayName: "苏维埃联盟（改）",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 58200,
@@ -8081,8 +8081,8 @@
     },
   },
   {
-    name: "alaska_II",
-    displayName: "阿拉斯加 II",
+    name: "alaska_kai",
+    displayName: "阿拉斯加（改）",
     type: "cruiser",
     typeAbbr: "CB",
     totalHP: 39800,
@@ -8603,8 +8603,8 @@
     }
   },
   {
-    name: "long_beach_II",
-    displayName: "长滩 II",
+    name: "long_beach_kai",
+    displayName: "长滩（改）",
     type: "cruiser",
     typeAbbr: "CGN",
     totalHP: 12000,

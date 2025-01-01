@@ -414,7 +414,7 @@
           "kongo",
           "fuso",
           "sovetsky_soyuz",
-          "sovetsky_soyuz_II",
+          "sovetsky_soyuz_kai",
           "slava",
           "bismarck",
           "scharnhorst",
@@ -422,7 +422,7 @@
           "hood",
           "nelson",
           "lion",
-          "lion_II",
+          "lion_kai",
           "king_george_v",
           "warspite",
           "tiger",
@@ -435,9 +435,9 @@
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
-          "alaska_II",
+          "alaska_kai",
           "atlanta",
-          "long_beach_II",
+          "long_beach_kai",
           "new_orleans",
           "pensacola",
           "mogami",
@@ -610,7 +610,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "sovetsky_soyuz_II",
+        name: "sovetsky_soyuz_kai",
         pos: [35, 43],
         rotation: 90,
         belongPlayer: "HA"
@@ -658,7 +658,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "lion_II",
+        name: "lion_kai",
         pos: [31, 39],
         rotation: 90,
         belongPlayer: "HA"
@@ -682,7 +682,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "alaska_II",
+        name: "alaska_kai",
         pos: [42, 33],
         rotation: 90,
         belongPlayer: "HA"
@@ -694,7 +694,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "long_beach_II",
+        name: "long_beach_kai",
         pos: [42, 35],
         rotation: 90,
         belongPlayer: "HA"
