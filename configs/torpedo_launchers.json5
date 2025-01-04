@@ -38,6 +38,16 @@
     range: 12,
     bulletSpeed: 45,
   },
+  // 日本海军 4联装 回天鱼雷
+  {
+    name: "JP/Kaiten/4",
+    bulletName: "JP/TB/Kaiten/1943",
+    bulletCount: 4,
+    shotInterval: 3,
+    reloadTime: 300,
+    range: 30,
+    bulletSpeed: 36,
+  },
   // 日本海军 610mm 4联装 酸素鱼雷
   {
     name: "JP/610/4",

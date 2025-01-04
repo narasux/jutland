@@ -731,8 +731,14 @@
         belongPlayer: "HA"
       },
       {
-        name: "nagara",
+        name: "kitakami",
         pos: [42, 41],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagara",
+        pos: [41, 42],
         rotation: 90,
         belongPlayer: "HA"
       },

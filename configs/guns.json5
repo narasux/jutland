@@ -409,6 +409,16 @@
     bulletSpread: 25,
     bulletSpeed: 900
   },
+  // 日本海军 单装 25 毫米机炮
+  {
+    name: "JP/25/60",
+    bulletName: "JP/GB/25/1936",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 5,
+    bulletSpread: 25,
+    bulletSpeed: 900
+  },
   // 日本海军 单装 13 毫米机枪
   {
     name: "JP/13",

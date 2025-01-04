@@ -48,10 +48,11 @@ var (
 )
 
 var (
-	tb450 = ebutil.NewImageWithColor(3, 16, colorx.Silver)
-	tb533 = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
-	tb610 = ebutil.NewImageWithColor(4, 24, colorx.Silver)
-	tb622 = ebutil.NewImageWithColor(4, 25, colorx.Gray)
+	tb450  = ebutil.NewImageWithColor(3, 16, colorx.Silver)
+	tb533  = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
+	tb610  = ebutil.NewImageWithColor(4, 24, colorx.Silver)
+	tb622  = ebutil.NewImageWithColor(4, 25, colorx.Gray)
+	tb1350 = ebutil.NewImageWithColor(5, 52, colorx.DarkSilver)
 )
 
 var NotFount = ebutil.NewImageWithColor(10, 20, colorx.Red)
@@ -147,6 +148,8 @@ func GetTorpedo(diameter int) *ebiten.Image {
 		return tb610
 	case 622:
 		return tb622
+	case 1350:
+		return tb1350
 	}
 	// 找不到就暴露出来
 	return NotFount
