@@ -442,6 +442,7 @@
           "pensacola",
           "mogami",
           "tone",
+          "haguro",
           "ooi",
           "kitakami",
           "nagara",
@@ -725,20 +726,26 @@
         belongPlayer: "HA"
       },
       {
-        name: "ooi",
+        name: "haguro",
         pos: [41, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kitakami",
+        name: "ooi",
         pos: [42, 41],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "nagara",
+        name: "kitakami",
         pos: [41, 42],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagara",
+        pos: [42, 43],
         rotation: 90,
         belongPlayer: "HA"
       },
