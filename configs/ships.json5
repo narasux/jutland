@@ -9096,6 +9096,149 @@
     }
   },
   {
+    name: "ooi",
+    displayName: "大井",
+    type: "cruiser",
+    typeAbbr: "CL",
+    totalHP: 6900,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: -0.5,
+    maxSpeed: 32,
+    acceleration: 0.6,
+    rotateSpeed: 2,
+    length: 162,
+    width: 14,
+    fundsCost: 120,
+    timeCost: 24,
+    description: [
+      "雷击巡洋舰（日）",
+      "主炮：4 座单装 140mm/50",
+      "防空炮：2 座双联装 25mm/60",
+      "鱼雷：10 座四联装直航 610mm",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/140/50",
+          posPercent: 0.73,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "JP/140/50",
+          posPercent: 0.67,
+          rightFiringArc: [60, 150],
+          leftFiringArc: [210, 300]
+        },
+        // 右前主炮 C
+        {
+          name: "JP/140/50",
+          posPercent: 0.47,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左前主炮 C
+        {
+          name: "JP/140/50",
+          posPercent: 0.47,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [270, 360]
+        },
+        // 左高炮 B
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.27,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 右舷鱼雷 A
+        {
+          name: "JP/610/4",
+          posPercent: 0.18,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "JP/610/4",
+          posPercent: 0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 右舷鱼雷 B
+        {
+          name: "JP/610/4",
+          posPercent: 0.03,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          name: "JP/610/4",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 右舷鱼雷 C
+        {
+          name: "JP/610/4",
+          posPercent: -0.15,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 C
+        {
+          name: "JP/610/4",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 右舷鱼雷 D
+        {
+          name: "JP/610/4",
+          posPercent: -0.33,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 D
+        {
+          name: "JP/610/4",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 右舷鱼雷 E
+        {
+          name: "JP/610/4",
+          posPercent: -0.52,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 E
+        {
+          name: "JP/610/4",
+          posPercent: -0.52,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
+  {
     name: "kitakami",
     displayName: "北上",
     type: "cruiser",

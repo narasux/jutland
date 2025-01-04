@@ -284,7 +284,7 @@
         belongPlayer: "CA"
       },
       {
-        name: "kitakami",
+        name: "ooi",
         pos: [107, 48],
         rotation: 270,
         belongPlayer: "CA"
@@ -442,6 +442,7 @@
           "pensacola",
           "mogami",
           "tone",
+          "ooi",
           "kitakami",
           "nagara",
           "prinz_eugen",
@@ -724,7 +725,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "kitakami",
+        name: "ooi",
         pos: [41, 40],
         rotation: 90,
         belongPlayer: "HA"
@@ -976,7 +977,7 @@
         belongPlayer: "CA"
       },
       {
-        name: "kitakami",
+        name: "ooi",
         pos: [107, 48],
         rotation: 270,
         belongPlayer: "CA"
