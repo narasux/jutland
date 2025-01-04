@@ -443,6 +443,7 @@
           "mogami",
           "tone",
           "haguro",
+          "atago",
           "ooi",
           "kitakami",
           "nagara",
@@ -732,20 +733,26 @@
         belongPlayer: "HA"
       },
       {
-        name: "ooi",
+        name: "atago",
         pos: [42, 41],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kitakami",
+        name: "ooi",
         pos: [41, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "nagara",
+        name: "kitakami",
         pos: [42, 43],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagara",
+        pos: [41, 44],
         rotation: 90,
         belongPlayer: "HA"
       },
