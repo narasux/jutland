@@ -447,6 +447,7 @@
           "ooi",
           "kitakami",
           "nagara",
+          "isuzu",
           "prinz_eugen",
           "leipzig",
           "cheshire",
@@ -753,6 +754,12 @@
       {
         name: "nagara",
         pos: [41, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "isuzu",
+        pos: [42, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
