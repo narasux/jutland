@@ -448,6 +448,7 @@
           "kitakami",
           "nagara",
           "isuzu",
+          "abukuma",
           "prinz_eugen",
           "leipzig",
           "cheshire",
@@ -760,6 +761,12 @@
       {
         name: "isuzu",
         pos: [42, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "abukuma",
+        pos: [41, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
