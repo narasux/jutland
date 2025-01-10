@@ -449,6 +449,7 @@
           "nagara",
           "isuzu",
           "abukuma",
+          "yahagi",
           "prinz_eugen",
           "leipzig",
           "cheshire",
@@ -767,6 +768,12 @@
       {
         name: "abukuma",
         pos: [41, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "yahagi",
+        pos: [42, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
