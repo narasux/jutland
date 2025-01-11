@@ -329,6 +329,16 @@
     bulletSpread: 100,
     bulletSpeed: 840
   },
+  // 日本海军 双联装 14.0 厘米 50 倍口径舰炮
+  {
+    name: "JP/140/50/2",
+    bulletName: "JP/GB/140/1914",
+    bulletCount: 2,
+    reloadTime: 3,
+    range: 20,
+    bulletSpread: 80,
+    bulletSpeed: 860
+  },
   // 日本海军 单装 14.0 厘米 50 倍口径舰炮
   {
     name: "JP/140/50",
