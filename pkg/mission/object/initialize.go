@@ -166,5 +166,6 @@ func initShipMap() {
 		s.VerticalDamageReduction = min(1, s.VerticalDamageReduction)
 
 		shipMap[s.Name] = &s
+		allShipNames = append(allShipNames, s.Name)
 	}
 }

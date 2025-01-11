@@ -212,7 +212,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 	// 战舰信息
 	xOffset, yOffset = float64(75), float64(ms.Layout.Height)/3*2
 	text := fmt.Sprintf(
-		"战舰：%s (%d/%d)",
+		"%s (%d/%d)",
 		object.GetShipDisplayName(selectedShipName),
 		rp.CurSelectedShipIndex+1,
 		len(rp.ProvidedShipNames),

@@ -1,16 +1,20 @@
 package game
 
 import (
+	"fmt"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/metadata"
+	"github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
+	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
@@ -117,6 +121,67 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 
 	d.abbrMaps[curMission] = abbrMap
 	return abbrMap
+}
+
+// 绘制战舰图鉴
+func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string) {
+	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
+
+	bgWidth, bgHeight := float64(screenWidth)/8*7, float64(screenHeight)/5*3
+	xOffset, yOffset := (float64(screenWidth)-bgWidth)/2, float64(50)
+
+	opts := d.genDefaultDrawImageOptions()
+	designGraphImg := bgImg.MissionWindowParchment
+	opts.GeoM.Scale(
+		bgWidth/float64(designGraphImg.Bounds().Dx()),
+		bgHeight/float64(designGraphImg.Bounds().Dy()),
+	)
+	opts.GeoM.Translate(xOffset, yOffset)
+	screen.DrawImage(designGraphImg, opts)
+
+	// 设计图添加银色边框
+	vector.StrokeRect(
+		screen, float32(xOffset), float32(yOffset),
+		float32(bgWidth), float32(bgHeight),
+		5, colorx.Silver, false,
+	)
+
+	// 绘制战舰 侧视图 & 俯视图
+	sideImg := shipImg.GetSide(curShipName, 4)
+	sideImgDx, sideImgDy := sideImg.Bounds().Dx(), sideImg.Bounds().Dy()
+
+	topImg := shipImg.GetTop(curShipName, 4)
+	// x, y 互换，因为需要顺时针旋转 90 度
+	topImgDx, topImgDy := topImg.Bounds().Dy(), topImg.Bounds().Dx()
+
+	paddingX := (bgWidth - float64(sideImgDx)) / 7 * 3
+	paddingY := (bgHeight - float64(topImgDy+sideImgDy)) / 3
+
+	opts = d.genDefaultDrawImageOptions()
+	opts.GeoM.Translate(xOffset+paddingX, yOffset+paddingY)
+	screen.DrawImage(sideImg, opts)
+
+	opts = d.genDefaultDrawImageOptions()
+	ebutil.SetOptsCenterRotation(opts, topImg, 90)
+	opts.GeoM.Translate(xOffset+paddingX, yOffset+2*paddingY+float64(sideImgDy))
+	opts.GeoM.Translate(float64(topImgDx-topImgDy)/2, float64(topImgDy-topImgDx)/2)
+	screen.DrawImage(topImg, opts)
+
+	// 战舰信息
+	xOffset, yOffset = xOffset+float64(30), bgHeight+yOffset*2
+	allShipNames := object.GetAllShipNames()
+	textStr := fmt.Sprintf(
+		"%s (%d/%d)",
+		object.GetShipDisplayName(curShipName),
+		lo.IndexOf(allShipNames, curShipName)+1,
+		len(allShipNames),
+	)
+	d.drawText(screen, textStr, xOffset, yOffset, 40, font.Hang, colorx.White)
+
+	yOffset += 70
+	for idx, line := range object.GetShipDesc(curShipName) {
+		d.drawText(screen, line, xOffset, yOffset+float64(idx)*45, 24, font.Hang, colorx.White)
+	}
 }
 
 // 绘制游戏标题

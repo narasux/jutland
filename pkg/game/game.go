@@ -6,9 +6,12 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/mission/manager"
+	"github.com/narasux/jutland/pkg/mission/object"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -31,16 +34,19 @@ type Game struct {
 	curMission string
 	// 任务管理
 	missionMgr *manager.MissionManager
+
+	curShipName string
 }
 
 func New() *Game {
 	g := &Game{
-		mode:       GameModeStart,
-		drawer:     NewDrawer(),
-		player:     audio.NewPlayer(audio.Context),
-		objStates:  nil,
-		curMission: "Alpha",
-		missionMgr: nil,
+		mode:        GameModeStart,
+		drawer:      NewDrawer(),
+		player:      audio.NewPlayer(audio.Context),
+		objStates:   nil,
+		curMission:  "Alpha",
+		missionMgr:  nil,
+		curShipName: "duck",
 	}
 	g.init()
 	return g
@@ -110,8 +116,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, bgImg.MissionFailed)
 		g.drawer.drawMissionResult(screen, "任务失败...", colorx.Red)
 	case GameModeCollection:
-		// TODO 功能待实现
-		return
+		g.drawer.drawBackground(screen, bgImg.MissionWindow)
+		g.drawer.drawCollection(screen, g.curShipName)
 	case GameModeGameSetting:
 		// TODO 功能待实现
 		return
@@ -148,9 +154,7 @@ func (g *Game) init() {
 				FontSize: fontSize,
 				Font:     font.Hang,
 				Color:    colorx.White,
-				// Mode:     GameModeCollection,
-				// TODO 临时调试
-				Mode: GameModeMissionSuccess,
+				Mode:     GameModeCollection,
 			},
 			GameSetting: &menuButton{
 				Text:     "游戏设置",
@@ -159,7 +163,7 @@ func (g *Game) init() {
 				Color:    colorx.White,
 				// Mode:     GameModeGameSetting,
 				// TODO 临时调试
-				Mode: GameModeMissionFailed,
+				Mode: GameModeMissionSuccess,
 			},
 			ExitGame: &menuButton{
 				Text:     "退出游戏",
@@ -216,10 +220,27 @@ func (g *Game) handleMenuSelect() error {
 	return nil
 }
 
-// 游戏图鉴 TODO 功能待实现
+// 游戏图鉴
 func (g *Game) handleGameCollection() error {
-	log.Println("work in progress")
-	return ebiten.Termination
+	// Esc 键返回菜单
+	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		g.mode = GameModeMenuSelect
+	}
+
+	allShipNames := object.GetAllShipNames()
+
+	// 左右方向键选择战舰
+	shipIndex := lo.IndexOf(allShipNames, g.curShipName)
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) {
+		shipIndex--
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) {
+		shipIndex++
+	}
+	shipCount := len(allShipNames)
+	shipIndex = (shipIndex + shipCount) % shipCount
+
+	g.curShipName = allShipNames[shipIndex]
+	return nil
 }
 
 // 游戏设置 TODO 功能待实现

@@ -317,6 +317,8 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos, nearGoal bo
 
 var shipMap = map[string]*BattleShip{}
 
+var allShipNames = []string{}
+
 // NewShip 新建战舰
 func NewShip(
 	uidGenerator *ShipUidGenerator, name string, pos MapPos, rotation float64, player faction.Player,
@@ -329,6 +331,11 @@ func NewShip(
 	// 战舰默认不编组
 	s.GroupID = GroupIDNone
 	return &s
+}
+
+// GetAllShipNames 获取所有战舰名称
+func GetAllShipNames() []string {
+	return allShipNames
 }
 
 // GetShipDisplayName 获取战舰展示用名称
