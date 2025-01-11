@@ -446,7 +446,7 @@
           "atago",
           "ooi",
           "kitakami",
-          "nagara",
+          "shintsu",
           "isuzu",
           "abukuma",
           "yahagi",
@@ -755,7 +755,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "nagara",
+        name: "shintsu",
         pos: [41, 44],
         rotation: 90,
         belongPlayer: "HA"
