@@ -10263,7 +10263,7 @@
     typeAbbr: "CL",
     totalHP: 5595,
     horizontalDamageReduction: 0.1,
-    verticalDamageReduction: -0.5,
+    verticalDamageReduction: 0,
     maxSpeed: 35.3,
     acceleration: 0.6,
     rotateSpeed: 2,
@@ -10420,7 +10420,7 @@
     typeAbbr: "CL",
     totalHP: 6260,
     horizontalDamageReduction: 0.1,
-    verticalDamageReduction: -0.3,
+    verticalDamageReduction: 0,
     maxSpeed: 34.5,
     acceleration: 0.6,
     rotateSpeed: 2,
@@ -10862,7 +10862,7 @@
     typeAbbr: "CL",
     totalHP: 7710,
     horizontalDamageReduction: 0.15,
-    verticalDamageReduction: -0.2,
+    verticalDamageReduction: 0,
     maxSpeed: 35,
     acceleration: 0.6,
     rotateSpeed: 2,
@@ -11180,7 +11180,7 @@
     typeAbbr: "CL",
     totalHP: 4447,
     horizontalDamageReduction: 0.1,
-    verticalDamageReduction: -0.35,
+    verticalDamageReduction: 0,
     maxSpeed: 35.5,
     acceleration: 0.6,
     rotateSpeed: 2.2,
@@ -11295,7 +11295,7 @@
     typeAbbr: "CL",
     totalHP: 4420,
     horizontalDamageReduction: 0.1,
-    verticalDamageReduction: -0.3,
+    verticalDamageReduction: 0,
     maxSpeed: 33,
     acceleration: 0.6,
     rotateSpeed: 2.2,
@@ -11390,7 +11390,7 @@
     typeAbbr: "CL",
     totalHP: 5500,
     horizontalDamageReduction: 0.1,
-    verticalDamageReduction: -0.3,
+    verticalDamageReduction: 0,
     maxSpeed: 36,
     acceleration: 0.6,
     rotateSpeed: 2.2,
@@ -11517,6 +11517,163 @@
           leftFiringArc: [240, 300]
         }
       ]
+    }
+  },
+  {
+    name: "ooyodo",
+    displayName: "大淀",
+    type: "cruiser",
+    typeAbbr: "CL",
+    totalHP: 10990,
+    horizontalDamageReduction: 0.15,
+    verticalDamageReduction: 0.05,
+    maxSpeed: 35,
+    acceleration: 0.5,
+    rotateSpeed: 2,
+    length: 192,
+    width: 17,
+    fundsCost: 86,
+    timeCost: 24,
+    description: [
+      "轻巡洋舰（日）",
+      "主炮：2 座三联装 155mm/60",
+      "高平炮：4 座双联装 100mm/65",
+      "防空炮：12 座三联裝 25mm/60",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/155/60/3",
+          posPercent: 0.55,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "JP/155/60/3",
+          posPercent: 0.45,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+      ],
+      secondaryGuns: [
+        // 右高平两用炮 A
+        {
+          name: "JP/100/65/2/DP",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高平两用炮 A
+        {
+          name: "GER/105/65/2/DP",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高平两用炮 B
+        {
+          name: "GER/105/65/2/DP",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高平两用炮 B
+        {
+          name: "GER/105/65/2/DP",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.44,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 D
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 E
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 F
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 F
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: []
     }
   },
   // 德国海军
