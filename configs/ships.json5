@@ -11288,6 +11288,101 @@
       ]
     }
   },
+  {
+    name: "tenryu",
+    displayName: "天龙",
+    type: "cruiser",
+    typeAbbr: "CL",
+    totalHP: 4420,
+    horizontalDamageReduction: 0.1,
+    verticalDamageReduction: -0.3,
+    maxSpeed: 33,
+    acceleration: 0.6,
+    rotateSpeed: 2.2,
+    length: 142,
+    width: 12,
+    fundsCost: 40,
+    timeCost: 12,
+    description: [
+      "轻巡洋舰（日）",
+      "主炮：4 座单装 140mm/50",
+      "副炮：1 座单装 76mm/40",
+      "防空炮：2 座双联裝 25mm/60",
+      "鱼雷：2 座三联装直航 533mm",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/140/50",
+          posPercent: 0.67,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "JP/140/50",
+          posPercent: 0.44,
+          rightFiringArc: [60, 150],
+          leftFiringArc: [210, 300]
+        },
+        // 后主炮 C
+        {
+          name: "JP/140/50",
+          posPercent: -0.49,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 后主炮 D
+        {
+          name: "JP/140/50",
+          posPercent: -0.63,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        {
+          name: "JP/76/40",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "JP/533/3",
+          posPercent: 0.35,
+          rightFiringArc: [30, 120],
+          leftFiringArc: [240, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "JP/533/3",
+          posPercent: -0.3,
+          rightFiringArc: [60, 150],
+          leftFiringArc: [210, 300]
+        }
+      ]
+    }
+  },
   // 德国海军
   {
     name: "prinz_eugen",
@@ -11435,7 +11530,7 @@
     description: [
       "轻巡洋舰（德）",
       "主炮：3 座三联装 150mm/60",
-      "高平炮：6 座单装 88mm/56",
+      "高平炮：3 座双联装 88mm/56",
       "鱼雷：4 座三联装直航 533mm"
     ],
     weapon: {

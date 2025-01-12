@@ -451,6 +451,7 @@
           "abukuma",
           "yahagi",
           "yubari",
+          "tenryu",
           "prinz_eugen",
           "leipzig",
           "cheshire",
@@ -781,6 +782,12 @@
       {
         name: "yubari",
         pos: [41, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "tenryu",
+        pos: [42, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
