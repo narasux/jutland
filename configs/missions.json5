@@ -723,85 +723,85 @@
       },
       {
         name: "mogami",
-        pos: [41, 38],
+        pos: [42, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "tone",
-        pos: [42, 39],
+        pos: [43, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "haguro",
-        pos: [41, 40],
+        pos: [42, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "atago",
-        pos: [42, 41],
+        pos: [43, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "ooi",
-        pos: [41, 42],
+        pos: [40, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "kitakami",
-        pos: [42, 43],
+        pos: [41, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "shintsu",
-        pos: [41, 44],
+        pos: [40, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "isuzu",
-        pos: [42, 45],
+        pos: [41, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "abukuma",
-        pos: [41, 46],
+        pos: [38, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "yahagi",
-        pos: [42, 47],
+        pos: [39, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "yubari",
-        pos: [41, 48],
+        pos: [38, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "tenryu",
-        pos: [42, 49],
+        pos: [39, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "kuma",
-        pos: [41, 50],
+        pos: [36, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "ooyodo",
-        pos: [42, 51],
+        pos: [37, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
