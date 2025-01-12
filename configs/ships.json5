@@ -11383,6 +11383,142 @@
       ]
     }
   },
+  {
+    name: "kuma",
+    displayName: "球磨",
+    type: "cruiser",
+    typeAbbr: "CL",
+    totalHP: 5500,
+    horizontalDamageReduction: 0.1,
+    verticalDamageReduction: -0.3,
+    maxSpeed: 36,
+    acceleration: 0.6,
+    rotateSpeed: 2.2,
+    length: 162,
+    width: 14,
+    fundsCost: 52,
+    timeCost: 14,
+    description: [
+      "轻巡洋舰（日）",
+      "主炮：7 座单装 140mm/50",
+      "防空炮：2 座双联裝 25mm/60",
+      "鱼雷：2 座三联装直航 533mm",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/140/50",
+          posPercent: 0.75,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "JP/140/50",
+          posPercent: 0.68,
+          rightFiringArc: [60, 150],
+          leftFiringArc: [210, 300]
+        },
+        // 右前主炮 C
+        {
+          name: "JP/140/50",
+          posPercent: 0.48,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左前主炮 C
+        {
+          name: "JP/140/50",
+          posPercent: 0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 D
+        {
+          name: "JP/140/50",
+          posPercent: 0.33,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 E
+        {
+          name: "JP/140/50",
+          posPercent: -0.53,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 后主炮 F
+        {
+          name: "JP/140/50",
+          posPercent: -0.7,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "JP/25/60/2",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 B
+        {
+          name: "JP/25/60/2",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 右舷鱼雷 A
+        {
+          name: "JP/533/2",
+          posPercent: 0.35,
+          rightFiringArc: [60, 120],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "JP/533/2",
+          posPercent: 0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [240, 300]
+        },
+        // 右舷鱼雷 B
+        {
+          name: "JP/533/2",
+          posPercent: -0.25,
+          rightFiringArc: [60, 120],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          name: "JP/533/2",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [240, 300]
+        }
+      ]
+    }
+  },
   // 德国海军
   {
     name: "prinz_eugen",

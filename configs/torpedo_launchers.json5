@@ -88,6 +88,16 @@
     range: 17,
     bulletSpeed: 45,
   },
+  // 日本海军 533mm 2联装鱼雷
+  {
+    name: "JP/533/2",
+    bulletName: "JP/TB/533/1921",
+    bulletCount: 2,
+    shotInterval: 1,
+    reloadTime: 19,
+    range: 17,
+    bulletSpeed: 45,
+  },
   // 日本海军 450mm 单装鱼雷
   {
     name: "JP/450/1",
