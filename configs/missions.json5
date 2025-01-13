@@ -505,7 +505,8 @@
         maxOncomingShip: 5,
         providedShipNames: [
           "kongo",
-          "mogami",
+          "haguro",
+          "kitakami",
           "asashio",
         ],
       },
@@ -516,7 +517,9 @@
         belongPlayer: "CA",
         maxOncomingShip: 5,
         providedShipNames: [
-          "mogami",
+          "fuso",
+          "haguro",
+          "atago",
           "asashio",
           "yugumo",
         ],
@@ -992,7 +995,7 @@
         belongPlayer: "CA"
       },
       {
-        name: "mogami",
+        name: "haguro",
         pos: [76, 58],
         rotation: 0,
         belongPlayer: "CA"
@@ -1022,13 +1025,13 @@
         belongPlayer: "CA"
       },
       {
-        name: "mogami",
+        name: "atago",
         pos: [101, 45],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
-        name: "mogami",
+        name: "haguro",
         pos: [102, 43],
         rotation: 270,
         belongPlayer: "CA"
