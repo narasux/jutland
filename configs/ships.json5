@@ -7189,8 +7189,8 @@
   },
   // 苏联海军
   {
-    name: "sovetsky_soyuz",
-    displayName: "苏维埃联盟",
+    name: "soviet_union",
+    displayName: "苏联",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 67370,
@@ -7396,8 +7396,8 @@
     }
   },
   {
-    name: "sovetsky_soyuz_kai",
-    displayName: "苏维埃联盟（改）",
+    name: "soviet_union_nelsonski",
+    displayName: "苏联（纳尔逊型）",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 58200,
@@ -7577,6 +7577,367 @@
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
+      ],
+      torpedoes: []
+    }
+  },
+  {
+    name: "kremlin",
+    displayName: "克里姆林",
+    type: "battleship",
+    typeAbbr: "BB",
+    totalHP: 81150,
+    horizontalDamageReduction: 0.6,
+    verticalDamageReduction: 0.35,
+    maxSpeed: 30,
+    acceleration: 0.3,
+    rotateSpeed: 0.85,
+    length: 282,
+    width: 40,
+    fundsCost: 850,
+    timeCost: 88,
+    description: [
+      "战列舰（苏）",
+      "主炮：3 座三联装 406mm/50",
+      "副炮：12 座双联装 130mm/60",
+      "防空炮：14 座四联装 45mm/78",
+      "防空炮：18 座四联装 25mm/65",
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "SU/406/50/3",
+          posPercent: 0.45,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 前主炮 B
+        {
+          name: "SU/406/50/3",
+          posPercent: 0.3,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 后主炮 C
+        {
+          name: "SU/406/50/3",
+          posPercent: -0.55,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        }
+      ],
+      secondaryGuns: [
+        // 前副炮 A
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.2,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 330]
+        },
+        // 前副炮 B
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.14,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 330]
+        },
+        // 右前副炮 C
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副炮 C
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前副炮 D
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副炮 D
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后副炮 E
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后副炮 E
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后副炮 F
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后副炮 F
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后副炮 G
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.39,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后副炮 H
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.45,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右前高炮 A
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 A
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 B
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 B
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 C
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 C
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 D
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 D
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 E
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 E
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 F
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 F
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 G
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.95,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左前高炮 G
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.95,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 A
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.68,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [225, 360]
+        },
+        // 左前高炮 A
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.68,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 B
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.19,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 B
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.19,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 C
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 C
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 D
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 D
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 E
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 E
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 F
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 F
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 G
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 G
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 H
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.72,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左前高炮 H
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.72,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高炮 I
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左前高炮 I
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ],
       torpedoes: []
     }

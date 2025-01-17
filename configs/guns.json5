@@ -789,6 +789,16 @@
     bulletSpread: 100,
     bulletSpeed: 950
   },
+  // 苏联海军 SU/130/60 双联装舰炮
+  {
+    name: "SU/130/60/2",
+    bulletName: "SU/GB/130/1935",
+    bulletCount: 2,
+    reloadTime: 2,
+    range: 30,
+    bulletSpread: 80,
+    bulletSpeed: 980
+  },
   // 苏联海军 SU/130/58 双联装舰炮
   {
     name: "SU/130/58/2",
@@ -841,6 +851,16 @@
   },
   // 苏联海军 SU/37/57/4 四联装高炮
   {
+    name: "SU/45/78/4",
+    bulletName: "SU/GB/45/1945",
+    bulletCount: 4,
+    reloadTime: 0.7,
+    range: 12,
+    bulletSpread: 25,
+    bulletSpeed: 1200
+  },
+  // 苏联海军 SU/37/57/4 四联装高炮
+  {
     name: "SU/37/57/4",
     bulletName: "SU/GB/37/1946",
     bulletCount: 4,
@@ -858,6 +878,16 @@
     range: 6,
     bulletSpread: 20,
     bulletSpeed: 820
+  },
+  // 苏联海军 SU/25/65/4 四联装高炮
+  {
+    name: "SU/25/65/4",
+    bulletName: "SU/GB/25/1940",
+    bulletCount: 4,
+    reloadTime: 0.2,
+    range: 5,
+    bulletSpread: 30,
+    bulletSpeed: 950
   },
   // 苏联海军 SU/25/65/2 双联装高炮
   {

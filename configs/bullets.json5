@@ -398,8 +398,15 @@
   {
     name: "SU/GB/57/1945",
     type: "shell",
-    diameter: 100,
+    diameter: 57,
     damage: 14,
+    criticalRate: 0.001
+  },
+  {
+    name: "SU/GB/45/1945",
+    type: "shell",
+    diameter: 45,
+    damage: 8,
     criticalRate: 0.001
   },
   {

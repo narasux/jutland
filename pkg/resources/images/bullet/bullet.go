@@ -37,6 +37,7 @@ var (
 	gb88   = ebutil.NewImageWithColor(2, 2, colorx.Gold)
 	gb76   = ebutil.NewImageWithColor(2, 2, colorx.White)
 	gb57   = ebutil.NewImageWithColor(1, 2, colorx.Yellow)
+	gb45   = ebutil.NewImageWithColor(1, 1, colorx.Yellow)
 	gb40   = ebutil.NewImageWithColor(1, 1, colorx.Gold)
 	gb37   = ebutil.NewImageWithColor(1, 1, colorx.DarkBlue)
 	gb25   = ebutil.NewImageWithColor(1, 1, colorx.Gold)
@@ -118,6 +119,8 @@ func GetShell(diameter int) *ebiten.Image {
 		return gb76
 	case 57:
 		return gb57
+	case 45:
+		return gb45
 	case 40:
 		return gb40
 	case 37:
