@@ -445,6 +445,7 @@
           "tone",
           "haguro",
           "atago",
+          "furutaka",
           "ooi",
           "kitakami",
           "shintsu",
@@ -762,62 +763,74 @@
         belongPlayer: "HA"
       },
       {
-        name: "ooi",
+        name: "furutaka",
         pos: [41, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kitakami",
+        name: "furutaka",
         pos: [40, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "shintsu",
+        name: "ooi",
         pos: [41, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "isuzu",
+        name: "kitakami",
         pos: [38, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "abukuma",
+        name: "shintsu",
         pos: [39, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yahagi",
+        name: "isuzu",
         pos: [38, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yubari",
+        name: "abukuma",
         pos: [39, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "tenryu",
+        name: "yahagi",
         pos: [36, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kuma",
+        name: "yubari",
         pos: [37, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "ooyodo",
+        name: "tenryu",
         pos: [36, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kuma",
+        pos: [37, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "ooyodo",
+        pos: [35, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
