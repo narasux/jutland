@@ -441,21 +441,22 @@
           "long_beach_kai",
           "new_orleans",
           "pensacola",
-          "mogami",
-          "tone",
-          "haguro",
-          "atago",
           "furutaka",
           "aoba",
-          "ooi",
-          "kitakami",
-          "shintsu",
-          "isuzu",
-          "abukuma",
-          "yahagi",
-          "yubari",
+          "haguro",
+          "atago",
+          "mogami",
+          "suzuya",
+          "tone",
           "tenryu",
           "kuma",
+          "kitakami",
+          "ooi",
+          "isuzu",
+          "shintsu",
+          "abukuma",
+          "yubari",
+          "yahagi",
           "ooyodo",
           "prinz_eugen",
           "leipzig",
@@ -734,97 +735,97 @@
         belongPlayer: "HA"
       },
       {
-        name: "mogami",
+        name: "furutaka",
         pos: [42, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "suzuya",
+        name: "aoba",
         pos: [43, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "tone",
+        name: "haguro",
         pos: [42, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "haguro",
+        name: "atago",
         pos: [43, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "atago",
+        name: "mogami",
         pos: [40, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "furutaka",
+        name: "suzuya",
         pos: [41, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "aoba",
+        name: "tone",
         pos: [40, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "ooi",
+        name: "tenryu",
         pos: [41, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kitakami",
+        name: "kuma",
         pos: [38, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "shintsu",
+        name: "kitakami",
         pos: [39, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "isuzu",
+        name: "ooi",
         pos: [38, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "abukuma",
+        name: "isuzu",
         pos: [39, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yahagi",
+        name: "abukuma",
         pos: [36, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yubari",
+        name: "shintsu",
         pos: [37, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "tenryu",
+        name: "yubari",
         pos: [36, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kuma",
+        name: "yahagi",
         pos: [37, 51],
         rotation: 90,
         belongPlayer: "HA"
