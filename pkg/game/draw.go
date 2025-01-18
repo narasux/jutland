@@ -168,7 +168,7 @@ func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string) {
 	screen.DrawImage(topImg, opts)
 
 	// 战舰信息
-	xOffset, yOffset = xOffset+float64(30), bgHeight+yOffset*2
+	xOffset, yOffset = xOffset+30, bgHeight+50*2
 	allShipNames := object.GetAllShipNames()
 	textStr := fmt.Sprintf(
 		"%s (%d/%d)",
@@ -181,6 +181,31 @@ func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string) {
 	yOffset += 70
 	for idx, line := range object.GetShipDesc(curShipName) {
 		d.drawText(screen, line, xOffset, yOffset+float64(idx)*45, 24, font.Hang, colorx.White)
+	}
+
+	// 如果战舰已经有引用信息，则展示
+	if ref := object.GetReference(curShipName); ref != nil {
+		// 战舰描述
+		xOffset, yOffset = float64(screenWidth/3)+100, bgHeight+45*3
+
+		for _, line := range ref.Description {
+			d.drawText(screen, line, xOffset, yOffset, 24, font.Hang, colorx.White)
+			yOffset += 45
+		}
+
+		// 引用信息
+		xOffset, yOffset = float64(screenWidth/3*2)+200, bgHeight+45*3
+		author := fmt.Sprintf("素材原作者：%s", ref.Author)
+		d.drawText(screen, author, xOffset, yOffset, 24, font.Hang, colorx.White)
+		yOffset += 70
+
+		d.drawText(screen, "参考资料：", xOffset, yOffset, 24, font.Hang, colorx.White)
+		for idx, link := range ref.Links {
+			yOffset += 45
+			// TODO 支持点击跳转浏览器
+			textStr = fmt.Sprintf("[%d] %s", idx+1, link.Name)
+			d.drawText(screen, textStr, xOffset, yOffset, 24, font.Hang, colorx.White)
+		}
 	}
 }
 

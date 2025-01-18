@@ -9554,7 +9554,7 @@
     rotateSpeed: 1.6,
     length: 206,
     width: 22,
-    fundsCost: 145,
+    fundsCost: 150,
     timeCost: 16,
     description: [
       "重巡洋舰（日）",
@@ -9846,7 +9846,7 @@
     rotateSpeed: 1.6,
     length: 204,
     width: 22,
-    fundsCost: 140,
+    fundsCost: 160,
     timeCost: 16,
     description: [
       "重巡洋舰（日）",

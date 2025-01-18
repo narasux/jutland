@@ -18,6 +18,7 @@ func init() {
 	initGunMap()
 	initTorpedoLauncherMap()
 	initShipMap()
+	initReferenceMap()
 }
 
 func initBulletMap() {
@@ -167,5 +168,25 @@ func initShipMap() {
 
 		shipMap[s.Name] = &s
 		allShipNames = append(allShipNames, s.Name)
+	}
+}
+
+func initReferenceMap() {
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "references.json5"))
+	if err != nil {
+		log.Fatal("failed to open references.json5: ", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var references []Reference
+	err = json5.Unmarshal(bytes, &references)
+	if err != nil {
+		log.Fatal("failed to unmarshal references.json5: ", err)
+	}
+
+	for _, ref := range references {
+		referencesMap[ref.Name] = &ref
 	}
 }
