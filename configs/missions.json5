@@ -446,6 +446,7 @@
           "haguro",
           "atago",
           "furutaka",
+          "aoba",
           "ooi",
           "kitakami",
           "shintsu",
@@ -769,7 +770,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "furutaka",
+        name: "aoba",
         pos: [40, 50],
         rotation: 90,
         belongPlayer: "HA"
