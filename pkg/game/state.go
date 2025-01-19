@@ -11,6 +11,7 @@ import (
 type objStates struct {
 	MenuButton       *menuButtonStates
 	LoadingInterface *loadingInterface
+	RefLinks         []*refLink
 }
 
 type menuButtonStates struct {
@@ -62,4 +63,24 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 // 任务加载界面
 type loadingInterface struct {
 	Ready bool
+}
+
+// 引用链接
+type refLink struct {
+	// 链接文本
+	Text string
+	// 链接地址
+	URL string
+	// top-left 位置
+	PosX float64
+	PosY float64
+	// 文本尺寸
+	FontSize float64
+	// 文本字体
+	Font *text.GoTextFaceSource
+	// 文本颜色
+	Color color.Color
+	// 渲染出的按钮尺寸
+	Width  float64
+	Height float64
 }

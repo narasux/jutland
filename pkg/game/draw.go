@@ -124,7 +124,7 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 }
 
 // 绘制战舰图鉴
-func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string) {
+func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string, refLinks []*refLink) {
 	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
 
 	bgWidth, bgHeight := float64(screenWidth)/8*7, float64(screenHeight)/5*3
@@ -200,11 +200,8 @@ func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string) {
 		yOffset += 70
 
 		d.drawText(screen, "参考资料：", xOffset, yOffset, 24, font.Hang, colorx.White)
-		for idx, link := range ref.Links {
-			yOffset += 45
-			// TODO 支持点击跳转浏览器
-			textStr = fmt.Sprintf("[%d] %s", idx+1, link.Name)
-			d.drawText(screen, textStr, xOffset, yOffset, 24, font.Hang, colorx.White)
+		for _, link := range refLinks {
+			d.drawText(screen, link.Text, link.PosX, link.PosY, link.FontSize, link.Font, link.Color)
 		}
 	}
 }

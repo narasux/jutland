@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/pkg/browser"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
@@ -16,6 +17,7 @@ import (
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 	"github.com/narasux/jutland/pkg/utils/colorx"
+	"github.com/narasux/jutland/pkg/utils/layout"
 	"github.com/narasux/jutland/pkg/version"
 )
 
@@ -117,7 +119,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawMissionResult(screen, "任务失败...", colorx.Red)
 	case GameModeCollection:
 		g.drawer.drawBackground(screen, bgImg.MissionWindow)
-		g.drawer.drawCollection(screen, g.curShipName)
+		g.drawer.drawCollection(screen, g.curShipName, g.objStates.RefLinks)
 	case GameModeGameSetting:
 		// TODO 功能待实现
 		return
@@ -226,20 +228,54 @@ func (g *Game) handleGameCollection() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		g.mode = GameModeMenuSelect
 	}
+	// TODO 大海战 2 军港 BGM ？
 
 	allShipNames := object.GetAllShipNames()
 
 	// 左右方向键选择战舰
 	shipIndex := lo.IndexOf(allShipNames, g.curShipName)
-	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) {
+	_, wheelY := ebiten.Wheel()
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) ||
+		inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) ||
+		wheelY > 0 {
 		shipIndex--
-	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) {
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) ||
+		inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) ||
+		wheelY < 0 {
 		shipIndex++
 	}
 	shipCount := len(allShipNames)
 	shipIndex = (shipIndex + shipCount) % shipCount
 
 	g.curShipName = allShipNames[shipIndex]
+	g.objStates.RefLinks = nil
+
+	if ref := object.GetReference(g.curShipName); ref != nil {
+		misLayout := layout.NewScreenLayout()
+		xOffset, yOffset := float64(misLayout.Width/3*2)+200, float64(misLayout.Height/5*3)+250
+
+		// 生成跳转链接点击区域
+		for idx, link := range ref.Links {
+			g.objStates.RefLinks = append(g.objStates.RefLinks, &refLink{
+				fmt.Sprintf("[%d] %s", idx+1, link.Name), link.URL,
+				xOffset, yOffset + float64(idx*45),
+				24, font.Hang, colorx.White,
+				float64(len(link.Name)) * 12, 30,
+			})
+		}
+
+		for _, link := range g.objStates.RefLinks {
+			if isHoverRefLink(link) {
+				link.Color = colorx.SkyBlue
+				// 左键点击按钮：浏览器打开链接
+				if isMouseButtonLeftJustPressed() {
+					_ = browser.OpenURL(link.URL)
+				}
+			} else {
+				link.Color = colorx.White
+			}
+		}
+	}
 	return nil
 }
 

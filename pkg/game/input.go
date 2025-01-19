@@ -24,6 +24,15 @@ func isHoverMenuButton(button *menuButton) bool {
 	return image.Pt(ebiten.CursorPosition()).In(r)
 }
 
+// isHoverRefLink 判定鼠标是否在引用链接上
+func isHoverRefLink(link *refLink) bool {
+	r := image.Rectangle{
+		Min: image.Point{X: int(link.PosX), Y: int(link.PosY)},
+		Max: image.Point{X: int(link.PosX + link.Width), Y: int(link.PosY + link.Height)},
+	}
+	return image.Pt(ebiten.CursorPosition()).In(r)
+}
+
 // 判定是否按下空格键
 func isKeySpaceJustPressed() bool {
 	return inpututil.IsKeyJustPressed(ebiten.KeySpace)
