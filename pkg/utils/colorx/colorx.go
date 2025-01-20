@@ -1,6 +1,9 @@
 package colorx
 
-import "image/color"
+import (
+	"image/color"
+	"strings"
+)
 
 var (
 	// Red 红色
@@ -44,3 +47,36 @@ var (
 	// DarkSilver 暗银
 	DarkSilver = color.RGBA{105, 105, 105, 255}
 )
+
+var clrMap = map[string]color.Color{
+	"red":        Red,
+	"darkred":    DarkRed,
+	"green":      Green,
+	"blue":       Blue,
+	"skyblue":    SkyBlue,
+	"darkblue":   DarkBlue,
+	"yellow":     Yellow,
+	"black":      Black,
+	"white":      White,
+	"gray":       Gray,
+	"cyan":       Cyan,
+	"magenta":    Magenta,
+	"orange":     Orange,
+	"brown":      Brown,
+	"pink":       Pink,
+	"purple":     Purple,
+	"violet":     Violet,
+	"gold":       Gold,
+	"silver":     Silver,
+	"darksilver": DarkSilver,
+}
+
+// GetColorByName 根据名称获取颜色
+func GetColorByName(clr string) color.Color {
+	// 替换空格
+	clr = strings.ReplaceAll(clr, " ", "")
+	// 转换为小写
+	clr = strings.ToLower(clr)
+
+	return clrMap[clr]
+}

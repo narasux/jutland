@@ -76,7 +76,7 @@ func NewTerminal() *Terminal {
 		LineSpacing:   terminalLineSpacing,
 		FontSize:      terminalFontSize,
 		Font:          font.OpenSansItalic,
-		Color:         colorx.Green,
+		Color:         colorx.Gold,
 	}
 }
 
@@ -95,18 +95,21 @@ func (t *Terminal) Update(misState *state.MissionState) {
 		switch k {
 		case ebiten.KeyEnter:
 			cmd := t.Input.String()
-			// 记录历史 & 缓冲区
-			t.History = append(t.History, cmd)
+			// 填充缓冲区
 			t.Buffer = append(t.Buffer, Line{Text: cmd, Type: LineTypeInput})
-			// 执行命令
-			t.execCommand(misState, cmd)
-			// 清理过长的缓冲区
-			if len(t.Buffer) > t.ReservedLines {
-				t.Buffer = t.Buffer[len(t.Buffer)-t.ReservedLines:]
+			// 如果命令不为空，则执行 & 记录历史
+			if cmd != "" {
+				t.History = append(t.History, cmd)
+				// 执行命令
+				t.execCommand(misState, cmd)
+				// 清理过长的缓冲区
+				if len(t.Buffer) > t.ReservedLines {
+					t.Buffer = t.Buffer[len(t.Buffer)-t.ReservedLines:]
+				}
+				// 重置输入行
+				t.Input.Reset()
+				t.HistoryIndex = 0
 			}
-			// 重置输入行
-			t.Input.Reset()
-			t.HistoryIndex = 0
 		case ebiten.KeyBackspace:
 			if t.Input.Len() > 0 {
 				str := t.Input.String()
@@ -163,6 +166,13 @@ func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
 		}
 		return
 	default:
+		// TODO 适当封装，提供前缀匹配的方法，不要直接 HasPrefix
+		// 修改终端颜色
+		if strings.HasPrefix(cmd, ":set color") {
+			t.setColorByCmd(cmd)
+			return
+		}
+		// 其他情况下才进行匹配
 		for _, c := range cheat.Cheats {
 			if c.Match(cmd) {
 				log := c.Exec(misState)
@@ -175,4 +185,14 @@ func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
 	t.Buffer = append(
 		t.Buffer, Line{Text: fmt.Sprintf("Command `%s` Not Effect", cmd), Type: LineTypeOutput},
 	)
+}
+
+func (t *Terminal) setColorByCmd(cmd string) {
+	clrName := strings.ReplaceAll(cmd, ":set color", "")
+
+	if clr := colorx.GetColorByName(clrName); clr != nil {
+		t.Color = clr
+	} else {
+		t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("Color `%s` Not Found", clrName), Type: LineTypeOutput})
+	}
 }
