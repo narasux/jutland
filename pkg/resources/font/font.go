@@ -20,6 +20,12 @@ var (
 
 	// OpenSansItalic OpenSans 斜体
 	OpenSansItalic *text.GoTextFaceSource
+
+	// JetbrainsMono Mono 字体
+	JetbrainsMono *text.GoTextFaceSource
+
+	// JetbrainsMonoItalic Mono 斜体
+	JetbrainsMonoItalic *text.GoTextFaceSource
 )
 
 var fontStrMap map[*text.GoTextFaceSource]string
@@ -54,8 +60,23 @@ func init() {
 		log.Fatalf("missing %s: %s", fontPath, err)
 	}
 
+	fontPath = "/jetbrains_mono.ttf"
+	if JetbrainsMono, err = loader.LoadFont(fontPath); err != nil {
+		log.Fatalf("missing %s: %s", fontPath, err)
+	}
+
+	fontPath = "/jetbrains_mono_italic.ttf"
+	if JetbrainsMonoItalic, err = loader.LoadFont(fontPath); err != nil {
+		log.Fatalf("missing %s: %s", fontPath, err)
+	}
+
 	fontStrMap = map[*text.GoTextFaceSource]string{
-		Hang: "hang", Kai: "kai", OpenSans: "open_sans", OpenSansItalic: "open_sans_italic",
+		Hang:                "hang",
+		Kai:                 "kai",
+		OpenSans:            "open_sans",
+		OpenSansItalic:      "open_sans_italic",
+		JetbrainsMono:       "jetbrains_mono",
+		JetbrainsMonoItalic: "jetbrains_mono_italic",
 	}
 
 	log.Println("font resources loaded")

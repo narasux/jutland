@@ -30,8 +30,8 @@ const inputPrefix = ">>> "
 type LineType int
 
 const (
-	LineTypeInput LineType = iota
-	LineTypeOutput
+	LineTypeOutput LineType = iota
+	LineTypeInput
 )
 
 // 缓冲区行
@@ -75,8 +75,9 @@ func NewTerminal() *Terminal {
 		ReservedLines: misLayout.Height / (terminalLineSpacing + terminalFontSize) / 5 * 4,
 		LineSpacing:   terminalLineSpacing,
 		FontSize:      terminalFontSize,
-		Font:          font.OpenSansItalic,
+		Font:          font.JetbrainsMono,
 		Color:         colorx.Gold,
+		Buffer:        []Line{{Text: "Welcome to use Jutland terminal! Type `help` to get started."}},
 	}
 }
 
@@ -154,45 +155,83 @@ func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
 	switch cmd {
 	case ":q", ":wq", "exit", "quit":
 		misState.MissionStatus = state.MissionRunning
-		return
+		fallthrough
 	case "clear":
 		t.Buffer = t.Buffer[:0]
-		return
 	case "help":
-		for _, c := range cheat.Cheats {
-			t.Buffer = append(
-				t.Buffer, Line{Text: fmt.Sprintf("%s: %s", c.String(), c.Desc()), Type: LineTypeOutput},
-			)
-		}
-		return
+		t.showHelpText()
 	default:
 		// TODO 适当封装，提供前缀匹配的方法，不要直接 HasPrefix
-		// 修改终端颜色
 		if strings.HasPrefix(cmd, ":set color") {
+			// 修改终端颜色
 			t.setColorByCmd(cmd)
-			return
-		}
-		// 其他情况下才进行匹配
-		for _, c := range cheat.Cheats {
-			if c.Match(cmd) {
-				log := c.Exec(misState)
-				t.Buffer = append(t.Buffer, Line{Text: log, Type: LineTypeOutput})
-				return
+		} else if strings.HasPrefix(cmd, ":set font") {
+			// 修改终端字体
+			t.setFontByCmd(cmd)
+		} else {
+			match := false
+			// 其他情况下才进行匹配
+			for _, c := range cheat.Cheats {
+				if c.Match(cmd) {
+					t.Buffer = append(t.Buffer, Line{Text: c.Exec(misState), Type: LineTypeOutput})
+					match = true
+					break
+				}
 			}
+			// 无效的命令
+			if !match {
+				t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("command not found: %s", cmd)})
+			}
+			// 添加空行
+			t.Buffer = append(t.Buffer, Line{Text: ""})
 		}
 	}
-	// 还没有被执行的命令认为是无效的
-	t.Buffer = append(
-		t.Buffer, Line{Text: fmt.Sprintf("Command `%s` Not Effect", cmd), Type: LineTypeOutput},
-	)
 }
 
+// 输出终端提示
+func (t *Terminal) showHelpText() {
+	tips := []string{
+		"clear  -->  clear terminal buffer",
+		":set font <type>  -->  change terminal font, suggestion: [regular, italic]",
+		":set color <name>  -->  change terminal color, suggestion: [gold, cyan, yellow, skyblue, pink, silver]",
+		":q | :wq | quit | exit  -->  exit terminal",
+	}
+
+	t.Buffer = append(t.Buffer, Line{Text: ""}, Line{Text: "Commands:"})
+	for _, line := range tips {
+		t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("• %s", line)})
+	}
+
+	t.Buffer = append(t.Buffer, Line{Text: ""}, Line{Text: "Game Cheats:"})
+	for _, c := range cheat.Cheats {
+		t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("• %s  -->  %s", c.String(), c.Desc())})
+	}
+	t.Buffer = append(t.Buffer, Line{Text: ""})
+}
+
+// 修改终端字体颜色
 func (t *Terminal) setColorByCmd(cmd string) {
 	clrName := strings.ReplaceAll(cmd, ":set color", "")
 
 	if clr := colorx.GetColorByName(clrName); clr != nil {
 		t.Color = clr
 	} else {
-		t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("Color `%s` Not Found", clrName), Type: LineTypeOutput})
+		t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("color not found: %s", clrName)})
+	}
+}
+
+// 修改终端字体
+func (t *Terminal) setFontByCmd(cmd string) {
+	fontType := strings.ToLower(
+		strings.Trim(strings.ReplaceAll(cmd, ":set font", ""), " "),
+	)
+
+	switch fontType {
+	case "regular":
+		t.Font = font.JetbrainsMono
+	case "italic":
+		t.Font = font.JetbrainsMonoItalic
+	default:
+		t.Font = font.JetbrainsMono
 	}
 }
