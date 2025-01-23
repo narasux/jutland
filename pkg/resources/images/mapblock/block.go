@@ -90,7 +90,7 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 	// 丢弃上一个关卡的地图贴图数据
 	c.data = map[string]*ebiten.Image{}
 
-	imgPath := fmt.Sprintf("/map/scenes/%s.png", cfg.Name)
+	imgPath := fmt.Sprintf("/map/abbrs/%s.png", cfg.Name)
 	imgData, err := os.ReadFile(config.ImgResBaseDir + imgPath)
 	if err != nil {
 		return err
@@ -104,10 +104,9 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 		return errors.New("mission map image isn't image.NRGBA type")
 	}
 
-	blockSize := constants.MapBlockSize
-	w, h := (missionImg.Bounds().Dx()+2)/blockSize, (missionImg.Bounds().Dy()+2)/blockSize
-	for x := 0; x < w; x++ {
-		for y := 0; y < h; y++ {
+	blockSize := missionImg.Bounds().Dx() / cfg.Width
+	for x := 0; x < cfg.Width; x++ {
+		for y := 0; y < cfg.Height; y++ {
 			// 纯海洋（不含浅滩）不需要贴图，可以跳过
 			chr := cfg.Map.Get(x, y)
 			if chr == mapcfg.ChrSea || chr == mapcfg.ChrDeepSea {
@@ -115,7 +114,17 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 			}
 			topLeftX, topLeftY := x*blockSize, y*blockSize
 			cropRect := image.Rect(topLeftX, topLeftY, topLeftX+blockSize, topLeftY+blockSize)
-			c.data[c.genKey(x, y)] = ebiten.NewImageFromImage(missionImg.SubImage(cropRect))
+			subImg := missionImg.SubImage(cropRect)
+			// 计算缩放比例
+			scaleX := float64(constants.MapBlockSize) / float64(blockSize)
+			scaleY := float64(constants.MapBlockSize) / float64(blockSize)
+			// 生成地图块
+			blockImg := ebiten.NewImage(constants.MapBlockSize, constants.MapBlockSize)
+			opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterNearest}
+			opts.GeoM.Scale(scaleX, scaleY)
+			blockImg.DrawImage(ebiten.NewImageFromImage(subImg), opts)
+
+			c.data[c.genKey(x, y)] = blockImg
 		}
 	}
 	log.Printf("mission %s map scene blocks loaded, total size: %d\n", cfg.Name, len(c.data))
