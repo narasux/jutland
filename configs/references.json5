@@ -66,13 +66,76 @@
     ]
   },
   {
+    name: "yorktown",
+    description: [
+      "约克城号（CV-5）是美国海军约克城级航空母舰的首舰。",
+      "其于 1937 年服役，约克城号 1942 年 5 月在珊瑚海",
+      "海战中受到重创，但在 72 小时的快速维修后赶及参与 6 月初",
+      "的中途岛海战，并与企业号联手击溃日本的航母部队，扭转",
+      "战争局势，但其也在该海战再次受到重创，其最终倾覆沉没。"
+    ],
+    author: "midnike",
+    links: [
+      {
+        name: "Midnike: USN YORKTOWN",
+        url: "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-YORKTOWN-CV-5-563330656"
+      },
+      {
+        name: "维基百科 - 约克城号",
+        url: "https://zh.wikipedia.org/wiki/%E7%B4%84%E5%85%8B%E9%8E%AE%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6_(CV-5)"
+      }
+    ]
+  },
+  {
+    name: "saratoga",
+    description: [
+      "萨拉托加号（CV-3）美国海军列克星敦航空母舰级的二号舰。",
+      "原计划中其为战列巡洋舰，但受《华盛顿海军条约》所限，",
+      "而改为重型航空母舰。该舰是美国海军少数在二战之前",
+      "就已造好，最后安然度过战火的航空母舰之一。战后由于参与",
+      "比基尼环礁的 “十字路口” 核武器试验，被原子弹破坏并沉没。"
+    ],
+    author: "midnike",
+    links: [
+      {
+        name: "Midnike: USN LEXINGTON",
+        url: "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-LEXINGTON-CV-2-563330163"
+      },
+      {
+        name: "维基百科 - 萨拉托加号",
+        url: "https://zh.wikipedia.org/wiki/%E8%96%A9%E6%8B%89%E6%89%98%E5%8A%A0%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6_(CV-3)"
+      }
+    ]
+  },
+  {
+    name: "taiho",
+    description: [
+      "大凤号航空母舰是二战时日本海军第一艘拥有装甲飞行甲板的",
+      "正规大型航空母舰，也是日本在二战中最后完工的一艘正规",
+      "航空母舰。其曾作为机动部队的旗舰参加战斗，在服役 3 个月后，",
+      "于 1944 年 6 月在马里亚纳海战时被美军潜艇大青花鱼号击中，",
+      "由于不可靠的损管，其在后续由于泄漏的油气点燃爆炸而沉没。"
+    ],
+    author: "BB1987",
+    links: [
+      {
+        name: "shipbucket: BB1987 G-15 Kai-Taihō",
+        url: "https://www.shipbucket.com/drawings/4338"
+      },
+      {
+        name: "维基百科 - 大凤号",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%B3%B3%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "lowa",
     description: [
       "衣阿华号战列舰是美国海军建成的排水量最大最新锐衣阿华级",
       "战列舰首舰，其曾参与第二次世界大战、朝鲜战争、两伊战争，",
       "并于 1945 年在东京湾见证日本投降签字仪式，并且是历史上",
       "唯一一艘有浴缸的战列舰，除此之外也是世界上最晚退役的",
-      "战列舰，其 4 艘同型舰仍作为博物馆保存至今。"
+      "战列舰，衣阿华级 4 艘同型舰仍作为博物馆保存至今。"
     ],
     author: "TZoli",
     links: [
