@@ -186,7 +186,7 @@ func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string, refLin
 	// 如果战舰已经有引用信息，则展示
 	if ref := object.GetReference(curShipName); ref != nil {
 		// 战舰描述
-		xOffset, yOffset = float64(screenWidth/3)+100, bgHeight+45*3
+		xOffset, yOffset = float64(screenWidth/3)+60, bgHeight+45*3
 
 		for _, line := range ref.Description {
 			d.drawText(screen, line, xOffset, yOffset, 24, font.Hang, colorx.White)
