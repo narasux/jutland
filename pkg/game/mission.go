@@ -56,7 +56,8 @@ func (g *Game) handleMissionLoading() error {
 func (g *Game) handleMissionStart() error {
 	if isAnyNextInput() {
 		g.mode = GameModeMissionRunning
-		g.player.Close()
+		// TODO 支持关卡内 BGM
+		// g.player.Close()
 	}
 	return nil
 }

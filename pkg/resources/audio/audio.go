@@ -17,7 +17,6 @@ func init() {
 	NewGameEndBackground()
 	NewMenuBackground()
 	NewMissionsBackground()
-	NewMissionStartBackground()
 	NewMissionSuccess()
 	NewMissionFailed()
 	NewMenuButtonClick()
@@ -37,32 +36,22 @@ func mustNewAudio(audioPath string) types.AudioStream {
 
 // NewGameStartBackground 游戏开始 背景音乐
 func NewGameStartBackground() types.AudioStream {
-	return mustNewAudio("/bgm/start_bgm.wav")
+	return mustNewAudio("/bgm/start_bgm.mp3")
 }
 
 // NewGameEndBackground 游戏结束 背景音乐
 func NewGameEndBackground() types.AudioStream {
-	return mustNewAudio("/bgm/end_bgm.wav")
+	return mustNewAudio("/bgm/end_bgm.mp3")
 }
 
 // NewMenuBackground 菜单页面 背景音乐
 func NewMenuBackground() types.AudioStream {
-	return mustNewAudio("/bgm/menu_bgm.wav")
+	return mustNewAudio("/bgm/menu_bgm.mp3")
 }
 
-// NewMissionsBackground 任务选择 背景音乐 TODO 更换音频
+// NewMissionsBackground 任务选择 背景音乐
 func NewMissionsBackground() types.AudioStream {
-	return mustNewAudio("/bgm/menu_bgm.wav")
-}
-
-// NewMissionLoadingBackground 任务加载中 背景音乐 TODO 更换音频
-func NewMissionLoadingBackground() types.AudioStream {
-	return mustNewAudio("/bgm/menu_bgm.wav")
-}
-
-// NewMissionStartBackground 任务开始 背景音乐 TODO 更换音频
-func NewMissionStartBackground() types.AudioStream {
-	return mustNewAudio("/bgm/menu_bgm.wav")
+	return mustNewAudio("/bgm/mission_bgm.mp3")
 }
 
 // NewMenuButtonHover 鼠标悬停菜单按钮
@@ -77,12 +66,12 @@ func NewMenuButtonClick() types.AudioStream {
 
 // NewMissionSuccess 任务成功
 func NewMissionSuccess() types.AudioStream {
-	return mustNewAudio("/bgm/mission_success.wav")
+	return mustNewAudio("/bgm/mission_success.mp3")
 }
 
 // NewMissionFailed 任务失败
 func NewMissionFailed() types.AudioStream {
-	return mustNewAudio("/bgm/mission_failed.wav")
+	return mustNewAudio("/bgm/mission_failed.mp3")
 }
 
 // NewShipExplode 战舰爆炸

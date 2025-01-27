@@ -101,10 +101,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawGameMenu(screen, g.objStates.MenuButton)
 	case GameModeMissionSelect:
 		g.drawer.drawMissionSelect(screen, g.curMission)
-		g.drawer.drawGameTip(screen, "选择任务...")
 	case GameModeMissionLoading:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
-		g.drawer.drawGameTip(screen, "加载中...")
+		g.drawer.drawGameTip(screen, "Loading...")
 		g.objStates.LoadingInterface.Ready = true
 	case GameModeMissionStart:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)

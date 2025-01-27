@@ -80,7 +80,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
 	}
 
 	// 方向键 + 提示
-	x, y := float64(abbrMapWidth+120), float64(misLayout.Height)-250
+	x, y := float64(misLayout.Width)-300, float64(misLayout.Height)-250
 	drawArrowKey := func(xOffset, yOffset, rotation float64) {
 		opts = d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, textureImg.ArrowKey, rotation)
