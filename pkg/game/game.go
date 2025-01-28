@@ -3,6 +3,7 @@ package game
 import (
 	"fmt"
 	"log"
+	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
@@ -11,6 +12,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
+	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	"github.com/narasux/jutland/pkg/mission/object"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -48,7 +50,7 @@ func New() *Game {
 		objStates:   nil,
 		curMission:  "Alpha",
 		missionMgr:  nil,
-		curShipName: "duck",
+		curShipName: "lowa",
 	}
 	g.init()
 	return g
@@ -226,8 +228,19 @@ func (g *Game) handleGameCollection() error {
 	// Esc 键返回菜单
 	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		g.mode = GameModeMenuSelect
+		g.player.Close()
+		return nil
 	}
-	// TODO 大海战 2 军港 BGM ？
+	// 随机选个军港 BGM（如果没播放完，会跳过的）
+	newHarborFuncs := []func() types.AudioStream{
+		audioRes.NewHarborUS,
+		audioRes.NewHarborJP,
+		audioRes.NewHarborUK,
+		audioRes.NewHarborGEM,
+		audioRes.NewHarborFR,
+		audioRes.NewHarborNeutral,
+	}
+	g.player.Play(newHarborFuncs[rand.Intn(len(newHarborFuncs))]())
 
 	allShipNames := object.GetAllShipNames()
 

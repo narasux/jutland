@@ -21,6 +21,13 @@ func init() {
 	NewMissionFailed()
 	NewMenuButtonClick()
 	NewMenuButtonHover()
+	// 港口背景音乐
+	NewHarborUS()
+	NewHarborJP()
+	NewHarborUK()
+	NewHarborGEM()
+	NewHarborFR()
+	NewHarborNeutral()
 
 	log.Println("audio resources tested")
 }
@@ -82,6 +89,36 @@ func NewShipExplode() types.AudioStream {
 // NewMissionLoaded 关卡加载完成
 func NewMissionLoaded() types.AudioStream {
 	return mustNewAudio("/loaded.wav")
+}
+
+// NewHarborUS 美国港口
+func NewHarborUS() types.AudioStream {
+	return mustNewAudio("/bgm/harbor_us.mp3")
+}
+
+// NewHarborJP 日本港口
+func NewHarborJP() types.AudioStream {
+	return mustNewAudio("/bgm/harbor_jp.mp3")
+}
+
+// NewHarborUK 英国港口
+func NewHarborUK() types.AudioStream {
+	return mustNewAudio("/bgm/harbor_uk.mp3")
+}
+
+// NewHarborGEM 德国港口
+func NewHarborGEM() types.AudioStream {
+	return mustNewAudio("/bgm/harbor_gem.mp3")
+}
+
+// NewHarborFR 法国港口
+func NewHarborFR() types.AudioStream {
+	return mustNewAudio("/bgm/harbor_fr.mp3")
+}
+
+// NewHarborNeutral 中立港口
+func NewHarborNeutral() types.AudioStream {
+	return mustNewAudio("/bgm/harbor_neutral.mp3")
 }
 
 // 轨道炮
