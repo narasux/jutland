@@ -432,6 +432,13 @@
     criticalRate: 0.05
   },
   {
+    name: "US/TB/324/1957",
+    type: "torpedo",
+    diameter: 324,
+    damage: 1400,
+    criticalRate: 0.02
+  },
+  {
     name: "JP/TB/Kaiten/1943",
     type: "torpedo",
     diameter: 1350,

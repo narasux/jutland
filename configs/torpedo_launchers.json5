@@ -38,6 +38,16 @@
     range: 12,
     bulletSpeed: 45,
   },
+  // 美国海军 324mm 三联装鱼雷
+  {
+    name: "US/324/3",
+    bulletName: "US/TB/324/1957",
+    bulletCount: 3,
+    shotInterval: 1,
+    reloadTime: 25,
+    range: 10,
+    bulletSpeed: 50,
+  },
   // 日本海军 4联装 回天鱼雷
   {
     name: "JP/Kaiten/4",

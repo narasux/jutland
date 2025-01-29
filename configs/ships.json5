@@ -8966,23 +8966,81 @@
     }
   },
   {
+    name: "long_beach",
+    displayName: "长滩",
+    type: "cruiser",
+    typeAbbr: "CGN",
+    totalHP: 16600,
+    horizontalDamageReduction: 0.1,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 30,
+    acceleration: 0.6,
+    rotateSpeed: 1.6,
+    length: 220,
+    width: 22,
+    fundsCost: 180,
+    timeCost: 15,
+    description: [
+      "导弹巡洋舰（美）",
+      "主炮：2 座单装 127mm/38",
+      "鱼雷：2 座三联装 324mm"
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/127/38/MK45",
+          posPercent: 0.25,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 后主炮 B
+        {
+          name: "US/127/38/MK45",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [],
+      torpedoes: [
+        // 右舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.18,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ]
+    }
+  },
+  {
     name: "long_beach_scheme_D",
     displayName: "长滩（Scheme D）",
     type: "cruiser",
     typeAbbr: "CGN",
-    totalHP: 12000,
+    totalHP: 11300,
     horizontalDamageReduction: 0.05,
     verticalDamageReduction: 0.05,
-    maxSpeed: 30,
-    acceleration: 0.6,
+    maxSpeed: 32,
+    acceleration: 0.65,
     rotateSpeed: 1.8,
-    length: 220,
-    width: 22,
-    fundsCost: 150,
-    timeCost: 12,
+    length: 177,
+    width: 17,
+    fundsCost: 125,
+    timeCost: 10,
     description: [
       "导弹巡洋舰（美）",
       "主炮：2 座单装 127mm/38",
+      "鱼雷：2 座三联装 324mm"
     ],
     weapon: {
       mainGuns: [
@@ -8996,13 +9054,29 @@
         // 后主炮 B
         {
           name: "US/127/38/MK45",
-          posPercent: -0.6,
+          posPercent: -0.64,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         }
       ],
       secondaryGuns: [],
-      torpedoes: []
+      antiAircraftGuns: [],
+      torpedoes: [
+        // 右舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.22,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ]
     }
   },
   {

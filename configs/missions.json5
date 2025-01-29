@@ -438,6 +438,7 @@
         providedShipNames: [
           "alaska_kai",
           "atlanta",
+          "long_beach",
           "long_beach_scheme_D",
           "astoria",
           "pensacola",
@@ -704,36 +705,44 @@
         rotation: 90,
         belongPlayer: "HA"
       },
+      // 美国巡洋舰
       {
         name: "alaska_kai",
-        pos: [42, 33],
+        pos: [42, 28],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "atlanta",
-        pos: [41, 34],
+        pos: [41, 29],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "long_beach",
+        pos: [42, 30],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "long_beach_scheme_D",
-        pos: [42, 35],
+        pos: [41, 31],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "astoria",
-        pos: [41, 36],
+        pos: [40, 28],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "pensacola",
-        pos: [42, 37],
+        pos: [39, 29],
         rotation: 90,
         belongPlayer: "HA"
       },
+      // 日本巡洋舰
       {
         name: "furutaka",
         pos: [42, 48],
@@ -836,6 +845,7 @@
         rotation: 90,
         belongPlayer: "HA"
       },
+      // 巡洋舰
       {
         name: "prinz_eugen",
         pos: [40, 33],
@@ -878,6 +888,7 @@
         rotation: 90,
         belongPlayer: "HA"
       },
+      // 驱逐舰
       {
         name: "porter",
         pos: [44, 33],
@@ -980,6 +991,7 @@
         rotation: 90,
         belongPlayer: "HA"
       },
+      // 敌人舰队
       {
         name: "molamola",
         pos: [28, 70],

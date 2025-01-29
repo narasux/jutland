@@ -49,6 +49,7 @@ var (
 )
 
 var (
+	tb324  = ebutil.NewImageWithColor(2, 10, colorx.White)
 	tb450  = ebutil.NewImageWithColor(3, 16, colorx.Silver)
 	tb533  = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
 	tb610  = ebutil.NewImageWithColor(4, 24, colorx.Silver)
@@ -143,6 +144,8 @@ func GetShell(diameter int) *ebiten.Image {
 // GetTorpedo 获取鱼雷弹药图片
 func GetTorpedo(diameter int) *ebiten.Image {
 	switch diameter {
+	case 324:
+		return tb324
 	case 450:
 		return tb450
 	case 533:
