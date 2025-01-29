@@ -16,8 +16,6 @@ var (
 	// GameEnd 游戏结束
 	GameEnd *ebiten.Image
 
-	// MissionsMap 任务地图
-	MissionsMap *ebiten.Image
 	// MissionStart 任务开始
 	MissionStart *ebiten.Image
 	// MissionSuccess 任务成功
@@ -51,12 +49,6 @@ func init() {
 
 	imgPath = "/backgrounds/game_end.png"
 	if GameEnd, err = loader.LoadImage(imgPath); err != nil {
-		log.Fatalf("missing %s: %s", imgPath, err)
-	}
-
-	// TODO 替换该资源
-	imgPath = "/backgrounds/missions_map.png"
-	if MissionsMap, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

@@ -39,7 +39,7 @@ func NewDrawer(mission string) *Drawer {
 	opts.GeoM.Scale(scaleX, scaleY)
 
 	abbrMap.DrawImage(abbrMapImg.Background, opts)
-	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Name), opts)
+	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Source), opts)
 
 	return &Drawer{mission: mission, abbrMap: abbrMap}
 }

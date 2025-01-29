@@ -117,7 +117,7 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 	opts.GeoM.Scale(abbrMapSize/float64(w), abbrMapSize/float64(h))
 
 	abbrMap.DrawImage(abbrMapImg.Background, opts)
-	abbrMap.DrawImage(abbrMapImg.Get(misMD.MapCfg.Name), opts)
+	abbrMap.DrawImage(abbrMapImg.Get(misMD.MapCfg.Source), opts)
 
 	d.abbrMaps[curMission] = abbrMap
 	return abbrMap

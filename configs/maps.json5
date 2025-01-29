@@ -2,13 +2,21 @@
   {
     name: "darwin",
     displayName: "达尔文港",
+    source: "darwin"
   },
   {
     name: "peleliu",
     displayName: "佩莱利乌岛",
+    source: "peleliu"
   },
   {
     name: "wake",
     displayName: "威克岛",
-  }
+    source: "wake"
+  },
+  {
+    name: "darwin_256",
+    displayName: "达尔文港（256x256）",
+    source: "darwin"
+  },
 ]

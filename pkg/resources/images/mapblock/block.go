@@ -90,7 +90,7 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 	// 丢弃上一个关卡的地图贴图数据
 	c.data = map[string]*ebiten.Image{}
 
-	imgPath := fmt.Sprintf("/map/abbrs/%s.png", cfg.Name)
+	imgPath := fmt.Sprintf("/map/abbrs/%s.png", cfg.Source)
 	imgData, err := os.ReadFile(config.ImgResBaseDir + imgPath)
 	if err != nil {
 		return err

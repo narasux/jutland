@@ -8,7 +8,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/samber/lo"
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
@@ -73,9 +72,11 @@ func (m *MapData) ToGridCells() grid.Cells {
 // 地图配置
 type MapCfg struct {
 	// 地图名称
-	Name string
+	Name string `json:"name"`
 	// 展示名称
-	DisplayName string
+	DisplayName string `json:"displayName"`
+	// 原始素材名
+	Source string `json:"source"`
 	// 地图数据
 	Map MapData
 	// 地图网格数据
@@ -86,15 +87,9 @@ type MapCfg struct {
 	Height int
 }
 
-// GenPath 生成路径
-func (cfg *MapCfg) GenPath(start, end grid.Point) []grid.Point {
-	return grid.NewGrid(cfg.Cells).Search(start, end)
-}
-
-var maps map[string]*MapCfg
-
-func loadMapCfg(name string) *MapCfg {
-	mapPath := fmt.Sprintf("%s/%s.map", config.MapResBaseDir, name)
+// 初始化方块信息
+func (cfg *MapCfg) initMapCells() {
+	mapPath := fmt.Sprintf("%s/%s.map", config.MapResBaseDir, cfg.Name)
 
 	file, err := os.Open(mapPath)
 	if err != nil {
@@ -102,21 +97,25 @@ func loadMapCfg(name string) *MapCfg {
 	}
 	defer file.Close()
 
-	cfg := MapCfg{Name: name, Map: MapData{}}
 	scanner := bufio.NewScanner(file)
-
 	for scanner.Scan() {
 		cfg.Map = append(cfg.Map, scanner.Text())
 	}
 	if err = scanner.Err(); err != nil {
-		log.Fatalf("error when load map %s: %s", name, err)
+		log.Fatalf("error when load map %s: %s", cfg.Name, err)
 	}
 
 	cfg.Cells = cfg.Map.ToGridCells()
 	cfg.Width = len(cfg.Map[0])
 	cfg.Height = len(cfg.Map)
-	return &cfg
 }
+
+// GenPath 生成路径
+func (cfg *MapCfg) GenPath(start, end grid.Point) []grid.Point {
+	return grid.NewGrid(cfg.Cells).Search(start, end)
+}
+
+var maps map[string]*MapCfg
 
 func init() {
 	log.Println("loading map config...")
@@ -137,7 +136,8 @@ func init() {
 	}
 
 	for _, cfg := range mapConfigs {
-		maps[cfg.Name] = loadMapCfg(cfg.Name)
+		cfg.initMapCells()
+		maps[cfg.Name] = &cfg
 	}
 
 	log.Println("map config loaded")
@@ -148,7 +148,11 @@ func GetByName(name string) *MapCfg {
 	return maps[name]
 }
 
-// GetAllMapNames 获取所有地图名称
-func GetAllMapNames() []string {
-	return lo.Keys(maps)
+// GetAllMapSources 获取所有地图原始资源名称
+func GetAllMapSources() []string {
+	sources := []string{}
+	for _, m := range maps {
+		sources = append(sources, m.Source)
+	}
+	return sources
 }

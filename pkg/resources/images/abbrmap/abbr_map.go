@@ -28,9 +28,9 @@ func init() {
 
 	abbrMapImgMap = make(map[string]*ebiten.Image)
 
-	for _, mapName := range mapcfg.GetAllMapNames() {
-		imgPath = fmt.Sprintf("/map/abbrs/%s.png", mapName)
-		if abbrMapImgMap[mapName], err = loader.LoadImage(imgPath); err != nil {
+	for _, mapSource := range mapcfg.GetAllMapSources() {
+		imgPath = fmt.Sprintf("/map/abbrs/%s.png", mapSource)
+		if abbrMapImgMap[mapSource], err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)
 		}
 	}
