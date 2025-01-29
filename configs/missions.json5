@@ -18,7 +18,7 @@
         maxOncomingShip: 10,
         providedShipNames: [
           "south_dakota",
-          "new_orleans",
+          "astoria",
           "atlanta",
           "porter",
           "PT_791",
@@ -32,7 +32,7 @@
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
-          "new_orleans",
+          "astoria",
           "atlanta",
           "porter",
           "PT_791",
@@ -104,25 +104,25 @@
         belongPlayer: "HA"
       },
       {
-        name: "new_orleans",
+        name: "astoria",
         pos: [22, 23],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_orleans",
+        name: "astoria",
         pos: [24, 28],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_orleans",
+        name: "astoria",
         pos: [32, 33],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_orleans",
+        name: "astoria",
         pos: [34, 38],
         rotation: 90,
         belongPlayer: "HA"
@@ -438,8 +438,8 @@
         providedShipNames: [
           "alaska_kai",
           "atlanta",
-          "long_beach_kai",
-          "new_orleans",
+          "long_beach_scheme_D",
+          "astoria",
           "pensacola",
           "furutaka",
           "aoba",
@@ -717,13 +717,13 @@
         belongPlayer: "HA"
       },
       {
-        name: "long_beach_kai",
+        name: "long_beach_scheme_D",
         pos: [42, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_orleans",
+        name: "astoria",
         pos: [41, 36],
         rotation: 90,
         belongPlayer: "HA"

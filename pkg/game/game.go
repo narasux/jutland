@@ -243,8 +243,7 @@ func (g *Game) handleGameCollection() error {
 	g.player.Play(newHarborFuncs[rand.Intn(len(newHarborFuncs))]())
 
 	allShipNames := object.GetAllShipNames()
-
-	// 左右方向键选择战舰
+	// 上下左右方向键 / 鼠标滚轮选择战舰
 	shipIndex := lo.IndexOf(allShipNames, g.curShipName)
 	_, wheelY := ebiten.Wheel()
 	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) ||

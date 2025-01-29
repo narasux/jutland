@@ -232,7 +232,7 @@
         // 可选择的战舰名称
         providedShipNames: [
           "south_dakota",
-          "new_orleans",
+          "astoria",
           "atlanta",
           "porter",
           "PT_791",

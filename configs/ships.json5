@@ -8448,15 +8448,15 @@
     displayName: "阿拉斯加（改）",
     type: "cruiser",
     typeAbbr: "CB",
-    totalHP: 39800,
+    totalHP: 42800,
     horizontalDamageReduction: 0.35,
     verticalDamageReduction: 0.2,
     maxSpeed: 33,
     acceleration: 0.6,
     rotateSpeed: 1.5,
-    length: 256,
-    width: 28,
-    fundsCost: 420,
+    length: 262,
+    width: 32,
+    fundsCost: 450,
     timeCost: 40,
     description: [
       "大型巡洋舰（美）",
@@ -8966,8 +8966,8 @@
     }
   },
   {
-    name: "long_beach_kai",
-    displayName: "长滩（改）",
+    name: "long_beach_scheme_D",
+    displayName: "长滩（Scheme D）",
     type: "cruiser",
     typeAbbr: "CGN",
     totalHP: 12000,
@@ -9006,8 +9006,8 @@
     }
   },
   {
-    name: "new_orleans",
-    displayName: "新奥尔良",
+    name: "astoria",
+    displayName: "阿斯托里亚",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 12663,

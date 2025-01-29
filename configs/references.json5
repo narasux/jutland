@@ -174,10 +174,10 @@
     name: "south_dakota",
     description: [
       "南达科他号是美国海军南达科他级战列舰的首舰。其在 1942 年服役，",
-      "在瓜达尔卡纳尔海战中遭到雾岛号战列舰等重创而回国维修，而后其曾",
-      "短暂到大西洋巡航，然后返回太平洋，并先后参与马绍尔群岛、马里",
-      "亚纳及帕劳群岛战役、莱特湾海战、硫磺岛战役及冲绳战役。日本投降",
-      "后，南达科他号在东京湾见证日本签字投降仪式。"
+      "在瓜达尔卡纳尔海战中遭到雾岛号战列舰等重创而回国维修，而后其",
+      "曾短暂到大西洋巡航，然后返回太平洋，并先后参与马绍尔群岛、",
+      "马里亚纳及帕劳群岛战役、莱特湾海战、硫磺岛战役及冲绳战役。",
+      "日本投降后，南达科他号在东京湾见证日本签字投降仪式。"
     ],
     author: "Ronald Yoshioka",
     links: [
@@ -205,5 +205,135 @@
         url: "https://www.bilibili.com/opus/920994748118859845"
       },
     ]
-  }
+  },
+  {
+    name: "atlanta",
+    description: [
+      "亚特兰大号是美国海军在二次大战中服役的轻巡洋舰，",
+      "采用防空巡洋舰的设计思路建造。数量众多的双联装",
+      "高平两用炮是该级战舰的主要特点，在二战中，首舰",
+      "亚特兰大号，二号舰朱诺号均于 1942.11.13 战沉，与其",
+      "一起沉入海底的，还有来自衣阿华州的沙利文五兄弟。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Light Cruiser ATLANTA, CL-51",
+        url: "https://www.deviantart.com/midnike/art/USN-Light-Cruiser-ATLANTA-CL-51-563332388"
+      },
+      {
+        name: "维基百科 - 亚特兰大级轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E4%BA%9E%E7%89%B9%E8%98%AD%E5%A4%A7%E7%B4%9A%E8%BC%95%E5%B7%A1%E6%B4%8B%E8%89%A6"
+      }
+    ]
+  },
+  {
+    name: "alaska_kai",
+    description: [
+      "改进型阿拉斯加级大型巡洋舰是 TZoli 的个人作品，",
+      "相较于原阿拉斯加级，拥有更多的 12 英寸（305mm）主炮。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "The never-were Alaska from a forgotten age",
+        url: "https://www.deviantart.com/tzoli/art/The-never-were-Alaska-from-a-forgotten-age-686219191"
+      },
+      {
+        name: "维基百科 - 阿拉斯加级大型巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%8B%89%E6%96%AF%E5%8A%A0%E7%BA%A7%E5%A4%A7%E5%9E%8B%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "long_beach",
+    description: [
+      "长滩号是人类历史上第一艘核动力巡洋舰，曾与企业号",
+      "航空母舰，班布里奇号核动力导弹巡洋舰完成首次核动力",
+      "舰队环球航行的 “海环行动”，在三个月的航行中不靠港补给。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "USS Long Beach Fully Equipped",
+        url: "https://www.deviantart.com/tzoli/art/USS-Long-Beach-Fully-Equipped-865083762"
+      },
+      {
+        name: "百度百科 - 长滩号巡洋舰",
+        url: "https://baike.baidu.com/item/%E9%95%BF%E6%BB%A9%E5%8F%B7%E5%B7%A1%E6%B4%8B%E8%88%B0/13386730"
+      },
+      {
+        name: "Wikipedia - USS Long Beach (CGN-9)",
+        url: "https://en.wikipedia.org/wiki/USS_Long_Beach_(CGN-9)"
+      }
+    ]
+  },
+  {
+    name: "long_beach_scheme_D",
+    description: [
+      "长滩级导弹巡洋舰 Scheme D 是 TZoli 的个人作品，",
+      "相较于其原型长滩号，通过简化设备，优化舰体获取更短的",
+      "舰体及更紧凑的上层建筑，使得看起来更像驱逐舰领舰。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "Long Beach Preliminary Scheme D-1",
+        url: "https://www.deviantart.com/tzoli/art/Long-Beach-Preliminary-Scheme-D-1-860816689"
+      },
+      {
+        name: "Wikipedia - USS Long Beach (CGN-9)",
+        url: "https://en.wikipedia.org/wiki/USS_Long_Beach_(CGN-9)"
+      }
+    ]
+  },
+  {
+    name: "astoria",
+    description: [
+      "阿斯托利亚号重巡洋舰是新奥尔良级重巡洋舰的姊妹舰，",
+      "在 1934 年下水，在珊瑚海海战中护卫约克城号航空",
+      "母舰，最后在 1942.8 的萨沃岛夜战中被引爆弹药库沉没，",
+      "与其一同战沉的还有同级的昆西，文森斯两舰。",
+      "注：该舰 1939 曾送大使遗体到日本，并参与日本国葬。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Heavy Cruiser ASTORIA, CA-34",
+        url: "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-ASTORIA-CA-34-563332137"
+      },
+      {
+        name: "维基百科 - 新奥尔良级重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%B4%90%E5%A5%A7%E8%89%AF%E7%B4%9A%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6"
+      },
+      {
+        name: "Wikipedia - USS Astoria (CA-34)",
+        url: "https://en.wikipedia.org/wiki/USS_Astoria_(CA-34)"
+      }
+    ]
+  },
+  {
+    name: "pensacola",
+    description: [
+      "彭萨科拉号是美国海军彭萨科拉级重巡洋舰首舰，是美国最早",
+      "装备的条约型巡洋舰，它依照《华盛顿海军条约》规定的上限",
+      "规格建造，2+3+3+2 的 8 英寸炮塔布局是其特点之一。",
+      "她与姊妹舰盐湖城号都幸运地在二战中幸存下来。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Heavy Cruiser PENSACOLA, CA-24",
+        url: "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-PENSACOLA-CA-24-563331092"
+      },
+      {
+        name: "维基百科 - 彭萨科拉级重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%BD%AD%E8%90%A8%E7%A7%91%E6%8B%89%E7%BA%A7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      },
+      {
+        name: "Wikipedia - USS Pensacola (CA-24)",
+        url: "https://en.wikipedia.org/wiki/USS_Pensacola_(CA-24)"
+      }
+    ]
+  },
 ]
