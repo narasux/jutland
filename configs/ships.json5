@@ -14653,7 +14653,7 @@
   },
   // 苏联海军
   {
-    name: "30bis",
+    name: "rapid",
     displayName: "快速",
     type: "destroyer",
     typeAbbr: "DD",

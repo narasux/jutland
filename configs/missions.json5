@@ -485,7 +485,7 @@
           "v",
           "y",
           "ardent",
-          "30bis"
+          "rapid"
         ],
       },
       {
@@ -950,7 +950,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "30bis",
+        name: "rapid",
         pos: [44, 43],
         rotation: 90,
         belongPlayer: "HA"

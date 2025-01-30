@@ -2,9 +2,11 @@
   {
     name: "duck",
     description: [
-      "小黄鸭是一种利用塑胶或者聚氯乙烯制成雏鸭形状",
-      "的玩具，中空而且质料轻软，有些在底部装置了鸣笛，",
-      "当按压鸭体时会发出类似于鸭的叫声。"
+      "小黄鸭是一种利用塑胶或者聚氯乙烯制成雏鸭形状的玩具，",
+      "中空而且质料轻软。在本游戏中，小黄鸭承担了各类武器的",
+      "测试工作，因此当发现飞机从鸭身上出现时，请不要惊讶，",
+      "毕竟鸭子飞行时掉点毛也很合理。还有一件事：小黄鸭有一门",
+      "朝后的高伤害电磁炮，发射红色的炮弹，我称其为 “鸭屎香” :D"
     ],
     author: "未知",
     links: [
@@ -207,6 +209,81 @@
     ]
   },
   {
+    name: "soviet_union",
+    description: [
+      "苏联级（23型）是苏联在30年代末期设计建造的一级战列舰。",
+      "她在设计时得到了来自意大利的技术援助，在一些地方设计受",
+      "维内托级和 UP41 方案的影响。可惜的是，由于德国入侵，二战",
+      "后航母取代战列舰地位等原因，四艘苏联级均没有能够建成。",
+      "注：该作品是 TZoli 的个人作品，设计风格上有英/日系风格。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "KB-4 Type A Battleship Design",
+        url: "https://www.deviantart.com/tzoli/art/KB-4-Type-A-Battleship-Design-904759741"
+      },
+      {
+        name: "维基百科 - 苏联级",
+        url: "https://zh.wikipedia.org/wiki/%E8%8B%8F%E8%81%94%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+      }
+    ]
+  },
+  {
+    name: "soviet_union_nelsonski",
+    description: [
+      "苏维埃纳尔逊斯基是 TZoli 的个人作品，",
+      "其特点是参考英国纳尔逊级战列舰，将三座主炮",
+      "设置在舰体前部，使用更少的装甲以限制总吨位。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "The Sovietskiy Nelsonski",
+        url: "https://www.deviantart.com/tzoli/art/KB-4-Type-A-Battleship-Design-904759741"
+      }
+    ]
+  },
+  {
+    name: "kremlin",
+    description: [
+      "24 型原本为苏联级（23型）的后续方案，在 23 型的基础上进行",
+      "少量的改动，但是由于战争爆发而搁置，直到战后才重新开始，",
+      "此时该舰的假想敌已改为衣阿华级，在设计中出现许多夸张的方案",
+      "（如：12 门 406mm 主炮，13 万吨）。但是在项目细化时，支持",
+      "大舰巨炮路线的最高领导人去世，24 型最终没能走下绘图板。"
+    ],
+    author: "1143M",
+    links: [
+      {
+        name: "Deviant Art - 1143M - project 24",
+        url: "https://www.deviantart.com/1143m/art/project-24-889643069"
+      },
+      {
+        name: "幻梦中的红色巨兽 —— 苏联 24 型战列舰计划始末",
+        url: "https://www.bilibili.com/opus/615405806350174553"
+      }
+    ]
+  },
+  {
+    name: "slava",
+    description: [
+      "光荣级超级战列舰是 B 站 UP 主莫斯科凉粉的个人作品，",
+      "设定中拥有四座巨大的 500mm 双联装主炮，总吨位超多 10 万吨。"
+    ],
+    author: "莫斯科凉粉",
+    links: [
+      {
+        name: "光荣级战列舰双视图",
+        url: "https://t.bilibili.com/989631301929664512?tab=2"
+      },
+      {
+        name: "G72 型战列舰 “光荣” 号",
+        url: "https://www.bilibili.com/opus/885383787003772948"
+      },
+    ]
+  },
+  {
     name: "atlanta",
     description: [
       "亚特兰大号是美国海军在二次大战中服役的轻巡洋舰，",
@@ -337,6 +414,42 @@
     ]
   },
   {
+    name: "sverdlov",
+    description: [
+      "斯维尔德洛夫号是苏联最著名的火炮巡洋舰 68-бис 型的首舰。",
+      "该舰是战前研发，战后完工的 68k 型巡洋舰的改进版本。战后",
+      "完工的斯维尔德洛夫各项性能均达到轻巡优秀水平。在她刚完工",
+      "不久就参加了英国的阅舰式，向西方展示了战后苏联海军的风貌。"
+    ],
+    author: "SakhaliaNet",
+    links: [
+      {
+        name: "SVERDLOV CLASS (1950-1955)",
+        url: "https://sakhalianet.x10.mx/shippictures/ig_sverdlov_class.htm"
+      },
+      {
+        name: "维基百科 - 斯维尔德洛夫级巡洋舰",
+        url: "https://zh.wikipedia.org/zh-hans/%E6%96%AF%E7%BB%B4%E5%B0%94%E5%BE%B7%E6%B4%9B%E5%A4%AB%E7%BA%A7%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      },
+    ]
+  },
+  {
+    name: "kirov",
+    description: [
+      "基洛夫级巡洋舰是苏联吸收了意大利技术后建造的一级巡洋舰，",
+      "她采用了特别的三联装 180mm 主炮，最大射程达到 38km。",
+      "由于苏德战争中海战不是主要战场，基洛夫号主要执行对陆火力",
+      "支援任务，尽管在战争中受损严重，但基洛夫号仍一直幸存到战后。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 基洛夫级巡洋舰 (1936年)",
+        url: "https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%B4%9B%E5%A4%AB%E7%BA%A7%E5%B7%A1%E6%B4%8B%E8%88%B0_(1936%E5%B9%B4)"
+      },
+    ]
+  },
+  {
     name: "porter",
     description: [
       "波特号是美国海军波特级驱逐舰的首舰，也是美国第一种以驱逐舰",
@@ -401,4 +514,40 @@
       }
     ]
   },
+  {
+    name: "rapid",
+    description: [
+      "快速号驱逐舰是二战后苏联海军建造的第一批驱逐舰（30bis）。",
+      "火力强大，性能均衡是她的显著特点，同级舰有 70 艘之多。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "ShipBucket - Smelyi",
+        url: "http://www.shipbucket.com/drawings/10560"
+      },
+      {
+        name: "Wikipedia - Skory-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Skory-class_destroyer"
+      }
+    ]
+  },
+  {
+    name: "P_6",
+    description: [
+      "183 型鱼雷艇（P-6级鱼雷艇）是曾在苏联海军",
+      "和东德海军服役的鱼雷艇，拥有机关炮，鱼雷与深弹。"
+    ],
+    author: "Piv",
+    links: [
+      {
+        name: "SNF TKA 821",
+        url: "https://jp.pinterest.com/pin/39547302971899630/"
+      },
+      {
+        name: "Торпедные катера проекта 183",
+        url: "https://ru.wikipedia.org/wiki/%D0%A2%D0%BE%D1%80%D0%BF%D0%B5%D0%B4%D0%BD%D1%8B%D0%B5_%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B0_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0_183"
+      }
+    ]
+  }
 ]
