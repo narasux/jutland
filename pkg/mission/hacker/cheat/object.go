@@ -2,6 +2,7 @@ package cheat
 
 import (
 	"fmt"
+	"math/rand"
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/object"
@@ -110,7 +111,10 @@ func (c *BlackGoldRush) Exec(misState *state.MissionState) string {
 	if misState.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
 		return "Current cursor position on land, can't create oil platform"
 	}
-	op := object.NewOilPlatform(*pos, 5, 100)
+	// 油井范围，生成量随机
+	radius := 3 + rand.Intn(4)
+	yield := 50 + rand.Intn(100)
+	op := object.NewOilPlatform(*pos, radius, yield)
 	misState.OilPlatforms[op.Uid] = op
 	return fmt.Sprintf("Oil platform created at %s. Be careful, oil can breed mold!", pos.String())
 }

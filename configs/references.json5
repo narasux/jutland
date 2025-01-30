@@ -336,4 +336,69 @@
       }
     ]
   },
+  {
+    name: "porter",
+    description: [
+      "波特号是美国海军波特级驱逐舰的首舰，也是美国第一种以驱逐舰",
+      "领舰为概念所开发的舰艇，设计中她将作为驱逐舰战队的旗舰，容",
+      "纳更多的武装和通讯装备，火力亦较一般驱逐舰强。波特级驱逐舰",
+      "均顺利度过整个二战 - 除波特号外，她在救援 TBF 鱼雷机飞行员",
+      "时，误触鱼雷导致重创，在弃舰后被己方击沉。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Destroyer PORTER, DD-356",
+        url: "https://www.deviantart.com/midnike/art/USN-Destroyer-PORTER-DD-356-563333059"
+      },
+      {
+        name: "维基百科 - 波特级驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%B3%A2%E7%89%B9%E7%BA%A7%E9%A9%B1%E9%80%90%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "maury",
+    description: [
+      "莫雷号是美国海军格里德利级驱逐舰的四号舰，曾参与珊瑚海海战、",
+      "中途岛海战、东所罗门海战及圣克鲁斯群岛战役，而后还参与莱特",
+      "湾海战，菲律宾登陆战等，在 TF58 舰队中为航空母舰护航，支持",
+      "其对琉球群岛，台湾和吕宋岛的日军基地的空袭行动。该舰在二战",
+      "中共获得 16 枚战斗之星，在驱逐舰中仅次于欧班农号（DD-450）"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Destroyer MAURY, DD-401",
+        url: "https://www.deviantart.com/midnike/art/USN-Destroyer-MAURY-DD-401-563333362"
+      },
+      {
+        name: "维基百科 - 格里德利级驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%A0%BC%E9%87%8C%E5%BE%B7%E5%88%A9%E7%BA%A7%E9%A9%B1%E9%80%90%E8%88%B0"
+      },
+      {
+        name: "Wikipedia: USS Maury (DD-401)",
+        url: "https://en.wikipedia.org/wiki/USS_Maury_(DD-401)"
+      }
+    ]
+  },
+  {
+    name: "hammann",
+    description: [
+      "哈曼号是美国海军西姆斯级驱逐舰的四号舰，曾作为航空母舰的，",
+      "护航舰艇参与珊瑚海海战，但在中途岛海战期间因尝试协助正在",
+      "沉没的约克城号航空母舰而被突破防御网的日军潜艇 伊-168 击沉。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Destroyer HAMMANN, DD-412",
+        url: "https://www.deviantart.com/midnike/art/USN-Destroyer-HAMMANN-DD-412-563333796"
+      },
+      {
+        name: "维基百科 - 哈曼号驱逐舰",
+        url: "https://zh.wikipedia.org/zh-cn/%E5%93%88%E6%9B%BC%E5%8F%B7%E9%A9%B1%E9%80%90%E8%88%B0"
+      }
+    ]
+  },
 ]
