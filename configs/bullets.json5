@@ -80,6 +80,13 @@
     criticalRate: 0.0001
   },
   {
+    name: "US/GB/12.7/1919",
+    type: "shell",
+    diameter: 13,
+    damage: 0.25,
+    criticalRate: 0
+  },
+  {
     name: "JP/GB/510/1945",
     type: "shell",
     diameter: 510,
@@ -425,6 +432,13 @@
   },
   // 鱼雷
   {
+    name: "US/TB/570/1938",
+    type: "torpedo",
+    diameter: 570,
+    damage: 4800,
+    criticalRate: 0.075
+  },
+  {
     name: "US/TB/533/1931",
     type: "torpedo",
     diameter: 533,
@@ -500,5 +514,34 @@
     diameter: 533,
     damage: 4800,
     criticalRate: 0.08
+  },
+  // 炸弹
+  {
+    name: "US/BB/2000/907",
+    type: "bomb",
+    diameter: 457,
+    damage: 4000,
+    criticalRate: 0.1
+  },
+  {
+    name: "US/BB/1000/454",
+    type: "bomb",
+    diameter: 356,
+    damage: 1800,
+    criticalRate: 0.05
+  },
+  {
+    name: "US/BB/500/227",
+    type: "bomb",
+    diameter: 273,
+    damage: 800,
+    criticalRate: 0.02
+  },
+  {
+    name: "US/BB/250/114",
+    type: "bomb",
+    diameter: 160,
+    damage: 335,
+    criticalRate: 0.005
   }
 ]

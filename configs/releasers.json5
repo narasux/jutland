@@ -1,0 +1,37 @@
+[
+  {
+    name: "US/BB/2000",
+    bulletName: "US/BB/2000/907",
+    type: "bomb",
+    range: 2,
+    bulletSpeed: 45,
+  },
+  {
+    name: "US/BB/1000",
+    bulletName: "US/BB/1000/454",
+    type: "bomb",
+    range: 2,
+    bulletSpeed: 45,
+  },
+  {
+    name: "US/BB/500",
+    bulletName: "US/BB/500/227",
+    type: "bomb",
+    range: 2,
+    bulletSpeed: 45,
+  },
+  {
+    name: "US/BB/250",
+    bulletName: "US/BB/250/113",
+    type: "bomb",
+    range: 2,
+    bulletSpeed: 45,
+  },
+  {
+    name: "US/TB/570",
+    bulletName: "US/TB/570/1938",
+    type: "torpedo",
+    range: 6,
+    bulletSpeed: 45,
+  }
+]

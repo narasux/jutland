@@ -17,6 +17,8 @@ func init() {
 	initBulletMap()
 	initGunMap()
 	initTorpedoLauncherMap()
+	initReleaserMap()
+	initPlaneMap()
 	initShipMap()
 	initReferenceMap()
 }
@@ -79,6 +81,59 @@ func initTorpedoLauncherMap() {
 		lc.Range /= 2
 		lc.BulletSpeed /= 600
 		torpedoLauncherMap[lc.Name] = &lc
+	}
+}
+
+func initReleaserMap() {
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "releasers.json5"))
+	if err != nil {
+		log.Fatal("failed to open releasers.json5: ", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var releasers []Releaser
+	if err = json5.Unmarshal(bytes, &releasers); err != nil {
+		log.Fatal("failed to unmarshal releasers.json5: ", err)
+	}
+
+	for _, r := range releasers {
+		releaserMap[r.Name] = &r
+	}
+}
+
+func initPlaneMap() {
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "planes.json5"))
+	if err != nil {
+		log.Fatal("failed to open planes.json5: ", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var planes []Plane
+	if err = json5.Unmarshal(bytes, &planes); err != nil {
+		log.Fatal("failed to unmarshal planes.json5: ", err)
+	}
+
+	for _, p := range planes {
+		// 机关炮
+		for _, gunMD := range p.Weapon.MainGunsMD {
+			p.Weapon.MainGuns = append(p.Weapon.MainGuns, newGun(
+				gunMD.Name, gunMD.PosPercent,
+				FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
+			))
+		}
+		// 当前生命值
+		p.CurHP = p.TotalHP
+		// 折算速度
+		p.MaxSpeed /= 600
+		p.Acceleration /= 600
+		// 检查伤害减免值不能超过 1
+		p.DamageReduction = min(1, p.DamageReduction)
+		planeMap[p.Name] = &p
 	}
 }
 

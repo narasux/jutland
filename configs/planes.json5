@@ -1,0 +1,93 @@
+[
+  {
+    name: "F4F-3",
+    displayName: "野猫",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 100,
+    damageReduction: 0.5,
+    maxSpeed: 533,
+    acceleration: 30,
+    rotateSpeed: 12,
+    length: 9,
+    width: 12,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 3.367,
+    range: 1360,
+    description: [
+      "战斗机（美）",
+      "4 x 12.7mm 机枪",
+    ],
+    weapon: {
+      guns: [],
+      rockets: [],
+      bombs: [],
+      torpedoes: []
+    }
+  },
+  {
+    name: "SBD-3",
+    displayName: "无畏",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    totalHP: 100,
+    damageReduction: 0.5,
+    maxSpeed: 410,
+    acceleration: 25,
+    rotateSpeed: 8,
+    length: 10,
+    width: 13,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 4.245,
+    range: 1595,
+    description: [
+      "俯冲轰炸机（美）",
+      "2 x 12.7mm 机枪（前向）",
+      "2 x 7.62mm 机枪（后座）",
+      "1 x 2000 磅，2 x 250 磅炸弹"
+    ],
+    weapon: {
+      guns: [],
+      rockets: [],
+      bombs: [],
+      torpedoes: []
+    }
+  },
+  {
+    name: "TBD-1",
+    displayName: "蹂躏者",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    totalHP: 100,
+    damageReduction: 0.5,
+    maxSpeed: 332,
+    acceleration: 20,
+    rotateSpeed: 6,
+    length: 11,
+    width: 15,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 4.624,
+    range: 700,
+    description: [
+      "鱼雷轰炸机（美）",
+      "1 x 12.7mm 机枪（前向）",
+      "1 x 7.62mm 机枪（后座）",
+      "1 x Mk-13 570mm 鱼雷"
+    ],
+    weapon: {
+      guns: [],
+      rockets: [],
+      bombs: [],
+      torpedoes: []
+    }
+  }
+]

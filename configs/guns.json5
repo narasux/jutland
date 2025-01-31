@@ -229,6 +229,16 @@
     bulletSpread: 20,
     bulletSpeed: 910
   },
+  // 美国海军 US/12.7 单装机枪
+  {
+    name: "US/12.7",
+    bulletName: "US/GB/12.7/1919",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 2.5,
+    bulletSpread: 15,
+    bulletSpeed: 900
+  },
   // 日本海军 三联装 51 厘米 45 倍口径舰炮
   {
     name: "JP/510/45/3",

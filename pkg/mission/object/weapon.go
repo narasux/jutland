@@ -47,6 +47,8 @@ type Weapon struct {
 	AntiAircraftGuns []*Gun
 	// 鱼雷
 	Torpedoes []*TorpedoLauncher
+	// 释放器
+	Releasers []*Releaser `json:"releasers"`
 	// 最大射程（各类武器射程最大值）
 	MaxRange float64
 	// 拥有的武器情况
@@ -54,6 +56,7 @@ type Weapon struct {
 	HasSecondaryGun    bool
 	HasAntiAircraftGun bool
 	HasTorpedo         bool
+	HasReleaser        bool
 	// 武器禁用情况
 	MainGunDisabled         bool
 	SecondaryGunDisabled    bool
