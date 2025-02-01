@@ -128,8 +128,8 @@ func initPlaneMap() {
 		}
 		// 当前生命值
 		p.CurHP = p.TotalHP
-		// 折算速度
-		p.MaxSpeed /= 600
+		// 折算速度（公里换成节）
+		p.MaxSpeed /= 600 * 2.5
 		p.Acceleration /= 600
 		// 检查伤害减免值不能超过 1
 		p.DamageReduction = min(1, p.DamageReduction)

@@ -77,7 +77,8 @@ type Plane struct {
 
 var planeMap = map[string]*Plane{}
 
-func newPlane(name string, curPos MapPos, rotation float64) *Plane {
+// NewPlane 生成飞机
+func NewPlane(name string, curPos MapPos, rotation float64) *Plane {
 	plane, ok := planeMap[name]
 	if !ok {
 		log.Fatalf("plane %s no found", name)

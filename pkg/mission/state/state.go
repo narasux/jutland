@@ -78,6 +78,8 @@ type MissionState struct {
 	DestroyedShips []*obj.BattleShip
 	// 战舰尾流
 	Trails []*obj.Trail
+	// 飞机
+	Planes map[string]*obj.Plane
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*obj.Bullet
 	// 游戏标识
@@ -197,6 +199,11 @@ func NewMissionState(mission string) *MissionState {
 		DestroyedShips:            []*obj.BattleShip{},
 		Trails:                    []*obj.Trail{},
 		ForwardingBullets:         []*obj.Bullet{},
-		GameMarks:                 map[obj.MarkID]*obj.Mark{},
+		Planes:                    map[string]*obj.Plane{
+			//"1": obj.NewPlane("F4F-3", obj.NewMapPos(5, 5), 90),
+			//"2": obj.NewPlane("SBD-3", obj.NewMapPos(6, 6), 180),
+			//"3": obj.NewPlane("TBD-1", obj.NewMapPos(7, 7), 270),
+		},
+		GameMarks: map[obj.MarkID]*obj.Mark{},
 	}
 }

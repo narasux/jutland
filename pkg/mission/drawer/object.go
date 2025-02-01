@@ -12,6 +12,7 @@ import (
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
+	planeImg "github.com/narasux/jutland/pkg/resources/images/plane"
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -203,6 +204,31 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 			(s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-30,
 		)
 		screen.DrawImage(explodeImg, opts)
+	}
+}
+
+// 绘制飞机
+func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) {
+	// 飞机排序，确保渲染顺序是一致的（否则重叠会出现问题）
+	planes := lo.Values(ms.Planes)
+	slices.SortFunc(planes, func(a, b *obj.Plane) int {
+		return strings.Compare(a.Uid, b.Uid)
+	})
+
+	for _, p := range planes {
+		// 只有在屏幕中的才渲染
+		if !ms.Camera.Contains(p.CurPos) {
+			continue
+		}
+
+		pImg := planeImg.Get(p.Name, ms.GameOpts.Zoom)
+		opts := d.genDefaultDrawImageOptions()
+		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
+		opts.GeoM.Translate(
+			(p.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(pImg.Bounds().Dx()/2),
+			(p.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(pImg.Bounds().Dy()/2),
+		)
+		screen.DrawImage(pImg, opts)
 	}
 }
 
