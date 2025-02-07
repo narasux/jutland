@@ -89,5 +89,96 @@
       bombs: [],
       torpedoes: []
     }
+  },
+  {
+    name: "A6M_0",
+    displayName: "零式",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 100,
+    damageReduction: 0.3,
+    maxSpeed: 533,
+    acceleration: 30,
+    rotateSpeed: 16,
+    length: 9,
+    width: 12,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 2.424,
+    range: 3350,
+    description: [
+      "战斗机（日）",
+      "2 x 20mm 机炮",
+      "2 x 7.7mm 机枪",
+    ],
+    weapon: {
+      guns: [],
+      rockets: [],
+      bombs: [],
+      torpedoes: []
+    }
+  },
+  {
+    name: "D3A_99",
+    displayName: "九九式",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    totalHP: 100,
+    damageReduction: 0.5,
+    maxSpeed: 382,
+    acceleration: 22,
+    rotateSpeed: 9,
+    length: 10,
+    width: 15,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 3.65,
+    range: 1472,
+    description: [
+      "俯冲轰炸机（日）",
+      "2 x 7.7mm 机枪（前向）",
+      "1 x 7.7mm 机枪（后座）",
+      "1 x 250kg，2 x 60kg 炸弹"
+    ],
+    weapon: {
+      guns: [],
+      rockets: [],
+      bombs: [],
+      torpedoes: []
+    }
+  },
+  {
+    name: "B5N2_97",
+    displayName: "九七式",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    totalHP: 100,
+    damageReduction: 0.5,
+    maxSpeed: 378,
+    acceleration: 20,
+    rotateSpeed: 7,
+    length: 10,
+    width: 16,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 3.8,
+    range: 1992,
+    description: [
+      "鱼雷轰炸机（日）",
+      "1 x 7.62mm 机枪（后座）",
+      "1 x 九一式 450mm 鱼雷"
+    ],
+    weapon: {
+      guns: [],
+      rockets: [],
+      bombs: [],
+      torpedoes: []
+    }
   }
 ]

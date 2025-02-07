@@ -200,9 +200,12 @@ func NewMissionState(mission string) *MissionState {
 		Trails:                    []*obj.Trail{},
 		ForwardingBullets:         []*obj.Bullet{},
 		Planes:                    map[string]*obj.Plane{
-			//"1": obj.NewPlane("F4F-3", obj.NewMapPos(5, 5), 90),
-			//"2": obj.NewPlane("SBD-3", obj.NewMapPos(6, 6), 180),
-			//"3": obj.NewPlane("TBD-1", obj.NewMapPos(7, 7), 270),
+			//"1": obj.NewPlane("F4F-3", obj.NewMapPos(4, 4), 90),
+			//"2": obj.NewPlane("SBD-3", obj.NewMapPos(5, 5), 180),
+			//"3": obj.NewPlane("TBD-1", obj.NewMapPos(6, 6), 270),
+			//"4": obj.NewPlane("A6M_0", obj.NewMapPos(7, 7), 45),
+			//"5": obj.NewPlane("D3A_99", obj.NewMapPos(8, 8), 135),
+			//"6": obj.NewPlane("B5N2_97", obj.NewMapPos(9, 9), 225),
 		},
 		GameMarks: map[obj.MarkID]*obj.Mark{},
 	}

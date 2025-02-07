@@ -221,7 +221,8 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 			continue
 		}
 
-		pImg := planeImg.Get(p.Name, ms.GameOpts.Zoom)
+		// TODO 目前飞机默认战舰 2 倍尺寸，渲染效果会好一些
+		pImg := planeImg.Get(p.Name, ms.GameOpts.Zoom*2)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
 		opts.GeoM.Translate(

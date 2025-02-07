@@ -23,6 +23,7 @@ func init() {
 	}
 
 	loadPlaneImages(planeZoom10ImgMap, planeTypes)
+	genZoomImages(planeZoom10ImgMap, planeZoom8ImgMap, 1.25)
 	genZoomImages(planeZoom10ImgMap, planeZoom4ImgMap, 2.5)
 	genZoomImages(planeZoom10ImgMap, planeZoom2ImgMap, 5)
 	genZoomImages(planeZoom10ImgMap, planeZoom1ImgMap, 10)
@@ -68,6 +69,7 @@ func genZoomImages(
 
 var (
 	planeZoom10ImgMap = map[string]*ebiten.Image{}
+	planeZoom8ImgMap  = map[string]*ebiten.Image{}
 	planeZoom4ImgMap  = map[string]*ebiten.Image{}
 	planeZoom2ImgMap  = map[string]*ebiten.Image{}
 	planeZoom1ImgMap  = map[string]*ebiten.Image{}
@@ -81,6 +83,8 @@ func Get(name string, zoom int) *ebiten.Image {
 		return planeZoom2ImgMap[name]
 	} else if zoom == 4 {
 		return planeZoom4ImgMap[name]
+	} else if zoom == 8 {
+		return planeZoom8ImgMap[name]
 	}
 	return planeZoom10ImgMap[name]
 }
