@@ -237,7 +237,17 @@
     reloadTime: 0.05,
     range: 2.5,
     bulletSpread: 15,
-    bulletSpeed: 900
+    bulletSpeed: 930
+  },
+  // 美国海军 US/7.62 单装机枪
+  {
+    name: "US/7.62",
+    bulletName: "US/GB/7.62/1925",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 1.6,
+    bulletSpread: 10,
+    bulletSpeed: 850
   },
   // 日本海军 三联装 51 厘米 45 倍口径舰炮
   {
@@ -454,10 +464,20 @@
     name: "JP/25/60",
     bulletName: "JP/GB/25/1936",
     bulletCount: 1,
-    reloadTime: 0.05,
+    reloadTime: 0.08,
     range: 5,
     bulletSpread: 25,
     bulletSpeed: 900
+  },
+  // 日本海军 单装 20 毫米机炮
+  {
+    name: "JP/20",
+    bulletName: "JP/GB/20/1938",
+    bulletCount: 1,
+    reloadTime: 0.08,
+    range: 3,
+    bulletSpread: 25,
+    bulletSpeed: 750
   },
   // 日本海军 单装 13 毫米机枪
   {
@@ -468,6 +488,36 @@
     range: 2,
     bulletSpread: 20,
     bulletSpeed: 800
+  },
+  // 日本海军 单装 7.92 毫米机枪
+  {
+    name: "JP/7.92",
+    bulletName: "JP/GB/7.92/1930",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 1.6,
+    bulletSpread: 20,
+    bulletSpeed: 840
+  },
+  // 日本海军 单装 7.7 毫米机枪
+  {
+    name: "JP/7.7",
+    bulletName: "JP/GB/7.7/1922",
+    bulletCount: 1,
+    reloadTime: 0.04,
+    range: 1.6,
+    bulletSpread: 15,
+    bulletSpeed: 870
+  },
+  // 日本海军 单装 7.62 毫米机枪
+  {
+    name: "JP/7.62",
+    bulletName: "JP/GB/7.62/1925",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 1.5,
+    bulletSpread: 12,
+    bulletSpeed: 850
   },
   // 德国海军 GER/381/52 双联装舰炮
   {

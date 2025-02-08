@@ -87,6 +87,13 @@
     criticalRate: 0
   },
   {
+    name: "US/GB/7.62/1925",
+    type: "shell",
+    diameter: 8,
+    damage: 0.1,
+    criticalRate: 0
+  },
+  {
     name: "JP/GB/510/1945",
     type: "shell",
     diameter: 510,
@@ -185,10 +192,38 @@
     criticalRate: 0.0003
   },
   {
+    name: "JP/GB/20/1938",
+    type: "shell",
+    diameter: 20,
+    damage: 1.3,
+    criticalRate: 0.0002
+  },
+  {
     name: "JP/GB/13/1935",
     type: "shell",
     diameter: 13,
     damage: 0.2,
+    criticalRate: 0
+  },
+  {
+    name: "JP/GB/7.92/1930",
+    type: "shell",
+    diameter: 8,
+    damage: 0.12,
+    criticalRate: 0
+  },
+  {
+    name: "JP/GB/7.7/1922",
+    type: "shell",
+    diameter: 8,
+    damage: 0.11,
+    criticalRate: 0
+  },
+  {
+    name: "JP/GB/7.62/1925",
+    type: "shell",
+    diameter: 8,
+    damage: 0.1,
     criticalRate: 0
   },
   {
