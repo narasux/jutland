@@ -578,5 +578,26 @@
     diameter: 160,
     damage: 335,
     criticalRate: 0.005
+  },
+  {
+    name: "JP/BB/500",
+    type: "bomb",
+    diameter: 380,
+    damage: 2000,
+    criticalRate: 0.07
+  },
+  {
+    name: "JP/BB/250",
+    type: "bomb",
+    diameter: 280,
+    damage: 910,
+    criticalRate: 0.03
+  },
+  {
+    name: "JP/BB/60",
+    type: "bomb",
+    diameter: 70,
+    damage: 125,
+    criticalRate: 0.002
   }
 ]

@@ -22,7 +22,32 @@
       "4 x 12.7mm 机枪",
     ],
     weapon: {
-      guns: [],
+      guns: [
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
       rockets: [],
       bombs: [],
       torpedoes: []
@@ -53,9 +78,47 @@
       "1 x 2000 磅，2 x 250 磅炸弹"
     ],
     weapon: {
-      guns: [],
+      guns: [
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/7.62/2",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
       rockets: [],
-      bombs: [],
+      bombs: [
+        {
+          name: "US/BB/907",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
       torpedoes: []
     }
   },
@@ -84,10 +147,30 @@
       "1 x Mk-13 570mm 鱼雷"
     ],
     weapon: {
-      guns: [],
+      guns: [
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
       rockets: [],
       bombs: [],
-      torpedoes: []
+      torpedoes: [
+        {
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
     }
   },
   {
@@ -114,7 +197,32 @@
       "2 x 7.7mm 机枪",
     ],
     weapon: {
-      guns: [],
+      guns: [
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
       rockets: [],
       bombs: [],
       torpedoes: []
@@ -145,9 +253,47 @@
       "1 x 250kg，2 x 60kg 炸弹"
     ],
     weapon: {
-      guns: [],
+      guns: [
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
       rockets: [],
-      bombs: [],
+      bombs: [
+        {
+          name: "JP/BB/250",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/BB/60",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/BB/60",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
       torpedoes: []
     }
   },
@@ -175,10 +321,24 @@
       "1 x 九一式 450mm 鱼雷"
     ],
     weapon: {
-      guns: [],
+      guns: [
+        {
+          name: "JP/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
       rockets: [],
       bombs: [],
-      torpedoes: []
+      torpedoes: [
+        {
+          name: "JP/AST/450",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
     }
   }
 ]

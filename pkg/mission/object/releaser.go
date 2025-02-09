@@ -18,15 +18,26 @@ type Releaser struct {
 	Range float64 `json:"range"`
 	// 弹药速度
 	BulletSpeed float64 `json:"bulletSpeed"`
+	// 相对位置
+	// 0.35 -> 从中心往头部 35% 舰体长度
+	// -0.3 -> 从中心往尾部 30% 舰体长度
+	PosPercent float64
+	// 左射界 (180, 360]
+	LeftFiringArc FiringArc
+	// 右射界 (0, 180]
+	RightFiringArc FiringArc
 }
 
 var releaserMap = map[string]*Releaser{}
 
-func newReleaser(name string) *Releaser {
+func newReleaser(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Releaser {
 	releaser, ok := releaserMap[name]
 	if !ok {
 		log.Fatalf("releaser %s no found", name)
 	}
 	r := deepcopy.Copy(*releaser).(Releaser)
+	r.PosPercent = posPercent
+	r.LeftFiringArc = leftFireArc
+	r.RightFiringArc = rightFireArc
 	return &r
 }

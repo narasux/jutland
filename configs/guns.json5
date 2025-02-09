@@ -239,6 +239,16 @@
     bulletSpread: 15,
     bulletSpeed: 930
   },
+  // 美国海军 US/7.62 双联装机枪
+  {
+    name: "US/7.62/2",
+    bulletName: "US/GB/7.62/1925",
+    bulletCount: 2,
+    reloadTime: 0.05,
+    range: 1.6,
+    bulletSpread: 10,
+    bulletSpeed: 850
+  },
   // 美国海军 US/7.62 单装机枪
   {
     name: "US/7.62",

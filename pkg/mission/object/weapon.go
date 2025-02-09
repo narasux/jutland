@@ -39,6 +39,8 @@ type Weapon struct {
 	AntiAircraftGunsMD []WeaponMetadata `json:"antiAircraftGuns"`
 	// 鱼雷元数据
 	TorpedoesMD []WeaponMetadata `json:"torpedoes"`
+	// 释放器元数据
+	ReleasersMD []WeaponMetadata `json:"releasers"`
 	// 主炮
 	MainGuns []*Gun
 	// 副炮
@@ -48,7 +50,7 @@ type Weapon struct {
 	// 鱼雷
 	Torpedoes []*TorpedoLauncher
 	// 释放器
-	Releasers []*Releaser `json:"releasers"`
+	Releasers []*Releaser
 	// 最大射程（各类武器射程最大值）
 	MaxRange float64
 	// 拥有的武器情况

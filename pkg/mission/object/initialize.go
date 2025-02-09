@@ -126,6 +126,23 @@ func initPlaneMap() {
 				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
+		// 炸弹释放器
+		for _, releaserMD := range p.Weapon.ReleasersMD {
+			p.Weapon.Releasers = append(p.Weapon.Releasers, newReleaser(
+				releaserMD.Name, releaserMD.PosPercent,
+				FiringArc{Start: releaserMD.LeftFiringArc[0], End: releaserMD.LeftFiringArc[1]},
+				FiringArc{Start: releaserMD.RightFiringArc[0], End: releaserMD.RightFiringArc[1]},
+			))
+		}
+		// 鱼雷
+		for _, torpedoMD := range p.Weapon.TorpedoesMD {
+			p.Weapon.Torpedoes = append(p.Weapon.Torpedoes, newTorpedoLauncher(
+				torpedoMD.Name, torpedoMD.PosPercent,
+				FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
+				FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
+			))
+		}
+
 		// 当前生命值
 		p.CurHP = p.TotalHP
 		// 折算速度（公里换成节）
