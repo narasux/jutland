@@ -83,21 +83,24 @@ func (lc *TorpedoLauncher) Reloaded() bool {
 }
 
 // Fire 发射
-func (lc *TorpedoLauncher) Fire(ship, enemy *BattleShip) []*Bullet {
-	curPos := ship.CurPos.Copy()
+func (lc *TorpedoLauncher) Fire(self Attacker, enemy Hurtable) []*Bullet {
+	sState := self.ManeuverState()
+	eState := enemy.ManeuverState()
+
+	curPos := sState.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
-	gunOffset := lc.PosPercent * ship.Length / constants.MapBlockSize / 2
-	curPos.AddRx(math.Sin(ship.CurRotation*math.Pi/180) * gunOffset)
-	curPos.SubRy(math.Cos(ship.CurRotation*math.Pi/180) * gunOffset)
+	gunOffset := lc.PosPercent * self.GeometricSize().Length / constants.MapBlockSize / 2
+	curPos.AddRx(math.Sin(sState.CurRotation*math.Pi/180) * gunOffset)
+	curPos.SubRy(math.Cos(sState.CurRotation*math.Pi/180) * gunOffset)
 
 	// 考虑提前量（依赖敌舰速度，角度）
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		ship.CurPos.RX, ship.CurPos.RY, lc.BulletSpeed,
-		enemy.CurPos.RX, enemy.CurPos.RY, enemy.CurSpeed, enemy.CurRotation,
+		sState.CurPos.RX, sState.CurPos.RY, lc.BulletSpeed,
+		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := NewMapPosR(targetRx, targetRY)
 
-	if !lc.CanFire(ship.CurRotation, curPos, targetPos) {
+	if !lc.CanFire(sState.CurRotation, curPos, targetPos) {
 		return []*Bullet{}
 	}
 	// 鱼雷不是齐射的，是一个一个来的
@@ -115,7 +118,7 @@ func (lc *TorpedoLauncher) Fire(ship, enemy *BattleShip) []*Bullet {
 	life := int(lc.Range/lc.BulletSpeed) + 5
 	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*Bullet{NewBullets(
-		lc.BulletName, curPos, targetPos, BulletShotTypeDirect, lc.BulletSpeed, life, ship.Uid, ship.BelongPlayer,
+		lc.BulletName, curPos, targetPos, BulletShotTypeDirect, lc.BulletSpeed, life, self.ID(), self.Player(),
 	)}
 }
 

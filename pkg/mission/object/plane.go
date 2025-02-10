@@ -2,10 +2,16 @@ package object
 
 import (
 	"log"
+	"math"
+	"math/rand"
+	"slices"
 
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/resources/mapcfg"
+	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 // PlaneType 飞机类型
@@ -73,12 +79,136 @@ type Plane struct {
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
+	// 所属战舰（uid）
+	BelongShip string
+}
+
+var _ Hurtable = (*Plane)(nil)
+
+var _ Attacker = (*Plane)(nil)
+
+// ID 唯一标识
+func (p *Plane) ID() string {
+	return p.Uid
+}
+
+// Player 所属玩家
+func (p *Plane) Player() faction.Player {
+	return p.BelongPlayer
+}
+
+// ManeuverState 机动状态
+func (p *Plane) ManeuverState() UnitManeuverState {
+	return UnitManeuverState{
+		CurPos:      p.CurPos.Copy(),
+		CurRotation: p.CurRotation,
+		CurSpeed:    p.CurSpeed,
+	}
+}
+
+// GeometricSize 几何尺寸
+func (p *Plane) GeometricSize() UnitGeometricSize {
+	return UnitGeometricSize{Length: p.Length, Width: p.Width}
+}
+
+// Attack 攻击指定目标
+func (p *Plane) Attack(shipUid string) {
+	p.AttackTarget = shipUid
+}
+
+// Fire 向指定目标发射武器
+func (p *Plane) Fire(enemy Hurtable) []*Bullet {
+	shotBullets := []*Bullet{}
+	// 如果生命值为 0，那还 Fire 个锤子，直接返回
+	if p.CurHP <= 0 {
+		return shotBullets
+	}
+	for i := 0; i < len(p.Weapon.MainGuns); i++ {
+		shotBullets = slices.Concat(shotBullets, p.Weapon.MainGuns[i].Fire(p, enemy))
+	}
+	for i := 0; i < len(p.Weapon.SecondaryGuns); i++ {
+		shotBullets = slices.Concat(shotBullets, p.Weapon.SecondaryGuns[i].Fire(p, enemy))
+	}
+	// FIXME 这里改成投掷炸弹
+	//for i := 0; i < len(s.Weapon.AntiAircraftGuns); i++ {
+	//	shotBullets = slices.Concat(shotBullets, s.Weapon.AntiAircraftGuns[i].Fire(s, enemy))
+	//}
+	for i := 0; i < len(p.Weapon.Torpedoes); i++ {
+		shotBullets = slices.Concat(shotBullets, p.Weapon.Torpedoes[i].Fire(p, enemy))
+	}
+	return shotBullets
+}
+
+// HurtBy 受到伤害
+func (p *Plane) HurtBy(bullet *Bullet) {
+	realDamage := bullet.Damage * (1 - p.DamageReduction)
+
+	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
+	criticalType := CriticalTypeNone
+	randVal := rand.Float64()
+	if randVal < bullet.CriticalRate/10 {
+		realDamage *= 10
+		criticalType = CriticalTypeTenTimes
+	} else if randVal < bullet.CriticalRate {
+		realDamage *= 3
+		criticalType = CriticalTypeThreeTimes
+	}
+
+	// 计算生命值 & 累计伤害
+	p.CurHP = max(0, p.CurHP-realDamage)
+	// 弹药是可以造成重复伤害的，这里需要计算累计值，暴击类型统计，只统计最高倍数
+	bullet.RealDamage += realDamage
+	bullet.CriticalType = max(criticalType, bullet.CriticalType)
+}
+
+// MoveTo 移动到指定位置
+func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive bool) {
+	// 如果生命值为 0，肯定是走不动，直接返回
+	if p.CurHP <= 0 {
+		return true
+	}
+	// 未到达目标位置，逐渐加速
+	if p.CurSpeed < p.MaxSpeed {
+		p.CurSpeed = min(p.MaxSpeed, p.CurSpeed+p.Acceleration)
+	}
+	// 到目标位置附近，逐渐减速
+	if p.CurPos.Near(targetPos, p.Length/constants.MapBlockSize*1.5) {
+		p.CurSpeed = max(p.Acceleration*20, p.CurSpeed-p.Acceleration*10)
+	}
+	targetRotation := geometry.CalcAngleBetweenPoints(p.CurPos.RX, p.CurPos.RY, targetPos.RX, targetPos.RY)
+	// 逐渐转向
+	if p.CurRotation != targetRotation {
+		// 默认顺时针旋转
+		rotateFlag := RotateFlagClockwise
+		// 如果逆时针夹角小于顺时针夹角，则需要逆时针旋转
+		if math.Mod(targetRotation-p.CurRotation+360, 360) > 180 {
+			rotateFlag = RotateFlagAnticlockwise
+		}
+		p.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-p.CurRotation), p.RotateSpeed)
+		p.CurRotation = math.Mod(p.CurRotation+360, 360)
+	}
+	nextPos := p.CurPos.Copy()
+	// 修改位置
+	nextPos.AddRx(math.Sin(p.CurRotation*math.Pi/180) * p.CurSpeed)
+	nextPos.SubRy(math.Cos(p.CurRotation*math.Pi/180) * p.CurSpeed)
+	// 防止出边界
+	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
+	// 移动到新位置
+	p.CurPos = nextPos
+
+	return false
 }
 
 var planeMap = map[string]*Plane{}
 
 // NewPlane 生成飞机
-func NewPlane(name string, curPos MapPos, rotation float64) *Plane {
+func NewPlane(
+	name string,
+	curPos MapPos,
+	rotation float64,
+	shipUid string,
+	player faction.Player,
+) *Plane {
 	plane, ok := planeMap[name]
 	if !ok {
 		log.Fatalf("plane %s no found", name)
@@ -86,6 +216,7 @@ func NewPlane(name string, curPos MapPos, rotation float64) *Plane {
 	p := deepcopy.Copy(*plane).(Plane)
 	p.CurPos = curPos
 	p.CurRotation = rotation
-	// FIXME 战机的其他属性初始化
+	p.BelongPlayer = player
+	p.BelongShip = shipUid
 	return &p
 }

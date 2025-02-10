@@ -100,6 +100,34 @@ type BattleShip struct {
 	BelongPlayer faction.Player
 }
 
+var _ Hurtable = (*BattleShip)(nil)
+
+var _ Attacker = (*BattleShip)(nil)
+
+// ID 唯一标识
+func (s *BattleShip) ID() string {
+	return s.Uid
+}
+
+// Player 所属玩家
+func (s *BattleShip) Player() faction.Player {
+	return s.BelongPlayer
+}
+
+// ManeuverState 机动状态
+func (s *BattleShip) ManeuverState() UnitManeuverState {
+	return UnitManeuverState{
+		CurPos:      s.CurPos.Copy(),
+		CurRotation: s.CurRotation,
+		CurSpeed:    s.CurSpeed,
+	}
+}
+
+// GeometricSize 几何尺寸
+func (s *BattleShip) GeometricSize() UnitGeometricSize {
+	return UnitGeometricSize{Length: s.Length, Width: s.Width}
+}
+
 // DisableWeapon 禁用武器
 func (s *BattleShip) DisableWeapon(t WeaponType) {
 	if t == WeaponTypeAll || t == WeaponTypeMainGun {
@@ -162,7 +190,7 @@ func (s *BattleShip) Attack(shipUid string) {
 }
 
 // Fire 向指定目标发射武器
-func (s *BattleShip) Fire(enemy *BattleShip) []*Bullet {
+func (s *BattleShip) Fire(enemy Hurtable) []*Bullet {
 	shotBullets := []*Bullet{}
 	// 如果生命值为 0，那还 Fire 个锤子，直接返回
 	if s.CurHP <= 0 {
