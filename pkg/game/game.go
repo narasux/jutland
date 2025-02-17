@@ -214,7 +214,6 @@ func (g *Game) handleMenuSelect() error {
 			if isMouseButtonLeftJustPressed() {
 				g.mode = button.Mode
 				audio.PlayAudioToEnd(audioRes.NewMenuButtonClick())
-				g.player.Close()
 			}
 		} else {
 			button.Color = colorx.White

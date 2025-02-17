@@ -6383,9 +6383,9 @@
     timeCost: 35,
     description: [
       "战列舰（英）",
-      "主炮：3 座三联装 406mm/45",
-      "副炮：6 座双联装 152mm/50",
-      "高平炮：6 座单装 120mm/45",
+      "主炮：3 座三联装 406mm/45，副炮：6 座双联装 152mm/50",
+      "高平炮：6 座单装 120mm/45，高炮：6 座八联装 40mm/39",
+      "高炮：4 座四联装 40mm/56，高炮：59 座单装 20mm/70",
       "鱼雷：2 座单装直航 622mm",
     ],
     weapon: {
@@ -6496,6 +6496,491 @@
           posPercent: -0.8,
           rightFiringArc: [150, 180],
           leftFiringArc: [180, 330]
+        },
+      ],
+      antiAircraftGuns: [
+        // 前高炮 A
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.44,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [270, 315]
+        },
+        // 左高炮 B
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.44,
+          rightFiringArc: [45, 90],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 210]
+        },
+        // 左高炮 C
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.76,
+          rightFiringArc: [150, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 后高炮 D
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.99,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 右高炮 A
+        {
+          name: "UK/40/56/4",
+          posPercent: -0.2,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [240, 360]
+        },
+        // 左高炮 A
+        {
+          name: "UK/40/56/4",
+          posPercent: -0.2,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [210, 360]
+        },
+        // 右高炮 B
+        {
+          name: "UK/40/56/4",
+          posPercent: -0.54,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [215, 270]
+        },
+        // 左高炮 B
+        {
+          name: "UK/40/56/4",
+          posPercent: -0.54,
+          rightFiringArc: [90, 135],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 A
+        {
+          name: "UK/20/70",
+          posPercent: 0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 A
+        {
+          name: "UK/20/70",
+          posPercent: 0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "UK/20/70",
+          posPercent: 0.52,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 B
+        {
+          name: "UK/20/70",
+          posPercent: 0.52,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 C
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "UK/20/70",
+          posPercent: 0.48,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 D
+        {
+          name: "UK/20/70",
+          posPercent: 0.48,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "UK/20/70",
+          posPercent: 0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 E
+        {
+          name: "UK/20/70",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 F
+        {
+          name: "UK/20/70",
+          posPercent: -0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 F
+        {
+          name: "UK/20/70",
+          posPercent: -0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 G
+        {
+          name: "UK/20/70",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 G
+        {
+          name: "UK/20/70",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 H
+        {
+          name: "UK/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 H
+        {
+          name: "UK/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 I
+        {
+          name: "UK/20/70",
+          posPercent: -0.15,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [270, 360]
+        },
+        // 左高炮 I
+        {
+          name: "UK/20/70",
+          posPercent: -0.15,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [210, 360]
+        },
+        // 右高炮 J
+        {
+          name: "UK/20/70",
+          posPercent: -0.19,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [270, 360]
+        },
+        // 左高炮 J
+        {
+          name: "UK/20/70",
+          posPercent: -0.19,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [210, 360]
+        },
+        // 右高炮 K
+        {
+          name: "UK/20/70",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 K
+        {
+          name: "UK/20/70",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 L
+        {
+          name: "UK/20/70",
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 L
+        {
+          name: "UK/20/70",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 M
+        {
+          name: "UK/20/70",
+          posPercent: -0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 M
+        {
+          name: "UK/20/70",
+          posPercent: -0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 N
+        {
+          name: "UK/20/70",
+          posPercent: -0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 N
+        {
+          name: "UK/20/70",
+          posPercent: -0.39,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 O
+        {
+          name: "UK/20/70",
+          posPercent: -0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 O
+        {
+          name: "UK/20/70",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 P
+        {
+          name: "UK/20/70",
+          posPercent: -0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 P
+        {
+          name: "UK/20/70",
+          posPercent: -0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 Q
+        {
+          name: "UK/20/70",
+          posPercent: -0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 Q
+        {
+          name: "UK/20/70",
+          posPercent: -0.43,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 R
+        {
+          name: "UK/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 R
+        {
+          name: "UK/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 S
+        {
+          name: "UK/20/70",
+          posPercent: -0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 S
+        {
+          name: "UK/20/70",
+          posPercent: -0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 T
+        {
+          name: "UK/20/70",
+          posPercent: -0.44,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 T
+        {
+          name: "UK/20/70",
+          posPercent: -0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 U
+        {
+          name: "UK/20/70",
+          posPercent: -0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 U
+        {
+          name: "UK/20/70",
+          posPercent: -0.6,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 V
+        {
+          name: "UK/20/70",
+          posPercent: -0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 V
+        {
+          name: "UK/20/70",
+          posPercent: -0.62,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 W
+        {
+          name: "UK/20/70",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 W
+        {
+          name: "UK/20/70",
+          posPercent: -0.64,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 X
+        {
+          name: "UK/20/70",
+          posPercent: -0.66,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 X
+        {
+          name: "UK/20/70",
+          posPercent: -0.66,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 Y
+        {
+          name: "UK/20/70",
+          posPercent: -0.68,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 Y
+        {
+          name: "UK/20/70",
+          posPercent: -0.68,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后舰桥高炮 A
+        {
+          name: "UK/20/70",
+          posPercent: -0.69,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后舰桥高炮 A
+        {
+          name: "UK/20/70",
+          posPercent: -0.69,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后舰桥高炮 B
+        {
+          name: "UK/20/70",
+          posPercent: -0.72,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后舰桥高炮 B
+        {
+          name: "UK/20/70",
+          posPercent: -0.72,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 ZA
+        {
+          name: "UK/20/70",
+          posPercent: -0.79,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 ZA
+        {
+          name: "UK/20/70",
+          posPercent: -0.79,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 270]
+        },
+        // 后高炮 Z
+        {
+          name: "UK/20/70",
+          posPercent: -0.84,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        // 右高炮 ZC
+        {
+          name: "UK/20/70",
+          posPercent: -0.9,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 左高炮 ZC
+        {
+          name: "UK/20/70",
+          posPercent: -0.9,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 315]
         },
       ],
       torpedoes: [

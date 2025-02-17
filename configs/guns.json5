@@ -799,6 +799,36 @@
     bulletSpread: 20,
     bulletSpeed: 880
   },
+  // 英国海军 UK/40/56 四联装高炮
+  {
+    name: "UK/40/56/4",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 4,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 860
+  },
+  // 英国海军 UK/40/56 四联装高炮
+  {
+    name: "UK/40/39/8",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 8,
+    reloadTime: 0.6,
+    range: 3,
+    bulletSpread: 40,
+    bulletSpeed: 585
+  },
+  // 英国海军 UK/20/70 单装高炮
+  {
+    name: "UK/20/70",
+    bulletName: "UK/GB/20/1940",
+    bulletCount: 1,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910
+  },
   // 英国海军 UK/12.7 双联装机枪
   {
     name: "UK/12.7/2",

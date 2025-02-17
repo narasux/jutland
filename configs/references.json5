@@ -209,6 +209,26 @@
     ]
   },
   {
+    name: "nelson",
+    description: [
+      "纳尔逊级是英国一战后设计建造的战列舰。设计参考了战争经验，",
+      "在主炮布局和防护设计上大胆创新，采用三联装主炮全前置布局，",
+      "牺牲后向火力以增强防护性能。该级舰共建成两艘，在二战中曾",
+      "参与丹麦海峡海战，诺曼底登陆等战役，展现出强大作战能力。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "HMS Nelson in 1945",
+        url: "https://www.deviantart.com/tzoli/art/HMS-Nelson-in-1945-1060440759"
+      },
+      {
+        name: "维基百科 - 纳尔逊级",
+        url: "https://zh.wikipedia.org/zh-hans/%E7%BA%B3%E5%B0%94%E9%80%8A%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+      }
+    ]
+  },
+  {
     name: "soviet_union",
     description: [
       "苏联级（23 型）是苏联在 30 年代末期设计建造的一级战列舰。",

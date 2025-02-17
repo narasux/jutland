@@ -16,8 +16,6 @@ import (
 
 // 任务选择
 func (g *Game) handleMissionSelect() error {
-	g.player.Play(audioRes.NewMissionsBackground())
-
 	missions := metadata.AvailableMissions()
 	curIndex := lo.IndexOf(missions, g.curMission)
 
@@ -34,6 +32,7 @@ func (g *Game) handleMissionSelect() error {
 
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		g.mode = GameModeMissionLoading
+		g.player.Close()
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		g.mode = GameModeMenuSelect
 	}
@@ -42,6 +41,8 @@ func (g *Game) handleMissionSelect() error {
 
 // 任务加载
 func (g *Game) handleMissionLoading() error {
+	g.player.Play(audioRes.NewMissionsBackground())
+
 	// 确保先展示加载中的界面，再加载地图数据
 	if !g.objStates.LoadingInterface.Ready {
 		return nil
