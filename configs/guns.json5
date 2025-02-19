@@ -7,7 +7,9 @@
     reloadTime: 3,
     range: 128,
     bulletSpread: 10,
-    bulletSpeed: 2300
+    bulletSpeed: 2300,
+    antiShip: true,
+    antiAircraft: false
   },
   // 主炮 - 冲鸭
   {
@@ -17,7 +19,9 @@
     reloadTime: 1,
     range: 36,
     bulletSpread: 100,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: false
   },
   // 副炮 - 润鸭
   {
@@ -27,7 +31,9 @@
     reloadTime: 0.5,
     range: 20,
     bulletSpread: 100,
-    bulletSpeed: 1000
+    bulletSpeed: 1000,
+    antiShip: true,
+    antiAircraft: true
   },
   // 防空炮 - 飞鸭
   {
@@ -37,7 +43,9 @@
     reloadTime: 0.5,
     range: 6,
     bulletSpread: 20,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
   },
   // 水滴撞击
   {
@@ -47,7 +55,9 @@
     reloadTime: 0.001,
     range: 1.5,
     bulletSpread: 0,
-    bulletSpeed: 3000
+    bulletSpeed: 3000,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/127/38/MK45 单裝舰炮
   {
@@ -57,7 +67,9 @@
     reloadTime: 1,
     range: 22,
     bulletSpread: 50,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/457/45 三联装舰炮
   {
@@ -67,7 +79,9 @@
     reloadTime: 17,
     range: 36,
     bulletSpread: 180,
-    bulletSpeed: 780
+    bulletSpeed: 780,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/406/50/MK7 三联装舰炮
   {
@@ -77,7 +91,9 @@
     reloadTime: 12,
     range: 38,
     bulletSpread: 150,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/406/45/MK6 三联装舰炮
   {
@@ -87,7 +103,9 @@
     reloadTime: 12,
     range: 37,
     bulletSpread: 160,
-    bulletSpeed: 760
+    bulletSpeed: 760,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/305/50/MK8 三联装舰炮
   {
@@ -97,7 +115,9 @@
     reloadTime: 10,
     range: 35,
     bulletSpread: 120,
-    bulletSpeed: 840
+    bulletSpeed: 840,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/203/55 三联装舰炮
   {
@@ -107,7 +127,9 @@
     reloadTime: 7,
     range: 26,
     bulletSpread: 100,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/203/55 双联装舰炮
   {
@@ -117,7 +139,9 @@
     reloadTime: 7,
     range: 26,
     bulletSpread: 100,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/127/38/MK12 双联装舰炮
   {
@@ -127,7 +151,9 @@
     reloadTime: 1.5,
     range: 18,
     bulletSpread: 80,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/127/38/MK12 单装舰炮
   {
@@ -137,7 +163,9 @@
     reloadTime: 1.4,
     range: 18,
     bulletSpread: 80,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/127/25/MK10 单裝高平两用炮
   {
@@ -147,7 +175,9 @@
     reloadTime: 1.3,
     range: 15,
     bulletSpread: 120,
-    bulletSpeed: 650
+    bulletSpeed: 650,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/127/54/MK39 双联装舰炮
   {
@@ -157,7 +187,9 @@
     reloadTime: 1.4,
     range: 24,
     bulletSpread: 80,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/76/50 单装舰炮
   {
@@ -167,7 +199,9 @@
     reloadTime: 1,
     range: 13,
     bulletSpread: 70,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/40/60/4 四联装装高炮
   {
@@ -177,7 +211,9 @@
     reloadTime: 0.5,
     range: 7,
     bulletSpread: 20,
-    bulletSpeed: 880
+    bulletSpeed: 880,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/40/60/2 双联装装高炮
   {
@@ -187,7 +223,9 @@
     reloadTime: 0.5,
     range: 7,
     bulletSpread: 20,
-    bulletSpeed: 880
+    bulletSpeed: 880,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/40/60 单装高炮
   {
@@ -197,7 +235,9 @@
     reloadTime: 0.5,
     range: 7,
     bulletSpread: 20,
-    bulletSpeed: 880
+    bulletSpeed: 880,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/28/75 四联装高炮
   {
@@ -207,7 +247,9 @@
     reloadTime: 0.4,
     range: 6,
     bulletSpread: 25,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/20/70/2 双装高炮
   {
@@ -217,7 +259,9 @@
     reloadTime: 0.2,
     range: 4,
     bulletSpread: 20,
-    bulletSpeed: 910
+    bulletSpeed: 910,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/20/70 单装高炮
   {
@@ -227,7 +271,9 @@
     reloadTime: 0.2,
     range: 4,
     bulletSpread: 20,
-    bulletSpeed: 910
+    bulletSpeed: 910,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/12.7 单装机枪
   {
@@ -237,7 +283,9 @@
     reloadTime: 0.05,
     range: 2.5,
     bulletSpread: 15,
-    bulletSpeed: 930
+    bulletSpeed: 930,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/7.62 双联装机枪
   {
@@ -247,7 +295,9 @@
     reloadTime: 0.05,
     range: 1.6,
     bulletSpread: 10,
-    bulletSpeed: 850
+    bulletSpeed: 850,
+    antiShip: true,
+    antiAircraft: true
   },
   // 美国海军 US/7.62 单装机枪
   {
@@ -257,7 +307,9 @@
     reloadTime: 0.05,
     range: 1.6,
     bulletSpread: 10,
-    bulletSpeed: 850
+    bulletSpeed: 850,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 三联装 51 厘米 45 倍口径舰炮
   {
@@ -267,7 +319,9 @@
     reloadTime: 26,
     range: 50,
     bulletSpread: 180,
-    bulletSpeed: 750
+    bulletSpeed: 750,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 双联装 51 厘米 45 倍口径舰炮
   {
@@ -277,7 +331,9 @@
     reloadTime: 26,
     range: 50,
     bulletSpread: 180,
-    bulletSpeed: 750
+    bulletSpeed: 750,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 三联装 46 厘米 45 倍口径舰炮
   {
@@ -287,7 +343,9 @@
     reloadTime: 18,
     range: 42,
     bulletSpread: 180,
-    bulletSpeed: 780
+    bulletSpeed: 780,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 双联装 35.6 厘米 45 倍口径舰炮
   {
@@ -297,7 +355,9 @@
     reloadTime: 20,
     range: 35,
     bulletSpread: 150,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 双联装 20.3 厘米 50 倍口径舰炮
   {
@@ -307,7 +367,9 @@
     reloadTime: 8,
     range: 24,
     bulletSpread: 120,
-    bulletSpeed: 880
+    bulletSpeed: 880,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 三联装 20 厘米 50 倍口径舰炮
   {
@@ -317,7 +379,9 @@
     reloadTime: 7,
     range: 30,
     bulletSpread: 110,
-    bulletSpeed: 920
+    bulletSpeed: 920,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 双联装 20 厘米 50 倍口径舰炮
   {
@@ -327,7 +391,9 @@
     reloadTime: 7,
     range: 30,
     bulletSpread: 120,
-    bulletSpeed: 920
+    bulletSpeed: 920,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 三联装 15.5 厘米 60 倍口径舰炮
   {
@@ -337,7 +403,9 @@
     reloadTime: 3.5,
     range: 27,
     bulletSpread: 100,
-    bulletSpeed: 920
+    bulletSpeed: 920,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 双联装 15.2 厘米 50 倍口径舰炮
   {
@@ -347,7 +415,9 @@
     reloadTime: 4,
     range: 22,
     bulletSpread: 100,
-    bulletSpeed: 880
+    bulletSpeed: 880,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 15.2 厘米 50 倍口径舰炮
   {
@@ -357,7 +427,9 @@
     reloadTime: 5,
     range: 18,
     bulletSpread: 100,
-    bulletSpeed: 840
+    bulletSpeed: 840,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 双联装 14.0 厘米 50 倍口径舰炮
   {
@@ -367,7 +439,9 @@
     reloadTime: 3,
     range: 20,
     bulletSpread: 80,
-    bulletSpeed: 860
+    bulletSpeed: 860,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 14.0 厘米 50 倍口径舰炮
   {
@@ -377,7 +451,9 @@
     reloadTime: 4,
     range: 18,
     bulletSpread: 70,
-    bulletSpeed: 840
+    bulletSpeed: 840,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 双联装 12.7 厘米 50 倍口径舰炮
   {
@@ -387,7 +463,9 @@
     reloadTime: 2.5,
     range: 18,
     bulletSpread: 70,
-    bulletSpeed: 920
+    bulletSpeed: 920,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 双联装 12.7 厘米 50 倍口径高平两用炮
   {
@@ -397,7 +475,9 @@
     reloadTime: 3,
     range: 18,
     bulletSpread: 70,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 双联装 12.7 厘米 40 倍口径高平两用炮
   {
@@ -407,7 +487,9 @@
     reloadTime: 3.5,
     range: 14,
     bulletSpread: 80,
-    bulletSpeed: 720
+    bulletSpeed: 720,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 双联装 10 厘米 65 倍口径高平两用炮
   {
@@ -417,7 +499,9 @@
     reloadTime: 2.3,
     range: 19,
     bulletSpread: 60,
-    bulletSpeed: 1000
+    bulletSpeed: 1000,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 双联装 7.6 厘米 65 倍径舰炮
   {
@@ -427,7 +511,9 @@
     reloadTime: 1.4,
     range: 13,
     bulletSpread: 60,
-    bulletSpeed: 950
+    bulletSpeed: 950,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 7.6 厘米 40 倍径舰炮
   {
@@ -437,7 +523,9 @@
     reloadTime: 1.8,
     range: 9,
     bulletSpread: 70,
-    bulletSpeed: 720
+    bulletSpeed: 720,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 双联装 4 厘米高炮
   {
@@ -447,7 +535,9 @@
     reloadTime: 0.5,
     range: 7,
     bulletSpread: 25,
-    bulletSpeed: 850
+    bulletSpeed: 850,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 三联装 25 毫米机炮
   {
@@ -457,7 +547,9 @@
     reloadTime: 0.05,
     range: 5,
     bulletSpread: 25,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 双联装 25 毫米机炮
   {
@@ -467,7 +559,9 @@
     reloadTime: 0.05,
     range: 5,
     bulletSpread: 25,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 25 毫米机炮
   {
@@ -477,7 +571,9 @@
     reloadTime: 0.08,
     range: 5,
     bulletSpread: 25,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 20 毫米机炮
   {
@@ -487,7 +583,9 @@
     reloadTime: 0.08,
     range: 3,
     bulletSpread: 25,
-    bulletSpeed: 750
+    bulletSpeed: 750,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 13 毫米机枪
   {
@@ -497,7 +595,9 @@
     reloadTime: 0.05,
     range: 2,
     bulletSpread: 20,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 7.92 毫米机枪
   {
@@ -507,7 +607,9 @@
     reloadTime: 0.05,
     range: 1.6,
     bulletSpread: 20,
-    bulletSpeed: 840
+    bulletSpeed: 840,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 7.7 毫米机枪
   {
@@ -517,7 +619,9 @@
     reloadTime: 0.04,
     range: 1.6,
     bulletSpread: 15,
-    bulletSpeed: 870
+    bulletSpeed: 870,
+    antiShip: true,
+    antiAircraft: true
   },
   // 日本海军 单装 7.62 毫米机枪
   {
@@ -527,7 +631,9 @@
     reloadTime: 0.05,
     range: 1.5,
     bulletSpread: 12,
-    bulletSpeed: 850
+    bulletSpeed: 850,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/381/52 双联装舰炮
   {
@@ -537,7 +643,9 @@
     reloadTime: 10,
     range: 38,
     bulletSpread: 100,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: false
   },
   // 德国海军 GER/283/55 三联装舰炮
   {
@@ -547,7 +655,9 @@
     reloadTime: 8,
     range: 38,
     bulletSpread: 100,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: false
   },
   // 德国海军 GER/283/52 三联装舰炮
   {
@@ -557,7 +667,9 @@
     reloadTime: 12,
     range: 26,
     bulletSpread: 100,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: false
   },
   // 德国海军 GER/203/60 双联装舰炮
   {
@@ -567,7 +679,9 @@
     reloadTime: 6,
     range: 34,
     bulletSpread: 80,
-    bulletSpeed: 925
+    bulletSpeed: 925,
+    antiShip: true,
+    antiAircraft: false
   },
   // 德国海军 GER/150/60 三联装舰炮
   {
@@ -577,7 +691,9 @@
     reloadTime: 1.3,
     range: 18,
     bulletSpread: 90,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/150/60 双联装舰炮
   {
@@ -587,7 +703,9 @@
     reloadTime: 1.4,
     range: 17,
     bulletSpread: 80,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/150/60 单裝舰炮
   {
@@ -597,7 +715,9 @@
     reloadTime: 1.5,
     range: 17,
     bulletSpread: 90,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/127/45 单裝舰炮
   {
@@ -607,7 +727,9 @@
     reloadTime: 1,
     range: 16,
     bulletSpread: 80,
-    bulletSpeed: 830
+    bulletSpeed: 830,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/105/65 双联装高平两用炮
   {
@@ -617,7 +739,9 @@
     reloadTime: 1,
     range: 16,
     bulletSpread: 50,
-    bulletSpeed: 1000
+    bulletSpeed: 1000,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/88/56 双联装高平两用炮
   {
@@ -627,7 +751,9 @@
     reloadTime: 0.5,
     range: 12,
     bulletSpread: 30,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/37/57 高炮
   {
@@ -637,7 +763,9 @@
     reloadTime: 0.6,
     range: 6,
     bulletSpread: 20,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
   },
   // 德国海军 GER/20/70 单装高炮
   {
@@ -647,7 +775,9 @@
     reloadTime: 0.2,
     range: 4,
     bulletSpread: 20,
-    bulletSpeed: 910
+    bulletSpeed: 910,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/406/45 三联装舰炮
   {
@@ -657,7 +787,9 @@
     reloadTime: 18,
     range: 36,
     bulletSpread: 140,
-    bulletSpeed: 790
+    bulletSpeed: 790,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/381/42 双联装舰炮
   {
@@ -667,7 +799,9 @@
     reloadTime: 14,
     range: 31,
     bulletSpread: 120,
-    bulletSpeed: 740
+    bulletSpeed: 740,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/356/45 四联装舰炮
   {
@@ -677,7 +811,9 @@
     reloadTime: 13,
     range: 33,
     bulletSpread: 120,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/356/45 双联装舰炮
   {
@@ -687,7 +823,9 @@
     reloadTime: 13,
     range: 33,
     bulletSpread: 120,
-    bulletSpeed: 800
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/343/45 双联装舰炮
   {
@@ -697,7 +835,9 @@
     reloadTime: 15,
     range: 26,
     bulletSpread: 130,
-    bulletSpeed: 750
+    bulletSpeed: 750,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/203/50 三联装舰炮
   {
@@ -707,7 +847,9 @@
     reloadTime: 7,
     range: 27,
     bulletSpread: 100,
-    bulletSpeed: 780
+    bulletSpeed: 780,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/152/50 双联装舰炮
   {
@@ -717,7 +859,9 @@
     reloadTime: 4,
     range: 23,
     bulletSpread: 100,
-    bulletSpeed: 840
+    bulletSpeed: 840,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/152/45 单装舰炮
   {
@@ -727,7 +871,9 @@
     reloadTime: 6,
     range: 17,
     bulletSpread: 120,
-    bulletSpeed: 750
+    bulletSpeed: 750,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/140/50 单装舰炮
   {
@@ -737,7 +883,9 @@
     reloadTime: 4,
     range: 18,
     bulletSpread: 70,
-    bulletSpeed: 840
+    bulletSpeed: 840,
+    antiShip: true,
+    antiAircraft: false
   },
   // 英国海军 UK/133/50 双联装高平两用炮
   {
@@ -747,7 +895,9 @@
     reloadTime: 2.4,
     range: 21,
     bulletSpread: 70,
-    bulletSpeed: 810
+    bulletSpeed: 810,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/120/45 单裝高平两用炮
   {
@@ -757,7 +907,9 @@
     reloadTime: 1,
     range: 17,
     bulletSpread: 65,
-    bulletSpeed: 770
+    bulletSpeed: 770,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/114/45 双联装高平两用炮
   {
@@ -767,7 +919,9 @@
     reloadTime: 1,
     range: 16,
     bulletSpread: 65,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/102/45 双联装高平两用炮
   {
@@ -777,7 +931,9 @@
     reloadTime: 1,
     range: 16,
     bulletSpread: 60,
-    bulletSpeed: 810
+    bulletSpeed: 810,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/102/45 单装高平两用炮
   {
@@ -787,7 +943,9 @@
     reloadTime: 1,
     range: 16,
     bulletSpread: 60,
-    bulletSpeed: 810
+    bulletSpeed: 810,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/40/60 单装高炮
   {
@@ -797,7 +955,9 @@
     reloadTime: 0.5,
     range: 7,
     bulletSpread: 20,
-    bulletSpeed: 880
+    bulletSpeed: 880,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/40/56 四联装高炮
   {
@@ -807,9 +967,11 @@
     reloadTime: 0.5,
     range: 7,
     bulletSpread: 20,
-    bulletSpeed: 860
+    bulletSpeed: 860,
+    antiShip: true,
+    antiAircraft: true
   },
-  // 英国海军 UK/40/56 四联装高炮
+  // 英国海军 UK/40/39 八联装高炮
   {
     name: "UK/40/39/8",
     bulletName: "UK/GB/40/1930",
@@ -817,7 +979,9 @@
     reloadTime: 0.6,
     range: 3,
     bulletSpread: 40,
-    bulletSpeed: 585
+    bulletSpeed: 585,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/20/70 单装高炮
   {
@@ -827,7 +991,9 @@
     reloadTime: 0.2,
     range: 4,
     bulletSpread: 20,
-    bulletSpeed: 910
+    bulletSpeed: 910,
+    antiShip: true,
+    antiAircraft: true
   },
   // 英国海军 UK/12.7 双联装机枪
   {
@@ -837,7 +1003,9 @@
     reloadTime: 0.02,
     range: 1,
     bulletSpread: 10,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/500/50 双联装舰炮
   {
@@ -847,7 +1015,9 @@
     reloadTime: 15,
     range: 50,
     bulletSpread: 180,
-    bulletSpeed: 850
+    bulletSpeed: 850,
+    antiShip: true,
+    antiAircraft: false
   },
   // 苏联海军 SU/406/50 三联装舰炮
   {
@@ -857,7 +1027,9 @@
     reloadTime: 12,
     range: 45,
     bulletSpread: 180,
-    bulletSpeed: 870
+    bulletSpeed: 870,
+    antiShip: true,
+    antiAircraft: false
   },
   // 苏联海军 SU/180/57 三联装舰炮
   {
@@ -867,7 +1039,9 @@
     reloadTime: 6,
     range: 38,
     bulletSpread: 100,
-    bulletSpeed: 920
+    bulletSpeed: 920,
+    antiShip: true,
+    antiAircraft: false
   },
   // 苏联海军 SU/152/57 三联装舰炮
   {
@@ -877,7 +1051,9 @@
     reloadTime: 4.5,
     range: 32,
     bulletSpread: 100,
-    bulletSpeed: 950
+    bulletSpeed: 950,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/152/57 双联装舰炮
   {
@@ -887,7 +1063,9 @@
     reloadTime: 4.5,
     range: 32,
     bulletSpread: 100,
-    bulletSpeed: 950
+    bulletSpeed: 950,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/130/60 双联装舰炮
   {
@@ -897,7 +1075,9 @@
     reloadTime: 2,
     range: 30,
     bulletSpread: 80,
-    bulletSpeed: 980
+    bulletSpeed: 980,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/130/58 双联装舰炮
   {
@@ -907,7 +1087,9 @@
     reloadTime: 1.8,
     range: 27,
     bulletSpread: 70,
-    bulletSpeed: 940
+    bulletSpeed: 940,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/100/70 双联装高平两用炮
   {
@@ -917,7 +1099,9 @@
     reloadTime: 0.8,
     range: 24,
     bulletSpread: 35,
-    bulletSpeed: 1100
+    bulletSpeed: 1100,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/100/56 二联装高平两用炮
   {
@@ -927,7 +1111,9 @@
     reloadTime: 1,
     range: 18,
     bulletSpread: 50,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/100/56 单装高平两用炮
   {
@@ -937,7 +1123,9 @@
     reloadTime: 1,
     range: 18,
     bulletSpread: 50,
-    bulletSpeed: 900
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/57/72/4 四联装高炮
   {
@@ -947,9 +1135,11 @@
     reloadTime: 1,
     range: 11,
     bulletSpread: 40,
-    bulletSpeed: 1000
+    bulletSpeed: 1000,
+    antiShip: true,
+    antiAircraft: true
   },
-  // 苏联海军 SU/37/57/4 四联装高炮
+  // 苏联海军 SU/45/78/4 四联装高炮
   {
     name: "SU/45/78/4",
     bulletName: "SU/GB/45/1945",
@@ -957,7 +1147,9 @@
     reloadTime: 0.7,
     range: 12,
     bulletSpread: 25,
-    bulletSpeed: 1200
+    bulletSpeed: 1200,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/37/57/4 四联装高炮
   {
@@ -967,7 +1159,9 @@
     reloadTime: 0.6,
     range: 6,
     bulletSpread: 20,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/37/57/2 双联装高炮
   {
@@ -977,7 +1171,9 @@
     reloadTime: 0.6,
     range: 6,
     bulletSpread: 20,
-    bulletSpeed: 820
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/25/65/4 四联装高炮
   {
@@ -987,7 +1183,9 @@
     reloadTime: 0.2,
     range: 5,
     bulletSpread: 30,
-    bulletSpeed: 950
+    bulletSpeed: 950,
+    antiShip: true,
+    antiAircraft: true
   },
   // 苏联海军 SU/25/65/2 双联装高炮
   {
@@ -997,6 +1195,8 @@
     reloadTime: 0.2,
     range: 5,
     bulletSpread: 30,
-    bulletSpeed: 950
+    bulletSpeed: 950,
+    antiShip: true,
+    antiAircraft: true
   }
 ]

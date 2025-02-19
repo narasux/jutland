@@ -27,6 +27,10 @@ type Gun struct {
 	BulletSpread int `json:"bulletSpread"`
 	// 炮弹速度
 	BulletSpeed float64 `json:"bulletSpeed"`
+	// 能否反舰
+	AntiShip bool `json:"antiShip"`
+	// 能否防空
+	AntiAircraft bool `json:"antiAircraft"`
 	// 相对位置
 	// 0.35 -> 从中心往舰首 35% 舰体长度
 	// -0.3 -> 从中心往舰尾 30% 舰体长度
