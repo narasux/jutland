@@ -42,6 +42,8 @@ type Gun struct {
 	ReloadStartAt int64
 }
 
+var _ AttackWeapon = (*Gun)(nil)
+
 // CanFire 是否可发射
 func (g *Gun) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 	// 未启用，不可发射
@@ -72,13 +74,13 @@ func (g *Gun) Reloaded() bool {
 }
 
 // Fire 发射
-func (g *Gun) Fire(self Attacker, enemy Hurtable) []*Bullet {
-	sState := self.ManeuverState()
-	eState := enemy.ManeuverState()
+func (g *Gun) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
+	sState := shooter.MovementState()
+	eState := enemy.MovementState()
 
 	curPos := sState.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
-	gunOffset := g.PosPercent * self.GeometricSize().Length / constants.MapBlockSize / 2
+	gunOffset := g.PosPercent * shooter.GeometricSize().Length / constants.MapBlockSize / 2
 	curPos.AddRx(math.Sin(sState.CurRotation*math.Pi/180) * gunOffset)
 	curPos.SubRy(math.Cos(sState.CurRotation*math.Pi/180) * gunOffset)
 
@@ -123,7 +125,9 @@ func (g *Gun) Fire(self Attacker, enemy Hurtable) []*Bullet {
 		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		shotBullets = append(shotBullets, NewBullets(
-			g.BulletName, curPos, pos, shotType, g.BulletSpeed, life, self.ID(), self.Player(),
+			g.BulletName, curPos, pos,
+			shotType, g.BulletSpeed,
+			life, shooter.ID(), shooter.Player(),
 		))
 	}
 

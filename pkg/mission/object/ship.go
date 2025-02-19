@@ -114,9 +114,9 @@ func (s *BattleShip) Player() faction.Player {
 	return s.BelongPlayer
 }
 
-// ManeuverState 机动状态
-func (s *BattleShip) ManeuverState() UnitManeuverState {
-	return UnitManeuverState{
+// MovementState 机动状态
+func (s *BattleShip) MovementState() UnitMovementState {
+	return UnitMovementState{
 		CurPos:      s.CurPos.Copy(),
 		CurRotation: s.CurRotation,
 		CurSpeed:    s.CurSpeed,

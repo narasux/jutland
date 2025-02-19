@@ -46,6 +46,8 @@ type TorpedoLauncher struct {
 	ShotCountBeforeReload int
 }
 
+var _ AttackWeapon = (*TorpedoLauncher)(nil)
+
 // CanFire 是否可发射
 func (lc *TorpedoLauncher) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
 	// 未启用，不可发射
@@ -83,13 +85,13 @@ func (lc *TorpedoLauncher) Reloaded() bool {
 }
 
 // Fire 发射
-func (lc *TorpedoLauncher) Fire(self Attacker, enemy Hurtable) []*Bullet {
-	sState := self.ManeuverState()
-	eState := enemy.ManeuverState()
+func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
+	sState := shooter.MovementState()
+	eState := enemy.MovementState()
 
 	curPos := sState.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
-	gunOffset := lc.PosPercent * self.GeometricSize().Length / constants.MapBlockSize / 2
+	gunOffset := lc.PosPercent * shooter.GeometricSize().Length / constants.MapBlockSize / 2
 	curPos.AddRx(math.Sin(sState.CurRotation*math.Pi/180) * gunOffset)
 	curPos.SubRy(math.Cos(sState.CurRotation*math.Pi/180) * gunOffset)
 
@@ -118,7 +120,9 @@ func (lc *TorpedoLauncher) Fire(self Attacker, enemy Hurtable) []*Bullet {
 	life := int(lc.Range/lc.BulletSpeed) + 5
 	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*Bullet{NewBullets(
-		lc.BulletName, curPos, targetPos, BulletShotTypeDirect, lc.BulletSpeed, life, self.ID(), self.Player(),
+		lc.BulletName, curPos, targetPos,
+		BulletShotTypeDirect, lc.BulletSpeed,
+		life, shooter.ID(), shooter.Player(),
 	)}
 }
 

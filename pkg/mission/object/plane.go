@@ -97,9 +97,9 @@ func (p *Plane) Player() faction.Player {
 	return p.BelongPlayer
 }
 
-// ManeuverState 机动状态
-func (p *Plane) ManeuverState() UnitManeuverState {
-	return UnitManeuverState{
+// MovementState 机动状态
+func (p *Plane) MovementState() UnitMovementState {
+	return UnitMovementState{
 		CurPos:      p.CurPos.Copy(),
 		CurRotation: p.CurRotation,
 		CurSpeed:    p.CurSpeed,

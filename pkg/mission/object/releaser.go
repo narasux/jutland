@@ -28,6 +28,13 @@ type Releaser struct {
 	RightFiringArc FiringArc
 }
 
+var _ AttackWeapon = (*Releaser)(nil)
+
+// Fire 发射
+func (lc *Releaser) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
+	return []*Bullet{}
+}
+
 var releaserMap = map[string]*Releaser{}
 
 func newReleaser(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Releaser {

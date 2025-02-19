@@ -2,8 +2,8 @@ package object
 
 import "github.com/narasux/jutland/pkg/mission/faction"
 
-// UnitManeuverState 单位机动状态
-type UnitManeuverState struct {
+// UnitMovementState 单位机动状态
+type UnitMovementState struct {
 	CurPos      MapPos
 	CurRotation float64
 	CurSpeed    float64
@@ -19,7 +19,7 @@ type UnitGeometricSize struct {
 type BattleUnit interface {
 	ID() string
 	Player() faction.Player
-	ManeuverState() UnitManeuverState
+	MovementState() UnitMovementState
 	GeometricSize() UnitGeometricSize
 }
 
@@ -30,7 +30,7 @@ type Hurtable interface {
 	HurtBy(bullet *Bullet)
 }
 
-// Attacker 可开火的对象
+// Attacker 攻击者
 type Attacker interface {
 	BattleUnit
 
@@ -39,5 +39,5 @@ type Attacker interface {
 
 // AttackWeapon 攻击性武器
 type AttackWeapon interface {
-	Fire(self, enemy Hurtable) []*Bullet
+	Fire(shooter Attacker, enemy Hurtable) []*Bullet
 }
