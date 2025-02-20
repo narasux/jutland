@@ -1,5 +1,81 @@
 [
   {
+    name: "F",
+    displayName: "歼击机",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 1000,
+    damageReduction: 0.5,
+    maxSpeed: 2200,
+    acceleration: 80,
+    rotateSpeed: 25,
+    length: 26,
+    width: 21,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 3,
+    tonnage: 20,
+    range: 3360,
+    description: [
+      "战斗机",
+      "4 x 20mm 机炮",
+      "4 x 12.7mm 机枪",
+    ],
+    weapon: {
+      mainGuns: [
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+    }
+  },
+  {
     name: "F4F-3",
     displayName: "野猫",
     type: "fighter",
