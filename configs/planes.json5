@@ -6,11 +6,11 @@
     typeAbbr: "F",
     totalHP: 1000,
     damageReduction: 0.5,
-    maxSpeed: 2200,
+    maxSpeed: 2500,
     acceleration: 80,
     rotateSpeed: 25,
-    length: 26,
-    width: 21,
+    length: 25,
+    width: 18,
     // TODO 确认资金
     fundsCost: 10,
     // TODO 确认时间
@@ -73,6 +73,195 @@
           leftFiringArc: [340, 360]
         }
       ],
+    }
+  },
+  {
+    name: "B",
+    displayName: "轰炸机",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    totalHP: 2000,
+    damageReduction: 0.5,
+    maxSpeed: 1300,
+    acceleration: 35,
+    rotateSpeed: 10,
+    length: 36,
+    width: 21,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 45,
+    range: 5300,
+    description: [
+      "轰炸机",
+      "2 x 20mm 机炮（侧向）",
+      "1 x 20mm 双联装机炮（后向）",
+      "3 x 2000 磅，6 x 250 磅炸弹"
+    ],
+    weapon: {
+      mainGuns: [
+        {
+          name: "US/20/70",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.8,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [180, 270]
+        },
+      ],
+      bombs: [
+        {
+          name: "US/BB/907",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/113",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+    }
+  },
+  {
+    name: "A",
+    displayName: "攻击机",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    totalHP: 1400,
+    damageReduction: 0.5,
+    maxSpeed: 1850,
+    acceleration: 60,
+    rotateSpeed: 20,
+    length: 27,
+    width: 22,
+    // TODO 确认资金
+    fundsCost: 10,
+    // TODO 确认时间
+    timeCost: 5,
+    tonnage: 38,
+    range: 4100,
+    description: [
+      "攻击机",
+      "2 x 20mm 机炮（前向）",
+      "2 x 20mm 机炮（侧向）",
+      "1 x 20mm 双联装机炮（后向）",
+      "4 x Mk-13 570mm 鱼雷"
+    ],
+    weapon: {
+      mainGuns: [
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.8,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [180, 270]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
     }
   },
   {
