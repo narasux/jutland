@@ -11,7 +11,6 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
-	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 // PlaneType 飞机类型
@@ -97,6 +96,11 @@ func (p *Plane) Player() faction.Player {
 	return p.BelongPlayer
 }
 
+// ObjType 对象类型
+func (p *Plane) ObjType() ObjectType {
+	return ObjectTypePlane
+}
+
 // MovementState 机动状态
 func (p *Plane) MovementState() UnitMovementState {
 	return UnitMovementState{
@@ -175,7 +179,7 @@ func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive bool) {
 	if p.CurPos.Near(targetPos, p.Length/constants.MapBlockSize*1.5) {
 		p.CurSpeed = max(p.Acceleration*20, p.CurSpeed-p.Acceleration*10)
 	}
-	targetRotation := geometry.CalcAngleBetweenPoints(p.CurPos.RX, p.CurPos.RY, targetPos.RX, targetPos.RY)
+	targetRotation := p.CurPos.Angle(targetPos)
 	// 逐渐转向
 	if p.CurRotation != targetRotation {
 		// 默认顺时针旋转

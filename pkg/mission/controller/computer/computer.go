@@ -10,7 +10,6 @@ import (
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 // ComputerDecisionHandler 电脑决策处理器
@@ -78,8 +77,7 @@ func (h *ComputerDecisionHandler) Handle(
 		} else {
 			// 防御模式，如果附近有敌人在移动，则自己在附近随机移动
 			for _, enemy := range enemyShips {
-				distance := geometry.CalcDistance(ship.CurPos.RX, ship.CurPos.RY, enemy.CurPos.RX, enemy.CurPos.RY)
-				if distance < 20 && ship.CurSpeed == 0 && enemy.CurSpeed != 0 {
+				if ship.CurPos.Distance(enemy.CurPos) < 20 && ship.CurSpeed == 0 && enemy.CurSpeed != 0 {
 					x, y := rand.Intn(11)-5, rand.Intn(11)-5
 					moveInstr := instr.NewShipMove(
 						ship.Uid, obj.NewMapPos(

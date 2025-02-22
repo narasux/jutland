@@ -206,21 +206,20 @@ func initShipMap() {
 		}
 		s.Weapon.HasTorpedo = len(s.Weapon.Torpedoes) > 0
 		// 计算最大射程
-		for _, gun := range s.Weapon.MainGuns {
-			if s.Weapon.MaxRange < gun.Range {
-				s.Weapon.MaxRange = gun.Range
-			}
-		}
-		// 虽然副炮射程比主炮远不太可能，不过还是加上吧
-		for _, gun := range s.Weapon.SecondaryGuns {
-			if s.Weapon.MaxRange < gun.Range {
-				s.Weapon.MaxRange = gun.Range
+		for _, guns := range [][]*Gun{
+			s.Weapon.MainGuns, s.Weapon.SecondaryGuns, s.Weapon.AntiAircraftGuns,
+		} {
+			for _, gun := range guns {
+				if gun.AntiShip {
+					s.Weapon.MaxToShipRange = max(s.Weapon.MaxToShipRange, gun.Range)
+				}
+				if gun.AntiAircraft {
+					s.Weapon.MaxToPlaneRange = max(s.Weapon.MaxToPlaneRange, gun.Range)
+				}
 			}
 		}
 		for _, torpedo := range s.Weapon.Torpedoes {
-			if s.Weapon.MaxRange < torpedo.Range {
-				s.Weapon.MaxRange = torpedo.Range
-			}
+			s.Weapon.MaxToShipRange = max(s.Weapon.MaxToShipRange, torpedo.Range)
 		}
 		s.CurHP = s.TotalHP
 		s.Tonnage = s.TotalHP

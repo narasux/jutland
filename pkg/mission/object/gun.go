@@ -48,28 +48,15 @@ type Gun struct {
 
 var _ AttackWeapon = (*Gun)(nil)
 
-// CanFire 是否可发射
-func (g *Gun) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
-	// 未启用，不可发射
-	if g.Disable {
-		return false
+// IsAvailableAntiType 是否能反制该类型
+func (g *Gun) IsAvailableAntiType(objType ObjectType) bool {
+	if g.AntiAircraft && objType == ObjectTypePlane {
+		return true
 	}
-	// 在重新装填，不可发射
-	if !g.Reloaded() {
-		return false
+	if g.AntiShip && objType == ObjectTypeShip {
+		return true
 	}
-	// 不在射程内，不可发射
-	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
-	if distance > g.Range {
-		return false
-	}
-	// 不在射界范围内，不可发射
-	rotation := geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
-	rotation = math.Mod(rotation-shipCurRotation+360, 360)
-	if !g.LeftFiringArc.Contains(rotation) && !g.RightFiringArc.Contains(rotation) {
-		return false
-	}
-	return true
+	return false
 }
 
 // Reloaded 是否已装填完成
@@ -77,10 +64,28 @@ func (g *Gun) Reloaded() bool {
 	return g.ReloadStartAt+int64(g.ReloadTime*1e3) <= time.Now().UnixMilli()
 }
 
+// InShotRange 是否在射程 / 射界内
+func (g *Gun) InShotRange(shipCurRotation float64, curPos, targetPos MapPos) bool {
+	// 不在射程内，不可发射
+	if curPos.Distance(targetPos) > g.Range {
+		return false
+	}
+	// 不在射界范围内，不可发射
+	rotation := math.Mod(curPos.Angle(targetPos)-shipCurRotation+360, 360)
+	if !g.LeftFiringArc.Contains(rotation) && !g.RightFiringArc.Contains(rotation) {
+		return false
+	}
+	return true
+}
+
 // Fire 发射
-func (g *Gun) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
-	sState := shooter.MovementState()
-	eState := enemy.MovementState()
+func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
+	// 未启用 / 重新装填中 / 对象类型不匹配，不可发射
+	if g.Disable || !g.Reloaded() || !g.IsAvailableAntiType(enemy.ObjType()) {
+		return
+	}
+
+	sState, eState := shooter.MovementState(), enemy.MovementState()
 
 	curPos := sState.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
@@ -95,15 +100,16 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
 	)
 	targetPos := NewMapPosR(targetRx, targetRY)
 
-	if !g.CanFire(sState.CurRotation, curPos, targetPos) {
-		return []*Bullet{}
+	if !g.InShotRange(sState.CurRotation, curPos, targetPos) {
+		return
 	}
 	g.ReloadStartAt = time.Now().UnixMilli()
 
-	// 散布应该随着距离减小而减小
-	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	distance := curPos.Distance(targetPos)
+	// 火炮炮弹生命值与目标距离相关，15 对于 0.4 速度的炮弹来说，相当于 6 格地图，在大多数火炮散布范围之内
+	life := int(distance/g.BulletSpeed) + 15
+	// 炮弹散布的半径，散布应该随着距离减小而减小
 	rangePercent := distance / g.Range
-	// 炮弹散布的半径
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
 	shotType := BulletShotTypeArcing
@@ -119,23 +125,19 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
 		}
 	}
 
-	// 火炮炮弹生命值与目标距离相关，15 对于 0.4 速度的炮弹来说，相当于 6 格地图，在大多数火炮散布范围之内
-	life := int(distance/g.BulletSpeed) + 15
-
-	shotBullets := []*Bullet{}
 	for i := 0; i < g.BulletCount; i++ {
 		pos := targetPos.Copy()
 		// rand.Intn(3) - 1 算方向，rand.Float64() 算距离
 		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
-		shotBullets = append(shotBullets, NewBullets(
+		bullets = append(bullets, NewBullets(
 			g.BulletName, curPos, pos,
 			shotType, g.BulletSpeed,
 			life, shooter.ID(), shooter.Player(),
 		))
 	}
 
-	return shotBullets
+	return bullets
 }
 
 var gunMap = map[string]*Gun{}

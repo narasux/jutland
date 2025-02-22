@@ -35,6 +35,11 @@ func (p *MapPos) Distance(other MapPos) float64 {
 	return geometry.CalcDistance(p.RX, p.RY, other.RX, other.RY)
 }
 
+// Angle 计算角度
+func (p *MapPos) Angle(other MapPos) float64 {
+	return geometry.CalcAngleBetweenPoints(p.RX, p.RY, other.RX, other.RY)
+}
+
 // Near 判断位置是否在指定范围内
 func (p *MapPos) Near(other MapPos, distance float64) bool {
 	return p.Distance(other) <= distance

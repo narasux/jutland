@@ -48,27 +48,6 @@ type TorpedoLauncher struct {
 
 var _ AttackWeapon = (*TorpedoLauncher)(nil)
 
-// CanFire 是否可发射
-func (lc *TorpedoLauncher) CanFire(shipCurRotation float64, curPos, targetPos MapPos) bool {
-	// 未启用，不可发射
-	if lc.Disable {
-		return false
-	}
-	// 不在射程内，不可发射
-	distance := geometry.CalcDistance(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
-	if distance > lc.Range {
-		return false
-	}
-	// 不在射界范围内，不可发射
-	rotation := geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
-	rotation = math.Mod(rotation-shipCurRotation+360, 360)
-	if !lc.LeftFiringArc.Contains(rotation) && !lc.RightFiringArc.Contains(rotation) {
-		return false
-	}
-	// 检查是否已经重新装填完成
-	return lc.Reloaded()
-}
-
 // Reloaded 是否在重新装填 / 发射间隔
 func (lc *TorpedoLauncher) Reloaded() bool {
 	// 注：鱼雷是需要考虑发射间隔的，比如每秒一发之类，全部打完才是重新装填
@@ -84,10 +63,28 @@ func (lc *TorpedoLauncher) Reloaded() bool {
 	return lc.ShotCountBeforeReload < lc.BulletCount
 }
 
+// InShotRange 是否在射程 & 射界内
+func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPos MapPos) bool {
+	// 不在射程内，不可发射
+	if curPos.Distance(targetPos) > lc.Range {
+		return false
+	}
+	// 不在射界范围内，不可发射
+	rotation := math.Mod(curPos.Angle(targetPos)-shipCurRotation+360, 360)
+	if !lc.LeftFiringArc.Contains(rotation) && !lc.RightFiringArc.Contains(rotation) {
+		return false
+	}
+	return true
+}
+
 // Fire 发射
-func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
-	sState := shooter.MovementState()
-	eState := enemy.MovementState()
+func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
+	// 未启用 / 装填中 / 对象不是战战舰，不可发射
+	if lc.Disable || !lc.Reloaded() || enemy.ObjType() != ObjectTypeShip {
+		return
+	}
+
+	sState, eState := shooter.MovementState(), enemy.MovementState()
 
 	curPos := sState.CurPos.Copy()
 	// 炮塔距离战舰中心的距离
@@ -102,8 +99,8 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
 	)
 	targetPos := NewMapPosR(targetRx, targetRY)
 
-	if !lc.CanFire(sState.CurRotation, curPos, targetPos) {
-		return []*Bullet{}
+	if !lc.InShotRange(sState.CurRotation, curPos, targetPos) {
+		return
 	}
 	// 鱼雷不是齐射的，是一个一个来的
 	lc.ShotCountBeforeReload++
@@ -118,6 +115,7 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) []*Bullet {
 
 	// 鱼雷的生命值就是最大射程（+5 预留）
 	life := int(lc.Range/lc.BulletSpeed) + 5
+
 	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*Bullet{NewBullets(
 		lc.BulletName, curPos, targetPos,

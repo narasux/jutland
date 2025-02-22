@@ -10,7 +10,6 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/faction"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
-	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 type BulletType string
@@ -42,17 +41,19 @@ const (
 	CriticalTypeTenTimes
 )
 
-type HitObjectType int
+type ObjectType int
 
 const (
-	// HitObjectTypeNone 无
-	HitObjectTypeNone HitObjectType = iota
-	// HitObjectTypeShip 战舰
-	HitObjectTypeShip
-	// HitObjectTypeWater 水面
-	HitObjectTypeWater
-	// HitObjectTypeLand 陆地
-	HitObjectTypeLand
+	// ObjectTypeNone 无
+	ObjectTypeNone ObjectType = iota
+	// ObjectTypeShip 战舰
+	ObjectTypeShip
+	// ObjectTypePlane 战机
+	ObjectTypePlane
+	// ObjectTypeWater 水面
+	ObjectTypeWater
+	// ObjectTypeLand 陆地
+	ObjectTypeLand
 )
 
 // 火炮 / 鱼雷弹药
@@ -95,7 +96,7 @@ type Bullet struct {
 	// 造成暴击类型
 	CriticalType CriticalType
 	// 击中的对象类型
-	HitObjectType HitObjectType
+	HitObjectType ObjectType
 }
 
 // Forward 弹药前进
@@ -109,8 +110,7 @@ func (b *Bullet) Forward() {
 	if b.ShotType == BulletShotTypeDirect {
 		b.CurPos = nextPos
 	} else if b.ShotType == BulletShotTypeArcing {
-		curDist := geometry.CalcDistance(b.CurPos.RX, b.CurPos.RY, b.TargetPos.RX, b.TargetPos.RY)
-		nextDist := geometry.CalcDistance(nextPos.RX, nextPos.RY, b.TargetPos.RX, b.TargetPos.RY)
+		curDist, nextDist := b.CurPos.Distance(b.TargetPos), nextPos.Distance(b.TargetPos)
 		// 离目标地点越来越远，说明下一个位置已经过了，曲射就是已经命中
 		b.CurPos = lo.Ternary(nextDist > curDist, b.TargetPos, nextPos)
 	} else {
@@ -125,7 +125,7 @@ func (b *Bullet) Forward() {
 // GenTrail 生成尾流
 func (b *Bullet) GenTrails() []*Trail {
 	// 已经命中的没有尾流
-	if b.HitObjectType != HitObjectTypeNone {
+	if b.HitObjectType != ObjectTypeNone {
 		return nil
 	}
 	// 刚刚发射的不添加尾流
@@ -167,7 +167,7 @@ func NewBullets(
 	b.TargetPos = targetPos
 	b.ShotType = shotType
 
-	b.Rotation = geometry.CalcAngleBetweenPoints(curPos.RX, curPos.RY, targetPos.RX, targetPos.RY)
+	b.Rotation = curPos.Angle(targetPos)
 	b.Speed = speed
 	b.Life = life
 
@@ -175,6 +175,6 @@ func NewBullets(
 	b.BelongPlayer = player
 
 	b.CriticalType = CriticalTypeNone
-	b.HitObjectType = HitObjectTypeNone
+	b.HitObjectType = ObjectTypeNone
 	return &b
 }

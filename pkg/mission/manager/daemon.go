@@ -92,30 +92,48 @@ func (m *MissionManager) updateBuildings() {
 
 // 更新武器开火相关状态，目前是攻击最近的目标
 // TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
-func (m *MissionManager) updateWeaponFire() {
+func (m *MissionManager) updateShipWeaponFire() {
 	maxBulletDiameter := 0
 	isTorpedoLaunched := false
 
 	for shipUid, ship := range m.state.Ships {
-		inRangeEnemies := []*obj.BattleShip{}
+		inRangeEnemies := []obj.Hurtable{}
 
-		for enemyUid, enemy := range m.state.Ships {
-			// 不能炮击自己，也不能主动炮击己方的战舰
-			if shipUid == enemyUid || ship.BelongPlayer == enemy.BelongPlayer {
-				continue
+		if target := m.state.Ships[ship.AttackTarget]; target != nil {
+			// 如果有目标敌人，则检查是否在射程内，如果有直接选中即可
+			if ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange {
+				inRangeEnemies = append(inRangeEnemies, target)
 			}
-			// 如果不在最大射程内，跳过
-			distance := geometry.CalcDistance(ship.CurPos.RX, ship.CurPos.RY, enemy.CurPos.RX, enemy.CurPos.RY)
-			if distance > ship.Weapon.MaxRange {
-				continue
+		} else {
+			// 敌机
+			for _, enemy := range m.state.Planes {
+				// 不能攻击己方的战机
+				if ship.BelongPlayer == enemy.BelongPlayer {
+					continue
+				}
+				// 如果不在 对空 最大射程内，跳过
+				if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToPlaneRange {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-			// 如果是选定的攻击目标，还在最大射程内，不用选，干他就完事了
-			if enemy.Uid == ship.AttackTarget {
-				inRangeEnemies = []*obj.BattleShip{enemy}
-				break
+
+			// 敌舰
+			for enemyUid, enemy := range m.state.Ships {
+				// 不能炮击自己，也不能主动炮击己方的战舰，目标敌人的也可以跳过（前面已处理）
+				if shipUid == enemyUid ||
+					ship.BelongPlayer == enemy.BelongPlayer ||
+					enemyUid == ship.AttackTarget {
+					continue
+				}
+				// 如果不在 对舰 最大射程内，跳过
+				if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToShipRange {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
+
 		if total := len(inRangeEnemies); total != 0 {
 			// 射程内的敌人都会被攻击
 			enemy := inRangeEnemies[rand.Intn(total)]
@@ -205,7 +223,7 @@ func (m *MissionManager) updateShotBullets() {
 					ship.CurRotation,
 				) {
 					ship.HurtBy(bt)
-					bt.HitObjectType = obj.HitObjectTypeShip
+					bt.HitObjectType = obj.ObjectTypeShip
 					return true
 				}
 			}
@@ -218,17 +236,17 @@ func (m *MissionManager) updateShotBullets() {
 		// 迷失的弹药，要及时消亡（如鱼雷没命中）
 		if bt.Life <= 0 {
 			// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-			bt.HitObjectType = obj.HitObjectTypeWater
+			bt.HitObjectType = obj.ObjectTypeWater
 			continue
 		}
 		if bt.ShotType == obj.BulletShotTypeArcing {
 			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
 			if bt.CurPos.Near(bt.TargetPos, 0.05) {
 				if resolveDamage(bt) {
-					bt.HitObjectType = obj.HitObjectTypeShip
+					bt.HitObjectType = obj.ObjectTypeShip
 				} else {
 					// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-					bt.HitObjectType = obj.HitObjectTypeWater
+					bt.HitObjectType = obj.ObjectTypeWater
 				}
 				arrivedBullets = append(arrivedBullets, bt)
 			} else {
@@ -237,7 +255,7 @@ func (m *MissionManager) updateShotBullets() {
 		} else if bt.ShotType == obj.BulletShotTypeDirect {
 			// 鱼雷碰撞到陆地，应该不再前进
 			if bt.Type == obj.BulletTypeTorpedo && m.state.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
-				bt.HitObjectType = obj.HitObjectTypeLand
+				bt.HitObjectType = obj.ObjectTypeLand
 				arrivedBullets = append(arrivedBullets, bt)
 			} else if resolveDamage(bt) {
 				// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
@@ -253,7 +271,7 @@ func (m *MissionManager) updateShotBullets() {
 	// 已经到达目标地点的，转换成爆炸 & 伤害数值
 	// TODO 支持命中爆炸
 	for _, bt := range arrivedBullets {
-		if bt.HitObjectType != obj.HitObjectTypeShip {
+		if bt.HitObjectType != obj.ObjectTypeShip {
 			continue
 		}
 

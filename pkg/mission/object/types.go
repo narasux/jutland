@@ -27,6 +27,7 @@ type BattleUnit interface {
 type Hurtable interface {
 	BattleUnit
 
+	ObjType() ObjectType
 	HurtBy(bullet *Bullet)
 }
 

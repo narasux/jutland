@@ -206,9 +206,9 @@ func NewMissionState(mission string) *MissionState {
 			//"3": obj.NewPlane("F4F-3", obj.NewMapPos(4, 3), 90, "0", faction.HumanAlpha),
 			//"4": obj.NewPlane("SBD-3", obj.NewMapPos(4, 4), 180, "0", faction.HumanAlpha),
 			//"5": obj.NewPlane("TBD-1", obj.NewMapPos(4, 5), 270, "0", faction.HumanAlpha),
-			//"6": obj.NewPlane("A6M_0", obj.NewMapPos(5, 3), 45, "0", faction.HumanAlpha),
-			//"7": obj.NewPlane("D3A_99", obj.NewMapPos(5, 4), 135, "0", faction.HumanAlpha),
-			//"8": obj.NewPlane("B5N2_97", obj.NewMapPos(5, 5), 225, "0", faction.HumanAlpha),
+			//"6": obj.NewPlane("A6M_0", obj.NewMapPos(5, 3), 45, "0", faction.ComputerAlpha),
+			//"7": obj.NewPlane("D3A_99", obj.NewMapPos(5, 4), 135, "0", faction.ComputerAlpha),
+			//"8": obj.NewPlane("B5N2_97", obj.NewMapPos(5, 5), 225, "0", faction.ComputerAlpha),
 		},
 		GameMarks: map[obj.MarkID]*obj.Mark{},
 	}

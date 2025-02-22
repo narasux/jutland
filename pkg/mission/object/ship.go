@@ -13,7 +13,6 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/colorx"
-	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
 // ShipType 战舰类型
@@ -114,6 +113,11 @@ func (s *BattleShip) Player() faction.Player {
 	return s.BelongPlayer
 }
 
+// ObjType 对象类型
+func (s *BattleShip) ObjType() ObjectType {
+	return ObjectTypeShip
+}
+
 // MovementState 机动状态
 func (s *BattleShip) MovementState() UnitMovementState {
 	return UnitMovementState{
@@ -196,17 +200,17 @@ func (s *BattleShip) Fire(enemy Hurtable) []*Bullet {
 	if s.CurHP <= 0 {
 		return shotBullets
 	}
-	for i := 0; i < len(s.Weapon.MainGuns); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.MainGuns[i].Fire(s, enemy))
+	for _, gun := range s.Weapon.MainGuns {
+		shotBullets = slices.Concat(shotBullets, gun.Fire(s, enemy))
 	}
-	for i := 0; i < len(s.Weapon.SecondaryGuns); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.SecondaryGuns[i].Fire(s, enemy))
+	for _, gun := range s.Weapon.SecondaryGuns {
+		shotBullets = slices.Concat(shotBullets, gun.Fire(s, enemy))
 	}
-	for i := 0; i < len(s.Weapon.AntiAircraftGuns); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.AntiAircraftGuns[i].Fire(s, enemy))
+	for _, gun := range s.Weapon.AntiAircraftGuns {
+		shotBullets = slices.Concat(shotBullets, gun.Fire(s, enemy))
 	}
-	for i := 0; i < len(s.Weapon.Torpedoes); i++ {
-		shotBullets = slices.Concat(shotBullets, s.Weapon.Torpedoes[i].Fire(s, enemy))
+	for _, tp := range s.Weapon.Torpedoes {
+		shotBullets = slices.Concat(shotBullets, tp.Fire(s, enemy))
 	}
 	return shotBullets
 }
@@ -310,7 +314,7 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos, nearGoal bo
 	if nearGoal && s.CurPos.Near(targetPos, s.Length/constants.MapBlockSize*1.5) {
 		s.CurSpeed = max(s.Acceleration*20, s.CurSpeed-s.Acceleration*10)
 	}
-	targetRotation := geometry.CalcAngleBetweenPoints(s.CurPos.RX, s.CurPos.RY, targetPos.RX, targetPos.RY)
+	targetRotation := s.CurPos.Angle(targetPos)
 	// 逐渐转向
 	if s.CurRotation != targetRotation {
 		// 默认顺时针旋转

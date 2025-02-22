@@ -52,7 +52,8 @@ type Weapon struct {
 	// 释放器
 	Releasers []*Releaser
 	// 最大射程（各类武器射程最大值）
-	MaxRange float64
+	MaxToShipRange  float64
+	MaxToPlaneRange float64
 	// 拥有的武器情况
 	HasMainGun         bool
 	HasSecondaryGun    bool
