@@ -71,6 +71,16 @@ func NewMenuButtonClick() types.AudioStream {
 	return mustNewAudio("/button_click.wav")
 }
 
+// NewMissionLoaded 关卡加载完成
+func NewMissionLoaded() types.AudioStream {
+	return mustNewAudio("/loaded.wav")
+}
+
+// NewCheating 开始作弊
+func NewCheating() types.AudioStream {
+	return mustNewAudio("/cheating.wav")
+}
+
 // NewMissionSuccess 任务成功
 func NewMissionSuccess() types.AudioStream {
 	return mustNewAudio("/bgm/mission_success.mp3")
@@ -83,12 +93,7 @@ func NewMissionFailed() types.AudioStream {
 
 // NewShipExplode 战舰爆炸
 func NewShipExplode() types.AudioStream {
-	return mustNewAudio("/ship_explode.wav")
-}
-
-// NewMissionLoaded 关卡加载完成
-func NewMissionLoaded() types.AudioStream {
-	return mustNewAudio("/loaded.wav")
+	return mustNewAudio("/hit/ship_explode.wav")
 }
 
 // NewHarborUS 美国港口
@@ -146,6 +151,11 @@ func NewGunFire(bulletDiameter int) types.AudioStream {
 		audioType = "small"
 	}
 	return mustNewAudio(fmt.Sprintf("/fire/gun_%s.wav", audioType))
+}
+
+// NewBombSpawn 炸弹投放
+func NewBombSpawn() types.AudioStream {
+	return mustNewAudio("/fire/bomb_spawn.wav")
 }
 
 // NewTorpedoLaunch 鱼雷发射

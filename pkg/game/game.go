@@ -213,6 +213,7 @@ func (g *Game) handleMenuSelect() error {
 			// 左键点击按钮：切模式，播放音效，停止 BGM
 			if isMouseButtonLeftJustPressed() {
 				g.mode = button.Mode
+				g.player.Close()
 				audio.PlayAudioToEnd(audioRes.NewMenuButtonClick())
 			}
 		} else {
