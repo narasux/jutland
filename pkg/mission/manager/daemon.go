@@ -90,13 +90,13 @@ func (m *MissionManager) updateBuildings() {
 	}
 }
 
-// 更新武器开火相关状态，目前是攻击最近的目标
+// 更新战舰武器开火相关状态
 // TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
 func (m *MissionManager) updateShipWeaponFire() {
 	maxBulletDiameter := 0
 	isTorpedoLaunched := false
 
-	for shipUid, ship := range m.state.Ships {
+	for _, ship := range m.state.Ships {
 		inRangeEnemies := []obj.Hurtable{}
 
 		if target := m.state.Ships[ship.AttackTarget]; target != nil {
@@ -120,9 +120,8 @@ func (m *MissionManager) updateShipWeaponFire() {
 
 			// 敌舰
 			for enemyUid, enemy := range m.state.Ships {
-				// 不能炮击自己，也不能主动炮击己方的战舰，目标敌人的也可以跳过（前面已处理）
-				if shipUid == enemyUid ||
-					ship.BelongPlayer == enemy.BelongPlayer ||
+				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
+				if ship.BelongPlayer == enemy.BelongPlayer ||
 					enemyUid == ship.AttackTarget {
 					continue
 				}
@@ -160,6 +159,79 @@ func (m *MissionManager) updateShipWeaponFire() {
 	if maxBulletDiameter > 0 {
 		audio.PlayAudioToEnd(audioRes.NewGunFire(maxBulletDiameter))
 	} else if isTorpedoLaunched {
+		audio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
+	}
+}
+
+// 更新战机武器开火相关状态
+func (m *MissionManager) updatePlaneWeaponFire() {
+	bombReleased, torpedoLaunched := false, false
+
+	for _, plane := range m.state.Planes {
+		inRangeEnemies := []obj.Hurtable{}
+
+		if target := m.state.Ships[plane.AttackTarget]; target != nil {
+			// 如果有目标敌人，则检查是否在射程内，如果有直接选中即可
+			if plane.CurPos.Distance(target.CurPos) < plane.Weapon.MaxToShipRange {
+				inRangeEnemies = append(inRangeEnemies, target)
+			}
+		} else {
+			// 敌机
+			for _, enemy := range m.state.Planes {
+				// 不能攻击己方的战机（包括自己）
+				if plane.BelongPlayer == enemy.BelongPlayer {
+					continue
+				}
+				// 如果不在 对空 最大射程内，跳过
+				if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
+			}
+
+			// 敌舰
+			for enemyUid, enemy := range m.state.Ships {
+				// 不能攻击自己，也不能攻击己方的战舰，目标敌人的也可以跳过（前面已处理）
+				if plane.BelongPlayer == enemy.BelongPlayer || enemyUid == plane.AttackTarget {
+					continue
+				}
+				// 如果不在 对舰 最大射程内，跳过
+				if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToShipRange {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
+			}
+		}
+
+		if total := len(inRangeEnemies); total != 0 {
+			// 射程内的敌人都会被攻击
+			enemy := inRangeEnemies[rand.Intn(total)]
+			bullets := plane.Fire(enemy)
+			if len(bullets) == 0 {
+				continue
+			}
+			// 镜头内的才统计
+			if m.state.Camera.Contains(plane.CurPos) {
+				for _, bt := range bullets {
+					// 统计一个就好，不要吵吵
+					if bombReleased || torpedoLaunched {
+						break
+					}
+					if bt.Type == obj.BulletTypeBomb {
+						bombReleased = true
+					} else if bt.Type == obj.BulletTypeTorpedo {
+						torpedoLaunched = true
+					}
+				}
+			}
+			m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
+		}
+	}
+
+	// 有炸弹就发声音
+	if bombReleased {
+		audio.PlayAudioToEnd(audioRes.NewBombSpawn())
+	} else if torpedoLaunched {
 		audio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
 	}
 }
@@ -408,11 +480,8 @@ func (m *MissionManager) updateMissionStatus() {
 	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
 		ebiten.IsKeyPressed(ebiten.KeyShiftLeft) &&
 		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
-		m.state.MissionStatus = lo.Ternary(
-			m.state.MissionStatus != state.MissionInTerminal,
-			state.MissionInTerminal,
-			state.MissionRunning,
-		)
+		m.state.MissionStatus = state.MissionInTerminal
+		audio.PlayAudioToEnd(audioRes.NewCheating())
 		// 进入终端会按下 ctrl，此时会导致进入编组模式，需要强制退出下
 		m.state.IsGrouping = false
 	}

@@ -79,7 +79,7 @@ func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPo
 
 // Fire 发射
 func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
-	// 未启用 / 装填中 / 对象不是战战舰，不可发射
+	// 未启用 / 装填中 / 对象不是战舰，不可发射
 	if lc.Disable || !lc.Reloaded() || enemy.ObjType() != ObjectTypeShip {
 		return
 	}

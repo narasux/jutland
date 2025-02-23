@@ -48,16 +48,6 @@
     range: 10,
     bulletSpeed: 50,
   },
-  // （航空）美国海军 570mm 鱼雷
-  {
-    name: "US/AST/570",
-    bulletName: "US/TB/570/1938",
-    bulletCount: 1,
-    shotInterval: 1,
-    reloadTime: 99999,
-    range: 4,
-    bulletSpeed: 45,
-  },
   // 日本海军 4联装 回天鱼雷
   {
     name: "JP/Kaiten/4",
@@ -126,16 +116,6 @@
     shotInterval: 1,
     reloadTime: 30,
     range: 12,
-    bulletSpeed: 45,
-  },
-  // （航空）日本海军 450mm 鱼雷
-  {
-    name: "JP/AST/450",
-    bulletName: "JP/TB/450/1928",
-    bulletCount: 1,
-    shotInterval: 1,
-    reloadTime: 99999,
-    range: 3,
     bulletSpeed: 45,
   },
   // 德国海军 533mm 4联装 鱼雷

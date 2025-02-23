@@ -29,8 +29,8 @@ type WeaponMetadata struct {
 	RightFiringArc [2]float64 `json:"rightFiringArc"`
 }
 
-// Weapon 武器系统
-type Weapon struct {
+// ShipWeapon 战舰武器系统
+type ShipWeapon struct {
 	// 主炮元数据
 	MainGunsMD []WeaponMetadata `json:"mainGuns"`
 	// 副炮元数据
@@ -68,7 +68,7 @@ type Weapon struct {
 }
 
 // MainGunReloaded 主炮是否已装填
-func (w *Weapon) MainGunReloaded() bool {
+func (w *ShipWeapon) MainGunReloaded() bool {
 	for _, g := range w.MainGuns {
 		if g.Reloaded() {
 			return true
@@ -78,7 +78,7 @@ func (w *Weapon) MainGunReloaded() bool {
 }
 
 // SecondaryGunReloaded 副炮是否已装填
-func (w *Weapon) SecondaryGunReloaded() bool {
+func (w *ShipWeapon) SecondaryGunReloaded() bool {
 	for _, g := range w.SecondaryGuns {
 		if g.Reloaded() {
 			return true
@@ -88,11 +88,30 @@ func (w *Weapon) SecondaryGunReloaded() bool {
 }
 
 // TorpedoLauncherReloaded 鱼雷是否已装填
-func (w *Weapon) TorpedoLauncherReloaded() bool {
+func (w *ShipWeapon) TorpedoLauncherReloaded() bool {
 	for _, t := range w.Torpedoes {
 		if t.Reloaded() {
 			return true
 		}
 	}
 	return false
+}
+
+// PlaneWeapon 战机武器系统
+type PlaneWeapon struct {
+	// 机炮元数据
+	GunsMD []WeaponMetadata `json:"guns"`
+	// 炸弹元数据
+	BombsMD []WeaponMetadata `json:"bombs"`
+	// 鱼雷元数据
+	TorpedoesMD []WeaponMetadata `json:"torpedoes"`
+	// 固定机炮
+	Guns []*Gun
+	// 炸弹
+	Bombs []*Releaser
+	// 鱼雷
+	Torpedoes []*Releaser
+	// 最大射程（各类武器射程最大值）
+	MaxToShipRange  float64
+	MaxToPlaneRange float64
 }

@@ -59,7 +59,7 @@ type Plane struct {
 	// 吨位
 	Tonnage float64 `json:"tonnage"`
 	// 武器
-	Weapon Weapon `json:"weapon"`
+	Weapon PlaneWeapon `json:"weapon"`
 
 	// 唯一标识
 	Uid string
@@ -127,16 +127,12 @@ func (p *Plane) Fire(enemy Hurtable) []*Bullet {
 	if p.CurHP <= 0 {
 		return shotBullets
 	}
-	for i := 0; i < len(p.Weapon.MainGuns); i++ {
-		shotBullets = slices.Concat(shotBullets, p.Weapon.MainGuns[i].Fire(p, enemy))
+	for i := 0; i < len(p.Weapon.Guns); i++ {
+		shotBullets = slices.Concat(shotBullets, p.Weapon.Guns[i].Fire(p, enemy))
 	}
-	for i := 0; i < len(p.Weapon.SecondaryGuns); i++ {
-		shotBullets = slices.Concat(shotBullets, p.Weapon.SecondaryGuns[i].Fire(p, enemy))
+	for i := 0; i < len(p.Weapon.Bombs); i++ {
+		shotBullets = slices.Concat(shotBullets, p.Weapon.Bombs[i].Fire(p, enemy))
 	}
-	// FIXME 这里改成投掷炸弹
-	//for i := 0; i < len(s.Weapon.AntiAircraftGuns); i++ {
-	//	shotBullets = slices.Concat(shotBullets, s.Weapon.AntiAircraftGuns[i].Fire(s, enemy))
-	//}
 	for i := 0; i < len(p.Weapon.Torpedoes); i++ {
 		shotBullets = slices.Concat(shotBullets, p.Weapon.Torpedoes[i].Fire(p, enemy))
 	}

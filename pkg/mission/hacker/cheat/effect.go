@@ -195,7 +195,7 @@ func (c *Expelliarmus) Match(cmd string) bool {
 func (c *Expelliarmus) Exec(misState *state.MissionState) string {
 	for _, ship := range misState.Ships {
 		if misState.Camera.Contains(ship.CurPos) && ship.BelongPlayer != misState.CurPlayer {
-			ship.Weapon = object.Weapon{}
+			ship.Weapon = object.ShipWeapon{}
 		}
 	}
 	return "Expelliarmus! (>.>)-o------(QAQ)"

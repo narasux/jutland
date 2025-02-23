@@ -398,7 +398,7 @@
   {
     name: "UK/GB/12.7/1910",
     type: "shell",
-    diameter: 12,
+    diameter: 13,
     damage: 0.2,
     criticalRate: 0
   },

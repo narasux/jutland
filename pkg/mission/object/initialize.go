@@ -119,28 +119,43 @@ func initPlaneMap() {
 
 	for _, p := range planes {
 		// 机关炮
-		for _, gunMD := range p.Weapon.MainGunsMD {
-			p.Weapon.MainGuns = append(p.Weapon.MainGuns, newGun(
+		for _, gunMD := range p.Weapon.GunsMD {
+			p.Weapon.Guns = append(p.Weapon.Guns, newGun(
 				gunMD.Name, gunMD.PosPercent,
 				FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
 				FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
-		// 炸弹释放器
-		for _, releaserMD := range p.Weapon.ReleasersMD {
-			p.Weapon.Releasers = append(p.Weapon.Releasers, newReleaser(
-				releaserMD.Name, releaserMD.PosPercent,
-				FiringArc{Start: releaserMD.LeftFiringArc[0], End: releaserMD.LeftFiringArc[1]},
-				FiringArc{Start: releaserMD.RightFiringArc[0], End: releaserMD.RightFiringArc[1]},
+		// 炸弹
+		for _, bombMD := range p.Weapon.BombsMD {
+			p.Weapon.Bombs = append(p.Weapon.Bombs, newReleaser(
+				bombMD.Name, bombMD.PosPercent,
+				FiringArc{Start: bombMD.LeftFiringArc[0], End: bombMD.LeftFiringArc[1]},
+				FiringArc{Start: bombMD.RightFiringArc[0], End: bombMD.RightFiringArc[1]},
 			))
 		}
 		// 鱼雷
 		for _, torpedoMD := range p.Weapon.TorpedoesMD {
-			p.Weapon.Torpedoes = append(p.Weapon.Torpedoes, newTorpedoLauncher(
+			p.Weapon.Torpedoes = append(p.Weapon.Torpedoes, newReleaser(
 				torpedoMD.Name, torpedoMD.PosPercent,
 				FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
 				FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
 			))
+		}
+		// 计算最大射程
+		for _, gun := range p.Weapon.Guns {
+			if gun.AntiShip {
+				p.Weapon.MaxToShipRange = max(p.Weapon.MaxToShipRange, gun.Range)
+			}
+			if gun.AntiAircraft {
+				p.Weapon.MaxToPlaneRange = max(p.Weapon.MaxToPlaneRange, gun.Range)
+			}
+		}
+		for _, bomb := range p.Weapon.Bombs {
+			p.Weapon.MaxToShipRange = max(p.Weapon.MaxToShipRange, bomb.Range)
+		}
+		for _, torpedo := range p.Weapon.Torpedoes {
+			p.Weapon.MaxToShipRange = max(p.Weapon.MaxToShipRange, torpedo.Range)
 		}
 
 		// 当前生命值

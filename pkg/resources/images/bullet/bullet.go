@@ -43,9 +43,10 @@ var (
 	gb25   = ebutil.NewImageWithColor(1, 1, colorx.Gold)
 	gb28   = ebutil.NewImageWithColor(1, 1, colorx.Gray)
 	gb20   = ebutil.NewImageWithColor(1, 1, colorx.White)
-	gb13   = ebutil.NewImageWithColor(1, 1, colorx.Gray)
-	// gb12 其实就是 12.7mm，懒得改成 float，就这样吧 :D
-	gb12 = ebutil.NewImageWithColor(1, 1, colorx.White)
+	// 12.7 / 13 都使用 13
+	gb13 = ebutil.NewImageWithColor(1, 1, colorx.Gray)
+	// 7.62 / 7.7 / 7.92 / 8 都使用 8
+	gb8 = ebutil.NewImageWithColor(1, 1, colorx.White)
 )
 
 var (
@@ -56,6 +57,8 @@ var (
 	tb622  = ebutil.NewImageWithColor(4, 25, colorx.Gray)
 	tb1350 = ebutil.NewImageWithColor(5, 52, colorx.DarkSilver)
 )
+
+// FIXME 添加炸弹的贴图
 
 var NotFount = ebutil.NewImageWithColor(10, 20, colorx.Red)
 
@@ -134,8 +137,8 @@ func GetShell(diameter int) *ebiten.Image {
 		return gb20
 	case 13:
 		return gb13
-	case 12:
-		return gb12
+	case 8:
+		return gb8
 	}
 	// 找不到就暴露出来
 	return NotFount

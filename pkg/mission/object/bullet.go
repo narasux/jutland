@@ -19,6 +19,8 @@ const (
 	BulletTypeShell BulletType = "shell"
 	// BulletTypeTorpedo 鱼雷
 	BulletTypeTorpedo BulletType = "torpedo"
+	// BulletTypeBomb 炸弹
+	BulletTypeBomb BulletType = "bomb"
 )
 
 type BulletShotType int
@@ -39,21 +41,6 @@ const (
 	CriticalTypeThreeTimes
 	// CriticalTypeTenTimes 十倍暴击
 	CriticalTypeTenTimes
-)
-
-type ObjectType int
-
-const (
-	// ObjectTypeNone 无
-	ObjectTypeNone ObjectType = iota
-	// ObjectTypeShip 战舰
-	ObjectTypeShip
-	// ObjectTypePlane 战机
-	ObjectTypePlane
-	// ObjectTypeWater 水面
-	ObjectTypeWater
-	// ObjectTypeLand 陆地
-	ObjectTypeLand
 )
 
 // 火炮 / 鱼雷弹药
@@ -177,4 +164,13 @@ func NewBullets(
 	b.CriticalType = CriticalTypeNone
 	b.HitObjectType = ObjectTypeNone
 	return &b
+}
+
+// GetBulletType 获取弹药类型
+func GetBulletType(name string) BulletType {
+	b, ok := bulletMap[name]
+	if !ok {
+		log.Fatalf("bullet %s no found", name)
+	}
+	return b.Type
 }

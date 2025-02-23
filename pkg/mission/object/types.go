@@ -2,6 +2,21 @@ package object
 
 import "github.com/narasux/jutland/pkg/mission/faction"
 
+type ObjectType int
+
+const (
+	// ObjectTypeNone 无
+	ObjectTypeNone ObjectType = iota
+	// ObjectTypeShip 战舰
+	ObjectTypeShip
+	// ObjectTypePlane 战机
+	ObjectTypePlane
+	// ObjectTypeWater 水面
+	ObjectTypeWater
+	// ObjectTypeLand 陆地
+	ObjectTypeLand
+)
+
 // UnitMovementState 单位机动状态
 type UnitMovementState struct {
 	CurPos      MapPos
