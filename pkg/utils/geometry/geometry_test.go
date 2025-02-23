@@ -135,6 +135,8 @@ func TestIsSegmentIntersectRotatedRectangle(t *testing.T) {
 	assert.False(t, geometry.IsSegmentIntersectRotatedRectangle(-6, -6, -4, -4, cx, cy, 10, 4, 45)) // 旋转45度
 	assert.False(t, geometry.IsSegmentIntersectRotatedRectangle(6, 0, 8, 0, cx, cy, 10, 4, 90))     // 旋转90度
 	assert.False(t, geometry.IsSegmentIntersectRotatedRectangle(0, 6, 0, 8, cx, cy, 10, 4, 135))
+
+	assert.True(t, geometry.IsSegmentIntersectRotatedRectangle(30, 71, 30, 69, 30, 70, 2.9140625, 2.9140625, 0))
 }
 
 func TestCalcWeaponFireAngle(t *testing.T) {

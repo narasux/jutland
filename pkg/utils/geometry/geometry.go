@@ -76,8 +76,8 @@ func IsSegmentIntersectRotatedRectangle(x1, y1, x2, y2, cx, cy, length, width, a
 	// 计算长方形的四个顶点坐标
 	halfLength, halfWidth := length/2, width/2
 
-	minX, minY := cx-halfWidth, cy-halfLength
-	maxX, maxY := cx+halfWidth, cy+halfLength
+	minX, minY := -halfWidth, -halfLength
+	maxX, maxY := halfWidth, halfLength
 
 	// 端点测试
 	if (x1 >= minX && x1 <= maxX && y1 >= minY && y1 <= maxY) ||

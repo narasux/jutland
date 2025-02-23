@@ -203,32 +203,37 @@ func (m *MissionManager) updateShotBullets() {
 				continue
 			}
 
-			// 如果是直射弹药，要检查多个等分点，避免速度过快，只在终点算伤害（虚空过穿）
-			// 以最小宽度 10 计算，速度在 0.3125 内时，4 个等分点内不会丢失伤害，超过则需要倍增
-			speedInterval := 0.3125
-			checkPoint := lo.Ternary(
-				bt.ShotType == obj.BulletShotTypeDirect, 4*int(math.Ceil(bt.Speed/speedInterval)), 1,
-			)
-			for cp := 0; cp < checkPoint; cp++ {
-				pos := bt.CurPos.Copy()
-				pos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed / float64(checkPoint) * float64(cp))
-				pos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed / float64(checkPoint) * float64(cp))
+			prevPos := bt.CurPos.Copy()
+			prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
+			prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
 
-				// 判定命中，扣除战舰生命值，标记命中战舰
-				if geometry.IsPointInRotatedRectangle(
-					pos.RX, pos.RY,
+			shipBlockLength := ship.Length / constants.MapBlockSize
+			shipBlockWidth := ship.Width / constants.MapBlockSize
+			if bt.ShotType == obj.BulletShotTypeDirect {
+				// 直射则检查线段是否qq与矩形相交
+				if geometry.IsSegmentIntersectRotatedRectangle(
+					prevPos.RX, prevPos.RY, bt.CurPos.RX, bt.CurPos.RY,
 					ship.CurPos.RX, ship.CurPos.RY,
-					ship.Length/constants.MapBlockSize,
-					ship.Width/constants.MapBlockSize,
+					shipBlockLength, shipBlockWidth,
 					ship.CurRotation,
 				) {
 					ship.HurtBy(bt)
 					bt.HitObjectType = obj.ObjectTypeShip
-					return true
+					break
+				}
+			} else if bt.ShotType == obj.BulletShotTypeArcing {
+				// 弧线炮弹，只要命中一个目标，就不再继续搜索
+				if geometry.IsPointInRotatedRectangle(
+					prevPos.RX, prevPos.RY, ship.CurPos.RX, ship.CurPos.RY,
+					shipBlockLength, shipBlockWidth, ship.CurRotation,
+				) {
+					ship.HurtBy(bt)
+					bt.HitObjectType = obj.ObjectTypeShip
+					break
 				}
 			}
 		}
-		return false
+		return bt.HitObjectType != obj.ObjectTypeNone
 	}
 
 	arrivedBullets, forwardingBullets := []*obj.Bullet{}, []*obj.Bullet{}
@@ -242,9 +247,7 @@ func (m *MissionManager) updateShotBullets() {
 		if bt.ShotType == obj.BulletShotTypeArcing {
 			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
 			if bt.CurPos.Near(bt.TargetPos, 0.05) {
-				if resolveDamage(bt) {
-					bt.HitObjectType = obj.ObjectTypeShip
-				} else {
+				if !resolveDamage(bt) {
 					// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
 					bt.HitObjectType = obj.ObjectTypeWater
 				}
