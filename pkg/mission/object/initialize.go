@@ -99,6 +99,7 @@ func initReleaserMap() {
 	}
 
 	for _, r := range releasers {
+		r.BulletSpeed /= 600
 		releaserMap[r.Name] = &r
 	}
 }

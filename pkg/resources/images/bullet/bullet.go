@@ -58,7 +58,15 @@ var (
 	tb1350 = ebutil.NewImageWithColor(5, 52, colorx.DarkSilver)
 )
 
-// FIXME 添加炸弹的贴图
+var (
+	bb70  = ebutil.NewImageWithColor(2, 4, colorx.Silver)
+	bb160 = ebutil.NewImageWithColor(3, 5, colorx.Silver)
+	bb273 = ebutil.NewImageWithColor(3, 7, colorx.Silver)
+	bb280 = ebutil.NewImageWithColor(3, 8, colorx.Silver)
+	bb356 = ebutil.NewImageWithColor(4, 9, colorx.Silver)
+	bb380 = ebutil.NewImageWithColor(4, 10, colorx.Silver)
+	bb457 = ebutil.NewImageWithColor(5, 12, colorx.Silver)
+)
 
 var NotFount = ebutil.NewImageWithColor(10, 20, colorx.Red)
 
@@ -159,6 +167,28 @@ func GetTorpedo(diameter int) *ebiten.Image {
 		return tb622
 	case 1350:
 		return tb1350
+	}
+	// 找不到就暴露出来
+	return NotFount
+}
+
+// GetBomb 获取炸弹弹药图片
+func GetBomb(diameter int) *ebiten.Image {
+	switch diameter {
+	case 70:
+		return bb70
+	case 160:
+		return bb160
+	case 273:
+		return bb273
+	case 280:
+		return bb280
+	case 356:
+		return bb356
+	case 380:
+		return bb380
+	case 457:
+		return bb457
 	}
 	// 找不到就暴露出来
 	return NotFount
