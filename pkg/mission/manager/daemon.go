@@ -251,6 +251,10 @@ func (m *MissionManager) updateObjectTrails() {
 		}
 	}
 	for _, bt := range m.state.ForwardingBullets {
+		// 炸弹目前没有尾流
+		if bt.Type == obj.BulletTypeBomb {
+			continue
+		}
 		if trails := bt.GenTrails(); trails != nil {
 			m.state.Trails = append(m.state.Trails, trails...)
 		}

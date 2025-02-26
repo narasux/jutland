@@ -5,6 +5,7 @@ import (
 	"math"
 	"math/rand"
 	"slices"
+	"time"
 
 	"github.com/mohae/deepcopy"
 
@@ -121,20 +122,31 @@ func (p *Plane) Attack(shipUid string) {
 }
 
 // Fire 向指定目标发射武器
-func (p *Plane) Fire(enemy Hurtable) []*Bullet {
-	shotBullets := []*Bullet{}
+func (p *Plane) Fire(enemy Hurtable) (shotBullets []*Bullet) {
 	// 如果生命值为 0，那还 Fire 个锤子，直接返回
 	if p.CurHP <= 0 {
-		return shotBullets
+		return
 	}
+	// 机炮不用记录射击时间
 	for i := 0; i < len(p.Weapon.Guns); i++ {
 		shotBullets = slices.Concat(shotBullets, p.Weapon.Guns[i].Fire(p, enemy))
 	}
-	for i := 0; i < len(p.Weapon.Bombs); i++ {
-		shotBullets = slices.Concat(shotBullets, p.Weapon.Bombs[i].Fire(p, enemy))
-	}
-	for i := 0; i < len(p.Weapon.Torpedoes); i++ {
-		shotBullets = slices.Concat(shotBullets, p.Weapon.Torpedoes[i].Fire(p, enemy))
+	// 释放器类武器，有最小的释放间隔限制，且目前只能攻击战舰（后面有导弹，火箭弹再说）
+	if enemy.ObjType() == ObjectTypeShip {
+		timeNow := time.Now().UnixMilli()
+		if timeNow > p.Weapon.LatestReleaseAt+p.Weapon.ReleaseInterval*1e3 {
+			for _, releasers := range [2][]*Releaser{
+				p.Weapon.Bombs, p.Weapon.Torpedoes,
+			} {
+				for i := 0; i < len(releasers); i++ {
+					if bullets := releasers[i].Fire(p, enemy); len(bullets) > 0 {
+						shotBullets = slices.Concat(shotBullets, bullets)
+						p.Weapon.LatestReleaseAt = timeNow
+						break
+					}
+				}
+			}
+		}
 	}
 	return shotBullets
 }

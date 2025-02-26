@@ -140,42 +140,43 @@
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         }
       ],
+      releaseInterval: 2,
     }
   },
   {
@@ -261,7 +262,8 @@
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         }
-      ]
+      ],
+      releaseInterval: 5
     }
   },
   {
@@ -368,18 +370,19 @@
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/113",
+          name: "US/BB/114",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         }
       ],
+      releaseInterval: 5
     }
   },
   {
@@ -548,6 +551,7 @@
           leftFiringArc: [340, 360]
         }
       ],
+      releaseInterval: 5
     }
   },
   {

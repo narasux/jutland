@@ -3,56 +3,56 @@
   {
     name: "US/BB/907",
     bulletName: "US/BB/2000/907",
-    range: 1,
+    range: 4,
     bulletSpeed: 30,
   },
   // 美国海军 1000 磅（454kg）炸弹
   {
     name: "US/BB/454",
     bulletName: "US/BB/1000/454",
-    range: 1,
+    range: 4,
     bulletSpeed: 30,
   },
   // 美国海军 500 磅（227kg）炸弹
   {
     name: "US/BB/227",
     bulletName: "US/BB/500/227",
-    range: 1,
+    range: 4,
     bulletSpeed: 30,
   },
   // 美国海军 250 磅（113kg）炸弹
   {
-    name: "US/BB/113",
-    bulletName: "US/BB/250/113",
-    range: 1,
+    name: "US/BB/114",
+    bulletName: "US/BB/250/114",
+    range: 4,
     bulletSpeed: 30,
   },
   // 日本海军 250kg 炸弹
   {
     name: "JP/BB/250",
     bulletName: "JP/BB/250",
-    range: 1,
+    range: 4,
     bulletSpeed: 30,
   },
   // 日本海军 60kg 炸弹
   {
     name: "JP/BB/60",
     bulletName: "JP/BB/60",
-    range: 1,
+    range: 4,
     bulletSpeed: 30,
   },
   // 美国海军 570mm 航空鱼雷
   {
     name: "US/AST/570",
     bulletName: "US/TB/570/1938",
-    range: 4,
+    range: 8,
     bulletSpeed: 35,
   },
   // 日本海军 450mm 航空鱼雷
   {
     name: "JP/AST/450",
     bulletName: "JP/TB/450/1928",
-    range: 4,
+    range: 8,
     bulletSpeed: 40,
   }
 ]

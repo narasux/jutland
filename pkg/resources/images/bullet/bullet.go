@@ -53,6 +53,7 @@ var (
 	tb324  = ebutil.NewImageWithColor(2, 10, colorx.White)
 	tb450  = ebutil.NewImageWithColor(3, 16, colorx.Silver)
 	tb533  = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
+	tb570  = ebutil.NewImageWithColor(3, 22, colorx.DarkSilver)
 	tb610  = ebutil.NewImageWithColor(4, 24, colorx.Silver)
 	tb622  = ebutil.NewImageWithColor(4, 25, colorx.Gray)
 	tb1350 = ebutil.NewImageWithColor(5, 52, colorx.DarkSilver)
@@ -161,6 +162,8 @@ func GetTorpedo(diameter int) *ebiten.Image {
 		return tb450
 	case 533:
 		return tb533
+	case 570:
+		return tb570
 	case 610:
 		return tb610
 	case 622:
