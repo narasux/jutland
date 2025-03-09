@@ -11,6 +11,8 @@ const (
 	NameShipMove      = "ShipMove"
 	NameShipMovePath  = "ShipMovePath"
 	NameShipSummon    = "ShipSummon"
+	NamePlaneMove     = "PlaneMove"
+	NamePlaneMovePath = "PlaneMovePath"
 )
 
 // InstrStatus 指令状态

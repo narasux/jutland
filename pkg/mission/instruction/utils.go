@@ -8,6 +8,8 @@ func GenInstrUid(instrName, objUid string) string {
 	//  不过这个其实在接收方（instructions）那边处理会更好，这里只是临时处理
 	if instrName == NameShipMovePath {
 		instrName = NameShipMove
+	} else if instrName == NamePlaneMovePath {
+		instrName = NamePlaneMove
 	}
 
 	return fmt.Sprintf("%s-%s", instrName, objUid)
