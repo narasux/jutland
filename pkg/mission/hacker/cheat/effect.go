@@ -10,6 +10,28 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+// AngelicaSinensis 当归
+type AngelicaSinensis struct{}
+
+func (c *AngelicaSinensis) String() string {
+	return "angelica sinensis"
+}
+
+func (c *AngelicaSinensis) Desc() string {
+	return "DangGui is a traditional Chinese herbal medicine."
+}
+
+func (c *AngelicaSinensis) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *AngelicaSinensis) Exec(misState *state.MissionState) string {
+	// TODO 公辞八十载，今夕请当归
+	return "Eight decades since your parting sigh. This night, return as Angelica nigh."
+}
+
+var _ Cheat = (*AngelicaSinensis)(nil)
+
 // BlackSheepWall 黑羊之墙 -> 地图全开（目前没用）
 type BlackSheepWall struct{}
 

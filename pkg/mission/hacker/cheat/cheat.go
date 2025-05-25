@@ -10,6 +10,7 @@ var Cheats = []Cheat{
 	// 经济类
 	&ShowMeTheMoney{},
 	// 效果类
+	&AngelicaSinensis{},
 	&BlackSheepWall{},
 	&BathtubWar{},
 	&WhoIsCallingTheFleet{},

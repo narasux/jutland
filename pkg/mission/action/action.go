@@ -35,7 +35,7 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 	}
 
 	// Hover 下侧
-	if y > h-5 {
+	if y > h-50 {
 		// Hover 左侧 3/10
 		if x < w/10*3 {
 			return HoverScreenBottomLeft
