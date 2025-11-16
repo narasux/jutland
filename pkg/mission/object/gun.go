@@ -132,7 +132,7 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		bullets = append(bullets, NewBullets(
 			g.BulletName, curPos, pos,
-			shotType, g.BulletSpeed,
+			shotType, enemy.ObjType(), g.BulletSpeed,
 			life, shooter.ID(), shooter.Player(),
 		))
 	}

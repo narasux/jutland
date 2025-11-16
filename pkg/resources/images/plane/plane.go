@@ -11,7 +11,25 @@ import (
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/loader"
+	"github.com/narasux/jutland/pkg/resources/images/utils"
 )
+
+// 战机图片（各类缩放尺寸）
+var planeZoom10ImgMap, planeZoom8ImgMap, planeZoom4ImgMap, planeZoom2ImgMap, planeZoom1ImgMap map[string]*ebiten.Image
+
+// Get 获取战机（顶部）图片
+func Get(name string, zoom int) *ebiten.Image {
+	if zoom == 1 {
+		return planeZoom1ImgMap[name]
+	} else if zoom == 2 {
+		return planeZoom2ImgMap[name]
+	} else if zoom == 4 {
+		return planeZoom4ImgMap[name]
+	} else if zoom == 8 {
+		return planeZoom8ImgMap[name]
+	}
+	return planeZoom10ImgMap[name]
+}
 
 func init() {
 	log.Println("loading plane image resources...")
@@ -22,11 +40,12 @@ func init() {
 		"torpedo_bomber",
 	}
 
+	planeZoom10ImgMap = map[string]*ebiten.Image{}
 	loadPlaneImages(planeZoom10ImgMap, planeTypes)
-	genZoomImages(planeZoom10ImgMap, planeZoom8ImgMap, 1.25)
-	genZoomImages(planeZoom10ImgMap, planeZoom4ImgMap, 2.5)
-	genZoomImages(planeZoom10ImgMap, planeZoom2ImgMap, 5)
-	genZoomImages(planeZoom10ImgMap, planeZoom1ImgMap, 10)
+	planeZoom8ImgMap = utils.GenZoomImages(planeZoom10ImgMap, 1.25)
+	planeZoom4ImgMap = utils.GenZoomImages(planeZoom10ImgMap, 2.5)
+	planeZoom2ImgMap = utils.GenZoomImages(planeZoom10ImgMap, 5)
+	planeZoom1ImgMap = utils.GenZoomImages(planeZoom10ImgMap, 10)
 
 	log.Println("plane image resources loaded")
 }
@@ -50,41 +69,4 @@ func loadPlaneImages(cache map[string]*ebiten.Image, planeTypes []string) {
 			cache[strings.TrimSuffix(entry.Name(), ".png")] = shipImg
 		}
 	}
-}
-
-func genZoomImages(
-	source map[string]*ebiten.Image, target map[string]*ebiten.Image, arcZoom float64,
-) {
-	for name, img := range source {
-		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
-		opts.GeoM.Scale(1/arcZoom, 1/arcZoom)
-
-		width := int(float64(img.Bounds().Dx())/arcZoom) + 1
-		height := int(float64(img.Bounds().Dy())/arcZoom) + 1
-		zoomImg := ebiten.NewImage(width, height)
-		zoomImg.DrawImage(img, opts)
-		target[name] = zoomImg
-	}
-}
-
-var (
-	planeZoom10ImgMap = map[string]*ebiten.Image{}
-	planeZoom8ImgMap  = map[string]*ebiten.Image{}
-	planeZoom4ImgMap  = map[string]*ebiten.Image{}
-	planeZoom2ImgMap  = map[string]*ebiten.Image{}
-	planeZoom1ImgMap  = map[string]*ebiten.Image{}
-)
-
-// Get 获取战机（顶部）图片
-func Get(name string, zoom int) *ebiten.Image {
-	if zoom == 1 {
-		return planeZoom1ImgMap[name]
-	} else if zoom == 2 {
-		return planeZoom2ImgMap[name]
-	} else if zoom == 4 {
-		return planeZoom4ImgMap[name]
-	} else if zoom == 8 {
-		return planeZoom8ImgMap[name]
-	}
-	return planeZoom10ImgMap[name]
 }

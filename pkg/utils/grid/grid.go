@@ -49,8 +49,8 @@ func (g *Grid) Search(start, goal Point) []Point {
 		}
 
 		// 从列表中移除 Cur
-		for i, n := range openSet {
-			if n.Point == cur.Point {
+		for i := len(openSet) - 1; i >= 0; i-- {
+			if openSet[i].Point == cur.Point {
 				openSet = append(openSet[:i], openSet[i+1:]...)
 			}
 		}

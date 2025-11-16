@@ -233,6 +233,35 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 	}
 }
 
+// 绘制消亡中的战机器
+func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionState) {
+	for _, p := range ms.DestroyedPlanes {
+		// 只有在屏幕中的才渲染
+		if !ms.Camera.Contains(p.CurPos) {
+			continue
+		}
+
+		pImg := planeImg.Get(p.Name, ms.GameOpts.Zoom*2)
+		opts := d.genDefaultDrawImageOptions()
+		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
+		opts.GeoM.Translate(
+			(p.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(pImg.Bounds().Dx()/2),
+			(p.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(pImg.Bounds().Dy()/2),
+		)
+		screen.DrawImage(pImg, opts)
+
+		// 绘制爆炸效果
+		explodeImg := textureImg.GetPlaneExplode(p.CurHP)
+		opts = d.genDefaultDrawImageOptions()
+		ebutil.SetOptsCenterRotation(opts, explodeImg, p.CurRotation)
+		opts.GeoM.Translate(
+			(p.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
+			(p.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-10,
+		)
+		screen.DrawImage(explodeImg, opts)
+	}
+}
+
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.ForwardingBullets {

@@ -70,11 +70,13 @@ type Bullet struct {
 	Speed float64
 	// 射击方式
 	ShotType BulletShotType
+	// 目标对象类型
+	TargetObjectType ObjectType
 	// 前进周期数
 	ForwardAge int
 
-	// 所属战舰
-	BelongShip string
+	// 所属战舰/战机
+	Shooter string
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 
@@ -142,9 +144,10 @@ func NewBullets(
 	name string,
 	curPos, targetPos MapPos,
 	shotType BulletShotType,
+	targetObjectType ObjectType,
 	speed float64,
 	life int,
-	shipUid string,
+	shooterUid string,
 	player faction.Player,
 ) *Bullet {
 	b := deepcopy.Copy(*bulletMap[name]).(Bullet)
@@ -153,12 +156,13 @@ func NewBullets(
 	b.CurPos = curPos
 	b.TargetPos = targetPos
 	b.ShotType = shotType
+	b.TargetObjectType = targetObjectType
 
 	b.Rotation = curPos.Angle(targetPos)
 	b.Speed = speed
 	b.Life = life
 
-	b.BelongShip = shipUid
+	b.Shooter = shooterUid
 	b.BelongPlayer = player
 
 	b.CriticalType = CriticalTypeNone

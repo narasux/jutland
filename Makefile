@@ -6,7 +6,7 @@ else
     VERSION=$(shell git describe --always)
 endif
 
-GOARCH ?= amd64
+GOARCH ?= arm64
 GOOS ?= darwin
 BINARY_NAME ?= jutland
 

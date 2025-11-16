@@ -302,8 +302,90 @@
       "威克岛是马绍尔群岛中的小岛、北太平洋上的环礁",
       "该岛于 1568 年被发现，于 1899 年被美国占领"
     ],
-    initReinforcePoints: [],
-    initOilPlatforms: [],
+    initReinforcePoints: [
+      {
+        pos: [1, 20],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "lowa",
+          "south_dakota",
+          "astoria",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [1, 55],
+        rotation: 90,
+        rallyPos: [30, 50],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "astoria",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [1, 85],
+        rotation: 90,
+        rallyPos: [30, 50],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "astoria",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [125, 20],
+        rotation: 270,
+        rallyPos: [90, 50],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
+          "kongo",
+          "mogami",
+          "asashio",
+          "yugumo",
+        ],
+      },
+      {
+        pos: [125, 90],
+        rotation: 270,
+        rallyPos: [100, 60],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
+          "mogami",
+          "asashio",
+          "yugumo",
+          "T_14"
+        ],
+      }
+    ],
+    initOilPlatforms: [
+      {
+        pos: [10, 60],
+        radius: 3,
+        yield: 10
+      },
+      {
+        pos: [70, 64],
+        radius: 4,
+        yield: 25
+      }
+    ],
     initShips: [
       {
         name: "south_dakota",

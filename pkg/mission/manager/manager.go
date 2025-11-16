@@ -57,6 +57,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateObjectTrails()
 		m.updateShotBullets()
 		m.updateMissionShips()
+		m.updateMissionPlanes()
 	case state.MissionInMap:
 		m.updateInstructions()
 		m.executeInstructions()
@@ -68,6 +69,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateObjectTrails()
 		m.updateShotBullets()
 		m.updateMissionShips()
+		m.updateMissionPlanes()
 	case state.MissionInBuilding:
 		m.updateInstructions()
 		m.executeInstructions()
@@ -79,6 +81,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateObjectTrails()
 		m.updateShotBullets()
 		m.updateMissionShips()
+		m.updateMissionPlanes()
 	case state.MissionInTerminal:
 		m.updateTerminal()
 	}

@@ -79,7 +79,8 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 	life := int(r.Range/r.BulletSpeed) + 5
 
 	return []*Bullet{NewBullets(
-		r.BulletName, sState.CurPos, targetPos, shotType,
+		r.BulletName, sState.CurPos, targetPos,
+		shotType, enemy.ObjType(),
 		r.BulletSpeed, life, shooter.ID(), shooter.Player(),
 	)}
 }

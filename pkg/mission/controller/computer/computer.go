@@ -68,8 +68,8 @@ func (h *ComputerDecisionHandler) Handle(
 		} else if ship.CurPos.OnBorder(
 			float64(misState.MissionMD.MapCfg.Width-2),
 			float64(misState.MissionMD.MapCfg.Height-2),
-		) {
-			// 如果到了边界，就往自己的增援点的集结点走
+		) && reinforcePointUid != "" {
+			// 如果到了边界，且存在增援点，则往自己的增援点的集结点走
 			moveInstr := instr.NewShipMove(
 				ship.Uid, misState.ReinforcePoints[reinforcePointUid].RallyPos,
 			)

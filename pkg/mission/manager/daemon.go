@@ -228,10 +228,11 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 		}
 	}
 
-	// 有炸弹就发声音
 	if bombReleased {
+		// 有炸弹就发声音
 		audio.PlayAudioToEnd(audioRes.NewBombSpawn())
 	} else if torpedoLaunched {
+		// 有鱼雷就发声音
 		audio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
 	}
 }
@@ -269,45 +270,81 @@ func (m *MissionManager) updateShotBullets() {
 
 	// 结算伤害
 	resolveDamage := func(bt *obj.Bullet) bool {
-		for _, ship := range m.state.Ships {
-			// 总不能不小心打死自己吧，真是不应该 :D
-			if bt.BelongShip == ship.Uid {
-				continue
-			}
-			// 如果友军伤害没启用，则不对己方战舰造成伤害
-			if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
-				continue
-			}
+		prevPos := bt.CurPos.Copy()
+		prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
+		prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
 
-			prevPos := bt.CurPos.Copy()
-			prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
-			prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
+		switch bt.TargetObjectType {
+		case obj.ObjectTypeShip:
+			for _, ship := range m.state.Ships {
+				// 总不能不小心打死自己吧，真是不应该 :D
+				if bt.Shooter == ship.Uid {
+					continue
+				}
+				// 如果友军伤害没启用，则不对己方战舰造成伤害
+				if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
+					continue
+				}
 
-			shipBlockLength := ship.Length / constants.MapBlockSize
-			shipBlockWidth := ship.Width / constants.MapBlockSize
-			if bt.ShotType == obj.BulletShotTypeDirect {
-				// 直射则检查线段是否qq与矩形相交
+				if bt.ShotType == obj.BulletShotTypeDirect {
+					// 直射则检查线段是否与矩形相交
+					if geometry.IsSegmentIntersectRotatedRectangle(
+						prevPos.RX, prevPos.RY,
+						bt.CurPos.RX, bt.CurPos.RY,
+						ship.CurPos.RX, ship.CurPos.RY,
+						// 转换成实际地图上的尺寸
+						ship.Length/constants.MapBlockSize,
+						ship.Width/constants.MapBlockSize,
+						ship.CurRotation,
+					) {
+						ship.HurtBy(bt)
+						bt.HitObjectType = obj.ObjectTypeShip
+						break
+					}
+				} else if bt.ShotType == obj.BulletShotTypeArcing {
+					// 弧线炮弹，只要命中一个目标，就不再继续搜索
+					if geometry.IsPointInRotatedRectangle(
+						prevPos.RX, prevPos.RY,
+						ship.CurPos.RX, ship.CurPos.RY,
+						// 转换成实际地图上的尺寸
+						ship.Length/constants.MapBlockSize,
+						ship.Width/constants.MapBlockSize,
+						ship.CurRotation,
+					) {
+						ship.HurtBy(bt)
+						bt.HitObjectType = obj.ObjectTypeShip
+						break
+					}
+				}
+			}
+		case obj.ObjectTypePlane:
+			for _, plane := range m.state.Planes {
+				// 总不能不小心打死自己吧，真是不应该 :D
+				if bt.Shooter == plane.Uid {
+					continue
+				}
+				// 如果友军伤害没启用，则不对己方战舰造成伤害
+				if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
+					continue
+				}
+
+				// 对空射击都认为是直射，检查线段是否与矩形相交
 				if geometry.IsSegmentIntersectRotatedRectangle(
-					prevPos.RX, prevPos.RY, bt.CurPos.RX, bt.CurPos.RY,
-					ship.CurPos.RX, ship.CurPos.RY,
-					shipBlockLength, shipBlockWidth,
-					ship.CurRotation,
+					prevPos.RX, prevPos.RY,
+					bt.CurPos.RX, bt.CurPos.RY,
+					plane.CurPos.RX, plane.CurPos.RY,
+					// 转换成实际地图上的尺寸
+					plane.Length/constants.MapBlockSize,
+					plane.Width/constants.MapBlockSize,
+					plane.CurRotation,
 				) {
-					ship.HurtBy(bt)
-					bt.HitObjectType = obj.ObjectTypeShip
-					break
-				}
-			} else if bt.ShotType == obj.BulletShotTypeArcing {
-				// 弧线炮弹，只要命中一个目标，就不再继续搜索
-				if geometry.IsPointInRotatedRectangle(
-					prevPos.RX, prevPos.RY, ship.CurPos.RX, ship.CurPos.RY,
-					shipBlockLength, shipBlockWidth, ship.CurRotation,
-				) {
-					ship.HurtBy(bt)
-					bt.HitObjectType = obj.ObjectTypeShip
+					plane.HurtBy(bt)
+					bt.HitObjectType = obj.ObjectTypePlane
 					break
 				}
 			}
+		default:
+			return false
 		}
 		return bt.HitObjectType != obj.ObjectTypeNone
 	}
@@ -350,7 +387,8 @@ func (m *MissionManager) updateShotBullets() {
 	// 已经到达目标地点的，转换成爆炸 & 伤害数值
 	// TODO 支持命中爆炸
 	for _, bt := range arrivedBullets {
-		if bt.HitObjectType != obj.ObjectTypeShip {
+		// 击中的是战舰 / 飞机，才会有伤害数值
+		if bt.HitObjectType != obj.ObjectTypeShip && bt.HitObjectType != obj.ObjectTypePlane {
 			continue
 		}
 
@@ -378,7 +416,6 @@ func (m *MissionManager) updateMissionShips() {
 		if ship.CurHP <= 0 {
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			ship.CurHP = textureImg.MaxShipExplodeState
-			ship.CurSpeed = 0
 
 			if audioPlayQuota > 0 && m.state.Camera.Contains(ship.CurPos) {
 				audio.PlayAudioToEnd(audioRes.NewShipExplode())
@@ -393,11 +430,45 @@ func (m *MissionManager) updateMissionShips() {
 	// 消亡中的战舰会逐渐掉血到 0
 	for _, ship := range m.state.DestroyedShips {
 		ship.CurHP -= 0.5
+		// 支持逐渐减速的效果，而不是直接就变成 0
+		ship.CurSpeed = max(0, ship.CurSpeed-ship.MaxSpeed/30)
 	}
 
 	// 移除已经完全消亡的战舰
 	m.state.DestroyedShips = lo.Filter(
 		m.state.DestroyedShips, func(ship *obj.BattleShip, _ int) bool { return ship.CurHP > 0 },
+	)
+}
+
+// 更新局内战机
+func (m *MissionManager) updateMissionPlanes() {
+	audioPlayQuota := 2
+	// 如果战机 HP 为 0，则需要走消亡流程
+	for uid, plane := range m.state.Planes {
+		if plane.CurHP <= 0 {
+			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
+			plane.CurHP = textureImg.MaxPlaneExplodeState
+
+			if audioPlayQuota > 0 && m.state.Camera.Contains(plane.CurPos) {
+				audio.PlayAudioToEnd(audioRes.NewShipExplode())
+				audioPlayQuota--
+			}
+
+			m.state.DestroyedPlanes = append(m.state.DestroyedPlanes, plane)
+			delete(m.state.Planes, uid)
+		}
+	}
+
+	// 消亡中的战机会逐渐掉血到 0
+	for _, plane := range m.state.DestroyedPlanes {
+		plane.CurHP -= 0.5
+		// 支持逐渐减速的效果，而不是直接就变成 0
+		plane.CurSpeed = max(0, plane.CurSpeed-plane.MaxSpeed/30)
+	}
+
+	// 移除已经完全消亡的战舰
+	m.state.DestroyedPlanes = lo.Filter(
+		m.state.DestroyedPlanes, func(plane *obj.Plane, _ int) bool { return plane.CurHP > 0 },
 	)
 }
 

@@ -70,6 +70,7 @@ func (d *Drawer) Draw(
 		d.drawBattleShips(screen, misState)
 		d.drawDestroyedShips(screen, misState)
 		d.drawFlyingPlanes(screen, misState)
+		d.drawDestroyedPlanes(screen, misState)
 		// 用户行为
 		d.drawArrowOnMapWhenHover(screen, misState)
 		d.drawSelectedArea(screen, misState)
