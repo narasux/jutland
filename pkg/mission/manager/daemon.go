@@ -163,46 +163,123 @@ func (m *MissionManager) updateShipWeaponFire() {
 	}
 }
 
-// 更新战机武器开火相关状态
-func (m *MissionManager) updatePlaneWeaponFire() {
-	bombReleased, torpedoLaunched := false, false
+// 飞机出动 & 攻击
+func (m *MissionManager) updatePlaneAttackOrReturn() {
+	for _, ship := range m.state.Ships {
+		// 战舰上没有飞机的，跳过
+		if !ship.Aircraft.HasPlane {
+			continue
+		}
 
-	for _, plane := range m.state.Planes {
 		inRangeEnemies := []obj.Hurtable{}
-
-		if target := m.state.Ships[plane.AttackTarget]; target != nil {
-			// 如果有目标敌人，则检查是否在射程内，如果有直接选中即可
-			if plane.CurPos.Distance(target.CurPos) < plane.Weapon.MaxToShipRange {
-				inRangeEnemies = append(inRangeEnemies, target)
-			}
+		// TODO 目前飞机目标都没考虑是否在攻击范围内，未来还是需要考虑的
+		if target := m.state.Ships[ship.AttackTarget]; target != nil {
+			// 如果有目标敌人，则直接选中即可
+			inRangeEnemies = append(inRangeEnemies, target)
 		} else {
 			// 敌机
 			for _, enemy := range m.state.Planes {
-				// 不能攻击己方的战机（包括自己）
-				if plane.BelongPlayer == enemy.BelongPlayer {
-					continue
-				}
-				// 如果不在 对空 最大射程内，跳过
-				if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
+				// 不能攻击己方的战机
+				if ship.BelongPlayer == enemy.BelongPlayer {
 					continue
 				}
 				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-
 			// 敌舰
-			for enemyUid, enemy := range m.state.Ships {
-				// 不能攻击自己，也不能攻击己方的战舰，目标敌人的也可以跳过（前面已处理）
-				if plane.BelongPlayer == enemy.BelongPlayer || enemyUid == plane.AttackTarget {
-					continue
-				}
-				// 如果不在 对舰 最大射程内，跳过
-				if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToShipRange {
+			for _, enemy := range m.state.Ships {
+				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
+				if ship.BelongPlayer == enemy.BelongPlayer {
 					continue
 				}
 				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
 		}
 
+		if total := len(inRangeEnemies); total != 0 {
+			// 射程内的敌人都会被攻击
+			enemy := inRangeEnemies[rand.Intn(total)]
+			plane := ship.Aircraft.TakeOff(ship, enemy.ObjType())
+			// 没有合适的飞机，那就跳过
+			if plane == nil {
+				continue
+			}
+			// 加入到对局飞机数据集中
+			m.state.Planes[plane.Uid] = plane
+			// 给飞机下达攻击指令
+			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
+		}
+	}
+
+	for _, plane := range m.state.Planes {
+		// 剩余燃料为 0，需要返航
+		if plane.RemainRange <= 0 {
+			// 添加返航指令
+			m.instructionSet.Add(instr.NewPlaneReturn(plane.Uid))
+			continue
+		}
+		instrUid := instr.GenInstrUid(instr.NamePlaneAttack, plane.Uid)
+		// 如果战机已经有攻击目标，则跳过
+		if _, ok := m.instructionSet.Items()[instrUid]; ok {
+			continue
+		}
+
+		// 有剩余燃料 & 没有攻击目标，选一个新的
+		inRangeEnemies := []obj.Hurtable{}
+		// 敌机
+		for _, enemy := range m.state.Planes {
+			// 不能攻击己方的战机
+			if plane.BelongPlayer == enemy.BelongPlayer {
+				continue
+			}
+			inRangeEnemies = append(inRangeEnemies, enemy)
+		}
+		// 敌舰
+		for _, enemy := range m.state.Ships {
+			// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
+			if plane.BelongPlayer == enemy.BelongPlayer {
+				continue
+			}
+			inRangeEnemies = append(inRangeEnemies, enemy)
+		}
+		if total := len(inRangeEnemies); total != 0 {
+			// 射程内的敌人都会被攻击
+			enemy := inRangeEnemies[rand.Intn(total)]
+			// 给飞机下达攻击指令
+			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
+		}
+	}
+}
+
+// 更新战机武器开火相关状态
+func (m *MissionManager) updatePlaneWeaponFire() {
+	bombReleased, torpedoLaunched := false, false
+
+	for _, plane := range m.state.Planes {
+		inRangeEnemies := []obj.Hurtable{}
+		// 敌机
+		for _, enemy := range m.state.Planes {
+			// 不能攻击己方的战机（包括自己）
+			if plane.BelongPlayer == enemy.BelongPlayer {
+				continue
+			}
+			// 如果不在 对空 最大射程内，跳过
+			if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
+				continue
+			}
+			inRangeEnemies = append(inRangeEnemies, enemy)
+		}
+		// 敌舰
+		for _, enemy := range m.state.Ships {
+			// 不能攻击自己，也不能攻击己方的战舰
+			if plane.BelongPlayer == enemy.BelongPlayer {
+				continue
+			}
+			// 如果不在 对舰 最大射程内，跳过
+			if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToShipRange {
+				continue
+			}
+			inRangeEnemies = append(inRangeEnemies, enemy)
+		}
 		if total := len(inRangeEnemies); total != 0 {
 			// 射程内的敌人都会被攻击
 			enemy := inRangeEnemies[rand.Intn(total)]
@@ -442,18 +519,13 @@ func (m *MissionManager) updateMissionShips() {
 
 // 更新局内战机
 func (m *MissionManager) updateMissionPlanes() {
-	audioPlayQuota := 2
 	// 如果战机 HP 为 0，则需要走消亡流程
 	for uid, plane := range m.state.Planes {
 		if plane.CurHP <= 0 {
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			plane.CurHP = textureImg.MaxPlaneExplodeState
 
-			if audioPlayQuota > 0 && m.state.Camera.Contains(plane.CurPos) {
-				audio.PlayAudioToEnd(audioRes.NewShipExplode())
-				audioPlayQuota--
-			}
-
+			// TODO 评估是否要参考战舰爆炸一样播放声音？
 			m.state.DestroyedPlanes = append(m.state.DestroyedPlanes, plane)
 			delete(m.state.Planes, uid)
 		}
@@ -462,8 +534,7 @@ func (m *MissionManager) updateMissionPlanes() {
 	// 消亡中的战机会逐渐掉血到 0
 	for _, plane := range m.state.DestroyedPlanes {
 		plane.CurHP -= 0.5
-		// 支持逐渐减速的效果，而不是直接就变成 0
-		plane.CurSpeed = max(0, plane.CurSpeed-plane.MaxSpeed/30)
+		// FIXME 如何模拟出被击落的效果？
 	}
 
 	// 移除已经完全消亡的战舰

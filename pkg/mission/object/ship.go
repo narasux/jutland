@@ -79,6 +79,8 @@ type BattleShip struct {
 	Tonnage float64 `json:"tonnage"`
 	// 武器
 	Weapon ShipWeapon `json:"weapon"`
+	// 舰载机联队
+	Aircraft ShipAircraft `json:"aircraft"`
 
 	// 唯一标识
 	Uid string

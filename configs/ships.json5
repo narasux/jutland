@@ -71,6 +71,23 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    aircraft: {
+      takeOffTime: 10,
+      groups: [
+        {
+          name: "F",
+          count: 12
+        },
+        {
+          name: "B",
+          count: 12
+        },
+        {
+          name: "A",
+          count: 12
+        }
+      ]
     }
   },
   // 水滴！攻击物是水滴！！！
@@ -562,6 +579,23 @@
         }
       ],
       torpedoes: []
+    },
+    aircraft: {
+      takeOffTime: 2,
+      groups: [
+        {
+          name: "F4F-3",
+          count: 36
+        },
+        {
+          name: "SBD-3",
+          count: 40
+        },
+        {
+          name: "TBD-1",
+          count: 20
+        }
+      ]
     }
   },
   {
@@ -894,6 +928,23 @@
         },
       ],
       torpedoes: []
+    },
+    aircraft: {
+      takeOffTime: 2,
+      groups: [
+        {
+          name: "F4F-3",
+          count: 36
+        },
+        {
+          name: "SBD-3",
+          count: 40
+        },
+        {
+          name: "TBD-1",
+          count: 20
+        }
+      ]
     }
   },
   // 日本海军
@@ -1120,6 +1171,23 @@
         },
       ],
       torpedoes: []
+    },
+    aircraft: {
+      takeOffTime: 2,
+      groups: [
+        {
+          name: "A6M_0",
+          count: 24
+        },
+        {
+          name: "D3A_99",
+          count: 12
+        },
+        {
+          name: "B5N2_97",
+          count: 24
+        }
+      ]
     }
   },
   // 战列舰

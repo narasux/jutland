@@ -22,6 +22,7 @@ func NewEnableWeapon(shipUid string, weaponType obj.WeaponType) *EnableWeapon {
 
 var _ Instruction = (*EnableWeapon)(nil)
 
+// Exec ...
 func (i *EnableWeapon) Exec(s *state.MissionState) error {
 	i.status = Executed
 	// 战舰如果不存在（被摧毁），直跳过
@@ -34,14 +35,17 @@ func (i *EnableWeapon) Exec(s *state.MissionState) error {
 	return nil
 }
 
+// Executed ...
 func (i *EnableWeapon) Executed() bool {
 	return i.status == Executed
 }
 
+// Uid ...
 func (i *EnableWeapon) Uid() string {
 	return GenInstrUid(NameEnableWeapon, i.shipUid)
 }
 
+// String ...
 func (i *EnableWeapon) String() string {
 	return fmt.Sprintf("Enable ship %s weapon %s", i.shipUid, string(i.weaponType))
 }
@@ -60,6 +64,7 @@ func NewDisableWeapon(shipUid string, weaponType obj.WeaponType) *DisableWeapon 
 
 var _ Instruction = (*DisableWeapon)(nil)
 
+// Exec ...
 func (i *DisableWeapon) Exec(s *state.MissionState) error {
 	i.status = Executed
 	// 战舰如果不存在（被摧毁），直跳过
@@ -72,14 +77,17 @@ func (i *DisableWeapon) Exec(s *state.MissionState) error {
 	return nil
 }
 
+// Executed ...
 func (i *DisableWeapon) Executed() bool {
 	return i.status == Executed
 }
 
+// Uid ...
 func (i *DisableWeapon) Uid() string {
 	return GenInstrUid(NameDisableWeapon, i.shipUid)
 }
 
+// String ...
 func (i *DisableWeapon) String() string {
 	return fmt.Sprintf("Disable ship %s weapon %s", i.shipUid, string(i.weaponType))
 }
@@ -98,6 +106,7 @@ func NewShipMove(shipUid string, targetPos obj.MapPos) *ShipMove {
 
 var _ Instruction = (*ShipMove)(nil)
 
+// Exec ...
 func (i *ShipMove) Exec(s *state.MissionState) error {
 	// 战舰如果不存在（被摧毁），直接修改指令为已完成
 	ship, ok := s.Ships[i.shipUid]
@@ -112,14 +121,17 @@ func (i *ShipMove) Exec(s *state.MissionState) error {
 	return nil
 }
 
+// Executed ...
 func (i *ShipMove) Executed() bool {
 	return i.status == Executed
 }
 
+// Uid ...
 func (i *ShipMove) Uid() string {
 	return GenInstrUid(NameShipMove, i.shipUid)
 }
 
+// String ...
 func (i *ShipMove) String() string {
 	return fmt.Sprintf("Ship %s move to %s", i.shipUid, i.targetPos.String())
 }
@@ -141,6 +153,7 @@ func NewShipMovePath(shipUid string, curPos, targetPos obj.MapPos) *ShipMovePath
 
 var _ Instruction = (*ShipMovePath)(nil)
 
+// Exec ...
 func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	if i.status != Ready {
 		if i.status != Preparing {
@@ -171,6 +184,7 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	return nil
 }
 
+// genPath 生成战舰移动的路径
 func (i *ShipMovePath) genPath(misState *state.MissionState) {
 	points := misState.MissionMD.MapCfg.GenPath(
 		grid.Point{i.curPos.MX, i.curPos.MY},
@@ -189,14 +203,17 @@ func (i *ShipMovePath) genPath(misState *state.MissionState) {
 	i.status = Ready
 }
 
+// Executed ...
 func (i *ShipMovePath) Executed() bool {
 	return i.status == Executed
 }
 
+// Uid ...
 func (i *ShipMovePath) Uid() string {
 	return GenInstrUid(NameShipMovePath, i.shipUid)
 }
 
+// String ...
 func (i *ShipMovePath) String() string {
 	return fmt.Sprintf("Ship %s move with path %v", i.shipUid, i.path)
 }

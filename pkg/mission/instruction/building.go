@@ -23,6 +23,7 @@ func NewShipSummon(reinforcePointUid string, shipName string) *ShipSummon {
 
 var _ Instruction = (*ShipSummon)(nil)
 
+// Exec 执行战舰增援指令
 func (i *ShipSummon) Exec(s *state.MissionState) error {
 	rp, ok := s.ReinforcePoints[i.reinforcePointUid]
 	if !ok {
@@ -41,14 +42,17 @@ func (i *ShipSummon) Exec(s *state.MissionState) error {
 	return nil
 }
 
+// Executed 判断指令是否执行完成
 func (i *ShipSummon) Executed() bool {
 	return i.status == Executed
 }
 
+// Uid 指令 uid
 func (i *ShipSummon) Uid() string {
 	return GenInstrUid(NameShipSummon, i.reinforcePointUid)
 }
 
+// String 返回指令字符串表示
 func (i *ShipSummon) String() string {
 	return fmt.Sprintf("summon %s from reinforce point %s", i.shipName, i.reinforcePointUid)
 }

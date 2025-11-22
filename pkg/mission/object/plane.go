@@ -7,9 +7,9 @@ import (
 	"slices"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
-	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
@@ -26,14 +26,14 @@ const (
 	PlaneTypeTorpedoBomber PlaneType = "torpedo_bomber"
 )
 
-// Plane 战舰
+// Plane 战机
 type Plane struct {
 	// 名称
 	Name string `json:"name"`
 	// 展示用名称
 	DisplayName string `json:"displayName"`
 	// 类别
-	Type ShipType `json:"type"`
+	Type PlaneType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
 	// 描述
@@ -49,6 +49,8 @@ type Plane struct {
 	Acceleration float64 `json:"acceleration"`
 	// 转向速度（度）
 	RotateSpeed float64 `json:"rotateSpeed"`
+	// 总航程
+	Range float64 `json:"range"`
 	// 战机长度
 	Length float64 `json:"length"`
 	// 战机宽度
@@ -74,8 +76,8 @@ type Plane struct {
 	CurRotation float64
 	// 当前速度
 	CurSpeed float64
-	// 攻击目标（敌舰/敌机 Uid）
-	AttackTarget string
+	// 剩余航程
+	RemainRange float64
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
@@ -116,11 +118,6 @@ func (p *Plane) GeometricSize() UnitGeometricSize {
 	return UnitGeometricSize{Length: p.Length, Width: p.Width}
 }
 
-// Attack 攻击指定目标
-func (p *Plane) Attack(shipUid string) {
-	p.AttackTarget = shipUid
-}
-
 // Fire 向指定目标发射武器
 func (p *Plane) Fire(enemy Hurtable) (shotBullets []*Bullet) {
 	// 如果生命值为 0，那还 Fire 个锤子，直接返回
@@ -153,7 +150,8 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*Bullet) {
 
 // HurtBy 受到伤害
 func (p *Plane) HurtBy(bullet *Bullet) {
-	realDamage := bullet.Damage * (1 - p.DamageReduction)
+	// 计算真实伤害，飞机比较脆，所以伤害要再额外乘以 3
+	realDamage := bullet.Damage * (1 - p.DamageReduction) * 3
 
 	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
 	criticalType := CriticalTypeNone
@@ -174,19 +172,14 @@ func (p *Plane) HurtBy(bullet *Bullet) {
 }
 
 // MoveTo 移动到指定位置
-func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive bool) {
+func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if p.CurHP <= 0 {
-		return true
+		return
 	}
-	// 未到达目标位置，逐渐加速
-	if p.CurSpeed < p.MaxSpeed {
-		p.CurSpeed = min(p.MaxSpeed, p.CurSpeed+p.Acceleration)
-	}
-	// 到目标位置附近，逐渐减速
-	if p.CurPos.Near(targetPos, p.Length/constants.MapBlockSize*1.5) {
-		p.CurSpeed = max(p.Acceleration*20, p.CurSpeed-p.Acceleration*10)
-	}
+	// 飞机只要移动，就是最大速度（简化逻辑）
+	p.CurSpeed = p.MaxSpeed
+
 	targetRotation := p.CurPos.Angle(targetPos)
 	// 逐渐转向
 	if p.CurRotation != targetRotation {
@@ -207,8 +200,7 @@ func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) (arrive bool) {
 	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
 	// 移动到新位置
 	p.CurPos = nextPos
-
-	return false
+	p.RemainRange -= p.CurSpeed
 }
 
 var planeMap = map[string]*Plane{}
@@ -226,9 +218,28 @@ func NewPlane(
 		log.Fatalf("plane %s no found", name)
 	}
 	p := deepcopy.Copy(*plane).(Plane)
+
+	p.Uid = uuid.New().String()
 	p.CurPos = curPos
 	p.CurRotation = rotation
 	p.BelongPlayer = player
 	p.BelongShip = shipUid
 	return &p
+}
+
+// getPlaneTargetObjType 获取飞机攻击目标类型
+func getPlaneTargetObjType(name string) ObjectType {
+	plane, ok := planeMap[name]
+	if !ok {
+		log.Fatalf("plane %s no found", name)
+	}
+	// 根据飞机类型获取目标类型
+	switch plane.Type {
+	case PlaneTypeFighter:
+		return ObjectTypePlane
+	case PlaneTypeDiveBomber, PlaneTypeTorpedoBomber:
+		return ObjectTypeShip
+	default:
+		return ObjectTypeNone
+	}
 }

@@ -1,5 +1,7 @@
 package object
 
+import "time"
+
 type WeaponType string
 
 const (
@@ -49,8 +51,6 @@ type ShipWeapon struct {
 	AntiAircraftGuns []*Gun
 	// 鱼雷
 	Torpedoes []*TorpedoLauncher
-	// 释放器
-	Releasers []*Releaser
 	// 最大射程（各类武器射程最大值）
 	MaxToShipRange  float64
 	MaxToPlaneRange float64
@@ -59,7 +59,6 @@ type ShipWeapon struct {
 	HasSecondaryGun    bool
 	HasAntiAircraftGun bool
 	HasTorpedo         bool
-	HasReleaser        bool
 	// 武器禁用情况
 	MainGunDisabled         bool
 	SecondaryGunDisabled    bool
@@ -118,4 +117,53 @@ type PlaneWeapon struct {
 	// 最大射程（各类武器射程最大值）
 	MaxToShipRange  float64
 	MaxToPlaneRange float64
+}
+
+// PlaneGroup 飞机分组
+type PlaneGroup struct {
+	// Name 战机名称
+	Name string `json:"name"`
+	// Count 总数量（起飞 -1，回收 +1）
+	Count int64 `json:"count"`
+	// TargetType 目标类型（战斗机制空，轰炸机、鱼雷机对地）
+	TargetType ObjectType `json:"targetType"`
+}
+
+// ShipAircraft 战舰上的飞机，也能算是武器吧 :D
+type ShipAircraft struct {
+	// TakeOffTime 起飞耗时（单位：秒）
+	TakeOffTime float64 `json:"takeOffTime"`
+	// TODO BatchCount 每次起飞多少架（目前没用，未来考虑支持）
+	// BatchCount int64 `json:"batchCount"`
+	// Groups 战机分组
+	Groups []PlaneGroup `json:"groups"`
+
+	// 是否禁用舰载机
+	Disable bool
+	// 是否拥有舰载机
+	HasPlane bool
+	// 最近起飞时间（毫秒时间戳)
+	LatestTakeOffAt int64
+}
+
+// TakeOff 起飞战机（不区分飞机种类，只看打击对象类型）
+func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType ObjectType) *Plane {
+	// 判断起飞冷却，冷却中不允许起飞
+	if sa.LatestTakeOffAt+int64(sa.TakeOffTime*1e3) > time.Now().UnixMilli() {
+		return nil
+	}
+
+	for idx, g := range sa.Groups {
+		if g.TargetType != targetObjType {
+			continue
+		}
+		if g.Count <= 0 {
+			continue
+		}
+		// 非指针需要通过索引修改
+		sa.Groups[idx].Count--
+		sa.LatestTakeOffAt = time.Now().UnixMilli()
+		return NewPlane(g.Name, ship.CurPos, ship.CurRotation, ship.Uid, ship.BelongPlayer)
+	}
+	return nil
 }

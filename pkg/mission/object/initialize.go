@@ -162,7 +162,11 @@ func initPlaneMap() {
 		// 当前生命值
 		p.CurHP = p.TotalHP
 		// 折算速度（公里换成节）
-		p.MaxSpeed /= 600 * 2.5
+		p.MaxSpeed /= 4500 * 1.8
+		// 折算总航程
+		p.Range /= 8 * 1.8
+		// 剩余航程
+		p.RemainRange = p.Range
 		p.Acceleration /= 600
 		// 检查伤害减免值不能超过 1
 		p.DamageReduction = min(1, p.DamageReduction)
@@ -237,7 +241,15 @@ func initShipMap() {
 		for _, torpedo := range s.Weapon.Torpedoes {
 			s.Weapon.MaxToShipRange = max(s.Weapon.MaxToShipRange, torpedo.Range)
 		}
+		// 飞机相关状态
+		s.Aircraft.HasPlane = len(s.Aircraft.Groups) > 0
+		// 根据飞机名称，设置飞机目标类型
+		for i := 0; i < len(s.Aircraft.Groups); i++ {
+			s.Aircraft.Groups[i].TargetType = getPlaneTargetObjType(s.Aircraft.Groups[i].Name)
+		}
+		// 初始化当前生命值
 		s.CurHP = s.TotalHP
+		// 计算吨位（即最大生命值）
 		s.Tonnage = s.TotalHP
 		// 添加默认描述
 		s.Description = append(

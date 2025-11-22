@@ -3,124 +3,150 @@ package instruction
 import (
 	"fmt"
 
+	"github.com/pkg/errors"
+
 	obj "github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/utils/grid"
+	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
-// PlaneMove 移动
-type PlaneMove struct {
-	planeUid  string
-	targetPos obj.MapPos
-	status    InstrStatus
+// PlaneAttack 攻击
+type PlaneAttack struct {
+	planeUid      string
+	targetObjType obj.ObjectType
+	targetUid     string
+	status        InstrStatus
 }
 
-// NewPlaneMove ...
-func NewPlaneMove(planeUid string, targetPos obj.MapPos) *PlaneMove {
-	return &PlaneMove{planeUid: planeUid, targetPos: targetPos, status: Ready}
+// NewPlaneAttack ...
+func NewPlaneAttack(planeUid string, targetObjType obj.ObjectType, targetUid string) *PlaneAttack {
+	return &PlaneAttack{
+		planeUid:      planeUid,
+		targetObjType: targetObjType,
+		targetUid:     targetUid,
+		status:        Ready,
+	}
 }
 
-var _ Instruction = (*PlaneMove)(nil)
+var _ Instruction = (*PlaneAttack)(nil)
 
-func (i *PlaneMove) Exec(s *state.MissionState) error {
-	// 战舰如果不存在（被摧毁），直接修改指令为已完成
-	plane, ok := s.Planes[i.planeUid]
+// Exec 执行指令
+func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
+	// 获取攻击方飞机
+	attacker, ok := missionState.Planes[i.planeUid]
+	// 攻击方已经不存在，判定已经完成
 	if !ok {
 		i.status = Executed
 		return nil
 	}
-
-	if plane.MoveTo(s.MissionMD.MapCfg, i.targetPos) {
-		i.status = Executed
-	}
-	return nil
-}
-
-func (i *PlaneMove) Executed() bool {
-	return i.status == Executed
-}
-
-func (i *PlaneMove) Uid() string {
-	return GenInstrUid(NamePlaneMove, i.planeUid)
-}
-
-func (i *PlaneMove) String() string {
-	return fmt.Sprintf("Plane %s move to %s", i.planeUid, i.targetPos.String())
-}
-
-// PlaneMovePath 按照指定路径移动
-type PlaneMovePath struct {
-	planeUid  string
-	curPos    obj.MapPos
-	targetPos obj.MapPos
-	path      []obj.MapPos
-	curIdx    int
-	status    InstrStatus
-}
-
-// NewPlaneMovePath ...
-func NewPlaneMovePath(planeUid string, curPos, targetPos obj.MapPos) *PlaneMovePath {
-	return &PlaneMovePath{planeUid: planeUid, curPos: curPos, targetPos: targetPos, status: Pending}
-}
-
-var _ Instruction = (*PlaneMovePath)(nil)
-
-func (i *PlaneMovePath) Exec(s *state.MissionState) error {
-	if i.status != Ready {
-		if i.status != Preparing {
-			i.status = Preparing
-			go i.genPath(s)
-		}
-		return nil
-	}
-
-	if i.curIdx >= len(i.path) {
+	// 如果剩余航程 <= 0，则判定已经完成
+	if attacker.RemainRange <= 0 {
 		i.status = Executed
 		return nil
 	}
 
-	// 战舰如果不存在（被摧毁），直接修改指令为已完成
-	ship, ok := s.Ships[i.planeUid]
-	if !ok {
+	var enemy obj.Hurtable
+	var enemyExists bool
+	// 获取打击目标
+	switch i.targetObjType {
+	case obj.ObjectTypeShip:
+		enemy, enemyExists = missionState.Ships[i.targetUid]
+	case obj.ObjectTypePlane:
+		enemy, enemyExists = missionState.Planes[i.targetUid]
+	default:
+		return errors.Errorf("invalid target obj type: %s", i.targetObjType)
+	}
+	// 目标不存在，判定已经完成
+	if !enemyExists {
 		i.status = Executed
 		return nil
 	}
-	if ship.MoveTo(
-		s.MissionMD.MapCfg,
-		i.path[i.curIdx],
-		i.curIdx == len(i.path)-1,
-	) {
-		i.curIdx++
-	}
-	return nil
-}
 
-func (i *PlaneMovePath) genPath(misState *state.MissionState) {
-	points := misState.MissionMD.MapCfg.GenPath(
-		grid.Point{i.curPos.MX, i.curPos.MY},
-		grid.Point{i.targetPos.MX, i.targetPos.MY},
+	// 如果目标存在，则战机应该冲上去贴贴
+	eState := enemy.MovementState()
+	// 考虑提前量（依赖敌舰 / 敌机速度，角度）
+	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
+		attacker.CurPos.RX, attacker.CurPos.RY, attacker.MaxSpeed,
+		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	// 无需执行的路径（如寻路失败，直接算指令执行成功）
-	if len(points) < 2 {
-		i.status = Executed
-		return
-	}
-	i.path = []obj.MapPos{i.curPos}
-	for _, p := range points[1 : len(points)-1] {
-		i.path = append(i.path, obj.NewMapPos(p.X, p.Y))
-	}
-	i.path = append(i.path, i.targetPos)
-	i.status = Ready
+	targetPos := obj.NewMapPosR(targetRx, targetRY)
+	attacker.MoveTo(missionState.MissionMD.MapCfg, targetPos)
+	return nil
 }
 
-func (i *PlaneMovePath) Executed() bool {
+// Executed 返回指令是否已经执行
+func (i *PlaneAttack) Executed() bool {
 	return i.status == Executed
 }
 
-func (i *PlaneMovePath) Uid() string {
-	return GenInstrUid(NamePlaneMovePath, i.planeUid)
+// Uid 返回指令唯一ID
+func (i *PlaneAttack) Uid() string {
+	return GenInstrUid(NamePlaneAttack, i.planeUid)
 }
 
-func (i *PlaneMovePath) String() string {
-	return fmt.Sprintf("Plane %s move with path %v", i.planeUid, i.path)
+// String 返回指令的描述
+func (i *PlaneAttack) String() string {
+	return fmt.Sprintf("Plane %s attack %s", i.planeUid, i.targetUid)
+}
+
+// PlaneReturn 返航
+type PlaneReturn struct {
+	planeUid string
+	status   InstrStatus
+}
+
+// NewPlaneReturn ...
+func NewPlaneReturn(planeUid string) *PlaneReturn {
+	return &PlaneReturn{planeUid: planeUid}
+}
+
+var _ Instruction = (*PlaneReturn)(nil)
+
+// Exec 执行指令
+func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
+	// 获取飞机
+	plane, ok := missionState.Planes[i.planeUid]
+	// 飞机已经不存在，判定已经完成
+	if !ok {
+		i.status = Executed
+		return nil
+	}
+
+	ship, ok := missionState.Ships[plane.BelongShip]
+	if !ok {
+		// FIXME 目前载舰如果沉没，则飞机也直接坠毁，后续考虑备降到其他地方
+		plane.CurHP = 0
+		i.status = Executed
+		return nil
+	}
+
+	// 考虑提前量（依赖敌舰 / 敌机速度，角度）
+	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
+		plane.CurPos.RX, plane.CurPos.RY, plane.MaxSpeed,
+		ship.CurPos.RX, ship.CurPos.RY, ship.CurSpeed, ship.CurRotation,
+	)
+	targetPos := obj.NewMapPosR(targetRx, targetRY)
+	plane.MoveTo(missionState.MissionMD.MapCfg, targetPos)
+	// 飞机到达载舰附近，判定已经完成
+	if plane.CurPos.Near(ship.CurPos, 1) {
+		i.status = Executed
+		// 删除该飞机（视同着陆）
+		delete(missionState.Planes, i.planeUid)
+	}
+	return nil
+}
+
+// Executed 返回指令是否已经执行
+func (i *PlaneReturn) Executed() bool {
+	return i.status == Executed
+}
+
+// Uid 返回指令唯一ID
+func (i *PlaneReturn) Uid() string {
+	return GenInstrUid(NamePlaneReturn, i.planeUid)
+}
+
+// String 返回指令的描述
+func (i *PlaneReturn) String() string {
+	return fmt.Sprintf("Plane %s return", i.planeUid)
 }
