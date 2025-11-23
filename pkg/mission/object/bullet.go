@@ -71,12 +71,14 @@ type Bullet struct {
 	// 射击方式
 	ShotType BulletShotType
 	// 目标对象类型
-	TargetObjectType ObjectType
+	TargetObjType ObjectType
 	// 前进周期数
 	ForwardAge int
 
 	// 所属战舰/战机
 	Shooter string
+	// 所属对象类型
+	ShooterObjType ObjectType
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 
@@ -85,7 +87,7 @@ type Bullet struct {
 	// 造成暴击类型
 	CriticalType CriticalType
 	// 击中的对象类型
-	HitObjectType ObjectType
+	HitObjType ObjectType
 }
 
 // Forward 弹药前进
@@ -114,7 +116,7 @@ func (b *Bullet) Forward() {
 // GenTrail 生成尾流
 func (b *Bullet) GenTrails() []*Trail {
 	// 已经命中的没有尾流
-	if b.HitObjectType != ObjectTypeNone {
+	if b.HitObjType != ObjectTypeNone {
 		return nil
 	}
 	// 刚刚发射的不添加尾流
@@ -143,12 +145,11 @@ var bulletMap = map[string]*Bullet{}
 func NewBullets(
 	name string,
 	curPos, targetPos MapPos,
+	shooter Attacker,
 	shotType BulletShotType,
 	targetObjectType ObjectType,
 	speed float64,
 	life int,
-	shooterUid string,
-	player faction.Player,
 ) *Bullet {
 	b := deepcopy.Copy(*bulletMap[name]).(Bullet)
 
@@ -156,17 +157,18 @@ func NewBullets(
 	b.CurPos = curPos
 	b.TargetPos = targetPos
 	b.ShotType = shotType
-	b.TargetObjectType = targetObjectType
+	b.TargetObjType = targetObjectType
 
 	b.Rotation = curPos.Angle(targetPos)
 	b.Speed = speed
 	b.Life = life
 
-	b.Shooter = shooterUid
-	b.BelongPlayer = player
+	b.Shooter = shooter.ID()
+	b.ShooterObjType = shooter.ObjType()
+	b.BelongPlayer = shooter.Player()
 
 	b.CriticalType = CriticalTypeNone
-	b.HitObjectType = ObjectTypeNone
+	b.HitObjType = ObjectTypeNone
 	return &b
 }
 

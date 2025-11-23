@@ -212,7 +212,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 
 	for _, plane := range m.state.Planes {
 		// 剩余燃料为 0，需要返航
-		if plane.RemainRange <= 0 {
+		if plane.MustReturn() {
 			// 添加返航指令
 			m.instructionSet.Add(instr.NewPlaneReturn(plane.Uid))
 			continue
@@ -351,7 +351,7 @@ func (m *MissionManager) updateShotBullets() {
 		prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
 		prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
 
-		switch bt.TargetObjectType {
+		switch bt.TargetObjType {
 		case obj.ObjectTypeShip:
 			for _, ship := range m.state.Ships {
 				// 总不能不小心打死自己吧，真是不应该 :D
@@ -375,7 +375,7 @@ func (m *MissionManager) updateShotBullets() {
 						ship.CurRotation,
 					) {
 						ship.HurtBy(bt)
-						bt.HitObjectType = obj.ObjectTypeShip
+						bt.HitObjType = obj.ObjectTypeShip
 						break
 					}
 				} else if bt.ShotType == obj.BulletShotTypeArcing {
@@ -389,7 +389,7 @@ func (m *MissionManager) updateShotBullets() {
 						ship.CurRotation,
 					) {
 						ship.HurtBy(bt)
-						bt.HitObjectType = obj.ObjectTypeShip
+						bt.HitObjType = obj.ObjectTypeShip
 						break
 					}
 				}
@@ -404,6 +404,12 @@ func (m *MissionManager) updateShotBullets() {
 				if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
 					continue
 				}
+				// 如果是舰对空，设置 7/8 的 “擦肩而过” 率，现在命中率太高了
+				if bt.ShooterObjType == obj.ObjectTypeShip {
+					if rand.Intn(8) == 0 {
+						continue
+					}
+				}
 
 				// 对空射击都认为是直射，检查线段是否与矩形相交
 				if geometry.IsSegmentIntersectRotatedRectangle(
@@ -416,14 +422,14 @@ func (m *MissionManager) updateShotBullets() {
 					plane.CurRotation,
 				) {
 					plane.HurtBy(bt)
-					bt.HitObjectType = obj.ObjectTypePlane
+					bt.HitObjType = obj.ObjectTypePlane
 					break
 				}
 			}
 		default:
 			return false
 		}
-		return bt.HitObjectType != obj.ObjectTypeNone
+		return bt.HitObjType != obj.ObjectTypeNone
 	}
 
 	arrivedBullets, forwardingBullets := []*obj.Bullet{}, []*obj.Bullet{}
@@ -431,7 +437,7 @@ func (m *MissionManager) updateShotBullets() {
 		// 迷失的弹药，要及时消亡（如鱼雷没命中）
 		if bt.Life <= 0 {
 			// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-			bt.HitObjectType = obj.ObjectTypeWater
+			bt.HitObjType = obj.ObjectTypeWater
 			continue
 		}
 		if bt.ShotType == obj.BulletShotTypeArcing {
@@ -439,7 +445,7 @@ func (m *MissionManager) updateShotBullets() {
 			if bt.CurPos.Near(bt.TargetPos, 0.05) {
 				if !resolveDamage(bt) {
 					// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-					bt.HitObjectType = obj.ObjectTypeWater
+					bt.HitObjType = obj.ObjectTypeWater
 				}
 				arrivedBullets = append(arrivedBullets, bt)
 			} else {
@@ -448,7 +454,7 @@ func (m *MissionManager) updateShotBullets() {
 		} else if bt.ShotType == obj.BulletShotTypeDirect {
 			// 鱼雷碰撞到陆地，应该不再前进
 			if bt.Type == obj.BulletTypeTorpedo && m.state.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
-				bt.HitObjectType = obj.ObjectTypeLand
+				bt.HitObjType = obj.ObjectTypeLand
 				arrivedBullets = append(arrivedBullets, bt)
 			} else if resolveDamage(bt) {
 				// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
@@ -465,7 +471,7 @@ func (m *MissionManager) updateShotBullets() {
 	// TODO 支持命中爆炸
 	for _, bt := range arrivedBullets {
 		// 击中的是战舰 / 飞机，才会有伤害数值
-		if bt.HitObjectType != obj.ObjectTypeShip && bt.HitObjectType != obj.ObjectTypePlane {
+		if bt.HitObjType != obj.ObjectTypeShip && bt.HitObjType != obj.ObjectTypePlane {
 			continue
 		}
 

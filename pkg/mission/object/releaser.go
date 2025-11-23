@@ -80,8 +80,7 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 
 	return []*Bullet{NewBullets(
 		r.BulletName, sState.CurPos, targetPos,
-		shotType, enemy.ObjType(),
-		r.BulletSpeed, life, shooter.ID(), shooter.Player(),
+		shooter, shotType, enemy.ObjType(), r.BulletSpeed, life,
 	)}
 }
 

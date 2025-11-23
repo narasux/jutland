@@ -50,6 +50,7 @@ type Hurtable interface {
 type Attacker interface {
 	BattleUnit
 
+	ObjType() ObjectType
 	Fire(enemy Hurtable) []*Bullet
 }
 

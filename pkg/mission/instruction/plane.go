@@ -39,8 +39,8 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
-	// 如果剩余航程 <= 0，则判定已经完成
-	if attacker.RemainRange <= 0 {
+	// 如果必须返航，则判定已经完成
+	if attacker.MustReturn() {
 		i.status = Executed
 		return nil
 	}
@@ -120,7 +120,7 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 		return nil
 	}
 
-	// 考虑提前量（依赖敌舰 / 敌机速度，角度）
+	// 考虑提前量（依赖母舰速度，角度）
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
 		plane.CurPos.RX, plane.CurPos.RY, plane.MaxSpeed,
 		ship.CurPos.RX, ship.CurPos.RY, ship.CurSpeed, ship.CurRotation,
@@ -129,9 +129,12 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	plane.MoveTo(missionState.MissionMD.MapCfg, targetPos)
 	// 飞机到达载舰附近，判定已经完成
 	if plane.CurPos.Near(ship.CurPos, 1) {
-		i.status = Executed
+		// 尝试回收飞机
+		ship.Aircraft.Recovery(plane)
 		// 删除该飞机（视同着陆）
 		delete(missionState.Planes, i.planeUid)
+		// 修改状态为已经完成
+		i.status = Executed
 	}
 	return nil
 }

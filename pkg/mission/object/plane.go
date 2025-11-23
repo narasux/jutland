@@ -203,6 +203,30 @@ func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) {
 	p.RemainRange -= p.CurSpeed
 }
 
+// MustReturn 必须返航
+func (p *Plane) MustReturn() bool {
+	// 如果剩余航程 <= 0，必须返航
+	if p.RemainRange <= 0 {
+		return true
+	}
+	// 轰炸机 / 鱼雷机，只要没有进攻武器了，就返航（我滴任务完成啦！）
+	if p.Type == PlaneTypeDiveBomber || p.Type == PlaneTypeTorpedoBomber {
+		for _, r := range p.Weapon.Bombs {
+			if !r.Released {
+				return false
+			}
+		}
+		for _, r := range p.Weapon.Torpedoes {
+			if !r.Released {
+				return false
+			}
+		}
+		return true
+	}
+	// 战斗机只能是到没燃油才返航
+	return false
+}
+
 var planeMap = map[string]*Plane{}
 
 // NewPlane 生成飞机

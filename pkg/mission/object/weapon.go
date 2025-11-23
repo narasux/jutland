@@ -123,18 +123,18 @@ type PlaneWeapon struct {
 type PlaneGroup struct {
 	// Name 战机名称
 	Name string `json:"name"`
-	// Count 总数量（起飞 -1，回收 +1）
-	Count int64 `json:"count"`
+	// MaxCount 总数量
+	MaxCount int64 `json:"maxCount"`
 	// TargetType 目标类型（战斗机制空，轰炸机、鱼雷机对地）
 	TargetType ObjectType `json:"targetType"`
+	// CurCount 当前数量（起飞 -1，回收 +1）
+	CurCount int64 `json:"curCount"`
 }
 
 // ShipAircraft 战舰上的飞机，也能算是武器吧 :D
 type ShipAircraft struct {
 	// TakeOffTime 起飞耗时（单位：秒）
 	TakeOffTime float64 `json:"takeOffTime"`
-	// TODO BatchCount 每次起飞多少架（目前没用，未来考虑支持）
-	// BatchCount int64 `json:"batchCount"`
 	// Groups 战机分组
 	Groups []PlaneGroup `json:"groups"`
 
@@ -157,13 +157,33 @@ func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType ObjectType) *Pla
 		if g.TargetType != targetObjType {
 			continue
 		}
-		if g.Count <= 0 {
+		if g.CurCount <= 0 {
 			continue
 		}
 		// 非指针需要通过索引修改
-		sa.Groups[idx].Count--
+		sa.Groups[idx].CurCount--
 		sa.LatestTakeOffAt = time.Now().UnixMilli()
 		return NewPlane(g.Name, ship.CurPos, ship.CurRotation, ship.Uid, ship.BelongPlayer)
 	}
 	return nil
+}
+
+// Recovery 回收飞机
+func (sa *ShipAircraft) Recovery(plane *Plane) {
+	// 飞机血量低于 15% 时，没有回收价值
+	if plane.CurHP/plane.TotalHP < 0.15 {
+		return
+	}
+	// 逐个组按名称匹配
+	for idx, g := range sa.Groups {
+		if g.Name != plane.Name {
+			continue
+		}
+		if g.CurCount >= g.MaxCount {
+			continue
+		}
+		// 添加库存数量（非指针需要通过索引修改）
+		sa.Groups[idx].CurCount++
+		return
+	}
 }

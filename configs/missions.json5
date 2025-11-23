@@ -310,6 +310,7 @@
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
+          "yorktown",
           "lowa",
           "south_dakota",
           "astoria",
@@ -354,9 +355,9 @@
         belongPlayer: "CA",
         maxOncomingShip: 5,
         providedShipNames: [
+          "taiho",
           "kongo",
           "mogami",
-          "asashio",
           "yugumo",
         ],
       },
@@ -428,25 +429,48 @@
     initShips: [
       {
         name: "south_dakota",
+        pos: [34, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },{
+        name: "yorktown",
         pos: [31, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "south_dakota",
+        name: "saratoga",
         pos: [32, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
+        name: "south_dakota",
+        pos: [35, 39],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "kongo",
-        pos: [105, 46],
+        pos: [103, 34],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [105, 36],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [107, 39],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "kongo",
-        pos: [107, 44],
+        pos: [103, 41],
         rotation: 270,
         belongPlayer: "CA"
       }

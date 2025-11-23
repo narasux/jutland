@@ -118,9 +118,8 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bu
 
 	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*Bullet{NewBullets(
-		lc.BulletName, curPos, targetPos,
-		BulletShotTypeDirect, enemy.ObjType(),
-		lc.BulletSpeed, life, shooter.ID(), shooter.Player(),
+		lc.BulletName, curPos, targetPos, shooter, BulletShotTypeDirect,
+		enemy.ObjType(), lc.BulletSpeed, life,
 	)}
 }
 

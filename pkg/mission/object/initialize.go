@@ -162,7 +162,7 @@ func initPlaneMap() {
 		// 当前生命值
 		p.CurHP = p.TotalHP
 		// 折算速度（公里换成节）
-		p.MaxSpeed /= 4500 * 1.8
+		p.MaxSpeed /= 3000 * 1.8
 		// 折算总航程
 		p.Range /= 8 * 1.8
 		// 剩余航程
@@ -243,8 +243,10 @@ func initShipMap() {
 		}
 		// 飞机相关状态
 		s.Aircraft.HasPlane = len(s.Aircraft.Groups) > 0
-		// 根据飞机名称，设置飞机目标类型
 		for i := 0; i < len(s.Aircraft.Groups); i++ {
+			// 初始化飞机数量
+			s.Aircraft.Groups[i].CurCount = s.Aircraft.Groups[i].MaxCount
+			// 根据飞机名称，设置飞机目标类型
 			s.Aircraft.Groups[i].TargetType = getPlaneTargetObjType(s.Aircraft.Groups[i].Name)
 		}
 		// 初始化当前生命值

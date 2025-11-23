@@ -73,19 +73,19 @@
       ]
     },
     aircraft: {
-      takeOffTime: 10,
+      takeOffTime: 1,
       groups: [
         {
           name: "F",
-          count: 12
+          maxCount: 12
         },
         {
           name: "B",
-          count: 12
+          maxCount: 12
         },
         {
           name: "A",
-          count: 12
+          maxCount: 12
         }
       ]
     }
@@ -581,19 +581,19 @@
       torpedoes: []
     },
     aircraft: {
-      takeOffTime: 2,
+      takeOffTime: 1.5,
       groups: [
         {
           name: "F4F-3",
-          count: 36
-        },
-        {
-          name: "SBD-3",
-          count: 40
+          maxCount: 36
         },
         {
           name: "TBD-1",
-          count: 20
+          maxCount: 20
+        },
+        {
+          name: "SBD-3",
+          maxCount: 40
         }
       ]
     }
@@ -930,19 +930,19 @@
       torpedoes: []
     },
     aircraft: {
-      takeOffTime: 2,
+      takeOffTime: 1.3,
       groups: [
         {
           name: "F4F-3",
-          count: 36
+          maxCount: 36
         },
         {
           name: "SBD-3",
-          count: 40
+          maxCount: 40
         },
         {
           name: "TBD-1",
-          count: 20
+          maxCount: 20
         }
       ]
     }
@@ -1177,15 +1177,15 @@
       groups: [
         {
           name: "A6M_0",
-          count: 24
+          maxCount: 24
         },
         {
           name: "D3A_99",
-          count: 12
+          maxCount: 12
         },
         {
           name: "B5N2_97",
-          count: 24
+          maxCount: 24
         }
       ]
     }
