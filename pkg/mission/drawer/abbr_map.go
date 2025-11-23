@@ -29,6 +29,8 @@ func (d *Drawer) drawAbbreviationMap(screen *ebiten.Image, ms *state.MissionStat
 	d.drawAbbrBuildings(screen, ms)
 	// 绘制敌我战舰
 	d.drawAbbrShips(screen, ms)
+	// 绘制敌我战机
+	d.drawAbbrPlanes(screen, ms)
 }
 
 // 绘制左右背景 + 居中展示缩略地图
@@ -172,5 +174,23 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex)
 		screen.DrawImage(sImg, opts)
+	}
+}
+
+// 绘制敌我战机
+func (d *Drawer) drawAbbrPlanes(screen *ebiten.Image, ms *state.MissionState) {
+	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
+	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
+
+	for _, p := range ms.Planes {
+		pImg := textureImg.GetAbbrPlane(p.BelongPlayer != ms.CurPlayer)
+		opts := d.genDefaultDrawImageOptions()
+		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
+
+		xIndex := p.CurPos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+		yIndex := p.CurPos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+
+		opts.GeoM.Translate(xIndex+xOffset, yIndex)
+		screen.DrawImage(pImg, opts)
 	}
 }

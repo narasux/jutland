@@ -7,6 +7,8 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/narasux/jutland/pkg/loader"
+	"github.com/narasux/jutland/pkg/utils/colorx"
+	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 var (
@@ -35,6 +37,11 @@ var (
 	AbbrEnemyHeavy *ebiten.Image
 	// AbbrEnemyReinforcePoint 敌方增援点
 	AbbrEnemyReinforcePoint *ebiten.Image
+
+	// AbbrPlane 己方战机
+	AbbrPlane = ebutil.NewImageWithColor(1, 2, colorx.Green)
+	// AbbrEnemyPlane 敌方战机
+	AbbrEnemyPlane = ebutil.NewImageWithColor(1, 2, colorx.Red)
 )
 
 func init() {
@@ -116,4 +123,9 @@ func GetAbbrShip(ton float64, isEnemy bool) *ebiten.Image {
 	} else {
 		return lo.Ternary(isEnemy, AbbrEnemyHeavy, AbbrShipHeavy)
 	}
+}
+
+// GetAbbrPlane 获取缩略图
+func GetAbbrPlane(isEnemy bool) *ebiten.Image {
+	return lo.Ternary(isEnemy, AbbrEnemyPlane, AbbrPlane)
 }
