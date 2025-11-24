@@ -45,14 +45,14 @@
   {
     name: "US/AST/570",
     bulletName: "US/TB/570/1938",
-    range: 8,
+    range: 6,
     bulletSpeed: 35,
   },
   // 日本海军 450mm 航空鱼雷
   {
     name: "JP/AST/450",
     bulletName: "JP/TB/450/1928",
-    range: 8,
+    range: 6,
     bulletSpeed: 40,
   }
 ]

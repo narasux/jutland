@@ -606,5 +606,14 @@
     diameter: 70,
     damage: 125,
     criticalRate: 0.002
+  },
+  // 镭射
+  // 50mm 镭射
+  {
+    name: "CN/LASER/50/2048",
+    type: "laser",
+    diameter: 50,
+    damage: 90,
+    criticalRate: 0
   }
 ]

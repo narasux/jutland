@@ -108,8 +108,12 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			if lockOnEnemy != nil {
 				ship.Attack(lockOnEnemy.Uid)
 			}
-			moveInstr := instr.NewShipMovePath(ship.Uid, ship.CurPos, targetPos)
-			instructions[moveInstr.Uid()] = moveInstr
+			// 航母攻击的话，不要移动过去突脸
+			// FIXME 可以有其他的逻辑，比如战列舰就不该直接突脸
+			if lockOnEnemy == nil || ship.Type != obj.ShipTypeAircraftCarrier {
+				moveInstr := instr.NewShipMovePath(ship.Uid, ship.CurPos, targetPos)
+				instructions[moveInstr.Uid()] = moveInstr
+			}
 		}
 		// 有战舰被选中的情况下，标记目标位置
 		markID, markImg := obj.MarkIDTarget, textureImg.TargetPos

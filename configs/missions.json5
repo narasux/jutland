@@ -355,7 +355,6 @@
         belongPlayer: "CA",
         maxOncomingShip: 5,
         providedShipNames: [
-          "taiho",
           "kongo",
           "mogami",
           "yugumo",
@@ -368,8 +367,8 @@
         belongPlayer: "CA",
         maxOncomingShip: 5,
         providedShipNames: [
-          "mogami",
-          "asashio",
+          "suzuya",
+          "yubari",
           "yugumo",
           "T_14"
         ],
@@ -389,6 +388,18 @@
     ],
     initShips: [
       {
+        name: "yorktown",
+        pos: [28, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "yorktown",
+        pos: [29, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "south_dakota",
         pos: [31, 35],
         rotation: 90,
@@ -401,6 +412,36 @@
         belongPlayer: "HA"
       },
       {
+        name: "atlanta",
+        pos: [29, 31],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [30, 41],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [31, 30],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [31, 42],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "taiho",
+        pos: [109, 45],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
         name: "kongo",
         pos: [105, 46],
         rotation: 270,
@@ -409,6 +450,30 @@
       {
         name: "kongo",
         pos: [107, 44],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "haguro",
+        pos: [103, 42],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "haguro",
+        pos: [105, 48],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yugumo",
+        pos: [104, 44],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yugumo",
+        pos: [101, 46],
         rotation: 270,
         belongPlayer: "CA"
       }

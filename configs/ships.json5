@@ -54,6 +54,13 @@
           posPercent: 0,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        },
+        // 镭射防空，很合理
+        {
+          name: "LeiYa",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ],
       torpedoes: [

@@ -47,6 +47,18 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 镭射炮 - 雷鸭
+  {
+    name: "LeiYa",
+    bulletName: "CN/LASER/50/2048",
+    bulletCount: 1,
+    reloadTime: 0.001,
+    range: 40,
+    bulletSpread: 0,
+    bulletSpeed: 10000,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 水滴撞击
   {
     name: "Impact",

@@ -15,6 +15,8 @@ func GetBulletImg(btType BulletType, diameter int) *ebiten.Image {
 		return bulletImg.GetTorpedo(diameter)
 	case BulletTypeBomb:
 		return bulletImg.GetBomb(diameter)
+	case BulletTypeLaser:
+		return bulletImg.GetLaser(diameter)
 	}
 	return bulletImg.NotFount
 }

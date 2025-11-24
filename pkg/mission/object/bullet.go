@@ -21,6 +21,8 @@ const (
 	BulletTypeTorpedo BulletType = "torpedo"
 	// BulletTypeBomb 炸弹
 	BulletTypeBomb BulletType = "bomb"
+	// BulletTypeLaser 镭射
+	BulletTypeLaser BulletType = "laser"
 )
 
 type BulletShotType int
@@ -121,6 +123,10 @@ func (b *Bullet) GenTrails() []*Trail {
 	}
 	// 刚刚发射的不添加尾流
 	if b.ForwardAge <= 10 {
+		return nil
+	}
+	// 镭射弹药没有尾流
+	if b.Type == BulletTypeLaser {
 		return nil
 	}
 	// 不同类型的尾流特性不同

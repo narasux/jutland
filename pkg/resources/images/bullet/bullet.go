@@ -69,6 +69,10 @@ var (
 	bb457 = ebutil.NewImageWithColor(5, 12, colorx.Silver)
 )
 
+var (
+	laser50 = ebutil.NewImageWithColor(2, 1000, colorx.Green)
+)
+
 var NotFount = ebutil.NewImageWithColor(10, 20, colorx.Red)
 
 // GetShell 获取炮弹弹药图片
@@ -192,6 +196,16 @@ func GetBomb(diameter int) *ebiten.Image {
 		return bb380
 	case 457:
 		return bb457
+	}
+	// 找不到就暴露出来
+	return NotFount
+}
+
+// GetLaser 获取镭射弹药图片
+func GetLaser(diameter int) *ebiten.Image {
+	switch diameter {
+	case 50:
+		return laser50
 	}
 	// 找不到就暴露出来
 	return NotFount

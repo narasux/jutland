@@ -233,7 +233,7 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 	}
 }
 
-// 绘制消亡中的战机器
+// 绘制消亡中的战机
 func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	for _, p := range ms.DestroyedPlanes {
 		// 只有在屏幕中的才渲染
@@ -265,6 +265,11 @@ func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionStat
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.ForwardingBullets {
+		// 如果是激光，且刚发射，则不渲染
+		// FIXME-P1 实际解决还是得算位移，不然贴脸时候就没展示了
+		if b.Type == obj.BulletTypeLaser && b.ForwardAge < 2 {
+			continue
+		}
 		img := obj.GetBulletImg(b.Type, b.Diameter)
 
 		opts := d.genDefaultDrawImageOptions()
