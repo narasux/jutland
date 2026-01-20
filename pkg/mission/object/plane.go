@@ -1,6 +1,7 @@
 package object
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"math/rand"
@@ -94,6 +95,14 @@ func (p *Plane) ID() string {
 	return p.Uid
 }
 
+// Detail 详细信息
+func (p *Plane) Detail() string {
+	return fmt.Sprintf(
+		"Plane %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f",
+		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.CurSpeed, p.MaxSpeed, p.CurHP, p.TotalHP,
+	)
+}
+
 // Player 所属玩家
 func (p *Plane) Player() faction.Player {
 	return p.BelongPlayer
@@ -102,6 +111,11 @@ func (p *Plane) Player() faction.Player {
 // ObjType 对象类型
 func (p *Plane) ObjType() ObjectType {
 	return ObjectTypePlane
+}
+
+// AttackObjType 攻击对象类型
+func (p *Plane) AttackObjType() ObjectType {
+	return getPlaneTargetObjType(p.Name)
 }
 
 // MovementState 机动状态
@@ -244,6 +258,7 @@ func NewPlane(
 	p := deepcopy.Copy(*plane).(Plane)
 
 	p.Uid = uuid.New().String()
+	p.CurSpeed = p.MaxSpeed
 	p.CurPos = curPos
 	p.CurRotation = rotation
 	p.BelongPlayer = player
@@ -252,6 +267,7 @@ func NewPlane(
 }
 
 // getPlaneTargetObjType 获取飞机攻击目标类型
+// FIXME 目前这样很暴力，会导致战斗机只能打飞机，轰炸机只能打舰船
 func getPlaneTargetObjType(name string) ObjectType {
 	plane, ok := planeMap[name]
 	if !ok {

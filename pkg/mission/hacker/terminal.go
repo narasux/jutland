@@ -160,6 +160,8 @@ func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
 		t.Buffer = t.Buffer[:0]
 	case "help":
 		t.showHelpText()
+	case "debug":
+		t.showDebugText()
 	default:
 		// TODO 适当封装，提供前缀匹配的方法，不要直接 HasPrefix
 		if strings.HasPrefix(cmd, ":set color") {
@@ -170,12 +172,14 @@ func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
 			t.setFontByCmd(cmd)
 		} else {
 			match := false
-			// 其他情况下才进行匹配
-			for _, c := range cheat.Cheats {
-				if c.Match(cmd) {
-					t.Buffer = append(t.Buffer, Line{Text: c.Exec(misState), Type: LineTypeOutput})
-					match = true
-					break
+			// 其他情况下才进行匹配，先匹配普通秘籍，再匹配调试用秘籍
+			for _, cheats := range [][]cheat.Cheat{cheat.Cheats, cheat.DebugCheats} {
+				for _, c := range cheats {
+					if c.Match(cmd) {
+						t.Buffer = append(t.Buffer, Line{Text: c.Exec(misState), Type: LineTypeOutput})
+						match = true
+						break
+					}
 				}
 			}
 			// 无效的命令
@@ -204,6 +208,20 @@ func (t *Terminal) showHelpText() {
 
 	t.Buffer = append(t.Buffer, Line{Text: ""}, Line{Text: "Game Cheats:"})
 	for _, c := range cheat.Cheats {
+		t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("• %s  -->  %s", c.String(), c.Desc())})
+	}
+	t.Buffer = append(t.Buffer, Line{Text: ""})
+}
+
+// 输出调试信息
+func (t *Terminal) showDebugText() {
+	t.Buffer = append(
+		t.Buffer,
+		Line{Text: "debug cheats only for developers"},
+		Line{Text: ""},
+		Line{Text: "Debug Commands:"},
+	)
+	for _, c := range cheat.DebugCheats {
 		t.Buffer = append(t.Buffer, Line{Text: fmt.Sprintf("• %s  -->  %s", c.String(), c.Desc())})
 	}
 	t.Buffer = append(t.Buffer, Line{Text: ""})

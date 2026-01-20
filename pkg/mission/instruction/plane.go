@@ -66,7 +66,7 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	eState := enemy.MovementState()
 	// 考虑提前量（依赖敌舰 / 敌机速度，角度）
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		attacker.CurPos.RX, attacker.CurPos.RY, attacker.MaxSpeed,
+		attacker.CurPos.RX, attacker.CurPos.RY, attacker.CurSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := obj.NewMapPosR(targetRx, targetRY)
@@ -122,7 +122,7 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 
 	// 考虑提前量（依赖母舰速度，角度）
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		plane.CurPos.RX, plane.CurPos.RY, plane.MaxSpeed,
+		plane.CurPos.RX, plane.CurPos.RY, plane.CurSpeed,
 		ship.CurPos.RX, ship.CurPos.RY, ship.CurSpeed, ship.CurRotation,
 	)
 	targetPos := obj.NewMapPosR(targetRx, targetRY)

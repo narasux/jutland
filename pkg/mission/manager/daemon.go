@@ -8,9 +8,9 @@ import (
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
@@ -219,33 +219,40 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		}
 		instrUid := instr.GenInstrUid(instr.NamePlaneAttack, plane.Uid)
 		// 如果战机已经有攻击目标，则跳过
-		if _, ok := m.instructionSet.Items()[instrUid]; ok {
+		if m.instructionSet.Exists(instrUid) {
 			continue
 		}
 
-		// 有剩余燃料 & 没有攻击目标，选一个新的
+		// 有剩余燃料 & 没有攻击目标，按攻击类型选一个新的
 		inRangeEnemies := []obj.Hurtable{}
-		// 敌机
-		for _, enemy := range m.state.Planes {
-			// 不能攻击己方的战机
-			if plane.BelongPlayer == enemy.BelongPlayer {
-				continue
+
+		if plane.AttackObjType() == obj.ObjectTypePlane {
+			// 敌机
+			for _, enemy := range m.state.Planes {
+				// 不能攻击己方的战机
+				if plane.BelongPlayer == enemy.BelongPlayer {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-			inRangeEnemies = append(inRangeEnemies, enemy)
-		}
-		// 敌舰
-		for _, enemy := range m.state.Ships {
-			// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
-			if plane.BelongPlayer == enemy.BelongPlayer {
-				continue
+		} else if plane.AttackObjType() == obj.ObjectTypeShip {
+			// 敌舰
+			for _, enemy := range m.state.Ships {
+				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
+				if plane.BelongPlayer == enemy.BelongPlayer {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
 		if total := len(inRangeEnemies); total != 0 {
 			// 射程内的敌人都会被攻击
 			enemy := inRangeEnemies[rand.Intn(total)]
 			// 给飞机下达攻击指令
 			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
+		} else {
+			// 没有可攻击对象，返航
+			m.instructionSet.Add(instr.NewPlaneReturn(plane.Uid))
 		}
 	}
 }
@@ -485,7 +492,21 @@ func (m *MissionManager) updateShotBullets() {
 			case obj.CriticalTypeTenTimes:
 				fontSize, clr = float64(24), colorx.Red
 			}
-			mark := obj.NewTextMark(bt.CurPos, strconv.Itoa(int(bt.RealDamage)), fontSize, clr, 20)
+			// DEBUG: 调试用逻辑，区分敌我伤害
+			if m.state.DebugFlags.DamageColorByTeam {
+				if bt.BelongPlayer == m.state.CurPlayer {
+					clr = colorx.Cyan
+				} else {
+					clr = colorx.DarkRed
+				}
+			}
+			// 如果是大于 1 的，则取整，否则保留两位小数
+			flagText := lo.Ternary(
+				bt.RealDamage > 1,
+				strconv.Itoa(int(bt.RealDamage)),
+				fmt.Sprintf("%.2f", bt.RealDamage),
+			)
+			mark := obj.NewTextMark(bt.CurPos, flagText, fontSize, clr, 20)
 			m.state.GameMarks[mark.ID] = mark
 		}
 	}
@@ -586,7 +607,7 @@ func (m *MissionManager) updateMissionStatus() {
 	case state.MissionPaused:
 		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 			m.state.MissionStatus = state.MissionFailed
-		} else if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.MissionStatus = state.MissionRunning
 		}
 	case state.MissionInMap:

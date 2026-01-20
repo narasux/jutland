@@ -86,6 +86,8 @@ type MissionState struct {
 	ForwardingBullets []*obj.Bullet
 	// 游戏标识
 	GameMarks map[obj.MarkID]*obj.Mark
+	// DebugFlags 调试标识
+	DebugFlags DebugFlags
 }
 
 // CameraPosBorder 获取相机视野边界

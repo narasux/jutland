@@ -32,9 +32,15 @@ type UnitGeometricSize struct {
 
 // BattleUnit 战斗单位
 type BattleUnit interface {
+	// ID 单位ID
 	ID() string
+	// Detail 详细信息，调试时候使用
+	Detail() string
+	// Player 所属玩家
 	Player() faction.Player
+	// MovementState 机动状态（速度，方向，位置等信息）
 	MovementState() UnitMovementState
+	// GeometricSize 几何尺寸（长、宽等信息）
 	GeometricSize() UnitGeometricSize
 }
 

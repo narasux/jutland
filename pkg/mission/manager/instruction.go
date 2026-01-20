@@ -62,6 +62,14 @@ func (s *InstructionSet) Items() map[string]instr.Instruction {
 	return s.instructions
 }
 
+// Exists 相同 ID 的指令是否存在
+func (s *InstructionSet) Exists(uid string) bool {
+	s.RLock()
+	defer s.RUnlock()
+	_, ok := s.instructions[uid]
+	return ok
+}
+
 // ExecAll 执行所有指令
 func (s *InstructionSet) ExecAll(state *state.MissionState) {
 	s.RLock()

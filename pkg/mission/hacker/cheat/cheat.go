@@ -19,3 +19,10 @@ var Cheats = []Cheat{
 	&AbandonDarkness{},
 	&Expelliarmus{},
 }
+
+// DebugCheats 调试秘籍表
+var DebugCheats = []Cheat{
+	&DebugAll{},
+	&DamageColorByTeam{},
+	&ShowCursorPosObjInfo{},
+}

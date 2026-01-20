@@ -110,6 +110,14 @@ func (s *BattleShip) ID() string {
 	return s.Uid
 }
 
+// Detail 详细信息
+func (s *BattleShip) Detail() string {
+	return fmt.Sprintf(
+		"Ship %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f",
+		s.Name, s.Uid, s.CurPos.String(), s.CurRotation, s.CurSpeed, s.MaxSpeed, s.CurHP, s.TotalHP,
+	)
+}
+
 // Player 所属玩家
 func (s *BattleShip) Player() faction.Player {
 	return s.BelongPlayer

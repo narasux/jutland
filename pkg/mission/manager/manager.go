@@ -87,6 +87,9 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateMissionPlanes()
 	case state.MissionInTerminal:
 		m.updateTerminal()
+	case state.MissionPaused:
+		// 暂停时也可以移动相机
+		m.updateCameraPosition()
 	}
 	m.updateMissionStatus()
 
