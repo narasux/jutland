@@ -553,6 +553,83 @@
     ]
   },
   {
+    name: "PT_791",
+    description: [
+      "PT-791 是二战后期美国海军的鱼雷艇之一，属于",
+      "Higgins 78 英尺 PT 艇的改进批次。",
+      "木质船体配三台汽油机，极速约 41 节，常用于夜间",
+      "突袭、护航与反潜。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "US Navy Torpedo Boats (PT-Boats), 1940-1945",
+        url: "https://www.ibiblio.org/hyperwar/USN/ships/ships-pt.html"
+      },
+      {
+        name: "Higgins 78-ft torpedo boats (PT71)",
+        url: "https://www.navypedia.org/ships/usa/us_pt_pt71.htm"
+      }
+    ]
+  },
+  {
+    name: "T_14",
+    description: [
+      "T-14（十四号型）是二战末期日本海军量产的",
+      "小型鱼雷艇，全木质船体，单发动机。",
+      "主武装为 450mm 鱼雷，并可搭载深弹。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "T-14 Class torpedo boat: Single-Engine Seafarer",
+        url: "https://warthunder.com/en/news/4303-development-t-14-class-torpedo-boat-single-engine-seafarer-en"
+      },
+      {
+        name: "War Thunder Wiki - Type T-14",
+        url: "https://wiki.warthunder.com/Type_T-14"
+      }
+    ]
+  },
+  {
+    name: "S_100",
+    description: [
+      "S-100 是德国海军著名的 Schnellboot（S-艇），",
+      "盟军称其为 E-boat，以高速与强适航性著称。",
+      "三台柴油机驱动，航速约 43 节，主武装为 533mm 鱼雷。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "s-Boats in the Kriegsmarine S-100",
+        url: "http://www.s-boot.net/englisch/sboats-km-dat-s100.html"
+      },
+      {
+        name: "Wikipedia - Schnellboot",
+        url: "https://en.wikipedia.org/wiki/Schnellboot"
+      }
+    ]
+  },
+  {
+    name: "MTB_77",
+    description: [
+      "MTB-77 是英国皇家海军的机动鱼雷艇，隶属",
+      "Vosper 72 英尺级，以高速突击与近海作战著称。",
+      "装备机枪与 533mm 鱼雷，在地中海等战区活跃。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "HMS MTB 77 (MTB 77) of the Royal Navy",
+        url: "https://uboat.net/allies/warships/ship/16838.html"
+      },
+      {
+        name: "Vosper 72 feet-type class Motor Torpedo Boats",
+        url: "https://uboat.net/allies/warships/class.html?ID=646&navy=HMS"
+      }
+    ]
+  },
+  {
     name: "P_6",
     description: [
       "183 型鱼雷艇（P-6级鱼雷艇）是曾在苏联海军",
