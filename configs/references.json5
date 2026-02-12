@@ -12,8 +12,8 @@
     links: [
       {
         name: "百度百科 - 小黄鸭",
-        url: "https://baike.baidu.com/item/%E5%B0%8F%E9%BB%84%E9%B8%AD/3214424",
-      },
+        url: "https://baike.baidu.com/item/%E5%B0%8F%E9%BB%84%E9%B8%AD/3214424"
+      }
     ]
   },
   {
@@ -24,14 +24,14 @@
       "拥有强度高达太阳系中最坚硬的材料的百倍以上的坚硬外壳。",
       "在飞行时，水滴甚至可以毫不减速地做出违反定律的锐角转向。",
       "在末日之战中，仅单个水滴就靠撞击摧毁人类大部分的太空武装",
-      "力量（共计 2008 艘恒星级战舰）。",
+      "力量（共计 2008 艘恒星级战舰）。"
     ],
     author: "未知",
     links: [
       {
         name: "百度百科 - 水滴",
         url: "https://baike.baidu.com/item/%E6%B0%B4%E6%BB%B4/9086002"
-      },
+      }
     ]
   },
   {
@@ -57,16 +57,17 @@
       "大量的自由轮来替代被德国潜艇击沉的商船，同时，也有很多",
       "自由轮通过租借法案提供给英国。自由轮建造迅速，价格便宜，",
       "让它成为二战中美国工业的一种象征。在 1941-1945 年间，",
-      "18 个美国船坞共计建造了 2751 艘自由轮。",
+      "18 个美国船坞共计建造了 2751 艘自由轮。"
     ],
     author: "未知",
     links: [
       {
         name: "维基百科 - 自由轮",
-        url: "https://zh.wikipedia.org/wiki/%E8%87%AA%E7%94%B1%E8%BD%AE",
+        url: "https://zh.wikipedia.org/wiki/%E8%87%AA%E7%94%B1%E8%BD%AE"
       }
     ]
   },
+  // 美国海军
   {
     name: "yorktown",
     description: [
@@ -109,6 +110,7 @@
       }
     ]
   },
+  // 日本海军
   {
     name: "taiho",
     description: [
@@ -130,6 +132,7 @@
       }
     ]
   },
+  // 美国海军
   {
     name: "lowa",
     description: [
@@ -147,7 +150,7 @@
       },
       {
         name: "维基百科 - 衣阿华号",
-        url: "https://zh.wikipedia.org/wiki/%E8%89%BE%E5%A5%A7%E7%93%A6%E8%99%9F%E6%88%B0%E8%89%A6_(BB-61)",
+        url: "https://zh.wikipedia.org/wiki/%E8%89%BE%E5%A5%A7%E7%93%A6%E8%99%9F%E6%88%B0%E8%89%A6_(BB-61)"
       }
     ]
   },
@@ -157,8 +160,8 @@
       "蒙大拿号战列舰是美国海军在第二次世界大战期间计划建造，但",
       "从未实际造成的一艘战列舰。其设计是用来对抗日本的大和级战舰。",
       "相比于衣阿华级，其虽然极速降低，但是吨位，火力，装甲都更强。",
-      "由于二战胜利后，美国海军倾向于航母而被取消建造。按规划，若",
-      "蒙大拿号完工，将会是美国海军史上级别最高、火力最强大的战列舰。",
+      "由于二战胜利后，美国海军倾向于航母而被取消建造。若蒙大拿号",
+      "按计划完工，将会是美国海军史上级别最高、火力最强大的战列舰。",
     ],
     author: "TZoli",
     links: [
@@ -168,7 +171,7 @@
       },
       {
         name: "维基百科 - 蒙大拿级",
-        url: "https://zh.wikipedia.org/wiki/%E8%92%99%E5%A4%A7%E6%8B%BF%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+        url: "https://zh.wikipedia.org/wiki/%E8%92%99%E5%A4%A7%E6%8B%BF%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0"
       }
     ]
   },
@@ -189,7 +192,7 @@
       },
       {
         name: "维基百科 - 南达科他号",
-        url: "https://zh.wikipedia.org/wiki/%E5%8D%97%E9%81%94%E7%A7%91%E4%BB%96%E8%99%9F%E6%88%B0%E8%89%A6_(BB-57)",
+        url: "https://zh.wikipedia.org/wiki/%E5%8D%97%E9%81%94%E7%A7%91%E4%BB%96%E8%99%9F%E6%88%B0%E8%89%A6_(BB-57)"
       }
     ]
   },
@@ -205,7 +208,161 @@
       {
         name: "现实架空 - 列克星敦级战列巡洋舰",
         url: "https://www.bilibili.com/opus/920994748118859845"
+      }
+    ]
+  },
+  // 日本海军
+  {
+    name: "kongo",
+    description: [
+      "金刚号是日本海军战列舰，",
+      "原为英国建造的战列巡洋舰，",
+      "后经过改装成为高速战列舰，",
+      "在太平洋战争中多次参与作战，",
+      "是日本海军的重要战力之一。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 金刚号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%87%91%E5%88%9A%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "fuso",
+    description: [
+      "扶桑号是日本海军扶桑级战列舰首舰，",
+      "是日本第一艘超无畏舰代表作品。",
+      "该舰采用独特的六座双联装主炮布局，",
+      "在莱特湾海战中遭遇美军驱逐舰，",
+      "被鱼雷击中弹药库后发生爆炸沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 扶桑号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%89%B6%E6%A1%91%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "yamato",
+    description: [
+      "大和号是日本海军大和级战列舰首舰，",
+      "是人类历史上建造过的最大战列舰，",
+      "排水量超过 7 万吨，规模惊人。",
+      "搭载史上最大口径的 460 毫米主炮，",
+      "1945 年被美军击沉于冲绳附近。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "维基百科 - 大和号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%92%8C%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "satsuma",
+    description: [
+      "萨摩号是日本海军大和级改进型，",
+      "设计目标超越原有战舰性能，",
+      "火力装甲进行全面强化升级，",
+      "采用萨摩古国命名延续传统，",
+      "该舰仅存在于设计图纸中。"
+    ],
+    author: "TZoli",
+    links: []
+  },
+  {
+    name: "edo",
+    description: [
+      "江户国是古代日本的令制国之一，",
+      "位于现在的东京都及周边地区。",
+      "是江户时代的政治经济中心，",
+      "在游戏中作为日本最强战舰登场。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "维基百科 - 江户时代",
+        url: "https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%88%B8%E6%97%B6%E4%BB%A3"
       },
+      {
+        name: "维基百科 - 令制国",
+        url: "https://zh.wikipedia.org/wiki/%E4%BB%A4%E5%88%B6%E5%9B%BD"
+      }
+    ]
+  },
+  // 德国海军
+  {
+    name: "bismarck",
+    description: [
+      "俾斯麦号是纳粹德国海军战列舰首舰，",
+      "是二战时期德国最大的战舰之一。",
+      "其 1941 年首次出击就表现卓越，",
+      "击沉英国皇家海军胡德号战列巡洋舰，",
+      "后在追击中被英军舰队击沉。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 俾斯麦号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E4%BF%98%E6%96%AF%E9%BA%A6%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "scharnhorst",
+    description: [
+      "沙恩霍斯特号是德国的战列巡洋舰，",
+      "是沙恩霍斯特级的首舰代表，",
+      "以其出色的机动性著称于世，",
+      "拥有较强的生存能力和战斗力，",
+      "1943 年在北角海战中沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 沙恩霍斯特号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%B2%99%E6%81%A9%E9%9C%8D%E6%96%AF%E7%89%B9%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "lutzow",
+    description: [
+      "吕佐夫号是德国的德意志级战舰，",
+      "是该级的首舰，原名德意志号，",
+      "后为鼓舞士气而更名为吕佐夫号，",
+      "曾多次参与大西洋破交作战，",
+      "也参与北挪威海域的军事行动。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 德国级装甲舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%BE%B7%E5%9B%BD%E7%BA%A7%E8%A3%85%E7%94%B2%E8%88%B0"
+      }
+    ]
+  },
+  // 英国海军
+  {
+    name: "hood",
+    description: [
+      "胡德号是英国皇家海军战列巡洋舰，",
+      "曾是世界最大战舰，闻名于世。",
+      "被称为皇家海军的骄傲与象征，",
+      "排水量超过 4 万吨，但在 1941 年的",
+      "丹麦海峡海战中被俾斯麦号击沉。"
+    ],
+    author: "TZoli",
+    links: [
+      {
+        name: "维基百科 - 胡德号战列巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%83%A1%E5%BE%B7%E5%8F%B7%E6%88%98%E5%88%97%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
     ]
   },
   {
@@ -224,10 +381,86 @@
       },
       {
         name: "维基百科 - 纳尔逊级",
-        url: "https://zh.wikipedia.org/zh-hans/%E7%BA%B3%E5%B0%94%E9%80%8A%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+        url: "https://zh.wikipedia.org/zh-hans/%E7%BA%B3%E5%B0%94%E9%80%8A%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0"
       }
     ]
   },
+  {
+    name: "lion",
+    description: [
+      "狮级战列舰是英国皇家海军计划建造的",
+      "一级战列舰，设计用于对抗新型威胁。",
+      "主要目标是德国 H 级战列舰和",
+      "日本大和级，火力强大性能优异。",
+      "由于战争爆发，该级战舰未能建成。"
+    ],
+    author: "未知",
+    links: []
+  },
+  {
+    name: "lion_kai",
+    description: [
+      "狮级改战列舰是狮级的改进方案，",
+      "在原有设计基础上进行优化，",
+      "进一步强化了火力和装甲防护，",
+      "提升整体作战能力与生存性，",
+      "该舰仅存在于设计图纸中。"
+    ],
+    author: "未知",
+    links: []
+  },
+  {
+    name: "king_george_v",
+    description: [
+      "乔治五世号是英国皇家海军战舰，",
+      "是英王乔治五世级的首舰。",
+      "曾参与围剿俾斯麦号的行动，",
+      "在二战中服役于多场重要海战，",
+      "为反法西斯战争做出贡献。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 英王乔治五世级战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%8B%B1%E7%8E%8B%E4%B9%94%E6%B2%BB%E4%BA%94%E4%B8%96%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0_(1939%E5%B9%B4)"
+      }
+    ]
+  },
+  {
+    name: "warspite",
+    description: [
+      "厌战号是英国皇家海军战列舰，",
+      "属于伊丽莎白女王级战列舰，",
+      "被称为可敬的老太太称号，",
+      "服役生涯极其漫长且辉煌，",
+      "在一战和二战中表现出色。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 厌战号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8E%8C%E6%88%98%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "tiger",
+    description: [
+      "虎号是英国皇家海军战列巡洋舰，",
+      "是虎级战列巡洋舰的首舰代表，",
+      "是玛丽皇后号的姊妹舰之一，",
+      "在一战期间服役并参与作战，",
+      "战后退役并被拆解出售。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 虎号战列巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%99%8E%E5%8F%B7%E6%88%98%E5%88%97%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  // 苏联海军
   {
     name: "soviet_union",
     description: [
@@ -245,7 +478,7 @@
       },
       {
         name: "维基百科 - 苏联级",
-        url: "https://zh.wikipedia.org/wiki/%E8%8B%8F%E8%81%94%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+        url: "https://zh.wikipedia.org/wiki/%E8%8B%8F%E8%81%94%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0"
       }
     ]
   },
@@ -289,7 +522,7 @@
     name: "slava",
     description: [
       "光荣级超级战列舰是 B 站 UP 主莫斯科凉粉的个人作品，",
-      "设定中拥有四座巨大的 500mm 双联装主炮，总吨位超多 10 万吨。"
+      "设定中拥有四座巨大的 500mm 双联装主炮，总吨位超过 10 万吨。"
     ],
     author: "莫斯科凉粉",
     links: [
@@ -300,9 +533,10 @@
       {
         name: "G72 型战列舰 “光荣” 号",
         url: "https://www.bilibili.com/opus/885383787003772948"
-      },
+      }
     ]
   },
+  // 美国海军
   {
     name: "atlanta",
     description: [
@@ -433,6 +667,355 @@
       }
     ]
   },
+  // 日本海军
+  {
+    name: "furutaka",
+    description: [
+      "古鹰号是日本海军重巡洋舰首舰，",
+      "是日本第一种条约型重巡洋舰，",
+      "开创了日本重巡洋舰的先河，",
+      "后在所罗门海战中遭遇美军，",
+      "被击沉，结束了其服役生涯。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 古鹰号重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8F%A4%E9%B9%B0%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "aoba",
+    description: [
+      "青叶号是日本海军重巡洋舰首舰，",
+      "是古鹰级的改进型升级版本，",
+      "火控系统得到显著加强优化，",
+      "在太平洋战争中多次参与作战，",
+      "执行多种任务展现其价值。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 青叶号重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%9D%92%E5%8F%B6%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "haguro",
+    description: [
+      "羽黑号是日本海军重巡洋舰，",
+      "是高雄级四号舰代表作品，",
+      "在太平洋战争中表现出色，",
+      "多次参与重要海战和行动，",
+      "1945 年在马来半岛附近沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 羽黑号重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%BE%BD%E9%BB%91%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "atago",
+    description: [
+      "爱宕号是日本海军重巡洋舰，",
+      "是高雄级二号舰，改良设计，",
+      "拥有更强的火力和防护性能，",
+      "曾作为第二舰队旗舰服役，",
+      "后在巴拉望水道被击沉。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 爱宕号重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%88%B1%E5%AE%95%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "mogami",
+    description: [
+      "最上级是日本海军重巡洋舰首舰，",
+      "最初按轻巡洋舰设计建造，",
+      "后改装为重巡洋舰以增强火力，",
+      "在莱特湾海战中遭受重创，",
+      "最终沉没于太平洋战场。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 最上级重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%9C%80%E4%B8%8A%E7%BA%A7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "suzuya",
+    description: [
+      "铃谷号是日本海军重巡洋舰，",
+      "是最上级三号舰代表作品，",
+      "设计与其他舰略有不同特色，",
+      "在莱特湾海战中遭遇空袭，",
+      "遭到重创后选择自沉结束。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 铃谷号重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%93%83%E8%B0%B7%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "tone",
+    description: [
+      "利根号是日本海军重巡洋舰首舰，",
+      "设计为水上侦察机搭载巡洋舰，",
+      "拥有大量水上机用于侦查，",
+      "在莱特湾海战中遭遇空袭，",
+      "遭受重创后沉没于太平洋。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 利根号重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%88%A9%E6%A0%B9%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "tenryu",
+    description: [
+      "天龙号是日本海军轻巡洋舰首舰，",
+      "是日本第一种设计的轻巡洋舰，",
+      "开创了日本轻巡洋舰的先河，",
+      "在瓜达尔卡纳尔海战中被击沉"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 天龙号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%BE%99%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "kuma",
+    description: [
+      "球磨号是日本海军轻巡洋舰首舰，",
+      "是 5500 吨级轻巡洋舰标准型，",
+      "设计均衡，性能表现良好，",
+      "在太平洋战争中执行多种任务，",
+      "后被击沉，结束其服役生涯。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 球磨号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%90%83%E7%A3%A8%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "kitakami",
+    description: [
+      "北上号是日本海军轻巡洋舰，",
+      "是球磨级巡洋舰的四号舰，",
+      "后被改装为重雷装巡洋舰，",
+      "可搭载大量鱼雷进行攻击，",
+      "在战争后期改造成回天鱼雷载舰。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 北上号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8C%97%E4%B8%8A%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "ooi",
+    description: [
+      "大井号是日本海军轻巡洋舰，",
+      "是球磨级巡洋舰的五号舰，",
+      "与北上号一同被改装设计，",
+      "成为重雷装巡洋舰服役，"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 大井号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E4%BA%95%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "isuzu",
+    description: [
+      "长良号是日本海军轻巡洋舰，",
+      "是 5500 吨级轻巡洋舰成员，",
+      "属于长良级四号舰系列，",
+      "在战争中多次执行各种任务，",
+      "后在帕劳海战中被击沉。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 长良级轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%95%BF%E8%89%AF%E7%BA%A7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "abukuma",
+    description: [
+      "阿武隈号是日本海军轻巡洋舰首舰，",
+      "是 6000 吨级轻巡洋舰改进型代表，",
+      "设计注重均衡性能与生存能力，",
+      "在多场战役中表现出色，后沉没，",
+      "于莱特湾海战中遭遇美军重创。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 阿武隈号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%AD%A6%E9%9A%88%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "shintsu",
+    description: [
+      "神通号是日本海军轻巡洋舰，",
+      "是川内级巡洋舰的二号舰，",
+      "在太平洋战争中服役多年，",
+      "作为第二水雷战队旗舰，",
+      "1943 年于维拉拉维拉海战沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 神通号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%A5%9E%E9%80%9A%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "yubari",
+    description: [
+      "夕张号是日本海军试验型轻巡，",
+      "设计为 5500 吨级轻巡缩小版，",
+      "测试了许多新技术和创新，",
+      "展现了日本海军的设计实力，",
+      "后在战争中沉没于太平洋。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 夕张号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%95%E5%BC%A0%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "yahagi",
+    description: [
+      "矢矧号是日本海军轻巡洋舰，",
+      "是阿贺野级二号舰代表，",
+      "是最后一种 5500 吨级轻巡洋舰，",
+      "在菊水特攻行动中遭遇空袭，",
+      "沉没，结束了其服役生涯。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 矢矧号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%9F%A2%E7%9F%A7%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "ooyodo",
+    description: [
+      "大淀号是日本海军轻巡洋舰首舰，",
+      "设计为旗舰型轻巡洋舰布局，",
+      "拥有强大的通信设备系统，",
+      "在战争后期主要用于执行",
+      "特攻任务，最终搁浅自沉。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 大淀号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%B7%80%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  // 德国海军
+  {
+    name: "prinz_eugen",
+    description: [
+      "欧根亲王号是德国海军重巡洋舰，",
+      "属于希佩尔海军上将级，",
+      "与俾斯麦号一同参与作战，",
+      "参加了丹麦海峡海战行动，",
+      "战后交付美国用于核试验。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 欧根亲王号重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%AC%A7%E6%A0%B9%E4%BA%B2%E7%8E%8B%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "leipzig",
+    description: [
+      "莱比锡号是德国海军轻巡洋舰，",
+      "是莱比锡级巡洋舰的首舰，",
+      "德国在两次大战期间建造的",
+      "最后一批轻巡洋舰之一，",
+      "在二战中多次参与北海作战。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 莱比锡号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%8E%B1%E6%AF%94%E9%94%A1%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  // 英国海军
+  {
+    name: "cheshire",
+    description: [
+      "柴郡号是英国皇家海军重巡洋舰，",
+      "基于美国巴尔的摩级重巡洋舰设计，",
+      "是英国版的改进设计方案，",
+      "该舰仅存在于设计图纸中，",
+      "从未实际建造下水服役。"
+    ],
+    author: "未知",
+    links: []
+  },
+  {
+    name: "vickers",
+    description: [],
+    author: "未知",
+    links: []
+  },
+  {
+    name: "k_25",
+    description: [],
+    author: "未知",
+    links: []
+  },
+  // 苏联海军
   {
     name: "sverdlov",
     description: [
@@ -450,7 +1033,7 @@
       {
         name: "维基百科 - 斯维尔德洛夫级巡洋舰",
         url: "https://zh.wikipedia.org/zh-hans/%E6%96%AF%E7%BB%B4%E5%B0%94%E5%BE%B7%E6%B4%9B%E5%A4%AB%E7%BA%A7%E5%B7%A1%E6%B4%8B%E8%88%B0"
-      },
+      }
     ]
   },
   {
@@ -466,9 +1049,10 @@
       {
         name: "维基百科 - 基洛夫级巡洋舰 (1936年)",
         url: "https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%B4%9B%E5%A4%AB%E7%BA%A7%E5%B7%A1%E6%B4%8B%E8%88%B0_(1936%E5%B9%B4)"
-      },
+      }
     ]
   },
+  // 美国海军
   {
     name: "porter",
     description: [
@@ -534,13 +1118,127 @@
       }
     ]
   },
+  // 日本海军
+  {
+    name: "asashio",
+    description: [
+      "朝潮号是日本海军驱逐舰，",
+      "是朝潮级驱逐舰的首舰，",
+      "是日本在二战中建造的主战驱逐舰，",
+      "在多场重要海战中表现出色，",
+      "最终战沉于太平洋战场。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "维基百科 - 朝潮级驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%9C%9D%E6%BD%AE%E7%BA%A7%E9%A9%B1%E9%80%90%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "yugumo",
+    description: [
+      "夕云号是日本海军驱逐舰，",
+      "是夕云级驱逐舰的首舰，",
+      "是朝潮级的改进型版本，",
+      "性能更加均衡和稳定可靠，",
+      "在太平洋战争中多次参与作战。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "维基百科 - 夕云级驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%95%E4%BA%91%E7%BA%A7%E9%A9%B1%E9%80%90%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "yukikaze",
+    description: [
+      "雪风号是日本海军驱逐舰，",
+      "是阳炎级驱逐舰的八号舰，",
+      "被称为奇迹的驱逐舰称号，",
+      "多次执行危险任务而幸存，",
+      "战后由国民党接收，台湾退役。"
+    ],
+    author: "Midnike",
+    links: [
+      {
+        name: "维基百科 - 雪风号驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%9B%AA%E9%A3%8E%E5%8F%B7%E9%A9%B1%E9%80%90%E8%88%B0"
+      }
+    ]
+  },
+  // 德国海军
+  {
+    name: "z_11",
+    description: [
+      "Z-11 是德国海军1934A 型驱逐舰，",
+      "是纳粹德国海军早期建造的驱逐舰"
+    ],
+    author: "未知",
+    links: [
+      {
+        "name": "维基百科 - 双视图",
+        "url": "https://zh.wikipedia.org/wiki/1934%E7%BA%A7%E9%A9%B1%E9%80%90%E8%88%B0#/media/File:Z1Zerst%C3%B6rer1934modifiedDraw.svg"
+      },
+      {
+        name: "维基百科 - 1934型驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/1934%E5%9E%8B%E9%A9%B1%E9%80%90%E8%88%B0"
+      }
+    ]
+  },
+  // 英国海军
+  {
+    name: "v",
+    description: [
+      "V 级驱逐舰是英国皇家海军设计，",
+      "是驱逐舰的设计方案之一，",
+      "基于 V 级和 W 级的改进型，",
+      "进行了多项性能优化设计，",
+      "该方案仅存在于设计图纸中。"
+    ],
+    author: "未知",
+    links: []
+  },
+  {
+    name: "y",
+    description: [
+      "Y 级驱逐舰是英国皇家海军设计，",
+      "是驱逐舰的设计方案之一，",
+      "基于 V 级驱逐舰进一步改进，",
+      "进行了更深入的设计优化，",
+      "该方案仅存在于设计图纸中。"
+    ],
+    author: "未知",
+    links: []
+  },
+  {
+    name: "ardent",
+    description: [
+      "决心号是英国皇家海军驱逐舰首舰，",
+      "是 A 级驱逐舰的代表作品，",
+      "两次大战期间建造的标准型，",
+      "在二战中执行护航任务服务，",
+      "后被德军击沉，结束服役生涯。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "舰 R 百科 - 热心号",
+        url: "https://www.zjsnrwiki.com/wiki/%E7%83%AD%E5%BF%83#A%E7%BA%A7%E9%A9%B1%E9%80%90%E8%88%B0%E8%AE%BE%E8%AE%A1%E7%AE%80%E4%BB%8B"
+      }
+    ]
+  },
+  // 苏联海军
   {
     name: "rapid",
     description: [
       "快速号驱逐舰是二战后苏联海军建造的第一批驱逐舰（30bis）。",
       "火力强大，性能均衡是她的显著特点，同级舰有 70 艘之多。"
     ],
-    author: "Midnike",
+    author: "Zustt",
     links: [
       {
         name: "ShipBucket - Smelyi",
@@ -552,13 +1250,14 @@
       }
     ]
   },
+  // 美国海军
   {
     name: "PT_791",
     description: [
-      "PT-791 是二战后期美国海军的鱼雷艇之一，属于",
-      "Higgins 78 英尺 PT 艇的改进批次。",
-      "木质船体配三台汽油机，极速约 41 节，常用于夜间",
-      "突袭、护航与反潜。"
+      "PT-791 是二战后期美国海军的鱼雷艇之一，",
+      "是 Higgins 78 英尺 PT 艇的改进批次。",
+      "木质船体配三台汽油机，极速约 41 节，",
+      "常用于夜间突袭、护航与反潜。"
     ],
     author: "未知",
     links: [
@@ -572,6 +1271,7 @@
       }
     ]
   },
+  // 日本海军
   {
     name: "T_14",
     description: [
@@ -591,6 +1291,7 @@
       }
     ]
   },
+  // 德国海军
   {
     name: "S_100",
     description: [
@@ -610,6 +1311,7 @@
       }
     ]
   },
+  // 英国海军
   {
     name: "MTB_77",
     description: [
@@ -629,6 +1331,7 @@
       }
     ]
   },
+  // 苏联海军
   {
     name: "P_6",
     description: [

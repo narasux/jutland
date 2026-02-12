@@ -5244,8 +5244,8 @@
     }
   },
   {
-    name: "amaterasu",
-    displayName: "天照大御神",
+    name: "edo",
+    displayName: "江户",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 105000,
