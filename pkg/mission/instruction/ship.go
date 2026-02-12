@@ -3,7 +3,7 @@ package instruction
 import (
 	"fmt"
 
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objWeapon "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/grid"
@@ -96,12 +96,12 @@ func (i *DisableWeapon) String() string {
 // ShipMove 移动
 type ShipMove struct {
 	shipUid   string
-	targetPos objCommon.MapPos
+	targetPos objPos.MapPos
 	status    InstrStatus
 }
 
 // NewShipMove ...
-func NewShipMove(shipUid string, targetPos objCommon.MapPos) *ShipMove {
+func NewShipMove(shipUid string, targetPos objPos.MapPos) *ShipMove {
 	return &ShipMove{shipUid: shipUid, targetPos: targetPos, status: Ready}
 }
 
@@ -140,15 +140,15 @@ func (i *ShipMove) String() string {
 // ShipMovePath 按照指定路径移动
 type ShipMovePath struct {
 	shipUid   string
-	curPos    objCommon.MapPos
-	targetPos objCommon.MapPos
-	path      []objCommon.MapPos
+	curPos    objPos.MapPos
+	targetPos objPos.MapPos
+	path      []objPos.MapPos
 	curIdx    int
 	status    InstrStatus
 }
 
 // NewShipMovePath ...
-func NewShipMovePath(shipUid string, curPos, targetPos objCommon.MapPos) *ShipMovePath {
+func NewShipMovePath(shipUid string, curPos, targetPos objPos.MapPos) *ShipMovePath {
 	return &ShipMovePath{shipUid: shipUid, curPos: curPos, targetPos: targetPos, status: Pending}
 }
 
@@ -196,9 +196,9 @@ func (i *ShipMovePath) genPath(misState *state.MissionState) {
 		i.status = Executed
 		return
 	}
-	i.path = []objCommon.MapPos{i.curPos}
+	i.path = []objPos.MapPos{i.curPos}
 	for _, p := range points[1 : len(points)-1] {
-		i.path = append(i.path, objCommon.NewMapPos(p.X, p.Y))
+		i.path = append(i.path, objPos.New(p.X, p.Y))
 	}
 	i.path = append(i.path, i.targetPos)
 	i.status = Ready

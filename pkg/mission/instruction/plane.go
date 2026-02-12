@@ -6,6 +6,7 @@ import (
 	"github.com/pkg/errors"
 
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/geometry"
@@ -70,7 +71,7 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		attacker.CurPos.RX, attacker.CurPos.RY, attacker.CurSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
+	targetPos := objPos.NewR(targetRx, targetRY)
 	attacker.MoveTo(missionState.MissionMD.MapCfg, targetPos)
 	return nil
 }
@@ -126,7 +127,7 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 		plane.CurPos.RX, plane.CurPos.RY, plane.CurSpeed,
 		ship.CurPos.RX, ship.CurPos.RY, ship.CurSpeed, ship.CurRotation,
 	)
-	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
+	targetPos := objPos.NewR(targetRx, targetRY)
 	plane.MoveTo(missionState.MissionMD.MapCfg, targetPos)
 	// 飞机到达载舰附近，判定已经完成
 	if plane.CurPos.Near(ship.CurPos, 1) {

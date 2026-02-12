@@ -11,6 +11,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -61,7 +62,7 @@ type BattleShip struct {
 	// 当前生命值
 	CurHP float64
 	// 当前位置
-	CurPos objCommon.MapPos
+	CurPos objPos.MapPos
 	// 旋转角度
 	CurRotation float64
 	// 当前速度
@@ -279,7 +280,7 @@ func (s *BattleShip) CanOnLand() bool {
 }
 
 // MoveTo 移动到指定位置
-func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objCommon.MapPos, nearGoal bool) (arrive bool) {
+func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, nearGoal bool) (arrive bool) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if s.CurHP <= 0 {
 		return true
@@ -336,7 +337,7 @@ var AllShipNames = []string{}
 
 // NewShip 新建战舰
 func NewShip(
-	uidGenerator *ShipUidGenerator, name string, pos objCommon.MapPos, rotation float64, player faction.Player,
+	uidGenerator *ShipUidGenerator, name string, pos objPos.MapPos, rotation float64, player faction.Player,
 ) *BattleShip {
 	// FIXME-P1 小黄鸭太 Bug 了，需要默认禁用一些武器
 	s := deepcopy.Copy(*ShipMap[name]).(BattleShip)

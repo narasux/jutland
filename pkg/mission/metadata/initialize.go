@@ -10,7 +10,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
@@ -71,7 +71,7 @@ func init() {
 		for _, shipMD := range md.InitShips {
 			initShips = append(initShips, InitShipMetadata{
 				ShipName:     shipMD.Name,
-				Pos:          objCommon.NewMapPos(shipMD.Pos[0], shipMD.Pos[1]),
+				Pos:          objPos.New(shipMD.Pos[0], shipMD.Pos[1]),
 				Rotation:     float64(shipMD.Rotation),
 				BelongPlayer: faction.Player(shipMD.BelongPlayer),
 			})
@@ -80,9 +80,9 @@ func init() {
 		initReinforcePoints := []InitReinforcePointMetadata{}
 		for _, rpMD := range md.InitReinforcePoints {
 			initReinforcePoints = append(initReinforcePoints, InitReinforcePointMetadata{
-				Pos:               objCommon.NewMapPos(rpMD.Pos[0], rpMD.Pos[1]),
+				Pos:               objPos.New(rpMD.Pos[0], rpMD.Pos[1]),
 				Rotation:          float64(rpMD.Rotation),
-				RallyPos:          objCommon.NewMapPos(rpMD.RallyPos[0], rpMD.RallyPos[1]),
+				RallyPos:          objPos.New(rpMD.RallyPos[0], rpMD.RallyPos[1]),
 				BelongPlayer:      faction.Player(rpMD.BelongPlayer),
 				MaxOncomingShip:   rpMD.MaxOncomingShip,
 				ProvidedShipNames: rpMD.ProvidedShipNames,
@@ -92,7 +92,7 @@ func init() {
 		initOilPlatforms := []InitOilPlatformMetadata{}
 		for _, opMD := range md.InitOilPlatforms {
 			initOilPlatforms = append(initOilPlatforms, InitOilPlatformMetadata{
-				Pos:    objCommon.NewMapPos(opMD.Pos[0], opMD.Pos[1]),
+				Pos:    objPos.New(opMD.Pos[0], opMD.Pos[1]),
 				Radius: opMD.Radius,
 				Yield:  opMD.Yield,
 			})
@@ -103,7 +103,7 @@ func init() {
 			DisplayName:         md.DisplayName,
 			MaxShipCount:        md.MaxShipCount,
 			InitFunds:           md.InitFunds,
-			InitCameraPos:       objCommon.NewMapPos(md.InitCameraPos[0], md.InitCameraPos[1]),
+			InitCameraPos:       objPos.New(md.InitCameraPos[0], md.InitCameraPos[1]),
 			MapCfg:              mapcfg.GetByName(md.MapName),
 			Description:         md.Description,
 			InitShips:           initShips,

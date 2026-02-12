@@ -14,6 +14,7 @@ import (
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
@@ -127,10 +128,10 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	}
 
 	// 通过 ShipMove 指令实现移动
-	handleMove := func(shipUid string, curPos objCommon.MapPos, dx, dy int) {
+	handleMove := func(shipUid string, curPos objPos.MapPos, dx, dy int) {
 		moveInstr := instr.NewShipMove(
 			shipUid,
-			objCommon.NewMapPosR(
+			objPos.NewR(
 				curPos.RX+float64(dx),
 				curPos.RY+float64(dy),
 			),

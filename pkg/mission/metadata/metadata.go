@@ -4,7 +4,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
@@ -18,7 +18,7 @@ type MissionMetadata struct {
 	// 初始资金
 	InitFunds int64
 	// 初始位置
-	InitCameraPos objCommon.MapPos
+	InitCameraPos objPos.MapPos
 	// 关卡描述
 	Description []string
 	// 初始战舰
@@ -32,16 +32,16 @@ type MissionMetadata struct {
 // InitShipMetadata ...
 type InitShipMetadata struct {
 	ShipName     string
-	Pos          objCommon.MapPos
+	Pos          objPos.MapPos
 	Rotation     float64
 	BelongPlayer faction.Player
 }
 
 // InitReinforcePointMetadata ...
 type InitReinforcePointMetadata struct {
-	Pos               objCommon.MapPos
+	Pos               objPos.MapPos
 	Rotation          float64
-	RallyPos          objCommon.MapPos
+	RallyPos          objPos.MapPos
 	BelongPlayer      faction.Player
 	MaxOncomingShip   int
 	ProvidedShipNames []string
@@ -49,7 +49,7 @@ type InitReinforcePointMetadata struct {
 
 // InitOilPlatformMetadata ...
 type InitOilPlatformMetadata struct {
-	Pos    objCommon.MapPos
+	Pos    objPos.MapPos
 	Radius int
 	Yield  int
 }

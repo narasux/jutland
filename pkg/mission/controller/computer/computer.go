@@ -8,7 +8,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
@@ -81,7 +81,7 @@ func (h *ComputerDecisionHandler) Handle(
 				if ship.CurPos.Distance(enemy.CurPos) < 20 && ship.CurSpeed == 0 && enemy.CurSpeed != 0 {
 					x, y := rand.Intn(11)-5, rand.Intn(11)-5
 					moveInstr := instr.NewShipMove(
-						ship.Uid, objCommon.NewMapPos(
+						ship.Uid, objPos.New(
 							misState.Ships[ship.Uid].CurPos.MX+x,
 							misState.Ships[ship.Uid].CurPos.MY+y,
 						),

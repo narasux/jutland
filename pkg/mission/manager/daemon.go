@@ -17,6 +17,7 @@ import (
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -57,7 +58,7 @@ func (m *MissionManager) updateBuildings() {
 			}
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3
-			targetPos := objCommon.NewMapPos(rp.RallyPos.MX+x, rp.RallyPos.MY+y)
+			targetPos := objPos.New(rp.RallyPos.MX+x, rp.RallyPos.MY+y)
 			m.instructionSet.Add(instr.NewShipMove(ship.Uid, targetPos))
 		}
 	}

@@ -10,6 +10,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
@@ -64,9 +65,9 @@ type Bullet struct {
 	// 唯一标识
 	Uid string
 	// 当前位置
-	CurPos objCommon.MapPos
+	CurPos objPos.MapPos
 	// 目标位置
-	TargetPos objCommon.MapPos
+	TargetPos objPos.MapPos
 	// 旋转角度
 	Rotation float64
 	// 速度
@@ -151,7 +152,7 @@ var BulletMap = map[string]*Bullet{}
 // New 新建弹药
 func New(
 	name string,
-	curPos, targetPos objCommon.MapPos,
+	curPos, targetPos objPos.MapPos,
 	shooterUid string,
 	shooterObjType objCommon.ObjectType,
 	shooterBelongPlayer faction.Player,

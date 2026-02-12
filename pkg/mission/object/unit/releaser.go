@@ -9,6 +9,7 @@ import (
 
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -39,7 +40,7 @@ type Releaser struct {
 var _ AttackWeapon = (*Releaser)(nil)
 
 // InShotRange 是否在射程 & 射界内
-func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objCommon.MapPos) bool {
+func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos.MapPos) bool {
 	// 不在射程内，不可发射
 	if curPos.Distance(targetPos) > r.Range {
 		return false
@@ -66,7 +67,7 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 		sState.CurPos.RX, sState.CurPos.RY, r.BulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
+	targetPos := objPos.NewR(targetRx, targetRY)
 
 	if !r.InShotRange(sState.CurRotation, sState.CurPos, targetPos) {
 		return

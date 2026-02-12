@@ -1,4 +1,4 @@
-package common
+package position
 
 import (
 	"fmt"
@@ -15,13 +15,13 @@ type MapPos struct {
 	RX, RY float64
 }
 
-// NewMapPos 使用 MX，MY 新建 MapPos
-func NewMapPos(mx, my int) MapPos {
+// New 使用 MX，MY 新建 MapPos
+func New(mx, my int) MapPos {
 	return MapPos{MX: mx, MY: my, RX: float64(mx), RY: float64(my)}
 }
 
-// NewMapPosR 使用 RX，RY 新建 MapPos
-func NewMapPosR(rx, ry float64) MapPos {
+// NewR 使用 RX，RY 新建 MapPos
+func NewR(rx, ry float64) MapPos {
 	return MapPos{MX: int(math.Floor(rx)), MY: int(math.Floor(ry)), RX: rx, RY: ry}
 }
 

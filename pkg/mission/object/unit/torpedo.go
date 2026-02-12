@@ -10,6 +10,7 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -66,7 +67,7 @@ func (lc *TorpedoLauncher) Reloaded() bool {
 }
 
 // InShotRange 是否在射程 & 射界内
-func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPos objCommon.MapPos) bool {
+func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPos objPos.MapPos) bool {
 	// 不在射程内，不可发射
 	if curPos.Distance(targetPos) > lc.Range {
 		return false
@@ -99,7 +100,7 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 		sState.CurPos.RX, sState.CurPos.RY, lc.BulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
+	targetPos := objPos.NewR(targetRx, targetRY)
 
 	if !lc.InShotRange(sState.CurRotation, curPos, targetPos) {
 		return

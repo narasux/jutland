@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
 
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/resources/font"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
@@ -25,18 +25,18 @@ const (
 // Mark 标记（如目标地点等，会存在一定时间后消失）
 type Mark struct {
 	ID   ID
-	Pos  objCommon.MapPos
+	Pos  objPos.MapPos
 	Img  *ebiten.Image
 	Life int
 }
 
 // NewImg 创建图片类型标记
-func NewImg(id ID, pos objCommon.MapPos, img *ebiten.Image, life int) *Mark {
+func NewImg(id ID, pos objPos.MapPos, img *ebiten.Image, life int) *Mark {
 	return &Mark{ID: id, Pos: pos, Img: img, Life: life}
 }
 
 // NewText 创建文字类型标记
-func NewText(pos objCommon.MapPos, text string, fontSize float64, clr color.Color, life int) *Mark {
+func NewText(pos objPos.MapPos, text string, fontSize float64, clr color.Color, life int) *Mark {
 	img := textureImg.GetText(text, font.Hang, fontSize, clr)
 	return &Mark{ID: ID(uuid.New().String()), Pos: pos, Img: img, Life: life}
 }

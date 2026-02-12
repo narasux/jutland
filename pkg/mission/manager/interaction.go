@@ -9,6 +9,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
@@ -37,7 +38,7 @@ func (m *MissionManager) updateInstructions() {
 
 // 计算下一帧相机位置
 func (m *MissionManager) updateCameraPosition() {
-	var nextPos *objCommon.MapPos
+	var nextPos *objPos.MapPos
 	// 游戏模式 / 全屏地图模式走不同的相机位置更新模式
 	if m.state.MissionStatus == state.MissionInMap {
 		nextPos = m.getNextCameraPosInFullMapMode()
@@ -63,7 +64,7 @@ func (m *MissionManager) updateCameraPosition() {
 
 // 计算下一帧相机位置（全屏地图模式）
 // 全屏模式，鼠标点击可以移动相机位置（点击位置居中）
-func (m *MissionManager) getNextCameraPosInFullMapMode() *objCommon.MapPos {
+func (m *MissionManager) getNextCameraPosInFullMapMode() *objPos.MapPos {
 	if !inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
 		return nil
 	}
@@ -87,7 +88,7 @@ func (m *MissionManager) getNextCameraPosInFullMapMode() *objCommon.MapPos {
 
 // 计算下一帧相机位置（游戏模式）
 // 游戏模式，可以通过 hover 鼠标在边缘上，移动相机
-func (m *MissionManager) getNextCameraPosInGameMode() *objCommon.MapPos {
+func (m *MissionManager) getNextCameraPosInGameMode() *objPos.MapPos {
 	pos := m.state.Camera.Pos.Copy()
 	// TODO 支持在游戏设置内修改相机移动速度
 	moveSpeed := m.state.Camera.BaseMoveSpeed

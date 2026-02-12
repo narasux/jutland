@@ -7,6 +7,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	"github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
@@ -93,7 +94,7 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 }
 
 // 探测游戏地图上的鼠标按键点击
-func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *objCommon.MapPos {
+func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *position.MapPos {
 	// 鼠标按键没有点击，直接跳过
 	if !inpututil.IsMouseButtonJustPressed(button) {
 		return nil
@@ -102,11 +103,11 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 }
 
 // 探测当前鼠标在地图上的位置
-func DetectCursorPosOnMap(misState *state.MissionState) *objCommon.MapPos {
+func DetectCursorPosOnMap(misState *state.MissionState) *position.MapPos {
 	sx, sy := ebiten.CursorPosition()
 	rx := misState.Camera.Pos.RX + float64(sx)/constants.MapBlockSize
 	ry := misState.Camera.Pos.RY + float64(sy)/constants.MapBlockSize
-	return lo.ToPtr(objCommon.NewMapPosR(rx, ry))
+	return lo.ToPtr(position.NewR(rx, ry))
 }
 
 // 键盘按键与组 ID 的映射关系

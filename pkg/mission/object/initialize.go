@@ -11,7 +11,6 @@ import (
 
 	"github.com/narasux/jutland/pkg/config"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	ObjRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
@@ -127,24 +126,24 @@ func initPlaneMap() {
 		for _, gunMD := range p.Weapon.GunsMD {
 			p.Weapon.Guns = append(p.Weapon.Guns, objUnit.NewGun(
 				gunMD.Name, gunMD.PosPercent,
-				objCommon.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
-				objCommon.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
 		// 炸弹
 		for _, bombMD := range p.Weapon.BombsMD {
 			p.Weapon.Bombs = append(p.Weapon.Bombs, objUnit.NewReleaser(
 				bombMD.Name, bombMD.PosPercent,
-				objCommon.FiringArc{Start: bombMD.LeftFiringArc[0], End: bombMD.LeftFiringArc[1]},
-				objCommon.FiringArc{Start: bombMD.RightFiringArc[0], End: bombMD.RightFiringArc[1]},
+				objUnit.FiringArc{Start: bombMD.LeftFiringArc[0], End: bombMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: bombMD.RightFiringArc[0], End: bombMD.RightFiringArc[1]},
 			))
 		}
 		// 鱼雷
 		for _, torpedoMD := range p.Weapon.TorpedoesMD {
 			p.Weapon.Torpedoes = append(p.Weapon.Torpedoes, objUnit.NewReleaser(
 				torpedoMD.Name, torpedoMD.PosPercent,
-				objCommon.FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
-				objCommon.FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
+				objUnit.FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
 			))
 		}
 		// 计算最大射程
@@ -197,8 +196,8 @@ func initShipMap() {
 		for _, gunMD := range s.Weapon.MainGunsMD {
 			s.Weapon.MainGuns = append(s.Weapon.MainGuns, objUnit.NewGun(
 				gunMD.Name, gunMD.PosPercent,
-				objCommon.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
-				objCommon.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
 		s.Weapon.HasMainGun = len(s.Weapon.MainGuns) > 0
@@ -206,8 +205,8 @@ func initShipMap() {
 		for _, gunMD := range s.Weapon.SecondaryGunsMD {
 			s.Weapon.SecondaryGuns = append(s.Weapon.SecondaryGuns, objUnit.NewGun(
 				gunMD.Name, gunMD.PosPercent,
-				objCommon.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
-				objCommon.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
 		s.Weapon.HasSecondaryGun = len(s.Weapon.SecondaryGuns) > 0
@@ -215,8 +214,8 @@ func initShipMap() {
 		for _, gunMD := range s.Weapon.AntiAircraftGunsMD {
 			s.Weapon.AntiAircraftGuns = append(s.Weapon.AntiAircraftGuns, objUnit.NewGun(
 				gunMD.Name, gunMD.PosPercent,
-				objCommon.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
-				objCommon.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.LeftFiringArc[0], End: gunMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: gunMD.RightFiringArc[0], End: gunMD.RightFiringArc[1]},
 			))
 		}
 		s.Weapon.HasAntiAircraftGun = len(s.Weapon.AntiAircraftGuns) > 0
@@ -224,8 +223,8 @@ func initShipMap() {
 		for _, torpedoMD := range s.Weapon.TorpedoesMD {
 			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, objUnit.NewTorpedoLauncher(
 				torpedoMD.Name, torpedoMD.PosPercent,
-				objCommon.FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
-				objCommon.FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
+				objUnit.FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
 			))
 		}
 		s.Weapon.HasTorpedo = len(s.Weapon.Torpedoes) > 0

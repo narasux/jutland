@@ -7,7 +7,7 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
@@ -35,10 +35,10 @@ func (s *OncomingShip) Update() (finished bool) {
 // ReinforcePoint 增援点
 type ReinforcePoint struct {
 	Uid      string
-	Pos      objCommon.MapPos
+	Pos      objPos.MapPos
 	Rotation float64
 	// 集结点 FIXME 支持自定义集结点
-	RallyPos objCommon.MapPos
+	RallyPos objPos.MapPos
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 	// 当前被选中的战舰索引
@@ -105,9 +105,9 @@ func (p *ReinforcePoint) Progress() int {
 
 // NewReinforcePoint ...
 func NewReinforcePoint(
-	pos objCommon.MapPos,
+	pos objPos.MapPos,
 	rotation float64,
-	rallyPos objCommon.MapPos,
+	rallyPos objPos.MapPos,
 	belongPlayer faction.Player,
 	maxOncomingShip int,
 	providedShipNames []string,
@@ -126,7 +126,7 @@ func NewReinforcePoint(
 
 // LoadingOilShip 装载石油的货轮
 type LoadingOilShip struct {
-	CurPos objCommon.MapPos
+	CurPos objPos.MapPos
 	// 资金产量
 	FundYield int
 	// 装载耗时
@@ -157,7 +157,7 @@ func (s *LoadingOilShip) Update() (finished bool) {
 // OilPlatform 油井
 type OilPlatform struct {
 	Uid             string
-	Pos             objCommon.MapPos
+	Pos             objPos.MapPos
 	Radius          int
 	Yield           int
 	LoadingOilShips map[string]*LoadingOilShip
@@ -181,7 +181,7 @@ func (p *OilPlatform) RemoveShip(shipUid string) {
 }
 
 // NewOilPlatform ...
-func NewOilPlatform(pos objCommon.MapPos, radius int, yield int) *OilPlatform {
+func NewOilPlatform(pos objPos.MapPos, radius int, yield int) *OilPlatform {
 	return &OilPlatform{
 		Uid:             uuid.NewString(),
 		Pos:             pos,

@@ -13,6 +13,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
@@ -71,7 +72,7 @@ type Plane struct {
 	// 当前生命值
 	CurHP float64
 	// 当前位置
-	CurPos objCommon.MapPos
+	CurPos objPos.MapPos
 	// 当前高度 TODO 是否引入高度概念？
 	CurHeight float64
 	// 旋转角度
@@ -187,7 +188,7 @@ func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
 }
 
 // MoveTo 移动到指定位置
-func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objCommon.MapPos) {
+func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if p.CurHP <= 0 {
 		return
@@ -247,7 +248,7 @@ var PlaneMap = map[string]*Plane{}
 // NewPlane 生成飞机
 func NewPlane(
 	name string,
-	curPos objCommon.MapPos,
+	curPos objPos.MapPos,
 	rotation float64,
 	shipUid string,
 	player faction.Player,

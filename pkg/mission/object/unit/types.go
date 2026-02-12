@@ -4,11 +4,12 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
 // UnitMovementState 单位机动状态
 type UnitMovementState struct {
-	CurPos      objCommon.MapPos
+	CurPos      objPos.MapPos
 	CurRotation float64
 	CurSpeed    float64
 }
