@@ -14,6 +14,7 @@ import (
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/mission/manager"
+	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"

@@ -1,4 +1,4 @@
-package object
+package initialize
 
 import (
 	"fmt"
@@ -43,6 +43,7 @@ func initBulletMap() {
 	for _, b := range bullets {
 		objBullet.BulletMap[b.Name] = &b
 	}
+	log.Println("bullets data loaded from json5 file")
 }
 
 func initGunMap() {
@@ -64,6 +65,7 @@ func initGunMap() {
 		g.BulletSpeed /= 4000
 		objUnit.GunMap[g.Name] = &g
 	}
+	log.Println("guns data loaded from json5 file")
 }
 
 func initTorpedoLauncherMap() {
@@ -85,6 +87,7 @@ func initTorpedoLauncherMap() {
 		lc.BulletSpeed /= 600
 		objUnit.TorpedoLauncherMap[lc.Name] = &lc
 	}
+	log.Println("torpedo launchers data loaded from json5 file")
 }
 
 func initReleaserMap() {
@@ -105,6 +108,7 @@ func initReleaserMap() {
 		r.BulletSpeed /= 600
 		objUnit.ReleaserMap[r.Name] = &r
 	}
+	log.Println("releasers data loaded from json5 file")
 }
 
 func initPlaneMap() {
@@ -175,6 +179,7 @@ func initPlaneMap() {
 		p.DamageReduction = min(1, p.DamageReduction)
 		objUnit.PlaneMap[p.Name] = &p
 	}
+	log.Println("planes data loaded from json5 file")
 }
 
 func initShipMap() {
@@ -273,6 +278,7 @@ func initShipMap() {
 		objUnit.ShipMap[s.Name] = &s
 		objUnit.AllShipNames = append(objUnit.AllShipNames, s.Name)
 	}
+	log.Println("ships data loaded from json5 file")
 }
 
 func initReferenceMap() {
@@ -293,4 +299,5 @@ func initReferenceMap() {
 	for _, ref := range references {
 		ObjRef.SetReference(ref.Name, &ref)
 	}
+	log.Println("references data loaded from json5 file")
 }

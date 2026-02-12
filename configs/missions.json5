@@ -579,7 +579,7 @@
           "lowa",
           "lexington",
           "south_dakota",
-          "amaterasu",
+          "edo",
           "satsuma",
           "yamato",
           "kongo",
@@ -775,7 +775,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "amaterasu",
+        name: "edo",
         pos: [35, 39],
         rotation: 90,
         belongPlayer: "HA"
