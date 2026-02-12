@@ -8,7 +8,11 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	"github.com/narasux/jutland/pkg/mission/object"
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
@@ -61,31 +65,31 @@ type MissionState struct {
 	// 被选中的增援点
 	SelectedReinforcePointUid string
 	// 增援点信息
-	ReinforcePoints map[string]*obj.ReinforcePoint
+	ReinforcePoints map[string]*objBuilding.ReinforcePoint
 	// 被选中的增援战舰名称
 	SelectedSummonShipName string
 	// 油井信息
-	OilPlatforms map[string]*obj.OilPlatform
+	OilPlatforms map[string]*objBuilding.OilPlatform
 	// 战舰信息（Key: Uid）
-	Ships map[string]*obj.BattleShip
+	Ships map[string]*objUnit.BattleShip
 	// 战舰 Uid 生成器
-	ShipUidGenerators map[faction.Player]*obj.ShipUidGenerator
+	ShipUidGenerators map[faction.Player]*objUnit.ShipUidGenerator
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
 	// 当前被选中的编组
-	SelectedGroupID obj.GroupID
+	SelectedGroupID objCommon.GroupID
 	// 被摧毁的战舰
-	DestroyedShips []*obj.BattleShip
+	DestroyedShips []*objUnit.BattleShip
 	// 被摧毁的战机
-	DestroyedPlanes []*obj.Plane
+	DestroyedPlanes []*objUnit.Plane
 	// 战舰尾流
-	Trails []*obj.Trail
+	Trails []*objBullet.Trail
 	// 飞机
-	Planes map[string]*obj.Plane
+	Planes map[string]*objUnit.Plane
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
-	ForwardingBullets []*obj.Bullet
+	ForwardingBullets []*objBullet.Bullet
 	// 游戏标识
-	GameMarks map[obj.MarkID]*obj.Mark
+	GameMarks map[object.MarkID]*object.Mark
 	// DebugFlags 调试标识
 	DebugFlags DebugFlags
 }
@@ -99,7 +103,7 @@ func (s *MissionState) CameraPosBorder() (w float64, h float64) {
 
 // CountShips 对同类战舰进行计数
 func (s *MissionState) Fleet(player faction.Player) Fleet {
-	ships := lo.Filter(lo.Values(s.Ships), func(ship *obj.BattleShip, _ int) bool {
+	ships := lo.Filter(lo.Values(s.Ships), func(ship *objUnit.BattleShip, _ int) bool {
 		return ship.BelongPlayer == player
 	})
 
@@ -126,14 +130,14 @@ func NewMissionState(mission string) *MissionState {
 	missionMD := metadata.Get(mission)
 	misLayout := layout.NewScreenLayout()
 	// 初始化战舰 Uid 生成器
-	shipUidGenerators := map[faction.Player]*obj.ShipUidGenerator{
-		faction.HumanAlpha:    obj.NewShipUidGenerator(faction.HumanAlpha),
-		faction.ComputerAlpha: obj.NewShipUidGenerator(faction.ComputerAlpha),
+	shipUidGenerators := map[faction.Player]*objUnit.ShipUidGenerator{
+		faction.HumanAlpha:    objUnit.NewShipUidGenerator(faction.HumanAlpha),
+		faction.ComputerAlpha: objUnit.NewShipUidGenerator(faction.ComputerAlpha),
 	}
 	// 初始化战舰
-	ships := map[string]*obj.BattleShip{}
+	ships := map[string]*objUnit.BattleShip{}
 	for _, md := range missionMD.InitShips {
-		ship := obj.NewShip(
+		ship := objUnit.NewShip(
 			shipUidGenerators[md.BelongPlayer],
 			md.ShipName,
 			md.Pos,
@@ -144,9 +148,9 @@ func NewMissionState(mission string) *MissionState {
 	}
 	// 初始化增援点
 	selectedReinforcePointUid := ""
-	reinforcePoints := map[string]*obj.ReinforcePoint{}
+	reinforcePoints := map[string]*objBuilding.ReinforcePoint{}
 	for _, md := range missionMD.InitReinforcePoints {
-		rp := obj.NewReinforcePoint(
+		rp := objBuilding.NewReinforcePoint(
 			md.Pos,
 			md.Rotation,
 			md.RallyPos,
@@ -160,9 +164,9 @@ func NewMissionState(mission string) *MissionState {
 		}
 	}
 	// 初始化油井
-	oilPlatforms := map[string]*obj.OilPlatform{}
+	oilPlatforms := map[string]*objBuilding.OilPlatform{}
 	for _, md := range missionMD.InitOilPlatforms {
-		op := obj.NewOilPlatform(md.Pos, md.Radius, md.Yield)
+		op := objBuilding.NewOilPlatform(md.Pos, md.Radius, md.Yield)
 		oilPlatforms[op.Uid] = op
 	}
 
@@ -200,12 +204,12 @@ func NewMissionState(mission string) *MissionState {
 		ShipUidGenerators:         shipUidGenerators,
 		Ships:                     ships,
 		SelectedShips:             []string{},
-		SelectedGroupID:           obj.GroupIDNone,
-		DestroyedShips:            []*obj.BattleShip{},
-		DestroyedPlanes:           []*obj.Plane{},
-		Trails:                    []*obj.Trail{},
-		ForwardingBullets:         []*obj.Bullet{},
-		Planes:                    map[string]*obj.Plane{},
-		GameMarks:                 map[obj.MarkID]*obj.Mark{},
+		SelectedGroupID:           objCommon.GroupIDNone,
+		DestroyedShips:            []*objUnit.BattleShip{},
+		DestroyedPlanes:           []*objUnit.Plane{},
+		Trails:                    []*objBullet.Trail{},
+		ForwardingBullets:         []*objBullet.Bullet{},
+		Planes:                    map[string]*objUnit.Plane{},
+		GameMarks:                 map[object.MarkID]*object.Mark{},
 	}
 }

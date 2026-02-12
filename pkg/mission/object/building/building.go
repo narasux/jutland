@@ -1,4 +1,4 @@
-package object
+package building
 
 import (
 	"slices"
@@ -7,6 +7,8 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
 // OncomingShip 增援中的战舰
@@ -33,10 +35,10 @@ func (s *OncomingShip) Update() (finished bool) {
 // ReinforcePoint 增援点
 type ReinforcePoint struct {
 	Uid      string
-	Pos      MapPos
+	Pos      objCommon.MapPos
 	Rotation float64
 	// 集结点 FIXME 支持自定义集结点
-	RallyPos MapPos
+	RallyPos objCommon.MapPos
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 	// 当前被选中的战舰索引
@@ -59,7 +61,7 @@ func (p *ReinforcePoint) Summon(shipName string) {
 		return
 	}
 
-	fundsCost, timeCost := GetShipCost(shipName)
+	fundsCost, timeCost := objUnit.GetShipCost(shipName)
 	p.OncomingShips = append(p.OncomingShips, &OncomingShip{
 		Name: shipName, FundsCost: fundsCost, TimeCost: timeCost,
 	})
@@ -67,8 +69,8 @@ func (p *ReinforcePoint) Summon(shipName string) {
 
 // Update ...
 func (p *ReinforcePoint) Update(
-	shipUidGenerator *ShipUidGenerator, curFunds int64,
-) *BattleShip {
+	shipUidGenerator *objUnit.ShipUidGenerator, curFunds int64,
+) *objUnit.BattleShip {
 	if len(p.OncomingShips) == 0 {
 		return nil
 	}
@@ -81,7 +83,7 @@ func (p *ReinforcePoint) Update(
 	// 增援进度计算
 	if finished := oncomingShip.Update(); finished {
 		p.OncomingShips = p.OncomingShips[1:]
-		return NewShip(
+		return objUnit.NewShip(
 			shipUidGenerator,
 			oncomingShip.Name,
 			// FIXME 支持计算位置而不是固定
@@ -103,9 +105,9 @@ func (p *ReinforcePoint) Progress() int {
 
 // NewReinforcePoint ...
 func NewReinforcePoint(
-	pos MapPos,
+	pos objCommon.MapPos,
 	rotation float64,
-	rallyPos MapPos,
+	rallyPos objCommon.MapPos,
 	belongPlayer faction.Player,
 	maxOncomingShip int,
 	providedShipNames []string,
@@ -124,7 +126,7 @@ func NewReinforcePoint(
 
 // LoadingOilShip 装载石油的货轮
 type LoadingOilShip struct {
-	CurPos MapPos
+	CurPos objCommon.MapPos
 	// 资金产量
 	FundYield int
 	// 装载耗时
@@ -155,14 +157,14 @@ func (s *LoadingOilShip) Update() (finished bool) {
 // OilPlatform 油井
 type OilPlatform struct {
 	Uid             string
-	Pos             MapPos
+	Pos             objCommon.MapPos
 	Radius          int
 	Yield           int
 	LoadingOilShips map[string]*LoadingOilShip
 }
 
 // AddShip 添加货轮
-func (p *OilPlatform) AddShip(ship *BattleShip) {
+func (p *OilPlatform) AddShip(ship *objUnit.BattleShip) {
 	if _, ok := p.LoadingOilShips[ship.Uid]; !ok {
 		// TODO 目前装载耗时固定为 5s
 		p.LoadingOilShips[ship.Uid] = &LoadingOilShip{
@@ -179,7 +181,7 @@ func (p *OilPlatform) RemoveShip(shipUid string) {
 }
 
 // NewOilPlatform ...
-func NewOilPlatform(pos MapPos, radius int, yield int) *OilPlatform {
+func NewOilPlatform(pos objCommon.MapPos, radius int, yield int) *OilPlatform {
 	return &OilPlatform{
 		Uid:             uuid.NewString(),
 		Pos:             pos,

@@ -1,4 +1,4 @@
-package object
+package unit
 
 import (
 	"log"
@@ -8,6 +8,8 @@ import (
 
 	"github.com/mohae/deepcopy"
 	"github.com/narasux/jutland/pkg/common/constants"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -19,7 +21,7 @@ type Gun struct {
 	BulletName string `json:"bulletName"`
 	// 单次抛射炮弹数量
 	BulletCount int `json:"bulletCount"`
-	// 装填时间（单位: s)
+	// 装填时间（单位: s）
 	ReloadTime float64 `json:"reloadTime"`
 	// 射程
 	Range float64 `json:"range"`
@@ -49,11 +51,11 @@ type Gun struct {
 var _ AttackWeapon = (*Gun)(nil)
 
 // IsAvailableAntiType 是否能反制该类型
-func (g *Gun) IsAvailableAntiType(objType ObjectType) bool {
-	if g.AntiAircraft && objType == ObjectTypePlane {
+func (g *Gun) IsAvailableAntiType(objType objCommon.ObjectType) bool {
+	if g.AntiAircraft && objType == objCommon.ObjectTypePlane {
 		return true
 	}
-	if g.AntiShip && objType == ObjectTypeShip {
+	if g.AntiShip && objType == objCommon.ObjectTypeShip {
 		return true
 	}
 	return false
@@ -65,7 +67,7 @@ func (g *Gun) Reloaded() bool {
 }
 
 // InShotRange 是否在射程 / 射界内
-func (g *Gun) InShotRange(shipCurRotation float64, curPos, targetPos MapPos) bool {
+func (g *Gun) InShotRange(shipCurRotation float64, curPos, targetPos objCommon.MapPos) bool {
 	// 不在射程内，不可发射
 	if curPos.Distance(targetPos) > g.Range {
 		return false
@@ -79,7 +81,7 @@ func (g *Gun) InShotRange(shipCurRotation float64, curPos, targetPos MapPos) boo
 }
 
 // Fire 发射
-func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
+func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
 	// 未启用 / 重新装填中 / 对象类型不匹配，不可发射
 	if g.Disable || !g.Reloaded() || !g.IsAvailableAntiType(enemy.ObjType()) {
 		return
@@ -98,7 +100,7 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 		sState.CurPos.RX, sState.CurPos.RY, g.BulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	targetPos := NewMapPosR(targetRx, targetRY)
+	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
 
 	if !g.InShotRange(sState.CurRotation, curPos, targetPos) {
 		return
@@ -112,16 +114,16 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 	rangePercent := distance / g.Range
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
-	shotType := BulletShotTypeArcing
+	shotType := objBullet.BulletShotTypeArcing
 	// 某些情况下使用直射
 	if g.Name == "RailGun" {
-		shotType = BulletShotTypeDirect
+		shotType = objBullet.BulletShotTypeDirect
 	} else {
-		diameter := bulletMap[g.BulletName].Diameter
+		diameter := objBullet.BulletMap[g.BulletName].Diameter
 		if rangePercent < 0.65 || diameter <= 100 ||
 			(diameter <= 200 && rangePercent < 0.8) ||
 			(diameter <= 300 && rangePercent < 0.65) {
-			shotType = BulletShotTypeDirect
+			shotType = objBullet.BulletShotTypeDirect
 		}
 	}
 
@@ -130,19 +132,20 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 		// rand.Intn(3) - 1 算方向，rand.Float64() 算距离
 		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
-		bullets = append(bullets, NewBullets(
-			g.BulletName, curPos, pos, shooter, shotType,
-			enemy.ObjType(), g.BulletSpeed, life,
+		bullets = append(bullets, objBullet.New(
+			g.BulletName, curPos, pos,
+			shooter.ID(), shooter.ObjType(), shooter.Player(),
+			shotType, enemy.ObjType(), g.BulletSpeed, life,
 		))
 	}
 
 	return bullets
 }
 
-var gunMap = map[string]*Gun{}
+var GunMap = map[string]*Gun{}
 
-func newGun(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Gun {
-	gun, ok := gunMap[name]
+func NewGun(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Gun {
+	gun, ok := GunMap[name]
 	if !ok {
 		log.Fatalf("gun %s no found", name)
 	}

@@ -5,7 +5,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -13,13 +14,13 @@ import (
 // PlaneAttack 攻击
 type PlaneAttack struct {
 	planeUid      string
-	targetObjType obj.ObjectType
+	targetObjType objCommon.ObjectType
 	targetUid     string
 	status        InstrStatus
 }
 
 // NewPlaneAttack ...
-func NewPlaneAttack(planeUid string, targetObjType obj.ObjectType, targetUid string) *PlaneAttack {
+func NewPlaneAttack(planeUid string, targetObjType objCommon.ObjectType, targetUid string) *PlaneAttack {
 	return &PlaneAttack{
 		planeUid:      planeUid,
 		targetObjType: targetObjType,
@@ -45,13 +46,13 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		return nil
 	}
 
-	var enemy obj.Hurtable
+	var enemy objUnit.Hurtable
 	var enemyExists bool
 	// 获取打击目标
 	switch i.targetObjType {
-	case obj.ObjectTypeShip:
+	case objCommon.ObjectTypeShip:
 		enemy, enemyExists = missionState.Ships[i.targetUid]
-	case obj.ObjectTypePlane:
+	case objCommon.ObjectTypePlane:
 		enemy, enemyExists = missionState.Planes[i.targetUid]
 	default:
 		return errors.Errorf("invalid target obj type: %s", i.targetObjType)
@@ -69,7 +70,7 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		attacker.CurPos.RX, attacker.CurPos.RY, attacker.CurSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	targetPos := obj.NewMapPosR(targetRx, targetRY)
+	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
 	attacker.MoveTo(missionState.MissionMD.MapCfg, targetPos)
 	return nil
 }
@@ -125,7 +126,7 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 		plane.CurPos.RX, plane.CurPos.RY, plane.CurSpeed,
 		ship.CurPos.RX, ship.CurPos.RY, ship.CurSpeed, ship.CurRotation,
 	)
-	targetPos := obj.NewMapPosR(targetRx, targetRY)
+	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
 	plane.MoveTo(missionState.MissionMD.MapCfg, targetPos)
 	// 飞机到达载舰附近，判定已经完成
 	if plane.CurPos.Near(ship.CurPos, 1) {

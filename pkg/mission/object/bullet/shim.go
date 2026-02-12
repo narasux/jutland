@@ -1,4 +1,4 @@
-package object
+package bullet
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"

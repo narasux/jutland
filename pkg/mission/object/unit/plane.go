@@ -1,17 +1,18 @@
-package object
+package unit
 
 import (
 	"fmt"
 	"log"
 	"math"
 	"math/rand"
-	"slices"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
@@ -70,7 +71,7 @@ type Plane struct {
 	// 当前生命值
 	CurHP float64
 	// 当前位置
-	CurPos MapPos
+	CurPos objCommon.MapPos
 	// 当前高度 TODO 是否引入高度概念？
 	CurHeight float64
 	// 旋转角度
@@ -109,16 +110,16 @@ func (p *Plane) Player() faction.Player {
 }
 
 // ObjType 对象类型
-func (p *Plane) ObjType() ObjectType {
-	return ObjectTypePlane
+func (p *Plane) ObjType() objCommon.ObjectType {
+	return objCommon.ObjectTypePlane
 }
 
 // AttackObjType 攻击对象类型
-func (p *Plane) AttackObjType() ObjectType {
-	return getPlaneTargetObjType(p.Name)
+func (p *Plane) AttackObjType() objCommon.ObjectType {
+	return GetPlaneTargetObjType(p.Name)
 }
 
-// MovementState 机动状态
+// MovementState 机动状态（速度，方向，位置等信息）
 func (p *Plane) MovementState() UnitMovementState {
 	return UnitMovementState{
 		CurPos:      p.CurPos.Copy(),
@@ -127,23 +128,23 @@ func (p *Plane) MovementState() UnitMovementState {
 	}
 }
 
-// GeometricSize 几何尺寸
+// GeometricSize 几何尺寸（长、宽等信息）
 func (p *Plane) GeometricSize() UnitGeometricSize {
 	return UnitGeometricSize{Length: p.Length, Width: p.Width}
 }
 
 // Fire 向指定目标发射武器
-func (p *Plane) Fire(enemy Hurtable) (shotBullets []*Bullet) {
+func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	// 如果生命值为 0，那还 Fire 个锤子，直接返回
 	if p.CurHP <= 0 {
 		return
 	}
 	// 机炮不用记录射击时间
 	for i := 0; i < len(p.Weapon.Guns); i++ {
-		shotBullets = slices.Concat(shotBullets, p.Weapon.Guns[i].Fire(p, enemy))
+		shotBullets = append(shotBullets, p.Weapon.Guns[i].Fire(p, enemy)...)
 	}
 	// 释放器类武器，有最小的释放间隔限制，且目前只能攻击战舰（后面有导弹，火箭弹再说）
-	if enemy.ObjType() == ObjectTypeShip {
+	if enemy.ObjType() == objCommon.ObjectTypeShip {
 		timeNow := time.Now().UnixMilli()
 		if timeNow > p.Weapon.LatestReleaseAt+p.Weapon.ReleaseInterval*1e3 {
 			for _, releasers := range [2][]*Releaser{
@@ -151,7 +152,7 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*Bullet) {
 			} {
 				for i := 0; i < len(releasers); i++ {
 					if bullets := releasers[i].Fire(p, enemy); len(bullets) > 0 {
-						shotBullets = slices.Concat(shotBullets, bullets)
+						shotBullets = append(shotBullets, bullets...)
 						p.Weapon.LatestReleaseAt = timeNow
 						break
 					}
@@ -163,19 +164,19 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*Bullet) {
 }
 
 // HurtBy 受到伤害
-func (p *Plane) HurtBy(bullet *Bullet) {
+func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
 	// 计算真实伤害，飞机比较脆，所以伤害要再额外乘以 3
 	realDamage := bullet.Damage * (1 - p.DamageReduction) * 3
 
 	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
-	criticalType := CriticalTypeNone
+	criticalType := objBullet.CriticalTypeNone
 	randVal := rand.Float64()
 	if randVal < bullet.CriticalRate/10 {
 		realDamage *= 10
-		criticalType = CriticalTypeTenTimes
+		criticalType = objBullet.CriticalTypeTenTimes
 	} else if randVal < bullet.CriticalRate {
 		realDamage *= 3
-		criticalType = CriticalTypeThreeTimes
+		criticalType = objBullet.CriticalTypeThreeTimes
 	}
 
 	// 计算生命值 & 累计伤害
@@ -186,7 +187,7 @@ func (p *Plane) HurtBy(bullet *Bullet) {
 }
 
 // MoveTo 移动到指定位置
-func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos) {
+func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objCommon.MapPos) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if p.CurHP <= 0 {
 		return
@@ -241,17 +242,17 @@ func (p *Plane) MustReturn() bool {
 	return false
 }
 
-var planeMap = map[string]*Plane{}
+var PlaneMap = map[string]*Plane{}
 
 // NewPlane 生成飞机
 func NewPlane(
 	name string,
-	curPos MapPos,
+	curPos objCommon.MapPos,
 	rotation float64,
 	shipUid string,
 	player faction.Player,
 ) *Plane {
-	plane, ok := planeMap[name]
+	plane, ok := PlaneMap[name]
 	if !ok {
 		log.Fatalf("plane %s no found", name)
 	}
@@ -266,20 +267,20 @@ func NewPlane(
 	return &p
 }
 
-// getPlaneTargetObjType 获取飞机攻击目标类型
+// GetPlaneTargetObjType 获取飞机攻击目标类型
 // FIXME 目前这样很暴力，会导致战斗机只能打飞机，轰炸机只能打舰船
-func getPlaneTargetObjType(name string) ObjectType {
-	plane, ok := planeMap[name]
+func GetPlaneTargetObjType(name string) objCommon.ObjectType {
+	plane, ok := PlaneMap[name]
 	if !ok {
 		log.Fatalf("plane %s no found", name)
 	}
 	// 根据飞机类型获取目标类型
 	switch plane.Type {
 	case PlaneTypeFighter:
-		return ObjectTypePlane
+		return objCommon.ObjectTypePlane
 	case PlaneTypeDiveBomber, PlaneTypeTorpedoBomber:
-		return ObjectTypeShip
+		return objCommon.ObjectTypeShip
 	default:
-		return ObjectTypeNone
+		return objCommon.ObjectTypeNone
 	}
 }

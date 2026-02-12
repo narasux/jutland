@@ -14,7 +14,8 @@ import (
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/mission/manager"
-	"github.com/narasux/jutland/pkg/mission/object"
+	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -245,7 +246,7 @@ func (g *Game) handleGameCollection() error {
 	}
 	g.player.Play(newHarborFuncs[rand.Intn(len(newHarborFuncs))]())
 
-	allShipNames := object.GetAllShipNames()
+	allShipNames := objUnit.GetAllShipNames()
 	// 上下左右方向键 / 鼠标滚轮选择战舰
 	shipIndex := lo.IndexOf(allShipNames, g.curShipName)
 	_, wheelY := ebiten.Wheel()
@@ -264,7 +265,7 @@ func (g *Game) handleGameCollection() error {
 	g.curShipName = allShipNames[shipIndex]
 	g.objStates.RefLinks = nil
 
-	if ref := object.GetReference(g.curShipName); ref != nil {
+	if ref := objRef.GetReference(g.curShipName); ref != nil {
 		misLayout := layout.NewScreenLayout()
 		xOffset, yOffset := float64(misLayout.Width/3*2)+200, float64(misLayout.Height/5*3)+250
 

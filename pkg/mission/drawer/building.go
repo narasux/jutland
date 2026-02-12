@@ -9,7 +9,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	"github.com/narasux/jutland/pkg/mission/object"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -213,14 +213,14 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 	xOffset, yOffset = float64(75), float64(ms.Layout.Height)/3*2
 	text := fmt.Sprintf(
 		"%s (%d/%d)",
-		object.GetShipDisplayName(selectedShipName),
+		objUnit.GetShipDisplayName(selectedShipName),
 		rp.CurSelectedShipIndex+1,
 		len(rp.ProvidedShipNames),
 	)
 	d.drawText(screen, text, xOffset, yOffset, 40, font.Hang, colorx.White)
 
 	yOffset += 80
-	for idx, line := range object.GetShipDesc(selectedShipName) {
+	for idx, line := range objUnit.GetShipDesc(selectedShipName) {
 		d.drawText(screen, line, xOffset, yOffset+float64(idx)*50, 24, font.Hang, colorx.White)
 	}
 
@@ -231,7 +231,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 
 	yOffset += 80
 	for idx, ship := range rp.OncomingShips {
-		text = object.GetShipDisplayName(ship.Name)
+		text = objUnit.GetShipDisplayName(ship.Name)
 		if idx == 0 {
 			text = fmt.Sprintf("%s %.0f%%", text, ship.Progress)
 		} else if idx%5 == 0 {

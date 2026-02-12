@@ -1,25 +1,14 @@
-package object
+package unit
 
-import "github.com/narasux/jutland/pkg/mission/faction"
-
-type ObjectType int
-
-const (
-	// ObjectTypeNone 无
-	ObjectTypeNone ObjectType = iota
-	// ObjectTypeShip 战舰
-	ObjectTypeShip
-	// ObjectTypePlane 战机
-	ObjectTypePlane
-	// ObjectTypeWater 水面
-	ObjectTypeWater
-	// ObjectTypeLand 陆地
-	ObjectTypeLand
+import (
+	"github.com/narasux/jutland/pkg/mission/faction"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 )
 
 // UnitMovementState 单位机动状态
 type UnitMovementState struct {
-	CurPos      MapPos
+	CurPos      objCommon.MapPos
 	CurRotation float64
 	CurSpeed    float64
 }
@@ -29,6 +18,13 @@ type UnitGeometricSize struct {
 	Length float64
 	Width  float64
 }
+
+const (
+	// 顺时针
+	RotateFlagClockwise = 1
+	// 逆时针
+	RotateFlagAnticlockwise = -1
+)
 
 // BattleUnit 战斗单位
 type BattleUnit interface {
@@ -44,23 +40,24 @@ type BattleUnit interface {
 	GeometricSize() UnitGeometricSize
 }
 
+// 下面是向前声明的接口，用于避免循环引用
+// 实际类型在各自的包中定义
+
 // Hurtable 可被伤害的对象
 type Hurtable interface {
 	BattleUnit
-
-	ObjType() ObjectType
-	HurtBy(bullet *Bullet)
+	ObjType() objCommon.ObjectType
+	HurtBy(bullet *objBullet.Bullet)
 }
 
 // Attacker 攻击者
 type Attacker interface {
 	BattleUnit
-
-	ObjType() ObjectType
-	Fire(enemy Hurtable) []*Bullet
+	ObjType() objCommon.ObjectType
+	Fire(enemy Hurtable) []*objBullet.Bullet
 }
 
 // AttackWeapon 攻击性武器
 type AttackWeapon interface {
-	Fire(shooter Attacker, enemy Hurtable) []*Bullet
+	Fire(shooter Attacker, enemy Hurtable) []*objBullet.Bullet
 }

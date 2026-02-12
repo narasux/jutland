@@ -1,4 +1,4 @@
-package object
+package unit
 
 import (
 	"log"
@@ -8,6 +8,8 @@ import (
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -18,9 +20,9 @@ type TorpedoLauncher struct {
 	BulletName string `json:"bulletName"`
 	// 鱼雷数量
 	BulletCount int `json:"bulletCount"`
-	// 发射间隔（单位: s)
+	// 发射间隔（单位: s）
 	ShotInterval float64 `json:"shotInterval"`
-	// 装填时间（单位: s)
+	// 装填时间（单位: s）
 	ReloadTime float64 `json:"reloadTime"`
 	// 射程
 	Range float64 `json:"range"`
@@ -38,7 +40,7 @@ type TorpedoLauncher struct {
 	// 动态参数
 	// 当前鱼雷是否可用（如战损 / 禁用）
 	Disable bool
-	// 开始装填时间（时间戳)
+	// 开始装填时间（时间戳）
 	ReloadStartAt int64
 	// 最近发射时间（时间戳）
 	LatestFireAt int64
@@ -64,7 +66,7 @@ func (lc *TorpedoLauncher) Reloaded() bool {
 }
 
 // InShotRange 是否在射程 & 射界内
-func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPos MapPos) bool {
+func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPos objCommon.MapPos) bool {
 	// 不在射程内，不可发射
 	if curPos.Distance(targetPos) > lc.Range {
 		return false
@@ -78,9 +80,9 @@ func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPo
 }
 
 // Fire 发射
-func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
+func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
 	// 未启用 / 装填中 / 对象不是战舰，不可发射
-	if lc.Disable || !lc.Reloaded() || enemy.ObjType() != ObjectTypeShip {
+	if lc.Disable || !lc.Reloaded() || enemy.ObjType() != objCommon.ObjectTypeShip {
 		return
 	}
 
@@ -97,7 +99,7 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bu
 		sState.CurPos.RX, sState.CurPos.RY, lc.BulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	targetPos := NewMapPosR(targetRx, targetRY)
+	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
 
 	if !lc.InShotRange(sState.CurRotation, curPos, targetPos) {
 		return
@@ -117,16 +119,18 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bu
 	life := int(lc.Range/lc.BulletSpeed) + 5
 
 	// 注：鱼雷只有直射的情况，哪来的曲射？
-	return []*Bullet{NewBullets(
-		lc.BulletName, curPos, targetPos, shooter, BulletShotTypeDirect,
+	return []*objBullet.Bullet{objBullet.New(
+		lc.BulletName, curPos, targetPos,
+		shooter.ID(), shooter.ObjType(), shooter.Player(),
+		objBullet.BulletShotTypeDirect,
 		enemy.ObjType(), lc.BulletSpeed, life,
 	)}
 }
 
-var torpedoLauncherMap = map[string]*TorpedoLauncher{}
+var TorpedoLauncherMap = map[string]*TorpedoLauncher{}
 
-func newTorpedoLauncher(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *TorpedoLauncher {
-	launcher, ok := torpedoLauncherMap[name]
+func NewTorpedoLauncher(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *TorpedoLauncher {
+	launcher, ok := TorpedoLauncherMap[name]
 	if !ok {
 		log.Fatalf("torpedo launcher %s no found", name)
 	}

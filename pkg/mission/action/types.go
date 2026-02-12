@@ -1,6 +1,6 @@
 package action
 
-import obj "github.com/narasux/jutland/pkg/mission/object"
+import objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 
 // CursorHoverType 鼠标悬停动作
 type CursorHoverType string
@@ -40,13 +40,13 @@ const (
 // SelectedArea 选中的区域
 type SelectedArea struct {
 	// 地图位置
-	StartAt, CurAt obj.MapPos
+	StartAt, CurAt objCommon.MapPos
 	// 屏幕位置
 	StartX, StartY, CurX, CurY int
 }
 
 // Contain 判断某个位置是否在选中区域内
-func (a *SelectedArea) Contain(pos obj.MapPos) bool {
+func (a *SelectedArea) Contain(pos objCommon.MapPos) bool {
 	topLeftX, topLeftY := min(a.StartAt.RX, a.CurAt.RX), min(a.StartAt.RY, a.CurAt.RY)
 	bottomRightX, bottomRightY := max(a.StartAt.RX, a.CurAt.RX), max(a.StartAt.RY, a.CurAt.RY)
 

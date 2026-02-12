@@ -6,7 +6,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
-	"github.com/narasux/jutland/pkg/mission/object"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -71,9 +71,9 @@ func (c *BathtubWar) Match(cmd string) bool {
 func (c *BathtubWar) Exec(misState *state.MissionState) string {
 	curShips := lo.Values(misState.Ships)
 
-	misState.Ships = map[string]*object.BattleShip{}
+	misState.Ships = map[string]*objUnit.BattleShip{}
 	for _, ship := range curShips {
-		duck := object.NewShip(
+		duck := objUnit.NewShip(
 			misState.ShipUidGenerators[ship.BelongPlayer],
 			"duck",
 			ship.CurPos,
@@ -217,7 +217,7 @@ func (c *Expelliarmus) Match(cmd string) bool {
 func (c *Expelliarmus) Exec(misState *state.MissionState) string {
 	for _, ship := range misState.Ships {
 		if misState.Camera.Contains(ship.CurPos) && ship.BelongPlayer != misState.CurPlayer {
-			ship.Weapon = object.ShipWeapon{}
+			ship.Weapon = objUnit.ShipWeapon{}
 		}
 	}
 	return "Expelliarmus! (>.>)-o------(QAQ)"

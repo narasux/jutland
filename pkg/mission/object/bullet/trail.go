@@ -1,14 +1,15 @@
-package object
+package bullet
 
 import (
 	"image/color"
 
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
 // Trail 尾流（战舰，鱼雷，炮弹）
 type Trail struct {
-	Pos   MapPos
+	Pos   objCommon.MapPos
 	Shape textureImg.TrailShape
 	// 当前尺寸 & 尺寸扩散速度
 	CurSize       float64
@@ -24,9 +25,9 @@ type Trail struct {
 	Color color.Color
 }
 
-// 创建尾流对象
-func newTrail(
-	pos MapPos,
+// NewTrail 创建尾流对象
+func NewTrail(
+	pos objCommon.MapPos,
 	Shape textureImg.TrailShape,
 	size, diffusionRate float64,
 	life, lifeReductionRate float64,

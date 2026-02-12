@@ -1,45 +1,19 @@
-package object
+package unit
 
 import (
 	"fmt"
 	"math"
 	"math/rand"
-	"slices"
 
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/colorx"
-)
-
-// ShipType 战舰类型
-type ShipType string
-
-const (
-	// ShipTypeDefault 默认
-	ShipTypeDefault ShipType = "default"
-	// ShipTypeAircraftCarrier 航空母舰
-	ShipTypeAircraftCarrier ShipType = "aircraft_carrier"
-	// ShipTypeBattleShip 战列舰
-	ShipTypeBattleShip ShipType = "battleship"
-	// ShipTypeCruiser 巡洋舰
-	ShipTypeCruiser ShipType = "cruiser"
-	// ShipTypeDestroyer 驱逐舰
-	ShipTypeDestroyer ShipType = "destroyer"
-	// ShipTypeTorpedoBoat 鱼雷艇
-	ShipTypeTorpedoBoat ShipType = "torpedo_boat"
-	// ShipTypeCargo 货轮
-	ShipTypeCargo ShipType = "cargo"
-)
-
-const (
-	// 顺时针
-	RotateFlagClockwise = 1
-	// 逆时针
-	RotateFlagAnticlockwise = -1
 )
 
 // BattleShip 战舰
@@ -49,7 +23,7 @@ type BattleShip struct {
 	// 展示用名称
 	DisplayName string `json:"displayName"`
 	// 类别
-	Type ShipType `json:"type"`
+	Type objCommon.ShipType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
 	// 描述
@@ -87,13 +61,13 @@ type BattleShip struct {
 	// 当前生命值
 	CurHP float64
 	// 当前位置
-	CurPos MapPos
+	CurPos objCommon.MapPos
 	// 旋转角度
 	CurRotation float64
 	// 当前速度
 	CurSpeed float64
 	// 分组ID
-	GroupID GroupID
+	GroupID objCommon.GroupID
 	// 攻击目标（敌舰 Uid）
 	AttackTarget string
 
@@ -124,11 +98,11 @@ func (s *BattleShip) Player() faction.Player {
 }
 
 // ObjType 对象类型
-func (s *BattleShip) ObjType() ObjectType {
-	return ObjectTypeShip
+func (s *BattleShip) ObjType() objCommon.ObjectType {
+	return objCommon.ObjectTypeShip
 }
 
-// MovementState 机动状态
+// MovementState 机动状态（速度，方向，位置等信息）
 func (s *BattleShip) MovementState() UnitMovementState {
 	return UnitMovementState{
 		CurPos:      s.CurPos.Copy(),
@@ -137,7 +111,7 @@ func (s *BattleShip) MovementState() UnitMovementState {
 	}
 }
 
-// GeometricSize 几何尺寸
+// GeometricSize 几何尺寸（长、宽等信息）
 func (s *BattleShip) GeometricSize() UnitGeometricSize {
 	return UnitGeometricSize{Length: s.Length, Width: s.Width}
 }
@@ -204,31 +178,30 @@ func (s *BattleShip) Attack(shipUid string) {
 }
 
 // Fire 向指定目标发射武器
-func (s *BattleShip) Fire(enemy Hurtable) []*Bullet {
-	shotBullets := []*Bullet{}
+func (s *BattleShip) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	// 如果生命值为 0，那还 Fire 个锤子，直接返回
 	if s.CurHP <= 0 {
-		return shotBullets
+		return
 	}
 	for _, gun := range s.Weapon.MainGuns {
-		shotBullets = slices.Concat(shotBullets, gun.Fire(s, enemy))
+		shotBullets = append(shotBullets, gun.Fire(s, enemy)...)
 	}
 	for _, gun := range s.Weapon.SecondaryGuns {
-		shotBullets = slices.Concat(shotBullets, gun.Fire(s, enemy))
+		shotBullets = append(shotBullets, gun.Fire(s, enemy)...)
 	}
 	for _, gun := range s.Weapon.AntiAircraftGuns {
-		shotBullets = slices.Concat(shotBullets, gun.Fire(s, enemy))
+		shotBullets = append(shotBullets, gun.Fire(s, enemy)...)
 	}
 	for _, tp := range s.Weapon.Torpedoes {
-		shotBullets = slices.Concat(shotBullets, tp.Fire(s, enemy))
+		shotBullets = append(shotBullets, tp.Fire(s, enemy)...)
 	}
 	return shotBullets
 }
 
 // HurtBy 受到伤害
-func (s *BattleShip) HurtBy(bullet *Bullet) {
+func (s *BattleShip) HurtBy(bullet *objBullet.Bullet) {
 	realDamage := 0.0
-	if bullet.ShotType == BulletShotTypeDirect {
+	if bullet.ShotType == objBullet.BulletShotTypeDirect {
 		// 平射打击水平装甲带
 		realDamage = bullet.Damage * (1 - s.HorizontalDamageReduction)
 	} else {
@@ -237,14 +210,14 @@ func (s *BattleShip) HurtBy(bullet *Bullet) {
 	}
 
 	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
-	criticalType := CriticalTypeNone
+	criticalType := objBullet.CriticalTypeNone
 	randVal := rand.Float64()
 	if randVal < bullet.CriticalRate/10 {
 		realDamage *= 10
-		criticalType = CriticalTypeTenTimes
+		criticalType = objBullet.CriticalTypeTenTimes
 	} else if randVal < bullet.CriticalRate {
 		realDamage *= 3
-		criticalType = CriticalTypeThreeTimes
+		criticalType = objBullet.CriticalTypeThreeTimes
 	}
 
 	// 计算生命值 & 累计伤害
@@ -255,14 +228,14 @@ func (s *BattleShip) HurtBy(bullet *Bullet) {
 }
 
 // GenTrails 生成尾流
-func (s *BattleShip) GenTrails() []*Trail {
+func (s *BattleShip) GenTrails() []*objBullet.Trail {
 	if s.CurSpeed <= 0 {
 		return nil
 	}
 	// 水滴应该是特殊的尾流（蓝色光尾流，负扩散）
 	if s.TypeAbbr == "WaterDrop" {
-		return []*Trail{
-			newTrail(
+		return []*objBullet.Trail{
+			objBullet.NewTrail(
 				s.CurPos, textureImg.TrailShapeRect,
 				(0.4+(s.CurSpeed/s.MaxSpeed))*s.Width*0.5, -2,
 				s.Length/6+150*s.CurSpeed, 5,
@@ -271,7 +244,7 @@ func (s *BattleShip) GenTrails() []*Trail {
 		}
 	} else if s.TypeAbbr == "Molamola" {
 		// 翻车鱼暂时不提供尾流
-		return []*Trail{}
+		return []*objBullet.Trail{}
 	}
 
 	offset := s.Length / constants.MapBlockSize
@@ -284,14 +257,14 @@ func (s *BattleShip) GenTrails() []*Trail {
 	backPos.SubRx(sinVal * offset * 0.2)
 	backPos.AddRy(cosVal * offset * 0.2)
 
-	return []*Trail{
-		newTrail(
+	return []*objBullet.Trail{
+		objBullet.NewTrail(
 			frontPos, textureImg.TrailShapeCircle,
 			s.Width*0.6, 1.1,
 			s.Length/8+555*s.CurSpeed, 1,
 			0, 0, nil,
 		),
-		newTrail(
+		objBullet.NewTrail(
 			backPos, textureImg.TrailShapeCircle,
 			s.Width, 0.6,
 			s.Length/9+380*s.CurSpeed, 1.5,
@@ -306,7 +279,7 @@ func (s *BattleShip) CanOnLand() bool {
 }
 
 // MoveTo 移动到指定位置
-func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos, nearGoal bool) (arrive bool) {
+func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objCommon.MapPos, nearGoal bool) (arrive bool) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if s.CurHP <= 0 {
 		return true
@@ -357,33 +330,33 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos MapPos, nearGoal bo
 	return false
 }
 
-var shipMap = map[string]*BattleShip{}
+var ShipMap = map[string]*BattleShip{}
 
-var allShipNames = []string{}
+var AllShipNames = []string{}
 
 // NewShip 新建战舰
 func NewShip(
-	uidGenerator *ShipUidGenerator, name string, pos MapPos, rotation float64, player faction.Player,
+	uidGenerator *ShipUidGenerator, name string, pos objCommon.MapPos, rotation float64, player faction.Player,
 ) *BattleShip {
 	// FIXME-P1 小黄鸭太 Bug 了，需要默认禁用一些武器
-	s := deepcopy.Copy(*shipMap[name]).(BattleShip)
+	s := deepcopy.Copy(*ShipMap[name]).(BattleShip)
 	s.Uid = uidGenerator.Gen(s.TypeAbbr)
 	s.CurPos = pos
 	s.CurRotation = rotation
 	s.BelongPlayer = player
 	// 战舰默认不编组
-	s.GroupID = GroupIDNone
+	s.GroupID = objCommon.GroupIDNone
 	return &s
 }
 
 // GetAllShipNames 获取所有战舰名称
 func GetAllShipNames() []string {
-	return allShipNames
+	return AllShipNames
 }
 
 // GetShipDisplayName 获取战舰展示用名称
 func GetShipDisplayName(name string) string {
-	ship, ok := shipMap[name]
+	ship, ok := ShipMap[name]
 	if !ok {
 		return name
 	}
@@ -392,7 +365,7 @@ func GetShipDisplayName(name string) string {
 
 // GetShipCost 获取战舰成本
 func GetShipCost(name string) (fundsCost int64, timeCost int64) {
-	ship, ok := shipMap[name]
+	ship, ok := ShipMap[name]
 	if !ok {
 		return 0, 0
 	}
@@ -401,7 +374,7 @@ func GetShipCost(name string) (fundsCost int64, timeCost int64) {
 
 // GetShipDesc 获取战舰描述
 func GetShipDesc(name string) []string {
-	ship, ok := shipMap[name]
+	ship, ok := ShipMap[name]
 	if !ok {
 		return []string{}
 	}

@@ -1,4 +1,4 @@
-package object
+package unit
 
 import (
 	"log"
@@ -7,6 +7,8 @@ import (
 	"github.com/mohae/deepcopy"
 	"github.com/samber/lo"
 
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -17,7 +19,7 @@ type Releaser struct {
 	// 弹药名称
 	BulletName string `json:"bulletName"`
 	// 类别
-	Type ShipType `json:"type"`
+	Type objCommon.ShipType `json:"type"`
 	// 射程
 	Range float64 `json:"range"`
 	// 弹药速度
@@ -37,7 +39,7 @@ type Releaser struct {
 var _ AttackWeapon = (*Releaser)(nil)
 
 // InShotRange 是否在射程 & 射界内
-func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos MapPos) bool {
+func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objCommon.MapPos) bool {
 	// 不在射程内，不可发射
 	if curPos.Distance(targetPos) > r.Range {
 		return false
@@ -51,9 +53,9 @@ func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos MapPos
 }
 
 // Fire 发射
-func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
+func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
 	// 已释放 / 对象不是战舰，不可发射
-	if r.Released || enemy.ObjType() != ObjectTypeShip {
+	if r.Released || enemy.ObjType() != objCommon.ObjectTypeShip {
 		return
 	}
 
@@ -64,7 +66,7 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 		sState.CurPos.RX, sState.CurPos.RY, r.BulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
-	targetPos := NewMapPosR(targetRx, targetRY)
+	targetPos := objCommon.NewMapPosR(targetRx, targetRY)
 
 	if !r.InShotRange(sState.CurRotation, sState.CurPos, targetPos) {
 		return
@@ -73,21 +75,22 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*Bullet) {
 	// 成功释放弹药
 	r.Released = true
 	shotType := lo.Ternary(
-		GetBulletType(r.BulletName) == BulletTypeBomb,
-		BulletShotTypeArcing, BulletShotTypeDirect,
+		objBullet.GetBulletType(r.BulletName) == objBullet.BulletTypeBomb,
+		objBullet.BulletShotTypeArcing, objBullet.BulletShotTypeDirect,
 	)
 	life := int(r.Range/r.BulletSpeed) + 5
 
-	return []*Bullet{NewBullets(
+	return []*objBullet.Bullet{objBullet.New(
 		r.BulletName, sState.CurPos, targetPos,
-		shooter, shotType, enemy.ObjType(), r.BulletSpeed, life,
+		shooter.ID(), shooter.ObjType(), shooter.Player(),
+		shotType, enemy.ObjType(), r.BulletSpeed, life,
 	)}
 }
 
-var releaserMap = map[string]*Releaser{}
+var ReleaserMap = map[string]*Releaser{}
 
-func newReleaser(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Releaser {
-	releaser, ok := releaserMap[name]
+func NewReleaser(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Releaser {
+	releaser, ok := ReleaserMap[name]
 	if !ok {
 		log.Fatalf("releaser %s no found", name)
 	}

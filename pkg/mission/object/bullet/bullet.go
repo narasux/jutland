@@ -1,4 +1,4 @@
-package object
+package bullet
 
 import (
 	"log"
@@ -9,6 +9,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
@@ -63,9 +64,9 @@ type Bullet struct {
 	// 唯一标识
 	Uid string
 	// 当前位置
-	CurPos MapPos
+	CurPos objCommon.MapPos
 	// 目标位置
-	TargetPos MapPos
+	TargetPos objCommon.MapPos
 	// 旋转角度
 	Rotation float64
 	// 速度
@@ -73,14 +74,14 @@ type Bullet struct {
 	// 射击方式
 	ShotType BulletShotType
 	// 目标对象类型
-	TargetObjType ObjectType
+	TargetObjType objCommon.ObjectType
 	// 前进周期数
 	ForwardAge int
 
 	// 所属战舰/战机
 	Shooter string
 	// 所属对象类型
-	ShooterObjType ObjectType
+	ShooterObjType objCommon.ObjectType
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 
@@ -89,7 +90,7 @@ type Bullet struct {
 	// 造成暴击类型
 	CriticalType CriticalType
 	// 击中的对象类型
-	HitObjType ObjectType
+	HitObjType objCommon.ObjectType
 }
 
 // Forward 弹药前进
@@ -118,7 +119,7 @@ func (b *Bullet) Forward() {
 // GenTrail 生成尾流
 func (b *Bullet) GenTrails() []*Trail {
 	// 已经命中的没有尾流
-	if b.HitObjType != ObjectTypeNone {
+	if b.HitObjType != objCommon.ObjectTypeNone {
 		return nil
 	}
 	// 刚刚发射的不添加尾流
@@ -136,7 +137,7 @@ func (b *Bullet) GenTrails() []*Trail {
 	}
 	size := float64(GetImgWidth(b.Name, b.Type, b.Diameter))
 	return []*Trail{
-		newTrail(
+		NewTrail(
 			b.CurPos, textureImg.TrailShapeRect,
 			size, diffusionRate,
 			size*multipleSizeAsLife, lifeReductionRate,
@@ -145,19 +146,21 @@ func (b *Bullet) GenTrails() []*Trail {
 	}
 }
 
-var bulletMap = map[string]*Bullet{}
+var BulletMap = map[string]*Bullet{}
 
-// NewBullets 新建弹药
-func NewBullets(
+// New 新建弹药
+func New(
 	name string,
-	curPos, targetPos MapPos,
-	shooter Attacker,
+	curPos, targetPos objCommon.MapPos,
+	shooterUid string,
+	shooterObjType objCommon.ObjectType,
+	shooterBelongPlayer faction.Player,
 	shotType BulletShotType,
-	targetObjectType ObjectType,
+	targetObjectType objCommon.ObjectType,
 	speed float64,
 	life int,
 ) *Bullet {
-	b := deepcopy.Copy(*bulletMap[name]).(Bullet)
+	b := deepcopy.Copy(*BulletMap[name]).(Bullet)
 
 	b.Uid = uuid.New().String()
 	b.CurPos = curPos
@@ -169,18 +172,18 @@ func NewBullets(
 	b.Speed = speed
 	b.Life = life
 
-	b.Shooter = shooter.ID()
-	b.ShooterObjType = shooter.ObjType()
-	b.BelongPlayer = shooter.Player()
+	b.Shooter = shooterUid
+	b.ShooterObjType = shooterObjType
+	b.BelongPlayer = shooterBelongPlayer
 
 	b.CriticalType = CriticalTypeNone
-	b.HitObjType = ObjectTypeNone
+	b.HitObjType = objCommon.ObjectTypeNone
 	return &b
 }
 
 // GetBulletType 获取弹药类型
 func GetBulletType(name string) BulletType {
-	b, ok := bulletMap[name]
+	b, ok := BulletMap[name]
 	if !ok {
 		log.Fatalf("bullet %s no found", name)
 	}

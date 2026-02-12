@@ -2,13 +2,13 @@ package state
 
 import (
 	"github.com/narasux/jutland/pkg/mission/faction"
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
 // ShipClass 同级战舰
 type ShipClass struct {
 	Total int
-	Kind  *obj.BattleShip
+	Kind  *objUnit.BattleShip
 }
 
 // Fleet 舰队

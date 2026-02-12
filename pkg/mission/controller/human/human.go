@@ -12,7 +12,9 @@ import (
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	"github.com/narasux/jutland/pkg/mission/object"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/geometry"
@@ -54,7 +56,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	selectedShipCount := len(misState.SelectedShips)
 
 	// 检查鼠标是否在某个敌方战舰上，需要显示锁定
-	var lockOnEnemy *obj.BattleShip
+	var lockOnEnemy *objUnit.BattleShip
 	if selectedShipCount != 0 {
 		pos := action.DetectCursorPosOnMap(misState)
 		for _, ship := range misState.Ships {
@@ -71,17 +73,17 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 				lockOnEnemy = ship
 
 				// 默认为锁定标志
-				markID, markImg := obj.MarkIDLockOn, textureImg.LockOnTarget
+				markID, markImg := object.MarkIDLockOn, textureImg.LockOnTarget
 				// 如果选中战舰中某艘已经设置该战舰为攻击目标，则应显示攻击标志而非锁定标志
 				for _, shipUid := range misState.SelectedShips {
 					if s, ok := misState.Ships[shipUid]; ok {
 						if s.AttackTarget == lockOnEnemy.Uid {
-							markID, markImg = obj.MarkIDAttack, textureImg.AttackTarget
+							markID, markImg = object.MarkIDAttack, textureImg.AttackTarget
 							break
 						}
 					}
 				}
-				mark := obj.NewImgMark(markID, *pos, markImg, 2)
+				mark := object.NewImgMark(markID, *pos, markImg, 2)
 				misState.GameMarks[mark.ID] = mark
 				break
 			}
@@ -110,25 +112,25 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			}
 			// 航母攻击的话，不要移动过去突脸
 			// FIXME 可以有其他的逻辑，比如战列舰就不该直接突脸
-			if lockOnEnemy == nil || ship.Type != obj.ShipTypeAircraftCarrier {
+			if lockOnEnemy == nil || ship.Type != objCommon.ShipTypeAircraftCarrier {
 				moveInstr := instr.NewShipMovePath(ship.Uid, ship.CurPos, targetPos)
 				instructions[moveInstr.Uid()] = moveInstr
 			}
 		}
 		// 有战舰被选中的情况下，标记目标位置
-		markID, markImg := obj.MarkIDTarget, textureImg.TargetPos
+		markID, markImg := object.MarkIDTarget, textureImg.TargetPos
 		if lockOnEnemy != nil {
-			markID, markImg = obj.MarkIDAttack, textureImg.AttackTarget
+			markID, markImg = object.MarkIDAttack, textureImg.AttackTarget
 		}
-		mark := obj.NewImgMark(markID, *pos, markImg, 20)
+		mark := object.NewImgMark(markID, *pos, markImg, 20)
 		misState.GameMarks[markID] = mark
 	}
 
 	// 通过 ShipMove 指令实现移动
-	handleMove := func(shipUid string, curPos obj.MapPos, dx, dy int) {
+	handleMove := func(shipUid string, curPos objCommon.MapPos, dx, dy int) {
 		moveInstr := instr.NewShipMove(
 			shipUid,
-			obj.NewMapPosR(
+			objCommon.NewMapPosR(
 				curPos.RX+float64(dx),
 				curPos.RY+float64(dy),
 			),
@@ -176,8 +178,8 @@ func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[strin
 
 	type operation struct {
 		key        ebiten.Key
-		weaponType obj.WeaponType
-		isDisabled func(s *obj.BattleShip) bool
+		weaponType objUnit.WeaponType
+		isDisabled func(s *objUnit.BattleShip) bool
 	}
 
 	// 按下 q 键，如果任意选中战舰任意武器被禁用，则启用所有，否则禁用所有
@@ -188,8 +190,8 @@ func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[strin
 	ops := []operation{
 		{
 			ebiten.KeyQ,
-			obj.WeaponTypeAll,
-			func(s *obj.BattleShip) bool {
+			objUnit.WeaponTypeAll,
+			func(s *objUnit.BattleShip) bool {
 				return s.Weapon.MainGunDisabled ||
 					s.Weapon.SecondaryGunDisabled ||
 					s.Weapon.AntiAircraftGunDisabled ||
@@ -198,23 +200,23 @@ func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[strin
 		},
 		{
 			ebiten.KeyW,
-			obj.WeaponTypeMainGun,
-			func(s *obj.BattleShip) bool { return s.Weapon.MainGunDisabled },
+			objUnit.WeaponTypeMainGun,
+			func(s *objUnit.BattleShip) bool { return s.Weapon.MainGunDisabled },
 		},
 		{
 			ebiten.KeyE,
-			obj.WeaponTypeSecondaryGun,
-			func(s *obj.BattleShip) bool { return s.Weapon.SecondaryGunDisabled },
+			objUnit.WeaponTypeSecondaryGun,
+			func(s *objUnit.BattleShip) bool { return s.Weapon.SecondaryGunDisabled },
 		},
 		{
 			ebiten.KeyR,
-			obj.WeaponTypeAntiAircraftGun,
-			func(s *obj.BattleShip) bool { return s.Weapon.AntiAircraftGunDisabled },
+			objUnit.WeaponTypeAntiAircraftGun,
+			func(s *objUnit.BattleShip) bool { return s.Weapon.AntiAircraftGunDisabled },
 		},
 		{
 			ebiten.KeyT,
-			obj.WeaponTypeTorpedo,
-			func(s *obj.BattleShip) bool { return s.Weapon.TorpedoDisabled },
+			objUnit.WeaponTypeTorpedo,
+			func(s *objUnit.BattleShip) bool { return s.Weapon.TorpedoDisabled },
 		},
 	}
 

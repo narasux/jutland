@@ -5,7 +5,8 @@ import (
 	"math/rand"
 
 	"github.com/narasux/jutland/pkg/mission/action"
-	"github.com/narasux/jutland/pkg/mission/object"
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -31,7 +32,7 @@ func (c *ShowMeTheDuck) Exec(misState *state.MissionState) string {
 		return "Current cursor position on land, can't create duck"
 	}
 	uidGenerator := misState.ShipUidGenerators[misState.CurPlayer]
-	ship := object.NewShip(uidGenerator, "duck", *pos, 0, misState.CurPlayer)
+	ship := objUnit.NewShip(uidGenerator, "duck", *pos, 0, misState.CurPlayer)
 	misState.Ships[ship.Uid] = ship
 	return "Duck ready at " + ship.CurPos.String()
 }
@@ -56,7 +57,7 @@ func (c *ShowMeTheWaterdrop) Match(cmd string) bool {
 func (c *ShowMeTheWaterdrop) Exec(misState *state.MissionState) string {
 	uidGenerator := misState.ShipUidGenerators[misState.CurPlayer]
 	pos := action.DetectCursorPosOnMap(misState)
-	ship := object.NewShip(uidGenerator, "waterdrop", *pos, 0, misState.CurPlayer)
+	ship := objUnit.NewShip(uidGenerator, "waterdrop", *pos, 0, misState.CurPlayer)
 	misState.Ships[ship.Uid] = ship
 	return "Waterdrop ready at " + ship.CurPos.String()
 }
@@ -84,7 +85,7 @@ func (c *ShowMeTheMolaMola) Exec(misState *state.MissionState) string {
 	if misState.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
 		return "Current cursor position on land, can't create molamola"
 	}
-	ship := object.NewShip(uidGenerator, "molamola", *pos, 0, misState.CurPlayer)
+	ship := objUnit.NewShip(uidGenerator, "molamola", *pos, 0, misState.CurPlayer)
 	misState.Ships[ship.Uid] = ship
 	return "MolaMola ready at " + ship.CurPos.String()
 }
@@ -114,7 +115,7 @@ func (c *BlackGoldRush) Exec(misState *state.MissionState) string {
 	// 油井范围，生成量随机
 	radius := 3 + rand.Intn(4)
 	yield := 50 + rand.Intn(100)
-	op := object.NewOilPlatform(*pos, radius, yield)
+	op := objBuilding.NewOilPlatform(*pos, radius, yield)
 	misState.OilPlatforms[op.Uid] = op
 	return fmt.Sprintf("Oil platform created at %s. Be careful, oil can breed mold!", pos.String())
 }

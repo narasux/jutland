@@ -10,7 +10,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -51,7 +51,7 @@ func (d *Drawer) drawDebugPrint(screen *ebiten.Image, ms *state.MissionState) {
 	// 对光标指到的对象进行信息展示
 	if ms.DebugFlags.ShowCursorPosObjInfo {
 		pos := action.DetectCursorPosOnMap(ms)
-		var allBattleUnits []obj.BattleUnit
+		var allBattleUnits []objUnit.BattleUnit
 		for _, ship := range ms.Ships {
 			allBattleUnits = append(allBattleUnits, ship)
 		}
@@ -59,7 +59,7 @@ func (d *Drawer) drawDebugPrint(screen *ebiten.Image, ms *state.MissionState) {
 			allBattleUnits = append(allBattleUnits, plane)
 		}
 		// 统计出在当前光标位置的战舰/战机
-		var curCursorPosObjs []obj.BattleUnit
+		var curCursorPosObjs []objUnit.BattleUnit
 		for _, ut := range allBattleUnits {
 			movementState := ut.MovementState()
 			geometricSize := ut.GeometricSize()

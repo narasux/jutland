@@ -1,4 +1,4 @@
-package object
+package common
 
 // 战舰编组 ID
 type GroupID int

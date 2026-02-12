@@ -6,7 +6,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
@@ -93,7 +93,7 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 }
 
 // 探测游戏地图上的鼠标按键点击
-func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *obj.MapPos {
+func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *objCommon.MapPos {
 	// 鼠标按键没有点击，直接跳过
 	if !inpututil.IsMouseButtonJustPressed(button) {
 		return nil
@@ -102,38 +102,38 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 }
 
 // 探测当前鼠标在地图上的位置
-func DetectCursorPosOnMap(misState *state.MissionState) *obj.MapPos {
+func DetectCursorPosOnMap(misState *state.MissionState) *objCommon.MapPos {
 	sx, sy := ebiten.CursorPosition()
 	rx := misState.Camera.Pos.RX + float64(sx)/constants.MapBlockSize
 	ry := misState.Camera.Pos.RY + float64(sy)/constants.MapBlockSize
-	return lo.ToPtr(obj.NewMapPosR(rx, ry))
+	return lo.ToPtr(objCommon.NewMapPosR(rx, ry))
 }
 
 // 键盘按键与组 ID 的映射关系
 type KeyGroupIDMapping struct {
 	Key     ebiten.Key
-	GroupID obj.GroupID
+	GroupID objCommon.GroupID
 }
 
 var keyGroupIDMap = []KeyGroupIDMapping{
-	{Key: ebiten.KeyDigit1, GroupID: obj.GroupID1},
-	{Key: ebiten.KeyDigit2, GroupID: obj.GroupID2},
-	{Key: ebiten.KeyDigit3, GroupID: obj.GroupID3},
-	{Key: ebiten.KeyDigit4, GroupID: obj.GroupID4},
-	{Key: ebiten.KeyDigit5, GroupID: obj.GroupID5},
-	{Key: ebiten.KeyDigit6, GroupID: obj.GroupID6},
-	{Key: ebiten.KeyDigit7, GroupID: obj.GroupID7},
-	{Key: ebiten.KeyDigit8, GroupID: obj.GroupID8},
-	{Key: ebiten.KeyDigit9, GroupID: obj.GroupID9},
-	{Key: ebiten.KeyDigit0, GroupID: obj.GroupID0},
+	{Key: ebiten.KeyDigit1, GroupID: objCommon.GroupID1},
+	{Key: ebiten.KeyDigit2, GroupID: objCommon.GroupID2},
+	{Key: ebiten.KeyDigit3, GroupID: objCommon.GroupID3},
+	{Key: ebiten.KeyDigit4, GroupID: objCommon.GroupID4},
+	{Key: ebiten.KeyDigit5, GroupID: objCommon.GroupID5},
+	{Key: ebiten.KeyDigit6, GroupID: objCommon.GroupID6},
+	{Key: ebiten.KeyDigit7, GroupID: objCommon.GroupID7},
+	{Key: ebiten.KeyDigit8, GroupID: objCommon.GroupID8},
+	{Key: ebiten.KeyDigit9, GroupID: objCommon.GroupID9},
+	{Key: ebiten.KeyDigit0, GroupID: objCommon.GroupID0},
 }
 
 // GetGroupIDByPressedKey 探测按键对应的组 ID
-func GetGroupIDByPressedKey() obj.GroupID {
+func GetGroupIDByPressedKey() objCommon.GroupID {
 	for _, mapping := range keyGroupIDMap {
 		if inpututil.IsKeyJustPressed(mapping.Key) {
 			return mapping.GroupID
 		}
 	}
-	return obj.GroupIDNone
+	return objCommon.GroupIDNone
 }

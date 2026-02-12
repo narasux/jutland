@@ -69,9 +69,7 @@ var (
 	bb457 = ebutil.NewImageWithColor(5, 12, colorx.Silver)
 )
 
-var (
-	laser50 = ebutil.NewImageWithColor(2, 1000, colorx.Green)
-)
+var laser50 = ebutil.NewImageWithColor(2, 1000, colorx.Green)
 
 var NotFount = ebutil.NewImageWithColor(10, 20, colorx.Red)
 

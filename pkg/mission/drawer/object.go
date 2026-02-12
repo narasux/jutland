@@ -9,7 +9,9 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
 	planeImg "github.com/narasux/jutland/pkg/resources/images/plane"
@@ -42,7 +44,7 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	// 战舰排序，确保渲染顺序是一致的（否则重叠战舰会出现问题）
 	ships := lo.Values(ms.Ships)
-	slices.SortFunc(ships, func(a, b *obj.BattleShip) int {
+	slices.SortFunc(ships, func(a, b *objUnit.BattleShip) int {
 		return strings.Compare(a.Uid, b.Uid)
 	})
 
@@ -155,7 +157,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			}
 
 			// 如果被编组，需要标记出来
-			if s.GroupID != obj.GroupIDNone {
+			if s.GroupID != objCommon.GroupIDNone {
 				textStr, fontSize := strconv.Itoa(int(s.GroupID)), float64(30)
 				posX := (s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize - 55
 				posY := (s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize - 85
@@ -211,7 +213,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	// 飞机排序，确保渲染顺序是一致的（否则重叠会出现问题）
 	planes := lo.Values(ms.Planes)
-	slices.SortFunc(planes, func(a, b *obj.Plane) int {
+	slices.SortFunc(planes, func(a, b *objUnit.Plane) int {
 		return strings.Compare(a.Uid, b.Uid)
 	})
 
@@ -267,10 +269,10 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.ForwardingBullets {
 		// 如果是激光，且刚发射，则不渲染
 		// FIXME-P1 实际解决还是得算位移，不然贴脸时候就没展示了
-		if b.Type == obj.BulletTypeLaser && b.ForwardAge < 2 {
+		if b.Type == objBullet.BulletTypeLaser && b.ForwardAge < 2 {
 			continue
 		}
-		img := obj.GetBulletImg(b.Type, b.Diameter)
+		img := objBullet.GetBulletImg(b.Type, b.Diameter)
 
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, img, b.Rotation)

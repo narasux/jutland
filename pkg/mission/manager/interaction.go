@@ -8,7 +8,8 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/action"
-	obj "github.com/narasux/jutland/pkg/mission/object"
+	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -36,7 +37,7 @@ func (m *MissionManager) updateInstructions() {
 
 // 计算下一帧相机位置
 func (m *MissionManager) updateCameraPosition() {
-	var nextPos *obj.MapPos
+	var nextPos *objCommon.MapPos
 	// 游戏模式 / 全屏地图模式走不同的相机位置更新模式
 	if m.state.MissionStatus == state.MissionInMap {
 		nextPos = m.getNextCameraPosInFullMapMode()
@@ -62,7 +63,7 @@ func (m *MissionManager) updateCameraPosition() {
 
 // 计算下一帧相机位置（全屏地图模式）
 // 全屏模式，鼠标点击可以移动相机位置（点击位置居中）
-func (m *MissionManager) getNextCameraPosInFullMapMode() *obj.MapPos {
+func (m *MissionManager) getNextCameraPosInFullMapMode() *objCommon.MapPos {
 	if !inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
 		return nil
 	}
@@ -86,7 +87,7 @@ func (m *MissionManager) getNextCameraPosInFullMapMode() *obj.MapPos {
 
 // 计算下一帧相机位置（游戏模式）
 // 游戏模式，可以通过 hover 鼠标在边缘上，移动相机
-func (m *MissionManager) getNextCameraPosInGameMode() *obj.MapPos {
+func (m *MissionManager) getNextCameraPosInGameMode() *objCommon.MapPos {
 	pos := m.state.Camera.Pos.Copy()
 	// TODO 支持在游戏设置内修改相机移动速度
 	moveSpeed := m.state.Camera.BaseMoveSpeed
@@ -142,11 +143,11 @@ func (m *MissionManager) updateSelectedShips() {
 	if !m.state.IsGrouping {
 		// 通过分组选中战舰
 		groupID := action.GetGroupIDByPressedKey()
-		if groupID != obj.GroupIDNone {
-			shipInGroup := lo.Filter(lo.Values(m.state.Ships), func(ship *obj.BattleShip, _ int) bool {
+		if groupID != objCommon.GroupIDNone {
+			shipInGroup := lo.Filter(lo.Values(m.state.Ships), func(ship *objUnit.BattleShip, _ int) bool {
 				return ship.BelongPlayer == m.state.CurPlayer && ship.GroupID == groupID
 			})
-			m.state.SelectedShips = lo.Map(shipInGroup, func(ship *obj.BattleShip, _ int) string {
+			m.state.SelectedShips = lo.Map(shipInGroup, func(ship *objUnit.BattleShip, _ int) string {
 				return ship.Uid
 			})
 
@@ -175,8 +176,8 @@ func (m *MissionManager) updateSelectedShips() {
 		return ok && ship != nil && ship.CurHP > 0
 	})
 	// 没有战舰被选中，应该重置 SelectedGroupID
-	if m.state.SelectedGroupID != obj.GroupIDNone && len(m.state.SelectedShips) == 0 {
-		m.state.SelectedGroupID = obj.GroupIDNone
+	if m.state.SelectedGroupID != objCommon.GroupIDNone && len(m.state.SelectedShips) == 0 {
+		m.state.SelectedGroupID = objCommon.GroupIDNone
 	}
 }
 
@@ -199,13 +200,13 @@ func (m *MissionManager) updateShipGroups() {
 	}
 	groupID := action.GetGroupIDByPressedKey()
 	// 没有设置合法的编组
-	if groupID == obj.GroupIDNone {
+	if groupID == objCommon.GroupIDNone {
 		return
 	}
 	// 重新编组，只有当前选中的拥有这个编组
 	for _, ship := range m.state.Ships {
 		if ship.GroupID == groupID {
-			ship.GroupID = obj.GroupIDNone
+			ship.GroupID = objCommon.GroupIDNone
 		}
 	}
 	for _, shipUid := range m.state.SelectedShips {

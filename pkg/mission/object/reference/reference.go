@@ -1,4 +1,4 @@
-package object
+package reference
 
 type Link struct {
 	// 名称
@@ -24,4 +24,9 @@ var referencesMap = map[string]*Reference{}
 // GetReference 获取对象引用
 func GetReference(name string) *Reference {
 	return referencesMap[name]
+}
+
+// SetReference 设置对象引用（供初始化使用）
+func SetReference(name string, ref *Reference) {
+	referencesMap[name] = ref
 }

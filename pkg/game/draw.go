@@ -10,7 +10,8 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/metadata"
-	"github.com/narasux/jutland/pkg/mission/object"
+	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -169,22 +170,22 @@ func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string, refLin
 
 	// 战舰信息
 	xOffset, yOffset = xOffset+30, bgHeight+50*2
-	allShipNames := object.GetAllShipNames()
+	allShipNames := objUnit.GetAllShipNames()
 	textStr := fmt.Sprintf(
 		"%s (%d/%d)",
-		object.GetShipDisplayName(curShipName),
+		objUnit.GetShipDisplayName(curShipName),
 		lo.IndexOf(allShipNames, curShipName)+1,
 		len(allShipNames),
 	)
 	d.drawText(screen, textStr, xOffset, yOffset, 40, font.Hang, colorx.White)
 
 	yOffset += 70
-	for idx, line := range object.GetShipDesc(curShipName) {
+	for idx, line := range objUnit.GetShipDesc(curShipName) {
 		d.drawText(screen, line, xOffset, yOffset+float64(idx)*45, 24, font.Hang, colorx.White)
 	}
 
 	// 如果战舰已经有引用信息，则展示
-	if ref := object.GetReference(curShipName); ref != nil {
+	if ref := objRef.GetReference(curShipName); ref != nil {
 		// 战舰描述
 		xOffset, yOffset = float64(screenWidth/3)+60, bgHeight+45*3
 
