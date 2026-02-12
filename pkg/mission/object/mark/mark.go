@@ -1,4 +1,4 @@
-package object
+package mark
 
 import (
 	"image/color"
@@ -11,32 +11,32 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
-type MarkID string
+type ID string
 
 const (
-	// MarkIDTarget 目标标记
-	MarkIDTarget MarkID = "target"
-	// MarkIDLockOn 锁定标记
-	MarkIDLockOn MarkID = "lockOn"
-	// MarkIDAttack 攻击标记
-	MarkIDAttack MarkID = "attack"
+	// IDTarget 目标标记
+	IDTarget ID = "target"
+	// IDLockOn 锁定标记
+	IDLockOn ID = "lockOn"
+	// IDAttack 攻击标记
+	IDAttack ID = "attack"
 )
 
 // Mark 标记（如目标地点等，会存在一定时间后消失）
 type Mark struct {
-	ID   MarkID
+	ID   ID
 	Pos  objCommon.MapPos
 	Img  *ebiten.Image
 	Life int
 }
 
-// NewImgMark ...
-func NewImgMark(id MarkID, pos objCommon.MapPos, img *ebiten.Image, life int) *Mark {
+// NewImg 创建图片类型标记
+func NewImg(id ID, pos objCommon.MapPos, img *ebiten.Image, life int) *Mark {
 	return &Mark{ID: id, Pos: pos, Img: img, Life: life}
 }
 
-// NewTextMark ...
-func NewTextMark(pos objCommon.MapPos, text string, fontSize float64, clr color.Color, life int) *Mark {
+// NewText 创建文字类型标记
+func NewText(pos objCommon.MapPos, text string, fontSize float64, clr color.Color, life int) *Mark {
 	img := textureImg.GetText(text, font.Hang, fontSize, clr)
-	return &Mark{ID: MarkID(uuid.New().String()), Pos: pos, Img: img, Life: life}
+	return &Mark{ID: ID(uuid.New().String()), Pos: pos, Img: img, Life: life}
 }

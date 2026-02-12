@@ -14,9 +14,9 @@ import (
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
-	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -86,7 +86,7 @@ func (m *MissionManager) updateBuildings() {
 				op.RemoveShip(uid)
 			} else if cargo.BelongPlayer == m.state.CurPlayer && ship.Update() {
 				m.state.CurFunds += int64(ship.FundYield)
-				mark := object.NewTextMark(cargo.CurPos, text, fontSize, colorx.Gold, 50)
+				mark := objMark.NewText(cargo.CurPos, text, fontSize, colorx.Gold, 50)
 				m.state.GameMarks[mark.ID] = mark
 			}
 		}
@@ -509,7 +509,7 @@ func (m *MissionManager) updateShotBullets() {
 				strconv.Itoa(int(bt.RealDamage)),
 				fmt.Sprintf("%.2f", bt.RealDamage),
 			)
-			mark := object.NewTextMark(bt.CurPos, flagText, fontSize, clr, 20)
+			mark := objMark.NewText(bt.CurPos, flagText, fontSize, clr, 20)
 			m.state.GameMarks[mark.ID] = mark
 		}
 	}

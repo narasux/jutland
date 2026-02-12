@@ -12,8 +12,8 @@ import (
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
-	"github.com/narasux/jutland/pkg/mission/object"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
@@ -73,17 +73,17 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 				lockOnEnemy = ship
 
 				// 默认为锁定标志
-				markID, markImg := object.MarkIDLockOn, textureImg.LockOnTarget
+				markID, markImg := objMark.IDLockOn, textureImg.LockOnTarget
 				// 如果选中战舰中某艘已经设置该战舰为攻击目标，则应显示攻击标志而非锁定标志
 				for _, shipUid := range misState.SelectedShips {
 					if s, ok := misState.Ships[shipUid]; ok {
 						if s.AttackTarget == lockOnEnemy.Uid {
-							markID, markImg = object.MarkIDAttack, textureImg.AttackTarget
+							markID, markImg = objMark.IDAttack, textureImg.AttackTarget
 							break
 						}
 					}
 				}
-				mark := object.NewImgMark(markID, *pos, markImg, 2)
+				mark := objMark.NewImg(markID, *pos, markImg, 2)
 				misState.GameMarks[mark.ID] = mark
 				break
 			}
@@ -118,11 +118,11 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			}
 		}
 		// 有战舰被选中的情况下，标记目标位置
-		markID, markImg := object.MarkIDTarget, textureImg.TargetPos
+		markID, markImg := objMark.IDTarget, textureImg.TargetPos
 		if lockOnEnemy != nil {
-			markID, markImg = object.MarkIDAttack, textureImg.AttackTarget
+			markID, markImg = objMark.IDAttack, textureImg.AttackTarget
 		}
-		mark := object.NewImgMark(markID, *pos, markImg, 20)
+		mark := objMark.NewImg(markID, *pos, markImg, 20)
 		misState.GameMarks[markID] = mark
 	}
 

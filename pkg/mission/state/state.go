@@ -8,10 +8,10 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
-	"github.com/narasux/jutland/pkg/mission/object"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
@@ -89,7 +89,7 @@ type MissionState struct {
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*objBullet.Bullet
 	// 游戏标识
-	GameMarks map[object.MarkID]*object.Mark
+	GameMarks map[objMark.ID]*objMark.Mark
 	// DebugFlags 调试标识
 	DebugFlags DebugFlags
 }
@@ -210,6 +210,6 @@ func NewMissionState(mission string) *MissionState {
 		Trails:                    []*objBullet.Trail{},
 		ForwardingBullets:         []*objBullet.Bullet{},
 		Planes:                    map[string]*objUnit.Plane{},
-		GameMarks:                 map[object.MarkID]*object.Mark{},
+		GameMarks:                 map[objMark.ID]*objMark.Mark{},
 	}
 }
