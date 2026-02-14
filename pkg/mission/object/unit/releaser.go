@@ -7,8 +7,8 @@ import (
 	"github.com/mohae/deepcopy"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -20,7 +20,7 @@ type Releaser struct {
 	// 弹药名称
 	BulletName string `json:"bulletName"`
 	// 类别
-	Type objCommon.ShipType `json:"type"`
+	Type ShipType `json:"type"`
 	// 射程
 	Range float64 `json:"range"`
 	// 弹药速度
@@ -56,7 +56,7 @@ func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos
 // Fire 发射
 func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
 	// 已释放 / 对象不是战舰，不可发射
-	if r.Released || enemy.ObjType() != objCommon.ObjectTypeShip {
+	if r.Released || enemy.ObjType() != object.TypeShip {
 		return
 	}
 
@@ -76,7 +76,7 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 	// 成功释放弹药
 	r.Released = true
 	shotType := lo.Ternary(
-		objBullet.GetBulletType(r.BulletName) == objBullet.BulletTypeBomb,
+		objBullet.GetType(r.BulletName) == objBullet.BulletTypeBomb,
 		objBullet.BulletShotTypeArcing, objBullet.BulletShotTypeDirect,
 	)
 	life := int(r.Range/r.BulletSpeed) + 5

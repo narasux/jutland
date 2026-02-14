@@ -3,7 +3,7 @@ package unit
 import (
 	"time"
 
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	"github.com/narasux/jutland/pkg/mission/object"
 )
 
 // ShipAircraft 战舰上的飞机，也能算是武器吧 :D
@@ -22,7 +22,7 @@ type ShipAircraft struct {
 }
 
 // TakeOff 起飞战机（不区分飞机种类，只看打击对象类型）
-func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType objCommon.ObjectType) *Plane {
+func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType object.Type) *Plane {
 	// 判断起飞冷却，冷却中不允许起飞
 	if sa.LatestTakeOffAt+int64(sa.TakeOffTime*1e3) > time.Now().UnixMilli() {
 		return nil

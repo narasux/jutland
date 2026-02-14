@@ -9,12 +9,33 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/colorx"
+)
+
+// ShipType 战舰类型
+type ShipType string
+
+const (
+	// ShipTypeDefault 默认
+	ShipTypeDefault ShipType = "default"
+	// ShipTypeAircraftCarrier 航空母舰
+	ShipTypeAircraftCarrier ShipType = "aircraft_carrier"
+	// ShipTypeBattleShip 战列舰
+	ShipTypeBattleShip ShipType = "battleship"
+	// ShipTypeCruiser 巡洋舰
+	ShipTypeCruiser ShipType = "cruiser"
+	// ShipTypeDestroyer 驱逐舰
+	ShipTypeDestroyer ShipType = "destroyer"
+	// ShipTypeTorpedoBoat 鱼雷艇
+	ShipTypeTorpedoBoat ShipType = "torpedo_boat"
+	// ShipTypeCargo 货轮
+	ShipTypeCargo ShipType = "cargo"
 )
 
 // BattleShip 战舰
@@ -24,7 +45,7 @@ type BattleShip struct {
 	// 展示用名称
 	DisplayName string `json:"displayName"`
 	// 类别
-	Type objCommon.ShipType `json:"type"`
+	Type ShipType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
 	// 描述
@@ -68,7 +89,7 @@ type BattleShip struct {
 	// 当前速度
 	CurSpeed float64
 	// 分组ID
-	GroupID objCommon.GroupID
+	GroupID object.GroupID
 	// 攻击目标（敌舰 Uid）
 	AttackTarget string
 
@@ -99,8 +120,8 @@ func (s *BattleShip) Player() faction.Player {
 }
 
 // ObjType 对象类型
-func (s *BattleShip) ObjType() objCommon.ObjectType {
-	return objCommon.ObjectTypeShip
+func (s *BattleShip) ObjType() object.Type {
+	return object.TypeShip
 }
 
 // MovementState 机动状态（速度，方向，位置等信息）
@@ -229,14 +250,14 @@ func (s *BattleShip) HurtBy(bullet *objBullet.Bullet) {
 }
 
 // GenTrails 生成尾流
-func (s *BattleShip) GenTrails() []*objBullet.Trail {
+func (s *BattleShip) GenTrails() []*objTrail.Trail {
 	if s.CurSpeed <= 0 {
 		return nil
 	}
 	// 水滴应该是特殊的尾流（蓝色光尾流，负扩散）
 	if s.TypeAbbr == "WaterDrop" {
-		return []*objBullet.Trail{
-			objBullet.NewTrail(
+		return []*objTrail.Trail{
+			objTrail.New(
 				s.CurPos, textureImg.TrailShapeRect,
 				(0.4+(s.CurSpeed/s.MaxSpeed))*s.Width*0.5, -2,
 				s.Length/6+150*s.CurSpeed, 5,
@@ -245,7 +266,7 @@ func (s *BattleShip) GenTrails() []*objBullet.Trail {
 		}
 	} else if s.TypeAbbr == "Molamola" {
 		// 翻车鱼暂时不提供尾流
-		return []*objBullet.Trail{}
+		return []*objTrail.Trail{}
 	}
 
 	offset := s.Length / constants.MapBlockSize
@@ -258,14 +279,14 @@ func (s *BattleShip) GenTrails() []*objBullet.Trail {
 	backPos.SubRx(sinVal * offset * 0.2)
 	backPos.AddRy(cosVal * offset * 0.2)
 
-	return []*objBullet.Trail{
-		objBullet.NewTrail(
+	return []*objTrail.Trail{
+		objTrail.New(
 			frontPos, textureImg.TrailShapeCircle,
 			s.Width*0.6, 1.1,
 			s.Length/8+555*s.CurSpeed, 1,
 			0, 0, nil,
 		),
-		objBullet.NewTrail(
+		objTrail.New(
 			backPos, textureImg.TrailShapeCircle,
 			s.Width, 0.6,
 			s.Length/9+380*s.CurSpeed, 1.5,
@@ -346,7 +367,7 @@ func NewShip(
 	s.CurRotation = rotation
 	s.BelongPlayer = player
 	// 战舰默认不编组
-	s.GroupID = objCommon.GroupIDNone
+	s.GroupID = object.GroupIDNone
 	return &s
 }
 

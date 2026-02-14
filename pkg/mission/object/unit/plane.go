@@ -11,8 +11,8 @@ import (
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
@@ -111,12 +111,12 @@ func (p *Plane) Player() faction.Player {
 }
 
 // ObjType 对象类型
-func (p *Plane) ObjType() objCommon.ObjectType {
-	return objCommon.ObjectTypePlane
+func (p *Plane) ObjType() object.Type {
+	return object.TypePlane
 }
 
 // AttackObjType 攻击对象类型
-func (p *Plane) AttackObjType() objCommon.ObjectType {
+func (p *Plane) AttackObjType() object.Type {
 	return GetPlaneTargetObjType(p.Name)
 }
 
@@ -145,7 +145,7 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 		shotBullets = append(shotBullets, p.Weapon.Guns[i].Fire(p, enemy)...)
 	}
 	// 释放器类武器，有最小的释放间隔限制，且目前只能攻击战舰（后面有导弹，火箭弹再说）
-	if enemy.ObjType() == objCommon.ObjectTypeShip {
+	if enemy.ObjType() == object.TypeShip {
 		timeNow := time.Now().UnixMilli()
 		if timeNow > p.Weapon.LatestReleaseAt+p.Weapon.ReleaseInterval*1e3 {
 			for _, releasers := range [2][]*Releaser{
@@ -270,7 +270,7 @@ func NewPlane(
 
 // GetPlaneTargetObjType 获取飞机攻击目标类型
 // FIXME 目前这样很暴力，会导致战斗机只能打飞机，轰炸机只能打舰船
-func GetPlaneTargetObjType(name string) objCommon.ObjectType {
+func GetPlaneTargetObjType(name string) object.Type {
 	plane, ok := PlaneMap[name]
 	if !ok {
 		log.Fatalf("plane %s no found", name)
@@ -278,10 +278,10 @@ func GetPlaneTargetObjType(name string) objCommon.ObjectType {
 	// 根据飞机类型获取目标类型
 	switch plane.Type {
 	case PlaneTypeFighter:
-		return objCommon.ObjectTypePlane
+		return object.TypePlane
 	case PlaneTypeDiveBomber, PlaneTypeTorpedoBomber:
-		return objCommon.ObjectTypeShip
+		return object.TypeShip
 	default:
-		return objCommon.ObjectTypeNone
+		return object.TypeNone
 	}
 }

@@ -1,8 +1,6 @@
 package unit
 
-import (
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
-)
+import "github.com/narasux/jutland/pkg/mission/object"
 
 // FiringArc 火炮射界
 type FiringArc struct {
@@ -139,7 +137,7 @@ type PlaneGroup struct {
 	// MaxCount 总数量
 	MaxCount int64 `json:"maxCount"`
 	// TargetType 目标类型（战斗机制空，轰炸机、鱼雷机对地）
-	TargetType objCommon.ObjectType `json:"targetType"`
+	TargetType object.Type `json:"targetType"`
 	// CurCount 当前数量（起飞 -1，回收 +1）
 	CurCount int64 `json:"curCount"`
 }

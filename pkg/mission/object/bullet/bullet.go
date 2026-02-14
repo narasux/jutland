@@ -5,12 +5,15 @@ import (
 	"math"
 
 	"github.com/google/uuid"
+	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mohae/deepcopy"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	"github.com/narasux/jutland/pkg/mission/object/trail"
+	bulletImg "github.com/narasux/jutland/pkg/resources/images/bullet"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
@@ -75,14 +78,14 @@ type Bullet struct {
 	// 射击方式
 	ShotType BulletShotType
 	// 目标对象类型
-	TargetObjType objCommon.ObjectType
+	TargetObjType object.Type
 	// 前进周期数
 	ForwardAge int
 
 	// 所属战舰/战机
 	Shooter string
 	// 所属对象类型
-	ShooterObjType objCommon.ObjectType
+	ShooterObjType object.Type
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 
@@ -91,7 +94,7 @@ type Bullet struct {
 	// 造成暴击类型
 	CriticalType CriticalType
 	// 击中的对象类型
-	HitObjType objCommon.ObjectType
+	HitObjType object.Type
 }
 
 // Forward 弹药前进
@@ -118,9 +121,9 @@ func (b *Bullet) Forward() {
 }
 
 // GenTrail 生成尾流
-func (b *Bullet) GenTrails() []*Trail {
+func (b *Bullet) GenTrails() []*trail.Trail {
 	// 已经命中的没有尾流
-	if b.HitObjType != objCommon.ObjectTypeNone {
+	if b.HitObjType != object.TypeNone {
 		return nil
 	}
 	// 刚刚发射的不添加尾流
@@ -137,8 +140,8 @@ func (b *Bullet) GenTrails() []*Trail {
 		diffusionRate, multipleSizeAsLife, lifeReductionRate = 0.5, 8.0, 3.0
 	}
 	size := float64(GetImgWidth(b.Name, b.Type, b.Diameter))
-	return []*Trail{
-		NewTrail(
+	return []*trail.Trail{
+		trail.New(
 			b.CurPos, textureImg.TrailShapeRect,
 			size, diffusionRate,
 			size*multipleSizeAsLife, lifeReductionRate,
@@ -154,10 +157,10 @@ func New(
 	name string,
 	curPos, targetPos objPos.MapPos,
 	shooterUid string,
-	shooterObjType objCommon.ObjectType,
+	shooterObjType object.Type,
 	shooterBelongPlayer faction.Player,
 	shotType BulletShotType,
-	targetObjectType objCommon.ObjectType,
+	targetObjectType object.Type,
 	speed float64,
 	life int,
 ) *Bullet {
@@ -178,15 +181,42 @@ func New(
 	b.BelongPlayer = shooterBelongPlayer
 
 	b.CriticalType = CriticalTypeNone
-	b.HitObjType = objCommon.ObjectTypeNone
+	b.HitObjType = object.TypeNone
 	return &b
 }
 
-// GetBulletType 获取弹药类型
-func GetBulletType(name string) BulletType {
+// GetType 获取弹药类型
+func GetType(name string) BulletType {
 	b, ok := BulletMap[name]
 	if !ok {
 		log.Fatalf("bullet %s no found", name)
 	}
 	return b.Type
+}
+
+// GetImg 获取弹药图片
+func GetImg(btType BulletType, diameter int) *ebiten.Image {
+	switch btType {
+	case BulletTypeShell:
+		return bulletImg.GetShell(diameter)
+	case BulletTypeTorpedo:
+		return bulletImg.GetTorpedo(diameter)
+	case BulletTypeBomb:
+		return bulletImg.GetBomb(diameter)
+	case BulletTypeLaser:
+		return bulletImg.GetLaser(diameter)
+	}
+	return bulletImg.NotFount
+}
+
+var BulletImgWidthMap = map[string]int{}
+
+// GetImgWidth 获取弹药图片宽度（虽然可能价值不大，总之先加一点缓存 :）
+func GetImgWidth(btName string, btType BulletType, diameter int) int {
+	if width, ok := BulletImgWidthMap[btName]; ok {
+		return width
+	}
+	width := GetImg(btType, diameter).Bounds().Dx()
+	BulletImgWidthMap[btName] = width
+	return width
 }

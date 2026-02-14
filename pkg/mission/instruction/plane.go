@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -15,13 +15,13 @@ import (
 // PlaneAttack 攻击
 type PlaneAttack struct {
 	planeUid      string
-	targetObjType objCommon.ObjectType
+	targetObjType object.Type
 	targetUid     string
 	status        InstrStatus
 }
 
 // NewPlaneAttack ...
-func NewPlaneAttack(planeUid string, targetObjType objCommon.ObjectType, targetUid string) *PlaneAttack {
+func NewPlaneAttack(planeUid string, targetObjType object.Type, targetUid string) *PlaneAttack {
 	return &PlaneAttack{
 		planeUid:      planeUid,
 		targetObjType: targetObjType,
@@ -51,9 +51,9 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	var enemyExists bool
 	// 获取打击目标
 	switch i.targetObjType {
-	case objCommon.ObjectTypeShip:
+	case object.TypeShip:
 		enemy, enemyExists = missionState.Ships[i.targetUid]
-	case objCommon.ObjectTypePlane:
+	case object.TypePlane:
 		enemy, enemyExists = missionState.Planes[i.targetUid]
 	default:
 		return errors.Errorf("invalid target obj type: %s", i.targetObjType)

@@ -8,8 +8,8 @@ import (
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -83,7 +83,7 @@ func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPo
 // Fire 发射
 func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
 	// 未启用 / 装填中 / 对象不是战舰，不可发射
-	if lc.Disable || !lc.Reloaded() || enemy.ObjType() != objCommon.ObjectTypeShip {
+	if lc.Disable || !lc.Reloaded() || enemy.ObjType() != object.TypeShip {
 		return
 	}
 

@@ -2,8 +2,8 @@ package unit
 
 import (
 	"github.com/narasux/jutland/pkg/mission/faction"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
@@ -47,14 +47,14 @@ type BattleUnit interface {
 // Hurtable 可被伤害的对象
 type Hurtable interface {
 	BattleUnit
-	ObjType() objCommon.ObjectType
+	ObjType() object.Type
 	HurtBy(bullet *objBullet.Bullet)
 }
 
 // Attacker 攻击者
 type Attacker interface {
 	BattleUnit
-	ObjType() objCommon.ObjectType
+	ObjType() object.Type
 	Fire(enemy Hurtable) []*objBullet.Bullet
 }
 

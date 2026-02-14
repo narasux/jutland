@@ -14,10 +14,11 @@ import (
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	"github.com/narasux/jutland/pkg/mission/object/trail"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -68,7 +69,7 @@ func (m *MissionManager) updateBuildings() {
 	for _, op := range m.state.OilPlatforms {
 		text := fmt.Sprintf("+%d $", op.Yield)
 		for _, ship := range m.state.Ships {
-			if ship.Type != objCommon.ShipTypeCargo || ship.BelongPlayer != m.state.CurPlayer {
+			if ship.Type != objUnit.ShipTypeCargo || ship.BelongPlayer != m.state.CurPlayer {
 				continue
 			}
 
@@ -230,7 +231,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		// 有剩余燃料 & 没有攻击目标，按攻击类型选一个新的
 		inRangeEnemies := []objUnit.Hurtable{}
 
-		if plane.AttackObjType() == objCommon.ObjectTypePlane {
+		if plane.AttackObjType() == object.TypePlane {
 			// 敌机
 			for _, enemy := range m.state.Planes {
 				// 不能攻击己方的战机
@@ -239,7 +240,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 				}
 				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-		} else if plane.AttackObjType() == objCommon.ObjectTypeShip {
+		} else if plane.AttackObjType() == object.TypeShip {
 			// 敌舰
 			for _, enemy := range m.state.Ships {
 				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
@@ -331,7 +332,7 @@ func (m *MissionManager) updateObjectTrails() {
 		m.state.Trails[i].Update()
 	}
 	// 生命周期结束的，不再需要
-	m.state.Trails = lo.Filter(m.state.Trails, func(t *objBullet.Trail, _ int) bool {
+	m.state.Trails = lo.Filter(m.state.Trails, func(t *trail.Trail, _ int) bool {
 		return t.IsAlive()
 	})
 	for _, ship := range m.state.Ships {
@@ -363,7 +364,7 @@ func (m *MissionManager) updateShotBullets() {
 		prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
 
 		switch bt.TargetObjType {
-		case objCommon.ObjectTypeShip:
+		case object.TypeShip:
 			for _, ship := range m.state.Ships {
 				// 总不能不小心打死自己吧，真是不应该 :D
 				if bt.Shooter == ship.Uid {
@@ -386,7 +387,7 @@ func (m *MissionManager) updateShotBullets() {
 						ship.CurRotation,
 					) {
 						ship.HurtBy(bt)
-						bt.HitObjType = objCommon.ObjectTypeShip
+						bt.HitObjType = object.TypeShip
 						break
 					}
 				} else if bt.ShotType == objBullet.BulletShotTypeArcing {
@@ -400,12 +401,12 @@ func (m *MissionManager) updateShotBullets() {
 						ship.CurRotation,
 					) {
 						ship.HurtBy(bt)
-						bt.HitObjType = objCommon.ObjectTypeShip
+						bt.HitObjType = object.TypeShip
 						break
 					}
 				}
 			}
-		case objCommon.ObjectTypePlane:
+		case object.TypePlane:
 			for _, plane := range m.state.Planes {
 				// 总不能不小心打死自己吧，真是不应该 :D
 				if bt.Shooter == plane.Uid {
@@ -416,7 +417,7 @@ func (m *MissionManager) updateShotBullets() {
 					continue
 				}
 				// 如果是舰对空，设置 7/8 的 “擦肩而过” 率，现在命中率太高了
-				if bt.ShooterObjType == objCommon.ObjectTypeShip {
+				if bt.ShooterObjType == object.TypeShip {
 					if rand.Intn(8) == 0 {
 						continue
 					}
@@ -433,14 +434,14 @@ func (m *MissionManager) updateShotBullets() {
 					plane.CurRotation,
 				) {
 					plane.HurtBy(bt)
-					bt.HitObjType = objCommon.ObjectTypePlane
+					bt.HitObjType = object.TypePlane
 					break
 				}
 			}
 		default:
 			return false
 		}
-		return bt.HitObjType != objCommon.ObjectTypeNone
+		return bt.HitObjType != object.TypeNone
 	}
 
 	arrivedBullets, forwardingBullets := []*objBullet.Bullet{}, []*objBullet.Bullet{}
@@ -448,7 +449,7 @@ func (m *MissionManager) updateShotBullets() {
 		// 迷失的弹药，要及时消亡（如鱼雷没命中）
 		if bt.Life <= 0 {
 			// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-			bt.HitObjType = objCommon.ObjectTypeWater
+			bt.HitObjType = object.TypeWater
 			continue
 		}
 		if bt.ShotType == objBullet.BulletShotTypeArcing {
@@ -456,7 +457,7 @@ func (m *MissionManager) updateShotBullets() {
 			if bt.CurPos.Near(bt.TargetPos, 0.05) {
 				if !resolveDamage(bt) {
 					// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-					bt.HitObjType = objCommon.ObjectTypeWater
+					bt.HitObjType = object.TypeWater
 				}
 				arrivedBullets = append(arrivedBullets, bt)
 			} else {
@@ -465,7 +466,7 @@ func (m *MissionManager) updateShotBullets() {
 		} else if bt.ShotType == objBullet.BulletShotTypeDirect {
 			// 鱼雷碰撞到陆地，应该不再前进
 			if bt.Type == objBullet.BulletTypeTorpedo && m.state.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
-				bt.HitObjType = objCommon.ObjectTypeLand
+				bt.HitObjType = object.TypeLand
 				arrivedBullets = append(arrivedBullets, bt)
 			} else if resolveDamage(bt) {
 				// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
@@ -482,7 +483,7 @@ func (m *MissionManager) updateShotBullets() {
 	// TODO 支持命中爆炸
 	for _, bt := range arrivedBullets {
 		// 击中的是战舰 / 飞机，才会有伤害数值
-		if bt.HitObjType != objCommon.ObjectTypeShip && bt.HitObjType != objCommon.ObjectTypePlane {
+		if bt.HitObjType != object.TypeShip && bt.HitObjType != object.TypePlane {
 			continue
 		}
 

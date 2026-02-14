@@ -9,8 +9,8 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -157,7 +157,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			}
 
 			// 如果被编组，需要标记出来
-			if s.GroupID != objCommon.GroupIDNone {
+			if s.GroupID != object.GroupIDNone {
 				textStr, fontSize := strconv.Itoa(int(s.GroupID)), float64(30)
 				posX := (s.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize - 55
 				posY := (s.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize - 85
@@ -272,7 +272,7 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		if b.Type == objBullet.BulletTypeLaser && b.ForwardAge < 2 {
 			continue
 		}
-		img := objBullet.GetBulletImg(b.Type, b.Diameter)
+		img := objBullet.GetImg(b.Type, b.Diameter)
 
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, img, b.Rotation)

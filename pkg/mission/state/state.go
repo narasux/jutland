@@ -8,10 +8,11 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
+	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
@@ -77,13 +78,13 @@ type MissionState struct {
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
 	// 当前被选中的编组
-	SelectedGroupID objCommon.GroupID
+	SelectedGroupID object.GroupID
 	// 被摧毁的战舰
 	DestroyedShips []*objUnit.BattleShip
 	// 被摧毁的战机
 	DestroyedPlanes []*objUnit.Plane
 	// 战舰尾流
-	Trails []*objBullet.Trail
+	Trails []*objTrail.Trail
 	// 飞机
 	Planes map[string]*objUnit.Plane
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
@@ -204,10 +205,10 @@ func NewMissionState(mission string) *MissionState {
 		ShipUidGenerators:         shipUidGenerators,
 		Ships:                     ships,
 		SelectedShips:             []string{},
-		SelectedGroupID:           objCommon.GroupIDNone,
+		SelectedGroupID:           object.GroupIDNone,
 		DestroyedShips:            []*objUnit.BattleShip{},
 		DestroyedPlanes:           []*objUnit.Plane{},
-		Trails:                    []*objBullet.Trail{},
+		Trails:                    []*objTrail.Trail{},
 		ForwardingBullets:         []*objBullet.Bullet{},
 		Planes:                    map[string]*objUnit.Plane{},
 		GameMarks:                 map[objMark.ID]*objMark.Mark{},

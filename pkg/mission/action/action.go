@@ -6,7 +6,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	"github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/layout"
@@ -113,28 +113,28 @@ func DetectCursorPosOnMap(misState *state.MissionState) *position.MapPos {
 // 键盘按键与组 ID 的映射关系
 type KeyGroupIDMapping struct {
 	Key     ebiten.Key
-	GroupID objCommon.GroupID
+	GroupID object.GroupID
 }
 
 var keyGroupIDMap = []KeyGroupIDMapping{
-	{Key: ebiten.KeyDigit1, GroupID: objCommon.GroupID1},
-	{Key: ebiten.KeyDigit2, GroupID: objCommon.GroupID2},
-	{Key: ebiten.KeyDigit3, GroupID: objCommon.GroupID3},
-	{Key: ebiten.KeyDigit4, GroupID: objCommon.GroupID4},
-	{Key: ebiten.KeyDigit5, GroupID: objCommon.GroupID5},
-	{Key: ebiten.KeyDigit6, GroupID: objCommon.GroupID6},
-	{Key: ebiten.KeyDigit7, GroupID: objCommon.GroupID7},
-	{Key: ebiten.KeyDigit8, GroupID: objCommon.GroupID8},
-	{Key: ebiten.KeyDigit9, GroupID: objCommon.GroupID9},
-	{Key: ebiten.KeyDigit0, GroupID: objCommon.GroupID0},
+	{Key: ebiten.KeyDigit1, GroupID: object.GroupID1},
+	{Key: ebiten.KeyDigit2, GroupID: object.GroupID2},
+	{Key: ebiten.KeyDigit3, GroupID: object.GroupID3},
+	{Key: ebiten.KeyDigit4, GroupID: object.GroupID4},
+	{Key: ebiten.KeyDigit5, GroupID: object.GroupID5},
+	{Key: ebiten.KeyDigit6, GroupID: object.GroupID6},
+	{Key: ebiten.KeyDigit7, GroupID: object.GroupID7},
+	{Key: ebiten.KeyDigit8, GroupID: object.GroupID8},
+	{Key: ebiten.KeyDigit9, GroupID: object.GroupID9},
+	{Key: ebiten.KeyDigit0, GroupID: object.GroupID0},
 }
 
 // GetGroupIDByPressedKey 探测按键对应的组 ID
-func GetGroupIDByPressedKey() objCommon.GroupID {
+func GetGroupIDByPressedKey() object.GroupID {
 	for _, mapping := range keyGroupIDMap {
 		if inpututil.IsKeyJustPressed(mapping.Key) {
 			return mapping.GroupID
 		}
 	}
-	return objCommon.GroupIDNone
+	return object.GroupIDNone
 }

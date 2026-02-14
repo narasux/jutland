@@ -8,7 +8,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/action"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -144,7 +144,7 @@ func (m *MissionManager) updateSelectedShips() {
 	if !m.state.IsGrouping {
 		// 通过分组选中战舰
 		groupID := action.GetGroupIDByPressedKey()
-		if groupID != objCommon.GroupIDNone {
+		if groupID != object.GroupIDNone {
 			shipInGroup := lo.Filter(lo.Values(m.state.Ships), func(ship *objUnit.BattleShip, _ int) bool {
 				return ship.BelongPlayer == m.state.CurPlayer && ship.GroupID == groupID
 			})
@@ -177,8 +177,8 @@ func (m *MissionManager) updateSelectedShips() {
 		return ok && ship != nil && ship.CurHP > 0
 	})
 	// 没有战舰被选中，应该重置 SelectedGroupID
-	if m.state.SelectedGroupID != objCommon.GroupIDNone && len(m.state.SelectedShips) == 0 {
-		m.state.SelectedGroupID = objCommon.GroupIDNone
+	if m.state.SelectedGroupID != object.GroupIDNone && len(m.state.SelectedShips) == 0 {
+		m.state.SelectedGroupID = object.GroupIDNone
 	}
 }
 
@@ -201,13 +201,13 @@ func (m *MissionManager) updateShipGroups() {
 	}
 	groupID := action.GetGroupIDByPressedKey()
 	// 没有设置合法的编组
-	if groupID == objCommon.GroupIDNone {
+	if groupID == object.GroupIDNone {
 		return
 	}
 	// 重新编组，只有当前选中的拥有这个编组
 	for _, ship := range m.state.Ships {
 		if ship.GroupID == groupID {
-			ship.GroupID = objCommon.GroupIDNone
+			ship.GroupID = object.GroupIDNone
 		}
 	}
 	for _, shipUid := range m.state.SelectedShips {

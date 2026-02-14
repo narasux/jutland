@@ -1,4 +1,4 @@
-package bullet
+package trail
 
 import (
 	"image/color"
@@ -25,8 +25,8 @@ type Trail struct {
 	Color color.Color
 }
 
-// NewTrail 创建尾流对象
-func NewTrail(
+// New 创建尾流对象
+func New(
 	pos objPos.MapPos,
 	Shape textureImg.TrailShape,
 	size, diffusionRate float64,

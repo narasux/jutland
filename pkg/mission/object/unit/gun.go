@@ -8,8 +8,8 @@ import (
 
 	"github.com/mohae/deepcopy"
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -52,11 +52,11 @@ type Gun struct {
 var _ AttackWeapon = (*Gun)(nil)
 
 // IsAvailableAntiType 是否能反制该类型
-func (g *Gun) IsAvailableAntiType(objType objCommon.ObjectType) bool {
-	if g.AntiAircraft && objType == objCommon.ObjectTypePlane {
+func (g *Gun) IsAvailableAntiType(objType object.Type) bool {
+	if g.AntiAircraft && objType == object.TypePlane {
 		return true
 	}
-	if g.AntiShip && objType == objCommon.ObjectTypeShip {
+	if g.AntiShip && objType == object.TypeShip {
 		return true
 	}
 	return false

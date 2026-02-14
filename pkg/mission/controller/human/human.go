@@ -12,7 +12,6 @@ import (
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
-	objCommon "github.com/narasux/jutland/pkg/mission/object/common"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -113,7 +112,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			}
 			// 航母攻击的话，不要移动过去突脸
 			// FIXME 可以有其他的逻辑，比如战列舰就不该直接突脸
-			if lockOnEnemy == nil || ship.Type != objCommon.ShipTypeAircraftCarrier {
+			if lockOnEnemy == nil || ship.Type != objUnit.ShipTypeAircraftCarrier {
 				moveInstr := instr.NewShipMovePath(ship.Uid, ship.CurPos, targetPos)
 				instructions[moveInstr.Uid()] = moveInstr
 			}
