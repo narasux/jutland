@@ -17,6 +17,7 @@ import (
 	planeImg "github.com/narasux/jutland/pkg/resources/images/plane"
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
+	weaponImg "github.com/narasux/jutland/pkg/resources/images/weapon"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
@@ -107,53 +108,60 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 			// 绘制主炮状态
 			if s.Weapon.HasMainGun {
-				clr := colorx.Yellow
+				status := weaponImg.WeaponStatusReloading
 				if s.Weapon.MainGunDisabled {
-					clr = colorx.Red
+					status = weaponImg.WeaponStatusDisabled
 				} else if s.Weapon.MainGunReloaded() {
-					clr = colorx.Green
+					status = weaponImg.WeaponStatusLoaded
 				}
-				opts.GeoM.Translate(20, -25)
-				img := textureImg.GetText("M", font.Hang, 16, clr)
-				screen.DrawImage(img, opts)
-				opts.GeoM.Translate(0, 25)
+
+				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeMainGun, status, ms.GameOpts.Zoom)
+				opts.GeoM.Translate(20, -30)
+				screen.DrawImage(weaponIcon, opts)
+				opts.GeoM.Translate(0, 30)
 			}
 
 			// 绘制副炮状态
 			if s.Weapon.HasSecondaryGun {
-				clr := colorx.Yellow
+				status := weaponImg.WeaponStatusReloading
 				if s.Weapon.SecondaryGunDisabled {
-					clr = colorx.Red
+					status = weaponImg.WeaponStatusDisabled
 				} else if s.Weapon.SecondaryGunReloaded() {
-					clr = colorx.Green
+					status = weaponImg.WeaponStatusLoaded
 				}
-				opts.GeoM.Translate(weaponInterstitialSpacing, -25)
-				img := textureImg.GetText("S", font.Hang, 16, clr)
-				screen.DrawImage(img, opts)
-				opts.GeoM.Translate(0, 25)
+
+				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeSecondaryGun, status, ms.GameOpts.Zoom)
+				opts.GeoM.Translate(weaponInterstitialSpacing, -30)
+				screen.DrawImage(weaponIcon, opts)
+				opts.GeoM.Translate(0, 30)
 			}
 
 			// 绘制防空炮状态（注：由于防空炮装填速度很快，所以不需要绘制装填中的状态，即只有红绿两种）
 			if s.Weapon.HasAntiAircraftGun {
-				clr := lo.Ternary(s.Weapon.AntiAircraftGunDisabled, colorx.Red, colorx.Green)
-				opts.GeoM.Translate(weaponInterstitialSpacing, -25)
-				img := textureImg.GetText("A", font.Hang, 16, clr)
-				screen.DrawImage(img, opts)
-				opts.GeoM.Translate(0, 25)
+				status := weaponImg.WeaponStatusLoaded
+				if s.Weapon.AntiAircraftGunDisabled {
+					status = weaponImg.WeaponStatusDisabled
+				}
+
+				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeAntiAircraftGun, status, ms.GameOpts.Zoom)
+				opts.GeoM.Translate(weaponInterstitialSpacing, -30)
+				screen.DrawImage(weaponIcon, opts)
+				opts.GeoM.Translate(0, 30)
 			}
 
 			// 绘制鱼雷发射器状态
 			if s.Weapon.HasTorpedo {
-				clr := colorx.Yellow
+				status := weaponImg.WeaponStatusReloading
 				if s.Weapon.TorpedoDisabled {
-					clr = colorx.Red
+					status = weaponImg.WeaponStatusDisabled
 				} else if s.Weapon.TorpedoLauncherReloaded() {
-					clr = colorx.Green
+					status = weaponImg.WeaponStatusLoaded
 				}
-				opts.GeoM.Translate(weaponInterstitialSpacing, -25)
-				img := textureImg.GetText("T", font.Hang, 16, clr)
-				screen.DrawImage(img, opts)
-				opts.GeoM.Translate(0, 25)
+
+				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeTorpedo, status, ms.GameOpts.Zoom)
+				opts.GeoM.Translate(weaponInterstitialSpacing, -30)
+				screen.DrawImage(weaponIcon, opts)
+				opts.GeoM.Translate(0, 30)
 			}
 
 			// 如果被编组，需要标记出来

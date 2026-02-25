@@ -35,9 +35,10 @@ ideas.md
 .codebuddy
 .gemini
 .specify
+.venv
 specs
 openspec
 
 jutland
-
 jutland-*
+/jutland.log
