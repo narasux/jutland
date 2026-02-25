@@ -221,11 +221,15 @@
       "在太平洋战争中多次参与作战，",
       "是日本海军的重要战力之一。"
     ],
-    author: "未知",
+    author: "Alexpl",
     links: [
       {
         name: "维基百科 - 金刚号战列舰",
         url: "https://zh.wikipedia.org/wiki/%E9%87%91%E5%88%9A%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      },
+      {
+        name: "Wiki: Kongo1944.png",
+        url: "https://commons.wikimedia.org/wiki/File:Kongo1944.png"
       }
     ]
   },
@@ -238,11 +242,15 @@
       "在莱特湾海战中遭遇美军驱逐舰，",
       "被鱼雷击中弹药库后发生爆炸沉没。"
     ],
-    author: "未知",
+    author: "Alexpl",
     links: [
       {
         name: "维基百科 - 扶桑号战列舰",
         url: "https://zh.wikipedia.org/wiki/%E6%89%B6%E6%A1%91%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      },
+      {
+        name: "Wiki: Fuso1944.png",
+        url: "https://commons.wikimedia.org/wiki/File:Fuso1944.png"
       }
     ]
   },
@@ -260,6 +268,10 @@
       {
         name: "维基百科 - 大和号战列舰",
         url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%92%8C%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0"
+      },
+      {
+        name: "Yamato class Battleship Final Form 1945",
+        url: "https://www.deviantart.com/tzoli/art/Yamato-class-Battleship-Final-Form-1945-756103504"
       }
     ]
   },
@@ -273,7 +285,12 @@
       "该舰仅存在于设计图纸中。"
     ],
     author: "TZoli",
-    links: []
+    links: [
+      {
+        name: "A-150 Super Yamato class possible variant C",
+        url: "https://www.deviantart.com/tzoli/art/A-150-Super-Yamato-class-possible-variant-C-758321728"
+      }
+    ]
   },
   {
     name: "edo",
@@ -286,12 +303,8 @@
     author: "TZoli",
     links: [
       {
-        name: "维基百科 - 江户时代",
-        url: "https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%88%B8%E6%97%B6%E4%BB%A3"
-      },
-      {
-        name: "维基百科 - 令制国",
-        url: "https://zh.wikipedia.org/wiki/%E4%BB%A4%E5%88%B6%E5%9B%BD"
+        name: "Last Japanese Battleship proposal",
+        url: "https://www.deviantart.com/tzoli/art/Last-Japanese-Battleship-proposal-759738735"
       }
     ]
   },
