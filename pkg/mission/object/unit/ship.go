@@ -95,6 +95,21 @@ type BattleShip struct {
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
+
+	// 视野范围（单位：地图格数）
+	// 0 表示使用默认值（最大武器射程 + 5）
+	SightRange float64 `json:"sightRange"`
+}
+
+// GetSightRange 获取视野范围（支持默认值计算）
+func (s *BattleShip) GetSightRange() float64 {
+	// 配置验证：确保sightRange >= 0
+	if s.SightRange > 0 {
+		return s.SightRange
+	}
+
+	// 默认：最大武器射程 + 5
+	return s.Weapon.MaxToShipRange * 1.5
 }
 
 var _ Hurtable = (*BattleShip)(nil)

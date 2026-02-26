@@ -55,6 +55,14 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
+		// 迷雾可见性检查：敌方单位只有在视野内才渲染
+		if s.BelongPlayer != ms.CurPlayer {
+			// 检查是否在迷雾视野内
+			if ms.FogOfWar != nil && !ms.FogOfWar.IsVisible(int(s.CurPos.RX), int(s.CurPos.RY)) {
+				continue
+			}
+		}
+
 		sImg := shipImg.GetTop(s.Name, ms.GameOpts.Zoom)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)

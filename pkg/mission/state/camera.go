@@ -18,3 +18,13 @@ func (c *Camera) Contains(pos objPos.MapPos) bool {
 		pos.MY < c.Pos.MY ||
 		pos.MY > c.Pos.MY+c.Height)
 }
+
+// GetVisibleRange 获取相机视野范围（用于迷雾渲染优化）
+// 返回相机视野的左上角和右下角坐标
+func (c *Camera) GetVisibleRange() (x1, y1, x2, y2 int) {
+	x1 = c.Pos.MX
+	y1 = c.Pos.MY
+	x2 = c.Pos.MX + c.Width
+	y2 = c.Pos.MY + c.Height
+	return x1, y1, x2, y2
+}

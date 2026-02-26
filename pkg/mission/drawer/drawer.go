@@ -15,8 +15,9 @@ import (
 
 // Drawer 任务运行中图像绘制器
 type Drawer struct {
-	mission string
-	abbrMap *ebiten.Image
+	mission   string
+	abbrMap   *ebiten.Image
+	fogDrawer *FogDrawer
 }
 
 // NewDrawer ...
@@ -41,7 +42,11 @@ func NewDrawer(mission string) *Drawer {
 	abbrMap.DrawImage(abbrMapImg.Background, opts)
 	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Source), opts)
 
-	return &Drawer{mission: mission, abbrMap: abbrMap}
+	return &Drawer{
+		mission:   mission,
+		abbrMap:   abbrMap,
+		fogDrawer: NewFogDrawer(),
+	}
 }
 
 // Draw 绘制任务关卡图像
@@ -71,6 +76,8 @@ func (d *Drawer) Draw(
 		d.drawDestroyedShips(screen, misState)
 		d.drawFlyingPlanes(screen, misState)
 		d.drawDestroyedPlanes(screen, misState)
+		// 战争迷雾（在所有对象之上渲染）
+		d.fogDrawer.DrawFog(screen, misState)
 		// 用户行为
 		d.drawArrowOnMapWhenHover(screen, misState)
 		d.drawSelectedArea(screen, misState)

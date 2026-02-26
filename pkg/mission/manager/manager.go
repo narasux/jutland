@@ -59,6 +59,8 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateShotBullets()
 		m.updateMissionShips()
 		m.updateMissionPlanes()
+		// 更新战争迷雾视野
+		m.updateFogOfWar()
 	case state.MissionInMap:
 		m.updateInstructions()
 		m.executeInstructions()
@@ -72,6 +74,8 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateShotBullets()
 		m.updateMissionShips()
 		m.updateMissionPlanes()
+		// 更新战争迷雾视野
+		m.updateFogOfWar()
 	case state.MissionInBuilding:
 		m.updateInstructions()
 		m.executeInstructions()

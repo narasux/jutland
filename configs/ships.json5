@@ -15,6 +15,7 @@
     width: 100,
     fundsCost: 0,
     timeCost: 5,
+    sightRange: 30,
     description: [
       "特殊战舰，只能通过秘籍获取，感受鸭力吧！",
       "主炮：单装 1024mm 电磁炮，八联装 406mm",
@@ -171,6 +172,7 @@
     width: 17,
     fundsCost: 50,
     timeCost: 15,
+    sightRange: 8,
     description: [
       "自由轮（停油井附近以获取资金）",
       "主炮：1 座单装 127mm/25",
@@ -264,6 +266,7 @@
     width: 34,
     fundsCost: 410,
     timeCost: 40,
+    sightRange: 25, // 航空母舰有较大的视野范围
     description: [
       "航空母舰（美）",
       "主炮：8 座单装 127mm/38",

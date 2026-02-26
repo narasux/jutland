@@ -14,6 +14,7 @@ import (
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
+	"github.com/narasux/jutland/pkg/mission/warfog"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
@@ -93,6 +94,8 @@ type MissionState struct {
 	GameMarks map[objMark.ID]*objMark.Mark
 	// DebugFlags 调试标识
 	DebugFlags DebugFlags
+	// 战争迷雾状态
+	FogOfWar *warfog.FogOfWar
 }
 
 // CameraPosBorder 获取相机视野边界
@@ -171,6 +174,12 @@ func NewMissionState(mission string) *MissionState {
 		oilPlatforms[op.Uid] = op
 	}
 
+	// 初始化战争迷雾
+	fogOfWar := warfog.NewFogOfWar(
+		missionMD.MapCfg.Width,
+		missionMD.MapCfg.Height,
+	)
+
 	return &MissionState{
 		Mission:       mission,
 		MissionStatus: MissionRunning,
@@ -212,5 +221,6 @@ func NewMissionState(mission string) *MissionState {
 		ForwardingBullets:         []*objBullet.Bullet{},
 		Planes:                    map[string]*objUnit.Plane{},
 		GameMarks:                 map[objMark.ID]*objMark.Mark{},
+		FogOfWar:                  fogOfWar,
 	}
 }
