@@ -120,7 +120,7 @@ func (b *Bullet) Forward() {
 	b.ForwardAge++
 }
 
-// GenTrail 生成尾流
+// GenTrails 生成尾流
 func (b *Bullet) GenTrails() []*trail.Trail {
 	// 已经命中的没有尾流
 	if b.HitObjType != object.TypeNone {

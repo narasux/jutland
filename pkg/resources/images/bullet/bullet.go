@@ -1,8 +1,12 @@
 package bullet
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/narasux/jutland/pkg/loader"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
@@ -49,15 +53,28 @@ var (
 	gb8 = ebutil.NewImageWithColor(1, 1, colorx.White)
 )
 
-var (
-	tb324  = ebutil.NewImageWithColor(2, 10, colorx.White)
-	tb450  = ebutil.NewImageWithColor(3, 16, colorx.Silver)
-	tb533  = ebutil.NewImageWithColor(3, 20, colorx.DarkSilver)
-	tb570  = ebutil.NewImageWithColor(3, 22, colorx.DarkSilver)
-	tb610  = ebutil.NewImageWithColor(4, 24, colorx.Silver)
-	tb622  = ebutil.NewImageWithColor(4, 25, colorx.Gray)
-	tb1350 = ebutil.NewImageWithColor(5, 52, colorx.DarkSilver)
-)
+// torpedoDiameters 支持的鱼雷口径列表
+var torpedoDiameters = []int{324, 450, 533, 570, 610, 622, 1350}
+
+// torpedoes 鱼雷图片映射表
+var torpedoes = make(map[int]*ebiten.Image)
+
+// init 预加载鱼雷图片资源
+func init() {
+	for _, diameter := range torpedoDiameters {
+		path := fmt.Sprintf("/bullets/torpedoes/%d.png", diameter)
+		img, err := loader.LoadImage(path)
+		if err != nil {
+			log.Fatalf("missing %s: %s", path, err)
+		}
+		// 缩放到原图的 1/5 FIXME 后续看下更合适的缩放方式，直接 1/5 好粗暴
+		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+		opts.GeoM.Scale(1/5.0, 1/5.0)
+		zoomImg := ebiten.NewImage(img.Bounds().Dx()/5, img.Bounds().Dy()/5)
+		zoomImg.DrawImage(img, opts)
+		torpedoes[diameter] = zoomImg
+	}
+}
 
 var (
 	bb70  = ebutil.NewImageWithColor(2, 4, colorx.Silver)
@@ -157,21 +174,8 @@ func GetShell(diameter int) *ebiten.Image {
 
 // GetTorpedo 获取鱼雷弹药图片
 func GetTorpedo(diameter int) *ebiten.Image {
-	switch diameter {
-	case 324:
-		return tb324
-	case 450:
-		return tb450
-	case 533:
-		return tb533
-	case 570:
-		return tb570
-	case 610:
-		return tb610
-	case 622:
-		return tb622
-	case 1350:
-		return tb1350
+	if img, ok := torpedoes[diameter]; ok {
+		return img
 	}
 	// 找不到就暴露出来
 	return NotFount
