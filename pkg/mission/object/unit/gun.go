@@ -8,6 +8,7 @@ import (
 
 	"github.com/mohae/deepcopy"
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
@@ -96,9 +97,12 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 	curPos.AddRx(math.Sin(sState.CurRotation*math.Pi/180) * gunOffset)
 	curPos.SubRy(math.Cos(sState.CurRotation*math.Pi/180) * gunOffset)
 
+	// 应用全局速度倍率
+	bulletSpeed := g.BulletSpeed * config.G.SpeedMultiplier
+
 	// 考虑提前量（依赖敌舰速度，角度）
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		sState.CurPos.RX, sState.CurPos.RY, g.BulletSpeed,
+		sState.CurPos.RX, sState.CurPos.RY, bulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
@@ -110,7 +114,7 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 
 	distance := curPos.Distance(targetPos)
 	// 火炮炮弹生命值与目标距离相关，15 对于 0.4 速度的炮弹来说，相当于 6 格地图，在大多数火炮散布范围之内
-	life := int(distance/g.BulletSpeed) + 15
+	life := int(distance/bulletSpeed) + 15
 	// 炮弹散布的半径，散布应该随着距离减小而减小
 	rangePercent := distance / g.Range
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
@@ -136,7 +140,7 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 		bullets = append(bullets, objBullet.New(
 			g.BulletName, curPos, pos,
 			shooter.ID(), shooter.ObjType(), shooter.Player(),
-			shotType, enemy.ObjType(), g.BulletSpeed, life,
+			shotType, enemy.ObjType(), bulletSpeed, life,
 		))
 	}
 

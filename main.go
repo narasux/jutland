@@ -8,12 +8,16 @@ import (
 	_ "github.com/silbinarywolf/preferdiscretegpu"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/game"
 )
 
 func main() {
 	// 设置 Golang GC 阈值，避免使用过多内存
 	debug.SetGCPercent(50)
+
+	// 加载游戏设置
+	config.LoadGameSettings()
 
 	ebiten.SetTPS(constants.MaxTPS)
 	ebiten.SetFullscreen(true)

@@ -8,6 +8,7 @@ import (
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
@@ -95,9 +96,12 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	curPos.AddRx(math.Sin(sState.CurRotation*math.Pi/180) * gunOffset)
 	curPos.SubRy(math.Cos(sState.CurRotation*math.Pi/180) * gunOffset)
 
+	// 应用全局速度倍率
+	bulletSpeed := lc.BulletSpeed * config.G.SpeedMultiplier
+
 	// 考虑提前量（依赖敌舰速度，角度）
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		sState.CurPos.RX, sState.CurPos.RY, lc.BulletSpeed,
+		sState.CurPos.RX, sState.CurPos.RY, bulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
@@ -117,14 +121,14 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	}
 
 	// 鱼雷的生命值就是最大射程（+5 预留）
-	life := int(lc.Range/lc.BulletSpeed) + 5
+	life := int(lc.Range/bulletSpeed) + 5
 
 	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*objBullet.Bullet{objBullet.New(
 		lc.BulletName, curPos, targetPos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
 		objBullet.BulletShotTypeDirect,
-		enemy.ObjType(), lc.BulletSpeed, life,
+		enemy.ObjType(), bulletSpeed, life,
 	)}
 }
 

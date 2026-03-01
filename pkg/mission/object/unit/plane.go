@@ -10,6 +10,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -193,8 +194,12 @@ func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos) {
 	if p.CurHP <= 0 {
 		return
 	}
+	// 应用全局速度倍率
+	maxSpeed := p.MaxSpeed * config.G.SpeedMultiplier
+	rotateSpeed := p.RotateSpeed * config.G.SpeedMultiplier
+
 	// 飞机只要移动，就是最大速度（简化逻辑）
-	p.CurSpeed = p.MaxSpeed
+	p.CurSpeed = maxSpeed
 
 	targetRotation := p.CurPos.Angle(targetPos)
 	// 逐渐转向
@@ -205,7 +210,7 @@ func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos) {
 		if math.Mod(targetRotation-p.CurRotation+360, 360) > 180 {
 			rotateFlag = RotateFlagAnticlockwise
 		}
-		p.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-p.CurRotation), p.RotateSpeed)
+		p.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-p.CurRotation), rotateSpeed)
 		p.CurRotation = math.Mod(p.CurRotation+360, 360)
 	}
 	nextPos := p.CurPos.Copy()

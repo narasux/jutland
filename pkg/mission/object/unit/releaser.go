@@ -7,6 +7,7 @@ import (
 	"github.com/mohae/deepcopy"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
@@ -62,9 +63,12 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 
 	sState, eState := shooter.MovementState(), enemy.MovementState()
 
+	// 应用全局速度倍率
+	bulletSpeed := r.BulletSpeed * config.G.SpeedMultiplier
+
 	// 考虑提前量（依赖敌舰速度，角度）
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		sState.CurPos.RX, sState.CurPos.RY, r.BulletSpeed,
+		sState.CurPos.RX, sState.CurPos.RY, bulletSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
@@ -79,12 +83,12 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 		objBullet.GetType(r.BulletName) == objBullet.BulletTypeBomb,
 		objBullet.BulletShotTypeArcing, objBullet.BulletShotTypeDirect,
 	)
-	life := int(r.Range/r.BulletSpeed) + 5
+	life := int(r.Range/bulletSpeed) + 5
 
 	return []*objBullet.Bullet{objBullet.New(
 		r.BulletName, sState.CurPos, targetPos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
-		shotType, enemy.ObjType(), r.BulletSpeed, life,
+		shotType, enemy.ObjType(), bulletSpeed, life,
 	)}
 }
 

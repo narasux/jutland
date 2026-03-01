@@ -1,6 +1,7 @@
 package trail
 
 import (
+	"github.com/narasux/jutland/pkg/config"
 	"image/color"
 
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
@@ -50,11 +51,11 @@ func New(
 // Update ...
 func (t *Trail) Update() {
 	if t.Delay > 0 {
-		t.Delay -= t.LifeReductionRate
+		t.Delay -= t.LifeReductionRate * config.G.SpeedMultiplier
 		return
 	}
-	t.CurSize += t.DiffusionRate
-	t.CurLife -= t.LifeReductionRate
+	t.CurSize += t.DiffusionRate * config.G.SpeedMultiplier
+	t.CurLife -= t.LifeReductionRate * config.G.SpeedMultiplier
 }
 
 // IsAlive ...

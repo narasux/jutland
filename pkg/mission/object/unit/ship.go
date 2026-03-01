@@ -8,6 +8,7 @@ import (
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -311,13 +312,20 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 		s.CurSpeed = 0
 		return true
 	}
+
+	// 应用全局速度倍率
+	multiplier := config.G.SpeedMultiplier
+	maxSpeed := s.MaxSpeed * multiplier
+	acceleration := s.Acceleration * multiplier
+	rotateSpeed := s.RotateSpeed * multiplier
+
 	// 未到达目标位置，逐渐加速
-	if s.CurSpeed < s.MaxSpeed {
-		s.CurSpeed = min(s.MaxSpeed, s.CurSpeed+s.Acceleration)
+	if s.CurSpeed < maxSpeed {
+		s.CurSpeed = min(maxSpeed, s.CurSpeed+acceleration)
 	}
 	// 到目标位置附近，逐渐减速
 	if nearGoal && s.CurPos.Near(targetPos, s.Length/constants.MapBlockSize*1.5) {
-		s.CurSpeed = max(s.Acceleration*20, s.CurSpeed-s.Acceleration*10)
+		s.CurSpeed = max(acceleration*20, s.CurSpeed-acceleration*10)
 	}
 	targetRotation := s.CurPos.Angle(targetPos)
 	// 逐渐转向
@@ -328,7 +336,7 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 		if math.Mod(targetRotation-s.CurRotation+360, 360) > 180 {
 			rotateFlag = RotateFlagAnticlockwise
 		}
-		s.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-s.CurRotation), s.RotateSpeed)
+		s.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-s.CurRotation), rotateSpeed)
 		s.CurRotation = math.Mod(s.CurRotation+360, 360)
 		// 如果距离太近，则原地旋转到差不多角度，才开始移动
 		if s.CurPos.Near(targetPos, 4) && math.Abs(s.CurRotation-targetRotation) > 1 {
