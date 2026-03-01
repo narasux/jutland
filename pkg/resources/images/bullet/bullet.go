@@ -28,6 +28,12 @@ var torpedoDiameters = []int{324, 450, 533, 570, 610, 622, 1350}
 // torpedoes 鱼雷图片映射表
 var torpedoes = make(map[int]*ebiten.Image)
 
+// bombDiameters 支持的炸弹口径列表
+var bombDiameters = []int{457, 380, 356, 280, 273, 160, 70}
+
+// bombs 炸弹图片映射表
+var bombs = make(map[int]*ebiten.Image)
+
 // init 预加载炮弹和鱼雷图片资源
 func init() {
 	// 加载炮弹图片（图片尺寸是实际显示的4倍，加载时按1/4缩放）
@@ -39,7 +45,7 @@ func init() {
 		}
 		// 缩放到原图的 1/4
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
-		opts.GeoM.Scale(1/4.0, 1/4.0)
+		opts.GeoM.Scale(0.25, 0.25)
 		zoomImg := ebiten.NewImage(img.Bounds().Dx()/4, img.Bounds().Dy()/4)
 		zoomImg.DrawImage(img, opts)
 		shells[diameter] = zoomImg
@@ -54,22 +60,27 @@ func init() {
 		}
 		// 缩放到原图的 1/5 FIXME 后续看下更合适的缩放方式，直接 1/5 好粗暴
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
-		opts.GeoM.Scale(1/5.0, 1/5.0)
+		opts.GeoM.Scale(0.2, 0.2)
 		zoomImg := ebiten.NewImage(img.Bounds().Dx()/5, img.Bounds().Dy()/5)
 		zoomImg.DrawImage(img, opts)
 		torpedoes[diameter] = zoomImg
 	}
-}
 
-var (
-	bb70  = ebutil.NewImageWithColor(2, 4, colorx.Silver)
-	bb160 = ebutil.NewImageWithColor(3, 5, colorx.Silver)
-	bb273 = ebutil.NewImageWithColor(3, 7, colorx.Silver)
-	bb280 = ebutil.NewImageWithColor(3, 8, colorx.Silver)
-	bb356 = ebutil.NewImageWithColor(4, 9, colorx.Silver)
-	bb380 = ebutil.NewImageWithColor(4, 10, colorx.Silver)
-	bb457 = ebutil.NewImageWithColor(5, 12, colorx.Silver)
-)
+	// 加载炸弹图片（图片尺寸是实际显示的4倍，加载时按1/4缩放）
+	for _, diameter := range bombDiameters {
+		path := fmt.Sprintf("/bullets/bombs/%d.png", diameter)
+		img, err := loader.LoadImage(path)
+		if err != nil {
+			log.Fatalf("missing %s: %s", path, err)
+		}
+		// 缩放到原图的 1/4
+		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+		opts.GeoM.Scale(0.25, 0.25)
+		zoomImg := ebiten.NewImage(img.Bounds().Dx()/4, img.Bounds().Dy()/4)
+		zoomImg.DrawImage(img, opts)
+		bombs[diameter] = zoomImg
+	}
+}
 
 var laser50 = ebutil.NewImageWithColor(2, 1000, colorx.Green)
 
@@ -95,21 +106,8 @@ func GetTorpedo(diameter int) *ebiten.Image {
 
 // GetBomb 获取炸弹弹药图片
 func GetBomb(diameter int) *ebiten.Image {
-	switch diameter {
-	case 70:
-		return bb70
-	case 160:
-		return bb160
-	case 273:
-		return bb273
-	case 280:
-		return bb280
-	case 356:
-		return bb356
-	case 380:
-		return bb380
-	case 457:
-		return bb457
+	if img, ok := bombs[diameter]; ok {
+		return img
 	}
 	// 找不到就暴露出来
 	return NotFount

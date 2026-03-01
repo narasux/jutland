@@ -497,7 +497,8 @@
         pos: [34, 33],
         rotation: 90,
         belongPlayer: "HA"
-      },{
+      },
+      {
         name: "yorktown",
         pos: [31, 35],
         rotation: 90,

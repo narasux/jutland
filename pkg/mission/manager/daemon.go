@@ -416,10 +416,18 @@ func (m *MissionManager) updateShotBullets() {
 				if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
 					continue
 				}
-				// 如果是舰对空，设置 7/8 的 “擦肩而过” 率，现在命中率太高了
+				// 如果是舰对空，需要设置 “擦肩而过” 率，现在命中率太高（昭和防空，十防九空）
 				if bt.ShooterObjType == object.TypeShip {
-					if rand.Intn(8) == 0 {
-						continue
+					if plane.Type == objUnit.PlaneTypeDiveBomber {
+						// 俯冲轰炸机要飞得很近，插肩而过率得高一些
+						if rand.Intn(16) != 0 {
+							continue
+						}
+					} else {
+						// 鱼雷机/战斗机按 1/8 的概率被击中
+						if rand.Intn(8) != 0 {
+							continue
+						}
 					}
 				}
 
