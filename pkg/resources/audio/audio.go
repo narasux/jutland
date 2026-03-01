@@ -3,7 +3,6 @@ package audio
 import (
 	"fmt"
 	"log"
-	"slices"
 
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/loader"
@@ -129,25 +128,25 @@ func NewHarborNeutral() types.AudioStream {
 // 轨道炮
 const railGunBulletDiameter = 1024
 
-// 大口径炮弹
-var largeGunBulletDiameter = []int{460, 406, 381, 356, 305}
-
-// 中口径炮弹
-var mediumGunBulletDiameter = []int{203, 155, 152}
-
-// 小口径炮弹
-var smallGunBulletDiameter = []int{140, 127}
+const (
+	// 大口径炮弹阈值
+	largeGunBulletDiameterThreshold = 305
+	// 中口径炮弹
+	mediumGunBulletDiameterThreshold = 152
+	// 小口径炮弹
+	smallGunBulletDiameterThreshold = 127
+)
 
 // NewGunFire 火炮开火
 func NewGunFire(bulletDiameter int) types.AudioStream {
 	audioType := "silent"
 	if bulletDiameter == railGunBulletDiameter {
 		audioType = "rail"
-	} else if slices.Contains(largeGunBulletDiameter, bulletDiameter) {
+	} else if bulletDiameter >= largeGunBulletDiameterThreshold {
 		audioType = "large"
-	} else if slices.Contains(mediumGunBulletDiameter, bulletDiameter) {
+	} else if bulletDiameter >= mediumGunBulletDiameterThreshold {
 		audioType = "medium"
-	} else if slices.Contains(smallGunBulletDiameter, bulletDiameter) {
+	} else if bulletDiameter >= smallGunBulletDiameterThreshold {
 		audioType = "small"
 	}
 	return mustNewAudio(fmt.Sprintf("/fire/gun_%s.wav", audioType))
