@@ -13,6 +13,7 @@ func (f *FiringArc) Contains(angle float64) bool {
 	return f.Start <= angle && angle <= f.End
 }
 
+// WeaponType 武器类型
 type WeaponType string
 
 const (
@@ -30,6 +31,7 @@ const (
 	WeaponTypeMissile WeaponType = "missile"
 )
 
+// WeaponMetadata 武器元数据
 type WeaponMetadata struct {
 	Name string `json:"name"`
 	// 相对位置

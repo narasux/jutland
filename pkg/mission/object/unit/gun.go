@@ -119,16 +119,16 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 	rangePercent := distance / g.Range
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
 
-	shotType := objBullet.BulletShotTypeArcing
+	shotType := objBullet.ShotTypeArcing
 	// 某些情况下使用直射
 	if g.Name == "RailGun" {
-		shotType = objBullet.BulletShotTypeDirect
+		shotType = objBullet.ShotTypeDirect
 	} else {
-		diameter := objBullet.BulletMap[g.BulletName].Diameter
+		diameter := objBullet.Map[g.BulletName].Diameter
 		if rangePercent < 0.65 || diameter <= 100 ||
 			(diameter <= 200 && rangePercent < 0.8) ||
 			(diameter <= 300 && rangePercent < 0.65) {
-			shotType = objBullet.BulletShotTypeDirect
+			shotType = objBullet.ShotTypeDirect
 		}
 	}
 

@@ -1,5 +1,6 @@
 package reference
 
+// Link 链接信息
 type Link struct {
 	// 名称
 	Name string `json:"name"`

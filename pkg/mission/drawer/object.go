@@ -277,7 +277,7 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.ForwardingBullets {
 		// 如果是激光，且刚发射，则不渲染
 		// FIXME-P1 实际解决还是得算位移，不然贴脸时候就没展示了
-		if b.Type == objBullet.BulletTypeLaser && b.ForwardAge < 2 {
+		if b.Type == objBullet.TypeLaser && b.ForwardAge < 2 {
 			continue
 		}
 		img := objBullet.GetImg(b.Type, b.Diameter)

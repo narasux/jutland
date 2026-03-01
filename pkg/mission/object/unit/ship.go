@@ -224,7 +224,7 @@ func (s *BattleShip) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 // HurtBy 受到伤害
 func (s *BattleShip) HurtBy(bullet *objBullet.Bullet) {
 	realDamage := 0.0
-	if bullet.ShotType == objBullet.BulletShotTypeDirect {
+	if bullet.ShotType == objBullet.ShotTypeDirect {
 		// 平射打击水平装甲带
 		realDamage = bullet.Damage * (1 - s.HorizontalDamageReduction)
 	} else {

@@ -17,26 +17,28 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
-type BulletType string
+// Type 弹药类型
+type Type string
 
 const (
-	// BulletTypeShell 火炮炮弹
-	BulletTypeShell BulletType = "shell"
-	// BulletTypeTorpedo 鱼雷
-	BulletTypeTorpedo BulletType = "torpedo"
-	// BulletTypeBomb 炸弹
-	BulletTypeBomb BulletType = "bomb"
-	// BulletTypeLaser 镭射
-	BulletTypeLaser BulletType = "laser"
+	// TypeShell 火炮炮弹
+	TypeShell Type = "shell"
+	// TypeTorpedo 鱼雷
+	TypeTorpedo Type = "torpedo"
+	// TypeBomb 炸弹
+	TypeBomb Type = "bomb"
+	// TypeLaser 镭射
+	TypeLaser Type = "laser"
 )
 
-type BulletShotType int
+// ShotType 射击方式
+type ShotType int
 
 const (
-	// BulletShotTypeDirect 直射
-	BulletShotTypeDirect BulletShotType = iota
-	// BulletShotTypeArcing 曲射（抛物线射击）
-	BulletShotTypeArcing
+	// ShotTypeDirect 直射
+	ShotTypeDirect ShotType = iota
+	// ShotTypeArcing 曲射（抛物线射击）
+	ShotTypeArcing
 )
 
 type CriticalType int
@@ -55,7 +57,7 @@ type Bullet struct {
 	// 弹药名称
 	Name string `json:"name"`
 	// 弹药类型
-	Type BulletType `json:"type"`
+	Type Type `json:"type"`
 	// 口径
 	Diameter int `json:"diameter"`
 	// 伤害数值
@@ -76,7 +78,7 @@ type Bullet struct {
 	// 速度
 	Speed float64
 	// 射击方式
-	ShotType BulletShotType
+	ShotType ShotType
 	// 目标对象类型
 	TargetObjType object.Type
 	// 前进周期数
@@ -105,9 +107,9 @@ func (b *Bullet) Forward() {
 	nextPos.SubRy(math.Cos(b.Rotation*math.Pi/180) * b.Speed)
 
 	// 直射的弹药只要一直塔塔开就好了，曲射的要考虑的就多了去了 :）
-	if b.ShotType == BulletShotTypeDirect {
+	if b.ShotType == ShotTypeDirect {
 		b.CurPos = nextPos
-	} else if b.ShotType == BulletShotTypeArcing {
+	} else if b.ShotType == ShotTypeArcing {
 		curDist, nextDist := b.CurPos.Distance(b.TargetPos), nextPos.Distance(b.TargetPos)
 		// 离目标地点越来越远，说明下一个位置已经过了，曲射就是已经命中
 		b.CurPos = lo.Ternary(nextDist > curDist, b.TargetPos, nextPos)
@@ -131,12 +133,12 @@ func (b *Bullet) GenTrails() []*trail.Trail {
 		return nil
 	}
 	// 镭射弹药没有尾流
-	if b.Type == BulletTypeLaser {
+	if b.Type == TypeLaser {
 		return nil
 	}
 	// 不同类型的尾流特性不同
 	diffusionRate, multipleSizeAsLife, lifeReductionRate := 0.1, 7.0, 2.0
-	if b.Type == BulletTypeTorpedo {
+	if b.Type == TypeTorpedo {
 		diffusionRate, multipleSizeAsLife, lifeReductionRate = 0.5, 8.0, 3.0
 	}
 	size := float64(GetImgWidth(b.Name, b.Type, b.Diameter))
@@ -150,7 +152,8 @@ func (b *Bullet) GenTrails() []*trail.Trail {
 	}
 }
 
-var BulletMap = map[string]*Bullet{}
+// Map 弹药表
+var Map = map[string]*Bullet{}
 
 // New 新建弹药
 func New(
@@ -159,12 +162,12 @@ func New(
 	shooterUid string,
 	shooterObjType object.Type,
 	shooterBelongPlayer faction.Player,
-	shotType BulletShotType,
+	shotType ShotType,
 	targetObjectType object.Type,
 	speed float64,
 	life int,
 ) *Bullet {
-	b := deepcopy.Copy(*BulletMap[name]).(Bullet)
+	b := deepcopy.Copy(*Map[name]).(Bullet)
 
 	b.Uid = uuid.New().String()
 	b.CurPos = curPos
@@ -186,8 +189,8 @@ func New(
 }
 
 // GetType 获取弹药类型
-func GetType(name string) BulletType {
-	b, ok := BulletMap[name]
+func GetType(name string) Type {
+	b, ok := Map[name]
 	if !ok {
 		log.Fatalf("bullet %s no found", name)
 	}
@@ -195,15 +198,15 @@ func GetType(name string) BulletType {
 }
 
 // GetImg 获取弹药图片
-func GetImg(btType BulletType, diameter int) *ebiten.Image {
+func GetImg(btType Type, diameter int) *ebiten.Image {
 	switch btType {
-	case BulletTypeShell:
+	case TypeShell:
 		return bulletImg.GetShell(diameter)
-	case BulletTypeTorpedo:
+	case TypeTorpedo:
 		return bulletImg.GetTorpedo(diameter)
-	case BulletTypeBomb:
+	case TypeBomb:
 		return bulletImg.GetBomb(diameter)
-	case BulletTypeLaser:
+	case TypeLaser:
 		return bulletImg.GetLaser(diameter)
 	}
 	return bulletImg.NotFount
@@ -212,7 +215,7 @@ func GetImg(btType BulletType, diameter int) *ebiten.Image {
 var BulletImgWidthMap = map[string]int{}
 
 // GetImgWidth 获取弹药图片宽度（虽然可能价值不大，总之先加一点缓存 :）
-func GetImgWidth(btName string, btType BulletType, diameter int) int {
+func GetImgWidth(btName string, btType Type, diameter int) int {
 	if width, ok := BulletImgWidthMap[btName]; ok {
 		return width
 	}

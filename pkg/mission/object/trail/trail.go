@@ -1,9 +1,9 @@
 package trail
 
 import (
-	"github.com/narasux/jutland/pkg/config"
 	"image/color"
 
+	"github.com/narasux/jutland/pkg/config"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )

@@ -80,8 +80,8 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 	// 成功释放弹药
 	r.Released = true
 	shotType := lo.Ternary(
-		objBullet.GetType(r.BulletName) == objBullet.BulletTypeBomb,
-		objBullet.BulletShotTypeArcing, objBullet.BulletShotTypeDirect,
+		objBullet.GetType(r.BulletName) == objBullet.TypeBomb,
+		objBullet.ShotTypeArcing, objBullet.ShotTypeDirect,
 	)
 	life := int(r.Range/bulletSpeed) + 5
 

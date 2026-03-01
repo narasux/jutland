@@ -41,7 +41,7 @@ func initBulletMap() {
 	}
 
 	for _, b := range bullets {
-		objBullet.BulletMap[b.Name] = &b
+		objBullet.Map[b.Name] = &b
 	}
 	log.Println("bullets data loaded from json5 file")
 }

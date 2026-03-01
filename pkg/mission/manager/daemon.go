@@ -148,7 +148,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 			// 镜头内的才统计
 			if m.state.Camera.Contains(ship.CurPos) {
 				for _, bt := range bullets {
-					if bt.Type == objBullet.BulletTypeTorpedo {
+					if bt.Type == objBullet.TypeTorpedo {
 						isTorpedoLaunched = true
 					} else {
 						// 只有炮弹才计算口径，鱼雷发射都是一个声音
@@ -306,9 +306,9 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 					if bombReleased || torpedoLaunched {
 						break
 					}
-					if bt.Type == objBullet.BulletTypeBomb {
+					if bt.Type == objBullet.TypeBomb {
 						bombReleased = true
-					} else if bt.Type == objBullet.BulletTypeTorpedo {
+					} else if bt.Type == objBullet.TypeTorpedo {
 						torpedoLaunched = true
 					}
 				}
@@ -342,7 +342,7 @@ func (m *MissionManager) updateObjectTrails() {
 	}
 	for _, bt := range m.state.ForwardingBullets {
 		// 炸弹目前没有尾流
-		if bt.Type == objBullet.BulletTypeBomb {
+		if bt.Type == objBullet.TypeBomb {
 			continue
 		}
 		if trails := bt.GenTrails(); trails != nil {
@@ -375,7 +375,7 @@ func (m *MissionManager) updateShotBullets() {
 					continue
 				}
 
-				if bt.ShotType == objBullet.BulletShotTypeDirect {
+				if bt.ShotType == objBullet.ShotTypeDirect {
 					// 直射则检查线段是否与矩形相交
 					if geometry.IsSegmentIntersectRotatedRectangle(
 						prevPos.RX, prevPos.RY,
@@ -390,7 +390,7 @@ func (m *MissionManager) updateShotBullets() {
 						bt.HitObjType = object.TypeShip
 						break
 					}
-				} else if bt.ShotType == objBullet.BulletShotTypeArcing {
+				} else if bt.ShotType == objBullet.ShotTypeArcing {
 					// 弧线炮弹，只要命中一个目标，就不再继续搜索
 					if geometry.IsPointInRotatedRectangle(
 						prevPos.RX, prevPos.RY,
@@ -452,7 +452,7 @@ func (m *MissionManager) updateShotBullets() {
 			bt.HitObjType = object.TypeWater
 			continue
 		}
-		if bt.ShotType == objBullet.BulletShotTypeArcing {
+		if bt.ShotType == objBullet.ShotTypeArcing {
 			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
 			if bt.CurPos.Near(bt.TargetPos, 0.05) {
 				if !resolveDamage(bt) {
@@ -463,9 +463,9 @@ func (m *MissionManager) updateShotBullets() {
 			} else {
 				forwardingBullets = append(forwardingBullets, bt)
 			}
-		} else if bt.ShotType == objBullet.BulletShotTypeDirect {
+		} else if bt.ShotType == objBullet.ShotTypeDirect {
 			// 鱼雷碰撞到陆地，应该不再前进
-			if bt.Type == objBullet.BulletTypeTorpedo && m.state.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
+			if bt.Type == objBullet.TypeTorpedo && m.state.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
 				bt.HitObjType = object.TypeLand
 				arrivedBullets = append(arrivedBullets, bt)
 			} else if resolveDamage(bt) {
