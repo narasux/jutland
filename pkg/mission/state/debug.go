@@ -6,4 +6,6 @@ type DebugFlags struct {
 	DamageColorByTeam bool
 	// ShowCursorPosObjInfo 显示光标悬停对象信息
 	ShowCursorPosObjInfo bool
+	// ShowPlaneHP 显示飞机生命值（当前 HP / 总 HP）
+	ShowPlaneHP bool
 }

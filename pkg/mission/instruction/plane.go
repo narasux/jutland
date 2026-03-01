@@ -46,6 +46,8 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
+	// 设置攻击目标
+	attacker.CurAttackTarget = i.targetUid
 
 	var enemy objUnit.Hurtable
 	var enemyExists bool
@@ -72,7 +74,8 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
-	attacker.MoveTo(missionState.MissionMD.MapCfg, targetPos)
+	// 传递目标位置、敌人当前位置和目标速度，用于战斗机追踪时调整速度
+	attacker.MoveTo(missionState.MissionMD.MapCfg, targetPos, eState.CurPos, eState.CurSpeed)
 	return nil
 }
 
@@ -128,7 +131,8 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 		ship.CurPos.RX, ship.CurPos.RY, ship.CurSpeed, ship.CurRotation,
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
-	plane.MoveTo(missionState.MissionMD.MapCfg, targetPos)
+	// 返航时不需要调整速度（敌人位置和目标速度都传空值/0）
+	plane.MoveTo(missionState.MissionMD.MapCfg, targetPos, objPos.New(0, 0), 0)
 	// 飞机到达载舰附近，判定已经完成
 	if plane.CurPos.Near(ship.CurPos, 1) {
 		// 尝试回收飞机

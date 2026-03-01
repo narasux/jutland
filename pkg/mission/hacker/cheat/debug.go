@@ -25,6 +25,7 @@ func (c *DebugAll) Exec(misState *state.MissionState) string {
 	misState.DebugFlags = state.DebugFlags{
 		DamageColorByTeam:    true,
 		ShowCursorPosObjInfo: true,
+		ShowPlaneHP:          true,
 	}
 	return "Enabled all debug flags"
 }
@@ -76,3 +77,26 @@ func (c *ShowCursorPosObjInfo) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*ShowCursorPosObjInfo)(nil)
+
+// ShowPlaneHP -> 修改是否显示飞机生命值
+type ShowPlaneHP struct{}
+
+func (c *ShowPlaneHP) String() string {
+	return "show plane hp"
+}
+
+func (c *ShowPlaneHP) Desc() string {
+	return "switch show plane HP on/off (display current HP / total HP above planes)"
+}
+
+func (c *ShowPlaneHP) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *ShowPlaneHP) Exec(misState *state.MissionState) string {
+	nextState := !misState.DebugFlags.ShowPlaneHP
+	misState.DebugFlags.ShowPlaneHP = nextState
+	return "Toggled show plane HP: " + lo.Ternary(nextState, "on", "off")
+}
+
+var _ Cheat = (*ShowPlaneHP)(nil)

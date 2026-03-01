@@ -1,6 +1,7 @@
 package drawer
 
 import (
+	"fmt"
 	"slices"
 	"strconv"
 	"strings"
@@ -240,6 +241,23 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 			(p.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(pImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(pImg, opts)
+
+		// DEBUG: 如果启用了调试显示飞机 HP，则在飞机上部显示生命值
+		if ms.DebugFlags.ShowPlaneHP {
+			// 格式：当前 HP / 总 HP（例如：85.0/100.0）
+			hpText := fmt.Sprintf("%.1f/%.1f", p.CurHP, p.TotalHP)
+			fontSize := float64(14)
+			// 计算文本位置（飞机图片上方居中）
+			textWidth := float64(len(hpText)) * fontSize * 0.6 // 估算文本宽度
+			posX := (p.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize - textWidth/2
+			posY := (p.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize - float64(pImg.Bounds().Dy()/2) - 20
+			// 根据阵营选择颜色：友军绿色，敌军红色
+			textColor := colorx.Green
+			if p.BelongPlayer != ms.CurPlayer {
+				textColor = colorx.Red
+			}
+			d.drawText(screen, hpText, posX, posY, fontSize, font.Hang, textColor)
+		}
 	}
 }
 

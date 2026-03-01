@@ -3,14 +3,12 @@ package unit
 import (
 	"fmt"
 	"log"
-	"math"
 	"math/rand"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
-	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -82,11 +80,16 @@ type Plane struct {
 	CurSpeed float64
 	// 剩余航程
 	RemainRange float64
+	// 当前攻击目标 (uid)
+	CurAttackTarget string
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 	// 所属战舰（uid）
 	BelongShip string
+
+	// 移动策略（根据飞机类型自动设置）
+	movementStrategy MovementStrategy
 }
 
 var _ Hurtable = (*Plane)(nil)
@@ -101,8 +104,8 @@ func (p *Plane) ID() string {
 // Detail 详细信息
 func (p *Plane) Detail() string {
 	return fmt.Sprintf(
-		"Plane %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f",
-		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.CurSpeed, p.MaxSpeed, p.CurHP, p.TotalHP,
+		"Plane %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f, AttackTarget: %s",
+		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.CurSpeed, p.MaxSpeed, p.CurHP, p.TotalHP, p.CurAttackTarget,
 	)
 }
 
@@ -189,39 +192,14 @@ func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
 }
 
 // MoveTo 移动到指定位置
-func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos) {
-	// 如果生命值为 0，肯定是走不动，直接返回
-	if p.CurHP <= 0 {
-		return
-	}
-	// 应用全局速度倍率
-	maxSpeed := p.MaxSpeed * config.G.SpeedMultiplier
-	rotateSpeed := p.RotateSpeed * config.G.SpeedMultiplier
-
-	// 飞机只要移动，就是最大速度（简化逻辑）
-	p.CurSpeed = maxSpeed
-
-	targetRotation := p.CurPos.Angle(targetPos)
-	// 逐渐转向
-	if p.CurRotation != targetRotation {
-		// 默认顺时针旋转
-		rotateFlag := RotateFlagClockwise
-		// 如果逆时针夹角小于顺时针夹角，则需要逆时针旋转
-		if math.Mod(targetRotation-p.CurRotation+360, 360) > 180 {
-			rotateFlag = RotateFlagAnticlockwise
-		}
-		p.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-p.CurRotation), rotateSpeed)
-		p.CurRotation = math.Mod(p.CurRotation+360, 360)
-	}
-	nextPos := p.CurPos.Copy()
-	// 修改位置
-	nextPos.AddRx(math.Sin(p.CurRotation*math.Pi/180) * p.CurSpeed)
-	nextPos.SubRy(math.Cos(p.CurRotation*math.Pi/180) * p.CurSpeed)
-	// 防止出边界
-	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
-	// 移动到新位置
-	p.CurPos = nextPos
-	p.RemainRange -= p.CurSpeed
+// 参数:
+//   - mapCfg: 地图配置
+//   - targetPos: 目标位置（提前量位置）
+//   - enemyPos: 敌人当前位置（用于战斗机计算追踪距离）
+//   - targetSpeed: 目标速度（用于战斗机追踪时调整自身速度，默认为0表示不调整）
+func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos, enemyPos objPos.MapPos, targetSpeed float64) {
+	// 委托给移动策略处理
+	p.movementStrategy.MoveTo(p, mapCfg, targetPos, enemyPos, targetSpeed)
 }
 
 // MustReturn 必须返航
@@ -270,6 +248,10 @@ func NewPlane(
 	p.CurRotation = rotation
 	p.BelongPlayer = player
 	p.BelongShip = shipUid
+
+	// 根据飞机类型初始化移动策略
+	p.movementStrategy = NewMovementStrategy(p.Type)
+
 	return &p
 }
 
