@@ -36,6 +36,7 @@ var bombs = make(map[int]*ebiten.Image)
 
 // init 预加载炮弹和鱼雷图片资源
 func init() {
+	// FIXME 后续支持加载 1， 1/2， 1/4 三种尺寸
 	// 加载炮弹图片（图片尺寸是实际显示的4倍，加载时按1/4缩放）
 	for _, diameter := range shellDiameters {
 		path := fmt.Sprintf("/bullets/shells/%d.png", diameter)
@@ -58,9 +59,9 @@ func init() {
 		if err != nil {
 			log.Fatalf("missing %s: %s", path, err)
 		}
-		// 缩放到原图的 1/5 FIXME 后续看下更合适的缩放方式，直接 1/5 好粗暴
+		// 缩放到原图的 1/4
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
-		opts.GeoM.Scale(0.2, 0.2)
+		opts.GeoM.Scale(0.25, 0.25)
 		zoomImg := ebiten.NewImage(img.Bounds().Dx()/5, img.Bounds().Dy()/5)
 		zoomImg.DrawImage(img, opts)
 		torpedoes[diameter] = zoomImg
