@@ -18,6 +18,11 @@ type PlaneAttack struct {
 	targetObjType object.Type
 	targetUid     string
 	status        InstrStatus
+	// 一击脱离（Hit-and-Run）相关字段：
+	// 飞机攻击战舰时，释放鱼雷/炸弹后应立即脱离，由 daemon 分配下一个目标，
+	// 而非持续追踪同一目标直到其被击沉。通过快照比对方式检测武器释放事件。
+	releaserSnapshot []bool // 指令创建时各释放器（炸弹+鱼雷）的 Released 状态快照
+	snapshotTaken    bool   // 标记是否已拍摄快照，避免重复拍摄覆盖初始状态
 }
 
 // NewPlaneAttack ...
@@ -31,6 +36,49 @@ func NewPlaneAttack(planeUid string, targetObjType object.Type, targetUid string
 }
 
 var _ Instruction = (*PlaneAttack)(nil)
+
+// takeReleaserSnapshot 拍摄释放器状态快照
+// 按 Bombs → Torpedoes 的顺序，记录每个释放器当前的 Released 状态，
+// 后续通过 hasNewRelease 比对，发现从 false → true 的变化即视为完成了一次攻击。
+func (i *PlaneAttack) takeReleaserSnapshot(plane *objUnit.Plane) {
+	if i.snapshotTaken {
+		return
+	}
+	i.snapshotTaken = true
+	i.releaserSnapshot = make([]bool, len(plane.Weapon.Bombs)+len(plane.Weapon.Torpedoes))
+	idx := 0
+	for _, b := range plane.Weapon.Bombs {
+		i.releaserSnapshot[idx] = b.Released
+		idx++
+	}
+	for _, t := range plane.Weapon.Torpedoes {
+		i.releaserSnapshot[idx] = t.Released
+		idx++
+	}
+}
+
+// hasNewRelease 检测是否有新的释放（鱼雷/炸弹）
+// 将当前释放器状态与快照逐一比对，任一释放器从 false（快照时未释放）
+// 变为 true（当前已释放），即认为飞机已完成一次攻击投弹，应脱离目标。
+func (i *PlaneAttack) hasNewRelease(plane *objUnit.Plane) bool {
+	if !i.snapshotTaken {
+		return false
+	}
+	idx := 0
+	for _, b := range plane.Weapon.Bombs {
+		if idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] && b.Released {
+			return true
+		}
+		idx++
+	}
+	for _, t := range plane.Weapon.Torpedoes {
+		if idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] && t.Released {
+			return true
+		}
+		idx++
+	}
+	return false
+}
 
 // Exec 执行指令
 func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
@@ -64,6 +112,21 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	if !enemyExists {
 		i.status = Executed
 		return nil
+	}
+
+	// 一击脱离逻辑（仅对战舰目标生效，对飞机目标保持持续追踪直到击落）：
+	// 飞机对战舰的攻击本质上是投弹/投雷后即脱离，不需要像空战那样持续缠斗。
+	// 脱离后 daemon 进程（updatePlaneAttackOrReturn）会在下一帧检测到该飞机
+	// 无攻击指令，并为其重新分配目标或触发返航。
+	if i.targetObjType == object.TypeShip {
+		// 首次执行时拍摄快照，记录此刻各释放器的状态作为基准线
+		i.takeReleaserSnapshot(attacker)
+		// 检测是否有新的鱼雷/炸弹释放，如果有则一击脱离
+		if i.hasNewRelease(attacker) {
+			attacker.CurAttackTarget = ""
+			i.status = Executed
+			return nil
+		}
 	}
 
 	// 如果目标存在，则战机应该冲上去贴贴
