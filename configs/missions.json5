@@ -484,63 +484,221 @@
     name: "Gamma",
     displayName: "帕劳群岛-1944",
     initFunds: 8000,
-    initCameraPos: [28, 30],
+    initCameraPos: [18, 37],
     mapName: "peleliu",
-    maxShipCount: 30,
+    maxShipCount: 24,
     description: [
-      "佩莱利乌岛是西太平洋上的帕劳群岛中的一部分"
+      "1944 年 9 月，帕劳群岛，太平洋战场",
+      "美军双航母特混编队从西侧逼近帕劳群岛，企图夺取制海权",
+      "日本联合舰队双航母机动部队从东南方向迂回，意图截断美军补给线",
+      "两支重兵集团即将在佩莱利乌海域展开大规模航母对决"
     ],
-    initReinforcePoints: [],
-    initOilPlatforms: [],
+    initReinforcePoints: [
+      {
+        pos: [1, 42],
+        rotation: 90,
+        rallyPos: [20, 42],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "yorktown",
+          "south_dakota",
+          "pensacola",
+          "atlanta",
+          "porter",
+          "liberty"
+        ],
+      },
+      {
+        pos: [125, 105],
+        rotation: 270,
+        rallyPos: [110, 105],
+        belongPlayer: "CA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "taiho",
+          "fuso",
+          "atago",
+          "yahagi",
+          "asashio",
+          "yugumo",
+        ],
+      },
+    ],
+    initOilPlatforms: [
+      {
+        pos: [55, 15],
+        radius: 3,
+        yield: 20
+      },
+      {
+        pos: [55, 55],
+        radius: 3,
+        yield: 25
+      },
+      {
+        pos: [80, 95],
+        radius: 3,
+        yield: 20
+      },
+    ],
     initShips: [
+      // === 美方双航母编队（左侧，y≈35-50） ===
+      // BB: 战列舰前方
       {
         name: "south_dakota",
-        pos: [34, 33],
+        pos: [30, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
+        name: "lowa",
+        pos: [30, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // CA: 重巡洋舰居中两翼
+      {
+        name: "astoria",
+        pos: [28, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "pensacola",
+        pos: [28, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // CV: 航母居中偏后
+      {
         name: "yorktown",
-        pos: [31, 35],
+        pos: [22, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "saratoga",
-        pos: [32, 37],
+        pos: [22, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // CL: 轻巡洋舰两侧
+      {
+        name: "atlanta",
+        pos: [25, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "south_dakota",
-        pos: [35, 39],
+        name: "atlanta",
+        pos: [25, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // DD: 驱逐舰外围
+      {
+        name: "porter",
+        pos: [32, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kongo",
-        pos: [103, 34],
+        name: "porter",
+        pos: [32, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "maury",
+        pos: [20, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "maury",
+        pos: [20, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === 日方双航母编队（右下角，y≈98-112） ===
+      // BB: 战列舰前方（面朝左，x 值较大靠前）
+      {
+        name: "yamato",
+        pos: [100, 103],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "fuso",
+        pos: [100, 107],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // CA: 重巡洋舰居中两翼
+      {
+        name: "atago",
+        pos: [102, 101],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "haguro",
+        pos: [102, 109],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // CV: 航母居中偏后（面朝左，x 值较小为后方）
+      {
+        name: "taiho",
+        pos: [108, 103],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "taiho",
-        pos: [105, 36],
+        pos: [108, 107],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // CL: 轻巡洋舰两侧
+      {
+        name: "yahagi",
+        pos: [105, 99],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
-        name: "taiho",
-        pos: [107, 39],
+        name: "ooyodo",
+        pos: [105, 111],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // DD: 驱逐舰外围
+      {
+        name: "asashio",
+        pos: [98, 99],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
-        name: "kongo",
-        pos: [103, 41],
+        name: "asashio",
+        pos: [98, 111],
         rotation: 270,
         belongPlayer: "CA"
-      }
+      },
+      {
+        name: "yukikaze",
+        pos: [110, 101],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [110, 109],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
     ],
   },
   {

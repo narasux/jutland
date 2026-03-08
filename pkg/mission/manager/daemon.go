@@ -420,7 +420,7 @@ func (m *MissionManager) updateShotBullets() {
 				if bt.ShooterObjType == object.TypeShip {
 					if plane.Type == objUnit.PlaneTypeDiveBomber {
 						// 俯冲轰炸机要飞得很近，插肩而过率得高一些
-						if rand.Intn(16) != 0 {
+						if rand.Intn(12) != 0 {
 							continue
 						}
 					} else {
