@@ -145,21 +145,32 @@ type ShipMovePath struct {
 	path      []objPos.MapPos
 	curIdx    int
 	status    InstrStatus
+	// 创建指令时战舰的当前速度，用于路径就绪后恢复速度
+	initSpeed float64
 }
 
 // NewShipMovePath ...
-func NewShipMovePath(shipUid string, curPos, targetPos objPos.MapPos) *ShipMovePath {
-	return &ShipMovePath{shipUid: shipUid, curPos: curPos, targetPos: targetPos, status: Pending}
+func NewShipMovePath(shipUid string, curPos, targetPos objPos.MapPos, curSpeed float64) *ShipMovePath {
+	return &ShipMovePath{shipUid: shipUid, curPos: curPos, targetPos: targetPos, status: Pending, initSpeed: curSpeed}
 }
 
 var _ Instruction = (*ShipMovePath)(nil)
 
 // Exec ...
 func (i *ShipMovePath) Exec(s *state.MissionState) error {
+	// 路径生成失败（寻路失败），直接返回
+	if i.status == Executed {
+		return nil
+	}
+
 	if i.status != Ready {
 		if i.status != Preparing {
 			i.status = Preparing
 			go i.genPath(s)
+		}
+		// Preparing 状态下，让战舰继续朝目标方向直线移动作为过渡
+		if ship, ok := s.Ships[i.shipUid]; ok && ship.CurSpeed > 0 {
+			ship.MoveTo(s.MissionMD.MapCfg, i.targetPos, false)
 		}
 		return nil
 	}
@@ -175,6 +186,32 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
+
+	// 路径就绪后的首帧处理（initSpeed >= 0 表示尚未处理过）
+	if i.initSpeed >= 0 {
+		// 恢复创建指令时的速度，确保不因路径切换而归零
+		if i.initSpeed > 0 {
+			ship.CurSpeed = min(i.initSpeed, ship.MaxSpeed)
+		}
+		// 标记首帧处理已完成，避免后续帧重复执行
+		i.initSpeed = -1
+		// 找到路径中离战舰当前位置最近的有效路径点，跳过已经过的点
+		// 避免战舰在过渡移动后"回退"到已经过的路径点
+		minDist := ship.CurPos.Distance(i.path[0])
+		bestIdx := 0
+		for idx := 1; idx < len(i.path); idx++ {
+			dist := ship.CurPos.Distance(i.path[idx])
+			if dist < minDist {
+				minDist = dist
+				bestIdx = idx
+			} else {
+				// 路径点距离开始增大，说明已经过了最近点，停止搜索
+				break
+			}
+		}
+		i.curIdx = bestIdx
+	}
+
 	if ship.MoveTo(
 		s.MissionMD.MapCfg,
 		i.path[i.curIdx],
@@ -201,6 +238,15 @@ func (i *ShipMovePath) genPath(misState *state.MissionState) {
 		i.path = append(i.path, objPos.New(p.X, p.Y))
 	}
 	i.path = append(i.path, i.targetPos)
+
+	// 如果战舰仍然存在，检查路径起始点是否与战舰当前实际位置重合或过近
+	// 如果是则跳过起始点，避免 MoveTo 因"已到达"而将速度归零
+	if ship, ok := misState.Ships[i.shipUid]; ok {
+		if ship.CurPos.Near(i.path[0], 0.6) && len(i.path) > 1 {
+			i.path = i.path[1:]
+		}
+	}
+
 	i.status = Ready
 }
 

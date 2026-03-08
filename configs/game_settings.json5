@@ -3,5 +3,5 @@
 // 范围: 0.25 ~ 4.0，默认值: 1.0
 
 {
-  "speedMultiplier": 1
+  "speedMultiplier": 0.5
 }

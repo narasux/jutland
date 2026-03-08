@@ -367,6 +367,7 @@
         belongPlayer: "CA",
         maxOncomingShip: 5,
         providedShipNames: [
+          "taiho",
           "suzuya",
           "yubari",
           "yugumo",
@@ -1263,6 +1264,12 @@
       {
         name: "ooi",
         pos: [107, 48],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [109, 46],
         rotation: 270,
         belongPlayer: "CA"
       }

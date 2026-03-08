@@ -64,7 +64,7 @@ func (h *ComputerDecisionHandler) Handle(
 			if _, ok := curInstructions[instrUid]; !ok {
 				// 进攻模式，随机选一个敌人冲上去
 				enemy := enemyShips[rand.Intn(len(enemyShips))]
-				instructions[instrUid] = instr.NewShipMovePath(ship.Uid, ship.CurPos, enemy.CurPos)
+				instructions[instrUid] = instr.NewShipMovePath(ship.Uid, ship.CurPos, enemy.CurPos, ship.CurSpeed)
 			}
 		} else if ship.CurPos.OnBorder(
 			float64(misState.MissionMD.MapCfg.Width-2),
