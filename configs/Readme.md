@@ -15,6 +15,8 @@
     // 弹药类型
     // shell 炮弹
     // torpedo 鱼雷
+    // bomb 炸弹
+    // laser 镭射
     type: "shell",
     // 口径
     diameter: 305,
@@ -51,7 +53,11 @@
     bulletSpread: 50,
     // 炮弹速度
     // 推荐值：1km/s -> 1000
-    bulletSpeed: 1000
+    bulletSpeed: 1000,
+    // 是否对舰
+    antiShip: true,
+    // 是否对空
+    antiAircraft: true
   }
 ]
 ```
@@ -130,6 +136,8 @@
     fundsCost: 150,
     // 增援时间
     timeCost: 12,
+    // 吨位
+    tonnage: 8000,
     // 战舰描述（建议不多于 4 行）
     description: [
       "导弹巡洋舰（美）",
@@ -190,9 +198,160 @@
           leftFiringArc: [210, 330]
         },
       ]
+    },
+    // 舰载机联队（仅航空母舰需要配置）
+    aircraft: {
+      // 起飞间隔（单位：秒）
+      takeOffTime: 1,
+      // 飞机编组
+      groups: [
+        {
+          // 飞机名称（需确保在 planes.json5 中存在）
+          name: "F",
+          // 最大数量
+          maxCount: 12
+        },
+        {
+          name: "B",
+          maxCount: 12
+        },
+        {
+          name: "A",
+          maxCount: 12
+        }
+      ]
     }
   }
 ]
+```
+
+## 飞机配置（planes.json5）
+
+```json5
+[
+  {
+    // 飞机名称（不可重复）
+    name: "F4F-3",
+    // 展示用名称
+    displayName: "野猫",
+    // 飞机类型，可选值：
+    // fighter 战斗机
+    // dive_bomber 俯冲轰炸机
+    // torpedo_bomber 鱼雷轰炸机
+    type: "fighter",
+    // 类型缩写
+    typeAbbr: "F",
+    // 初始生命值
+    totalHP: 35,
+    // 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
+    damageReduction: 0.5,
+    // 最大速度
+    maxSpeed: 533,
+    // 加速度
+    acceleration: 30,
+    // 转向速度（度）
+    rotateSpeed: 12,
+    // 飞机长度（实际长度，单位：米）
+    length: 9,
+    // 飞机宽度（翼展，单位：米）
+    width: 12,
+    // 造价
+    fundsCost: 10,
+    // 耗时
+    timeCost: 5,
+    // 吨位
+    tonnage: 3.367,
+    // 总航程
+    range: 1360,
+    // 飞机描述
+    description: [
+      "战斗机（美）",
+      "4 x 12.7mm 机枪",
+    ],
+    // 武器配置
+    weapon: {
+      // 机炮（参数与舰炮武器挂载点相同）
+      guns: [
+        {
+          // 舰炮名称，需保证存在
+          name: "US/12.7",
+          // 相对位置（与战舰武器位置参数含义相同）
+          posPercent: 0.5,
+          // 右侧射界
+          rightFiringArc: [0, 20],
+          // 左侧射界
+          leftFiringArc: [340, 360]
+        },
+      ],
+      // 炸弹（仅俯冲轰炸机使用，参数与机炮挂载点相同）
+      bombs: [
+        {
+          // 释放器名称（需确保在 releasers.json5 中存在）
+          name: "US/BB/907",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+      ],
+      // 鱼雷（仅鱼雷轰炸机使用，参数与机炮挂载点相同）
+      torpedoes: [
+        {
+          // 释放器名称（需确保在 releasers.json5 中存在）
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+      ],
+      // 释放间隔（单位：秒，炸弹/鱼雷两次投放之间的最小间隔）
+      releaseInterval: 5
+    }
+  }
+]
+```
+
+## 释放器配置（releasers.json5）
+
+```json5
+[
+  {
+    // 释放器名称（不可重复）
+    // US 是所属阵营，BB 表示炸弹，AST 表示航空鱼雷
+    name: "US/BB/907",
+    // 弹药名称（需确保在 bullets.json5 中存在）
+    bulletName: "US/BB/2000/907",
+    // 射程（地图格数）
+    range: 1.5,
+    // 弹药速度
+    bulletSpeed: 30,
+  }
+]
+```
+
+## 地图配置（maps.json5）
+
+```json5
+[
+  {
+    // 地图名称（不可重复）
+    name: "darwin",
+    // 展示用名称
+    displayName: "达尔文港",
+    // 地图资源名称
+    source: "darwin"
+  }
+]
+```
+
+## 游戏设置配置（game_settings.json5）
+
+```json5
+{
+  // 全局速度倍率
+  // 影响战舰、炮弹、鱼雷、飞机等移动/转向速度
+  // 范围: 0.25 ~ 4.0，默认值: 1.0
+  "speedMultiplier": 1.0
+}
 ```
 
 ## 任务关卡配置（missions.json5）
