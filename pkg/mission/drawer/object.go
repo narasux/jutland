@@ -278,13 +278,13 @@ func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionStat
 		)
 		screen.DrawImage(pImg, opts)
 
-		// 绘制爆炸效果
+		// 绘制爆炸效果，还会额外添加火焰+黑烟尾流来表现坠落拉烟效果
 		explodeImg := textureImg.GetPlaneExplode(p.CurHP)
 		opts = d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, explodeImg, p.CurRotation)
 		opts.GeoM.Translate(
 			(p.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
-			(p.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-10,
+			(p.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2),
 		)
 		screen.DrawImage(explodeImg, opts)
 	}

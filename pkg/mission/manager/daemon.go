@@ -349,6 +349,36 @@ func (m *MissionManager) updateObjectTrails() {
 			m.state.Trails = append(m.state.Trails, trails...)
 		}
 	}
+	// 消亡中的飞机生成火焰 + 黑烟尾流（拉烟效果）
+	for _, plane := range m.state.DestroyedPlanes {
+		if plane.CurSpeed <= 0 {
+			continue
+		}
+		// 计算飞机尾部位置（相对飞机朝向的后方偏移）
+		tailPos := plane.CurPos.Copy()
+		sinVal := math.Sin(plane.CurRotation * math.Pi / 180)
+		cosVal := math.Cos(plane.CurRotation * math.Pi / 180)
+		tailOffset := plane.Length / constants.MapBlockSize * 0.3
+		tailPos.SubRx(sinVal * tailOffset)
+		tailPos.AddRy(cosVal * tailOffset)
+
+		// 火焰尾流（橙红色，较小，扩散快，生命短）
+		m.state.Trails = append(m.state.Trails, trail.New(
+			tailPos, textureImg.TrailShapeCircle,
+			3.0, 0.8, // 初始尺寸 3，扩散速度 0.8
+			80, 3.0, // 生命值 80，衰减速度 3.0
+			0, 0,
+			colorx.Orange,
+		))
+		// 黑烟尾流（深灰色，较大，扩散慢，生命长）
+		m.state.Trails = append(m.state.Trails, trail.New(
+			tailPos, textureImg.TrailShapeCircle,
+			2.0, 0.5, // 初始尺寸 2，扩散速度 0.5
+			120, 2.0, // 生命值 120，衰减速度 2.0
+			2, 0, // 延迟 2 帧出现（略慢于火焰）
+			colorx.DarkSilver,
+		))
+	}
 }
 
 // 更新弹药状态
@@ -565,16 +595,30 @@ func (m *MissionManager) updateMissionPlanes() {
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			plane.CurHP = textureImg.MaxPlaneExplodeState
 
-			// TODO 评估是否要参考战舰爆炸一样播放声音？
+			// 随机决定坠落偏转方向和幅度，存储在 RemainRange 中（借用该字段）
+			// 范围 [-0.5, 0.5]，正值右偏，负值左偏
+			plane.RemainRange = rand.Float64() - 0.5
+
 			m.state.DestroyedPlanes = append(m.state.DestroyedPlanes, plane)
 			delete(m.state.Planes, uid)
 		}
 	}
 
-	// 消亡中的战机会逐渐掉血到 0
+	mapCfg := m.state.MissionMD.MapCfg
 	for _, plane := range m.state.DestroyedPlanes {
-		plane.CurHP -= 0.5
-		// FIXME 如何模拟出被击落的效果？
+		// 消亡中的战机会逐渐掉血到 0
+		plane.CurHP -= 1
+		// 模拟被击落效果：逐渐减速（比战舰更缓）并保持惯性前进
+		plane.CurSpeed = max(0, plane.CurSpeed-plane.MaxSpeed/60)
+		// 模拟失控螺旋：每帧添加微小旋转偏转（借用 RemainRange 存储偏转方向）
+		plane.CurRotation += plane.RemainRange
+		if plane.CurSpeed > 0 {
+			nextPos := plane.CurPos.Copy()
+			nextPos.AddRx(math.Sin(plane.CurRotation*math.Pi/180) * plane.CurSpeed)
+			nextPos.SubRy(math.Cos(plane.CurRotation*math.Pi/180) * plane.CurSpeed)
+			nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
+			plane.CurPos = nextPos
+		}
 	}
 
 	// 移除已经完全消亡的战舰

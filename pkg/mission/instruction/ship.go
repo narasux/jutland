@@ -158,7 +158,14 @@ var _ Instruction = (*ShipMovePath)(nil)
 
 // Exec ...
 func (i *ShipMovePath) Exec(s *state.MissionState) error {
-	// 路径生成失败（寻路失败），直接返回
+	// 寻路失败（genPath 异步标记为 Executing），主线程中重置速度后标记完成
+	if i.status == Executing {
+		if ship, ok := s.Ships[i.shipUid]; ok {
+			ship.CurSpeed = 0
+		}
+		i.status = Executed
+		return nil
+	}
 	if i.status == Executed {
 		return nil
 	}
@@ -177,6 +184,9 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 
 	if i.curIdx >= len(i.path) {
 		i.status = Executed
+		if ship, ok := s.Ships[i.shipUid]; ok {
+			ship.CurSpeed = 0
+		}
 		return nil
 	}
 
@@ -228,9 +238,10 @@ func (i *ShipMovePath) genPath(misState *state.MissionState) {
 		grid.Point{i.curPos.MX, i.curPos.MY},
 		grid.Point{i.targetPos.MX, i.targetPos.MY},
 	)
-	// 无需执行的路径（如寻路失败，直接算指令执行成功）
+	// 寻路失败，标记为 Executing 让主线程的 Exec 处理速度重置
+	// 不能直接标记 Executed，否则会被 RemoveExecuted 在 Exec 之前清除，导致速度无法重置
 	if len(points) < 2 {
-		i.status = Executed
+		i.status = Executing
 		return
 	}
 	i.path = []objPos.MapPos{i.curPos}
