@@ -702,7 +702,137 @@
     ],
   },
   {
-    name: "Test",
+    name: "TestAntiAircraft",
+    displayName: "防空测试-威克岛",
+    initFunds: 10000,
+    initCameraPos: [58, 58],
+    mapName: "wake",
+    maxShipCount: 29,
+    description: [
+      "威克岛海域，防空压力测试",
+      "我方小黄鸭被敌方航母群从八个方向包围",
+      "依靠舰载机与防空火力抵御源源不断的空袭浪潮",
+    ],
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // === 我方舰队（中央，围绕 [64, 20]） ===
+      // 特殊单位：小黄鸭核心
+      {
+        name: "duck",
+        pos: [64, 64],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === 敌方航母（8 个方向，每方向 2 艘，船头指向中心） ===
+      // 北方（正上方）
+      {
+        name: "yorktown",
+        pos: [62, 3],
+        rotation: 180,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [66, 3],
+        rotation: 180,
+        belongPlayer: "CA"
+      },
+      // 东北方
+      {
+        name: "yorktown",
+        pos: [98, 3],
+        rotation: 245,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [102, 3],
+        rotation: 245,
+        belongPlayer: "CA"
+      },
+      // 东方（正右方）
+      {
+        name: "yorktown",
+        pos: [120, 18],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [120, 22],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // 东南方
+      {
+        name: "yorktown",
+        pos: [98, 120],
+        rotation: 340,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [102, 120],
+        rotation: 340,
+        belongPlayer: "CA"
+      },
+      // 南方（正下方）
+      {
+        name: "saratoga",
+        pos: [62, 120],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [66, 120],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      // 西南方
+      {
+        name: "saratoga",
+        pos: [23, 120],
+        rotation: 21,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [27, 120],
+        rotation: 21,
+        belongPlayer: "CA"
+      },
+      // 西方（正左方）
+      {
+        name: "saratoga",
+        pos: [5, 18],
+        rotation: 90,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [5, 22],
+        rotation: 90,
+        belongPlayer: "CA"
+      },
+      // 西北方
+      {
+        name: "saratoga",
+        pos: [23, 3],
+        rotation: 114,
+        belongPlayer: "CA"
+      },
+      {
+        name: "taiho",
+        pos: [27, 3],
+        rotation: 114,
+        belongPlayer: "CA"
+      },
+    ],
+  },
+  {
+    name: "TestAll",
     displayName: "测试-1941",
     initFunds: 10000,
     initCameraPos: [26, 32],
