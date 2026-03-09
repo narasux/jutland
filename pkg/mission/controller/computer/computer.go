@@ -54,6 +54,14 @@ func (h *ComputerDecisionHandler) Handle(
 		}
 	}
 
+	// 收集敌方飞机
+	var enemyPlanes []*objUnit.Plane
+	for _, p := range misState.Planes {
+		if p.BelongPlayer != h.player && p.CurHP > 0 {
+			enemyPlanes = append(enemyPlanes, p)
+		}
+	}
+
 	// AI 战舰够多，就开始莽一波
 	isAttackMode := lo.Ternary(len(ships) >= 24, true, false)
 
@@ -76,19 +84,37 @@ func (h *ComputerDecisionHandler) Handle(
 			)
 			instructions[moveInstr.Uid()] = moveInstr
 		} else {
-			// 防御模式，如果附近有敌人在移动，则自己在附近随机移动
-			for _, enemy := range enemyShips {
-				if ship.CurPos.Distance(enemy.CurPos) < 20 && ship.CurSpeed == 0 && enemy.CurSpeed != 0 {
-					x, y := rand.Intn(11)-5, rand.Intn(11)-5
-					moveInstr := instr.NewShipMove(
-						ship.Uid, objPos.New(
-							misState.Ships[ship.Uid].CurPos.MX+x,
-							misState.Ships[ship.Uid].CurPos.MY+y,
-						),
-					)
-					instructions[moveInstr.Uid()] = moveInstr
-					break
+			shouldMove := false
+
+			// 防御模式，如果附近有敌方飞机，且攻击对象是自己，则需要主动机动规避
+			if ship.CurSpeed == 0 {
+				for _, ep := range enemyPlanes {
+					if ep.CurAttackTarget == ship.Uid && ship.CurPos.Distance(ep.CurPos) < 5 {
+						shouldMove = true
+						break
+					}
 				}
+			}
+
+			// 防御模式，如果附近有敌舰在移动，也主动机动
+			if !shouldMove {
+				for _, enemy := range enemyShips {
+					if ship.CurPos.Distance(enemy.CurPos) < 20 && ship.CurSpeed == 0 && enemy.CurSpeed != 0 {
+						shouldMove = true
+						break
+					}
+				}
+			}
+
+			if shouldMove {
+				x, y := rand.Intn(11)-5, rand.Intn(11)-5
+				moveInstr := instr.NewShipMove(
+					ship.Uid, objPos.New(
+						misState.Ships[ship.Uid].CurPos.MX+x,
+						misState.Ships[ship.Uid].CurPos.MY+y,
+					),
+				)
+				instructions[moveInstr.Uid()] = moveInstr
 			}
 		}
 	}

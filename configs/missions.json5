@@ -484,7 +484,7 @@
     name: "Gamma",
     displayName: "帕劳群岛-1944",
     initFunds: 8000,
-    initCameraPos: [18, 37],
+    initCameraPos: [18, 45],
     mapName: "peleliu",
     maxShipCount: 24,
     description: [
@@ -543,81 +543,81 @@
       },
     ],
     initShips: [
-      // === 美方双航母编队（左侧，y≈35-50） ===
+      // === 美方双航母编队（左侧，y≈45-60） ===
       // BB: 战列舰前方
       {
         name: "south_dakota",
-        pos: [30, 40],
+        pos: [30, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "lowa",
-        pos: [30, 44],
+        pos: [30, 54],
         rotation: 90,
         belongPlayer: "HA"
       },
       // CA: 重巡洋舰居中两翼
       {
         name: "astoria",
-        pos: [28, 38],
+        pos: [28, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "pensacola",
-        pos: [28, 46],
+        pos: [28, 56],
         rotation: 90,
         belongPlayer: "HA"
       },
       // CV: 航母居中偏后
       {
         name: "yorktown",
-        pos: [22, 40],
+        pos: [22, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "saratoga",
-        pos: [22, 44],
+        pos: [22, 54],
         rotation: 90,
         belongPlayer: "HA"
       },
       // CL: 轻巡洋舰两侧
       {
         name: "atlanta",
-        pos: [25, 36],
+        pos: [25, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "atlanta",
-        pos: [25, 48],
+        pos: [25, 58],
         rotation: 90,
         belongPlayer: "HA"
       },
       // DD: 驱逐舰外围
       {
         name: "porter",
-        pos: [32, 36],
+        pos: [32, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "porter",
-        pos: [32, 48],
+        pos: [32, 58],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "maury",
-        pos: [20, 38],
+        pos: [20, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "maury",
-        pos: [20, 46],
+        pos: [20, 56],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -625,77 +625,77 @@
       // BB: 战列舰前方（面朝左，x 值较大靠前）
       {
         name: "yamato",
-        pos: [100, 103],
+        pos: [85, 103],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "fuso",
-        pos: [100, 107],
+        pos: [85, 107],
         rotation: 270,
         belongPlayer: "CA"
       },
       // CA: 重巡洋舰居中两翼
       {
         name: "atago",
-        pos: [102, 101],
+        pos: [87, 101],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "haguro",
-        pos: [102, 109],
+        pos: [87, 109],
         rotation: 270,
         belongPlayer: "CA"
       },
       // CV: 航母居中偏后（面朝左，x 值较小为后方）
       {
         name: "taiho",
-        pos: [108, 103],
+        pos: [93, 103],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "taiho",
-        pos: [108, 107],
+        pos: [93, 107],
         rotation: 270,
         belongPlayer: "CA"
       },
       // CL: 轻巡洋舰两侧
       {
         name: "yahagi",
-        pos: [105, 99],
+        pos: [90, 99],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "ooyodo",
-        pos: [105, 111],
+        pos: [90, 111],
         rotation: 270,
         belongPlayer: "CA"
       },
       // DD: 驱逐舰外围
       {
         name: "asashio",
-        pos: [98, 99],
+        pos: [83, 99],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "asashio",
-        pos: [98, 111],
+        pos: [83, 111],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "yukikaze",
-        pos: [110, 101],
+        pos: [95, 101],
         rotation: 270,
         belongPlayer: "CA"
       },
       {
         name: "yukikaze",
-        pos: [110, 109],
+        pos: [95, 109],
         rotation: 270,
         belongPlayer: "CA"
       },
