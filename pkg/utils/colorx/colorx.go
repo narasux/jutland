@@ -46,6 +46,8 @@ var (
 	Silver = color.RGBA{192, 192, 192, 255}
 	// DarkSilver 暗银
 	DarkSilver = color.RGBA{105, 105, 105, 255}
+	// LightGreen 浅绿色（半透明，用于医疗船治疗范围圈）
+	LightGreen = color.RGBA{144, 238, 144, 100}
 )
 
 var clrMap = map[string]color.Color{
@@ -69,6 +71,7 @@ var clrMap = map[string]color.Color{
 	"gold":       Gold,
 	"silver":     Silver,
 	"darksilver": DarkSilver,
+	"lightgreen": LightGreen,
 }
 
 // GetColorByName 根据名称获取颜色

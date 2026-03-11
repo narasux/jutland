@@ -67,6 +67,7 @@ func (d *Drawer) Draw(
 		d.drawBuildingsInCamera(screen, misState)
 		d.drawShotBullets(screen, misState)
 		d.drawObjectTrails(screen, misState)
+		d.drawHospitalShipHealRange(screen, misState)
 		d.drawBattleShips(screen, misState)
 		d.drawDestroyedShips(screen, misState)
 		d.drawFlyingPlanes(screen, misState)

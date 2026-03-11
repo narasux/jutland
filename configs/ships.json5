@@ -15557,5 +15557,32 @@
         }
       ]
     }
+  },
+  // 医疗船
+  {
+    name: "britannic",
+    displayName: "医疗船",
+    type: "hospital",
+    typeAbbr: "HS",
+    totalHP: 53848,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 24,
+    acceleration: 0.15,
+    rotateSpeed: 0.6,
+    length: 269,
+    width: 29,
+    fundsCost: 420,
+    timeCost: 45,
+    description: [
+      "医疗船（无武装，治疗范围内友方战舰自动回复）",
+      "治疗量：100 HP/10s，治疗范围：5 格"
+    ],
+    weapon: {
+      mainGuns: [],
+      secondaryGuns: [],
+      antiAircraftGuns: [],
+      torpedoes: []
+    }
   }
 ]

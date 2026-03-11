@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -22,6 +23,31 @@ import (
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
+
+// 绘制医疗船治疗范围圈（仅在选中己方医疗船时显示）
+func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.MissionState) {
+	for _, ship := range ms.Ships {
+		// 只绘制己方存活的医疗船
+		if !ship.IsHospitalShip() || ship.BelongPlayer != ms.CurPlayer || ship.CurHP <= 0 {
+			continue
+		}
+		// 检查是否被选中
+		if !slices.Contains(ms.SelectedShips, ship.Uid) {
+			continue
+		}
+		// 只有在屏幕中的才渲染
+		if !ms.Camera.Contains(ship.CurPos) {
+			continue
+		}
+		// 计算圆心屏幕坐标（相对于 Camera 偏移）
+		cx := float32((ship.CurPos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize)
+		cy := float32((ship.CurPos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize)
+		// 计算半径像素值
+		radius := float32(ship.HealRange() * constants.MapBlockSize)
+		// 绘制半透明浅绿色实线圆
+		vector.StrokeCircle(screen, cx, cy, radius, 1, colorx.LightGreen, false)
+	}
+}
 
 // 绘制尾流（战舰，鱼雷，炮弹）
 func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) {

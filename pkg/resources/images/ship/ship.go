@@ -24,6 +24,7 @@ func init() {
 		"destroyer",
 		"torpedo_boat",
 		"cargo",
+		"hospital",
 	}
 
 	loadShipImages(topShipZoom4ImgMap, shipTypes, "top")

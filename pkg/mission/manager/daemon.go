@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"slices"
 	"strconv"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -92,6 +93,43 @@ func (m *MissionManager) updateBuildings() {
 				m.state.GameMarks[mark.ID] = mark
 			}
 		}
+	}
+}
+
+// 更新医疗船治疗逻辑
+// 医疗船每 10 秒自动治疗范围内同阵营战舰（含自身），显示绿色浮动文字
+// 注意：治疗间隔不受 config.G.SpeedMultiplier 影响，使用 time.Now() 而非帧计数
+func (m *MissionManager) updateHospitalShipHealing() {
+	now := time.Now().UnixMilli()
+	for _, ship := range m.state.Ships {
+		// 只有存活的医疗船才能治疗
+		if !ship.IsHospitalShip() || ship.CurHP <= 0 {
+			continue
+		}
+		// 检查距上次治疗是否 ≥ 5000ms（5 秒固定间隔）
+		if now-ship.LastHealAt < 5000 {
+			continue
+		}
+		// 遍历同阵营战舰目标
+		for _, target := range m.state.Ships {
+			// 目标必须是同阵营、存活且未满血
+			if target.BelongPlayer != ship.BelongPlayer || target.CurHP <= 0 || target.CurHP >= target.TotalHP {
+				continue
+			}
+			// 检查目标是否在治疗范围内
+			if !ship.CurPos.Near(target.CurPos, ship.HealRange()) {
+				continue
+			}
+			// 恢复 HP（不超过上限）
+			healAmount := ship.HealAmount()
+			target.CurHP = min(target.TotalHP, target.CurHP+healAmount)
+			// 创建绿色浮动治疗文字
+			text := fmt.Sprintf("+ %d HP", int(healAmount))
+			mark := objMark.NewText(target.CurPos, text, 20, colorx.Green, 50)
+			m.state.GameMarks[mark.ID] = mark
+		}
+		// 治疗完成后更新时间戳
+		ship.LastHealAt = now
 	}
 }
 

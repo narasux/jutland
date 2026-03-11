@@ -1011,6 +1011,12 @@
         belongPlayer: "HA"
       },
       {
+        name: "britannic",
+        pos: [29, 32],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "yorktown",
         pos: [28, 33],
         rotation: 90,
