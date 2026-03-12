@@ -97,13 +97,13 @@ func (m *MissionManager) updateBuildings() {
 }
 
 // 更新医疗船治疗逻辑
-// 医疗船每 10 秒自动治疗范围内同阵营战舰（含自身），显示绿色浮动文字
+// 医疗船自动治疗范围内同阵营战舰（含自身），显示绿色浮动文字
 // 注意：治疗间隔不受 config.G.SpeedMultiplier 影响，使用 time.Now() 而非帧计数
 func (m *MissionManager) updateHospitalShipHealing() {
 	now := time.Now().UnixMilli()
 	for _, ship := range m.state.Ships {
 		// 只有存活的医疗船才能治疗
-		if !ship.IsHospitalShip() || ship.CurHP <= 0 {
+		if ship.Type != objUnit.ShipTypeHospital || ship.CurHP <= 0 {
 			continue
 		}
 		// 检查距上次治疗是否 ≥ 5000ms（5 秒固定间隔）
@@ -117,11 +117,11 @@ func (m *MissionManager) updateHospitalShipHealing() {
 				continue
 			}
 			// 检查目标是否在治疗范围内
-			if !ship.CurPos.Near(target.CurPos, ship.HealRange()) {
+			if !ship.CurPos.Near(target.CurPos, objUnit.HospitalShipEffectRange) {
 				continue
 			}
 			// 恢复 HP（不超过上限）
-			healAmount := ship.HealAmount()
+			healAmount := ship.Length * ship.Width / 16
 			target.CurHP = min(target.TotalHP, target.CurHP+healAmount)
 			// 创建绿色浮动治疗文字
 			text := fmt.Sprintf("+ %d HP", int(healAmount))

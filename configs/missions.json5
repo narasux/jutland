@@ -1011,6 +1011,18 @@
         belongPlayer: "HA"
       },
       {
+        name: "mercy",
+        pos: [29, 30],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "peace_ark",
+        pos: [28, 31],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "britannic",
         pos: [29, 32],
         rotation: 90,

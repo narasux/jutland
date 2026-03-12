@@ -15560,8 +15560,46 @@
   },
   // 医疗船
   {
+    name: "mercy",
+    displayName: "仁慈",
+    type: "hospital",
+    typeAbbr: "HS",
+    totalHP: 70473,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 17,
+    acceleration: 0.1,
+    rotateSpeed: 0.5,
+    length: 273,
+    width: 32,
+    fundsCost: 520,
+    timeCost: 50,
+    description: [
+      "医疗船（无武装，治疗范围内友方战舰自动回复）",
+    ]
+  },
+  {
+    name: "peace_ark",
+    displayName: "和平方舟",
+    type: "hospital",
+    typeAbbr: "HS",
+    totalHP: 14300,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 20,
+    acceleration: 0.15,
+    rotateSpeed: 0.6,
+    length: 178,
+    width: 24,
+    fundsCost: 200,
+    timeCost: 20,
+    description: [
+      "医疗船（无武装，治疗范围内友方战舰自动回复）",
+    ],
+  },
+  {
     name: "britannic",
-    displayName: "医疗船",
+    displayName: "不列颠",
     type: "hospital",
     typeAbbr: "HS",
     totalHP: 53848,
@@ -15576,13 +15614,6 @@
     timeCost: 45,
     description: [
       "医疗船（无武装，治疗范围内友方战舰自动回复）",
-      "治疗量：100 HP/10s，治疗范围：5 格"
-    ],
-    weapon: {
-      mainGuns: [],
-      secondaryGuns: [],
-      antiAircraftGuns: [],
-      torpedoes: []
-    }
+    ]
   }
 ]

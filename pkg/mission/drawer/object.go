@@ -28,7 +28,7 @@ import (
 func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.MissionState) {
 	for _, ship := range ms.Ships {
 		// 只绘制己方存活的医疗船
-		if !ship.IsHospitalShip() || ship.BelongPlayer != ms.CurPlayer || ship.CurHP <= 0 {
+		if ship.Type != objUnit.ShipTypeHospital || ship.BelongPlayer != ms.CurPlayer || ship.CurHP <= 0 {
 			continue
 		}
 		// 检查是否被选中
@@ -43,7 +43,7 @@ func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.Missi
 		cx := float32((ship.CurPos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize)
 		cy := float32((ship.CurPos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize)
 		// 计算半径像素值
-		radius := float32(ship.HealRange() * constants.MapBlockSize)
+		radius := float32(objUnit.HospitalShipEffectRange * constants.MapBlockSize)
 		// 绘制半透明浅绿色实线圆
 		vector.StrokeCircle(screen, cx, cy, radius, 1, colorx.LightGreen, false)
 	}

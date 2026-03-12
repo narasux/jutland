@@ -41,6 +41,9 @@ const (
 	ShipTypeHospital ShipType = "hospital"
 )
 
+// HospitalShipEffectRange 医疗船效果范围（地图三格）
+const HospitalShipEffectRange = 3
+
 // BattleShip 战舰
 type BattleShip struct {
 	// 名称
@@ -98,7 +101,7 @@ type BattleShip struct {
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
-	// 上次治疗的 Unix 毫秒时间戳，用于计算 10 秒固定间隔（仅医疗船使用）
+	// 上次治疗的 Unix 毫秒时间戳，用于计算固定间隔（仅医疗船使用）
 	LastHealAt int64
 }
 
@@ -298,27 +301,6 @@ func (s *BattleShip) GenTrails() []*objTrail.Trail {
 			0, 0, nil,
 		),
 	}
-}
-
-// IsHospitalShip 是否是医疗船
-func (s *BattleShip) IsHospitalShip() bool {
-	return s.Type == ShipTypeHospital
-}
-
-// HealAmount [仅医疗船] 治疗量（每次治疗恢复的 HP）
-func (s *BattleShip) HealAmount() float64 {
-	if !s.IsHospitalShip() {
-		return 0
-	}
-	return s.Tonnage / 250
-}
-
-// HealRange [仅医疗船] 治疗范围（地图格数）
-func (s *BattleShip) HealRange() float64 {
-	if !s.IsHospitalShip() {
-		return 0
-	}
-	return s.Tonnage / 20000
 }
 
 // CanOnLand 能在陆地上
