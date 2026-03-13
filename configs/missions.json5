@@ -853,6 +853,9 @@
         providedShipNames: [
           "duck",
           "liberty",
+          "mercy",
+          "peace_ark",
+          "britannic",
           "yorktown",
           "saratoga",
           "taiho",

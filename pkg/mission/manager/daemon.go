@@ -121,7 +121,7 @@ func (m *MissionManager) updateHospitalShipHealing() {
 				continue
 			}
 			// 恢复 HP（不超过上限）
-			healAmount := ship.Length * ship.Width / 16
+			healAmount := ship.Length * ship.Width / 6
 			target.CurHP = min(target.TotalHP, target.CurHP+healAmount)
 			// 创建绿色浮动治疗文字
 			text := fmt.Sprintf("+ %d HP", int(healAmount))
