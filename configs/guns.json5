@@ -959,6 +959,18 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 UK/40/60 双联装高炮
+  {
+    name: "UK/40/60/2",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 2,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 880,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 英国海军 UK/40/60 单装高炮
   {
     name: "UK/40/60",
@@ -971,12 +983,24 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 UK/40/56 六联装高炮
+  {
+    name: "UK/40/56/6",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 6,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 860,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 英国海军 UK/40/56 四联装高炮
   {
     name: "UK/40/56/4",
     bulletName: "UK/GB/40/1930",
     bulletCount: 4,
-    reloadTime: 0.5,
+    reloadTime: 0.45,
     range: 7,
     bulletSpread: 20,
     bulletSpeed: 860,
@@ -992,6 +1016,30 @@
     range: 3,
     bulletSpread: 40,
     bulletSpeed: 585,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 英国海军 UK/20/70 四联装高炮
+  {
+    name: "UK/20/70/4",
+    bulletName: "UK/GB/20/1940",
+    bulletCount: 4,
+    reloadTime: 0.16,
+    range: 4.5,
+    bulletSpread: 15,
+    bulletSpeed: 910,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 英国海军 UK/20/70 双联装高炮
+  {
+    name: "UK/20/70/2",
+    bulletName: "UK/GB/20/1940",
+    bulletCount: 2,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
     antiShip: true,
     antiAircraft: true
   },

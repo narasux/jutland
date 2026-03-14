@@ -887,7 +887,7 @@
           "hood",
           "nelson",
           "lion",
-          "lion_kai",
+          "lioness",
           "king_george_v",
           "warspite",
           "tiger",
@@ -1164,7 +1164,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "lion_kai",
+        name: "lioness",
         pos: [31, 39],
         rotation: 90,
         belongPlayer: "HA"

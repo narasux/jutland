@@ -403,24 +403,33 @@
     description: [
       "狮级战列舰是英国皇家海军计划建造的",
       "一级战列舰，设计用于对抗新型威胁。",
-      "主要目标是德国 H 级战列舰和",
-      "日本大和级，火力强大性能优异。",
+      "主要目标是德国 H 级战列舰和日本大和级",
+      "在装甲防护方面表现优异，而火力却较为平庸。",
       "由于战争爆发，该级战舰未能建成。"
     ],
-    author: "未知",
-    links: []
+    author: "tzoli",
+    links: [
+      {
+        name: "TZoli Lion Class Battleship Design 1945 A",
+        url: "https://www.deviantart.com/tzoli/art/Lion-Class-Battleship-Design-1945-A-810520319"
+      }
+    ]
   },
   {
-    name: "lion_kai",
+    name: "lioness",
     description: [
-      "狮级改战列舰是狮级的改进方案，",
-      "在原有设计基础上进行优化，",
-      "进一步强化了火力和装甲防护，",
-      "提升整体作战能力与生存性，",
-      "该舰仅存在于设计图纸中。"
+      "雌狮级战列舰是狮级方案的一种，",
+      "采用数量众多的 14 英寸火炮，",
+      "同时还兼顾装甲防护能力与航速。",
+      "但该舰最终也仅存在于设计图纸中。"
     ],
-    author: "未知",
-    links: []
+    author: "tzoli",
+    links: [
+      {
+        name: "TZoli Lion 14C-38",
+        url: "https://www.deviantart.com/tzoli/art/Lion-14C-38-804249041"
+      }
+    ]
   },
   {
     name: "king_george_v",
