@@ -859,6 +859,8 @@
           "yorktown",
           "saratoga",
           "taiho",
+          "akagi",
+          "kaga"
         ],
       },
       {
@@ -926,6 +928,7 @@
           "prinz_eugen",
           "leipzig",
           "cheshire",
+          "worcester",
           "vickers",
           "k_25",
           "sverdlov",
@@ -1046,6 +1049,18 @@
       {
         name: "taiho",
         pos: [28, 35],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "akagi",
+        pos: [29, 36],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kaga",
+        pos: [28, 37],
         rotation: 90,
         belongPlayer: "HA"
       },

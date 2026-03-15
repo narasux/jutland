@@ -132,6 +132,48 @@
       }
     ]
   },
+  {
+    name: "akagi",
+    description: [
+      "赤城号航空母舰原为天城级战列巡洋舰二号舰，因条约限制而",
+      "改建为航空母舰，早期采用独特的三段式飞行甲板布局，后经",
+      "现代化改装为全通式飞行甲板，成为日本机动部队的核心战力之一，",
+      "曾参加珍珠港空袭等作战，并于 1942 年 6 月的中途岛海战",
+      "中遭美军重创，最终因大火失控而沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "IJN Aircraft Carrier AKAGI",
+        url: "https://www.deviantart.com/midnike/art/IJN-Aircraft-Carrier-AKAGI-563294372"
+      },
+      {
+        name: "维基百科 - 赤城号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%B5%A4%E5%9F%8E%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "kaga",
+    description: [
+      "加贺号航空母舰原为加贺级战列舰首舰，因条约限制而改建为",
+      "航空母舰，早期同样采用多层飞行甲板设计，后经全面改装后",
+      "成为日本海军的大型主力航母之一，舰载机运用能力较为突出。",
+      "其参加了珍珠港空袭等作战，并于 1942 年 6 月的中途岛",
+      "海战中遭美军重创，最终因爆炸与火灾而沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "IJN Aircraft Carrier KAGA",
+        url: "https://www.deviantart.com/midnike/art/IJN-Aircraft-Carrier-KAGA-563294872"
+      },
+      {
+        name: "维基百科 - 加贺号航空母舰",
+        url: "https://zh.wikipedia.org/zh-cn/%E5%8A%A0%E8%B4%BA%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0"
+      }
+    ]
+  },
   // 美国海军
   {
     name: "lowa",

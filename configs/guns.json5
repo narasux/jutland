@@ -407,6 +407,18 @@
     antiShip: true,
     antiAircraft: false
   },
+  // 日本海军 单装 20 厘米 50 倍口径舰炮
+  {
+    name: "JP/200/50",
+    bulletName: "JP/GB/200/1944",
+    bulletCount: 1,
+    reloadTime: 8,
+    range: 27,
+    bulletSpread: 120,
+    bulletSpeed: 920,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 日本海军 三联装 15.5 厘米 60 倍口径舰炮
   {
     name: "JP/155/60/3",
