@@ -1330,18 +1330,24 @@
       // 巡洋舰
       {
         name: "prinz_eugen",
-        pos: [40, 33],
+        pos: [39, 32],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "leipzig",
-        pos: [39, 34],
+        pos: [40, 33],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "cheshire",
+        pos: [39, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "worcester",
         pos: [40, 35],
         rotation: 90,
         belongPlayer: "HA"

@@ -1016,26 +1016,64 @@
   {
     name: "cheshire",
     description: [
-      "柴郡号是英国皇家海军重巡洋舰，",
-      "基于美国巴尔的摩级重巡洋舰设计，",
-      "是英国版的改进设计方案，",
-      "该舰仅存在于设计图纸中，",
-      "从未实际建造下水服役。"
+      "柴郡号对应英国皇家海军 Admiral 级重巡洋舰",
+      "于 1942 年 3 月取消前的最终方案设想，体现出",
+      "英国在战时仍重视舰载侦察机运用，并在火控与",
+      "测距设备上向更现代化配置过渡的重巡设计思路。"
     ],
-    author: "未知",
-    links: []
+    author: "Tzoli",
+    links: [
+      {
+        name: "Admiral Class Heavy Cruiser Final Design",
+        url: "https://www.deviantart.com/tzoli/art/Admiral-Class-Heavy-Cruiser-Final-Design-874924962"
+      }
+    ]
+  },
+  {
+    name: "worcester",
+    description: [
+      "伍斯特号对应英国皇家海军战后米诺陶级轻巡洋舰的",
+      "R 型早期方案，是同系列中体量最大的设想之一，体现了",
+      "英国在战后兼顾高速、强火力与多用途需求的大型轻巡设计思路。"
+    ],
+    author: "Tzoli",
+    links: [
+      {
+        name: "RN Minotaur Class Preliminary Design R",
+        url: "https://www.deviantart.com/tzoli/art/RN-Minotaur-Class-Preliminary-Design-R-1296815610"
+      }
+    ]
   },
   {
     name: "vickers",
-    description: [],
-    author: "未知",
-    links: []
+    description: [
+      "维克斯号是维克斯公司于 1919 年为阿根廷等",
+      "南美市场提出的 758A 轻巡洋舰外销方案，",
+      "体现出英国战后轻巡的过渡性设计特征。"
+    ],
+    author: "Tzoli",
+    links: [
+      {
+        name: "Vickers Export Design 758A for Argentina",
+        url: "https://www.deviantart.com/tzoli/art/Vickers-Export-Design-758A-for-Argentina-820086654"
+      }
+    ]
   },
   {
     name: "k_25",
-    description: [],
-    author: "未知",
-    links: []
+    description: [
+      "K-25 是英国皇家海军于 1936 年在皇冠殖民地级",
+      "设计发展过程中提出的一组轻巡研究方案，核心思路是",
+      "在约 8000 吨舰体上探索搭载化双联 133mm 炮塔的可能，",
+      "体现出英国在战前对防护型高平两用巡洋舰路线的尝试。"
+    ],
+    author: "Tzoli",
+    links: [
+      {
+        name: "Design K-25F Light Cruiser",
+        url: "https://www.deviantart.com/tzoli/art/Design-K-25F-Light-Cruiser-565846342"
+      }
+    ]
   },
   // 苏联海军
   {

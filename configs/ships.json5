@@ -14505,6 +14505,8 @@
       "重巡洋舰（英）",
       "主炮：3 座三联装 203mm/50",
       "副炮：8 座双联装 102mm/45",
+      "高炮：5 座八联装 40mm/39",
+      "高炮：16 座双联装 20mm/70"
     ],
     weapon: {
       mainGuns: [
@@ -14588,7 +14590,304 @@
           leftFiringArc: [180, 360]
         },
       ],
-      torpedoes: []
+      antiAircraftGuns: [
+        // 前高炮 A
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.37,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 右前高炮 B
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 B
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后高炮 C
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 左后高炮 C
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.38,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 前高炮 A
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.47,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 330]
+        },
+        // 右高炮 B
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.42,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 C
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.39,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 D
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 E
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.13,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 F
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.47,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 F
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.47,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 G
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 G
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.53,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 H
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 315]
+        },
+        // 左高炮 H
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.85,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 后高炮 I
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.95,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    }
+  },
+  {
+    name: "worcester",
+    displayName: "伍斯特",
+    type: "cruiser",
+    typeAbbr: "CL",
+    totalHP: 21000,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 31.5,
+    acceleration: 0.4,
+    rotateSpeed: 1,
+    length: 217,
+    width: 24,
+    fundsCost: 180,
+    timeCost: 17,
+    description: [
+      "轻巡洋舰（英）",
+      "主炮：5 座双联装 152mm/50",
+      "副炮：8 座四联装 76mm/70",
+      "鱼雷：4 座四联装直航 533mm"
+    ],
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "UK/152/50/2",
+          posPercent: 0.51,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 B
+        {
+          name: "UK/152/50/2",
+          posPercent: 0.39,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 C
+        {
+          name: "UK/152/50/2",
+          posPercent: 0.29,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 D
+        {
+          name: "UK/152/50/2",
+          posPercent: -0.45,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 E
+        {
+          name: "UK/152/50/2",
+          posPercent: -0.58,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [
+        // 右前高平两用炮 A
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: 0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高平两用炮 A
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后高平两用炮 B
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后高平两用炮 B
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前高平两用炮 C
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高平两用炮 C
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 300]
+        },
+        // 右后高平两用炮 D
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: -0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后高平两用炮 D
+        {
+          name: "UK/76/70/4/DP",
+          posPercent: -0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      torpedoes: [
+        // 右舷鱼雷 A
+        {
+          name: "UK/533/4",
+          posPercent: -0.03,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "UK/533/4",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        },
+        // 右舷鱼雷 B
+        {
+          name: "UK/533/4",
+          posPercent: -0.1,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          name: "UK/533/4",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ]
     }
   },
   {
@@ -14610,6 +14909,7 @@
       "轻巡洋舰（英）",
       "主炮：4 座双联装 152mm/50",
       "副炮：2 座单装 102mm/45",
+      "高炮：2 座单装 40mm/39",
       "鱼雷：4 座三联装直航 533mm"
     ],
     weapon: {
@@ -14658,6 +14958,22 @@
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
+      ],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "UK/40/39",
+          posPercent: 0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "UK/40/39",
+          posPercent: 0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
       ],
       torpedoes: [
         // 右舷鱼雷 A
@@ -14709,6 +15025,8 @@
     description: [
       "防空巡洋舰（英）",
       "主炮：8 座双联装 133mm/50",
+      "副炮：2 座八联装，2 座四联装 40mm/39",
+      "高炮：4 座四联装 12.7mm 机枪",
       "鱼雷：2 座四联装直航 533mm"
     ],
     weapon: {
@@ -14770,7 +15088,66 @@
           leftFiringArc: [180, 330]
         }
       ],
-      secondaryGuns: [],
+      secondaryGuns: [
+        // 右高炮 A
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.15,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 左高炮 B
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.16,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.29,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.29,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.34,
+          rightFiringArc: [180, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
       torpedoes: [
         // 右舷鱼雷 A
         {
