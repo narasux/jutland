@@ -56,6 +56,8 @@ type BattleShip struct {
 	TypeAbbr string `json:"typeAbbr"`
 	// 描述
 	Description []string `json:"description"`
+	// 年份
+	Year int `json:"year"`
 
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`

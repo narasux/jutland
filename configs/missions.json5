@@ -860,7 +860,9 @@
           "saratoga",
           "taiho",
           "akagi",
-          "kaga"
+          "kaga",
+          "soryu",
+          "hiryu"
         ],
       },
       {
@@ -1061,6 +1063,18 @@
       {
         name: "kaga",
         pos: [28, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "soryu",
+        pos: [29, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hiryu",
+        pos: [28, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
