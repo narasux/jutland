@@ -174,6 +174,38 @@
       }
     ]
   },
+  {
+    name: "soryu",
+    description: [
+      "苍龙号是日本海军苍龙级航空母舰首舰，",
+      "是日本海军第一款以正规航母设计的舰队航母，",
+      "曾参与珍珠港空袭等重要作战，于中途岛海战",
+      "中遭美军俯冲轰炸机重创沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 苍龙号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%8B%8D%E9%BE%99%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0"
+      }
+    ]
+  },
+  {
+    name: "hiryu",
+    description: [
+      "飞龙号是日本海军苍龙级航空母舰二号舰，",
+      "与苍龙号组成第二航空战队，曾参与珍珠港",
+      "空袭等重要作战，于中途岛海战中遭美军",
+      "轰炸机重创，后由日军自行雷击处分沉没。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 飞龙号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%A3%9E%E9%BE%99%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0"
+      }
+    ]
+  },
   // 美国海军
   {
     name: "lowa",
@@ -1449,6 +1481,58 @@
       {
         name: "Торпедные катера проекта 183",
         url: "https://ru.wikipedia.org/wiki/%D0%A2%D0%BE%D1%80%D0%BF%D0%B5%D0%B4%D0%BD%D1%8B%D0%B5_%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B0_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0_183"
+      }
+    ]
+  },
+  // 医疗船
+  {
+    name: "mercy",
+    description: [
+      "仁慈号是美国海军天堂级医院船，于二战期间建造并服役。",
+      "该船满载排水量约 15000 吨，设有完善的医疗设施，",
+      "包括手术室、病房及化验室等，可容纳约 800 名伤员，",
+      "主要在太平洋战区执行伤员救护和后送任务。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 仁慈号医院船",
+        url: "https://zh.wikipedia.org/zh-cn/%E4%BB%81%E6%85%88%E7%B4%9A%E9%86%AB%E7%99%82%E8%88%B9"
+      }
+    ]
+  },
+  {
+    name: "peace_ark",
+    description: [
+      "和平方舟号是中国人民解放军海军 920 型医院船，",
+      "是世界上第一艘专门设计建造的万吨级医院船，",
+      "曾多次执行远海医疗援助任务。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "百度百科 - 和平方舟号医院船",
+        url: "https://baike.baidu.com/item/%E5%92%8C%E5%B9%B3%E6%96%B9%E8%88%9F%E5%8F%B7%E5%8C%BB%E9%99%A2%E8%88%B9"
+      },
+      {
+        name: "维基百科 - 920型医院船",
+        url: "https://zh.wikipedia.org/wiki/920%E5%9E%8B%E5%8C%BB%E9%99%A2%E8%88%B9"
+      }
+    ]
+  },
+  {
+    name: "britannic",
+    description: [
+      "不列颠号是奥林匹克级远洋客轮三号舰，",
+      "是泰坦尼克号的姊妹舰，一战期间被征用为医院船，",
+      "船体涂刷白色并标有红十字标识，1916 年在爱琴海",
+      "执行任务时触雷沉没，是一战期间沉没的最大船只。"
+    ],
+    author: "未知",
+    links: [
+      {
+        name: "Wikipedia - HMHS Britannic",
+        url: "https://en.wikipedia.org/wiki/HMHS_Britannic"
       }
     ]
   }
