@@ -1,7 +1,6 @@
 package drawer
 
 import (
-	"fmt"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -76,7 +75,7 @@ func (d *Drawer) drawDebugPrint(screen *ebiten.Image, ms *state.MissionState) {
 		}
 		// 逐行展示
 		for idx, bu := range curCursorPosObjs {
-			ebitenutil.DebugPrintAt(screen, fmt.Sprintf(bu.Detail()), 0, (idx+1)*20)
+			ebitenutil.DebugPrintAt(screen, bu.Detail(), 0, (idx+1)*20)
 		}
 	}
 }

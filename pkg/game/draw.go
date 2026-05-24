@@ -27,6 +27,19 @@ type Drawer struct {
 	abbrMaps map[string]*ebiten.Image
 }
 
+type collectionLayout struct {
+	GraphX, GraphY, GraphW, GraphH float64
+	InfoY, InfoH                   float64
+	CardGap                        float64
+	ArchiveCard                    collectionCard
+	ArmamentCard                   collectionCard
+	SourceCard                     collectionCard
+}
+
+type collectionCard struct {
+	X, Y, W, H float64
+}
+
 // NewDrawer ...
 func NewDrawer() *Drawer {
 	return &Drawer{
@@ -81,7 +94,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
 	}
 
 	// 方向键 + 提示
-	x, y := float64(misLayout.Width)-300, float64(misLayout.Height)-250
+	x, y := float64(misLayout.Width)-300, float64(misLayout.Height)-300
 	drawArrowKey := func(xOffset, yOffset, rotation float64) {
 		opts = d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, textureImg.ArrowKey, rotation)
@@ -127,8 +140,16 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 // 绘制战舰图鉴
 func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string, refLinks []*refLink) {
 	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
+	collLayout := calcCollectionLayout(screenWidth, screenHeight)
 
-	bgWidth, bgHeight := float64(screenWidth)/8*7, float64(screenHeight)/5*3
+	d.drawCollectionDesignGraph(screen, curShipName, collLayout)
+	d.drawCollectionInfoCards(screen, curShipName, refLinks, collLayout)
+}
+
+func (d *Drawer) drawCollectionDesignGraph(screen *ebiten.Image, curShipName string, collLayout collectionLayout) {
+	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
+
+	bgWidth, bgHeight := float64(screenWidth)/8*7, float64(screenHeight)/20*11
 	xOffset, yOffset := (float64(screenWidth)-bgWidth)/2, float64(50)
 
 	opts := d.genDefaultDrawImageOptions()
@@ -167,44 +188,209 @@ func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string, refLin
 	opts.GeoM.Translate(xOffset+paddingX, yOffset+2*paddingY+float64(sideImgDy))
 	opts.GeoM.Translate(float64(topImgDx-topImgDy)/2, float64(topImgDy-topImgDx)/2)
 	screen.DrawImage(topImg, opts)
+}
 
-	// 战舰信息
-	xOffset, yOffset = xOffset+30, bgHeight+50*2
+func (d *Drawer) drawCollectionInfoCards(
+	screen *ebiten.Image, curShipName string, refLinks []*refLink, layout collectionLayout,
+) {
+	ship := objUnit.ShipMap[curShipName]
+	ref := objRef.GetReference(curShipName)
 	allShipNames := objUnit.GetAllShipNames()
-	textStr := fmt.Sprintf(
-		"%s (%d/%d)",
-		objUnit.GetShipDisplayName(curShipName),
-		lo.IndexOf(allShipNames, curShipName)+1,
-		len(allShipNames),
+
+	d.drawCollectionCard(screen, layout.ArchiveCard, "舰船档案")
+	d.drawText(
+		screen,
+		fmt.Sprintf("%s (%d/%d)", objUnit.GetShipDisplayName(curShipName), lo.IndexOf(allShipNames, curShipName)+1, len(allShipNames)),
+		layout.ArchiveCard.X+24, layout.ArchiveCard.Y+54, 36, font.Hang, colorx.White,
 	)
-	d.drawText(screen, textStr, xOffset, yOffset, 40, font.Hang, colorx.White)
 
-	yOffset += 70
-	for idx, line := range objUnit.GetShipDesc(curShipName) {
-		d.drawText(screen, line, xOffset, yOffset+float64(idx)*45, 24, font.Hang, colorx.White)
+	if ship != nil {
+		specs := []objRef.InfoItem{
+			{Label: "类型", Value: fmt.Sprintf("%s / %s", ship.TypeAbbr, ship.Type)},
+			{Label: "HP", Value: fmt.Sprintf("%.0f", ship.TotalHP)},
+			{Label: "速度", Value: fmt.Sprintf("%.1f 节", ship.MaxSpeed*600)},
+			{Label: "费用", Value: fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost)},
+			{Label: "吨位", Value: fmt.Sprintf("%.0f", ship.Tonnage)},
+		}
+		if ref != nil && len(ref.Specs) > 0 {
+			specs = ref.Specs
+		}
+		d.drawCollectionInfoItems(
+			screen, specs, layout.ArchiveCard.X+24, layout.ArchiveCard.Y+104,
+			layout.ArchiveCard.W-140, 28,
+		)
 	}
 
-	// 如果战舰已经有引用信息，则展示
-	if ref := objRef.GetReference(curShipName); ref != nil {
-		// 战舰描述
-		xOffset, yOffset = float64(screenWidth/3)+60, bgHeight+45*3
+	d.drawCollectionCard(screen, layout.ArmamentCard, "武装配置")
+	armaments := []objRef.InfoItem{}
+	if ref != nil {
+		armaments = ref.Armaments
+	}
+	if len(armaments) > 0 {
+		d.drawCollectionInfoItems(
+			screen, armaments, layout.ArmamentCard.X+24, layout.ArmamentCard.Y+54,
+			layout.ArmamentCard.W-140, 30,
+		)
+	} else {
+		d.drawCollectionLines(
+			screen, objUnit.GetShipDesc(curShipName), layout.ArmamentCard.X+24, layout.ArmamentCard.Y+54,
+			layout.ArmamentCard.W-48, 22, 34, font.Kai, 5, colorx.White,
+		)
+	}
 
-		for _, line := range ref.Description {
-			d.drawText(screen, line, xOffset, yOffset, 24, font.Hang, colorx.White)
-			yOffset += 45
+	d.drawCollectionCard(screen, layout.SourceCard, "历史与来源")
+	if ref == nil {
+		d.drawText(screen, "暂无参考资料", layout.SourceCard.X+24, layout.SourceCard.Y+58, 22, font.Kai, colorx.White)
+		return
+	}
+	descriptionLines := wrapCollectionParagraph(ref.Description, layout.SourceCard.W-48, 20)
+	authorY := collectionSourceMetaY(layout, len(descriptionLines))
+	maxDescriptionLines := max(1, int((authorY-layout.SourceCard.Y-78)/30))
+	d.drawCollectionLines(
+		screen, descriptionLines, layout.SourceCard.X+24, layout.SourceCard.Y+54,
+		layout.SourceCard.W-48, 20, 30, font.Kai, maxDescriptionLines, colorx.White,
+	)
+	d.drawText(screen, fmt.Sprintf("素材原作者：%s", ref.Author), layout.SourceCard.X+24, authorY, 20, font.Kai, colorx.White)
+	d.drawText(screen, "参考资料：", layout.SourceCard.X+24, authorY+34, 20, font.Kai, colorx.White)
+	for _, link := range refLinks {
+		d.drawText(screen, link.Text, link.PosX, link.PosY, link.FontSize, link.Font, link.Color)
+	}
+}
+
+func (d *Drawer) drawCollectionCard(screen *ebiten.Image, card collectionCard, title string) {
+	vector.FillRect(
+		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
+		color.RGBA{18, 18, 18, 172}, false,
+	)
+	vector.StrokeRect(
+		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
+		2, color.RGBA{214, 201, 178, 190}, false,
+	)
+	d.drawText(screen, title, card.X+20, card.Y+18, 20, font.Kai, color.RGBA{230, 218, 194, 255})
+	vector.StrokeLine(
+		screen, float32(card.X+20), float32(card.Y+44), float32(card.X+card.W-20), float32(card.Y+44),
+		1, color.RGBA{214, 201, 178, 120}, false,
+	)
+}
+
+func (d *Drawer) drawCollectionInfoItems(
+	screen *ebiten.Image, items []objRef.InfoItem, x, y, valueMaxWidth, lineHeight float64,
+) {
+	drawn := 0
+	for _, item := range items {
+		lineY := y + float64(drawn)*lineHeight
+		d.drawText(screen, item.Label, x, lineY, 20, font.Kai, color.RGBA{214, 201, 178, 255})
+
+		valueFont := font.Kai
+		wrappedValues := wrapCollectionText(item.Value, valueMaxWidth, 20)
+		for idx, value := range wrappedValues {
+			d.drawText(screen, value, x+92, lineY+float64(idx)*lineHeight, 20, valueFont, colorx.White)
 		}
+		drawn += max(1, len(wrappedValues))
+	}
+}
 
-		// 引用信息
-		xOffset, yOffset = float64(screenWidth/3*2)+200, bgHeight+45*3
-		author := fmt.Sprintf("素材原作者：%s", ref.Author)
-		d.drawText(screen, author, xOffset, yOffset, 24, font.Hang, colorx.White)
-		yOffset += 70
-
-		d.drawText(screen, "参考资料：", xOffset, yOffset, 24, font.Hang, colorx.White)
-		for _, link := range refLinks {
-			d.drawText(screen, link.Text, link.PosX, link.PosY, link.FontSize, link.Font, link.Color)
+func (d *Drawer) drawCollectionLines(
+	screen *ebiten.Image,
+	lines []string,
+	x, y, maxWidth, fontSize, lineHeight float64,
+	textFont *text.GoTextFaceSource,
+	maxLines int,
+	textColor color.Color,
+) {
+	drawn := 0
+	for _, line := range lines {
+		for _, wrapped := range wrapCollectionText(line, maxWidth, fontSize) {
+			if drawn >= maxLines {
+				return
+			}
+			d.drawText(screen, wrapped, x, y+float64(drawn)*lineHeight, fontSize, textFont, textColor)
+			drawn++
 		}
 	}
+}
+
+func calcCollectionLayout(screenWidth, screenHeight int) collectionLayout {
+	screenW, screenH := float64(screenWidth), float64(screenHeight)
+	graphW, graphH := screenW*0.88, screenH*0.54
+	graphX, graphY := (screenW-graphW)/2, 50.0
+	infoY := graphY + graphH + 52
+	infoH := screenH - infoY - 54
+	gap := 24.0
+	infoX, infoW := graphX, graphW
+	archiveW, armamentW := infoW*0.27, infoW*0.28
+	sourceW := infoW - archiveW - armamentW - 2*gap
+	return collectionLayout{
+		GraphX: graphX, GraphY: graphY, GraphW: graphW, GraphH: graphH,
+		InfoY: infoY, InfoH: infoH, CardGap: gap,
+		ArchiveCard:  collectionCard{X: infoX, Y: infoY, W: archiveW, H: infoH},
+		ArmamentCard: collectionCard{X: infoX + archiveW + gap, Y: infoY, W: armamentW, H: infoH},
+		SourceCard:   collectionCard{X: infoX + archiveW + armamentW + 2*gap, Y: infoY, W: sourceW, H: infoH},
+	}
+}
+
+func collectionRefLinkOriginByDescription(
+	screenWidth, screenHeight int, description []string,
+) (float64, float64) {
+	collLayout := calcCollectionLayout(screenWidth, screenHeight)
+	descriptionLines := wrapCollectionParagraph(description, collLayout.SourceCard.W-48, 20)
+	return collLayout.SourceCard.X + 24, collectionSourceMetaY(collLayout, len(descriptionLines)) + 40
+}
+
+func collectionSourceMetaY(layout collectionLayout, descriptionLineCount int) float64 {
+	descriptionLineCount = min(descriptionLineCount, 4)
+	descriptionBottomY := layout.SourceCard.Y + 54 + float64(descriptionLineCount)*30
+	return min(descriptionBottomY+42, layout.SourceCard.Y+layout.SourceCard.H-132)
+}
+
+func wrapCollectionText(text string, maxWidth, fontSize float64) []string {
+	if estimateCollectionTextWidth(text, fontSize) <= maxWidth {
+		return []string{text}
+	}
+	lines := []string{}
+	line := ""
+	for _, r := range text {
+		next := line + string(r)
+		if line != "" && estimateCollectionTextWidth(next, fontSize) > maxWidth {
+			lines = append(lines, line)
+			line = string(r)
+			continue
+		}
+		line = next
+	}
+	if line != "" {
+		lines = append(lines, line)
+	}
+	return lines
+}
+
+func wrapCollectionParagraph(paragraphs []string, maxWidth, fontSize float64) []string {
+	lines := []string{}
+	for _, paragraph := range paragraphs {
+		lines = append(lines, wrapCollectionText(paragraph, maxWidth, fontSize)...)
+	}
+	return lines
+}
+
+func estimateCollectionTextWidth(text string, fontSize float64) float64 {
+	width := 0.0
+	for _, r := range text {
+		if r <= 127 {
+			width += fontSize * 0.55
+		} else {
+			width += fontSize
+		}
+	}
+	return width
+}
+
+func hasNonASCII(text string) bool {
+	for _, r := range text {
+		if r > 127 {
+			return true
+		}
+	}
+	return false
 }
 
 // 绘制游戏标题

@@ -83,6 +83,6 @@ func getHalfRect(width, multipleWidthAsHeight, life float64, clr color.Color) *e
 	r, g, b, _ := clr.RGBA()
 	clr = color.NRGBA{uint8(r), uint8(g), uint8(b), uint8(life)}
 	// 绘制矩形
-	vector.DrawFilledRect(trailImg, 0, float32(height), float32(width), float32(height), clr, false)
+	vector.FillRect(trailImg, 0, float32(height), float32(width), float32(height), clr, false)
 	return trailImg
 }

@@ -268,15 +268,16 @@ func (g *Game) handleGameCollection() error {
 
 	if ref := objRef.GetReference(g.curShipName); ref != nil {
 		misLayout := layout.NewScreenLayout()
-		xOffset, yOffset := float64(misLayout.Width/3*2)+200, float64(misLayout.Height/5*3)+250
+		xOffset, yOffset := collectionRefLinkOriginByDescription(misLayout.Width, misLayout.Height, ref.Description)
 
 		// 生成跳转链接点击区域
 		for idx, link := range ref.Links {
+			text := fmt.Sprintf("[%d] %s", idx+1, link.Name)
 			g.objStates.RefLinks = append(g.objStates.RefLinks, &refLink{
-				fmt.Sprintf("[%d] %s", idx+1, link.Name), link.URL,
-				xOffset, yOffset + float64(idx*45),
-				24, font.Hang, colorx.White,
-				float64(len(link.Name)) * 12, 30,
+				text, link.URL,
+				xOffset, yOffset + float64(idx*32),
+				18, font.Kai, colorx.White,
+				estimateCollectionTextWidth(text, 18), 24,
 			})
 		}
 

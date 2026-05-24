@@ -1,12 +1,25 @@
 [
   {
     name: "duck",
+    specs: [
+      {label: "类型", value: "Duck / default"},
+      {label: "HP", value: "150000"},
+      {label: "速度", value: "45 节"},
+      {label: "费用", value: "$0 / 5s"},
+      {label: "吨位", value: "150000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x8 406mm"},
+      {label: "主炮", value: "1x1 1024mm"},
+      {label: "副炮", value: "1x15 155mm"},
+      {label: "高炮", value: "1x30 37mm"},
+      {label: "高炮", value: "1x1 50mm"},
+      {label: "鱼雷", value: "1x15 610mm"},
+      {label: "鱼雷", value: "1x20 533mm"},
+      {label: "舰载机", value: "F x12，B x12，A x12"},
+    ],
     description: [
-      "小黄鸭是一种利用塑胶或者聚氯乙烯制成雏鸭形状的玩具，",
-      "中空而且质料轻软。在本游戏中，小黄鸭承担了各类武器的",
-      "测试工作，因此当发现飞机从鸭身上出现时，请不要惊讶，",
-      "毕竟鸭子飞行时掉点毛也很合理。还有一件事：小黄鸭有一门",
-      "朝后的高伤害电磁炮，发射红色的炮弹，我称其为 “鸭屎香” :D"
+      "小黄鸭是一种利用塑胶或者聚氯乙烯制成雏鸭形状的玩具，中空而且质料轻软。",
     ],
     author: "未知",
     links: [
@@ -18,13 +31,18 @@
   },
   {
     name: "waterdrop",
+    specs: [
+      {label: "类型", value: "WaterDrop / default"},
+      {label: "HP", value: "1"},
+      {label: "速度", value: "1000 节"},
+      {label: "费用", value: "$0 / 5s"},
+      {label: "吨位", value: "1"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x3 1mm"},
+    ],
     description: [
-      "水滴是科幻小说《三体》中由三体文明制造的宇宙探测器，",
-      "其对电磁波的反射率为 100％，温度处于绝对零度且绝对光滑，",
-      "拥有强度高达太阳系中最坚硬的材料的百倍以上的坚硬外壳。",
-      "在飞行时，水滴甚至可以毫不减速地做出违反定律的锐角转向。",
-      "在末日之战中，仅单个水滴就靠撞击摧毁人类大部分的太空武装",
-      "力量（共计 2008 艘恒星级战舰）。"
+      "水滴是科幻小说《三体》中由三体文明制造的宇宙探测器，其对电磁波的反射率为 100％，温度处于绝对零度且绝对光滑，拥有强度高达太阳系中最坚硬的材料的百倍以上的坚硬外壳。",
     ],
     author: "未知",
     links: [
@@ -36,11 +54,18 @@
   },
   {
     name: "molamola",
+    specs: [
+      {label: "类型", value: "Molamola / default"},
+      {label: "HP", value: "1000000"},
+      {label: "速度", value: "5 节"},
+      {label: "费用", value: "$10 / 10s"},
+      {label: "吨位", value: "1000000"},
+    ],
+    armaments: [
+      {label: "武装", value: "无固定武装"},
+    ],
     description: [
-      "翻车鱼是属于鲀形目翻车鲀科的一种鱼，原产于世界各地的",
-      "热带和温带水域，也见于寒带海洋，属于大型大洋性鱼类。",
-      "翻车鱼是世界上最重的两种硬骨鱼之一，其形似一个长着尾巴",
-      "的鱼头，身体扁平，行动缓慢。"
+      "翻车鱼是属于鲀形目翻车鲀科的一种鱼，原产于世界各地的热带和温带水域，也见于寒带海洋，属于大型大洋性鱼类。翻车鱼是世界上最重的两种硬骨鱼之一，其形似一个长着尾巴的鱼头，身体扁平，行动缓慢。",
     ],
     author: "未知",
     links: [
@@ -52,12 +77,20 @@
   },
   {
     name: "liberty",
+    specs: [
+      {label: "类型", value: "Cargo / cargo"},
+      {label: "HP", value: "7500"},
+      {label: "速度", value: "11 节"},
+      {label: "费用", value: "$50 / 15s"},
+      {label: "吨位", value: "7500"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x1 127mm/25"},
+      {label: "高平炮", value: "1x1 76mm/50"},
+      {label: "高炮", value: "8x1 20mm/70"},
+    ],
     description: [
-      "自由轮是一种在二战期间在美国大量制造的货轮。美国制造",
-      "大量的自由轮来替代被德国潜艇击沉的商船，同时，也有很多",
-      "自由轮通过租借法案提供给英国。自由轮建造迅速，价格便宜，",
-      "让它成为二战中美国工业的一种象征。在 1941-1945 年间，",
-      "18 个美国船坞共计建造了 2751 艘自由轮。"
+      "自由轮是一种在二战期间在美国大量制造的货轮。美国制造大量的自由轮来替代被德国潜艇击沉的商船，同时，也有很多自由轮通过租借法案提供给英国。",
     ],
     author: "未知",
     links: [
@@ -70,12 +103,21 @@
   // 美国海军
   {
     name: "yorktown",
+    specs: [
+      {label: "类型", value: "CV / aircraft_carrier"},
+      {label: "HP", value: "25900"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$410 / 40s"},
+      {label: "吨位", value: "25900"},
+    ],
+    armaments: [
+      {label: "主炮", value: "8x1 127mm/38"},
+      {label: "高炮", value: "4x4 40mm/60"},
+      {label: "高炮", value: "32x2 20mm/70"},
+      {label: "舰载机", value: "F4F-3 x36，TBD-1 x20，SBD-3 x40"},
+    ],
     description: [
       "约克城号（CV-5）是美国海军约克城级航空母舰的首舰。",
-      "其于 1937 年服役，约克城号 1942 年 5 月在珊瑚海",
-      "海战中受到重创，但在 72 小时的快速维修后赶及参与 6 月初",
-      "的中途岛海战，并与企业号联手击溃日本的航母部队，扭转",
-      "战争局势，但其也在该海战再次受到重创，其最终倾覆沉没。"
     ],
     author: "midnike",
     links: [
@@ -91,12 +133,21 @@
   },
   {
     name: "saratoga",
+    specs: [
+      {label: "类型", value: "CV / aircraft_carrier"},
+      {label: "HP", value: "50000"},
+      {label: "速度", value: "34 节"},
+      {label: "费用", value: "$635 / 60s"},
+      {label: "吨位", value: "50000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "12x1 127mm/38"},
+      {label: "高炮", value: "11x4 40mm/60"},
+      {label: "高炮", value: "20x2 20mm/70"},
+      {label: "舰载机", value: "F4F-3 x36，SBD-3 x40，TBD-1 x20"},
+    ],
     description: [
       "萨拉托加号（CV-3）美国海军列克星敦航空母舰级的二号舰。",
-      "原计划中其为战列巡洋舰，但受《华盛顿海军条约》所限，",
-      "而改为重型航空母舰。该舰是美国海军少数在二战之前",
-      "就已造好，最后安然度过战火的航空母舰之一。战后由于参与",
-      "比基尼环礁的 “十字路口” 核武器试验，被原子弹破坏并沉没。"
     ],
     author: "midnike",
     links: [
@@ -113,12 +164,20 @@
   // 日本海军
   {
     name: "taiho",
+    specs: [
+      {label: "类型", value: "CV / aircraft_carrier"},
+      {label: "HP", value: "37270"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$500 / 52s"},
+      {label: "吨位", value: "37270"},
+    ],
+    armaments: [
+      {label: "主炮", value: "8x2 100mm/65"},
+      {label: "高炮", value: "20x3 25mm/60"},
+      {label: "舰载机", value: "A6M_0 x24，D3A_99 x12，B5N2_97 x24"},
+    ],
     description: [
-      "大凤号航空母舰是二战时日本海军第一艘拥有装甲飞行甲板的",
-      "正规大型航空母舰，也是日本在二战中最后完工的一艘正规",
-      "航空母舰。其曾作为机动部队的旗舰参加战斗，在服役 3 个月后，",
-      "于 1944 年 6 月在马里亚纳海战时被美军潜艇大青花鱼号击中，",
-      "由于不可靠的损管，其在后续由于泄漏的油气点燃爆炸而沉没。"
+      "大凤号航空母舰是二战时日本海军第一艘拥有装甲飞行甲板的正规大型航空母舰，也是日本在二战中最后完工的一艘正规航空母舰。",
     ],
     author: "BB1987",
     links: [
@@ -134,12 +193,21 @@
   },
   {
     name: "akagi",
+    specs: [
+      {label: "类型", value: "CV / aircraft_carrier"},
+      {label: "HP", value: "41300"},
+      {label: "速度", value: "31 节"},
+      {label: "费用", value: "$460 / 45s"},
+      {label: "吨位", value: "41300"},
+    ],
+    armaments: [
+      {label: "主炮", value: "6x1 200mm/50"},
+      {label: "高平炮", value: "6x2 127mm/40"},
+      {label: "高炮", value: "14x2 25mm/60"},
+      {label: "舰载机", value: "A6M_0 x28，D3A_99 x28，B5N2_97 x36"},
+    ],
     description: [
-      "赤城号航空母舰原为天城级战列巡洋舰二号舰，因条约限制而",
-      "改建为航空母舰，早期采用独特的三段式飞行甲板布局，后经",
-      "现代化改装为全通式飞行甲板，成为日本机动部队的核心战力之一，",
-      "曾参加珍珠港空袭等作战，并于 1942 年 6 月的中途岛海战",
-      "中遭美军重创，最终因大火失控而沉没。"
+      "赤城号航空母舰原为天城级战列巡洋舰二号舰，因条约限制而改建为航空母舰，早期采用独特的三段式飞行甲板布局，后经现代化改装为全通式飞行甲板，成为日本机动部队的核心战力之一，曾参加珍珠港空袭等作战。",
     ],
     author: "未知",
     links: [
@@ -155,12 +223,21 @@
   },
   {
     name: "kaga",
+    specs: [
+      {label: "类型", value: "CV / aircraft_carrier"},
+      {label: "HP", value: "43600"},
+      {label: "速度", value: "28 节"},
+      {label: "费用", value: "$460 / 45s"},
+      {label: "吨位", value: "43600"},
+    ],
+    armaments: [
+      {label: "主炮", value: "10x1 200mm/50"},
+      {label: "高平炮", value: "8x2 127mm/40"},
+      {label: "高炮", value: "16x2 25mm/60"},
+      {label: "舰载机", value: "A6M_0 x24，B5N2_97 x48，D3A_99 x24"},
+    ],
     description: [
-      "加贺号航空母舰原为加贺级战列舰首舰，因条约限制而改建为",
-      "航空母舰，早期同样采用多层飞行甲板设计，后经全面改装后",
-      "成为日本海军的大型主力航母之一，舰载机运用能力较为突出。",
-      "其参加了珍珠港空袭等作战，并于 1942 年 6 月的中途岛",
-      "海战中遭美军重创，最终因爆炸与火灾而沉没。"
+      "加贺号航空母舰原为加贺级战列舰首舰，因条约限制而改建为航空母舰，早期同样采用多层飞行甲板设计，后经全面改装后成为日本海军的大型主力航母之一，舰载机运用能力较为突出。",
     ],
     author: "未知",
     links: [
@@ -176,11 +253,20 @@
   },
   {
     name: "soryu",
+    specs: [
+      {label: "类型", value: "CV / aircraft_carrier"},
+      {label: "HP", value: "19500"},
+      {label: "速度", value: "34.5 节"},
+      {label: "费用", value: "$220 / 30s"},
+      {label: "吨位", value: "19500"},
+    ],
+    armaments: [
+      {label: "主炮", value: "6x2 127mm/40"},
+      {label: "高炮", value: "12x2 25mm/60"},
+      {label: "舰载机", value: "A6M_0 x21，B5N2_97 x21，D3A_99 x21"},
+    ],
     description: [
-      "苍龙号是日本海军苍龙级航空母舰首舰，",
-      "是日本海军第一款以正规航母设计的舰队航母，",
-      "曾参与珍珠港空袭等重要作战，于中途岛海战",
-      "中遭美军俯冲轰炸机重创沉没。"
+      "苍龙号是日本海军苍龙级航空母舰首舰，是日本海军第一款以正规航母设计的舰队航母，曾参与珍珠港空袭等重要作战，于中途岛海战中遭美军俯冲轰炸机重创沉没。",
     ],
     author: "未知",
     links: [
@@ -192,11 +278,21 @@
   },
   {
     name: "hiryu",
+    specs: [
+      {label: "类型", value: "CV / aircraft_carrier"},
+      {label: "HP", value: "21900"},
+      {label: "速度", value: "34.5 节"},
+      {label: "费用", value: "$230 / 32s"},
+      {label: "吨位", value: "21900"},
+    ],
+    armaments: [
+      {label: "主炮", value: "6x2 127mm/40"},
+      {label: "高炮", value: "7x3 25mm/60"},
+      {label: "高炮", value: "5x2 25mm/60"},
+      {label: "舰载机", value: "A6M_0 x24，B5N2_97 x24，D3A_99 x24"},
+    ],
     description: [
-      "飞龙号是日本海军苍龙级航空母舰二号舰，",
-      "与苍龙号组成第二航空战队，曾参与珍珠港",
-      "空袭等重要作战，于中途岛海战中遭美军",
-      "轰炸机重创，后由日军自行雷击处分沉没。"
+      "飞龙号是日本海军苍龙级航空母舰二号舰，与苍龙号组成第二航空战队，曾参与珍珠港空袭等重要作战，于中途岛海战中遭美军轰炸机重创，后由日军自行雷击处分沉没。",
     ],
     author: "未知",
     links: [
@@ -209,12 +305,21 @@
   // 美国海军
   {
     name: "lowa",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "58000"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$580 / 54s"},
+      {label: "吨位", value: "58000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 406mm/50"},
+      {label: "高平炮", value: "10x2 127mm/38"},
+      {label: "高炮", value: "20x4 40mm/60"},
+      {label: "高炮", value: "44x1 20mm/70"},
+    ],
     description: [
-      "衣阿华号战列舰是美国海军建成的排水量最大最新锐衣阿华级",
-      "战列舰首舰，其曾参与第二次世界大战、朝鲜战争、两伊战争，",
-      "并于 1945 年在东京湾见证日本投降签字仪式，并且是历史上",
-      "唯一一艘有浴缸的战列舰，除此之外也是世界上最晚退役的",
-      "战列舰，衣阿华级 4 艘同型舰仍作为博物馆保存至今。"
+      "衣阿华号战列舰是美国海军建成的排水量最大最新锐衣阿华级战列舰首舰，其曾参与第二次世界大战、朝鲜战争、两伊战争，并于 1945 年在东京湾见证日本投降签字仪式，并且是历史上唯一一艘有浴缸的战列舰。",
     ],
     author: "TZoli",
     links: [
@@ -230,12 +335,21 @@
   },
   {
     name: "montana",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "70500"},
+      {label: "速度", value: "27 节"},
+      {label: "费用", value: "$705 / 65s"},
+      {label: "吨位", value: "70500"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x3 406mm/50"},
+      {label: "高平炮", value: "10x2 127mm/54"},
+      {label: "高炮", value: "20x4 40mm/60"},
+      {label: "高炮", value: "72x1 20mm/70"},
+    ],
     description: [
-      "蒙大拿号战列舰是美国海军在第二次世界大战期间计划建造，但",
-      "从未实际造成的一艘战列舰。其设计是用来对抗日本的大和级战舰。",
-      "相比于衣阿华级，其虽然极速降低，但是吨位，火力，装甲都更强。",
-      "由于二战胜利后，美国海军倾向于航母而被取消建造。若蒙大拿号",
-      "按计划完工，将会是美国海军史上级别最高、火力最强大的战列舰。",
+      "蒙大拿号战列舰是美国海军在第二次世界大战期间计划建造，但从未实际造成的一艘战列舰。",
     ],
     author: "TZoli",
     links: [
@@ -251,12 +365,21 @@
   },
   {
     name: "south_dakota",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "46000"},
+      {label: "速度", value: "28 节"},
+      {label: "费用", value: "$445 / 40s"},
+      {label: "吨位", value: "46000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 406mm/45"},
+      {label: "高平炮", value: "8x2 127mm/38"},
+      {label: "高炮", value: "17x4 40mm/60"},
+      {label: "高炮", value: "57x1 20mm/70"},
+    ],
     description: [
-      "南达科他号是美国海军南达科他级战列舰的首舰。其在 1942 年服役，",
-      "在瓜达尔卡纳尔海战中遭到雾岛号战列舰等重创而回国维修，而后其",
-      "曾短暂到大西洋巡航，然后返回太平洋，并先后参与马绍尔群岛、",
-      "马里亚纳及帕劳群岛战役、莱特湾海战、硫磺岛战役及冲绳战役。",
-      "日本投降后，南达科他号在东京湾见证日本签字投降仪式。"
+      "南达科他号是美国海军南达科他级战列舰的首舰。其在 1942 年服役，在瓜达尔卡纳尔海战中遭到雾岛号战列舰等重创而回国维修，而后其曾短暂到大西洋巡航，然后返回太平洋，并先后参与马绍尔群岛、马里亚纳及帕劳群岛战役、莱特湾海战、硫磺岛战役及冲绳战役。",
     ],
     author: "Ronald Yoshioka",
     links: [
@@ -272,10 +395,22 @@
   },
   {
     name: "lexington",
+    specs: [
+      {label: "类型", value: "BC / battleship"},
+      {label: "HP", value: "58400"},
+      {label: "速度", value: "30 节"},
+      {label: "费用", value: "$585 / 60s"},
+      {label: "吨位", value: "58400"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 457mm/45"},
+      {label: "高平炮", value: "10x2 127mm/38"},
+      {label: "高炮", value: "13x4 40mm/60"},
+      {label: "高炮", value: "4x2 40mm/60"},
+      {label: "高炮", value: "34x1 20mm/70"},
+    ],
     description: [
-      "列克星敦号战列巡洋舰是 B 站 UP 主莫斯科凉粉的个人作品，",
-      "基于列克星敦级没有受《华盛顿海军条约》限制而改建航母的背景。",
-      "设定中拥有三座巨大的 18 英寸（457mm）三联装主炮。"
+      "列克星敦号战列巡洋舰是 B 站 UP 主莫斯科凉粉的个人作品，基于列克星敦级没有受《华盛顿海军条约》限制而改建航母的背景。设定中拥有三座巨大的 18 英寸（457mm）三联装主炮。",
     ],
     author: "莫斯科凉粉",
     links: [
@@ -288,12 +423,22 @@
   // 日本海军
   {
     name: "kongo",
+    specs: [
+      {label: "类型", value: "BC / battleship"},
+      {label: "HP", value: "36600"},
+      {label: "速度", value: "30 节"},
+      {label: "费用", value: "$380 / 45s"},
+      {label: "吨位", value: "36600"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 356mm/45"},
+      {label: "副炮", value: "14x1 152mm/50"},
+      {label: "高平炮", value: "6x2 127mm/40"},
+      {label: "高炮", value: "18x3 25mm/60"},
+      {label: "高炮", value: "6x2 25mm/60"},
+    ],
     description: [
-      "金刚号是日本海军战列舰，",
-      "原为英国建造的战列巡洋舰，",
-      "后经过改装成为高速战列舰，",
-      "在太平洋战争中多次参与作战，",
-      "是日本海军的重要战力之一。"
+      "金刚号是日本海军战列舰，原为英国建造的战列巡洋舰，后经过改装成为高速战列舰，在太平洋战争中多次参与作战，是日本海军的重要战力之一。",
     ],
     author: "Alexpl",
     links: [
@@ -309,12 +454,22 @@
   },
   {
     name: "fuso",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "39154"},
+      {label: "速度", value: "25 节"},
+      {label: "费用", value: "$400 / 45s"},
+      {label: "吨位", value: "39154"},
+    ],
+    armaments: [
+      {label: "主炮", value: "6x2 356mm/45"},
+      {label: "副炮", value: "14x1 152mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "22x3 25mm/60"},
+      {label: "高炮", value: "4x2 25mm/60"},
+    ],
     description: [
-      "扶桑号是日本海军扶桑级战列舰首舰，",
-      "是日本第一艘超无畏舰代表作品。",
-      "该舰采用独特的六座双联装主炮布局，",
-      "在莱特湾海战中遭遇美军驱逐舰，",
-      "被鱼雷击中弹药库后发生爆炸沉没。"
+      "扶桑号是日本海军扶桑级战列舰首舰，是日本第一艘超无畏舰代表作品。该舰采用独特的六座双联装主炮布局，在莱特湾海战中遭遇美军驱逐舰，被鱼雷击中弹药库后发生爆炸沉没。",
     ],
     author: "Alexpl",
     links: [
@@ -330,12 +485,21 @@
   },
   {
     name: "yamato",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "72500"},
+      {label: "速度", value: "27 节"},
+      {label: "费用", value: "$720 / 72s"},
+      {label: "吨位", value: "72500"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 460mm/45"},
+      {label: "副炮", value: "2x3 155mm/60"},
+      {label: "高平炮", value: "12x2 127mm/40"},
+      {label: "高炮", value: "48x3 25mm/60"},
+    ],
     description: [
-      "大和号是日本海军大和级战列舰首舰，",
-      "是人类历史上建造过的最大战列舰，",
-      "排水量超过 7 万吨，规模惊人。",
-      "搭载史上最大口径的 460 毫米主炮，",
-      "1945 年被美军击沉于冲绳附近。"
+      "大和号是日本海军大和级战列舰首舰，是人类历史上建造过的最大战列舰，排水量超过 7 万吨，规模惊人。搭载史上最大口径的 460 毫米主炮，1945 年被美军击沉于冲绳附近。",
     ],
     author: "TZoli",
     links: [
@@ -351,12 +515,22 @@
   },
   {
     name: "satsuma",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "84000"},
+      {label: "速度", value: "29 节"},
+      {label: "费用", value: "$920 / 100s"},
+      {label: "吨位", value: "84000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 510mm/45"},
+      {label: "副炮", value: "6x2 200mm/50"},
+      {label: "高平炮", value: "10x2 100mm/65"},
+      {label: "高炮", value: "14x2 40mm/60"},
+      {label: "高炮", value: "12x3 25mm/60"},
+    ],
     description: [
-      "萨摩号是日本海军大和级改进型，",
-      "设计目标超越原有战舰性能，",
-      "火力装甲进行全面强化升级，",
-      "采用萨摩古国命名延续传统，",
-      "该舰仅存在于设计图纸中。"
+      "萨摩号是日本海军大和级改进型，设计目标超越原有战舰性能，火力装甲进行全面强化升级，采用萨摩古国命名延续传统，该舰仅存在于设计图纸中。",
     ],
     author: "TZoli",
     links: [
@@ -368,11 +542,21 @@
   },
   {
     name: "edo",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "105000"},
+      {label: "速度", value: "29 节"},
+      {label: "费用", value: "$1200 / 130s"},
+      {label: "吨位", value: "105000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x3 510mm/45"},
+      {label: "副炮", value: "2x3 200mm/50"},
+      {label: "高平炮", value: "16x2 127mm/50"},
+      {label: "高炮", value: "44x2 40mm/60"},
+    ],
     description: [
-      "江户国是古代日本的令制国之一，",
-      "位于现在的东京都及周边地区。",
-      "是江户时代的政治经济中心，",
-      "在游戏中作为日本最强战舰登场。"
+      "江户国是古代日本的令制国之一，位于现在的东京都及周边地区。是江户时代的政治经济中心，在游戏中作为日本最强战舰登场。",
     ],
     author: "TZoli",
     links: [
@@ -385,12 +569,20 @@
   // 德国海军
   {
     name: "bismarck",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "52600"},
+      {label: "速度", value: "30 节"},
+      {label: "费用", value: "$550 / 50s"},
+      {label: "吨位", value: "52600"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 381mm/52"},
+      {label: "副炮", value: "6x2 150mm/60"},
+      {label: "高平炮", value: "8x2 105mm/65"},
+    ],
     description: [
-      "俾斯麦号是纳粹德国海军战列舰首舰，",
-      "是二战时期德国最大的战舰之一。",
-      "其 1941 年首次出击就表现卓越，",
-      "击沉英国皇家海军胡德号战列巡洋舰，",
-      "后在追击中被英军舰队击沉。"
+      "俾斯麦号是纳粹德国海军战列舰首舰，是二战时期德国最大的战舰之一。其 1941 年首次出击就表现卓越，击沉英国皇家海军胡德号战列巡洋舰，后在追击中被英军舰队击沉。",
     ],
     author: "未知",
     links: [
@@ -402,12 +594,22 @@
   },
   {
     name: "scharnhorst",
+    specs: [
+      {label: "类型", value: "BC / battleship"},
+      {label: "HP", value: "38100"},
+      {label: "速度", value: "31 节"},
+      {label: "费用", value: "$385 / 36s"},
+      {label: "吨位", value: "38100"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 283mm/55"},
+      {label: "副炮", value: "4x2 150mm/60"},
+      {label: "副炮", value: "4x1 150mm/60"},
+      {label: "高平炮", value: "7x2 105mm/65"},
+      {label: "鱼雷", value: "2x3 533mm"},
+    ],
     description: [
-      "沙恩霍斯特号是德国的战列巡洋舰，",
-      "是沙恩霍斯特级的首舰代表，",
-      "以其出色的机动性著称于世，",
-      "拥有较强的生存能力和战斗力，",
-      "1943 年在北角海战中沉没。"
+      "沙恩霍斯特号是德国的战列巡洋舰，是沙恩霍斯特级的首舰代表，以其出色的机动性著称于世，拥有较强的生存能力和战斗力，1943 年在北角海战中沉没。",
     ],
     author: "未知",
     links: [
@@ -419,12 +621,21 @@
   },
   {
     name: "lutzow",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "16200"},
+      {label: "速度", value: "28.5 节"},
+      {label: "费用", value: "$160 / 16s"},
+      {label: "吨位", value: "16200"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x3 283mm/52"},
+      {label: "副炮", value: "8x1 150mm/60"},
+      {label: "高平炮", value: "3x2 105mm/65"},
+      {label: "鱼雷", value: "2x4 533mm"},
+    ],
     description: [
-      "吕佐夫号是德国的德意志级战舰，",
-      "是该级的首舰，原名德意志号，",
-      "后为鼓舞士气而更名为吕佐夫号，",
-      "曾多次参与大西洋破交作战，",
-      "也参与北挪威海域的军事行动。"
+      "吕佐夫号是德国的德意志级战舰，是该级的首舰，原名德意志号，后为鼓舞士气而更名为吕佐夫号，曾多次参与大西洋破交作战，也参与北挪威海域的军事行动。",
     ],
     author: "未知",
     links: [
@@ -437,12 +648,21 @@
   // 英国海军
   {
     name: "hood",
+    specs: [
+      {label: "类型", value: "BC / battleship"},
+      {label: "HP", value: "47430"},
+      {label: "速度", value: "32 节"},
+      {label: "费用", value: "$450 / 40s"},
+      {label: "吨位", value: "47430"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 381mm/42"},
+      {label: "副炮", value: "16x1 140mm/50"},
+      {label: "高平炮", value: "4x1 102mm/45"},
+      {label: "鱼雷", value: "6x1 533mm"},
+    ],
     description: [
-      "胡德号是英国皇家海军战列巡洋舰，",
-      "曾是世界最大战舰，闻名于世。",
-      "被称为皇家海军的骄傲与象征，",
-      "排水量超过 4 万吨，但在 1941 年的",
-      "丹麦海峡海战中被俾斯麦号击沉。"
+      "胡德号是英国皇家海军战列巡洋舰，曾是世界最大战舰，闻名于世。被称为皇家海军的骄傲与象征，排水量超过 4 万吨，但在 1941 年的丹麦海峡海战中被俾斯麦号击沉。",
     ],
     author: "TZoli",
     links: [
@@ -454,11 +674,24 @@
   },
   {
     name: "nelson",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "38000"},
+      {label: "速度", value: "24 节"},
+      {label: "费用", value: "$390 / 35s"},
+      {label: "吨位", value: "38000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 406mm/45"},
+      {label: "副炮", value: "6x2 152mm/50"},
+      {label: "高平炮", value: "6x1 120mm/45"},
+      {label: "高炮", value: "6x8 40mm/39"},
+      {label: "高炮", value: "4x4 40mm/56"},
+      {label: "高炮", value: "59x1 20mm/70"},
+      {label: "鱼雷", value: "2x1 622mm"},
+    ],
     description: [
-      "纳尔逊级是英国一战后设计建造的战列舰。设计参考了战争经验，",
-      "在主炮布局和防护设计上大胆创新，采用三联装主炮全前置布局，",
-      "牺牲后向火力以增强防护性能。该级舰共建成两艘，在二战中曾",
-      "参与丹麦海峡海战，诺曼底登陆等战役，展现出强大作战能力。"
+      "纳尔逊级是英国一战后设计建造的战列舰。设计参考了战争经验，在主炮布局和防护设计上大胆创新，采用三联装主炮全前置布局，牺牲后向火力以增强防护性能。",
     ],
     author: "TZoli",
     links: [
@@ -474,12 +707,23 @@
   },
   {
     name: "lion",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "69500"},
+      {label: "速度", value: "29 节"},
+      {label: "费用", value: "$680 / 56s"},
+      {label: "吨位", value: "69500"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 406mm/45"},
+      {label: "高平炮", value: "12x2 114mm/45"},
+      {label: "高炮", value: "10x6 40mm/56"},
+      {label: "高炮", value: "8x2 40mm/60"},
+      {label: "高炮", value: "10x1 40mm/60"},
+      {label: "鱼雷", value: "2x5 533mm"},
+    ],
     description: [
-      "狮级战列舰是英国皇家海军计划建造的",
-      "一级战列舰，设计用于对抗新型威胁。",
-      "主要目标是德国 H 级战列舰和日本大和级",
-      "在装甲防护方面表现优异，而火力却较为平庸。",
-      "由于战争爆发，该级战舰未能建成。"
+      "狮级战列舰是英国皇家海军计划建造的一级战列舰，设计用于对抗新型威胁。主要目标是德国 H 级战列舰和日本大和级在装甲防护方面表现优异，而火力却较为平庸。由于战争爆发，该级战舰未能建成。",
     ],
     author: "tzoli",
     links: [
@@ -491,11 +735,22 @@
   },
   {
     name: "lioness",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "55000"},
+      {label: "速度", value: "30 节"},
+      {label: "费用", value: "$500 / 45s"},
+      {label: "吨位", value: "55000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x4 356mm/45"},
+      {label: "副炮", value: "8x2 133mm/50"},
+      {label: "高炮", value: "4x8 40mm/39"},
+      {label: "高炮", value: "4x4 20mm/70"},
+      {label: "高炮", value: "6x2 20mm/70"},
+    ],
     description: [
-      "雌狮级战列舰是狮级方案的一种，",
-      "采用数量众多的 14 英寸火炮，",
-      "同时还兼顾装甲防护能力与航速。",
-      "但该舰最终也仅存在于设计图纸中。"
+      "雌狮级战列舰是狮级方案的一种，采用数量众多的 14 英寸火炮，同时还兼顾装甲防护能力与航速。但该舰最终也仅存在于设计图纸中。",
     ],
     author: "tzoli",
     links: [
@@ -507,12 +762,22 @@
   },
   {
     name: "king_george_v",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "43780"},
+      {label: "速度", value: "27 节"},
+      {label: "费用", value: "$420 / 40s"},
+      {label: "吨位", value: "43780"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x4 356mm/45"},
+      {label: "主炮", value: "1x2 356mm/45"},
+      {label: "副炮", value: "8x2 133mm/50"},
+      {label: "高炮", value: "8x8 40mm/39"},
+      {label: "高炮", value: "20x1 20mm/70"},
+    ],
     description: [
-      "乔治五世号是英国皇家海军战舰，",
-      "是英王乔治五世级的首舰。",
-      "曾参与围剿俾斯麦号的行动，",
-      "在二战中服役于多场重要海战，",
-      "为反法西斯战争做出贡献。"
+      "乔治五世号是英国皇家海军战舰，是英王乔治五世级的首舰。曾参与围剿俾斯麦号的行动，在二战中服役于多场重要海战，为反法西斯战争做出贡献。",
     ],
     author: "未知",
     links: [
@@ -524,12 +789,20 @@
   },
   {
     name: "warspite",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "37000"},
+      {label: "速度", value: "24 节"},
+      {label: "费用", value: "$340 / 33s"},
+      {label: "吨位", value: "37000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 381mm/42"},
+      {label: "副炮", value: "8x1 152mm/45"},
+      {label: "鱼雷", value: "4x1 533mm"},
+    ],
     description: [
-      "厌战号是英国皇家海军战列舰，",
-      "属于伊丽莎白女王级战列舰，",
-      "被称为可敬的老太太称号，",
-      "服役生涯极其漫长且辉煌，",
-      "在一战和二战中表现出色。"
+      "厌战号是英国皇家海军战列舰，属于伊丽莎白女王级战列舰，被称为可敬的老太太称号，服役生涯极其漫长且辉煌，在一战和二战中表现出色。",
     ],
     author: "未知",
     links: [
@@ -541,12 +814,20 @@
   },
   {
     name: "tiger",
+    specs: [
+      {label: "类型", value: "BC / battleship"},
+      {label: "HP", value: "33600"},
+      {label: "速度", value: "28 节"},
+      {label: "费用", value: "$300 / 28s"},
+      {label: "吨位", value: "33600"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 343mm/45"},
+      {label: "副炮", value: "12x1 152mm/45"},
+      {label: "鱼雷", value: "4x1 533mm"},
+    ],
     description: [
-      "虎号是英国皇家海军战列巡洋舰，",
-      "是虎级战列巡洋舰的首舰代表，",
-      "是玛丽皇后号的姊妹舰之一，",
-      "在一战期间服役并参与作战，",
-      "战后退役并被拆解出售。"
+      "虎号是英国皇家海军战列巡洋舰，是虎级战列巡洋舰的首舰代表，是玛丽皇后号的姊妹舰之一，在一战期间服役并参与作战，战后退役并被拆解出售。",
     ],
     author: "未知",
     links: [
@@ -559,12 +840,21 @@
   // 苏联海军
   {
     name: "soviet_union",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "67370"},
+      {label: "速度", value: "29 节"},
+      {label: "费用", value: "$720 / 68s"},
+      {label: "吨位", value: "67370"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 406mm/50"},
+      {label: "副炮", value: "6x2 152mm/57"},
+      {label: "高平炮", value: "6x2 100mm/56"},
+      {label: "高炮", value: "10x4 37mm/57"},
+    ],
     description: [
       "苏联级（23 型）是苏联在 30 年代末期设计建造的一级战列舰。",
-      "她在设计时得到了来自意大利的技术援助，在一些地方设计受",
-      "维内托级和 UP41 方案的影响。可惜的是，由于德国入侵，二战",
-      "后航母取代战列舰地位等原因，四艘苏联级均没有能够建成。",
-      "注：该作品是 TZoli 的个人作品，设计风格上有英/日系风格。"
     ],
     author: "TZoli",
     links: [
@@ -580,10 +870,21 @@
   },
   {
     name: "soviet_union_nelsonski",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "58200"},
+      {label: "速度", value: "29 节"},
+      {label: "费用", value: "$650 / 63s"},
+      {label: "吨位", value: "58200"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 406mm/50"},
+      {label: "副炮", value: "4x3 152mm/57"},
+      {label: "高平炮", value: "6x2 100mm/56"},
+      {label: "高炮", value: "9x4 37mm/57"},
+    ],
     description: [
-      "苏维埃纳尔逊斯基是 TZoli 的个人作品，",
-      "其特点是参考英国纳尔逊级战列舰，将三座主炮",
-      "设置在舰体前部，使用更少的装甲以限制总吨位。"
+      "苏维埃纳尔逊斯基是 TZoli 的个人作品，其特点是参考英国纳尔逊级战列舰，将三座主炮设置在舰体前部，使用更少的装甲以限制总吨位。",
     ],
     author: "TZoli",
     links: [
@@ -595,12 +896,21 @@
   },
   {
     name: "kremlin",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "81150"},
+      {label: "速度", value: "30 节"},
+      {label: "费用", value: "$850 / 88s"},
+      {label: "吨位", value: "81150"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 406mm/50"},
+      {label: "高平炮", value: "12x2 130mm/60"},
+      {label: "高炮", value: "14x4 45mm/78"},
+      {label: "高炮", value: "18x4 25mm/65"},
+    ],
     description: [
-      "24 型原本为苏联级（23 型）的后续方案，在 23 型的基础上进行",
-      "少量的改动，但是由于战争爆发而搁置，直到战后才重新开始，",
-      "此时该舰的假想敌已改为衣阿华级，在设计中出现许多夸张的方案",
-      "（如：12 门 406mm 主炮，13 万吨）。但是在项目细化时，支持",
-      "大舰巨炮路线的最高领导人去世，24 型最终没能走下绘图板。"
+      "24 型原本为苏联级（23 型）的后续方案，在 23 型的基础上进行少量的改动，但是由于战争爆发而搁置，直到战后才重新开始，此时该舰的假想敌已改为衣阿华级，在设计中出现许多夸张的方案（如：12 门 406mm 主炮，13 万吨）。",
     ],
     author: "1143M",
     links: [
@@ -616,9 +926,22 @@
   },
   {
     name: "slava",
+    specs: [
+      {label: "类型", value: "BB / battleship"},
+      {label: "HP", value: "105300"},
+      {label: "速度", value: "30 节"},
+      {label: "费用", value: "$1170 / 105s"},
+      {label: "吨位", value: "105300"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 500mm/50"},
+      {label: "高平炮", value: "8x2 130mm/58"},
+      {label: "高炮", value: "8x4 57mm/72"},
+      {label: "高炮", value: "12x4 37mm/57"},
+      {label: "高炮", value: "8x2 37mm/57"},
+    ],
     description: [
-      "光荣级超级战列舰是 B 站 UP 主莫斯科凉粉的个人作品，",
-      "设定中拥有四座巨大的 500mm 双联装主炮，总吨位超过 10 万吨。"
+      "光荣级超级战列舰是 B 站 UP 主莫斯科凉粉的个人作品，设定中拥有四座巨大的 500mm 双联装主炮，总吨位超过 10 万吨。",
     ],
     author: "莫斯科凉粉",
     links: [
@@ -635,12 +958,21 @@
   // 美国海军
   {
     name: "atlanta",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "7400"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$70 / 10s"},
+      {label: "吨位", value: "7400"},
+    ],
+    armaments: [
+      {label: "主炮", value: "8x2 127mm/38"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "8x1 20mm/70"},
+      {label: "鱼雷", value: "2x4 533mm"},
+    ],
     description: [
-      "亚特兰大号是美国海军在二次大战中服役的轻巡洋舰，",
-      "采用防空巡洋舰的设计思路建造。数量众多的双联装",
-      "高平两用炮是该级战舰的主要特点，在二战中，首舰",
-      "亚特兰大号，二号舰朱诺号均于 1942.11.13 战沉，与其",
-      "一起沉入海底的，还有来自衣阿华州的沙利文五兄弟。"
+      "亚特兰大号是美国海军在二次大战中服役的轻巡洋舰，采用防空巡洋舰的设计思路建造。",
     ],
     author: "Midnike",
     links: [
@@ -656,9 +988,21 @@
   },
   {
     name: "alaska_kai",
+    specs: [
+      {label: "类型", value: "CB / cruiser"},
+      {label: "HP", value: "42800"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$450 / 40s"},
+      {label: "吨位", value: "42800"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x3 305mm/50"},
+      {label: "高平炮", value: "8x2 127mm/38"},
+      {label: "高炮", value: "14x4 40mm/60"},
+      {label: "高炮", value: "44x1 20mm/70"},
+    ],
     description: [
-      "改进型阿拉斯加级大型巡洋舰是 TZoli 的个人作品，",
-      "相较于原阿拉斯加级，拥有更多的 12 英寸（305mm）主炮。"
+      "改进型阿拉斯加级大型巡洋舰是 TZoli 的个人作品，相较于原阿拉斯加级，拥有更多的 12 英寸（305mm）主炮。",
     ],
     author: "TZoli",
     links: [
@@ -674,10 +1018,19 @@
   },
   {
     name: "long_beach",
+    specs: [
+      {label: "类型", value: "CGN / cruiser"},
+      {label: "HP", value: "16600"},
+      {label: "速度", value: "30 节"},
+      {label: "费用", value: "$180 / 15s"},
+      {label: "吨位", value: "16600"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x1 127mm/38"},
+      {label: "鱼雷", value: "2x3 324mm"},
+    ],
     description: [
-      "长滩号是人类历史上第一艘核动力巡洋舰，曾与企业号",
-      "航空母舰，班布里奇号核动力导弹巡洋舰完成首次核动力",
-      "舰队环球航行的 “海环行动”，在三个月的航行中不靠港补给。"
+      "长滩号是人类历史上第一艘核动力巡洋舰，曾与企业号航空母舰，班布里奇号核动力导弹巡洋舰完成首次核动力舰队环球航行的 “海环行动”，在三个月的航行中不靠港补给。",
     ],
     author: "TZoli",
     links: [
@@ -697,10 +1050,19 @@
   },
   {
     name: "long_beach_scheme_D",
+    specs: [
+      {label: "类型", value: "CGN / cruiser"},
+      {label: "HP", value: "11300"},
+      {label: "速度", value: "32 节"},
+      {label: "费用", value: "$125 / 10s"},
+      {label: "吨位", value: "11300"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x1 127mm/38"},
+      {label: "鱼雷", value: "2x3 324mm"},
+    ],
     description: [
-      "长滩级导弹巡洋舰 Scheme D 是 TZoli 的个人作品，",
-      "相较于其原型长滩号，通过简化设备，优化舰体获取更短的",
-      "舰体及更紧凑的上层建筑，使得看起来更像驱逐舰领舰。"
+      "长滩级导弹巡洋舰 Scheme D 是 TZoli 的个人作品，相较于其原型长滩号，通过简化设备，优化舰体获取更短的舰体及更紧凑的上层建筑，使得看起来更像驱逐舰领舰。",
     ],
     author: "TZoli",
     links: [
@@ -716,12 +1078,19 @@
   },
   {
     name: "astoria",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "12663"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$120 / 12s"},
+      {label: "吨位", value: "12663"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/55"},
+      {label: "高平炮", value: "8x1 127mm/25"},
+    ],
     description: [
-      "阿斯托利亚号重巡洋舰是新奥尔良级重巡洋舰的姊妹舰，",
-      "在 1934 年下水，在珊瑚海海战中护卫约克城号航空",
-      "母舰，最后在 1942.8 的萨沃岛夜战中被引爆弹药库沉没，",
-      "与其一同战沉的还有同级的昆西，文森斯两舰。",
-      "注：该舰 1939 曾送大使遗体到日本，并参与日本国葬。"
+      "阿斯托利亚号重巡洋舰是新奥尔良级重巡洋舰的姊妹舰，在 1934 年下水，在珊瑚海海战中护卫约克城号航空母舰，最后在 1942.8 的萨沃岛夜战中被引爆弹药库沉没，与其一同战沉的还有同级的昆西，文森斯两舰。",
     ],
     author: "Midnike",
     links: [
@@ -741,11 +1110,20 @@
   },
   {
     name: "pensacola",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "11696"},
+      {label: "速度", value: "32.5 节"},
+      {label: "费用", value: "$120 / 12s"},
+      {label: "吨位", value: "11696"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x2 203mm/55"},
+      {label: "主炮", value: "2x3 203mm/55"},
+      {label: "高平炮", value: "8x1 127mm/25"},
+    ],
     description: [
-      "彭萨科拉号是美国海军彭萨科拉级重巡洋舰首舰，是美国最早",
-      "装备的条约型巡洋舰，它依照《华盛顿海军条约》规定的上限",
-      "规格建造，2+3+3+2 的 8 英寸炮塔布局是其特点之一。",
-      "她与姊妹舰盐湖城号都幸运地在二战中幸存下来。"
+      "彭萨科拉号是美国海军彭萨科拉级重巡洋舰首舰，是美国最早装备的条约型巡洋舰，它依照《华盛顿海军条约》规定的上限规格建造，2+3+3+2 的 8 英寸炮塔布局是其特点之一。",
     ],
     author: "Midnike",
     links: [
@@ -766,12 +1144,21 @@
   // 日本海军
   {
     name: "furutaka",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "10630"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$110 / 14s"},
+      {label: "吨位", value: "10630"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 203mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "6x2 25mm/60"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "古鹰号是日本海军重巡洋舰首舰，",
-      "是日本第一种条约型重巡洋舰，",
-      "开创了日本重巡洋舰的先河，",
-      "后在所罗门海战中遭遇美军，",
-      "被击沉，结束了其服役生涯。"
+      "古鹰号是日本海军重巡洋舰首舰，是日本第一种条约型重巡洋舰，开创了日本重巡洋舰的先河，后在所罗门海战中遭遇美军，被击沉，结束了其服役生涯。",
     ],
     author: "未知",
     links: [
@@ -783,12 +1170,21 @@
   },
   {
     name: "aoba",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "11660"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$120 / 16s"},
+      {label: "吨位", value: "11660"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 203mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "12x2 25mm/60"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "青叶号是日本海军重巡洋舰首舰，",
-      "是古鹰级的改进型升级版本，",
-      "火控系统得到显著加强优化，",
-      "在太平洋战争中多次参与作战，",
-      "执行多种任务展现其价值。"
+      "青叶号是日本海军重巡洋舰首舰，是古鹰级的改进型升级版本，火控系统得到显著加强优化，在太平洋战争中多次参与作战，执行多种任务展现其价值。",
     ],
     author: "未知",
     links: [
@@ -800,12 +1196,22 @@
   },
   {
     name: "haguro",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "15479"},
+      {label: "速度", value: "33.5 节"},
+      {label: "费用", value: "$150 / 16s"},
+      {label: "吨位", value: "15479"},
+    ],
+    armaments: [
+      {label: "主炮", value: "5x2 203mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "10x3 25mm/60"},
+      {label: "高炮", value: "14x1 25mm/60"},
+      {label: "鱼雷", value: "4x4 610mm"},
+    ],
     description: [
-      "羽黑号是日本海军重巡洋舰，",
-      "是高雄级四号舰代表作品，",
-      "在太平洋战争中表现出色，",
-      "多次参与重要海战和行动，",
-      "1945 年在马来半岛附近沉没。"
+      "羽黑号是日本海军重巡洋舰，是高雄级四号舰代表作品，在太平洋战争中表现出色，多次参与重要海战和行动，1945 年在马来半岛附近沉没。",
     ],
     author: "未知",
     links: [
@@ -817,12 +1223,22 @@
   },
   {
     name: "atago",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "15718"},
+      {label: "速度", value: "34 节"},
+      {label: "费用", value: "$160 / 16s"},
+      {label: "吨位", value: "15718"},
+    ],
+    armaments: [
+      {label: "主炮", value: "5x2 203mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "10x3 25mm/60"},
+      {label: "高炮", value: "26x1 25mm/60"},
+      {label: "鱼雷", value: "4x4 610mm"},
+    ],
     description: [
-      "爱宕号是日本海军重巡洋舰，",
-      "是高雄级二号舰，改良设计，",
-      "拥有更强的火力和防护性能，",
-      "曾作为第二舰队旗舰服役，",
-      "后在巴拉望水道被击沉。"
+      "爱宕号是日本海军重巡洋舰，是高雄级二号舰，改良设计，拥有更强的火力和防护性能，曾作为第二舰队旗舰服役，后在巴拉望水道被击沉。",
     ],
     author: "未知",
     links: [
@@ -834,12 +1250,22 @@
   },
   {
     name: "mogami",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "13600"},
+      {label: "速度", value: "35 节"},
+      {label: "费用", value: "$150 / 18s"},
+      {label: "吨位", value: "13600"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 203mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "14x2 25mm/60"},
+      {label: "高炮", value: "18x1 25mm/60"},
+      {label: "鱼雷", value: "4x3 610mm"},
+    ],
     description: [
-      "最上级是日本海军重巡洋舰首舰，",
-      "最初按轻巡洋舰设计建造，",
-      "后改装为重巡洋舰以增强火力，",
-      "在莱特湾海战中遭受重创，",
-      "最终沉没于太平洋战场。"
+      "最上级是日本海军重巡洋舰首舰，最初按轻巡洋舰设计建造，后改装为重巡洋舰以增强火力，在莱特湾海战中遭受重创，最终沉没于太平洋战场。",
     ],
     author: "未知",
     links: [
@@ -851,12 +1277,22 @@
   },
   {
     name: "suzuya",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "13887"},
+      {label: "速度", value: "36 节"},
+      {label: "费用", value: "$130 / 16s"},
+      {label: "吨位", value: "13887"},
+    ],
+    armaments: [
+      {label: "主炮", value: "5x2 203mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "12x2 25mm/60"},
+      {label: "高炮", value: "16x1 25mm/60"},
+      {label: "鱼雷", value: "4x3 610mm"},
+    ],
     description: [
-      "铃谷号是日本海军重巡洋舰，",
-      "是最上级三号舰代表作品，",
-      "设计与其他舰略有不同特色，",
-      "在莱特湾海战中遭遇空袭，",
-      "遭到重创后选择自沉结束。"
+      "铃谷号是日本海军重巡洋舰，是最上级三号舰代表作品，设计与其他舰略有不同特色，在莱特湾海战中遭遇空袭，遭到重创后选择自沉结束。",
     ],
     author: "未知",
     links: [
@@ -868,12 +1304,22 @@
   },
   {
     name: "tone",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "13200"},
+      {label: "速度", value: "35.5 节"},
+      {label: "费用", value: "$140 / 20s"},
+      {label: "吨位", value: "13200"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 203mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "12x2 25mm/60"},
+      {label: "高炮", value: "20x1 25mm/60"},
+      {label: "鱼雷", value: "4x3 610mm"},
+    ],
     description: [
-      "利根号是日本海军重巡洋舰首舰，",
-      "设计为水上侦察机搭载巡洋舰，",
-      "拥有大量水上机用于侦查，",
-      "在莱特湾海战中遭遇空袭，",
-      "遭受重创后沉没于太平洋。"
+      "利根号是日本海军重巡洋舰首舰，设计为水上侦察机搭载巡洋舰，拥有大量水上机用于侦查，在莱特湾海战中遭遇空袭，遭受重创后沉没于太平洋。",
     ],
     author: "未知",
     links: [
@@ -885,11 +1331,21 @@
   },
   {
     name: "tenryu",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "4420"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$40 / 12s"},
+      {label: "吨位", value: "4420"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x1 140mm/50"},
+      {label: "高平炮", value: "1x1 76mm/40"},
+      {label: "高炮", value: "2x2 25mm/60"},
+      {label: "鱼雷", value: "2x3 533mm"},
+    ],
     description: [
-      "天龙号是日本海军轻巡洋舰首舰，",
-      "是日本第一种设计的轻巡洋舰，",
-      "开创了日本轻巡洋舰的先河，",
-      "在瓜达尔卡纳尔海战中被击沉"
+      "天龙号是日本海军轻巡洋舰首舰，是日本第一种设计的轻巡洋舰，开创了日本轻巡洋舰的先河，在瓜达尔卡纳尔海战中被击沉",
     ],
     author: "未知",
     links: [
@@ -901,12 +1357,20 @@
   },
   {
     name: "kuma",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "5500"},
+      {label: "速度", value: "36 节"},
+      {label: "费用", value: "$52 / 14s"},
+      {label: "吨位", value: "5500"},
+    ],
+    armaments: [
+      {label: "主炮", value: "7x1 140mm/50"},
+      {label: "高炮", value: "4x2 25mm/60"},
+      {label: "鱼雷", value: "4x2 533mm"},
+    ],
     description: [
-      "球磨号是日本海军轻巡洋舰首舰，",
-      "是 5500 吨级轻巡洋舰标准型，",
-      "设计均衡，性能表现良好，",
-      "在太平洋战争中执行多种任务，",
-      "后被击沉，结束其服役生涯。"
+      "球磨号是日本海军轻巡洋舰首舰，是 5500 吨级轻巡洋舰标准型，设计均衡，性能表现良好，在太平洋战争中执行多种任务，后被击沉，结束其服役生涯。",
     ],
     author: "未知",
     links: [
@@ -918,12 +1382,21 @@
   },
   {
     name: "kitakami",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "7041"},
+      {label: "速度", value: "24 节"},
+      {label: "费用", value: "$130 / 22s"},
+      {label: "吨位", value: "7041"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x2 127mm/40"},
+      {label: "高炮", value: "14x3 25mm/60"},
+      {label: "高炮", value: "27x1 25mm/60"},
+      {label: "鱼雷", value: "2x4 4mm"},
+    ],
     description: [
-      "北上号是日本海军轻巡洋舰，",
-      "是球磨级巡洋舰的四号舰，",
-      "后被改装为重雷装巡洋舰，",
-      "可搭载大量鱼雷进行攻击，",
-      "在战争后期改造成回天鱼雷载舰。"
+      "北上号是日本海军轻巡洋舰，是球磨级巡洋舰的四号舰，后被改装为重雷装巡洋舰，可搭载大量鱼雷进行攻击，在战争后期改造成回天鱼雷载舰。",
     ],
     author: "未知",
     links: [
@@ -935,11 +1408,20 @@
   },
   {
     name: "ooi",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "6900"},
+      {label: "速度", value: "32 节"},
+      {label: "费用", value: "$120 / 24s"},
+      {label: "吨位", value: "6900"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x1 140mm/50"},
+      {label: "高炮", value: "2x2 25mm/60"},
+      {label: "鱼雷", value: "10x4 610mm"},
+    ],
     description: [
-      "大井号是日本海军轻巡洋舰，",
-      "是球磨级巡洋舰的五号舰，",
-      "与北上号一同被改装设计，",
-      "成为重雷装巡洋舰服役，"
+      "大井号是日本海军轻巡洋舰，是球磨级巡洋舰的五号舰，与北上号一同被改装设计，成为重雷装巡洋舰服役，",
     ],
     author: "未知",
     links: [
@@ -951,12 +1433,21 @@
   },
   {
     name: "isuzu",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "6260"},
+      {label: "速度", value: "34.5 节"},
+      {label: "费用", value: "$60 / 12s"},
+      {label: "吨位", value: "6260"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 127mm/40"},
+      {label: "高炮", value: "11x3 25mm/60"},
+      {label: "高炮", value: "11x1 25mm/60"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "长良号是日本海军轻巡洋舰，",
-      "是 5500 吨级轻巡洋舰成员，",
-      "属于长良级四号舰系列，",
-      "在战争中多次执行各种任务，",
-      "后在帕劳海战中被击沉。"
+      "长良号是日本海军轻巡洋舰，是 5500 吨级轻巡洋舰成员，属于长良级四号舰系列，在战争中多次执行各种任务，后在帕劳海战中被击沉。",
     ],
     author: "未知",
     links: [
@@ -968,12 +1459,23 @@
   },
   {
     name: "abukuma",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "5925"},
+      {label: "速度", value: "36 节"},
+      {label: "费用", value: "$58 / 12s"},
+      {label: "吨位", value: "5925"},
+    ],
+    armaments: [
+      {label: "主炮", value: "5x1 140mm/50"},
+      {label: "高平炮", value: "1x2 127mm/40"},
+      {label: "高炮", value: "2x2 25mm/60"},
+      {label: "高炮", value: "4x3 25mm/60"},
+      {label: "高炮", value: "13x1 25mm/60"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "阿武隈号是日本海军轻巡洋舰首舰，",
-      "是 6000 吨级轻巡洋舰改进型代表，",
-      "设计注重均衡性能与生存能力，",
-      "在多场战役中表现出色，后沉没，",
-      "于莱特湾海战中遭遇美军重创。"
+      "阿武隈号是日本海军轻巡洋舰首舰，是 6000 吨级轻巡洋舰改进型代表，设计注重均衡性能与生存能力，在多场战役中表现出色，后沉没，于莱特湾海战中遭遇美军重创。",
     ],
     author: "未知",
     links: [
@@ -985,12 +1487,20 @@
   },
   {
     name: "shintsu",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "5595"},
+      {label: "速度", value: "35.3 节"},
+      {label: "费用", value: "$52 / 12s"},
+      {label: "吨位", value: "5595"},
+    ],
+    armaments: [
+      {label: "主炮", value: "7x1 140mm/50"},
+      {label: "高炮", value: "9x2 25mm/60"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "神通号是日本海军轻巡洋舰，",
-      "是川内级巡洋舰的二号舰，",
-      "在太平洋战争中服役多年，",
-      "作为第二水雷战队旗舰，",
-      "1943 年于维拉拉维拉海战沉没。"
+      "神通号是日本海军轻巡洋舰，是川内级巡洋舰的二号舰，在太平洋战争中服役多年，作为第二水雷战队旗舰，1943 年于维拉拉维拉海战沉没。",
     ],
     author: "未知",
     links: [
@@ -1002,12 +1512,22 @@
   },
   {
     name: "yubari",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "4447"},
+      {label: "速度", value: "35.5 节"},
+      {label: "费用", value: "$46 / 12s"},
+      {label: "吨位", value: "4447"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x1 140mm/50"},
+      {label: "主炮", value: "2x2 140mm/50"},
+      {label: "高炮", value: "4x2 25mm/60"},
+      {label: "高炮", value: "3x3 25mm/60"},
+      {label: "鱼雷", value: "2x2 610mm"},
+    ],
     description: [
-      "夕张号是日本海军试验型轻巡，",
-      "设计为 5500 吨级轻巡缩小版，",
-      "测试了许多新技术和创新，",
-      "展现了日本海军的设计实力，",
-      "后在战争中沉没于太平洋。"
+      "夕张号是日本海军试验型轻巡，设计为 5500 吨级轻巡缩小版，测试了许多新技术和创新，展现了日本海军的设计实力，后在战争中沉没于太平洋。",
     ],
     author: "未知",
     links: [
@@ -1019,12 +1539,22 @@
   },
   {
     name: "yahagi",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "7710"},
+      {label: "速度", value: "35 节"},
+      {label: "费用", value: "$72 / 16s"},
+      {label: "吨位", value: "7710"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 152mm/50"},
+      {label: "高平炮", value: "2x2 76mm/65"},
+      {label: "高炮", value: "10x3 25mm/60"},
+      {label: "高炮", value: "24x1 25mm/60"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "矢矧号是日本海军轻巡洋舰，",
-      "是阿贺野级二号舰代表，",
-      "是最后一种 5500 吨级轻巡洋舰，",
-      "在菊水特攻行动中遭遇空袭，",
-      "沉没，结束了其服役生涯。"
+      "矢矧号是日本海军轻巡洋舰，是阿贺野级二号舰代表，是最后一种 5500 吨级轻巡洋舰，在菊水特攻行动中遭遇空袭，沉没，结束了其服役生涯。",
     ],
     author: "未知",
     links: [
@@ -1036,12 +1566,21 @@
   },
   {
     name: "ooyodo",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "10990"},
+      {label: "速度", value: "35 节"},
+      {label: "费用", value: "$86 / 24s"},
+      {label: "吨位", value: "10990"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x3 155mm/60"},
+      {label: "高平炮", value: "1x2 100mm/65"},
+      {label: "高平炮", value: "3x2 105mm/65"},
+      {label: "高炮", value: "12x3 25mm/60"},
+    ],
     description: [
-      "大淀号是日本海军轻巡洋舰首舰，",
-      "设计为旗舰型轻巡洋舰布局，",
-      "拥有强大的通信设备系统，",
-      "在战争后期主要用于执行",
-      "特攻任务，最终搁浅自沉。"
+      "大淀号是日本海军轻巡洋舰首舰，设计为旗舰型轻巡洋舰布局，拥有强大的通信设备系统，在战争后期主要用于执行特攻任务，最终搁浅自沉。",
     ],
     author: "未知",
     links: [
@@ -1054,12 +1593,20 @@
   // 德国海军
   {
     name: "prinz_eugen",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "18400"},
+      {label: "速度", value: "33.5 节"},
+      {label: "费用", value: "$190 / 19s"},
+      {label: "吨位", value: "18400"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 203mm/60"},
+      {label: "高平炮", value: "6x2 105mm/65"},
+      {label: "鱼雷", value: "4x3 533mm"},
+    ],
     description: [
-      "欧根亲王号是德国海军重巡洋舰，",
-      "属于希佩尔海军上将级，",
-      "与俾斯麦号一同参与作战，",
-      "参加了丹麦海峡海战行动，",
-      "战后交付美国用于核试验。"
+      "欧根亲王号是德国海军重巡洋舰，属于希佩尔海军上将级，与俾斯麦号一同参与作战，参加了丹麦海峡海战行动，战后交付美国用于核试验。",
     ],
     author: "未知",
     links: [
@@ -1071,12 +1618,20 @@
   },
   {
     name: "leipzig",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "8680"},
+      {label: "速度", value: "32 节"},
+      {label: "费用", value: "$90 / 14s"},
+      {label: "吨位", value: "8680"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 150mm/60"},
+      {label: "高平炮", value: "3x2 88mm/56"},
+      {label: "鱼雷", value: "4x3 533mm"},
+    ],
     description: [
-      "莱比锡号是德国海军轻巡洋舰，",
-      "是莱比锡级巡洋舰的首舰，",
-      "德国在两次大战期间建造的",
-      "最后一批轻巡洋舰之一，",
-      "在二战中多次参与北海作战。"
+      "莱比锡号是德国海军轻巡洋舰，是莱比锡级巡洋舰的首舰，德国在两次大战期间建造的最后一批轻巡洋舰之一，在二战中多次参与北海作战。",
     ],
     author: "未知",
     links: [
@@ -1089,11 +1644,21 @@
   // 英国海军
   {
     name: "cheshire",
+    specs: [
+      {label: "类型", value: "CA / cruiser"},
+      {label: "HP", value: "20100"},
+      {label: "速度", value: "31.5 节"},
+      {label: "费用", value: "$195 / 18s"},
+      {label: "吨位", value: "20100"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/50"},
+      {label: "高平炮", value: "8x2 102mm/45"},
+      {label: "高炮", value: "5x8 40mm/39"},
+      {label: "高炮", value: "16x2 20mm/70"},
+    ],
     description: [
-      "柴郡号对应英国皇家海军 Admiral 级重巡洋舰",
-      "于 1942 年 3 月取消前的最终方案设想，体现出",
-      "英国在战时仍重视舰载侦察机运用，并在火控与",
-      "测距设备上向更现代化配置过渡的重巡设计思路。"
+      "柴郡号对应英国皇家海军 Admiral 级重巡洋舰于 1942 年 3 月取消前的最终方案设想，体现出英国在战时仍重视舰载侦察机运用，并在火控与测距设备上向更现代化配置过渡的重巡设计思路。",
     ],
     author: "Tzoli",
     links: [
@@ -1105,10 +1670,20 @@
   },
   {
     name: "worcester",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "21000"},
+      {label: "速度", value: "31.5 节"},
+      {label: "费用", value: "$180 / 17s"},
+      {label: "吨位", value: "21000"},
+    ],
+    armaments: [
+      {label: "主炮", value: "5x2 152mm/50"},
+      {label: "高平炮", value: "8x4 76mm/70"},
+      {label: "鱼雷", value: "4x4 533mm"},
+    ],
     description: [
-      "伍斯特号对应英国皇家海军战后米诺陶级轻巡洋舰的",
-      "R 型早期方案，是同系列中体量最大的设想之一，体现了",
-      "英国在战后兼顾高速、强火力与多用途需求的大型轻巡设计思路。"
+      "伍斯特号对应英国皇家海军战后米诺陶级轻巡洋舰的R 型早期方案，是同系列中体量最大的设想之一，体现了英国在战后兼顾高速、强火力与多用途需求的大型轻巡设计思路。",
     ],
     author: "Tzoli",
     links: [
@@ -1120,10 +1695,21 @@
   },
   {
     name: "vickers",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "8100"},
+      {label: "速度", value: "29 节"},
+      {label: "费用", value: "$76 / 12s"},
+      {label: "吨位", value: "8100"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 152mm/50"},
+      {label: "高平炮", value: "2x1 102mm/45"},
+      {label: "高炮", value: "2x1 40mm/39"},
+      {label: "鱼雷", value: "4x3 533mm"},
+    ],
     description: [
-      "维克斯号是维克斯公司于 1919 年为阿根廷等",
-      "南美市场提出的 758A 轻巡洋舰外销方案，",
-      "体现出英国战后轻巡的过渡性设计特征。"
+      "维克斯号是维克斯公司于 1919 年为阿根廷等南美市场提出的 758A 轻巡洋舰外销方案，体现出英国战后轻巡的过渡性设计特征。",
     ],
     author: "Tzoli",
     links: [
@@ -1135,11 +1721,22 @@
   },
   {
     name: "k_25",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "8500"},
+      {label: "速度", value: "32 节"},
+      {label: "费用", value: "$80 / 14s"},
+      {label: "吨位", value: "8500"},
+    ],
+    armaments: [
+      {label: "主炮", value: "8x2 133mm/50"},
+      {label: "高炮", value: "2x4 40mm/39"},
+      {label: "高炮", value: "2x8 40mm/39"},
+      {label: "高平炮", value: "4x4 1910mm"},
+      {label: "鱼雷", value: "2x4 533mm"},
+    ],
     description: [
-      "K-25 是英国皇家海军于 1936 年在皇冠殖民地级",
-      "设计发展过程中提出的一组轻巡研究方案，核心思路是",
-      "在约 8000 吨舰体上探索搭载化双联 133mm 炮塔的可能，",
-      "体现出英国在战前对防护型高平两用巡洋舰路线的尝试。"
+      "K-25 是英国皇家海军于 1936 年在皇冠殖民地级设计发展过程中提出的一组轻巡研究方案，核心思路是在约 8000 吨舰体上探索搭载化双联 133mm 炮塔的可能，体现出英国在战前对防护型高平两用巡洋舰路线的尝试。",
     ],
     author: "Tzoli",
     links: [
@@ -1152,11 +1749,20 @@
   // 苏联海军
   {
     name: "sverdlov",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "16640"},
+      {label: "速度", value: "34 节"},
+      {label: "费用", value: "$170 / 18s"},
+      {label: "吨位", value: "16640"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x3 152mm/57"},
+      {label: "高平炮", value: "6x2 100mm/70"},
+      {label: "鱼雷", value: "2x5 533mm"},
+    ],
     description: [
       "斯维尔德洛夫号是苏联最著名的火炮巡洋舰 68-бис 型的首舰。",
-      "该舰是战前研发，战后完工的 68k 型巡洋舰的改进版本。战后",
-      "完工的斯维尔德洛夫各项性能均达到轻巡优秀水平。在她刚完工",
-      "不久就参加了英国的阅舰式，向西方展示了战后苏联海军的风貌。"
     ],
     author: "SakhaliaNet",
     links: [
@@ -1172,11 +1778,20 @@
   },
   {
     name: "kirov",
+    specs: [
+      {label: "类型", value: "CL / cruiser"},
+      {label: "HP", value: "9400"},
+      {label: "速度", value: "36 节"},
+      {label: "费用", value: "$100 / 12s"},
+      {label: "吨位", value: "9400"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 180mm/57"},
+      {label: "高平炮", value: "6x1 100mm/56"},
+      {label: "鱼雷", value: "2x3 533mm"},
+    ],
     description: [
-      "基洛夫级巡洋舰是苏联吸收了意大利技术后建造的一级巡洋舰，",
-      "她采用了特别的三联装 180mm 主炮，最大射程达到 38km。",
-      "由于苏德战争中海战不是主要战场，基洛夫号主要执行对陆火力",
-      "支援任务，尽管在战争中受损严重，但基洛夫号仍一直幸存到战后。"
+      "基洛夫级巡洋舰是苏联吸收了意大利技术后建造的一级巡洋舰，她采用了特别的三联装 180mm 主炮，最大射程达到 38km。",
     ],
     author: "未知",
     links: [
@@ -1189,12 +1804,19 @@
   // 美国海军
   {
     name: "porter",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "1850"},
+      {label: "速度", value: "37 节"},
+      {label: "费用", value: "$16 / 7s"},
+      {label: "吨位", value: "1850"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 127mm/38"},
+      {label: "鱼雷", value: "2x4 533mm"},
+    ],
     description: [
-      "波特号是美国海军波特级驱逐舰的首舰，也是美国第一种以驱逐舰",
-      "领舰为概念所开发的舰艇，设计中她将作为驱逐舰战队的旗舰，容",
-      "纳更多的武装和通讯装备，火力亦较一般驱逐舰强。波特级驱逐舰",
-      "均顺利度过整个二战 - 除波特号外，她在救援 TBF 鱼雷机飞行员",
-      "时，误触鱼雷导致重创，在弃舰后被己方击沉。"
+      "波特号是美国海军波特级驱逐舰的首舰，也是美国第一种以驱逐舰领舰为概念所开发的舰艇，设计中她将作为驱逐舰战队的旗舰，容纳更多的武装和通讯装备，火力亦较一般驱逐舰强。",
     ],
     author: "Midnike",
     links: [
@@ -1210,12 +1832,19 @@
   },
   {
     name: "maury",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "2286"},
+      {label: "速度", value: "38.5 节"},
+      {label: "费用", value: "$25 / 8s"},
+      {label: "吨位", value: "2286"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x1 127mm/38"},
+      {label: "鱼雷", value: "4x4 533mm"},
+    ],
     description: [
-      "莫雷号是美国海军格里德利级驱逐舰的四号舰，曾参与珊瑚海海战、",
-      "中途岛海战、东所罗门海战及圣克鲁斯群岛战役，而后还参与莱特",
-      "湾海战，菲律宾登陆战等，在 TF58 舰队中为航空母舰护航，支持",
-      "其对琉球群岛，台湾和吕宋岛的日军基地的空袭行动。该舰在二战",
-      "中共获得 16 枚战斗之星，在驱逐舰中仅次于欧班农号（DD-450）"
+      "莫雷号是美国海军格里德利级驱逐舰的四号舰，曾参与珊瑚海海战、中途岛海战、东所罗门海战及圣克鲁斯群岛战役，而后还参与莱特湾海战，菲律宾登陆战等，在 TF58 舰队中为航空母舰护航，支持其对琉球群岛，台湾和吕宋岛的日军基地的空袭行动。",
     ],
     author: "Midnike",
     links: [
@@ -1235,10 +1864,19 @@
   },
   {
     name: "hammann",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "2246"},
+      {label: "速度", value: "37 节"},
+      {label: "费用", value: "$19 / 8s"},
+      {label: "吨位", value: "2246"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x1 127mm/38"},
+      {label: "鱼雷", value: "2x4 533mm"},
+    ],
     description: [
-      "哈曼号是美国海军西姆斯级驱逐舰的四号舰，曾作为航空母舰的，",
-      "护航舰艇参与珊瑚海海战，但在中途岛海战期间因尝试协助正在",
-      "沉没的约克城号航空母舰而被突破防御网的日军潜艇 伊-168 击沉。"
+      "哈曼号是美国海军西姆斯级驱逐舰的四号舰，曾作为航空母舰的，护航舰艇参与珊瑚海海战，但在中途岛海战期间因尝试协助正在沉没的约克城号航空母舰而被突破防御网的日军潜艇 伊-168 击沉。",
     ],
     author: "Midnike",
     links: [
@@ -1255,12 +1893,19 @@
   // 日本海军
   {
     name: "asashio",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "2635"},
+      {label: "速度", value: "36 节"},
+      {label: "费用", value: "$26 / 10s"},
+      {label: "吨位", value: "2635"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 127mm/50"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "朝潮号是日本海军驱逐舰，",
-      "是朝潮级驱逐舰的首舰，",
-      "是日本在二战中建造的主战驱逐舰，",
-      "在多场重要海战中表现出色，",
-      "最终战沉于太平洋战场。"
+      "朝潮号是日本海军驱逐舰，是朝潮级驱逐舰的首舰，是日本在二战中建造的主战驱逐舰，在多场重要海战中表现出色，最终战沉于太平洋战场。",
     ],
     author: "Midnike",
     links: [
@@ -1272,12 +1917,19 @@
   },
   {
     name: "yugumo",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "2520"},
+      {label: "速度", value: "35.5 节"},
+      {label: "费用", value: "$26 / 10s"},
+      {label: "吨位", value: "2520"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 127mm/50"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "夕云号是日本海军驱逐舰，",
-      "是夕云级驱逐舰的首舰，",
-      "是朝潮级的改进型版本，",
-      "性能更加均衡和稳定可靠，",
-      "在太平洋战争中多次参与作战。"
+      "夕云号是日本海军驱逐舰，是夕云级驱逐舰的首舰，是朝潮级的改进型版本，性能更加均衡和稳定可靠，在太平洋战争中多次参与作战。",
     ],
     author: "Midnike",
     links: [
@@ -1289,12 +1941,19 @@
   },
   {
     name: "yukikaze",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "2490"},
+      {label: "速度", value: "35.5 节"},
+      {label: "费用", value: "$25 / 10s"},
+      {label: "吨位", value: "2490"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x2 127mm/50"},
+      {label: "鱼雷", value: "2x4 610mm"},
+    ],
     description: [
-      "雪风号是日本海军驱逐舰，",
-      "是阳炎级驱逐舰的八号舰，",
-      "被称为奇迹的驱逐舰称号，",
-      "多次执行危险任务而幸存，",
-      "战后由国民党接收，台湾退役。"
+      "雪风号是日本海军驱逐舰，是阳炎级驱逐舰的八号舰，被称为奇迹的驱逐舰称号，多次执行危险任务而幸存，战后由国民党接收，台湾退役。",
     ],
     author: "Midnike",
     links: [
@@ -1307,9 +1966,19 @@
   // 德国海军
   {
     name: "z_11",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "3190"},
+      {label: "速度", value: "36 节"},
+      {label: "费用", value: "$31 / 12s"},
+      {label: "吨位", value: "3190"},
+    ],
+    armaments: [
+      {label: "主炮", value: "5x1 127mm/45"},
+      {label: "鱼雷", value: "2x4 533mm"},
+    ],
     description: [
-      "Z-11 是德国海军1934A 型驱逐舰，",
-      "是纳粹德国海军早期建造的驱逐舰"
+      "Z-11 是德国海军1934A 型驱逐舰，是纳粹德国海军早期建造的驱逐舰",
     ],
     author: "未知",
     links: [
@@ -1326,36 +1995,58 @@
   // 英国海军
   {
     name: "v",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "2200"},
+      {label: "速度", value: "36 节"},
+      {label: "费用", value: "$22 / 10s"},
+      {label: "吨位", value: "2200"},
+    ],
+    armaments: [
+      {label: "主炮", value: "5x1 120mm/45"},
+      {label: "鱼雷", value: "1x5 533mm"},
+    ],
     description: [
-      "V 级驱逐舰是英国皇家海军设计，",
-      "是驱逐舰的设计方案之一，",
-      "基于 V 级和 W 级的改进型，",
-      "进行了多项性能优化设计，",
-      "该方案仅存在于设计图纸中。"
+      "V 级驱逐舰是英国皇家海军设计，是驱逐舰的设计方案之一，基于 V 级和 W 级的改进型，进行了多项性能优化设计，该方案仅存在于设计图纸中。",
     ],
     author: "未知",
     links: []
   },
   {
     name: "y",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "3100"},
+      {label: "速度", value: "35 节"},
+      {label: "费用", value: "$20 / 10s"},
+      {label: "吨位", value: "3100"},
+    ],
+    armaments: [
+      {label: "主炮", value: "3x1 120mm/45"},
+      {label: "鱼雷", value: "1x5 533mm"},
+    ],
     description: [
-      "Y 级驱逐舰是英国皇家海军设计，",
-      "是驱逐舰的设计方案之一，",
-      "基于 V 级驱逐舰进一步改进，",
-      "进行了更深入的设计优化，",
-      "该方案仅存在于设计图纸中。"
+      "Y 级驱逐舰是英国皇家海军设计，是驱逐舰的设计方案之一，基于 V 级驱逐舰进一步改进，进行了更深入的设计优化，该方案仅存在于设计图纸中。",
     ],
     author: "未知",
     links: []
   },
   {
     name: "ardent",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "1810"},
+      {label: "速度", value: "35 节"},
+      {label: "费用", value: "$12 / 7s"},
+      {label: "吨位", value: "1810"},
+    ],
+    armaments: [
+      {label: "主炮", value: "4x1 120mm/45"},
+      {label: "高炮", value: "2x1 40mm/60"},
+      {label: "鱼雷", value: "2x4 533mm"},
+    ],
     description: [
-      "决心号是英国皇家海军驱逐舰首舰，",
-      "是 A 级驱逐舰的代表作品，",
-      "两次大战期间建造的标准型，",
-      "在二战中执行护航任务服务，",
-      "后被德军击沉，结束服役生涯。"
+      "决心号是英国皇家海军驱逐舰首舰，是 A 级驱逐舰的代表作品，两次大战期间建造的标准型，在二战中执行护航任务服务，后被德军击沉，结束服役生涯。",
     ],
     author: "未知",
     links: [
@@ -1368,9 +2059,19 @@
   // 苏联海军
   {
     name: "rapid",
+    specs: [
+      {label: "类型", value: "DD / destroyer"},
+      {label: "HP", value: "3230"},
+      {label: "速度", value: "38.5 节"},
+      {label: "费用", value: "$30 / 13s"},
+      {label: "吨位", value: "3230"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x2 130mm/58"},
+      {label: "鱼雷", value: "2x5 533mm"},
+    ],
     description: [
-      "快速号驱逐舰是二战后苏联海军建造的第一批驱逐舰（30bis）。",
-      "火力强大，性能均衡是她的显著特点，同级舰有 70 艘之多。"
+      "快速号驱逐舰是二战后苏联海军建造的第一批驱逐舰（30bis）。火力强大，性能均衡是她的显著特点，同级舰有 70 艘之多。",
     ],
     author: "Zustt",
     links: [
@@ -1387,11 +2088,20 @@
   // 美国海军
   {
     name: "PT_791",
+    specs: [
+      {label: "类型", value: "TB / torpedo_boat"},
+      {label: "HP", value: "48"},
+      {label: "速度", value: "41 节"},
+      {label: "费用", value: "$5 / 3s"},
+      {label: "吨位", value: "48"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x1 40mm/60"},
+      {label: "高炮", value: "2x1 20mm/70"},
+      {label: "鱼雷", value: "2x1 533mm"},
+    ],
     description: [
-      "PT-791 是二战后期美国海军的鱼雷艇之一，",
-      "是 Higgins 78 英尺 PT 艇的改进批次。",
-      "木质船体配三台汽油机，极速约 41 节，",
-      "常用于夜间突袭、护航与反潜。"
+      "PT-791 是二战后期美国海军的鱼雷艇之一，是 Higgins 78 英尺 PT 艇的改进批次。木质船体配三台汽油机，极速约 41 节，常用于夜间突袭、护航与反潜。",
     ],
     author: "未知",
     links: [
@@ -1408,10 +2118,19 @@
   // 日本海军
   {
     name: "T_14",
+    specs: [
+      {label: "类型", value: "TB / torpedo_boat"},
+      {label: "HP", value: "18"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$3 / 3s"},
+      {label: "吨位", value: "18"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x1 13mm"},
+      {label: "鱼雷", value: "2x1 450mm"},
+    ],
     description: [
-      "T-14（十四号型）是二战末期日本海军量产的",
-      "小型鱼雷艇，全木质船体，单发动机。",
-      "主武装为 450mm 鱼雷，并可搭载深弹。"
+      "T-14（十四号型）是二战末期日本海军量产的小型鱼雷艇，全木质船体，单发动机。主武装为 450mm 鱼雷，并可搭载深弹。",
     ],
     author: "未知",
     links: [
@@ -1428,10 +2147,20 @@
   // 德国海军
   {
     name: "S_100",
+    specs: [
+      {label: "类型", value: "TB / torpedo_boat"},
+      {label: "HP", value: "95"},
+      {label: "速度", value: "43 节"},
+      {label: "费用", value: "$7 / 6s"},
+      {label: "吨位", value: "95"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x1 37mm/57"},
+      {label: "高炮", value: "2x1 20mm/70"},
+      {label: "鱼雷", value: "2x1 533mm"},
+    ],
     description: [
-      "S-100 是德国海军著名的 Schnellboot（S-艇），",
-      "盟军称其为 E-boat，以高速与强适航性著称。",
-      "三台柴油机驱动，航速约 43 节，主武装为 533mm 鱼雷。"
+      "S-100 是德国海军著名的 Schnellboot（S-艇），盟军称其为 E-boat，以高速与强适航性著称。三台柴油机驱动，航速约 43 节，主武装为 533mm 鱼雷。",
     ],
     author: "未知",
     links: [
@@ -1448,10 +2177,19 @@
   // 英国海军
   {
     name: "MTB_77",
+    specs: [
+      {label: "类型", value: "TB / torpedo_boat"},
+      {label: "HP", value: "45"},
+      {label: "速度", value: "39 节"},
+      {label: "费用", value: "$4 / 4s"},
+      {label: "吨位", value: "45"},
+    ],
+    armaments: [
+      {label: "主炮", value: "1x2 1910mm"},
+      {label: "鱼雷", value: "2x1 533mm"},
+    ],
     description: [
-      "MTB-77 是英国皇家海军的机动鱼雷艇，隶属",
-      "Vosper 72 英尺级，以高速突击与近海作战著称。",
-      "装备机枪与 533mm 鱼雷，在地中海等战区活跃。"
+      "MTB-77 是英国皇家海军的机动鱼雷艇，隶属Vosper 72 英尺级，以高速突击与近海作战著称。装备机枪与 533mm 鱼雷，在地中海等战区活跃。",
     ],
     author: "未知",
     links: [
@@ -1468,9 +2206,19 @@
   // 苏联海军
   {
     name: "P_6",
+    specs: [
+      {label: "类型", value: "TB / torpedo_boat"},
+      {label: "HP", value: "66"},
+      {label: "速度", value: "45 节"},
+      {label: "费用", value: "$5 / 4s"},
+      {label: "吨位", value: "66"},
+    ],
+    armaments: [
+      {label: "主炮", value: "2x2 25mm/65"},
+      {label: "鱼雷", value: "2x1 533mm"},
+    ],
     description: [
-      "183 型鱼雷艇（P-6级鱼雷艇）是曾在苏联海军",
-      "和东德海军服役的鱼雷艇，拥有机关炮，鱼雷与深弹。"
+      "183 型鱼雷艇（P-6级鱼雷艇）是曾在苏联海军和东德海军服役的鱼雷艇，拥有机关炮，鱼雷与深弹。",
     ],
     author: "Piv",
     links: [
@@ -1487,11 +2235,18 @@
   // 医疗船
   {
     name: "mercy",
+    specs: [
+      {label: "类型", value: "HS / hospital"},
+      {label: "HP", value: "70473"},
+      {label: "速度", value: "17 节"},
+      {label: "费用", value: "$520 / 50s"},
+      {label: "吨位", value: "70473"},
+    ],
+    armaments: [
+      {label: "武装", value: "无固定武装"},
+    ],
     description: [
       "仁慈号是美国海军天堂级医院船，于二战期间建造并服役。",
-      "该船满载排水量约 15000 吨，设有完善的医疗设施，",
-      "包括手术室、病房及化验室等，可容纳约 800 名伤员，",
-      "主要在太平洋战区执行伤员救护和后送任务。"
     ],
     author: "未知",
     links: [
@@ -1503,10 +2258,18 @@
   },
   {
     name: "peace_ark",
+    specs: [
+      {label: "类型", value: "HS / hospital"},
+      {label: "HP", value: "14300"},
+      {label: "速度", value: "20 节"},
+      {label: "费用", value: "$200 / 20s"},
+      {label: "吨位", value: "14300"},
+    ],
+    armaments: [
+      {label: "武装", value: "无固定武装"},
+    ],
     description: [
-      "和平方舟号是中国人民解放军海军 920 型医院船，",
-      "是世界上第一艘专门设计建造的万吨级医院船，",
-      "曾多次执行远海医疗援助任务。"
+      "和平方舟号是中国人民解放军海军 920 型医院船，是世界上第一艘专门设计建造的万吨级医院船，曾多次执行远海医疗援助任务。",
     ],
     author: "未知",
     links: [
@@ -1522,11 +2285,18 @@
   },
   {
     name: "britannic",
+    specs: [
+      {label: "类型", value: "HS / hospital"},
+      {label: "HP", value: "53848"},
+      {label: "速度", value: "24 节"},
+      {label: "费用", value: "$420 / 45s"},
+      {label: "吨位", value: "53848"},
+    ],
+    armaments: [
+      {label: "武装", value: "无固定武装"},
+    ],
     description: [
-      "不列颠号是奥林匹克级远洋客轮三号舰，",
-      "是泰坦尼克号的姊妹舰，一战期间被征用为医院船，",
-      "船体涂刷白色并标有红十字标识，1916 年在爱琴海",
-      "执行任务时触雷沉没，是一战期间沉没的最大船只。"
+      "不列颠号是奥林匹克级远洋客轮三号舰，是泰坦尼克号的姊妹舰，一战期间被征用为医院船，船体涂刷白色并标有红十字标识，1916 年在爱琴海执行任务时触雷沉没，是一战期间沉没的最大船只。",
     ],
     author: "未知",
     links: [
