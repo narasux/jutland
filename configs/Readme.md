@@ -62,6 +62,37 @@
 ]
 ```
 
+## 图鉴引用配置（references.json5）
+
+```json5
+[
+  {
+    // 对象名称，通常与 ships.json5 中的 name 对应
+    name: "duck",
+    // 图鉴核心参数
+    specs: [
+      {label: "类型", value: "Duck / default"},
+      {label: "吨位", value: "150000"},
+    ],
+    // 图鉴武装摘要
+    armaments: [
+      {label: "主炮", value: "1x8 406mm"},
+    ],
+    // 历史与来源描述。这里使用单个字符串，长文案由 UI 自动换行。
+    description: "小黄鸭是一种利用塑胶或者聚氯乙烯制成雏鸭形状的玩具，中空而且质料轻软。",
+    // 素材原作者
+    author: "未知",
+    // 参考链接
+    links: [
+      {
+        name: "百度百科 - 小黄鸭",
+        url: "https://baike.baidu.com/item/%E5%B0%8F%E9%BB%84%E9%B8%AD/3214424"
+      }
+    ]
+  }
+]
+```
+
 ## 鱼雷发射器配置（torpedo_launchers.json5）
 
 ```json5

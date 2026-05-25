@@ -25,7 +25,7 @@ type Reference struct {
 	// 图鉴武装摘要
 	Armaments []InfoItem `json:"armaments"`
 	// 描述
-	Description []string `json:"description"`
+	Description string `json:"description"`
 	// 原作者
 	Author string `json:"author"`
 	// 链接

@@ -41,6 +41,29 @@ const (
 	ShipTypeHospital ShipType = "hospital"
 )
 
+// ToDisplay 舰船类型展示用名称
+func (t ShipType) ToDisplay() string {
+	switch t {
+	case ShipTypeAircraftCarrier:
+		return "航空母舰"
+	case ShipTypeBattleShip:
+		return "战列舰"
+	case ShipTypeCruiser:
+		return "巡洋舰"
+	case ShipTypeDestroyer:
+		return "驱逐舰"
+	case ShipTypeHospital:
+		return "医疗船"
+	case ShipTypeCargo:
+		return "货轮"
+	case ShipTypeTorpedoBoat:
+		return "鱼雷艇"
+	case ShipTypeDefault:
+		return "默认"
+	}
+	return "默认"
+}
+
 // HospitalShipEffectRange 医疗船效果范围（地图三格）
 const HospitalShipEffectRange = 3
 

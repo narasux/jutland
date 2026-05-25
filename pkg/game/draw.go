@@ -193,57 +193,30 @@ func (d *Drawer) drawCollectionDesignGraph(screen *ebiten.Image, curShipName str
 func (d *Drawer) drawCollectionInfoCards(
 	screen *ebiten.Image, curShipName string, refLinks []*refLink, layout collectionLayout,
 ) {
-	ship := objUnit.ShipMap[curShipName]
 	ref := objRef.GetReference(curShipName)
 	allShipNames := objUnit.GetAllShipNames()
 
 	d.drawCollectionCard(screen, layout.ArchiveCard, "舰船档案")
+	shipIndexText := fmt.Sprintf("%d/%d", lo.IndexOf(allShipNames, curShipName)+1, len(allShipNames))
 	d.drawText(
-		screen,
-		fmt.Sprintf("%s (%d/%d)", objUnit.GetShipDisplayName(curShipName), lo.IndexOf(allShipNames, curShipName)+1, len(allShipNames)),
-		layout.ArchiveCard.X+24, layout.ArchiveCard.Y+54, 36, font.Hang, colorx.White,
+		screen, shipIndexText, layout.ArchiveCard.X+110, layout.ArchiveCard.Y+20,
+		16, font.Kai, color.RGBA{230, 218, 194, 220},
+	)
+	shipDisplayName := objUnit.GetShipDisplayName(curShipName)
+	d.drawText(screen, shipDisplayName, layout.ArchiveCard.X+24, layout.ArchiveCard.Y+54, 36, font.Hang, colorx.White)
+	d.drawCollectionInfoItems(
+		screen, ref.Specs, layout.ArchiveCard.X+24, layout.ArchiveCard.Y+104,
+		layout.ArchiveCard.W-140, 28,
 	)
 
-	if ship != nil {
-		specs := []objRef.InfoItem{
-			{Label: "类型", Value: fmt.Sprintf("%s / %s", ship.TypeAbbr, ship.Type)},
-			{Label: "HP", Value: fmt.Sprintf("%.0f", ship.TotalHP)},
-			{Label: "速度", Value: fmt.Sprintf("%.1f 节", ship.MaxSpeed*600)},
-			{Label: "费用", Value: fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost)},
-			{Label: "吨位", Value: fmt.Sprintf("%.0f", ship.Tonnage)},
-		}
-		if ref != nil && len(ref.Specs) > 0 {
-			specs = ref.Specs
-		}
-		d.drawCollectionInfoItems(
-			screen, specs, layout.ArchiveCard.X+24, layout.ArchiveCard.Y+104,
-			layout.ArchiveCard.W-140, 28,
-		)
-	}
-
 	d.drawCollectionCard(screen, layout.ArmamentCard, "武装配置")
-	armaments := []objRef.InfoItem{}
-	if ref != nil {
-		armaments = ref.Armaments
-	}
-	if len(armaments) > 0 {
-		d.drawCollectionInfoItems(
-			screen, armaments, layout.ArmamentCard.X+24, layout.ArmamentCard.Y+54,
-			layout.ArmamentCard.W-140, 30,
-		)
-	} else {
-		d.drawCollectionLines(
-			screen, objUnit.GetShipDesc(curShipName), layout.ArmamentCard.X+24, layout.ArmamentCard.Y+54,
-			layout.ArmamentCard.W-48, 22, 34, font.Kai, 5, colorx.White,
-		)
-	}
+	d.drawCollectionInfoItems(
+		screen, ref.Armaments, layout.ArmamentCard.X+24, layout.ArmamentCard.Y+54,
+		layout.ArmamentCard.W-140, 30,
+	)
 
 	d.drawCollectionCard(screen, layout.SourceCard, "历史与来源")
-	if ref == nil {
-		d.drawText(screen, "暂无参考资料", layout.SourceCard.X+24, layout.SourceCard.Y+58, 22, font.Kai, colorx.White)
-		return
-	}
-	descriptionLines := wrapCollectionParagraph(ref.Description, layout.SourceCard.W-48, 20)
+	descriptionLines := wrapCollectionText(ref.Description, layout.SourceCard.W-48, 20)
 	authorY := collectionSourceMetaY(layout, len(descriptionLines))
 	maxDescriptionLines := max(1, int((authorY-layout.SourceCard.Y-78)/30))
 	d.drawCollectionLines(
@@ -318,7 +291,7 @@ func calcCollectionLayout(screenWidth, screenHeight int) collectionLayout {
 	infoH := screenH - infoY - 54
 	gap := 24.0
 	infoX, infoW := graphX, graphW
-	archiveW, armamentW := infoW*0.27, infoW*0.28
+	archiveW, armamentW := infoW*0.23, infoW*0.24
 	sourceW := infoW - archiveW - armamentW - 2*gap
 	return collectionLayout{
 		GraphX: graphX, GraphY: graphY, GraphW: graphW, GraphH: graphH,
@@ -329,11 +302,9 @@ func calcCollectionLayout(screenWidth, screenHeight int) collectionLayout {
 	}
 }
 
-func collectionRefLinkOriginByDescription(
-	screenWidth, screenHeight int, description []string,
-) (float64, float64) {
+func collectionRefLinkOriginByDescription(screenWidth, screenHeight int, description string) (float64, float64) {
 	collLayout := calcCollectionLayout(screenWidth, screenHeight)
-	descriptionLines := wrapCollectionParagraph(description, collLayout.SourceCard.W-48, 20)
+	descriptionLines := wrapCollectionText(description, collLayout.SourceCard.W-48, 20)
 	return collLayout.SourceCard.X + 24, collectionSourceMetaY(collLayout, len(descriptionLines)) + 40
 }
 
@@ -364,14 +335,7 @@ func wrapCollectionText(text string, maxWidth, fontSize float64) []string {
 	return lines
 }
 
-func wrapCollectionParagraph(paragraphs []string, maxWidth, fontSize float64) []string {
-	lines := []string{}
-	for _, paragraph := range paragraphs {
-		lines = append(lines, wrapCollectionText(paragraph, maxWidth, fontSize)...)
-	}
-	return lines
-}
-
+// estimateCollectionTextWidth 粗略估算图鉴文本宽度，用于换行和同排文本定位。
 func estimateCollectionTextWidth(text string, fontSize float64) float64 {
 	width := 0.0
 	for _, r := range text {
@@ -382,15 +346,6 @@ func estimateCollectionTextWidth(text string, fontSize float64) float64 {
 		}
 	}
 	return width
-}
-
-func hasNonASCII(text string) bool {
-	for _, r := range text {
-		if r > 127 {
-			return true
-		}
-	}
-	return false
 }
 
 // 绘制游戏标题
