@@ -199,7 +199,9 @@ func (d *Drawer) drawCollectionInfoCards(
 	d.drawCollectionCard(screen, layout.ArchiveCard, "舰船档案")
 	shipIndexText := fmt.Sprintf("%d/%d", lo.IndexOf(allShipNames, curShipName)+1, len(allShipNames))
 	d.drawText(
-		screen, shipIndexText, layout.ArchiveCard.X+110, layout.ArchiveCard.Y+20,
+		screen, shipIndexText,
+		layout.ArchiveCard.X+layout.ArchiveCard.W-24-estimateCollectionTextWidth(shipIndexText, 16),
+		layout.ArchiveCard.Y+20,
 		16, font.Kai, color.RGBA{230, 218, 194, 220},
 	)
 	shipDisplayName := objUnit.GetShipDisplayName(curShipName)
@@ -257,7 +259,7 @@ func (d *Drawer) drawCollectionInfoItems(
 		valueFont := font.Kai
 		wrappedValues := wrapCollectionText(item.Value, valueMaxWidth, 20)
 		for idx, value := range wrappedValues {
-			d.drawText(screen, value, x+92, lineY+float64(idx)*lineHeight, 20, valueFont, colorx.White)
+			d.drawText(screen, value, x+76, lineY+float64(idx)*lineHeight, 20, valueFont, colorx.White)
 		}
 		drawn += max(1, len(wrappedValues))
 	}

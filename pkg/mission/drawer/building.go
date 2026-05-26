@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image/color"
 	"strconv"
+	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -50,6 +51,7 @@ var (
 	reinforceProgressFill = color.RGBA{107, 151, 166, 255}
 )
 
+// drawBuildingsInCamera 绘制镜头范围内的建筑对象和建筑状态。
 func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionState) {
 	// 增援点（只有在屏幕中的才渲染）
 	for _, rp := range ms.ReinforcePoints {
@@ -105,20 +107,22 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 	}
 }
 
+// drawBuildingInterface 绘制增援点交互界面。
 func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.MissionStatus != state.MissionInBuilding {
 		return
 	}
 	ui := calcReinforceUILayout(ms)
 	d.drawBuildingBackground(screen, ms)
-	d.drawReinforcePanel(screen, ui.Preview, "舰船预览", reinforcePreviewFill, true)
-	d.drawReinforcePanel(screen, ui.Map, "战区地图", reinforceMapFill, false)
-	d.drawReinforcePanel(screen, ui.Console, "补给控制台", reinforcePanelFill, false)
+	d.drawReinforcePanel(screen, ui.Preview, reinforcePreviewFill, true)
+	d.drawReinforcePanel(screen, ui.Map, reinforceMapFill, false)
+	d.drawReinforcePanel(screen, ui.Console, reinforcePanelFill, false)
 	d.drawAbbrMapInRPInterface(screen, ms, ui)
 	d.drawSelectedProvidedShips(screen, ms, ui)
-	d.drawSummonOperationTips(screen, ui)
+	d.drawSummonOperationTips(screen, ui, ms.CurFunds)
 }
 
+// drawBuildingBackground 绘制增援界面的底图和暗色遮罩。
 func (d *Drawer) drawBuildingBackground(screen *ebiten.Image, ms *state.MissionState) {
 	windowImg := bgImg.MissionWindow
 	windowWidth, windowHeight := windowImg.Bounds().Dx(), windowImg.Bounds().Dy()
@@ -135,23 +139,22 @@ func (d *Drawer) drawBuildingBackground(screen *ebiten.Image, ms *state.MissionS
 // 在增援点界面画缩略地图
 func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.MissionState, ui reinforceUILayout) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
-	mapSize := min(ui.Map.W-32, ui.Map.H-64)
-	xOffset, yOffset := ui.Map.X+(ui.Map.W-mapSize)/2, ui.Map.Y+48
+	xOffset, yOffset := ui.Map.X, ui.Map.Y
+	mapW, mapH := ui.Map.W, ui.Map.H
 
 	opts := d.genDefaultDrawImageOptions()
 	opts.GeoM.Scale(
-		mapSize/float64(abbrMapWidth),
-		mapSize/float64(abbrMapHeight),
+		mapW/float64(abbrMapWidth),
+		mapH/float64(abbrMapHeight),
 	)
 	opts.GeoM.Translate(xOffset, yOffset)
 	screen.DrawImage(d.abbrMap, opts)
-
 	vector.StrokeRect(
 		screen,
 		float32(xOffset),
 		float32(yOffset),
-		float32(mapSize),
-		float32(mapSize),
+		float32(mapW),
+		float32(mapH),
 		2,
 		reinforcePanelBorder,
 		false,
@@ -173,14 +176,15 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 		opts = d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
 
-		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * mapSize
-		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * mapSize
+		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * mapW
+		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * mapH
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex+yOffset)
 		screen.DrawImage(img, opts)
 	}
 }
 
+// drawSelectedProvidedShips 绘制当前可召唤舰船的预览图和信息面板。
 func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.MissionState, ui reinforceUILayout) {
 	rp, ok := ms.ReinforcePoints[ms.SelectedReinforcePointUid]
 	if !ok {
@@ -220,67 +224,136 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 	screen.DrawImage(topImg, opts)
 
 	ship := objUnit.ShipMap[selectedShipName]
+	d.drawReinforceShipInfo(
+		screen,
+		selectedShipName,
+		rp.CurSelectedShipIndex+1,
+		len(rp.ProvidedShipNames),
+		ship,
+		ui.Info,
+	)
+	d.drawReinforceQueue(screen, rp.OncomingShips, ui.Queue)
+}
+
+// drawReinforceShipInfo 绘制舰船档案和武装配置两张信息卡。
+func (d *Drawer) drawReinforceShipInfo(
+	screen *ebiten.Image,
+	selectedShipName string,
+	shipIndex int,
+	shipCount int,
+	ship *objUnit.BattleShip,
+	panel reinforceUIPanel,
+) {
+	cardInsetX := 16.0
+	cardInsetY := 18.0
+	cardGap := 36.0
+	cardY := panel.Y + cardInsetY
+	cardH := panel.H - cardInsetY*2
+	archiveW := panel.W * 0.43
+	armamentW := panel.W - archiveW - cardGap
+	archiveCard := reinforceUIPanel{X: panel.X + cardInsetX, Y: cardY, W: archiveW - cardInsetX, H: cardH}
+	armamentCard := reinforceUIPanel{X: archiveCard.X + archiveCard.W + cardGap, Y: cardY, W: armamentW - cardInsetX, H: cardH}
+
+	d.drawReinforceInfoCard(screen, archiveCard, "舰船档案")
+	d.drawReinforceInfoCard(screen, armamentCard, "武装配置")
+
+	indexText := fmt.Sprintf("%d/%d", shipIndex, shipCount)
+	d.drawText(screen, indexText, archiveCard.X+archiveCard.W-76, archiveCard.Y+18, 18, font.JetbrainsMono, reinforceMutedText)
+
 	titleFontSize := float64(34)
 	if len(objUnit.GetShipDisplayName(selectedShipName)) > 6 {
 		titleFontSize = 30
 	}
-	d.drawText(
-		screen,
-		fmt.Sprintf(
-			"%s (%d/%d)",
-			objUnit.GetShipDisplayName(selectedShipName),
-			rp.CurSelectedShipIndex+1,
-			len(rp.ProvidedShipNames),
-		),
-		ui.Info.X+24, ui.Info.Y+42, titleFontSize, font.Hang, reinforceText,
-	)
+	d.drawText(screen, objUnit.GetShipDisplayName(selectedShipName), archiveCard.X+24, archiveCard.Y+58, titleFontSize, font.Hang, reinforceText)
 
 	if ship != nil {
-		stats := []string{
-			fmt.Sprintf("%s / %s", ship.TypeAbbr, ship.Type),
-			fmt.Sprintf("HP %.0f", ship.TotalHP),
-			fmt.Sprintf("速度 %.1f 节", ship.MaxSpeed*600),
-			fmt.Sprintf("费用 $%d / %ds", ship.FundsCost, ship.TimeCost),
+		items := []struct {
+			label string
+			value string
+		}{
+			{label: "类型", value: fmt.Sprintf("%s / %s", ship.TypeAbbr, ship.Type)},
+			{label: "HP", value: fmt.Sprintf("%.0f", ship.TotalHP)},
+			{label: "速度", value: fmt.Sprintf("%.1f 节", ship.MaxSpeed*600)},
+			{label: "费用", value: fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost)},
 		}
-		for idx, stat := range stats {
-			d.drawText(screen, stat, ui.Info.X+24, ui.Info.Y+86+float64(idx)*28, 18, font.Kai, reinforceMutedText)
+		for idx, item := range items {
+			lineY := archiveCard.Y + 112 + float64(idx)*32
+			d.drawText(screen, item.label, archiveCard.X+24, lineY, 20, font.Kai, reinforceAccent)
+			d.drawText(screen, item.value, archiveCard.X+92, lineY, 20, font.Kai, reinforceText)
 		}
 	}
 
-	descY := ui.Info.Y + 200
-	d.drawText(screen, "武装摘要", ui.Info.X+24, descY, 18, font.Kai, reinforceAccent)
-	for idx, line := range objUnit.GetShipDesc(selectedShipName) {
-		if idx >= 4 {
+	drawn := 0
+	for _, line := range objUnit.GetShipDesc(selectedShipName) {
+		if drawn >= 6 {
 			break
 		}
-		d.drawText(screen, line, ui.Info.X+24, descY+34+float64(idx)*28, 18, font.Kai, reinforceText)
+		if skipReinforceArmamentLine(line) {
+			continue
+		}
+		d.drawText(screen, line, armamentCard.X+24, armamentCard.Y+58+float64(drawn)*32, 20, font.Kai, reinforceText)
+		drawn++
 	}
-
-	d.drawText(screen, fmt.Sprintf("当前资金：%d", ms.CurFunds), ui.Queue.X+24, ui.Queue.Y+42, 28, font.Hang, reinforceText)
-	d.drawReinforceQueue(screen, rp.OncomingShips, ui.Queue)
 }
 
+// skipReinforceArmamentLine 判断战舰描述行是否已被舰船档案覆盖。
+func skipReinforceArmamentLine(line string) bool {
+	return strings.HasPrefix(line, "HP") ||
+		strings.HasPrefix(line, "速度") ||
+		strings.HasPrefix(line, "费用") ||
+		strings.Contains(line, "HP：") ||
+		strings.Contains(line, "速度：") ||
+		strings.Contains(line, "费用：")
+}
+
+// drawReinforceInfoCard 绘制增援控制台内统一样式的信息卡。
+func (d *Drawer) drawReinforceInfoCard(screen *ebiten.Image, panel reinforceUIPanel, title string) {
+	vector.FillRect(screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H), color.RGBA{12, 28, 34, 178}, false)
+	vector.StrokeRect(screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H), 1.5, reinforcePanelBorder, false)
+	d.drawText(screen, title, panel.X+20, panel.Y+16, 20, font.Kai, reinforceAccent)
+	vector.StrokeLine(
+		screen,
+		float32(panel.X+20), float32(panel.Y+44),
+		float32(panel.X+panel.W-20), float32(panel.Y+44),
+		1,
+		reinforceAccentMuted,
+		false,
+	)
+}
+
+// drawReinforceQueue 绘制当前增援队列和队列中的舰船卡片。
 func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.OncomingShip, panel reinforceUIPanel) {
-	d.drawText(screen, "增援队列", panel.X+24, panel.Y+90, 18, font.Kai, reinforceAccent)
+	cardInsetX := 16.0
+	cardInsetY := 18.0
+	card := reinforceUIPanel{
+		X: panel.X + cardInsetX,
+		Y: panel.Y + cardInsetY,
+		W: panel.W - cardInsetX*2,
+		H: panel.H - cardInsetY*2,
+	}
+	d.drawReinforceInfoCard(screen, card, "增援队列")
+
 	if len(ships) == 0 {
-		d.drawText(screen, "待命", panel.X+24, panel.Y+134, 26, font.Hang, reinforceMutedText)
+		d.drawText(screen, "待命", card.X+24, card.Y+64, 24, font.Kai, reinforceMutedText)
 		return
 	}
 
 	maxItems := min(6, len(ships))
-	cardW := (panel.W - 48 - 16) / 2
+	cardGap := 16.0
+	cardW := (card.W - 48 - cardGap) / 2
 	cardH := 58.0
 	for idx := 0; idx < maxItems; idx++ {
 		col, row := idx%2, idx/2
-		x := panel.X + 24 + float64(col)*(cardW+16)
-		y := panel.Y + 126 + float64(row)*(cardH+14)
+		x := card.X + 24 + float64(col)*(cardW+cardGap)
+		y := card.Y + 62 + float64(row)*(cardH+14)
 		d.drawQueueCard(screen, ships[idx], x, y, cardW, cardH, idx == 0)
 	}
 	if len(ships) > maxItems {
-		d.drawText(screen, fmt.Sprintf("+%d", len(ships)-maxItems), panel.X+panel.W-56, panel.Y+panel.H-28, 18, font.JetbrainsMono, reinforceMutedText)
+		d.drawText(screen, fmt.Sprintf("+%d", len(ships)-maxItems), card.X+card.W-42, card.Y+card.H-24, 18, font.JetbrainsMono, reinforceMutedText)
 	}
 }
 
+// drawQueueCard 绘制单个队列舰船的建造进度或费用信息。
 func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingShip, x, y, w, h float64, active bool) {
 	bgColor := reinforceCardFill
 	borderColor := reinforcePanelBorder
@@ -302,43 +375,70 @@ func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingS
 	d.drawText(screen, fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost), x+12, y+34, 15, font.JetbrainsMono, reinforceMutedText)
 }
 
-func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILayout) {
+// drawSummonOperationTips 绘制当前资金和增援操作提示。
+func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILayout, curFunds int64) {
+	cardInsetX := 16.0
+	cardInsetY := 18.0
+	card := reinforceUIPanel{
+		X: ui.Help.X + cardInsetX,
+		Y: ui.Help.Y + cardInsetY,
+		W: ui.Help.W - cardInsetX*2,
+		H: ui.Help.H - cardInsetY*2,
+	}
+	d.drawReinforceInfoCard(screen, card, "控制状态")
+
+	d.drawText(screen, "当前资金", card.X+20, card.Y+58, 17, font.Kai, reinforceAccent)
+	d.drawText(screen, fmt.Sprintf("%d", curFunds), card.X+20, card.Y+84, 24, font.Kai, reinforceText)
+
+	dividerY := card.Y + 124
+	vector.StrokeLine(
+		screen,
+		float32(card.X+20), float32(dividerY),
+		float32(card.X+card.W-20), float32(dividerY),
+		1,
+		reinforceAccentMuted,
+		false,
+	)
+
 	tips := []string{
-		"↑↓ 增援点",
-		"←→ 舰船",
+		"↑ ↓ 增援点",
+		"← → 舰船",
+		"Enter 召唤",
 	}
 	for idx, tip := range tips {
-		x := ui.Help.X + 18
-		y := ui.Help.Y + 44 + float64(idx)*30
-		d.drawText(screen, tip, x, y, 17, font.OpenSans, reinforceMutedText)
+		x := card.X + 20
+		y := dividerY + 28 + float64(idx)*30
+		d.drawText(screen, tip, x, y, 18, font.Kai, reinforceMutedText)
 	}
 }
 
+// calcReinforceUILayout 计算增援界面中预览、地图和控制台区域布局。
 func calcReinforceUILayout(ms *state.MissionState) reinforceUILayout {
 	w, h := float64(ms.Layout.Width), float64(ms.Layout.Height)
-	margin, gap := 28.0, 18.0
+	margin, topGap, consoleGap := 18.0, 18.0, 4.0
 	bottomMargin := 56.0
 	topY := 48.0
 	topH := h * 0.55
-	consoleY := topY + topH + gap
+	consoleY := topY + topH + topGap
 	consoleH := h - consoleY - bottomMargin
-	previewW := w*0.6 - margin - gap/2
-	mapW := w - previewW - 2*margin - gap
+	previewW := w*0.6 - margin - topGap/2
+	mapW := w - previewW - 2*margin - topGap
 	consoleW := w - 2*margin
-	infoW := consoleW * 0.36
-	queueW := consoleW * 0.42
-	helpW := consoleW - infoW - queueW - 2*gap
+	helpW := max(240.0, consoleW*0.16)
+	queueW := consoleW * 0.32
+	infoW := consoleW - queueW - helpW - 2*consoleGap
 	return reinforceUILayout{
 		Preview: reinforceUIPanel{X: margin, Y: topY, W: previewW, H: topH},
-		Map:     reinforceUIPanel{X: margin + previewW + gap, Y: topY, W: mapW, H: topH},
+		Map:     reinforceUIPanel{X: margin + previewW + topGap, Y: topY, W: mapW, H: topH},
 		Console: reinforceUIPanel{X: margin, Y: consoleY, W: consoleW, H: consoleH},
 		Info:    reinforceUIPanel{X: margin, Y: consoleY, W: infoW, H: consoleH},
-		Queue:   reinforceUIPanel{X: margin + infoW + gap, Y: consoleY, W: queueW, H: consoleH},
-		Help:    reinforceUIPanel{X: margin + infoW + queueW + 2*gap, Y: consoleY, W: helpW, H: consoleH},
+		Queue:   reinforceUIPanel{X: margin + infoW + consoleGap, Y: consoleY, W: queueW, H: consoleH},
+		Help:    reinforceUIPanel{X: margin + infoW + queueW + 2*consoleGap, Y: consoleY, W: helpW, H: consoleH},
 	}
 }
 
-func (d *Drawer) drawReinforcePanel(screen *ebiten.Image, panel reinforceUIPanel, title string, fill color.Color, textured bool) {
+// drawReinforcePanel 绘制增援界面外层区域底色和边框。
+func (d *Drawer) drawReinforcePanel(screen *ebiten.Image, panel reinforceUIPanel, fill color.Color, textured bool) {
 	vector.FillRect(
 		screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H),
 		fill, false,
@@ -355,5 +455,4 @@ func (d *Drawer) drawReinforcePanel(screen *ebiten.Image, panel reinforceUIPanel
 		screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H),
 		2, reinforcePanelBorder, false,
 	)
-	d.drawText(screen, title, panel.X+18, panel.Y+14, 16, font.OpenSans, reinforceAccent)
 }

@@ -927,7 +927,7 @@
   {
     name: "long_beach",
     specs: [
-      {label: "类型", value: "CGN / 核动力导弹巡洋舰"},
+      {label: "类型", value: "CGN / 导弹巡洋舰"},
       {label: "吨位", value: "16600"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$180 / 15s"},
@@ -956,7 +956,7 @@
   {
     name: "long_beach_scheme_D",
     specs: [
-      {label: "类型", value: "CGN / 核动力导弹巡洋舰"},
+      {label: "类型", value: "CGN / 导弹巡洋舰"},
       {label: "吨位", value: "11300"},
       {label: "速度", value: "32 节"},
       {label: "费用", value: "$125 / 10s"},
@@ -965,7 +965,7 @@
       {label: "主炮", value: "2x1 127mm/38"},
       {label: "鱼雷", value: "2x3 324mm"},
     ],
-    description: "长滩级导弹巡洋舰 Scheme D 是 TZoli 的个人作品，相较于其原型长滩号，通过简化设备，优化舰体获取更短的舰体及更紧凑的上层建筑，使得看起来更像驱逐舰领舰。",
+    description: "长滩级导弹巡洋舰 D 型是 TZoli 的个人作品，相较于其原型长滩号，通过简化设备，优化舰体获取更短的舰体及更紧凑的上层建筑，使得看起来更像驱逐舰领舰。",
     author: "TZoli",
     links: [
       {

@@ -10971,7 +10971,7 @@
   },
   {
     name: "long_beach_scheme_D",
-    displayName: "长滩（Scheme D）",
+    displayName: "长滩（D 型）",
     type: "cruiser",
     typeAbbr: "CGN",
     totalHP: 11300,
