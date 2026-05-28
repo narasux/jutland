@@ -147,10 +147,8 @@ func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string, refLin
 }
 
 func (d *Drawer) drawCollectionDesignGraph(screen *ebiten.Image, curShipName string, collLayout collectionLayout) {
-	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
-
-	bgWidth, bgHeight := float64(screenWidth)/8*7, float64(screenHeight)/20*11
-	xOffset, yOffset := (float64(screenWidth)-bgWidth)/2, float64(50)
+	bgWidth, bgHeight := collLayout.GraphW, collLayout.GraphH
+	xOffset, yOffset := collLayout.GraphX, collLayout.GraphY
 
 	opts := d.genDefaultDrawImageOptions()
 	designGraphImg := bgImg.MissionWindowParchment
@@ -220,10 +218,10 @@ func (d *Drawer) drawCollectionInfoCards(
 	d.drawCollectionCard(screen, layout.SourceCard, "历史与来源")
 	descriptionLines := wrapCollectionText(ref.Description, layout.SourceCard.W-48, 20)
 	authorY := collectionSourceMetaY(layout, len(descriptionLines))
-	maxDescriptionLines := max(1, int((authorY-layout.SourceCard.Y-78)/30))
+	maxDescriptionLines := max(1, int((authorY-layout.SourceCard.Y-78)/26))
 	d.drawCollectionLines(
 		screen, descriptionLines, layout.SourceCard.X+24, layout.SourceCard.Y+54,
-		layout.SourceCard.W-48, 20, 30, font.Kai, maxDescriptionLines, colorx.White,
+		layout.SourceCard.W-48, 20, 26, font.Kai, maxDescriptionLines, colorx.White,
 	)
 	d.drawText(screen, fmt.Sprintf("素材原作者：%s", ref.Author), layout.SourceCard.X+24, authorY, 20, font.Kai, colorx.White)
 	d.drawText(screen, "参考资料：", layout.SourceCard.X+24, authorY+34, 20, font.Kai, colorx.White)
@@ -287,7 +285,7 @@ func (d *Drawer) drawCollectionLines(
 
 func calcCollectionLayout(screenWidth, screenHeight int) collectionLayout {
 	screenW, screenH := float64(screenWidth), float64(screenHeight)
-	graphW, graphH := screenW*0.88, screenH*0.54
+	graphW, graphH := screenW*0.88, screenH*0.48
 	graphX, graphY := (screenW-graphW)/2, 50.0
 	infoY := graphY + graphH + 52
 	infoH := screenH - infoY - 54
@@ -307,13 +305,12 @@ func calcCollectionLayout(screenWidth, screenHeight int) collectionLayout {
 func collectionRefLinkOriginByDescription(screenWidth, screenHeight int, description string) (float64, float64) {
 	collLayout := calcCollectionLayout(screenWidth, screenHeight)
 	descriptionLines := wrapCollectionText(description, collLayout.SourceCard.W-48, 20)
-	return collLayout.SourceCard.X + 24, collectionSourceMetaY(collLayout, len(descriptionLines)) + 40
+	return collLayout.SourceCard.X + 24, collectionSourceMetaY(collLayout, len(descriptionLines)) + 48
 }
 
 func collectionSourceMetaY(layout collectionLayout, descriptionLineCount int) float64 {
-	descriptionLineCount = min(descriptionLineCount, 4)
 	descriptionBottomY := layout.SourceCard.Y + 54 + float64(descriptionLineCount)*30
-	return min(descriptionBottomY+42, layout.SourceCard.Y+layout.SourceCard.H-132)
+	return min(descriptionBottomY+42, layout.SourceCard.Y+layout.SourceCard.H-100)
 }
 
 func wrapCollectionText(text string, maxWidth, fontSize float64) []string {

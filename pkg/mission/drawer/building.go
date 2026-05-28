@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image/color"
 	"strconv"
-	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -12,6 +11,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
+	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -271,7 +271,7 @@ func (d *Drawer) drawReinforceShipInfo(
 			label string
 			value string
 		}{
-			{label: "类型", value: fmt.Sprintf("%s / %s", ship.TypeAbbr, ship.Type)},
+			{label: "类型", value: fmt.Sprintf("%s / %s", ship.TypeAbbr, ship.Type.ToDisplay())},
 			{label: "HP", value: fmt.Sprintf("%.0f", ship.TotalHP)},
 			{label: "速度", value: fmt.Sprintf("%.1f 节", ship.MaxSpeed*600)},
 			{label: "费用", value: fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost)},
@@ -284,26 +284,16 @@ func (d *Drawer) drawReinforceShipInfo(
 	}
 
 	drawn := 0
-	for _, line := range objUnit.GetShipDesc(selectedShipName) {
-		if drawn >= 6 {
-			break
+	if ref := objRef.GetReference(selectedShipName); ref != nil {
+		for _, armament := range ref.Armaments {
+			if drawn >= 6 {
+				break
+			}
+			line := fmt.Sprintf("%s：%s", armament.Label, armament.Value)
+			d.drawText(screen, line, armamentCard.X+24, armamentCard.Y+58+float64(drawn)*32, 20, font.Kai, reinforceText)
+			drawn++
 		}
-		if skipReinforceArmamentLine(line) {
-			continue
-		}
-		d.drawText(screen, line, armamentCard.X+24, armamentCard.Y+58+float64(drawn)*32, 20, font.Kai, reinforceText)
-		drawn++
 	}
-}
-
-// skipReinforceArmamentLine 判断战舰描述行是否已被舰船档案覆盖。
-func skipReinforceArmamentLine(line string) bool {
-	return strings.HasPrefix(line, "HP") ||
-		strings.HasPrefix(line, "速度") ||
-		strings.HasPrefix(line, "费用") ||
-		strings.Contains(line, "HP：") ||
-		strings.Contains(line, "速度：") ||
-		strings.Contains(line, "费用：")
 }
 
 // drawReinforceInfoCard 绘制增援控制台内统一样式的信息卡。

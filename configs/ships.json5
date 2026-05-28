@@ -15,14 +15,6 @@
     width: 100,
     fundsCost: 0,
     timeCost: 5,
-    description: [
-      "特殊舰船（特）",
-      "主炮：1x8 406mm",
-      "主炮：1x1 1024mm",
-      "副炮：1x15 155mm",
-      "高炮：1x30 37mm",
-      "HP：150000，速度：45 节，费用：$0 / 5s",
-    ],
     weapon: {
       mainGuns: [
         // 鸭子大炮
@@ -115,11 +107,6 @@
     width: 36,
     fundsCost: 0,
     timeCost: 5,
-    description: [
-      "特殊舰船（特）",
-      "主炮：1x3 1mm",
-      "HP：1，速度：1000 节，费用：$0 / 5s",
-    ],
     weapon: {
       mainGuns: [
         // 前半球朝向但射程极短的炮模拟撞击
@@ -148,11 +135,7 @@
     width: 280,
     fundsCost: 10,
     timeCost: 10,
-    description: [
-      "特殊舰船（特）",
-      "武装：无固定武装",
-      "HP：1000000，速度：5 节，费用：$10 / 10s",
-    ],},
+  },
   // 自由轮
   {
     name: "liberty",
@@ -169,13 +152,6 @@
     width: 17,
     fundsCost: 50,
     timeCost: 15,
-    description: [
-      "货轮（美）",
-      "主炮：1x1 127mm/25",
-      "高平炮：1x1 76mm/50",
-      "高炮：8x1 20mm/70",
-      "HP：7500，速度：11 节，费用：$50 / 15s",
-    ],
     weapon: {
       mainGuns: [
         {
@@ -262,14 +238,6 @@
     width: 34,
     fundsCost: 410,
     timeCost: 40,
-    description: [
-      "航空母舰（美）",
-      "主炮：8x1 127mm/38",
-      "高炮：4x4 40mm/60",
-      "高炮：32x2 20mm/70",
-      "舰载机：F4F-3 x36，TBD-1 x20，SBD-3 x40",
-      "HP：25900，速度：33 节，费用：$410 / 40s",
-    ],
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -619,14 +587,6 @@
     width: 34,
     fundsCost: 635,
     timeCost: 60,
-    description: [
-      "航空母舰（美）",
-      "主炮：12x1 127mm/38",
-      "高炮：11x4 40mm/60",
-      "高炮：20x2 20mm/70",
-      "舰载机：F4F-3 x36，SBD-3 x40，TBD-1 x20",
-      "HP：50000，速度：34 节，费用：$635 / 60s",
-    ],
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -970,13 +930,6 @@
     width: 35,
     fundsCost: 500,
     timeCost: 52,
-    description: [
-      "航空母舰（日）",
-      "主炮：8x2 100mm/65",
-      "高炮：20x3 25mm/60",
-      "舰载机：A6M_0 x24，D3A_99 x12，B5N2_97 x24",
-      "HP：37270，速度：33 节，费用：$500 / 52s",
-    ],
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -1213,14 +1166,6 @@
     width: 32,
     fundsCost: 460,
     timeCost: 45,
-    description: [
-      "航空母舰（日）",
-      "主炮：6x1 200mm/50",
-      "高平炮：6x2 127mm/40",
-      "高炮：14x2 25mm/60",
-      "舰载机：A6M_0 x28，D3A_99 x28，B5N2_97 x36",
-      "HP：41300，速度：31 节，费用：$460 / 45s",
-    ],
     weapon: {
       mainGuns: [
         // 右主炮 A
@@ -1445,14 +1390,6 @@
     width: 33,
     fundsCost: 460,
     timeCost: 45,
-    description: [
-      "航空母舰（日）",
-      "主炮：10x1 200mm/50",
-      "高平炮：8x2 127mm/40",
-      "高炮：16x2 25mm/60",
-      "舰载机：A6M_0 x24，B5N2_97 x48，D3A_99 x24",
-      "HP：43600，速度：28 节，费用：$460 / 45s",
-    ],
     weapon: {
       mainGuns: [
         // 右主炮 A
@@ -1733,13 +1670,6 @@
     width: 22,
     fundsCost: 220,
     timeCost: 30,
-    description: [
-      "航空母舰（日）",
-      "主炮：6x2 127mm/40",
-      "高炮：12x2 25mm/60",
-      "舰载机：A6M_0 x21，B5N2_97 x21，D3A_99 x21",
-      "HP：19500，速度：34.5 节，费用：$220 / 30s",
-    ],
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -1906,14 +1836,6 @@
     width: 22,
     fundsCost: 230,
     timeCost: 32,
-    description: [
-      "航空母舰（日）",
-      "主炮：6x2 127mm/40",
-      "高炮：7x3 25mm/60",
-      "高炮：5x2 25mm/60",
-      "舰载机：A6M_0 x24，B5N2_97 x24，D3A_99 x24",
-      "HP：21900，速度：34.5 节，费用：$230 / 32s",
-    ],
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -2081,14 +2003,6 @@
     width: 33,
     fundsCost: 580,
     timeCost: 54,
-    description: [
-      "战列舰（美）",
-      "主炮：3x3 406mm/50",
-      "高平炮：10x2 127mm/38",
-      "高炮：20x4 40mm/60",
-      "高炮：44x1 20mm/70",
-      "HP：58000，速度：33 节，费用：$580 / 54s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -2652,14 +2566,6 @@
     width: 37,
     fundsCost: 705,
     timeCost: 65,
-    description: [
-      "战列舰（美）",
-      "主炮：4x3 406mm/50",
-      "高平炮：10x2 127mm/54",
-      "高炮：20x4 40mm/60",
-      "高炮：72x1 20mm/70",
-      "HP：70500，速度：27 节，费用：$705 / 65s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -3426,14 +3332,6 @@
     width: 33,
     fundsCost: 445,
     timeCost: 40,
-    description: [
-      "战列舰（美）",
-      "主炮：3x3 406mm/45",
-      "高平炮：8x2 127mm/38",
-      "高炮：17x4 40mm/60",
-      "高炮：57x1 20mm/70",
-      "HP：46000，速度：28 节，费用：$445 / 40s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -4053,14 +3951,6 @@
     width: 39,
     fundsCost: 585,
     timeCost: 60,
-    description: [
-      "战列舰（美）",
-      "主炮：3x3 457mm/45",
-      "高平炮：10x2 127mm/38",
-      "高炮：13x4 40mm/60",
-      "高炮：4x2 40mm/60",
-      "HP：58400，速度：30 节，费用：$585 / 60s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -4534,14 +4424,6 @@
     width: 31,
     fundsCost: 380,
     timeCost: 45,
-    description: [
-      "战列舰（日）",
-      "主炮：4x2 356mm/45",
-      "副炮：14x1 152mm/50",
-      "高平炮：6x2 127mm/40",
-      "高炮：18x3 25mm/60",
-      "HP：36600，速度：30 节，费用：$380 / 45s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -4902,14 +4784,6 @@
     width: 33,
     fundsCost: 400,
     timeCost: 45,
-    description: [
-      "战列舰（日）",
-      "主炮：6x2 356mm/45",
-      "副炮：14x1 152mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：22x3 25mm/60",
-      "HP：39154，速度：25 节，费用：$400 / 45s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -5284,14 +5158,6 @@
     width: 39,
     fundsCost: 720,
     timeCost: 72,
-    description: [
-      "战列舰（日）",
-      "主炮：3x3 460mm/45",
-      "副炮：2x3 155mm/60",
-      "高平炮：12x2 127mm/40",
-      "高炮：48x3 25mm/60",
-      "HP：72500，速度：27 节，费用：$720 / 72s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -5772,14 +5638,6 @@
     fundsCost: 920,
     timeCost: 100,
     // TODO 还有 10 座双联装 21 发防空火箭弹（主炮顶4，舰尾6）
-    description: [
-      "战列舰（日）",
-      "主炮：4x2 510mm/45",
-      "副炮：6x2 200mm/50",
-      "高平炮：10x2 100mm/65",
-      "高炮：14x2 40mm/60",
-      "HP：84000，速度：29 节，费用：$920 / 100s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -6127,14 +5985,6 @@
     fundsCost: 1200,
     timeCost: 130,
     // TODO 还有 12 座双联装 21 发防空火箭弹（主炮侧面4，舰桥2，舰尾6）
-    description: [
-      "战列舰（日）",
-      "主炮：4x3 510mm/45",
-      "副炮：2x3 200mm/50",
-      "高平炮：16x2 127mm/50",
-      "高炮：44x2 40mm/60",
-      "HP：105000，速度：29 节，费用：$1200 / 130s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -6622,13 +6472,6 @@
     width: 36,
     fundsCost: 550,
     timeCost: 50,
-    description: [
-      "战列舰（德）",
-      "主炮：4x2 381mm/52",
-      "副炮：6x2 150mm/60",
-      "高平炮：8x2 105mm/65",
-      "HP：52600，速度：30 节，费用：$550 / 50s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -6777,14 +6620,6 @@
     width: 30,
     fundsCost: 385,
     timeCost: 36,
-    description: [
-      "战列舰（德）",
-      "主炮：3x3 283mm/55",
-      "副炮：4x2 150mm/60",
-      "副炮：4x1 150mm/60",
-      "高平炮：7x2 105mm/65",
-      "HP：38100，速度：31 节，费用：$385 / 36s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -6949,14 +6784,6 @@
     width: 22,
     fundsCost: 160,
     timeCost: 16,
-    description: [
-      "战列舰（德）",
-      "主炮：2x3 283mm/52",
-      "副炮：8x1 150mm/60",
-      "高平炮：3x2 105mm/65",
-      "鱼雷：2x4 533mm",
-      "HP：16200，速度：28.5 节，费用：$160 / 16s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -7087,14 +6914,6 @@
     width: 32,
     fundsCost: 450,
     timeCost: 40,
-    description: [
-      "战列舰（英）",
-      "主炮：4x2 381mm/42",
-      "副炮：16x1 140mm/50",
-      "高平炮：4x1 102mm/45",
-      "鱼雷：6x1 533mm",
-      "HP：47430，速度：32 节，费用：$450 / 40s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -7329,14 +7148,6 @@
     width: 32,
     fundsCost: 390,
     timeCost: 35,
-    description: [
-      "战列舰（特）",
-      "主炮：3x3 406mm/45",
-      "副炮：6x2 152mm/50",
-      "高平炮：6x1 120mm/45",
-      "高炮：6x8 40mm/39",
-      "HP：38000，速度：24 节，费用：$390 / 35s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -7965,14 +7776,6 @@
     width: 37,
     fundsCost: 680,
     timeCost: 56,
-    description: [
-      "战列舰（英）",
-      "主炮：3x3 406mm/45",
-      "高平炮：12x2 114mm/45",
-      "高炮：10x6 40mm/56",
-      "高炮：8x2 40mm/60",
-      "HP：69500，速度：29 节，费用：$680 / 56s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -8314,14 +8117,6 @@
     width: 34,
     fundsCost: 500,
     timeCost: 45,
-    description: [
-      "战列舰（英）",
-      "主炮：4x4 356mm/45",
-      "副炮：8x2 133mm/50",
-      "高炮：4x8 40mm/39",
-      "高炮：4x4 20mm/70",
-      "HP：55000，速度：30 节，费用：$500 / 45s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -8528,14 +8323,6 @@
     width: 34,
     fundsCost: 420,
     timeCost: 40,
-    description: [
-      "战列舰（英）",
-      "主炮：2x4 356mm/45",
-      "主炮：1x2 356mm/45",
-      "副炮：8x2 133mm/50",
-      "高炮：8x8 40mm/39",
-      "HP：43780，速度：27 节，费用：$420 / 40s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -8833,13 +8620,6 @@
     width: 28,
     fundsCost: 340,
     timeCost: 33,
-    description: [
-      "战列舰（英）",
-      "主炮：4x2 381mm/42",
-      "副炮：8x1 152mm/45",
-      "鱼雷：4x1 533mm",
-      "HP：37000，速度：24 节，费用：$340 / 33s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -8976,13 +8756,6 @@
     width: 28,
     fundsCost: 300,
     timeCost: 28,
-    description: [
-      "战列舰（英）",
-      "主炮：4x2 343mm/45",
-      "副炮：12x1 152mm/45",
-      "鱼雷：4x1 533mm",
-      "HP：33600，速度：28 节，费用：$300 / 28s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -9148,14 +8921,6 @@
     width: 36,
     fundsCost: 720,
     timeCost: 68,
-    description: [
-      "战列舰（苏）",
-      "主炮：3x3 406mm/50",
-      "副炮：6x2 152mm/57",
-      "高平炮：6x2 100mm/56",
-      "高炮：10x4 37mm/57",
-      "HP：67370，速度：29 节，费用：$720 / 68s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -9355,14 +9120,6 @@
     width: 34,
     fundsCost: 650,
     timeCost: 63,
-    description: [
-      "战列舰（苏）",
-      "主炮：3x3 406mm/50",
-      "副炮：4x3 152mm/57",
-      "高平炮：6x2 100mm/56",
-      "高炮：9x4 37mm/57",
-      "HP：58200，速度：29 节，费用：$650 / 63s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -9541,14 +9298,6 @@
     width: 40,
     fundsCost: 850,
     timeCost: 88,
-    description: [
-      "战列舰（苏）",
-      "主炮：3x3 406mm/50",
-      "高平炮：12x2 130mm/60",
-      "高炮：14x4 45mm/78",
-      "高炮：18x4 25mm/65",
-      "HP：81150，速度：30 节，费用：$850 / 88s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -9902,14 +9651,6 @@
     width: 36,
     fundsCost: 1170,
     timeCost: 105,
-    description: [
-      "战列舰（苏）",
-      "主炮：4x2 500mm/50",
-      "高平炮：8x2 130mm/58",
-      "高炮：8x4 57mm/72",
-      "高炮：12x4 37mm/57",
-      "HP：105300，速度：30 节，费用：$1170 / 105s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10216,14 +9957,6 @@
     width: 16,
     fundsCost: 70,
     timeCost: 10,
-    description: [
-      "巡洋舰（美）",
-      "主炮：8x2 127mm/38",
-      "高炮：4x4 28mm/75",
-      "高炮：8x1 20mm/70",
-      "鱼雷：2x4 533mm",
-      "HP：7400，速度：33 节，费用：$70 / 10s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10404,14 +10137,6 @@
     width: 32,
     fundsCost: 450,
     timeCost: 40,
-    description: [
-      "巡洋舰（美）",
-      "主炮：4x3 305mm/50",
-      "高平炮：8x2 127mm/38",
-      "高炮：14x4 40mm/60",
-      "高炮：44x1 20mm/70",
-      "HP：42800，速度：33 节，费用：$450 / 40s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10926,12 +10651,6 @@
     width: 22,
     fundsCost: 180,
     timeCost: 15,
-    description: [
-      "巡洋舰（美）",
-      "主炮：2x1 127mm/38",
-      "鱼雷：2x3 324mm",
-      "HP：16600，速度：30 节，费用：$180 / 15s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10984,12 +10703,6 @@
     width: 17,
     fundsCost: 125,
     timeCost: 10,
-    description: [
-      "巡洋舰（美）",
-      "主炮：2x1 127mm/38",
-      "鱼雷：2x3 324mm",
-      "HP：11300，速度：32 节，费用：$125 / 10s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11042,12 +10755,6 @@
     width: 19,
     fundsCost: 120,
     timeCost: 12,
-    description: [
-      "巡洋舰（美）",
-      "主炮：3x3 203mm/55",
-      "高平炮：8x1 127mm/25",
-      "HP：12663，速度：33 节，费用：$120 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11147,13 +10854,6 @@
     width: 19,
     fundsCost: 120,
     timeCost: 12,
-    description: [
-      "巡洋舰（美）",
-      "主炮：2x2 203mm/55",
-      "主炮：2x3 203mm/55",
-      "高平炮：8x1 127mm/25",
-      "HP：11696，速度：32.5 节，费用：$120 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11261,14 +10961,6 @@
     width: 17,
     fundsCost: 110,
     timeCost: 14,
-    description: [
-      "巡洋舰（日）",
-      "主炮：3x2 203mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：6x2 25mm/60",
-      "鱼雷：2x4 610mm",
-      "HP：10630，速度：33 节，费用：$110 / 14s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11400,14 +11092,6 @@
     width: 18,
     fundsCost: 120,
     timeCost: 16,
-    description: [
-      "巡洋舰（日）",
-      "主炮：3x2 203mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：12x2 25mm/60",
-      "鱼雷：2x4 610mm",
-      "HP：11660，速度：33 节，费用：$120 / 16s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11581,14 +11265,6 @@
     width: 22,
     fundsCost: 150,
     timeCost: 16,
-    description: [
-      "巡洋舰（日）",
-      "主炮：5x2 203mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：10x3 25mm/60",
-      "高炮：14x1 25mm/60",
-      "HP：15479，速度：33.5 节，费用：$150 / 16s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11874,14 +11550,6 @@
     width: 22,
     fundsCost: 160,
     timeCost: 16,
-    description: [
-      "巡洋舰（日）",
-      "主炮：5x2 203mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：10x3 25mm/60",
-      "高炮：26x1 25mm/60",
-      "HP：15718，速度：34 节，费用：$160 / 16s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -12251,14 +11919,6 @@
     width: 21,
     fundsCost: 150,
     timeCost: 18,
-    description: [
-      "巡洋舰（日）",
-      "主炮：3x2 203mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：14x2 25mm/60",
-      "高炮：18x1 25mm/60",
-      "HP：13600，速度：35 节，费用：$150 / 18s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -12586,14 +12246,6 @@
     width: 21,
     fundsCost: 130,
     timeCost: 16,
-    description: [
-      "巡洋舰（日）",
-      "主炮：5x2 203mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：12x2 25mm/60",
-      "高炮：16x1 25mm/60",
-      "HP：13887，速度：36 节，费用：$130 / 16s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -12907,14 +12559,6 @@
     width: 22,
     fundsCost: 140,
     timeCost: 20,
-    description: [
-      "巡洋舰（日）",
-      "主炮：4x2 203mm/50",
-      "高平炮：4x2 127mm/40",
-      "高炮：12x2 25mm/60",
-      "高炮：20x1 25mm/60",
-      "HP：13200，速度：35.5 节，费用：$140 / 20s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -13249,14 +12893,6 @@
     width: 12,
     fundsCost: 40,
     timeCost: 12,
-    description: [
-      "巡洋舰（日）",
-      "主炮：4x1 140mm/50",
-      "高平炮：1x1 76mm/40",
-      "高炮：2x2 25mm/60",
-      "鱼雷：2x3 533mm",
-      "HP：4420，速度：33 节，费用：$40 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -13345,13 +12981,6 @@
     width: 14,
     fundsCost: 52,
     timeCost: 14,
-    description: [
-      "巡洋舰（日）",
-      "主炮：7x1 140mm/50",
-      "高炮：4x2 25mm/60",
-      "鱼雷：4x2 533mm",
-      "HP：5500，速度：36 节，费用：$52 / 14s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -13482,14 +13111,6 @@
     width: 14,
     fundsCost: 130,
     timeCost: 22,
-    description: [
-      "巡洋舰（日）",
-      "主炮：2x2 127mm/40",
-      "高炮：14x3 25mm/60",
-      "高炮：27x1 25mm/60",
-      "鱼雷：2x4 4mm",
-      "HP：7041，速度：24 节，费用：$130 / 22s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -13831,13 +13452,6 @@
     width: 14,
     fundsCost: 120,
     timeCost: 24,
-    description: [
-      "巡洋舰（日）",
-      "主炮：4x1 140mm/50",
-      "高炮：2x2 25mm/60",
-      "鱼雷：10x4 610mm",
-      "HP：6900，速度：32 节，费用：$120 / 24s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -13975,14 +13589,6 @@
     width: 14,
     fundsCost: 60,
     timeCost: 12,
-    description: [
-      "巡洋舰（日）",
-      "主炮：3x2 127mm/40",
-      "高炮：11x3 25mm/60",
-      "高炮：11x1 25mm/60",
-      "鱼雷：2x4 610mm",
-      "HP：6260，速度：34.5 节，费用：$60 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14197,14 +13803,6 @@
     width: 14,
     fundsCost: 58,
     timeCost: 12,
-    description: [
-      "巡洋舰（日）",
-      "主炮：5x1 140mm/50",
-      "高平炮：1x2 127mm/40",
-      "高炮：2x2 25mm/60",
-      "高炮：4x3 25mm/60",
-      "HP：5925，速度：36 节，费用：$58 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14420,13 +14018,6 @@
     width: 14,
     fundsCost: 52,
     timeCost: 12,
-    description: [
-      "巡洋舰（日）",
-      "主炮：7x1 140mm/50",
-      "高炮：9x2 25mm/60",
-      "鱼雷：2x4 610mm",
-      "HP：5595，速度：35.3 节，费用：$52 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14578,14 +14169,6 @@
     width: 12,
     fundsCost: 46,
     timeCost: 12,
-    description: [
-      "巡洋舰（日）",
-      "主炮：1x1 140mm/50",
-      "主炮：2x2 140mm/50",
-      "高炮：4x2 25mm/60",
-      "高炮：3x3 25mm/60",
-      "HP：4447，速度：35.5 节，费用：$46 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14695,14 +14278,6 @@
     width: 15,
     fundsCost: 72,
     timeCost: 16,
-    description: [
-      "巡洋舰（日）",
-      "主炮：3x2 152mm/50",
-      "高平炮：2x2 76mm/65",
-      "高炮：10x3 25mm/60",
-      "高炮：24x1 25mm/60",
-      "HP：7710，速度：35 节，费用：$72 / 16s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15014,14 +14589,6 @@
     width: 17,
     fundsCost: 86,
     timeCost: 24,
-    description: [
-      "巡洋舰（日）",
-      "主炮：2x3 155mm/60",
-      "高平炮：1x2 100mm/65",
-      "高平炮：3x2 105mm/65",
-      "高炮：12x3 25mm/60",
-      "HP：10990，速度：35 节，费用：$86 / 24s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15173,13 +14740,6 @@
     width: 22,
     fundsCost: 190,
     timeCost: 19,
-    description: [
-      "巡洋舰（德）",
-      "主炮：4x2 203mm/60",
-      "高平炮：6x2 105mm/65",
-      "鱼雷：4x3 533mm",
-      "HP：18400，速度：33.5 节，费用：$190 / 19s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15302,13 +14862,6 @@
     width: 16,
     fundsCost: 90,
     timeCost: 14,
-    description: [
-      "巡洋舰（德）",
-      "主炮：3x3 150mm/60",
-      "高平炮：3x2 88mm/56",
-      "鱼雷：4x3 533mm",
-      "HP：8680，速度：32 节，费用：$90 / 14s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15404,14 +14957,6 @@
     width: 25,
     fundsCost: 195,
     timeCost: 18,
-    description: [
-      "巡洋舰（英）",
-      "主炮：3x3 203mm/50",
-      "高平炮：8x2 102mm/45",
-      "高炮：5x8 40mm/39",
-      "高炮：16x2 20mm/70",
-      "HP：20100，速度：31.5 节，费用：$195 / 18s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15660,13 +15205,6 @@
     width: 24,
     fundsCost: 180,
     timeCost: 17,
-    description: [
-      "巡洋舰（英）",
-      "主炮：5x2 152mm/50",
-      "高平炮：8x4 76mm/70",
-      "鱼雷：4x4 533mm",
-      "HP：21000，速度：31.5 节，费用：$180 / 17s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15810,14 +15348,6 @@
     width: 16,
     fundsCost: 76,
     timeCost: 12,
-    description: [
-      "巡洋舰（英）",
-      "主炮：4x2 152mm/50",
-      "高平炮：2x1 102mm/45",
-      "高炮：2x1 40mm/39",
-      "鱼雷：4x3 533mm",
-      "HP：8100，速度：29 节，费用：$76 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15928,14 +15458,6 @@
     width: 19,
     fundsCost: 80,
     timeCost: 14,
-    description: [
-      "巡洋舰（英）",
-      "主炮：8x2 133mm/50",
-      "高炮：2x4 40mm/39",
-      "高炮：2x8 40mm/39",
-      "高平炮：4x4 1910mm",
-      "HP：8500，速度：32 节，费用：$80 / 14s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16089,13 +15611,6 @@
     width: 22,
     fundsCost: 170,
     timeCost: 18,
-    description: [
-      "巡洋舰（苏）",
-      "主炮：4x3 152mm/57",
-      "高平炮：6x2 100mm/70",
-      "鱼雷：2x5 533mm",
-      "HP：16640，速度：34 节，费用：$170 / 18s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16204,13 +15719,6 @@
     width: 18,
     fundsCost: 100,
     timeCost: 12,
-    description: [
-      "巡洋舰（苏）",
-      "主炮：3x3 180mm/57",
-      "高平炮：6x1 100mm/56",
-      "鱼雷：2x3 533mm",
-      "HP：9400，速度：36 节，费用：$100 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16314,12 +15822,6 @@
     width: 11,
     fundsCost: 16,
     timeCost: 7,
-    description: [
-      "驱逐舰（美）",
-      "主炮：4x2 127mm/38",
-      "鱼雷：2x4 533mm",
-      "HP：1850，速度：37 节，费用：$16 / 7s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16385,12 +15887,6 @@
     width: 11,
     fundsCost: 25,
     timeCost: 8,
-    description: [
-      "驱逐舰（美）",
-      "主炮：4x1 127mm/38",
-      "鱼雷：4x4 533mm",
-      "HP：2286，速度：38.5 节，费用：$25 / 8s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16470,12 +15966,6 @@
     width: 11,
     fundsCost: 19,
     timeCost: 8,
-    description: [
-      "驱逐舰（美）",
-      "主炮：4x1 127mm/38",
-      "鱼雷：2x4 533mm",
-      "HP：2246，速度：37 节，费用：$19 / 8s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16542,12 +16032,6 @@
     width: 11,
     fundsCost: 26,
     timeCost: 10,
-    description: [
-      "驱逐舰（日）",
-      "主炮：3x2 127mm/50",
-      "鱼雷：2x4 610mm",
-      "HP：2635，速度：36 节，费用：$26 / 10s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16606,12 +16090,6 @@
     width: 11,
     fundsCost: 26,
     timeCost: 10,
-    description: [
-      "驱逐舰（日）",
-      "主炮：3x2 127mm/50",
-      "鱼雷：2x4 610mm",
-      "HP：2520，速度：35.5 节，费用：$26 / 10s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16670,12 +16148,6 @@
     width: 11,
     fundsCost: 25,
     timeCost: 10,
-    description: [
-      "驱逐舰（日）",
-      "主炮：3x2 127mm/50",
-      "鱼雷：2x4 610mm",
-      "HP：2490，速度：35.5 节，费用：$25 / 10s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16735,12 +16207,6 @@
     width: 11,
     fundsCost: 31,
     timeCost: 12,
-    description: [
-      "驱逐舰（德）",
-      "主炮：5x1 127mm/45",
-      "鱼雷：2x4 533mm",
-      "HP：3190，速度：36 节，费用：$31 / 12s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16814,12 +16280,6 @@
     width: 12,
     fundsCost: 22,
     timeCost: 10,
-    description: [
-      "驱逐舰（英）",
-      "主炮：5x1 120mm/45",
-      "鱼雷：1x5 533mm",
-      "HP：2200，速度：36 节，费用：$22 / 10s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16885,12 +16345,6 @@
     width: 12,
     fundsCost: 20,
     timeCost: 10,
-    description: [
-      "驱逐舰（英）",
-      "主炮：3x1 120mm/45",
-      "鱼雷：1x5 533mm",
-      "HP：3100，速度：35 节，费用：$20 / 10s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16942,13 +16396,6 @@
     width: 10,
     fundsCost: 12,
     timeCost: 7,
-    description: [
-      "驱逐舰（英）",
-      "主炮：4x1 120mm/45",
-      "高炮：2x1 40mm/60",
-      "鱼雷：2x4 533mm",
-      "HP：1810，速度：35 节，费用：$12 / 7s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17030,12 +16477,6 @@
     width: 13,
     fundsCost: 30,
     timeCost: 13,
-    description: [
-      "驱逐舰（苏）",
-      "主炮：2x2 130mm/58",
-      "鱼雷：2x5 533mm",
-      "HP：3230，速度：38.5 节，费用：$30 / 13s",
-    ],
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17089,13 +16530,6 @@
     width: 7,
     fundsCost: 5,
     timeCost: 3,
-    description: [
-      "鱼雷艇（美）",
-      "主炮：1x1 40mm/60",
-      "高炮：2x1 20mm/70",
-      "鱼雷：2x1 533mm",
-      "HP：48，速度：41 节，费用：$5 / 3s",
-    ],
     weapon: {
       mainGuns: [
         // 后主炮 A
@@ -17156,12 +16590,6 @@
     width: 4,
     fundsCost: 3,
     timeCost: 3,
-    description: [
-      "鱼雷艇（日）",
-      "主炮：1x1 13mm",
-      "鱼雷：2x1 450mm",
-      "HP：18，速度：33 节，费用：$3 / 3s",
-    ],
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -17207,13 +16635,6 @@
     width: 5,
     fundsCost: 7,
     timeCost: 6,
-    description: [
-      "鱼雷艇（德）",
-      "主炮：1x1 37mm/57",
-      "高炮：2x1 20mm/70",
-      "鱼雷：2x1 533mm",
-      "HP：95，速度：43 节，费用：$7 / 6s",
-    ],
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -17274,12 +16695,6 @@
     width: 7,
     fundsCost: 4,
     timeCost: 4,
-    description: [
-      "鱼雷艇（英）",
-      "主炮：1x2 1910mm",
-      "鱼雷：2x1 533mm",
-      "HP：45，速度：39 节，费用：$4 / 4s",
-    ],
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -17325,12 +16740,6 @@
     width: 6,
     fundsCost: 5,
     timeCost: 4,
-    description: [
-      "鱼雷艇（苏）",
-      "主炮：2x2 25mm/65",
-      "鱼雷：2x1 533mm",
-      "HP：66，速度：45 节，费用：$5 / 4s",
-    ],
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -17383,11 +16792,7 @@
     width: 32,
     fundsCost: 520,
     timeCost: 50,
-    description: [
-      "医疗船（美）",
-      "武装：无固定武装",
-      "HP：70473，速度：17 节，费用：$520 / 50s",
-    ],},
+  },
   {
     name: "peace_ark",
     displayName: "和平方舟",
@@ -17403,11 +16808,7 @@
     width: 24,
     fundsCost: 200,
     timeCost: 20,
-    description: [
-      "医疗船（中）",
-      "武装：无固定武装",
-      "HP：14300，速度：20 节，费用：$200 / 20s",
-    ],},
+  },
   {
     name: "britannic",
     displayName: "不列颠",
@@ -17423,9 +16824,5 @@
     width: 29,
     fundsCost: 420,
     timeCost: 45,
-    description: [
-      "医疗船（英）",
-      "武装：无固定武装",
-      "HP：53848，速度：24 节，费用：$420 / 45s",
-    ],}
+  },
 ]

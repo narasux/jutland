@@ -77,8 +77,6 @@ type BattleShip struct {
 	Type ShipType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
-	// 描述
-	Description []string `json:"description"`
 	// 年份
 	Year int `json:"year"`
 
@@ -432,15 +430,6 @@ func GetShipCost(name string) (fundsCost int64, timeCost int64) {
 		return 0, 0
 	}
 	return ship.FundsCost, ship.TimeCost
-}
-
-// GetShipDesc 获取战舰描述
-func GetShipDesc(name string) []string {
-	ship, ok := ShipMap[name]
-	if !ok {
-		return []string{}
-	}
-	return ship.Description
 }
 
 // ShipUidGenerator 战舰 Uid 生成器

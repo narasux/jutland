@@ -1,7 +1,6 @@
 package initialize
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -261,13 +260,6 @@ func initShipMap() {
 		s.CurHP = s.TotalHP
 		// 计算吨位（即最大生命值）
 		s.Tonnage = s.TotalHP
-		// 添加默认描述
-		s.Description = append(
-			s.Description, fmt.Sprintf(
-				"HP：%.0f，速度：%.0f 节，费用：$%d / %ds",
-				s.TotalHP, s.MaxSpeed, s.FundsCost, s.TimeCost,
-			),
-		)
 		// 折算速度
 		s.MaxSpeed /= 600
 		s.Acceleration /= 600
