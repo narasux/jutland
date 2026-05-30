@@ -1,0 +1,14 @@
+configs/references.json5
+  h_83f239dc907c66 116-118,147-149,178-180,209-211,240-242,270-272,297-299
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "49c420dbd7c3136d5e36bb37d90ba3865b9aa066",
+  "prompts": {},
+  "humans": {
+    "h_83f239dc907c66": {
+      "author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  }
+}
