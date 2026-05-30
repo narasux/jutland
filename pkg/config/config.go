@@ -38,7 +38,7 @@ var (
 // GameSettings 游戏设置配置
 type GameSettings struct {
 	// SpeedMultiplier 全局速度倍率，影响战舰、炮弹、鱼雷、飞机等移动速度
-	// 默认值为1.0，最小值为0.1，最大值为10.0
+	// 默认值为 1.0，0.25 ~ 4.0
 	SpeedMultiplier float64 `json:"speedMultiplier"`
 }
 
@@ -126,7 +126,7 @@ func SaveGameSettings() error {
 
 	// 写入JSON5格式的注释头部
 	_, _ = file.WriteString("// 游戏设置配置文件\n")
-	_, _ = file.WriteString("// SpeedMultiplier: 全局速度倍率，影响战舰、炮弹、鱼雷、飞机等移动/转向速度\n")
+	_, _ = file.WriteString("// SpeedMultiplier: 全局速度倍率（极慢=0.25 / 慢=0.50 / 正常=1.00 / 快=2.00 / 极快=4.00），影响战舰、炮弹、鱼雷、飞机等移动/转向速度\n")
 	_, _ = file.WriteString("// 范围: 0.25 ~ 4.0，默认值: 1.0\n\n")
 
 	// 编码并写入配置

@@ -13,6 +13,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/types"
+	"github.com/narasux/jutland/pkg/game/settings"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
@@ -40,6 +41,8 @@ type Game struct {
 	curMission string
 	// 任务管理
 	missionMgr *manager.MissionManager
+	// 设置界面
+	settingUI *settings.UI
 
 	curShipName string
 }
@@ -52,6 +55,7 @@ func New() *Game {
 		objStates:   nil,
 		curMission:  "Alpha",
 		missionMgr:  nil,
+		settingUI:   settings.New(),
 		curShipName: "lowa",
 	}
 	g.init()
@@ -124,8 +128,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, bgImg.MissionWindow)
 		g.drawer.drawCollection(screen, g.curShipName, g.objStates.RefLinks)
 	case GameModeGameSetting:
-		// TODO 功能待实现
-		return
+		g.settingUI.Draw(screen)
 	case GameModeEnd:
 		g.drawer.drawBackground(screen, bgImg.GameEnd)
 		g.drawer.drawCredits(screen)
@@ -166,9 +169,7 @@ func (g *Game) init() {
 				FontSize: fontSize,
 				Font:     font.Hang,
 				Color:    colorx.White,
-				// Mode:     GameModeGameSetting,
-				// TODO 临时调试
-				Mode: GameModeMissionSuccess,
+				Mode:     GameModeGameSetting,
 			},
 			ExitGame: &menuButton{
 				Text:     "退出游戏",
@@ -296,10 +297,20 @@ func (g *Game) handleGameCollection() error {
 	return nil
 }
 
-// 游戏设置 TODO 功能待实现
+// 游戏设置
 func (g *Game) handleGameSetting() error {
-	log.Println("work in progress")
-	return ebiten.Termination
+	// ESC 返回菜单
+	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		g.settingUI.Reset()
+		g.mode = GameModeMenuSelect
+		return nil
+	}
+	g.settingUI.Update()
+	if g.settingUI.BackPressed() {
+		g.settingUI.Reset()
+		g.mode = GameModeMenuSelect
+	}
+	return nil
 }
 
 // 游戏结束

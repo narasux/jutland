@@ -2,6 +2,7 @@ package drawer
 
 import (
 	"fmt"
+	"math"
 	"slices"
 	"strconv"
 	"strings"
@@ -327,10 +328,21 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		img := objBullet.GetImg(b.Type, b.Diameter)
 
 		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, img, b.Rotation)
+		rotation := b.Rotation
+		offsetX, offsetY := 0.0, 0.0
+		// 激光弹丸：图片以中心旋转绘制，弹丸位置对应图片中心，
+		// 导致一半光束向前（射击方向）、一半光束向后（反方向光线）。
+		// 修复：将中心向射击方向前移 h/2，使图片尾部对齐弹丸，
+		// 光束仅向射击正方向延伸。
+		if b.Type == objBullet.TypeLaser {
+			halfH := float64(img.Bounds().Dy()) / 2.0
+			offsetX = halfH * math.Sin(rotation*math.Pi/180)
+			offsetY = -halfH * math.Cos(rotation*math.Pi/180)
+		}
+		ebutil.SetOptsCenterRotation(opts, img, rotation)
 		opts.GeoM.Translate(
-			(b.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
-			(b.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
+			(b.CurPos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2)+offsetX,
+			(b.CurPos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2)+offsetY,
 		)
 		screen.DrawImage(img, opts)
 	}

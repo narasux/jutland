@@ -328,7 +328,7 @@ func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.O
 		return
 	}
 
-	maxItems := min(6, len(ships))
+	maxItems := calcReinforceQueueMaxItems(card.H, len(ships))
 	cardGap := 16.0
 	cardW := (card.W - 48 - cardGap) / 2
 	cardH := 58.0
@@ -363,6 +363,15 @@ func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingS
 		return
 	}
 	d.drawText(screen, fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost), x+12, y+34, 15, font.JetbrainsMono, reinforceMutedText)
+}
+
+// calcReinforceQueueMaxItems 根据队列面板可用高度动态计算最多可展示的卡片数量。
+func calcReinforceQueueMaxItems(panelH float64, count int) int {
+	titleAndDivider := 62.0
+	bottomReserve := 36.0
+	rowH := 58.0 + 14.0
+	maxRows := max(1, int((panelH-titleAndDivider-bottomReserve)/rowH))
+	return min(2*maxRows, count)
 }
 
 // drawSummonOperationTips 绘制当前资金和增援操作提示。

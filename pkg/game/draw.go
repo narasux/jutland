@@ -305,7 +305,8 @@ func calcCollectionLayout(screenWidth, screenHeight int) collectionLayout {
 func collectionRefLinkOriginByDescription(screenWidth, screenHeight int, description string) (float64, float64) {
 	collLayout := calcCollectionLayout(screenWidth, screenHeight)
 	descriptionLines := wrapCollectionText(description, collLayout.SourceCard.W-48, 20)
-	return collLayout.SourceCard.X + 24, collectionSourceMetaY(collLayout, len(descriptionLines)) + 48
+	refLinkGap := max(20.0, collLayout.SourceCard.H*0.05)
+	return collLayout.SourceCard.X + 24, collectionSourceMetaY(collLayout, len(descriptionLines)) + 34 + refLinkGap
 }
 
 func collectionSourceMetaY(layout collectionLayout, descriptionLineCount int) float64 {
