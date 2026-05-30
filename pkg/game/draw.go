@@ -249,6 +249,18 @@ func (d *Drawer) drawCollectionCard(screen *ebiten.Image, card collectionCard, t
 func (d *Drawer) drawCollectionInfoItems(
 	screen *ebiten.Image, items []objRef.InfoItem, x, y, valueMaxWidth, lineHeight float64,
 ) {
+	// 根据最长标签动态计算值的起始 X，避免标签与值重叠
+	labelOffset := 76.0
+	longestLabel := 0.0
+	for _, item := range items {
+		w := estimateCollectionTextWidth(item.Label, 20)
+		if w > longestLabel {
+			longestLabel = w
+		}
+	}
+	if longestLabel > 60 {
+		labelOffset = longestLabel + 16
+	}
 	drawn := 0
 	for _, item := range items {
 		lineY := y + float64(drawn)*lineHeight
@@ -257,7 +269,7 @@ func (d *Drawer) drawCollectionInfoItems(
 		valueFont := font.Kai
 		wrappedValues := wrapCollectionText(item.Value, valueMaxWidth, 20)
 		for idx, value := range wrappedValues {
-			d.drawText(screen, value, x+76, lineY+float64(idx)*lineHeight, 20, valueFont, colorx.White)
+			d.drawText(screen, value, x+labelOffset, lineY+float64(idx)*lineHeight, 20, valueFont, colorx.White)
 		}
 		drawn += max(1, len(wrappedValues))
 	}
