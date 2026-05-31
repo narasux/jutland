@@ -6,8 +6,8 @@
       {label: "吨位", value: "150000"},
       {label: "速度", value: "45 节"},
       {label: "费用", value: "$0 / 5s"},
-      {label: "水平装甲", value: "75%"},
-      {label: "垂直装甲", value: "75%"}
+      {label: "水平减伤", value: "75%"},
+      {label: "垂直减伤", value: "75%"}
     ],
     armaments: [
       {label: "主炮", value: "1x8 406mm"},
@@ -37,8 +37,8 @@
       {label: "吨位", value: "1"},
       {label: "速度", value: "1000 节"},
       {label: "费用", value: "$0 / 5s"},
-      {label: "水平装甲", value: "100%"},
-      {label: "垂直装甲", value: "100%"}
+      {label: "水平减伤", value: "100%"},
+      {label: "垂直减伤", value: "100%"}
     ],
     armaments: [
       {label: "主炮", value: "1x3 1mm"},
@@ -59,8 +59,8 @@
       {label: "吨位", value: "1000000"},
       {label: "速度", value: "5 节"},
       {label: "费用", value: "$10 / 10s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "武装", value: "无固定武装"},
@@ -81,8 +81,8 @@
       {label: "吨位", value: "7500"},
       {label: "速度", value: "11 节"},
       {label: "费用", value: "$50 / 15s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "1x1 127mm/25"},
@@ -106,8 +106,8 @@
       {label: "吨位", value: "25900"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$410 / 40s"},
-      {label: "水平装甲", value: "25%"},
-      {label: "垂直装甲", value: "7%"}
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "7%"}
     ],
     armaments: [
       {label: "主炮", value: "8x1 127mm/38"},
@@ -137,8 +137,8 @@
       {label: "吨位", value: "50000"},
       {label: "速度", value: "34 节"},
       {label: "费用", value: "$635 / 60s"},
-      {label: "水平装甲", value: "30%"},
-      {label: "垂直装甲", value: "10%"}
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "10%"}
     ],
     armaments: [
       {label: "主炮", value: "12x1 127mm/38"},
@@ -169,8 +169,8 @@
       {label: "吨位", value: "37270"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$500 / 52s"},
-      {label: "水平装甲", value: "30%"},
-      {label: "垂直装甲", value: "10%"}
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "10%"}
     ],
     armaments: [
       {label: "主炮", value: "8x2 100mm/65"},
@@ -199,8 +199,8 @@
       {label: "吨位", value: "41300"},
       {label: "速度", value: "31 节"},
       {label: "费用", value: "$460 / 45s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "6x1 200mm/50"},
@@ -230,8 +230,8 @@
       {label: "吨位", value: "43600"},
       {label: "速度", value: "28 节"},
       {label: "费用", value: "$460 / 45s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "10x1 200mm/50"},
@@ -261,8 +261,8 @@
       {label: "吨位", value: "19500"},
       {label: "速度", value: "34.5 节"},
       {label: "费用", value: "$220 / 30s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "6x2 127mm/40"},
@@ -287,8 +287,8 @@
       {label: "吨位", value: "21900"},
       {label: "速度", value: "34.5 节"},
       {label: "费用", value: "$230 / 32s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "6x2 127mm/40"},
@@ -315,8 +315,8 @@
       {label: "吨位", value: "58000"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$580 / 54s"},
-      {label: "水平装甲", value: "50%"},
-      {label: "垂直装甲", value: "30%"}
+      {label: "水平减伤", value: "50%"},
+      {label: "垂直减伤", value: "30%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
@@ -344,8 +344,8 @@
       {label: "吨位", value: "70500"},
       {label: "速度", value: "27 节"},
       {label: "费用", value: "$705 / 65s"},
-      {label: "水平装甲", value: "55%"},
-      {label: "垂直装甲", value: "30%"}
+      {label: "水平减伤", value: "55%"},
+      {label: "垂直减伤", value: "30%"}
     ],
     armaments: [
       {label: "主炮", value: "4x3 406mm/50"},
@@ -373,8 +373,8 @@
       {label: "吨位", value: "46000"},
       {label: "速度", value: "28 节"},
       {label: "费用", value: "$445 / 40s"},
-      {label: "水平装甲", value: "45%"},
-      {label: "垂直装甲", value: "30%"}
+      {label: "水平减伤", value: "45%"},
+      {label: "垂直减伤", value: "30%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 406mm/45"},
@@ -402,8 +402,8 @@
       {label: "吨位", value: "58400"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$585 / 60s"},
-      {label: "水平装甲", value: "40%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "40%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 457mm/45"},
@@ -429,8 +429,8 @@
       {label: "吨位", value: "36600"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$380 / 45s"},
-      {label: "水平装甲", value: "40%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "40%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 356mm/45"},
@@ -459,8 +459,8 @@
       {label: "吨位", value: "39154"},
       {label: "速度", value: "25 节"},
       {label: "费用", value: "$400 / 45s"},
-      {label: "水平装甲", value: "40%"},
-      {label: "垂直装甲", value: "25%"}
+      {label: "水平减伤", value: "40%"},
+      {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
       {label: "主炮", value: "6x2 356mm/45"},
@@ -489,8 +489,8 @@
       {label: "吨位", value: "72500"},
       {label: "速度", value: "27 节"},
       {label: "费用", value: "$720 / 72s"},
-      {label: "水平装甲", value: "55%"},
-      {label: "垂直装甲", value: "30%"}
+      {label: "水平减伤", value: "55%"},
+      {label: "垂直减伤", value: "30%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 460mm/45"},
@@ -518,8 +518,8 @@
       {label: "吨位", value: "84000"},
       {label: "速度", value: "29 节"},
       {label: "费用", value: "$920 / 100s"},
-      {label: "水平装甲", value: "60%"},
-      {label: "垂直装甲", value: "35%"}
+      {label: "水平减伤", value: "60%"},
+      {label: "垂直减伤", value: "35%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 510mm/45"},
@@ -544,8 +544,8 @@
       {label: "吨位", value: "105000"},
       {label: "速度", value: "29 节"},
       {label: "费用", value: "$1200 / 130s"},
-      {label: "水平装甲", value: "60%"},
-      {label: "垂直装甲", value: "40%"}
+      {label: "水平减伤", value: "60%"},
+      {label: "垂直减伤", value: "40%"}
     ],
     armaments: [
       {label: "主炮", value: "4x3 510mm/45"},
@@ -570,8 +570,8 @@
       {label: "吨位", value: "52600"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$550 / 50s"},
-      {label: "水平装甲", value: "55%"},
-      {label: "垂直装甲", value: "35%"}
+      {label: "水平减伤", value: "55%"},
+      {label: "垂直减伤", value: "35%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 381mm/52"},
@@ -594,8 +594,8 @@
       {label: "吨位", value: "38100"},
       {label: "速度", value: "31 节"},
       {label: "费用", value: "$385 / 36s"},
-      {label: "水平装甲", value: "40%"},
-      {label: "垂直装甲", value: "25%"}
+      {label: "水平减伤", value: "40%"},
+      {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 283mm/55"},
@@ -620,8 +620,8 @@
       {label: "吨位", value: "16200"},
       {label: "速度", value: "28.5 节"},
       {label: "费用", value: "$160 / 16s"},
-      {label: "水平装甲", value: "35%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "35%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "2x3 283mm/52"},
@@ -646,8 +646,8 @@
       {label: "吨位", value: "47430"},
       {label: "速度", value: "32 节"},
       {label: "费用", value: "$450 / 40s"},
-      {label: "水平装甲", value: "45%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "45%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 381mm/42"},
@@ -671,8 +671,8 @@
       {label: "吨位", value: "38000"},
       {label: "速度", value: "24 节"},
       {label: "费用", value: "$390 / 35s"},
-      {label: "水平装甲", value: "45%"},
-      {label: "垂直装甲", value: "25%"}
+      {label: "水平减伤", value: "45%"},
+      {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 406mm/45"},
@@ -703,8 +703,8 @@
       {label: "吨位", value: "69500"},
       {label: "速度", value: "29 节"},
       {label: "费用", value: "$680 / 56s"},
-      {label: "水平装甲", value: "65%"},
-      {label: "垂直装甲", value: "32%"}
+      {label: "水平减伤", value: "65%"},
+      {label: "垂直减伤", value: "32%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 406mm/45"},
@@ -730,8 +730,8 @@
       {label: "吨位", value: "55000"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$500 / 45s"},
-      {label: "水平装甲", value: "45%"},
-      {label: "垂直装甲", value: "25%"}
+      {label: "水平减伤", value: "45%"},
+      {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
       {label: "主炮", value: "4x4 356mm/45"},
@@ -756,8 +756,8 @@
       {label: "吨位", value: "43780"},
       {label: "速度", value: "27 节"},
       {label: "费用", value: "$420 / 40s"},
-      {label: "水平装甲", value: "40%"},
-      {label: "垂直装甲", value: "25%"}
+      {label: "水平减伤", value: "40%"},
+      {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
       {label: "主炮", value: "2x4 356mm/45"},
@@ -782,8 +782,8 @@
       {label: "吨位", value: "37000"},
       {label: "速度", value: "24 节"},
       {label: "费用", value: "$340 / 33s"},
-      {label: "水平装甲", value: "30%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 381mm/42"},
@@ -806,8 +806,8 @@
       {label: "吨位", value: "33600"},
       {label: "速度", value: "28 节"},
       {label: "费用", value: "$300 / 28s"},
-      {label: "水平装甲", value: "26%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "26%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 343mm/45"},
@@ -831,8 +831,8 @@
       {label: "吨位", value: "67370"},
       {label: "速度", value: "29 节"},
       {label: "费用", value: "$720 / 68s"},
-      {label: "水平装甲", value: "55%"},
-      {label: "垂直装甲", value: "30%"}
+      {label: "水平减伤", value: "55%"},
+      {label: "垂直减伤", value: "30%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
@@ -860,8 +860,8 @@
       {label: "吨位", value: "58200"},
       {label: "速度", value: "29 节"},
       {label: "费用", value: "$650 / 63s"},
-      {label: "水平装甲", value: "45%"},
-      {label: "垂直装甲", value: "30%"}
+      {label: "水平减伤", value: "45%"},
+      {label: "垂直减伤", value: "30%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
@@ -885,8 +885,8 @@
       {label: "吨位", value: "81150"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$850 / 88s"},
-      {label: "水平装甲", value: "60%"},
-      {label: "垂直装甲", value: "35%"}
+      {label: "水平减伤", value: "60%"},
+      {label: "垂直减伤", value: "35%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
@@ -914,8 +914,8 @@
       {label: "吨位", value: "105300"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$1170 / 105s"},
-      {label: "水平装甲", value: "60%"},
-      {label: "垂直装甲", value: "40%"}
+      {label: "水平减伤", value: "60%"},
+      {label: "垂直减伤", value: "40%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 500mm/50"},
@@ -945,8 +945,8 @@
       {label: "吨位", value: "7400"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$70 / 10s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "5%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "5%"}
     ],
     armaments: [
       {label: "主炮", value: "8x2 127mm/38"},
@@ -974,8 +974,8 @@
       {label: "吨位", value: "42800"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$450 / 40s"},
-      {label: "水平装甲", value: "35%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "35%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "4x3 305mm/50"},
@@ -1003,8 +1003,8 @@
       {label: "吨位", value: "16600"},
       {label: "速度", value: "30 节"},
       {label: "费用", value: "$180 / 15s"},
-      {label: "水平装甲", value: "10%"},
-      {label: "垂直装甲", value: "10%"}
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "10%"}
     ],
     armaments: [
       {label: "主炮", value: "2x1 127mm/38"},
@@ -1034,8 +1034,8 @@
       {label: "吨位", value: "11300"},
       {label: "速度", value: "32 节"},
       {label: "费用", value: "$125 / 10s"},
-      {label: "水平装甲", value: "5%"},
-      {label: "垂直装甲", value: "5%"}
+      {label: "水平减伤", value: "5%"},
+      {label: "垂直减伤", value: "5%"}
     ],
     armaments: [
       {label: "主炮", value: "2x1 127mm/38"},
@@ -1061,8 +1061,8 @@
       {label: "吨位", value: "12663"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$120 / 12s"},
-      {label: "水平装甲", value: "30%"},
-      {label: "垂直装甲", value: "15%"}
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 203mm/55"},
@@ -1092,8 +1092,8 @@
       {label: "吨位", value: "11696"},
       {label: "速度", value: "32.5 节"},
       {label: "费用", value: "$120 / 12s"},
-      {label: "水平装甲", value: "30%"},
-      {label: "垂直装甲", value: "15%"}
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
       {label: "主炮", value: "2x2 203mm/55"},
@@ -1125,8 +1125,8 @@
       {label: "吨位", value: "10630"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$110 / 14s"},
-      {label: "水平装甲", value: "15%"},
-      {label: "垂直装甲", value: "15%"}
+      {label: "水平减伤", value: "15%"},
+      {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 203mm/50"},
@@ -1150,8 +1150,8 @@
       {label: "吨位", value: "11660"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$120 / 16s"},
-      {label: "水平装甲", value: "15%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "15%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 203mm/50"},
@@ -1175,8 +1175,8 @@
       {label: "吨位", value: "15479"},
       {label: "速度", value: "33.5 节"},
       {label: "费用", value: "$150 / 16s"},
-      {label: "水平装甲", value: "25%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "5x2 203mm/50"},
@@ -1201,8 +1201,8 @@
       {label: "吨位", value: "15718"},
       {label: "速度", value: "34 节"},
       {label: "费用", value: "$160 / 16s"},
-      {label: "水平装甲", value: "25%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "5x2 203mm/50"},
@@ -1227,8 +1227,8 @@
       {label: "吨位", value: "13600"},
       {label: "速度", value: "35 节"},
       {label: "费用", value: "$150 / 18s"},
-      {label: "水平装甲", value: "25%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 203mm/50"},
@@ -1253,8 +1253,8 @@
       {label: "吨位", value: "13887"},
       {label: "速度", value: "36 节"},
       {label: "费用", value: "$130 / 16s"},
-      {label: "水平装甲", value: "25%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "5x2 203mm/50"},
@@ -1279,8 +1279,8 @@
       {label: "吨位", value: "13200"},
       {label: "速度", value: "35.5 节"},
       {label: "费用", value: "$140 / 20s"},
-      {label: "水平装甲", value: "25%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 203mm/50"},
@@ -1305,8 +1305,8 @@
       {label: "吨位", value: "4420"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$40 / 12s"},
-      {label: "水平装甲", value: "10%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "4x1 140mm/50"},
@@ -1330,8 +1330,8 @@
       {label: "吨位", value: "5500"},
       {label: "速度", value: "36 节"},
       {label: "费用", value: "$52 / 14s"},
-      {label: "水平装甲", value: "10%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "7x1 140mm/50"},
@@ -1354,14 +1354,14 @@
       {label: "吨位", value: "7041"},
       {label: "速度", value: "24 节"},
       {label: "费用", value: "$130 / 22s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "2x2 127mm/40"},
       {label: "高炮", value: "14x3 25mm/60"},
       {label: "高炮", value: "27x1 25mm/60"},
-      {label: "鱼雷", value: "2x4 4mm"},
+      {label: "鱼雷", value: "8 枚回天鱼雷"},
     ],
     description: "北上号是日本海军球磨级轻巡洋舰四号舰，1921 年服役。1941 年与大井号一同改装为重雷装巡洋舰，两舷共 40 具鱼雷发射管，是世界上鱼雷搭载量最高的舰艇之一。战争后期改为回天自杀鱼雷搭载舰，但未有机会实战出击。",
     author: "未知",
@@ -1379,8 +1379,8 @@
       {label: "吨位", value: "6900"},
       {label: "速度", value: "32 节"},
       {label: "费用", value: "$120 / 24s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "4x1 140mm/50"},
@@ -1403,8 +1403,8 @@
       {label: "吨位", value: "6260"},
       {label: "速度", value: "34.5 节"},
       {label: "费用", value: "$60 / 12s"},
-      {label: "水平装甲", value: "10%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 127mm/40"},
@@ -1428,8 +1428,8 @@
       {label: "吨位", value: "5925"},
       {label: "速度", value: "36 节"},
       {label: "费用", value: "$58 / 12s"},
-      {label: "水平装甲", value: "10%"},
-      {label: "垂直装甲", value: "-30%"}
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "5x1 140mm/50"},
@@ -1455,8 +1455,8 @@
       {label: "吨位", value: "5595"},
       {label: "速度", value: "35.3 节"},
       {label: "费用", value: "$52 / 12s"},
-      {label: "水平装甲", value: "10%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "7x1 140mm/50"},
@@ -1479,8 +1479,8 @@
       {label: "吨位", value: "4447"},
       {label: "速度", value: "35.5 节"},
       {label: "费用", value: "$46 / 12s"},
-      {label: "水平装甲", value: "10%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "1x1 140mm/50"},
@@ -1505,8 +1505,8 @@
       {label: "吨位", value: "7710"},
       {label: "速度", value: "35 节"},
       {label: "费用", value: "$72 / 16s"},
-      {label: "水平装甲", value: "15%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "15%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 152mm/50"},
@@ -1531,8 +1531,8 @@
       {label: "吨位", value: "10990"},
       {label: "速度", value: "35 节"},
       {label: "费用", value: "$86 / 24s"},
-      {label: "水平装甲", value: "15%"},
-      {label: "垂直装甲", value: "5%"}
+      {label: "水平减伤", value: "15%"},
+      {label: "垂直减伤", value: "5%"}
     ],
     armaments: [
       {label: "主炮", value: "2x3 155mm/60"},
@@ -1557,8 +1557,8 @@
       {label: "吨位", value: "18400"},
       {label: "速度", value: "33.5 节"},
       {label: "费用", value: "$190 / 19s"},
-      {label: "水平装甲", value: "32%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "32%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 203mm/60"},
@@ -1581,8 +1581,8 @@
       {label: "吨位", value: "8680"},
       {label: "速度", value: "32 节"},
       {label: "费用", value: "$90 / 14s"},
-      {label: "水平装甲", value: "22%"},
-      {label: "垂直装甲", value: "13%"}
+      {label: "水平减伤", value: "22%"},
+      {label: "垂直减伤", value: "13%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 150mm/60"},
@@ -1606,8 +1606,8 @@
       {label: "吨位", value: "20100"},
       {label: "速度", value: "31.5 节"},
       {label: "费用", value: "$195 / 18s"},
-      {label: "水平装甲", value: "34%"},
-      {label: "垂直装甲", value: "22%"}
+      {label: "水平减伤", value: "34%"},
+      {label: "垂直减伤", value: "22%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 203mm/50"},
@@ -1631,8 +1631,8 @@
       {label: "吨位", value: "21000"},
       {label: "速度", value: "31.5 节"},
       {label: "费用", value: "$180 / 17s"},
-      {label: "水平装甲", value: "30%"},
-      {label: "垂直装甲", value: "20%"}
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
       {label: "主炮", value: "5x2 152mm/50"},
@@ -1655,8 +1655,8 @@
       {label: "吨位", value: "8100"},
       {label: "速度", value: "29 节"},
       {label: "费用", value: "$76 / 12s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "6%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "6%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 152mm/50"},
@@ -1680,8 +1680,8 @@
       {label: "吨位", value: "8500"},
       {label: "速度", value: "32 节"},
       {label: "费用", value: "$80 / 14s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "10%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "10%"}
     ],
     armaments: [
       {label: "主炮", value: "8x2 133mm/50"},
@@ -1707,8 +1707,8 @@
       {label: "吨位", value: "16640"},
       {label: "速度", value: "34 节"},
       {label: "费用", value: "$170 / 18s"},
-      {label: "水平装甲", value: "26%"},
-      {label: "垂直装甲", value: "15%"}
+      {label: "水平减伤", value: "26%"},
+      {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
       {label: "主炮", value: "4x3 152mm/57"},
@@ -1735,8 +1735,8 @@
       {label: "吨位", value: "9400"},
       {label: "速度", value: "36 节"},
       {label: "费用", value: "$100 / 12s"},
-      {label: "水平装甲", value: "20%"},
-      {label: "垂直装甲", value: "10%"}
+      {label: "水平减伤", value: "20%"},
+      {label: "垂直减伤", value: "10%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 180mm/57"},
@@ -1760,8 +1760,8 @@
       {label: "吨位", value: "1850"},
       {label: "速度", value: "37 节"},
       {label: "费用", value: "$16 / 7s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "4x2 127mm/38"},
@@ -1787,8 +1787,8 @@
       {label: "吨位", value: "2286"},
       {label: "速度", value: "38.5 节"},
       {label: "费用", value: "$25 / 8s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "4x1 127mm/38"},
@@ -1818,8 +1818,8 @@
       {label: "吨位", value: "2246"},
       {label: "速度", value: "37 节"},
       {label: "费用", value: "$19 / 8s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "4x1 127mm/38"},
@@ -1846,8 +1846,8 @@
       {label: "吨位", value: "2635"},
       {label: "速度", value: "36 节"},
       {label: "费用", value: "$26 / 10s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 127mm/50"},
@@ -1869,8 +1869,8 @@
       {label: "吨位", value: "2520"},
       {label: "速度", value: "35.5 节"},
       {label: "费用", value: "$26 / 10s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 127mm/50"},
@@ -1892,8 +1892,8 @@
       {label: "吨位", value: "2490"},
       {label: "速度", value: "35.5 节"},
       {label: "费用", value: "$25 / 10s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "3x2 127mm/50"},
@@ -1916,8 +1916,8 @@
       {label: "吨位", value: "3190"},
       {label: "速度", value: "36 节"},
       {label: "费用", value: "$31 / 12s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "5x1 127mm/45"},
@@ -1944,8 +1944,8 @@
       {label: "吨位", value: "2200"},
       {label: "速度", value: "36 节"},
       {label: "费用", value: "$22 / 10s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "5x1 120mm/45"},
@@ -1962,8 +1962,8 @@
       {label: "吨位", value: "3100"},
       {label: "速度", value: "35 节"},
       {label: "费用", value: "$20 / 10s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-40%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "3x1 120mm/45"},
@@ -1980,8 +1980,8 @@
       {label: "吨位", value: "1810"},
       {label: "速度", value: "35 节"},
       {label: "费用", value: "$12 / 7s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-50%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "4x1 120mm/45"},
@@ -2005,8 +2005,8 @@
       {label: "吨位", value: "3230"},
       {label: "速度", value: "38.5 节"},
       {label: "费用", value: "$30 / 13s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "-40%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "2x2 130mm/58"},
@@ -2033,8 +2033,8 @@
       {label: "吨位", value: "48"},
       {label: "速度", value: "41 节"},
       {label: "费用", value: "$5 / 3s"},
-      {label: "水平装甲", value: "-30%"},
-      {label: "垂直装甲", value: "-100%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "1x1 40mm/60"},
@@ -2062,8 +2062,8 @@
       {label: "吨位", value: "18"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$3 / 3s"},
-      {label: "水平装甲", value: "-30%"},
-      {label: "垂直装甲", value: "-100%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "1x1 13mm"},
@@ -2090,8 +2090,8 @@
       {label: "吨位", value: "95"},
       {label: "速度", value: "43 节"},
       {label: "费用", value: "$7 / 6s"},
-      {label: "水平装甲", value: "-20%"},
-      {label: "垂直装甲", value: "-100%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "1x1 37mm/57"},
@@ -2119,8 +2119,8 @@
       {label: "吨位", value: "45"},
       {label: "速度", value: "39 节"},
       {label: "费用", value: "$4 / 4s"},
-      {label: "水平装甲", value: "-30%"},
-      {label: "垂直装甲", value: "-100%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "1x2 1910mm"},
@@ -2147,8 +2147,8 @@
       {label: "吨位", value: "66"},
       {label: "速度", value: "45 节"},
       {label: "费用", value: "$5 / 4s"},
-      {label: "水平装甲", value: "-25%"},
-      {label: "垂直装甲", value: "-100%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "主炮", value: "2x2 25mm/65"},
@@ -2175,8 +2175,8 @@
       {label: "吨位", value: "70473"},
       {label: "速度", value: "17 节"},
       {label: "费用", value: "$520 / 50s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "武装", value: "无固定武装"},
@@ -2197,8 +2197,8 @@
       {label: "吨位", value: "14300"},
       {label: "速度", value: "20 节"},
       {label: "费用", value: "$200 / 20s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "武装", value: "无固定武装"},
@@ -2223,8 +2223,8 @@
       {label: "吨位", value: "53848"},
       {label: "速度", value: "24 节"},
       {label: "费用", value: "$420 / 45s"},
-      {label: "水平装甲", value: "0%"},
-      {label: "垂直装甲", value: "0%"}
+      {label: "水平减伤", value: "0%"},
+      {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
       {label: "武装", value: "无固定武装"},
