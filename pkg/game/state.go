@@ -11,6 +11,7 @@ import (
 type objStates struct {
 	MenuButton       *menuButtonStates
 	LoadingInterface *loadingInterface
+	MissionSelectUI  *missionSelectUI
 	RefLinks         []*refLink
 }
 
@@ -44,7 +45,7 @@ type menuButton struct {
 	Height float64
 }
 
-// 根据菜单按钮文本 & 字体尺寸，自动计算位置等信息
+// AutoUpdateMenuButtonStates 根据菜单按钮文本 & 字体尺寸，自动计算位置等信息
 func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
 	for idx, button := range []*menuButton{
@@ -63,6 +64,18 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 // 任务加载界面
 type loadingInterface struct {
 	Ready bool
+}
+
+// 关卡选择界面 UI
+type missionSelectUI struct {
+	LeftArrow   clickableArea
+	RightArrow  clickableArea
+	StartButton clickableArea
+	BackButton  clickableArea
+}
+
+type clickableArea struct {
+	X, Y, W, H float64
 }
 
 // 引用链接

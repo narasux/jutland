@@ -37,18 +37,18 @@ type reinforceUIPanel struct {
 }
 
 var (
-	reinforcePanelFill    = color.RGBA{9, 24, 29, 212}
-	reinforcePreviewFill  = color.RGBA{222, 218, 204, 238}
-	reinforceMapFill      = color.RGBA{8, 22, 27, 172}
-	reinforcePanelBorder  = color.RGBA{105, 124, 128, 198}
-	reinforceText         = color.RGBA{226, 233, 231, 255}
-	reinforceMutedText    = color.RGBA{172, 185, 186, 255}
-	reinforceAccent       = color.RGBA{122, 165, 178, 255}
-	reinforceAccentMuted  = color.RGBA{91, 123, 132, 255}
-	reinforceCardFill     = color.RGBA{18, 38, 45, 210}
-	reinforceCardActive   = color.RGBA{28, 57, 66, 228}
-	reinforceProgressBase = color.RGBA{61, 77, 80, 255}
-	reinforceProgressFill = color.RGBA{107, 151, 166, 255}
+	reinforcePanelFill    = color.RGBA{R: 9, G: 24, B: 29, A: 212}
+	reinforcePreviewFill  = color.RGBA{R: 222, G: 218, B: 204, A: 238}
+	reinforceMapFill      = color.RGBA{R: 8, G: 22, B: 27, A: 172}
+	reinforcePanelBorder  = color.RGBA{R: 105, G: 124, B: 128, A: 198}
+	reinforceText         = color.RGBA{R: 226, G: 233, B: 231, A: 255}
+	reinforceMutedText    = color.RGBA{R: 172, G: 185, B: 186, A: 255}
+	reinforceAccent       = color.RGBA{R: 122, G: 165, B: 178, A: 255}
+	reinforceAccentMuted  = color.RGBA{R: 91, G: 123, B: 132, A: 255}
+	reinforceCardFill     = color.RGBA{R: 18, G: 38, B: 45, A: 210}
+	reinforceCardActive   = color.RGBA{R: 28, G: 57, B: 66, A: 228}
+	reinforceProgressBase = color.RGBA{R: 61, G: 77, B: 80, A: 255}
+	reinforceProgressFill = color.RGBA{R: 107, G: 151, B: 166, A: 255}
 )
 
 // drawBuildingsInCamera 绘制镜头范围内的建筑对象和建筑状态。
@@ -132,7 +132,7 @@ func (d *Drawer) drawBuildingBackground(screen *ebiten.Image, ms *state.MissionS
 	screen.DrawImage(windowImg, opts)
 	vector.FillRect(
 		screen, 0, 0, float32(ms.Layout.Width), float32(ms.Layout.Height),
-		color.RGBA{3, 12, 16, 116}, false,
+		color.RGBA{R: 3, G: 12, B: 16, A: 116}, false,
 	)
 }
 
@@ -252,19 +252,40 @@ func (d *Drawer) drawReinforceShipInfo(
 	archiveW := panel.W * 0.43
 	armamentW := panel.W - archiveW - cardGap
 	archiveCard := reinforceUIPanel{X: panel.X + cardInsetX, Y: cardY, W: archiveW - cardInsetX, H: cardH}
-	armamentCard := reinforceUIPanel{X: archiveCard.X + archiveCard.W + cardGap, Y: cardY, W: armamentW - cardInsetX, H: cardH}
+	armamentCard := reinforceUIPanel{
+		X: archiveCard.X + archiveCard.W + cardGap,
+		Y: cardY,
+		W: armamentW - cardInsetX,
+		H: cardH,
+	}
 
 	d.drawReinforceInfoCard(screen, archiveCard, "舰船档案")
 	d.drawReinforceInfoCard(screen, armamentCard, "武装配置")
 
 	indexText := fmt.Sprintf("%d/%d", shipIndex, shipCount)
-	d.drawText(screen, indexText, archiveCard.X+archiveCard.W-76, archiveCard.Y+18, 18, font.JetbrainsMono, reinforceMutedText)
+	d.drawText(
+		screen,
+		indexText,
+		archiveCard.X+archiveCard.W-76,
+		archiveCard.Y+18,
+		18,
+		font.JetbrainsMono,
+		reinforceMutedText,
+	)
 
 	titleFontSize := float64(34)
 	if len(objUnit.GetShipDisplayName(selectedShipName)) > 6 {
 		titleFontSize = 30
 	}
-	d.drawText(screen, objUnit.GetShipDisplayName(selectedShipName), archiveCard.X+24, archiveCard.Y+58, titleFontSize, font.Hang, reinforceText)
+	d.drawText(
+		screen,
+		objUnit.GetShipDisplayName(selectedShipName),
+		archiveCard.X+24,
+		archiveCard.Y+58,
+		titleFontSize,
+		font.Hang,
+		reinforceText,
+	)
 
 	if ship != nil {
 		items := []struct {
@@ -290,7 +311,15 @@ func (d *Drawer) drawReinforceShipInfo(
 				break
 			}
 			line := fmt.Sprintf("%s：%s", armament.Label, armament.Value)
-			d.drawText(screen, line, armamentCard.X+24, armamentCard.Y+58+float64(drawn)*32, 20, font.Kai, reinforceText)
+			d.drawText(
+				screen,
+				line,
+				armamentCard.X+24,
+				armamentCard.Y+58+float64(drawn)*32,
+				20,
+				font.Kai,
+				reinforceText,
+			)
 			drawn++
 		}
 	}
@@ -298,8 +327,25 @@ func (d *Drawer) drawReinforceShipInfo(
 
 // drawReinforceInfoCard 绘制增援控制台内统一样式的信息卡。
 func (d *Drawer) drawReinforceInfoCard(screen *ebiten.Image, panel reinforceUIPanel, title string) {
-	vector.FillRect(screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H), color.RGBA{12, 28, 34, 178}, false)
-	vector.StrokeRect(screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H), 1.5, reinforcePanelBorder, false)
+	vector.FillRect(
+		screen,
+		float32(panel.X),
+		float32(panel.Y),
+		float32(panel.W),
+		float32(panel.H),
+		color.RGBA{R: 12, G: 28, B: 34, A: 178},
+		false,
+	)
+	vector.StrokeRect(
+		screen,
+		float32(panel.X),
+		float32(panel.Y),
+		float32(panel.W),
+		float32(panel.H),
+		1.5,
+		reinforcePanelBorder,
+		false,
+	)
 	d.drawText(screen, title, panel.X+20, panel.Y+16, 20, font.Kai, reinforceAccent)
 	vector.StrokeLine(
 		screen,
@@ -339,7 +385,15 @@ func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.O
 		d.drawQueueCard(screen, ships[idx], x, y, cardW, cardH, idx == 0)
 	}
 	if len(ships) > maxItems {
-		d.drawText(screen, fmt.Sprintf("+%d", len(ships)-maxItems), card.X+card.W-42, card.Y+card.H-24, 18, font.JetbrainsMono, reinforceMutedText)
+		d.drawText(
+			screen,
+			fmt.Sprintf("+%d", len(ships)-maxItems),
+			card.X+card.W-42,
+			card.Y+card.H-24,
+			18,
+			font.JetbrainsMono,
+			reinforceMutedText,
+		)
 	}
 }
 
@@ -358,11 +412,27 @@ func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingS
 		progress := max(0, min(100, ship.Progress))
 		barX, barY, barW := x+12, y+h-16, w-24
 		vector.FillRect(screen, float32(barX), float32(barY), float32(barW), 5, reinforceProgressBase, false)
-		vector.FillRect(screen, float32(barX), float32(barY), float32(barW*progress/100), 5, reinforceProgressFill, false)
+		vector.FillRect(
+			screen,
+			float32(barX),
+			float32(barY),
+			float32(barW*progress/100),
+			5,
+			reinforceProgressFill,
+			false,
+		)
 		d.drawText(screen, fmt.Sprintf("%.0f%%", progress), x+w-58, y+12, 16, font.JetbrainsMono, reinforceAccent)
 		return
 	}
-	d.drawText(screen, fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost), x+12, y+34, 15, font.JetbrainsMono, reinforceMutedText)
+	d.drawText(
+		screen,
+		fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost),
+		x+12,
+		y+34,
+		15,
+		font.JetbrainsMono,
+		reinforceMutedText,
+	)
 }
 
 // calcReinforceQueueMaxItems 根据队列面板可用高度动态计算最多可展示的卡片数量。

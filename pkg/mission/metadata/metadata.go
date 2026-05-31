@@ -1,6 +1,8 @@
 package metadata
 
 import (
+	"sort"
+
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -8,7 +10,7 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
-// 任务元配置
+// MissionMetadata 任务元配置
 type MissionMetadata struct {
 	Name        string
 	DisplayName string
@@ -20,7 +22,14 @@ type MissionMetadata struct {
 	// 初始位置
 	InitCameraPos objPos.MapPos
 	// 关卡描述
-	Description []string
+	Description string
+	// 统计信息（加载时计算）
+	AllyShipCount       int // 我方初始舰船数
+	EnemyShipCount      int // 敌方初始舰船数
+	AllyReinforceCount  int // 我方增援点数量
+	EnemyReinforceCount int // 敌方增援点数量
+	OilPlatformCount    int // 油井数量
+	TotalReinforceSlots int // 全部增援槽位总数
 	// 初始战舰
 	InitShips []InitShipMetadata
 	// 初始增援点
@@ -63,5 +72,7 @@ func Get(mission string) MissionMetadata {
 
 // AvailableMissions 获取可用任务列表
 func AvailableMissions() []string {
-	return lo.Keys(missionMetadata)
+	keys := lo.Keys(missionMetadata)
+	sort.Strings(keys)
+	return keys
 }

@@ -18,9 +18,7 @@ import (
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
-var (
-	colorPanelBg = color.RGBA{R: 48, G: 40, B: 30, A: 100} // 半透明深色面板
-)
+var colorPanelBg = color.RGBA{R: 48, G: 40, B: 30, A: 100} // 半透明深色面板
 
 // 文字尺寸
 const (
@@ -130,7 +128,7 @@ func (s *UI) buildUI() {
 	}
 	normalBtnTextColor := &widget.ButtonTextColor{
 		Idle:     colorx.White,
-		Disabled: color.RGBA{120, 110, 100, 255},
+		Disabled: color.RGBA{R: 120, G: 110, B: 100, A: 255},
 		Hover:    colorx.Gold,
 		Pressed:  colorx.DarkSilver,
 	}
@@ -143,7 +141,7 @@ func (s *UI) buildUI() {
 	}
 	selectedBtnTextColor := &widget.ButtonTextColor{
 		Idle:     colorx.Black,
-		Disabled: color.RGBA{120, 110, 100, 255},
+		Disabled: color.RGBA{R: 120, G: 110, B: 100, A: 255},
 		Hover:    colorx.Black,
 		Pressed:  colorx.Black,
 	}

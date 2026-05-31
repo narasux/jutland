@@ -7,47 +7,47 @@ import (
 
 var (
 	// Red 红色
-	Red = color.RGBA{255, 0, 0, 255}
+	Red = color.RGBA{R: 255, A: 255}
 	// DarkRed 暗红
-	DarkRed = color.RGBA{139, 0, 0, 255}
+	DarkRed = color.RGBA{R: 139, A: 255}
 	// Green 绿色
-	Green = color.RGBA{0, 255, 0, 255}
+	Green = color.RGBA{G: 255, A: 255}
 	// Blue 蓝色
-	Blue = color.RGBA{0, 0, 255, 255}
+	Blue = color.RGBA{B: 255, A: 255}
 	// SkyBlue 天蓝
-	SkyBlue = color.RGBA{135, 206, 235, 255}
+	SkyBlue = color.RGBA{R: 135, G: 206, B: 235, A: 255}
 	// DarkBlue 暗蓝
-	DarkBlue = color.RGBA{0, 0, 139, 255}
+	DarkBlue = color.RGBA{B: 139, A: 255}
 	// Yellow 黄色
-	Yellow = color.RGBA{255, 255, 0, 255}
+	Yellow = color.RGBA{R: 255, G: 255, A: 255}
 	// Black 黑色
-	Black = color.RGBA{0, 0, 0, 255}
+	Black = color.RGBA{A: 255}
 	// White 白色
-	White = color.RGBA{255, 255, 255, 255}
+	White = color.RGBA{R: 255, G: 255, B: 255, A: 255}
 	// Gray 灰色
-	Gray = color.RGBA{128, 128, 128, 255}
+	Gray = color.RGBA{R: 128, G: 128, B: 128, A: 255}
 	// Cyan 青色
-	Cyan = color.RGBA{0, 255, 255, 255}
+	Cyan = color.RGBA{G: 255, B: 255, A: 255}
 	// Magenta 洋红
-	Magenta = color.RGBA{255, 0, 255, 255}
+	Magenta = color.RGBA{R: 255, B: 255, A: 255}
 	// Orange 橙色
-	Orange = color.RGBA{255, 165, 0, 255}
+	Orange = color.RGBA{R: 255, G: 165, A: 255}
 	// Brown 棕色
-	Brown = color.RGBA{165, 42, 42, 255}
+	Brown = color.RGBA{R: 165, G: 42, B: 42, A: 255}
 	// Pink 粉色
-	Pink = color.RGBA{255, 192, 203, 255}
+	Pink = color.RGBA{R: 255, G: 192, B: 203, A: 255}
 	// Purple 紫色
-	Purple = color.RGBA{128, 0, 128, 255}
+	Purple = color.RGBA{R: 128, B: 128, A: 255}
 	// Violet 紫罗兰
-	Violet = color.RGBA{238, 130, 238, 255}
+	Violet = color.RGBA{R: 238, G: 130, B: 238, A: 255}
 	// Gold 金色
-	Gold = color.RGBA{255, 215, 0, 255}
+	Gold = color.RGBA{R: 255, G: 215, A: 255}
 	// Silver 银色
-	Silver = color.RGBA{192, 192, 192, 255}
+	Silver = color.RGBA{R: 192, G: 192, B: 192, A: 255}
 	// DarkSilver 暗银
-	DarkSilver = color.RGBA{105, 105, 105, 255}
+	DarkSilver = color.RGBA{R: 105, G: 105, B: 105, A: 255}
 	// LightGreen 浅绿色（半透明，用于医疗船治疗范围圈）
-	LightGreen = color.RGBA{144, 238, 144, 100}
+	LightGreen = color.RGBA{R: 144, G: 238, B: 144, A: 100}
 )
 
 var clrMap = map[string]color.Color{

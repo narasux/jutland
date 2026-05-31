@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"image"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -16,7 +17,6 @@ import (
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
-	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 	"github.com/narasux/jutland/pkg/utils/layout"
@@ -61,56 +61,190 @@ func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 
 func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
 	misLayout := layout.NewScreenLayout()
+	screenW, screenH := float64(misLayout.Width), float64(misLayout.Height)
 	abbrMap := d.getAbbrMap(curMission)
+
+	// 暖色系（参照图鉴卡片）
+	titleClr := color.RGBA{R: 240, G: 232, B: 218, A: 255}
+	subtitleClr := color.RGBA{R: 175, G: 165, B: 150, A: 255}
+	labelClr := color.RGBA{R: 214, G: 201, B: 178, A: 255}
+	bodyClr := color.RGBA{R: 224, G: 210, B: 188, A: 255}
+	cardFillClr := color.RGBA{R: 18, G: 18, B: 18, A: 172}
+	cardBorderClr := color.RGBA{R: 214, G: 201, B: 178, A: 190}
 
 	window := bgImg.MissionWindow
 	windowWidth, windowHeight := window.Bounds().Dx(), window.Bounds().Dy()
-	abbrMapWidth, abbrMapHeight := abbrMap.Bounds().Dx(), abbrMap.Bounds().Dy()
-
 	opts := d.genDefaultDrawImageOptions()
-	opts.GeoM.Scale(float64(misLayout.Width)/float64(windowWidth), float64(misLayout.Height)/float64(windowHeight))
+	opts.GeoM.Scale(screenW/float64(windowWidth), screenH/float64(windowHeight))
 	screen.DrawImage(window, opts)
 
+	// 缩略地图（左侧）
+	abbrX, abbrY := 50.0, 45.0
+	abbrDisplaySize := min(screenW*0.48, screenH-130)
+	abbrSrcW, abbrSrcH := float64(abbrMap.Bounds().Dx()), float64(abbrMap.Bounds().Dy())
+	abbrScale := abbrDisplaySize / abbrSrcW
+	abbrH := abbrSrcH * abbrScale
+
 	opts = d.genDefaultDrawImageOptions()
-	opts.GeoM.Translate(50, 50)
+	opts.GeoM.Scale(abbrScale, abbrScale)
+	opts.GeoM.Translate(abbrX, abbrY)
 	screen.DrawImage(abbrMap, opts)
-	// 缩略地图添加银色边框
+
+	// 地图银色边框
 	strokeWidth := float32(4)
 	vector.StrokeRect(
 		screen,
-		float32(50), float32(50)+strokeWidth, float32(abbrMapWidth),
-		float32(abbrMapHeight)-2*strokeWidth, strokeWidth,
-		colorx.Silver, false,
+		float32(abbrX), float32(abbrY)+strokeWidth,
+		float32(abbrDisplaySize), float32(abbrH)-2*strokeWidth,
+		strokeWidth, colorx.Silver, false,
 	)
 
-	// 关卡名称，描述，配置等
+	// 右侧详情卡片（与地图等高）
 	misMD := metadata.Get(curMission)
-	xOffset, yOffset := float64(abbrMapWidth+120), float64(120)
-	d.drawText(screen, misMD.DisplayName, xOffset, yOffset, 40, font.Hang, colorx.White)
+	cardGap := 60.0
+	cardX := abbrX + abbrDisplaySize + cardGap
+	cardY := abbrY
+	cardW := screenW - cardX - 50
+	cardH := abbrH
 
-	yOffset += 80
-	for idx, line := range misMD.Description {
-		d.drawText(screen, line, xOffset, yOffset+float64(idx)*50, 24, font.Hang, colorx.White)
+	// 卡片背景 + 边框（与图鉴卡片一致）
+	vector.FillRect(
+		screen,
+		float32(cardX), float32(cardY), float32(cardW), float32(cardH),
+		cardFillClr, false,
+	)
+	vector.StrokeRect(
+		screen,
+		float32(cardX), float32(cardY), float32(cardW), float32(cardH),
+		2, cardBorderClr, false,
+	)
+
+	// 卡片内边距
+	pad := 28.0
+	panelX := cardX + pad
+	curY := cardY + 32.0
+
+	d.drawText(screen, misMD.DisplayName, panelX, curY, 36, font.Hang, titleClr)
+
+	curY += 50
+	d.drawText(screen, misMD.MapCfg.DisplayName, panelX, curY, 20, font.Kai, subtitleClr)
+
+	// 标题分隔线
+	curY += 32
+	vector.StrokeLine(
+		screen,
+		float32(panelX), float32(curY),
+		float32(cardX+cardW-pad), float32(curY),
+		1, color.RGBA{R: 214, G: 201, B: 178, A: 120}, false,
+	)
+
+	curY += 22
+	// 数据行
+	dataLine := fmt.Sprintf(
+		"初始资金 %d  |  舰队上限 %d  |  油井 %d",
+		misMD.InitFunds, misMD.MaxShipCount, misMD.OilPlatformCount,
+	)
+	d.drawText(screen, dataLine, panelX, curY, 19, font.Kai, labelClr)
+
+	curY += 32
+	// 战力对比
+	battleLine := fmt.Sprintf(
+		"我方 %d 舰  vs  敌方 %d 舰  |  我方增援点 %d  敌方增援点 %d",
+		misMD.AllyShipCount, misMD.EnemyShipCount,
+		misMD.AllyReinforceCount, misMD.EnemyReinforceCount,
+	)
+	d.drawText(screen, battleLine, panelX, curY, 19, font.Kai, bodyClr)
+
+	curY += 42
+	// 描述区
+	descFontSize := 18.0
+	descLineHeight := 28.0
+	descMaxWidth := cardW - 2*pad
+	for idx, line := range wrapCollectionText(misMD.Description, descMaxWidth, descFontSize) {
+		d.drawText(screen, line, panelX, curY+float64(idx)*descLineHeight, descFontSize, font.Kai, bodyClr)
 	}
 
-	// 方向键 + 提示
-	x, y := float64(misLayout.Width)-300, float64(misLayout.Height)-300
-	drawArrowKey := func(xOffset, yOffset, rotation float64) {
-		opts = d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, textureImg.ArrowKey, rotation)
-		opts.GeoM.Translate(x+xOffset, y+yOffset)
-		screen.DrawImage(textureImg.ArrowKey, opts)
+	// 底部控件（卡片下方）
+	arrowSize := 36.0
+	buttonW := 150.0
+	buttonH := 40.0
+	controlY := screenH - 95
+
+	// 左箭头
+	leftX := screenW*0.38 - arrowSize/2
+	leftArrow := clickableArea{X: leftX, Y: controlY - arrowSize/2, W: arrowSize, H: arrowSize}
+	leftColor := colorx.Gray
+	if isHoverArea(leftArrow) {
+		leftColor = colorx.SkyBlue
 	}
-	drawArrowKey(45, 90, 90)
-	drawArrowKey(-45, 90, 270)
+	d.drawText(screen, "<", leftX+4, controlY-4, 36, font.Hang, leftColor)
 
-	d.drawText(screen, "选择", x+15, y+200, 24, font.Hang, colorx.White)
+	// 右箭头
+	rightX := screenW*0.62 - arrowSize/2
+	rightArrow := clickableArea{X: rightX, Y: controlY - arrowSize/2, W: arrowSize, H: arrowSize}
+	rightColor := colorx.Gray
+	if isHoverArea(rightArrow) {
+		rightColor = colorx.SkyBlue
+	}
+	d.drawText(screen, ">", rightX+4, controlY-4, 36, font.Hang, rightColor)
 
-	opts = d.genDefaultDrawImageOptions()
-	opts.GeoM.Translate(x+145, y+80)
-	screen.DrawImage(textureImg.EnterKey, opts)
+	// 关卡索引
+	missions := metadata.AvailableMissions()
+	for i, m := range missions {
+		if m == curMission {
+			idxText := fmt.Sprintf("%d / %d", i+1, len(missions))
+			idxW := layout.CalcTextWidth(idxText, 18)
+			d.drawText(screen, idxText, screenW/2-idxW/2, controlY-16, 18, font.Kai, subtitleClr)
+		}
+	}
 
-	d.drawText(screen, "确定", x+145, y+200, 24, font.Hang, colorx.White)
+	// 开始任务按钮
+	startX := screenW/2 - buttonW - 28
+	startY := controlY + 40
+	startBtn := clickableArea{X: startX, Y: startY, W: buttonW, H: buttonH}
+	startColor := bodyClr
+	borderColor := subtitleClr
+	if isHoverArea(startBtn) {
+		startColor = colorx.White
+		borderColor = colorx.SkyBlue
+	}
+	vector.StrokeRect(
+		screen,
+		float32(startX),
+		float32(startY),
+		float32(buttonW),
+		float32(buttonH),
+		1,
+		borderColor,
+		false,
+	)
+	startText := "开始任务"
+	startTW := layout.CalcTextWidth(startText, 22)
+	d.drawText(screen, startText, startX+(buttonW-startTW)/2, startY+10, 22, font.Hang, startColor)
+
+	// 返回按钮
+	backX := screenW/2 + 28
+	backY := startY
+	backBtn := clickableArea{X: backX, Y: backY, W: buttonW, H: buttonH}
+	backColor := bodyClr
+	backBorderColor := subtitleClr
+	if isHoverArea(backBtn) {
+		backColor = colorx.White
+		backBorderColor = colorx.SkyBlue
+	}
+	vector.StrokeRect(
+		screen,
+		float32(backX),
+		float32(backY),
+		float32(buttonW),
+		float32(buttonH),
+		1,
+		backBorderColor,
+		false,
+	)
+	backText := "返回"
+	backTW := layout.CalcTextWidth(backText, 22)
+	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, font.Hang, backColor)
 }
 
 func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
@@ -233,16 +367,16 @@ func (d *Drawer) drawCollectionInfoCards(
 func (d *Drawer) drawCollectionCard(screen *ebiten.Image, card collectionCard, title string) {
 	vector.FillRect(
 		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
-		color.RGBA{18, 18, 18, 172}, false,
+		color.RGBA{R: 18, G: 18, B: 18, A: 172}, false,
 	)
 	vector.StrokeRect(
 		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
-		2, color.RGBA{214, 201, 178, 190}, false,
+		2, color.RGBA{R: 214, G: 201, B: 178, A: 190}, false,
 	)
-	d.drawText(screen, title, card.X+20, card.Y+18, 20, font.Kai, color.RGBA{230, 218, 194, 255})
+	d.drawText(screen, title, card.X+20, card.Y+18, 20, font.Kai, color.RGBA{R: 230, G: 218, B: 194, A: 255})
 	vector.StrokeLine(
 		screen, float32(card.X+20), float32(card.Y+44), float32(card.X+card.W-20), float32(card.Y+44),
-		1, color.RGBA{214, 201, 178, 120}, false,
+		1, color.RGBA{R: 214, G: 201, B: 178, A: 120}, false,
 	)
 }
 
@@ -264,7 +398,7 @@ func (d *Drawer) drawCollectionInfoItems(
 	drawn := 0
 	for _, item := range items {
 		lineY := y + float64(drawn)*lineHeight
-		d.drawText(screen, item.Label, x, lineY, 20, font.Kai, color.RGBA{214, 201, 178, 255})
+		d.drawText(screen, item.Label, x, lineY, 20, font.Kai, color.RGBA{R: 214, G: 201, B: 178, A: 255})
 
 		valueFont := font.Kai
 		wrappedValues := wrapCollectionText(item.Value, valueMaxWidth, 20)
@@ -430,5 +564,43 @@ func (d *Drawer) genDefaultDrawImageOptions() *ebiten.DrawImageOptions {
 	return &ebiten.DrawImageOptions{
 		// 线性过滤：通过计算周围像素的加权平均值来进行插值，可使得边缘 & 色彩转换更加自然
 		Filter: ebiten.FilterLinear,
+	}
+}
+
+// isHoverArea 判定鼠标是否在可点击区域内
+func isHoverArea(area clickableArea) bool {
+	r := image.Rectangle{
+		Min: image.Point{X: int(area.X), Y: int(area.Y)},
+		Max: image.Point{X: int(area.X + area.W), Y: int(area.Y + area.H)},
+	}
+	return image.Pt(ebiten.CursorPosition()).In(r)
+}
+
+// updateMissionSelectUI 根据当前屏幕尺寸更新关卡选择 UI 控件位置
+func (g *Game) updateMissionSelectUI() {
+	misLayout := layout.NewScreenLayout()
+	screenW, screenH := float64(misLayout.Width), float64(misLayout.Height)
+
+	arrowSize := 36.0
+	buttonW, buttonH := 150.0, 40.0
+	controlY := screenH - 95
+
+	g.objStates.MissionSelectUI = &missionSelectUI{
+		LeftArrow: clickableArea{
+			X: screenW*0.38 - arrowSize/2, Y: controlY - arrowSize/2,
+			W: arrowSize, H: arrowSize,
+		},
+		RightArrow: clickableArea{
+			X: screenW*0.62 - arrowSize/2, Y: controlY - arrowSize/2,
+			W: arrowSize, H: arrowSize,
+		},
+		StartButton: clickableArea{
+			X: screenW/2 - buttonW - 28, Y: controlY + 40,
+			W: buttonW, H: buttonH,
+		},
+		BackButton: clickableArea{
+			X: screenW/2 + 28, Y: controlY + 40,
+			W: buttonW, H: buttonH,
+		},
 	}
 }

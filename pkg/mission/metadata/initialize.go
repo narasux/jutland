@@ -21,7 +21,7 @@ type rawMissionMetadata struct {
 	InitCameraPos       [2]int                          `json:"initCameraPos"`
 	MapName             string                          `json:"mapName"`
 	MaxShipCount        int                             `json:"maxShipCount"`
-	Description         []string                        `json:"description"`
+	Description         string                          `json:"description"`
 	InitShips           []rawInitShipMetadata           `json:"initShips"`
 	InitReinforcePoints []rawInitReinforcePointMetadata `json:"initReinforcePoints"`
 	InitOilPlatforms    []rawInitOilPlatformMetadata    `json:"initOilPlatforms"`
@@ -47,6 +47,11 @@ type rawInitOilPlatformMetadata struct {
 	Pos    [2]int `json:"pos"`
 	Radius int    `json:"radius"`
 	Yield  int    `json:"yield"`
+}
+
+// isAllyPlayer 判定是否为友方玩家
+func isAllyPlayer(p faction.Player) bool {
+	return p == faction.HumanAlpha || p == faction.HumanBeta
 }
 
 func init() {
@@ -97,6 +102,24 @@ func init() {
 				Yield:  opMD.Yield,
 			})
 		}
+		// 统计计算
+		allyShips, enemyShips := 0, 0
+		for _, s := range initShips {
+			if isAllyPlayer(s.BelongPlayer) {
+				allyShips++
+			} else {
+				enemyShips++
+			}
+		}
+		allyReinforce, enemyReinforce, totalSlots := 0, 0, 0
+		for _, rp := range initReinforcePoints {
+			if isAllyPlayer(rp.BelongPlayer) {
+				allyReinforce++
+			} else {
+				enemyReinforce++
+			}
+			totalSlots += rp.MaxOncomingShip
+		}
 		// 元数据
 		missionMetadata[md.Name] = MissionMetadata{
 			Name:                md.Name,
@@ -106,6 +129,12 @@ func init() {
 			InitCameraPos:       objPos.New(md.InitCameraPos[0], md.InitCameraPos[1]),
 			MapCfg:              mapcfg.GetByName(md.MapName),
 			Description:         md.Description,
+			AllyShipCount:       allyShips,
+			EnemyShipCount:      enemyShips,
+			AllyReinforceCount:  allyReinforce,
+			EnemyReinforceCount: enemyReinforce,
+			OilPlatformCount:    len(initOilPlatforms),
+			TotalReinforceSlots: totalSlots,
 			InitShips:           initShips,
 			InitReinforcePoints: initReinforcePoints,
 			InitOilPlatforms:    initOilPlatforms,

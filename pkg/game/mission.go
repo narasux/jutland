@@ -19,21 +19,50 @@ func (g *Game) handleMissionSelect() error {
 	missions := metadata.AvailableMissions()
 	curIndex := lo.IndexOf(missions, g.curMission)
 
+	// 更新 UI 控件位置
+	g.updateMissionSelectUI()
+	ui := g.objStates.MissionSelectUI
+
 	// 左右方向键选择关卡
 	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) ||
-		inpututil.IsKeyJustReleased(ebiten.KeyArrowUp) {
+		inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
 		curIndex--
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) ||
-		inpututil.IsKeyJustReleased(ebiten.KeyArrowDown) {
+		inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
 		curIndex++
 	}
+
+	// 鼠标滚轮切换
+	_, wheelY := ebiten.Wheel()
+	if wheelY > 0 {
+		curIndex--
+	} else if wheelY < 0 {
+		curIndex++
+	}
+
+	// 鼠标点击左右箭头
+	if ui != nil {
+		if isHoverArea(ui.LeftArrow) && isMouseButtonLeftJustPressed() {
+			curIndex--
+		}
+		if isHoverArea(ui.RightArrow) && isMouseButtonLeftJustPressed() {
+			curIndex++
+		}
+	}
+
 	curIndex = (curIndex + len(missions)) % len(missions)
 	g.curMission = missions[curIndex]
 
+	// 确定：Enter 键或点击「开始任务」
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		g.mode = GameModeMissionLoading
 		g.player.Close()
+	} else if ui != nil && isHoverArea(ui.StartButton) && isMouseButtonLeftJustPressed() {
+		g.mode = GameModeMissionLoading
+		g.player.Close()
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		g.mode = GameModeMenuSelect
+	} else if ui != nil && isHoverArea(ui.BackButton) && isMouseButtonLeftJustPressed() {
 		g.mode = GameModeMenuSelect
 	}
 	return nil
