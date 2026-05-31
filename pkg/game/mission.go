@@ -19,8 +19,6 @@ func (g *Game) handleMissionSelect() error {
 	missions := metadata.AvailableMissions()
 	curIndex := lo.IndexOf(missions, g.curMission)
 
-	// 更新 UI 控件位置
-	g.updateMissionSelectUI()
 	ui := g.objStates.MissionSelectUI
 
 	// 左右方向键选择关卡

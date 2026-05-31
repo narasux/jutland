@@ -59,9 +59,8 @@ func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 	screen.DrawImage(bg, opts)
 }
 
-func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
-	misLayout := layout.NewScreenLayout()
-	screenW, screenH := float64(misLayout.Width), float64(misLayout.Height)
+func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, states *objStates) {
+	screenW, screenH := float64(screen.Bounds().Dx()), float64(screen.Bounds().Dy())
 	abbrMap := d.getAbbrMap(curMission)
 
 	// 暖色系（参照图鉴卡片）
@@ -177,7 +176,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
 	if isHoverArea(leftArrow) {
 		leftColor = colorx.SkyBlue
 	}
-	d.drawText(screen, "<", leftX+4, controlY-4, 36, font.Hang, leftColor)
+	d.drawText(screen, "<", leftX+4, controlY-12, 36, font.Hang, leftColor)
 
 	// 右箭头
 	rightX := screenW*0.62 - arrowSize/2
@@ -186,7 +185,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
 	if isHoverArea(rightArrow) {
 		rightColor = colorx.SkyBlue
 	}
-	d.drawText(screen, ">", rightX+4, controlY-4, 36, font.Hang, rightColor)
+	d.drawText(screen, ">", rightX+4, controlY-12, 36, font.Hang, rightColor)
 
 	// 关卡索引
 	missions := metadata.AvailableMissions()
@@ -194,7 +193,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
 		if m == curMission {
 			idxText := fmt.Sprintf("%d / %d", i+1, len(missions))
 			idxW := layout.CalcTextWidth(idxText, 18)
-			d.drawText(screen, idxText, screenW/2-idxW/2, controlY-16, 18, font.Kai, subtitleClr)
+			d.drawText(screen, idxText, screenW/2-idxW/2, controlY-4, 22, font.Kai, subtitleClr)
 		}
 	}
 
@@ -245,6 +244,16 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string) {
 	backText := "返回"
 	backTW := layout.CalcTextWidth(backText, 22)
 	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, font.Hang, backColor)
+
+	// 同步 UI 点击热区（基于实际屏幕尺寸，避免与 ebiten.WindowSize() 不一致）
+	if states != nil {
+		states.MissionSelectUI = &missionSelectUI{
+			LeftArrow:   leftArrow,
+			RightArrow:  rightArrow,
+			StartButton: startBtn,
+			BackButton:  backBtn,
+		}
+	}
 }
 
 func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
@@ -253,9 +262,9 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 	}
 	// 初始化
 	misMD := metadata.Get(curMission)
-	misLayout := layout.NewScreenLayout()
+	_, wHeight := ebiten.WindowSize()
 
-	abbrMapSize := float64(misLayout.Height) - 2*50
+	abbrMapSize := float64(wHeight) - 2*50
 	abbrMap := ebiten.NewImage(int(abbrMapSize), int(abbrMapSize))
 
 	bg := abbrMapImg.Background
@@ -574,33 +583,4 @@ func isHoverArea(area clickableArea) bool {
 		Max: image.Point{X: int(area.X + area.W), Y: int(area.Y + area.H)},
 	}
 	return image.Pt(ebiten.CursorPosition()).In(r)
-}
-
-// updateMissionSelectUI 根据当前屏幕尺寸更新关卡选择 UI 控件位置
-func (g *Game) updateMissionSelectUI() {
-	misLayout := layout.NewScreenLayout()
-	screenW, screenH := float64(misLayout.Width), float64(misLayout.Height)
-
-	arrowSize := 36.0
-	buttonW, buttonH := 150.0, 40.0
-	controlY := screenH - 95
-
-	g.objStates.MissionSelectUI = &missionSelectUI{
-		LeftArrow: clickableArea{
-			X: screenW*0.38 - arrowSize/2, Y: controlY - arrowSize/2,
-			W: arrowSize, H: arrowSize,
-		},
-		RightArrow: clickableArea{
-			X: screenW*0.62 - arrowSize/2, Y: controlY - arrowSize/2,
-			W: arrowSize, H: arrowSize,
-		},
-		StartButton: clickableArea{
-			X: screenW/2 - buttonW - 28, Y: controlY + 40,
-			W: buttonW, H: buttonH,
-		},
-		BackButton: clickableArea{
-			X: screenW/2 + 28, Y: controlY + 40,
-			W: buttonW, H: buttonH,
-		},
-	}
 }
