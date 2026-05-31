@@ -1,0 +1,28 @@
+pkg/game/state.go
+  h_83f239dc907c66 14,48,69-78
+pkg/game/draw.go
+  h_83f239dc907c66 5,64,67-74,78,81-87,89-90,92-93,97-98,102,104-108,110-120,122-125,127,129-156,158-164,167-178,180-189,191-199,201-247,370,374,376,379,401,569-604
+pkg/mission/drawer/building.go
+  h_83f239dc907c66 40-51,135,259,273,287,321,336-337,347,395,422,434
+pkg/config/config.go
+  h_83f239dc907c66 130-131
+pkg/game/settings/ui.go
+  h_83f239dc907c66 21,131,144
+configs/missions.json5
+  h_83f239dc907c66 9,299,485,701,827
+pkg/mission/metadata/metadata.go
+  h_83f239dc907c66 4-5,13,25-32,75-77
+pkg/utils/colorx/colorx.go
+  h_83f239dc907c66 10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "4f8be6b74d0983cf4d8cde2e86616fa89be9da33",
+  "prompts": {},
+  "humans": {
+    "h_83f239dc907c66": {
+      "author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  }
+}
