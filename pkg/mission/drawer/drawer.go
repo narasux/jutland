@@ -77,7 +77,7 @@ func (d *Drawer) Draw(
 		d.drawSelectedArea(screen, misState)
 		d.drawMarks(screen, misState)
 		d.drawRallyLine(screen, misState)
-		d.drawTips(screen, misState)
+		d.drawPauseOverlay(screen, misState)
 		// 调试信息
 		d.drawDebugPrint(screen, misState)
 	}

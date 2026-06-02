@@ -702,14 +702,30 @@ func (m *MissionManager) updateMissionStatus() {
 		// 暂停游戏
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.MissionStatus = state.MissionPaused
+			m.state.ConfirmQuitMission = false
 		}
 		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
 	case state.MissionPaused:
+		input := state.PauseInputNone
 		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
-			m.state.MissionStatus = state.MissionFailed
+			input = state.PauseInputQuit
 		} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionRunning
+			input = state.PauseInputResume
+		} else if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+			sx, sy := ebiten.CursorPosition()
+			ui := state.CalcPauseUILayout(m.state.Layout)
+			if ui.PrimaryButton.Contains(sx, sy) {
+				input = state.PauseInputResume
+			} else if ui.DangerButton.Contains(sx, sy) {
+				input = state.PauseInputQuit
+			}
 		}
+		m.state.MissionStatus, m.state.ConfirmQuitMission = state.ApplyPauseInput(
+			m.state.MissionStatus,
+			m.state.ConfirmQuitMission,
+			input,
+		)
+		return
 	case state.MissionInMap:
 		// 退出全屏地图模式
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {

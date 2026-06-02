@@ -41,6 +41,8 @@ type MissionState struct {
 	Mission string
 	// 任务关卡状态
 	MissionStatus MissionStatus
+	// 是否正在确认放弃任务
+	ConfirmQuitMission bool
 	// 任务关卡元数据
 	MissionMD metadata.MissionMetadata
 	// 屏幕布局
@@ -176,10 +178,11 @@ func NewMissionState(mission string) *MissionState {
 	}
 
 	return &MissionState{
-		Mission:       mission,
-		MissionStatus: MissionRunning,
-		MissionMD:     missionMD,
-		Layout:        misLayout,
+		Mission:            mission,
+		MissionStatus:      MissionRunning,
+		ConfirmQuitMission: false,
+		MissionMD:          missionMD,
+		Layout:             misLayout,
 		Camera: Camera{
 			Pos: missionMD.InitCameraPos,
 			// 地图资源，多展示一行 & 列，避免出现黑边
