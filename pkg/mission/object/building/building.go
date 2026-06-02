@@ -67,6 +67,11 @@ func (p *ReinforcePoint) Summon(shipName string) {
 	})
 }
 
+// SetRallyPos 设置集结点
+func (p *ReinforcePoint) SetRallyPos(pos objPos.MapPos) {
+	p.RallyPos = pos
+}
+
 // Update ...
 func (p *ReinforcePoint) Update(
 	shipUidGenerator *objUnit.ShipUidGenerator, curFunds int64,

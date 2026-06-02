@@ -44,6 +44,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	// 如果是暂停，不要继续刷新
 	switch m.state.MissionStatus {
 	case state.MissionRunning:
+		m.updateRallyLineClick()
 		m.updateGameOptions()
 		m.updateInstructions()
 		m.executeInstructions()

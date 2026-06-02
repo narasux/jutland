@@ -43,6 +43,11 @@ func (m *MissionManager) updateGameMarks() {
 			delete(m.state.GameMarks, markID)
 		}
 	}
+
+	// 集结点设置失败提示倒计时
+	if m.state.RallySetFailedTick > 0 {
+		m.state.RallySetFailedTick--
+	}
 }
 
 // 更新建筑物

@@ -3,6 +3,7 @@ package drawer
 import (
 	"fmt"
 	"image/color"
+	"math"
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -181,6 +182,17 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex+yOffset)
 		screen.DrawImage(img, opts)
+	}
+
+	// 绘制当前选中增援点的集结点标记
+	if rp, ok := ms.ReinforcePoints[ms.SelectedReinforcePointUid]; ok && rp.BelongPlayer == ms.CurPlayer {
+		rallyX := float64(rp.RallyPos.MX)/float64(ms.MissionMD.MapCfg.Width)*mapW + xOffset
+		rallyY := float64(rp.RallyPos.MY)/float64(ms.MissionMD.MapCfg.Height)*mapH + yOffset
+		ebutil.DrawCrossMarker(screen, rallyX, rallyY, 6, 2, colorx.Green)
+		// 集结点陆地失败提示
+		if ms.RallySetFailedTick > 0 {
+			d.drawText(screen, "陆地不可设集结点", rallyX-44, rallyY-18, 14, font.Kai, colorx.Red)
+		}
 	}
 }
 
@@ -473,6 +485,8 @@ func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILay
 		"↑ ↓ 增援点",
 		"← → 舰船",
 		"Enter 召唤",
+		"退格 取消增援",
+		"点击地图 设集结点",
 	}
 	for idx, tip := range tips {
 		x := card.X + 20
@@ -524,4 +538,73 @@ func (d *Drawer) drawReinforcePanel(screen *ebiten.Image, panel reinforceUIPanel
 		screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H),
 		2, reinforcePanelBorder, false,
 	)
+}
+
+// drawRallyLine 绘制增援点到集结点的虚线
+func (d *Drawer) drawRallyLine(screen *ebiten.Image, ms *state.MissionState) {
+	if ms.ShowRallyLinePointUid == "" {
+		return
+	}
+	rp, ok := ms.ReinforcePoints[ms.ShowRallyLinePointUid]
+	if !ok || rp.BelongPlayer != ms.CurPlayer {
+		return
+	}
+
+	// 将地图坐标转换为屏幕坐标
+	startX := (rp.Pos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize
+	startY := (rp.Pos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize
+	endX := (rp.RallyPos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize
+	endY := (rp.RallyPos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize
+
+	const (
+		rallyFlagPoleHeight = 24.0
+		rallyLineEndGap     = 8.0
+	)
+	startGap := float64(max(buildingImg.ReinforcePoint.Bounds().Dx(), buildingImg.ReinforcePoint.Bounds().Dy()))/2 + 8
+	lineStartX, lineStartY, lineEndX, lineEndY, ok := ebutil.TrimLineSegment(
+		startX, startY, endX, endY, startGap, rallyLineEndGap,
+	)
+	if !ok {
+		ebutil.DrawFlagMarker(screen, endX, endY, rallyFlagPoleHeight, colorx.Green)
+		return
+	}
+
+	const dashLen = 8.0
+	const gapLen = 6.0
+
+	// 用分段线段绘制虚线
+	dx := lineEndX - lineStartX
+	dy := lineEndY - lineStartY
+	totalDist := math.Sqrt(dx*dx + dy*dy)
+	ux, uy := dx/totalDist, dy/totalDist
+	progress := 0.0
+	drawing := true
+	lineColor := color.RGBA{R: 72, G: 206, B: 128, A: 180}
+
+	for progress < totalDist {
+		seg := dashLen
+		if !drawing {
+			seg = gapLen
+		}
+		if progress+seg > totalDist {
+			seg = totalDist - progress
+		}
+		if drawing {
+			segStartX := lineStartX + ux*progress
+			segStartY := lineStartY + uy*progress
+			segEndX := segStartX + ux*seg
+			segEndY := segStartY + uy*seg
+			vector.StrokeLine(
+				screen,
+				float32(segStartX), float32(segStartY),
+				float32(segEndX), float32(segEndY),
+				2, lineColor, false,
+			)
+		}
+		progress += seg
+		drawing = !drawing
+	}
+
+	// 在集结点位置绘制旗帜标记
+	ebutil.DrawFlagMarker(screen, endX, endY, rallyFlagPoleHeight, colorx.Green)
 }

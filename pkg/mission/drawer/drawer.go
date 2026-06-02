@@ -76,6 +76,7 @@ func (d *Drawer) Draw(
 		d.drawArrowOnMapWhenHover(screen, misState)
 		d.drawSelectedArea(screen, misState)
 		d.drawMarks(screen, misState)
+		d.drawRallyLine(screen, misState)
 		d.drawTips(screen, misState)
 		// 调试信息
 		d.drawDebugPrint(screen, misState)

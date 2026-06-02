@@ -276,4 +276,54 @@ func (m *MissionManager) updateReinforcePoints() {
 			rp.OncomingShips = rp.OncomingShips[:len(rp.OncomingShips)-1]
 		}
 	}
+
+	// 缩略地图点击设集结点
+	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+		sx, sy := ebiten.CursorPosition()
+		w, h := float64(m.state.Layout.Width), float64(m.state.Layout.Height)
+		margin, topGap := 18.0, 18.0
+		topY := 48.0
+		topH := h * 0.55
+		previewW := w*0.6 - margin - topGap/2
+		mapW := w - previewW - 2*margin - topGap
+		mapX := margin + previewW + topGap
+		mapY := topY
+		if float64(sx) >= mapX && float64(sx) <= mapX+mapW &&
+			float64(sy) >= mapY && float64(sy) <= mapY+topH {
+			mapWidth := float64(m.state.MissionMD.MapCfg.Width)
+			mapHeight := float64(m.state.MissionMD.MapCfg.Height)
+			mx := int((float64(sx) - mapX) / mapW * mapWidth)
+			my := int((float64(sy) - mapY) / topH * mapHeight)
+			mx = max(min(mx, m.state.MissionMD.MapCfg.Width-1), 0)
+			my = max(min(my, m.state.MissionMD.MapCfg.Height-1), 0)
+			if m.state.MissionMD.MapCfg.Map.IsLand(mx, my) {
+				m.state.RallySetFailedTick = 60
+			} else {
+				rp.SetRallyPos(objPos.New(mx, my))
+			}
+		}
+	}
+}
+
+// 更新集结线显示（游戏模式下点击己方增援点）
+func (m *MissionManager) updateRallyLineClick() {
+	if m.state.MissionStatus != state.MissionRunning {
+		return
+	}
+
+	pos := action.DetectMouseButtonClickOnMap(m.state, ebiten.MouseButtonLeft)
+	if pos == nil {
+		return
+	}
+
+	for _, rp := range m.state.ReinforcePoints {
+		if rp.BelongPlayer != m.state.CurPlayer {
+			continue
+		}
+		if rp.Pos.Distance(*pos) < 3 {
+			m.state.ShowRallyLinePointUid = rp.Uid
+			return
+		}
+	}
+	m.state.ShowRallyLinePointUid = ""
 }
