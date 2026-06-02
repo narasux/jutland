@@ -50,7 +50,7 @@ func (d *Drawer) Draw(
 	misState *state.MissionState,
 	terminal *hacker.Terminal,
 ) {
-	switch misState.MissionStatus {
+	switch misState.Core.MissionStatus {
 	case state.MissionInTerminal:
 		// 绘制终端模式，不需要绘制其他对象
 		d.drawTerminal(screen, misState, terminal)

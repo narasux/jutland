@@ -154,7 +154,7 @@ func (t *Terminal) fillHistory() {
 func (t *Terminal) execCommand(misState *state.MissionState, cmd string) {
 	switch cmd {
 	case ":q", ":wq", "exit", "quit":
-		misState.MissionStatus = state.MissionRunning
+		misState.Core.MissionStatus = state.MissionRunning
 		fallthrough
 	case "clear":
 		t.Buffer = t.Buffer[:0]

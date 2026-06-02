@@ -28,12 +28,12 @@ func (c *ShowMeTheDuck) Match(cmd string) bool {
 func (c *ShowMeTheDuck) Exec(misState *state.MissionState) string {
 	// 如果鼠标位置是海洋，则成功，否则失败
 	pos := action.DetectCursorPosOnMap(misState)
-	if misState.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
+	if misState.Core.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
 		return "Current cursor position on land, can't create duck"
 	}
-	uidGenerator := misState.ShipUidGenerators[misState.CurPlayer]
-	ship := objUnit.NewShip(uidGenerator, "duck", *pos, 0, misState.CurPlayer)
-	misState.Ships[ship.Uid] = ship
+	uidGenerator := misState.Arena.ShipUidGenerators[misState.Player.CurPlayer]
+	ship := objUnit.NewShip(uidGenerator, "duck", *pos, 0, misState.Player.CurPlayer)
+	misState.Arena.Ships[ship.Uid] = ship
 	return "Duck ready at " + ship.CurPos.String()
 }
 
@@ -55,10 +55,10 @@ func (c *ShowMeTheWaterdrop) Match(cmd string) bool {
 }
 
 func (c *ShowMeTheWaterdrop) Exec(misState *state.MissionState) string {
-	uidGenerator := misState.ShipUidGenerators[misState.CurPlayer]
+	uidGenerator := misState.Arena.ShipUidGenerators[misState.Player.CurPlayer]
 	pos := action.DetectCursorPosOnMap(misState)
-	ship := objUnit.NewShip(uidGenerator, "waterdrop", *pos, 0, misState.CurPlayer)
-	misState.Ships[ship.Uid] = ship
+	ship := objUnit.NewShip(uidGenerator, "waterdrop", *pos, 0, misState.Player.CurPlayer)
+	misState.Arena.Ships[ship.Uid] = ship
 	return "Waterdrop ready at " + ship.CurPos.String()
 }
 
@@ -80,13 +80,13 @@ func (c *ShowMeTheMolaMola) Match(cmd string) bool {
 }
 
 func (c *ShowMeTheMolaMola) Exec(misState *state.MissionState) string {
-	uidGenerator := misState.ShipUidGenerators[misState.CurPlayer]
+	uidGenerator := misState.Arena.ShipUidGenerators[misState.Player.CurPlayer]
 	pos := action.DetectCursorPosOnMap(misState)
-	if misState.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
+	if misState.Core.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
 		return "Current cursor position on land, can't create molamola"
 	}
-	ship := objUnit.NewShip(uidGenerator, "molamola", *pos, 0, misState.CurPlayer)
-	misState.Ships[ship.Uid] = ship
+	ship := objUnit.NewShip(uidGenerator, "molamola", *pos, 0, misState.Player.CurPlayer)
+	misState.Arena.Ships[ship.Uid] = ship
 	return "MolaMola ready at " + ship.CurPos.String()
 }
 
@@ -109,14 +109,14 @@ func (c *BlackGoldRush) Match(cmd string) bool {
 
 func (c *BlackGoldRush) Exec(misState *state.MissionState) string {
 	pos := action.DetectCursorPosOnMap(misState)
-	if misState.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
+	if misState.Core.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
 		return "Current cursor position on land, can't create oil platform"
 	}
 	// 油井范围，生成量随机
 	radius := 3 + rand.Intn(4)
 	yield := 50 + rand.Intn(100)
 	op := objBuilding.NewOilPlatform(*pos, radius, yield)
-	misState.OilPlatforms[op.Uid] = op
+	misState.Arena.OilPlatforms[op.Uid] = op
 	return fmt.Sprintf("Oil platform created at %s. Be careful, oil can breed mold!", pos.String())
 }
 

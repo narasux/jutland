@@ -22,8 +22,8 @@ func (c *ShowMeTheMoney) Match(cmd string) bool {
 }
 
 func (c *ShowMeTheMoney) Exec(misState *state.MissionState) string {
-	misState.CurFunds += 10000
-	return "Add 10000 funds, current funds: " + strconv.FormatInt(misState.CurFunds, 10)
+	misState.Player.CurFunds += 10000
+	return "Add 10000 funds, current funds: " + strconv.FormatInt(misState.Player.CurFunds, 10)
 }
 
 var _ Cheat = (*ShowMeTheMoney)(nil)

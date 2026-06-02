@@ -69,18 +69,18 @@ func (c *BathtubWar) Match(cmd string) bool {
 }
 
 func (c *BathtubWar) Exec(misState *state.MissionState) string {
-	curShips := lo.Values(misState.Ships)
+	curShips := lo.Values(misState.Arena.Ships)
 
-	misState.Ships = map[string]*objUnit.BattleShip{}
+	misState.Arena.Ships = map[string]*objUnit.BattleShip{}
 	for _, ship := range curShips {
 		duck := objUnit.NewShip(
-			misState.ShipUidGenerators[ship.BelongPlayer],
+			misState.Arena.ShipUidGenerators[ship.BelongPlayer],
 			"duck",
 			ship.CurPos,
 			ship.CurRotation,
 			ship.BelongPlayer,
 		)
-		misState.Ships[duck.Uid] = duck
+		misState.Arena.Ships[duck.Uid] = duck
 	}
 	return "Congratulations! All the battle ships on map become duck, enjoy it!"
 }
@@ -103,9 +103,9 @@ func (c *WhoIsCallingTheFleet) Match(cmd string) bool {
 }
 
 func (c *WhoIsCallingTheFleet) Exec(misState *state.MissionState) string {
-	for _, rfp := range misState.ReinforcePoints {
+	for _, rfp := range misState.Arena.ReinforcePoints {
 		// 只有自己的会生效
-		if rfp.BelongPlayer != misState.CurPlayer {
+		if rfp.BelongPlayer != misState.Player.CurPlayer {
 			continue
 		}
 		for _, ship := range rfp.OncomingShips {
@@ -134,14 +134,14 @@ func (c *DoNotDie) Match(cmd string) bool {
 }
 
 func (c *DoNotDie) Exec(misState *state.MissionState) string {
-	for _, shipUid := range misState.SelectedShips {
+	for _, shipUid := range misState.Interaction.SelectedShips {
 		// 满血数值其实就是吨位
-		if ship, ok := misState.Ships[shipUid]; ok {
+		if ship, ok := misState.Arena.Ships[shipUid]; ok {
 			ship.CurHP = ship.Tonnage
 		}
 	}
 
-	return fmt.Sprintf("Change %d ships to full hp.", len(misState.SelectedShips))
+	return fmt.Sprintf("Change %d ships to full hp.", len(misState.Interaction.SelectedShips))
 }
 
 var _ Cheat = (*DoNotDie)(nil)
@@ -163,8 +163,8 @@ func (c *YouHaveBetrayedTheWorkingClass) Match(cmd string) bool {
 }
 
 func (c *YouHaveBetrayedTheWorkingClass) Exec(misState *state.MissionState) string {
-	for _, shipUid := range misState.SelectedShips {
-		if ship, ok := misState.Ships[shipUid]; ok {
+	for _, shipUid := range misState.Interaction.SelectedShips {
+		if ship, ok := misState.Arena.Ships[shipUid]; ok {
 			ship.BelongPlayer = faction.ComputerAlpha
 		}
 	}
@@ -189,9 +189,9 @@ func (c *AbandonDarkness) Match(cmd string) bool {
 }
 
 func (c *AbandonDarkness) Exec(misState *state.MissionState) string {
-	for _, ship := range misState.Ships {
-		if misState.Camera.Contains(ship.CurPos) {
-			ship.BelongPlayer = misState.CurPlayer
+	for _, ship := range misState.Arena.Ships {
+		if misState.View.Camera.Contains(ship.CurPos) {
+			ship.BelongPlayer = misState.Player.CurPlayer
 		}
 	}
 	return "Thank you, you are both good man."
@@ -215,8 +215,8 @@ func (c *Expelliarmus) Match(cmd string) bool {
 }
 
 func (c *Expelliarmus) Exec(misState *state.MissionState) string {
-	for _, ship := range misState.Ships {
-		if misState.Camera.Contains(ship.CurPos) && ship.BelongPlayer != misState.CurPlayer {
+	for _, ship := range misState.Arena.Ships {
+		if misState.View.Camera.Contains(ship.CurPos) && ship.BelongPlayer != misState.Player.CurPlayer {
 			ship.Weapon = objUnit.ShipWeapon{}
 		}
 	}

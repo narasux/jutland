@@ -14,7 +14,7 @@ func (d *Drawer) drawTerminal(
 	ms *state.MissionState,
 	terminal *hacker.Terminal,
 ) {
-	if ms.MissionStatus != state.MissionInTerminal {
+	if ms.Core.MissionStatus != state.MissionInTerminal {
 		return
 	}
 	terminalImg := bgImg.MissionTerminal
@@ -23,8 +23,8 @@ func (d *Drawer) drawTerminal(
 
 	opts := d.genDefaultDrawImageOptions()
 	opts.GeoM.Scale(
-		float64(ms.Layout.Width)/float64(terminalWidth),
-		float64(ms.Layout.Height)/float64(terminalHeight),
+		float64(ms.View.Layout.Width)/float64(terminalWidth),
+		float64(ms.View.Layout.Height)/float64(terminalHeight),
 	)
 	screen.DrawImage(terminalImg, opts)
 

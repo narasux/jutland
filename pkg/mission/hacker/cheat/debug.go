@@ -22,7 +22,7 @@ func (c *DebugAll) Match(cmd string) bool {
 }
 
 func (c *DebugAll) Exec(misState *state.MissionState) string {
-	misState.DebugFlags = state.DebugFlags{
+	misState.UI.DebugFlags = state.DebugFlags{
 		DamageColorByTeam:    true,
 		ShowCursorPosObjInfo: true,
 		ShowPlaneHP:          true,
@@ -48,8 +48,8 @@ func (c *DamageColorByTeam) Match(cmd string) bool {
 }
 
 func (c *DamageColorByTeam) Exec(misState *state.MissionState) string {
-	nextState := !misState.DebugFlags.DamageColorByTeam
-	misState.DebugFlags.DamageColorByTeam = nextState
+	nextState := !misState.UI.DebugFlags.DamageColorByTeam
+	misState.UI.DebugFlags.DamageColorByTeam = nextState
 	return "Toggled damage color by team: " + lo.Ternary(nextState, "on", "off")
 }
 
@@ -71,8 +71,8 @@ func (c *ShowCursorPosObjInfo) Match(cmd string) bool {
 }
 
 func (c *ShowCursorPosObjInfo) Exec(misState *state.MissionState) string {
-	nextState := !misState.DebugFlags.ShowCursorPosObjInfo
-	misState.DebugFlags.ShowCursorPosObjInfo = nextState
+	nextState := !misState.UI.DebugFlags.ShowCursorPosObjInfo
+	misState.UI.DebugFlags.ShowCursorPosObjInfo = nextState
 	return "Toggled show cursor position object info: " + lo.Ternary(nextState, "on", "off")
 }
 
@@ -94,8 +94,8 @@ func (c *ShowPlaneHP) Match(cmd string) bool {
 }
 
 func (c *ShowPlaneHP) Exec(misState *state.MissionState) string {
-	nextState := !misState.DebugFlags.ShowPlaneHP
-	misState.DebugFlags.ShowPlaneHP = nextState
+	nextState := !misState.UI.DebugFlags.ShowPlaneHP
+	misState.UI.DebugFlags.ShowPlaneHP = nextState
 	return "Toggled show plane HP: " + lo.Ternary(nextState, "on", "off")
 }
 

@@ -39,7 +39,7 @@ func (h *HumanInputHandler) Handle(
 	instructions := map[string]instr.Instruction{}
 
 	// 部分场景需要屏蔽用户输入
-	if misState.MissionStatus != state.MissionRunning {
+	if misState.Core.MissionStatus != state.MissionRunning {
 		return instructions
 	}
 
@@ -53,14 +53,14 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	instructions := map[string]instr.Instruction{}
 
 	// 当前选中的战舰数量
-	selectedShipCount := len(misState.SelectedShips)
+	selectedShipCount := len(misState.Interaction.SelectedShips)
 
 	// 检查鼠标是否在某个敌方战舰上，需要显示锁定
 	var lockOnEnemy *objUnit.BattleShip
 	if selectedShipCount != 0 {
 		pos := action.DetectCursorPosOnMap(misState)
-		for _, ship := range misState.Ships {
-			if ship.BelongPlayer == misState.CurPlayer {
+		for _, ship := range misState.Arena.Ships {
+			if ship.BelongPlayer == misState.Player.CurPlayer {
 				continue
 			}
 			if geometry.IsPointInRotatedRectangle(
@@ -75,8 +75,8 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 				// 默认为锁定标志
 				markID, markImg := objMark.IDLockOn, textureImg.LockOnTarget
 				// 如果选中战舰中某艘已经设置该战舰为攻击目标，则应显示攻击标志而非锁定标志
-				for _, shipUid := range misState.SelectedShips {
-					if s, ok := misState.Ships[shipUid]; ok {
+				for _, shipUid := range misState.Interaction.SelectedShips {
+					if s, ok := misState.Arena.Ships[shipUid]; ok {
 						if s.AttackTarget == lockOnEnemy.Uid {
 							markID, markImg = objMark.IDAttack, textureImg.AttackTarget
 							break
@@ -84,7 +84,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 					}
 				}
 				mark := objMark.NewImg(markID, *pos, markImg, 2)
-				misState.GameMarks[mark.ID] = mark
+				misState.UI.GameMarks[mark.ID] = mark
 				break
 			}
 		}
@@ -94,7 +94,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	if pos := action.DetectMouseButtonClickOnMap(
 		misState, ebiten.MouseButtonRight,
 	); pos != nil && selectedShipCount != 0 {
-		for _, shipUid := range misState.SelectedShips {
+		for _, shipUid := range misState.Interaction.SelectedShips {
 			// 如果是多艘战舰，则需要区分下终点位置，不要聚在一起挨揍
 			targetPos := pos.Copy()
 			if selectedShipCount > 1 {
@@ -102,7 +102,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 				targetPos.AddRy(float64(rand.Intn(5) - 2))
 			}
 			// 通过 ShipMovePath 指令实现移动行为
-			ship, ok := misState.Ships[shipUid]
+			ship, ok := misState.Arena.Ships[shipUid]
 			if !ok {
 				continue
 			}
@@ -123,7 +123,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			markID, markImg = objMark.IDAttack, textureImg.AttackTarget
 		}
 		mark := objMark.NewImg(markID, *pos, markImg, 20)
-		misState.GameMarks[markID] = mark
+		misState.UI.GameMarks[markID] = mark
 	}
 
 	// 通过 ShipMove 指令实现移动
@@ -140,15 +140,15 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 
 	// 随机散开，用于战舰重叠的情况（按下 X 键）
 	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
-		for _, shipUid := range misState.SelectedShips {
+		for _, shipUid := range misState.Interaction.SelectedShips {
 			// 如果战舰不是静止状态，则散开指令无效
-			if misState.Ships[shipUid].CurSpeed != 0 {
+			if misState.Arena.Ships[shipUid].CurSpeed != 0 {
 				continue
 			}
 			// 随机散开 [-3, 3] 的范围
 			dx, dy := rand.Intn(7)-3, rand.Intn(7)-3
 			// 通过 ShipMove 指令实现散开行为
-			handleMove(shipUid, misState.Ships[shipUid].CurPos, dx, dy)
+			handleMove(shipUid, misState.Arena.Ships[shipUid].CurPos, dx, dy)
 		}
 	}
 
@@ -164,8 +164,8 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 		dx, dy = 1, 0
 	}
 	if dx != 0 || dy != 0 {
-		for _, shipUid := range misState.SelectedShips {
-			if ship, ok := misState.Ships[shipUid]; ok {
+		for _, shipUid := range misState.Interaction.SelectedShips {
+			if ship, ok := misState.Arena.Ships[shipUid]; ok {
 				handleMove(shipUid, ship.CurPos, dx, dy)
 			}
 		}
@@ -220,19 +220,19 @@ func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[strin
 		},
 	}
 
-	if len(misState.Ships) > 0 {
+	if len(misState.Arena.Ships) > 0 {
 		for _, op := range ops {
 			if inpututil.IsKeyJustPressed(op.key) {
 				anyDisabled := false
-				for _, shipUid := range misState.SelectedShips {
-					ship := misState.Ships[shipUid]
+				for _, shipUid := range misState.Interaction.SelectedShips {
+					ship := misState.Arena.Ships[shipUid]
 					if op.isDisabled(ship) {
 						anyDisabled = true
 						break
 					}
 				}
 
-				for _, shipUid := range misState.SelectedShips {
+				for _, shipUid := range misState.Interaction.SelectedShips {
 					if anyDisabled {
 						enableWeaponInstr := instr.NewEnableWeapon(shipUid, op.weaponType)
 						instructions[enableWeaponInstr.Uid()] = enableWeaponInstr

@@ -55,20 +55,20 @@ var (
 // drawBuildingsInCamera 绘制镜头范围内的建筑对象和建筑状态。
 func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionState) {
 	// 增援点（只有在屏幕中的才渲染）
-	for _, rp := range ms.ReinforcePoints {
-		if !ms.Camera.Contains(rp.Pos) {
+	for _, rp := range ms.Arena.ReinforcePoints {
+		if !ms.View.Camera.Contains(rp.Pos) {
 			continue
 		}
 		img := lo.Ternary(
-			rp.BelongPlayer == ms.CurPlayer,
+			rp.BelongPlayer == ms.Player.CurPlayer,
 			buildingImg.ReinforcePoint,
 			buildingImg.EnemyReinforcePoint,
 		)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
 		opts.GeoM.Translate(
-			(rp.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
-			(rp.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
+			(rp.Pos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
+			(rp.Pos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
 		)
 		screen.DrawImage(img, opts)
 
@@ -76,8 +76,8 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 			d.drawText(
 				screen,
 				strconv.Itoa(process),
-				(rp.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-10,
-				(rp.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-12,
+				(rp.Pos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-10,
+				(rp.Pos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-12,
 				20,
 				font.Hang,
 				colorx.White,
@@ -85,13 +85,13 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 		}
 	}
 	// 油井
-	for _, op := range ms.OilPlatforms {
-		if !ms.Camera.Contains(op.Pos) {
+	for _, op := range ms.Arena.OilPlatforms {
+		if !ms.View.Camera.Contains(op.Pos) {
 			continue
 		}
 		img := buildingImg.OilPlatform
-		x := (op.Pos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize
-		y := (op.Pos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize
+		x := (op.Pos.RX - ms.View.Camera.Pos.RX) * constants.MapBlockSize
+		y := (op.Pos.RY - ms.View.Camera.Pos.RY) * constants.MapBlockSize
 		opts := d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(x-float64(img.Bounds().Dx()/2), y-float64(img.Bounds().Dy()/2))
 		screen.DrawImage(img, opts)
@@ -110,7 +110,7 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 
 // drawBuildingInterface 绘制增援点交互界面。
 func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionState) {
-	if ms.MissionStatus != state.MissionInBuilding {
+	if ms.Core.MissionStatus != state.MissionInBuilding {
 		return
 	}
 	ui := calcReinforceUILayout(ms)
@@ -120,7 +120,7 @@ func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionSt
 	d.drawReinforcePanel(screen, ui.Console, reinforcePanelFill, false)
 	d.drawAbbrMapInRPInterface(screen, ms, ui)
 	d.drawSelectedProvidedShips(screen, ms, ui)
-	d.drawSummonOperationTips(screen, ui, ms.CurFunds)
+	d.drawSummonOperationTips(screen, ui, ms.Player.CurFunds)
 }
 
 // drawBuildingBackground 绘制增援界面的底图和暗色遮罩。
@@ -129,10 +129,10 @@ func (d *Drawer) drawBuildingBackground(screen *ebiten.Image, ms *state.MissionS
 	windowWidth, windowHeight := windowImg.Bounds().Dx(), windowImg.Bounds().Dy()
 
 	opts := d.genDefaultDrawImageOptions()
-	opts.GeoM.Scale(float64(ms.Layout.Width)/float64(windowWidth), float64(ms.Layout.Height)/float64(windowHeight))
+	opts.GeoM.Scale(float64(ms.View.Layout.Width)/float64(windowWidth), float64(ms.View.Layout.Height)/float64(windowHeight))
 	screen.DrawImage(windowImg, opts)
 	vector.FillRect(
-		screen, 0, 0, float32(ms.Layout.Width), float32(ms.Layout.Height),
+		screen, 0, 0, float32(ms.View.Layout.Width), float32(ms.View.Layout.Height),
 		color.RGBA{R: 3, G: 12, B: 16, A: 116}, false,
 	)
 }
@@ -162,14 +162,14 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 	)
 
 	// 把当前选中的增援点展示到地图上
-	for _, rp := range ms.ReinforcePoints {
+	for _, rp := range ms.Arena.ReinforcePoints {
 		// 只会画出属于己方的增援点
-		if rp.BelongPlayer != ms.CurPlayer {
+		if rp.BelongPlayer != ms.Player.CurPlayer {
 			continue
 		}
 		// 选中的是实心绿色，否则是空心绿色
 		img := lo.Ternary(
-			rp.Uid == ms.SelectedReinforcePointUid,
+			rp.Uid == ms.Interaction.SelectedReinforcePointUid,
 			textureImg.AbbrSelectedReinforcePoint,
 			textureImg.AbbrReinforcePoint,
 		)
@@ -177,20 +177,20 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 		opts = d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
 
-		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * mapW
-		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * mapH
+		xIndex := rp.Pos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * mapW
+		yIndex := rp.Pos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * mapH
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex+yOffset)
 		screen.DrawImage(img, opts)
 	}
 
 	// 绘制当前选中增援点的集结点标记
-	if rp, ok := ms.ReinforcePoints[ms.SelectedReinforcePointUid]; ok && rp.BelongPlayer == ms.CurPlayer {
-		rallyX := float64(rp.RallyPos.MX)/float64(ms.MissionMD.MapCfg.Width)*mapW + xOffset
-		rallyY := float64(rp.RallyPos.MY)/float64(ms.MissionMD.MapCfg.Height)*mapH + yOffset
+	if rp, ok := ms.Arena.ReinforcePoints[ms.Interaction.SelectedReinforcePointUid]; ok && rp.BelongPlayer == ms.Player.CurPlayer {
+		rallyX := float64(rp.RallyPos.MX)/float64(ms.Core.MissionMD.MapCfg.Width)*mapW + xOffset
+		rallyY := float64(rp.RallyPos.MY)/float64(ms.Core.MissionMD.MapCfg.Height)*mapH + yOffset
 		ebutil.DrawCrossMarker(screen, rallyX, rallyY, 6, 2, colorx.Green)
 		// 集结点陆地失败提示
-		if ms.RallySetFailedTick > 0 {
+		if ms.UI.RallySetFailedTick > 0 {
 			d.drawText(screen, "陆地不可设集结点", rallyX-44, rallyY-18, 14, font.Kai, colorx.Red)
 		}
 	}
@@ -198,7 +198,7 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 
 // drawSelectedProvidedShips 绘制当前可召唤舰船的预览图和信息面板。
 func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.MissionState, ui reinforceUILayout) {
-	rp, ok := ms.ReinforcePoints[ms.SelectedReinforcePointUid]
+	rp, ok := ms.Arena.ReinforcePoints[ms.Interaction.SelectedReinforcePointUid]
 	if !ok {
 		return
 	}
@@ -497,7 +497,7 @@ func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILay
 
 // calcReinforceUILayout 计算增援界面中预览、地图和控制台区域布局。
 func calcReinforceUILayout(ms *state.MissionState) reinforceUILayout {
-	w, h := float64(ms.Layout.Width), float64(ms.Layout.Height)
+	w, h := float64(ms.View.Layout.Width), float64(ms.View.Layout.Height)
 	margin, topGap, consoleGap := 18.0, 18.0, 4.0
 	bottomMargin := 56.0
 	topY := 48.0
@@ -542,19 +542,19 @@ func (d *Drawer) drawReinforcePanel(screen *ebiten.Image, panel reinforceUIPanel
 
 // drawRallyLine 绘制增援点到集结点的虚线
 func (d *Drawer) drawRallyLine(screen *ebiten.Image, ms *state.MissionState) {
-	if ms.ShowRallyLinePointUid == "" {
+	if ms.UI.ShowRallyLinePointUid == "" {
 		return
 	}
-	rp, ok := ms.ReinforcePoints[ms.ShowRallyLinePointUid]
-	if !ok || rp.BelongPlayer != ms.CurPlayer {
+	rp, ok := ms.Arena.ReinforcePoints[ms.UI.ShowRallyLinePointUid]
+	if !ok || rp.BelongPlayer != ms.Player.CurPlayer {
 		return
 	}
 
 	// 将地图坐标转换为屏幕坐标
-	startX := (rp.Pos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize
-	startY := (rp.Pos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize
-	endX := (rp.RallyPos.RX - ms.Camera.Pos.RX) * constants.MapBlockSize
-	endY := (rp.RallyPos.RY - ms.Camera.Pos.RY) * constants.MapBlockSize
+	startX := (rp.Pos.RX - ms.View.Camera.Pos.RX) * constants.MapBlockSize
+	startY := (rp.Pos.RY - ms.View.Camera.Pos.RY) * constants.MapBlockSize
+	endX := (rp.RallyPos.RX - ms.View.Camera.Pos.RX) * constants.MapBlockSize
+	endY := (rp.RallyPos.RY - ms.View.Camera.Pos.RY) * constants.MapBlockSize
 
 	const (
 		rallyFlagPoleHeight = 24.0

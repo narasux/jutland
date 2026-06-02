@@ -72,23 +72,23 @@ var sArea = SelectedArea{}
 func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 	// 左键没有被压下，直接跳过
 	if !ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
-		misState.IsAreaSelecting = false
+		misState.Interaction.IsAreaSelecting = false
 		return nil
 	}
-	if !misState.IsAreaSelecting {
+	if !misState.Interaction.IsAreaSelecting {
 		sx, sy := ebiten.CursorPosition()
 		sArea.StartX, sArea.StartY = sx, sy
 		sArea.StartAt.AssignRxy(
-			misState.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
-			misState.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
+			misState.View.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
+			misState.View.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
 		)
-		misState.IsAreaSelecting = true
+		misState.Interaction.IsAreaSelecting = true
 	}
 	sx, sy := ebiten.CursorPosition()
 	sArea.CurX, sArea.CurY = sx, sy
 	sArea.CurAt.AssignRxy(
-		misState.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
-		misState.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
+		misState.View.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
+		misState.View.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
 	)
 	return &sArea
 }
@@ -105,8 +105,8 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 // 探测当前鼠标在地图上的位置
 func DetectCursorPosOnMap(misState *state.MissionState) *position.MapPos {
 	sx, sy := ebiten.CursorPosition()
-	rx := misState.Camera.Pos.RX + float64(sx)/constants.MapBlockSize
-	ry := misState.Camera.Pos.RY + float64(sy)/constants.MapBlockSize
+	rx := misState.View.Camera.Pos.RX + float64(sx)/constants.MapBlockSize
+	ry := misState.View.Camera.Pos.RY + float64(sy)/constants.MapBlockSize
 	return lo.ToPtr(position.NewR(rx, ry))
 }
 

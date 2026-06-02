@@ -34,7 +34,7 @@ func (h *ComputerDecisionHandler) Handle(
 
 	// AI 指令：扫描所有增援点，只要可用，就随机召唤增援
 	reinforcePointUid := ""
-	for _, rp := range misState.ReinforcePoints {
+	for _, rp := range misState.Arena.ReinforcePoints {
 		if rp.BelongPlayer != h.player {
 			continue
 		}
@@ -46,7 +46,7 @@ func (h *ComputerDecisionHandler) Handle(
 	}
 
 	var ships, enemyShips []*objUnit.BattleShip
-	for _, s := range misState.Ships {
+	for _, s := range misState.Arena.Ships {
 		if s.BelongPlayer == h.player {
 			ships = append(ships, s)
 		} else {
@@ -56,7 +56,7 @@ func (h *ComputerDecisionHandler) Handle(
 
 	// 收集敌方飞机
 	var enemyPlanes []*objUnit.Plane
-	for _, p := range misState.Planes {
+	for _, p := range misState.Arena.Planes {
 		if p.BelongPlayer != h.player && p.CurHP > 0 {
 			enemyPlanes = append(enemyPlanes, p)
 		}
@@ -75,12 +75,12 @@ func (h *ComputerDecisionHandler) Handle(
 				instructions[instrUid] = instr.NewShipMovePath(ship.Uid, ship.CurPos, enemy.CurPos, ship.CurSpeed)
 			}
 		} else if ship.CurPos.OnBorder(
-			float64(misState.MissionMD.MapCfg.Width-2),
-			float64(misState.MissionMD.MapCfg.Height-2),
+			float64(misState.Core.MissionMD.MapCfg.Width-2),
+			float64(misState.Core.MissionMD.MapCfg.Height-2),
 		) && reinforcePointUid != "" {
 			// 如果到了边界，且存在增援点，则往自己的增援点的集结点走
 			moveInstr := instr.NewShipMove(
-				ship.Uid, misState.ReinforcePoints[reinforcePointUid].RallyPos,
+				ship.Uid, misState.Arena.ReinforcePoints[reinforcePointUid].RallyPos,
 			)
 			instructions[moveInstr.Uid()] = moveInstr
 		} else {
@@ -110,8 +110,8 @@ func (h *ComputerDecisionHandler) Handle(
 				x, y := rand.Intn(11)-5, rand.Intn(11)-5
 				moveInstr := instr.NewShipMove(
 					ship.Uid, objPos.New(
-						misState.Ships[ship.Uid].CurPos.MX+x,
-						misState.Ships[ship.Uid].CurPos.MY+y,
+						misState.Arena.Ships[ship.Uid].CurPos.MX+x,
+						misState.Arena.Ships[ship.Uid].CurPos.MY+y,
 					),
 				)
 				instructions[moveInstr.Uid()] = moveInstr

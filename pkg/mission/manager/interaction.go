@@ -18,12 +18,12 @@ import (
 func (m *MissionManager) updateGameOptions() {
 	// 按下 d 键，全局展示 / 不展示所有战舰状态
 	if inpututil.IsKeyJustPressed(ebiten.KeyD) {
-		m.state.GameOpts.ForceDisplayState = !m.state.GameOpts.ForceDisplayState
+		m.state.UI.GameOpts.ForceDisplayState = !m.state.UI.GameOpts.ForceDisplayState
 	}
 
 	// 按下 n 键，全局展示 / 不展示所有伤害数字
 	if inpututil.IsKeyJustPressed(ebiten.KeyN) {
-		m.state.GameOpts.DisplayDamageNumber = !m.state.GameOpts.DisplayDamageNumber
+		m.state.UI.GameOpts.DisplayDamageNumber = !m.state.UI.GameOpts.DisplayDamageNumber
 	}
 }
 
@@ -40,11 +40,11 @@ func (m *MissionManager) updateInstructions() {
 func (m *MissionManager) updateCameraPosition() {
 	var nextPos *objPos.MapPos
 	// 游戏模式 / 全屏地图模式走不同的相机位置更新模式
-	if m.state.MissionStatus == state.MissionInMap {
+	if m.state.Core.MissionStatus == state.MissionInMap {
 		nextPos = m.getNextCameraPosInFullMapMode()
 		// 如果是全屏地图模式，且点击位置相同，则退出全屏（模拟双击效果）
-		if nextPos != nil && m.state.Camera.Pos.MEqual(*nextPos) {
-			m.state.MissionStatus = state.MissionRunning
+		if nextPos != nil && m.state.View.Camera.Pos.MEqual(*nextPos) {
+			m.state.Core.MissionStatus = state.MissionRunning
 		}
 	} else {
 		nextPos = m.getNextCameraPosInGameMode()
@@ -56,10 +56,10 @@ func (m *MissionManager) updateCameraPosition() {
 	}
 
 	// 剪掉小尾巴，避免出现黑边
-	moveSpeed := m.state.Camera.BaseMoveSpeed
+	moveSpeed := m.state.View.Camera.BaseMoveSpeed
 	rx := float64(int(nextPos.RX/moveSpeed)) * moveSpeed
 	ry := float64(int(nextPos.RY/moveSpeed)) * moveSpeed
-	m.state.Camera.Pos.AssignRxy(rx, ry)
+	m.state.View.Camera.Pos.AssignRxy(rx, ry)
 }
 
 // 计算下一帧相机位置（全屏地图模式）
@@ -70,16 +70,16 @@ func (m *MissionManager) getNextCameraPosInFullMapMode() *objPos.MapPos {
 	}
 
 	sx, sy := ebiten.CursorPosition()
-	xOffset := float64(m.state.Layout.Width-m.state.Layout.Height) / 2
+	xOffset := float64(m.state.View.Layout.Width-m.state.View.Layout.Height) / 2
 
-	abbrMapWidth, abbrMapHeight := float64(m.state.Layout.Height), float64(m.state.Layout.Height)
-	mapWidth, mapHeight := float64(m.state.MissionMD.MapCfg.Width), float64(m.state.MissionMD.MapCfg.Height)
+	abbrMapWidth, abbrMapHeight := float64(m.state.View.Layout.Height), float64(m.state.View.Layout.Height)
+	mapWidth, mapHeight := float64(m.state.Core.MissionMD.MapCfg.Width), float64(m.state.Core.MissionMD.MapCfg.Height)
 
 	rx := (float64(sx) - xOffset) / abbrMapWidth * mapWidth
 	ry := float64(sy) / abbrMapHeight * mapHeight
 
-	pos := m.state.Camera.Pos.Copy()
-	pos.AssignRxy(rx-float64(m.state.Camera.Width)/2, ry-float64(m.state.Camera.Height)/2)
+	pos := m.state.View.Camera.Pos.Copy()
+	pos.AssignRxy(rx-float64(m.state.View.Camera.Width)/2, ry-float64(m.state.View.Camera.Height)/2)
 	// 防止超出边界
 	pos.EnsureBorder(m.state.CameraPosBorder())
 
@@ -89,11 +89,11 @@ func (m *MissionManager) getNextCameraPosInFullMapMode() *objPos.MapPos {
 // 计算下一帧相机位置（游戏模式）
 // 游戏模式，可以通过 hover 鼠标在边缘上，移动相机
 func (m *MissionManager) getNextCameraPosInGameMode() *objPos.MapPos {
-	pos := m.state.Camera.Pos.Copy()
+	pos := m.state.View.Camera.Pos.Copy()
 	// TODO 支持在游戏设置内修改相机移动速度
-	moveSpeed := m.state.Camera.BaseMoveSpeed
+	moveSpeed := m.state.View.Camera.BaseMoveSpeed
 
-	switch action.DetectCursorHoverOnGameMap(m.state.Layout) {
+	switch action.DetectCursorHoverOnGameMap(m.state.View.Layout) {
 	case action.HoverScreenLeft:
 		pos.SubRx(moveSpeed)
 	case action.HoverScreenRight:
@@ -127,76 +127,76 @@ func (m *MissionManager) getNextCameraPosInGameMode() *objPos.MapPos {
 
 // 更新选择的战舰列表
 func (m *MissionManager) updateSelectedShips() {
-	if m.state.MissionStatus != state.MissionRunning {
+	if m.state.Core.MissionStatus != state.MissionRunning {
 		return
 	}
 	// 选择一个区域中的所有战舰
 	if area := action.DetectCursorSelectArea(m.state); area != nil {
-		m.state.SelectedShips = []string{}
-		for _, ship := range m.state.Ships {
+		m.state.Interaction.SelectedShips = []string{}
+		for _, ship := range m.state.Arena.Ships {
 			// 被鼠标划区区域选中的我方战舰
-			if ship.BelongPlayer == m.state.CurPlayer && area.Contain(ship.CurPos) {
-				m.state.SelectedShips = append(m.state.SelectedShips, ship.Uid)
+			if ship.BelongPlayer == m.state.Player.CurPlayer && area.Contain(ship.CurPos) {
+				m.state.Interaction.SelectedShips = append(m.state.Interaction.SelectedShips, ship.Uid)
 			}
 		}
 	}
 	// 正在分组中，不可用
-	if !m.state.IsGrouping {
+	if !m.state.Interaction.IsGrouping {
 		// 通过分组选中战舰
 		groupID := action.GetGroupIDByPressedKey()
 		if groupID != object.GroupIDNone {
-			shipInGroup := lo.Filter(lo.Values(m.state.Ships), func(ship *objUnit.BattleShip, _ int) bool {
-				return ship.BelongPlayer == m.state.CurPlayer && ship.GroupID == groupID
+			shipInGroup := lo.Filter(lo.Values(m.state.Arena.Ships), func(ship *objUnit.BattleShip, _ int) bool {
+				return ship.BelongPlayer == m.state.Player.CurPlayer && ship.GroupID == groupID
 			})
-			m.state.SelectedShips = lo.Map(shipInGroup, func(ship *objUnit.BattleShip, _ int) string {
+			m.state.Interaction.SelectedShips = lo.Map(shipInGroup, func(ship *objUnit.BattleShip, _ int) string {
 				return ship.Uid
 			})
 
 			// 如果当前选中的分组不是当前按键的分组，则更新记录
-			if m.state.SelectedGroupID != groupID {
-				m.state.SelectedGroupID = groupID
+			if m.state.Interaction.SelectedGroupID != groupID {
+				m.state.Interaction.SelectedGroupID = groupID
 			} else {
 				// 如果当前选中的分组再次被选中，移动相机中心位置到当前分组的第一艘战舰处
-				if len(m.state.SelectedShips) > 0 {
-					nextPos := m.state.Ships[m.state.SelectedShips[0]].CurPos.Copy()
-					nextPos.SubMx(m.state.Camera.Width / 2)
-					nextPos.SubMy(m.state.Camera.Height / 2)
+				if len(m.state.Interaction.SelectedShips) > 0 {
+					nextPos := m.state.Arena.Ships[m.state.Interaction.SelectedShips[0]].CurPos.Copy()
+					nextPos.SubMx(m.state.View.Camera.Width / 2)
+					nextPos.SubMy(m.state.View.Camera.Height / 2)
 
-					moveSpeed := m.state.Camera.BaseMoveSpeed
+					moveSpeed := m.state.View.Camera.BaseMoveSpeed
 					rx := float64(int(nextPos.RX/moveSpeed)) * moveSpeed
 					ry := float64(int(nextPos.RY/moveSpeed)) * moveSpeed
-					m.state.Camera.Pos.AssignRxy(rx, ry)
+					m.state.View.Camera.Pos.AssignRxy(rx, ry)
 				}
 			}
 		}
 	}
 
 	// 检查选中的战舰，如果已经被摧毁，则要去掉
-	m.state.SelectedShips = lo.Filter(m.state.SelectedShips, func(uid string, _ int) bool {
-		ship, ok := m.state.Ships[uid]
+	m.state.Interaction.SelectedShips = lo.Filter(m.state.Interaction.SelectedShips, func(uid string, _ int) bool {
+		ship, ok := m.state.Arena.Ships[uid]
 		return ok && ship != nil && ship.CurHP > 0
 	})
 	// 没有战舰被选中，应该重置 SelectedGroupID
-	if m.state.SelectedGroupID != object.GroupIDNone && len(m.state.SelectedShips) == 0 {
-		m.state.SelectedGroupID = object.GroupIDNone
+	if m.state.Interaction.SelectedGroupID != object.GroupIDNone && len(m.state.Interaction.SelectedShips) == 0 {
+		m.state.Interaction.SelectedGroupID = object.GroupIDNone
 	}
 }
 
 // 更新舰队编组状态（左 Ctrl + 0-9 编组）
 func (m *MissionManager) updateShipGroups() {
-	if m.state.MissionStatus != state.MissionRunning {
+	if m.state.Core.MissionStatus != state.MissionRunning {
 		return
 	}
 	// 按下左边的 ctrl 键：进入 / 退出编组模式
 	if inpututil.IsKeyJustPressed(ebiten.KeyControlLeft) {
-		m.state.IsGrouping = !m.state.IsGrouping
+		m.state.Interaction.IsGrouping = !m.state.Interaction.IsGrouping
 	}
 	// 设置编组后，如果松开 ctrl，则退出编组模式
 	if inpututil.IsKeyJustReleased(ebiten.KeyControlLeft) {
-		m.state.IsGrouping = false
+		m.state.Interaction.IsGrouping = false
 	}
 	// 没有在编组模式，直接返回
-	if !m.state.IsGrouping {
+	if !m.state.Interaction.IsGrouping {
 		return
 	}
 	groupID := action.GetGroupIDByPressedKey()
@@ -205,13 +205,13 @@ func (m *MissionManager) updateShipGroups() {
 		return
 	}
 	// 重新编组，只有当前选中的拥有这个编组
-	for _, ship := range m.state.Ships {
+	for _, ship := range m.state.Arena.Ships {
 		if ship.GroupID == groupID {
 			ship.GroupID = object.GroupIDNone
 		}
 	}
-	for _, shipUid := range m.state.SelectedShips {
-		m.state.Ships[shipUid].GroupID = groupID
+	for _, shipUid := range m.state.Interaction.SelectedShips {
+		m.state.Arena.Ships[shipUid].GroupID = groupID
 	}
 }
 
@@ -222,13 +222,13 @@ func (m *MissionManager) updateTerminal() {
 
 // 更新被选中的待增援战舰
 func (m *MissionManager) updateReinforcePoints() {
-	if m.state.MissionStatus != state.MissionInBuilding {
+	if m.state.Core.MissionStatus != state.MissionInBuilding {
 		return
 	}
 
 	reinforcePointUIDs := []string{}
-	for uid, rp := range m.state.ReinforcePoints {
-		if rp.BelongPlayer == m.state.CurPlayer {
+	for uid, rp := range m.state.Arena.ReinforcePoints {
+		if rp.BelongPlayer == m.state.Player.CurPlayer {
 			reinforcePointUIDs = append(reinforcePointUIDs, uid)
 		}
 	}
@@ -237,7 +237,7 @@ func (m *MissionManager) updateReinforcePoints() {
 	}
 
 	slices.Sort(reinforcePointUIDs)
-	rpIndex := lo.IndexOf(reinforcePointUIDs, m.state.SelectedReinforcePointUid)
+	rpIndex := lo.IndexOf(reinforcePointUIDs, m.state.Interaction.SelectedReinforcePointUid)
 
 	// 上下方向键选择增援点
 	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
@@ -249,9 +249,9 @@ func (m *MissionManager) updateReinforcePoints() {
 	rpIndex = (rpIndex + uidCount) % uidCount
 
 	rpUID := reinforcePointUIDs[rpIndex]
-	m.state.SelectedReinforcePointUid = rpUID
+	m.state.Interaction.SelectedReinforcePointUid = rpUID
 
-	rp := m.state.ReinforcePoints[rpUID]
+	rp := m.state.Arena.ReinforcePoints[rpUID]
 
 	// 左右方向键选择战舰
 	shipIndex := rp.CurSelectedShipIndex
@@ -280,7 +280,7 @@ func (m *MissionManager) updateReinforcePoints() {
 	// 缩略地图点击设集结点
 	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
 		sx, sy := ebiten.CursorPosition()
-		w, h := float64(m.state.Layout.Width), float64(m.state.Layout.Height)
+		w, h := float64(m.state.View.Layout.Width), float64(m.state.View.Layout.Height)
 		margin, topGap := 18.0, 18.0
 		topY := 48.0
 		topH := h * 0.55
@@ -290,14 +290,14 @@ func (m *MissionManager) updateReinforcePoints() {
 		mapY := topY
 		if float64(sx) >= mapX && float64(sx) <= mapX+mapW &&
 			float64(sy) >= mapY && float64(sy) <= mapY+topH {
-			mapWidth := float64(m.state.MissionMD.MapCfg.Width)
-			mapHeight := float64(m.state.MissionMD.MapCfg.Height)
+			mapWidth := float64(m.state.Core.MissionMD.MapCfg.Width)
+			mapHeight := float64(m.state.Core.MissionMD.MapCfg.Height)
 			mx := int((float64(sx) - mapX) / mapW * mapWidth)
 			my := int((float64(sy) - mapY) / topH * mapHeight)
-			mx = max(min(mx, m.state.MissionMD.MapCfg.Width-1), 0)
-			my = max(min(my, m.state.MissionMD.MapCfg.Height-1), 0)
-			if m.state.MissionMD.MapCfg.Map.IsLand(mx, my) {
-				m.state.RallySetFailedTick = 60
+			mx = max(min(mx, m.state.Core.MissionMD.MapCfg.Width-1), 0)
+			my = max(min(my, m.state.Core.MissionMD.MapCfg.Height-1), 0)
+			if m.state.Core.MissionMD.MapCfg.Map.IsLand(mx, my) {
+				m.state.UI.RallySetFailedTick = 60
 			} else {
 				rp.SetRallyPos(objPos.New(mx, my))
 			}
@@ -307,7 +307,7 @@ func (m *MissionManager) updateReinforcePoints() {
 
 // 更新集结线显示（游戏模式下点击己方增援点）
 func (m *MissionManager) updateRallyLineClick() {
-	if m.state.MissionStatus != state.MissionRunning {
+	if m.state.Core.MissionStatus != state.MissionRunning {
 		return
 	}
 
@@ -316,14 +316,14 @@ func (m *MissionManager) updateRallyLineClick() {
 		return
 	}
 
-	for _, rp := range m.state.ReinforcePoints {
-		if rp.BelongPlayer != m.state.CurPlayer {
+	for _, rp := range m.state.Arena.ReinforcePoints {
+		if rp.BelongPlayer != m.state.Player.CurPlayer {
 			continue
 		}
 		if rp.Pos.Distance(*pos) < 3 {
-			m.state.ShowRallyLinePointUid = rp.Uid
+			m.state.UI.ShowRallyLinePointUid = rp.Uid
 			return
 		}
 	}
-	m.state.ShowRallyLinePointUid = ""
+	m.state.UI.ShowRallyLinePointUid = ""
 }

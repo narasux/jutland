@@ -19,13 +19,13 @@ import (
 
 // drawPauseOverlay 绘制暂停遮罩和操作面板。
 func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) {
-	if ms.MissionStatus != state.MissionPaused {
+	if ms.Core.MissionStatus != state.MissionPaused {
 		return
 	}
 
-	ui := state.CalcPauseUILayout(ms.Layout)
+	ui := state.CalcPauseUILayout(ms.View.Layout)
 	vector.FillRect(
-		screen, 0, 0, float32(ms.Layout.Width), float32(ms.Layout.Height),
+		screen, 0, 0, float32(ms.View.Layout.Width), float32(ms.View.Layout.Height),
 		color.RGBA{R: 3, G: 10, B: 14, A: 150}, false,
 	)
 	vector.FillRect(
@@ -39,7 +39,7 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 
 	title := "任务暂停"
 	primaryText, dangerText := "继续", "放弃"
-	if ms.ConfirmQuitMission {
+	if ms.Core.ConfirmQuitMission {
 		title = "确认放弃任务？"
 		primaryText, dangerText = "返回", "确认"
 	}
@@ -110,13 +110,13 @@ func (d *Drawer) drawText(
 // drawDebugPrint DEBUG: 绘制调试信息
 func (d *Drawer) drawDebugPrint(screen *ebiten.Image, ms *state.MissionState) {
 	// 对光标指到的对象进行信息展示
-	if ms.DebugFlags.ShowCursorPosObjInfo {
+	if ms.UI.DebugFlags.ShowCursorPosObjInfo {
 		pos := action.DetectCursorPosOnMap(ms)
 		var allBattleUnits []objUnit.BattleUnit
-		for _, ship := range ms.Ships {
+		for _, ship := range ms.Arena.Ships {
 			allBattleUnits = append(allBattleUnits, ship)
 		}
-		for _, plane := range ms.Planes {
+		for _, plane := range ms.Arena.Planes {
 			allBattleUnits = append(allBattleUnits, plane)
 		}
 		// 统计出在当前光标位置的战舰/战机

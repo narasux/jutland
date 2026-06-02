@@ -83,7 +83,7 @@ func (i *PlaneAttack) hasNewRelease(plane *objUnit.Plane) bool {
 // Exec 执行指令
 func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	// 获取攻击方飞机
-	attacker, ok := missionState.Planes[i.planeUid]
+	attacker, ok := missionState.Arena.Planes[i.planeUid]
 	// 攻击方已经不存在，判定已经完成
 	if !ok {
 		i.status = Executed
@@ -102,9 +102,9 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	// 获取打击目标
 	switch i.targetObjType {
 	case object.TypeShip:
-		enemy, enemyExists = missionState.Ships[i.targetUid]
+		enemy, enemyExists = missionState.Arena.Ships[i.targetUid]
 	case object.TypePlane:
-		enemy, enemyExists = missionState.Planes[i.targetUid]
+		enemy, enemyExists = missionState.Arena.Planes[i.targetUid]
 	default:
 		return errors.Errorf("invalid target obj type: %s", i.targetObjType)
 	}
@@ -138,7 +138,7 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
 	// 传递目标位置、敌人当前位置和目标速度，用于战斗机追踪时调整速度
-	attacker.MoveTo(missionState.MissionMD.MapCfg, targetPos, eState.CurPos, eState.CurSpeed)
+	attacker.MoveTo(missionState.Core.MissionMD.MapCfg, targetPos, eState.CurPos, eState.CurSpeed)
 	return nil
 }
 
@@ -173,14 +173,14 @@ var _ Instruction = (*PlaneReturn)(nil)
 // Exec 执行指令
 func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	// 获取飞机
-	plane, ok := missionState.Planes[i.planeUid]
+	plane, ok := missionState.Arena.Planes[i.planeUid]
 	// 飞机已经不存在，判定已经完成
 	if !ok {
 		i.status = Executed
 		return nil
 	}
 
-	ship, ok := missionState.Ships[plane.BelongShip]
+	ship, ok := missionState.Arena.Ships[plane.BelongShip]
 	if !ok {
 		// FIXME 目前载舰如果沉没，则飞机也直接坠毁，后续考虑备降到其他地方
 		plane.CurHP = 0
@@ -195,13 +195,13 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
 	// 返航时不需要调整速度（敌人位置和目标速度都传空值/0）
-	plane.MoveTo(missionState.MissionMD.MapCfg, targetPos, objPos.New(0, 0), 0)
+	plane.MoveTo(missionState.Core.MissionMD.MapCfg, targetPos, objPos.New(0, 0), 0)
 	// 飞机到达载舰附近，判定已经完成
 	if plane.CurPos.Near(ship.CurPos, 1) {
 		// 尝试回收飞机
 		ship.Aircraft.Recovery(plane)
 		// 删除该飞机（视同着陆）
-		delete(missionState.Planes, i.planeUid)
+		delete(missionState.Arena.Planes, i.planeUid)
 		// 修改状态为已经完成
 		i.status = Executed
 	}

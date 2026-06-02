@@ -39,10 +39,10 @@ func (d *Drawer) drawAbbrMapAndBackground(screen *ebiten.Image, ms *state.Missio
 	windowWidth, windowHeight := window.Bounds().Dx(), window.Bounds().Dy()
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
 
-	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
+	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
 	opts := d.genDefaultDrawImageOptions()
-	opts.GeoM.Scale(xOffset/float64(windowWidth), float64(ms.Layout.Height)/float64(windowHeight))
+	opts.GeoM.Scale(xOffset/float64(windowWidth), float64(ms.View.Layout.Height)/float64(windowHeight))
 	screen.DrawImage(window, opts)
 
 	opts.GeoM.Translate(xOffset+float64(abbrMapWidth), 0)
@@ -67,7 +67,7 @@ func (d *Drawer) drawAbbrMapAndBackground(screen *ebiten.Image, ms *state.Missio
 
 func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
-	windowWidth := float64(ms.Layout.Width-abbrMapWidth) / 2
+	windowWidth := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
 	drawShips := func(player faction.Player, xOffset, yOffset, scaleX float64) {
 		fleet := ms.Fleet(player)
@@ -75,7 +75,7 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 		// 绘制敌我标识
 		d.drawText(
 			screen,
-			fmt.Sprintf("%s（%d）", lo.Ternary(player == ms.CurPlayer, "我", "敌"), fleet.Total),
+			fmt.Sprintf("%s（%d）", lo.Ternary(player == ms.Player.CurPlayer, "我", "敌"), fleet.Total),
 			xOffset-50, 20, 48, font.Hang, colorx.White,
 		)
 
@@ -108,19 +108,19 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 	}
 
 	// 己方舰队概览
-	drawShips(ms.CurPlayer, float64(windowWidth)/4, 80, 1)
+	drawShips(ms.Player.CurPlayer, float64(windowWidth)/4, 80, 1)
 	// 敌方舰队概览
-	drawShips(ms.CurEnemy, float64(abbrMapWidth)+float64(windowWidth)*1.6, 80, -1)
+	drawShips(ms.Player.CurEnemy, float64(abbrMapWidth)+float64(windowWidth)*1.6, 80, -1)
 }
 
 // 绘制当前视野范围
 func (d *Drawer) drawAbbrCameraBox(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
-	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
+	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	rx, ry := float32(ms.Camera.Pos.RX), float32(ms.Camera.Pos.RY)
-	cameraWidth, cameraHeight := float32(ms.Camera.Width), float32(ms.Camera.Height)
-	mapWidth, mapHeight := float32(ms.MissionMD.MapCfg.Width), float32(ms.MissionMD.MapCfg.Height)
+	rx, ry := float32(ms.View.Camera.Pos.RX), float32(ms.View.Camera.Pos.RY)
+	cameraWidth, cameraHeight := float32(ms.View.Camera.Width), float32(ms.View.Camera.Height)
+	mapWidth, mapHeight := float32(ms.Core.MissionMD.MapCfg.Width), float32(ms.Core.MissionMD.MapCfg.Height)
 
 	x1 := rx / mapWidth * float32(abbrMapWidth)
 	y1 := ry / mapHeight * float32(abbrMapHeight)
@@ -132,28 +132,28 @@ func (d *Drawer) drawAbbrCameraBox(screen *ebiten.Image, ms *state.MissionState)
 // 绘制建筑物
 func (d *Drawer) drawAbbrBuildings(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
-	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
+	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	for _, rp := range ms.ReinforcePoints {
+	for _, rp := range ms.Arena.ReinforcePoints {
 		img := lo.Ternary(
-			rp.BelongPlayer == ms.CurPlayer,
+			rp.BelongPlayer == ms.Player.CurPlayer,
 			textureImg.AbbrReinforcePoint,
 			textureImg.AbbrEnemyReinforcePoint,
 		)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
 
-		xIndex := rp.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
-		yIndex := rp.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+		xIndex := rp.Pos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+		yIndex := rp.Pos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex)
 		screen.DrawImage(img, opts)
 	}
 
-	for _, op := range ms.OilPlatforms {
+	for _, op := range ms.Arena.OilPlatforms {
 		opts := d.genDefaultDrawImageOptions()
-		xIndex := op.Pos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
-		yIndex := op.Pos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+		xIndex := op.Pos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+		yIndex := op.Pos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
 		opts.GeoM.Translate(xIndex+xOffset, yIndex)
 		screen.DrawImage(textureImg.AbbrOilPlatform, opts)
 	}
@@ -162,15 +162,15 @@ func (d *Drawer) drawAbbrBuildings(screen *ebiten.Image, ms *state.MissionState)
 // 绘制敌我战舰
 func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
-	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
+	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	for _, s := range ms.Ships {
-		sImg := textureImg.GetAbbrShip(s.Tonnage, s.BelongPlayer != ms.CurPlayer)
+	for _, s := range ms.Arena.Ships {
+		sImg := textureImg.GetAbbrShip(s.Tonnage, s.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
 
-		xIndex := s.CurPos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
-		yIndex := s.CurPos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+		xIndex := s.CurPos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+		yIndex := s.CurPos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex)
 		screen.DrawImage(sImg, opts)
@@ -180,15 +180,15 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 // 绘制敌我战机
 func (d *Drawer) drawAbbrPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
-	xOffset := float64(ms.Layout.Width-abbrMapWidth) / 2
+	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	for _, p := range ms.Planes {
-		pImg := textureImg.GetAbbrPlane(p.BelongPlayer != ms.CurPlayer)
+	for _, p := range ms.Arena.Planes {
+		pImg := textureImg.GetAbbrPlane(p.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
 
-		xIndex := p.CurPos.RX / float64(ms.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
-		yIndex := p.CurPos.RY / float64(ms.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+		xIndex := p.CurPos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+		yIndex := p.CurPos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
 
 		opts.GeoM.Translate(xIndex+xOffset, yIndex)
 		screen.DrawImage(pImg, opts)

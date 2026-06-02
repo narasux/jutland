@@ -36,8 +36,8 @@ const (
 	MissionInBuilding MissionStatus = "inBuilding"
 )
 
-// MissionState 任务状态（包含地图，资源，进度，对象等）
-type MissionState struct {
+// MissionCoreState 任务核心状态
+type MissionCoreState struct {
 	Mission string
 	// 任务关卡状态
 	MissionStatus MissionStatus
@@ -45,11 +45,18 @@ type MissionState struct {
 	ConfirmQuitMission bool
 	// 任务关卡元数据
 	MissionMD metadata.MissionMetadata
+}
+
+// MissionViewState 任务视图状态
+type MissionViewState struct {
 	// 屏幕布局
 	Layout layout.ScreenLayout
 	// 相机
 	Camera Camera
+}
 
+// MissionPlayerState 任务玩家状态
+type MissionPlayerState struct {
 	// 当前玩家
 	CurPlayer faction.Player
 	// 当前资金
@@ -57,9 +64,10 @@ type MissionState struct {
 	// 当前敌人
 	// TODO 支持多个敌对势力
 	CurEnemy faction.Player
-	// 游戏选项
-	GameOpts GameOptions
+}
 
+// MissionInteractionState 任务交互状态
+type MissionInteractionState struct {
 	// 是否正在选择区域
 	IsAreaSelecting bool
 	// 是否正在编组
@@ -67,24 +75,24 @@ type MissionState struct {
 
 	// 被选中的增援点
 	SelectedReinforcePointUid string
-	// 增援点信息
-	ReinforcePoints map[string]*objBuilding.ReinforcePoint
 	// 被选中的增援战舰名称
 	SelectedSummonShipName string
-	// 显示集结线的增援点 Uid（游戏主地图中点击增援点时设置）
-	ShowRallyLinePointUid string
-	// 集结点设置失败计数器（用于短暂闪烁提示）
-	RallySetFailedTick int
+	// 被选中的战舰信息（Uid）
+	SelectedShips []string
+	// 当前被选中的编组
+	SelectedGroupID object.GroupID
+}
+
+// MissionArenaState 任务战场对象状态
+type MissionArenaState struct {
+	// 增援点信息
+	ReinforcePoints map[string]*objBuilding.ReinforcePoint
 	// 油井信息
 	OilPlatforms map[string]*objBuilding.OilPlatform
 	// 战舰信息（Key: Uid）
 	Ships map[string]*objUnit.BattleShip
 	// 战舰 Uid 生成器
 	ShipUidGenerators map[faction.Player]*objUnit.ShipUidGenerator
-	// 被选中的战舰信息（Uid）
-	SelectedShips []string
-	// 当前被选中的编组
-	SelectedGroupID object.GroupID
 	// 被摧毁的战舰
 	DestroyedShips []*objUnit.BattleShip
 	// 被摧毁的战机
@@ -95,22 +103,42 @@ type MissionState struct {
 	Planes map[string]*objUnit.Plane
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*objBullet.Bullet
+}
+
+// MissionUIState 任务界面状态
+type MissionUIState struct {
 	// 游戏标识
 	GameMarks map[objMark.ID]*objMark.Mark
+	// 显示集结线的增援点 Uid（游戏主地图中点击增援点时设置）
+	ShowRallyLinePointUid string
+	// 集结点设置失败计数器（用于短暂闪烁提示）
+	RallySetFailedTick int
+	// 游戏选项
+	GameOpts GameOptions
 	// DebugFlags 调试标识
 	DebugFlags DebugFlags
 }
 
+// MissionState 任务状态（包含地图，资源，进度，对象等）
+type MissionState struct {
+	Core        MissionCoreState
+	View        MissionViewState
+	Player      MissionPlayerState
+	Interaction MissionInteractionState
+	Arena       MissionArenaState
+	UI          MissionUIState
+}
+
 // CameraPosBorder 获取相机视野边界
 func (s *MissionState) CameraPosBorder() (w float64, h float64) {
-	w = float64(s.MissionMD.MapCfg.Width - s.Camera.Width - 1)
-	h = float64(s.MissionMD.MapCfg.Height - s.Camera.Height - 1)
+	w = float64(s.Core.MissionMD.MapCfg.Width - s.View.Camera.Width - 1)
+	h = float64(s.Core.MissionMD.MapCfg.Height - s.View.Camera.Height - 1)
 	return w, h
 }
 
 // CountShips 对同类战舰进行计数
 func (s *MissionState) Fleet(player faction.Player) Fleet {
-	ships := lo.Filter(lo.Values(s.Ships), func(ship *objUnit.BattleShip, _ int) bool {
+	ships := lo.Filter(lo.Values(s.Arena.Ships), func(ship *objUnit.BattleShip, _ int) bool {
 		return ship.BelongPlayer == player
 	})
 
@@ -178,46 +206,61 @@ func NewMissionState(mission string) *MissionState {
 	}
 
 	return &MissionState{
-		Mission:            mission,
-		MissionStatus:      MissionRunning,
-		ConfirmQuitMission: false,
-		MissionMD:          missionMD,
-		Layout:             misLayout,
-		Camera: Camera{
-			Pos: missionMD.InitCameraPos,
-			// 地图资源，多展示一行 & 列，避免出现黑边
-			Width:  misLayout.Width/constants.MapBlockSize + 1,
-			Height: misLayout.Height/constants.MapBlockSize + 1,
-			// 默认移动速度
-			BaseMoveSpeed: 0.25,
+		Core: MissionCoreState{
+			Mission:            mission,
+			MissionStatus:      MissionRunning,
+			ConfirmQuitMission: false,
+			MissionMD:          missionMD,
 		},
-		CurPlayer: faction.HumanAlpha,
-		CurFunds:  missionMD.InitFunds,
-		CurEnemy:  faction.ComputerAlpha,
-		GameOpts: GameOptions{
-			// 默认展示游戏单位的状态
-			ForceDisplayState: true,
-			// TODO 后续允许设置开启友军伤害，游戏性 up！但是如何解决敌人打死自己人？
-			FriendlyFire: false,
-			// 默认展示伤害数值
-			DisplayDamageNumber: true,
-			// 默认缩放 1 倍
-			Zoom: 1,
+		View: MissionViewState{
+			Layout: misLayout,
+			Camera: Camera{
+				Pos: missionMD.InitCameraPos,
+				// 地图资源，多展示一行 & 列，避免出现黑边
+				Width:  misLayout.Width/constants.MapBlockSize + 1,
+				Height: misLayout.Height/constants.MapBlockSize + 1,
+				// 默认移动速度
+				BaseMoveSpeed: 0.25,
+			},
 		},
-		IsAreaSelecting:           false,
-		IsGrouping:                false,
-		SelectedReinforcePointUid: selectedReinforcePointUid,
-		ReinforcePoints:           reinforcePoints,
-		OilPlatforms:              oilPlatforms,
-		ShipUidGenerators:         shipUidGenerators,
-		Ships:                     ships,
-		SelectedShips:             []string{},
-		SelectedGroupID:           object.GroupIDNone,
-		DestroyedShips:            []*objUnit.BattleShip{},
-		DestroyedPlanes:           []*objUnit.Plane{},
-		Trails:                    []*objTrail.Trail{},
-		ForwardingBullets:         []*objBullet.Bullet{},
-		Planes:                    map[string]*objUnit.Plane{},
-		GameMarks:                 map[objMark.ID]*objMark.Mark{},
+		Player: MissionPlayerState{
+			CurPlayer: faction.HumanAlpha,
+			CurFunds:  missionMD.InitFunds,
+			CurEnemy:  faction.ComputerAlpha,
+		},
+		Interaction: MissionInteractionState{
+			IsAreaSelecting:           false,
+			IsGrouping:                false,
+			SelectedReinforcePointUid: selectedReinforcePointUid,
+			SelectedSummonShipName:    "",
+			SelectedShips:             []string{},
+			SelectedGroupID:           object.GroupIDNone,
+		},
+		Arena: MissionArenaState{
+			ReinforcePoints:   reinforcePoints,
+			OilPlatforms:      oilPlatforms,
+			ShipUidGenerators: shipUidGenerators,
+			Ships:             ships,
+			DestroyedShips:    []*objUnit.BattleShip{},
+			DestroyedPlanes:   []*objUnit.Plane{},
+			Trails:            []*objTrail.Trail{},
+			ForwardingBullets: []*objBullet.Bullet{},
+			Planes:            map[string]*objUnit.Plane{},
+		},
+		UI: MissionUIState{
+			GameMarks:             map[objMark.ID]*objMark.Mark{},
+			ShowRallyLinePointUid: "",
+			RallySetFailedTick:    0,
+			GameOpts: GameOptions{
+				// 默认展示游戏单位的状态
+				ForceDisplayState: true,
+				// TODO 后续允许设置开启友军伤害，游戏性 up！但是如何解决敌人打死自己人？
+				FriendlyFire: false,
+				// 默认展示伤害数值
+				DisplayDamageNumber: true,
+				// 默认缩放 1 倍
+				Zoom: 1,
+			},
+		},
 	}
 }

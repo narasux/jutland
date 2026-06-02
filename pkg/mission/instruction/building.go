@@ -25,7 +25,7 @@ var _ Instruction = (*ShipSummon)(nil)
 
 // Exec 执行战舰增援指令
 func (i *ShipSummon) Exec(s *state.MissionState) error {
-	rp, ok := s.ReinforcePoints[i.reinforcePointUid]
+	rp, ok := s.Arena.ReinforcePoints[i.reinforcePointUid]
 	if !ok {
 		return errors.Errorf("reinforce point %s not found", i.reinforcePointUid)
 	}

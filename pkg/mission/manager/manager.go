@@ -42,7 +42,7 @@ func (m *MissionManager) Draw(screen *ebiten.Image) {
 
 func (m *MissionManager) Update() (state.MissionStatus, error) {
 	// 如果是暂停，不要继续刷新
-	switch m.state.MissionStatus {
+	switch m.state.Core.MissionStatus {
 	case state.MissionRunning:
 		m.updateRallyLineClick()
 		m.updateGameOptions()
@@ -97,5 +97,5 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	}
 	m.updateMissionStatus()
 
-	return m.state.MissionStatus, nil
+	return m.state.Core.MissionStatus, nil
 }

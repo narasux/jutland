@@ -27,7 +27,7 @@ var _ Instruction = (*EnableWeapon)(nil)
 func (i *EnableWeapon) Exec(s *state.MissionState) error {
 	i.status = Executed
 	// 战舰如果不存在（被摧毁），直跳过
-	ship, ok := s.Ships[i.shipUid]
+	ship, ok := s.Arena.Ships[i.shipUid]
 	if !ok {
 		return nil
 	}
@@ -69,7 +69,7 @@ var _ Instruction = (*DisableWeapon)(nil)
 func (i *DisableWeapon) Exec(s *state.MissionState) error {
 	i.status = Executed
 	// 战舰如果不存在（被摧毁），直跳过
-	ship, ok := s.Ships[i.shipUid]
+	ship, ok := s.Arena.Ships[i.shipUid]
 	if !ok {
 		return nil
 	}
@@ -110,13 +110,13 @@ var _ Instruction = (*ShipMove)(nil)
 // Exec ...
 func (i *ShipMove) Exec(s *state.MissionState) error {
 	// 战舰如果不存在（被摧毁），直接修改指令为已完成
-	ship, ok := s.Ships[i.shipUid]
+	ship, ok := s.Arena.Ships[i.shipUid]
 	if !ok {
 		i.status = Executed
 		return nil
 	}
 
-	if ship.MoveTo(s.MissionMD.MapCfg, i.targetPos, true) {
+	if ship.MoveTo(s.Core.MissionMD.MapCfg, i.targetPos, true) {
 		i.status = Executed
 	}
 	return nil
@@ -160,7 +160,7 @@ var _ Instruction = (*ShipMovePath)(nil)
 func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	// 寻路失败（genPath 异步标记为 Executing），主线程中重置速度后标记完成
 	if i.status == Executing {
-		if ship, ok := s.Ships[i.shipUid]; ok {
+		if ship, ok := s.Arena.Ships[i.shipUid]; ok {
 			ship.CurSpeed = 0
 		}
 		i.status = Executed
@@ -176,22 +176,22 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 			go i.genPath(s)
 		}
 		// Preparing 状态下，让战舰继续朝目标方向直线移动作为过渡
-		if ship, ok := s.Ships[i.shipUid]; ok && ship.CurSpeed > 0 {
-			ship.MoveTo(s.MissionMD.MapCfg, i.targetPos, false)
+		if ship, ok := s.Arena.Ships[i.shipUid]; ok && ship.CurSpeed > 0 {
+			ship.MoveTo(s.Core.MissionMD.MapCfg, i.targetPos, false)
 		}
 		return nil
 	}
 
 	if i.curIdx >= len(i.path) {
 		i.status = Executed
-		if ship, ok := s.Ships[i.shipUid]; ok {
+		if ship, ok := s.Arena.Ships[i.shipUid]; ok {
 			ship.CurSpeed = 0
 		}
 		return nil
 	}
 
 	// 战舰如果不存在（被摧毁），直接修改指令为已完成
-	ship, ok := s.Ships[i.shipUid]
+	ship, ok := s.Arena.Ships[i.shipUid]
 	if !ok {
 		i.status = Executed
 		return nil
@@ -223,7 +223,7 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	}
 
 	if ship.MoveTo(
-		s.MissionMD.MapCfg,
+		s.Core.MissionMD.MapCfg,
 		i.path[i.curIdx],
 		i.curIdx == len(i.path)-1,
 	) {
@@ -234,7 +234,7 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 
 // genPath 生成战舰移动的路径
 func (i *ShipMovePath) genPath(misState *state.MissionState) {
-	points := misState.MissionMD.MapCfg.GenPath(
+	points := misState.Core.MissionMD.MapCfg.GenPath(
 		grid.Point{i.curPos.MX, i.curPos.MY},
 		grid.Point{i.targetPos.MX, i.targetPos.MY},
 	)
@@ -252,7 +252,7 @@ func (i *ShipMovePath) genPath(misState *state.MissionState) {
 
 	// 如果战舰仍然存在，检查路径起始点是否与战舰当前实际位置重合或过近
 	// 如果是则跳过起始点，避免 MoveTo 因"已到达"而将速度归零
-	if ship, ok := misState.Ships[i.shipUid]; ok {
+	if ship, ok := misState.Arena.Ships[i.shipUid]; ok {
 		if ship.CurPos.Near(i.path[0], 0.6) && len(i.path) > 1 {
 			i.path = i.path[1:]
 		}

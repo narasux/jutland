@@ -16,23 +16,23 @@ import (
 func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.MissionState) {
 	posX, posY, rotation, padding := 0, 0, 0.0, 10
 	imgW, imgH := textureImg.ArrowWhite.Bounds().Dx(), textureImg.ArrowWhite.Bounds().Dy()
-	switch action.DetectCursorHoverOnGameMap(ms.Layout) {
+	switch action.DetectCursorHoverOnGameMap(ms.View.Layout) {
 	case action.HoverScreenLeft:
-		posX, posY, rotation = padding, ms.Layout.Height/2, 180
+		posX, posY, rotation = padding, ms.View.Layout.Height/2, 180
 	case action.HoverScreenRight:
-		posX, posY, rotation = ms.Layout.Width-imgW-padding, ms.Layout.Height/2, 0
+		posX, posY, rotation = ms.View.Layout.Width-imgW-padding, ms.View.Layout.Height/2, 0
 	case action.HoverScreenTop:
-		posX, posY, rotation = ms.Layout.Width/2, padding, 270
+		posX, posY, rotation = ms.View.Layout.Width/2, padding, 270
 	case action.HoverScreenBottom:
-		posX, posY, rotation = ms.Layout.Width/2, ms.Layout.Height-imgH-padding, 90
+		posX, posY, rotation = ms.View.Layout.Width/2, ms.View.Layout.Height-imgH-padding, 90
 	case action.HoverScreenTopLeft:
 		posX, posY, rotation = padding, padding, 225
 	case action.HoverScreenTopRight:
-		posX, posY, rotation = ms.Layout.Width-imgW-padding, padding, 315
+		posX, posY, rotation = ms.View.Layout.Width-imgW-padding, padding, 315
 	case action.HoverScreenBottomLeft:
-		posX, posY, rotation = padding, ms.Layout.Height-imgH-padding, 135
+		posX, posY, rotation = padding, ms.View.Layout.Height-imgH-padding, 135
 	case action.HoverScreenBottomRight:
-		posX, posY, rotation = ms.Layout.Width-imgW-padding, ms.Layout.Height-imgH-padding, 45
+		posX, posY, rotation = ms.View.Layout.Width-imgW-padding, ms.View.Layout.Height-imgH-padding, 45
 	default:
 		return
 	}
@@ -46,7 +46,7 @@ func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.Mission
 // 绘制选择框
 func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) {
 	area := action.DetectCursorSelectArea(ms)
-	if area == nil || !ms.IsAreaSelecting {
+	if area == nil || !ms.Interaction.IsAreaSelecting {
 		return
 	}
 	x1, y1 := float32(min(area.StartX, area.CurX)), float32(min(area.StartY, area.CurY))
@@ -57,11 +57,11 @@ func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) 
 
 // 绘制标识
 func (d *Drawer) drawMarks(screen *ebiten.Image, ms *state.MissionState) {
-	for _, mark := range ms.GameMarks {
+	for _, mark := range ms.UI.GameMarks {
 		opts := d.genDefaultDrawImageOptions()
 		opts.GeoM.Translate(
-			(mark.Pos.RX-ms.Camera.Pos.RX)*constants.MapBlockSize-float64(mark.Img.Bounds().Dx()/2),
-			(mark.Pos.RY-ms.Camera.Pos.RY)*constants.MapBlockSize-float64(mark.Img.Bounds().Dy()/2),
+			(mark.Pos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(mark.Img.Bounds().Dx()/2),
+			(mark.Pos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(mark.Img.Bounds().Dy()/2),
 		)
 		screen.DrawImage(mark.Img, opts)
 	}

@@ -35,33 +35,33 @@ func (m *MissionManager) executeInstructions() {
 
 // 更新游戏标识
 func (m *MissionManager) updateGameMarks() {
-	for markID, mark := range m.state.GameMarks {
+	for markID, mark := range m.state.UI.GameMarks {
 		mark.Life--
 
 		// 检查游戏标识，如果生命值为 0，则删除
 		if mark.Life <= 0 {
-			delete(m.state.GameMarks, markID)
+			delete(m.state.UI.GameMarks, markID)
 		}
 	}
 
 	// 集结点设置失败提示倒计时
-	if m.state.RallySetFailedTick > 0 {
-		m.state.RallySetFailedTick--
+	if m.state.UI.RallySetFailedTick > 0 {
+		m.state.UI.RallySetFailedTick--
 	}
 }
 
 // 更新建筑物
 func (m *MissionManager) updateBuildings() {
 	// 增援点当然算是建筑物！
-	for _, rp := range m.state.ReinforcePoints {
+	for _, rp := range m.state.Arena.ReinforcePoints {
 		if ship := rp.Update(
-			m.state.ShipUidGenerators[rp.BelongPlayer],
+			m.state.Arena.ShipUidGenerators[rp.BelongPlayer],
 			// FIXME 目前电脑玩家先不限制金钱
-			lo.Ternary(rp.BelongPlayer == m.state.CurPlayer, m.state.CurFunds, 50000),
+			lo.Ternary(rp.BelongPlayer == m.state.Player.CurPlayer, m.state.Player.CurFunds, 50000),
 		); ship != nil {
-			m.state.Ships[ship.Uid] = ship
-			if rp.BelongPlayer == m.state.CurPlayer {
-				m.state.CurFunds -= ship.FundsCost
+			m.state.Arena.Ships[ship.Uid] = ship
+			if rp.BelongPlayer == m.state.Player.CurPlayer {
+				m.state.Player.CurFunds -= ship.FundsCost
 			}
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3
@@ -72,10 +72,10 @@ func (m *MissionManager) updateBuildings() {
 
 	// 油井当然算是建筑物！
 	fontSize := float64(24)
-	for _, op := range m.state.OilPlatforms {
+	for _, op := range m.state.Arena.OilPlatforms {
 		text := fmt.Sprintf("+%d $", op.Yield)
-		for _, ship := range m.state.Ships {
-			if ship.Type != objUnit.ShipTypeCargo || ship.BelongPlayer != m.state.CurPlayer {
+		for _, ship := range m.state.Arena.Ships {
+			if ship.Type != objUnit.ShipTypeCargo || ship.BelongPlayer != m.state.Player.CurPlayer {
 				continue
 			}
 
@@ -89,13 +89,13 @@ func (m *MissionManager) updateBuildings() {
 
 		for uid, ship := range op.LoadingOilShips {
 			// 如果货轮不在了，需要及时移除掉
-			cargo, ok := m.state.Ships[uid]
+			cargo, ok := m.state.Arena.Ships[uid]
 			if !ok {
 				op.RemoveShip(uid)
-			} else if cargo.BelongPlayer == m.state.CurPlayer && ship.Update() {
-				m.state.CurFunds += int64(ship.FundYield)
+			} else if cargo.BelongPlayer == m.state.Player.CurPlayer && ship.Update() {
+				m.state.Player.CurFunds += int64(ship.FundYield)
 				mark := objMark.NewText(cargo.CurPos, text, fontSize, colorx.Gold, 50)
-				m.state.GameMarks[mark.ID] = mark
+				m.state.UI.GameMarks[mark.ID] = mark
 			}
 		}
 	}
@@ -106,7 +106,7 @@ func (m *MissionManager) updateBuildings() {
 // 注意：治疗间隔不受 config.G.SpeedMultiplier 影响，使用 time.Now() 而非帧计数
 func (m *MissionManager) updateHospitalShipHealing() {
 	now := time.Now().UnixMilli()
-	for _, ship := range m.state.Ships {
+	for _, ship := range m.state.Arena.Ships {
 		// 只有存活的医疗船才能治疗
 		if ship.Type != objUnit.ShipTypeHospital || ship.CurHP <= 0 {
 			continue
@@ -116,7 +116,7 @@ func (m *MissionManager) updateHospitalShipHealing() {
 			continue
 		}
 		// 遍历同阵营战舰目标
-		for _, target := range m.state.Ships {
+		for _, target := range m.state.Arena.Ships {
 			// 目标必须是同阵营、存活且未满血
 			if target.BelongPlayer != ship.BelongPlayer || target.CurHP <= 0 || target.CurHP >= target.TotalHP {
 				continue
@@ -131,7 +131,7 @@ func (m *MissionManager) updateHospitalShipHealing() {
 			// 创建绿色浮动治疗文字
 			text := fmt.Sprintf("+ %d HP", int(healAmount))
 			mark := objMark.NewText(target.CurPos, text, 20, colorx.Green, 50)
-			m.state.GameMarks[mark.ID] = mark
+			m.state.UI.GameMarks[mark.ID] = mark
 		}
 		// 治疗完成后更新时间戳
 		ship.LastHealAt = now
@@ -144,17 +144,17 @@ func (m *MissionManager) updateShipWeaponFire() {
 	maxBulletDiameter := 0
 	isTorpedoLaunched := false
 
-	for _, ship := range m.state.Ships {
+	for _, ship := range m.state.Arena.Ships {
 		inRangeEnemies := []objUnit.Hurtable{}
 
-		if target := m.state.Ships[ship.AttackTarget]; target != nil {
+		if target := m.state.Arena.Ships[ship.AttackTarget]; target != nil {
 			// 如果有目标敌人，则检查是否在射程内，如果有直接选中即可
 			if ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange {
 				inRangeEnemies = append(inRangeEnemies, target)
 			}
 		} else {
 			// 敌机
-			for _, enemy := range m.state.Planes {
+			for _, enemy := range m.state.Arena.Planes {
 				// 不能攻击己方的战机
 				if ship.BelongPlayer == enemy.BelongPlayer {
 					continue
@@ -167,7 +167,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 			}
 
 			// 敌舰
-			for enemyUid, enemy := range m.state.Ships {
+			for enemyUid, enemy := range m.state.Arena.Ships {
 				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
 				if ship.BelongPlayer == enemy.BelongPlayer ||
 					enemyUid == ship.AttackTarget {
@@ -189,7 +189,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 				continue
 			}
 			// 镜头内的才统计
-			if m.state.Camera.Contains(ship.CurPos) {
+			if m.state.View.Camera.Contains(ship.CurPos) {
 				for _, bt := range bullets {
 					if bt.Type == objBullet.TypeTorpedo {
 						isTorpedoLaunched = true
@@ -199,7 +199,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 					}
 				}
 			}
-			m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
+			m.state.Arena.ForwardingBullets = slices.Concat(m.state.Arena.ForwardingBullets, bullets)
 		}
 	}
 
@@ -213,7 +213,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 
 // 飞机出动 & 攻击
 func (m *MissionManager) updatePlaneAttackOrReturn() {
-	for _, ship := range m.state.Ships {
+	for _, ship := range m.state.Arena.Ships {
 		// 战舰上没有飞机的，跳过
 		if !ship.Aircraft.HasPlane {
 			continue
@@ -221,12 +221,12 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 
 		inRangeEnemies := []objUnit.Hurtable{}
 		// TODO 目前飞机目标都没考虑是否在攻击范围内，未来还是需要考虑的
-		if target := m.state.Ships[ship.AttackTarget]; target != nil {
+		if target := m.state.Arena.Ships[ship.AttackTarget]; target != nil {
 			// 如果有目标敌人，则直接选中即可
 			inRangeEnemies = append(inRangeEnemies, target)
 		} else {
 			// 敌机
-			for _, enemy := range m.state.Planes {
+			for _, enemy := range m.state.Arena.Planes {
 				// 不能攻击己方的战机
 				if ship.BelongPlayer == enemy.BelongPlayer {
 					continue
@@ -234,7 +234,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
 			// 敌舰
-			for _, enemy := range m.state.Ships {
+			for _, enemy := range m.state.Arena.Ships {
 				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
 				if ship.BelongPlayer == enemy.BelongPlayer {
 					continue
@@ -252,13 +252,13 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 				continue
 			}
 			// 加入到对局飞机数据集中
-			m.state.Planes[plane.Uid] = plane
+			m.state.Arena.Planes[plane.Uid] = plane
 			// 给飞机下达攻击指令
 			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
 		}
 	}
 
-	for _, plane := range m.state.Planes {
+	for _, plane := range m.state.Arena.Planes {
 		// 剩余燃料为 0，需要返航
 		if plane.MustReturn() {
 			// 添加返航指令
@@ -276,7 +276,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 
 		if plane.AttackObjType() == object.TypePlane {
 			// 敌机
-			for _, enemy := range m.state.Planes {
+			for _, enemy := range m.state.Arena.Planes {
 				// 不能攻击己方的战机
 				if plane.BelongPlayer == enemy.BelongPlayer {
 					continue
@@ -285,7 +285,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 			}
 		} else if plane.AttackObjType() == object.TypeShip {
 			// 敌舰
-			for _, enemy := range m.state.Ships {
+			for _, enemy := range m.state.Arena.Ships {
 				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
 				if plane.BelongPlayer == enemy.BelongPlayer {
 					continue
@@ -309,10 +309,10 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 func (m *MissionManager) updatePlaneWeaponFire() {
 	bombReleased, torpedoLaunched := false, false
 
-	for _, plane := range m.state.Planes {
+	for _, plane := range m.state.Arena.Planes {
 		inRangeEnemies := []objUnit.Hurtable{}
 		// 敌机
-		for _, enemy := range m.state.Planes {
+		for _, enemy := range m.state.Arena.Planes {
 			// 不能攻击己方的战机（包括自己）
 			if plane.BelongPlayer == enemy.BelongPlayer {
 				continue
@@ -324,7 +324,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
 		// 敌舰
-		for _, enemy := range m.state.Ships {
+		for _, enemy := range m.state.Arena.Ships {
 			// 不能攻击自己，也不能攻击己方的战舰
 			if plane.BelongPlayer == enemy.BelongPlayer {
 				continue
@@ -343,7 +343,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 				continue
 			}
 			// 镜头内的才统计
-			if m.state.Camera.Contains(plane.CurPos) {
+			if m.state.View.Camera.Contains(plane.CurPos) {
 				for _, bt := range bullets {
 					// 统计一个就好，不要吵吵
 					if bombReleased || torpedoLaunched {
@@ -356,7 +356,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 					}
 				}
 			}
-			m.state.ForwardingBullets = slices.Concat(m.state.ForwardingBullets, bullets)
+			m.state.Arena.ForwardingBullets = slices.Concat(m.state.Arena.ForwardingBullets, bullets)
 		}
 	}
 
@@ -371,29 +371,29 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 
 // 更新尾流状态（战舰，鱼雷，炮弹）
 func (m *MissionManager) updateObjectTrails() {
-	for i := 0; i < len(m.state.Trails); i++ {
-		m.state.Trails[i].Update()
+	for i := 0; i < len(m.state.Arena.Trails); i++ {
+		m.state.Arena.Trails[i].Update()
 	}
 	// 生命周期结束的，不再需要
-	m.state.Trails = lo.Filter(m.state.Trails, func(t *trail.Trail, _ int) bool {
+	m.state.Arena.Trails = lo.Filter(m.state.Arena.Trails, func(t *trail.Trail, _ int) bool {
 		return t.IsAlive()
 	})
-	for _, ship := range m.state.Ships {
+	for _, ship := range m.state.Arena.Ships {
 		if trails := ship.GenTrails(); trails != nil {
-			m.state.Trails = append(m.state.Trails, trails...)
+			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
 		}
 	}
-	for _, bt := range m.state.ForwardingBullets {
+	for _, bt := range m.state.Arena.ForwardingBullets {
 		// 炸弹目前没有尾流
 		if bt.Type == objBullet.TypeBomb {
 			continue
 		}
 		if trails := bt.GenTrails(); trails != nil {
-			m.state.Trails = append(m.state.Trails, trails...)
+			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
 		}
 	}
 	// 消亡中的飞机生成火焰 + 黑烟尾流（拉烟效果）
-	for _, plane := range m.state.DestroyedPlanes {
+	for _, plane := range m.state.Arena.DestroyedPlanes {
 		if plane.CurSpeed <= 0 {
 			continue
 		}
@@ -406,7 +406,7 @@ func (m *MissionManager) updateObjectTrails() {
 		tailPos.AddRy(cosVal * tailOffset)
 
 		// 火焰尾流（橙红色，较小，扩散快，生命短）
-		m.state.Trails = append(m.state.Trails, trail.New(
+		m.state.Arena.Trails = append(m.state.Arena.Trails, trail.New(
 			tailPos, textureImg.TrailShapeCircle,
 			3.0, 0.8, // 初始尺寸 3，扩散速度 0.8
 			80, 3.0, // 生命值 80，衰减速度 3.0
@@ -414,7 +414,7 @@ func (m *MissionManager) updateObjectTrails() {
 			colorx.Orange,
 		))
 		// 黑烟尾流（深灰色，较大，扩散慢，生命长）
-		m.state.Trails = append(m.state.Trails, trail.New(
+		m.state.Arena.Trails = append(m.state.Arena.Trails, trail.New(
 			tailPos, textureImg.TrailShapeCircle,
 			2.0, 0.5, // 初始尺寸 2，扩散速度 0.5
 			120, 2.0, // 生命值 120，衰减速度 2.0
@@ -426,8 +426,8 @@ func (m *MissionManager) updateObjectTrails() {
 
 // 更新弹药状态
 func (m *MissionManager) updateShotBullets() {
-	for i := 0; i < len(m.state.ForwardingBullets); i++ {
-		m.state.ForwardingBullets[i].Forward()
+	for i := 0; i < len(m.state.Arena.ForwardingBullets); i++ {
+		m.state.Arena.ForwardingBullets[i].Forward()
 	}
 
 	// 结算伤害
@@ -438,13 +438,13 @@ func (m *MissionManager) updateShotBullets() {
 
 		switch bt.TargetObjType {
 		case object.TypeShip:
-			for _, ship := range m.state.Ships {
+			for _, ship := range m.state.Arena.Ships {
 				// 总不能不小心打死自己吧，真是不应该 :D
 				if bt.Shooter == ship.Uid {
 					continue
 				}
 				// 如果友军伤害没启用，则不对己方战舰造成伤害
-				if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
+				if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
 					continue
 				}
 
@@ -480,13 +480,13 @@ func (m *MissionManager) updateShotBullets() {
 				}
 			}
 		case object.TypePlane:
-			for _, plane := range m.state.Planes {
+			for _, plane := range m.state.Arena.Planes {
 				// 总不能不小心打死自己吧，真是不应该 :D
 				if bt.Shooter == plane.Uid {
 					continue
 				}
 				// 如果友军伤害没启用，则不对己方战舰造成伤害
-				if !m.state.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
+				if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
 					continue
 				}
 				// 如果是舰对空，需要设置 “擦肩而过” 率，现在命中率太高（昭和防空，十防九空）
@@ -526,7 +526,7 @@ func (m *MissionManager) updateShotBullets() {
 	}
 
 	arrivedBullets, forwardingBullets := []*objBullet.Bullet{}, []*objBullet.Bullet{}
-	for _, bt := range m.state.ForwardingBullets {
+	for _, bt := range m.state.Arena.ForwardingBullets {
 		// 迷失的弹药，要及时消亡（如鱼雷没命中）
 		if bt.Life <= 0 {
 			// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
@@ -546,7 +546,7 @@ func (m *MissionManager) updateShotBullets() {
 			}
 		} else if bt.ShotType == objBullet.ShotTypeDirect {
 			// 鱼雷碰撞到陆地，应该不再前进
-			if bt.Type == objBullet.TypeTorpedo && m.state.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
+			if bt.Type == objBullet.TypeTorpedo && m.state.Core.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
 				bt.HitObjType = object.TypeLand
 				arrivedBullets = append(arrivedBullets, bt)
 			} else if resolveDamage(bt) {
@@ -559,7 +559,7 @@ func (m *MissionManager) updateShotBullets() {
 	}
 
 	// 继续塔塔开的，保留
-	m.state.ForwardingBullets = forwardingBullets
+	m.state.Arena.ForwardingBullets = forwardingBullets
 	// 已经到达目标地点的，转换成爆炸 & 伤害数值
 	// TODO 支持命中爆炸
 	for _, bt := range arrivedBullets {
@@ -568,7 +568,7 @@ func (m *MissionManager) updateShotBullets() {
 			continue
 		}
 
-		if m.state.GameOpts.DisplayDamageNumber {
+		if m.state.UI.GameOpts.DisplayDamageNumber {
 			fontSize, clr := 0.0, colorx.White
 			switch bt.CriticalType {
 			case objBullet.CriticalTypeNone:
@@ -579,8 +579,8 @@ func (m *MissionManager) updateShotBullets() {
 				fontSize, clr = float64(24), colorx.Red
 			}
 			// DEBUG: 调试用逻辑，区分敌我伤害
-			if m.state.DebugFlags.DamageColorByTeam {
-				if bt.BelongPlayer == m.state.CurPlayer {
+			if m.state.UI.DebugFlags.DamageColorByTeam {
+				if bt.BelongPlayer == m.state.Player.CurPlayer {
 					clr = colorx.Cyan
 				} else {
 					clr = colorx.DarkRed
@@ -593,7 +593,7 @@ func (m *MissionManager) updateShotBullets() {
 				fmt.Sprintf("%.2f", bt.RealDamage),
 			)
 			mark := objMark.NewText(bt.CurPos, flagText, fontSize, clr, 20)
-			m.state.GameMarks[mark.ID] = mark
+			m.state.UI.GameMarks[mark.ID] = mark
 		}
 	}
 }
@@ -602,38 +602,38 @@ func (m *MissionManager) updateShotBullets() {
 func (m *MissionManager) updateMissionShips() {
 	audioPlayQuota := 2
 	// 如果战舰 HP 为 0，则需要走消亡流程
-	for uid, ship := range m.state.Ships {
+	for uid, ship := range m.state.Arena.Ships {
 		if ship.CurHP <= 0 {
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			ship.CurHP = textureImg.MaxShipExplodeState
 
-			if audioPlayQuota > 0 && m.state.Camera.Contains(ship.CurPos) {
+			if audioPlayQuota > 0 && m.state.View.Camera.Contains(ship.CurPos) {
 				audio.PlayAudioToEnd(audioRes.NewShipExplode())
 				audioPlayQuota--
 			}
 
-			m.state.DestroyedShips = append(m.state.DestroyedShips, ship)
-			delete(m.state.Ships, uid)
+			m.state.Arena.DestroyedShips = append(m.state.Arena.DestroyedShips, ship)
+			delete(m.state.Arena.Ships, uid)
 		}
 	}
 
 	// 消亡中的战舰会逐渐掉血到 0
-	for _, ship := range m.state.DestroyedShips {
+	for _, ship := range m.state.Arena.DestroyedShips {
 		ship.CurHP -= 0.5
 		// 支持逐渐减速的效果，而不是直接就变成 0
 		ship.CurSpeed = max(0, ship.CurSpeed-ship.MaxSpeed/30)
 	}
 
 	// 移除已经完全消亡的战舰
-	m.state.DestroyedShips = lo.Filter(
-		m.state.DestroyedShips, func(ship *objUnit.BattleShip, _ int) bool { return ship.CurHP > 0 },
+	m.state.Arena.DestroyedShips = lo.Filter(
+		m.state.Arena.DestroyedShips, func(ship *objUnit.BattleShip, _ int) bool { return ship.CurHP > 0 },
 	)
 }
 
 // 更新局内战机
 func (m *MissionManager) updateMissionPlanes() {
 	// 如果战机 HP 为 0，则需要走消亡流程
-	for uid, plane := range m.state.Planes {
+	for uid, plane := range m.state.Arena.Planes {
 		if plane.CurHP <= 0 {
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			plane.CurHP = textureImg.MaxPlaneExplodeState
@@ -642,13 +642,13 @@ func (m *MissionManager) updateMissionPlanes() {
 			// 范围 [-0.5, 0.5]，正值右偏，负值左偏
 			plane.RemainRange = rand.Float64() - 0.5
 
-			m.state.DestroyedPlanes = append(m.state.DestroyedPlanes, plane)
-			delete(m.state.Planes, uid)
+			m.state.Arena.DestroyedPlanes = append(m.state.Arena.DestroyedPlanes, plane)
+			delete(m.state.Arena.Planes, uid)
 		}
 	}
 
-	mapCfg := m.state.MissionMD.MapCfg
-	for _, plane := range m.state.DestroyedPlanes {
+	mapCfg := m.state.Core.MissionMD.MapCfg
+	for _, plane := range m.state.Arena.DestroyedPlanes {
 		// 消亡中的战机会逐渐掉血到 0
 		plane.CurHP -= 1
 		// 模拟被击落效果：逐渐减速（比战舰更缓）并保持惯性前进
@@ -665,8 +665,8 @@ func (m *MissionManager) updateMissionPlanes() {
 	}
 
 	// 移除已经完全消亡的战舰
-	m.state.DestroyedPlanes = lo.Filter(
-		m.state.DestroyedPlanes, func(plane *objUnit.Plane, _ int) bool { return plane.CurHP > 0 },
+	m.state.Arena.DestroyedPlanes = lo.Filter(
+		m.state.Arena.DestroyedPlanes, func(plane *objUnit.Plane, _ int) bool { return plane.CurHP > 0 },
 	)
 }
 
@@ -674,37 +674,37 @@ func (m *MissionManager) updateMissionPlanes() {
 func (m *MissionManager) updateMissionStatus() {
 	calcNextStatusByShips := func(curStatus state.MissionStatus) state.MissionStatus {
 		// 还有战舰在沉没，游戏继续
-		if len(m.state.DestroyedShips) != 0 {
+		if len(m.state.Arena.DestroyedShips) != 0 {
 			return curStatus
 		}
 		// 检查所有战舰，判定胜利 / 失败
 		anySelfShip, anyEnemyShip := false, false
-		for _, ship := range m.state.Ships {
-			if ship.BelongPlayer == m.state.CurPlayer {
+		for _, ship := range m.state.Arena.Ships {
+			if ship.BelongPlayer == m.state.Player.CurPlayer {
 				anySelfShip = true
 			} else {
 				anyEnemyShip = true
 			}
 		}
 		// 自己的船都没了，失败
-		if !anySelfShip && len(m.state.DestroyedShips) == 0 {
+		if !anySelfShip && len(m.state.Arena.DestroyedShips) == 0 {
 			return state.MissionFailed
 		}
 		// 敌人都不存在，胜利
-		if !anyEnemyShip && len(m.state.DestroyedShips) == 0 {
+		if !anyEnemyShip && len(m.state.Arena.DestroyedShips) == 0 {
 			return state.MissionSuccess
 		}
 		return curStatus
 	}
 
-	switch m.state.MissionStatus {
+	switch m.state.Core.MissionStatus {
 	case state.MissionRunning:
 		// 暂停游戏
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionPaused
-			m.state.ConfirmQuitMission = false
+			m.state.Core.MissionStatus = state.MissionPaused
+			m.state.Core.ConfirmQuitMission = false
 		}
-		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
+		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
 	case state.MissionPaused:
 		input := state.PauseInputNone
 		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
@@ -713,44 +713,44 @@ func (m *MissionManager) updateMissionStatus() {
 			input = state.PauseInputResume
 		} else if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
 			sx, sy := ebiten.CursorPosition()
-			ui := state.CalcPauseUILayout(m.state.Layout)
+			ui := state.CalcPauseUILayout(m.state.View.Layout)
 			if ui.PrimaryButton.Contains(sx, sy) {
 				input = state.PauseInputResume
 			} else if ui.DangerButton.Contains(sx, sy) {
 				input = state.PauseInputQuit
 			}
 		}
-		m.state.MissionStatus, m.state.ConfirmQuitMission = state.ApplyPauseInput(
-			m.state.MissionStatus,
-			m.state.ConfirmQuitMission,
+		m.state.Core.MissionStatus, m.state.Core.ConfirmQuitMission = state.ApplyPauseInput(
+			m.state.Core.MissionStatus,
+			m.state.Core.ConfirmQuitMission,
 			input,
 		)
 		return
 	case state.MissionInMap:
 		// 退出全屏地图模式
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionRunning
+			m.state.Core.MissionStatus = state.MissionRunning
 		}
-		m.state.MissionStatus = calcNextStatusByShips(m.state.MissionStatus)
+		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
 	case state.MissionInTerminal:
 		// 退出终端模式
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionRunning
+			m.state.Core.MissionStatus = state.MissionRunning
 		}
 		return
 	case state.MissionInBuilding:
 		// 退出建筑物交互模式
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.MissionStatus = state.MissionRunning
+			m.state.Core.MissionStatus = state.MissionRunning
 		}
 	default:
-		m.state.MissionStatus = state.MissionRunning
+		m.state.Core.MissionStatus = state.MissionRunning
 	}
 
 	// 按下 m 键，切换地图展示模式
 	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
-		m.state.MissionStatus = lo.Ternary(
-			m.state.MissionStatus != state.MissionInMap,
+		m.state.Core.MissionStatus = lo.Ternary(
+			m.state.Core.MissionStatus != state.MissionInMap,
 			state.MissionInMap,
 			state.MissionRunning,
 		)
@@ -758,8 +758,8 @@ func (m *MissionManager) updateMissionStatus() {
 
 	// 按下 b 键，开启查看增援点模式
 	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
-		m.state.MissionStatus = lo.Ternary(
-			m.state.MissionStatus != state.MissionInBuilding,
+		m.state.Core.MissionStatus = lo.Ternary(
+			m.state.Core.MissionStatus != state.MissionInBuilding,
 			state.MissionInBuilding,
 			state.MissionRunning,
 		)
@@ -769,9 +769,9 @@ func (m *MissionManager) updateMissionStatus() {
 	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
 		ebiten.IsKeyPressed(ebiten.KeyShiftLeft) &&
 		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
-		m.state.MissionStatus = state.MissionInTerminal
+		m.state.Core.MissionStatus = state.MissionInTerminal
 		audio.PlayAudioToEnd(audioRes.NewCheating())
 		// 进入终端会按下 ctrl，此时会导致进入编组模式，需要强制退出下
-		m.state.IsGrouping = false
+		m.state.Interaction.IsGrouping = false
 	}
 }
