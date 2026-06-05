@@ -18,7 +18,7 @@ type InstructionSet struct {
 	instructions map[string]instr.Instruction
 }
 
-// NewInstructionSet ...
+// NewInstructionSet 创建空指令集
 func NewInstructionSet() *InstructionSet {
 	return &InstructionSet{
 		instructions: map[string]instr.Instruction{},

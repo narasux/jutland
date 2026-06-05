@@ -10,7 +10,6 @@ import (
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
-	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -145,12 +144,12 @@ func (m *MissionManager) updateSelectedShips() {
 		// 通过分组选中战舰
 		groupID := action.GetGroupIDByPressedKey()
 		if groupID != object.GroupIDNone {
-			shipInGroup := lo.Filter(lo.Values(m.state.Arena.Ships), func(ship *objUnit.BattleShip, _ int) bool {
-				return ship.BelongPlayer == m.state.Player.CurPlayer && ship.GroupID == groupID
-			})
-			m.state.Interaction.SelectedShips = lo.Map(shipInGroup, func(ship *objUnit.BattleShip, _ int) string {
-				return ship.Uid
-			})
+			m.state.Interaction.SelectedShips = m.state.Interaction.SelectedShips[:0]
+			for _, ship := range m.state.Arena.Ships {
+				if ship.BelongPlayer == m.state.Player.CurPlayer && ship.GroupID == groupID {
+					m.state.Interaction.SelectedShips = append(m.state.Interaction.SelectedShips, ship.Uid)
+				}
+			}
 
 			// 如果当前选中的分组不是当前按键的分组，则更新记录
 			if m.state.Interaction.SelectedGroupID != groupID {
@@ -172,10 +171,14 @@ func (m *MissionManager) updateSelectedShips() {
 	}
 
 	// 检查选中的战舰，如果已经被摧毁，则要去掉
-	m.state.Interaction.SelectedShips = lo.Filter(m.state.Interaction.SelectedShips, func(uid string, _ int) bool {
+	selectedShips := m.state.Interaction.SelectedShips[:0]
+	for _, uid := range m.state.Interaction.SelectedShips {
 		ship, ok := m.state.Arena.Ships[uid]
-		return ok && ship != nil && ship.CurHP > 0
-	})
+		if ok && ship != nil && ship.CurHP > 0 {
+			selectedShips = append(selectedShips, uid)
+		}
+	}
+	m.state.Interaction.SelectedShips = selectedShips
 	// 没有战舰被选中，应该重置 SelectedGroupID
 	if m.state.Interaction.SelectedGroupID != object.GroupIDNone && len(m.state.Interaction.SelectedShips) == 0 {
 		m.state.Interaction.SelectedGroupID = object.GroupIDNone

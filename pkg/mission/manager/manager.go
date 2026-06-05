@@ -22,7 +22,7 @@ type MissionManager struct {
 	playerBetaHandler  controller.InputHandler
 }
 
-// NewManager ...
+// New 创建任务管理器
 func New(mission string) *MissionManager {
 	return &MissionManager{
 		state:          state.NewMissionState(mission),
@@ -40,62 +40,71 @@ func (m *MissionManager) Draw(screen *ebiten.Image) {
 	m.drawer.Draw(screen, m.state, m.terminal)
 }
 
+// Update 更新一帧任务状态
 func (m *MissionManager) Update() (state.MissionStatus, error) {
-	// 如果是暂停，不要继续刷新
-	switch m.state.Core.MissionStatus {
+	status := m.state.Core.MissionStatus
+	switch status {
 	case state.MissionRunning:
 		m.updateRallyLineClick()
 		m.updateGameOptions()
-		m.updateInstructions()
-		m.executeInstructions()
-		m.updateCameraPosition()
-		m.updateGameMarks()
-		m.updateBuildings()
-		m.updateHospitalShipHealing()
-		m.updateSelectedShips()
-		m.updateShipGroups()
-		m.updateShipWeaponFire()
-		m.updatePlaneAttackOrReturn()
-		m.updatePlaneWeaponFire()
-		m.updateObjectTrails()
-		m.updateShotBullets()
-		m.updateMissionShips()
-		m.updateMissionPlanes()
-	case state.MissionInMap:
-		m.updateInstructions()
-		m.executeInstructions()
-		m.updateCameraPosition()
-		m.updateGameMarks()
-		m.updateBuildings()
-		m.updateHospitalShipHealing()
-		m.updateShipWeaponFire()
-		m.updatePlaneAttackOrReturn()
-		m.updatePlaneWeaponFire()
-		m.updateObjectTrails()
-		m.updateShotBullets()
-		m.updateMissionShips()
-		m.updateMissionPlanes()
-	case state.MissionInBuilding:
-		m.updateInstructions()
-		m.executeInstructions()
-		m.updateReinforcePoints()
-		m.updateGameMarks()
-		m.updateBuildings()
-		m.updateHospitalShipHealing()
-		m.updateShipWeaponFire()
-		m.updatePlaneAttackOrReturn()
-		m.updatePlaneWeaponFire()
-		m.updateObjectTrails()
-		m.updateShotBullets()
-		m.updateMissionShips()
-		m.updateMissionPlanes()
 	case state.MissionInTerminal:
 		m.updateTerminal()
 	case state.MissionPaused:
 		// 暂停时也可以移动相机
 		m.updateCameraPosition()
 	}
+
+	if missionStatusRunsSimulation(status) {
+		m.updateCommandPhase()
+		switch status {
+		case state.MissionRunning, state.MissionInMap:
+			m.updateCameraPosition()
+		case state.MissionInBuilding:
+			m.updateReinforcePoints()
+		}
+		m.updateSupportPhase()
+		if status == state.MissionRunning {
+			m.updateSelectedShips()
+			m.updateShipGroups()
+		}
+		m.updateCombatPhase()
+	}
+
 	m.updateMissionStatus()
 
 	return m.state.Core.MissionStatus, nil
+}
+
+// missionStatusRunsSimulation 判断当前任务状态是否需要继续推进战斗模拟
+func missionStatusRunsSimulation(status state.MissionStatus) bool {
+	switch status {
+	case state.MissionRunning, state.MissionInMap, state.MissionInBuilding:
+		return true
+	default:
+		return false
+	}
+}
+
+// updateCommandPhase 更新玩家和电脑指令并执行已就绪指令
+func (m *MissionManager) updateCommandPhase() {
+	m.updateInstructions()
+	m.executeInstructions()
+}
+
+// updateSupportPhase 更新标识、建筑和辅助单位效果
+func (m *MissionManager) updateSupportPhase() {
+	m.updateGameMarks()
+	m.updateBuildings()
+	m.updateHospitalShipHealing()
+}
+
+// updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
+func (m *MissionManager) updateCombatPhase() {
+	m.updateShipWeaponFire()
+	m.updatePlaneAttackOrReturn()
+	m.updatePlaneWeaponFire()
+	m.updateObjectTrails()
+	m.updateShotBullets()
+	m.updateMissionShips()
+	m.updateMissionPlanes()
 }

@@ -4,12 +4,8 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
-	"slices"
 	"strconv"
-	"time"
 
-	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
@@ -18,125 +14,11 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
-	objPos "github.com/narasux/jutland/pkg/mission/object/position"
-	"github.com/narasux/jutland/pkg/mission/object/trail"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
-	"github.com/narasux/jutland/pkg/mission/state"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
-	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
-
-// 逐条执行指令（移动/炮击/雷击/建造）
-func (m *MissionManager) executeInstructions() {
-	m.instructionSet.ExecAll(m.state)
-}
-
-// 更新游戏标识
-func (m *MissionManager) updateGameMarks() {
-	for markID, mark := range m.state.UI.GameMarks {
-		mark.Life--
-
-		// 检查游戏标识，如果生命值为 0，则删除
-		if mark.Life <= 0 {
-			delete(m.state.UI.GameMarks, markID)
-		}
-	}
-
-	// 集结点设置失败提示倒计时
-	if m.state.UI.RallySetFailedTick > 0 {
-		m.state.UI.RallySetFailedTick--
-	}
-}
-
-// 更新建筑物
-func (m *MissionManager) updateBuildings() {
-	// 增援点当然算是建筑物！
-	for _, rp := range m.state.Arena.ReinforcePoints {
-		if ship := rp.Update(
-			m.state.Arena.ShipUidGenerators[rp.BelongPlayer],
-			// FIXME 目前电脑玩家先不限制金钱
-			lo.Ternary(rp.BelongPlayer == m.state.Player.CurPlayer, m.state.Player.CurFunds, 50000),
-		); ship != nil {
-			m.state.Arena.Ships[ship.Uid] = ship
-			if rp.BelongPlayer == m.state.Player.CurPlayer {
-				m.state.Player.CurFunds -= ship.FundsCost
-			}
-			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
-			x, y := rand.Intn(7)-3, rand.Intn(7)-3
-			targetPos := objPos.New(rp.RallyPos.MX+x, rp.RallyPos.MY+y)
-			m.instructionSet.Add(instr.NewShipMove(ship.Uid, targetPos))
-		}
-	}
-
-	// 油井当然算是建筑物！
-	fontSize := float64(24)
-	for _, op := range m.state.Arena.OilPlatforms {
-		text := fmt.Sprintf("+%d $", op.Yield)
-		for _, ship := range m.state.Arena.Ships {
-			if ship.Type != objUnit.ShipTypeCargo || ship.BelongPlayer != m.state.Player.CurPlayer {
-				continue
-			}
-
-			// TODO 目前是只要货轮在油井附近就给钱，后续考虑开采 & 存储 & 货轮容量的设计
-			if ship.CurPos.Near(op.Pos, float64(op.Radius)) {
-				op.AddShip(ship)
-			} else {
-				op.RemoveShip(ship.Uid)
-			}
-		}
-
-		for uid, ship := range op.LoadingOilShips {
-			// 如果货轮不在了，需要及时移除掉
-			cargo, ok := m.state.Arena.Ships[uid]
-			if !ok {
-				op.RemoveShip(uid)
-			} else if cargo.BelongPlayer == m.state.Player.CurPlayer && ship.Update() {
-				m.state.Player.CurFunds += int64(ship.FundYield)
-				mark := objMark.NewText(cargo.CurPos, text, fontSize, colorx.Gold, 50)
-				m.state.UI.GameMarks[mark.ID] = mark
-			}
-		}
-	}
-}
-
-// 更新医疗船治疗逻辑
-// 医疗船自动治疗范围内同阵营战舰（含自身），显示绿色浮动文字
-// 注意：治疗间隔不受 config.G.SpeedMultiplier 影响，使用 time.Now() 而非帧计数
-func (m *MissionManager) updateHospitalShipHealing() {
-	now := time.Now().UnixMilli()
-	for _, ship := range m.state.Arena.Ships {
-		// 只有存活的医疗船才能治疗
-		if ship.Type != objUnit.ShipTypeHospital || ship.CurHP <= 0 {
-			continue
-		}
-		// 检查距上次治疗是否 ≥ 5000ms（5 秒固定间隔）
-		if now-ship.LastHealAt < 5000 {
-			continue
-		}
-		// 遍历同阵营战舰目标
-		for _, target := range m.state.Arena.Ships {
-			// 目标必须是同阵营、存活且未满血
-			if target.BelongPlayer != ship.BelongPlayer || target.CurHP <= 0 || target.CurHP >= target.TotalHP {
-				continue
-			}
-			// 检查目标是否在治疗范围内
-			if !ship.CurPos.Near(target.CurPos, objUnit.HospitalShipEffectRange) {
-				continue
-			}
-			// 恢复 HP（不超过上限）
-			healAmount := ship.Length * ship.Width / 6
-			target.CurHP = min(target.TotalHP, target.CurHP+healAmount)
-			// 创建绿色浮动治疗文字
-			text := fmt.Sprintf("+ %d HP", int(healAmount))
-			mark := objMark.NewText(target.CurPos, text, 20, colorx.Green, 50)
-			m.state.UI.GameMarks[mark.ID] = mark
-		}
-		// 治疗完成后更新时间戳
-		ship.LastHealAt = now
-	}
-}
 
 // 更新战舰武器开火相关状态
 // TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
@@ -199,7 +81,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 					}
 				}
 			}
-			m.state.Arena.ForwardingBullets = slices.Concat(m.state.Arena.ForwardingBullets, bullets)
+			m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
 		}
 	}
 
@@ -356,7 +238,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 					}
 				}
 			}
-			m.state.Arena.ForwardingBullets = slices.Concat(m.state.Arena.ForwardingBullets, bullets)
+			m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
 		}
 	}
 
@@ -366,61 +248,6 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 	} else if torpedoLaunched {
 		// 有鱼雷就发声音
 		audio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
-	}
-}
-
-// 更新尾流状态（战舰，鱼雷，炮弹）
-func (m *MissionManager) updateObjectTrails() {
-	for i := 0; i < len(m.state.Arena.Trails); i++ {
-		m.state.Arena.Trails[i].Update()
-	}
-	// 生命周期结束的，不再需要
-	m.state.Arena.Trails = lo.Filter(m.state.Arena.Trails, func(t *trail.Trail, _ int) bool {
-		return t.IsAlive()
-	})
-	for _, ship := range m.state.Arena.Ships {
-		if trails := ship.GenTrails(); trails != nil {
-			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
-		}
-	}
-	for _, bt := range m.state.Arena.ForwardingBullets {
-		// 炸弹目前没有尾流
-		if bt.Type == objBullet.TypeBomb {
-			continue
-		}
-		if trails := bt.GenTrails(); trails != nil {
-			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
-		}
-	}
-	// 消亡中的飞机生成火焰 + 黑烟尾流（拉烟效果）
-	for _, plane := range m.state.Arena.DestroyedPlanes {
-		if plane.CurSpeed <= 0 {
-			continue
-		}
-		// 计算飞机尾部位置（相对飞机朝向的后方偏移）
-		tailPos := plane.CurPos.Copy()
-		sinVal := math.Sin(plane.CurRotation * math.Pi / 180)
-		cosVal := math.Cos(plane.CurRotation * math.Pi / 180)
-		tailOffset := plane.Length / constants.MapBlockSize * 0.3
-		tailPos.SubRx(sinVal * tailOffset)
-		tailPos.AddRy(cosVal * tailOffset)
-
-		// 火焰尾流（橙红色，较小，扩散快，生命短）
-		m.state.Arena.Trails = append(m.state.Arena.Trails, trail.New(
-			tailPos, textureImg.TrailShapeCircle,
-			3.0, 0.8, // 初始尺寸 3，扩散速度 0.8
-			80, 3.0, // 生命值 80，衰减速度 3.0
-			0, 0,
-			colorx.Orange,
-		))
-		// 黑烟尾流（深灰色，较大，扩散慢，生命长）
-		m.state.Arena.Trails = append(m.state.Arena.Trails, trail.New(
-			tailPos, textureImg.TrailShapeCircle,
-			2.0, 0.5, // 初始尺寸 2，扩散速度 0.5
-			120, 2.0, // 生命值 120，衰减速度 2.0
-			2, 0, // 延迟 2 帧出现（略慢于火焰）
-			colorx.DarkSilver,
-		))
 	}
 }
 
@@ -595,183 +422,5 @@ func (m *MissionManager) updateShotBullets() {
 			mark := objMark.NewText(bt.CurPos, flagText, fontSize, clr, 20)
 			m.state.UI.GameMarks[mark.ID] = mark
 		}
-	}
-}
-
-// 更新局内战舰
-func (m *MissionManager) updateMissionShips() {
-	audioPlayQuota := 2
-	// 如果战舰 HP 为 0，则需要走消亡流程
-	for uid, ship := range m.state.Arena.Ships {
-		if ship.CurHP <= 0 {
-			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
-			ship.CurHP = textureImg.MaxShipExplodeState
-
-			if audioPlayQuota > 0 && m.state.View.Camera.Contains(ship.CurPos) {
-				audio.PlayAudioToEnd(audioRes.NewShipExplode())
-				audioPlayQuota--
-			}
-
-			m.state.Arena.DestroyedShips = append(m.state.Arena.DestroyedShips, ship)
-			delete(m.state.Arena.Ships, uid)
-		}
-	}
-
-	// 消亡中的战舰会逐渐掉血到 0
-	for _, ship := range m.state.Arena.DestroyedShips {
-		ship.CurHP -= 0.5
-		// 支持逐渐减速的效果，而不是直接就变成 0
-		ship.CurSpeed = max(0, ship.CurSpeed-ship.MaxSpeed/30)
-	}
-
-	// 移除已经完全消亡的战舰
-	m.state.Arena.DestroyedShips = lo.Filter(
-		m.state.Arena.DestroyedShips, func(ship *objUnit.BattleShip, _ int) bool { return ship.CurHP > 0 },
-	)
-}
-
-// 更新局内战机
-func (m *MissionManager) updateMissionPlanes() {
-	// 如果战机 HP 为 0，则需要走消亡流程
-	for uid, plane := range m.state.Arena.Planes {
-		if plane.CurHP <= 0 {
-			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
-			plane.CurHP = textureImg.MaxPlaneExplodeState
-
-			// 随机决定坠落偏转方向和幅度，存储在 RemainRange 中（借用该字段）
-			// 范围 [-0.5, 0.5]，正值右偏，负值左偏
-			plane.RemainRange = rand.Float64() - 0.5
-
-			m.state.Arena.DestroyedPlanes = append(m.state.Arena.DestroyedPlanes, plane)
-			delete(m.state.Arena.Planes, uid)
-		}
-	}
-
-	mapCfg := m.state.Core.MissionMD.MapCfg
-	for _, plane := range m.state.Arena.DestroyedPlanes {
-		// 消亡中的战机会逐渐掉血到 0
-		plane.CurHP -= 1
-		// 模拟被击落效果：逐渐减速（比战舰更缓）并保持惯性前进
-		plane.CurSpeed = max(0, plane.CurSpeed-plane.MaxSpeed/60)
-		// 模拟失控螺旋：每帧添加微小旋转偏转（借用 RemainRange 存储偏转方向）
-		plane.CurRotation += plane.RemainRange
-		if plane.CurSpeed > 0 {
-			nextPos := plane.CurPos.Copy()
-			nextPos.AddRx(math.Sin(plane.CurRotation*math.Pi/180) * plane.CurSpeed)
-			nextPos.SubRy(math.Cos(plane.CurRotation*math.Pi/180) * plane.CurSpeed)
-			nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
-			plane.CurPos = nextPos
-		}
-	}
-
-	// 移除已经完全消亡的战舰
-	m.state.Arena.DestroyedPlanes = lo.Filter(
-		m.state.Arena.DestroyedPlanes, func(plane *objUnit.Plane, _ int) bool { return plane.CurHP > 0 },
-	)
-}
-
-// 计算下一帧任务状态
-func (m *MissionManager) updateMissionStatus() {
-	calcNextStatusByShips := func(curStatus state.MissionStatus) state.MissionStatus {
-		// 还有战舰在沉没，游戏继续
-		if len(m.state.Arena.DestroyedShips) != 0 {
-			return curStatus
-		}
-		// 检查所有战舰，判定胜利 / 失败
-		anySelfShip, anyEnemyShip := false, false
-		for _, ship := range m.state.Arena.Ships {
-			if ship.BelongPlayer == m.state.Player.CurPlayer {
-				anySelfShip = true
-			} else {
-				anyEnemyShip = true
-			}
-		}
-		// 自己的船都没了，失败
-		if !anySelfShip && len(m.state.Arena.DestroyedShips) == 0 {
-			return state.MissionFailed
-		}
-		// 敌人都不存在，胜利
-		if !anyEnemyShip && len(m.state.Arena.DestroyedShips) == 0 {
-			return state.MissionSuccess
-		}
-		return curStatus
-	}
-
-	switch m.state.Core.MissionStatus {
-	case state.MissionRunning:
-		// 暂停游戏
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.Core.MissionStatus = state.MissionPaused
-			m.state.Core.ConfirmQuitMission = false
-		}
-		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
-	case state.MissionPaused:
-		input := state.PauseInputNone
-		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
-			input = state.PauseInputQuit
-		} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			input = state.PauseInputResume
-		} else if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
-			sx, sy := ebiten.CursorPosition()
-			ui := state.CalcPauseUILayout(m.state.View.Layout)
-			if ui.PrimaryButton.Contains(sx, sy) {
-				input = state.PauseInputResume
-			} else if ui.DangerButton.Contains(sx, sy) {
-				input = state.PauseInputQuit
-			}
-		}
-		m.state.Core.MissionStatus, m.state.Core.ConfirmQuitMission = state.ApplyPauseInput(
-			m.state.Core.MissionStatus,
-			m.state.Core.ConfirmQuitMission,
-			input,
-		)
-		return
-	case state.MissionInMap:
-		// 退出全屏地图模式
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.Core.MissionStatus = state.MissionRunning
-		}
-		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
-	case state.MissionInTerminal:
-		// 退出终端模式
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.Core.MissionStatus = state.MissionRunning
-		}
-		return
-	case state.MissionInBuilding:
-		// 退出建筑物交互模式
-		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-			m.state.Core.MissionStatus = state.MissionRunning
-		}
-	default:
-		m.state.Core.MissionStatus = state.MissionRunning
-	}
-
-	// 按下 m 键，切换地图展示模式
-	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
-		m.state.Core.MissionStatus = lo.Ternary(
-			m.state.Core.MissionStatus != state.MissionInMap,
-			state.MissionInMap,
-			state.MissionRunning,
-		)
-	}
-
-	// 按下 b 键，开启查看增援点模式
-	if inpututil.IsKeyJustPressed(ebiten.KeyB) {
-		m.state.Core.MissionStatus = lo.Ternary(
-			m.state.Core.MissionStatus != state.MissionInBuilding,
-			state.MissionInBuilding,
-			state.MissionRunning,
-		)
-	}
-
-	// 按下 LeftCtrl，LeftShift 的同时按下 ` 键开启终端
-	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
-		ebiten.IsKeyPressed(ebiten.KeyShiftLeft) &&
-		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
-		m.state.Core.MissionStatus = state.MissionInTerminal
-		audio.PlayAudioToEnd(audioRes.NewCheating())
-		// 进入终端会按下 ctrl，此时会导致进入编组模式，需要强制退出下
-		m.state.Interaction.IsGrouping = false
 	}
 }
