@@ -51,6 +51,9 @@ func (h *HumanInputHandler) Handle(
 
 func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[string]instr.Instruction {
 	instructions := map[string]instr.Instruction{}
+	if misState.UI.SidebarConsumesCursor {
+		return instructions
+	}
 
 	// 当前选中的战舰数量
 	selectedShipCount := len(misState.Interaction.SelectedShips)

@@ -14,25 +14,15 @@ import (
 )
 
 // 更新游戏选项
-func (m *MissionManager) updateGameOptions() {
+func (m *MissionManager) updateGameOptions(skipCursorInput bool) {
 	_, wheelY := ebiten.Wheel()
-	if wheelY != 0 {
+	if !skipCursorInput && wheelY != 0 {
 		sx, sy := ebiten.CursorPosition()
 		if wheelY > 0 {
 			m.state.StepZoomAtScreenPoint(1, sx, sy)
 		} else {
 			m.state.StepZoomAtScreenPoint(-1, sx, sy)
 		}
-	}
-
-	// 按下 d 键，全局展示 / 不展示所有战舰状态
-	if inpututil.IsKeyJustPressed(ebiten.KeyD) {
-		m.state.UI.GameOpts.ForceDisplayState = !m.state.UI.GameOpts.ForceDisplayState
-	}
-
-	// 按下 n 键，全局展示 / 不展示所有伤害数字
-	if inpututil.IsKeyJustPressed(ebiten.KeyN) {
-		m.state.UI.GameOpts.DisplayDamageNumber = !m.state.UI.GameOpts.DisplayDamageNumber
 	}
 }
 

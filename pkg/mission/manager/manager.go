@@ -9,6 +9,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/hacker"
+	"github.com/narasux/jutland/pkg/mission/sidebar"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -16,6 +17,7 @@ import (
 type MissionManager struct {
 	state              *state.MissionState
 	drawer             *drawer.Drawer
+	sidebar            *sidebar.Panel
 	terminal           *hacker.Terminal
 	instructionSet     *InstructionSet
 	playerAlphaHandler controller.InputHandler
@@ -27,6 +29,7 @@ func New(mission string) *MissionManager {
 	return &MissionManager{
 		state:          state.NewMissionState(mission),
 		drawer:         drawer.NewDrawer(mission),
+		sidebar:        sidebar.New(mission),
 		terminal:       hacker.NewTerminal(),
 		instructionSet: NewInstructionSet(),
 		// 目前用户一只能是人类，用户二是电脑 TODO 支持多人远程联机
@@ -38,19 +41,28 @@ func New(mission string) *MissionManager {
 // Draw 绘制任务图像
 func (m *MissionManager) Draw(screen *ebiten.Image) {
 	m.drawer.Draw(screen, m.state, m.terminal)
+	m.sidebar.Draw(screen, m.state)
 }
 
 // Update 更新一帧任务状态
 func (m *MissionManager) Update() (state.MissionStatus, error) {
 	status := m.state.Core.MissionStatus
+	if status == state.MissionRunning {
+		m.sidebar.Update(m.state)
+	} else {
+		m.state.UI.SidebarConsumesCursor = false
+	}
+
 	switch status {
 	case state.MissionRunning:
-		m.updateRallyLineClick()
-		m.updateGameOptions()
+		if !m.state.UI.SidebarConsumesCursor {
+			m.updateRallyLineClick()
+		}
+		m.updateGameOptions(m.state.UI.SidebarConsumesCursor)
 	case state.MissionInTerminal:
 		m.updateTerminal()
 	case state.MissionPaused:
-		m.updateGameOptions()
+		m.updateGameOptions(false)
 		// 暂停时也可以移动相机
 		m.updateCameraPosition()
 	}
@@ -65,7 +77,11 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		}
 		m.updateSupportPhase()
 		if status == state.MissionRunning {
-			m.updateSelectedShips()
+			if !m.state.UI.SidebarConsumesCursor {
+				m.updateSelectedShips()
+			} else {
+				m.state.Interaction.IsAreaSelecting = false
+			}
 			m.updateShipGroups()
 		}
 		m.updateCombatPhase()

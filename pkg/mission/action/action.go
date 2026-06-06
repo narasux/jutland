@@ -19,6 +19,7 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 	}
 	x, y := ebiten.CursorPosition()
 	w, h := misLayout.Width, misLayout.Height
+	rightEdgeWidth := 50
 
 	// Hover 上侧
 	if y < 5 {
@@ -53,12 +54,12 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 		return HoverScreenLeft
 	}
 	// Hover 右侧
-	if x > w-5 {
+	if x > w-rightEdgeWidth {
 		return HoverScreenRight
 	}
 
 	// Hover 在中间
-	if 5 < x && x < w-5 && 5 < y && y < h-5 {
+	if 5 < x && x < w-rightEdgeWidth && 5 < y && y < h-5 {
 		return HoverScreenMiddle
 	}
 	return DoNothing
@@ -69,6 +70,10 @@ var sArea = SelectedArea{}
 
 // 探测游戏地图上的鼠标选区
 func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
+	if misState.UI.SidebarConsumesCursor {
+		misState.Interaction.IsAreaSelecting = false
+		return nil
+	}
 	// 左键没有被压下，直接跳过
 	if !ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 		misState.Interaction.IsAreaSelecting = false
@@ -88,6 +93,9 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 
 // 探测游戏地图上的鼠标按键点击
 func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *objPos.MapPos {
+	if misState.UI.SidebarConsumesCursor {
+		return nil
+	}
 	// 鼠标按键没有点击，直接跳过
 	if !inpututil.IsMouseButtonJustPressed(button) {
 		return nil

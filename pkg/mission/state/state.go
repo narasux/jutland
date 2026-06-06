@@ -109,6 +109,10 @@ type MissionArenaState struct {
 type MissionUIState struct {
 	// 游戏标识
 	GameMarks map[objMark.ID]*objMark.Mark
+	// 右侧任务侧栏是否展开
+	SidebarExpanded bool
+	// 右侧任务侧栏本帧是否占用鼠标输入
+	SidebarConsumesCursor bool
 	// 显示集结线的增援点 Uid（游戏主地图中点击增援点时设置）
 	ShowRallyLinePointUid string
 	// 集结点设置失败计数器（用于短暂闪烁提示）
@@ -249,6 +253,8 @@ func NewMissionState(mission string) *MissionState {
 		},
 		UI: MissionUIState{
 			GameMarks:             map[objMark.ID]*objMark.Mark{},
+			SidebarExpanded:       false,
+			SidebarConsumesCursor: false,
 			ShowRallyLinePointUid: "",
 			RallySetFailedTick:    0,
 			GameOpts: GameOptions{
