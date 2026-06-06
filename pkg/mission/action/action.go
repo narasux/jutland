@@ -5,9 +5,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
-	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/object"
-	"github.com/narasux/jutland/pkg/mission/object/position"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
@@ -78,23 +77,17 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 	if !misState.Interaction.IsAreaSelecting {
 		sx, sy := ebiten.CursorPosition()
 		sArea.StartX, sArea.StartY = sx, sy
-		sArea.StartAt.AssignRxy(
-			misState.View.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
-			misState.View.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
-		)
+		sArea.StartAt = misState.ScreenToCameraPos(float64(sx), float64(sy))
 		misState.Interaction.IsAreaSelecting = true
 	}
 	sx, sy := ebiten.CursorPosition()
 	sArea.CurX, sArea.CurY = sx, sy
-	sArea.CurAt.AssignRxy(
-		misState.View.Camera.Pos.RX+float64(sx)/constants.MapBlockSize,
-		misState.View.Camera.Pos.RY+float64(sy)/constants.MapBlockSize,
-	)
+	sArea.CurAt = misState.ScreenToCameraPos(float64(sx), float64(sy))
 	return &sArea
 }
 
 // 探测游戏地图上的鼠标按键点击
-func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *position.MapPos {
+func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *objPos.MapPos {
 	// 鼠标按键没有点击，直接跳过
 	if !inpututil.IsMouseButtonJustPressed(button) {
 		return nil
@@ -103,11 +96,9 @@ func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.Mou
 }
 
 // 探测当前鼠标在地图上的位置
-func DetectCursorPosOnMap(misState *state.MissionState) *position.MapPos {
+func DetectCursorPosOnMap(misState *state.MissionState) *objPos.MapPos {
 	sx, sy := ebiten.CursorPosition()
-	rx := misState.View.Camera.Pos.RX + float64(sx)/constants.MapBlockSize
-	ry := misState.View.Camera.Pos.RY + float64(sy)/constants.MapBlockSize
-	return lo.ToPtr(position.NewR(rx, ry))
+	return lo.ToPtr(misState.ScreenToCameraPos(float64(sx), float64(sy)))
 }
 
 // 键盘按键与组 ID 的映射关系

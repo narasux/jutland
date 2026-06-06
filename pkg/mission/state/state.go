@@ -205,7 +205,7 @@ func NewMissionState(mission string) *MissionState {
 		oilPlatforms[op.Uid] = op
 	}
 
-	return &MissionState{
+	ms := &MissionState{
 		Core: MissionCoreState{
 			Mission:            mission,
 			MissionStatus:      MissionRunning,
@@ -259,8 +259,10 @@ func NewMissionState(mission string) *MissionState {
 				// 默认展示伤害数值
 				DisplayDamageNumber: true,
 				// 默认缩放 1 倍
-				Zoom: 1,
+				Zoom: DefaultZoom(),
 			},
 		},
 	}
+	ms.RefreshCameraSize()
+	return ms
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
-	"github.com/narasux/jutland/pkg/common/constants"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -64,21 +63,16 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 			buildingImg.ReinforcePoint,
 			buildingImg.EnemyReinforcePoint,
 		)
-		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, img, rp.Rotation)
-		opts.GeoM.Translate(
-			(rp.Pos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2),
-			(rp.Pos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2),
-		)
-		screen.DrawImage(img, opts)
+		x, y := ms.CameraPosToScreen(rp.Pos)
+		drawImageCentered(screen, img, x, y, rp.Rotation, ms.ZoomScale())
 
 		if process := rp.Progress(); process > 0 {
 			d.drawText(
 				screen,
 				strconv.Itoa(process),
-				(rp.Pos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-10,
-				(rp.Pos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-12,
-				20,
+				x-10*ms.ZoomScale(),
+				y-12*ms.ZoomScale(),
+				20*ms.ZoomScale(),
 				font.Hang,
 				colorx.White,
 			)
@@ -90,17 +84,14 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 			continue
 		}
 		img := buildingImg.OilPlatform
-		x := (op.Pos.RX - ms.View.Camera.Pos.RX) * constants.MapBlockSize
-		y := (op.Pos.RY - ms.View.Camera.Pos.RY) * constants.MapBlockSize
-		opts := d.genDefaultDrawImageOptions()
-		opts.GeoM.Translate(x-float64(img.Bounds().Dx()/2), y-float64(img.Bounds().Dy()/2))
-		screen.DrawImage(img, opts)
+		x, y := ms.CameraPosToScreen(op.Pos)
+		drawImageCentered(screen, img, x, y, 0, ms.ZoomScale())
 		// 绘制范围圈
 		vector.StrokeCircle(
 			screen,
 			float32(x),
 			float32(y),
-			float32(op.Radius*constants.MapBlockSize),
+			float32(float64(op.Radius)*ms.MapBlockDisplaySize()),
 			2,
 			colorx.Green,
 			false,
@@ -551,16 +542,15 @@ func (d *Drawer) drawRallyLine(screen *ebiten.Image, ms *state.MissionState) {
 	}
 
 	// 将地图坐标转换为屏幕坐标
-	startX := (rp.Pos.RX - ms.View.Camera.Pos.RX) * constants.MapBlockSize
-	startY := (rp.Pos.RY - ms.View.Camera.Pos.RY) * constants.MapBlockSize
-	endX := (rp.RallyPos.RX - ms.View.Camera.Pos.RX) * constants.MapBlockSize
-	endY := (rp.RallyPos.RY - ms.View.Camera.Pos.RY) * constants.MapBlockSize
+	startX, startY := ms.CameraPosToScreen(rp.Pos)
+	endX, endY := ms.CameraPosToScreen(rp.RallyPos)
 
 	const (
 		rallyFlagPoleHeight = 24.0
 		rallyLineEndGap     = 8.0
 	)
-	startGap := float64(max(buildingImg.ReinforcePoint.Bounds().Dx(), buildingImg.ReinforcePoint.Bounds().Dy()))/2 + 8
+	startGap := (float64(max(buildingImg.ReinforcePoint.Bounds().Dx(), buildingImg.ReinforcePoint.Bounds().Dy()))/2 + 8) *
+		ms.ZoomScale()
 	lineStartX, lineStartY, lineEndX, lineEndY, ok := ebutil.TrimLineSegment(
 		startX, startY, endX, endY, startGap, rallyLineEndGap,
 	)

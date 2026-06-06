@@ -11,7 +11,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
-	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -22,8 +21,52 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	weaponImg "github.com/narasux/jutland/pkg/resources/images/weapon"
 	"github.com/narasux/jutland/pkg/utils/colorx"
-	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
+
+// closestResourceZoom 选择最接近目标显示倍率的资源档位。
+// 这样可以优先复用已有缓存图片，再用少量 GeoM 缩放补齐剩余比例。
+func closestResourceZoom(target float64, candidates []int) int {
+	best := candidates[0]
+	bestDiff := math.Abs(target - float64(best))
+	for _, candidate := range candidates[1:] {
+		diff := math.Abs(target - float64(candidate))
+		if diff < bestDiff {
+			best = candidate
+			bestDiff = diff
+		}
+	}
+	return best
+}
+
+// shipResource 返回战舰图片和残余绘制缩放比例。
+// 普通战舰按最接近档位取图，特殊默认素材只取原图并完全依赖场景缩放。
+func shipResource(name string, sceneZoom int) (*ebiten.Image, float64) {
+	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom())
+	if name == "duck" || name == "waterdrop" || name == "molamola" {
+		return shipImg.GetTop(name, 1), target
+	}
+	resourceZoom := closestResourceZoom(target, []int{1, 2, 4})
+	return shipImg.GetTop(name, resourceZoom), target / float64(resourceZoom)
+}
+
+// planeResource 返回飞机图片和残余绘制缩放比例。
+// 飞机保留旧实现中比战舰大一档的视觉效果，再匹配最接近的飞机资源档位。
+func planeResource(name string, sceneZoom int) (*ebiten.Image, float64) {
+	// 飞机沿用原来的视觉意图：默认比战舰大一档。
+	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom()) * 2
+	resourceZoom := closestResourceZoom(target, []int{1, 2, 4, 8, 10})
+	return planeImg.Get(name, resourceZoom), target / float64(resourceZoom)
+}
+
+// weaponResource 返回武器状态图标和残余绘制缩放比例。
+// 它把场景 zoom 转成资源档位，避免把新的场景缩放值直接传给旧资源接口。
+func weaponResource(
+	weapon weaponImg.WeaponType, status weaponImg.WeaponStatus, sceneZoom int,
+) (*ebiten.Image, float64) {
+	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom())
+	resourceZoom := closestResourceZoom(target, []int{1, 2, 4})
+	return weaponImg.Get(weapon, status, resourceZoom), target / float64(resourceZoom)
+}
 
 // 绘制医疗船治疗范围圈（仅在选中己方医疗船时显示）
 func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.MissionState) {
@@ -40,11 +83,11 @@ func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.Missi
 		if !ms.View.Camera.Contains(ship.CurPos) {
 			continue
 		}
-		// 计算圆心屏幕坐标（相对于 Camera 偏移）
-		cx := float32((ship.CurPos.RX - ms.View.Camera.Pos.RX) * constants.MapBlockSize)
-		cy := float32((ship.CurPos.RY - ms.View.Camera.Pos.RY) * constants.MapBlockSize)
+		x, y := ms.CameraPosToScreen(ship.CurPos)
+		cx := float32(x)
+		cy := float32(y)
 		// 计算半径像素值
-		radius := float32(objUnit.HospitalShipEffectRange * constants.MapBlockSize)
+		radius := float32(objUnit.HospitalShipEffectRange * ms.MapBlockDisplaySize())
 		// 绘制半透明浅绿色实线圆
 		vector.StrokeCircle(screen, cx, cy, radius, 1, colorx.LightGreen, false)
 	}
@@ -59,13 +102,7 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 		}
 
 		trailImg := textureImg.GetTrail(trail.Shape, trail.CurSize, trail.CurLife, trail.Color)
-		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, trailImg, trail.Rotation)
-		opts.GeoM.Translate(
-			(trail.Pos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(trailImg.Bounds().Dx()/2),
-			(trail.Pos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(trailImg.Bounds().Dy()/2),
-		)
-		screen.DrawImage(trailImg, opts)
+		drawImageCenteredAtMapPos(screen, ms, trailImg, trail.Pos, trail.Rotation, ms.ZoomScale())
 	}
 }
 
@@ -83,34 +120,21 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
-		sImg := shipImg.GetTop(s.Name, ms.UI.GameOpts.Zoom)
-		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
-		opts.GeoM.Translate(
-			(s.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(sImg.Bounds().Dx()/2),
-			(s.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(sImg.Bounds().Dy()/2),
-		)
-		screen.DrawImage(sImg, opts)
+		sImg, sImgScale := shipResource(s.Name, ms.UI.GameOpts.Zoom)
+		shipX, shipY := ms.CameraPosToScreen(s.CurPos)
+		drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
 
 		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP，武器状态
 		isShipSelected := slices.Contains(ms.Interaction.SelectedShips, s.Uid)
 		if (ms.UI.GameOpts.ForceDisplayState || isShipSelected) && s.BelongPlayer == ms.Player.CurPlayer {
-			opts = d.genDefaultDrawImageOptions()
-
+			sceneScale := ms.ZoomScale()
 			// 绘制当前生命值
-			opts.GeoM.Translate(
-				(s.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-25,
-				(s.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-30,
-			)
 			hpImg := textureImg.GetHP(s.CurHP, s.TotalHP)
-			screen.DrawImage(hpImg, opts)
+			drawImageAtScale(screen, hpImg, shipX-25*sceneScale, shipY-30*sceneScale, sceneScale)
 
 			if isShipSelected {
-				opts.GeoM.Translate(-35, -10)
-				screen.DrawImage(textureImg.ShipSelected, opts)
-				opts.GeoM.Translate(35, 10)
+				drawImageAtScale(screen, textureImg.ShipSelected, shipX-60*sceneScale, shipY-40*sceneScale, sceneScale)
 			}
-			opts.GeoM.Translate(-20, 0)
 
 			// 渲染武器状态时候的 X 方向间隙大小
 			var weaponInterstitialSpacing float64
@@ -133,6 +157,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			default:
 				weaponInterstitialSpacing = 35.0
 			}
+			weaponX := shipX - 45*sceneScale
 
 			// 绘制主炮状态
 			if s.Weapon.HasMainGun {
@@ -143,10 +168,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status = weaponImg.WeaponStatusLoaded
 				}
 
-				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeMainGun, status, ms.UI.GameOpts.Zoom)
-				opts.GeoM.Translate(20, -30)
-				screen.DrawImage(weaponIcon, opts)
-				opts.GeoM.Translate(0, 30)
+				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeMainGun, status, ms.UI.GameOpts.Zoom)
+				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
 			}
 
 			// 绘制副炮状态
@@ -158,10 +181,9 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status = weaponImg.WeaponStatusLoaded
 				}
 
-				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeSecondaryGun, status, ms.UI.GameOpts.Zoom)
-				opts.GeoM.Translate(weaponInterstitialSpacing, -30)
-				screen.DrawImage(weaponIcon, opts)
-				opts.GeoM.Translate(0, 30)
+				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeSecondaryGun, status, ms.UI.GameOpts.Zoom)
+				weaponX += weaponInterstitialSpacing * sceneScale
+				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
 			}
 
 			// 绘制防空炮状态（注：由于防空炮装填速度很快，所以不需要绘制装填中的状态，即只有红绿两种）
@@ -171,10 +193,9 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status = weaponImg.WeaponStatusDisabled
 				}
 
-				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeAntiAircraftGun, status, ms.UI.GameOpts.Zoom)
-				opts.GeoM.Translate(weaponInterstitialSpacing, -30)
-				screen.DrawImage(weaponIcon, opts)
-				opts.GeoM.Translate(0, 30)
+				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeAntiAircraftGun, status, ms.UI.GameOpts.Zoom)
+				weaponX += weaponInterstitialSpacing * sceneScale
+				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
 			}
 
 			// 绘制鱼雷发射器状态
@@ -186,30 +207,25 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status = weaponImg.WeaponStatusLoaded
 				}
 
-				weaponIcon := weaponImg.Get(weaponImg.WeaponTypeTorpedo, status, ms.UI.GameOpts.Zoom)
-				opts.GeoM.Translate(weaponInterstitialSpacing, -30)
-				screen.DrawImage(weaponIcon, opts)
-				opts.GeoM.Translate(0, 30)
+				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeTorpedo, status, ms.UI.GameOpts.Zoom)
+				weaponX += weaponInterstitialSpacing * sceneScale
+				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
 			}
 
 			// 如果被编组，需要标记出来
 			if s.GroupID != object.GroupIDNone {
-				textStr, fontSize := strconv.Itoa(int(s.GroupID)), float64(30)
-				posX := (s.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize - 55
-				posY := (s.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize - 85
+				textStr, fontSize := strconv.Itoa(int(s.GroupID)), float64(30)*sceneScale
+				posX := shipX - 55*sceneScale
+				posY := shipY - 85*sceneScale
 				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 			}
 		}
 
 		// 如果全局启用状态展示，则敌方战舰也要绘制 HP 值
 		if ms.UI.GameOpts.ForceDisplayState && s.BelongPlayer != ms.Player.CurPlayer {
-			opts = d.genDefaultDrawImageOptions()
-			opts.GeoM.Translate(
-				(s.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-25,
-				(s.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-30,
-			)
+			sceneScale := ms.ZoomScale()
 			hpImg := textureImg.GetEnemyHP(s.CurHP, s.TotalHP)
-			screen.DrawImage(hpImg, opts)
+			drawImageAtScale(screen, hpImg, shipX-25*sceneScale, shipY-30*sceneScale, sceneScale)
 		}
 
 		// TODO 绘制战损情况，开火情况
@@ -224,24 +240,13 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 			continue
 		}
 
-		sImg := shipImg.GetTop(s.Name, ms.UI.GameOpts.Zoom)
-		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
-		opts.GeoM.Translate(
-			(s.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(sImg.Bounds().Dx()/2),
-			(s.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(sImg.Bounds().Dy()/2),
-		)
-		screen.DrawImage(sImg, opts)
+		sImg, sImgScale := shipResource(s.Name, ms.UI.GameOpts.Zoom)
+		shipX, shipY := ms.CameraPosToScreen(s.CurPos)
+		drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
 
 		// 绘制爆炸效果
 		explodeImg := textureImg.GetShipExplode(s.CurHP)
-		opts = d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, explodeImg, s.CurRotation)
-		opts.GeoM.Translate(
-			(s.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
-			(s.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2)-30,
-		)
-		screen.DrawImage(explodeImg, opts)
+		drawImageCentered(screen, explodeImg, shipX, shipY-30*ms.ZoomScale(), s.CurRotation, ms.ZoomScale())
 	}
 }
 
@@ -259,25 +264,19 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 			continue
 		}
 
-		// TODO 目前飞机默认战舰 2 倍尺寸，渲染效果会好一些
-		pImg := planeImg.Get(p.Name, ms.UI.GameOpts.Zoom*2)
-		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
-		opts.GeoM.Translate(
-			(p.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(pImg.Bounds().Dx()/2),
-			(p.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(pImg.Bounds().Dy()/2),
-		)
-		screen.DrawImage(pImg, opts)
+		pImg, pImgScale := planeResource(p.Name, ms.UI.GameOpts.Zoom)
+		planeX, planeY := ms.CameraPosToScreen(p.CurPos)
+		drawImageCentered(screen, pImg, planeX, planeY, p.CurRotation, pImgScale)
 
 		// DEBUG: 如果启用了调试显示飞机 HP，则在飞机上部显示生命值
 		if ms.UI.DebugFlags.ShowPlaneHP {
 			// 格式：当前 HP / 总 HP（例如：85.0/100.0）
 			hpText := fmt.Sprintf("%.1f/%.1f", p.CurHP, p.TotalHP)
-			fontSize := float64(14)
+			fontSize := float64(14) * ms.ZoomScale()
 			// 计算文本位置（飞机图片上方居中）
 			textWidth := float64(len(hpText)) * fontSize * 0.6 // 估算文本宽度
-			posX := (p.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize - textWidth/2
-			posY := (p.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize - float64(pImg.Bounds().Dy()/2) - 20
+			posX := planeX - textWidth/2
+			posY := planeY - float64(pImg.Bounds().Dy())*pImgScale/2 - 20*ms.ZoomScale()
 			// 根据阵营选择颜色：友军绿色，敌军红色
 			textColor := colorx.Green
 			if p.BelongPlayer != ms.Player.CurPlayer {
@@ -296,24 +295,13 @@ func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionStat
 			continue
 		}
 
-		pImg := planeImg.Get(p.Name, ms.UI.GameOpts.Zoom*2)
-		opts := d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
-		opts.GeoM.Translate(
-			(p.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(pImg.Bounds().Dx()/2),
-			(p.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(pImg.Bounds().Dy()/2),
-		)
-		screen.DrawImage(pImg, opts)
+		pImg, pImgScale := planeResource(p.Name, ms.UI.GameOpts.Zoom)
+		planeX, planeY := ms.CameraPosToScreen(p.CurPos)
+		drawImageCentered(screen, pImg, planeX, planeY, p.CurRotation, pImgScale)
 
 		// 绘制爆炸效果，还会额外添加火焰+黑烟尾流来表现坠落拉烟效果
 		explodeImg := textureImg.GetPlaneExplode(p.CurHP)
-		opts = d.genDefaultDrawImageOptions()
-		ebutil.SetOptsCenterRotation(opts, explodeImg, p.CurRotation)
-		opts.GeoM.Translate(
-			(p.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(explodeImg.Bounds().Dx()/2),
-			(p.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(explodeImg.Bounds().Dy()/2),
-		)
-		screen.DrawImage(explodeImg, opts)
+		drawImageCentered(screen, explodeImg, planeX, planeY, p.CurRotation, ms.ZoomScale())
 	}
 }
 
@@ -327,7 +315,6 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		}
 		img := objBullet.GetImg(b.Type, b.Diameter)
 
-		opts := d.genDefaultDrawImageOptions()
 		rotation := b.Rotation
 		offsetX, offsetY := 0.0, 0.0
 		// 激光弹丸：图片以中心旋转绘制，弹丸位置对应图片中心，
@@ -335,15 +322,11 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		// 修复：将中心向射击方向前移 h/2，使图片尾部对齐弹丸，
 		// 光束仅向射击正方向延伸。
 		if b.Type == objBullet.TypeLaser {
-			halfH := float64(img.Bounds().Dy()) / 2.0
+			halfH := float64(img.Bounds().Dy()) * ms.ZoomScale() / 2.0
 			offsetX = halfH * math.Sin(rotation*math.Pi/180)
 			offsetY = -halfH * math.Cos(rotation*math.Pi/180)
 		}
-		ebutil.SetOptsCenterRotation(opts, img, rotation)
-		opts.GeoM.Translate(
-			(b.CurPos.RX-ms.View.Camera.Pos.RX)*constants.MapBlockSize-float64(img.Bounds().Dx()/2)+offsetX,
-			(b.CurPos.RY-ms.View.Camera.Pos.RY)*constants.MapBlockSize-float64(img.Bounds().Dy()/2)+offsetY,
-		)
-		screen.DrawImage(img, opts)
+		x, y := ms.CameraPosToScreen(b.CurPos)
+		drawImageCentered(screen, img, x+offsetX, y+offsetY, rotation, ms.ZoomScale())
 	}
 }

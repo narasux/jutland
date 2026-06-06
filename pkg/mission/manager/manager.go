@@ -50,6 +50,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	case state.MissionInTerminal:
 		m.updateTerminal()
 	case state.MissionPaused:
+		m.updateGameOptions()
 		// 暂停时也可以移动相机
 		m.updateCameraPosition()
 	}
