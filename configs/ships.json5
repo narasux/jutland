@@ -5646,7 +5646,6 @@
     width: 41,
     fundsCost: 920,
     timeCost: 100,
-    // TODO 还有 10 座双联装 21 发防空火箭弹（主炮顶4，舰尾6）
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -5980,70 +5979,70 @@
         // 右防空火箭炮 A
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: 0.3,
           rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
+          leftFiringArc: [180, 360]
         },
         // 左防空火箭炮 A
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
-          rightFiringArc: [0, 0],
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 B
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.35,
           rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
+          leftFiringArc: [180, 360]
         },
         // 左防空火箭炮 B
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
-          rightFiringArc: [0, 0],
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 C
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.76,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 C
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.76,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 D
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.8,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 D
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.8,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 E
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.99,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 E
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.99,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
@@ -6065,7 +6064,6 @@
     width: 41,
     fundsCost: 1200,
     timeCost: 130,
-    // TODO 还有 12 座双联装 21 发防空火箭弹（主炮侧面4，舰桥2，舰尾6）
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -6539,84 +6537,84 @@
         // 右防空火箭炮 A
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: 0.35,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 A
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: 0.35,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 B
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: 0.31,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 B
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: 0.31,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 C
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: 0.08,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 C
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: 0.08,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 D
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.76,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 D
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.76,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 E
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.8,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 E
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.8,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 F
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.99,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 F
         {
           name: "JP/120/21/Type5/AA",
-          posPercent: 0,
+          posPercent: -0.99,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }

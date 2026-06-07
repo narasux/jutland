@@ -340,15 +340,17 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		img := objBullet.GetImg(b.Type, b.Diameter)
 
 		rotation := b.Rotation
-		x, y := ms.CameraPosToScreen(b.CurPos)
+		offsetX, offsetY := 0.0, 0.0
+		// 激光弹丸：图片以中心旋转绘制，弹丸位置对应图片中心，
+		// 导致一半光束向前（射击方向）、一半光束向后（反方向光线）。
+		// 修复：将中心向射击方向前移 h/2，使图片尾部对齐弹丸，
+		// 光束仅向射击正方向延伸。
 		if b.Type == objBullet.TypeLaser {
-			// 激光的模拟位置每帧都会前进；绘制时回推到发射原点，
-			// 避免光束尾部因延迟/高速位移而脱离船体。
-			origin := b.CurPos.Copy()
-			origin.SubRx(math.Sin(rotation*math.Pi/180) * b.Speed * float64(b.ForwardAge))
-			origin.AddRy(math.Cos(rotation*math.Pi/180) * b.Speed * float64(b.ForwardAge))
-			x, y = ms.CameraPosToScreen(origin)
+			halfH := float64(img.Bounds().Dy()) * ms.ZoomScale() / 2.0
+			offsetX = halfH * math.Sin(rotation*math.Pi/180)
+			offsetY = -halfH * math.Cos(rotation*math.Pi/180)
 		}
-		drawImageCentered(screen, img, x, y, rotation, ms.ZoomScale())
+		x, y := ms.CameraPosToScreen(b.CurPos)
+		drawImageCentered(screen, img, x+offsetX, y+offsetY, rotation, ms.ZoomScale())
 	}
 }
