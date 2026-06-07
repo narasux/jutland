@@ -73,6 +73,14 @@
           leftFiringArc: [340, 360]
         }
       ],
+      rockets: [
+        {
+          name: "US/AIR/RB/127/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
     }
   },
   {
@@ -176,6 +184,14 @@
           leftFiringArc: [340, 360]
         }
       ],
+      rockets: [
+        {
+          name: "US/AIR/RB/127/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
       releaseInterval: 2,
     }
   },
@@ -261,6 +277,14 @@
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        {
+          name: "US/AIR/RB/127/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
         }
       ],
       releaseInterval: 5

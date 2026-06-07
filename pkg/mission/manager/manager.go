@@ -79,6 +79,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	case state.MissionRunning:
 		if !m.state.UI.SidebarConsumesCursor {
 			m.updateRallyLineClick()
+			m.updateRallyPointRightClick()
 		}
 		m.updateGameOptions(m.state.UI.SidebarConsumesCursor)
 	case state.MissionInTerminal:

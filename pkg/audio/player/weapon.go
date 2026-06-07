@@ -45,10 +45,12 @@ func (p *WeaponFire) PlayShipFire(maxBulletDiameter int, torpedoLaunched, rocket
 	}
 }
 
-// PlayPlaneFire 按战机本帧投弹或鱼雷发射事件播放音效。
-func (p *WeaponFire) PlayPlaneFire(bombReleased, torpedoLaunched bool) {
+// PlayPlaneFire 按战机本帧投弹、火箭或鱼雷发射事件播放音效。
+func (p *WeaponFire) PlayPlaneFire(bombReleased, rocketLaunched, torpedoLaunched bool) {
 	if bombReleased {
 		baseAudio.PlayAudioToEnd(audioRes.NewBombSpawn())
+	} else if rocketLaunched {
+		p.PlayRocketSpawn()
 	} else if torpedoLaunched {
 		baseAudio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
 	}

@@ -16,7 +16,7 @@ var shellDiameters = []int{
 	1024, 510, 500, 460, 457, 406, 381, 356, 343, 305, 283,
 	203, 200, 180, 155, 152, 150, 140, 133, 130, 127, 120,
 	114, 105, 102, 100, 88, 76, 57, 45, 40, 37, 28, 25, 20,
-	13, 8,
+	13, 8, 1,
 }
 
 // shells 炮弹图片映射表
@@ -42,7 +42,6 @@ var rockets = make(map[int]*ebiten.Image)
 
 // init 预加载弹药图片资源
 func init() {
-	// FIXME 后续支持加载 1， 1/2， 1/4 三种尺寸
 	// 加载炮弹图片（图片尺寸是实际显示的4倍，加载时按1/4缩放）
 	for _, diameter := range shellDiameters {
 		path := fmt.Sprintf("/bullets/shells/%d.png", diameter)
@@ -53,7 +52,9 @@ func init() {
 		// 缩放到原图的 1/4
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		opts.GeoM.Scale(0.25, 0.25)
-		zoomImg := ebiten.NewImage(img.Bounds().Dx()/4, img.Bounds().Dy()/4)
+		width := max(1, img.Bounds().Dx()/4)
+		height := max(1, img.Bounds().Dy()/4)
+		zoomImg := ebiten.NewImage(width, height)
 		zoomImg.DrawImage(img, opts)
 		shells[diameter] = zoomImg
 	}

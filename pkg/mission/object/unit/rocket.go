@@ -38,6 +38,10 @@ type RocketLauncher struct {
 	BulletSpread int `json:"bulletSpread"`
 	// 火箭弹速度
 	BulletSpeed float64 `json:"bulletSpeed"`
+	// 能否反舰
+	AntiShip bool `json:"antiShip"`
+	// 能否防空
+	AntiAircraft bool `json:"antiAircraft"`
 	// 近炸触发半径
 	ProximityRadius float64 `json:"proximityRadius"`
 	// 爆炸伤害半径
@@ -60,6 +64,17 @@ type RocketLauncher struct {
 }
 
 var _ AttackWeapon = (*RocketLauncher)(nil)
+
+// IsAvailableAntiType 是否能反制该类型
+func (r *RocketLauncher) IsAvailableAntiType(objType object.Type) bool {
+	if r.AntiAircraft && objType == object.TypePlane {
+		return true
+	}
+	if r.AntiShip && objType == object.TypeShip {
+		return true
+	}
+	return false
+}
 
 // Reloaded 是否已装填并满足下一枚火箭弹的发射间隔
 func (r *RocketLauncher) Reloaded() bool {
@@ -96,9 +111,9 @@ func (r *RocketLauncher) InShotRange(shipCurRotation float64, curPos, targetPos 
 	return r.LeftFiringArc.Contains(rotation) || r.RightFiringArc.Contains(rotation)
 }
 
-// Fire 发射下一枚防空火箭弹，只攻击飞机；每组按单发间隔逐发打完
+// Fire 发射下一枚火箭弹；每组按单发间隔逐发打完
 func (r *RocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
-	if r.Disable || !r.Reloaded() || enemy.ObjType() != object.TypePlane {
+	if r.Disable || !r.Reloaded() || !r.IsAvailableAntiType(enemy.ObjType()) {
 		return nil
 	}
 

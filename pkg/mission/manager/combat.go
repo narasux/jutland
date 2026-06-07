@@ -186,33 +186,36 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 
 // 更新战机武器开火相关状态
 func (m *MissionManager) updatePlaneWeaponFire() {
-	bombReleased, torpedoLaunched := false, false
+	bombReleased, rocketLaunched, torpedoLaunched := false, false, false
 
 	for _, plane := range m.state.Arena.Planes {
 		inRangeEnemies := []objUnit.Hurtable{}
-		// 敌机
-		for _, enemy := range m.state.Arena.Planes {
-			// 不能攻击己方的战机（包括自己）
-			if plane.BelongPlayer == enemy.BelongPlayer {
-				continue
+		if plane.AttackObjType() == object.TypePlane {
+			// 敌机
+			for _, enemy := range m.state.Arena.Planes {
+				// 不能攻击己方的战机（包括自己）
+				if plane.BelongPlayer == enemy.BelongPlayer {
+					continue
+				}
+				// 如果不在 对空 最大射程内，跳过
+				if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-			// 如果不在 对空 最大射程内，跳过
-			if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
-				continue
+		} else if plane.AttackObjType() == object.TypeShip {
+			// 敌舰
+			for _, enemy := range m.state.Arena.Ships {
+				// 不能攻击自己，也不能攻击己方的战舰
+				if plane.BelongPlayer == enemy.BelongPlayer {
+					continue
+				}
+				// 如果不在 对舰 最大射程内，跳过
+				if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToShipRange {
+					continue
+				}
+				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
-			inRangeEnemies = append(inRangeEnemies, enemy)
-		}
-		// 敌舰
-		for _, enemy := range m.state.Arena.Ships {
-			// 不能攻击自己，也不能攻击己方的战舰
-			if plane.BelongPlayer == enemy.BelongPlayer {
-				continue
-			}
-			// 如果不在 对舰 最大射程内，跳过
-			if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToShipRange {
-				continue
-			}
-			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
 		if total := len(inRangeEnemies); total != 0 {
 			// 射程内的敌人都会被攻击
@@ -225,11 +228,13 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 			if m.state.View.Camera.Contains(plane.CurPos) {
 				for _, bt := range bullets {
 					// 统计一个就好，不要吵吵
-					if bombReleased || torpedoLaunched {
+					if bombReleased || rocketLaunched || torpedoLaunched {
 						break
 					}
 					if bt.Type == objBullet.TypeBomb {
 						bombReleased = true
+					} else if bt.Type == objBullet.TypeRocket {
+						rocketLaunched = true
 					} else if bt.Type == objBullet.TypeTorpedo {
 						torpedoLaunched = true
 					}
@@ -239,7 +244,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 		}
 	}
 
-	m.weaponFirePlayer.PlayPlaneFire(bombReleased, torpedoLaunched)
+	m.weaponFirePlayer.PlayPlaneFire(bombReleased, rocketLaunched, torpedoLaunched)
 }
 
 // 更新弹药状态
@@ -387,7 +392,7 @@ func (m *MissionManager) updateShotBullets() {
 
 	arrivedBullets, forwardingBullets := []*objBullet.Bullet{}, []*objBullet.Bullet{}
 	for _, bt := range m.state.Arena.ForwardingBullets {
-		if bt.Type == objBullet.TypeRocket {
+		if bt.Type == objBullet.TypeRocket && bt.TargetObjType == object.TypePlane {
 			if rocketShouldExplode(bt) {
 				resolveRocketDamage(bt)
 				arrivedBullets = append(arrivedBullets, bt)

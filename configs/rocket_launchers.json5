@@ -11,6 +11,8 @@
     range: 16,
     bulletSpread: 200,
     bulletSpeed: 880,
+    antiShip: false,
+    antiAircraft: true,
     proximityRadius: 0.25,
     blastRadius: 0.45
   },
@@ -26,6 +28,8 @@
     range: 12,
     bulletSpread: 250,
     bulletSpeed: 720,
+    antiShip: false,
+    antiAircraft: true,
     proximityRadius: 0.25,
     blastRadius: 0.45,
   },

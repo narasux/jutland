@@ -9,6 +9,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/object"
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
@@ -299,13 +300,24 @@ func (m *MissionManager) updateReinforcePoints() {
 			my := int((float64(sy) - mapY) / topH * mapHeight)
 			mx = max(min(mx, m.state.Core.MissionMD.MapCfg.Width-1), 0)
 			my = max(min(my, m.state.Core.MissionMD.MapCfg.Height-1), 0)
-			if m.state.Core.MissionMD.MapCfg.Map.IsLand(mx, my) {
-				m.state.UI.RallySetFailedTick = 60
-			} else {
-				rp.SetRallyPos(objPos.New(mx, my))
-			}
+			m.setReinforcePointRallyPos(rp, objPos.New(mx, my))
 		}
 	}
+}
+
+// setReinforcePointRallyPos 设置增援点集合点，并复用陆地拒绝与失败反馈。
+func (m *MissionManager) setReinforcePointRallyPos(rp *objBuilding.ReinforcePoint, pos objPos.MapPos) {
+	mx := max(min(pos.MX, m.state.Core.MissionMD.MapCfg.Width-1), 0)
+	my := max(min(pos.MY, m.state.Core.MissionMD.MapCfg.Height-1), 0)
+	if m.state.Core.MissionMD.MapCfg.Map.IsLand(mx, my) {
+		m.state.UI.RallySetFailedTick = 60
+		return
+	}
+	pos.AssignRxy(
+		max(min(pos.RX, float64(m.state.Core.MissionMD.MapCfg.Width-1)), 0),
+		max(min(pos.RY, float64(m.state.Core.MissionMD.MapCfg.Height-1)), 0),
+	)
+	rp.SetRallyPos(pos)
 }
 
 // 更新集结线显示（游戏模式下点击己方增援点）
@@ -329,4 +341,23 @@ func (m *MissionManager) updateRallyLineClick() {
 		}
 	}
 	m.state.UI.ShowRallyLinePointUid = ""
+}
+
+// updateRallyPointRightClick 在主地图中右键设置当前选中增援点的集合点。
+func (m *MissionManager) updateRallyPointRightClick() {
+	if m.state.Core.MissionStatus != state.MissionRunning || m.state.UI.ShowRallyLinePointUid == "" {
+		return
+	}
+
+	pos := action.DetectMouseButtonClickOnMap(m.state, ebiten.MouseButtonRight)
+	if pos == nil {
+		return
+	}
+
+	rp, ok := m.state.Arena.ReinforcePoints[m.state.UI.ShowRallyLinePointUid]
+	if !ok || rp.BelongPlayer != m.state.Player.CurPlayer {
+		m.state.UI.ShowRallyLinePointUid = ""
+		return
+	}
+	m.setReinforcePointRallyPos(rp, *pos)
 }

@@ -20,6 +20,7 @@ func init() {
 	initGunMap()
 	initTorpedoLauncherMap()
 	initRocketLauncherMap()
+	initPlaneRocketLauncherMap()
 	initReleaserMap()
 	initPlaneMap()
 	initShipMap()
@@ -112,6 +113,28 @@ func initRocketLauncherMap() {
 	log.Println("rocket launchers data loaded from json5 file")
 }
 
+func initPlaneRocketLauncherMap() {
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "plane_rocket_launchers.json5"))
+	if err != nil {
+		log.Fatal("failed to open plane_rocket_launchers.json5: ", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var rocketLaunchers []objUnit.PlaneRocketLauncher
+	if err = json5.Unmarshal(bytes, &rocketLaunchers); err != nil {
+		log.Fatal("failed to unmarshal plane_rocket_launchers.json5: ", err)
+	}
+
+	for _, lc := range rocketLaunchers {
+		lc.Range /= 2
+		lc.BulletSpeed /= 4000
+		objUnit.PlaneRocketLauncherMap[lc.Name] = &lc
+	}
+	log.Println("plane rocket launchers data loaded from json5 file")
+}
+
 func initReleaserMap() {
 	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "releasers.json5"))
 	if err != nil {
@@ -172,6 +195,14 @@ func initPlaneMap() {
 				objUnit.FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
 			))
 		}
+		// 火箭弹
+		for _, rocketMD := range p.Weapon.RocketsMD {
+			p.Weapon.Rockets = append(p.Weapon.Rockets, objUnit.NewPlaneRocketLauncher(
+				rocketMD.Name, rocketMD.PosPercent,
+				objUnit.FiringArc{Start: rocketMD.LeftFiringArc[0], End: rocketMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: rocketMD.RightFiringArc[0], End: rocketMD.RightFiringArc[1]},
+			))
+		}
 		// 计算最大射程
 		for _, gun := range p.Weapon.Guns {
 			if gun.AntiShip {
@@ -186,6 +217,13 @@ func initPlaneMap() {
 		}
 		for _, torpedo := range p.Weapon.Torpedoes {
 			p.Weapon.MaxToShipRange = max(p.Weapon.MaxToShipRange, torpedo.Range)
+		}
+		for _, rocket := range p.Weapon.Rockets {
+			if p.Type == objUnit.PlaneTypeFighter {
+				p.Weapon.MaxToPlaneRange = max(p.Weapon.MaxToPlaneRange, rocket.Range)
+			} else if p.Type == objUnit.PlaneTypeDiveBomber || p.Type == objUnit.PlaneTypeTorpedoBomber {
+				p.Weapon.MaxToShipRange = max(p.Weapon.MaxToShipRange, rocket.Range)
+			}
 		}
 
 		// 当前生命值
@@ -281,7 +319,12 @@ func initShipMap() {
 			s.Weapon.MaxToShipRange = max(s.Weapon.MaxToShipRange, torpedo.Range)
 		}
 		for _, rocket := range s.Weapon.Rockets {
-			s.Weapon.MaxToPlaneRange = max(s.Weapon.MaxToPlaneRange, rocket.Range)
+			if rocket.AntiShip {
+				s.Weapon.MaxToShipRange = max(s.Weapon.MaxToShipRange, rocket.Range)
+			}
+			if rocket.AntiAircraft {
+				s.Weapon.MaxToPlaneRange = max(s.Weapon.MaxToPlaneRange, rocket.Range)
+			}
 		}
 		// 飞机相关状态
 		s.Aircraft.HasPlane = len(s.Aircraft.Groups) > 0

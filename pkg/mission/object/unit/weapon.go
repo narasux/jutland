@@ -139,6 +139,8 @@ type PlaneWeapon struct {
 	BombsMD []WeaponMetadata `json:"bombs"`
 	// 鱼雷元数据
 	TorpedoesMD []WeaponMetadata `json:"torpedoes"`
+	// 火箭弹元数据
+	RocketsMD []WeaponMetadata `json:"rockets"`
 	// 最小释放间隔
 	ReleaseInterval int64 `json:"releaseInterval"`
 	// 最近释放时间
@@ -149,6 +151,8 @@ type PlaneWeapon struct {
 	Bombs []*Releaser
 	// 鱼雷
 	Torpedoes []*Releaser
+	// 火箭弹
+	Rockets []*PlaneRocketLauncher
 	// 最大射程（各类武器射程最大值）
 	MaxToShipRange  float64
 	MaxToPlaneRange float64

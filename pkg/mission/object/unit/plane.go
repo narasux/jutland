@@ -148,7 +148,10 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	for i := 0; i < len(p.Weapon.Guns); i++ {
 		shotBullets = append(shotBullets, p.Weapon.Guns[i].Fire(p, enemy)...)
 	}
-	// 释放器类武器，有最小的释放间隔限制，且目前只能攻击战舰（后面有导弹，火箭弹再说）
+	for i := 0; i < len(p.Weapon.Rockets); i++ {
+		shotBullets = append(shotBullets, p.Weapon.Rockets[i].Fire(p, enemy)...)
+	}
+	// 释放器类武器，有最小的释放间隔限制，且目前只能攻击战舰。
 	if enemy.ObjType() == object.TypeShip {
 		timeNow := time.Now().UnixMilli()
 		if timeNow > p.Weapon.LatestReleaseAt+p.Weapon.ReleaseInterval*1e3 {
@@ -217,6 +220,11 @@ func (p *Plane) MustReturn() bool {
 		}
 		for _, r := range p.Weapon.Torpedoes {
 			if !r.Released {
+				return false
+			}
+		}
+		for _, r := range p.Weapon.Rockets {
+			if !r.Exhausted() {
 				return false
 			}
 		}

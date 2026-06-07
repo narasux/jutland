@@ -54,6 +54,10 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 	if misState.UI.SidebarConsumesCursor {
 		return instructions
 	}
+	// 选中增援点时，主地图右键用于设置集合点，不再同时下发舰船移动命令。
+	if misState.UI.ShowRallyLinePointUid != "" && inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonRight) {
+		return instructions
+	}
 
 	// 当前选中的战舰数量
 	selectedShipCount := len(misState.Interaction.SelectedShips)

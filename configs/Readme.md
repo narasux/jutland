@@ -148,10 +148,46 @@
     bulletSpread: 140,
     // 火箭弹速度
     bulletSpeed: 700,
+    // 是否具备反舰能力
+    antiShip: false,
+    // 是否具备防空能力
+    antiAircraft: true,
     // 近炸触发半径（地图格数）
     proximityRadius: 0.25,
     // 爆炸伤害半径（地图格数）
     blastRadius: 0.45,
+  },
+]
+```
+
+## 飞机火箭发射器配置（plane_rocket_launchers.json5）
+
+```json5
+[
+  {
+    // 飞机火箭发射器名称
+    // 名称建议包含总备弹数量，如 127/4 表示 127mm / 4 发挂载
+    name: "US/AIR/RB/127/4",
+    // 火箭弹名称
+    bulletName: "US/RB/127/1937",
+    // 挂载总数；飞机火箭弹不会在空中重装
+    rocketCount: 4,
+    // 单发发射间隔（单位：秒）
+    shotInterval: 0.18,
+    // 射程（地图格数）
+    range: 8,
+    // 火箭弹散布
+    bulletSpread: 140,
+    // 火箭弹速度
+    bulletSpeed: 700,
+    // 是否具备反舰能力
+    antiShip: true,
+    // 是否具备防空能力；第一版实际目标仍由载机类型决定
+    antiAircraft: false,
+    // 近炸触发半径；实际只有对空目标会进入近炸分支
+    proximityRadius: 0.22,
+    // 爆炸伤害半径；实际只有对空目标会进入范围伤害分支
+    blastRadius: 0.35,
   },
 ]
 ```
@@ -377,6 +413,15 @@
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
+        },
+      ],
+      // 火箭弹（参数与机炮挂载点相同，名称需确保在 plane_rocket_launchers.json5 中存在）
+      rockets: [
+        {
+          name: "US/AIR/RB/127/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
         },
       ],
       // 释放间隔（单位：秒，炸弹/鱼雷两次投放之间的最小间隔）
