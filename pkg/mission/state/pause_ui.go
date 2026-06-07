@@ -7,7 +7,7 @@ type PauseUIRect struct {
 	X, Y, W, H float64
 }
 
-// Contains 判断屏幕坐标是否落在暂停 UI 矩形内。
+// Contains 判断屏幕坐标是否落在暂停 UI 矩形内
 func (r PauseUIRect) Contains(x, y int) bool {
 	fx, fy := float64(x), float64(y)
 	return fx >= r.X && fx <= r.X+r.W && fy >= r.Y && fy <= r.Y+r.H
@@ -20,7 +20,7 @@ type PauseUILayout struct {
 	DangerButton  PauseUIRect
 }
 
-// CalcPauseUILayout 根据当前屏幕尺寸计算暂停面板布局。
+// CalcPauseUILayout 根据当前屏幕尺寸计算暂停面板布局
 func CalcPauseUILayout(screen layout.ScreenLayout) PauseUILayout {
 	panelW, panelH := 420.0, 220.0
 	buttonW, buttonH := 112.0, 38.0

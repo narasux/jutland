@@ -195,6 +195,12 @@ func (s *BattleShip) DisableWeapon(t WeaponType) {
 		}
 		s.Weapon.TorpedoDisabled = true
 	}
+	if t == WeaponTypeAll || t == WeaponTypeRocket {
+		for i := 0; i < len(s.Weapon.Rockets); i++ {
+			s.Weapon.Rockets[i].Disable = true
+		}
+		s.Weapon.RocketDisabled = true
+	}
 }
 
 // EnableWeapon 启用武器
@@ -223,6 +229,12 @@ func (s *BattleShip) EnableWeapon(t WeaponType) {
 		}
 		s.Weapon.TorpedoDisabled = false
 	}
+	if t == WeaponTypeAll || t == WeaponTypeRocket {
+		for i := 0; i < len(s.Weapon.Rockets); i++ {
+			s.Weapon.Rockets[i].Disable = false
+		}
+		s.Weapon.RocketDisabled = false
+	}
 }
 
 // Attack 攻击指定目标
@@ -247,6 +259,9 @@ func (s *BattleShip) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	}
 	for _, tp := range s.Weapon.Torpedoes {
 		shotBullets = append(shotBullets, tp.Fire(s, enemy)...)
+	}
+	for _, rocket := range s.Weapon.Rockets {
+		shotBullets = append(shotBullets, rocket.Fire(s, enemy)...)
 	}
 	return shotBullets
 }

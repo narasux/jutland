@@ -24,7 +24,7 @@ import (
 )
 
 // closestResourceZoom 选择最接近目标显示倍率的资源档位。
-// 这样可以优先复用已有缓存图片，再用少量 GeoM 缩放补齐剩余比例。
+// 这样可以优先复用已有缓存图片，再用少量 GeoM 缩放补齐剩余比例
 func closestResourceZoom(target float64, candidates []int) int {
 	best := candidates[0]
 	bestDiff := math.Abs(target - float64(best))
@@ -39,7 +39,7 @@ func closestResourceZoom(target float64, candidates []int) int {
 }
 
 // shipResource 返回战舰图片和残余绘制缩放比例。
-// 普通战舰按最接近档位取图，特殊默认素材只取原图并完全依赖场景缩放。
+// 普通战舰按最接近档位取图，特殊默认素材只取原图并完全依赖场景缩放
 func shipResource(name string, sceneZoom int) (*ebiten.Image, float64) {
 	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom())
 	if name == "duck" || name == "waterdrop" || name == "molamola" {
@@ -50,7 +50,7 @@ func shipResource(name string, sceneZoom int) (*ebiten.Image, float64) {
 }
 
 // planeResource 返回飞机图片和残余绘制缩放比例。
-// 飞机保留旧实现中比战舰大一档的视觉效果，再匹配最接近的飞机资源档位。
+// 飞机保留旧实现中比战舰大一档的视觉效果，再匹配最接近的飞机资源档位
 func planeResource(name string, sceneZoom int) (*ebiten.Image, float64) {
 	// 飞机沿用原来的视觉意图：默认比战舰大一档。
 	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom()) * 2
@@ -59,7 +59,7 @@ func planeResource(name string, sceneZoom int) (*ebiten.Image, float64) {
 }
 
 // weaponResource 返回武器状态图标和残余绘制缩放比例。
-// 它把场景 zoom 转成资源档位，避免把新的场景缩放值直接传给旧资源接口。
+// 它把场景 zoom 转成资源档位，避免把新的场景缩放值直接传给旧资源接口
 func weaponResource(
 	weapon weaponImg.WeaponType, status weaponImg.WeaponStatus, sceneZoom int,
 ) (*ebiten.Image, float64) {
@@ -106,6 +106,18 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 	}
 }
 
+// drawExplosions 绘制火箭弹等局部爆炸效果
+func (d *Drawer) drawExplosions(screen *ebiten.Image, ms *state.MissionState) {
+	for _, explosion := range ms.Arena.Explosions {
+		if !ms.View.Camera.Contains(explosion.Pos) {
+			continue
+		}
+		explodeImg := textureImg.GetPlaneExplode(explosion.FrameHP())
+		explodeX, explodeY := ms.CameraPosToScreen(explosion.Pos)
+		drawImageCentered(screen, explodeImg, explodeX, explodeY, explosion.Rotation, ms.ZoomScale())
+	}
+}
+
 // 绘制战舰
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	// 战舰排序，确保渲染顺序是一致的（否则重叠战舰会出现问题）
@@ -144,12 +156,15 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					s.Weapon.HasSecondaryGun,
 					s.Weapon.HasAntiAircraftGun,
 					s.Weapon.HasTorpedo,
+					s.Weapon.HasRocket,
 				},
 				func(b bool, _ int) bool {
 					return b
 				},
 			))
 			switch weaponCnt {
+			case 5:
+				weaponInterstitialSpacing = 12.0
 			case 4:
 				weaponInterstitialSpacing = 15.0
 			case 3:
@@ -208,6 +223,20 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				}
 
 				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeTorpedo, status, ms.UI.GameOpts.Zoom)
+				weaponX += weaponInterstitialSpacing * sceneScale
+				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+			}
+
+			// 绘制火箭炮发射器状态
+			if s.Weapon.HasRocket {
+				status := weaponImg.WeaponStatusReloading
+				if s.Weapon.RocketDisabled {
+					status = weaponImg.WeaponStatusDisabled
+				} else if s.Weapon.RocketLauncherReloaded() {
+					status = weaponImg.WeaponStatusLoaded
+				}
+
+				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeRocket, status, ms.UI.GameOpts.Zoom)
 				weaponX += weaponInterstitialSpacing * sceneScale
 				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
 			}
@@ -308,25 +337,18 @@ func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionStat
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.Arena.ForwardingBullets {
-		// 如果是激光，且刚发射，则不渲染
-		// FIXME-P1 实际解决还是得算位移，不然贴脸时候就没展示了
-		if b.Type == objBullet.TypeLaser && b.ForwardAge < 2 {
-			continue
-		}
 		img := objBullet.GetImg(b.Type, b.Diameter)
 
 		rotation := b.Rotation
-		offsetX, offsetY := 0.0, 0.0
-		// 激光弹丸：图片以中心旋转绘制，弹丸位置对应图片中心，
-		// 导致一半光束向前（射击方向）、一半光束向后（反方向光线）。
-		// 修复：将中心向射击方向前移 h/2，使图片尾部对齐弹丸，
-		// 光束仅向射击正方向延伸。
-		if b.Type == objBullet.TypeLaser {
-			halfH := float64(img.Bounds().Dy()) * ms.ZoomScale() / 2.0
-			offsetX = halfH * math.Sin(rotation*math.Pi/180)
-			offsetY = -halfH * math.Cos(rotation*math.Pi/180)
-		}
 		x, y := ms.CameraPosToScreen(b.CurPos)
-		drawImageCentered(screen, img, x+offsetX, y+offsetY, rotation, ms.ZoomScale())
+		if b.Type == objBullet.TypeLaser {
+			// 激光的模拟位置每帧都会前进；绘制时回推到发射原点，
+			// 避免光束尾部因延迟/高速位移而脱离船体。
+			origin := b.CurPos.Copy()
+			origin.SubRx(math.Sin(rotation*math.Pi/180) * b.Speed * float64(b.ForwardAge))
+			origin.AddRy(math.Cos(rotation*math.Pi/180) * b.Speed * float64(b.ForwardAge))
+			x, y = ms.CameraPosToScreen(origin)
+		}
+		drawImageCentered(screen, img, x, y, rotation, ms.ZoomScale())
 	}
 }

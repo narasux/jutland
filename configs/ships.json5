@@ -57,6 +57,15 @@
           leftFiringArc: [180, 360]
         }
       ],
+      rockets: [
+        // 鸭子火箭
+        {
+          name: "DuckRocket",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
       torpedoes: [
         // 鸭雷山大
         {
@@ -5966,6 +5975,78 @@
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
+      ],
+      rockets: [
+        // 右防空火箭炮 A
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 A
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 B
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 B
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 C
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 C
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 D
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 D
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 E
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 E
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -6450,6 +6531,92 @@
         {
           name: "JP/40/60/2",
           posPercent: -0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      rockets: [
+        // 右防空火箭炮 A
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 A
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 B
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 B
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 C
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 C
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 D
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 D
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 E
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 E
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右防空火箭炮 F
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左防空火箭炮 F
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }

@@ -39,7 +39,7 @@ var _ Instruction = (*PlaneAttack)(nil)
 
 // takeReleaserSnapshot 拍摄释放器状态快照
 // 按 Bombs → Torpedoes 的顺序，记录每个释放器当前的 Released 状态，
-// 后续通过 hasNewRelease 比对，发现从 false → true 的变化即视为完成了一次攻击。
+// 后续通过 hasNewRelease 比对，发现从 false → true 的变化即视为完成了一次攻击
 func (i *PlaneAttack) takeReleaserSnapshot(plane *objUnit.Plane) {
 	if i.snapshotTaken {
 		return
@@ -59,7 +59,7 @@ func (i *PlaneAttack) takeReleaserSnapshot(plane *objUnit.Plane) {
 
 // hasNewRelease 检测是否有新的释放（鱼雷/炸弹）
 // 将当前释放器状态与快照逐一比对，任一释放器从 false（快照时未释放）
-// 变为 true（当前已释放），即认为飞机已完成一次攻击投弹，应脱离目标。
+// 变为 true（当前已释放），即认为飞机已完成一次攻击投弹，应脱离目标
 func (i *PlaneAttack) hasNewRelease(plane *objUnit.Plane) bool {
 	if !i.snapshotTaken {
 		return false

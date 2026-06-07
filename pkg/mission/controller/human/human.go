@@ -198,7 +198,8 @@ func (h *HumanInputHandler) handleWeapon(misState *state.MissionState) map[strin
 				return s.Weapon.MainGunDisabled ||
 					s.Weapon.SecondaryGunDisabled ||
 					s.Weapon.AntiAircraftGunDisabled ||
-					s.Weapon.TorpedoDisabled
+					s.Weapon.TorpedoDisabled ||
+					s.Weapon.RocketDisabled
 			},
 		},
 		{

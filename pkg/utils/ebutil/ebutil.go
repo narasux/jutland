@@ -27,7 +27,7 @@ func SetOptsCenterRotation(opts *ebiten.DrawImageOptions, img *ebiten.Image, rot
 	opts.GeoM.Translate(float64(w)/2, float64(h)/2)
 }
 
-// TrimLineSegment 按起点和终点留白裁剪线段。
+// TrimLineSegment 按起点和终点留白裁剪线段
 func TrimLineSegment(
 	startX, startY, endX, endY float64,
 	startGap, endGap float64,
@@ -47,7 +47,7 @@ func TrimLineSegment(
 		true
 }
 
-// DrawCrossMarker 绘制以 x, y 为中心的十字标记。
+// DrawCrossMarker 绘制以 x, y 为中心的十字标记
 func DrawCrossMarker(screen *ebiten.Image, x, y, crossLen, strokeWidth float64, clr color.Color) {
 	vector.StrokeLine(
 		screen,
@@ -71,7 +71,7 @@ func DrawCrossMarker(screen *ebiten.Image, x, y, crossLen, strokeWidth float64, 
 	)
 }
 
-// DrawFlagMarker 绘制以 x, y 为旗杆底部的旗帜标记。
+// DrawFlagMarker 绘制以 x, y 为旗杆底部的旗帜标记
 func DrawFlagMarker(screen *ebiten.Image, x, y, poleHeight float64, clr color.Color) {
 	poleX := float32(x)
 	poleTopY := float32(y - poleHeight)

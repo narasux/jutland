@@ -27,6 +27,8 @@ const (
 	WeaponTypeAntiAircraftGun WeaponType = "antiAircraftGun"
 	// WeaponTypeTorpedo 鱼雷
 	WeaponTypeTorpedo WeaponType = "torpedo"
+	// WeaponTypeRocket 火箭炮
+	WeaponTypeRocket WeaponType = "rocket"
 	// WeaponTypeMissile 导弹
 	WeaponTypeMissile WeaponType = "missile"
 )
@@ -54,6 +56,8 @@ type ShipWeapon struct {
 	AntiAircraftGunsMD []WeaponMetadata `json:"antiAircraftGuns"`
 	// 鱼雷元数据
 	TorpedoesMD []WeaponMetadata `json:"torpedoes"`
+	// 火箭炮元数据
+	RocketsMD []WeaponMetadata `json:"rockets"`
 	// 释放器元数据
 	ReleasersMD []WeaponMetadata `json:"releasers"`
 	// 主炮
@@ -64,6 +68,8 @@ type ShipWeapon struct {
 	AntiAircraftGuns []*Gun
 	// 鱼雷
 	Torpedoes []*TorpedoLauncher
+	// 火箭炮
+	Rockets []*RocketLauncher
 	// 最大射程（各类武器射程最大值）
 	MaxToShipRange  float64
 	MaxToPlaneRange float64
@@ -72,11 +78,13 @@ type ShipWeapon struct {
 	HasSecondaryGun    bool
 	HasAntiAircraftGun bool
 	HasTorpedo         bool
+	HasRocket          bool
 	// 武器禁用情况
 	MainGunDisabled         bool
 	SecondaryGunDisabled    bool
 	AntiAircraftGunDisabled bool
 	TorpedoDisabled         bool
+	RocketDisabled          bool
 }
 
 // MainGunReloaded 主炮是否已装填
@@ -103,6 +111,16 @@ func (w *ShipWeapon) SecondaryGunReloaded() bool {
 func (w *ShipWeapon) TorpedoLauncherReloaded() bool {
 	for _, t := range w.Torpedoes {
 		if t.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
+// RocketLauncherReloaded 火箭炮是否已装填并可发射下一组
+func (w *ShipWeapon) RocketLauncherReloaded() bool {
+	for _, r := range w.Rockets {
+		if r.Reloaded() {
 			return true
 		}
 	}

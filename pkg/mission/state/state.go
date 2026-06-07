@@ -11,6 +11,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objExplosion "github.com/narasux/jutland/pkg/mission/object/explosion"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -99,6 +100,8 @@ type MissionArenaState struct {
 	DestroyedPlanes []*objUnit.Plane
 	// 战舰尾流
 	Trails []*objTrail.Trail
+	// 火箭弹等局部爆炸效果
+	Explosions []*objExplosion.Explosion
 	// 飞机
 	Planes map[string]*objUnit.Plane
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
@@ -248,6 +251,7 @@ func NewMissionState(mission string) *MissionState {
 			DestroyedShips:    []*objUnit.BattleShip{},
 			DestroyedPlanes:   []*objUnit.Plane{},
 			Trails:            []*objTrail.Trail{},
+			Explosions:        []*objExplosion.Explosion{},
 			ForwardingBullets: []*objBullet.Bullet{},
 			Planes:            map[string]*objUnit.Plane{},
 		},

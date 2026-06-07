@@ -69,7 +69,7 @@ type sidebarLayout struct {
 	Map    rect
 }
 
-// New 创建任务侧栏。
+// New 创建任务侧栏
 func New(mission string) *Panel {
 	missionMD := md.Get(mission)
 	misLayout := layout.NewScreenLayout()
@@ -85,7 +85,7 @@ func New(mission string) *Panel {
 	return &Panel{abbrMap: abbrMap}
 }
 
-// Update 更新侧栏控件状态，并处理小地图点击。
+// Update 更新侧栏控件状态，并处理小地图点击
 func (p *Panel) Update(ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		ms.UI.SidebarConsumesCursor = false
@@ -116,7 +116,7 @@ func (p *Panel) Update(ms *state.MissionState) {
 	}
 }
 
-// Draw 绘制任务侧栏。
+// Draw 绘制任务侧栏
 func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return
@@ -132,7 +132,7 @@ func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState) {
 	p.drawHandleArrow(screen, ms)
 }
 
-// ConsumesCursor 判断当前鼠标位置是否应由侧栏消费。
+// ConsumesCursor 判断当前鼠标位置是否应由侧栏消费
 func (p *Panel) ConsumesCursor(ms *state.MissionState) bool {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return false

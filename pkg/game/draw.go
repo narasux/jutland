@@ -490,7 +490,7 @@ func wrapCollectionText(text string, maxWidth, fontSize float64) []string {
 	return lines
 }
 
-// estimateCollectionTextWidth 粗略估算图鉴文本宽度，用于换行和同排文本定位。
+// estimateCollectionTextWidth 粗略估算图鉴文本宽度，用于换行和同排文本定位
 func estimateCollectionTextWidth(text string, fontSize float64) float64 {
 	width := 0.0
 	for _, r := range text {

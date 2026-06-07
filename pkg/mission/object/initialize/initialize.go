@@ -19,6 +19,7 @@ func init() {
 	initBulletMap()
 	initGunMap()
 	initTorpedoLauncherMap()
+	initRocketLauncherMap()
 	initReleaserMap()
 	initPlaneMap()
 	initShipMap()
@@ -87,6 +88,28 @@ func initTorpedoLauncherMap() {
 		objUnit.TorpedoLauncherMap[lc.Name] = &lc
 	}
 	log.Println("torpedo launchers data loaded from json5 file")
+}
+
+func initRocketLauncherMap() {
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "rocket_launchers.json5"))
+	if err != nil {
+		log.Fatal("failed to open rocket_launchers.json5: ", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var rocketLaunchers []objUnit.RocketLauncher
+	if err = json5.Unmarshal(bytes, &rocketLaunchers); err != nil {
+		log.Fatal("failed to unmarshal rocket_launchers.json5: ", err)
+	}
+
+	for _, lc := range rocketLaunchers {
+		lc.Range /= 2
+		lc.BulletSpeed /= 4000
+		objUnit.RocketLauncherMap[lc.Name] = &lc
+	}
+	log.Println("rocket launchers data loaded from json5 file")
 }
 
 func initReleaserMap() {
@@ -232,6 +255,15 @@ func initShipMap() {
 			))
 		}
 		s.Weapon.HasTorpedo = len(s.Weapon.Torpedoes) > 0
+		// 火箭炮
+		for _, rocketMD := range s.Weapon.RocketsMD {
+			s.Weapon.Rockets = append(s.Weapon.Rockets, objUnit.NewRocketLauncher(
+				rocketMD.Name, rocketMD.PosPercent,
+				objUnit.FiringArc{Start: rocketMD.LeftFiringArc[0], End: rocketMD.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: rocketMD.RightFiringArc[0], End: rocketMD.RightFiringArc[1]},
+			))
+		}
+		s.Weapon.HasRocket = len(s.Weapon.Rockets) > 0
 		// 计算最大射程
 		for _, guns := range [][]*objUnit.Gun{
 			s.Weapon.MainGuns, s.Weapon.SecondaryGuns, s.Weapon.AntiAircraftGuns,
@@ -247,6 +279,9 @@ func initShipMap() {
 		}
 		for _, torpedo := range s.Weapon.Torpedoes {
 			s.Weapon.MaxToShipRange = max(s.Weapon.MaxToShipRange, torpedo.Range)
+		}
+		for _, rocket := range s.Weapon.Rockets {
+			s.Weapon.MaxToPlaneRange = max(s.Weapon.MaxToPlaneRange, rocket.Range)
 		}
 		// 飞机相关状态
 		s.Aircraft.HasPlane = len(s.Aircraft.Groups) > 0

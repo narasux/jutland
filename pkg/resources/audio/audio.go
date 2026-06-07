@@ -161,3 +161,13 @@ func NewBombSpawn() types.AudioStream {
 func NewTorpedoLaunch() types.AudioStream {
 	return mustNewAudio("/fire/torpedo_launch.wav")
 }
+
+// NewRocketSpawn 火箭弹发射
+func NewRocketSpawn() types.AudioStream {
+	return mustNewAudio("/fire/rocketspawn.wav")
+}
+
+// NewRocketExplode 火箭弹爆炸
+func NewRocketExplode() types.AudioStream {
+	return mustNewAudio("/hit/rocketgroundexplo.wav")
+}

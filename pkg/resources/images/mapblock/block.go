@@ -144,7 +144,7 @@ func (c *sceneBlockCache) Get(x, y int) *ebiten.Image {
 	return c.data[c.genKey(x, y)]
 }
 
-// GetZoom 根据坐标和缩放档位获取已缓存的场景地图块。
+// GetZoom 根据坐标和缩放档位获取已缓存的场景地图块
 func (c *sceneBlockCache) GetZoom(x, y int, zoom int) *ebiten.Image {
 	zoom = normalizeZoom(zoom)
 
@@ -177,7 +177,7 @@ func GetByCharAndPos(c rune, x, y int) []*ebiten.Image {
 	return GetByCharAndPosZoom(c, x, y, 4)
 }
 
-// GetByCharAndPosZoom 根据指定字符、坐标和缩放档位获取地图块资源。
+// GetByCharAndPosZoom 根据指定字符、坐标和缩放档位获取地图块资源
 func GetByCharAndPosZoom(c rune, x, y int, zoom int) []*ebiten.Image {
 	hash := md5.Sum([]byte(fmt.Sprintf("%d:%d", x, y)))
 	zoom = normalizeZoom(zoom)
@@ -210,7 +210,7 @@ func GetByCharAndPosZoom(c rune, x, y int, zoom int) []*ebiten.Image {
 }
 
 // genZoomBlockMap 为一组地图块生成所有支持缩放档位的缓存。
-// 它只用于通用海面等少量资源；关卡陆地块走按需缓存以缩短加载时间。
+// 它只用于通用海面等少量资源；关卡陆地块走按需缓存以缩短加载时间
 func genZoomBlockMap(source map[string]*ebiten.Image) map[int]map[string]*ebiten.Image {
 	target := make(map[int]map[string]*ebiten.Image, len(supportedZooms))
 	for _, zoom := range supportedZooms {
@@ -224,7 +224,7 @@ func genZoomBlockMap(source map[string]*ebiten.Image) map[int]map[string]*ebiten
 }
 
 // genZoomBlock 生成单张地图块在指定 zoom 下的缓存图。
-// 缓存图使用最近邻缩放，并额外保留 1px 覆盖边缘以减少 tile 缝隙。
+// 缓存图使用最近邻缩放，并额外保留 1px 覆盖边缘以减少 tile 缝隙
 func genZoomBlock(img *ebiten.Image, zoom int) *ebiten.Image {
 	// 缩放后的 tile 多保留 1px 覆盖边缘，避免子像素相机位置下露出背景缝。
 	size := zoomedBlockSize(zoom) + 1
@@ -237,7 +237,7 @@ func genZoomBlock(img *ebiten.Image, zoom int) *ebiten.Image {
 }
 
 // normalizeZoom 将地图块缩放值修正为受支持档位。
-// 非法值回到默认 4，保持与任务主战场的默认 1x 语义一致。
+// 非法值回到默认 4，保持与任务主战场的默认 1x 语义一致
 func normalizeZoom(zoom int) int {
 	for _, supportedZoom := range supportedZooms {
 		if zoom == supportedZoom {
@@ -248,7 +248,7 @@ func normalizeZoom(zoom int) int {
 }
 
 // zoomedBlockSize 返回指定 zoom 下地图块的目标边长。
-// zoom 使用“倍率 * 4”的整数语义，因此 4 对应原始 MapBlockSize。
+// zoom 使用“倍率 * 4”的整数语义，因此 4 对应原始 MapBlockSize
 func zoomedBlockSize(zoom int) int {
 	return max(1, constants.MapBlockSize*normalizeZoom(zoom)/4)
 }

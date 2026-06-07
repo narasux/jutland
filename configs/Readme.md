@@ -9,6 +9,7 @@
     // US 表示所属阵营
     // GB (gun bullet) 表示是火炮弹药
     // TB (torpedo bullet) 表示鱼雷弹药
+    // RB (rocket bullet) 表示火箭弹
     // 127 表示口径 127mm
     // 1932 表示 1932 年研制（不一定准确，主要是做区分）
     name: "US/GB/127/1932",
@@ -16,6 +17,7 @@
     // shell 炮弹
     // torpedo 鱼雷
     // bomb 炸弹
+    // rocket 火箭弹
     // laser 镭射
     type: "shell",
     // 口径
@@ -117,6 +119,39 @@
     // 鱼雷速度
     // 推荐值：实际速度（节）如 45 节 -> 45
     bulletSpeed: 45,
+  },
+]
+```
+
+## 火箭发射器配置（rocket_launchers.json5）
+
+```json5
+[
+  {
+    // 火箭发射器名称
+    name: "JP/120/21/Type5/AA",
+    // 火箭弹名称
+    bulletName: "JP/RB/120/1944",
+    // 单轮装填火箭弹数量
+    rocketCount: 21,
+    // 分组数量，21 发 / 3 组即每组 7 发
+    groupCount: 3,
+    // 组内单发发射间隔（单位：秒）
+    shotInterval: 0.06,
+    // 分组发射间隔（单位：秒）
+    groupInterval: 0.35,
+    // 装填时间（单位：秒）
+    reloadTime: 45,
+    // 射程（地图格数）
+    range: 12,
+    // 火箭弹散布
+    bulletSpread: 140,
+    // 火箭弹速度
+    bulletSpeed: 700,
+    // 近炸触发半径（地图格数）
+    proximityRadius: 0.25,
+    // 爆炸伤害半径（地图格数）
+    blastRadius: 0.45,
   },
 ]
 ```
@@ -227,6 +262,16 @@
           posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        },
+      ],
+      // 火箭发射器（参数与主炮相同）
+      rockets: [
+        // 右防空火箭炮 A
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
         },
       ]
     },

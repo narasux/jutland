@@ -8,14 +8,13 @@ import (
 
 	"github.com/samber/lo"
 
-	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objExplosion "github.com/narasux/jutland/pkg/mission/object/explosion"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
-	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
@@ -25,6 +24,7 @@ import (
 func (m *MissionManager) updateShipWeaponFire() {
 	maxBulletDiameter := 0
 	isTorpedoLaunched := false
+	isRocketLaunched := false
 
 	for _, ship := range m.state.Arena.Ships {
 		inRangeEnemies := []objUnit.Hurtable{}
@@ -75,6 +75,8 @@ func (m *MissionManager) updateShipWeaponFire() {
 				for _, bt := range bullets {
 					if bt.Type == objBullet.TypeTorpedo {
 						isTorpedoLaunched = true
+					} else if bt.Type == objBullet.TypeRocket {
+						isRocketLaunched = true
 					} else {
 						// 只有炮弹才计算口径，鱼雷发射都是一个声音
 						maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
@@ -85,12 +87,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 		}
 	}
 
-	// 口径即是真理，只有最大的才能在本轮说话
-	if maxBulletDiameter > 0 {
-		audio.PlayAudioToEnd(audioRes.NewGunFire(maxBulletDiameter))
-	} else if isTorpedoLaunched {
-		audio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
-	}
+	m.weaponFirePlayer.PlayShipFire(maxBulletDiameter, isTorpedoLaunched, isRocketLaunched)
 }
 
 // 飞机出动 & 攻击
@@ -242,13 +239,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 		}
 	}
 
-	if bombReleased {
-		// 有炸弹就发声音
-		audio.PlayAudioToEnd(audioRes.NewBombSpawn())
-	} else if torpedoLaunched {
-		// 有鱼雷就发声音
-		audio.PlayAudioToEnd(audioRes.NewTorpedoLaunch())
-	}
+	m.weaponFirePlayer.PlayPlaneFire(bombReleased, torpedoLaunched)
 }
 
 // 更新弹药状态
@@ -352,8 +343,59 @@ func (m *MissionManager) updateShotBullets() {
 		return bt.HitObjType != object.TypeNone
 	}
 
+	rocketShouldExplode := func(bt *objBullet.Bullet) bool {
+		if bt.Life <= 0 || bt.CurPos.Near(bt.TargetPos, bt.ProximityRadius) {
+			return true
+		}
+		for _, plane := range m.state.Arena.Planes {
+			if bt.Shooter == plane.Uid {
+				continue
+			}
+			if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
+				continue
+			}
+			if bt.CurPos.Distance(plane.CurPos) <= bt.ProximityRadius {
+				return true
+			}
+		}
+		return false
+	}
+
+	// resolveRocketDamage 处理火箭近炸破片范围伤害，并创建局部爆炸效果。
+	resolveRocketDamage := func(bt *objBullet.Bullet) {
+		for _, plane := range m.state.Arena.Planes {
+			if bt.Shooter == plane.Uid {
+				continue
+			}
+			if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
+				continue
+			}
+			if bt.CurPos.Distance(plane.CurPos) > bt.BlastRadius {
+				continue
+			}
+			plane.HurtBy(bt)
+			bt.HitObjType = object.TypePlane
+		}
+		if bt.HitObjType == object.TypeNone {
+			bt.HitObjType = object.TypeWater
+		}
+		m.state.Arena.Explosions = append(m.state.Arena.Explosions, objExplosion.NewRocket(bt.CurPos.Copy(), bt.Rotation))
+		if m.state.View.Camera.Contains(bt.CurPos) {
+			m.weaponFirePlayer.PlayRocketExplode()
+		}
+	}
+
 	arrivedBullets, forwardingBullets := []*objBullet.Bullet{}, []*objBullet.Bullet{}
 	for _, bt := range m.state.Arena.ForwardingBullets {
+		if bt.Type == objBullet.TypeRocket {
+			if rocketShouldExplode(bt) {
+				resolveRocketDamage(bt)
+				arrivedBullets = append(arrivedBullets, bt)
+			} else {
+				forwardingBullets = append(forwardingBullets, bt)
+			}
+			continue
+		}
 		// 迷失的弹药，要及时消亡（如鱼雷没命中）
 		if bt.Life <= 0 {
 			// TODO 其实还应该判断下，可能是 HitLand，后面再做吧

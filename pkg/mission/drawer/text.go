@@ -17,7 +17,7 @@ import (
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
-// drawPauseOverlay 绘制暂停遮罩和操作面板。
+// drawPauseOverlay 绘制暂停遮罩和操作面板
 func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionPaused {
 		return
@@ -57,7 +57,7 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 	)
 }
 
-// drawPauseButton 绘制暂停面板按钮，并根据鼠标悬停状态调整边框。
+// drawPauseButton 绘制暂停面板按钮，并根据鼠标悬停状态调整边框
 func (d *Drawer) drawPauseButton(
 	screen *ebiten.Image,
 	rect state.PauseUIRect,
@@ -77,7 +77,7 @@ func (d *Drawer) drawPauseButton(
 	d.drawCenteredPauseText(screen, label, rect.X+rect.W/2, rect.Y+8, 18, colorx.White)
 }
 
-// drawCenteredPauseText 使用实际字体测量宽度，避免中文标题居中偏移。
+// drawCenteredPauseText 使用实际字体测量宽度，避免中文标题居中偏移
 func (d *Drawer) drawCenteredPauseText(
 	screen *ebiten.Image,
 	textStr string,

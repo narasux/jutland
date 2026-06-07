@@ -622,5 +622,22 @@
     diameter: 50,
     damage: 90,
     criticalRate: 0
+  },
+  // 火箭弹
+  // 美国海军 127mm 防空火箭弹
+  {
+    name: "US/RB/127/1937",
+    type: "rocket",
+    diameter: 127,
+    damage: 22,
+    criticalRate: 0.0005
+  },
+  // 日本海军 12cm 5式防空火箭弹
+  {
+    name: "JP/RB/120/1940",
+    type: "rocket",
+    diameter: 120,
+    damage: 25,
+    criticalRate: 0.0005
   }
 ]

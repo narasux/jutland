@@ -1,0 +1,32 @@
+[
+  // 鸭子火箭
+  {
+    name: "DuckRocket",
+    bulletName: "JP/RB/120/1940",
+    rocketCount: 21,
+    groupCount: 3,
+    shotInterval: 0.06,
+    groupInterval: 0.35,
+    reloadTime: 5,
+    range: 12,
+    bulletSpread: 140,
+    bulletSpeed: 720,
+    proximityRadius: 0.25,
+    blastRadius: 0.45
+  },
+  // 日本海军 21 发 12cm 5式防空火箭炮
+  {
+    name: "JP/120/21/Type5/AA",
+    bulletName: "JP/RB/120/1940",
+    rocketCount: 21,
+    groupCount: 3,
+    shotInterval: 0.06,
+    groupInterval: 0.35,
+    reloadTime: 45,
+    range: 12,
+    bulletSpread: 140,
+    bulletSpeed: 720,
+    proximityRadius: 0.25,
+    blastRadius: 0.45,
+  },
+]

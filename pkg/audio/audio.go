@@ -12,13 +12,17 @@ var Context = audio.NewContext(constants.AudioSampleRate)
 
 // PlayAudioToEnd 音频播放（一次性使用，可并发，播放到完成，只能用于短音频）
 func PlayAudioToEnd(ads types.AudioStream) {
+	PlayAudioToEndWithVolume(ads, 0.3)
+}
+
+// PlayAudioToEndWithVolume 按指定音量播放短音频，适合源文件响度不一致的局部修正。
+func PlayAudioToEndWithVolume(ads types.AudioStream, volume float64) {
 	if ads.Length() > constants.AudioSampleRate*30 {
 		log.Fatalf("audio too long for PlayAudioToEnd: %d", ads.Length())
 	}
 	go func() {
 		p, _ := Context.NewPlayer(ads)
-		// FIXME 支持设置音量大小
-		p.SetVolume(0.3)
+		p.SetVolume(volume)
 		p.Play()
 	}()
 }

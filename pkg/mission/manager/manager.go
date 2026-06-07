@@ -3,6 +3,7 @@ package manager
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
+	audioPlayer "github.com/narasux/jutland/pkg/audio/player"
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
 	"github.com/narasux/jutland/pkg/mission/controller/human"
@@ -22,6 +23,7 @@ type MissionManager struct {
 	instructionSet     *InstructionSet
 	playerAlphaHandler controller.InputHandler
 	playerBetaHandler  controller.InputHandler
+	weaponFirePlayer   *audioPlayer.WeaponFire
 }
 
 // New 创建任务管理器
@@ -35,6 +37,7 @@ func New(mission string) *MissionManager {
 		// 目前用户一只能是人类，用户二是电脑 TODO 支持多人远程联机
 		playerAlphaHandler: human.NewHandler(faction.HumanAlpha),
 		playerBetaHandler:  computer.NewHandler(faction.ComputerAlpha),
+		weaponFirePlayer:   audioPlayer.NewWeaponFire(),
 	}
 }
 
@@ -117,11 +120,13 @@ func (m *MissionManager) updateSupportPhase() {
 
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
 func (m *MissionManager) updateCombatPhase() {
+	m.weaponFirePlayer.Update()
 	m.updateShipWeaponFire()
 	m.updatePlaneAttackOrReturn()
 	m.updatePlaneWeaponFire()
 	m.updateObjectTrails()
 	m.updateShotBullets()
+	m.updateExplosions()
 	m.updateMissionShips()
 	m.updateMissionPlanes()
 }

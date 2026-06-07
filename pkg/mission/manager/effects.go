@@ -72,6 +72,21 @@ func (m *MissionManager) updateObjectTrails() {
 	}
 }
 
+// updateExplosions 推进并清理短生命周期的局部爆炸效果
+func (m *MissionManager) updateExplosions() {
+	for i := 0; i < len(m.state.Arena.Explosions); i++ {
+		m.state.Arena.Explosions[i].Update()
+	}
+
+	explosions := m.state.Arena.Explosions[:0]
+	for _, e := range m.state.Arena.Explosions {
+		if e.IsAlive() {
+			explosions = append(explosions, e)
+		}
+	}
+	m.state.Arena.Explosions = explosions
+}
+
 // 更新局内战舰
 func (m *MissionManager) updateMissionShips() {
 	audioPlayQuota := 2

@@ -12,7 +12,7 @@ const (
 	PauseInputQuit
 )
 
-// ApplyPauseInput 根据当前暂停确认状态计算下一帧任务状态。
+// ApplyPauseInput 根据当前暂停确认状态计算下一帧任务状态
 func ApplyPauseInput(status MissionStatus, confirmQuit bool, input PauseInput) (MissionStatus, bool) {
 	if status != MissionPaused {
 		return status, false

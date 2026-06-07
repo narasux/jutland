@@ -34,7 +34,13 @@ var bombDiameters = []int{457, 380, 356, 280, 273, 160, 70}
 // bombs 炸弹图片映射表
 var bombs = make(map[int]*ebiten.Image)
 
-// init 预加载炮弹和鱼雷图片资源
+// rocketDiameters 支持的火箭弹口径列表
+var rocketDiameters = []int{120, 127}
+
+// rockets 火箭弹图片映射表
+var rockets = make(map[int]*ebiten.Image)
+
+// init 预加载弹药图片资源
 func init() {
 	// FIXME 后续支持加载 1， 1/2， 1/4 三种尺寸
 	// 加载炮弹图片（图片尺寸是实际显示的4倍，加载时按1/4缩放）
@@ -81,6 +87,20 @@ func init() {
 		zoomImg.DrawImage(img, opts)
 		bombs[diameter] = zoomImg
 	}
+
+	// 加载火箭弹图片（由 TGA 预先转换为透明底 PNG，加载时按1/4缩放）
+	for _, diameter := range rocketDiameters {
+		path := fmt.Sprintf("/bullets/rockets/%d.png", diameter)
+		img, err := loader.LoadImage(path)
+		if err != nil {
+			log.Fatalf("missing %s: %s", path, err)
+		}
+		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+		opts.GeoM.Scale(0.25, 0.25)
+		zoomImg := ebiten.NewImage(img.Bounds().Dx()/4, img.Bounds().Dy()/4)
+		zoomImg.DrawImage(img, opts)
+		rockets[diameter] = zoomImg
+	}
 }
 
 var laser50 = ebutil.NewImageWithColor(2, 1000, colorx.Green)
@@ -108,6 +128,15 @@ func GetTorpedo(diameter int) *ebiten.Image {
 // GetBomb 获取炸弹弹药图片
 func GetBomb(diameter int) *ebiten.Image {
 	if img, ok := bombs[diameter]; ok {
+		return img
+	}
+	// 找不到就暴露出来
+	return NotFount
+}
+
+// GetRocket 获取火箭弹图片
+func GetRocket(diameter int) *ebiten.Image {
+	if img, ok := rockets[diameter]; ok {
 		return img
 	}
 	// 找不到就暴露出来

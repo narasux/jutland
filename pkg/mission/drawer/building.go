@@ -51,7 +51,7 @@ var (
 	reinforceProgressFill = color.RGBA{R: 107, G: 151, B: 166, A: 255}
 )
 
-// drawBuildingsInCamera 绘制镜头范围内的建筑对象和建筑状态。
+// drawBuildingsInCamera 绘制镜头范围内的建筑对象和建筑状态
 func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionState) {
 	// 增援点（只有在屏幕中的才渲染）
 	for _, rp := range ms.Arena.ReinforcePoints {
@@ -99,7 +99,7 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 	}
 }
 
-// drawBuildingInterface 绘制增援点交互界面。
+// drawBuildingInterface 绘制增援点交互界面
 func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionInBuilding {
 		return
@@ -114,7 +114,7 @@ func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionSt
 	d.drawSummonOperationTips(screen, ui, ms.Player.CurFunds)
 }
 
-// drawBuildingBackground 绘制增援界面的底图和暗色遮罩。
+// drawBuildingBackground 绘制增援界面的底图和暗色遮罩
 func (d *Drawer) drawBuildingBackground(screen *ebiten.Image, ms *state.MissionState) {
 	windowImg := bgImg.MissionWindow
 	windowWidth, windowHeight := windowImg.Bounds().Dx(), windowImg.Bounds().Dy()
@@ -187,7 +187,7 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 	}
 }
 
-// drawSelectedProvidedShips 绘制当前可召唤舰船的预览图和信息面板。
+// drawSelectedProvidedShips 绘制当前可召唤舰船的预览图和信息面板
 func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.MissionState, ui reinforceUILayout) {
 	rp, ok := ms.Arena.ReinforcePoints[ms.Interaction.SelectedReinforcePointUid]
 	if !ok {
@@ -238,7 +238,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 	d.drawReinforceQueue(screen, rp.OncomingShips, ui.Queue)
 }
 
-// drawReinforceShipInfo 绘制舰船档案和武装配置两张信息卡。
+// drawReinforceShipInfo 绘制舰船档案和武装配置两张信息卡
 func (d *Drawer) drawReinforceShipInfo(
 	screen *ebiten.Image,
 	selectedShipName string,
@@ -328,7 +328,7 @@ func (d *Drawer) drawReinforceShipInfo(
 	}
 }
 
-// drawReinforceInfoCard 绘制增援控制台内统一样式的信息卡。
+// drawReinforceInfoCard 绘制增援控制台内统一样式的信息卡
 func (d *Drawer) drawReinforceInfoCard(screen *ebiten.Image, panel reinforceUIPanel, title string) {
 	vector.FillRect(
 		screen,
@@ -360,7 +360,7 @@ func (d *Drawer) drawReinforceInfoCard(screen *ebiten.Image, panel reinforceUIPa
 	)
 }
 
-// drawReinforceQueue 绘制当前增援队列和队列中的舰船卡片。
+// drawReinforceQueue 绘制当前增援队列和队列中的舰船卡片
 func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.OncomingShip, panel reinforceUIPanel) {
 	cardInsetX := 16.0
 	cardInsetY := 18.0
@@ -400,7 +400,7 @@ func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.O
 	}
 }
 
-// drawQueueCard 绘制单个队列舰船的建造进度或费用信息。
+// drawQueueCard 绘制单个队列舰船的建造进度或费用信息
 func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingShip, x, y, w, h float64, active bool) {
 	bgColor := reinforceCardFill
 	borderColor := reinforcePanelBorder
@@ -438,7 +438,7 @@ func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingS
 	)
 }
 
-// calcReinforceQueueMaxItems 根据队列面板可用高度动态计算最多可展示的卡片数量。
+// calcReinforceQueueMaxItems 根据队列面板可用高度动态计算最多可展示的卡片数量
 func calcReinforceQueueMaxItems(panelH float64, count int) int {
 	titleAndDivider := 62.0
 	bottomReserve := 36.0
@@ -447,7 +447,7 @@ func calcReinforceQueueMaxItems(panelH float64, count int) int {
 	return min(2*maxRows, count)
 }
 
-// drawSummonOperationTips 绘制当前资金和增援操作提示。
+// drawSummonOperationTips 绘制当前资金和增援操作提示
 func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILayout, curFunds int64) {
 	cardInsetX := 16.0
 	cardInsetY := 18.0
@@ -486,7 +486,7 @@ func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILay
 	}
 }
 
-// calcReinforceUILayout 计算增援界面中预览、地图和控制台区域布局。
+// calcReinforceUILayout 计算增援界面中预览、地图和控制台区域布局
 func calcReinforceUILayout(ms *state.MissionState) reinforceUILayout {
 	w, h := float64(ms.View.Layout.Width), float64(ms.View.Layout.Height)
 	margin, topGap, consoleGap := 18.0, 18.0, 4.0
@@ -511,7 +511,7 @@ func calcReinforceUILayout(ms *state.MissionState) reinforceUILayout {
 	}
 }
 
-// drawReinforcePanel 绘制增援界面外层区域底色和边框。
+// drawReinforcePanel 绘制增援界面外层区域底色和边框
 func (d *Drawer) drawReinforcePanel(screen *ebiten.Image, panel reinforceUIPanel, fill color.Color, textured bool) {
 	vector.FillRect(
 		screen, float32(panel.X), float32(panel.Y), float32(panel.W), float32(panel.H),

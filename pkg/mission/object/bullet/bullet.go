@@ -15,6 +15,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object/trail"
 	bulletImg "github.com/narasux/jutland/pkg/resources/images/bullet"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
 // Type 弹药类型
@@ -27,6 +28,8 @@ const (
 	TypeTorpedo Type = "torpedo"
 	// TypeBomb 炸弹
 	TypeBomb Type = "bomb"
+	// TypeRocket 火箭弹
+	TypeRocket Type = "rocket"
 	// TypeLaser 镭射
 	TypeLaser Type = "laser"
 )
@@ -97,6 +100,10 @@ type Bullet struct {
 	CriticalType CriticalType
 	// 击中的对象类型
 	HitObjType object.Type
+	// 近炸触发半径，仅火箭弹使用
+	ProximityRadius float64
+	// 爆炸伤害半径，仅火箭弹使用
+	BlastRadius float64
 }
 
 // Forward 弹药前进
@@ -128,6 +135,9 @@ func (b *Bullet) GenTrails() []*trail.Trail {
 	if b.HitObjType != object.TypeNone {
 		return nil
 	}
+	if b.Type == TypeRocket {
+		return b.genRocketTrails()
+	}
 	// 刚刚发射的不添加尾流
 	if b.ForwardAge <= 10 {
 		return nil
@@ -150,6 +160,50 @@ func (b *Bullet) GenTrails() []*trail.Trail {
 			0, b.Rotation, nil,
 		),
 	}
+}
+
+// genRocketTrails 生成火箭专属尾流：短促尾焰叠加连续深灰烟点，和炮弹的线状尾流区分开。
+func (b *Bullet) genRocketTrails() []*trail.Trail {
+	if b.ForwardAge <= 1 {
+		return nil
+	}
+
+	sinVal := math.Sin(b.Rotation * math.Pi / 180)
+	cosVal := math.Cos(b.Rotation * math.Pi / 180)
+	tailPos := func(distance float64) objPos.MapPos {
+		pos := b.CurPos.Copy()
+		pos.SubRx(sinVal * b.Speed * distance)
+		pos.AddRy(cosVal * b.Speed * distance)
+		return pos
+	}
+
+	trails := []*trail.Trail{
+		trail.New(
+			tailPos(0.9), textureImg.TrailShapeCircle,
+			3.2, 0.18,
+			120, 7.5,
+			0, 0, colorx.Orange,
+		),
+	}
+	if b.ForwardAge%2 != 0 {
+		return trails
+	}
+
+	trails = append(trails,
+		trail.New(
+			tailPos(1.5), textureImg.TrailShapeCircle,
+			5.5, 0.10,
+			105, 3.0,
+			0, 0, colorx.DarkSilver,
+		),
+		trail.New(
+			tailPos(2.4), textureImg.TrailShapeCircle,
+			4.6, 0.08,
+			82, 2.6,
+			0, 0, colorx.Gray,
+		),
+	)
+	return trails
 }
 
 // Map 弹药表
@@ -206,6 +260,8 @@ func GetImg(btType Type, diameter int) *ebiten.Image {
 		return bulletImg.GetTorpedo(diameter)
 	case TypeBomb:
 		return bulletImg.GetBomb(diameter)
+	case TypeRocket:
+		return bulletImg.GetRocket(diameter)
 	case TypeLaser:
 		return bulletImg.GetLaser(diameter)
 	}
