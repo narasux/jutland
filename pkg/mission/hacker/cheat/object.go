@@ -3,6 +3,7 @@ package cheat
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
@@ -91,6 +92,59 @@ func (c *ShowMeTheMolaMola) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*ShowMeTheMolaMola)(nil)
+
+// ShowMeTheShip -> 在鼠标当前位置按名称初始化一艘战舰
+type ShowMeTheShip struct {
+	shipName string
+}
+
+func (c *ShowMeTheShip) String() string {
+	return "show me the ship <name>"
+}
+
+func (c *ShowMeTheShip) Desc() string {
+	return "Create a named ship at current cursor position."
+}
+
+func (c *ShowMeTheShip) Match(cmd string) bool {
+	const prefix = "show me the ship"
+
+	normalizedPrefix := normalizeCommandToken(prefix)
+	normalizedCmd := normalizeCommandToken(cmd)
+	if !strings.HasPrefix(normalizedCmd, normalizedPrefix) {
+		return false
+	}
+	target := strings.TrimPrefix(normalizedCmd, normalizedPrefix)
+	if target == "" {
+		return false
+	}
+	for _, shipName := range objUnit.GetAllShipNames() {
+		if target == normalizeCommandToken(shipName) {
+			c.shipName = shipName
+			return true
+		}
+	}
+	return false
+}
+
+func (c *ShowMeTheShip) Exec(misState *state.MissionState) string {
+	if c.shipName == "" {
+		return "Ship not found"
+	}
+	pos := action.DetectCursorPosOnMap(misState)
+	if misState.Core.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
+		return fmt.Sprintf(
+			"Current cursor position on land, can't create %s",
+			objUnit.GetShipDisplayName(c.shipName),
+		)
+	}
+	uidGenerator := misState.Arena.ShipUidGenerators[misState.Player.CurPlayer]
+	ship := objUnit.NewShip(uidGenerator, c.shipName, *pos, 0, misState.Player.CurPlayer)
+	misState.Arena.Ships[ship.Uid] = ship
+	return fmt.Sprintf("%s ready at %s", objUnit.GetShipDisplayName(c.shipName), ship.CurPos.String())
+}
+
+var _ Cheat = (*ShowMeTheShip)(nil)
 
 // BlackGoldRush -> 在指定地点生成一个油井
 type BlackGoldRush struct{}

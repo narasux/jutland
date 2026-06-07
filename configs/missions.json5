@@ -824,7 +824,7 @@
     initCameraPos: [26, 32],
     mapName: "darwin",
     maxShipCount: 30,
-    description: "联合舰队司令部 1941 年度全面战备检验——代号「怒海」达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，各型舰艇共计 99 艘参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
+    description: "联合舰队司令部 1941 年度全面战备检验——代号「怒海」达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，超过百艘的各型舰艇参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
     initReinforcePoints: [
       {
         pos: [1, 20],
@@ -941,6 +941,16 @@
       },
       {
         pos: [1, 80],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "jiujiang",
+        ],
+      },
+      {
+        pos: [1, 95],
         rotation: 90,
         rallyPos: [25, 35],
         belongPlayer: "HA",
@@ -1454,6 +1464,7 @@
         rotation: 90,
         belongPlayer: "HA"
       },
+      // 鱼雷艇
       {
         name: "PT_791",
         pos: [45, 33],
@@ -1481,6 +1492,12 @@
       {
         name: "P_6",
         pos: [45, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "jiujiang",
+        pos: [45, 38],
         rotation: 90,
         belongPlayer: "HA"
       },

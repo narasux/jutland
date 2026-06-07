@@ -6,6 +6,7 @@ var Cheats = []Cheat{
 	&ShowMeTheDuck{},
 	&ShowMeTheWaterdrop{},
 	&ShowMeTheMolaMola{},
+	&ShowMeTheShip{},
 	&BlackGoldRush{},
 	// 经济类
 	&ShowMeTheMoney{},

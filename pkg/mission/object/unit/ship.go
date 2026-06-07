@@ -33,6 +33,8 @@ const (
 	ShipTypeCruiser ShipType = "cruiser"
 	// ShipTypeDestroyer 驱逐舰
 	ShipTypeDestroyer ShipType = "destroyer"
+	// ShipTypeFrigate 护卫舰
+	ShipTypeFrigate ShipType = "frigate"
 	// ShipTypeTorpedoBoat 鱼雷艇
 	ShipTypeTorpedoBoat ShipType = "torpedo_boat"
 	// ShipTypeCargo 货轮
@@ -52,6 +54,8 @@ func (t ShipType) ToDisplay() string {
 		return "巡洋舰"
 	case ShipTypeDestroyer:
 		return "驱逐舰"
+	case ShipTypeFrigate:
+		return "护卫舰"
 	case ShipTypeHospital:
 		return "医疗船"
 	case ShipTypeCargo:

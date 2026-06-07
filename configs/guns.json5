@@ -59,6 +59,30 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 中国海军 79A 式双管 100mm 自动炮
+  {
+    name: "CN/100/56/2/Type79A",
+    bulletName: "CN/GB/100/1960",
+    bulletCount: 2,
+    reloadTime: 1,
+    range: 18,
+    bulletSpread: 50,
+    bulletSpeed: 900,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 中国海军 76A 式双联装 37mm 炮
+  {
+    name: "CN/37/63/2/Type76A",
+    bulletName: "CN/GB/37/1960",
+    bulletCount: 2,
+    reloadTime: 0.4,
+    range: 6,
+    bulletSpread: 20,
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 水滴撞击
   {
     name: "Impact",

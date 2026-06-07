@@ -206,6 +206,7 @@
     // battleship 战列舰
     // cruiser 巡洋舰
     // destroyer 驱逐舰
+    // frigate 护卫舰
     // cargo 货轮
     // torpedo_boat 快艇
     // submarine 潜艇（未来可期）

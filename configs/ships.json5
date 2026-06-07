@@ -16678,6 +16678,109 @@
       ]
     }
   },
+  // 护卫舰
+  // 中国海军
+  {
+    name: "jiujiang",
+    displayName: "九江",
+    type: "frigate",
+    typeAbbr: "FF",
+    totalHP: 1702,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 26,
+    acceleration: 0.9,
+    rotateSpeed: 2,
+    length: 103.2,
+    width: 10.8,
+    fundsCost: 24,
+    timeCost: 9,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "CN/100/56/2/Type79A",
+          posPercent: 0.57,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 B
+        {
+          name: "CN/100/56/2/Type79A",
+          posPercent: -0.73,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 高炮 A
+        {
+          name: "CN/37/63/2/Type76A",
+          posPercent: 0.39,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [270, 360]
+        },
+        // 高炮 B
+        {
+          name: "CN/37/63/2/Type76A",
+          posPercent: 0.39,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      rockets: [
+        // 50 管火箭炮 A
+        {
+          name: "CN/122/50",
+          posPercent: -0.04,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 50 管火箭炮 B
+        {
+          name: "CN/122/50",
+          posPercent: -0.39,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 50 管火箭炮 C
+        {
+          name: "CN/122/50",
+          posPercent: -0.52,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 50 管火箭炮 D
+        {
+          name: "CN/122/50",
+          posPercent: -0.6,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 50 管火箭炮 E
+        {
+          name: "CN/122/50",
+          posPercent: -0.91,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 前反潜火箭 A
+        {
+          name: "CN/250/5/Type65",
+          posPercent: 0.7,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [225, 360]
+        },
+        // 前反潜火箭 B
+        {
+          name: "CN/250/5/Type65",
+          posPercent: 0.7,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [270, 360]
+        }
+      ]
+    }
+  },
   // 鱼雷艇
   // 美国海军
   {

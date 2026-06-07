@@ -22,6 +22,7 @@ func init() {
 		"cruiser",
 		"default",
 		"destroyer",
+		"frigate",
 		"torpedo_boat",
 		"cargo",
 		"hospital",

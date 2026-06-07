@@ -623,6 +623,22 @@
     damage: 90,
     criticalRate: 0
   },
+  // 中国海军 100mm 舰炮弹
+  {
+    name: "CN/GB/100/1960",
+    type: "shell",
+    diameter: 100,
+    damage: 55,
+    criticalRate: 0.001
+  },
+  // 中国海军 37mm 舰炮弹
+  {
+    name: "CN/GB/37/1960",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
+    criticalRate: 0.001
+  },
   // 火箭弹
   // 美国海军 127mm 防空火箭弹
   {
@@ -639,5 +655,21 @@
     diameter: 120,
     damage: 25,
     criticalRate: 0.0005
+  },
+  // 中国海军 122mm 舰载火箭弹
+  {
+    name: "CN/RB/122/1960",
+    type: "rocket",
+    diameter: 122,
+    damage: 28,
+    criticalRate: 0.0005
+  },
+  // 中国海军 250mm 65 式反潜火箭弹
+  {
+    name: "CN/RB/250/1965",
+    type: "rocket",
+    diameter: 250,
+    damage: 95,
+    criticalRate: 0.001
   }
 ]
