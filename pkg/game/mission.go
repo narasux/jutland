@@ -79,6 +79,7 @@ func (g *Game) handleMissionLoading() error {
 
 // 任务开始
 func (g *Game) handleMissionStart() error {
+	g.missionMgr.WarmupMapBlocks()
 	if g.objStates.LoadingInterface.MissionStartDrawn &&
 		!g.objStates.LoadingInterface.LoadedAudioPlayed {
 		audio.PlayAudioToEnd(audioRes.NewMissionLoaded())

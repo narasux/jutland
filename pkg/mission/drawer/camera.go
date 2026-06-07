@@ -14,20 +14,22 @@ func (d *Drawer) drawCameraView(screen *ebiten.Image, ms *state.MissionState) {
 	blockSize := ms.MapBlockDisplaySize()
 	for x := 0; x <= ms.View.Camera.Width; x++ {
 		for y := 0; y <= ms.View.Camera.Height; y++ {
-			opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterNearest}
-			opts.GeoM.Translate(
-				(float64(x)-xAccOffset)*blockSize,
-				(float64(y)-yAccOffset)*blockSize,
-			)
+			drawX := (float64(x) - xAccOffset) * blockSize
+			drawY := (float64(y) - yAccOffset) * blockSize
 
 			mapX, mapY := ms.View.Camera.Pos.MX+x, ms.View.Camera.Pos.MY+y
 			char := ms.Core.MissionMD.MapCfg.Map.Get(mapX, mapY)
-			images := mapBlockImg.GetByCharAndPosZoom(char, mapX, mapY, ms.UI.GameOpts.Zoom)
-			for _, img := range images {
-				if img == nil {
+			blocks := mapBlockImg.GetDrawBlocksByCharAndPosZoom(char, mapX, mapY, ms.UI.GameOpts.Zoom)
+			for _, block := range blocks {
+				if block.Image == nil {
 					continue
 				}
-				screen.DrawImage(img, opts)
+				opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterNearest}
+				if block.Scale != 1 {
+					opts.GeoM.Scale(block.Scale, block.Scale)
+				}
+				opts.GeoM.Translate(drawX, drawY)
+				screen.DrawImage(block.Image, opts)
 			}
 		}
 	}

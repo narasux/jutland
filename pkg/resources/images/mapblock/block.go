@@ -77,9 +77,22 @@ func init() {
 }
 
 type sceneBlockCache struct {
-	mapName  string
-	data     map[string]*ebiten.Image
-	zoomData map[int]map[string]*ebiten.Image
+	mapName       string
+	data          map[string]*ebiten.Image
+	zoomData      map[int]map[string]*ebiten.Image
+	prewarmJobs   []sceneBlockPrewarmJob
+	prewarmQueued map[string]bool
+}
+
+type sceneBlockPrewarmJob struct {
+	key  string
+	zoom int
+}
+
+// DrawBlock 是地图块绘制层，Scale 用于缺少预热缓存时临时缩放原始场景块。
+type DrawBlock struct {
+	Image *ebiten.Image
+	Scale float64
 }
 
 // SceneBlockCache 场景地图块缓存
@@ -97,6 +110,8 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 	// 丢弃上一个关卡的地图贴图数据
 	c.data = map[string]*ebiten.Image{}
 	c.zoomData = map[int]map[string]*ebiten.Image{}
+	c.prewarmJobs = nil
+	c.prewarmQueued = map[string]bool{}
 
 	imgPath := fmt.Sprintf("/map/abbrs/%s.png", cfg.Source)
 	imgData, err := os.ReadFile(config.ImgResBaseDir + imgPath)
@@ -150,21 +165,106 @@ func (c *sceneBlockCache) GetZoom(x, y int, zoom int) *ebiten.Image {
 
 	zoomMap := c.zoomData[zoom]
 	if zoomMap == nil {
-		zoomMap = map[string]*ebiten.Image{}
-		c.zoomData[zoom] = zoomMap
+		return nil
 	}
+	return zoomMap[c.genKey(x, y)]
+}
 
-	key := c.genKey(x, y)
-	if img := zoomMap[key]; img != nil {
-		return img
+// GetZoomDrawBlock 获取场景地图块绘制层；缓存未就绪时返回原始图和临时缩放比例。
+func (c *sceneBlockCache) GetZoomDrawBlock(x, y int, zoom int) DrawBlock {
+	zoom = normalizeZoom(zoom)
+	if img := c.GetZoom(x, y, zoom); img != nil {
+		return DrawBlock{Image: img, Scale: 1}
 	}
 	baseImg := c.Get(x, y)
 	if baseImg == nil {
-		return nil
+		return DrawBlock{}
 	}
-	zoomImg := genZoomBlock(baseImg, zoom)
-	zoomMap[key] = zoomImg
-	return zoomImg
+	return DrawBlock{
+		Image: baseImg,
+		Scale: float64(zoomedBlockSize(zoom)+1) / float64(constants.MapBlockSize),
+	}
+}
+
+// SchedulePrewarmAround 把相机附近的场景地图块加入预热队列；已缓存或已排队的块会被跳过。
+func (c *sceneBlockCache) SchedulePrewarmAround(minX, minY, width, height int, zooms []int, margin int) {
+	for _, zoom := range zooms {
+		zoom = normalizeZoom(zoom)
+		zoomMap := c.zoomData[zoom]
+		if zoomMap == nil {
+			zoomMap = map[string]*ebiten.Image{}
+			c.zoomData[zoom] = zoomMap
+		}
+		for x := minX - margin; x <= minX+width+margin; x++ {
+			for y := minY - margin; y <= minY+height+margin; y++ {
+				key := c.genKey(x, y)
+				if c.data[key] == nil || zoomMap[key] != nil {
+					continue
+				}
+				queueKey := c.prewarmQueueKey(key, zoom)
+				if c.prewarmQueued[queueKey] {
+					continue
+				}
+				c.prewarmQueued[queueKey] = true
+				c.prewarmJobs = append(c.prewarmJobs, sceneBlockPrewarmJob{key: key, zoom: zoom})
+			}
+		}
+	}
+}
+
+// HasMissingAround 判断相机附近是否仍有指定 zoom 的场景地图块缓存缺口。
+func (c *sceneBlockCache) HasMissingAround(minX, minY, width, height int, zoom int, margin int) bool {
+	zoom = normalizeZoom(zoom)
+	zoomMap := c.zoomData[zoom]
+	if zoomMap == nil {
+		return true
+	}
+	for x := minX - margin; x <= minX+width+margin; x++ {
+		for y := minY - margin; y <= minY+height+margin; y++ {
+			key := c.genKey(x, y)
+			if c.data[key] != nil && zoomMap[key] == nil {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// ResetPrewarmQueue 清空待预热队列，用于缩放变更后丢弃旧优先级任务。
+func (c *sceneBlockCache) ResetPrewarmQueue() {
+	c.prewarmJobs = nil
+	c.prewarmQueued = map[string]bool{}
+}
+
+// StepPrewarm 按预算生成场景地图块缩放缓存，避免在单帧集中创建过多图片。
+func (c *sceneBlockCache) StepPrewarm(budget int) int {
+	processed := 0
+	for budget > 0 && len(c.prewarmJobs) > 0 {
+		job := c.prewarmJobs[0]
+		c.prewarmJobs = c.prewarmJobs[1:]
+		delete(c.prewarmQueued, c.prewarmQueueKey(job.key, job.zoom))
+
+		baseImg := c.data[job.key]
+		if baseImg == nil {
+			continue
+		}
+		zoomMap := c.zoomData[job.zoom]
+		if zoomMap == nil {
+			zoomMap = map[string]*ebiten.Image{}
+			c.zoomData[job.zoom] = zoomMap
+		}
+		if zoomMap[job.key] != nil {
+			continue
+		}
+		zoomMap[job.key] = genZoomBlock(baseImg, job.zoom)
+		budget--
+		processed++
+	}
+	return processed
+}
+
+func (c *sceneBlockCache) prewarmQueueKey(key string, zoom int) string {
+	return fmt.Sprintf("%d:%s", zoom, key)
 }
 
 // 生成缓存键
@@ -204,6 +304,37 @@ func GetByCharAndPosZoom(c rune, x, y int, zoom int) []*ebiten.Image {
 		posBlocks = append(posBlocks, img, SceneBlockCache.GetZoom(x, y, zoom))
 		// 调试地图浅海/海岸用（人工标记法 orz）
 		// posBlocks = append(posBlocks, blocks[fmt.Sprintf("char_%s", strings.ToLower(string(c)))])
+	}
+
+	return posBlocks
+}
+
+// GetDrawBlocksByCharAndPosZoom 根据指定字符、坐标和缩放档位获取可绘制地图块层。
+func GetDrawBlocksByCharAndPosZoom(c rune, x, y int, zoom int) []DrawBlock {
+	hash := md5.Sum([]byte(fmt.Sprintf("%d:%d", x, y)))
+	zoom = normalizeZoom(zoom)
+
+	posBlocks := []DrawBlock{}
+	switch c {
+	case mapcfg.ChrSea:
+		index := int(hash[0]) % seaBlockCount
+		img := zoomBlocks[zoom][fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
+		posBlocks = append(posBlocks, DrawBlock{Image: img, Scale: 1})
+	case mapcfg.ChrDeepSea:
+		index := int(hash[0]) % deepSeaBlockCount
+		img := zoomBlocks[zoom][fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
+		posBlocks = append(posBlocks, DrawBlock{Image: img, Scale: 1})
+	case mapcfg.ChrLand:
+		posBlocks = append(posBlocks, SceneBlockCache.GetZoomDrawBlock(x, y, zoom))
+	case mapcfg.ChrShallow:
+		fallthrough
+	case mapcfg.ChrCoast:
+		index := int(hash[0]) % seaBlockCount
+		img := zoomBlocks[zoom][fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
+		posBlocks = append(posBlocks,
+			DrawBlock{Image: img, Scale: 1},
+			SceneBlockCache.GetZoomDrawBlock(x, y, zoom),
+		)
 	}
 
 	return posBlocks
