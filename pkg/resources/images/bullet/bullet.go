@@ -35,7 +35,7 @@ var bombDiameters = []int{457, 380, 356, 280, 273, 160, 70}
 var bombs = make(map[int]*ebiten.Image)
 
 // rocketDiameters 支持的火箭弹口径列表
-var rocketDiameters = []int{120, 122, 127}
+var rocketDiameters = []int{120, 122, 127, 250}
 
 // rockets 火箭弹图片映射表
 var rockets = make(map[int]*ebiten.Image)

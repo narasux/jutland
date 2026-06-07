@@ -827,9 +827,9 @@
     description: "联合舰队司令部 1941 年度全面战备检验——代号「怒海」达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，超过百艘的各型舰艇参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
     initReinforcePoints: [
       {
-        pos: [1, 20],
+        pos: [1, 15],
         rotation: 90,
-        rallyPos: [25, 35],
+        rallyPos: [10, 15],
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -848,9 +848,9 @@
         ],
       },
       {
-        pos: [1, 35],
+        pos: [1, 30],
         rotation: 90,
-        rallyPos: [25, 35],
+        rallyPos: [10, 30],
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -880,9 +880,9 @@
         ],
       },
       {
-        pos: [1, 50],
+        pos: [1, 45],
         rotation: 90,
-        rallyPos: [25, 35],
+        rallyPos: [10, 45],
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -920,9 +920,9 @@
         ],
       },
       {
-        pos: [1, 65],
+        pos: [1, 60],
         rotation: 90,
-        rallyPos: [30, 50],
+        rallyPos: [10, 60],
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -940,9 +940,9 @@
         ],
       },
       {
-        pos: [1, 80],
+        pos: [1, 75],
         rotation: 90,
-        rallyPos: [25, 35],
+        rallyPos: [10, 75],
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -950,9 +950,9 @@
         ],
       },
       {
-        pos: [1, 95],
+        pos: [1, 90],
         rotation: 90,
-        rallyPos: [25, 35],
+        rallyPos: [10, 90],
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
