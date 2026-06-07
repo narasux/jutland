@@ -63,7 +63,16 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 
 // 任务加载界面
 type loadingInterface struct {
-	Ready bool
+	Ready             bool
+	MissionStartDrawn bool
+	LoadedAudioPlayed bool
+}
+
+// Reset 重置加载界面状态，保证每次进入关卡都先显示 loading 再执行阻塞加载。
+func (i *loadingInterface) Reset() {
+	i.Ready = false
+	i.MissionStartDrawn = false
+	i.LoadedAudioPlayed = false
 }
 
 // 关卡选择界面 UI

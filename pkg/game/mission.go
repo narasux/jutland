@@ -53,11 +53,9 @@ func (g *Game) handleMissionSelect() error {
 
 	// 确定：Enter 键或点击「开始任务」
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
-		g.mode = GameModeMissionLoading
-		g.player.Close()
+		g.startMissionLoading()
 	} else if ui != nil && isHoverArea(ui.StartButton) && isMouseButtonLeftJustPressed() {
-		g.mode = GameModeMissionLoading
-		g.player.Close()
+		g.startMissionLoading()
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		g.mode = GameModeMenuSelect
 	} else if ui != nil && isHoverArea(ui.BackButton) && isMouseButtonLeftJustPressed() {
@@ -76,18 +74,29 @@ func (g *Game) handleMissionLoading() error {
 	}
 	g.missionMgr = manager.New(g.curMission)
 	g.mode = GameModeMissionStart
-	audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
 	return nil
 }
 
 // 任务开始
 func (g *Game) handleMissionStart() error {
+	if g.objStates.LoadingInterface.MissionStartDrawn &&
+		!g.objStates.LoadingInterface.LoadedAudioPlayed {
+		audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
+		g.objStates.LoadingInterface.LoadedAudioPlayed = true
+	}
 	if isAnyNextInput() {
 		g.mode = GameModeMissionRunning
 		// TODO 支持关卡内 BGM
 		// g.player.Close()
 	}
 	return nil
+}
+
+// startMissionLoading 进入关卡加载状态，并重置加载界面与完成音效状态。
+func (g *Game) startMissionLoading() {
+	g.objStates.LoadingInterface.Reset()
+	g.mode = GameModeMissionLoading
+	g.player.Close()
 }
 
 // 任务运行

@@ -10,6 +10,10 @@ type FiringArc struct {
 
 // Contains 是否在射界内
 func (f *FiringArc) Contains(angle float64) bool {
+	// 排除 [0, 0], [360, 360] 的情况
+	if f.Start == f.End {
+		return false
+	}
 	return f.Start <= angle && angle <= f.End
 }
 

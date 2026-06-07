@@ -116,6 +116,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case GameModeMissionStart:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, "任务开始！")
+		g.objStates.LoadingInterface.MissionStartDrawn = true
 	case GameModeMissionRunning:
 		g.missionMgr.Draw(screen)
 	case GameModeMissionSuccess:
