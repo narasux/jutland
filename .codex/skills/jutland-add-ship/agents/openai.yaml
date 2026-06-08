@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jutland 添加战舰"
+  short_description: "从蓝图素材添加 Jutland 战舰"
+  default_prompt: "使用 $jutland-add-ship 根据战舰蓝图向 Jutland 添加一艘新战舰。"
