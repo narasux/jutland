@@ -1995,6 +1995,186 @@
       ]
     }
   },
+  {
+    name: "shokaku",
+    displayName: "翔鹤",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1941,
+    totalHP: 32105,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.07,
+    maxSpeed: 34,
+    acceleration: 0.35,
+    rotateSpeed: 0.85,
+    length: 258,
+    width: 26,
+    fundsCost: 420,
+    timeCost: 42,
+    weapon: {
+      mainGuns: [
+        // 右前高平炮 A
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右前高平炮 B
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.48,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右后高平炮 C
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右后高平炮 D
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高平炮 A
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.61,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左前高平炮 B
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左后高平炮 C
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左后高平炮 D
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.54,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右前高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右前高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右前高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右后高炮 D
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右后高炮 E
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.72,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右后高炮 F
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.77,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左前高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左前高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左后高炮 D
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左后高炮 E
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左后高炮 F
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 1.7,
+      groups: [
+        {
+          name: "A6M_0",
+          maxCount: 20
+        },
+        {
+          name: "D3A_99",
+          maxCount: 32
+        },
+        {
+          name: "B5N2_97",
+          maxCount: 32
+        }
+      ]
+    }
+  },
   // 战列舰
   // 美国海军
   {

@@ -255,6 +255,32 @@
     ]
   },
   {
+    name: "shokaku",
+    specs: [
+      {label: "类型", value: "CV / 航空母舰"},
+      {label: "吨位", value: "32105"},
+      {label: "速度", value: "34 节"},
+      {label: "费用", value: "$420 / 42s"},
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "7%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "8x2 127mm/40"},
+      {label: "高炮", value: "12x3 25mm/60"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x20"},
+      {label: "俯冲轰炸机", value: "九九舰爆（D3A）x32"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x32"},
+    ],
+    description: "翔鹤号航空母舰是日本海军翔鹤级航空母舰首舰，1941 年服役，与同级舰瑞鹤共同组成第五航空战队。翔鹤级在飞龙号基础上扩大改进，具备较高航速、双层机库和较强舰载机运用能力，曾参加珍珠港空袭、珊瑚海海战、南太平洋海战等作战。1944 年 6 月马里亚纳海战中，翔鹤号遭美军潜艇棘鳍号鱼雷命中，随后因航空燃料气体引发爆炸而沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 翔鹤号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%BF%94%E9%B9%A4%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0"
+      }
+    ]
+  },
+  {
     name: "soryu",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
