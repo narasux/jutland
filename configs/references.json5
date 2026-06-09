@@ -385,6 +385,31 @@
       }
     ]
   },
+  {
+    name: "hosho",
+    specs: [
+      {label: "类型", value: "CVL / 轻型航空母舰"},
+      {label: "吨位", value: "9646"},
+      {label: "速度", value: "25 节"},
+      {label: "费用", value: "$120 / 22s"},
+      {label: "水平减伤", value: "5%"},
+      {label: "垂直减伤", value: "0%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "4x1 140mm/50"},
+      {label: "高炮", value: "6x3 25mm/60"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x8"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x6"},
+    ],
+    description: "凤翔号航空母舰是日本海军第一艘专门设计建造的航空母舰，也是世界上最早完工服役的标准航空母舰之一。该舰具备强烈的实验色彩，服役后多次改装，太平洋战争爆发后主要承担训练和辅助任务，战后用于复员运输，最终于 1947 年完成解体。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 凤翔号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%B3%B3%E7%BF%94%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
   // 美国海军
   {
     name: "lowa",

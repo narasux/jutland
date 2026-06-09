@@ -2434,6 +2434,113 @@
       ]
     }
   },
+  {
+    name: "hosho",
+    displayName: "凤翔",
+    type: "aircraft_carrier",
+    typeAbbr: "CVL",
+    year: 1941,
+    totalHP: 9646,
+    horizontalDamageReduction: 0.05,
+    verticalDamageReduction: 0,
+    maxSpeed: 25,
+    acceleration: 0.4,
+    rotateSpeed: 1.05,
+    length: 168,
+    width: 18,
+    fundsCost: 120,
+    timeCost: 22,
+    weapon: {
+      mainGuns: [
+        // 右前主炮
+        {
+          name: "JP/140/50",
+          posPercent: 0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前主炮
+        {
+          name: "JP/140/50",
+          posPercent: 0.67,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后主炮
+        {
+          name: "JP/140/50",
+          posPercent: -0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后主炮
+        {
+          name: "JP/140/50",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.44,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.45,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+
+        // 右高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.87,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.87,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 4,
+      groups: [
+        {
+          name: "A6M_0",
+          maxCount: 8
+        },
+        {
+          name: "B5N2_97",
+          maxCount: 6
+        }
+      ]
+    }
+  },
   // 战列舰
   // 美国海军
   {
