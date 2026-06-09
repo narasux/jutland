@@ -1831,6 +1831,126 @@
     }
   },
   {
+    name: "ryujo",
+    displayName: "龙骧",
+    type: "aircraft_carrier",
+    typeAbbr: "CVL",
+    year: 1941,
+    totalHP: 12732,
+    horizontalDamageReduction: 0.1,
+    verticalDamageReduction: 0,
+    maxSpeed: 28,
+    acceleration: 0.45,
+    rotateSpeed: 0.95,
+    length: 180,
+    width: 20,
+    fundsCost: 170,
+    timeCost: 26,
+    weapon: {
+      mainGuns: [
+        // 右前高平炮
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右后高平炮
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高平炮
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左后高平炮
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "JP/25/60/2",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "JP/25/60/2",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右机枪 A
+        {
+          name: "JP/13/4",
+          posPercent: 0.63,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左机枪 B
+        {
+          name: "JP/13/4",
+          posPercent: 0.63,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右机枪 B
+        {
+          name: "JP/13/4",
+          posPercent: -0.62,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左机枪 B
+        {
+          name: "JP/13/4",
+          posPercent: -0.65,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右机枪 C
+        {
+          name: "JP/13/4",
+          posPercent: -0.78,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左机枪 C
+        {
+          name: "JP/13/4",
+          posPercent: -0.78,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 2.8,
+      groups: [
+        {
+          name: "A6M_0",
+          maxCount: 18
+        },
+        {
+          name: "B5N2_97",
+          maxCount: 24
+        }
+      ]
+    }
+  },
+  {
     name: "hiryu",
     displayName: "飞龙",
     type: "aircraft_carrier",

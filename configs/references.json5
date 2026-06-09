@@ -359,6 +359,32 @@
       }
     ]
   },
+  {
+    name: "ryujo",
+    specs: [
+      {label: "类型", value: "CVL / 轻型航空母舰"},
+      {label: "吨位", value: "12732"},
+      {label: "速度", value: "28 节"},
+      {label: "费用", value: "$170 / 26s"},
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "2x2 25mm/60"},
+      {label: "高射机枪", value: "6x4 13mm"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x18"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
+    ],
+    description: "龙骧号航空母舰是日本海军为利用条约吨位空隙而建造的小型航空母舰，采用全通式飞行甲板和双层机库，舰体重心偏高、稳定性较差。该舰曾参加中日战争和太平洋战争初期行动，1942 年 8 月在东所罗门海战中遭美军舰载机攻击后沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 龙骧号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%BE%8D%E9%A9%A4%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
   // 美国海军
   {
     name: "lowa",

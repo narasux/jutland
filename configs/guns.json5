@@ -635,6 +635,18 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 日本海军 四联装 13 毫米机枪
+  {
+    name: "JP/13/4",
+    bulletName: "JP/GB/13/1935",
+    bulletCount: 4,
+    reloadTime: 0.05,
+    range: 2,
+    bulletSpread: 20,
+    bulletSpeed: 800,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 日本海军 单装 13 毫米机枪
   {
     name: "JP/13",
