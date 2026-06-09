@@ -333,6 +333,32 @@
       }
     ]
   },
+  {
+    name: "hiyo",
+    specs: [
+      {label: "类型", value: "CV / 航空母舰"},
+      {label: "吨位", value: "27500"},
+      {label: "速度", value: "25.5 节"},
+      {label: "费用", value: "$320 / 36s"},
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "3%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "6x2 127mm/40"},
+      {label: "高炮", value: "8x3 25mm/60"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x15"},
+      {label: "俯冲轰炸机", value: "九九舰爆（D3A）x20"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x23"},
+    ],
+    description: "飞鹰号航空母舰原为日本邮船橿原丸级客货轮出云丸，建造中被日本海军征用并改装为飞鹰级航空母舰首舰。该级航母载机量接近正规大型航母，但因商船基础与轮机配置限制，航速较低且服役中多次受机械可靠性影响。飞鹰号曾在 1943 年遭潜艇鱼雷重创，1944 年 6 月菲律宾海海战中被美军舰载机鱼雷命中后爆炸沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 飞鹰号航空母舰",
+        url: "https://zh.wikipedia.org/zh-cn/%E9%A3%9B%E9%B7%B9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
   // 美国海军
   {
     name: "lowa",
