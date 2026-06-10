@@ -386,6 +386,35 @@
     ]
   },
   {
+    name: "shoho",
+    specs: [
+      {label: "类型", value: "CVL / 轻型航空母舰"},
+      {label: "吨位", value: "13100"},
+      {label: "速度", value: "28 节"},
+      {label: "费用", value: "$160 / 26s"},
+      {label: "水平减伤", value: "10%"},
+      {label: "垂直减伤", value: "0%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "4x3 25mm/60"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x21"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9"},
+    ],
+    description: "祥凤号航空母舰原为剑崎型潜水母舰首舰剑崎，后按战时快速改装航母的思路改建为轻型航空母舰。1942 年 1 月以航空母舰身份服役后参加南太平洋作战，同年 5 月在珊瑚海海战中遭美军舰载机连续命中炸弹与鱼雷后沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "用户提供素材 - shoho.png",
+        url: "shoho.png"
+      },
+      {
+        name: "维基百科 - 祥凤号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%A5%A5%E9%B3%B3%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "hosho",
     specs: [
       {label: "类型", value: "CVL / 轻型航空母舰"},
