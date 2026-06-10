@@ -436,6 +436,32 @@
     ]
   },
   {
+    name: "taiyo",
+    specs: [
+      {label: "类型", value: "CVE / 护航航空母舰"},
+      {label: "吨位", value: "20000"},
+      {label: "速度", value: "21 节"},
+      {label: "费用", value: "$150 / 25s"},
+      {label: "水平减伤", value: "8%"},
+      {label: "垂直减伤", value: "0%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "4x1 120mm"},
+      {label: "高炮", value: "10x3 25mm/60"},
+      {label: "高射机枪", value: "10x1 13mm"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x18"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9"},
+    ],
+    description: "大鹰号航空母舰原名春日丸，原为日本邮船新田丸级客货船，尚未完工即被日本海军征用并改装为航空母舰。该舰航速较低，主要承担训练、飞机运输与护航任务；1944 年 8 月在吕宋岛以西海域遭美军潜艇鱼雷命中，因航空燃料爆炸而沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 大鹰号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%B7%B9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "hosho",
     specs: [
       {label: "类型", value: "CVL / 轻型航空母舰"},

@@ -539,6 +539,18 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 日本海军 双联装 12.7 厘米 40 倍口径高炮
+  {
+    name: "JP/120/45",
+    bulletName: "JP/GB/120/1922",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 11,
+    bulletSpread: 60,
+    bulletSpeed: 825,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 日本海军 双联装 10 厘米 65 倍口径高平两用炮
   {
     name: "JP/100/65/2/DP",

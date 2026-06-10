@@ -2661,6 +2661,140 @@
     }
   },
   {
+    name: "taiyo",
+    displayName: "大鹰",
+    type: "aircraft_carrier",
+    typeAbbr: "CVE",
+    year: 1943,
+    totalHP: 20000,
+    horizontalDamageReduction: 0.08,
+    verticalDamageReduction: 0,
+    maxSpeed: 21,
+    acceleration: 0.25,
+    rotateSpeed: 0.7,
+    length: 180,
+    width: 23,
+    fundsCost: 150,
+    timeCost: 25,
+    weapon: {
+      mainGuns: [
+        // 右舷高炮 A
+        {
+          name: "JP/120/45",
+          posPercent: 0.66,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高炮 A
+        {
+          name: "JP/120/45",
+          posPercent: 0.66,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高炮 B
+        {
+          name: "JP/120/45",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高炮 B
+        {
+          name: "JP/120/45",
+          posPercent: -0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高炮 C
+        {
+          name: "JP/120/45",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高炮 C
+        {
+          name: "JP/120/45",
+          posPercent: -0.64,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右前高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高炮 A
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.9,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右中高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左中高炮 B
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右中高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左中高炮 C
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后高炮 D
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.99,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后高炮 D
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.99,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 2.8,
+      groups: [
+        {
+          name: "A6M_0",
+          maxCount: 18
+        },
+        {
+          name: "B5N2_97",
+          maxCount: 9
+        }
+      ]
+    }
+  },
+  {
     name: "hosho",
     displayName: "凤翔",
     type: "aircraft_carrier",

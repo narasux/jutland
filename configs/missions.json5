@@ -850,6 +850,7 @@
           "hiryu",
           "shokaku",
           "hiyo",
+          "taiyo",
           "hosho"
         ],
       },
@@ -1107,8 +1108,14 @@
         belongPlayer: "HA"
       },
       {
-        name: "hosho",
+        name: "taiyo",
         pos: [28, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hosho",
+        pos: [29, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
