@@ -405,12 +405,33 @@
     author: "未知",
     links: [
       {
-        name: "用户提供素材 - shoho.png",
-        url: "shoho.png"
-      },
-      {
         name: "维基百科 - 祥凤号航空母舰",
         url: "https://zh.wikipedia.org/wiki/%E7%A5%A5%E9%B3%B3%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
+    name: "chitose",
+    specs: [
+      {label: "类型", value: "CVL / 轻型航空母舰"},
+      {label: "吨位", value: "13600"},
+      {label: "速度", value: "29 节"},
+      {label: "费用", value: "$185 / 28s"},
+      {label: "水平减伤", value: "12%"},
+      {label: "垂直减伤", value: "0%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "10x3 25mm/60"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x21"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9"},
+    ],
+    description: "千岁号航空母舰原为千岁级水上飞机母舰首舰，建造时已考虑日后改装为航空母舰。中途岛海战后该舰于 1943 年完成航母改装，1944 年参加马里亚纳海战与莱特湾海战，并在恩加尼奥角海战中遭美军舰载机攻击后战沉。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 千岁号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8D%83%E6%AD%B2%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
       }
     ]
   },
