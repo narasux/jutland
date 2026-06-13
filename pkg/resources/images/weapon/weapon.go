@@ -35,12 +35,12 @@ const (
 func init() {
 	log.Println("loading weapon icon resources...")
 
-	// 加载原始图标（放大4倍，用于高分辨率）
-	loadWeaponIcons(weaponZoom4ImgMap)
-
-	// 生成不同缩放级别的图标
-	genZoomWeaponImages(weaponZoom4ImgMap, weaponZoom2ImgMap, 2)
-	genZoomWeaponImages(weaponZoom4ImgMap, weaponZoom1ImgMap, 4)
+	// 保留高分辨率源图，在初始化阶段一次性生成游戏需要的三档缓存。
+	weaponSourceImgMap := map[string]*ebiten.Image{}
+	loadWeaponIcons(weaponSourceImgMap)
+	genSizedWeaponImages(weaponSourceImgMap, weaponZoom4ImgMap, 64)
+	genSizedWeaponImages(weaponSourceImgMap, weaponZoom2ImgMap, 32)
+	genSizedWeaponImages(weaponSourceImgMap, weaponZoom1ImgMap, 16)
 
 	log.Println("weapon icon resources loaded")
 }
@@ -89,13 +89,21 @@ func loadWeaponIcons(cache map[string]*ebiten.Image) {
 	}
 }
 
-// genZoomWeaponImages 生成缩放后的武器图标
-func genZoomWeaponImages(source, target map[string]*ebiten.Image, arcZoom int) {
+// genSizedWeaponImages 把高分辨率武器源图等比缩放并居中到固定尺寸缓存。
+// 缩放只在资源初始化时执行，绘制热路径直接复用对应 zoom 的缓存图片。
+func genSizedWeaponImages(source, target map[string]*ebiten.Image, size int) {
 	for key, img := range source {
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
-		opts.GeoM.Scale(1/float64(arcZoom), 1/float64(arcZoom))
+		width := img.Bounds().Dx()
+		height := img.Bounds().Dy()
+		scale := min(float64(size)/float64(width), float64(size)/float64(height))
+		opts.GeoM.Scale(scale, scale)
+		opts.GeoM.Translate(
+			(float64(size)-float64(width)*scale)/2,
+			(float64(size)-float64(height)*scale)/2,
+		)
 
-		zoomImg := ebiten.NewImage(img.Bounds().Dx()/arcZoom, img.Bounds().Dy()/arcZoom)
+		zoomImg := ebiten.NewImage(size, size)
 		zoomImg.DrawImage(img, opts)
 		target[key] = zoomImg
 	}
