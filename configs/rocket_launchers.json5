@@ -16,6 +16,23 @@
     proximityRadius: 0.25,
     blastRadius: 0.45
   },
+  // 日本海军 28 发 12cm 5式防空火箭炮
+  {
+    name: "JP/120/28/Type5/AA",
+    bulletName: "JP/RB/120/1940",
+    rocketCount: 28,
+    groupCount: 4,
+    shotInterval: 0.06,
+    groupInterval: 0.35,
+    reloadTime: 90,
+    range: 12,
+    bulletSpread: 250,
+    bulletSpeed: 720,
+    antiShip: false,
+    antiAircraft: true,
+    proximityRadius: 0.25,
+    blastRadius: 0.45,
+  },
   // 日本海军 21 发 12cm 5式防空火箭炮
   {
     name: "JP/120/21/Type5/AA",

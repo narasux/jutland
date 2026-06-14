@@ -872,6 +872,7 @@
           "yamato",
           "kongo",
           "fuso",
+          "ise",
           "soviet_union",
           "soviet_union_nelsonski",
           "kremlin",
@@ -1188,26 +1189,32 @@
         belongPlayer: "HA"
       },
       {
-        name: "soviet_union",
+        name: "ise",
         pos: [37, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "soviet_union_nelsonski",
-        pos: [35, 43],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "kremlin",
+        name: "soviet_union",
         pos: [37, 44],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "slava",
+        name: "soviet_union_nelsonski",
         pos: [35, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kremlin",
+        pos: [37, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "slava",
+        pos: [35, 47],
         rotation: 90,
         belongPlayer: "HA"
       },

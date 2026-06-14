@@ -714,6 +714,39 @@
     ]
   },
   {
+    name: "ise",
+    specs: [
+      {label: "类型", value: "BBV / 航空战列舰"},
+      {label: "吨位", value: "38676"},
+      {label: "速度", value: "25.3 节"},
+      {label: "费用", value: "$460 / 50s"},
+      {label: "水平减伤", value: "42%"},
+      {label: "垂直减伤", value: "25%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 356mm/45"},
+      {label: "高平炮", value: "8x2 127mm/40"},
+      {label: "高炮", value: "29x3 25mm/60"},
+      {label: "高炮", value: "11x1 25mm/60"},
+      {label: "防空火箭", value: "6x28 120mm"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x6"},
+      {label: "俯冲轰炸机", value: "九九舰爆（D3A）x8"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x8"},
+    ],
+    description: "伊势号是日本海军伊势级战列舰首舰。中途岛海战后，其舰艉两座主炮被拆除并改建为航空作业甲板、机库与弹射器，形成保留四座双联装 356 毫米主炮的航空战列舰。改装方案计划搭载约 22 架飞机，但因舰载机和飞行员短缺，未能按设计形成完整航空战力。",
+    author: "Alexpl",
+    links: [
+      {
+        name: "维基百科 - 伊势号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E4%BC%8A%E5%8B%A2%E8%99%9F%E6%88%B0%E8%89%A6"
+      },
+      {
+        name: "Wiki: Ise1944.png",
+        url: "https://commons.wikimedia.org/wiki/File:Ise1944.png"
+      }
+    ]
+  },
+  {
     name: "yamato",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
