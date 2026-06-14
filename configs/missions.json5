@@ -784,7 +784,7 @@
         belongPlayer: "CA"
       },
       {
-        name: "hiyo",
+        name: "taiho",
         pos: [27, 120],
         rotation: 21,
         belongPlayer: "CA"
@@ -841,6 +841,7 @@
           "yorktown",
           "saratoga",
           "hakuryu",
+          "taiho",
           "shinano",
           "akagi",
           "kaga",
@@ -1050,79 +1051,85 @@
       },
       {
         name: "hakuryu",
-        pos: [28, 35],
+        pos: [25, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "taiho",
+        pos: [26, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "shinano",
-        pos: [29, 36],
+        pos: [25, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "akagi",
-        pos: [28, 37],
+        pos: [26, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "kaga",
-        pos: [29, 38],
+        pos: [25, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "soryu",
-        pos: [28, 39],
+        pos: [26, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "hiryu",
-        pos: [29, 40],
+        pos: [25, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "shokaku",
-        pos: [28, 41],
+        pos: [26, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "hiyo",
-        pos: [29, 42],
+        pos: [25, 41],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "ryujo",
-        pos: [28, 43],
+        pos: [26, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "shoho",
-        pos: [29, 44],
+        pos: [25, 43],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "chitose",
-        pos: [28, 45],
+        pos: [26, 44],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "taiyo",
-        pos: [29, 46],
+        pos: [25, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "hosho",
-        pos: [28, 47],
+        pos: [26, 46],
         rotation: 90,
         belongPlayer: "HA"
       },

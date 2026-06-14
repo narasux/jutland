@@ -166,15 +166,15 @@
     name: "hakuryu",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "37270"},
+      {label: "吨位", value: "38570"},
       {label: "速度", value: "33 节"},
       {label: "费用", value: "$500 / 52s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "10%"}
+      {label: "水平减伤", value: "33%"},
+      {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
       {label: "主炮", value: "8x2 100mm/65"},
-      {label: "高炮", value: "20x3 25mm/60"},
+      {label: "高炮", value: "22x3 25mm/60"},
       {label: "制空战斗机", value: "零式舰战（A6M）x24"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x12"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
@@ -189,6 +189,32 @@
       {
         name: "维基百科 - 改大凤型航空母舰",
         url: "https://ja.wikipedia.org/wiki/%E6%94%B9%E5%A4%A7%E9%B3%B3%E5%9E%8B%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
+    name: "taiho",
+    specs: [
+      {label: "类型", value: "CV / 装甲航空母舰"},
+      {label: "吨位", value: "37270"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$450 / 48s"},
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "10%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "6x2 100mm/65"},
+      {label: "高炮", value: "17x3 25mm/60"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x24"},
+      {label: "俯冲轰炸机", value: "九九舰爆（D3A）x12"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x20"},
+    ],
+    description: "大凤号航空母舰是日本海军在第二次世界大战期间建成的装甲航空母舰，也是日本第一艘采用装甲飞行甲板的正规大型航空母舰。该舰于 1944 年 3 月服役，同年 6 月参加马里亚纳海战时遭美国潜艇大青花鱼号鱼雷命中，随后因航空燃油蒸气爆炸而沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 大凤号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%B3%B3%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
       }
     ]
   },
