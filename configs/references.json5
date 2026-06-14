@@ -746,6 +746,38 @@
       }
     ]
   },
+
+  {
+    name: "nagato",
+    specs: [
+      {label: "类型", value: "BB / 战列舰"},
+      {label: "吨位", value: "42850"},
+      {label: "速度", value: "26 节"},
+      {label: "费用", value: "$430 / 42s"},
+      {label: "水平减伤", value: "45%"},
+      {label: "垂直减伤", value: "25%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "4x2 410mm/45"},
+      {label: "副炮", value: "16x1 140mm/50"},
+      {label: "高平炮", value: "4x2 127mm/40"},
+      {label: "高炮", value: "12x3 25mm/60"},
+      {label: "高炮", value: "6x2 25mm/60"},
+      {label: "高炮", value: "24x1 25mm/60"},
+    ],
+    description: "长门号是日本海军长门级战列舰首舰，1920 年服役，是世界上最早装备 410 毫米主炮的战列舰之一。太平洋战争期间曾长期担任联合舰队旗舰，1944 年参加莱特湾海战并幸存；战后被美军接收，最终在十字路口行动核试验中沉没。",
+    author: "Alexpl",
+    links: [
+      {
+        name: "维基百科 - 长门号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%95%B7%E9%96%80%E8%99%9F%E6%88%B0%E8%89%A6"
+      },
+      {
+        name: "Wiki: Nagato1944.png",
+        url: "https://commons.wikimedia.org/wiki/File:Nagato1944.png"
+      }
+    ]
+  },
   {
     name: "yamato",
     specs: [

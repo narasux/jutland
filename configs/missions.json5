@@ -873,6 +873,7 @@
           "kongo",
           "fuso",
           "ise",
+          "nagato",
           "soviet_union",
           "soviet_union_nelsonski",
           "kremlin",
@@ -1191,6 +1192,12 @@
       {
         name: "ise",
         pos: [37, 42],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagato",
+        pos: [35, 43],
         rotation: 90,
         belongPlayer: "HA"
       },
