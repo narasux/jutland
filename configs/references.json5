@@ -163,7 +163,7 @@
   },
   // 日本海军
   {
-    name: "taiho",
+    name: "hakuryu",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "37270"},
@@ -179,7 +179,7 @@
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x12"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
     ],
-    description: "大凤号航空母舰是二战时日本海军第一艘拥有装甲飞行甲板的正规大型航空母舰，也是日本在二战中最后完工的一艘正规航空母舰。其曾作为机动部队的旗舰参加战斗，在服役 3 个月后，于 1944 年 6 月在马里亚纳海战时被美军潜艇大青花鱼号击中，由于不可靠的损管，其在后续由于泄漏的油气点燃爆炸而沉没。",
+    description: "白龙号是游戏中对日本海军 G-15 改进型航空母舰方案的命名。该方案以大凤型装甲航空母舰为基础进一步扩大舰体并强化航空运用能力，但最终未实际建造。",
     author: "BB1987",
     links: [
       {
@@ -187,8 +187,8 @@
         url: "https://www.shipbucket.com/drawings/4338"
       },
       {
-        name: "维基百科 - 大凤号",
-        url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%B3%B3%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+        name: "维基百科 - 改大凤型航空母舰",
+        url: "https://ja.wikipedia.org/wiki/%E6%94%B9%E5%A4%A7%E9%B3%B3%E5%9E%8B%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
       }
     ]
   },

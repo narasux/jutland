@@ -925,8 +925,8 @@
   },
   // 日本海军
   {
-    name: "taiho",
-    displayName: "大凤",
+    name: "hakuryu",
+    displayName: "白龙",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1945,
@@ -937,7 +937,7 @@
     acceleration: 0.3,
     rotateSpeed: 0.75,
     length: 270,
-    width: 35,
+    width: 32,
     fundsCost: 500,
     timeCost: 52,
     weapon: {
