@@ -841,6 +841,7 @@
           "yorktown",
           "saratoga",
           "taiho",
+          "shinano",
           "akagi",
           "kaga",
           "soryu",
@@ -1054,68 +1055,74 @@
         belongPlayer: "HA"
       },
       {
-        name: "akagi",
+        name: "shinano",
         pos: [29, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "kaga",
+        name: "akagi",
         pos: [28, 37],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "soryu",
+        name: "kaga",
         pos: [29, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "hiryu",
+        name: "soryu",
         pos: [28, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "shokaku",
+        name: "hiryu",
         pos: [29, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "hiyo",
+        name: "shokaku",
         pos: [28, 41],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "ryujo",
+        name: "hiyo",
         pos: [29, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "shoho",
+        name: "ryujo",
         pos: [28, 43],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "chitose",
+        name: "shoho",
         pos: [29, 44],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "taiyo",
+        name: "chitose",
         pos: [28, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "hosho",
+        name: "taiyo",
         pos: [29, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hosho",
+        pos: [28, 47],
         rotation: 90,
         belongPlayer: "HA"
       },

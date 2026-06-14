@@ -193,6 +193,32 @@
     ]
   },
   {
+    name: "shinano",
+    specs: [
+      {label: "类型", value: "CV / 重装甲航空母舰"},
+      {label: "吨位", value: "71890"},
+      {label: "速度", value: "27 节"},
+      {label: "费用", value: "$780 / 70s"},
+      {label: "水平减伤", value: "55%"},
+      {label: "垂直减伤", value: "35%"}
+    ],
+    armaments: [
+      {label: "高平炮", value: "8x2 127mm/40"},
+      {label: "高炮", value: "35x3 25mm/60"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x36"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x18"},
+      {label: "俯冲轰炸机", value: "九九舰爆（D3A）x9"},
+    ],
+    description: "信浓号航空母舰由大和级战列舰三号舰舰体改建而成，是日本海军在第二次世界大战期间建成的重装甲航空母舰。该舰于 1944 年 11 月尚未完成舾装时转移，途中遭美国海军潜艇射水鱼号发射鱼雷命中，因水密与损害管制问题于次日上午沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 信浓号航空母舰",
+        url: "https://zh.wikipedia.org/zh-hans/%E4%BF%A1%E6%BF%83%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "akagi",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},

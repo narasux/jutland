@@ -1161,6 +1161,317 @@
     }
   },
   {
+    name: "shinano",
+    displayName: "信浓",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1944,
+    totalHP: 71890,
+    horizontalDamageReduction: 0.55,
+    verticalDamageReduction: 0.35,
+    maxSpeed: 27,
+    acceleration: 0.22,
+    rotateSpeed: 0.6,
+    length: 266,
+    width: 36,
+    fundsCost: 780,
+    timeCost: 70,
+    weapon: {
+      mainGuns: [
+        // 右舷八九式高平炮
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.66,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.54,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷八九式高平炮
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/127/40/2/DP",
+          posPercent: -0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 前部高炮 4 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.98,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.98,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.98,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.98,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [210, 360]
+        },
+        // 舰桥高炮 3 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.25,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.19,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.22,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 右舷高炮 11 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.10,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.58,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.63,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.71,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.78,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高炮 15 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.69,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.62,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.57,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.19,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.58,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.67,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.73,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.79,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 尾部高炮 3 座
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 1.6,
+      groups: [
+        {
+          name: "A6M_0",
+          maxCount: 36
+        },
+        {
+          name: "B5N2_97",
+          maxCount: 18
+        },
+        {
+          name: "D3A_99",
+          maxCount: 9
+        }
+      ]
+    }
+  },
+  {
     name: "akagi",
     displayName: "赤城",
     type: "aircraft_carrier",
