@@ -1372,71 +1372,59 @@
     timeCost: 70,
     weapon: {
       mainGuns: [
-        // 右舷八九式高平炮
+        // 右舷九八式 10 厘米高平炮
         {
-          name: "JP/127/40/2/DP",
-          posPercent: 0.66,
+          name: "JP/100/65/2/DP",
+          posPercent: 0.67,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/127/40/2/DP",
-          posPercent: 0.54,
+          name: "JP/100/65/2/DP",
+          posPercent: 0.55,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/127/40/2/DP",
+          name: "JP/100/65/2/DP",
           posPercent: -0.28,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/127/40/2/DP",
-          posPercent: -0.39,
+          name: "JP/100/65/2/DP",
+          posPercent: -0.4,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
-        // 左舷八九式高平炮
+        // 左舷九八式 10 厘米高平炮
         {
-          name: "JP/127/40/2/DP",
-          posPercent: 0.36,
+          name: "JP/100/65/2/DP",
+          posPercent: 0.34,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "JP/127/40/2/DP",
+          name: "JP/100/65/2/DP",
           posPercent: 0.21,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "JP/127/40/2/DP",
-          posPercent: -0.37,
+          name: "JP/100/65/2/DP",
+          posPercent: -0.35,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "JP/127/40/2/DP",
-          posPercent: -0.48,
+          name: "JP/100/65/2/DP",
+          posPercent: -0.5,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
       ],
       antiAircraftGuns: [
-        // 前部高炮 4 座
-        {
-          name: "JP/25/60/3",
-          posPercent: 0.98,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [270, 360]
-        },
-        {
-          name: "JP/25/60/3",
-          posPercent: 0.98,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [270, 360]
-        },
+        // 舰艏三联装高炮 x4
         {
           name: "JP/25/60/3",
           posPercent: 0.98,
@@ -1447,31 +1435,43 @@
           name: "JP/25/60/3",
           posPercent: 0.98,
           rightFiringArc: [0, 90],
-          leftFiringArc: [210, 360]
-        },
-        // 舰桥高炮 3 座
-        {
-          name: "JP/25/60/3",
-          posPercent: 0.25,
-          rightFiringArc: [0, 160],
-          leftFiringArc: [200, 360]
+          leftFiringArc: [270, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.19,
-          rightFiringArc: [20, 180],
-          leftFiringArc: [180, 340]
+          posPercent: -0.98,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.22,
-          rightFiringArc: [20, 180],
-          leftFiringArc: [180, 340]
+          posPercent: -0.98,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
-        // 右舷高炮 11 座
+        // 舰艉三联装高炮 x3
         {
           name: "JP/25/60/3",
-          posPercent: 0.38,
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 右舷三联装高炮 14 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.39,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
@@ -1489,43 +1489,61 @@
         },
         {
           name: "JP/25/60/3",
-          posPercent: 0.10,
+          posPercent: 0.23,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: 0,
+          posPercent: 0.1,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.11,
+          posPercent: -0.01,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.53,
+          posPercent: -0.12,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.58,
+          posPercent: -0.15,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.63,
+          posPercent: -0.23,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.55,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.71,
+          posPercent: -0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.65,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.72,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
@@ -1535,7 +1553,7 @@
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
-        // 左舷高炮 15 座
+        // 左舷三联装高炮 15 座
         {
           name: "JP/25/60/3",
           posPercent: 0.69,
@@ -1562,7 +1580,7 @@
         },
         {
           name: "JP/25/60/3",
-          posPercent: 0.12,
+          posPercent: 0.13,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
@@ -1604,46 +1622,202 @@
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.58,
+          posPercent: -0.55,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.67,
+          posPercent: -0.64,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.73,
+          posPercent: -0.69,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "JP/25/60/3",
-          posPercent: -0.79,
+          posPercent: -0.74,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
-        // 尾部高炮 3 座
+        // 双联装高炮 3 座
         {
-          name: "JP/25/60/3",
-          posPercent: -0.99,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
+          name: "JP/25/60/2",
+          posPercent: -0.84,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
         },
         {
-          name: "JP/25/60/3",
-          posPercent: -0.99,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
+          name: "JP/25/60/2",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
         },
         {
-          name: "JP/25/60/3",
-          posPercent: -0.99,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
+          name: "JP/25/60/2",
+          posPercent: -0.84,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右舷单装高炮 5 座
+        {
+          name: "JP/25/60",
+          posPercent: 0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: 0.29,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: -0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷单装高炮 7 座
+        {
+          name: "JP/25/60",
+          posPercent: 0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: -0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60",
+          posPercent: -0.74,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      rockets: [
+        // 舰艏
+        // 防空火箭炮 A
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0.91,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0.91,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 防空火箭炮 B
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0.88,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0.88,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 防空火箭炮 C
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: 0.85,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰艉
+        // 防空火箭炮 D
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: -0.89,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: -0.89,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 防空火箭炮 E
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: -0.92,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: -0.92,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 防空火箭炮 F
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: -0.95,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/21/Type5/AA",
+          posPercent: -0.95,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
         }
       ]
     },
@@ -1652,15 +1826,15 @@
       groups: [
         {
           name: "A6M_0",
-          maxCount: 36
+          maxCount: 40
         },
         {
           name: "B5N2_97",
-          maxCount: 18
+          maxCount: 20
         },
         {
           name: "D3A_99",
-          maxCount: 9
+          maxCount: 10
         }
       ]
     }
