@@ -18481,6 +18481,125 @@
       ]
     },
   },
+  {
+    name: "dewey",
+    displayName: "杜威",
+    type: "destroyer",
+    typeAbbr: "DD",
+    totalHP: 2100,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 36,
+    acceleration: 1.1,
+    rotateSpeed: 2.2,
+    length: 104,
+    width: 10,
+    fundsCost: 20,
+    timeCost: 8,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.7,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.55,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.65,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 D
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.82,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.41,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [180, 360]
+        },
+        // 高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 高炮 C
+        {
+          name: "US/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 高炮 D
+        {
+          name: "US/20/70",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "US/533/4",
+          posPercent: -0.25,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "US/533/4",
+          posPercent: -0.4,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
   // 日本海军
   {
     name: "asashio",

@@ -940,6 +940,7 @@
           "porter",
           "maury",
           "hammann",
+          "dewey",
           "asashio",
           "yugumo",
           "yukikaze",
@@ -1494,50 +1495,56 @@
         belongPlayer: "HA"
       },
       {
-        name: "asashio",
+        name: "dewey",
         pos: [43, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
+        name: "asashio",
+        pos: [43, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "yugumo",
-        pos: [44, 37],
+        pos: [44, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "yukikaze",
-        pos: [43, 38],
+        pos: [43, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "z_11",
-        pos: [44, 39],
+        pos: [44, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "v",
-        pos: [43, 40],
+        pos: [43, 41],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "y",
-        pos: [44, 41],
+        pos: [44, 42],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "ardent",
-        pos: [43, 42],
+        pos: [43, 43],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "rapid",
-        pos: [44, 43],
+        pos: [44, 44],
         rotation: 90,
         belongPlayer: "HA"
       },
