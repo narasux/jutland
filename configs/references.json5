@@ -1350,43 +1350,12 @@
     ]
   },
   {
-    name: "astoria",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "12663"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$120 / 12s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
-    armaments: [
-      {label: "主炮", value: "3x3 203mm/55"},
-      {label: "高平炮", value: "8x1 127mm/25"},
-    ],
-    description: "阿斯托利亚号重巡洋舰是新奥尔良级重巡洋舰的姊妹舰，在 1934 年下水，在珊瑚海海战中护卫约克城号航空母舰，最后在 1942.8 的萨沃岛夜战中被引爆弹药库沉没，与其一同战沉的还有同级的昆西，文森斯两舰。",
-    author: "Midnike",
-    links: [
-      {
-        name: "USN Heavy Cruiser ASTORIA, CA-34",
-        url: "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-ASTORIA-CA-34-563332137"
-      },
-      {
-        name: "维基百科 - 新奥尔良级重巡洋舰",
-        url: "https://zh.wikipedia.org/wiki/%E7%B4%90%E5%A5%A7%E8%89%AF%E7%B4%9A%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6"
-      },
-      {
-        name: "Wikipedia - USS Astoria (CA-34)",
-        url: "https://en.wikipedia.org/wiki/USS_Astoria_(CA-34)"
-      }
-    ]
-  },
-  {
     name: "pensacola",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "11696"},
       {label: "速度", value: "32.5 节"},
-      {label: "费用", value: "$120 / 12s"},
+      {label: "费用", value: "$125 / 13s"},
       {label: "水平减伤", value: "30%"},
       {label: "垂直减伤", value: "15%"}
     ],
@@ -1394,6 +1363,8 @@
       {label: "主炮", value: "2x2 203mm/55"},
       {label: "主炮", value: "2x3 203mm/55"},
       {label: "高平炮", value: "8x1 127mm/25"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "6x1 20mm/70"},
     ],
     description: "彭萨科拉号是美国海军彭萨科拉级重巡洋舰首舰，是美国最早装备的条约型巡洋舰，它依照《华盛顿海军条约》规定的上限规格建造，2+3+3+2 的 8 英寸炮塔布局是其特点之一。她与姊妹舰盐湖城号都幸运地在二战中幸存下来。",
     author: "Midnike",
@@ -1409,6 +1380,98 @@
       {
         name: "Wikipedia - USS Pensacola (CA-24)",
         url: "https://en.wikipedia.org/wiki/USS_Pensacola_(CA-24)"
+      }
+    ]
+  },
+  {
+    name: "northampton",
+    specs: [
+      {label: "类型", value: "CA / 重巡洋舰"},
+      {label: "吨位", value: "11830"},
+      {label: "速度", value: "32.7 节"},
+      {label: "费用", value: "$115 / 12s"},
+      {label: "水平减伤", value: "25%"},
+      {label: "垂直减伤", value: "10%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/55"},
+      {label: "高平炮", value: "8x1 127mm/25"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "6x1 20mm/70"},
+      {label: "鱼雷", value: "2x3 533mm"},
+    ],
+    description: "北安普顿号是美国海军北安普顿级重巡洋舰首舰，1930 年服役，后因 8 英寸主炮重新分类为重巡洋舰。太平洋战争中她为企业号等航母编队护航，参加中途岛和圣克鲁斯群岛等作战，1942 年 11 月 30 日在塔萨法隆格海战中被日军鱼雷击沉。",
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Heavy Cruiser NORTHAMPTON, CA-26",
+        url: "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-NORTHAMPTON-CA-26-563331379"
+      },
+      {
+        name: "Wikipedia - USS Northampton (CA-26)",
+        url: "https://en.wikipedia.org/wiki/USS_Northampton_(CA-26)"
+      }
+    ]
+  },
+  {
+    name: "portland",
+    specs: [
+      {label: "类型", value: "CA / 重巡洋舰"},
+      {label: "吨位", value: "12960"},
+      {label: "速度", value: "32.7 节"},
+      {label: "费用", value: "$130 / 13s"},
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "15%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/55"},
+      {label: "高平炮", value: "8x1 127mm/25"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "15x1 20mm/70"},
+    ],
+    description: "波特兰号是美国海军波特兰级重巡洋舰首舰，1933 年服役。太平洋战争中她先后参加珊瑚海、中途岛、瓜达尔卡纳尔和莱特湾等战役，并在瓜达尔卡纳尔海战中遭鱼雷重创后修复返役，最终获得 16 枚战斗之星。",
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Heavy Cruiser PORTLAND, CA-33",
+        url: "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-PORTLAND-CA-33-563331762"
+      },
+      {
+        name: "Wikipedia - USS Portland (CA-33)",
+        url: "https://en.wikipedia.org/wiki/USS_Portland_(CA-33)"
+      }
+    ]
+  },
+  {
+    name: "astoria",
+    specs: [
+      {label: "类型", value: "CA / 重巡洋舰"},
+      {label: "吨位", value: "12663"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$130 / 13s"},
+      {label: "水平减伤", value: "30%"},
+      {label: "垂直减伤", value: "15%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/55"},
+      {label: "高平炮", value: "8x1 127mm/25"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "10x1 20mm/70"},
+    ],
+    description: "阿斯托利亚号重巡洋舰是新奥尔良级重巡洋舰的姊妹舰，在 1934 年下水，在珊瑚海海战中护卫约克城号航空母舰，最后在 1942.8 的萨沃岛夜战中被引爆弹药库沉没，与其一同战沉的还有同级的昆西，文森斯两舰。",
+    author: "Midnike",
+    links: [
+      {
+        name: "USN Heavy Cruiser ASTORIA, CA-34",
+        url: "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-ASTORIA-CA-34-563332137"
+      },
+      {
+        name: "维基百科 - 新奥尔良级重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%B4%90%E5%A5%A7%E8%89%AF%E7%B4%9A%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6"
+      },
+      {
+        name: "Wikipedia - USS Astoria (CA-34)",
+        url: "https://en.wikipedia.org/wiki/USS_Astoria_(CA-34)"
       }
     ]
   },

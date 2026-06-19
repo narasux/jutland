@@ -902,6 +902,8 @@
           "long_beach",
           "long_beach_scheme_D",
           "astoria",
+          "northampton",
+          "portland",
           "pensacola",
           "furutaka",
           "aoba",
@@ -1314,6 +1316,18 @@
       {
         name: "astoria",
         pos: [40, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "northampton",
+        pos: [39, 31],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "portland",
+        pos: [40, 30],
         rotation: 90,
         belongPlayer: "HA"
       },
