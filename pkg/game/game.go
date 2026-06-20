@@ -5,24 +5,21 @@ import (
 	"log"
 	"math/rand"
 
+	"github.com/ebitenui/ebitenui"
+	"github.com/ebitenui/ebitenui/widget"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
-	"github.com/pkg/browser"
-	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/game/settings"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
-	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
-	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 	"github.com/narasux/jutland/pkg/utils/colorx"
-	"github.com/narasux/jutland/pkg/utils/layout"
 	"github.com/narasux/jutland/pkg/version"
 )
 
@@ -43,11 +40,15 @@ type Game struct {
 	missionMgr *manager.MissionManager
 	// 设置界面
 	settingUI *settings.UI
-
-	curShipName string
+	// 游戏图鉴界面
+	collectionUI *CollectionUI
+	// 全游戏唯一的 EbitenUI 主实例
+	ui          *ebitenui.UI
+	emptyUIRoot widget.Containerer
 }
 
 func New() *Game {
+	emptyUIRoot := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
 	g := &Game{
 		mode:        GameModeStart,
 		drawer:      NewDrawer(),
@@ -56,8 +57,13 @@ func New() *Game {
 		curMission:  "Alpha",
 		missionMgr:  nil,
 		settingUI:   settings.New(),
-		curShipName: "lowa",
+		emptyUIRoot: emptyUIRoot,
+		ui: &ebitenui.UI{
+			Container:           emptyUIRoot,
+			DisableDefaultFocus: true,
+		},
 	}
+	g.collectionUI = NewCollectionUI(g.drawer)
 	g.init()
 	return g
 }
@@ -65,6 +71,15 @@ func New() *Game {
 // Update 核心方法，用于更新各资源状态
 func (g *Game) Update() error {
 	defer recoverAndLogThenExit()
+	if g.handleUIEscape() {
+		g.syncUIContainer()
+		return nil
+	}
+	g.syncUIContainer()
+	// 任务运行页由战术侧栏承载 EbitenUI，避免同一 Tick 重复更新全局输入。
+	if g.mode != GameModeMissionRunning {
+		g.ui.Update()
+	}
 
 	switch g.mode {
 	case GameModeStart:
@@ -127,7 +142,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawMissionResult(screen, "任务失败...", colorx.Red)
 	case GameModeCollection:
 		g.drawer.drawBackground(screen, bgImg.MissionWindow)
-		g.drawer.drawCollection(screen, g.curShipName, g.objStates.RefLinks)
+		g.collectionUI.Draw(screen)
 	case GameModeGameSetting:
 		g.settingUI.Draw(screen)
 	case GameModeEnd:
@@ -137,7 +152,49 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		log.Println("unknown game mode:", g.mode)
 	}
 
+	if g.mode != GameModeMissionRunning {
+		g.syncUIContainer()
+		g.ui.Draw(screen)
+	}
+	if g.mode == GameModeCollection {
+		g.collectionUI.DrawOverlay(screen)
+	}
+
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("VER %s FPS %0.2f", version.Version, ebiten.ActualFPS()))
+}
+
+func (g *Game) syncUIContainer() {
+	if g.mode == GameModeMissionRunning {
+		return
+	}
+	target := g.emptyUIRoot
+	switch g.mode {
+	case GameModeCollection:
+		target = g.collectionUI.Container()
+	case GameModeGameSetting:
+		target = g.settingUI.Container()
+	}
+	if target != nil && g.ui.Container != target {
+		g.ui.Container = target
+	}
+}
+
+func (g *Game) handleUIEscape() bool {
+	if !inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		return false
+	}
+	switch g.mode {
+	case GameModeCollection:
+		g.mode = GameModeMenuSelect
+		g.player.Close()
+		return true
+	case GameModeGameSetting:
+		g.settingUI.Reset()
+		g.mode = GameModeMenuSelect
+		return true
+	default:
+		return false
+	}
 }
 
 // Layout 核心方法，用于设置窗口大小（全屏模式下无意义）
@@ -189,7 +246,7 @@ func (g *Game) init() {
 // 游戏开始
 func (g *Game) handleGameStart() error {
 	// 播放游戏封面的 BGM
-	g.player.Play(audioRes.NewGameStartBackground())
+	g.player.PlayLazy(audioRes.NewGameStartBackground)
 	// 任意下一按键触发后，切换模式，关闭 BGM
 	if isAnyNextInput() {
 		g.mode = GameModeMenuSelect
@@ -200,7 +257,7 @@ func (g *Game) handleGameStart() error {
 
 // 菜单选择
 func (g *Game) handleMenuSelect() error {
-	g.player.Play(audioRes.NewMenuBackground())
+	g.player.PlayLazy(audioRes.NewMenuBackground)
 	// 对于菜单按钮，如果 hover 则展示红色，点击则切换游戏模式
 	for _, button := range []*menuButton{
 		g.objStates.MenuButton.MissionSelect,
@@ -216,11 +273,16 @@ func (g *Game) handleMenuSelect() error {
 			}
 			// 左键点击按钮：切模式，播放音效，停止 BGM
 			if isMouseButtonLeftJustPressed() {
-				g.mode = button.Mode
+				nextMode := button.Mode
 				// 注：任务关卡选择延续菜单的 BGM
-				if g.mode != GameModeMissionSelect {
+				if nextMode != GameModeMissionSelect {
 					g.player.Close()
 				}
+				g.mode = nextMode
+				if nextMode == GameModeCollection {
+					g.startCollectionBGM()
+				}
+				g.syncUIContainer()
 				audio.PlayAudioToEnd(audioRes.NewMenuButtonClick())
 			}
 		} else {
@@ -232,13 +294,12 @@ func (g *Game) handleMenuSelect() error {
 
 // 游戏图鉴
 func (g *Game) handleGameCollection() error {
-	// Esc 键返回菜单
-	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-		g.mode = GameModeMenuSelect
-		g.player.Close()
-		return nil
-	}
-	// 随机选个军港 BGM（如果没播放完，会跳过的）
+	g.collectionUI.Update()
+	g.syncUIContainer()
+	return nil
+}
+
+func (g *Game) startCollectionBGM() {
 	newHarborFuncs := []func() types.AudioStream{
 		audioRes.NewHarborUS,
 		audioRes.NewHarborJP,
@@ -247,77 +308,23 @@ func (g *Game) handleGameCollection() error {
 		audioRes.NewHarborFR,
 		audioRes.NewHarborNeutral,
 	}
-	g.player.Play(newHarborFuncs[rand.Intn(len(newHarborFuncs))]())
-
-	allShipNames := objUnit.GetAllShipNames()
-	// 上下左右方向键 / 鼠标滚轮选择战舰
-	shipIndex := lo.IndexOf(allShipNames, g.curShipName)
-	_, wheelY := ebiten.Wheel()
-	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) ||
-		inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) ||
-		wheelY > 0 {
-		shipIndex--
-	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) ||
-		inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) ||
-		wheelY < 0 {
-		shipIndex++
-	}
-	shipCount := len(allShipNames)
-	shipIndex = (shipIndex + shipCount) % shipCount
-
-	g.curShipName = allShipNames[shipIndex]
-	g.objStates.RefLinks = nil
-
-	if ref := objRef.GetReference(g.curShipName); ref != nil {
-		misLayout := layout.NewScreenLayout()
-		xOffset, yOffset := collectionRefLinkOriginByDescription(misLayout.Width, misLayout.Height, ref.Description)
-
-		// 生成跳转链接点击区域
-		for idx, link := range ref.Links {
-			text := fmt.Sprintf("[%d] %s", idx+1, link.Name)
-			g.objStates.RefLinks = append(g.objStates.RefLinks, &refLink{
-				text, link.URL,
-				xOffset, yOffset + float64(idx*32),
-				18, font.Kai, colorx.White,
-				estimateCollectionTextWidth(text, 18), 24,
-			})
-		}
-
-		for _, link := range g.objStates.RefLinks {
-			if isHoverRefLink(link) {
-				link.Color = colorx.SkyBlue
-				// 左键点击按钮：浏览器打开链接
-				if isMouseButtonLeftJustPressed() {
-					_ = browser.OpenURL(link.URL)
-				}
-			} else {
-				link.Color = colorx.White
-			}
-		}
-	}
-	return nil
+	g.player.PlayLazy(newHarborFuncs[rand.Intn(len(newHarborFuncs))])
 }
 
 // 游戏设置
 func (g *Game) handleGameSetting() error {
-	// ESC 返回菜单
-	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-		g.settingUI.Reset()
-		g.mode = GameModeMenuSelect
-		return nil
-	}
-	g.settingUI.Update()
 	if g.settingUI.BackPressed() {
 		g.settingUI.Reset()
 		g.mode = GameModeMenuSelect
 	}
+	g.syncUIContainer()
 	return nil
 }
 
 // 游戏结束
 func (g *Game) handleGameEnd() error {
 	// 播放游戏结束的 BGM
-	g.player.Play(audioRes.NewGameEndBackground())
+	g.player.PlayLazy(audioRes.NewGameEndBackground)
 	if isAnyNextInput() {
 		return ebiten.Termination
 	}

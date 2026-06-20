@@ -2,6 +2,13 @@ package game
 
 type GameMode int
 
+type collectionCategory int
+
+const (
+	collectionCategoryShip collectionCategory = iota
+	collectionCategoryPlane
+)
+
 const (
 	// 游戏开始
 	GameModeStart = iota

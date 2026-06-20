@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
-	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
@@ -16,24 +16,13 @@ import (
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
-	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/utils/colorx"
-	"github.com/narasux/jutland/pkg/utils/ebutil"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 // Drawer 图像绘制工具
 type Drawer struct {
 	abbrMaps map[string]*ebiten.Image
-}
-
-type collectionLayout struct {
-	GraphX, GraphY, GraphW, GraphH float64
-	InfoY, InfoH                   float64
-	CardGap                        float64
-	ArchiveCard                    collectionCard
-	ArmamentCard                   collectionCard
-	SourceCard                     collectionCard
 }
 
 type collectionCard struct {
@@ -280,100 +269,78 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 	return abbrMap
 }
 
-// 绘制战舰图鉴
-func (d *Drawer) drawCollection(screen *ebiten.Image, curShipName string, refLinks []*refLink) {
-	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
-	collLayout := calcCollectionLayout(screenWidth, screenHeight)
-
-	d.drawCollectionDesignGraph(screen, curShipName, collLayout)
-	d.drawCollectionInfoCards(screen, curShipName, refLinks, collLayout)
-}
-
-func (d *Drawer) drawCollectionDesignGraph(screen *ebiten.Image, curShipName string, collLayout collectionLayout) {
-	bgWidth, bgHeight := collLayout.GraphW, collLayout.GraphH
-	xOffset, yOffset := collLayout.GraphX, collLayout.GraphY
-
-	opts := d.genDefaultDrawImageOptions()
-	designGraphImg := bgImg.MissionWindowParchment
-	opts.GeoM.Scale(
-		bgWidth/float64(designGraphImg.Bounds().Dx()),
-		bgHeight/float64(designGraphImg.Bounds().Dy()),
-	)
-	opts.GeoM.Translate(xOffset, yOffset)
-	screen.DrawImage(designGraphImg, opts)
-
-	// 设计图添加银色边框
-	vector.StrokeRect(
-		screen, float32(xOffset), float32(yOffset),
-		float32(bgWidth), float32(bgHeight),
-		5, colorx.Silver, false,
-	)
-
-	// 绘制战舰 侧视图 & 俯视图
-	sideImg := shipImg.GetSide(curShipName, 4)
-	sideImgDx, sideImgDy := sideImg.Bounds().Dx(), sideImg.Bounds().Dy()
-
-	topImg := shipImg.GetTop(curShipName, 4)
-	// x, y 互换，因为需要顺时针旋转 90 度
-	topImgDx, topImgDy := topImg.Bounds().Dy(), topImg.Bounds().Dx()
-
-	paddingX := (bgWidth - float64(sideImgDx)) / 7 * 3
-	paddingY := (bgHeight - float64(topImgDy+sideImgDy)) / 3
-
-	opts = d.genDefaultDrawImageOptions()
-	opts.GeoM.Translate(xOffset+paddingX, yOffset+paddingY)
-	screen.DrawImage(sideImg, opts)
-
-	opts = d.genDefaultDrawImageOptions()
-	ebutil.SetOptsCenterRotation(opts, topImg, 90)
-	opts.GeoM.Translate(xOffset+paddingX, yOffset+2*paddingY+float64(sideImgDy))
-	opts.GeoM.Translate(float64(topImgDx-topImgDy)/2, float64(topImgDy-topImgDx)/2)
-	screen.DrawImage(topImg, opts)
-}
-
-func (d *Drawer) drawCollectionInfoCards(
-	screen *ebiten.Image, curShipName string, refLinks []*refLink, layout collectionLayout,
+func (d *Drawer) drawCollectionImageFit(
+	screen *ebiten.Image,
+	img *ebiten.Image,
+	x, y, width, height, rotation float64,
+	allowUpscale bool,
 ) {
-	ref := objRef.GetReference(curShipName)
-	allShipNames := objUnit.GetAllShipNames()
-
-	d.drawCollectionCard(screen, layout.ArchiveCard, "舰船档案")
-	shipIndexText := fmt.Sprintf("%d/%d", lo.IndexOf(allShipNames, curShipName)+1, len(allShipNames))
-	d.drawText(
-		screen, shipIndexText,
-		layout.ArchiveCard.X+layout.ArchiveCard.W-24-estimateCollectionTextWidth(shipIndexText, 16),
-		layout.ArchiveCard.Y+20,
-		16, font.Kai, color.RGBA{230, 218, 194, 220},
-	)
-	shipDisplayName := objUnit.GetShipDisplayName(curShipName)
-	d.drawText(screen, shipDisplayName, layout.ArchiveCard.X+24, layout.ArchiveCard.Y+54, 36, font.Hang, colorx.White)
-	d.drawCollectionInfoItems(
-		screen, ref.Specs, layout.ArchiveCard.X+24, layout.ArchiveCard.Y+104,
-		layout.ArchiveCard.W-140, 28,
-	)
-
-	d.drawCollectionCard(screen, layout.ArmamentCard, "武装配置")
-	d.drawCollectionInfoItems(
-		screen, ref.Armaments, layout.ArmamentCard.X+24, layout.ArmamentCard.Y+54,
-		layout.ArmamentCard.W-140, 30,
-	)
-
-	d.drawCollectionCard(screen, layout.SourceCard, "历史与来源")
-	descriptionLines := wrapCollectionText(ref.Description, layout.SourceCard.W-48, 20)
-	authorY := collectionSourceMetaY(layout, len(descriptionLines))
-	maxDescriptionLines := max(1, int((authorY-layout.SourceCard.Y-78)/26))
-	d.drawCollectionLines(
-		screen, descriptionLines, layout.SourceCard.X+24, layout.SourceCard.Y+54,
-		layout.SourceCard.W-48, 20, 26, font.Kai, maxDescriptionLines, colorx.White,
-	)
-	d.drawText(screen, fmt.Sprintf("素材原作者：%s", ref.Author), layout.SourceCard.X+24, authorY, 20, font.Kai, colorx.White)
-	d.drawText(screen, "参考资料：", layout.SourceCard.X+24, authorY+34, 20, font.Kai, colorx.White)
-	for _, link := range refLinks {
-		d.drawText(screen, link.Text, link.PosX, link.PosY, link.FontSize, link.Font, link.Color)
+	if img == nil || width <= 0 || height <= 0 {
+		return
 	}
+	imgW, imgH := float64(img.Bounds().Dx()), float64(img.Bounds().Dy())
+	rotatedW, rotatedH := imgW, imgH
+	if int(math.Mod(math.Abs(rotation), 180)) == 90 {
+		rotatedW, rotatedH = imgH, imgW
+	}
+	scale := min(width/rotatedW, height/rotatedH)
+	if !allowUpscale {
+		scale = min(1, scale)
+	} else {
+		scale = min(8, scale)
+	}
+	opts := d.genDefaultDrawImageOptions()
+	opts.GeoM.Translate(-imgW/2, -imgH/2)
+	opts.GeoM.Rotate(rotation * math.Pi / 180)
+	opts.GeoM.Scale(scale, scale)
+	opts.GeoM.Translate(x+width/2, y+height/2)
+	screen.DrawImage(img, opts)
 }
 
-func (d *Drawer) drawCollectionCard(screen *ebiten.Image, card collectionCard, title string) {
+func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {
+	items := []objRef.InfoItem{}
+	appendGroup := func(label string, names []string) {
+		counts, order := map[string]int{}, []string{}
+		for _, name := range names {
+			if counts[name] == 0 {
+				order = append(order, name)
+			}
+			counts[name]++
+		}
+		for _, name := range order {
+			items = append(items, objRef.InfoItem{Label: label, Value: fmt.Sprintf("%dx %s", counts[name], name)})
+		}
+	}
+	gunNames := make([]string, 0, len(plane.Weapon.Guns))
+	for _, gun := range plane.Weapon.Guns {
+		gunNames = append(gunNames, gun.Name)
+	}
+	bombNames := make([]string, 0, len(plane.Weapon.Bombs))
+	for _, bomb := range plane.Weapon.Bombs {
+		bombNames = append(bombNames, bomb.Name)
+	}
+	torpedoNames := make([]string, 0, len(plane.Weapon.Torpedoes))
+	for _, torpedo := range plane.Weapon.Torpedoes {
+		torpedoNames = append(torpedoNames, torpedo.Name)
+	}
+	rocketNames := make([]string, 0, len(plane.Weapon.Rockets))
+	for _, rocket := range plane.Weapon.Rockets {
+		rocketNames = append(rocketNames, rocket.Name)
+	}
+	appendGroup("机炮", gunNames)
+	appendGroup("炸弹", bombNames)
+	appendGroup("鱼雷", torpedoNames)
+	appendGroup("火箭", rocketNames)
+	if len(items) == 0 {
+		items = append(items, objRef.InfoItem{Label: "武装", Value: "无"})
+	}
+	return items
+}
+
+func (d *Drawer) drawCollectionCard(
+	screen *ebiten.Image, card collectionCard, title string, metrics collectionMetrics,
+) {
+	scale := metrics.Scale
 	vector.FillRect(
 		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
 		color.RGBA{R: 18, G: 18, B: 18, A: 172}, false,
@@ -382,9 +349,13 @@ func (d *Drawer) drawCollectionCard(screen *ebiten.Image, card collectionCard, t
 		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
 		2, color.RGBA{R: 214, G: 201, B: 178, A: 190}, false,
 	)
-	d.drawText(screen, title, card.X+20, card.Y+18, 20, font.Kai, color.RGBA{R: 230, G: 218, B: 194, A: 255})
+	d.drawText(
+		screen, title, card.X+20*scale, card.Y+18*scale,
+		metrics.CardTitle, font.Kai, color.RGBA{R: 230, G: 218, B: 194, A: 255},
+	)
 	vector.StrokeLine(
-		screen, float32(card.X+20), float32(card.Y+44), float32(card.X+card.W-20), float32(card.Y+44),
+		screen, float32(card.X+20*scale), float32(card.Y+44*scale),
+		float32(card.X+card.W-20*scale), float32(card.Y+44*scale),
 		1, color.RGBA{R: 214, G: 201, B: 178, A: 120}, false,
 	)
 }
@@ -436,37 +407,6 @@ func (d *Drawer) drawCollectionLines(
 			drawn++
 		}
 	}
-}
-
-func calcCollectionLayout(screenWidth, screenHeight int) collectionLayout {
-	screenW, screenH := float64(screenWidth), float64(screenHeight)
-	graphW, graphH := screenW*0.88, screenH*0.48
-	graphX, graphY := (screenW-graphW)/2, 50.0
-	infoY := graphY + graphH + 52
-	infoH := screenH - infoY - 54
-	gap := 24.0
-	infoX, infoW := graphX, graphW
-	archiveW, armamentW := infoW*0.23, infoW*0.24
-	sourceW := infoW - archiveW - armamentW - 2*gap
-	return collectionLayout{
-		GraphX: graphX, GraphY: graphY, GraphW: graphW, GraphH: graphH,
-		InfoY: infoY, InfoH: infoH, CardGap: gap,
-		ArchiveCard:  collectionCard{X: infoX, Y: infoY, W: archiveW, H: infoH},
-		ArmamentCard: collectionCard{X: infoX + archiveW + gap, Y: infoY, W: armamentW, H: infoH},
-		SourceCard:   collectionCard{X: infoX + archiveW + armamentW + 2*gap, Y: infoY, W: sourceW, H: infoH},
-	}
-}
-
-func collectionRefLinkOriginByDescription(screenWidth, screenHeight int, description string) (float64, float64) {
-	collLayout := calcCollectionLayout(screenWidth, screenHeight)
-	descriptionLines := wrapCollectionText(description, collLayout.SourceCard.W-48, 20)
-	refLinkGap := max(20.0, collLayout.SourceCard.H*0.05)
-	return collLayout.SourceCard.X + 24, collectionSourceMetaY(collLayout, len(descriptionLines)) + 34 + refLinkGap
-}
-
-func collectionSourceMetaY(layout collectionLayout, descriptionLineCount int) float64 {
-	descriptionBottomY := layout.SourceCard.Y + 54 + float64(descriptionLineCount)*30
-	return min(descriptionBottomY+42, layout.SourceCard.Y+layout.SourceCard.H-100)
 }
 
 func wrapCollectionText(text string, maxWidth, fontSize float64) []string {

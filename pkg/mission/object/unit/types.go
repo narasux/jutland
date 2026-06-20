@@ -20,10 +20,83 @@ type UnitGeometricSize struct {
 	Width  float64
 }
 
+// Nation 单位所属国籍。
+type Nation string
+
 const (
-	// 顺时针
+	NationAll     Nation = "all"
+	NationSpecial Nation = "special"
+	NationUS      Nation = "us"
+	NationJP      Nation = "jp"
+	NationDE      Nation = "de"
+	NationUK      Nation = "uk"
+	NationSU      Nation = "su"
+	NationCN      Nation = "cn"
+)
+
+// ToDisplay 国籍展示用名称。
+func (n Nation) ToDisplay() string {
+	switch n {
+	case NationAll:
+		return "全部"
+	case NationUS:
+		return "美国"
+	case NationJP:
+		return "日本"
+	case NationDE:
+		return "德国"
+	case NationUK:
+		return "英国"
+	case NationSU:
+		return "苏联"
+	case NationCN:
+		return "中国"
+	default:
+		return "特殊"
+	}
+}
+
+// AvailableNations 返回图鉴筛选使用的稳定国籍顺序。
+func AvailableNations() []Nation {
+	return []Nation{NationAll, NationUS, NationJP, NationDE, NationUK, NationSU, NationCN, NationSpecial}
+}
+
+// CombatPowerInfo 单位的静态战力评估，仅用于图鉴与平衡分析。
+type CombatPowerInfo struct {
+	Total    int
+	AntiShip int
+	AntiAir  int
+	Survival int
+	Mobility int
+	Range    int
+	Burst    int
+	Hull     int
+	Aviation int
+	Details  CombatPowerDetails
+}
+
+// CombatPowerDetails 战力各维度的原始值和武器贡献，用于图鉴说明。
+type CombatPowerDetails struct {
+	EffectiveHP           float64
+	AntiShipDPS           float64
+	AntiAirDPS            float64
+	MaxRange              float64
+	BurstDamage           float64
+	AntiShipContributions []CombatPowerContribution
+	AntiAirContributions  []CombatPowerContribution
+	BurstContributions    []CombatPowerContribution
+}
+
+// CombatPowerContribution 单项武器或舰载机对某项能力的贡献。
+type CombatPowerContribution struct {
+	Name  string
+	Value float64
+}
+
+const (
+	// RotateFlagClockwise 顺时针
 	RotateFlagClockwise = 1
-	// 逆时针
+	// RotateFlagAnticlockwise 逆时针
 	RotateFlagAnticlockwise = -1
 )
 

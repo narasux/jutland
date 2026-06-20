@@ -10,6 +10,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/config"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	"github.com/narasux/jutland/pkg/mission/object/combatpower"
 	ObjRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
@@ -24,6 +25,7 @@ func init() {
 	initReleaserMap()
 	initPlaneMap()
 	initShipMap()
+	initCombatPower()
 	initReferenceMap()
 }
 
@@ -238,6 +240,7 @@ func initPlaneMap() {
 		// 检查伤害减免值不能超过 1
 		p.DamageReduction = min(1, p.DamageReduction)
 		objUnit.PlaneMap[p.Name] = &p
+		objUnit.AllPlaneNames = append(objUnit.AllPlaneNames, p.Name)
 	}
 	log.Println("planes data loaded from json5 file")
 }
@@ -349,6 +352,16 @@ func initShipMap() {
 		objUnit.AllShipNames = append(objUnit.AllShipNames, s.Name)
 	}
 	log.Println("ships data loaded from json5 file")
+}
+
+func initCombatPower() {
+	for _, plane := range objUnit.PlaneMap {
+		plane.CombatPower = combatpower.CalculatePlane(plane, objBullet.Map)
+	}
+	for _, ship := range objUnit.ShipMap {
+		ship.CombatPower = combatpower.CalculateShip(ship, objUnit.PlaneMap, objBullet.Map)
+	}
+	log.Println("combat power calculated for planes and ships")
 }
 
 func initReferenceMap() {

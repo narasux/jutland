@@ -201,6 +201,10 @@
     name: "atlanta",
     // 展示用名称
     displayName: "亚特兰大",
+    // 国籍，用于图鉴筛选，可选值：
+    // us 美国 / jp 日本 / de 德国 / uk 英国
+    // su 苏联 / cn 中国 / special 特殊或中立单位
+    nation: "us",
     // 战舰类型，可选值：
     // aircraft_carrier 航空母舰
     // battleship 战列舰
@@ -347,6 +351,8 @@
     name: "F4F-3",
     // 展示用名称
     displayName: "野猫",
+    // 国籍，取值与舰船配置一致
+    nation: "us",
     // 飞机类型，可选值：
     // fighter 战斗机
     // dive_bomber 俯冲轰炸机
