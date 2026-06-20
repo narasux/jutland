@@ -1,0 +1,34 @@
+configs/releasers.json5
+  s_56da2c685e42e4::t_c2bed77aa497ad 64,66
+  h_83f239dc907c66 60,65,67-70
+configs/planes.json5
+  h_83f239dc907c66 615,772
+  s_56da2c685e42e4::t_c2bed77aa497ad 500-502,799
+configs/bullets.json5
+  h_83f239dc907c66 547
+  s_56da2c685e42e4::t_c2bed77aa497ad 548-552
+pkg/mission/object/unit/plane.go
+  h_83f239dc907c66 274
+  s_56da2c685e42e4::t_c2bed77aa497ad 46,273,275-277
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "08d3f6dfa7b874cd2f3ee1fbc624f145a42ef066",
+  "prompts": {},
+  "humans": {
+    "h_83f239dc907c66": {
+      "author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  },
+  "sessions": {
+    "s_56da2c685e42e4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ee345-05a2-7521-aed9-f70d9c671432",
+        "model": "gpt-5.5"
+      },
+      "human_author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  }
+}
