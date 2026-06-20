@@ -544,6 +544,13 @@
     criticalRate: 0.02
   },
   {
+    name: "JP/TB/450/1943",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3200,
+    criticalRate: 0.03
+  },
+  {
     name: "GER/TB/533/1940",
     type: "torpedo",
     diameter: 533,

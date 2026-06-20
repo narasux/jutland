@@ -497,9 +497,9 @@
         },
         {
           name: "JP/7.7",
-          posPercent: 0,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
         },
         {
           name: "JP/7.7",
@@ -612,7 +612,7 @@
       ],
       torpedoes: [
         {
-          name: "JP/AST/450",
+          name: "JP/AST/450/1940",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -769,7 +769,7 @@
       ],
       torpedoes: [
         {
-          name: "JP/AST/450",
+          name: "JP/AST/450/1943",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -796,7 +796,7 @@
     tonnage: 4.5,
     range: 5308,
     description: [
-      "舰载侦察机（日，游戏按战斗机处理）",
+      "舰载侦察机（日，侦察系统实装前不自动出动）",
       "无攻击挂载"
     ],
     weapon: {}

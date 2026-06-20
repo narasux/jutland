@@ -43,7 +43,7 @@ type Plane struct {
 
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`
-	// 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
+	// 伤害减免（0.7 -> 仅受到击中的 30% 伤害)
 	DamageReduction float64 `json:"damageReduction"`
 	// 最大速度
 	MaxSpeed float64 `json:"maxSpeed"`
@@ -269,6 +269,12 @@ func GetPlaneTargetObjType(name string) object.Type {
 	plane, ok := PlaneMap[name]
 	if !ok {
 		log.Fatalf("plane %s no found", name)
+	}
+	// 侦察机等无武装飞机不应被自动派出参与攻击。
+	// FIXME 未来会有其他用途
+	if len(plane.Weapon.Guns) == 0 && len(plane.Weapon.Bombs) == 0 &&
+		len(plane.Weapon.Torpedoes) == 0 && len(plane.Weapon.Rockets) == 0 {
+		return object.TypeNone
 	}
 	// 根据飞机类型获取目标类型
 	switch plane.Type {

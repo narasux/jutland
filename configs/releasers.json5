@@ -57,9 +57,16 @@
   },
   // 日本海军 450mm 航空鱼雷
   {
-    name: "JP/AST/450",
+    name: "JP/AST/450/1940",
     bulletName: "JP/TB/450/1928",
     range: 4,
     bulletSpeed: 40,
+  },
+  // 日本海军新式 450mm 航空鱼雷
+  {
+    name: "JP/AST/450/1943",
+    bulletName: "JP/TB/450/1943",
+    range: 4.5,
+    bulletSpeed: 30,
   }
 ]
