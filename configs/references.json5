@@ -173,8 +173,8 @@
       {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
-      {label: "主炮", value: "8x2 100mm/65"},
-      {label: "高炮", value: "22x3 25mm/60"},
+      {label: "主炮", value: "8x2 100mm/65 九八式"},
+      {label: "高炮", value: "22x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x24"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x12"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
@@ -203,8 +203,8 @@
       {label: "垂直减伤", value: "10%"}
     ],
     armaments: [
-      {label: "高平炮", value: "6x2 100mm/65"},
-      {label: "高炮", value: "17x3 25mm/60"},
+      {label: "高平炮", value: "6x2 100mm/65 九八式"},
+      {label: "高炮", value: "17x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x24"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x12"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x20"},
@@ -230,7 +230,7 @@
     ],
     armaments: [
       {label: "高平炮", value: "8x2 100mm/60"},
-      {label: "高炮", value: "36x3、3x2、12x1 25mm/60"},
+      {label: "高炮", value: "36x3、3x2、12x1 25mm/60 九六式"},
       {label: "防空火箭", value: "12x21 12cm"},
       {label: "制空战斗机", value: "烈风舰战（A7M2）x32"},
       {label: "俯冲轰炸机", value: "彗星舰爆（D4Y3）x16"},
@@ -261,9 +261,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "6x1 200mm/50"},
-      {label: "高平炮", value: "6x2 127mm/40"},
-      {label: "高炮", value: "14x2 25mm/60"},
+      {label: "主炮", value: "6x1 200mm/50 三年式"},
+      {label: "高平炮", value: "6x2 127mm/40 八九式"},
+      {label: "高炮", value: "14x2 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x28"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x28"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x36"},
@@ -292,9 +292,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "10x1 200mm/50"},
-      {label: "高平炮", value: "8x2 127mm/40"},
-      {label: "高炮", value: "16x2 25mm/60"},
+      {label: "主炮", value: "10x1 200mm/50 三年式"},
+      {label: "高平炮", value: "8x2 127mm/40 八九式"},
+      {label: "高炮", value: "16x2 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x24"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x48"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x24"},
@@ -323,8 +323,8 @@
       {label: "垂直减伤", value: "7%"}
     ],
     armaments: [
-      {label: "高平炮", value: "8x2 127mm/40"},
-      {label: "高炮", value: "12x3 25mm/60"},
+      {label: "高平炮", value: "8x2 127mm/40 八九式"},
+      {label: "高炮", value: "12x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x20"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x32"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x32"},
@@ -349,8 +349,8 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "6x2 127mm/40"},
-      {label: "高炮", value: "12x2 25mm/60"},
+      {label: "主炮", value: "6x2 127mm/40 八九式"},
+      {label: "高炮", value: "12x2 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x21"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x21"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x21"},
@@ -375,9 +375,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "6x2 127mm/40"},
-      {label: "高炮", value: "7x3 25mm/60"},
-      {label: "高炮", value: "5x2 25mm/60"},
+      {label: "主炮", value: "6x2 127mm/40 八九式"},
+      {label: "高炮", value: "7x3 25mm/60 九六式"},
+      {label: "高炮", value: "5x2 25mm/60 九六式"},
       {label: "制空战斗机", value: "九九舰爆（D3A）x24"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x24"},
@@ -402,8 +402,8 @@
       {label: "垂直减伤", value: "3%"}
     ],
     armaments: [
-      {label: "高平炮", value: "6x2 127mm/40"},
-      {label: "高炮", value: "8x3 25mm/60"},
+      {label: "高平炮", value: "6x2 127mm/40 八九式"},
+      {label: "高炮", value: "8x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x15"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x20"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x23"},
@@ -428,9 +428,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "2x2 25mm/60"},
-      {label: "高射机枪", value: "6x4 13mm"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "2x2 25mm/60 九六式"},
+      {label: "高射机枪", value: "6x4 13mm 九三式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x18"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
     ],
@@ -454,8 +454,8 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "4x3 25mm/60"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "4x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x21"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9"},
     ],
@@ -479,8 +479,8 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "10x3 25mm/60"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "10x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x21"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9"},
     ],
@@ -504,9 +504,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "高平炮", value: "4x1 120mm"},
-      {label: "高炮", value: "10x3 25mm/60"},
-      {label: "高射机枪", value: "10x1 13mm"},
+      {label: "高平炮", value: "4x1 120mm 四年式"},
+      {label: "高炮", value: "10x3 25mm/60 九六式"},
+      {label: "高射机枪", value: "10x1 13mm 九三式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x18"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9"},
     ],
@@ -530,8 +530,8 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "4x1 140mm/50"},
-      {label: "高炮", value: "6x3 25mm/60"},
+      {label: "主炮", value: "4x1 140mm/50 三年式"},
+      {label: "高炮", value: "6x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x8"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x6"},
     ],
@@ -643,7 +643,7 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x3 457mm/45"},
+      {label: "主炮", value: "3x3 457mm/45 Mk1"},
       {label: "高平炮", value: "10x2 127mm/38"},
       {label: "高炮", value: "13x4 40mm/60"},
       {label: "高炮", value: "4x2 40mm/60"},
@@ -670,11 +670,11 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "4x2 356mm/45"},
-      {label: "副炮", value: "14x1 152mm/50"},
-      {label: "高平炮", value: "6x2 127mm/40"},
-      {label: "高炮", value: "18x3 25mm/60"},
-      {label: "高炮", value: "6x2 25mm/60"},
+      {label: "主炮", value: "4x2 356mm/45 四一式"},
+      {label: "副炮", value: "14x1 152mm/50 四一式"},
+      {label: "高平炮", value: "6x2 127mm/40 八九式"},
+      {label: "高炮", value: "18x3 25mm/60 九六式"},
+      {label: "高炮", value: "6x2 25mm/60 九六式"},
     ],
     description: "金刚号是日本海军金刚级战列巡洋舰首舰，1913 年由英国维克斯公司建造，是日本最后一艘从国外订购的主力舰。经两次大规模现代化改装后转型为高速战列舰，航速达 30 节，1944 年 11 月在台湾海峡遭美军潜艇击沉。",
     author: "Alexpl",
@@ -700,11 +700,11 @@
       {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
-      {label: "主炮", value: "6x2 356mm/45"},
-      {label: "副炮", value: "14x1 152mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "22x3 25mm/60"},
-      {label: "高炮", value: "4x2 25mm/60"},
+      {label: "主炮", value: "6x2 356mm/45 四一式"},
+      {label: "副炮", value: "14x1 152mm/50 四一式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "22x3 25mm/60 九六式"},
+      {label: "高炮", value: "4x2 25mm/60 九六式"},
     ],
     description: "扶桑号是日本海军扶桑级战列舰首舰，是日本第一艘超无畏舰代表作品。该舰采用独特的六座双联装主炮布局，在莱特湾海战中遭遇美军驱逐舰，被鱼雷击中弹药库后发生爆炸沉没。",
     author: "Alexpl",
@@ -730,11 +730,11 @@
       {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
-      {label: "主炮", value: "4x2 356mm/45"},
-      {label: "高平炮", value: "8x2 127mm/40"},
-      {label: "高炮", value: "29x3 25mm/60"},
-      {label: "高炮", value: "11x1 25mm/60"},
-      {label: "防空火箭", value: "6x28 120mm"},
+      {label: "主炮", value: "4x2 356mm/45 四一式"},
+      {label: "高平炮", value: "8x2 127mm/40 八九式"},
+      {label: "高炮", value: "29x3 25mm/60 九六式"},
+      {label: "高炮", value: "11x1 25mm/60 九六式"},
+      {label: "防空火箭", value: "6x28 120mm 四年式"},
       {label: "制空战斗机", value: "零式舰战（A6M）x6"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x8"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x8"},
@@ -763,12 +763,12 @@
       {label: "垂直减伤", value: "25%"}
     ],
     armaments: [
-      {label: "主炮", value: "4x2 410mm/45"},
-      {label: "副炮", value: "16x1 140mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "12x3 25mm/60"},
-      {label: "高炮", value: "6x2 25mm/60"},
-      {label: "高炮", value: "24x1 25mm/60"},
+      {label: "主炮", value: "4x2 410mm/45 三年式"},
+      {label: "副炮", value: "16x1 140mm/50 三年式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "12x3 25mm/60 九六式"},
+      {label: "高炮", value: "6x2 25mm/60 九六式"},
+      {label: "高炮", value: "24x1 25mm/60 九六式"},
     ],
     description: "长门号是日本海军长门级战列舰首舰，1920 年服役，是世界上最早装备 410 毫米主炮的战列舰之一。太平洋战争期间曾长期担任联合舰队旗舰，1944 年参加莱特湾海战并幸存；战后被美军接收，最终在十字路口行动核试验中沉没。",
     author: "Alexpl",
@@ -794,10 +794,10 @@
       {label: "垂直减伤", value: "30%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x3 460mm/45"},
-      {label: "副炮", value: "2x3 155mm/60"},
-      {label: "高平炮", value: "12x2 127mm/40"},
-      {label: "高炮", value: "48x3 25mm/60"},
+      {label: "主炮", value: "3x3 460mm/45 九四式"},
+      {label: "副炮", value: "2x3 155mm/60 三年式"},
+      {label: "高平炮", value: "12x2 127mm/40 八九式"},
+      {label: "高炮", value: "48x3 25mm/60 九六式"},
     ],
     description: "大和号是日本海军大和级战列舰首舰，是人类历史上建造过的最大战列舰，排水量超过 7 万吨，规模惊人。搭载史上最大口径的 460 毫米主炮，1945 年被美军击沉于冲绳附近。",
     author: "TZoli",
@@ -824,10 +824,10 @@
     ],
     armaments: [
       {label: "主炮", value: "4x2 510mm/45"},
-      {label: "副炮", value: "6x2 200mm/50"},
-      {label: "高平炮", value: "10x2 100mm/65"},
-      {label: "高炮", value: "14x2 40mm/60"},
-      {label: "高炮", value: "12x3 25mm/60"},
+      {label: "副炮", value: "6x2 200mm/50 三年式"},
+      {label: "高平炮", value: "10x2 100mm/65 九八式"},
+      {label: "高炮", value: "14x2 40mm/60 五年式"},
+      {label: "高炮", value: "12x3 25mm/60 九六式"},
     ],
     description: "萨摩号是日本海军大和级战列舰的后续改进方案（A-150 计划），设计搭载 510mm 主炮，意图在火力与装甲上全面超越大和级。采用萨摩古国命名延续日本主力舰命名传统，但因战争局势恶化，该舰仅存在于设计图纸中。",
     author: "TZoli",
@@ -850,9 +850,9 @@
     ],
     armaments: [
       {label: "主炮", value: "4x3 510mm/45"},
-      {label: "副炮", value: "2x3 200mm/50"},
-      {label: "高平炮", value: "16x2 127mm/50"},
-      {label: "高炮", value: "44x2 40mm/60"},
+      {label: "副炮", value: "2x3 200mm/50 三年式"},
+      {label: "高平炮", value: "16x2 127mm/50 三年式"},
+      {label: "高炮", value: "44x2 40mm/60 五年式"},
     ],
     description: "江户国是古代日本的令制国之一，位于现在的东京都及周边地区。江户时代起即是日本的政治经济中心，文化繁荣、武备雄厚。在游戏中，江户号以超乎时代的庞大舰体与极致火力作为日本阵营最强战舰登场，象征着幕府末期的野心与幻想。",
     author: "TZoli",
@@ -1551,9 +1551,9 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x2 203mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "12x2 25mm/60"},
+      {label: "主炮", value: "3x2 203mm/50 三年式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "12x2 25mm/60 九六式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "青叶号是日本海军青叶级重巡洋舰首舰，1927 年服役。作为古鹰级的改进型，换装了双联装 203mm 主炮塔并强化了火控系统，舰桥也更为高大。在太平洋战争中活跃于所罗门海域，1945 年 7 月在吴港空袭中坐沉。",
@@ -1576,10 +1576,10 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "5x2 203mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "10x3 25mm/60"},
-      {label: "高炮", value: "14x1 25mm/60"},
+      {label: "主炮", value: "5x2 203mm/50 三年式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "10x3 25mm/60 九六式"},
+      {label: "高炮", value: "14x1 25mm/60 九六式"},
       {label: "鱼雷", value: "4x4 610mm"},
     ],
     description: "羽黑号是日本海军妙高级重巡洋舰四号舰，1929 年服役。参与南方攻略、珊瑚海海战与莱特湾海战等多次重大作战，是日本海军最后一艘在战斗中沉没的重巡洋舰——1945 年 5 月在马六甲海峡遭英军驱逐舰编队鱼雷击沉。",
@@ -1602,10 +1602,10 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "5x2 203mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "10x3 25mm/60"},
-      {label: "高炮", value: "26x1 25mm/60"},
+      {label: "主炮", value: "5x2 203mm/50 三年式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "10x3 25mm/60 九六式"},
+      {label: "高炮", value: "26x1 25mm/60 九六式"},
       {label: "鱼雷", value: "4x4 610mm"},
     ],
     description: "爱宕号是日本海军高雄级重巡洋舰二号舰，1932 年服役，拥有当时世界最强的 203mm 主炮与厚重的舰桥装甲，曾多次担任第二舰队旗舰。1944 年 10 月在莱特湾海战前的巴拉望水道遭美军潜艇伏击沉没。",
@@ -1628,10 +1628,10 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x2 203mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "14x2 25mm/60"},
-      {label: "高炮", value: "18x1 25mm/60"},
+      {label: "主炮", value: "3x2 203mm/50 三年式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "14x2 25mm/60 九六式"},
+      {label: "高炮", value: "18x1 25mm/60 九六式"},
       {label: "鱼雷", value: "4x3 610mm"},
     ],
     description: "最上号是日本海军最上级巡洋舰首舰，1935 年服役。该级最初以轻巡名义建造，装备 155mm 三连装主炮，条约失效后换装 203mm 双联主炮转型为重巡。1944 年 10 月在苏里高海峡夜战中遭重创，由己方驱逐舰雷击处分。",
@@ -1654,10 +1654,10 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "5x2 203mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "12x2 25mm/60"},
-      {label: "高炮", value: "16x1 25mm/60"},
+      {label: "主炮", value: "5x2 203mm/50 三年式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "12x2 25mm/60 九六式"},
+      {label: "高炮", value: "16x1 25mm/60 九六式"},
       {label: "鱼雷", value: "4x3 610mm"},
     ],
     description: "铃谷号是日本海军最上级重巡洋舰三号舰，1937 年服役。与同型前两舰相比，其舰体焊接比例更高、船体略轻，在莱特湾海战中遭遇美军舰载机密集空袭，因弹药殉爆重创，后由己方驱逐舰雷击处分。",
@@ -1680,10 +1680,10 @@
       {label: "垂直减伤", value: "20%"}
     ],
     armaments: [
-      {label: "主炮", value: "4x2 203mm/50"},
-      {label: "高平炮", value: "4x2 127mm/40"},
-      {label: "高炮", value: "12x2 25mm/60"},
-      {label: "高炮", value: "20x1 25mm/60"},
+      {label: "主炮", value: "4x2 203mm/50 三年式"},
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "12x2 25mm/60 九六式"},
+      {label: "高炮", value: "20x1 25mm/60 九六式"},
       {label: "鱼雷", value: "4x3 610mm"},
     ],
     description: "利根号是日本海军利根级重巡洋舰首舰，1938 年服役，其独特之处在于将全部四座主炮塔集中于舰首，舰尾则用作大型水上侦察机运作平台，可搭载 6 架水上机。1945 年 7 月在吴港空袭中坐沉，战后拆解。",
@@ -1706,9 +1706,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "4x1 140mm/50"},
-      {label: "高平炮", value: "1x1 76mm/40"},
-      {label: "高炮", value: "2x2 25mm/60"},
+      {label: "主炮", value: "4x1 140mm/50 三年式"},
+      {label: "高平炮", value: "1x1 76mm/40 三年式"},
+      {label: "高炮", value: "2x2 25mm/60 九六式"},
       {label: "鱼雷", value: "2x3 533mm"},
     ],
     description: "天龙号是日本海军天龍级轻巡洋舰首舰，1919 年服役，是日本第一种专门设计的轻巡洋舰，开创了日本轻巡洋舰的先河。其以高航速著称，常担任水雷战队旗舰，1942 年 12 月在瓜达尔卡纳尔海战中遭美军潜艇伏击沉没。",
@@ -1731,8 +1731,8 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "7x1 140mm/50"},
-      {label: "高炮", value: "4x2 25mm/60"},
+      {label: "主炮", value: "7x1 140mm/50 三年式"},
+      {label: "高炮", value: "4x2 25mm/60 九六式"},
       {label: "鱼雷", value: "4x2 533mm"},
     ],
     description: "球磨号是日本海军球磨级轻巡洋舰首舰，1920 年服役，是日本 5500 吨级轻巡洋舰的开山之作，设计均衡可靠。二战中主要执行南方海域护航及运输任务，1944 年 1 月在槟榔屿附近遭英军潜艇击沉。",
@@ -1755,9 +1755,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "2x2 127mm/40"},
-      {label: "高炮", value: "14x3 25mm/60"},
-      {label: "高炮", value: "27x1 25mm/60"},
+      {label: "主炮", value: "2x2 127mm/40 八九式"},
+      {label: "高炮", value: "14x3 25mm/60 九六式"},
+      {label: "高炮", value: "27x1 25mm/60 九六式"},
       {label: "鱼雷", value: "8 枚回天鱼雷"},
     ],
     description: "北上号是日本海军球磨级轻巡洋舰四号舰，1921 年服役。1941 年与大井号一同改装为重雷装巡洋舰，两舷共 40 具鱼雷发射管，是世界上鱼雷搭载量最高的舰艇之一。战争后期改为回天自杀鱼雷搭载舰，但未有机会实战出击。",
@@ -1780,8 +1780,8 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "4x1 140mm/50"},
-      {label: "高炮", value: "2x2 25mm/60"},
+      {label: "主炮", value: "4x1 140mm/50 三年式"},
+      {label: "高炮", value: "2x2 25mm/60 九六式"},
       {label: "鱼雷", value: "10x4 610mm"},
     ],
     description: "大井号是日本海军球磨级轻巡洋舰五号舰，1941 年与姊妹舰北上号一同改装为重雷装巡洋舰，两舷共搭载 40 具 610mm 鱼雷发射管，是历史上鱼雷搭载密度最高的巡洋舰之一，1944 年 7 月在马尼拉附近遭美军空袭击沉。",
@@ -1804,9 +1804,9 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x2 127mm/40"},
-      {label: "高炮", value: "11x3 25mm/60"},
-      {label: "高炮", value: "11x1 25mm/60"},
+      {label: "主炮", value: "3x2 127mm/40 八九式"},
+      {label: "高炮", value: "11x3 25mm/60 九六式"},
+      {label: "高炮", value: "11x1 25mm/60 九六式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "五十铃号是日本海军长良级轻巡洋舰二号舰，属 5500 吨级轻巡系列，1923 年服役，在战争中担任水雷战队旗舰执行南方攻略与护航任务，后经防空强化改装，1945 年 4 月在松巴哇岛附近遭美军潜艇击沉。",
@@ -1829,11 +1829,11 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "5x1 140mm/50"},
-      {label: "高平炮", value: "1x2 127mm/40"},
-      {label: "高炮", value: "2x2 25mm/60"},
-      {label: "高炮", value: "4x3 25mm/60"},
-      {label: "高炮", value: "13x1 25mm/60"},
+      {label: "主炮", value: "5x1 140mm/50 三年式"},
+      {label: "高平炮", value: "1x2 127mm/40 八九式"},
+      {label: "高炮", value: "2x2 25mm/60 九六式"},
+      {label: "高炮", value: "4x3 25mm/60 九六式"},
+      {label: "高炮", value: "13x1 25mm/60 九六式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "阿武隈号是日本海军长良级轻巡洋舰，1925 年服役，属 5500 吨级轻巡系列，以均衡的性能与良好的生存能力著称。活跃于太平洋战场各大主要战役，1944 年 10 月在莱特湾海战的苏里高海峡夜战中遭美军鱼雷艇雷击，最终沉没。",
@@ -1856,8 +1856,8 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "7x1 140mm/50"},
-      {label: "高炮", value: "9x2 25mm/60"},
+      {label: "主炮", value: "7x1 140mm/50 三年式"},
+      {label: "高炮", value: "9x2 25mm/60 九六式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "神通号是日本海军川内级轻巡洋舰二号舰，1925 年服役，长期担任第二水雷战队旗舰，指挥驱逐舰作战经验丰富。1943 年 7 月在科隆班加拉岛夜战中遭美军巡洋舰编队集中炮击，虽受重创仍坚持还击，最终沉没。",
@@ -1880,10 +1880,10 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "1x1 140mm/50"},
-      {label: "主炮", value: "2x2 140mm/50"},
-      {label: "高炮", value: "4x2 25mm/60"},
-      {label: "高炮", value: "3x3 25mm/60"},
+      {label: "主炮", value: "1x1 140mm/50 三年式"},
+      {label: "主炮", value: "2x2 140mm/50 三年式"},
+      {label: "高炮", value: "4x2 25mm/60 九六式"},
+      {label: "高炮", value: "3x3 25mm/60 九六式"},
       {label: "鱼雷", value: "2x2 610mm"},
     ],
     description: "夕张号是日本海军试验型轻巡洋舰，1923 年服役，在仅约 3500 吨的舰体上实现了 5500 吨级轻巡的火力与航速，集中测试了大量创新设计（如烟囱合并、装甲结构一体化），为后续日本巡洋舰发展奠定了基础。1944 年 4 月在帕劳附近被击沉。",
@@ -1906,10 +1906,10 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x2 152mm/50"},
-      {label: "高平炮", value: "2x2 76mm/65"},
-      {label: "高炮", value: "10x3 25mm/60"},
-      {label: "高炮", value: "24x1 25mm/60"},
+      {label: "主炮", value: "3x2 152mm/50 四一式"},
+      {label: "高平炮", value: "2x2 76mm/65 九八式"},
+      {label: "高炮", value: "10x3 25mm/60 九六式"},
+      {label: "高炮", value: "24x1 25mm/60 九六式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "矢矧号是日本海军阿贺野级轻巡洋舰二号舰，1943 年服役，是日本建造的最后一种 5500 吨级轻巡洋舰。1945 年 4 月随大和号执行菊水特攻，在坊之岬海战中遭美军舰载机集中攻击，与大和号一同沉没。",
@@ -1932,10 +1932,10 @@
       {label: "垂直减伤", value: "5%"}
     ],
     armaments: [
-      {label: "主炮", value: "2x3 155mm/60"},
-      {label: "高平炮", value: "1x2 100mm/65"},
+      {label: "主炮", value: "2x3 155mm/60 三年式"},
+      {label: "高平炮", value: "1x2 100mm/65 九八式"},
       {label: "高平炮", value: "3x2 105mm/65"},
-      {label: "高炮", value: "12x3 25mm/60"},
+      {label: "高炮", value: "12x3 25mm/60 九六式"},
     ],
     description: "大淀号是日本海军大淀级轻巡洋舰首舰，1943 年服役，以舰队司令部旗舰为建设目标，拥有当时日本舰艇最强的通信与指挥设施，后部宽阔的飞行甲板可搭载大型水上侦察机。1945 年 7 月在吴港空袭中搁浅坐沉。",
     author: "未知",
@@ -2275,7 +2275,7 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x2 127mm/50"},
+      {label: "主炮", value: "3x2 127mm/50 三年式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "朝潮号是日本海军朝潮级驱逐舰首舰，1937 年服役，是日本摆脱条约限制后设计的第一型大型驱逐舰，航速达 35 节。先后参与南方攻略与所罗门群岛作战，1943 年 3 月在俾斯麦海海战中遭盟军轰炸机击沉。",
@@ -2298,7 +2298,7 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x2 127mm/50"},
+      {label: "主炮", value: "3x2 127mm/50 三年式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "夕云号是日本海军夕云级驱逐舰首舰，作为朝潮级的改进型，延续了优秀的雷击与续航能力，并对防空火力做了小幅强化。1941 年服役后参与所罗门群岛方面作战，1943 年 10 月在维拉拉维拉海战中遭美军驱逐舰编队夜战击沉。",
@@ -2321,7 +2321,7 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x2 127mm/50"},
+      {label: "主炮", value: "3x2 127mm/50 三年式"},
       {label: "鱼雷", value: "2x4 610mm"},
     ],
     description: "雪风号是日本海军阳炎级驱逐舰八号舰，1940 年服役，以惊人的生存率闻名——从珍珠港到菊水特攻，历经大小海战数十场而奇迹般幸存，被称作“奇迹的驱逐舰”。战后由国民党海军接收改名丹阳号，在台湾服役至 1966 年退役。",
@@ -2512,7 +2512,7 @@
       {label: "垂直减伤", value: "0%"}
     ],
     armaments: [
-      {label: "主炮", value: "1x1 13mm"},
+      {label: "主炮", value: "1x1 13mm 九三式"},
       {label: "鱼雷", value: "2x1 450mm"},
     ],
     description: "T-14（十四号型）是二战末期日本海军为本土决战紧急量产的小型鱼雷艇，全木质船体配单台汽车发动机，结构极其简单。主武装为两具 450mm 鱼雷发射管，并可搭载深水炸弹执行反潜任务。",

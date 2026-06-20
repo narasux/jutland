@@ -107,15 +107,16 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/457/45 三联装舰炮
+  // 美国海军 US/457/45/3/MK1
+  // 三联装舰炮（列克星敦级 Mark 1）
   {
-    name: "US/457/45/3",
+    name: "US/457/45/3/MK1",
     bulletName: "US/GB/457/1922",
     bulletCount: 3,
-    reloadTime: 17,
-    range: 36,
-    bulletSpread: 180,
-    bulletSpeed: 780,
+    reloadTime: 14,
+    range: 38,
+    bulletSpread: 190,
+    bulletSpeed: 750,
     antiShip: true,
     antiAircraft: false
   },
@@ -400,9 +401,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 三联装 51 厘米 45 倍口径舰炮
+
+  // 日本海军 九八式 51cm 三联装炮
   {
-    name: "JP/510/45/3",
+    name: "JP/510/45/3/Type98",
     bulletName: "JP/GB/510/1945",
     bulletCount: 3,
     reloadTime: 24,
@@ -412,9 +414,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 双联装 51 厘米 45 倍口径舰炮
+
+  // 日本海军 九八式 51cm 联装炮
   {
-    name: "JP/510/45/2",
+    name: "JP/510/45/2/Type98",
     bulletName: "JP/GB/510/1945",
     bulletCount: 2,
     reloadTime: 24,
@@ -424,9 +427,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 三联装 46 厘米 45 倍口径舰炮
+
+  // 日本海军 九四式 46cm 三联装炮
   {
-    name: "JP/460/45/3",
+    name: "JP/460/45/3/Type94",
     bulletName: "JP/GB/460/1942",
     bulletCount: 3,
     reloadTime: 20,
@@ -436,9 +440,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 双联装 41 厘米 45 倍口径舰炮
+
+  // 日本海军 三年式 41cm 联装炮
   {
-    name: "JP/410/45/2",
+    name: "JP/410/45/2/Type3",
     bulletName: "JP/GB/410/1921",
     bulletCount: 2,
     reloadTime: 16,
@@ -448,9 +453,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 双联装 35.6 厘米 45 倍口径舰炮
+
+  // 日本海军 四一式 35.6cm 联装炮
   {
-    name: "JP/356/45/2",
+    name: "JP/356/45/2/Type41",
     bulletName: "JP/GB/356/1935",
     bulletCount: 2,
     reloadTime: 16,
@@ -460,9 +466,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 双联装 20.3 厘米 50 倍口径舰炮
+
+  // 日本海军 三年式二号 20.3cm 联装炮
   {
-    name: "JP/203/50/2",
+    name: "JP/203/50/2/Type3",
     bulletName: "JP/GB/203/1937",
     bulletCount: 2,
     reloadTime: 8,
@@ -472,9 +479,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 三联装 20 厘米 50 倍口径舰炮
+
+  // 日本海军 三年式一号 20cm 三联装炮
   {
-    name: "JP/200/50/3",
+    name: "JP/200/50/3/Type3",
     bulletName: "JP/GB/200/1944",
     bulletCount: 3,
     reloadTime: 7,
@@ -484,9 +492,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 双联装 20 厘米 50 倍口径舰炮
+
+  // 日本海军 三年式一号 20cm 联装炮
   {
-    name: "JP/200/50/2",
+    name: "JP/200/50/2/Type3",
     bulletName: "JP/GB/200/1944",
     bulletCount: 2,
     reloadTime: 7,
@@ -496,9 +505,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 单装 20 厘米 50 倍口径舰炮
+
+  // 日本海军 三年式一号 20cm 炮
   {
-    name: "JP/200/50",
+    name: "JP/200/50/Type3",
     bulletName: "JP/GB/200/1944",
     bulletCount: 1,
     reloadTime: 8,
@@ -508,9 +518,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 三联装 15.5 厘米 60 倍口径舰炮
+
+  // 日本海军 三年式 15.5cm 三联装炮
   {
-    name: "JP/155/60/3",
+    name: "JP/155/60/3/Type3",
     bulletName: "JP/GB/155/1934",
     bulletCount: 3,
     reloadTime: 3.5,
@@ -520,9 +531,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 15.2 厘米 50 倍口径舰炮
+
+  // 日本海军 四一式 15.2cm 联装炮
   {
-    name: "JP/152/50/2",
+    name: "JP/152/50/2/Type41",
     bulletName: "JP/GB/152/1912",
     bulletCount: 2,
     reloadTime: 4,
@@ -532,9 +544,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 15.2 厘米 50 倍口径舰炮
+
+  // 日本海军 四一式 15.2cm 炮
   {
-    name: "JP/152/50",
+    name: "JP/152/50/Type41",
     bulletName: "JP/GB/152/1912",
     bulletCount: 1,
     reloadTime: 5,
@@ -544,9 +557,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 双联装 14.0 厘米 50 倍口径舰炮
+
+  // 日本海军 三年式 14cm 联装炮
   {
-    name: "JP/140/50/2",
+    name: "JP/140/50/2/Type3",
     bulletName: "JP/GB/140/1914",
     bulletCount: 2,
     reloadTime: 3,
@@ -556,9 +570,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 14.0 厘米 50 倍口径舰炮
+
+  // 日本海军 三年式 14cm 炮
   {
-    name: "JP/140/50",
+    name: "JP/140/50/Type3",
     bulletName: "JP/GB/140/1914",
     bulletCount: 1,
     reloadTime: 4,
@@ -568,9 +583,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 日本海军 双联装 12.7 厘米 50 倍口径舰炮
+
+  // 日本海军 三年式 12.7cm 炮
   {
-    name: "JP/127/50/2",
+    name: "JP/127/50/2/Type3",
     bulletName: "JP/GB/127/1926",
     bulletCount: 2,
     reloadTime: 2.5,
@@ -580,9 +596,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 12.7 厘米 50 倍口径高平两用炮
+
+  // 日本海军 三年式 12.7cm 高平炮
   {
-    name: "JP/127/50/2/DP",
+    name: "JP/127/50/2/Type3/DP",
     bulletName: "JP/GB/127/1929",
     bulletCount: 2,
     reloadTime: 3,
@@ -592,9 +609,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 12.7 厘米 40 倍口径高平两用炮
+
+  // 日本海军 八九式 12.7cm 高角炮
   {
-    name: "JP/127/40/2/DP",
+    name: "JP/127/40/2/Type89/DP",
     bulletName: "JP/GB/127/1929",
     bulletCount: 2,
     reloadTime: 3.5,
@@ -604,9 +622,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 12.7 厘米 40 倍口径高炮
+
+  // 日本海军 十年式 12cm 炮
   {
-    name: "JP/120/45",
+    name: "JP/120/45/Type10",
     bulletName: "JP/GB/120/1922",
     bulletCount: 1,
     reloadTime: 3,
@@ -616,9 +635,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 10 厘米 65 倍口径高平两用炮
+
+  // 日本海军 九八式 10cm 高角炮
   {
-    name: "JP/100/65/2/DP",
+    name: "JP/100/65/2/Type98/DP",
     bulletName: "JP/GB/100/1933",
     bulletCount: 2,
     reloadTime: 2.3,
@@ -628,9 +648,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 7.6 厘米 65 倍径舰炮
+
+  // 日本海军 九八式 7.6cm 高角炮
   {
-    name: "JP/76/65/2",
+    name: "JP/76/65/2/Type98",
     bulletName: "JP/GB/76/1936",
     bulletCount: 2,
     reloadTime: 1.4,
@@ -640,9 +661,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 7.6 厘米 40 倍径舰炮
+
+  // 日本海军 三年式 7.6cm 炮
   {
-    name: "JP/76/40",
+    name: "JP/76/40/Type3",
     bulletName: "JP/GB/76/1936",
     bulletCount: 1,
     reloadTime: 1.8,
