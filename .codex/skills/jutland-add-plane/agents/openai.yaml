@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jutland 添加飞机"
+  short_description: "为 Jutland 添加飞机配置、透明顶视图素材和完整引用链"
+  default_prompt: "使用 $jutland-add-plane 根据给定资料和顶视图素材向 Jutland 添加一型飞机。"

@@ -70,7 +70,7 @@ type sidebarLayout struct {
 }
 
 // New 创建任务侧栏
-func New(mission string) *Panel {
+func New(mission string, ui *ebitenui.UI) *Panel {
 	missionMD := md.Get(mission)
 	misLayout := layout.NewScreenLayout()
 	abbrMap := ebiten.NewImage(misLayout.Height, misLayout.Height)
@@ -82,7 +82,7 @@ func New(mission string) *Panel {
 	abbrMap.DrawImage(abbrMapImg.Background, opts)
 	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Source), opts)
 
-	return &Panel{abbrMap: abbrMap}
+	return &Panel{ui: ui, abbrMap: abbrMap}
 }
 
 // Update 更新侧栏控件状态，并处理小地图点击
@@ -197,7 +197,7 @@ func (p *Panel) buildUI(ms *state.MissionState) {
 		})
 	}
 
-	p.ui = &ebitenui.UI{Container: root}
+	p.ui.Container = root
 }
 
 func (p *Panel) addCheckboxButton(

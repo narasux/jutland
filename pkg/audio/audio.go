@@ -54,6 +54,14 @@ func (p *Player) Play(ads types.AudioStream) {
 	p.player.Play()
 }
 
+// PlayLazy 仅在当前没有音频播放时创建新的音频流。
+func (p *Player) PlayLazy(factory func() types.AudioStream) {
+	if p.player != nil && p.player.IsPlaying() {
+		return
+	}
+	p.Play(factory())
+}
+
 // Pause 暂停音频播放
 func (p *Player) Pause() {
 	p.player.Pause()

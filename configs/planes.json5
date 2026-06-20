@@ -2,6 +2,7 @@
   {
     // 歼击机
     name: "F",
+    nation: "special",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 175,
@@ -86,6 +87,7 @@
   {
     // 轰炸机
     name: "B",
+    nation: "special",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 250,
@@ -198,6 +200,7 @@
   {
     // 攻击机
     name: "A",
+    nation: "special",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 200,
@@ -293,6 +296,7 @@
   {
     // 野猫
     name: "F4F-3",
+    nation: "us",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 35,
@@ -344,6 +348,7 @@
   {
     // 无畏
     name: "SBD-3",
+    nation: "us",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 50,
@@ -412,6 +417,7 @@
   {
     // 蹂躏者
     name: "TBD-1",
+    nation: "us",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 45,
@@ -461,6 +467,7 @@
   {
     // 零式
     name: "A6M_0",
+    nation: "jp",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 26,
@@ -513,6 +520,7 @@
   {
     // 九九式
     name: "D3A_99",
+    nation: "jp",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 40,
@@ -581,6 +589,7 @@
   {
     // 九七式
     name: "B5N2_97",
+    nation: "jp",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 45,
@@ -623,6 +632,7 @@
   {
     // 烈风
     name: "A7M2",
+    nation: "jp",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 40,
@@ -673,6 +683,7 @@
   {
     // 彗星
     name: "D4Y3",
+    nation: "jp",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 42,
@@ -727,6 +738,7 @@
   {
     // 流星
     name: "B7A2",
+    nation: "jp",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 55,
@@ -782,6 +794,7 @@
   {
     // 彩云
     name: "C6N1",
+    nation: "jp",
     type: "fighter",
     typeAbbr: "R",
     totalHP: 36,

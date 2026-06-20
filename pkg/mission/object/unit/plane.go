@@ -29,11 +29,26 @@ const (
 	PlaneTypeTorpedoBomber PlaneType = "torpedo_bomber"
 )
 
+// ToDisplay 飞机类型展示用名称。
+func (t PlaneType) ToDisplay() string {
+	switch t {
+	case PlaneTypeFighter:
+		return "战斗机"
+	case PlaneTypeDiveBomber:
+		return "俯冲轰炸机"
+	case PlaneTypeTorpedoBomber:
+		return "鱼雷轰炸机"
+	default:
+		return "未知"
+	}
+}
+
 // Plane 战机
 type Plane struct {
 	// 名称
 	Name string `json:"name"`
-	// 展示用名称
+	// 国籍
+	Nation Nation `json:"nation"`
 	// 类别
 	Type PlaneType `json:"type"`
 	// 类别缩写
@@ -65,6 +80,8 @@ type Plane struct {
 	Tonnage float64 `json:"tonnage"`
 	// 武器
 	Weapon PlaneWeapon `json:"weapon"`
+	// 战力评估（配置与武器初始化完成后计算）
+	CombatPower CombatPowerInfo `json:"-"`
 
 	// 唯一标识
 	Uid string
@@ -236,6 +253,8 @@ func (p *Plane) MustReturn() bool {
 
 var PlaneMap = map[string]*Plane{}
 
+var AllPlaneNames = []string{}
+
 // NewPlane 生成飞机
 func NewPlane(
 	name string,
@@ -261,6 +280,11 @@ func NewPlane(
 	p.movementStrategy = NewMovementStrategy(p.Type)
 
 	return &p
+}
+
+// GetAllPlaneNames 获取所有飞机名称，顺序与配置文件一致。
+func GetAllPlaneNames() []string {
+	return AllPlaneNames
 }
 
 // GetPlaneTargetObjType 获取飞机攻击目标类型

@@ -76,6 +76,9 @@ const HospitalShipEffectRange = 3
 type BattleShip struct {
 	// 名称
 	Name string   `json:"name"`
+	// 国籍
+	Nation Nation `json:"nation"`
+	// 类别
 	Type ShipType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
@@ -108,6 +111,8 @@ type BattleShip struct {
 	Weapon ShipWeapon `json:"weapon"`
 	// 舰载机联队
 	Aircraft ShipAircraft `json:"aircraft"`
+	// 战力评估（配置与武器初始化完成后计算）
+	CombatPower CombatPowerInfo `json:"-"`
 
 	// 唯一标识
 	Uid string

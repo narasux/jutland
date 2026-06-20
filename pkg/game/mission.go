@@ -66,13 +66,13 @@ func (g *Game) handleMissionSelect() error {
 
 // 任务加载
 func (g *Game) handleMissionLoading() error {
-	g.player.Play(audioRes.NewMissionsBackground())
+	g.player.PlayLazy(audioRes.NewMissionsBackground)
 
 	// 确保先展示加载中的界面，再加载地图数据
 	if !g.objStates.LoadingInterface.Ready {
 		return nil
 	}
-	g.missionMgr = manager.New(g.curMission)
+	g.missionMgr = manager.New(g.curMission, g.ui)
 	g.mode = GameModeMissionStart
 	return nil
 }
@@ -116,7 +116,7 @@ func (g *Game) handleMissionRunning() error {
 
 // 任务成功
 func (g *Game) handleMissionSuccess() error {
-	g.player.Play(audioRes.NewMissionSuccess())
+	g.player.PlayLazy(audioRes.NewMissionSuccess)
 	if isAnyNextInput() {
 		g.mode = GameModeMenuSelect
 		g.player.Close()
@@ -126,7 +126,7 @@ func (g *Game) handleMissionSuccess() error {
 
 // 任务失败
 func (g *Game) handleMissionFailed() error {
-	g.player.Play(audioRes.NewMissionFailed())
+	g.player.PlayLazy(audioRes.NewMissionFailed)
 	if isAnyNextInput() {
 		g.mode = GameModeMenuSelect
 		g.player.Close()

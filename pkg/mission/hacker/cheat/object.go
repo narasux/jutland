@@ -133,15 +133,12 @@ func (c *ShowMeTheShip) Exec(misState *state.MissionState) string {
 	}
 	pos := action.DetectCursorPosOnMap(misState)
 	if misState.Core.MissionMD.MapCfg.Map.IsLand(pos.MX, pos.MY) {
-		return fmt.Sprintf(
-			"Current cursor position on land, can't create %s",
-			objUnit.GetShipDisplayName(c.shipName),
-		)
+		return fmt.Sprintf("Current cursor position on land, can't create %s", c.shipName)
 	}
 	uidGenerator := misState.Arena.ShipUidGenerators[misState.Player.CurPlayer]
 	ship := objUnit.NewShip(uidGenerator, c.shipName, *pos, 0, misState.Player.CurPlayer)
 	misState.Arena.Ships[ship.Uid] = ship
-	return fmt.Sprintf("%s ready at %s", objUnit.GetShipDisplayName(c.shipName), ship.CurPos.String())
+	return fmt.Sprintf("%s ready at %s", c.shipName, ship.CurPos.String())
 }
 
 var _ Cheat = (*ShowMeTheShip)(nil)

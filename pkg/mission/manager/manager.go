@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"github.com/ebitenui/ebitenui"
 	"github.com/hajimehoshi/ebiten/v2"
 
 	audioPlayer "github.com/narasux/jutland/pkg/audio/player"
@@ -41,11 +42,11 @@ type MissionManager struct {
 }
 
 // New 创建任务管理器
-func New(mission string) *MissionManager {
+func New(mission string, ui *ebitenui.UI) *MissionManager {
 	return &MissionManager{
 		state:          state.NewMissionState(mission),
 		drawer:         drawer.NewDrawer(mission),
-		sidebar:        sidebar.New(mission),
+		sidebar:        sidebar.New(mission, ui),
 		terminal:       hacker.NewTerminal(),
 		instructionSet: NewInstructionSet(),
 		// 目前用户一只能是人类，用户二是电脑 TODO 支持多人远程联机

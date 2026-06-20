@@ -5,7 +5,6 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/ebitenui/ebitenui"
 	"github.com/ebitenui/ebitenui/image"
 	"github.com/ebitenui/ebitenui/widget"
 
@@ -41,7 +40,7 @@ var speedOptions = []struct {
 
 // UI 游戏设置 UI
 type UI struct {
-	ui          *ebitenui.UI
+	container   widget.Containerer
 	localValue  float64 // 本地副本，保存时才写回 config.G
 	backPressed bool
 }
@@ -55,16 +54,13 @@ func New() *UI {
 	return s
 }
 
-// Update 更新设置界面
-func (s *UI) Update() {
-	s.ui.Update()
-}
-
 // Draw 绘制设置界面
 func (s *UI) Draw(screen *ebiten.Image) {
 	s.drawParchmentBg(screen)
-	s.ui.Draw(screen)
 }
+
+// Container 返回由游戏共享 EbitenUI 主实例承载的设置容器。
+func (s *UI) Container() widget.Containerer { return s.container }
 
 // BackPressed 返回用户是否点了返回/取消
 func (s *UI) BackPressed() bool { return s.backPressed }
@@ -276,7 +272,5 @@ func (s *UI) buildUI() {
 	rootWidget := mainPanel.GetWidget()
 	rootWidget.LayoutData = rootData
 
-	s.ui = &ebitenui.UI{
-		Container: rootContainer,
-	}
+	s.container = rootContainer
 }

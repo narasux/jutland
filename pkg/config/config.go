@@ -5,18 +5,33 @@ import (
 	"math"
 	"os"
 	"path/filepath"
-	"strings"
 
-	"github.com/samber/lo"
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 )
 
-var (
-	pwd, _     = os.Getwd()
-	exePath, _ = os.Executable()
-	exeDir     = filepath.Dir(exePath)
-	BaseDir    = lo.Ternary(strings.Contains(exeDir, pwd), exeDir, pwd)
-)
+var BaseDir = detectBaseDir()
+
+// detectBaseDir 兼容从仓库子目录启动的 Go 测试，同时保留从可执行文件旁加载资源的能力。
+func detectBaseDir() string {
+	pwd, _ := os.Getwd()
+	exePath, _ := os.Executable()
+	for _, candidate := range []string{filepath.Dir(exePath), pwd} {
+		for dir := candidate; dir != filepath.Dir(dir); dir = filepath.Dir(dir) {
+			if isResourceBaseDir(dir) {
+				return dir
+			}
+		}
+	}
+	return pwd
+}
+
+func isResourceBaseDir(dir string) bool {
+	if _, err := os.Stat(filepath.Join(dir, "configs")); err != nil {
+		return false
+	}
+	_, err := os.Stat(filepath.Join(dir, "resources"))
+	return err == nil
+}
 
 var (
 	// ImgResBaseDir 图片资源根目录
