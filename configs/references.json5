@@ -56,7 +56,7 @@
     name: "molamola",
     specs: [
       {label: "类型", value: "特殊-标靶"},
-      {label: "吨位", value: "1000000"},
+      {label: "吨位", value: "5000000"},
       {label: "速度", value: "5 节"},
       {label: "费用", value: "$10 / 10s"},
       {label: "水平减伤", value: "0%"},
@@ -1366,8 +1366,8 @@
       {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
-      {label: "主炮", value: "2x2 203mm/55"},
-      {label: "主炮", value: "2x3 203mm/55"},
+      {label: "主炮", value: "2x2 203mm/55 Mk9"},
+      {label: "主炮", value: "2x3 203mm/55 Mk9"},
       {label: "高平炮", value: "8x1 127mm/25"},
       {label: "高炮", value: "4x4 28mm/75"},
       {label: "高炮", value: "6x1 20mm/70"},
@@ -1400,7 +1400,7 @@
       {label: "垂直减伤", value: "10%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x3 203mm/55"},
+      {label: "主炮", value: "3x3 203mm/55 Mk12"},
       {label: "高平炮", value: "8x1 127mm/25"},
       {label: "高炮", value: "4x4 28mm/75"},
       {label: "高炮", value: "6x1 20mm/70"},
@@ -1430,7 +1430,7 @@
       {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x3 203mm/55"},
+      {label: "主炮", value: "3x3 203mm/55 Mk14"},
       {label: "高平炮", value: "8x1 127mm/25"},
       {label: "高炮", value: "4x4 28mm/75"},
       {label: "高炮", value: "15x1 20mm/70"},
@@ -1459,7 +1459,7 @@
       {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
-      {label: "主炮", value: "3x3 203mm/55"},
+      {label: "主炮", value: "3x3 203mm/55 Mk14"},
       {label: "高平炮", value: "8x1 127mm/25"},
       {label: "高炮", value: "4x4 28mm/75"},
       {label: "高炮", value: "10x1 20mm/70"},
@@ -1478,6 +1478,39 @@
       {
         name: "Wikipedia - USS Astoria (CA-34)",
         url: "https://en.wikipedia.org/wiki/USS_Astoria_(CA-34)"
+      }
+    ]
+  },
+  {
+    name: "des_moines",
+    specs: [
+      {label: "类型", value: "CA / 重巡洋舰"},
+      {label: "吨位", value: "21269"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$220 / 22s"},
+      {label: "水平减伤", value: "35%"},
+      {label: "垂直减伤", value: "20%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/55 Mk16"},
+      {label: "高平炮", value: "6x2 127mm/38 Mk12"},
+      {label: "高平炮", value: "12x2 76mm/50 Mk22"},
+      {label: "高炮", value: "12x1 20mm/70"},
+    ],
+    description: "得梅因号是美国海军得梅因级重巡洋舰首舰，1948 年服役，是全世界最后一级完工的全炮型重巡洋舰。其最突出的技术特征是装备了新型 8\"/55 Mk16 速射主炮，射速高达每分钟 10 发，远超过此前的重巡洋舰。得梅因号在二战末期开工，战后方才入役，因此未参与太平洋战争，但长期作为第六舰队旗舰在地中海执勤，直至 1961 年退役。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Des Moines Class as Finished",
+        url: "https://www.deviantart.com/tzoli/art/Des-Moines-Class-as-Finished-971525494"
+      },
+      {
+        name: "维基百科 - 得梅因级重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%BE%97%E6%A2%85%E5%9B%A0%E7%BA%A7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      },
+      {
+        name: "Wikipedia - USS Des Moines (CA-134)",
+        url: "https://en.wikipedia.org/wiki/USS_Des_Moines_(CA-134)"
       }
     ]
   },

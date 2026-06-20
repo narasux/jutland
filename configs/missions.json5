@@ -898,6 +898,7 @@
         maxOncomingShip: 10,
         providedShipNames: [
           "alaska_kai",
+          "des_moines",
           "atlanta",
           "long_beach",
           "long_beach_scheme_D",
@@ -1292,6 +1293,12 @@
       {
         name: "alaska_kai",
         pos: [42, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "des_moines",
+        pos: [42, 27],
         rotation: 90,
         belongPlayer: "HA"
       },

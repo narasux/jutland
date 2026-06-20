@@ -155,26 +155,67 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 美国海军 US/203/55 三联装舰炮
+  // 美国海军 US/203/55/2/MK9
+  // 双联装舰炮（彭萨科拉级 Mark 9）
   {
-    name: "US/203/55/3",
+    name: "US/203/55/2/MK9",
+    bulletName: "US/GB/203/1939",
+    bulletCount: 2,
+    reloadTime: 7,
+    range: 29,
+    bulletSpread: 105,
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 美国海军 US/203/55/3/MK9
+  // 三联装舰炮（彭萨科拉级 Mark 9）
+  {
+    name: "US/203/55/3/MK9",
     bulletName: "US/GB/203/1939",
     bulletCount: 3,
     reloadTime: 7,
-    range: 26,
+    range: 29,
+    bulletSpread: 105,
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 美国海军 US/203/55/3/MK12
+  // 三联装舰炮（北安普顿级 Mark 12）
+  {
+    name: "US/203/55/3/MK12",
+    bulletName: "US/GB/203/1939",
+    bulletCount: 3,
+    reloadTime: 7,
+    range: 29,
     bulletSpread: 100,
     bulletSpeed: 820,
     antiShip: true,
     antiAircraft: false
   },
-  // 美国海军 US/203/55 双联装舰炮
+  // 美国海军 US/203/55/3/MK14
+  // 三联装舰炮（波特兰级 / 新奥尔良级 Mark 14）
   {
-    name: "US/203/55/2",
+    name: "US/203/55/3/MK14",
     bulletName: "US/GB/203/1939",
-    bulletCount: 2,
-    reloadTime: 7,
-    range: 26,
-    bulletSpread: 100,
+    bulletCount: 3,
+    reloadTime: 6.5,
+    range: 29,
+    bulletSpread: 95,
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 美国海军 US/203/55/3/MK16
+  // 三联装速射舰炮（得梅因级 Mark 16）
+  {
+    name: "US/203/55/3/MK16",
+    bulletName: "US/GB/203/1939",
+    bulletCount: 3,
+    reloadTime: 3.2,
+    range: 27,
+    bulletSpread: 90,
     bulletSpeed: 820,
     antiShip: true,
     antiAircraft: false
@@ -235,6 +276,18 @@
     reloadTime: 1,
     range: 13,
     bulletSpread: 70,
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 美国海军 US/76/50/2/MK22 双联装高平两用炮（Mark 22）
+  {
+    name: "US/76/50/2/MK22",
+    bulletName: "US/GB/76/1910",
+    bulletCount: 2,
+    reloadTime: 0.6,
+    range: 13,
+    bulletSpread: 55,
     bulletSpeed: 820,
     antiShip: true,
     antiAircraft: true
