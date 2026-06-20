@@ -1,0 +1,32 @@
+configs/ships.json5
+  h_83f239dc907c66 1829,1833,1837
+  s_80626906a80edd::t_bbdfedf5a3fe12 1828,1832,1836,1838-1841
+configs/references.json5
+  h_83f239dc907c66 235-238
+configs/releasers.json5
+  s_80626906a80edd::t_e803794defa708 30-36,65
+configs/planes.json5
+  h_83f239dc907c66 781
+  s_80626906a80edd::t_151bdb53ff05bb 622-780,782-802
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "19321d8e2fbaf1b4a618eccb725231dcc3546cfc",
+  "prompts": {},
+  "humans": {
+    "h_83f239dc907c66": {
+      "author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  },
+  "sessions": {
+    "s_80626906a80edd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ee031-6ee8-7503-bc66-8881a2ce2a69",
+        "model": "gpt-5.5"
+      },
+      "human_author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  }
+}
