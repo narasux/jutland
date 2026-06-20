@@ -1825,16 +1825,20 @@
       takeOffTime: 1.6,
       groups: [
         {
-          name: "A6M_0",
-          maxCount: 40
+          name: "A7M2",
+          maxCount: 32
         },
         {
-          name: "B5N2_97",
-          maxCount: 20
+          name: "D4Y3",
+          maxCount: 16
         },
         {
-          name: "D3A_99",
-          maxCount: 10
+          name: "B7A2",
+          maxCount: 32
+        },
+        {
+          name: "C6N1",
+          maxCount: 4
         }
       ]
     }

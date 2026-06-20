@@ -27,6 +27,13 @@
     range: 1.5,
     bulletSpeed: 30,
   },
+  // 日本海军 500kg 炸弹
+  {
+    name: "JP/BB/500",
+    bulletName: "JP/BB/500",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
   // 日本海军 250kg 炸弹
   {
     name: "JP/BB/250",

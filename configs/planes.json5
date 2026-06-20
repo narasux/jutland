@@ -619,5 +619,186 @@
         }
       ]
     }
+  },
+  {
+    name: "A7M2",
+    displayName: "烈风",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 40,
+    damageReduction: 0.45,
+    maxSpeed: 628,
+    acceleration: 36,
+    rotateSpeed: 13,
+    length: 11,
+    width: 14,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 4.72,
+    range: 1960,
+    description: [
+      "战斗机（日）",
+      "2 x 20mm 机炮",
+      "2 x 13mm 机枪",
+    ],
+    weapon: {
+      guns: [
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/13",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/13",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    name: "D4Y3",
+    displayName: "彗星",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    totalHP: 42,
+    damageReduction: 0.4,
+    maxSpeed: 574,
+    acceleration: 30,
+    rotateSpeed: 9,
+    length: 10,
+    width: 12,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 4.657,
+    range: 1520,
+    description: [
+      "俯冲轰炸机（日）",
+      "2 x 7.7mm 机枪（前向）",
+      "1 x 7.92mm 机枪（后座）",
+      "1 x 500kg 炸弹"
+    ],
+    weapon: {
+      guns: [
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/7.92",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "JP/BB/500",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 5
+    }
+  },
+  {
+    name: "B7A2",
+    displayName: "流星",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    totalHP: 55,
+    damageReduction: 0.5,
+    maxSpeed: 567,
+    acceleration: 28,
+    rotateSpeed: 8,
+    length: 11,
+    width: 14,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 5.7,
+    range: 3038,
+    description: [
+      "舰载攻击机（日）",
+      "2 x 20mm 机炮（前向）",
+      "1 x 13mm 机枪（后座）",
+      "1 x 九一式 450mm 鱼雷"
+    ],
+    weapon: {
+      guns: [
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/13",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "JP/AST/450",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 5
+    }
+  },
+  // FIXME 引入侦察系统
+  {
+    name: "C6N1",
+    displayName: "彩云",
+    type: "fighter",
+    typeAbbr: "R",
+    totalHP: 36,
+    damageReduction: 0.35,
+    maxSpeed: 610,
+    acceleration: 34,
+    rotateSpeed: 10,
+    length: 11,
+    width: 13,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 4.5,
+    range: 5308,
+    description: [
+      "舰载侦察机（日，游戏按战斗机处理）",
+      "无攻击挂载"
+    ],
+    weapon: {}
   }
 ]
