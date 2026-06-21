@@ -118,7 +118,7 @@ func (c *ShowMeTheShip) Match(cmd string) bool {
 	if target == "" {
 		return false
 	}
-	for _, shipName := range objUnit.GetAllShipNames() {
+	for _, shipName := range objUnit.AllShipNames {
 		if target == normalizeCommandToken(shipName) {
 			c.shipName = shipName
 			return true

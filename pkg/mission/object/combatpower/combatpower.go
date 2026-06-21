@@ -17,6 +17,8 @@ const (
 	minimumDamageRate = 0.001
 	// 航母航空战力不按满值直接相加，保留 0.7 的折扣是为了避免航空编队把舰体价值完全淹没。
 	aviationFactor = 0.7
+	// 飞机图鉴统一按 10 架标准编队评估，减少单机小数在过早取整时的信息损失。
+	planeFormationSize = 10
 	// 舰炮配置以现实公里数填写，初始化时除以 2 转成运行时距离。
 	shipProjectionKilometersPerMapUnit = 2.0
 	// 飞机航程初始化时除以 14.4 转成运行时距离。
@@ -46,7 +48,7 @@ func newPowerAccumulator() *powerAccumulator {
 	}
 }
 
-// CalculatePlane 计算单架飞机的静态战力。
+// CalculatePlane 计算飞机标准编队的静态战力。
 // 这里输入的是已经完成资源解析的运行时对象，所以不需要再回头查配置或做额外初始化。
 func CalculatePlane(plane *objUnit.Plane, bullets map[string]*objBullet.Bullet) objUnit.CombatPowerInfo {
 	if plane == nil {
@@ -100,18 +102,15 @@ func CalculatePlane(plane *objUnit.Plane, bullets map[string]*objBullet.Bullet) 
 		}
 	}
 
-	// 机种限制只影响战力统计，不改动真实伤害逻辑。
-	// 当前规则下，战斗机只计对空，轰炸机和鱼雷机只计对舰。
-	switch plane.Type {
-	case objUnit.PlaneTypeFighter:
+	// 战斗机继续只计对空；其他机种按实际武器标记同时保留对舰和对空能力。
+	// 该规则只影响图鉴战力，不改动实战目标选择、AI 或伤害逻辑。
+	if plane.Type == objUnit.PlaneTypeFighter {
 		acc.clearAntiShip()
-	case objUnit.PlaneTypeDiveBomber, objUnit.PlaneTypeTorpedoBomber:
-		acc.clearAntiAir()
 	}
 
 	ehp := planeEHP(plane)
 	mobility := planeMobility(plane)
-	result := buildPowerInfo(ehp, mobility, plane.Range, acc)
+	result := buildPowerInfo(ehp, mobility, plane.Range, planeFormationSize, acc)
 	result.Details.MaxProjectionDistanceKM = plane.Range * planeProjectionKilometersPerMapUnit
 	return result
 }
@@ -172,7 +171,7 @@ func CalculateShip(
 		acc.maxProjectionRange = max(acc.maxProjectionRange, rocket.Range)
 	}
 
-	hull := buildPowerInfo(shipEHP(ship), shipMobility(ship), acc.maxProjectionRange, acc)
+	hull := buildPowerInfo(shipEHP(ship), shipMobility(ship), acc.maxProjectionRange, 1, acc)
 	hull.Details.MaxProjectionDistanceKM = acc.maxProjectionRange * shipProjectionKilometersPerMapUnit
 	result := hull
 	result.Hull = hull.Total
@@ -184,11 +183,13 @@ func CalculateShip(
 			continue
 		}
 		count := float64(group.MaxCount)
-		aviationAntiShip += float64(plane.CombatPower.AntiShip) * count * aviationFactor
-		aviationAntiAir += float64(plane.CombatPower.AntiAir) * count * aviationFactor
-		result.Details.AntiShipDPS += plane.CombatPower.Details.AntiShipDPS * count * aviationFactor
-		result.Details.AntiAirDPS += plane.CombatPower.Details.AntiAirDPS * count * aviationFactor
-		result.Details.BurstDamage += plane.CombatPower.Details.BurstDamage * count * aviationFactor
+		formationSize := float64(max(1, plane.CombatPower.FormationSize))
+		aircraftFactor := count / formationSize * aviationFactor
+		aviationAntiShip += float64(plane.CombatPower.AntiShip) * aircraftFactor
+		aviationAntiAir += float64(plane.CombatPower.AntiAir) * aircraftFactor
+		result.Details.AntiShipDPS += plane.CombatPower.Details.AntiShipDPS * aircraftFactor
+		result.Details.AntiAirDPS += plane.CombatPower.Details.AntiAirDPS * aircraftFactor
+		result.Details.BurstDamage += plane.CombatPower.Details.BurstDamage * aircraftFactor
 		result.Details.MaxProjectionRange = max(result.Details.MaxProjectionRange, plane.Range)
 		result.Details.MaxProjectionDistanceKM = max(
 			result.Details.MaxProjectionDistanceKM,
@@ -197,15 +198,15 @@ func CalculateShip(
 		label := objUnit.GetPlaneDisplayName(plane.Name) + " ×" + formatCount(group.MaxCount)
 		addSortedContribution(
 			&result.Details.AntiShipContributions, label,
-			plane.CombatPower.Details.AntiShipDPS*count*aviationFactor,
+			plane.CombatPower.Details.AntiShipDPS*aircraftFactor,
 		)
 		addSortedContribution(
 			&result.Details.AntiAirContributions, label,
-			plane.CombatPower.Details.AntiAirDPS*count*aviationFactor,
+			plane.CombatPower.Details.AntiAirDPS*aircraftFactor,
 		)
 		addSortedContribution(
 			&result.Details.BurstContributions, label,
-			plane.CombatPower.Details.BurstDamage*count*aviationFactor,
+			plane.CombatPower.Details.BurstDamage*aircraftFactor,
 		)
 	}
 
@@ -250,14 +251,6 @@ func (a *powerAccumulator) clearAntiShip() {
 	a.burstShip = 0
 	a.antiShip = map[string]float64{}
 	a.burstToShip = map[string]float64{}
-}
-
-func (a *powerAccumulator) clearAntiAir() {
-	// 机种限制命中后，直接清空对空统计，避免错误的跨目标输出污染结果。
-	a.antiAirDPS = 0
-	a.burstAir = 0
-	a.antiAir = map[string]float64{}
-	a.burstToAir = map[string]float64{}
 }
 
 func (a *powerAccumulator) burst() (float64, []objUnit.CombatPowerContribution) {
@@ -307,32 +300,49 @@ func formatCount(count int64) string {
 }
 
 func buildPowerInfo(
-	ehp, mobility, maxProjectionRange float64, acc *powerAccumulator,
+	ehp, mobility, maxProjectionRange float64, formationSize int, acc *powerAccumulator,
 ) objUnit.CombatPowerInfo {
 	// 这里统一把“存活能力 + 目标效率 + 机动修正”换算成最终对舰 / 对空战力。
 	// 任何辅助字段都只保存在 Details 中，方便图鉴和 tooltip 解释来源。
-	antiShip := combatScore(ehp, acc.antiShipDPS, mobility)
-	antiAir := combatScore(ehp, acc.antiAirDPS, mobility)
+	formationSize = max(1, formationSize)
+	formationFactor := float64(formationSize)
+	formationEHP := ehp * formationFactor
+	antiShipDPS := acc.antiShipDPS * formationFactor
+	antiAirDPS := acc.antiAirDPS * formationFactor
+	antiShip := combatScore(formationEHP, antiShipDPS, mobility)
+	antiAir := combatScore(formationEHP, antiAirDPS, mobility)
 	burstDamage, burstContributions := acc.burst()
+	burstDamage *= formationFactor
 	return objUnit.CombatPowerInfo{
-		Total:      weightedTotal(antiShip, antiAir),
-		AntiShip:   antiShip,
-		AntiAir:    antiAir,
-		Survival:   nonNegativeRound(math.Sqrt(max(0, ehp))),
-		Mobility:   nonNegativeRound(100 * mobility),
-		Projection: projectionScore(maxProjectionRange),
-		Burst:      burstScore(burstDamage),
+		FormationSize: formationSize,
+		Total:         weightedTotal(antiShip, antiAir),
+		AntiShip:      antiShip,
+		AntiAir:       antiAir,
+		Survival:      nonNegativeRound(math.Sqrt(max(0, formationEHP))),
+		Mobility:      nonNegativeRound(100 * mobility),
+		Projection:    projectionScore(maxProjectionRange),
+		Burst:         burstScore(burstDamage),
 		Details: objUnit.CombatPowerDetails{
-			EffectiveHP:           ehp,
-			AntiShipDPS:           acc.antiShipDPS,
-			AntiAirDPS:            acc.antiAirDPS,
+			EffectiveHP:           formationEHP,
+			AntiShipDPS:           antiShipDPS,
+			AntiAirDPS:            antiAirDPS,
 			MaxProjectionRange:    maxProjectionRange,
 			BurstDamage:           burstDamage,
-			AntiShipContributions: sortedContributions(acc.antiShip),
-			AntiAirContributions:  sortedContributions(acc.antiAir),
-			BurstContributions:    burstContributions,
+			AntiShipContributions: scaledContributions(sortedContributions(acc.antiShip), formationFactor),
+			AntiAirContributions:  scaledContributions(sortedContributions(acc.antiAir), formationFactor),
+			BurstContributions:    scaledContributions(burstContributions, formationFactor),
 		},
 	}
+}
+
+func scaledContributions(contributions []objUnit.CombatPowerContribution, factor float64) []objUnit.CombatPowerContribution {
+	if factor == 1 {
+		return contributions
+	}
+	for idx := range contributions {
+		contributions[idx].Value *= factor
+	}
+	return contributions
 }
 
 func weightedTotal(antiShip, antiAir int) int {

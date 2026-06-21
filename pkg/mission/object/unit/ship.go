@@ -75,7 +75,7 @@ const HospitalShipEffectRange = 3
 // BattleShip 战舰
 type BattleShip struct {
 	// 名称
-	Name string   `json:"name"`
+	Name string `json:"name"`
 	// 国籍
 	Nation Nation `json:"nation"`
 	// 类别
@@ -429,11 +429,6 @@ func NewShip(
 	// 战舰默认不编组
 	s.GroupID = object.GroupIDNone
 	return &s
-}
-
-// GetAllShipNames 获取所有战舰名称
-func GetAllShipNames() []string {
-	return AllShipNames
 }
 
 // GetShipDisplayName 获取战舰展示用名称

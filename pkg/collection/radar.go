@@ -233,9 +233,11 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale f
 	percent := int(math.Round(min(1, max(0, dimension.Value(power))/max(1, scale)) * 100))
 	lines := []string{
 		fmt.Sprintf("%s · %s", subject.Name, dimension.Label),
-		fmt.Sprintf("能力值：%d", value),
-		fmt.Sprintf("相对位置：%d%%", percent),
 	}
+	if subject.IsPlane && power.FormationSize > 1 {
+		lines = append(lines, fmt.Sprintf("统计口径：%d 架标准编队", power.FormationSize))
+	}
+	lines = append(lines, fmt.Sprintf("能力值：%d", value), fmt.Sprintf("相对位置：%d%%", percent))
 	var contributions []objUnit.CombatPowerContribution
 	switch dimension.ID {
 	case "anti_ship":
@@ -243,6 +245,9 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale f
 		contributions = power.Details.AntiShipContributions
 	case "anti_air":
 		lines = append(lines, fmt.Sprintf("有效对空输出：%.1f /s", power.Details.AntiAirDPS))
+		if subject.IsPlane {
+			lines = append(lines, "仅用于图鉴评估，不改变实战目标选择")
+		}
 		contributions = power.Details.AntiAirContributions
 	case "survival":
 		lines = append(lines, fmt.Sprintf("有效耐久：%.0f", power.Details.EffectiveHP))

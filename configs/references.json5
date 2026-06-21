@@ -162,8 +162,12 @@
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x20"},
     ],
     description: "大凤号航空母舰是日本海军在第二次世界大战期间建成的装甲航空母舰，也是日本第一艘采用装甲飞行甲板的正规大型航空母舰。该舰于 1944 年 3 月服役，同年 6 月参加马里亚纳海战时遭美国潜艇大青花鱼号鱼雷命中，随后因航空燃油蒸气爆炸而沉没。",
-    author: "未知",
+    author: "BB1987",
     links: [
+      {
+        name: "Shipbucket - IJN Taiho (1944)",
+        url: "https://www.shipbucket.com/drawings/4329"
+      },
       {
         name: "维基百科 - 大凤号航空母舰",
         url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%B3%B3%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"

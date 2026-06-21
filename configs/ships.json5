@@ -4,7 +4,6 @@
     // Duck
     name: "duck",
     nation: "special",
-    displayName: "Duck",
     type: "default",
     typeAbbr: "Duck",
     totalHP: 150000,
@@ -107,7 +106,6 @@
     // WaterDrop
     name: "waterdrop",
     nation: "special",
-    displayName: "WaterDrop",
     type: "default",
     typeAbbr: "WaterDrop",
     totalHP: 1,
@@ -137,7 +135,6 @@
     // 翻车鱼
     name: "molamola",
     nation: "special",
-    displayName: "翻车鱼",
     type: "default",
     typeAbbr: "Molamola",
     totalHP: 5000000,
@@ -156,7 +153,6 @@
     // 自由轮
     name: "liberty",
     nation: "us",
-    displayName: "自由轮",
     type: "cargo",
     typeAbbr: "Cargo",
     totalHP: 7500,
@@ -244,7 +240,6 @@
     // 约克城
     name: "yorktown",
     nation: "us",
-    displayName: "约克城",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     totalHP: 25900,
@@ -595,7 +590,6 @@
     // 萨拉托加
     name: "saratoga",
     nation: "us",
-    displayName: "萨拉托加",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     totalHP: 50000,
@@ -940,7 +934,6 @@
     // 白龙
     name: "hakuryu",
     nation: "jp",
-    displayName: "白龙",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1945,
@@ -1191,7 +1184,6 @@
     // 大凤
     name: "taiho",
     nation: "jp",
-    displayName: "大凤",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1944,
@@ -1374,7 +1366,6 @@
     // 信浓
     name: "shinano",
     nation: "jp",
-    displayName: "信浓",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1944,
@@ -1865,7 +1856,6 @@
     // 赤城
     name: "akagi",
     nation: "jp",
-    displayName: "赤城",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1941,
@@ -2091,7 +2081,6 @@
     // 加贺
     name: "kaga",
     nation: "jp",
-    displayName: "加贺",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1942,
@@ -2373,7 +2362,6 @@
     // 苍龙
     name: "soryu",
     nation: "jp",
-    displayName: "苍龙",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1941,
@@ -2541,7 +2529,6 @@
     // 飞龙
     name: "hiryu",
     nation: "jp",
-    displayName: "飞龙",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1942,
@@ -2709,7 +2696,6 @@
     // 翔鹤
     name: "shokaku",
     nation: "jp",
-    displayName: "翔鹤",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1941,
@@ -2891,7 +2877,6 @@
     // 飞鹰
     name: "hiyo",
     nation: "jp",
-    displayName: "飞鹰",
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1942,
@@ -3031,7 +3016,6 @@
     // 龙骧
     name: "ryujo",
     nation: "jp",
-    displayName: "龙骧",
     type: "aircraft_carrier",
     typeAbbr: "CVL",
     year: 1941,
@@ -3153,7 +3137,6 @@
     // 祥凤
     name: "shoho",
     nation: "jp",
-    displayName: "祥凤",
     type: "aircraft_carrier",
     typeAbbr: "CVL",
     year: 1942,
@@ -3247,7 +3230,6 @@
     // 千岁
     name: "chitose",
     nation: "jp",
-    displayName: "千岁",
     type: "aircraft_carrier",
     typeAbbr: "CVL",
     year: 1943,
@@ -3383,7 +3365,6 @@
     // 大鹰
     name: "taiyo",
     nation: "jp",
-    displayName: "大鹰",
     type: "aircraft_carrier",
     typeAbbr: "CVE",
     year: 1943,
@@ -3519,7 +3500,6 @@
     // 凤翔
     name: "hosho",
     nation: "jp",
-    displayName: "凤翔",
     type: "aircraft_carrier",
     typeAbbr: "CVL",
     year: 1941,
@@ -3629,7 +3609,6 @@
     // 衣阿华
     name: "lowa",
     nation: "us",
-    displayName: "衣阿华",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 58000,
@@ -4194,7 +4173,6 @@
     // 蒙大拿
     name: "montana",
     nation: "us",
-    displayName: "蒙大拿",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 70500,
@@ -4962,7 +4940,6 @@
     // 南达科他
     name: "south_dakota",
     nation: "us",
-    displayName: "南达科他",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 46000,
@@ -5583,7 +5560,6 @@
     // 列克星敦
     name: "lexington",
     nation: "us",
-    displayName: "列克星敦",
     type: "battleship",
     typeAbbr: "BC",
     totalHP: 58400,
@@ -6058,7 +6034,6 @@
     // 金刚
     name: "kongo",
     nation: "jp",
-    displayName: "金刚",
     type: "battleship",
     typeAbbr: "BC",
     year: 1942,
@@ -6421,7 +6396,6 @@
     // 扶桑
     name: "fuso",
     nation: "jp",
-    displayName: "扶桑",
     type: "battleship",
     typeAbbr: "BB",
     year: 1942,
@@ -6798,7 +6772,6 @@
     // 伊势
     name: "ise",
     nation: "jp",
-    displayName: "伊势",
     type: "battleship",
     typeAbbr: "BB",
     year: 1944,
@@ -7225,7 +7198,6 @@
     // 长门
     name: "nagato",
     nation: "jp",
-    displayName: "长门",
     type: "battleship",
     typeAbbr: "BB",
     year: 1944,
@@ -7690,7 +7662,6 @@
     // 大和
     name: "yamato",
     nation: "jp",
-    displayName: "大和",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 72500,
@@ -8171,7 +8142,6 @@
     // 萨摩
     name: "satsuma",
     nation: "jp",
-    displayName: "萨摩",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 84000,
@@ -8591,7 +8561,6 @@
     // 江户
     name: "edo",
     nation: "jp",
-    displayName: "江户",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 105000,
@@ -9166,7 +9135,6 @@
     // 俾斯麦
     name: "bismarck",
     nation: "de",
-    displayName: "俾斯麦",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 52600,
@@ -9316,7 +9284,6 @@
     // 沙恩霍特斯
     name: "scharnhorst",
     nation: "de",
-    displayName: "沙恩霍特斯",
     type: "battleship",
     typeAbbr: "BC",
     totalHP: 38100,
@@ -9482,7 +9449,6 @@
     // 吕佐
     name: "lutzow",
     nation: "de",
-    displayName: "吕佐",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 16200,
@@ -9614,7 +9580,6 @@
     // 胡德
     name: "hood",
     nation: "uk",
-    displayName: "胡德",
     type: "battleship",
     typeAbbr: "BC",
     totalHP: 47430,
@@ -9850,7 +9815,6 @@
     // 纳尔逊
     name: "nelson",
     nation: "uk",
-    displayName: "纳尔逊",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 38000,
@@ -10480,7 +10444,6 @@
     // 狮
     name: "lion",
     nation: "uk",
-    displayName: "狮",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 69500,
@@ -10823,7 +10786,6 @@
     // 雌狮
     name: "lioness",
     nation: "uk",
-    displayName: "雌狮",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 55000,
@@ -11031,7 +10993,6 @@
     // 乔治五世
     name: "king_george_v",
     nation: "uk",
-    displayName: "乔治五世",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 43780,
@@ -11330,7 +11291,6 @@
     // 厌战
     name: "warspite",
     nation: "uk",
-    displayName: "厌战",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 37000,
@@ -11468,7 +11428,6 @@
     // 虎
     name: "tiger",
     nation: "uk",
-    displayName: "虎",
     type: "battleship",
     typeAbbr: "BC",
     totalHP: 33600,
@@ -11635,7 +11594,6 @@
     // 苏联
     name: "soviet_union",
     nation: "su",
-    displayName: "苏联",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 67370,
@@ -11836,7 +11794,6 @@
     // 苏联（纳尔逊型）
     name: "soviet_union_nelsonski",
     nation: "su",
-    displayName: "苏联（纳尔逊型）",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 58200,
@@ -12016,7 +11973,6 @@
     // 克里姆林
     name: "kremlin",
     nation: "su",
-    displayName: "克里姆林",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 81150,
@@ -12371,7 +12327,6 @@
     // 光荣
     name: "slava",
     nation: "su",
-    displayName: "光荣",
     type: "battleship",
     typeAbbr: "BB",
     totalHP: 105300,
@@ -12679,7 +12634,6 @@
     // 亚特兰大
     name: "atlanta",
     nation: "us",
-    displayName: "亚特兰大",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 7400,
@@ -12861,7 +12815,6 @@
     // 阿拉斯加（改）
     name: "alaska_kai",
     nation: "us",
-    displayName: "阿拉斯加（改）",
     type: "cruiser",
     typeAbbr: "CB",
     totalHP: 42800,
@@ -13377,7 +13330,6 @@
     // 长滩
     name: "long_beach",
     nation: "us",
-    displayName: "长滩",
     type: "cruiser",
     typeAbbr: "CGN",
     totalHP: 16600,
@@ -13431,7 +13383,6 @@
     // 长滩（D 型）
     name: "long_beach_scheme_D",
     nation: "us",
-    displayName: "长滩（D 型）",
     type: "cruiser",
     typeAbbr: "CGN",
     totalHP: 11300,
@@ -13485,7 +13436,6 @@
     // 彭萨科拉
     name: "pensacola",
     nation: "us",
-    displayName: "彭萨科拉",
     type: "cruiser",
     typeAbbr: "CA",
     year: 1942,
@@ -13666,7 +13616,6 @@
     // 北安普顿
     name: "northampton",
     nation: "us",
-    displayName: "北安普顿",
     type: "cruiser",
     typeAbbr: "CA",
     year: 1942,
@@ -13832,7 +13781,6 @@
     // 波特兰
     name: "portland",
     nation: "us",
-    displayName: "波特兰",
     type: "cruiser",
     typeAbbr: "CA",
     year: 1942,
@@ -14069,7 +14017,6 @@
     // 阿斯托里亚
     name: "astoria",
     nation: "us",
-    displayName: "阿斯托里亚",
     type: "cruiser",
     typeAbbr: "CA",
     year: 1942,
@@ -14271,7 +14218,6 @@
     // 得梅因
     name: "des_moines",
     nation: "us",
-    displayName: "得梅因",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 21269,
@@ -15153,7 +15099,6 @@
     // 古鹰
     name: "furutaka",
     nation: "jp",
-    displayName: "古鹰",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 10630,
@@ -15286,7 +15231,6 @@
     // 青叶
     name: "aoba",
     nation: "jp",
-    displayName: "青叶",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 11660,
@@ -15461,7 +15405,6 @@
     // 羽黑
     name: "haguro",
     nation: "jp",
-    displayName: "羽黑",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 15479,
@@ -15748,7 +15691,6 @@
     // 爱宕
     name: "atago",
     nation: "jp",
-    displayName: "爱宕",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 15718,
@@ -16119,7 +16061,6 @@
     // 最上
     name: "mogami",
     nation: "jp",
-    displayName: "最上",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 13600,
@@ -16448,7 +16389,6 @@
     // 铃谷
     name: "suzuya",
     nation: "jp",
-    displayName: "铃谷",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 13887,
@@ -16763,7 +16703,6 @@
     // 利根
     name: "tone",
     nation: "jp",
-    displayName: "利根",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 13200,
@@ -17099,7 +17038,6 @@
     // 天龙
     name: "tenryu",
     nation: "jp",
-    displayName: "天龙",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 4420,
@@ -17189,7 +17127,6 @@
     // 球磨
     name: "kuma",
     nation: "jp",
-    displayName: "球磨",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 5500,
@@ -17321,7 +17258,6 @@
     // 北上
     name: "kitakami",
     nation: "jp",
-    displayName: "北上",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 7041,
@@ -17664,7 +17600,6 @@
     // 大井
     name: "ooi",
     nation: "jp",
-    displayName: "大井",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 6900,
@@ -17803,7 +17738,6 @@
     // 五十铃
     name: "isuzu",
     nation: "jp",
-    displayName: "五十铃",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 6260,
@@ -18019,7 +17953,6 @@
     // 阿武隈
     name: "abukuma",
     nation: "jp",
-    displayName: "阿武隈",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 5925,
@@ -18236,7 +18169,6 @@
     // 神通
     name: "shintsu",
     nation: "jp",
-    displayName: "神通",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 5595,
@@ -18389,7 +18321,6 @@
     // 夕张
     name: "yubari",
     nation: "jp",
-    displayName: "夕张",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 4447,
@@ -18500,7 +18431,6 @@
     // 矢矧
     name: "yahagi",
     nation: "jp",
-    displayName: "矢矧",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 7710,
@@ -18813,7 +18743,6 @@
     // 大淀
     name: "ooyodo",
     nation: "jp",
-    displayName: "大淀",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 10990,
@@ -18966,7 +18895,6 @@
     // 欧根亲王
     name: "prinz_eugen",
     nation: "de",
-    displayName: "欧根亲王",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 18400,
@@ -19090,7 +19018,6 @@
     // 莱比锡
     name: "leipzig",
     nation: "de",
-    displayName: "莱比锡",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 8680,
@@ -19187,7 +19114,6 @@
     // 柴郡
     name: "cheshire",
     nation: "uk",
-    displayName: "柴郡",
     type: "cruiser",
     typeAbbr: "CA",
     totalHP: 20100,
@@ -19437,7 +19363,6 @@
     // 伍斯特
     name: "worcester",
     nation: "uk",
-    displayName: "伍斯特",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 21000,
@@ -19582,7 +19507,6 @@
     // 维克斯
     name: "vickers",
     nation: "uk",
-    displayName: "维克斯",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 8100,
@@ -19694,7 +19618,6 @@
     // K-25
     name: "k_25",
     nation: "uk",
-    displayName: "K-25",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 8500,
@@ -19849,7 +19772,6 @@
     // 斯维尔德洛夫
     name: "sverdlov",
     nation: "su",
-    displayName: "斯维尔德洛夫",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 16640,
@@ -19959,7 +19881,6 @@
     // 基洛夫
     name: "kirov",
     nation: "su",
-    displayName: "基洛夫",
     type: "cruiser",
     typeAbbr: "CL",
     totalHP: 9400,
@@ -20064,7 +19985,6 @@
     // 波特
     name: "porter",
     nation: "us",
-    displayName: "波特",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 1850,
@@ -20131,7 +20051,6 @@
     // 莫雷
     name: "maury",
     nation: "us",
-    displayName: "莫雷",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 2286,
@@ -20212,7 +20131,6 @@
     // 哈曼
     name: "hammann",
     nation: "us",
-    displayName: "哈曼",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 2246,
@@ -20279,7 +20197,6 @@
     // 杜威
     name: "dewey",
     nation: "us",
-    displayName: "杜威",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 2100,
@@ -20401,7 +20318,6 @@
     // 朝潮
     name: "asashio",
     nation: "jp",
-    displayName: "朝潮",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 2635,
@@ -20461,7 +20377,6 @@
     // 夕云
     name: "yugumo",
     nation: "jp",
-    displayName: "夕云",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 2520,
@@ -20521,7 +20436,6 @@
     // 雪风
     name: "yukikaze",
     nation: "jp",
-    displayName: "雪风",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 2490,
@@ -20582,7 +20496,6 @@
     // Z-11
     name: "z_11",
     nation: "de",
-    displayName: "Z-11",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 3190,
@@ -20657,7 +20570,6 @@
     // V
     name: "v",
     nation: "uk",
-    displayName: "V",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 2200,
@@ -20724,7 +20636,6 @@
     // Y
     name: "y",
     nation: "uk",
-    displayName: "Y",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 3100,
@@ -20777,7 +20688,6 @@
     // 热心
     name: "ardent",
     nation: "uk",
-    displayName: "热心",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 1810,
@@ -20860,7 +20770,6 @@
     // 快速
     name: "rapid",
     nation: "su",
-    displayName: "快速",
     type: "destroyer",
     typeAbbr: "DD",
     totalHP: 3230,
@@ -20915,7 +20824,6 @@
     // 九江
     name: "jiujiang",
     nation: "cn",
-    displayName: "九江",
     type: "frigate",
     typeAbbr: "FF",
     totalHP: 1702,
@@ -21020,7 +20928,6 @@
     // PT-791
     name: "PT_791",
     nation: "us",
-    displayName: "PT-791",
     type: "torpedo_boat",
     typeAbbr: "TB",
     totalHP: 48,
@@ -21082,7 +20989,6 @@
     // T-14
     name: "T_14",
     nation: "jp",
-    displayName: "T-14",
     type: "torpedo_boat",
     typeAbbr: "TB",
     totalHP: 18,
@@ -21129,7 +21035,6 @@
     // S-100
     name: "S_100",
     nation: "de",
-    displayName: "S-100",
     type: "torpedo_boat",
     typeAbbr: "TB",
     totalHP: 95,
@@ -21191,7 +21096,6 @@
     // MTB-77
     name: "MTB_77",
     nation: "uk",
-    displayName: "MTB-77",
     type: "torpedo_boat",
     typeAbbr: "TB",
     totalHP: 45,
@@ -21238,7 +21142,6 @@
     // P-6
     name: "P_6",
     nation: "su",
-    displayName: "P-6",
     type: "torpedo_boat",
     typeAbbr: "TB",
     totalHP: 66,
@@ -21292,7 +21195,6 @@
     // 仁慈
     name: "mercy",
     nation: "us",
-    displayName: "仁慈",
     type: "hospital",
     typeAbbr: "HS",
     totalHP: 70473,
@@ -21310,7 +21212,6 @@
     // 和平方舟
     name: "peace_ark",
     nation: "cn",
-    displayName: "和平方舟",
     type: "hospital",
     typeAbbr: "HS",
     totalHP: 14300,
@@ -21328,7 +21229,6 @@
     // 不列颠
     name: "britannic",
     nation: "uk",
-    displayName: "不列颠",
     type: "hospital",
     typeAbbr: "HS",
     totalHP: 53848,
