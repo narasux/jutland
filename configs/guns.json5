@@ -208,6 +208,19 @@
     antiShip: true,
     antiAircraft: false
   },
+  // 美国海军 US/203/55/3/MK15
+  // 三联装舰炮（巴尔的摩，俄勒冈城级 Mark 15）
+  {
+    name: "US/203/55/3/MK15",
+    bulletName: "US/GB/203/1939",
+    bulletCount: 3,
+    reloadTime: 6.2,
+    range: 29,
+    bulletSpread: 90,
+    bulletSpeed: 820,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 美国海军 US/203/55/3/MK16
   // 三联装速射舰炮（得梅因级 Mark 16）
   {
@@ -401,7 +414,6 @@
     antiShip: true,
     antiAircraft: true
   },
-
   // 日本海军 九八式 51cm 三联装炮
   {
     name: "JP/510/45/3/Type98",

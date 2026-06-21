@@ -1397,7 +1397,7 @@
       {label: "速度", value: "32.7 节"},
       {label: "费用", value: "$115 / 12s"},
       {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "10%"}
+      {label: "垂直减伤", value: "15%"}
     ],
     armaments: [
       {label: "主炮", value: "3x3 203mm/55 Mk12"},
@@ -1511,6 +1511,66 @@
       {
         name: "Wikipedia - USS Des Moines (CA-134)",
         url: "https://en.wikipedia.org/wiki/USS_Des_Moines_(CA-134)"
+      }
+    ]
+  },
+  // 美国海军
+  {
+    name: "baltimore",
+    specs: [
+      {label: "类型", value: "CA / 重巡洋舰"},
+      {label: "吨位", value: "17031"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$200 / 20s"},
+      {label: "水平减伤", value: "32%"},
+      {label: "垂直减伤", value: "18%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/55 Mk15"},
+      {label: "高平炮", value: "6x2 127mm/38 Mk12"},
+      {label: "高炮", value: "12x4 40mm/60"},
+      {label: "高炮", value: "22x1 20mm/70"},
+    ],
+    description: "巴尔的摩号（USS Baltimore, CA-68）是美国海军巴尔的摩级重巡洋舰首舰，1943 年 4 月服役。本级舰是美国海军在二战期间建造数量最多的重巡洋舰（共完工 14 艘），也是最后一级条约型重巡洋舰。巴尔的摩号在太平洋战场表现活跃，参与了对菲律宾、台湾、冲绳和日本本土的多次攻击行动，曾担任第 58 特混舰队的护航旗舰，1946 年退役封存，1972 年拆解。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Baltimore Class as Finished 1944",
+        url: "https://www.deviantart.com/tzoli/art/Baltimore-Class-as-Finished-1944-972681112"
+      },
+      {
+        name: "Wikipedia - USS Baltimore (CA-68)",
+        url: "https://en.wikipedia.org/wiki/USS_Baltimore_(CA-68)"
+      }
+    ]
+  },
+  // 美国海军
+  {
+    name: "oregon_city",
+    specs: [
+      {label: "类型", value: "CA / 重巡洋舰"},
+      {label: "吨位", value: "17700"},
+      {label: "速度", value: "33 节"},
+      {label: "费用", value: "$205 / 20s"},
+      {label: "水平减伤", value: "32%"},
+      {label: "垂直减伤", value: "18%"}
+    ],
+    armaments: [
+      {label: "主炮", value: "3x3 203mm/55 Mk15"},
+      {label: "高平炮", value: "6x2 127mm/38 Mk12"},
+      {label: "高炮", value: "11x4 + 2x2 40mm/60"},
+      {label: "高炮", value: "16x2 20mm/70"},
+    ],
+    description: "俄勒冈城号（USS Oregon City, CA-122）是美国海军俄勒冈城级重巡洋舰首舰，1946 年 2 月服役。本级舰原计划建造 3 艘，最终仅俄勒冈城号 1 艘完工入役（另 2 艘改建为指挥舰）。俄勒冈城级是巴尔的摩级的改进型，最显著的区别是采用单烟囱设计，将两个烟囱合并为一个，改善了防空炮射界。俄勒冈城号服役时间虽短（仅 22 个月便于 1947 年 12 月退役封存），但其间曾担任第四舰队旗舰，1973 年拆解。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Oregon City Class as Finished 1946",
+        url: "https://www.deviantart.com/tzoli/art/Oregon-City-Class-as-Finished-1946-973169657"
+      },
+      {
+        name: "Wikipedia - USS Oregon City (CA-122)",
+        url: "https://en.wikipedia.org/wiki/USS_Oregon_City"
       }
     ]
   },

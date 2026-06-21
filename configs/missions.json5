@@ -899,13 +899,15 @@
         providedShipNames: [
           "alaska_kai",
           "des_moines",
-          "atlanta",
-          "long_beach",
-          "long_beach_scheme_D",
+          "oregon_city",
+          "baltimore",
           "astoria",
           "northampton",
           "portland",
           "pensacola",
+          "atlanta",
+          "long_beach",
+          "long_beach_scheme_D",
           "furutaka",
           "aoba",
           "haguro",
@@ -1299,6 +1301,18 @@
       {
         name: "des_moines",
         pos: [42, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "oregon_city",
+        pos: [41, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "baltimore",
+        pos: [42, 28],
         rotation: 90,
         belongPlayer: "HA"
       },
