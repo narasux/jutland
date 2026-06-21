@@ -282,11 +282,6 @@ func NewPlane(
 	return &p
 }
 
-// GetAllPlaneNames 获取所有飞机名称，顺序与配置文件一致。
-func GetAllPlaneNames() []string {
-	return AllPlaneNames
-}
-
 // GetPlaneTargetObjType 获取飞机攻击目标类型
 // FIXME 目前这样很暴力，会导致战斗机只能打飞机，轰炸机只能打舰船
 func GetPlaneTargetObjType(name string) object.Type {

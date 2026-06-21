@@ -196,8 +196,6 @@
   {
     // 战舰名称（不可重复）
     name: "atlanta",
-    // 展示用名称
-    displayName: "亚特兰大",
     // 国籍，用于图鉴筛选，可选值：
     // us 美国 / jp 日本 / de 德国 / uk 英国
     // su 苏联 / cn 中国 / special 特殊或中立单位

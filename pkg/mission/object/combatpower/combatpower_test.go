@@ -2,6 +2,7 @@ package combatpower
 
 import (
 	"math"
+	"strconv"
 	"testing"
 
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -102,7 +103,7 @@ func TestEffectiveHP(t *testing.T) {
 	}
 }
 
-func TestPlaneTargetRestriction(t *testing.T) {
+func TestPlaneFormationAndWeaponCapabilities(t *testing.T) {
 	bullets := testBullets("gun", 10, 0)
 	gun := &objUnit.Gun{
 		BulletName: "gun", BulletCount: 1, ReloadTime: 1, Range: 10,
@@ -119,11 +120,28 @@ func TestPlaneTargetRestriction(t *testing.T) {
 	fighter := base
 	fighter.Type = objUnit.PlaneTypeFighter
 	fighterPower := CalculatePlane(&fighter, bullets)
+	if fighterPower.FormationSize != planeFormationSize {
+		t.Fatalf("fighter formation size = %d, want %d", fighterPower.FormationSize, planeFormationSize)
+	}
 	if fighterPower.AntiShip != 0 || fighterPower.AntiAir <= 0 {
 		t.Fatalf("fighter power = %+v, want only anti-air power", fighterPower)
 	}
+	wantEHP := planeEHP(&fighter) * planeFormationSize
+	if math.Abs(fighterPower.Details.EffectiveHP-wantEHP) > 1e-9 {
+		t.Fatalf("fighter formation EHP = %v, want %v", fighterPower.Details.EffectiveHP, wantEHP)
+	}
+	wantAntiAirDPS := gunDPS(gun, bullets) * gunEffectiveness(gun, true, true) * planeFormationSize
+	if math.Abs(fighterPower.Details.AntiAirDPS-wantAntiAirDPS) > 1e-9 {
+		t.Fatalf("fighter formation anti-air DPS = %v, want %v", fighterPower.Details.AntiAirDPS, wantAntiAirDPS)
+	}
+	if got, want := fighterPower.Survival, nonNegativeRound(math.Sqrt(wantEHP)); got != want {
+		t.Fatalf("fighter survival = %d, want %d", got, want)
+	}
 	if fighterPower.Projection <= 0 || fighterPower.Burst <= 0 || len(fighterPower.Details.AntiAirContributions) != 1 {
 		t.Fatalf("fighter extended dimensions not populated: %+v", fighterPower)
+	}
+	if got := fighterPower.Details.AntiAirContributions[0].Value; math.Abs(got-wantAntiAirDPS) > 1e-9 {
+		t.Fatalf("fighter contribution = %v, want %v", got, wantAntiAirDPS)
 	}
 	if fighterPower.Details.MaxProjectionDistanceKM != 1500 {
 		t.Fatalf("fighter projection distance = %.0f km, want 1500", fighterPower.Details.MaxProjectionDistanceKM)
@@ -132,38 +150,62 @@ func TestPlaneTargetRestriction(t *testing.T) {
 	bomber := base
 	bomber.Type = objUnit.PlaneTypeDiveBomber
 	bomberPower := CalculatePlane(&bomber, bullets)
-	if bomberPower.AntiShip <= 0 || bomberPower.AntiAir != 0 {
-		t.Fatalf("bomber power = %+v, want only anti-ship power", bomberPower)
+	if bomberPower.AntiShip <= 0 || bomberPower.AntiAir <= 0 {
+		t.Fatalf("bomber power = %+v, want weapon-based anti-ship and anti-air power", bomberPower)
+	}
+
+	torpedoBomber := base
+	torpedoBomber.Type = objUnit.PlaneTypeTorpedoBomber
+	torpedoBomberPower := CalculatePlane(&torpedoBomber, bullets)
+	if torpedoBomberPower.AntiShip <= 0 || torpedoBomberPower.AntiAir <= 0 {
+		t.Fatalf("torpedo bomber power = %+v, want weapon-based anti-ship and anti-air power", torpedoBomberPower)
 	}
 }
 
-func TestCarrierAddsFullAirWingWithAvailabilityFactor(t *testing.T) {
+func TestCarrierScalesStandardFormationByAircraftCount(t *testing.T) {
 	plane := &objUnit.Plane{
 		Name: "plane", Range: 20,
 		CombatPower: objUnit.CombatPowerInfo{
-			Total: 85, AntiShip: 100, AntiAir: 50,
+			FormationSize: 10, Total: 85, AntiShip: 100, AntiAir: 50,
 			Details: objUnit.CombatPowerDetails{
 				AntiShipDPS: 10, AntiAirDPS: 5, BurstDamage: 100,
 			},
 		},
 	}
-	carrier := &objUnit.BattleShip{
-		TotalHP:  1000,
-		Aircraft: objUnit.ShipAircraft{Groups: []objUnit.PlaneGroup{{Name: "plane", MaxCount: 10}}},
+	tests := []struct {
+		count                   int64
+		wantShip, wantAir       int
+		wantAviation, wantTotal int
+		wantDPS                 float64
+	}{
+		{count: 5, wantShip: 35, wantAir: 18, wantAviation: 30, wantTotal: 30, wantDPS: 3.5},
+		{count: 10, wantShip: 70, wantAir: 35, wantAviation: 60, wantTotal: 60, wantDPS: 7},
+		{count: 20, wantShip: 140, wantAir: 70, wantAviation: 119, wantTotal: 119, wantDPS: 14},
 	}
 
-	power := CalculateShip(carrier, map[string]*objUnit.Plane{"plane": plane}, nil)
-	if power.Hull != 0 || power.AntiShip != 700 || power.AntiAir != 350 {
-		t.Fatalf("carrier power = %+v, want 70%% of ten-plane wing", power)
-	}
-	if power.Aviation != 595 || power.Total != 595 {
-		t.Fatalf("carrier totals = %+v, want aviation and total 595", power)
-	}
-	if power.Projection != 200 || power.Burst <= 0 || len(power.Details.BurstContributions) != 1 {
-		t.Fatalf("carrier projection, burst or contribution details missing: %+v", power)
-	}
-	if power.Details.MaxProjectionDistanceKM != 288 {
-		t.Fatalf("carrier projection distance = %.0f km, want 288", power.Details.MaxProjectionDistanceKM)
+	for _, tt := range tests {
+		t.Run(strconv.FormatInt(tt.count, 10), func(t *testing.T) {
+			carrier := &objUnit.BattleShip{
+				TotalHP:  1000,
+				Aircraft: objUnit.ShipAircraft{Groups: []objUnit.PlaneGroup{{Name: "plane", MaxCount: tt.count}}},
+			}
+			power := CalculateShip(carrier, map[string]*objUnit.Plane{"plane": plane}, nil)
+			if power.Hull != 0 || power.AntiShip != tt.wantShip || power.AntiAir != tt.wantAir {
+				t.Fatalf("carrier power = %+v, want anti-ship %d and anti-air %d", power, tt.wantShip, tt.wantAir)
+			}
+			if power.Aviation != tt.wantAviation || power.Total != tt.wantTotal {
+				t.Fatalf("carrier totals = %+v, want aviation %d and total %d", power, tt.wantAviation, tt.wantTotal)
+			}
+			if math.Abs(power.Details.AntiShipDPS-tt.wantDPS) > 1e-9 {
+				t.Fatalf("carrier anti-ship DPS = %v, want %v", power.Details.AntiShipDPS, tt.wantDPS)
+			}
+			if power.Projection != 200 || power.Burst <= 0 || len(power.Details.BurstContributions) != 1 {
+				t.Fatalf("carrier projection, burst or contribution details missing: %+v", power)
+			}
+			if power.Details.MaxProjectionDistanceKM != 288 {
+				t.Fatalf("carrier projection distance = %.0f km, want 288", power.Details.MaxProjectionDistanceKM)
+			}
+		})
 	}
 }
 

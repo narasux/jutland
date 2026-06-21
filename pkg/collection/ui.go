@@ -360,15 +360,11 @@ func (c *CollectionUI) handleToolbarClick(point image.Point) {
 		return
 	}
 	if button := c.tabButtons[collectionCategoryShip]; button != nil && point.In(button.GetWidget().Rect) {
-		c.category = collectionCategoryShip
-		c.openDropdown = collectionDropdownNone
-		c.pendingRebuild = true
+		c.selectCategory(collectionCategoryShip)
 		return
 	}
 	if button := c.tabButtons[collectionCategoryPlane]; button != nil && point.In(button.GetWidget().Rect) {
-		c.category = collectionCategoryPlane
-		c.openDropdown = collectionDropdownNone
-		c.pendingRebuild = true
+		c.selectCategory(collectionCategoryPlane)
 		return
 	}
 	if c.nationCombo != nil && point.In(c.nationCombo.GetWidget().Rect) {
@@ -520,16 +516,21 @@ func (c *CollectionUI) dropdownListRect(dropdown collectionDropdown) image.Recta
 }
 
 func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
-	// hover 提示与下拉列表都在共享 UI 之后绘制，保证舰船和飞机工具栏视觉一致。
-	if rect, ok := c.hoveredComboRect(image.Pt(ebiten.CursorPosition())); ok {
-		vector.FillRect(
-			screen, float32(rect.Min.X), float32(rect.Min.Y), float32(rect.Dx()), float32(rect.Dy()),
-			color.RGBA{R: 145, G: 126, B: 92, A: 42}, false,
+	// hover 提示与下拉列表都在共享 UI 之后绘制，保证舰船和战机工具栏视觉一致。
+	point := image.Pt(ebiten.CursorPosition())
+	if rect, label, ok := c.hoveredTab(point); ok {
+		c.drawToolbarHover(screen, rect)
+		fontSize := c.metrics.ToolbarFont
+		textWidth := estimateCollectionTextWidth(label, fontSize)
+		c.drawer.drawText(
+			screen, label,
+			float64(rect.Min.X)+(float64(rect.Dx())-textWidth)/2,
+			float64(rect.Min.Y)+(float64(rect.Dy())-fontSize)/2,
+			fontSize, font.Kai, colorx.White,
 		)
-		vector.StrokeRect(
-			screen, float32(rect.Min.X), float32(rect.Min.Y), float32(rect.Dx()), float32(rect.Dy()),
-			1, color.RGBA{R: 190, G: 176, B: 148, A: 125}, false,
-		)
+	}
+	if rect, ok := c.hoveredComboRect(point); ok {
+		c.drawToolbarHover(screen, rect)
 	}
 	if c.openDropdown == collectionDropdownNone {
 		return
@@ -554,6 +555,35 @@ func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
 			float64(rowRect.Min.Y)+6*c.metrics.Scale, c.metrics.ToolbarFont, font.Kai, colorx.White,
 		)
 	}
+}
+
+func (c *CollectionUI) drawToolbarHover(screen *ebiten.Image, rect image.Rectangle) {
+	// 分类按钮和下拉框使用同一层轻量提示，避免默认高亮颜色过强或不同容器表现不一致。
+	if rect.Empty() {
+		return
+	}
+	vector.FillRect(
+		screen, float32(rect.Min.X), float32(rect.Min.Y), float32(rect.Dx()), float32(rect.Dy()),
+		color.RGBA{R: 145, G: 126, B: 92, A: 42}, false,
+	)
+	vector.StrokeRect(
+		screen, float32(rect.Min.X), float32(rect.Min.Y), float32(rect.Dx()), float32(rect.Dy()),
+		1, color.RGBA{R: 190, G: 176, B: 148, A: 125}, false,
+	)
+}
+
+func (c *CollectionUI) hoveredTab(point image.Point) (image.Rectangle, string, bool) {
+	// 当前分类已经有选中底色，只为另一个分类绘制 hover，保证舰船页和战机页行为对称。
+	for category, button := range c.tabButtons {
+		if category == c.category || button == nil {
+			continue
+		}
+		rect := button.GetWidget().Rect
+		if !rect.Empty() && point.In(rect) {
+			return rect, collectionCategoryLabel(category), true
+		}
+	}
+	return image.Rectangle{}, "", false
 }
 
 func (c *CollectionUI) hoveredComboRect(point image.Point) (image.Rectangle, bool) {
@@ -682,8 +712,8 @@ func (c *CollectionUI) buildToolbar(rect image.Rectangle) *widget.Container {
 			}),
 		)),
 	)
-	shipTab := c.newTabButton("舰船", collectionCategoryShip)
-	planeTab := c.newTabButton("飞机", collectionCategoryPlane)
+	shipTab := c.newTabButton(collectionCategoryShip)
+	planeTab := c.newTabButton(collectionCategoryPlane)
 	c.tabButtons[collectionCategoryShip] = shipTab
 	c.tabButtons[collectionCategoryPlane] = planeTab
 	panel.AddChild(shipTab)
@@ -715,8 +745,8 @@ func (c *CollectionUI) buildPlaneToolbar(rect image.Rectangle) *widget.Container
 			Top: int(math.Round(7 * c.metrics.Scale)), Bottom: int(math.Round(7 * c.metrics.Scale)),
 		}),
 	)))
-	shipTab := c.newTabButton("舰船", collectionCategoryShip)
-	planeTab := c.newTabButton("飞机", collectionCategoryPlane)
+	shipTab := c.newTabButton(collectionCategoryShip)
+	planeTab := c.newTabButton(collectionCategoryPlane)
 	c.tabButtons[collectionCategoryShip] = shipTab
 	c.tabButtons[collectionCategoryPlane] = planeTab
 	c.nationCombo = c.newNationCombo("国籍:", c.planeNation, func(nation objUnit.Nation) {
@@ -746,14 +776,17 @@ func (c *CollectionUI) buildPlaneToolbar(rect image.Rectangle) *widget.Container
 	return panel
 }
 
-func (c *CollectionUI) newTabButton(label string, category collectionCategory) *widget.Button {
+func collectionCategoryLabel(category collectionCategory) string {
+	if category == collectionCategoryPlane {
+		return "战机"
+	}
+	return "舰船"
+}
+
+func (c *CollectionUI) newTabButton(category collectionCategory) *widget.Button {
 	// 标签按钮只是分类切换入口，不携带额外状态。
-	return c.newButton(label, 72, c.category == category, func() {
-		if c.category == category {
-			return
-		}
-		c.category = category
-		c.pendingRebuild = true
+	return c.newButton(collectionCategoryLabel(category), 72, c.category == category, func() {
+		c.selectCategory(category)
 	})
 }
 
@@ -761,11 +794,9 @@ func (c *CollectionUI) newButton(label string, width int, selected bool, clicked
 	// 所有按钮共用同一套视觉参数，区别只在是否处于选中态。
 	face := collectionFace(c.metrics.ToolbarFont, font.Kai)
 	idle := color.RGBA{30, 28, 25, 230}
-	hover := color.RGBA{80, 69, 52, 240}
 	textIdle := colorx.White
 	if selected {
 		idle = color.RGBA{190, 157, 92, 255}
-		hover = idle
 		textIdle = colorx.Black
 	}
 	scale := c.metrics.Scale
@@ -774,11 +805,11 @@ func (c *CollectionUI) newButton(label string, width int, selected bool, clicked
 			int(math.Round(float64(width)*scale)), int(math.Round(34*scale)),
 		)),
 		widget.ButtonOpts.Image(&widget.ButtonImage{
-			Idle: uiImage.NewNineSliceColor(idle), Hover: uiImage.NewNineSliceColor(hover),
+			Idle: uiImage.NewNineSliceColor(idle), Hover: uiImage.NewNineSliceColor(idle),
 			Pressed: uiImage.NewNineSliceColor(color.RGBA{45, 40, 34, 255}),
 		}),
 		widget.ButtonOpts.Text(label, face, &widget.ButtonTextColor{
-			Idle: textIdle, Hover: colorx.Gold, Pressed: colorx.White,
+			Idle: textIdle, Hover: textIdle, Pressed: colorx.White,
 		}),
 		widget.ButtonOpts.TextPadding(&widget.Insets{
 			Left: int(math.Round(12 * scale)), Right: int(math.Round(12 * scale)),
@@ -1007,10 +1038,19 @@ func collectionFace(size float64, source *text.GoTextFaceSource) *text.Face {
 func (c *CollectionUI) toggleCategory() {
 	// 分类切换后保留各自的筛选状态，便于在舰船和飞机页之间来回查看。
 	if c.category == collectionCategoryShip {
-		c.category = collectionCategoryPlane
-	} else {
-		c.category = collectionCategoryShip
+		c.selectCategory(collectionCategoryPlane)
+		return
 	}
+	c.selectCategory(collectionCategoryShip)
+}
+
+func (c *CollectionUI) selectCategory(category collectionCategory) {
+	// 鼠标、EbitenUI 回调和 Tab 键统一走同一状态转换，确保两个分类的切换行为完全一致。
+	c.openDropdown = collectionDropdownNone
+	if c.category == category {
+		return
+	}
+	c.category = category
 	c.pendingRebuild = true
 }
 
@@ -1065,8 +1105,8 @@ func clampFloat(value, minimum, maximum float64) float64 {
 
 func (c *CollectionUI) filteredShips() []*objUnit.BattleShip {
 	// 舰船过滤顺序与“分类 -> 国籍 -> 名称”工具栏一致，方便用户和代码逻辑对应。
-	ships := make([]*objUnit.BattleShip, 0, len(objUnit.GetAllShipNames()))
-	for _, name := range objUnit.GetAllShipNames() {
+	ships := make([]*objUnit.BattleShip, 0, len(objUnit.AllShipNames))
+	for _, name := range objUnit.AllShipNames {
 		ship := objUnit.ShipMap[name]
 		if ship == nil || (c.shipNation != objUnit.NationAll && ship.Nation != c.shipNation) ||
 			!matchShipClass(ship.Type, c.shipClass) {
@@ -1105,8 +1145,8 @@ func matchShipClass(shipType objUnit.ShipType, filter shipClassFilter) bool {
 
 func (c *CollectionUI) filteredPlanes() []*objUnit.Plane {
 	// 飞机页只按国籍和机种筛选，保持列表足够短，便于纵列和横向滚动展示。
-	planes := make([]*objUnit.Plane, 0, len(objUnit.GetAllPlaneNames()))
-	for _, name := range objUnit.GetAllPlaneNames() {
+	planes := make([]*objUnit.Plane, 0, len(objUnit.AllPlaneNames))
+	for _, name := range objUnit.AllPlaneNames {
 		plane := objUnit.PlaneMap[name]
 		if plane == nil || (c.planeNation != objUnit.NationAll && plane.Nation != c.planeNation) ||
 			!matchPlaneType(plane.Type, c.planeType) {
@@ -1237,7 +1277,7 @@ func (c *CollectionUI) drawShipArchive(screen *ebiten.Image, ship *objUnit.Battl
 
 func (c *CollectionUI) currentShipPositionLabel() string {
 	position, total := 0, 0
-	for _, name := range objUnit.GetAllShipNames() {
+	for _, name := range objUnit.AllShipNames {
 		ship := objUnit.ShipMap[name]
 		if ship == nil || (c.shipNation != objUnit.NationAll && ship.Nation != c.shipNation) ||
 			!matchShipClass(ship.Type, c.shipClass) {
@@ -1327,13 +1367,13 @@ func (c *CollectionUI) drawShipCombat(screen *ebiten.Image, ship *objUnit.Battle
 	c.drawRadarScaleNote(
 		screen, card.X+weaponW+12*scale, card.Y+card.H-38*scale,
 		card.W-weaponW-24*scale, c.metrics.RadarLabel,
+		"相对能力（按当前筛选结果 P95 归一化）",
 	)
 }
 
 func (c *CollectionUI) drawRadarScaleNote(
-	screen *ebiten.Image, x, y, width, fontSize float64,
+	screen *ebiten.Image, x, y, width, fontSize float64, note string,
 ) {
-	const note = "相对能力（按当前筛选结果 P95 归一化）"
 	lineHeight := fontSize * 1.25
 	for idx, line := range wrapCollectionText(note, width, fontSize) {
 		if idx >= 2 {
@@ -1554,8 +1594,10 @@ func (c *CollectionUI) drawPlaneCard(
 	}
 	c.drawRadarScaleNote(
 		screen, float64(x)+px(20), float64(radarY)+px(208), float64(width)-px(40), px(14),
+		fmt.Sprintf("%d架标准编队 · 相对能力（按当前筛选结果 P95 归一化）", plane.CombatPower.FormationSize),
 	)
-	c.drawer.drawText(screen, "综合战力", float64(x)+px(22), float64(y+height)-px(48), px(18), font.Kai, color.RGBA{214, 201, 178, 255})
+	formationLabel := fmt.Sprintf("编队战力（%d架）", plane.CombatPower.FormationSize)
+	c.drawer.drawText(screen, formationLabel, float64(x)+px(22), float64(y+height)-px(48), px(18), font.Kai, color.RGBA{214, 201, 178, 255})
 	valueText := fmt.Sprintf("%d", plane.CombatPower.Total)
 	valueSize := px(26)
 	c.drawer.drawText(screen, valueText, float64(x+width)-px(22)-estimateCollectionTextWidth(valueText, valueSize), float64(y+height)-px(52), valueSize, font.JetbrainsMono, colorx.White)

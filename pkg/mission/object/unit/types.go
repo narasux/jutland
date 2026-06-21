@@ -63,16 +63,18 @@ func AvailableNations() []Nation {
 
 // CombatPowerInfo 单位的静态战力评估，仅用于图鉴与平衡分析。
 type CombatPowerInfo struct {
-	Total      int
-	AntiShip   int
-	AntiAir    int
-	Survival   int
-	Mobility   int
-	Projection int
-	Burst      int
-	Hull       int
-	Aviation   int
-	Details    CombatPowerDetails
+	// FormationSize 表示本条战力覆盖的单位数量：舰船为 1，飞机为 10 架标准编队。
+	FormationSize int
+	Total         int
+	AntiShip      int
+	AntiAir       int
+	Survival      int
+	Mobility      int
+	Projection    int
+	Burst         int
+	Hull          int
+	Aviation      int
+	Details       CombatPowerDetails
 }
 
 // CombatPowerDetails 战力各维度的原始值和武器贡献，用于图鉴说明。
