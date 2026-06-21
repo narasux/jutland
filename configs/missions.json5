@@ -821,10 +821,10 @@
     name: "TestAll",
     displayName: "测试-1941",
     initFunds: 10000,
-    initCameraPos: [26, 32],
+    initCameraPos: [12, 34],
     mapName: "darwin",
     maxShipCount: 30,
-    description: "联合舰队司令部 1941 年度全面战备检验——代号「怒海」达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，超过百艘的各型舰艇参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
+    description: "舰队司令部 1941 年度全面战备检验——代号「怒海」，达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，超过百艘的各型舰艇参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
     initReinforcePoints: [
       {
         pos: [1, 15],
@@ -1021,602 +1021,28 @@
       }
     ],
     initShips: [
+      // === SP ===
       {
         name: "duck",
-        pos: [38, 33],
+        pos: [17, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "mercy",
-        pos: [29, 30],
+        pos: [16, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "peace_ark",
-        pos: [28, 31],
+        pos: [15, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "britannic",
-        pos: [29, 32],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "yorktown",
-        pos: [28, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "saratoga",
-        pos: [29, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "hakuryu",
-        pos: [25, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "taiho",
-        pos: [26, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "shinano",
-        pos: [25, 35],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "akagi",
-        pos: [26, 36],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "kaga",
-        pos: [25, 37],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "soryu",
-        pos: [26, 38],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "hiryu",
-        pos: [25, 39],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "shokaku",
-        pos: [26, 40],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "hiyo",
-        pos: [25, 41],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "ryujo",
-        pos: [26, 42],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "shoho",
-        pos: [25, 43],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "chitose",
-        pos: [26, 44],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "taiyo",
-        pos: [25, 45],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "hosho",
-        pos: [26, 46],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "lowa",
-        pos: [35, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "montana",
-        pos: [37, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "south_dakota",
-        pos: [35, 35],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "lexington",
-        pos: [37, 36],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "yamato",
-        pos: [35, 37],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "satsuma",
-        pos: [37, 38],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "edo",
-        pos: [35, 39],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "kongo",
-        pos: [37, 40],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "fuso",
-        pos: [35, 41],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "ise",
-        pos: [37, 42],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "nagato",
-        pos: [35, 43],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "soviet_union",
-        pos: [37, 44],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "soviet_union_nelsonski",
-        pos: [35, 45],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "kremlin",
-        pos: [37, 46],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "slava",
-        pos: [35, 47],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "bismarck",
-        pos: [31, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "scharnhorst",
-        pos: [33, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "lutzow",
-        pos: [31, 35],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "hood",
-        pos: [33, 36],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "nelson",
-        pos: [31, 37],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "lion",
-        pos: [33, 38],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "lioness",
-        pos: [31, 39],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "king_george_v",
-        pos: [33, 40],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "warspite",
-        pos: [31, 41],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "tiger",
-        pos: [33, 42],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // 美国巡洋舰
-      {
-        name: "alaska_kai",
-        pos: [42, 28],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "des_moines",
-        pos: [42, 27],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "oregon_city",
-        pos: [41, 28],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "baltimore",
-        pos: [42, 28],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "atlanta",
-        pos: [41, 29],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "long_beach",
-        pos: [42, 30],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "long_beach_scheme_D",
-        pos: [41, 31],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "astoria",
-        pos: [40, 28],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "northampton",
-        pos: [39, 31],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "portland",
-        pos: [40, 30],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "pensacola",
-        pos: [39, 29],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // 日本巡洋舰
-      {
-        name: "furutaka",
-        pos: [42, 48],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "aoba",
-        pos: [43, 49],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "haguro",
-        pos: [42, 50],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "atago",
-        pos: [43, 51],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "mogami",
-        pos: [40, 48],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "suzuya",
-        pos: [41, 49],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "tone",
-        pos: [40, 50],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "tenryu",
-        pos: [41, 51],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "kuma",
-        pos: [38, 48],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "kitakami",
-        pos: [39, 49],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "ooi",
-        pos: [38, 50],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "isuzu",
-        pos: [39, 51],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "abukuma",
-        pos: [36, 48],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "shintsu",
-        pos: [37, 49],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "yubari",
-        pos: [36, 50],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "yahagi",
-        pos: [37, 51],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "ooyodo",
-        pos: [35, 49],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // 巡洋舰
-      {
-        name: "prinz_eugen",
-        pos: [39, 32],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "leipzig",
-        pos: [40, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "cheshire",
-        pos: [39, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "worcester",
-        pos: [40, 35],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "vickers",
-        pos: [39, 36],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "k_25",
-        pos: [40, 37],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "sverdlov",
-        pos: [39, 38],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "kirov",
-        pos: [40, 39],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // 驱逐舰
-      {
-        name: "porter",
-        pos: [44, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "maury",
-        pos: [43, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "hammann",
-        pos: [44, 35],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "dewey",
-        pos: [43, 36],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "asashio",
-        pos: [43, 37],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "yugumo",
-        pos: [44, 38],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "yukikaze",
-        pos: [43, 39],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "z_11",
-        pos: [44, 40],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "v",
-        pos: [43, 41],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "y",
-        pos: [44, 42],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "ardent",
-        pos: [43, 43],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "rapid",
-        pos: [44, 44],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // 鱼雷艇
-      {
-        name: "PT_791",
-        pos: [45, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "S_100",
-        pos: [45, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "MTB_77",
-        pos: [45, 35],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "T_14",
-        pos: [45, 36],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "P_6",
-        pos: [45, 37],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "jiujiang",
-        pos: [45, 38],
+        pos: [16, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -1626,10 +1052,603 @@
         rotation: 90,
         belongPlayer: "HA"
       },
+      // === German ===
+      {
+        name: "bismarck",
+        pos: [24, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "scharnhorst",
+        pos: [25, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "lutzow",
+        pos: [24, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "prinz_eugen",
+        pos: [26, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "leipzig",
+        pos: [27, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "z_11",
+        pos: [26, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "S_100",
+        pos: [27, 29],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === British BB ===
+      {
+        name: "lion",
+        pos: [14, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "lioness",
+        pos: [15, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nelson",
+        pos: [14, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "king_george_v",
+        pos: [15, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hood",
+        pos: [14, 29],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "warspite",
+        pos: [15, 30],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "tiger",
+        pos: [14, 31],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === British CA / CL ===
+      {
+        name: "cheshire",
+        pos: [16, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "worcester",
+        pos: [17, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "vickers",
+        pos: [16, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "k_25",
+        pos: [17, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === British TB/DD ===
+      {
+        name: "y",
+        pos: [18, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "v",
+        pos: [19, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "ardent",
+        pos: [18, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "MTB_77",
+        pos: [19, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === Soviet ===
+      {
+        name: "slava",
+        pos: [34, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kremlin",
+        pos: [35, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "soviet_union",
+        pos: [34, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "soviet_union_nelsonski",
+        pos: [35, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "sverdlov",
+        pos: [37, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kirov",
+        pos: [38, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "rapid",
+        pos: [37, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "P_6",
+        pos: [38, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === Chinese ===
+      {
+        name: "jiujiang",
+        pos: [32, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === US CV ===
+      {
+        name: "yorktown",
+        pos: [32, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "saratoga",
+        pos: [31, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === US BB ===
+      {
+        name: "montana",
+        pos: [35, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "lowa",
+        pos: [34, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_dakota",
+        pos: [35, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "lexington",
+        pos: [34, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === US CA ===
+      {
+        name: "alaska_kai",
+        pos: [38, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "des_moines",
+        pos: [37, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "oregon_city",
+        pos: [38, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "baltimore",
+        pos: [37, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "astoria",
+        pos: [38, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "northampton",
+        pos: [37, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "portland",
+        pos: [38, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "pensacola",
+        pos: [37, 52],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === US CL ===
+      {
+        name: "long_beach",
+        pos: [41, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "long_beach_scheme_D",
+        pos: [40, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [41, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === US TB/DD ===
+      {
+        name: "hammann",
+        pos: [43, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "maury",
+        pos: [42, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [43, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "dewey",
+        pos: [42, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "PT_791",
+        pos: [43, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === IJN CV ===
+      {
+        name: "shinano",
+        pos: [14, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hakuryu",
+        pos: [15, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "taiho",
+        pos: [14, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "akagi",
+        pos: [15, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kaga",
+        pos: [14, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "soryu",
+        pos: [15, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hiryu",
+        pos: [14, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "shokaku",
+        pos: [11, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // FIXME 这里位置留给云龙级
+      {
+        name: "hiyo",
+        pos: [11, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "ryujo",
+        pos: [12, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "shoho",
+        pos: [11, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "chitose",
+        pos: [12, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "taiyo",
+        pos: [11, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hosho",
+        pos: [12, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === IJN BB ===
+      {
+        name: "edo",
+        pos: [17, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "satsuma",
+        pos: [18, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "yamato",
+        pos: [17, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "nagato",
+        pos: [18, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "ise",
+        pos: [17, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "fuso",
+        pos: [18, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kongo",
+        pos: [17, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === IJN CA ===
+      {
+        name: "tone",
+        pos: [20, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "mogami",
+        pos: [21, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "suzuya",
+        pos: [20, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atago",
+        pos: [21, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "haguro",
+        pos: [20, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "aoba",
+        pos: [21, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "furutaka",
+        pos: [20, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === IJN CL ===
+      {
+        name: "ooyodo",
+        pos: [22, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "yahagi",
+        pos: [23, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "yubari",
+        pos: [22, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "shintsu",
+        pos: [23, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "abukuma",
+        pos: [22, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "isuzu",
+        pos: [23, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "ooi",
+        pos: [22, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kitakami",
+        pos: [23, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kuma",
+        pos: [22, 52],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "tenryu",
+        pos: [23, 53],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === IJN TB/DD ===
+      {
+        name: "yugumo",
+        pos: [24, 44],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "asashio",
+        pos: [25, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "yukikaze",
+        pos: [24, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "T_14",
+        pos: [25, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
       // 敌人舰队
       {
         name: "molamola",
-        pos: [28, 70],
+        pos: [15, 90],
+        rotation: 90,
+        belongPlayer: "CA"
+      },
+      {
+        name: "molamola",
+        pos: [100, 100],
         rotation: 90,
         belongPlayer: "CA"
       },
