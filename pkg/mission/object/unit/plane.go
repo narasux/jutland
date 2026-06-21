@@ -13,6 +13,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
@@ -33,7 +34,6 @@ type Plane struct {
 	// 名称
 	Name string `json:"name"`
 	// 展示用名称
-	DisplayName string `json:"displayName"`
 	// 类别
 	Type PlaneType `json:"type"`
 	// 类别缩写
@@ -285,4 +285,12 @@ func GetPlaneTargetObjType(name string) object.Type {
 	default:
 		return object.TypeNone
 	}
+}
+
+// GetPlaneDisplayName 获取战机展示用名称
+func GetPlaneDisplayName(name string) string {
+	if ref := objRef.GetReference(name); ref != nil {
+		return ref.DisplayName
+	}
+	return name
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
@@ -74,10 +75,7 @@ const HospitalShipEffectRange = 3
 // BattleShip 战舰
 type BattleShip struct {
 	// 名称
-	Name string `json:"name"`
-	// 展示用名称
-	DisplayName string `json:"displayName"`
-	// 类别
+	Name string   `json:"name"`
 	Type ShipType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
@@ -435,11 +433,10 @@ func GetAllShipNames() []string {
 
 // GetShipDisplayName 获取战舰展示用名称
 func GetShipDisplayName(name string) string {
-	ship, ok := ShipMap[name]
-	if !ok {
-		return name
+	if ref := objRef.GetReference(name); ref != nil {
+		return ref.DisplayName
 	}
-	return ship.DisplayName
+	return name
 }
 
 // GetShipCost 获取战舰成本

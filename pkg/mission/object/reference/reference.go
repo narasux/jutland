@@ -20,6 +20,8 @@ type InfoItem struct {
 type Reference struct {
 	// 名称
 	Name string `json:"name"`
+	// 展示用名称
+	DisplayName string `json:"displayName"`
 	// 图鉴核心参数
 	Specs []InfoItem `json:"specs"`
 	// 图鉴武装摘要

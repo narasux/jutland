@@ -1,7 +1,7 @@
 [
   {
+    // 歼击机
     name: "F",
-    displayName: "歼击机",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 175,
@@ -84,8 +84,8 @@
     }
   },
   {
+    // 轰炸机
     name: "B",
-    displayName: "轰炸机",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 250,
@@ -196,8 +196,8 @@
     }
   },
   {
+    // 攻击机
     name: "A",
-    displayName: "攻击机",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 200,
@@ -291,8 +291,8 @@
     }
   },
   {
+    // 野猫
     name: "F4F-3",
-    displayName: "野猫",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 35,
@@ -342,8 +342,8 @@
     }
   },
   {
+    // 无畏
     name: "SBD-3",
-    displayName: "无畏",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 50,
@@ -410,8 +410,8 @@
     }
   },
   {
+    // 蹂躏者
     name: "TBD-1",
-    displayName: "蹂躏者",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 45,
@@ -459,8 +459,8 @@
     }
   },
   {
+    // 零式
     name: "A6M_0",
-    displayName: "零式",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 26,
@@ -511,8 +511,8 @@
     }
   },
   {
+    // 九九式
     name: "D3A_99",
-    displayName: "九九式",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 40,
@@ -579,8 +579,8 @@
     }
   },
   {
+    // 九七式
     name: "B5N2_97",
-    displayName: "九七式",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 45,
@@ -621,8 +621,8 @@
     }
   },
   {
+    // 烈风
     name: "A7M2",
-    displayName: "烈风",
     type: "fighter",
     typeAbbr: "F",
     totalHP: 40,
@@ -671,8 +671,8 @@
     }
   },
   {
+    // 彗星
     name: "D4Y3",
-    displayName: "彗星",
     type: "dive_bomber",
     typeAbbr: "DB",
     totalHP: 42,
@@ -725,8 +725,8 @@
     }
   },
   {
+    // 流星
     name: "B7A2",
-    displayName: "流星",
     type: "torpedo_bomber",
     typeAbbr: "TB",
     totalHP: 55,
@@ -780,8 +780,8 @@
   },
   // FIXME 引入侦察系统
   {
+    // 彩云
     name: "C6N1",
-    displayName: "彩云",
     type: "fighter",
     typeAbbr: "R",
     totalHP: 36,

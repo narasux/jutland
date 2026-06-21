@@ -8,6 +8,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -100,7 +101,7 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 
 			d.drawText(
 				screen,
-				fmt.Sprintf("%s x %d", cls.Kind.DisplayName, cls.Total),
+				fmt.Sprintf("%s x %d", objUnit.GetShipDisplayName(cls.Kind.Name), cls.Total),
 				xOffset-50, yOffset, 20, font.Hang, colorx.White,
 			)
 			yOffset += 50

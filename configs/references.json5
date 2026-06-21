@@ -1,6 +1,7 @@
 [
   {
     name: "duck",
+    displayName: "小黄鸭",
     specs: [
       {label: "类型", value: "特殊"},
       {label: "吨位", value: "150000"},
@@ -32,6 +33,7 @@
   },
   {
     name: "waterdrop",
+    displayName: "水滴",
     specs: [
       {label: "类型", value: "特殊"},
       {label: "吨位", value: "1"},
@@ -54,6 +56,7 @@
   },
   {
     name: "molamola",
+    displayName: "翻车鱼",
     specs: [
       {label: "类型", value: "特殊-标靶"},
       {label: "吨位", value: "5000000"},
@@ -76,6 +79,7 @@
   },
   {
     name: "liberty",
+    displayName: "自由轮",
     specs: [
       {label: "类型", value: "Cargo / 货轮"},
       {label: "吨位", value: "7500"},
@@ -101,6 +105,7 @@
   // 美国海军
   {
     name: "yorktown",
+    displayName: "约克城",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "25900"},
@@ -132,6 +137,7 @@
   },
   {
     name: "saratoga",
+    displayName: "萨拉托加",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "50000"},
@@ -164,6 +170,7 @@
   // 日本海军
   {
     name: "hakuryu",
+    displayName: "白龙",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "38570"},
@@ -194,6 +201,7 @@
   },
   {
     name: "taiho",
+    displayName: "大凤",
     specs: [
       {label: "类型", value: "CV / 装甲航空母舰"},
       {label: "吨位", value: "37270"},
@@ -220,6 +228,7 @@
   },
   {
     name: "shinano",
+    displayName: "信浓",
     specs: [
       {label: "类型", value: "CV / 重装甲航空母舰"},
       {label: "吨位", value: "71890"},
@@ -252,6 +261,7 @@
   },
   {
     name: "akagi",
+    displayName: "赤城",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "41300"},
@@ -283,6 +293,7 @@
   },
   {
     name: "kaga",
+    displayName: "加贺",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "43600"},
@@ -314,6 +325,7 @@
   },
   {
     name: "shokaku",
+    displayName: "翔鹤",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "32105"},
@@ -340,6 +352,7 @@
   },
   {
     name: "soryu",
+    displayName: "苍龙",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "19500"},
@@ -366,6 +379,7 @@
   },
   {
     name: "hiryu",
+    displayName: "飞龙",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "21900"},
@@ -393,6 +407,7 @@
   },
   {
     name: "hiyo",
+    displayName: "飞鹰",
     specs: [
       {label: "类型", value: "CV / 航空母舰"},
       {label: "吨位", value: "27500"},
@@ -419,6 +434,7 @@
   },
   {
     name: "ryujo",
+    displayName: "龙骧",
     specs: [
       {label: "类型", value: "CVL / 轻型航空母舰"},
       {label: "吨位", value: "12732"},
@@ -445,6 +461,7 @@
   },
   {
     name: "shoho",
+    displayName: "祥凤",
     specs: [
       {label: "类型", value: "CVL / 轻型航空母舰"},
       {label: "吨位", value: "13100"},
@@ -470,6 +487,7 @@
   },
   {
     name: "chitose",
+    displayName: "千岁",
     specs: [
       {label: "类型", value: "CVL / 轻型航空母舰"},
       {label: "吨位", value: "13600"},
@@ -495,6 +513,7 @@
   },
   {
     name: "taiyo",
+    displayName: "大鹰",
     specs: [
       {label: "类型", value: "CVE / 护航航空母舰"},
       {label: "吨位", value: "20000"},
@@ -521,6 +540,7 @@
   },
   {
     name: "hosho",
+    displayName: "凤翔",
     specs: [
       {label: "类型", value: "CVL / 轻型航空母舰"},
       {label: "吨位", value: "9646"},
@@ -547,6 +567,7 @@
   // 美国海军
   {
     name: "lowa",
+    displayName: "衣阿华",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "58000"},
@@ -576,6 +597,7 @@
   },
   {
     name: "montana",
+    displayName: "蒙大拿",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "70500"},
@@ -605,6 +627,7 @@
   },
   {
     name: "south_dakota",
+    displayName: "南达科他",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "46000"},
@@ -634,6 +657,7 @@
   },
   {
     name: "lexington",
+    displayName: "列克星敦",
     specs: [
       {label: "类型", value: "BC / 战列舰"},
       {label: "吨位", value: "58400"},
@@ -661,6 +685,7 @@
   // 日本海军
   {
     name: "kongo",
+    displayName: "金刚",
     specs: [
       {label: "类型", value: "BC / 战列巡洋舰"},
       {label: "吨位", value: "36600"},
@@ -691,6 +716,7 @@
   },
   {
     name: "fuso",
+    displayName: "扶桑",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "39154"},
@@ -721,6 +747,7 @@
   },
   {
     name: "ise",
+    displayName: "伊势",
     specs: [
       {label: "类型", value: "BBV / 航空战列舰"},
       {label: "吨位", value: "38676"},
@@ -754,6 +781,7 @@
   },
   {
     name: "nagato",
+    displayName: "长门",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "42850"},
@@ -785,6 +813,7 @@
   },
   {
     name: "yamato",
+    displayName: "大和",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "72500"},
@@ -814,6 +843,7 @@
   },
   {
     name: "satsuma",
+    displayName: "萨摩",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "84000"},
@@ -840,6 +870,7 @@
   },
   {
     name: "edo",
+    displayName: "江户",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "105000"},
@@ -866,6 +897,7 @@
   // 德国海军
   {
     name: "bismarck",
+    displayName: "俾斯麦",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "52600"},
@@ -890,6 +922,7 @@
   },
   {
     name: "scharnhorst",
+    displayName: "沙恩霍特斯",
     specs: [
       {label: "类型", value: "BC / 战列巡洋舰"},
       {label: "吨位", value: "38100"},
@@ -916,6 +949,7 @@
   },
   {
     name: "lutzow",
+    displayName: "吕佐",
     specs: [
       {label: "类型", value: "BB / 袖珍战列舰"},
       {label: "吨位", value: "16200"},
@@ -942,6 +976,7 @@
   // 英国海军
   {
     name: "hood",
+    displayName: "胡德",
     specs: [
       {label: "类型", value: "BC / 战列巡洋舰"},
       {label: "吨位", value: "47430"},
@@ -967,6 +1002,7 @@
   },
   {
     name: "nelson",
+    displayName: "纳尔逊",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "38000"},
@@ -999,6 +1035,7 @@
   },
   {
     name: "lion",
+    displayName: "狮",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "69500"},
@@ -1026,6 +1063,7 @@
   },
   {
     name: "lioness",
+    displayName: "雌狮",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "55000"},
@@ -1052,6 +1090,7 @@
   },
   {
     name: "king_george_v",
+    displayName: "乔治五世",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "43780"},
@@ -1078,6 +1117,7 @@
   },
   {
     name: "warspite",
+    displayName: "厌战",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "37000"},
@@ -1102,6 +1142,7 @@
   },
   {
     name: "tiger",
+    displayName: "虎",
     specs: [
       {label: "类型", value: "BC / 战列巡洋舰"},
       {label: "吨位", value: "33600"},
@@ -1127,6 +1168,7 @@
   // 苏联海军
   {
     name: "soviet_union",
+    displayName: "苏联",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "67370"},
@@ -1156,6 +1198,7 @@
   },
   {
     name: "soviet_union_nelsonski",
+    displayName: "苏联（纳尔逊型）",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "58200"},
@@ -1181,6 +1224,7 @@
   },
   {
     name: "kremlin",
+    displayName: "克里姆林",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "81150"},
@@ -1210,6 +1254,7 @@
   },
   {
     name: "slava",
+    displayName: "光荣",
     specs: [
       {label: "类型", value: "BB / 战列舰"},
       {label: "吨位", value: "105300"},
@@ -1241,6 +1286,7 @@
   // 美国海军
   {
     name: "atlanta",
+    displayName: "亚特兰大",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "7400"},
@@ -1270,6 +1316,7 @@
   },
   {
     name: "alaska_kai",
+    displayName: "阿拉斯加（改）",
     specs: [
       {label: "类型", value: "CB / 大型巡洋舰"},
       {label: "吨位", value: "42800"},
@@ -1299,6 +1346,7 @@
   },
   {
     name: "long_beach",
+    displayName: "长滩",
     specs: [
       {label: "类型", value: "CGN / 导弹巡洋舰"},
       {label: "吨位", value: "16600"},
@@ -1330,6 +1378,7 @@
   },
   {
     name: "long_beach_scheme_D",
+    displayName: "长滩（D 型）",
     specs: [
       {label: "类型", value: "CGN / 导弹巡洋舰"},
       {label: "吨位", value: "11300"},
@@ -1357,6 +1406,7 @@
   },
   {
     name: "pensacola",
+    displayName: "彭萨科拉",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "11696"},
@@ -1391,6 +1441,7 @@
   },
   {
     name: "northampton",
+    displayName: "北安普顿",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "11830"},
@@ -1421,6 +1472,7 @@
   },
   {
     name: "portland",
+    displayName: "波特兰",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "12960"},
@@ -1450,6 +1502,7 @@
   },
   {
     name: "astoria",
+    displayName: "阿斯托里亚",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "12663"},
@@ -1483,6 +1536,7 @@
   },
   {
     name: "des_moines",
+    displayName: "得梅因",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "21269"},
@@ -1517,6 +1571,7 @@
   // 美国海军
   {
     name: "baltimore",
+    displayName: "巴尔的摩",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "17031"},
@@ -1547,6 +1602,7 @@
   // 美国海军
   {
     name: "oregon_city",
+    displayName: "俄勒冈城",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "17700"},
@@ -1577,6 +1633,7 @@
   // 日本海军
   {
     name: "furutaka",
+    displayName: "古鹰",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "10630"},
@@ -1602,6 +1659,7 @@
   },
   {
     name: "aoba",
+    displayName: "青叶",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "11660"},
@@ -1627,6 +1685,7 @@
   },
   {
     name: "haguro",
+    displayName: "羽黑",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "15479"},
@@ -1653,6 +1712,7 @@
   },
   {
     name: "atago",
+    displayName: "爱宕",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "15718"},
@@ -1679,6 +1739,7 @@
   },
   {
     name: "mogami",
+    displayName: "最上",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "13600"},
@@ -1705,6 +1766,7 @@
   },
   {
     name: "suzuya",
+    displayName: "铃谷",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "13887"},
@@ -1731,6 +1793,7 @@
   },
   {
     name: "tone",
+    displayName: "利根",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "13200"},
@@ -1757,6 +1820,7 @@
   },
   {
     name: "tenryu",
+    displayName: "天龙",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "4420"},
@@ -1782,6 +1846,7 @@
   },
   {
     name: "kuma",
+    displayName: "球磨",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "5500"},
@@ -1806,6 +1871,7 @@
   },
   {
     name: "kitakami",
+    displayName: "北上",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "7041"},
@@ -1831,6 +1897,7 @@
   },
   {
     name: "ooi",
+    displayName: "大井",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "6900"},
@@ -1855,6 +1922,7 @@
   },
   {
     name: "isuzu",
+    displayName: "五十铃",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "6260"},
@@ -1880,6 +1948,7 @@
   },
   {
     name: "abukuma",
+    displayName: "阿武隈",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "5925"},
@@ -1907,6 +1976,7 @@
   },
   {
     name: "shintsu",
+    displayName: "神通",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "5595"},
@@ -1931,6 +2001,7 @@
   },
   {
     name: "yubari",
+    displayName: "夕张",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "4447"},
@@ -1957,6 +2028,7 @@
   },
   {
     name: "yahagi",
+    displayName: "矢矧",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "7710"},
@@ -1983,6 +2055,7 @@
   },
   {
     name: "ooyodo",
+    displayName: "大淀",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "10990"},
@@ -2009,6 +2082,7 @@
   // 德国海军
   {
     name: "prinz_eugen",
+    displayName: "欧根亲王",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "18400"},
@@ -2033,6 +2107,7 @@
   },
   {
     name: "leipzig",
+    displayName: "莱比锡",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "8680"},
@@ -2058,6 +2133,7 @@
   // 英国海军
   {
     name: "cheshire",
+    displayName: "柴郡",
     specs: [
       {label: "类型", value: "CA / 重巡洋舰"},
       {label: "吨位", value: "20100"},
@@ -2083,6 +2159,7 @@
   },
   {
     name: "worcester",
+    displayName: "伍斯特",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "21000"},
@@ -2107,6 +2184,7 @@
   },
   {
     name: "vickers",
+    displayName: "维克斯",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "8100"},
@@ -2132,6 +2210,7 @@
   },
   {
     name: "k_25",
+    displayName: "K-25",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "8500"},
@@ -2159,6 +2238,7 @@
   // 苏联海军
   {
     name: "sverdlov",
+    displayName: "斯维尔德洛夫",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "16640"},
@@ -2187,6 +2267,7 @@
   },
   {
     name: "kirov",
+    displayName: "基洛夫",
     specs: [
       {label: "类型", value: "CL / 轻巡洋舰"},
       {label: "吨位", value: "9400"},
@@ -2212,6 +2293,7 @@
   // 美国海军
   {
     name: "porter",
+    displayName: "波特",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "1850"},
@@ -2239,6 +2321,7 @@
   },
   {
     name: "maury",
+    displayName: "莫雷",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "2286"},
@@ -2270,6 +2353,7 @@
   },
   {
     name: "hammann",
+    displayName: "哈曼",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "2246"},
@@ -2297,6 +2381,7 @@
   },
   {
     name: "dewey",
+    displayName: "杜威",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "2100"},
@@ -2326,6 +2411,7 @@
   // 日本海军
   {
     name: "asashio",
+    displayName: "朝潮",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "2635"},
@@ -2349,6 +2435,7 @@
   },
   {
     name: "yugumo",
+    displayName: "夕云",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "2520"},
@@ -2372,6 +2459,7 @@
   },
   {
     name: "yukikaze",
+    displayName: "雪风",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "2490"},
@@ -2396,6 +2484,7 @@
   // 德国海军
   {
     name: "z_11",
+    displayName: "Z-11",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "3190"},
@@ -2424,6 +2513,7 @@
   // 英国海军
   {
     name: "v",
+    displayName: "V",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "2200"},
@@ -2442,6 +2532,7 @@
   },
   {
     name: "y",
+    displayName: "Y",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "3100"},
@@ -2460,6 +2551,7 @@
   },
   {
     name: "ardent",
+    displayName: "热心",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "1810"},
@@ -2485,6 +2577,7 @@
   // 苏联海军
   {
     name: "rapid",
+    displayName: "快速",
     specs: [
       {label: "类型", value: "DD / 驱逐舰"},
       {label: "吨位", value: "3230"},
@@ -2513,6 +2606,7 @@
   // 中国海军
   {
     name: "jiujiang",
+    displayName: "九江",
     specs: [
       {label: "类型", value: "FF / 护卫舰"},
       {label: "吨位", value: "1702"},
@@ -2534,6 +2628,7 @@
   // 美国海军
   {
     name: "PT_791",
+    displayName: "PT-791",
     specs: [
       {label: "类型", value: "TB / 鱼雷艇"},
       {label: "吨位", value: "48"},
@@ -2563,6 +2658,7 @@
   // 日本海军
   {
     name: "T_14",
+    displayName: "T-14",
     specs: [
       {label: "类型", value: "TB / 鱼雷艇"},
       {label: "吨位", value: "18"},
@@ -2591,6 +2687,7 @@
   // 德国海军
   {
     name: "S_100",
+    displayName: "S-100",
     specs: [
       {label: "类型", value: "TB / 鱼雷艇"},
       {label: "吨位", value: "95"},
@@ -2620,6 +2717,7 @@
   // 英国海军
   {
     name: "MTB_77",
+    displayName: "MTB-77",
     specs: [
       {label: "类型", value: "TB / 鱼雷艇"},
       {label: "吨位", value: "45"},
@@ -2648,6 +2746,7 @@
   // 苏联海军
   {
     name: "P_6",
+    displayName: "P-6",
     specs: [
       {label: "类型", value: "TB / 鱼雷艇"},
       {label: "吨位", value: "66"},
@@ -2676,6 +2775,7 @@
   // 医疗船
   {
     name: "mercy",
+    displayName: "仁慈",
     specs: [
       {label: "类型", value: "HS / 医疗船"},
       {label: "吨位", value: "70473"},
@@ -2698,6 +2798,7 @@
   },
   {
     name: "peace_ark",
+    displayName: "和平方舟",
     specs: [
       {label: "类型", value: "HS / 医疗船"},
       {label: "吨位", value: "14300"},
@@ -2724,6 +2825,7 @@
   },
   {
     name: "britannic",
+    displayName: "不列颠",
     specs: [
       {label: "类型", value: "HS / 医疗船"},
       {label: "吨位", value: "53848"},
@@ -2743,5 +2845,122 @@
         url: "https://en.wikipedia.org/wiki/HMHS_Britannic"
       }
     ]
+  }
+  // 飞机部分
+  {
+    name: "F",
+    displayName: "歼击机",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "B",
+    displayName: "轰炸机",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "A",
+    displayName: "攻击机",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "A6M_0",
+    displayName: "零式",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "A7M2",
+    displayName: "烈风",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "B5N2_97",
+    displayName: "九七式",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "B7A2",
+    displayName: "流星",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "C6N1",
+    displayName: "彩云",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "D3A_99",
+    displayName: "九九式",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "D4Y3",
+    displayName: "彗星",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "F4F-3",
+    displayName: "野猫",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SBD-3",
+    displayName: "无畏",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  {
+    name: "TBD-1",
+    displayName: "蹂躏者",
+    specs: [],
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
   }
 ]
