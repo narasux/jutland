@@ -1,4 +1,4 @@
-package game
+package collection
 
 import (
 	"fmt"
@@ -16,6 +16,7 @@ import (
 )
 
 type abilityDimension struct {
+	// ID 用作缩放缓存的键，Label 用作图上展示，Value 决定这个维度从战力信息中取哪个字段。
 	ID    string
 	Label string
 	Value func(objUnit.CombatPowerInfo) float64
@@ -28,26 +29,37 @@ var collectionAbilityDimensions = []abilityDimension{
 	{ID: "anti_air", Label: "对空", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.AntiAir) }},
 	{ID: "survival", Label: "生存", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Survival) }},
 	{ID: "mobility", Label: "机动", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Mobility) }},
-	{ID: "range", Label: "射程", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Range) }},
+	{ID: "projection", Label: "投送", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Projection) }},
 	{ID: "burst", Label: "爆发", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Burst) }},
 }
 
 type abilityScales map[string]float64
 
 type radarSubject struct {
+	// Subject 代表当前绘制对象，包含展示名称、战力数值和是否为飞机页条目。
 	Name    string
 	Power   objUnit.CombatPowerInfo
 	IsPlane bool
 }
 
 type radarHitArea struct {
+	// radarHitArea 记录雷达轴标签的屏幕命中区域，用于 hover 时弹出具体数值说明。
 	Point     image.Point
 	LabelRect image.Rectangle
 	Dimension abilityDimension
 	Subject   radarSubject
+	// Scale 是当前筛选结果在该维度上的 P95 基准，供 tooltip 展示相对位置。
+	Scale float64
+}
+
+type combatPowerHitArea struct {
+	// combatPowerHitArea 仅用于航母综合战力的 hover 拆分提示。
+	Rect    image.Rectangle
+	Subject radarSubject
 }
 
 func calculateAbilityScales(powers []objUnit.CombatPowerInfo) abilityScales {
+	// 雷达轴的缩放不是线性取最大值，而是取 95 分位，避免极端值把普通单位压扁。
 	scales := abilityScales{}
 	for _, dimension := range collectionAbilityDimensions {
 		values := make([]float64, 0, len(powers))
@@ -74,6 +86,7 @@ func (d *Drawer) drawAbilityRadar(
 	screenOffset image.Point,
 	labelFontSize float64,
 ) []radarHitArea {
+	// 雷达图既负责展示整体能力轮廓，也负责为每个轴生成 hover 命中区。
 	count := len(collectionAbilityDimensions)
 	if count < 3 || radius <= 0 {
 		return nil
@@ -125,12 +138,14 @@ func (d *Drawer) drawAbilityRadar(
 			),
 			Dimension: dimension,
 			Subject:   subject,
+			Scale:     max(1, scales[dimension.ID]),
 		})
 	}
 	return hits
 }
 
 func radarPolygonPath(count int, pointAt func(index int) (float64, float64)) *vector.Path {
+	// 按固定顶点数生成闭合多边形路径，供网格、填充和描边复用。
 	path := &vector.Path{}
 	for idx := range count {
 		x, y := pointAt(idx)
@@ -145,12 +160,14 @@ func radarPolygonPath(count int, pointAt func(index int) (float64, float64)) *ve
 }
 
 func colorDrawOptions(clr color.Color) *vector.DrawPathOptions {
+	// 统一给 vector.Path 生成带抗锯齿的颜色绘制参数。
 	result := &vector.DrawPathOptions{AntiAlias: true}
 	result.ColorScale.ScaleWithColor(clr)
 	return result
 }
 
 func hoveredRadarArea(areas []radarHitArea) *radarHitArea {
+	// hover 判定同时支持标签框和轴点附近点击，降低玩家找命中的成本。
 	cursorX, cursorY := ebiten.CursorPosition()
 	point := image.Pt(cursorX, cursorY)
 	for idx := range areas {
@@ -163,15 +180,17 @@ func hoveredRadarArea(areas []radarHitArea) *radarHitArea {
 }
 
 func distanceSquared(left, right image.Point) int {
+	// 这里只比较平方距离，避免每帧做开方。
 	dx, dy := left.X-right.X, left.Y-right.Y
 	return dx*dx + dy*dy
 }
 
 func (d *Drawer) drawRadarTooltip(screen *ebiten.Image, hit *radarHitArea, fontSize float64) {
+	// tooltip 不走普通布局系统，因为它需要根据鼠标位置动态避让屏幕边缘。
 	if hit == nil {
 		return
 	}
-	lines := radarTooltipLines(hit.Dimension, hit.Subject)
+	lines := radarTooltipLines(hit.Dimension, hit.Subject, hit.Scale)
 	if len(lines) == 0 {
 		return
 	}
@@ -207,10 +226,16 @@ func (d *Drawer) drawRadarTooltip(screen *ebiten.Image, hit *radarHitArea, fontS
 	}
 }
 
-func radarTooltipLines(dimension abilityDimension, subject radarSubject) []string {
+func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale float64) []string {
+	// tooltip 先给出维度总值，再列出这一项的主要来源，便于看出战力从哪里来。
 	power := subject.Power
 	value := int(math.Round(dimension.Value(power)))
-	lines := []string{fmt.Sprintf("%s · %s", subject.Name, dimension.Label), fmt.Sprintf("能力值：%d", value)}
+	percent := int(math.Round(min(1, max(0, dimension.Value(power))/max(1, scale)) * 100))
+	lines := []string{
+		fmt.Sprintf("%s · %s", subject.Name, dimension.Label),
+		fmt.Sprintf("能力值：%d", value),
+		fmt.Sprintf("相对位置：%d%%", percent),
+	}
 	var contributions []objUnit.CombatPowerContribution
 	switch dimension.ID {
 	case "anti_ship":
@@ -223,11 +248,11 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject) []strin
 		lines = append(lines, fmt.Sprintf("有效耐久：%.0f", power.Details.EffectiveHP))
 	case "mobility":
 		lines = append(lines, "由速度、转向、加速度综合计算")
-	case "range":
+	case "projection":
 		if subject.IsPlane {
-			lines = append(lines, fmt.Sprintf("作战航程：%.0f km", power.Details.MaxRange*14.4))
+			lines = append(lines, fmt.Sprintf("作战半径：%.0f km", power.Details.MaxProjectionDistanceKM))
 		} else {
-			lines = append(lines, fmt.Sprintf("最大打击距离：%.1f 格", power.Details.MaxRange))
+			lines = append(lines, fmt.Sprintf("最大投送距离：%.1f km", power.Details.MaxProjectionDistanceKM))
 		}
 	case "burst":
 		lines = append(lines, fmt.Sprintf("首轮期望伤害：%.0f", power.Details.BurstDamage))
@@ -251,4 +276,49 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject) []strin
 		}
 	}
 	return lines
+}
+
+func hoveredCombatPowerArea(areas []combatPowerHitArea) *combatPowerHitArea {
+	point := image.Pt(ebiten.CursorPosition())
+	for idx := range areas {
+		if point.In(areas[idx].Rect) {
+			return &areas[idx]
+		}
+	}
+	return nil
+}
+
+func (d *Drawer) drawCombatPowerTooltip(
+	screen *ebiten.Image, hit *combatPowerHitArea, fontSize float64,
+) {
+	// 航母的舰体与航空战力只在需要时显示，避免长期占用雷达图下方空间。
+	if hit == nil {
+		return
+	}
+	scale := fontSize / 17
+	width := 260.0 * scale
+	lineHeight := fontSize * 1.45
+	height := lineHeight*4 + 22*scale
+	cursorX, cursorY := ebiten.CursorPosition()
+	x, y := float64(cursorX+16), float64(cursorY+18)
+	if x+width > float64(screen.Bounds().Dx())-12 {
+		x = float64(cursorX) - width - 16
+	}
+	if y+height > float64(screen.Bounds().Dy())-12 {
+		y = float64(screen.Bounds().Dy()) - height - 12
+	}
+	x, y = max(12, x), max(12, y)
+
+	vector.FillRect(screen, float32(x), float32(y), float32(width), float32(height), color.RGBA{18, 18, 18, 238}, false)
+	vector.StrokeRect(screen, float32(x), float32(y), float32(width), float32(height), 1.5, colorx.Gold, false)
+	d.drawText(screen, hit.Subject.Name+" · 综合战力", x+14*scale, y+11*scale, fontSize, font.Kai, colorx.Gold)
+	labels := []string{"综合", "舰体", "航空"}
+	values := []int{hit.Subject.Power.Total, hit.Subject.Power.Hull, hit.Subject.Power.Aviation}
+	for idx, label := range labels {
+		lineY := y + 11*scale + float64(idx+1)*lineHeight
+		d.drawText(screen, label, x+14*scale, lineY, fontSize, font.Kai, colorx.White)
+		value := fmt.Sprintf("%d", values[idx])
+		valueX := x + width - 14*scale - estimateCollectionTextWidth(value, fontSize)
+		d.drawText(screen, value, valueX, lineY, fontSize, font.JetbrainsMono, colorx.White)
+	}
 }

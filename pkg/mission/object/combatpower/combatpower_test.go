@@ -122,8 +122,11 @@ func TestPlaneTargetRestriction(t *testing.T) {
 	if fighterPower.AntiShip != 0 || fighterPower.AntiAir <= 0 {
 		t.Fatalf("fighter power = %+v, want only anti-air power", fighterPower)
 	}
-	if fighterPower.Range <= 0 || fighterPower.Burst <= 0 || len(fighterPower.Details.AntiAirContributions) != 1 {
+	if fighterPower.Projection <= 0 || fighterPower.Burst <= 0 || len(fighterPower.Details.AntiAirContributions) != 1 {
 		t.Fatalf("fighter extended dimensions not populated: %+v", fighterPower)
+	}
+	if fighterPower.Details.MaxProjectionDistanceKM != 1500 {
+		t.Fatalf("fighter projection distance = %.0f km, want 1500", fighterPower.Details.MaxProjectionDistanceKM)
 	}
 
 	bomber := base
@@ -136,7 +139,7 @@ func TestPlaneTargetRestriction(t *testing.T) {
 
 func TestCarrierAddsFullAirWingWithAvailabilityFactor(t *testing.T) {
 	plane := &objUnit.Plane{
-		DisplayName: "测试机", Range: 20,
+		Name: "plane", Range: 20,
 		CombatPower: objUnit.CombatPowerInfo{
 			Total: 85, AntiShip: 100, AntiAir: 50,
 			Details: objUnit.CombatPowerDetails{
@@ -156,8 +159,11 @@ func TestCarrierAddsFullAirWingWithAvailabilityFactor(t *testing.T) {
 	if power.Aviation != 595 || power.Total != 595 {
 		t.Fatalf("carrier totals = %+v, want aviation and total 595", power)
 	}
-	if power.Range != 200 || power.Burst <= 0 || len(power.Details.BurstContributions) != 1 {
-		t.Fatalf("carrier range, burst or contribution details missing: %+v", power)
+	if power.Projection != 200 || power.Burst <= 0 || len(power.Details.BurstContributions) != 1 {
+		t.Fatalf("carrier projection, burst or contribution details missing: %+v", power)
+	}
+	if power.Details.MaxProjectionDistanceKM != 288 {
+		t.Fatalf("carrier projection distance = %.0f km, want 288", power.Details.MaxProjectionDistanceKM)
 	}
 }
 

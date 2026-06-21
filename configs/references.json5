@@ -2,20 +2,13 @@
   {
     name: "duck",
     displayName: "小黄鸭",
-    specs: [
-      {label: "类型", value: "特殊"},
-      {label: "吨位", value: "150000"},
-      {label: "速度", value: "45 节"},
-      {label: "费用", value: "$0 / 5s"},
-      {label: "水平减伤", value: "75%"},
-      {label: "垂直减伤", value: "75%"}
-    ],
+    type: "浴室玩具",
     armaments: [
-      {label: "主炮", value: "1x8 406mm"},
-      {label: "主炮", value: "1x1 1024mm"},
-      {label: "副炮", value: "1x15 155mm"},
-      {label: "高炮", value: "1x30 37mm"},
-      {label: "高炮", value: "1x1 50mm"},
+      {label: "超电磁炮", value: "1x1 1024mm"},
+      {label: "八管主炮", value: "1x8 406mm"},
+      {label: "多联装副炮", value: "1x15 155mm"},
+      {label: "防空炮", value: "1x30 37mm"},
+      {label: "镭射", value: "1x1 50mm"},
       {label: "鱼雷", value: "1x15 610mm"},
       {label: "鱼雷", value: "1x20 533mm"},
       {label: "舰载机", value: "F x12"},
@@ -34,16 +27,9 @@
   {
     name: "waterdrop",
     displayName: "水滴",
-    specs: [
-      {label: "类型", value: "特殊"},
-      {label: "吨位", value: "1"},
-      {label: "速度", value: "1000 节"},
-      {label: "费用", value: "$0 / 5s"},
-      {label: "水平减伤", value: "100%"},
-      {label: "垂直减伤", value: "100%"}
-    ],
+    type: "宇宙探测器",
     armaments: [
-      {label: "主炮", value: "1x3 1mm"},
+      {label: "攻击方式", value: "撞击"},
     ],
     description: "水滴是科幻小说《三体》中由三体文明制造的宇宙探测器，其对电磁波的反射率为 100％，温度处于绝对零度且绝对光滑，拥有强度高达太阳系中最坚硬的材料的百倍以上的坚硬外壳。在飞行时，水滴甚至可以毫不减速地做出违反定律的锐角转向。在末日之战中，仅单个水滴就靠撞击摧毁人类大部分的太空武装力量（共计 2008 艘恒星级战舰）。",
     author: "未知",
@@ -57,16 +43,9 @@
   {
     name: "molamola",
     displayName: "翻车鱼",
-    specs: [
-      {label: "类型", value: "特殊-标靶"},
-      {label: "吨位", value: "5000000"},
-      {label: "速度", value: "5 节"},
-      {label: "费用", value: "$10 / 10s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "靶子",
     armaments: [
-      {label: "武装", value: "无固定武装"},
+      {label: "武装", value: "无"},
     ],
     description: "翻车鱼是属于鲀形目翻车鲀科的一种鱼，原产于世界各地的热带和温带水域，也见于寒带海洋，属于大型大洋性鱼类。翻车鱼是世界上最重的两种硬骨鱼之一，其形似一个长着尾巴的鱼头，身体扁平，行动缓慢。",
     author: "未知",
@@ -80,14 +59,7 @@
   {
     name: "liberty",
     displayName: "自由轮",
-    specs: [
-      {label: "类型", value: "Cargo / 货轮"},
-      {label: "吨位", value: "7500"},
-      {label: "速度", value: "11 节"},
-      {label: "费用", value: "$50 / 15s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "货轮",
     armaments: [
       {label: "主炮", value: "1x1 127mm/25"},
       {label: "高平炮", value: "1x1 76mm/50"},
@@ -106,14 +78,7 @@
   {
     name: "yorktown",
     displayName: "约克城",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "25900"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$410 / 40s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "7%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "主炮", value: "8x1 127mm/38"},
       {label: "高炮", value: "4x4 40mm/60"},
@@ -138,14 +103,7 @@
   {
     name: "saratoga",
     displayName: "萨拉托加",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "50000"},
-      {label: "速度", value: "34 节"},
-      {label: "费用", value: "$635 / 60s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "10%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "主炮", value: "12x1 127mm/38"},
       {label: "高炮", value: "11x4 40mm/60"},
@@ -171,14 +129,7 @@
   {
     name: "hakuryu",
     displayName: "白龙",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "38570"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$500 / 52s"},
-      {label: "水平减伤", value: "33%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "主炮", value: "8x2 100mm/65 九八式"},
       {label: "高炮", value: "22x3 25mm/60 九六式"},
@@ -202,14 +153,7 @@
   {
     name: "taiho",
     displayName: "大凤",
-    specs: [
-      {label: "类型", value: "CV / 装甲航空母舰"},
-      {label: "吨位", value: "37270"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$450 / 48s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "10%"}
-    ],
+    type: "装甲航空母舰",
     armaments: [
       {label: "高平炮", value: "6x2 100mm/65 九八式"},
       {label: "高炮", value: "17x3 25mm/60 九六式"},
@@ -229,14 +173,7 @@
   {
     name: "shinano",
     displayName: "信浓",
-    specs: [
-      {label: "类型", value: "CV / 重装甲航空母舰"},
-      {label: "吨位", value: "71890"},
-      {label: "速度", value: "27 节"},
-      {label: "费用", value: "$780 / 70s"},
-      {label: "水平减伤", value: "55%"},
-      {label: "垂直减伤", value: "35%"}
-    ],
+    type: "重装甲航空母舰",
     armaments: [
       {label: "高平炮", value: "8x2 100mm/60"},
       {label: "高炮", value: "36x3、3x2、12x1 25mm/60 九六式"},
@@ -262,14 +199,7 @@
   {
     name: "akagi",
     displayName: "赤城",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "41300"},
-      {label: "速度", value: "31 节"},
-      {label: "费用", value: "$460 / 45s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "主炮", value: "6x1 200mm/50 三年式"},
       {label: "高平炮", value: "6x2 127mm/40 八九式"},
@@ -294,14 +224,7 @@
   {
     name: "kaga",
     displayName: "加贺",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "43600"},
-      {label: "速度", value: "28 节"},
-      {label: "费用", value: "$460 / 45s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "主炮", value: "10x1 200mm/50 三年式"},
       {label: "高平炮", value: "8x2 127mm/40 八九式"},
@@ -326,14 +249,7 @@
   {
     name: "shokaku",
     displayName: "翔鹤",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "32105"},
-      {label: "速度", value: "34 节"},
-      {label: "费用", value: "$420 / 42s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "7%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "高平炮", value: "8x2 127mm/40 八九式"},
       {label: "高炮", value: "12x3 25mm/60 九六式"},
@@ -353,14 +269,7 @@
   {
     name: "soryu",
     displayName: "苍龙",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "19500"},
-      {label: "速度", value: "34.5 节"},
-      {label: "费用", value: "$220 / 30s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "主炮", value: "6x2 127mm/40 八九式"},
       {label: "高炮", value: "12x2 25mm/60 九六式"},
@@ -380,14 +289,7 @@
   {
     name: "hiryu",
     displayName: "飞龙",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "21900"},
-      {label: "速度", value: "34.5 节"},
-      {label: "费用", value: "$230 / 32s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "主炮", value: "6x2 127mm/40 八九式"},
       {label: "高炮", value: "7x3 25mm/60 九六式"},
@@ -408,14 +310,7 @@
   {
     name: "hiyo",
     displayName: "飞鹰",
-    specs: [
-      {label: "类型", value: "CV / 航空母舰"},
-      {label: "吨位", value: "27500"},
-      {label: "速度", value: "25.5 节"},
-      {label: "费用", value: "$320 / 36s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "3%"}
-    ],
+    type: "航空母舰",
     armaments: [
       {label: "高平炮", value: "6x2 127mm/40 八九式"},
       {label: "高炮", value: "8x3 25mm/60 九六式"},
@@ -435,14 +330,7 @@
   {
     name: "ryujo",
     displayName: "龙骧",
-    specs: [
-      {label: "类型", value: "CVL / 轻型航空母舰"},
-      {label: "吨位", value: "12732"},
-      {label: "速度", value: "28 节"},
-      {label: "费用", value: "$170 / 26s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻型航空母舰",
     armaments: [
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
       {label: "高炮", value: "2x2 25mm/60 九六式"},
@@ -462,14 +350,7 @@
   {
     name: "shoho",
     displayName: "祥凤",
-    specs: [
-      {label: "类型", value: "CVL / 轻型航空母舰"},
-      {label: "吨位", value: "13100"},
-      {label: "速度", value: "28 节"},
-      {label: "费用", value: "$160 / 26s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻型航空母舰",
     armaments: [
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
       {label: "高炮", value: "4x3 25mm/60 九六式"},
@@ -488,14 +369,7 @@
   {
     name: "chitose",
     displayName: "千岁",
-    specs: [
-      {label: "类型", value: "CVL / 轻型航空母舰"},
-      {label: "吨位", value: "13600"},
-      {label: "速度", value: "29 节"},
-      {label: "费用", value: "$185 / 28s"},
-      {label: "水平减伤", value: "12%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻型航空母舰",
     armaments: [
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
       {label: "高炮", value: "10x3 25mm/60 九六式"},
@@ -514,14 +388,7 @@
   {
     name: "taiyo",
     displayName: "大鹰",
-    specs: [
-      {label: "类型", value: "CVE / 护航航空母舰"},
-      {label: "吨位", value: "20000"},
-      {label: "速度", value: "21 节"},
-      {label: "费用", value: "$150 / 25s"},
-      {label: "水平减伤", value: "8%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "护航航空母舰",
     armaments: [
       {label: "高平炮", value: "4x1 120mm 四年式"},
       {label: "高炮", value: "10x3 25mm/60 九六式"},
@@ -541,14 +408,7 @@
   {
     name: "hosho",
     displayName: "凤翔",
-    specs: [
-      {label: "类型", value: "CVL / 轻型航空母舰"},
-      {label: "吨位", value: "9646"},
-      {label: "速度", value: "25 节"},
-      {label: "费用", value: "$120 / 22s"},
-      {label: "水平减伤", value: "5%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻型航空母舰",
     armaments: [
       {label: "主炮", value: "4x1 140mm/50 三年式"},
       {label: "高炮", value: "6x3 25mm/60 九六式"},
@@ -568,14 +428,7 @@
   {
     name: "lowa",
     displayName: "衣阿华",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "58000"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$580 / 54s"},
-      {label: "水平减伤", value: "50%"},
-      {label: "垂直减伤", value: "30%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
       {label: "高平炮", value: "10x2 127mm/38"},
@@ -598,14 +451,7 @@
   {
     name: "montana",
     displayName: "蒙大拿",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "70500"},
-      {label: "速度", value: "27 节"},
-      {label: "费用", value: "$705 / 65s"},
-      {label: "水平减伤", value: "55%"},
-      {label: "垂直减伤", value: "30%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "4x3 406mm/50"},
       {label: "高平炮", value: "10x2 127mm/54"},
@@ -628,14 +474,7 @@
   {
     name: "south_dakota",
     displayName: "南达科他",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "46000"},
-      {label: "速度", value: "28 节"},
-      {label: "费用", value: "$445 / 40s"},
-      {label: "水平减伤", value: "45%"},
-      {label: "垂直减伤", value: "30%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 406mm/45"},
       {label: "高平炮", value: "8x2 127mm/38"},
@@ -658,14 +497,7 @@
   {
     name: "lexington",
     displayName: "列克星敦",
-    specs: [
-      {label: "类型", value: "BC / 战列舰"},
-      {label: "吨位", value: "58400"},
-      {label: "速度", value: "30 节"},
-      {label: "费用", value: "$585 / 60s"},
-      {label: "水平减伤", value: "40%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 457mm/45 Mk1"},
       {label: "高平炮", value: "10x2 127mm/38"},
@@ -686,14 +518,7 @@
   {
     name: "kongo",
     displayName: "金刚",
-    specs: [
-      {label: "类型", value: "BC / 战列巡洋舰"},
-      {label: "吨位", value: "36600"},
-      {label: "速度", value: "30 节"},
-      {label: "费用", value: "$380 / 45s"},
-      {label: "水平减伤", value: "40%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "战列巡洋舰",
     armaments: [
       {label: "主炮", value: "4x2 356mm/45 四一式"},
       {label: "副炮", value: "14x1 152mm/50 四一式"},
@@ -717,14 +542,7 @@
   {
     name: "fuso",
     displayName: "扶桑",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "39154"},
-      {label: "速度", value: "25 节"},
-      {label: "费用", value: "$400 / 45s"},
-      {label: "水平减伤", value: "40%"},
-      {label: "垂直减伤", value: "25%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "6x2 356mm/45 四一式"},
       {label: "副炮", value: "14x1 152mm/50 四一式"},
@@ -748,14 +566,7 @@
   {
     name: "ise",
     displayName: "伊势",
-    specs: [
-      {label: "类型", value: "BBV / 航空战列舰"},
-      {label: "吨位", value: "38676"},
-      {label: "速度", value: "25.3 节"},
-      {label: "费用", value: "$460 / 50s"},
-      {label: "水平减伤", value: "42%"},
-      {label: "垂直减伤", value: "25%"}
-    ],
+    type: "航空战列舰",
     armaments: [
       {label: "主炮", value: "4x2 356mm/45 四一式"},
       {label: "高平炮", value: "8x2 127mm/40 八九式"},
@@ -782,14 +593,7 @@
   {
     name: "nagato",
     displayName: "长门",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "42850"},
-      {label: "速度", value: "26 节"},
-      {label: "费用", value: "$430 / 42s"},
-      {label: "水平减伤", value: "45%"},
-      {label: "垂直减伤", value: "25%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "4x2 410mm/45 三年式"},
       {label: "副炮", value: "16x1 140mm/50 三年式"},
@@ -814,14 +618,7 @@
   {
     name: "yamato",
     displayName: "大和",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "72500"},
-      {label: "速度", value: "27 节"},
-      {label: "费用", value: "$720 / 72s"},
-      {label: "水平减伤", value: "55%"},
-      {label: "垂直减伤", value: "30%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 460mm/45 九四式"},
       {label: "副炮", value: "2x3 155mm/60 三年式"},
@@ -844,14 +641,7 @@
   {
     name: "satsuma",
     displayName: "萨摩",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "84000"},
-      {label: "速度", value: "29 节"},
-      {label: "费用", value: "$920 / 100s"},
-      {label: "水平减伤", value: "60%"},
-      {label: "垂直减伤", value: "35%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "4x2 510mm/45"},
       {label: "副炮", value: "6x2 200mm/50 三年式"},
@@ -871,14 +661,7 @@
   {
     name: "edo",
     displayName: "江户",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "105000"},
-      {label: "速度", value: "29 节"},
-      {label: "费用", value: "$1200 / 130s"},
-      {label: "水平减伤", value: "60%"},
-      {label: "垂直减伤", value: "40%"}
-    ],
+    type: "超级战列舰",
     armaments: [
       {label: "主炮", value: "4x3 510mm/45"},
       {label: "副炮", value: "2x3 200mm/50 三年式"},
@@ -898,14 +681,7 @@
   {
     name: "bismarck",
     displayName: "俾斯麦",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "52600"},
-      {label: "速度", value: "30 节"},
-      {label: "费用", value: "$550 / 50s"},
-      {label: "水平减伤", value: "55%"},
-      {label: "垂直减伤", value: "35%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "4x2 381mm/52"},
       {label: "副炮", value: "6x2 150mm/60"},
@@ -923,14 +699,7 @@
   {
     name: "scharnhorst",
     displayName: "沙恩霍特斯",
-    specs: [
-      {label: "类型", value: "BC / 战列巡洋舰"},
-      {label: "吨位", value: "38100"},
-      {label: "速度", value: "31 节"},
-      {label: "费用", value: "$385 / 36s"},
-      {label: "水平减伤", value: "40%"},
-      {label: "垂直减伤", value: "25%"}
-    ],
+    type: "战列巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 283mm/55"},
       {label: "副炮", value: "4x2 150mm/60"},
@@ -950,14 +719,7 @@
   {
     name: "lutzow",
     displayName: "吕佐",
-    specs: [
-      {label: "类型", value: "BB / 袖珍战列舰"},
-      {label: "吨位", value: "16200"},
-      {label: "速度", value: "28.5 节"},
-      {label: "费用", value: "$160 / 16s"},
-      {label: "水平减伤", value: "35%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "袖珍战列舰",
     armaments: [
       {label: "主炮", value: "2x3 283mm/52"},
       {label: "副炮", value: "8x1 150mm/60"},
@@ -977,14 +739,7 @@
   {
     name: "hood",
     displayName: "胡德",
-    specs: [
-      {label: "类型", value: "BC / 战列巡洋舰"},
-      {label: "吨位", value: "47430"},
-      {label: "速度", value: "32 节"},
-      {label: "费用", value: "$450 / 40s"},
-      {label: "水平减伤", value: "45%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "战列巡洋舰",
     armaments: [
       {label: "主炮", value: "4x2 381mm/42"},
       {label: "副炮", value: "16x1 140mm/50"},
@@ -1003,14 +758,7 @@
   {
     name: "nelson",
     displayName: "纳尔逊",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "38000"},
-      {label: "速度", value: "24 节"},
-      {label: "费用", value: "$390 / 35s"},
-      {label: "水平减伤", value: "45%"},
-      {label: "垂直减伤", value: "25%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 406mm/45"},
       {label: "副炮", value: "6x2 152mm/50"},
@@ -1036,14 +784,7 @@
   {
     name: "lion",
     displayName: "狮",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "69500"},
-      {label: "速度", value: "29 节"},
-      {label: "费用", value: "$680 / 56s"},
-      {label: "水平减伤", value: "65%"},
-      {label: "垂直减伤", value: "32%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 406mm/45"},
       {label: "高平炮", value: "12x2 114mm/45"},
@@ -1053,10 +794,10 @@
       {label: "鱼雷", value: "2x5 533mm"},
     ],
     description: "狮级战列舰是英国皇家海军计划建造的一级战列舰，设计用于对抗新型威胁。主要目标是德国 H 级战列舰和日本大和级在装甲防护方面表现优异，而火力却较为平庸。由于战争爆发，该级战舰未能建成。",
-    author: "tzoli",
+    author: "TZoli",
     links: [
       {
-        name: "TZoli Lion Class Battleship Design 1945 A",
+        name: "Lion Class Battleship Design 1945 A",
         url: "https://www.deviantart.com/tzoli/art/Lion-Class-Battleship-Design-1945-A-810520319"
       }
     ]
@@ -1064,14 +805,7 @@
   {
     name: "lioness",
     displayName: "雌狮",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "55000"},
-      {label: "速度", value: "30 节"},
-      {label: "费用", value: "$500 / 45s"},
-      {label: "水平减伤", value: "45%"},
-      {label: "垂直减伤", value: "25%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "4x4 356mm/45"},
       {label: "副炮", value: "8x2 133mm/50"},
@@ -1080,10 +814,10 @@
       {label: "高炮", value: "6x2 20mm/70"},
     ],
     description: "雌狮级战列舰是英国狮级方案的衍生设计之一，主炮口径降低至 14 英寸但炮管数量大幅增加，意图以投射量优势压制敌舰，同时兼顾厚装甲与 30 节航速。由于战争爆发，该方案仅存在于设计图纸中。",
-    author: "tzoli",
+    author: "TZoli",
     links: [
       {
-        name: "TZoli Lion 14C-38",
+        name: "Lion 14C-38",
         url: "https://www.deviantart.com/tzoli/art/Lion-14C-38-804249041"
       }
     ]
@@ -1091,14 +825,7 @@
   {
     name: "king_george_v",
     displayName: "乔治五世",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "43780"},
-      {label: "速度", value: "27 节"},
-      {label: "费用", value: "$420 / 40s"},
-      {label: "水平减伤", value: "40%"},
-      {label: "垂直减伤", value: "25%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "2x4 356mm/45"},
       {label: "主炮", value: "1x2 356mm/45"},
@@ -1118,14 +845,7 @@
   {
     name: "warspite",
     displayName: "厌战",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "37000"},
-      {label: "速度", value: "24 节"},
-      {label: "费用", value: "$340 / 33s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "4x2 381mm/42"},
       {label: "副炮", value: "8x1 152mm/45"},
@@ -1143,14 +863,7 @@
   {
     name: "tiger",
     displayName: "虎",
-    specs: [
-      {label: "类型", value: "BC / 战列巡洋舰"},
-      {label: "吨位", value: "33600"},
-      {label: "速度", value: "28 节"},
-      {label: "费用", value: "$300 / 28s"},
-      {label: "水平减伤", value: "26%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "战列巡洋舰",
     armaments: [
       {label: "主炮", value: "4x2 343mm/45"},
       {label: "副炮", value: "12x1 152mm/45"},
@@ -1169,14 +882,7 @@
   {
     name: "soviet_union",
     displayName: "苏联",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "67370"},
-      {label: "速度", value: "29 节"},
-      {label: "费用", value: "$720 / 68s"},
-      {label: "水平减伤", value: "55%"},
-      {label: "垂直减伤", value: "30%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
       {label: "副炮", value: "6x2 152mm/57"},
@@ -1199,14 +905,7 @@
   {
     name: "soviet_union_nelsonski",
     displayName: "苏联（纳尔逊型）",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "58200"},
-      {label: "速度", value: "29 节"},
-      {label: "费用", value: "$650 / 63s"},
-      {label: "水平减伤", value: "45%"},
-      {label: "垂直减伤", value: "30%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
       {label: "副炮", value: "4x3 152mm/57"},
@@ -1225,14 +924,7 @@
   {
     name: "kremlin",
     displayName: "克里姆林",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "81150"},
-      {label: "速度", value: "30 节"},
-      {label: "费用", value: "$850 / 88s"},
-      {label: "水平减伤", value: "60%"},
-      {label: "垂直减伤", value: "35%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "3x3 406mm/50"},
       {label: "高平炮", value: "12x2 130mm/60"},
@@ -1255,14 +947,7 @@
   {
     name: "slava",
     displayName: "光荣",
-    specs: [
-      {label: "类型", value: "BB / 战列舰"},
-      {label: "吨位", value: "105300"},
-      {label: "速度", value: "30 节"},
-      {label: "费用", value: "$1170 / 105s"},
-      {label: "水平减伤", value: "60%"},
-      {label: "垂直减伤", value: "40%"}
-    ],
+    type: "战列舰",
     armaments: [
       {label: "主炮", value: "4x2 500mm/50"},
       {label: "高平炮", value: "8x2 130mm/58"},
@@ -1287,14 +972,7 @@
   {
     name: "atlanta",
     displayName: "亚特兰大",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "7400"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$70 / 10s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "5%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "8x2 127mm/38"},
       {label: "高炮", value: "4x4 28mm/75"},
@@ -1317,14 +995,7 @@
   {
     name: "alaska_kai",
     displayName: "阿拉斯加（改）",
-    specs: [
-      {label: "类型", value: "CB / 大型巡洋舰"},
-      {label: "吨位", value: "42800"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$450 / 40s"},
-      {label: "水平减伤", value: "35%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "大型巡洋舰",
     armaments: [
       {label: "主炮", value: "4x3 305mm/50"},
       {label: "高平炮", value: "8x2 127mm/38"},
@@ -1347,14 +1018,7 @@
   {
     name: "long_beach",
     displayName: "长滩",
-    specs: [
-      {label: "类型", value: "CGN / 导弹巡洋舰"},
-      {label: "吨位", value: "16600"},
-      {label: "速度", value: "30 节"},
-      {label: "费用", value: "$180 / 15s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "10%"}
-    ],
+    type: "导弹巡洋舰",
     armaments: [
       {label: "主炮", value: "2x1 127mm/38"},
       {label: "鱼雷", value: "2x3 324mm"},
@@ -1379,14 +1043,7 @@
   {
     name: "long_beach_scheme_D",
     displayName: "长滩（D 型）",
-    specs: [
-      {label: "类型", value: "CGN / 导弹巡洋舰"},
-      {label: "吨位", value: "11300"},
-      {label: "速度", value: "32 节"},
-      {label: "费用", value: "$125 / 10s"},
-      {label: "水平减伤", value: "5%"},
-      {label: "垂直减伤", value: "5%"}
-    ],
+    type: "导弹巡洋舰",
     armaments: [
       {label: "主炮", value: "2x1 127mm/38"},
       {label: "鱼雷", value: "2x3 324mm"},
@@ -1407,14 +1064,7 @@
   {
     name: "pensacola",
     displayName: "彭萨科拉",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "11696"},
-      {label: "速度", value: "32.5 节"},
-      {label: "费用", value: "$125 / 13s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "2x2 203mm/55 Mk9"},
       {label: "主炮", value: "2x3 203mm/55 Mk9"},
@@ -1442,14 +1092,7 @@
   {
     name: "northampton",
     displayName: "北安普顿",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "11830"},
-      {label: "速度", value: "32.7 节"},
-      {label: "费用", value: "$115 / 12s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 203mm/55 Mk12"},
       {label: "高平炮", value: "8x1 127mm/25"},
@@ -1473,14 +1116,7 @@
   {
     name: "portland",
     displayName: "波特兰",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "12960"},
-      {label: "速度", value: "32.7 节"},
-      {label: "费用", value: "$130 / 13s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 203mm/55 Mk14"},
       {label: "高平炮", value: "8x1 127mm/25"},
@@ -1503,14 +1139,7 @@
   {
     name: "astoria",
     displayName: "阿斯托里亚",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "12663"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$130 / 13s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 203mm/55 Mk14"},
       {label: "高平炮", value: "8x1 127mm/25"},
@@ -1537,14 +1166,7 @@
   {
     name: "des_moines",
     displayName: "得梅因",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "21269"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$220 / 22s"},
-      {label: "水平减伤", value: "35%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 203mm/55 Mk16"},
       {label: "高平炮", value: "6x2 127mm/38 Mk12"},
@@ -1572,14 +1194,7 @@
   {
     name: "baltimore",
     displayName: "巴尔的摩",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "17031"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$200 / 20s"},
-      {label: "水平减伤", value: "32%"},
-      {label: "垂直减伤", value: "18%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 203mm/55 Mk15"},
       {label: "高平炮", value: "6x2 127mm/38 Mk12"},
@@ -1603,14 +1218,7 @@
   {
     name: "oregon_city",
     displayName: "俄勒冈城",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "17700"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$205 / 20s"},
-      {label: "水平减伤", value: "32%"},
-      {label: "垂直减伤", value: "18%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 203mm/55 Mk15"},
       {label: "高平炮", value: "6x2 127mm/38 Mk12"},
@@ -1634,14 +1242,7 @@
   {
     name: "furutaka",
     displayName: "古鹰",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "10630"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$110 / 14s"},
-      {label: "水平减伤", value: "15%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x2 203mm/50"},
       {label: "高平炮", value: "4x2 127mm/40"},
@@ -1660,14 +1261,7 @@
   {
     name: "aoba",
     displayName: "青叶",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "11660"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$120 / 16s"},
-      {label: "水平减伤", value: "15%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x2 203mm/50 三年式"},
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
@@ -1686,14 +1280,7 @@
   {
     name: "haguro",
     displayName: "羽黑",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "15479"},
-      {label: "速度", value: "33.5 节"},
-      {label: "费用", value: "$150 / 16s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "5x2 203mm/50 三年式"},
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
@@ -1713,14 +1300,7 @@
   {
     name: "atago",
     displayName: "爱宕",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "15718"},
-      {label: "速度", value: "34 节"},
-      {label: "费用", value: "$160 / 16s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "5x2 203mm/50 三年式"},
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
@@ -1740,14 +1320,7 @@
   {
     name: "mogami",
     displayName: "最上",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "13600"},
-      {label: "速度", value: "35 节"},
-      {label: "费用", value: "$150 / 18s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x2 203mm/50 三年式"},
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
@@ -1767,14 +1340,7 @@
   {
     name: "suzuya",
     displayName: "铃谷",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "13887"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$130 / 16s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "5x2 203mm/50 三年式"},
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
@@ -1794,14 +1360,7 @@
   {
     name: "tone",
     displayName: "利根",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "13200"},
-      {label: "速度", value: "35.5 节"},
-      {label: "费用", value: "$140 / 20s"},
-      {label: "水平减伤", value: "25%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "4x2 203mm/50 三年式"},
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
@@ -1821,14 +1380,7 @@
   {
     name: "tenryu",
     displayName: "天龙",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "4420"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$40 / 12s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "4x1 140mm/50 三年式"},
       {label: "高平炮", value: "1x1 76mm/40 三年式"},
@@ -1847,14 +1399,7 @@
   {
     name: "kuma",
     displayName: "球磨",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "5500"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$52 / 14s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "7x1 140mm/50 三年式"},
       {label: "高炮", value: "4x2 25mm/60 九六式"},
@@ -1872,14 +1417,7 @@
   {
     name: "kitakami",
     displayName: "北上",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "7041"},
-      {label: "速度", value: "24 节"},
-      {label: "费用", value: "$130 / 22s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "2x2 127mm/40 八九式"},
       {label: "高炮", value: "14x3 25mm/60 九六式"},
@@ -1898,14 +1436,7 @@
   {
     name: "ooi",
     displayName: "大井",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "6900"},
-      {label: "速度", value: "32 节"},
-      {label: "费用", value: "$120 / 24s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "4x1 140mm/50 三年式"},
       {label: "高炮", value: "2x2 25mm/60 九六式"},
@@ -1923,14 +1454,7 @@
   {
     name: "isuzu",
     displayName: "五十铃",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "6260"},
-      {label: "速度", value: "34.5 节"},
-      {label: "费用", value: "$60 / 12s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "3x2 127mm/40 八九式"},
       {label: "高炮", value: "11x3 25mm/60 九六式"},
@@ -1949,14 +1473,7 @@
   {
     name: "abukuma",
     displayName: "阿武隈",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "5925"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$58 / 12s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "5x1 140mm/50 三年式"},
       {label: "高平炮", value: "1x2 127mm/40 八九式"},
@@ -1977,14 +1494,7 @@
   {
     name: "shintsu",
     displayName: "神通",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "5595"},
-      {label: "速度", value: "35.3 节"},
-      {label: "费用", value: "$52 / 12s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "7x1 140mm/50 三年式"},
       {label: "高炮", value: "9x2 25mm/60 九六式"},
@@ -2002,14 +1512,7 @@
   {
     name: "yubari",
     displayName: "夕张",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "4447"},
-      {label: "速度", value: "35.5 节"},
-      {label: "费用", value: "$46 / 12s"},
-      {label: "水平减伤", value: "10%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "1x1 140mm/50 三年式"},
       {label: "主炮", value: "2x2 140mm/50 三年式"},
@@ -2029,14 +1532,7 @@
   {
     name: "yahagi",
     displayName: "矢矧",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "7710"},
-      {label: "速度", value: "35 节"},
-      {label: "费用", value: "$72 / 16s"},
-      {label: "水平减伤", value: "15%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "3x2 152mm/50 四一式"},
       {label: "高平炮", value: "2x2 76mm/65 九八式"},
@@ -2056,14 +1552,7 @@
   {
     name: "ooyodo",
     displayName: "大淀",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "10990"},
-      {label: "速度", value: "35 节"},
-      {label: "费用", value: "$86 / 24s"},
-      {label: "水平减伤", value: "15%"},
-      {label: "垂直减伤", value: "5%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "2x3 155mm/60 三年式"},
       {label: "高平炮", value: "1x2 100mm/65 九八式"},
@@ -2083,14 +1572,7 @@
   {
     name: "prinz_eugen",
     displayName: "欧根亲王",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "18400"},
-      {label: "速度", value: "33.5 节"},
-      {label: "费用", value: "$190 / 19s"},
-      {label: "水平减伤", value: "32%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "4x2 203mm/60"},
       {label: "高平炮", value: "6x2 105mm/65"},
@@ -2108,14 +1590,7 @@
   {
     name: "leipzig",
     displayName: "莱比锡",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "8680"},
-      {label: "速度", value: "32 节"},
-      {label: "费用", value: "$90 / 14s"},
-      {label: "水平减伤", value: "22%"},
-      {label: "垂直减伤", value: "13%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 150mm/60"},
       {label: "高平炮", value: "3x2 88mm/56"},
@@ -2134,14 +1609,7 @@
   {
     name: "cheshire",
     displayName: "柴郡",
-    specs: [
-      {label: "类型", value: "CA / 重巡洋舰"},
-      {label: "吨位", value: "20100"},
-      {label: "速度", value: "31.5 节"},
-      {label: "费用", value: "$195 / 18s"},
-      {label: "水平减伤", value: "34%"},
-      {label: "垂直减伤", value: "22%"}
-    ],
+    type: "重巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 203mm/50"},
       {label: "高平炮", value: "8x2 102mm/45"},
@@ -2160,14 +1628,7 @@
   {
     name: "worcester",
     displayName: "伍斯特",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "21000"},
-      {label: "速度", value: "31.5 节"},
-      {label: "费用", value: "$180 / 17s"},
-      {label: "水平减伤", value: "30%"},
-      {label: "垂直减伤", value: "20%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "5x2 152mm/50"},
       {label: "高平炮", value: "8x4 76mm/70"},
@@ -2185,14 +1646,7 @@
   {
     name: "vickers",
     displayName: "维克斯",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "8100"},
-      {label: "速度", value: "29 节"},
-      {label: "费用", value: "$76 / 12s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "6%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "4x2 152mm/50"},
       {label: "高平炮", value: "2x1 102mm/45"},
@@ -2211,14 +1665,7 @@
   {
     name: "k_25",
     displayName: "K-25",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "8500"},
-      {label: "速度", value: "32 节"},
-      {label: "费用", value: "$80 / 14s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "10%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "8x2 133mm/50"},
       {label: "高炮", value: "2x4 40mm/39"},
@@ -2239,14 +1686,7 @@
   {
     name: "sverdlov",
     displayName: "斯维尔德洛夫",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "16640"},
-      {label: "速度", value: "34 节"},
-      {label: "费用", value: "$170 / 18s"},
-      {label: "水平减伤", value: "26%"},
-      {label: "垂直减伤", value: "15%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "4x3 152mm/57"},
       {label: "高平炮", value: "6x2 100mm/70"},
@@ -2268,14 +1708,7 @@
   {
     name: "kirov",
     displayName: "基洛夫",
-    specs: [
-      {label: "类型", value: "CL / 轻巡洋舰"},
-      {label: "吨位", value: "9400"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$100 / 12s"},
-      {label: "水平减伤", value: "20%"},
-      {label: "垂直减伤", value: "10%"}
-    ],
+    type: "轻巡洋舰",
     armaments: [
       {label: "主炮", value: "3x3 180mm/57"},
       {label: "高平炮", value: "6x1 100mm/56"},
@@ -2294,14 +1727,7 @@
   {
     name: "porter",
     displayName: "波特",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "1850"},
-      {label: "速度", value: "37 节"},
-      {label: "费用", value: "$16 / 7s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "4x2 127mm/38"},
       {label: "鱼雷", value: "2x4 533mm"},
@@ -2322,14 +1748,7 @@
   {
     name: "maury",
     displayName: "莫雷",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "2286"},
-      {label: "速度", value: "38.5 节"},
-      {label: "费用", value: "$25 / 8s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "4x1 127mm/38"},
       {label: "鱼雷", value: "4x4 533mm"},
@@ -2354,14 +1773,7 @@
   {
     name: "hammann",
     displayName: "哈曼",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "2246"},
-      {label: "速度", value: "37 节"},
-      {label: "费用", value: "$19 / 8s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "4x1 127mm/38"},
       {label: "鱼雷", value: "2x4 533mm"},
@@ -2382,14 +1794,7 @@
   {
     name: "dewey",
     displayName: "杜威",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "2100"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$20 / 8s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "4x1 127mm/38"},
       {label: "高炮", value: "4x1 20mm/70"},
@@ -2412,14 +1817,7 @@
   {
     name: "asashio",
     displayName: "朝潮",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "2635"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$26 / 10s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "3x2 127mm/50 三年式"},
       {label: "鱼雷", value: "2x4 610mm"},
@@ -2436,14 +1834,7 @@
   {
     name: "yugumo",
     displayName: "夕云",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "2520"},
-      {label: "速度", value: "35.5 节"},
-      {label: "费用", value: "$26 / 10s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "3x2 127mm/50 三年式"},
       {label: "鱼雷", value: "2x4 610mm"},
@@ -2460,14 +1851,7 @@
   {
     name: "yukikaze",
     displayName: "雪风",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "2490"},
-      {label: "速度", value: "35.5 节"},
-      {label: "费用", value: "$25 / 10s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "3x2 127mm/50 三年式"},
       {label: "鱼雷", value: "2x4 610mm"},
@@ -2485,14 +1869,7 @@
   {
     name: "z_11",
     displayName: "Z-11",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "3190"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$31 / 12s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "5x1 127mm/45"},
       {label: "鱼雷", value: "2x4 533mm"},
@@ -2514,14 +1891,7 @@
   {
     name: "v",
     displayName: "V",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "2200"},
-      {label: "速度", value: "36 节"},
-      {label: "费用", value: "$22 / 10s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "5x1 120mm/45"},
       {label: "鱼雷", value: "1x5 533mm"},
@@ -2533,14 +1903,7 @@
   {
     name: "y",
     displayName: "Y",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "3100"},
-      {label: "速度", value: "35 节"},
-      {label: "费用", value: "$20 / 10s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "3x1 120mm/45"},
       {label: "鱼雷", value: "1x5 533mm"},
@@ -2552,14 +1915,7 @@
   {
     name: "ardent",
     displayName: "热心",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "1810"},
-      {label: "速度", value: "35 节"},
-      {label: "费用", value: "$12 / 7s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "4x1 120mm/45"},
       {label: "高炮", value: "2x1 40mm/60"},
@@ -2578,14 +1934,7 @@
   {
     name: "rapid",
     displayName: "快速",
-    specs: [
-      {label: "类型", value: "DD / 驱逐舰"},
-      {label: "吨位", value: "3230"},
-      {label: "速度", value: "38.5 节"},
-      {label: "费用", value: "$30 / 13s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "驱逐舰",
     armaments: [
       {label: "主炮", value: "2x2 130mm/58"},
       {label: "鱼雷", value: "2x5 533mm"},
@@ -2607,14 +1956,7 @@
   {
     name: "jiujiang",
     displayName: "九江",
-    specs: [
-      {label: "类型", value: "FF / 护卫舰"},
-      {label: "吨位", value: "1702"},
-      {label: "速度", value: "26 节"},
-      {label: "费用", value: "$24 / 9s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "护卫舰",
     armaments: [
       {label: "主炮", value: "2x2 100mm 79A"},
       {label: "副炮", value: "2x2 37mm"},
@@ -2629,14 +1971,7 @@
   {
     name: "PT_791",
     displayName: "PT-791",
-    specs: [
-      {label: "类型", value: "TB / 鱼雷艇"},
-      {label: "吨位", value: "48"},
-      {label: "速度", value: "41 节"},
-      {label: "费用", value: "$5 / 3s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "鱼雷艇",
     armaments: [
       {label: "主炮", value: "1x1 40mm/60"},
       {label: "高炮", value: "2x1 20mm/70"},
@@ -2659,14 +1994,7 @@
   {
     name: "T_14",
     displayName: "T-14",
-    specs: [
-      {label: "类型", value: "TB / 鱼雷艇"},
-      {label: "吨位", value: "18"},
-      {label: "速度", value: "33 节"},
-      {label: "费用", value: "$3 / 3s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "鱼雷艇",
     armaments: [
       {label: "主炮", value: "1x1 13mm 九三式"},
       {label: "鱼雷", value: "2x1 450mm"},
@@ -2688,14 +2016,7 @@
   {
     name: "S_100",
     displayName: "S-100",
-    specs: [
-      {label: "类型", value: "TB / 鱼雷艇"},
-      {label: "吨位", value: "95"},
-      {label: "速度", value: "43 节"},
-      {label: "费用", value: "$7 / 6s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "鱼雷艇",
     armaments: [
       {label: "主炮", value: "1x1 37mm/57"},
       {label: "高炮", value: "2x1 20mm/70"},
@@ -2718,14 +2039,7 @@
   {
     name: "MTB_77",
     displayName: "MTB-77",
-    specs: [
-      {label: "类型", value: "TB / 鱼雷艇"},
-      {label: "吨位", value: "45"},
-      {label: "速度", value: "39 节"},
-      {label: "费用", value: "$4 / 4s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "鱼雷艇",
     armaments: [
       {label: "主炮", value: "1x2 1910mm"},
       {label: "鱼雷", value: "2x1 533mm"},
@@ -2747,14 +2061,7 @@
   {
     name: "P_6",
     displayName: "P-6",
-    specs: [
-      {label: "类型", value: "TB / 鱼雷艇"},
-      {label: "吨位", value: "66"},
-      {label: "速度", value: "45 节"},
-      {label: "费用", value: "$5 / 4s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "鱼雷艇",
     armaments: [
       {label: "主炮", value: "2x2 25mm/65"},
       {label: "鱼雷", value: "2x1 533mm"},
@@ -2776,37 +2083,23 @@
   {
     name: "mercy",
     displayName: "仁慈",
-    specs: [
-      {label: "类型", value: "HS / 医疗船"},
-      {label: "吨位", value: "70473"},
-      {label: "速度", value: "17 节"},
-      {label: "费用", value: "$520 / 50s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "医疗船",
     armaments: [
       {label: "武装", value: "无固定武装"},
     ],
-    description: "仁慈号是美国海军天堂级医院船，于二战期间建造并服役。该船满载排水量约 15000 吨，设有完善的医疗设施，包括手术室、病房及化验室等，可容纳约 800 名伤员，主要在太平洋战区执行伤员救护和后送任务。",
+    description: "仁慈号（USNS Mercy, T-AH-19）是美国海军仁慈级医院船首舰，最初作为油轮 SS Worth 于 1976 年建成，1984 年开始改装为医院船，1986 年正式服役。该船主要执行医疗救护、灾害响应和人道主义援助任务，母港设在圣迭戈。",
     author: "未知",
     links: [
       {
-        name: "维基百科 - 仁慈号医院船",
-        url: "https://zh.wikipedia.org/zh-cn/%E4%BB%81%E6%85%88%E7%B4%9A%E9%86%AB%E7%99%82%E8%88%B9"
+        name: "Wikipedia - USNS Mercy",
+        url: "https://en.wikipedia.org/wiki/USNS_Mercy"
       }
     ]
   },
   {
     name: "peace_ark",
     displayName: "和平方舟",
-    specs: [
-      {label: "类型", value: "HS / 医疗船"},
-      {label: "吨位", value: "14300"},
-      {label: "速度", value: "20 节"},
-      {label: "费用", value: "$200 / 20s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "医疗船",
     armaments: [
       {label: "武装", value: "无固定武装"},
     ],
@@ -2826,14 +2119,7 @@
   {
     name: "britannic",
     displayName: "不列颠",
-    specs: [
-      {label: "类型", value: "HS / 医疗船"},
-      {label: "吨位", value: "53848"},
-      {label: "速度", value: "24 节"},
-      {label: "费用", value: "$420 / 45s"},
-      {label: "水平减伤", value: "0%"},
-      {label: "垂直减伤", value: "0%"}
-    ],
+    type: "医疗船",
     armaments: [
       {label: "武装", value: "无固定武装"},
     ],
@@ -2845,12 +2131,11 @@
         url: "https://en.wikipedia.org/wiki/HMHS_Britannic"
       }
     ]
-  }
+  },
   // 飞机部分
   {
     name: "F",
     displayName: "歼击机",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2859,7 +2144,6 @@
   {
     name: "B",
     displayName: "轰炸机",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2868,7 +2152,6 @@
   {
     name: "A",
     displayName: "攻击机",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2877,7 +2160,6 @@
   {
     name: "A6M_0",
     displayName: "零式",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2886,7 +2168,6 @@
   {
     name: "A7M2",
     displayName: "烈风",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2895,7 +2176,6 @@
   {
     name: "B5N2_97",
     displayName: "九七式",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2904,7 +2184,6 @@
   {
     name: "B7A2",
     displayName: "流星",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2913,7 +2192,6 @@
   {
     name: "C6N1",
     displayName: "彩云",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2922,7 +2200,6 @@
   {
     name: "D3A_99",
     displayName: "九九式",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2931,7 +2208,6 @@
   {
     name: "D4Y3",
     displayName: "彗星",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2940,7 +2216,6 @@
   {
     name: "F4F-3",
     displayName: "野猫",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
@@ -2949,15 +2224,14 @@
   {
     name: "SBD-3",
     displayName: "无畏",
-    specs: [],
     armaments: [],
     description: "",
     author: "",
     links: []
+  },
   {
     name: "TBD-1",
     displayName: "蹂躏者",
-    specs: [],
     armaments: [],
     description: "",
     author: "",

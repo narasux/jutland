@@ -11,21 +11,30 @@ import (
 )
 
 const (
-	evaluationWindow  = 60.0
+	// 战力评估默认以 60 秒为观察窗口，既能覆盖飞机有限弹药，也能稳定折算持续火力。
+	evaluationWindow = 60.0
+	// 最小减伤下限防止 100% 减伤单位在公式里出现除零。
 	minimumDamageRate = 0.001
-	aviationFactor    = 0.7
+	// 航母航空战力不按满值直接相加，保留 0.7 的折扣是为了避免航空编队把舰体价值完全淹没。
+	aviationFactor = 0.7
+	// 舰炮配置以现实公里数填写，初始化时除以 2 转成运行时距离。
+	shipProjectionKilometersPerMapUnit = 2.0
+	// 飞机航程初始化时除以 14.4 转成运行时距离。
+	planeProjectionKilometersPerMapUnit = 14.4
 )
 
 type powerAccumulator struct {
-	antiShipDPS float64
-	antiAirDPS  float64
-	burstShip   float64
-	burstAir    float64
-	maxRange    float64
-	antiShip    map[string]float64
-	antiAir     map[string]float64
-	burstToShip map[string]float64
-	burstToAir  map[string]float64
+	// powerAccumulator 负责把多门炮、多组挂载和多种武器来源汇总成统一的 DPS / 爆发池。
+	// 这样可以在最后一步统一换算成战力，避免不同武器在中途各自 round 造成误差放大。
+	antiShipDPS        float64
+	antiAirDPS         float64
+	burstShip          float64
+	burstAir           float64
+	maxProjectionRange float64
+	antiShip           map[string]float64
+	antiAir            map[string]float64
+	burstToShip        map[string]float64
+	burstToAir         map[string]float64
 }
 
 func newPowerAccumulator() *powerAccumulator {
@@ -38,6 +47,7 @@ func newPowerAccumulator() *powerAccumulator {
 }
 
 // CalculatePlane 计算单架飞机的静态战力。
+// 这里输入的是已经完成资源解析的运行时对象，所以不需要再回头查配置或做额外初始化。
 func CalculatePlane(plane *objUnit.Plane, bullets map[string]*objBullet.Bullet) objUnit.CombatPowerInfo {
 	if plane == nil {
 		return objUnit.CombatPowerInfo{}
@@ -90,7 +100,8 @@ func CalculatePlane(plane *objUnit.Plane, bullets map[string]*objBullet.Bullet) 
 		}
 	}
 
-	// 当前战斗逻辑中战斗机只攻击飞机，轰炸机与鱼雷机只攻击舰船。
+	// 机种限制只影响战力统计，不改动真实伤害逻辑。
+	// 当前规则下，战斗机只计对空，轰炸机和鱼雷机只计对舰。
 	switch plane.Type {
 	case objUnit.PlaneTypeFighter:
 		acc.clearAntiShip()
@@ -100,10 +111,13 @@ func CalculatePlane(plane *objUnit.Plane, bullets map[string]*objBullet.Bullet) 
 
 	ehp := planeEHP(plane)
 	mobility := planeMobility(plane)
-	return buildPowerInfo(ehp, mobility, plane.Range, acc)
+	result := buildPowerInfo(ehp, mobility, plane.Range, acc)
+	result.Details.MaxProjectionDistanceKM = plane.Range * planeProjectionKilometersPerMapUnit
+	return result
 }
 
 // CalculateShip 计算舰船本体以及满编舰载机贡献后的静态战力。
+// 舰体和舰载机分别先算，再在这里汇总，是为了保留“舰体价值”和“航空价值”的拆分结果。
 func CalculateShip(
 	ship *objUnit.BattleShip,
 	planes map[string]*objUnit.Plane,
@@ -126,7 +140,7 @@ func CalculateShip(
 				effectiveness := gunEffectiveness(gun, true, false)
 				acc.addAntiAir(gun.Name, gunDPS(gun, bullets)*effectiveness, gunBurst(gun, bullets)*effectiveness)
 			}
-			acc.maxRange = max(acc.maxRange, gun.Range)
+			acc.maxProjectionRange = max(acc.maxProjectionRange, gun.Range)
 		}
 	}
 	for _, torpedo := range ship.Weapon.Torpedoes {
@@ -137,7 +151,7 @@ func CalculateShip(
 			torpedo.Name, torpedoDPS(torpedo, bullets)*effectiveness,
 			torpedoBurst(torpedo, bullets)*effectiveness,
 		)
-		acc.maxRange = max(acc.maxRange, torpedo.Range)
+		acc.maxProjectionRange = max(acc.maxProjectionRange, torpedo.Range)
 	}
 	for _, rocket := range ship.Weapon.Rockets {
 		dps := shipRocketDPS(rocket, bullets)
@@ -155,10 +169,11 @@ func CalculateShip(
 			)
 			acc.addAntiAir(rocket.Name, dps*effectiveness, shipRocketBurst(rocket, bullets)*effectiveness)
 		}
-		acc.maxRange = max(acc.maxRange, rocket.Range)
+		acc.maxProjectionRange = max(acc.maxProjectionRange, rocket.Range)
 	}
 
-	hull := buildPowerInfo(shipEHP(ship), shipMobility(ship), acc.maxRange, acc)
+	hull := buildPowerInfo(shipEHP(ship), shipMobility(ship), acc.maxProjectionRange, acc)
+	hull.Details.MaxProjectionDistanceKM = acc.maxProjectionRange * shipProjectionKilometersPerMapUnit
 	result := hull
 	result.Hull = hull.Total
 
@@ -174,8 +189,12 @@ func CalculateShip(
 		result.Details.AntiShipDPS += plane.CombatPower.Details.AntiShipDPS * count * aviationFactor
 		result.Details.AntiAirDPS += plane.CombatPower.Details.AntiAirDPS * count * aviationFactor
 		result.Details.BurstDamage += plane.CombatPower.Details.BurstDamage * count * aviationFactor
-		result.Details.MaxRange = max(result.Details.MaxRange, plane.Range)
-		label := plane.DisplayName + " ×" + formatCount(group.MaxCount)
+		result.Details.MaxProjectionRange = max(result.Details.MaxProjectionRange, plane.Range)
+		result.Details.MaxProjectionDistanceKM = max(
+			result.Details.MaxProjectionDistanceKM,
+			plane.Range*planeProjectionKilometersPerMapUnit,
+		)
+		label := objUnit.GetPlaneDisplayName(plane.Name) + " ×" + formatCount(group.MaxCount)
 		addSortedContribution(
 			&result.Details.AntiShipContributions, label,
 			plane.CombatPower.Details.AntiShipDPS*count*aviationFactor,
@@ -196,12 +215,13 @@ func CalculateShip(
 	result.AntiAir += aviationAir
 	result.Aviation = weightedTotal(aviationShip, aviationAir)
 	result.Total = result.Hull + result.Aviation
-	result.Range = rangeScore(result.Details.MaxRange)
+	result.Projection = projectionScore(result.Details.MaxProjectionRange)
 	result.Burst = burstScore(result.Details.BurstDamage)
 	return result
 }
 
 func (a *powerAccumulator) addAntiShip(name string, dps, burst float64) {
+	// 同名武器可能在不同挂载组里出现，先按名称聚合后再排序更适合图鉴展示。
 	if dps > 0 {
 		a.antiShipDPS += dps
 		a.antiShip[name] += dps
@@ -213,6 +233,7 @@ func (a *powerAccumulator) addAntiShip(name string, dps, burst float64) {
 }
 
 func (a *powerAccumulator) addAntiAir(name string, dps, burst float64) {
+	// 对空池和对舰池分开记账，最终会各自落到雷达图的不同维度。
 	if dps > 0 {
 		a.antiAirDPS += dps
 		a.antiAir[name] += dps
@@ -224,6 +245,7 @@ func (a *powerAccumulator) addAntiAir(name string, dps, burst float64) {
 }
 
 func (a *powerAccumulator) clearAntiShip() {
+	// 机种限制命中后，直接清空对舰统计，避免错误的跨目标输出污染结果。
 	a.antiShipDPS = 0
 	a.burstShip = 0
 	a.antiShip = map[string]float64{}
@@ -231,6 +253,7 @@ func (a *powerAccumulator) clearAntiShip() {
 }
 
 func (a *powerAccumulator) clearAntiAir() {
+	// 机种限制命中后，直接清空对空统计，避免错误的跨目标输出污染结果。
 	a.antiAirDPS = 0
 	a.burstAir = 0
 	a.antiAir = map[string]float64{}
@@ -238,6 +261,7 @@ func (a *powerAccumulator) clearAntiAir() {
 }
 
 func (a *powerAccumulator) burst() (float64, []objUnit.CombatPowerContribution) {
+	// 爆发值取对舰/对空中更高的一侧，方便图鉴展示“这单位最强的一次齐射”。
 	if a.burstAir > a.burstShip {
 		return a.burstAir, sortedContributions(a.burstToAir)
 	}
@@ -245,6 +269,7 @@ func (a *powerAccumulator) burst() (float64, []objUnit.CombatPowerContribution) 
 }
 
 func sortedContributions(values map[string]float64) []objUnit.CombatPowerContribution {
+	// 贡献列表按数值从高到低输出，便于图鉴 tooltip 直接告诉玩家主要来源。
 	result := make([]objUnit.CombatPowerContribution, 0, len(values))
 	for name, value := range values {
 		if value <= 0 {
@@ -262,6 +287,7 @@ func sortedContributions(values map[string]float64) []objUnit.CombatPowerContrib
 }
 
 func addSortedContribution(target *[]objUnit.CombatPowerContribution, name string, value float64) {
+	// 舰载机贡献会在多组挂载之间重复出现，所以这里需要做累加而不是简单 append。
 	if value <= 0 {
 		return
 	}
@@ -281,24 +307,26 @@ func formatCount(count int64) string {
 }
 
 func buildPowerInfo(
-	ehp, mobility, maxRange float64, acc *powerAccumulator,
+	ehp, mobility, maxProjectionRange float64, acc *powerAccumulator,
 ) objUnit.CombatPowerInfo {
+	// 这里统一把“存活能力 + 目标效率 + 机动修正”换算成最终对舰 / 对空战力。
+	// 任何辅助字段都只保存在 Details 中，方便图鉴和 tooltip 解释来源。
 	antiShip := combatScore(ehp, acc.antiShipDPS, mobility)
 	antiAir := combatScore(ehp, acc.antiAirDPS, mobility)
 	burstDamage, burstContributions := acc.burst()
 	return objUnit.CombatPowerInfo{
-		Total:    weightedTotal(antiShip, antiAir),
-		AntiShip: antiShip,
-		AntiAir:  antiAir,
-		Survival: nonNegativeRound(math.Sqrt(max(0, ehp))),
-		Mobility: nonNegativeRound(100 * mobility),
-		Range:    rangeScore(maxRange),
-		Burst:    burstScore(burstDamage),
+		Total:      weightedTotal(antiShip, antiAir),
+		AntiShip:   antiShip,
+		AntiAir:    antiAir,
+		Survival:   nonNegativeRound(math.Sqrt(max(0, ehp))),
+		Mobility:   nonNegativeRound(100 * mobility),
+		Projection: projectionScore(maxProjectionRange),
+		Burst:      burstScore(burstDamage),
 		Details: objUnit.CombatPowerDetails{
 			EffectiveHP:           ehp,
 			AntiShipDPS:           acc.antiShipDPS,
 			AntiAirDPS:            acc.antiAirDPS,
-			MaxRange:              maxRange,
+			MaxProjectionRange:    maxProjectionRange,
 			BurstDamage:           burstDamage,
 			AntiShipContributions: sortedContributions(acc.antiShip),
 			AntiAirContributions:  sortedContributions(acc.antiAir),
@@ -308,6 +336,7 @@ func buildPowerInfo(
 }
 
 func weightedTotal(antiShip, antiAir int) int {
+	// 综合战力不是简单平均，而是偏向对舰能力，因为大多数单位的主用途仍然是打舰船。
 	total := nonNegativeRound(0.7*float64(antiShip) + 0.3*float64(antiAir))
 	if total == 0 && (antiShip > 0 || antiAir > 0) {
 		return 1
@@ -316,21 +345,26 @@ func weightedTotal(antiShip, antiAir int) int {
 }
 
 func combatScore(ehp, dps, mobility float64) int {
+	// 采用 sqrt(EHP * DPS) 的形式，让“更硬”与“更能打”共同抬高分数，但不会被单项极端拉爆。
 	if ehp <= 0 || dps <= 0 || mobility <= 0 {
 		return 0
 	}
 	return nonNegativeRound(math.Sqrt(ehp*dps) * mobility / 10)
 }
 
-func rangeScore(maxRange float64) int {
-	return nonNegativeRound(maxRange * 10)
+func projectionScore(maxProjectionRange float64) int {
+	// 投送距离不直接参与主战斗分数，而是作为图鉴中的独立维度展示。
+	return nonNegativeRound(maxProjectionRange * 10)
 }
 
 func burstScore(damage float64) int {
+	// 爆发值用于表达一次齐射/齐投的体感威胁，不和持续 DPS 混在一起。
 	return nonNegativeRound(math.Sqrt(max(0, damage)))
 }
 
 func expectedDamage(bulletName string, bullets map[string]*objBullet.Bullet) float64 {
+	// 暴击期望按 Damage × (1 + 2.7 × CritRate) 计算。
+	// 这样做比只看基础伤害更接近实际战斗表现，但仍然保持可解释性。
 	bullet, ok := bullets[bulletName]
 	if !ok || bullet == nil || bullet.Damage <= 0 {
 		return 0
@@ -339,6 +373,7 @@ func expectedDamage(bulletName string, bullets map[string]*objBullet.Bullet) flo
 }
 
 func gunDPS(gun *objUnit.Gun, bullets map[string]*objBullet.Bullet) float64 {
+	// 火炮直接按“每轮伤害 / 装填周期”折算持续 DPS。
 	if gun == nil || gun.BulletCount <= 0 || gun.ReloadTime <= 0 {
 		return 0
 	}
@@ -346,6 +381,7 @@ func gunDPS(gun *objUnit.Gun, bullets map[string]*objBullet.Bullet) float64 {
 }
 
 func gunBurst(gun *objUnit.Gun, bullets map[string]*objBullet.Bullet) float64 {
+	// 火炮爆发就是单轮齐射总伤害。
 	if gun == nil || gun.BulletCount <= 0 {
 		return 0
 	}
@@ -353,6 +389,7 @@ func gunBurst(gun *objUnit.Gun, bullets map[string]*objBullet.Bullet) float64 {
 }
 
 func torpedoDPS(launcher *objUnit.TorpedoLauncher, bullets map[string]*objBullet.Bullet) float64 {
+	// 鱼雷按首发装填 + 连发间隔计算完整发射周期。
 	if launcher == nil || launcher.BulletCount <= 0 {
 		return 0
 	}
@@ -371,6 +408,7 @@ func torpedoBurst(launcher *objUnit.TorpedoLauncher, bullets map[string]*objBull
 }
 
 func shipRocketDPS(launcher *objUnit.RocketLauncher, bullets map[string]*objBullet.Bullet) float64 {
+	// 舰载火箭存在分组发射，所以周期要同时考虑组内连发和组间间隔。
 	if launcher == nil || launcher.RocketCount <= 0 {
 		return 0
 	}
@@ -394,6 +432,7 @@ func shipRocketBurst(launcher *objUnit.RocketLauncher, bullets map[string]*objBu
 }
 
 func releaserDPS(releaser *objUnit.Releaser, bullets map[string]*objBullet.Bullet) float64 {
+	// 飞机炸弹和鱼雷在图鉴里按 60 秒窗口折算，避免低弹药挂载被高估。
 	if releaser == nil {
 		return 0
 	}
@@ -408,6 +447,7 @@ func releaserBurst(releaser *objUnit.Releaser, bullets map[string]*objBullet.Bul
 }
 
 func planeRocketDPS(launcher *objUnit.PlaneRocketLauncher, bullets map[string]*objBullet.Bullet) float64 {
+	// 飞机火箭同样按固定窗口折算，便于与炸弹、鱼雷放在同一战力框架下比较。
 	if launcher == nil || launcher.RocketCount <= 0 {
 		return 0
 	}
@@ -422,6 +462,7 @@ func planeRocketBurst(launcher *objUnit.PlaneRocketLauncher, bullets map[string]
 }
 
 func gunEffectiveness(gun *objUnit.Gun, antiAir, planeShooter bool) float64 {
+	// 命中系数把基础命中率、散布、射界和射程合在一起，得到一个可比较的有效输出倍率。
 	if gun == nil {
 		return 0
 	}
@@ -445,6 +486,7 @@ func weaponEffectiveness(
 	leftArc, rightArc objUnit.FiringArc,
 	antiAir bool,
 ) float64 {
+	// 对舰与对空使用不同的散布、射程基准，避免大口径舰炮和近程防空炮互相失真。
 	spreadRef, rangeRef := 100.0, 10.0
 	if antiAir {
 		spreadRef, rangeRef = 20, 3
@@ -459,6 +501,7 @@ func weaponEffectiveness(
 }
 
 func firingArcCoverage(leftArc, rightArc objUnit.FiringArc) float64 {
+	// 射界按并集角度计算，重叠区只算一次。
 	intervals := [][2]float64{}
 	for _, arc := range []objUnit.FiringArc{leftArc, rightArc} {
 		start, end := clamp(arc.Start, 0, 360), clamp(arc.End, 0, 360)
@@ -484,6 +527,7 @@ func firingArcCoverage(leftArc, rightArc objUnit.FiringArc) float64 {
 }
 
 func shipEHP(ship *objUnit.BattleShip) float64 {
+	// 舰船 EHP 分成水平与垂直两套减伤，按 6:4 加权，近似反映不同武器类型的穿透差异。
 	if ship == nil || ship.TotalHP <= 0 {
 		return 0
 	}
@@ -493,6 +537,7 @@ func shipEHP(ship *objUnit.BattleShip) float64 {
 }
 
 func planeEHP(plane *objUnit.Plane) float64 {
+	// 飞机通常会承受更高的集中打击，所以用三倍受伤系数把有效生存压回可比较的范围。
 	if plane == nil || plane.TotalHP <= 0 {
 		return 0
 	}
@@ -500,6 +545,7 @@ func planeEHP(plane *objUnit.Plane) float64 {
 }
 
 func shipMobility(ship *objUnit.BattleShip) float64 {
+	// 舰船机动由速度、转向和加速度共同决定，并限制在一个窄区间内，避免小差异放大。
 	if ship == nil {
 		return 0.75
 	}
@@ -510,6 +556,7 @@ func shipMobility(ship *objUnit.BattleShip) float64 {
 }
 
 func planeMobility(plane *objUnit.Plane) float64 {
+	// 飞机机动比舰船更敏感，所以额外把航程也纳入到机动折算里。
 	if plane == nil {
 		return 0.75
 	}
@@ -521,6 +568,7 @@ func planeMobility(plane *objUnit.Plane) float64 {
 }
 
 func nonNegativeRatio(value, reference float64) float64 {
+	// 所有比值都先做非负保护，避免非法配置把幂函数输入推成 NaN。
 	if value <= 0 || reference <= 0 {
 		return 0
 	}
@@ -528,6 +576,7 @@ func nonNegativeRatio(value, reference float64) float64 {
 }
 
 func nonNegativeRound(value float64) int {
+	// 任何非法或负数结果都压回 0，保证图鉴和测试里不会出现 NaN / Inf 的后续传播。
 	if value <= 0 || math.IsNaN(value) || math.IsInf(value, 0) {
 		return 0
 	}
@@ -535,5 +584,6 @@ func nonNegativeRound(value float64) int {
 }
 
 func clamp(value, minimum, maximum float64) float64 {
+	// 通用夹取函数，所有经验系数都通过它收口。
 	return min(maximum, max(minimum, value))
 }

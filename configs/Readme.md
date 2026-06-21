@@ -71,11 +71,8 @@
   {
     // 对象名称，通常与 ships.json5 中的 name 对应
     name: "duck",
-    // 图鉴核心参数
-    specs: [
-      {label: "类型", value: "Duck / default"},
-      {label: "吨位", value: "150000"},
-    ],
+    // 图鉴使用的精细舰种名称；缩写、排水量、速度、费用和减伤从 ships.json5 读取
+    type: "特殊",
     // 图鉴武装摘要
     armaments: [
       {label: "主炮", value: "1x8 406mm"},
