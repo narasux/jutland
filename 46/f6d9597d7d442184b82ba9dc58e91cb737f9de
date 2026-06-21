@@ -1,0 +1,61 @@
+pkg/collection/ui.go
+  s_52be2b05ff5291::t_9699c902f6cc46 1108-1109,1148-1149,1280
+  s_52be2b05ff5291::t_185beb362a6739 1041-1051,1053
+  s_52be2b05ff5291::t_513e55ba94da71 1370,1375,1597,1599-1600
+  s_52be2b05ff5291::t_38cde8cc9084c6 363,367
+  s_52be2b05ff5291::t_b89ddb18c22cbd 521,523-528,575,583,586
+  s_52be2b05ff5291::t_6c3ebd6d641a5f 529
+  s_52be2b05ff5291::t_780258b3e8f7ea 565-572
+  s_52be2b05ff5291::t_f3db4dce724db3 715-716,748-749,779-786,788-789,808,812
+  s_52be2b05ff5291::t_c5d4b8bad33715 520,522,532-534,560-564,573-574,576-582,584
+  s_52be2b05ff5291::t_89f4a87fbcf947 519
+pkg/mission/object/combatpower/README.md
+  s_52be2b05ff5291::t_7818cc8da20c16 21,104,144,152-159,199,207-208,251,258,262,265-267,273
+pkg/mission/object/unit/types.go
+  s_52be2b05ff5291::t_43ffda4c9553f9 67
+  s_52be2b05ff5291::t_2f9ff98bbcbe4b 68-77
+  s_52be2b05ff5291::t_956ea3cbb577aa 66
+configs/references.json5
+  s_02fd07ebe5d871::t_684235a79e026a 165,167-170
+pkg/mission/object/combatpower/combatpower_test.go
+  s_52be2b05ff5291::t_2f9ff98bbcbe4b 176-177,179,189
+  s_52be2b05ff5291::t_3bc1d2ae61f606 106,123-125,129-139,143-145,153-161,165,169,175,178,180-183,186-188,190-208
+  s_52be2b05ff5291::t_c01c51bcb4bc15 5
+.codex/skills/jutland-add-ship/SKILL.md
+  s_02fd07ebe5d871::t_7356656b509e14 12,81,96-101,114
+  s_02fd07ebe5d871::t_af5c27a67187a6 13,102-103
+  s_02fd07ebe5d871::t_5807cd50218d0e 83,104-105
+pkg/mission/object/unit/ship.go
+  s_52be2b05ff5291::t_3bd90d2a9c3804 78
+pkg/collection/radar.go
+  s_52be2b05ff5291::t_dd96af9d27cf73 237-240,248-250
+pkg/mission/object/combatpower/combatpower.go
+  s_52be2b05ff5291::t_2f9ff98bbcbe4b 318-324
+  s_52be2b05ff5291::t_5a83515600d72b 20-21,51,105-107,113,174,186-192,201,205,209,303,307-313,315,317,326-328,331-333,338-345
+pkg/mission/hacker/cheat/object.go
+  s_52be2b05ff5291::t_9699c902f6cc46 121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "46f6d9597d7d442184b82ba9dc58e91cb737f9de",
+  "prompts": {},
+  "sessions": {
+    "s_02fd07ebe5d871": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eea2f-3ce0-7b93-8ea9-1b9c6dcc7c7e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    },
+    "s_52be2b05ff5291": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ee34c-2ff9-7173-b29e-68dea94ce4a2",
+        "model": "gpt-5.5"
+      },
+      "human_author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  }
+}
