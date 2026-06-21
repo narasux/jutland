@@ -25,8 +25,8 @@ func init() {
 	initReleaserMap()
 	initPlaneMap()
 	initShipMap()
-	initCombatPower()
 	initReferenceMap()
+	initCombatPower()
 }
 
 func initBulletMap() {

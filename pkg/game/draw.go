@@ -4,15 +4,12 @@ import (
 	"fmt"
 	"image"
 	"image/color"
-	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
 	"github.com/narasux/jutland/pkg/mission/metadata"
-	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
-	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -23,10 +20,6 @@ import (
 // Drawer 图像绘制工具
 type Drawer struct {
 	abbrMaps map[string]*ebiten.Image
-}
-
-type collectionCard struct {
-	X, Y, W, H float64
 }
 
 // NewDrawer ...
@@ -148,7 +141,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	descFontSize := 18.0
 	descLineHeight := 28.0
 	descMaxWidth := cardW - 2*pad
-	for idx, line := range wrapCollectionText(misMD.Description, descMaxWidth, descFontSize) {
+	for idx, line := range wrapText(misMD.Description, descMaxWidth, descFontSize) {
 		d.drawText(screen, line, panelX, curY+float64(idx)*descLineHeight, descFontSize, font.Kai, bodyClr)
 	}
 
@@ -269,155 +262,15 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 	return abbrMap
 }
 
-func (d *Drawer) drawCollectionImageFit(
-	screen *ebiten.Image,
-	img *ebiten.Image,
-	x, y, width, height, rotation float64,
-	allowUpscale bool,
-) {
-	if img == nil || width <= 0 || height <= 0 {
-		return
-	}
-	imgW, imgH := float64(img.Bounds().Dx()), float64(img.Bounds().Dy())
-	rotatedW, rotatedH := imgW, imgH
-	if int(math.Mod(math.Abs(rotation), 180)) == 90 {
-		rotatedW, rotatedH = imgH, imgW
-	}
-	scale := min(width/rotatedW, height/rotatedH)
-	if !allowUpscale {
-		scale = min(1, scale)
-	} else {
-		scale = min(8, scale)
-	}
-	opts := d.genDefaultDrawImageOptions()
-	opts.GeoM.Translate(-imgW/2, -imgH/2)
-	opts.GeoM.Rotate(rotation * math.Pi / 180)
-	opts.GeoM.Scale(scale, scale)
-	opts.GeoM.Translate(x+width/2, y+height/2)
-	screen.DrawImage(img, opts)
-}
-
-func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {
-	items := []objRef.InfoItem{}
-	appendGroup := func(label string, names []string) {
-		counts, order := map[string]int{}, []string{}
-		for _, name := range names {
-			if counts[name] == 0 {
-				order = append(order, name)
-			}
-			counts[name]++
-		}
-		for _, name := range order {
-			items = append(items, objRef.InfoItem{Label: label, Value: fmt.Sprintf("%dx %s", counts[name], name)})
-		}
-	}
-	gunNames := make([]string, 0, len(plane.Weapon.Guns))
-	for _, gun := range plane.Weapon.Guns {
-		gunNames = append(gunNames, gun.Name)
-	}
-	bombNames := make([]string, 0, len(plane.Weapon.Bombs))
-	for _, bomb := range plane.Weapon.Bombs {
-		bombNames = append(bombNames, bomb.Name)
-	}
-	torpedoNames := make([]string, 0, len(plane.Weapon.Torpedoes))
-	for _, torpedo := range plane.Weapon.Torpedoes {
-		torpedoNames = append(torpedoNames, torpedo.Name)
-	}
-	rocketNames := make([]string, 0, len(plane.Weapon.Rockets))
-	for _, rocket := range plane.Weapon.Rockets {
-		rocketNames = append(rocketNames, rocket.Name)
-	}
-	appendGroup("机炮", gunNames)
-	appendGroup("炸弹", bombNames)
-	appendGroup("鱼雷", torpedoNames)
-	appendGroup("火箭", rocketNames)
-	if len(items) == 0 {
-		items = append(items, objRef.InfoItem{Label: "武装", Value: "无"})
-	}
-	return items
-}
-
-func (d *Drawer) drawCollectionCard(
-	screen *ebiten.Image, card collectionCard, title string, metrics collectionMetrics,
-) {
-	scale := metrics.Scale
-	vector.FillRect(
-		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
-		color.RGBA{R: 18, G: 18, B: 18, A: 172}, false,
-	)
-	vector.StrokeRect(
-		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
-		2, color.RGBA{R: 214, G: 201, B: 178, A: 190}, false,
-	)
-	d.drawText(
-		screen, title, card.X+20*scale, card.Y+18*scale,
-		metrics.CardTitle, font.Kai, color.RGBA{R: 230, G: 218, B: 194, A: 255},
-	)
-	vector.StrokeLine(
-		screen, float32(card.X+20*scale), float32(card.Y+44*scale),
-		float32(card.X+card.W-20*scale), float32(card.Y+44*scale),
-		1, color.RGBA{R: 214, G: 201, B: 178, A: 120}, false,
-	)
-}
-
-func (d *Drawer) drawCollectionInfoItems(
-	screen *ebiten.Image, items []objRef.InfoItem, x, y, valueMaxWidth, lineHeight float64,
-) {
-	// 根据最长标签动态计算值的起始 X，避免标签与值重叠
-	labelOffset := 76.0
-	longestLabel := 0.0
-	for _, item := range items {
-		w := estimateCollectionTextWidth(item.Label, 20)
-		if w > longestLabel {
-			longestLabel = w
-		}
-	}
-	if longestLabel > 60 {
-		labelOffset = longestLabel + 16
-	}
-	drawn := 0
-	for _, item := range items {
-		lineY := y + float64(drawn)*lineHeight
-		d.drawText(screen, item.Label, x, lineY, 20, font.Kai, color.RGBA{R: 214, G: 201, B: 178, A: 255})
-
-		valueFont := font.Kai
-		wrappedValues := wrapCollectionText(item.Value, valueMaxWidth, 20)
-		for idx, value := range wrappedValues {
-			d.drawText(screen, value, x+labelOffset, lineY+float64(idx)*lineHeight, 20, valueFont, colorx.White)
-		}
-		drawn += max(1, len(wrappedValues))
-	}
-}
-
-func (d *Drawer) drawCollectionLines(
-	screen *ebiten.Image,
-	lines []string,
-	x, y, maxWidth, fontSize, lineHeight float64,
-	textFont *text.GoTextFaceSource,
-	maxLines int,
-	textColor color.Color,
-) {
-	drawn := 0
-	for _, line := range lines {
-		for _, wrapped := range wrapCollectionText(line, maxWidth, fontSize) {
-			if drawn >= maxLines {
-				return
-			}
-			d.drawText(screen, wrapped, x, y+float64(drawn)*lineHeight, fontSize, textFont, textColor)
-			drawn++
-		}
-	}
-}
-
-func wrapCollectionText(text string, maxWidth, fontSize float64) []string {
-	if estimateCollectionTextWidth(text, fontSize) <= maxWidth {
+func wrapText(text string, maxWidth, fontSize float64) []string {
+	if estimateTextWidth(text, fontSize) <= maxWidth {
 		return []string{text}
 	}
 	lines := []string{}
 	line := ""
 	for _, r := range text {
 		next := line + string(r)
-		if line != "" && estimateCollectionTextWidth(next, fontSize) > maxWidth {
+		if line != "" && estimateTextWidth(next, fontSize) > maxWidth {
 			lines = append(lines, line)
 			line = string(r)
 			continue
@@ -430,8 +283,8 @@ func wrapCollectionText(text string, maxWidth, fontSize float64) []string {
 	return lines
 }
 
-// estimateCollectionTextWidth 粗略估算图鉴文本宽度，用于换行和同排文本定位
-func estimateCollectionTextWidth(text string, fontSize float64) float64 {
+// estimateTextWidth 粗略估算文本宽度，用于换行。
+func estimateTextWidth(text string, fontSize float64) float64 {
 	width := 0.0
 	for _, r := range text {
 		if r <= 127 {

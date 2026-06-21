@@ -12,6 +12,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
 	"github.com/narasux/jutland/pkg/audio"
+	"github.com/narasux/jutland/pkg/collection"
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/game/settings"
 	"github.com/narasux/jutland/pkg/mission/manager"
@@ -41,7 +42,7 @@ type Game struct {
 	// 设置界面
 	settingUI *settings.UI
 	// 游戏图鉴界面
-	collectionUI *CollectionUI
+	collectionUI *collection.UI
 	// 全游戏唯一的 EbitenUI 主实例
 	ui          *ebitenui.UI
 	emptyUIRoot widget.Containerer
@@ -63,7 +64,7 @@ func New() *Game {
 			DisableDefaultFocus: true,
 		},
 	}
-	g.collectionUI = NewCollectionUI(g.drawer)
+	g.collectionUI = collection.New()
 	g.init()
 	return g
 }

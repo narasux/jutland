@@ -22,8 +22,9 @@ type Reference struct {
 	Name string `json:"name"`
 	// 展示用名称
 	DisplayName string `json:"displayName"`
-	// 图鉴核心参数
-	Specs []InfoItem `json:"specs"`
+	// 舰种名称，用于保留“重巡洋舰”“装甲航空母舰”等精细分类。
+	// 缩写、排水量、速度、费用和减伤等数据统一从舰船配置读取。
+	Type string `json:"type"`
 	// 图鉴武装摘要
 	Armaments []InfoItem `json:"armaments"`
 	// 描述
