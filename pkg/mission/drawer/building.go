@@ -10,6 +10,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -21,6 +22,7 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 type reinforceUILayout struct {
@@ -182,7 +184,7 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 		ebutil.DrawCrossMarker(screen, rallyX, rallyY, 6, 2, colorx.Green)
 		// 集结点陆地失败提示
 		if ms.UI.RallySetFailedTick > 0 {
-			d.drawText(screen, "陆地不可设集结点", rallyX-44, rallyY-18, 14, font.Kai, colorx.Red)
+			d.drawText(screen, gamei18n.Text(gamei18n.MsgRallyLandBlocked), rallyX-44, rallyY-18, 14, font.LocalizedUI(font.Kai), colorx.Red)
 		}
 	}
 }
@@ -262,8 +264,8 @@ func (d *Drawer) drawReinforceShipInfo(
 		H: cardH,
 	}
 
-	d.drawReinforceInfoCard(screen, archiveCard, "舰船档案")
-	d.drawReinforceInfoCard(screen, armamentCard, "武装配置")
+	d.drawReinforceInfoCard(screen, archiveCard, gamei18n.Text(gamei18n.MsgReinforceShipArchive))
+	d.drawReinforceInfoCard(screen, armamentCard, gamei18n.Text(gamei18n.MsgReinforceWeaponConfig))
 
 	indexText := fmt.Sprintf("%d/%d", shipIndex, shipCount)
 	d.drawText(
@@ -277,7 +279,8 @@ func (d *Drawer) drawReinforceShipInfo(
 	)
 
 	titleFontSize := float64(34)
-	if len(objUnit.GetShipDisplayName(selectedShipName)) > 6 {
+	titleFont := font.LocalizedUI(font.Hang)
+	if layout.CalcTextWidth(objUnit.GetShipDisplayName(selectedShipName), titleFontSize, titleFont) > archiveCard.W-48 {
 		titleFontSize = 30
 	}
 	d.drawText(
@@ -286,7 +289,7 @@ func (d *Drawer) drawReinforceShipInfo(
 		archiveCard.X+24,
 		archiveCard.Y+58,
 		titleFontSize,
-		font.Hang,
+		titleFont,
 		reinforceText,
 	)
 
@@ -295,15 +298,15 @@ func (d *Drawer) drawReinforceShipInfo(
 			label string
 			value string
 		}{
-			{label: "类型", value: fmt.Sprintf("%s / %s", ship.TypeAbbr, ship.Type.ToDisplay())},
-			{label: "HP", value: fmt.Sprintf("%.0f", ship.TotalHP)},
-			{label: "速度", value: fmt.Sprintf("%.1f 节", ship.MaxSpeed*600)},
-			{label: "费用", value: fmt.Sprintf("$%d / %ds", ship.FundsCost, ship.TimeCost)},
+			{label: gamei18n.Text(gamei18n.MsgReinforceType), value: gamei18n.Format(gamei18n.MsgTypeSlash, map[string]any{"Abbr": ship.TypeAbbr, "Type": ship.Type.ToDisplay()})},
+			{label: gamei18n.Text(gamei18n.MsgReinforceHP), value: fmt.Sprintf("%.0f", ship.TotalHP)},
+			{label: gamei18n.Text(gamei18n.MsgReinforceSpeed), value: gamei18n.Format(gamei18n.MsgValueKnots, map[string]any{"Value": fmt.Sprintf("%.1f", ship.MaxSpeed*600)})},
+			{label: gamei18n.Text(gamei18n.MsgReinforceCost), value: gamei18n.Format(gamei18n.MsgValueCost, map[string]any{"Funds": ship.FundsCost, "Seconds": ship.TimeCost})},
 		}
 		for idx, item := range items {
 			lineY := archiveCard.Y + 112 + float64(idx)*32
-			d.drawText(screen, item.label, archiveCard.X+24, lineY, 20, font.Kai, reinforceAccent)
-			d.drawText(screen, item.value, archiveCard.X+92, lineY, 20, font.Kai, reinforceText)
+			d.drawText(screen, item.label, archiveCard.X+24, lineY, 20, font.LocalizedUI(font.Kai), reinforceAccent)
+			d.drawText(screen, item.value, archiveCard.X+92, lineY, 20, font.LocalizedUI(font.Kai), reinforceText)
 		}
 	}
 
@@ -313,14 +316,14 @@ func (d *Drawer) drawReinforceShipInfo(
 			if drawn >= 6 {
 				break
 			}
-			line := fmt.Sprintf("%s：%s", armament.Label, armament.Value)
+			line := gamei18n.Format(gamei18n.MsgLabelValue, map[string]any{"Label": armament.Label, "Value": armament.Value})
 			d.drawText(
 				screen,
 				line,
 				armamentCard.X+24,
 				armamentCard.Y+58+float64(drawn)*32,
 				20,
-				font.Kai,
+				font.LocalizedUI(font.Kai),
 				reinforceText,
 			)
 			drawn++
@@ -349,7 +352,7 @@ func (d *Drawer) drawReinforceInfoCard(screen *ebiten.Image, panel reinforceUIPa
 		reinforcePanelBorder,
 		false,
 	)
-	d.drawText(screen, title, panel.X+20, panel.Y+16, 20, font.Kai, reinforceAccent)
+	d.drawText(screen, title, panel.X+20, panel.Y+16, 20, font.LocalizedUI(font.Kai), reinforceAccent)
 	vector.StrokeLine(
 		screen,
 		float32(panel.X+20), float32(panel.Y+44),
@@ -370,10 +373,10 @@ func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.O
 		W: panel.W - cardInsetX*2,
 		H: panel.H - cardInsetY*2,
 	}
-	d.drawReinforceInfoCard(screen, card, "增援队列")
+	d.drawReinforceInfoCard(screen, card, gamei18n.Text(gamei18n.MsgReinforceQueue))
 
 	if len(ships) == 0 {
-		d.drawText(screen, "待命", card.X+24, card.Y+64, 24, font.Kai, reinforceMutedText)
+		d.drawText(screen, gamei18n.Text(gamei18n.MsgReinforceStandby), card.X+24, card.Y+64, 24, font.LocalizedUI(font.Kai), reinforceMutedText)
 		return
 	}
 
@@ -410,7 +413,7 @@ func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingS
 	}
 	vector.FillRect(screen, float32(x), float32(y), float32(w), float32(h), bgColor, false)
 	vector.StrokeRect(screen, float32(x), float32(y), float32(w), float32(h), 1.5, borderColor, false)
-	d.drawText(screen, objUnit.GetShipDisplayName(ship.Name), x+12, y+12, 18, font.Kai, reinforceText)
+	d.drawText(screen, objUnit.GetShipDisplayName(ship.Name), x+12, y+12, 18, font.LocalizedUI(font.Kai), reinforceText)
 	if active {
 		progress := max(0, min(100, ship.Progress))
 		barX, barY, barW := x+12, y+h-16, w-24
@@ -457,10 +460,10 @@ func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILay
 		W: ui.Help.W - cardInsetX*2,
 		H: ui.Help.H - cardInsetY*2,
 	}
-	d.drawReinforceInfoCard(screen, card, "控制状态")
+	d.drawReinforceInfoCard(screen, card, gamei18n.Text(gamei18n.MsgReinforceControl))
 
-	d.drawText(screen, "当前资金", card.X+20, card.Y+58, 17, font.Kai, reinforceAccent)
-	d.drawText(screen, fmt.Sprintf("%d", curFunds), card.X+20, card.Y+84, 24, font.Kai, reinforceText)
+	d.drawText(screen, gamei18n.Text(gamei18n.MsgReinforceCurrentFunds), card.X+20, card.Y+58, 17, font.LocalizedUI(font.Kai), reinforceAccent)
+	d.drawText(screen, fmt.Sprintf("%d", curFunds), card.X+20, card.Y+84, 24, font.JetbrainsMono, reinforceText)
 
 	dividerY := card.Y + 124
 	vector.StrokeLine(
@@ -473,16 +476,16 @@ func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILay
 	)
 
 	tips := []string{
-		"↑ ↓ 增援点",
-		"← → 舰船",
-		"Enter 召唤",
-		"退格 取消增援",
-		"点击地图 设集结点",
+		gamei18n.Text(gamei18n.MsgReinforceTipPoint),
+		gamei18n.Text(gamei18n.MsgReinforceTipShip),
+		gamei18n.Text(gamei18n.MsgReinforceTipSummon),
+		gamei18n.Text(gamei18n.MsgReinforceTipCancel),
+		gamei18n.Text(gamei18n.MsgReinforceTipRally),
 	}
 	for idx, tip := range tips {
 		x := card.X + 20
 		y := dividerY + 28 + float64(idx)*30
-		d.drawText(screen, tip, x, y, 18, font.Kai, reinforceMutedText)
+		d.drawText(screen, tip, x, y, 18, font.LocalizedUI(font.Kai), reinforceMutedText)
 	}
 }
 

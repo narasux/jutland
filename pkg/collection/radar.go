@@ -10,27 +10,29 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/utils/colorx"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 type abilityDimension struct {
 	// ID 用作缩放缓存的键，Label 用作图上展示，Value 决定这个维度从战力信息中取哪个字段。
-	ID    string
-	Label string
-	Value func(objUnit.CombatPowerInfo) float64
+	ID      string
+	LabelID gamei18n.MessageID
+	Value   func(objUnit.CombatPowerInfo) float64
 }
 
 // collectionAbilityDimensions 是图鉴雷达图唯一的维度定义入口。
 // 调整顺序、增删维度或替换取值时，雷达布局会自动适配。
 var collectionAbilityDimensions = []abilityDimension{
-	{ID: "anti_ship", Label: "对舰", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.AntiShip) }},
-	{ID: "anti_air", Label: "对空", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.AntiAir) }},
-	{ID: "survival", Label: "生存", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Survival) }},
-	{ID: "mobility", Label: "机动", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Mobility) }},
-	{ID: "projection", Label: "投送", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Projection) }},
-	{ID: "burst", Label: "爆发", Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Burst) }},
+	{ID: "anti_ship", LabelID: gamei18n.MsgRadarAntiShip, Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.AntiShip) }},
+	{ID: "anti_air", LabelID: gamei18n.MsgRadarAntiAir, Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.AntiAir) }},
+	{ID: "survival", LabelID: gamei18n.MsgRadarSurvival, Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Survival) }},
+	{ID: "mobility", LabelID: gamei18n.MsgRadarMobility, Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Mobility) }},
+	{ID: "projection", LabelID: gamei18n.MsgRadarProjection, Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Projection) }},
+	{ID: "burst", LabelID: gamei18n.MsgRadarBurst, Value: func(power objUnit.CombatPowerInfo) float64 { return float64(power.Burst) }},
 }
 
 type abilityScales map[string]float64
@@ -126,9 +128,11 @@ func (d *Drawer) drawAbilityRadar(
 	for idx, dimension := range collectionAbilityDimensions {
 		labelOffset := 18 * labelFontSize / 16
 		x, y := pointAt(idx, radius+labelOffset)
-		labelWidth := estimateCollectionTextWidth(dimension.Label, labelFontSize)
+		label := gamei18n.Text(dimension.LabelID)
+		labelFont := font.LocalizedUI(font.Kai)
+		labelWidth := layout.CalcTextWidth(label, labelFontSize, labelFont)
 		labelX, labelY := x-labelWidth/2, y-labelFontSize/2
-		d.drawText(screen, dimension.Label, labelX, labelY, labelFontSize, font.Kai, colorx.White)
+		d.drawText(screen, label, labelX, labelY, labelFontSize, labelFont, colorx.White)
 		hits = append(hits, radarHitArea{
 			Point: image.Pt(int(x)+screenOffset.X, int(y)+screenOffset.Y),
 			LabelRect: image.Rect(
@@ -221,7 +225,7 @@ func (d *Drawer) drawRadarTooltip(screen *ebiten.Image, hit *radarHitArea, fontS
 		}
 		d.drawText(
 			screen, line, x+14*scale, y+12*scale+float64(idx)*lineHeight,
-			fontSize, font.Kai, clr,
+			fontSize, font.LocalizedUI(font.Kai), clr,
 		)
 	}
 }
@@ -231,40 +235,43 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale f
 	power := subject.Power
 	value := int(math.Round(dimension.Value(power)))
 	percent := int(math.Round(min(1, max(0, dimension.Value(power))/max(1, scale)) * 100))
-	lines := []string{
-		fmt.Sprintf("%s · %s", subject.Name, dimension.Label),
-	}
+	lines := []string{gamei18n.Format(gamei18n.MsgRadarSubjectDimension, map[string]any{
+		"Name": subject.Name, "Dimension": gamei18n.Text(dimension.LabelID),
+	})}
 	if subject.IsPlane && power.FormationSize > 1 {
-		lines = append(lines, fmt.Sprintf("统计口径：%d 架标准编队", power.FormationSize))
+		lines = append(lines, gamei18n.Format(gamei18n.MsgRadarFormationScope, map[string]any{"Count": power.FormationSize}))
 	}
-	lines = append(lines, fmt.Sprintf("能力值：%d", value), fmt.Sprintf("相对位置：%d%%", percent))
+	lines = append(lines,
+		gamei18n.Format(gamei18n.MsgRadarAbilityValue, map[string]any{"Value": value}),
+		gamei18n.Format(gamei18n.MsgRadarRelativePosition, map[string]any{"Percent": percent}),
+	)
 	var contributions []objUnit.CombatPowerContribution
 	switch dimension.ID {
 	case "anti_ship":
-		lines = append(lines, fmt.Sprintf("有效对舰输出：%.1f /s", power.Details.AntiShipDPS))
+		lines = append(lines, gamei18n.Format(gamei18n.MsgRadarAntiShipDPS, map[string]any{"Value": fmt.Sprintf("%.1f", power.Details.AntiShipDPS)}))
 		contributions = power.Details.AntiShipContributions
 	case "anti_air":
-		lines = append(lines, fmt.Sprintf("有效对空输出：%.1f /s", power.Details.AntiAirDPS))
+		lines = append(lines, gamei18n.Format(gamei18n.MsgRadarAntiAirDPS, map[string]any{"Value": fmt.Sprintf("%.1f", power.Details.AntiAirDPS)}))
 		if subject.IsPlane {
-			lines = append(lines, "仅用于图鉴评估，不改变实战目标选择")
+			lines = append(lines, gamei18n.Text(gamei18n.MsgRadarTargetingNote))
 		}
 		contributions = power.Details.AntiAirContributions
 	case "survival":
-		lines = append(lines, fmt.Sprintf("有效耐久：%.0f", power.Details.EffectiveHP))
+		lines = append(lines, gamei18n.Format(gamei18n.MsgRadarEffectiveHP, map[string]any{"Value": fmt.Sprintf("%.0f", power.Details.EffectiveHP)}))
 	case "mobility":
-		lines = append(lines, "由速度、转向、加速度综合计算")
+		lines = append(lines, gamei18n.Text(gamei18n.MsgRadarMobilityNote))
 	case "projection":
 		if subject.IsPlane {
-			lines = append(lines, fmt.Sprintf("作战半径：%.0f km", power.Details.MaxProjectionDistanceKM))
+			lines = append(lines, gamei18n.Format(gamei18n.MsgRadarCombatRadius, map[string]any{"Value": fmt.Sprintf("%.0f", power.Details.MaxProjectionDistanceKM)}))
 		} else {
-			lines = append(lines, fmt.Sprintf("最大投送距离：%.1f km", power.Details.MaxProjectionDistanceKM))
+			lines = append(lines, gamei18n.Format(gamei18n.MsgRadarProjectionDistance, map[string]any{"Value": fmt.Sprintf("%.1f", power.Details.MaxProjectionDistanceKM)}))
 		}
 	case "burst":
-		lines = append(lines, fmt.Sprintf("首轮期望伤害：%.0f", power.Details.BurstDamage))
+		lines = append(lines, gamei18n.Format(gamei18n.MsgRadarBurstDamage, map[string]any{"Value": fmt.Sprintf("%.0f", power.Details.BurstDamage)}))
 		contributions = power.Details.BurstContributions
 	}
 	if len(contributions) > 0 {
-		lines = append(lines, "主要贡献：")
+		lines = append(lines, gamei18n.Text(gamei18n.MsgRadarMainContributions))
 		total := 0.0
 		for _, contribution := range contributions {
 			total += contribution.Value
@@ -277,7 +284,9 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale f
 			if total > 0 {
 				percent = contribution.Value / total * 100
 			}
-			lines = append(lines, fmt.Sprintf("  %s  %.0f%%", contribution.Name, percent))
+			lines = append(lines, gamei18n.Format(gamei18n.MsgRadarContribution, map[string]any{
+				"Name": contribution.Name, "Percent": fmt.Sprintf("%.0f", percent),
+			}))
 		}
 	}
 	return lines
@@ -316,12 +325,17 @@ func (d *Drawer) drawCombatPowerTooltip(
 
 	vector.FillRect(screen, float32(x), float32(y), float32(width), float32(height), color.RGBA{18, 18, 18, 238}, false)
 	vector.StrokeRect(screen, float32(x), float32(y), float32(width), float32(height), 1.5, colorx.Gold, false)
-	d.drawText(screen, hit.Subject.Name+" · 综合战力", x+14*scale, y+11*scale, fontSize, font.Kai, colorx.Gold)
-	labels := []string{"综合", "舰体", "航空"}
+	bodyFont := font.LocalizedUI(font.Kai)
+	d.drawText(screen, gamei18n.Format(gamei18n.MsgRadarSubjectPower, map[string]any{"Name": hit.Subject.Name}), x+14*scale, y+11*scale, fontSize, bodyFont, colorx.Gold)
+	labels := []string{
+		gamei18n.Text(gamei18n.MsgRadarOverall),
+		gamei18n.Text(gamei18n.MsgRadarHull),
+		gamei18n.Text(gamei18n.MsgRadarAviation),
+	}
 	values := []int{hit.Subject.Power.Total, hit.Subject.Power.Hull, hit.Subject.Power.Aviation}
 	for idx, label := range labels {
 		lineY := y + 11*scale + float64(idx+1)*lineHeight
-		d.drawText(screen, label, x+14*scale, lineY, fontSize, font.Kai, colorx.White)
+		d.drawText(screen, label, x+14*scale, lineY, fontSize, bodyFont, colorx.White)
 		value := fmt.Sprintf("%d", values[idx])
 		valueX := x + width - 14*scale - estimateCollectionTextWidth(value, fontSize)
 		d.drawText(screen, value, valueX, lineY, fontSize, font.JetbrainsMono, colorx.White)

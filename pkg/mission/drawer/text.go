@@ -9,6 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/action"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -37,11 +38,11 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 		2, color.RGBA{R: 104, G: 132, B: 139, A: 230}, false,
 	)
 
-	title := "任务暂停"
-	primaryText, dangerText := "继续", "放弃"
+	title := gamei18n.Text(gamei18n.MsgMissionPaused)
+	primaryText, dangerText := gamei18n.Text(gamei18n.MsgMissionResume), gamei18n.Text(gamei18n.MsgMissionAbandon)
 	if ms.Core.ConfirmQuitMission {
-		title = "确认放弃任务？"
-		primaryText, dangerText = "返回", "确认"
+		title = gamei18n.Text(gamei18n.MsgMissionConfirmAbandon)
+		primaryText, dangerText = gamei18n.Text(gamei18n.MsgBack), gamei18n.Text(gamei18n.MsgConfirm)
 	}
 
 	d.drawCenteredPauseText(screen, title, ui.Panel.X+ui.Panel.W/2, ui.Panel.Y+46, 30, colorx.White)
@@ -84,9 +85,10 @@ func (d *Drawer) drawCenteredPauseText(
 	centerX, y, fontSize float64,
 	textColor color.Color,
 ) {
-	textFace := text.GoTextFace{Source: font.Kai, Size: fontSize}
+	textFont := font.LocalizedUI(font.Kai)
+	textFace := text.GoTextFace{Source: textFont, Size: fontSize}
 	textW, _ := text.Measure(textStr, &textFace, 0)
-	d.drawText(screen, textStr, centerX-textW/2, y, fontSize, font.Kai, textColor)
+	d.drawText(screen, textStr, centerX-textW/2, y, fontSize, textFont, textColor)
 }
 
 // 绘制文本

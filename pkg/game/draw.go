@@ -9,6 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
@@ -105,10 +106,10 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	panelX := cardX + pad
 	curY := cardY + 32.0
 
-	d.drawText(screen, misMD.DisplayName, panelX, curY, 36, font.Hang, titleClr)
+	d.drawText(screen, misMD.DisplayName, panelX, curY, 36, font.LocalizedUI(font.Hang), titleClr)
 
 	curY += 50
-	d.drawText(screen, misMD.MapCfg.DisplayName, panelX, curY, 20, font.Kai, subtitleClr)
+	d.drawText(screen, misMD.MapCfg.DisplayName, panelX, curY, 20, font.LocalizedUI(font.Kai), subtitleClr)
 
 	// 标题分隔线
 	curY += 32
@@ -121,20 +122,18 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 
 	curY += 22
 	// 数据行
-	dataLine := fmt.Sprintf(
-		"初始资金 %d  |  舰队上限 %d  |  油井 %d",
-		misMD.InitFunds, misMD.MaxShipCount, misMD.OilPlatformCount,
-	)
-	d.drawText(screen, dataLine, panelX, curY, 19, font.Kai, labelClr)
+	dataLine := gamei18n.Format(gamei18n.MsgMissionStats, map[string]any{
+		"Funds": misMD.InitFunds, "ShipLimit": misMD.MaxShipCount, "OilPlatforms": misMD.OilPlatformCount,
+	})
+	d.drawText(screen, dataLine, panelX, curY, 19, font.LocalizedUI(font.Kai), labelClr)
 
 	curY += 32
 	// 战力对比
-	battleLine := fmt.Sprintf(
-		"我方 %d 舰  vs  敌方 %d 舰  |  我方增援点 %d  敌方增援点 %d",
-		misMD.AllyShipCount, misMD.EnemyShipCount,
-		misMD.AllyReinforceCount, misMD.EnemyReinforceCount,
-	)
-	d.drawText(screen, battleLine, panelX, curY, 19, font.Kai, bodyClr)
+	battleLine := gamei18n.Format(gamei18n.MsgMissionBattleStats, map[string]any{
+		"AllyShips": misMD.AllyShipCount, "EnemyShips": misMD.EnemyShipCount,
+		"AllyPoints": misMD.AllyReinforceCount, "EnemyPoints": misMD.EnemyReinforceCount,
+	})
+	d.drawText(screen, battleLine, panelX, curY, 19, font.LocalizedUI(font.Kai), bodyClr)
 
 	curY += 42
 	// 描述区
@@ -142,7 +141,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	descLineHeight := 28.0
 	descMaxWidth := cardW - 2*pad
 	for idx, line := range wrapText(misMD.Description, descMaxWidth, descFontSize) {
-		d.drawText(screen, line, panelX, curY+float64(idx)*descLineHeight, descFontSize, font.Kai, bodyClr)
+		d.drawText(screen, line, panelX, curY+float64(idx)*descLineHeight, descFontSize, font.LocalizedUI(font.Kai), bodyClr)
 	}
 
 	// 底部控件（卡片下方）
@@ -158,7 +157,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	if isHoverArea(leftArrow) {
 		leftColor = colorx.SkyBlue
 	}
-	d.drawText(screen, "<", leftX+4, controlY-12, 36, font.Hang, leftColor)
+	d.drawText(screen, "<", leftX+4, controlY-12, 36, font.LocalizedUI(font.Hang), leftColor)
 
 	// 右箭头
 	rightX := screenW*0.62 - arrowSize/2
@@ -167,15 +166,16 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	if isHoverArea(rightArrow) {
 		rightColor = colorx.SkyBlue
 	}
-	d.drawText(screen, ">", rightX+4, controlY-12, 36, font.Hang, rightColor)
+	d.drawText(screen, ">", rightX+4, controlY-12, 36, font.LocalizedUI(font.Hang), rightColor)
 
 	// 关卡索引
 	missions := metadata.AvailableMissions()
 	for i, m := range missions {
 		if m == curMission {
 			idxText := fmt.Sprintf("%d / %d", i+1, len(missions))
-			idxW := layout.CalcTextWidth(idxText, 18)
-			d.drawText(screen, idxText, screenW/2-idxW/2, controlY-4, 22, font.Kai, subtitleClr)
+			idxFont := font.LocalizedUI(font.Kai)
+			idxW := layout.CalcTextWidth(idxText, 22, idxFont)
+			d.drawText(screen, idxText, screenW/2-idxW/2, controlY-4, 22, idxFont, subtitleClr)
 		}
 	}
 
@@ -199,9 +199,10 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 		borderColor,
 		false,
 	)
-	startText := "开始任务"
-	startTW := layout.CalcTextWidth(startText, 22)
-	d.drawText(screen, startText, startX+(buttonW-startTW)/2, startY+10, 22, font.Hang, startColor)
+	startText := gamei18n.Text(gamei18n.MsgMissionStart)
+	startFont := font.LocalizedUI(font.Hang)
+	startTW := layout.CalcTextWidth(startText, 22, startFont)
+	d.drawText(screen, startText, startX+(buttonW-startTW)/2, startY+10, 22, startFont, startColor)
 
 	// 返回按钮
 	backX := screenW/2 + 28
@@ -223,9 +224,10 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 		backBorderColor,
 		false,
 	)
-	backText := "返回"
-	backTW := layout.CalcTextWidth(backText, 22)
-	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, font.Hang, backColor)
+	backText := gamei18n.Text(gamei18n.MsgBack)
+	backFont := font.LocalizedUI(font.Hang)
+	backTW := layout.CalcTextWidth(backText, 22, backFont)
+	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, backFont, backColor)
 
 	// 同步 UI 点击热区（基于实际屏幕尺寸，避免与 ebiten.WindowSize() 不一致）
 	if states != nil {
@@ -263,46 +265,17 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 }
 
 func wrapText(text string, maxWidth, fontSize float64) []string {
-	if estimateTextWidth(text, fontSize) <= maxWidth {
-		return []string{text}
-	}
-	lines := []string{}
-	line := ""
-	for _, r := range text {
-		next := line + string(r)
-		if line != "" && estimateTextWidth(next, fontSize) > maxWidth {
-			lines = append(lines, line)
-			line = string(r)
-			continue
-		}
-		line = next
-	}
-	if line != "" {
-		lines = append(lines, line)
-	}
-	return lines
-}
-
-// estimateTextWidth 粗略估算文本宽度，用于换行。
-func estimateTextWidth(text string, fontSize float64) float64 {
-	width := 0.0
-	for _, r := range text {
-		if r <= 127 {
-			width += fontSize * 0.55
-		} else {
-			width += fontSize
-		}
-	}
-	return width
+	return layout.WrapText(text, maxWidth, fontSize, font.LocalizedUI(font.Kai))
 }
 
 // 绘制游戏标题
 func (d *Drawer) drawGameTitle(screen *ebiten.Image) {
-	textStr := "怒 海 激 战"
+	textStr := gamei18n.Text(gamei18n.MsgGameTitle)
 	fontSize := float64(128)
-	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
+	titleFont := font.LocalizedUI(font.Hang)
+	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, titleFont)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
-	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
+	d.drawText(screen, textStr, posX, posY, fontSize, titleFont, colorx.White)
 }
 
 // 绘制游戏菜单
@@ -320,27 +293,30 @@ func (d *Drawer) drawGameMenu(screen *ebiten.Image, states *menuButtonStates) {
 // 绘制游戏通用提示
 func (d *Drawer) drawGameTip(screen *ebiten.Image, textStr string) {
 	fontSize := float64(64)
-	posX := float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize) - 50
+	tipFont := font.LocalizedUI(font.Hang)
+	posX := float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, tipFont) - 50
 	posY := float64(screen.Bounds().Dy()) / 10 * 9
-	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
+	d.drawText(screen, textStr, posX, posY, fontSize, tipFont, colorx.White)
 }
 
 // 绘制任务结果
 func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textColor color.Color) {
 	fontSize := float64(96)
-	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 7
+	resultFont := font.LocalizedUI(font.Hang)
+	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, resultFont)) / 7
 	posY := float64(screen.Bounds().Dy() / 8 * 7)
-	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, textColor)
+	d.drawText(screen, textStr, posX, posY, fontSize, resultFont, textColor)
 }
 
 // 绘制鸣谢
 func (d *Drawer) drawCredits(screen *ebiten.Image) {
 	// 注：英文感叹号字体是一样的，但是末尾留白少一些，对齐比较好看 :D
-	textStr := "祝君武运昌隆!"
+	textStr := gamei18n.Text(gamei18n.MsgGameCredits)
 	fontSize := float64(128)
-	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize)) / 2
+	creditsFont := font.LocalizedUI(font.Hang)
+	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, creditsFont)) / 2
 	posY := float64(screen.Bounds().Dy()) / 6 * 5
-	d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
+	d.drawText(screen, textStr, posX, posY, fontSize, creditsFont, colorx.White)
 }
 
 // 绘制文本

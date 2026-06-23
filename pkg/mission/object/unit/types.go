@@ -1,6 +1,7 @@
 package unit
 
 import (
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -38,21 +39,21 @@ const (
 func (n Nation) ToDisplay() string {
 	switch n {
 	case NationAll:
-		return "全部"
+		return gamei18n.Text(gamei18n.MsgNationAll)
 	case NationCN:
-		return "中国"
+		return gamei18n.Text(gamei18n.MsgNationChina)
 	case NationUS:
-		return "美国"
+		return gamei18n.Text(gamei18n.MsgNationUnitedStates)
 	case NationJP:
-		return "日本"
+		return gamei18n.Text(gamei18n.MsgNationJapan)
 	case NationDE:
-		return "德国"
+		return gamei18n.Text(gamei18n.MsgNationGermany)
 	case NationUK:
-		return "英国"
+		return gamei18n.Text(gamei18n.MsgNationUnitedKingdom)
 	case NationSU:
-		return "苏联"
+		return gamei18n.Text(gamei18n.MsgNationSovietUnion)
 	default:
-		return "特殊"
+		return gamei18n.Text(gamei18n.MsgNationSpecial)
 	}
 }
 

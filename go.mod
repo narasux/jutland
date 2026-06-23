@@ -3,16 +3,19 @@ module github.com/narasux/jutland
 go 1.25.6
 
 require (
+	github.com/BurntSushi/toml v1.6.0
 	github.com/ebitenui/ebitenui v0.7.3
 	github.com/google/uuid v1.6.0
 	github.com/hajimehoshi/ebiten/v2 v2.9.7
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
+	github.com/nicksnyder/go-i18n/v2 v2.6.1
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/pkg/errors v0.9.1
 	github.com/samber/lo v1.52.0
 	github.com/silbinarywolf/preferdiscretegpu v1.0.0
 	github.com/stretchr/testify v1.11.1
 	github.com/yosuke-furukawa/json5 v0.1.1
+	golang.org/x/text v0.32.0
 )
 
 require (
@@ -33,8 +36,7 @@ require (
 	github.com/rogpeppe/go-internal v1.15.0 // indirect
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
 	golang.org/x/image v0.31.0 // indirect
-	golang.org/x/sync v0.18.0 // indirect
+	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.38.0 // indirect
-	golang.org/x/text v0.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

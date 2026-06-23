@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -33,13 +34,13 @@ const (
 func (t PlaneType) ToDisplay() string {
 	switch t {
 	case PlaneTypeFighter:
-		return "战斗机"
+		return gamei18n.Text(gamei18n.MsgPlaneTypeFighter)
 	case PlaneTypeDiveBomber:
-		return "俯冲轰炸机"
+		return gamei18n.Text(gamei18n.MsgPlaneTypeDiveBomber)
 	case PlaneTypeTorpedoBomber:
-		return "鱼雷轰炸机"
+		return gamei18n.Text(gamei18n.MsgPlaneTypeTorpedoBomber)
 	default:
-		return "未知"
+		return gamei18n.Text(gamei18n.MsgUnknown)
 	}
 }
 
