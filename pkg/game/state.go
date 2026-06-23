@@ -53,9 +53,9 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 		s.MenuButton.GameSetting,
 		s.MenuButton.ExitGame,
 	} {
-		button.PosX = (float64(screenWidth) - layout.CalcTextWidth(button.Text, button.FontSize)) * 0.2 * float64(idx+1)
+		button.PosX = (float64(screenWidth) - layout.CalcTextWidth(button.Text, button.FontSize, button.Font)) * 0.2 * float64(idx+1)
 		button.PosY = float64(screenHeight / 5 * 4)
-		button.Width = layout.CalcTextWidth(button.Text, button.FontSize)
+		button.Width = layout.CalcTextWidth(button.Text, button.FontSize, button.Font)
 		button.Height = button.FontSize
 	}
 }

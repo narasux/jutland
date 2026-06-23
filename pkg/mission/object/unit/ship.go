@@ -9,6 +9,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -48,25 +49,25 @@ const (
 func (t ShipType) ToDisplay() string {
 	switch t {
 	case ShipTypeAircraftCarrier:
-		return "航空母舰"
+		return gamei18n.Text(gamei18n.MsgShipTypeCarrier)
 	case ShipTypeBattleShip:
-		return "战列舰"
+		return gamei18n.Text(gamei18n.MsgShipTypeBattleship)
 	case ShipTypeCruiser:
-		return "巡洋舰"
+		return gamei18n.Text(gamei18n.MsgShipTypeCruiser)
 	case ShipTypeDestroyer:
-		return "驱逐舰"
+		return gamei18n.Text(gamei18n.MsgShipTypeDestroyer)
 	case ShipTypeFrigate:
-		return "护卫舰"
+		return gamei18n.Text(gamei18n.MsgShipTypeFrigate)
 	case ShipTypeHospital:
-		return "医疗船"
+		return gamei18n.Text(gamei18n.MsgShipTypeHospital)
 	case ShipTypeCargo:
-		return "货轮"
+		return gamei18n.Text(gamei18n.MsgShipTypeCargo)
 	case ShipTypeTorpedoBoat:
-		return "鱼雷艇"
+		return gamei18n.Text(gamei18n.MsgShipTypeTorpedoBoat)
 	case ShipTypeDefault:
-		return "默认"
+		return gamei18n.Text(gamei18n.MsgShipTypeDefault)
 	}
-	return "默认"
+	return gamei18n.Text(gamei18n.MsgShipTypeDefault)
 }
 
 // HospitalShipEffectRange 医疗船效果范围（地图三格）

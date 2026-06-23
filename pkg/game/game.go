@@ -14,7 +14,9 @@ import (
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/collection"
 	"github.com/narasux/jutland/pkg/common/types"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/game/settings"
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -49,6 +51,7 @@ type Game struct {
 }
 
 func New() *Game {
+	config.G.Language = string(gamei18n.SetLanguage(config.G.Language))
 	emptyUIRoot := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
 	g := &Game{
 		mode:        GameModeStart,
@@ -127,20 +130,20 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawMissionSelect(screen, g.curMission, g.objStates)
 	case GameModeMissionLoading:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
-		g.drawer.drawGameTip(screen, "Loading...")
+		g.drawer.drawGameTip(screen, gamei18n.Text(gamei18n.MsgLoading))
 		g.objStates.LoadingInterface.Ready = true
 	case GameModeMissionStart:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
-		g.drawer.drawGameTip(screen, "任务开始！")
+		g.drawer.drawGameTip(screen, gamei18n.Text(gamei18n.MsgMissionStarted))
 		g.objStates.LoadingInterface.MissionStartDrawn = true
 	case GameModeMissionRunning:
 		g.missionMgr.Draw(screen)
 	case GameModeMissionSuccess:
 		g.drawer.drawBackground(screen, bgImg.MissionSuccess)
-		g.drawer.drawMissionResult(screen, "任务成功！", colorx.Green)
+		g.drawer.drawMissionResult(screen, gamei18n.Text(gamei18n.MsgMissionSuccess), colorx.Green)
 	case GameModeMissionFailed:
 		g.drawer.drawBackground(screen, bgImg.MissionFailed)
-		g.drawer.drawMissionResult(screen, "任务失败...", colorx.Red)
+		g.drawer.drawMissionResult(screen, gamei18n.Text(gamei18n.MsgMissionFailed), colorx.Red)
 	case GameModeCollection:
 		g.drawer.drawBackground(screen, bgImg.MissionWindow)
 		g.collectionUI.Draw(screen)
@@ -205,41 +208,44 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 
 // 游戏初始化
 func (g *Game) init() {
+	g.initMenuButtons()
+	g.objStates.LoadingInterface = &loadingInterface{Ready: false}
+}
+
+func (g *Game) initMenuButtons() {
 	// 初始化菜单配置
 	var fontSize float64 = 48
-	g.objStates = &objStates{
-		MenuButton: &menuButtonStates{
-			MissionSelect: &menuButton{
-				Text:     "任务选择",
-				FontSize: fontSize,
-				Font:     font.Hang,
-				Color:    colorx.White,
-				Mode:     GameModeMissionSelect,
-			},
-			Collection: &menuButton{
-				Text:     "游戏图鉴",
-				FontSize: fontSize,
-				Font:     font.Hang,
-				Color:    colorx.White,
-				Mode:     GameModeCollection,
-			},
-			GameSetting: &menuButton{
-				Text:     "游戏设置",
-				FontSize: fontSize,
-				Font:     font.Hang,
-				Color:    colorx.White,
-				Mode:     GameModeGameSetting,
-			},
-			ExitGame: &menuButton{
-				Text:     "退出游戏",
-				FontSize: fontSize,
-				Font:     font.Hang,
-				Color:    colorx.White,
-				Mode:     GameModeEnd,
-			},
+	if g.objStates == nil {
+		g.objStates = &objStates{}
+	}
+	g.objStates.MenuButton = &menuButtonStates{
+		MissionSelect: &menuButton{
+			Text:     gamei18n.Text(gamei18n.MsgMenuMissionSelect),
+			FontSize: fontSize,
+			Font:     font.LocalizedUI(font.Hang),
+			Color:    colorx.White,
+			Mode:     GameModeMissionSelect,
 		},
-		LoadingInterface: &loadingInterface{
-			Ready: false,
+		Collection: &menuButton{
+			Text:     gamei18n.Text(gamei18n.MsgMenuCollection),
+			FontSize: fontSize,
+			Font:     font.LocalizedUI(font.Hang),
+			Color:    colorx.White,
+			Mode:     GameModeCollection,
+		},
+		GameSetting: &menuButton{
+			Text:     gamei18n.Text(gamei18n.MsgMenuSettings),
+			FontSize: fontSize,
+			Font:     font.LocalizedUI(font.Hang),
+			Color:    colorx.White,
+			Mode:     GameModeGameSetting,
+		},
+		ExitGame: &menuButton{
+			Text:     gamei18n.Text(gamei18n.MsgMenuExit),
+			FontSize: fontSize,
+			Font:     font.LocalizedUI(font.Hang),
+			Color:    colorx.White,
+			Mode:     GameModeEnd,
 		},
 	}
 }
@@ -315,11 +321,20 @@ func (g *Game) startCollectionBGM() {
 // 游戏设置
 func (g *Game) handleGameSetting() error {
 	if g.settingUI.BackPressed() {
+		g.applyLanguage(config.G.Language)
 		g.settingUI.Reset()
 		g.mode = GameModeMenuSelect
 	}
 	g.syncUIContainer()
 	return nil
+}
+
+func (g *Game) applyLanguage(value string) {
+	lang := gamei18n.SetLanguage(value)
+	config.G.Language = string(lang)
+	g.initMenuButtons()
+	g.settingUI.ReloadLanguage()
+	g.collectionUI.ReloadLanguage()
 }
 
 // 游戏结束

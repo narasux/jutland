@@ -1,11 +1,76 @@
 package layout
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"strings"
+
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text/v2"
+
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
+)
 
 // CalcTextWidth 计算文本宽度
-func CalcTextWidth(text string, fontSize float64) float64 {
-	// 字体原因，宽度大致是 0.35 的文字高度
-	return fontSize * float64(len(text)) / 20 * 7
+func CalcTextWidth(textStr string, fontSize float64, source *text.GoTextFaceSource) float64 {
+	width, _ := text.Measure(textStr, &text.GoTextFace{Source: source, Size: fontSize}, 0)
+	return width
+}
+
+// WrapText 按当前语言和实际字体宽度换行。
+func WrapText(value string, maxWidth, fontSize float64, source *text.GoTextFaceSource) []string {
+	if CalcTextWidth(value, fontSize, source) <= maxWidth {
+		return []string{value}
+	}
+	if gamei18n.CurrentLanguage() == gamei18n.LanguageEnglish {
+		return wrapWords(value, maxWidth, fontSize, source)
+	}
+	return wrapRunes(value, maxWidth, fontSize, source)
+}
+
+func wrapWords(value string, maxWidth, fontSize float64, source *text.GoTextFaceSource) []string {
+	words := strings.Fields(value)
+	lines, line := []string{}, ""
+	for _, word := range words {
+		candidate := word
+		if line != "" {
+			candidate = line + " " + word
+		}
+		if CalcTextWidth(candidate, fontSize, source) <= maxWidth {
+			line = candidate
+			continue
+		}
+		if line != "" {
+			lines = append(lines, line)
+			line = ""
+		}
+		if CalcTextWidth(word, fontSize, source) <= maxWidth {
+			line = word
+			continue
+		}
+		parts := wrapRunes(word, maxWidth, fontSize, source)
+		lines = append(lines, parts[:len(parts)-1]...)
+		line = parts[len(parts)-1]
+	}
+	if line != "" {
+		lines = append(lines, line)
+	}
+	return lines
+}
+
+func wrapRunes(value string, maxWidth, fontSize float64, source *text.GoTextFaceSource) []string {
+	lines, line := []string{}, ""
+	for _, r := range value {
+		candidate := line + string(r)
+		if line != "" && CalcTextWidth(candidate, fontSize, source) > maxWidth {
+			lines = append(lines, line)
+			line = string(r)
+			continue
+		}
+		line = candidate
+	}
+	if line != "" {
+		lines = append(lines, line)
+	}
+	return lines
 }
 
 // ScreenPos 屏幕坐标

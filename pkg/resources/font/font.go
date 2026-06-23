@@ -5,6 +5,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/loader"
 )
 
@@ -33,6 +34,19 @@ var fontStrMap map[*text.GoTextFaceSource]string
 // FontToStr 字体转名称字符串
 func FontToStr(f *text.GoTextFaceSource) string {
 	return fontStrMap[f]
+}
+
+// LocalizedUI 返回当前语言应使用的界面字体；英文统一使用 JetBrains Mono。
+func LocalizedUI(chinese *text.GoTextFaceSource) *text.GoTextFaceSource {
+	return ForLanguage(gamei18n.CurrentLanguage(), chinese)
+}
+
+// ForLanguage 返回指定语言应使用的界面字体。
+func ForLanguage(lang gamei18n.Language, chinese *text.GoTextFaceSource) *text.GoTextFaceSource {
+	if lang == gamei18n.LanguageEnglish {
+		return JetbrainsMono
+	}
+	return chinese
 }
 
 func init() {

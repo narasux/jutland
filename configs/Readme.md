@@ -473,7 +473,9 @@
   // 全局速度倍率
   // 影响战舰、炮弹、鱼雷、飞机等移动/转向速度
   // 范围: 0.25 ~ 4.0，默认值: 1.0
-  "speedMultiplier": 1.0
+  "speedMultiplier": 1.0,
+  // 游戏界面语言；当前正式启用 zh-Hans
+  "language": "zh-Hans"
 }
 ```
 

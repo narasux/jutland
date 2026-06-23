@@ -1,7 +1,6 @@
 package collection
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 	"math"
@@ -11,9 +10,11 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 type collectionCard struct {
@@ -87,7 +88,12 @@ func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {
 			counts[name]++
 		}
 		for _, name := range order {
-			items = append(items, objRef.InfoItem{Label: label, Value: fmt.Sprintf("%dx %s", counts[name], name)})
+			items = append(items, objRef.InfoItem{
+				Label: label,
+				Value: gamei18n.Format(gamei18n.MsgItemCount, map[string]any{
+					"Name": name, "Count": counts[name],
+				}),
+			})
 		}
 	}
 	gunNames := make([]string, 0, len(plane.Weapon.Guns))
@@ -106,12 +112,15 @@ func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {
 	for _, rocket := range plane.Weapon.Rockets {
 		rocketNames = append(rocketNames, rocket.Name)
 	}
-	appendGroup("机炮", gunNames)
-	appendGroup("炸弹", bombNames)
-	appendGroup("鱼雷", torpedoNames)
-	appendGroup("火箭", rocketNames)
+	appendGroup(gamei18n.Text(gamei18n.MsgWeaponGun), gunNames)
+	appendGroup(gamei18n.Text(gamei18n.MsgWeaponBomb), bombNames)
+	appendGroup(gamei18n.Text(gamei18n.MsgWeaponTorpedo), torpedoNames)
+	appendGroup(gamei18n.Text(gamei18n.MsgWeaponRocket), rocketNames)
 	if len(items) == 0 {
-		items = append(items, objRef.InfoItem{Label: "武装", Value: "无"})
+		items = append(items, objRef.InfoItem{
+			Label: gamei18n.Text(gamei18n.MsgCollectionArmaments),
+			Value: gamei18n.Text(gamei18n.MsgCollectionNone),
+		})
 	}
 	return items
 }
@@ -131,7 +140,7 @@ func (d *Drawer) drawCollectionCard(
 	)
 	d.drawText(
 		screen, title, card.X+20*scale, card.Y+18*scale,
-		metrics.CardTitle, font.Kai, color.RGBA{R: 230, G: 218, B: 194, A: 255},
+		metrics.CardTitle, font.LocalizedUI(font.Kai), color.RGBA{R: 230, G: 218, B: 194, A: 255},
 	)
 	vector.StrokeLine(
 		screen, float32(card.X+20*scale), float32(card.Y+44*scale),
@@ -162,37 +171,11 @@ func (d *Drawer) drawCollectionLines(
 }
 
 func wrapCollectionText(value string, maxWidth, fontSize float64) []string {
-	// 中文文本按 rune 逐字切分；英文/数字会因为宽度较窄而允许更长的连续片段。
-	if estimateCollectionTextWidth(value, fontSize) <= maxWidth {
-		return []string{value}
-	}
-	lines, line := []string{}, ""
-	for _, r := range value {
-		next := line + string(r)
-		if line != "" && estimateCollectionTextWidth(next, fontSize) > maxWidth {
-			lines = append(lines, line)
-			line = string(r)
-			continue
-		}
-		line = next
-	}
-	if line != "" {
-		lines = append(lines, line)
-	}
-	return lines
+	return layout.WrapText(value, maxWidth, fontSize, font.LocalizedUI(font.Kai))
 }
 
 func estimateCollectionTextWidth(value string, fontSize float64) float64 {
-	// 这里不是精确字形宽度，只是给图鉴卡片做布局预算，误差可接受。
-	width := 0.0
-	for _, r := range value {
-		if r <= 127 {
-			width += fontSize * 0.55
-		} else {
-			width += fontSize
-		}
-	}
-	return width
+	return layout.CalcTextWidth(value, fontSize, font.LocalizedUI(font.Kai))
 }
 
 func isHoverArea(area clickableArea) bool {

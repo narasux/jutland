@@ -2,7 +2,6 @@
 package sidebar
 
 import (
-	"fmt"
 	"image/color"
 	"math"
 
@@ -15,6 +14,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -362,13 +362,14 @@ func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 
 	selfFleet := ms.Fleet(ms.Player.CurPlayer)
 	enemyFleet := ms.Fleet(ms.Player.CurEnemy)
-	p.drawText(screen, fmt.Sprintf("资金: %d", ms.Player.CurFunds), ui.Panel.X+28, y+14, 18, font.Kai, colorx.White)
-	p.drawText(screen, fmt.Sprintf("我方舰队: %d    敌方舰队: %d", selfFleet.Total, enemyFleet.Total), ui.Panel.X+28, y+40, 16, font.Kai, colorx.Silver)
+	bodyFont := font.LocalizedUI(font.Kai)
+	p.drawText(screen, gamei18n.Format(gamei18n.MsgSidebarFunds, map[string]any{"Funds": ms.Player.CurFunds}), ui.Panel.X+28, y+14, 18, bodyFont, colorx.White)
+	p.drawText(screen, gamei18n.Format(gamei18n.MsgSidebarFleets, map[string]any{"Ally": selfFleet.Total, "Enemy": enemyFleet.Total}), ui.Panel.X+28, y+40, 16, bodyFont, colorx.Silver)
 }
 
 func (p *Panel) drawSettings(screen *ebiten.Image, ms *state.MissionState) {
-	p.drawCheckboxRow(screen, 0, "状态显示", ms.UI.GameOpts.ForceDisplayState)
-	p.drawCheckboxRow(screen, 1, "伤害数字", ms.UI.GameOpts.DisplayDamageNumber)
+	p.drawCheckboxRow(screen, 0, gamei18n.Text(gamei18n.MsgSidebarShowState), ms.UI.GameOpts.ForceDisplayState)
+	p.drawCheckboxRow(screen, 1, gamei18n.Text(gamei18n.MsgSidebarDamageNumbers), ms.UI.GameOpts.DisplayDamageNumber)
 }
 
 func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, checked bool) {
@@ -385,7 +386,7 @@ func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, c
 		vector.StrokeLine(screen, boxX+4, boxY+9, boxX+8, boxY+14, 3, colorx.Gold, false)
 		vector.StrokeLine(screen, boxX+8, boxY+14, boxX+15, boxY+4, 3, colorx.Gold, false)
 	}
-	p.drawText(screen, label, x+34, contentY, 18, font.Kai, textColor)
+	p.drawText(screen, label, x+34, contentY, 18, font.LocalizedUI(font.Kai), textColor)
 }
 
 func (p *Panel) drawCard(screen *ebiten.Image, x, y, w, h float64) {

@@ -12,6 +12,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 
 	"github.com/narasux/jutland/pkg/config"
+	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -28,27 +29,29 @@ const (
 
 // 速度选项定义
 var speedOptions = []struct {
-	Label string
+	Label gamei18n.MessageID
 	Value float64
 }{
-	{"极慢", 0.25},
-	{"慢", 0.50},
-	{"正常", 1.00},
-	{"快", 2.00},
-	{"极快", 4.00},
+	{gamei18n.MsgSpeedVerySlow, 0.25},
+	{gamei18n.MsgSpeedSlow, 0.50},
+	{gamei18n.MsgSpeedNormal, 1.00},
+	{gamei18n.MsgSpeedFast, 2.00},
+	{gamei18n.MsgSpeedVeryFast, 4.00},
 }
 
 // UI 游戏设置 UI
 type UI struct {
-	container   widget.Containerer
-	localValue  float64 // 本地副本，保存时才写回 config.G
-	backPressed bool
+	container     widget.Containerer
+	localValue    float64 // 本地副本，保存时才写回 config.G
+	localLanguage gamei18n.Language
+	backPressed   bool
 }
 
 // New 创建设置界面
 func New() *UI {
 	s := &UI{
-		localValue: config.G.SpeedMultiplier,
+		localValue:    config.G.SpeedMultiplier,
+		localLanguage: gamei18n.NormalizeLanguage(config.G.Language),
 	}
 	s.buildUI()
 	return s
@@ -68,13 +71,25 @@ func (s *UI) BackPressed() bool { return s.backPressed }
 // Reset 重置本地值（重新进入设置页时调用）
 func (s *UI) Reset() {
 	s.localValue = config.G.SpeedMultiplier
+	s.localLanguage = gamei18n.NormalizeLanguage(config.G.Language)
 	s.backPressed = false
+	s.buildUI()
+}
+
+// ReloadLanguage 按当前语言重建界面控件。
+func (s *UI) ReloadLanguage() {
+	s.localLanguage = gamei18n.CurrentLanguage()
 	s.buildUI()
 }
 
 // selectSpeed 选择一个速度倍率并重建 UI
 func (s *UI) selectSpeed(value float64) {
 	s.localValue = value
+	s.buildUI()
+}
+
+func (s *UI) selectLanguage(value gamei18n.Language) {
+	s.localLanguage = value
 	s.buildUI()
 }
 
@@ -103,9 +118,9 @@ func (s *UI) buildUI() {
 	s.backPressed = false
 
 	// 构建主题字体（ebitenui 需要 *text.Face 即指向接口的指针）
-	_titleFace := text.Face(&text.GoTextFace{Source: font.Hang, Size: titleFontSize})
-	_labelFace := text.Face(&text.GoTextFace{Source: font.Kai, Size: labelFontSize})
-	_buttonFace := text.Face(&text.GoTextFace{Source: font.Kai, Size: buttonFontSize})
+	_titleFace := text.Face(&text.GoTextFace{Source: font.LocalizedUI(font.Hang), Size: titleFontSize})
+	_labelFace := text.Face(&text.GoTextFace{Source: font.LocalizedUI(font.Kai), Size: labelFontSize})
+	_buttonFace := text.Face(&text.GoTextFace{Source: font.LocalizedUI(font.Kai), Size: buttonFontSize})
 	titleFace := &_titleFace
 	labelFace := &_labelFace
 	buttonFace := &_buttonFace
@@ -144,12 +159,12 @@ func (s *UI) buildUI() {
 
 	// ====== 标题 ======
 	titleLabel := widget.NewLabel(
-		widget.LabelOpts.Text("游戏设置", titleFace, &widget.LabelColor{Idle: colorx.White, Disabled: colorx.White}),
+		widget.LabelOpts.Text(gamei18n.Text(gamei18n.MsgSettingsTitle), titleFace, &widget.LabelColor{Idle: colorx.White, Disabled: colorx.White}),
 	)
 
 	// ====== 速度倍率标签 ======
 	speedLabel := widget.NewLabel(
-		widget.LabelOpts.Text("全局速度倍率", labelFace, &widget.LabelColor{Idle: colorx.White, Disabled: colorx.White}),
+		widget.LabelOpts.Text(gamei18n.Text(gamei18n.MsgSettingsSpeed), labelFace, &widget.LabelColor{Idle: colorx.White, Disabled: colorx.White}),
 	)
 
 	// ====== 速度选项按钮行 ======
@@ -176,7 +191,7 @@ func (s *UI) buildUI() {
 
 		btn := widget.NewButton(
 			widget.ButtonOpts.Image(btnImg),
-			widget.ButtonOpts.Text(opt.Label, buttonFace, btnColor),
+			widget.ButtonOpts.Text(gamei18n.Text(opt.Label), buttonFace, btnColor),
 			widget.ButtonOpts.TextPadding(&widget.Insets{Left: 28, Right: 28, Top: 10, Bottom: 10}),
 			widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
 				s.selectSpeed(opt.Value)
@@ -185,21 +200,47 @@ func (s *UI) buildUI() {
 		speedRow.AddChild(btn)
 	}
 
+	languageLabel := widget.NewLabel(
+		widget.LabelOpts.Text(gamei18n.Text(gamei18n.MsgSettingsLanguage), labelFace, &widget.LabelColor{Idle: colorx.White, Disabled: colorx.White}),
+	)
+	languageRow := widget.NewContainer(
+		widget.ContainerOpts.Layout(widget.NewRowLayout(
+			widget.RowLayoutOpts.Direction(widget.DirectionHorizontal),
+			widget.RowLayoutOpts.Spacing(16),
+		)),
+	)
+	for _, lang := range gamei18n.SupportedLanguages() {
+		lang := lang
+		btnImg, btnColor := normalBtnImage, normalBtnTextColor
+		if lang == s.localLanguage {
+			btnImg, btnColor = selectedBtnImage, selectedBtnTextColor
+		}
+		languageRow.AddChild(widget.NewButton(
+			widget.ButtonOpts.Image(btnImg),
+			widget.ButtonOpts.Text(lang.NativeName(), buttonFace, btnColor),
+			widget.ButtonOpts.TextPadding(&widget.Insets{Left: 28, Right: 28, Top: 10, Bottom: 10}),
+			widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
+				s.selectLanguage(lang)
+			}),
+		))
+	}
+
 	// ====== 按钮栏 ======
 	saveBtn := widget.NewButton(
 		widget.ButtonOpts.Image(normalBtnImage),
-		widget.ButtonOpts.Text("保存", buttonFace, normalBtnTextColor),
+		widget.ButtonOpts.Text(gamei18n.Text(gamei18n.MsgSettingsSave), buttonFace, normalBtnTextColor),
 		widget.ButtonOpts.TextPadding(&widget.Insets{Left: 24, Right: 24, Top: 8, Bottom: 8}),
 		widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
 			s.backPressed = true
 			config.G.SpeedMultiplier = s.localValue
+			config.G.Language = string(s.localLanguage)
 			_ = config.SaveGameSettings()
 		}),
 	)
 
 	cancelBtn := widget.NewButton(
 		widget.ButtonOpts.Image(normalBtnImage),
-		widget.ButtonOpts.Text("取消", buttonFace, normalBtnTextColor),
+		widget.ButtonOpts.Text(gamei18n.Text(gamei18n.MsgSettingsCancel), buttonFace, normalBtnTextColor),
 		widget.ButtonOpts.TextPadding(&widget.Insets{Left: 24, Right: 24, Top: 8, Bottom: 8}),
 		widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
 			s.backPressed = true
@@ -225,6 +266,8 @@ func (s *UI) buildUI() {
 	topContent.AddChild(titleLabel)
 	topContent.AddChild(speedLabel)
 	topContent.AddChild(speedRow)
+	topContent.AddChild(languageLabel)
+	topContent.AddChild(languageRow)
 
 	// ====== 底部内容（操作按钮 + 提示） ======
 	bottomContent := widget.NewContainer(

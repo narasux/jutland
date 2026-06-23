@@ -1,0 +1,292 @@
+[GameTitle]
+other = "怒 海 激 战"
+[GameCredits]
+other = "祝君武运昌隆!"
+[MenuMissionSelect]
+other = "任务选择"
+[MenuCollection]
+other = "游戏图鉴"
+[MenuSettings]
+other = "游戏设置"
+[MenuExit]
+other = "退出游戏"
+[Loading]
+other = "Loading..."
+[MissionStarted]
+other = "任务开始！"
+[MissionSuccess]
+other = "任务成功！"
+[MissionFailed]
+other = "任务失败..."
+[MissionStart]
+other = "开始任务"
+[Back]
+other = "返回"
+[MissionStats]
+other = "初始资金 {{.Funds}}  |  舰队上限 {{.ShipLimit}}  |  油井 {{.OilPlatforms}}"
+[MissionBattleStats]
+other = "我方 {{.AllyShips}} 舰  vs  敌方 {{.EnemyShips}} 舰  |  我方增援点 {{.AllyPoints}}  敌方增援点 {{.EnemyPoints}}"
+[MissionPaused]
+other = "任务暂停"
+[MissionResume]
+other = "继续"
+[MissionAbandon]
+other = "放弃"
+[MissionConfirmAbandon]
+other = "确认放弃任务？"
+[Confirm]
+other = "确认"
+[SettingsTitle]
+other = "游戏设置"
+[SettingsSpeed]
+other = "全局速度倍率"
+[SettingsLanguage]
+other = "语言"
+[SettingsSave]
+other = "保存"
+[SettingsCancel]
+other = "取消"
+[SpeedVerySlow]
+other = "极慢"
+[SpeedSlow]
+other = "慢"
+[SpeedNormal]
+other = "正常"
+[SpeedFast]
+other = "快"
+[SpeedVeryFast]
+other = "极快"
+[NationAll]
+other = "全部"
+[NationChina]
+other = "中国"
+[NationUnitedStates]
+other = "美国"
+[NationJapan]
+other = "日本"
+[NationGermany]
+other = "德国"
+[NationUnitedKingdom]
+other = "英国"
+[NationSovietUnion]
+other = "苏联"
+[NationSpecial]
+other = "特殊"
+[ShipTypeDefault]
+other = "默认"
+[ShipTypeCarrier]
+other = "航空母舰"
+[ShipTypeBattleship]
+other = "战列舰"
+[ShipTypeCruiser]
+other = "巡洋舰"
+[ShipTypeDestroyer]
+other = "驱逐舰"
+[ShipTypeFrigate]
+other = "护卫舰"
+[ShipTypeHospital]
+other = "医疗船"
+[ShipTypeCargo]
+other = "货轮"
+[ShipTypeTorpedoBoat]
+other = "鱼雷艇"
+[PlaneTypeFighter]
+other = "战斗机"
+[PlaneTypeDiveBomber]
+other = "俯冲轰炸机"
+[PlaneTypeTorpedoBomber]
+other = "鱼雷轰炸机"
+[Unknown]
+other = "未知"
+[CollectionAll]
+other = "全部"
+[CollectionSpecial]
+other = "特殊"
+[CollectionAuxiliary]
+other = "辅助舰"
+[CollectionShip]
+other = "舰船"
+[CollectionPlane]
+other = "战机"
+[CollectionNation]
+other = "国籍:"
+[CollectionShipClass]
+other = "舰种: {{.Value}}⌄"
+[CollectionPlaneType]
+other = "机种: {{.Value}}⌄"
+[CollectionShipName]
+other = "舰名: {{.Value}}⌄"
+[CollectionPlaneCount]
+other = "共 {{.Count}} 架飞机"
+[CollectionNationValue]
+other = "国籍: {{.Value}}⌄"
+[CollectionNoMatchingShip]
+other = "当前筛选条件下没有舰船"
+[CollectionNoMatchingPlane]
+other = "当前筛选条件下没有飞机"
+[CollectionShipArchive]
+other = "舰船档案"
+[CollectionNationLabel]
+other = "国籍"
+[CollectionTypeLabel]
+other = "舰种"
+[CollectionYear]
+other = "年份"
+[CollectionTonnage]
+other = "排水量"
+[CollectionSpeed]
+other = "速度"
+[CollectionCost]
+other = "费用"
+[CollectionHorizontalDR]
+other = "水平减伤"
+[CollectionVerticalDR]
+other = "垂直减伤"
+[CollectionArmaments]
+other = "武装"
+[CollectionNone]
+other = "无"
+[CollectionCombat]
+other = "武装与作战能力"
+[CollectionTotalPower]
+other = "综合战力"
+[CollectionRelativeNote]
+other = "相对能力（按当前筛选结果 P95 归一化）"
+[CollectionHistorySource]
+other = "历史与来源"
+[CollectionNoHistory]
+other = "暂无历史资料"
+[CollectionAssetAuthor]
+other = "素材原作者：{{.Author}}"
+[CollectionBasicData]
+other = "基础数据"
+[CollectionDurability]
+other = "耐久 {{.Value}}"
+[CollectionDamageReduction]
+other = "减伤 {{.Value}}%"
+[CollectionRange]
+other = "航程 {{.Value}} km"
+[CollectionPlaneSpeed]
+other = "速度 {{.Value}} km/h"
+[CollectionWeaponConfig]
+other = "武器配置"
+[CollectionCombatAbility]
+other = "作战能力"
+[CollectionFormationNote]
+other = "{{.Count}}架标准编队 · 相对能力（按当前筛选结果 P95 归一化）"
+[CollectionFormationPower]
+other = "编队战力（{{.Count}}架）"
+[WeaponGun]
+other = "机炮"
+[WeaponBomb]
+other = "炸弹"
+[WeaponTorpedo]
+other = "鱼雷"
+[WeaponRocket]
+other = "火箭"
+[RadarAntiShip]
+other = "对舰"
+[RadarAntiAir]
+other = "对空"
+[RadarSurvival]
+other = "生存"
+[RadarMobility]
+other = "机动"
+[RadarProjection]
+other = "投送"
+[RadarBurst]
+other = "爆发"
+[RadarFormationScope]
+other = "统计口径：{{.Count}} 架标准编队"
+[RadarAbilityValue]
+other = "能力值：{{.Value}}"
+[RadarRelativePosition]
+other = "相对位置：{{.Percent}}%"
+[RadarAntiShipDPS]
+other = "有效对舰输出：{{.Value}} /s"
+[RadarAntiAirDPS]
+other = "有效对空输出：{{.Value}} /s"
+[RadarTargetingNote]
+other = "仅用于图鉴评估，不改变实战目标选择"
+[RadarEffectiveHP]
+other = "有效耐久：{{.Value}}"
+[RadarMobilityNote]
+other = "由速度、转向、加速度综合计算"
+[RadarCombatRadius]
+other = "作战半径：{{.Value}} km"
+[RadarProjectionDistance]
+other = "最大投送距离：{{.Value}} km"
+[RadarBurstDamage]
+other = "首轮期望伤害：{{.Value}}"
+[RadarMainContributions]
+other = "主要贡献："
+[RadarSubjectPower]
+other = "{{.Name}} · 综合战力"
+[RadarSubjectDimension]
+other = "{{.Name}} · {{.Dimension}}"
+[RadarContribution]
+other = "  {{.Name}}  {{.Percent}}%"
+[RadarOverall]
+other = "综合"
+[RadarHull]
+other = "舰体"
+[RadarAviation]
+other = "航空"
+[SidebarFunds]
+other = "资金: {{.Funds}}"
+[SidebarFleets]
+other = "我方舰队: {{.Ally}}    敌方舰队: {{.Enemy}}"
+[SidebarShowState]
+other = "状态显示"
+[SidebarDamageNumbers]
+other = "伤害数字"
+[MapSelf]
+other = "我"
+[MapEnemy]
+other = "敌"
+[MapFleetCount]
+other = "{{.Side}}（{{.Count}}）"
+[RallyLandBlocked]
+other = "陆地不可设集结点"
+[ReinforceShipArchive]
+other = "舰船档案"
+[ReinforceWeaponConfig]
+other = "武装配置"
+[ReinforceType]
+other = "类型"
+[ReinforceHP]
+other = "HP"
+[ReinforceSpeed]
+other = "速度"
+[ReinforceCost]
+other = "费用"
+[ReinforceQueue]
+other = "增援队列"
+[ReinforceStandby]
+other = "待命"
+[ReinforceControl]
+other = "控制状态"
+[ReinforceCurrentFunds]
+other = "当前资金"
+[ReinforceTipPoint]
+other = "↑ ↓ 增援点"
+[ReinforceTipShip]
+other = "← → 舰船"
+[ReinforceTipSummon]
+other = "Enter 召唤"
+[ReinforceTipCancel]
+other = "退格 取消增援"
+[ReinforceTipRally]
+other = "点击地图 设集结点"
+[ValueKnots]
+other = "{{.Value}} 节"
+[ValueCost]
+other = "${{.Funds}} / {{.Seconds}}s"
+[TypeWithAbbr]
+other = "{{.Type}}（{{.Abbr}}）"
+[LabelValue]
+other = "{{.Label}}：{{.Value}}"
+[ItemCount]
+other = "{{.Name}} x {{.Count}}"
+[TypeSlash]
+other = "{{.Abbr}} / {{.Type}}"

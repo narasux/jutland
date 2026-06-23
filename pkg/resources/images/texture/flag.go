@@ -148,7 +148,7 @@ func GetText(
 		return img
 	}
 
-	img := ebiten.NewImage(int(layout.CalcTextWidth(textStr, fontSize)*3), int(fontSize)+3)
+	img := ebiten.NewImage(int(layout.CalcTextWidth(textStr, fontSize, textFont)*3), int(fontSize)+3)
 	opts := &text.DrawOptions{}
 	opts.ColorScale.ScaleWithColor(clr)
 	textFace := text.GoTextFace{
