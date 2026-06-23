@@ -6,7 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 )
 
 // CalcTextWidth 计算文本宽度
@@ -20,7 +20,7 @@ func WrapText(value string, maxWidth, fontSize float64, source *text.GoTextFaceS
 	if CalcTextWidth(value, fontSize, source) <= maxWidth {
 		return []string{value}
 	}
-	if gamei18n.CurrentLanguage() == gamei18n.LanguageEnglish {
+	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
 		return wrapWords(value, maxWidth, fontSize, source)
 	}
 	return wrapRunes(value, maxWidth, fontSize, source)

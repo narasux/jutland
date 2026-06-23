@@ -384,7 +384,10 @@ func (m *MissionManager) updateShotBullets() {
 		if bt.HitObjType == object.TypeNone {
 			bt.HitObjType = object.TypeWater
 		}
-		m.state.Arena.Explosions = append(m.state.Arena.Explosions, objExplosion.NewRocket(bt.CurPos.Copy(), bt.Rotation))
+		m.state.Arena.Explosions = append(
+			m.state.Arena.Explosions,
+			objExplosion.NewRocket(bt.CurPos.Copy(), bt.Rotation),
+		)
 		if m.state.View.Camera.Contains(bt.CurPos) {
 			m.weaponFirePlayer.PlayRocketExplode()
 		}

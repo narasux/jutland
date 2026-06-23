@@ -16,7 +16,7 @@ import (
 	"github.com/pkg/browser"
 	"github.com/samber/lo"
 
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -51,23 +51,23 @@ const (
 func (f shipClassFilter) display() string {
 	switch f {
 	case shipClassCarrier:
-		return gamei18n.Text(gamei18n.MsgShipTypeCarrier)
+		return i18n.Text(i18n.MsgShipTypeCarrier)
 	case shipClassBattleship:
-		return gamei18n.Text(gamei18n.MsgShipTypeBattleship)
+		return i18n.Text(i18n.MsgShipTypeBattleship)
 	case shipClassCruiser:
-		return gamei18n.Text(gamei18n.MsgShipTypeCruiser)
+		return i18n.Text(i18n.MsgShipTypeCruiser)
 	case shipClassDestroyer:
-		return gamei18n.Text(gamei18n.MsgShipTypeDestroyer)
+		return i18n.Text(i18n.MsgShipTypeDestroyer)
 	case shipClassFrigate:
-		return gamei18n.Text(gamei18n.MsgShipTypeFrigate)
+		return i18n.Text(i18n.MsgShipTypeFrigate)
 	case shipClassTorpedo:
-		return gamei18n.Text(gamei18n.MsgShipTypeTorpedoBoat)
+		return i18n.Text(i18n.MsgShipTypeTorpedoBoat)
 	case shipClassAuxiliary:
-		return gamei18n.Text(gamei18n.MsgCollectionAuxiliary)
+		return i18n.Text(i18n.MsgCollectionAuxiliary)
 	case shipClassSpecial:
-		return gamei18n.Text(gamei18n.MsgCollectionSpecial)
+		return i18n.Text(i18n.MsgCollectionSpecial)
 	default:
-		return gamei18n.Text(gamei18n.MsgCollectionAll)
+		return i18n.Text(i18n.MsgCollectionAll)
 	}
 }
 
@@ -88,13 +88,13 @@ const (
 func (f planeTypeFilter) display() string {
 	switch f {
 	case planeTypeFighter:
-		return gamei18n.Text(gamei18n.MsgPlaneTypeFighter)
+		return i18n.Text(i18n.MsgPlaneTypeFighter)
 	case planeTypeDive:
-		return gamei18n.Text(gamei18n.MsgPlaneTypeDiveBomber)
+		return i18n.Text(i18n.MsgPlaneTypeDiveBomber)
 	case planeTypeTorpedo:
-		return gamei18n.Text(gamei18n.MsgPlaneTypeTorpedoBomber)
+		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
 	default:
-		return gamei18n.Text(gamei18n.MsgCollectionAll)
+		return i18n.Text(i18n.MsgCollectionAll)
 	}
 }
 
@@ -540,8 +540,25 @@ func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
 		return
 	}
 	rect := c.dropdownListRect(c.openDropdown)
-	vector.FillRect(screen, float32(rect.Min.X), float32(rect.Min.Y), float32(rect.Dx()), float32(rect.Dy()), color.RGBA{20, 19, 17, 252}, false)
-	vector.StrokeRect(screen, float32(rect.Min.X), float32(rect.Min.Y), float32(rect.Dx()), float32(rect.Dy()), 1.5, colorx.Gold, false)
+	vector.FillRect(
+		screen,
+		float32(rect.Min.X),
+		float32(rect.Min.Y),
+		float32(rect.Dx()),
+		float32(rect.Dy()),
+		color.RGBA{20, 19, 17, 252},
+		false,
+	)
+	vector.StrokeRect(
+		screen,
+		float32(rect.Min.X),
+		float32(rect.Min.Y),
+		float32(rect.Dx()),
+		float32(rect.Dy()),
+		1.5,
+		colorx.Gold,
+		false,
+	)
 	entries := c.dropdownEntries(c.openDropdown)
 	cursor := image.Pt(ebiten.CursorPosition())
 	rowHeight := c.dropdownRowHeight()
@@ -552,7 +569,15 @@ func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
 		}
 		rowRect := image.Rect(rect.Min.X, rect.Min.Y+row*rowHeight, rect.Max.X, rect.Min.Y+(row+1)*rowHeight)
 		if cursor.In(rowRect) {
-			vector.FillRect(screen, float32(rowRect.Min.X), float32(rowRect.Min.Y), float32(rowRect.Dx()), float32(rowRect.Dy()), color.RGBA{80, 69, 52, 255}, false)
+			vector.FillRect(
+				screen,
+				float32(rowRect.Min.X),
+				float32(rowRect.Min.Y),
+				float32(rowRect.Dx()),
+				float32(rowRect.Dy()),
+				color.RGBA{80, 69, 52, 255},
+				false,
+			)
 		}
 		c.drawer.drawText(
 			screen, c.dropdownEntryLabel(entries[index]), float64(rowRect.Min.X)+12*c.metrics.Scale,
@@ -670,7 +695,9 @@ func calculateCollectionUILayout(width, height int) collectionUILayout {
 			X: float64(marginX + archiveW + gap), Y: float64(detailsY), W: float64(combatW), H: float64(detailsH),
 		},
 		ShipSource: collectionCard{
-			X: float64(marginX + archiveW + combatW + 2*gap), Y: float64(detailsY), W: float64(sourceW), H: float64(detailsH),
+			X: float64(
+				marginX + archiveW + combatW + 2*gap,
+			), Y: float64(detailsY), W: float64(sourceW), H: float64(detailsH),
 		},
 		PlaneViewport: planeViewport,
 	}
@@ -768,7 +795,7 @@ func (c *CollectionUI) buildPlaneToolbar(rect image.Rectangle) *widget.Container
 	panel.AddChild(controls)
 
 	planeCount := len(c.filteredPlanes())
-	count := c.newLabel(gamei18n.Plural(gamei18n.MsgCollectionPlaneCount, planeCount, map[string]any{
+	count := c.newLabel(i18n.Plural(i18n.MsgCollectionPlaneCount, planeCount, map[string]any{
 		"Count": planeCount,
 	}), c.metrics.ToolbarFont*0.78)
 	count.GetWidget().LayoutData = widget.AnchorLayoutData{
@@ -785,9 +812,9 @@ func (c *CollectionUI) buildPlaneToolbar(rect image.Rectangle) *widget.Container
 
 func collectionCategoryLabel(category collectionCategory) string {
 	if category == collectionCategoryPlane {
-		return gamei18n.Text(gamei18n.MsgCollectionPlane)
+		return i18n.Text(i18n.MsgCollectionPlane)
 	}
-	return gamei18n.Text(gamei18n.MsgCollectionShip)
+	return i18n.Text(i18n.MsgCollectionShip)
 }
 
 func (c *CollectionUI) newTabButton(category collectionCategory) *widget.Button {
@@ -844,7 +871,7 @@ func (c *CollectionUI) newNationCombo(
 	return c.newCombo(
 		entries, selected, 132,
 		func(entry any) string {
-			return gamei18n.Format(gamei18n.MsgCollectionNationValue, map[string]any{
+			return i18n.Format(i18n.MsgCollectionNationValue, map[string]any{
 				"Value": entry.(objUnit.Nation).ToDisplay(),
 			})
 		},
@@ -862,7 +889,7 @@ func (c *CollectionUI) newShipClassCombo() *widget.ListComboButton {
 	return c.newCombo(
 		entries, c.shipClass, 148,
 		func(entry any) string {
-			return gamei18n.Format(gamei18n.MsgCollectionShipClass, map[string]any{
+			return i18n.Format(i18n.MsgCollectionShipClass, map[string]any{
 				"Value": entry.(shipClassFilter).display(),
 			})
 		},
@@ -882,7 +909,7 @@ func (c *CollectionUI) newPlaneTypeCombo() *widget.ListComboButton {
 	return c.newCombo(
 		entries, c.planeType, 160,
 		func(entry any) string {
-			return gamei18n.Format(gamei18n.MsgCollectionPlaneType, map[string]any{
+			return i18n.Format(i18n.MsgCollectionPlaneType, map[string]any{
 				"Value": entry.(planeTypeFilter).display(),
 			})
 		},
@@ -908,13 +935,13 @@ func (c *CollectionUI) newShipNameCombo() *widget.ListComboButton {
 		}
 	}
 	if len(entries) == 0 {
-		entries = append(entries, collectionNameOption{Label: gamei18n.Text(gamei18n.MsgCollectionNoMatchingShip)})
+		entries = append(entries, collectionNameOption{Label: i18n.Text(i18n.MsgCollectionNoMatchingShip)})
 		selected = entries[0].(collectionNameOption)
 	}
 	return c.newCombo(
 		entries, selected, 210,
 		func(entry any) string {
-			return gamei18n.Format(gamei18n.MsgCollectionShipName, map[string]any{
+			return i18n.Format(i18n.MsgCollectionShipName, map[string]any{
 				"Value": entry.(collectionNameOption).Label,
 			})
 		},
@@ -1253,7 +1280,15 @@ func (c *CollectionUI) drawShip(screen *ebiten.Image) {
 	// 舰船页上半部分是纯蓝图，下半部分是档案、作战能力和来源三块内容。
 	ship := objUnit.ShipMap[c.curShip]
 	if ship == nil {
-		c.drawer.drawText(screen, gamei18n.Text(gamei18n.MsgCollectionNoMatchingShip), 80, float64(c.layout.ShipArchive.Y+40), 24, font.LocalizedUI(font.Kai), colorx.White)
+		c.drawer.drawText(
+			screen,
+			i18n.Text(i18n.MsgCollectionNoMatchingShip),
+			80,
+			float64(c.layout.ShipArchive.Y+40),
+			24,
+			font.LocalizedUI(font.Kai),
+			colorx.White,
+		)
 		return
 	}
 	c.drawShipBlueprint(screen, ship)
@@ -1270,20 +1305,47 @@ func (c *CollectionUI) drawShipBlueprint(screen *ebiten.Image, ship *objUnit.Bat
 	opts.GeoM.Scale(float64(rect.Dx())/float64(bg.Bounds().Dx()), float64(rect.Dy())/float64(bg.Bounds().Dy()))
 	opts.GeoM.Translate(float64(rect.Min.X), float64(rect.Min.Y))
 	screen.DrawImage(bg, opts)
-	vector.StrokeRect(screen, float32(rect.Min.X), float32(rect.Min.Y), float32(rect.Dx()), float32(rect.Dy()), 4, colorx.Silver, false)
+	vector.StrokeRect(
+		screen,
+		float32(rect.Min.X),
+		float32(rect.Min.Y),
+		float32(rect.Dx()),
+		float32(rect.Dy()),
+		4,
+		colorx.Silver,
+		false,
+	)
 
 	innerX, innerY := float64(rect.Min.X+24), float64(rect.Min.Y+18)
 	innerW, innerH := float64(rect.Dx()-48), float64(rect.Dy()-36)
 	halfHeight := (innerH - 12) / 2
-	c.drawer.drawCollectionImageFit(screen, shipImg.GetSide(ship.Name, 4), innerX, innerY, innerW, halfHeight, 0, false)
-	c.drawer.drawCollectionImageFit(screen, shipImg.GetTop(ship.Name, 4), innerX, innerY+halfHeight+12, innerW, halfHeight, 90, false)
+	c.drawer.drawCollectionImageFit(
+		screen,
+		shipImg.GetSide(ship.Name, 4),
+		innerX,
+		innerY,
+		innerW,
+		halfHeight,
+		0,
+		false,
+	)
+	c.drawer.drawCollectionImageFit(
+		screen,
+		shipImg.GetTop(ship.Name, 4),
+		innerX,
+		innerY+halfHeight+12,
+		innerW,
+		halfHeight,
+		90,
+		false,
+	)
 }
 
 func (c *CollectionUI) drawShipArchive(screen *ebiten.Image, ship *objUnit.BattleShip) {
 	// 档案卡片优先使用 reference 里的标准资料，缺失时才退回到配置字段。
 	card := c.layout.ShipArchive
 	scale := c.metrics.Scale
-	c.drawer.drawCollectionCard(screen, card, gamei18n.Text(gamei18n.MsgCollectionShipArchive), c.metrics)
+	c.drawer.drawCollectionCard(screen, card, i18n.Text(i18n.MsgCollectionShipArchive), c.metrics)
 	ref := objRef.GetReference(ship.Name)
 	c.drawer.drawText(
 		screen, objUnit.GetShipDisplayName(ship.Name), card.X+20*scale, card.Y+54*scale,
@@ -1320,14 +1382,32 @@ func (c *CollectionUI) currentShipPositionLabel() string {
 func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []objRef.InfoItem {
 	// reference 只保留精细舰种名称，其余档案数据全部来自 ships.json5 初始化后的舰船对象。
 	return []objRef.InfoItem{
-		{Label: gamei18n.Text(gamei18n.MsgCollectionNationLabel), Value: ship.Nation.ToDisplay()},
-		{Label: gamei18n.Text(gamei18n.MsgCollectionTypeLabel), Value: shipTypeDisplayValue(ship, ref)},
-		{Label: gamei18n.Text(gamei18n.MsgCollectionYear), Value: lo.Ternary(ship.Year == 0, "--", fmt.Sprintf("%d", ship.Year))},
-		{Label: gamei18n.Text(gamei18n.MsgCollectionTonnage), Value: fmt.Sprintf("%.0f", ship.Tonnage)},
-		{Label: gamei18n.Text(gamei18n.MsgCollectionSpeed), Value: gamei18n.Format(gamei18n.MsgValueKnots, map[string]any{"Value": formatShipArchiveNumber(ship.MaxSpeed * 600)})},
-		{Label: gamei18n.Text(gamei18n.MsgCollectionCost), Value: gamei18n.Format(gamei18n.MsgValueCost, map[string]any{"Funds": ship.FundsCost, "Seconds": ship.TimeCost})},
-		{Label: gamei18n.Text(gamei18n.MsgCollectionHorizontalDR), Value: formatShipArchiveNumber(ship.HorizontalDamageReduction*100) + "%"},
-		{Label: gamei18n.Text(gamei18n.MsgCollectionVerticalDR), Value: formatShipArchiveNumber(ship.VerticalDamageReduction*100) + "%"},
+		{Label: i18n.Text(i18n.MsgCollectionNationLabel), Value: ship.Nation.ToDisplay()},
+		{Label: i18n.Text(i18n.MsgCollectionTypeLabel), Value: shipTypeDisplayValue(ship, ref)},
+		{
+			Label: i18n.Text(i18n.MsgCollectionYear),
+			Value: lo.Ternary(ship.Year == 0, "--", fmt.Sprintf("%d", ship.Year)),
+		},
+		{Label: i18n.Text(i18n.MsgCollectionTonnage), Value: fmt.Sprintf("%.0f", ship.Tonnage)},
+		{
+			Label: i18n.Text(i18n.MsgCollectionSpeed),
+			Value: i18n.Format(
+				i18n.MsgValueKnots,
+				map[string]any{"Value": formatShipArchiveNumber(ship.MaxSpeed * 600)},
+			),
+		},
+		{
+			Label: i18n.Text(i18n.MsgCollectionCost),
+			Value: i18n.Format(i18n.MsgValueCost, map[string]any{"Funds": ship.FundsCost, "Seconds": ship.TimeCost}),
+		},
+		{
+			Label: i18n.Text(i18n.MsgCollectionHorizontalDR),
+			Value: formatShipArchiveNumber(ship.HorizontalDamageReduction*100) + "%",
+		},
+		{
+			Label: i18n.Text(i18n.MsgCollectionVerticalDR),
+			Value: formatShipArchiveNumber(ship.VerticalDamageReduction*100) + "%",
+		},
 	}
 }
 
@@ -1339,7 +1419,7 @@ func shipTypeDisplayValue(ship *objUnit.BattleShip, ref *objRef.Reference) strin
 	if ship.TypeAbbr == "" {
 		return display
 	}
-	return gamei18n.Format(gamei18n.MsgTypeWithAbbr, map[string]any{"Type": display, "Abbr": ship.TypeAbbr})
+	return i18n.Format(i18n.MsgTypeWithAbbr, map[string]any{"Type": display, "Abbr": ship.TypeAbbr})
 }
 
 func formatShipArchiveNumber(value float64) string {
@@ -1351,11 +1431,11 @@ func (c *CollectionUI) drawShipCombat(screen *ebiten.Image, ship *objUnit.Battle
 	// 作战卡片左边展示武装，右边展示雷达，顶部补一行总战力，方便快速扫读。
 	card := c.layout.ShipCombat
 	scale := c.metrics.Scale
-	c.drawer.drawCollectionCard(screen, card, gamei18n.Text(gamei18n.MsgCollectionCombat), c.metrics)
+	c.drawer.drawCollectionCard(screen, card, i18n.Text(i18n.MsgCollectionCombat), c.metrics)
 	labelX := card.X + card.W - 185*scale
 	valueX := card.X + card.W - 78*scale
 	c.drawer.drawText(
-		screen, gamei18n.Text(gamei18n.MsgCollectionTotalPower), labelX, card.Y+18*scale,
+		screen, i18n.Text(i18n.MsgCollectionTotalPower), labelX, card.Y+18*scale,
 		c.metrics.Body, font.LocalizedUI(font.Kai), color.RGBA{214, 201, 178, 255},
 	)
 	c.drawer.drawText(
@@ -1382,15 +1462,23 @@ func (c *CollectionUI) drawShipCombat(screen *ebiten.Image, ship *objUnit.Battle
 	centerX := card.X + weaponW + (card.W-weaponW)/2
 	centerY := card.Y + card.H/2 + 12
 	hits := c.drawer.drawAbilityRadar(
-		screen, centerX, centerY, radius,
-		radarSubject{Name: objUnit.GetShipDisplayName(ship.Name), Power: ship.CombatPower}, c.shipScales, image.Point{},
+		screen,
+		centerX,
+		centerY,
+		radius,
+		radarSubject{
+			Name:  objUnit.GetShipDisplayName(ship.Name),
+			Power: ship.CombatPower,
+		},
+		c.shipScales,
+		image.Point{},
 		c.metrics.RadarLabel,
 	)
 	c.radarHits = append(c.radarHits, hits...)
 	c.drawRadarScaleNote(
 		screen, card.X+weaponW+12*scale, card.Y+card.H-38*scale,
 		card.W-weaponW-24*scale, c.metrics.RadarLabel,
-		gamei18n.Text(gamei18n.MsgCollectionRelativeNote),
+		i18n.Text(i18n.MsgCollectionRelativeNote),
 	)
 }
 
@@ -1463,8 +1551,8 @@ func shipArmamentItems(ship *objUnit.BattleShip) []objRef.InfoItem {
 	}
 	if len(items) == 0 {
 		items = append(items, objRef.InfoItem{
-			Label: gamei18n.Text(gamei18n.MsgCollectionArmaments),
-			Value: gamei18n.Text(gamei18n.MsgCollectionNone),
+			Label: i18n.Text(i18n.MsgCollectionArmaments),
+			Value: i18n.Text(i18n.MsgCollectionNone),
 		})
 	}
 	return items
@@ -1474,11 +1562,11 @@ func (c *CollectionUI) drawShipSource(screen *ebiten.Image, ship *objUnit.Battle
 	// 来源卡片不做外链抓取，只展示本地配置和 reference 数据，保持图鉴离线可用。
 	card := c.layout.ShipSource
 	scale := c.metrics.Scale
-	c.drawer.drawCollectionCard(screen, card, gamei18n.Text(gamei18n.MsgCollectionHistorySource), c.metrics)
+	c.drawer.drawCollectionCard(screen, card, i18n.Text(i18n.MsgCollectionHistorySource), c.metrics)
 	ref := objRef.GetReference(ship.Name)
 	if ref == nil {
 		c.drawer.drawText(
-			screen, gamei18n.Text(gamei18n.MsgCollectionNoHistory), card.X+20*scale, card.Y+58*scale,
+			screen, i18n.Text(i18n.MsgCollectionNoHistory), card.X+20*scale, card.Y+58*scale,
 			c.metrics.History, font.LocalizedUI(font.Kai), colorx.White,
 		)
 		return
@@ -1502,8 +1590,13 @@ func (c *CollectionUI) drawShipSource(screen *ebiten.Image, ship *objUnit.Battle
 	metaY := descriptionY + float64(drawnLines+1)*lineHeight
 	if ref.Author != "" {
 		c.drawer.drawText(
-			screen, gamei18n.Format(gamei18n.MsgCollectionAssetAuthor, map[string]any{"Author": ref.Author}), card.X+20*scale, metaY,
-			c.metrics.Body, font.LocalizedUI(font.Kai), color.RGBA{214, 201, 178, 255},
+			screen,
+			i18n.Format(i18n.MsgCollectionAssetAuthor, map[string]any{"Author": ref.Author}),
+			card.X+20*scale,
+			metaY,
+			c.metrics.Body,
+			font.LocalizedUI(font.Kai),
+			color.RGBA{214, 201, 178, 255},
 		)
 		metaY += lineHeight
 	}
@@ -1528,16 +1621,25 @@ func (c *CollectionUI) drawShipSource(screen *ebiten.Image, ship *objUnit.Battle
 func (c *CollectionUI) drawPlanes(screen *ebiten.Image) {
 	// 飞机页只横向排列完整卡片；可见范围由两侧箭头按单架飞机步进。
 	viewport := c.layout.PlaneViewport
-	if c.planeCanvas == nil || c.planeCanvas.Bounds().Dx() != viewport.Dx() || c.planeCanvas.Bounds().Dy() != viewport.Dy() {
+	if c.planeCanvas == nil || c.planeCanvas.Bounds().Dx() != viewport.Dx() ||
+		c.planeCanvas.Bounds().Dy() != viewport.Dy() {
 		c.planeCanvas = ebiten.NewImage(viewport.Dx(), viewport.Dy())
 	}
 	c.planeCanvas.Clear()
-	vector.FillRect(c.planeCanvas, 0, 0, float32(viewport.Dx()), float32(viewport.Dy()), color.RGBA{12, 12, 12, 150}, false)
+	vector.FillRect(
+		c.planeCanvas,
+		0,
+		0,
+		float32(viewport.Dx()),
+		float32(viewport.Dy()),
+		color.RGBA{12, 12, 12, 150},
+		false,
+	)
 
 	planes := c.filteredPlanes()
 	if len(planes) == 0 {
 		c.drawer.drawText(
-			c.planeCanvas, gamei18n.Text(gamei18n.MsgCollectionNoMatchingPlane),
+			c.planeCanvas, i18n.Text(i18n.MsgCollectionNoMatchingPlane),
 			24*c.metrics.Scale, 30*c.metrics.Scale, c.metrics.CardTitle, font.LocalizedUI(font.Kai), colorx.White,
 		)
 	} else {
@@ -1561,7 +1663,16 @@ func (c *CollectionUI) drawPlanes(screen *ebiten.Image) {
 	opts := &ebiten.DrawImageOptions{}
 	opts.GeoM.Translate(float64(viewport.Min.X), float64(viewport.Min.Y))
 	screen.DrawImage(c.planeCanvas, opts)
-	vector.StrokeRect(screen, float32(viewport.Min.X), float32(viewport.Min.Y), float32(viewport.Dx()), float32(viewport.Dy()), 2, color.RGBA{214, 201, 178, 180}, false)
+	vector.StrokeRect(
+		screen,
+		float32(viewport.Min.X),
+		float32(viewport.Min.Y),
+		float32(viewport.Dx()),
+		float32(viewport.Dy()),
+		2,
+		color.RGBA{214, 201, 178, 180},
+		false,
+	)
 }
 
 func (c *CollectionUI) drawPlaneCard(
@@ -1570,8 +1681,25 @@ func (c *CollectionUI) drawPlaneCard(
 ) {
 	// 每张飞机卡片从上到下固定分为：标题、素材、基础数据、武器配置、雷达图和总战力。
 	px := func(value float64) float64 { return value * scale }
-	vector.FillRect(screen, float32(x), float32(y), float32(width), float32(height), color.RGBA{25, 23, 20, 235}, false)
-	vector.StrokeRect(screen, float32(x), float32(y), float32(width), float32(height), 1.5, color.RGBA{214, 201, 178, 190}, false)
+	vector.FillRect(
+		screen,
+		float32(x),
+		float32(y),
+		float32(width),
+		float32(height),
+		color.RGBA{25, 23, 20, 235},
+		false,
+	)
+	vector.StrokeRect(
+		screen,
+		float32(x),
+		float32(y),
+		float32(width),
+		float32(height),
+		1.5,
+		color.RGBA{214, 201, 178, 190},
+		false,
+	)
 	c.drawer.drawText(
 		screen, objUnit.GetPlaneDisplayName(plane.Name), float64(x)+px(20), float64(y)+px(20),
 		px(27), font.LocalizedUI(font.Hang), colorx.White,
@@ -1587,26 +1715,77 @@ func (c *CollectionUI) drawPlaneCard(
 	)
 
 	sectionY := y + int(math.Round(px(208)))
-	c.drawPlaneSectionTitle(screen, x, sectionY, width, scale, gamei18n.Text(gamei18n.MsgCollectionBasicData))
+	c.drawPlaneSectionTitle(screen, x, sectionY, width, scale, i18n.Text(i18n.MsgCollectionBasicData))
 	bodyFont := font.LocalizedUI(font.Kai)
-	c.drawer.drawText(screen, gamei18n.Format(gamei18n.MsgCollectionDurability, map[string]any{"Value": fmt.Sprintf("%.0f", plane.TotalHP)}), float64(x)+px(22), float64(sectionY)+px(34), px(18), bodyFont, colorx.White)
-	c.drawer.drawText(screen, gamei18n.Format(gamei18n.MsgCollectionDamageReduction, map[string]any{"Value": fmt.Sprintf("%.0f", plane.DamageReduction*100)}), float64(x)+px(178), float64(sectionY)+px(34), px(18), bodyFont, colorx.White)
-	c.drawer.drawText(screen, gamei18n.Format(gamei18n.MsgCollectionPlaneSpeed, map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*5400)}), float64(x)+px(22), float64(sectionY)+px(60), px(18), bodyFont, colorx.White)
-	c.drawer.drawText(screen, gamei18n.Format(gamei18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}), float64(x)+px(178), float64(sectionY)+px(60), px(18), bodyFont, colorx.White)
+	c.drawer.drawText(
+		screen,
+		i18n.Format(i18n.MsgCollectionDurability, map[string]any{"Value": fmt.Sprintf("%.0f", plane.TotalHP)}),
+		float64(x)+px(22),
+		float64(sectionY)+px(34),
+		px(18),
+		bodyFont,
+		colorx.White,
+	)
+	c.drawer.drawText(
+		screen,
+		i18n.Format(
+			i18n.MsgCollectionDamageReduction,
+			map[string]any{"Value": fmt.Sprintf("%.0f", plane.DamageReduction*100)},
+		),
+		float64(x)+px(178),
+		float64(sectionY)+px(34),
+		px(18),
+		bodyFont,
+		colorx.White,
+	)
+	c.drawer.drawText(
+		screen,
+		i18n.Format(i18n.MsgCollectionPlaneSpeed, map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*5400)}),
+		float64(x)+px(22),
+		float64(sectionY)+px(60),
+		px(18),
+		bodyFont,
+		colorx.White,
+	)
+	c.drawer.drawText(
+		screen,
+		i18n.Format(i18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}),
+		float64(x)+px(178),
+		float64(sectionY)+px(60),
+		px(18),
+		bodyFont,
+		colorx.White,
+	)
 
 	weaponY := sectionY + int(math.Round(px(94)))
-	c.drawPlaneSectionTitle(screen, x, weaponY, width, scale, gamei18n.Text(gamei18n.MsgCollectionWeaponConfig))
+	c.drawPlaneSectionTitle(screen, x, weaponY, width, scale, i18n.Text(i18n.MsgCollectionWeaponConfig))
 	weaponLines := planeWeaponLines(plane)
 	for idx, line := range weaponLines {
 		if idx >= 6 {
-			c.drawer.drawText(screen, "…", float64(x)+px(22), float64(weaponY)+px(34+float64(idx)*24), px(18), bodyFont, colorx.White)
+			c.drawer.drawText(
+				screen,
+				"…",
+				float64(x)+px(22),
+				float64(weaponY)+px(34+float64(idx)*24),
+				px(18),
+				bodyFont,
+				colorx.White,
+			)
 			break
 		}
-		c.drawer.drawText(screen, line, float64(x)+px(22), float64(weaponY)+px(34+float64(idx)*24), px(18), bodyFont, colorx.White)
+		c.drawer.drawText(
+			screen,
+			line,
+			float64(x)+px(22),
+			float64(weaponY)+px(34+float64(idx)*24),
+			px(18),
+			bodyFont,
+			colorx.White,
+		)
 	}
 
 	radarY := weaponY + int(math.Round(px(196)))
-	c.drawPlaneSectionTitle(screen, x, radarY, width, scale, gamei18n.Text(gamei18n.MsgCollectionCombatAbility))
+	c.drawPlaneSectionTitle(screen, x, radarY, width, scale, i18n.Text(i18n.MsgCollectionCombatAbility))
 	radarCenterX, radarCenterY := float64(x+width/2), float64(radarY)+px(114)
 	hits := c.drawer.drawAbilityRadar(
 		screen, radarCenterX, radarCenterY, px(70),
@@ -1621,20 +1800,47 @@ func (c *CollectionUI) drawPlaneCard(
 	}
 	c.drawRadarScaleNote(
 		screen, float64(x)+px(20), float64(radarY)+px(208), float64(width)-px(40), px(14),
-		gamei18n.Format(gamei18n.MsgCollectionFormationNote, map[string]any{"Count": plane.CombatPower.FormationSize}),
+		i18n.Format(i18n.MsgCollectionFormationNote, map[string]any{"Count": plane.CombatPower.FormationSize}),
 	)
-	formationLabel := gamei18n.Format(gamei18n.MsgCollectionFormationPower, map[string]any{"Count": plane.CombatPower.FormationSize})
-	c.drawer.drawText(screen, formationLabel, float64(x)+px(22), float64(y+height)-px(48), px(18), bodyFont, color.RGBA{214, 201, 178, 255})
+	formationLabel := i18n.Format(
+		i18n.MsgCollectionFormationPower,
+		map[string]any{"Count": plane.CombatPower.FormationSize},
+	)
+	c.drawer.drawText(
+		screen,
+		formationLabel,
+		float64(x)+px(22),
+		float64(y+height)-px(48),
+		px(18),
+		bodyFont,
+		color.RGBA{214, 201, 178, 255},
+	)
 	valueText := fmt.Sprintf("%d", plane.CombatPower.Total)
 	valueSize := px(26)
-	c.drawer.drawText(screen, valueText, float64(x+width)-px(22)-estimateCollectionTextWidth(valueText, valueSize), float64(y+height)-px(52), valueSize, font.JetbrainsMono, colorx.White)
+	c.drawer.drawText(
+		screen,
+		valueText,
+		float64(x+width)-px(22)-estimateCollectionTextWidth(valueText, valueSize),
+		float64(y+height)-px(52),
+		valueSize,
+		font.JetbrainsMono,
+		colorx.White,
+	)
 }
 
 func (c *CollectionUI) drawPlaneSectionTitle(
 	screen *ebiten.Image, x, y, width int, scale float64, title string,
 ) {
 	// 小节标题统一使用短横线分隔，保持飞机卡片的纵向阅读节奏。
-	c.drawer.drawText(screen, title, float64(x)+20*scale, float64(y), 18*scale, font.LocalizedUI(font.Kai), color.RGBA{214, 201, 178, 255})
+	c.drawer.drawText(
+		screen,
+		title,
+		float64(x)+20*scale,
+		float64(y),
+		18*scale,
+		font.LocalizedUI(font.Kai),
+		color.RGBA{214, 201, 178, 255},
+	)
 	vector.StrokeLine(
 		screen, float32(float64(x)+100*scale), float32(float64(y)+12*scale),
 		float32(float64(x+width)-20*scale), float32(float64(y)+12*scale),

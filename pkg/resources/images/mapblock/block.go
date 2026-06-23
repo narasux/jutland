@@ -24,8 +24,10 @@ const (
 	deepSeaBlockCount = 3
 )
 
-var blocks map[string]*ebiten.Image
-var zoomBlocks map[int]map[string]*ebiten.Image
+var (
+	blocks     map[string]*ebiten.Image
+	zoomBlocks map[int]map[string]*ebiten.Image
+)
 
 // supportedZooms 是地图块缓存支持的主战场缩放档位。
 var supportedZooms = []int{1, 2, 4, 8, 16}
@@ -331,7 +333,8 @@ func GetDrawBlocksByCharAndPosZoom(c rune, x, y int, zoom int) []DrawBlock {
 	case mapcfg.ChrCoast:
 		index := int(hash[0]) % seaBlockCount
 		img := zoomBlocks[zoom][fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks,
+		posBlocks = append(
+			posBlocks,
 			DrawBlock{Image: img, Scale: 1},
 			SceneBlockCache.GetZoomDrawBlock(x, y, zoom),
 		)

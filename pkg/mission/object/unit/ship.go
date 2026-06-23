@@ -9,7 +9,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -49,25 +49,25 @@ const (
 func (t ShipType) ToDisplay() string {
 	switch t {
 	case ShipTypeAircraftCarrier:
-		return gamei18n.Text(gamei18n.MsgShipTypeCarrier)
+		return i18n.Text(i18n.MsgShipTypeCarrier)
 	case ShipTypeBattleShip:
-		return gamei18n.Text(gamei18n.MsgShipTypeBattleship)
+		return i18n.Text(i18n.MsgShipTypeBattleship)
 	case ShipTypeCruiser:
-		return gamei18n.Text(gamei18n.MsgShipTypeCruiser)
+		return i18n.Text(i18n.MsgShipTypeCruiser)
 	case ShipTypeDestroyer:
-		return gamei18n.Text(gamei18n.MsgShipTypeDestroyer)
+		return i18n.Text(i18n.MsgShipTypeDestroyer)
 	case ShipTypeFrigate:
-		return gamei18n.Text(gamei18n.MsgShipTypeFrigate)
+		return i18n.Text(i18n.MsgShipTypeFrigate)
 	case ShipTypeHospital:
-		return gamei18n.Text(gamei18n.MsgShipTypeHospital)
+		return i18n.Text(i18n.MsgShipTypeHospital)
 	case ShipTypeCargo:
-		return gamei18n.Text(gamei18n.MsgShipTypeCargo)
+		return i18n.Text(i18n.MsgShipTypeCargo)
 	case ShipTypeTorpedoBoat:
-		return gamei18n.Text(gamei18n.MsgShipTypeTorpedoBoat)
+		return i18n.Text(i18n.MsgShipTypeTorpedoBoat)
 	case ShipTypeDefault:
-		return gamei18n.Text(gamei18n.MsgShipTypeDefault)
+		return i18n.Text(i18n.MsgShipTypeDefault)
 	}
-	return gamei18n.Text(gamei18n.MsgShipTypeDefault)
+	return i18n.Text(i18n.MsgShipTypeDefault)
 }
 
 // HospitalShipEffectRange 医疗船效果范围（地图三格）

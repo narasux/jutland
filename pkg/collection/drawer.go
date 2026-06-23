@@ -10,7 +10,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -90,7 +90,7 @@ func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {
 		for _, name := range order {
 			items = append(items, objRef.InfoItem{
 				Label: label,
-				Value: gamei18n.Format(gamei18n.MsgItemCount, map[string]any{
+				Value: i18n.Format(i18n.MsgItemCount, map[string]any{
 					"Name": name, "Count": counts[name],
 				}),
 			})
@@ -112,14 +112,14 @@ func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {
 	for _, rocket := range plane.Weapon.Rockets {
 		rocketNames = append(rocketNames, rocket.Name)
 	}
-	appendGroup(gamei18n.Text(gamei18n.MsgWeaponGun), gunNames)
-	appendGroup(gamei18n.Text(gamei18n.MsgWeaponBomb), bombNames)
-	appendGroup(gamei18n.Text(gamei18n.MsgWeaponTorpedo), torpedoNames)
-	appendGroup(gamei18n.Text(gamei18n.MsgWeaponRocket), rocketNames)
+	appendGroup(i18n.Text(i18n.MsgWeaponGun), gunNames)
+	appendGroup(i18n.Text(i18n.MsgWeaponBomb), bombNames)
+	appendGroup(i18n.Text(i18n.MsgWeaponTorpedo), torpedoNames)
+	appendGroup(i18n.Text(i18n.MsgWeaponRocket), rocketNames)
 	if len(items) == 0 {
 		items = append(items, objRef.InfoItem{
-			Label: gamei18n.Text(gamei18n.MsgCollectionArmaments),
-			Value: gamei18n.Text(gamei18n.MsgCollectionNone),
+			Label: i18n.Text(i18n.MsgCollectionArmaments),
+			Value: i18n.Text(i18n.MsgCollectionNone),
 		})
 	}
 	return items

@@ -189,7 +189,8 @@ func (b *Bullet) genRocketTrails() []*trail.Trail {
 		return trails
 	}
 
-	trails = append(trails,
+	trails = append(
+		trails,
 		trail.New(
 			tailPos(1.5), textureImg.TrailShapeCircle,
 			5.5, 0.10,

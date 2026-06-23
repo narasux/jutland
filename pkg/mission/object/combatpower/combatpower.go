@@ -335,7 +335,10 @@ func buildPowerInfo(
 	}
 }
 
-func scaledContributions(contributions []objUnit.CombatPowerContribution, factor float64) []objUnit.CombatPowerContribution {
+func scaledContributions(
+	contributions []objUnit.CombatPowerContribution,
+	factor float64,
+) []objUnit.CombatPowerContribution {
 	if factor == 1 {
 		return contributions
 	}

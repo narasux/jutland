@@ -196,7 +196,11 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status = weaponImg.WeaponStatusLoaded
 				}
 
-				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeSecondaryGun, status, ms.UI.GameOpts.Zoom)
+				weaponIcon, weaponScale := weaponResource(
+					weaponImg.WeaponTypeSecondaryGun,
+					status,
+					ms.UI.GameOpts.Zoom,
+				)
 				weaponX += weaponInterstitialSpacing * sceneScale
 				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
 			}
@@ -208,7 +212,11 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status = weaponImg.WeaponStatusDisabled
 				}
 
-				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeAntiAircraftGun, status, ms.UI.GameOpts.Zoom)
+				weaponIcon, weaponScale := weaponResource(
+					weaponImg.WeaponTypeAntiAircraftGun,
+					status,
+					ms.UI.GameOpts.Zoom,
+				)
 				weaponX += weaponInterstitialSpacing * sceneScale
 				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
 			}

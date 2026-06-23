@@ -7,9 +7,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/narasux/jutland/pkg/i18n"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/action"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -38,11 +38,11 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 		2, color.RGBA{R: 104, G: 132, B: 139, A: 230}, false,
 	)
 
-	title := gamei18n.Text(gamei18n.MsgMissionPaused)
-	primaryText, dangerText := gamei18n.Text(gamei18n.MsgMissionResume), gamei18n.Text(gamei18n.MsgMissionAbandon)
+	title := i18n.Text(i18n.MsgMissionPaused)
+	primaryText, dangerText := i18n.Text(i18n.MsgMissionResume), i18n.Text(i18n.MsgMissionAbandon)
 	if ms.Core.ConfirmQuitMission {
-		title = gamei18n.Text(gamei18n.MsgMissionConfirmAbandon)
-		primaryText, dangerText = gamei18n.Text(gamei18n.MsgBack), gamei18n.Text(gamei18n.MsgConfirm)
+		title = i18n.Text(i18n.MsgMissionConfirmAbandon)
+		primaryText, dangerText = i18n.Text(i18n.MsgBack), i18n.Text(i18n.MsgConfirm)
 	}
 
 	d.drawCenteredPauseText(screen, title, ui.Panel.X+ui.Panel.W/2, ui.Panel.Y+46, 30, colorx.White)
