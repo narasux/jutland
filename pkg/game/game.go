@@ -16,7 +16,7 @@ import (
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/game/settings"
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -51,7 +51,7 @@ type Game struct {
 }
 
 func New() *Game {
-	config.G.Language = string(gamei18n.SetLanguage(config.G.Language))
+	config.G.Language = string(i18n.SetLanguage(config.G.Language))
 	emptyUIRoot := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
 	g := &Game{
 		mode:        GameModeStart,
@@ -130,20 +130,20 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawMissionSelect(screen, g.curMission, g.objStates)
 	case GameModeMissionLoading:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
-		g.drawer.drawGameTip(screen, gamei18n.Text(gamei18n.MsgLoading))
+		g.drawer.drawGameTip(screen, i18n.Text(i18n.MsgLoading))
 		g.objStates.LoadingInterface.Ready = true
 	case GameModeMissionStart:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
-		g.drawer.drawGameTip(screen, gamei18n.Text(gamei18n.MsgMissionStarted))
+		g.drawer.drawGameTip(screen, i18n.Text(i18n.MsgMissionStarted))
 		g.objStates.LoadingInterface.MissionStartDrawn = true
 	case GameModeMissionRunning:
 		g.missionMgr.Draw(screen)
 	case GameModeMissionSuccess:
 		g.drawer.drawBackground(screen, bgImg.MissionSuccess)
-		g.drawer.drawMissionResult(screen, gamei18n.Text(gamei18n.MsgMissionSuccess), colorx.Green)
+		g.drawer.drawMissionResult(screen, i18n.Text(i18n.MsgMissionSuccess), colorx.Green)
 	case GameModeMissionFailed:
 		g.drawer.drawBackground(screen, bgImg.MissionFailed)
-		g.drawer.drawMissionResult(screen, gamei18n.Text(gamei18n.MsgMissionFailed), colorx.Red)
+		g.drawer.drawMissionResult(screen, i18n.Text(i18n.MsgMissionFailed), colorx.Red)
 	case GameModeCollection:
 		g.drawer.drawBackground(screen, bgImg.MissionWindow)
 		g.collectionUI.Draw(screen)
@@ -220,28 +220,28 @@ func (g *Game) initMenuButtons() {
 	}
 	g.objStates.MenuButton = &menuButtonStates{
 		MissionSelect: &menuButton{
-			Text:     gamei18n.Text(gamei18n.MsgMenuMissionSelect),
+			Text:     i18n.Text(i18n.MsgMenuMissionSelect),
 			FontSize: fontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
 			Mode:     GameModeMissionSelect,
 		},
 		Collection: &menuButton{
-			Text:     gamei18n.Text(gamei18n.MsgMenuCollection),
+			Text:     i18n.Text(i18n.MsgMenuCollection),
 			FontSize: fontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
 			Mode:     GameModeCollection,
 		},
 		GameSetting: &menuButton{
-			Text:     gamei18n.Text(gamei18n.MsgMenuSettings),
+			Text:     i18n.Text(i18n.MsgMenuSettings),
 			FontSize: fontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
 			Mode:     GameModeGameSetting,
 		},
 		ExitGame: &menuButton{
-			Text:     gamei18n.Text(gamei18n.MsgMenuExit),
+			Text:     i18n.Text(i18n.MsgMenuExit),
 			FontSize: fontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
@@ -330,7 +330,7 @@ func (g *Game) handleGameSetting() error {
 }
 
 func (g *Game) applyLanguage(value string) {
-	lang := gamei18n.SetLanguage(value)
+	lang := i18n.SetLanguage(value)
 	config.G.Language = string(lang)
 	g.initMenuButtons()
 	g.settingUI.ReloadLanguage()

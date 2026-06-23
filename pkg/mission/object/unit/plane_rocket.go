@@ -124,7 +124,11 @@ func (r *PlaneRocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []
 var PlaneRocketLauncherMap = map[string]*PlaneRocketLauncher{}
 
 // NewPlaneRocketLauncher 基于模板创建带飞机挂点位置与射界的火箭发射器实例。
-func NewPlaneRocketLauncher(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *PlaneRocketLauncher {
+func NewPlaneRocketLauncher(
+	name string,
+	posPercent float64,
+	leftFireArc, rightFireArc FiringArc,
+) *PlaneRocketLauncher {
 	launcher, ok := PlaneRocketLauncherMap[name]
 	if !ok {
 		log.Fatalf("plane rocket launcher %s no found", name)

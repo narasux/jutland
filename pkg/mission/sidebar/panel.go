@@ -14,7 +14,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -181,7 +181,9 @@ func (p *Panel) buildUI(ms *state.MissionState) {
 			widget.WidgetOpts.LayoutData(widget.AnchorLayoutData{
 				HorizontalPosition: widget.AnchorLayoutPositionEnd,
 				VerticalPosition:   widget.AnchorLayoutPositionCenter,
-				Padding:            &widget.Insets{Right: int(p.layout.Screen.Width) - int(p.layout.Handle.X) - handleW},
+				Padding: &widget.Insets{
+					Right: int(p.layout.Screen.Width) - int(p.layout.Handle.X) - handleW,
+				},
 			}),
 		),
 		widget.ButtonOpts.Image(transparentButton),
@@ -226,8 +228,25 @@ func (p *Panel) addCheckboxButton(
 
 func (p *Panel) drawPanel(screen *ebiten.Image, ms *state.MissionState) {
 	ui := p.layout
-	vector.FillRect(screen, float32(ui.Panel.X), float32(ui.Panel.Y), float32(ui.Panel.W), float32(ui.Panel.H), panelBgColor, false)
-	vector.StrokeRect(screen, float32(ui.Panel.X), float32(ui.Panel.Y), float32(ui.Panel.W), float32(ui.Panel.H), 2, panelLineColor, false)
+	vector.FillRect(
+		screen,
+		float32(ui.Panel.X),
+		float32(ui.Panel.Y),
+		float32(ui.Panel.W),
+		float32(ui.Panel.H),
+		panelBgColor,
+		false,
+	)
+	vector.StrokeRect(
+		screen,
+		float32(ui.Panel.X),
+		float32(ui.Panel.Y),
+		float32(ui.Panel.W),
+		float32(ui.Panel.H),
+		2,
+		panelLineColor,
+		false,
+	)
 
 	p.drawMinimap(screen, ms)
 	p.drawBattleInfo(screen, ms)
@@ -295,14 +314,31 @@ func (p *Panel) drawHandleArrow(screen *ebiten.Image, ms *state.MissionState) {
 
 func (p *Panel) drawMinimap(screen *ebiten.Image, ms *state.MissionState) {
 	ui := p.layout
-	vector.FillRect(screen, float32(ui.Map.X-2), float32(ui.Map.Y-2), float32(ui.Map.W+4), float32(ui.Map.H+4), color.RGBA{R: 2, G: 8, B: 11, A: 245}, false)
+	vector.FillRect(
+		screen,
+		float32(ui.Map.X-2),
+		float32(ui.Map.Y-2),
+		float32(ui.Map.W+4),
+		float32(ui.Map.H+4),
+		color.RGBA{R: 2, G: 8, B: 11, A: 245},
+		false,
+	)
 
 	opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 	opts.GeoM.Scale(ui.Map.W/float64(p.abbrMap.Bounds().Dx()), ui.Map.H/float64(p.abbrMap.Bounds().Dy()))
 	opts.GeoM.Translate(ui.Map.X, ui.Map.Y)
 	screen.DrawImage(p.abbrMap, opts)
 
-	vector.StrokeRect(screen, float32(ui.Map.X), float32(ui.Map.Y), float32(ui.Map.W), float32(ui.Map.H), 2, panelLineColor, false)
+	vector.StrokeRect(
+		screen,
+		float32(ui.Map.X),
+		float32(ui.Map.Y),
+		float32(ui.Map.W),
+		float32(ui.Map.H),
+		2,
+		panelLineColor,
+		false,
+	)
 	p.drawMinimapCamera(screen, ms)
 	p.drawMinimapBuildings(screen, ms)
 	p.drawMinimapShips(screen, ms)
@@ -363,13 +399,29 @@ func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 	selfFleet := ms.Fleet(ms.Player.CurPlayer)
 	enemyFleet := ms.Fleet(ms.Player.CurEnemy)
 	bodyFont := font.LocalizedUI(font.Kai)
-	p.drawText(screen, gamei18n.Format(gamei18n.MsgSidebarFunds, map[string]any{"Funds": ms.Player.CurFunds}), ui.Panel.X+28, y+14, 18, bodyFont, colorx.White)
-	p.drawText(screen, gamei18n.Format(gamei18n.MsgSidebarFleets, map[string]any{"Ally": selfFleet.Total, "Enemy": enemyFleet.Total}), ui.Panel.X+28, y+40, 16, bodyFont, colorx.Silver)
+	p.drawText(
+		screen,
+		i18n.Format(i18n.MsgSidebarFunds, map[string]any{"Funds": ms.Player.CurFunds}),
+		ui.Panel.X+28,
+		y+14,
+		18,
+		bodyFont,
+		colorx.White,
+	)
+	p.drawText(
+		screen,
+		i18n.Format(i18n.MsgSidebarFleets, map[string]any{"Ally": selfFleet.Total, "Enemy": enemyFleet.Total}),
+		ui.Panel.X+28,
+		y+40,
+		16,
+		bodyFont,
+		colorx.Silver,
+	)
 }
 
 func (p *Panel) drawSettings(screen *ebiten.Image, ms *state.MissionState) {
-	p.drawCheckboxRow(screen, 0, gamei18n.Text(gamei18n.MsgSidebarShowState), ms.UI.GameOpts.ForceDisplayState)
-	p.drawCheckboxRow(screen, 1, gamei18n.Text(gamei18n.MsgSidebarDamageNumbers), ms.UI.GameOpts.DisplayDamageNumber)
+	p.drawCheckboxRow(screen, 0, i18n.Text(i18n.MsgSidebarShowState), ms.UI.GameOpts.ForceDisplayState)
+	p.drawCheckboxRow(screen, 1, i18n.Text(i18n.MsgSidebarDamageNumbers), ms.UI.GameOpts.DisplayDamageNumber)
 }
 
 func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, checked bool) {
@@ -391,7 +443,16 @@ func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, c
 
 func (p *Panel) drawCard(screen *ebiten.Image, x, y, w, h float64) {
 	vector.FillRect(screen, float32(x), float32(y), float32(w), float32(h), cardBgColor, false)
-	vector.StrokeRect(screen, float32(x), float32(y), float32(w), float32(h), 1, color.RGBA{R: 59, G: 97, B: 106, A: 210}, false)
+	vector.StrokeRect(
+		screen,
+		float32(x),
+		float32(y),
+		float32(w),
+		float32(h),
+		1,
+		color.RGBA{R: 59, G: 97, B: 106, A: 210},
+		false,
+	)
 }
 
 func (p *Panel) drawText(

@@ -1,4 +1,4 @@
-.PHONY: tidy build test
+.PHONY: tidy build pack test fmt vet golines gofumpt
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -24,11 +24,6 @@ tidy:
 # build executable binary
 build: tidy
 	go build -ldflags ${LDFLAGS} -o jutland ./main.go
-
-# format code style
-fmt:
-	golines ./ -m 120 -w --base-formatter gofmt --no-reformat-tags
-	gofumpt -l -w .
 
 # run unittest
 test: tidy
@@ -60,3 +55,26 @@ pack:
 
 	# clean pack dir
 	rm -rf ./jutland-${VERSION}
+
+fmt: golines gofumpt
+	$(GOLINES) ./ -m 119 -w --base-formatter gofmt --no-reformat-tags
+	$(GOFUMPT) -l -w .
+
+vet:
+	go vet ./...
+
+LOCALBIN ?= $(shell pwd)/bin
+$(LOCALBIN):
+	mkdir -p $(LOCALBIN)
+
+## Tool Binaries
+GOLINES ?= $(LOCALBIN)/golines
+GOFUMPT ?= $(LOCALBIN)/gofumpt
+
+golines: $(GOLINES)
+$(GOLINES): $(LOCALBIN)
+	GOBIN=$(LOCALBIN) go install github.com/segmentio/golines@v0.13.0
+
+gofumpt: $(GOFUMPT)
+$(GOFUMPT): $(LOCALBIN)
+	GOBIN=$(LOCALBIN) go install mvdan.cc/gofumpt@v0.10.0

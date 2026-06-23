@@ -1,7 +1,7 @@
 package unit
 
 import (
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -39,21 +39,21 @@ const (
 func (n Nation) ToDisplay() string {
 	switch n {
 	case NationAll:
-		return gamei18n.Text(gamei18n.MsgNationAll)
+		return i18n.Text(i18n.MsgNationAll)
 	case NationCN:
-		return gamei18n.Text(gamei18n.MsgNationChina)
+		return i18n.Text(i18n.MsgNationChina)
 	case NationUS:
-		return gamei18n.Text(gamei18n.MsgNationUnitedStates)
+		return i18n.Text(i18n.MsgNationUnitedStates)
 	case NationJP:
-		return gamei18n.Text(gamei18n.MsgNationJapan)
+		return i18n.Text(i18n.MsgNationJapan)
 	case NationDE:
-		return gamei18n.Text(gamei18n.MsgNationGermany)
+		return i18n.Text(i18n.MsgNationGermany)
 	case NationUK:
-		return gamei18n.Text(gamei18n.MsgNationUnitedKingdom)
+		return i18n.Text(i18n.MsgNationUnitedKingdom)
 	case NationSU:
-		return gamei18n.Text(gamei18n.MsgNationSovietUnion)
+		return i18n.Text(i18n.MsgNationSovietUnion)
 	default:
-		return gamei18n.Text(gamei18n.MsgNationSpecial)
+		return i18n.Text(i18n.MsgNationSpecial)
 	}
 }
 

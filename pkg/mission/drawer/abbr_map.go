@@ -7,7 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
-	gamei18n "github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -75,13 +75,13 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 		fleet := ms.Fleet(player)
 
 		// 绘制敌我标识
-		side := gamei18n.Text(gamei18n.MsgMapEnemy)
+		side := i18n.Text(i18n.MsgMapEnemy)
 		if player == ms.Player.CurPlayer {
-			side = gamei18n.Text(gamei18n.MsgMapSelf)
+			side = i18n.Text(i18n.MsgMapSelf)
 		}
 		d.drawText(
 			screen,
-			gamei18n.Format(gamei18n.MsgMapFleetCount, map[string]any{"Side": side, "Count": fleet.Total}),
+			i18n.Format(i18n.MsgMapFleetCount, map[string]any{"Side": side, "Count": fleet.Total}),
 			xOffset-50, 20, 48, font.LocalizedUI(font.Hang), colorx.White,
 		)
 
@@ -106,7 +106,7 @@ func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionSt
 
 			d.drawText(
 				screen,
-				gamei18n.Format(gamei18n.MsgItemCount, map[string]any{
+				i18n.Format(i18n.MsgItemCount, map[string]any{
 					"Name": objUnit.GetShipDisplayName(cls.Kind.Name), "Count": cls.Total,
 				}),
 				xOffset-50, yOffset, 20, font.LocalizedUI(font.Hang), colorx.White,
