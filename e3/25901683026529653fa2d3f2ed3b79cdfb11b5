@@ -1,0 +1,44 @@
+pkg/mission/drawer/text.go
+  h_83f239dc907c66 41
+pkg/mission/object/unit/plane.go
+  h_83f239dc907c66 12,37,39,41,43
+pkg/collection/drawer.go
+  h_83f239dc907c66 13,93,115-118,121-122
+pkg/collection/ui.go
+  h_83f239dc907c66 19,54,56,58,60,62,64,66,68,70,91,93,95,97,771,788,790,847,865,885,911,917,1256,1286,1323-1330,1342,1354,1358,1393,1466-1467,1477,1481,1505,1540,1590,1592-1595,1598,1609,1624,1626
+pkg/resources/font/font_test.go
+  h_83f239dc907c66 10-12
+pkg/collection/radar.go
+  h_83f239dc907c66 13,23,32-33,244,251,262
+pkg/utils/layout/layout.go
+  h_83f239dc907c66 8-9,23
+pkg/mission/object/unit/ship.go
+  h_83f239dc907c66 12,52,54,56,58,60,62,64,66,68,70
+pkg/game/settings/ui.go
+  h_83f239dc907c66 15,32,35-39,44-47,53-54,80-84,91-95,121-123,162,167,194,204,220-227,231,236,243,269-270
+pkg/mission/drawer/abbr_map.go
+  h_83f239dc907c66 10,78,80,84,109
+pkg/game/draw.go
+  h_83f239dc907c66 12,125,132,202,227,273,314
+pkg/mission/sidebar/panel.go
+  h_83f239dc907c66 17,366-367,371-372
+pkg/game/game.go
+  h_83f239dc907c66 19,54,133,137,143,146,223,230,237,244,333
+pkg/mission/object/unit/types.go
+  h_83f239dc907c66 4,42,44,46,48,50,52,54,56
+pkg/mission/drawer/building.go
+  h_83f239dc907c66 13,187,267-268,301-304,319,376,379,463,465,479-483
+pkg/resources/font/font.go
+  h_83f239dc907c66 8,41,45-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "e325901683026529653fa2d3f2ed3b79cdfb11b5",
+  "prompts": {},
+  "humans": {
+    "h_83f239dc907c66": {
+      "author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  }
+}
