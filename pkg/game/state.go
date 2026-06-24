@@ -44,22 +44,56 @@ type menuButton struct {
 	Height float64
 }
 
+const (
+	menuFontSize          = 48.0
+	menuHorizontalPadding = 24.0
+	menuMinimumGap        = 24.0
+)
+
 // AutoUpdateMenuButtonStates 根据菜单按钮文本 & 字体尺寸，自动计算位置等信息
 func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
-	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
-	for idx, button := range []*menuButton{
+	screenWidth, screenHeight := float64(screen.Bounds().Dx()), float64(screen.Bounds().Dy())
+	buttons := []*menuButton{
 		s.MenuButton.MissionSelect,
 		s.MenuButton.Collection,
 		s.MenuButton.GameSetting,
 		s.MenuButton.ExitGame,
-	} {
-		button.PosX = (float64(screenWidth) - layout.CalcTextWidth(button.Text, button.FontSize, button.Font)) * 0.2 * float64(
-			idx+1,
-		)
-		button.PosY = float64(screenHeight / 5 * 4)
+	}
+
+	totalWidth := updateMenuButtonSizes(buttons, menuFontSize)
+	gap := menuMinimumGap
+	availableWidth := max(screenWidth-2*menuHorizontalPadding, 0)
+	minimumWidth := totalWidth + gap*float64(len(buttons)-1)
+	if minimumWidth > availableWidth && minimumWidth > 0 {
+		scale := availableWidth / minimumWidth
+		totalWidth = updateMenuButtonSizes(buttons, menuFontSize*scale)
+		gap *= scale
+	}
+
+	// 中文等宽菜单保持原有 20% 分布；英文等长文本则压缩空隙，避免相邻项重叠。
+	averageWidth := totalWidth / float64(len(buttons))
+	preferredWidth := screenWidth*0.6 + averageWidth*0.4
+	groupWidth := max(totalWidth+gap*float64(len(buttons)-1), preferredWidth)
+	groupWidth = min(groupWidth, availableWidth)
+	gap = (groupWidth - totalWidth) / float64(len(buttons)-1)
+
+	posX := (screenWidth - groupWidth) / 2
+	for _, button := range buttons {
+		button.PosX = posX
+		button.PosY = screenHeight / 5 * 4
+		posX += button.Width + gap
+	}
+}
+
+func updateMenuButtonSizes(buttons []*menuButton, fontSize float64) float64 {
+	var totalWidth float64
+	for _, button := range buttons {
+		button.FontSize = fontSize
 		button.Width = layout.CalcTextWidth(button.Text, button.FontSize, button.Font)
 		button.Height = button.FontSize
+		totalWidth += button.Width
 	}
+	return totalWidth
 }
 
 // 任务加载界面

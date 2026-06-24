@@ -28,6 +28,7 @@ go.work
 raw_resources/
 scripts/
 tools/
+bin/
 
 ideas.md
 
@@ -41,7 +42,6 @@ specs
 openspec
 
 jutland
-jutland-*
-/jutland.log
+jutland.log
 
 .DS_Store

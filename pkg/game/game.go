@@ -214,35 +214,34 @@ func (g *Game) init() {
 
 func (g *Game) initMenuButtons() {
 	// 初始化菜单配置
-	var fontSize float64 = 48
 	if g.objStates == nil {
 		g.objStates = &objStates{}
 	}
 	g.objStates.MenuButton = &menuButtonStates{
 		MissionSelect: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuMissionSelect),
-			FontSize: fontSize,
+			FontSize: menuFontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
 			Mode:     GameModeMissionSelect,
 		},
 		Collection: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuCollection),
-			FontSize: fontSize,
+			FontSize: menuFontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
 			Mode:     GameModeCollection,
 		},
 		GameSetting: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuSettings),
-			FontSize: fontSize,
+			FontSize: menuFontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
 			Mode:     GameModeGameSetting,
 		},
 		ExitGame: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuExit),
-			FontSize: fontSize,
+			FontSize: menuFontSize,
 			Font:     font.LocalizedUI(font.Hang),
 			Color:    colorx.White,
 			Mode:     GameModeEnd,

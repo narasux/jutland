@@ -522,16 +522,8 @@ func (c *CollectionUI) dropdownListRect(dropdown collectionDropdown) image.Recta
 func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
 	// hover 提示与下拉列表都在共享 UI 之后绘制，保证舰船和战机工具栏视觉一致。
 	point := image.Pt(ebiten.CursorPosition())
-	if rect, label, ok := c.hoveredTab(point); ok {
+	if rect, ok := c.hoveredTab(point); ok {
 		c.drawToolbarHover(screen, rect)
-		fontSize := c.metrics.ToolbarFont
-		textWidth := estimateCollectionTextWidth(label, fontSize)
-		c.drawer.drawText(
-			screen, label,
-			float64(rect.Min.X)+(float64(rect.Dx())-textWidth)/2,
-			float64(rect.Min.Y)+(float64(rect.Dy())-fontSize)/2,
-			fontSize, font.LocalizedUI(font.Kai), colorx.White,
-		)
 	}
 	if rect, ok := c.hoveredComboRect(point); ok {
 		c.drawToolbarHover(screen, rect)
@@ -601,7 +593,7 @@ func (c *CollectionUI) drawToolbarHover(screen *ebiten.Image, rect image.Rectang
 	)
 }
 
-func (c *CollectionUI) hoveredTab(point image.Point) (image.Rectangle, string, bool) {
+func (c *CollectionUI) hoveredTab(point image.Point) (image.Rectangle, bool) {
 	// 当前分类已经有选中底色，只为另一个分类绘制 hover，保证舰船页和战机页行为对称。
 	for category, button := range c.tabButtons {
 		if category == c.category || button == nil {
@@ -609,10 +601,10 @@ func (c *CollectionUI) hoveredTab(point image.Point) (image.Rectangle, string, b
 		}
 		rect := button.GetWidget().Rect
 		if !rect.Empty() && point.In(rect) {
-			return rect, collectionCategoryLabel(category), true
+			return rect, true
 		}
 	}
-	return image.Rectangle{}, "", false
+	return image.Rectangle{}, false
 }
 
 func (c *CollectionUI) hoveredComboRect(point image.Point) (image.Rectangle, bool) {
@@ -1008,7 +1000,9 @@ func (c *CollectionUI) newCombo(
 	selectedHandler func(any),
 ) *widget.ListComboButton {
 	// 所有下拉框都走同一套样式和选中回调，差异只来自条目生成器。
-	face := collectionFace(c.metrics.ToolbarFont, font.Kai)
+	faceSource := font.ForText(buttonLabel(selected), font.LocalizedUI(font.Kai))
+	faceValue := text.Face(&text.GoTextFace{Source: faceSource, Size: c.metrics.ToolbarFont})
+	face := &faceValue
 	scale := c.metrics.Scale
 	buttonImage := &widget.ButtonImage{
 		Idle:    uiImage.NewNineSliceColor(color.RGBA{30, 28, 25, 235}),
@@ -1717,47 +1711,23 @@ func (c *CollectionUI) drawPlaneCard(
 	sectionY := y + int(math.Round(px(208)))
 	c.drawPlaneSectionTitle(screen, x, sectionY, width, scale, i18n.Text(i18n.MsgCollectionBasicData))
 	bodyFont := font.LocalizedUI(font.Kai)
-	c.drawer.drawText(
-		screen,
+	basicLines := []string{
 		i18n.Format(i18n.MsgCollectionDurability, map[string]any{"Value": fmt.Sprintf("%.0f", plane.TotalHP)}),
-		float64(x)+px(22),
-		float64(sectionY)+px(34),
-		px(18),
-		bodyFont,
-		colorx.White,
-	)
-	c.drawer.drawText(
-		screen,
 		i18n.Format(
 			i18n.MsgCollectionDamageReduction,
 			map[string]any{"Value": fmt.Sprintf("%.0f", plane.DamageReduction*100)},
 		),
-		float64(x)+px(178),
-		float64(sectionY)+px(34),
-		px(18),
-		bodyFont,
-		colorx.White,
-	)
-	c.drawer.drawText(
-		screen,
 		i18n.Format(i18n.MsgCollectionPlaneSpeed, map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*5400)}),
-		float64(x)+px(22),
-		float64(sectionY)+px(60),
-		px(18),
-		bodyFont,
-		colorx.White,
-	)
-	c.drawer.drawText(
-		screen,
 		i18n.Format(i18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}),
-		float64(x)+px(178),
-		float64(sectionY)+px(60),
-		px(18),
-		bodyFont,
-		colorx.White,
-	)
+	}
+	for idx, line := range basicLines {
+		c.drawer.drawText(
+			screen, line, float64(x)+px(22), float64(sectionY)+px(34+float64(idx)*22),
+			px(18), bodyFont, colorx.White,
+		)
+	}
 
-	weaponY := sectionY + int(math.Round(px(94)))
+	weaponY := sectionY + int(math.Round(px(128)))
 	c.drawPlaneSectionTitle(screen, x, weaponY, width, scale, i18n.Text(i18n.MsgCollectionWeaponConfig))
 	weaponLines := planeWeaponLines(plane)
 	for idx, line := range weaponLines {
@@ -1784,7 +1754,7 @@ func (c *CollectionUI) drawPlaneCard(
 		)
 	}
 
-	radarY := weaponY + int(math.Round(px(196)))
+	radarY := weaponY + int(math.Round(px(184)))
 	c.drawPlaneSectionTitle(screen, x, radarY, width, scale, i18n.Text(i18n.MsgCollectionCombatAbility))
 	radarCenterX, radarCenterY := float64(x+width/2), float64(radarY)+px(114)
 	hits := c.drawer.drawAbilityRadar(
@@ -1806,21 +1776,28 @@ func (c *CollectionUI) drawPlaneCard(
 		i18n.MsgCollectionFormationPower,
 		map[string]any{"Count": plane.CombatPower.FormationSize},
 	)
+	valueText := fmt.Sprintf("%d", plane.CombatPower.Total)
+	valueSize := px(26)
+	valueX := float64(x+width) - px(22) - estimateCollectionTextWidth(valueText, valueSize)
+	labelX := float64(x) + px(22)
+	labelSize := px(18)
+	labelMaxWidth := valueX - labelX - px(12)
+	if labelWidth := estimateCollectionTextWidth(formationLabel, labelSize); labelWidth > labelMaxWidth {
+		labelSize *= labelMaxWidth / labelWidth
+	}
 	c.drawer.drawText(
 		screen,
 		formationLabel,
-		float64(x)+px(22),
+		labelX,
 		float64(y+height)-px(48),
-		px(18),
+		labelSize,
 		bodyFont,
 		color.RGBA{214, 201, 178, 255},
 	)
-	valueText := fmt.Sprintf("%d", plane.CombatPower.Total)
-	valueSize := px(26)
 	c.drawer.drawText(
 		screen,
 		valueText,
-		float64(x+width)-px(22)-estimateCollectionTextWidth(valueText, valueSize),
+		valueX,
 		float64(y+height)-px(52),
 		valueSize,
 		font.JetbrainsMono,
@@ -1832,18 +1809,25 @@ func (c *CollectionUI) drawPlaneSectionTitle(
 	screen *ebiten.Image, x, y, width int, scale float64, title string,
 ) {
 	// 小节标题统一使用短横线分隔，保持飞机卡片的纵向阅读节奏。
+	titleX := float64(x) + 20*scale
+	titleSize := 18 * scale
 	c.drawer.drawText(
 		screen,
 		title,
-		float64(x)+20*scale,
+		titleX,
 		float64(y),
-		18*scale,
+		titleSize,
 		font.LocalizedUI(font.Kai),
 		color.RGBA{214, 201, 178, 255},
 	)
+	lineStartX := titleX + estimateCollectionTextWidth(title, titleSize) + 12*scale
+	lineEndX := float64(x+width) - 20*scale
+	if lineStartX >= lineEndX {
+		return
+	}
 	vector.StrokeLine(
-		screen, float32(float64(x)+100*scale), float32(float64(y)+12*scale),
-		float32(float64(x+width)-20*scale), float32(float64(y)+12*scale),
+		screen, float32(lineStartX), float32(float64(y)+12*scale),
+		float32(lineEndX), float32(float64(y)+12*scale),
 		1, color.RGBA{214, 201, 178, 100}, false,
 	)
 }

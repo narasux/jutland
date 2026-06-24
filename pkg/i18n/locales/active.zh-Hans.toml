@@ -11,7 +11,7 @@ other = "游戏设置"
 [MenuExit]
 other = "退出游戏"
 [Loading]
-other = "Loading..."
+other = "加载中..."
 [MissionStarted]
 other = "任务开始！"
 [MissionSuccess]
