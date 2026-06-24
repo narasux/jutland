@@ -29,7 +29,7 @@ type localizerState struct {
 }
 
 var (
-	enabledLanguages = []Language{LanguageZhHans}
+	enabledLanguages = []Language{LanguageZhHans, LanguageEnglish}
 	bundle           = newBundle()
 	currentState     atomic.Pointer[localizerState]
 	missingOnce      sync.Map

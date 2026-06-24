@@ -43,6 +43,7 @@ func (d *Drawer) drawText(
 	opts := &text.DrawOptions{}
 	opts.GeoM.Translate(posX, posY)
 	opts.ColorScale.ScaleWithColor(textColor)
+	textFont = font.ForText(textStr, textFont)
 	text.Draw(screen, textStr, &text.GoTextFace{Source: textFont, Size: fontSize}, opts)
 }
 
@@ -171,11 +172,13 @@ func (d *Drawer) drawCollectionLines(
 }
 
 func wrapCollectionText(value string, maxWidth, fontSize float64) []string {
-	return layout.WrapText(value, maxWidth, fontSize, font.LocalizedUI(font.Kai))
+	textFont := font.ForText(value, font.LocalizedUI(font.Kai))
+	return layout.WrapText(value, maxWidth, fontSize, textFont)
 }
 
 func estimateCollectionTextWidth(value string, fontSize float64) float64 {
-	return layout.CalcTextWidth(value, fontSize, font.LocalizedUI(font.Kai))
+	textFont := font.ForText(value, font.LocalizedUI(font.Kai))
+	return layout.CalcTextWidth(value, fontSize, textFont)
 }
 
 func isHoverArea(area clickableArea) bool {

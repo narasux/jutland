@@ -14,12 +14,19 @@ import (
 )
 
 func TestDefaultAndFallbackLanguage(t *testing.T) {
+	t.Cleanup(func() {
+		SetLanguage(string(LanguageZhHans))
+	})
+	require.Equal(t, LanguageZhHans, SetLanguage("zh-Hans"))
 	require.Equal(t, LanguageZhHans, CurrentLanguage())
 	require.Equal(t, LanguageZhHans, SetLanguage("invalid"))
 	require.Equal(t, "任务选择", Text(MsgMenuMissionSelect))
+	require.Equal(t, LanguageEnglish, SetLanguage("en"))
+	require.Equal(t, "Mission Select", Text(MsgMenuMissionSelect))
 }
 
 func TestFormat(t *testing.T) {
+	SetLanguage(string(LanguageZhHans))
 	got := Format(MsgSidebarFunds, map[string]any{"Funds": 123})
 	require.Equal(t, "资金: 123", got)
 }

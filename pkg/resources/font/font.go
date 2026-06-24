@@ -2,6 +2,7 @@ package font
 
 import (
 	"log"
+	"unicode"
 
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 
@@ -47,6 +48,20 @@ func ForLanguage(lang i18n.Language, chinese *text.GoTextFaceSource) *text.GoTex
 		return JetbrainsMono
 	}
 	return chinese
+}
+
+// ForText 在英文字体无法覆盖中日韩文字时回退到中文字体。
+func ForText(value string, preferred *text.GoTextFaceSource) *text.GoTextFaceSource {
+	if preferred != JetbrainsMono && preferred != JetbrainsMonoItalic &&
+		preferred != OpenSans && preferred != OpenSansItalic {
+		return preferred
+	}
+	for _, r := range value {
+		if unicode.In(r, unicode.Han, unicode.Hiragana, unicode.Katakana, unicode.Hangul, unicode.Bopomofo) {
+			return Kai
+		}
+	}
+	return preferred
 }
 
 func init() {

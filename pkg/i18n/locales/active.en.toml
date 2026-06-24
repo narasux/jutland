@@ -1,0 +1,292 @@
+[GameTitle]
+other = "Jutland: Naval Clash"
+[GameCredits]
+other = "Fair winds and following seas!"
+[MenuMissionSelect]
+other = "Mission Select"
+[MenuCollection]
+other = "Collection"
+[MenuSettings]
+other = "Settings"
+[MenuExit]
+other = "Exit Game"
+[Loading]
+other = "Loading..."
+[MissionStarted]
+other = "Mission started!"
+[MissionSuccess]
+other = "Mission accomplished!"
+[MissionFailed]
+other = "Mission failed..."
+[MissionStart]
+other = "Start Mission"
+[Back]
+other = "Back"
+[MissionStats]
+other = "Starting funds {{.Funds}}  |  Fleet limit {{.ShipLimit}}  |  Oil platforms {{.OilPlatforms}}"
+[MissionBattleStats]
+other = "Allied {{.AllyShips}} ships vs Enemy {{.EnemyShips}} ships  |  Allied reinforcements {{.AllyPoints}}  Enemy reinforcements {{.EnemyPoints}}"
+[MissionPaused]
+other = "Mission Paused"
+[MissionResume]
+other = "Resume"
+[MissionAbandon]
+other = "Abandon"
+[MissionConfirmAbandon]
+other = "Abandon this mission?"
+[Confirm]
+other = "Confirm"
+[SettingsTitle]
+other = "Game Settings"
+[SettingsSpeed]
+other = "Global Speed Multiplier"
+[SettingsLanguage]
+other = "Language"
+[SettingsSave]
+other = "Save"
+[SettingsCancel]
+other = "Cancel"
+[SpeedVerySlow]
+other = "Very Slow"
+[SpeedSlow]
+other = "Slow"
+[SpeedNormal]
+other = "Normal"
+[SpeedFast]
+other = "Fast"
+[SpeedVeryFast]
+other = "Very Fast"
+[NationAll]
+other = "All"
+[NationChina]
+other = "China"
+[NationUnitedStates]
+other = "United States"
+[NationJapan]
+other = "Japan"
+[NationGermany]
+other = "Germany"
+[NationUnitedKingdom]
+other = "United Kingdom"
+[NationSovietUnion]
+other = "Soviet Union"
+[NationSpecial]
+other = "Special"
+[ShipTypeDefault]
+other = "Default"
+[ShipTypeCarrier]
+other = "Aircraft Carrier"
+[ShipTypeBattleship]
+other = "Battleship"
+[ShipTypeCruiser]
+other = "Cruiser"
+[ShipTypeDestroyer]
+other = "Destroyer"
+[ShipTypeFrigate]
+other = "Frigate"
+[ShipTypeHospital]
+other = "Hospital Ship"
+[ShipTypeCargo]
+other = "Cargo Ship"
+[ShipTypeTorpedoBoat]
+other = "Torpedo Boat"
+[PlaneTypeFighter]
+other = "Fighter"
+[PlaneTypeDiveBomber]
+other = "Dive Bomber"
+[PlaneTypeTorpedoBomber]
+other = "Torpedo Bomber"
+[Unknown]
+other = "Unknown"
+[CollectionAll]
+other = "All"
+[CollectionSpecial]
+other = "Special"
+[CollectionAuxiliary]
+other = "Auxiliary Ship"
+[CollectionShip]
+other = "Ships"
+[CollectionPlane]
+other = "Aircraft"
+[CollectionNation]
+other = "Nation:"
+[CollectionShipClass]
+other = "Class: {{.Value}}⌄"
+[CollectionPlaneType]
+other = "Type: {{.Value}}⌄"
+[CollectionShipName]
+other = "Ship: {{.Value}}⌄"
+[CollectionPlaneCount]
+other = "Total {{.Count}} aircraft"
+[CollectionNationValue]
+other = "Nation: {{.Value}}⌄"
+[CollectionNoMatchingShip]
+other = "No ships match the current filters"
+[CollectionNoMatchingPlane]
+other = "No aircraft match the current filters"
+[CollectionShipArchive]
+other = "Ship Archive"
+[CollectionNationLabel]
+other = "Nation"
+[CollectionTypeLabel]
+other = "Type"
+[CollectionYear]
+other = "Year"
+[CollectionTonnage]
+other = "Tonnage"
+[CollectionSpeed]
+other = "Speed"
+[CollectionCost]
+other = "Cost"
+[CollectionHorizontalDR]
+other = "Horizontal DR"
+[CollectionVerticalDR]
+other = "Vertical DR"
+[CollectionArmaments]
+other = "Armaments"
+[CollectionNone]
+other = "None"
+[CollectionCombat]
+other = "Armaments and Combat Ability"
+[CollectionTotalPower]
+other = "Total Power"
+[CollectionRelativeNote]
+other = "Relative power (normalized by P95 of current filter results)"
+[CollectionHistorySource]
+other = "History and Sources"
+[CollectionNoHistory]
+other = "No historical record available"
+[CollectionAssetAuthor]
+other = "Asset author: {{.Author}}"
+[CollectionBasicData]
+other = "Basic Data"
+[CollectionDurability]
+other = "Durability {{.Value}}"
+[CollectionDamageReduction]
+other = "Damage reduction {{.Value}}%"
+[CollectionRange]
+other = "Range {{.Value}} km"
+[CollectionPlaneSpeed]
+other = "Speed {{.Value}} km/h"
+[CollectionWeaponConfig]
+other = "Weapon Configuration"
+[CollectionCombatAbility]
+other = "Combat Ability"
+[CollectionFormationNote]
+other = "{{.Count}}-ship standard formation · Relative power (normalized by P95 of current filter results)"
+[CollectionFormationPower]
+other = "Formation Power ({{.Count}} ships)"
+[WeaponGun]
+other = "Gun"
+[WeaponBomb]
+other = "Bomb"
+[WeaponTorpedo]
+other = "Torpedo"
+[WeaponRocket]
+other = "Rocket"
+[RadarAntiShip]
+other = "Anti-Ship"
+[RadarAntiAir]
+other = "Anti-Air"
+[RadarSurvival]
+other = "Survival"
+[RadarMobility]
+other = "Mobility"
+[RadarProjection]
+other = "Projection"
+[RadarBurst]
+other = "Burst"
+[RadarFormationScope]
+other = "Stat scope: standard formation of {{.Count}} ships"
+[RadarAbilityValue]
+other = "Ability value: {{.Value}}"
+[RadarRelativePosition]
+other = "Relative position: {{.Percent}}%"
+[RadarAntiShipDPS]
+other = "Effective anti-ship DPS: {{.Value}} /s"
+[RadarAntiAirDPS]
+other = "Effective anti-air DPS: {{.Value}} /s"
+[RadarTargetingNote]
+other = "For archive evaluation only; does not affect target selection in battle"
+[RadarEffectiveHP]
+other = "Effective HP: {{.Value}}"
+[RadarMobilityNote]
+other = "Calculated from speed, turning, and acceleration"
+[RadarCombatRadius]
+other = "Combat radius: {{.Value}} km"
+[RadarProjectionDistance]
+other = "Maximum projection range: {{.Value}} km"
+[RadarBurstDamage]
+other = "Expected first-salvo damage: {{.Value}}"
+[RadarMainContributions]
+other = "Main contributions:"
+[RadarSubjectPower]
+other = "{{.Name}} · Total Power"
+[RadarSubjectDimension]
+other = "{{.Name}} · {{.Dimension}}"
+[RadarContribution]
+other = "  {{.Name}}  {{.Percent}}%"
+[RadarOverall]
+other = "Overall"
+[RadarHull]
+other = "Hull"
+[RadarAviation]
+other = "Aviation"
+[SidebarFunds]
+other = "Funds: {{.Funds}}"
+[SidebarFleets]
+other = "Allied fleet: {{.Ally}}    Enemy fleet: {{.Enemy}}"
+[SidebarShowState]
+other = "Status display"
+[SidebarDamageNumbers]
+other = "Damage numbers"
+[MapSelf]
+other = "Ally"
+[MapEnemy]
+other = "Enemy"
+[MapFleetCount]
+other = "{{.Side}} ({{.Count}})"
+[RallyLandBlocked]
+other = "Cannot set a rally point on land"
+[ReinforceShipArchive]
+other = "Ship Archive"
+[ReinforceWeaponConfig]
+other = "Weapon Configuration"
+[ReinforceType]
+other = "Type"
+[ReinforceHP]
+other = "HP"
+[ReinforceSpeed]
+other = "Speed"
+[ReinforceCost]
+other = "Cost"
+[ReinforceQueue]
+other = "Reinforcement Queue"
+[ReinforceStandby]
+other = "Standby"
+[ReinforceControl]
+other = "Control Status"
+[ReinforceCurrentFunds]
+other = "Current Funds"
+[ReinforceTipPoint]
+other = "↑ ↓ Reinforcement points"
+[ReinforceTipShip]
+other = "← → Ships"
+[ReinforceTipSummon]
+other = "Enter Summon"
+[ReinforceTipCancel]
+other = "Backspace Cancel reinforcement"
+[ReinforceTipRally]
+other = "Click map Set rally point"
+[ValueKnots]
+other = "{{.Value}} knots"
+[ValueCost]
+other = "${{.Funds}} / {{.Seconds}}s"
+[TypeWithAbbr]
+other = "{{.Type}} ({{.Abbr}})"
+[LabelValue]
+other = "{{.Label}}: {{.Value}}"
+[ItemCount]
+other = "{{.Name}} x {{.Count}}"
+[TypeSlash]
+other = "{{.Abbr}} / {{.Type}}"

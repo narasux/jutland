@@ -125,17 +125,32 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	dataLine := i18n.Format(i18n.MsgMissionStats, map[string]any{
 		"Funds": misMD.InitFunds, "ShipLimit": misMD.MaxShipCount, "OilPlatforms": misMD.OilPlatformCount,
 	})
-	d.drawText(screen, dataLine, panelX, curY, 19, font.LocalizedUI(font.Kai), labelClr)
+	statsFontSize := 19.0
+	statsLineHeight := 28.0
+	statsMaxWidth := cardW - 2*pad
+	dataLines := wrapText(dataLine, statsMaxWidth, statsFontSize)
+	for idx, line := range dataLines {
+		d.drawText(
+			screen, line, panelX, curY+float64(idx)*statsLineHeight,
+			statsFontSize, font.LocalizedUI(font.Kai), labelClr,
+		)
+	}
 
-	curY += 32
+	curY += float64(len(dataLines))*statsLineHeight + 4
 	// 战力对比
 	battleLine := i18n.Format(i18n.MsgMissionBattleStats, map[string]any{
 		"AllyShips": misMD.AllyShipCount, "EnemyShips": misMD.EnemyShipCount,
 		"AllyPoints": misMD.AllyReinforceCount, "EnemyPoints": misMD.EnemyReinforceCount,
 	})
-	d.drawText(screen, battleLine, panelX, curY, 19, font.LocalizedUI(font.Kai), bodyClr)
+	battleLines := wrapText(battleLine, statsMaxWidth, statsFontSize)
+	for idx, line := range battleLines {
+		d.drawText(
+			screen, line, panelX, curY+float64(idx)*statsLineHeight,
+			statsFontSize, font.LocalizedUI(font.Kai), bodyClr,
+		)
+	}
 
-	curY += 42
+	curY += float64(len(battleLines))*statsLineHeight + 14
 	// 描述区
 	descFontSize := 18.0
 	descLineHeight := 28.0
@@ -154,7 +169,13 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 
 	// 底部控件（卡片下方）
 	arrowSize := 36.0
-	buttonW := 150.0
+	startText := i18n.Text(i18n.MsgMissionStart)
+	startFont := font.LocalizedUI(font.Hang)
+	startTW := layout.CalcTextWidth(startText, 22, startFont)
+	backText := i18n.Text(i18n.MsgBack)
+	backFont := font.LocalizedUI(font.Hang)
+	backTW := layout.CalcTextWidth(backText, 22, backFont)
+	buttonW := max(150.0, max(startTW, backTW)+48)
 	buttonH := 40.0
 	controlY := screenH - 95
 
@@ -207,9 +228,6 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 		borderColor,
 		false,
 	)
-	startText := i18n.Text(i18n.MsgMissionStart)
-	startFont := font.LocalizedUI(font.Hang)
-	startTW := layout.CalcTextWidth(startText, 22, startFont)
 	d.drawText(screen, startText, startX+(buttonW-startTW)/2, startY+10, 22, startFont, startColor)
 
 	// 返回按钮
@@ -232,9 +250,6 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 		backBorderColor,
 		false,
 	)
-	backText := i18n.Text(i18n.MsgBack)
-	backFont := font.LocalizedUI(font.Hang)
-	backTW := layout.CalcTextWidth(backText, 22, backFont)
 	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, backFont, backColor)
 
 	// 同步 UI 点击热区（基于实际屏幕尺寸，避免与 ebiten.WindowSize() 不一致）
@@ -273,7 +288,8 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 }
 
 func wrapText(text string, maxWidth, fontSize float64) []string {
-	return layout.WrapText(text, maxWidth, fontSize, font.LocalizedUI(font.Kai))
+	textFont := font.ForText(text, font.LocalizedUI(font.Kai))
+	return layout.WrapText(text, maxWidth, fontSize, textFont)
 }
 
 // 绘制游戏标题
@@ -338,6 +354,7 @@ func (d *Drawer) drawText(
 	opts := &text.DrawOptions{}
 	opts.GeoM.Translate(posX, posY)
 	opts.ColorScale.ScaleWithColor(textColor)
+	textFont = font.ForText(textStr, textFont)
 	textFace := text.GoTextFace{
 		Source: textFont,
 		Size:   fontSize,

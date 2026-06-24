@@ -226,9 +226,13 @@ func (s *UI) buildUI() {
 		if lang == s.localLanguage {
 			btnImg, btnColor = selectedBtnImage, selectedBtnTextColor
 		}
+		langButtonFace := text.Face(&text.GoTextFace{
+			Source: font.ForLanguage(lang, font.Kai),
+			Size:   buttonFontSize,
+		})
 		languageRow.AddChild(widget.NewButton(
 			widget.ButtonOpts.Image(btnImg),
-			widget.ButtonOpts.Text(lang.NativeName(), buttonFace, btnColor),
+			widget.ButtonOpts.Text(lang.NativeName(), &langButtonFace, btnColor),
 			widget.ButtonOpts.TextPadding(&widget.Insets{Left: 28, Right: 28, Top: 10, Bottom: 10}),
 			widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
 				s.selectLanguage(lang)
