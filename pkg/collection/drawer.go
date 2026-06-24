@@ -139,9 +139,17 @@ func (d *Drawer) drawCollectionCard(
 		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
 		2, color.RGBA{R: 214, G: 201, B: 178, A: 190}, false,
 	)
+	titleFontSize := metrics.CardTitle
+	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
+		titleFontSize *= 0.82
+	}
+	maxTitleWidth := card.W - 40*scale
+	if titleWidth := estimateCollectionTextWidth(title, titleFontSize); titleWidth > maxTitleWidth {
+		titleFontSize *= maxTitleWidth / titleWidth
+	}
 	d.drawText(
 		screen, title, card.X+20*scale, card.Y+18*scale,
-		metrics.CardTitle, font.LocalizedUI(font.Kai), color.RGBA{R: 230, G: 218, B: 194, A: 255},
+		titleFontSize, font.LocalizedUI(font.Kai), color.RGBA{R: 230, G: 218, B: 194, A: 255},
 	)
 	vector.StrokeLine(
 		screen, float32(card.X+20*scale), float32(card.Y+44*scale),

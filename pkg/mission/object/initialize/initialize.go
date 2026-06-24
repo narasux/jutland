@@ -9,6 +9,7 @@ import (
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/i18n"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	"github.com/narasux/jutland/pkg/mission/object/combatpower"
 	ObjRef "github.com/narasux/jutland/pkg/mission/object/reference"
@@ -365,22 +366,31 @@ func initCombatPower() {
 }
 
 func initReferenceMap() {
-	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "references.json5"))
-	if err != nil {
-		log.Fatal("failed to open references.json5: ", err)
+	locales := []struct {
+		Language i18n.Language
+		Filename string
+	}{
+		{i18n.LanguageZhHans, "references.json5"},
+		{i18n.LanguageEnglish, "references.en.json5"},
 	}
-	defer file.Close()
-
-	bytes, _ := io.ReadAll(file)
-
-	var references []ObjRef.Reference
-	err = json5.Unmarshal(bytes, &references)
-	if err != nil {
-		log.Fatal("failed to unmarshal references.json5: ", err)
+	loaded := make(map[i18n.Language][]ObjRef.Reference, len(locales))
+	for _, locale := range locales {
+		references, err := ObjRef.Load(filepath.Join(config.ConfigBaseDir, locale.Filename))
+		if err != nil {
+			log.Fatalf("failed to load %s: %s", locale.Filename, err)
+		}
+		loaded[locale.Language] = references
 	}
-
-	for _, ref := range references {
-		ObjRef.SetReference(ref.Name, &ref)
+	if err := ObjRef.ValidateLocales(
+		loaded[i18n.LanguageZhHans], loaded[i18n.LanguageEnglish],
+	); err != nil {
+		log.Fatal("invalid localized references: ", err)
 	}
-	log.Println("references data loaded from json5 file")
+	for lang, references := range loaded {
+		for idx := range references {
+			ref := &references[idx]
+			ObjRef.SetReference(lang, ref.Name, ref)
+		}
+	}
+	log.Println("localized references data loaded from json5 files")
 }

@@ -45,9 +45,9 @@ type menuButton struct {
 }
 
 const (
-	menuFontSize          = 48.0
+	menuFontSize          = 36.0
 	menuHorizontalPadding = 24.0
-	menuMinimumGap        = 24.0
+	menuMinimumGap        = 48.0
 )
 
 // AutoUpdateMenuButtonStates 根据菜单按钮文本 & 字体尺寸，自动计算位置等信息

@@ -1,5 +1,7 @@
 package reference
 
+import "github.com/narasux/jutland/pkg/i18n"
+
 // Link 链接信息
 type Link struct {
 	// 名称
@@ -35,14 +37,23 @@ type Reference struct {
 	Links []Link `json:"links"`
 }
 
-var referencesMap = map[string]*Reference{}
+var referencesByLanguage = map[i18n.Language]map[string]*Reference{}
 
 // GetReference 获取对象引用
 func GetReference(name string) *Reference {
-	return referencesMap[name]
+	lang := i18n.CurrentLanguage()
+	if references := referencesByLanguage[lang]; references != nil {
+		if ref := references[name]; ref != nil {
+			return ref
+		}
+	}
+	return referencesByLanguage[i18n.LanguageZhHans][name]
 }
 
 // SetReference 设置对象引用（供初始化使用）
-func SetReference(name string, ref *Reference) {
-	referencesMap[name] = ref
+func SetReference(lang i18n.Language, name string, ref *Reference) {
+	if referencesByLanguage[lang] == nil {
+		referencesByLanguage[lang] = map[string]*Reference{}
+	}
+	referencesByLanguage[lang][name] = ref
 }

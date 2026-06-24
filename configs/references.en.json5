@@ -1,0 +1,3501 @@
+[
+  {
+    "name": "duck",
+    "displayName": "Rubber Duck",
+    "type": "Bath Toy",
+    "armaments": [
+      {
+        "label": "Railgun",
+        "value": "1x1 1024mm"
+      },
+      {
+        "label": "Eight-barrel Main Battery",
+        "value": "1x8 406mm"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "1x15 155mm"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "1x30 37mm"
+      },
+      {
+        "label": "Laser",
+        "value": "1x1 50mm"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "1x15 610mm"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "1x20 533mm"
+      },
+      {
+        "label": "Carrier Aircraft",
+        "value": "F x12"
+      },
+      {
+        "label": "Carrier Aircraft",
+        "value": "B x12"
+      },
+      {
+        "label": "Carrier Aircraft",
+        "value": "A x12"
+      }
+    ],
+    "description": "The rubber duck is a light, hollow bath toy traditionally made from rubber or plastic. In Jutland it serves as an all-purpose weapons test platform, so aircraft emerging from it are entirely intentional. Its most dangerous feature is a rear-facing railgun that fires a distinctive red projectile.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Rubber Duck",
+        "url": "https://en.wikipedia.org/wiki/Rubber%20duck"
+      }
+    ]
+  },
+  {
+    "name": "waterdrop",
+    "displayName": "Droplet",
+    "type": "Space Probe",
+    "armaments": [
+      {
+        "label": "Attack Method",
+        "value": "Ramming"
+      }
+    ],
+    "description": "The Droplet is an alien probe from Liu Cixin's science-fiction novel The Three-Body Problem. Its perfectly smooth, extremely strong shell reflects electromagnetic radiation and remains near absolute zero. During the Doomsday Battle, a single Droplet destroys most of humanity's space fleet by repeatedly ramming its warships.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Droplet",
+        "url": "https://en.wikipedia.org/wiki/The%20Three-Body%20Problem%20%28novel%29"
+      }
+    ]
+  },
+  {
+    "name": "molamola",
+    "displayName": "Ocean Sunfish",
+    "type": "Target",
+    "armaments": [
+      {
+        "label": "Armament",
+        "value": "None"
+      }
+    ],
+    "description": "The ocean sunfish, Mola mola, is a large pelagic fish found in temperate and tropical seas worldwide. It is among the heaviest living bony fishes and has a distinctive flattened body that resembles a fish head without a conventional tail. In the game it serves as an unusually durable target.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Ocean Sunfish",
+        "url": "https://en.wikipedia.org/wiki/Ocean%20sunfish"
+      }
+    ]
+  },
+  {
+    "name": "liberty",
+    "displayName": "Liberty Ship",
+    "type": "Cargo Ship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "1x1 127mm/25"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "1x1 76mm/50"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x1 20mm/70"
+      }
+    ],
+    "description": "Liberty ships were standardized American cargo vessels mass-produced during the Second World War. Designed for rapid, inexpensive construction, they replaced merchant tonnage lost to U-boats and supplied Allied nations through Lend-Lease. Eighteen American shipyards completed 2,710 of the ships between 1941 and 1945 for worldwide wartime service.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Liberty Ship",
+        "url": "https://en.wikipedia.org/wiki/Liberty%20ship"
+      }
+    ]
+  },
+  {
+    "name": "yorktown",
+    "displayName": "Yorktown",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "8x1 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "32x2 20mm/70"
+      },
+      {
+        "label": "Fighters",
+        "value": "F4F-3 Wildcatx36"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "TBD-1 Devastatorx20"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "SBD-3 Dauntlessx40"
+      }
+    ],
+    "description": "USS Yorktown (CV-5) was the lead ship of the Yorktown-class aircraft carriers. Damaged at the Battle of the Coral Sea, she received emergency repairs in time to fight at Midway in June 1942. Japanese aircraft and submarine torpedoes ultimately left her beyond recovery, and she sank on 7 June.",
+    "author": "midnike",
+    "links": [
+      {
+        "name": "USN Aircraft Carrier YORKTOWN",
+        "url": "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-YORKTOWN-CV-5-563330656"
+      },
+      {
+        "name": "Wikipedia — Yorktown",
+        "url": "https://en.wikipedia.org/wiki/USS%20Yorktown%20%28CV-5%29"
+      }
+    ]
+  },
+  {
+    "name": "saratoga",
+    "displayName": "Saratoga",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "12x1 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "11x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "20x2 20mm/70"
+      },
+      {
+        "label": "Fighters",
+        "value": "F4F-3 Wildcatx36"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "SBD-3 Dauntlessx40"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "TBD-1 Devastatorx20"
+      }
+    ],
+    "description": "USS Saratoga (CV-3) began as a Lexington-class battlecruiser and was converted into an aircraft carrier under the Washington Naval Treaty. She served throughout the Pacific War and survived repeated torpedo attacks. After the war she was expended during Operation Crossroads and sank after the underwater Baker nuclear test.",
+    "author": "midnike",
+    "links": [
+      {
+        "name": "USN Aircraft Carrier LEXINGTON",
+        "url": "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-LEXINGTON-CV-2-563330163"
+      },
+      {
+        "name": "Wikipedia — Saratoga",
+        "url": "https://en.wikipedia.org/wiki/USS%20Saratoga%20%28CV-3%29"
+      }
+    ]
+  },
+  {
+    "name": "hakuryu",
+    "displayName": "Hakuryū",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "8x2 100mm/65 Type 98"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "22x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox24"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax12"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x24"
+      }
+    ],
+    "description": "Hakuryū is the game's name for an enlarged development of Japan's wartime G-15 carrier design. The concept builds on the armored flight deck and protected aviation facilities of Taihō while expanding the hull and air group. No ship of this design was laid down before Japan's carrier program collapsed.",
+    "author": "BB1987",
+    "links": [
+      {
+        "name": "G-15 Kai-Taihō as planned",
+        "url": "https://www.shipbucket.com/drawings/4338"
+      },
+      {
+        "name": "Wikipedia — Hakuryū",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Taih%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "taiho",
+    "displayName": "Taihō",
+    "type": "Armored Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 100mm/65 Type 98"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "17x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox24"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax12"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x20"
+      }
+    ],
+    "description": "Taihō was the Imperial Japanese Navy's first fleet carrier built with an armored flight deck. Commissioned in March 1944, she joined the First Mobile Fleet for the Battle of the Philippine Sea. A torpedo from USS Albacore ruptured aviation-fuel systems, and accumulated vapors later exploded, sinking the carrier on 19 June.",
+    "author": "BB1987",
+    "links": [
+      {
+        "name": "Shipbucket - IJN Taiho (1944)",
+        "url": "https://www.shipbucket.com/drawings/4329"
+      },
+      {
+        "name": "Wikipedia — Taihō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Taih%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "shinano",
+    "displayName": "Shinano",
+    "type": "Heavy Armored Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 100mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "36x3, 3x2, 12x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Rockets",
+        "value": "12x21 12cm"
+      },
+      {
+        "label": "Fighters",
+        "value": "A7M2 Reppūx32"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D4Y3 Suiseix16"
+      },
+      {
+        "label": "Attack Aircraft",
+        "value": "B7A2 Ryūseix32"
+      },
+      {
+        "label": "Reconnaissance Aircraft",
+        "value": "C6N1 Saiunx4"
+      }
+    ],
+    "description": "Shinano was converted from the incomplete third Yamato-class battleship into a heavily protected aircraft carrier. She left Yokosuka in November 1944 before fitting-out was complete. Torpedoes from USS Archerfish exposed poor watertight integrity and damage control, causing the enormous carrier to capsize and sink the following morning.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "IJN Shinano Carrier as Designed",
+        "url": "https://www.deviantart.com/tzoli/art/IJN-Shinano-Carrier-as-Designed-858298562"
+      },
+      {
+        "name": "Wikipedia — Shinano",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Shinano"
+      }
+    ]
+  },
+  {
+    "name": "akagi",
+    "displayName": "Akagi",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "6x1 200mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox28"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax28"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x36"
+      }
+    ],
+    "description": "Akagi was laid down as an Amagi-class battlecruiser and converted into an aircraft carrier under treaty restrictions. After early service with three flight decks, she was rebuilt with a single full-length deck and became a core member of the First Air Fleet. American dive bombers fatally damaged her at Midway.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "IJN Aircraft Carrier AKAGI",
+        "url": "https://www.deviantart.com/midnike/art/IJN-Aircraft-Carrier-AKAGI-563294372"
+      },
+      {
+        "name": "Wikipedia — Akagi",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Akagi"
+      }
+    ]
+  },
+  {
+    "name": "kaga",
+    "displayName": "Kaga",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "10x1 200mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "16x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox24"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x48"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax24"
+      }
+    ],
+    "description": "Kaga began as a Tosa-class battleship and was converted into an aircraft carrier after the Washington Naval Treaty. A major reconstruction replaced her original multi-level flight decks and made her one of Japan's principal fleet carriers. She took part in the Pearl Harbor attack and was fatally bombed at Midway.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "IJN Aircraft Carrier KAGA",
+        "url": "https://www.deviantart.com/midnike/art/IJN-Aircraft-Carrier-KAGA-563294872"
+      },
+      {
+        "name": "Wikipedia — Kaga",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Kaga"
+      }
+    ]
+  },
+  {
+    "name": "shokaku",
+    "displayName": "Shōkaku",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox20"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax32"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x32"
+      }
+    ],
+    "description": "Shōkaku was the lead ship of a fast, capable class of Japanese fleet carriers commissioned shortly before the Pacific War. Together with Zuikaku she fought at Pearl Harbor, the Coral Sea, and the Santa Cruz Islands. USS Cavalla torpedoed her during the Battle of the Philippine Sea in June 1944.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Shōkaku",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Sh%C5%8Dkaku"
+      }
+    ]
+  },
+  {
+    "name": "soryu",
+    "displayName": "Sōryū",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "6x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox21"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x21"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax21"
+      }
+    ],
+    "description": "Sōryū was a fast Japanese fleet carrier commissioned in 1937 and designed from the outset for carrier operations. She participated in the attack on Pearl Harbor and the Indian Ocean raid. At Midway, bombs from American SBD Dauntless dive bombers ignited fueled and armed aircraft, leaving her beyond control.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Sōryū",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20S%C5%8Dry%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "hiryu",
+    "displayName": "Hiryū",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "6x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "7x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "5x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "D3Ax24"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x24"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax24"
+      }
+    ],
+    "description": "Hiryū was a close development of Sōryū and served with her in the Second Carrier Division. During the Battle of Midway, Hiryū's air groups launched two attacks that crippled USS Yorktown. American dive bombers later set the Japanese carrier ablaze, and she was scuttled after the crew abandoned ship.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Hiryū",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiry%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "hiyo",
+    "displayName": "Hiyō",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox15"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax20"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x23"
+      }
+    ],
+    "description": "Hiyō was converted during construction from the passenger liner Izumo Maru into a fleet-support carrier. Her large air group was offset by slower speed and machinery inherited from the merchant design. After earlier mechanical trouble and torpedo damage, she was sunk by aircraft during the Battle of the Philippine Sea in June 1944.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Hiyō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiy%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "ryujo",
+    "displayName": "Ryūjō",
+    "type": "Light Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Machine Guns",
+        "value": "6x4 13mm Type 93"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox18"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x24"
+      }
+    ],
+    "description": "Ryūjō was a light aircraft carrier built to exploit a loophole in interwar treaty limits. Her narrow hull and two-level hangar produced serious stability problems that required reconstruction. She supported operations in China and the early Pacific War before American carrier aircraft sank her at the Battle of the Eastern Solomons.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Ryūjō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Ry%C5%ABj%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "shoho",
+    "displayName": "Shōhō",
+    "type": "Light Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox21"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x9"
+      }
+    ],
+    "description": "Shōhō began as the submarine tender Tsurugizaki and was later converted into a light aircraft carrier. Commissioned as a carrier in January 1942, she covered the Port Moresby invasion force. Aircraft from USS Lexington and Yorktown overwhelmed her at the Battle of the Coral Sea, making her Japan's first carrier loss of the war.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Shōhō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Sh%C5%8Dh%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "chitose",
+    "displayName": "Chitose",
+    "type": "Light Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox21"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x9"
+      }
+    ],
+    "description": "Chitose was built as a seaplane tender with provision for later conversion into an aircraft carrier. Rebuilt as a light carrier after Midway, she fought in the Philippine Sea and served as a decoy in the Battle of Leyte Gulf. American carrier aircraft sank her off Cape Engaño on 25 October 1944.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Chitose",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Chitose"
+      }
+    ]
+  },
+  {
+    "name": "taiyo",
+    "displayName": "Taiyō",
+    "type": "Escort Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x1 120mm 4th Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Machine Guns",
+        "value": "10x1 13mm Type 93"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox18"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x9"
+      }
+    ],
+    "description": "Taiyō was converted from the passenger liner Kasuga Maru into an escort carrier. Too slow for fleet operations, she primarily trained aircrews, transported aircraft, and escorted convoys. After surviving earlier submarine attacks, she was torpedoed by USS Rasher west of Luzon in August 1944 and sank following a violent aviation-fuel explosion.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Taiyō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Taiy%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "hosho",
+    "displayName": "Hōshō",
+    "type": "Light Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox8"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x6"
+      }
+    ],
+    "description": "Hōshō was the first ship completed as a purpose-built aircraft carrier. Her experimental layout helped the Imperial Japanese Navy develop carrier doctrine and aviation procedures during the interwar period. Obsolete for combat by the Pacific War, she mainly served as a training carrier and survived to repatriate Japanese personnel after the surrender.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Hōshō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20H%C5%8Dsh%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "lowa",
+    "displayName": "Iowa",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "10x2 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "20x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "44x1 20mm/70"
+      }
+    ],
+    "description": "USS Iowa (BB-61) was the lead ship of the Iowa-class fast battleships and served in the Second World War, Korea, and the 1980s. Her speed allowed her to escort fast carrier groups while nine 16-inch guns provided heavy bombardment. Decommissioned in 1990, she is preserved as a museum ship in Los Angeles.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "DeviantArt - TZoli",
+        "url": "https://www.deviantart.com/tzoli"
+      },
+      {
+        "name": "Wikipedia — Iowa",
+        "url": "https://en.wikipedia.org/wiki/USS%20Iowa%20%28BB-61%29"
+      }
+    ]
+  },
+  {
+    "name": "montana",
+    "displayName": "Montana",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x3 406mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "10x2 127mm/54"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "20x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "72x1 20mm/70"
+      }
+    ],
+    "description": "The Montana class was planned as the United States Navy's largest and most heavily armed battleship design. Twelve 16-inch guns and stronger protection offered greater broadside power than the Iowa class, at the cost of speed and Panama Canal compatibility. All five authorized ships were cancelled in 1943 before construction began.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Montana class Final Design",
+        "url": "https://www.deviantart.com/tzoli/art/Montana-class-Battleship-Final-Design-835111617"
+      },
+      {
+        "name": "Wikipedia — Montana",
+        "url": "https://en.wikipedia.org/wiki/Montana-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "south_dakota",
+    "displayName": "South Dakota",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 406mm/45"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "17x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "57x1 20mm/70"
+      }
+    ],
+    "description": "USS South Dakota (BB-57) was the lead ship of a compact class of treaty battleships. Commissioned in 1942, she fought in the Guadalcanal campaign and later supported carrier operations and amphibious assaults across the Pacific. She earned thirteen battle stars and was present in Tokyo Bay when Japan formally surrendered.",
+    "author": "Ronald Yoshioka",
+    "links": [
+      {
+        "name": "USS South Dakota (BB-57) battleship",
+        "url": "https://jp.pinterest.com/pin/289989663499798759/"
+      },
+      {
+        "name": "Wikipedia — South Dakota",
+        "url": "https://en.wikipedia.org/wiki/USS%20South%20Dakota%20%28BB-57%29"
+      }
+    ]
+  },
+  {
+    "name": "lexington",
+    "displayName": "Lexington",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 457mm/45 Mk1"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "10x2 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "13x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x2 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "34x1 20mm/70"
+      }
+    ],
+    "description": "This Lexington is an alternate-history battlecruiser created by the artist Moscow Jelly, imagining the class completed instead of converted under the Washington Naval Treaty. The design emphasizes an exceptionally heavy battery of three triple 18-inch gun turrets. It is a fictional interpretation rather than a historical United States Navy configuration.",
+    "author": "莫斯科凉粉",
+    "links": [
+      {
+        "name": "Alternate-history Lexington-class battlecruiser artwork",
+        "url": "https://www.bilibili.com/opus/920994748118859845"
+      },
+      {
+        "name": "Wikipedia — Lexington",
+        "url": "https://en.wikipedia.org/wiki/Lexington-class%20battlecruiser"
+      }
+    ]
+  },
+  {
+    "name": "kongo",
+    "displayName": "Kongō",
+    "type": "Battlecruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 356mm/45 41st Year Type"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "14x1 152mm/50 41st Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "18x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x2 25mm/60 Type 96"
+      }
+    ],
+    "description": "Kongō was the lead ship of Japan's Kongō-class battlecruisers and the last Japanese capital ship built abroad. Completed by Vickers in Britain in 1913, she underwent major reconstructions that transformed her into a fast battleship. USS Sealion torpedoed and sank her in the Taiwan Strait in November 1944.",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Kongo1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Kongo1944.png"
+      },
+      {
+        "name": "Wikipedia — Kongō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Kong%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "fuso",
+    "displayName": "Fusō",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "6x2 356mm/45 41st Year Type"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "14x1 152mm/50 41st Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "22x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x2 25mm/60 Type 96"
+      }
+    ],
+    "description": "Fusō was the lead ship of Japan's first class of domestically built super-dreadnought battleships. Her six twin 14-inch turrets and towering reconstructed superstructure gave her a distinctive appearance. During the Battle of Surigao Strait in October 1944, destroyer torpedoes fatally damaged her before the main American battle line engaged.",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Fuso1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Fuso1944.png"
+      },
+      {
+        "name": "Wikipedia — Fusō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Fus%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "ise",
+    "displayName": "Ise",
+    "type": "Aviation Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 356mm/45 41st Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "29x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "11x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Rockets",
+        "value": "6x28 120mm 4th Year Type"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zerox6"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D3Ax8"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2x8"
+      }
+    ],
+    "description": "Ise was the lead ship of the Ise-class battleships. After Midway, her two aftermost main turrets were removed and replaced by a short flight deck, hangar, and catapults, creating a hybrid aviation battleship. Aircraft and trained crews were unavailable, so the planned air group never became operational in combat.",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Ise1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Ise1944.png"
+      },
+      {
+        "name": "Wikipedia — Ise",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Ise"
+      }
+    ]
+  },
+  {
+    "name": "nagato",
+    "displayName": "Nagato",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 410mm/45 3rd Year Type"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "16x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "24x1 25mm/60 Type 96"
+      }
+    ],
+    "description": "Nagato was the lead ship of her class and one of the first battleships armed with 410 mm guns. She served as Combined Fleet flagship during the early Pacific War and survived the Battle of Leyte Gulf. Seized after Japan's surrender, she sank at Bikini Atoll following the Operation Crossroads nuclear tests.",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Nagato1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Nagato1944.png"
+      },
+      {
+        "name": "Wikipedia — Nagato",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Nagato"
+      }
+    ]
+  },
+  {
+    "name": "yamato",
+    "displayName": "Yamato",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 460mm/45 Type 94"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "2x3 155mm/60 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "12x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "48x3 25mm/60 Type 96"
+      }
+    ],
+    "description": "Yamato was the lead ship of the largest and most heavily armed battleships ever completed. Her nine 460 mm guns were the biggest mounted on a warship, while armor and displacement exceeded contemporary rivals. American carrier aircraft sank her on 7 April 1945 during Operation Ten-Go, before she could reach Okinawa.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Yamato class Battleship Final Form 1945",
+        "url": "https://www.deviantart.com/tzoli/art/Yamato-class-Battleship-Final-Form-1945-756103504"
+      },
+      {
+        "name": "Wikipedia — Yamato",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Yamato"
+      }
+    ]
+  },
+  {
+    "name": "satsuma",
+    "displayName": "Satsuma",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 510mm/45"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "6x2 200mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "10x2 100mm/65 Type 98"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x2 40mm/60 5th Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x3 25mm/60 Type 96"
+      }
+    ],
+    "description": "Satsuma represents a game interpretation of Design A-150, a proposed successor to Japan's Yamato class. Surviving studies suggest even larger guns, commonly associated with a 510 mm caliber, and protection intended to defeat contemporary battleships. Wartime priorities prevented the concept from progressing beyond preliminary design work.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "A-150 Super Yamato class possible variant C",
+        "url": "https://www.deviantart.com/tzoli/art/A-150-Super-Yamato-class-possible-variant-C-758321728"
+      },
+      {
+        "name": "Wikipedia — Satsuma",
+        "url": "https://en.wikipedia.org/wiki/Design%20A-150%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "edo",
+    "displayName": "Edo",
+    "type": "Super Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x3 510mm/45"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "2x3 200mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "16x2 127mm/50 3rd Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "44x2 40mm/60 5th Year Type"
+      }
+    ],
+    "description": "Edo is a fictional Japanese super-battleship created for the game. Its name evokes the historic province and the political center of Tokugawa Japan, while the design exaggerates capital-ship scale, armor, and firepower beyond practical wartime limits. It should be read as naval fantasy rather than a documented Imperial Japanese Navy project.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Last Japanese Battleship proposal",
+        "url": "https://www.deviantart.com/tzoli/art/Last-Japanese-Battleship-proposal-759738735"
+      },
+      {
+        "name": "Wikipedia — Edo",
+        "url": "https://en.wikipedia.org/wiki/Battleship"
+      }
+    ]
+  },
+  {
+    "name": "bismarck",
+    "displayName": "Bismarck",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 381mm/52"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "6x2 150mm/60"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 105mm/65"
+      }
+    ],
+    "description": "Bismarck was the lead ship of Germany's largest class of battleships. On her first operation in May 1941, she sank the battlecruiser HMS Hood in the Denmark Strait. British aircraft damaged her steering, allowing pursuing battleships and cruisers to close and sink her after a sustained engagement on 27 May.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Bismarck",
+        "url": "https://en.wikipedia.org/wiki/German%20battleship%20Bismarck"
+      }
+    ]
+  },
+  {
+    "name": "scharnhorst",
+    "displayName": "Scharnhorst",
+    "type": "Battlecruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 283mm/55"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "4x2 150mm/60"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "4x1 150mm/60"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "7x2 105mm/65"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "Scharnhorst was a fast German capital ship armed with nine 28 cm guns. She conducted commerce-raiding operations and fought in the Norwegian campaign before returning to northern waters. At the Battle of the North Cape in December 1943, HMS Duke of York and accompanying forces overtook and sank her; only 36 survived.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Scharnhorst",
+        "url": "https://en.wikipedia.org/wiki/German%20battleship%20Scharnhorst"
+      }
+    ]
+  },
+  {
+    "name": "lutzow",
+    "displayName": "Lützow",
+    "type": "Panzerschiff",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x3 283mm/52"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "8x1 150mm/60"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "3x2 105mm/65"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "Lützow was the lead Deutschland-class Panzerschiff, originally commissioned as Deutschland in 1933. Combining six 28 cm guns with long cruising range, she was intended for commerce warfare. Renamed in 1939, she later operated mainly in Norwegian and Baltic waters and was scuttled after heavy air attack in 1945.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Lützow",
+        "url": "https://en.wikipedia.org/wiki/German%20cruiser%20Deutschland"
+      }
+    ]
+  },
+  {
+    "name": "hood",
+    "displayName": "Hood",
+    "type": "Battlecruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 381mm/42"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "16x1 140mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x1 102mm/45"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "6x1 533mm"
+      }
+    ],
+    "description": "HMS Hood was the last battlecruiser completed for the Royal Navy and, for two decades, one of the world's most famous warships. Her high speed and imposing appearance made her a symbol of British sea power. Bismarck and Prinz Eugen engaged her in the Denmark Strait, where a magazine explosion destroyed her.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Wikipedia — Hood",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Hood"
+      }
+    ]
+  },
+  {
+    "name": "nelson",
+    "displayName": "Nelson",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 406mm/45"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "6x2 152mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x1 120mm/45"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x8 40mm/39"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 40mm/56"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "59x1 20mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x1 622mm"
+      }
+    ],
+    "description": "HMS Nelson was the lead ship of a treaty battleship class that concentrated all three triple 16-inch turrets forward of the bridge. The unusual arrangement allowed strong armor and armament within displacement limits. Nelson served in the Atlantic, Mediterranean, and Normandy campaigns and survived the war before being scrapped.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "HMS Nelson in 1945",
+        "url": "https://www.deviantart.com/tzoli/art/HMS-Nelson-in-1945-1060440759"
+      },
+      {
+        "name": "Wikipedia — Nelson",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Nelson%20%2828%29"
+      }
+    ]
+  },
+  {
+    "name": "lion",
+    "displayName": "Lion",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 406mm/45"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "12x2 114mm/45"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x6 40mm/56"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x2 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x1 40mm/60"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x5 533mm"
+      }
+    ],
+    "description": "The Lion class was Britain's planned successor to the King George V class. Its design combined nine 16-inch guns with armor and speed suitable for fighting modern German, Italian, and Japanese capital ships. Two ships were laid down in 1939, but wartime demands repeatedly suspended construction and the class was never completed.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Lion Class Battleship Design 1945 A",
+        "url": "https://www.deviantart.com/tzoli/art/Lion-Class-Battleship-Design-1945-A-810520319"
+      },
+      {
+        "name": "Wikipedia — Lion",
+        "url": "https://en.wikipedia.org/wiki/Lion-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "lioness",
+    "displayName": "Lioness",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x4 356mm/45"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "8x2 133mm/50"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x8 40mm/39"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 20mm/70"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x2 20mm/70"
+      }
+    ],
+    "description": "Lioness is a fictional derivative of Britain's Lion-class battleship studies. The design trades gun caliber for a larger number of 14-inch weapons, seeking high volume of fire while retaining heavy protection and roughly 30-knot speed. It is an artistic design study rather than an approved Royal Navy construction project.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Lion 14C-38",
+        "url": "https://www.deviantart.com/tzoli/art/Lion-14C-38-804249041"
+      },
+      {
+        "name": "Wikipedia — Lioness",
+        "url": "https://en.wikipedia.org/wiki/Lion-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "king_george_v",
+    "displayName": "King George V",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x4 356mm/45"
+      },
+      {
+        "label": "Main Battery",
+        "value": "1x2 356mm/45"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "8x2 133mm/50"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x8 40mm/39"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "20x1 20mm/70"
+      }
+    ],
+    "description": "HMS King George V was the lead ship of Britain's final class of treaty battleships. Armed with ten 14-inch guns, she helped engage Bismarck in May 1941 and later served in the Pacific. She was present in Tokyo Bay for Japan's surrender and remained in service until the early 1950s.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — King George V",
+        "url": "https://en.wikipedia.org/wiki/HMS%20King%20George%20V%20%2841%29"
+      }
+    ]
+  },
+  {
+    "name": "warspite",
+    "displayName": "Warspite",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 381mm/42"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "8x1 152mm/45"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x1 533mm"
+      }
+    ],
+    "description": "HMS Warspite was a Queen Elizabeth-class battleship whose career spanned both world wars. She fought at Jutland, Narvik, Matapan, and in numerous Mediterranean operations, earning one of the Royal Navy's most distinguished records. Despite severe damage from a German guided bomb, she returned to support the Normandy landings.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Warspite",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Warspite%20%2803%29"
+      }
+    ]
+  },
+  {
+    "name": "tiger",
+    "displayName": "Tiger",
+    "type": "Battlecruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 343mm/45"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "12x1 152mm/45"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x1 533mm"
+      }
+    ],
+    "description": "HMS Tiger was the last battlecruiser completed for the Royal Navy before the First World War. Her eight 13.5-inch guns and balanced layout reflected lessons from earlier battlecruisers. She fought at Dogger Bank and Jutland, later served as a training ship, and was scrapped under interwar naval treaty limits.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Tiger",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Tiger%20%281913%29"
+      }
+    ]
+  },
+  {
+    "name": "soviet_union",
+    "displayName": "Sovetsky Soyuz",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "6x2 152mm/57"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 100mm/56"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x4 37mm/57"
+      }
+    ],
+    "description": "The Sovetsky Soyuz class was designed to give the Soviet Navy modern battleships comparable with foreign capital ships. The Project 23 design carried nine 406 mm guns and extensive armor on a very large hull. Four ships were laid down, but the German invasion halted construction and none was completed.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "KB-4 Type A Battleship Design",
+        "url": "https://www.deviantart.com/tzoli/art/KB-4-Type-A-Battleship-Design-904759741"
+      },
+      {
+        "name": "Wikipedia — Sovetsky Soyuz",
+        "url": "https://en.wikipedia.org/wiki/Sovetsky%20Soyuz-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "soviet_union_nelsonski",
+    "displayName": "Sovetsky Soyuz (Nelsonski)",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "4x3 152mm/57"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 100mm/56"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "9x4 37mm/57"
+      }
+    ],
+    "description": "Nelsonski is a fictional alternative arrangement of the Soviet Project 23 battleship. It groups the main battery forward in a layout reminiscent of Britain's Nelson class while retaining the scale and protection associated with Sovetsky Soyuz. The configuration is an artistic proposal and was not built by the Soviet Navy.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "The Sovietskiy Nelsonski",
+        "url": "https://www.deviantart.com/tzoli/art/KB-4-Type-A-Battleship-Design-904759741"
+      },
+      {
+        "name": "Wikipedia — Sovetsky Soyuz (Nelsonski)",
+        "url": "https://en.wikipedia.org/wiki/Sovetsky%20Soyuz-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "kremlin",
+    "displayName": "Kremlin",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "12x2 130mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x4 45mm/78"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "18x4 25mm/65"
+      }
+    ],
+    "description": "Kremlin represents a fictional culmination of Soviet large-battleship concepts. Its massive hull, heavy armor, and large-caliber battery draw loosely on wartime and postwar design studies but do not correspond to a completed historical project. In the game it serves as the Soviet faction's extreme high-tier capital ship.",
+    "author": "1143M",
+    "links": [
+      {
+        "name": "Deviant Art - 1143M - project 24",
+        "url": "https://www.deviantart.com/1143m/art/project-24-889643069"
+      },
+      {
+        "name": "Wikipedia — Kremlin",
+        "url": "https://en.wikipedia.org/wiki/Sovetsky%20Soyuz-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "slava",
+    "displayName": "Slava",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 500mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 130mm/58"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x4 57mm/72"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x4 37mm/57"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x2 37mm/57"
+      }
+    ],
+    "description": "Slava is a fictional Soviet battleship interpretation emphasizing long-range gunnery and high shell velocity. The design borrows visual and technical ideas from late Soviet capital-ship studies, but no matching vessel was laid down. Its in-game characteristics should not be treated as a documented historical configuration.",
+    "author": "莫斯科凉粉",
+    "links": [
+      {
+        "name": "Slava-class battleship artwork",
+        "url": "https://t.bilibili.com/989631301929664512?tab=2"
+      },
+      {
+        "name": "Wikipedia — Slava",
+        "url": "https://en.wikipedia.org/wiki/Battleship"
+      }
+    ]
+  },
+  {
+    "name": "atlanta",
+    "displayName": "Atlanta",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "8x2 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x1 20mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS Atlanta (CL-51) was the lead ship of a class of small cruisers built around a powerful battery of dual-purpose 5-inch guns. Intended to lead destroyers and provide anti-aircraft defense, she fought in the Guadalcanal campaign. Atlanta was fatally damaged by gunfire and a torpedo during the Naval Battle of Guadalcanal.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Light Cruiser ATLANTA, CL-51",
+        "url": "https://www.deviantart.com/midnike/art/USN-Light-Cruiser-ATLANTA-CL-51-563332388"
+      },
+      {
+        "name": "Wikipedia — Atlanta",
+        "url": "https://en.wikipedia.org/wiki/USS%20Atlanta%20%28CL-51%29"
+      }
+    ]
+  },
+  {
+    "name": "alaska_kai",
+    "displayName": "Alaska Kai",
+    "type": "Large Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x3 305mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "44x1 20mm/70"
+      }
+    ],
+    "description": "Alaska Kai is an artistic development of the historical Alaska-class large cruiser. The design adds a fourth triple 12-inch turret and correspondingly increases displacement and protection, pushing the concept closer to a battlecruiser. It was not an approved United States Navy configuration and exists as a speculative design study.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "The never-were Alaska from a forgotten age",
+        "url": "https://www.deviantart.com/tzoli/art/The-never-were-Alaska-from-a-forgotten-age-686219191"
+      },
+      {
+        "name": "Wikipedia — Alaska Kai",
+        "url": "https://en.wikipedia.org/wiki/Alaska-class%20cruiser"
+      }
+    ]
+  },
+  {
+    "name": "long_beach",
+    "displayName": "Long Beach",
+    "type": "Guided-missile Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x1 127mm/38"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x3 324mm"
+      }
+    ],
+    "description": "USS Long Beach (CGN-9) was the world's first nuclear-powered surface combatant and the first purpose-built guided-missile cruiser. Commissioned in 1961, her box-like superstructure carried early phased-array radars. In 1964 she joined Enterprise and Bainbridge for Operation Sea Orbit, circumnavigating the globe without refueling or taking on fuel supplies.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "USS Long Beach Fully Equipped",
+        "url": "https://www.deviantart.com/tzoli/art/USS-Long-Beach-Fully-Equipped-865083762"
+      },
+      {
+        "name": "Wikipedia — Long Beach",
+        "url": "https://en.wikipedia.org/wiki/USS%20Long%20Beach%20%28CGN-9%29"
+      }
+    ]
+  },
+  {
+    "name": "long_beach_scheme_D",
+    "displayName": "Long Beach (Scheme D)",
+    "type": "Guided-missile Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x1 127mm/38"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x3 324mm"
+      }
+    ],
+    "description": "Long Beach Scheme D is an artistic compact derivative of USS Long Beach. It removes or rearranges parts of the original electronics fit, shortens the hull, and lowers the massive superstructure to create a silhouette closer to a large destroyer leader. The scheme was not built as an operational United States Navy cruiser.",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Long Beach Preliminary Scheme D-1",
+        "url": "https://www.deviantart.com/tzoli/art/Long-Beach-Preliminary-Scheme-D-1-860816689"
+      },
+      {
+        "name": "Wikipedia — Long Beach (Scheme D)",
+        "url": "https://en.wikipedia.org/wiki/USS%20Long%20Beach%20%28CGN-9%29"
+      }
+    ]
+  },
+  {
+    "name": "pensacola",
+    "displayName": "Pensacola",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x2 203mm/55 Mk9"
+      },
+      {
+        "label": "Main Battery",
+        "value": "2x3 203mm/55 Mk9"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x1 20mm/70"
+      }
+    ],
+    "description": "USS Pensacola (CA-24) was the lead ship of the United States Navy's first class of treaty cruisers. Her unusual arrangement of twin and triple 8-inch turrets reflected efforts to maximize firepower within displacement limits. She served through the Pacific War, survived, and was later expended during the Operation Crossroads tests.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser PENSACOLA, CA-24",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-PENSACOLA-CA-24-563331092"
+      },
+      {
+        "name": "Wikipedia — Pensacola",
+        "url": "https://en.wikipedia.org/wiki/USS%20Pensacola%20%28CA-24%29"
+      }
+    ]
+  },
+  {
+    "name": "northampton",
+    "displayName": "Northampton",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 203mm/55 Mk12"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x1 20mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "USS Northampton (CA-26) was the lead ship of a class initially designated light cruisers and reclassified after the 1930 London Naval Treaty. She escorted American carriers at Midway and the Santa Cruz Islands. Japanese Type 93 torpedoes sank her during the Battle of Tassafaronga on 30 November 1942.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser NORTHAMPTON, CA-26",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-NORTHAMPTON-CA-26-563331379"
+      },
+      {
+        "name": "Wikipedia — Northampton",
+        "url": "https://en.wikipedia.org/wiki/USS%20Northampton%20%28CA-26%29"
+      }
+    ]
+  },
+  {
+    "name": "portland",
+    "displayName": "Portland",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 203mm/55 Mk14"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "15x1 20mm/70"
+      }
+    ],
+    "description": "USS Portland (CA-33) was the lead ship of her heavy-cruiser class. She fought at the Coral Sea, Midway, Guadalcanal, Leyte Gulf, and in later Pacific campaigns. Despite severe torpedo damage during the Naval Battle of Guadalcanal, she returned to service and finished the war with sixteen battle stars.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser PORTLAND, CA-33",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-PORTLAND-CA-33-563331762"
+      },
+      {
+        "name": "Wikipedia — Portland",
+        "url": "https://en.wikipedia.org/wiki/USS%20Portland%20%28CA-33%29"
+      }
+    ]
+  },
+  {
+    "name": "astoria",
+    "displayName": "Astoria",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 203mm/55 Mk14"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x1 20mm/70"
+      }
+    ],
+    "description": "USS Astoria (CA-34) was a New Orleans-class heavy cruiser commissioned in 1934. She escorted USS Yorktown at the Battle of the Coral Sea and fought at Midway. During the Battle of Savo Island in August 1942, Japanese cruiser gunfire caused uncontrollable fires and damage that sank Astoria the following day.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser ASTORIA, CA-34",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-ASTORIA-CA-34-563332137"
+      },
+      {
+        "name": "Wikipedia — Astoria",
+        "url": "https://en.wikipedia.org/wiki/USS%20Astoria%20%28CA-34%29"
+      }
+    ]
+  },
+  {
+    "name": "des_moines",
+    "displayName": "Des Moines",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 203mm/55 Mk16"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/38 Mk12"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "12x2 76mm/50 Mk22"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x1 20mm/70"
+      }
+    ],
+    "description": "USS Des Moines (CA-134) led the final class of all-gun heavy cruisers completed for the United States Navy. Her automatic 8-inch/55 Mk 16 guns achieved a much higher rate of fire than earlier cruiser weapons. Commissioned too late for the Second World War, she later served as a Sixth Fleet flagship in the Mediterranean.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Des Moines Class as Finished",
+        "url": "https://www.deviantart.com/tzoli/art/Des-Moines-Class-as-Finished-971525494"
+      },
+      {
+        "name": "Wikipedia — Des Moines",
+        "url": "https://en.wikipedia.org/wiki/USS%20Des%20Moines%20%28CA-134%29"
+      }
+    ]
+  },
+  {
+    "name": "baltimore",
+    "displayName": "Baltimore",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 203mm/55 Mk15"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/38 Mk12"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "22x1 20mm/70"
+      }
+    ],
+    "description": "USS Baltimore (CA-68) was the lead ship of the United States Navy's largest wartime heavy-cruiser class. Commissioned in 1943, she screened fast carriers and supported attacks across the Central Pacific, Philippines, Okinawa, and Japan. The class combined reliable 8-inch firepower with stronger protection and anti-aircraft batteries than earlier treaty cruisers.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Baltimore Class as Finished 1944",
+        "url": "https://www.deviantart.com/tzoli/art/Baltimore-Class-as-Finished-1944-972681112"
+      },
+      {
+        "name": "Wikipedia — Baltimore",
+        "url": "https://en.wikipedia.org/wiki/USS%20Baltimore%20%28CA-68%29"
+      }
+    ]
+  },
+  {
+    "name": "oregon_city",
+    "displayName": "Oregon City",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 203mm/55 Mk15"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/38 Mk12"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "11x4 + 2x2 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "16x2 20mm/70"
+      }
+    ],
+    "description": "USS Oregon City (CA-122) was the lead ship of a modified Baltimore-class design distinguished by a single funnel and rearranged superstructure. Commissioned in 1946, she briefly served as Fourth Fleet flagship before entering reserve in 1947. Two sister hulls were completed in substantially different command-ship configurations.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Oregon City Class as Finished 1946",
+        "url": "https://www.deviantart.com/tzoli/art/Oregon-City-Class-as-Finished-1946-973169657"
+      },
+      {
+        "name": "Wikipedia — Oregon City",
+        "url": "https://en.wikipedia.org/wiki/USS%20Oregon%20City%20%28CA-122%29"
+      }
+    ]
+  },
+  {
+    "name": "furutaka",
+    "displayName": "Furutaka",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 203mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "6x2 25mm/60"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Furutaka was the lead ship of Japan's first class of modern heavy cruisers. Originally armed with six single 200 mm turrets, she was reconstructed with twin 203 mm mounts and improved machinery. American cruisers and destroyers fatally damaged her during the Battle of Cape Esperance in October 1942.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Furutaka",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Furutaka"
+      }
+    ]
+  },
+  {
+    "name": "aoba",
+    "displayName": "Aoba",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 203mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Aoba was the lead ship of an improved development of the Furutaka class, built with twin 203 mm turrets and more capable fire control. She served extensively around the Solomon Islands and survived repeated damage. American carrier aircraft bombed her at Kure in July 1945, leaving the cruiser settled in shallow water.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Aoba",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Aoba"
+      }
+    ]
+  },
+  {
+    "name": "haguro",
+    "displayName": "Haguro",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "5x2 203mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x4 610mm"
+      }
+    ],
+    "description": "Haguro was the fourth Myōkō-class heavy cruiser and served in numerous campaigns from the Dutch East Indies to Leyte Gulf. In May 1945, British destroyers intercepted her in the Malacca Strait during Operation Dukedom. Gunfire and torpedoes sank Haguro, making her one of the last major Japanese warships lost in surface combat.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Haguro",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Haguro"
+      }
+    ]
+  },
+  {
+    "name": "atago",
+    "displayName": "Atago",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "5x2 203mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "26x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x4 610mm"
+      }
+    ],
+    "description": "Atago was the second Takao-class heavy cruiser and frequently served as flagship of Japan's Second Fleet. Her ten 203 mm guns and massive bridge made the class powerful but top-heavy. USS Darter torpedoed and sank Atago in the Palawan Passage on 23 October 1944 as the fleet approached Leyte Gulf.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Atago",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Atago"
+      }
+    ]
+  },
+  {
+    "name": "mogami",
+    "displayName": "Mogami",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 203mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "18x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x3 610mm"
+      }
+    ],
+    "description": "Mogami was the lead ship of a cruiser class built with fifteen 155 mm guns under treaty rules. After treaty restrictions ended, five twin 203 mm turrets converted her into a heavy cruiser. She was crippled by collision, gunfire, and air attack during the Battle of Surigao Strait and was subsequently scuttled.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Mogami",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Mogami%20%281934%29"
+      }
+    ]
+  },
+  {
+    "name": "suzuya",
+    "displayName": "Suzuya",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "5x2 203mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "16x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x3 610mm"
+      }
+    ],
+    "description": "Suzuya was the third Mogami-class cruiser, completed with design improvements after structural problems in the first ships. Re-armed with 203 mm guns, she served as a heavy cruiser throughout the Pacific War. Near Samar in October 1944, air attack triggered torpedo explosions that fatally damaged her, and the crew abandoned ship.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Suzuya",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Suzuya%20%281934%29"
+      }
+    ]
+  },
+  {
+    "name": "tone",
+    "displayName": "Tone",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 203mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "20x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x3 610mm"
+      }
+    ],
+    "description": "Tone was the lead ship of a class that concentrated all four 203 mm turrets forward, leaving the stern for an extensive seaplane deck. This arrangement supported long-range reconnaissance for Japanese carrier forces. American carrier aircraft sank her in shallow water during attacks on Kure in July 1945.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Tone",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Tone%20%281937%29"
+      }
+    ]
+  },
+  {
+    "name": "tenryu",
+    "displayName": "Tenryū",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "1x1 76mm/40 3rd Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "Tenryū was the lead ship of Japan's first purpose-built light-cruiser class. Fast for her era, she was designed to lead destroyer flotillas and carried a modest battery on a small hull. After operations in China and the Pacific, USS Albacore torpedoed and sank her near New Guinea in December 1942.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Tenryū",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Tenry%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "kuma",
+    "displayName": "Kuma",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "7x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x2 533mm"
+      }
+    ],
+    "description": "Kuma was the lead ship of Japan's first group of 5,500-ton light cruisers. Designed as a fast destroyer-flotilla leader, she later performed transport and escort duties in Southeast Asian waters. The British submarine HMS Tally-Ho torpedoed and sank Kuma off Penang in January 1944 after years of wartime service.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Kuma",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Kuma"
+      }
+    ]
+  },
+  {
+    "name": "kitakami",
+    "displayName": "Kitakami",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "27x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "8  Kaiten torpedoes"
+      }
+    ],
+    "description": "Kitakami was a Kuma-class light cruiser radically rebuilt in 1941 as a torpedo cruiser with forty 610 mm tubes. The intended massed night attack never occurred, and many tubes were later removed for transport duties. Late in the war she was converted to carry Kaiten human torpedoes but did not launch them operationally.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Kitakami",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Kitakami"
+      }
+    ]
+  },
+  {
+    "name": "ooi",
+    "displayName": "Ōi",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "10x4 610mm"
+      }
+    ],
+    "description": "Ōi was a Kuma-class light cruiser converted alongside Kitakami into a torpedo cruiser carrying forty 610 mm tubes. Changing operational needs soon led to her use as a fast transport instead of a massed torpedo attacker. The American submarine USS Flasher torpedoed and sank her in the South China Sea in July 1944.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Ōi",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20%C5%8Ci"
+      }
+    ]
+  },
+  {
+    "name": "isuzu",
+    "displayName": "Isuzu",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "11x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "11x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Isuzu was the second Nagara-class light cruiser and often served as a destroyer-flotilla leader. Later reconstruction removed much of her surface armament in favor of anti-aircraft guns, radar, and depth charges. American submarines Charr, Besugo, and Gabilan attacked her off Sumbawa, sinking the cruiser in April 1945.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Isuzu",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Isuzu"
+      }
+    ]
+  },
+  {
+    "name": "abukuma",
+    "displayName": "Abukuma",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "5x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "1x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "13x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Abukuma was the final Nagara-class light cruiser and served as a destroyer-flotilla flagship, including during the Pearl Harbor strike and Aleutian operations. At the Battle of Surigao Strait she was struck by a torpedo boat. Land-based bombers finished the damaged cruiser off the Philippines on 26 October 1944.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Abukuma",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Abukuma"
+      }
+    ]
+  },
+  {
+    "name": "shintsu",
+    "displayName": "Jintsū",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "7x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "9x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Jintsū was the second Sendai-class light cruiser and a long-serving flagship of the Second Destroyer Squadron. During the Battle of Kolombangara in July 1943, she illuminated the Allied force and drew concentrated cruiser fire. Jintsū sank after sustaining numerous shell hits and at least one torpedo strike.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Jintsū",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Jints%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "yubari",
+    "displayName": "Yūbari",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "1x1 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Main Battery",
+        "value": "2x2 140mm/50 3rd Year Type"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x2 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "3x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x2 610mm"
+      }
+    ],
+    "description": "Yūbari was an experimental Japanese light cruiser designed to combine the speed and armament of a 5,500-ton cruiser in a much smaller hull. Integrated armor, a combined funnel, and compact machinery influenced later Japanese designs. USS Bluegill torpedoed her near Palau in April 1944, and she sank the next day.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Yūbari",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Y%C5%ABbari"
+      }
+    ]
+  },
+  {
+    "name": "yahagi",
+    "displayName": "Yahagi",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 152mm/50 41st Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "2x2 76mm/65 Type 98"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "24x1 25mm/60 Type 96"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Yahagi was the second Agano-class light cruiser, a modern destroyer-squadron leader commissioned in 1943. She accompanied the battleship Yamato during Operation Ten-Go, Japan's final major sortie toward Okinawa. American carrier aircraft overwhelmed the force on 7 April 1945, sinking Yahagi after multiple bomb and torpedo hits.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Yahagi",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Yahagi%20%281942%29"
+      }
+    ]
+  },
+  {
+    "name": "ooyodo",
+    "displayName": "Ōyodo",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x3 155mm/60 3rd Year Type"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "1x2 100mm/65 Type 98"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "3x2 105mm/65"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "12x3 25mm/60 Type 96"
+      }
+    ],
+    "description": "Ōyodo was a unique light cruiser designed to command submarine forces and operate long-range reconnaissance seaplanes from a large after deck. She instead became a Combined Fleet flagship and received extensive communications facilities. American carrier aircraft sank her in shallow water at Kure during the July 1945 raids.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Ōyodo",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20%C5%8Cyodo"
+      }
+    ]
+  },
+  {
+    "name": "prinz_eugen",
+    "displayName": "Prinz Eugen",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 203mm/60"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 105mm/65"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x3 533mm"
+      }
+    ],
+    "description": "Prinz Eugen was the third Admiral Hipper-class heavy cruiser. She accompanied Bismarck during the Battle of the Denmark Strait and later operated in Norwegian and Baltic waters. Surrendered to the United States after the war, she survived two Operation Crossroads nuclear tests before capsizing at Kwajalein Atoll.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Prinz Eugen",
+        "url": "https://en.wikipedia.org/wiki/German%20cruiser%20Prinz%20Eugen"
+      }
+    ]
+  },
+  {
+    "name": "leipzig",
+    "displayName": "Leipzig",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 150mm/60"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "3x2 88mm/56"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x3 533mm"
+      }
+    ],
+    "description": "Leipzig was the lead ship of a small class of German light cruisers completed between the world wars. She performed training, minelaying, and escort duties, and was severely damaged in a 1944 collision with Prinz Eugen. Loaded with chemical munitions after the war, Leipzig was scuttled in the North Sea in 1946.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Leipzig",
+        "url": "https://en.wikipedia.org/wiki/German%20cruiser%20Leipzig"
+      }
+    ]
+  },
+  {
+    "name": "cheshire",
+    "displayName": "Cheshire",
+    "type": "Heavy Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 203mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 102mm/45"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "5x8 40mm/39"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "16x2 20mm/70"
+      }
+    ],
+    "description": "Cheshire represents an artistic interpretation of a late British wartime heavy-cruiser study associated with the cancelled Admiral concepts. Its aviation facilities, fire-control equipment, and large-caliber cruiser battery illustrate attempts to modernize reconnaissance and gunnery arrangements. The ship was not constructed and should be treated as a design reconstruction.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Admiral Class Heavy Cruiser Final Design",
+        "url": "https://www.deviantart.com/tzoli/art/Admiral-Class-Heavy-Cruiser-Final-Design-874924962"
+      },
+      {
+        "name": "Wikipedia — Cheshire",
+        "url": "https://en.wikipedia.org/wiki/Heavy%20cruiser"
+      }
+    ]
+  },
+  {
+    "name": "worcester",
+    "displayName": "Worcester",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "5x2 152mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x4 76mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x4 533mm"
+      }
+    ],
+    "description": "Worcester represents a large British postwar light-cruiser study related to the Minotaur design program, not the American cruiser of the same name. High-rate dual-purpose 152 mm guns were intended to combine surface fire with long-range air defense. The design remained on paper as priorities shifted toward missiles and smaller ships.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "RN Minotaur Class Preliminary Design R",
+        "url": "https://www.deviantart.com/tzoli/art/RN-Minotaur-Class-Preliminary-Design-R-1296815610"
+      },
+      {
+        "name": "Wikipedia — Worcester",
+        "url": "https://en.wikipedia.org/wiki/Minotaur-class%20cruiser%20%281947%29"
+      }
+    ]
+  },
+  {
+    "name": "vickers",
+    "displayName": "Vickers 758A",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 152mm/50"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "2x1 102mm/45"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x1 40mm/39"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x3 533mm"
+      }
+    ],
+    "description": "Vickers 758A was an export light-cruiser proposal prepared in 1919 for potential South American customers, including Argentina. The compact design combined First World War cruiser practice with postwar efforts to reduce displacement and cost. No vessel was ordered, leaving the scheme as an example of British interwar export design work.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Vickers Export Design 758A for Argentina",
+        "url": "https://www.deviantart.com/tzoli/art/Vickers-Export-Design-758A-for-Argentina-820086654"
+      },
+      {
+        "name": "Wikipedia — Vickers 758A",
+        "url": "https://en.wikipedia.org/wiki/Vickers-Armstrongs"
+      }
+    ]
+  },
+  {
+    "name": "k_25",
+    "displayName": "K-25",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "8x2 133mm/50"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x4 40mm/39"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x8 40mm/39"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x4 1910mm"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "K-25 was one of several British cruiser studies explored during development of the Crown Colony class in the mid-1930s. The proposal examined fitting twin 5.25-inch dual-purpose turrets to a protected cruiser hull of roughly 8,000 tons. It remained a design study and was not selected for construction.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Design K-25F Light Cruiser",
+        "url": "https://www.deviantart.com/tzoli/art/Design-K-25F-Light-Cruiser-565846342"
+      },
+      {
+        "name": "Wikipedia — K-25",
+        "url": "https://en.wikipedia.org/wiki/Crown%20Colony-class%20cruiser"
+      }
+    ]
+  },
+  {
+    "name": "sverdlov",
+    "displayName": "Sverdlov",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x3 152mm/57"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 100mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x5 533mm"
+      }
+    ],
+    "description": "Sverdlov was the lead ship of the Soviet Project 68-bis class, the last conventional gun cruisers built for the Soviet Navy. The design improved earlier wartime cruisers with greater endurance and updated systems. Her appearance at the 1953 Coronation Fleet Review became a prominent demonstration of postwar Soviet naval power.",
+    "author": "SakhaliaNet",
+    "links": [
+      {
+        "name": "Wikipedia — Sverdlov",
+        "url": "https://en.wikipedia.org/wiki/Soviet%20cruiser%20Sverdlov"
+      }
+    ]
+  },
+  {
+    "name": "kirov",
+    "displayName": "Kirov",
+    "type": "Light Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 180mm/57"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x1 100mm/56"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "Kirov was the lead ship of the Soviet Project 26 cruisers, developed with Italian technical assistance. Her unusual triple turrets mounted nine 180 mm guns with long range. During the Second World War she primarily supported ground forces around Leningrad, survived heavy damage, and remained in service into the postwar period.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Kirov",
+        "url": "https://en.wikipedia.org/wiki/Soviet%20cruiser%20Kirov"
+      }
+    ]
+  },
+  {
+    "name": "porter",
+    "displayName": "Porter",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x2 127mm/38"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS Porter (DD-356) led a class of large destroyer leaders designed to serve as squadron flagships with heavier guns and communications facilities. She fought in the Pacific during 1942. After being disabled during the Battle of the Santa Cruz Islands, Porter was abandoned and sunk by USS Shaw.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer PORTER, DD-356",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-PORTER-DD-356-563333059"
+      },
+      {
+        "name": "Wikipedia — Porter",
+        "url": "https://en.wikipedia.org/wiki/USS%20Porter%20%28DD-356%29"
+      }
+    ]
+  },
+  {
+    "name": "maury",
+    "displayName": "Maury",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x1 127mm/38"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "4x4 533mm"
+      }
+    ],
+    "description": "USS Maury (DD-401) was a Gridley-class destroyer that fought in major carrier battles and later screened Task Force 58 across the Central Pacific. Her service included Coral Sea, Midway, the Eastern Solomons, Leyte, and operations against Japan. Maury earned sixteen battle stars, among the highest totals awarded to a destroyer.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer MAURY, DD-401",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-MAURY-DD-401-563333362"
+      },
+      {
+        "name": "Wikipedia — Maury",
+        "url": "https://en.wikipedia.org/wiki/USS%20Maury%20%28DD-401%29"
+      }
+    ]
+  },
+  {
+    "name": "hammann",
+    "displayName": "Hammann",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x1 127mm/38"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS Hammann (DD-412) was a Sims-class destroyer that screened carriers at the Battle of the Coral Sea. At Midway she came alongside the damaged USS Yorktown to provide pumps, power, and damage-control support. Torpedoes from the Japanese submarine I-168 struck both ships, breaking Hammann in two and sinking her rapidly.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer HAMMANN, DD-412",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-HAMMANN-DD-412-563333796"
+      },
+      {
+        "name": "Wikipedia — Hammann",
+        "url": "https://en.wikipedia.org/wiki/USS%20Hammann%20%28DD-412%29"
+      }
+    ]
+  },
+  {
+    "name": "dewey",
+    "displayName": "Dewey",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x1 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x1 20mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS Dewey (DD-349) was the first Farragut-class destroyer, representing a new generation of American treaty-era destroyers. She served throughout the Pacific, including carrier screening, the Aleutian campaign, and amphibious operations, before later escort work in other theaters. Dewey survived the war and received thirteen battle stars.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer DEWEY, DD-349",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-DEWEY-DD-349-563332853"
+      },
+      {
+        "name": "Wikipedia — Dewey",
+        "url": "https://en.wikipedia.org/wiki/USS%20Dewey%20%28DD-349%29"
+      }
+    ]
+  },
+  {
+    "name": "asashio",
+    "displayName": "Asashio",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 127mm/50 3rd Year Type"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Asashio was the lead ship of Japan's first large destroyer class designed after withdrawal from treaty limits. Armed with 127 mm guns and Type 93 torpedoes, she combined high speed with strong offensive power. Allied aircraft sank her while she attempted to rescue survivors during the Battle of the Bismarck Sea in March 1943.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "Wikipedia — Asashio",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Asashio%20%281936%29"
+      }
+    ]
+  },
+  {
+    "name": "yugumo",
+    "displayName": "Yūgumo",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 127mm/50 3rd Year Type"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Yūgumo was the lead ship of an improved Japanese fleet-destroyer class derived from the Kagerō design. She retained powerful torpedo armament and long range while incorporating modest refinements. During the Battle of Vella Lavella in October 1943, American destroyer gunfire and a torpedo sank her after a close night engagement.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "Wikipedia — Yūgumo",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Y%C5%ABgumo%20%281941%29"
+      }
+    ]
+  },
+  {
+    "name": "yukikaze",
+    "displayName": "Yukikaze",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x2 127mm/50 3rd Year Type"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "Yukikaze was a Kagerō-class destroyer famous for surviving many of the Imperial Japanese Navy's most dangerous operations. She fought from the opening Pacific campaigns through Operation Ten-Go. Transferred to the Republic of China after the war and renamed Tan Yang, she remained in service until 1966.",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "Wikipedia — Yukikaze",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Yukikaze%20%281939%29"
+      }
+    ]
+  },
+  {
+    "name": "z_11",
+    "displayName": "Z11 Bernd von Arnim",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "5x1 127mm/45"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "Z11 Bernd von Arnim was a German Type 1934A destroyer commissioned in 1938. She participated in the invasion of Norway and landed troops at Narvik. After exhausting much of her ammunition and suffering damage during the Second Battle of Narvik, her crew scuttled the ship in April 1940.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Z11 Bernd von Arnim",
+        "url": "https://en.wikipedia.org/wiki/German%20destroyer%20Z11%20Bernd%20von%20Arnim"
+      }
+    ]
+  },
+  {
+    "name": "v",
+    "displayName": "V",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "5x1 120mm/45"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "1x5 533mm"
+      }
+    ],
+    "description": "V is a speculative British destroyer design derived from the established V and W-class platform. The proposal emphasizes greater speed, larger boilers, and quadruple torpedo tubes while retaining the compact fleet-destroyer layout. It remained an interwar paper concept rather than a commissioned Royal Navy class.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — V",
+        "url": "https://en.wikipedia.org/wiki/V%20and%20W-class%20destroyer"
+      }
+    ]
+  },
+  {
+    "name": "y",
+    "displayName": "Y",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x1 120mm/45"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "1x5 533mm"
+      }
+    ],
+    "description": "Y is a speculative further development of Britain's V and W-class destroyer family. The design combines improved endurance and anti-submarine equipment with more modern radar and sonar concepts. It is presented as an artistic paper design and should not be confused with the historical Second World War Y-class destroyers.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Y",
+        "url": "https://en.wikipedia.org/wiki/V%20and%20W-class%20destroyer"
+      }
+    ]
+  },
+  {
+    "name": "ardent",
+    "displayName": "Ardent",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "4x1 120mm/45"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x1 40mm/60"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "HMS Ardent was an A-class destroyer commissioned in 1930. She performed fleet and escort duties during the opening months of the Second World War. While escorting the aircraft carrier HMS Glorious off Norway in June 1940, Ardent attacked Scharnhorst and Gneisenau before German gunfire sank her.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Ardent",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Ardent%20%28H41%29"
+      }
+    ]
+  },
+  {
+    "name": "rapid",
+    "displayName": "Skoryy",
+    "type": "Destroyer",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x2 130mm/58"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x5 533mm"
+      }
+    ],
+    "description": "Skoryy represents the Soviet Project 30bis destroyers, the first large postwar destroyer series built for the Soviet Navy. The class combined conventional guns, torpedoes, and anti-submarine weapons in a robust design. Seventy ships were completed, forming an important part of Soviet and allied fleets during the early Cold War.",
+    "author": "Zustt",
+    "links": [
+      {
+        "name": "ShipBucket - Smelyi",
+        "url": "http://www.shipbucket.com/drawings/10560"
+      },
+      {
+        "name": "Wikipedia — Skoryy",
+        "url": "https://en.wikipedia.org/wiki/Skory-class%20destroyer"
+      }
+    ]
+  },
+  {
+    "name": "jiujiang",
+    "displayName": "Jiujiang",
+    "type": "Frigate",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x2 100mm 79A"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "2x2 37mm"
+      },
+      {
+        "label": "Rockets",
+        "value": "5x50 fire-support rockets"
+      },
+      {
+        "label": "Anti-submarine Weapons",
+        "value": "2x5 250mm Type 65 ASW rockets"
+      }
+    ],
+    "description": "Jiujiang was converted into a Chinese naval fire-support ship built around a 1,700-ton frigate hull. Twin 100 mm and 37 mm guns provided conventional surface and air defense, while extensive multiple rocket launchers delivered short, concentrated bombardments. Additional Type 65 anti-submarine rockets supplied close-range forward-firing capability.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Jiujiang",
+        "url": "https://en.wikipedia.org/wiki/Type%20053H%20frigate"
+      }
+    ]
+  },
+  {
+    "name": "PT_791",
+    "displayName": "PT-791",
+    "type": "Motor Torpedo Boat",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "1x1 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x1 20mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "PT-791 was a late-production American motor torpedo boat of the Higgins 78-foot family. A wooden hull and three gasoline engines gave boats of this type speeds around 40 knots. Their torpedoes, automatic weapons, and compact size suited night attacks, patrol, escort, and limited anti-submarine missions.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — PT-791",
+        "url": "https://en.wikipedia.org/wiki/PT%20boat"
+      }
+    ]
+  },
+  {
+    "name": "T_14",
+    "displayName": "T-14",
+    "type": "Motor Torpedo Boat",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "1x1 13mm Type 93"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x1 450mm"
+      }
+    ],
+    "description": "T-14 represents Japan's Type 14 motor torpedo boats, simplified wooden craft produced late in the Second World War for coastal defense. An automotive engine and austere construction allowed rapid manufacture. The small boats carried two 450 mm torpedoes and could also embark depth charges for local anti-submarine work.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — T-14",
+        "url": "https://en.wikipedia.org/wiki/Motor%20torpedo%20boat"
+      }
+    ]
+  },
+  {
+    "name": "S_100",
+    "displayName": "S-100",
+    "type": "Motor Torpedo Boat",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "1x1 37mm/57"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x1 20mm/70"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "The S-100 class was a late-war German Schnellboot design known to the Allies as an E-boat. Its diesel-powered, round-bottomed hull combined high speed with excellent performance in rough seas. Two 533 mm torpedo tubes and increasingly heavy automatic weapons made the type dangerous in coastal waters.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — S-100",
+        "url": "https://en.wikipedia.org/wiki/E-boat"
+      }
+    ]
+  },
+  {
+    "name": "MTB_77",
+    "displayName": "MTB-77",
+    "type": "Motor Torpedo Boat",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "1x2 1910mm"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "MTB-77 was a British motor torpedo boat of the Vosper 72-foot family. Three gasoline engines produced speeds near 40 knots, while torpedoes and light automatic weapons supported night attacks and patrols. Boats of this type operated in the Mediterranean and English Channel on interception, escort, and clandestine missions.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — MTB-77",
+        "url": "https://en.wikipedia.org/wiki/Motor%20torpedo%20boat"
+      }
+    ]
+  },
+  {
+    "name": "P_6",
+    "displayName": "P-6",
+    "type": "Motor Torpedo Boat",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x2 25mm/65"
+      },
+      {
+        "label": "Torpedoes",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "The Soviet Project 183 motor torpedo boat, designated P-6 by NATO, was a wooden-hulled postwar attack craft capable of roughly 45 knots. It carried 533 mm torpedoes, twin 25 mm guns, and depth charges. Large numbers served with the Soviet Navy and were exported to allied states.",
+    "author": "Piv",
+    "links": [
+      {
+        "name": "SNF TKA 821",
+        "url": "https://jp.pinterest.com/pin/39547302971899630/"
+      },
+      {
+        "name": "Wikipedia — P-6",
+        "url": "https://en.wikipedia.org/wiki/P%206-class%20torpedo%20boat"
+      }
+    ]
+  },
+  {
+    "name": "mercy",
+    "displayName": "Mercy",
+    "type": "Hospital Ship",
+    "armaments": [
+      {
+        "label": "Armament",
+        "value": "Nonefixed armament"
+      }
+    ],
+    "description": "USNS Mercy (T-AH-19) is the lead ship of the United States Navy's Mercy-class hospital ships. Originally completed in 1976 as the oil tanker SS Worth, she was converted and entered naval service in 1986. Mercy provides afloat medical care, disaster response, and humanitarian assistance from her home port in San Diego.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Mercy",
+        "url": "https://en.wikipedia.org/wiki/USNS%20Mercy%20%28T-AH-19%29"
+      }
+    ]
+  },
+  {
+    "name": "peace_ark",
+    "displayName": "Peace Ark",
+    "type": "Hospital Ship",
+    "armaments": [
+      {
+        "label": "Armament",
+        "value": "Nonefixed armament"
+      }
+    ],
+    "description": "Peace Ark is the People's Liberation Army Navy's Type 920 hospital ship, commissioned in 2008. Purpose-built for medical support and humanitarian missions, she carries operating rooms, intensive-care facilities, diagnostic equipment, and hundreds of hospital beds. The ship has conducted repeated overseas deployments across Asia, Africa, the Pacific, and Latin America.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Peace Ark",
+        "url": "https://en.wikipedia.org/wiki/Chinese%20hospital%20ship%20Daishan%20Dao"
+      }
+    ]
+  },
+  {
+    "name": "britannic",
+    "displayName": "Britannic",
+    "type": "Hospital Ship",
+    "armaments": [
+      {
+        "label": "Armament",
+        "value": "Nonefixed armament"
+      }
+    ],
+    "description": "HMHS Britannic was the third Olympic-class ocean liner and a sister ship of Titanic. Requisitioned as a hospital ship during the First World War, she was painted white with large red crosses. Britannic struck a mine in the Aegean Sea in November 1916 and became the largest ship lost during the war.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Britannic",
+        "url": "https://en.wikipedia.org/wiki/HMHS%20Britannic"
+      }
+    ]
+  },
+  {
+    "name": "F",
+    "displayName": "Fighter",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — Fighter",
+        "url": "https://en.wikipedia.org/wiki/Fighter%20aircraft"
+      }
+    ]
+  },
+  {
+    "name": "B",
+    "displayName": "Bomber",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — Bomber",
+        "url": "https://en.wikipedia.org/wiki/Bomber"
+      }
+    ]
+  },
+  {
+    "name": "A",
+    "displayName": "Attack Aircraft",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — Attack Aircraft",
+        "url": "https://en.wikipedia.org/wiki/Attack%20aircraft"
+      }
+    ]
+  },
+  {
+    "name": "A6M_0",
+    "displayName": "A6M Zero",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — A6M Zero",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A6M%20Zero"
+      }
+    ]
+  },
+  {
+    "name": "A7M2",
+    "displayName": "A7M2 Reppū",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — A7M2 Reppū",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A7M"
+      }
+    ]
+  },
+  {
+    "name": "B5N2_97",
+    "displayName": "B5N2 Type 97",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — B5N2 Type 97",
+        "url": "https://en.wikipedia.org/wiki/Nakajima%20B5N"
+      }
+    ]
+  },
+  {
+    "name": "B7A2",
+    "displayName": "B7A2 Ryūsei",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — B7A2 Ryūsei",
+        "url": "https://en.wikipedia.org/wiki/Aichi%20B7A"
+      }
+    ]
+  },
+  {
+    "name": "C6N1",
+    "displayName": "C6N1 Saiun",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — C6N1 Saiun",
+        "url": "https://en.wikipedia.org/wiki/Nakajima%20C6N"
+      }
+    ]
+  },
+  {
+    "name": "D3A_99",
+    "displayName": "D3A Type 99",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — D3A Type 99",
+        "url": "https://en.wikipedia.org/wiki/Aichi%20D3A"
+      }
+    ]
+  },
+  {
+    "name": "D4Y3",
+    "displayName": "D4Y3 Suisei",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — D4Y3 Suisei",
+        "url": "https://en.wikipedia.org/wiki/Yokosuka%20D4Y"
+      }
+    ]
+  },
+  {
+    "name": "F4F-3",
+    "displayName": "F4F-3 Wildcat",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — F4F-3 Wildcat",
+        "url": "https://en.wikipedia.org/wiki/Grumman%20F4F%20Wildcat"
+      }
+    ]
+  },
+  {
+    "name": "SBD-3",
+    "displayName": "SBD-3 Dauntless",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — SBD-3 Dauntless",
+        "url": "https://en.wikipedia.org/wiki/Douglas%20SBD%20Dauntless"
+      }
+    ]
+  },
+  {
+    "name": "TBD-1",
+    "displayName": "TBD-1 Devastator",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — TBD-1 Devastator",
+        "url": "https://en.wikipedia.org/wiki/Douglas%20TBD%20Devastator"
+      }
+    ]
+  }
+]

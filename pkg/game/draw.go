@@ -295,8 +295,8 @@ func wrapText(text string, maxWidth, fontSize float64) []string {
 // 绘制游戏标题
 func (d *Drawer) drawGameTitle(screen *ebiten.Image) {
 	textStr := i18n.Text(i18n.MsgGameTitle)
-	fontSize := float64(128)
-	titleFont := font.LocalizedUI(font.Hang)
+	fontSize := float64(96)
+	titleFont := font.Hang
 	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, titleFont)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
 	d.drawText(screen, textStr, posX, posY, fontSize, titleFont, colorx.White)
@@ -334,10 +334,13 @@ func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textCol
 
 // 绘制鸣谢
 func (d *Drawer) drawCredits(screen *ebiten.Image) {
-	// 注：英文感叹号字体是一样的，但是末尾留白少一些，对齐比较好看 :D
 	textStr := i18n.Text(i18n.MsgGameCredits)
-	fontSize := float64(128)
-	creditsFont := font.LocalizedUI(font.Hang)
+	fontSize := float64(96)
+	creditsFont := font.Hang
+	maxWidth := float64(screen.Bounds().Dx()) - 100
+	if textWidth := layout.CalcTextWidth(textStr, fontSize, creditsFont); textWidth > maxWidth {
+		fontSize *= maxWidth / textWidth
+	}
 	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, creditsFont)) / 2
 	posY := float64(screen.Bounds().Dy()) / 6 * 5
 	d.drawText(screen, textStr, posX, posY, fontSize, creditsFont, colorx.White)

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jutland References 本地化"
+  short_description: "维护 Jutland 双语图鉴资料、来源与运行时切换"
+  default_prompt: "Use $jutland-localize-references to add or update localized Jutland reference data with source and parity validation."

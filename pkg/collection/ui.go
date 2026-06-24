@@ -1426,14 +1426,15 @@ func (c *CollectionUI) drawShipCombat(screen *ebiten.Image, ship *objUnit.Battle
 	card := c.layout.ShipCombat
 	scale := c.metrics.Scale
 	c.drawer.drawCollectionCard(screen, card, i18n.Text(i18n.MsgCollectionCombat), c.metrics)
-	labelX := card.X + card.W - 185*scale
-	valueX := card.X + card.W - 78*scale
+	label := i18n.Text(i18n.MsgCollectionTotalPower)
+	value := fmt.Sprintf("%d", ship.CombatPower.Total)
+	labelX, valueX := combatPowerHeaderPositions(card, scale, label, value)
 	c.drawer.drawText(
-		screen, i18n.Text(i18n.MsgCollectionTotalPower), labelX, card.Y+18*scale,
+		screen, label, labelX, card.Y+18*scale,
 		c.metrics.Body, font.LocalizedUI(font.Kai), color.RGBA{214, 201, 178, 255},
 	)
 	c.drawer.drawText(
-		screen, fmt.Sprintf("%d", ship.CombatPower.Total), valueX, card.Y+15*scale,
+		screen, value, valueX, card.Y+15*scale,
 		24*scale, font.JetbrainsMono, colorx.White,
 	)
 	if ship.Type == objUnit.ShipTypeAircraftCarrier {
@@ -1474,6 +1475,14 @@ func (c *CollectionUI) drawShipCombat(screen *ebiten.Image, ship *objUnit.Battle
 		card.W-weaponW-24*scale, c.metrics.RadarLabel,
 		i18n.Text(i18n.MsgCollectionRelativeNote),
 	)
+}
+
+func combatPowerHeaderPositions(card collectionCard, scale float64, label, value string) (float64, float64) {
+	valueWidth := layout.CalcTextWidth(value, 24*scale, font.JetbrainsMono)
+	valueX := card.X + card.W - 20*scale - valueWidth
+	labelWidth := estimateCollectionTextWidth(label, 18*scale)
+	labelX := valueX - 14*scale - labelWidth
+	return labelX, valueX
 }
 
 func (c *CollectionUI) drawRadarScaleNote(
@@ -1565,12 +1574,25 @@ func (c *CollectionUI) drawShipSource(screen *ebiten.Image, ship *objUnit.Battle
 		)
 		return
 	}
-	fontSize, lineHeight := c.metrics.History, c.metrics.History*1.35
+	fontSize := c.metrics.History
+	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
+		fontSize *= 0.82
+	}
+	lineHeight := fontSize * 1.35
+	contentWidth := card.W - 40*scale
 	descriptionLines := wrapCollectionText(ref.Description, card.W-40*scale, fontSize)
-	linkCount := min(2, len(ref.Links))
-	metadataLines := linkCount
+	authorLines := []string{}
 	if ref.Author != "" {
-		metadataLines++
+		authorText := i18n.Format(i18n.MsgCollectionAssetAuthor, map[string]any{"Author": ref.Author})
+		authorLines = wrapCollectionText(authorText, contentWidth, fontSize)
+	}
+	linkLines := make([][]string, min(2, len(ref.Links)))
+	metadataLines := len(authorLines)
+	for idx := range linkLines {
+		linkLines[idx] = wrapCollectionText(
+			fmt.Sprintf("[%d] %s", idx+1, ref.Links[idx].Name), contentWidth, fontSize,
+		)
+		metadataLines += len(linkLines[idx])
 	}
 	descriptionY := card.Y + 56*scale
 	// 历史正文之后固定留一行空白，再按内容流顺序绘制作者和链接。
@@ -1582,33 +1604,27 @@ func (c *CollectionUI) drawShipSource(screen *ebiten.Image, ship *objUnit.Battle
 	)
 	drawnLines := min(maxLines, len(descriptionLines))
 	metaY := descriptionY + float64(drawnLines+1)*lineHeight
-	if ref.Author != "" {
+	for _, line := range authorLines {
 		c.drawer.drawText(
-			screen,
-			i18n.Format(i18n.MsgCollectionAssetAuthor, map[string]any{"Author": ref.Author}),
-			card.X+20*scale,
-			metaY,
-			c.metrics.Body,
-			font.LocalizedUI(font.Kai),
-			color.RGBA{214, 201, 178, 255},
+			screen, line, card.X+20*scale, metaY, fontSize,
+			font.LocalizedUI(font.Kai), color.RGBA{214, 201, 178, 255},
 		)
 		metaY += lineHeight
 	}
-	for idx, link := range ref.Links {
-		if idx >= 2 {
-			break
+	for idx, lines := range linkLines {
+		for _, line := range lines {
+			area := clickableArea{
+				X: card.X + 20*scale, Y: metaY,
+				W: estimateCollectionTextWidth(line, fontSize), H: fontSize * 1.25,
+			}
+			clr := colorx.White
+			if isHoverArea(area) {
+				clr = colorx.SkyBlue
+			}
+			c.drawer.drawText(screen, line, area.X, area.Y, fontSize, font.LocalizedUI(font.Kai), clr)
+			c.links = append(c.links, collectionLink{Area: area, URL: ref.Links[idx].URL})
+			metaY += lineHeight
 		}
-		text := fmt.Sprintf("[%d] %s", idx+1, link.Name)
-		clr := colorx.White
-		area := clickableArea{
-			X: card.X + 20*scale, Y: metaY + float64(idx)*lineHeight,
-			W: estimateCollectionTextWidth(text, c.metrics.Body), H: c.metrics.Body * 1.25,
-		}
-		if isHoverArea(area) {
-			clr = colorx.SkyBlue
-		}
-		c.drawer.drawText(screen, text, area.X, area.Y, c.metrics.Body, font.LocalizedUI(font.Kai), clr)
-		c.links = append(c.links, collectionLink{Area: area, URL: link.URL})
 	}
 }
 
