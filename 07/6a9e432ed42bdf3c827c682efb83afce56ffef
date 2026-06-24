@@ -1,0 +1,61 @@
+pkg/i18n/locales/active.en.toml
+  s_16f825d33d1b76::t_9e08071ccd6c7d 1-292
+pkg/resources/font/font_test.go
+  s_16f825d33d1b76::t_b8f486d59c16cf 15-21
+  s_16f825d33d1b76::t_0898833fbbbd40 6
+pkg/collection/ui.go
+  s_16f825d33d1b76::t_32115eb3bb5fa5 1714,1722-1728,1730,1757,1779-1787,1791,1793,1800,1812-1813,1817,1819,1823-1827,1829-1830
+  s_16f825d33d1b76::t_25acd047ed5c02 525,596,604,607
+  s_16f825d33d1b76::t_b8f486d59c16cf 1003-1005
+pkg/game/draw.go
+  s_16f825d33d1b76::t_322d69c76b7580 128-137,139,145-151,153,172-178,291-292,357
+configs/Readme.md
+  s_16f825d33d1b76::t_47751448faeff6 477
+.gitignore
+  h_83f239dc907c66 31,45
+pkg/i18n/locales/active.zh-Hans.toml
+  h_83f239dc907c66 14
+pkg/game/state.go
+  s_16f825d33d1b76::t_a9801bd306e3fb 47-52,55-56,61-91,94,96
+pkg/i18n/i18n.go
+  s_16f825d33d1b76::t_077c9b037f86ae 32
+configs/game_settings.json5
+  s_16f825d33d1b76::t_33ae496cabc89e 5
+pkg/i18n/i18n_test.go
+  s_16f825d33d1b76::t_68d0417813e300 17-20,24-25,29
+pkg/game/game.go
+  s_16f825d33d1b76::t_a9801bd306e3fb 223,230,237,244
+pkg/resources/font/font.go
+  s_16f825d33d1b76::t_b8f486d59c16cf 5,53-64
+pkg/collection/drawer.go
+  s_16f825d33d1b76::t_b8f486d59c16cf 46,175-176,180-181
+pkg/game/settings/ui.go
+  s_16f825d33d1b76::t_9c240593e511d0 229-232,235
+pkg/config/config.go
+  s_16f825d33d1b76::t_4564fa90b29762 58,81-83,157
+pkg/game/state_test.go
+  s_16f825d33d1b76::t_cbe70669ae9431 14-23,25-40
+  s_16f825d33d1b76::t_a9801bd306e3fb 1-3,5-13,24,41-42
+  s_16f825d33d1b76::t_a1588b825cedc4 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "076a9e432ed42bdf3c827c682efb83afce56ffef",
+  "prompts": {},
+  "humans": {
+    "h_83f239dc907c66": {
+      "author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  },
+  "sessions": {
+    "s_16f825d33d1b76": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef501-8bb0-7323-9e16-3006e1b31e9d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  }
+}
