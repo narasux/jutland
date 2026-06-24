@@ -26,11 +26,13 @@ const (
 	buttonFontSize = 22
 )
 
-// 速度选项定义
-var speedOptions = []struct {
+type speedOption struct {
 	Label i18n.MessageID
 	Value float64
-}{
+}
+
+// 速度选项定义
+var speedOptions = []speedOption{
 	{i18n.MsgSpeedVerySlow, 0.25},
 	{i18n.MsgSpeedSlow, 0.50},
 	{i18n.MsgSpeedNormal, 1.00},
@@ -81,15 +83,13 @@ func (s *UI) ReloadLanguage() {
 	s.buildUI()
 }
 
-// selectSpeed 选择一个速度倍率并重建 UI
+// selectSpeed 选择一个速度倍率。
 func (s *UI) selectSpeed(value float64) {
 	s.localValue = value
-	s.buildUI()
 }
 
 func (s *UI) selectLanguage(value i18n.Language) {
 	s.localLanguage = value
-	s.buildUI()
 }
 
 // speedOptionIndex 返回当前 localValue 匹配的速度选项索引，不匹配时返回 -1
@@ -143,19 +143,6 @@ func (s *UI) buildUI() {
 		Pressed:  colorx.DarkSilver,
 	}
 
-	// 选中按钮样式（金色背景）
-	selectedBtnImage := &widget.ButtonImage{
-		Idle:    image.NewNineSliceColor(colorx.Gold),
-		Hover:   image.NewNineSliceColor(colorx.Gold),
-		Pressed: image.NewNineSliceColor(colorx.DarkSilver),
-	}
-	selectedBtnTextColor := &widget.ButtonTextColor{
-		Idle:     colorx.Black,
-		Disabled: color.RGBA{R: 120, G: 110, B: 100, A: 255},
-		Hover:    colorx.Black,
-		Pressed:  colorx.Black,
-	}
-
 	// ====== 标题 ======
 	titleLabel := widget.NewLabel(
 		widget.LabelOpts.Text(
@@ -174,38 +161,23 @@ func (s *UI) buildUI() {
 		),
 	)
 
-	// ====== 速度选项按钮行 ======
+	// ====== 速度倍率下拉框 ======
 	selectedIndex := s.speedOptionIndex()
-
-	speedRow := widget.NewContainer(
-		widget.ContainerOpts.Layout(widget.NewRowLayout(
-			widget.RowLayoutOpts.Direction(widget.DirectionHorizontal),
-			widget.RowLayoutOpts.Spacing(16),
-		)),
-	)
-
-	for idx, opt := range speedOptions {
-		opt := opt
-		idx := idx
-		selected := idx == selectedIndex
-
-		btnImg := normalBtnImage
-		btnColor := normalBtnTextColor
-		if selected {
-			btnImg = selectedBtnImage
-			btnColor = selectedBtnTextColor
-		}
-
-		btn := widget.NewButton(
-			widget.ButtonOpts.Image(btnImg),
-			widget.ButtonOpts.Text(i18n.Text(opt.Label), buttonFace, btnColor),
-			widget.ButtonOpts.TextPadding(&widget.Insets{Left: 28, Right: 28, Top: 10, Bottom: 10}),
-			widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
-				s.selectSpeed(opt.Value)
-			}),
-		)
-		speedRow.AddChild(btn)
+	speedEntries := make([]any, len(speedOptions))
+	for idx := range speedOptions {
+		speedEntries[idx] = speedOptions[idx]
 	}
+	if selectedIndex < 0 {
+		selectedIndex = 2
+	}
+	speedCombo := newSettingsCombo(
+		speedEntries,
+		speedOptions[selectedIndex],
+		buttonFace,
+		func(entry any) string { return i18n.Text(entry.(speedOption).Label) + "  ▾" },
+		func(entry any) string { return i18n.Text(entry.(speedOption).Label) },
+		func(entry any) { s.selectSpeed(entry.(speedOption).Value) },
+	)
 
 	languageLabel := widget.NewLabel(
 		widget.LabelOpts.Text(
@@ -214,31 +186,21 @@ func (s *UI) buildUI() {
 			&widget.LabelColor{Idle: colorx.White, Disabled: colorx.White},
 		),
 	)
-	languageRow := widget.NewContainer(
-		widget.ContainerOpts.Layout(widget.NewRowLayout(
-			widget.RowLayoutOpts.Direction(widget.DirectionHorizontal),
-			widget.RowLayoutOpts.Spacing(16),
-		)),
-	)
-	for _, lang := range i18n.SupportedLanguages() {
-		lang := lang
-		btnImg, btnColor := normalBtnImage, normalBtnTextColor
-		if lang == s.localLanguage {
-			btnImg, btnColor = selectedBtnImage, selectedBtnTextColor
-		}
-		langButtonFace := text.Face(&text.GoTextFace{
-			Source: font.ForLanguage(lang, font.Kai),
-			Size:   buttonFontSize,
-		})
-		languageRow.AddChild(widget.NewButton(
-			widget.ButtonOpts.Image(btnImg),
-			widget.ButtonOpts.Text(lang.NativeName(), &langButtonFace, btnColor),
-			widget.ButtonOpts.TextPadding(&widget.Insets{Left: 28, Right: 28, Top: 10, Bottom: 10}),
-			widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
-				s.selectLanguage(lang)
-			}),
-		))
+	languages := i18n.SupportedLanguages()
+	languageEntries := make([]any, len(languages))
+	for idx := range languages {
+		languageEntries[idx] = languages[idx]
 	}
+	// 语言列表同时包含中英文，固定使用具备完整拉丁与汉字字形的字体。
+	languageFaceValue := text.Face(&text.GoTextFace{Source: font.Kai, Size: buttonFontSize})
+	languageCombo := newSettingsCombo(
+		languageEntries,
+		s.localLanguage,
+		&languageFaceValue,
+		func(entry any) string { return entry.(i18n.Language).NativeName() + "  ▾" },
+		func(entry any) string { return entry.(i18n.Language).NativeName() },
+		func(entry any) { s.selectLanguage(entry.(i18n.Language)) },
+	)
 
 	// ====== 按钮栏 ======
 	saveBtn := widget.NewButton(
@@ -280,9 +242,9 @@ func (s *UI) buildUI() {
 	)
 	topContent.AddChild(titleLabel)
 	topContent.AddChild(speedLabel)
-	topContent.AddChild(speedRow)
+	topContent.AddChild(speedCombo)
 	topContent.AddChild(languageLabel)
-	topContent.AddChild(languageRow)
+	topContent.AddChild(languageCombo)
 
 	// ====== 底部内容（操作按钮 + 提示） ======
 	bottomContent := widget.NewContainer(
@@ -331,4 +293,66 @@ func (s *UI) buildUI() {
 	rootWidget.LayoutData = rootData
 
 	s.container = rootContainer
+}
+
+func newSettingsCombo(
+	entries []any,
+	selected any,
+	face *text.Face,
+	buttonLabel func(any) string,
+	entryLabel func(any) string,
+	selectedHandler func(any),
+) *widget.ListComboButton {
+	border := color.RGBA{R: 212, G: 180, B: 112, A: 255}
+	buttonImage := &widget.ButtonImage{
+		Idle:    image.NewBorderedNineSliceColor(color.RGBA{R: 20, G: 22, B: 25, A: 250}, border, 2),
+		Hover:   image.NewBorderedNineSliceColor(color.RGBA{R: 45, G: 42, B: 35, A: 255}, colorx.Gold, 2),
+		Pressed: image.NewBorderedNineSliceColor(color.RGBA{R: 12, G: 14, B: 17, A: 255}, colorx.Gold, 2),
+	}
+	textColor := &widget.ButtonTextColor{
+		Idle: colorx.White, Hover: colorx.Gold, Pressed: colorx.White,
+		Disabled: color.RGBA{R: 120, G: 110, B: 100, A: 255},
+	}
+	listImage := &widget.ScrollContainerImage{
+		Idle: image.NewBorderedNineSliceColor(color.RGBA{R: 13, G: 15, B: 18, A: 255}, border, 2),
+		Mask: image.NewNineSliceColor(colorx.White),
+	}
+
+	return widget.NewListComboButton(
+		widget.ListComboButtonOpts.WidgetOpts(widget.WidgetOpts.MinSize(360, 52)),
+		widget.ListComboButtonOpts.Entries(entries),
+		widget.ListComboButtonOpts.InitialEntry(selected),
+		widget.ListComboButtonOpts.ButtonParams(&widget.ButtonParams{
+			Image:       buttonImage,
+			TextPadding: &widget.Insets{Left: 18, Right: 18, Top: 12, Bottom: 12},
+		}),
+		widget.ListComboButtonOpts.Text(face, nil, textColor),
+		widget.ListComboButtonOpts.ListParams(&widget.ListParams{
+			ScrollContainerImage: listImage,
+			ScrollContainerPadding: &widget.Insets{
+				Left: 2, Right: 2, Top: 2, Bottom: 2,
+			},
+			EntryFace: face,
+			EntryColor: &widget.ListEntryColor{
+				Unselected:                 colorx.White,
+				Selected:                   colorx.Gold,
+				DisabledUnselected:         colorx.Gray,
+				DisabledSelected:           colorx.Gray,
+				SelectingBackground:        color.RGBA{R: 76, G: 65, B: 47, A: 255},
+				SelectedBackground:         color.RGBA{R: 48, G: 43, B: 34, A: 255},
+				FocusedBackground:          color.RGBA{R: 58, G: 51, B: 40, A: 255},
+				SelectingFocusedBackground: color.RGBA{R: 88, G: 73, B: 50, A: 255},
+				SelectedFocusedBackground:  color.RGBA{R: 65, G: 56, B: 42, A: 255},
+				DisabledSelectedBackground: color.RGBA{R: 28, G: 28, B: 27, A: 255},
+			},
+			EntryTextPadding: &widget.Insets{Left: 18, Right: 18, Top: 10, Bottom: 10},
+		}),
+		widget.ListComboButtonOpts.EntryLabelFunc(buttonLabel, entryLabel),
+		widget.ListComboButtonOpts.EntrySelectedHandler(
+			func(args *widget.ListComboButtonEntrySelectedEventArgs) {
+				selectedHandler(args.Entry)
+			},
+		),
+		widget.ListComboButtonOpts.MaxContentHeight(240),
+	)
 }

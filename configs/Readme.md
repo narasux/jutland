@@ -64,7 +64,12 @@
 ]
 ```
 
-## 图鉴引用配置（references.json5）
+## 图鉴引用配置（references.json5 / references.en.json5）
+
+图鉴引用按语言拆分为两个同结构文件：`references.json5` 为简体中文，
+`references.en.json5` 为英文。两个文件必须保持完全一致的 `name` 集合和武装条目数量；
+`name`、武器数量、口径、型号及素材作者署名属于稳定数据，不应在翻译时改变。
+运行时会按当前界面语言读取对应条目，英文条目缺失时回退到简体中文。
 
 ```json5
 [

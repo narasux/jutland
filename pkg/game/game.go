@@ -217,32 +217,36 @@ func (g *Game) initMenuButtons() {
 	if g.objStates == nil {
 		g.objStates = &objStates{}
 	}
+	menuFont := font.Hang
+	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
+		menuFont = font.OpenSans
+	}
 	g.objStates.MenuButton = &menuButtonStates{
 		MissionSelect: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuMissionSelect),
 			FontSize: menuFontSize,
-			Font:     font.LocalizedUI(font.Hang),
+			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeMissionSelect,
 		},
 		Collection: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuCollection),
 			FontSize: menuFontSize,
-			Font:     font.LocalizedUI(font.Hang),
+			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeCollection,
 		},
 		GameSetting: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuSettings),
 			FontSize: menuFontSize,
-			Font:     font.LocalizedUI(font.Hang),
+			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeGameSetting,
 		},
 		ExitGame: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuExit),
 			FontSize: menuFontSize,
-			Font:     font.LocalizedUI(font.Hang),
+			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeEnd,
 		},

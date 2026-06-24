@@ -40,3 +40,25 @@ func TestAutoUpdateMenuButtonStatesDoesNotOverlapEnglishText(t *testing.T) {
 		})
 	}
 }
+
+func TestAutoUpdateMenuButtonStatesKeepsClearGapOnWideScreen(t *testing.T) {
+	buttons := &menuButtonStates{
+		MissionSelect: &menuButton{Text: "Mission Select", Font: font.OpenSans},
+		Collection:    &menuButton{Text: "Collection", Font: font.OpenSans},
+		GameSetting:   &menuButton{Text: "Settings", Font: font.OpenSans},
+		ExitGame:      &menuButton{Text: "Exit Game", Font: font.OpenSans},
+	}
+	states := &objStates{MenuButton: buttons}
+	states.AutoUpdateMenuButtonStates(ebiten.NewImage(2048, 1280))
+
+	ordered := []*menuButton{
+		buttons.MissionSelect,
+		buttons.Collection,
+		buttons.GameSetting,
+		buttons.ExitGame,
+	}
+	for idx := 1; idx < len(ordered); idx++ {
+		gap := ordered[idx].PosX - ordered[idx-1].PosX - ordered[idx-1].Width
+		require.GreaterOrEqual(t, gap, menuMinimumGap)
+	}
+}
