@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jutland 清理战舰图片"
+  short_description: "仅清理战舰图片白色背景并生成透明和高对比预览供人工确认"
+  default_prompt: "使用 $jutland-clean-ship-image 清理给定战舰图片的白色背景并生成确认预览。"
