@@ -1,0 +1,27 @@
+.codex/skills/jutland-add-ship/agents/openai.yaml
+  s_02fd07ebe5d871::t_e6f87bc10207ba 3-4
+.codex/skills/jutland-add-ship/SKILL.md
+  s_02fd07ebe5d871::t_6b3da290a9a3b3 3,10-23,25-26,30-45,48,63-97
+  s_02fd07ebe5d871::t_8e68fee2060979 24,46-47,49-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "1737ad410f6de3efee9e54bacd6e60a805ebabe5",
+  "prompts": {},
+  "humans": {
+    "h_83f239dc907c66": {
+      "author": "narasux <suzh9@mail2.sysu.edu.cn>"
+    }
+  },
+  "sessions": {
+    "s_02fd07ebe5d871": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eea2f-3ce0-7b93-8ea9-1b9c6dcc7c7e",
+        "model": "gpt-5.5"
+      },
+      "human_author": null
+    }
+  }
+}
