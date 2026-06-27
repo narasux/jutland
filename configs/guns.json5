@@ -806,10 +806,10 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/381/52 双联装舰炮
+  // 德国海军 GER/380/52 双联装舰炮
   {
-    name: "GER/381/52/2",
-    bulletName: "GER/GB/381/1939",
+    name: "GER/380/52/2",
+    bulletName: "GER/GB/380/1939",
     bulletCount: 2,
     reloadTime: 10,
     range: 38,

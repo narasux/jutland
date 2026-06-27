@@ -936,7 +936,7 @@
     nation: "jp",
     type: "aircraft_carrier",
     typeAbbr: "CV",
-    year: 1945,
+    year: 1948,
     totalHP: 38570,
     horizontalDamageReduction: 0.3,
     verticalDamageReduction: 0.15,
@@ -944,7 +944,7 @@
     acceleration: 0.3,
     rotateSpeed: 0.75,
     length: 270,
-    width: 32,
+    width: 30,
     fundsCost: 500,
     timeCost: 52,
     weapon: {
@@ -1194,7 +1194,7 @@
     acceleration: 0.32,
     rotateSpeed: 0.8,
     length: 261,
-    width: 28,
+    width: 30,
     fundsCost: 450,
     timeCost: 48,
     weapon: {
@@ -9151,28 +9151,28 @@
       mainGuns: [
         // 前主炮 A
         {
-          name: "GER/381/52/2",
+          name: "GER/380/52/2",
           posPercent: 0.55,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
         // 前主炮 B
         {
-          name: "GER/381/52/2",
+          name: "GER/380/52/2",
           posPercent: 0.4,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
         // 后主炮 C
         {
-          name: "GER/381/52/2",
+          name: "GER/380/52/2",
           posPercent: -0.45,
           rightFiringArc: [45, 180],
           leftFiringArc: [180, 315]
         },
         // 后主炮 D
         {
-          name: "GER/381/52/2",
+          name: "GER/380/52/2",
           posPercent: -0.6,
           rightFiringArc: [45, 180],
           leftFiringArc: [180, 315]
