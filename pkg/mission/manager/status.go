@@ -46,6 +46,21 @@ func (m *MissionManager) updateMissionStatus() {
 		}
 		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
 	case state.MissionPaused:
+		if m.state.UI.DebugFlags.IsActive() {
+			// debug 模式下跳过确认面板，Q 直接退出，Esc 直接继续
+			if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
+				m.state.Core.MissionStatus = state.MissionFailed
+				m.state.Core.ConfirmQuitMission = true
+				return
+			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+				m.state.Core.MissionStatus = state.MissionRunning
+				m.state.Core.ConfirmQuitMission = false
+				return
+			}
+			return
+		}
+
 		input := state.PauseInputNone
 		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 			input = state.PauseInputQuit

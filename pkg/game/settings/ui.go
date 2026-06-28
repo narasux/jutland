@@ -2,6 +2,7 @@
 package settings
 
 import (
+	stdimg "image"
 	"image/color"
 	"math"
 
@@ -24,6 +25,8 @@ const (
 	titleFontSize  = 40
 	labelFontSize  = 24
 	buttonFontSize = 22
+
+	controlWidth = 140
 )
 
 type speedOption struct {
@@ -306,11 +309,11 @@ func newSettingsCombo(
 	border := color.RGBA{R: 212, G: 180, B: 112, A: 255}
 	buttonImage := &widget.ButtonImage{
 		Idle:    image.NewBorderedNineSliceColor(color.RGBA{R: 20, G: 22, B: 25, A: 250}, border, 2),
-		Hover:   image.NewBorderedNineSliceColor(color.RGBA{R: 45, G: 42, B: 35, A: 255}, colorx.Gold, 2),
-		Pressed: image.NewBorderedNineSliceColor(color.RGBA{R: 12, G: 14, B: 17, A: 255}, colorx.Gold, 2),
+		Hover:   image.NewBorderedNineSliceColor(color.RGBA{R: 45, G: 42, B: 35, A: 255}, colorx.Silver, 2),
+		Pressed: image.NewBorderedNineSliceColor(color.RGBA{R: 12, G: 14, B: 17, A: 255}, colorx.Silver, 2),
 	}
 	textColor := &widget.ButtonTextColor{
-		Idle: colorx.White, Hover: colorx.Gold, Pressed: colorx.White,
+		Idle: colorx.White, Hover: colorx.White, Pressed: colorx.White,
 		Disabled: color.RGBA{R: 120, G: 110, B: 100, A: 255},
 	}
 	listImage := &widget.ScrollContainerImage{
@@ -318,8 +321,21 @@ func newSettingsCombo(
 		Mask: image.NewNineSliceColor(colorx.White),
 	}
 
+	// 选项数量少无需滚动条，配置透明滑块使其不可见
+	transparent := image.NewNineSliceColor(color.RGBA{A: 0})
+	sliderHandleImg := &widget.ButtonImage{
+		Idle:    transparent,
+		Hover:   transparent,
+		Pressed: transparent,
+	}
+	sliderTrackImg := &widget.SliderTrackImage{
+		Idle:  transparent,
+		Hover: transparent,
+	}
+	fixedHandleSize := 0
+
 	return widget.NewListComboButton(
-		widget.ListComboButtonOpts.WidgetOpts(widget.WidgetOpts.MinSize(360, 52)),
+		widget.ListComboButtonOpts.WidgetOpts(widget.WidgetOpts.MinSize(controlWidth, 52)),
 		widget.ListComboButtonOpts.Entries(entries),
 		widget.ListComboButtonOpts.InitialEntry(selected),
 		widget.ListComboButtonOpts.ButtonParams(&widget.ButtonParams{
@@ -328,6 +344,7 @@ func newSettingsCombo(
 		}),
 		widget.ListComboButtonOpts.Text(face, nil, textColor),
 		widget.ListComboButtonOpts.ListParams(&widget.ListParams{
+			MinSize:              &stdimg.Point{X: controlWidth, Y: 0},
 			ScrollContainerImage: listImage,
 			ScrollContainerPadding: &widget.Insets{
 				Left: 2, Right: 2, Top: 2, Bottom: 2,
@@ -335,7 +352,7 @@ func newSettingsCombo(
 			EntryFace: face,
 			EntryColor: &widget.ListEntryColor{
 				Unselected:                 colorx.White,
-				Selected:                   colorx.Gold,
+				Selected:                   colorx.Silver,
 				DisabledUnselected:         colorx.Gray,
 				DisabledSelected:           colorx.Gray,
 				SelectingBackground:        color.RGBA{R: 76, G: 65, B: 47, A: 255},
@@ -346,6 +363,11 @@ func newSettingsCombo(
 				DisabledSelectedBackground: color.RGBA{R: 28, G: 28, B: 27, A: 255},
 			},
 			EntryTextPadding: &widget.Insets{Left: 18, Right: 18, Top: 10, Bottom: 10},
+			Slider: &widget.SliderParams{
+				HandleImage:     sliderHandleImg,
+				TrackImage:      sliderTrackImg,
+				FixedHandleSize: &fixedHandleSize,
+			},
 		}),
 		widget.ListComboButtonOpts.EntryLabelFunc(buttonLabel, entryLabel),
 		widget.ListComboButtonOpts.EntrySelectedHandler(

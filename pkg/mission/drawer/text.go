@@ -24,6 +24,12 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 		return
 	}
 
+	// debug 模式下不绘制遮罩和确认面板，只显示文字提示
+	if ms.UI.DebugFlags.IsActive() {
+		d.drawDebugPauseHint(screen, ms)
+		return
+	}
+
 	ui := state.CalcPauseUILayout(ms.View.Layout)
 	vector.FillRect(
 		screen, 0, 0, float32(ms.View.Layout.Width), float32(ms.View.Layout.Height),
@@ -56,6 +62,31 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 		color.RGBA{R: 77, G: 37, B: 33, A: 235},
 		color.RGBA{R: 214, G: 118, B: 91, A: 255},
 	)
+}
+
+// drawDebugPauseHint 在 debug 模式下绘制简洁的暂停提示文字（无遮罩）
+func (d *Drawer) drawDebugPauseHint(screen *ebiten.Image, ms *state.MissionState) {
+	hint := "游戏已暂停 | [Q] 退出  [Esc] 继续"
+
+	textFont := font.LocalizedUI(font.Kai)
+	textFace := text.GoTextFace{Source: textFont, Size: 22}
+	textW, textH := text.Measure(hint, &textFace, 0)
+
+	// 左下角位置，带半透明暗底
+	padX, padY := 12.0, 8.0
+	bgX := 8.0
+	bgY := float64(ms.View.Layout.Height) - 100.0
+	bgW := textW + padX*2
+	bgH := textH + padY*2
+	vector.FillRect(
+		screen,
+		float32(bgX), float32(bgY),
+		float32(bgW), float32(bgH),
+		color.RGBA{R: 3, G: 12, B: 20, A: 190},
+		false,
+	)
+
+	d.drawText(screen, hint, bgX+padX, bgY+padY, 22, textFont, colorx.White)
 }
 
 // drawPauseButton 绘制暂停面板按钮，并根据鼠标悬停状态调整边框

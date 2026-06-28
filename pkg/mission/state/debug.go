@@ -9,3 +9,8 @@ type DebugFlags struct {
 	// ShowPlaneHP 显示飞机生命值（当前 HP / 总 HP）
 	ShowPlaneHP bool
 }
+
+// IsActive 判断是否有任何调试标志已启用
+func (f DebugFlags) IsActive() bool {
+	return f.DamageColorByTeam || f.ShowCursorPosObjInfo || f.ShowPlaneHP
+}

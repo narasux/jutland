@@ -60,13 +60,14 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 		s.MenuButton.ExitGame,
 	}
 
-	totalWidth := updateMenuButtonSizes(buttons, menuFontSize)
+	baseSize := buttons[0].FontSize
+	totalWidth := updateMenuButtonSizes(buttons, baseSize)
 	gap := menuMinimumGap
 	availableWidth := max(screenWidth-2*menuHorizontalPadding, 0)
 	minimumWidth := totalWidth + gap*float64(len(buttons)-1)
 	if minimumWidth > availableWidth && minimumWidth > 0 {
 		scale := availableWidth / minimumWidth
-		totalWidth = updateMenuButtonSizes(buttons, menuFontSize*scale)
+		totalWidth = updateMenuButtonSizes(buttons, baseSize*scale)
 		gap *= scale
 	}
 

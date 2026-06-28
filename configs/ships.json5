@@ -592,7 +592,7 @@
     nation: "us",
     type: "aircraft_carrier",
     typeAbbr: "CV",
-    totalHP: 50000,
+    totalHP: 43400,
     horizontalDamageReduction: 0.3,
     verticalDamageReduction: 0.1,
     maxSpeed: 34,
@@ -600,7 +600,7 @@
     rotateSpeed: 0.8,
     length: 275,
     width: 34,
-    fundsCost: 635,
+    fundsCost: 575,
     timeCost: 60,
     weapon: {
       mainGuns: [

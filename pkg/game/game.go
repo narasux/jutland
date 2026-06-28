@@ -221,31 +221,37 @@ func (g *Game) initMenuButtons() {
 	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
 		menuFont = font.OpenSans
 	}
+	btnFontSize := menuFontSize
+	if i18n.CurrentLanguage() != i18n.LanguageEnglish {
+		// 中文字体在同等字号下视觉上明显小于拉���字体，适当放大
+		btnFontSize = 50
+	}
+
 	g.objStates.MenuButton = &menuButtonStates{
 		MissionSelect: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuMissionSelect),
-			FontSize: menuFontSize,
+			FontSize: btnFontSize,
 			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeMissionSelect,
 		},
 		Collection: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuCollection),
-			FontSize: menuFontSize,
+			FontSize: btnFontSize,
 			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeCollection,
 		},
 		GameSetting: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuSettings),
-			FontSize: menuFontSize,
+			FontSize: btnFontSize,
 			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeGameSetting,
 		},
 		ExitGame: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuExit),
-			FontSize: menuFontSize,
+			FontSize: btnFontSize,
 			Font:     menuFont,
 			Color:    colorx.White,
 			Mode:     GameModeEnd,
