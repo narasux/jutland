@@ -51,7 +51,7 @@
   // 日本海军 4联装 回天鱼雷
   {
     name: "JP/Kaiten/4",
-    bulletName: "JP/TB/Kaiten/1943",
+    bulletName: "JP/TB/Kaiten/1944",
     bulletCount: 4,
     shotInterval: 3,
     reloadTime: 300,
