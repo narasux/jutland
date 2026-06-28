@@ -589,28 +589,28 @@
   {
     name: "US/BB/2000/907",
     type: "bomb",
-    diameter: 457,
+    diameter: 610,
     damage: 4000,
     criticalRate: 0.1
   },
   {
     name: "US/BB/1000/454",
     type: "bomb",
-    diameter: 356,
+    diameter: 450,
     damage: 1800,
     criticalRate: 0.05
   },
   {
     name: "US/BB/500/227",
     type: "bomb",
-    diameter: 273,
+    diameter: 360,
     damage: 800,
     criticalRate: 0.02
   },
   {
     name: "US/BB/250/114",
     type: "bomb",
-    diameter: 160,
+    diameter: 250,
     damage: 335,
     criticalRate: 0.005
   },
