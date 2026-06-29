@@ -1313,25 +1313,15 @@ func (c *CollectionUI) drawShipBlueprint(screen *ebiten.Image, ship *objUnit.Bat
 	innerX, innerY := float64(rect.Min.X+24), float64(rect.Min.Y+18)
 	innerW, innerH := float64(rect.Dx()-48), float64(rect.Dy()-36)
 	halfHeight := (innerH - 12) / 2
-	c.drawer.drawCollectionImageFit(
-		screen,
-		shipImg.GetSide(ship.Name, 4),
-		innerX,
-		innerY,
-		innerW,
-		halfHeight,
-		0,
-		false,
+	sideImage := shipImg.GetSide(ship.Name, 4)
+	topImage := shipImg.GetTop(ship.Name, 4)
+	sharedScale := min(
+		collectionImageFitScale(sideImage, innerW, halfHeight, 0, false),
+		collectionImageFitScale(topImage, innerW, halfHeight, 90, false),
 	)
-	c.drawer.drawCollectionImageFit(
-		screen,
-		shipImg.GetTop(ship.Name, 4),
-		innerX,
-		innerY+halfHeight+12,
-		innerW,
-		halfHeight,
-		90,
-		false,
+	c.drawer.drawCollectionImageScaled(screen, sideImage, innerX, innerY, innerW, halfHeight, 0, sharedScale)
+	c.drawer.drawCollectionImageScaled(
+		screen, topImage, innerX, innerY+halfHeight+12, innerW, halfHeight, 90, sharedScale,
 	)
 }
 

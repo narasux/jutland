@@ -125,7 +125,7 @@
     "type": "Aircraft Carrier",
     "armaments": [
       {
-        "label": "Main Battery",
+        "label": "Dual-purpose Guns",
         "value": "8x1 127mm/38"
       },
       {
@@ -168,7 +168,7 @@
     "type": "Aircraft Carrier",
     "armaments": [
       {
-        "label": "Main Battery",
+        "label": "Dual-purpose Guns",
         "value": "12x1 127mm/38"
       },
       {
@@ -211,7 +211,7 @@
     "type": "Aircraft Carrier",
     "armaments": [
       {
-        "label": "Main Battery",
+        "label": "Dual-purpose Guns",
         "value": "8x2 100mm/65 Type 98"
       },
       {

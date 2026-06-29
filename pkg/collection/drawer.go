@@ -57,6 +57,14 @@ func (d *Drawer) drawCollectionImageFit(
 	if img == nil || width <= 0 || height <= 0 {
 		return
 	}
+	scale := collectionImageFitScale(img, width, height, rotation, allowUpscale)
+	d.drawCollectionImageScaled(screen, img, x, y, width, height, rotation, scale)
+}
+
+func collectionImageFitScale(img *ebiten.Image, width, height, rotation float64, allowUpscale bool) float64 {
+	if img == nil || width <= 0 || height <= 0 {
+		return 0
+	}
 	imgW, imgH := float64(img.Bounds().Dx()), float64(img.Bounds().Dy())
 	rotatedW, rotatedH := imgW, imgH
 	if int(math.Mod(math.Abs(rotation), 180)) == 90 {
@@ -68,6 +76,18 @@ func (d *Drawer) drawCollectionImageFit(
 	} else {
 		scale = min(8, scale)
 	}
+	return scale
+}
+
+func (d *Drawer) drawCollectionImageScaled(
+	screen *ebiten.Image,
+	img *ebiten.Image,
+	x, y, width, height, rotation, scale float64,
+) {
+	if img == nil || width <= 0 || height <= 0 || scale <= 0 {
+		return
+	}
+	imgW, imgH := float64(img.Bounds().Dx()), float64(img.Bounds().Dy())
 	opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 	opts.GeoM.Translate(-imgW/2, -imgH/2)
 	opts.GeoM.Rotate(rotation * math.Pi / 180)
