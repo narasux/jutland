@@ -302,19 +302,19 @@
       },
       {
         "label": "Fighters",
-        "value": "A7M2 Reppūx32"
+        "value": "A7M2 Reppū x32"
       },
       {
         "label": "Dive Bombers",
-        "value": "D4Y3 Suiseix16"
+        "value": "D4Y3 Suisei x16"
       },
       {
         "label": "Attack Aircraft",
-        "value": "B7A2 Ryūseix32"
+        "value": "B7A2 Ryūsei x32"
       },
       {
         "label": "Reconnaissance Aircraft",
-        "value": "C6N1 Saiunx4"
+        "value": "C6N1 Saiun x4"
       }
     ],
     "description": "Shinano was converted from the incomplete third Yamato-class battleship into a heavily protected aircraft carrier. She left Yokosuka in November 1944 before fitting-out was complete. Torpedoes from USS Archerfish exposed poor watertight integrity and damage control, causing the enormous carrier to capsize and sink the following morning.",
@@ -427,7 +427,7 @@
       },
       {
         "label": "Anti-aircraft Guns",
-        "value": "12x3 25mm/60 Type 96"
+        "value": "16x3 25mm/60 Type 96"
       },
       {
         "label": "Fighters",
@@ -443,8 +443,12 @@
       }
     ],
     "description": "Shōkaku was the lead ship of a fast, capable class of Japanese fleet carriers commissioned shortly before the Pacific War. Together with Zuikaku she fought at Pearl Harbor, the Coral Sea, and the Santa Cruz Islands. USS Cavalla torpedoed her during the Battle of the Philippine Sea in June 1944.",
-    "author": "Unknown",
+    "author": "PomboCZ",
     "links": [
+      {
+        name: "Shōkaku 1944-06",
+        url: "https://www.shipbucket.com/drawings/4323"
+      },
       {
         "name": "Wikipedia — Shōkaku",
         "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Sh%C5%8Dkaku"
