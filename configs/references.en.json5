@@ -220,15 +220,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox24"
+        "value": "A6M Zero x24"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax12"
+        "value": "D3A x12"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x24"
+        "value": "B5N2 x24"
       }
     ],
     "description": "Hakuryū is the game's name for an enlarged development of Japan's wartime G-15 carrier design. The concept builds on the armored flight deck and protected aviation facilities of Taihō while expanding the hull and air group. No ship of this design was laid down before Japan's carrier program collapsed.",
@@ -259,15 +259,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox24"
+        "value": "A6M Zero x24"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax12"
+        "value": "D3A x12"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x20"
+        "value": "B5N2 x20"
       }
     ],
     "description": "Taihō was the Imperial Japanese Navy's first fleet carrier built with an armored flight deck. Commissioned in March 1944, she joined the First Mobile Fleet for the Battle of the Philippine Sea. A torpedo from USS Albacore ruptured aviation-fuel systems, and accumulated vapors later exploded, sinking the carrier on 19 June.",
@@ -349,15 +349,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox28"
+        "value": "A6M Zero x28"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax28"
+        "value": "D3A x28"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x36"
+        "value": "B5N2 x36"
       }
     ],
     "description": "Akagi was laid down as an Amagi-class battlecruiser and converted into an aircraft carrier under treaty restrictions. After early service with three flight decks, she was rebuilt with a single full-length deck and became a core member of the First Air Fleet. American dive bombers fatally damaged her at Midway.",
@@ -392,15 +392,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox24"
+        "value": "A6M Zero x24"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x48"
+        "value": "B5N2 x48"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax24"
+        "value": "D3A x24"
       }
     ],
     "description": "Kaga began as a Tosa-class battleship and was converted into an aircraft carrier after the Washington Naval Treaty. A major reconstruction replaced her original multi-level flight decks and made her one of Japan's principal fleet carriers. She took part in the Pearl Harbor attack and was fatally bombed at Midway.",
@@ -431,15 +431,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox20"
+        "value": "A6M Zero x20"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax32"
+        "value": "D3A x32"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x32"
+        "value": "B5N2 x32"
       }
     ],
     "description": "Shōkaku was the lead ship of a fast, capable class of Japanese fleet carriers commissioned shortly before the Pacific War. Together with Zuikaku she fought at Pearl Harbor, the Coral Sea, and the Santa Cruz Islands. USS Cavalla torpedoed her during the Battle of the Philippine Sea in June 1944.",
@@ -470,15 +470,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox21"
+        "value": "A6M Zero x21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x21"
+        "value": "B5N2 x21"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax21"
+        "value": "D3A x21"
       }
     ],
     "description": "Sōryū was a fast Japanese fleet carrier commissioned in 1937 and designed from the outset for carrier operations. She participated in the attack on Pearl Harbor and the Indian Ocean raid. At Midway, bombs from American SBD Dauntless dive bombers ignited fueled and armed aircraft, leaving her beyond control.",
@@ -509,15 +509,15 @@
       },
       {
         "label": "Fighters",
-        "value": "D3Ax24"
+        "value": "D3A x24"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x24"
+        "value": "B5N2 x24"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax24"
+        "value": "D3A x24"
       }
     ],
     "description": "Hiryū was a close development of Sōryū and served with her in the Second Carrier Division. During the Battle of Midway, Hiryū's air groups launched two attacks that crippled USS Yorktown. American dive bombers later set the Japanese carrier ablaze, and she was scuttled after the crew abandoned ship.",
@@ -540,24 +540,28 @@
       },
       {
         "label": "Anti-aircraft Guns",
-        "value": "8x3 25mm/60 Type 96"
+        "value": "12x3 25mm/60 Type 96"
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox15"
+        "value": "A6M Zero x15"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax20"
+        "value": "D3A x20"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x23"
+        "value": "B5N2 x23"
       }
     ],
     "description": "Hiyō was converted during construction from the passenger liner Izumo Maru into a fleet-support carrier. Her large air group was offset by slower speed and machinery inherited from the merchant design. After earlier mechanical trouble and torpedo damage, she was sunk by aircraft during the Battle of the Philippine Sea in June 1944.",
-    "author": "Unknown",
+    "author": "PomboCZ",
     "links": [
+      {
+        name: "Hiyō 1943",
+        url: "https://www.shipbucket.com/drawings/4314"
+      },
       {
         "name": "Wikipedia — Hiyō",
         "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiy%C5%8D"
@@ -583,11 +587,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox18"
+        "value": "A6M Zero x18"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x24"
+        "value": "B5N2 x24"
       }
     ],
     "description": "Ryūjō was a light aircraft carrier built to exploit a loophole in interwar treaty limits. Her narrow hull and two-level hangar produced serious stability problems that required reconstruction. She supported operations in China and the early Pacific War before American carrier aircraft sank her at the Battle of the Eastern Solomons.",
@@ -614,11 +618,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox21"
+        "value": "A6M Zero x21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x9"
+        "value": "B5N2 x9"
       }
     ],
     "description": "Shōhō began as the submarine tender Tsurugizaki and was later converted into a light aircraft carrier. Commissioned as a carrier in January 1942, she covered the Port Moresby invasion force. Aircraft from USS Lexington and Yorktown overwhelmed her at the Battle of the Coral Sea, making her Japan's first carrier loss of the war.",
@@ -645,11 +649,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox21"
+        "value": "A6M Zero x21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x9"
+        "value": "B5N2 x9"
       }
     ],
     "description": "Chitose was built as a seaplane tender with provision for later conversion into an aircraft carrier. Rebuilt as a light carrier after Midway, she fought in the Philippine Sea and served as a decoy in the Battle of Leyte Gulf. American carrier aircraft sank her off Cape Engaño on 25 October 1944.",
@@ -680,11 +684,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox18"
+        "value": "A6M Zero x18"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x9"
+        "value": "B5N2 x9"
       }
     ],
     "description": "Taiyō was converted from the passenger liner Kasuga Maru into an escort carrier. Too slow for fleet operations, she primarily trained aircrews, transported aircraft, and escorted convoys. After surviving earlier submarine attacks, she was torpedoed by USS Rasher west of Luzon in August 1944 and sank following a violent aviation-fuel explosion.",
@@ -711,11 +715,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox8"
+        "value": "A6M Zero x8"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x6"
+        "value": "B5N2 x6"
       }
     ],
     "description": "Hōshō was the first ship completed as a purpose-built aircraft carrier. Her experimental layout helped the Imperial Japanese Navy develop carrier doctrine and aviation procedures during the interwar period. Obsolete for combat by the Pacific War, she mainly served as a training carrier and survived to repatriate Japanese personnel after the surrender.",
@@ -976,15 +980,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zerox6"
+        "value": "A6M Zero x6"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3Ax8"
+        "value": "D3A x8"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2x8"
+        "value": "B5N2 x8"
       }
     ],
     "description": "Ise was the lead ship of the Ise-class battleships. After Midway, her two aftermost main turrets were removed and replaced by a short flight deck, hangar, and catapults, creating a hybrid aviation battleship. Aircraft and trained crews were unavailable, so the planned air group never became operational in combat.",
