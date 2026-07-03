@@ -446,7 +446,7 @@
     "author": "PomboCZ",
     "links": [
       {
-        name: "Shōkaku 1944-06",
+        name: "Shipbucket - Shōkaku 1944-06",
         url: "https://www.shipbucket.com/drawings/4323"
       },
       {
@@ -559,7 +559,7 @@
     "author": "PomboCZ",
     "links": [
       {
-        name: "Hiyō 1943",
+        name: "Shipbucket - Hiyō 1943",
         url: "https://www.shipbucket.com/drawings/4314"
       },
       {
@@ -697,6 +697,41 @@
       {
         "name": "Wikipedia — Taiyō",
         "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Taiy%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "shinyo",
+    "displayName": "Shin'yō",
+    "type": "Escort Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Fighters",
+        "value": "A6M Zero x18 (game approximation)"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "B5N2 x9 (game approximation)"
+      }
+    ],
+    "description": "Shin'yō was converted from the German ocean liner Scharnhorst after the ship was trapped in Japan during the war in Europe. Commissioned as an escort carrier in late 1943, she mainly covered convoys and training duties. USS Spadefish torpedoed her in November 1944, causing aviation-fuel explosions that destroyed the ship.",
+    "author": "BB1987",
+    "links": [
+      {
+        "name": "Shipbucket - Shin'yō 1943",
+        "url": "https://www.shipbucket.com/drawings/4333"
+      },
+      {
+        "name": "Wikipedia — Shin'yō",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Shin%27y%C5%8D"
       }
     ]
   },

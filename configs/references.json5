@@ -265,7 +265,7 @@
     author: "PomboCZ",
     links: [
       {
-        name: "Shōkaku 1944-06",
+        name: "Shipbucket - Shokaku 1944-06",
         url: "https://www.shipbucket.com/drawings/4323"
       },
       {
@@ -330,7 +330,7 @@
     author: "PomboCZ",
     links: [
       {
-        name: "Hiyō 1943",
+        name: "Shipbucket - Hiyo 1943",
         url: "https://www.shipbucket.com/drawings/4314"
       },
       {
@@ -414,6 +414,29 @@
       {
         name: "维基百科 - 大鹰号航空母舰",
         url: "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%B7%B9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
+    name: "shinyo",
+    displayName: "神鹰",
+    type: "护航航空母舰",
+    armaments: [
+      {label: "高平炮", value: "4x2 127mm/40 八九式"},
+      {label: "高炮", value: "8x3 25mm/60 九六式"},
+      {label: "制空战斗机", value: "零式舰战（A6M）x18（游戏近似）"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9（游戏近似）"},
+    ],
+    description: "神鹰号航空母舰原为德国邮轮沙恩霍斯特号，因第二次世界大战爆发滞留日本，后由日本海军购入并按护航航空母舰改装。该舰 1943 年 12 月服役，主要承担护航与训练任务；1944 年 11 月护卫 Hi-81 船团时遭美军潜艇鱼雷命中，因航空燃料爆炸而沉没。",
+    author: "BB1987",
+    links: [
+      {
+        name: "Shipbucket - Shinyo 1943",
+        url: "https://www.shipbucket.com/drawings/4333"
+      },
+      {
+        name: "维基百科 - 神鹰号航空母舰",
+        url: "https://zh.wikipedia.org/zh-cn/%E7%A5%9E%E9%B7%B9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
       }
     ]
   },

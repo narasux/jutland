@@ -853,6 +853,7 @@
           "shokaku",
           "hiyo",
           "taiyo",
+          "shinyo",
           "hosho"
         ],
       },
@@ -1426,44 +1427,50 @@
       },
       {
         name: "shokaku",
-        pos: [11, 44],
+        pos: [15, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       // FIXME 这里位置留给云龙级
       {
         name: "hiyo",
-        pos: [11, 46],
+        pos: [11, 44],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "ryujo",
-        pos: [12, 47],
+        pos: [12, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "shoho",
-        pos: [11, 48],
+        pos: [11, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "chitose",
-        pos: [12, 49],
+        pos: [12, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "taiyo",
-        pos: [11, 50],
+        pos: [11, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "shinyo",
+        pos: [12, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "hosho",
-        pos: [12, 51],
+        pos: [11, 50],
         rotation: 90,
         belongPlayer: "HA"
       },

@@ -40,7 +40,7 @@ func TestLocalizedReferenceFilesStayInSync(t *testing.T) {
 	english, err := Load(filepath.Join(config.ConfigBaseDir, "references.en.json5"))
 	require.NoError(t, err)
 
-	require.Len(t, chinese, 115)
+	require.Len(t, chinese, 116)
 	require.NoError(t, ValidateLocales(chinese, english))
 
 	englishByName := make(map[string]Reference, len(english))
