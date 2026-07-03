@@ -28,6 +28,8 @@ other = "初始资金 {{.Funds}}  |  舰队上限 {{.ShipLimit}}  |  油井 {{.O
 other = "我方 {{.AllyShips}} 舰  vs  敌方 {{.EnemyShips}} 舰  |  我方增援点 {{.AllyPoints}}  敌方增援点 {{.EnemyPoints}}"
 [MissionPaused]
 other = "任务暂停"
+[MissionDebugPauseHint]
+other = "游戏已暂停 | [Q] 退出  [Esc] 继续"
 [MissionResume]
 other = "继续"
 [MissionAbandon]
@@ -236,6 +238,10 @@ other = "航空"
 other = "资金: {{.Funds}}"
 [SidebarFleets]
 other = "我方舰队: {{.Ally}}    敌方舰队: {{.Enemy}}"
+[SidebarAllyFleet]
+other = "我方舰队: {{.Count}}"
+[SidebarEnemyFleet]
+other = "敌方舰队: {{.Count}}"
 [SidebarShowState]
 other = "状态显示"
 [SidebarDamageNumbers]

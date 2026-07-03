@@ -5,6 +5,7 @@ import (
 
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
@@ -12,9 +13,10 @@ import (
 
 // MissionMetadata 任务元配置
 type MissionMetadata struct {
-	Name        string
-	DisplayName string
-	MapCfg      *mapcfg.MapCfg
+	Name         string
+	DisplayName  string
+	MapCfg       *mapcfg.MapCfg
+	displayNames map[i18n.Language]string
 	// 最大战舰数量
 	MaxShipCount int
 	// 初始资金
@@ -22,7 +24,8 @@ type MissionMetadata struct {
 	// 初始位置
 	InitCameraPos objPos.MapPos
 	// 关卡描述
-	Description string
+	Description  string
+	descriptions map[i18n.Language]string
 	// 统计信息（加载时计算）
 	AllyShipCount       int // 我方初始舰船数
 	EnemyShipCount      int // 敌方初始舰船数
@@ -67,7 +70,15 @@ var missionMetadata map[string]MissionMetadata
 
 // Get 获取任务元配置
 func Get(mission string) MissionMetadata {
-	return missionMetadata[mission]
+	md := missionMetadata[mission]
+	lang := i18n.CurrentLanguage()
+	if value := md.displayNames[lang]; value != "" {
+		md.DisplayName = value
+	}
+	if value := md.descriptions[lang]; value != "" {
+		md.Description = value
+	}
+	return md
 }
 
 // AvailableMissions 获取可用任务列表

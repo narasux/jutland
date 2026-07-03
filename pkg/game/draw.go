@@ -109,7 +109,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	d.drawText(screen, misMD.DisplayName, panelX, curY, 36, font.LocalizedUI(font.Hang), titleClr)
 
 	curY += 50
-	d.drawText(screen, misMD.MapCfg.DisplayName, panelX, curY, 20, font.LocalizedUI(font.Kai), subtitleClr)
+	d.drawText(screen, misMD.MapCfg.LocalizedDisplayName(), panelX, curY, 20, font.LocalizedUI(font.Kai), subtitleClr)
 
 	// 标题分隔线
 	curY += 32

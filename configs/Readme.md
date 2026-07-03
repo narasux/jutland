@@ -465,6 +465,8 @@
     name: "darwin",
     // 展示用名称
     displayName: "达尔文港",
+    // 英文展示用名称；英文界面使用，缺失时回退 displayName
+    displayNameEn: "Darwin Harbour",
     // 地图资源名称
     source: "darwin"
   }
@@ -493,6 +495,8 @@
     name: "default",
     // 展示用名称
     displayName: "默认",
+    // 英文展示用名称；英文界面使用，缺失时回退 displayName
+    displayNameEn: "Default",
     // 初始资金
     initFunds: 10000,
     // 初始相机视角位置（需在地图范围内）
@@ -501,10 +505,10 @@
     mapName: "default",
     // 最大战舰数量（目前不生效）
     maxShipCount: 5,
-    // 关卡描述
-    description: [
-      "默认关卡"
-    ],
+    // 关卡描述；中文界面使用
+    description: "默认关卡",
+    // 英文关卡描述；英文界面使用，缺失时回退 description
+    descriptionEn: "Default mission",
     // 增援点信息
     initReinforcePoints: [
       {

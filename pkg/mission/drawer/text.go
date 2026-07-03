@@ -66,7 +66,7 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 
 // drawDebugPauseHint 在 debug 模式下绘制简洁的暂停提示文字（无遮罩）
 func (d *Drawer) drawDebugPauseHint(screen *ebiten.Image, ms *state.MissionState) {
-	hint := "游戏已暂停 | [Q] 退出  [Esc] 继续"
+	hint := i18n.Text(i18n.MsgMissionDebugPauseHint)
 
 	textFont := font.LocalizedUI(font.Kai)
 	textFace := text.GoTextFace{Source: textFont, Size: 22}

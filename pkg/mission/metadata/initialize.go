@@ -9,6 +9,7 @@ import (
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
@@ -17,11 +18,13 @@ import (
 type rawMissionMetadata struct {
 	Name                string                          `json:"name"`
 	DisplayName         string                          `json:"displayName"`
+	DisplayNameEn       string                          `json:"displayNameEn"`
 	InitFunds           int64                           `json:"initFunds"`
 	InitCameraPos       [2]int                          `json:"initCameraPos"`
 	MapName             string                          `json:"mapName"`
 	MaxShipCount        int                             `json:"maxShipCount"`
 	Description         string                          `json:"description"`
+	DescriptionEn       string                          `json:"descriptionEn"`
 	InitShips           []rawInitShipMetadata           `json:"initShips"`
 	InitReinforcePoints []rawInitReinforcePointMetadata `json:"initReinforcePoints"`
 	InitOilPlatforms    []rawInitOilPlatformMetadata    `json:"initOilPlatforms"`
@@ -122,13 +125,21 @@ func init() {
 		}
 		// 元数据
 		missionMetadata[md.Name] = MissionMetadata{
-			Name:                md.Name,
-			DisplayName:         md.DisplayName,
-			MaxShipCount:        md.MaxShipCount,
-			InitFunds:           md.InitFunds,
-			InitCameraPos:       objPos.New(md.InitCameraPos[0], md.InitCameraPos[1]),
-			MapCfg:              mapcfg.GetByName(md.MapName),
-			Description:         md.Description,
+			Name:        md.Name,
+			DisplayName: md.DisplayName,
+			displayNames: map[i18n.Language]string{
+				i18n.LanguageZhHans:  md.DisplayName,
+				i18n.LanguageEnglish: md.DisplayNameEn,
+			},
+			MaxShipCount:  md.MaxShipCount,
+			InitFunds:     md.InitFunds,
+			InitCameraPos: objPos.New(md.InitCameraPos[0], md.InitCameraPos[1]),
+			MapCfg:        mapcfg.GetByName(md.MapName),
+			Description:   md.Description,
+			descriptions: map[i18n.Language]string{
+				i18n.LanguageZhHans:  md.Description,
+				i18n.LanguageEnglish: md.DescriptionEn,
+			},
 			AllyShipCount:       allyShips,
 			EnemyShipCount:      enemyShips,
 			AllyReinforceCount:  allyReinforce,

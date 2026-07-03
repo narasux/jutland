@@ -394,7 +394,7 @@ func (p *Panel) drawMinimapPlanes(screen *ebiten.Image, ms *state.MissionState) 
 func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 	ui := p.layout
 	y := ui.Map.Y + ui.Map.H + 20
-	p.drawCard(screen, ui.Panel.X+16, y, ui.Panel.W-32, 78)
+	p.drawCard(screen, ui.Panel.X+16, y, ui.Panel.W-32, 104)
 
 	selfFleet := ms.Fleet(ms.Player.CurPlayer)
 	enemyFleet := ms.Fleet(ms.Player.CurEnemy)
@@ -410,9 +410,18 @@ func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 	)
 	p.drawText(
 		screen,
-		i18n.Format(i18n.MsgSidebarFleets, map[string]any{"Ally": selfFleet.Total, "Enemy": enemyFleet.Total}),
+		i18n.Format(i18n.MsgSidebarAllyFleet, map[string]any{"Count": selfFleet.Total}),
 		ui.Panel.X+28,
 		y+40,
+		16,
+		bodyFont,
+		colorx.Silver,
+	)
+	p.drawText(
+		screen,
+		i18n.Format(i18n.MsgSidebarEnemyFleet, map[string]any{"Count": enemyFleet.Total}),
+		ui.Panel.X+28,
+		y+64,
 		16,
 		bodyFont,
 		colorx.Silver,
@@ -488,7 +497,7 @@ func (p *Panel) mapToSidebar(ms *state.MissionState, rx, ry float64) (float64, f
 }
 
 func (p *Panel) settingRowsTop() float64 {
-	return p.layout.Map.Y + p.layout.Map.H + 116
+	return p.layout.Map.Y + p.layout.Map.H + 142
 }
 
 func calcLayout(screen layout.ScreenLayout, expanded bool) sidebarLayout {

@@ -11,6 +11,7 @@ import (
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
@@ -75,6 +76,8 @@ type MapCfg struct {
 	Name string `json:"name"`
 	// 展示名称
 	DisplayName string `json:"displayName"`
+	// 英文展示名称
+	DisplayNameEn string `json:"displayNameEn"`
 	// 原始素材名
 	Source string `json:"source"`
 	// 地图数据
@@ -85,6 +88,14 @@ type MapCfg struct {
 	Width int
 	// 地图高度
 	Height int
+}
+
+// LocalizedDisplayName 返回当前语言下的地图展示名称。
+func (cfg *MapCfg) LocalizedDisplayName() string {
+	if i18n.CurrentLanguage() == i18n.LanguageEnglish && cfg.DisplayNameEn != "" {
+		return cfg.DisplayNameEn
+	}
+	return cfg.DisplayName
 }
 
 // 初始化方块信息

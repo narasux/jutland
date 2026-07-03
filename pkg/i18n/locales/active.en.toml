@@ -28,6 +28,8 @@ other = "Starting funds {{.Funds}}  |  Fleet limit {{.ShipLimit}}  |  Oil platfo
 other = "Allied {{.AllyShips}} ships vs Enemy {{.EnemyShips}} ships  |  Allied reinforcements {{.AllyPoints}}  Enemy reinforcements {{.EnemyPoints}}"
 [MissionPaused]
 other = "Mission Paused"
+[MissionDebugPauseHint]
+other = "Mission paused | [Q] Quit  [Esc] Resume"
 [MissionResume]
 other = "Resume"
 [MissionAbandon]
@@ -236,6 +238,10 @@ other = "Aviation"
 other = "Funds: {{.Funds}}"
 [SidebarFleets]
 other = "Allied fleet: {{.Ally}}    Enemy fleet: {{.Enemy}}"
+[SidebarAllyFleet]
+other = "Allied fleet: {{.Count}}"
+[SidebarEnemyFleet]
+other = "Enemy fleet: {{.Count}}"
 [SidebarShowState]
 other = "Status display"
 [SidebarDamageNumbers]
