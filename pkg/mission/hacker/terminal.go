@@ -34,7 +34,7 @@ const (
 	LineTypeInput
 )
 
-// 缓冲区行
+// Line 缓冲区行
 type Line struct {
 	Text string
 	Type LineType
@@ -81,6 +81,7 @@ func NewTerminal() *Terminal {
 	}
 }
 
+// CurInputString ...
 func (t *Terminal) CurInputString() string {
 	cursor := lo.Ternary(time.Now().Unix()&1 == 0, "_", "")
 	return inputPrefix + t.Input.String() + cursor
