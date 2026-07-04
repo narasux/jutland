@@ -2902,6 +2902,257 @@
     }
   },
   {
+    // 云龙
+    name: "unryu",
+    nation: "jp",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1944,
+    totalHP: 20400,
+    horizontalDamageReduction: 0.22,
+    verticalDamageReduction: 0.03,
+    maxSpeed: 34,
+    acceleration: 0.42,
+    rotateSpeed: 0.95,
+    length: 227,
+    width: 22,
+    fundsCost: 280,
+    timeCost: 34,
+    weapon: {
+      mainGuns: [
+        // 右高角炮 A
+        {
+          name: "JP/127/40/2/Type89/DP",
+          posPercent: 0.59,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高角炮 A
+        {
+          name: "JP/127/40/2/Type89/DP",
+          posPercent: 0.59,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高角炮 B
+        {
+          name: "JP/127/40/2/Type89/DP",
+          posPercent: 0.45,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高角炮 B
+        {
+          name: "JP/127/40/2/Type89/DP",
+          posPercent: 0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高角炮 C
+        {
+          name: "JP/127/40/2/Type89/DP",
+          posPercent: -0.56,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高角炮 C
+        {
+          name: "JP/127/40/2/Type89/DP",
+          posPercent: -0.56,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 前高炮 2 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.95,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.95,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 右舷高炮 7 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.17,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后高炮 3 座
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.97,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [180, 300]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.99,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [180, 300]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.97,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [180, 300]
+        },
+        // 左高炮 9 座
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.69,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.75,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      rockets: [
+        {
+          name: "JP/120/28/Type5/AA",
+          posPercent: 0.77,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/28/Type5/AA",
+          posPercent: 0.77,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/120/28/Type5/AA",
+          posPercent: 0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/28/Type5/AA",
+          posPercent: 0.74,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/120/28/Type5/AA",
+          posPercent: 0.7,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/120/28/Type5/AA",
+          posPercent: 0.7,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 1.6,
+      groups: [
+        {
+          name: "A7M2",
+          maxCount: 24
+        },
+        {
+          name: "D4Y3",
+          maxCount: 6
+        },
+        {
+          name: "B7A2",
+          maxCount: 24
+        }
+      ]
+    }
+  },
+  {
     // 飞鹰
     name: "hiyo",
     nation: "jp",

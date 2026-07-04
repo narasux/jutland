@@ -861,6 +861,7 @@
           "chitose",
           "hiryu",
           "shokaku",
+          "unryu",
           "hiyo",
           "taiyo",
           "shinyo",
@@ -1441,7 +1442,12 @@
         rotation: 90,
         belongPlayer: "HA"
       },
-      // FIXME 这里位置留给云龙级
+      {
+        name: "unryu",
+        pos: [14, 52],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
       {
         name: "hiyo",
         pos: [11, 44],

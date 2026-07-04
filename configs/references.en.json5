@@ -569,6 +569,49 @@
     ]
   },
   {
+    "name": "unryu",
+    "displayName": "Unryū",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/40 Type 89"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "21x3 25mm/60 Type 96"
+      },
+      {
+        "label": "Anti-aircraft Rockets",
+        "value": "6x28 120mm Type 5"
+      },
+      {
+        "label": "Fighters",
+        "value": "A7M2 Reppū x24"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "D4Y3 Suisei x6"
+      },
+      {
+        "label": "Attack Aircraft",
+        "value": "B7A2 Ryūsei x24"
+      }
+    ],
+    "description": "Unryū was the lead ship of a wartime carrier class derived from Hiryū and simplified for mass production. Commissioned in August 1944, she never operated as a fleet carrier because Japan lacked trained aircrew and aircraft. In December 1944, USS Redfish torpedoed her while she was transporting Ōka special-attack aircraft to the Philippines.",
+    "author": "BB1987, Smokey455",
+    "links": [
+      {
+        "name": "DeviantArt - Unryu-class aircraft carrier",
+        "url": "https://www.deviantart.com/smokey445/art/Unryu-class-aircraft-carrier-974694860"
+      },
+      {
+        "name": "Wikipedia — Unryū",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Unry%C5%AB"
+      }
+    ]
+  },
+  {
     "name": "ryujo",
     "displayName": "Ryūjō",
     "type": "Light Aircraft Carrier",

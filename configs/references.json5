@@ -340,6 +340,31 @@
     ]
   },
   {
+    name: "unryu",
+    displayName: "云龙",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "6x2 127mm/40 八九式"},
+      {label: "高炮", value: "21x3 25mm/60 九六式"},
+      {label: "防空火箭", value: "6x28 120mm 五式"},
+      {label: "制空战斗机", value: "烈风舰战（A7M2）x24"},
+      {label: "俯冲轰炸机", value: "彗星舰爆（D4Y3）x6"},
+      {label: "舰载攻击机", value: "流星舰攻（B7A2）x24"},
+    ],
+    description: "云龙号航空母舰是日本海军云龙级航空母舰首舰，以飞龙号为基础简化设计并面向战时量产。该舰于 1944 年 8 月服役，但因飞行员和舰载机不足未能作为舰队航母投入决战；同年 12 月在向菲律宾运送樱花特别攻击机时，被美国潜艇红鱼号鱼雷击中后发生爆炸并沉没。游戏中按 1944 年后期防空强化状态配置，并采用云龙级设计舰载机编制。",
+    author: "BB1987, Smokey455",
+    links: [
+      {
+        name: "DeviantArt - Unryu-class aircraft carrier",
+        url: "https://www.deviantart.com/smokey445/art/Unryu-class-aircraft-carrier-974694860"
+      },
+      {
+        name: "维基百科 - 云龙号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%9B%B2%E9%BE%8D%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "ryujo",
     displayName: "龙骧",
     type: "轻型航空母舰",
