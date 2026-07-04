@@ -173,6 +173,30 @@
       }
     ]
   },
+  {
+    name: "card",
+    displayName: "卡德",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "2x1 127mm/38"},
+      {label: "高炮", value: "8x2 40mm/60"},
+      {label: "高炮", value: "20x1 20mm/70"},
+      {label: "制空战斗机", value: "野猫（F4F-3）x12"},
+      {label: "鱼雷攻击机", value: "蹂躏者（TBD-1）x12"},
+    ],
+    description: "卡德号（USS Card, CVE-11）是美国海军博格级护航航空母舰，1942 年服役，1943 年作为 TG 21.14 旗旗舰在北大西洋执行反潜猎杀任务。",
+    author: "Craig Hoefer, Gollevainen, Ultraking101",
+    links: [
+      {
+        name: "Shipbucket - USS Card CVE-11 (March 1943)",
+        url: "https://www.shipbucket.com/drawings/9260"
+      },
+      {
+        name: "维基百科 - 卡德号",
+        url: "https://en.wikipedia.org/wiki/USS_Card"
+      }
+    ]
+  },
   // 日本海军
   {
     name: "hakuryu",

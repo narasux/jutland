@@ -284,6 +284,45 @@
     ]
   },
   {
+    "name": "card",
+    "displayName": "Card",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "2x1 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x2 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "20x1 20mm/70"
+      },
+      {
+        "label": "Fighters",
+        "value": "F4F-3 x12"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "TBD-1 x12"
+      }
+    ],
+    "description": "USS Card (CVE-11) was a Bogue-class escort carrier commissioned in 1942. In 1943 she served as flagship of TG 21.14 in North Atlantic hunter-killer operations against German submarines.",
+    "author": "Craig Hoefer, Gollevainen, Ultraking101",
+    "links": [
+      {
+        "name": "Shipbucket — USS Card CVE-11 (March 1943)",
+        "url": "https://www.shipbucket.com/drawings/9260"
+      },
+      {
+        "name": "Wikipedia — Card",
+        "url": "https://en.wikipedia.org/wiki/USS_Card"
+      }
+    ]
+  },
+  {
     "name": "hakuryu",
     "displayName": "Hakuryū",
     "type": "Aircraft Carrier",

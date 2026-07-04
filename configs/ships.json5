@@ -1375,7 +1375,7 @@
     fundsCost: 315,
     timeCost: 34,
     weapon: {
-      secondaryGuns: [
+      mainGuns: [
         // 40mm 博福斯
         // 前四联装
         {
@@ -1571,6 +1571,237 @@
         {
           name: "TBD-1",
           maxCount: 9
+        }
+      ]
+    }
+  },
+  {
+    // 卡德
+    name: "card",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CVE",
+    year: 1943,
+    totalHP: 14200,
+    horizontalDamageReduction: 0.12,
+    verticalDamageReduction: 0.02,
+    maxSpeed: 18,
+    acceleration: 0.28,
+    rotateSpeed: 0.75,
+    length: 151,
+    width: 21,
+    fundsCost: 175,
+    timeCost: 26,
+    weapon: {
+      mainGuns: [
+        // 5 英寸高平炮
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.78,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 200]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.78,
+          rightFiringArc: [160, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [
+        // 40mm 博福斯双联装
+        // 右舷高炮 A
+        {
+          name: "US/40/60/2",
+          posPercent: 0.7,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高炮 A
+        {
+          name: "US/40/60/2",
+          posPercent: 0.7,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高炮 B
+        {
+          name: "US/40/60/2",
+          posPercent: 0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高炮 B
+        {
+          name: "US/40/60/2",
+          posPercent: 0.6,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高炮 C
+        {
+          name: "US/40/60/2",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高炮 C
+        {
+          name: "US/40/60/2",
+          posPercent: -0.53,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰艉高炮 2 座
+        {
+          name: "US/40/60/2",
+          posPercent: -0.96,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: -0.96,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰艏 2 座
+        {
+          name: "US/20/70",
+          posPercent: 0.93,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.93,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
+        },
+        // 右舷 9 座
+        {
+          name: "US/20/70",
+          posPercent: 0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 9 座
+        {
+          name: "US/20/70",
+          posPercent: 0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ]
+    },
+    aircraft: {
+      takeOffTime: 2.8,
+      groups: [
+        {
+          name: "F4F-3",
+          maxCount: 12
+        },
+        {
+          name: "TBD-1",
+          maxCount: 12
         }
       ]
     }

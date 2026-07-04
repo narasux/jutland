@@ -852,6 +852,7 @@
           "saratoga",
           "essex",
           "princeton",
+          "card",
           "hakuryu",
           "taiho",
           "shinano",
@@ -1280,6 +1281,12 @@
       {
         name: "princeton",
         pos: [31, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "card",
+        pos: [32, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
