@@ -120,49 +120,6 @@
     ]
   },
   {
-    "name": "yorktown",
-    "displayName": "Yorktown",
-    "type": "Aircraft Carrier",
-    "armaments": [
-      {
-        "label": "Dual-purpose Guns",
-        "value": "8x1 127mm/38"
-      },
-      {
-        "label": "Anti-aircraft Guns",
-        "value": "4x4 40mm/60"
-      },
-      {
-        "label": "Anti-aircraft Guns",
-        "value": "32x2 20mm/70"
-      },
-      {
-        "label": "Fighters",
-        "value": "F4F-3 Wildcatx36"
-      },
-      {
-        "label": "Torpedo Bombers",
-        "value": "TBD-1 Devastatorx20"
-      },
-      {
-        "label": "Dive Bombers",
-        "value": "SBD-3 Dauntlessx40"
-      }
-    ],
-    "description": "USS Yorktown (CV-5) was the lead ship of the Yorktown-class aircraft carriers. Damaged at the Battle of the Coral Sea, she received emergency repairs in time to fight at Midway in June 1942. Japanese aircraft and submarine torpedoes ultimately left her beyond recovery, and she sank on 7 June.",
-    "author": "midnike",
-    "links": [
-      {
-        "name": "USN Aircraft Carrier YORKTOWN",
-        "url": "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-YORKTOWN-CV-5-563330656"
-      },
-      {
-        "name": "Wikipedia — Yorktown",
-        "url": "https://en.wikipedia.org/wiki/USS%20Yorktown%20%28CV-5%29"
-      }
-    ]
-  },
-  {
     "name": "saratoga",
     "displayName": "Saratoga",
     "type": "Aircraft Carrier",
@@ -181,15 +138,15 @@
       },
       {
         "label": "Fighters",
-        "value": "F4F-3 Wildcatx36"
+        "value": "F4F-3 x36"
       },
       {
         "label": "Dive Bombers",
-        "value": "SBD-3 Dauntlessx40"
+        "value": "SBD-3 x40"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "TBD-1 Devastatorx20"
+        "value": "TBD-1 x20"
       }
     ],
     "description": "USS Saratoga (CV-3) began as a Lexington-class battlecruiser and was converted into an aircraft carrier under the Washington Naval Treaty. She served throughout the Pacific War and survived repeated torpedo attacks. After the war she was expended during Operation Crossroads and sank after the underwater Baker nuclear test.",
@@ -202,6 +159,92 @@
       {
         "name": "Wikipedia — Saratoga",
         "url": "https://en.wikipedia.org/wiki/USS%20Saratoga%20%28CV-3%29"
+      }
+    ]
+  },
+  {
+    "name": "yorktown",
+    "displayName": "Yorktown",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x1 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "32x2 20mm/70"
+      },
+      {
+        "label": "Fighters",
+        "value": "F4F-3 x36"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "TBD-1 x20"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "SBD-3 x40"
+      }
+    ],
+    "description": "USS Yorktown (CV-5) was the lead ship of the Yorktown-class aircraft carriers. Damaged at the Battle of the Coral Sea, she received emergency repairs in time to fight at Midway in June 1942. Japanese aircraft and submarine torpedoes ultimately left her beyond recovery, and she sank on 7 June.",
+    "author": "midnike",
+    "links": [
+      {
+        "name": "USN Aircraft Carrier YORKTOWN",
+        "url": "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-YORKTOWN-CV-5-563330656"
+      },
+      {
+        "name": "Wikipedia — Yorktown",
+        "url": "https://en.wikipedia.org/wiki/USS%20Yorktown%20%28CV-5%29"
+      }
+    ]
+  },
+  {
+    "name": "essex",
+    "displayName": "Essex",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 + 4x1 127mm/38"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "42x1 20mm/70"
+      },
+      {
+        "label": "Fighters",
+        "value": "F4F-3 x36"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "TBD-1 x18"
+      },
+      {
+        "label": "Dive Bombers",
+        "value": "SBD-3 x36"
+      }
+    ],
+    "description": "USS Essex (CV-9), lead ship of the Essex-class aircraft carriers, entered service in 1942 and joined Pacific operations in 1943. The class became the core of the U.S. Navy's wartime fast carrier force, combining a large air group with heavy anti-aircraft defenses. This game entry uses a 1943 fit; because TBF Avenger and F6F Hellcat aircraft are not yet available in the repository, TBD-1 and F4F-3 are used as gameplay approximations.",
+    "author": "Charybdis",
+    "links": [
+      {
+        "name": "Shipbucket — USS Essex 1943",
+        "url": "https://www.shipbucket.com/drawings/7230"
+      },
+      {
+        "name": "Wikipedia — Essex",
+        "url": "https://en.wikipedia.org/wiki/USS%20Essex%20%28CV-9%29"
       }
     ]
   },

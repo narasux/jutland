@@ -850,6 +850,7 @@
           "britannic",
           "yorktown",
           "saratoga",
+          "essex",
           "hakuryu",
           "taiho",
           "shinano",
@@ -1258,14 +1259,20 @@
       },
       // === US CV ===
       {
-        name: "yorktown",
+        name: "saratoga",
         pos: [32, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "saratoga",
+        name: "yorktown",
         pos: [31, 46],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "essex",
+        pos: [32, 47],
         rotation: 90,
         belongPlayer: "HA"
       },

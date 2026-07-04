@@ -76,6 +76,31 @@
   },
   // 美国海军
   {
+    name: "saratoga",
+    displayName: "萨拉托加",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "12x1 127mm/38"},
+      {label: "高炮", value: "11x4 40mm/60"},
+      {label: "高炮", value: "20x2 20mm/70"},
+      {label: "制空战斗机", value: "野猫（F4F-3）x36"},
+      {label: "俯冲轰炸机", value: "无畏（SBD-3）x40"},
+      {label: "鱼雷攻击机", value: "蹂躏者（TBD-1）x20"},
+    ],
+    description: "萨拉托加号（CV-3）美国海军列克星敦航空母舰级的二号舰。原计划中其为战列巡洋舰，但受《华盛顿海军条约》所限，而改为重型航空母舰。该舰是美国海军少数在二战之前就已造好，最后安然度过战火的航空母舰之一。战后由于参与比基尼环礁的 “十字路口” 核武器试验，被原子弹破坏并沉没。",
+    author: "midnike",
+    links: [
+      {
+        name: "USN Aircraft Carrier LEXINGTON",
+        url: "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-LEXINGTON-CV-2-563330163"
+      },
+      {
+        name: "维基百科 - 萨拉托加号",
+        url: "https://zh.wikipedia.org/wiki/%E8%96%A9%E6%8B%89%E6%89%98%E5%8A%A0%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6_(CV-3)"
+      }
+    ]
+  },
+  {
     name: "yorktown",
     displayName: "约克城",
     type: "航空母舰",
@@ -101,27 +126,27 @@
     ]
   },
   {
-    name: "saratoga",
-    displayName: "萨拉托加",
+    name: "essex",
+    displayName: "埃塞克斯",
     type: "航空母舰",
     armaments: [
-      {label: "高平炮", value: "12x1 127mm/38"},
-      {label: "高炮", value: "11x4 40mm/60"},
-      {label: "高炮", value: "20x2 20mm/70"},
+      {label: "高平炮", value: "4x2 + 4x1 127mm/38"},
+      {label: "高炮", value: "10x4 40mm/60"},
+      {label: "高炮", value: "42x1 20mm/70"},
       {label: "制空战斗机", value: "野猫（F4F-3）x36"},
-      {label: "俯冲轰炸机", value: "无畏（SBD-3）x40"},
-      {label: "鱼雷攻击机", value: "蹂躏者（TBD-1）x20"},
+      {label: "鱼雷攻击机", value: "蹂躏者（TBD-1）x18"},
+      {label: "俯冲轰炸机", value: "无畏（SBD-3）x36"},
     ],
-    description: "萨拉托加号（CV-3）美国海军列克星敦航空母舰级的二号舰。原计划中其为战列巡洋舰，但受《华盛顿海军条约》所限，而改为重型航空母舰。该舰是美国海军少数在二战之前就已造好，最后安然度过战火的航空母舰之一。战后由于参与比基尼环礁的 “十字路口” 核武器试验，被原子弹破坏并沉没。",
-    author: "midnike",
+    description: "埃塞克斯号（CV-9）是美国海军埃塞克斯级航空母舰首舰，1942 年服役，1943 年投入太平洋战场。该级舰成为美国二战舰队航母的核心型号，具备较大的机库、飞行甲板和强防空火力。本游戏条目采用 1943 年状态；因仓库暂缺 TBF 复仇者和 F6F 地狱猫，舰载机分别以 TBD-1 和 F4F-3 作游戏近似。",
+    author: "Charybdis",
     links: [
       {
-        name: "USN Aircraft Carrier LEXINGTON",
-        url: "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-LEXINGTON-CV-2-563330163"
+        name: "Shipbucket - USS Essex 1943",
+        url: "https://www.shipbucket.com/drawings/7230"
       },
       {
-        name: "维基百科 - 萨拉托加号",
-        url: "https://zh.wikipedia.org/wiki/%E8%96%A9%E6%8B%89%E6%89%98%E5%8A%A0%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6_(CV-3)"
+        name: "维基百科 - 埃塞克斯号",
+        url: "https://zh.wikipedia.org/wiki/%E5%9F%83%E5%A1%9E%E5%85%8B%E6%96%AF%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0_(CV-9)"
       }
     ]
   },
