@@ -150,6 +150,29 @@
       }
     ]
   },
+  {
+    name: "princeton",
+    displayName: "普林斯顿",
+    type: "航空母舰",
+    armaments: [
+      {label: "高炮", value: "2x4 + 9x2 40mm/60"},
+      {label: "高炮", value: "18x1 20mm/70"},
+      {label: "制空战斗机", value: "野猫（F4F-3）x25（F6F 游戏近似）"},
+      {label: "鱼雷攻击机", value: "蹂躏者（TBD-1）x9（TBF 游戏近似）"},
+    ],
+    description: "普林斯顿号（USS Princeton, CVL-23）是美国海军独立级轻型航空母舰，1943 年由克利夫兰级轻巡洋舰舰体改建服役，1944 年参加菲律宾海、帕劳和莱特湾等作战。",
+    author: "Ian Roberts",
+    links: [
+      {
+        name: "Shipbucket - USS Princeton CVL-23 (October 1944)",
+        url: "https://www.shipbucket.com/drawings/8065"
+      },
+      {
+        name: "维基百科 - 普林斯顿号",
+        url: "https://en.wikipedia.org/wiki/USS_Princeton_(CVL-23)"
+      }
+    ]
+  },
   // 日本海军
   {
     name: "hakuryu",

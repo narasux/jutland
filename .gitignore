@@ -26,7 +26,7 @@ go.work
 
 # custom
 raw_resources/
-scripts/
+/scripts
 tools/
 bin/
 

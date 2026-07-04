@@ -385,7 +385,8 @@ func main() {
 	removeEnclosedMinArea := flag.Int("remove-enclosed-min-area", 0, "remove residual near-white components with at least this many pixels; 0 disables")
 	componentLimit := flag.Int("component-limit", 40, "number of largest residual components to print")
 	analyzeOnly := flag.Bool("analyze-only", false, "print residual near-white components after edge cleanup without writing files")
-	previews := flag.Bool("previews", true, "write checker and dark-background previews when output is written")
+	previews := flag.Bool("previews", false, "write checker and dark-background previews when output is written")
+	backupBeforeAggressive := flag.Bool("backup-before-aggressive", false, "copy an existing output before enclosed-component cleanup")
 	var removeBoxes boxFlags
 	flag.Var(&removeBoxes, "remove-box", "limit enclosed component removal to a box minX,minY,maxX,maxY; repeatable")
 	flag.Parse()
@@ -418,12 +419,14 @@ func main() {
 
 	removedComponents, removedPixels := 0, 0
 	if *removeEnclosedMinArea > 0 {
-		if _, err := os.Stat(outPath); err == nil {
-			backup := backupPath(outPath)
-			if err := copyFile(outPath, backup); err != nil {
-				log.Fatal(err)
+		if *backupBeforeAggressive {
+			if _, err := os.Stat(outPath); err == nil {
+				backup := backupPath(outPath)
+				if err := copyFile(outPath, backup); err != nil {
+					log.Fatal(err)
+				}
+				fmt.Printf("backup_before_aggressive_cleanup=%s\n", backup)
 			}
-			fmt.Printf("backup_before_aggressive_cleanup=%s\n", backup)
 		}
 		removedComponents, removedPixels = removeLargeComponents(img, components, *removeEnclosedMinArea, removeBoxes, uint8(*componentMin), uint8(*maxSpread))
 	}

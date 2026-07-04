@@ -1357,6 +1357,224 @@
       ]
     }
   },
+  {
+    // 普林斯顿
+    name: "princeton",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CVL",
+    year: 1944,
+    totalHP: 13000,
+    horizontalDamageReduction: 0.2,
+    verticalDamageReduction: 0.06,
+    maxSpeed: 31,
+    acceleration: 0.36,
+    rotateSpeed: 0.85,
+    length: 190,
+    width: 22,
+    fundsCost: 315,
+    timeCost: 34,
+    weapon: {
+      secondaryGuns: [
+        // 40mm 博福斯
+        // 前四联装
+        {
+          name: "US/40/60/4",
+          posPercent: 0.88,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后四联装
+        {
+          name: "US/40/60/4",
+          posPercent: -0.98,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [180, 300]
+        },
+        // 右舷双联装 4 座
+        {
+          name: "US/40/60/2",
+          posPercent: 0.54,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: 0.45,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: -0.78,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷双联装 5 座
+        {
+          name: "US/40/60/2",
+          posPercent: 0.54,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: 0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: -0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/2",
+          posPercent: -0.78,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右舷 8 座
+        {
+          name: "US/20/70",
+          posPercent: 0.73,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.7,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 10 座
+        {
+          name: "US/20/70",
+          posPercent: 0.73,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.7,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.67,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.55,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 2.5,
+      groups: [
+        {
+          name: "F4F-3",
+          maxCount: 25
+        },
+        {
+          name: "TBD-1",
+          maxCount: 9
+        }
+      ]
+    }
+  },
   // 日本海军
   {
     // 白龙

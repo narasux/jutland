@@ -851,6 +851,7 @@
           "yorktown",
           "saratoga",
           "essex",
+          "princeton",
           "hakuryu",
           "taiho",
           "shinano",
@@ -1273,6 +1274,12 @@
       {
         name: "essex",
         pos: [32, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "princeton",
+        pos: [31, 48],
         rotation: 90,
         belongPlayer: "HA"
       },

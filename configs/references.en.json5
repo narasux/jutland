@@ -249,6 +249,41 @@
     ]
   },
   {
+    "name": "princeton",
+    "displayName": "Princeton",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "2x4 + 9x2 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "18x1 20mm/70"
+      },
+      {
+        "label": "Fighters",
+        "value": "F4F-3 x25 (F6F gameplay approximation)"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "TBD-1 x9 (TBF gameplay approximation)"
+      }
+    ],
+    "description": "USS Princeton (CVL-23) was an Independence-class light aircraft carrier converted from a Cleveland-class light-cruiser hull. Commissioned in 1943, she served with the fast carrier forces through the Central Pacific and was lost after Japanese air attack during the Battle of Leyte Gulf on 24 October 1944.",
+    "author": "Ian Roberts",
+    "links": [
+      {
+        "name": "Shipbucket — USS Princeton CVL-23 (October 1944)",
+        "url": "https://www.shipbucket.com/drawings/8065"
+      },
+      {
+        "name": "Wikipedia — Princeton",
+        "url": "https://en.wikipedia.org/wiki/USS_Princeton_%28CVL-23%29"
+      }
+    ]
+  },
+  {
     "name": "hakuryu",
     "displayName": "Hakuryū",
     "type": "Aircraft Carrier",

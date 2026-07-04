@@ -20,7 +20,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 - 图鉴：`configs/references.json5`
 - 测试任务：`configs/missions.json5` 中的 `TestAll`
 - 正式图片：`resources/images/ships/{top,side}/<type>/<name>.png`
-- 缩放前备份：`resources/images/ships/original/{top,side}/<type>/<name>.png`
+- 缩放前原尺寸图：放项目根目录，命名为 `<ship name> side.png`、`<ship name> top.png`，例如 `princeton side.png`、`princeton top.png`
 - 缩放脚本：`scripts/resize_ship_image.py`
 
 `type` 必须匹配 `pkg/resources/images/ship/ship.go` 扫描的现有目录，例如 `aircraft_carrier`、`battleship`、`cruiser`、`destroyer`、`frigate`、`torpedo_boat`、`cargo`、`hospital`。
@@ -44,7 +44,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 ### 3. 备份并等比例缩放
 
 - 必须使用 `scripts/resize_ship_image.py`，不要为单舰临时重写缩放代码。系统 Python 缺少 Pillow 时，先调用 `load_workspace_dependencies` 获取工作区 Python。
-- 脚本会在缩放前保留原尺寸备份；已有备份内容不同时会拒绝覆盖。备份路径使用 `resources/images/ships/original/{top,side}/<type>/<name>.png`。
+- 脚本会在缩放前校验并保留原尺寸图；已有原尺寸图内容不同时会拒绝覆盖。备份路径使用项目根目录文件，并用实际舰名替代 `<ship name>`，例如 `princeton side.png`、`princeton top.png`。不要使用 `resources/images/ships/original`。
 - `length` 和 `width` 写入四舍五入后的真实舰体尺寸；航母 `width` 使用舰体宽度，不用飞行甲板外廓宽度。
 - 正式 PNG 是运行时的 `zoom=4` 资源，加载器再生成 1/2 和 1/4 档；因此长轴通常必须保持约 `length*4`。提高该数值会改变舰船显示尺寸，不能用作保细节手段。
 - 在拆分阶段去除不必要的透明空白，但保留细线所需安全边距，避免把目标像素预算浪费在过大画布上。
@@ -57,7 +57,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 
 ```bash
 python3 scripts/resize_ship_image.py input.png output.png \
-  --backup resources/images/ships/original/top/aircraft_carrier/example.png \
+  --backup "example top.png" \
   --target-long-axis 1044 --mode line-art --preview-dir /tmp/example-preview
 ```
 
