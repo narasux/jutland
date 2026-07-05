@@ -692,8 +692,46 @@
     }
   },
   {
-    // 零式
-    name: "A6M_0",
+    // 九六式舰战
+    name: "A5M2a",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 22,
+    damageReduction: 0.25,
+    maxSpeed: 440,
+    acceleration: 26,
+    rotateSpeed: 17,
+    length: 8,
+    width: 11,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 1.7,
+    range: 1200,
+    description: [
+      "战斗机（日）",
+      "2 x 7.7mm 机枪",
+    ],
+    weapon: {
+      guns: [
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 零式舰战二一型
+    name: "A6M2b",
     nation: "jp",
     type: "fighter",
     typeAbbr: "F",
@@ -712,6 +750,7 @@
     range: 3350,
     description: [
       "战斗机（日）",
+      "零式舰载战斗机二一型",
       "2 x 20mm 机炮",
       "2 x 7.7mm 机枪",
     ],

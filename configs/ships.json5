@@ -2043,7 +2043,7 @@
       takeOffTime: 1.8,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 24
         },
         {
@@ -2225,7 +2225,7 @@
       takeOffTime: 1.8,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 24
         },
         {
@@ -2940,7 +2940,7 @@
       takeOffTime: 1.6,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 28
         },
         {
@@ -3221,7 +3221,7 @@
       takeOffTime: 1.6,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 24
         },
         {
@@ -3388,7 +3388,7 @@
       takeOffTime: 1.5,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 21
         },
         {
@@ -3555,7 +3555,7 @@
       takeOffTime: 1.5,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 24
         },
         {
@@ -3764,7 +3764,7 @@
       takeOffTime: 1.7,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 20
         },
         {
@@ -4182,7 +4182,7 @@
       takeOffTime: 2.1,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 15
         },
         {
@@ -4307,7 +4307,7 @@
       takeOffTime: 2.8,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 18
         },
         {
@@ -4400,7 +4400,7 @@
       takeOffTime: 2.4,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 21
         },
         {
@@ -4535,7 +4535,7 @@
       takeOffTime: 2.3,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 21
         },
         {
@@ -4670,7 +4670,7 @@
       takeOffTime: 2.8,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 18
         },
         {
@@ -4805,7 +4805,7 @@
       takeOffTime: 2.8,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 18
         },
         {
@@ -4912,7 +4912,7 @@
       takeOffTime: 4,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 8
         },
         {
@@ -8499,7 +8499,7 @@
       takeOffTime: 6,
       groups: [
         {
-          name: "A6M_0",
+          name: "A6M2b",
           maxCount: 6
         },
         {

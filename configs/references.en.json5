@@ -337,7 +337,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x24"
+        "value": "A6M2b Zero Model 21 x24"
       },
       {
         "label": "Dive Bombers",
@@ -376,7 +376,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x24"
+        "value": "A6M2b Zero Model 21 x24"
       },
       {
         "label": "Dive Bombers",
@@ -466,7 +466,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x28"
+        "value": "A6M2b Zero Model 21 x28"
       },
       {
         "label": "Dive Bombers",
@@ -509,7 +509,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x24"
+        "value": "A6M2b Zero Model 21 x24"
       },
       {
         "label": "Torpedo Bombers",
@@ -548,7 +548,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x20"
+        "value": "A6M2b Zero Model 21 x20"
       },
       {
         "label": "Dive Bombers",
@@ -587,7 +587,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x21"
+        "value": "A6M2b Zero Model 21 x21"
       },
       {
         "label": "Torpedo Bombers",
@@ -661,7 +661,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x15"
+        "value": "A6M2b Zero Model 21 x15"
       },
       {
         "label": "Dive Bombers",
@@ -747,7 +747,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x18"
+        "value": "A6M2b Zero Model 21 x18"
       },
       {
         "label": "Torpedo Bombers",
@@ -778,7 +778,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x21"
+        "value": "A6M2b Zero Model 21 x21"
       },
       {
         "label": "Torpedo Bombers",
@@ -809,7 +809,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x21"
+        "value": "A6M2b Zero Model 21 x21"
       },
       {
         "label": "Torpedo Bombers",
@@ -844,7 +844,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x18"
+        "value": "A6M2b Zero Model 21 x18"
       },
       {
         "label": "Torpedo Bombers",
@@ -875,7 +875,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x18 (game approximation)"
+        "value": "A6M2b Zero Model 21 x18 (game approximation)"
       },
       {
         "label": "Torpedo Bombers",
@@ -910,7 +910,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x8"
+        "value": "A6M2b Zero Model 21 x8"
       },
       {
         "label": "Torpedo Bombers",
@@ -1175,7 +1175,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M Zero x6"
+        "value": "A6M2b Zero Model 21 x6"
       },
       {
         "label": "Dive Bombers",
@@ -3572,14 +3572,27 @@
     ]
   },
   {
-    "name": "A6M_0",
-    "displayName": "A6M Zero",
+    "name": "A5M2a",
+    "displayName": "A5M2a Claude",
     "armaments": [],
     "description": "",
     "author": "",
     "links": [
       {
-        "name": "Wikipedia — A6M Zero",
+        "name": "Wikipedia — Mitsubishi A5M",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A5M"
+      }
+    ]
+  },
+  {
+    "name": "A6M2b",
+    "displayName": "A6M2b Zero Model 21",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — Mitsubishi A6M Zero",
         "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A6M%20Zero"
       }
     ]
