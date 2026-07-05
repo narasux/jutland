@@ -1343,7 +1343,7 @@
       takeOffTime: 1.5,
       groups: [
         {
-          name: "F4F-3",
+          name: "F6F-3",
           maxCount: 36
         },
         {
@@ -1351,7 +1351,7 @@
           maxCount: 18
         },
         {
-          name: "SBD-3",
+          name: "SB2C-4",
           maxCount: 36
         }
       ]
@@ -1565,7 +1565,7 @@
       takeOffTime: 2.5,
       groups: [
         {
-          name: "F4F-3",
+          name: "F6F-3",
           maxCount: 25
         },
         {
@@ -1800,7 +1800,7 @@
           maxCount: 12
         },
         {
-          name: "TBD-1",
+          name: "TBF-1",
           maxCount: 12
         }
       ]

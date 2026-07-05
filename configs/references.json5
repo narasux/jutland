@@ -133,11 +133,11 @@
       {label: "高平炮", value: "4x2 + 4x1 127mm/38"},
       {label: "高炮", value: "10x4 40mm/60"},
       {label: "高炮", value: "42x1 20mm/70"},
-      {label: "制空战斗机", value: "野猫（F4F-3）x36"},
+      {label: "制空战斗机", value: "地狱猫（F6F-3）x36"},
       {label: "鱼雷攻击机", value: "复仇者（TBF-1）x18"},
-      {label: "俯冲轰炸机", value: "无畏（SBD-3）x36"},
+      {label: "俯冲轰炸机", value: "地狱俯冲者（SB2C-4）x36"},
     ],
-    description: "埃塞克斯号（CV-9）是美国海军埃塞克斯级航空母舰首舰，1942 年服役，1943 年投入太平洋战场。该级舰成为美国二战舰队航母的核心型号，具备较大的机库、飞行甲板和强防空火力。本游戏条目采用 1943 年状态；因仓库暂缺 F6F 地狱猫，舰载战斗机以 F4F-3 作游戏近似。",
+    description: "埃塞克斯号（CV-9）是美国海军埃塞克斯级航空母舰首舰，1942 年服役，1943 年投入太平洋战场。该级舰成为美国二战舰队航母的核心型号，具备较大的机库、飞行甲板和强防空火力。本游戏条目舰载机使用 F6F-3、TBF-1 与 SB2C-4 表现其快速航母编组。",
     author: "Charybdis",
     links: [
       {
@@ -157,7 +157,7 @@
     armaments: [
       {label: "高炮", value: "2x4 + 9x2 40mm/60"},
       {label: "高炮", value: "18x1 20mm/70"},
-      {label: "制空战斗机", value: "野猫（F4F-3）x25（F6F 游戏近似）"},
+      {label: "制空战斗机", value: "地狱猫（F6F-3）x25"},
       {label: "鱼雷攻击机", value: "复仇者（TBF-1）x9"},
     ],
     description: "普林斯顿号（USS Princeton, CVL-23）是美国海军独立级轻型航空母舰，1943 年由克利夫兰级轻巡洋舰舰体改建服役，1944 年参加菲律宾海、帕劳和莱特湾等作战。",
@@ -182,7 +182,7 @@
       {label: "高炮", value: "8x2 40mm/60"},
       {label: "高炮", value: "20x1 20mm/70"},
       {label: "制空战斗机", value: "野猫（F4F-3）x12"},
-      {label: "鱼雷攻击机", value: "蹂躏者（TBD-1）x12"},
+      {label: "鱼雷攻击机", value: "复仇者（TBF-1）x12"},
     ],
     description: "卡德号（USS Card, CVE-11）是美国海军博格级护航航空母舰，1942 年服役，1943 年作为 TG 21.14 旗旗舰在北大西洋执行反潜猎杀任务。",
     author: "Craig Hoefer, Gollevainen, Ultraking101",
@@ -2356,6 +2356,14 @@
   {
     name: "F2A-3",
     displayName: "水牛",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "F6F-3",
+    displayName: "地狱猫",
     armaments: [],
     description: "",
     author: "",

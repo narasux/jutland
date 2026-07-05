@@ -224,7 +224,7 @@
       },
       {
         "label": "Fighters",
-        "value": "F4F-3 x36"
+        "value": "F6F-3 x36"
       },
       {
         "label": "Torpedo Bombers",
@@ -232,10 +232,10 @@
       },
       {
         "label": "Dive Bombers",
-        "value": "SBD-3 x36"
+        "value": "SB2C-4 x36"
       }
     ],
-    "description": "USS Essex (CV-9), lead ship of the Essex-class aircraft carriers, entered service in 1942 and joined Pacific operations in 1943. The class became the core of the U.S. Navy's wartime fast carrier force, combining a large air group with heavy anti-aircraft defenses. This game entry uses a 1943 fit; because F6F Hellcat aircraft are not yet available in the repository, F4F-3 is used as a gameplay approximation.",
+    "description": "USS Essex (CV-9), lead ship of the Essex-class aircraft carriers, entered service in 1942 and joined Pacific operations in 1943. The class became the core of the U.S. Navy's wartime fast carrier force, combining a large air group with heavy anti-aircraft defenses. This game entry uses F6F-3, TBF-1, and SB2C-4 aircraft.",
     "author": "Charybdis",
     "links": [
       {
@@ -263,7 +263,7 @@
       },
       {
         "label": "Fighters",
-        "value": "F4F-3 x25 (F6F gameplay approximation)"
+        "value": "F6F-3 x25"
       },
       {
         "label": "Torpedo Bombers",
@@ -306,7 +306,7 @@
       },
       {
         "label": "Torpedo Bombers",
-        "value": "TBD-1 x12"
+        "value": "TBF-1 x12"
       }
     ],
     "description": "USS Card (CVE-11) was a Bogue-class escort carrier commissioned in 1942. In 1943 she served as flagship of TG 21.14 in North Atlantic hunter-killer operations against German submarines.",
@@ -3685,6 +3685,19 @@
       {
         "name": "Wikipedia — F2A-3 Buffalo",
         "url": "https://en.wikipedia.org/wiki/Brewster%20F2A%20Buffalo"
+      }
+    ]
+  },
+  {
+    "name": "F6F-3",
+    "displayName": "F6F-3 Hellcat",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — F6F-3 Hellcat",
+        "url": "https://en.wikipedia.org/wiki/Grumman%20F6F%20Hellcat"
       }
     ]
   },
