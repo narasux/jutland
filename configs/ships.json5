@@ -1347,7 +1347,7 @@
           maxCount: 36
         },
         {
-          name: "TBD-1",
+          name: "TBF-1",
           maxCount: 18
         },
         {
@@ -1569,7 +1569,7 @@
           maxCount: 25
         },
         {
-          name: "TBD-1",
+          name: "TBF-1",
           maxCount: 9
         }
       ]

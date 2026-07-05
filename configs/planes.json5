@@ -346,6 +346,56 @@
     }
   },
   {
+    // 水牛
+    name: "F2A-3",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 32,
+    damageReduction: 0.45,
+    maxSpeed: 517,
+    acceleration: 28,
+    rotateSpeed: 12,
+    length: 8,
+    width: 11,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 3.2,
+    range: 1550,
+    description: [
+      "战斗机（美）",
+      "4 x 12.7mm 机枪",
+    ],
+    weapon: {
+      guns: [
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+    }
+  },
+  {
     // 无畏
     name: "SBD-3",
     nation: "us",
@@ -415,6 +465,73 @@
     }
   },
   {
+    // 地狱俯冲者
+    name: "SB2C-4",
+    nation: "us",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    totalHP: 55,
+    damageReduction: 0.5,
+    maxSpeed: 475,
+    acceleration: 24,
+    rotateSpeed: 7,
+    length: 11,
+    width: 15,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 7.6,
+    range: 1900,
+    description: [
+      "俯冲轰炸机（美）",
+      "2 x 20mm 机炮（前向）",
+      "2 x 7.62mm 机枪（后座）",
+      "1 x 2000 磅，2 x 500 磅炸弹"
+    ],
+    weapon: {
+      guns: [
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/7.62/2",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/907",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/227",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/227",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 5
+    }
+  },
+  {
     // 蹂躏者
     name: "TBD-1",
     nation: "us",
@@ -449,6 +566,54 @@
         },
         {
           name: "US/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 复仇者
+    name: "TBF-1",
+    nation: "us",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    totalHP: 60,
+    damageReduction: 0.5,
+    maxSpeed: 436,
+    acceleration: 22,
+    rotateSpeed: 6,
+    length: 12,
+    width: 17,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 7.8,
+    range: 1600,
+    description: [
+      "鱼雷轰炸机（美）",
+      "1 x 12.7mm 机枪（前向）",
+      "1 x 12.7mm 机枪（后座）",
+      "1 x Mk-13 570mm 鱼雷"
+    ],
+    weapon: {
+      guns: [
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]

@@ -61,6 +61,24 @@ func (d *Drawer) drawCollectionImageFit(
 	d.drawCollectionImageScaled(screen, img, x, y, width, height, rotation, scale)
 }
 
+func (d *Drawer) drawCollectionImageAtBaseScale(
+	screen *ebiten.Image,
+	img *ebiten.Image,
+	x, y, width, height, rotation, baseScale float64,
+) {
+	if img == nil || width <= 0 || height <= 0 || baseScale <= 0 {
+		return
+	}
+
+	imgW := float64(img.Bounds().Dx()) * baseScale
+	imgH := float64(img.Bounds().Dy()) * baseScale
+	if int(math.Mod(math.Abs(rotation), 180)) == 90 {
+		imgW, imgH = imgH, imgW
+	}
+	scale := baseScale * min(1, width/imgW, height/imgH)
+	d.drawCollectionImageScaled(screen, img, x, y, width, height, rotation, scale)
+}
+
 func collectionImageFitScale(img *ebiten.Image, width, height, rotation float64, allowUpscale bool) float64 {
 	if img == nil || width <= 0 || height <= 0 {
 		return 0

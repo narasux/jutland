@@ -261,13 +261,23 @@ func (c *CollectionUI) Update() {
 	} else if !c.comboExpanded() {
 		_, wheelY := ebiten.Wheel()
 		cursor := image.Pt(ebiten.CursorPosition())
-		offset := planeNavigationOffset(
-			inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft), inpututil.IsKeyJustPressed(ebiten.KeyArrowUp),
-			inpututil.IsKeyJustPressed(ebiten.KeyArrowRight), inpututil.IsKeyJustPressed(ebiten.KeyArrowDown),
-			wheelY, !cursor.In(c.layout.PlaneToolbar),
-		)
-		if offset != 0 {
-			c.movePlane(offset)
+		up := inpututil.IsKeyJustPressed(ebiten.KeyArrowUp)
+		down := inpututil.IsKeyJustPressed(ebiten.KeyArrowDown)
+		if up || down {
+			if up {
+				c.movePlaneType(-1)
+			} else {
+				c.movePlaneType(1)
+			}
+		} else {
+			offset := unitNavigationOffset(
+				inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft),
+				inpututil.IsKeyJustPressed(ebiten.KeyArrowRight),
+				wheelY, !cursor.In(c.layout.PlaneToolbar),
+			)
+			if offset != 0 {
+				c.movePlane(offset)
+			}
 		}
 	}
 
@@ -301,13 +311,6 @@ func unitNavigationOffset(left, right bool, wheelY float64, wheelAllowed bool) i
 		return 1
 	}
 	return 0
-}
-
-func planeNavigationOffset(
-	left, up, right, down bool, wheelY float64, wheelAllowed bool,
-) int {
-	// 飞机页的四个方向键和鼠标滚轮都按单架飞机步进。
-	return unitNavigationOffset(left || up, right || down, wheelY, wheelAllowed)
 }
 
 func (c *CollectionUI) applyPendingRebuild() {
@@ -1143,6 +1146,36 @@ func (c *CollectionUI) movePlane(offset int) {
 	c.planeFirstIndex = max(0, min(c.planeFirstIndex+offset, c.maxPlaneFirstIndex()))
 }
 
+func (c *CollectionUI) movePlaneType(offset int) {
+	// 上下方向键切换机种；当前国籍下没有飞机的机种会被跳过，行为对齐舰船页的舰种导航。
+	if offset == 0 || len(planeTypeFilters) == 0 {
+		return
+	}
+	current := 0
+	for idx, planeType := range planeTypeFilters {
+		if planeType == c.planeType {
+			current = idx
+			break
+		}
+	}
+	direction := 1
+	if offset < 0 {
+		direction = -1
+	}
+	for step := 1; step <= len(planeTypeFilters); step++ {
+		idx := (current + direction*step + len(planeTypeFilters)) % len(planeTypeFilters)
+		c.planeType = planeTypeFilters[idx]
+		if len(c.filteredPlanes()) == 0 {
+			continue
+		}
+		c.resetPlanePosition()
+		c.refreshPlaneAbilityScales()
+		c.pendingRebuild = true
+		return
+	}
+	c.planeType = planeTypeFilters[current]
+}
+
 func clampFloat(value, minimum, maximum float64) float64 {
 	return min(maximum, max(minimum, value))
 }
@@ -1709,9 +1742,9 @@ func (c *CollectionUI) drawPlaneCard(
 		float64(x)+px(20), float64(y)+px(54), px(18), font.LocalizedUI(font.Kai),
 		color.RGBA{175, 165, 150, 255},
 	)
-	c.drawer.drawCollectionImageFit(
-		screen, planeImg.Get(plane.Name, 10), float64(x)+px(24), float64(y)+px(78),
-		float64(width)-px(48), px(116), 0, true,
+	c.drawer.drawCollectionImageAtBaseScale(
+		screen, planeImg.GetOriginal(plane.Name), float64(x)+px(24), float64(y)+px(78),
+		float64(width)-px(48), px(116), 0, planeImg.GetDisplayScale(plane.Name),
 	)
 
 	sectionY := y + int(math.Round(px(208)))
