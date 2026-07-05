@@ -11,6 +11,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
 	"github.com/narasux/jutland/pkg/i18n"
+	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -353,8 +354,12 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale f
 			if total > 0 {
 				percent = contribution.Value / total * 100
 			}
+			name := contribution.Name
+			if ref := objRef.GetReference(name); ref != nil && ref.DisplayName != "" {
+				name = ref.DisplayName
+			}
 			lines = append(lines, i18n.Format(i18n.MsgRadarContribution, map[string]any{
-				"Name": contribution.Name, "Percent": fmt.Sprintf("%.0f", percent),
+				"Name": name, "Percent": fmt.Sprintf("%.0f", percent),
 			}))
 		}
 	}

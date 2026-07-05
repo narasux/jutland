@@ -294,24 +294,22 @@
     }
   },
   {
-    // 野猫
-    name: "F4F-3",
+    // 水牛
+    name: "F2A-3",
     nation: "us",
     type: "fighter",
     typeAbbr: "F",
-    totalHP: 35,
-    damageReduction: 0.5,
-    maxSpeed: 533,
-    acceleration: 30,
+    totalHP: 32,
+    damageReduction: 0.45,
+    maxSpeed: 517,
+    acceleration: 28,
     rotateSpeed: 12,
-    length: 9,
-    width: 12,
-    // TODO 确认资金
+    length: 8,
+    width: 11,
     fundsCost: 10,
-    // TODO 确认时间
     timeCost: 5,
-    tonnage: 3.367,
-    range: 1360,
+    tonnage: 3.2,
+    range: 1550,
     description: [
       "战斗机（美）",
       "4 x 12.7mm 机枪",
@@ -346,22 +344,24 @@
     }
   },
   {
-    // 水牛
-    name: "F2A-3",
+    // 野猫
+    name: "F4F-3",
     nation: "us",
     type: "fighter",
     typeAbbr: "F",
-    totalHP: 32,
-    damageReduction: 0.45,
-    maxSpeed: 517,
-    acceleration: 28,
+    totalHP: 35,
+    damageReduction: 0.5,
+    maxSpeed: 533,
+    acceleration: 30,
     rotateSpeed: 12,
-    length: 8,
-    width: 11,
+    length: 9,
+    width: 12,
+    // TODO 确认资金
     fundsCost: 10,
+    // TODO 确认时间
     timeCost: 5,
-    tonnage: 3.2,
-    range: 1550,
+    tonnage: 3.367,
+    range: 1360,
     description: [
       "战斗机（美）",
       "4 x 12.7mm 机枪",
@@ -663,7 +663,8 @@
     description: [
       "鱼雷轰炸机（美）",
       "1 x 12.7mm 机枪（前向）",
-      "1 x 12.7mm 机枪（后座）",
+      "1 x 12.7mm 机枪（背部炮塔）",
+      "1 x 7.62mm 机枪（腹部后向）",
       "1 x Mk-13 570mm 鱼雷"
     ],
     weapon: {
@@ -676,6 +677,12 @@
         },
         {
           name: "US/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/7.62",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]

@@ -45,7 +45,7 @@ func ValidateLocales(chinese, english []Reference) error {
 				name, len(zhRef.Armaments), len(enRef.Armaments),
 			)
 		}
-		if len(enRef.Links) == 0 {
+		if len(enRef.Links) == 0 && enRef.Type != "Weapon" && enRef.Type != "武器" {
 			return fmt.Errorf("en reference %q has no source links", name)
 		}
 	}

@@ -2268,7 +2268,11 @@
   {
     name: "F",
     displayName: "歼击机",
-    armaments: [],
+    armaments: [
+      {label: "机炮（前向）", value: "4 x 20mm"},
+      {label: "机枪（前向）", value: "4 x 12.7mm"},
+      {label: "火箭弹", value: "4 x HVAR"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2276,7 +2280,12 @@
   {
     name: "B",
     displayName: "轰炸机",
-    armaments: [],
+    armaments: [
+      {label: "机炮（侧向）", value: "2 x 20mm"},
+      {label: "机炮（后向）", value: "1 x 20mm 双联装"},
+      {label: "炸弹", value: "3 x 2000磅，6 x 250磅"},
+      {label: "火箭弹", value: "4 x HVAR"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2284,7 +2293,13 @@
   {
     name: "A",
     displayName: "攻击机",
-    armaments: [],
+    armaments: [
+      {label: "机炮（前向）", value: "2 x 20mm"},
+      {label: "机炮（侧向）", value: "2 x 20mm"},
+      {label: "机炮（后向）", value: "1 x 20mm 双联装"},
+      {label: "鱼雷", value: "4 x Mk-13 570mm"},
+      {label: "火箭弹", value: "4 x HVAR"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2292,15 +2307,20 @@
   {
     name: "A5M2a",
     displayName: "九六式舰战",
-    armaments: [],
+    armaments: [
+      {label: "机枪（前向）", value: "2 x 7.7mm"},
+    ],
     description: "",
     author: "",
     links: []
   },
   {
     name: "A6M2b",
-    displayName: "零式舰战二一型",
-    armaments: [],
+    displayName: "零式舰战 21 型",
+    armaments: [
+      {label: "机炮（前向）", value: "2 x 20mm"},
+      {label: "机枪（前向）", value: "2 x 7.7mm"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2308,7 +2328,10 @@
   {
     name: "A7M2",
     displayName: "烈风",
-    armaments: [],
+    armaments: [
+      {label: "机炮（前向）", value: "2 x 20mm"},
+      {label: "机枪（前向）", value: "2 x 13mm"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2316,7 +2339,10 @@
   {
     name: "B5N2_97",
     displayName: "九七式",
-    armaments: [],
+    armaments: [
+      {label: "机枪（后座）", value: "1 x 7.62mm"},
+      {label: "鱼雷", value: "1 x 九一式 450mm"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2324,7 +2350,11 @@
   {
     name: "B7A2",
     displayName: "流星",
-    armaments: [],
+    armaments: [
+      {label: "机炮（前向）", value: "2 x 20mm"},
+      {label: "机枪（后座）", value: "1 x 13mm"},
+      {label: "鱼雷", value: "1 x 九一式 450mm"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2332,7 +2362,9 @@
   {
     name: "C6N1",
     displayName: "彩云",
-    armaments: [],
+    armaments: [
+      {label: "武装", value: "无攻击挂载"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2340,7 +2372,11 @@
   {
     name: "D3A_99",
     displayName: "九九式",
-    armaments: [],
+    armaments: [
+      {label: "机枪（前向）", value: "2 x 7.7mm"},
+      {label: "机枪（后座）", value: "1 x 7.7mm"},
+      {label: "炸弹", value: "1 x 250kg，2 x 60kg"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2348,15 +2384,11 @@
   {
     name: "D4Y3",
     displayName: "彗星",
-    armaments: [],
-    description: "",
-    author: "",
-    links: []
-  },
-  {
-    name: "F4F-3",
-    displayName: "野猫",
-    armaments: [],
+    armaments: [
+      {label: "机枪（前向）", value: "2 x 7.7mm"},
+      {label: "机枪（后座）", value: "1 x 7.92mm"},
+      {label: "炸弹", value: "1 x 500kg"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2364,7 +2396,19 @@
   {
     name: "F2A-3",
     displayName: "水牛",
-    armaments: [],
+    armaments: [
+      {label: "机枪（前向）", value: "4 x 12.7mm"},
+    ],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "F4F-3",
+    displayName: "野猫",
+    armaments: [
+      {label: "机枪（前向）", value: "4 x 12.7mm"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2372,7 +2416,9 @@
   {
     name: "F6F-3",
     displayName: "地狱猫",
-    armaments: [],
+    armaments: [
+      {label: "机枪（前向）", value: "6 x 12.7mm"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2380,7 +2426,11 @@
   {
     name: "SBD-3",
     displayName: "无畏",
-    armaments: [],
+    armaments: [
+      {label: "机枪（前向）", value: "2 x 12.7mm"},
+      {label: "机枪（后座）", value: "2 x 7.62mm"},
+      {label: "炸弹", value: "1 x 2000磅，2 x 250磅"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2388,7 +2438,11 @@
   {
     name: "SB2C-4",
     displayName: "地狱俯冲者",
-    armaments: [],
+    armaments: [
+      {label: "机炮（前向）", value: "2 x 20mm"},
+      {label: "机枪（后座）", value: "2 x 7.62mm"},
+      {label: "炸弹", value: "1 x 2000磅，2 x 500磅"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2396,7 +2450,11 @@
   {
     name: "TBD-1",
     displayName: "蹂躏者",
-    armaments: [],
+    armaments: [
+      {label: "机枪（前向）", value: "1 x 12.7mm"},
+      {label: "机枪（后座）", value: "1 x 7.62mm"},
+      {label: "鱼雷", value: "1 x Mk-13 570mm"},
+    ],
     description: "",
     author: "",
     links: []
@@ -2404,6 +2462,1352 @@
   {
     name: "TBF-1",
     displayName: "复仇者",
+    armaments: [
+      {label: "机枪（前向）", value: "1 x 12.7mm"},
+      {label: "机枪（背部炮塔）", value: "1 x 12.7mm"},
+      {label: "机枪（腹部后向）", value: "1 x 7.62mm"},
+      {label: "鱼雷", value: "1 x Mk-13 570mm"},
+    ],
+    description: "",
+    author: "",
+    links: []
+  },
+{
+    name: "RailGun",
+    displayName: "超电磁炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "RushYa",
+    displayName: "406mm 八管「冲鸭」",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "RunYa",
+    displayName: "155mm 十五管「润鸭」",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "FlyYa",
+    displayName: "37mm 三十管「飞鸭」",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "LeiYa",
+    displayName: "50mm 镭射炮「雷鸭」",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "CN/100/56/2/Type79A",
+    displayName: "中国海军 79A 式双管 100mm 自动炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "CN/37/63/2/Type76A",
+    displayName: "中国海军 76A 式双联装 37mm 炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "Impact",
+    displayName: "水滴撞击",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/127/38/MK45",
+    displayName: "127mm/38 Mk45 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/457/45/3/MK1",
+    displayName: "457mm/45 三联装舰炮 Mk1",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/406/50/3/MK7",
+    displayName: "406mm/50 三联装舰炮 Mk7",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/406/45/3/MK6",
+    displayName: "406mm/45 三联装舰炮 Mk6",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/305/50/3/MK8",
+    displayName: "305mm/50 三联装舰炮 Mk8",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/203/55/2/MK9",
+    displayName: "203mm/55 双联装舰炮 Mk9",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/203/55/3/MK9",
+    displayName: "203mm/55 三联装舰炮 Mk9",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/203/55/3/MK12",
+    displayName: "203mm/55 三联装舰炮 Mk12",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/203/55/3/MK14",
+    displayName: "203mm/55 三联装舰炮 Mk14",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/203/55/3/MK15",
+    displayName: "203mm/55 三联装舰炮 Mk15",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/203/55/3/MK16",
+    displayName: "203mm/55 三联装速射舰炮 Mk16",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/127/38/2/MK12",
+    displayName: "127mm/38 双联装舰炮 Mk12",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/127/38/MK12",
+    displayName: "127mm/38 单装舰炮 Mk12",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/127/25/MK10",
+    displayName: "127mm/25 单装高平两用炮 Mk10",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/127/54/2/MK39",
+    displayName: "127mm/54 双联装舰炮 Mk39",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/76/50",
+    displayName: "76mm/50 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/76/50/2/MK22",
+    displayName: "76mm/50 双联装高平两用炮 Mk22",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/40/60/4",
+    displayName: "40mm/60 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/40/60/2",
+    displayName: "40mm/60 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/40/60",
+    displayName: "40mm/60 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/28/75/4",
+    displayName: "28mm/75 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/20/70/2",
+    displayName: "20mm/70 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/20/70",
+    displayName: "20mm/70 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/12.7",
+    displayName: "12.7mm 单装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/7.62/2",
+    displayName: "7.62mm 双联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/7.62",
+    displayName: "7.62mm 单装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/510/45/3/Type98",
+    displayName: "九八式 51cm 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/510/45/2/Type98",
+    displayName: "九八式 51cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/460/45/3/Type94",
+    displayName: "九四式 46cm 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/410/45/2/Type3",
+    displayName: "三年式 41cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/356/45/2/Type41",
+    displayName: "四一式 35.6cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/203/50/2/Type3",
+    displayName: "三年式二号 20.3cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/200/50/3/Type3",
+    displayName: "三年式一号 20cm 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/200/50/2/Type3",
+    displayName: "三年式一号 20cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/200/50/Type3",
+    displayName: "三年式一号 20cm 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/155/60/3/Type3",
+    displayName: "三年式 15.5cm 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/152/50/2/Type41",
+    displayName: "四一式 15.2cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/152/50/Type41",
+    displayName: "四一式 15.2cm 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/140/50/2/Type3",
+    displayName: "三年式 14cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/140/50/Type3",
+    displayName: "三年式 14cm 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/127/50/2/Type3",
+    displayName: "三年式 12.7cm 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/127/50/2/Type3/DP",
+    displayName: "三年式 12.7cm 双联装高平炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/127/40/2/Type89/DP",
+    displayName: "八九式 12.7cm 双联装高角炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/120/45/Type10",
+    displayName: "十年式 12cm 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/100/65/2/Type98/DP",
+    displayName: "九八式 10cm 双联装高角炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/76/65/2/Type98",
+    displayName: "九八式 7.6cm 双联装高角炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/76/40/Type3",
+    displayName: "三年式 7.6cm 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/40/60/2",
+    displayName: "40mm/60 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/25/60/3",
+    displayName: "25mm/60 三联装机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/25/60/2",
+    displayName: "25mm/60 双联装机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/25/60",
+    displayName: "25mm/60 单装机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/20",
+    displayName: "20mm 单装机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/13/4",
+    displayName: "13mm 四联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/13",
+    displayName: "13mm 单装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/7.92",
+    displayName: "7.92mm 单装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/7.7",
+    displayName: "7.7mm 单装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/7.62",
+    displayName: "7.62mm 单装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/380/52/2",
+    displayName: "380mm/52 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/283/55/3",
+    displayName: "283mm/55 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/283/52/3",
+    displayName: "283mm/52 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/203/60/2",
+    displayName: "203mm/60 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/150/60/3",
+    displayName: "150mm/60 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/150/60/2",
+    displayName: "150mm/60 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/150/60",
+    displayName: "150mm/60 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/127/45",
+    displayName: "127mm/45 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/105/65/2/DP",
+    displayName: "105mm/65 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/88/56/2/DP",
+    displayName: "88mm/56 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/37/57",
+    displayName: "37mm/57 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/20/70",
+    displayName: "20mm/70 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/406/45/3",
+    displayName: "406mm/45 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/381/42/2",
+    displayName: "381mm/42 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/356/45/4",
+    displayName: "356mm/45 四联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/356/45/2",
+    displayName: "356mm/45 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/343/45/2",
+    displayName: "343mm/45 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/203/50/3",
+    displayName: "203mm/50 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/152/50/2",
+    displayName: "152mm/50 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/152/45",
+    displayName: "152mm/45 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/140/50",
+    displayName: "140mm/50 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/133/50/2/DP",
+    displayName: "133mm/50 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/120/45/DP",
+    displayName: "120mm/45 单装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/114/45/2/DP",
+    displayName: "114mm/45 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/102/45/2/DP",
+    displayName: "102mm/45 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/102/45/DP",
+    displayName: "102mm/45 单装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/76/70/4/DP",
+    displayName: "76mm/70 四联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/40/60/2",
+    displayName: "40mm/60 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/40/60",
+    displayName: "40mm/60 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/40/56/6",
+    displayName: "40mm/56 六联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/40/56/4",
+    displayName: "40mm/56 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/40/39/8",
+    displayName: "40mm/39 八联装高炮（砰砰炮）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/40/39/4",
+    displayName: "40mm/39 四联装高炮（砰砰炮）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/40/39",
+    displayName: "40mm/39 单装高炮（砰砰炮）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/20/70/4",
+    displayName: "20mm/70 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/20/70/2",
+    displayName: "20mm/70 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/20/70",
+    displayName: "20mm/70 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/12.7/4",
+    displayName: "12.7mm 四联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/12.7/2",
+    displayName: "12.7mm 双联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/500/50/2",
+    displayName: "500mm/50 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/406/50/3",
+    displayName: "406mm/50 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/180/57/3",
+    displayName: "180mm/57 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/152/57/3",
+    displayName: "152mm/57 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/152/57/2",
+    displayName: "152mm/57 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/130/60/2",
+    displayName: "130mm/60 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/130/58/2",
+    displayName: "130mm/58 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/100/70/2/DP",
+    displayName: "100mm/70 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/100/56/2/DP",
+    displayName: "100mm/56 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/100/56/DP",
+    displayName: "100mm/56 单装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/57/72/4",
+    displayName: "57mm/72 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/45/78/4",
+    displayName: "45mm/78 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/37/57/4",
+    displayName: "37mm/57 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/37/57/2",
+    displayName: "37mm/57 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/25/65/4",
+    displayName: "25mm/65 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/25/65/2",
+    displayName: "25mm/65 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "YaLei",
+    displayName: "610mm 十五管「鸭雷」鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "ShanDa",
+    displayName: "山大鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/533/4",
+    displayName: "533mm 四联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/533/1",
+    displayName: "533mm 单装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/324/3",
+    displayName: "324mm 三联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/Kaiten/4",
+    displayName: "610mm 四联装回天鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/610/4",
+    displayName: "610mm 四联装酸素鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/610/3",
+    displayName: "610mm 三联装酸素鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/610/2",
+    displayName: "610mm 双联装酸素鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/533/3",
+    displayName: "533mm 三联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/533/2",
+    displayName: "533mm 双联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/450/1",
+    displayName: "450mm 单装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/533/4",
+    displayName: "533mm 四联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/533/3",
+    displayName: "533mm 三联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "GER/533/1",
+    displayName: "533mm 单装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/622/1",
+    displayName: "622mm 单装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/533/5",
+    displayName: "533mm 五联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/533/4",
+    displayName: "533mm 四联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/533/3",
+    displayName: "533mm 三联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/533/1",
+    displayName: "533mm 单装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/533/5",
+    displayName: "533mm 五联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/533/3",
+    displayName: "533mm 三联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "SU/533/1",
+    displayName: "533mm 单装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "DuckRocket",
+    displayName: "鸭子火箭",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/120/28/Type5/AA",
+    displayName: "12cm 28联装五式防空火箭",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "JP/120/21/Type5/AA",
+    displayName: "12cm 21联装五式防空火箭",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "CN/122/50",
+    displayName: "122mm 50管舰载火箭炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "CN/250/5/Type65",
+    displayName: "250mm 五管65式反潜火箭",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/AIR/RB/127/4",
+    displayName: "127mm 四联装火箭弹",
+    type: "武器",
     armaments: [],
     description: "",
     author: "",

@@ -3535,7 +3535,11 @@
   {
     "name": "F",
     "displayName": "Fighter",
-    "armaments": [],
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "4 x 20mm"},
+      {"label": "Machine Guns (Forward)", "value": "4 x 12.7mm"},
+      {"label": "Rockets", "value": "4 x HVAR"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3548,7 +3552,12 @@
   {
     "name": "B",
     "displayName": "Bomber",
-    "armaments": [],
+    "armaments": [
+      {"label": "Cannons (Side)", "value": "2 x 20mm"},
+      {"label": "Cannons (Rear)", "value": "1 x 20mm Twin"},
+      {"label": "Bombs", "value": "3 x 2000lb, 6 x 250lb"},
+      {"label": "Rockets", "value": "4 x HVAR"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3561,7 +3570,13 @@
   {
     "name": "A",
     "displayName": "Attack Aircraft",
-    "armaments": [],
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "2 x 20mm"},
+      {"label": "Cannons (Side)", "value": "2 x 20mm"},
+      {"label": "Cannons (Rear)", "value": "1 x 20mm Twin"},
+      {"label": "Torpedoes", "value": "4 x Mk-13 570mm"},
+      {"label": "Rockets", "value": "4 x HVAR"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3574,7 +3589,9 @@
   {
     "name": "A5M2a",
     "displayName": "A5M2a Claude",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3587,7 +3604,10 @@
   {
     "name": "A6M2b",
     "displayName": "A6M2b Zero Model 21",
-    "armaments": [],
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "2 x 20mm"},
+      {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3600,7 +3620,10 @@
   {
     "name": "A7M2",
     "displayName": "A7M2 Reppū",
-    "armaments": [],
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "2 x 20mm"},
+      {"label": "Machine Guns (Forward)", "value": "2 x 13mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3613,7 +3636,10 @@
   {
     "name": "B5N2_97",
     "displayName": "B5N2 Type 97",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Gun (Rear)", "value": "1 x 7.62mm"},
+      {"label": "Torpedo", "value": "1 x Type 91 450mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3626,7 +3652,11 @@
   {
     "name": "B7A2",
     "displayName": "B7A2 Ryūsei",
-    "armaments": [],
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "2 x 20mm"},
+      {"label": "Machine Gun (Rear)", "value": "1 x 13mm"},
+      {"label": "Torpedo", "value": "1 x Type 91 450mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3639,7 +3669,9 @@
   {
     "name": "C6N1",
     "displayName": "C6N1 Saiun",
-    "armaments": [],
+    "armaments": [
+      {"label": "Armament", "value": "None"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3652,7 +3684,11 @@
   {
     "name": "D3A_99",
     "displayName": "D3A Type 99",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"},
+      {"label": "Machine Gun (Rear)", "value": "1 x 7.7mm"},
+      {"label": "Bombs", "value": "1 x 250kg, 2 x 60kg"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3665,7 +3701,11 @@
   {
     "name": "D4Y3",
     "displayName": "D4Y3 Suisei",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"},
+      {"label": "Machine Gun (Rear)", "value": "1 x 7.92mm"},
+      {"label": "Bomb", "value": "1 x 500kg"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3676,22 +3716,11 @@
     ]
   },
   {
-    "name": "F4F-3",
-    "displayName": "F4F-3 Wildcat",
-    "armaments": [],
-    "description": "",
-    "author": "",
-    "links": [
-      {
-        "name": "Wikipedia — F4F-3 Wildcat",
-        "url": "https://en.wikipedia.org/wiki/Grumman%20F4F%20Wildcat"
-      }
-    ]
-  },
-  {
     "name": "F2A-3",
     "displayName": "F2A-3 Buffalo",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "4 x 12.7mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3702,9 +3731,26 @@
     ]
   },
   {
+    "name": "F4F-3",
+    "displayName": "F4F-3 Wildcat",
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "4 x 12.7mm"}
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — F4F-3 Wildcat",
+        "url": "https://en.wikipedia.org/wiki/Grumman%20F4F%20Wildcat"
+      }
+    ]
+  },
+  {
     "name": "F6F-3",
     "displayName": "F6F-3 Hellcat",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "6 x 12.7mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3717,7 +3763,11 @@
   {
     "name": "SBD-3",
     "displayName": "SBD-3 Dauntless",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "2 x 12.7mm"},
+      {"label": "Machine Guns (Rear)", "value": "2 x 7.62mm"},
+      {"label": "Bombs", "value": "1 x 2000lb, 2 x 250lb"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3730,7 +3780,11 @@
   {
     "name": "SB2C-4",
     "displayName": "SB2C-4 Helldiver",
-    "armaments": [],
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "2 x 20mm"},
+      {"label": "Machine Guns (Rear)", "value": "2 x 7.62mm"},
+      {"label": "Bombs", "value": "1 x 2000lb, 2 x 500lb"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3743,7 +3797,11 @@
   {
     "name": "TBD-1",
     "displayName": "TBD-1 Devastator",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Gun (Forward)", "value": "1 x 12.7mm"},
+      {"label": "Machine Gun (Rear)", "value": "1 x 7.62mm"},
+      {"label": "Torpedo", "value": "1 x Mk-13 570mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3756,7 +3814,12 @@
   {
     "name": "TBF-1",
     "displayName": "TBF-1 Avenger",
-    "armaments": [],
+    "armaments": [
+      {"label": "Machine Gun (Forward)", "value": "1 x 12.7mm"},
+      {"label": "Machine Gun (Dorsal Turret)", "value": "1 x 12.7mm"},
+      {"label": "Machine Gun (Ventral)", "value": "1 x 7.62mm"},
+      {"label": "Torpedo", "value": "1 x Mk-13 570mm"}
+    ],
     "description": "",
     "author": "",
     "links": [
@@ -3765,5 +3828,1346 @@
         "url": "https://en.wikipedia.org/wiki/Grumman%20TBF%20Avenger"
       }
     ]
+  },
+{
+    "name": "RailGun",
+    "displayName": "Railgun",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "RushYa",
+    "displayName": "406mm 8-Barrel RushYa",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "RunYa",
+    "displayName": "155mm 15-Barrel RunYa",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "FlyYa",
+    "displayName": "37mm 30-Barrel FlyYa",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "LeiYa",
+    "displayName": "50mm Laser LeiYa",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/100/56/2/Type79A",
+    "displayName": "100mm Twin Mount Type79A",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/37/63/2/Type76A",
+    "displayName": "37mm Twin Mount Type76A",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "Impact",
+    "displayName": "Impact Ram",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/38/MK45",
+    "displayName": "127mm Single Mount MK45",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/457/45/3/MK1",
+    "displayName": "457mm Triple Mount MK1",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/406/50/3/MK7",
+    "displayName": "406mm Triple Mount MK7",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/406/45/3/MK6",
+    "displayName": "406mm Triple Mount MK6",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/305/50/3/MK8",
+    "displayName": "305mm Triple Mount MK8",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/2/MK9",
+    "displayName": "203mm Twin Mount MK9",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK9",
+    "displayName": "203mm Triple Mount MK9",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK12",
+    "displayName": "203mm Triple Mount MK12",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK14",
+    "displayName": "203mm Triple Mount MK14",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK15",
+    "displayName": "203mm Triple Mount MK15",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK16",
+    "displayName": "203mm Triple Mount MK16",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/38/2/MK12",
+    "displayName": "127mm Twin Mount MK12",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/38/MK12",
+    "displayName": "127mm Single Mount MK12",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/25/MK10",
+    "displayName": "127mm Single Mount MK10",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/54/2/MK39",
+    "displayName": "127mm Twin Mount MK39",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/76/50",
+    "displayName": "76mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/76/50/2/MK22",
+    "displayName": "76mm Twin Mount MK22",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/40/60/4",
+    "displayName": "40mm Quadruple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/40/60/2",
+    "displayName": "40mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/40/60",
+    "displayName": "40mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/28/75/4",
+    "displayName": "28mm Quadruple AA Mount (Chicago Piano)",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/20/70/2",
+    "displayName": "20mm Twin AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/20/70",
+    "displayName": "20mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/12.7",
+    "displayName": "12.7mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/7.62/2",
+    "displayName": "7.62mm Twin AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/7.62",
+    "displayName": "7.62mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/510/45/3/Type98",
+    "displayName": "510mm Triple Mount Type98",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/510/45/2/Type98",
+    "displayName": "510mm Twin Mount Type98",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/460/45/3/Type94",
+    "displayName": "460mm Triple Mount Type94",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/410/45/2/Type3",
+    "displayName": "410mm Twin Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/356/45/2/Type41",
+    "displayName": "356mm Twin Mount Type41",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/203/50/2/Type3",
+    "displayName": "203mm Twin Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/200/50/3/Type3",
+    "displayName": "200mm Triple Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/200/50/2/Type3",
+    "displayName": "200mm Twin Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/200/50/Type3",
+    "displayName": "200mm Single Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/155/60/3/Type3",
+    "displayName": "155mm Triple Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/152/50/2/Type41",
+    "displayName": "152mm Twin Mount Type41",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/152/50/Type41",
+    "displayName": "152mm Single Mount Type41",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/140/50/2/Type3",
+    "displayName": "140mm Twin Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/140/50/Type3",
+    "displayName": "140mm Single Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/127/50/2/Type3",
+    "displayName": "127mm Twin Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/127/50/2/Type3/DP",
+    "displayName": "127mm Twin Dual-Purpose Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/127/40/2/Type89/DP",
+    "displayName": "127mm Twin Dual-Purpose Mount Type89",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/120/45/Type10",
+    "displayName": "120mm Single Mount Type10",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/100/65/2/Type98/DP",
+    "displayName": "100mm Twin Dual-Purpose Mount Type98",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/76/65/2/Type98",
+    "displayName": "76mm Twin Mount Type98",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/76/40/Type3",
+    "displayName": "76mm Single Mount Type3",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/40/60/2",
+    "displayName": "40mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/25/60/3",
+    "displayName": "25mm Triple AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/25/60/2",
+    "displayName": "25mm Twin AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/25/60",
+    "displayName": "25mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/20",
+    "displayName": "20mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/13/4",
+    "displayName": "13mm Quadruple AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/13",
+    "displayName": "13mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/7.92",
+    "displayName": "7.92mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/7.7",
+    "displayName": "7.7mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/7.62",
+    "displayName": "7.62mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/380/52/2",
+    "displayName": "380mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/283/55/3",
+    "displayName": "283mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/283/52/3",
+    "displayName": "283mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/203/60/2",
+    "displayName": "203mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/150/60/3",
+    "displayName": "150mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/150/60/2",
+    "displayName": "150mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/150/60",
+    "displayName": "150mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/127/45",
+    "displayName": "127mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/105/65/2/DP",
+    "displayName": "105mm Twin Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/88/56/2/DP",
+    "displayName": "88mm Twin Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/37/57",
+    "displayName": "37mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/20/70",
+    "displayName": "20mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/406/45/3",
+    "displayName": "406mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/381/42/2",
+    "displayName": "381mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/356/45/4",
+    "displayName": "356mm Quadruple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/356/45/2",
+    "displayName": "356mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/343/45/2",
+    "displayName": "343mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/203/50/3",
+    "displayName": "203mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/152/50/2",
+    "displayName": "152mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/152/45",
+    "displayName": "152mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/140/50",
+    "displayName": "140mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/133/50/2/DP",
+    "displayName": "133mm Twin Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/120/45/DP",
+    "displayName": "120mm Single Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/114/45/2/DP",
+    "displayName": "114mm Twin Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/102/45/2/DP",
+    "displayName": "102mm Twin Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/102/45/DP",
+    "displayName": "102mm Single Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/76/70/4/DP",
+    "displayName": "76mm Quadruple Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/60/2",
+    "displayName": "40mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/60",
+    "displayName": "40mm Single Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/56/6",
+    "displayName": "40mm Sextuple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/56/4",
+    "displayName": "40mm Quadruple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/39/8",
+    "displayName": "40mm Octuple AA Mount (Pom-Pom)",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/39/4",
+    "displayName": "40mm Quadruple AA Mount (Pom-Pom)",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/39",
+    "displayName": "40mm Single AA Mount (Pom-Pom)",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/20/70/4",
+    "displayName": "20mm Quadruple AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/20/70/2",
+    "displayName": "20mm Twin AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/20/70",
+    "displayName": "20mm Single AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/12.7/4",
+    "displayName": "12.7mm Quadruple AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/12.7/2",
+    "displayName": "12.7mm Twin AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/500/50/2",
+    "displayName": "500mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/406/50/3",
+    "displayName": "406mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/180/57/3",
+    "displayName": "180mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/152/57/3",
+    "displayName": "152mm Triple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/152/57/2",
+    "displayName": "152mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/130/60/2",
+    "displayName": "130mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/130/58/2",
+    "displayName": "130mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/100/70/2/DP",
+    "displayName": "100mm Twin Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/100/56/2/DP",
+    "displayName": "100mm Twin Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/100/56/DP",
+    "displayName": "100mm Single Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/57/72/4",
+    "displayName": "57mm Quadruple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/45/78/4",
+    "displayName": "45mm Quadruple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/37/57/4",
+    "displayName": "37mm Quadruple Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/37/57/2",
+    "displayName": "37mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/25/65/4",
+    "displayName": "25mm Quadruple AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/25/65/2",
+    "displayName": "25mm Twin AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "YaLei",
+    "displayName": "610mm 15-Tube YaLei Torpedo",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "ShanDa",
+    "displayName": "533mm 20-Tube ShanDa Torpedo",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/533/4",
+    "displayName": "533mm Quadruple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/533/1",
+    "displayName": "533mm Single Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/324/3",
+    "displayName": "324mm Triple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/Kaiten/4",
+    "displayName": "610mm Quadruple Kaiten Torpedo",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/610/4",
+    "displayName": "610mm Quadruple Type 93 Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/610/3",
+    "displayName": "610mm Triple Type 93 Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/610/2",
+    "displayName": "610mm Twin Type 93 Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/533/3",
+    "displayName": "533mm Triple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/533/2",
+    "displayName": "533mm Twin Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/450/1",
+    "displayName": "450mm Single Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/533/4",
+    "displayName": "533mm Quadruple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/533/3",
+    "displayName": "533mm Triple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/533/1",
+    "displayName": "533mm Single Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/622/1",
+    "displayName": "622mm Single Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/5",
+    "displayName": "533mm Quintuple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/4",
+    "displayName": "533mm Quadruple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/3",
+    "displayName": "533mm Triple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/1",
+    "displayName": "533mm Single Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/533/5",
+    "displayName": "533mm Quintuple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/533/3",
+    "displayName": "533mm Triple Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/533/1",
+    "displayName": "533mm Single Torpedo Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "DuckRocket",
+    "displayName": "DuckRocket Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/120/28/Type5/AA",
+    "displayName": "12cm 28-Round Type 5 AA Rocket Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/120/21/Type5/AA",
+    "displayName": "12cm 21-Round Type 5 AA Rocket Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/122/50",
+    "displayName": "122mm 50-Tube Shipboard Rocket Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/250/5/Type65",
+    "displayName": "250mm 5-Round Type 65 ASW Rocket Launcher",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/AIR/RB/127/4",
+    "displayName": "127mm 4-Round Aircraft Rocket",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
   }
 ]

@@ -1872,7 +1872,15 @@ func (c *CollectionUI) drawPlaneSectionTitle(
 }
 
 func planeWeaponLines(plane *objUnit.Plane) []string {
-	// 飞机武器只做“标签 + 值”的直接映射，具体分组和压缩由 planeArmamentItems 负责。
+	// 优先使用 references 中的武装描述，缺失时回退到原始武器名。
+	ref := objRef.GetReference(plane.Name)
+	if ref != nil && len(ref.Armaments) > 0 {
+		lines := make([]string, 0, len(ref.Armaments))
+		for _, item := range ref.Armaments {
+			lines = append(lines, item.Label+"  "+item.Value)
+		}
+		return lines
+	}
 	items := planeArmamentItems(plane)
 	lines := make([]string, 0, len(items))
 	for _, item := range items {
@@ -1880,7 +1888,6 @@ func planeWeaponLines(plane *objUnit.Plane) []string {
 	}
 	return lines
 }
-
 func (c *CollectionUI) refreshShipAbilityScales() {
 	// 舰船雷达只和当前国籍、舰种筛选结果比较；舰名选择不会改变比较池。
 	ships := c.filteredShips()
