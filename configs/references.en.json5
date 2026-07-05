@@ -337,7 +337,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x24"
+        "value": "A6M2 Zero Model 21 x24"
       },
       {
         "label": "Dive Bombers",
@@ -376,7 +376,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x24"
+        "value": "A6M2 Zero Model 21 x24"
       },
       {
         "label": "Dive Bombers",
@@ -466,7 +466,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x28"
+        "value": "A6M2 Zero Model 21 x28"
       },
       {
         "label": "Dive Bombers",
@@ -509,7 +509,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x24"
+        "value": "A6M2 Zero Model 21 x24"
       },
       {
         "label": "Torpedo Bombers",
@@ -548,7 +548,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x20"
+        "value": "A6M2 Zero Model 21 x20"
       },
       {
         "label": "Dive Bombers",
@@ -587,7 +587,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x21"
+        "value": "A6M2 Zero Model 21 x21"
       },
       {
         "label": "Torpedo Bombers",
@@ -661,7 +661,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x15"
+        "value": "A6M2 Zero Model 21 x15"
       },
       {
         "label": "Dive Bombers",
@@ -747,7 +747,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x18"
+        "value": "A6M2 Zero Model 21 x18"
       },
       {
         "label": "Torpedo Bombers",
@@ -778,7 +778,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x21"
+        "value": "A6M2 Zero Model 21 x21"
       },
       {
         "label": "Torpedo Bombers",
@@ -809,7 +809,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x21"
+        "value": "A6M2 Zero Model 21 x21"
       },
       {
         "label": "Torpedo Bombers",
@@ -844,7 +844,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x18"
+        "value": "A6M2 Zero Model 21 x18"
       },
       {
         "label": "Torpedo Bombers",
@@ -875,7 +875,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x18 (game approximation)"
+        "value": "A6M2 Zero Model 21 x18 (game approximation)"
       },
       {
         "label": "Torpedo Bombers",
@@ -910,7 +910,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x8"
+        "value": "A6M2 Zero Model 21 x8"
       },
       {
         "label": "Torpedo Bombers",
@@ -1175,7 +1175,7 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2b Zero Model 21 x6"
+        "value": "A6M2 Zero Model 21 x6"
       },
       {
         "label": "Dive Bombers",
@@ -3587,8 +3587,8 @@
     ]
   },
   {
-    "name": "A5M2a",
-    "displayName": "A5M2a Claude",
+    "name": "A5M2",
+    "displayName": "A5M2 Type 96",
     "armaments": [
       {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"}
     ],
@@ -3602,8 +3602,24 @@
     ]
   },
   {
-    "name": "A6M2b",
-    "displayName": "A6M2b Zero Model 21",
+    "name": "A6M2",
+    "displayName": "A6M2 Zero Model 21",
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "2 x 20mm"},
+      {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"}
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — Mitsubishi A6M Zero",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A6M%20Zero"
+      }
+    ]
+  },
+  {
+    "name": "A6M3",
+    "displayName": "A6M3 Zero Model 32",
     "armaments": [
       {"label": "Cannons (Forward)", "value": "2 x 20mm"},
       {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"}
@@ -3634,7 +3650,7 @@
     ]
   },
   {
-    "name": "B5N2_97",
+    "name": "B5N2",
     "displayName": "B5N2 Type 97",
     "armaments": [
       {"label": "Machine Gun (Rear)", "value": "1 x 7.62mm"},
@@ -3682,7 +3698,7 @@
     ]
   },
   {
-    "name": "D3A_99",
+    "name": "D3A1",
     "displayName": "D3A Type 99",
     "armaments": [
       {"label": "Machine Guns (Forward)", "value": "2 x 7.7mm"},

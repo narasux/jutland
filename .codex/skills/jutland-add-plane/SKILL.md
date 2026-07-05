@@ -34,13 +34,14 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
   ```bash
   python .codex/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
     --input "/path/to/source.jpg" \
-    --output resources/images/planes/fighter/A6M2b.png \
+    --output resources/images/planes/fighter/A6M2.png \
     --crop 285,35,1015,780 \
     --rotate -45 \
-    --target-width 770
+    --target-height 270
   ```
 - 角度说明：脚本沿用 Pillow 角度，正数为逆时针，顺时针 45 度写 `--rotate -45`。
-- 该脚本输出后必须再用 `view_image` 预览。若方向、裁剪、白边或残片有问题，只调整 `--crop`、`--rotate`、阈值或目标宽度；不要在脚本外重绘飞机结构。
+- 尺寸说明：原始 PNG 的机头到机尾垂直高度必须等于 `configs/planes.json5` 中该飞机 `length * 30` 像素；宽度按裁剪后原图比例自动确定，不强制压缩到配置 `width`。优先使用 `--target-height`，例如 `length: 9` 时传 `--target-height 270`。
+- 该脚本输出后必须再用 `view_image` 预览。若方向、裁剪、白边或残片有问题，只调整 `--crop`、`--rotate`、阈值或目标高度；不要在脚本外重绘飞机结构。
 
 ## 工作流程
 
@@ -66,7 +67,8 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
    - 只有用户明确要求独立玩法，且现有类型无法表达时，才扩展 Go 枚举、目标选择、移动策略、资源目录和相关判断。
 
 3. 生成顶视图素材。
-   - 先检查现有同国飞机 PNG：透明 RGBA、机头朝上，通常约 `10 px/米`。
+   - 先检查现有同国飞机 PNG：透明 RGBA、机头朝上。
+   - 原始 PNG 的垂直高度（机头到机尾）必须按 `planes.json5` 的 `length * 30` 像素生成；宽度由原素材比例决定，不为匹配配置宽度做非等比压缩。
    - 用户提供组合图时，优先裁取无遮挡、结构完整的同型机实例；若飞机互相遮挡，换用另一实例，不猜测被遮挡轮廓。
    - 仅做裁剪、旋转、透明化、边缘清理、轻微去噪和按真实尺寸缩放，不重绘用户素材，除非用户明确要求生成新美术。
    - 不要为了匹配其他飞机素材而重建线稿、重绘机翼/机身/尾翼、补画结构线或重新设计涂装。历史线稿即使不完美，也应优先保留。
@@ -90,6 +92,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 
 6. 验证。
    - 用 `git diff --check` 检查文本问题，用 `file` 或 `sips` 确认 PNG 为 RGBA 且尺寸合理。
+   - 对每张新增或更新的飞机 PNG，确认像素高度等于 `planes.json5` 中该飞机 `length * 30`；宽度只检查是否保持等比和视觉比例正常。
    - 搜索每个新飞机名，确认配置、资源和所有舰船引用一致且没有重复定义。
    - 搜索每个机炮、炸弹、鱼雷和火箭名称，确认上游配置存在。
    - 逐张使用 `view_image` 检查完整轮廓、朝向、透明边缘及发动机/螺旋桨等深色部件。

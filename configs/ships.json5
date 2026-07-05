@@ -2043,15 +2043,15 @@
       takeOffTime: 1.8,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 24
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 12
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 24
         }
       ]
@@ -2225,15 +2225,15 @@
       takeOffTime: 1.8,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 24
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 12
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 20
         }
       ]
@@ -2940,15 +2940,15 @@
       takeOffTime: 1.6,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 28
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 28
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 36
         }
       ]
@@ -3221,15 +3221,15 @@
       takeOffTime: 1.6,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 24
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 48
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 24
         }
       ]
@@ -3388,15 +3388,15 @@
       takeOffTime: 1.5,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 21
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 21
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 21
         }
       ]
@@ -3555,15 +3555,15 @@
       takeOffTime: 1.5,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 24
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 24
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 24
         }
       ]
@@ -3764,15 +3764,15 @@
       takeOffTime: 1.7,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 20
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 32
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 32
         }
       ]
@@ -4182,15 +4182,15 @@
       takeOffTime: 2.1,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 15
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 20
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 23
         }
       ]
@@ -4307,11 +4307,11 @@
       takeOffTime: 2.8,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 18
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 24
         }
       ]
@@ -4400,11 +4400,11 @@
       takeOffTime: 2.4,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 21
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 9
         }
       ]
@@ -4535,11 +4535,11 @@
       takeOffTime: 2.3,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 21
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 9
         }
       ]
@@ -4670,11 +4670,11 @@
       takeOffTime: 2.8,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 18
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 9
         }
       ]
@@ -4805,11 +4805,11 @@
       takeOffTime: 2.8,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 18
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 12
         }
       ]
@@ -4912,11 +4912,11 @@
       takeOffTime: 4,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 8
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 6
         }
       ]
@@ -8499,15 +8499,15 @@
       takeOffTime: 6,
       groups: [
         {
-          name: "A6M2b",
+          name: "A6M2",
           maxCount: 6
         },
         {
-          name: "D3A_99",
+          name: "D3A1",
           maxCount: 8
         },
         {
-          name: "B5N2_97",
+          name: "B5N2",
           maxCount: 8
         }
       ]
