@@ -18,11 +18,6 @@
     timeCost: 3,
     tonnage: 20,
     range: 3360,
-    description: [
-      "战斗机",
-      "4 x 20mm 机炮",
-      "4 x 12.7mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -103,12 +98,6 @@
     timeCost: 5,
     tonnage: 45,
     range: 5300,
-    description: [
-      "轰炸机",
-      "2 x 20mm 机炮（侧向）",
-      "1 x 20mm 双联装机炮（后向）",
-      "3 x 2000 磅，6 x 250 磅炸弹"
-    ],
     weapon: {
       guns: [
         {
@@ -216,13 +205,6 @@
     timeCost: 5,
     tonnage: 38,
     range: 4100,
-    description: [
-      "攻击机",
-      "2 x 20mm 机炮（前向）",
-      "2 x 20mm 机炮（侧向）",
-      "1 x 20mm 双联装机炮（后向）",
-      "4 x Mk-13 570mm 鱼雷"
-    ],
     weapon: {
       guns: [
         {
@@ -310,10 +292,6 @@
     timeCost: 5,
     tonnage: 3.2,
     range: 1550,
-    description: [
-      "战斗机（美）",
-      "4 x 12.7mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -362,10 +340,6 @@
     timeCost: 5,
     tonnage: 3.367,
     range: 1360,
-    description: [
-      "战斗机（美）",
-      "4 x 12.7mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -412,10 +386,6 @@
     timeCost: 5,
     tonnage: 5.7,
     range: 1520,
-    description: [
-      "战斗机（美）",
-      "6 x 12.7mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -476,12 +446,6 @@
     timeCost: 5,
     tonnage: 4.245,
     range: 1595,
-    description: [
-      "俯冲轰炸机（美）",
-      "2 x 12.7mm 机枪（前向）",
-      "2 x 7.62mm 机枪（后座）",
-      "1 x 2000 磅，2 x 250 磅炸弹"
-    ],
     weapon: {
       guns: [
         {
@@ -543,12 +507,6 @@
     timeCost: 5,
     tonnage: 7.6,
     range: 1900,
-    description: [
-      "俯冲轰炸机（美）",
-      "2 x 20mm 机炮（前向）",
-      "2 x 7.62mm 机枪（后座）",
-      "1 x 2000 磅，2 x 500 磅炸弹"
-    ],
     weapon: {
       guns: [
         {
@@ -612,12 +570,6 @@
     timeCost: 5,
     tonnage: 4.624,
     range: 1200,
-    description: [
-      "鱼雷轰炸机（美）",
-      "1 x 12.7mm 机枪（前向）",
-      "1 x 7.62mm 机枪（后座）",
-      "1 x Mk-13 570mm 鱼雷"
-    ],
     weapon: {
       guns: [
         {
@@ -660,13 +612,6 @@
     timeCost: 5,
     tonnage: 7.8,
     range: 1600,
-    description: [
-      "鱼雷轰炸机（美）",
-      "1 x 12.7mm 机枪（前向）",
-      "1 x 12.7mm 机枪（背部炮塔）",
-      "1 x 7.62mm 机枪（腹部后向）",
-      "1 x Mk-13 570mm 鱼雷"
-    ],
     weapon: {
       guns: [
         {
@@ -715,10 +660,6 @@
     timeCost: 5,
     tonnage: 1.7,
     range: 1200,
-    description: [
-      "战斗机（日）",
-      "2 x 7.7mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -755,12 +696,6 @@
     timeCost: 5,
     tonnage: 2.424,
     range: 3350,
-    description: [
-      "战斗机（日）",
-      "零式舰载战斗机二一型",
-      "2 x 20mm 机炮",
-      "2 x 7.7mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -807,12 +742,6 @@
     timeCost: 5,
     tonnage: 2.544,
     range: 2389,
-    description: [
-      "战斗机（日）",
-      "零式舰载战斗机三二型",
-      "2 x 20mm 机炮",
-      "2 x 7.7mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -843,6 +772,98 @@
     }
   },
   {
+    // 雷电二一型
+    name: "J2M3",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 34,
+    damageReduction: 0.4,
+    maxSpeed: 587,
+    acceleration: 34,
+    rotateSpeed: 13,
+    length: 9.7,
+    width: 10.8,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 3.435,
+    range: 2519,
+    weapon: {
+      guns: [
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 紫电二一型（改）
+    name: "N1K2",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 38,
+    damageReduction: 0.45,
+    maxSpeed: 644,
+    acceleration: 35,
+    rotateSpeed: 14,
+    length: 9.376,
+    width: 11.99,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 3.8,
+    range: 1715,
+    weapon: {
+      guns: [
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
     // 九九式
     name: "D3A1",
     nation: "jp",
@@ -861,12 +882,6 @@
     timeCost: 5,
     tonnage: 3.65,
     range: 1472,
-    description: [
-      "俯冲轰炸机（日）",
-      "2 x 7.7mm 机枪（前向）",
-      "1 x 7.7mm 机枪（后座）",
-      "1 x 250kg，2 x 60kg 炸弹"
-    ],
     weapon: {
       guns: [
         {
@@ -930,11 +945,6 @@
     timeCost: 5,
     tonnage: 3.8,
     range: 1992,
-    description: [
-      "鱼雷轰炸机（日）",
-      "1 x 7.62mm 机枪（后座）",
-      "1 x 九一式 450mm 鱼雷"
-    ],
     weapon: {
       guns: [
         {
@@ -955,6 +965,49 @@
     }
   },
   {
+    // 天山
+    name: "B6N2",
+    nation: "jp",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    totalHP: 50,
+    damageReduction: 0.5,
+    maxSpeed: 482,
+    acceleration: 24,
+    rotateSpeed: 7,
+    length: 11,
+    width: 15,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 5.2,
+    range: 1746,
+    weapon: {
+      guns: [
+        {
+          name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "JP/AST/450/1943",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 5
+    }
+  },
+  {
     // 烈风
     name: "A7M2",
     nation: "jp",
@@ -971,11 +1024,6 @@
     timeCost: 5,
     tonnage: 4.72,
     range: 1960,
-    description: [
-      "战斗机（日）",
-      "2 x 20mm 机炮",
-      "2 x 13mm 机枪",
-    ],
     weapon: {
       guns: [
         {
@@ -1022,12 +1070,6 @@
     timeCost: 5,
     tonnage: 4.657,
     range: 1520,
-    description: [
-      "俯冲轰炸机（日）",
-      "2 x 7.7mm 机枪（前向）",
-      "1 x 7.92mm 机枪（后座）",
-      "1 x 500kg 炸弹"
-    ],
     weapon: {
       guns: [
         {
@@ -1077,12 +1119,6 @@
     timeCost: 5,
     tonnage: 5.7,
     range: 3038,
-    description: [
-      "舰载攻击机（日）",
-      "2 x 20mm 机炮（前向）",
-      "1 x 13mm 机枪（后座）",
-      "1 x 九一式 450mm 鱼雷"
-    ],
     weapon: {
       guns: [
         {
@@ -1133,10 +1169,6 @@
     timeCost: 5,
     tonnage: 4.5,
     range: 5308,
-    description: [
-      "舰载侦察机（日，侦察系统实装前不自动出动）",
-      "无攻击挂载"
-    ],
     weapon: {}
   }
 ]

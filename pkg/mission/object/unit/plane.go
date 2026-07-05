@@ -54,8 +54,6 @@ type Plane struct {
 	Type PlaneType `json:"type"`
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
-	// 描述
-	Description []string `json:"description"`
 
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`

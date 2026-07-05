@@ -207,7 +207,7 @@
       {label: "高炮", value: "22x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M2）x24"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x12"},
-      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
+      {label: "舰载攻击机", value: "流星舰攻（B7A2）x24"},
     ],
     description: "白龙号是游戏中对日本海军 G-15 改进型航空母舰方案的命名。该方案以大凤型装甲航空母舰为基础进一步扩大舰体并强化航空运用能力，但最终未实际建造。",
     author: "BB1987",
@@ -231,7 +231,7 @@
       {label: "高炮", value: "17x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M2）x24"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x12"},
-      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x20"},
+      {label: "鱼雷攻击机", value: "天山舰攻（B6N2）x20"},
     ],
     description: "大凤号航空母舰是日本海军在第二次世界大战期间建成的装甲航空母舰，也是日本第一艘采用装甲飞行甲板的正规大型航空母舰。该舰于 1944 年 3 月服役，同年 6 月参加马里亚纳海战时遭美国潜艇大青花鱼号鱼雷命中，随后因航空燃油蒸气爆炸而沉没。",
     author: "BB1987",
@@ -331,7 +331,7 @@
       {label: "高炮", value: "16x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M2）x20"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x32"},
-      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x32"},
+      {label: "鱼雷攻击机", value: "天山舰攻（B6N2）x32"},
     ],
     description: "翔鹤号航空母舰是日本海军翔鹤级航空母舰首舰，1941 年服役，与同级舰瑞鹤共同组成第五航空战队。翔鹤级在飞龙号基础上扩大改进，具备较高航速、双层机库和较强舰载机运用能力，曾参加珍珠港空袭、珊瑚海海战、南太平洋海战等作战。1944 年 6 月马里亚纳海战中，翔鹤号遭美军潜艇棘鳍号鱼雷命中，随后因航空燃料气体引发爆炸而沉没。",
     author: "PomboCZ",
@@ -421,7 +421,7 @@
       {label: "防空火箭", value: "6x28 120mm 五式"},
       {label: "制空战斗机", value: "烈风舰战（A7M2）x24"},
       {label: "俯冲轰炸机", value: "彗星舰爆（D4Y3）x6"},
-      {label: "舰载攻击机", value: "流星舰攻（B7A2）x24"},
+      {label: "鱼雷攻击机", value: "天山舰攻（B6N2）x24"},
     ],
     description: "云龙号航空母舰是日本海军云龙级航空母舰首舰，以飞龙号为基础简化设计并面向战时量产。该舰于 1944 年 8 月服役，但因飞行员和舰载机不足未能作为舰队航母投入决战；同年 12 月在向菲律宾运送樱花特别攻击机时，被美国潜艇红鱼号鱼雷击中后发生爆炸并沉没。游戏中按 1944 年后期防空强化状态配置，并采用云龙级设计舰载机编制。",
     author: "BB1987, Smokey455",
@@ -2337,6 +2337,30 @@
     links: []
   },
   {
+    name: "J2M3",
+    displayName: "雷电二一型",
+    armaments: [
+      {label: "机炮（前向）", value: "4 x 20mm"},
+    ],
+    description: "日本海军局地战斗机，强调爬升、极速与火力；游戏中作为战斗机使用。",
+    author: "",
+    links: [
+      {name: "维基百科 - 雷电战斗机", url: "https://zh.wikipedia.org/wiki/%E9%9B%B7%E9%9B%BB%E6%88%B0%E9%AC%A5%E6%A9%9F"},
+    ]
+  },
+  {
+    name: "N1K2",
+    displayName: "紫电二一型（改）",
+    armaments: [
+      {label: "机炮（前向）", value: "4 x 20mm"}
+    ],
+    description: "日本海军局地战斗机，紫电改的最初量产型；游戏中作为战斗机使用。",
+    author: "",
+    links: [
+      {name: "维基百科 - 紫电改", url: "https://zh.wikipedia.org/wiki/%E7%B4%AB%E7%94%B5%E6%94%B9"},
+    ]
+  },
+  {
     name: "A7M2",
     displayName: "烈风",
     armaments: [
@@ -2359,11 +2383,23 @@
     links: []
   },
   {
+    name: "B6N2",
+    displayName: "天山",
+    armaments: [
+      {label: "机枪（机背）", value: "7.7mm 九二式"},
+      {label: "机枪（机腹）", value: "7.7mm 九二式"},
+      {label: "鱼雷", value: "1 x 九一式 450mm"},
+    ],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
     name: "B7A2",
     displayName: "流星",
     armaments: [
-      {label: "机炮（前向）", value: "2 x 20mm"},
-      {label: "机枪（后座）", value: "1 x 13mm"},
+      {label: "机炮（机翼）", value: "2 x 20mm 九九式"},
+      {label: "机枪（后座）", value: "1 x 13mm 二年式"},
       {label: "鱼雷", value: "1 x 九一式 450mm"},
     ],
     description: "",

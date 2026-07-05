@@ -2051,7 +2051,7 @@
           maxCount: 12
         },
         {
-          name: "B5N2",
+          name: "B7A2",
           maxCount: 24
         }
       ]
@@ -2233,7 +2233,7 @@
           maxCount: 12
         },
         {
-          name: "B5N2",
+          name: "B6N2",
           maxCount: 20
         }
       ]
@@ -3772,7 +3772,7 @@
           maxCount: 32
         },
         {
-          name: "B5N2",
+          name: "B6N2",
           maxCount: 32
         }
       ]
@@ -4023,7 +4023,7 @@
           maxCount: 6
         },
         {
-          name: "B7A2",
+          name: "B6N2",
           maxCount: 24
         }
       ]

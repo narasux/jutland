@@ -344,8 +344,8 @@
         "value": "D3A x12"
       },
       {
-        "label": "Torpedo Bombers",
-        "value": "B5N2 x24"
+        "label": "Attack Aircraft",
+        "value": "B7A2 Ryūsei x24"
       }
     ],
     "description": "Hakuryū is the game's name for an enlarged development of Japan's wartime G-15 carrier design. The concept builds on the armored flight deck and protected aviation facilities of Taihō while expanding the hull and air group. No ship of this design was laid down before Japan's carrier program collapsed.",
@@ -384,7 +384,7 @@
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x20"
+        "value": "B6N2 Tenzan x20"
       }
     ],
     "description": "Taihō was the Imperial Japanese Navy's first fleet carrier built with an armored flight deck. Commissioned in March 1944, she joined the First Mobile Fleet for the Battle of the Philippine Sea. A torpedo from USS Albacore ruptured aviation-fuel systems, and accumulated vapors later exploded, sinking the carrier on 19 June.",
@@ -556,7 +556,7 @@
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x32"
+        "value": "B6N2 Tenzan x32"
       }
     ],
     "description": "Shōkaku was the lead ship of a fast, capable class of Japanese fleet carriers commissioned shortly before the Pacific War. Together with Zuikaku she fought at Pearl Harbor, the Coral Sea, and the Santa Cruz Islands. USS Cavalla torpedoed her during the Battle of the Philippine Sea in June 1944.",
@@ -711,8 +711,8 @@
         "value": "D4Y3 Suisei x6"
       },
       {
-        "label": "Attack Aircraft",
-        "value": "B7A2 Ryūsei x24"
+        "label": "Torpedo Bombers",
+        "value": "B6N2 Tenzan x24"
       }
     ],
     "description": "Unryū was the lead ship of a wartime carrier class derived from Hiryū and simplified for mass production. Commissioned in August 1944, she never operated as a fleet carrier because Japan lacked trained aircrew and aircraft. In December 1944, USS Redfish torpedoed her while she was transporting Ōka special-attack aircraft to the Philippines.",
@@ -3634,6 +3634,36 @@
     ]
   },
   {
+    "name": "J2M3",
+    "displayName": "J2M3 Raiden Model 21",
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "4 x 20mm"}
+    ],
+    "description": "Imperial Japanese Navy local interceptor fighter emphasizing climb, speed, and firepower; represented in game as a fighter.",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — Mitsubishi J2M Raiden",
+        "url": "https://zh.wikipedia.org/wiki/%E9%9B%B7%E9%9B%BB%E6%88%B0%E9%AC%A5%E6%A9%9F"
+      }
+    ]
+  },
+  {
+    "name": "N1K2",
+    "displayName": "N1K2-J Shiden Kai Model 21",
+    "armaments": [
+      {"label": "Cannons (Forward)", "value": "4 x 20mm"}
+    ],
+    "description": "Imperial Japanese Navy local fighter and the first production Shiden Kai variant; represented in game as a fighter.",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — Kawanishi N1K Shiden",
+        "url": "https://zh.wikipedia.org/wiki/%E7%B4%AB%E7%94%B5%E6%94%B9"
+      }
+    ]
+  },
+  {
     "name": "A7M2",
     "displayName": "A7M2 Reppū",
     "armaments": [
@@ -3666,11 +3696,28 @@
     ]
   },
   {
+    "name": "B6N2",
+    "displayName": "B6N2 Tenzan",
+    "armaments": [
+      {"label": "Machine Guns (Dorsal)", "value": "7.7mm Type 92"},
+      {"label": "Machine Guns (Ventral)", "value": "7.7mm Type 92"},
+      {"label": "Torpedo", "value": "1 x Type 91 450mm"}
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "Wikipedia — B6N2 Tenzan",
+        "url": "https://en.wikipedia.org/wiki/Nakajima%20B6N"
+      }
+    ]
+  },
+  {
     "name": "B7A2",
     "displayName": "B7A2 Ryūsei",
     "armaments": [
-      {"label": "Cannons (Forward)", "value": "2 x 20mm"},
-      {"label": "Machine Gun (Rear)", "value": "1 x 13mm"},
+      {"label": "Wing Cannons", "value": "2 x 20mm Type 99"},
+      {"label": "Machine Gun (Rear)", "value": "1 x 13mm Type 2"},
       {"label": "Torpedo", "value": "1 x Type 91 450mm"}
     ],
     "description": "",
