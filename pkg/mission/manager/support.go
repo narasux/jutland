@@ -42,7 +42,8 @@ func (m *MissionManager) updateBuildings() {
 		); ship != nil {
 			m.state.Arena.Ships[ship.Uid] = ship
 			if rp.BelongPlayer == m.state.Player.CurPlayer {
-				m.state.Player.CurFunds -= ship.FundsCost
+				fundsCost, _ := objUnit.GetShipCost(ship.Name)
+				m.state.Player.CurFunds -= fundsCost
 			}
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3

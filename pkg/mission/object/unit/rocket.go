@@ -44,6 +44,8 @@ type RocketLauncher struct {
 	AntiAircraft bool `json:"antiAircraft"`
 	// 近炸触发半径
 	ProximityRadius float64 `json:"proximityRadius"`
+	// 造价
+	FundsCost int64 `json:"fundsCost"`
 	// 爆炸伤害半径
 	BlastRadius float64 `json:"blastRadius"`
 	// 相对位置

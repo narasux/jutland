@@ -27,6 +27,8 @@ type Gun struct {
 	ReloadTime float64 `json:"reloadTime"`
 	// 射程
 	Range float64 `json:"range"`
+	// 造价
+	FundsCost int64 `json:"fundsCost"`
 	// 炮弹散布
 	BulletSpread int `json:"bulletSpread"`
 	// 炮弹速度

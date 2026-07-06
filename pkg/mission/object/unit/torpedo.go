@@ -30,6 +30,8 @@ type TorpedoLauncher struct {
 	Range float64 `json:"range"`
 	// 鱼雷速度
 	BulletSpeed float64 `json:"bulletSpeed"`
+	// 造价
+	FundsCost int64 `json:"fundsCost"`
 	// 相对位置
 	// 0.35 -> 从中心往舰首 35% 舰体长度
 	// -0.3 -> 从中心往舰尾 30% 舰体长度

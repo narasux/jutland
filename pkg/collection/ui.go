@@ -1396,6 +1396,21 @@ func (c *CollectionUI) currentShipPositionLabel() string {
 	return fmt.Sprintf("%d/%d", position, total)
 }
 
+// shipCollectionCostValue 返回图鉴中展示的费用文本。
+// 航母展示舰体费 + 舰载机费合计；其他舰种只展示舰体费。
+func shipCollectionCostValue(ship *objUnit.BattleShip) string {
+	totalFunds := ship.FundsCost
+	for _, group := range ship.Aircraft.Groups {
+		if plane, ok := objUnit.PlaneMap[group.Name]; ok {
+			totalFunds += group.MaxCount * plane.FundsCost
+		}
+	}
+	return i18n.Format(i18n.MsgValueCost, map[string]any{
+		"Funds":   totalFunds,
+		"Seconds": ship.TimeCost,
+	})
+}
+
 func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []objRef.InfoItem {
 	// reference 只保留精细舰种名称，其余档案数据全部来自 ships.json5 初始化后的舰船对象。
 	return []objRef.InfoItem{
@@ -1415,7 +1430,7 @@ func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []obj
 		},
 		{
 			Label: i18n.Text(i18n.MsgCollectionCost),
-			Value: i18n.Format(i18n.MsgValueCost, map[string]any{"Funds": ship.FundsCost, "Seconds": ship.TimeCost}),
+			Value: shipCollectionCostValue(ship),
 		},
 		{
 			Label: i18n.Text(i18n.MsgCollectionHorizontalDR),

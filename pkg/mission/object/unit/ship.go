@@ -102,7 +102,7 @@ type BattleShip struct {
 	Length float64 `json:"length"`
 	// 战舰宽度
 	Width float64 `json:"width"`
-	// 造价
+	// 舰体费（不含舰载机）
 	FundsCost int64 `json:"fundsCost"`
 	// 耗时
 	TimeCost int64 `json:"timeCost"`
@@ -440,8 +440,23 @@ func GetShipDisplayName(name string) string {
 	return name
 }
 
-// GetShipCost 获取战舰成本
+// GetShipCost 获取战舰成本（舰体费 + 舰载机费）。
 func GetShipCost(name string) (fundsCost int64, timeCost int64) {
+	ship, ok := ShipMap[name]
+	if !ok {
+		return 0, 0
+	}
+	aircraftCost := int64(0)
+	for _, group := range ship.Aircraft.Groups {
+		if plane, ok := PlaneMap[group.Name]; ok {
+			aircraftCost += group.MaxCount * plane.FundsCost
+		}
+	}
+	return ship.FundsCost + aircraftCost, ship.TimeCost
+}
+
+// GetShipHullCost 获取战舰舰体成本（不含舰载机）。
+func GetShipHullCost(name string) (fundsCost int64, timeCost int64) {
 	ship, ok := ShipMap[name]
 	if !ok {
 		return 0, 0
@@ -449,7 +464,6 @@ func GetShipCost(name string) (fundsCost int64, timeCost int64) {
 	return ship.FundsCost, ship.TimeCost
 }
 
-// ShipUidGenerator 战舰 Uid 生成器
 type ShipUidGenerator struct {
 	player  faction.Player
 	counter map[string]int

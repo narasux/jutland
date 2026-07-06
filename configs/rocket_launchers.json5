@@ -11,10 +11,11 @@
     range: 16,
     bulletSpread: 200,
     bulletSpeed: 880,
-    antiShip: false,
-    antiAircraft: true,
     proximityRadius: 0.25,
-    blastRadius: 0.45
+    blastRadius: 0.45,
+    fundsCost: 10,
+    antiShip: false,
+    antiAircraft: true
   },
   // 日本海军 28 发 12cm 5式防空火箭炮
   {
@@ -28,10 +29,11 @@
     range: 12,
     bulletSpread: 250,
     bulletSpeed: 720,
-    antiShip: false,
-    antiAircraft: true,
     proximityRadius: 0.25,
     blastRadius: 0.45,
+    fundsCost: 5,
+    antiShip: false,
+    antiAircraft: true
   },
   // 日本海军 21 发 12cm 5式防空火箭炮
   {
@@ -45,10 +47,11 @@
     range: 12,
     bulletSpread: 250,
     bulletSpeed: 720,
-    antiShip: false,
-    antiAircraft: true,
     proximityRadius: 0.25,
     blastRadius: 0.45,
+    fundsCost: 5,
+    antiShip: false,
+    antiAircraft: true
   },
   // 中国海军 50 管舰载火箭炮
   {
@@ -62,10 +65,11 @@
     range: 14,
     bulletSpread: 300,
     bulletSpeed: 680,
-    antiShip: true,
-    antiAircraft: false,
     proximityRadius: 0.2,
     blastRadius: 0.5,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: false
   },
   // 中国海军 65 式 250mm 五管反潜火箭发射器
   {
@@ -79,9 +83,10 @@
     range: 8,
     bulletSpread: 120,
     bulletSpeed: 520,
-    antiShip: true,
-    antiAircraft: false,
     proximityRadius: 0.25,
     blastRadius: 0.75,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: false
   },
 ]
