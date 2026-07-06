@@ -71,7 +71,7 @@ type Plane struct {
 	Length float64 `json:"length"`
 	// 战机宽度
 	Width float64 `json:"width"`
-	// 造价 TODO 航空母舰可以无限补充飞机，但是得花时间 & 钱？
+	// 造价
 	FundsCost int64 `json:"fundsCost"`
 	// 耗时
 	TimeCost int64 `json:"timeCost"`
@@ -311,4 +311,13 @@ func GetPlaneDisplayName(name string) string {
 		return ref.DisplayName
 	}
 	return name
+}
+
+// GetPlaneCost 获取飞机成本
+func GetPlaneCost(name string) (fundsCost int64, timeCost int64) {
+	plane, ok := PlaneMap[name]
+	if !ok {
+		return 0, 0
+	}
+	return plane.FundsCost, plane.TimeCost
 }

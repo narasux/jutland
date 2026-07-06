@@ -12,10 +12,8 @@
     rotateSpeed: 25,
     length: 25,
     width: 18,
-    // TODO 确认资金
-    fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 3,
+    fundsCost: 25,
+    timeCost: 10,
     tonnage: 20,
     range: 3360,
     weapon: {
@@ -92,10 +90,8 @@
     rotateSpeed: 10,
     length: 36,
     width: 21,
-    // TODO 确认资金
-    fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    fundsCost: 25,
+    timeCost: 10,
     tonnage: 45,
     range: 5300,
     weapon: {
@@ -199,10 +195,8 @@
     rotateSpeed: 20,
     length: 27,
     width: 22,
-    // TODO 确认资金
-    fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    fundsCost: 25,
+    timeCost: 10,
     tonnage: 38,
     range: 4100,
     weapon: {
@@ -289,7 +283,7 @@
     length: 8,
     width: 11,
     fundsCost: 10,
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 3.2,
     range: 1550,
     weapon: {
@@ -334,10 +328,8 @@
     rotateSpeed: 12,
     length: 9,
     width: 12,
-    // TODO 确认资金
     fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 3.367,
     range: 1360,
     weapon: {
@@ -383,7 +375,7 @@
     length: 10,
     width: 13,
     fundsCost: 10,
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 5.7,
     range: 1520,
     weapon: {
@@ -440,10 +432,8 @@
     rotateSpeed: 8,
     length: 10,
     width: 13,
-    // TODO 确认资金
-    fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    fundsCost: 15,
+    timeCost: 7,
     tonnage: 4.245,
     range: 1595,
     weapon: {
@@ -503,8 +493,8 @@
     rotateSpeed: 7,
     length: 11,
     width: 15,
-    fundsCost: 10,
-    timeCost: 5,
+    fundsCost: 20,
+    timeCost: 9,
     tonnage: 7.6,
     range: 1900,
     weapon: {
@@ -564,10 +554,8 @@
     rotateSpeed: 6,
     length: 11,
     width: 15,
-    // TODO 确认资金
     fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 4.624,
     range: 1200,
     weapon: {
@@ -608,8 +596,8 @@
     rotateSpeed: 6,
     length: 12,
     width: 17,
-    fundsCost: 10,
-    timeCost: 5,
+    fundsCost: 15,
+    timeCost: 7,
     tonnage: 7.8,
     range: 1600,
     weapon: {
@@ -657,7 +645,7 @@
     length: 8,
     width: 11,
     fundsCost: 10,
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 1.7,
     range: 1200,
     weapon: {
@@ -690,10 +678,8 @@
     rotateSpeed: 16,
     length: 9,
     width: 12,
-    // TODO 确认资金
     fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 2.424,
     range: 3350,
     weapon: {
@@ -739,7 +725,7 @@
     length: 9,
     width: 12,
     fundsCost: 10,
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 2.544,
     range: 2389,
     weapon: {
@@ -785,7 +771,7 @@
     length: 9.7,
     width: 10.8,
     fundsCost: 10,
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 3.435,
     range: 2519,
     weapon: {
@@ -831,7 +817,7 @@
     length: 9.376,
     width: 11.99,
     fundsCost: 10,
-    timeCost: 5,
+    timeCost: 6,
     tonnage: 3.8,
     range: 1715,
     weapon: {
@@ -876,10 +862,8 @@
     rotateSpeed: 9,
     length: 10,
     width: 15,
-    // TODO 确认资金
-    fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    fundsCost: 15,
+    timeCost: 7,
     tonnage: 3.65,
     range: 1472,
     weapon: {
@@ -939,10 +923,8 @@
     rotateSpeed: 7,
     length: 10,
     width: 16,
-    // TODO 确认资金
-    fundsCost: 10,
-    // TODO 确认时间
-    timeCost: 5,
+    fundsCost: 15,
+    timeCost: 7,
     tonnage: 3.8,
     range: 1992,
     weapon: {
@@ -977,8 +959,8 @@
     rotateSpeed: 7,
     length: 11,
     width: 15,
-    fundsCost: 10,
-    timeCost: 5,
+    fundsCost: 20,
+    timeCost: 9,
     tonnage: 5.2,
     range: 1746,
     weapon: {
@@ -1020,8 +1002,8 @@
     rotateSpeed: 13,
     length: 11,
     width: 14,
-    fundsCost: 10,
-    timeCost: 5,
+    fundsCost: 15,
+    timeCost: 7,
     tonnage: 4.72,
     range: 1960,
     weapon: {
@@ -1066,8 +1048,8 @@
     rotateSpeed: 9,
     length: 10,
     width: 12,
-    fundsCost: 10,
-    timeCost: 5,
+    fundsCost: 15,
+    timeCost: 7,
     tonnage: 4.657,
     range: 1520,
     weapon: {
@@ -1115,8 +1097,8 @@
     rotateSpeed: 8,
     length: 11,
     width: 14,
-    fundsCost: 10,
-    timeCost: 5,
+    fundsCost: 25,
+    timeCost: 10,
     tonnage: 5.7,
     range: 3038,
     weapon: {
@@ -1165,10 +1147,12 @@
     rotateSpeed: 10,
     length: 11,
     width: 13,
-    fundsCost: 10,
-    timeCost: 5,
+    fundsCost: 15,
+    timeCost: 7,
     tonnage: 4.5,
     range: 5308,
     weapon: {}
   }
 ]
+
+
