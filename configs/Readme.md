@@ -457,6 +457,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     type: "fighter",
     // 类型缩写
     typeAbbr: "F",
+    // 服役年份
+    year: 1940,
     // 初始生命值
     totalHP: 35,
     // 伤害减免（0.7 -> 仅受到击中的 70% 伤害)

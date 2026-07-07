@@ -55,6 +55,8 @@ type Plane struct {
 	// 类别缩写
 	TypeAbbr string `json:"typeAbbr"`
 
+	// 服役年份
+	Year int `json:"year"`
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`
 	// 伤害减免（0.7 -> 仅受到击中的 30% 伤害)
