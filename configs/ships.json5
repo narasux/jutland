@@ -15,7 +15,7 @@
     length: 120,
     width: 100,
     fundsCost: 142,
-    timeCost: 52,
+    timeCost: 62,
     weapon: {
       mainGuns: [
         // 鸭子大炮
@@ -252,7 +252,7 @@
     length: 275,
     width: 34,
     fundsCost: 335,
-    timeCost: 119,
+    timeCost: 126,
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -596,7 +596,7 @@
     length: 247,
     width: 34,
     fundsCost: 263,
-    timeCost: 94,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -947,7 +947,7 @@
     length: 266,
     width: 28,
     fundsCost: 326,
-    timeCost: 116,
+    timeCost: 125,
     weapon: {
       mainGuns: [
         // 双联装高平炮 A
@@ -1373,7 +1373,7 @@
     length: 190,
     width: 22,
     fundsCost: 171,
-    timeCost: 62,
+    timeCost: 66,
     weapon: {
       mainGuns: [
         // 40mm 博福斯
@@ -1591,7 +1591,7 @@
     length: 151,
     width: 21,
     fundsCost: 182,
-    timeCost: 66,
+    timeCost: 70,
     weapon: {
       mainGuns: [
         // 5 英寸高平炮
@@ -2745,7 +2745,7 @@
     length: 261,
     width: 32,
     fundsCost: 362,
-    timeCost: 129,
+    timeCost: 130,
     weapon: {
       mainGuns: [
         // 右主炮 A
@@ -3251,7 +3251,7 @@
     length: 228,
     width: 22,
     fundsCost: 260,
-    timeCost: 93,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -3418,7 +3418,7 @@
     length: 228,
     width: 22,
     fundsCost: 284,
-    timeCost: 101,
+    timeCost: 110,
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -3585,7 +3585,7 @@
     length: 258,
     width: 26,
     fundsCost: 362,
-    timeCost: 129,
+    timeCost: 130,
     weapon: {
       mainGuns: [
         // 右前高平炮 A
@@ -3794,7 +3794,7 @@
     length: 227,
     width: 22,
     fundsCost: 341,
-    timeCost: 121,
+    timeCost: 130,
     weapon: {
       mainGuns: [
         // 右高角炮 A
@@ -4045,7 +4045,7 @@
     length: 219,
     width: 27,
     fundsCost: 319,
-    timeCost: 114,
+    timeCost: 123,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -4212,7 +4212,7 @@
     length: 180,
     width: 20,
     fundsCost: 190,
-    timeCost: 68,
+    timeCost: 74,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -4333,7 +4333,7 @@
     length: 206,
     width: 18,
     fundsCost: 199,
-    timeCost: 72,
+    timeCost: 77,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -4426,7 +4426,7 @@
     length: 186,
     width: 22,
     fundsCost: 237,
-    timeCost: 85,
+    timeCost: 90,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -4561,7 +4561,7 @@
     length: 180,
     width: 23,
     fundsCost: 253,
-    timeCost: 91,
+    timeCost: 96,
     weapon: {
       mainGuns: [
         // 右舷高炮 A
@@ -4696,7 +4696,7 @@
     length: 198,
     width: 26,
     fundsCost: 272,
-    timeCost: 97,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -4831,7 +4831,7 @@
     length: 168,
     width: 18,
     fundsCost: 186,
-    timeCost: 67,
+    timeCost: 71,
     weapon: {
       mainGuns: [
         // 右前主炮
@@ -12923,7 +12923,7 @@
     rotateSpeed: 0.85,
     length: 269,
     width: 36,
-    fundsCost: 562,
+    fundsCost: 602,
     timeCost: 130,
     weapon: {
       mainGuns: [
@@ -13123,7 +13123,7 @@
     rotateSpeed: 0.85,
     length: 260,
     width: 34,
-    fundsCost: 530,
+    fundsCost: 570,
     timeCost: 130,
     weapon: {
       mainGuns: [
@@ -13302,7 +13302,7 @@
     rotateSpeed: 0.85,
     length: 282,
     width: 40,
-    fundsCost: 668,
+    fundsCost: 718,
     timeCost: 130,
     weapon: {
       mainGuns: [
@@ -13656,7 +13656,7 @@
     rotateSpeed: 0.8,
     length: 324,
     width: 36,
-    fundsCost: 707,
+    fundsCost: 757,
     timeCost: 130,
     weapon: {
       mainGuns: [
@@ -21101,8 +21101,8 @@
     rotateSpeed: 1.5,
     length: 210,
     width: 22,
-    fundsCost: 206,
-    timeCost: 74,
+    fundsCost: 216,
+    timeCost: 78,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -21210,8 +21210,8 @@
     rotateSpeed: 1.6,
     length: 191,
     width: 18,
-    fundsCost: 157,
-    timeCost: 57,
+    fundsCost: 167,
+    timeCost: 60,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -22471,8 +22471,8 @@
     rotateSpeed: 6,
     length: 25,
     width: 6,
-    fundsCost: 42,
-    timeCost: 17,
+    fundsCost: 47,
+    timeCost: 18,
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -22562,5 +22562,4 @@
     timeCost: 86,
   },
 ]
-
 

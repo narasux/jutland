@@ -44,7 +44,7 @@ weaponCost    = clamp(round(weaponRawCost / 5) * 5, 1, 200)
 ```
 hullRawCost = HP^0.45 * typeMultiplier * nationMultiplier * hullScaleFactor
 fundsCost   = hullCost + weaponCost/10
-timeCost    = clamp(round(fundsCost * 0.35 + 2), 3, 130)
+hullTime    = clamp(round(fundsCost * 0.35 + 2), 3, 130)
 ```
 
 | 舰种 | typeMultiplier |
@@ -65,7 +65,7 @@ timeCost    = clamp(round(fundsCost * 0.35 + 2), 3, 130)
 | jp | 1.00 |
 | de | 1.05 |
 | uk | 1.00 |
-| ru | 1.10 |
+| ru / su | 1.10 |
 | cn | 1.00 |
 
 ### 舰载机费（运行时计算）
@@ -74,6 +74,41 @@ timeCost    = clamp(round(fundsCost * 0.35 + 2), 3, 130)
 aircraftCost = sum(planeCount * planeFundsCost)
 totalCost    = fundsCost + aircraftCost
 ```
+
+舰载机资金全额计入总费用，但不线性计入舰船建造时间。舰体与舰载机生产在设定上可并行，航母只承担小额的“飞行队适配时间”，用于表达机库、甲板调度、备件、弹药与飞行队磨合成本。
+
+```
+aircraftCount = sum(planeCount)
+aircraftTypes = count(unique planeName)
+avgPlaneTime  = weightedAverage(planeTimeCost, planeCount)
+
+airWingFitPenalty = clamp(
+    round(sqrt(aircraftCount) * avgPlaneTime * 0.12 + (aircraftTypes - 1) * 1.5),
+    0,
+    18,
+)
+timeCost = clamp(round(hullTime + airWingFitPenalty * nationTimeMultiplier), 3, 130)
+```
+
+| 国家 | nationTimeMultiplier | 说明 |
+|------|----------------------|------|
+| us | 0.75 | 工业化建造与大规模舰载机整备优势 |
+| uk | 0.90 | 成熟海军工业，略快 |
+| jp | 1.00 | 基准 |
+| de | 1.00 | 基准 |
+| ru / su | 1.05 | 略慢 |
+| cn | 0.50 | 建造/适配时间显著优惠 |
+
+### 年份性价比（后续校准目标）
+
+年份越新的单位应有更高目标性价比。当前脚本先保留 HP / 武器 / 舰载机三层费用模型；下一版若接入 `CombatPower.Total`，推荐改为以目标性价比反推费用：
+
+```
+targetEfficiency = baseEfficiency(type) * yearEfficiencyBonus(year) * nationEfficiencyBonus(nation)
+fundsCost        = combatPower / targetEfficiency
+```
+
+这样年份和国家工业能力会成为显式平衡参数，而不是依赖取整、上限或配置偶然性。
 
 ## 当前校准
 

@@ -22,6 +22,7 @@ description: Evaluate and assign fundsCost and timeCost for Jutland aircraft bas
 
 - `scripts/evaluate_plane_costs.sh`：编排脚本，负责提取战力数据、套用花费公式、输出建议值。
 - `scripts/plane_cost_data_test.go`：Go 测试模板，调用初始化函数后输出每架飞机的结构化战力数据。
+- `scripts/plane_cost_calc.py`：备用配置估算器；当 Go 测试因本机图形环境触发 Ebiten 初始化失败时使用。追加 `--apply` 可用备用估算器写回 `configs/planes.json5`。
 
 ### 使用方式
 
@@ -44,7 +45,7 @@ bash .codex/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
 
 ```
 rawFunds  = combatPower * typeMultiplier * scaleFactor
-fundsCost = clamp(round(rawFunds / 5) * 5, 3, 30)
+fundsCost = clamp(round(rawFunds), 3, 30)
 timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 ```
 
@@ -56,7 +57,7 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 | `typeMultiplier` (dive_bomber) | 1.15 | 俯冲轰炸机携带炸弹，费用略高 |
 | `typeMultiplier` (torpedo_bomber) | 1.30 | 鱼雷轰炸机挂载最重，费用最高 |
 | `scaleFactor` | 0.10 | 将战力值映射到 3–30 资金区间的缩放系数（初始估算值） |
-| `fundsCost` 范围 | 3–30 | 最便宜飞机不低于 $3，最贵飞机不超过 $30 |
+| `fundsCost` 范围 | 3–30 | 最便宜飞机不低于 $3，最贵飞机不超过 $30；不做粗粒度分档 |
 | `timeCost` 范围 | 3–10 | 建造时间随资金线性增长，钳制在 3–10 秒 |
 
 ### 比较基准
@@ -78,6 +79,8 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 ### 当前校准状态
 
 - scaleFactor: 0.10（初始估算，首次运行后校准）
+- fallbackScaleFactor: 0.30（仅用于 Python 配置估算器；其 `cpEstimate` 尺度低于 Go 图鉴战力）
+- fallbackFundsMin: 3
 
 ## 工作流程
 
@@ -111,9 +114,8 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 
 ```
 rawFunds  = tonnage * typeMultiplier * tonnageScaleFactor
-fundsCost = clamp(round(rawFunds / 5) * 5, 3, 30)
+fundsCost = clamp(round(rawFunds), 3, 30)
 timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 ```
 
 `tonnageScaleFactor` 需根据实际吨位范围校准，使 `rawFunds` 覆盖 3–30 区间。
-

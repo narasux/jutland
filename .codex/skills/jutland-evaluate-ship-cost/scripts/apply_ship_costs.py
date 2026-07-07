@@ -1,4 +1,4 @@
-import json5, json, math, re
+import json5, json, math, os, re
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 with open('/tmp/weapon_costs.json') as f:
@@ -12,14 +12,44 @@ TYPE_M = {
     'cruiser': 0.35, 'battleship': 0.80, 'aircraft_carrier': 0.65,
     'cargo': 0.30, 'hospital': 0.50,
 }
-NATION_M = {'us': 0.90, 'jp': 1.00, 'de': 1.05, 'uk': 1.00, 'ru': 1.10, 'cn': 1.00, 'special': 0.00}
+NATION_M = {
+    'us': 0.90, 'jp': 1.00, 'de': 1.05, 'uk': 1.00,
+    'ru': 1.10, 'su': 1.10, 'cn': 1.00, 'special': 0.00,
+}
+TIME_M = {
+    'us': 0.75, 'jp': 1.00, 'de': 1.00, 'uk': 0.90,
+    'ru': 1.05, 'su': 1.05, 'cn': 0.50, 'special': 1.00,
+}
 HULL_SF = 3.6
 WEAPON_SCALE = 10
+AIR_FIT_FACTOR = 0.12
+AIR_TYPE_PENALTY = 1.5
+AIR_FIT_MAX = 18
 
 _plane_costs = {}
+_plane_times = {}
 with open(f'{REPO}/configs/planes.json5') as f:
     for p in json5.loads(f.read()):
         _plane_costs[p['name']] = p.get('fundsCost', 10)
+        _plane_times[p['name']] = p.get('timeCost', 6)
+
+def air_wing_fit_penalty(s):
+    count = 0
+    weighted_time = 0
+    types = set()
+    for g in s.get('aircraft',{}).get('groups',[]):
+        plane_name = g.get('name','')
+        plane_count = g.get('maxCount',0)
+        if plane_count <= 0:
+            continue
+        count += plane_count
+        weighted_time += plane_count * _plane_times.get(plane_name, 6)
+        types.add(plane_name)
+    if count <= 0:
+        return 0
+    avg_time = weighted_time / count
+    raw = math.sqrt(count) * avg_time * AIR_FIT_FACTOR + max(0, len(types) - 1) * AIR_TYPE_PENALTY
+    return max(0, min(AIR_FIT_MAX, int(round(raw))))
 
 def calc(s):
     hp = float(s.get('totalHP', 0))
@@ -48,7 +78,9 @@ def calc(s):
         acost += g.get('maxCount',0) * _plane_costs.get(g.get('name',''), 10)
     
     total = funds + acost
-    time_cost = max(3, min(130, int(round(funds * 0.35 + 2))))
+    hull_time = max(3, min(130, int(round(funds * 0.35 + 2))))
+    fit_penalty = air_wing_fit_penalty(s)
+    time_cost = max(3, min(130, int(round(hull_time + fit_penalty * TIME_M.get(nation, 1.0)))))
     return funds, total, time_cost
 
 cost_map = {}

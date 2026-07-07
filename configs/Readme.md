@@ -1,5 +1,102 @@
 # 配置文件说明
 
+## 费用与耗时评估
+
+飞机与舰船的 `fundsCost` / `timeCost` 不建议手工长期维护。新增或重平衡单位后，优先使用仓库内的 Codex skill 统一评估，避免同类单位价格口径不一致。
+
+### 飞机费用（planes.json5）
+
+使用 skill：`jutland-evaluate-plane-cost`
+
+目标文件：`configs/planes.json5`
+
+主流程优先使用运行时战力数据：
+
+```bash
+bash .codex/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
+```
+
+如果当前环境因 Ebiten 图形初始化等问题无法运行 Go 测试导出，可使用备用配置估算器：
+
+```bash
+python3 .codex/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5
+python3 .codex/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5 --apply
+```
+
+当前飞机费用公式：
+
+```text
+rawFunds  = combatPower * typeMultiplier * scaleFactor
+fundsCost = clamp(round(rawFunds), 3, 30)
+timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
+```
+
+费用按整数写回，不再做 `$5` 粗粒度分档。备用估算器使用 `fallbackScaleFactor = 0.30`，其 `cpEstimate` 仅用于无法取得 Go 图鉴战力时的替代评估。
+
+### 舰船费用（ships.json5）
+
+使用 skill：`jutland-evaluate-ship-cost`
+
+目标文件：`configs/ships.json5`，并依赖 `configs/guns.json5`、`configs/torpedo_launchers.json5`、`configs/rocket_launchers.json5`、`configs/planes.json5` 中的武器和飞机费用。
+
+查看建议费用：
+
+```bash
+bash .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.sh
+```
+
+确认后写回：
+
+```bash
+python3 .codex/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
+```
+
+当前舰船费用分三层：
+
+```text
+weaponCost  = clamp(round(damage * bulletCount / reloadTime * weaponTypeFactor / 5) * 5, 1, 200)
+hullRawCost = HP^0.45 * typeMultiplier * nationMultiplier * hullScaleFactor
+fundsCost   = hullCost + weaponCost/10
+```
+
+航母的舰载机资金在运行时全额计入总费用：
+
+```text
+aircraftCost = sum(planeCount * planeFundsCost)
+totalCost    = fundsCost + aircraftCost
+```
+
+舰载机不线性增加舰船建造时间；舰船和飞机生产视为可并行。航母只增加小额飞行队适配时间：
+
+```text
+airWingFitPenalty = clamp(
+    round(sqrt(aircraftCount) * avgPlaneTime * 0.12 + (aircraftTypes - 1) * 1.5),
+    0,
+    18,
+)
+timeCost = clamp(round(hullTime + airWingFitPenalty * nationTimeMultiplier), 3, 130)
+```
+
+当前 `nationTimeMultiplier`：`us=0.75`、`uk=0.90`、`jp=1.00`、`de=1.00`、`ru/su=1.05`、`cn=0.50`。
+
+### 验证
+
+写回费用后至少运行：
+
+```bash
+make build
+```
+
+若只改费用脚本，可额外运行 Python 语法检查：
+
+```bash
+PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
+  .codex/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py \
+  .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py \
+  .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.py \
+  .codex/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
+```
+
 ## 弹药配置（bullets.json5）
 
 ```json5

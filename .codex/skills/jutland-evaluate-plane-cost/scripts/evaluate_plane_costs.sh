@@ -90,7 +90,7 @@ for rec in records:
     multi = type_multipliers.get(t, 1.0)
 
     raw = cp * multi * scale_factor
-    funds = int(round(raw / 5) * 5)
+    funds = int(round(raw))
     funds = max(funds_min, min(funds_max, funds))
     time_cost = int(round(funds * 0.35 + 2))
     time_cost = max(time_min, min(time_max, time_cost))
@@ -104,4 +104,3 @@ print(f'[evaluate_plane_costs] {len(records)} planes evaluated', file=sys.stderr
 "
 
 echo "[evaluate_plane_costs] done." >&2
-
