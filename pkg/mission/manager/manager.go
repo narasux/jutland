@@ -14,6 +14,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/sidebar"
 	"github.com/narasux/jutland/pkg/mission/state"
 	mapBlockImg "github.com/narasux/jutland/pkg/resources/images/mapblock"
+	"github.com/narasux/jutland/pkg/utils/magnify"
 )
 
 const (
@@ -33,6 +34,7 @@ type MissionManager struct {
 	playerAlphaHandler        controller.InputHandler
 	playerBetaHandler         controller.InputHandler
 	weaponFirePlayer          *audioPlayer.WeaponFire
+	pinchWheelAccum           float64
 	mapBlockPrewarmZoom       int
 	mapBlockPrewarmBurstTicks int
 	mapBlockPrewarmFocusX     int
@@ -43,6 +45,7 @@ type MissionManager struct {
 
 // New 创建任务管理器
 func New(mission string, ui *ebitenui.UI) *MissionManager {
+	magnify.Init()
 	return &MissionManager{
 		state:          state.NewMissionState(mission),
 		drawer:         drawer.NewDrawer(mission),
