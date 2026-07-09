@@ -12,18 +12,32 @@ import (
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/utils/magnify"
 )
 
 // 更新游戏选项
 func (m *MissionManager) updateGameOptions(skipCursorInput bool) {
 	_, wheelY := ebiten.Wheel()
-	if !skipCursorInput && wheelY != 0 {
-		sx, sy := ebiten.CursorPosition()
-		if wheelY > 0 {
-			m.state.StepZoomAtScreenPoint(1, sx, sy)
-		} else {
-			m.state.StepZoomAtScreenPoint(-1, sx, sy)
-		}
+	magnification := magnify.Poll()
+
+	if skipCursorInput || (wheelY == 0 && magnification == 0) {
+		m.pinchWheelAccum = 0
+		return
+	}
+
+	sx, sy := ebiten.CursorPosition()
+	// 鼠标滚轮 + 触控板双指缩放都汇入同一个累加器
+	// magnification 乘以 2 使得一次完整捏合动作产生 1–2 个变倍步
+	m.pinchWheelAccum += wheelY + magnification*2.0
+
+	const accumThreshold = 1.0
+	for m.pinchWheelAccum >= accumThreshold {
+		m.state.StepZoomAtScreenPoint(1, sx, sy)
+		m.pinchWheelAccum -= accumThreshold
+	}
+	for m.pinchWheelAccum <= -accumThreshold {
+		m.state.StepZoomAtScreenPoint(-1, sx, sy)
+		m.pinchWheelAccum += accumThreshold
 	}
 }
 
