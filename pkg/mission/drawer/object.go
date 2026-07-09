@@ -302,6 +302,7 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 		}
 
 		pImg, pImgScale := planeResource(p.Name, ms.UI.GameOpts.Zoom)
+		pImgScale *= p.VisualScaleMultiplier()
 		planeX, planeY := ms.CameraPosToScreen(p.CurPos)
 		drawImageCentered(screen, pImg, planeX, planeY, p.CurRotation, pImgScale)
 

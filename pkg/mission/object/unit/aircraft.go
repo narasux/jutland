@@ -38,7 +38,9 @@ func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType object.Type) *Pl
 		// 非指针需要通过索引修改
 		sa.Groups[idx].CurCount--
 		sa.LatestTakeOffAt = time.Now().UnixMilli()
-		return NewPlane(g.Name, ship.CurPos, ship.CurRotation, ship.Uid, ship.BelongPlayer)
+		plane := NewPlane(g.Name, ship.CurPos, ship.CurRotation, ship.Uid, ship.BelongPlayer)
+		plane.StartTakeoff(ship)
+		return plane
 	}
 	return nil
 }

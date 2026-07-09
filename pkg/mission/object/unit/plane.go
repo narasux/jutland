@@ -100,6 +100,16 @@ type Plane struct {
 	RemainRange float64
 	// 当前攻击目标 (uid)
 	CurAttackTarget string
+	// 飞行阶段（起飞 / 巡航 / 降落）
+	FlightPhase PlaneFlightPhase
+	// 当前飞行阶段起点
+	FlightPhaseStartPos objPos.MapPos
+	// 当前飞行阶段终点
+	FlightPhaseEndPos objPos.MapPos
+	// 当前飞行阶段起始视觉倍率（相对常规飞机 2 倍绘制）
+	FlightVisualScaleStart float64
+	// 当前飞行阶段结束视觉倍率（相对常规飞机 2 倍绘制）
+	FlightVisualScaleEnd float64
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
@@ -276,6 +286,9 @@ func NewPlane(
 	p.CurRotation = rotation
 	p.BelongPlayer = player
 	p.BelongShip = shipUid
+	p.FlightPhase = PlaneFlightPhaseCruising
+	p.FlightVisualScaleStart = 1
+	p.FlightVisualScaleEnd = 1
 
 	// 根据飞机类型初始化移动策略
 	p.movementStrategy = NewMovementStrategy(p.Type)
