@@ -25,14 +25,22 @@ type UnitGeometricSize struct {
 type Nation string
 
 const (
-	NationAll     Nation = "all"
+	// NationAll 表示图鉴筛选中的全部国籍。
+	NationAll Nation = "all"
+	// NationSpecial 表示不属于常规国家分类的特殊单位。
 	NationSpecial Nation = "special"
-	NationCN      Nation = "cn"
-	NationUS      Nation = "us"
-	NationJP      Nation = "jp"
-	NationDE      Nation = "de"
-	NationUK      Nation = "uk"
-	NationSU      Nation = "su"
+	// NationCN 表示中国。
+	NationCN Nation = "cn"
+	// NationUS 表示美国。
+	NationUS Nation = "us"
+	// NationJP 表示日本。
+	NationJP Nation = "jp"
+	// NationDE 表示德国。
+	NationDE Nation = "de"
+	// NationUK 表示英国。
+	NationUK Nation = "uk"
+	// NationSU 表示苏联。
+	NationSU Nation = "su"
 )
 
 // ToDisplay 国籍展示用名称。

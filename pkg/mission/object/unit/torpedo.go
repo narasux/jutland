@@ -15,6 +15,7 @@ import (
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
+// TorpedoLauncher 表示舰船鱼雷发射器的配置和局内装填状态。
 type TorpedoLauncher struct {
 	// 发射器名称
 	Name string `json:"name"`
@@ -134,8 +135,10 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	)}
 }
 
+// TorpedoLauncherMap 保存按配置名称索引的鱼雷发射器模板。
 var TorpedoLauncherMap = map[string]*TorpedoLauncher{}
 
+// NewTorpedoLauncher 从模板创建独立发射器实例，并设置安装位置和左右射界。
 func NewTorpedoLauncher(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *TorpedoLauncher {
 	launcher, ok := TorpedoLauncherMap[name]
 	if !ok {

@@ -92,8 +92,10 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 	)}
 }
 
+// ReleaserMap 保存按配置名称索引的炸弹和航空鱼雷释放器模板。
 var ReleaserMap = map[string]*Releaser{}
 
+// NewReleaser 从模板创建独立释放器实例，并设置安装位置和左右投放射界。
 func NewReleaser(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Releaser {
 	releaser, ok := ReleaserMap[name]
 	if !ok {

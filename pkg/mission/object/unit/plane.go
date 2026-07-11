@@ -278,8 +278,10 @@ func (p *Plane) MustReturn() bool {
 	return false
 }
 
+// PlaneMap 保存按配置名称索引的飞机模板。
 var PlaneMap = map[string]*Plane{}
 
+// AllPlaneNames 保存可用飞机模板名称，顺序由配置初始化过程确定。
 var AllPlaneNames = []string{}
 
 // NewPlane 生成飞机
