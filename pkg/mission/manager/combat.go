@@ -138,6 +138,9 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 	}
 
 	for _, plane := range m.state.Arena.Planes {
+		if !plane.IsCruising() {
+			continue
+		}
 		// 剩余燃料为 0，需要返航
 		if plane.MustReturn() {
 			// 添加返航指令
@@ -189,6 +192,9 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 	bombReleased, rocketLaunched, torpedoLaunched := false, false, false
 
 	for _, plane := range m.state.Arena.Planes {
+		if !plane.IsCruising() {
+			continue
+		}
 		inRangeEnemies := []objUnit.Hurtable{}
 		if plane.AttackObjType() == object.TypePlane {
 			// 敌机
