@@ -11,6 +11,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -66,6 +67,55 @@ func weaponResource(
 	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom())
 	resourceZoom := closestResourceZoom(target, []int{1, 2, 4})
 	return weaponImg.Get(weapon, status, resourceZoom), target / float64(resourceZoom)
+}
+
+// rotatedRectangleCorners 返回以屏幕坐标为中心、长度沿 Y 轴的旋转矩形四角。
+func rotatedRectangleCorners(centerX, centerY, length, width, rotation float64) [4][2]float64 {
+	halfLength, halfWidth := length/2, width/2
+	corners := [4][2]float64{
+		{-halfWidth, -halfLength},
+		{halfWidth, -halfLength},
+		{halfWidth, halfLength},
+		{-halfWidth, halfLength},
+	}
+
+	sinA, cosA := math.Sincos(rotation * degToRad)
+	for idx, corner := range corners {
+		x, y := corner[0], corner[1]
+		corners[idx] = [2]float64{
+			centerX + x*cosA - y*sinA,
+			centerY + x*sinA + y*cosA,
+		}
+	}
+	return corners
+}
+
+// drawUnitHitBox 按伤害判定使用的中心、长宽和朝向绘制单位受打击范围。
+func drawUnitHitBox(screen *ebiten.Image, ms *state.MissionState, battleUnit objUnit.BattleUnit) {
+	movementState := battleUnit.MovementState()
+	geometricSize := battleUnit.GeometricSize()
+	centerX, centerY := ms.CameraPosToScreen(movementState.CurPos)
+	blockSize := ms.MapBlockDisplaySize()
+	corners := rotatedRectangleCorners(
+		centerX,
+		centerY,
+		geometricSize.Length/constants.MapBlockSize*blockSize,
+		geometricSize.Width/constants.MapBlockSize*blockSize,
+		movementState.CurRotation,
+	)
+	for idx, corner := range corners {
+		nextCorner := corners[(idx+1)%len(corners)]
+		vector.StrokeLine(
+			screen,
+			float32(corner[0]),
+			float32(corner[1]),
+			float32(nextCorner[0]),
+			float32(nextCorner[1]),
+			2,
+			colorx.Red,
+			false,
+		)
+	}
 }
 
 // 绘制医疗船治疗范围圈（仅在选中己方医疗船时显示）
@@ -135,6 +185,9 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		sImg, sImgScale := shipResource(s.Name, ms.UI.GameOpts.Zoom)
 		shipX, shipY := ms.CameraPosToScreen(s.CurPos)
 		drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
+		if ms.UI.DebugFlags.ShowHitBoxes {
+			drawUnitHitBox(screen, ms, s)
+		}
 
 		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP，武器状态
 		isShipSelected := slices.Contains(ms.Interaction.SelectedShips, s.Uid)
@@ -304,6 +357,9 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 		pImg, pImgScale := planeResource(p.Name, ms.UI.GameOpts.Zoom)
 		planeX, planeY := ms.CameraPosToScreen(p.CurPos)
 		drawImageCentered(screen, pImg, planeX, planeY, p.CurRotation, pImgScale)
+		if ms.UI.DebugFlags.ShowHitBoxes {
+			drawUnitHitBox(screen, ms, p)
+		}
 
 		// DEBUG: 如果启用了调试显示飞机 HP，则在飞机上部显示生命值
 		if ms.UI.DebugFlags.ShowPlaneHP {

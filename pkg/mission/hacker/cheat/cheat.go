@@ -27,4 +27,5 @@ var DebugCheats = []Cheat{
 	&DamageColorByTeam{},
 	&ShowCursorPosObjInfo{},
 	&ShowPlaneHP{},
+	&ShowHitBoxes{},
 }
