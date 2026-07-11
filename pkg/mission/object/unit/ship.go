@@ -413,8 +413,10 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	return false
 }
 
+// ShipMap 保存按配置名称索引的舰船模板。
 var ShipMap = map[string]*BattleShip{}
 
+// AllShipNames 保存可用舰船模板名称，顺序由配置初始化过程确定。
 var AllShipNames = []string{}
 
 // NewShip 新建战舰
@@ -464,12 +466,13 @@ func GetShipHullCost(name string) (fundsCost int64, timeCost int64) {
 	return ship.FundsCost, ship.TimeCost
 }
 
+// ShipUidGenerator 按玩家和舰种缩写生成局内稳定递增的舰船 UID。
 type ShipUidGenerator struct {
 	player  faction.Player
 	counter map[string]int
 }
 
-// NewShipUidGenerator ...
+// NewShipUidGenerator 创建指定玩家独立使用的舰船 UID 生成器。
 func NewShipUidGenerator(player faction.Player) *ShipUidGenerator {
 	return &ShipUidGenerator{
 		player:  player,

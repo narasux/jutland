@@ -149,8 +149,10 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 	return bullets
 }
 
+// GunMap 保存按配置名称索引的火炮模板；构造实例时会执行深拷贝。
 var GunMap = map[string]*Gun{}
 
+// NewGun 从模板创建舰船挂载使用的独立火炮实例，并设置安装位置和左右射界。
 func NewGun(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *Gun {
 	gun, ok := GunMap[name]
 	if !ok {
