@@ -324,6 +324,7 @@ Enter 的详细流程：
   - `DamageColorByTeam`
   - `ShowCursorPosObjInfo`
   - `ShowPlaneHP`
+  - `ShowHitBoxes`
 
 `DamageColorByTeam`
 
@@ -342,6 +343,12 @@ Enter 的详细流程：
 - 命令：`show plane hp`
 - 切换 `misState.UI.DebugFlags.ShowPlaneHP`。
 - 用于显示飞机当前 HP 和总 HP。
+
+`ShowHitBoxes`
+
+- 命令：`show hit boxes`
+- 切换 `misState.UI.DebugFlags.ShowHitBoxes`。
+- 用红色旋转矩形显示当前舰船和飞机实际使用的受打击范围。
 
 ## 当前实现特点
 

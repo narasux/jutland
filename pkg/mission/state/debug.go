@@ -8,9 +8,11 @@ type DebugFlags struct {
 	ShowCursorPosObjInfo bool
 	// ShowPlaneHP 显示飞机生命值（当前 HP / 总 HP）
 	ShowPlaneHP bool
+	// ShowHitBoxes 显示舰船和飞机的受打击范围
+	ShowHitBoxes bool
 }
 
 // IsActive 判断是否有任何调试标志已启用
 func (f DebugFlags) IsActive() bool {
-	return f.DamageColorByTeam || f.ShowCursorPosObjInfo || f.ShowPlaneHP
+	return f.DamageColorByTeam || f.ShowCursorPosObjInfo || f.ShowPlaneHP || f.ShowHitBoxes
 }

@@ -26,6 +26,7 @@ func (c *DebugAll) Exec(misState *state.MissionState) string {
 		DamageColorByTeam:    true,
 		ShowCursorPosObjInfo: true,
 		ShowPlaneHP:          true,
+		ShowHitBoxes:         true,
 	}
 	return "Enabled all debug flags"
 }
@@ -100,3 +101,26 @@ func (c *ShowPlaneHP) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*ShowPlaneHP)(nil)
+
+// ShowHitBoxes -> 修改是否显示舰船和飞机的受打击范围
+type ShowHitBoxes struct{}
+
+func (c *ShowHitBoxes) String() string {
+	return "show hit boxes"
+}
+
+func (c *ShowHitBoxes) Desc() string {
+	return "switch ship and plane hit boxes on/off"
+}
+
+func (c *ShowHitBoxes) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *ShowHitBoxes) Exec(misState *state.MissionState) string {
+	nextState := !misState.UI.DebugFlags.ShowHitBoxes
+	misState.UI.DebugFlags.ShowHitBoxes = nextState
+	return "Toggled hit boxes: " + lo.Ternary(nextState, "on", "off")
+}
+
+var _ Cheat = (*ShowHitBoxes)(nil)
