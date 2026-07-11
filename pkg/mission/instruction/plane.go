@@ -89,6 +89,15 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
+	// 起飞阶段只沿母舰航向直线飞出一段距离，不立即转向接敌。
+	if attacker.FlightPhase == objUnit.PlaneFlightPhaseTakingOff {
+		attacker.UpdateTakeoff(missionState.Core.MissionMD.MapCfg)
+		return nil
+	}
+	if !attacker.IsCruising() {
+		i.status = Executed
+		return nil
+	}
 	// 如果必须返航，则判定已经完成
 	if attacker.MustReturn() {
 		i.status = Executed
@@ -106,7 +115,7 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	case object.TypePlane:
 		enemy, enemyExists = missionState.Arena.Planes[i.targetUid]
 	default:
-		return errors.Errorf("invalid target obj type: %s", i.targetObjType)
+		return errors.Errorf("invalid target obj type: %v", i.targetObjType)
 	}
 	// 目标不存在，判定已经完成
 	if !enemyExists {
@@ -188,24 +197,38 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 		return nil
 	}
 
-	// 考虑提前量（依赖母舰速度，角度）
-	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		plane.CurPos.RX, plane.CurPos.RY, plane.CurSpeed,
-		ship.CurPos.RX, ship.CurPos.RY, ship.CurSpeed, ship.CurRotation,
-	)
-	targetPos := objPos.NewR(targetRx, targetRY)
-	// 返航时不需要调整速度（敌人位置和目标速度都传空值/0）
-	plane.MoveTo(missionState.Core.MissionMD.MapCfg, targetPos, objPos.New(0, 0), 0)
-	// 飞机到达载舰附近，判定已经完成
-	if plane.CurPos.Near(ship.CurPos, 1) {
-		// 尝试回收飞机
-		ship.Aircraft.Recovery(plane)
-		// 删除该飞机（视同着陆）
-		delete(missionState.Arena.Planes, i.planeUid)
-		// 修改状态为已经完成
-		i.status = Executed
+	mapCfg := missionState.Core.MissionMD.MapCfg
+	switch plane.FlightPhase {
+	case objUnit.PlaneFlightPhaseTakingOff:
+		plane.UpdateTakeoff(mapCfg)
+	case "", objUnit.PlaneFlightPhaseCruising:
+		slot := ship.Aircraft.RequestLanding(plane.Uid)
+		plane.StartLandingStaging(mapCfg, ship, slot)
+	case objUnit.PlaneFlightPhaseLandingStaging:
+		if plane.UpdateLandingStaging(mapCfg, ship) {
+			plane.StartLandingApproach(ship)
+		}
+	case objUnit.PlaneFlightPhaseLandingApproach:
+		if plane.UpdateLandingApproach(ship) {
+			plane.StartLandingDeck(ship)
+		}
+	case objUnit.PlaneFlightPhaseLandingDeck:
+		if !plane.UpdateLandingDeck(ship) {
+			return nil
+		}
+		i.recoverPlane(missionState, ship, plane)
 	}
 	return nil
+}
+
+func (i *PlaneReturn) recoverPlane(
+	missionState *state.MissionState,
+	ship *objUnit.BattleShip,
+	plane *objUnit.Plane,
+) {
+	ship.Aircraft.Recovery(plane)
+	delete(missionState.Arena.Planes, i.planeUid)
+	i.status = Executed
 }
 
 // Executed 返回指令是否已经执行

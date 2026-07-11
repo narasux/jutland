@@ -98,6 +98,34 @@ type Plane struct {
 	RemainRange float64
 	// 当前攻击目标 (uid)
 	CurAttackTarget string
+	// 飞行阶段（起飞 / 巡航 / 降落）
+	FlightPhase PlaneFlightPhase
+	// 当前飞行阶段起点
+	FlightPhaseStartPos objPos.MapPos
+	// 当前飞行阶段终点
+	FlightPhaseEndPos objPos.MapPos
+	// 当前阶段已经经过的模拟帧数
+	FlightPhaseElapsed float64
+	// 当前阶段开始时的速度
+	FlightPhaseStartSpeed float64
+	// 无法直接通过固定起止点计算时使用的阶段进度
+	FlightPhaseProgressValue float64
+	// 当前飞行阶段起始视觉倍率（相对常规飞机 2 倍绘制）
+	FlightVisualScaleStart float64
+	// 当前飞行阶段结束视觉倍率（相对常规飞机 2 倍绘制）
+	FlightVisualScaleEnd float64
+	// 当前飞机在所属航母舰尾入口中的分散槽位
+	LandingSlot int
+	// 最终进近使用的航母局部坐标圆弧，仅在局内运行时初始化。
+	landingArc landingApproachArc
+	// 当前正在飞向切线引导点或圆弧入口。
+	landingStagingLeg landingStagingLeg
+	// 上一模拟帧的航母航向，用于计算移动着舰航线的切向速度。
+	landingCarrierRotation float64
+	// 航母当前每模拟帧的转向弧度。
+	landingCarrierTurnRate float64
+	// 最终直线进近的动态模拟帧数，仅在局内运行时计算。
+	landingDeckFrames float64
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
@@ -274,6 +302,10 @@ func NewPlane(
 	p.CurRotation = rotation
 	p.BelongPlayer = player
 	p.BelongShip = shipUid
+	p.FlightPhase = PlaneFlightPhaseCruising
+	p.FlightVisualScaleStart = 1
+	p.FlightVisualScaleEnd = 1
+	p.LandingSlot = -1
 
 	// 根据飞机类型初始化移动策略
 	p.movementStrategy = NewMovementStrategy(p.Type)

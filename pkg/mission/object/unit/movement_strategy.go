@@ -166,22 +166,20 @@ func executePlaneMovement(plane *Plane, mapCfg *mapcfg.MapCfg, targetPos objPos.
 
 	// 计算目标航向
 	targetRotation := plane.CurPos.Angle(targetPos)
-
-	// 逐渐转向
-	if plane.CurRotation != targetRotation {
-		rotateFlag := RotateFlagClockwise
-		if math.Mod(targetRotation-plane.CurRotation+360, 360) > 180 {
-			rotateFlag = RotateFlagAnticlockwise
-		}
-		plane.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-plane.CurRotation), rotateSpeed)
-		plane.CurRotation = math.Mod(plane.CurRotation+360, 360)
+	// 使用最短有符号角差，避免 0° / 360° 附近的浮点误差触发大幅反向转弯。
+	rotationDelta := math.Mod(targetRotation-plane.CurRotation+540, 360) - 180
+	if math.Abs(rotationDelta) > 1e-9 {
+		rotationDelta = max(-rotateSpeed, min(rotateSpeed, rotationDelta))
+		plane.CurRotation = math.Mod(plane.CurRotation+rotationDelta+360, 360)
 	}
 
 	// 更新位置
 	nextPos := plane.CurPos.Copy()
 	nextPos.AddRx(math.Sin(plane.CurRotation*math.Pi/180) * plane.CurSpeed)
 	nextPos.SubRy(math.Cos(plane.CurRotation*math.Pi/180) * plane.CurSpeed)
-	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
+	if mapCfg != nil {
+		nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
+	}
 	plane.CurPos = nextPos
 	plane.RemainRange -= plane.CurSpeed
 }

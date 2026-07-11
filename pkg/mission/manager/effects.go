@@ -128,6 +128,9 @@ func (m *MissionManager) updateMissionPlanes() {
 	// 如果战机 HP 为 0，则需要走消亡流程
 	for uid, plane := range m.state.Arena.Planes {
 		if plane.CurHP <= 0 {
+			if ship := m.state.Arena.Ships[plane.BelongShip]; ship != nil {
+				ship.Aircraft.CancelLanding(uid)
+			}
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			plane.CurHP = textureImg.MaxPlaneExplodeState
 
