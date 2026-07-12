@@ -581,6 +581,41 @@
     ]
   },
   {
+    name: "courageous",
+    displayName: "勇敢",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "16x1 120mm/40 Mk VIII"},
+      {label: "高炮", value: "3x8 40mm/39"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）24"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）24"},
+    ],
+    description: "勇敢号最初是英国皇家海军于第一次世界大战期间建造的战列巡洋舰，后依据《华盛顿海军条约》改建为航空母舰，1928 年重新服役。1939 年 9 月 17 日，该舰在西部航道执行反潜巡逻时遭德国潜艇 U-29 鱼雷击沉。",
+    author: "Hood, Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - 50 Courageous", url: "https://www.shipbucket.com/drawings/5155"},
+      {name: "维基百科 - 勇敢号航空母舰", url: "https://en.wikipedia.org/wiki/HMS_Courageous_(50)"}
+    ]
+  },
+  {
+    name: "hermes",
+    displayName: "竞技神",
+    type: "航空母舰",
+    armaments: [
+      {label: "主炮", value: "6x1 140mm/50"},
+      {label: "高平炮", value: "3x1 102mm/45"},
+      {label: "高射机枪", value: "3x4 12.7mm"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）8"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）12"},
+    ],
+    description: "竞技神号是英国皇家海军第一艘从设计之初就以航空母舰为目标建造的军舰，1924 年服役。该舰于 1939 年 8 月恢复一线航母任务，1942 年 4 月 9 日在锡兰外海遭日本航母舰载机击沉。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - 95 Hermes 1936", url: "http://www.shipbucket.com/drawings/5162"},
+      {name: "维基百科 - 竞技神号航空母舰", url: "https://en.wikipedia.org/wiki/HMS_Hermes_(95)"}
+    ]
+  },
+  {
     name: "victorious",
     displayName: "胜利",
     type: "航空母舰",
@@ -3419,6 +3454,15 @@
   {
     name: "UK/120/45/DP",
     displayName: "120mm/45 单装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/120/40/MK8/DP",
+    displayName: "120mm/40 Mk VIII 单装高平两用炮",
     type: "武器",
     armaments: [],
     description: "",

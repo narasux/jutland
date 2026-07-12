@@ -947,6 +947,41 @@
     ]
   },
   {
+    "name": "courageous",
+    "displayName": "Courageous",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "16x1 120mm/40 Mk VIII"},
+      {"label": "Anti-aircraft Guns", "value": "3x8 40mm/39"},
+      {"label": "Fighters", "value": "Fairey Fulmar Mk I x24"},
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x24"}
+    ],
+    "description": "HMS Courageous began as a First World War battlecruiser and was converted into an aircraft carrier under the Washington Naval Treaty, returning to service in 1928. In September 1939 she conducted anti-submarine patrols in the Western Approaches. German submarine U-29 torpedoed and sank her on 17 September, making her the Royal Navy's first major warship loss of the conflict.",
+    "author": "Hood, Bombhead, K. W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - 50 Courageous", "url": "https://www.shipbucket.com/drawings/5155"},
+      {"name": "Wikipedia - HMS Courageous", "url": "https://en.wikipedia.org/wiki/HMS_Courageous_(50)"}
+    ]
+  },
+  {
+    "name": "hermes",
+    "displayName": "Hermes",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Main Battery", "value": "6x1 140mm/50"},
+      {"label": "Dual-purpose Guns", "value": "3x1 102mm/45"},
+      {"label": "Anti-aircraft Machine Guns", "value": "3x4 12.7mm"},
+      {"label": "Fighters", "value": "Fairey Fulmar Mk I x8"},
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x12"}
+    ],
+    "description": "HMS Hermes was the Royal Navy's first ship designed from the outset as an aircraft carrier, although lengthy construction meant Hōshō entered service first. Commissioned in 1924, Hermes returned from training duties to active carrier service in August 1939. Japanese carrier aircraft sank her off Ceylon on 9 April 1942 during the Indian Ocean raid.",
+    "author": "Bombhead, K. W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - 95 Hermes 1936", "url": "http://www.shipbucket.com/drawings/5162"},
+      {"name": "Wikipedia - HMS Hermes", "url": "https://en.wikipedia.org/wiki/HMS_Hermes_(95)"}
+    ]
+  },
+  {
     "name": "victorious",
     "displayName": "Victorious",
     "type": "Aircraft Carrier",
@@ -4798,6 +4833,15 @@
   {
     "name": "UK/120/45/DP",
     "displayName": "120mm Single Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/120/40/MK8/DP",
+    "displayName": "120mm/40 Mk VIII Single Dual-Purpose Mount",
     "type": "Weapon",
     "armaments": [],
     "description": "",

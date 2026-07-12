@@ -1170,6 +1170,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 QF 4.7-inch Mk VIII 单装高平两用炮
+  {
+    name: "UK/120/40/MK8/DP",
+    bulletName: "UK/GB/120/1932",
+    bulletCount: 1,
+    reloadTime: 1.2,
+    range: 16,
+    bulletSpread: 70,
+    bulletSpeed: 750,
+    fundsCost: 40,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 英国海军 UK/114/45 双联装高平两用炮
   {
     name: "UK/114/45/2/DP",

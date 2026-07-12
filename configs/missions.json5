@@ -870,6 +870,8 @@
           "shinyo",
           "hosho",
           "ark_royal",
+          "courageous",
+          "hermes",
           "victorious"
         ],
       },
@@ -1122,6 +1124,18 @@
       {
         name: "victorious",
         pos: [12, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "courageous",
+        pos: [11, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hermes",
+        pos: [12, 28],
         rotation: 90,
         belongPlayer: "HA"
       },
