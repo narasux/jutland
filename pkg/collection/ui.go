@@ -149,6 +149,11 @@ type collectionNameOption struct {
 	Label string
 }
 
+type truncatedTextHitArea struct {
+	Rect  image.Rectangle
+	Lines []string
+}
+
 type collectionDropdown int
 
 const (
@@ -186,6 +191,7 @@ type CollectionUI struct {
 	planeScales abilityScales
 	radarHits   []radarHitArea
 	powerHits   []combatPowerHitArea
+	textHits    []truncatedTextHitArea
 	links       []collectionLink
 
 	planeCanvas    *ebiten.Image
@@ -500,26 +506,30 @@ func (c *CollectionUI) clampDropdownOffset() {
 }
 
 func (c *CollectionUI) dropdownListRect(dropdown collectionDropdown) image.Rectangle {
-	// 下拉列表默认跟按钮等宽；舰名列表按最长条目加左右边距自适应。
+	// 下拉列表按最长条目加左右边距自适应，避免英文舰种和机种越出列表边界。
 	button := c.dropdownButton(dropdown)
 	if button == nil {
 		return image.Rectangle{}
 	}
 	buttonRect := button.GetWidget().Rect
-	width := buttonRect.Dx()
-	if dropdown == collectionDropdownName {
-		contentWidth := 0.0
-		for _, entry := range c.dropdownEntries(dropdown) {
-			contentWidth = max(
-				contentWidth,
-				estimateCollectionTextWidth(c.dropdownEntryLabel(entry), c.metrics.ToolbarFont),
-			)
-		}
-		width = max(width, int(math.Ceil(contentWidth+24*c.metrics.Scale)))
-		width = min(width, max(buttonRect.Dx(), c.width-buttonRect.Min.X-12))
+	labels := make([]string, 0, len(c.dropdownEntries(dropdown)))
+	for _, entry := range c.dropdownEntries(dropdown) {
+		labels = append(labels, c.dropdownEntryLabel(entry))
 	}
+	width := dropdownListWidth(
+		buttonRect.Dx(), c.width-buttonRect.Min.X-12, c.metrics.Scale, c.metrics.ToolbarFont, labels,
+	)
 	height := c.dropdownVisibleRows(dropdown) * c.dropdownRowHeight()
 	return image.Rect(buttonRect.Min.X, buttonRect.Max.Y+2, buttonRect.Min.X+width, buttonRect.Max.Y+2+height)
+}
+
+func dropdownListWidth(buttonWidth, availableWidth int, scale, fontSize float64, labels []string) int {
+	contentWidth := 0.0
+	for _, label := range labels {
+		contentWidth = max(contentWidth, estimateCollectionTextWidth(label, fontSize))
+	}
+	width := max(buttonWidth, int(math.Ceil(contentWidth+36*scale)))
+	return min(width, max(buttonWidth, availableWidth))
 }
 
 func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
@@ -632,6 +642,7 @@ func (c *CollectionUI) Draw(screen *ebiten.Image) {
 	}
 	c.radarHits = c.radarHits[:0]
 	c.powerHits = c.powerHits[:0]
+	c.textHits = c.textHits[:0]
 	c.links = c.links[:0]
 
 	if c.category == collectionCategoryShip {
@@ -639,7 +650,9 @@ func (c *CollectionUI) Draw(screen *ebiten.Image) {
 	} else {
 		c.drawPlanes(screen)
 	}
-	if hit := hoveredCombatPowerArea(c.powerHits); hit != nil {
+	if hit := hoveredTruncatedTextArea(c.textHits); hit != nil {
+		c.drawer.drawTruncatedTextTooltip(screen, hit, c.metrics.Tooltip)
+	} else if hit := hoveredCombatPowerArea(c.powerHits); hit != nil {
 		c.drawer.drawCombatPowerTooltip(screen, hit, c.metrics.Tooltip)
 	} else {
 		c.drawer.drawRadarTooltip(screen, hoveredRadarArea(c.radarHits), c.metrics.Tooltip)
@@ -1563,18 +1576,44 @@ func (c *CollectionUI) drawCompactInfoItems(
 			fontSize, font.LocalizedUI(font.Kai), color.RGBA{214, 201, 178, 255},
 		)
 		valueX := compactInfoValueX(item.Label, card, fontSize, scale)
-		value := item.Value
 		maxWidth := card.X + card.W - 16*scale - valueX
-		for estimateCollectionTextWidth(value, fontSize) > maxWidth && len([]rune(value)) > 1 {
-			runes := []rune(value)
-			value = string(runes[:len(runes)-1])
-		}
-		if value != item.Value && len([]rune(value)) > 1 {
-			runes := []rune(value)
-			value = string(runes[:len(runes)-1]) + "…"
-		}
-		c.drawer.drawText(screen, value, valueX, y, fontSize, font.LocalizedUI(font.Kai), colorx.White)
+		c.drawFittedText(
+			screen, item.Value, valueX, y, maxWidth, fontSize, font.LocalizedUI(font.Kai), colorx.White,
+			image.Point{}, []string{item.Label + "  " + item.Value},
+		)
 	}
+}
+
+func (c *CollectionUI) drawFittedText(
+	screen *ebiten.Image, value string, x, y, maxWidth, fontSize float64,
+	textFont *text.GoTextFaceSource, textColor color.Color, screenOffset image.Point, tooltipLines []string,
+) {
+	display, truncated := truncateCollectionText(value, maxWidth, fontSize, textFont)
+	c.drawer.drawText(screen, display, x, y, fontSize, textFont, textColor)
+	if !truncated {
+		return
+	}
+	if len(tooltipLines) == 0 {
+		tooltipLines = []string{value}
+	}
+	c.addTruncatedTextHit(x, y, maxWidth, fontSize, screenOffset, tooltipLines)
+}
+
+func (c *CollectionUI) addTruncatedTextHit(
+	x, y, width, fontSize float64, screenOffset image.Point, lines []string,
+) {
+	if width <= 0 || len(lines) == 0 {
+		return
+	}
+	c.textHits = append(c.textHits, truncatedTextHitArea{
+		Rect: image.Rect(
+			int(math.Floor(x))+screenOffset.X,
+			int(math.Floor(y))+screenOffset.Y,
+			int(math.Ceil(x+width))+screenOffset.X,
+			int(math.Ceil(y+fontSize*1.3))+screenOffset.Y,
+		),
+		Lines: append([]string(nil), lines...),
+	})
 }
 
 func compactInfoValueX(label string, card collectionCard, fontSize, scale float64) float64 {
@@ -1748,14 +1787,14 @@ func (c *CollectionUI) drawPlaneCard(
 		color.RGBA{214, 201, 178, 190},
 		false,
 	)
-	c.drawer.drawText(
+	c.drawFittedText(
 		screen, objUnit.GetPlaneDisplayName(plane.Name), float64(x)+px(20), float64(y)+px(20),
-		px(27), font.LocalizedUI(font.Hang), colorx.White,
+		float64(width)-px(40), px(27), font.LocalizedUI(font.Hang), colorx.White, screenOffset, nil,
 	)
-	c.drawer.drawText(
+	c.drawFittedText(
 		screen, plane.Nation.ToDisplay()+" · "+plane.Type.ToDisplay(),
-		float64(x)+px(20), float64(y)+px(54), px(18), font.LocalizedUI(font.Kai),
-		color.RGBA{175, 165, 150, 255},
+		float64(x)+px(20), float64(y)+px(54), float64(width)-px(40), px(18),
+		font.LocalizedUI(font.Kai), color.RGBA{175, 165, 150, 255}, screenOffset, nil,
 	)
 	c.drawer.drawCollectionImageAtBaseScale(
 		screen, planeImg.GetOriginal(plane.Name), float64(x)+px(24), float64(y)+px(78),
@@ -1775,36 +1814,31 @@ func (c *CollectionUI) drawPlaneCard(
 		i18n.Format(i18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}),
 	}
 	for idx, line := range basicLines {
-		c.drawer.drawText(
+		c.drawFittedText(
 			screen, line, float64(x)+px(22), float64(sectionY)+px(34+float64(idx)*22),
-			px(18), bodyFont, colorx.White,
+			float64(width)-px(44), px(18), bodyFont, colorx.White, screenOffset, nil,
 		)
 	}
 
 	weaponY := sectionY + int(math.Round(px(128)))
 	c.drawPlaneSectionTitle(screen, x, weaponY, width, scale, i18n.Text(i18n.MsgCollectionWeaponConfig))
 	weaponLines := planeWeaponLines(plane)
-	for idx, line := range weaponLines {
-		if idx >= 6 {
+	const maxWeaponRows = 6
+	for idx := 0; idx < min(len(weaponLines), maxWeaponRows); idx++ {
+		lineY := float64(weaponY) + px(34+float64(idx)*24)
+		if idx == maxWeaponRows-1 && len(weaponLines) > maxWeaponRows {
 			c.drawer.drawText(
-				screen,
-				"…",
-				float64(x)+px(22),
-				float64(weaponY)+px(34+float64(idx)*24),
-				px(18),
-				bodyFont,
-				colorx.White,
+				screen, "…", float64(x)+px(22), lineY, px(18), bodyFont, colorx.White,
+			)
+			c.addTruncatedTextHit(
+				float64(x)+px(22), lineY, float64(width)-px(44), px(18),
+				screenOffset, weaponLines[idx:],
 			)
 			break
 		}
-		c.drawer.drawText(
-			screen,
-			line,
-			float64(x)+px(22),
-			float64(weaponY)+px(34+float64(idx)*24),
-			px(18),
-			bodyFont,
-			colorx.White,
+		c.drawFittedText(
+			screen, weaponLines[idx], float64(x)+px(22), lineY, float64(width)-px(44),
+			px(18), bodyFont, colorx.White, screenOffset, nil,
 		)
 	}
 

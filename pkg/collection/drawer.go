@@ -227,6 +227,33 @@ func estimateCollectionTextWidth(value string, fontSize float64) float64 {
 	return layout.CalcTextWidth(value, fontSize, textFont)
 }
 
+func truncateCollectionText(
+	value string, maxWidth, fontSize float64, textFont *text.GoTextFaceSource,
+) (string, bool) {
+	textWidth := func(candidate string) float64 {
+		return layout.CalcTextWidth(candidate, fontSize, font.ForText(candidate, textFont))
+	}
+	if value == "" || textWidth(value) <= maxWidth {
+		return value, false
+	}
+	if maxWidth <= 0 {
+		return "", true
+	}
+	ellipsis := "…"
+	if textWidth(ellipsis) > maxWidth {
+		return "", true
+	}
+	runes := []rune(value)
+	for len(runes) > 0 {
+		candidate := string(runes) + ellipsis
+		if textWidth(candidate) <= maxWidth {
+			return candidate, true
+		}
+		runes = runes[:len(runes)-1]
+	}
+	return ellipsis, true
+}
+
 func isHoverArea(area clickableArea) bool {
 	// 由于外部链接区域是手工维护的矩形，所以只需要简单的鼠标命中判断。
 	rect := image.Rect(int(area.X), int(area.Y), int(area.X+area.W), int(area.Y+area.H))

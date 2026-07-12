@@ -1,6 +1,9 @@
 package collection
 
 import (
+	"image"
+	"math"
+	"strings"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/i18n"
@@ -9,6 +12,42 @@ import (
 	"github.com/narasux/jutland/pkg/utils/layout"
 	"github.com/stretchr/testify/require"
 )
+
+func TestTruncateCollectionTextKeepsEllipsisWithinWidth(t *testing.T) {
+	fontSize := 18.0
+	maxWidth := estimateCollectionTextWidth("Main Battery 3x3", fontSize)
+	textFont := font.LocalizedUI(font.Kai)
+	display, truncated := truncateCollectionText(
+		"Main Battery 3x3 406mm/50 Mk.7", maxWidth, fontSize, textFont,
+	)
+
+	require.True(t, truncated)
+	require.True(t, strings.HasSuffix(display, "…"))
+	require.LessOrEqual(t, estimateCollectionTextWidth(display, fontSize), maxWidth)
+
+	display, truncated = truncateCollectionText("Torpedoes", maxWidth, fontSize, textFont)
+	require.False(t, truncated)
+	require.Equal(t, "Torpedoes", display)
+}
+
+func TestTruncatedTextAreaAt(t *testing.T) {
+	areas := []truncatedTextHitArea{
+		{Rect: image.Rect(10, 20, 110, 45), Lines: []string{"full armament"}},
+	}
+
+	require.Same(t, &areas[0], truncatedTextAreaAt(areas, image.Pt(50, 30)))
+	require.Nil(t, truncatedTextAreaAt(areas, image.Pt(110, 30)))
+}
+
+func TestDropdownListWidthFitsLongestLabelAndScreen(t *testing.T) {
+	fontSize := 20.0
+	scale := 1.0
+	labels := []string{"All", "Aircraft Carrier"}
+	contentWidth := int(math.Ceil(estimateCollectionTextWidth(labels[1], fontSize) + 36*scale))
+
+	require.Equal(t, contentWidth, dropdownListWidth(100, 500, scale, fontSize, labels))
+	require.Equal(t, 120, dropdownListWidth(100, 120, scale, fontSize, labels))
+}
 
 func TestCombatPowerHeaderPositionsKeepLabelAndValueSeparated(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()

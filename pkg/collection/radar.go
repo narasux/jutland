@@ -85,6 +85,65 @@ type combatPowerHitArea struct {
 	Subject radarSubject
 }
 
+func hoveredTruncatedTextArea(areas []truncatedTextHitArea) *truncatedTextHitArea {
+	return truncatedTextAreaAt(areas, image.Pt(ebiten.CursorPosition()))
+}
+
+func truncatedTextAreaAt(areas []truncatedTextHitArea, point image.Point) *truncatedTextHitArea {
+	for idx := range areas {
+		if point.In(areas[idx].Rect) {
+			return &areas[idx]
+		}
+	}
+	return nil
+}
+
+// 当 hover 在 ... 之上时，tooltips 展示完整信息
+func (d *Drawer) drawTruncatedTextTooltip(
+	screen *ebiten.Image, hit *truncatedTextHitArea, fontSize float64,
+) {
+	if hit == nil || len(hit.Lines) == 0 {
+		return
+	}
+	scale := fontSize / 17
+	maxContentWidth := min(520*scale, float64(screen.Bounds().Dx())-52*scale)
+	lines := make([]string, 0, len(hit.Lines))
+	for _, line := range hit.Lines {
+		lines = append(lines, wrapCollectionText(line, maxContentWidth, fontSize)...)
+	}
+	if len(lines) == 0 {
+		return
+	}
+	contentWidth := 0.0
+	for _, line := range lines {
+		contentWidth = max(contentWidth, estimateCollectionTextWidth(line, fontSize))
+	}
+	width := contentWidth + 28*scale
+	lineHeight := fontSize * 1.4
+	height := float64(len(lines))*lineHeight + 22*scale
+	cursorX, cursorY := ebiten.CursorPosition()
+	x, y := float64(cursorX+16), float64(cursorY+18)
+	if x+width > float64(screen.Bounds().Dx())-12 {
+		x = float64(cursorX) - width - 16
+	}
+	if y+height > float64(screen.Bounds().Dy())-12 {
+		y = float64(screen.Bounds().Dy()) - height - 12
+	}
+	x, y = max(12, x), max(12, y)
+
+	vector.FillRect(
+		screen, float32(x), float32(y), float32(width), float32(height),
+		color.RGBA{18, 18, 18, 238}, false,
+	)
+	vector.StrokeRect(screen, float32(x), float32(y), float32(width), float32(height), 1.5, colorx.Gold, false)
+	for idx, line := range lines {
+		d.drawText(
+			screen, line, x+14*scale, y+11*scale+float64(idx)*lineHeight,
+			fontSize, font.LocalizedUI(font.Kai), colorx.White,
+		)
+	}
+}
+
 func calculateAbilityScales(powers []objUnit.CombatPowerInfo) abilityScales {
 	// 雷达轴的缩放不是线性取最大值，而是取 95 分位，避免极端值把普通单位压扁。
 	scales := abilityScales{}
