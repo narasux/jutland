@@ -352,7 +352,7 @@
     type: "航空母舰",
     armaments: [
       {label: "主炮", value: "6x2 127mm/40 八九式"},
-      {label: "高炮", value: "12x2 25mm/60 九六式"},
+      {label: "高炮", value: "13x2 25mm/60 九六式"},
       {label: "制空战斗机", value: "零式舰战（A6M2）x21"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x21"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x21"},
@@ -372,8 +372,7 @@
     type: "航空母舰",
     armaments: [
       {label: "主炮", value: "6x2 127mm/40 八九式"},
-      {label: "高炮", value: "7x3 25mm/60 九六式"},
-      {label: "高炮", value: "5x2 25mm/60 九六式"},
+      {label: "高炮", value: "12x3 25mm/60 九六式"},
       {label: "制空战斗机", value: "九九舰爆（D3A）x24"},
       {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x24"},
       {label: "俯冲轰炸机", value: "九九舰爆（D3A）x24"},

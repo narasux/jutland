@@ -583,7 +583,7 @@
       },
       {
         "label": "Anti-aircraft Guns",
-        "value": "12x2 25mm/60 Type 96"
+        "value": "13x2 25mm/60 Type 96"
       },
       {
         "label": "Fighters",
@@ -618,11 +618,7 @@
       },
       {
         "label": "Anti-aircraft Guns",
-        "value": "7x3 25mm/60 Type 96"
-      },
-      {
-        "label": "Anti-aircraft Guns",
-        "value": "5x2 25mm/60 Type 96"
+        "value": "12x3 25mm/60 Type 96"
       },
       {
         "label": "Fighters",
