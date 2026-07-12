@@ -871,11 +871,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x18 (game approximation)"
+        "value": "A6M2 Zero Model 21 x18"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x9 (game approximation)"
+        "value": "B5N2 x9"
       }
     ],
     "description": "Shin'yō was converted from the German ocean liner Scharnhorst after the ship was trapped in Japan during the war in Europe. Commissioned as an escort carrier in late 1943, she mainly covered convoys and training duties. USS Spadefish torpedoed her in November 1944, causing aviation-fuel explosions that destroyed the ship.",
@@ -931,18 +931,43 @@
       {"label": "Anti-aircraft Guns", "value": "6x8 40mm/39"},
       {"label": "Anti-aircraft Machine Guns", "value": "8x4 12.7mm"},
       {"label": "Fighters", "value": "Fairey Fulmar Mk I x24"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x42"}
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x36"}
     ],
     "description": "HMS Ark Royal (91) was a purpose-built Royal Navy fleet carrier commissioned in 1938. Her enclosed hangars and long flight deck supported sustained air operations during the Norwegian Campaign, Mediterranean convoys, and the pursuit of Bismarck. German submarine U-81 torpedoed her in November 1941, and she sank the following day.",
     "author": "Bombhead, K.W. Vestergaard",
     "links": [
       {
         "name": "Shipbucket - HMS Ark Royal 1941",
-        "url": "http://www.shipbucket.com/drawings/5147"
+        "url": "https://www.shipbucket.com/drawings/5147"
       },
       {
         "name": "Naval History - HMS Ark Royal",
         "url": "https://www.naval-history.net/xGM-Chrono-04CV-Ark%20Royal.htm"
+      }
+    ]
+  },
+  {
+    "name": "victorious",
+    "displayName": "Victorious",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39"},
+      {"label": "Anti-aircraft Guns", "value": "1x2 + 4x1 40mm/60"},
+      {"label": "Anti-aircraft Guns", "value": "16x2 + 6x1 20mm/70"},
+      {"label": "Fighters", "value": "Fairey Fulmar Mk I x30 (game approximation)"},
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x24 (game approximation)"}
+    ],
+    "description": "HMS Victorious (R38) was the third Illustrious-class aircraft carrier and entered Royal Navy service in 1941. She fought in the pursuit of Bismarck, Arctic convoy operations, the Mediterranean, and the Pacific. After an extensive post-war reconstruction adapted her for jet aircraft, she remained in service until 1968 and was scrapped in 1969.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Victorious 1945",
+        "url": "https://www.shipbucket.com/drawings/5182"
+      },
+      {
+        "name": "Wikipedia — HMS Victorious",
+        "url": "https://en.wikipedia.org/wiki/HMS_Victorious_%28R38%29"
       }
     ]
   },
@@ -3329,7 +3354,7 @@
     "links": [
       {
         "name": "ShipBucket - Smelyi",
-        "url": "http://www.shipbucket.com/drawings/10560"
+        "url": "https://www.shipbucket.com/drawings/10560"
       },
       {
         "name": "Wikipedia — Skoryy",

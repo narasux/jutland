@@ -869,7 +869,8 @@
           "taiyo",
           "shinyo",
           "hosho",
-          "ark_royal"
+          "ark_royal",
+          "victorious"
         ],
       },
       {
@@ -1114,7 +1115,13 @@
       // === British CV ===
       {
         name: "ark_royal",
-        pos: [12, 25],
+        pos: [11, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "victorious",
+        pos: [12, 26],
         rotation: 90,
         belongPlayer: "HA"
       },

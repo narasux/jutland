@@ -4947,8 +4947,8 @@
     acceleration: 0.3,
     rotateSpeed: 0.7,
     length: 244,
-    width: 29,
-    fundsCost: 841,
+    width: 32,
+    fundsCost: 820,
     timeCost: 121,
     weapon: {
       mainGuns: [
@@ -5106,7 +5106,304 @@
         },
         {
           name: "Swordfish",
-          maxCount: 42
+          maxCount: 36
+        }
+      ]
+    }
+  },
+  // 胜利
+  {
+    name: "victorious",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1945,
+    totalHP: 28610,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.12,
+    maxSpeed: 30.5,
+    acceleration: 0.3,
+    rotateSpeed: 0.7,
+    length: 228,
+    width: 32,
+    fundsCost: 870,
+    timeCost: 125,
+    weapon: {
+      mainGuns: [
+        // 右舷高平炮 A
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.66,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高平炮 A
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.66,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高平炮 B
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.59,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高平炮 B
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.59,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高平炮 C
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.69,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高平炮 C
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.69,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高平炮 D
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.75,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高平炮 D
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.75,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 舰桥前 pom-pom 1 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [200, 360]
+        },
+        // 舰桥后 pom-pom 2 座
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.03,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.09,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 左舷 pom-pom 2 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 博福斯 二联装 1 座
+        {
+          name: "UK/40/60/2",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 博福斯 单装 4 座
+        {
+          name: "UK/40/60",
+          posPercent: 0.89,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.89,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.96,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.96,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥右侧双联装 Oerlikon 4 座
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥左侧双联装 Oerlikon 2 座
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷双联装 Oerlikon 2 座
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.49,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艉单装 Oerlikon 6 座
+        {
+          name: "UK/20/70",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 左舷双联装 Oerlikon 8 座
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.53,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 2.5,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 30
+        },
+        {
+          name: "Swordfish",
+          maxCount: 24
         }
       ]
     }

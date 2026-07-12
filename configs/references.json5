@@ -520,8 +520,8 @@
     armaments: [
       {label: "高平炮", value: "4x2 127mm/40 八九式"},
       {label: "高炮", value: "8x3 25mm/60 九六式"},
-      {label: "制空战斗机", value: "零式舰战（A6M2）x18（游戏近似）"},
-      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9（游戏近似）"},
+      {label: "制空战斗机", value: "零式舰战（A6M2）x18"},
+      {label: "鱼雷攻击机", value: "九七舰攻（B5N2）x9"},
     ],
     description: "神鹰号航空母舰原为德国邮轮沙恩霍斯特号，因第二次世界大战爆发滞留日本，后由日本海军购入并按护航航空母舰改装。该舰 1943 年 12 月服役，主要承担护航与训练任务；1944 年 11 月护卫 Hi-81 船团时遭美军潜艇鱼雷命中，因航空燃料爆炸而沉没。",
     author: "BB1987",
@@ -565,18 +565,43 @@
       {label: "高炮", value: "6x8 40mm/39"},
       {label: "高射机枪", value: "8x4 12.7mm"},
       {label: "制空战斗机", value: "海燕式（Fulmar Mk I）24"},
-      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）42"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）36"},
     ],
     description: "皇家方舟号（91）是英国皇家海军于 1938 年服役的舰队航空母舰，也是英国较早从龙骨开始按航空母舰用途设计的大型军舰。该舰参加了挪威战役、地中海护航和追击俾斯麦号等行动；1941 年 11 月遭德国潜艇 U-81 鱼雷命中，次日沉没。",
     author: "Bombhead, K.W. Vestergaard",
     links: [
       {
         name: "Shipbucket - HMS Ark Royal 1941",
-        url: "http://www.shipbucket.com/drawings/5147"
+        url: "https://www.shipbucket.com/drawings/5147"
       },
       {
         name: "Naval History - HMS Ark Royal",
         url: "https://www.naval-history.net/xGM-Chrono-04CV-Ark%20Royal.htm"
+      }
+    ]
+  },
+  {
+    name: "victorious",
+    displayName: "胜利",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "8x2 114mm/45"},
+      {label: "高炮", value: "5x8 40mm/39"},
+      {label: "高炮", value: "1x2 + 4x1 40mm/60"},
+      {label: "高炮", value: "16x2 + 6x1 20mm/70"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）30（游戏近似）"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）24（游戏近似）"},
+    ],
+    description: "胜利号（R38）是英国皇家海军光辉级航空母舰的三号舰，1941 年服役。该舰参加了追击俾斯麦号、北极护航、地中海作战和太平洋战役，1947 年首次退役。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - HMS Victorious 1945",
+        url: "https://www.shipbucket.com/drawings/5182"
+      },
+      {
+        name: "维基百科 - 胜利号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8B%9D%E5%88%A9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
       }
     ]
   },
@@ -2100,7 +2125,7 @@
     links: [
       {
         name: "ShipBucket - Smelyi",
-        url: "http://www.shipbucket.com/drawings/10560"
+        url: "https://www.shipbucket.com/drawings/10560"
       },
       {
         name: "Wikipedia - Skory-class destroyer",
