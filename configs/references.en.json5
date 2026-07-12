@@ -955,8 +955,8 @@
       {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39"},
       {"label": "Anti-aircraft Guns", "value": "1x2 + 4x1 40mm/60"},
       {"label": "Anti-aircraft Guns", "value": "16x2 + 6x1 20mm/70"},
-      {"label": "Fighters", "value": "Fairey Fulmar Mk I x30 (game approximation)"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x24 (game approximation)"}
+      {"label": "Fighters", "value": "Vought F4U-4 Corsair x30"},
+      {"label": "Torpedo Bombers", "value": "Grumman Avenger Mk I x24"}
     ],
     "description": "HMS Victorious (R38) was the third Illustrious-class aircraft carrier and entered Royal Navy service in 1941. She fought in the pursuit of Bismarck, Arctic convoy operations, the Mediterranean, and the Pacific. After an extensive post-war reconstruction adapted her for jet aircraft, she remained in service until 1968 and was scrapped in 1969.",
     "author": "Bombhead, K.W. Vestergaard",
@@ -3937,7 +3937,40 @@
       }
     ]
   },
+  {
+    "name": "TBF-1-UK",
+    "displayName": "Grumman Avenger Mk I",
+    "armaments": [
+      {"label": "Machine Gun (Forward)", "value": "1 x 7.62mm"},
+      {"label": "Machine Gun (Dorsal Turret)", "value": "1 x 12.7mm"},
+      {"label": "Machine Gun (Ventral)", "value": "1 x 7.62mm"},
+      {"label": "Torpedo", "value": "1 x Mk-13 570mm"}
+    ],
+    "description": "Grumman TBF-1 Avengers entered Royal Navy Fleet Air Arm service in 1943. Initially named Tarpon I, they were later redesignated Avenger Mk I and retained British-specific observer accommodations. In game this aircraft is a torpedo bomber carrying one forward 7.62mm gun, one dorsal 12.7mm gun, one ventral 7.62mm gun, and one Mk-13 aerial torpedo.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Smithsonian National Air and Space Museum - Grumman Tarpon I",
+        "url": "https://airandspace.si.edu/collection-objects/grumman-tarpon-i-tbf-1-avenger/nasm_A19610117000"
+      }
+    ]
+  },
 
+  {
+    "name": "F4U-4",
+    "displayName": "Vought F4U-4 Corsair",
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "6 x 12.7mm Browning"}
+    ],
+    "description": "The Vought F4U-4 Corsair entered service in 1945 as a high-performance single-seat carrier fighter. The Royal Navy's wartime Corsairs were chiefly earlier variants, so assigning this model to HMS Victorious is a game approximation. In game it is treated as a fighter armed only with six forward-firing 12.7mm Browning machine guns.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Naval History and Heritage Command - F4U-4 Corsair",
+        "url": "https://www.history.navy.mil/research/histories/naval-aviation-history/naval-aircraft/fighter-aircraft/f4u-4-corsair-wwii-korea.html"
+      }
+    ]
+  },
   {
     "name": "Fulmar",
     "displayName": "Fairey Fulmar Mk I",

@@ -589,8 +589,8 @@
       {label: "高炮", value: "5x8 40mm/39"},
       {label: "高炮", value: "1x2 + 4x1 40mm/60"},
       {label: "高炮", value: "16x2 + 6x1 20mm/70"},
-      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）30（游戏近似）"},
-      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）24（游戏近似）"},
+      {label: "制空战斗机", value: "海盗式（F4U-4）30"},
+      {label: "鱼雷攻击机", value: "复仇者式（Avenger Mk I）24"},
     ],
     description: "胜利号（R38）是英国皇家海军光辉级航空母舰的三号舰，1941 年服役。该舰参加了追击俾斯麦号、北极护航、地中海作战和太平洋战役，1947 年首次退役。",
     author: "Bombhead, K.W. Vestergaard",
@@ -2567,6 +2567,39 @@
     description: "",
     author: "",
     links: []
+  },
+  {
+    name: "TBF-1-UK",
+    displayName: "复仇者式 Mk I（英）",
+    armaments: [
+      {label: "机枪（前向）", value: "1 x 7.62mm"},
+      {label: "机枪（背部炮塔）", value: "1 x 12.7mm"},
+      {label: "机枪（腹部后向）", value: "1 x 7.62mm"},
+      {label: "鱼雷", value: "1 x Mk-13 570mm"},
+    ],
+    description: "格鲁曼 TBF-1 复仇者式于 1943 年交付英国皇家海军航空兵，最初称 Tarpon I，后改称 Avenger Mk I，配置一挺前向 7.62mm 机枪、一挺背部炮塔 12.7mm 机枪、一挺腹部后向 7.62mm 机枪和一枚 Mk-13 航空鱼雷。",
+    author: "未知",
+    links: [
+      {
+        name: "美国国家航空航天博物馆 - Grumman Tarpon I",
+        url: "https://airandspace.si.edu/collection-objects/grumman-tarpon-i-tbf-1-avenger/nasm_A19610117000"
+      }
+    ]
+  },
+  {
+    name: "F4U-4",
+    displayName: "海盗式 F4U-4",
+    armaments: [
+      {label: "机枪（前向）", value: "6 x 12.7mm 勃朗宁"},
+    ],
+    description: "钱斯·沃特 F4U-4 海盗式于 1945 年服役，是一种高性能单座舰载战斗机。英国皇家海军航空兵在战时实际主要使用较早型号的海盗式，因此本机编入胜利号属于游戏近似。游戏中按战斗机处理，仅配置六挺前向 12.7mm 勃朗宁机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "美国海军历史与遗产指挥部 - F4U-4 海盗式",
+        url: "https://www.history.navy.mil/research/histories/naval-aviation-history/naval-aircraft/fighter-aircraft/f4u-4-corsair-wwii-korea.html"
+      }
+    ]
   },
   {
     name: "Fulmar",

@@ -34,6 +34,8 @@ const (
 
 	// 低空 0.5 倍乘在常规飞机的 2 倍绘制比例上，视觉结果与舰船同级。
 	planeLowAltitudeVisualScale = 0.5
+	// landingDeckScaleDistanceRatio 是飞机缩放到最小时已完成的着舰路程比例。
+	landingDeckScaleDistanceRatio = 0.8
 
 	// takeoffInitialSpeedRatio 是静止航母上飞机的初始滑跑速度相对最大速度的比例。
 	takeoffInitialSpeedRatio = 0.15
@@ -135,7 +137,8 @@ func (p *Plane) VisualScaleMultiplier() float64 {
 	}
 	progress := p.FlightPhaseProgress()
 	if p.FlightPhase == PlaneFlightPhaseLandingDeck {
-		progress = smoothstep(progress)
+		distanceProgress := easeOutQuadratic(progress)
+		progress = smoothstep(clamp01(distanceProgress / landingDeckScaleDistanceRatio))
 	}
 	return p.FlightVisualScaleStart + (p.FlightVisualScaleEnd-p.FlightVisualScaleStart)*progress
 }

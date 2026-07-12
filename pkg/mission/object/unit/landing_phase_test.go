@@ -872,8 +872,16 @@ func TestLandingVisualScaleInterpolation(t *testing.T) {
 	requireClose(t, plane.VisualScaleMultiplier(), 1)
 
 	plane.StartLandingDeck(ship)
-	plane.FlightPhaseProgressValue = 0.5
+	requireClose(t, plane.VisualScaleMultiplier(), 1)
+
+	// ease-out 位移下，时间进度需要反算成指定的实际路程进度。
+	plane.FlightPhaseProgressValue = 1 - math.Sqrt(1-0.4)
 	requireClose(t, plane.VisualScaleMultiplier(), 0.75)
+
+	plane.FlightPhaseProgressValue = 1 - math.Sqrt(1-landingDeckScaleDistanceRatio)
+	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
+	plane.FlightPhaseProgressValue = 1 - math.Sqrt(1-0.9)
+	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 	plane.FlightPhaseProgressValue = 1
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }

@@ -1178,6 +1178,114 @@
 
   // 英国海军
   {
+    // 海盗式 F4U-4
+    name: "F4U-4",
+    nation: "uk",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 50,
+    damageReduction: 0.6,
+    maxSpeed: 718,
+    acceleration: 40,
+    rotateSpeed: 13,
+    length: 10.3,
+    width: 12.5,
+    fundsCost: 15,
+    timeCost: 7,
+    tonnage: 6.59,
+    range: 1617,
+    weapon: {
+      guns: [
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 英国复仇者式 Mk I
+    name: "TBF-1-UK",
+    nation: "uk",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1943,
+    totalHP: 60,
+    damageReduction: 0.5,
+    maxSpeed: 436,
+    acceleration: 22,
+    rotateSpeed: 6,
+    length: 12,
+    width: 17,
+    fundsCost: 19,
+    timeCost: 9,
+    tonnage: 7.8,
+    range: 1600,
+    weapon: {
+      guns: [
+        {
+          name: "US/7.62",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "US/AST/570",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
     // 海燕式 Mk I
     name: "Fulmar",
     nation: "uk",

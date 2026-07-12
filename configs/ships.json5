@@ -5398,11 +5398,11 @@
       takeOffTime: 2.5,
       groups: [
         {
-          name: "Fulmar",
+          name: "F4U-4",
           maxCount: 30
         },
         {
-          name: "Swordfish",
+          name: "TBF-1-UK",
           maxCount: 24
         }
       ]
