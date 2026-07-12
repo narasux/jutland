@@ -11,8 +11,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/hacker"
+	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/sidebar"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/mission/unitpanel"
 	mapBlockImg "github.com/narasux/jutland/pkg/resources/images/mapblock"
 )
 
@@ -28,6 +30,7 @@ type MissionManager struct {
 	state                     *state.MissionState
 	drawer                    *drawer.Drawer
 	sidebar                   *sidebar.Panel
+	unitPanel                 *unitpanel.Panel
 	terminal                  *hacker.Terminal
 	instructionSet            *InstructionSet
 	playerAlphaHandler        controller.InputHandler
@@ -47,6 +50,7 @@ func New(mission string, ui *ebitenui.UI) *MissionManager {
 		state:          state.NewMissionState(mission),
 		drawer:         drawer.NewDrawer(mission),
 		sidebar:        sidebar.New(mission, ui),
+		unitPanel:      unitpanel.New(),
 		terminal:       hacker.NewTerminal(),
 		instructionSet: NewInstructionSet(),
 		// 目前用户一只能是人类，用户二是电脑 TODO 支持多人远程联机
@@ -56,10 +60,24 @@ func New(mission string, ui *ebitenui.UI) *MissionManager {
 	}
 }
 
+// Resize 将 Ebiten 的真实逻辑屏幕尺寸同步到任务布局，并刷新相机视野范围。
+func (m *MissionManager) Resize(width, height int) {
+	if width <= 0 || height <= 0 {
+		return
+	}
+	if m.state.View.Layout.Width == width && m.state.View.Layout.Height == height {
+		return
+	}
+	m.state.View.Layout.Width = width
+	m.state.View.Layout.Height = height
+	m.state.RefreshCameraSize()
+}
+
 // Draw 绘制任务图像
 func (m *MissionManager) Draw(screen *ebiten.Image) {
 	m.drawer.Draw(screen, m.state, m.terminal)
 	m.sidebar.Draw(screen, m.state)
+	m.unitPanel.Draw(screen, m.state, m.sidebar.OccupiedWidth(m.state))
 }
 
 // WarmupMapBlocks 允许非运行态画面分帧预热地图块缓存，减少进入关卡后的首次缩放卡顿。
@@ -72,17 +90,22 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	status := m.state.Core.MissionStatus
 	if status == state.MissionRunning {
 		m.sidebar.Update(m.state)
+		rightInset := m.sidebar.OccupiedWidth(m.state)
+		actions := m.unitPanel.Update(m.state, rightInset)
+		m.state.UI.UIConsumesCursor = m.sidebar.ConsumesCursor(m.state) ||
+			m.unitPanel.ConsumesCursor(m.state, rightInset)
+		m.handleUnitPanelActions(actions)
 	} else {
-		m.state.UI.SidebarConsumesCursor = false
+		m.state.UI.UIConsumesCursor = false
 	}
 
 	switch status {
 	case state.MissionRunning:
-		if !m.state.UI.SidebarConsumesCursor {
+		if !m.state.UI.UIConsumesCursor {
 			m.updateRallyLineClick()
 			m.updateRallyPointRightClick()
 		}
-		m.updateGameOptions(m.state.UI.SidebarConsumesCursor)
+		m.updateGameOptions(m.state.UI.UIConsumesCursor)
 	case state.MissionInTerminal:
 		m.updateTerminal()
 	case state.MissionPaused:
@@ -94,7 +117,11 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	if missionStatusRunsSimulation(status) {
 		m.updateCommandPhase()
 		switch status {
-		case state.MissionRunning, state.MissionInMap:
+		case state.MissionRunning:
+			if !m.state.UI.UIConsumesCursor {
+				m.updateCameraPosition()
+			}
+		case state.MissionInMap:
 			m.updateCameraPosition()
 		case state.MissionInBuilding:
 			m.updateReinforcePoints()
@@ -102,7 +129,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateSupportPhase()
 		m.updateMapBlockPrewarm()
 		if status == state.MissionRunning {
-			if !m.state.UI.SidebarConsumesCursor {
+			if !m.state.UI.UIConsumesCursor {
 				m.updateSelectedShips()
 			} else {
 				m.state.Interaction.IsAreaSelecting = false
@@ -115,6 +142,38 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	m.updateMissionStatus()
 
 	return m.state.Core.MissionStatus, nil
+}
+
+// handleUnitPanelActions 将 UI 动作转换为相机操作或游戏指令。
+func (m *MissionManager) handleUnitPanelActions(actions []unitpanel.Action) {
+	for _, action := range actions {
+		switch action.Kind {
+		case unitpanel.ActionFocusShip:
+			if ship := m.state.Arena.Ships[action.FocusUid]; ship != nil {
+				m.state.Interaction.FocusedShipUid = ship.Uid
+			}
+		case unitpanel.ActionCenterTarget:
+			if target := m.state.Arena.Ships[action.TargetUid]; target != nil {
+				m.centerCameraOn(target.CurPos)
+			}
+		case unitpanel.ActionToggleWeapon:
+			for _, shipUid := range action.ShipUids {
+				if action.Enable {
+					m.instructionSet.Add(instr.NewEnableWeapon(shipUid, action.WeaponType))
+				} else {
+					m.instructionSet.Add(instr.NewDisableWeapon(shipUid, action.WeaponType))
+				}
+			}
+		case unitpanel.ActionToggleAircraft:
+			for _, shipUid := range action.ShipUids {
+				if action.Enable {
+					m.instructionSet.Add(instr.NewEnableAircraft(shipUid))
+				} else {
+					m.instructionSet.Add(instr.NewDisableAircraft(shipUid))
+				}
+			}
+		}
+	}
 }
 
 // missionStatusRunsSimulation 判断当前任务状态是否需要继续推进战斗模拟

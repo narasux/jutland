@@ -21,6 +21,7 @@ func TestUIHasNoHardcodedChineseStrings(t *testing.T) {
 		"pkg/game",
 		"pkg/collection",
 		"pkg/mission/sidebar",
+		"pkg/mission/unitpanel",
 		"pkg/mission/drawer",
 		"pkg/mission/object/unit",
 	}

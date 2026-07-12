@@ -80,6 +80,8 @@ type MissionInteractionState struct {
 	SelectedSummonShipName string
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
+	// 当前在单位面板中聚焦的战舰 Uid；多选时与 SelectedShips 分离维护。
+	FocusedShipUid string
 	// 当前被选中的编组
 	SelectedGroupID object.GroupID
 }
@@ -114,8 +116,10 @@ type MissionUIState struct {
 	GameMarks map[objMark.ID]*objMark.Mark
 	// 右侧任务侧栏是否展开
 	SidebarExpanded bool
-	// 右侧任务侧栏本帧是否占用鼠标输入
-	SidebarConsumesCursor bool
+	// 底部单位面板是否展开
+	UnitPanelExpanded bool
+	// 任一任务 UI 本帧是否占用鼠标输入
+	UIConsumesCursor bool
 	// 显示集结线的增援点 Uid（游戏主地图中点击增援点时设置）
 	ShowRallyLinePointUid string
 	// 集结点设置失败计数器（用于短暂闪烁提示）
@@ -241,6 +245,7 @@ func NewMissionState(mission string) *MissionState {
 			SelectedReinforcePointUid: selectedReinforcePointUid,
 			SelectedSummonShipName:    "",
 			SelectedShips:             []string{},
+			FocusedShipUid:            "",
 			SelectedGroupID:           object.GroupIDNone,
 		},
 		Arena: MissionArenaState{
@@ -258,7 +263,8 @@ func NewMissionState(mission string) *MissionState {
 		UI: MissionUIState{
 			GameMarks:             map[objMark.ID]*objMark.Mark{},
 			SidebarExpanded:       false,
-			SidebarConsumesCursor: false,
+			UnitPanelExpanded:     false,
+			UIConsumesCursor:      false,
 			ShowRallyLinePointUid: "",
 			RallySetFailedTick:    0,
 			GameOpts: GameOptions{

@@ -2,6 +2,7 @@ package manager
 
 import (
 	"slices"
+	"sort"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -11,6 +12,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
@@ -89,6 +91,9 @@ func (m *MissionManager) getNextCameraPosInFullMapMode() *objPos.MapPos {
 // 计算下一帧相机位置（游戏模式）
 // 游戏模式，可以通过 hover 鼠标在边缘上，移动相机
 func (m *MissionManager) getNextCameraPosInGameMode() *objPos.MapPos {
+	if m.state.UI.UIConsumesCursor {
+		return nil
+	}
 	pos := m.state.View.Camera.Pos.Copy()
 	// TODO 支持在游戏设置内修改相机移动速度
 	moveSpeed := m.state.View.Camera.BaseMoveSpeed
@@ -153,25 +158,11 @@ func (m *MissionManager) updateSelectedShips() {
 			}
 
 			// 如果当前选中的分组不是当前按键的分组，则更新记录
-			if m.state.Interaction.SelectedGroupID != groupID {
-				m.state.Interaction.SelectedGroupID = groupID
-			} else {
-				// 如果当前选中的分组再次被选中，移动相机中心位置到当前分组的第一艘战舰处
-				if len(m.state.Interaction.SelectedShips) > 0 {
-					nextPos := m.state.Arena.Ships[m.state.Interaction.SelectedShips[0]].CurPos.Copy()
-					nextPos.SubMx(m.state.View.Camera.Width / 2)
-					nextPos.SubMy(m.state.View.Camera.Height / 2)
-
-					moveSpeed := m.state.View.Camera.BaseMoveSpeed
-					rx := float64(int(nextPos.RX/moveSpeed)) * moveSpeed
-					ry := float64(int(nextPos.RY/moveSpeed)) * moveSpeed
-					m.state.View.Camera.Pos.AssignRxy(rx, ry)
-				}
-			}
+			m.state.Interaction.SelectedGroupID = groupID
 		}
 	}
 
-	// 检查选中的战舰，如果已经被摧毁，则要去掉
+	// 检查选中的战舰，如果已经被摧毁，则要去掉，并保持面板展示顺序稳定。
 	selectedShips := m.state.Interaction.SelectedShips[:0]
 	for _, uid := range m.state.Interaction.SelectedShips {
 		ship, ok := m.state.Arena.Ships[uid]
@@ -179,11 +170,58 @@ func (m *MissionManager) updateSelectedShips() {
 			selectedShips = append(selectedShips, uid)
 		}
 	}
+	sort.Slice(selectedShips, func(i, j int) bool {
+		left, right := m.state.Arena.Ships[selectedShips[i]], m.state.Arena.Ships[selectedShips[j]]
+		leftName, rightName := objUnit.GetShipDisplayName(left.Name), objUnit.GetShipDisplayName(right.Name)
+		if leftName == rightName {
+			return left.Uid < right.Uid
+		}
+		return leftName < rightName
+	})
 	m.state.Interaction.SelectedShips = selectedShips
 	// 没有战舰被选中，应该重置 SelectedGroupID
 	if m.state.Interaction.SelectedGroupID != object.GroupIDNone && len(m.state.Interaction.SelectedShips) == 0 {
 		m.state.Interaction.SelectedGroupID = object.GroupIDNone
 	}
+	// 框选拖动过程中不能移动镜头，否则选区的地图坐标会发生跳变。
+	if !m.state.Interaction.IsAreaSelecting {
+		m.syncFocusedShip()
+	}
+}
+
+// syncFocusedShip 保留仍在选区中的焦点舰，否则选择稳定排序后的第一艘。
+// 焦点变化只影响信息面板，不应隐式移动玩家相机。
+func (m *MissionManager) syncFocusedShip() {
+	selected := m.state.Interaction.SelectedShips
+	if len(selected) == 0 {
+		m.state.Interaction.FocusedShipUid = ""
+		return
+	}
+	if slices.Contains(selected, m.state.Interaction.FocusedShipUid) {
+		return
+	}
+	m.state.Interaction.FocusedShipUid = selected[0]
+}
+
+// centerCameraOn 将地图坐标放到未被右侧栏和底部面板遮挡的战场区域中心。
+func (m *MissionManager) centerCameraOn(pos objPos.MapPos) {
+	rightInset := m.sidebar.OccupiedWidth(m.state)
+	bottomInset := m.unitPanel.OccupiedHeight(m.state)
+	m.state.View.Camera.Pos = centeredCameraPos(m.state, pos, rightInset, bottomInset)
+}
+
+// centeredCameraPos 计算将目标放在可见战场中心后的相机左上角坐标。
+func centeredCameraPos(ms *state.MissionState, pos objPos.MapPos, rightInset, bottomInset float64) objPos.MapPos {
+	visibleWidth := max(1, float64(ms.View.Layout.Width)-rightInset)
+	visibleHeight := max(1, float64(ms.View.Layout.Height)-bottomInset)
+	blockSize := ms.MapBlockDisplaySize()
+	nextPos := pos.Copy()
+	nextPos.AssignRxy(
+		pos.RX-visibleWidth/blockSize/2,
+		pos.RY-visibleHeight/blockSize/2,
+	)
+	nextPos.EnsureBorder(ms.CameraPosBorder())
+	return nextPos
 }
 
 // 更新舰队编组状态（左 Ctrl + 0-9 编组）

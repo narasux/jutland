@@ -5,6 +5,6 @@
 // Language: 游戏界面语言，当前正式启用 zh-Hans / en
 
 {
-  "speedMultiplier": 1,
+  "speedMultiplier": 0.25,
   "language": "zh-Hans"
 }

@@ -88,7 +88,6 @@ func New(mission string, ui *ebitenui.UI) *Panel {
 // Update 更新侧栏控件状态，并处理小地图点击
 func (p *Panel) Update(ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionRunning {
-		ms.UI.SidebarConsumesCursor = false
 		return
 	}
 
@@ -97,7 +96,6 @@ func (p *Panel) Update(ms *state.MissionState) {
 		sx, sy := ebiten.CursorPosition()
 		if p.layout.Handle.contains(sx, sy) {
 			ms.UI.SidebarExpanded = !ms.UI.SidebarExpanded
-			ms.UI.SidebarConsumesCursor = true
 			p.ensureUI(ms)
 			return
 		}
@@ -106,7 +104,6 @@ func (p *Panel) Update(ms *state.MissionState) {
 	p.ensureUI(ms)
 	p.ui.Update()
 	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
-	ms.UI.SidebarConsumesCursor = p.ConsumesCursor(ms)
 
 	if ms.UI.SidebarExpanded && inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
 		sx, sy := ebiten.CursorPosition()
@@ -134,16 +131,29 @@ func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState) {
 
 // ConsumesCursor 判断当前鼠标位置是否应由侧栏消费
 func (p *Panel) ConsumesCursor(ms *state.MissionState) bool {
+	sx, sy := ebiten.CursorPosition()
+	return p.consumesCursorAt(ms, sx, sy)
+}
+
+// consumesCursorAt 判断给定屏幕坐标是否位于右侧栏或其把手内。
+func (p *Panel) consumesCursorAt(ms *state.MissionState, sx, sy int) bool {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return false
 	}
 
 	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
-	sx, sy := ebiten.CursorPosition()
 	if ui.Handle.contains(sx, sy) {
 		return true
 	}
 	return ms.UI.SidebarExpanded && ui.Panel.contains(sx, sy)
+}
+
+// OccupiedWidth 返回展开侧栏遮挡战场的屏幕像素宽度。
+func (p *Panel) OccupiedWidth(ms *state.MissionState) float64 {
+	if !ms.UI.SidebarExpanded || ms.Core.MissionStatus != state.MissionRunning {
+		return 0
+	}
+	return calcLayout(ms.View.Layout, true).Panel.W
 }
 
 func (p *Panel) ensureUI(ms *state.MissionState) {

@@ -246,6 +246,90 @@ other = "Enemy fleet: {{.Count}}"
 other = "Status display"
 [SidebarDamageNumbers]
 other = "Damage numbers"
+[UnitPanelNoSelection]
+other = "No ships selected"
+[UnitPanelOpen]
+other = "Open ship information"
+[UnitPanelClose]
+other = "Close ship information"
+[UnitPanelSelectedCount]
+other = "{{.Count}} ships selected"
+[UnitPanelBasicInfo]
+other = "Basic Information"
+[UnitPanelWeaponTab]
+other = "Weapons"
+[UnitPanelAircraftTab]
+other = "Aircraft"
+[UnitPanelName]
+other = "Name"
+[UnitPanelType]
+other = "Type"
+[UnitPanelSpeed]
+other = "Speed"
+[UnitPanelHeading]
+other = "Heading"
+[UnitPanelTarget]
+other = "Target"
+[UnitPanelDistance]
+other = "Distance"
+[UnitPanelStatus]
+other = "Status"
+[UnitPanelGroup]
+other = "Group"
+[UnitPanelAircraft]
+other = "Aircraft"
+[UnitPanelNoTarget]
+other = "—"
+[UnitPanelIdle]
+other = "Standby"
+[UnitPanelMoving]
+other = "Moving"
+[UnitPanelEngaging]
+other = "Engaging"
+[UnitPanelAllWeapons]
+other = "All weapons"
+[UnitPanelMainGun]
+other = "Main guns"
+[UnitPanelSecondaryGun]
+other = "Secondary guns"
+[UnitPanelAntiAircraftGun]
+other = "Anti-aircraft"
+[UnitPanelTorpedo]
+other = "Torpedoes"
+[UnitPanelRocket]
+other = "Rockets"
+[UnitPanelAllowed]
+other = "Allowed"
+[UnitPanelDisabled]
+other = "Disabled"
+[UnitPanelMixed]
+other = "Mixed"
+[UnitPanelReady]
+other = "Ready"
+[UnitPanelReadyCount]
+other = "{{.Ready}}/{{.Total}} ready"
+[UnitPanelSeconds]
+other = "{{.Seconds}} s"
+[UnitPanelAircraftEmpty]
+other = "No embarked aircraft"
+[UnitPanelTakeoff]
+other = "Aircraft takeoff"
+[UnitPanelPlaneType]
+other = "Type"
+[UnitPanelStandby]
+other = "Standby"
+[UnitPanelInCombat]
+other = "Combat"
+[UnitPanelReturning]
+other = "Returning"
+[UnitPanelLost]
+other = "Lost"
+[UnitPanelTotal]
+other = "Total"
+[UnitPanelAverageHP]
+other = "Average HP"
+[UnitPanelAverageSpeed]
+other = "Average speed"
 [MapSelf]
 other = "Ally"
 [MapEnemy]

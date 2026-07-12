@@ -246,6 +246,90 @@ other = "敌方舰队: {{.Count}}"
 other = "状态显示"
 [SidebarDamageNumbers]
 other = "伤害数字"
+[UnitPanelNoSelection]
+other = "未选择战舰"
+[UnitPanelOpen]
+other = "展开战舰信息"
+[UnitPanelClose]
+other = "收起战舰信息"
+[UnitPanelSelectedCount]
+other = "已选择 {{.Count}} 艘"
+[UnitPanelBasicInfo]
+other = "基础信息"
+[UnitPanelWeaponTab]
+other = "武器"
+[UnitPanelAircraftTab]
+other = "航空"
+[UnitPanelName]
+other = "名称"
+[UnitPanelType]
+other = "类型"
+[UnitPanelSpeed]
+other = "速度"
+[UnitPanelHeading]
+other = "航向"
+[UnitPanelTarget]
+other = "目标"
+[UnitPanelDistance]
+other = "距离"
+[UnitPanelStatus]
+other = "状态"
+[UnitPanelGroup]
+other = "编组"
+[UnitPanelAircraft]
+other = "飞机"
+[UnitPanelNoTarget]
+other = "—"
+[UnitPanelIdle]
+other = "待命"
+[UnitPanelMoving]
+other = "航行中"
+[UnitPanelEngaging]
+other = "接敌中"
+[UnitPanelAllWeapons]
+other = "全部武器"
+[UnitPanelMainGun]
+other = "主炮"
+[UnitPanelSecondaryGun]
+other = "副炮"
+[UnitPanelAntiAircraftGun]
+other = "防空炮"
+[UnitPanelTorpedo]
+other = "鱼雷"
+[UnitPanelRocket]
+other = "火箭炮"
+[UnitPanelAllowed]
+other = "允许"
+[UnitPanelDisabled]
+other = "禁用"
+[UnitPanelMixed]
+other = "混合"
+[UnitPanelReady]
+other = "已就绪"
+[UnitPanelReadyCount]
+other = "{{.Ready}}/{{.Total}} 就绪"
+[UnitPanelSeconds]
+other = "{{.Seconds}} 秒"
+[UnitPanelAircraftEmpty]
+other = "未搭载舰载机"
+[UnitPanelTakeoff]
+other = "舰载机起飞"
+[UnitPanelPlaneType]
+other = "机型"
+[UnitPanelStandby]
+other = "待命"
+[UnitPanelInCombat]
+other = "作战"
+[UnitPanelReturning]
+other = "返航"
+[UnitPanelLost]
+other = "损失"
+[UnitPanelTotal]
+other = "合计"
+[UnitPanelAverageHP]
+other = "平均 HP"
+[UnitPanelAverageSpeed]
+other = "平均速度"
 [MapSelf]
 other = "我"
 [MapEnemy]
