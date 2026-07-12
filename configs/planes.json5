@@ -1152,5 +1152,126 @@
     tonnage: 4.5,
     range: 5308,
     weapon: {}
-  }
+  },
+
+  // 英国海军
+  {
+    // 海燕式 Mk I
+    name: "Fulmar",
+    nation: "uk",
+    type: "fighter",
+    typeAbbr: "F",
+    totalHP: 45,
+    damageReduction: 0.45,
+    maxSpeed: 398,
+    acceleration: 22,
+    rotateSpeed: 8,
+    length: 12.24,
+    width: 14.14,
+    fundsCost: 11,
+    timeCost: 6,
+    tonnage: 4.853,
+    range: 1287,
+    weapon: {
+      guns: [
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后向
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 剑鱼式 Mk I
+    name: "Swordfish",
+    nation: "uk",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    totalHP: 38,
+    damageReduction: 0.35,
+    maxSpeed: 224,
+    acceleration: 14,
+    rotateSpeed: 7,
+    length: 10.87,
+    width: 13.87,
+    fundsCost: 6,
+    timeCost: 4,
+    tonnage: 3.5,
+    range: 879,
+    weapon: {
+      guns: [
+        {
+          name: "UK/7.7/Vickers",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "UK/AST/457/1935",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
 ]

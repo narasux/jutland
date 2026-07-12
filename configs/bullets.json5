@@ -424,6 +424,13 @@
     criticalRate: 0
   },
   {
+    name: "UK/GB/7.7/1937",
+    type: "shell",
+    diameter: 8,
+    damage: 0.08,
+    criticalRate: 0
+  },
+  {
     name: "SU/GB/500/1945",
     type: "shell",
     diameter: 500,
@@ -556,6 +563,13 @@
     diameter: 533,
     damage: 4750,
     criticalRate: 0.07
+  },
+  {
+    name: "UK/TB/457/1935",
+    type: "torpedo",
+    diameter: 457,
+    damage: 3000,
+    criticalRate: 0.03
   },
   {
     name: "UK/TB/622/1925",

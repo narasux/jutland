@@ -1378,6 +1378,45 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 .303 勃朗宁航空机枪
+  {
+    name: "UK/7.7/Browning",
+    bulletName: "UK/GB/7.7/1937",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 1.5,
+    bulletSpread: 12,
+    bulletSpeed: 745,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 英国海军 .303 维克斯 K 型航空机枪
+  {
+    name: "UK/7.7/VickersK",
+    bulletName: "UK/GB/7.7/1937",
+    bulletCount: 1,
+    reloadTime: 0.063,
+    range: 1.4,
+    bulletSpread: 16,
+    bulletSpeed: 745,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 英国海军 .303 固定式维克斯航空机枪
+  {
+    name: "UK/7.7/Vickers",
+    bulletName: "UK/GB/7.7/1937",
+    bulletCount: 1,
+    reloadTime: 0.075,
+    range: 1.4,
+    bulletSpread: 14,
+    bulletSpeed: 745,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 苏联海军 SU/500/50 双联装舰炮
   {
     name: "SU/500/50/2",

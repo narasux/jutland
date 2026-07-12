@@ -3888,7 +3888,49 @@
       }
     ]
   },
-{
+
+  {
+    "name": "fulmar",
+    "displayName": "Fairey Fulmar Mk I",
+    "armaments": [
+      {"label": "Machine Guns (Forward)", "value": "8 x 7.7mm Browning"},
+      {"label": "Machine Gun (Rear)", "value": "1 x 7.7mm Vickers K"}
+    ],
+    "description": "The Fairey Fulmar Mk I was a two-seat carrier fighter operated by the Royal Navy's Fleet Air Arm early in the Second World War. Its long range, navigator, and eight forward-firing machine guns suited fleet patrol and interception duties, although its size and weight limited performance against modern single-seat fighters.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Australian War Memorial - Fairey Fulmar ammunition",
+        "url": "https://www.awm.gov.au/collection/304537"
+      },
+      {
+        "name": "History of War - Fairey Fulmar",
+        "url": "https://www.historyofwar.org/articles/weapons_fairey_fulmar.html"
+      }
+    ]
+  },
+  {
+    "name": "Swordfish",
+    "displayName": "Fairey Swordfish Mk I",
+    "armaments": [
+      {"label": "Machine Gun (Forward)", "value": "1 x 7.7mm Vickers"},
+      {"label": "Machine Gun (Rear)", "value": "1 x 7.7mm Vickers K"},
+      {"label": "Torpedo", "value": "1 x 457mm Mark XII (approximately 730-760kg)"}
+    ],
+    "description": "The Fairey Swordfish Mk I was a carrier-based torpedo bomber used by the Royal Navy's Fleet Air Arm. Despite its low speed and biplane construction, its excellent low-speed handling contributed to the attack on Taranto and the pursuit of Bismarck. The game configuration carries two .303-inch machine guns and one Mark XII aerial torpedo.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Canada Aviation and Space Museum - Fairey Swordfish II",
+        "url": "https://ingenium.ca/aviation/en/collection-highlight/fairey-swordfish-ii/"
+      },
+      {
+        "name": "History of War - Fairey Swordfish",
+        "url": "https://www.historyofwar.org/articles/weapons_fairey_swordfish.html"
+      }
+    ]
+  },
+  {
     "name": "RailGun",
     "displayName": "Railgun",
     "type": "Weapon",
