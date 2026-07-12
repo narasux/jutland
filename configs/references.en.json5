@@ -923,6 +923,30 @@
     ]
   },
   {
+    "name": "ark_royal",
+    "displayName": "Ark Royal",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "6x8 40mm/39"},
+      {"label": "Anti-aircraft Machine Guns", "value": "8x4 12.7mm"},
+      {"label": "Fighters", "value": "Fairey Fulmar Mk I x24"},
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x42"}
+    ],
+    "description": "HMS Ark Royal (91) was a purpose-built Royal Navy fleet carrier commissioned in 1938. Her enclosed hangars and long flight deck supported sustained air operations during the Norwegian Campaign, Mediterranean convoys, and the pursuit of Bismarck. German submarine U-81 torpedoed her in November 1941, and she sank the following day.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Ark Royal 1941",
+        "url": "http://www.shipbucket.com/drawings/5147"
+      },
+      {
+        "name": "Naval History - HMS Ark Royal",
+        "url": "https://www.naval-history.net/xGM-Chrono-04CV-Ark%20Royal.htm"
+      }
+    ]
+  },
+  {
     "name": "lowa",
     "displayName": "Iowa",
     "type": "Battleship",
@@ -3890,7 +3914,7 @@
   },
 
   {
-    "name": "fulmar",
+    "name": "Fulmar",
     "displayName": "Fairey Fulmar Mk I",
     "armaments": [
       {"label": "Machine Guns (Forward)", "value": "8 x 7.7mm Browning"},
@@ -3915,7 +3939,7 @@
     "armaments": [
       {"label": "Machine Gun (Forward)", "value": "1 x 7.7mm Vickers"},
       {"label": "Machine Gun (Rear)", "value": "1 x 7.7mm Vickers K"},
-      {"label": "Torpedo", "value": "1 x 457mm Mark XII (approximately 730-760kg)"}
+      {"label": "Torpedo", "value": "1 x 457mm Mark XII"}
     ],
     "description": "The Fairey Swordfish Mk I was a carrier-based torpedo bomber used by the Royal Navy's Fleet Air Arm. Despite its low speed and biplane construction, its excellent low-speed handling contributed to the attack on Taranto and the pursuit of Bismarck. The game configuration carries two .303-inch machine guns and one Mark XII aerial torpedo.",
     "author": "Unknown",

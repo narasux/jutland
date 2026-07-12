@@ -23,7 +23,7 @@ var shellDiameters = []int{
 var shells = make(map[int]*ebiten.Image)
 
 // torpedoDiameters 支持的鱼雷口径列表
-var torpedoDiameters = []int{324, 450, 533, 570, 610, 622, 1350}
+var torpedoDiameters = []int{324, 450, 457, 533, 570, 610, 622, 1350}
 
 // torpedoes 鱼雷图片映射表
 var torpedoes = make(map[int]*ebiten.Image)

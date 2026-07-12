@@ -4928,6 +4928,185 @@
       ]
     }
   },
+  // 英国海军
+  {
+    // 皇家方舟
+    name: "ark_royal",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1941,
+    totalHP: 27200,
+    horizontalDamageReduction: 0.18,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 31,
+    acceleration: 0.3,
+    rotateSpeed: 0.7,
+    length: 244,
+    width: 29,
+    fundsCost: 841,
+    timeCost: 121,
+    weapon: {
+      mainGuns: [
+        // 右舷高平炮
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.61,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高平炮
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.61,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.57,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 舰桥前高炮 2 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.36,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.28,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 舰桥后高炮 2 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.02,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.05,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 左舷高炮 2 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰艏高射机枪 4 座
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.88,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.88,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.84,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.84,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰艉高射机枪 4 座
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.76,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.8,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.8,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 2.5,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 24
+        },
+        {
+          name: "Swordfish",
+          maxCount: 42
+        }
+      ]
+    }
+  },
   // 战列舰
   // 美国海军
   {
@@ -22568,4 +22747,3 @@
     timeCost: 86,
   },
 ]
-

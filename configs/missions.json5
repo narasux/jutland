@@ -868,7 +868,8 @@
           "hiyo",
           "taiyo",
           "shinyo",
-          "hosho"
+          "hosho",
+          "ark_royal"
         ],
       },
       {
@@ -1107,6 +1108,13 @@
       {
         name: "S_100",
         pos: [27, 29],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === British CV ===
+      {
+        name: "ark_royal",
+        pos: [12, 25],
         rotation: 90,
         belongPlayer: "HA"
       },

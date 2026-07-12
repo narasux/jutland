@@ -555,6 +555,31 @@
       }
     ]
   },
+  // 英国海军
+  {
+    name: "ark_royal",
+    displayName: "皇家方舟",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "8x2 114mm/45"},
+      {label: "高炮", value: "6x8 40mm/39"},
+      {label: "高射机枪", value: "8x4 12.7mm"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）24"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）42"},
+    ],
+    description: "皇家方舟号（91）是英国皇家海军于 1938 年服役的舰队航空母舰，也是英国较早从龙骨开始按航空母舰用途设计的大型军舰。该舰参加了挪威战役、地中海护航和追击俾斯麦号等行动；1941 年 11 月遭德国潜艇 U-81 鱼雷命中，次日沉没。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - HMS Ark Royal 1941",
+        url: "http://www.shipbucket.com/drawings/5147"
+      },
+      {
+        name: "Naval History - HMS Ark Royal",
+        url: "https://www.naval-history.net/xGM-Chrono-04CV-Ark%20Royal.htm"
+      }
+    ]
+  },
   // 美国海军
   {
     name: "lowa",
@@ -2519,7 +2544,7 @@
     links: []
   },
   {
-    name: "fulmar",
+    name: "Fulmar",
     displayName: "海燕式 Mk I",
     armaments: [
       {label: "机枪（前向）", value: "8 x 7.7mm 勃朗宁"},
@@ -2535,7 +2560,7 @@
     armaments: [
       {label: "机枪（前向）", value: "1 x 7.7mm 维克斯"},
       {label: "机枪（后向）", value: "1 x 7.7mm 维克斯 K 型"},
-      {label: "鱼雷", value: "1 x 457mm Mark XII（约 730–760kg）"},
+      {label: "鱼雷", value: "1 x 457mm Mark XII"},
     ],
     description: "费尔雷剑鱼式 Mk I 是英国皇家海军航空兵在第二次世界大战初期使用的舰载鱼雷攻击机，虽然速度较低，却凭借良好的低速操纵性参加了塔兰托空袭和追击俾斯麦号等行动。游戏中按鱼雷轰炸机处理，仅配置用户指定的两挺 .303 英寸维克斯机枪和一枚 Mark XII 航空鱼雷。",
     author: "未知",
