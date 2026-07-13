@@ -5408,6 +5408,225 @@
       ]
     }
   },
+  // 复仇
+  {
+    name: "vengeance",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CVL",
+    year: 1945,
+    totalHP: 18040,
+    horizontalDamageReduction: 0.08,
+    verticalDamageReduction: 0.02,
+    maxSpeed: 24.5,
+    acceleration: 0.4,
+    rotateSpeed: 0.9,
+    length: 212,
+    width: 24,
+    fundsCost: 213,
+    timeCost: 83,
+    weapon: {
+      secondaryGuns: [
+        // 前部四联装 pom-pom 2 座
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.5,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥前后四联装 pom-pom 2 座
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.3,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.08,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 前部四联装 pom-pom 2 座
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.43,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 20mm Oerlikon
+        // 前部右舷 A
+        {
+          name: "UK/20/70",
+          posPercent: 0.63,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 前部左舷 A
+        {
+          name: "UK/20/70",
+          posPercent: 0.63,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 前部右舷 B
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.58,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 前部左舷 B
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.58,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 前部左舷 C
+        {
+          name: "UK/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 前部左舷 D
+        {
+          name: "UK/20/70",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 单联
+        // 后部右舷 E
+        {
+          name: "UK/20/70",
+          posPercent: -0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部左舷 E
+        {
+          name: "UK/20/70",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部右舷 F
+        {
+          name: "UK/20/70",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部左舷 F
+        {
+          name: "UK/20/70",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部右舷 G
+        {
+          name: "UK/20/70",
+          posPercent: -0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部左舷 G
+        {
+          name: "UK/20/70",
+          posPercent: -0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 双联
+        // 后部右舷 H
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.51,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部左舷 H
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部右舷 I
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.56,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部左舷 I
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.56,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部右舷 J
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部左舷 J
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.62,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰尾右舷
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.98,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [180, 300]
+        },
+        // 舰尾左舷
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.98,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [180, 300]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 3,
+      groups: [
+        {
+          name: "F4U-4",
+          maxCount: 24
+        },
+        {
+          name: "TBF-1-UK",
+          maxCount: 14
+        }
+      ]
+    }
+  },
   // 勇敢
   {
     name: "courageous",

@@ -616,6 +616,23 @@
     ]
   },
   {
+    name: "vengeance",
+    displayName: "复仇",
+    type: "轻型航空母舰",
+    armaments: [
+      {label: "高炮", value: "6x4 40mm/39"},
+      {label: "高炮", value: "10x2 + 10x1 20mm/70"},
+      {label: "制空战斗机", value: "海盗式（F4U-4）24"},
+      {label: "鱼雷攻击机", value: "复仇者式（Avenger Mk I）14"},
+    ],
+    description: "复仇号（R71）是英国皇家海军巨像级轻型舰队航空母舰，1945 年 1 月服役。该舰建成后编入英国太平洋舰队，但未参加实战；战后曾借给澳大利亚海军，后售予巴西并改名为米纳斯吉拉斯号，2001 年退役。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - 71 Vengeance", url: "https://www.shipbucket.com/drawings/5186"},
+      {name: "维基百科 - HMS Vengeance (R71)", url: "https://en.wikipedia.org/wiki/HMS_Vengeance_(R71)"}
+    ]
+  },
+  {
     name: "victorious",
     displayName: "胜利",
     type: "航空母舰",

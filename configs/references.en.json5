@@ -982,6 +982,23 @@
     ]
   },
   {
+    "name": "vengeance",
+    "displayName": "Vengeance",
+    "type": "Light Aircraft Carrier",
+    "armaments": [
+      {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39"},
+      {"label": "Anti-aircraft Guns", "value": "10x2 + 10x1 20mm/70"},
+      {"label": "Fighters", "value": "Vought F4U-4 Corsair x24"},
+      {"label": "Torpedo Bombers", "value": "Grumman Avenger Mk I x14"}
+    ],
+    "description": "HMS Vengeance (R71) was a Colossus-class light fleet carrier commissioned into the Royal Navy in January 1945. Completed too late to see combat, she nevertheless joined the British Pacific Fleet. She later served on loan with the Royal Australian Navy and, after sale and reconstruction, spent four decades in Brazilian service as Minas Gerais before being decommissioned in 2001.",
+    "author": "Bombhead, K. W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - 71 Vengeance", "url": "https://www.shipbucket.com/drawings/5186"},
+      {"name": "Wikipedia - HMS Vengeance (R71)", "url": "https://en.wikipedia.org/wiki/HMS_Vengeance_(R71)"}
+    ]
+  },
+  {
     "name": "victorious",
     "displayName": "Victorious",
     "type": "Aircraft Carrier",

@@ -869,10 +869,11 @@
           "taiyo",
           "shinyo",
           "hosho",
+          "victorious",
           "ark_royal",
           "courageous",
           "hermes",
-          "victorious"
+          "vengeance"
         ],
       },
       {
@@ -1136,6 +1137,12 @@
       {
         name: "hermes",
         pos: [12, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "vengeance",
+        pos: [13, 29],
         rotation: 90,
         belongPlayer: "HA"
       },
