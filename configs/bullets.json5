@@ -572,6 +572,13 @@
     criticalRate: 0.03
   },
   {
+    name: "UK/TB/457/1942",
+    type: "torpedo",
+    diameter: 457,
+    damage: 4050,
+    criticalRate: 0.06
+  },
+  {
     name: "UK/TB/622/1925",
     type: "torpedo",
     diameter: 622,

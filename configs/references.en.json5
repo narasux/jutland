@@ -1026,7 +1026,7 @@
       {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39"},
       {"label": "Anti-aircraft Guns", "value": "10x2 + 10x1 20mm/70"},
       {"label": "Fighters", "value": "Vought F4U-4 Corsair x24"},
-      {"label": "Torpedo Bombers", "value": "Grumman Avenger Mk I x14"}
+      {"label": "Torpedo Bombers", "value": "Fairey Barracuda Mk II x14"}
     ],
     "description": "HMS Vengeance (R71) was a Colossus-class light fleet carrier commissioned into the Royal Navy in January 1945. Completed too late to see combat, she nevertheless joined the British Pacific Fleet. She later served on loan with the Royal Australian Navy and, after sale and reconstruction, spent four decades in Brazilian service as Minas Gerais before being decommissioned in 2001.",
     "author": "Bombhead, K. W. Vestergaard",
@@ -4098,6 +4098,26 @@
       {
         "name": "History of War - Fairey Swordfish",
         "url": "https://www.historyofwar.org/articles/weapons_fairey_swordfish.html"
+      }
+    ]
+  },
+  {
+    "name": "Barracuda-II",
+    "displayName": "Fairey Barracuda Mk II",
+    "armaments": [
+      {"label": "Machine Guns (Rear)", "value": "2 x .303 in Vickers K"},
+      {"label": "Torpedo", "value": "1 x 18-inch Mark XV"}
+    ],
+    "description": "The Fairey Barracuda Mk II entered Fleet Air Arm service in 1943 as a carrier-borne torpedo and dive bomber. It became the definitive Merlin 32-powered variant and took part in major operations including the 1944 strikes against Tirpitz. In game it is treated as a torpedo bomber, carrying two rear-firing .303-inch Vickers K machine guns and one 18-inch Mark XV aerial torpedo.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Royal Navy - Torpedo bomber recovered from the Solent",
+        "url": "https://www.royalnavy.mod.uk/news/2019/june/11/190611-torpedo-bomber-recovered-from-solent"
+      },
+      {
+        "name": "Imperial War Museums - The Barracuda, the Navy's new torpedo bomber",
+        "url": "https://www.iwm.org.uk/collections/item/object/205152671"
       }
     ]
   },

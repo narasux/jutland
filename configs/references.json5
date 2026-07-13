@@ -660,7 +660,7 @@
       {label: "高炮", value: "6x4 40mm/39"},
       {label: "高炮", value: "10x2 + 10x1 20mm/70"},
       {label: "制空战斗机", value: "海盗式（F4U-4）24"},
-      {label: "鱼雷攻击机", value: "复仇者式（Avenger Mk I）14"},
+      {label: "鱼雷攻击机", value: "梭鱼式（Barracuda Mk II）14"},
     ],
     description: "复仇号（R71）是英国皇家海军巨像级轻型舰队航空母舰，1945 年 1 月服役。该舰建成后编入英国太平洋舰队，但未参加实战；战后曾借给澳大利亚海军，后售予巴西并改名为米纳斯吉拉斯号，2001 年退役。",
     author: "Bombhead, K.W. Vestergaard",
@@ -2719,6 +2719,26 @@
       {
         name: "History of War - Fairey Swordfish",
         url: "https://www.historyofwar.org/articles/weapons_fairey_swordfish.html"
+      }
+    ]
+  },
+  {
+    name: "Barracuda-II",
+    displayName: "梭鱼式 Mk II",
+    armaments: [
+      {label: "机枪（后向）", value: "2 x 7.7mm 维克斯 K 型"},
+      {label: "鱼雷", value: "1 x 457mm Mark XV"},
+    ],
+    description: "费尔雷梭鱼式 Mk II 于 1943 年进入英国皇家海军航空兵服役，是兼具鱼雷攻击与俯冲轰炸能力的舰载攻击机，并参加了 1944 年对提尔皮茨号的空袭。游戏中按鱼雷轰炸机处理，配置两挺后向 7.7mm 维克斯 K 型机枪和一枚 457mm Mark XV 航空鱼雷。",
+    author: "未知",
+    links: [
+      {
+        name: "英国皇家海军 - 打捞二战鱼雷轰炸机",
+        url: "https://www.royalnavy.mod.uk/news/2019/june/11/190611-torpedo-bomber-recovered-from-solent"
+      },
+      {
+        name: "帝国战争博物馆 - 梭鱼式鱼雷轰炸机",
+        url: "https://www.iwm.org.uk/collections/item/object/205152671"
       }
     ]
   },

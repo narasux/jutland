@@ -1404,4 +1404,47 @@
       ]
     }
   },
+  {
+    // 梭鱼式 Mk II
+    name: "Barracuda-II",
+    nation: "uk",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1945,
+    totalHP: 55,
+    damageReduction: 0.5,
+    maxSpeed: 367,
+    acceleration: 21,
+    rotateSpeed: 6,
+    length: 12.12,
+    width: 14.99,
+    fundsCost: 13,
+    timeCost: 7,
+    tonnage: 6,
+    range: 1104,
+    weapon: {
+      guns: [
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0.2,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "UK/AST/457/1942",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
 ]

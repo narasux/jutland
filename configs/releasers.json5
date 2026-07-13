@@ -75,5 +75,12 @@
     bulletName: "UK/TB/457/1935",
     range: 3.5,
     bulletSpeed: 40,
+  },
+  // 英国海军 457mm Mark XV 航空鱼雷
+  {
+    name: "UK/AST/457/1942",
+    bulletName: "UK/TB/457/1942",
+    range: 4.5,
+    bulletSpeed: 40,
   }
 ]
