@@ -1118,6 +1118,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 BL 6-inch Mk XVII 单装舰炮
+  {
+    name: "UK/152/50/MK17",
+    bulletName: "UK/GB/152/1910",
+    bulletCount: 1,
+    reloadTime: 6,
+    range: 18,
+    bulletSpread: 100,
+    bulletSpeed: 846,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 英国海军 UK/152/45 单装舰炮
   {
     name: "UK/152/45",

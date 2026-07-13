@@ -634,6 +634,25 @@
     ]
   },
   {
+    name: "eagle",
+    displayName: "鹰",
+    type: "航空母舰",
+    armaments: [
+      {label: "主炮", value: "9x1 152mm/50 Mk XVII"},
+      {label: "高平炮", value: "4x1 102mm/45"},
+      {label: "高炮", value: "2x8 40mm/39"},
+      {label: "高射机枪", value: "3x4 12.7mm"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）9"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）12"},
+    ],
+    description: "鹰号由智利战列舰阿尔米兰特·科克伦号改建，1924 年加入英国皇家海军，游戏中为 1939 年形态。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - HMS Eagle 1933", url: "https://www.shipbucket.com/drawings/5157"},
+      {name: "维基百科 - HMS Eagle", url: "https://en.wikipedia.org/wiki/HMS_Eagle_(1918)"}
+    ]
+  },
+  {
     name: "vengeance",
     displayName: "复仇",
     type: "轻型航空母舰",
@@ -3453,6 +3472,15 @@
   {
     name: "UK/152/50/2",
     displayName: "152mm/50 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/152/50/MK17",
+    displayName: "152mm/50 Mk XVII 单装舰炮",
     type: "武器",
     armaments: [],
     description: "",

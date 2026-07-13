@@ -872,6 +872,7 @@
           "victorious",
           "ark_royal",
           "argus",
+          "eagle",
           "courageous",
           "hermes",
           "vengeance"
@@ -1150,6 +1151,12 @@
       {
         name: "argus",
         pos: [12, 30],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "eagle",
+        pos: [11, 31],
         rotation: 90,
         belongPlayer: "HA"
       },

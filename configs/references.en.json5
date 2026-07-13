@@ -1000,6 +1000,25 @@
     ]
   },
   {
+    "name": "eagle",
+    "displayName": "Eagle",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Main Guns", "value": "9x1 152mm/50 Mk XVII"},
+      {"label": "Dual-purpose Guns", "value": "4x1 102mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "2x8 40mm/39"},
+      {"label": "Anti-aircraft Machine Guns", "value": "3x4 12.7mm"},
+      {"label": "Fighters", "value": "Fairey Fulmar Mk I x9"},
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x12"}
+    ],
+    "description": "HMS Eagle was converted from the incomplete Chilean battleship Almirante Cochrane and entered Royal Navy service in 1924. This configuration represents her after the 1932 refit, as drawn in 1939.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - HMS Eagle 1933", "url": "https://www.shipbucket.com/drawings/5157"},
+      {"name": "Wikipedia - HMS Eagle", "url": "https://en.wikipedia.org/wiki/HMS_Eagle_(1918)"}
+    ]
+  },
+  {
     "name": "vengeance",
     "displayName": "Vengeance",
     "type": "Light Aircraft Carrier",
@@ -4832,6 +4851,15 @@
   {
     "name": "UK/152/50/2",
     "displayName": "152mm Twin Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/152/50/MK17",
+    "displayName": "152mm/50 Mk XVII Single Naval Gun",
     "type": "Weapon",
     "armaments": [],
     "description": "",
