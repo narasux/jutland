@@ -982,6 +982,24 @@
     ]
   },
   {
+    "name": "argus",
+    "displayName": "Argus",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "4x1 102mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "6x2 20mm/70"},
+      {"label": "Anti-aircraft Machine Guns", "value": "2x4 12.7mm"},
+      {"label": "Fighters", "value": "Fairey Fulmar Mk I x8"},
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x10"}
+    ],
+    "description": "HMS Argus was converted from an ocean liner and commissioned in 1918, becoming the first aircraft carrier with a full-length unobstructed flight deck. Returned to front-line service in 1942, she took part in Operation Harpoon, supporting Malta, and Operation Torch, the Allied landings in North Africa.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - HMS Argus 1942", "url": "https://www.shipbucket.com/drawings/5154"},
+      {"name": "Wikipedia - HMS Argus", "url": "https://en.wikipedia.org/wiki/HMS_Argus_(I49)"}
+    ]
+  },
+  {
     "name": "vengeance",
     "displayName": "Vengeance",
     "type": "Light Aircraft Carrier",

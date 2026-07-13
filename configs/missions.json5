@@ -871,6 +871,7 @@
           "hosho",
           "victorious",
           "ark_royal",
+          "argus",
           "courageous",
           "hermes",
           "vengeance"
@@ -1129,7 +1130,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "courageous",
+        name: "vengeance",
         pos: [11, 27],
         rotation: 90,
         belongPlayer: "HA"
@@ -1141,8 +1142,14 @@
         belongPlayer: "HA"
       },
       {
-        name: "vengeance",
-        pos: [13, 29],
+        name: "courageous",
+        pos: [11, 29],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "argus",
+        pos: [12, 30],
         rotation: 90,
         belongPlayer: "HA"
       },

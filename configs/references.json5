@@ -616,6 +616,24 @@
     ]
   },
   {
+    name: "argus",
+    displayName: "百眼巨人",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "4x1 102mm/45"},
+      {label: "高炮", value: "6x2 20mm/70"},
+      {label: "高炮", value: "2x4 12.7mm"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）8"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）10"},
+    ],
+    description: "百眼巨人号由远洋客轮船体改建，1918 年服役，是首艘采用无遮挡全通飞行甲板的航空母舰。1942 年该舰重新投入一线，参加了支援马耳他的 “鱼叉行动” 和北非登陆 “火炬行动”。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - HMS Argus 1942", url: "https://www.shipbucket.com/drawings/5154"},
+      {name: "维基百科 - HMS Argus", url: "https://en.wikipedia.org/wiki/HMS_Argus_(I49)"}
+    ]
+  },
+  {
     name: "vengeance",
     displayName: "复仇",
     type: "轻型航空母舰",

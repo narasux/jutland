@@ -3254,8 +3254,8 @@
     rotateSpeed: 1,
     length: 228,
     width: 22,
-    fundsCost: 260,
-    timeCost: 102,
+    fundsCost: 263,
+    timeCost: 103,
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -3427,8 +3427,8 @@
     rotateSpeed: 1,
     length: 228,
     width: 22,
-    fundsCost: 284,
-    timeCost: 110,
+    fundsCost: 294,
+    timeCost: 114,
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -4948,7 +4948,7 @@
     rotateSpeed: 0.7,
     length: 244,
     width: 32,
-    fundsCost: 820,
+    fundsCost: 325,
     timeCost: 121,
     weapon: {
       mainGuns: [
@@ -5126,8 +5126,8 @@
     rotateSpeed: 0.7,
     length: 228,
     width: 32,
-    fundsCost: 870,
-    timeCost: 125,
+    fundsCost: 325,
+    timeCost: 123,
     weapon: {
       mainGuns: [
         // 右舷高平炮 A
@@ -5423,7 +5423,7 @@
     rotateSpeed: 0.9,
     length: 212,
     width: 24,
-    fundsCost: 213,
+    fundsCost: 214,
     timeCost: 83,
     weapon: {
       secondaryGuns: [
@@ -5642,8 +5642,8 @@
     rotateSpeed: 0.7,
     length: 240,
     width: 27,
-    fundsCost: 303,
-    timeCost: 113,
+    fundsCost: 301,
+    timeCost: 112,
     weapon: {
       mainGuns: [
         // 右舷 120mm 高平炮 A
@@ -5810,8 +5810,8 @@
     rotateSpeed: 1,
     length: 183,
     width: 22,
-    fundsCost: 191,
-    timeCost: 73,
+    fundsCost: 197,
+    timeCost: 75,
     weapon: {
       mainGuns: [
         // 右舷 140mm 主炮
@@ -5905,6 +5905,122 @@
         {
           name: "Swordfish",
           maxCount: 12
+        }
+      ]
+    }
+  },
+  // 百眼巨人
+  {
+    name: "argus",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1942,
+    totalHP: 16750,
+    horizontalDamageReduction: 0.08,
+    verticalDamageReduction: 0.04,
+    maxSpeed: 20.25,
+    acceleration: 0.4,
+    rotateSpeed: 1,
+    length: 172,
+    width: 23,
+    fundsCost: 197,
+    timeCost: 75,
+    weapon: {
+      mainGuns: [
+        // 右舷 102mm 高平炮
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 102mm 高平炮
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰艉右舷 102mm 高平炮
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.95,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 舰艉左舷 102mm 高平炮
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.95,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        }
+      ],
+      secondaryGuns: [
+        // 20mm Oerlikon 双联装高炮 6 座
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.99,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.99,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 4.5,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 8
+        },
+        {
+          name: "Swordfish",
+          maxCount: 10
         }
       ]
     }
