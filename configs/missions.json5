@@ -870,6 +870,7 @@
           "shinyo",
           "hosho",
           "victorious",
+          "implacable",
           "ark_royal",
           "argus",
           "eagle",
@@ -1171,6 +1172,12 @@
       {
         name: "unicorn",
         pos: [11, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "implacable",
+        pos: [12, 34],
         rotation: 90,
         belongPlayer: "HA"
       },

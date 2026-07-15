@@ -618,8 +618,8 @@
         url: "https://www.shipbucket.com/drawings/5163"
       },
       {
-        name: "Naval History - HMS Unicorn",
-        url: "https://www.naval-history.net/xGM-Chrono-04CV-Unicorn.htm"
+        name: "维基百科 - 独角兽号航空母舰",
+        url: "https://en.wikipedia.org/wiki/HMS_Unicorn_(I72)"
       }
     ]
   },
@@ -734,6 +734,32 @@
       {
         name: "维基百科 - 胜利号航空母舰",
         url: "https://zh.wikipedia.org/wiki/%E5%8B%9D%E5%88%A9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
+    name: "implacable",
+    displayName: "怨仇",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "8x2 114mm/45"},
+      {label: "高炮", value: "5x8 40mm/39 2 磅炮"},
+      {label: "高炮", value: "7x1 40mm/60 博福斯"},
+      {label: "高炮", value: "12x1 20mm/70 厄利孔"},
+      {label: "制空战斗机", value: "海盗式（F4U-4）x32"},
+      {label: "鱼雷攻击机", value: "复仇者式（Avenger Mk I）x32"},
+      {label: "攻击机", value: "梭鱼式（Barracuda Mk II）x16"},
+    ],
+    description: "怨仇号（R86）是英国皇家海军怨仇级舰队航空母舰首舰，1944 年服役。该舰先后参加挪威沿岸作战，并于 1945 年加入英国太平洋舰队，空袭特鲁克、攻击日本本土目标，随后参与盟军遣返与运输任务。",
+    author: "未知",
+    links: [
+      {
+        name: "Shipbucket - HMS Implacable 1953",
+        url: "https://www.shipbucket.com/drawings/5164"
+      },
+      {
+        name: "维基百科 - 怨仇号航空母舰",
+        url: "https://en.wikipedia.org/wiki/HMS_Implacable_(R86)"
       }
     ]
   },

@@ -5695,6 +5695,250 @@
       ]
     }
   },
+  // 怨仇（1945 年形态）
+  {
+    name: "implacable",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1945,
+    totalHP: 32110,
+    horizontalDamageReduction: 0.22,
+    verticalDamageReduction: 0.12,
+    maxSpeed: 32.5,
+    acceleration: 0.3,
+    rotateSpeed: 0.7,
+    length: 234,
+    width: 29,
+    fundsCost: 1630,
+    timeCost: 129,
+    weapon: {
+      mainGuns: [
+        // 前后各两座、左右舷对称布置的 114mm 高平炮
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.7,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.7,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.63,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.63,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.47,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.47,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 5 座八联装 2 磅炮
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.52,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.4,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.11,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 单装博福斯 7 座
+        {
+          name: "UK/40/60",
+          posPercent: 0.49,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右侧 2 座
+        {
+          name: "UK/40/60",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [ 360, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [ 360, 360]
+        },
+        // 舰桥左侧 2 座
+        {
+          name: "UK/40/60",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 单装 Oerlikon
+        // 舰艏左右 4 座
+        {
+          name: "UK/20/70",
+          posPercent: 0.93,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.93,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.9,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰艉左右 4 座
+        {
+          name: "UK/20/70",
+          posPercent: -0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.9,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.93,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.93,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰尾 4 座
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 2,
+      groups: [
+        {
+          name: "F4U-4",
+          maxCount: 32
+        },
+        {
+          name: "TBF-1-UK",
+          maxCount: 32
+        },
+        {
+          name: "Barracuda-II",
+          maxCount: 16
+        }
+      ]
+    }
+  },
   // 复仇
   {
     name: "vengeance",

@@ -999,8 +999,8 @@
         "url": "https://www.shipbucket.com/drawings/5163"
       },
       {
-        "name": "Naval History - HMS Unicorn",
-        "url": "https://www.naval-history.net/xGM-Chrono-04CV-Unicorn.htm"
+        "name": "Wikipedia - HMS Unicorn (I72)",
+        "url": "https://en.wikipedia.org/wiki/HMS_Unicorn_(I72)"
       }
     ]
   },
@@ -1115,6 +1115,32 @@
       {
         "name": "Wikipedia — HMS Victorious",
         "url": "https://en.wikipedia.org/wiki/HMS_Victorious_%28R38%29"
+      }
+    ]
+  },
+  {
+    "name": "implacable",
+    "displayName": "Implacable",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39 2-pounders"},
+      {"label": "Anti-aircraft Guns", "value": "7x1 40mm/60 Bofors"},
+      {"label": "Anti-aircraft Guns", "value": "12x1 20mm/70 Oerlikons"},
+      {"label": "Fighters", "value": "Vought F4U-4 Corsair x32"},
+      {"label": "Torpedo Bombers", "value": "Grumman Avenger Mk I x32"},
+      {"label": "Strike Aircraft", "value": "Fairey Barracuda Mk II x16"}
+    ],
+    "description": "HMS Implacable (R86) was the lead ship of a fast, heavily protected class of British fleet carriers completed in 1944. After operations off Norway, she joined the British Pacific Fleet in 1945, striking Truk and targets in the Japanese home islands. Following Japan's surrender, she supported repatriation and transport duties before returning to Britain.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Implacable 1953",
+        "url": "https://www.shipbucket.com/drawings/5164"
+      },
+      {
+        "name": "Wikipedia - HMS Implacable (R86)",
+        "url": "https://en.wikipedia.org/wiki/HMS_Implacable_(R86)"
       }
     ]
   },
