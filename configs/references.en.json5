@@ -949,7 +949,7 @@
   {
     "name": "bicorn",
     "displayName": "Bicorn",
-    "type": "Fictional Light Aircraft Carrier",
+    "type": "Light Aircraft Carrier",
     "armaments": [
       {"label": "Dual-purpose Guns", "value": "8x1 102mm/45"},
       {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39 2-pounder"},
@@ -962,6 +962,45 @@
       {
         "name": "Alternate Universe Warships - CVL 1941 Unicorn",
         "url": "http://www.alternateuniversewarships.com/Royal%20Commonwealth%20Navy/CVL%201941%20Unicorn/CVL_1941_Unicorn.htm"
+      }
+    ]
+  },
+  {
+    "name": "unicorn",
+    "displayName": "Unicorn",
+    "type": "Light Fleet Carrier",
+    "armaments": [
+      {
+        "label": "Dual-purpose Guns",
+        "value": "4x2 102mm/45 Mk XVI"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "4x8 40mm/39 2-pounder"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "10x1 20mm/70 Oerlikon"
+      },
+      {
+        "label": "Fighters",
+        "value": "Fulmar Mk I x18 (game approximation for Seafire)"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "Swordfish Mk I x15"
+      }
+    ],
+    "description": "HMS Unicorn (I72) was a purpose-built aircraft maintenance ship that could also operate as a light fleet carrier. Completed in 1943, she supported the Salerno landings before serving the Eastern and British Pacific Fleets as an aviation repair and replenishment ship.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Unicorn 1943",
+        "url": "https://www.shipbucket.com/drawings/5163"
+      },
+      {
+        "name": "Naval History - HMS Unicorn",
+        "url": "https://www.naval-history.net/xGM-Chrono-04CV-Unicorn.htm"
       }
     ]
   },

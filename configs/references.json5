@@ -583,7 +583,7 @@
   {
     name: "bicorn",
     displayName: "双角兽",
-    type: "架空轻型航空母舰",
+    type: "轻型航空母舰",
     armaments: [
       {label: "高平炮", value: "8x1 102mm/45"},
       {label: "高炮", value: "6x4 40mm/39 2 磅炮"},
@@ -596,6 +596,30 @@
       {
         name: "Alternate Universe Warships - CVL 1941 Unicorn",
         url: "http://www.alternateuniversewarships.com/Royal%20Commonwealth%20Navy/CVL%201941%20Unicorn/CVL_1941_Unicorn.htm"
+      }
+    ]
+  },
+  {
+    name: "unicorn",
+    displayName: "独角兽",
+    type: "轻型航空母舰",
+    armaments: [
+      {label: "高平炮", value: "4x2 102mm/45 Mk XVI"},
+      {label: "高炮", value: "4x8 40mm/39 2 磅炮"},
+      {label: "高炮", value: "10x1 20mm/70 厄利孔"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）16"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）16"},
+    ],
+    description: "独角兽号（I72）是英国皇家海军专门建造的航空维修舰，同时具备轻型航空母舰的作战能力。该舰于 1943 年完工，参加萨莱诺登陆支援，之后作为航空维修与补给舰服务于东方舰队和英国太平洋舰队。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - HMS Unicorn 1943",
+        url: "https://www.shipbucket.com/drawings/5163"
+      },
+      {
+        name: "Naval History - HMS Unicorn",
+        url: "https://www.naval-history.net/xGM-Chrono-04CV-Unicorn.htm"
       }
     ]
   },

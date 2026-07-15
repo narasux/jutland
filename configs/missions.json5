@@ -876,7 +876,8 @@
           "courageous",
           "hermes",
           "vengeance",
-          "bicorn"
+          "bicorn",
+          "unicorn"
         ],
       },
       {
@@ -1164,6 +1165,12 @@
       {
         name: "bicorn",
         pos: [12, 32],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "unicorn",
+        pos: [11, 33],
         rotation: 90,
         belongPlayer: "HA"
       },
