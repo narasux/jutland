@@ -947,6 +947,25 @@
     ]
   },
   {
+    "name": "bicorn",
+    "displayName": "Bicorn",
+    "type": "Fictional Light Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "8x1 102mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39 2-pounder"},
+      {"label": "Fighters", "value": "Fairey Fulmar Mk I x18"},
+      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x24"}
+    ],
+    "description": "Bicorn is a fictional British light aircraft carrier based on the private alternate-history design published by Alternate Universe Warships, not the historical HMS Unicorn (I72). In that setting, the first ship was laid down in late 1938 and completed in early 1941 as a small service carrier, but wartime demand sent the class into front-line operations from the outset.",
+    "author": "Hood, Bombhead, Krakatoa",
+    "links": [
+      {
+        "name": "Alternate Universe Warships - CVL 1941 Unicorn",
+        "url": "http://www.alternateuniversewarships.com/Royal%20Commonwealth%20Navy/CVL%201941%20Unicorn/CVL_1941_Unicorn.htm"
+      }
+    ]
+  },
+  {
     "name": "courageous",
     "displayName": "Courageous",
     "type": "Aircraft Carrier",

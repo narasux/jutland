@@ -5111,6 +5111,138 @@
       ]
     }
   },
+  // 双角兽
+  {
+    name: "bicorn",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CVL",
+    year: 1941,
+    totalHP: 23750,
+    horizontalDamageReduction: 0.15,
+    verticalDamageReduction: 0.08,
+    maxSpeed: 30,
+    acceleration: 0.35,
+    rotateSpeed: 0.8,
+    length: 205,
+    width: 24,
+    fundsCost: 253,
+    timeCost: 96,
+    weapon: {
+      mainGuns: [
+        // 102mm 单装高平炮
+        // 右前炮 A
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前炮 A
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.64,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前炮 B
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.56,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前炮 B
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.56,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后炮 C
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.51,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后炮 C
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后炮 D
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后炮 D
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.6,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右舷四联装 2 磅炮 3 座
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.35,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [220, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.13,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 330]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左舷四联装 2 磅炮 3 座
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 3,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 18
+        },
+        {
+          name: "Swordfish",
+          maxCount: 24
+        }
+      ]
+    }
+  },
   // 胜利
   {
     name: "victorious",

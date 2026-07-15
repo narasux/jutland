@@ -581,6 +581,25 @@
     ]
   },
   {
+    name: "bicorn",
+    displayName: "双角兽",
+    type: "架空轻型航空母舰",
+    armaments: [
+      {label: "高平炮", value: "8x1 102mm/45"},
+      {label: "高炮", value: "6x4 40mm/39 2 磅炮"},
+      {label: "制空战斗机", value: "海燕式（Fulmar Mk I）18"},
+      {label: "鱼雷攻击机", value: "剑鱼式（Swordfish Mk I）24"},
+    ],
+    description: "双角兽号是 Alternate Universe Warships 作者创作的英国架空轻型航空母舰，并非历史上的英国皇家海军独角兽号（I72）。在该私人设定中，首舰于 1938 年底开工、1941 年初完工，原计划作为支援舰队航母的小型航空勤务舰；因战争期间各战区急需航母，同级舰从服役之初便承担一线作战任务。",
+    author: "Hood, Bombhead, Krakatoa",
+    links: [
+      {
+        name: "Alternate Universe Warships - CVL 1941 Unicorn",
+        url: "http://www.alternateuniversewarships.com/Royal%20Commonwealth%20Navy/CVL%201941%20Unicorn/CVL_1941_Unicorn.htm"
+      }
+    ]
+  },
+  {
     name: "courageous",
     displayName: "勇敢",
     type: "航空母舰",
