@@ -557,6 +557,57 @@
   },
   // 英国海军
   {
+    name: "implacable",
+    displayName: "怨仇",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "8x2 114mm/45"},
+      {label: "高炮", value: "5x8 40mm/39 2 磅炮"},
+      {label: "高炮", value: "7x1 40mm/60 博福斯"},
+      {label: "高炮", value: "12x1 20mm/70 厄利孔"},
+      {label: "制空战斗机", value: "32x 海盗式（F4U-4）"},
+      {label: "鱼雷攻击机", value: "32x 复仇者式（Avenger Mk I）"},
+      {label: "攻击机", value: "16x 梭鱼式（Barracuda Mk II）"},
+    ],
+    description: "怨仇号（R86）是英国皇家海军怨仇级舰队航空母舰首舰，1944 年服役。该舰先后参加挪威沿岸作战，并于 1945 年加入英国太平洋舰队，空袭特鲁克、攻击日本本土目标，随后参与盟军遣返与运输任务。",
+    author: "未知",
+    links: [
+      {
+        name: "Shipbucket - HMS Implacable 1953",
+        url: "https://www.shipbucket.com/drawings/5164"
+      },
+      {
+        name: "维基百科 - 怨仇号航空母舰",
+        url: "https://en.wikipedia.org/wiki/HMS_Implacable_(R86)"
+      }
+    ]
+  },
+  {
+    name: "victorious",
+    displayName: "胜利",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "8x2 114mm/45"},
+      {label: "高炮", value: "5x8 40mm/39"},
+      {label: "高炮", value: "1x2 + 4x1 40mm/60"},
+      {label: "高炮", value: "16x2 + 6x1 20mm/70"},
+      {label: "制空战斗机", value: "30x 海盗式（F4U-4）"},
+      {label: "鱼雷攻击机", value: "24x 复仇者式（Avenger Mk I）"},
+    ],
+    description: "胜利号（R38）是英国皇家海军光辉级航空母舰的三号舰，1941 年服役。该舰参加了追击俾斯麦号、北极护航、地中海作战和太平洋战役，1947 年首次退役。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - HMS Victorious 1945",
+        url: "https://www.shipbucket.com/drawings/5182"
+      },
+      {
+        name: "维基百科 - 胜利号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8B%9D%E5%88%A9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "ark_royal",
     displayName: "皇家方舟",
     type: "航空母舰",
@@ -578,6 +629,23 @@
         name: "Naval History - HMS Ark Royal",
         url: "https://www.naval-history.net/xGM-Chrono-04CV-Ark%20Royal.htm"
       }
+    ]
+  },
+  {
+    name: "vengeance",
+    displayName: "复仇",
+    type: "轻型航空母舰",
+    armaments: [
+      {label: "高炮", value: "6x4 40mm/39"},
+      {label: "高炮", value: "10x2 + 10x1 20mm/70"},
+      {label: "制空战斗机", value: "24x 海盗式（F4U-4）"},
+      {label: "鱼雷攻击机", value: "14x 梭鱼式（Barracuda Mk II）"},
+    ],
+    description: "复仇号（R71）是英国皇家海军巨像级轻型舰队航空母舰，1945 年 1 月服役。该舰建成后编入英国太平洋舰队，但未参加实战；战后曾借给澳大利亚海军，后售予巴西并改名为米纳斯吉拉斯号，2001 年退役。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - 71 Vengeance", url: "https://www.shipbucket.com/drawings/5186"},
+      {name: "维基百科 - HMS Vengeance (R71)", url: "https://en.wikipedia.org/wiki/HMS_Vengeance_(R71)"}
     ]
   },
   {
@@ -624,20 +692,22 @@
     ]
   },
   {
-    name: "courageous",
-    displayName: "勇敢",
+    name: "eagle",
+    displayName: "鹰",
     type: "航空母舰",
     armaments: [
-      {label: "高平炮", value: "16x1 120mm/40 Mk VIII"},
-      {label: "高炮", value: "3x8 40mm/39"},
-      {label: "制空战斗机", value: "24x 海燕式（Fulmar Mk I）"},
-      {label: "鱼雷攻击机", value: "24x 剑鱼式（Swordfish Mk I）"},
+      {label: "主炮", value: "9x1 152mm/50 Mk XVII"},
+      {label: "高平炮", value: "4x1 102mm/45"},
+      {label: "高炮", value: "2x8 40mm/39"},
+      {label: "高射机枪", value: "3x4 12.7mm"},
+      {label: "制空战斗机", value: "9x 海燕式（Fulmar Mk I）"},
+      {label: "鱼雷攻击机", value: "12x 剑鱼式（Swordfish Mk I）"},
     ],
-    description: "勇敢号最初是英国皇家海军于第一次世界大战期间建造的战列巡洋舰，后依据《华盛顿海军条约》改建为航空母舰，1928 年重新服役。1939 年 9 月 17 日，该舰在西部航道执行反潜巡逻时遭德国潜艇 U-29 鱼雷击沉。",
-    author: "Hood, Bombhead, K.W. Vestergaard",
+    description: "鹰号由智利战列舰阿尔米兰特·科克伦号改建，1924 年加入英国皇家海军，游戏中为 1939 年形态。",
+    author: "Bombhead, K.W. Vestergaard",
     links: [
-      {name: "Shipbucket - 50 Courageous", url: "https://www.shipbucket.com/drawings/5155"},
-      {name: "维基百科 - 勇敢号航空母舰", url: "https://en.wikipedia.org/wiki/HMS_Courageous_(50)"}
+      {name: "Shipbucket - HMS Eagle 1933", url: "https://www.shipbucket.com/drawings/5157"},
+      {name: "维基百科 - HMS Eagle", url: "https://en.wikipedia.org/wiki/HMS_Eagle_(1918)"}
     ]
   },
   {
@@ -659,6 +729,23 @@
     ]
   },
   {
+    name: "courageous",
+    displayName: "勇敢",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "16x1 120mm/40 Mk VIII"},
+      {label: "高炮", value: "3x8 40mm/39"},
+      {label: "制空战斗机", value: "24x 海燕式（Fulmar Mk I）"},
+      {label: "鱼雷攻击机", value: "24x 剑鱼式（Swordfish Mk I）"},
+    ],
+    description: "勇敢号最初是英国皇家海军于第一次世界大战期间建造的战列巡洋舰，后依据《华盛顿海军条约》改建为航空母舰，1928 年重新服役。1939 年 9 月 17 日，该舰在西部航道执行反潜巡逻时遭德国潜艇 U-29 鱼雷击沉。",
+    author: "Hood, Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - 50 Courageous", url: "https://www.shipbucket.com/drawings/5155"},
+      {name: "维基百科 - 勇敢号航空母舰", url: "https://en.wikipedia.org/wiki/HMS_Courageous_(50)"}
+    ]
+  },
+  {
     name: "argus",
     displayName: "百眼巨人",
     type: "航空母舰",
@@ -674,93 +761,6 @@
     links: [
       {name: "Shipbucket - HMS Argus 1942", url: "https://www.shipbucket.com/drawings/5154"},
       {name: "维基百科 - HMS Argus", url: "https://en.wikipedia.org/wiki/HMS_Argus_(I49)"}
-    ]
-  },
-  {
-    name: "eagle",
-    displayName: "鹰",
-    type: "航空母舰",
-    armaments: [
-      {label: "主炮", value: "9x1 152mm/50 Mk XVII"},
-      {label: "高平炮", value: "4x1 102mm/45"},
-      {label: "高炮", value: "2x8 40mm/39"},
-      {label: "高射机枪", value: "3x4 12.7mm"},
-      {label: "制空战斗机", value: "9x 海燕式（Fulmar Mk I）"},
-      {label: "鱼雷攻击机", value: "12x 剑鱼式（Swordfish Mk I）"},
-    ],
-    description: "鹰号由智利战列舰阿尔米兰特·科克伦号改建，1924 年加入英国皇家海军，游戏中为 1939 年形态。",
-    author: "Bombhead, K.W. Vestergaard",
-    links: [
-      {name: "Shipbucket - HMS Eagle 1933", url: "https://www.shipbucket.com/drawings/5157"},
-      {name: "维基百科 - HMS Eagle", url: "https://en.wikipedia.org/wiki/HMS_Eagle_(1918)"}
-    ]
-  },
-  {
-    name: "vengeance",
-    displayName: "复仇",
-    type: "轻型航空母舰",
-    armaments: [
-      {label: "高炮", value: "6x4 40mm/39"},
-      {label: "高炮", value: "10x2 + 10x1 20mm/70"},
-      {label: "制空战斗机", value: "24x 海盗式（F4U-4）"},
-      {label: "鱼雷攻击机", value: "14x 梭鱼式（Barracuda Mk II）"},
-    ],
-    description: "复仇号（R71）是英国皇家海军巨像级轻型舰队航空母舰，1945 年 1 月服役。该舰建成后编入英国太平洋舰队，但未参加实战；战后曾借给澳大利亚海军，后售予巴西并改名为米纳斯吉拉斯号，2001 年退役。",
-    author: "Bombhead, K.W. Vestergaard",
-    links: [
-      {name: "Shipbucket - 71 Vengeance", url: "https://www.shipbucket.com/drawings/5186"},
-      {name: "维基百科 - HMS Vengeance (R71)", url: "https://en.wikipedia.org/wiki/HMS_Vengeance_(R71)"}
-    ]
-  },
-  {
-    name: "victorious",
-    displayName: "胜利",
-    type: "航空母舰",
-    armaments: [
-      {label: "高平炮", value: "8x2 114mm/45"},
-      {label: "高炮", value: "5x8 40mm/39"},
-      {label: "高炮", value: "1x2 + 4x1 40mm/60"},
-      {label: "高炮", value: "16x2 + 6x1 20mm/70"},
-      {label: "制空战斗机", value: "30x 海盗式（F4U-4）"},
-      {label: "鱼雷攻击机", value: "24x 复仇者式（Avenger Mk I）"},
-    ],
-    description: "胜利号（R38）是英国皇家海军光辉级航空母舰的三号舰，1941 年服役。该舰参加了追击俾斯麦号、北极护航、地中海作战和太平洋战役，1947 年首次退役。",
-    author: "Bombhead, K.W. Vestergaard",
-    links: [
-      {
-        name: "Shipbucket - HMS Victorious 1945",
-        url: "https://www.shipbucket.com/drawings/5182"
-      },
-      {
-        name: "维基百科 - 胜利号航空母舰",
-        url: "https://zh.wikipedia.org/wiki/%E5%8B%9D%E5%88%A9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
-      }
-    ]
-  },
-  {
-    name: "implacable",
-    displayName: "怨仇",
-    type: "航空母舰",
-    armaments: [
-      {label: "高平炮", value: "8x2 114mm/45"},
-      {label: "高炮", value: "5x8 40mm/39 2 磅炮"},
-      {label: "高炮", value: "7x1 40mm/60 博福斯"},
-      {label: "高炮", value: "12x1 20mm/70 厄利孔"},
-      {label: "制空战斗机", value: "32x 海盗式（F4U-4）"},
-      {label: "鱼雷攻击机", value: "32x 复仇者式（Avenger Mk I）"},
-      {label: "攻击机", value: "16x 梭鱼式（Barracuda Mk II）"},
-    ],
-    description: "怨仇号（R86）是英国皇家海军怨仇级舰队航空母舰首舰，1944 年服役。该舰先后参加挪威沿岸作战，并于 1945 年加入英国太平洋舰队，空袭特鲁克、攻击日本本土目标，随后参与盟军遣返与运输任务。",
-    author: "未知",
-    links: [
-      {
-        name: "Shipbucket - HMS Implacable 1953",
-        url: "https://www.shipbucket.com/drawings/5164"
-      },
-      {
-        name: "维基百科 - 怨仇号航空母舰",
-        url: "https://en.wikipedia.org/wiki/HMS_Implacable_(R86)"
-      }
     ]
   },
   // 美国海军

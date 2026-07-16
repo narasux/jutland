@@ -4935,470 +4935,249 @@
   // 英国海军
   // 皇家方舟
   {
-    name: "ark_royal",
+    name: "implacable",
     nation: "uk",
     type: "aircraft_carrier",
     typeAbbr: "CV",
-    year: 1941,
-    totalHP: 27200,
-    horizontalDamageReduction: 0.18,
-    verticalDamageReduction: 0.1,
-    maxSpeed: 31,
+    year: 1945,
+    totalHP: 32110,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 32.5,
     acceleration: 0.3,
     rotateSpeed: 0.7,
-    length: 244,
-    width: 32,
-    fundsCost: 325,
-    timeCost: 121,
+    length: 234,
+    width: 29,
+    fundsCost: 336,
+    timeCost: 130,
     weapon: {
       mainGuns: [
-        // 右舷高平炮
+        // 前后各两座、左右舷对称布置的 114mm 高平炮
         {
           name: "UK/114/45/2/DP",
-          posPercent: 0.61,
+          posPercent: 0.7,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: 0.41,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/114/45/2/DP",
-          posPercent: -0.41,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/114/45/2/DP",
-          posPercent: -0.57,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷高平炮
-        {
-          name: "UK/114/45/2/DP",
-          posPercent: 0.61,
+          posPercent: 0.7,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: 0.41,
+          posPercent: 0.63,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.63,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: -0.41,
+          posPercent: -0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.42,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: -0.57,
+          posPercent: -0.47,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.47,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
       ],
       secondaryGuns: [
-        // 舰桥前高炮 2 座
+        // 5 座八联装 2 磅炮
         {
           name: "UK/40/39/8",
-          posPercent: 0.36,
+          posPercent: 0.52,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
         },
         {
           name: "UK/40/39/8",
-          posPercent: 0.28,
+          posPercent: 0.4,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
         },
-        // 舰桥后高炮 2 座
         {
           name: "UK/40/39/8",
-          posPercent: 0.02,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "UK/40/39/8",
-          posPercent: -0.05,
+          posPercent: -0.11,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
-        // 左舷高炮 2 座
         {
           name: "UK/40/39/8",
-          posPercent: 0.12,
-          rightFiringArc: [0, 0],
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         {
           name: "UK/40/39/8",
-          posPercent: 0.03,
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 单装博福斯 7 座
+        {
+          name: "UK/40/60",
+          posPercent: 0.49,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥右侧 2 座
+        {
+          name: "UK/40/60",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [ 360, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [ 360, 360]
+        },
+        // 舰桥左侧 2 座
+        {
+          name: "UK/40/60",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.04,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
       ],
       antiAircraftGuns: [
-        // 舰艏高射机枪 4 座
+        // 单装 Oerlikon
+        // 舰艏左右 4 座
         {
-          name: "UK/12.7/4",
-          posPercent: 0.88,
+          name: "UK/20/70",
+          posPercent: 0.93,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/12.7/4",
-          posPercent: 0.88,
+          name: "UK/20/70",
+          posPercent: 0.93,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "UK/12.7/4",
-          posPercent: 0.84,
+          name: "UK/20/70",
+          posPercent: 0.9,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/12.7/4",
-          posPercent: 0.84,
+          name: "UK/20/70",
+          posPercent: 0.9,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
-        // 舰艉高射机枪 4 座
+        // 舰艉左右 4 座
         {
-          name: "UK/12.7/4",
-          posPercent: -0.76,
+          name: "UK/20/70",
+          posPercent: -0.9,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/12.7/4",
-          posPercent: -0.76,
+          name: "UK/20/70",
+          posPercent: -0.9,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "UK/12.7/4",
-          posPercent: -0.8,
+          name: "UK/20/70",
+          posPercent: -0.93,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/12.7/4",
-          posPercent: -0.8,
+          name: "UK/20/70",
+          posPercent: -0.93,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
+        },
+        // 舰尾 4 座
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
         }
       ]
     },
     aircraft: {
-      takeOffTime: 2.5,
+      takeOffTime: 2,
       groups: [
         {
-          name: "Fulmar",
-          maxCount: 24
+          name: "F4U-4",
+          maxCount: 32
         },
         {
-          name: "Swordfish",
-          maxCount: 36
+          name: "TBF-1-UK",
+          maxCount: 32
+        },
+        {
+          name: "Barracuda-II",
+          maxCount: 16
         }
       ]
     }
   },
   // 双角兽
-  {
-    name: "bicorn",
-    nation: "uk",
-    type: "aircraft_carrier",
-    typeAbbr: "CVL",
-    year: 1941,
-    totalHP: 23750,
-    horizontalDamageReduction: 0.15,
-    verticalDamageReduction: 0.08,
-    maxSpeed: 30,
-    acceleration: 0.35,
-    rotateSpeed: 0.8,
-    length: 205,
-    width: 24,
-    fundsCost: 253,
-    timeCost: 96,
-    weapon: {
-      mainGuns: [
-        // 102mm 单装高平炮
-        // 右前炮 A
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.64,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左前炮 A
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.64,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右前炮 B
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.56,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左前炮 B
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.56,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右后炮 C
-        {
-          name: "UK/102/45/DP",
-          posPercent: -0.51,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左后炮 C
-        {
-          name: "UK/102/45/DP",
-          posPercent: -0.51,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右后炮 D
-        {
-          name: "UK/102/45/DP",
-          posPercent: -0.6,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左后炮 D
-        {
-          name: "UK/102/45/DP",
-          posPercent: -0.6,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
-        // 右舷四联装 2 磅炮 3 座
-        {
-          name: "UK/40/39/4",
-          posPercent: 0.35,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [220, 360]
-        },
-        {
-          name: "UK/40/39/4",
-          posPercent: 0.13,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [360, 330]
-        },
-        {
-          name: "UK/40/39/4",
-          posPercent: -0.38,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左舷四联装 2 磅炮 3 座
-        {
-          name: "UK/40/39/4",
-          posPercent: 0.27,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/40/39/4",
-          posPercent: 0.08,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/40/39/4",
-          posPercent: -0.39,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        }
-      ]
-    },
-    aircraft: {
-      takeOffTime: 3,
-      groups: [
-        {
-          name: "Fulmar",
-          maxCount: 18
-        },
-        {
-          name: "Swordfish",
-          maxCount: 24
-        }
-      ]
-    }
-  },
-  // 独角兽
-  {
-    name: "unicorn",
-    nation: "uk",
-    type: "aircraft_carrier",
-    typeAbbr: "CVL",
-    year: 1943,
-    totalHP: 18300,
-    horizontalDamageReduction: 0.12,
-    verticalDamageReduction: 0.08,
-    maxSpeed: 24,
-    acceleration: 0.4,
-    rotateSpeed: 0.9,
-    length: 195,
-    width: 27,
-    fundsCost: 228,
-    timeCost: 86,
-    weapon: {
-      mainGuns: [
-        // 舰艏双联装 102mm 高平炮
-        {
-          name: "UK/102/45/2/DP",
-          posPercent: 0.59,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/102/45/2/DP",
-          posPercent: 0.59,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 舰艉双联装 102mm 高平炮
-        {
-          name: "UK/102/45/2/DP",
-          posPercent: -0.51,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/102/45/2/DP",
-          posPercent: -0.51,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      secondaryGuns: [
-        // 八联装 2 磅炮
-        {
-          name: "UK/40/39/8",
-          posPercent: 0.3,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/40/39/8",
-          posPercent: 0.28,
-          rightFiringArc:[0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/40/39/8",
-          posPercent: -0.06,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/40/39/8",
-          posPercent: -0.06,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
-        // 单装厄利孔 20mm 高炮
-        // 右舷 2 座
-        {
-          name: "UK/20/70",
-          posPercent: 0.82,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: 0.44,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷 3 座
-        {
-          name: "UK/20/70",
-          posPercent: 0.44,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: 0.08,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: 0.03,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 舰桥后 1 座
-        {
-          name: "UK/20/70",
-          posPercent: 0.01,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 舰尾左右 4 座
-        {
-          name: "UK/20/70",
-          posPercent: -0.7,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: -0.7,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: -0.81,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: -0.81,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ]
-    },
-    aircraft: {
-      takeOffTime: 3,
-      groups: [
-        {
-          name: "Fulmar",
-          maxCount: 16
-        },
-        {
-          name: "Swordfish",
-          maxCount: 16
-        }
-      ]
-    }
-  },
-  // 胜利
   {
     name: "victorious",
     nation: "uk",
@@ -5407,7 +5186,7 @@
     year: 1945,
     totalHP: 28610,
     horizontalDamageReduction: 0.25,
-    verticalDamageReduction: 0.12,
+    verticalDamageReduction: 0.15,
     maxSpeed: 30.5,
     acceleration: 0.3,
     rotateSpeed: 0.7,
@@ -5695,251 +5474,185 @@
       ]
     }
   },
-  // 怨仇（1945 年形态）
+  // 独角兽
   {
-    name: "implacable",
+    name: "ark_royal",
     nation: "uk",
     type: "aircraft_carrier",
     typeAbbr: "CV",
-    year: 1945,
-    totalHP: 32110,
-    horizontalDamageReduction: 0.22,
-    verticalDamageReduction: 0.12,
-    maxSpeed: 32.5,
+    year: 1941,
+    totalHP: 27200,
+    horizontalDamageReduction: 0.2,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 31,
     acceleration: 0.3,
     rotateSpeed: 0.7,
-    length: 234,
-    width: 29,
-    fundsCost: 1630,
-    timeCost: 129,
+    length: 244,
+    width: 32,
+    fundsCost: 325,
+    timeCost: 121,
     weapon: {
       mainGuns: [
-        // 前后各两座、左右舷对称布置的 114mm 高平炮
+        // 右舷高平炮
         {
           name: "UK/114/45/2/DP",
-          posPercent: 0.7,
+          posPercent: 0.61,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: 0.7,
+          posPercent: 0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷高平炮
+        {
+          name: "UK/114/45/2/DP",
+          posPercent: 0.61,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: 0.63,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/114/45/2/DP",
-          posPercent: 0.63,
+          posPercent: 0.41,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: -0.42,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/114/45/2/DP",
-          posPercent: -0.42,
+          posPercent: -0.41,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "UK/114/45/2/DP",
-          posPercent: -0.47,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/114/45/2/DP",
-          posPercent: -0.47,
+          posPercent: -0.57,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
       ],
       secondaryGuns: [
-        // 5 座八联装 2 磅炮
+        // 舰桥前高炮 2 座
         {
           name: "UK/40/39/8",
-          posPercent: 0.52,
+          posPercent: 0.36,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
         },
         {
           name: "UK/40/39/8",
-          posPercent: 0.4,
+          posPercent: 0.28,
           rightFiringArc: [0, 160],
           leftFiringArc: [200, 360]
         },
+        // 舰桥后高炮 2 座
         {
           name: "UK/40/39/8",
-          posPercent: -0.11,
+          posPercent: 0.02,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.05,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
+        // 左舷高炮 2 座
         {
           name: "UK/40/39/8",
-          posPercent: 0.2,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/40/39/8",
-          posPercent: -0.1,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 单装博福斯 7 座
-        {
-          name: "UK/40/60",
-          posPercent: 0.49,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/40/60",
-          posPercent: 0.4,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/40/60",
-          posPercent: 0.3,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 舰桥右侧 2 座
-        {
-          name: "UK/40/60",
-          posPercent: 0.07,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [ 360, 360]
-        },
-        {
-          name: "UK/40/60",
-          posPercent: 0.04,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [ 360, 360]
-        },
-        // 舰桥左侧 2 座
-        {
-          name: "UK/40/60",
-          posPercent: 0.07,
+          posPercent: 0.12,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "UK/40/60",
-          posPercent: 0.04,
+          name: "UK/40/39/8",
+          posPercent: 0.03,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
       ],
       antiAircraftGuns: [
-        // 单装 Oerlikon
-        // 舰艏左右 4 座
+        // 舰艏高射机枪 4 座
         {
-          name: "UK/20/70",
-          posPercent: 0.93,
+          name: "UK/12.7/4",
+          posPercent: 0.88,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/20/70",
-          posPercent: 0.93,
+          name: "UK/12.7/4",
+          posPercent: 0.88,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "UK/20/70",
-          posPercent: 0.9,
+          name: "UK/12.7/4",
+          posPercent: 0.84,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/20/70",
-          posPercent: 0.9,
+          name: "UK/12.7/4",
+          posPercent: 0.84,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
-        // 舰艉左右 4 座
+        // 舰艉高射机枪 4 座
         {
-          name: "UK/20/70",
-          posPercent: -0.9,
+          name: "UK/12.7/4",
+          posPercent: -0.76,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/20/70",
-          posPercent: -0.9,
+          name: "UK/12.7/4",
+          posPercent: -0.76,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "UK/20/70",
-          posPercent: -0.93,
+          name: "UK/12.7/4",
+          posPercent: -0.8,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "UK/20/70",
-          posPercent: -0.93,
+          name: "UK/12.7/4",
+          posPercent: -0.8,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
-        },
-        // 舰尾 4 座
-        {
-          name: "UK/20/70",
-          posPercent: -0.99,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: -0.99,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: -0.99,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
-        },
-        {
-          name: "UK/20/70",
-          posPercent: -0.99,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
         }
       ]
     },
     aircraft: {
-      takeOffTime: 2,
+      takeOffTime: 2.5,
       groups: [
         {
-          name: "F4U-4",
-          maxCount: 32
+          name: "Fulmar",
+          maxCount: 24
         },
         {
-          name: "TBF-1-UK",
-          maxCount: 32
-        },
-        {
-          name: "Barracuda-II",
-          maxCount: 16
+          name: "Swordfish",
+          maxCount: 36
         }
       ]
     }
   },
-  // 复仇
+  // 胜利
   {
     name: "vengeance",
     nation: "uk",
@@ -5947,8 +5660,8 @@
     typeAbbr: "CVL",
     year: 1945,
     totalHP: 18040,
-    horizontalDamageReduction: 0.08,
-    verticalDamageReduction: 0.02,
+    horizontalDamageReduction: 0.06,
+    verticalDamageReduction: 0,
     maxSpeed: 24.5,
     acceleration: 0.4,
     rotateSpeed: 0.9,
@@ -6158,7 +5871,561 @@
       ]
     }
   },
+  // 怨仇（1945 年形态）
+  {
+    name: "bicorn",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CVL",
+    year: 1941,
+    totalHP: 23750,
+    horizontalDamageReduction: 0.12,
+    verticalDamageReduction: 0.06,
+    maxSpeed: 30,
+    acceleration: 0.35,
+    rotateSpeed: 0.8,
+    length: 205,
+    width: 24,
+    fundsCost: 253,
+    timeCost: 96,
+    weapon: {
+      mainGuns: [
+        // 102mm 单装高平炮
+        // 右前炮 A
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前炮 A
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.64,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前炮 B
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.56,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前炮 B
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.56,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后炮 C
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.51,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后炮 C
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后炮 D
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后炮 D
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.6,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右舷四联装 2 磅炮 3 座
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.35,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [220, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.13,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 330]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左舷四联装 2 磅炮 3 座
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 3,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 18
+        },
+        {
+          name: "Swordfish",
+          maxCount: 24
+        }
+      ]
+    }
+  },
+  // 复仇
+  {
+    name: "unicorn",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CVL",
+    year: 1943,
+    totalHP: 18300,
+    horizontalDamageReduction: 0.08,
+    verticalDamageReduction: 0.08,
+    maxSpeed: 24,
+    acceleration: 0.4,
+    rotateSpeed: 0.9,
+    length: 195,
+    width: 27,
+    fundsCost: 232,
+    timeCost: 88,
+    weapon: {
+      mainGuns: [
+        // 舰艏双联装 102mm 高平炮
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.59,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.59,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰艉双联装 102mm 高平炮
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: -0.51,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: -0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 八联装 2 磅炮
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.28,
+          rightFiringArc:[0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 单装厄利孔 20mm 高炮
+        // 右舷 2 座
+        {
+          name: "UK/20/70",
+          posPercent: 0.82,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.44,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 3 座
+        {
+          name: "UK/20/70",
+          posPercent: 0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后 1 座
+        {
+          name: "UK/20/70",
+          posPercent: 0.01,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 舰尾左右 4 座
+        {
+          name: "UK/20/70",
+          posPercent: -0.7,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.7,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.81,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.81,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 3,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 16
+        },
+        {
+          name: "Swordfish",
+          maxCount: 16
+        }
+      ]
+    }
+  },
   // 勇敢
+  {
+    name: "eagle",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1939,
+    totalHP: 26800,
+    horizontalDamageReduction: 0.15,
+    verticalDamageReduction: 0.05,
+    maxSpeed: 22.5,
+    acceleration: 0.3,
+    rotateSpeed: 0.8,
+    length: 204,
+    width: 35,
+    fundsCost: 262,
+    timeCost: 98,
+    weapon: {
+      mainGuns: [
+        // 右舷 152mm 舰炮 3 门
+        {
+          name: "UK/152/50/MK17",
+          posPercent: 0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/50/MK17",
+          posPercent: 0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/50/MK17",
+          posPercent: -0.56,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 152mm 舰炮 3 门
+        {
+          name: "UK/152/50/MK17",
+          posPercent: 0.62,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/152/50/MK17",
+          posPercent: 0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/152/50/MK17",
+          posPercent: -0.56,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰艉 152mm 舰炮 3 门
+        {
+          name: "UK/152/50/MK17",
+          posPercent: -0.82,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/50/MK17",
+          posPercent: -0.82,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/152/50/MK17",
+          posPercent: -0.92,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 300]
+        }
+      ],
+      secondaryGuns: [
+        // 102mm 高炮 4 门
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 八联装 pom-pom 2 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.63,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.12,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 四联装 Vickers 12.7mm 机枪 3 座
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.49,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 4,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 9
+        },
+        {
+          name: "Swordfish",
+          maxCount: 12
+        }
+      ]
+    }
+  },
+  // 竞技神
+  {
+    name: "hermes",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1939,
+    totalHP: 13700,
+    horizontalDamageReduction: 0.1,
+    verticalDamageReduction: 0.04,
+    maxSpeed: 25,
+    acceleration: 0.4,
+    rotateSpeed: 1,
+    length: 183,
+    width: 22,
+    fundsCost: 197,
+    timeCost: 75,
+    weapon: {
+      mainGuns: [
+        // 右舷 140mm 主炮
+        {
+          name: "UK/140/50",
+          posPercent: 0.31,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/140/50",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/140/50",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 140mm 主炮
+        {
+          name: "UK/140/50",
+          posPercent: 0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/140/50",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/140/50",
+          posPercent: -0.53,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.49,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "UK/102/45/DP",
+          posPercent: 0.4,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "UK/102/45/DP",
+          posPercent: -0.08,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      antiAircraftGuns: [
+        // 高射机枪 3 座
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.45,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.3,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: -0.2,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 4,
+      groups: [
+        {
+          name: "Fulmar",
+          maxCount: 8
+        },
+        {
+          name: "Swordfish",
+          maxCount: 12
+        }
+      ]
+    }
+  },
+  // 百眼巨人
   {
     name: "courageous",
     nation: "uk",
@@ -6167,7 +6434,7 @@
     year: 1939,
     totalHP: 26990,
     horizontalDamageReduction: 0.12,
-    verticalDamageReduction: 0.05,
+    verticalDamageReduction: 0.03,
     maxSpeed: 30,
     acceleration: 0.3,
     rotateSpeed: 0.7,
@@ -6326,121 +6593,7 @@
       ]
     }
   },
-  // 竞技神
-  {
-    name: "hermes",
-    nation: "uk",
-    type: "aircraft_carrier",
-    typeAbbr: "CV",
-    year: 1939,
-    totalHP: 13700,
-    horizontalDamageReduction: 0.12,
-    verticalDamageReduction: 0.08,
-    maxSpeed: 25,
-    acceleration: 0.4,
-    rotateSpeed: 1,
-    length: 183,
-    width: 22,
-    fundsCost: 197,
-    timeCost: 75,
-    weapon: {
-      mainGuns: [
-        // 右舷 140mm 主炮
-        {
-          name: "UK/140/50",
-          posPercent: 0.31,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/140/50",
-          posPercent: 0.01,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/140/50",
-          posPercent: -0.53,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷 140mm 主炮
-        {
-          name: "UK/140/50",
-          posPercent: 0.31,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/140/50",
-          posPercent: 0.01,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/140/50",
-          posPercent: -0.53,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      secondaryGuns: [
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.49,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.4,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        {
-          name: "UK/102/45/DP",
-          posPercent: -0.08,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        }
-      ],
-      antiAircraftGuns: [
-        // 高射机枪 3 座
-        {
-          name: "UK/12.7/4",
-          posPercent: 0.45,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        {
-          name: "UK/12.7/4",
-          posPercent: 0.3,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        {
-          name: "UK/12.7/4",
-          posPercent: -0.2,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        }
-      ]
-    },
-    aircraft: {
-      takeOffTime: 4,
-      groups: [
-        {
-          name: "Fulmar",
-          maxCount: 8
-        },
-        {
-          name: "Swordfish",
-          maxCount: 12
-        }
-      ]
-    }
-  },
-  // 百眼巨人
+  // 鹰
   {
     name: "argus",
     nation: "uk",
@@ -6448,15 +6601,15 @@
     typeAbbr: "CV",
     year: 1942,
     totalHP: 16750,
-    horizontalDamageReduction: 0.08,
-    verticalDamageReduction: 0.04,
+    horizontalDamageReduction: 0.04,
+    verticalDamageReduction: 0,
     maxSpeed: 20.25,
     acceleration: 0.4,
     rotateSpeed: 1,
     length: 172,
     width: 23,
-    fundsCost: 197,
-    timeCost: 75,
+    fundsCost: 204,
+    timeCost: 77,
     weapon: {
       mainGuns: [
         // 右舷 102mm 高平炮
@@ -6552,159 +6705,6 @@
         {
           name: "Swordfish",
           maxCount: 10
-        }
-      ]
-    }
-  },
-  // 鹰
-  {
-    name: "eagle",
-    nation: "uk",
-    type: "aircraft_carrier",
-    typeAbbr: "CV",
-    year: 1939,
-    totalHP: 26800,
-    horizontalDamageReduction: 0.18,
-    verticalDamageReduction: 0.08,
-    maxSpeed: 22.5,
-    acceleration: 0.3,
-    rotateSpeed: 0.8,
-    length: 204,
-    width: 35,
-    fundsCost: 426,
-    timeCost: 95,
-    weapon: {
-      mainGuns: [
-        // 右舷 152mm 舰炮 3 门
-        {
-          name: "UK/152/50/MK17",
-          posPercent: 0.62,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/152/50/MK17",
-          posPercent: 0.33,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/152/50/MK17",
-          posPercent: -0.56,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷 152mm 舰炮 3 门
-        {
-          name: "UK/152/50/MK17",
-          posPercent: 0.62,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/152/50/MK17",
-          posPercent: 0.33,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/152/50/MK17",
-          posPercent: -0.56,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 舰艉 152mm 舰炮 3 门
-        {
-          name: "UK/152/50/MK17",
-          posPercent: -0.82,
-          rightFiringArc: [60, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "UK/152/50/MK17",
-          posPercent: -0.82,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 270]
-        },
-        {
-          name: "UK/152/50/MK17",
-          posPercent: -0.92,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 300]
-        }
-      ],
-      secondaryGuns: [
-        // 102mm 高炮 4 门
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.5,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/102/45/DP",
-          posPercent: 0.4,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/102/45/DP",
-          posPercent: -0.07,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/102/45/DP",
-          posPercent: -0.22,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-      ],
-      antiAircraftGuns: [
-        // 八联装 pom-pom 2 座
-        {
-          name: "UK/40/39/8",
-          posPercent: 0.63,
-          rightFiringArc: [0, 160],
-          leftFiringArc: [200, 360]
-        },
-        {
-          name: "UK/40/39/8",
-          posPercent: 0.12,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [210, 330]
-        },
-        // 四联装 Vickers 12.7mm 机枪 3 座
-        {
-          name: "UK/12.7/4",
-          posPercent: 0.85,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/12.7/4",
-          posPercent: 0.85,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "UK/12.7/4",
-          posPercent: -0.49,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        }
-      ]
-    },
-    aircraft: {
-      takeOffTime: 4,
-      groups: [
-        {
-          name: "Fulmar",
-          maxCount: 9
-        },
-        {
-          name: "Swordfish",
-          maxCount: 12
         }
       ]
     }

@@ -923,6 +923,57 @@
     ]
   },
   {
+    "name": "implacable",
+    "displayName": "Implacable",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39 2-pounders"},
+      {"label": "Anti-aircraft Guns", "value": "7x1 40mm/60 Bofors"},
+      {"label": "Anti-aircraft Guns", "value": "12x1 20mm/70 Oerlikons"},
+      {"label": "Fighters", "value": "32× Vought F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "32× Grumman Avenger Mk I"},
+      {"label": "Strike Aircraft", "value": "16× Fairey Barracuda Mk II"}
+    ],
+    "description": "HMS Implacable (R86) was the lead ship of a fast, heavily protected class of British fleet carriers completed in 1944. After operations off Norway, she joined the British Pacific Fleet in 1945, striking Truk and targets in the Japanese home islands. Following Japan's surrender, she supported repatriation and transport duties before returning to Britain.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Implacable 1953",
+        "url": "https://www.shipbucket.com/drawings/5164"
+      },
+      {
+        "name": "Wikipedia - HMS Implacable (R86)",
+        "url": "https://en.wikipedia.org/wiki/HMS_Implacable_(R86)"
+      }
+    ]
+  },
+  {
+    "name": "victorious",
+    "displayName": "Victorious",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39"},
+      {"label": "Anti-aircraft Guns", "value": "1x2 + 4x1 40mm/60"},
+      {"label": "Anti-aircraft Guns", "value": "16x2 + 6x1 20mm/70"},
+      {"label": "Fighters", "value": "30× Vought F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "24× Grumman Avenger Mk I"}
+    ],
+    "description": "HMS Victorious (R38) was the third Illustrious-class aircraft carrier and entered Royal Navy service in 1941. She fought in the pursuit of Bismarck, Arctic convoy operations, the Mediterranean, and the Pacific. After an extensive post-war reconstruction adapted her for jet aircraft, she remained in service until 1968 and was scrapped in 1969.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Victorious 1945",
+        "url": "https://www.shipbucket.com/drawings/5182"
+      },
+      {
+        "name": "Wikipedia — HMS Victorious",
+        "url": "https://en.wikipedia.org/wiki/HMS_Victorious_%28R38%29"
+      }
+    ]
+  },
+  {
     "name": "ark_royal",
     "displayName": "Ark Royal",
     "type": "Aircraft Carrier",
@@ -944,6 +995,23 @@
         "name": "Naval History - HMS Ark Royal",
         "url": "https://www.naval-history.net/xGM-Chrono-04CV-Ark%20Royal.htm"
       }
+    ]
+  },
+  {
+    "name": "vengeance",
+    "displayName": "Vengeance",
+    "type": "Light Aircraft Carrier",
+    "armaments": [
+      {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39"},
+      {"label": "Anti-aircraft Guns", "value": "10x2 + 10x1 20mm/70"},
+      {"label": "Fighters", "value": "24× Vought F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "14× Fairey Barracuda Mk II"}
+    ],
+    "description": "HMS Vengeance (R71) was a Colossus-class light fleet carrier commissioned into the Royal Navy in January 1945. Completed too late to see combat, she nevertheless joined the British Pacific Fleet. She later served on loan with the Royal Australian Navy and, after sale and reconstruction, spent four decades in Brazilian service as Minas Gerais before being decommissioned in 2001.",
+    "author": "Bombhead, K. W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - 71 Vengeance", "url": "https://www.shipbucket.com/drawings/5186"},
+      {"name": "Wikipedia - HMS Vengeance (R71)", "url": "https://en.wikipedia.org/wiki/HMS_Vengeance_(R71)"}
     ]
   },
   {
@@ -1005,20 +1073,22 @@
     ]
   },
   {
-    "name": "courageous",
-    "displayName": "Courageous",
+    "name": "eagle",
+    "displayName": "Eagle",
     "type": "Aircraft Carrier",
     "armaments": [
-      {"label": "Dual-purpose Guns", "value": "16x1 120mm/40 Mk VIII"},
-      {"label": "Anti-aircraft Guns", "value": "3x8 40mm/39"},
-      {"label": "Fighters", "value": "24× Fairey Fulmar Mk I"},
-      {"label": "Torpedo Bombers", "value": "24× Fairey Swordfish Mk I"}
+      {"label": "Main Guns", "value": "9x1 152mm/50 Mk XVII"},
+      {"label": "Dual-purpose Guns", "value": "4x1 102mm/45"},
+      {"label": "Anti-aircraft Guns", "value": "2x8 40mm/39"},
+      {"label": "Anti-aircraft Machine Guns", "value": "3x4 12.7mm"},
+      {"label": "Fighters", "value": "9× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "12× Fairey Swordfish Mk I"}
     ],
-    "description": "HMS Courageous began as a First World War battlecruiser and was converted into an aircraft carrier under the Washington Naval Treaty, returning to service in 1928. In September 1939 she conducted anti-submarine patrols in the Western Approaches. German submarine U-29 torpedoed and sank her on 17 September, making her the Royal Navy's first major warship loss of the conflict.",
-    "author": "Hood, Bombhead, K. W. Vestergaard",
+    "description": "HMS Eagle was converted from the incomplete Chilean battleship Almirante Cochrane and entered Royal Navy service in 1924. This configuration represents her after the 1932 refit, as drawn in 1939.",
+    "author": "Bombhead, K.W. Vestergaard",
     "links": [
-      {"name": "Shipbucket - 50 Courageous", "url": "https://www.shipbucket.com/drawings/5155"},
-      {"name": "Wikipedia - HMS Courageous", "url": "https://en.wikipedia.org/wiki/HMS_Courageous_(50)"}
+      {"name": "Shipbucket - HMS Eagle 1933", "url": "https://www.shipbucket.com/drawings/5157"},
+      {"name": "Wikipedia - HMS Eagle", "url": "https://en.wikipedia.org/wiki/HMS_Eagle_(1918)"}
     ]
   },
   {
@@ -1040,6 +1110,23 @@
     ]
   },
   {
+    "name": "courageous",
+    "displayName": "Courageous",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {"label": "Dual-purpose Guns", "value": "16x1 120mm/40 Mk VIII"},
+      {"label": "Anti-aircraft Guns", "value": "3x8 40mm/39"},
+      {"label": "Fighters", "value": "24× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "24× Fairey Swordfish Mk I"}
+    ],
+    "description": "HMS Courageous began as a First World War battlecruiser and was converted into an aircraft carrier under the Washington Naval Treaty, returning to service in 1928. In September 1939 she conducted anti-submarine patrols in the Western Approaches. German submarine U-29 torpedoed and sank her on 17 September, making her the Royal Navy's first major warship loss of the conflict.",
+    "author": "Hood, Bombhead, K. W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - 50 Courageous", "url": "https://www.shipbucket.com/drawings/5155"},
+      {"name": "Wikipedia - HMS Courageous", "url": "https://en.wikipedia.org/wiki/HMS_Courageous_(50)"}
+    ]
+  },
+  {
     "name": "argus",
     "displayName": "Argus",
     "type": "Aircraft Carrier",
@@ -1055,93 +1142,6 @@
     "links": [
       {"name": "Shipbucket - HMS Argus 1942", "url": "https://www.shipbucket.com/drawings/5154"},
       {"name": "Wikipedia - HMS Argus", "url": "https://en.wikipedia.org/wiki/HMS_Argus_(I49)"}
-    ]
-  },
-  {
-    "name": "eagle",
-    "displayName": "Eagle",
-    "type": "Aircraft Carrier",
-    "armaments": [
-      {"label": "Main Guns", "value": "9x1 152mm/50 Mk XVII"},
-      {"label": "Dual-purpose Guns", "value": "4x1 102mm/45"},
-      {"label": "Anti-aircraft Guns", "value": "2x8 40mm/39"},
-      {"label": "Anti-aircraft Machine Guns", "value": "3x4 12.7mm"},
-      {"label": "Fighters", "value": "9× Fairey Fulmar Mk I"},
-      {"label": "Torpedo Bombers", "value": "12× Fairey Swordfish Mk I"}
-    ],
-    "description": "HMS Eagle was converted from the incomplete Chilean battleship Almirante Cochrane and entered Royal Navy service in 1924. This configuration represents her after the 1932 refit, as drawn in 1939.",
-    "author": "Bombhead, K.W. Vestergaard",
-    "links": [
-      {"name": "Shipbucket - HMS Eagle 1933", "url": "https://www.shipbucket.com/drawings/5157"},
-      {"name": "Wikipedia - HMS Eagle", "url": "https://en.wikipedia.org/wiki/HMS_Eagle_(1918)"}
-    ]
-  },
-  {
-    "name": "vengeance",
-    "displayName": "Vengeance",
-    "type": "Light Aircraft Carrier",
-    "armaments": [
-      {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39"},
-      {"label": "Anti-aircraft Guns", "value": "10x2 + 10x1 20mm/70"},
-      {"label": "Fighters", "value": "24× Vought F4U-4 Corsair"},
-      {"label": "Torpedo Bombers", "value": "14× Fairey Barracuda Mk II"}
-    ],
-    "description": "HMS Vengeance (R71) was a Colossus-class light fleet carrier commissioned into the Royal Navy in January 1945. Completed too late to see combat, she nevertheless joined the British Pacific Fleet. She later served on loan with the Royal Australian Navy and, after sale and reconstruction, spent four decades in Brazilian service as Minas Gerais before being decommissioned in 2001.",
-    "author": "Bombhead, K. W. Vestergaard",
-    "links": [
-      {"name": "Shipbucket - 71 Vengeance", "url": "https://www.shipbucket.com/drawings/5186"},
-      {"name": "Wikipedia - HMS Vengeance (R71)", "url": "https://en.wikipedia.org/wiki/HMS_Vengeance_(R71)"}
-    ]
-  },
-  {
-    "name": "victorious",
-    "displayName": "Victorious",
-    "type": "Aircraft Carrier",
-    "armaments": [
-      {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
-      {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39"},
-      {"label": "Anti-aircraft Guns", "value": "1x2 + 4x1 40mm/60"},
-      {"label": "Anti-aircraft Guns", "value": "16x2 + 6x1 20mm/70"},
-      {"label": "Fighters", "value": "30× Vought F4U-4 Corsair"},
-      {"label": "Torpedo Bombers", "value": "24× Grumman Avenger Mk I"}
-    ],
-    "description": "HMS Victorious (R38) was the third Illustrious-class aircraft carrier and entered Royal Navy service in 1941. She fought in the pursuit of Bismarck, Arctic convoy operations, the Mediterranean, and the Pacific. After an extensive post-war reconstruction adapted her for jet aircraft, she remained in service until 1968 and was scrapped in 1969.",
-    "author": "Bombhead, K.W. Vestergaard",
-    "links": [
-      {
-        "name": "Shipbucket - HMS Victorious 1945",
-        "url": "https://www.shipbucket.com/drawings/5182"
-      },
-      {
-        "name": "Wikipedia — HMS Victorious",
-        "url": "https://en.wikipedia.org/wiki/HMS_Victorious_%28R38%29"
-      }
-    ]
-  },
-  {
-    "name": "implacable",
-    "displayName": "Implacable",
-    "type": "Aircraft Carrier",
-    "armaments": [
-      {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
-      {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39 2-pounders"},
-      {"label": "Anti-aircraft Guns", "value": "7x1 40mm/60 Bofors"},
-      {"label": "Anti-aircraft Guns", "value": "12x1 20mm/70 Oerlikons"},
-      {"label": "Fighters", "value": "32× Vought F4U-4 Corsair"},
-      {"label": "Torpedo Bombers", "value": "32× Grumman Avenger Mk I"},
-      {"label": "Strike Aircraft", "value": "16× Fairey Barracuda Mk II"}
-    ],
-    "description": "HMS Implacable (R86) was the lead ship of a fast, heavily protected class of British fleet carriers completed in 1944. After operations off Norway, she joined the British Pacific Fleet in 1945, striking Truk and targets in the Japanese home islands. Following Japan's surrender, she supported repatriation and transport duties before returning to Britain.",
-    "author": "Unknown",
-    "links": [
-      {
-        "name": "Shipbucket - HMS Implacable 1953",
-        "url": "https://www.shipbucket.com/drawings/5164"
-      },
-      {
-        "name": "Wikipedia - HMS Implacable (R86)",
-        "url": "https://en.wikipedia.org/wiki/HMS_Implacable_(R86)"
-      }
     ]
   },
   {

@@ -869,16 +869,16 @@
           "taiyo",
           "shinyo",
           "hosho",
-          "victorious",
           "implacable",
+          "victorious",
           "ark_royal",
-          "argus",
-          "eagle",
-          "courageous",
-          "hermes",
           "vengeance",
           "bicorn",
-          "unicorn"
+          "unicorn",
+          "eagle",
+          "hermes",
+          "courageous",
+          "argus"
         ],
       },
       {
@@ -1122,8 +1122,8 @@
       },
       // === British CV ===
       {
-        name: "ark_royal",
-        pos: [11, 25],
+        name: "implacable",
+        pos: [12, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -1134,8 +1134,32 @@
         belongPlayer: "HA"
       },
       {
+        name: "ark_royal",
+        pos: [11, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "vengeance",
         pos: [11, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "bicorn",
+        pos: [12, 32],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "unicorn",
+        pos: [11, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "eagle",
+        pos: [11, 31],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -1154,30 +1178,6 @@
       {
         name: "argus",
         pos: [12, 30],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "eagle",
-        pos: [11, 31],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "bicorn",
-        pos: [12, 32],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "unicorn",
-        pos: [11, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "implacable",
-        pos: [12, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
