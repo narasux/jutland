@@ -853,6 +853,8 @@
           "essex",
           "princeton",
           "card",
+          "langley",
+          "wolverine",
           "hakuryu",
           "taiho",
           "shinano",
@@ -1386,6 +1388,18 @@
       {
         name: "card",
         pos: [32, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "langley",
+        pos: [31, 52],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "wolverine",
+        pos: [32, 51],
         rotation: 90,
         belongPlayer: "HA"
       },

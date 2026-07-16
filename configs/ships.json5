@@ -1810,6 +1810,115 @@
       ]
     }
   },
+  {
+    // 兰利
+    name: "langley",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1930,
+    totalHP: 13900,
+    horizontalDamageReduction: 0.04,
+    verticalDamageReduction: 0,
+    maxSpeed: 15.5,
+    acceleration: 0.2,
+    rotateSpeed: 0.9,
+    length: 165,
+    width: 20,
+    fundsCost: 157,
+    timeCost: 62,
+    weapon: {
+      mainGuns: [
+        // 右前舰炮
+        {
+          name: "US/102/50/MK9",
+          posPercent: 0.82,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左前舰炮
+        {
+          name: "US/102/50/MK9",
+          posPercent: 0.82,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        // 右后舰炮
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.78,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后舰炮
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.78,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: []
+    },
+    aircraft: {
+      takeOffTime: 4.5,
+      groups: [
+        {
+          name: "F2A-3",
+          maxCount: 8
+        },
+        {
+          name: "SBD-3",
+          maxCount: 8
+        },
+        {
+          name: "TBD-1",
+          maxCount: 6
+        }
+      ]
+    }
+  },
+  {
+    // 狼獾
+    name: "wolverine",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "IX",
+    year: 1942,
+    totalHP: 7200,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 19.1,
+    acceleration: 0.18,
+    rotateSpeed: 0.8,
+    length: 152,
+    width: 18,
+    fundsCost: 115,
+    timeCost: 46,
+    weapon: {
+      mainGuns: [],
+      secondaryGuns: [],
+      antiAircraftGuns: []
+    },
+    aircraft: {
+      takeOffTime: 6.5,
+      groups: [
+        {
+          name: "F6F-3",
+          maxCount: 3
+        },
+        {
+          name: "SBD-3",
+          maxCount: 3
+        },
+        {
+          name: "TBF-1",
+          maxCount: 2
+        }
+      ]
+    }
+  },
   // 日本海军
   {
     // 白龙

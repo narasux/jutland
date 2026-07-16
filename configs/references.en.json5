@@ -323,6 +323,76 @@
     ]
   },
   {
+    "name": "langley",
+    "displayName": "Langley",
+    "type": "Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Guns",
+        "value": "4×1 102 mm/50 Mk 9"
+      },
+      {
+        "label": "Fighters",
+        "value": "8× F2A-3"
+      },
+      {
+        "label": "Scout/Dive Bombers",
+        "value": "8× SBD-3"
+      },
+      {
+        "label": "Torpedo Bombers",
+        "value": "6× TBD-1"
+      }
+    ],
+    "description": "USS Langley (CV-1), converted from the collier Jupiter, entered service in 1922 as the U.S. Navy's first aircraft carrier and supported early carrier aviation experiments and pilot training. Her air group consists of eight F2A-3 fighters, eight SBD-3 scout/dive bombers, and six TBD-1 torpedo bombers. She became a seaplane tender in 1937 and was scuttled after a Japanese air attack in 1942.",
+    "author": "Charybdis",
+    "links": [
+      {
+        "name": "Shipbucket — USS Langley, CV-1, 1930",
+        "url": "https://www.shipbucket.com/drawings/7220"
+      },
+      {
+        "name": "Wikipedia — USS Langley (CV-1)",
+        "url": "https://en.wikipedia.org/wiki/USS_Langley_(CV-1)"
+      }
+    ]
+  },
+  {
+    "name": "wolverine",
+    "displayName": "Wolverine",
+    "type": "Training Aircraft Carrier",
+    "armaments": [
+      {
+        "label": "Armament",
+        "value": "None"
+      },
+      {
+        "label": "Training Fighters",
+        "value": "3× F6F-3"
+      },
+      {
+        "label": "Training Dive Bombers",
+        "value": "3× SBD-3"
+      },
+      {
+        "label": "Training Torpedo Bombers",
+        "value": "2× TBF-1"
+      }
+    ],
+    "description": "USS Wolverine (IX-64), converted from the Great Lakes side-wheel steamer Seeandbee, entered service as a freshwater carrier-qualification training ship. She had no armor, hangar, elevators, or armament; aircraft flew out from shore bases each day.",
+    "author": "Corp",
+    "links": [
+      {
+        "name": "Shipbucket — IX-64 Wolverine as designed",
+        "url": "https://www.shipbucket.com/drawings/8613"
+      },
+      {
+        "name": "Wikipedia — Wolverine",
+        "url": "https://en.wikipedia.org/wiki/USS_Wolverine_(IX-64)"
+      }
+    ]
+  },
+  {
     "name": "hakuryu",
     "displayName": "Hakuryū",
     "type": "Aircraft Carrier",
@@ -1052,7 +1122,7 @@
       },
       {
         "label": "Fighters",
-        "value": "18× Fulmar Mk I (game approximation for Seafire)"
+        "value": "18× Fulmar Mk I"
       },
       {
         "label": "Torpedo Bombers",
@@ -4201,7 +4271,7 @@
     "armaments": [
       {"label": "Machine Guns (Forward)", "value": "6 x 12.7mm Browning"}
     ],
-    "description": "The Vought F4U-4 Corsair entered service in 1945 as a high-performance single-seat carrier fighter. The Royal Navy's wartime Corsairs were chiefly earlier variants, so assigning this model to HMS Victorious is a game approximation. In game it is treated as a fighter armed only with six forward-firing 12.7mm Browning machine guns.",
+    "description": "The Vought F4U-4 Corsair entered service in 1945 as a high-performance single-seat carrier fighter. In game it is treated as a fighter armed with six forward-firing 12.7mm Browning machine guns.",
     "author": "Unknown",
     "links": [
       {

@@ -176,6 +176,8 @@ type CollectionUI struct {
 	layout  collectionUILayout
 	metrics collectionMetrics
 
+	shipBlueprintScale float64
+
 	category collectionCategory
 
 	shipNation objUnit.Nation
@@ -665,9 +667,43 @@ func (c *CollectionUI) resize(width, height int) {
 	c.width, c.height = width, height
 	c.metrics = calculateCollectionMetrics(width, height)
 	c.layout = calculateCollectionUILayout(width, height)
+	c.shipBlueprintScale = collectionShipBlueprintScale(c.layout.Blueprint)
 	c.clampPlaneFirstIndex()
 	c.planeCanvas = ebiten.NewImage(c.layout.PlaneViewport.Dx(), c.layout.PlaneViewport.Dy())
 	c.buildUI()
+}
+
+func collectionShipBlueprintScale(rect image.Rectangle) float64 {
+	// 常规舰船素材约按统一像素比例制作，因此图鉴也必须使用同一个绘制倍率。
+	// 取全体常规舰船都能放入蓝图区的最大倍率，避免切换舰名时各自重新塞满画布。
+	innerW := float64(rect.Dx() - 48)
+	halfHeight := (float64(rect.Dy()-36) - 12) / 2
+	if innerW <= 0 || halfHeight <= 0 {
+		return 0
+	}
+
+	scale := 1.0
+	found := false
+	for _, name := range objUnit.AllShipNames {
+		ship := objUnit.ShipMap[name]
+		if ship == nil || ship.Nation == objUnit.NationSpecial || ship.Type == objUnit.ShipTypeDefault {
+			continue
+		}
+		for _, candidate := range []float64{
+			collectionImageFitScale(shipImg.GetSide(name, 4), innerW, halfHeight, 0, false),
+			collectionImageFitScale(shipImg.GetTop(name, 4), innerW, halfHeight, 90, false),
+		} {
+			if candidate <= 0 {
+				continue
+			}
+			scale = min(scale, candidate)
+			found = true
+		}
+	}
+	if !found {
+		return 0
+	}
+	return scale
 }
 
 func calculateCollectionUILayout(width, height int) collectionUILayout {
@@ -1361,10 +1397,14 @@ func (c *CollectionUI) drawShipBlueprint(screen *ebiten.Image, ship *objUnit.Bat
 	halfHeight := (innerH - 12) / 2
 	sideImage := shipImg.GetSide(ship.Name, 4)
 	topImage := shipImg.GetTop(ship.Name, 4)
-	sharedScale := min(
-		collectionImageFitScale(sideImage, innerW, halfHeight, 0, false),
-		collectionImageFitScale(topImage, innerW, halfHeight, 90, false),
-	)
+	sharedScale := c.shipBlueprintScale
+	if sharedScale <= 0 || ship.Nation == objUnit.NationSpecial || ship.Type == objUnit.ShipTypeDefault {
+		// 彩蛋素材没有遵循常规舰船的统一像素比例，继续按自身画布适配。
+		sharedScale = min(
+			collectionImageFitScale(sideImage, innerW, halfHeight, 0, false),
+			collectionImageFitScale(topImage, innerW, halfHeight, 90, false),
+		)
+	}
 	c.drawer.drawCollectionImageScaled(screen, sideImage, innerX, innerY, innerW, halfHeight, 0, sharedScale)
 	c.drawer.drawCollectionImageScaled(
 		screen, topImage, innerX, innerY+halfHeight+12, innerW, halfHeight, 90, sharedScale,

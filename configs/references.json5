@@ -197,6 +197,52 @@
       }
     ]
   },
+  {
+    name: "langley",
+    displayName: "兰利",
+    type: "航空母舰",
+    armaments: [
+      {label: "舰炮", value: "4x1 102mm/50 Mk 9"},
+      {label: "制空战斗机", value: "8x 水牛（F2A-3）"},
+      {label: "侦察/俯冲轰炸机", value: "8x 无畏（SBD-3）"},
+      {label: "鱼雷攻击机", value: "6x 蹂躏者（TBD-1）"},
+    ],
+    description: "兰利号（USS Langley, CV-1）由煤船木星号改装，1922 年服役，成为美国海军第一艘航空母舰，并承担舰载航空实验与飞行员训练。兰利号于 1937 年改为水上飞机母舰，1942 年遭日军空袭重创后由护航舰凿沉。",
+    author: "Charybdis",
+    links: [
+      {
+        name: "Shipbucket - USS Langley, CV-1, 1930",
+        url: "https://www.shipbucket.com/drawings/7220"
+      },
+      {
+        name: "维基百科 - 兰利号航空母舰",
+        url: "https://en.wikipedia.org/wiki/USS_Langley_(CV-1)"
+      }
+    ]
+  },
+  {
+    name: "wolverine",
+    displayName: "狼獾",
+    type: "训练航空母舰",
+    armaments: [
+      {label: "武装", value: "无"},
+      {label: "训练战斗机", value: "3x 地狱猫（F6F-3）"},
+      {label: "训练俯冲轰炸机", value: "3x 无畏（SBD-3）"},
+      {label: "训练鱼雷机", value: "2x 复仇者（TBF-1）"},
+    ],
+    description: "狼獾号（USS Wolverine, IX-64）原为五大湖侧轮客轮 Seeandbee，1942 年改装为美国海军淡水训练航母，用于舰载机飞行员起降资格训练。该舰没有装甲、机库、升降机或舰载武装，训练飞机从岸基机场飞来，仅在甲板上完成起降。",
+    author: "Corp",
+    links: [
+      {
+        name: "Shipbucket - IX-64 Wolverine as designed",
+        url: "https://www.shipbucket.com/drawings/8613"
+      },
+      {
+        name: "维基百科 - 狼獾号",
+        url: "https://en.wikipedia.org/wiki/USS_Wolverine_(IX-64)"
+      }
+    ]
+  },
   // 日本海军
   {
     name: "hakuryu",
@@ -2816,7 +2862,7 @@
     armaments: [
       {label: "机枪（前向）", value: "6 x 12.7mm 勃朗宁"},
     ],
-    description: "钱斯·沃特 F4U-4 海盗式于 1945 年服役，是一种高性能单座舰载战斗机。英国皇家海军航空兵在战时实际主要使用较早型号的海盗式，因此本机编入胜利号属于游戏近似。游戏中按战斗机处理，仅配置六挺前向 12.7mm 勃朗宁机枪。",
+    description: "钱斯·沃特 F4U-4 海盗式于 1945 年服役，是一种高性能单座舰载战斗机。游戏中按战斗机处理，配置六挺前向 12.7mm 勃朗宁机枪。",
     author: "未知",
     links: [
       {

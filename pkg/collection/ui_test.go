@@ -9,6 +9,7 @@ import (
 	"github.com/narasux/jutland/pkg/i18n"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
+	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/utils/layout"
 	"github.com/stretchr/testify/require"
 )
@@ -64,6 +65,33 @@ func TestCombatPowerHeaderPositionsKeepLabelAndValueSeparated(t *testing.T) {
 	valueWidth := layout.CalcTextWidth(value, 24*scale, font.JetbrainsMono)
 	require.LessOrEqual(t, labelX+labelWidth, valueX)
 	require.LessOrEqual(t, valueX+valueWidth, card.X+card.W-20*scale)
+}
+
+func TestShipBlueprintUsesSharedScaleAndKeepsCarrierLengthOrder(t *testing.T) {
+	previousShipMap := objUnit.ShipMap
+	previousShipNames := objUnit.AllShipNames
+	t.Cleanup(func() {
+		objUnit.ShipMap = previousShipMap
+		objUnit.AllShipNames = previousShipNames
+	})
+
+	objUnit.ShipMap = map[string]*objUnit.BattleShip{
+		"saratoga": {Name: "saratoga", Nation: objUnit.NationUS, Type: objUnit.ShipTypeAircraftCarrier},
+		"yorktown": {Name: "yorktown", Nation: objUnit.NationUS, Type: objUnit.ShipTypeAircraftCarrier},
+		"essex":    {Name: "essex", Nation: objUnit.NationUS, Type: objUnit.ShipTypeAircraftCarrier},
+	}
+	objUnit.AllShipNames = []string{"saratoga", "yorktown", "essex"}
+
+	scale := collectionShipBlueprintScale(image.Rect(0, 0, 1100, 360))
+	require.Positive(t, scale)
+
+	saratogaLength := float64(shipImg.GetTop("saratoga", 4).Bounds().Dy()) * scale
+	yorktownLength := float64(shipImg.GetTop("yorktown", 4).Bounds().Dy()) * scale
+	essexLength := float64(shipImg.GetTop("essex", 4).Bounds().Dy()) * scale
+
+	require.Less(t, yorktownLength, essexLength)
+	require.InDelta(t, 247.0/266.0, yorktownLength/essexLength, 0.02)
+	require.InDelta(t, 275.0/266.0, saratogaLength/essexLength, 0.02)
 }
 
 func TestMovePlaneTypeSkipsEmptyTypesAndResetsPosition(t *testing.T) {
