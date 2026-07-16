@@ -1,4 +1,4 @@
 interface:
   display_name: "Jutland 战舰配色修改"
-  short_description: "参考同类舰配色精确重涂舰体甲板与武器并修复局部误染"
-  default_prompt: "使用 $jutland-recolor-ship-image 参考目标舰图片精确修改战舰涂装并验证局部换色结果。"
+  short_description: "精确重涂舰体甲板并修复迷彩残留、板缝与对称金属带"
+  default_prompt: "使用 $jutland-recolor-ship-image 从原始清晰图重涂战舰，并验证线稿、甲板板缝、迷彩残留和对称金属结构。"
