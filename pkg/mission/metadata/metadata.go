@@ -71,11 +71,10 @@ var missionMetadata map[string]MissionMetadata
 // Get 获取任务元配置
 func Get(mission string) MissionMetadata {
 	md := missionMetadata[mission]
-	lang := i18n.CurrentLanguage()
-	if value := md.displayNames[lang]; value != "" {
+	if value := i18n.LocalizedValue(md.displayNames); value != "" {
 		md.DisplayName = value
 	}
-	if value := md.descriptions[lang]; value != "" {
+	if value := i18n.LocalizedValue(md.descriptions); value != "" {
 		md.Description = value
 	}
 	return md

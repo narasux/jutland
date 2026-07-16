@@ -1,0 +1,298 @@
+[GameTitle]
+other = "Jutland：蒼海の激戦"
+[GameCredits]
+other = "武運長久を祈る！"
+[MenuMissionSelect]
+other = "ミッション選択"
+[MenuCollection]
+other = "艦船図鑑"
+[MenuSettings]
+other = "設定"
+[MenuExit]
+other = "ゲーム終了"
+[Loading]
+other = "読み込み中..."
+[MissionStarted]
+other = "作戦開始！"
+[MissionSuccess]
+other = "作戦成功！"
+[MissionFailed]
+other = "作戦失敗..."
+[MissionStart]
+other = "作戦開始"
+[Back]
+other = "戻る"
+[MissionStats]
+other = "初期資金 {{.Funds}}  |  艦隊上限 {{.ShipLimit}}  |  油田 {{.OilPlatforms}}"
+[MissionBattleStats]
+other = "味方 {{.AllyShips}}隻  対  敵 {{.EnemyShips}}隻  |  増援地点 味方{{.AllyPoints}} 敵{{.EnemyPoints}}"
+[MissionPaused]
+other = "一時停止"
+[MissionDebugPauseHint]
+other = "一時停止中 | [Q] 終了  [Esc] 再開"
+[MissionResume]
+other = "再開"
+[MissionAbandon]
+other = "作戦放棄"
+[MissionConfirmAbandon]
+other = "この作戦を放棄しますか？"
+[Confirm]
+other = "決定"
+[SettingsTitle]
+other = "ゲーム設定"
+[SettingsSpeed]
+other = "全体速度倍率"
+[SettingsLanguage]
+other = "言語"
+[SettingsSave]
+other = "保存"
+[SettingsCancel]
+other = "キャンセル"
+[SpeedVerySlow]
+other = "非常に遅い"
+[SpeedSlow]
+other = "遅い"
+[SpeedNormal]
+other = "標準"
+[SpeedFast]
+other = "速い"
+[SpeedVeryFast]
+other = "非常に速い"
+[NationAll]
+other = "すべて"
+[NationChina]
+other = "中国"
+[NationUnitedStates]
+other = "アメリカ"
+[NationJapan]
+other = "日本"
+[NationGermany]
+other = "ドイツ"
+[NationUnitedKingdom]
+other = "イギリス"
+[NationSovietUnion]
+other = "ソビエト連邦"
+[NationSpecial]
+other = "特殊"
+[ShipTypeDefault]
+other = "その他"
+[ShipTypeCarrier]
+other = "航空母艦"
+[ShipTypeBattleship]
+other = "戦艦"
+[ShipTypeCruiser]
+other = "巡洋艦"
+[ShipTypeDestroyer]
+other = "駆逐艦"
+[ShipTypeFrigate]
+other = "フリゲート"
+[ShipTypeHospital]
+other = "病院船"
+[ShipTypeCargo]
+other = "貨物船"
+[ShipTypeTorpedoBoat]
+other = "魚雷艇"
+[PlaneTypeFighter]
+other = "戦闘機"
+[PlaneTypeDiveBomber]
+other = "急降下爆撃機"
+[PlaneTypeTorpedoBomber]
+other = "雷撃機"
+[Unknown]
+other = "不明"
+[CollectionAll]
+other = "すべて"
+[CollectionSpecial]
+other = "特殊"
+[CollectionAuxiliary]
+other = "補助艦艇"
+[CollectionShip]
+other = "艦船"
+[CollectionPlane]
+other = "航空機"
+[CollectionNation]
+other = "国籍："
+[CollectionShipClass]
+other = "艦種：{{.Value}} ↓"
+[CollectionPlaneType]
+other = "機種：{{.Value}} ↓"
+[CollectionShipName]
+other = "艦名：{{.Value}} ↓"
+[CollectionPlaneCount]
+other = "全{{.Count}}機"
+[CollectionNationValue]
+other = "国籍：{{.Value}} ↓"
+[CollectionNoMatchingShip]
+other = "条件に一致する艦船はありません"
+[CollectionNoMatchingPlane]
+other = "条件に一致する航空機はありません"
+[CollectionShipArchive]
+other = "艦船資料"
+[CollectionNationLabel]
+other = "国籍"
+[CollectionTypeLabel]
+other = "艦種"
+[CollectionYear]
+other = "年"
+[CollectionTonnage]
+other = "排水量"
+[CollectionSpeed]
+other = "速力"
+[CollectionCost]
+other = "建造費"
+[CollectionHorizontalDR]
+other = "水平防御"
+[CollectionVerticalDR]
+other = "垂直防御"
+[CollectionArmaments]
+other = "兵装"
+[CollectionNone]
+other = "なし"
+[CollectionCombat]
+other = "兵装・戦闘能力"
+[CollectionTotalPower]
+other = "総合戦力"
+[CollectionRelativeNote]
+other = "相対戦力（現在の抽出結果のP95で正規化）"
+[CollectionHistorySource]
+other = "艦歴・出典"
+[CollectionNoHistory]
+other = "艦歴資料はありません"
+[CollectionAssetAuthor]
+other = "画像作者：{{.Author}}"
+[CollectionBasicData]
+other = "基本性能"
+[CollectionDurability]
+other = "耐久 {{.Value}}"
+[CollectionDamageReduction]
+other = "ダメージ軽減 {{.Value}}%"
+[CollectionRange]
+other = "航続距離 {{.Value}} km"
+[CollectionPlaneSpeed]
+other = "速度 {{.Value}} km/h"
+[CollectionWeaponConfig]
+other = "兵装構成"
+[CollectionCombatAbility]
+other = "戦闘能力"
+[CollectionFormationNote]
+other = "標準{{.Count}}機編隊 · 相対戦力（現在の抽出結果のP95で正規化）"
+[CollectionFormationPower]
+other = "編隊戦力（{{.Count}}機）"
+[WeaponGun]
+other = "機銃"
+[WeaponBomb]
+other = "爆弾"
+[WeaponTorpedo]
+other = "魚雷"
+[WeaponRocket]
+other = "ロケット"
+[RadarAntiShip]
+other = "対艦"
+[RadarAntiAir]
+other = "対空"
+[RadarSurvival]
+other = "生存性"
+[RadarMobility]
+other = "機動性"
+[RadarProjection]
+other = "展開力"
+[RadarBurst]
+other = "瞬発力"
+[RadarFormationScope]
+other = "集計範囲：標準{{.Count}}機編隊"
+[RadarAbilityValue]
+other = "能力値：{{.Value}}"
+[RadarRelativePosition]
+other = "相対位置：{{.Percent}}%"
+[RadarAntiShipDPS]
+other = "実効対艦DPS：{{.Value}}/秒"
+[RadarAntiAirDPS]
+other = "実効対空DPS：{{.Value}}/秒"
+[RadarTargetingNote]
+other = "図鑑評価専用。戦闘時の目標選択には影響しません"
+[RadarEffectiveHP]
+other = "実効耐久：{{.Value}}"
+[RadarMobilityNote]
+other = "速度・旋回・加速から算出"
+[RadarCombatRadius]
+other = "戦闘半径：{{.Value}} km"
+[RadarProjectionDistance]
+other = "最大展開距離：{{.Value}} km"
+[RadarBurstDamage]
+other = "初回斉射予測ダメージ：{{.Value}}"
+[RadarMainContributions]
+other = "主な構成要素："
+[RadarSubjectPower]
+other = "{{.Name}}・総合戦力"
+[RadarSubjectDimension]
+other = "{{.Name}}・{{.Dimension}}"
+[RadarContribution]
+other = "  {{.Name}}  {{.Percent}}%"
+[RadarOverall]
+other = "総合"
+[RadarHull]
+other = "船体"
+[RadarAviation]
+other = "航空"
+[SidebarFunds]
+other = "資金：{{.Funds}}"
+[SidebarFleets]
+other = "味方艦隊：{{.Ally}}    敵艦隊：{{.Enemy}}"
+[SidebarAllyFleet]
+other = "味方艦隊：{{.Count}}"
+[SidebarEnemyFleet]
+other = "敵艦隊：{{.Count}}"
+[SidebarShowState]
+other = "状態表示"
+[SidebarDamageNumbers]
+other = "ダメージ表示"
+[MapSelf]
+other = "味方"
+[MapEnemy]
+other = "敵"
+[MapFleetCount]
+other = "{{.Side}}（{{.Count}}）"
+[RallyLandBlocked]
+other = "陸上には集結地点を設定できません"
+[ReinforceShipArchive]
+other = "艦船資料"
+[ReinforceWeaponConfig]
+other = "兵装構成"
+[ReinforceType]
+other = "艦種"
+[ReinforceHP]
+other = "耐久"
+[ReinforceSpeed]
+other = "速力"
+[ReinforceCost]
+other = "建造費"
+[ReinforceQueue]
+other = "増援待機列"
+[ReinforceStandby]
+other = "待機"
+[ReinforceControl]
+other = "操作状況"
+[ReinforceCurrentFunds]
+other = "現在資金"
+[ReinforceTipPoint]
+other = "↑ ↓ 増援地点"
+[ReinforceTipShip]
+other = "← → 艦船"
+[ReinforceTipSummon]
+other = "Enter 建造"
+[ReinforceTipCancel]
+other = "Backspace 建造取消"
+[ReinforceTipRally]
+other = "マップをクリック：集結地点"
+[ValueKnots]
+other = "{{.Value}}ノット"
+[ValueCost]
+other = "${{.Funds}} / {{.Seconds}}秒"
+[TypeWithAbbr]
+other = "{{.Type}}（{{.Abbr}}）"
+[LabelValue]
+other = "{{.Label}}：{{.Value}}"
+[ItemCount]
+other = "{{.Name}} × {{.Count}}"
+[TypeSlash]
+other = "{{.Abbr}} / {{.Type}}"

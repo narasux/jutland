@@ -372,6 +372,8 @@ func initReferenceMap() {
 	}{
 		{i18n.LanguageZhHans, "references.json5"},
 		{i18n.LanguageEnglish, "references.en.json5"},
+		{i18n.LanguageRussian, "references.ru.json5"},
+		{i18n.LanguageJapanese, "references.ja.json5"},
 	}
 	loaded := make(map[i18n.Language][]ObjRef.Reference, len(locales))
 	for _, locale := range locales {
@@ -381,9 +383,7 @@ func initReferenceMap() {
 		}
 		loaded[locale.Language] = references
 	}
-	if err := ObjRef.ValidateLocales(
-		loaded[i18n.LanguageZhHans], loaded[i18n.LanguageEnglish],
-	); err != nil {
+	if err := ObjRef.ValidateLocales(loaded); err != nil {
 		log.Fatal("invalid localized references: ", err)
 	}
 	for lang, references := range loaded {

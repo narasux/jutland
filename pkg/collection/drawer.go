@@ -178,7 +178,7 @@ func (d *Drawer) drawCollectionCard(
 		2, color.RGBA{R: 214, G: 201, B: 178, A: 190}, false,
 	)
 	titleFontSize := metrics.CardTitle
-	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
+	if i18n.CurrentLanguage().UsesLatinVisualScale() {
 		titleFontSize *= 0.82
 	}
 	maxTitleWidth := card.W - 40*scale

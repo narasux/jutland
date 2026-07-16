@@ -78,6 +78,10 @@ type MapCfg struct {
 	DisplayName string `json:"displayName"`
 	// 英文展示名称
 	DisplayNameEn string `json:"displayNameEn"`
+	// 俄文展示名称
+	DisplayNameRu string `json:"displayNameRu"`
+	// 日文展示名称
+	DisplayNameJa string `json:"displayNameJa"`
 	// 原始素材名
 	Source string `json:"source"`
 	// 地图数据
@@ -92,10 +96,12 @@ type MapCfg struct {
 
 // LocalizedDisplayName 返回当前语言下的地图展示名称。
 func (cfg *MapCfg) LocalizedDisplayName() string {
-	if i18n.CurrentLanguage() == i18n.LanguageEnglish && cfg.DisplayNameEn != "" {
-		return cfg.DisplayNameEn
-	}
-	return cfg.DisplayName
+	return i18n.LocalizedValue(map[i18n.Language]string{
+		i18n.LanguageZhHans:   cfg.DisplayName,
+		i18n.LanguageEnglish:  cfg.DisplayNameEn,
+		i18n.LanguageRussian:  cfg.DisplayNameRu,
+		i18n.LanguageJapanese: cfg.DisplayNameJa,
+	})
 }
 
 // 初始化方块信息

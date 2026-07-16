@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"os"
 
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 )
 
@@ -21,37 +22,60 @@ func Load(path string) ([]Reference, error) {
 	return references, nil
 }
 
-// ValidateLocales 校验中英文图鉴配置的对象和稳定数据保持同步。
-func ValidateLocales(chinese, english []Reference) error {
-	chineseByName, err := validateReferences(chinese, "zh-Hans")
-	if err != nil {
-		return err
-	}
-	englishByName, err := validateReferences(english, "en")
-	if err != nil {
-		return err
-	}
-	if len(chineseByName) != len(englishByName) {
-		return fmt.Errorf("locale object counts differ: zh-Hans=%d en=%d", len(chineseByName), len(englishByName))
-	}
-	for name, zhRef := range chineseByName {
-		enRef, ok := englishByName[name]
-		if !ok {
-			return fmt.Errorf("en is missing reference %q", name)
+// ValidateLocales 校验所有图鉴语言的对象和稳定数据保持同步。
+func ValidateLocales(locales map[i18n.Language][]Reference) error {
+	validated := make(map[i18n.Language]map[string]Reference, len(locales))
+	for lang, references := range locales {
+		byName, err := validateReferences(references, string(lang))
+		if err != nil {
+			return err
 		}
-		if len(zhRef.Armaments) != len(enRef.Armaments) {
+		validated[lang] = byName
+	}
+	chinese := validated[i18n.LanguageZhHans]
+	english := validated[i18n.LanguageEnglish]
+	if chinese == nil || english == nil {
+		return fmt.Errorf("zh-Hans and en reference locales are required")
+	}
+	for _, lang := range i18n.SupportedLanguages() {
+		localized := validated[lang]
+		if localized == nil {
+			return fmt.Errorf("missing reference locale %s", lang)
+		}
+		if len(localized) != len(chinese) {
 			return fmt.Errorf(
-				"reference %q armament counts differ: zh-Hans=%d en=%d",
-				name, len(zhRef.Armaments), len(enRef.Armaments),
+				"locale object counts differ: zh-Hans=%d %s=%d",
+				len(chinese), lang, len(localized),
 			)
 		}
-		if len(enRef.Links) == 0 && enRef.Type != "Weapon" && enRef.Type != "武器" {
-			return fmt.Errorf("en reference %q has no source links", name)
-		}
-	}
-	for name := range englishByName {
-		if _, ok := chineseByName[name]; !ok {
-			return fmt.Errorf("en contains unknown reference %q", name)
+		for name, zhRef := range chinese {
+			ref, ok := localized[name]
+			if !ok {
+				return fmt.Errorf("%s is missing reference %q", lang, name)
+			}
+			if lang == i18n.LanguageEnglish && ref.Type != "Weapon" && ref.Type != "武器" && len(ref.Links) == 0 {
+				return fmt.Errorf("en reference %q has no source links", name)
+			}
+			if len(zhRef.Armaments) != len(ref.Armaments) {
+				return fmt.Errorf(
+					"reference %q armament counts differ: zh-Hans=%d %s=%d",
+					name, len(zhRef.Armaments), lang, len(ref.Armaments),
+				)
+			}
+			if lang == i18n.LanguageRussian || lang == i18n.LanguageJapanese {
+				enRef := english[name]
+				if len(ref.Links) != len(enRef.Links) {
+					return fmt.Errorf(
+						"reference %q link counts differ: en=%d %s=%d",
+						name, len(enRef.Links), lang, len(ref.Links),
+					)
+				}
+				for idx := range ref.Links {
+					if ref.Links[idx].URL != enRef.Links[idx].URL {
+						return fmt.Errorf("%s reference %q link %d URL differs from en", lang, name, idx)
+					}
+				}
+			}
 		}
 	}
 	return nil

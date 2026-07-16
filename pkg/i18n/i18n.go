@@ -16,8 +16,10 @@ import (
 type Language string
 
 const (
-	LanguageZhHans  Language = "zh-Hans"
-	LanguageEnglish Language = "en"
+	LanguageZhHans   Language = "zh-Hans"
+	LanguageEnglish  Language = "en"
+	LanguageRussian  Language = "ru"
+	LanguageJapanese Language = "ja"
 )
 
 //go:embed locales/active.*.toml
@@ -29,10 +31,15 @@ type localizerState struct {
 }
 
 var (
-	enabledLanguages = []Language{LanguageZhHans, LanguageEnglish}
-	bundle           = newBundle()
-	currentState     atomic.Pointer[localizerState]
-	missingOnce      sync.Map
+	enabledLanguages = []Language{
+		LanguageZhHans,
+		LanguageEnglish,
+		LanguageRussian,
+		LanguageJapanese,
+	}
+	bundle       = newBundle()
+	currentState atomic.Pointer[localizerState]
+	missingOnce  sync.Map
 )
 
 func init() {
@@ -61,9 +68,48 @@ func (l Language) NativeName() string {
 	switch l {
 	case LanguageEnglish:
 		return "English"
+	case LanguageRussian:
+		return "Русский"
+	case LanguageJapanese:
+		return "日本語"
 	default:
-		return "简体中文"
+		return "中文"
 	}
+}
+
+// FallbackLanguages 返回指定语言的查找顺序。
+func FallbackLanguages(lang Language) []Language {
+	lang = NormalizeLanguage(string(lang))
+	switch lang {
+	case LanguageEnglish:
+		return []Language{LanguageEnglish, LanguageZhHans}
+	case LanguageRussian:
+		return []Language{LanguageRussian, LanguageEnglish, LanguageZhHans}
+	case LanguageJapanese:
+		return []Language{LanguageJapanese, LanguageEnglish, LanguageZhHans}
+	default:
+		return []Language{LanguageZhHans}
+	}
+}
+
+// LocalizedValue 按目标语言、英文、简体中文的顺序读取本地化值。
+func LocalizedValue(values map[Language]string) string {
+	for _, lang := range FallbackLanguages(CurrentLanguage()) {
+		if value := values[lang]; value != "" {
+			return value
+		}
+	}
+	return ""
+}
+
+// UsesWordWrapping 表示该语言优先按空格分词换行。
+func (l Language) UsesWordWrapping() bool {
+	return l == LanguageEnglish || l == LanguageRussian
+}
+
+// UsesLatinVisualScale 表示该语言使用拉丁/西里尔字体的字号补偿。
+func (l Language) UsesLatinVisualScale() bool {
+	return l == LanguageEnglish || l == LanguageRussian
 }
 
 // NormalizeLanguage 将配置值修正为已支持语言。
@@ -85,9 +131,14 @@ func SetLanguage(value string) Language {
 }
 
 func setCurrentLanguage(lang Language) {
+	preferences := FallbackLanguages(lang)
+	tags := make([]string, len(preferences))
+	for idx := range preferences {
+		tags[idx] = string(preferences[idx])
+	}
 	currentState.Store(&localizerState{
 		language:  lang,
-		localizer: goi18n.NewLocalizer(bundle, string(lang), string(LanguageZhHans)),
+		localizer: goi18n.NewLocalizer(bundle, tags...),
 	})
 }
 

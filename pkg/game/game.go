@@ -217,12 +217,9 @@ func (g *Game) initMenuButtons() {
 	if g.objStates == nil {
 		g.objStates = &objStates{}
 	}
-	menuFont := font.Hang
-	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
-		menuFont = font.OpenSans
-	}
+	menuFont := font.LocalizedTitle(font.Hang)
 	btnFontSize := menuFontSize
-	if i18n.CurrentLanguage() != i18n.LanguageEnglish {
+	if !i18n.CurrentLanguage().UsesLatinVisualScale() {
 		// 中文字体在同等字号下视觉上明显小于拉���字体，适当放大
 		btnFontSize = 50
 	}

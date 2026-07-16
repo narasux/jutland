@@ -39,6 +39,11 @@ type reinforceUIPanel struct {
 	X, Y, W, H float64
 }
 
+type reinforceArchiveItem struct {
+	label string
+	value string
+}
+
 var (
 	reinforcePanelFill    = color.RGBA{R: 9, G: 24, B: 29, A: 212}
 	reinforcePreviewFill  = color.RGBA{R: 222, G: 218, B: 204, A: 238}
@@ -314,11 +319,9 @@ func (d *Drawer) drawReinforceShipInfo(
 		reinforceText,
 	)
 
+	tooltip := ""
 	if ship != nil {
-		items := []struct {
-			label string
-			value string
-		}{
+		items := []reinforceArchiveItem{
 			{
 				label: i18n.Text(i18n.MsgReinforceType),
 				value: i18n.Format(
@@ -342,15 +345,23 @@ func (d *Drawer) drawReinforceShipInfo(
 				),
 			},
 		}
+		textFont := font.LocalizedUI(font.Kai)
+		labelX, valueX, valueWidth := reinforceArchiveColumns(archiveCard, items, 20, textFont)
 		for idx, item := range items {
 			lineY := archiveCard.Y + 112 + float64(idx)*32
-			d.drawText(screen, item.label, archiveCard.X+24, lineY, 20, font.LocalizedUI(font.Kai), reinforceAccent)
-			d.drawText(screen, item.value, archiveCard.X+92, lineY, 20, font.LocalizedUI(font.Kai), reinforceText)
+			d.drawText(screen, item.label, labelX, lineY, 20, textFont, reinforceAccent)
+			display, truncated := truncateReinforceText(item.value, valueWidth, 20, textFont)
+			d.drawText(screen, display, valueX, lineY, 20, font.ForText(display, textFont), reinforceText)
+			if truncated && reinforceTextHovered(valueX, lineY, valueWidth, 20) {
+				tooltip = i18n.Format(
+					i18n.MsgLabelValue,
+					map[string]any{"Label": item.label, "Value": item.value},
+				)
+			}
 		}
 	}
 
 	drawn := 0
-	tooltip := ""
 	if ref := objRef.GetReference(selectedShipName); ref != nil {
 		textFont := font.LocalizedUI(font.Kai)
 		maxWidth := armamentCard.W - 48
@@ -378,6 +389,29 @@ func (d *Drawer) drawReinforceShipInfo(
 		}
 	}
 	return tooltip
+}
+
+func reinforceArchiveColumns(
+	card reinforceUIPanel,
+	items []reinforceArchiveItem,
+	fontSize float64,
+	textFont *text.GoTextFaceSource,
+) (labelX, valueX, valueWidth float64) {
+	const (
+		paddingX  = 24.0
+		columnGap = 16.0
+	)
+	labelX = card.X + paddingX
+	maxLabelWidth := 0.0
+	for _, item := range items {
+		maxLabelWidth = max(
+			maxLabelWidth,
+			layout.CalcTextWidth(item.label, fontSize, font.ForText(item.label, textFont)),
+		)
+	}
+	valueX = labelX + maxLabelWidth + columnGap
+	valueWidth = max(0, card.X+card.W-paddingX-valueX)
+	return labelX, valueX, valueWidth
 }
 
 // drawReinforceInfoCard 绘制增援控制台内统一样式的信息卡

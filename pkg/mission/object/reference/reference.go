@@ -41,13 +41,13 @@ var referencesByLanguage = map[i18n.Language]map[string]*Reference{}
 
 // GetReference 获取对象引用
 func GetReference(name string) *Reference {
-	lang := i18n.CurrentLanguage()
-	if references := referencesByLanguage[lang]; references != nil {
+	for _, lang := range i18n.FallbackLanguages(i18n.CurrentLanguage()) {
+		references := referencesByLanguage[lang]
 		if ref := references[name]; ref != nil {
 			return ref
 		}
 	}
-	return referencesByLanguage[i18n.LanguageZhHans][name]
+	return nil
 }
 
 // SetReference 设置对象引用（供初始化使用）

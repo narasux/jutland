@@ -190,12 +190,13 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 ]
 ```
 
-## 图鉴引用配置（references.json5 / references.en.json5）
+## 图鉴引用配置（references.json5 / references.LOCALE.json5）
 
-图鉴引用按语言拆分为两个同结构文件：`references.json5` 为简体中文，
-`references.en.json5` 为英文。两个文件必须保持完全一致的 `name` 集合和武装条目数量；
+图鉴引用按语言拆分为四个同结构文件：`references.json5` 为简体中文，
+`references.en.json5`、`references.ru.json5`、`references.ja.json5` 分别为英文、俄文和日文。
+四个文件必须保持完全一致的 `name` 集合和武装条目数量；
 `name`、武器数量、口径、型号及素材作者署名属于稳定数据，不应在翻译时改变。
-运行时会按当前界面语言读取对应条目，英文条目缺失时回退到简体中文。
+运行时会按“当前语言 → 英文 → 简体中文”的顺序读取对应条目。
 
 ```json5
 [
@@ -588,8 +589,11 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     name: "darwin",
     // 展示用名称
     displayName: "达尔文港",
-    // 英文展示用名称；英文界面使用，缺失时回退 displayName
+    // 英文展示用名称；英文界面使用
     displayNameEn: "Darwin Harbour",
+    // 俄文、日文展示用名称；缺失时按 ru/ja → en → zh-Hans 回退
+    displayNameRu: "Порт-Дарвин",
+    displayNameJa: "ダーウィン港",
     // 地图资源名称
     source: "darwin"
   }
@@ -604,7 +608,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   // 影响战舰、炮弹、鱼雷、飞机等移动/转向速度
   // 范围: 0.25 ~ 4.0，默认值: 1.0
   "speedMultiplier": 1.0,
-  // 游戏界面语言；当前正式启用 zh-Hans / en
+  // 游戏界面语言；当前正式启用 zh-Hans / en / ru / ja
   "language": "zh-Hans"
 }
 ```
@@ -618,8 +622,11 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     name: "default",
     // 展示用名称
     displayName: "默认",
-    // 英文展示用名称；英文界面使用，缺失时回退 displayName
+    // 英文展示用名称；英文界面使用
     displayNameEn: "Default",
+    // 俄文、日文展示用名称；缺失时按 ru/ja → en → zh-Hans 回退
+    displayNameRu: "По умолчанию",
+    displayNameJa: "デフォルト",
     // 初始资金
     initFunds: 10000,
     // 初始相机视角位置（需在地图范围内）
@@ -630,8 +637,11 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     maxShipCount: 5,
     // 关卡描述；中文界面使用
     description: "默认关卡",
-    // 英文关卡描述；英文界面使用，缺失时回退 description
+    // 英文关卡描述；英文界面使用
     descriptionEn: "Default mission",
+    // 俄文、日文关卡描述；缺失时按 ru/ja → en → zh-Hans 回退
+    descriptionRu: "Стандартная миссия",
+    descriptionJa: "デフォルト作戦",
     // 增援点信息
     initReinforcePoints: [
       {

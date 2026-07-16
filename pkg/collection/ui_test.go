@@ -2,10 +2,12 @@ package collection
 
 import (
 	"image"
+	"image/color"
 	"math"
 	"strings"
 	"testing"
 
+	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/narasux/jutland/pkg/i18n"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -29,6 +31,45 @@ func TestTruncateCollectionTextKeepsEllipsisWithinWidth(t *testing.T) {
 	display, truncated = truncateCollectionText("Torpedoes", maxWidth, fontSize, textFont)
 	require.False(t, truncated)
 	require.Equal(t, "Torpedoes", display)
+}
+
+func TestTruncateRussianShipNameKeepsEllipsisWithinArchiveCard(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	i18n.SetLanguage(string(i18n.LanguageRussian))
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	fontSize := 30.0
+	textFont := font.LocalizedUI(font.Hang)
+	maxWidth := estimateCollectionTextWidth("Лонг-Бич (вариант", fontSize)
+	display, truncated := truncateCollectionText(
+		"Лонг-Бич (вариант D)", maxWidth, fontSize, textFont,
+	)
+
+	require.True(t, truncated)
+	require.True(t, strings.HasSuffix(display, "…"))
+	require.LessOrEqual(t, estimateCollectionTextWidth(display, fontSize), maxWidth)
+}
+
+func TestDrawFittedRussianShipNameRegistersFullNameTooltip(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	i18n.SetLanguage(string(i18n.LanguageRussian))
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	const fullName = "Лонг-Бич (вариант D)"
+	ui := &CollectionUI{drawer: NewDrawer()}
+	fontSize := 30.0
+	textFont := font.LocalizedUI(font.Hang)
+	maxWidth := estimateCollectionTextWidth("Лонг-Бич (вариант", fontSize)
+	screen := ebiten.NewImage(800, 120)
+
+	ui.drawFittedText(
+		screen, fullName, 20, 20, maxWidth, fontSize, textFont, color.White,
+		image.Point{}, []string{fullName},
+	)
+
+	require.Len(t, ui.textHits, 1)
+	require.Equal(t, []string{fullName}, ui.textHits[0].Lines)
+	require.Positive(t, ui.textHits[0].Rect.Dx())
 }
 
 func TestFitCollectionLinesAddsEllipsisWhenRowsOverflow(t *testing.T) {

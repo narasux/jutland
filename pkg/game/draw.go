@@ -296,11 +296,11 @@ func wrapText(text string, maxWidth, fontSize float64) []string {
 func (d *Drawer) drawGameTitle(screen *ebiten.Image) {
 	textStr := i18n.Text(i18n.MsgGameTitle)
 	fontSize := float64(96)
-	if i18n.CurrentLanguage() != i18n.LanguageEnglish {
+	if !i18n.CurrentLanguage().UsesLatinVisualScale() {
 		// 中文字体��同等字号下视觉上偏小，放大补偿
 		fontSize = 130
 	}
-	titleFont := font.Hang
+	titleFont := font.LocalizedTitle(font.Hang)
 	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, titleFont)) / 2
 	posY := float64(screen.Bounds().Dy()) / 5 * 4
 	d.drawText(screen, textStr, posX, posY, fontSize, titleFont, colorx.White)

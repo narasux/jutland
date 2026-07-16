@@ -194,8 +194,8 @@ func (s *UI) buildUI() {
 	for idx := range languages {
 		languageEntries[idx] = languages[idx]
 	}
-	// 语言列表同时包含中英文，固定使用具备完整拉丁与汉字字形的字体。
-	languageFaceValue := text.Face(&text.GoTextFace{Source: font.Kai, Size: buttonFontSize})
+	// 语言列表固定使用能完整覆盖中文、拉丁、西里尔和日文字形的字体。
+	languageFaceValue := text.Face(&text.GoTextFace{Source: font.LanguageSelector(), Size: buttonFontSize})
 	languageCombo := newSettingsCombo(
 		languageEntries,
 		s.localLanguage,

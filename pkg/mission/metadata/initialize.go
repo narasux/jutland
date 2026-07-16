@@ -19,12 +19,16 @@ type rawMissionMetadata struct {
 	Name                string                          `json:"name"`
 	DisplayName         string                          `json:"displayName"`
 	DisplayNameEn       string                          `json:"displayNameEn"`
+	DisplayNameRu       string                          `json:"displayNameRu"`
+	DisplayNameJa       string                          `json:"displayNameJa"`
 	InitFunds           int64                           `json:"initFunds"`
 	InitCameraPos       [2]int                          `json:"initCameraPos"`
 	MapName             string                          `json:"mapName"`
 	MaxShipCount        int                             `json:"maxShipCount"`
 	Description         string                          `json:"description"`
 	DescriptionEn       string                          `json:"descriptionEn"`
+	DescriptionRu       string                          `json:"descriptionRu"`
+	DescriptionJa       string                          `json:"descriptionJa"`
 	InitShips           []rawInitShipMetadata           `json:"initShips"`
 	InitReinforcePoints []rawInitReinforcePointMetadata `json:"initReinforcePoints"`
 	InitOilPlatforms    []rawInitOilPlatformMetadata    `json:"initOilPlatforms"`
@@ -128,8 +132,10 @@ func init() {
 			Name:        md.Name,
 			DisplayName: md.DisplayName,
 			displayNames: map[i18n.Language]string{
-				i18n.LanguageZhHans:  md.DisplayName,
-				i18n.LanguageEnglish: md.DisplayNameEn,
+				i18n.LanguageZhHans:   md.DisplayName,
+				i18n.LanguageEnglish:  md.DisplayNameEn,
+				i18n.LanguageRussian:  md.DisplayNameRu,
+				i18n.LanguageJapanese: md.DisplayNameJa,
 			},
 			MaxShipCount:  md.MaxShipCount,
 			InitFunds:     md.InitFunds,
@@ -137,8 +143,10 @@ func init() {
 			MapCfg:        mapcfg.GetByName(md.MapName),
 			Description:   md.Description,
 			descriptions: map[i18n.Language]string{
-				i18n.LanguageZhHans:  md.Description,
-				i18n.LanguageEnglish: md.DescriptionEn,
+				i18n.LanguageZhHans:   md.Description,
+				i18n.LanguageEnglish:  md.DescriptionEn,
+				i18n.LanguageRussian:  md.DescriptionRu,
+				i18n.LanguageJapanese: md.DescriptionJa,
 			},
 			AllyShipCount:       allyShips,
 			EnemyShipCount:      enemyShips,

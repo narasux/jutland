@@ -1417,9 +1417,11 @@ func (c *CollectionUI) drawShipArchive(screen *ebiten.Image, ship *objUnit.Battl
 	scale := c.metrics.Scale
 	c.drawer.drawCollectionCard(screen, card, i18n.Text(i18n.MsgCollectionShipArchive), c.metrics)
 	ref := objRef.GetReference(ship.Name)
-	c.drawer.drawText(
-		screen, objUnit.GetShipDisplayName(ship.Name), card.X+20*scale, card.Y+54*scale,
-		c.metrics.ShipName, font.LocalizedUI(font.Hang), colorx.White,
+	shipName := objUnit.GetShipDisplayName(ship.Name)
+	c.drawFittedText(
+		screen, shipName, card.X+20*scale, card.Y+54*scale,
+		card.W-40*scale, c.metrics.ShipName, font.LocalizedUI(font.Hang), colorx.White,
+		image.Point{}, []string{shipName},
 	)
 	if position := c.currentShipPositionLabel(); position != "" {
 		c.drawer.drawText(
@@ -1692,7 +1694,7 @@ func (c *CollectionUI) drawShipSource(screen *ebiten.Image, ship *objUnit.Battle
 		return
 	}
 	fontSize := c.metrics.History
-	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
+	if i18n.CurrentLanguage().UsesLatinVisualScale() {
 		fontSize *= 0.82
 	}
 	lineHeight := fontSize * 1.35

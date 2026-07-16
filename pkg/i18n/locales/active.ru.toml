@@ -1,0 +1,301 @@
+[GameTitle]
+other = "Jutland: Морское сражение"
+[GameCredits]
+other = "Семь футов под килем!"
+[MenuMissionSelect]
+other = "Выбор миссии"
+[MenuCollection]
+other = "Коллекция"
+[MenuSettings]
+other = "Настройки"
+[MenuExit]
+other = "Выход"
+[Loading]
+other = "Загрузка..."
+[MissionStarted]
+other = "Миссия началась!"
+[MissionSuccess]
+other = "Миссия выполнена!"
+[MissionFailed]
+other = "Миссия провалена..."
+[MissionStart]
+other = "Начать миссию"
+[Back]
+other = "Назад"
+[MissionStats]
+other = "Начальные средства {{.Funds}}  |  Лимит флота {{.ShipLimit}}  |  Нефтяные платформы {{.OilPlatforms}}"
+[MissionBattleStats]
+other = "Союзники: {{.AllyShips}}  противник: {{.EnemyShips}}  |  Точки подкрепления: {{.AllyPoints}} / {{.EnemyPoints}}"
+[MissionPaused]
+other = "Пауза"
+[MissionDebugPauseHint]
+other = "Игра приостановлена | [Q] Выход  [Esc] Продолжить"
+[MissionResume]
+other = "Продолжить"
+[MissionAbandon]
+other = "Прервать"
+[MissionConfirmAbandon]
+other = "Прервать эту миссию?"
+[Confirm]
+other = "Подтвердить"
+[SettingsTitle]
+other = "Настройки игры"
+[SettingsSpeed]
+other = "Общий множитель скорости"
+[SettingsLanguage]
+other = "Язык"
+[SettingsSave]
+other = "Сохранить"
+[SettingsCancel]
+other = "Отмена"
+[SpeedVerySlow]
+other = "Очень медленно"
+[SpeedSlow]
+other = "Медленно"
+[SpeedNormal]
+other = "Нормально"
+[SpeedFast]
+other = "Быстро"
+[SpeedVeryFast]
+other = "Очень быстро"
+[NationAll]
+other = "Все"
+[NationChina]
+other = "Китай"
+[NationUnitedStates]
+other = "США"
+[NationJapan]
+other = "Япония"
+[NationGermany]
+other = "Германия"
+[NationUnitedKingdom]
+other = "Великобритания"
+[NationSovietUnion]
+other = "Советский Союз"
+[NationSpecial]
+other = "Особые"
+[ShipTypeDefault]
+other = "Прочие"
+[ShipTypeCarrier]
+other = "Авианосец"
+[ShipTypeBattleship]
+other = "Линкор"
+[ShipTypeCruiser]
+other = "Крейсер"
+[ShipTypeDestroyer]
+other = "Эсминец"
+[ShipTypeFrigate]
+other = "Фрегат"
+[ShipTypeHospital]
+other = "Госпитальное судно"
+[ShipTypeCargo]
+other = "Грузовое судно"
+[ShipTypeTorpedoBoat]
+other = "Торпедный катер"
+[PlaneTypeFighter]
+other = "Истребитель"
+[PlaneTypeDiveBomber]
+other = "Пикирующий бомбардировщик"
+[PlaneTypeTorpedoBomber]
+other = "Торпедоносец"
+[Unknown]
+other = "Неизвестно"
+[CollectionAll]
+other = "Все"
+[CollectionSpecial]
+other = "Особые"
+[CollectionAuxiliary]
+other = "Вспомогательные"
+[CollectionShip]
+other = "Корабли"
+[CollectionPlane]
+other = "Авиация"
+[CollectionNation]
+other = "Страна:"
+[CollectionShipClass]
+other = "Класс: {{.Value}} ↓"
+[CollectionPlaneType]
+other = "Тип: {{.Value}} ↓"
+[CollectionShipName]
+other = "Корабль: {{.Value}} ↓"
+[CollectionPlaneCount]
+one = "Всего {{.Count}} самолёт"
+few = "Всего {{.Count}} самолёта"
+many = "Всего {{.Count}} самолётов"
+other = "Всего {{.Count}} самолёта"
+[CollectionNationValue]
+other = "Страна: {{.Value}} ↓"
+[CollectionNoMatchingShip]
+other = "Нет кораблей, соответствующих фильтрам"
+[CollectionNoMatchingPlane]
+other = "Нет самолётов, соответствующих фильтрам"
+[CollectionShipArchive]
+other = "Архив кораблей"
+[CollectionNationLabel]
+other = "Страна"
+[CollectionTypeLabel]
+other = "Тип"
+[CollectionYear]
+other = "Год"
+[CollectionTonnage]
+other = "Водоизмещение"
+[CollectionSpeed]
+other = "Скорость"
+[CollectionCost]
+other = "Стоимость"
+[CollectionHorizontalDR]
+other = "Горизонтальная защита"
+[CollectionVerticalDR]
+other = "Вертикальная защита"
+[CollectionArmaments]
+other = "Вооружение"
+[CollectionNone]
+other = "Нет"
+[CollectionCombat]
+other = "Вооружение и боевые возможности"
+[CollectionTotalPower]
+other = "Общая мощь"
+[CollectionRelativeNote]
+other = "Относительная мощь (нормирована по P95 текущей выборки)"
+[CollectionHistorySource]
+other = "История и источники"
+[CollectionNoHistory]
+other = "Исторические сведения отсутствуют"
+[CollectionAssetAuthor]
+other = "Автор изображения: {{.Author}}"
+[CollectionBasicData]
+other = "Основные данные"
+[CollectionDurability]
+other = "Прочность {{.Value}}"
+[CollectionDamageReduction]
+other = "Снижение урона {{.Value}}%"
+[CollectionRange]
+other = "Дальность {{.Value}} км"
+[CollectionPlaneSpeed]
+other = "Скорость {{.Value}} км/ч"
+[CollectionWeaponConfig]
+other = "Состав вооружения"
+[CollectionCombatAbility]
+other = "Боевые возможности"
+[CollectionFormationNote]
+other = "Стандартная группа: {{.Count}} ед. · Относительная мощь нормирована по P95"
+[CollectionFormationPower]
+other = "Мощь группы ({{.Count}} ед.)"
+[WeaponGun]
+other = "Орудие"
+[WeaponBomb]
+other = "Бомба"
+[WeaponTorpedo]
+other = "Торпеда"
+[WeaponRocket]
+other = "Ракета"
+[RadarAntiShip]
+other = "Против кораблей"
+[RadarAntiAir]
+other = "ПВО"
+[RadarSurvival]
+other = "Живучесть"
+[RadarMobility]
+other = "Манёвренность"
+[RadarProjection]
+other = "Дальность действия"
+[RadarBurst]
+other = "Залп"
+[RadarFormationScope]
+other = "Показатели стандартной группы из {{.Count}} ед."
+[RadarAbilityValue]
+other = "Значение: {{.Value}}"
+[RadarRelativePosition]
+other = "Относительная позиция: {{.Percent}}%"
+[RadarAntiShipDPS]
+other = "Эффективный урон по кораблям: {{.Value}}/с"
+[RadarAntiAirDPS]
+other = "Эффективный урон ПВО: {{.Value}}/с"
+[RadarTargetingNote]
+other = "Только для оценки архива; не влияет на выбор цели в бою"
+[RadarEffectiveHP]
+other = "Эффективная прочность: {{.Value}}"
+[RadarMobilityNote]
+other = "Рассчитано по скорости, поворотливости и ускорению"
+[RadarCombatRadius]
+other = "Боевой радиус: {{.Value}} км"
+[RadarProjectionDistance]
+other = "Предельная дальность действия: {{.Value}} км"
+[RadarBurstDamage]
+other = "Ожидаемый урон первого залпа: {{.Value}}"
+[RadarMainContributions]
+other = "Основной вклад:"
+[RadarSubjectPower]
+other = "{{.Name}} · Общая мощь"
+[RadarSubjectDimension]
+other = "{{.Name}} · {{.Dimension}}"
+[RadarContribution]
+other = "  {{.Name}}  {{.Percent}}%"
+[RadarOverall]
+other = "Итог"
+[RadarHull]
+other = "Корпус"
+[RadarAviation]
+other = "Авиация"
+[SidebarFunds]
+other = "Средства: {{.Funds}}"
+[SidebarFleets]
+other = "Союзный флот: {{.Ally}}    Вражеский флот: {{.Enemy}}"
+[SidebarAllyFleet]
+other = "Союзный флот: {{.Count}}"
+[SidebarEnemyFleet]
+other = "Вражеский флот: {{.Count}}"
+[SidebarShowState]
+other = "Показывать состояние"
+[SidebarDamageNumbers]
+other = "Числа урона"
+[MapSelf]
+other = "Союзники"
+[MapEnemy]
+other = "Противник"
+[MapFleetCount]
+other = "{{.Side}} ({{.Count}})"
+[RallyLandBlocked]
+other = "Нельзя назначить точку сбора на суше"
+[ReinforceShipArchive]
+other = "Архив кораблей"
+[ReinforceWeaponConfig]
+other = "Состав вооружения"
+[ReinforceType]
+other = "Тип"
+[ReinforceHP]
+other = "Прочность"
+[ReinforceSpeed]
+other = "Скорость"
+[ReinforceCost]
+other = "Стоимость"
+[ReinforceQueue]
+other = "Очередь подкреплений"
+[ReinforceStandby]
+other = "Ожидание"
+[ReinforceControl]
+other = "Управление"
+[ReinforceCurrentFunds]
+other = "Текущие средства"
+[ReinforceTipPoint]
+other = "↑ ↓ Точки подкрепления"
+[ReinforceTipShip]
+other = "← → Корабли"
+[ReinforceTipSummon]
+other = "Enter Вызвать"
+[ReinforceTipCancel]
+other = "Backspace Отменить"
+[ReinforceTipRally]
+other = "Щелчок по карте: точка сбора"
+[ValueKnots]
+other = "{{.Value}} уз."
+[ValueCost]
+other = "${{.Funds}} / {{.Seconds}}с"
+[TypeWithAbbr]
+other = "{{.Type}} ({{.Abbr}})"
+[LabelValue]
+other = "{{.Label}}: {{.Value}}"
+[ItemCount]
+other = "{{.Name}} × {{.Count}}"
+[TypeSlash]
+other = "{{.Abbr}} / {{.Type}}"

@@ -55,7 +55,7 @@ type GameSettings struct {
 	// SpeedMultiplier 全局速度倍率，影响战舰、炮弹、鱼雷、飞机等移动速度
 	// 默认值为 1.0，0.25 ~ 4.0
 	SpeedMultiplier float64 `json:"speedMultiplier"`
-	// Language 游戏界面语言，当前正式启用 zh-Hans / en。
+	// Language 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja。
 	Language string `json:"language"`
 }
 
@@ -79,7 +79,7 @@ func (s *GameSettings) validate() {
 	// 限制范围 0.25 ~ 4.0
 	s.SpeedMultiplier = math.Max(0.25, math.Min(4.0, s.SpeedMultiplier))
 	switch s.Language {
-	case "zh-Hans", "en":
+	case "zh-Hans", "en", "ru", "ja":
 	default:
 		s.Language = "zh-Hans"
 	}
@@ -154,7 +154,7 @@ func SaveGameSettings() error {
 			"影响战舰、炮弹、鱼雷、飞机等移动/转向速度\n",
 	)
 	_, _ = file.WriteString("// 范围: 0.25 ~ 4.0，默认值: 1.0\n\n")
-	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en\n\n")
+	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

@@ -1,0 +1,6151 @@
+[
+  {
+    "name": "duck",
+    "displayName": "ラバーダック",
+    "type": "バス玩具",
+    "armaments": [
+      {
+        "label": "レールガン",
+        "value": "1x1 1024mm"
+      },
+      {
+        "label": "八連装主砲",
+        "value": "1x8 406mm"
+      },
+      {
+        "label": "副砲",
+        "value": "1x15 155mm"
+      },
+      {
+        "label": "対空砲",
+        "value": "1x30 37mm"
+      },
+      {
+        "label": "レーザー",
+        "value": "1x1 50mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "1x15 610mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "1x20 533mm"
+      },
+      {
+        "label": "艦載機",
+        "value": "F x12"
+      },
+      {
+        "label": "艦載機",
+        "value": "B x12"
+      },
+      {
+        "label": "艦載機",
+        "value": "A x12"
+      }
+    ],
+    "description": "ラバーダックは、ゴムやプラスチックで作られる中空の軽い浴用玩具である。本作では汎用兵器試験台として使われ、内部から航空機が発進するのも仕様である。最大の脅威は、赤い弾体を撃ち出す後方指向のレールガン。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — ラバーダック",
+        "url": "https://en.wikipedia.org/wiki/Rubber%20duck"
+      }
+    ]
+  },
+  {
+    "name": "waterdrop",
+    "displayName": "水滴",
+    "type": "宇宙探査機",
+    "armaments": [
+      {
+        "label": "攻撃方法",
+        "value": "体当たり"
+      }
+    ],
+    "description": "「水滴」は、劉慈欣のSF小説『三体』に登場する異星文明の探査機である。完全に滑らかな超高強度の外殻は電磁波を反射し、絶対零度に近い温度を保つ。終末決戦では、体当たりを繰り返して人類の宇宙艦隊の大半を単独で壊滅させた。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 水滴",
+        "url": "https://en.wikipedia.org/wiki/The%20Three-Body%20Problem%20%28novel%29"
+      }
+    ]
+  },
+  {
+    "name": "molamola",
+    "displayName": "マンボウ",
+    "type": "標的",
+    "armaments": [
+      {
+        "label": "兵装",
+        "value": "なし"
+      }
+    ],
+    "description": "マンボウ（Mola mola）は、世界の温帯・熱帯海域に生息する大型の外洋性魚類で、現生硬骨魚の中でも特に重い種の一つである。通常の尾を欠いた魚の頭部のような、左右に平たい独特の体形を持つ。本作では異例に頑丈な標的として登場する。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — マンボウ",
+        "url": "https://en.wikipedia.org/wiki/Ocean%20sunfish"
+      }
+    ]
+  },
+  {
+    "name": "liberty",
+    "displayName": "リバティ船",
+    "type": "貨物船",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "1x1 127mm/25"
+      },
+      {
+        "label": "両用砲",
+        "value": "1x1 76mm/50"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x1 20mm/70"
+      }
+    ],
+    "description": "リバティ船は、第二次世界大戦中に米国が規格化して大量建造した貨物船である。短期間かつ低コストで建造できるよう設計され、Uボートに失われた商船を補い、レンドリースを通じて連合国の補給を支えた。1941～1945年に米国内18造船所で計2,710隻が完成した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — リバティ船",
+        "url": "https://en.wikipedia.org/wiki/Liberty%20ship"
+      }
+    ]
+  },
+  {
+    "name": "saratoga",
+    "displayName": "サラトガ",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "12x1 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "11x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "20x2 20mm/70"
+      },
+      {
+        "label": "戦闘機",
+        "value": "36× F4F-3"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "40× SBD-3"
+      },
+      {
+        "label": "雷撃機",
+        "value": "20× TBD-1"
+      }
+    ],
+    "description": "USS サラトガ（CV-3）はレキシントン級巡洋戦艦として起工され、ワシントン海軍軍縮条約により航空母艦へ改造された。太平洋戦争を通じて戦い、複数回の雷撃にも生き残った。戦後はクロスロード作戦の標的艦となり、水中核実験ベーカーで沈没した。",
+    "author": "midnike",
+    "links": [
+      {
+        "name": "USN Aircraft Carrier LEXINGTON",
+        "url": "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-LEXINGTON-CV-2-563330163"
+      },
+      {
+        "name": "ウィキペディア — サラトガ",
+        "url": "https://en.wikipedia.org/wiki/USS%20Saratoga%20%28CV-3%29"
+      }
+    ]
+  },
+  {
+    "name": "yorktown",
+    "displayName": "ヨークタウン",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x1 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "32x2 20mm/70"
+      },
+      {
+        "label": "戦闘機",
+        "value": "36× F4F-3"
+      },
+      {
+        "label": "雷撃機",
+        "value": "20× TBD-1"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "40× SBD-3"
+      }
+    ],
+    "description": "USS ヨークタウン（CV-5）はヨークタウン級航空母艦のネームシップである。珊瑚海海戦で損傷したものの応急修理を受け、1942年6月のミッドウェー海戦に参加した。日本軍機と潜水艦の雷撃で復旧不能となり、6月7日に沈没した。",
+    "author": "midnike",
+    "links": [
+      {
+        "name": "USN Aircraft Carrier YORKTOWN",
+        "url": "https://www.deviantart.com/midnike/art/USN-Aircraft-Carrier-YORKTOWN-CV-5-563330656"
+      },
+      {
+        "name": "ウィキペディア — ヨークタウン",
+        "url": "https://en.wikipedia.org/wiki/USS%20Yorktown%20%28CV-5%29"
+      }
+    ]
+  },
+  {
+    "name": "essex",
+    "displayName": "エセックス",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x2 + 4x1 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "42x1 20mm/70"
+      },
+      {
+        "label": "戦闘機",
+        "value": "36× F6F-3"
+      },
+      {
+        "label": "雷撃機",
+        "value": "18× TBF-1"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "36× SB2C-4"
+      }
+    ],
+    "description": "USS エセックス（CV-9）はエセックス級航空母艦のネームシップで、1942年に就役し翌年から太平洋で作戦に参加した。同級は大規模な航空隊と強力な対空兵装を備え、米海軍の高速空母部隊の中核となった。本作の搭載機はF6F-3、TBF-1、SB2C-4で構成される。",
+    "author": "Charybdis",
+    "links": [
+      {
+        "name": "Shipbucket — USS Essex 1943",
+        "url": "https://www.shipbucket.com/drawings/7230"
+      },
+      {
+        "name": "ウィキペディア — エセックス",
+        "url": "https://en.wikipedia.org/wiki/USS%20Essex%20%28CV-9%29"
+      }
+    ]
+  },
+  {
+    "name": "princeton",
+    "displayName": "プリンストン",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "対空砲",
+        "value": "2x4 + 9x2 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "18x1 20mm/70"
+      },
+      {
+        "label": "戦闘機",
+        "value": "25× F6F-3"
+      },
+      {
+        "label": "雷撃機",
+        "value": "9× TBF-1"
+      }
+    ],
+    "description": "USS プリンストン（CVL-23）は、クリーブランド級軽巡洋艦の船体から改造されたインディペンデンス級軽空母である。1943年に就役し、中部太平洋で高速空母部隊と行動した。1944年10月24日、レイテ沖海戦中の日本軍機の攻撃で失われた。",
+    "author": "Ian Roberts",
+    "links": [
+      {
+        "name": "Shipbucket — USS Princeton CVL-23 (October 1944)",
+        "url": "https://www.shipbucket.com/drawings/8065"
+      },
+      {
+        "name": "ウィキペディア — プリンストン",
+        "url": "https://en.wikipedia.org/wiki/USS_Princeton_%28CVL-23%29"
+      }
+    ]
+  },
+  {
+    "name": "card",
+    "displayName": "カード",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "2x1 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x2 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "20x1 20mm/70"
+      },
+      {
+        "label": "戦闘機",
+        "value": "12× F4F-3"
+      },
+      {
+        "label": "雷撃機",
+        "value": "12× TBF-1"
+      }
+    ],
+    "description": "USS カード（CVE-11）はボーグ級護衛空母で、1942年に就役した。1943年には第21.14任務群の旗艦として北大西洋の対潜掃討作戦に従事し、艦載機と護衛艦を組み合わせたハンター・キラー部隊でドイツ潜水艦を追跡した。",
+    "author": "Craig Hoefer, Gollevainen, Ultraking101",
+    "links": [
+      {
+        "name": "Shipbucket — USS Card CVE-11 (March 1943)",
+        "url": "https://www.shipbucket.com/drawings/9260"
+      },
+      {
+        "name": "ウィキペディア — カード",
+        "url": "https://en.wikipedia.org/wiki/USS_Card"
+      }
+    ]
+  },
+  {
+    "name": "langley",
+    "displayName": "ラングレー",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "砲",
+        "value": "4×1 102 mm/50 Mk 9"
+      },
+      {
+        "label": "戦闘機",
+        "value": "8× F2A-3"
+      },
+      {
+        "label": "偵察・急降下爆撃機",
+        "value": "8× SBD-3"
+      },
+      {
+        "label": "雷撃機",
+        "value": "6× TBD-1"
+      }
+    ],
+    "description": "USS ラングレー（CV-1）は給炭艦ジュピターから改造され、1922年に米海軍初の航空母艦として就役した。初期の艦上航空実験と搭乗員訓練を担い、本作ではF2A-3を8機、SBD-3を8機、TBD-1を6機搭載する。1937年に水上機母艦となり、1942年の日本軍空襲後に自沈処分された。",
+    "author": "Charybdis",
+    "links": [
+      {
+        "name": "Shipbucket — USS Langley, CV-1, 1930",
+        "url": "https://www.shipbucket.com/drawings/7220"
+      },
+      {
+        "name": "ウィキペディア — ラングレー",
+        "url": "https://en.wikipedia.org/wiki/USS_Langley_(CV-1)"
+      }
+    ]
+  },
+  {
+    "name": "wolverine",
+    "displayName": "ウルヴァリン",
+    "type": "練習空母",
+    "armaments": [
+      {
+        "label": "兵装",
+        "value": "なし"
+      },
+      {
+        "label": "練習戦闘機",
+        "value": "3× F6F-3"
+      },
+      {
+        "label": "練習急降下爆撃機",
+        "value": "3× SBD-3"
+      },
+      {
+        "label": "練習雷撃機",
+        "value": "2× TBF-1"
+      }
+    ],
+    "description": "USS ウルヴァリン（IX-64）は、五大湖の外輪客船シーアンドビーを改造した淡水上の空母着艦訓練艦である。装甲、格納庫、昇降機、兵装を持たず、訓練機は毎日陸上基地から飛来して発着艦訓練を行った。",
+    "author": "Corp",
+    "links": [
+      {
+        "name": "Shipbucket — IX-64 Wolverine as designed",
+        "url": "https://www.shipbucket.com/drawings/8613"
+      },
+      {
+        "name": "ウィキペディア — ウルヴァリン",
+        "url": "https://en.wikipedia.org/wiki/USS_Wolverine_(IX-64)"
+      }
+    ]
+  },
+  {
+    "name": "hakuryu",
+    "displayName": "白龍",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x2 100mm/65 九八式"
+      },
+      {
+        "label": "対空砲",
+        "value": "22x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× A6M2 Zero Model 21"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "12× D3A"
+      },
+      {
+        "label": "攻撃機",
+        "value": "24× B7A2 Ryūsei"
+      }
+    ],
+    "description": "白龍は、日本海軍の戦時G-15空母案を大型化した発展型として本作が与えた名称である。大鳳の装甲飛行甲板と防護された航空施設を基礎に、船体と搭載航空隊を拡大した構想となっている。日本の空母建造計画が崩壊するまでに、この設計の艦が起工されることはなかった。",
+    "author": "BB1987",
+    "links": [
+      {
+        "name": "G-15 Kai-Taihō as planned",
+        "url": "https://www.shipbucket.com/drawings/4338"
+      },
+      {
+        "name": "ウィキペディア — 白龍",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Taih%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "taiho",
+    "displayName": "大鳳",
+    "type": "装甲航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "6x2 100mm/65 九八式"
+      },
+      {
+        "label": "対空砲",
+        "value": "17x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× A6M2 Zero Model 21"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "12× D3A"
+      },
+      {
+        "label": "雷撃機",
+        "value": "20× B6N2 Tenzan"
+      }
+    ],
+    "description": "大鳳は、日本海軍で初めて装甲飛行甲板を採用した艦隊空母である。1944年3月に竣工し、第一機動艦隊に加わってマリアナ沖海戦に参加した。USS アルバコアの魚雷で航空燃料系統が損傷し、滞留した気化燃料が爆発して6月19日に沈没した。",
+    "author": "BB1987",
+    "links": [
+      {
+        "name": "Shipbucket - IJN Taiho (1944)",
+        "url": "https://www.shipbucket.com/drawings/4329"
+      },
+      {
+        "name": "ウィキペディア — 大鳳",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Taih%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "shinano",
+    "displayName": "信濃",
+    "type": "重装甲航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x2 100mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "36x3, 3x2, 12x1 25mm/60 九六式"
+      },
+      {
+        "label": "対空ロケット",
+        "value": "12x21 12cm"
+      },
+      {
+        "label": "戦闘機",
+        "value": "32× A7M2 Reppū"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "16× D4Y3 Suisei"
+      },
+      {
+        "label": "攻撃機",
+        "value": "32× B7A2 Ryūsei"
+      },
+      {
+        "label": "偵察機",
+        "value": "4× C6N1 Saiun"
+      }
+    ],
+    "description": "信濃は、未完成だった大和型戦艦の三番艦を重防御の航空母艦へ改造した艦である。艤装未完のまま1944年11月に横須賀を出港したが、USS アーチャーフィッシュの雷撃を受けた。水密性と応急処置の不備が被害を拡大し、翌朝転覆・沈没した。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "IJN Shinano Carrier as Designed",
+        "url": "https://www.deviantart.com/tzoli/art/IJN-Shinano-Carrier-as-Designed-858298562"
+      },
+      {
+        "name": "ウィキペディア — 信濃",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Shinano"
+      }
+    ]
+  },
+  {
+    "name": "akagi",
+    "displayName": "赤城",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "6x1 200mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x2 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "28× A6M2 Zero Model 21"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "28× D3A"
+      },
+      {
+        "label": "雷撃機",
+        "value": "36× B5N2"
+      }
+    ],
+    "description": "赤城は天城型巡洋戦艦として起工され、軍縮条約により航空母艦へ改造された。当初の三段飛行甲板から全通式一段甲板へ大改装され、第一航空艦隊の中核を担った。ミッドウェー海戦で米軍急降下爆撃機の攻撃を受け、致命的損傷を被った。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "IJN Aircraft Carrier AKAGI",
+        "url": "https://www.deviantart.com/midnike/art/IJN-Aircraft-Carrier-AKAGI-563294372"
+      },
+      {
+        "name": "ウィキペディア — 赤城",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Akagi"
+      }
+    ]
+  },
+  {
+    "name": "kaga",
+    "displayName": "加賀",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "10x1 200mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "16x2 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "48× B5N2"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "24× D3A"
+      }
+    ],
+    "description": "加賀は土佐型戦艦として建造が始まり、ワシントン海軍軍縮条約後に航空母艦へ改造された。大改装で多段式飛行甲板を全通式一段甲板へ改め、日本海軍の主力空母となった。真珠湾攻撃に参加したのち、ミッドウェー海戦で爆撃を受けて失われた。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "IJN Aircraft Carrier KAGA",
+        "url": "https://www.deviantart.com/midnike/art/IJN-Aircraft-Carrier-KAGA-563294872"
+      },
+      {
+        "name": "ウィキペディア — 加賀",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Kaga"
+      }
+    ]
+  },
+  {
+    "name": "shokaku",
+    "displayName": "翔鶴",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "16x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "20× A6M2 Zero Model 21"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "32× D3A"
+      },
+      {
+        "label": "雷撃機",
+        "value": "32× B6N2 Tenzan"
+      }
+    ],
+    "description": "翔鶴は、太平洋戦争直前に竣工した高速かつ高性能な翔鶴型艦隊空母のネームシップである。瑞鶴とともに真珠湾攻撃、珊瑚海海戦、南太平洋海戦を戦った。1944年6月のマリアナ沖海戦でUSS カヴァラの雷撃を受け、沈没した。",
+    "author": "PomboCZ",
+    "links": [
+      {
+        "name": "Shipbucket - Shōkaku 1944-06",
+        "url": "https://www.shipbucket.com/drawings/4323"
+      },
+      {
+        "name": "ウィキペディア — 翔鶴",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Sh%C5%8Dkaku"
+      }
+    ]
+  },
+  {
+    "name": "soryu",
+    "displayName": "蒼龍",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "6x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "13x2 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "21× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "21× B5N2"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "21× D3A"
+      }
+    ],
+    "description": "蒼龍は1937年に竣工した高速艦隊空母で、当初から空母として設計された。真珠湾攻撃やインド洋作戦に参加したが、ミッドウェー海戦で米軍SBDドーントレスの爆撃を受けた。燃料と兵装を搭載した艦載機が誘爆し、制御不能となった。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 蒼龍",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20S%C5%8Dry%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "hiryu",
+    "displayName": "飛龍",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "6x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× D3A"
+      },
+      {
+        "label": "雷撃機",
+        "value": "24× B5N2"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "24× D3A"
+      }
+    ],
+    "description": "飛龍は蒼龍の発展型で、同艦と第二航空戦隊を編成した。ミッドウェー海戦では飛龍の航空隊が二度の攻撃でUSS ヨークタウンを行動不能にした。その後、米軍急降下爆撃機の攻撃で炎上し、乗員退去後に自沈処分された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 飛龍",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiry%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "hiyo",
+    "displayName": "飛鷹",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "15× A6M2 Zero Model 21"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "20× D3A"
+      },
+      {
+        "label": "雷撃機",
+        "value": "23× B5N2"
+      }
+    ],
+    "description": "飛鷹は客船出雲丸として建造中に、艦隊支援用の航空母艦へ改造された。大きな搭載力を持つ一方、商船由来の機関により速力と信頼性で劣った。機関故障や雷撃損傷を経験したのち、1944年6月のマリアナ沖海戦で航空攻撃を受け沈没した。",
+    "author": "PomboCZ",
+    "links": [
+      {
+        "name": "Shipbucket - Hiyō 1943",
+        "url": "https://www.shipbucket.com/drawings/4314"
+      },
+      {
+        "name": "ウィキペディア — 飛鷹",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiy%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "unryu",
+    "displayName": "雲龍",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "21x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空ロケット",
+        "value": "6x28 120mm 五式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× A7M2 Reppū"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "6× D4Y3 Suisei"
+      },
+      {
+        "label": "雷撃機",
+        "value": "24× B6N2 Tenzan"
+      }
+    ],
+    "description": "雲龍は、飛龍を基礎に量産向けの簡略化を施した戦時空母級のネームシップである。1944年8月に竣工したが、搭乗員と航空機の不足から艦隊空母として実戦運用されなかった。同年12月、桜花をフィリピンへ輸送中にUSS レッドフィッシュの雷撃で沈没した。",
+    "author": "BB1987, Smokey455",
+    "links": [
+      {
+        "name": "DeviantArt - Unryu-class aircraft carrier",
+        "url": "https://www.deviantart.com/smokey445/art/Unryu-class-aircraft-carrier-974694860"
+      },
+      {
+        "name": "ウィキペディア — 雲龍",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Unry%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "ryujo",
+    "displayName": "龍驤",
+    "type": "軽空母",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x2 25mm/60 九六式"
+      },
+      {
+        "label": "対空機銃",
+        "value": "6x4 13mm 九三式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "18× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "24× B5N2"
+      }
+    ],
+    "description": "龍驤は、戦間期の軍縮条約の制限を回避する目的で建造された軽空母である。狭い船体に二段格納庫を載せたため復原性に問題があり、改装を要した。中国方面と太平洋戦争初期に活動したのち、第二次ソロモン海戦で米空母機に撃沈された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 龍驤",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Ry%C5%ABj%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "shoho",
+    "displayName": "祥鳳",
+    "type": "軽空母",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "21× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "9× B5N2"
+      }
+    ],
+    "description": "祥鳳は潜水母艦剣埼として建造され、のちに軽空母へ改造された。1942年1月に空母として就役し、ポートモレスビー攻略部隊を支援した。珊瑚海海戦でUSS レキシントンとヨークタウンの艦載機に集中攻撃され、日本海軍が同戦争で失った最初の空母となった。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 祥鳳",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Sh%C5%8Dh%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "chitose",
+    "displayName": "千歳",
+    "type": "軽空母",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "21× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "9× B5N2"
+      }
+    ],
+    "description": "千歳は、将来の空母改造を考慮して建造された水上機母艦である。ミッドウェー海戦後に軽空母へ改造され、マリアナ沖海戦を経てレイテ沖海戦では囮部隊に加わった。1944年10月25日、エンガノ岬沖で米空母機に撃沈された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 千歳",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Chitose"
+      }
+    ]
+  },
+  {
+    "name": "taiyo",
+    "displayName": "大鷹",
+    "type": "護衛空母",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x1 120mm 四年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空機銃",
+        "value": "10x1 13mm 九三式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "18× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "9× B5N2"
+      }
+    ],
+    "description": "大鷹は客船春日丸から改造された護衛空母である。速力が低く艦隊作戦には適さなかったため、主に搭乗員訓練、航空機輸送、船団護衛に用いられた。複数回の潜水艦攻撃を生き延びたが、1944年8月にルソン島西方でUSS ラッシャーの雷撃を受け、航空燃料の爆発で沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 大鷹",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Taiy%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "shinyo",
+    "displayName": "神鷹",
+    "type": "護衛空母",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "18× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "9× B5N2"
+      }
+    ],
+    "description": "神鷹は、欧州戦争のため日本に足止めされたドイツ客船シャルンホルストを改造した護衛空母である。1943年末に就役し、主に船団護衛と訓練任務に従事した。1944年11月、USS スペードフィッシュの雷撃で航空燃料が爆発し、沈没した。",
+    "author": "BB1987",
+    "links": [
+      {
+        "name": "Shipbucket - Shin'yō 1943",
+        "url": "https://www.shipbucket.com/drawings/4333"
+      },
+      {
+        "name": "ウィキペディア — 神鷹",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Shin%27y%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "hosho",
+    "displayName": "鳳翔",
+    "type": "軽空母",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x1 140mm/50 三年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x3 25mm/60 九六式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "8× A6M2 Zero Model 21"
+      },
+      {
+        "label": "雷撃機",
+        "value": "6× B5N2"
+      }
+    ],
+    "description": "鳳翔は、最初から航空母艦として設計され完成した世界初の艦である。その実験的な構造は、戦間期の日本海軍が空母運用教義と航空作業手順を確立するうえで重要な役割を果たした。太平洋戦争時には旧式化して主に練習空母として使われ、戦後は復員輸送にも従事した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 鳳翔",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20H%C5%8Dsh%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "implacable",
+    "displayName": "インプラカブル",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x2 114mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "5x8 40mm/39 2-pounders"
+      },
+      {
+        "label": "対空砲",
+        "value": "7x1 40mm/60 Bofors"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x1 20mm/70 Oerlikons"
+      },
+      {
+        "label": "戦闘機",
+        "value": "32× Vought F4U-4 Corsair"
+      },
+      {
+        "label": "雷撃機",
+        "value": "32× Grumman Avenger Mk I"
+      },
+      {
+        "label": "攻撃機",
+        "value": "16× Fairey Barracuda Mk II"
+      }
+    ],
+    "description": "HMS インプラカブル（R86）は、1944年に完成した高速・重防御のインプラカブル級艦隊空母のネームシップである。ノルウェー沖での作戦後、1945年に英国太平洋艦隊へ加わり、トラック島や日本本土を攻撃した。終戦後は復員・輸送任務を行ってから英国へ帰還した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Implacable 1953",
+        "url": "https://www.shipbucket.com/drawings/5164"
+      },
+      {
+        "name": "ウィキペディア — インプラカブル",
+        "url": "https://en.wikipedia.org/wiki/HMS_Implacable_(R86)"
+      }
+    ]
+  },
+  {
+    "name": "victorious",
+    "displayName": "ヴィクトリアス",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x2 114mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "5x8 40mm/39"
+      },
+      {
+        "label": "対空砲",
+        "value": "1x2 + 4x1 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "16x2 + 6x1 20mm/70"
+      },
+      {
+        "label": "戦闘機",
+        "value": "30× Vought F4U-4 Corsair"
+      },
+      {
+        "label": "雷撃機",
+        "value": "24× Grumman Avenger Mk I"
+      }
+    ],
+    "description": "HMS ヴィクトリアス（R38）はイラストリアス級航空母艦の三番艦で、1941年に就役した。ビスマルク追撃、北極船団護衛、地中海、太平洋で戦った。戦後の大改装でジェット機運用に対応し、1968年まで在籍したのち1969年に解体された。",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Victorious 1945",
+        "url": "https://www.shipbucket.com/drawings/5182"
+      },
+      {
+        "name": "ウィキペディア — ヴィクトリアス",
+        "url": "https://en.wikipedia.org/wiki/HMS_Victorious_%28R38%29"
+      }
+    ]
+  },
+  {
+    "name": "ark_royal",
+    "displayName": "アーク・ロイヤル",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x2 114mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x8 40mm/39"
+      },
+      {
+        "label": "対空機銃",
+        "value": "8x4 12.7mm"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× Fairey Fulmar Mk I"
+      },
+      {
+        "label": "雷撃機",
+        "value": "36× Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "HMS アーク・ロイヤル（91）は1938年に就役した英国海軍の正規艦隊空母である。密閉式格納庫と長い飛行甲板を備え、ノルウェー作戦、地中海船団護衛、ビスマルク追撃で継続的な航空作戦を支えた。1941年11月にU-81の雷撃を受け、翌日沈没した。",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Ark Royal 1941",
+        "url": "https://www.shipbucket.com/drawings/5147"
+      },
+      {
+        "name": "Naval History - HMS Ark Royal",
+        "url": "https://www.naval-history.net/xGM-Chrono-04CV-Ark%20Royal.htm"
+      }
+    ]
+  },
+  {
+    "name": "vengeance",
+    "displayName": "ヴェンジェンス",
+    "type": "軽空母",
+    "armaments": [
+      {
+        "label": "対空砲",
+        "value": "6x4 40mm/39"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x2 + 10x1 20mm/70"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× Vought F4U-4 Corsair"
+      },
+      {
+        "label": "雷撃機",
+        "value": "14× Fairey Barracuda Mk II"
+      }
+    ],
+    "description": "HMS ヴェンジェンス（R71）はコロッサス級軽空母で、1945年1月に英国海軍へ就役した。実戦には間に合わなかったが英国太平洋艦隊に加わり、のちにオーストラリア海軍へ貸与された。売却・改装後はブラジル海軍のミナス・ジェライスとして約40年間運用され、2001年に退役した。",
+    "author": "Bombhead, K. W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - 71 Vengeance",
+        "url": "https://www.shipbucket.com/drawings/5186"
+      },
+      {
+        "name": "ウィキペディア — ヴェンジェンス",
+        "url": "https://en.wikipedia.org/wiki/HMS_Vengeance_(R71)"
+      }
+    ]
+  },
+  {
+    "name": "bicorn",
+    "displayName": "バイコーン",
+    "type": "軽空母",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "8x1 102mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x4 40mm/39 2-pounder"
+      },
+      {
+        "label": "戦闘機",
+        "value": "18× Fairey Fulmar Mk I"
+      },
+      {
+        "label": "雷撃機",
+        "value": "24× Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "バイコーンは、Alternate Universe Warshipsが公開した架空戦記上の英国軽空母で、実在のHMS ユニコーン（I72）とは別の私案である。その設定では一番艦は1938年末に起工、1941年初頭に小型の補助空母として竣工したが、戦時需要により当初から前線へ投入された。",
+    "author": "Hood, Bombhead, Krakatoa",
+    "links": [
+      {
+        "name": "Alternate Universe Warships - CVL 1941 Unicorn",
+        "url": "http://www.alternateuniversewarships.com/Royal%20Commonwealth%20Navy/CVL%201941%20Unicorn/CVL_1941_Unicorn.htm"
+      }
+    ]
+  },
+  {
+    "name": "unicorn",
+    "displayName": "ユニコーン",
+    "type": "軽艦隊空母",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x2 102mm/45 Mk XVI"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x8 40mm/39 2-pounder"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x1 20mm/70 Oerlikon"
+      },
+      {
+        "label": "戦闘機",
+        "value": "18× Fulmar Mk I"
+      },
+      {
+        "label": "雷撃機",
+        "value": "15× Swordfish Mk I"
+      }
+    ],
+    "description": "HMS ユニコーン（I72）は、軽艦隊空母としても運用可能な航空機整備艦として専用設計された。1943年に完成し、サレルノ上陸作戦を支援したのち、東洋艦隊と英国太平洋艦隊で航空機の修理・補給を担った。",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Unicorn 1943",
+        "url": "https://www.shipbucket.com/drawings/5163"
+      },
+      {
+        "name": "ウィキペディア — ユニコーン",
+        "url": "https://en.wikipedia.org/wiki/HMS_Unicorn_(I72)"
+      }
+    ]
+  },
+  {
+    "name": "eagle",
+    "displayName": "イーグル",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "9x1 152mm/50 Mk XVII"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x1 102mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x8 40mm/39"
+      },
+      {
+        "label": "対空機銃",
+        "value": "3x4 12.7mm"
+      },
+      {
+        "label": "戦闘機",
+        "value": "9× Fairey Fulmar Mk I"
+      },
+      {
+        "label": "雷撃機",
+        "value": "12× Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "HMS イーグルは、未完成だったチリ海軍戦艦アルミランテ・コクランを改造し、1924年に英国海軍へ就役した航空母艦である。本作の姿は1932年改装後、1939年時点の状態を再現している。",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Eagle 1933",
+        "url": "https://www.shipbucket.com/drawings/5157"
+      },
+      {
+        "name": "ウィキペディア — イーグル",
+        "url": "https://en.wikipedia.org/wiki/HMS_Eagle_(1918)"
+      }
+    ]
+  },
+  {
+    "name": "hermes",
+    "displayName": "ハーミーズ",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "6x1 140mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "3x1 102mm/45"
+      },
+      {
+        "label": "対空機銃",
+        "value": "3x4 12.7mm"
+      },
+      {
+        "label": "戦闘機",
+        "value": "8× Fairey Fulmar Mk I"
+      },
+      {
+        "label": "雷撃機",
+        "value": "12× Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "HMS ハーミーズは英国海軍で初めて当初から航空母艦として設計された艦だが、建造の長期化により鳳翔が先に就役した。1924年に就役し、1939年8月に訓練任務から実戦部隊へ復帰した。1942年4月9日、インド洋作戦中にセイロン沖で日本空母機に撃沈された。",
+    "author": "Bombhead, K. W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - 95 Hermes 1936",
+        "url": "http://www.shipbucket.com/drawings/5162"
+      },
+      {
+        "name": "ウィキペディア — ハーミーズ",
+        "url": "https://en.wikipedia.org/wiki/HMS_Hermes_(95)"
+      }
+    ]
+  },
+  {
+    "name": "courageous",
+    "displayName": "カレイジャス",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "16x1 120mm/40 Mk VIII"
+      },
+      {
+        "label": "対空砲",
+        "value": "3x8 40mm/39"
+      },
+      {
+        "label": "戦闘機",
+        "value": "24× Fairey Fulmar Mk I"
+      },
+      {
+        "label": "雷撃機",
+        "value": "24× Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "HMS カレイジャスは第一次世界大戦期の巡洋戦艦として建造され、ワシントン海軍軍縮条約により航空母艦へ改造されて1928年に再就役した。1939年9月、西方海域で対潜哨戒中にU-29の雷撃を受けて沈没し、英国海軍が同大戦で失った最初の主力艦となった。",
+    "author": "Hood, Bombhead, K. W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - 50 Courageous",
+        "url": "https://www.shipbucket.com/drawings/5155"
+      },
+      {
+        "name": "ウィキペディア — カレイジャス",
+        "url": "https://en.wikipedia.org/wiki/HMS_Courageous_(50)"
+      }
+    ]
+  },
+  {
+    "name": "argus",
+    "displayName": "アーガス",
+    "type": "航空母艦",
+    "armaments": [
+      {
+        "label": "両用砲",
+        "value": "4x1 102mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x2 20mm/70"
+      },
+      {
+        "label": "対空機銃",
+        "value": "2x4 12.7mm"
+      },
+      {
+        "label": "戦闘機",
+        "value": "8× Fairey Fulmar Mk I"
+      },
+      {
+        "label": "雷撃機",
+        "value": "10× Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "HMS アーガスは客船から改造されて1918年に就役し、障害物のない全通飛行甲板を備えた最初の航空母艦となった。1942年に前線任務へ復帰し、マルタ支援のハープーン作戦と北アフリカ上陸のトーチ作戦に参加した。",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Argus 1942",
+        "url": "https://www.shipbucket.com/drawings/5154"
+      },
+      {
+        "name": "ウィキペディア — アーガス",
+        "url": "https://en.wikipedia.org/wiki/HMS_Argus_(I49)"
+      }
+    ]
+  },
+  {
+    "name": "queen",
+    "displayName": "クイーン",
+    "type": "護衛航空母艦",
+    "armaments": [
+      {
+        "label": "対空砲",
+        "value": "10x2 40mm/60 Bofors"
+      },
+      {
+        "label": "対空砲",
+        "value": "18x1 20mm/70 Oerlikon"
+      },
+      {
+        "label": "戦闘機",
+        "value": "8x F4U-4 Corsair"
+      },
+      {
+        "label": "雷撃機",
+        "value": "12x Avenger Mk I"
+      }
+    ],
+    "description": "HMS クイーン（D19）は米国で建造されたルーラー級護衛空母で、レンドリースにより英国へ引き渡され1943年に就役した。大西洋と北極海で任務に就き、搭載する第853海軍航空隊は1945年5月4日のジャッジメント作戦に参加した。",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Queen D19",
+        "url": "https://www.shipbucket.com/drawings/5189"
+      },
+      {
+        "name": "ウィキペディア — クイーン",
+        "url": "https://en.wikipedia.org/wiki/HMS_Queen_(D19)"
+      }
+    ]
+  },
+  {
+    "name": "biter",
+    "displayName": "バイター",
+    "type": "護衛航空母艦",
+    "armaments": [
+      {
+        "label": "甲板砲",
+        "value": "3x1 102mm/50 Mk 9"
+      },
+      {
+        "label": "対空砲",
+        "value": "5x2 + 6x1 20mm/70 Oerlikon"
+      },
+      {
+        "label": "戦闘機",
+        "value": "8x F4U-4 Corsair"
+      },
+      {
+        "label": "雷撃機",
+        "value": "12x Fairey Swordfish Mk II"
+      }
+    ],
+    "description": "HMS バイター（D97）は米国のC3型商船リオ・パラナから改造され、1942年に英国海軍へ就役した。北大西洋で船団護衛と対潜任務に従事し、史実では第811海軍航空隊のマートレット戦闘機とソードフィッシュ雷撃機を運用した。",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {
+        "name": "Shipbucket - HMS Biter D97",
+        "url": "https://www.shipbucket.com/drawings/5191"
+      },
+      {
+        "name": "ウィキペディア — バイター",
+        "url": "https://en.wikipedia.org/wiki/HMS_Biter_(D97)"
+      }
+    ]
+  },
+  {
+    "name": "empire_maccoll",
+    "displayName": "エンパイア・マッコール",
+    "type": "商船空母",
+    "armaments": [
+      {
+        "label": "甲板砲",
+        "value": "1x1 102mm/40 QF Mk IV"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x1 20mm/70 Oerlikon"
+      },
+      {
+        "label": "雷撃機",
+        "value": "3x Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "エンパイア・マッコールは英国の石油タンカーを商船空母へ改造した艦で、1943年11月にMACシップとして運用を開始した。石油輸送を続けながら、海軍分遣隊のソードフィッシュが船団の対潜哨戒を行った。本作は1944年時点の3機搭載状態を採用し、戦後はブリティッシュ・パイロットに戻って1962年に解体された。",
+    "author": "Bombhead",
+    "links": [
+      {
+        "name": "Shipbucket - Empire MacColl 1944",
+        "url": "https://www.shipbucket.com/drawings/5192"
+      },
+      {
+        "name": "ウィキペディア — エンパイア・マッコール",
+        "url": "https://en.wikipedia.org/wiki/MV_Empire_MacColl"
+      }
+    ]
+  },
+  {
+    "name": "empire_macrae",
+    "displayName": "エンパイア・マクレー",
+    "type": "商船空母",
+    "armaments": [
+      {
+        "label": "甲板砲",
+        "value": "1x1 102mm/40 QF Mk IV"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x1 20mm/70 Oerlikon"
+      },
+      {
+        "label": "雷撃機",
+        "value": "4x Fairey Swordfish Mk I"
+      }
+    ],
+    "description": "エンパイア・マクレーは英国の穀物運搬船を商船空母として完成させ、貨物輸送と小規模な海軍航空隊の運用を両立した。4機のフェアリー・ソードフィッシュが飛行甲板から対潜哨戒を行う一方、同艦は穀物輸送を継続した。戦後は商船に戻り、数度の改名を経て1971年に高雄で解体された。",
+    "author": "Bombhead",
+    "links": [
+      {
+        "name": "Shipbucket - Empire MacRae 1944",
+        "url": "https://www.shipbucket.com/drawings/5193"
+      },
+      {
+        "name": "ウィキペディア — エンパイア・マクレー",
+        "url": "https://en.wikipedia.org/wiki/MV_Empire_MacRae"
+      }
+    ]
+  },
+  {
+    "name": "lowa",
+    "displayName": "アイオワ",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "10x2 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "20x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "44x1 20mm/70"
+      }
+    ],
+    "description": "USS アイオワ（BB-61）はアイオワ級高速戦艦のネームシップで、第二次世界大戦、朝鮮戦争、1980年代に就役した。高速を生かして空母機動部隊を護衛し、9門の16インチ砲で強力な艦砲射撃を行った。1990年に退役し、現在はロサンゼルスで博物館船として保存されている。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "DeviantArt - TZoli",
+        "url": "https://www.deviantart.com/tzoli"
+      },
+      {
+        "name": "ウィキペディア — アイオワ",
+        "url": "https://en.wikipedia.org/wiki/USS%20Iowa%20%28BB-61%29"
+      }
+    ]
+  },
+  {
+    "name": "montana",
+    "displayName": "モンタナ",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x3 406mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "10x2 127mm/54"
+      },
+      {
+        "label": "対空砲",
+        "value": "20x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "72x1 20mm/70"
+      }
+    ],
+    "description": "モンタナ級は、米海軍最大・最重武装の戦艦として計画された。12門の16インチ砲と強化装甲によりアイオワ級を上回る斉射火力を得る一方、速力とパナマ運河通航能力を犠牲にした。認可された5隻は、いずれも起工前の1943年に中止された。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Montana class Final Design",
+        "url": "https://www.deviantart.com/tzoli/art/Montana-class-Battleship-Final-Design-835111617"
+      },
+      {
+        "name": "ウィキペディア — モンタナ",
+        "url": "https://en.wikipedia.org/wiki/Montana-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "south_dakota",
+    "displayName": "サウスダコタ",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 406mm/45"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "17x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "57x1 20mm/70"
+      }
+    ],
+    "description": "USS サウスダコタ（BB-57）は、条約制限下で設計された小型精鋭の戦艦級のネームシップである。1942年に就役し、ガダルカナル戦から太平洋各地の空母護衛・上陸支援まで戦った。従軍星章13個を受け、東京湾で日本の降伏調印にも立ち会った。",
+    "author": "Ronald Yoshioka",
+    "links": [
+      {
+        "name": "USS South Dakota (BB-57) battleship",
+        "url": "https://jp.pinterest.com/pin/289989663499798759/"
+      },
+      {
+        "name": "ウィキペディア — サウスダコタ",
+        "url": "https://en.wikipedia.org/wiki/USS%20South%20Dakota%20%28BB-57%29"
+      }
+    ]
+  },
+  {
+    "name": "lexington",
+    "displayName": "レキシントン",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 457mm/45 Mk1"
+      },
+      {
+        "label": "両用砲",
+        "value": "10x2 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "13x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x2 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "34x1 20mm/70"
+      }
+    ],
+    "description": "このレキシントンは、Moscow Jellyが描いた架空戦記上の巡洋戦艦で、ワシントン海軍軍縮条約による空母改造を受けず完成した姿を想定している。18インチ三連装砲塔3基という非常に強力な主砲配置が特徴で、米海軍の実在した状態ではなく創作上の解釈である。",
+    "author": "莫斯科凉粉",
+    "links": [
+      {
+        "name": "Alternate-history Lexington-class battlecruiser artwork",
+        "url": "https://www.bilibili.com/opus/920994748118859845"
+      },
+      {
+        "name": "ウィキペディア — レキシントン",
+        "url": "https://en.wikipedia.org/wiki/Lexington-class%20battlecruiser"
+      }
+    ]
+  },
+  {
+    "name": "kongo",
+    "displayName": "金剛",
+    "type": "巡洋戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 356mm/45 四一式"
+      },
+      {
+        "label": "副砲",
+        "value": "14x1 152mm/50 四一式"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "18x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x2 25mm/60 九六式"
+      }
+    ],
+    "description": "金剛は金剛型巡洋戦艦のネームシップで、日本が国外で建造した最後の主力艦である。1913年に英国ヴィッカース社で完成し、大改装を重ねて高速戦艦へ変貌した。1944年11月、台湾海峡でUSS シーライオンの雷撃を受け沈没した。",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Kongo1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Kongo1944.png"
+      },
+      {
+        "name": "ウィキペディア — 金剛",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Kong%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "fuso",
+    "displayName": "扶桑",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "6x2 356mm/45 四一式"
+      },
+      {
+        "label": "副砲",
+        "value": "14x1 152mm/50 四一式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "22x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x2 25mm/60 九六式"
+      }
+    ],
+    "description": "扶桑は、日本初の国産超弩級戦艦級である扶桑型のネームシップである。14インチ連装砲塔6基と、改装後の高くそびえる艦橋が独特の外観を形作った。1944年10月のスリガオ海峡海戦で、米主力戦艦部隊と交戦する前に駆逐艦の魚雷で致命傷を負った。",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Fuso1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Fuso1944.png"
+      },
+      {
+        "name": "ウィキペディア — 扶桑",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Fus%C5%8D"
+      }
+    ]
+  },
+  {
+    "name": "ise",
+    "displayName": "伊勢",
+    "type": "航空戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 356mm/45 四一式"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "29x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "11x1 25mm/60 九六式"
+      },
+      {
+        "label": "対空ロケット",
+        "value": "6x28 120mm 四年式"
+      },
+      {
+        "label": "戦闘機",
+        "value": "A6M2 Zero Model 21 x6"
+      },
+      {
+        "label": "急降下爆撃機",
+        "value": "D3A x8"
+      },
+      {
+        "label": "雷撃機",
+        "value": "B5N2 x8"
+      }
+    ],
+    "description": "伊勢は伊勢型戦艦のネームシップである。ミッドウェー海戦後、後部主砲塔2基を撤去して短い飛行甲板、格納庫、射出機を設け、航空戦艦へ改装された。しかし航空機と訓練済み搭乗員が不足し、計画された航空隊が実戦運用されることはなかった。",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Ise1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Ise1944.png"
+      },
+      {
+        "name": "ウィキペディア — 伊勢",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Ise"
+      }
+    ]
+  },
+  {
+    "name": "nagato",
+    "displayName": "長門",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 410mm/45 三年式"
+      },
+      {
+        "label": "副砲",
+        "value": "16x1 140mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x2 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "24x1 25mm/60 九六式"
+      }
+    ],
+    "description": "長門は長門型戦艦のネームシップで、410mm砲を搭載した最初期の戦艦の一つである。太平洋戦争初期には連合艦隊旗艦を務め、レイテ沖海戦を生き延びた。終戦後に接収され、ビキニ環礁のクロスロード作戦核実験後に沈没した。",
+    "author": "Alexpl",
+    "links": [
+      {
+        "name": "Wiki: Nagato1944.png",
+        "url": "https://commons.wikimedia.org/wiki/File:Nagato1944.png"
+      },
+      {
+        "name": "ウィキペディア — 長門",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Nagato"
+      }
+    ]
+  },
+  {
+    "name": "yamato",
+    "displayName": "大和",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 460mm/45 九四式"
+      },
+      {
+        "label": "副砲",
+        "value": "2x3 155mm/60 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "12x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "48x3 25mm/60 九六式"
+      }
+    ],
+    "description": "大和は、完成した戦艦として史上最大かつ最重武装の大和型のネームシップである。軍艦に搭載された最大の砲である460mm砲9門を備え、装甲と排水量も同時代の艦を凌駕した。1945年4月7日、沖縄到達前に天一号作戦中の米空母機攻撃で沈没した。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Yamato class Battleship Final Form 1945",
+        "url": "https://www.deviantart.com/tzoli/art/Yamato-class-Battleship-Final-Form-1945-756103504"
+      },
+      {
+        "name": "ウィキペディア — 大和",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20battleship%20Yamato"
+      }
+    ]
+  },
+  {
+    "name": "satsuma",
+    "displayName": "薩摩",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 510mm/45"
+      },
+      {
+        "label": "副砲",
+        "value": "6x2 200mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "10x2 100mm/65 九八式"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x2 40mm/60 五年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x3 25mm/60 九六式"
+      }
+    ],
+    "description": "薩摩は、大和型の後継として検討されたA-150案を本作向けに解釈した艦である。残存資料からは、一般に510mm級とされるさらに大型の主砲と、同時代の戦艦を圧倒する防御が想定されていたと考えられる。戦時の優先順位により、構想は予備設計の域を出なかった。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "A-150 Super Yamato class possible variant C",
+        "url": "https://www.deviantart.com/tzoli/art/A-150-Super-Yamato-class-possible-variant-C-758321728"
+      },
+      {
+        "name": "ウィキペディア — 薩摩",
+        "url": "https://en.wikipedia.org/wiki/Design%20A-150%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "edo",
+    "displayName": "江戸",
+    "type": "超戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x3 510mm/45"
+      },
+      {
+        "label": "副砲",
+        "value": "2x3 200mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "16x2 127mm/50 三年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "44x2 40mm/60 五年式"
+      }
+    ],
+    "description": "江戸は本作のために創作された日本の超大型戦艦である。名称は歴史上の国名と徳川政権の中心地にちなみ、設計は現実的な戦時限界を超えて主力艦の規模・装甲・火力を誇張している。日本海軍の実在計画ではなく、海洋幻想として位置付けられる。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Last Japanese Battleship proposal",
+        "url": "https://www.deviantart.com/tzoli/art/Last-Japanese-Battleship-proposal-759738735"
+      },
+      {
+        "name": "ウィキペディア — 江戸",
+        "url": "https://en.wikipedia.org/wiki/Battleship"
+      }
+    ]
+  },
+  {
+    "name": "bismarck",
+    "displayName": "ビスマルク",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 381mm/52"
+      },
+      {
+        "label": "副砲",
+        "value": "6x2 150mm/60"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 105mm/65"
+      }
+    ],
+    "description": "ビスマルクはドイツ最大の戦艦級のネームシップである。1941年5月の初作戦でデンマーク海峡において巡洋戦艦HMS フッドを撃沈した。その後、英国機の攻撃で舵を損傷し、追撃する戦艦・巡洋艦との長時間の戦闘の末、5月27日に沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — ビスマルク",
+        "url": "https://en.wikipedia.org/wiki/German%20battleship%20Bismarck"
+      }
+    ]
+  },
+  {
+    "name": "scharnhorst",
+    "displayName": "シャルンホルスト",
+    "type": "巡洋戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 283mm/55"
+      },
+      {
+        "label": "副砲",
+        "value": "4x2 150mm/60"
+      },
+      {
+        "label": "副砲",
+        "value": "4x1 150mm/60"
+      },
+      {
+        "label": "両用砲",
+        "value": "7x2 105mm/65"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "シャルンホルストは28cm砲9門を備えたドイツの高速主力艦である。通商破壊やノルウェー作戦に従事したのち、北方海域へ戻った。1943年12月の北岬沖海戦でHMS デューク・オブ・ヨーク以下の部隊に捕捉・撃沈され、生存者は36名だった。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — シャルンホルスト",
+        "url": "https://en.wikipedia.org/wiki/German%20battleship%20Scharnhorst"
+      }
+    ]
+  },
+  {
+    "name": "lutzow",
+    "displayName": "リュッツォウ",
+    "type": "装甲艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x3 283mm/52"
+      },
+      {
+        "label": "副砲",
+        "value": "8x1 150mm/60"
+      },
+      {
+        "label": "両用砲",
+        "value": "3x2 105mm/65"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "リュッツォウはドイッチュラント級装甲艦のネームシップで、1933年にドイッチュラントとして就役した。28cm砲6門と長い航続力を組み合わせ、通商破壊を目的としていた。1939年に改名後は主にノルウェーとバルト海で活動し、1945年の激しい空襲後に自沈処分された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — リュッツォウ",
+        "url": "https://en.wikipedia.org/wiki/German%20cruiser%20Deutschland"
+      }
+    ]
+  },
+  {
+    "name": "hood",
+    "displayName": "フッド",
+    "type": "巡洋戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 381mm/42"
+      },
+      {
+        "label": "副砲",
+        "value": "16x1 140mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x1 102mm/45"
+      },
+      {
+        "label": "魚雷",
+        "value": "6x1 533mm"
+      }
+    ],
+    "description": "HMS フッドは英国海軍が最後に完成させた巡洋戦艦で、約20年間にわたり世界で最も著名な軍艦の一つだった。高速と堂々たる姿から英国海軍力の象徴となったが、デンマーク海峡でビスマルク、プリンツ・オイゲンと交戦中、弾薬庫爆発により失われた。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "ウィキペディア — フッド",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Hood"
+      }
+    ]
+  },
+  {
+    "name": "nelson",
+    "displayName": "ネルソン",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 406mm/45"
+      },
+      {
+        "label": "副砲",
+        "value": "6x2 152mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x1 120mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x8 40mm/39"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 40mm/56"
+      },
+      {
+        "label": "対空砲",
+        "value": "59x1 20mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x1 622mm"
+      }
+    ],
+    "description": "HMS ネルソンは、16インチ三連装砲塔3基を艦橋前方に集中配置した条約型戦艦級のネームシップである。この特異な配置により、排水量制限内で強力な兵装と装甲を両立した。大西洋、地中海、ノルマンディーで作戦に参加し、終戦後に解体された。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "HMS Nelson in 1945",
+        "url": "https://www.deviantart.com/tzoli/art/HMS-Nelson-in-1945-1060440759"
+      },
+      {
+        "name": "ウィキペディア — ネルソン",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Nelson%20%2828%29"
+      }
+    ]
+  },
+  {
+    "name": "lion",
+    "displayName": "ライオン",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 406mm/45"
+      },
+      {
+        "label": "両用砲",
+        "value": "12x2 114mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x6 40mm/56"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x2 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x1 40mm/60"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x5 533mm"
+      }
+    ],
+    "description": "ライオン級は、キング・ジョージ五世級に続く英国戦艦として計画された。16インチ砲9門と、ドイツ・イタリア・日本の新型主力艦に対抗できる装甲・速力を備える設計だった。1939年に2隻が起工されたが、戦時需要で工事が中断され、完成しなかった。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Lion Class Battleship Design 1945 A",
+        "url": "https://www.deviantart.com/tzoli/art/Lion-Class-Battleship-Design-1945-A-810520319"
+      },
+      {
+        "name": "ウィキペディア — ライオン",
+        "url": "https://en.wikipedia.org/wiki/Lion-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "lioness",
+    "displayName": "ライオネス",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x4 356mm/45"
+      },
+      {
+        "label": "副砲",
+        "value": "8x2 133mm/50"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x8 40mm/39"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 20mm/70"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x2 20mm/70"
+      }
+    ],
+    "description": "ライオネスは、英国のライオン級戦艦研究から派生した架空設計である。主砲口径を抑えて14インチ砲の門数を増やし、重防御と約30ノットの速力を維持しながら高い投射量を狙っている。英国海軍が承認した建造計画ではなく、創作上の設計研究である。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Lion 14C-38",
+        "url": "https://www.deviantart.com/tzoli/art/Lion-14C-38-804249041"
+      },
+      {
+        "name": "ウィキペディア — ライオネス",
+        "url": "https://en.wikipedia.org/wiki/Lion-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "king_george_v",
+    "displayName": "キング・ジョージ五世",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x4 356mm/45"
+      },
+      {
+        "label": "主砲",
+        "value": "1x2 356mm/45"
+      },
+      {
+        "label": "副砲",
+        "value": "8x2 133mm/50"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x8 40mm/39"
+      },
+      {
+        "label": "対空砲",
+        "value": "20x1 20mm/70"
+      }
+    ],
+    "description": "HMS キング・ジョージ五世は、英国最後の条約型戦艦級のネームシップである。14インチ砲10門を備え、1941年5月のビスマルク追撃戦に参加し、のちに太平洋でも活動した。日本の降伏時には東京湾に在泊し、1950年代初頭まで就役した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — キング・ジョージ五世",
+        "url": "https://en.wikipedia.org/wiki/HMS%20King%20George%20V%20%2841%29"
+      }
+    ]
+  },
+  {
+    "name": "warspite",
+    "displayName": "ウォースパイト",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 381mm/42"
+      },
+      {
+        "label": "副砲",
+        "value": "8x1 152mm/45"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x1 533mm"
+      }
+    ],
+    "description": "HMS ウォースパイトはクイーン・エリザベス級戦艦で、二度の世界大戦にまたがって活動した。ユトランド、ナルヴィク、マタパン沖をはじめ地中海各地で戦い、英国海軍屈指の戦歴を残した。ドイツの誘導爆弾で大破した後も復帰し、ノルマンディー上陸を支援した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — ウォースパイト",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Warspite%20%2803%29"
+      }
+    ]
+  },
+  {
+    "name": "tiger",
+    "displayName": "タイガー",
+    "type": "巡洋戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 343mm/45"
+      },
+      {
+        "label": "副砲",
+        "value": "12x1 152mm/45"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x1 533mm"
+      }
+    ],
+    "description": "HMS タイガーは第一次世界大戦前に英国海軍が完成させた最後の巡洋戦艦である。13.5インチ砲8門と均整の取れた配置には、先行する巡洋戦艦の教訓が反映された。ドッガー・バンクとユトランドで戦い、のちに練習艦となり、戦間期の軍縮条約により解体された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — タイガー",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Tiger%20%281913%29"
+      }
+    ]
+  },
+  {
+    "name": "soviet_union",
+    "displayName": "ソビエツキー・ソユーズ",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "副砲",
+        "value": "6x2 152mm/57"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 100mm/56"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x4 37mm/57"
+      }
+    ],
+    "description": "ソビエツキー・ソユーズ級は、外国の主力艦に対抗できる近代戦艦をソ連海軍に与えるため計画された。23号計画は巨大な船体に406mm砲9門と重装甲を備えていた。4隻が起工されたが、ドイツ軍の侵攻で建造は停止し、完成艦はなかった。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "KB-4 Type A Battleship Design",
+        "url": "https://www.deviantart.com/tzoli/art/KB-4-Type-A-Battleship-Design-904759741"
+      },
+      {
+        "name": "ウィキペディア — ソビエツキー・ソユーズ",
+        "url": "https://en.wikipedia.org/wiki/Sovetsky%20Soyuz-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "soviet_union_nelsonski",
+    "displayName": "ソビエツキー・ソユーズ（ネルソンスキー）",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "副砲",
+        "value": "4x3 152mm/57"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 100mm/56"
+      },
+      {
+        "label": "対空砲",
+        "value": "9x4 37mm/57"
+      }
+    ],
+    "description": "「ネルソンスキー」は、ソ連23号計画戦艦の架空の別配置案である。ソビエツキー・ソユーズ級の規模と防御を保ちながら、英国ネルソン級を思わせる前部集中式の主砲配置を採る。創作上の提案であり、ソ連海軍が建造したものではない。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "The Sovietskiy Nelsonski",
+        "url": "https://www.deviantart.com/tzoli/art/KB-4-Type-A-Battleship-Design-904759741"
+      },
+      {
+        "name": "ウィキペディア — ソビエツキー・ソユーズ（ネルソンスキー）",
+        "url": "https://en.wikipedia.org/wiki/Sovetsky%20Soyuz-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "kremlin",
+    "displayName": "クレムリン",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 406mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "12x2 130mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x4 45mm/78"
+      },
+      {
+        "label": "対空砲",
+        "value": "18x4 25mm/65"
+      }
+    ],
+    "description": "クレムリンは、ソ連の大型戦艦構想を架空に発展させた最終形である。巨大な船体、重装甲、大口径主砲は戦中・戦後の設計研究を緩やかに下敷きとするが、実在の完成計画には対応しない。本作ではソ連陣営の極端な最上位主力艦として位置付けられる。",
+    "author": "1143M",
+    "links": [
+      {
+        "name": "Deviant Art - 1143M - project 24",
+        "url": "https://www.deviantart.com/1143m/art/project-24-889643069"
+      },
+      {
+        "name": "ウィキペディア — クレムリン",
+        "url": "https://en.wikipedia.org/wiki/Sovetsky%20Soyuz-class%20battleship"
+      }
+    ]
+  },
+  {
+    "name": "slava",
+    "displayName": "スラヴァ",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 500mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 130mm/58"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x4 57mm/72"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x4 37mm/57"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x2 37mm/57"
+      }
+    ],
+    "description": "スラヴァは長距離砲戦と高初速を重視した架空のソ連戦艦である。外観と技術にはソ連後期の主力艦研究から着想を得た要素があるが、該当する艦が起工された事実はない。本作の性能を史実上の設計として扱うべきではない。",
+    "author": "莫斯科凉粉",
+    "links": [
+      {
+        "name": "Slava-class battleship artwork",
+        "url": "https://t.bilibili.com/989631301929664512?tab=2"
+      },
+      {
+        "name": "ウィキペディア — スラヴァ",
+        "url": "https://en.wikipedia.org/wiki/Battleship"
+      }
+    ]
+  },
+  {
+    "name": "atlanta",
+    "displayName": "アトランタ",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "8x2 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x1 20mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS アトランタ（CL-51）は、強力な5インチ両用砲群を中心に設計された小型巡洋艦級のネームシップである。駆逐隊指揮と防空を目的とし、ガダルカナル戦に参加した。第三次ソロモン海戦で砲撃と魚雷により致命傷を負った。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Light Cruiser ATLANTA, CL-51",
+        "url": "https://www.deviantart.com/midnike/art/USN-Light-Cruiser-ATLANTA-CL-51-563332388"
+      },
+      {
+        "name": "ウィキペディア — アトランタ",
+        "url": "https://en.wikipedia.org/wiki/USS%20Atlanta%20%28CL-51%29"
+      }
+    ]
+  },
+  {
+    "name": "alaska_kai",
+    "displayName": "アラスカ改",
+    "type": "大型巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x3 305mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "44x1 20mm/70"
+      }
+    ],
+    "description": "アラスカ改は、実在のアラスカ級大型巡洋艦を芸術的に発展させた架空案である。12インチ三連装砲塔を4基に増やし、排水量と防御も強化して巡洋戦艦に近づけている。米海軍が承認した状態ではなく、推測的な設計研究として制作された。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "The never-were Alaska from a forgotten age",
+        "url": "https://www.deviantart.com/tzoli/art/The-never-were-Alaska-from-a-forgotten-age-686219191"
+      },
+      {
+        "name": "ウィキペディア — アラスカ改",
+        "url": "https://en.wikipedia.org/wiki/Alaska-class%20cruiser"
+      }
+    ]
+  },
+  {
+    "name": "long_beach",
+    "displayName": "ロングビーチ",
+    "type": "ミサイル巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x1 127mm/38"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x3 324mm"
+      }
+    ],
+    "description": "USS ロングビーチ（CGN-9）は世界初の原子力水上戦闘艦であり、最初からミサイル巡洋艦として建造された最初の艦でもある。1961年に就役し、箱形の巨大な上部構造に初期のフェーズドアレイ・レーダーを搭載した。1964年にはエンタープライズ、ベインブリッジとシー・オービット作戦に参加し、無補給で世界一周を達成した。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "USS Long Beach Fully Equipped",
+        "url": "https://www.deviantart.com/tzoli/art/USS-Long-Beach-Fully-Equipped-865083762"
+      },
+      {
+        "name": "ウィキペディア — ロングビーチ",
+        "url": "https://en.wikipedia.org/wiki/USS%20Long%20Beach%20%28CGN-9%29"
+      }
+    ]
+  },
+  {
+    "name": "long_beach_scheme_D",
+    "displayName": "ロングビーチ（D案）",
+    "type": "ミサイル巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x1 127mm/38"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x3 324mm"
+      }
+    ],
+    "description": "ロングビーチD案は、USS ロングビーチを小型化した創作上の派生案である。原型の電子装備を撤去・再配置し、船体を短縮して巨大な上部構造を低くすることで、大型嚮導駆逐艦に近い外形としている。米海軍の実用巡洋艦として建造された設計ではない。",
+    "author": "TZoli",
+    "links": [
+      {
+        "name": "Long Beach Preliminary Scheme D-1",
+        "url": "https://www.deviantart.com/tzoli/art/Long-Beach-Preliminary-Scheme-D-1-860816689"
+      },
+      {
+        "name": "ウィキペディア — ロングビーチ（D案）",
+        "url": "https://en.wikipedia.org/wiki/USS%20Long%20Beach%20%28CGN-9%29"
+      }
+    ]
+  },
+  {
+    "name": "pensacola",
+    "displayName": "ペンサコーラ",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x2 203mm/55 Mk9"
+      },
+      {
+        "label": "主砲",
+        "value": "2x3 203mm/55 Mk9"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x1 20mm/70"
+      }
+    ],
+    "description": "USS ペンサコーラ（CA-24）は、米海軍初の条約型巡洋艦級のネームシップである。連装・三連装8インチ砲塔を混載する特異な配置は、排水量制限内で火力を最大化する試みだった。太平洋戦争を生き延び、戦後はクロスロード作戦の標的艦として処分された。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser PENSACOLA, CA-24",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-PENSACOLA-CA-24-563331092"
+      },
+      {
+        "name": "ウィキペディア — ペンサコーラ",
+        "url": "https://en.wikipedia.org/wiki/USS%20Pensacola%20%28CA-24%29"
+      }
+    ]
+  },
+  {
+    "name": "northampton",
+    "displayName": "ノーザンプトン",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 203mm/55 Mk12"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x1 20mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "USS ノーザンプトン（CA-26）は、当初軽巡洋艦に分類され、1930年ロンドン海軍軍縮条約後に重巡洋艦へ変更された級のネームシップである。ミッドウェー海戦と南太平洋海戦で米空母を護衛した。1942年11月30日のルンガ沖夜戦で九三式魚雷を受け沈没した。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser NORTHAMPTON, CA-26",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-NORTHAMPTON-CA-26-563331379"
+      },
+      {
+        "name": "ウィキペディア — ノーザンプトン",
+        "url": "https://en.wikipedia.org/wiki/USS%20Northampton%20%28CA-26%29"
+      }
+    ]
+  },
+  {
+    "name": "portland",
+    "displayName": "ポートランド",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 203mm/55 Mk14"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "対空砲",
+        "value": "15x1 20mm/70"
+      }
+    ],
+    "description": "USS ポートランド（CA-33）はポートランド級重巡洋艦のネームシップである。珊瑚海、ミッドウェー、ガダルカナル、レイテ沖など太平洋各地で戦った。第三次ソロモン海戦で大きな雷撃損傷を受けても復帰し、従軍星章16個を得て終戦を迎えた。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser PORTLAND, CA-33",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-PORTLAND-CA-33-563331762"
+      },
+      {
+        "name": "ウィキペディア — ポートランド",
+        "url": "https://en.wikipedia.org/wiki/USS%20Portland%20%28CA-33%29"
+      }
+    ]
+  },
+  {
+    "name": "astoria",
+    "displayName": "アストリア",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 203mm/55 Mk14"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x1 127mm/25"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x1 20mm/70"
+      }
+    ],
+    "description": "USS アストリア（CA-34）は1934年就役のニューオーリンズ級重巡洋艦である。珊瑚海海戦でUSS ヨークタウンを護衛し、ミッドウェー海戦にも参加した。1942年8月の第一次ソロモン海戦で日本巡洋艦隊の砲撃を受け、消火不能となって翌日沈没した。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Heavy Cruiser ASTORIA, CA-34",
+        "url": "https://www.deviantart.com/midnike/art/USN-Heavy-Cruiser-ASTORIA-CA-34-563332137"
+      },
+      {
+        "name": "ウィキペディア — アストリア",
+        "url": "https://en.wikipedia.org/wiki/USS%20Astoria%20%28CA-34%29"
+      }
+    ]
+  },
+  {
+    "name": "des_moines",
+    "displayName": "デモイン",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 203mm/55 Mk16"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/38 Mk12"
+      },
+      {
+        "label": "両用砲",
+        "value": "12x2 76mm/50 Mk22"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x1 20mm/70"
+      }
+    ],
+    "description": "USS デモイン（CA-134）は、米海軍が完成させた最後の砲戦型重巡洋艦級のネームシップである。自動装填式8インチ55口径Mk 16砲は、従来の巡洋艦砲を大きく上回る発射速度を実現した。第二次世界大戦には間に合わず、のちに地中海で第6艦隊旗艦を務めた。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Des Moines Class as Finished",
+        "url": "https://www.deviantart.com/tzoli/art/Des-Moines-Class-as-Finished-971525494"
+      },
+      {
+        "name": "ウィキペディア — デモイン",
+        "url": "https://en.wikipedia.org/wiki/USS%20Des%20Moines%20%28CA-134%29"
+      }
+    ]
+  },
+  {
+    "name": "baltimore",
+    "displayName": "ボルチモア",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 203mm/55 Mk15"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/38 Mk12"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "22x1 20mm/70"
+      }
+    ],
+    "description": "USS ボルチモア（CA-68）は、米海軍最大の戦時重巡洋艦級のネームシップである。1943年に就役し、高速空母を護衛しながら中部太平洋、フィリピン、沖縄、日本本土への攻撃を支援した。同級は信頼性の高い8インチ砲と、条約型巡洋艦より強力な防御・対空兵装を備えた。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Baltimore Class as Finished 1944",
+        "url": "https://www.deviantart.com/tzoli/art/Baltimore-Class-as-Finished-1944-972681112"
+      },
+      {
+        "name": "ウィキペディア — ボルチモア",
+        "url": "https://en.wikipedia.org/wiki/USS%20Baltimore%20%28CA-68%29"
+      }
+    ]
+  },
+  {
+    "name": "oregon_city",
+    "displayName": "オレゴンシティ",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 203mm/55 Mk15"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/38 Mk12"
+      },
+      {
+        "label": "対空砲",
+        "value": "11x4 + 2x2 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "16x2 20mm/70"
+      }
+    ],
+    "description": "USS オレゴンシティ（CA-122）は、単煙突と再配置された上部構造を特徴とするボルチモア級改型のネームシップである。1946年に就役して短期間第4艦隊旗艦を務めた後、1947年に予備役となった。同型船体2隻は、大きく異なる指揮艦仕様で完成した。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Oregon City Class as Finished 1946",
+        "url": "https://www.deviantart.com/tzoli/art/Oregon-City-Class-as-Finished-1946-973169657"
+      },
+      {
+        "name": "ウィキペディア — オレゴンシティ",
+        "url": "https://en.wikipedia.org/wiki/USS%20Oregon%20City%20%28CA-122%29"
+      }
+    ]
+  },
+  {
+    "name": "furutaka",
+    "displayName": "古鷹",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 203mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x2 25mm/60"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "古鷹は、日本初の近代的重巡洋艦級のネームシップである。当初は200mm単装砲塔6基を備えたが、改装で203mm連装砲塔と改良機関を搭載した。1942年10月のサボ島沖海戦で米巡洋艦・駆逐艦の攻撃により致命傷を負った。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 古鷹",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Furutaka"
+      }
+    ]
+  },
+  {
+    "name": "aoba",
+    "displayName": "青葉",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 203mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x2 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "青葉は古鷹型の改良発展型である青葉型のネームシップで、当初から203mm連装砲塔と強化された射撃指揮装置を備えた。ソロモン諸島周辺で長く戦い、度重なる損傷を生き延びた。1945年7月、呉で米空母機の爆撃を受け浅瀬に着底した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 青葉",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Aoba"
+      }
+    ]
+  },
+  {
+    "name": "haguro",
+    "displayName": "羽黒",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x2 203mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x4 610mm"
+      }
+    ],
+    "description": "羽黒は妙高型重巡洋艦の四番艦で、蘭印作戦からレイテ沖海戦まで多数の作戦に参加した。1945年5月、デュークダム作戦中の英国駆逐艦隊にマラッカ海峡で捕捉された。砲撃と魚雷で沈没し、水上戦闘で失われた日本最後期の大型軍艦の一つとなった。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 羽黒",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Haguro"
+      }
+    ]
+  },
+  {
+    "name": "atago",
+    "displayName": "愛宕",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x2 203mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "26x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x4 610mm"
+      }
+    ],
+    "description": "愛宕は高雄型重巡洋艦の二番艦で、しばしば第二艦隊旗艦を務めた。203mm砲10門と巨大な艦橋により強力な一方、トップヘビーな性格も持っていた。1944年10月23日、レイテへ向かう途中のパラワン水道でUSS ダーターの雷撃を受け沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 愛宕",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Atago"
+      }
+    ]
+  },
+  {
+    "name": "mogami",
+    "displayName": "最上",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 203mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x2 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "18x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x3 610mm"
+      }
+    ],
+    "description": "最上は、条約制限下で155mm砲15門を搭載して建造された最上型巡洋艦のネームシップである。条約失効後、203mm連装砲塔5基へ換装され重巡洋艦となった。スリガオ海峡海戦で衝突、砲撃、空襲により行動不能となり、のちに自沈処分された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 最上",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Mogami%20%281934%29"
+      }
+    ]
+  },
+  {
+    "name": "suzuya",
+    "displayName": "鈴谷",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x2 203mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x2 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "16x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x3 610mm"
+      }
+    ],
+    "description": "鈴谷は最上型巡洋艦の三番艦で、先行艦の船体強度問題を受けた改良を盛り込んで完成した。203mm砲へ換装され、太平洋戦争を通じて重巡洋艦として活動した。1944年10月のサマール沖で、空襲により魚雷が誘爆して致命傷を負い、乗員が退去した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 鈴谷",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Suzuya%20%281934%29"
+      }
+    ]
+  },
+  {
+    "name": "tone",
+    "displayName": "利根",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 203mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x2 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "20x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x3 610mm"
+      }
+    ],
+    "description": "利根は203mm砲塔4基をすべて前部に集中し、後部を広い水上機甲板とした利根型のネームシップである。この配置は日本空母部隊の長距離偵察を支えた。1945年7月、呉への米空母機攻撃で浅海に沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 利根",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Tone%20%281937%29"
+      }
+    ]
+  },
+  {
+    "name": "tenryu",
+    "displayName": "天龍",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x1 140mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "1x1 76mm/40 三年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x2 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "天龍は、日本初の本格的な軽巡洋艦級のネームシップである。当時として高速で、小型船体に控えめな砲力を備え、駆逐隊の嚮導を目的としていた。中国方面と太平洋で活動後、1942年12月にニューギニア近海でUSS アルバコアの雷撃を受け沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 天龍",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Tenry%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "kuma",
+    "displayName": "球磨",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "7x1 140mm/50 三年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x2 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x2 533mm"
+      }
+    ],
+    "description": "球磨は、日本最初の5,500トン型軽巡洋艦群である球磨型のネームシップである。高速の駆逐隊嚮導艦として設計され、のちに東南アジア海域で輸送・護衛任務を担った。1944年1月、ペナン沖で英国潜水艦HMS タリホーの雷撃を受け沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 球磨",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Kuma"
+      }
+    ]
+  },
+  {
+    "name": "kitakami",
+    "displayName": "北上",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "27x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "8  Kaiten torpedoes"
+      }
+    ],
+    "description": "北上は球磨型軽巡洋艦で、1941年に610mm魚雷発射管40門を持つ重雷装艦へ大改装された。想定された集団夜襲は実現せず、輸送任務のため多くの発射管が撤去された。大戦末期には回天搭載艦へ改造されたが、実戦発進は行っていない。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 北上",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Kitakami"
+      }
+    ]
+  },
+  {
+    "name": "ooi",
+    "displayName": "大井",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x1 140mm/50 三年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x2 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "10x4 610mm"
+      }
+    ],
+    "description": "大井は北上とともに610mm魚雷発射管40門を備える重雷装艦へ改造された球磨型軽巡洋艦である。作戦要求の変化から、魚雷一斉攻撃ではなく高速輸送に用いられるようになった。1944年7月、南シナ海でUSS フラッシャーの雷撃を受け沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 大井",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20%C5%8Ci"
+      }
+    ]
+  },
+  {
+    "name": "isuzu",
+    "displayName": "五十鈴",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "11x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "11x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "五十鈴は長良型軽巡洋艦の二番艦で、しばしば駆逐隊の嚮導艦を務めた。後年の改装では水上戦兵装の多くを撤去し、対空砲、レーダー、爆雷を強化した。1945年4月、スンバワ島沖で米潜水艦チャー、ベスゴ、ガビランの攻撃を受け沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 五十鈴",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Isuzu"
+      }
+    ]
+  },
+  {
+    "name": "abukuma",
+    "displayName": "阿武隈",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x1 140mm/50 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "1x2 127mm/40 八九式"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x2 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "13x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "阿武隈は長良型軽巡洋艦の最終艦で、真珠湾攻撃やアリューシャン作戦を含め駆逐戦隊旗艦として活動した。スリガオ海峡海戦で魚雷艇の雷撃を受け、損傷状態で退避した。1944年10月26日、フィリピン沖で陸上爆撃機の攻撃を受け沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 阿武隈",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Abukuma"
+      }
+    ]
+  },
+  {
+    "name": "shintsu",
+    "displayName": "神通",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "7x1 140mm/50 三年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "9x2 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "神通は川内型軽巡洋艦の二番艦で、長く第二水雷戦隊旗艦を務めた。1943年7月のコロンバンガラ島沖海戦では探照灯で連合軍部隊を照射し、巡洋艦の集中砲火を引き受けた。多数の命中弾と少なくとも1本の魚雷を受けて沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 神通",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Jints%C5%AB"
+      }
+    ]
+  },
+  {
+    "name": "yubari",
+    "displayName": "夕張",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "1x1 140mm/50 三年式"
+      },
+      {
+        "label": "主砲",
+        "value": "2x2 140mm/50 三年式"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x2 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "3x3 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x2 610mm"
+      }
+    ],
+    "description": "夕張は、5,500トン型巡洋艦の速力と兵装を大幅に小さな船体へ収めることを目指した実験的軽巡洋艦である。船体構造に組み込んだ装甲、集合煙突、コンパクトな機関配置は後続の日本巡洋艦へ影響を与えた。1944年4月、パラオ近海でUSS ブルーギルの雷撃を受け、翌日沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 夕張",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Y%C5%ABbari"
+      }
+    ]
+  },
+  {
+    "name": "yahagi",
+    "displayName": "矢矧",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 152mm/50 四一式"
+      },
+      {
+        "label": "両用砲",
+        "value": "2x2 76mm/65 九八式"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x3 25mm/60 九六式"
+      },
+      {
+        "label": "対空砲",
+        "value": "24x1 25mm/60 九六式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "矢矧は阿賀野型軽巡洋艦の二番艦で、1943年に竣工した近代的な水雷戦隊嚮導艦である。日本最後の大規模出撃である天一号作戦で戦艦大和に随伴した。1945年4月7日、米空母機の多数の爆弾・魚雷を受け沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 矢矧",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20Yahagi%20%281942%29"
+      }
+    ]
+  },
+  {
+    "name": "ooyodo",
+    "displayName": "大淀",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x3 155mm/60 三年式"
+      },
+      {
+        "label": "両用砲",
+        "value": "1x2 100mm/65 九八式"
+      },
+      {
+        "label": "両用砲",
+        "value": "3x2 105mm/65"
+      },
+      {
+        "label": "対空砲",
+        "value": "12x3 25mm/60 九六式"
+      }
+    ],
+    "description": "大淀は、潜水艦部隊の指揮と後部の大型甲板からの長距離偵察水上機運用を目的とした独特の軽巡洋艦である。実際には連合艦隊旗艦となり、大規模な通信設備を搭載した。1945年7月の呉空襲で米空母機に攻撃され、浅瀬に沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 大淀",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20cruiser%20%C5%8Cyodo"
+      }
+    ]
+  },
+  {
+    "name": "prinz_eugen",
+    "displayName": "プリンツ・オイゲン",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 203mm/60"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 105mm/65"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x3 533mm"
+      }
+    ],
+    "description": "プリンツ・オイゲンはアドミラル・ヒッパー級重巡洋艦の三番艦である。デンマーク海峡海戦でビスマルクと行動し、その後はノルウェーとバルト海で活動した。戦後米国へ引き渡され、クロスロード作戦の核実験2回を生き延びたのち、クェゼリン環礁で転覆した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — プリンツ・オイゲン",
+        "url": "https://en.wikipedia.org/wiki/German%20cruiser%20Prinz%20Eugen"
+      }
+    ]
+  },
+  {
+    "name": "leipzig",
+    "displayName": "ライプツィヒ",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 150mm/60"
+      },
+      {
+        "label": "両用砲",
+        "value": "3x2 88mm/56"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x3 533mm"
+      }
+    ],
+    "description": "ライプツィヒは、戦間期に完成したドイツ小型軽巡洋艦級のネームシップである。訓練、機雷敷設、護衛に従事し、1944年にはプリンツ・オイゲンとの衝突で大破した。戦後は化学兵器を積載した状態で、1946年に北海へ海没処分された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — ライプツィヒ",
+        "url": "https://en.wikipedia.org/wiki/German%20cruiser%20Leipzig"
+      }
+    ]
+  },
+  {
+    "name": "cheshire",
+    "displayName": "チェシャー",
+    "type": "重巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 203mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 102mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "5x8 40mm/39"
+      },
+      {
+        "label": "対空砲",
+        "value": "16x2 20mm/70"
+      }
+    ],
+    "description": "チェシャーは、中止されたアドミラル級構想に関連する英国戦時末期の重巡洋艦研究を、創作的に再構成した艦である。航空設備、射撃指揮装置、大口径巡洋艦砲は、偵察・砲戦配置の近代化を模索した姿を示す。建造されておらず、設計復元として扱うべきである。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Admiral Class Heavy Cruiser Final Design",
+        "url": "https://www.deviantart.com/tzoli/art/Admiral-Class-Heavy-Cruiser-Final-Design-874924962"
+      },
+      {
+        "name": "ウィキペディア — チェシャー",
+        "url": "https://en.wikipedia.org/wiki/Heavy%20cruiser"
+      }
+    ]
+  },
+  {
+    "name": "worcester",
+    "displayName": "ウースター",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x2 152mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x4 76mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x4 533mm"
+      }
+    ],
+    "description": "ウースターは、同名の米巡洋艦ではなく、英国のミノーター設計計画に関連する大型戦後軽巡洋艦案を表す。高発射速度の152mm両用砲で水上戦と長距離防空を両立する構想だった。海軍の重点がミサイルと小型艦へ移り、設計は紙上に留まった。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "RN Minotaur Class Preliminary Design R",
+        "url": "https://www.deviantart.com/tzoli/art/RN-Minotaur-Class-Preliminary-Design-R-1296815610"
+      },
+      {
+        "name": "ウィキペディア — ウースター",
+        "url": "https://en.wikipedia.org/wiki/Minotaur-class%20cruiser%20%281947%29"
+      }
+    ]
+  },
+  {
+    "name": "vickers",
+    "displayName": "ビッカース758A",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 152mm/50"
+      },
+      {
+        "label": "両用砲",
+        "value": "2x1 102mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x1 40mm/39"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x3 533mm"
+      }
+    ],
+    "description": "ビッカース758Aは、1919年にアルゼンチンなど南米諸国への輸出を想定して作成された軽巡洋艦案である。第一次世界大戦期の巡洋艦設計と、戦後の排水量・費用削減を組み合わせた小型案だった。受注には至らず、英国戦間期の輸出艦設計例として残った。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Vickers Export Design 758A for Argentina",
+        "url": "https://www.deviantart.com/tzoli/art/Vickers-Export-Design-758A-for-Argentina-820086654"
+      },
+      {
+        "name": "ウィキペディア — ビッカース758A",
+        "url": "https://en.wikipedia.org/wiki/Vickers-Armstrongs"
+      }
+    ]
+  },
+  {
+    "name": "k_25",
+    "displayName": "K-25",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "8x2 133mm/50"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x4 40mm/39"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x8 40mm/39"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x4 1910mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "K-25は、1930年代半ばにクラウン・コロニー級を開発する過程で検討された英国巡洋艦案の一つである。約8,000トンの防御巡洋艦船体に、5.25インチ連装両用砲塔を搭載する構想だった。設計研究に留まり、建造案には採用されなかった。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "Design K-25F Light Cruiser",
+        "url": "https://www.deviantart.com/tzoli/art/Design-K-25F-Light-Cruiser-565846342"
+      },
+      {
+        "name": "ウィキペディア — K-25",
+        "url": "https://en.wikipedia.org/wiki/Crown%20Colony-class%20cruiser"
+      }
+    ]
+  },
+  {
+    "name": "sverdlov",
+    "displayName": "スヴェルドロフ",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x3 152mm/57"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 100mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x5 533mm"
+      }
+    ],
+    "description": "スヴェルドロフはソ連68-bis号計画型のネームシップで、ソ連海軍が建造した最後の通常型砲巡洋艦群に属する。戦時設計の巡洋艦を基礎に、航続力と各種装備を改良した。1953年の戴冠記念観艦式への参加は、戦後ソ連海軍力を示す象徴的な出来事となった。",
+    "author": "SakhaliaNet",
+    "links": [
+      {
+        "name": "ウィキペディア — スヴェルドロフ",
+        "url": "https://en.wikipedia.org/wiki/Soviet%20cruiser%20Sverdlov"
+      }
+    ]
+  },
+  {
+    "name": "kirov",
+    "displayName": "キーロフ",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 180mm/57"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x1 100mm/56"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x3 533mm"
+      }
+    ],
+    "description": "キーロフは、イタリアの技術協力を受けて開発されたソ連26号計画型巡洋艦のネームシップである。独特の三連装砲塔に長射程の180mm砲9門を搭載した。第二次世界大戦では主にレニングラード周辺で陸軍を支援し、大きな損傷を受けながら戦後まで在籍した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — キーロフ",
+        "url": "https://en.wikipedia.org/wiki/Soviet%20cruiser%20Kirov"
+      }
+    ]
+  },
+  {
+    "name": "porter",
+    "displayName": "ポーター",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x2 127mm/38"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS ポーター（DD-356）は、強化された砲力と通信設備で駆逐戦隊旗艦を務める大型嚮導駆逐艦級のネームシップである。1942年に太平洋で戦い、南太平洋海戦で行動不能となった。放棄後、USS ショーの砲撃で処分された。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer PORTER, DD-356",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-PORTER-DD-356-563333059"
+      },
+      {
+        "name": "ウィキペディア — ポーター",
+        "url": "https://en.wikipedia.org/wiki/USS%20Porter%20%28DD-356%29"
+      }
+    ]
+  },
+  {
+    "name": "maury",
+    "displayName": "モーリー",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x1 127mm/38"
+      },
+      {
+        "label": "魚雷",
+        "value": "4x4 533mm"
+      }
+    ],
+    "description": "USS モーリー（DD-401）はグリッドレイ級駆逐艦で、主要な空母戦に参加し、のちに中部太平洋で第58任務部隊を護衛した。珊瑚海、ミッドウェー、第二次ソロモン、レイテ、日本本土作戦などを戦った。駆逐艦として最多級の従軍星章16個を受けた。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer MAURY, DD-401",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-MAURY-DD-401-563333362"
+      },
+      {
+        "name": "ウィキペディア — モーリー",
+        "url": "https://en.wikipedia.org/wiki/USS%20Maury%20%28DD-401%29"
+      }
+    ]
+  },
+  {
+    "name": "hammann",
+    "displayName": "ハマン",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x1 127mm/38"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS ハマン（DD-412）はシムス級駆逐艦で、珊瑚海海戦では空母を護衛した。ミッドウェー海戦後、損傷したUSS ヨークタウンに横付けして排水、電力、応急処置を支援したが、日本潜水艦伊168の魚雷が両艦に命中した。ハマンは船体を折られて急速に沈没した。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer HAMMANN, DD-412",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-HAMMANN-DD-412-563333796"
+      },
+      {
+        "name": "ウィキペディア — ハマン",
+        "url": "https://en.wikipedia.org/wiki/USS%20Hammann%20%28DD-412%29"
+      }
+    ]
+  },
+  {
+    "name": "dewey",
+    "displayName": "デューイ",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x1 127mm/38"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x1 20mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "USS デューイ（DD-349）はファラガット級の一番艦で、米国の条約時代における新世代駆逐艦を代表した。空母護衛、アリューシャン作戦、上陸支援、その後の他戦域での船団護衛など太平洋戦争を通じて活動した。終戦まで生き残り、従軍星章13個を得た。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "USN Destroyer DEWEY, DD-349",
+        "url": "https://www.deviantart.com/midnike/art/USN-Destroyer-DEWEY-DD-349-563332853"
+      },
+      {
+        "name": "ウィキペディア — デューイ",
+        "url": "https://en.wikipedia.org/wiki/USS%20Dewey%20%28DD-349%29"
+      }
+    ]
+  },
+  {
+    "name": "asashio",
+    "displayName": "朝潮",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 127mm/50 三年式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "朝潮は、軍縮条約脱退後に設計された日本初の大型駆逐艦級のネームシップである。127mm砲と九三式魚雷を備え、高速と強力な攻撃力を両立した。1943年3月のビスマルク海海戦で生存者救助中、連合軍機の攻撃を受け沈没した。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "ウィキペディア — 朝潮",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Asashio%20%281936%29"
+      }
+    ]
+  },
+  {
+    "name": "yugumo",
+    "displayName": "夕雲",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 127mm/50 三年式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "夕雲は陽炎型を改良した日本の艦隊型駆逐艦級のネームシップである。強力な魚雷兵装と長い航続力を維持しつつ、細部を改良した。1943年10月のベララベラ海戦で、米駆逐艦との近距離夜戦中に砲撃と魚雷を受け沈没した。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "ウィキペディア — 夕雲",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Y%C5%ABgumo%20%281941%29"
+      }
+    ]
+  },
+  {
+    "name": "yukikaze",
+    "displayName": "雪風",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x2 127mm/50 三年式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 610mm"
+      }
+    ],
+    "description": "雪風は陽炎型駆逐艦で、日本海軍の危険な主要作戦を数多く生き延びたことで知られる。太平洋戦争開戦時から天一号作戦まで戦い続けた。戦後は中華民国へ引き渡され丹陽と改名し、1966年まで在籍した。",
+    "author": "Midnike",
+    "links": [
+      {
+        "name": "ウィキペディア — 雪風",
+        "url": "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Yukikaze%20%281939%29"
+      }
+    ]
+  },
+  {
+    "name": "z_11",
+    "displayName": "Z11 ベルント・フォン・アルニム",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x1 127mm/45"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "Z11 ベルント・フォン・アルニムは、1938年に就役したドイツ1934A型駆逐艦である。ノルウェー侵攻に参加し、ナルヴィクへ兵員を揚陸した。第二次ナルヴィク海戦で弾薬の多くを使い果たし損傷したため、1940年4月に乗員が自沈させた。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — Z11 ベルント・フォン・アルニム",
+        "url": "https://en.wikipedia.org/wiki/German%20destroyer%20Z11%20Bernd%20von%20Arnim"
+      }
+    ]
+  },
+  {
+    "name": "v",
+    "displayName": "V",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x1 120mm/45"
+      },
+      {
+        "label": "魚雷",
+        "value": "1x5 533mm"
+      }
+    ],
+    "description": "Vは、既存のV・W級を基礎とする架空の英国駆逐艦案である。小型の艦隊型駆逐艦という構成を保ちながら、速力向上、大型ボイラー、四連装魚雷発射管を重視している。英国海軍で就役した艦級ではなく、戦間期の紙上案である。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — V",
+        "url": "https://en.wikipedia.org/wiki/V%20and%20W-class%20destroyer"
+      }
+    ]
+  },
+  {
+    "name": "y",
+    "displayName": "Y",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x1 120mm/45"
+      },
+      {
+        "label": "魚雷",
+        "value": "1x5 533mm"
+      }
+    ],
+    "description": "Yは、英国V・W級駆逐艦系列をさらに発展させた架空案である。航続力と対潜装備を改善し、より近代的なレーダー・ソナー構想を組み合わせている。創作上の紙上設計で、第二次世界大戦期に実在したY級駆逐艦とは異なる。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — Y",
+        "url": "https://en.wikipedia.org/wiki/V%20and%20W-class%20destroyer"
+      }
+    ]
+  },
+  {
+    "name": "ardent",
+    "displayName": "アーデント",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x1 120mm/45"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x1 40mm/60"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x4 533mm"
+      }
+    ],
+    "description": "HMS アーデントは1930年に就役したA級駆逐艦である。第二次世界大戦初期には艦隊・護衛任務に従事した。1940年6月、ノルウェー沖で空母HMS グローリアスを護衛中にシャルンホルストとグナイゼナウへ攻撃を試み、ドイツ艦の砲撃で沈没した。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — アーデント",
+        "url": "https://en.wikipedia.org/wiki/HMS%20Ardent%20%28H41%29"
+      }
+    ]
+  },
+  {
+    "name": "rapid",
+    "displayName": "スコーリィ",
+    "type": "駆逐艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x2 130mm/58"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x5 533mm"
+      }
+    ],
+    "description": "スコーリィは、ソ連海軍が戦後初めて大量建造した30-bis号計画型駆逐艦を表す。通常砲、魚雷、対潜兵器を堅牢な船体にまとめた設計で、計70隻が完成した。冷戦初期のソ連および同盟国海軍で重要な戦力となった。",
+    "author": "Zustt",
+    "links": [
+      {
+        "name": "ShipBucket - Smelyi",
+        "url": "https://www.shipbucket.com/drawings/10560"
+      },
+      {
+        "name": "ウィキペディア — スコーリィ",
+        "url": "https://en.wikipedia.org/wiki/Skory-class%20destroyer"
+      }
+    ]
+  },
+  {
+    "name": "jiujiang",
+    "displayName": "九江",
+    "type": "フリゲート",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x2 100mm 79A"
+      },
+      {
+        "label": "副砲",
+        "value": "2x2 37mm"
+      },
+      {
+        "label": "ロケット",
+        "value": "5x50 fire-support rockets"
+      },
+      {
+        "label": "対潜兵器",
+        "value": "2x5 250mm Type 65 ASW rockets"
+      }
+    ],
+    "description": "九江は、約1,700トンのフリゲート船体を基礎に中国海軍の火力支援艦へ改造された。100mm・37mm連装砲が通常の対水上・対空戦闘を担い、多数の多連装ロケット発射機が短時間の集中砲撃を行う。さらに65式対潜ロケットが近距離の前方対潜攻撃能力を与えた。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 九江",
+        "url": "https://en.wikipedia.org/wiki/Type%20053H%20frigate"
+      }
+    ]
+  },
+  {
+    "name": "PT_791",
+    "displayName": "PT-791",
+    "type": "魚雷艇",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "1x1 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x1 20mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "PT-791は、米国製ヒギンズ78フィート型モーター魚雷艇の後期生産艇である。木製船体とガソリン機関3基により約40ノットを発揮した。魚雷、自動火器、小型の船体を生かし、夜襲、哨戒、護衛、限定的な対潜任務に適していた。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — PT-791",
+        "url": "https://en.wikipedia.org/wiki/PT%20boat"
+      }
+    ]
+  },
+  {
+    "name": "T_14",
+    "displayName": "T-14",
+    "type": "魚雷艇",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "1x1 13mm 九三式"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x1 450mm"
+      }
+    ],
+    "description": "T-14は、日本が第二次世界大戦末期の沿岸防衛用に簡略生産した十四米特型魚雷艇を表す。自動車用機関と簡素な木造構造により迅速な量産を可能にした。小型艇ながら450mm魚雷2本を装備し、局地対潜用の爆雷も搭載できた。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — T-14",
+        "url": "https://en.wikipedia.org/wiki/Motor%20torpedo%20boat"
+      }
+    ]
+  },
+  {
+    "name": "S_100",
+    "displayName": "S-100",
+    "type": "魚雷艇",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "1x1 37mm/57"
+      },
+      {
+        "label": "対空砲",
+        "value": "2x1 20mm/70"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "S-100級は、連合国からEボートと呼ばれたドイツ海軍の大戦末期型Sボートである。ディーゼル機関と丸底船体により、高速と荒天時の良好な航洋性を両立した。533mm魚雷発射管2門と次第に強化された機関砲により、沿岸海域で大きな脅威となった。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — S-100",
+        "url": "https://en.wikipedia.org/wiki/E-boat"
+      }
+    ]
+  },
+  {
+    "name": "MTB_77",
+    "displayName": "MTB-77",
+    "type": "魚雷艇",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "1x2 1910mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "MTB-77は英国ヴォスパー72フィート型モーター魚雷艇である。ガソリン機関3基で約40ノットを発揮し、魚雷と軽機関砲を用いて夜襲・哨戒に従事した。同型艇は地中海と英仏海峡で、迎撃、護衛、秘密作戦にも使用された。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — MTB-77",
+        "url": "https://en.wikipedia.org/wiki/Motor%20torpedo%20boat"
+      }
+    ]
+  },
+  {
+    "name": "P_6",
+    "displayName": "P-6",
+    "type": "魚雷艇",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x2 25mm/65"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "NATOがP-6と呼んだソ連183号計画型モーター魚雷艇は、約45ノットを発揮する木造の戦後型攻撃艇である。533mm魚雷、25mm連装機関砲、爆雷を搭載した。多数がソ連海軍で運用され、同盟諸国にも輸出された。",
+    "author": "Piv",
+    "links": [
+      {
+        "name": "SNF TKA 821",
+        "url": "https://jp.pinterest.com/pin/39547302971899630/"
+      },
+      {
+        "name": "ウィキペディア — P-6",
+        "url": "https://en.wikipedia.org/wiki/P%206-class%20torpedo%20boat"
+      }
+    ]
+  },
+  {
+    "name": "mercy",
+    "displayName": "マーシー",
+    "type": "病院船",
+    "armaments": [
+      {
+        "label": "兵装",
+        "value": "Nonefixed armament"
+      }
+    ],
+    "description": "USNS マーシー（T-AH-19）は米海軍マーシー級病院船のネームシップである。1976年完成の石油タンカーSS ワースを改造し、1986年に海軍へ就役した。サンディエゴを母港に、洋上医療、災害対応、人道支援を提供している。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — マーシー",
+        "url": "https://en.wikipedia.org/wiki/USNS%20Mercy%20%28T-AH-19%29"
+      }
+    ]
+  },
+  {
+    "name": "peace_ark",
+    "displayName": "和平方舟",
+    "type": "病院船",
+    "armaments": [
+      {
+        "label": "兵装",
+        "value": "Nonefixed armament"
+      }
+    ],
+    "description": "和平方舟は、中国人民解放軍海軍の920型病院船で、2008年に就役した。医療支援と人道任務のため専用建造され、手術室、集中治療設備、診断機器、数百床の病床を備える。アジア、アフリカ、太平洋、中南米へ繰り返し海外派遣されている。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — 和平方舟",
+        "url": "https://en.wikipedia.org/wiki/Chinese%20hospital%20ship%20Daishan%20Dao"
+      }
+    ]
+  },
+  {
+    "name": "britannic",
+    "displayName": "ブリタニック",
+    "type": "病院船",
+    "armaments": [
+      {
+        "label": "兵装",
+        "value": "Nonefixed armament"
+      }
+    ],
+    "description": "HMHS ブリタニックはオリンピック級客船の三番船で、タイタニックの姉妹船である。第一次世界大戦中に病院船として徴用され、白い船体に大きな赤十字を描いた。1916年11月にエーゲ海で機雷に触れて沈没し、同大戦で失われた最大の船となった。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "ウィキペディア — ブリタニック",
+        "url": "https://en.wikipedia.org/wiki/HMHS%20Britannic"
+      }
+    ]
+  },
+  {
+    "name": "F",
+    "displayName": "戦闘機",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "4 x 20mm"
+      },
+      {
+        "label": "機銃（前方）",
+        "value": "4 x 12.7mm"
+      },
+      {
+        "label": "ロケット",
+        "value": "4 x HVAR"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — 戦闘機",
+        "url": "https://en.wikipedia.org/wiki/Fighter%20aircraft"
+      }
+    ]
+  },
+  {
+    "name": "B",
+    "displayName": "爆撃機",
+    "armaments": [
+      {
+        "label": "側面砲",
+        "value": "2 x 20mm"
+      },
+      {
+        "label": "尾部砲",
+        "value": "1 x 20mm Twin"
+      },
+      {
+        "label": "爆弾",
+        "value": "3 x 2000lb, 6 x 250lb"
+      },
+      {
+        "label": "ロケット",
+        "value": "4 x HVAR"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — 爆撃機",
+        "url": "https://en.wikipedia.org/wiki/Bomber"
+      }
+    ]
+  },
+  {
+    "name": "A",
+    "displayName": "攻撃機",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "2 x 20mm"
+      },
+      {
+        "label": "側面砲",
+        "value": "2 x 20mm"
+      },
+      {
+        "label": "尾部砲",
+        "value": "1 x 20mm Twin"
+      },
+      {
+        "label": "魚雷",
+        "value": "4 x Mk-13 570mm"
+      },
+      {
+        "label": "ロケット",
+        "value": "4 x HVAR"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — 攻撃機",
+        "url": "https://en.wikipedia.org/wiki/Attack%20aircraft"
+      }
+    ]
+  },
+  {
+    "name": "A5M2",
+    "displayName": "A5M2 九六式艦戦",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "2 x 7.7mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — A5M2 九六式艦戦",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A5M"
+      }
+    ]
+  },
+  {
+    "name": "A6M2",
+    "displayName": "A6M2 零戦二一型",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "2 x 20mm"
+      },
+      {
+        "label": "機銃（前方）",
+        "value": "2 x 7.7mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — A6M2 零戦二一型",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A6M%20Zero"
+      }
+    ]
+  },
+  {
+    "name": "A6M3",
+    "displayName": "A6M3 零戦三二型",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "2 x 20mm"
+      },
+      {
+        "label": "機銃（前方）",
+        "value": "2 x 7.7mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — A6M3 零戦三二型",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A6M%20Zero"
+      }
+    ]
+  },
+  {
+    "name": "J2M3",
+    "displayName": "J2M3 雷電二一型",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "4 x 20mm"
+      }
+    ],
+    "description": "J2M3 雷電二一型は、上昇力・速度・火力を重視した日本海軍の局地戦闘機である。本作では戦闘機として扱われる。",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — J2M3 雷電二一型",
+        "url": "https://zh.wikipedia.org/wiki/%E9%9B%B7%E9%9B%BB%E6%88%B0%E9%AC%A5%E6%A9%9F"
+      }
+    ]
+  },
+  {
+    "name": "N1K2",
+    "displayName": "N1K2-J 紫電改二一型",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "4 x 20mm"
+      }
+    ],
+    "description": "N1K2-J 紫電改二一型は、日本海軍の局地戦闘機であり、紫電改として最初の量産型である。本作では戦闘機として扱われる。",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — N1K2-J 紫電改二一型",
+        "url": "https://zh.wikipedia.org/wiki/%E7%B4%AB%E7%94%B5%E6%94%B9"
+      }
+    ]
+  },
+  {
+    "name": "A7M2",
+    "displayName": "A7M2 烈風",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "2 x 20mm"
+      },
+      {
+        "label": "機銃（前方）",
+        "value": "2 x 13mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — A7M2 烈風",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi%20A7M"
+      }
+    ]
+  },
+  {
+    "name": "B5N2",
+    "displayName": "B5N2 九七式艦攻",
+    "armaments": [
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 7.62mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x Type 91 450mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — B5N2 九七式艦攻",
+        "url": "https://en.wikipedia.org/wiki/Nakajima%20B5N"
+      }
+    ]
+  },
+  {
+    "name": "B6N2",
+    "displayName": "B6N2 天山",
+    "armaments": [
+      {
+        "label": "機銃（背部）",
+        "value": "7.7mm Type 92"
+      },
+      {
+        "label": "機銃（腹部）",
+        "value": "7.7mm Type 92"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x Type 91 450mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — B6N2 天山",
+        "url": "https://en.wikipedia.org/wiki/Nakajima%20B6N"
+      }
+    ]
+  },
+  {
+    "name": "B7A2",
+    "displayName": "B7A2 流星",
+    "armaments": [
+      {
+        "label": "翼砲",
+        "value": "2 x 20mm Type 99"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 13mm Type 2"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x Type 91 450mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — B7A2 流星",
+        "url": "https://en.wikipedia.org/wiki/Aichi%20B7A"
+      }
+    ]
+  },
+  {
+    "name": "C6N1",
+    "displayName": "C6N1 彩雲",
+    "armaments": [
+      {
+        "label": "兵装",
+        "value": "なし"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — C6N1 彩雲",
+        "url": "https://en.wikipedia.org/wiki/Nakajima%20C6N"
+      }
+    ]
+  },
+  {
+    "name": "D3A1",
+    "displayName": "D3A 九九式艦爆",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "2 x 7.7mm"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 7.7mm"
+      },
+      {
+        "label": "爆弾",
+        "value": "1 x 250kg, 2 x 60kg"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — D3A 九九式艦爆",
+        "url": "https://en.wikipedia.org/wiki/Aichi%20D3A"
+      }
+    ]
+  },
+  {
+    "name": "D4Y3",
+    "displayName": "D4Y3 彗星",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "2 x 7.7mm"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 7.92mm"
+      },
+      {
+        "label": "爆弾",
+        "value": "1 x 500kg"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — D4Y3 彗星",
+        "url": "https://en.wikipedia.org/wiki/Yokosuka%20D4Y"
+      }
+    ]
+  },
+  {
+    "name": "F2A-3",
+    "displayName": "F2A-3 バッファロー",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "4 x 12.7mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — F2A-3 バッファロー",
+        "url": "https://en.wikipedia.org/wiki/Brewster%20F2A%20Buffalo"
+      }
+    ]
+  },
+  {
+    "name": "F4F-3",
+    "displayName": "F4F-3 ワイルドキャット",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "4 x 12.7mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — F4F-3 ワイルドキャット",
+        "url": "https://en.wikipedia.org/wiki/Grumman%20F4F%20Wildcat"
+      }
+    ]
+  },
+  {
+    "name": "F6F-3",
+    "displayName": "F6F-3 ヘルキャット",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "6 x 12.7mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — F6F-3 ヘルキャット",
+        "url": "https://en.wikipedia.org/wiki/Grumman%20F6F%20Hellcat"
+      }
+    ]
+  },
+  {
+    "name": "SBD-3",
+    "displayName": "SBD-3 ドーントレス",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "2 x 12.7mm"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "2 x 7.62mm"
+      },
+      {
+        "label": "爆弾",
+        "value": "1 x 2000lb, 2 x 250lb"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — SBD-3 ドーントレス",
+        "url": "https://en.wikipedia.org/wiki/Douglas%20SBD%20Dauntless"
+      }
+    ]
+  },
+  {
+    "name": "SB2C-4",
+    "displayName": "SB2C-4 ヘルダイバー",
+    "armaments": [
+      {
+        "label": "機首砲",
+        "value": "2 x 20mm"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "2 x 7.62mm"
+      },
+      {
+        "label": "爆弾",
+        "value": "1 x 2000lb, 2 x 500lb"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — SB2C-4 ヘルダイバー",
+        "url": "https://en.wikipedia.org/wiki/Curtiss%20SB2C%20Helldiver"
+      }
+    ]
+  },
+  {
+    "name": "TBD-1",
+    "displayName": "TBD-1 デバステーター",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "1 x 12.7mm"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 7.62mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x Mk-13 570mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — TBD-1 デバステーター",
+        "url": "https://en.wikipedia.org/wiki/Douglas%20TBD%20Devastator"
+      }
+    ]
+  },
+  {
+    "name": "TBF-1",
+    "displayName": "TBF-1 アベンジャー",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "1 x 12.7mm"
+      },
+      {
+        "label": "機銃（背部砲塔）",
+        "value": "1 x 12.7mm"
+      },
+      {
+        "label": "機銃（腹部）",
+        "value": "1 x 7.62mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x Mk-13 570mm"
+      }
+    ],
+    "description": "",
+    "author": "",
+    "links": [
+      {
+        "name": "ウィキペディア — TBF-1 アベンジャー",
+        "url": "https://en.wikipedia.org/wiki/Grumman%20TBF%20Avenger"
+      }
+    ]
+  },
+  {
+    "name": "TBF-1-UK",
+    "displayName": "グラマン・アベンジャー Mk I",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "1 x 7.62mm"
+      },
+      {
+        "label": "機銃（背部砲塔）",
+        "value": "1 x 12.7mm"
+      },
+      {
+        "label": "機銃（腹部）",
+        "value": "1 x 7.62mm"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x Mk-13 570mm"
+      }
+    ],
+    "description": "グラマンTBF-1 アベンジャーは1943年に英国海軍航空隊へ導入された。当初はターポン Mk Iと呼ばれ、のちにアベンジャー Mk Iへ改称されたが、英国仕様の観測員席を維持した。本作では前方7.62mm、背部12.7mm、腹部7.62mm機銃とMk 13航空魚雷1本を備える雷撃機である。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "Smithsonian National Air and Space Museum - Grumman Tarpon I",
+        "url": "https://airandspace.si.edu/collection-objects/grumman-tarpon-i-tbf-1-avenger/nasm_A19610117000"
+      }
+    ]
+  },
+  {
+    "name": "F4U-4",
+    "displayName": "ヴォート F4U-4 コルセア",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "6 x 12.7mm Browning"
+      }
+    ],
+    "description": "ヴォートF4U-4 コルセアは、1945年に就役した高性能の単座艦上戦闘機である。本作では前方固定12.7mmブローニング機銃6挺を装備する戦闘機として扱われる。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "Naval History and Heritage Command - F4U-4 Corsair",
+        "url": "https://www.history.navy.mil/research/histories/naval-aviation-history/naval-aircraft/fighter-aircraft/f4u-4-corsair-wwii-korea.html"
+      }
+    ]
+  },
+  {
+    "name": "Fulmar",
+    "displayName": "フェアリー・フルマー Mk I",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "8 x 7.7mm Browning"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 7.7mm Vickers K"
+      }
+    ],
+    "description": "フェアリー・フルマー Mk Iは、第二次世界大戦初期に英国海軍航空隊が運用した複座艦上戦闘機である。長い航続力、航法員、前方機銃8挺は艦隊哨戒と迎撃に適したが、大型で重いため近代的な単座戦闘機に対して性能面で不利だった。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "Australian War Memorial - Fairey Fulmar ammunition",
+        "url": "https://www.awm.gov.au/collection/304537"
+      },
+      {
+        "name": "History of War - Fairey Fulmar",
+        "url": "https://www.historyofwar.org/articles/weapons_fairey_fulmar.html"
+      }
+    ]
+  },
+  {
+    "name": "Swordfish",
+    "displayName": "フェアリー・ソードフィッシュ Mk I",
+    "armaments": [
+      {
+        "label": "機銃（前方）",
+        "value": "1 x 7.7mm Vickers"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 7.7mm Vickers K"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x 457mm Mark XII"
+      }
+    ],
+    "description": "フェアリー・ソードフィッシュ Mk Iは英国海軍航空隊の艦上雷撃機である。低速の複葉機ながら優れた低速操縦性を持ち、タラント空襲とビスマルク追撃で重要な役割を果たした。本作の仕様は.303インチ機銃2挺とMark XII航空魚雷1本を搭載する。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "Canada Aviation and Space Museum - Fairey Swordfish II",
+        "url": "https://ingenium.ca/aviation/en/collection-highlight/fairey-swordfish-ii/"
+      },
+      {
+        "name": "History of War - Fairey Swordfish",
+        "url": "https://www.historyofwar.org/articles/weapons_fairey_swordfish.html"
+      }
+    ]
+  },
+  {
+    "name": "Barracuda-II",
+    "displayName": "フェアリー・バラクーダ Mk II",
+    "armaments": [
+      {
+        "label": "機銃（後方）",
+        "value": "2 x .303 in Vickers K"
+      },
+      {
+        "label": "魚雷",
+        "value": "1 x 18-inch Mark XV"
+      }
+    ],
+    "description": "フェアリー・バラクーダ Mk IIは1943年に英国海軍航空隊へ配備された艦上雷撃・急降下爆撃機である。マーリン32を搭載した主力量産型となり、1944年のティルピッツ攻撃など主要作戦に参加した。本作では後方射撃用.303インチ・ヴィッカースK機銃2挺と18インチMark XV航空魚雷1本を搭載する。",
+    "author": "不明",
+    "links": [
+      {
+        "name": "Royal Navy - Torpedo bomber recovered from the Solent",
+        "url": "https://www.royalnavy.mod.uk/news/2019/june/11/190611-torpedo-bomber-recovered-from-solent"
+      },
+      {
+        "name": "Imperial War Museums - The Barracuda, the Navy's new torpedo bomber",
+        "url": "https://www.iwm.org.uk/collections/item/object/205152671"
+      }
+    ]
+  },
+  {
+    "name": "RailGun",
+    "displayName": "レールガン",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "RushYa",
+    "displayName": "406mm 8-Barrel RushYa",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "RunYa",
+    "displayName": "155mm 15-Barrel RunYa",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "FlyYa",
+    "displayName": "37mm 30-Barrel FlyYa",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "LeiYa",
+    "displayName": "50mm レーザー LeiYa",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/100/56/2/Type79A",
+    "displayName": "100mm 連装砲 タイプ79A",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/37/63/2/Type76A",
+    "displayName": "37mm 連装砲 タイプ76A",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "Impact",
+    "displayName": "衝角",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/38/MK45",
+    "displayName": "127mm 単装砲 MK45",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/457/45/3/MK1",
+    "displayName": "457mm 三連装砲 MK1",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/406/50/3/MK7",
+    "displayName": "406mm 三連装砲 MK7",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/406/45/3/MK6",
+    "displayName": "406mm 三連装砲 MK6",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/305/50/3/MK8",
+    "displayName": "305mm 三連装砲 MK8",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/2/MK9",
+    "displayName": "203mm 連装砲 MK9",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK9",
+    "displayName": "203mm 三連装砲 MK9",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK12",
+    "displayName": "203mm 三連装砲 MK12",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK14",
+    "displayName": "203mm 三連装砲 MK14",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK15",
+    "displayName": "203mm 三連装砲 MK15",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/203/55/3/MK16",
+    "displayName": "203mm 三連装砲 MK16",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/38/2/MK12",
+    "displayName": "127mm 連装砲 MK12",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/38/MK12",
+    "displayName": "127mm 単装砲 MK12",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/25/MK10",
+    "displayName": "127mm 単装砲 MK10",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/102/50/MK9",
+    "displayName": "102mm/50 単装砲 Mk 9",
+    "type": "兵器",
+    "armaments": [],
+    "description": "米海軍の4インチ50口径Mk 9単装砲で、本作ではHMS バイターが搭載した米国製4インチ砲3基を表現するために使用されている。",
+    "author": "",
+    "links": [
+      {
+        "name": "NavWeaps - 4-inch/50 Marks 7, 8, 9 and 10",
+        "url": "http://www.navweaps.com/Weapons/WNUS_4-50_mk9.php"
+      }
+    ]
+  },
+  {
+    "name": "US/127/54/2/MK39",
+    "displayName": "127mm 連装砲 MK39",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/76/50",
+    "displayName": "76mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/76/50/2/MK22",
+    "displayName": "76mm 連装砲 MK22",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/40/60/4",
+    "displayName": "40mm 四連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/40/60/2",
+    "displayName": "40mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/40/60",
+    "displayName": "40mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/28/75/4",
+    "displayName": "28mm 四連装対空砲 (シカゴ・ピアノ)",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/20/70/2",
+    "displayName": "20mm 連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/20/70",
+    "displayName": "20mm 単装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/12.7",
+    "displayName": "12.7mm 単装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/7.62/2",
+    "displayName": "7.62mm 連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/7.62",
+    "displayName": "7.62mm 単装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/510/45/3/Type98",
+    "displayName": "九八式 510mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/510/45/2/Type98",
+    "displayName": "九八式 510mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/460/45/3/Type94",
+    "displayName": "九四式 460mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/410/45/2/Type3",
+    "displayName": "三年式 410mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/356/45/2/Type41",
+    "displayName": "四一式 356mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/203/50/2/Type3",
+    "displayName": "三年式二号 203mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/200/50/3/Type3",
+    "displayName": "三年式一号 200mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/200/50/2/Type3",
+    "displayName": "三年式一号 200mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/200/50/Type3",
+    "displayName": "三年式一号 200mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/155/60/3/Type3",
+    "displayName": "三年式 155mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/152/50/2/Type41",
+    "displayName": "四一式 152mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/152/50/Type41",
+    "displayName": "四一式 152mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/140/50/2/Type3",
+    "displayName": "三年式 140mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/140/50/Type3",
+    "displayName": "三年式 140mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/127/50/2/Type3",
+    "displayName": "三年式 127mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/127/50/2/Type3/DP",
+    "displayName": "三年式 127mm 連装両用砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/127/40/2/Type89/DP",
+    "displayName": "八九式 127mm 連装高角砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/120/45/Type10",
+    "displayName": "十年式 120mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/100/65/2/Type98/DP",
+    "displayName": "九八式 100mm 連装高角砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/76/65/2/Type98",
+    "displayName": "九八式 76mm 連装高角砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/76/40/Type3",
+    "displayName": "三年式 76mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/40/60/2",
+    "displayName": "40mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/25/60/3",
+    "displayName": "九六式 25mm 三連装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/25/60/2",
+    "displayName": "九六式 25mm 連装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/25/60",
+    "displayName": "九六式 25mm 単装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/20",
+    "displayName": "20mm 単装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/13/4",
+    "displayName": "13mm 四連装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/13",
+    "displayName": "13mm 単装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/7.92",
+    "displayName": "7.92mm 単装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/7.7",
+    "displayName": "7.7mm 単装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/7.62",
+    "displayName": "7.62mm 単装機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/380/52/2",
+    "displayName": "380mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/283/55/3",
+    "displayName": "283mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/283/52/3",
+    "displayName": "283mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/203/60/2",
+    "displayName": "203mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/150/60/3",
+    "displayName": "150mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/150/60/2",
+    "displayName": "150mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/150/60",
+    "displayName": "150mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/127/45",
+    "displayName": "127mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/105/65/2/DP",
+    "displayName": "105mm Twin 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/88/56/2/DP",
+    "displayName": "88mm Twin 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/37/57",
+    "displayName": "37mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/20/70",
+    "displayName": "20mm 単装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/406/45/3",
+    "displayName": "406mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/381/42/2",
+    "displayName": "381mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/356/45/4",
+    "displayName": "356mm 四連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/356/45/2",
+    "displayName": "356mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/343/45/2",
+    "displayName": "343mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/203/50/3",
+    "displayName": "203mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/152/50/2",
+    "displayName": "152mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/152/50/MK17",
+    "displayName": "152mm/50 Mk XVII Single Naval Gun",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/152/45",
+    "displayName": "152mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/140/50",
+    "displayName": "140mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/133/50/2/DP",
+    "displayName": "133mm Twin 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/120/45/DP",
+    "displayName": "120mm Single 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/120/40/MK8/DP",
+    "displayName": "120mm/40 Mk VIII Single 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/114/45/2/DP",
+    "displayName": "114mm Twin 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/102/45/2/DP",
+    "displayName": "102mm Twin 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/102/45/DP",
+    "displayName": "102mm Single 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/102/40/MK4",
+    "displayName": "102mm/40 QF Mk IV Single Gun",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/76/70/4/DP",
+    "displayName": "76mm Quadruple 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/60/2",
+    "displayName": "40mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/60",
+    "displayName": "40mm 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/56/6",
+    "displayName": "40mm 六連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/56/4",
+    "displayName": "40mm 四連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/39/8",
+    "displayName": "40mm 八連装対空砲 (Pom-Pom)",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/39/4",
+    "displayName": "40mm 四連装対空砲 (Pom-Pom)",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/40/39",
+    "displayName": "40mm 単装対空砲 (Pom-Pom)",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/20/70/4",
+    "displayName": "20mm 四連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/20/70/2",
+    "displayName": "20mm 連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/20/70",
+    "displayName": "20mm 単装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/12.7/4",
+    "displayName": "12.7mm 四連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/12.7/2",
+    "displayName": "12.7mm 連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/500/50/2",
+    "displayName": "500mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/406/50/3",
+    "displayName": "406mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/180/57/3",
+    "displayName": "180mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/152/57/3",
+    "displayName": "152mm 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/152/57/2",
+    "displayName": "152mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/130/60/2",
+    "displayName": "130mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/130/58/2",
+    "displayName": "130mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/100/70/2/DP",
+    "displayName": "100mm Twin 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/100/56/2/DP",
+    "displayName": "100mm Twin 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/100/56/DP",
+    "displayName": "100mm Single 両用砲架",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/57/72/4",
+    "displayName": "57mm 四連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/45/78/4",
+    "displayName": "45mm 四連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/37/57/4",
+    "displayName": "37mm 四連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/37/57/2",
+    "displayName": "37mm 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/25/65/4",
+    "displayName": "25mm 四連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/25/65/2",
+    "displayName": "25mm 連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "YaLei",
+    "displayName": "610mm 15-Tube YaLei Torpedo",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "ShanDa",
+    "displayName": "533mm 20-Tube ShanDa Torpedo",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/533/4",
+    "displayName": "533mm Quadruple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/533/1",
+    "displayName": "533mm Single 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/324/3",
+    "displayName": "324mm Triple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/Kaiten/4",
+    "displayName": "610mm 四連装回天魚雷",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/610/4",
+    "displayName": "九三式 610mm 四連装魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/610/3",
+    "displayName": "九三式 610mm 三連装魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/610/2",
+    "displayName": "九三式 610mm 連装魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/533/3",
+    "displayName": "533mm 三連装魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/533/2",
+    "displayName": "533mm 連装魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/450/1",
+    "displayName": "450mm 単装魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/533/4",
+    "displayName": "533mm Quadruple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/533/3",
+    "displayName": "533mm Triple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "GER/533/1",
+    "displayName": "533mm Single 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/622/1",
+    "displayName": "622mm Single 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/5",
+    "displayName": "533mm Quintuple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/4",
+    "displayName": "533mm Quadruple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/3",
+    "displayName": "533mm Triple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/533/1",
+    "displayName": "533mm Single 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/533/5",
+    "displayName": "533mm Quintuple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/533/3",
+    "displayName": "533mm Triple 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "SU/533/1",
+    "displayName": "533mm Single 魚雷発射管",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "DuckRocket",
+    "displayName": "Duckロケット発射機",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/120/28/Type5/AA",
+    "displayName": "五式 12cm 28連装対空噴進砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "JP/120/21/Type5/AA",
+    "displayName": "五式 12cm 21連装対空噴進砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/122/50",
+    "displayName": "122mm 50-Tube Shipboard ロケット発射機",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "CN/250/5/Type65",
+    "displayName": "250mm 5-Round タイプ 65 ASW ロケット発射機",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/AIR/RB/127/4",
+    "displayName": "127mm 4-Round 航空ロケット",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  }
+]

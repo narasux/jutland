@@ -20,7 +20,7 @@ func WrapText(value string, maxWidth, fontSize float64, source *text.GoTextFaceS
 	if CalcTextWidth(value, fontSize, source) <= maxWidth {
 		return []string{value}
 	}
-	if i18n.CurrentLanguage() == i18n.LanguageEnglish {
+	if i18n.CurrentLanguage().UsesWordWrapping() {
 		return wrapWords(value, maxWidth, fontSize, source)
 	}
 	return wrapRunes(value, maxWidth, fontSize, source)

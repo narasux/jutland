@@ -27,6 +27,30 @@ func TestTruncateReinforceTextKeepsEllipsisWithinPanel(t *testing.T) {
 	require.LessOrEqual(t, layout.CalcTextWidth(display, fontSize, textFont), maxWidth)
 }
 
+func TestReinforceArchiveColumnsKeepRussianLabelsAndValuesSeparated(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	i18n.SetLanguage(string(i18n.LanguageRussian))
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	textFont := font.LocalizedUI(font.Kai)
+	items := []reinforceArchiveItem{
+		{label: i18n.Text(i18n.MsgReinforceType), value: "ТВ / Торпедный катер"},
+		{label: i18n.Text(i18n.MsgReinforceHP), value: "48"},
+		{label: i18n.Text(i18n.MsgReinforceSpeed), value: "41.0 уз."},
+		{label: i18n.Text(i18n.MsgReinforceCost), value: "$25 / 11с"},
+	}
+	card := reinforceUIPanel{X: 48, W: 420}
+
+	labelX, valueX, valueWidth := reinforceArchiveColumns(card, items, 20, textFont)
+
+	for _, item := range items {
+		labelWidth := layout.CalcTextWidth(item.label, 20, font.ForText(item.label, textFont))
+		require.LessOrEqual(t, labelX+labelWidth, valueX)
+	}
+	require.Positive(t, valueWidth)
+	require.LessOrEqual(t, valueX+valueWidth, card.X+card.W-24)
+}
+
 func TestLayoutReinforceTipsWrapsWithinAvailableSpace(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	i18n.SetLanguage(string(i18n.LanguageEnglish))

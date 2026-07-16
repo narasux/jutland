@@ -3,24 +3,32 @@
     name: "darwin",
     displayName: "达尔文港",
     displayNameEn: "Darwin Harbour",
+    displayNameRu: "Порт-Дарвин",
+    displayNameJa: "ダーウィン港",
     source: "darwin"
   },
   {
     name: "peleliu",
     displayName: "佩莱利乌岛",
     displayNameEn: "Peleliu",
+    displayNameRu: "Пелелиу",
+    displayNameJa: "ペリリュー島",
     source: "peleliu"
   },
   {
     name: "wake",
     displayName: "威克岛",
     displayNameEn: "Wake Island",
+    displayNameRu: "Остров Уэйк",
+    displayNameJa: "ウェーク島",
     source: "wake"
   },
   {
     name: "darwin_256",
     displayName: "达尔文港（256x256）",
     displayNameEn: "Darwin Harbour (256x256)",
+    displayNameRu: "Порт-Дарвин (256x256)",
+    displayNameJa: "ダーウィン港（256x256）",
     source: "darwin"
   },
 ]

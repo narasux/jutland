@@ -23,6 +23,37 @@ func TestDefaultAndFallbackLanguage(t *testing.T) {
 	require.Equal(t, "任务选择", Text(MsgMenuMissionSelect))
 	require.Equal(t, LanguageEnglish, SetLanguage("en"))
 	require.Equal(t, "Mission Select", Text(MsgMenuMissionSelect))
+	require.Equal(t, LanguageRussian, SetLanguage("ru"))
+	require.Equal(t, "Выбор миссии", Text(MsgMenuMissionSelect))
+	require.Equal(t, LanguageJapanese, SetLanguage("ja"))
+	require.Equal(t, "ミッション選択", Text(MsgMenuMissionSelect))
+}
+
+func TestFallbackLanguageOrder(t *testing.T) {
+	require.Equal(t, []Language{LanguageRussian, LanguageEnglish, LanguageZhHans}, FallbackLanguages(LanguageRussian))
+	require.Equal(t, []Language{LanguageJapanese, LanguageEnglish, LanguageZhHans}, FallbackLanguages(LanguageJapanese))
+	require.Equal(t, []Language{LanguageEnglish, LanguageZhHans}, FallbackLanguages(LanguageEnglish))
+	require.Equal(t, []Language{LanguageZhHans}, FallbackLanguages(LanguageZhHans))
+}
+
+func TestRussianPluralForms(t *testing.T) {
+	t.Cleanup(func() { SetLanguage(string(LanguageZhHans)) })
+	SetLanguage(string(LanguageRussian))
+	require.Equal(t, "Всего 1 самолёт", Plural(MsgCollectionPlaneCount, 1, map[string]any{"Count": 1}))
+	require.Equal(t, "Всего 2 самолёта", Plural(MsgCollectionPlaneCount, 2, map[string]any{"Count": 2}))
+	require.Equal(t, "Всего 5 самолётов", Plural(MsgCollectionPlaneCount, 5, map[string]any{"Count": 5}))
+	require.Equal(t, "Всего 21 самолёт", Plural(MsgCollectionPlaneCount, 21, map[string]any{"Count": 21}))
+}
+
+func TestRussianCollectionDropdownUsesSupportedArrow(t *testing.T) {
+	t.Cleanup(func() { SetLanguage(string(LanguageZhHans)) })
+	SetLanguage(string(LanguageRussian))
+
+	require.Equal(
+		t,
+		"Класс: Авианосец ↓",
+		Format(MsgCollectionShipClass, map[string]any{"Value": "Авианосец"}),
+	)
 }
 
 func TestFormat(t *testing.T) {
