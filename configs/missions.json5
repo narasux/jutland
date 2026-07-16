@@ -1165,49 +1165,49 @@
       },
       {
         name: "eagle",
-        pos: [11, 31],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "hermes",
-        pos: [12, 32],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "courageous",
-        pos: [11, 33],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "argus",
-        pos: [12, 34],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "queen",
         pos: [9, 25],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "biter",
+        name: "hermes",
         pos: [10, 26],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "empire_maccoll",
+        name: "courageous",
         pos: [9, 27],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "empire_macrae",
+        name: "argus",
         pos: [10, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "queen",
+        pos: [7, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "biter",
+        pos: [8, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "empire_maccoll",
+        pos: [7, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "empire_macrae",
+        pos: [8, 28],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -1393,7 +1393,7 @@
       },
       {
         name: "langley",
-        pos: [31, 52],
+        pos: [31, 50],
         rotation: 90,
         belongPlayer: "HA"
       },

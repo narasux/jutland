@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
@@ -112,8 +113,9 @@ func (d *Drawer) drawBuildingInterface(screen *ebiten.Image, ms *state.MissionSt
 	d.drawReinforcePanel(screen, ui.Map, reinforceMapFill, false)
 	d.drawReinforcePanel(screen, ui.Console, reinforcePanelFill, false)
 	d.drawAbbrMapInRPInterface(screen, ms, ui)
-	d.drawSelectedProvidedShips(screen, ms, ui)
+	tooltip := d.drawSelectedProvidedShips(screen, ms, ui)
 	d.drawSummonOperationTips(screen, ui, ms.Player.CurFunds)
+	d.drawReinforceTooltip(screen, tooltip)
 }
 
 // drawBuildingBackground 绘制增援界面的底图和暗色遮罩
@@ -202,10 +204,12 @@ func (d *Drawer) drawAbbrMapInRPInterface(screen *ebiten.Image, ms *state.Missio
 }
 
 // drawSelectedProvidedShips 绘制当前可召唤舰船的预览图和信息面板
-func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.MissionState, ui reinforceUILayout) {
+func (d *Drawer) drawSelectedProvidedShips(
+	screen *ebiten.Image, ms *state.MissionState, ui reinforceUILayout,
+) string {
 	rp, ok := ms.Arena.ReinforcePoints[ms.Interaction.SelectedReinforcePointUid]
 	if !ok {
-		return
+		return ""
 	}
 
 	selectedShipName := rp.ProvidedShipNames[rp.CurSelectedShipIndex]
@@ -241,7 +245,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 	screen.DrawImage(topImg, opts)
 
 	ship := objUnit.ShipMap[selectedShipName]
-	d.drawReinforceShipInfo(
+	tooltip := d.drawReinforceShipInfo(
 		screen,
 		selectedShipName,
 		rp.CurSelectedShipIndex+1,
@@ -250,6 +254,7 @@ func (d *Drawer) drawSelectedProvidedShips(screen *ebiten.Image, ms *state.Missi
 		ui.Info,
 	)
 	d.drawReinforceQueue(screen, rp.OncomingShips, ui.Queue)
+	return tooltip
 }
 
 // drawReinforceShipInfo 绘制舰船档案和武装配置两张信息卡
@@ -260,7 +265,7 @@ func (d *Drawer) drawReinforceShipInfo(
 	shipCount int,
 	ship *objUnit.BattleShip,
 	panel reinforceUIPanel,
-) {
+) string {
 	cardInsetX := 16.0
 	cardInsetY := 18.0
 	cardGap := 36.0
@@ -345,24 +350,34 @@ func (d *Drawer) drawReinforceShipInfo(
 	}
 
 	drawn := 0
+	tooltip := ""
 	if ref := objRef.GetReference(selectedShipName); ref != nil {
+		textFont := font.LocalizedUI(font.Kai)
+		maxWidth := armamentCard.W - 48
 		for _, armament := range ref.Armaments {
 			if drawn >= 6 {
 				break
 			}
 			line := i18n.Format(i18n.MsgLabelValue, map[string]any{"Label": armament.Label, "Value": armament.Value})
+			display, truncated := truncateReinforceText(line, maxWidth, 20, textFont)
+			x := armamentCard.X + 24
+			y := armamentCard.Y + 58 + float64(drawn)*32
 			d.drawText(
 				screen,
-				line,
-				armamentCard.X+24,
-				armamentCard.Y+58+float64(drawn)*32,
+				display,
+				x,
+				y,
 				20,
-				font.LocalizedUI(font.Kai),
+				font.ForText(display, textFont),
 				reinforceText,
 			)
+			if truncated && reinforceTextHovered(x, y, maxWidth, 20) {
+				tooltip = line
+			}
 			drawn++
 		}
 	}
+	return tooltip
 }
 
 // drawReinforceInfoCard 绘制增援控制台内统一样式的信息卡
@@ -540,10 +555,149 @@ func (d *Drawer) drawSummonOperationTips(screen *ebiten.Image, ui reinforceUILay
 		i18n.Text(i18n.MsgReinforceTipCancel),
 		i18n.Text(i18n.MsgReinforceTipRally),
 	}
-	for idx, tip := range tips {
-		x := card.X + 20
-		y := dividerY + 28 + float64(idx)*30
-		d.drawText(screen, tip, x, y, 18, font.LocalizedUI(font.Kai), reinforceMutedText)
+	tipX := card.X + 20
+	tipY := dividerY + 26
+	maxWidth := card.W - 40
+	maxHeight := card.Y + card.H - 18 - tipY
+	tipFont := font.LocalizedUI(font.Kai)
+	tipLayout := layoutReinforceTips(tips, maxWidth, maxHeight, tipFont)
+	for idx, lines := range tipLayout.Lines {
+		for _, line := range lines {
+			d.drawText(
+				screen, line, tipX, tipY, tipLayout.FontSize,
+				font.ForText(line, tipFont), reinforceMutedText,
+			)
+			tipY += tipLayout.LineHeight
+		}
+		if idx < len(tipLayout.Lines)-1 {
+			tipY += tipLayout.GroupGap
+		}
+	}
+}
+
+type reinforceTipLayout struct {
+	FontSize   float64
+	LineHeight float64
+	GroupGap   float64
+	Lines      [][]string
+}
+
+func layoutReinforceTips(
+	tips []string, maxWidth, maxHeight float64, textFont *text.GoTextFaceSource,
+) reinforceTipLayout {
+	const (
+		maxFontSize = 18.0
+		minFontSize = 14.0
+	)
+	var result reinforceTipLayout
+	for fontSize := maxFontSize; fontSize >= minFontSize; fontSize-- {
+		lineHeight := fontSize * 1.32
+		groupGap := fontSize * 0.32
+		lines := make([][]string, 0, len(tips))
+		lineCount := 0
+		for _, tip := range tips {
+			wrapped := layout.WrapText(tip, maxWidth, fontSize, font.ForText(tip, textFont))
+			lines = append(lines, wrapped)
+			lineCount += len(wrapped)
+		}
+		result = reinforceTipLayout{
+			FontSize:   fontSize,
+			LineHeight: lineHeight,
+			GroupGap:   groupGap,
+			Lines:      lines,
+		}
+		requiredHeight := float64(lineCount)*lineHeight + float64(max(0, len(tips)-1))*groupGap
+		if requiredHeight <= maxHeight {
+			return result
+		}
+	}
+	return result
+}
+
+func truncateReinforceText(
+	value string, maxWidth, fontSize float64, textFont *text.GoTextFaceSource,
+) (string, bool) {
+	textWidth := func(candidate string) float64 {
+		return layout.CalcTextWidth(candidate, fontSize, font.ForText(candidate, textFont))
+	}
+	if value == "" || textWidth(value) <= maxWidth {
+		return value, false
+	}
+	if maxWidth <= 0 {
+		return "", true
+	}
+	ellipsis := "…"
+	if textWidth(ellipsis) > maxWidth {
+		return "", true
+	}
+	runes := []rune(value)
+	for len(runes) > 0 {
+		candidate := string(runes) + ellipsis
+		if textWidth(candidate) <= maxWidth {
+			return candidate, true
+		}
+		runes = runes[:len(runes)-1]
+	}
+	return ellipsis, true
+}
+
+func reinforceTextHovered(x, y, width, fontSize float64) bool {
+	cursorX, cursorY := ebiten.CursorPosition()
+	return float64(cursorX) >= x && float64(cursorX) < x+width &&
+		float64(cursorY) >= y && float64(cursorY) < y+fontSize*1.3
+}
+
+func (d *Drawer) drawReinforceTooltip(screen *ebiten.Image, value string) {
+	if value == "" {
+		return
+	}
+	const fontSize = 17.0
+	maxContentWidth := min(520.0, float64(screen.Bounds().Dx())-52)
+	if maxContentWidth <= 0 {
+		return
+	}
+	textFont := font.LocalizedUI(font.Kai)
+	lines := layout.WrapText(value, maxContentWidth, fontSize, font.ForText(value, textFont))
+	if len(lines) == 0 {
+		return
+	}
+	contentWidth := 0.0
+	for _, line := range lines {
+		contentWidth = max(
+			contentWidth,
+			layout.CalcTextWidth(line, fontSize, font.ForText(line, textFont)),
+		)
+	}
+	const (
+		paddingX   = 14.0
+		paddingY   = 11.0
+		lineHeight = fontSize * 1.4
+	)
+	width := contentWidth + paddingX*2
+	height := float64(len(lines))*lineHeight + paddingY*2
+	cursorX, cursorY := ebiten.CursorPosition()
+	x, y := float64(cursorX+16), float64(cursorY+18)
+	if x+width > float64(screen.Bounds().Dx())-12 {
+		x = float64(cursorX) - width - 16
+	}
+	if y+height > float64(screen.Bounds().Dy())-12 {
+		y = float64(screen.Bounds().Dy()) - height - 12
+	}
+	x, y = max(12, x), max(12, y)
+
+	vector.FillRect(
+		screen, float32(x), float32(y), float32(width), float32(height),
+		color.RGBA{R: 7, G: 20, B: 25, A: 242}, false,
+	)
+	vector.StrokeRect(
+		screen, float32(x), float32(y), float32(width), float32(height),
+		1.5, reinforceAccent, false,
+	)
+	for idx, line := range lines {
+		d.drawText(
+			screen, line, x+paddingX, y+paddingY+float64(idx)*lineHeight,
+			fontSize, font.ForText(line, textFont), reinforceText,
+		)
 	}
 }
 
