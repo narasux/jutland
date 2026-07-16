@@ -138,15 +138,15 @@
       },
       {
         "label": "Fighters",
-        "value": "F4F-3 x36"
+        "value": "36× F4F-3"
       },
       {
         "label": "Dive Bombers",
-        "value": "SBD-3 x40"
+        "value": "40× SBD-3"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "TBD-1 x20"
+        "value": "20× TBD-1"
       }
     ],
     "description": "USS Saratoga (CV-3) began as a Lexington-class battlecruiser and was converted into an aircraft carrier under the Washington Naval Treaty. She served throughout the Pacific War and survived repeated torpedo attacks. After the war she was expended during Operation Crossroads and sank after the underwater Baker nuclear test.",
@@ -181,15 +181,15 @@
       },
       {
         "label": "Fighters",
-        "value": "F4F-3 x36"
+        "value": "36× F4F-3"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "TBD-1 x20"
+        "value": "20× TBD-1"
       },
       {
         "label": "Dive Bombers",
-        "value": "SBD-3 x40"
+        "value": "40× SBD-3"
       }
     ],
     "description": "USS Yorktown (CV-5) was the lead ship of the Yorktown-class aircraft carriers. Damaged at the Battle of the Coral Sea, she received emergency repairs in time to fight at Midway in June 1942. Japanese aircraft and submarine torpedoes ultimately left her beyond recovery, and she sank on 7 June.",
@@ -224,15 +224,15 @@
       },
       {
         "label": "Fighters",
-        "value": "F6F-3 x36"
+        "value": "36× F6F-3"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "TBF-1 x18"
+        "value": "18× TBF-1"
       },
       {
         "label": "Dive Bombers",
-        "value": "SB2C-4 x36"
+        "value": "36× SB2C-4"
       }
     ],
     "description": "USS Essex (CV-9), lead ship of the Essex-class aircraft carriers, entered service in 1942 and joined Pacific operations in 1943. The class became the core of the U.S. Navy's wartime fast carrier force, combining a large air group with heavy anti-aircraft defenses. This game entry uses F6F-3, TBF-1, and SB2C-4 aircraft.",
@@ -263,11 +263,11 @@
       },
       {
         "label": "Fighters",
-        "value": "F6F-3 x25"
+        "value": "25× F6F-3"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "TBF-1 x9"
+        "value": "9× TBF-1"
       }
     ],
     "description": "USS Princeton (CVL-23) was an Independence-class light aircraft carrier converted from a Cleveland-class light-cruiser hull. Commissioned in 1943, she served with the fast carrier forces through the Central Pacific and was lost after Japanese air attack during the Battle of Leyte Gulf on 24 October 1944.",
@@ -302,11 +302,11 @@
       },
       {
         "label": "Fighters",
-        "value": "F4F-3 x12"
+        "value": "12× F4F-3"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "TBF-1 x12"
+        "value": "12× TBF-1"
       }
     ],
     "description": "USS Card (CVE-11) was a Bogue-class escort carrier commissioned in 1942. In 1943 she served as flagship of TG 21.14 in North Atlantic hunter-killer operations against German submarines.",
@@ -337,15 +337,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x24"
+        "value": "24× A6M2 Zero Model 21"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x12"
+        "value": "12× D3A"
       },
       {
         "label": "Attack Aircraft",
-        "value": "B7A2 Ryūsei x24"
+        "value": "24× B7A2 Ryūsei"
       }
     ],
     "description": "Hakuryū is the game's name for an enlarged development of Japan's wartime G-15 carrier design. The concept builds on the armored flight deck and protected aviation facilities of Taihō while expanding the hull and air group. No ship of this design was laid down before Japan's carrier program collapsed.",
@@ -376,15 +376,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x24"
+        "value": "24× A6M2 Zero Model 21"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x12"
+        "value": "12× D3A"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B6N2 Tenzan x20"
+        "value": "20× B6N2 Tenzan"
       }
     ],
     "description": "Taihō was the Imperial Japanese Navy's first fleet carrier built with an armored flight deck. Commissioned in March 1944, she joined the First Mobile Fleet for the Battle of the Philippine Sea. A torpedo from USS Albacore ruptured aviation-fuel systems, and accumulated vapors later exploded, sinking the carrier on 19 June.",
@@ -419,19 +419,19 @@
       },
       {
         "label": "Fighters",
-        "value": "A7M2 Reppū x32"
+        "value": "32× A7M2 Reppū"
       },
       {
         "label": "Dive Bombers",
-        "value": "D4Y3 Suisei x16"
+        "value": "16× D4Y3 Suisei"
       },
       {
         "label": "Attack Aircraft",
-        "value": "B7A2 Ryūsei x32"
+        "value": "32× B7A2 Ryūsei"
       },
       {
         "label": "Reconnaissance Aircraft",
-        "value": "C6N1 Saiun x4"
+        "value": "4× C6N1 Saiun"
       }
     ],
     "description": "Shinano was converted from the incomplete third Yamato-class battleship into a heavily protected aircraft carrier. She left Yokosuka in November 1944 before fitting-out was complete. Torpedoes from USS Archerfish exposed poor watertight integrity and damage control, causing the enormous carrier to capsize and sink the following morning.",
@@ -466,15 +466,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x28"
+        "value": "28× A6M2 Zero Model 21"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x28"
+        "value": "28× D3A"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x36"
+        "value": "36× B5N2"
       }
     ],
     "description": "Akagi was laid down as an Amagi-class battlecruiser and converted into an aircraft carrier under treaty restrictions. After early service with three flight decks, she was rebuilt with a single full-length deck and became a core member of the First Air Fleet. American dive bombers fatally damaged her at Midway.",
@@ -509,15 +509,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x24"
+        "value": "24× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x48"
+        "value": "48× B5N2"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x24"
+        "value": "24× D3A"
       }
     ],
     "description": "Kaga began as a Tosa-class battleship and was converted into an aircraft carrier after the Washington Naval Treaty. A major reconstruction replaced her original multi-level flight decks and made her one of Japan's principal fleet carriers. She took part in the Pearl Harbor attack and was fatally bombed at Midway.",
@@ -548,15 +548,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x20"
+        "value": "20× A6M2 Zero Model 21"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x32"
+        "value": "32× D3A"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B6N2 Tenzan x32"
+        "value": "32× B6N2 Tenzan"
       }
     ],
     "description": "Shōkaku was the lead ship of a fast, capable class of Japanese fleet carriers commissioned shortly before the Pacific War. Together with Zuikaku she fought at Pearl Harbor, the Coral Sea, and the Santa Cruz Islands. USS Cavalla torpedoed her during the Battle of the Philippine Sea in June 1944.",
@@ -587,15 +587,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x21"
+        "value": "21× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x21"
+        "value": "21× B5N2"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x21"
+        "value": "21× D3A"
       }
     ],
     "description": "Sōryū was a fast Japanese fleet carrier commissioned in 1937 and designed from the outset for carrier operations. She participated in the attack on Pearl Harbor and the Indian Ocean raid. At Midway, bombs from American SBD Dauntless dive bombers ignited fueled and armed aircraft, leaving her beyond control.",
@@ -622,15 +622,15 @@
       },
       {
         "label": "Fighters",
-        "value": "D3A x24"
+        "value": "24× D3A"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x24"
+        "value": "24× B5N2"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x24"
+        "value": "24× D3A"
       }
     ],
     "description": "Hiryū was a close development of Sōryū and served with her in the Second Carrier Division. During the Battle of Midway, Hiryū's air groups launched two attacks that crippled USS Yorktown. American dive bombers later set the Japanese carrier ablaze, and she was scuttled after the crew abandoned ship.",
@@ -657,15 +657,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x15"
+        "value": "15× A6M2 Zero Model 21"
       },
       {
         "label": "Dive Bombers",
-        "value": "D3A x20"
+        "value": "20× D3A"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x23"
+        "value": "23× B5N2"
       }
     ],
     "description": "Hiyō was converted during construction from the passenger liner Izumo Maru into a fleet-support carrier. Her large air group was offset by slower speed and machinery inherited from the merchant design. After earlier mechanical trouble and torpedo damage, she was sunk by aircraft during the Battle of the Philippine Sea in June 1944.",
@@ -700,15 +700,15 @@
       },
       {
         "label": "Fighters",
-        "value": "A7M2 Reppū x24"
+        "value": "24× A7M2 Reppū"
       },
       {
         "label": "Dive Bombers",
-        "value": "D4Y3 Suisei x6"
+        "value": "6× D4Y3 Suisei"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B6N2 Tenzan x24"
+        "value": "24× B6N2 Tenzan"
       }
     ],
     "description": "Unryū was the lead ship of a wartime carrier class derived from Hiryū and simplified for mass production. Commissioned in August 1944, she never operated as a fleet carrier because Japan lacked trained aircrew and aircraft. In December 1944, USS Redfish torpedoed her while she was transporting Ōka special-attack aircraft to the Philippines.",
@@ -743,11 +743,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x18"
+        "value": "18× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x24"
+        "value": "24× B5N2"
       }
     ],
     "description": "Ryūjō was a light aircraft carrier built to exploit a loophole in interwar treaty limits. Her narrow hull and two-level hangar produced serious stability problems that required reconstruction. She supported operations in China and the early Pacific War before American carrier aircraft sank her at the Battle of the Eastern Solomons.",
@@ -774,11 +774,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x21"
+        "value": "21× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x9"
+        "value": "9× B5N2"
       }
     ],
     "description": "Shōhō began as the submarine tender Tsurugizaki and was later converted into a light aircraft carrier. Commissioned as a carrier in January 1942, she covered the Port Moresby invasion force. Aircraft from USS Lexington and Yorktown overwhelmed her at the Battle of the Coral Sea, making her Japan's first carrier loss of the war.",
@@ -805,11 +805,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x21"
+        "value": "21× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x9"
+        "value": "9× B5N2"
       }
     ],
     "description": "Chitose was built as a seaplane tender with provision for later conversion into an aircraft carrier. Rebuilt as a light carrier after Midway, she fought in the Philippine Sea and served as a decoy in the Battle of Leyte Gulf. American carrier aircraft sank her off Cape Engaño on 25 October 1944.",
@@ -840,11 +840,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x18"
+        "value": "18× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x9"
+        "value": "9× B5N2"
       }
     ],
     "description": "Taiyō was converted from the passenger liner Kasuga Maru into an escort carrier. Too slow for fleet operations, she primarily trained aircrews, transported aircraft, and escorted convoys. After surviving earlier submarine attacks, she was torpedoed by USS Rasher west of Luzon in August 1944 and sank following a violent aviation-fuel explosion.",
@@ -871,11 +871,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x18"
+        "value": "18× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x9"
+        "value": "9× B5N2"
       }
     ],
     "description": "Shin'yō was converted from the German ocean liner Scharnhorst after the ship was trapped in Japan during the war in Europe. Commissioned as an escort carrier in late 1943, she mainly covered convoys and training duties. USS Spadefish torpedoed her in November 1944, causing aviation-fuel explosions that destroyed the ship.",
@@ -906,11 +906,11 @@
       },
       {
         "label": "Fighters",
-        "value": "A6M2 Zero Model 21 x8"
+        "value": "8× A6M2 Zero Model 21"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "B5N2 x6"
+        "value": "6× B5N2"
       }
     ],
     "description": "Hōshō was the first ship completed as a purpose-built aircraft carrier. Her experimental layout helped the Imperial Japanese Navy develop carrier doctrine and aviation procedures during the interwar period. Obsolete for combat by the Pacific War, she mainly served as a training carrier and survived to repatriate Japanese personnel after the surrender.",
@@ -930,8 +930,8 @@
       {"label": "Dual-purpose Guns", "value": "8x2 114mm/45"},
       {"label": "Anti-aircraft Guns", "value": "6x8 40mm/39"},
       {"label": "Anti-aircraft Machine Guns", "value": "8x4 12.7mm"},
-      {"label": "Fighters", "value": "Fairey Fulmar Mk I x24"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x36"}
+      {"label": "Fighters", "value": "24× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "36× Fairey Swordfish Mk I"}
     ],
     "description": "HMS Ark Royal (91) was a purpose-built Royal Navy fleet carrier commissioned in 1938. Her enclosed hangars and long flight deck supported sustained air operations during the Norwegian Campaign, Mediterranean convoys, and the pursuit of Bismarck. German submarine U-81 torpedoed her in November 1941, and she sank the following day.",
     "author": "Bombhead, K.W. Vestergaard",
@@ -953,8 +953,8 @@
     "armaments": [
       {"label": "Dual-purpose Guns", "value": "8x1 102mm/45"},
       {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39 2-pounder"},
-      {"label": "Fighters", "value": "Fairey Fulmar Mk I x18"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x24"}
+      {"label": "Fighters", "value": "18× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "24× Fairey Swordfish Mk I"}
     ],
     "description": "Bicorn is a fictional British light aircraft carrier based on the private alternate-history design published by Alternate Universe Warships, not the historical HMS Unicorn (I72). In that setting, the first ship was laid down in late 1938 and completed in early 1941 as a small service carrier, but wartime demand sent the class into front-line operations from the outset.",
     "author": "Hood, Bombhead, Krakatoa",
@@ -984,11 +984,11 @@
       },
       {
         "label": "Fighters",
-        "value": "Fulmar Mk I x18 (game approximation for Seafire)"
+        "value": "18× Fulmar Mk I (game approximation for Seafire)"
       },
       {
         "label": "Torpedo Bombers",
-        "value": "Swordfish Mk I x15"
+        "value": "15× Swordfish Mk I"
       }
     ],
     "description": "HMS Unicorn (I72) was a purpose-built aircraft maintenance ship that could also operate as a light fleet carrier. Completed in 1943, she supported the Salerno landings before serving the Eastern and British Pacific Fleets as an aviation repair and replenishment ship.",
@@ -1011,8 +1011,8 @@
     "armaments": [
       {"label": "Dual-purpose Guns", "value": "16x1 120mm/40 Mk VIII"},
       {"label": "Anti-aircraft Guns", "value": "3x8 40mm/39"},
-      {"label": "Fighters", "value": "Fairey Fulmar Mk I x24"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x24"}
+      {"label": "Fighters", "value": "24× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "24× Fairey Swordfish Mk I"}
     ],
     "description": "HMS Courageous began as a First World War battlecruiser and was converted into an aircraft carrier under the Washington Naval Treaty, returning to service in 1928. In September 1939 she conducted anti-submarine patrols in the Western Approaches. German submarine U-29 torpedoed and sank her on 17 September, making her the Royal Navy's first major warship loss of the conflict.",
     "author": "Hood, Bombhead, K. W. Vestergaard",
@@ -1029,8 +1029,8 @@
       {"label": "Main Battery", "value": "6x1 140mm/50"},
       {"label": "Dual-purpose Guns", "value": "3x1 102mm/45"},
       {"label": "Anti-aircraft Machine Guns", "value": "3x4 12.7mm"},
-      {"label": "Fighters", "value": "Fairey Fulmar Mk I x8"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x12"}
+      {"label": "Fighters", "value": "8× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "12× Fairey Swordfish Mk I"}
     ],
     "description": "HMS Hermes was the Royal Navy's first ship designed from the outset as an aircraft carrier, although lengthy construction meant Hōshō entered service first. Commissioned in 1924, Hermes returned from training duties to active carrier service in August 1939. Japanese carrier aircraft sank her off Ceylon on 9 April 1942 during the Indian Ocean raid.",
     "author": "Bombhead, K. W. Vestergaard",
@@ -1047,8 +1047,8 @@
       {"label": "Dual-purpose Guns", "value": "4x1 102mm/45"},
       {"label": "Anti-aircraft Guns", "value": "6x2 20mm/70"},
       {"label": "Anti-aircraft Machine Guns", "value": "2x4 12.7mm"},
-      {"label": "Fighters", "value": "Fairey Fulmar Mk I x8"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x10"}
+      {"label": "Fighters", "value": "8× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "10× Fairey Swordfish Mk I"}
     ],
     "description": "HMS Argus was converted from an ocean liner and commissioned in 1918, becoming the first aircraft carrier with a full-length unobstructed flight deck. Returned to front-line service in 1942, she took part in Operation Harpoon, supporting Malta, and Operation Torch, the Allied landings in North Africa.",
     "author": "Bombhead, K.W. Vestergaard",
@@ -1066,8 +1066,8 @@
       {"label": "Dual-purpose Guns", "value": "4x1 102mm/45"},
       {"label": "Anti-aircraft Guns", "value": "2x8 40mm/39"},
       {"label": "Anti-aircraft Machine Guns", "value": "3x4 12.7mm"},
-      {"label": "Fighters", "value": "Fairey Fulmar Mk I x9"},
-      {"label": "Torpedo Bombers", "value": "Fairey Swordfish Mk I x12"}
+      {"label": "Fighters", "value": "9× Fairey Fulmar Mk I"},
+      {"label": "Torpedo Bombers", "value": "12× Fairey Swordfish Mk I"}
     ],
     "description": "HMS Eagle was converted from the incomplete Chilean battleship Almirante Cochrane and entered Royal Navy service in 1924. This configuration represents her after the 1932 refit, as drawn in 1939.",
     "author": "Bombhead, K.W. Vestergaard",
@@ -1083,8 +1083,8 @@
     "armaments": [
       {"label": "Anti-aircraft Guns", "value": "6x4 40mm/39"},
       {"label": "Anti-aircraft Guns", "value": "10x2 + 10x1 20mm/70"},
-      {"label": "Fighters", "value": "Vought F4U-4 Corsair x24"},
-      {"label": "Torpedo Bombers", "value": "Fairey Barracuda Mk II x14"}
+      {"label": "Fighters", "value": "24× Vought F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "14× Fairey Barracuda Mk II"}
     ],
     "description": "HMS Vengeance (R71) was a Colossus-class light fleet carrier commissioned into the Royal Navy in January 1945. Completed too late to see combat, she nevertheless joined the British Pacific Fleet. She later served on loan with the Royal Australian Navy and, after sale and reconstruction, spent four decades in Brazilian service as Minas Gerais before being decommissioned in 2001.",
     "author": "Bombhead, K. W. Vestergaard",
@@ -1102,8 +1102,8 @@
       {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39"},
       {"label": "Anti-aircraft Guns", "value": "1x2 + 4x1 40mm/60"},
       {"label": "Anti-aircraft Guns", "value": "16x2 + 6x1 20mm/70"},
-      {"label": "Fighters", "value": "Vought F4U-4 Corsair x30"},
-      {"label": "Torpedo Bombers", "value": "Grumman Avenger Mk I x24"}
+      {"label": "Fighters", "value": "30× Vought F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "24× Grumman Avenger Mk I"}
     ],
     "description": "HMS Victorious (R38) was the third Illustrious-class aircraft carrier and entered Royal Navy service in 1941. She fought in the pursuit of Bismarck, Arctic convoy operations, the Mediterranean, and the Pacific. After an extensive post-war reconstruction adapted her for jet aircraft, she remained in service until 1968 and was scrapped in 1969.",
     "author": "Bombhead, K.W. Vestergaard",
@@ -1127,9 +1127,9 @@
       {"label": "Anti-aircraft Guns", "value": "5x8 40mm/39 2-pounders"},
       {"label": "Anti-aircraft Guns", "value": "7x1 40mm/60 Bofors"},
       {"label": "Anti-aircraft Guns", "value": "12x1 20mm/70 Oerlikons"},
-      {"label": "Fighters", "value": "Vought F4U-4 Corsair x32"},
-      {"label": "Torpedo Bombers", "value": "Grumman Avenger Mk I x32"},
-      {"label": "Strike Aircraft", "value": "Fairey Barracuda Mk II x16"}
+      {"label": "Fighters", "value": "32× Vought F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "32× Grumman Avenger Mk I"},
+      {"label": "Strike Aircraft", "value": "16× Fairey Barracuda Mk II"}
     ],
     "description": "HMS Implacable (R86) was the lead ship of a fast, heavily protected class of British fleet carriers completed in 1944. After operations off Norway, she joined the British Pacific Fleet in 1945, striking Truk and targets in the Japanese home islands. Following Japan's surrender, she supported repatriation and transport duties before returning to Britain.",
     "author": "Unknown",
