@@ -878,7 +878,9 @@
           "eagle",
           "hermes",
           "courageous",
-          "argus"
+          "argus",
+          "empire_maccoll",
+          "empire_macrae"
         ],
       },
       {
@@ -1123,7 +1125,7 @@
       // === British CV ===
       {
         name: "implacable",
-        pos: [12, 34],
+        pos: [11, 25],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -1135,25 +1137,25 @@
       },
       {
         name: "ark_royal",
-        pos: [11, 25],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "vengeance",
         pos: [11, 27],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
+        name: "vengeance",
+        pos: [12, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
         name: "bicorn",
-        pos: [12, 32],
+        pos: [11, 29],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "unicorn",
-        pos: [11, 33],
+        pos: [12, 30],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -1165,19 +1167,31 @@
       },
       {
         name: "hermes",
-        pos: [12, 28],
+        pos: [12, 32],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "courageous",
-        pos: [11, 29],
+        pos: [11, 33],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "argus",
-        pos: [12, 30],
+        pos: [12, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "empire_maccoll",
+        pos: [9, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "empire_macrae",
+        pos: [10, 26],
         rotation: 90,
         belongPlayer: "HA"
       },

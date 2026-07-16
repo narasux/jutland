@@ -1145,6 +1145,38 @@
     ]
   },
   {
+    "name": "empire_maccoll",
+    "displayName": "Empire MacColl",
+    "type": "Merchant Aircraft Carrier",
+    "armaments": [
+      {"label": "Deck Gun", "value": "1x1 102mm/40 QF Mk IV"},
+      {"label": "Anti-aircraft Guns", "value": "8x1 20mm/70 Oerlikon"},
+      {"label": "Torpedo Bombers", "value": "3x Fairey Swordfish Mk I"}
+    ],
+    "description": "Empire MacColl was an oil tanker completed as a British merchant aircraft carrier and entered MAC service in November 1943. She continued carrying oil while a small naval detachment operated Swordfish aircraft for convoy anti-submarine patrols. The game uses the three-aircraft fit listed for her 1944 configuration. Returned to tanker service as British Pilot in 1946, she was scrapped in 1962.",
+    "author": "Bombhead",
+    "links": [
+      {"name": "Shipbucket - Empire MacColl 1944", "url": "https://www.shipbucket.com/drawings/5192"},
+      {"name": "Wikipedia — MV Empire MacColl", "url": "https://en.wikipedia.org/wiki/MV_Empire_MacColl"}
+    ]
+  },
+  {
+    "name": "empire_macrae",
+    "displayName": "Empire MacRae",
+    "type": "Merchant Aircraft Carrier",
+    "armaments": [
+      {"label": "Deck Gun", "value": "1x1 102mm/40 QF Mk IV"},
+      {"label": "Anti-aircraft Guns", "value": "6x1 20mm/70 Oerlikon"},
+      {"label": "Torpedo Bombers", "value": "4x Fairey Swordfish Mk I"}
+    ],
+    "description": "Empire MacRae was a British grain carrier completed as a merchant aircraft carrier, combining convoy cargo work with a small naval air detachment. Four Fairey Swordfish flew anti-submarine patrols from her flight deck while she continued transporting grain. After the war she returned to merchant service, changed names several times, and was finally scrapped at Kaohsiung in 1971.",
+    "author": "Bombhead",
+    "links": [
+      {"name": "Shipbucket - Empire MacRae 1944", "url": "https://www.shipbucket.com/drawings/5193"},
+      {"name": "Wikipedia — MV Empire MacRae", "url": "https://en.wikipedia.org/wiki/MV_Empire_MacRae"}
+    ]
+  },
+  {
     "name": "lowa",
     "displayName": "Iowa",
     "type": "Battleship",
@@ -5036,6 +5068,15 @@
   {
     "name": "UK/102/45/DP",
     "displayName": "102mm Single Dual-Purpose Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/102/40/MK4",
+    "displayName": "102mm/40 QF Mk IV Single Gun",
     "type": "Weapon",
     "armaments": [],
     "description": "",

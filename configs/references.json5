@@ -763,6 +763,38 @@
       {name: "维基百科 - HMS Argus", url: "https://en.wikipedia.org/wiki/HMS_Argus_(I49)"}
     ]
   },
+  {
+    name: "empire_maccoll",
+    displayName: "帝国麦科尔",
+    type: "商船航母",
+    armaments: [
+      {label: "舰炮", value: "1x1 102mm/40 QF Mk IV"},
+      {label: "高炮", value: "8x1 20mm/70 厄利孔"},
+      {label: "鱼雷攻击机", value: "3x 剑鱼式（Swordfish Mk I）"},
+    ],
+    description: "帝国麦科尔号是一艘以油轮船体建成的英国商船航母，1943 年 11 月投入使用。该舰在继续承担油运任务的同时，由小规模海军分队操作剑鱼式飞机，为北大西洋船队执行反潜巡逻；1946 年恢复为油轮并更名为 British Pilot，1962 年拆解。",
+    author: "Bombhead",
+    links: [
+      {name: "Shipbucket - Empire MacColl 1944", url: "https://www.shipbucket.com/drawings/5192"},
+      {name: "维基百科 - MV Empire MacColl", url: "https://en.wikipedia.org/wiki/MV_Empire_MacColl"}
+    ]
+  },
+  {
+    name: "empire_macrae",
+    displayName: "帝国麦克雷",
+    type: "商船航母",
+    armaments: [
+      {label: "舰炮", value: "1x1 102mm/40 QF Mk IV"},
+      {label: "高炮", value: "6x1 20mm/70 厄利孔"},
+      {label: "鱼雷攻击机", value: "4x 剑鱼式（Swordfish Mk I）"},
+    ],
+    description: "帝国麦克雷号是一艘兼作散装粮船的英国商船航母，1943 年下水，并以 1944 年状态加入游戏。该舰在继续运粮的同时搭载四架剑鱼式飞机，为大西洋船队执行反潜巡逻；战后恢复为粮船，历经数次易名，1971 年在高雄拆解。",
+    author: "Bombhead",
+    links: [
+      {name: "Shipbucket - Empire MacRae 1944", url: "https://www.shipbucket.com/drawings/5193"},
+      {name: "维基百科 - MV Empire MacRae", url: "https://en.wikipedia.org/wiki/MV_Empire_MacRae"}
+    ]
+  },
   // 美国海军
   {
     name: "lowa",
@@ -3642,6 +3674,15 @@
   {
     name: "UK/102/45/DP",
     displayName: "102mm/45 单装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/102/40/MK4",
+    displayName: "102mm/40 QF Mk IV 单装舰炮",
     type: "武器",
     armaments: [],
     description: "",

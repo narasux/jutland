@@ -6709,6 +6709,168 @@
       ]
     }
   },
+  // 帝国麦科尔，商船航母
+  {
+    name: "empire_maccoll",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "MAC",
+    year: 1944,
+    totalHP: 12000,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 11,
+    acceleration: 0.1,
+    rotateSpeed: 0.5,
+    length: 147,
+    width: 19,
+    fundsCost: 165,
+    timeCost: 61,
+    weapon: {
+      mainGuns: [
+        {
+          name: "UK/102/40/MK4",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        }
+      ],
+      antiAircraftGuns: [
+        {
+          name: "UK/20/70",
+          posPercent: 0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 5.5,
+      groups: [
+        {
+          name: "Swordfish",
+          maxCount: 3
+        }
+      ]
+    }
+  },
+  // 帝国麦克雷，商船航母
+  {
+    name: "empire_macrae",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "MAC",
+    year: 1944,
+    totalHP: 12000,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 12.5,
+    acceleration: 0.1,
+    rotateSpeed: 0.6,
+    length: 135,
+    width: 18,
+    fundsCost: 164,
+    timeCost: 60,
+    weapon: {
+      mainGuns: [
+        {
+          name: "UK/102/40/MK4",
+          posPercent: -0.98,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        }
+      ],
+      antiAircraftGuns: [
+        {
+          name: "UK/40/60",
+          posPercent: 0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 5,
+      groups: [
+        {
+          name: "Swordfish",
+          maxCount: 4
+        }
+      ]
+    }
+  },
   // 战列舰
   // 美国海军
   {
