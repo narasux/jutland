@@ -6709,6 +6709,346 @@
       ]
     }
   },
+  // 女王，护航航空母舰
+  {
+    name: "queen",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CVE",
+    year: 1945,
+    totalHP: 14200,
+    horizontalDamageReduction: 0.12,
+    verticalDamageReduction: 0.02,
+    maxSpeed: 17,
+    acceleration: 0.26,
+    rotateSpeed: 0.78,
+    length: 151,
+    width: 21,
+    fundsCost: 202,
+    timeCost: 78,
+    weapon: {
+      mainGuns: [],
+      secondaryGuns: [
+        {
+          name: "UK/40/60/2",
+          posPercent: 0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: 0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: 0.7,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: 0.7,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: 0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: 0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: -0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: -0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: -0.98,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60/2",
+          posPercent: -0.98,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右舷 9 座
+        {
+          name: "UK/20/70",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左舷 9 座
+        {
+          name: "UK/20/70",
+          posPercent: 0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.31,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 4,
+      groups: [
+        {
+          name: "F4U-4",
+          maxCount: 8
+        },
+        {
+          name: "TBF-1-UK",
+          maxCount: 12
+        }
+      ]
+    }
+  },
+  // 比特，护航航空母舰
+  {
+    name: "biter",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "CVE",
+    year: 1943,
+    totalHP: 9144,
+    horizontalDamageReduction: 0.04,
+    verticalDamageReduction: 0,
+    maxSpeed: 16.5,
+    acceleration: 0.18,
+    rotateSpeed: 0.7,
+    length: 150,
+    width: 20,
+    fundsCost: 147,
+    timeCost: 56,
+    weapon: {
+      mainGuns: [
+        {
+          name: "US/102/50/MK9",
+          posPercent: 0.9,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "US/102/50/MK9",
+          posPercent: 0.9,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.93,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        }
+      ],
+      antiAircraftGuns: [
+        // 前部 1 座
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.65,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 A
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 A
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "UK/20/70",
+          posPercent: 0.63,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 B
+        {
+          name: "UK/20/70",
+          posPercent: 0.63,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "UK/20/70",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 C
+        {
+          name: "UK/20/70",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "UK/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 D
+        {
+          name: "UK/20/70",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 E
+        {
+          name: "UK/20/70/2",
+          posPercent: -0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 4.5,
+      groups: [
+        {
+          name: "F4U-4",
+          maxCount: 8
+        },
+        {
+          name: "Swordfish",
+          maxCount: 12
+        }
+      ]
+    }
+  },
   // 帝国麦科尔，商船航母
   {
     name: "empire_maccoll",

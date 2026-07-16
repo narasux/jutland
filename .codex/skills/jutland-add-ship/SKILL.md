@@ -37,7 +37,8 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 
 - 从用户确认的透明图中提取需要的视图；默认只保留俯视和侧视，除非用户另有要求。
 - 边界不明显时按 alpha 或非背景像素做行列密度扫描。裁剪必须保留桅杆、天线、索具和舷外结构；侧视图最上方内容上方至少保留 50 px 原始分辨率余量。
-- 裁剪后确认最外层非透明像素不贴边。宁可保留透明余量，也不要截断细线。
+- 裁剪后确认最外层非透明像素不贴边，但舰艏、舰艉只保留防止截断所需的小安全边，通常为原图 2~6 px，且不得超过舰体长轴的 1%。不要把整张素材画布或大段透明区域带入缩放；否则按真实长度生成的资源会让可见舰体偏小。
+- 以主视图的 alpha 边界核对舰艏、舰艉裁切位置，忽略签名、网址、比例尺和其他视图的零散像素。若原图某端已经贴边，在该端补 2~4 px 透明安全边，不得继续裁掉船体。
 - 按现有资源方向统一：俯视图舰艏朝上，侧视图舰艏朝右。只旋转或裁剪，不改变舰体比例。
 - 若此时发现白底残留，返回 `jutland-clean-ship-image` 处理并等待用户重新确认，不在本 skill 内清理。
 
@@ -47,7 +48,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 - 脚本会在缩放前校验并保留原尺寸图；已有原尺寸图内容不同时会拒绝覆盖。备份路径使用项目根目录文件，并用实际舰名替代 `<ship name>`，例如 `princeton side.png`、`princeton top.png`。不要使用 `resources/images/ships/original`。
 - `length` 和 `width` 写入四舍五入后的真实舰体尺寸；航母 `width` 使用舰体宽度，不用飞行甲板外廓宽度。
 - 正式 PNG 是运行时的 `zoom=4` 资源，加载器再生成 1/2 和 1/4 档；因此长轴通常必须保持约 `length*4`。提高该数值会改变舰船显示尺寸，不能用作保细节手段。
-- 在拆分阶段去除不必要的透明空白，但保留细线所需安全边距，避免把目标像素预算浪费在过大画布上。
+- 在拆分阶段去除不必要的透明空白，尤其是决定实际显示长度的舰艏、舰艉方向；侧视图仍保留桅杆上方至少 50 px 原始分辨率余量。缩放前记录画布边界与 alpha 边界的间距，确认长轴两端只剩小安全边。
 - 使用 `--target-long-axis` 或单个目标轴，另一轴由脚本按原比例计算。默认 `--mode line-art` 在预乘 alpha 的 Lanczos 缩放后做固定的温和锐化；`--mode plain` 只做 Lanczos。
 - 缩放比例 `<0.5` 时分别生成 `plain` 和 `line-art` 候选并比较高对比预览。锐化只能增强线条对比，无法恢复缩放后不足 1 px 的结构；必要时换用更高分辨率源图。
 - 始终使用 `--preview-dir` 生成黑底和洋红底预览，并用 `view_image` 检查。若仍有白底残留，交回 `jutland-clean-ship-image` 处理并确认。
@@ -90,7 +91,7 @@ python3 scripts/resize_ship_image.py input.png output.png \
 
 ### 7. 验证
 
-- 确认原尺寸备份和正式俯视/侧视 PNG 均存在，方向正确，缩放保持长宽比。
+- 确认原尺寸备份和正式俯视/侧视 PNG 均存在，方向正确，缩放保持长宽比；正式图舰艏、舰艉不得有会使可见舰体明显小于 `length*4` 的透明留白。
 - 搜索舰名，确认 `ships.json5`、`references.json5`、`TestAll` 和 PNG 文件名一致且没有重复定义。
 - 搜索所有武器、弹药、发射器和飞机引用，确认上游配置存在。
 - 用 `view_image` 检查正式 PNG 的完整轮廓和透明边缘；用 `git diff --check` 检查文本问题。

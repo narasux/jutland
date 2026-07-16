@@ -1145,6 +1145,40 @@
     ]
   },
   {
+    "name": "queen",
+    "displayName": "Queen",
+    "type": "Escort Aircraft Carrier",
+    "armaments": [
+      {"label": "Anti-aircraft Guns", "value": "10x2 40mm/60 Bofors"},
+      {"label": "Anti-aircraft Guns", "value": "18x1 20mm/70 Oerlikon"},
+      {"label": "Fighters", "value": "8x F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "12x Avenger Mk I"}
+    ],
+    "description": "HMS Queen (D19) was a U.S.-built Ruler-class escort carrier transferred to the Royal Navy under Lend-Lease and commissioned in 1943. She served on Atlantic and Arctic duties, and aircraft of 853 Naval Air Squadron took part in Operation Judgement on 4 May 1945.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - HMS Queen D19", "url": "https://www.shipbucket.com/drawings/5189"},
+      {"name": "Wikipedia - HMS Queen (D19)", "url": "https://en.wikipedia.org/wiki/HMS_Queen_(D19)"},
+    ]
+  },
+  {
+    "name": "biter",
+    "displayName": "Biter",
+    "type": "Escort Aircraft Carrier",
+    "armaments": [
+      {"label": "Deck Guns", "value": "3x1 102mm/50 Mk 9"},
+      {"label": "Anti-aircraft Guns", "value": "5x2 + 6x1 20mm/70 Oerlikon"},
+      {"label": "Fighters", "value": "8x F4U-4 Corsair"},
+      {"label": "Torpedo Bombers", "value": "12x Fairey Swordfish Mk II"}
+    ],
+    "description": "HMS Biter (D97) was converted from the American C3 merchant ship Rio-Parana and commissioned into the Royal Navy in 1942. She served as a North Atlantic escort and anti-submarine carrier, historically operating Martlets and Swordfish with 811 Naval Air Squadron.",
+    "author": "Bombhead, K.W. Vestergaard",
+    "links": [
+      {"name": "Shipbucket - HMS Biter D97", "url": "https://www.shipbucket.com/drawings/5191"},
+      {"name": "Wikipedia - HMS Biter (D97)", "url": "https://en.wikipedia.org/wiki/HMS_Biter_(D97)"}
+    ]
+  },
+  {
     "name": "empire_maccoll",
     "displayName": "Empire MacColl",
     "type": "Merchant Aircraft Carrier",
@@ -4434,6 +4468,17 @@
     "description": "",
     "author": "",
     "links": []
+  },
+  {
+    "name": "US/102/50/MK9",
+    "displayName": "102mm/50 Single Mount Mk 9",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "A U.S. Navy 4-inch/50 Mk 9 single gun used in the game to represent the three American-built 4-inch mounts carried by HMS Biter.",
+    "author": "",
+    "links": [
+      {"name": "NavWeaps - 4-inch/50 Marks 7, 8, 9 and 10", "url": "http://www.navweaps.com/Weapons/WNUS_4-50_mk9.php"}
+    ]
   },
   {
     "name": "US/127/54/2/MK39",

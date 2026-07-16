@@ -292,6 +292,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 美国海军 4-inch/50 Mk 9 单装舰炮
+  {
+    name: "US/102/50/MK9",
+    bulletName: "UK/GB/102/1930",
+    bulletCount: 1,
+    reloadTime: 7,
+    range: 15,
+    bulletSpread: 70,
+    bulletSpeed: 884,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 美国海军 US/127/54/MK39 双联装舰炮
   {
     name: "US/127/54/2/MK39",

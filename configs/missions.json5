@@ -879,6 +879,8 @@
           "hermes",
           "courageous",
           "argus",
+          "queen",
+          "biter",
           "empire_maccoll",
           "empire_macrae"
         ],
@@ -1184,14 +1186,26 @@
         belongPlayer: "HA"
       },
       {
-        name: "empire_maccoll",
+        name: "queen",
         pos: [9, 25],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "empire_macrae",
+        name: "biter",
         pos: [10, 26],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "empire_maccoll",
+        pos: [9, 27],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "empire_macrae",
+        pos: [10, 28],
         rotation: 90,
         belongPlayer: "HA"
       },

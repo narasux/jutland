@@ -764,6 +764,40 @@
     ]
   },
   {
+    name: "queen",
+    displayName: "女王",
+    type: "护航航空母舰",
+    armaments: [
+      {label: "高炮", value: "10x2 40mm/60 博福斯"},
+      {label: "高炮", value: "18x1 20mm/70 厄利孔"},
+      {label: "制空战斗机", value: "8x 海盗式（F4U-4）"},
+      {label: "鱼雷攻击机", value: "12x 复仇者式（Avenger Mk I）"},
+    ],
+    description: "女王号（HMS Queen, D19）是美国建造并通过租借法案移交英国皇家海军的统治者级护航航空母舰，1943 年服役。1945 年该舰搭载第 853 海军航空中队参加挪威沿岸作战，并于 5 月 4 日参加欧洲战场最后一次舰载机空袭“审判行动”。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - HMS Queen D19", url: "https://www.shipbucket.com/drawings/5189"},
+      {name: "维基百科 - HMS Queen (D19)", url: "https://en.wikipedia.org/wiki/HMS_Queen_(D19)"},
+    ]
+  },
+  {
+    name: "biter",
+    displayName: "比特",
+    type: "护航航空母舰",
+    armaments: [
+      {label: "舰炮", value: "3x1 102mm/50 Mk 9"},
+      {label: "高炮", value: "5x2 + 6x1 20mm/70 厄利孔"},
+      {label: "制空战斗机", value: "8x 海盗式（F4U-4）"},
+      {label: "鱼雷攻击机", value: "12x 剑鱼式（Swordfish Mk II）"},
+    ],
+    description: "比特号（HMS Biter, D97）由美国 C3 型货轮 Rio-Parana 改装为复仇者级护航航空母舰，1942 年加入英国皇家海军。该舰主要承担北大西洋护航与反潜任务，历史上曾由第 811 海军航空中队操作 Martlet 与 Swordfish。",
+    author: "Bombhead, K.W. Vestergaard",
+    links: [
+      {name: "Shipbucket - HMS Biter D97", url: "https://www.shipbucket.com/drawings/5191"},
+      {name: "维基百科 - HMS Biter (D97)", url: "https://en.wikipedia.org/wiki/HMS_Biter_(D97)"}
+    ]
+  },
+  {
     name: "empire_maccoll",
     displayName: "帝国麦科尔",
     type: "商船航母",
@@ -3040,6 +3074,17 @@
     description: "",
     author: "",
     links: []
+  },
+  {
+    name: "US/102/50/MK9",
+    displayName: "102mm/50 单装舰炮 Mk9",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 4 英寸/50 Mk 9 单装舰炮；本游戏用于表现英国护航航空母舰比特号装备的三座美制 4 英寸炮。",
+    author: "",
+    links: [
+      {name: "NavWeaps - 4-inch/50 Marks 7, 8, 9 and 10", url: "http://www.navweaps.com/Weapons/WNUS_4-50_mk9.php"}
+    ]
   },
   {
     name: "US/127/54/2/MK39",
