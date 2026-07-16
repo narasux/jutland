@@ -31,6 +31,42 @@ func TestTruncateCollectionTextKeepsEllipsisWithinWidth(t *testing.T) {
 	require.Equal(t, "Torpedoes", display)
 }
 
+func TestFitCollectionLinesAddsEllipsisWhenRowsOverflow(t *testing.T) {
+	fontSize := 18.0
+	textFont := font.LocalizedUI(font.Kai)
+	maxWidth := estimateCollectionTextWidth("Second line", fontSize)
+
+	lines, truncated := fitCollectionLines(
+		[]string{"First line", "Second line", "Third line"},
+		maxWidth,
+		fontSize,
+		textFont,
+		2,
+	)
+
+	require.True(t, truncated)
+	require.Len(t, lines, 2)
+	require.True(t, strings.HasSuffix(lines[1], "…"))
+	require.LessOrEqual(t, estimateCollectionTextWidth(lines[1], fontSize), maxWidth)
+}
+
+func TestFitCollectionLinesKeepsCompleteRowsUnchanged(t *testing.T) {
+	fontSize := 18.0
+	textFont := font.LocalizedUI(font.Kai)
+	input := []string{"First line", "Second line"}
+
+	lines, truncated := fitCollectionLines(
+		input,
+		estimateCollectionTextWidth("Second line", fontSize),
+		fontSize,
+		textFont,
+		2,
+	)
+
+	require.False(t, truncated)
+	require.Equal(t, input, lines)
+}
+
 func TestTruncatedTextAreaAt(t *testing.T) {
 	areas := []truncatedTextHitArea{
 		{Rect: image.Rect(10, 20, 110, 45), Lines: []string{"full armament"}},

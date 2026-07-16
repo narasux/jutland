@@ -1715,11 +1715,20 @@ func (c *CollectionUI) drawShipSource(screen *ebiten.Image, ship *objUnit.Battle
 	// 历史正文之后固定留一行空白，再按内容流顺序绘制作者和链接。
 	reservedHeight := float64(metadataLines+1)*lineHeight + 12*scale
 	maxLines := max(1, int((card.Y+card.H-descriptionY-reservedHeight)/lineHeight))
-	c.drawer.drawCollectionLines(
+	drawnLines, descriptionTruncated := c.drawer.drawCollectionLines(
 		screen, descriptionLines, card.X+20*scale, descriptionY,
 		card.W-40*scale, fontSize, lineHeight, font.LocalizedUI(font.Kai), maxLines, colorx.White,
 	)
-	drawnLines := min(maxLines, len(descriptionLines))
+	if descriptionTruncated {
+		c.addTruncatedTextHit(
+			card.X+20*scale,
+			descriptionY+float64(drawnLines-1)*lineHeight,
+			contentWidth,
+			fontSize,
+			image.Point{},
+			[]string{ref.Description},
+		)
+	}
 	metaY := descriptionY + float64(drawnLines+1)*lineHeight
 	for _, line := range authorLines {
 		c.drawer.drawText(

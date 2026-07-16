@@ -203,18 +203,38 @@ func (d *Drawer) drawCollectionLines(
 	textFont *text.GoTextFaceSource,
 	maxLines int,
 	textColor color.Color,
-) {
+) (int, bool) {
 	// 文本卡片需要按宽度折行，但又不想引入复杂排版器，所以这里使用保守的手写折行逻辑。
-	drawn := 0
-	for _, line := range lines {
-		for _, wrapped := range wrapCollectionText(line, maxWidth, fontSize) {
-			if drawn >= maxLines {
-				return
-			}
-			d.drawText(screen, wrapped, x, y+float64(drawn)*lineHeight, fontSize, textFont, textColor)
-			drawn++
-		}
+	visibleLines, truncated := fitCollectionLines(lines, maxWidth, fontSize, textFont, maxLines)
+	for idx, line := range visibleLines {
+		d.drawText(screen, line, x, y+float64(idx)*lineHeight, fontSize, textFont, textColor)
 	}
+	return len(visibleLines), truncated
+}
+
+func fitCollectionLines(
+	lines []string,
+	maxWidth, fontSize float64,
+	textFont *text.GoTextFaceSource,
+	maxLines int,
+) ([]string, bool) {
+	wrappedLines := make([]string, 0, len(lines))
+	for _, line := range lines {
+		wrappedLines = append(wrappedLines, wrapCollectionText(line, maxWidth, fontSize)...)
+	}
+	if len(wrappedLines) <= maxLines {
+		return wrappedLines, false
+	}
+	if maxLines <= 0 {
+		return nil, true
+	}
+
+	visibleLines := append([]string(nil), wrappedLines[:maxLines]...)
+	last := len(visibleLines) - 1
+	visibleLines[last], _ = truncateCollectionText(
+		visibleLines[last]+"…", maxWidth, fontSize, textFont,
+	)
+	return visibleLines, true
 }
 
 func wrapCollectionText(value string, maxWidth, fontSize float64) []string {
