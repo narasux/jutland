@@ -31,7 +31,7 @@
     bulletSpeed: 720,
     proximityRadius: 0.25,
     blastRadius: 0.45,
-    fundsCost: 5,
+    fundsCost: 1,
     antiShip: false,
     antiAircraft: true
   },
@@ -49,7 +49,7 @@
     bulletSpeed: 720,
     proximityRadius: 0.25,
     blastRadius: 0.45,
-    fundsCost: 5,
+    fundsCost: 1,
     antiShip: false,
     antiAircraft: true
   },
@@ -67,7 +67,7 @@
     bulletSpeed: 680,
     proximityRadius: 0.2,
     blastRadius: 0.5,
-    fundsCost: 10,
+    fundsCost: 5,
     antiShip: true,
     antiAircraft: false
   },
@@ -85,7 +85,7 @@
     bulletSpeed: 520,
     proximityRadius: 0.25,
     blastRadius: 0.75,
-    fundsCost: 5,
+    fundsCost: 1,
     antiShip: true,
     antiAircraft: false
   },

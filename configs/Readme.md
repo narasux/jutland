@@ -37,7 +37,7 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 
 使用 skill：`jutland-evaluate-ship-cost`
 
-目标文件：`configs/ships.json5`，并依赖 `configs/guns.json5`、`configs/torpedo_launchers.json5`、`configs/rocket_launchers.json5`、`configs/planes.json5` 中的武器和飞机费用。
+目标文件：`configs/ships.json5`、`configs/guns.json5`、`configs/torpedo_launchers.json5`、`configs/rocket_launchers.json5`，并依赖 `configs/bullets.json5`、`configs/planes.json5` 与初始化后的运行时战力。
 
 查看建议费用：
 
@@ -48,25 +48,43 @@ bash .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.sh
 确认后写回：
 
 ```bash
+python3 .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py --apply
 python3 .codex/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
 ```
 
-当前舰船费用分三层：
+武器参考价同时考虑持续输出与首轮爆发：
 
 ```text
-weaponCost  = clamp(round(damage * bulletCount / reloadTime * weaponTypeFactor / 5) * 5, 1, 200)
-hullRawCost = HP^0.45 * typeMultiplier * nationMultiplier * hullScaleFactor
-fundsCost   = hullCost + weaponCost/10
+expectedDamage = damage * (1 + 2.7 * criticalRate)
+salvoDamage    = expectedDamage * projectileCount
+referenceScore = salvoDamage * (0.70 / actualCycle + 0.30 / referenceCycle)
+               * weaponTypeFactor
+weaponCost     = clamp(roundTo5(referenceScore / 5), 1, 100)
 ```
 
-航母的舰载机资金在运行时全额计入总费用：
+`referenceScore` 只用于比较武器强弱，除以 `5` 后才映射为游戏资金。标准武器统一计算；没有阵营路径的彩蛋武器保留手工价格，但同样限制在 `$1–100`。武器 `fundsCost` 当前不会在运行时被单独购买。
+
+舰船价格以 `combatpower.CalculateShip` 的运行时结果为主，并用有效生命值防止无武装或低输出舰体被低估：
+
+```text
+economicPower = HullPower + 0.25 * Burst + 0.10 * Projection
+combatCost    = roundTo5(typeBaseCost + economicPower * typePowerFactor)
+hullFloor     = roundTo5(EHP^0.45 * hullFloorMultiplier * 3.0)
+fundsCost     = max(5, combatCost, hullFloor)
+```
+
+航母和航空战列舰的 `Burst` / `Projection` 已混入航空贡献，因此舰体定价只使用 `HullPower`，舰载机资金仍在运行时全额追加：
 
 ```text
 aircraftCost = sum(planeCount * planeFundsCost)
 totalCost    = fundsCost + aircraftCost
 ```
 
-舰载机不线性增加舰船建造时间；舰船和飞机生产视为可并行。航母只增加小额飞行队适配时间：
+医疗船的常规战力为零，使用 `roundTo5(hullFloor + 25)`，其中 `$25` 表示治疗设施和支援价值。`nation == special` 的彩蛋舰船保留手工价格。
+
+少数科技树终局舰可以在用户确认后使用显式战略倍率。当前 `satsuma=1.10`，用于让其价格贴近大和；`edo=1.15`，用于确保江户明显高于大和。此类例外只解决科技树层级，不应改动全局战列舰系数。
+
+舰载机不线性增加舰船建造时间；舰船和飞机生产视为可并行，只增加小额飞行队适配时间：
 
 ```text
 airWingFitPenalty = clamp(
@@ -74,10 +92,21 @@ airWingFitPenalty = clamp(
     0,
     18,
 )
-timeCost = clamp(round(hullTime + airWingFitPenalty * nationTimeMultiplier), 3, 130)
+
+普通舰种：
+baseTime = clamp(round(2 + fundsCost * 0.35), 3, 130)
+
+战列舰：
+baseTime = clamp(round(40 + fundsCost * 0.13), 85, 180)
+
+timeCost = clamp(
+    baseTime + airWingFitPenalty * nationAirFitMultiplier,
+    3,
+    typeTimeMax,
+)
 ```
 
-当前 `nationTimeMultiplier`：`us=0.75`、`uk=0.90`、`jp=1.00`、`de=1.00`、`ru/su=1.05`、`cn=0.50`。
+当前适配时间国家倍率：`us=0.75`、`uk=0.90`、`jp/de=1.00`、`ru/su=1.05`、`cn=0.50`。
 
 ### 验证
 

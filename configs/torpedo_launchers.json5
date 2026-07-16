@@ -8,7 +8,7 @@
     reloadTime: 5,
     range: 20,
     bulletSpeed: 54,
-    fundsCost: 200
+    fundsCost: 100
   },
   {
     name: "ShanDa",
@@ -18,7 +18,7 @@
     reloadTime: 5,
     range: 12,
     bulletSpeed: 45,
-    fundsCost: 200
+    fundsCost: 100
   },
   // 美国海军 533mm 4联装 鱼雷
   {
@@ -29,7 +29,7 @@
     reloadTime: 75,
     range: 12,
     bulletSpeed: 45,
-    fundsCost: 200
+    fundsCost: 55
   },
   // 美国海军 533mm 单装鱼雷
   {
@@ -40,7 +40,7 @@
     reloadTime: 25,
     range: 12,
     bulletSpeed: 45,
-    fundsCost: 170
+    fundsCost: 30
   },
   // 美国海军 324mm 三联装鱼雷
   {
@@ -51,7 +51,7 @@
     reloadTime: 25,
     range: 10,
     bulletSpeed: 50,
-    fundsCost: 155
+    fundsCost: 25
   },
   // 日本海军 4联装 回天鱼雷
   {
@@ -62,7 +62,7 @@
     reloadTime: 300,
     range: 30,
     bulletSpeed: 36,
-    fundsCost: 200
+    fundsCost: 100
   },
   // 日本海军 610mm 4联装 酸素鱼雷
   {
@@ -73,7 +73,7 @@
     reloadTime: 70,
     range: 22,
     bulletSpeed: 54,
-    fundsCost: 200
+    fundsCost: 95
   },
   // 日本海军 610mm 3联装 酸素鱼雷
   {
@@ -84,7 +84,7 @@
     reloadTime: 54,
     range: 22,
     bulletSpeed: 54,
-    fundsCost: 200
+    fundsCost: 85
   },
   // 日本海军 610mm 2联装 酸素鱼雷
   {
@@ -95,7 +95,7 @@
     reloadTime: 33,
     range: 22,
     bulletSpeed: 54,
-    fundsCost: 200
+    fundsCost: 80
   },
   // 日本海军 533mm 3联装鱼雷
   {
@@ -106,7 +106,7 @@
     reloadTime: 28,
     range: 17,
     bulletSpeed: 45,
-    fundsCost: 200
+    fundsCost: 85
   },
   // 日本海军 533mm 2联装鱼雷
   {
@@ -117,7 +117,7 @@
     reloadTime: 19,
     range: 17,
     bulletSpeed: 45,
-    fundsCost: 200
+    fundsCost: 80
   },
   // 日本海军 450mm 单装鱼雷
   {
@@ -128,7 +128,7 @@
     reloadTime: 30,
     range: 12,
     bulletSpeed: 45,
-    fundsCost: 90
+    fundsCost: 15
   },
   // 德国海军 533mm 4联装 鱼雷
   {
@@ -139,7 +139,7 @@
     reloadTime: 70,
     range: 15,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 65
   },
   // 德国海军 533mm 3联装 鱼雷
   {
@@ -150,7 +150,7 @@
     reloadTime: 52,
     range: 15,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 60
   },
   // 德国海军 533mm 单装鱼雷
   {
@@ -161,7 +161,7 @@
     reloadTime: 20,
     range: 15,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 45
   },
   // 英国海军 622mm 单装 鱼雷
   {
@@ -172,7 +172,7 @@
     reloadTime: 20,
     range: 18,
     bulletSpeed: 45,
-    fundsCost: 200
+    fundsCost: 55
   },
   // 英国海军 533mm 五联装 鱼雷
   {
@@ -183,7 +183,7 @@
     reloadTime: 88,
     range: 14,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 70
   },
   // 英国海军 533mm 四联装 鱼雷
   {
@@ -194,7 +194,7 @@
     reloadTime: 70,
     range: 14,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 65
   },
   // 英国海军 533mm 三联装 鱼雷
   {
@@ -205,7 +205,7 @@
     reloadTime: 52,
     range: 14,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 60
   },
   // 英国海军 533mm 单装 鱼雷
   {
@@ -216,7 +216,7 @@
     reloadTime: 16,
     range: 13,
     bulletSpeed: 45,
-    fundsCost: 200
+    fundsCost: 45
   },
   // 苏联海军 533mm 五联装 鱼雷
   {
@@ -227,7 +227,7 @@
     reloadTime: 80,
     range: 18,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 80
   },
   // 苏联海军 533mm 三联装 鱼雷
   {
@@ -238,7 +238,7 @@
     reloadTime: 56,
     range: 18,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 60
   },
   // 苏联海军 533mm 单装鱼雷
   {
@@ -249,7 +249,6 @@
     reloadTime: 18,
     range: 18,
     bulletSpeed: 50,
-    fundsCost: 200
+    fundsCost: 50
   }
 ]
-
