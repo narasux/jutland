@@ -8,6 +8,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 ## 核心规则
 
 - 在仓库根目录工作。先阅读 `AGENTS.md` 并执行 `git status --short`，保留所有无关用户改动。
+- 所有项目路径以仓库根目录为基准；脚本不得写死机器绝对路径，外部输入和输出路径由调用者显式传入。
 - 先检查同阵营、同任务类型的现有飞机，再按现有命名、数值和素材风格做最小修改。
 - 保持配置引用链完整：弹药 -> 机炮/释放器/火箭发射器 -> 飞机 -> 舰船编组。
 - 保持飞机 `name`、PNG 文件名和舰船编组引用完全一致。
@@ -33,7 +34,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 - 使用示例：
   ```bash
   python .codex/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
-    --input "/path/to/source.jpg" \
+    --input "raw/source.jpg" \
     --output resources/images/planes/fighter/A6M2.png \
     --crop 285,35,1015,780 \
     --rotate -45 \
@@ -98,5 +99,5 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
    - 搜索每个机炮、炸弹、鱼雷和火箭名称，确认上游配置存在。
    - 逐张使用 `view_image` 检查完整轮廓、朝向、透明边缘及发动机/螺旋桨等深色部件。
    - 对用户提供图片生成的素材，最终说明必须写清楚素材来源、执行的旋转角度、是否只做确定性处理，以及是否发生过换源或重绘；若没有用户明确授权，不得声称重绘/生成版本是最终结果。
-   - 运行 `GOCACHE=/tmp/go-build go build -o /dev/null ./pkg/...`。修改 Go 行为时再运行相关单元测试和 `gofmt`。
+   - 运行 `go build ./pkg/...`。修改 Go 行为时再运行相关单元测试和 `gofmt`。
    - 最终说明新增型号、类型近似、舰船编组变化、素材来源处理和实际执行的验证。

@@ -7,6 +7,7 @@ description: Recolor Jutland ship PNG drawings from a reference ship or requeste
 
 ## 范围
 
+- 在仓库根目录执行命令；项目路径以仓库根目录为基准，脚本不得写死机器绝对路径。
 - 只修改用户指定的涂装或材质颜色；保留舰型、视图布局、尺寸、比例、线稿和透明通道。
 - 默认保留红色水下舰体、黑色轮廓、旗帜、文字、比例尺、舷号、舷窗和来源署名。
 - 不裁剪、不旋转、不缩放、不重绘设备，也不更新正式游戏资源或配置。
@@ -103,7 +104,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/recolor_ship_components.
 ```
 
 - 可重复使用 `-include-box` 和 `-exclude-box`。
-- 多个源色需要分多次处理，每次写入 `/tmp` 中间文件；最终只保留一个候选 PNG。
+- 多个源色需要分多次处理，每次写入由 `mktemp -d` 动态创建的临时目录；最终只保留一个候选 PNG。
 - 防鱼雷突出部通常是两条长而对称的连通带，可用面积、宽度、纵向位置筛选。
 - 防空炮通常是成对或成组重复的小组件，应逐组框选，不要把附近甲板板缝整体改灰。
 

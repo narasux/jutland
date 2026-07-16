@@ -7,6 +7,7 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
 
 ## 范围
 
+- 在仓库根目录执行命令；项目路径以仓库根目录为基准，脚本不得写死机器绝对路径。
 - 只把白色或近白色背景变为透明；保留原始画布尺寸、方向、比例和图中内容。
 - 不裁剪、不拆分视图、不判断俯视/侧视、不旋转、不缩放、不更新配置，也不覆盖正式游戏资源。
 - 不重绘、补画、风格化或删除飞机、标注等非背景内容。边界不确定时停止并请用户判断。
@@ -33,7 +34,7 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
    - 可先只分析不写文件：
      `go run .codex/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -analyze-only`
    - 只删除能明确判断为背景的组件。栅栏、索具、吊臂等细线包围区域可在原始分辨率下使用约 `225~235` 的低饱和亮色阈值，但必须保留深灰、黑色和抗锯齿线条。
-   - 每次放宽阈值或扩大区域前，如需人工对比，可把候选文件临时复制到 `/tmp` 或显式使用 `-backup-before-aggressive`；完成前必须删除中间版本，仓库中只保留最终 `<stem>.cleaned.png`。
+   - 每次放宽阈值或扩大区域前，如需人工对比，可用 `mktemp -d` 动态创建临时目录保存候选文件，或显式使用 `-backup-before-aggressive`；完成前必须删除中间版本，仓库中只保留最终 `<stem>.cleaned.png`。
    - 如需删除明确的大块封闭背景，使用脚本的显式面积阈值，例如：
      `go run .codex/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -remove-enclosed-min-area <pixels>`
      脚本默认直接覆盖输出文件；只有显式传入 `-backup-before-aggressive` 时才会生成 `<stem>.before-aggressive-cleanup.png` 备份。
@@ -69,7 +70,7 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
 
 5. 输出确认材料。
    - 保存未缩放的透明 PNG 候选文件，不覆盖输入或 `resources/images/ships/...` 正式资源；仓库中只保留 `<stem>.cleaned.png`。
-   - 用 `view_image` 检查透明 PNG；如需高对比背景预览，输出到 `/tmp`，完成前删除，不保留在仓库。
+   - 用 `view_image` 检查透明 PNG；如需高对比背景预览，输出到 `mktemp -d` 动态创建的临时目录，完成前删除，不保留在仓库。
    - 报告原始/输出尺寸、删除的像素或组件数量、调色像素数量，以及仍需人工判断的区域。
    - 明确请求用户确认，然后停止。
 

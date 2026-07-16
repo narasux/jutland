@@ -8,6 +8,7 @@ description: Localize and maintain Jutland encyclopedia reference data across co
 ## 核心规则
 
 - 在仓库根目录工作。先阅读 `AGENTS.md` 并执行 `git status --short`，保留用户已有改动和素材。
+- 所有项目路径以仓库根目录为基准；命令和辅助脚本不得写死机器绝对路径。
 - 把 `configs/references.json5` 视为简体中文基准，把 `configs/references.<locale>.json5` 视为同结构的完整本地化文件。
 - 保持所有语言的顶层 `name` 集合完全一致。`name` 是稳定内部 ID，不翻译、不修正大小写。
 - 保持武装条目数量、顺序、数量、口径、型号和游戏数值不变；只翻译展示文本。
@@ -62,7 +63,7 @@ description: Localize and maintain Jutland encyclopedia reference data across co
    - 在 `configs/Readme.md` 记录语言文件、稳定字段和回退行为。
    - 运行 `gofmt` 处理 Go 文件，执行 `git diff --check`。
    - 运行 `go test ./pkg/mission/object/reference`，覆盖解析、重复 ID、语言集合、武装数量、URL、运行时选择和中文回退。
-   - 运行受影响包测试和 `go build -o /dev/null ./...`。
+   - 运行受影响包测试和 `go build ./...`。
    - `go test ./...` 在无 GUI 的 macOS 环境可能因 Ebiten 初始化失败；先保证纯数据测试不依赖 Ebiten，并如实报告全量测试的实际失败原因。
 
 ## 完成标准

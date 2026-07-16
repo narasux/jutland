@@ -8,6 +8,7 @@ description: Evaluate and assign fundsCost and timeCost for Jutland aircraft bas
 ## 核心规则
 
 - 在仓库根目录工作。先阅读 `AGENTS.md` 并执行 `git status --short`，保留所有无关用户改动。
+- 所有项目路径以仓库根目录为基准；脚本不得写死机器绝对路径，中间产物使用动态临时路径。
 - 花费评估必须基于实际战力数据（通过脚本提取），不做凭空估算。
 - 公式参数在本文件中集中维护；修改公式时必须同步更新脚本与本文档。
 - 不删除、不替换、不清理用户未要求处理的现有配置。
@@ -21,8 +22,8 @@ description: Evaluate and assign fundsCost and timeCost for Jutland aircraft bas
 ## 脚本
 
 - `scripts/evaluate_plane_costs.sh`：编排脚本，负责提取战力数据、套用花费公式、输出建议值。
-- `scripts/plane_cost_data_test.go`：Go 测试模板，调用初始化函数后输出每架飞机的结构化战力数据。
-- `scripts/plane_cost_calc.py`：备用配置估算器；当 Go 测试因本机图形环境触发 Ebiten 初始化失败时使用。追加 `--apply` 可用备用估算器写回 `configs/planes.json5`。
+- `export_plane_cost_data.go`：普通 Go 导出器，加载初始化后的飞机并输出结构化战力数据；不向业务包复制临时测试。
+- `scripts/plane_cost_calc.py`：备用配置估算器；当 Go 导出器因本机图形环境触发 Ebiten 初始化失败时使用。追加 `--apply` 可用备用估算器写回 `configs/planes.json5`。
 
 ### 使用方式
 
@@ -34,12 +35,10 @@ bash .codex/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
 
 ### 脚本内部流程
 
-1. 将 `plane_cost_data_test.go` 复制到 `pkg/mission/object/initialize/`
-2. 运行 `go test -run TestPlaneCostData -v ./pkg/mission/object/initialize/`
-3. 解析测试日志中的 JSON 行，提取 `name`、`type`、`nation`、`combatPower`、`tonnage`
-4. 套用花费公式计算 `fundsCost` 与 `timeCost`
-5. 输出 TSV 结果表
-6. 清理 `pkg/mission/object/initialize/` 下的临时测试文件
+1. 运行 `go run export_plane_cost_data.go`，加载游戏初始化数据
+2. 解析导出的 JSON，提取 `name`、`type`、`nation`、`combatPower`、`tonnage`
+3. 套用花费公式计算 `fundsCost` 与 `timeCost`
+4. 输出 TSV 结果表
 
 ## 花费公式
 

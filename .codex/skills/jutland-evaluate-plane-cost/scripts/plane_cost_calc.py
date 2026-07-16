@@ -6,11 +6,15 @@ a combat-power estimate derived from configurable plane attributes.
 Output TSV: name	type	nation	tonnage	fundsCost	timeCost	cpEstimate
 """
 
+import argparse
 import math
 import re
 import sys
+from pathlib import Path
 
 import json5
+
+REPO_ROOT = Path(__file__).resolve().parents[4]
 
 # Fallback formula parameters (kept in sync with SKILL.md)
 SCALE_FACTOR = 0.30
@@ -26,9 +30,9 @@ TYPE_MULTIPLIERS = {
 }
 
 
-def parse_planes_json5(path: str) -> list:
+def parse_planes_json5(path: Path) -> list:
     """Parse planes.json5 and return plane entries."""
-    with open(path, 'r') as f:
+    with path.open('r') as f:
         return json5.loads(f.read())
 
 
@@ -67,9 +71,9 @@ def calc_cost(plane: dict) -> tuple[int, int, float]:
     return funds, time_cost, cp_est
 
 
-def apply_costs(path: str, records: list[tuple[str, int, int]]) -> None:
+def apply_costs(path: Path, records: list[tuple[str, int, int]]) -> None:
     cost_map = {name: (funds, time_cost) for name, funds, time_cost in records}
-    with open(path, 'r') as f:
+    with path.open('r') as f:
         content = f.read()
 
     lines = content.split('\n')
@@ -93,17 +97,27 @@ def apply_costs(path: str, records: list[tuple[str, int, int]]) -> None:
                     break
         result.append(line)
 
-    with open(path, 'w') as f:
+    with path.open('w') as f:
         f.write('\n'.join(result).rstrip() + '\n')
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 plane_cost_calc.py <planes.json5> [--apply]", file=sys.stderr)
-        sys.exit(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "planes",
+        type=Path,
+        help="planes.json5 path, relative to the repository root by default",
+    )
+    parser.add_argument(
+        "--apply",
+        action="store_true",
+        help="write evaluated costs back to the selected configuration",
+    )
+    args = parser.parse_args()
 
-    path = sys.argv[1]
-    apply = '--apply' in sys.argv[2:]
+    path = args.planes
+    if not path.is_absolute():
+        path = REPO_ROOT / path
     planes = parse_planes_json5(path)
 
     records = []
@@ -131,7 +145,7 @@ def main():
     max_cp = max(r[6] for r in records)
     print(f'[plane_cost_calc] estimated cp range: {min_cp:.1f} – {max_cp:.1f}', file=sys.stderr)
     print(f'[plane_cost_calc] {len(records)} planes evaluated', file=sys.stderr)
-    if apply:
+    if args.apply:
         apply_costs(path, apply_records)
         print(f'[plane_cost_calc] updated {len(apply_records)} planes in {path}', file=sys.stderr)
 

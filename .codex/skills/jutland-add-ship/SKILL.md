@@ -8,6 +8,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 ## 核心规则
 
 - 在仓库根目录阅读 `AGENTS.md`，执行 `git status --short`，保留无关用户改动。
+- 所有项目路径以仓库根目录为基准；脚本不得写死机器绝对路径，外部输入和输出路径由调用者显式传入。
 - 只接受已完成白底清理且经用户确认的透明图片。若输入仍有白底或未确认，先使用 `jutland-clean-ship-image` 并在预览后停止。
 - 本 skill 不执行白底透明化。只允许拆分、裁剪、旋转和等比例缩放素材，不重绘或风格化。
 - 保持 `name`、PNG 文件名及所有配置引用一致；优先复用现有舰船、武器、飞机和发射器模式。
@@ -57,9 +58,10 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 示例：
 
 ```bash
-python3 scripts/resize_ship_image.py input.png output.png \
+python3 .codex/skills/jutland-add-ship/scripts/resize_ship_image.py \
+  input.png output.png \
   --backup "example top.png" \
-  --target-long-axis 1044 --mode line-art --preview-dir /tmp/example-preview
+  --target-long-axis 1044 --mode line-art --preview-dir "$(mktemp -d)"
 ```
 
 ### 4. 添加舰船配置
@@ -95,4 +97,4 @@ python3 scripts/resize_ship_image.py input.png output.png \
 - 搜索舰名，确认 `ships.json5`、`references.json5`、`TestAll` 和 PNG 文件名一致且没有重复定义。
 - 搜索所有武器、弹药、发射器和飞机引用，确认上游配置存在。
 - 用 `view_image` 检查正式 PNG 的完整轮廓和透明边缘；用 `git diff --check` 检查文本问题。
-- 运行 `GOCACHE=/tmp/go-build go build -o /dev/null ./pkg/...`。最终说明资料假设、游戏近似和未验证的视觉区域。
+- 运行 `go build ./pkg/...`。最终说明资料假设、游戏近似和未验证的视觉区域。
