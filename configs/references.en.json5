@@ -1386,6 +1386,30 @@
     ]
   },
   {
+    "name": "new_york",
+    "displayName": "New York",
+    "type": "Battleship",
+    "armaments": [
+      {"label": "Main Battery", "value": "5x2 356mm/45 Mk 1"},
+      {"label": "Secondary Battery", "value": "6x1 127mm/51 Mk 7"},
+      {"label": "Anti-aircraft Guns", "value": "10x1 76mm/50"},
+      {"label": "Anti-aircraft Guns", "value": "4x4 28mm/75"},
+      {"label": "Anti-aircraft Guns", "value": "12x1 20mm/70"}
+    ],
+    "description": "USS New York was the lead ship of her battleship class and entered service in 1914. Modernized during the 1920s, she joined the Atlantic Neutrality Patrol in 1939 and later escorted convoys and provided shore bombardment in North Africa, at Iwo Jima, and at Okinawa. After Operation Crossroads, she was sunk as a target in 1948. The game depicts her 1939 configuration.",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket - USS New York BB-34, 1939",
+        "url": "https://www.shipbucket.com/drawings/7493"
+      },
+      {
+        "name": "Wikipedia - USS New York (BB-34)",
+        "url": "https://en.wikipedia.org/wiki/USS_New_York_%28BB-34%29"
+      }
+    ]
+  },
+  {
     "name": "arkansas",
     "displayName": "Arkansas",
     "type": "Battleship",
@@ -1421,6 +1445,41 @@
       {
         "name": "Wikipedia - USS Arkansas (BB-33)",
         "url": "https://en.wikipedia.org/wiki/USS_Arkansas_%28BB-33%29"
+      }
+    ]
+  },
+  {
+    "name": "nevada",
+    "displayName": "Nevada",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "2x3 + 2x2 356mm/45 Mark 8"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "8x2 127mm/38 Mark 12"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "9x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "38x1 20mm/70"
+      }
+    ],
+    "description": "USS Nevada (BB-36) was the lead ship of her class and a pioneer of the U.S. Standard-type battleships. She was the only battleship to get underway during the Pearl Harbor attack. Rebuilt in 1942, she later supported the Aleutian, Normandy, Southern France, Iwo Jima, and Okinawa campaigns before surviving the Crossroads nuclear tests and being sunk as a target in 1948.",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket — BB-36 Nevada 1942",
+        "url": "https://www.shipbucket.com/drawings/7504"
+      },
+      {
+        "name": "Wikipedia - USS Nevada (BB-36)",
+        "url": "https://en.wikipedia.org/wiki/USS_Nevada_%28BB-36%29"
       }
     ]
   },
@@ -4485,6 +4544,15 @@
     "type": "Weapon",
     "armaments": [],
     "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/2/MK1",
+    "displayName": "356mm/45 Twin Mount Mk 1",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "A U.S. Navy 14-inch/45 Mk 1 twin gun mount used by USS New York in the game.",
     "author": "",
     "links": []
   },

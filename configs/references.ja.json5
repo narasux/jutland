@@ -1620,6 +1620,30 @@
     ]
   },
   {
+    "name": "new_york",
+    "displayName": "ニューヨーク",
+    "type": "戦艦",
+    "armaments": [
+      {"label": "主砲", "value": "5x2 356mm/45 Mk 1"},
+      {"label": "副砲", "value": "6x1 127mm/51 Mk 7"},
+      {"label": "対空砲", "value": "10x1 76mm/50"},
+      {"label": "対空砲", "value": "4x4 28mm/75"},
+      {"label": "対空砲", "value": "12x1 20mm/70"}
+    ],
+    "description": "USS ニューヨークはニューヨーク級戦艦のネームシップで、1914年に就役した。1920年代の近代化改装後、1939年に大西洋の中立パトロールへ加わり、第二次世界大戦では船団護衛と北アフリカ、硫黄島、沖縄での艦砲射撃に従事した。クロスロード作戦後、1948年に標的艦として撃沈された。本作では1939年時の姿を再現している。",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket — USS New York BB-34, 1939",
+        "url": "https://www.shipbucket.com/drawings/7493"
+      },
+      {
+        "name": "Wikipedia - ニューヨーク (戦艦)",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A8%E3%83%BC%E3%82%AF_%28%E6%88%A6%E8%89%A6%29"
+      }
+    ]
+  },
+  {
     "name": "arkansas",
     "displayName": "アーカンソー",
     "type": "戦艦",
@@ -1655,6 +1679,41 @@
       {
         "name": "Wikipedia - USS Arkansas (BB-33)",
         "url": "https://en.wikipedia.org/wiki/USS_Arkansas_%28BB-33%29"
+      }
+    ]
+  },
+  {
+    "name": "nevada",
+    "displayName": "ネバダ",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "2x3 + 2x2 356mm/45 Mark 8"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x2 127mm/38 Mark 12"
+      },
+      {
+        "label": "対空砲",
+        "value": "9x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "38x1 20mm/70"
+      }
+    ],
+    "description": "USS ネバダ（BB-36）はネバダ級のネームシップで、米海軍の標準型戦艦の先駆けとなった。真珠湾攻撃では戦艦のうち唯一出港を試みた。1942年の大改装後はアリューシャン、ノルマンディー、南フランス、硫黄島、沖縄の各作戦に参加した。戦後はクロスロード核実験に耐え、1948年に標的艦として沈められた。",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket — BB-36 Nevada 1942",
+        "url": "https://www.shipbucket.com/drawings/7504"
+      },
+      {
+        "name": "Wikipedia - ネバダ (戦艦)",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%83%90%E3%83%80_%28%E6%88%A6%E8%89%A6%29"
       }
     ]
   },
@@ -4910,6 +4969,15 @@
     "type": "兵器",
     "armaments": [],
     "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/2/MK1",
+    "displayName": "356mm/45 Mk 1 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "米海軍の14インチ45口径Mk 1連装砲で、本作では戦艦USS ニューヨークに搭載される。",
     "author": "",
     "links": []
   },

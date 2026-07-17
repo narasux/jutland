@@ -31,6 +31,20 @@
     criticalRate: 0.025
   },
   {
+    name: "US/GB/356/1942",
+    type: "shell",
+    diameter: 356,
+    damage: 2050,
+    criticalRate: 0.01
+  },
+  {
+    name: "US/GB/356/1914",
+    type: "shell",
+    diameter: 356,
+    damage: 2050,
+    criticalRate: 0.01
+  },
+  {
     name: "US/GB/305/1942",
     type: "shell",
     diameter: 305,

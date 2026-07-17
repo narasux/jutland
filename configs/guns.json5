@@ -169,6 +169,45 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 356mm/45 Mk1 双联装舰炮（纽约级、内华达级）
+  {
+    name: "US/356/45/2/MK1",
+    bulletName: "US/GB/356/1914",
+    bulletCount: 2,
+    reloadTime: 17,
+    range: 31,
+    bulletSpread: 150,
+    bulletSpeed: 792,
+    fundsCost: 25,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  // 美国海军 14 英寸/45 Mark 8 三联装舰炮
+  {
+    name: "US/356/45/3/MK8",
+    bulletName: "US/GB/356/1942",
+    bulletCount: 3,
+    reloadTime: 16,
+    range: 34,
+    bulletSpread: 160,
+    bulletSpeed: 790,
+    fundsCost: 35,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  // 美国海军 14 英寸/45 Mark 8 双联装舰炮
+  {
+    name: "US/356/45/2/MK8",
+    bulletName: "US/GB/356/1942",
+    bulletCount: 2,
+    reloadTime: 16,
+    range: 34,
+    bulletSpread: 160,
+    bulletSpeed: 790,
+    fundsCost: 25,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 US/305/50/MK8 三联装舰炮
   {
     name: "US/305/50/3/MK8",
@@ -268,6 +307,18 @@
   },
   // 美国海军 US/127/38/MK12 双联装舰炮
   {
+    name: "US/127/51/MK7",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 1,
+    reloadTime: 5.5,
+    range: 16,
+    bulletSpread: 90,
+    bulletSpeed: 960,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  {
     name: "US/127/38/2/MK12",
     bulletName: "US/GB/127/1932",
     bulletCount: 2,
@@ -291,19 +342,6 @@
     fundsCost: 5,
     antiShip: true,
     antiAircraft: true
-  },
-  // 美国海军 127mm/51 Mk7 单装舰炮
-  {
-    name: "US/127/51/MK7",
-    bulletName: "US/GB/127/1932",
-    bulletCount: 1,
-    reloadTime: 2.5,
-    range: 15,
-    bulletSpread: 90,
-    bulletSpeed: 960,
-    fundsCost: 5,
-    antiShip: true,
-    antiAircraft: false
   },
   // 美国海军 US/127/25/MK10 单裝高平两用炮
   {

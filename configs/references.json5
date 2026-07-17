@@ -946,6 +946,30 @@
     ]
   },
   {
+    name: "new_york",
+    displayName: "纽约",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "5x2 356mm/45 Mk1"},
+      {label: "副炮", value: "6x1 127mm/51 Mk7"},
+      {label: "高炮", value: "10x1 76mm/50"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "12x1 20mm/70"},
+    ],
+    description: "纽约号是美国海军纽约级战列舰首舰，1914 年服役，第一次世界大战期间曾编入英国大舰队。1920 年代现代化改装后，她于 1939 年加入大西洋中立巡逻；第二次世界大战中承担护航、训练以及北非、硫磺岛和冲绳的对岸炮击任务。战后该舰参加十字路口核试验，最终于 1948 年作为靶舰被击沉。游戏采用 1939 年形态。",
+    author: "Karle94, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - USS New York BB-34, 1939",
+        url: "https://www.shipbucket.com/drawings/7493"
+      },
+      {
+        name: "维基百科 - 纽约号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%B4%90%E7%B4%84%E8%99%9F%E6%88%B0%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "arkansas",
     displayName: "阿肯色",
     type: "战列舰",
@@ -966,6 +990,29 @@
       {
         name: "维基百科 - 阿肯色号战舰",
         url: "https://zh.wikipedia.org/wiki/%E9%98%BF%E8%82%AF%E8%89%B2%E8%99%9F%E6%88%B0%E8%89%A6"
+      }
+    ]
+  },
+  {
+    name: "nevada",
+    displayName: "内华达",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "2x3 + 2x2 356mm/45 Mark 8"},
+      {label: "高平炮", value: "8x2 127mm/38 Mark 12"},
+      {label: "高炮", value: "9x4 40mm/60"},
+      {label: "高炮", value: "38x1 20mm/70"},
+    ],
+    description: "内华达号是美国海军内华达级战列舰首舰，也是美国“标准型战列舰”的先驱。1941 年珍珠港袭击中，该舰是战列舰队中唯一尝试驶离港口的军舰；打捞修复后于 1942 年完成大规模改装，随后参加阿留申、诺曼底、法国南部、硫磺岛和冲绳等战役。战后该舰参加十字路口核试验，并于 1948 年作为靶舰被击沉。",
+    author: "Karle94, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - BB-36 Nevada 1942",
+        url: "https://www.shipbucket.com/drawings/7504"
+      },
+      {
+        name: "维基百科 - 内华达号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%85%A7%E8%8F%AF%E9%81%94%E8%99%9F%E6%88%B0%E8%89%A6"
       }
     ]
   },
@@ -3052,6 +3099,15 @@
     type: "武器",
     armaments: [],
     description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/356/45/2/MK1",
+    displayName: "356mm/45 双联装舰炮 Mk1",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 14 英寸/45 Mk 1 双联装舰炮，游戏中用于纽约号战列舰。",
     author: "",
     links: []
   },
