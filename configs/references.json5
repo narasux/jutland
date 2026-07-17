@@ -877,6 +877,30 @@
   },
   // 美国海军
   {
+    name: "pennsylvania",
+    displayName: "宾夕法尼亚",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "4x3 356mm/45"},
+      {label: "副炮", value: "10x1 127mm/51"},
+      {label: "高平炮", value: "8x1 127mm/25"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "14x1 20mm/70"},
+    ],
+    description: "宾夕法尼亚号（BB-38）是美国海军宾夕法尼亚级战列舰首舰，1916 年服役，1929 至 1931 年接受现代化改装。游戏采用 1942 年末大改装前形态；该舰在珍珠港袭击中受轻伤，修复后于美国西海岸及夏威夷近海训练巡逻，1942 年 10 月起改装为以 127mm/38 双联装炮为核心的新防空配置。其后参加阿留申、吉尔伯特、马绍尔、马里亚纳、帕劳与菲律宾战役，并在苏里高海峡海战中作战。",
+    author: "Karle94, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - USS Pennsylvania BB-38 1942",
+        url: "https://www.shipbucket.com/drawings/7509"
+      },
+      {
+        name: "NHHC - Pennsylvania III (Battleship No. 38)",
+        url: "https://www.history.navy.mil/content/history/nhhc/research/histories/ship-histories/danfs/p/pennsylvania-ii.html"
+      }
+    ]
+  },
+  {
     name: "lowa",
     displayName: "衣阿华",
     type: "战列舰",

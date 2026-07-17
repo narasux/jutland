@@ -1281,6 +1281,30 @@
     ]
   },
   {
+    "name": "pennsylvania",
+    "displayName": "Pennsylvania",
+    "type": "Battleship",
+    "armaments": [
+      {"label": "Main Battery", "value": "4x3 356mm/45"},
+      {"label": "Secondary Battery", "value": "10x1 127mm/51"},
+      {"label": "Dual-purpose Guns", "value": "8x1 127mm/25"},
+      {"label": "Anti-aircraft Guns", "value": "4x4 28mm/75"},
+      {"label": "Anti-aircraft Guns", "value": "14x1 20mm/70"}
+    ],
+    "description": "USS Pennsylvania (BB-38) was the lead ship of her class, commissioned in 1916 and modernized in 1929–31. This entry depicts her pre-overhaul 1942 fit, after light damage at Pearl Harbor and before twin 5-inch/38 mounts replaced her older secondary battery. She later supported amphibious operations across the Pacific and fought at Surigao Strait.",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket — USS Pennsylvania BB-38 1942",
+        "url": "https://www.shipbucket.com/drawings/7509"
+      },
+      {
+        "name": "NHHC — Pennsylvania III (Battleship No. 38)",
+        "url": "https://www.history.navy.mil/content/history/nhhc/research/histories/ship-histories/danfs/p/pennsylvania-ii.html"
+      }
+    ]
+  },
+  {
     "name": "lowa",
     "displayName": "Iowa",
     "type": "Battleship",

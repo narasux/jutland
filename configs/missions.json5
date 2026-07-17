@@ -918,6 +918,7 @@
           "lowa",
           "lexington",
           "south_dakota",
+          "pennsylvania",
           "nevada",
           "new_york",
           "arkansas",
@@ -1452,20 +1453,26 @@
         belongPlayer: "HA"
       },
       {
-        name: "nevada",
+        name: "pennsylvania",
         pos: [35, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_york",
+        name: "nevada",
         pos: [34, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "arkansas",
+        name: "new_york",
         pos: [35, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "arkansas",
+        pos: [34, 52],
         rotation: 90,
         belongPlayer: "HA"
       },

@@ -1515,6 +1515,30 @@
     ]
   },
   {
+    "name": "pennsylvania",
+    "displayName": "ペンシルベニア",
+    "type": "戦艦",
+    "armaments": [
+      {"label": "主砲", "value": "4x3 356mm/45"},
+      {"label": "副砲", "value": "10x1 127mm/51"},
+      {"label": "高角砲", "value": "8x1 127mm/25"},
+      {"label": "対空砲", "value": "4x4 28mm/75"},
+      {"label": "対空砲", "value": "14x1 20mm/70"}
+    ],
+    "description": "ペンシルベニア（BB-38）はペンシルベニア級戦艦のネームシップで、1916年に就役し、1929～1931年に近代化改装を受けた。ゲームでは真珠湾攻撃後、127mm/38連装砲を中心とする大改装前の1942年時の姿を再現している。その後は太平洋各地の上陸作戦を支援し、スリガオ海峡海戦にも参加した。",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket — USS Pennsylvania BB-38 1942",
+        "url": "https://www.shipbucket.com/drawings/7509"
+      },
+      {
+        "name": "NHHC — Pennsylvania III (Battleship No. 38)",
+        "url": "https://www.history.navy.mil/content/history/nhhc/research/histories/ship-histories/danfs/p/pennsylvania-ii.html"
+      }
+    ]
+  },
+  {
     "name": "lowa",
     "displayName": "アイオワ",
     "type": "戦艦",

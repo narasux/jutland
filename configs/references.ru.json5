@@ -1515,6 +1515,30 @@
     ]
   },
   {
+    "name": "pennsylvania",
+    "displayName": "Пенсильвания",
+    "type": "Линкор",
+    "armaments": [
+      {"label": "Главный калибр", "value": "4x3 356-мм/45"},
+      {"label": "Вспомогательная артиллерия", "value": "10x1 127-мм/51"},
+      {"label": "Универсальная артиллерия", "value": "8x1 127-мм/25"},
+      {"label": "Зенитная артиллерия", "value": "4x4 28-мм/75"},
+      {"label": "Зенитная артиллерия", "value": "14x1 20-мм/70"}
+    ],
+    "description": "USS Pennsylvania (BB-38) — головной линкор своего типа, вступивший в строй в 1916 году и модернизированный в 1929–1931 годах. В игре представлен облик 1942 года до капитальной перестройки и замены старой вспомогательной артиллерии спаренными 127-мм/38 установками. Корабль поддерживал десантные операции на Тихом океане и участвовал в бою в проливе Суригао.",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket — USS Pennsylvania BB-38, 1942",
+        "url": "https://www.shipbucket.com/drawings/7509"
+      },
+      {
+        "name": "NHHC — Pennsylvania III (Battleship No. 38)",
+        "url": "https://www.history.navy.mil/content/history/nhhc/research/histories/ship-histories/danfs/p/pennsylvania-ii.html"
+      }
+    ]
+  },
+  {
     "name": "lowa",
     "displayName": "Айова",
     "type": "Линкор",
