@@ -1620,6 +1620,45 @@
     ]
   },
   {
+    "name": "arkansas",
+    "displayName": "アーカンソー",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "6x2 305mm/50 Mk 7"
+      },
+      {
+        "label": "副砲",
+        "value": "6x1 127mm/51 Mk 7"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x1 76mm/50"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "24x1 20mm/70"
+      }
+    ],
+    "description": "USS アーカンソー（BB-33）はワイオミング級戦艦の2番艦で、1912年に就役した。本作では1944年時の姿を採用し、満載排水量約31,900トン、全長約171メートル、最大速力20.5ノットである。ノルマンディー上陸作戦とシェルブール砲撃に参加した後、硫黄島・沖縄の上陸作戦を支援し、1946年のビキニ環礁におけるクロスロード作戦で沈没した。",
+    "author": "Redhorse, Karle94, David Latuch",
+    "links": [
+      {
+        "name": "素材出典 - Shipbucket BB-33 Arkansas 1944",
+        "url": "https://www.shipbucket.com/drawings/7486"
+      },
+      {
+        "name": "Wikipedia - USS Arkansas (BB-33)",
+        "url": "https://en.wikipedia.org/wiki/USS_Arkansas_%28BB-33%29"
+      }
+    ]
+  },
+  {
     "name": "lexington",
     "displayName": "レキシントン",
     "type": "戦艦",
@@ -4875,6 +4914,20 @@
     "links": []
   },
   {
+    "name": "US/305/50/2/MK7",
+    "displayName": "305mm/50 Mk 7 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "米海軍の12インチ50口径Mk 7砲は、ワイオミング級戦艦に連装砲塔として搭載された。本作では第二次世界大戦期の毎分2～3発という発射速度と、約22キロメートルの最大射程を反映している。",
+    "author": "",
+    "links": [
+      {
+        "name": "NavWeaps - 12-inch/50 Mark 7",
+        "url": "https://www.navweaps.com/Weapons/WNUS_12-50_mk7.php"
+      }
+    ]
+  },
+  {
     "name": "US/305/50/3/MK8",
     "displayName": "305mm 三連装砲 MK8",
     "type": "兵器",
@@ -4954,6 +5007,20 @@
     "description": "",
     "author": "",
     "links": []
+  },
+  {
+    "name": "US/127/51/MK7",
+    "displayName": "127mm/51 Mk 7 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "5インチ51口径Mk 7単装砲は、米海軍の初期戦艦が副砲として搭載した対水上用火砲である。本作でも水上目標専用とし、後の5インチ38口径両用砲が持つ対空能力は与えていない。",
+    "author": "",
+    "links": [
+      {
+        "name": "NavWeaps - 5-inch/51 Marks 7, 8, 9, 14 and 15",
+        "url": "https://www.navweaps.com/Weapons/WNUS_5-51_mk7.php"
+      }
+    ]
   },
   {
     "name": "US/127/25/MK10",

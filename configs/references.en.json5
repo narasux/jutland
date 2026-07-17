@@ -1386,6 +1386,45 @@
     ]
   },
   {
+    "name": "arkansas",
+    "displayName": "Arkansas",
+    "type": "Battleship",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "6x2 305mm/50 Mk 7"
+      },
+      {
+        "label": "Secondary Battery",
+        "value": "6x1 127mm/51 Mk 7"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x1 76mm/50"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "8x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "24x1 20mm/70"
+      }
+    ],
+    "description": "USS Arkansas (BB-33), the second Wyoming-class battleship, entered service in 1912. Represented in her 1944 configuration, she displaced about 31,900 tons fully loaded, measured roughly 171 metres long, and could make 20.5 knots. She bombarded Normandy and Cherbourg, later supported the Iwo Jima and Okinawa landings, and was sunk during Operation Crossroads at Bikini Atoll in 1946.",
+    "author": "Redhorse, Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Artwork Source - Shipbucket BB-33 Arkansas 1944",
+        "url": "https://www.shipbucket.com/drawings/7486"
+      },
+      {
+        "name": "Wikipedia - USS Arkansas (BB-33)",
+        "url": "https://en.wikipedia.org/wiki/USS_Arkansas_%28BB-33%29"
+      }
+    ]
+  },
+  {
     "name": "lexington",
     "displayName": "Lexington",
     "type": "Battleship",
@@ -4450,6 +4489,20 @@
     "links": []
   },
   {
+    "name": "US/305/50/2/MK7",
+    "displayName": "305mm/50 Twin Mount Mk 7",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "The U.S. Navy's 12-inch/50 Mk 7 armed the Wyoming-class battleships in twin turrets. In the game it reflects the weapon's Second World War rate of two to three rounds per minute and an effective maximum range of about 22 kilometres.",
+    "author": "",
+    "links": [
+      {
+        "name": "NavWeaps - 12-inch/50 Mark 7",
+        "url": "https://www.navweaps.com/Weapons/WNUS_12-50_mk7.php"
+      }
+    ]
+  },
+  {
     "name": "US/305/50/3/MK8",
     "displayName": "305mm Triple Mount MK8",
     "type": "Weapon",
@@ -4529,6 +4582,20 @@
     "description": "",
     "author": "",
     "links": []
+  },
+  {
+    "name": "US/127/51/MK7",
+    "displayName": "127mm/51 Single Mount Mk 7",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "The 5-inch/51 Mk 7 was a single-purpose secondary gun carried by early U.S. battleships. It is modeled for surface fire and lacks the anti-aircraft capability of the later 5-inch/38 dual-purpose gun.",
+    "author": "",
+    "links": [
+      {
+        "name": "NavWeaps - 5-inch/51 Marks 7, 8, 9, 14 and 15",
+        "url": "https://www.navweaps.com/Weapons/WNUS_5-51_mk7.php"
+      }
+    ]
   },
   {
     "name": "US/127/25/MK10",

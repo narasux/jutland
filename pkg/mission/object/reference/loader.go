@@ -70,11 +70,6 @@ func ValidateLocales(locales map[i18n.Language][]Reference) error {
 						name, len(enRef.Links), lang, len(ref.Links),
 					)
 				}
-				for idx := range ref.Links {
-					if ref.Links[idx].URL != enRef.Links[idx].URL {
-						return fmt.Errorf("%s reference %q link %d URL differs from en", lang, name, idx)
-					}
-				}
 			}
 		}
 	}

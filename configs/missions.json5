@@ -918,6 +918,7 @@
           "lowa",
           "lexington",
           "south_dakota",
+          "arkansas",
           "edo",
           "satsuma",
           "yamato",
@@ -1445,6 +1446,12 @@
       {
         name: "lexington",
         pos: [34, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "arkansas",
+        pos: [35, 49],
         rotation: 90,
         belongPlayer: "HA"
       },

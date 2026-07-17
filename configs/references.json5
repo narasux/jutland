@@ -946,6 +946,30 @@
     ]
   },
   {
+    name: "arkansas",
+    displayName: "阿肯色",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "6x2 305mm/50 Mk 7"},
+      {label: "副炮", value: "6x1 127mm/51 Mk 7"},
+      {label: "高炮", value: "8x1 76mm/50"},
+      {label: "高炮", value: "8x4 40mm/60"},
+      {label: "高炮", value: "24x1 20mm/70"},
+    ],
+    description: "阿肯色号（USS Arkansas, BB-33）是美国海军怀俄明级战列舰二号舰，1912 年服役。本游戏采用 1944 年改装状态：全长约 171 米、舰宽约 32 米、满载排水量约 31,900 吨、最大航速 20.5 节。该舰先后参加诺曼底登陆与瑟堡炮击，随后转赴太平洋支援硫磺岛和冲绳作战；1946 年在比基尼环礁的十字路口行动核试验中沉没。",
+    author: "Redhorse, Karle94, David Latuch",
+    links: [
+      {
+        name: "素材来源 - Shipbucket BB-33 Arkansas 1944",
+        url: "https://www.shipbucket.com/drawings/7486"
+      },
+      {
+        name: "维基百科 - 阿肯色号战舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%98%BF%E8%82%AF%E8%89%B2%E8%99%9F%E6%88%B0%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "lexington",
     displayName: "列克星敦",
     type: "战列舰",
@@ -3032,6 +3056,17 @@
     links: []
   },
   {
+    name: "US/305/50/2/MK7",
+    displayName: "305mm/50 双联装舰炮 Mk7",
+    type: "武器",
+    armaments: [],
+    description: "美国海军怀俄明级战列舰使用的 12 英寸/50 Mk 7 主炮双联装炮塔。游戏中按二战时期约 22 千米最大射程与每分钟 2 至 3 发射速表现。",
+    author: "",
+    links: [
+      {name: "NavWeaps - 12-inch/50 Mark 7", url: "https://www.navweaps.com/Weapons/WNUS_12-50_mk7.php"}
+    ]
+  },
+  {
     name: "US/305/50/3/MK8",
     displayName: "305mm/50 三联装舰炮 Mk8",
     type: "武器",
@@ -3111,6 +3146,17 @@
     description: "",
     author: "",
     links: []
+  },
+  {
+    name: "US/127/51/MK7",
+    displayName: "127mm/51 单装舰炮 Mk7",
+    type: "武器",
+    armaments: [],
+    description: "美国海军早期战列舰使用的 5 英寸/51 Mk 7 单装副炮，主要用于对舰射击，不具备 5 英寸/38 高平两用炮的防空能力。",
+    author: "",
+    links: [
+      {name: "NavWeaps - 5-inch/51 Marks 7, 8, 9, 14 and 15", url: "https://www.navweaps.com/Weapons/WNUS_5-51_mk7.php"}
+    ]
   },
   {
     name: "US/127/25/MK10",

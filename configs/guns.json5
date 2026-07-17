@@ -156,6 +156,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 305mm/50 Mk7 双联装舰炮（怀俄明级）
+  {
+    name: "US/305/50/2/MK7",
+    bulletName: "US/GB/305/1942",
+    bulletCount: 2,
+    reloadTime: 12,
+    range: 22,
+    bulletSpread: 150,
+    bulletSpeed: 884,
+    fundsCost: 25,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 US/305/50/MK8 三联装舰炮
   {
     name: "US/305/50/3/MK8",
@@ -278,6 +291,19 @@
     fundsCost: 5,
     antiShip: true,
     antiAircraft: true
+  },
+  // 美国海军 127mm/51 Mk7 单装舰炮
+  {
+    name: "US/127/51/MK7",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 1,
+    reloadTime: 2.5,
+    range: 15,
+    bulletSpread: 90,
+    bulletSpeed: 960,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/127/25/MK10 单裝高平两用炮
   {

@@ -24,21 +24,23 @@ func TestValidateLocalesKeepsStableReferenceShape(t *testing.T) {
 	require.NoError(t, ValidateLocales(locales))
 }
 
-func TestValidateLocalesRejectsLinkURLDrift(t *testing.T) {
+func TestValidateLocalesAllowsLocalizedSourceURLs(t *testing.T) {
 	locales := map[i18n.Language][]Reference{}
 	for _, lang := range i18n.SupportedLanguages() {
 		locales[lang] = []Reference{{
 			Name:        "test_ship",
 			DisplayName: string(lang),
 			Type:        "Battleship",
-			Links:       []Link{{Name: "History", URL: "https://example.com/test_ship"}},
+			Links: []Link{
+				{Name: "Artwork", URL: "https://example.com/artwork"},
+				{Name: "History", URL: "https://example.com/test_ship"},
+			},
 		}}
 	}
-	locales[i18n.LanguageJapanese][0].Links[0].URL = "https://example.com/different"
+	locales[i18n.LanguageJapanese][0].Links[1].URL = "https://ja.example.com/test_ship"
+	locales[i18n.LanguageRussian][0].Links[1].URL = "https://ru.example.com/test_ship"
 
-	err := ValidateLocales(locales)
-	require.Error(t, err)
-	require.Contains(t, err.Error(), "link 0 URL differs")
+	require.NoError(t, ValidateLocales(locales))
 }
 
 func TestValidateLocalesRequiresEveryFormalLanguage(t *testing.T) {

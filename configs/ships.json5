@@ -9750,6 +9750,148 @@
       ]
     }
   },
+  {
+    // 阿肯色（1944）
+    name: "arkansas",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1944,
+    totalHP: 31900,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 20.5,
+    acceleration: 0.22,
+    rotateSpeed: 0.7,
+    length: 171,
+    width: 32,
+    fundsCost: 425,
+    timeCost: 95,
+    weapon: {
+      mainGuns: [
+        {
+          name: "US/305/50/2/MK7",
+          posPercent: 0.64,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        {
+          name: "US/305/50/2/MK7",
+          posPercent: 0.48,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        {
+          name: "US/305/50/2/MK7",
+          posPercent: -0.12,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        {
+          name: "US/305/50/2/MK7",
+          posPercent: -0.25,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        {
+          name: "US/305/50/2/MK7",
+          posPercent: -0.53,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        {
+          name: "US/305/50/2/MK7",
+          posPercent: -0.68,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 舷侧 127mm 舰炮 6 座
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.4,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.28,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.17,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 340]
+        },
+        // 8 座 76mm/50 高炮
+        {name: "US/76/50", posPercent: 0.45, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50", posPercent: 0.45, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/50", posPercent: 0.34, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50", posPercent: 0.34, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/50", posPercent: 0.28, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50", posPercent: 0.28, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/50", posPercent: -0.47, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50", posPercent: -0.47, rightFiringArc: [0, 0], leftFiringArc: [180, 360]}
+      ],
+      antiAircraftGuns: [
+        // 8 座四联装 40mm 高炮
+        {name: "US/40/60/4", posPercent: 0.35, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: 0.35, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: 0.19, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: 0.19, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: 0.03, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: 0.03, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: 0.57, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: 0.57, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 24 座单装 20mm 高炮
+        {name: "US/20/70", posPercent: 0.55, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.55, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.52, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.52, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.4, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.4, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.38, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.38, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.1, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.1, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.05, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.05, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.06, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.06, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.11, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.11, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.45, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.45, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.48, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.48, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.44, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.44, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.9, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.9, rightFiringArc: [0, 180], leftFiringArc: [180, 360]}
+      ]
+    }
+  },
   // 日本海军
   {
     // 金刚
