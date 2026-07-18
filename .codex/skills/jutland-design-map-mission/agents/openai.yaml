@@ -1,4 +1,4 @@
 interface:
   display_name: "Jutland 设计地图关卡"
-  short_description: "基于现有地图设计历史关卡、舰队部署、替代舰与比例校验"
+  short_description: "设计历史关卡并校验舰队间距、玩家镜头、替代舰与地图比例"
   default_prompt: "使用 $jutland-design-map-mission 基于现有地图设计并验证一个历史海战关卡。"

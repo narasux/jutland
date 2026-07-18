@@ -39,4 +39,52 @@
     displayNameJa: "真珠湾",
     source: "pearl_harbor"
   },
+  {
+    name: "midway",
+    displayName: "中途岛",
+    displayNameEn: "Midway Atoll",
+    displayNameRu: "Атолл Мидуэй",
+    displayNameJa: "ミッドウェー環礁",
+    source: "midway"
+  },
+  {
+    name: "saipan",
+    displayName: "塞班岛",
+    displayNameEn: "Saipan",
+    displayNameRu: "Сайпан",
+    displayNameJa: "サイパン島",
+    source: "saipan"
+  },
+  {
+    name: "leyte_gulf",
+    displayName: "莱特湾",
+    displayNameEn: "Leyte Gulf",
+    displayNameRu: "Залив Лейте",
+    displayNameJa: "レイテ湾",
+    source: "leyte_gulf"
+  },
+  {
+    name: "manila",
+    displayName: "马尼拉湾",
+    displayNameEn: "Manila Bay",
+    displayNameRu: "Манильский залив",
+    displayNameJa: "マニラ湾",
+    source: "manila"
+  },
+  {
+    name: "guam",
+    displayName: "关岛",
+    displayNameEn: "Guam",
+    displayNameRu: "Гуам",
+    displayNameJa: "グアム",
+    source: "guam"
+  },
+  {
+    name: "island_chain",
+    displayName: "岛链",
+    displayNameEn: "Island Chain",
+    displayNameRu: "Цепь островов",
+    displayNameJa: "諸島",
+    source: "island_chain"
+  },
 ]
