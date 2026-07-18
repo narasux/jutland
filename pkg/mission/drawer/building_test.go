@@ -27,6 +27,31 @@ func TestTruncateReinforceTextKeepsEllipsisWithinPanel(t *testing.T) {
 	require.LessOrEqual(t, layout.CalcTextWidth(display, fontSize, textFont), maxWidth)
 }
 
+func TestCalcReinforcePreviewScaleUsesOneScaleForBothViews(t *testing.T) {
+	// 中途岛的两张原图长度相同，但侧视图更高，统一倍率应受侧视图高度限制。
+	scale := calcReinforcePreviewScale(1180, 228, 1180, 226, 1178, 569)
+
+	require.InDelta(t, 569*0.35/228, scale, 1e-9)
+	require.LessOrEqual(t, 1180*scale, 1178.0)
+	require.LessOrEqual(t, 228*scale, 569*0.35)
+	require.LessOrEqual(t, 1180*scale, 1178.0)
+	require.LessOrEqual(t, 226*scale, 569*0.48)
+}
+
+func TestCalcReinforceArmamentTextLayoutFitsAllMidwayItems(t *testing.T) {
+	const (
+		cardH     = 202.0
+		itemCount = 7
+	)
+
+	fontSize, lineHeight := calcReinforceArmamentTextLayout(cardH, itemCount)
+	lastLineBottom := 58 + float64(itemCount-1)*lineHeight + fontSize
+
+	require.LessOrEqual(t, lastLineBottom, cardH-20)
+	require.Positive(t, fontSize)
+	require.Positive(t, lineHeight)
+}
+
 func TestReinforceArchiveColumnsKeepRussianLabelsAndValuesSeparated(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	i18n.SetLanguage(string(i18n.LanguageRussian))

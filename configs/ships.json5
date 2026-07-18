@@ -1588,6 +1588,405 @@
     }
   },
   {
+    // 中途岛
+    name: "midway",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CVB",
+    year: 1945,
+    totalHP: 60100,
+    horizontalDamageReduction: 0.42,
+    verticalDamageReduction: 0.3,
+    maxSpeed: 33,
+    acceleration: 0.28,
+    rotateSpeed: 0.72,
+    length: 295,
+    width: 34,
+    fundsCost: 405,
+    timeCost: 130,
+    weapon: {
+      mainGuns: [
+        // 127mm/54 单装高平炮
+        // 前部 6 座
+        {
+          name: "US/127/54/MK16",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: 0.5,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: 0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: 0.43,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: 0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: 0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 中部 6 座
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部 6 座
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.46,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.53,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/54/MK16",
+          posPercent: -0.62,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 四联装 40mm 高炮
+        // 舰首 2 座
+        {
+          name: "US/40/60/4",
+          posPercent: 0.97,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.97,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 右舷前 3 座
+        {
+          name: "US/40/60/4",
+          posPercent: 0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.31,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.26,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 右舷后 3 座
+        {
+          name: "US/40/60/4",
+          posPercent: -0.71,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.76,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前 4 座
+        {
+          name: "US/40/60/4",
+          posPercent: 0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左舷中 3 座
+        {
+          name: "US/40/60/4",
+          posPercent: -0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左舷后 4 座
+        {
+          name: "US/40/60/4",
+          posPercent: -0.57,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.71,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.76,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.84,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰尾 2 座
+        {
+          name: "US/40/60/4",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.99,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+      ],
+      antiAircraftGuns: [
+        // 双联装 20mm 高炮
+        // 舰首左右 12 座
+        {
+          name: "US/20/70/2",
+          posPercent: 0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.85,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.83,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.83,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.81,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.81,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.79,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.79,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.77,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.77,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.75,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.75,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷舰桥后 2 座
+        {
+          name: "US/20/70/2",
+          posPercent: -0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 中后部左右 4 座
+        {
+          name: "US/20/70/2",
+          posPercent: -0.49,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.49,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.51,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 1,
+      groups: [
+        {
+          name: "F4U-4",
+          maxCount: 12
+        },
+        {
+          name: "F6F-3",
+          maxCount: 36
+        },
+        {
+          name: "TBF-1",
+          maxCount: 24
+        },
+        {
+          name: "SB2C-4",
+          maxCount: 64
+        }
+      ]
+    }
+  },
+  {
     // 普林斯顿
     name: "princeton",
     nation: "us",

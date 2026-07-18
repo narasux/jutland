@@ -229,22 +229,23 @@ func (d *Drawer) drawSelectedProvidedShips(
 	topImgDx, topImgDy := float64(topImg.Bounds().Dy()), float64(topImg.Bounds().Dx())
 
 	contentW, contentH := ui.Preview.W*0.78, ui.Preview.H*0.72
-	sideScale := min(1, min(contentW/float64(sideImgDx), contentH*0.35/float64(sideImgDy)))
-	topScale := min(1, min(contentW/topImgDx, contentH*0.48/topImgDy))
-	sideW, sideH := float64(sideImgDx)*sideScale, float64(sideImgDy)*sideScale
-	topW, topH := topImgDx*topScale, topImgDy*topScale
+	previewScale := calcReinforcePreviewScale(
+		float64(sideImgDx), float64(sideImgDy), topImgDx, topImgDy, contentW, contentH,
+	)
+	sideW, sideH := float64(sideImgDx)*previewScale, float64(sideImgDy)*previewScale
+	topW, topH := topImgDx*previewScale, topImgDy*previewScale
 	centerX := ui.Preview.X + ui.Preview.W/2
 	sideY := ui.Preview.Y + ui.Preview.H*0.34
 	topY := ui.Preview.Y + ui.Preview.H*0.68
 
 	opts := d.genDefaultDrawImageOptions()
-	opts.GeoM.Scale(sideScale, sideScale)
+	opts.GeoM.Scale(previewScale, previewScale)
 	opts.GeoM.Translate(centerX-sideW/2, sideY-sideH/2)
 	screen.DrawImage(sideImg, opts)
 
 	opts = d.genDefaultDrawImageOptions()
 	ebutil.SetOptsCenterRotation(opts, topImg, 90)
-	opts.GeoM.Scale(topScale, topScale)
+	opts.GeoM.Scale(previewScale, previewScale)
 	opts.GeoM.Translate(centerX-topW/2, topY-topH/2)
 	opts.GeoM.Translate((topW-topH)/2, (topH-topW)/2)
 	screen.DrawImage(topImg, opts)
@@ -260,6 +261,17 @@ func (d *Drawer) drawSelectedProvidedShips(
 	)
 	d.drawReinforceQueue(screen, rp.OncomingShips, ui.Queue)
 	return tooltip
+}
+
+// calcReinforcePreviewScale 为侧视图和俯视图计算统一缩放比例。
+func calcReinforcePreviewScale(sideW, sideH, topW, topH, contentW, contentH float64) float64 {
+	return min(
+		1,
+		contentW/sideW,
+		contentH*0.35/sideH,
+		contentW/topW,
+		contentH*0.48/topH,
+	)
 }
 
 // drawReinforceShipInfo 绘制舰船档案和武装配置两张信息卡
@@ -361,34 +373,48 @@ func (d *Drawer) drawReinforceShipInfo(
 		}
 	}
 
-	drawn := 0
 	if ref := objRef.GetReference(selectedShipName); ref != nil {
 		textFont := font.LocalizedUI(font.Kai)
 		maxWidth := armamentCard.W - 48
-		for _, armament := range ref.Armaments {
-			if drawn >= 6 {
-				break
-			}
+		fontSize, lineHeight := calcReinforceArmamentTextLayout(armamentCard.H, len(ref.Armaments))
+		for idx, armament := range ref.Armaments {
 			line := i18n.Format(i18n.MsgLabelValue, map[string]any{"Label": armament.Label, "Value": armament.Value})
-			display, truncated := truncateReinforceText(line, maxWidth, 20, textFont)
+			display, truncated := truncateReinforceText(line, maxWidth, fontSize, textFont)
 			x := armamentCard.X + 24
-			y := armamentCard.Y + 58 + float64(drawn)*32
+			y := armamentCard.Y + 58 + float64(idx)*lineHeight
 			d.drawText(
 				screen,
 				display,
 				x,
 				y,
-				20,
+				fontSize,
 				font.ForText(display, textFont),
 				reinforceText,
 			)
-			if truncated && reinforceTextHovered(x, y, maxWidth, 20) {
+			if truncated && reinforceTextHovered(x, y, maxWidth, fontSize) {
 				tooltip = line
 			}
-			drawn++
 		}
 	}
 	return tooltip
+}
+
+// calcReinforceArmamentTextLayout 根据条目数量缩放字号和行距，保证全部武装都能显示在卡片内。
+func calcReinforceArmamentTextLayout(cardH float64, itemCount int) (fontSize, lineHeight float64) {
+	const (
+		topOffset         = 58.0
+		bottomPadding     = 20.0
+		defaultFontSize   = 20.0
+		defaultLineHeight = 32.0
+	)
+	if itemCount <= 1 {
+		return defaultFontSize, defaultLineHeight
+	}
+
+	requiredH := defaultFontSize + float64(itemCount-1)*defaultLineHeight
+	availableH := max(1, cardH-topOffset-bottomPadding)
+	scale := min(1, availableH/requiredH)
+	return defaultFontSize * scale, defaultLineHeight * scale
 }
 
 func reinforceArchiveColumns(

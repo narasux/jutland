@@ -190,6 +190,32 @@
     ]
   },
   {
+    name: "midway",
+    displayName: "中途岛",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "18x1 127mm/54 Mk 16"},
+      {label: "高炮", value: "20x4 40mm/60"},
+      {label: "高炮", value: "18x2 20mm/70"},
+      {label: "制空战斗机", value: "12x 海盗式（F4U-4）"},
+      {label: "制空战斗机", value: "36x 地狱猫（F6F-3）"},
+      {label: "鱼雷攻击机", value: "24x 复仇者（TBF-1）"},
+      {label: "俯冲轰炸机", value: "64x 地狱俯冲者（SB2C-4）"},
+    ],
+    description: "中途岛号（USS Midway，CVB-41）是中途岛级大型航空母舰首舰，于 1945 年 9 月 10 日服役。其装甲飞行甲板、大型舰体和强大航空队代表了美国海军二战末期舰队航母设计的顶点。服役期间该舰历经多次现代化改装，参加越南战争与海湾战争，1992 年退役后成为圣迭戈的博物馆舰。",
+    author: "MS21",
+    links: [
+      {
+        name: "Shipbucket - CVB-41 Midway 1945",
+        url: "https://www.shipbucket.com/drawings/10873"
+      },
+      {
+        name: "维基百科 - 中途岛号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%80%94%E5%B3%B6%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "princeton",
     displayName: "普林斯顿",
     type: "航空母舰",

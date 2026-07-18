@@ -434,6 +434,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 美国海军 5 英寸/54 Mark 16 单装高平炮（中途岛号）
+  {
+    name: "US/127/54/MK16",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 1,
+    reloadTime: 1.4,
+    range: 24,
+    bulletSpread: 80,
+    bulletSpeed: 800,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 美国海军 US/76/50 单装舰炮
   {
     name: "US/76/50",
