@@ -28,9 +28,9 @@
         rotation: 225,
         belongPlayer: "HA"
       },
-      // Arizona BB-39 -> pennsylvania：同属 Pennsylvania 级；F-7 内侧，Vestal 位于外舷但本关不部署辅助舰。
+      // Arizona BB-39：现有同名资源；F-7 内侧，Vestal 位于外舷但本关不部署辅助舰。
       {
-        name: "pennsylvania",
+        name: "arizona",
         pos: [68, 60],
         rotation: 225,
         belongPlayer: "HA"
@@ -1412,6 +1412,7 @@
           "tennessee",
           "new_mexico",
           "pennsylvania",
+          "arizona",
           "nevada",
           "new_york",
           "arkansas",
@@ -1983,20 +1984,26 @@
         belongPlayer: "HA"
       },
       {
-        name: "nevada",
+        name: "arizona",
         pos: [34, 54],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_york",
+        name: "nevada",
         pos: [35, 55],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "arkansas",
+        name: "new_york",
         pos: [34, 56],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "arkansas",
+        pos: [35, 57],
         rotation: 90,
         belongPlayer: "HA"
       },

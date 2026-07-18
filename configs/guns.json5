@@ -208,6 +208,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 14 英寸/45 Mark 10 三联装舰炮（亚利桑那号）
+  {
+    name: "US/356/45/3/MK10",
+    bulletName: "US/GB/356/1942",
+    bulletCount: 3,
+    reloadTime: 16,
+    range: 34,
+    bulletSpread: 160,
+    bulletSpeed: 790,
+    fundsCost: 35,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 14 英寸/45 Mark 8 双联装舰炮
   {
     name: "US/356/45/2/MK8",
@@ -334,6 +347,19 @@
   // 美国海军 US/127/38/MK12 双联装舰炮
   {
     name: "US/127/51/MK7",
+    bulletName: "US/GB/127/1932",
+    bulletCount: 1,
+    reloadTime: 5.5,
+    range: 16,
+    bulletSpread: 90,
+    bulletSpeed: 960,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  // 美国海军 5 英寸/51 Mark 15 单装副炮（亚利桑那号）
+  {
+    name: "US/127/51/MK15",
     bulletName: "US/GB/127/1932",
     bulletCount: 1,
     reloadTime: 5.5,

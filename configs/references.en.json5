@@ -1328,6 +1328,29 @@
     ]
   },
   {
+    "name": "arizona",
+    "displayName": "Arizona",
+    "type": "Battleship",
+    "armaments": [
+      {"label": "Main Battery", "value": "4x3 356mm/45 Mk 10"},
+      {"label": "Secondary Battery", "value": "10x1 127mm/51 Mk 15"},
+      {"label": "Dual-purpose Guns", "value": "8x1 127mm/25 Mk 10"},
+      {"label": "Anti-aircraft Guns", "value": "8x1 12.7mm/90 M1921"}
+    ],
+    "description": "USS Arizona (BB-39) was the second Pennsylvania-class battleship, commissioned in 1916 and modernized in 1929–31. The game depicts her on 7 December 1941, before the planned CXAM radar and quadruple 1.1-inch mounts were fitted, leaving eight 5-inch/25 guns and eight .50-caliber machine guns as her antiaircraft battery. Her forward magazines exploded during the Pearl Harbor attack, killing 1,177 aboard; the wreck later became a memorial.",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "DeviantArt — USS Arizona in 1941 December",
+        "url": "https://www.deviantart.com/tzoli/art/USS-Arizona-in-1941-December-1154861214"
+      },
+      {
+        "name": "Wikipedia — USS Arizona",
+        "url": "https://en.wikipedia.org/wiki/USS_Arizona"
+      }
+    ]
+  },
+  {
     "name": "maryland",
     "displayName": "Maryland",
     "type": "Battleship",

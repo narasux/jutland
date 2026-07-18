@@ -1562,6 +1562,29 @@
     ]
   },
   {
+    "name": "arizona",
+    "displayName": "アリゾナ",
+    "type": "戦艦",
+    "armaments": [
+      {"label": "主砲", "value": "4x3 356mm/45 Mk 10"},
+      {"label": "副砲", "value": "10x1 127mm/51 Mk 15"},
+      {"label": "高角砲", "value": "8x1 127mm/25 Mk 10"},
+      {"label": "対空機銃", "value": "8x1 12.7mm/90 M1921"}
+    ],
+    "description": "USS アリゾナ（BB-39）はペンシルベニア級戦艦の2番艦で、1916年に就役し、1929～1931年に近代化改装を受けた。ゲームでは1941年12月7日の姿を再現しており、搭載予定だったCXAMレーダーと28mm四連装機銃は未装備で、対空兵装は127mm/25高角砲8門と12.7mm機銃8挺である。真珠湾攻撃で前部弾薬庫が爆発し、艦上で1,177名が死亡した。船体は後に記念施設となった。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "DeviantArt — USS Arizona in 1941 December",
+        "url": "https://www.deviantart.com/tzoli/art/USS-Arizona-in-1941-December-1154861214"
+      },
+      {
+        "name": "ウィキペディア — アリゾナ (戦艦)",
+        "url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%AA%E3%82%BE%E3%83%8A_(%E6%88%A6%E8%89%A6)"
+      }
+    ]
+  },
+  {
     "name": "maryland",
     "displayName": "メリーランド",
     "type": "戦艦",

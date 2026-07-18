@@ -11432,6 +11432,215 @@
     }
   },
   {
+    // 亚利桑那（1941 年 12 月 7 日）
+    name: "arizona",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1941,
+    totalHP: 35929,
+    horizontalDamageReduction: 0.4,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 21,
+    acceleration: 0.18,
+    rotateSpeed: 0.65,
+    length: 185,
+    width: 32,
+    fundsCost: 445,
+    timeCost: 98,
+    weapon: {
+      mainGuns: [
+        {
+          name: "US/356/45/3/MK10",
+          posPercent: 0.55,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        {
+          name: "US/356/45/3/MK10",
+          posPercent: 0.38,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        {
+          name: "US/356/45/3/MK10",
+          posPercent: -0.43,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        {
+          name: "US/356/45/3/MK10",
+          posPercent: -0.58,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 10 门 127mm/51 Mark 15 单装平射炮
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK15",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 8 门 127mm/25 Mark 10 单装高平两用炮
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 8 挺 12.7mm/90 M1921 单装机枪
+        {
+          name: "US/12.7",
+          posPercent: 0.19,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.19,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.02,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: -0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: -0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: -0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    }
+  },
+  {
     // 内华达
     name: "nevada",
     nation: "us",
