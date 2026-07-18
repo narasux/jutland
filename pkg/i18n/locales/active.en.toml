@@ -113,15 +113,15 @@ other = "Aircraft"
 [CollectionNation]
 other = "Nation:"
 [CollectionShipClass]
-other = "Class: {{.Value}} ↓"
+other = "Class: {{.Value}}"
 [CollectionPlaneType]
-other = "Type: {{.Value}} ↓"
+other = "Type: {{.Value}}"
 [CollectionShipName]
-other = "Ship: {{.Value}} ↓"
+other = "Ship: {{.Value}}"
 [CollectionPlaneCount]
 other = "Total {{.Count}} aircraft"
 [CollectionNationValue]
-other = "Nation: {{.Value}} ↓"
+other = "Nation: {{.Value}}"
 [CollectionNoMatchingShip]
 other = "No ships match the current filters"
 [CollectionNoMatchingPlane]

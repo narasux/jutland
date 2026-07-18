@@ -113,18 +113,18 @@ other = "Авиация"
 [CollectionNation]
 other = "Страна:"
 [CollectionShipClass]
-other = "Класс: {{.Value}} ↓"
+other = "Класс: {{.Value}}"
 [CollectionPlaneType]
-other = "Тип: {{.Value}} ↓"
+other = "Тип: {{.Value}}"
 [CollectionShipName]
-other = "Корабль: {{.Value}} ↓"
+other = "Корабль: {{.Value}}"
 [CollectionPlaneCount]
 one = "Всего {{.Count}} самолёт"
 few = "Всего {{.Count}} самолёта"
 many = "Всего {{.Count}} самолётов"
 other = "Всего {{.Count}} самолёта"
 [CollectionNationValue]
-other = "Страна: {{.Value}} ↓"
+other = "Страна: {{.Value}}"
 [CollectionNoMatchingShip]
 other = "Нет кораблей, соответствующих фильтрам"
 [CollectionNoMatchingPlane]

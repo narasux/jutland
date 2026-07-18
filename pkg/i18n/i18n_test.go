@@ -45,13 +45,13 @@ func TestRussianPluralForms(t *testing.T) {
 	require.Equal(t, "Всего 21 самолёт", Plural(MsgCollectionPlaneCount, 21, map[string]any{"Count": 21}))
 }
 
-func TestRussianCollectionDropdownUsesSupportedArrow(t *testing.T) {
+func TestRussianCollectionDropdownLabelLeavesArrowToUI(t *testing.T) {
 	t.Cleanup(func() { SetLanguage(string(LanguageZhHans)) })
 	SetLanguage(string(LanguageRussian))
 
 	require.Equal(
 		t,
-		"Класс: Авианосец ↓",
+		"Класс: Авианосец",
 		Format(MsgCollectionShipClass, map[string]any{"Value": "Авианосец"}),
 	)
 }

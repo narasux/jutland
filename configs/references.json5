@@ -987,6 +987,31 @@
     ]
   },
   {
+    name: "tennessee",
+    displayName: "田纳西",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "4x3 356mm/50 Mk11"},
+      {label: "副炮", value: "10x1 127mm/51 Mk7"},
+      {label: "高平炮", value: "8x1 127mm/25 Mk10"},
+      {label: "高炮", value: "4x4 28mm/75"},
+      {label: "高炮", value: "14x1 20mm/70 厄利孔"},
+      {label: "鱼雷", value: "2x1 533mm"},
+    ],
+    description: "田纳西号（BB-43）是美国海军田纳西级战列舰首舰，1920 年服役。珍珠港遇袭时，她被困在西弗吉尼亚号与码头之间并遭两枚炸弹命中，但于 1942 年初完成修复和防空强化后重返舰队；本作采用其 1942 年状态。此后该舰接受全面现代化改装，参加阿留申、吉尔伯特、马绍尔、莱特湾、硫磺岛及冲绳等战役，二战期间获得十枚战斗之星。",
+    author: "Karle94, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - USS Tennessee BB-43 1942",
+        url: "https://www.shipbucket.com/drawings/7532"
+      },
+      {
+        name: "维基百科 - 田纳西号战舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%94%B0%E7%B4%8D%E8%A5%BF%E8%99%9F%E6%88%B0%E8%89%A6"
+      }
+    ]
+  },
+  {
     name: "new_york",
     displayName: "纽约",
     type: "战列舰",

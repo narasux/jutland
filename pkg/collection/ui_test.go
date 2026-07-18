@@ -127,6 +127,17 @@ func TestDropdownListWidthFitsLongestLabelAndScreen(t *testing.T) {
 	require.Equal(t, 120, dropdownListWidth(100, 120, scale, fontSize, labels))
 }
 
+func TestDropdownChevronGeometryFormsCenteredDownwardV(t *testing.T) {
+	rect := image.Rect(100, 20, 260, 60)
+	chevron := dropdownChevronGeometry(rect, 1)
+
+	require.Equal(t, float32(247), chevron.CenterX)
+	require.Equal(t, float32(42), chevron.CenterY)
+	require.Equal(t, chevron.CenterX-chevron.LeftX, chevron.RightX-chevron.CenterX)
+	require.Less(t, chevron.LeftY, chevron.CenterY)
+	require.Equal(t, chevron.LeftY, chevron.RightY)
+}
+
 func TestCombatPowerHeaderPositionsKeepLabelAndValueSeparated(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	i18n.SetLanguage(string(i18n.LanguageEnglish))

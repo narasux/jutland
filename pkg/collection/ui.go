@@ -543,6 +543,7 @@ func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
 	if rect, ok := c.hoveredComboRect(point); ok {
 		c.drawToolbarHover(screen, rect)
 	}
+	c.drawDropdownChevrons(screen, point)
 	if c.openDropdown == collectionDropdownNone {
 		return
 	}
@@ -589,6 +590,52 @@ func (c *CollectionUI) DrawOverlay(screen *ebiten.Image) {
 		c.drawer.drawText(
 			screen, c.dropdownEntryLabel(entries[index]), float64(rowRect.Min.X)+12*c.metrics.Scale,
 			float64(rowRect.Min.Y)+6*c.metrics.Scale, c.metrics.ToolbarFont, font.LocalizedUI(font.Kai), colorx.White,
+		)
+	}
+}
+
+type dropdownChevron struct {
+	LeftX, LeftY     float32
+	CenterX, CenterY float32
+	RightX, RightY   float32
+}
+
+func dropdownChevronGeometry(rect image.Rectangle, scale float64) dropdownChevron {
+	width := float32(max(6.0, math.Round(8*scale)))
+	height := float32(max(3.0, math.Round(4*scale)))
+	rightPadding := float32(max(11.0, math.Round(13*scale)))
+	centerX := float32(rect.Max.X) - rightPadding
+	centerY := float32(rect.Min.Y) + float32(rect.Dy())/2
+	return dropdownChevron{
+		LeftX: centerX - width/2, LeftY: centerY - height/2,
+		CenterX: centerX, CenterY: centerY + height/2,
+		RightX: centerX + width/2, RightY: centerY - height/2,
+	}
+}
+
+func (c *CollectionUI) drawDropdownChevrons(screen *ebiten.Image, point image.Point) {
+	// 下拉提示独立绘制，避免俄语、日语等字体缺少旧版 ⌄ 字形时发生字体回退或显示方框。
+	strokeWidth := float32(max(1.2, 1.4*c.metrics.Scale))
+	for _, combo := range c.comboButtons {
+		if combo == nil {
+			continue
+		}
+		rect := combo.GetWidget().Rect
+		if rect.Empty() {
+			continue
+		}
+		clr := color.Color(colorx.White)
+		if point.In(rect) {
+			clr = colorx.Gold
+		}
+		chevron := dropdownChevronGeometry(rect, c.metrics.Scale)
+		vector.StrokeLine(
+			screen, chevron.LeftX, chevron.LeftY, chevron.CenterX, chevron.CenterY,
+			strokeWidth, clr, true,
+		)
+		vector.StrokeLine(
+			screen, chevron.CenterX, chevron.CenterY, chevron.RightX, chevron.RightY,
+			strokeWidth, clr, true,
 		)
 	}
 }
@@ -1085,7 +1132,8 @@ func (c *CollectionUI) newCombo(
 		widget.ListComboButtonOpts.ButtonParams(&widget.ButtonParams{
 			Image: buttonImage,
 			TextPadding: &widget.Insets{
-				Left: int(math.Round(12 * scale)), Right: int(math.Round(12 * scale)),
+				// 右侧为独立绘制的 V 形箭头留出空间，避免长舰名或宽字形与箭头重叠。
+				Left: int(math.Round(12 * scale)), Right: int(math.Round(32 * scale)),
 				Top: int(math.Round(6 * scale)), Bottom: int(math.Round(6 * scale)),
 			},
 		}),

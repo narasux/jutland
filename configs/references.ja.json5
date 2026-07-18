@@ -1661,6 +1661,49 @@
     ]
   },
   {
+    "name": "tennessee",
+    "displayName": "テネシー",
+    "type": "戦艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "4x3 356mm/50 Mk11"
+      },
+      {
+        "label": "副砲",
+        "value": "10x1 127mm/51 Mk7"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x1 127mm/25 Mk10"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 28mm/75"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x1 20mm/70 エリコン"
+      },
+      {
+        "label": "魚雷",
+        "value": "2x1 533mm"
+      }
+    ],
+    "description": "USS テネシー（BB-43）はテネシー級戦艦のネームシップである。真珠湾攻撃で損傷して岸壁との間に閉じ込められたが、修理と対空兵装の強化を終えて1942年初頭に復帰し、本作ではこの時期の姿を再現する。その後は大改装を受け、アリューシャン、レイテ湾、硫黄島、沖縄などで戦い、従軍星章10個を受けた。",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {
+        "name": "Shipbucket — USS Tennessee BB-43（1942年）",
+        "url": "https://www.shipbucket.com/drawings/7532"
+      },
+      {
+        "name": "ウィキペディア — テネシー (戦艦)",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%8D%E3%82%B7%E3%83%BC_%28%E6%88%A6%E8%89%A6%29"
+      }
+    ]
+  },
+  {
     "name": "new_york",
     "displayName": "ニューヨーク",
     "type": "戦艦",

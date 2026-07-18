@@ -9751,6 +9751,300 @@
     }
   },
   {
+    // 田纳西
+    name: "tennessee",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1942,
+    totalHP: 33190,
+    horizontalDamageReduction: 0.45,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 21,
+    acceleration: 0.2,
+    rotateSpeed: 0.65,
+    length: 190,
+    width: 30,
+    fundsCost: 465,
+    timeCost: 100,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/356/50/3/MK11",
+          posPercent: 0.45,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/356/50/3/MK11",
+          posPercent: 0.31,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/356/50/3/MK11",
+          posPercent: -0.42,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        // 后主炮 D
+        {
+          name: "US/356/50/3/MK11",
+          posPercent: -0.57,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 5 英寸/51 舷侧副炮
+        // 前向 6 座
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.27,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.15,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.03,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 后向 4 座
+        {
+          name: "US/127/51/MK7",
+          posPercent: -0.06,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: -0.17,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/51/MK7",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        },
+        // 5 英寸/25 高平炮 8 座
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.19,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.19,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 四联装 1.1 英寸高炮 4 座
+        {
+          name: "US/28/75/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/28/75/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/28/75/4",
+          posPercent: -0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/28/75/4",
+          posPercent: -0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 单装 20mm 厄利孔 14 座
+        // 前炮塔左右 4 座
+        {
+          name: "US/20/70",
+          posPercent: 0.31,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 前舰桥 4 座
+        {
+          name: "US/20/70",
+          posPercent: 0.25,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.25,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.25,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.25,
+          rightFiringArc: [80, 180],
+          leftFiringArc: [180, 280]
+        },
+        // 后舰桥左右 4 座
+        {
+          name: "US/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后炮塔左右 2 座
+        {
+          name: "US/20/70",
+          posPercent: -0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      torpedoes: [
+        {
+          name: "US/533/1",
+          posPercent: 0,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/533/1",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        }
+      ]
+    }
+  },
+  {
     // 新墨西哥（1936）
     name: "new_mexico",
     nation: "us",

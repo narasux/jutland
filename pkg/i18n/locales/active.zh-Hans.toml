@@ -113,15 +113,15 @@ other = "战机"
 [CollectionNation]
 other = "国籍:"
 [CollectionShipClass]
-other = "舰种: {{.Value}} ↓"
+other = "舰种: {{.Value}}"
 [CollectionPlaneType]
-other = "机种: {{.Value}} ↓"
+other = "机种: {{.Value}}"
 [CollectionShipName]
-other = "舰名: {{.Value}} ↓"
+other = "舰名: {{.Value}}"
 [CollectionPlaneCount]
 other = "共 {{.Count}} 架飞机"
 [CollectionNationValue]
-other = "国籍: {{.Value}} ↓"
+other = "国籍: {{.Value}}"
 [CollectionNoMatchingShip]
 other = "当前筛选条件下没有舰船"
 [CollectionNoMatchingPlane]
