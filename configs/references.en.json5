@@ -2443,8 +2443,8 @@
     ]
   },
   {
-    "name": "alaska_kai",
-    "displayName": "Alaska Kai",
+    "name": "puerto_rico",
+    "displayName": "Puerto Rico",
     "type": "Large Cruiser",
     "armaments": [
       {
@@ -2464,7 +2464,7 @@
         "value": "44x1 20mm/70"
       }
     ],
-    "description": "Alaska Kai is an artistic development of the historical Alaska-class large cruiser. The design adds a fourth triple 12-inch turret and correspondingly increases displacement and protection, pushing the concept closer to a battlecruiser. It was not an approved United States Navy configuration and exists as a speculative design study.",
+    "description": "Puerto Rico is a fictional development of the historical Alaska-class large cruiser created by TZoli; the game assigns it the name originally planned for CB-5. The design adds a fourth triple 12-inch turret and increases displacement and protection, pushing the concept closer to a battlecruiser. It was never an approved United States Navy configuration.",
     "author": "TZoli",
     "links": [
       {
@@ -2472,7 +2472,7 @@
         "url": "https://www.deviantart.com/tzoli/art/The-never-were-Alaska-from-a-forgotten-age-686219191"
       },
       {
-        "name": "Wikipedia — Alaska Kai",
+        "name": "Wikipedia — Alaska-class cruiser",
         "url": "https://en.wikipedia.org/wiki/Alaska-class%20cruiser"
       }
     ]

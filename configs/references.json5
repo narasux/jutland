@@ -1615,8 +1615,8 @@
     ]
   },
   {
-    name: "alaska_kai",
-    displayName: "阿拉斯加（改）",
+    name: "puerto_rico",
+    displayName: "波多黎各",
     type: "大型巡洋舰",
     armaments: [
       {label: "主炮", value: "4x3 305mm/50"},
@@ -1624,7 +1624,7 @@
       {label: "高炮", value: "14x4 40mm/60"},
       {label: "高炮", value: "44x1 20mm/70"},
     ],
-    description: "改进型阿拉斯加级大型巡洋舰是 TZoli 的个人作品，在史实阿拉斯加级的基础上强化了火力配置，换装四座三联装 12 英寸（305mm）主炮，防护与吨位也相应增加，是介于重巡与战巡之间的极端方案。",
+    description: "波多黎各号是 TZoli 以史实阿拉斯加级为基础创作的架空改进型大型巡洋舰；本作沿用原定于 CB-5 的“波多黎各”之名。该方案换装四座三联装 12 英寸（305mm）主炮，防护与吨位也相应增加，定位介于重巡洋舰与战列巡洋舰之间。",
     author: "TZoli",
     links: [
       {

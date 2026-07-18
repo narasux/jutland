@@ -2677,8 +2677,8 @@
     ]
   },
   {
-    "name": "alaska_kai",
-    "displayName": "アラスカ改",
+    "name": "puerto_rico",
+    "displayName": "プエルトリコ",
     "type": "大型巡洋艦",
     "armaments": [
       {
@@ -2698,7 +2698,7 @@
         "value": "44x1 20mm/70"
       }
     ],
-    "description": "アラスカ改は、実在のアラスカ級大型巡洋艦を芸術的に発展させた架空案である。12インチ三連装砲塔を4基に増やし、排水量と防御も強化して巡洋戦艦に近づけている。米海軍が承認した状態ではなく、推測的な設計研究として制作された。",
+    "description": "プエルトリコは、TZoliが実在のアラスカ級大型巡洋艦を基に制作した架空の発展案であり、本作では当初CB-5に予定された艦名を用いている。12インチ三連装砲塔を4基に増やし、排水量と防御も強化したことで、巡洋戦艦に近い性格を持つ。米海軍に承認された設計ではない。",
     "author": "TZoli",
     "links": [
       {
@@ -2706,7 +2706,7 @@
         "url": "https://www.deviantart.com/tzoli/art/The-never-were-Alaska-from-a-forgotten-age-686219191"
       },
       {
-        "name": "ウィキペディア — アラスカ改",
+        "name": "ウィキペディア — アラスカ級大型巡洋艦",
         "url": "https://en.wikipedia.org/wiki/Alaska-class%20cruiser"
       }
     ]

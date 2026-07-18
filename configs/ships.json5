@@ -19030,8 +19030,8 @@
     },
   },
   {
-    // 阿拉斯加（改）
-    name: "alaska_kai",
+    // 波多黎各
+    name: "puerto_rico",
     nation: "us",
     type: "cruiser",
     typeAbbr: "CB",

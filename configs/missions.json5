@@ -956,7 +956,7 @@
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
-          "alaska_kai",
+          "puerto_rico",
           "alaska",
           "des_moines",
           "oregon_city",
@@ -1507,7 +1507,7 @@
       },
       // === US CA ===
       {
-        name: "alaska_kai",
+        name: "puerto_rico",
         pos: [38, 45],
         rotation: 90,
         belongPlayer: "HA"
