@@ -228,6 +228,7 @@ func (m *MissionManager) updateCombatPhase() {
 	m.updatePlaneWeaponFire()
 	m.updateObjectTrails()
 	m.updateShotBullets()
+	m.updateShipAnimations()
 	m.updateExplosions()
 	m.updateMissionShips()
 	m.updateMissionPlanes()

@@ -112,6 +112,8 @@ type BattleShip struct {
 	Weapon ShipWeapon `json:"weapon"`
 	// 舰载机联队
 	Aircraft ShipAircraft `json:"aircraft"`
+	// 舰船动画
+	Animation ShipAnimation `json:"animation"`
 	// 战力评估（配置与武器初始化完成后计算）
 	CombatPower CombatPowerInfo `json:"-"`
 
@@ -125,6 +127,8 @@ type BattleShip struct {
 	CurRotation float64
 	// 当前速度
 	CurSpeed float64
+	// 动画累计模拟帧
+	AnimationAge float64
 	// 分组ID
 	GroupID object.GroupID
 	// 攻击目标（敌舰 Uid）

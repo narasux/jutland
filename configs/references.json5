@@ -41,6 +41,20 @@
     ]
   },
   {
+    name: "swordfish",
+    displayName: "巨型剑鱼",
+    type: "生物舰船",
+    armaments: [
+      {label: "攻击方式", value: "舰首撞击"},
+    ],
+    description: "剑鱼是一种大型、高度洄游的掠食性鱼类，以扁平而细长的剑状吻部得名。它们遍布大西洋、太平洋和印度洋的热带及温带海域，身体流线、游速很快，会用剑状吻部击伤猎物。在本游戏中，这条剑鱼被放大为约 180 米长的巨型生物舰船。",
+    author: "GPT 5.6 Sol",
+    links: [
+      {name: "OpenAI", url: "https://openai.com/"},
+      {name: "维基百科 - 剑鱼", url: "https://zh.wikipedia.org/wiki/%E5%89%91%E6%97%97%E9%B1%BC"},
+    ]
+  },
+  {
     name: "molamola",
     displayName: "翻车鱼",
     type: "靶子",

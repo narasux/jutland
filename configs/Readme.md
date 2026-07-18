@@ -372,6 +372,12 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     timeCost: 12,
     // 吨位
     tonnage: 8000,
+    // 可选：俯视逐帧动画；静止时使用 idleTopFrame
+    animation: {
+      topFrames: ["swordfish_01", "swordfish_02", "swordfish_03"],
+      idleTopFrame: "swordfish_03",
+      frameTicks: 6,
+    },
     // 战舰描述（建议不多于 4 行）
     description: [
       "导弹巡洋舰（美）",

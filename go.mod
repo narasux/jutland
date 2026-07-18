@@ -5,6 +5,7 @@ go 1.25.6
 require (
 	github.com/BurntSushi/toml v1.6.0
 	github.com/ebitenui/ebitenui v0.7.3
+	github.com/go-text/typesetting v0.3.2
 	github.com/google/uuid v1.6.0
 	github.com/hajimehoshi/ebiten/v2 v2.9.7
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
@@ -25,7 +26,6 @@ require (
 	github.com/ebitengine/oto/v3 v3.4.0 // indirect
 	github.com/ebitengine/purego v0.9.1 // indirect
 	github.com/frustra/bbcode v0.0.0-20201127003707-6ef347fbe1c8 // indirect
-	github.com/go-text/typesetting v0.3.2 // indirect
 	github.com/hajimehoshi/go-mp3 v0.3.4 // indirect
 	github.com/jezek/xgb v1.1.1 // indirect
 	github.com/jfreymuth/oggvorbis v1.0.5 // indirect

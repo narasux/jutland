@@ -74,6 +74,29 @@
     ]
   },
   {
+    "name": "swordfish",
+    "displayName": "巨大メカジキ",
+    "type": "生体艦船",
+    "armaments": [
+      {
+        "label": "攻撃方法",
+        "value": "艦首体当たり"
+      }
+    ],
+    "description": "メカジキは、長く扁平な剣状の吻を持つ大型の高度回遊性捕食魚である。大西洋・太平洋・インド洋の熱帯から温帯に分布し、流線形の体で高速に泳ぎ、吻で獲物を傷つける。本作では全長約180メートルの巨大な生体艦船として登場する。",
+    "author": "GPT 5.6 Sol",
+    "links": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com/"
+      },
+      {
+        "name": "ウィキペディア — メカジキ",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%AB%E3%82%B8%E3%82%AD"
+      }
+    ]
+  },
+  {
     "name": "molamola",
     "displayName": "マンボウ",
     "type": "標的",

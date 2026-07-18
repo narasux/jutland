@@ -182,7 +182,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
-		sImg, sImgScale := shipResource(s.Name, ms.UI.GameOpts.Zoom)
+		sImg, sImgScale := shipResource(s.CurrentTopImageName(), ms.UI.GameOpts.Zoom)
 		shipX, shipY := ms.CameraPosToScreen(s.CurPos)
 		drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
 		if ms.UI.DebugFlags.ShowHitBoxes {
@@ -330,7 +330,7 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 			continue
 		}
 
-		sImg, sImgScale := shipResource(s.Name, ms.UI.GameOpts.Zoom)
+		sImg, sImgScale := shipResource(s.CurrentTopImageName(), ms.UI.GameOpts.Zoom)
 		shipX, shipY := ms.CameraPosToScreen(s.CurPos)
 		drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
 

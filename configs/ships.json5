@@ -132,6 +132,48 @@
       ]
     }
   },
+  // 巨型剑鱼：复用水滴的极短射程主炮模拟撞击
+  {
+    name: "swordfish",
+    nation: "special",
+    type: "default",
+    typeAbbr: "Swordfish",
+    year: 2026,
+    totalHP: 100000,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 50,
+    acceleration: 1.0,
+    rotateSpeed: 2.0,
+    length: 180,
+    width: 76,
+    fundsCost: 500,
+    timeCost: 100,
+    weapon: {
+      mainGuns: [
+        {
+          name: "Impact",
+          posPercent: 0,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
+        }
+      ]
+    },
+    animation: {
+      topFrames: [
+        "swordfish_01",
+        "swordfish_02",
+        "swordfish_03",
+        "swordfish_04",
+        "swordfish_05",
+        "swordfish_04",
+        "swordfish_03",
+        "swordfish_02",
+      ],
+      idleTopFrame: "swordfish_03",
+      frameTicks: 6,
+    },
+  },
   // 翻车鱼，好吃的翻车鱼！
   {
     // 翻车鱼
@@ -19045,7 +19087,7 @@
     length: 262,
     width: 32,
     fundsCost: 470,
-    timeCost: 130,
+    timeCost: 142,
     weapon: {
       mainGuns: [
         // 前主炮 A

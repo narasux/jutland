@@ -74,6 +74,29 @@
     ]
   },
   {
+    "name": "swordfish",
+    "displayName": "Giant Swordfish",
+    "type": "Biological Vessel",
+    "armaments": [
+      {
+        "label": "Attack Method",
+        "value": "Bow Ramming"
+      }
+    ],
+    "description": "Swordfish are large, highly migratory predatory fish named for their long, flat, sword-like bills. They inhabit tropical and temperate parts of the Atlantic, Pacific and Indian oceans, have streamlined bodies, and are powerful swimmers that slash at prey with their bills. In the game, this individual has grown into a biological vessel about 180 metres long.",
+    "author": "GPT 5.6 Sol",
+    "links": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com/"
+      },
+      {
+        "name": "Wikipedia — Swordfish",
+        "url": "https://en.wikipedia.org/wiki/Swordfish"
+      }
+    ]
+  },
+  {
     "name": "molamola",
     "displayName": "Ocean Sunfish",
     "type": "Target",
