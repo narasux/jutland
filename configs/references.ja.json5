@@ -1539,6 +1539,40 @@
     ]
   },
   {
+    "name": "maryland",
+    "displayName": "メリーランド",
+    "type": "戦艦",
+    "armaments": [
+      {"label": "主砲", "value": "4x2 406mm/45 Mk5"},
+      {"label": "両用砲", "value": "8x2 127mm/38 Mk12"},
+      {"label": "対空砲", "value": "10x4 + 2x2 40mm/60"},
+      {"label": "対空砲", "value": "21x1 20mm/70"}
+    ],
+    "description": "USS メリーランド（BB-46）はコロラド級戦艦の2番艦で、1921年に就役した。ゲーム内では1944年の艦として扱い、現行兵装は127mm/38 Mk12連装両用砲8基、40mm/60四連装砲10基と連装砲2基、20mm/70単装砲21門で構成される。真珠湾攻撃での損傷は比較的軽く、その後はタラワ、クェゼリン、サイパン、パラオ、レイテ湾の各作戦とスリガオ海峡海戦に参加し、第二次世界大戦で7個の従軍星章を受けた。",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {"name": "Shipbucket — USS Maryland BB-46 1944", "url": "https://www.shipbucket.com/drawings/7542"},
+      {"name": "ウィキペディア — USS Maryland (BB-46)", "url": "https://en.wikipedia.org/wiki/USS_Maryland_%28BB-46%29"}
+    ]
+  },
+  {
+    "name": "west_virginia",
+    "displayName": "ウェスト・バージニア",
+    "type": "戦艦",
+    "armaments": [
+      {"label": "主砲", "value": "4x2 406mm/45 Mk5"},
+      {"label": "両用砲", "value": "8x2 127mm/38 Mk12"},
+      {"label": "対空砲", "value": "10x4 40mm/60"},
+      {"label": "対空砲", "value": "60x1 20mm/70"}
+    ],
+    "description": "USS ウェスト・バージニア（BB-48）はコロラド級戦艦のうち3番目に完成した艦で、1923年に就役した。真珠湾攻撃で魚雷と爆弾を受けて浅瀬に沈没したが、浮揚後に塔型艦橋、対魚雷バルジ、レーダー、127mm/38連装両用砲を備える大改装を受けた。本作では最終的な1945年状態を再現する。復帰後はスリガオ海峡でレーダー射撃により米戦列の先頭に立ち、リンガエン湾、硫黄島、沖縄の各作戦を支援し、日本降伏後には東京湾へ入港した。第二次世界大戦で5個の従軍星章を受けた。",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {"name": "Shipbucket — USS West Virginia BB-48 1945", "url": "https://www.shipbucket.com/drawings/7545"},
+      {"name": "ウィキペディア — コロラド級戦艦", "url": "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%AD%E3%83%A9%E3%83%89%E7%B4%9A%E6%88%A6%E8%89%A6"}
+    ]
+  },
+  {
     "name": "new_mexico",
     "displayName": "ニューメキシコ",
     "type": "戦艦",

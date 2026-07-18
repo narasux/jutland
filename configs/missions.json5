@@ -918,6 +918,8 @@
           "lowa",
           "lexington",
           "south_dakota",
+          "west_virginia",
+          "maryland",
           "tennessee",
           "new_mexico",
           "pennsylvania",
@@ -1455,38 +1457,50 @@
         belongPlayer: "HA"
       },
       {
-        name: "tennessee",
+        name: "west_virginia",
         pos: [35, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_mexico",
+        name: "maryland",
         pos: [34, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "pennsylvania",
+        name: "tennessee",
         pos: [35, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "nevada",
+        name: "new_mexico",
         pos: [34, 52],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "new_york",
+        name: "pennsylvania",
         pos: [35, 53],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "arkansas",
+        name: "nevada",
         pos: [34, 54],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "new_york",
+        pos: [35, 55],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "arkansas",
+        pos: [34, 56],
         rotation: 90,
         belongPlayer: "HA"
       },

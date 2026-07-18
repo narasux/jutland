@@ -901,6 +901,40 @@
     ]
   },
   {
+    name: "maryland",
+    displayName: "马里兰",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "4x2 406mm/45 Mk5"},
+      {label: "高平炮", value: "8x2 127mm/38 Mk12"},
+      {label: "高炮", value: "10x4 + 2x2 40mm/60"},
+      {label: "高炮", value: "21x1 20mm/70"},
+    ],
+    description: "马里兰号（BB-46）是美国海军科罗拉多级战列舰二号舰，1921 年服役。游戏条目以 1944 年为年代，当前武装配置为 8 座双联装 127mm/38 Mk12 高平两用炮、10 座四联装与 2 座双联装 40mm/60 高炮，以及 21 门单装 20mm/70 高炮。该舰在珍珠港袭击中受损较轻，随后参加塔拉瓦、夸贾林、塞班岛、帕劳和莱特湾等战役，并在苏里高海峡海战中作战；二战期间获得七枚战斗之星。",
+    author: "Karle94, David Latuch",
+    links: [
+      {name: "Shipbucket - USS Maryland BB-46 1944", url: "https://www.shipbucket.com/drawings/7542"},
+      {name: "维基百科 - 马利兰号战舰", url: "https://zh.wikipedia.org/wiki/%E9%A6%AC%E5%88%A9%E8%98%AD%E8%99%9F%E6%88%B0%E8%89%A6"}
+    ]
+  },
+  {
+    name: "west_virginia",
+    displayName: "西弗吉尼亚",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "4x2 406mm/45 Mk5"},
+      {label: "高平炮", value: "8x2 127mm/38 Mk12"},
+      {label: "高炮", value: "10x4 40mm/60"},
+      {label: "高炮", value: "60x1 20mm/70"},
+    ],
+    description: "西弗吉尼亚号（BB-48）是美国海军科罗拉多级战列舰三号舰，1923 年服役。该舰在珍珠港袭击中被多枚鱼雷和炸弹击沉于浅水，打捞后接受全面重建，换装塔式舰桥、鱼雷防护鼓包、雷达和 127mm/38 双联装高平炮；游戏采用其 1945 年最终状态。重返战场后，该舰在苏里高海峡以雷达火控率先向日军战列线开火，随后参加仁牙因湾、硫磺岛和冲绳战役，并在日本投降后驶入东京湾；二战期间获得五枚战斗之星。",
+    author: "Karle94, David Latuch",
+    links: [
+      {name: "Shipbucket - USS West Virginia BB-48 1945", url: "https://www.shipbucket.com/drawings/7545"},
+      {name: "维基百科 - 西维珍尼亚号战舰", url: "https://zh.wikipedia.org/wiki/%E8%A5%BF%E7%B6%AD%E7%8F%8D%E5%B0%BC%E4%BA%9E%E8%99%9F%E6%88%B0%E8%89%A6"}
+    ]
+  },
+  {
     name: "new_mexico",
     displayName: "新墨西哥",
     type: "战列舰",

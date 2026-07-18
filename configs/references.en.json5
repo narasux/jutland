@@ -1305,6 +1305,40 @@
     ]
   },
   {
+    "name": "maryland",
+    "displayName": "Maryland",
+    "type": "Battleship",
+    "armaments": [
+      {"label": "Main Battery", "value": "4x2 406mm/45 Mk5"},
+      {"label": "Dual-purpose Guns", "value": "8x2 127mm/38 Mk12"},
+      {"label": "Anti-aircraft Guns", "value": "10x4 + 2x2 40mm/60"},
+      {"label": "Anti-aircraft Guns", "value": "21x1 20mm/70"}
+    ],
+    "description": "USS Maryland (BB-46) was the second Colorado-class battleship and entered service in 1921. The game entry is dated 1944 and its current loadout uses eight twin 5-inch/38 Mk 12 dual-purpose mounts, ten quadruple plus two twin 40 mm mounts, and twenty-one single 20 mm guns. Lightly damaged at Pearl Harbor, she later fought across the Central Pacific and at Surigao Strait, earning seven battle stars during the Second World War.",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {"name": "Shipbucket — USS Maryland BB-46 1944", "url": "https://www.shipbucket.com/drawings/7542"},
+      {"name": "Wikipedia — USS Maryland (BB-46)", "url": "https://en.wikipedia.org/wiki/USS_Maryland_%28BB-46%29"}
+    ]
+  },
+  {
+    "name": "west_virginia",
+    "displayName": "West Virginia",
+    "type": "Battleship",
+    "armaments": [
+      {"label": "Main Battery", "value": "4x2 406mm/45 Mk5"},
+      {"label": "Dual-purpose Guns", "value": "8x2 127mm/38 Mk12"},
+      {"label": "Anti-aircraft Guns", "value": "10x4 40mm/60"},
+      {"label": "Anti-aircraft Guns", "value": "60x1 20mm/70"}
+    ],
+    "description": "USS West Virginia (BB-48) was the third completed Colorado-class battleship and entered service in 1923. Sunk in shallow water by torpedoes and bombs at Pearl Harbor, she was salvaged and comprehensively rebuilt with a tower superstructure, torpedo bulges, radar, and twin 5-inch/38 dual-purpose mounts; the game depicts her final 1945 configuration. After returning to action, her radar-directed battery led the American battle line at Surigao Strait, and she later supported the Lingayen Gulf, Iwo Jima, and Okinawa campaigns before entering Tokyo Bay after Japan's surrender. She earned five battle stars during the Second World War.",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {"name": "Shipbucket — USS West Virginia BB-48 1945", "url": "https://www.shipbucket.com/drawings/7545"},
+      {"name": "Wikipedia — USS West Virginia (BB-48)", "url": "https://en.wikipedia.org/wiki/USS_West_Virginia_%28BB-48%29"}
+    ]
+  },
+  {
     "name": "new_mexico",
     "displayName": "New Mexico",
     "type": "Battleship",
