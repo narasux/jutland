@@ -208,6 +208,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 14-inch/50 Mk 11 三联装舰炮
+  {
+    name: "US/356/50/3/MK11",
+    bulletName: "US/GB/356/1935",
+    bulletCount: 3,
+    reloadTime: 15,
+    range: 35,
+    bulletSpread: 145,
+    bulletSpeed: 820,
+    fundsCost: 40,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 US/305/50/MK8 三联装舰炮
   {
     name: "US/305/50/3/MK8",

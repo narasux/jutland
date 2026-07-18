@@ -1305,6 +1305,23 @@
     ]
   },
   {
+    "name": "new_mexico",
+    "displayName": "New Mexico",
+    "type": "Battleship",
+    "armaments": [
+      {"label": "Main Battery", "value": "4x3 356mm/50 Mk11"},
+      {"label": "Secondary Guns", "value": "10x1 127mm/51 Mk7"},
+      {"label": "Dual-purpose Guns", "value": "8x1 127mm/25 Mk10"},
+      {"label": "Anti-aircraft Guns", "value": "8x1 20mm/70"}
+    ],
+    "description": "USS New Mexico (BB-40) was the lead ship of her battleship class. Reconstructed from 1931 to 1933, she received a tower bridge, stronger protection, and improved anti-aircraft armament; the game depicts her in 1936. She later supported campaigns from the Aleutians to Okinawa and earned six battle stars during the Second World War.",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {"name": "Shipbucket - USS New Mexico BB-40 1936", "url": "https://www.shipbucket.com/drawings/7521"},
+      {"name": "Wikipedia - USS New Mexico (BB-40)", "url": "https://en.wikipedia.org/wiki/USS_New_Mexico_%28BB-40%29"}
+    ]
+  },
+  {
     "name": "lowa",
     "displayName": "Iowa",
     "type": "Battleship",
@@ -4568,6 +4585,15 @@
     "type": "Weapon",
     "armaments": [],
     "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/50/3/MK11",
+    "displayName": "356mm/50 Triple Mount Mk11",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "A U.S. Navy 14-inch/50 Mk11 triple gun mount used in the game for USS New Mexico in her 1936 configuration.",
     "author": "",
     "links": []
   },

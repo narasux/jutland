@@ -919,6 +919,7 @@
           "lexington",
           "south_dakota",
           "pennsylvania",
+          "new_mexico",
           "nevada",
           "new_york",
           "arkansas",
@@ -1473,6 +1474,12 @@
       {
         name: "arkansas",
         pos: [34, 52],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "new_mexico",
+        pos: [35, 53],
         rotation: 90,
         belongPlayer: "HA"
       },

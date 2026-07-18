@@ -901,6 +901,23 @@
     ]
   },
   {
+    name: "new_mexico",
+    displayName: "新墨西哥",
+    type: "战列舰",
+    armaments: [
+      {label: "主炮", value: "4x3 356mm/50 Mk11"},
+      {label: "副炮", value: "10x1 127mm/51 Mk7"},
+      {label: "高平炮", value: "8x1 127mm/25 Mk10"},
+      {label: "高炮", value: "8x1 20mm/70"},
+    ],
+    description: "新墨西哥号（BB-40）是美国海军新墨西哥级战列舰首舰，1918 年服役。该舰在 1931 至 1933 年间完成大规模现代化改装，换装塔式舰桥并加强装甲与防空能力；本游戏采用其 1936 年状态。太平洋战争期间，新墨西哥号参加了阿留申、吉尔伯特、马绍尔、马里亚纳、菲律宾和冲绳等战役，并获得六枚战斗之星。",
+    author: "Karle94, David Latuch",
+    links: [
+      {name: "Shipbucket - USS New Mexico BB-40 1936", url: "https://www.shipbucket.com/drawings/7521"},
+      {name: "维基百科 - 新墨西哥号战舰", url: "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%A2%A8%E8%A5%BF%E5%93%A5%E8%99%9F%E6%88%B0%E8%89%A6"}
+    ]
+  },
+  {
     name: "lowa",
     displayName: "衣阿华",
     type: "战列舰",
@@ -3123,6 +3140,15 @@
     type: "武器",
     armaments: [],
     description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/356/50/3/MK11",
+    displayName: "356mm/50 三联装舰炮 Mk11",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 14 英寸/50 Mk 11 三联装舰炮，本游戏用于新墨西哥号 1936 年状态。",
     author: "",
     links: []
   },

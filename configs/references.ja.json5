@@ -1539,6 +1539,23 @@
     ]
   },
   {
+    "name": "new_mexico",
+    "displayName": "ニューメキシコ",
+    "type": "戦艦",
+    "armaments": [
+      {"label": "主砲", "value": "4x3 356mm/50 Mk11"},
+      {"label": "副砲", "value": "10x1 127mm/51 Mk7"},
+      {"label": "両用砲", "value": "8x1 127mm/25 Mk10"},
+      {"label": "対空砲", "value": "8x1 20mm/70"}
+    ],
+    "description": "USS ニューメキシコ（BB-40）はニューメキシコ級戦艦のネームシップである。1931年から1933年の大改装で塔型艦橋への換装、防御強化、対空兵装の改善を受け、本作では1936年時の姿を採用する。第二次世界大戦ではアリューシャンから沖縄まで各作戦を支援し、従軍星章6個を受けた。",
+    "author": "Karle94, David Latuch",
+    "links": [
+      {"name": "Shipbucket — USS ニューメキシコ BB-40 1936", "url": "https://www.shipbucket.com/drawings/7521"},
+      {"name": "ウィキペディア — ニューメキシコ (戦艦)", "url": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A1%E3%82%AD%E3%82%B7%E3%82%B3_%28%E6%88%A6%E8%89%A6%29"}
+    ]
+  },
+  {
     "name": "lowa",
     "displayName": "アイオワ",
     "type": "戦艦",
@@ -4993,6 +5010,15 @@
     "type": "兵器",
     "armaments": [],
     "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/50/3/MK11",
+    "displayName": "356mm/50 三連装砲 Mk11",
+    "type": "兵器",
+    "armaments": [],
+    "description": "米海軍の14インチ50口径Mk11三連装砲で、本作では1936年時のUSS ニューメキシコに使用されている。",
     "author": "",
     "links": []
   },
