@@ -20,25 +20,58 @@ func (m *MissionManager) updateGameOptions(skipCursorInput bool) {
 	_, wheelY := ebiten.Wheel()
 	magnification := magnify.Poll()
 
-	if skipCursorInput || (wheelY == 0 && magnification == 0) {
+	if skipCursorInput {
 		m.pinchWheelAccum = 0
+		if m.wheelZoomCooldown > 0 {
+			m.wheelZoomCooldown--
+		}
 		return
 	}
 
+	direction := m.consumeZoomInput(wheelY, magnification)
+	if direction == 0 {
+		return
+	}
 	sx, sy := ebiten.CursorPosition()
-	// 鼠标滚轮 + 触控板双指缩放都汇入同一个累加器
-	// magnification 乘以 2 使得一次完整捏合动作产生 1–2 个变倍步
-	m.pinchWheelAccum += wheelY + magnification*2.0
+	m.state.StepZoomAtScreenPoint(direction, sx, sy)
+}
+
+// consumeZoomInput 将滚轮与触控板输入转换为单次缩放方向。
+// 鼠标滚轮不使用原始增量跨越多档，并用短冷却吸收同一次滚动的连续事件。
+func (m *MissionManager) consumeZoomInput(wheelY, magnification float64) int {
+	if m.wheelZoomCooldown > 0 {
+		m.wheelZoomCooldown--
+	}
+	if wheelY != 0 {
+		m.pinchWheelAccum = 0
+		if m.wheelZoomCooldown > 0 {
+			return 0
+		}
+		m.wheelZoomCooldown = wheelZoomCooldownTicks
+		if wheelY > 0 {
+			return 1
+		}
+		return -1
+	}
+
+	if magnification == 0 {
+		m.pinchWheelAccum = 0
+		return 0
+	}
+
+	// magnification 乘以 2 使得一次完整捏合动作产生 1–2 个变倍步。
+	m.pinchWheelAccum += magnification * 2.0
 
 	const accumThreshold = 1.0
-	for m.pinchWheelAccum >= accumThreshold {
-		m.state.StepZoomAtScreenPoint(1, sx, sy)
+	if m.pinchWheelAccum >= accumThreshold {
 		m.pinchWheelAccum -= accumThreshold
+		return 1
 	}
-	for m.pinchWheelAccum <= -accumThreshold {
-		m.state.StepZoomAtScreenPoint(-1, sx, sy)
+	if m.pinchWheelAccum <= -accumThreshold {
 		m.pinchWheelAccum += accumThreshold
+		return -1
 	}
+	return 0
 }
 
 // 更新指令集合

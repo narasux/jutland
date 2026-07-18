@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jutland 添加地图"
+  short_description: "处理原始地图素材并接入地形网格、缩略图与运行时资源"
+  default_prompt: "使用 $jutland-add-map 根据给定原始素材添加并验证一张 Jutland 地图，不修改关卡信息。"

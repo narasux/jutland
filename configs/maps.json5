@@ -31,4 +31,12 @@
     displayNameJa: "ダーウィン港（256x256）",
     source: "darwin"
   },
+  {
+    name: "pearl_harbor",
+    displayName: "珍珠港",
+    displayNameEn: "Pearl Harbor",
+    displayNameRu: "Перл-Харбор",
+    displayNameJa: "真珠湾",
+    source: "pearl_harbor"
+  },
 ]

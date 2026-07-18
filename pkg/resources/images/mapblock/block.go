@@ -129,7 +129,17 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 		return errors.New("mission map image isn't image.NRGBA type")
 	}
 
-	blockSize := missionImg.Bounds().Dx() / cfg.Width
+	imgWidth, imgHeight := missionImg.Bounds().Dx(), missionImg.Bounds().Dy()
+	if imgWidth%cfg.Width != 0 || imgHeight%cfg.Height != 0 {
+		return fmt.Errorf(
+			"mission map image size %dx%d is not divisible by map grid %dx%d",
+			imgWidth, imgHeight, cfg.Width, cfg.Height,
+		)
+	}
+	blockSize := imgWidth / cfg.Width
+	if imgHeight/cfg.Height != blockSize {
+		return fmt.Errorf("mission map image cells are not square: %dx%d", imgWidth/cfg.Width, imgHeight/cfg.Height)
+	}
 	for x := 0; x < cfg.Width; x++ {
 		for y := 0; y < cfg.Height; y++ {
 			// 纯海洋（不含浅滩）不需要贴图，可以跳过

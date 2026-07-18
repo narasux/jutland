@@ -217,6 +217,19 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	return shotBullets
 }
 
+// TorpedoPathCrossesLand 返回当前可投放的航空鱼雷航迹是否经过陆地。
+func (p *Plane) TorpedoPathCrossesLand(enemy Hurtable, terrain *mapcfg.MapData) bool {
+	if p.CurHP <= 0 || enemy.ObjType() != object.TypeShip {
+		return false
+	}
+	for _, torpedo := range p.Weapon.Torpedoes {
+		if torpedo.pathCrossesLand(p, enemy, terrain) {
+			return true
+		}
+	}
+	return false
+}
+
 // HurtBy 受到伤害
 func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
 	// 计算真实伤害，飞机比较脆，所以伤害要再额外乘以 3

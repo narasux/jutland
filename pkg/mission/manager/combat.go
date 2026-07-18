@@ -226,6 +226,13 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 		if total := len(inRangeEnemies); total != 0 {
 			// 射程内的敌人都会被攻击
 			enemy := inRangeEnemies[rand.Intn(total)]
+			// 投放前检查飞机到预计命中点的航迹，只有陆地真正挡在
+			// 鱼雷与目标之间时才放弃本次投放。
+			if plane.Type == objUnit.PlaneTypeTorpedoBomber &&
+				plane.TorpedoPathCrossesLand(enemy, &m.state.Core.MissionMD.MapCfg.Map) {
+				m.retargetTorpedoBomber(plane, enemy.ID())
+				continue
+			}
 			bullets := plane.Fire(enemy)
 			if len(bullets) == 0 {
 				continue
@@ -251,6 +258,25 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 	}
 
 	m.weaponFirePlayer.PlayPlaneFire(bombReleased, rocketLaunched, torpedoLaunched)
+}
+
+// retargetTorpedoBomber 让鱼雷机放弃当前不安全的投放对象，改为追踪其他敌舰。
+// 若没有其他敌舰，则保留原指令，等飞离陆地后再尝试投放。
+func (m *MissionManager) retargetTorpedoBomber(plane *objUnit.Plane, skippedTargetUid string) {
+	targets := []objUnit.Hurtable{}
+	for _, enemy := range m.state.Arena.Ships {
+		if plane.BelongPlayer == enemy.BelongPlayer || enemy.Uid == skippedTargetUid {
+			continue
+		}
+		targets = append(targets, enemy)
+	}
+	if len(targets) == 0 {
+		return
+	}
+
+	enemy := targets[rand.Intn(len(targets))]
+	plane.CurAttackTarget = enemy.ID()
+	m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
 }
 
 // 更新弹药状态
@@ -322,7 +348,7 @@ func (m *MissionManager) updateShotBullets() {
 				if bt.ShooterObjType == object.TypeShip {
 					if plane.Type == objUnit.PlaneTypeDiveBomber {
 						// 俯冲轰炸机要飞得很近，插肩而过率得高一些
-						if rand.Intn(12) != 0 {
+						if rand.Intn(24) != 0 {
 							continue
 						}
 					} else {

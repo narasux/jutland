@@ -1,5 +1,493 @@
 [
   {
+    name: "PearlHarbor1941",
+    displayName: "珍珠港袭击-1941",
+    displayNameEn: "Attack on Pearl Harbor - 1941",
+    displayNameRu: "Нападение на Пёрл-Харбор — 1941",
+    displayNameJa: "真珠湾攻撃―1941年",
+    initFunds: 0,
+    initCameraPos: [64, 66],
+    mapName: "pearl_harbor",
+    maxShipCount: 65,
+    description: "1941 年 12 月 7 日约 07:55，珍珠港内的美国太平洋舰队遭到日本第一航空舰队突袭。本关按袭击开始时的历史泊位关系部署港内 8 艘战列舰、8 艘巡洋舰和 29 艘驱逐舰；日本航母机动部队及其近接护航舰队从地图右下方开放水域驶向港区。受现有舰船资源限制，缺失舰型均按同级优先、其次同类别近似吨位替代，并在配置注释中逐舰注明。",
+    descriptionEn: "At about 07:55 on 7 December 1941, the U.S. Pacific Fleet at Pearl Harbor came under attack. This scenario places eight battleships, eight cruisers, and twenty-nine destroyers in their opening historical berth relationships. The Japanese carrier striking force and its close surface escort enter from the open water at the lower right. Missing ship assets use same-class substitutes first, then ships of the same category and similar displacement; every substitution is documented in the configuration comments.",
+    descriptionRu: "Около 07:55 7 декабря 1941 года Тихоокеанский флот США в Пёрл-Харборе подвергся внезапному удару. В сценарии восемь линкоров, восемь крейсеров и двадцать девять эсминцев размещены с сохранением исторического взаимного расположения на стоянках. Японское авианосное соединение с ближним охранением входит из открытой воды в правом нижнем углу карты. Отсутствующие корабли заменены прежде всего однотипными, затем кораблями той же категории и близкого водоизмещения; каждая замена отмечена в комментариях конфигурации.",
+    descriptionJa: "1941年12月7日午前7時55分頃、真珠湾の米太平洋艦隊は日本海軍第一航空艦隊の奇襲を受けた。本シナリオでは攻撃開始時の係留関係に基づき、戦艦8隻、巡洋艦8隻、駆逐艦29隻を港内に配置する。日本の空母機動部隊と近接護衛部隊はマップ右下の外洋から港へ向かう。未収録艦は同型艦を優先し、次に同じ艦種で排水量の近い艦を代用し、各代用を設定コメントに記した。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // 坐标按 128x192 pearl_harbor.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 港内窄泊位在地图中被压缩为岸格时，舰位移到最近的可航行格，并保持历史上的纵向顺序与内外舷关系。
+
+      // === 美军：战列舰（Battleship Row 与海军船厂） ===
+      // 地貌逻辑尺度约为史实的 1.9 倍；Battleship Row 泊位间距按游戏观感压缩约 30%，保留历史顺序、并靠关系与舰首方向。
+      // Nevada BB-36：现有同名资源；F-8 单独停泊，舰首约向西南。
+      {
+        name: "nevada",
+        pos: [68, 57],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Arizona BB-39 -> pennsylvania：同属 Pennsylvania 级；F-7 内侧，Vestal 位于外舷但本关不部署辅助舰。
+      {
+        name: "pennsylvania",
+        pos: [68, 60],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Tennessee BB-43：现有同名资源；F-6 内侧。
+      {
+        name: "tennessee",
+        pos: [67, 63],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // West Virginia BB-48：现有同名资源；与 Tennessee 并靠、位于外舷。
+      {
+        name: "west_virginia",
+        pos: [68, 64],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Maryland BB-46：现有同名资源；F-5 内侧。
+      {
+        name: "maryland",
+        pos: [66, 66],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Oklahoma BB-37 -> nevada：同属 Nevada 级；与 Maryland 并靠、位于外舷。
+      {
+        name: "nevada",
+        pos: [67, 67],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // California BB-44 -> tennessee：同属 Tennessee 级；F-3 单独停泊。
+      {
+        name: "tennessee",
+        pos: [63, 69],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Pennsylvania BB-38：现有同名资源；位于 1 号干船坞后部，舰首约向西南。
+      {
+        name: "pennsylvania",
+        pos: [54, 88],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+
+      // === 美军：巡洋舰 ===
+      // Detroit CL-8 -> atlanta：Omaha 级未收录；以同类别、吨位最接近的现有美军轻巡洋舰替代。F-13，舰首西南。
+      {
+        name: "atlanta",
+        pos: [42, 60],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Raleigh CL-7 -> atlanta：Omaha 级未收录；同类别近似吨位替代。F-12，舰首西南。
+      {
+        name: "atlanta",
+        pos: [41, 64],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Phoenix CL-46 -> portland：Brooklyn 级未收录；以同类别、近似万吨级现有巡洋舰替代。C-6，舰首西南。
+      {
+        name: "portland",
+        pos: [87, 55],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Helena CL-50 -> portland：St. Louis 级轻巡洋舰未收录；同类别近似吨位替代。B-2，靠近 1010 船坞。
+      {
+        name: "portland",
+        pos: [56, 84],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // New Orleans CA-32 -> astoria：同属 New Orleans 级。B-16，舰首西南。
+      {
+        name: "astoria",
+        pos: [68, 83],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // San Francisco CA-38 -> astoria：同属 New Orleans 级。B-17，舰首西南。
+      {
+        name: "astoria",
+        pos: [71, 83],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Honolulu CL-48 -> portland：Brooklyn 级未收录；同类别近似吨位替代。B-21 内侧。
+      {
+        name: "portland",
+        pos: [78, 84],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // St. Louis CL-49 -> portland：St. Louis 级轻巡洋舰未收录；同类别近似吨位替代。B-21，位于 Honolulu 外舷。
+      {
+        name: "portland",
+        pos: [80, 84],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+
+      // === 美军：驱逐舰 ===
+      // X-14：四舰舰首 030°；Farragut 级均以同级 dewey 资源替代。
+      // Aylwin DD-355 -> dewey（同级）。
+      {
+        name: "dewey",
+        pos: [59, 41],
+        rotation: 30,
+        belongPlayer: "HA"
+      },
+      // Farragut DD-348 -> dewey（同级）。
+      {
+        name: "dewey",
+        pos: [60, 41],
+        rotation: 30,
+        belongPlayer: "HA"
+      },
+      // Dale DD-353 -> dewey（同级）。
+      {
+        name: "dewey",
+        pos: [61, 40],
+        rotation: 30,
+        belongPlayer: "HA"
+      },
+      // Monaghan DD-354 -> dewey（同级）。
+      {
+        name: "dewey",
+        pos: [62, 40],
+        rotation: 30,
+        belongPlayer: "HA"
+      },
+
+      // X-11：Ralph Talbot 的战斗报告记载舰首向南；三舰均为 Bagley 级，以近缘 Gridley 级 maury 替代。
+      // Henley DD-391 -> maury（同类别、近似吨位）。
+      {
+        name: "maury",
+        pos: [75, 45],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // Patterson DD-392 -> maury（同类别、近似吨位）。
+      {
+        name: "maury",
+        pos: [76, 45],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // Ralph Talbot DD-390 -> maury（同类别、近似吨位）。
+      {
+        name: "maury",
+        pos: [77, 45],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+
+      // X-8：Conyngham 的战斗报告记载舰首北偏东北，取 22°。
+      // Conyngham DD-371 -> maury：Mahan 级未收录；同类别、近似吨位替代。
+      {
+        name: "maury",
+        pos: [84, 43],
+        rotation: 22,
+        belongPlayer: "HA"
+      },
+      // Reid DD-369 -> maury（Mahan 级；同类别近似吨位）。
+      {
+        name: "maury",
+        pos: [85, 43],
+        rotation: 22,
+        belongPlayer: "HA"
+      },
+      // Tucker DD-374 -> maury（Mahan 级；同类别近似吨位）。
+      {
+        name: "maury",
+        pos: [86, 43],
+        rotation: 22,
+        belongPlayer: "HA"
+      },
+      // Case DD-370 -> maury（Mahan 级；同类别近似吨位）。
+      {
+        name: "maury",
+        pos: [87, 43],
+        rotation: 22,
+        belongPlayer: "HA"
+      },
+      // Selfridge DD-357 -> porter：同属 Porter 级。
+      {
+        name: "porter",
+        pos: [88, 43],
+        rotation: 22,
+        belongPlayer: "HA"
+      },
+
+      // Blue DD-387 -> maury：Bagley 级未收录；以近缘 Gridley 级、近似吨位替代。X-7，按泊位轴线舰首约南南西。
+      {
+        name: "maury",
+        pos: [89, 50],
+        rotation: 205,
+        belongPlayer: "HA"
+      },
+      // Helm DD-388 -> maury：Bagley 级未收录；同类别近似吨位替代。袭击开始时已离开 X-7，置于西部航道并向西北航行。
+      {
+        name: "maury",
+        pos: [34, 68],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+
+      // X-2：五舰与驱逐舰供应舰 Dobbin 并靠；本关不部署辅助舰。泊位轴线舰首取北偏东北 25°。
+      // Hull DD-350 -> dewey（同属 Farragut 级）。
+      {
+        name: "dewey",
+        pos: [74, 54],
+        rotation: 25,
+        belongPlayer: "HA"
+      },
+      // Dewey DD-349：现有同名、同级资源。
+      {
+        name: "dewey",
+        pos: [75, 54],
+        rotation: 25,
+        belongPlayer: "HA"
+      },
+      // Worden DD-352 -> dewey（同属 Farragut 级）。
+      {
+        name: "dewey",
+        pos: [76, 54],
+        rotation: 25,
+        belongPlayer: "HA"
+      },
+      // Macdonough DD-351 -> dewey（同属 Farragut 级）。
+      {
+        name: "dewey",
+        pos: [77, 54],
+        rotation: 25,
+        belongPlayer: "HA"
+      },
+      // Phelps DD-360 -> porter：同属 Porter 级。
+      {
+        name: "porter",
+        pos: [78, 54],
+        rotation: 25,
+        belongPlayer: "HA"
+      },
+
+      // X-5：Allen 与 Chew 均为一战时期 Wickes 级，以现有较小型美军驱逐舰 dewey 作同类别近似替代。
+      // Allen DD-66 -> dewey；舰首按泊位轴线约南南西。
+      {
+        name: "dewey",
+        pos: [83, 64],
+        rotation: 205,
+        belongPlayer: "HA"
+      },
+      // Chew DD-106 -> dewey。
+      {
+        name: "dewey",
+        pos: [84, 64],
+        rotation: 205,
+        belongPlayer: "HA"
+      },
+
+      // 1 号干船坞：两舰位于 Pennsylvania 前方。
+      // Cassin DD-372 -> maury：Mahan 级未收录；同类别近似吨位替代。
+      {
+        name: "maury",
+        pos: [53, 86],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Downes DD-375 -> maury：Mahan 级未收录；同类别近似吨位替代。
+      {
+        name: "maury",
+        pos: [52, 87],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Shaw DD-373 -> maury：Mahan 级未收录；同类别近似吨位替代。YFD-2 浮船坞。
+      {
+        name: "maury",
+        pos: [47, 85],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Cummings DD-365 -> maury：Mahan 级未收录；同类别近似吨位替代。B-15。
+      {
+        name: "maury",
+        pos: [67, 82],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Mugford DD-389 -> maury：Bagley 级未收录；以近缘 Gridley 级替代。B-6。
+      {
+        name: "maury",
+        pos: [59, 82],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Jarvis DD-393 -> maury：Bagley 级未收录；以近缘 Gridley 级替代。B-6，与 Mugford 并靠。
+      {
+        name: "maury",
+        pos: [58, 83],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Bagley DD-386 -> maury：Bagley 级未收录；以近缘 Gridley 级替代。B-22。
+      {
+        name: "maury",
+        pos: [84, 83],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Schley DD-103 -> dewey：Clemson 级未收录；以较小型现有美军驱逐舰作同类别近似替代。B-20。
+      {
+        name: "dewey",
+        pos: [82, 86],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+
+      // === 日本第一航空舰队：以 [101, 145] 为中心的中等间距编队，舰首统一朝西北驶向港区 ===
+      // Akagi、Kaga、Soryu、Hiryu、Shokaku 均使用现有同名资源。
+      {
+        name: "akagi",
+        pos: [92, 140],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kaga",
+        pos: [101, 140],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "soryu",
+        pos: [110, 140],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "hiryu",
+        pos: [92, 148],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "shokaku",
+        pos: [101, 148],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Zuikaku -> shokaku：同属 Shokaku 级。
+      {
+        name: "shokaku",
+        pos: [110, 148],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+
+      // Hiei、Kirishima -> kongo：均属 Kongo 级。
+      {
+        name: "kongo",
+        pos: [83, 138],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kongo",
+        pos: [119, 151],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+
+      // Tone：现有同名资源。
+      {
+        name: "tone",
+        pos: [84, 149],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Chikuma -> tone：同属 Tone 级。
+      {
+        name: "tone",
+        pos: [118, 139],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Abukuma：现有同名资源。
+      {
+        name: "abukuma",
+        pos: [101, 133],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+
+      // Urakaze、Isokaze、Tanikaze、Hamakaze、Kagero、Shiranui、Akigumo -> yukikaze：均为 Kagero 级同级替代。
+      {
+        name: "yukikaze",
+        pos: [87, 133],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [81, 143],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [84, 155],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [92, 158],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [101, 159],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [110, 158],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [118, 156],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Arare、Kasumi -> asashio：均为 Asashio 级同级替代。
+      {
+        name: "asashio",
+        pos: [122, 146],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "asashio",
+        pos: [116, 133],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+    ],
+  },
+  {
     name: "Alpha",
     displayName: "达尔文港-1942",
     displayNameEn: "Darwin Harbour - 1942",
@@ -864,6 +1352,7 @@
         maxOncomingShip: 10,
         providedShipNames: [
           "duck",
+          "swordfish",
           "liberty",
           "mercy",
           "peace_ark",
@@ -1085,6 +1574,12 @@
       {
         name: "duck",
         pos: [17, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "swordfish",
+        pos: [18, 42],
         rotation: 90,
         belongPlayer: "HA"
       },

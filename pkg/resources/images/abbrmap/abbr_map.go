@@ -41,3 +41,19 @@ func init() {
 func Get(mapName string) *ebiten.Image {
 	return abbrMapImgMap[mapName]
 }
+
+// NewComposite 按地图实际宽高比生成背景与地图素材的合成缩略图。
+func NewComposite(mapSource string, mapWidth, mapHeight, targetHeight int) *ebiten.Image {
+	targetWidth := targetHeight * mapWidth / mapHeight
+	composite := ebiten.NewImage(targetWidth, targetHeight)
+
+	drawScaled := func(img *ebiten.Image) {
+		w, h := img.Bounds().Dx(), img.Bounds().Dy()
+		opts := &ebiten.DrawImageOptions{}
+		opts.GeoM.Scale(float64(targetWidth)/float64(w), float64(targetHeight)/float64(h))
+		composite.DrawImage(img, opts)
+	}
+	drawScaled(Background)
+	drawScaled(Get(mapSource))
+	return composite
+}

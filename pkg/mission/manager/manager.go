@@ -22,6 +22,7 @@ const (
 	mapBlockPrewarmIdleBudget = 4
 	mapBlockPrewarmZoomBudget = 24
 	mapBlockPrewarmZoomTicks  = 45
+	wheelZoomCooldownTicks    = 8
 )
 
 // MissionManager 任务管理器
@@ -35,6 +36,7 @@ type MissionManager struct {
 	playerBetaHandler         controller.InputHandler
 	weaponFirePlayer          *audioPlayer.WeaponFire
 	pinchWheelAccum           float64
+	wheelZoomCooldown         int
 	mapBlockPrewarmZoom       int
 	mapBlockPrewarmBurstTicks int
 	mapBlockPrewarmFocusX     int

@@ -129,6 +129,8 @@ type BattleShip struct {
 	CurSpeed float64
 	// 动画累计模拟帧
 	AnimationAge float64
+	// 上一次生成专用尾流时的采样步，用于避免每帧重复堆叠
+	LastTrailAnimationStep int
 	// 分组ID
 	GroupID object.GroupID
 	// 攻击目标（敌舰 Uid）
@@ -322,6 +324,8 @@ func (s *BattleShip) GenTrails() []*objTrail.Trail {
 				0, s.CurRotation, colorx.SkyBlue,
 			),
 		}
+	} else if s.TypeAbbr == "Swordfish" {
+		return s.genSwordfishTrails()
 	} else if s.TypeAbbr == "Molamola" {
 		// 翻车鱼暂时不提供尾流
 		return []*objTrail.Trail{}
@@ -349,6 +353,69 @@ func (s *BattleShip) GenTrails() []*objTrail.Trail {
 			s.Width, 0.6,
 			s.Length/9+380*s.CurSpeed, 1.5,
 			0, 0, nil,
+		),
+	}
+}
+
+// genSwordfishTrails 模拟鲔形游动在尾鳍后方形成的水体扰动与涡流。
+// 剑鱼前部躯干相对稳定，主要由后段身体和新月形尾鳍左右摆动推进，
+// 因此尾流只从当前动画帧对应的尾尖位置产生，而不覆盖整个鱼身。
+func (s *BattleShip) genSwordfishTrails() []*objTrail.Trail {
+	frameCount := len(s.Animation.TopFrames)
+	frameTicks := s.Animation.FrameTicks
+	if frameCount == 0 || frameTicks <= 0 {
+		return nil
+	}
+
+	// 每个动画帧采样三次，使水迹连续但仍保留尾摆形成的蛇形路径。
+	trailStepDuration := max(1.0, frameTicks/3)
+	trailStep := int(s.AnimationAge / trailStepDuration)
+	if trailStep == s.LastTrailAnimationStep {
+		return nil
+	}
+	s.LastTrailAnimationStep = trailStep
+
+	cycleTicks := frameTicks * float64(frameCount)
+	// 动画从左摆极限开始，半个周期后到达右摆极限。
+	phase := -math.Cos(2 * math.Pi * s.AnimationAge / cycleTicks)
+
+	speedRatio := 0.0
+	if s.MaxSpeed > 0 {
+		speedRatio = max(0, min(1, s.CurSpeed/s.MaxSpeed))
+	}
+	sinVal := math.Sin(s.CurRotation * math.Pi / 180)
+	cosVal := math.Cos(s.CurRotation * math.Pi / 180)
+
+	tailPos := s.CurPos.Copy()
+	rearOffset := s.Length / constants.MapBlockSize * 0.48
+	tailPos.SubRx(sinVal * rearOffset)
+	tailPos.AddRy(cosVal * rearOffset)
+	lateralOffset := phase * s.Width / constants.MapBlockSize * 0.48
+	tailPos.AddRx(cosVal * lateralOffset)
+	tailPos.AddRy(sinVal * lateralOffset)
+
+	foamPos := tailPos.Copy()
+	foamRearOffset := s.Length / constants.MapBlockSize * 0.025
+	foamPos.SubRx(sinVal * foamRearOffset)
+	foamPos.AddRy(cosVal * foamRearOffset)
+	foamLateralOffset := -phase * s.Width / constants.MapBlockSize * 0.06
+	foamPos.AddRx(cosVal * foamLateralOffset)
+	foamPos.AddRy(sinVal * foamLateralOffset)
+
+	return []*objTrail.Trail{
+		// 低透明度水涡从尾尖扩散，沿尾摆轨迹形成断续的蛇形水迹。
+		objTrail.New(
+			tailPos, textureImg.TrailShapeCircle,
+			3.5+speedRatio*2.5, 0.45+speedRatio*0.2,
+			24+speedRatio*24, 4,
+			0, 0, colorx.SkyBlue,
+		),
+		// 少量白色泡沫与主涡错开，表现尾鳍拍水而不是发光推进器。
+		objTrail.New(
+			foamPos, textureImg.TrailShapeCircle,
+			1.5+speedRatio*2, 0.25,
+			18+speedRatio*18, 4,
+			0, 0, colorx.White,
 		),
 	}
 }
@@ -432,6 +499,7 @@ func NewShip(
 	s.Uid = uidGenerator.Gen(s.TypeAbbr)
 	s.CurPos = pos
 	s.CurRotation = rotation
+	s.LastTrailAnimationStep = -1
 	s.BelongPlayer = player
 	// 战舰默认不编组
 	s.GroupID = object.GroupIDNone

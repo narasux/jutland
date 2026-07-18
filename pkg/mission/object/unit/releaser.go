@@ -11,6 +11,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	"github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
@@ -54,11 +55,12 @@ func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos
 	return true
 }
 
-// Fire 发射
-func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
+func (r *Releaser) shotParameters(
+	shooter Attacker, enemy Hurtable,
+) (UnitMovementState, objPos.MapPos, float64, bool) {
 	// 已释放 / 对象不是战舰，不可发射
 	if r.Released || enemy.ObjType() != object.TypeShip {
-		return
+		return UnitMovementState{}, objPos.MapPos{}, 0, false
 	}
 
 	sState, eState := shooter.MovementState(), enemy.MovementState()
@@ -72,18 +74,56 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
-
 	if !r.InShotRange(sState.CurRotation, sState.CurPos, targetPos) {
+		return UnitMovementState{}, objPos.MapPos{}, 0, false
+	}
+	return sState, targetPos, bulletSpeed, true
+}
+
+// pathCrossesLand 检查鱼雷投放点到预计命中点之间是否有陆地阻挡。
+// 目标后方的岸线不应阻止攻击靠岸停泊的战舰。
+func (r *Releaser) pathCrossesLand(
+	shooter Attacker, enemy Hurtable, terrain *mapcfg.MapData,
+) bool {
+	sState, targetPos, _, ok := r.shotParameters(shooter, enemy)
+	if !ok {
+		return false
+	}
+
+	// 每 1/4 个地图格取样一次，鱼雷射程很短，这里最多只会检查几十个点。
+	steps := max(1, int(math.Ceil(sState.CurPos.Distance(targetPos)*4)))
+	for step := 0; step <= steps; step++ {
+		progress := float64(step) / float64(steps)
+		pos := objPos.NewR(
+			sState.CurPos.RX+(targetPos.RX-sState.CurPos.RX)*progress,
+			sState.CurPos.RY+(targetPos.RY-sState.CurPos.RY)*progress,
+		)
+		if terrain.IsLand(pos.MX, pos.MY) {
+			return true
+		}
+	}
+	return false
+}
+
+// Fire 发射
+func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
+	sState, targetPos, bulletSpeed, ok := r.shotParameters(shooter, enemy)
+	if !ok {
 		return
 	}
 
 	// 成功释放弹药
 	r.Released = true
+	bulletType := objBullet.GetType(r.BulletName)
 	shotType := lo.Ternary(
-		objBullet.GetType(r.BulletName) == objBullet.TypeBomb,
+		bulletType == objBullet.TypeBomb,
 		objBullet.ShotTypeArcing, objBullet.ShotTypeDirect,
 	)
 	life := int(r.Range/bulletSpeed) + 5
+	if bulletType == objBullet.TypeTorpedo {
+		// 航空鱼雷只行驶到预计命中点附近，额外一帧确保到达后仍会结算碰撞。
+		life = int(math.Ceil(sState.CurPos.Distance(targetPos)/bulletSpeed)) + 1
+	}
 
 	return []*objBullet.Bullet{objBullet.New(
 		r.BulletName, sState.CurPos, targetPos,

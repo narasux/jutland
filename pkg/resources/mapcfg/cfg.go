@@ -32,10 +32,14 @@ const (
 type MapData []string
 
 func (m *MapData) Get(x, y int) rune {
-	if x < 0 || x >= len(*m) || y < 0 || y >= len(*m) {
+	if y < 0 || y >= len(*m) {
 		return ' '
 	}
-	return rune((*m)[y][x])
+	row := (*m)[y]
+	if x < 0 || x >= len(row) {
+		return ' '
+	}
+	return rune(row[x])
 }
 
 // IsSea ...
@@ -121,9 +125,18 @@ func (cfg *MapCfg) initMapCells() {
 	if err = scanner.Err(); err != nil {
 		log.Fatalf("error when load map %s: %s", cfg.Name, err)
 	}
+	if len(cfg.Map) == 0 {
+		log.Fatalf("map %s is empty", cfg.Name)
+	}
+	width := len(cfg.Map[0])
+	for y, row := range cfg.Map {
+		if len(row) != width {
+			log.Fatalf("map %s row %d has width %d, expected %d", cfg.Name, y, len(row), width)
+		}
+	}
 
 	cfg.Cells = cfg.Map.ToGridCells()
-	cfg.Width = len(cfg.Map[0])
+	cfg.Width = width
 	cfg.Height = len(cfg.Map)
 }
 

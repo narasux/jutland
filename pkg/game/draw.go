@@ -62,9 +62,11 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 
 	// 缩略地图（左侧）
 	abbrX, abbrY := 50.0, 45.0
-	abbrDisplaySize := min(screenW*0.48, screenH-130)
+	// 高度从 abbrY 起算，底部预留页码、箭头和按钮区域。
+	abbrMaxWidth, abbrMaxHeight := screenW*0.48, screenH-abbrY-130
 	abbrSrcW, abbrSrcH := float64(abbrMap.Bounds().Dx()), float64(abbrMap.Bounds().Dy())
-	abbrScale := abbrDisplaySize / abbrSrcW
+	abbrScale := min(abbrMaxWidth/abbrSrcW, abbrMaxHeight/abbrSrcH)
+	abbrW := abbrSrcW * abbrScale
 	abbrH := abbrSrcH * abbrScale
 
 	opts = d.genDefaultDrawImageOptions()
@@ -77,14 +79,14 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	vector.StrokeRect(
 		screen,
 		float32(abbrX), float32(abbrY)+strokeWidth,
-		float32(abbrDisplaySize), float32(abbrH)-2*strokeWidth,
+		float32(abbrW), float32(abbrH)-2*strokeWidth,
 		strokeWidth, colorx.Silver, false,
 	)
 
 	// 右侧详情卡片（与地图等高）
 	misMD := metadata.Get(curMission)
 	cardGap := 60.0
-	cardX := abbrX + abbrDisplaySize + cardGap
+	cardX := abbrX + abbrW + cardGap
 	cardY := abbrY
 	cardW := screenW - cardX - 50
 	cardH := abbrH
@@ -272,16 +274,12 @@ func (d *Drawer) getAbbrMap(curMission string) *ebiten.Image {
 	_, wHeight := ebiten.WindowSize()
 
 	abbrMapSize := float64(wHeight) - 2*50
-	abbrMap := ebiten.NewImage(int(abbrMapSize), int(abbrMapSize))
-
-	bg := abbrMapImg.Background
-	w, h := bg.Bounds().Dx(), bg.Bounds().Dy()
-
-	opts := &ebiten.DrawImageOptions{}
-	opts.GeoM.Scale(abbrMapSize/float64(w), abbrMapSize/float64(h))
-
-	abbrMap.DrawImage(abbrMapImg.Background, opts)
-	abbrMap.DrawImage(abbrMapImg.Get(misMD.MapCfg.Source), opts)
+	abbrMap := abbrMapImg.NewComposite(
+		misMD.MapCfg.Source,
+		misMD.MapCfg.Width,
+		misMD.MapCfg.Height,
+		int(abbrMapSize),
+	)
 
 	d.abbrMaps[curMission] = abbrMap
 	return abbrMap

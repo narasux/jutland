@@ -27,19 +27,12 @@ func NewDrawer(mission string) *Drawer {
 	}
 
 	misLayout := layout.NewScreenLayout()
-	abbrMap := ebiten.NewImage(misLayout.Height, misLayout.Height)
-
-	bg := abbrMapImg.Background
-	w, h := bg.Bounds().Dx(), bg.Bounds().Dy()
-
-	scaleX := float64(misLayout.Height) / float64(w)
-	scaleY := float64(misLayout.Height) / float64(h)
-
-	opts := &ebiten.DrawImageOptions{}
-	opts.GeoM.Scale(scaleX, scaleY)
-
-	abbrMap.DrawImage(abbrMapImg.Background, opts)
-	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Source), opts)
+	abbrMap := abbrMapImg.NewComposite(
+		missionMD.MapCfg.Source,
+		missionMD.MapCfg.Width,
+		missionMD.MapCfg.Height,
+		misLayout.Height,
+	)
 
 	return &Drawer{mission: mission, abbrMap: abbrMap}
 }
