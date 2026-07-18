@@ -45,10 +45,12 @@ PROJECTION_POWER_WEIGHT = 0.10
 HOSPITAL_UTILITY_COST = 25
 COST_STEP = 5
 # 战力公式无法完整表达科技树层级时，使用少量显式战略溢价。
-# 萨摩应贴近大和；江户作为日本终局舰需要明显高于大和。
+# 萨摩应贴近大和；江户作为日本终局舰需要明显高于大和；
+# 伊利诺伊计入衣阿华级大型舰体改装与战略稀缺性。
 STRATEGIC_COST_MULTIPLIER = {
     "satsuma": 1.10,
     "edo": 1.15,
+    "illinois": 1.10,
 }
 
 DEFAULT_TIME_FACTOR = 0.35

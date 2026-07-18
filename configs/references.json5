@@ -165,6 +165,31 @@
     ]
   },
   {
+    name: "illinois",
+    displayName: "伊利诺伊",
+    type: "航空母舰",
+    armaments: [
+      {label: "高平炮", value: "4x2 + 4x1 127mm/38"},
+      {label: "高炮", value: "6x4 40mm/60"},
+      {label: "高炮", value: "8x2 20mm/70"},
+      {label: "制空战斗机", value: "32x 地狱猫（F6F-3）"},
+      {label: "鱼雷攻击机", value: "24x 复仇者（TBF-1）"},
+      {label: "俯冲轰炸机", value: "32x 地狱俯冲者（SB2C-4）"},
+    ],
+    description: "伊利诺伊号是以未完工的衣阿华级 BB-65 为舰名、按 1942 年 S-511-54 航母改造研究设想的架空完工舰。该方案采用约 263×33 米飞行甲板、两部升降机和一具弹射器，但因载机量较少、成本高于新造埃塞克斯级而取消。",
+    author: "Takács Zoltán (TZoli)",
+    links: [
+      {
+        name: "Iowa class Aircraft Carrier Design by TZoli",
+        url: "https://www.deviantart.com/tzoli/art/Iowa-class-Aircraft-Carrier-Design-809910243"
+      },
+      {
+        name: "维基百科 - 伊利诺号战舰",
+        url: "https://zh.wikipedia.org/wiki/%E4%BC%8A%E5%88%A9%E8%AB%BE%E8%99%9F%E6%88%B0%E8%89%A6_%28BB-65%29"
+      }
+    ]
+  },
+  {
     name: "princeton",
     displayName: "普林斯顿",
     type: "航空母舰",

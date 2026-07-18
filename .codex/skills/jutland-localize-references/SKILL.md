@@ -12,6 +12,7 @@ description: Localize and maintain Jutland encyclopedia reference data across co
 - 把 `configs/references.json5` 视为简体中文基准，把 `configs/references.<locale>.json5` 视为同结构的完整本地化文件。
 - 保持所有语言的顶层 `name` 集合完全一致。`name` 是稳定内部 ID，不翻译、不修正大小写。
 - 保持武装条目数量、顺序、数量、口径、型号和游戏数值不变；只翻译展示文本。
+- 图鉴直接陈述当前配置，不添加模板化免责声明。
 - 保留真实素材作者的原始署名和素材链接。只把“未知”本地化为目标语言。
 - 不向第三方翻译服务发送仓库文本，除非用户明确授权。历史内容可从公开资料核验，但图鉴链接遵循下述统一来源规则。
 

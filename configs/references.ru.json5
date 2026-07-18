@@ -272,6 +272,49 @@
     ]
   },
   {
+    "name": "illinois",
+    "displayName": "Иллинойс",
+    "type": "Авианосец",
+    "armaments": [
+      {
+        "label": "Универсальные орудия",
+        "value": "4x2 + 4x1 127mm/38"
+      },
+      {
+        "label": "Зенитные орудия",
+        "value": "6x4 40mm/60"
+      },
+      {
+        "label": "Зенитные орудия",
+        "value": "8x2 20mm/70"
+      },
+      {
+        "label": "Истребители",
+        "value": "32× F6F-3"
+      },
+      {
+        "label": "Торпедоносцы",
+        "value": "24× TBF-1"
+      },
+      {
+        "label": "Пикирующие бомбардировщики",
+        "value": "32× SB2C-4"
+      }
+    ],
+    "description": "«Иллинойс» — условно достроенный как авианосец незавершённый корабль типа Iowa BB-65 по проекту переоборудования S-511-54 1942 года. Проект предусматривал полётную палубу примерно 263×33 м, два самолётоподъёмника и одну катапульту, но был отклонён из-за меньшей авиагруппы и большей стоимости по сравнению с новым авианосцем типа Essex.",
+    "author": "Takács Zoltán (TZoli)",
+    "links": [
+      {
+        "name": "Iowa class Aircraft Carrier Design by TZoli",
+        "url": "https://www.deviantart.com/tzoli/art/Iowa-class-Aircraft-Carrier-Design-809910243"
+      },
+      {
+        "name": "Википедия — USS Illinois (BB-65)",
+        "url": "https://ru.wikipedia.org/wiki/USS_Illinois_%28BB-65%29"
+      }
+    ]
+  },
+  {
     "name": "princeton",
     "displayName": "Принстон",
     "type": "Авианосец",

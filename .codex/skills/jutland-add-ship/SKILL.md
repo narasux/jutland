@@ -69,7 +69,7 @@ python3 .codex/skills/jutland-add-ship/scripts/resize_ship_image.py \
 - 将条目放到同舰种、同阵营附近。
 - `totalHP` 优先使用满载排水量；`maxSpeed` 使用节。费用、时间、减伤、加速度和转向从选定基准推导。
 - 按资料与图片配置主炮、副炮、防空炮、鱼雷、火箭和舰载机挂点。只引用存在的配置名称，并核对 `posPercent`、射界和数量。
-- 航空母舰只编入仓库已有飞机；缺少历史机型时复用同阵营、同任务角色的近似机型，并在图鉴标注“游戏近似”。
+- 航空母舰只编入仓库已有飞机；缺少历史机型时复用同阵营、同任务角色的可用机型。图鉴直接列出实际配置，不添加模板化免责声明。
 
 #### Mark 专用武器
 
@@ -99,4 +99,4 @@ python3 .codex/skills/jutland-add-ship/scripts/resize_ship_image.py \
 - 搜索舰名，确认 `ships.json5`、`references.json5`、`TestAll` 和 PNG 文件名一致且没有重复定义。
 - 搜索所有武器、弹药、发射器和飞机引用，确认上游配置存在。
 - 用 `view_image` 检查正式 PNG 的完整轮廓和透明边缘；用 `git diff --check` 检查文本问题。
-- 运行 `go build ./pkg/...`。最终说明资料假设、游戏近似和未验证的视觉区域。
+- 运行 `go build ./pkg/...`。最终说明资料来源、配置选择和未验证的视觉区域。

@@ -1404,6 +1404,190 @@
     }
   },
   {
+    // 伊利诺伊（衣阿华级航母改造案）
+    name: "illinois",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1944,
+    totalHP: 50000,
+    horizontalDamageReduction: 0.4,
+    verticalDamageReduction: 0.18,
+    maxSpeed: 33,
+    acceleration: 0.3,
+    rotateSpeed: 0.82,
+    length: 270,
+    width: 33,
+    fundsCost: 340,
+    timeCost: 130,
+    weapon: {
+      mainGuns: [
+        // 舰岛右舷双联装高平炮
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.21,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.15,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.3,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.36,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 左舷单装高平炮
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.66,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.79,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 40mm 四联装高炮
+        // 舰桥前后 4 座
+        {
+          name: "US/40/60/4",
+          posPercent: 0.1,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.04,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.18,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.25,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 左舷 2 座
+        {
+          name: "US/40/60/4",
+          posPercent: -0.54,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.78,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // FIXME 衣阿华改的防空炮有点少，未来可能会酌情增加（需微调素材）
+        // 20mm 厄利孔高炮
+        // 舰桥右舷双联装
+        {
+          name: "US/20/70/2",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷双联装厄利孔高炮
+        {
+          name: "US/20/70/2",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      takeOffTime: 1.7,
+      groups: [
+        {
+          name: "F6F-3",
+          maxCount: 32
+        },
+        {
+          name: "TBF-1",
+          maxCount: 24
+        },
+        {
+          name: "SB2C-4",
+          maxCount: 32
+        }
+      ]
+    }
+  },
+  {
     // 普林斯顿
     name: "princeton",
     nation: "us",

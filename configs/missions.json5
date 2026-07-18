@@ -1357,6 +1357,7 @@
           "mercy",
           "peace_ark",
           "britannic",
+          "illinois",
           "yorktown",
           "saratoga",
           "essex",
@@ -1887,44 +1888,50 @@
       },
       // === US CV ===
       {
-        name: "saratoga",
+        name: "illinois",
         pos: [32, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "yorktown",
+        name: "saratoga",
         pos: [31, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "essex",
+        name: "yorktown",
         pos: [32, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "princeton",
+        name: "essex",
         pos: [31, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "card",
+        name: "princeton",
         pos: [32, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "langley",
+        name: "card",
         pos: [31, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "wolverine",
+        name: "langley",
         pos: [32, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "wolverine",
+        pos: [31, 52],
         rotation: 90,
         belongPlayer: "HA"
       },
