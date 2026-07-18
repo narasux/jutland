@@ -73,6 +73,13 @@
     criticalRate: 0.01
   },
   {
+    name: "US/GB/152/1939",
+    type: "shell",
+    diameter: 152,
+    damage: 200,
+    criticalRate: 0.005
+  },
+  {
     name: "US/GB/127/1932",
     type: "shell",
     diameter: 127,

@@ -1703,6 +1703,52 @@
     ]
   },
   {
+    name: "st_louis",
+    displayName: "圣路易斯",
+    type: "轻巡洋舰",
+    armaments: [
+      {label: "主炮", value: "5x3 152mm/47 Mk16"},
+      {label: "高平炮", value: "4x2 127mm/38 Mk12"},
+      {label: "高炮", value: "8x1 12.7mm"},
+    ],
+    description: "圣路易斯号（CL-49）是布鲁克林级后两艘舰所构成的圣路易斯亚级首舰，1939 年服役；该亚级采用单元式动力舱布置，并换装四座双联 127mm/38 高平炮。珍珠港遇袭时她成功驶出港口，随后参与太平洋战争并获得 11 枚战斗之星。1951 年转交巴西海军并改名“塔曼达雷海军上将”号，1976 年退役，1980 年在拖往拆船厂途中沉没。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "USS St. Louis 1939 年服役时双视图",
+        url: "https://www.deviantart.com/tzoli/art/USS-St-Louis-as-Looked-like-in-1939-1313001544"
+      },
+      {
+        name: "Wikipedia - USS St. Louis (CL-49)",
+        url: "https://en.wikipedia.org/wiki/USS_St._Louis_%28CL-49%29"
+      }
+    ]
+  },
+  {
+    name: "brooklyn",
+    displayName: "布鲁克林",
+    type: "轻巡洋舰",
+    armaments: [
+      {label: "主炮", value: "5x3 152mm/47 Mk16"},
+      {label: "高平炮", value: "8x1 127mm/25 Mk10"},
+      {label: "高炮", value: "4x4 40mm/60"},
+      {label: "高炮", value: "6x2 40mm/60"},
+      {label: "高炮", value: "10x2 20mm/70"},
+    ],
+    description: "布鲁克林号（CL-40）是布鲁克林级轻巡洋舰首舰，1937 年服役。二战中她主要在大西洋和地中海担任护航与岸轰，先后支援北非、西西里、安齐奥和法国南部登陆，获得 4 枚战斗之星。1951 年她转交智利海军并改名“奥希金斯”号，服役至 1992 年，同年在拖往拆船厂途中沉没。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "USS Brooklyn 1945 年状态双视图",
+        url: "https://www.deviantart.com/tzoli/art/USS-Brooklyn-as-Looked-like-in-1945-1311459216"
+      },
+      {
+        name: "维基百科 - 布鲁克林级轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%B8%83%E9%B2%81%E5%85%8B%E6%9E%97%E7%BA%A7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
     name: "puerto_rico",
     displayName: "波多黎各",
     type: "大型巡洋舰",

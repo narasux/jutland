@@ -19681,188 +19681,7 @@
   },
   // 巡洋舰
   // 美国海军
-  {
-    // 亚特兰大
-    name: "atlanta",
-    nation: "us",
-    type: "cruiser",
-    typeAbbr: "CL",
-    year: 1942,
-    totalHP: 7400,
-    horizontalDamageReduction: 0.2,
-    verticalDamageReduction: 0.05,
-    maxSpeed: 33,
-    acceleration: 0.7,
-    rotateSpeed: 1.8,
-    length: 165,
-    width: 16,
-    fundsCost: 175,
-    timeCost: 63,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: 0.64,
-          rightFiringArc: [0, 160],
-          leftFiringArc: [200, 360]
-        },
-        // 前主炮 B
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: 0.54,
-          rightFiringArc: [0, 160],
-          leftFiringArc: [200, 360]
-        },
-        // 前主炮 C
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: 0.43,
-          rightFiringArc: [0, 160],
-          leftFiringArc: [200, 360]
-        },
-        // 后主炮 D
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: -0.4,
-          rightFiringArc: [20, 180],
-          leftFiringArc: [180, 340]
-        },
-        // 后主炮 E
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: -0.5,
-          rightFiringArc: [20, 180],
-          leftFiringArc: [180, 340]
-        },
-        // 后主炮 F
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: -0.6,
-          rightFiringArc: [20, 180],
-          leftFiringArc: [180, 340]
-        },
-        // 右后舰炮 A
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: -0.27,
-          rightFiringArc: [10, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左后舰炮 A
-        {
-          name: "US/127/38/2/MK12",
-          posPercent: -0.27,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 350]
-        }
-      ],
-      secondaryGuns: [
-        // 右副炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左副炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 后副炮 B
-        {
-          name: "US/28/75/4",
-          posPercent: -0.33,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 后副炮 C
-        {
-          name: "US/28/75/4",
-          posPercent: -0.91,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
-        // 右高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.35,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [270, 360]
-        },
-        // 左高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.35,
-          rightFiringArc: [0, 90],
-          leftFiringArc: [210, 360]
-        },
-        // 右高炮 B
-        {
-          name: "US/20/70",
-          posPercent: -0.04,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左高炮 B
-        {
-          name: "US/20/70",
-          posPercent: -0.04,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右高炮 C
-        {
-          name: "US/20/70",
-          posPercent: -0.1,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左高炮 C
-        {
-          name: "US/20/70",
-          posPercent: -0.1,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右高炮 D
-        {
-          name: "US/20/70",
-          posPercent: -0.83,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 左高炮 D
-        {
-          name: "US/20/70",
-          posPercent: -0.83,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      torpedoes: [
-        // 右舷鱼雷 A
-        {
-          name: "US/533/4",
-          posPercent: -0.2,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷鱼雷 A
-        {
-          name: "US/533/4",
-          posPercent: -0.2,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        }
-      ]
-    },
-  },
+  // 重巡洋舰
   {
     // 波多黎各
     name: "puerto_rico",
@@ -20525,896 +20344,6 @@
         {name: "US/20/70", posPercent: -0.66, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
         {name: "US/20/70", posPercent: -0.68, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
         {name: "US/20/70", posPercent: -0.68, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
-      ]
-    }
-  },
-  {
-    // 长滩
-    name: "long_beach",
-    nation: "us",
-    type: "cruiser",
-    typeAbbr: "CGN",
-    year: 1961,
-    totalHP: 16600,
-    horizontalDamageReduction: 0.1,
-    verticalDamageReduction: 0.1,
-    maxSpeed: 30,
-    acceleration: 0.6,
-    rotateSpeed: 1.6,
-    length: 220,
-    width: 22,
-    fundsCost: 130,
-    timeCost: 48,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "US/127/38/MK45",
-          posPercent: 0.25,
-          rightFiringArc: [20, 160],
-          leftFiringArc: [360, 360]
-        },
-        // 后主炮 B
-        {
-          name: "US/127/38/MK45",
-          posPercent: -0.25,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [200, 340]
-        }
-      ],
-      secondaryGuns: [],
-      antiAircraftGuns: [],
-      torpedoes: [
-        // 右舷鱼雷
-        {
-          name: "US/324/3",
-          posPercent: 0.18,
-          rightFiringArc: [20, 160],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷鱼雷
-        {
-          name: "US/324/3",
-          posPercent: 0.18,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [200, 340]
-        }
-      ]
-    }
-  },
-  {
-    // 长滩（D 型）
-    name: "long_beach_scheme_D",
-    nation: "us",
-    type: "cruiser",
-    typeAbbr: "CGN",
-    year: 1961,
-    totalHP: 11300,
-    horizontalDamageReduction: 0.05,
-    verticalDamageReduction: 0.05,
-    maxSpeed: 32,
-    acceleration: 0.65,
-    rotateSpeed: 1.8,
-    length: 177,
-    width: 17,
-    fundsCost: 125,
-    timeCost: 46,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "US/127/38/MK45",
-          posPercent: 0.6,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 后主炮 B
-        {
-          name: "US/127/38/MK45",
-          posPercent: -0.64,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        }
-      ],
-      secondaryGuns: [],
-      antiAircraftGuns: [],
-      torpedoes: [
-        // 右舷鱼雷
-        {
-          name: "US/324/3",
-          posPercent: 0.22,
-          rightFiringArc: [20, 160],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷鱼雷
-        {
-          name: "US/324/3",
-          posPercent: 0.22,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [200, 340]
-        }
-      ]
-    }
-  },
-  {
-    // 彭萨科拉
-    name: "pensacola",
-    nation: "us",
-    type: "cruiser",
-    typeAbbr: "CA",
-    year: 1942,
-    totalHP: 11696,
-    horizontalDamageReduction: 0.3,
-    verticalDamageReduction: 0.15,
-    maxSpeed: 32.5,
-    acceleration: 0.6,
-    rotateSpeed: 1.6,
-    length: 180,
-    width: 19,
-    fundsCost: 180,
-    timeCost: 65,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "US/203/55/2/MK9",
-          posPercent: 0.63,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 前主炮 B
-        {
-          name: "US/203/55/3/MK9",
-          posPercent: 0.48,
-          rightFiringArc: [0, 120],
-          leftFiringArc: [240, 360]
-        },
-        // 后主炮 C
-        {
-          name: "US/203/55/3/MK9",
-          posPercent: -0.55,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 后主炮 D
-        {
-          name: "US/203/55/2/MK9",
-          posPercent: -0.69,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        }
-      ],
-      secondaryGuns: [
-        // 右舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.35,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.35,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.25,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.2,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.2,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.3,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.3,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
-        // 右 28mm 四联高炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.23,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 28mm 四联高炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.23,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 28mm 四联高炮 B
-        {
-          name: "US/28/75/4",
-          posPercent: -0.87,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左 28mm 四联高炮 B
-        {
-          name: "US/28/75/4",
-          posPercent: -0.87,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.32,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左 20mm 高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.32,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 B
-        {
-          name: "US/20/70",
-          posPercent: 0.3,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左 20mm 高炮 B
-        {
-          name: "US/20/70",
-          posPercent: 0.3,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 C
-        {
-          name: "US/20/70",
-          posPercent: -0.62,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左 20mm 高炮 C
-        {
-          name: "US/20/70",
-          posPercent: -0.62,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        }
-      ]
-    }
-  },
-  {
-    // 北安普顿
-    name: "northampton",
-    nation: "us",
-    type: "cruiser",
-    typeAbbr: "CA",
-    year: 1942,
-    totalHP: 11830,
-    horizontalDamageReduction: 0.25,
-    verticalDamageReduction: 0.15,
-    maxSpeed: 32.7,
-    acceleration: 0.62,
-    rotateSpeed: 1.7,
-    length: 183,
-    width: 20,
-    fundsCost: 175,
-    timeCost: 63,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "US/203/55/3/MK12",
-          posPercent: 0.55,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-        // 前主炮 B
-        {
-          name: "US/203/55/3/MK12",
-          posPercent: 0.4,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-        // 后主炮 C
-        {
-          name: "US/203/55/3/MK12",
-          posPercent: -0.67,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        }
-      ],
-      secondaryGuns: [
-        // 右舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.12,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.12,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.2,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.2,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.35,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.35,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.41,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.41,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
-        // 四联 28mm 高炮 x 4
-        {
-          name: "US/28/75/4",
-          posPercent: 0.27,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "US/28/75/4",
-          posPercent: 0.27,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "US/28/75/4",
-          posPercent: -0.29,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "US/28/75/4",
-          posPercent: -0.29,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 20mm 高炮 x 6
-        {
-          name: "US/20/70",
-          posPercent: -0.54,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "US/20/70",
-          posPercent: -0.54,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "US/20/70",
-          posPercent: -0.57,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "US/20/70",
-          posPercent: -0.57,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "US/20/70",
-          posPercent: -0.9,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "US/20/70",
-          posPercent: -0.9,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        }
-      ]
-    }
-  },
-  {
-    // 波特兰
-    name: "portland",
-    nation: "us",
-    type: "cruiser",
-    typeAbbr: "CA",
-    year: 1942,
-    totalHP: 12960,
-    horizontalDamageReduction: 0.3,
-    verticalDamageReduction: 0.15,
-    maxSpeed: 32.7,
-    acceleration: 0.6,
-    rotateSpeed: 1.6,
-    length: 186,
-    width: 20,
-    fundsCost: 185,
-    timeCost: 67,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "US/203/55/3/MK14",
-          posPercent: 0.54,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-        // 前主炮 B
-        {
-          name: "US/203/55/3/MK14",
-          posPercent: 0.38,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-        // 后主炮 C
-        {
-          name: "US/203/55/3/MK14",
-          posPercent: -0.67,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        }
-      ],
-      secondaryGuns: [
-        // 右舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.15,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.15,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.23,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.23,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.34,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.34,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.42,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.42,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
-        // 右 28mm 四联高炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 28mm 四联高炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.25,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 28mm 四联高炮 B
-        {
-          name: "US/28/75/4",
-          posPercent: -0.3,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左 28mm 四联高炮 B
-        {
-          name: "US/28/75/4",
-          posPercent: -0.3,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.31,
-          rightFiringArc: [0, 120],
-          leftFiringArc: [240, 360]
-        },
-        // 左 20mm 高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.31,
-          rightFiringArc: [0, 120],
-          leftFiringArc: [240, 360]
-        },
-        // 右 20mm 高炮 B
-        {
-          name: "US/20/70",
-          posPercent: 0.31,
-          rightFiringArc: [0, 120],
-          leftFiringArc: [240, 360]
-        },
-        // 左 20mm 高炮 B
-        {
-          name: "US/20/70",
-          posPercent: 0.31,
-          rightFiringArc: [0, 120],
-          leftFiringArc: [240, 360]
-        },
-        // 右 20mm 高炮 C
-        {
-          name: "US/20/70",
-          posPercent: 0.29,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [300, 360]
-        },
-        // 左 20mm 高炮 C
-        {
-          name: "US/20/70",
-          posPercent: 0.29,
-          rightFiringArc: [0, 60],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 D
-        {
-          name: "US/20/70",
-          posPercent: 0.27,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 20mm 高炮 D
-        {
-          name: "US/20/70",
-          posPercent: 0.27,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 E
-        {
-          name: "US/20/70",
-          posPercent: -0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左 20mm 高炮 E
-        {
-          name: "US/20/70",
-          posPercent: -0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 F
-        {
-          name: "US/20/70",
-          posPercent: -0.5,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 20mm 高炮 F
-        {
-          name: "US/20/70",
-          posPercent: -0.5,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 G
-        {
-          name: "US/20/70",
-          posPercent: -0.6,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 左 20mm 高炮 G
-        {
-          name: "US/20/70",
-          posPercent: -0.6,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 舰艉 20mm 高炮 H
-        {
-          name: "US/20/70",
-          posPercent: -0.64,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        }
-      ]
-    }
-  },
-  {
-    // 阿斯托里亚
-    name: "astoria",
-    nation: "us",
-    type: "cruiser",
-    typeAbbr: "CA",
-    year: 1942,
-    totalHP: 12663,
-    horizontalDamageReduction: 0.3,
-    verticalDamageReduction: 0.15,
-    maxSpeed: 33,
-    acceleration: 0.6,
-    rotateSpeed: 1.6,
-    length: 180,
-    width: 19,
-    fundsCost: 185,
-    timeCost: 67,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "US/203/55/3/MK14",
-          posPercent: 0.55,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 前主炮 B
-        {
-          name: "US/203/55/3/MK14",
-          posPercent: 0.45,
-          rightFiringArc: [0, 120],
-          leftFiringArc: [240, 360]
-        },
-        // 后主炮 C
-        {
-          name: "US/203/55/3/MK14",
-          posPercent: -0.55,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        }
-      ],
-      secondaryGuns: [
-        // 右舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 A
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.25,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.15,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 B
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0.15,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 C
-        {
-          name: "US/127/25/MK10",
-          posPercent: 0,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.1,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左舷副炮 D
-        {
-          name: "US/127/25/MK10",
-          posPercent: -0.1,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
-        // 右 28mm 四联高炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.24,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 28mm 四联高炮 A
-        {
-          name: "US/28/75/4",
-          posPercent: 0.24,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 28mm 四联高炮 B
-        {
-          name: "US/28/75/4",
-          posPercent: -0.85,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 左 28mm 四联高炮 B
-        {
-          name: "US/28/75/4",
-          posPercent: -0.85,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.36,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 20mm 高炮 A
-        {
-          name: "US/20/70",
-          posPercent: 0.36,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 B
-        {
-          name: "US/20/70",
-          posPercent: 0.32,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 20mm 高炮 B
-        {
-          name: "US/20/70",
-          posPercent: 0.32,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 C
-        {
-          name: "US/20/70",
-          posPercent: -0.42,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 20mm 高炮 C
-        {
-          name: "US/20/70",
-          posPercent: -0.42,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 D
-        {
-          name: "US/20/70",
-          posPercent: -0.55,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 20mm 高炮 D
-        {
-          name: "US/20/70",
-          posPercent: -0.55,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右 20mm 高炮 E
-        {
-          name: "US/20/70",
-          posPercent: -0.57,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左 20mm 高炮 E
-        {
-          name: "US/20/70",
-          posPercent: -0.57,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        }
       ]
     }
   },
@@ -22301,7 +21230,1316 @@
       ]
     }
   },
+  {
+    // 阿斯托里亚
+    name: "astoria",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CA",
+    year: 1942,
+    totalHP: 12663,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 33,
+    acceleration: 0.6,
+    rotateSpeed: 1.6,
+    length: 180,
+    width: 19,
+    fundsCost: 185,
+    timeCost: 67,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/203/55/3/MK14",
+          posPercent: 0.55,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/203/55/3/MK14",
+          posPercent: 0.45,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/203/55/3/MK14",
+          posPercent: -0.55,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 右舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右 28mm 四联高炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 28mm 四联高炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 28mm 四联高炮 B
+        {
+          name: "US/28/75/4",
+          posPercent: -0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左 28mm 四联高炮 B
+        {
+          name: "US/28/75/4",
+          posPercent: -0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 20mm 高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 20mm 高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 C
+        {
+          name: "US/20/70",
+          posPercent: -0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 20mm 高炮 C
+        {
+          name: "US/20/70",
+          posPercent: -0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 D
+        {
+          name: "US/20/70",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 20mm 高炮 D
+        {
+          name: "US/20/70",
+          posPercent: -0.55,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 E
+        {
+          name: "US/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 20mm 高炮 E
+        {
+          name: "US/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 波特兰
+    name: "portland",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CA",
+    year: 1942,
+    totalHP: 12960,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 32.7,
+    acceleration: 0.6,
+    rotateSpeed: 1.6,
+    length: 186,
+    width: 20,
+    fundsCost: 185,
+    timeCost: 67,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/203/55/3/MK14",
+          posPercent: 0.54,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/203/55/3/MK14",
+          posPercent: 0.38,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/203/55/3/MK14",
+          posPercent: -0.67,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        }
+      ],
+      secondaryGuns: [
+        // 右舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右 28mm 四联高炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 28mm 四联高炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 28mm 四联高炮 B
+        {
+          name: "US/28/75/4",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左 28mm 四联高炮 B
+        {
+          name: "US/28/75/4",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.31,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 左 20mm 高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.31,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 右 20mm 高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.31,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 左 20mm 高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.31,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 右 20mm 高炮 C
+        {
+          name: "US/20/70",
+          posPercent: 0.29,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [300, 360]
+        },
+        // 左 20mm 高炮 C
+        {
+          name: "US/20/70",
+          posPercent: 0.29,
+          rightFiringArc: [0, 60],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 D
+        {
+          name: "US/20/70",
+          posPercent: 0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 20mm 高炮 D
+        {
+          name: "US/20/70",
+          posPercent: 0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 E
+        {
+          name: "US/20/70",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左 20mm 高炮 E
+        {
+          name: "US/20/70",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 F
+        {
+          name: "US/20/70",
+          posPercent: -0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 20mm 高炮 F
+        {
+          name: "US/20/70",
+          posPercent: -0.5,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 G
+        {
+          name: "US/20/70",
+          posPercent: -0.6,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 左 20mm 高炮 G
+        {
+          name: "US/20/70",
+          posPercent: -0.6,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 舰艉 20mm 高炮 H
+        {
+          name: "US/20/70",
+          posPercent: -0.64,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ]
+    }
+  },
+  {
+    // 北安普顿
+    name: "northampton",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CA",
+    year: 1942,
+    totalHP: 11830,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 32.7,
+    acceleration: 0.62,
+    rotateSpeed: 1.7,
+    length: 183,
+    width: 20,
+    fundsCost: 175,
+    timeCost: 63,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/203/55/3/MK12",
+          posPercent: 0.55,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/203/55/3/MK12",
+          posPercent: 0.4,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/203/55/3/MK12",
+          posPercent: -0.67,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        }
+      ],
+      secondaryGuns: [
+        // 右舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 四联 28mm 高炮 x 4
+        {
+          name: "US/28/75/4",
+          posPercent: 0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/28/75/4",
+          posPercent: 0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/28/75/4",
+          posPercent: -0.29,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/28/75/4",
+          posPercent: -0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 高炮 x 6
+        {
+          name: "US/20/70",
+          posPercent: -0.54,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.54,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.9,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 彭萨科拉
+    name: "pensacola",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CA",
+    year: 1942,
+    totalHP: 11696,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 32.5,
+    acceleration: 0.6,
+    rotateSpeed: 1.6,
+    length: 180,
+    width: 19,
+    fundsCost: 180,
+    timeCost: 65,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/203/55/2/MK9",
+          posPercent: 0.63,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/203/55/3/MK9",
+          posPercent: 0.48,
+          rightFiringArc: [0, 120],
+          leftFiringArc: [240, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/203/55/3/MK9",
+          posPercent: -0.55,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 D
+        {
+          name: "US/203/55/2/MK9",
+          posPercent: -0.69,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 右舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 A
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 B
+        {
+          name: "US/127/25/MK10",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 C
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 D
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右 28mm 四联高炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左 28mm 四联高炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右 28mm 四联高炮 B
+        {
+          name: "US/28/75/4",
+          posPercent: -0.87,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左 28mm 四联高炮 B
+        {
+          name: "US/28/75/4",
+          posPercent: -0.87,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左 20mm 高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左 20mm 高炮 B
+        {
+          name: "US/20/70",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右 20mm 高炮 C
+        {
+          name: "US/20/70",
+          posPercent: -0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左 20mm 高炮 C
+        {
+          name: "US/20/70",
+          posPercent: -0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    }
+  },
+  // 轻巡洋舰
+  {
+    // 布鲁克林（1945 年状态）
+    name: "brooklyn",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CL",
+    year: 1945,
+    totalHP: 12800,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 32.5,
+    acceleration: 0.65,
+    rotateSpeed: 1.7,
+    length: 185,
+    width: 21,
+    fundsCost: 195,
+    timeCost: 70,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: 0.61,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: 0.47,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 C
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: 0.37,
+          rightFiringArc: [60, 150],
+          leftFiringArc: [210, 300]
+        },
+        // 后主炮 D
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: -0.46,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 E
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: -0.59,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        {name: "US/127/25/MK10", posPercent: 0.2, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/127/25/MK10", posPercent: 0.2, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/127/25/MK10", posPercent: 0.07, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/127/25/MK10", posPercent: 0.07, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/127/25/MK10", posPercent: -0.03, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/127/25/MK10", posPercent: -0.03, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/127/25/MK10", posPercent: -0.13, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/127/25/MK10", posPercent: -0.13, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+      ],
+      antiAircraftGuns: [
+        // 4 座四联装 40mm 博福斯高炮
+        {name: "US/40/60/4", posPercent: 0.13, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: 0.13, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: -0.31, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: -0.31, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 6 座双联装 40mm 博福斯高炮
+        {name: "US/40/60/2", posPercent: 0.26, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/2", posPercent: 0.26, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/2", posPercent: -0.41, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/2", posPercent: -0.41, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/2", posPercent: -0.96, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/40/60/2", posPercent: -0.96, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 双联装 20mm 厄利孔高炮
+        // 舰首 2 座
+        {name: "US/20/70/2", posPercent: 0.93, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: 0.93, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 后舰桥前 4 座
+        {name: "US/20/70/2", posPercent: -0.16, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: -0.16, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: -0.21, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: -0.21, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 后舰桥后 4 座
+        {name: "US/20/70/2", posPercent: -0.36, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70/2", posPercent: -0.36, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: -0.37, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70/2", posPercent: -0.37, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+      ]
+    }
+  },
+  {
+    // 圣路易斯
+    name: "st_louis",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CL",
+    year: 1939,
+    totalHP: 13327,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 32.5,
+    acceleration: 0.65,
+    rotateSpeed: 1.7,
+    length: 185,
+    width: 19,
+    fundsCost: 180,
+    timeCost: 65,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: 0.61,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: 0.47,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 C
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: 0.37,
+          rightFiringArc: [60, 150],
+          leftFiringArc: [210, 300]
+        },
+        // 后主炮 D
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: -0.46,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 E
+        {
+          name: "US/152/47/3/MK16",
+          posPercent: -0.59,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 右前高平炮
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前高平炮
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后高平炮
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后高平炮
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 前部 12.7mm 机枪
+        {
+          name: "US/12.7",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部 12.7mm 机枪
+        {
+          name: "US/12.7",
+          posPercent: -0.45,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/12.7",
+          posPercent: -0.45,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: -0.48,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/12.7",
+          posPercent: -0.48,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 亚特兰大
+    name: "atlanta",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CL",
+    year: 1942,
+    totalHP: 7400,
+    horizontalDamageReduction: 0.2,
+    verticalDamageReduction: 0.05,
+    maxSpeed: 33,
+    acceleration: 0.7,
+    rotateSpeed: 1.8,
+    length: 165,
+    width: 16,
+    fundsCost: 175,
+    timeCost: 63,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.64,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.54,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 C
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.43,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 D
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.4,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 E
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.5,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 F
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.6,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 右后舰炮 A
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.27,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后舰炮 A
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 350]
+        }
+      ],
+      secondaryGuns: [
+        // 右副炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左副炮 A
+        {
+          name: "US/28/75/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 后副炮 B
+        {
+          name: "US/28/75/4",
+          posPercent: -0.33,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后副炮 C
+        {
+          name: "US/28/75/4",
+          posPercent: -0.91,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.35,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [270, 360]
+        },
+        // 左高炮 A
+        {
+          name: "US/20/70",
+          posPercent: 0.35,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [210, 360]
+        },
+        // 右高炮 B
+        {
+          name: "US/20/70",
+          posPercent: -0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "US/20/70",
+          posPercent: -0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "US/20/70",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 C
+        {
+          name: "US/20/70",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "US/20/70",
+          posPercent: -0.83,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 左高炮 D
+        {
+          name: "US/20/70",
+          posPercent: -0.83,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 右舷鱼雷 A
+        {
+          name: "US/533/4",
+          posPercent: -0.2,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "US/533/4",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    },
+  },
+  // 导弹巡洋舰
+  {
+    // 长滩
+    name: "long_beach",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CGN",
+    year: 1961,
+    totalHP: 16600,
+    horizontalDamageReduction: 0.1,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 30,
+    acceleration: 0.6,
+    rotateSpeed: 1.6,
+    length: 220,
+    width: 22,
+    fundsCost: 130,
+    timeCost: 48,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/127/38/MK45",
+          posPercent: 0.25,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 后主炮 B
+        {
+          name: "US/127/38/MK45",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [],
+      torpedoes: [
+        // 右舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.18,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ]
+    }
+  },
+  {
+    // 长滩（D 型）
+    name: "long_beach_scheme_D",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CGN",
+    year: 1961,
+    totalHP: 11300,
+    horizontalDamageReduction: 0.05,
+    verticalDamageReduction: 0.05,
+    maxSpeed: 32,
+    acceleration: 0.65,
+    rotateSpeed: 1.8,
+    length: 177,
+    width: 17,
+    fundsCost: 125,
+    timeCost: 46,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/127/38/MK45",
+          posPercent: 0.6,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 B
+        {
+          name: "US/127/38/MK45",
+          posPercent: -0.64,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [],
+      torpedoes: [
+        // 右舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.22,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷
+        {
+          name: "US/324/3",
+          posPercent: 0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ]
+    }
+  },
   // 日本海军
+  // 重巡洋舰
   {
     // 古鹰
     name: "furutaka",
@@ -24248,6 +24486,7 @@
       ]
     }
   },
+  // 轻巡洋舰
   {
     // 天龙
     name: "tenryu",

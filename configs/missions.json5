@@ -2099,8 +2099,20 @@
         belongPlayer: "HA"
       },
       {
-        name: "atlanta",
+        name: "brooklyn",
         pos: [41, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "st_louis",
+        pos: [40, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [41, 49],
         rotation: 90,
         belongPlayer: "HA"
       },

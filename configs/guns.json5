@@ -344,6 +344,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 6 英寸/47 Mark 16 三联装舰炮（St. Louis 级）
+  {
+    name: "US/152/47/3/MK16",
+    bulletName: "US/GB/152/1939",
+    bulletCount: 3,
+    reloadTime: 4.5,
+    range: 24,
+    bulletSpread: 90,
+    bulletSpeed: 812,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 US/127/38/MK12 双联装舰炮
   {
     name: "US/127/51/MK7",

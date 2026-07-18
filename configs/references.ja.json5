@@ -2813,6 +2813,76 @@
     ]
   },
   {
+    "name": "st_louis",
+    "displayName": "セントルイス",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x3 152mm/47 Mk16"
+      },
+      {
+        "label": "両用砲",
+        "value": "4x2 127mm/38 Mk12"
+      },
+      {
+        "label": "対空砲",
+        "value": "8x1 12.7mm"
+      }
+    ],
+    "description": "USSセントルイス（CL-49）は、ブルックリン級の後期型に当たるセントルイス級のネームシップで、1939年に就役した。区画ごとに機関をまとめたユニット式機関配置と4基の127mm連装両用砲を備え、真珠湾攻撃時には港外へ脱出し、その後の太平洋戦争で11個の従軍星章を得た。1951年にブラジルへ譲渡されアウミランテ・タマンダレとなり、1976年まで使用された後、1980年に解体地への曳航中に沈没した。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "1939年就役時のUSSセントルイス",
+        "url": "https://www.deviantart.com/tzoli/art/USS-St-Louis-as-Looked-like-in-1939-1313001544"
+      },
+      {
+        "name": "ウィキペディア — USSセントルイス (CL-49)",
+        "url": "https://en.wikipedia.org/wiki/USS_St._Louis_%28CL-49%29"
+      }
+    ]
+  },
+  {
+    "name": "brooklyn",
+    "displayName": "ブルックリン",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "5x3 152mm/47 Mk16"
+      },
+      {
+        "label": "両用砲",
+        "value": "8x1 127mm/25 Mk10"
+      },
+      {
+        "label": "対空砲",
+        "value": "4x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "6x2 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "10x2 20mm/70"
+      }
+    ],
+    "description": "USSブルックリン（CL-40）はブルックリン級軽巡洋艦のネームシップで、1937年に就役した。第二次世界大戦では主に大西洋と地中海で船団護衛と艦砲射撃に従事し、北アフリカ、シチリア、アンツィオ、南フランスの上陸作戦を支援して4個の従軍星章を得た。1951年にチリへ譲渡されオイギンスと改名、1992年の退役後、解体地への曳航中に沈没した。",
+    "author": "Tzoli",
+    "links": [
+      {
+        "name": "1945年時のUSSブルックリン",
+        "url": "https://www.deviantart.com/tzoli/art/USS-Brooklyn-as-Looked-like-in-1945-1311459216"
+      },
+      {
+        "name": "ウィキペディア — USSブルックリン (CL-40)",
+        "url": "https://en.wikipedia.org/wiki/USS_Brooklyn_%28CL-40%29"
+      }
+    ]
+  },
+  {
     "name": "puerto_rico",
     "displayName": "プエルトリコ",
     "type": "大型巡洋艦",
