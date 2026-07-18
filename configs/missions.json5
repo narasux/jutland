@@ -957,6 +957,7 @@
         maxOncomingShip: 10,
         providedShipNames: [
           "alaska_kai",
+          "alaska",
           "des_moines",
           "oregon_city",
           "baltimore",
@@ -1512,44 +1513,50 @@
         belongPlayer: "HA"
       },
       {
-        name: "des_moines",
+        name: "alaska",
         pos: [37, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "oregon_city",
+        name: "des_moines",
         pos: [38, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "baltimore",
+        name: "oregon_city",
         pos: [37, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "astoria",
+        name: "baltimore",
         pos: [38, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "northampton",
+        name: "astoria",
         pos: [37, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "portland",
+        name: "northampton",
         pos: [38, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "pensacola",
+        name: "portland",
         pos: [37, 52],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "pensacola",
+        pos: [38, 53],
         rotation: 90,
         belongPlayer: "HA"
       },

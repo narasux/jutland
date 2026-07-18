@@ -2712,6 +2712,41 @@
     ]
   },
   {
+    "name": "alaska",
+    "displayName": "アラスカ",
+    "type": "大型巡洋艦",
+    "armaments": [
+      {
+        "label": "主砲",
+        "value": "3x3 305mm/50 Mk 8"
+      },
+      {
+        "label": "両用砲",
+        "value": "6x2 127mm/38 Mk 12"
+      },
+      {
+        "label": "対空砲",
+        "value": "14x4 40mm/60"
+      },
+      {
+        "label": "対空砲",
+        "value": "32x1 20mm/70"
+      }
+    ],
+    "description": "USS アラスカ（CB-1）はアラスカ級大型巡洋艦のネームシップで、1944年に就役した。1945年には硫黄島・沖縄作戦で高速空母部隊の護衛と防空に従事し、艦砲射撃や東シナ海・黄海での掃討にも参加した。第二次世界大戦で従軍星章3個を受け、1947年に退役した後、解体のため売却された。",
+    "author": "Ian Roberts",
+    "links": [
+      {
+        "name": "Shipbucket — USS Alaska CB-1 1945",
+        "url": "https://www.shipbucket.com/drawings/8991"
+      },
+      {
+        "name": "ウィキペディア — アラスカ (大型巡洋艦)",
+        "url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A9%E3%82%B9%E3%82%AB_%28%E5%A4%A7%E5%9E%8B%E5%B7%A1%E6%B4%8B%E8%89%A6%29"
+      }
+    ]
+  },
+  {
     "name": "long_beach",
     "displayName": "ロングビーチ",
     "type": "ミサイル巡洋艦",

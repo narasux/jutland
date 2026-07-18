@@ -1638,6 +1638,29 @@
     ]
   },
   {
+    name: "alaska",
+    displayName: "阿拉斯加",
+    type: "大型巡洋舰",
+    armaments: [
+      {label: "主炮", value: "3x3 305mm/50 Mk 8"},
+      {label: "高平炮", value: "6x2 127mm/38 Mk 12"},
+      {label: "高炮", value: "14x4 40mm/60"},
+      {label: "高炮", value: "32x1 20mm/70"},
+    ],
+    description: "阿拉斯加号（CB-1）是阿拉斯加级大型巡洋舰首舰，1944 年服役。1945 年她为快速航母编队提供防空掩护，参加硫磺岛与冲绳作战，并执行岸轰和东海、黄海扫荡任务，二战期间获得三枚战斗之星。该舰于 1947 年退役封存，后被出售拆解。",
+    author: "Ian Roberts",
+    links: [
+      {
+        name: "Shipbucket - USS Alaska CB-1 1945",
+        url: "https://www.shipbucket.com/drawings/8991"
+      },
+      {
+        name: "维基百科 - 阿拉斯加级大型巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%8B%89%E6%96%AF%E5%8A%A0%E7%BA%A7%E5%A4%A7%E5%9E%8B%E5%B7%A1%E6%B4%8B%E8%88%B0"
+      }
+    ]
+  },
+  {
     name: "long_beach",
     displayName: "长滩",
     type: "导弹巡洋舰",

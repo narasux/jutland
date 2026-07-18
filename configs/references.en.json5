@@ -2478,6 +2478,41 @@
     ]
   },
   {
+    "name": "alaska",
+    "displayName": "Alaska",
+    "type": "Large Cruiser",
+    "armaments": [
+      {
+        "label": "Main Battery",
+        "value": "3x3 305mm/50 Mk 8"
+      },
+      {
+        "label": "Dual-purpose Guns",
+        "value": "6x2 127mm/38 Mk 12"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "14x4 40mm/60"
+      },
+      {
+        "label": "Anti-aircraft Guns",
+        "value": "32x1 20mm/70"
+      }
+    ],
+    "description": "USS Alaska (CB-1) was the lead ship of the Alaska-class large cruisers and entered service in 1944. In 1945 she screened fast carriers during the Iwo Jima and Okinawa campaigns, conducted shore bombardments, and swept the East China and Yellow Seas. She earned three battle stars before being decommissioned in 1947 and was later sold for scrapping.",
+    "author": "Ian Roberts",
+    "links": [
+      {
+        "name": "Shipbucket — USS Alaska CB-1 1945",
+        "url": "https://www.shipbucket.com/drawings/8991"
+      },
+      {
+        "name": "Wikipedia — USS Alaska (CB-1)",
+        "url": "https://en.wikipedia.org/wiki/USS_Alaska_%28CB-1%29"
+      }
+    ]
+  },
+  {
     "name": "long_beach",
     "displayName": "Long Beach",
     "type": "Guided-missile Cruiser",

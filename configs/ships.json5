@@ -19546,6 +19546,155 @@
     }
   },
   {
+    // 阿拉斯加
+    name: "alaska",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CB",
+    year: 1944,
+    totalHP: 34803,
+    horizontalDamageReduction: 0.35,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 33,
+    acceleration: 0.45,
+    rotateSpeed: 1.2,
+    length: 246,
+    width: 28,
+    fundsCost: 380,
+    timeCost: 130,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/305/50/3/MK8",
+          posPercent: 0.46,
+          rightFiringArc: [0, 140],
+          leftFiringArc: [220, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/305/50/3/MK8",
+          posPercent: 0.35,
+          rightFiringArc: [0, 140],
+          leftFiringArc: [220, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/305/50/3/MK8",
+          posPercent: -0.51,
+          rightFiringArc: [40, 180],
+          leftFiringArc: [180, 320]
+        }
+      ],
+      secondaryGuns: [
+        // 前副炮 A
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.25,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 右前副炮 B
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.24,
+          rightFiringArc: [0, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 左前副炮 B
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 360]
+        },
+        // 右后副炮 C
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.13,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后副炮 C
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 350]
+        },
+        // 后副炮 D
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.61,
+          rightFiringArc: [60, 180],
+          leftFiringArc: [180, 300]
+        }
+      ],
+      antiAircraftGuns: [
+        // 四联装 40mm 高炮
+        // 舰首 1 座
+        {name: "US/40/60/4", posPercent: 0.95, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 前舰桥 5 座
+        {name: "US/40/60/4", posPercent: 0.2, rightFiringArc: [0, 180], leftFiringArc: [300, 360]},
+        {name: "US/40/60/4", posPercent: 0.2, rightFiringArc: [0, 60], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: 0.19, rightFiringArc: [0, 160], leftFiringArc: [200, 360]},
+        {name: "US/40/60/4", posPercent: 0.11, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: 0.11, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 后舰桥 4 座
+        {name: "US/40/60/4", posPercent: -0.26, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: -0.26, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: -0.31, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: -0.31, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 舰尾 4 座
+        {name: "US/40/60/4", posPercent: -0.8, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: -0.8, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: -0.97, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: -0.97, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 单装 20mm 高炮
+        // 前甲板 4 座
+        {name: "US/20/70", posPercent: 0.73, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.73, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.71, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.71, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 前炮塔左右 4 座
+        {name: "US/20/70", posPercent: 0.38, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.38, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.36, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.36, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 前舰桥左右 4 座
+        {name: "US/20/70", posPercent: 0.19, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.19, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.22, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.22, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 后舰桥左右 4 座
+        {name: "US/20/70", posPercent: -0.1, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.1, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.16, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.16, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 后舰桥舷侧 12 座
+        {name: "US/20/70", posPercent: -0.12, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.12, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.14, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.14, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.18, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.18, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.29, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.29, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.31, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.31, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.37, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.37, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.39, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.39, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 后甲板 4 座
+        {name: "US/20/70", posPercent: -0.66, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.66, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.68, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.68, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+      ]
+    }
+  },
+  {
     // 长滩
     name: "long_beach",
     nation: "us",
