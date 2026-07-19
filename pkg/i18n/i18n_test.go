@@ -56,6 +56,13 @@ func TestRussianCollectionDropdownLabelLeavesArrowToUI(t *testing.T) {
 	)
 }
 
+func TestJapaneseCarrierUsesShortNavalLabel(t *testing.T) {
+	t.Cleanup(func() { SetLanguage(string(LanguageZhHans)) })
+	SetLanguage(string(LanguageJapanese))
+
+	require.Equal(t, "空母", Text(MsgShipTypeCarrier))
+}
+
 func TestFormat(t *testing.T) {
 	SetLanguage(string(LanguageZhHans))
 	got := Format(MsgSidebarFunds, map[string]any{"Funds": 123})

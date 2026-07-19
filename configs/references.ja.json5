@@ -145,7 +145,7 @@
   {
     "name": "saratoga",
     "displayName": "サラトガ",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -188,7 +188,7 @@
   {
     "name": "yorktown",
     "displayName": "ヨークタウン",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -231,7 +231,7 @@
   {
     "name": "essex",
     "displayName": "エセックス",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -274,7 +274,7 @@
   {
     "name": "illinois",
     "displayName": "イリノイ",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -317,7 +317,7 @@
   {
     "name": "midway",
     "displayName": "ミッドウェイ",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -364,7 +364,7 @@
   {
     "name": "princeton",
     "displayName": "プリンストン",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "対空砲",
@@ -399,7 +399,7 @@
   {
     "name": "card",
     "displayName": "カード",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -438,7 +438,7 @@
   {
     "name": "langley",
     "displayName": "ラングレー",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "砲",
@@ -508,7 +508,7 @@
   {
     "name": "hakuryu",
     "displayName": "白龍",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -547,7 +547,7 @@
   {
     "name": "taiho",
     "displayName": "大鳳",
-    "type": "装甲航空母艦",
+    "type": "装甲空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -586,7 +586,7 @@
   {
     "name": "shinano",
     "displayName": "信濃",
-    "type": "重装甲航空母艦",
+    "type": "重装甲空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -633,7 +633,7 @@
   {
     "name": "akagi",
     "displayName": "赤城",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "主砲",
@@ -676,7 +676,7 @@
   {
     "name": "kaga",
     "displayName": "加賀",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "主砲",
@@ -719,7 +719,7 @@
   {
     "name": "shokaku",
     "displayName": "翔鶴",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -758,7 +758,7 @@
   {
     "name": "soryu",
     "displayName": "蒼龍",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "主砲",
@@ -793,7 +793,7 @@
   {
     "name": "hiryu",
     "displayName": "飛龍",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "主砲",
@@ -828,7 +828,7 @@
   {
     "name": "hiyo",
     "displayName": "飛鷹",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -867,7 +867,7 @@
   {
     "name": "unryu",
     "displayName": "雲龍",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -1108,7 +1108,7 @@
   {
     "name": "implacable",
     "displayName": "インプラカブル",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -1155,7 +1155,7 @@
   {
     "name": "victorious",
     "displayName": "ヴィクトリアス",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -1198,7 +1198,7 @@
   {
     "name": "ark_royal",
     "displayName": "アーク・ロイヤル",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -1342,7 +1342,7 @@
   {
     "name": "eagle",
     "displayName": "イーグル",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "主砲",
@@ -1385,7 +1385,7 @@
   {
     "name": "hermes",
     "displayName": "ハーミーズ",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "主砲",
@@ -1424,7 +1424,7 @@
   {
     "name": "courageous",
     "displayName": "カレイジャス",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -1459,7 +1459,7 @@
   {
     "name": "argus",
     "displayName": "アーガス",
-    "type": "航空母艦",
+    "type": "空母",
     "armaments": [
       {
         "label": "両用砲",
@@ -1498,7 +1498,7 @@
   {
     "name": "queen",
     "displayName": "クイーン",
-    "type": "護衛航空母艦",
+    "type": "護衛空母",
     "armaments": [
       {
         "label": "対空砲",
@@ -1533,7 +1533,7 @@
   {
     "name": "biter",
     "displayName": "バイター",
-    "type": "護衛航空母艦",
+    "type": "護衛空母",
     "armaments": [
       {
         "label": "甲板砲",
@@ -2814,7 +2814,7 @@
   },
   {
     "name": "charlotte",
-    "displayName": "シャーロット（CL-154 計画）",
+    "displayName": "シャーロット",
     "type": "防空軽巡洋艦",
     "armaments": [
       {"label": "主砲", "value": "6x2 127mm/54 Mk39"},
@@ -5381,6 +5381,42 @@
     "links": []
   },
   {
+    "name": "US/406/45/2/MK5",
+    "displayName": "406mm/45 Mk5 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/3/MK8",
+    "displayName": "356mm/45 Mk8 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/3/MK10",
+    "displayName": "356mm/45 Mk10 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/2/MK8",
+    "displayName": "356mm/45 Mk8 連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/356/50/3/MK11",
     "displayName": "356mm/50 三連装砲 Mk11",
     "type": "兵器",
@@ -5476,6 +5512,15 @@
     "links": []
   },
   {
+    "name": "US/152/47/3/MK16",
+    "displayName": "152mm/47 Mk16 三連装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "米海軍の6インチ/47 Mk16砲を収める三連装砲塔で、ブルックリン級、セントルイス級、クリーブランド級、ファーゴ級軽巡洋艦の主砲として用いられた。ゲームでは対水上用として扱い、後の連装Mk16DPのような両用性能は持たない。",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/152/47/2/MK16DP",
     "displayName": "152mm/47 Mk16DP 連装両用砲",
     "type": "兵器",
@@ -5517,6 +5562,15 @@
     ]
   },
   {
+    "name": "US/127/51/MK15",
+    "displayName": "127mm/51 Mk15 単装砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/127/25/MK10",
     "displayName": "127mm 単装砲 MK10",
     "type": "兵器",
@@ -5542,6 +5596,15 @@
   {
     "name": "US/127/54/2/MK39",
     "displayName": "127mm 連装砲 MK39",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/54/MK16",
+    "displayName": "127mm/54 Mk16 単装両用砲",
     "type": "兵器",
     "armaments": [],
     "description": "",
@@ -6316,6 +6379,33 @@
   {
     "name": "UK/12.7/2",
     "displayName": "12.7mm 連装対空砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/Browning",
+    "displayName": "7.7mm ブローニング航空機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/VickersK",
+    "displayName": "7.7mm ヴィッカースK航空機銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/Vickers",
+    "displayName": "7.7mm ヴィッカース航空機銃",
     "type": "兵器",
     "armaments": [],
     "description": "",

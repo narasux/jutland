@@ -1,12 +1,14 @@
 package reference
 
 import (
+	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/stretchr/testify/require"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 )
 
 func TestValidateLocalesKeepsStableReferenceShape(t *testing.T) {
@@ -76,6 +78,49 @@ func TestJapaneseReferencesUseJapaneseYearTypeNames(t *testing.T) {
 	require.Equal(t, "4x2 410mm/45 三年式", nagato.Armaments[0].Value)
 	for _, armament := range nagato.Armaments {
 		require.NotContains(t, armament.Value, "Type ")
+	}
+}
+
+func TestJapaneseCarrierTypesUseShortNavalLabels(t *testing.T) {
+	references, err := Load(filepath.Join("..", "..", "..", "..", "configs", "references.ja.json5"))
+	require.NoError(t, err)
+
+	byName := make(map[string]Reference, len(references))
+	for _, ref := range references {
+		byName[ref.Name] = ref
+		require.NotContains(t, ref.Type, "航空母艦", ref.Name)
+	}
+
+	require.Equal(t, "空母", byName["yorktown"].Type)
+	require.Equal(t, "装甲空母", byName["taiho"].Type)
+	require.Equal(t, "重装甲空母", byName["shinano"].Type)
+	require.Equal(t, "護衛空母", byName["queen"].Type)
+	require.Contains(t, byName["yorktown"].Description, "航空母艦")
+}
+
+func TestEveryConfiguredGunHasLocalizedReference(t *testing.T) {
+	configDir := filepath.Join("..", "..", "..", "..", "configs")
+	data, err := os.ReadFile(filepath.Join(configDir, "guns.json5"))
+	require.NoError(t, err)
+	var guns []struct {
+		Name string `json:"name"`
+	}
+	require.NoError(t, json5.Unmarshal(data, &guns))
+
+	for _, lang := range i18n.SupportedLanguages() {
+		fileName := "references." + string(lang) + ".json5"
+		if lang == i18n.LanguageZhHans {
+			fileName = "references.json5"
+		}
+		references, err := Load(filepath.Join(configDir, fileName))
+		require.NoError(t, err)
+		byName := make(map[string]Reference, len(references))
+		for _, ref := range references {
+			byName[ref.Name] = ref
+		}
+		for _, gun := range guns {
+			require.Containsf(t, byName, gun.Name, "%s is missing gun reference %q", lang, gun.Name)
+		}
 	}
 }
 

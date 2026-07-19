@@ -177,7 +177,7 @@ func (s *UI) buildUI() {
 		speedEntries,
 		speedOptions[selectedIndex],
 		buttonFace,
-		func(entry any) string { return i18n.Text(entry.(speedOption).Label) + "  ▾" },
+		func(entry any) string { return i18n.Text(entry.(speedOption).Label) },
 		func(entry any) string { return i18n.Text(entry.(speedOption).Label) },
 		func(entry any) { s.selectSpeed(entry.(speedOption).Value) },
 	)
@@ -200,7 +200,7 @@ func (s *UI) buildUI() {
 		languageEntries,
 		s.localLanguage,
 		&languageFaceValue,
-		func(entry any) string { return entry.(i18n.Language).NativeName() + "  ▾" },
+		func(entry any) string { return entry.(i18n.Language).NativeName() },
 		func(entry any) string { return entry.(i18n.Language).NativeName() },
 		func(entry any) { s.selectLanguage(entry.(i18n.Language)) },
 	)

@@ -138,8 +138,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawGameTip(screen, i18n.Text(i18n.MsgLoading))
 		g.objStates.LoadingInterface.Ready = true
 	case GameModeMissionStart:
-		g.drawer.drawBackground(screen, bgImg.MissionStart)
-		g.drawer.drawGameTip(screen, i18n.Text(i18n.MsgMissionStarted))
+		g.missionMgr.DrawPreview(screen)
+		g.drawer.drawMissionReady(screen)
 		g.objStates.LoadingInterface.MissionStartDrawn = true
 	case GameModeMissionRunning:
 		g.missionMgr.Draw(screen)

@@ -13,7 +13,9 @@ other = "Выход"
 [Loading]
 other = "Загрузка..."
 [MissionStarted]
-other = "Миссия началась!"
+other = "Миссия готова!"
+[MissionContinueHint]
+other = "Нажмите пробел, Enter или левую кнопку мыши"
 [MissionSuccess]
 other = "Миссия выполнена!"
 [MissionFailed]

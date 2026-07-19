@@ -2814,7 +2814,7 @@
   },
   {
     "name": "charlotte",
-    "displayName": "«Шарлотт» (проект CL-154)",
+    "displayName": "Шарлотт",
     "type": "Крейсер ПВО",
     "armaments": [
       {"label": "Главный калибр", "value": "6x2 127mm/54 Mk39"},
@@ -5381,6 +5381,42 @@
     "links": []
   },
   {
+    "name": "US/406/45/2/MK5",
+    "displayName": "406-мм/45 двухорудийная установка Mk5",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/3/MK8",
+    "displayName": "356-мм/45 трёхорудийная установка Mk8",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/3/MK10",
+    "displayName": "356-мм/45 трёхорудийная установка Mk10",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/2/MK8",
+    "displayName": "356-мм/45 двухорудийная установка Mk8",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/356/50/3/MK11",
     "displayName": "356mm/50 трёхствольная установка Mk11",
     "type": "Оружие",
@@ -5476,6 +5512,15 @@
     "links": []
   },
   {
+    "name": "US/152/47/3/MK16",
+    "displayName": "152-мм/47 трёхорудийная установка Mk16",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "Трёхорудийная установка американского 152-мм/47 орудия Mk16 служила главным калибром лёгких крейсеров типов Brooklyn, St. Louis, Cleveland и Fargo. В игре она предназначена для стрельбы по надводным целям и, в отличие от более поздней двухорудийной Mk16DP, не является универсальной.",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/152/47/2/MK16DP",
     "displayName": "152-мм/47 двухорудийная универсальная установка Mk16DP",
     "type": "Оружие",
@@ -5517,6 +5562,15 @@
     ]
   },
   {
+    "name": "US/127/51/MK15",
+    "displayName": "127-мм/51 одноорудийная установка Mk15",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/127/25/MK10",
     "displayName": "127mm одноствольная установка MK10",
     "type": "Оружие",
@@ -5542,6 +5596,15 @@
   {
     "name": "US/127/54/2/MK39",
     "displayName": "127mm двуствольная установка MK39",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/54/MK16",
+    "displayName": "127-мм/54 одноорудийная универсальная установка Mk16",
     "type": "Оружие",
     "armaments": [],
     "description": "",
@@ -6316,6 +6379,33 @@
   {
     "name": "UK/12.7/2",
     "displayName": "12.7mm двуствольная зенитная установка",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/Browning",
+    "displayName": "7,7-мм авиационный пулемёт Browning",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/VickersK",
+    "displayName": "7,7-мм авиационный пулемёт Vickers K",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/Vickers",
+    "displayName": "7,7-мм авиационный пулемёт Vickers",
     "type": "Оружие",
     "armaments": [],
     "description": "",

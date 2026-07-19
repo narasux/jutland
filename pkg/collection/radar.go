@@ -413,16 +413,23 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale f
 			if total > 0 {
 				percent = contribution.Value / total * 100
 			}
-			name := contribution.Name
-			if ref := objRef.GetReference(name); ref != nil && ref.DisplayName != "" {
-				name = ref.DisplayName
-			}
 			lines = append(lines, i18n.Format(i18n.MsgRadarContribution, map[string]any{
-				"Name": name, "Percent": fmt.Sprintf("%.0f", percent),
+				"Name": localizedContributionName(contribution), "Percent": fmt.Sprintf("%.0f", percent),
 			}))
 		}
 	}
 	return lines
+}
+
+func localizedContributionName(contribution objUnit.CombatPowerContribution) string {
+	name := contribution.Name
+	if ref := objRef.GetReference(name); ref != nil && ref.DisplayName != "" {
+		name = ref.DisplayName
+	}
+	if contribution.Count > 0 {
+		name += fmt.Sprintf(" ×%d", contribution.Count)
+	}
+	return name
 }
 
 func hoveredCombatPowerArea(areas []combatPowerHitArea) *combatPowerHitArea {

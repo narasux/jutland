@@ -67,9 +67,14 @@ func (m *MissionManager) Draw(screen *ebiten.Image) {
 	m.sidebar.Draw(screen, m.state)
 }
 
-// WarmupMapBlocks 允许非运行态画面分帧预热地图块缓存，减少进入关卡后的首次缩放卡顿。
-func (m *MissionManager) WarmupMapBlocks() {
-	m.updateMapBlockPrewarm()
+// DrawPreview 绘制开始任务前的战场预览，不激活任务侧栏。
+func (m *MissionManager) DrawPreview(screen *ebiten.Image) {
+	m.drawer.Draw(screen, m.state, m.terminal)
+}
+
+// WarmupMapBlocks 分帧预热地图块缓存，并报告当前视野是否已经就绪。
+func (m *MissionManager) WarmupMapBlocks() bool {
+	return m.updateMapBlockPrewarm()
 }
 
 // Update 更新一帧任务状态
@@ -145,8 +150,8 @@ func (m *MissionManager) updateSupportPhase() {
 	m.updateHospitalShipHealing()
 }
 
-// updateMapBlockPrewarm 分帧预热相机附近场景地图块的缩放缓存，避免首次缩放集中建图。
-func (m *MissionManager) updateMapBlockPrewarm() {
+// updateMapBlockPrewarm 分帧预热相机附近场景地图块的缩放缓存，返回当前缩放是否就绪。
+func (m *MissionManager) updateMapBlockPrewarm() bool {
 	camera := m.state.View.Camera
 	zoom := state.NormalizeZoom(m.state.UI.GameOpts.Zoom)
 	if m.mapBlockPrewarmZoom != zoom ||
@@ -182,16 +187,16 @@ func (m *MissionManager) updateMapBlockPrewarm() {
 		zoom,
 		mapBlockPrewarmMargin,
 	) {
-		return
+		return false
 	}
 
 	remainingBudget := budget - processed
 	if remainingBudget <= 0 {
-		return
+		return true
 	}
 	adjacentZooms := getAdjacentZooms(zoom)
 	if len(adjacentZooms) == 0 {
-		return
+		return true
 	}
 	mapBlockImg.SceneBlockCache.SchedulePrewarmAround(
 		camera.Pos.MX, camera.Pos.MY,
@@ -200,6 +205,7 @@ func (m *MissionManager) updateMapBlockPrewarm() {
 		mapBlockPrewarmMargin,
 	)
 	mapBlockImg.SceneBlockCache.StepPrewarm(remainingBudget)
+	return true
 }
 
 // getAdjacentZooms 返回当前 zoom 的相邻档位，当前视野热好后再作为下一层预热目标。

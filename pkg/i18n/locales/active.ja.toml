@@ -13,7 +13,9 @@ other = "ゲーム終了"
 [Loading]
 other = "読み込み中..."
 [MissionStarted]
-other = "作戦開始！"
+other = "作戦準備完了！"
+[MissionContinueHint]
+other = "Space、Enter、または左クリックで開始"
 [MissionSuccess]
 other = "作戦成功！"
 [MissionFailed]
@@ -81,7 +83,7 @@ other = "特殊"
 [ShipTypeDefault]
 other = "その他"
 [ShipTypeCarrier]
-other = "航空母艦"
+other = "空母"
 [ShipTypeBattleship]
 other = "戦艦"
 [ShipTypeCruiser]

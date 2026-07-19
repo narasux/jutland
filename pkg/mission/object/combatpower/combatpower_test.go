@@ -205,6 +205,10 @@ func TestCarrierScalesStandardFormationByAircraftCount(t *testing.T) {
 			if power.Details.MaxProjectionDistanceKM != 288 {
 				t.Fatalf("carrier projection distance = %.0f km, want 288", power.Details.MaxProjectionDistanceKM)
 			}
+			contribution := power.Details.AntiShipContributions[0]
+			if contribution.Name != "plane" || contribution.Count != tt.count {
+				t.Fatalf("carrier contribution = %+v, want stable plane ID and count %d", contribution, tt.count)
+			}
 		})
 	}
 }

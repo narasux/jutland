@@ -13,7 +13,9 @@ other = "退出游戏"
 [Loading]
 other = "加载中..."
 [MissionStarted]
-other = "任务开始！"
+other = "任务已就绪！"
+[MissionContinueHint]
+other = "按空格、回车或鼠标左键开始"
 [MissionSuccess]
 other = "任务成功！"
 [MissionFailed]

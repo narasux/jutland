@@ -382,6 +382,21 @@ func (d *Drawer) drawGameTip(screen *ebiten.Image, textStr string) {
 	d.drawText(screen, textStr, posX, posY, fontSize, tipFont, colorx.White)
 }
 
+// drawMissionReady 绘制已完成加载的任务预览提示。
+func (d *Drawer) drawMissionReady(screen *ebiten.Image) {
+	screenW, screenH := float64(screen.Bounds().Dx()), float64(screen.Bounds().Dy())
+	title := i18n.Text(i18n.MsgMissionStarted)
+	hint := i18n.Text(i18n.MsgMissionContinueHint)
+	titleFont := font.LocalizedUI(font.Hang)
+	hintFont := font.LocalizedUI(font.Kai)
+	titleSize, hintSize := 56.0, 24.0
+	titleW := layout.CalcTextWidth(title, titleSize, titleFont)
+	hintW := layout.CalcTextWidth(hint, hintSize, hintFont)
+
+	d.drawText(screen, title, max(30, screenW-titleW-50), screenH-105, titleSize, titleFont, colorx.White)
+	d.drawText(screen, hint, max(30, screenW-hintW-50), screenH-55, hintSize, hintFont, colorx.Silver)
+}
+
 // 绘制任务结果
 func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textColor color.Color) {
 	fontSize := float64(96)

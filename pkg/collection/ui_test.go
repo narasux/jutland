@@ -9,12 +9,28 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/narasux/jutland/pkg/i18n"
+	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/utils/layout"
 	"github.com/stretchr/testify/require"
 )
+
+func TestLocalizedContributionNameUsesCurrentLanguage(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	const planeName = "test-localized-contribution-plane"
+	objRef.SetReference(i18n.LanguageZhHans, planeName, &objRef.Reference{DisplayName: "测试飞机"})
+	objRef.SetReference(i18n.LanguageJapanese, planeName, &objRef.Reference{DisplayName: "テスト機"})
+	contribution := objUnit.CombatPowerContribution{Name: planeName, Count: 12}
+
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+	require.Equal(t, "测试飞机 ×12", localizedContributionName(contribution))
+	i18n.SetLanguage(string(i18n.LanguageJapanese))
+	require.Equal(t, "テスト機 ×12", localizedContributionName(contribution))
+}
 
 func TestTruncateCollectionTextKeepsEllipsisWithinWidth(t *testing.T) {
 	fontSize := 18.0

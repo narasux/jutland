@@ -2580,7 +2580,7 @@
   },
   {
     "name": "charlotte",
-    "displayName": "Charlotte (CL-154 Design)",
+    "displayName": "Charlotte",
     "type": "Anti-aircraft Light Cruiser",
     "armaments": [
       {"label": "Main Battery", "value": "6x2 127mm/54 Mk39"},
@@ -4956,6 +4956,42 @@
     "links": []
   },
   {
+    "name": "US/406/45/2/MK5",
+    "displayName": "406mm/45 Twin Mount Mk5",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/3/MK8",
+    "displayName": "356mm/45 Triple Mount Mk8",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/3/MK10",
+    "displayName": "356mm/45 Triple Mount Mk10",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/356/45/2/MK8",
+    "displayName": "356mm/45 Twin Mount Mk8",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/356/50/3/MK11",
     "displayName": "356mm/50 Triple Mount Mk11",
     "type": "Weapon",
@@ -5051,6 +5087,15 @@
     "links": []
   },
   {
+    "name": "US/152/47/3/MK16",
+    "displayName": "152mm/47 Triple Mount Mk16",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "The triple mounting for the U.S. Navy 6-inch/47 Mk16 gun equipped Brooklyn-, St. Louis-, Cleveland-, and Fargo-class light cruisers. In the game it is modeled for surface fire, unlike the later twin Mk16DP dual-purpose mounting.",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/152/47/2/MK16DP",
     "displayName": "152mm/47 Twin Dual-Purpose Mount Mk16DP",
     "type": "Weapon",
@@ -5092,6 +5137,15 @@
     ]
   },
   {
+    "name": "US/127/51/MK15",
+    "displayName": "127mm/51 Single Mount Mk15",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/127/25/MK10",
     "displayName": "127mm Single Mount MK10",
     "type": "Weapon",
@@ -5114,6 +5168,15 @@
   {
     "name": "US/127/54/2/MK39",
     "displayName": "127mm Twin Mount MK39",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/127/54/MK16",
+    "displayName": "127mm/54 Single Dual-Purpose Mount Mk16",
     "type": "Weapon",
     "armaments": [],
     "description": "",
@@ -5888,6 +5951,33 @@
   {
     "name": "UK/12.7/2",
     "displayName": "12.7mm Twin AA Mount",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/Browning",
+    "displayName": "7.7mm Browning Aircraft Machine Gun",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/VickersK",
+    "displayName": "7.7mm Vickers K Aircraft Machine Gun",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "UK/7.7/Vickers",
+    "displayName": "7.7mm Vickers Aircraft Machine Gun",
     "type": "Weapon",
     "armaments": [],
     "description": "",

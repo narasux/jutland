@@ -12,6 +12,7 @@ const (
 	MsgMenuExit                  MessageID = "MenuExit"
 	MsgLoading                   MessageID = "Loading"
 	MsgMissionStarted            MessageID = "MissionStarted"
+	MsgMissionContinueHint       MessageID = "MissionContinueHint"
 	MsgMissionSuccess            MessageID = "MissionSuccess"
 	MsgMissionFailed             MessageID = "MissionFailed"
 	MsgMissionStart              MessageID = "MissionStart"

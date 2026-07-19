@@ -102,6 +102,7 @@ type CombatPowerDetails struct {
 // CombatPowerContribution 单项武器或舰载机对某项能力的贡献。
 type CombatPowerContribution struct {
 	Name  string
+	Count int64
 	Value float64
 }
 

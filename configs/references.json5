@@ -1704,7 +1704,7 @@
   },
   {
     name: "charlotte",
-    displayName: "夏洛特（CL-154 级方案）",
+    displayName: "夏洛特",
     type: "防空轻巡洋舰",
     armaments: [
       {label: "主炮", value: "6x2 127mm/54 Mk39"},
@@ -2520,7 +2520,7 @@
       {label: "高平炮", value: "6x2 100mm/70"},
       {label: "鱼雷", value: "2x5 533mm"},
     ],
-    description: "斯维尔德洛夫号是苏联最著名的火炮巡洋舰 68-бис 型的首舰。该舰是战前研发，战后完工的 68k 型巡洋舰的改进版本。战后完工的斯维尔德洛夫各项性能均达到轻巡优秀水平。在她刚完工不久就参加了英国的阅舰式，向西方展示了战后苏联海军的风貌。",
+    description: "斯维尔德洛夫号是苏联最著名的火炮巡洋舰 68-bis 型的首舰。该舰是战前研发，战后完工的 68k 型巡洋舰的改进版本。战后完工的斯维尔德洛夫各项性能均达到轻巡优秀水平。在她刚完工不久就参加了英国的阅舰式，向西方展示了战后苏联海军的风貌。",
     author: "SakhaliaNet",
     links: [
       {
@@ -3409,6 +3409,42 @@
     links: []
   },
   {
+    name: "US/406/45/2/MK5",
+    displayName: "406mm/45 双联装舰炮 Mk5",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/356/45/3/MK8",
+    displayName: "356mm/45 三联装舰炮 Mk8",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/356/45/3/MK10",
+    displayName: "356mm/45 三联装舰炮 Mk10",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/356/45/2/MK8",
+    displayName: "356mm/45 双联装舰炮 Mk8",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
     name: "US/356/50/3/MK11",
     displayName: "356mm/50 三联装舰炮 Mk11",
     type: "武器",
@@ -3501,6 +3537,15 @@
     links: []
   },
   {
+    name: "US/152/47/3/MK16",
+    displayName: "152mm/47 三联装舰炮 Mk16",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 6 英寸/47 Mk16 舰炮的三联装炮塔，装备于布鲁克林、圣路易斯、克利夫兰和法戈级轻巡洋舰。本游戏将其作为对海主炮，不具备后期双联装 Mk16DP 的高平两用能力。",
+    author: "",
+    links: []
+  },
+  {
     name: "US/152/47/2/MK16DP",
     displayName: "152mm/47 双联装高平两用舰炮 Mk16DP",
     type: "武器",
@@ -3539,6 +3584,15 @@
     ]
   },
   {
+    name: "US/127/51/MK15",
+    displayName: "127mm/51 单装舰炮 Mk15",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
     name: "US/127/25/MK10",
     displayName: "127mm/25 单装高平两用炮 Mk10",
     type: "武器",
@@ -3561,6 +3615,15 @@
   {
     name: "US/127/54/2/MK39",
     displayName: "127mm/54 双联装舰炮 Mk39",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/127/54/MK16",
+    displayName: "127mm/54 单装高平两用炮 Mk16",
     type: "武器",
     armaments: [],
     description: "",
@@ -4335,6 +4398,33 @@
   {
     name: "UK/12.7/2",
     displayName: "12.7mm 双联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/7.7/Browning",
+    displayName: "7.7mm 勃朗宁航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/7.7/VickersK",
+    displayName: "7.7mm 维克斯 K 型航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "UK/7.7/Vickers",
+    displayName: "7.7mm 维克斯航空机枪",
     type: "武器",
     armaments: [],
     description: "",

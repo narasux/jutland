@@ -5,6 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/narasux/jutland/pkg/audio"
+	"github.com/narasux/jutland/pkg/mission/manager"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 )
 
@@ -45,4 +47,25 @@ func TestCycleMissionWrapsWithinGivenCategory(t *testing.T) {
 	require.Equal(t, "Samar1944", cycleMission(classic, "PearlHarbor1941", -1))
 	require.Equal(t, "TestAll", cycleMission(tests, "TestAntiAircraft", 1))
 	require.Equal(t, "TestAntiAircraft", cycleMission(tests, "TestAll", -1))
+}
+
+func TestStartMissionLoadingResetsPreviousMission(t *testing.T) {
+	g := &Game{
+		mode:       GameModeMissionStart,
+		missionMgr: &manager.MissionManager{},
+		player:     &audio.Player{},
+		objStates: &objStates{LoadingInterface: &loadingInterface{
+			Ready:             true,
+			MissionStartDrawn: true,
+			LoadedAudioPlayed: true,
+		}},
+	}
+
+	g.startMissionLoading()
+
+	require.Equal(t, GameMode(GameModeMissionLoading), g.mode)
+	require.Nil(t, g.missionMgr)
+	require.False(t, g.objStates.LoadingInterface.Ready)
+	require.False(t, g.objStates.LoadingInterface.MissionStartDrawn)
+	require.False(t, g.objStates.LoadingInterface.LoadedAudioPlayed)
 }

@@ -4,7 +4,6 @@ package combatpower
 import (
 	"math"
 	"sort"
-	"strconv"
 
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -195,17 +194,16 @@ func CalculateShip(
 			result.Details.MaxProjectionDistanceKM,
 			plane.Range*planeProjectionKilometersPerMapUnit,
 		)
-		label := objUnit.GetPlaneDisplayName(plane.Name) + " ×" + formatCount(group.MaxCount)
 		addSortedContribution(
-			&result.Details.AntiShipContributions, label,
+			&result.Details.AntiShipContributions, plane.Name, group.MaxCount,
 			plane.CombatPower.Details.AntiShipDPS*aircraftFactor,
 		)
 		addSortedContribution(
-			&result.Details.AntiAirContributions, label,
+			&result.Details.AntiAirContributions, plane.Name, group.MaxCount,
 			plane.CombatPower.Details.AntiAirDPS*aircraftFactor,
 		)
 		addSortedContribution(
-			&result.Details.BurstContributions, label,
+			&result.Details.BurstContributions, plane.Name, group.MaxCount,
 			plane.CombatPower.Details.BurstDamage*aircraftFactor,
 		)
 	}
@@ -279,24 +277,23 @@ func sortedContributions(values map[string]float64) []objUnit.CombatPowerContrib
 	return result
 }
 
-func addSortedContribution(target *[]objUnit.CombatPowerContribution, name string, value float64) {
+func addSortedContribution(
+	target *[]objUnit.CombatPowerContribution, name string, count int64, value float64,
+) {
 	// 舰载机贡献会在多组挂载之间重复出现，所以这里需要做累加而不是简单 append。
 	if value <= 0 {
 		return
 	}
 	for idx := range *target {
 		if (*target)[idx].Name == name {
+			(*target)[idx].Count += count
 			(*target)[idx].Value += value
 			sort.Slice(*target, func(i, j int) bool { return (*target)[i].Value > (*target)[j].Value })
 			return
 		}
 	}
-	*target = append(*target, objUnit.CombatPowerContribution{Name: name, Value: value})
+	*target = append(*target, objUnit.CombatPowerContribution{Name: name, Count: count, Value: value})
 	sort.Slice(*target, func(i, j int) bool { return (*target)[i].Value > (*target)[j].Value })
-}
-
-func formatCount(count int64) string {
-	return strconv.FormatInt(count, 10)
 }
 
 func buildPowerInfo(

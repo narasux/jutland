@@ -13,7 +13,9 @@ other = "Exit Game"
 [Loading]
 other = "Loading..."
 [MissionStarted]
-other = "Mission started!"
+other = "Mission ready!"
+[MissionContinueHint]
+other = "Press Space, Enter, or left-click to start"
 [MissionSuccess]
 other = "Mission accomplished!"
 [MissionFailed]
