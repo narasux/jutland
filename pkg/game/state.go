@@ -15,6 +15,8 @@ type objStates struct {
 }
 
 type menuButtonStates struct {
+	// 菜单设计字号；窗口自适应缩放不能覆盖该基准值。
+	BaseFontSize float64
 	// 任务选择
 	MissionSelect *menuButton
 	// 游戏图鉴
@@ -60,7 +62,7 @@ func (s *objStates) AutoUpdateMenuButtonStates(screen *ebiten.Image) {
 		s.MenuButton.ExitGame,
 	}
 
-	baseSize := buttons[0].FontSize
+	baseSize := s.MenuButton.BaseFontSize
 	totalWidth := updateMenuButtonSizes(buttons, baseSize)
 	gap := menuMinimumGap
 	availableWidth := max(screenWidth-2*menuHorizontalPadding, 0)
@@ -99,15 +101,15 @@ func updateMenuButtonSizes(buttons []*menuButton, fontSize float64) float64 {
 
 // 任务加载界面
 type loadingInterface struct {
-	Ready             bool
-	MissionStartDrawn bool
-	LoadedAudioPlayed bool
+	Ready               bool
+	MissionRunningDrawn bool
+	LoadedAudioPlayed   bool
 }
 
 // Reset 重置加载界面状态，保证每次进入关卡都先显示 loading 再执行阻塞加载。
 func (i *loadingInterface) Reset() {
 	i.Ready = false
-	i.MissionStartDrawn = false
+	i.MissionRunningDrawn = false
 	i.LoadedAudioPlayed = false
 }
 

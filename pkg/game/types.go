@@ -3,16 +3,12 @@ package game
 type GameMode int
 
 const (
-	// 游戏开始
-	GameModeStart = iota
 	// 菜单选择
-	GameModeMenuSelect
+	GameModeMenuSelect = iota
 	// 任务选择
 	GameModeMissionSelect
 	// 任务加载
 	GameModeMissionLoading
-	// 任务开始
-	GameModeMissionStart
 	// 任务进行中
 	GameModeMissionRunning
 	// 任务结束 - 成功

@@ -1592,49 +1592,49 @@
       // Kongo：现有资源直接使用；战列线核心。
       {
         name: "kongo",
-        pos: [110, 58],
+        pos: [110, 78],
         rotation: 270,
         belongPlayer: "CA"
       },
       // Tone：现有资源直接使用；北侧重巡洋舰屏卫。
       {
         name: "tone",
-        pos: [114, 54],
+        pos: [114, 74],
         rotation: 270,
         belongPlayer: "CA"
       },
       // Abukuma：现有资源直接使用；南侧轻巡洋舰屏卫。
       {
         name: "abukuma",
-        pos: [114, 62],
+        pos: [114, 82],
         rotation: 270,
         belongPlayer: "CA"
       },
       // Asashio：现有资源直接使用；北侧驱逐舰前卫。
       {
         name: "asashio",
-        pos: [120, 48],
+        pos: [120, 68],
         rotation: 270,
         belongPlayer: "CA"
       },
       // Yugumo：现有资源直接使用；北侧驱逐舰屏卫。
       {
         name: "yugumo",
-        pos: [120, 54],
+        pos: [120, 74],
         rotation: 270,
         belongPlayer: "CA"
       },
       // Yukikaze：现有资源直接使用；南侧驱逐舰屏卫。
       {
         name: "yukikaze",
-        pos: [120, 60],
+        pos: [120, 80],
         rotation: 270,
         belongPlayer: "CA"
       },
       // 第二艘 Yukikaze 资源舰：架空编队中的南侧驱逐舰后卫。
       {
         name: "yukikaze",
-        pos: [120, 66],
+        pos: [120, 86],
         rotation: 270,
         belongPlayer: "CA"
       },
@@ -1789,52 +1789,52 @@
       // 美军位于左上、日军位于右下，两军保持原编队间距并沿对角线相向航行。
 
       // === 美军：第 58 特混舰队代表编队（左上，向东南） ===
-      // Yorktown CV-10：现有同名资源；航母核心北侧。
+      // Yorktown CV-10 -> essex：同属 Essex 级；航母核心南侧。
       {
-        name: "yorktown",
-        pos: [17, 14],
+        name: "essex",
+        pos: [11, 14],
         rotation: 135,
         belongPlayer: "HA"
       },
       // Essex CV-9：现有同名资源；航母核心中央。
       {
         name: "essex",
-        pos: [17, 21],
+        pos: [11, 21],
         rotation: 135,
         belongPlayer: "HA"
       },
       // Bunker Hill CV-17 -> essex：同属 Essex 级；航母核心南侧。
       {
         name: "essex",
-        pos: [17, 28],
+        pos: [11, 28],
         rotation: 135,
         belongPlayer: "HA"
       },
       // South Dakota BB-57：现有同名资源；快速战列舰屏卫北翼。
       {
         name: "south_dakota",
-        pos: [11, 10],
+        pos: [17, 10],
         rotation: 135,
         belongPlayer: "HA"
       },
       // Washington BB-56 -> south_dakota：North Carolina 级未收录；以同任务、尺寸接近的快速战列舰替代。
       {
         name: "south_dakota",
-        pos: [11, 16],
+        pos: [17, 16],
         rotation: 135,
         belongPlayer: "HA"
       },
       // Iowa BB-61 -> lowa：项目资源沿用 lowa 拼写；同名舰，战列舰屏卫中央。
       {
         name: "lowa",
-        pos: [11, 23],
+        pos: [17, 23],
         rotation: 135,
         belongPlayer: "HA"
       },
       // New Jersey BB-62 -> lowa：同属 Iowa 级；战列舰屏卫南翼。
       {
         name: "lowa",
-        pos: [11, 31],
+        pos: [17, 31],
         rotation: 135,
         belongPlayer: "HA"
       },
@@ -1885,49 +1885,49 @@
       // Taiho：现有同名资源；第一航空战队旗舰。
       {
         name: "taiho",
-        pos: [95, 84],
+        pos: [101, 84],
         rotation: 315,
         belongPlayer: "CA"
       },
       // Shokaku：现有同名资源；第一航空战队中央。
       {
         name: "shokaku",
-        pos: [95, 92],
+        pos: [101, 92],
         rotation: 315,
         belongPlayer: "CA"
       },
       // Zuikaku -> shokaku：同属 Shokaku 级；第一航空战队南侧。
       {
         name: "shokaku",
-        pos: [95, 100],
+        pos: [101, 100],
         rotation: 315,
         belongPlayer: "CA"
       },
       // Yamato：现有同名资源；前卫战列舰北翼。
       {
         name: "yamato",
-        pos: [101, 80],
+        pos: [95, 80],
         rotation: 315,
         belongPlayer: "CA"
       },
       // Musashi -> yamato：同属 Yamato 级；前卫战列舰中央偏北。
       {
         name: "yamato",
-        pos: [101, 88],
+        pos: [95, 88],
         rotation: 315,
         belongPlayer: "CA"
       },
       // Kongo：现有同名资源；前卫战列舰中央偏南。
       {
         name: "kongo",
-        pos: [101, 96],
+        pos: [95, 96],
         rotation: 315,
         belongPlayer: "CA"
       },
       // Haruna -> kongo：同属 Kongo 级；前卫战列舰南翼。
       {
         name: "kongo",
-        pos: [101, 104],
+        pos: [95, 104],
         rotation: 315,
         belongPlayer: "CA"
       },

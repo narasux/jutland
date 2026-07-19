@@ -57,7 +57,7 @@ func New() *Game {
 	config.G.Language = string(i18n.SetLanguage(config.G.Language))
 	emptyUIRoot := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
 	g := &Game{
-		mode:               GameModeStart,
+		mode:               GameModeMenuSelect,
 		drawer:             NewDrawer(),
 		player:             audio.NewPlayer(audio.Context),
 		objStates:          nil,
@@ -91,16 +91,12 @@ func (g *Game) Update() error {
 	}
 
 	switch g.mode {
-	case GameModeStart:
-		return g.handleGameStart()
 	case GameModeMenuSelect:
 		return g.handleMenuSelect()
 	case GameModeMissionSelect:
 		return g.handleMissionSelect()
 	case GameModeMissionLoading:
 		return g.handleMissionLoading()
-	case GameModeMissionStart:
-		return g.handleMissionStart()
 	case GameModeMissionRunning:
 		return g.handleMissionRunning()
 	case GameModeMissionSuccess:
@@ -124,9 +120,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	defer recoverAndLogThenExit()
 
 	switch g.mode {
-	case GameModeStart:
-		g.drawer.drawBackground(screen, bgImg.GameStart)
-		g.drawer.drawGameTitle(screen)
 	case GameModeMenuSelect:
 		g.objStates.AutoUpdateMenuButtonStates(screen)
 		g.drawer.drawBackground(screen, bgImg.GameMenu)
@@ -137,12 +130,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, i18n.Text(i18n.MsgLoading))
 		g.objStates.LoadingInterface.Ready = true
-	case GameModeMissionStart:
-		g.missionMgr.DrawPreview(screen)
-		g.drawer.drawMissionReady(screen)
-		g.objStates.LoadingInterface.MissionStartDrawn = true
 	case GameModeMissionRunning:
 		g.missionMgr.Draw(screen)
+		g.objStates.LoadingInterface.MissionRunningDrawn = true
 	case GameModeMissionSuccess:
 		g.drawer.drawBackground(screen, bgImg.MissionSuccess)
 		g.drawer.drawMissionResult(screen, i18n.Text(i18n.MsgMissionSuccess), colorx.Green)
@@ -230,6 +220,7 @@ func (g *Game) initMenuButtons() {
 	}
 
 	g.objStates.MenuButton = &menuButtonStates{
+		BaseFontSize: btnFontSize,
 		MissionSelect: &menuButton{
 			Text:     i18n.Text(i18n.MsgMenuMissionSelect),
 			FontSize: btnFontSize,
@@ -259,18 +250,6 @@ func (g *Game) initMenuButtons() {
 			Mode:     GameModeEnd,
 		},
 	}
-}
-
-// 游戏开始
-func (g *Game) handleGameStart() error {
-	// 播放游戏封面的 BGM
-	g.player.PlayLazy(audioRes.NewGameStartBackground)
-	// 任意下一按键触发后，切换模式，关闭 BGM
-	if isAnyNextInput() {
-		g.mode = GameModeMenuSelect
-		g.player.Close()
-	}
-	return nil
 }
 
 // 菜单选择

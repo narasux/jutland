@@ -125,23 +125,7 @@ func (g *Game) handleMissionLoading() error {
 	if !g.missionMgr.WarmupMapBlocks() {
 		return nil
 	}
-	g.mode = GameModeMissionStart
-	return nil
-}
-
-// 任务开始
-func (g *Game) handleMissionStart() error {
-	g.missionMgr.WarmupMapBlocks()
-	if g.objStates.LoadingInterface.MissionStartDrawn &&
-		!g.objStates.LoadingInterface.LoadedAudioPlayed {
-		audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
-		g.objStates.LoadingInterface.LoadedAudioPlayed = true
-	}
-	if isAnyNextInput() {
-		g.mode = GameModeMissionRunning
-		// TODO 支持关卡内 BGM
-		// g.player.Close()
-	}
+	g.mode = GameModeMissionRunning
 	return nil
 }
 
@@ -155,6 +139,12 @@ func (g *Game) startMissionLoading() {
 
 // 任务运行
 func (g *Game) handleMissionRunning() error {
+	// 等关卡至少实际绘制一帧后再播放提示音，避免声音先于关卡画面出现。
+	if g.objStates.LoadingInterface.MissionRunningDrawn &&
+		!g.objStates.LoadingInterface.LoadedAudioPlayed {
+		audio.PlayAudioToEnd(audioRes.NewMissionLoaded())
+		g.objStates.LoadingInterface.LoadedAudioPlayed = true
+	}
 	status, err := g.missionMgr.Update()
 	if err != nil {
 		log.Fatal("failed to update mission: ", err)

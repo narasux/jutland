@@ -12021,7 +12021,7 @@
     type: "battleship",
     typeAbbr: "BB",
     year: 1941,
-    totalHP: 35929,
+    totalHP: 35737,
     horizontalDamageReduction: 0.4,
     verticalDamageReduction: 0.2,
     maxSpeed: 21,

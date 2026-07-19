@@ -244,19 +244,13 @@ func (i *ShipMovePath) genPath(misState *state.MissionState) {
 		i.status = Executing
 		return
 	}
-	i.path = []objPos.MapPos{i.curPos}
+	// 寻路期间战舰会继续向新目标转向、移动；命令下达时的位置已经在身后，
+	// 不能再作为航点，否则大地图寻路较慢时战舰会折返并在近距离原地掉头。
+	i.path = make([]objPos.MapPos, 0, len(points)-1)
 	for _, p := range points[1 : len(points)-1] {
 		i.path = append(i.path, objPos.New(p.X, p.Y))
 	}
 	i.path = append(i.path, i.targetPos)
-
-	// 如果战舰仍然存在，检查路径起始点是否与战舰当前实际位置重合或过近
-	// 如果是则跳过起始点，避免 MoveTo 因"已到达"而将速度归零
-	if ship, ok := misState.Arena.Ships[i.shipUid]; ok {
-		if ship.CurPos.Near(i.path[0], 0.6) && len(i.path) > 1 {
-			i.path = i.path[1:]
-		}
-	}
 
 	i.status = Ready
 }

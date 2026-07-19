@@ -51,13 +51,13 @@ func TestCycleMissionWrapsWithinGivenCategory(t *testing.T) {
 
 func TestStartMissionLoadingResetsPreviousMission(t *testing.T) {
 	g := &Game{
-		mode:       GameModeMissionStart,
+		mode:       GameModeMissionRunning,
 		missionMgr: &manager.MissionManager{},
 		player:     &audio.Player{},
 		objStates: &objStates{LoadingInterface: &loadingInterface{
-			Ready:             true,
-			MissionStartDrawn: true,
-			LoadedAudioPlayed: true,
+			Ready:               true,
+			MissionRunningDrawn: true,
+			LoadedAudioPlayed:   true,
 		}},
 	}
 
@@ -66,6 +66,6 @@ func TestStartMissionLoadingResetsPreviousMission(t *testing.T) {
 	require.Equal(t, GameMode(GameModeMissionLoading), g.mode)
 	require.Nil(t, g.missionMgr)
 	require.False(t, g.objStates.LoadingInterface.Ready)
-	require.False(t, g.objStates.LoadingInterface.MissionStartDrawn)
+	require.False(t, g.objStates.LoadingInterface.MissionRunningDrawn)
 	require.False(t, g.objStates.LoadingInterface.LoadedAudioPlayed)
 }

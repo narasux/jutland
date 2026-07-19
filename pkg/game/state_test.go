@@ -14,6 +14,7 @@ func TestAutoUpdateMenuButtonStatesDoesNotOverlapEnglishText(t *testing.T) {
 	for _, screenWidth := range []int{2048, 1024} {
 		t.Run(fmt.Sprintf("width_%d", screenWidth), func(t *testing.T) {
 			buttons := &menuButtonStates{
+				BaseFontSize:  menuFontSize,
 				MissionSelect: &menuButton{Text: "Mission Select", Font: font.JetbrainsMono},
 				Collection:    &menuButton{Text: "Collection", Font: font.JetbrainsMono},
 				GameSetting:   &menuButton{Text: "Settings", Font: font.JetbrainsMono},
@@ -43,6 +44,7 @@ func TestAutoUpdateMenuButtonStatesDoesNotOverlapEnglishText(t *testing.T) {
 
 func TestAutoUpdateMenuButtonStatesKeepsClearGapOnWideScreen(t *testing.T) {
 	buttons := &menuButtonStates{
+		BaseFontSize:  menuFontSize,
 		MissionSelect: &menuButton{Text: "Mission Select", Font: font.OpenSans},
 		Collection:    &menuButton{Text: "Collection", Font: font.OpenSans},
 		GameSetting:   &menuButton{Text: "Settings", Font: font.OpenSans},
@@ -61,4 +63,21 @@ func TestAutoUpdateMenuButtonStatesKeepsClearGapOnWideScreen(t *testing.T) {
 		gap := ordered[idx].PosX - ordered[idx-1].PosX - ordered[idx-1].Width
 		require.GreaterOrEqual(t, gap, menuMinimumGap)
 	}
+}
+
+func TestAutoUpdateMenuButtonStatesRestoresBaseFontSizeAfterResize(t *testing.T) {
+	buttons := &menuButtonStates{
+		BaseFontSize:  50,
+		MissionSelect: &menuButton{Text: "任务选择", Font: font.Hang},
+		Collection:    &menuButton{Text: "游戏图鉴", Font: font.Hang},
+		GameSetting:   &menuButton{Text: "游戏设置", Font: font.Hang},
+		ExitGame:      &menuButton{Text: "退出游戏", Font: font.Hang},
+	}
+	states := &objStates{MenuButton: buttons}
+
+	states.AutoUpdateMenuButtonStates(ebiten.NewImage(320, 200))
+	require.Less(t, buttons.MissionSelect.FontSize, buttons.BaseFontSize)
+
+	states.AutoUpdateMenuButtonStates(ebiten.NewImage(2048, 1280))
+	require.InDelta(t, buttons.BaseFontSize, buttons.MissionSelect.FontSize, 0.001)
 }
