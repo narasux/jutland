@@ -20,6 +20,10 @@ other = "作戦成功！"
 other = "作戦失敗..."
 [MissionStart]
 other = "作戦開始"
+[MissionCategoryClassic]
+other = "クラシック"
+[MissionCategoryTest]
+other = "テスト"
 [Back]
 other = "戻る"
 [MissionStats]

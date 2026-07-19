@@ -15,6 +15,8 @@ const (
 	MsgMissionSuccess            MessageID = "MissionSuccess"
 	MsgMissionFailed             MessageID = "MissionFailed"
 	MsgMissionStart              MessageID = "MissionStart"
+	MsgMissionCategoryClassic    MessageID = "MissionCategoryClassic"
+	MsgMissionCategoryTest       MessageID = "MissionCategoryTest"
 	MsgBack                      MessageID = "Back"
 	MsgMissionStats              MessageID = "MissionStats"
 	MsgMissionBattleStats        MessageID = "MissionBattleStats"

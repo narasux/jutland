@@ -20,6 +20,10 @@ other = "任务成功！"
 other = "任务失败..."
 [MissionStart]
 other = "开始任务"
+[MissionCategoryClassic]
+other = "经典"
+[MissionCategoryTest]
+other = "测试"
 [Back]
 other = "返回"
 [MissionStats]

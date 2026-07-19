@@ -20,6 +20,10 @@ other = "Миссия выполнена!"
 other = "Миссия провалена..."
 [MissionStart]
 other = "Начать миссию"
+[MissionCategoryClassic]
+other = "Классика"
+[MissionCategoryTest]
+other = "Тесты"
 [Back]
 other = "Назад"
 [MissionStats]

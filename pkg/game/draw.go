@@ -42,7 +42,12 @@ func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 	screen.DrawImage(bg, opts)
 }
 
-func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, states *objStates) {
+func (d *Drawer) drawMissionSelect(
+	screen *ebiten.Image,
+	curMission string,
+	category metadata.MissionCategory,
+	states *objStates,
+) {
 	screenW, screenH := float64(screen.Bounds().Dx()), float64(screen.Bounds().Dy())
 	abbrMap := d.getAbbrMap(curMission)
 
@@ -200,7 +205,7 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	d.drawText(screen, ">", rightX+4, controlY-12, 36, font.LocalizedUI(font.Hang), rightColor)
 
 	// 关卡索引
-	missions := metadata.AvailableMissions()
+	missions := metadata.AvailableMissions(category)
 	for i, m := range missions {
 		if m == curMission {
 			idxText := fmt.Sprintf("%d / %d", i+1, len(missions))
@@ -254,13 +259,65 @@ func (d *Drawer) drawMissionSelect(screen *ebiten.Image, curMission string, stat
 	)
 	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, backFont, backColor)
 
+	// 左下角任务分类切换
+	categoryFont := font.LocalizedUI(font.Hang)
+	categoryFontSize := 20.0
+	categoryY := startY
+	categoryButtonH := buttonH
+	drawCategoryButton := func(
+		text string,
+		buttonCategory metadata.MissionCategory,
+		x float64,
+	) clickableArea {
+		textW := layout.CalcTextWidth(text, categoryFontSize, categoryFont)
+		button := clickableArea{X: x, Y: categoryY, W: max(92, textW+34), H: categoryButtonH}
+		textColor, buttonBorderColor := bodyClr, subtitleClr
+		if buttonCategory == category {
+			vector.FillRect(
+				screen,
+				float32(button.X), float32(button.Y), float32(button.W), float32(button.H),
+				color.RGBA{R: 68, G: 116, B: 138, A: 90}, false,
+			)
+			textColor, buttonBorderColor = colorx.SkyBlue, colorx.SkyBlue
+		} else if isHoverArea(button) {
+			textColor, buttonBorderColor = colorx.White, colorx.SkyBlue
+		}
+		vector.StrokeRect(
+			screen,
+			float32(button.X), float32(button.Y), float32(button.W), float32(button.H),
+			1, buttonBorderColor, false,
+		)
+		d.drawText(
+			screen,
+			text,
+			button.X+(button.W-textW)/2,
+			button.Y+10,
+			categoryFontSize,
+			categoryFont,
+			textColor,
+		)
+		return button
+	}
+	classicButton := drawCategoryButton(
+		i18n.Text(i18n.MsgMissionCategoryClassic),
+		metadata.MissionCategoryClassic,
+		50,
+	)
+	testButton := drawCategoryButton(
+		i18n.Text(i18n.MsgMissionCategoryTest),
+		metadata.MissionCategoryTest,
+		classicButton.X+classicButton.W+8,
+	)
+
 	// 同步 UI 点击热区（基于实际屏幕尺寸，避免与 ebiten.WindowSize() 不一致）
 	if states != nil {
 		states.MissionSelectUI = &missionSelectUI{
-			LeftArrow:   leftArrow,
-			RightArrow:  rightArrow,
-			StartButton: startBtn,
-			BackButton:  backBtn,
+			LeftArrow:     leftArrow,
+			RightArrow:    rightArrow,
+			StartButton:   startBtn,
+			BackButton:    backBtn,
+			ClassicButton: classicButton,
+			TestButton:    testButton,
 		}
 	}
 }

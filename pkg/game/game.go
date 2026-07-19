@@ -18,6 +18,7 @@ import (
 	"github.com/narasux/jutland/pkg/game/settings"
 	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/manager"
+	"github.com/narasux/jutland/pkg/mission/metadata"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -39,6 +40,8 @@ type Game struct {
 	objStates *objStates
 
 	curMission string
+	// 当前任务分类
+	curMissionCategory metadata.MissionCategory
 	// 任务管理
 	missionMgr *manager.MissionManager
 	// 设置界面
@@ -54,19 +57,21 @@ func New() *Game {
 	config.G.Language = string(i18n.SetLanguage(config.G.Language))
 	emptyUIRoot := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
 	g := &Game{
-		mode:        GameModeStart,
-		drawer:      NewDrawer(),
-		player:      audio.NewPlayer(audio.Context),
-		objStates:   nil,
-		curMission:  "Alpha",
-		missionMgr:  nil,
-		settingUI:   settings.New(),
-		emptyUIRoot: emptyUIRoot,
+		mode:               GameModeStart,
+		drawer:             NewDrawer(),
+		player:             audio.NewPlayer(audio.Context),
+		objStates:          nil,
+		curMission:         "",
+		curMissionCategory: metadata.MissionCategoryClassic,
+		missionMgr:         nil,
+		settingUI:          settings.New(),
+		emptyUIRoot:        emptyUIRoot,
 		ui: &ebitenui.UI{
 			Container:           emptyUIRoot,
 			DisableDefaultFocus: true,
 		},
 	}
+	g.selectMissionCategory(metadata.MissionCategoryClassic)
 	g.collectionUI = collection.New()
 	g.init()
 	return g
@@ -127,7 +132,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, bgImg.GameMenu)
 		g.drawer.drawGameMenu(screen, g.objStates.MenuButton)
 	case GameModeMissionSelect:
-		g.drawer.drawMissionSelect(screen, g.curMission, g.objStates)
+		g.drawer.drawMissionSelect(screen, g.curMission, g.curMissionCategory, g.objStates)
 	case GameModeMissionLoading:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, i18n.Text(i18n.MsgLoading))

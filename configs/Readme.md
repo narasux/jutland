@@ -626,6 +626,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   {
     // 任务关卡名称（不可重复）
     name: "default",
+    // 任务分类：classic（经典）或 test（测试）；缺省时按 classic 处理
+    category: "classic",
+    // 分类内显示顺序沿用本数组中的书写顺序
     // 展示用名称
     displayName: "默认",
     // 英文展示用名称；英文界面使用

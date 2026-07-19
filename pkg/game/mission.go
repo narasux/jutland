@@ -16,40 +16,54 @@ import (
 
 // 任务选择
 func (g *Game) handleMissionSelect() error {
-	missions := metadata.AvailableMissions()
-	curIndex := lo.IndexOf(missions, g.curMission)
+	if inpututil.IsKeyJustPressed(ebiten.KeyTab) {
+		g.selectMissionCategory(otherMissionCategory(g.curMissionCategory))
+		return nil
+	}
 
 	ui := g.objStates.MissionSelectUI
+	if ui != nil && isMouseButtonLeftJustPressed() {
+		if isHoverArea(ui.ClassicButton) {
+			g.selectMissionCategory(metadata.MissionCategoryClassic)
+			return nil
+		}
+		if isHoverArea(ui.TestButton) {
+			g.selectMissionCategory(metadata.MissionCategoryTest)
+			return nil
+		}
+	}
+
+	missions := metadata.AvailableMissions(g.curMissionCategory)
+	offset := 0
 
 	// 左右方向键选择关卡
 	if inpututil.IsKeyJustPressed(ebiten.KeyArrowLeft) ||
 		inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
-		curIndex--
+		offset--
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyArrowRight) ||
 		inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
-		curIndex++
+		offset++
 	}
 
 	// 鼠标滚轮切换
 	_, wheelY := ebiten.Wheel()
 	if wheelY > 0 {
-		curIndex--
+		offset--
 	} else if wheelY < 0 {
-		curIndex++
+		offset++
 	}
 
 	// 鼠标点击左右箭头
 	if ui != nil {
 		if isHoverArea(ui.LeftArrow) && isMouseButtonLeftJustPressed() {
-			curIndex--
+			offset--
 		}
 		if isHoverArea(ui.RightArrow) && isMouseButtonLeftJustPressed() {
-			curIndex++
+			offset++
 		}
 	}
 
-	curIndex = (curIndex + len(missions)) % len(missions)
-	g.curMission = missions[curIndex]
+	g.curMission = cycleMission(missions, g.curMission, offset)
 
 	// 确定：Enter 键或点击「开始任务」
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
@@ -62,6 +76,39 @@ func (g *Game) handleMissionSelect() error {
 		g.mode = GameModeMenuSelect
 	}
 	return nil
+}
+
+func otherMissionCategory(category metadata.MissionCategory) metadata.MissionCategory {
+	if category == metadata.MissionCategoryTest {
+		return metadata.MissionCategoryClassic
+	}
+	return metadata.MissionCategoryTest
+}
+
+func cycleMission(missions []string, current string, offset int) string {
+	if len(missions) == 0 {
+		return current
+	}
+	index := lo.IndexOf(missions, current)
+	if index < 0 {
+		index = 0
+	}
+	index = (index + offset%len(missions) + len(missions)) % len(missions)
+	return missions[index]
+}
+
+// selectMissionCategory 切换任务分类，并落到该分类的第一关。
+func (g *Game) selectMissionCategory(category metadata.MissionCategory) bool {
+	if category == g.curMissionCategory && g.curMission != "" {
+		return false
+	}
+	missions := metadata.AvailableMissions(category)
+	if len(missions) == 0 {
+		return false
+	}
+	g.curMissionCategory = category
+	g.curMission = missions[0]
+	return true
 }
 
 // 任务加载

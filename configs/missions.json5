@@ -1,6 +1,8 @@
 [
+  // 经典关卡
   {
     name: "PearlHarbor1941",
+    category: "classic",
     displayName: "珍珠港袭击-1941",
     displayNameEn: "Attack on Pearl Harbor - 1941",
     displayNameRu: "Нападение на Пёрл-Харбор — 1941",
@@ -488,7 +490,369 @@
     ],
   },
   {
-    name: "Alpha",
+    name: "ManilaBay1941",
+    category: "classic",
+    displayName: "马尼拉湾防卫战-1941",
+    displayNameEn: "Defense of Manila Bay - 1941",
+    displayNameRu: "Оборона Манильского залива — 1941",
+    displayNameJa: "マニラ湾防衛戦―1941年",
+    initFunds: 0,
+    initCameraPos: [54, 67],
+    mapName: "manila",
+    maxShipCount: 20,
+    description: "1941 年 12 月 8 日 04:00，马尼拉收到太平洋战争爆发的警报。本关是一场明确的架空推演：假设未按战前计划南撤的美国亚洲舰队主力仍留在马尼拉湾，并在近海迎击由日本第三舰队与轻型航母兵力组成的突入编队。指挥休斯敦、马布尔黑德、兰利及驱逐舰防守湾口。双方编成、距离与日军进入湾内均为玩法压缩；缺失舰船使用同级或同国同舰种近似资源替代。",
+    descriptionEn: "At 04:00 on 8 December 1941, Manila receives warning that war has begun across the Pacific. This scenario is explicitly alternate history: the main striking force of the U.S. Asiatic Fleet has not dispersed south as planned and instead meets a compressed Japanese Third Fleet and light-carrier force inside Manila Bay. Command Houston, Marblehead, Langley, and their destroyers in defense of the bay approaches. The opposing order of battle, distances, and Japanese entry into the bay are gameplay abstractions; missing ships use same-class or same-nation, same-category substitutes.",
+    descriptionRu: "8 декабря 1941 года в 04:00 Манила получает известие о начале войны на Тихом океане. Этот сценарий является явно обозначенной альтернативной историей: основные ударные силы Азиатского флота США не ушли на юг по довоенному плану, а встречают в Манильском заливе условно сведённые силы японского Третьего флота и лёгкого авианосца. Командуйте «Хьюстоном», «Марблхедом», «Лэнгли» и эсминцами, защищая подступы к заливу. Состав сторон, дистанции и вход японских кораблей в залив упрощены для игры; отсутствующие корабли заменены однотипными или близкими кораблями той же страны и категории.",
+    descriptionJa: "1941年12月8日04時00分、マニラに太平洋戦争勃発の警報が届く。本シナリオは明確な仮想戦であり、戦前計画どおり南方へ分散しなかった米アジア艦隊の主力が、マニラ湾内へ進入する日本第三艦隊と軽空母兵力の圧縮編成を迎撃する。ヒューストン、マーブルヘッド、ラングレーと駆逐艦を指揮し、湾口を防衛せよ。両軍の編成、距離、日本艦隊の湾内進入はゲーム上の近似であり、未収録艦は同型艦または同国・同艦種の近似艦で代用している。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // 坐标按 128x192 manila.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 地图逻辑范围为 16.384x24.576km；原图无地理控制点，双方在开阔水域的距离和队形均为玩法近似。
+      // 两军最近初始间距约 50 格（约 6.4km），为双方航空侦察、展开队形和远程交火预留空间。
+      // 时间锚点为 1941-12-08 04:00（马尼拉时间）；美军主力留湾、日军突入湾内均为明确的架空设定。
+
+      // === 美军：马尼拉湾防卫编队（东南侧，向西北） ===
+      // Houston CA-30 -> northampton：同属 Northampton 级；防卫线中央，舰首约向西北。
+      {
+        name: "northampton",
+        pos: [48, 64],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Marblehead CL-12 -> atlanta：Omaha 级未收录；以同国同巡洋舰类别且长度接近的资源替代。
+      {
+        name: "atlanta",
+        pos: [54, 65],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Langley AV-3 -> langley：同名资源表现其早期航母形态；防卫线后方提供航空支援。
+      {
+        name: "langley",
+        pos: [61, 64],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Paul Jones DD-230 -> dewey：Clemson 级未收录；以同国同舰种、长度接近的 Farragut 级资源替代。
+      {
+        name: "dewey",
+        pos: [42, 64],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Whipple DD-217 -> dewey：沿用 Clemson 级替代策略；北侧前卫。
+      {
+        name: "dewey",
+        pos: [44, 68],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Alden DD-211 -> dewey：沿用 Clemson 级替代策略；中央前卫。
+      {
+        name: "dewey",
+        pos: [49, 69],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // John D. Edwards DD-216 -> dewey：沿用 Clemson 级替代策略；中央前卫。
+      {
+        name: "dewey",
+        pos: [54, 70],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Edsall DD-219 -> dewey：沿用 Clemson 级替代策略；中央后卫。
+      {
+        name: "dewey",
+        pos: [59, 69],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Stewart DD-224 -> dewey：沿用 Clemson 级替代策略；南侧后卫。
+      {
+        name: "dewey",
+        pos: [64, 68],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+      // Parrott DD-218 -> dewey：沿用 Clemson 级替代策略；防卫线南翼。
+      {
+        name: "dewey",
+        pos: [68, 65],
+        rotation: 315,
+        belongPlayer: "HA"
+      },
+
+      // === 日军：架空突入编队（西北侧，向东南） ===
+      // Ryujo：同名资源；将史实中支援菲律宾南部作战的轻型航母压缩到本关战区。
+      {
+        name: "ryujo",
+        pos: [20, 12],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Ashigara -> haguro：同属 Myoko 级；第三舰队重巡洋舰旗舰的同级替代。
+      {
+        name: "haguro",
+        pos: [30, 10],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Haguro：同名资源；重巡洋舰线南侧。
+      {
+        name: "haguro",
+        pos: [35, 12],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Natori -> shintsu：Nagara 级未收录；以同国同轻巡洋舰类别、尺寸接近的 Sendai 级资源替代。
+      {
+        name: "shintsu",
+        pos: [40, 10],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Nagara -> shintsu：沿用同国同轻巡洋舰替代策略；巡洋舰线南翼。
+      {
+        name: "shintsu",
+        pos: [45, 12],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // 架空驱逐舰前卫 -> asashio：以 1941 年已服役的同国同舰种资源代表突入编队屏卫。
+      {
+        name: "asashio",
+        pos: [15, 8],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // 架空驱逐舰前卫 -> asashio：北侧外圈屏卫。
+      {
+        name: "asashio",
+        pos: [25, 7],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // 架空驱逐舰前卫 -> asashio：航母南侧屏卫。
+      {
+        name: "asashio",
+        pos: [15, 16],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // 架空驱逐舰前卫 -> asashio：巡洋舰线南侧屏卫。
+      {
+        name: "asashio",
+        pos: [25, 17],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // 架空驱逐舰前卫 -> asashio：编队北翼警戒。
+      {
+        name: "asashio",
+        pos: [35, 6],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+    ],
+  },
+  {
+    name: "WakeIsland1941",
+    category: "classic",
+    displayName: "威克岛-1941",
+    displayNameEn: "Wake Island - 1941",
+    displayNameRu: "Остров Уэйк — 1941",
+    displayNameJa: "ウェーク島―1941年",
+    initFunds: 5500,
+    initCameraPos: [28, 30],
+    mapName: "wake",
+    maxShipCount: 30,
+    description: "1941 年 12 月 8 日，日本联合舰队在偷袭珍珠港的同时发动了对威克岛的进攻，威克岛是美军在太平洋中部的重要前哨，素有「太平洋的直布罗陀」之称岛上驻有约 450 名海军陆战队员与六门 5 英寸岸防炮，战略地位极为重要日军以金龙丸号特设巡洋舰率两艘驱逐舰先行试探，遭遇美军顽强抵抗，首轮进攻受挫12 月 23 日，日军增派飞龙、苍龙号航母及重型水面舰艇发动第二轮猛攻，威克岛最终沦陷本关设定为盟军航母援军提前抵达的架空剧本——约克城号与南达科他号率领特混舰队在威克岛以西海域布阵，与日军南下主力展开正面交锋太平洋战争的第一场航母对决，将在北太平洋的环礁海域上演。",
+    descriptionEn: "On 8 December 1941, Japan attacked Wake Island while the strike on Pearl Harbor was still unfolding. The atoll was a vital American outpost in the central Pacific, defended by Marines and coastal guns. This scenario imagines Allied carrier reinforcements arriving before the second Japanese assault. Yorktown and South Dakota form a task force west of Wake to meet Hiryū, Sōryū, and the advancing Japanese surface force.",
+    descriptionRu: "8 декабря 1941 года, пока продолжался налёт на Пёрл-Харбор, Япония атаковала остров Уэйк. Этот атолл был важным американским опорным пунктом в центральной части Тихого океана, защищённым морской пехотой и береговыми батареями. В данном сценарии авианосное подкрепление союзников прибывает до второго японского штурма. «Йорктаун» и «Саут Дакота» формируют соединение к западу от Уэйка, чтобы встретить «Хирю», «Сорю» и наступающие японские надводные силы.",
+    descriptionJa: "1941年12月8日、真珠湾攻撃が続く中、日本軍はウェーク島への攻撃を開始した。この環礁は中部太平洋におけるアメリカの重要拠点であり、海兵隊と沿岸砲台が守備していた。本作戦では日本軍の第二次攻撃より先に、連合軍の空母増援が到着する。ヨークタウンとサウスダコタを中核とする任務部隊を率い、飛龍、蒼龍および接近する日本水上部隊を迎撃せよ。",
+    initReinforcePoints: [
+      {
+        pos: [1, 20],
+        rotation: 90,
+        rallyPos: [25, 35],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "yorktown",
+          "lowa",
+          "south_dakota",
+          "astoria",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [1, 55],
+        rotation: 90,
+        rallyPos: [30, 50],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "astoria",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [1, 85],
+        rotation: 90,
+        rallyPos: [30, 50],
+        belongPlayer: "HA",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "astoria",
+          "atlanta",
+          "porter",
+          "PT_791",
+          "liberty",
+        ],
+      },
+      {
+        pos: [125, 20],
+        rotation: 270,
+        rallyPos: [90, 50],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
+          "kongo",
+          "mogami",
+          "yugumo",
+        ],
+      },
+      {
+        pos: [125, 90],
+        rotation: 270,
+        rallyPos: [100, 60],
+        belongPlayer: "CA",
+        maxOncomingShip: 5,
+        providedShipNames: [
+          "kaga",
+          "suzuya",
+          "yubari",
+          "yugumo",
+          "T_14"
+        ],
+      }
+    ],
+    initOilPlatforms: [
+      {
+        pos: [10, 60],
+        radius: 3,
+        yield: 10
+      },
+      {
+        pos: [70, 64],
+        radius: 4,
+        yield: 25
+      }
+    ],
+    initShips: [
+      {
+        name: "yorktown",
+        pos: [28, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "yorktown",
+        pos: [29, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_dakota",
+        pos: [31, 35],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_dakota",
+        pos: [32, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [29, 31],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [30, 41],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [31, 30],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [31, 42],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kaga",
+        pos: [109, 45],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kongo",
+        pos: [105, 46],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kongo",
+        pos: [107, 44],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "haguro",
+        pos: [103, 42],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "haguro",
+        pos: [105, 48],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yugumo",
+        pos: [104, 44],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yugumo",
+        pos: [101, 46],
+        rotation: 270,
+        belongPlayer: "CA"
+      }
+    ],
+  },
+  {
+    name: "DarwinHarbour1942",
+    category: "classic",
     displayName: "达尔文港-1942",
     displayNameEn: "Darwin Harbour - 1942",
     displayNameRu: "Порт-Дарвин — 1942",
@@ -784,199 +1148,836 @@
     ],
   },
   {
-    name: "Beta",
-    displayName: "威克岛-1941",
-    displayNameEn: "Wake Island - 1941",
-    displayNameRu: "Остров Уэйк — 1941",
-    displayNameJa: "ウェーク島―1941年",
-    initFunds: 5500,
-    initCameraPos: [28, 30],
-    mapName: "wake",
-    maxShipCount: 30,
-    description: "1941 年 12 月 8 日，日本联合舰队在偷袭珍珠港的同时发动了对威克岛的进攻，威克岛是美军在太平洋中部的重要前哨，素有「太平洋的直布罗陀」之称岛上驻有约 450 名海军陆战队员与六门 5 英寸岸防炮，战略地位极为重要日军以金龙丸号特设巡洋舰率两艘驱逐舰先行试探，遭遇美军顽强抵抗，首轮进攻受挫12 月 23 日，日军增派飞龙、苍龙号航母及重型水面舰艇发动第二轮猛攻，威克岛最终沦陷本关设定为盟军航母援军提前抵达的架空剧本——约克城号与南达科他号率领特混舰队在威克岛以西海域布阵，与日军南下主力展开正面交锋太平洋战争的第一场航母对决，将在北太平洋的环礁海域上演。",
-    descriptionEn: "On 8 December 1941, Japan attacked Wake Island while the strike on Pearl Harbor was still unfolding. The atoll was a vital American outpost in the central Pacific, defended by Marines and coastal guns. This scenario imagines Allied carrier reinforcements arriving before the second Japanese assault. Yorktown and South Dakota form a task force west of Wake to meet Hiryū, Sōryū, and the advancing Japanese surface force.",
-    descriptionRu: "8 декабря 1941 года, пока продолжался налёт на Пёрл-Харбор, Япония атаковала остров Уэйк. Этот атолл был важным американским опорным пунктом в центральной части Тихого океана, защищённым морской пехотой и береговыми батареями. В данном сценарии авианосное подкрепление союзников прибывает до второго японского штурма. «Йорктаун» и «Саут Дакота» формируют соединение к западу от Уэйка, чтобы встретить «Хирю», «Сорю» и наступающие японские надводные силы.",
-    descriptionJa: "1941年12月8日、真珠湾攻撃が続く中、日本軍はウェーク島への攻撃を開始した。この環礁は中部太平洋におけるアメリカの重要拠点であり、海兵隊と沿岸砲台が守備していた。本作戦では日本軍の第二次攻撃より先に、連合軍の空母増援が到着する。ヨークタウンとサウスダコタを中核とする任務部隊を率い、飛龍、蒼龍および接近する日本水上部隊を迎撃せよ。",
-    initReinforcePoints: [
-      {
-        pos: [1, 20],
-        rotation: 90,
-        rallyPos: [25, 35],
-        belongPlayer: "HA",
-        maxOncomingShip: 10,
-        providedShipNames: [
-          "yorktown",
-          "lowa",
-          "south_dakota",
-          "astoria",
-          "atlanta",
-          "porter",
-          "PT_791",
-          "liberty",
-        ],
-      },
-      {
-        pos: [1, 55],
-        rotation: 90,
-        rallyPos: [30, 50],
-        belongPlayer: "HA",
-        maxOncomingShip: 10,
-        providedShipNames: [
-          "astoria",
-          "atlanta",
-          "porter",
-          "PT_791",
-          "liberty",
-        ],
-      },
-      {
-        pos: [1, 85],
-        rotation: 90,
-        rallyPos: [30, 50],
-        belongPlayer: "HA",
-        maxOncomingShip: 10,
-        providedShipNames: [
-          "astoria",
-          "atlanta",
-          "porter",
-          "PT_791",
-          "liberty",
-        ],
-      },
-      {
-        pos: [125, 20],
-        rotation: 270,
-        rallyPos: [90, 50],
-        belongPlayer: "CA",
-        maxOncomingShip: 5,
-        providedShipNames: [
-          "kongo",
-          "mogami",
-          "yugumo",
-        ],
-      },
-      {
-        pos: [125, 90],
-        rotation: 270,
-        rallyPos: [100, 60],
-        belongPlayer: "CA",
-        maxOncomingShip: 5,
-        providedShipNames: [
-          "kaga",
-          "suzuya",
-          "yubari",
-          "yugumo",
-          "T_14"
-        ],
-      }
-    ],
-    initOilPlatforms: [
-      {
-        pos: [10, 60],
-        radius: 3,
-        yield: 10
-      },
-      {
-        pos: [70, 64],
-        radius: 4,
-        yield: 25
-      }
-    ],
+    name: "Midway1942",
+    category: "classic",
+    displayName: "中途岛之战-1942",
+    displayNameEn: "Battle of Midway - 1942",
+    displayNameRu: "Битва за Мидуэй — 1942",
+    displayNameJa: "ミッドウェー海戦―1942年",
+    initFunds: 0,
+    initCameraPos: [188, 81],
+    mapName: "midway",
+    maxShipCount: 47,
+    description: "1942 年 6 月 4 日 05:45，中途岛的 PBY 巡逻机在西北 180 海里发现日本第一航空舰队；东北方向，美军第 16 与第 17 特混舰队已进入伏击阵位。本关以此为时间锚点，将数百海里的航母战压缩到 256×256 网格：指挥约克城、企业和大黄蜂三艘航母及其护航舰队，迎战赤城、加贺、苍龙、飞龙及近接护航舰队。现有资源缺失时采用同级舰或同类别近似舰替代；双方距离和队形间隔为可玩性近似，不代表史实舰位。",
+    descriptionEn: "At 05:45 on 4 June 1942, a Midway PBY sighted the Japanese First Air Fleet 180 nautical miles to the northwest, while U.S. Task Forces 16 and 17 waited to the northeast. This scenario uses that moment as its historical anchor and compresses a carrier battle fought across hundreds of miles into a 256×256 grid. Command Yorktown, Enterprise, Hornet, and their screens against Akagi, Kaga, Sōryū, Hiryū, and their close escort. Missing assets use same-class or same-category substitutes; distances and formation spacing are gameplay approximations, not exact historical positions.",
+    descriptionRu: "4 июня 1942 года в 05:45 патрульный самолёт PBY с Мидуэя обнаружил Первый воздушный флот Японии в 180 морских милях к северо-западу, а американские оперативные соединения 16 и 17 ожидали к северо-востоку. Сценарий использует этот момент как историческую точку отсчёта и сжимает авианосное сражение, проходившее на сотнях миль, до сетки 256×256. Командуйте «Йорктауном», «Энтерпрайзом», «Хорнетом» и их охранением против «Акаги», «Каги», «Сорю», «Хирю» и ближнего эскорта. Отсутствующие корабли заменены однотипными или близкими по категории; дистанции и интервалы построения являются игровым приближением.",
+    descriptionJa: "1942年6月4日05時45分、ミッドウェーのPBY哨戒機は北西180海里に日本海軍第一航空艦隊を発見し、北東には米第16・第17任務部隊が待機していた。本シナリオはこの時刻を歴史上の基準とし、数百海里に及ぶ空母戦を256×256グリッドへ圧縮する。ヨークタウン、エンタープライズ、ホーネットと護衛部隊を指揮し、赤城、加賀、蒼龍、飛龍および近接護衛部隊を迎撃せよ。未収録艦は同型艦または同艦種の近似艦で代用し、両軍の距離と隊形間隔は史実の正確な艦位ではなくゲーム上の近似である。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
     initShips: [
+      // 坐标按 256x256 midway.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 时间锚点为 1942-06-04 05:45（中途岛时区）；美军位于东北、日军位于西北。
+      // 史实舰队相距数百海里，本关压缩到 32.768km 逻辑地图；编队间距和美军 225° 舰首方向为可玩性近似。
+      // 为增加开场侦察与航空调度空间，美军整体向东北平移 [5,-10] 格，日军整体向西北平移 [-5,-10] 格，内部队形不变。
+      // 两军最近屏卫间距约 90 格（约 11.5km），最近航母间距约 110 格（约 14.1km）；双方最短航程俯冲轰炸机仍可抵达最近敌方屏卫。
+
+      // === 美军：第 16 特混舰队（东北编队） ===
+      // Enterprise CV-6 -> yorktown：同属 Yorktown 级；第 16 特混舰队内侧，舰首约向西南。
       {
         name: "yorktown",
-        pos: [28, 34],
-        rotation: 90,
+        pos: [187, 76],
+        rotation: 225,
         belongPlayer: "HA"
       },
+      // Hornet CV-8 -> yorktown：同属 Yorktown 级；第 16 特混舰队外侧，舰首约向西南。
       {
         name: "yorktown",
-        pos: [29, 38],
-        rotation: 90,
+        pos: [193, 80],
+        rotation: 225,
         belongPlayer: "HA"
       },
+      // New Orleans CA-32 -> astoria：同属 New Orleans 级；近接巡洋舰屏卫。
       {
-        name: "south_dakota",
-        pos: [31, 35],
-        rotation: 90,
+        name: "astoria",
+        pos: [185, 74],
+        rotation: 225,
         belongPlayer: "HA"
       },
+      // Minneapolis CA-36 -> astoria：同属 New Orleans 级；近接巡洋舰屏卫。
       {
-        name: "south_dakota",
-        pos: [32, 37],
-        rotation: 90,
+        name: "astoria",
+        pos: [189, 72],
+        rotation: 225,
         belongPlayer: "HA"
       },
+      // Vincennes CA-44 -> astoria：同属 New Orleans 级；近接巡洋舰屏卫。
+      {
+        name: "astoria",
+        pos: [193, 74],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Northampton CA-26：现有同名资源；巡洋舰屏卫东侧。
+      {
+        name: "northampton",
+        pos: [197, 78],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Pensacola CA-24：现有同名资源；巡洋舰屏卫东侧。
+      {
+        name: "pensacola",
+        pos: [197, 82],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Atlanta CL-51：现有同名资源；防空巡洋舰位于编队后侧。
       {
         name: "atlanta",
-        pos: [29, 31],
-        rotation: 90,
+        pos: [193, 86],
+        rotation: 225,
         belongPlayer: "HA"
       },
-      {
-        name: "atlanta",
-        pos: [30, 41],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
+      // Phelps DD-360 -> porter：同属 Porter 级；驱逐舰外圈前卫。
       {
         name: "porter",
-        pos: [31, 30],
-        rotation: 90,
+        pos: [185, 70],
+        rotation: 225,
         belongPlayer: "HA"
       },
+      // Worden DD-352 -> dewey：同属 Farragut 级；驱逐舰外圈前卫。
       {
-        name: "porter",
-        pos: [31, 42],
-        rotation: 90,
+        name: "dewey",
+        pos: [189, 69],
+        rotation: 225,
         belongPlayer: "HA"
       },
+      // Monaghan DD-354 -> dewey：同属 Farragut 级；驱逐舰外圈前卫。
+      {
+        name: "dewey",
+        pos: [193, 70],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Aylwin DD-355 -> dewey：同属 Farragut 级；驱逐舰外圈前卫。
+      {
+        name: "dewey",
+        pos: [197, 72],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Balch DD-363 -> maury：Mahan 级未收录；以近缘 Gridley 级替代。
+      {
+        name: "maury",
+        pos: [201, 75],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Conyngham DD-371 -> maury：Mahan 级未收录；以近缘 Gridley 级替代。
+      {
+        name: "maury",
+        pos: [201, 80],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Benham DD-397 -> maury：Benham 级未收录；以同类别、近似尺寸的 Gridley 级替代。
+      {
+        name: "maury",
+        pos: [201, 85],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Ellet DD-398 -> maury：同属 Benham 级替代策略；驱逐舰外圈后卫。
+      {
+        name: "maury",
+        pos: [197, 89],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Maury DD-401：现有同名资源；驱逐舰外圈后卫。
+      {
+        name: "maury",
+        pos: [193, 92],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+
+      // === 美军：第 17 特混舰队（第 16 特混舰队西南约 10 海里，游戏内并入东北编队） ===
+      // Yorktown CV-5：现有同名资源；第 17 特混舰队中心。
+      {
+        name: "yorktown",
+        pos: [181, 86],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Astoria CA-34：现有同名资源；Yorktown 近接屏卫。
+      {
+        name: "astoria",
+        pos: [177, 84],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Portland CA-33：现有同名资源；Yorktown 近接屏卫。
+      {
+        name: "portland",
+        pos: [179, 90],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Hammann DD-412：现有同名资源；第 17 特混舰队驱逐舰屏卫。
+      {
+        name: "hammann",
+        pos: [177, 79],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Hughes DD-410 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
+      {
+        name: "hammann",
+        pos: [173, 82],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Morris DD-417 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
+      {
+        name: "hammann",
+        pos: [173, 87],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Anderson DD-411 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
+      {
+        name: "hammann",
+        pos: [175, 92],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Russell DD-414 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
+      {
+        name: "hammann",
+        pos: [179, 95],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+      // Gwin DD-433 -> hammann：Gleaves 级未收录；以同类别、长度接近的 Sims 级替代。
+      {
+        name: "hammann",
+        pos: [184, 96],
+        rotation: 225,
+        belongPlayer: "HA"
+      },
+
+      // === 日军：第一航空舰队第一机动部队（西北编队） ===
+      // Akagi：现有同名资源；第一航空战队旗舰，舰首 135° 指向中途岛。
+      {
+        name: "akagi",
+        pos: [63, 78],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Kaga：现有同名资源；第一航空战队，舰首 135°。
       {
         name: "kaga",
-        pos: [109, 45],
-        rotation: 270,
+        pos: [71, 78],
+        rotation: 135,
         belongPlayer: "CA"
       },
+      // Soryu：现有同名资源；第二航空战队，舰首 135°。
+      {
+        name: "soryu",
+        pos: [63, 87],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Hiryu：现有同名资源；第二航空战队，舰首 135°。
+      {
+        name: "hiryu",
+        pos: [71, 87],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Haruna -> kongo：同属 Kongo 级；航母编队东侧前卫。
       {
         name: "kongo",
-        pos: [105, 46],
-        rotation: 270,
+        pos: [59, 81],
+        rotation: 135,
         belongPlayer: "CA"
       },
+      // Kirishima -> kongo：同属 Kongo 级；航母编队后卫。
       {
         name: "kongo",
-        pos: [107, 44],
-        rotation: 270,
+        pos: [75, 83],
+        rotation: 135,
         belongPlayer: "CA"
       },
+      // Tone：现有同名资源；航母编队西侧侦察巡洋舰。
       {
-        name: "haguro",
-        pos: [103, 42],
-        rotation: 270,
+        name: "tone",
+        pos: [59, 90],
+        rotation: 135,
         belongPlayer: "CA"
       },
+      // Chikuma -> tone：同属 Tone 级；航母编队后侧侦察巡洋舰。
       {
-        name: "haguro",
-        pos: [105, 48],
-        rotation: 270,
+        name: "tone",
+        pos: [75, 91],
+        rotation: 135,
         belongPlayer: "CA"
       },
+      // Nagara -> abukuma：同属 Nagara 级；第十驱逐战队旗舰。
+      {
+        name: "abukuma",
+        pos: [67, 93],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Kazagumo -> yugumo：同属 Yugumo 级；驱逐舰外圈前卫。
       {
         name: "yugumo",
-        pos: [104, 44],
-        rotation: 270,
+        pos: [55, 74],
+        rotation: 135,
         belongPlayer: "CA"
       },
+      // Yugumo：现有同名资源；驱逐舰外圈前卫。
       {
         name: "yugumo",
-        pos: [101, 46],
-        rotation: 270,
+        pos: [61, 71],
+        rotation: 135,
         belongPlayer: "CA"
-      }
+      },
+      // Makigumo -> yugumo：同属 Yugumo 级；驱逐舰外圈前卫。
+      {
+        name: "yugumo",
+        pos: [67, 70],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Akigumo -> yukikaze：同属 Kagero 级；驱逐舰外圈前卫。
+      {
+        name: "yukikaze",
+        pos: [73, 71],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Nowaki -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
+      {
+        name: "yukikaze",
+        pos: [79, 74],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Arashi -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
+      {
+        name: "yukikaze",
+        pos: [83, 79],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Hagikaze -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
+      {
+        name: "yukikaze",
+        pos: [83, 85],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Maikaze -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
+      {
+        name: "yukikaze",
+        pos: [81, 91],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Urakaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
+      {
+        name: "yukikaze",
+        pos: [77, 96],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Isokaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
+      {
+        name: "yukikaze",
+        pos: [71, 98],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Tanikaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
+      {
+        name: "yukikaze",
+        pos: [65, 98],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      // Hamakaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
+      {
+        name: "yukikaze",
+        pos: [59, 96],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
     ],
   },
   {
-    name: "Gamma",
+    name: "IslandChainEncounter1942",
+    category: "classic",
+    displayName: "岛链遭遇战-1942",
+    displayNameEn: "Island Chain Encounter - 1942",
+    displayNameRu: "Встречный бой у островной цепи — 1942",
+    displayNameJa: "島嶼群遭遇戦―1942年",
+    initFunds: 0,
+    initCameraPos: [64, 58],
+    mapName: "island_chain",
+    maxShipCount: 15,
+    description: "1942 年 9 月 15 日 16:00（架空时间锚点），美日两支水面舰队在无名岛链的东西水道相遇。本关不是历史复原；地图没有真实地理尺寸锚点，舰队按 128×128 网格（16.384 千米见方）的玩法尺度布置。指挥新墨西哥号、三艘巡洋舰和四艘驱逐舰向东突破，利用岛屿遮蔽火力并击败金刚号水面编队。无增援、无油井，舰名均直接使用现有资源，不代表史实编成。",
+    descriptionEn: "At 16:00 on 15 September 1942, in a fictional time frame, U.S. and Japanese surface forces meet in the east-west channel of an unnamed island chain. This is not a historical reconstruction: the fictional map has no real-world scale anchor, so the fleets use the gameplay scale of a 128×128 grid, 16.384 km square. Command New Mexico, three cruisers, and four destroyers eastward, using the islands for cover against Kongo's surface group. There are no reinforcements or oil platforms, and every ship name directly references an existing game asset rather than a historical order of battle.",
+    descriptionRu: "15 сентября 1942 года в 16:00, в рамках вымышленного эпизода, американские и японские надводные силы встречаются в проливе, идущем с запада на восток через безымянную цепь островов. Это не историческая реконструкция: у вымышленной карты нет реального масштабного ориентира, поэтому флотилии размещены в игровом масштабе сетки 128×128, то есть квадрата 16,384 км. Ведите «Нью-Мексико», три крейсера и четыре эсминца на восток, используя острова как укрытие против соединения «Конго». Подкреплений и нефтяных платформ нет; все названия кораблей напрямую ссылаются на имеющиеся игровые ресурсы, а не на исторический боевой состав.",
+    descriptionJa: "1942年9月15日16時00分という架空の時刻設定で、米日両軍の水上部隊が無名の島嶼群を東西に抜ける水道で遭遇する。本シナリオは史実の再現ではない。架空地図には実在地形の尺度基準がないため、128×128グリッド、すなわち一辺16.384kmのゲーム上の尺度で艦隊を配置した。ニューメキシコ、巡洋艦3隻、駆逐艦4隻を率いて東進し、島影を利用して金剛の水上部隊を撃破せよ。増援点と油井はなく、艦名はすべて既存ゲーム資源を直接使用しており、史実の編成を示すものではない。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // 坐标按 128×128 island_chain.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 时间锚点为架空的 1942-09-15 16:00；美军从西向东、日军从东向西进入中央水道。
+      // 地图逻辑范围为 16.384km×16.384km；中央岛约 2.688km×3.072km，相当于 14.1×16.2 个 new_mexico 舰长。
+      // 地图没有真实地理尺寸锚点，因此上述比值只用于游戏部署审计，不代表历史比例。
+
+      // === 美军：西侧水面编队，舰首向东 ===
+      // New Mexico：现有资源直接使用；战列线核心。
+      {
+        name: "new_mexico",
+        pos: [18, 58],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Portland：现有资源直接使用；前侧重巡洋舰屏卫。
+      {
+        name: "portland",
+        pos: [14, 54],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Astoria：现有资源直接使用；后侧重巡洋舰屏卫。
+      {
+        name: "astoria",
+        pos: [14, 62],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Atlanta：现有资源直接使用；编队后侧轻巡洋舰。
+      {
+        name: "atlanta",
+        pos: [19, 66],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Porter：现有资源直接使用；北侧驱逐舰前卫。
+      {
+        name: "porter",
+        pos: [8, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Maury：现有资源直接使用；北侧驱逐舰屏卫。
+      {
+        name: "maury",
+        pos: [8, 54],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Dewey：现有资源直接使用；南侧驱逐舰屏卫。
+      {
+        name: "dewey",
+        pos: [8, 60],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // 第二艘 Maury 资源舰：架空编队中的南侧驱逐舰后卫。
+      {
+        name: "maury",
+        pos: [8, 66],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+
+      // === 日军：东侧水面编队，舰首向西 ===
+      // Kongo：现有资源直接使用；战列线核心。
+      {
+        name: "kongo",
+        pos: [110, 58],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // Tone：现有资源直接使用；北侧重巡洋舰屏卫。
+      {
+        name: "tone",
+        pos: [114, 54],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // Abukuma：现有资源直接使用；南侧轻巡洋舰屏卫。
+      {
+        name: "abukuma",
+        pos: [114, 62],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // Asashio：现有资源直接使用；北侧驱逐舰前卫。
+      {
+        name: "asashio",
+        pos: [120, 48],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // Yugumo：现有资源直接使用；北侧驱逐舰屏卫。
+      {
+        name: "yugumo",
+        pos: [120, 54],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // Yukikaze：现有资源直接使用；南侧驱逐舰屏卫。
+      {
+        name: "yukikaze",
+        pos: [120, 60],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+      // 第二艘 Yukikaze 资源舰：架空编队中的南侧驱逐舰后卫。
+      {
+        name: "yukikaze",
+        pos: [120, 66],
+        rotation: 270,
+        belongPlayer: "CA"
+      },
+    ],
+  },
+  {
+    name: "Guam1944",
+    category: "classic",
+    displayName: "关岛外海截击-1944",
+    displayNameEn: "Intercept off Guam - 1944",
+    displayNameRu: "Перехват у Гуама — 1944",
+    displayNameJa: "グアム沖迎撃―1944年",
+    initFunds: 0,
+    initCameraPos: [16, 54],
+    mapName: "guam",
+    maxShipCount: 14,
+    description: "1944 年 6 月 16 日，火奴鲁鲁号巡洋舰、宾夕法尼亚号与爱达荷号战列舰及数艘驱逐舰正在炮击关岛西岸；与此同时，日本机动舰队正驶向马里亚纳。本关以约 13:00 作为游戏快照，从这一史实构造架空分支：一支日军水面分队抢先抵达关岛外海，迫使炮击编队转入近距离海战。地图为西岸艺术化局部，跑道地标的逻辑尺度约为史实的 1.49 倍，舰位、交战距离与编队间隔均为可玩性近似。",
+    descriptionEn: "On 16 June 1944, Honolulu, Pennsylvania, Idaho, and several destroyers were bombarding Guam's west coast while the Japanese Mobile Fleet approached the Marianas. Using about 13:00 as its scenario clock, this mission branches into an alternate engagement: a Japanese surface detachment reaches Guam first and forces the bombardment group into a close-range action. The map is an artistic western-coast sector whose runway landmark is about 1.49 times historical logical scale; positions, engagement distance, and formation spacing are gameplay approximations.",
+    descriptionRu: "16 июня 1944 года крейсер «Гонолулу», линкоры «Пенсильвания» и «Айдахо» и несколько эсминцев обстреливали западный берег Гуама, пока японский Мобильный флот приближался к Марианским островам. Сценарий использует примерно 13:00 как игровую отметку времени и развивает альтернативную ветвь: японский надводный отряд первым выходит к Гуаму и вынуждает группу обстрела принять ближний бой. Карта является художественным фрагментом западного побережья; логический масштаб ориентира-взлётной полосы примерно в 1,49 раза больше исторического, а позиции, дистанция боя и интервалы построения являются игровым приближением.",
+    descriptionJa: "1944年6月16日、巡洋艦ホノルル、戦艦ペンシルベニアとアイダホ、数隻の駆逐艦がグアム西岸を砲撃し、日本の機動部隊はマリアナ諸島へ接近していた。本シナリオは13時頃をゲーム上の時刻基準とし、この史実から分岐して日本水上部隊が先にグアム沖へ到着し、砲撃部隊に近距離海戦を強いる架空展開を描く。マップは西岸を描いた芸術的な局地図で、滑走路の論理尺度は史実のおよそ1.49倍であり、艦位・交戦距離・隊形間隔はゲーム上の近似である。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // 坐标按 128x128 guam.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 时间锚点为 1944-06-16 约 13:00（关卡时钟近似）；美军炮击与日军机动舰队逼近马里亚纳属史实，双方水面交战为架空分支。
+      // 可辨识的 Agana/Tiyan 单跑道在图上约 17.7 格（约 2.27km），对比史实约 1.52km，地图相对舰船约放大 1.49 倍。
+
+      // === 美军：西岸炮击编队，向南转向迎敌 ===
+      // Pennsylvania BB-38：现有同名资源；史实炮击核心舰。
+      {
+        name: "pennsylvania",
+        pos: [18, 52],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // Idaho BB-42 -> new_mexico：同属 New Mexico 级；史实炮击核心舰。
+      {
+        name: "new_mexico",
+        pos: [22, 55],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // Honolulu CL-48 -> portland：Brooklyn 级未收录；以同类别、舰长接近的现有美军巡洋舰替代。
+      {
+        name: "portland",
+        pos: [14, 56],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // 史实护航驱逐舰之一 -> maury：具体舰名未由采用的编队概述确定；同类别近似资源。
+      {
+        name: "maury",
+        pos: [10, 50],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // 史实护航驱逐舰之一 -> dewey：具体舰名未由采用的编队概述确定；同类别近似资源。
+      {
+        name: "dewey",
+        pos: [10, 58],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // 史实护航驱逐舰之一 -> porter：具体舰名未由采用的编队概述确定；同类别近似资源。
+      {
+        name: "porter",
+        pos: [18, 60],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+      // 史实护航驱逐舰之一 -> maury：具体舰名未由采用的编队概述确定；同类别近似资源。
+      {
+        name: "maury",
+        pos: [22, 48],
+        rotation: 180,
+        belongPlayer: "HA"
+      },
+
+      // === 日军：机动舰队架空水面分队，自南向北截击 ===
+      // Yamato：现有同名资源；机动舰队第一战队主力舰。
+      {
+        name: "yamato",
+        pos: [28, 91],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      // Haruna -> kongo：同属 Kongo 级；以同级资源表示高速战列舰。
+      {
+        name: "kongo",
+        pos: [34, 95],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      // Tone：现有同名资源；机动舰队侦察巡洋舰。
+      {
+        name: "tone",
+        pos: [22, 97],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      // Yukikaze：现有同名资源；架空分队前卫。
+      {
+        name: "yukikaze",
+        pos: [18, 92],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      // Asashio 级护航舰 -> asashio：同级资源；架空分队左后卫。
+      {
+        name: "asashio",
+        pos: [24, 102],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      // Yugumo：现有同名资源；架空分队中央后卫。
+      {
+        name: "yugumo",
+        pos: [30, 103],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+      // Kagero 级护航舰 -> yukikaze：同级资源；架空分队右后卫。
+      {
+        name: "yukikaze",
+        pos: [38, 100],
+        rotation: 0,
+        belongPlayer: "CA"
+      },
+    ],
+  },
+  {
+    name: "Saipan1944",
+    category: "classic",
+    displayName: "塞班岛海战-1944",
+    displayNameEn: "Battle off Saipan - 1944",
+    displayNameRu: "Сражение у Сайпана — 1944",
+    displayNameJa: "サイパン沖海戦―1944年",
+    initFunds: 0,
+    initCameraPos: [14, 21],
+    mapName: "saipan",
+    maxShipCount: 26,
+    description: "1944 年 6 月 19 日 07:20，美军战斗空中巡逻队在关岛上空迎击日机，菲律宾海海战由此全面展开。第 58 特混舰队守在塞班岛以西，掩护仍在进行的登陆作战；小泽治三郎的第一机动舰队则从更西方发动航空突击。本关将双方相隔数百海里的航母战压缩到 128×128 网格，并以双方主力舰队直接接敌的架空方式呈现。为适配地图玩法，初始部署反转为美军在左上、日军在右下，双方沿对角线相向接近。指挥美军航母、快速战列舰和护航舰队阻止日军突破；同级舰与近似舰替代均在配置注释中说明，舰位和编队间距不代表史实精确位置。",
+    descriptionEn: "At 07:20 on 19 June 1944, U.S. combat air patrols intercepted Japanese aircraft over Guam as the Battle of the Philippine Sea opened. Task Force 58 guarded the Saipan landings from the east while Ozawa's First Mobile Fleet attacked from much farther west. This scenario compresses a carrier battle fought across hundreds of nautical miles into a 128×128 grid and imagines the two main fleets closing for direct action. For gameplay, the initial layout is reversed, with the U.S. fleet in the upper left and the Japanese fleet in the lower right, closing along the diagonal. Command the U.S. carriers, fast battleships, and screen to stop the breakthrough. Same-class and similar-role substitutes are identified in the configuration comments; positions and formation spacing are gameplay approximations.",
+    descriptionRu: "19 июня 1944 года в 07:20 американские истребители перехватили японские самолёты над Гуамом — началась битва в Филиппинском море. Оперативное соединение 58 прикрывало высадку на Сайпане с востока, а Первый мобильный флот Одзавы наносил удар с далёкого запада. Сценарий сжимает авианосное сражение, проходившее на сотнях морских миль, до сетки 128×128 и условно сводит главные силы в прямом бою. Для игрового процесса начальная расстановка развёрнута: американский флот находится слева вверху, японский — справа внизу, и оба сближаются по диагонали. Командуйте американскими авианосцами, быстроходными линкорами и охранением и остановите прорыв. Замены однотипными и близкими по роли кораблями отмечены в комментариях; позиции и интервалы являются игровым приближением.",
+    descriptionJa: "1944年6月19日07時20分、米軍戦闘空中哨戒隊がグアム上空で日本機を迎撃し、マリアナ沖海戦が本格的に始まった。第58任務部隊は東側からサイパン上陸作戦を守り、小沢治三郎中将の第一機動艦隊ははるか西方から航空攻撃を開始した。本シナリオは数百海里に及ぶ空母戦を128×128グリッドへ圧縮し、両主力艦隊が直接交戦する架空の展開として描く。ゲーム上の都合により初期配置を反転し、米艦隊を左上、日本艦隊を右下に置いて対角線上で接近させる。米空母、高速戦艦、護衛部隊を指揮して突破を阻止せよ。同型艦・同任務艦による代用は設定コメントに明記し、艦位と隊形間隔はゲーム上の近似である。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // 坐标按 128×128 saipan.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 时间锚点为 1944-06-19 07:20（塞班岛当地时间）；双方数百海里的史实距离压缩为约 11km。
+      // 地图主岛逻辑长宽约 7.37×3.81km，仅约真实塞班岛的 40%；本关采用游戏化比例，不主张精确舰位。
+      // 美军位于左上、日军位于右下，两军保持原编队间距并沿对角线相向航行。
+
+      // === 美军：第 58 特混舰队代表编队（左上，向东南） ===
+      // Yorktown CV-10：现有同名资源；航母核心北侧。
+      {
+        name: "yorktown",
+        pos: [17, 14],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Essex CV-9：现有同名资源；航母核心中央。
+      {
+        name: "essex",
+        pos: [17, 21],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Bunker Hill CV-17 -> essex：同属 Essex 级；航母核心南侧。
+      {
+        name: "essex",
+        pos: [17, 28],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // South Dakota BB-57：现有同名资源；快速战列舰屏卫北翼。
+      {
+        name: "south_dakota",
+        pos: [11, 10],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Washington BB-56 -> south_dakota：North Carolina 级未收录；以同任务、尺寸接近的快速战列舰替代。
+      {
+        name: "south_dakota",
+        pos: [11, 16],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Iowa BB-61 -> lowa：项目资源沿用 lowa 拼写；同名舰，战列舰屏卫中央。
+      {
+        name: "lowa",
+        pos: [11, 23],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // New Jersey BB-62 -> lowa：同属 Iowa 级；战列舰屏卫南翼。
+      {
+        name: "lowa",
+        pos: [11, 31],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Baltimore CA-68：现有同名资源；巡洋舰前卫北侧。
+      {
+        name: "baltimore",
+        pos: [6, 10],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Minneapolis CA-36 -> astoria：同属 New Orleans 级；巡洋舰前卫中央。
+      {
+        name: "astoria",
+        pos: [6, 20],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // San Juan CL-54 -> atlanta：同属 Atlanta 级；防空巡洋舰前卫南侧。
+      {
+        name: "atlanta",
+        pos: [6, 31],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Phelps DD-360 -> porter：同属 Porter 级；外圈北侧屏卫。
+      {
+        name: "porter",
+        pos: [22, 8],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Dewey DD-349：现有同名资源；外圈中央屏卫。
+      {
+        name: "dewey",
+        pos: [22, 21],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+      // Newcomb DD-586 -> porter：Fletcher 级未收录；以同类别、长度接近的 Porter 级资源替代。
+      {
+        name: "porter",
+        pos: [22, 34],
+        rotation: 135,
+        belongPlayer: "HA"
+      },
+
+      // === 日军：第一机动舰队代表编队（右下，向西北） ===
+      // Taiho：现有同名资源；第一航空战队旗舰。
+      {
+        name: "taiho",
+        pos: [95, 84],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Shokaku：现有同名资源；第一航空战队中央。
+      {
+        name: "shokaku",
+        pos: [95, 92],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Zuikaku -> shokaku：同属 Shokaku 级；第一航空战队南侧。
+      {
+        name: "shokaku",
+        pos: [95, 100],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Yamato：现有同名资源；前卫战列舰北翼。
+      {
+        name: "yamato",
+        pos: [101, 80],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Musashi -> yamato：同属 Yamato 级；前卫战列舰中央偏北。
+      {
+        name: "yamato",
+        pos: [101, 88],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Kongo：现有同名资源；前卫战列舰中央偏南。
+      {
+        name: "kongo",
+        pos: [101, 96],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Haruna -> kongo：同属 Kongo 级；前卫战列舰南翼。
+      {
+        name: "kongo",
+        pos: [101, 104],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Atago：现有同名资源；巡洋舰前卫北侧。
+      {
+        name: "atago",
+        pos: [106, 82],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Haguro：现有同名资源；巡洋舰前卫中央。
+      {
+        name: "haguro",
+        pos: [106, 93],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Yahagi：现有同名资源；第十战队轻巡洋舰，前卫南侧。
+      {
+        name: "yahagi",
+        pos: [106, 104],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Yukikaze：现有同名资源；外圈北侧屏卫。
+      {
+        name: "yukikaze",
+        pos: [91, 79],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Yugumo：现有同名资源；外圈中央屏卫。
+      {
+        name: "yugumo",
+        pos: [91, 92],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      // Urakaze -> yukikaze：同属 Kagero 级；外圈南侧屏卫。
+      {
+        name: "yukikaze",
+        pos: [91, 106],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+    ],
+  },
+  {
+    name: "Palau1944",
+    category: "classic",
     displayName: "帕劳群岛-1944",
     displayNameEn: "Palau Islands - 1944",
     displayNameRu: "Острова Палау — 1944",
@@ -1198,145 +2199,300 @@
     ],
   },
   {
-    name: "TestAntiAircraft",
-    displayName: "防空测试-威克岛",
-    displayNameEn: "Anti-air Test - Wake Island",
-    displayNameRu: "Испытание ПВО — остров Уэйк",
-    displayNameJa: "対空試験―ウェーク島",
-    initFunds: 10000,
-    initCameraPos: [58, 58],
-    mapName: "wake",
-    maxShipCount: 29,
-    description: "作战导调部第 1941 号特别演习：极限防空生存测试实验舰「小黄鸭」号被部署于威克岛中央海域，执行高难度防空压力测试——十六艘敌对航母从八个方向完成环形包围，舰载机编队将发起多波次饱和空袭演习目的：验证新一代舰载防空火控系统在极限空袭密度下的拦截效率与生存能力小黄鸭号可自由调度舰载机升空拦截，防空火力自动响应——弹药与燃油消耗将是前所未有的考验，请合理调配每架战机的出击与回收节奏。",
-    descriptionEn: "Special Exercise 1941: the test ship Duck is deployed in the central waters of Wake Island for an extreme anti-air survival trial. Sixteen hostile carriers encircle the area from eight directions and will launch repeated saturation strikes. The objective is to evaluate interception efficiency and survivability under maximum air pressure. Launch fighters carefully, manage recovery cycles, and keep the ship alive through the attack waves.",
-    descriptionRu: "Особые учения 1941 года: испытательный корабль «Утка» развёрнут в центральных водах острова Уэйк для предельной проверки противовоздушной обороны. Шестнадцать вражеских авианосцев окружают район с восьми направлений и будут наносить повторные массированные удары. Задача — оценить эффективность перехвата и живучесть под максимальным давлением авиации. Расчётливо поднимайте истребители, управляйте циклами посадки и сохраните корабль во всех волнах атак.",
-    descriptionJa: "特別演習1941：試験艦ダックをウェーク島中央海域に配置し、極限状態での対空生存試験を実施する。16隻の敵空母が八方向から海域を包囲し、反復飽和攻撃を仕掛けてくる。本演習の目的は、最大規模の航空攻撃下における迎撃効率と生存性の評価である。戦闘機の発艦と収容周期を適切に管理し、すべての攻撃波を耐え抜け。",
+    name: "Samar1944",
+    category: "classic",
+    displayName: "萨马岛海战-1944",
+    displayNameEn: "Battle off Samar - 1944",
+    displayNameRu: "Сражение у острова Самар — 1944",
+    displayNameJa: "サマール沖海戦―1944年",
+    initFunds: 0,
+    initCameraPos: [58, 64],
+    mapName: "leyte_gulf",
+    maxShipCount: 36,
+    description: "1944 年 10 月 25 日 06:50，栗田健男的中央舰队在萨马岛外突然出现在‘塔菲 3’西北方。指挥 6 艘护航航母、3 艘驱逐舰与 4 艘护航驱逐舰向东撤退，以舰载机、烟幕和鱼雷阻止 4 艘战列舰、8 艘巡洋舰及 11 艘驱逐舰突入莱特湾。史实接触距离约 15 海里，本关压缩到约 3.8 公里并置入 128×128 的概略地图；舰位、编队间距和岸线均为玩法近似。缺失舰船优先采用同级舰，其次采用同舰种且尺寸相近的资源替代。",
+    descriptionEn: "At 06:50 on 25 October 1944, Vice Admiral Takeo Kurita's Center Force appeared northwest of Taffy 3 off Samar. Command six escort carriers, three destroyers, and four destroyer escorts withdrawing east while aircraft, smoke, and torpedoes hold back four battleships, eight cruisers, and eleven destroyers bound for Leyte Gulf. The historical contact range of about 15 nautical miles is compressed to about 3.8 km on this 128×128 schematic map; positions, spacing, and coastline are gameplay approximations. Missing ships use same-class substitutes first, then vessels of the same category and similar size.",
+    descriptionRu: "25 октября 1944 года в 06:50 Центральное соединение вице-адмирала Такэо Куриты внезапно появилось к северо-западу от «Таффи 3» у острова Самар. Командуйте шестью эскортными авианосцами, тремя эсминцами и четырьмя эскортными миноносцами, отходящими на восток, и задержите авиацией, дымовыми завесами и торпедами четыре линкора, восемь крейсеров и одиннадцать эсминцев, идущих к заливу Лейте. Историческая дистанция контакта около 15 морских миль сжата здесь примерно до 3,8 км на схематической сетке 128×128; позиции, интервалы и береговая линия являются игровым приближением. Отсутствующие корабли заменены прежде всего однотипными, затем близкими по классу и размерам.",
+    descriptionJa: "1944年10月25日06時50分、栗田健男中将の中央部隊はサマール島沖で「タフィ3」の北西に突如出現した。護衛空母6隻、駆逐艦3隻、護衛駆逐艦4隻を率いて東へ退避し、艦載機・煙幕・魚雷でレイテ湾へ向かう戦艦4隻、巡洋艦8隻、駆逐艦11隻を阻止せよ。史実の接触距離約15海里は、この128×128の概略マップ上で約3.8kmに圧縮されており、艦位・隊形間隔・海岸線はゲーム上の近似である。未収録艦は同型艦を優先し、次いで同艦種で寸法の近い艦を代用する。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
-      // === 我方舰队（中央，围绕 [64, 20]） ===
-      // 特殊单位：小黄鸭核心
+      // 时间锚点：1944-10-25 06:50。游戏约定 0°=北、90°=东、180°=南、270°=西。
+      // 史实日舰位于西北约 15 海里，航向约 120°；塔菲 3 于 06:50 奉命转向正东。
+      // 本关把双方中心距压缩到约 30 格（约 3.8km）；队形保持前后关系，不代表精确史实舰位。
+      // 为保证开场形成巨炮威胁，日军战列线置于舰队中央偏南；四艘战列舰均至少覆盖一艘美军护航航母。
+
+      // === 美军：第 77.4.3 特遣支队（塔菲 3） ===
+      // Fanshaw Bay CVE-70 -> card：同为美军护航航母，长度接近；编队北侧，舰首向东。
       {
-        name: "duck",
-        pos: [64, 64],
+        name: "card",
+        pos: [71, 68],
         rotation: 90,
         belongPlayer: "HA"
       },
-      // === 敌方航母（8 个方向，每方向 2 艘，船头指向中心） ===
-      // 北方（正上方）
+      // Gambier Bay CVE-73 -> card：同为美军护航航母，长度接近；编队东北侧，舰首向东。
       {
-        name: "yorktown",
-        pos: [62, 3],
-        rotation: 180,
-        belongPlayer: "CA"
-      },
-      {
-        name: "akagi",
-        pos: [66, 3],
-        rotation: 180,
-        belongPlayer: "CA"
-      },
-      // 东北方
-      {
-        name: "yorktown",
-        pos: [98, 3],
-        rotation: 245,
-        belongPlayer: "CA"
-      },
-      {
-        name: "kaga",
-        pos: [102, 3],
-        rotation: 245,
-        belongPlayer: "CA"
-      },
-      // 东方（正右方）
-      {
-        name: "yorktown",
-        pos: [120, 18],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      {
-        name: "shokaku",
-        pos: [120, 22],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      // 东南方
-      {
-        name: "yorktown",
-        pos: [98, 120],
-        rotation: 340,
-        belongPlayer: "CA"
-      },
-      {
-        name: "soryu",
-        pos: [102, 120],
-        rotation: 340,
-        belongPlayer: "CA"
-      },
-      // 南方（正下方）
-      {
-        name: "saratoga",
-        pos: [62, 120],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      {
-        name: "hiryu",
-        pos: [66, 120],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      // 西南方
-      {
-        name: "saratoga",
-        pos: [23, 120],
-        rotation: 21,
-        belongPlayer: "CA"
-      },
-      {
-        name: "taiho",
-        pos: [27, 120],
-        rotation: 21,
-        belongPlayer: "CA"
-      },
-      // 西方（正左方）
-      {
-        name: "saratoga",
-        pos: [5, 18],
+        name: "card",
+        pos: [75, 72],
         rotation: 90,
-        belongPlayer: "CA"
+        belongPlayer: "HA"
       },
+      // Kalinin Bay CVE-68 -> card：同为美军护航航母，长度接近；编队西北侧，舰首向东。
       {
-        name: "shinano",
-        pos: [5, 22],
+        name: "card",
+        pos: [67, 72],
         rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Kitkun Bay CVE-71 -> card：同为美军护航航母，长度接近；编队中央，舰首向东。
+      {
+        name: "card",
+        pos: [71, 76],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // St. Lo CVE-63 -> card：同为美军护航航母，长度接近；编队东南侧，舰首向东。
+      {
+        name: "card",
+        pos: [75, 80],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // White Plains CVE-66 -> card：同为美军护航航母，长度接近；编队西南侧，舰首向东。
+      {
+        name: "card",
+        pos: [67, 80],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+
+      // Johnston DD-557 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫北侧。
+      {
+        name: "maury",
+        pos: [61, 68],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Hoel DD-533 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫中央。
+      {
+        name: "maury",
+        pos: [62, 73],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Heermann DD-532 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫南侧。
+      {
+        name: "maury",
+        pos: [62, 78],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+
+      // Dennis DE-405 -> hammann：仓库无护航驱逐舰资源，以同年代美军驱逐舰近似；内圈北侧。
+      {
+        name: "hammann",
+        pos: [64, 70],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // John C. Butler DE-339 -> hammann：仓库无护航驱逐舰资源，以同年代美军驱逐舰近似；内圈中央偏北。
+      {
+        name: "hammann",
+        pos: [64, 74],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Raymond DE-341 -> hammann：仓库无护航驱逐舰资源，以同年代美军驱逐舰近似；内圈中央偏南。
+      {
+        name: "hammann",
+        pos: [64, 78],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // Samuel B. Roberts DE-413 -> hammann：仓库无 John C. Butler 级资源，以同年代美军驱逐舰近似；编队后卫。
+      {
+        name: "hammann",
+        pos: [68, 83],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+
+      // === 日本海军：第一游击部队（中央舰队） ===
+      // Kongō：现有同名资源；战列舰列左翼、舰队中央偏南，追击航向约 120°。
+      {
+        name: "kongo",
+        pos: [38, 56],
+        rotation: 120,
         belongPlayer: "CA"
       },
-      // 西北方
+      // Yamato：现有同名资源；栗田旗舰，战列舰列中央偏左，开场主炮可覆盖全部六艘护航航母。
       {
-        name: "saratoga",
-        pos: [23, 3],
-        rotation: 114,
+        name: "yamato",
+        pos: [42, 58],
+        rotation: 120,
         belongPlayer: "CA"
       },
+      // Nagato：现有同名资源；战列舰列中央偏右。
       {
-        name: "hakuryu",
-        pos: [27, 3],
-        rotation: 114,
+        name: "nagato",
+        pos: [46, 60],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Haruna -> kongo：同属 Kongō 级；战列舰列右翼。
+      {
+        name: "kongo",
+        pos: [50, 62],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+
+      // Chōkai -> atago：同属 Takao 级；重巡前列左翼。
+      {
+        name: "atago",
+        pos: [32, 49],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Haguro：现有同名资源；重巡前列中央偏左。
+      {
+        name: "haguro",
+        pos: [36, 52],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Kumano -> suzuya：同属 Mogami 级；重巡前列中央。
+      {
+        name: "suzuya",
+        pos: [40, 54],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Suzuya：现有同名资源；重巡前列中央偏右。
+      {
+        name: "suzuya",
+        pos: [44, 56],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Tone：现有同名资源；重巡前列右翼。
+      {
+        name: "tone",
+        pos: [48, 58],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Chikuma -> tone：同属 Tone 级；重巡前列最右翼。
+      {
+        name: "tone",
+        pos: [52, 60],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+
+      // Noshiro -> yahagi：同属 Agano 级；第二水雷战队旗舰，位于驱逐舰群左翼。
+      {
+        name: "yahagi",
+        pos: [34, 55],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Yahagi：现有同名资源；第十水雷战队旗舰，位于驱逐舰群右翼。
+      {
+        name: "yahagi",
+        pos: [50, 64],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+
+      // Kishinami -> yugumo：同属 Yūgumo 级；驱逐舰外圈左翼。
+      {
+        name: "yugumo",
+        pos: [30, 54],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Okinami -> yugumo：同属 Yūgumo 级；驱逐舰外圈左翼。
+      {
+        name: "yugumo",
+        pos: [32, 58],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Fujinami -> yugumo：同属 Yūgumo 级；驱逐舰外圈中央偏左。
+      {
+        name: "yugumo",
+        pos: [35, 61],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Hayashimo -> yugumo：同属 Yūgumo 级；驱逐舰外圈中央偏左。
+      {
+        name: "yugumo",
+        pos: [38, 64],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Kiyoshimo -> yugumo：同属 Yūgumo 级；驱逐舰外圈中央。
+      {
+        name: "yugumo",
+        pos: [42, 66],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Shimakaze -> yukikaze：仓库无同级舰，以同舰种且尺寸接近的高速驱逐舰近似；驱逐舰外圈中央。
+      {
+        name: "yukikaze",
+        pos: [46, 68],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Nowaki -> yukikaze：同属 Kagerō 级；驱逐舰外圈中央偏右。
+      {
+        name: "yukikaze",
+        pos: [50, 70],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Hamakaze -> yukikaze：同属 Kagerō 级；驱逐舰外圈右翼。
+      {
+        name: "yukikaze",
+        pos: [54, 68],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Isokaze -> yukikaze：同属 Kagerō 级；驱逐舰外圈右翼。
+      {
+        name: "yukikaze",
+        pos: [56, 64],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Urakaze -> yukikaze：同属 Kagerō 级；驱逐舰外圈后侧。
+      {
+        name: "yukikaze",
+        pos: [55, 60],
+        rotation: 120,
+        belongPlayer: "CA"
+      },
+      // Yukikaze：现有同名资源；驱逐舰外圈后侧。
+      {
+        name: "yukikaze",
+        pos: [52, 56],
+        rotation: 120,
         belongPlayer: "CA"
       },
     ],
   },
+  // 测试关卡
   {
     name: "TestAll",
+    category: "test",
     displayName: "非常多船",
     displayNameEn: "A Lot of Ships",
     displayNameRu: "Очень много кораблей",
     displayNameJa: "とてもたくさんの船",
     initFunds: 10000,
-    initCameraPos: [12, 34],
+    initCameraPos: [5, 32],
     mapName: "darwin",
     maxShipCount: 30,
     description: "舰队司令部 1941 年度全面战备检验——代号「怒海」，达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，超过百艘的各型舰艇参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
@@ -2571,1275 +3727,134 @@
     ],
   },
   {
-    name: "Midway1942",
-    displayName: "中途岛之战-1942",
-    displayNameEn: "Battle of Midway - 1942",
-    displayNameRu: "Битва за Мидуэй — 1942",
-    displayNameJa: "ミッドウェー海戦―1942年",
-    initFunds: 0,
-    initCameraPos: [183, 91],
-    mapName: "midway",
-    maxShipCount: 47,
-    description: "1942 年 6 月 4 日 05:45，中途岛的 PBY 巡逻机在西北 180 海里发现日本第一航空舰队；东北方向，美军第 16 与第 17 特混舰队已进入伏击阵位。本关以此为时间锚点，将数百海里的航母战压缩到 256×256 网格：指挥约克城、企业和大黄蜂三艘航母及其护航舰队，迎战赤城、加贺、苍龙、飞龙及近接护航舰队。现有资源缺失时采用同级舰或同类别近似舰替代；双方距离和队形间隔为可玩性近似，不代表史实舰位。",
-    descriptionEn: "At 05:45 on 4 June 1942, a Midway PBY sighted the Japanese First Air Fleet 180 nautical miles to the northwest, while U.S. Task Forces 16 and 17 waited to the northeast. This scenario uses that moment as its historical anchor and compresses a carrier battle fought across hundreds of miles into a 256×256 grid. Command Yorktown, Enterprise, Hornet, and their screens against Akagi, Kaga, Sōryū, Hiryū, and their close escort. Missing assets use same-class or same-category substitutes; distances and formation spacing are gameplay approximations, not exact historical positions.",
-    descriptionRu: "4 июня 1942 года в 05:45 патрульный самолёт PBY с Мидуэя обнаружил Первый воздушный флот Японии в 180 морских милях к северо-западу, а американские оперативные соединения 16 и 17 ожидали к северо-востоку. Сценарий использует этот момент как историческую точку отсчёта и сжимает авианосное сражение, проходившее на сотнях миль, до сетки 256×256. Командуйте «Йорктауном», «Энтерпрайзом», «Хорнетом» и их охранением против «Акаги», «Каги», «Сорю», «Хирю» и ближнего эскорта. Отсутствующие корабли заменены однотипными или близкими по категории; дистанции и интервалы построения являются игровым приближением.",
-    descriptionJa: "1942年6月4日05時45分、ミッドウェーのPBY哨戒機は北西180海里に日本海軍第一航空艦隊を発見し、北東には米第16・第17任務部隊が待機していた。本シナリオはこの時刻を歴史上の基準とし、数百海里に及ぶ空母戦を256×256グリッドへ圧縮する。ヨークタウン、エンタープライズ、ホーネットと護衛部隊を指揮し、赤城、加賀、蒼龍、飛龍および近接護衛部隊を迎撃せよ。未収録艦は同型艦または同艦種の近似艦で代用し、両軍の距離と隊形間隔は史実の正確な艦位ではなくゲーム上の近似である。",
+    name: "TestAntiAircraft",
+    category: "test",
+    displayName: "防空测试-威克岛",
+    displayNameEn: "Anti-air Test - Wake Island",
+    displayNameRu: "Испытание ПВО — остров Уэйк",
+    displayNameJa: "対空試験―ウェーク島",
+    initFunds: 10000,
+    initCameraPos: [58, 58],
+    mapName: "wake",
+    maxShipCount: 29,
+    description: "作战导调部第 1941 号特别演习：极限防空生存测试实验舰「小黄鸭」号被部署于威克岛中央海域，执行高难度防空压力测试——十六艘敌对航母从八个方向完成环形包围，舰载机编队将发起多波次饱和空袭演习目的：验证新一代舰载防空火控系统在极限空袭密度下的拦截效率与生存能力小黄鸭号可自由调度舰载机升空拦截，防空火力自动响应——弹药与燃油消耗将是前所未有的考验，请合理调配每架战机的出击与回收节奏。",
+    descriptionEn: "Special Exercise 1941: the test ship Duck is deployed in the central waters of Wake Island for an extreme anti-air survival trial. Sixteen hostile carriers encircle the area from eight directions and will launch repeated saturation strikes. The objective is to evaluate interception efficiency and survivability under maximum air pressure. Launch fighters carefully, manage recovery cycles, and keep the ship alive through the attack waves.",
+    descriptionRu: "Особые учения 1941 года: испытательный корабль «Утка» развёрнут в центральных водах острова Уэйк для предельной проверки противовоздушной обороны. Шестнадцать вражеских авианосцев окружают район с восьми направлений и будут наносить повторные массированные удары. Задача — оценить эффективность перехвата и живучесть под максимальным давлением авиации. Расчётливо поднимайте истребители, управляйте циклами посадки и сохраните корабль во всех волнах атак.",
+    descriptionJa: "特別演習1941：試験艦ダックをウェーク島中央海域に配置し、極限状態での対空生存試験を実施する。16隻の敵空母が八方向から海域を包囲し、反復飽和攻撃を仕掛けてくる。本演習の目的は、最大規模の航空攻撃下における迎撃効率と生存性の評価である。戦闘機の発艦と収容周期を適切に管理し、すべての攻撃波を耐え抜け。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
-      // 坐标按 256x256 midway.map 网格落位；0°=北、90°=东、180°=南、270°=西。
-      // 时间锚点为 1942-06-04 05:45（中途岛时区）；美军位于东北、日军位于西北。
-      // 史实舰队相距数百海里，本关压缩到 32.768km 逻辑地图；编队间距和美军 225° 舰首方向为可玩性近似。
-      // 两军最近屏卫间距约 80 格（约 10.2km），最近航母间距约 100 格（约 12.8km）；双方俯冲轰炸机仍可抵达目标。
-
-      // === 美军：第 16 特混舰队（东北编队） ===
-      // Enterprise CV-6 -> yorktown：同属 Yorktown 级；第 16 特混舰队内侧，舰首约向西南。
+      // === 我方舰队（中央，围绕 [64, 20]） ===
+      // 特殊单位：小黄鸭核心
+      {
+        name: "duck",
+        pos: [64, 64],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === 敌方航母（8 个方向，每方向 2 艘，船头指向中心） ===
+      // 北方（正上方）
       {
         name: "yorktown",
-        pos: [182, 86],
-        rotation: 225,
-        belongPlayer: "HA"
+        pos: [62, 3],
+        rotation: 180,
+        belongPlayer: "CA"
       },
-      // Hornet CV-8 -> yorktown：同属 Yorktown 级；第 16 特混舰队外侧，舰首约向西南。
-      {
-        name: "yorktown",
-        pos: [188, 90],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // New Orleans CA-32 -> astoria：同属 New Orleans 级；近接巡洋舰屏卫。
-      {
-        name: "astoria",
-        pos: [180, 84],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Minneapolis CA-36 -> astoria：同属 New Orleans 级；近接巡洋舰屏卫。
-      {
-        name: "astoria",
-        pos: [184, 82],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Vincennes CA-44 -> astoria：同属 New Orleans 级；近接巡洋舰屏卫。
-      {
-        name: "astoria",
-        pos: [188, 84],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Northampton CA-26：现有同名资源；巡洋舰屏卫东侧。
-      {
-        name: "northampton",
-        pos: [192, 88],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Pensacola CA-24：现有同名资源；巡洋舰屏卫东侧。
-      {
-        name: "pensacola",
-        pos: [192, 92],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Atlanta CL-51：现有同名资源；防空巡洋舰位于编队后侧。
-      {
-        name: "atlanta",
-        pos: [188, 96],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Phelps DD-360 -> porter：同属 Porter 级；驱逐舰外圈前卫。
-      {
-        name: "porter",
-        pos: [180, 80],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Worden DD-352 -> dewey：同属 Farragut 级；驱逐舰外圈前卫。
-      {
-        name: "dewey",
-        pos: [184, 79],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Monaghan DD-354 -> dewey：同属 Farragut 级；驱逐舰外圈前卫。
-      {
-        name: "dewey",
-        pos: [188, 80],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Aylwin DD-355 -> dewey：同属 Farragut 级；驱逐舰外圈前卫。
-      {
-        name: "dewey",
-        pos: [192, 82],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Balch DD-363 -> maury：Mahan 级未收录；以近缘 Gridley 级替代。
-      {
-        name: "maury",
-        pos: [196, 85],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Conyngham DD-371 -> maury：Mahan 级未收录；以近缘 Gridley 级替代。
-      {
-        name: "maury",
-        pos: [196, 90],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Benham DD-397 -> maury：Benham 级未收录；以同类别、近似尺寸的 Gridley 级替代。
-      {
-        name: "maury",
-        pos: [196, 95],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Ellet DD-398 -> maury：同属 Benham 级替代策略；驱逐舰外圈后卫。
-      {
-        name: "maury",
-        pos: [192, 99],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Maury DD-401：现有同名资源；驱逐舰外圈后卫。
-      {
-        name: "maury",
-        pos: [188, 102],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-
-      // === 美军：第 17 特混舰队（第 16 特混舰队西南约 10 海里，游戏内并入东北编队） ===
-      // Yorktown CV-5：现有同名资源；第 17 特混舰队中心。
-      {
-        name: "yorktown",
-        pos: [176, 96],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Astoria CA-34：现有同名资源；Yorktown 近接屏卫。
-      {
-        name: "astoria",
-        pos: [172, 94],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Portland CA-33：现有同名资源；Yorktown 近接屏卫。
-      {
-        name: "portland",
-        pos: [174, 100],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Hammann DD-412：现有同名资源；第 17 特混舰队驱逐舰屏卫。
-      {
-        name: "hammann",
-        pos: [172, 89],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Hughes DD-410 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
-      {
-        name: "hammann",
-        pos: [168, 92],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Morris DD-417 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
-      {
-        name: "hammann",
-        pos: [168, 97],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Anderson DD-411 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
-      {
-        name: "hammann",
-        pos: [170, 102],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Russell DD-414 -> hammann：同属 Sims 级；第 17 特混舰队驱逐舰屏卫。
-      {
-        name: "hammann",
-        pos: [174, 105],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-      // Gwin DD-433 -> hammann：Gleaves 级未收录；以同类别、长度接近的 Sims 级替代。
-      {
-        name: "hammann",
-        pos: [179, 106],
-        rotation: 225,
-        belongPlayer: "HA"
-      },
-
-      // === 日军：第一航空舰队第一机动部队（西北编队） ===
-      // Akagi：现有同名资源；第一航空战队旗舰，舰首 135° 指向中途岛。
       {
         name: "akagi",
-        pos: [68, 88],
-        rotation: 135,
+        pos: [66, 3],
+        rotation: 180,
         belongPlayer: "CA"
       },
-      // Kaga：现有同名资源；第一航空战队，舰首 135°。
-      {
-        name: "kaga",
-        pos: [76, 88],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Soryu：现有同名资源；第二航空战队，舰首 135°。
-      {
-        name: "soryu",
-        pos: [68, 97],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Hiryu：现有同名资源；第二航空战队，舰首 135°。
-      {
-        name: "hiryu",
-        pos: [76, 97],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Haruna -> kongo：同属 Kongo 级；航母编队东侧前卫。
-      {
-        name: "kongo",
-        pos: [64, 91],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Kirishima -> kongo：同属 Kongo 级；航母编队后卫。
-      {
-        name: "kongo",
-        pos: [80, 93],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Tone：现有同名资源；航母编队西侧侦察巡洋舰。
-      {
-        name: "tone",
-        pos: [64, 100],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Chikuma -> tone：同属 Tone 级；航母编队后侧侦察巡洋舰。
-      {
-        name: "tone",
-        pos: [80, 101],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Nagara -> abukuma：同属 Nagara 级；第十驱逐战队旗舰。
-      {
-        name: "abukuma",
-        pos: [72, 103],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Kazagumo -> yugumo：同属 Yugumo 级；驱逐舰外圈前卫。
-      {
-        name: "yugumo",
-        pos: [60, 84],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Yugumo：现有同名资源；驱逐舰外圈前卫。
-      {
-        name: "yugumo",
-        pos: [66, 81],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Makigumo -> yugumo：同属 Yugumo 级；驱逐舰外圈前卫。
-      {
-        name: "yugumo",
-        pos: [72, 80],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Akigumo -> yukikaze：同属 Kagero 级；驱逐舰外圈前卫。
-      {
-        name: "yukikaze",
-        pos: [78, 81],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Nowaki -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
-      {
-        name: "yukikaze",
-        pos: [84, 84],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Arashi -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
-      {
-        name: "yukikaze",
-        pos: [88, 89],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Hagikaze -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
-      {
-        name: "yukikaze",
-        pos: [88, 95],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Maikaze -> yukikaze：同属 Kagero 级；驱逐舰外圈东侧。
-      {
-        name: "yukikaze",
-        pos: [86, 101],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Urakaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
-      {
-        name: "yukikaze",
-        pos: [82, 106],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Isokaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
-      {
-        name: "yukikaze",
-        pos: [76, 108],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Tanikaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
-      {
-        name: "yukikaze",
-        pos: [70, 108],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Hamakaze -> yukikaze：同属 Kagero 级；驱逐舰外圈后卫。
-      {
-        name: "yukikaze",
-        pos: [64, 106],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-    ],
-  },
-  {
-    name: "Saipan1944",
-    displayName: "塞班岛海战-1944",
-    displayNameEn: "Battle off Saipan - 1944",
-    displayNameRu: "Сражение у Сайпана — 1944",
-    displayNameJa: "サイパン沖海戦―1944年",
-    initFunds: 0,
-    initCameraPos: [14, 21],
-    mapName: "saipan",
-    maxShipCount: 26,
-    description: "1944 年 6 月 19 日 07:20，美军战斗空中巡逻队在关岛上空迎击日机，菲律宾海海战由此全面展开。第 58 特混舰队守在塞班岛以西，掩护仍在进行的登陆作战；小泽治三郎的第一机动舰队则从更西方发动航空突击。本关将双方相隔数百海里的航母战压缩到 128×128 网格，并以双方主力舰队直接接敌的架空方式呈现。为适配地图玩法，初始部署反转为美军在左上、日军在右下，双方沿对角线相向接近。指挥美军航母、快速战列舰和护航舰队阻止日军突破；同级舰与近似舰替代均在配置注释中说明，舰位和编队间距不代表史实精确位置。",
-    descriptionEn: "At 07:20 on 19 June 1944, U.S. combat air patrols intercepted Japanese aircraft over Guam as the Battle of the Philippine Sea opened. Task Force 58 guarded the Saipan landings from the east while Ozawa's First Mobile Fleet attacked from much farther west. This scenario compresses a carrier battle fought across hundreds of nautical miles into a 128×128 grid and imagines the two main fleets closing for direct action. For gameplay, the initial layout is reversed, with the U.S. fleet in the upper left and the Japanese fleet in the lower right, closing along the diagonal. Command the U.S. carriers, fast battleships, and screen to stop the breakthrough. Same-class and similar-role substitutes are identified in the configuration comments; positions and formation spacing are gameplay approximations.",
-    descriptionRu: "19 июня 1944 года в 07:20 американские истребители перехватили японские самолёты над Гуамом — началась битва в Филиппинском море. Оперативное соединение 58 прикрывало высадку на Сайпане с востока, а Первый мобильный флот Одзавы наносил удар с далёкого запада. Сценарий сжимает авианосное сражение, проходившее на сотнях морских миль, до сетки 128×128 и условно сводит главные силы в прямом бою. Для игрового процесса начальная расстановка развёрнута: американский флот находится слева вверху, японский — справа внизу, и оба сближаются по диагонали. Командуйте американскими авианосцами, быстроходными линкорами и охранением и остановите прорыв. Замены однотипными и близкими по роли кораблями отмечены в комментариях; позиции и интервалы являются игровым приближением.",
-    descriptionJa: "1944年6月19日07時20分、米軍戦闘空中哨戒隊がグアム上空で日本機を迎撃し、マリアナ沖海戦が本格的に始まった。第58任務部隊は東側からサイパン上陸作戦を守り、小沢治三郎中将の第一機動艦隊ははるか西方から航空攻撃を開始した。本シナリオは数百海里に及ぶ空母戦を128×128グリッドへ圧縮し、両主力艦隊が直接交戦する架空の展開として描く。ゲーム上の都合により初期配置を反転し、米艦隊を左上、日本艦隊を右下に置いて対角線上で接近させる。米空母、高速戦艦、護衛部隊を指揮して突破を阻止せよ。同型艦・同任務艦による代用は設定コメントに明記し、艦位と隊形間隔はゲーム上の近似である。",
-    initReinforcePoints: [],
-    initOilPlatforms: [],
-    initShips: [
-      // 坐标按 128×128 saipan.map 网格落位；0°=北、90°=东、180°=南、270°=西。
-      // 时间锚点为 1944-06-19 07:20（塞班岛当地时间）；双方数百海里的史实距离压缩为约 11km。
-      // 地图主岛逻辑长宽约 7.37×3.81km，仅约真实塞班岛的 40%；本关采用游戏化比例，不主张精确舰位。
-      // 美军位于左上、日军位于右下，两军保持原编队间距并沿对角线相向航行。
-
-      // === 美军：第 58 特混舰队代表编队（左上，向东南） ===
-      // Yorktown CV-10：现有同名资源；航母核心北侧。
+      // 东北方
       {
         name: "yorktown",
-        pos: [17, 14],
-        rotation: 135,
-        belongPlayer: "HA"
+        pos: [98, 3],
+        rotation: 245,
+        belongPlayer: "CA"
       },
-      // Essex CV-9：现有同名资源；航母核心中央。
       {
-        name: "essex",
-        pos: [17, 21],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "kaga",
+        pos: [102, 3],
+        rotation: 245,
+        belongPlayer: "CA"
       },
-      // Bunker Hill CV-17 -> essex：同属 Essex 级；航母核心南侧。
+      // 东方（正右方）
       {
-        name: "essex",
-        pos: [17, 28],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "yorktown",
+        pos: [120, 18],
+        rotation: 270,
+        belongPlayer: "CA"
       },
-      // South Dakota BB-57：现有同名资源；快速战列舰屏卫北翼。
       {
-        name: "south_dakota",
-        pos: [11, 10],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "shokaku",
+        pos: [120, 22],
+        rotation: 270,
+        belongPlayer: "CA"
       },
-      // Washington BB-56 -> south_dakota：North Carolina 级未收录；以同任务、尺寸接近的快速战列舰替代。
+      // 东南方
       {
-        name: "south_dakota",
-        pos: [11, 16],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "yorktown",
+        pos: [98, 120],
+        rotation: 340,
+        belongPlayer: "CA"
       },
-      // Iowa BB-61 -> lowa：项目资源沿用 lowa 拼写；同名舰，战列舰屏卫中央。
       {
-        name: "lowa",
-        pos: [11, 23],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "soryu",
+        pos: [102, 120],
+        rotation: 340,
+        belongPlayer: "CA"
       },
-      // New Jersey BB-62 -> lowa：同属 Iowa 级；战列舰屏卫南翼。
+      // 南方（正下方）
       {
-        name: "lowa",
-        pos: [11, 31],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "saratoga",
+        pos: [62, 120],
+        rotation: 0,
+        belongPlayer: "CA"
       },
-      // Baltimore CA-68：现有同名资源；巡洋舰前卫北侧。
       {
-        name: "baltimore",
-        pos: [6, 10],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "hiryu",
+        pos: [66, 120],
+        rotation: 0,
+        belongPlayer: "CA"
       },
-      // Minneapolis CA-36 -> astoria：同属 New Orleans 级；巡洋舰前卫中央。
+      // 西南方
       {
-        name: "astoria",
-        pos: [6, 20],
-        rotation: 135,
-        belongPlayer: "HA"
+        name: "saratoga",
+        pos: [23, 120],
+        rotation: 21,
+        belongPlayer: "CA"
       },
-      // San Juan CL-54 -> atlanta：同属 Atlanta 级；防空巡洋舰前卫南侧。
-      {
-        name: "atlanta",
-        pos: [6, 31],
-        rotation: 135,
-        belongPlayer: "HA"
-      },
-      // Phelps DD-360 -> porter：同属 Porter 级；外圈北侧屏卫。
-      {
-        name: "porter",
-        pos: [22, 8],
-        rotation: 135,
-        belongPlayer: "HA"
-      },
-      // Dewey DD-349：现有同名资源；外圈中央屏卫。
-      {
-        name: "dewey",
-        pos: [22, 21],
-        rotation: 135,
-        belongPlayer: "HA"
-      },
-      // Newcomb DD-586 -> porter：Fletcher 级未收录；以同类别、长度接近的 Porter 级资源替代。
-      {
-        name: "porter",
-        pos: [22, 34],
-        rotation: 135,
-        belongPlayer: "HA"
-      },
-
-      // === 日军：第一机动舰队代表编队（右下，向西北） ===
-      // Taiho：现有同名资源；第一航空战队旗舰。
       {
         name: "taiho",
-        pos: [95, 84],
-        rotation: 315,
+        pos: [27, 120],
+        rotation: 21,
         belongPlayer: "CA"
       },
-      // Shokaku：现有同名资源；第一航空战队中央。
+      // 西方（正左方）
       {
-        name: "shokaku",
-        pos: [95, 92],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Zuikaku -> shokaku：同属 Shokaku 级；第一航空战队南侧。
-      {
-        name: "shokaku",
-        pos: [95, 100],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Yamato：现有同名资源；前卫战列舰北翼。
-      {
-        name: "yamato",
-        pos: [101, 80],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Musashi -> yamato：同属 Yamato 级；前卫战列舰中央偏北。
-      {
-        name: "yamato",
-        pos: [101, 88],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Kongo：现有同名资源；前卫战列舰中央偏南。
-      {
-        name: "kongo",
-        pos: [101, 96],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Haruna -> kongo：同属 Kongo 级；前卫战列舰南翼。
-      {
-        name: "kongo",
-        pos: [101, 104],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Atago：现有同名资源；巡洋舰前卫北侧。
-      {
-        name: "atago",
-        pos: [106, 82],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Haguro：现有同名资源；巡洋舰前卫中央。
-      {
-        name: "haguro",
-        pos: [106, 93],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Yahagi：现有同名资源；第十战队轻巡洋舰，前卫南侧。
-      {
-        name: "yahagi",
-        pos: [106, 104],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Yukikaze：现有同名资源；外圈北侧屏卫。
-      {
-        name: "yukikaze",
-        pos: [91, 79],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Yugumo：现有同名资源；外圈中央屏卫。
-      {
-        name: "yugumo",
-        pos: [91, 92],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-      // Urakaze -> yukikaze：同属 Kagero 级；外圈南侧屏卫。
-      {
-        name: "yukikaze",
-        pos: [91, 106],
-        rotation: 315,
-        belongPlayer: "CA"
-      },
-    ],
-  },
-  {
-    name: "Samar1944",
-    displayName: "萨马岛海战-1944",
-    displayNameEn: "Battle off Samar - 1944",
-    displayNameRu: "Сражение у острова Самар — 1944",
-    displayNameJa: "サマール沖海戦―1944年",
-    initFunds: 0,
-    initCameraPos: [58, 64],
-    mapName: "leyte_gulf",
-    maxShipCount: 36,
-    description: "1944 年 10 月 25 日 06:50，栗田健男的中央舰队在萨马岛外突然出现在‘塔菲 3’西北方。指挥 6 艘护航航母、3 艘驱逐舰与 4 艘护航驱逐舰向东撤退，以舰载机、烟幕和鱼雷阻止 4 艘战列舰、8 艘巡洋舰及 11 艘驱逐舰突入莱特湾。史实接触距离约 15 海里，本关压缩到约 3.8 公里并置入 128×128 的概略地图；舰位、编队间距和岸线均为玩法近似。缺失舰船优先采用同级舰，其次采用同舰种且尺寸相近的资源替代。",
-    descriptionEn: "At 06:50 on 25 October 1944, Vice Admiral Takeo Kurita's Center Force appeared northwest of Taffy 3 off Samar. Command six escort carriers, three destroyers, and four destroyer escorts withdrawing east while aircraft, smoke, and torpedoes hold back four battleships, eight cruisers, and eleven destroyers bound for Leyte Gulf. The historical contact range of about 15 nautical miles is compressed to about 3.8 km on this 128×128 schematic map; positions, spacing, and coastline are gameplay approximations. Missing ships use same-class substitutes first, then vessels of the same category and similar size.",
-    descriptionRu: "25 октября 1944 года в 06:50 Центральное соединение вице-адмирала Такэо Куриты внезапно появилось к северо-западу от «Таффи 3» у острова Самар. Командуйте шестью эскортными авианосцами, тремя эсминцами и четырьмя эскортными миноносцами, отходящими на восток, и задержите авиацией, дымовыми завесами и торпедами четыре линкора, восемь крейсеров и одиннадцать эсминцев, идущих к заливу Лейте. Историческая дистанция контакта около 15 морских миль сжата здесь примерно до 3,8 км на схематической сетке 128×128; позиции, интервалы и береговая линия являются игровым приближением. Отсутствующие корабли заменены прежде всего однотипными, затем близкими по классу и размерам.",
-    descriptionJa: "1944年10月25日06時50分、栗田健男中将の中央部隊はサマール島沖で「タフィ3」の北西に突如出現した。護衛空母6隻、駆逐艦3隻、護衛駆逐艦4隻を率いて東へ退避し、艦載機・煙幕・魚雷でレイテ湾へ向かう戦艦4隻、巡洋艦8隻、駆逐艦11隻を阻止せよ。史実の接触距離約15海里は、この128×128の概略マップ上で約3.8kmに圧縮されており、艦位・隊形間隔・海岸線はゲーム上の近似である。未収録艦は同型艦を優先し、次いで同艦種で寸法の近い艦を代用する。",
-    initReinforcePoints: [],
-    initOilPlatforms: [],
-    initShips: [
-      // 时间锚点：1944-10-25 06:50。游戏约定 0°=北、90°=东、180°=南、270°=西。
-      // 史实日舰位于西北约 15 海里，航向约 120°；塔菲 3 于 06:50 奉命转向正东。
-      // 本关把双方中心距压缩到约 30 格（约 3.8km）；队形保持前后关系，不代表精确史实舰位。
-      // 为保证开场形成巨炮威胁，日军战列线置于舰队中央偏南；四艘战列舰均至少覆盖一艘美军护航航母。
-
-      // === 美军：第 77.4.3 特遣支队（塔菲 3） ===
-      // Fanshaw Bay CVE-70 -> card：同为美军护航航母，长度接近；编队北侧，舰首向东。
-      {
-        name: "card",
-        pos: [71, 68],
+        name: "saratoga",
+        pos: [5, 18],
         rotation: 90,
-        belongPlayer: "HA"
+        belongPlayer: "CA"
       },
-      // Gambier Bay CVE-73 -> card：同为美军护航航母，长度接近；编队东北侧，舰首向东。
       {
-        name: "card",
-        pos: [75, 72],
+        name: "shinano",
+        pos: [5, 22],
         rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Kalinin Bay CVE-68 -> card：同为美军护航航母，长度接近；编队西北侧，舰首向东。
-      {
-        name: "card",
-        pos: [67, 72],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Kitkun Bay CVE-71 -> card：同为美军护航航母，长度接近；编队中央，舰首向东。
-      {
-        name: "card",
-        pos: [71, 76],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // St. Lo CVE-63 -> card：同为美军护航航母，长度接近；编队东南侧，舰首向东。
-      {
-        name: "card",
-        pos: [75, 80],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // White Plains CVE-66 -> card：同为美军护航航母，长度接近；编队西南侧，舰首向东。
-      {
-        name: "card",
-        pos: [67, 80],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-
-      // Johnston DD-557 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫北侧。
-      {
-        name: "maury",
-        pos: [61, 68],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Hoel DD-533 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫中央。
-      {
-        name: "maury",
-        pos: [62, 73],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Heermann DD-532 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫南侧。
-      {
-        name: "maury",
-        pos: [62, 78],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-
-      // Dennis DE-405 -> hammann：仓库无护航驱逐舰资源，以同年代美军驱逐舰近似；内圈北侧。
-      {
-        name: "hammann",
-        pos: [64, 70],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // John C. Butler DE-339 -> hammann：仓库无护航驱逐舰资源，以同年代美军驱逐舰近似；内圈中央偏北。
-      {
-        name: "hammann",
-        pos: [64, 74],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Raymond DE-341 -> hammann：仓库无护航驱逐舰资源，以同年代美军驱逐舰近似；内圈中央偏南。
-      {
-        name: "hammann",
-        pos: [64, 78],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Samuel B. Roberts DE-413 -> hammann：仓库无 John C. Butler 级资源，以同年代美军驱逐舰近似；编队后卫。
-      {
-        name: "hammann",
-        pos: [68, 83],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-
-      // === 日本海军：第一游击部队（中央舰队） ===
-      // Kongō：现有同名资源；战列舰列左翼、舰队中央偏南，追击航向约 120°。
-      {
-        name: "kongo",
-        pos: [38, 56],
-        rotation: 120,
         belongPlayer: "CA"
       },
-      // Yamato：现有同名资源；栗田旗舰，战列舰列中央偏左，开场主炮可覆盖全部六艘护航航母。
+      // 西北方
       {
-        name: "yamato",
-        pos: [42, 58],
-        rotation: 120,
+        name: "saratoga",
+        pos: [23, 3],
+        rotation: 114,
         belongPlayer: "CA"
       },
-      // Nagato：现有同名资源；战列舰列中央偏右。
       {
-        name: "nagato",
-        pos: [46, 60],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Haruna -> kongo：同属 Kongō 级；战列舰列右翼。
-      {
-        name: "kongo",
-        pos: [50, 62],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-
-      // Chōkai -> atago：同属 Takao 级；重巡前列左翼。
-      {
-        name: "atago",
-        pos: [32, 49],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Haguro：现有同名资源；重巡前列中央偏左。
-      {
-        name: "haguro",
-        pos: [36, 52],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Kumano -> suzuya：同属 Mogami 级；重巡前列中央。
-      {
-        name: "suzuya",
-        pos: [40, 54],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Suzuya：现有同名资源；重巡前列中央偏右。
-      {
-        name: "suzuya",
-        pos: [44, 56],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Tone：现有同名资源；重巡前列右翼。
-      {
-        name: "tone",
-        pos: [48, 58],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Chikuma -> tone：同属 Tone 级；重巡前列最右翼。
-      {
-        name: "tone",
-        pos: [52, 60],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-
-      // Noshiro -> yahagi：同属 Agano 级；第二水雷战队旗舰，位于驱逐舰群左翼。
-      {
-        name: "yahagi",
-        pos: [34, 55],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Yahagi：现有同名资源；第十水雷战队旗舰，位于驱逐舰群右翼。
-      {
-        name: "yahagi",
-        pos: [50, 64],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-
-      // Kishinami -> yugumo：同属 Yūgumo 级；驱逐舰外圈左翼。
-      {
-        name: "yugumo",
-        pos: [30, 54],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Okinami -> yugumo：同属 Yūgumo 级；驱逐舰外圈左翼。
-      {
-        name: "yugumo",
-        pos: [32, 58],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Fujinami -> yugumo：同属 Yūgumo 级；驱逐舰外圈中央偏左。
-      {
-        name: "yugumo",
-        pos: [35, 61],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Hayashimo -> yugumo：同属 Yūgumo 级；驱逐舰外圈中央偏左。
-      {
-        name: "yugumo",
-        pos: [38, 64],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Kiyoshimo -> yugumo：同属 Yūgumo 级；驱逐舰外圈中央。
-      {
-        name: "yugumo",
-        pos: [42, 66],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Shimakaze -> yukikaze：仓库无同级舰，以同舰种且尺寸接近的高速驱逐舰近似；驱逐舰外圈中央。
-      {
-        name: "yukikaze",
-        pos: [46, 68],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Nowaki -> yukikaze：同属 Kagerō 级；驱逐舰外圈中央偏右。
-      {
-        name: "yukikaze",
-        pos: [50, 70],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Hamakaze -> yukikaze：同属 Kagerō 级；驱逐舰外圈右翼。
-      {
-        name: "yukikaze",
-        pos: [54, 68],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Isokaze -> yukikaze：同属 Kagerō 级；驱逐舰外圈右翼。
-      {
-        name: "yukikaze",
-        pos: [56, 64],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Urakaze -> yukikaze：同属 Kagerō 级；驱逐舰外圈后侧。
-      {
-        name: "yukikaze",
-        pos: [55, 60],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-      // Yukikaze：现有同名资源；驱逐舰外圈后侧。
-      {
-        name: "yukikaze",
-        pos: [52, 56],
-        rotation: 120,
-        belongPlayer: "CA"
-      },
-    ],
-  },
-  {
-    name: "ManilaBay1941",
-    displayName: "马尼拉湾防卫战-1941",
-    displayNameEn: "Defense of Manila Bay - 1941",
-    displayNameRu: "Оборона Манильского залива — 1941",
-    displayNameJa: "マニラ湾防衛戦―1941年",
-    initFunds: 0,
-    initCameraPos: [54, 67],
-    mapName: "manila",
-    maxShipCount: 20,
-    description: "1941 年 12 月 8 日 04:00，马尼拉收到太平洋战争爆发的警报。本关是一场明确的架空推演：假设未按战前计划南撤的美国亚洲舰队主力仍留在马尼拉湾，并在近海迎击由日本第三舰队与轻型航母兵力组成的突入编队。指挥休斯敦、马布尔黑德、兰利及驱逐舰防守湾口。双方编成、距离与日军进入湾内均为玩法压缩；缺失舰船使用同级或同国同舰种近似资源替代。",
-    descriptionEn: "At 04:00 on 8 December 1941, Manila receives warning that war has begun across the Pacific. This scenario is explicitly alternate history: the main striking force of the U.S. Asiatic Fleet has not dispersed south as planned and instead meets a compressed Japanese Third Fleet and light-carrier force inside Manila Bay. Command Houston, Marblehead, Langley, and their destroyers in defense of the bay approaches. The opposing order of battle, distances, and Japanese entry into the bay are gameplay abstractions; missing ships use same-class or same-nation, same-category substitutes.",
-    descriptionRu: "8 декабря 1941 года в 04:00 Манила получает известие о начале войны на Тихом океане. Этот сценарий является явно обозначенной альтернативной историей: основные ударные силы Азиатского флота США не ушли на юг по довоенному плану, а встречают в Манильском заливе условно сведённые силы японского Третьего флота и лёгкого авианосца. Командуйте «Хьюстоном», «Марблхедом», «Лэнгли» и эсминцами, защищая подступы к заливу. Состав сторон, дистанции и вход японских кораблей в залив упрощены для игры; отсутствующие корабли заменены однотипными или близкими кораблями той же страны и категории.",
-    descriptionJa: "1941年12月8日04時00分、マニラに太平洋戦争勃発の警報が届く。本シナリオは明確な仮想戦であり、戦前計画どおり南方へ分散しなかった米アジア艦隊の主力が、マニラ湾内へ進入する日本第三艦隊と軽空母兵力の圧縮編成を迎撃する。ヒューストン、マーブルヘッド、ラングレーと駆逐艦を指揮し、湾口を防衛せよ。両軍の編成、距離、日本艦隊の湾内進入はゲーム上の近似であり、未収録艦は同型艦または同国・同艦種の近似艦で代用している。",
-    initReinforcePoints: [],
-    initOilPlatforms: [],
-    initShips: [
-      // 坐标按 128x192 manila.map 网格落位；0°=北、90°=东、180°=南、270°=西。
-      // 地图逻辑范围为 16.384x24.576km；原图无地理控制点，双方在开阔水域的距离和队形均为玩法近似。
-      // 两军最近初始间距约 50 格（约 6.4km），为双方航空侦察、展开队形和远程交火预留空间。
-      // 时间锚点为 1941-12-08 04:00（马尼拉时间）；美军主力留湾、日军突入湾内均为明确的架空设定。
-
-      // === 美军：马尼拉湾防卫编队（东南侧，向西北） ===
-      // Houston CA-30 -> northampton：同属 Northampton 级；防卫线中央，舰首约向西北。
-      {
-        name: "northampton",
-        pos: [48, 64],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Marblehead CL-12 -> atlanta：Omaha 级未收录；以同国同巡洋舰类别且长度接近的资源替代。
-      {
-        name: "atlanta",
-        pos: [54, 65],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Langley AV-3 -> langley：同名资源表现其早期航母形态；防卫线后方提供航空支援。
-      {
-        name: "langley",
-        pos: [61, 64],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Paul Jones DD-230 -> dewey：Clemson 级未收录；以同国同舰种、长度接近的 Farragut 级资源替代。
-      {
-        name: "dewey",
-        pos: [42, 64],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Whipple DD-217 -> dewey：沿用 Clemson 级替代策略；北侧前卫。
-      {
-        name: "dewey",
-        pos: [44, 68],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Alden DD-211 -> dewey：沿用 Clemson 级替代策略；中央前卫。
-      {
-        name: "dewey",
-        pos: [49, 69],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // John D. Edwards DD-216 -> dewey：沿用 Clemson 级替代策略；中央前卫。
-      {
-        name: "dewey",
-        pos: [54, 70],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Edsall DD-219 -> dewey：沿用 Clemson 级替代策略；中央后卫。
-      {
-        name: "dewey",
-        pos: [59, 69],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Stewart DD-224 -> dewey：沿用 Clemson 级替代策略；南侧后卫。
-      {
-        name: "dewey",
-        pos: [64, 68],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-      // Parrott DD-218 -> dewey：沿用 Clemson 级替代策略；防卫线南翼。
-      {
-        name: "dewey",
-        pos: [68, 65],
-        rotation: 315,
-        belongPlayer: "HA"
-      },
-
-      // === 日军：架空突入编队（西北侧，向东南） ===
-      // Ryujo：同名资源；将史实中支援菲律宾南部作战的轻型航母压缩到本关战区。
-      {
-        name: "ryujo",
-        pos: [20, 12],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Ashigara -> haguro：同属 Myoko 级；第三舰队重巡洋舰旗舰的同级替代。
-      {
-        name: "haguro",
-        pos: [30, 10],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Haguro：同名资源；重巡洋舰线南侧。
-      {
-        name: "haguro",
-        pos: [35, 12],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Natori -> shintsu：Nagara 级未收录；以同国同轻巡洋舰类别、尺寸接近的 Sendai 级资源替代。
-      {
-        name: "shintsu",
-        pos: [40, 10],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // Nagara -> shintsu：沿用同国同轻巡洋舰替代策略；巡洋舰线南翼。
-      {
-        name: "shintsu",
-        pos: [45, 12],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // 架空驱逐舰前卫 -> asashio：以 1941 年已服役的同国同舰种资源代表突入编队屏卫。
-      {
-        name: "asashio",
-        pos: [15, 8],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // 架空驱逐舰前卫 -> asashio：北侧外圈屏卫。
-      {
-        name: "asashio",
-        pos: [25, 7],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // 架空驱逐舰前卫 -> asashio：航母南侧屏卫。
-      {
-        name: "asashio",
-        pos: [15, 16],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // 架空驱逐舰前卫 -> asashio：巡洋舰线南侧屏卫。
-      {
-        name: "asashio",
-        pos: [25, 17],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-      // 架空驱逐舰前卫 -> asashio：编队北翼警戒。
-      {
-        name: "asashio",
-        pos: [35, 6],
-        rotation: 135,
-        belongPlayer: "CA"
-      },
-    ],
-  },
-  {
-    name: "Guam1944",
-    displayName: "关岛外海截击-1944",
-    displayNameEn: "Intercept off Guam - 1944",
-    displayNameRu: "Перехват у Гуама — 1944",
-    displayNameJa: "グアム沖迎撃―1944年",
-    initFunds: 0,
-    initCameraPos: [16, 54],
-    mapName: "guam",
-    maxShipCount: 14,
-    description: "1944 年 6 月 16 日，火奴鲁鲁号巡洋舰、宾夕法尼亚号与爱达荷号战列舰及数艘驱逐舰正在炮击关岛西岸；与此同时，日本机动舰队正驶向马里亚纳。本关以约 13:00 作为游戏快照，从这一史实构造架空分支：一支日军水面分队抢先抵达关岛外海，迫使炮击编队转入近距离海战。地图为西岸艺术化局部，跑道地标的逻辑尺度约为史实的 1.49 倍，舰位、交战距离与编队间隔均为可玩性近似。",
-    descriptionEn: "On 16 June 1944, Honolulu, Pennsylvania, Idaho, and several destroyers were bombarding Guam's west coast while the Japanese Mobile Fleet approached the Marianas. Using about 13:00 as its scenario clock, this mission branches into an alternate engagement: a Japanese surface detachment reaches Guam first and forces the bombardment group into a close-range action. The map is an artistic western-coast sector whose runway landmark is about 1.49 times historical logical scale; positions, engagement distance, and formation spacing are gameplay approximations.",
-    descriptionRu: "16 июня 1944 года крейсер «Гонолулу», линкоры «Пенсильвания» и «Айдахо» и несколько эсминцев обстреливали западный берег Гуама, пока японский Мобильный флот приближался к Марианским островам. Сценарий использует примерно 13:00 как игровую отметку времени и развивает альтернативную ветвь: японский надводный отряд первым выходит к Гуаму и вынуждает группу обстрела принять ближний бой. Карта является художественным фрагментом западного побережья; логический масштаб ориентира-взлётной полосы примерно в 1,49 раза больше исторического, а позиции, дистанция боя и интервалы построения являются игровым приближением.",
-    descriptionJa: "1944年6月16日、巡洋艦ホノルル、戦艦ペンシルベニアとアイダホ、数隻の駆逐艦がグアム西岸を砲撃し、日本の機動部隊はマリアナ諸島へ接近していた。本シナリオは13時頃をゲーム上の時刻基準とし、この史実から分岐して日本水上部隊が先にグアム沖へ到着し、砲撃部隊に近距離海戦を強いる架空展開を描く。マップは西岸を描いた芸術的な局地図で、滑走路の論理尺度は史実のおよそ1.49倍であり、艦位・交戦距離・隊形間隔はゲーム上の近似である。",
-    initReinforcePoints: [],
-    initOilPlatforms: [],
-    initShips: [
-      // 坐标按 128x128 guam.map 网格落位；0°=北、90°=东、180°=南、270°=西。
-      // 时间锚点为 1944-06-16 约 13:00（关卡时钟近似）；美军炮击与日军机动舰队逼近马里亚纳属史实，双方水面交战为架空分支。
-      // 可辨识的 Agana/Tiyan 单跑道在图上约 17.7 格（约 2.27km），对比史实约 1.52km，地图相对舰船约放大 1.49 倍。
-
-      // === 美军：西岸炮击编队，向南转向迎敌 ===
-      // Pennsylvania BB-38：现有同名资源；史实炮击核心舰。
-      {
-        name: "pennsylvania",
-        pos: [18, 52],
-        rotation: 180,
-        belongPlayer: "HA"
-      },
-      // Idaho BB-42 -> new_mexico：同属 New Mexico 级；史实炮击核心舰。
-      {
-        name: "new_mexico",
-        pos: [22, 55],
-        rotation: 180,
-        belongPlayer: "HA"
-      },
-      // Honolulu CL-48 -> portland：Brooklyn 级未收录；以同类别、舰长接近的现有美军巡洋舰替代。
-      {
-        name: "portland",
-        pos: [14, 56],
-        rotation: 180,
-        belongPlayer: "HA"
-      },
-      // 史实护航驱逐舰之一 -> maury：具体舰名未由采用的编队概述确定；同类别近似资源。
-      {
-        name: "maury",
-        pos: [10, 50],
-        rotation: 180,
-        belongPlayer: "HA"
-      },
-      // 史实护航驱逐舰之一 -> dewey：具体舰名未由采用的编队概述确定；同类别近似资源。
-      {
-        name: "dewey",
-        pos: [10, 58],
-        rotation: 180,
-        belongPlayer: "HA"
-      },
-      // 史实护航驱逐舰之一 -> porter：具体舰名未由采用的编队概述确定；同类别近似资源。
-      {
-        name: "porter",
-        pos: [18, 60],
-        rotation: 180,
-        belongPlayer: "HA"
-      },
-      // 史实护航驱逐舰之一 -> maury：具体舰名未由采用的编队概述确定；同类别近似资源。
-      {
-        name: "maury",
-        pos: [22, 48],
-        rotation: 180,
-        belongPlayer: "HA"
-      },
-
-      // === 日军：机动舰队架空水面分队，自南向北截击 ===
-      // Yamato：现有同名资源；机动舰队第一战队主力舰。
-      {
-        name: "yamato",
-        pos: [28, 91],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      // Haruna -> kongo：同属 Kongo 级；以同级资源表示高速战列舰。
-      {
-        name: "kongo",
-        pos: [34, 95],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      // Tone：现有同名资源；机动舰队侦察巡洋舰。
-      {
-        name: "tone",
-        pos: [22, 97],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      // Yukikaze：现有同名资源；架空分队前卫。
-      {
-        name: "yukikaze",
-        pos: [18, 92],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      // Asashio 级护航舰 -> asashio：同级资源；架空分队左后卫。
-      {
-        name: "asashio",
-        pos: [24, 102],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      // Yugumo：现有同名资源；架空分队中央后卫。
-      {
-        name: "yugumo",
-        pos: [30, 103],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-      // Kagero 级护航舰 -> yukikaze：同级资源；架空分队右后卫。
-      {
-        name: "yukikaze",
-        pos: [38, 100],
-        rotation: 0,
-        belongPlayer: "CA"
-      },
-    ],
-  },
-  {
-    name: "IslandChainEncounter1942",
-    displayName: "岛链遭遇战-1942",
-    displayNameEn: "Island Chain Encounter - 1942",
-    displayNameRu: "Встречный бой у островной цепи — 1942",
-    displayNameJa: "島嶼群遭遇戦―1942年",
-    initFunds: 0,
-    initCameraPos: [64, 58],
-    mapName: "island_chain",
-    maxShipCount: 15,
-    description: "1942 年 9 月 15 日 16:00（架空时间锚点），美日两支水面舰队在无名岛链的东西水道相遇。本关不是历史复原；地图没有真实地理尺寸锚点，舰队按 128×128 网格（16.384 千米见方）的玩法尺度布置。指挥新墨西哥号、三艘巡洋舰和四艘驱逐舰向东突破，利用岛屿遮蔽火力并击败金刚号水面编队。无增援、无油井，舰名均直接使用现有资源，不代表史实编成。",
-    descriptionEn: "At 16:00 on 15 September 1942, in a fictional time frame, U.S. and Japanese surface forces meet in the east-west channel of an unnamed island chain. This is not a historical reconstruction: the fictional map has no real-world scale anchor, so the fleets use the gameplay scale of a 128×128 grid, 16.384 km square. Command New Mexico, three cruisers, and four destroyers eastward, using the islands for cover against Kongo's surface group. There are no reinforcements or oil platforms, and every ship name directly references an existing game asset rather than a historical order of battle.",
-    descriptionRu: "15 сентября 1942 года в 16:00, в рамках вымышленного эпизода, американские и японские надводные силы встречаются в проливе, идущем с запада на восток через безымянную цепь островов. Это не историческая реконструкция: у вымышленной карты нет реального масштабного ориентира, поэтому флотилии размещены в игровом масштабе сетки 128×128, то есть квадрата 16,384 км. Ведите «Нью-Мексико», три крейсера и четыре эсминца на восток, используя острова как укрытие против соединения «Конго». Подкреплений и нефтяных платформ нет; все названия кораблей напрямую ссылаются на имеющиеся игровые ресурсы, а не на исторический боевой состав.",
-    descriptionJa: "1942年9月15日16時00分という架空の時刻設定で、米日両軍の水上部隊が無名の島嶼群を東西に抜ける水道で遭遇する。本シナリオは史実の再現ではない。架空地図には実在地形の尺度基準がないため、128×128グリッド、すなわち一辺16.384kmのゲーム上の尺度で艦隊を配置した。ニューメキシコ、巡洋艦3隻、駆逐艦4隻を率いて東進し、島影を利用して金剛の水上部隊を撃破せよ。増援点と油井はなく、艦名はすべて既存ゲーム資源を直接使用しており、史実の編成を示すものではない。",
-    initReinforcePoints: [],
-    initOilPlatforms: [],
-    initShips: [
-      // 坐标按 128×128 island_chain.map 网格落位；0°=北、90°=东、180°=南、270°=西。
-      // 时间锚点为架空的 1942-09-15 16:00；美军从西向东、日军从东向西进入中央水道。
-      // 地图逻辑范围为 16.384km×16.384km；中央岛约 2.688km×3.072km，相当于 14.1×16.2 个 new_mexico 舰长。
-      // 地图没有真实地理尺寸锚点，因此上述比值只用于游戏部署审计，不代表历史比例。
-
-      // === 美军：西侧水面编队，舰首向东 ===
-      // New Mexico：现有资源直接使用；战列线核心。
-      {
-        name: "new_mexico",
-        pos: [18, 58],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Portland：现有资源直接使用；前侧重巡洋舰屏卫。
-      {
-        name: "portland",
-        pos: [14, 54],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Astoria：现有资源直接使用；后侧重巡洋舰屏卫。
-      {
-        name: "astoria",
-        pos: [14, 62],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Atlanta：现有资源直接使用；编队后侧轻巡洋舰。
-      {
-        name: "atlanta",
-        pos: [19, 66],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Porter：现有资源直接使用；北侧驱逐舰前卫。
-      {
-        name: "porter",
-        pos: [8, 48],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Maury：现有资源直接使用；北侧驱逐舰屏卫。
-      {
-        name: "maury",
-        pos: [8, 54],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // Dewey：现有资源直接使用；南侧驱逐舰屏卫。
-      {
-        name: "dewey",
-        pos: [8, 60],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      // 第二艘 Maury 资源舰：架空编队中的南侧驱逐舰后卫。
-      {
-        name: "maury",
-        pos: [8, 66],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-
-      // === 日军：东侧水面编队，舰首向西 ===
-      // Kongo：现有资源直接使用；战列线核心。
-      {
-        name: "kongo",
-        pos: [110, 58],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      // Tone：现有资源直接使用；北侧重巡洋舰屏卫。
-      {
-        name: "tone",
-        pos: [114, 54],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      // Abukuma：现有资源直接使用；南侧轻巡洋舰屏卫。
-      {
-        name: "abukuma",
-        pos: [114, 62],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      // Asashio：现有资源直接使用；北侧驱逐舰前卫。
-      {
-        name: "asashio",
-        pos: [120, 48],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      // Yugumo：现有资源直接使用；北侧驱逐舰屏卫。
-      {
-        name: "yugumo",
-        pos: [120, 54],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      // Yukikaze：现有资源直接使用；南侧驱逐舰屏卫。
-      {
-        name: "yukikaze",
-        pos: [120, 60],
-        rotation: 270,
-        belongPlayer: "CA"
-      },
-      // 第二艘 Yukikaze 资源舰：架空编队中的南侧驱逐舰后卫。
-      {
-        name: "yukikaze",
-        pos: [120, 66],
-        rotation: 270,
+        name: "hakuryu",
+        pos: [27, 3],
+        rotation: 114,
         belongPlayer: "CA"
       },
     ],

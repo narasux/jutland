@@ -1,6 +1,7 @@
 package metadata
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -18,6 +19,7 @@ import (
 type rawMissionMetadata struct {
 	Name                string                          `json:"name"`
 	DisplayName         string                          `json:"displayName"`
+	Category            string                          `json:"category"`
 	DisplayNameEn       string                          `json:"displayNameEn"`
 	DisplayNameRu       string                          `json:"displayNameRu"`
 	DisplayNameJa       string                          `json:"displayNameJa"`
@@ -32,6 +34,17 @@ type rawMissionMetadata struct {
 	InitShips           []rawInitShipMetadata           `json:"initShips"`
 	InitReinforcePoints []rawInitReinforcePointMetadata `json:"initReinforcePoints"`
 	InitOilPlatforms    []rawInitOilPlatformMetadata    `json:"initOilPlatforms"`
+}
+
+func normalizeMissionCategory(raw string) (MissionCategory, error) {
+	category := MissionCategory(raw)
+	if category == "" {
+		return MissionCategoryClassic, nil
+	}
+	if category != MissionCategoryClassic && category != MissionCategoryTest {
+		return "", fmt.Errorf("unknown mission category %q", raw)
+	}
+	return category, nil
 }
 
 type rawInitShipMetadata struct {
@@ -76,8 +89,13 @@ func init() {
 	}
 
 	missionMetadata = make(map[string]MissionMetadata)
+	missionOrder = make([]string, 0, len(misMDs))
 
 	for _, md := range misMDs {
+		category, categoryErr := normalizeMissionCategory(md.Category)
+		if categoryErr != nil {
+			log.Fatalf("invalid category for mission %q: %v", md.Name, categoryErr)
+		}
 		// 战舰
 		initShips := []InitShipMetadata{}
 		for _, shipMD := range md.InitShips {
@@ -131,6 +149,7 @@ func init() {
 		missionMetadata[md.Name] = MissionMetadata{
 			Name:        md.Name,
 			DisplayName: md.DisplayName,
+			Category:    category,
 			displayNames: map[i18n.Language]string{
 				i18n.LanguageZhHans:   md.DisplayName,
 				i18n.LanguageEnglish:  md.DisplayNameEn,
@@ -158,5 +177,6 @@ func init() {
 			InitReinforcePoints: initReinforcePoints,
 			InitOilPlatforms:    initOilPlatforms,
 		}
+		missionOrder = append(missionOrder, md.Name)
 	}
 }

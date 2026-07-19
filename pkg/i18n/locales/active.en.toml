@@ -20,6 +20,10 @@ other = "Mission accomplished!"
 other = "Mission failed..."
 [MissionStart]
 other = "Start Mission"
+[MissionCategoryClassic]
+other = "Classic"
+[MissionCategoryTest]
+other = "Test"
 [Back]
 other = "Back"
 [MissionStats]
