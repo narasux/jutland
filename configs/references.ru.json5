@@ -2780,7 +2780,7 @@
   {
     "name": "atlanta",
     "displayName": "Атланта",
-    "type": "Лёгкий крейсер",
+    "type": "Крейсер ПВО",
     "armaments": [
       {
         "label": "Главная батарея",
@@ -2810,6 +2810,55 @@
         "name": "Википедия — Атланта",
         "url": "https://en.wikipedia.org/wiki/USS%20Atlanta%20%28CL-51%29"
       }
+    ]
+  },
+  {
+    "name": "charlotte",
+    "displayName": "«Шарлотт» (проект CL-154)",
+    "type": "Крейсер ПВО",
+    "armaments": [
+      {"label": "Главный калибр", "value": "6x2 127mm/54 Mk39"},
+      {"label": "Универсальная артиллерия", "value": "7x2 76mm/70 Mk26"},
+      {"label": "Зенитная артиллерия", "value": "8x1 20mm/70"}
+    ],
+    "description": "Тип CL-154 был поздним проектом американского крейсера ПВО «Супер Атланта». В игровой конфигурации он несёт шесть спаренных 127-мм/54, семь спаренных 76-мм/70 установок и восемь одноствольных 20-мм автоматов. Корабли не были построены и не получили официальных названий, поэтому по традиции именования американских лёгких крейсеров в честь городов использовано вымышленное имя «Шарлотт» — по городу в Северной Каролине.",
+    "author": "Tzoli",
+    "links": [
+      {"name": "The Super Atlanta Scheme 1945 Variant 2", "url": "https://www.deviantart.com/tzoli/art/The-Super-Atlanta-Scheme-1945-Variant-2-867019655"},
+      {"name": "Wikipedia — CL-154-class cruiser", "url": "https://en.wikipedia.org/wiki/CL-154-class_cruiser"}
+    ]
+  },
+  {
+    "name": "fargo",
+    "displayName": "«Фарго»",
+    "type": "Лёгкий крейсер",
+    "armaments": [
+      {"label": "Главный калибр", "value": "4x3 152mm/47 Mk16"},
+      {"label": "Универсальная артиллерия", "value": "6x2 127mm/38 Mk12"},
+      {"label": "Зенитная артиллерия", "value": "6x4 + 2x2 40mm/60"},
+      {"label": "Зенитная артиллерия", "value": "10x2 20mm/70"}
+    ],
+    "description": "USS Fargo (CL-106) стал головным кораблём усовершенствованного варианта типа Cleveland с пониженной компактной надстройкой, улучшавшей остойчивость и сектора зенитного огня. Вступил в строй в 1945 году и был выведен в резерв в 1950 году.",
+    "author": "Tzoli",
+    "links": [
+      {"name": "USS Fargo in 1950", "url": "https://www.deviantart.com/tzoli/art/USS-Fargo-in-1950-1144071798"},
+      {"name": "Wikipedia — USS Fargo (CL-106)", "url": "https://en.wikipedia.org/wiki/USS_Fargo_(CL-106)"}
+    ]
+  },
+  {
+    "name": "uss_worcester_1958",
+    "displayName": "Вустер",
+    "type": "Лёгкий крейсер",
+    "armaments": [
+      {"label": "Главный калибр", "value": "6x2 152mm/47 Mk16DP"},
+      {"label": "Универсальная артиллерия", "value": "11x2 76mm/50 Mk22"},
+      {"label": "Универсальная артиллерия", "value": "2x1 76mm/50 Mk22"}
+    ],
+    "description": "USS Worcester (CL-144), введённый в строй в 1948 году, был головным кораблём последнего американского типа полностью артиллерийских лёгких крейсеров. Его двенадцать 152-мм/47 орудий Mk16DP заряжались при любом угле возвышения; показан облик 1958 года.",
+    "author": "Tzoli",
+    "links": [
+      {"name": "Worcester Class as Looked like in 1958", "url": "https://www.deviantart.com/tzoli/art/Worcester-Class-as-Looked-like-in-1958-986017255"},
+      {"name": "Wikipedia — USS Worcester (CL-144)", "url": "https://en.wikipedia.org/wiki/USS_Worcester_(CL-144)"}
     ]
   },
   {
@@ -5427,6 +5476,15 @@
     "links": []
   },
   {
+    "name": "US/152/47/2/MK16DP",
+    "displayName": "152-мм/47 двухорудийная универсальная установка Mk16DP",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "Двухорудийная 6-дюймовая установка Mk16DP крейсеров типа Worcester могла заряжаться при любом угле возвышения и применяться как по морским, так и по воздушным целям.",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/127/38/2/MK12",
     "displayName": "127mm двуствольная установка MK12",
     "type": "Оружие",
@@ -5500,11 +5558,29 @@
     "links": []
   },
   {
+    "name": "US/76/50/MK22",
+    "displayName": "76-мм/50 одноорудийная универсальная установка Mk22",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "Американская одноорудийная универсальная установка 3 дюйма/50 Mk22; в игре представляет две установки в корме крейсера Worcester.",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/76/50/2/MK22",
     "displayName": "76mm двуствольная установка MK22",
     "type": "Оружие",
     "armaments": [],
     "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/76/70/2/MK26",
+    "displayName": "76-мм/70 двухорудийная универсальная установка Mk26",
+    "type": "Оружие",
+    "armaments": [],
+    "description": "Проектная скорострельная американская 3-дюймовая/70 спаренная установка; в игре представляет среднюю зенитную батарею проекта CL-154 сентября 1945 года.",
     "author": "",
     "links": []
   },

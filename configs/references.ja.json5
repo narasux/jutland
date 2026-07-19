@@ -2780,7 +2780,7 @@
   {
     "name": "atlanta",
     "displayName": "アトランタ",
-    "type": "軽巡洋艦",
+    "type": "防空巡洋艦",
     "armaments": [
       {
         "label": "主砲",
@@ -2810,6 +2810,55 @@
         "name": "ウィキペディア — アトランタ",
         "url": "https://en.wikipedia.org/wiki/USS%20Atlanta%20%28CL-51%29"
       }
+    ]
+  },
+  {
+    "name": "charlotte",
+    "displayName": "シャーロット（CL-154 計画）",
+    "type": "防空軽巡洋艦",
+    "armaments": [
+      {"label": "主砲", "value": "6x2 127mm/54 Mk39"},
+      {"label": "両用砲", "value": "7x2 76mm/70 Mk26"},
+      {"label": "対空砲", "value": "8x1 20mm/70"}
+    ],
+    "description": "CL-154 級は、第二次世界大戦末期に米海軍が計画した「スーパー・アトランタ」防空巡洋艦である。本作の構成は 127mm/54 連装砲6基、76mm/70 連装砲7基、20mm 単装対空砲8基を備える。同級は建造されず正式な艦名もなかったため、米軽巡洋艦を都市名で命名する伝統に従い、架空の艦名としてノースカロライナ州の都市シャーロットを採用した。",
+    "author": "Tzoli",
+    "links": [
+      {"name": "The Super Atlanta Scheme 1945 Variant 2", "url": "https://www.deviantart.com/tzoli/art/The-Super-Atlanta-Scheme-1945-Variant-2-867019655"},
+      {"name": "ウィキペディア — CL-154級巡洋艦", "url": "https://en.wikipedia.org/wiki/CL-154-class_cruiser"}
+    ]
+  },
+  {
+    "name": "fargo",
+    "displayName": "ファーゴ",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {"label": "主砲", "value": "4x3 152mm/47 Mk16"},
+      {"label": "両用砲", "value": "6x2 127mm/38 Mk12"},
+      {"label": "対空砲", "value": "6x4 + 2x2 40mm/60"},
+      {"label": "対空砲", "value": "10x2 20mm/70"}
+    ],
+    "description": "USS ファーゴ（CL-106）は、上部構造物を低く集中させて復原性と対空射界を改善した改良型クリーブランド級のネームシップである。1945年に就役し、主に戦後の地中海と大西洋で活動した後、1950年に退役した。",
+    "author": "Tzoli",
+    "links": [
+      {"name": "USS Fargo in 1950", "url": "https://www.deviantart.com/tzoli/art/USS-Fargo-in-1950-1144071798"},
+      {"name": "ウィキペディア — USSファーゴ (CL-106)", "url": "https://en.wikipedia.org/wiki/USS_Fargo_(CL-106)"}
+    ]
+  },
+  {
+    "name": "uss_worcester_1958",
+    "displayName": "ウースター",
+    "type": "軽巡洋艦",
+    "armaments": [
+      {"label": "主砲", "value": "6x2 152mm/47 Mk16DP"},
+      {"label": "両用砲", "value": "11x2 76mm/50 Mk22"},
+      {"label": "両用砲", "value": "2x1 76mm/50 Mk22"}
+    ],
+    "description": "USS ウースター（CL-144）は1948年就役の、米海軍最後の全砲装軽巡洋艦級のネームシップである。12門の 152mm/47 Mk16DP は全仰角装填に対応し、水上射撃と遠距離対空射撃を兼ねた。本項目は1958年時の姿を表す。",
+    "author": "Tzoli",
+    "links": [
+      {"name": "Worcester Class as Looked like in 1958", "url": "https://www.deviantart.com/tzoli/art/Worcester-Class-as-Looked-like-in-1958-986017255"},
+      {"name": "ウィキペディア — USSウースター (CL-144)", "url": "https://en.wikipedia.org/wiki/USS_Worcester_(CL-144)"}
     ]
   },
   {
@@ -5427,6 +5476,15 @@
     "links": []
   },
   {
+    "name": "US/152/47/2/MK16DP",
+    "displayName": "152mm/47 Mk16DP 連装両用砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "ウースター級の 6インチ/47 Mk16DP 連装砲。全仰角で装填でき、対水上戦と遠距離対空射撃の双方に対応した。",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/127/38/2/MK12",
     "displayName": "127mm 連装砲 MK12",
     "type": "兵器",
@@ -5500,11 +5558,29 @@
     "links": []
   },
   {
+    "name": "US/76/50/MK22",
+    "displayName": "76mm/50 Mk22 単装両用砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "米海軍の 3インチ/50 Mk22 単装両用砲。本作ではウースター艦尾の2基を再現する。",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/76/50/2/MK22",
     "displayName": "76mm 連装砲 MK22",
     "type": "兵器",
     "armaments": [],
     "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/76/70/2/MK26",
+    "displayName": "76mm/70 Mk26 連装両用砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "米海軍が計画した高発射速度の 3インチ/70 連装対空砲。本作では 1945年9月の CL-154 級案の中口径対空砲として再現する。",
     "author": "",
     "links": []
   },

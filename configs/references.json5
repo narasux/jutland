@@ -1682,7 +1682,7 @@
   {
     name: "atlanta",
     displayName: "亚特兰大",
-    type: "轻巡洋舰",
+    type: "防空巡洋舰",
     armaments: [
       {label: "主炮", value: "8x2 127mm/38"},
       {label: "高炮", value: "4x4 28mm/75"},
@@ -1700,6 +1700,55 @@
         name: "维基百科 - 亚特兰大级轻巡洋舰",
         url: "https://zh.wikipedia.org/wiki/%E4%BA%9E%E7%89%B9%E8%98%AD%E5%A4%A7%E7%B4%9A%E8%BC%95%E5%B7%A1%E6%B4%8B%E8%89%A6"
       }
+    ]
+  },
+  {
+    name: "charlotte",
+    displayName: "夏洛特（CL-154 级方案）",
+    type: "防空轻巡洋舰",
+    armaments: [
+      {label: "主炮", value: "6x2 127mm/54 Mk39"},
+      {label: "高平炮", value: "7x2 76mm/70 Mk26"},
+      {label: "高炮", value: "8x1 20mm/70"},
+    ],
+    description: "CL-154 级是美国海军在二战末期提出的“超级亚特兰大”防空巡洋舰方案。游戏配置以六座双联 127mm/54 炮、七座双联 76mm/70 炮和八座单装 20mm 高炮构成防空火力，但该级因造价与效费比问题未开工建造。该级从未获得正式舰名；游戏遵循美国轻巡洋舰以城市命名的传统，将本舰虚构命名为北卡罗来纳州城市“夏洛特”。",
+    author: "Tzoli",
+    links: [
+      {name: "The Super Atlanta Scheme 1945 Variant 2", url: "https://www.deviantart.com/tzoli/art/The-Super-Atlanta-Scheme-1945-Variant-2-867019655"},
+      {name: "Wikipedia - CL-154-class cruiser", url: "https://en.wikipedia.org/wiki/CL-154-class_cruiser"}
+    ]
+  },
+  {
+    name: "fargo",
+    displayName: "法戈",
+    type: "轻巡洋舰",
+    armaments: [
+      {label: "主炮", value: "4x3 152mm/47 Mk16"},
+      {label: "高平炮", value: "6x2 127mm/38 Mk12"},
+      {label: "高炮", value: "6x4 + 2x2 40mm/60"},
+      {label: "高炮", value: "10x2 20mm/70"},
+    ],
+    description: "法戈号（CL-106）是改进型克利夫兰级轻巡洋舰的首舰，通过压低并集中上层建筑改善稳定性和防空射界。她于 1945 年服役，主要在战后地中海与大西洋活动，并于 1950 年退役。",
+    author: "Tzoli",
+    links: [
+      {name: "USS Fargo in 1950", url: "https://www.deviantart.com/tzoli/art/USS-Fargo-in-1950-1144071798"},
+      {name: "Wikipedia - USS Fargo (CL-106)", url: "https://en.wikipedia.org/wiki/USS_Fargo_(CL-106)"}
+    ]
+  },
+  {
+    name: "uss_worcester_1958",
+    displayName: "伍斯特",
+    type: "轻巡洋舰",
+    armaments: [
+      {label: "主炮", value: "6x2 152mm/47 Mk16DP"},
+      {label: "高平炮", value: "11x2 76mm/50 Mk22"},
+      {label: "高平炮", value: "2x1 76mm/50 Mk22"},
+    ],
+    description: "伍斯特号（CL-144）是美国海军最后一代全火炮轻巡洋舰的首舰，1948 年服役。其十二门 152mm/47 Mk16DP 炮可全角装填并兼顾对海与远程防空；本条目表现她在 1958 年退役前的外观与武备。",
+    author: "Tzoli",
+    links: [
+      {name: "Worcester Class as Looked like in 1958", url: "https://www.deviantart.com/tzoli/art/Worcester-Class-as-Looked-like-in-1958-986017255"},
+      {name: "Wikipedia - USS Worcester (CL-144)", url: "https://en.wikipedia.org/wiki/USS_Worcester_(CL-144)"}
     ]
   },
   {
@@ -3452,6 +3501,15 @@
     links: []
   },
   {
+    name: "US/152/47/2/MK16DP",
+    displayName: "152mm/47 双联装高平两用舰炮 Mk16DP",
+    type: "武器",
+    armaments: [],
+    description: "伍斯特级采用的双联装 6 英寸/47 Mk16DP，具备全角装填与高俯仰、训练速度，可兼顾对海和远程防空射击。",
+    author: "",
+    links: []
+  },
+  {
     name: "US/127/38/2/MK12",
     displayName: "127mm/38 双联装舰炮 Mk12",
     type: "武器",
@@ -3519,11 +3577,29 @@
     links: []
   },
   {
+    name: "US/76/50/MK22",
+    displayName: "76mm/50 单装高平两用炮 Mk22",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 3 英寸/50 Mk22 单装高平两用炮，本游戏用于表现伍斯特号舰尾的两座单装炮。",
+    author: "",
+    links: []
+  },
+  {
     name: "US/76/50/2/MK22",
     displayName: "76mm/50 双联装高平两用炮 Mk22",
     type: "武器",
     armaments: [],
     description: "",
+    author: "",
+    links: []
+  },
+  {
+    name: "US/76/70/2/MK26",
+    displayName: "76mm/70 双联装高平两用炮 Mk26",
+    type: "武器",
+    armaments: [],
+    description: "美国海军战后规划的高射速 3 英寸/70 双联装炮，本游戏用于表现 CL-154 级 1945 年最终方案的中程防空炮组。",
     author: "",
     links: []
   },

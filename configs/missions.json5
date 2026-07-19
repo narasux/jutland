@@ -1353,6 +1353,8 @@
         providedShipNames: [
           "duck",
           "swordfish",
+          "waterdrop",
+          "molamola",
           "liberty",
           "mercy",
           "peace_ark",
@@ -1469,6 +1471,9 @@
           "brooklyn",
           "st_louis",
           "atlanta",
+          "charlotte",
+          "fargo",
+          "uss_worcester_1958",
           "long_beach",
           "long_beach_scheme_D",
           "furutaka",
@@ -1593,7 +1598,19 @@
       },
       {
         name: "swordfish",
-        pos: [18, 42],
+        pos: [19, 36],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "waterdrop",
+        pos: [19, 40],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "molamola",
+        pos: [12, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -2101,20 +2118,38 @@
         belongPlayer: "HA"
       },
       {
-        name: "brooklyn",
+        name: "uss_worcester_1958",
         pos: [41, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "st_louis",
+        name: "fargo",
         pos: [40, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "atlanta",
+        name: "charlotte",
         pos: [41, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "atlanta",
+        pos: [40, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "st_louis",
+        pos: [41, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "brooklyn",
+        pos: [40, 52],
         rotation: 90,
         belongPlayer: "HA"
       },

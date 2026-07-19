@@ -344,18 +344,31 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 美国海军 6 英寸/47 Mark 16 三联装舰炮（St. Louis 级）
+  // 美国海军 6 英寸/47 Mark 16 三联装舰炮（St. Louis / Fargo 级）
   {
     name: "US/152/47/3/MK16",
     bulletName: "US/GB/152/1939",
     bulletCount: 3,
     reloadTime: 4.5,
     range: 24,
-    bulletSpread: 90,
+    bulletSpread: 70,
     bulletSpeed: 812,
     fundsCost: 10,
     antiShip: true,
     antiAircraft: false,
+  },
+  // 美国海军 6 英寸/47 Mark 16DP 双联装高平两用舰炮（伍斯特级）
+  {
+    name: "US/152/47/2/MK16DP",
+    bulletName: "US/GB/152/1939",
+    bulletCount: 2,
+    reloadTime: 5,
+    range: 26,
+    bulletSpread: 40,
+    bulletSpeed: 812,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: true,
   },
   // 美国海军 US/127/38/MK12 双联装舰炮
   {
@@ -482,6 +495,32 @@
     range: 13,
     bulletSpread: 55,
     bulletSpeed: 820,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 美国海军 US/76/50/MK22 单装高平两用炮（Mark 22）
+  {
+    name: "US/76/50/MK22",
+    bulletName: "US/GB/76/1910",
+    bulletCount: 1,
+    reloadTime: 0.6,
+    range: 13,
+    bulletSpread: 50,
+    bulletSpeed: 820,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 美国海军 3 英寸/70 Mark 26 双联装高平两用炮（CL-154 方案）
+  {
+    name: "US/76/70/2/MK26",
+    bulletName: "US/GB/76/1910",
+    bulletCount: 2,
+    reloadTime: 0.5,
+    range: 17,
+    bulletSpread: 25,
+    bulletSpeed: 1036,
     fundsCost: 10,
     antiShip: true,
     antiAircraft: true

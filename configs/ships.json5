@@ -22252,7 +22252,7 @@
     name: "atlanta",
     nation: "us",
     type: "cruiser",
-    typeAbbr: "CL",
+    typeAbbr: "CLAA",
     year: 1942,
     totalHP: 7400,
     horizontalDamageReduction: 0.2,
@@ -22428,6 +22428,169 @@
         }
       ]
     },
+  },
+  {
+    // 夏洛特（CL-154 级 1945 年方案）
+    name: "charlotte",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CLAA",
+    year: 1945,
+    totalHP: 11950,
+    horizontalDamageReduction: 0.2,
+    verticalDamageReduction: 0.08,
+    maxSpeed: 34.5,
+    acceleration: 0.65,
+    rotateSpeed: 1.7,
+    length: 186,
+    width: 19,
+    fundsCost: 215,
+    timeCost: 77,
+    weapon: {
+      mainGuns: [
+        {name: "US/127/54/2/MK39", posPercent: 0.57, rightFiringArc: [0, 155], leftFiringArc: [205, 360]},
+        {name: "US/127/54/2/MK39", posPercent: 0.46, rightFiringArc: [0, 160], leftFiringArc: [200, 360]},
+        {name: "US/127/54/2/MK39", posPercent: 0.33, rightFiringArc: [0, 165], leftFiringArc: [195, 360]},
+        {name: "US/127/54/2/MK39", posPercent: -0.39, rightFiringArc: [15, 180], leftFiringArc: [180, 345]},
+        {name: "US/127/54/2/MK39", posPercent: -0.51, rightFiringArc: [20, 180], leftFiringArc: [180, 340]},
+        {name: "US/127/54/2/MK39", posPercent: -0.63, rightFiringArc: [25, 180], leftFiringArc: [180, 335]},
+      ],
+      secondaryGuns: [
+        // 舷侧 6 座
+        {name: "US/76/70/2/MK26", posPercent: 0.09, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/70/2/MK26", posPercent: 0.09, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/70/2/MK26", posPercent: -0.07, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/76/70/2/MK26", posPercent: -0.07, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/76/70/2/MK26", posPercent: -0.2, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/70/2/MK26", posPercent: -0.2, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 舰尾 1 座
+        {name: "US/76/70/2/MK26", posPercent: -0.91, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+      ],
+      antiAircraftGuns: [
+        // 20mm 高炮
+        // 前舰桥 4 座
+        {name: "US/20/70", posPercent: 0.4, rightFiringArc: [0, 180], leftFiringArc: [270, 360]},
+        {name: "US/20/70", posPercent: 0.4, rightFiringArc: [0, 90], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: 0.2, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: 0.2, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 后舰桥 2 座
+        {name: "US/20/70", posPercent: -0.91, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70", posPercent: -0.91, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 舰尾 2 座
+        {name: "US/20/70", posPercent: -0.91, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70", posPercent: -0.91, rightFiringArc: [0, 180], leftFiringArc: [180, 360]}
+      ]
+    }
+  },
+  {
+    // 法戈号（1950 年状态）
+    name: "fargo",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CL",
+    year: 1950,
+    totalHP: 14500,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 32.5,
+    acceleration: 0.6,
+    rotateSpeed: 1.6,
+    length: 186,
+    width: 20,
+    fundsCost: 205,
+    timeCost: 74,
+    weapon: {
+      mainGuns: [
+        {name: "US/152/47/3/MK16", posPercent: 0.62, rightFiringArc: [0, 150], leftFiringArc: [210, 360]},
+        {name: "US/152/47/3/MK16", posPercent: 0.49, rightFiringArc: [0, 150], leftFiringArc: [210, 360]},
+        {name: "US/152/47/3/MK16", posPercent: -0.46, rightFiringArc: [15, 180], leftFiringArc: [180, 345]},
+        {name: "US/152/47/3/MK16", posPercent: -0.58, rightFiringArc: [25, 180], leftFiringArc: [180, 335]},
+      ],
+      secondaryGuns: [
+        // 前向 3 座
+        {name: "US/127/38/2/MK12", posPercent: 0.38, rightFiringArc: [0, 150], leftFiringArc: [210, 360]},
+        {name: "US/127/38/2/MK12", posPercent: 0.27, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/127/38/2/MK12", posPercent: 0.27, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 后向 3 座
+        {name: "US/127/38/2/MK12", posPercent: -0.24, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/127/38/2/MK12", posPercent: -0.24, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/127/38/2/MK12", posPercent: -0.34, rightFiringArc: [45, 180], leftFiringArc: [180, 315]}
+      ],
+      antiAircraftGuns: [
+        // 40mm 博福斯
+        // 舰桥 6 座四联装
+        {name: "US/40/60/4", posPercent: 0.15, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: 0.15, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: -0.01, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: -0.01, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/40/60/4", posPercent: -0.13, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/40/60/4", posPercent: -0.13, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 舰尾 2 座双联装
+        {name: "US/40/60/2", posPercent: -0.97, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/40/60/2", posPercent: -0.97, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 双联装 20mm 厄利孔
+        // 舰首 2 座
+        {name: "US/20/70/2", posPercent: 0.94, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: 0.94, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 前副炮左右 4 座
+        {name: "US/20/70/2", posPercent: 0.41, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70/2", posPercent: 0.41, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: 0.37, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70/2", posPercent: 0.37, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 后副炮左右 4 座
+        {name: "US/20/70/2", posPercent: -0.34, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/20/70/2", posPercent: -0.34, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: -0.37, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/20/70/2", posPercent: -0.37, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+      ]
+    }
+  },
+  {
+    // USS Worcester（1958 年状态）
+    name: "uss_worcester_1958",
+    nation: "us",
+    type: "cruiser",
+    typeAbbr: "CL",
+    year: 1958,
+    totalHP: 18000,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.12,
+    maxSpeed: 32.7,
+    acceleration: 0.55,
+    rotateSpeed: 1.5,
+    length: 207,
+    width: 22,
+    fundsCost: 245,
+    timeCost: 88,
+    weapon: {
+      mainGuns: [
+        {name: "US/152/47/2/MK16DP", posPercent: 0.61, rightFiringArc: [0, 150], leftFiringArc: [210, 360]},
+        {name: "US/152/47/2/MK16DP", posPercent: 0.49, rightFiringArc: [0, 150], leftFiringArc: [210, 360]},
+        {name: "US/152/47/2/MK16DP", posPercent: 0.37, rightFiringArc: [0, 150], leftFiringArc: [210, 360]},
+        {name: "US/152/47/2/MK16DP", posPercent: -0.35, rightFiringArc: [30, 180], leftFiringArc: [180, 330]},
+        {name: "US/152/47/2/MK16DP", posPercent: -0.47, rightFiringArc: [30, 180], leftFiringArc: [180, 330]},
+        {name: "US/152/47/2/MK16DP", posPercent: -0.59, rightFiringArc: [30, 180], leftFiringArc: [180, 330]}
+      ],
+      secondaryGuns: [
+        // 舰首 1 座
+        {name: "US/76/50/2/MK22", posPercent: 0.92, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        // 舰桥左右 10 座
+        {name: "US/76/50/2/MK22", posPercent: 0.24, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50/2/MK22", posPercent: 0.24, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/50/2/MK22", posPercent: 0.17, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50/2/MK22", posPercent: 0.17, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/50/2/MK22", posPercent: 0.04, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50/2/MK22", posPercent: 0.04, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/50/2/MK22", posPercent: -0.12, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50/2/MK22", posPercent: -0.12, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        {name: "US/76/50/2/MK22", posPercent: -0.2, rightFiringArc: [0, 180], leftFiringArc: [360, 360]},
+        {name: "US/76/50/2/MK22", posPercent: -0.2, rightFiringArc: [0, 0], leftFiringArc: [180, 360]},
+        // 舰尾 2 座
+        {name: "US/76/50/MK22", posPercent: -0.97, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+        {name: "US/76/50/MK22", posPercent: -0.97, rightFiringArc: [0, 180], leftFiringArc: [180, 360]},
+      ],
+      antiAircraftGuns: []
+    }
   },
   // 导弹巡洋舰
   {

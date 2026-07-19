@@ -2546,7 +2546,7 @@
   {
     "name": "atlanta",
     "displayName": "Atlanta",
-    "type": "Light Cruiser",
+    "type": "Anti-aircraft Cruiser",
     "armaments": [
       {
         "label": "Main Battery",
@@ -2576,6 +2576,55 @@
         "name": "Wikipedia — Atlanta",
         "url": "https://en.wikipedia.org/wiki/USS%20Atlanta%20%28CL-51%29"
       }
+    ]
+  },
+  {
+    "name": "charlotte",
+    "displayName": "Charlotte (CL-154 Design)",
+    "type": "Anti-aircraft Light Cruiser",
+    "armaments": [
+      {"label": "Main Battery", "value": "6x2 127mm/54 Mk39"},
+      {"label": "Dual-purpose Guns", "value": "7x2 76mm/70 Mk26"},
+      {"label": "Anti-aircraft Guns", "value": "8x1 20mm/70"}
+    ],
+    "description": "The CL-154 class was the U.S. Navy's late-war 'Super Atlanta' anti-aircraft cruiser project. Its game configuration combines six twin 5-inch/54 mounts, seven twin 3-inch/70 mounts, and eight single 20mm guns. The class was never built or officially named, so the game follows the U.S. light-cruiser city-naming tradition and assigns the fictional name Charlotte, North Carolina.",
+    "author": "Tzoli",
+    "links": [
+      {"name": "The Super Atlanta Scheme 1945 Variant 2", "url": "https://www.deviantart.com/tzoli/art/The-Super-Atlanta-Scheme-1945-Variant-2-867019655"},
+      {"name": "Wikipedia — CL-154-class cruiser", "url": "https://en.wikipedia.org/wiki/CL-154-class_cruiser"}
+    ]
+  },
+  {
+    "name": "fargo",
+    "displayName": "Fargo",
+    "type": "Light Cruiser",
+    "armaments": [
+      {"label": "Main Battery", "value": "4x3 152mm/47 Mk16"},
+      {"label": "Dual-purpose Guns", "value": "6x2 127mm/38 Mk12"},
+      {"label": "Anti-aircraft Guns", "value": "6x4 + 2x2 40mm/60"},
+      {"label": "Anti-aircraft Guns", "value": "10x2 20mm/70"}
+    ],
+    "description": "USS Fargo (CL-106) led an improved Cleveland-class design whose lower, compact superstructure enhanced stability and anti-aircraft arcs. Commissioned in 1945, she served mainly in the postwar Mediterranean and Atlantic before decommissioning in 1950.",
+    "author": "Tzoli",
+    "links": [
+      {"name": "USS Fargo in 1950", "url": "https://www.deviantart.com/tzoli/art/USS-Fargo-in-1950-1144071798"},
+      {"name": "Wikipedia — USS Fargo (CL-106)", "url": "https://en.wikipedia.org/wiki/USS_Fargo_(CL-106)"}
+    ]
+  },
+  {
+    "name": "uss_worcester_1958",
+    "displayName": "Worcester",
+    "type": "Light Cruiser",
+    "armaments": [
+      {"label": "Main Battery", "value": "6x2 152mm/47 Mk16DP"},
+      {"label": "Dual-purpose Guns", "value": "11x2 76mm/50 Mk22"},
+      {"label": "Dual-purpose Guns", "value": "2x1 76mm/50 Mk22"}
+    ],
+    "description": "USS Worcester (CL-144), commissioned in 1948, led the U.S. Navy's final class of all-gun light cruisers. Her twelve 6-inch/47 Mk16DP guns could load at any elevation for both surface and long-range anti-aircraft fire; this entry depicts her 1958 appearance.",
+    "author": "Tzoli",
+    "links": [
+      {"name": "Worcester Class as Looked like in 1958", "url": "https://www.deviantart.com/tzoli/art/Worcester-Class-as-Looked-like-in-1958-986017255"},
+      {"name": "Wikipedia — USS Worcester (CL-144)", "url": "https://en.wikipedia.org/wiki/USS_Worcester_(CL-144)"}
     ]
   },
   {
@@ -5002,6 +5051,15 @@
     "links": []
   },
   {
+    "name": "US/152/47/2/MK16DP",
+    "displayName": "152mm/47 Twin Dual-Purpose Mount Mk16DP",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "The Worcester-class twin 6-inch/47 Mk16DP mount could load at any elevation and trained rapidly enough for both surface and long-range anti-aircraft fire.",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/127/38/2/MK12",
     "displayName": "127mm Twin Mount MK12",
     "type": "Weapon",
@@ -5072,11 +5130,29 @@
     "links": []
   },
   {
+    "name": "US/76/50/MK22",
+    "displayName": "76mm/50 Single Dual-Purpose Mount Mk22",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "A U.S. Navy single 3-inch/50 Mk22 dual-purpose mounting represented in the game by the two mounts at Worcester's stern.",
+    "author": "",
+    "links": []
+  },
+  {
     "name": "US/76/50/2/MK22",
     "displayName": "76mm Twin Mount MK22",
     "type": "Weapon",
     "armaments": [],
     "description": "",
+    "author": "",
+    "links": []
+  },
+  {
+    "name": "US/76/70/2/MK26",
+    "displayName": "76mm/70 Twin Dual-Purpose Mount Mk26",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "A high-rate-of-fire U.S. twin 3-inch/70 anti-aircraft mounting represented here as the medium battery planned for the September 1945 CL-154 design.",
     "author": "",
     "links": []
   },
