@@ -3,6 +3,8 @@ package game
 type GameMode int
 
 const (
+	// 游戏开始
+	GameModeStart = iota
 	// 菜单选择
 	GameModeMenuSelect = iota
 	// 任务选择

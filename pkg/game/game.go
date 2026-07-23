@@ -57,7 +57,7 @@ func New() *Game {
 	config.G.Language = string(i18n.SetLanguage(config.G.Language))
 	emptyUIRoot := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
 	g := &Game{
-		mode:               GameModeMenuSelect,
+		mode:               GameModeStart,
 		drawer:             NewDrawer(),
 		player:             audio.NewPlayer(audio.Context),
 		objStates:          nil,
@@ -91,6 +91,8 @@ func (g *Game) Update() error {
 	}
 
 	switch g.mode {
+	case GameModeStart:
+		return g.handleGameStart()
 	case GameModeMenuSelect:
 		return g.handleMenuSelect()
 	case GameModeMissionSelect:
@@ -120,6 +122,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	defer recoverAndLogThenExit()
 
 	switch g.mode {
+	case GameModeStart:
+		g.drawer.drawBackground(screen, bgImg.GameStart)
+		g.drawer.drawGameTitle(screen)
 	case GameModeMenuSelect:
 		g.objStates.AutoUpdateMenuButtonStates(screen)
 		g.drawer.drawBackground(screen, bgImg.GameMenu)
@@ -250,6 +255,18 @@ func (g *Game) initMenuButtons() {
 			Mode:     GameModeEnd,
 		},
 	}
+}
+
+// 游戏开始
+func (g *Game) handleGameStart() error {
+	// 播放游戏封面的 BGM
+	g.player.PlayLazy(audioRes.NewGameStartBackground)
+	// 任意下一按键触发后，切换模式，关闭 BGM
+	if isAnyNextInput() {
+		g.mode = GameModeMenuSelect
+		g.player.Close()
+	}
+	return nil
 }
 
 // 菜单选择
