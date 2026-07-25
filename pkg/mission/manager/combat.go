@@ -29,11 +29,10 @@ func (m *MissionManager) updateShipWeaponFire() {
 	for _, ship := range m.state.Arena.Ships {
 		inRangeEnemies := []objUnit.Hurtable{}
 
-		if target := m.state.Arena.Ships[ship.AttackTarget]; target != nil {
-			// 如果有目标敌人，则检查是否在射程内，如果有直接选中即可
-			if ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange {
-				inRangeEnemies = append(inRangeEnemies, target)
-			}
+		target := m.state.Arena.Ships[ship.AttackTarget]
+		// 若有指定攻击目标且在射程内，则优先攻击该目标；否则扫描沿途其他敌人
+		if target != nil && ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange {
+			inRangeEnemies = append(inRangeEnemies, target)
 		} else {
 			// 敌机
 			for _, enemy := range m.state.Arena.Planes {
