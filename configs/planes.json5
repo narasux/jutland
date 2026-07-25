@@ -1363,6 +1363,113 @@
     }
   },
   {
+    // 海飓风 Mk IIC
+    name: "SeaHurricane",
+    nation: "uk",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1941,
+    totalHP: 35,
+    damageReduction: 0.45,
+    maxSpeed: 505,
+    acceleration: 30,
+    rotateSpeed: 12,
+    length: 10,
+    width: 12,
+    fundsCost: 9,
+    timeCost: 5,
+    tonnage: 3.5,
+    range: 970,
+    weapon: {
+      guns: [
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+
+  {
+    // 海喷火 Mk III
+    name: "Seafire",
+    nation: "uk",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 32,
+    damageReduction: 0.35,
+    maxSpeed: 578,
+    acceleration: 38,
+    rotateSpeed: 15,
+    length: 9,
+    width: 11,
+    fundsCost: 10,
+    timeCost: 5,
+    tonnage: 3.0,
+    range: 820,
+    weapon: {
+      guns: [
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/Browning",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
     // 剑鱼式 Mk I
     name: "Swordfish",
     nation: "uk",
@@ -1447,4 +1554,59 @@
       ]
     }
   },
+  {
+    // 海蚊式 TR.33
+    name: "Mosquito",
+    nation: "uk",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1945,
+    totalHP: 60,
+    damageReduction: 0.5,
+    maxSpeed: 595,
+    acceleration: 35,
+    rotateSpeed: 9,
+    length: 13,
+    width: 17,
+    fundsCost: 18,
+    timeCost: 8,
+    tonnage: 6.5,
+    range: 2655,
+    weapon: {
+      guns: [
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "UK/AST/457/1942",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  }
 ]

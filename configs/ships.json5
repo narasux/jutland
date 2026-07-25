@@ -5898,11 +5898,19 @@
       groups: [
         {
           name: "F4U-4",
-          maxCount: 32
+          maxCount: 20
+        },
+        {
+          name: "Seafire",
+          maxCount: 12
         },
         {
           name: "TBF-1-UK",
-          maxCount: 32
+          maxCount: 26
+        },
+        {
+          name: "Mosquito",
+          maxCount: 6
         },
         {
           name: "Barracuda-II",
@@ -6199,11 +6207,19 @@
       groups: [
         {
           name: "F4U-4",
-          maxCount: 30
+          maxCount: 18
+        },
+        {
+          name: "Seafire",
+          maxCount: 12
         },
         {
           name: "TBF-1-UK",
-          maxCount: 24
+          maxCount: 18
+        },
+        {
+          name: "Mosquito",
+          maxCount: 6
         }
       ]
     }
@@ -6595,7 +6611,7 @@
       takeOffTime: 3,
       groups: [
         {
-          name: "F4U-4",
+          name: "Seafire",
           maxCount: 24
         },
         {
@@ -6882,8 +6898,12 @@
       takeOffTime: 3,
       groups: [
         {
-          name: "Fulmar",
-          maxCount: 16
+          name: "Seafire",
+          maxCount: 12
+        },
+        {
+          name: "SeaHurricane",
+          maxCount: 4
         },
         {
           name: "Swordfish",
@@ -7149,7 +7169,7 @@
       takeOffTime: 4,
       groups: [
         {
-          name: "Fulmar",
+          name: "SeaHurricane",
           maxCount: 8
         },
         {
@@ -7433,7 +7453,7 @@
       takeOffTime: 4.5,
       groups: [
         {
-          name: "Fulmar",
+          name: "SeaHurricane",
           maxCount: 8
         },
         {
@@ -7641,7 +7661,7 @@
       takeOffTime: 4,
       groups: [
         {
-          name: "F4U-4",
+          name: "Seafire",
           maxCount: 8
         },
         {
@@ -7773,7 +7793,7 @@
       takeOffTime: 4.5,
       groups: [
         {
-          name: "F4U-4",
+          name: "Seafire",
           maxCount: 8
         },
         {
@@ -7864,6 +7884,10 @@
       takeOffTime: 5.5,
       groups: [
         {
+          name: "SeaHurricane",
+          maxCount: 4
+        },
+        {
           name: "Swordfish",
           maxCount: 3
         }
@@ -7938,6 +7962,10 @@
     aircraft: {
       takeOffTime: 5,
       groups: [
+        {
+          name: "SeaHurricane",
+          maxCount: 4
+        },
         {
           name: "Swordfish",
           maxCount: 4
