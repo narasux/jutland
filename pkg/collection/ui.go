@@ -1842,6 +1842,7 @@ func (c *CollectionUI) drawPlanes(screen *ebiten.Image) {
 			c.drawPlaneCard(
 				c.planeCanvas, plane, x, y, geometry.Width, geometry.Height,
 				geometry.Scale, viewport.Min,
+				c.planeFirstIndex+column+1, len(planes),
 			)
 		}
 	}
@@ -1863,7 +1864,7 @@ func (c *CollectionUI) drawPlanes(screen *ebiten.Image) {
 
 func (c *CollectionUI) drawPlaneCard(
 	screen *ebiten.Image, plane *objUnit.Plane, x, y, width, height int,
-	scale float64, screenOffset image.Point,
+	scale float64, screenOffset image.Point, index, total int,
 ) {
 	// 每张飞机卡片从上到下固定分为：标题、素材、基础数据、武器配置、雷达图和总战力。
 	px := func(value float64) float64 { return value * scale }
@@ -1895,6 +1896,16 @@ func (c *CollectionUI) drawPlaneCard(
 		float64(x)+px(20), float64(y)+px(54), float64(width)-px(40), px(18),
 		font.LocalizedUI(font.Kai), color.RGBA{175, 165, 150, 255}, screenOffset, nil,
 	)
+	if total > 0 {
+		posText := fmt.Sprintf("%d/%d", index, total)
+		posFont := font.ForText(posText, font.LocalizedUI(font.Kai))
+		posWidth := estimateCollectionTextWidth(posText, px(18))
+		c.drawer.drawText(
+			screen, posText,
+			float64(x+width)-px(20)-posWidth, float64(y)+px(18),
+			px(18), posFont, color.RGBA{175, 165, 150, 255},
+		)
+	}
 	c.drawer.drawCollectionImageAtBaseScale(
 		screen, planeImg.GetOriginal(plane.Name), float64(x)+px(24), float64(y)+px(78),
 		float64(width)-px(48), px(116), 0, planeImg.GetDisplayScale(plane.Name),
