@@ -2026,8 +2026,12 @@
       },
     ],
     description: "飛龍は蒼龍の発展型で、同艦と第二航空戦隊を編成した。ミッドウェー海戦では飛龍の航空隊が二度の攻撃でUSS ヨークタウンを行動不能にした。その後、米軍急降下爆撃機の攻撃で炎上し、乗員退去後に自沈処分された。",
-    author: "不明",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket — 飛龍",
+        url: "https://www.shipbucket.com/drawings/4312",
+      },
       {
         name: "ウィキペディア — 飛龍",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiry%C5%AB",
@@ -4883,8 +4887,12 @@
       },
     ],
     description: "蒼龍は1937年に竣工した高速艦隊空母で、当初から空母として設計された。真珠湾攻撃やインド洋作戦に参加したが、ミッドウェー海戦で米軍SBDドーントレスの爆撃を受けた。燃料と兵装を搭載した艦載機が誘爆し、制御不能となった。",
-    author: "不明",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket — 蒼龍",
+        url: "https://www.shipbucket.com/drawings/4327",
+      },
       {
         name: "ウィキペディア — 蒼龍",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20S%C5%8Dry%C5%AB",

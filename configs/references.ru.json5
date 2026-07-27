@@ -2026,8 +2026,12 @@
       },
     ],
     description: "Hiryū был развитием Sōryū и вместе с ним входил во 2-ю дивизию авианосцев. У Мидуэя его авиагруппы провели две атаки, выведшие USS Yorktown из строя. Позднее американские пикировщики подожгли японский авианосец, и после эвакуации команды его затопили.",
-    author: "Неизвестно",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket — Хирю",
+        url: "https://www.shipbucket.com/drawings/4312",
+      },
       {
         name: "Википедия — Хирю",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiry%C5%AB",
@@ -4883,8 +4887,12 @@
       },
     ],
     description: "Sōryū — быстроходный японский эскадренный авианосец, вступивший в строй в 1937 году и изначально спроектированный для авианосных операций. Он участвовал в нападении на Пёрл-Харбор и рейде в Индийский океан. У Мидуэя бомбы американских SBD Dauntless вызвали пожары среди заправленных и вооружённых самолётов, после чего корабль спасти не удалось.",
-    author: "Неизвестно",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket — Сорю",
+        url: "https://www.shipbucket.com/drawings/4327",
+      },
       {
         name: "Википедия — Сорю",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20S%C5%8Dry%C5%AB",

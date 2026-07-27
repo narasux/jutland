@@ -782,8 +782,12 @@
       },
     ],
     description: "苍龙号是日本海军苍龙级航空母舰首舰，1937 年服役，是日本第一款以舰队航母为标准设计建造的正规航母，航速高达 34 节。曾参与珍珠港空袭与印度洋作战，1942 年 6 月在中途岛海战中遭美军 SBD 俯冲轰炸机击中三弹，因弹药殉爆沉没。",
-    author: "未知",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket - Soryu",
+        url: "https://www.shipbucket.com/drawings/4327",
+      },
       {
         name: "维基百科 - 苍龙号航空母舰",
         url: "https://zh.wikipedia.org/wiki/%E8%8B%8D%E9%BE%99%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0",
@@ -817,8 +821,12 @@
       },
     ],
     description: "飞龙号是日本海军苍龙级航空母舰二号舰，1939 年服役，与苍龙号组成第二航空战队。在中途岛海战中，飞龙号是日军最后残存的航母，其舰载机两度重创美军约克城号，但最终遭美军 SBD 俯冲轰炸机反击，舰体大火失控后由己方驱逐舰雷击处分。",
-    author: "未知",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket - Hiryu",
+        url: "https://www.shipbucket.com/drawings/4312",
+      },
       {
         name: "维基百科 - 飞龙号航空母舰",
         url: "https://zh.wikipedia.org/wiki/%E9%A3%9E%E9%BE%99%E5%8F%B7%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%88%B0",

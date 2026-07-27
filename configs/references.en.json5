@@ -2026,8 +2026,12 @@
       },
     ],
     description: "Hiryū was a close development of Sōryū and served with her in the Second Carrier Division. During the Battle of Midway, Hiryū's air groups launched two attacks that crippled USS Yorktown. American dive bombers later set the Japanese carrier ablaze, and she was scuttled after the crew abandoned ship.",
-    author: "Unknown",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket — Hiryū",
+        url: "https://www.shipbucket.com/drawings/4312",
+      },
       {
         name: "Wikipedia — Hiryū",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Hiry%C5%AB",
@@ -4883,8 +4887,12 @@
       },
     ],
     description: "Sōryū was a fast Japanese fleet carrier commissioned in 1937 and designed from the outset for carrier operations. She participated in the attack on Pearl Harbor and the Indian Ocean raid. At Midway, bombs from American SBD Dauntless dive bombers ignited fueled and armed aircraft, leaving her beyond control.",
-    author: "Unknown",
+    author: "BB1987, PomboCZ",
     links: [
+      {
+        name: "Shipbucket — Sōryū",
+        url: "https://www.shipbucket.com/drawings/4327",
+      },
       {
         name: "Wikipedia — Sōryū",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20S%C5%8Dry%C5%AB",
