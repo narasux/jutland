@@ -520,11 +520,11 @@
       },
       {
         label: "制空战斗机",
-        value: "24x 零式舰战（A6M2）",
+        value: "24x 烈风舰战（A7M2）",
       },
       {
         label: "俯冲轰炸机",
-        value: "12x 九九舰爆（D3A）",
+        value: "12x 彗星舰爆（D4Y3）",
       },
       {
         label: "舰载攻击机",
@@ -3094,7 +3094,7 @@
     armaments: [
       {
         label: "主炮",
-        value: "4x3 305mm/50",
+        value: "4x3 305mm/50 Mk 8",
       },
       {
         label: "高平炮",

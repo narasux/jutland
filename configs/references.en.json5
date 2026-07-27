@@ -1909,11 +1909,11 @@
       },
       {
         label: "Fighters",
-        value: "24× A6M2 Zero Model 21",
+        value: "24× A7M2 Reppū",
       },
       {
         label: "Dive Bombers",
-        value: "12× D3A",
+        value: "12× D4Y3 Suisei",
       },
       {
         label: "Attack Aircraft",
@@ -4245,7 +4245,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x3 305mm/50",
+        value: "4x3 305mm/50 Mk 8",
       },
       {
         label: "Dual-purpose Guns",

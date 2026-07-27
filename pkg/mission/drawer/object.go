@@ -2,6 +2,7 @@ package drawer
 
 import (
 	"fmt"
+	"image/color"
 	"math"
 	"slices"
 	"strconv"
@@ -105,15 +106,14 @@ func drawUnitHitBox(screen *ebiten.Image, ms *state.MissionState, battleUnit obj
 	)
 	for idx, corner := range corners {
 		nextCorner := corners[(idx+1)%len(corners)]
-		vector.StrokeLine(
-			screen,
-			float32(corner[0]),
-			float32(corner[1]),
-			float32(nextCorner[0]),
-			float32(nextCorner[1]),
-			2,
-			colorx.Red,
-			false,
+		clr := color.RGBA{R: 255, A: 80}
+		if battleUnit.Player() == ms.Player.CurPlayer {
+			clr = color.RGBA{G: 255, A: 80}
+		}
+		vector.StrokeLine(screen,
+			float32(corner[0]), float32(corner[1]),
+			float32(nextCorner[0]), float32(nextCorner[1]),
+			1, clr, false,
 		)
 	}
 }

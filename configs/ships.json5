@@ -2781,11 +2781,11 @@
       takeOffTime: 1.8,
       groups: [
         {
-          name: "A6M2",
+          name: "A7M2",
           maxCount: 24
         },
         {
-          name: "D3A1",
+          name: "D4Y3",
           maxCount: 12
         },
         {
@@ -2985,8 +2985,8 @@
     typeAbbr: "CV",
     year: 1944,
     totalHP: 71890,
-    horizontalDamageReduction: 0.55,
-    verticalDamageReduction: 0.35,
+    horizontalDamageReduction: 0.5,
+    verticalDamageReduction: 0.25,
     maxSpeed: 27,
     acceleration: 0.22,
     rotateSpeed: 0.6,
@@ -14929,7 +14929,7 @@
     year: 1944,
     totalHP: 72500,
     horizontalDamageReduction: 0.55,
-    verticalDamageReduction: 0.3,
+    verticalDamageReduction: 0.28,
     maxSpeed: 27,
     acceleration: 0.3,
     rotateSpeed: 0.8,
@@ -22495,7 +22495,7 @@
     acceleration: 0.65,
     rotateSpeed: 1.7,
     length: 185,
-    width: 21,
+    width: 19,
     fundsCost: 195,
     timeCost: 70,
     weapon: {

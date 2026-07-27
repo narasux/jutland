@@ -64,7 +64,7 @@ CPU / 显卡要求木有很高，但过低估计会卡帧（因为目前有些�
 ### 依赖环境
 
 - make
-- go 1.22 (CGO required)
+- go 1.25 (CGO required)
 
 ### 启动命令
 

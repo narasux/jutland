@@ -1909,11 +1909,11 @@
       },
       {
         label: "戦闘機",
-        value: "24× A6M2 Zero Model 21",
+        value: "24× A7M2 烈風",
       },
       {
         label: "急降下爆撃機",
-        value: "12× D3A",
+        value: "12× D4Y3 彗星",
       },
       {
         label: "攻撃機",
@@ -4245,7 +4245,7 @@
     armaments: [
       {
         label: "主砲",
-        value: "4x3 305mm/50",
+        value: "4x3 305mm/50 Mk 8",
       },
       {
         label: "両用砲",
