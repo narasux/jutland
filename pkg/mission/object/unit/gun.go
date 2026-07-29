@@ -67,7 +67,8 @@ func (g *Gun) IsAvailableAntiType(objType object.Type) bool {
 
 // Reloaded 是否已装填完成
 func (g *Gun) Reloaded() bool {
-	return g.ReloadStartAt+int64(g.ReloadTime*1e3) <= time.Now().UnixMilli()
+	elapsed := time.Now().UnixMilli() - g.ReloadStartAt
+	return float64(elapsed)*config.G.SpeedMultiplier >= g.ReloadTime*1e3
 }
 
 // InShotRange 是否在射程 / 射界内

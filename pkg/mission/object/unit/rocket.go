@@ -81,7 +81,8 @@ func (r *RocketLauncher) IsAvailableAntiType(objType object.Type) bool {
 // Reloaded 是否已装填并满足下一枚火箭弹的发射间隔
 func (r *RocketLauncher) Reloaded() bool {
 	timeNow := time.Now().UnixMilli()
-	if timeNow < r.ReloadStartAt+int64(r.ReloadTime*1e3) {
+	speedMult := config.G.SpeedMultiplier
+	if float64(timeNow-r.ReloadStartAt)*speedMult < r.ReloadTime*1e3 {
 		return false
 	}
 	if r.ShotCountBeforeReload <= 0 {
@@ -93,7 +94,7 @@ func (r *RocketLauncher) Reloaded() bool {
 	if r.ShotCountBeforeReload%groupSize == 0 {
 		interval = r.GroupInterval
 	}
-	if timeNow < r.LatestFireAt+int64(interval*1e3) {
+	if float64(timeNow-r.LatestFireAt)*speedMult < interval*1e3 {
 		return false
 	}
 	return r.ShotCountBeforeReload < r.RocketCount

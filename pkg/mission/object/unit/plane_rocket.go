@@ -64,7 +64,7 @@ func (r *PlaneRocketLauncher) Reloaded() bool {
 	if r.Exhausted() {
 		return false
 	}
-	return time.Now().UnixMilli() >= r.LatestFireAt+int64(r.ShotInterval*1e3)
+	return float64(time.Now().UnixMilli()-r.LatestFireAt)*config.G.SpeedMultiplier >= r.ShotInterval*1e3
 }
 
 // InShotRange 是否在射程 / 射界内。

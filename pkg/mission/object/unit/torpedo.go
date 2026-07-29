@@ -59,12 +59,13 @@ var _ AttackWeapon = (*TorpedoLauncher)(nil)
 func (lc *TorpedoLauncher) Reloaded() bool {
 	// 注：鱼雷是需要考虑发射间隔的，比如每秒一发之类，全部打完才是重新装填
 	timeNow := time.Now().UnixMilli()
+	speedMult := config.G.SpeedMultiplier
 	// 在重新装填，不可发射
-	if timeNow < lc.ReloadStartAt+int64(lc.ReloadTime*1e3) {
+	if float64(timeNow-lc.ReloadStartAt)*speedMult < lc.ReloadTime*1e3 {
 		return false
 	}
 	// 小于发射间隔也是不行的
-	if timeNow < lc.LatestFireAt+int64(lc.ShotInterval*1e3) {
+	if float64(timeNow-lc.LatestFireAt)*speedMult < lc.ShotInterval*1e3 {
 		return false
 	}
 	return lc.ShotCountBeforeReload < lc.BulletCount
