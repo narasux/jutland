@@ -29358,6 +29358,329 @@
       ]
     }
   },
+  {
+    // 赛尼特
+    name: "thanet",
+    nation: "uk",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1918,
+    totalHP: 1075,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 36,
+    acceleration: 1.1,
+    rotateSpeed: 2.4,
+    length: 84,
+    width: 8,
+    fundsCost: 70,
+    timeCost: 26,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "UK/102/40/MK4",
+          posPercent: 0.52,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "UK/102/40/MK4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "UK/102/40/MK4",
+          posPercent: -0.76,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 2磅砰砰炮
+        {
+          name: "UK/40/39",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "UK/533/2",
+          posPercent: -0.21,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "UK/533/2",
+          posPercent: -0.44,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
+  {
+    // 花环
+    name: "garland",
+    nation: "uk",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1936,
+    totalHP: 1350,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 36,
+    acceleration: 1.1,
+    rotateSpeed: 2.3,
+    length: 99,
+    width: 10,
+    fundsCost: 85,
+    timeCost: 32,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "UK/120/45/DP",
+          posPercent: 0.68,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "UK/120/45/DP",
+          posPercent: 0.54,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "UK/120/45/DP",
+          posPercent: -0.43,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 D
+        {
+          name: "UK/120/45/DP",
+          posPercent: -0.68,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 四联装 .50 高射机枪 A
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 四联装 .50 高射机枪 A
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 四联装 .50 高射机枪 B
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 四联装 .50 高射机枪 B
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "UK/533/4",
+          posPercent: -0.15,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+      ]
+    }
+  },
+  {
+    // 英雄
+    name: "hero",
+    nation: "uk",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1936,
+    totalHP: 1340,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 36,
+    acceleration: 1.1,
+    rotateSpeed: 2.3,
+    length: 99,
+    width: 10,
+    fundsCost: 95,
+    timeCost: 35,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "UK/120/45/DP",
+          posPercent: 0.68,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "UK/120/45/DP",
+          posPercent: 0.55,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "UK/120/45/DP",
+          posPercent: -0.67,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 D
+        {
+          name: "UK/120/45/DP",
+          posPercent: -0.8,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 四联装 .50 高射机枪
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 四联装 .50 高射机枪
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "UK/533/4",
+          posPercent: -0.19,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "UK/533/4",
+          posPercent: -0.40,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
+  {
+    // 廓尔喀
+    name: "gurkha",
+    nation: "uk",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1937,
+    totalHP: 1891,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 36,
+    acceleration: 1.1,
+    rotateSpeed: 2.3,
+    length: 115,
+    width: 11,
+    fundsCost: 95,
+    timeCost: 35,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A（双联装）
+        {
+          name: "UK/120/45/2",
+          posPercent: 0.64,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B（双联装）
+        {
+          name: "UK/120/45/2",
+          posPercent: 0.48,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 X（双联装）
+        {
+          name: "UK/120/45/2",
+          posPercent: -0.61,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 Y（双联装）
+        {
+          name: "UK/120/45/2",
+          posPercent: -0.79,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 四联装 2 磅砰砰炮
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 四联装 .50 维克斯机枪
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 四联装 .50 维克斯机枪
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中轴四联装鱼雷
+        {
+          name: "UK/533/4",
+          posPercent: -0.22,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
   // 苏联海军
   {
     // 快速

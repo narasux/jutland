@@ -4318,6 +4318,130 @@
     links: [],
   },
   {
+    name: "thanet",
+    displayName: "Thanet",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x1 102mm/40",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "1x1 40mm/39",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "HMS Thanet was an S-class destroyer commissioned in 1918, part of the emergency wartime construction programme. She served as an escort at Singapore during the Second World War and was sunk by Japanese forces at the Battle off Endau in January 1942.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Source Material",
+        url: "https://jp.pinterest.com/pin/809873945468170806/",
+      },
+      {
+        name: "Wikipedia — Thanet",
+        url: "https://en.wikipedia.org/wiki/HMS_Thanet_(H29)",
+      },
+    ],
+  },
+  {
+    name: "garland",
+    displayName: "Garland",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x4 12.7mm",
+      },
+      {
+        label: "Torpedoes",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "HMS Garland was a G-class destroyer commissioned in 1936. Loaned to the Polish Navy-in-exile in 1940, she escorted convoys in the North Sea and Mediterranean. Returned to the Royal Navy in 1944 and transferred to the Royal Netherlands Navy as HNLMS Marnix in 1947, she was broken up in 1964.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Source Material",
+        url: "https://jp.pinterest.com/pin/12455336467202540/",
+      },
+      {
+        name: "Wikipedia — Garland",
+        url: "https://en.wikipedia.org/wiki/HMS_Garland_(H37)",
+      },
+    ],
+  },
+  {
+    name: "hero",
+    displayName: "Hero",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x4 12.7mm",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "HMS Hero was an H-class destroyer commissioned in 1936. She served in the Mediterranean and North Atlantic during the Second World War, transferring to the Royal Canadian Navy as HMCS Chaudière in 1943 where she earned battle honours before being broken up in 1946.",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Source Material",
+        url: "https://jp.pinterest.com/pin/45036065012033097/",
+      },
+      {
+        name: "Wikipedia — Hero",
+        url: "https://en.wikipedia.org/wiki/HMS_Hero_(H99)",
+      },
+    ],
+  },
+  {
+    name: "gurkha",
+    displayName: "Gurkha",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 120mm/45",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "1x4 40mm/39 + 2x4 12.7mm",
+      },
+      {
+        label: "Torpedoes",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "HMS Gurkha was a Tribal-class destroyer commissioned in 1937. Armed with four twin 4.7-inch gun mounts, she was one of the most powerfully-armed destroyers of the early war period. She was sunk by German aircraft during the Norwegian campaign in April 1940.",
+    author: "Niemczyk Piotr",
+    links: [
+      {
+        name: "Source Material",
+        url: "https://jp.pinterest.com/pin/25473554125926405/",
+      },
+      {
+        name: "Wikipedia — Gurkha",
+        url: "https://en.wikipedia.org/wiki/HMS_Gurkha_(F20)",
+      },
+    ],
+  },
+  {
     name: "rapid",
     displayName: "Skoryy",
     type: "Destroyer",

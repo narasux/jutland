@@ -4543,6 +4543,130 @@
     ],
   },
   {
+    name: "thanet",
+    displayName: "赛尼特",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x1 102mm/40",
+      },
+      {
+        label: "高炮",
+        value: "1x1 40mm/39",
+      },
+      {
+        label: "鱼雷",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "赛尼特号是英国皇家海军 S 级驱逐舰，1918 年服役，是第一次世界大战末期建造的应急型驱逐舰。二战爆发后在新加坡担任护航任务，1942 年 1 月在兴楼海战中遭日军击沉。",
+    author: "未知",
+    links: [
+      {
+        name: "素材来源",
+        url: "https://jp.pinterest.com/pin/809873945468170806/",
+      },
+      {
+        name: "维基百科 - 赛尼特号",
+        url: "https://en.wikipedia.org/wiki/HMS_Thanet_(H29)",
+      },
+    ],
+  },
+  {
+    name: "garland",
+    displayName: "花环",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "高炮",
+        value: "4x4 12.7mm",
+      },
+      {
+        label: "鱼雷",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "花环号是英国皇家海军 G 级驱逐舰，1936 年服役。1940 年租借给波兰流亡海军，在北海和地中海执行护航任务。1944 年归还英国，1947 年转交荷兰海军并更名为马尼克斯号，1964 年解体。",
+    author: "未知",
+    links: [
+      {
+        name: "素材来源",
+        url: "https://jp.pinterest.com/pin/12455336467202540/",
+      },
+      {
+        name: "维基百科 - 花环号",
+        url: "https://en.wikipedia.org/wiki/HMS_Garland_(H37)",
+      },
+    ],
+  },
+  {
+    name: "hero",
+    displayName: "英雄",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "高炮",
+        value: "2x4 12.7mm",
+      },
+      {
+        label: "鱼雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "英雄号是英国皇家海军 H 级驱逐舰，1936 年服役。二战期间在地中海和北大西洋执行舰队和护航任务，1943 年转交加拿大皇家海军并更名为肖迪耶号，战功卓著，1946 年解体。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "素材来源",
+        url: "https://jp.pinterest.com/pin/45036065012033097/",
+      },
+      {
+        name: "维基百科 - 英雄号",
+        url: "https://en.wikipedia.org/wiki/HMS_Hero_(H99)",
+      },
+    ],
+  },
+  {
+    name: "gurkha",
+    displayName: "廓尔喀",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 120mm/45",
+      },
+      {
+        label: "高炮",
+        value: "1x4 40mm/39 + 2x4 12.7mm",
+      },
+      {
+        label: "鱼雷",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "廓尔喀号是英国皇家海军部族级驱逐舰，1937 年服役。装备四座双联装 4.7 英寸主炮，是二战初期火力最强的驱逐舰之一。1940 年 4 月在挪威战役中被德军飞机炸沉。",
+    author: "Niemczyk Piotr",
+    links: [
+      {
+        name: "素材来源",
+        url: "https://jp.pinterest.com/pin/25473554125926405/",
+      },
+      {
+        name: "维基百科 - 廓尔喀号",
+        url: "https://en.wikipedia.org/wiki/HMS_Gurkha_(F20)",
+      },
+    ],
+  },
+  {
     name: "rapid",
     displayName: "快速",
     type: "驱逐舰",

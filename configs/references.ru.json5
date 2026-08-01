@@ -4318,6 +4318,130 @@
     links: [],
   },
   {
+    name: "thanet",
+    displayName: "Танет",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главный калибр",
+        value: "3x1 102mm/40",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "1x1 40mm/39",
+      },
+      {
+        label: "Торпеды",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "HMS Thanet — эсминец типа S, вступил в строй в 1918 году. Во Второй мировой войне нёс эскортную службу в Сингапуре. Потоплен японскими силами в бою у Эндау в январе 1942 года.",
+    author: "Неизвестен",
+    links: [
+      {
+        name: "Исходный материал",
+        url: "https://jp.pinterest.com/pin/809873945468170806/",
+      },
+      {
+        name: "Wikipedia — Thanet",
+        url: "https://en.wikipedia.org/wiki/HMS_Thanet_(H29)",
+      },
+    ],
+  },
+  {
+    name: "garland",
+    displayName: "Гарленд",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главный калибр",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "4x4 12.7mm",
+      },
+      {
+        label: "Торпеды",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "HMS Garland — эсминец типа G, вступил в строй в 1936 году. В 1940 году передан ВМС Польши в изгнании. В 1944 году возвращён Королевскому флоту, в 1947 году передан ВМС Нидерландов как HNLMS Marnix. Разобран в 1964 году.",
+    author: "Неизвестен",
+    links: [
+      {
+        name: "Исходный материал",
+        url: "https://jp.pinterest.com/pin/12455336467202540/",
+      },
+      {
+        name: "Wikipedia — Garland",
+        url: "https://en.wikipedia.org/wiki/HMS_Garland_(H37)",
+      },
+    ],
+  },
+  {
+    name: "hero",
+    displayName: "Хироу",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главный калибр",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "2x4 12.7mm",
+      },
+      {
+        label: "Торпеды",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "HMS Hero — эсминец типа H, вступил в строй в 1936 году. Служил в Средиземном море и Северной Атлантике. В 1943 году передан Королевскому канадскому флоту как HMCS Chaudière. Разобран в 1946 году.",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Исходный материал",
+        url: "https://jp.pinterest.com/pin/45036065012033097/",
+      },
+      {
+        name: "Wikipedia — Hero",
+        url: "https://en.wikipedia.org/wiki/HMS_Hero_(H99)",
+      },
+    ],
+  },
+  {
+    name: "gurkha",
+    displayName: "Гуркха",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главный калибр",
+        value: "4x2 120mm/45",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "1x4 40mm/39 + 2x4 12.7mm",
+      },
+      {
+        label: "Торпеды",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "HMS Gurkha — эсминец типа Tribal, вступил в строй в 1937 году. Один из самых мощно вооружённых эсминцев начала войны с четырьмя спаренными 120-мм установками. Потоплен немецкой авиацией во время Норвежской кампании в апреле 1940 года.",
+    author: "Niemczyk Piotr",
+    links: [
+      {
+        name: "Исходный материал",
+        url: "https://jp.pinterest.com/pin/25473554125926405/",
+      },
+      {
+        name: "Wikipedia — Gurkha",
+        url: "https://en.wikipedia.org/wiki/HMS_Gurkha_(F20)",
+      },
+    ],
+  },
+  {
     name: "rapid",
     displayName: "Скорый",
     type: "Эсминец",

@@ -2677,6 +2677,10 @@
           "v",
           "y",
           "ardent",
+          "thanet",
+          "garland",
+          "hero",
+          "gurkha",
           "rapid"
         ],
       },
@@ -3010,8 +3014,32 @@
         belongPlayer: "HA"
       },
       {
-        name: "MTB_77",
+        name: "thanet",
         pos: [19, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "garland",
+        pos: [18, 29],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hero",
+        pos: [19, 30],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "gurkha",
+        pos: [18, 31],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "MTB_77",
+        pos: [19, 32],
         rotation: 90,
         belongPlayer: "HA"
       },

@@ -218,6 +218,17 @@
     bulletSpeed: 45,
     fundsCost: 45
   },
+  // 英国海军 533mm 双联装 鱼雷
+  {
+    name: "UK/533/2",
+    bulletName: "UK/TB/533/1918",
+    bulletCount: 2,
+    shotInterval: 1,
+    reloadTime: 30,
+    range: 13,
+    bulletSpeed: 45,
+    fundsCost: 45
+  },
   // 苏联海军 533mm 五联装 鱼雷
   {
     name: "SU/533/5",

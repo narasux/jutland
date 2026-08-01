@@ -107,6 +107,12 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			if selectedShipCount > 1 {
 				targetPos.AddRx(float64(rand.Intn(5) - 2))
 				targetPos.AddRy(float64(rand.Intn(5) - 2))
+				// 多舰编队去同一个点时，用小幅抖动分散落点，防止战舰堆积。
+				// 抖动后需要确保目标仍在海面上，否则路径计算会因终点在
+				// 陆地或海岸地图格上而失败，导致该艘战舰原地不动。
+				if misState.Core.MissionMD.MapCfg.Map.IsLand(targetPos.MX, targetPos.MY) {
+					targetPos = pos.Copy()
+				}
 			}
 			// 通过 ShipMovePath 指令实现移动行为
 			ship, ok := misState.Arena.Ships[shipUid]

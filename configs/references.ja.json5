@@ -4318,6 +4318,130 @@
     links: [],
   },
   {
+    name: "thanet",
+    displayName: "サネット",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x1 102mm/40",
+      },
+      {
+        label: "対空砲",
+        value: "1x1 40mm/39",
+      },
+      {
+        label: "魚雷",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "サネットは英国海軍S級駆逐艦で、1918年に就役。第二次大戦中はシンガポールで護衛任務に従事。1942年1月のエンダウ沖海戦で日本軍により撃沈された。",
+    author: "不明",
+    links: [
+      {
+        name: "素材出典",
+        url: "https://jp.pinterest.com/pin/809873945468170806/",
+      },
+      {
+        name: "Wikipedia — Thanet",
+        url: "https://en.wikipedia.org/wiki/HMS_Thanet_(H29)",
+      },
+    ],
+  },
+  {
+    name: "garland",
+    displayName: "ガーランド",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "対空砲",
+        value: "4x4 12.7mm",
+      },
+      {
+        label: "魚雷",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "ガーランドは英国海軍G級駆逐艦で、1936年に就役。1940年にポーランド亡命海軍へ貸与され、北海と地中海で船団護衛に従事。1944年に英海軍に返還、1947年にオランダ海軍へ移管されマルニクスと改名。1964年に解体された。",
+    author: "不明",
+    links: [
+      {
+        name: "素材出典",
+        url: "https://jp.pinterest.com/pin/12455336467202540/",
+      },
+      {
+        name: "Wikipedia — Garland",
+        url: "https://en.wikipedia.org/wiki/HMS_Garland_(H37)",
+      },
+    ],
+  },
+  {
+    name: "hero",
+    displayName: "ヒーロー",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "対空砲",
+        value: "2x4 12.7mm",
+      },
+      {
+        label: "魚雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "ヒーローは英国海軍H級駆逐艦で、1936年に就役。第二次大戦中、地中海と北大西洋で艦隊・船団護衛任務に従事。1943年にカナダ海軍へ移管されショーディエールと改名。1946年に解体された。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "素材出典",
+        url: "https://jp.pinterest.com/pin/45036065012033097/",
+      },
+      {
+        name: "Wikipedia — Hero",
+        url: "https://en.wikipedia.org/wiki/HMS_Hero_(H99)",
+      },
+    ],
+  },
+  {
+    name: "gurkha",
+    displayName: "グルカ",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 120mm/45",
+      },
+      {
+        label: "対空砲",
+        value: "1x4 40mm/39 + 2x4 12.7mm",
+      },
+      {
+        label: "魚雷",
+        value: "1x4 533mm",
+      },
+    ],
+    description: "グルカは英国海軍トライバル級駆逐艦で、1937年に就役。四基の連装120mm砲を備え、開戦初期で最も重武装の駆逐艦の一隻。1940年4月のノルウェー作戦中にドイツ空軍の爆撃で沈没。",
+    author: "Niemczyk Piotr",
+    links: [
+      {
+        name: "素材出典",
+        url: "https://jp.pinterest.com/pin/25473554125926405/",
+      },
+      {
+        name: "Wikipedia — Gurkha",
+        url: "https://en.wikipedia.org/wiki/HMS_Gurkha_(F20)",
+      },
+    ],
+  },
+  {
     name: "rapid",
     displayName: "スコーリィ",
     type: "駆逐艦",
