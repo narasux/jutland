@@ -4,6 +4,8 @@ package sidebar
 import (
 	"image/color"
 	"math"
+	"slices"
+	"strings"
 
 	"github.com/ebitenui/ebitenui"
 	"github.com/ebitenui/ebitenui/image"
@@ -17,6 +19,7 @@ import (
 	"github.com/narasux/jutland/pkg/i18n"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
@@ -368,25 +371,35 @@ func (p *Panel) drawMinimapBuildings(screen *ebiten.Image, ms *state.MissionStat
 }
 
 func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {
-	for _, ship := range ms.Arena.Ships {
-		img := textureImg.GetAbbrShip(ship.Tonnage, ship.BelongPlayer != ms.Player.CurPlayer)
+	ships := lo.Values(ms.Arena.Ships)
+	slices.SortFunc(ships, func(a, b *objUnit.BattleShip) int {
+		return strings.Compare(a.Uid, b.Uid)
+	})
+	for _, ship := range ships {
+		img := textureImg.GetAbbrShip(ship.TypeAbbr, ship.BelongPlayer != ms.Player.CurPlayer)
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		ebutil.SetOptsCenterRotation(opts, img, ship.CurRotation)
-		opts.GeoM.Scale(0.55, 0.55)
+		opts.GeoM.Scale(0.7, 0.7)
 		x, y := p.mapToSidebar(ms, ship.CurPos.RX, ship.CurPos.RY)
-		opts.GeoM.Translate(x, y)
+		w, h := float64(img.Bounds().Dx())*0.7, float64(img.Bounds().Dy())*0.7
+		opts.GeoM.Translate(x-w/2, y-h/2)
 		screen.DrawImage(img, opts)
 	}
 }
 
 func (p *Panel) drawMinimapPlanes(screen *ebiten.Image, ms *state.MissionState) {
-	for _, plane := range ms.Arena.Planes {
+	planes := lo.Values(ms.Arena.Planes)
+	slices.SortFunc(planes, func(a, b *objUnit.Plane) int {
+		return strings.Compare(a.Uid, b.Uid)
+	})
+	for _, plane := range planes {
 		img := textureImg.GetAbbrPlane(plane.BelongPlayer != ms.Player.CurPlayer)
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		ebutil.SetOptsCenterRotation(opts, img, plane.CurRotation)
 		opts.GeoM.Scale(0.65, 0.65)
 		x, y := p.mapToSidebar(ms, plane.CurPos.RX, plane.CurPos.RY)
-		opts.GeoM.Translate(x, y)
+		w, h := float64(img.Bounds().Dx())*0.65, float64(img.Bounds().Dy())*0.65
+		opts.GeoM.Translate(x-w/2, y-h/2)
 		screen.DrawImage(img, opts)
 	}
 }

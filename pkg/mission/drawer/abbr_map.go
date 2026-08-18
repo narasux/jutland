@@ -2,6 +2,8 @@ package drawer
 
 import (
 	"fmt"
+	"slices"
+	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -172,15 +174,20 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
 	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	for _, s := range ms.Arena.Ships {
-		sImg := textureImg.GetAbbrShip(s.Tonnage, s.BelongPlayer != ms.Player.CurPlayer)
+	ships := lo.Values(ms.Arena.Ships)
+	slices.SortFunc(ships, func(a, b *objUnit.BattleShip) int {
+		return strings.Compare(a.Uid, b.Uid)
+	})
+
+	for _, s := range ships {
+		sImg := textureImg.GetAbbrShip(s.TypeAbbr, s.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
 
 		xIndex := s.CurPos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
 		yIndex := s.CurPos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
-
-		opts.GeoM.Translate(xIndex+xOffset, yIndex)
+		w, h := float64(sImg.Bounds().Dx()), float64(sImg.Bounds().Dy())
+		opts.GeoM.Translate(xIndex+xOffset-w/2, yIndex-h/2)
 		screen.DrawImage(sImg, opts)
 	}
 }
@@ -190,15 +197,20 @@ func (d *Drawer) drawAbbrPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
 	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	for _, p := range ms.Arena.Planes {
+	planes := lo.Values(ms.Arena.Planes)
+	slices.SortFunc(planes, func(a, b *objUnit.Plane) int {
+		return strings.Compare(a.Uid, b.Uid)
+	})
+
+	for _, p := range planes {
 		pImg := textureImg.GetAbbrPlane(p.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)
 
 		xIndex := p.CurPos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
 		yIndex := p.CurPos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
-
-		opts.GeoM.Translate(xIndex+xOffset, yIndex)
+		w, h := float64(pImg.Bounds().Dx()), float64(pImg.Bounds().Dy())
+		opts.GeoM.Translate(xIndex+xOffset-w/2, yIndex-h/2)
 		screen.DrawImage(pImg, opts)
 	}
 }
