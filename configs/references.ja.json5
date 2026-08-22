@@ -1359,6 +1359,10 @@
         label: "対空砲",
         value: "44x2 40mm/60 五年式",
       },
+      {
+        label: "対空ロケット",
+        value: "12x21 120mm 五式",
+      },
     ],
     description: "江戸は本作のために創作された日本の超大型戦艦である。名称は歴史上の国名と徳川政権の中心地にちなみ、設計は現実的な戦時限界を超えて主力艦の規模・装甲・火力を誇張している。日本海軍の実在計画ではなく、海洋幻想として位置付けられる。",
     author: "TZoli",
@@ -4343,7 +4347,7 @@
         url: "https://jp.pinterest.com/pin/809873945468170806/",
       },
       {
-        name: "Wikipedia — Thanet",
+        name: "ウィキペディア — サネット",
         url: "https://en.wikipedia.org/wiki/HMS_Thanet_(H29)",
       },
     ],
@@ -4374,7 +4378,7 @@
         url: "https://jp.pinterest.com/pin/12455336467202540/",
       },
       {
-        name: "Wikipedia — Garland",
+        name: "ウィキペディア — ガーランド",
         url: "https://en.wikipedia.org/wiki/HMS_Garland_(H37)",
       },
     ],
@@ -4405,7 +4409,7 @@
         url: "https://jp.pinterest.com/pin/45036065012033097/",
       },
       {
-        name: "Wikipedia — Hero",
+        name: "ウィキペディア — ヒーロー",
         url: "https://en.wikipedia.org/wiki/HMS_Hero_(H99)",
       },
     ],
@@ -4436,7 +4440,7 @@
         url: "https://jp.pinterest.com/pin/25473554125926405/",
       },
       {
-        name: "Wikipedia — Gurkha",
+        name: "ウィキペディア — グルカ",
         url: "https://en.wikipedia.org/wiki/HMS_Gurkha_(F20)",
       },
     ],
@@ -4615,6 +4619,10 @@
       {
         label: "対空砲",
         value: "12x3 25mm/60 九六式",
+      },
+      {
+        label: "対空ロケット",
+        value: "10x21 120mm 五式",
       },
     ],
     description: "薩摩は、大和型の後継として検討されたA-150案を本作向けに解釈した艦である。残存資料からは、一般に510mm級とされるさらに大型の主砲と、同時代の戦艦を圧倒する防御が想定されていたと考えられる。戦時の優先順位により、構想は予備設計の域を出なかった。",
@@ -5821,6 +5829,15 @@
   {
     name: "UK/120/40/MK8/DP",
     displayName: "120mm/40 Mk VIII Single 両用砲架",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "UK/120/45/2",
+    displayName: "120mm 連装艦砲",
     type: "兵器",
     armaments: [],
     description: "",

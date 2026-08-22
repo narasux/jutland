@@ -1359,6 +1359,10 @@
         label: "Anti-aircraft Guns",
         value: "44x2 40mm/60 5th Year Type",
       },
+      {
+        label: "Anti-aircraft Rockets",
+        value: "12x21 120mm 5th Year Type",
+      },
     ],
     description: "Edo is a fictional Japanese super-battleship created for the game. Its name evokes the historic province and the political center of Tokugawa Japan, while the design exaggerates capital-ship scale, armor, and firepower beyond practical wartime limits. It should be read as naval fantasy rather than a documented Imperial Japanese Navy project.",
     author: "TZoli",
@@ -4616,6 +4620,10 @@
         label: "Anti-aircraft Guns",
         value: "12x3 25mm/60 Type 96",
       },
+      {
+        label: "Anti-aircraft Rockets",
+        value: "10x21 120mm 5th Year Type",
+      },
     ],
     description: "Satsuma represents a game interpretation of Design A-150, a proposed successor to Japan's Yamato class. Surviving studies suggest even larger guns, commonly associated with a 510 mm caliber, and protection intended to defeat contemporary battleships. Wartime priorities prevented the concept from progressing beyond preliminary design work.",
     author: "TZoli",
@@ -5821,6 +5829,15 @@
   {
     name: "UK/120/40/MK8/DP",
     displayName: "120mm/40 Mk VIII Single Dual-Purpose Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "UK/120/45/2",
+    displayName: "120mm Twin Naval Gun",
     type: "Weapon",
     armaments: [],
     description: "",
