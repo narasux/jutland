@@ -93,6 +93,72 @@ func (i *DisableWeapon) String() string {
 	return fmt.Sprintf("Disable ship %s weapon %s", i.shipUid, string(i.weaponType))
 }
 
+// EnableAircraft 允许指定战舰继续起飞舰载机。
+type EnableAircraft struct {
+	shipUid string
+	status  InstrStatus
+}
+
+// NewEnableAircraft 创建允许舰载机起飞的即时指令。
+func NewEnableAircraft(shipUid string) *EnableAircraft {
+	return &EnableAircraft{shipUid: shipUid, status: Ready}
+}
+
+var _ Instruction = (*EnableAircraft)(nil)
+
+// Exec 执行允许舰载机起飞操作。
+func (i *EnableAircraft) Exec(s *state.MissionState) error {
+	i.status = Executed
+	if ship := s.Arena.Ships[i.shipUid]; ship != nil {
+		ship.Aircraft.Disable = false
+	}
+	return nil
+}
+
+// Executed 返回指令是否已经执行。
+func (i *EnableAircraft) Executed() bool { return i.status == Executed }
+
+// Uid 返回该舰唯一的舰载机启用指令标识。
+func (i *EnableAircraft) Uid() string { return GenInstrUid(NameEnableAircraft, i.shipUid) }
+
+// String 返回便于日志记录的指令说明。
+func (i *EnableAircraft) String() string {
+	return fmt.Sprintf("Enable ship %s aircraft", i.shipUid)
+}
+
+// DisableAircraft 禁止指定战舰继续起飞舰载机。
+type DisableAircraft struct {
+	shipUid string
+	status  InstrStatus
+}
+
+// NewDisableAircraft 创建禁止舰载机起飞的即时指令。
+func NewDisableAircraft(shipUid string) *DisableAircraft {
+	return &DisableAircraft{shipUid: shipUid, status: Ready}
+}
+
+var _ Instruction = (*DisableAircraft)(nil)
+
+// Exec 执行禁止舰载机起飞操作。
+func (i *DisableAircraft) Exec(s *state.MissionState) error {
+	i.status = Executed
+	if ship := s.Arena.Ships[i.shipUid]; ship != nil {
+		ship.Aircraft.Disable = true
+	}
+	return nil
+}
+
+// Executed 返回指令是否已经执行。
+func (i *DisableAircraft) Executed() bool { return i.status == Executed }
+
+// Uid 返回该舰唯一的舰载机禁用指令标识。
+func (i *DisableAircraft) Uid() string { return GenInstrUid(NameDisableAircraft, i.shipUid) }
+
+// String 返回便于日志记录的指令说明。
+func (i *DisableAircraft) String() string {
+	return fmt.Sprintf("Disable ship %s aircraft", i.shipUid)
+}
+
 // ShipMove 移动
 type ShipMove struct {
 	shipUid   string

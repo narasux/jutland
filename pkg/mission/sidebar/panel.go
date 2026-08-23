@@ -1,4 +1,6 @@
-// Package sidebar 实现任务运行页右侧 RTS 风格侧栏。
+// Package sidebar 实现任务运行页右侧的合并 RTS 风格侧栏。
+// 面板由顶部页签条划分为「地图 + 战舰信息」与「设置」两个页签，共用同一宽度；
+// 底部单位信息内容在页签 1 内纵向堆叠并支持滚动。
 package sidebar
 
 import (
@@ -7,9 +9,6 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/ebitenui/ebitenui"
-	"github.com/ebitenui/ebitenui/image"
-	"github.com/ebitenui/ebitenui/widget"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
@@ -21,23 +20,34 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/mission/unitpanel"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 	"github.com/narasux/jutland/pkg/utils/layout"
+	"github.com/narasux/jutland/pkg/utils/theme"
 )
 
 const (
-	handleW = 42
-	handleH = 72
+	handleW = 36
+	handleH = 60
+	// arrowHandleSize 是把手箭头的等边三角形边长。
+	arrowHandleSize = 12.0
+	// tabBarHeight 是「地图 / 设置」页签条的屏幕像素高度。
+	tabBarHeight = 36.0
+	// scrollbarW 是内容滚动条的宽度。
+	scrollbarW = 6.0
 )
 
+// panelBgColor 等由共享 theme 包统一提供。
 var (
-	panelBgColor   = color.RGBA{R: 8, G: 18, B: 23, A: 222}
-	panelLineColor = color.RGBA{R: 85, G: 132, B: 143, A: 235}
-	cardBgColor    = color.RGBA{R: 12, G: 31, B: 38, A: 214}
+	panelBgColor   = theme.PanelBackground
+	panelLineColor = theme.PanelBorder
+	cardBgColor    = theme.CardBackground
+	scrollbarTrack = color.RGBA{R: 28, G: 52, B: 59, A: 200}
+	scrollbarThumb = color.RGBA{R: 120, G: 160, B: 170, A: 230}
 )
 
 type rect struct {
@@ -49,31 +59,42 @@ func (r rect) contains(x, y int) bool {
 	return fx >= r.X && fx <= r.X+r.W && fy >= r.Y && fy <= r.Y+r.H
 }
 
-type uiSnapshot struct {
-	width             int
-	height            int
-	expanded          bool
-	forceDisplayState bool
-	displayDamage     bool
+// unitRect 把侧栏自身的矩形转换为单位信息面板使用的公共矩形。
+func unitRect(r rect) unitpanel.Rect {
+	return unitpanel.Rect{X: r.X, Y: r.Y, W: r.W, H: r.H}
 }
 
-// Panel 是任务运行中的右侧战术侧栏。
-type Panel struct {
-	ui      *ebitenui.UI
-	abbrMap *ebiten.Image
-	layout  sidebarLayout
-	snap    uiSnapshot
-}
+// Tab 表示侧栏当前展示的页签。
+type Tab int
+
+const (
+	// TabBattle 展示小地图 + 战场信息 + 战舰信息（可滚动）。
+	TabBattle Tab = iota
+	// TabSettings 展示两个游戏内显示选项。
+	TabSettings
+)
 
 type sidebarLayout struct {
-	Screen layout.ScreenLayout
-	Panel  rect
-	Handle rect
-	Map    rect
+	Screen   layout.ScreenLayout
+	Panel    rect
+	Handle   rect
+	TabBar   rect
+	Map      rect
+	Battle   rect
+	Viewport rect
 }
 
-// New 创建任务侧栏
-func New(mission string, ui *ebitenui.UI) *Panel {
+// Panel 是任务运行中的合并右侧战术侧栏。
+type Panel struct {
+	abbrMap *ebiten.Image
+	layout  sidebarLayout
+	tab     Tab
+	scrollY float64
+	units   *unitpanel.Panel
+}
+
+// New 创建任务侧栏。
+func New(mission string) *Panel {
 	missionMD := md.Get(mission)
 	misLayout := layout.NewScreenLayout()
 	abbrMap := ebiten.NewImage(misLayout.Height, misLayout.Height)
@@ -85,246 +106,243 @@ func New(mission string, ui *ebitenui.UI) *Panel {
 	abbrMap.DrawImage(abbrMapImg.Background, opts)
 	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Source), opts)
 
-	return &Panel{ui: ui, abbrMap: abbrMap}
+	return &Panel{abbrMap: abbrMap, units: unitpanel.New()}
 }
 
-// Update 更新侧栏控件状态，并处理小地图点击
-func (p *Panel) Update(ms *state.MissionState) {
+// Update 更新侧栏控件状态，处理把手、页签、滚动与内容点击，并返回单位信息面板产生的操作。
+func (p *Panel) Update(ms *state.MissionState) []unitpanel.Action {
 	if ms.Core.MissionStatus != state.MissionRunning {
-		ms.UI.SidebarConsumesCursor = false
+		return nil
+	}
+	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
+	sx, sy := ebiten.CursorPosition()
+	leftPressed := inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
+
+	if leftPressed && p.layout.Handle.contains(sx, sy) {
+		ms.UI.SidebarExpanded = !ms.UI.SidebarExpanded
+		return nil
+	}
+	if !ms.UI.SidebarExpanded {
+		return nil
+	}
+
+	if leftPressed {
+		if newTab, ok := p.tabAt(sx, sy); ok {
+			if newTab != p.tab {
+				p.tab = newTab
+				p.scrollY = 0
+			}
+			return nil
+		}
+	}
+
+	switch p.tab {
+	case TabBattle:
+		return p.updateBattle(ms, sx, sy, leftPressed)
+	default:
+		p.updateSettings(ms, sx, sy, leftPressed)
+		return nil
+	}
+}
+
+func (p *Panel) updateBattle(ms *state.MissionState, sx, sy int, leftPressed bool) []unitpanel.Action {
+	if leftPressed && p.layout.Map.contains(sx, sy) {
+		p.centerCameraAtMinimap(ms, sx, sy)
+	}
+	if _, wheelY := ebiten.Wheel(); wheelY != 0 && p.layout.Viewport.contains(sx, sy) {
+		p.scrollY = p.clampScroll(ms, p.scrollY-float64(wheelY)*48)
+	} else {
+		p.scrollY = p.clampScroll(ms, p.scrollY)
+	}
+	return p.units.Update(ms, unitRect(p.layout.Viewport), p.scrollY)
+}
+
+// updateSettings 处理设置页签内两个复选框的点击。
+func (p *Panel) updateSettings(ms *state.MissionState, sx, sy int, leftPressed bool) {
+	if !leftPressed {
 		return
 	}
-
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
-	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
-		sx, sy := ebiten.CursorPosition()
-		if p.layout.Handle.contains(sx, sy) {
-			ms.UI.SidebarExpanded = !ms.UI.SidebarExpanded
-			ms.UI.SidebarConsumesCursor = true
-			p.ensureUI(ms)
-			return
-		}
-	}
-
-	p.ensureUI(ms)
-	p.ui.Update()
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
-	ms.UI.SidebarConsumesCursor = p.ConsumesCursor(ms)
-
-	if ms.UI.SidebarExpanded && inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
-		sx, sy := ebiten.CursorPosition()
-		if p.layout.Map.contains(sx, sy) {
-			p.centerCameraAtMinimap(ms, sx, sy)
-		}
+	if p.settingsRowRect(0).contains(sx, sy) {
+		ms.UI.GameOpts.ForceDisplayState = !ms.UI.GameOpts.ForceDisplayState
+	} else if p.settingsRowRect(1).contains(sx, sy) {
+		ms.UI.GameOpts.DisplayDamageNumber = !ms.UI.GameOpts.DisplayDamageNumber
 	}
 }
 
-// Draw 绘制任务侧栏
+// clampScroll 将滚动偏移限制在内容可视范围内。
+func (p *Panel) clampScroll(ms *state.MissionState, scroll float64) float64 {
+	contentH := p.units.MeasureContent(ms, unitRect(p.layout.Viewport))
+	return math.Max(0, math.Min(scroll, math.Max(0, contentH-p.layout.Viewport.H)))
+}
+
+// Draw 绘制任务侧栏。
 func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return
 	}
-
-	p.ensureUI(ms)
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
+	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
 	if ms.UI.SidebarExpanded {
 		p.drawPanel(screen, ms)
 	}
-	p.ui.Draw(screen)
 	p.drawHandleFrame(screen, ms)
 	p.drawHandleArrow(screen, ms)
 }
 
-// ConsumesCursor 判断当前鼠标位置是否应由侧栏消费
+// ConsumesCursor 判断当前鼠标位置是否应由侧栏消费。
 func (p *Panel) ConsumesCursor(ms *state.MissionState) bool {
+	sx, sy := ebiten.CursorPosition()
+	return p.consumesCursorAt(ms, sx, sy)
+}
+
+func (p *Panel) consumesCursorAt(ms *state.MissionState, sx, sy int) bool {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return false
 	}
-
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
-	sx, sy := ebiten.CursorPosition()
+	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
 	if ui.Handle.contains(sx, sy) {
 		return true
 	}
 	return ms.UI.SidebarExpanded && ui.Panel.contains(sx, sy)
 }
 
-func (p *Panel) ensureUI(ms *state.MissionState) {
-	snap := uiSnapshot{
-		width:             ms.View.Layout.Width,
-		height:            ms.View.Layout.Height,
-		expanded:          ms.UI.SidebarExpanded,
-		forceDisplayState: ms.UI.GameOpts.ForceDisplayState,
-		displayDamage:     ms.UI.GameOpts.DisplayDamageNumber,
+// OccupiedWidth 返回展开侧栏遮挡战场的屏幕像素宽度。
+func (p *Panel) OccupiedWidth(ms *state.MissionState) float64 {
+	if !ms.UI.SidebarExpanded || ms.Core.MissionStatus != state.MissionRunning {
+		return 0
 	}
-	if p.ui != nil && p.snap == snap {
-		return
-	}
-	p.snap = snap
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
-	p.buildUI(ms)
-}
-
-func (p *Panel) buildUI(ms *state.MissionState) {
-	transparentButton := &widget.ButtonImage{
-		Idle:    image.NewNineSliceColor(color.RGBA{}),
-		Hover:   image.NewNineSliceColor(color.RGBA{}),
-		Pressed: image.NewNineSliceColor(color.RGBA{}),
-	}
-	checkboxImage := &widget.ButtonImage{
-		Idle:    image.NewNineSliceColor(color.RGBA{}),
-		Hover:   image.NewNineSliceColor(color.RGBA{}),
-		Pressed: image.NewNineSliceColor(color.RGBA{}),
-	}
-
-	root := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
-	toggle := widget.NewButton(
-		widget.ButtonOpts.WidgetOpts(
-			widget.WidgetOpts.MinSize(handleW, handleH),
-			widget.WidgetOpts.LayoutData(widget.AnchorLayoutData{
-				HorizontalPosition: widget.AnchorLayoutPositionEnd,
-				VerticalPosition:   widget.AnchorLayoutPositionCenter,
-				Padding: &widget.Insets{
-					Right: int(p.layout.Screen.Width) - int(p.layout.Handle.X) - handleW,
-				},
-			}),
-		),
-		widget.ButtonOpts.Image(transparentButton),
-	)
-	root.AddChild(toggle)
-
-	if ms.UI.SidebarExpanded {
-		p.addCheckboxButton(root, checkboxImage, 0, func() {
-			ms.UI.GameOpts.ForceDisplayState = !ms.UI.GameOpts.ForceDisplayState
-		})
-		p.addCheckboxButton(root, checkboxImage, 1, func() {
-			ms.UI.GameOpts.DisplayDamageNumber = !ms.UI.GameOpts.DisplayDamageNumber
-		})
-	}
-
-	p.ui.Container = root
-}
-
-func (p *Panel) addCheckboxButton(
-	root *widget.Container,
-	buttonImage *widget.ButtonImage,
-	index int,
-	click func(),
-) {
-	buttonTop := int(p.settingRowsTop()) + index*44
-	btn := widget.NewButton(
-		widget.ButtonOpts.WidgetOpts(
-			widget.WidgetOpts.MinSize(int(p.layout.Panel.W)-32, 36),
-			widget.WidgetOpts.LayoutData(widget.AnchorLayoutData{
-				HorizontalPosition: widget.AnchorLayoutPositionEnd,
-				VerticalPosition:   widget.AnchorLayoutPositionStart,
-				Padding:            &widget.Insets{Right: 16, Top: buttonTop},
-			}),
-		),
-		widget.ButtonOpts.Image(buttonImage),
-		widget.ButtonOpts.ClickedHandler(func(args *widget.ButtonClickedEventArgs) {
-			click()
-		}),
-	)
-	root.AddChild(btn)
+	return calcLayout(ms.View.Layout, true, p.tab).Panel.W
 }
 
 func (p *Panel) drawPanel(screen *ebiten.Image, ms *state.MissionState) {
 	ui := p.layout
-	vector.FillRect(
+	theme.FillRoundedRect(
 		screen,
-		float32(ui.Panel.X),
-		float32(ui.Panel.Y),
-		float32(ui.Panel.W),
-		float32(ui.Panel.H),
-		panelBgColor,
-		false,
+		ui.Panel.X, ui.Panel.Y, ui.Panel.W, ui.Panel.H,
+		theme.CornerRadius,
+		panelBgColor, panelLineColor, theme.PanelBorderWidth,
 	)
-	vector.StrokeRect(
-		screen,
-		float32(ui.Panel.X),
-		float32(ui.Panel.Y),
-		float32(ui.Panel.W),
-		float32(ui.Panel.H),
-		2,
-		panelLineColor,
-		false,
-	)
+	p.drawTabBar(screen)
+	switch p.tab {
+	case TabBattle:
+		p.drawMinimap(screen, ms)
+		p.drawBattleInfo(screen, ms)
+		p.units.Draw(screen, ms, unitRect(ui.Viewport), p.scrollY)
+		p.drawScrollbar(screen, ms)
+	default:
+		p.drawSettings(screen, ms)
+	}
+}
 
-	p.drawMinimap(screen, ms)
-	p.drawBattleInfo(screen, ms)
-	p.drawSettings(screen, ms)
+// tabAt 返回光标下方对应的页签；不在页签条内时返回 false。
+func (p *Panel) tabAt(sx, sy int) (Tab, bool) {
+	if !p.layout.TabBar.contains(sx, sy) {
+		return 0, false
+	}
+	half := p.layout.TabBar.W / 2
+	if float64(sx) < p.layout.TabBar.X+half {
+		return TabBattle, true
+	}
+	return TabSettings, true
+}
+
+// tabRect 返回页签条中第 index 个页签的几何区域。
+func (p *Panel) tabRect(index int) rect {
+	ui := p.layout
+	w := ui.TabBar.W / 2
+	return rect{X: ui.TabBar.X + float64(index)*w, Y: ui.TabBar.Y, W: w, H: ui.TabBar.H}
+}
+
+func (p *Panel) drawTabBar(screen *ebiten.Image) {
+	ui := p.layout
+	separatorY := ui.TabBar.Y + ui.TabBar.H
+	vector.StrokeLine(screen, float32(ui.Panel.X), float32(separatorY), float32(ui.Panel.X+ui.Panel.W), float32(separatorY), 1, panelLineColor, false)
+
+	labels := []string{tabLabel(TabBattle), tabLabel(TabSettings)}
+	for index, label := range labels {
+		area := p.tabRect(index)
+		active := Tab(index) == p.tab
+		fill, border, textColor := theme.ButtonIdle, theme.CardBorder, colorx.Silver
+		if active {
+			fill, border, textColor = color.RGBA{R: 58, G: 69, B: 55, A: 235}, colorx.Gold, colorx.White
+		}
+		theme.FillRoundedRect(screen, area.X+4, area.Y+6, area.W-8, area.H-12, theme.CornerRadius, fill, border, theme.CardBorderWidth)
+		p.drawCenteredText(screen, label, area, theme.SizeBody, textColor)
+	}
+}
+
+func (p *Panel) drawSettings(screen *ebiten.Image, ms *state.MissionState) {
+	p.drawCheckboxRow(screen, 0, i18n.Text(i18n.MsgSidebarShowState), ms.UI.GameOpts.ForceDisplayState)
+	p.drawCheckboxRow(screen, 1, i18n.Text(i18n.MsgSidebarDamageNumbers), ms.UI.GameOpts.DisplayDamageNumber)
+}
+
+// settingsRowTop 是设置页签内容起始 Y。
+func (p *Panel) settingsRowTop() float64 {
+	return p.layout.TabBar.Y + p.layout.TabBar.H + 24
+}
+
+// settingsRowRect 返回第 index 个设置行的点击区域。
+func (p *Panel) settingsRowRect(index int) rect {
+	x := p.layout.Panel.X + 20
+	y := p.settingsRowTop() + float64(index)*44
+	return rect{X: x, Y: y, W: p.layout.Panel.W - 40, H: 40}
+}
+
+func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, checked bool) {
+	row := p.settingsRowRect(index)
+	boxSize := float32(18)
+	contentY := row.Y + 11
+	boxX, boxY := float32(row.X), float32(contentY)
+	textColor := lo.Ternary(checked, colorx.Gold, colorx.Silver)
+	borderColor := lo.Ternary(checked, colorx.Gold, panelLineColor)
+
+	vector.StrokeRect(screen, boxX, boxY, boxSize, boxSize, 2, borderColor, false)
+	if checked {
+		vector.StrokeLine(screen, boxX+4, boxY+9, boxX+8, boxY+14, 3, colorx.Gold, false)
+		vector.StrokeLine(screen, boxX+8, boxY+14, boxX+15, boxY+4, 3, colorx.Gold, false)
+	}
+	p.drawText(screen, label, row.X+34, contentY, 18, font.LocalizedUI(font.Kai), textColor)
 }
 
 func (p *Panel) drawHandleFrame(screen *ebiten.Image, ms *state.MissionState) {
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
+	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
 	sx, sy := ebiten.CursorPosition()
-	bgColor := color.RGBA{R: 21, G: 48, B: 56, A: 235}
+	fill := theme.HandleFill
 	if ui.Handle.contains(sx, sy) {
-		bgColor = color.RGBA{R: 27, G: 58, B: 66, A: 245}
+		fill = theme.HandleHover
+		if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
+			fill = theme.ButtonPressed
+		}
 	}
-	handleW := float32(ui.Handle.W)
+	handleW := float64(ui.Handle.W)
 	if ms.UI.SidebarExpanded {
 		handleW += 2
 	}
-	vector.FillRect(
+	theme.FillRoundedRect(
 		screen,
-		float32(ui.Handle.X),
-		float32(ui.Handle.Y),
-		handleW,
-		float32(ui.Handle.H),
-		bgColor,
-		false,
+		ui.Handle.X, ui.Handle.Y, handleW, float64(ui.Handle.H),
+		theme.HandleCornerRadius,
+		fill, theme.HandleBorder, theme.CardBorderWidth,
 	)
-
-	x, y := float32(ui.Handle.X), float32(ui.Handle.Y)
-	w, h := float32(ui.Handle.W), float32(ui.Handle.H)
-	edgeColor := color.RGBA{R: 128, G: 168, B: 174, A: 225}
-	// 展开时右侧与面板连在一起，不画分割边。
-	vector.StrokeLine(screen, x, y+1, x, y+h-1, 2, edgeColor, false)
-	vector.StrokeLine(screen, x, y, x+w, y, 2, edgeColor, false)
-	vector.StrokeLine(screen, x, y+h, x+w, y+h, 2, edgeColor, false)
-	if !ms.UI.SidebarExpanded {
-		vector.StrokeLine(screen, x+w, y+1, x+w, y+h-1, 2, edgeColor, false)
-	}
 }
 
 func (p *Panel) drawHandleArrow(screen *ebiten.Image, ms *state.MissionState) {
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded)
-	cx, cy := float32(ui.Handle.X+ui.Handle.W/2), float32(ui.Handle.Y+ui.Handle.H/2)
-	arrowW, arrowH := float32(14), float32(24)
-	fillColor := color.RGBA{R: 232, G: 224, B: 198, A: 255}
-	strokeColor := color.RGBA{R: 6, G: 16, B: 19, A: 230}
-
-	var path vector.Path
+	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
+	cx, cy := ui.Handle.X+ui.Handle.W/2, ui.Handle.Y+ui.Handle.H/2
+	dir := theme.TriangleLeft
 	if ms.UI.SidebarExpanded {
-		path.MoveTo(cx-arrowW/2, cy-arrowH/2)
-		path.LineTo(cx+arrowW/2, cy)
-		path.LineTo(cx-arrowW/2, cy+arrowH/2)
-	} else {
-		path.MoveTo(cx+arrowW/2, cy-arrowH/2)
-		path.LineTo(cx-arrowW/2, cy)
-		path.LineTo(cx+arrowW/2, cy+arrowH/2)
+		dir = theme.TriangleRight
 	}
-	path.Close()
-	strokeOpts := &vector.DrawPathOptions{AntiAlias: false}
-	strokeOpts.ColorScale.ScaleWithColor(strokeColor)
-	fillOpts := &vector.DrawPathOptions{AntiAlias: false}
-	fillOpts.ColorScale.ScaleWithColor(fillColor)
-	vector.FillPath(screen, &path, &vector.FillOptions{}, fillOpts)
-	vector.StrokePath(screen, &path, &vector.StrokeOptions{Width: 3}, strokeOpts)
+	theme.DrawTriangle(screen, cx, cy, arrowHandleSize, dir, theme.HandleArrow)
 }
 
 func (p *Panel) drawMinimap(screen *ebiten.Image, ms *state.MissionState) {
 	ui := p.layout
-	vector.FillRect(
+	theme.FillRoundedRect(
 		screen,
-		float32(ui.Map.X-2),
-		float32(ui.Map.Y-2),
-		float32(ui.Map.W+4),
-		float32(ui.Map.H+4),
+		ui.Map.X-2, ui.Map.Y-2, ui.Map.W+4, ui.Map.H+4,
+		theme.CornerRadius,
 		color.RGBA{R: 2, G: 8, B: 11, A: 245},
-		false,
+		panelLineColor, theme.CardBorderWidth,
 	)
 
 	opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
@@ -406,8 +424,7 @@ func (p *Panel) drawMinimapPlanes(screen *ebiten.Image, ms *state.MissionState) 
 
 func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 	ui := p.layout
-	y := ui.Map.Y + ui.Map.H + 20
-	p.drawCard(screen, ui.Panel.X+16, y, ui.Panel.W-32, 104)
+	p.drawCard(screen, ui.Battle.X, ui.Battle.Y, ui.Battle.W, ui.Battle.H)
 
 	selfFleet := ms.Fleet(ms.Player.CurPlayer)
 	enemyFleet := ms.Fleet(ms.Player.CurEnemy)
@@ -415,8 +432,8 @@ func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 	p.drawText(
 		screen,
 		i18n.Format(i18n.MsgSidebarFunds, map[string]any{"Funds": ms.Player.CurFunds}),
-		ui.Panel.X+28,
-		y+14,
+		ui.Battle.X+12,
+		ui.Battle.Y+14,
 		18,
 		bodyFont,
 		colorx.White,
@@ -424,8 +441,8 @@ func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 	p.drawText(
 		screen,
 		i18n.Format(i18n.MsgSidebarAllyFleet, map[string]any{"Count": selfFleet.Total}),
-		ui.Panel.X+28,
-		y+40,
+		ui.Battle.X+12,
+		ui.Battle.Y+40,
 		16,
 		bodyFont,
 		colorx.Silver,
@@ -433,47 +450,38 @@ func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
 	p.drawText(
 		screen,
 		i18n.Format(i18n.MsgSidebarEnemyFleet, map[string]any{"Count": enemyFleet.Total}),
-		ui.Panel.X+28,
-		y+64,
+		ui.Battle.X+12,
+		ui.Battle.Y+64,
 		16,
 		bodyFont,
 		colorx.Silver,
 	)
 }
 
-func (p *Panel) drawSettings(screen *ebiten.Image, ms *state.MissionState) {
-	p.drawCheckboxRow(screen, 0, i18n.Text(i18n.MsgSidebarShowState), ms.UI.GameOpts.ForceDisplayState)
-	p.drawCheckboxRow(screen, 1, i18n.Text(i18n.MsgSidebarDamageNumbers), ms.UI.GameOpts.DisplayDamageNumber)
-}
-
-func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, checked bool) {
-	x := p.layout.Panel.X + 28
-	y := p.settingRowsTop() + float64(index*44)
-	boxSize := float32(18)
-	contentY := y + 8
-	boxX, boxY := float32(x), float32(contentY)
-	textColor := lo.Ternary(checked, colorx.Gold, colorx.Silver)
-	borderColor := lo.Ternary(checked, colorx.Gold, panelLineColor)
-
-	vector.StrokeRect(screen, boxX, boxY, boxSize, boxSize, 2, borderColor, false)
-	if checked {
-		vector.StrokeLine(screen, boxX+4, boxY+9, boxX+8, boxY+14, 3, colorx.Gold, false)
-		vector.StrokeLine(screen, boxX+8, boxY+14, boxX+15, boxY+4, 3, colorx.Gold, false)
+func (p *Panel) drawScrollbar(screen *ebiten.Image, ms *state.MissionState) {
+	ui := p.layout
+	contentH := p.units.MeasureContent(ms, unitRect(ui.Viewport))
+	maxScroll := contentH - ui.Viewport.H
+	if maxScroll <= 0 {
+		return
 	}
-	p.drawText(screen, label, x+34, contentY, 18, font.LocalizedUI(font.Kai), textColor)
+	trackX := ui.Viewport.X + ui.Viewport.W - scrollbarW - 4
+	theme.FillRoundedRect(screen, trackX, ui.Viewport.Y, scrollbarW, ui.Viewport.H, scrollbarW/2, scrollbarTrack, scrollbarTrack, 1)
+
+	thumbH := ui.Viewport.H * ui.Viewport.H / contentH
+	if thumbH < 24 {
+		thumbH = 24
+	}
+	thumbY := ui.Viewport.Y + (ui.Viewport.H-thumbH)*(p.scrollY/maxScroll)
+	theme.FillRoundedRect(screen, trackX, thumbY, scrollbarW, thumbH, scrollbarW/2, scrollbarThumb, scrollbarThumb, 1)
 }
 
 func (p *Panel) drawCard(screen *ebiten.Image, x, y, w, h float64) {
-	vector.FillRect(screen, float32(x), float32(y), float32(w), float32(h), cardBgColor, false)
-	vector.StrokeRect(
+	theme.FillRoundedRect(
 		screen,
-		float32(x),
-		float32(y),
-		float32(w),
-		float32(h),
-		1,
-		color.RGBA{R: 59, G: 97, B: 106, A: 210},
-		false,
+		x, y, w, h,
+		theme.CornerRadius,
+		cardBgColor, theme.CardBorder, theme.CardBorderWidth,
 	)
 }
 
@@ -489,6 +497,12 @@ func (p *Panel) drawText(
 	opts.ColorScale.ScaleWithColor(textColor)
 	textFace := text.GoTextFace{Source: textFont, Size: fontSize}
 	text.Draw(screen, textStr, &textFace, opts)
+}
+
+func (p *Panel) drawCenteredText(screen *ebiten.Image, value string, area rect, size float64, textColor color.Color) {
+	source := theme.Body()
+	width, height := text.Measure(value, &text.GoTextFace{Source: source, Size: size}, 0)
+	p.drawText(screen, value, area.X+(area.W-width)/2, area.Y+(area.H-height)/2, size, source, textColor)
 }
 
 func (p *Panel) centerCameraAtMinimap(ms *state.MissionState, sx, sy int) {
@@ -509,11 +523,14 @@ func (p *Panel) mapToSidebar(ms *state.MissionState, rx, ry float64) (float64, f
 		ui.Map.Y + ry/float64(ms.Core.MissionMD.MapCfg.Height)*ui.Map.H
 }
 
-func (p *Panel) settingRowsTop() float64 {
-	return p.layout.Map.Y + p.layout.Map.H + 142
+func tabLabel(tab Tab) string {
+	if tab == TabSettings {
+		return i18n.Text(i18n.MsgSidebarTabSettings)
+	}
+	return i18n.Text(i18n.MsgSidebarTabBattle)
 }
 
-func calcLayout(screen layout.ScreenLayout, expanded bool) sidebarLayout {
+func calcLayout(screen layout.ScreenLayout, expanded bool, tab Tab) sidebarLayout {
 	panelW := math.Max(260, math.Min(float64(screen.Width)*0.24, 360))
 	panelX := float64(screen.Width)
 	if expanded {
@@ -525,10 +542,21 @@ func calcLayout(screen layout.ScreenLayout, expanded bool) sidebarLayout {
 		handleX = float64(screen.Width - handleW)
 	}
 	mapSize := panelW - 32
+	tabBar := rect{X: panelX, Y: 0, W: panelW, H: tabBarHeight}
+	mapR := rect{X: panelX + 16, Y: tabBarHeight + 20, W: mapSize, H: mapSize}
+	battle := rect{X: panelX + 16, Y: mapR.Y + mapSize + 16, W: panelW - 32, H: 104}
+	viewportTop := battle.Y + battle.H + 16
+	viewport := rect{X: panelX, Y: viewportTop, W: panelW, H: math.Max(0, float64(screen.Height)-viewportTop-12)}
+	if !expanded {
+		viewport = rect{}
+	}
 	return sidebarLayout{
-		Screen: screen,
-		Panel:  rect{X: panelX, Y: 0, W: panelW, H: float64(screen.Height)},
-		Handle: rect{X: handleX, Y: (float64(screen.Height) - handleH) / 2, W: handleW, H: handleH},
-		Map:    rect{X: panelX + 16, Y: 28, W: mapSize, H: mapSize},
+		Screen:   screen,
+		Panel:    rect{X: panelX, Y: 0, W: panelW, H: float64(screen.Height)},
+		Handle:   rect{X: handleX, Y: (float64(screen.Height) - handleH) / 2, W: handleW, H: handleH},
+		TabBar:   tabBar,
+		Map:      mapR,
+		Battle:   battle,
+		Viewport: viewport,
 	}
 }

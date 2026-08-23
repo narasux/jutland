@@ -252,6 +252,102 @@ other = "敵艦隊：{{.Count}}"
 other = "状態表示"
 [SidebarDamageNumbers]
 other = "ダメージ表示"
+[SidebarTabBattle]
+other = "地図 / 艦船"
+[SidebarTabSettings]
+other = "設定"
+[UnitPanelNoSelection]
+other = "艦艇未選択"
+[UnitPanelOpen]
+other = "艦艇情報を開く"
+[UnitPanelClose]
+other = "艦艇情報を閉じる"
+[UnitPanelSelectedCount]
+other = "{{.Count}} 隻選択中"
+[UnitPanelBasicInfo]
+other = "基本情報"
+[UnitPanelWeaponTab]
+other = "武装"
+[UnitPanelAircraftTab]
+other = "航空"
+[UnitPanelName]
+other = "名称"
+[UnitPanelType]
+other = "種別"
+[UnitPanelSpeed]
+other = "速度"
+[UnitPanelHeading]
+other = "針路"
+[UnitPanelTarget]
+other = "目標"
+[UnitPanelDistance]
+other = "距離"
+[UnitPanelStatus]
+other = "状態"
+[UnitPanelGroup]
+other = "編隊"
+[UnitPanelAircraft]
+other = "航空機"
+[UnitPanelNoTarget]
+other = "—"
+[UnitPanelIdle]
+other = "待機中"
+[UnitPanelMoving]
+other = "航行中"
+[UnitPanelEngaging]
+other = "交戦中"
+[UnitPanelAllWeapons]
+other = "全武装"
+[UnitPanelMainGun]
+other = "主砲"
+[UnitPanelSecondaryGun]
+other = "副砲"
+[UnitPanelAntiAircraftGun]
+other = "対空砲"
+[UnitPanelTorpedo]
+other = "魚雷"
+[UnitPanelRocket]
+other = "ロケット"
+[UnitPanelAllowed]
+other = "許可"
+[UnitPanelDisabled]
+other = "禁止"
+[UnitPanelMixed]
+other = "混在"
+[UnitPanelReady]
+other = "準備完了"
+[UnitPanelReadyCount]
+other = "{{.Ready}}/{{.Total}} 準備完了"
+[UnitPanelSeconds]
+other = "{{.Seconds}} 秒"
+[UnitPanelAircraftEmpty]
+other = "艦載機なし"
+[UnitPanelTakeoff]
+other = "艦載機発艦"
+[UnitPanelPlaneType]
+other = "機種"
+[UnitPanelStandby]
+other = "待機"
+[UnitPanelInCombat]
+other = "交戦"
+[UnitPanelReturning]
+other = "帰投"
+[UnitPanelLost]
+other = "損失"
+[UnitPanelTotal]
+other = "合計"
+[UnitPanelAverageHP]
+other = "平均 HP"
+[UnitPanelAverageSpeed]
+other = "平均速度"
+[UnitPanelGroupShip]
+other = "識別"
+[UnitPanelGroupStatus]
+other = "状態"
+[UnitPanelGroupTarget]
+other = "目標"
+[UnitPanelGroupFleet]
+other = "集計"
 [MapSelf]
 other = "味方"
 [MapEnemy]

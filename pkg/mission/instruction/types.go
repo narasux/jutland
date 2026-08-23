@@ -6,13 +6,15 @@ package instruction
 import "github.com/narasux/jutland/pkg/mission/state"
 
 const (
-	NameEnableWeapon  = "EnableWeapon"
-	NameDisableWeapon = "DisableWeapon"
-	NameShipMove      = "ShipMove"
-	NameShipMovePath  = "ShipMovePath"
-	NameShipSummon    = "ShipSummon"
-	NamePlaneAttack   = "PlaneAttack"
-	NamePlaneReturn   = "PlaneReturn"
+	NameEnableWeapon    = "EnableWeapon"
+	NameDisableWeapon   = "DisableWeapon"
+	NameEnableAircraft  = "EnableAircraft"
+	NameDisableAircraft = "DisableAircraft"
+	NameShipMove        = "ShipMove"
+	NameShipMovePath    = "ShipMovePath"
+	NameShipSummon      = "ShipSummon"
+	NamePlaneAttack     = "PlaneAttack"
+	NamePlaneReturn     = "PlaneReturn"
 )
 
 // InstrStatus 指令状态

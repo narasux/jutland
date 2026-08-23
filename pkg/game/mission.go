@@ -120,7 +120,7 @@ func (g *Game) handleMissionLoading() error {
 		return nil
 	}
 	if g.missionMgr == nil {
-		g.missionMgr = manager.New(g.curMission, g.ui)
+		g.missionMgr = manager.New(g.curMission)
 	}
 	if !g.missionMgr.WarmupMapBlocks() {
 		return nil

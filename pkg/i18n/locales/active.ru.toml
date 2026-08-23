@@ -255,6 +255,102 @@ other = "Вражеский флот: {{.Count}}"
 other = "Показывать состояние"
 [SidebarDamageNumbers]
 other = "Числа урона"
+[SidebarTabBattle]
+other = "Карта / Корабли"
+[SidebarTabSettings]
+other = "Настройки"
+[UnitPanelNoSelection]
+other = "Не выбрано кораблей"
+[UnitPanelOpen]
+other = "Открыть информацию о корабле"
+[UnitPanelClose]
+other = "Закрыть информацию о корабле"
+[UnitPanelSelectedCount]
+other = "Выбрано {{.Count}} кораблей"
+[UnitPanelBasicInfo]
+other = "Основная информация"
+[UnitPanelWeaponTab]
+other = "Оружие"
+[UnitPanelAircraftTab]
+other = "Авиация"
+[UnitPanelName]
+other = "Название"
+[UnitPanelType]
+other = "Тип"
+[UnitPanelSpeed]
+other = "Скорость"
+[UnitPanelHeading]
+other = "Курс"
+[UnitPanelTarget]
+other = "Цель"
+[UnitPanelDistance]
+other = "Дистанция"
+[UnitPanelStatus]
+other = "Статус"
+[UnitPanelGroup]
+other = "Группа"
+[UnitPanelAircraft]
+other = "Самолёты"
+[UnitPanelNoTarget]
+other = "—"
+[UnitPanelIdle]
+other = "В ожидании"
+[UnitPanelMoving]
+other = "Движется"
+[UnitPanelEngaging]
+other = "В бою"
+[UnitPanelAllWeapons]
+other = "Всё оружие"
+[UnitPanelMainGun]
+other = "Главный калибр"
+[UnitPanelSecondaryGun]
+other = "Вспомогательный калибр"
+[UnitPanelAntiAircraftGun]
+other = "Зенитная артиллерия"
+[UnitPanelTorpedo]
+other = "Торпеды"
+[UnitPanelRocket]
+other = "Ракеты"
+[UnitPanelAllowed]
+other = "Разрешено"
+[UnitPanelDisabled]
+other = "Запрещено"
+[UnitPanelMixed]
+other = "Смешанно"
+[UnitPanelReady]
+other = "Готово"
+[UnitPanelReadyCount]
+other = "{{.Ready}}/{{.Total}} готово"
+[UnitPanelSeconds]
+other = "{{.Seconds}} с"
+[UnitPanelAircraftEmpty]
+other = "Нет палубной авиации"
+[UnitPanelTakeoff]
+other = "Взлёт палубной авиации"
+[UnitPanelPlaneType]
+other = "Тип самолёта"
+[UnitPanelStandby]
+other = "В резерве"
+[UnitPanelInCombat]
+other = "В бою"
+[UnitPanelReturning]
+other = "Возвращаются"
+[UnitPanelLost]
+other = "Потери"
+[UnitPanelTotal]
+other = "Итого"
+[UnitPanelAverageHP]
+other = "Средний HP"
+[UnitPanelAverageSpeed]
+other = "Средняя скорость"
+[UnitPanelGroupShip]
+other = "Идентификация"
+[UnitPanelGroupStatus]
+other = "Статус"
+[UnitPanelGroupTarget]
+other = "Цель"
+[UnitPanelGroupFleet]
+other = "Сводка"
 [MapSelf]
 other = "Союзники"
 [MapEnemy]

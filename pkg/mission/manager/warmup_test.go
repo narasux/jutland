@@ -3,7 +3,6 @@ package manager
 import (
 	"testing"
 
-	"github.com/ebitenui/ebitenui"
 	"github.com/stretchr/testify/require"
 
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
@@ -11,7 +10,7 @@ import (
 )
 
 func TestWarmupMapBlocksReportsCurrentViewReadiness(t *testing.T) {
-	m := New("Midway1942", &ebitenui.UI{})
+	m := New("Midway1942")
 	m.state.View.Camera.Pos = objPos.New(100, 137)
 	m.state.View.Camera.Width = 30
 	m.state.View.Camera.Height = 20

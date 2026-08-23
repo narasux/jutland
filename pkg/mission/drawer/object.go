@@ -227,6 +227,13 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			}
 			weaponX := shipX - 45*sceneScale
 
+			// drawWeaponIcon 在游标处绘制一张图标，然后统一右移一个间距，
+			// 保证无论战舰是否拥有主炮，图标都从第一个槽位开始依次排列。
+			drawWeaponIcon := func(weaponIcon *ebiten.Image, weaponScale float64) {
+				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+				weaponX += weaponInterstitialSpacing * sceneScale
+			}
+
 			// 绘制主炮状态
 			if s.Weapon.HasMainGun {
 				status := weaponImg.WeaponStatusReloading
@@ -237,7 +244,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				}
 
 				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeMainGun, status, ms.UI.GameOpts.Zoom)
-				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 
 			// 绘制副炮状态
@@ -254,8 +261,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status,
 					ms.UI.GameOpts.Zoom,
 				)
-				weaponX += weaponInterstitialSpacing * sceneScale
-				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 
 			// 绘制防空炮状态（注：由于防空炮装填速度很快，所以不需要绘制装填中的状态，即只有红绿两种）
@@ -270,8 +276,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					status,
 					ms.UI.GameOpts.Zoom,
 				)
-				weaponX += weaponInterstitialSpacing * sceneScale
-				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 
 			// 绘制鱼雷发射器状态
@@ -284,8 +289,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				}
 
 				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeTorpedo, status, ms.UI.GameOpts.Zoom)
-				weaponX += weaponInterstitialSpacing * sceneScale
-				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 
 			// 绘制火箭炮发射器状态
@@ -298,8 +302,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				}
 
 				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeRocket, status, ms.UI.GameOpts.Zoom)
-				weaponX += weaponInterstitialSpacing * sceneScale
-				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 
 			// 如果被编组，需要标记出来

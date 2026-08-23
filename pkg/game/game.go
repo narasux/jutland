@@ -85,7 +85,7 @@ func (g *Game) Update() error {
 		return nil
 	}
 	g.syncUIContainer()
-	// 任务运行页由战术侧栏承载 EbitenUI，避免同一 Tick 重复更新全局输入。
+	// 任务运行页使用手绘 HUD，不承载全局 EbitenUI；避免在任务运行期重复更新全局输入。
 	if g.mode != GameModeMissionRunning {
 		g.ui.Update()
 	}
@@ -203,6 +203,11 @@ func (g *Game) handleUIEscape() bool {
 
 // Layout 核心方法，用于设置窗口大小（全屏模式下无意义）
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+	// Layout 是 Ebiten 保证在首帧 Update 前调用的真实逻辑尺寸来源。
+	// 任务 HUD 的绘制与点击区域必须使用同一尺寸，不能仅依赖初始化时的显示器大小。
+	if g.missionMgr != nil {
+		g.missionMgr.Resize(outsideWidth, outsideHeight)
+	}
 	return outsideWidth, outsideHeight
 }
 

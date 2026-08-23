@@ -70,7 +70,7 @@ var sArea = SelectedArea{}
 
 // 探测游戏地图上的鼠标选区
 func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
-	if misState.UI.SidebarConsumesCursor {
+	if misState.UI.UIConsumesCursor {
 		misState.Interaction.IsAreaSelecting = false
 		return nil
 	}
@@ -93,7 +93,7 @@ func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 
 // 探测游戏地图上的鼠标按键点击
 func DetectMouseButtonClickOnMap(misState *state.MissionState, button ebiten.MouseButton) *objPos.MapPos {
-	if misState.UI.SidebarConsumesCursor {
+	if misState.UI.UIConsumesCursor {
 		return nil
 	}
 	// 鼠标按键没有点击，直接跳过

@@ -54,6 +54,10 @@ func (sa *ShipAircraft) CancelLanding(planeUID string) {
 
 // TakeOff 起飞战机（不区分飞机种类，只看打击对象类型）
 func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType object.Type) *Plane {
+	// 禁止起飞只阻止新飞机离舰，不影响已经出击飞机继续作战或返航。
+	if sa.Disable {
+		return nil
+	}
 	// 判断起飞冷却，冷却中不允许起飞
 	if sa.LatestTakeOffAt+int64(sa.TakeOffTime*1e3) > time.Now().UnixMilli() {
 		return nil
