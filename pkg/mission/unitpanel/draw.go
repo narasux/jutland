@@ -36,6 +36,9 @@ var (
 	togglePressFill = color.RGBA{R: 12, G: 34, B: 41, A: 150}
 )
 
+// navChevronSize 是导航按钮 V 形箭头的开口半宽。
+const navChevronSize = 5.0
+
 // Draw 将单位信息内容绘制到滚动视口 region 内，并按 scrollY 上移。
 // 内容先绘制到离屏缓冲再整体贴回屏幕，从而把滚动溢出的部分裁剪在视口内。
 func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState, region Rect, scrollY float64) {
@@ -86,7 +89,17 @@ func (p *Panel) drawSections(screen *ebiten.Image, ms *state.MissionState) {
 		if area.W == 0 || area.H == 0 {
 			continue
 		}
-		theme.FillRoundedRect(screen, area.X, area.Y, area.W, area.H, theme.CornerRadius, sectionFill, sectionBorder, theme.CardBorderWidth)
+		theme.FillRoundedRect(
+			screen,
+			area.X,
+			area.Y,
+			area.W,
+			area.H,
+			theme.CornerRadius,
+			sectionFill,
+			sectionBorder,
+			theme.CardBorderWidth,
+		)
 	}
 
 	if len(ships) == 1 {
@@ -140,7 +153,15 @@ func (p *Panel) drawShipVisual(screen *ebiten.Image, ship *objUnit.BattleShip) {
 }
 
 func (p *Panel) drawFocusList(screen *ebiten.Image, ms *state.MissionState, ships []*objUnit.BattleShip) {
-	p.drawText(screen, i18n.Format(i18n.MsgUnitPanelSelectedCount, map[string]any{"Count": len(ships)}), p.layout.Visual.X+10, p.layout.Visual.Y+7, theme.SizeBody, theme.Body(), colorx.Silver)
+	p.drawText(
+		screen,
+		i18n.Format(i18n.MsgUnitPanelSelectedCount, map[string]any{"Count": len(ships)}),
+		p.layout.Visual.X+10,
+		p.layout.Visual.Y+7,
+		theme.SizeBody,
+		theme.Body(),
+		colorx.Silver,
+	)
 	p.drawNavButton(screen, p.previousFocusRect(), theme.TriangleLeft)
 	p.drawNavButton(screen, p.nextFocusRect(), theme.TriangleRight)
 	for _, entry := range p.visibleFocusShips(ships, ms.Interaction.FocusedShipUid) {
@@ -158,7 +179,15 @@ func (p *Panel) drawFocusList(screen *ebiten.Image, ms *state.MissionState, ship
 		name := p.fitText(objUnit.GetShipDisplayName(entry.Ship.Name), entry.Rect.W-68, theme.SizeBody-1, theme.Body())
 		p.drawText(screen, name, entry.Rect.X+8, entry.Rect.Y+5, theme.SizeBody-1, theme.Body(), colorx.White)
 		hp := fmt.Sprintf("%.0f%%", entry.Ship.CurHP/entry.Ship.TotalHP*100)
-		p.drawText(screen, hp, entry.Rect.X+entry.Rect.W-52, entry.Rect.Y+5, theme.SizeCaption, theme.Numeric(), colorx.Silver)
+		p.drawText(
+			screen,
+			hp,
+			entry.Rect.X+entry.Rect.W-52,
+			entry.Rect.Y+5,
+			theme.SizeCaption,
+			theme.Numeric(),
+			colorx.Silver,
+		)
 	}
 }
 
@@ -182,7 +211,15 @@ func (p *Panel) drawBasicInfo(screen *ebiten.Image, ms *state.MissionState, ship
 	if area.W == 0 || area.H == 0 {
 		return
 	}
-	p.drawText(screen, i18n.Text(i18n.MsgUnitPanelBasicInfo), area.X+10, area.Y+5, theme.SizeSection, theme.Title(), colorx.White)
+	p.drawText(
+		screen,
+		i18n.Text(i18n.MsgUnitPanelBasicInfo),
+		area.X+10,
+		area.Y+5,
+		theme.SizeSection,
+		theme.Title(),
+		colorx.White,
+	)
 
 	groups := p.buildInfoGroups(ms, ships)
 	if len(groups) == 0 {
@@ -280,8 +317,16 @@ func (p *Panel) shipGroups(ms *state.MissionState, ship *objUnit.BattleShip) []i
 		{label: i18n.Text(i18n.MsgUnitPanelName), value: objUnit.GetShipDisplayName(ship.Name)},
 		{label: i18n.Text(i18n.MsgUnitPanelType), value: ship.Type.ToDisplay()},
 		{label: "HP", value: fmt.Sprintf("%.0f%%", ship.CurHP/ship.TotalHP*100), numeric: true},
-		{label: i18n.Text(i18n.MsgUnitPanelSpeed), value: fmt.Sprintf("%.1f / %.1f", ship.CurSpeed*600, ship.MaxSpeed*600), numeric: true},
-		{label: i18n.Text(i18n.MsgUnitPanelHeading), value: fmt.Sprintf("%03.0f°", math.Mod(ship.CurRotation+360, 360)), numeric: true},
+		{
+			label:   i18n.Text(i18n.MsgUnitPanelSpeed),
+			value:   fmt.Sprintf("%.1f / %.1f", ship.CurSpeed*600, ship.MaxSpeed*600),
+			numeric: true,
+		},
+		{
+			label:   i18n.Text(i18n.MsgUnitPanelHeading),
+			value:   fmt.Sprintf("%03.0f°", math.Mod(ship.CurRotation+360, 360)),
+			numeric: true,
+		},
 		{label: i18n.Text(i18n.MsgUnitPanelStatus), value: status},
 		{label: i18n.Text(i18n.MsgUnitPanelGroup), value: group, numeric: true},
 	}
@@ -293,7 +338,8 @@ func (p *Panel) shipGroups(ms *state.MissionState, ship *objUnit.BattleShip) []i
 			numeric: true,
 		})
 	}
-	items = append(items,
+	items = append(
+		items,
 		infoItem{label: i18n.Text(i18n.MsgUnitPanelTarget), value: targetName},
 		infoItem{label: i18n.Text(i18n.MsgUnitPanelDistance), value: distance, numeric: true},
 	)
@@ -317,8 +363,16 @@ func (p *Panel) fleetGroup(ships []*objUnit.BattleShip) infoGroup {
 		items: []infoItem{
 			{label: i18n.Text(i18n.MsgUnitPanelName), value: focusName},
 			{label: i18n.Text(i18n.MsgUnitPanelTotal), value: fmt.Sprintf("%d", len(ships)), numeric: true},
-			{label: i18n.Text(i18n.MsgUnitPanelAverageHP), value: fmt.Sprintf("%.0f%%", hpPercent/float64(len(ships))), numeric: true},
-			{label: i18n.Text(i18n.MsgUnitPanelAverageSpeed), value: fmt.Sprintf("%.1f kn", speed/float64(len(ships))), numeric: true},
+			{
+				label:   i18n.Text(i18n.MsgUnitPanelAverageHP),
+				value:   fmt.Sprintf("%.0f%%", hpPercent/float64(len(ships))),
+				numeric: true,
+			},
+			{
+				label:   i18n.Text(i18n.MsgUnitPanelAverageSpeed),
+				value:   fmt.Sprintf("%.1f kn", speed/float64(len(ships))),
+				numeric: true,
+			},
 		},
 	}
 }
@@ -377,10 +431,24 @@ func (p *Panel) drawTab(screen *ebiten.Image, area Rect, label string, active bo
 func (p *Panel) drawWeapons(screen *ebiten.Image, ms *state.MissionState, ships []*objUnit.BattleShip) {
 	rows := weaponRows(ms, nowMillis())
 	if len(rows) == 0 {
-		p.drawCenteredText(screen, i18n.Text(i18n.MsgUnitPanelNoTarget), p.layout.Systems, theme.SizeSection, colorx.Silver)
+		p.drawCenteredText(
+			screen,
+			i18n.Text(i18n.MsgUnitPanelNoTarget),
+			p.layout.Systems,
+			theme.SizeSection,
+			colorx.Silver,
+		)
 		return
 	}
-	p.drawText(screen, i18n.Text(i18n.MsgUnitPanelAllWeapons), p.layout.Systems.X+4, p.layout.Systems.Y+38, float64(theme.SizeBody), theme.Body(), colorx.White)
+	p.drawText(
+		screen,
+		i18n.Text(i18n.MsgUnitPanelAllWeapons),
+		p.layout.Systems.X+4,
+		p.layout.Systems.Y+38,
+		float64(theme.SizeBody),
+		theme.Body(),
+		colorx.White,
+	)
 	p.drawToggleDot(screen, p.allWeaponsToggleRect(), allWeaponsToggle(ships))
 	for index, row := range rows {
 		p.drawWeaponRow(screen, row, index, len(rows))
@@ -408,7 +476,10 @@ func (p *Panel) drawWeaponRow(screen *ebiten.Image, row weaponRow, index, rowCou
 	barY := y + 27
 	status := i18n.Text(i18n.MsgUnitPanelReady)
 	if row.RemainingMillis > 0 {
-		status = i18n.Format(i18n.MsgUnitPanelSeconds, map[string]any{"Seconds": fmt.Sprintf("%.1f", float64(row.RemainingMillis)/1e3)})
+		status = i18n.Format(
+			i18n.MsgUnitPanelSeconds,
+			map[string]any{"Seconds": fmt.Sprintf("%.1f", float64(row.RemainingMillis)/1e3)},
+		)
 	}
 	statusFont := font.ForText(status, theme.Numeric())
 	statusW := textLayout.CalcTextWidth(status, fontSize, statusFont)
@@ -455,7 +526,7 @@ func toggleDotFill(state toggleState) color.Color {
 	}
 }
 
-// drawNavButton 绘制小巧的上一艘/下一艘导航按钮，使用矢量三角形箭头，避免字体缺失字形导致空白。
+// drawNavButton 绘制小巧的上一艘/下一艘导航按钮，使用矢量 V 形箭头，避免字体缺失字形导致空白。
 func (p *Panel) drawNavButton(screen *ebiten.Image, area Rect, dir theme.TriangleDir) {
 	fill, border := toggleFill, toggleBorder
 	if p.cursorAt(area) {
@@ -465,17 +536,31 @@ func (p *Panel) drawNavButton(screen *ebiten.Image, area Rect, dir theme.Triangl
 		}
 	}
 	p.drawRoundedRect(screen, area, theme.CornerRadius, fill, border)
-	theme.DrawTriangle(screen, area.X+area.W/2, area.Y+area.H/2, 7, dir, theme.HandleArrow)
+	theme.DrawChevron(screen, area.X+area.W/2, area.Y+area.H/2, navChevronSize, dir, theme.HandleArrow)
 }
 
 // drawAircraft 绘制单一表头、各机型数据、合计行和起飞总开关。
 func (p *Panel) drawAircraft(screen *ebiten.Image, ms *state.MissionState, ships []*objUnit.BattleShip) {
 	rows, total := aircraftRows(ms)
 	if len(rows) == 0 {
-		p.drawCenteredText(screen, i18n.Text(i18n.MsgUnitPanelAircraftEmpty), p.layout.Systems, theme.SizeSection, colorx.Silver)
+		p.drawCenteredText(
+			screen,
+			i18n.Text(i18n.MsgUnitPanelAircraftEmpty),
+			p.layout.Systems,
+			theme.SizeSection,
+			colorx.Silver,
+		)
 		return
 	}
-	p.drawText(screen, i18n.Text(i18n.MsgUnitPanelTakeoff), p.layout.Systems.X+4, p.layout.Systems.Y+38, float64(theme.SizeBody), theme.Body(), colorx.White)
+	p.drawText(
+		screen,
+		i18n.Text(i18n.MsgUnitPanelTakeoff),
+		p.layout.Systems.X+4,
+		p.layout.Systems.Y+38,
+		float64(theme.SizeBody),
+		theme.Body(),
+		colorx.White,
+	)
 	toggle := aircraftToggle(ships)
 	p.drawToggleDot(screen, p.aircraftToggleRect(), toggle)
 
@@ -490,24 +575,63 @@ func (p *Panel) drawAircraft(screen *ebiten.Image, ms *state.MissionState, ships
 		i18n.Text(i18n.MsgUnitPanelLost),
 	}
 	for index, heading := range headings {
-		p.drawText(screen, heading, p.layout.Systems.X+columns[index]*p.layout.Systems.W+4, tableY, theme.SizeCaption, theme.Body(), colorx.Gold)
+		p.drawText(
+			screen,
+			heading,
+			p.layout.Systems.X+columns[index]*p.layout.Systems.W+4,
+			tableY,
+			theme.SizeCaption,
+			theme.Body(),
+			colorx.Gold,
+		)
 	}
-	vector.StrokeLine(screen, float32(p.layout.Systems.X+4), float32(tableY+rowH-3), float32(p.layout.Systems.X+p.layout.Systems.W-4), float32(tableY+rowH-3), 1, sectionBorder, false)
+	vector.StrokeLine(
+		screen,
+		float32(p.layout.Systems.X+4),
+		float32(tableY+rowH-3),
+		float32(p.layout.Systems.X+p.layout.Systems.W-4),
+		float32(tableY+rowH-3),
+		1,
+		sectionBorder,
+		false,
+	)
 	for index, row := range rows {
 		p.drawAircraftRow(screen, row, tableY+rowH*float64(index+1), columns, rowH, false)
 	}
 	p.drawAircraftRow(screen, total, tableY+rowH*float64(len(rows)+1), columns, rowH, true)
 }
 
-func (p *Panel) drawAircraftRow(screen *ebiten.Image, row objUnit.AircraftGroupStatus, y float64, columns []float64, rowH float64, total bool) {
+func (p *Panel) drawAircraftRow(
+	screen *ebiten.Image,
+	row objUnit.AircraftGroupStatus,
+	y float64,
+	columns []float64,
+	rowH float64,
+	total bool,
+) {
 	name := objUnit.GetPlaneDisplayName(row.Name)
 	textColor := colorx.White
 	if total {
 		name = i18n.Text(i18n.MsgUnitPanelTotal)
 		textColor = colorx.Gold
-		vector.StrokeLine(screen, float32(p.layout.Systems.X+4), float32(y-3), float32(p.layout.Systems.X+p.layout.Systems.W-4), float32(y-3), 1, sectionBorder, false)
+		vector.StrokeLine(
+			screen,
+			float32(p.layout.Systems.X+4),
+			float32(y-3),
+			float32(p.layout.Systems.X+p.layout.Systems.W-4),
+			float32(y-3),
+			1,
+			sectionBorder,
+			false,
+		)
 	}
-	values := []string{name, fmt.Sprintf("%d", row.Standby), fmt.Sprintf("%d", row.InCombat), fmt.Sprintf("%d", row.Returning), fmt.Sprintf("%d", row.Lost)}
+	values := []string{
+		name,
+		fmt.Sprintf("%d", row.Standby),
+		fmt.Sprintf("%d", row.InCombat),
+		fmt.Sprintf("%d", row.Returning),
+		fmt.Sprintf("%d", row.Lost),
+	}
 	fontSize := math.Min(theme.SizeBody, math.Max(theme.SizeCaption, rowH-8))
 	for index, value := range values {
 		maxW := p.layout.Systems.W * 0.12
@@ -519,7 +643,15 @@ func (p *Panel) drawAircraftRow(screen *ebiten.Image, row objUnit.AircraftGroupS
 			face = theme.Numeric()
 		}
 		value = p.fitText(value, maxW, fontSize, face)
-		p.drawText(screen, value, p.layout.Systems.X+columns[index]*p.layout.Systems.W+4, y+2, fontSize, face, textColor)
+		p.drawText(
+			screen,
+			value,
+			p.layout.Systems.X+columns[index]*p.layout.Systems.W+4,
+			y+2,
+			fontSize,
+			face,
+			textColor,
+		)
 	}
 }
 
@@ -560,7 +692,13 @@ func (p *Panel) drawRoundedRect(screen *ebiten.Image, area Rect, radius float64,
 	theme.FillRoundedRect(screen, area.X, area.Y, area.W, area.H, radius, fill, stroke, 1)
 }
 
-func (p *Panel) drawText(screen *ebiten.Image, value string, x, y, size float64, source *text.GoTextFaceSource, textColor color.Color) {
+func (p *Panel) drawText(
+	screen *ebiten.Image,
+	value string,
+	x, y, size float64,
+	source *text.GoTextFaceSource,
+	textColor color.Color,
+) {
 	opts := &text.DrawOptions{}
 	opts.GeoM.Translate(x, y)
 	opts.ColorScale.ScaleWithColor(textColor)

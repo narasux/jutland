@@ -119,13 +119,13 @@ func (m *MissionManager) getNextCameraPosInFullMapMode() *objPos.MapPos {
 	}
 
 	sx, sy := ebiten.CursorPosition()
-	xOffset := float64(m.state.View.Layout.Width-m.state.View.Layout.Height) / 2
-
-	abbrMapWidth, abbrMapHeight := float64(m.state.View.Layout.Height), float64(m.state.View.Layout.Height)
+	// 缩略地图按地图实际宽高比绘制（见 drawer.NewDrawer），点击换算使用同一尺寸
+	abbrMapWidth, abbrMapHeight := m.drawer.AbbrMapSize()
 	mapWidth, mapHeight := float64(m.state.Core.MissionMD.MapCfg.Width), float64(m.state.Core.MissionMD.MapCfg.Height)
+	xOffset := (float64(m.state.View.Layout.Width) - float64(abbrMapWidth)) / 2
 
-	rx := (float64(sx) - xOffset) / abbrMapWidth * mapWidth
-	ry := float64(sy) / abbrMapHeight * mapHeight
+	rx := (float64(sx) - xOffset) / float64(abbrMapWidth) * mapWidth
+	ry := float64(sy) / float64(abbrMapHeight) * mapHeight
 
 	pos := m.state.View.Camera.Pos.Copy()
 	pos.AssignRxy(rx-float64(m.state.View.Camera.Width)/2, ry-float64(m.state.View.Camera.Height)/2)
@@ -250,21 +250,18 @@ func (m *MissionManager) syncFocusedShip() {
 	m.state.Interaction.FocusedShipUid = selected[0]
 }
 
-// centerCameraOn 将地图坐标放到未被右侧栏遮挡的战场区域中心。
+// centerCameraOn 将地图坐标放到战场视野中心。
 func (m *MissionManager) centerCameraOn(pos objPos.MapPos) {
-	rightInset := m.sidebar.OccupiedWidth(m.state)
-	m.state.View.Camera.Pos = centeredCameraPos(m.state, pos, rightInset, 0)
+	m.state.View.Camera.Pos = centeredCameraPos(m.state, pos)
 }
 
-// centeredCameraPos 计算将目标放在可见战场中心后的相机左上角坐标。
-func centeredCameraPos(ms *state.MissionState, pos objPos.MapPos, rightInset, bottomInset float64) objPos.MapPos {
-	visibleWidth := max(1, float64(ms.View.Layout.Width)-rightInset)
-	visibleHeight := max(1, float64(ms.View.Layout.Height)-bottomInset)
+// centeredCameraPos 计算将目标放在战场视野中心后的相机左上角坐标。
+func centeredCameraPos(ms *state.MissionState, pos objPos.MapPos) objPos.MapPos {
 	blockSize := ms.MapBlockDisplaySize()
 	nextPos := pos.Copy()
 	nextPos.AssignRxy(
-		pos.RX-visibleWidth/blockSize/2,
-		pos.RY-visibleHeight/blockSize/2,
+		pos.RX-float64(ms.View.Layout.Width)/blockSize/2,
+		pos.RY-float64(ms.View.Layout.Height)/blockSize/2,
 	)
 	nextPos.EnsureBorder(ms.CameraPosBorder())
 	return nextPos

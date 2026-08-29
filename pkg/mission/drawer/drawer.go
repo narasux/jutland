@@ -37,6 +37,12 @@ func NewDrawer(mission string) *Drawer {
 	return &Drawer{mission: mission, abbrMap: abbrMap}
 }
 
+// AbbrMapSize 返回全屏缩略地图的实际绘制尺寸（宽, 高），
+// 供点击换算与绘制使用同一尺寸，保证非正方形地图（如珍珠港 128x192）点击位置准确。
+func (d *Drawer) AbbrMapSize() (int, int) {
+	return d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
+}
+
 // Draw 绘制任务关卡图像
 func (d *Drawer) Draw(
 	screen *ebiten.Image,

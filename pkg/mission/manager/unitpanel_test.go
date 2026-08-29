@@ -14,9 +14,11 @@ import (
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
-func TestCenteredCameraPosUsesVisibleBattlefield(t *testing.T) {
+func TestCenteredCameraPosCentersTargetOnScreen(t *testing.T) {
 	missionState := &state.MissionState{
-		Core: state.MissionCoreState{MissionMD: metadata.MissionMetadata{MapCfg: &mapcfg.MapCfg{Width: 1000, Height: 1000}}},
+		Core: state.MissionCoreState{
+			MissionMD: metadata.MissionMetadata{MapCfg: &mapcfg.MapCfg{Width: 1000, Height: 1000}},
+		},
 		View: state.MissionViewState{
 			Layout: layout.ScreenLayout{Width: 1280, Height: 720},
 			Camera: state.Camera{Width: 33, Height: 19},
@@ -24,10 +26,10 @@ func TestCenteredCameraPosUsesVisibleBattlefield(t *testing.T) {
 		UI: state.MissionUIState{GameOpts: state.GameOptions{Zoom: state.DefaultZoom()}},
 	}
 	target := objPos.NewR(100, 80)
-	result := centeredCameraPos(missionState, target, 300, 240)
+	result := centeredCameraPos(missionState, target)
 	blockSize := missionState.MapBlockDisplaySize()
-	wantX := target.RX - (1280.0-300)/blockSize/2
-	wantY := target.RY - (720.0-240)/blockSize/2
+	wantX := target.RX - 1280.0/blockSize/2
+	wantY := target.RY - 720.0/blockSize/2
 	if math.Abs(result.RX-wantX) > 1e-9 || math.Abs(result.RY-wantY) > 1e-9 {
 		t.Fatalf("camera = (%v,%v), want (%v,%v)", result.RX, result.RY, wantX, wantY)
 	}
@@ -38,14 +40,16 @@ func TestCenteredCameraPosUsesVisibleBattlefield(t *testing.T) {
 
 func TestCenteredCameraPosClampsAtMapBorder(t *testing.T) {
 	missionState := &state.MissionState{
-		Core: state.MissionCoreState{MissionMD: metadata.MissionMetadata{MapCfg: &mapcfg.MapCfg{Width: 100, Height: 100}}},
+		Core: state.MissionCoreState{
+			MissionMD: metadata.MissionMetadata{MapCfg: &mapcfg.MapCfg{Width: 100, Height: 100}},
+		},
 		View: state.MissionViewState{
 			Layout: layout.ScreenLayout{Width: 1280, Height: 720},
 			Camera: state.Camera{Width: 33, Height: 19},
 		},
 		UI: state.MissionUIState{GameOpts: state.GameOptions{Zoom: state.DefaultZoom()}},
 	}
-	result := centeredCameraPos(missionState, objPos.NewR(1, 1), 0, 0)
+	result := centeredCameraPos(missionState, objPos.NewR(1, 1))
 	if result.RX != 0 || result.RY != 0 {
 		t.Fatalf("camera = (%v,%v), want map origin", result.RX, result.RY)
 	}

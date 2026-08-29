@@ -49,7 +49,7 @@ func NewComposite(mapSource string, mapWidth, mapHeight, targetHeight int) *ebit
 
 	drawScaled := func(img *ebiten.Image) {
 		w, h := img.Bounds().Dx(), img.Bounds().Dy()
-		opts := &ebiten.DrawImageOptions{}
+		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		opts.GeoM.Scale(float64(targetWidth)/float64(w), float64(targetHeight)/float64(h))
 		composite.DrawImage(img, opts)
 	}

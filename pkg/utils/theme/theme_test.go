@@ -10,32 +10,30 @@ import (
 	"github.com/narasux/jutland/pkg/resources/font"
 )
 
-// TestTriangleDirectionsAreCongruent校验四个方向的箭头三角形形状一致，
-// 保证底部把手与侧栏把手使用同一套等边三角形几何，不会出现形状差异。
-func TestTriangleDirectionsAreCongruent(t *testing.T) {
+// TestChevronDirectionsAreCongruent 校验四个方向的 V 形箭头折线形状一致，
+// 保证下拉把手与单位面板导航按钮使用同一套几何，不会出现形状差异。
+func TestChevronDirectionsAreCongruent(t *testing.T) {
 	const size = 12.0
-	ref := [3][2]float64{}
-	ref[0], ref[1], ref[2] = trianglePoints(0, 0, size, TriangleUp)
-	refDists := sortedPairDistances(ref)
+	start, apex, end := chevronPoints(0, 0, size, TriangleUp)
+	ref := sortedPairDistances([3][2]float64{start, apex, end})
 	for _, dir := range []TriangleDir{TriangleDown, TriangleLeft, TriangleRight} {
-		pts := [3][2]float64{}
-		pts[0], pts[1], pts[2] = trianglePoints(0, 0, size, dir)
-		got := sortedPairDistances(pts)
-		for i := range refDists {
-			if math.Abs(refDists[i]-got[i]) > 1e-9 {
-				t.Fatalf("dir %d side lengths %v differ from up %v", dir, got, refDists)
+		s, a, e := chevronPoints(0, 0, size, dir)
+		got := sortedPairDistances([3][2]float64{s, a, e})
+		for i := range ref {
+			if math.Abs(ref[i]-got[i]) > 1e-9 {
+				t.Fatalf("dir %d segment lengths %v differ from up %v", dir, got, ref)
 			}
 		}
 	}
 
-	// 箭头尖端方向正确：朝上时顶点在最上方。
-	top, _, _ := trianglePoints(0, 0, size, TriangleUp)
-	if top[1] != -size {
-		t.Fatalf("up triangle tip y = %v, want %v", top[1], -size)
+	// 箭头尖端方向正确：朝上时顶点在最上方，朝左时顶点在最左侧。
+	_, apexUp, _ := chevronPoints(0, 0, size, TriangleUp)
+	if apexUp[1] != -size/2 {
+		t.Fatalf("up chevron tip y = %v, want %v", apexUp[1], -size/2)
 	}
-	left, _, _ := trianglePoints(0, 0, size, TriangleLeft)
-	if left[0] != -size {
-		t.Fatalf("left triangle tip x = %v, want %v", left[0], -size)
+	_, apexLeft, _ := chevronPoints(0, 0, size, TriangleLeft)
+	if apexLeft[0] != -size/2 {
+		t.Fatalf("left chevron tip x = %v, want %v", apexLeft[0], -size/2)
 	}
 }
 
@@ -76,7 +74,12 @@ func TestPanelTokensAreDistinct(t *testing.T) {
 // TestNumericFaceSupportsLatinDigitsForEveryLanguage保证数值在四种语言下都能用
 // 等宽字体渲染拉丁数字与单位，不依赖 CJK 字形，从而避免缺字。
 func TestNumericFaceSupportsLatinDigitsForEveryLanguage(t *testing.T) {
-	languages := []i18n.Language{i18n.LanguageZhHans, i18n.LanguageEnglish, i18n.LanguageRussian, i18n.LanguageJapanese}
+	languages := []i18n.Language{
+		i18n.LanguageZhHans,
+		i18n.LanguageEnglish,
+		i18n.LanguageRussian,
+		i18n.LanguageJapanese,
+	}
 	for _, lang := range languages {
 		_ = i18n.SetLanguage(string(lang))
 		face := Numeric()

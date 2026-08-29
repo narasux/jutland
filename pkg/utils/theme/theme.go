@@ -32,8 +32,6 @@ const (
 const (
 	// CornerRadius 是卡片、按钮、进度条等控件的统一圆角半径（屏幕像素）。
 	CornerRadius = 6
-	// HandleCornerRadius 是展开/收起把手的圆角半径。
-	HandleCornerRadius = 8
 	// PanelPadding 是内容与面板边界之间的统一内边距。
 	PanelPadding = 14
 	// CardGap 是相邻卡片/分区之间的统一间距。
@@ -145,7 +143,7 @@ func FillRoundedRect(
 	}
 }
 
-// TriangleDir 表示等边三角形箭头指向的方向。
+// TriangleDir 表示 V 形折线箭头指向的方向。
 type TriangleDir int
 
 const (
@@ -159,33 +157,47 @@ const (
 	TriangleRight
 )
 
-// trianglePoints 返回以 (centerX, centerY) 为中心、size 为底边与高度的等边三角形三个顶点。
-// 供 DrawTriangle 与测试共用，确保四个方向下的三角形状一致。
-func trianglePoints(centerX, centerY, size float64, dir TriangleDir) ([2]float64, [2]float64, [2]float64) {
-	half := size / 2
+// chevronPoints 返回以 (centerX, centerY) 为中心的 V 形折线的起点、顶点、终点。
+// 上下方向时 size 为开口半宽、深度取其一半；左右方向旋转 90 度（开口与深度互换），
+// 线宽取深度值，保证四个方向下的折线形状一致。供 DrawChevron 与测试共用。
+func chevronPoints(centerX, centerY, size float64, dir TriangleDir) ([2]float64, [2]float64, [2]float64) {
+	opening, depth := size, size/2
 	switch dir {
 	case TriangleUp:
-		return [2]float64{centerX, centerY - size}, [2]float64{centerX - half, centerY}, [2]float64{centerX + half, centerY}
-	case TriangleDown:
-		return [2]float64{centerX, centerY + size}, [2]float64{centerX - half, centerY}, [2]float64{centerX + half, centerY}
+		return [2]float64{centerX - opening, centerY + depth},
+			[2]float64{centerX, centerY - depth},
+			[2]float64{centerX + opening, centerY + depth}
 	case TriangleLeft:
-		return [2]float64{centerX - size, centerY}, [2]float64{centerX, centerY - half}, [2]float64{centerX, centerY + half}
-	default: // TriangleRight
-		return [2]float64{centerX + size, centerY}, [2]float64{centerX, centerY - half}, [2]float64{centerX, centerY + half}
+		return [2]float64{centerX + depth, centerY - opening},
+			[2]float64{centerX - depth, centerY},
+			[2]float64{centerX + depth, centerY + opening}
+	case TriangleRight:
+		return [2]float64{centerX - depth, centerY - opening},
+			[2]float64{centerX + depth, centerY},
+			[2]float64{centerX - depth, centerY + opening}
+	default: // TriangleDown
+		return [2]float64{centerX - opening, centerY - depth},
+			[2]float64{centerX, centerY + depth},
+			[2]float64{centerX + opening, centerY - depth}
 	}
 }
 
-// DrawTriangle 绘制一个以 (centerX, centerY) 为中心、size 为边长的实心等边三角形。
-// 右侧 sidebar 与底部 unitpanel 共用，保证两套把手的箭头语言一致。
-func DrawTriangle(screen *ebiten.Image, centerX, centerY, size float64, dir TriangleDir, clr color.Color) {
-	top, bottomLeft, bottomRight := trianglePoints(centerX, centerY, size, dir)
+// DrawChevron 绘制一个以 (centerX, centerY) 为中心、size 为开口半宽的 V 形折线箭头，
+// 使用圆头圆角描边，视觉上比实心三角形更轻盈。右侧 sidebar 与底部 unitpanel 共用，
+// 保证两套把手的箭头语言一致。
+func DrawChevron(screen *ebiten.Image, centerX, centerY, size float64, dir TriangleDir, clr color.Color) {
+	start, apex, end := chevronPoints(centerX, centerY, size, dir)
 
 	var path vector.Path
-	path.MoveTo(float32(top[0]), float32(top[1]))
-	path.LineTo(float32(bottomLeft[0]), float32(bottomLeft[1]))
-	path.LineTo(float32(bottomRight[0]), float32(bottomRight[1]))
-	path.Close()
+	path.MoveTo(float32(start[0]), float32(start[1]))
+	path.LineTo(float32(apex[0]), float32(apex[1]))
+	path.LineTo(float32(end[0]), float32(end[1]))
+	strokeOp := &vector.StrokeOptions{
+		Width:    float32(size / 2),
+		LineCap:  vector.LineCapRound,
+		LineJoin: vector.LineJoinRound,
+	}
 	opts := &vector.DrawPathOptions{AntiAlias: true}
 	opts.ColorScale.ScaleWithColor(clr)
-	vector.FillPath(screen, &path, &vector.FillOptions{}, opts)
+	vector.StrokePath(screen, &path, strokeOp, opts)
 }

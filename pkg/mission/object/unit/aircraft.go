@@ -3,6 +3,8 @@ package unit
 import (
 	"time"
 
+	"github.com/narasux/jutland/pkg/config"
+
 	"github.com/narasux/jutland/pkg/mission/object"
 )
 
@@ -59,7 +61,7 @@ func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType object.Type) *Pl
 		return nil
 	}
 	// 判断起飞冷却，冷却中不允许起飞
-	if sa.LatestTakeOffAt+int64(sa.TakeOffTime*1e3) > time.Now().UnixMilli() {
+	if sa.LatestTakeOffAt+int64(sa.TakeOffTime*1e3/config.G.SpeedMultiplier) > time.Now().UnixMilli() {
 		return nil
 	}
 

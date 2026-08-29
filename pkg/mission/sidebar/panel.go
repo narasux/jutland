@@ -1,6 +1,7 @@
-// Package sidebar 实现任务运行页右侧的合并 RTS 风格侧栏。
-// 面板由顶部页签条划分为「地图 + 战舰信息」与「设置」两个页签，共用同一宽度；
-// 底部单位信息内容在页签 1 内纵向堆叠并支持滚动。
+// Package sidebar 实现任务运行页右上角的停靠式下拉战术面板（参考红警 3 的小地图位置）。
+// 面板贴着屏幕顶缘与右缘（各留 12px 细缝保证镜头边缘滚动可用），从上方下拉展开，
+// 收起后只留底缘把手；由页签条划分为「地图 + 战舰信息」与「设置」两个页签，共用同一宽度；
+// 底部单位信息内容在页签 1 内纵向堆叠并支持滚动；面板底缘的把手负责展开/收起。
 package sidebar
 
 import (
@@ -31,14 +32,25 @@ import (
 )
 
 const (
-	handleW = 36
-	handleH = 60
-	// arrowHandleSize 是把手箭头的等边三角形边长。
-	arrowHandleSize = 12.0
+	// handleW / handleH 是面板底缘「展开/收起」把手的尺寸（胶囊形）。
+	handleW = 132.0
+	handleH = 24.0
+	// handleGap 是面板底缘与把手之间的间距。
+	handleGap = 4.0
+	// handleChevronSize 是把手 V 形箭头的开口半宽。
+	handleChevronSize = 6.0
+	// panelMarginTop / panelMarginRight 是面板与屏幕顶缘、右缘的细缝宽度。
+	// 缝隙里的战场区域不消耗鼠标，保证镜头的顶部/右侧/右上角边缘滚动始终可用。
+	panelMarginTop   = 12.0
+	panelMarginRight = 12.0
+	// panelHeightRatio 是展开面板高度占屏幕高度的比例（参考红警 3：面板停靠在屏幕右上角）。
+	panelHeightRatio = 0.86
 	// tabBarHeight 是「地图 / 设置」页签条的屏幕像素高度。
 	tabBarHeight = 36.0
 	// scrollbarW 是内容滚动条的宽度。
 	scrollbarW = 6.0
+	// mapMaxHeightRatio 是小地图区域占屏幕高度的比例上限，防止竖长地图挤压下方内容。
+	mapMaxHeightRatio = 0.45
 )
 
 // panelBgColor 等由共享 theme 包统一提供。
@@ -84,29 +96,34 @@ type sidebarLayout struct {
 	Viewport rect
 }
 
-// Panel 是任务运行中的合并右侧战术侧栏。
+// Panel 是任务运行中的右上角停靠式下拉战术面板。
 type Panel struct {
 	abbrMap *ebiten.Image
-	layout  sidebarLayout
-	tab     Tab
-	scrollY float64
-	units   *unitpanel.Panel
+	// mapAspect 是地图实际宽高比（宽/高），用于让小地图保持地图原始比例。
+	mapAspect float64
+	layout    sidebarLayout
+	tab       Tab
+	scrollY   float64
+	units     *unitpanel.Panel
 }
 
 // New 创建任务侧栏。
 func New(mission string) *Panel {
 	missionMD := md.Get(mission)
 	misLayout := layout.NewScreenLayout()
-	abbrMap := ebiten.NewImage(misLayout.Height, misLayout.Height)
+	// 与全屏缩略地图一致，按地图实际宽高比合成，避免非正方形地图被拉伸变形
+	abbrMap := abbrMapImg.NewComposite(
+		missionMD.MapCfg.Source,
+		missionMD.MapCfg.Width,
+		missionMD.MapCfg.Height,
+		misLayout.Height,
+	)
 
-	bg := abbrMapImg.Background
-	w, h := bg.Bounds().Dx(), bg.Bounds().Dy()
-	opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
-	opts.GeoM.Scale(float64(misLayout.Height)/float64(w), float64(misLayout.Height)/float64(h))
-	abbrMap.DrawImage(abbrMapImg.Background, opts)
-	abbrMap.DrawImage(abbrMapImg.Get(missionMD.MapCfg.Source), opts)
-
-	return &Panel{abbrMap: abbrMap, units: unitpanel.New()}
+	return &Panel{
+		abbrMap:   abbrMap,
+		mapAspect: float64(missionMD.MapCfg.Width) / float64(missionMD.MapCfg.Height),
+		units:     unitpanel.New(),
+	}
 }
 
 // Update 更新侧栏控件状态，处理把手、页签、滚动与内容点击，并返回单位信息面板产生的操作。
@@ -114,7 +131,7 @@ func (p *Panel) Update(ms *state.MissionState) []unitpanel.Action {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return nil
 	}
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
+	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
 	sx, sy := ebiten.CursorPosition()
 	leftPressed := inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
 
@@ -180,7 +197,7 @@ func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return
 	}
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
+	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
 	if ms.UI.SidebarExpanded {
 		p.drawPanel(screen, ms)
 	}
@@ -198,19 +215,11 @@ func (p *Panel) consumesCursorAt(ms *state.MissionState, sx, sy int) bool {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return false
 	}
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
+	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
 	if ui.Handle.contains(sx, sy) {
 		return true
 	}
 	return ms.UI.SidebarExpanded && ui.Panel.contains(sx, sy)
-}
-
-// OccupiedWidth 返回展开侧栏遮挡战场的屏幕像素宽度。
-func (p *Panel) OccupiedWidth(ms *state.MissionState) float64 {
-	if !ms.UI.SidebarExpanded || ms.Core.MissionStatus != state.MissionRunning {
-		return 0
-	}
-	return calcLayout(ms.View.Layout, true, p.tab).Panel.W
 }
 
 func (p *Panel) drawPanel(screen *ebiten.Image, ms *state.MissionState) {
@@ -255,7 +264,16 @@ func (p *Panel) tabRect(index int) rect {
 func (p *Panel) drawTabBar(screen *ebiten.Image) {
 	ui := p.layout
 	separatorY := ui.TabBar.Y + ui.TabBar.H
-	vector.StrokeLine(screen, float32(ui.Panel.X), float32(separatorY), float32(ui.Panel.X+ui.Panel.W), float32(separatorY), 1, panelLineColor, false)
+	vector.StrokeLine(
+		screen,
+		float32(ui.Panel.X),
+		float32(separatorY),
+		float32(ui.Panel.X+ui.Panel.W),
+		float32(separatorY),
+		1,
+		panelLineColor,
+		false,
+	)
 
 	labels := []string{tabLabel(TabBattle), tabLabel(TabSettings)}
 	for index, label := range labels {
@@ -265,7 +283,17 @@ func (p *Panel) drawTabBar(screen *ebiten.Image) {
 		if active {
 			fill, border, textColor = color.RGBA{R: 58, G: 69, B: 55, A: 235}, colorx.Gold, colorx.White
 		}
-		theme.FillRoundedRect(screen, area.X+4, area.Y+6, area.W-8, area.H-12, theme.CornerRadius, fill, border, theme.CardBorderWidth)
+		theme.FillRoundedRect(
+			screen,
+			area.X+4,
+			area.Y+6,
+			area.W-8,
+			area.H-12,
+			theme.CornerRadius,
+			fill,
+			border,
+			theme.CardBorderWidth,
+		)
 		p.drawCenteredText(screen, label, area, theme.SizeBody, textColor)
 	}
 }
@@ -304,7 +332,7 @@ func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, c
 }
 
 func (p *Panel) drawHandleFrame(screen *ebiten.Image, ms *state.MissionState) {
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
+	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
 	sx, sy := ebiten.CursorPosition()
 	fill := theme.HandleFill
 	if ui.Handle.contains(sx, sy) {
@@ -313,26 +341,30 @@ func (p *Panel) drawHandleFrame(screen *ebiten.Image, ms *state.MissionState) {
 			fill = theme.ButtonPressed
 		}
 	}
-	handleW := float64(ui.Handle.W)
-	if ms.UI.SidebarExpanded {
-		handleW += 2
-	}
+	// 圆角取半高，渲染成胶囊形把手
 	theme.FillRoundedRect(
 		screen,
-		ui.Handle.X, ui.Handle.Y, handleW, float64(ui.Handle.H),
-		theme.HandleCornerRadius,
+		ui.Handle.X, ui.Handle.Y, ui.Handle.W, ui.Handle.H,
+		ui.Handle.H/2,
 		fill, theme.HandleBorder, theme.CardBorderWidth,
 	)
 }
 
+// drawHandleArrow 在把手中心绘制 V 形折线箭头：收起时朝下提示「下拉展开」，展开时朝上提示「收起」。
 func (p *Panel) drawHandleArrow(screen *ebiten.Image, ms *state.MissionState) {
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab)
-	cx, cy := ui.Handle.X+ui.Handle.W/2, ui.Handle.Y+ui.Handle.H/2
-	dir := theme.TriangleLeft
+	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	dir := theme.TriangleDown
 	if ms.UI.SidebarExpanded {
-		dir = theme.TriangleRight
+		dir = theme.TriangleUp
 	}
-	theme.DrawTriangle(screen, cx, cy, arrowHandleSize, dir, theme.HandleArrow)
+	theme.DrawChevron(
+		screen,
+		ui.Handle.X+ui.Handle.W/2,
+		ui.Handle.Y+ui.Handle.H/2,
+		handleChevronSize,
+		dir,
+		theme.HandleArrow,
+	)
 }
 
 func (p *Panel) drawMinimap(screen *ebiten.Image, ms *state.MissionState) {
@@ -466,7 +498,17 @@ func (p *Panel) drawScrollbar(screen *ebiten.Image, ms *state.MissionState) {
 		return
 	}
 	trackX := ui.Viewport.X + ui.Viewport.W - scrollbarW - 4
-	theme.FillRoundedRect(screen, trackX, ui.Viewport.Y, scrollbarW, ui.Viewport.H, scrollbarW/2, scrollbarTrack, scrollbarTrack, 1)
+	theme.FillRoundedRect(
+		screen,
+		trackX,
+		ui.Viewport.Y,
+		scrollbarW,
+		ui.Viewport.H,
+		scrollbarW/2,
+		scrollbarTrack,
+		scrollbarTrack,
+		1,
+	)
 
 	thumbH := ui.Viewport.H * ui.Viewport.H / contentH
 	if thumbH < 24 {
@@ -530,30 +572,51 @@ func tabLabel(tab Tab) string {
 	return i18n.Text(i18n.MsgSidebarTabBattle)
 }
 
-func calcLayout(screen layout.ScreenLayout, expanded bool, tab Tab) sidebarLayout {
+func calcLayout(screen layout.ScreenLayout, expanded bool, tab Tab, mapAspect float64) sidebarLayout {
 	panelW := math.Max(260, math.Min(float64(screen.Width)*0.24, 360))
-	panelX := float64(screen.Width)
+	// 面板停靠在屏幕右上角（参考红警 3）：贴着顶缘与右缘，只留细缝保证边缘滚动可用
+	panelX := float64(screen.Width) - panelMarginRight - panelW
+	panelY := panelMarginTop
+	panelH := 0.0
 	if expanded {
-		panelX -= panelW
+		panelH = float64(screen.Height) * panelHeightRatio
 	}
 
-	handleX := panelX - handleW
-	if !expanded {
-		handleX = float64(screen.Width - handleW)
+	// 把手挂在面板底缘；收起时面板高度为 0，把手贴着顶部作为「下拉」入口
+	handle := rect{
+		X: panelX + (panelW-handleW)/2,
+		Y: panelY + panelH + handleGap,
+		W: handleW,
+		H: handleH,
 	}
-	mapSize := panelW - 32
-	tabBar := rect{X: panelX, Y: 0, W: panelW, H: tabBarHeight}
-	mapR := rect{X: panelX + 16, Y: tabBarHeight + 20, W: mapSize, H: mapSize}
-	battle := rect{X: panelX + 16, Y: mapR.Y + mapSize + 16, W: panelW - 32, H: 104}
+
+	// 小地图保持地图实际宽高比；竖长地图（如珍珠港 128x192）超高时等比缩小并水平居中
+	mapMaxW := panelW - 32
+	mapW, mapH := mapMaxW, mapMaxW
+	if mapAspect > 0 {
+		mapH = mapW / mapAspect
+		if maxH := float64(screen.Height) * mapMaxHeightRatio; mapH > maxH {
+			mapH = maxH
+			mapW = maxH * mapAspect
+		}
+	}
+	tabBar := rect{X: panelX, Y: panelY, W: panelW, H: tabBarHeight}
+	mapR := rect{X: panelX + 16 + (mapMaxW-mapW)/2, Y: panelY + tabBarHeight + 20, W: mapW, H: mapH}
+	battle := rect{X: panelX + 16, Y: mapR.Y + mapH + 16, W: panelW - 32, H: 104}
 	viewportTop := battle.Y + battle.H + 16
-	viewport := rect{X: panelX, Y: viewportTop, W: panelW, H: math.Max(0, float64(screen.Height)-viewportTop-12)}
+	viewport := rect{
+		X: panelX,
+		Y: viewportTop,
+		W: panelW,
+		H: math.Max(0, panelY+panelH-viewportTop-16),
+	}
 	if !expanded {
 		viewport = rect{}
 	}
 	return sidebarLayout{
 		Screen:   screen,
-		Panel:    rect{X: panelX, Y: 0, W: panelW, H: float64(screen.Height)},
-		Handle:   rect{X: handleX, Y: (float64(screen.Height) - handleH) / 2, W: handleW, H: handleH},
+		Panel:    rect{X: panelX, Y: panelY, W: panelW, H: panelH},
+		Handle:   handle,
 		TabBar:   tabBar,
 		Map:      mapR,
 		Battle:   battle,
