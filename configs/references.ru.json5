@@ -235,6 +235,41 @@
     ],
   },
   {
+    name: "albatross",
+    displayName: "Альбатрос",
+    type: "Гидроавиатранспорт",
+    armaments: [
+      {
+        label: "Универсальные орудия",
+        value: "4x1 120mm/40 Mk VIII",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "4x1 40mm/60 Bofors",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "2x4 40mm/39 2-pounder",
+      },
+      {
+        label: "Торпедоносцы",
+        value: "9× Fairey Swordfish Mk I",
+      },
+    ],
+    description: "HMAS Albatross — построенный в Австралии гидроавиатранспорт, вступивший в строй в 1929 году. В 1938 году корабль передали Королевскому флоту, и в 1942-м он как HMS Albatross охранял судоходство в Атлантике и Индийском океане, поднимая гидросамолёты с носовой ангарной палубы. В 1944 году его переоборудовали в плавмастерскую; в августе того же года он получил торпедное попадание у Нормандии и позднее был продан на слом.",
+    author: "Portsmouth Bill, Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - I22 Albatross 1942",
+        url: "http://www.shipbucket.com/drawings/5194",
+      },
+      {
+        name: "Википедия — HMAS Albatross (1928)",
+        url: "https://ru.wikipedia.org/wiki/HMAS_Albatross_(1928)",
+      },
+    ],
+  },
+  {
     name: "aoba",
     displayName: "Аоба",
     type: "Тяжёлый крейсер",

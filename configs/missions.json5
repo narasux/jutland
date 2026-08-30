@@ -2557,6 +2557,7 @@
           "unicorn",
           "eagle",
           "hermes",
+          "albatross",
           "courageous",
           "argus",
           "queen",
@@ -2899,6 +2900,12 @@
       {
         name: "argus",
         pos: [10, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "albatross",
+        pos: [9, 29],
         rotation: 90,
         belongPlayer: "HA"
       },

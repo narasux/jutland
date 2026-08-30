@@ -88,14 +88,14 @@
       approachLength: 3
     }
   },
-  // 水上飞机母舰：弹射起飞，飞机返航时降落在舰侧水面并回收
+  // 水上飞机母舰：舰艏 1/5 处中线弹射起飞，返航时可在左右舷水面着水回收
   {
-    name: "seaplaneTender",
+    name: "BowSingleCatapultSeaplaneTender",
     takeoffPoints: [
       {
-        forward: 0.35,
+        forward: 0.2,
         lateral: 0,
-        runLength: 0.5
+        runLength: 0.22
       }
     ],
     landing: {

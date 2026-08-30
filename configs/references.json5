@@ -1450,6 +1450,41 @@
     ],
   },
   {
+    name: "albatross",
+    displayName: "信天翁",
+    type: "水上飞机母舰",
+    armaments: [
+      {
+        label: "高平炮",
+        value: "4x1 120mm/40 Mk VIII",
+      },
+      {
+        label: "高炮",
+        value: "4x1 40mm/60 博福斯",
+      },
+      {
+        label: "高炮",
+        value: "2x4 40mm/39 2 磅炮",
+      },
+      {
+        label: "鱼雷攻击机",
+        value: "9x 剑鱼式（Swordfish Mk I）",
+      },
+    ],
+    description: "信天翁号是澳大利亚建造的水上飞机母舰，1929 年服役，1938 年移交英国皇家海军。1942 年以 HMS Albatross 之名在大西洋和印度洋执行贸易护航，并从舰体前部机库甲板运作水上飞机。1944 年改为修理舰后，同年 8 月在诺曼底附近被鱼雷击伤，战后出售拆解。",
+    author: "Portsmouth Bill, Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - I22 Albatross 1942",
+        url: "http://www.shipbucket.com/drawings/5194",
+      },
+      {
+        name: "维基百科 - HMAS Albatross (1928)",
+        url: "https://en.wikipedia.org/wiki/HMAS_Albatross_(1928)",
+      },
+    ],
+  },
+  {
     name: "courageous",
     displayName: "勇敢",
     type: "航空母舰",

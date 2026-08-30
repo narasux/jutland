@@ -235,6 +235,41 @@
     ],
   },
   {
+    name: "albatross",
+    displayName: "Albatross",
+    type: "Seaplane Tender",
+    armaments: [
+      {
+        label: "Dual-purpose Guns",
+        value: "4x1 120mm/40 Mk VIII",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x1 40mm/60 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x4 40mm/39 2-pounder",
+      },
+      {
+        label: "Torpedo Bombers",
+        value: "9× Fairey Swordfish Mk I",
+      },
+    ],
+    description: "HMAS Albatross was a seaplane tender built in Australia and commissioned in 1929. Transferred to the Royal Navy in 1938, she served in 1942 as HMS Albatross on trade protection in the Atlantic and Indian Ocean, operating seaplanes from her forward hangar deck. Converted to a repair ship in 1944, she was torpedoed off Normandy that August and later sold for scrap.",
+    author: "Portsmouth Bill, Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - I22 Albatross 1942",
+        url: "http://www.shipbucket.com/drawings/5194",
+      },
+      {
+        name: "Wikipedia - HMAS Albatross (1928)",
+        url: "https://en.wikipedia.org/wiki/HMAS_Albatross_(1928)",
+      },
+    ],
+  },
+  {
     name: "aoba",
     displayName: "Aoba",
     type: "Heavy Cruiser",

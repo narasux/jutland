@@ -7213,6 +7213,105 @@
       ]
     }
   },
+  // 信天翁（水上飞机母舰）
+  {
+    name: "albatross",
+    nation: "uk",
+    type: "aircraft_carrier",
+    typeAbbr: "AV",
+    year: 1942,
+    totalHP: 6350,
+    horizontalDamageReduction: 0.04,
+    verticalDamageReduction: 0,
+    maxSpeed: 22,
+    acceleration: 0.28,
+    rotateSpeed: 1,
+    length: 135,
+    width: 18,
+    fundsCost: 88,
+    timeCost: 40,
+    weapon: {
+      mainGuns: [
+        // 右舷前 120mm 高平炮
+        {
+          name: "UK/120/40/MK8/DP",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左舷前 120mm 高平炮
+        {
+          name: "UK/120/40/MK8/DP",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰尾 120mm 高平炮 B
+        {
+          name: "UK/120/40/MK8/DP",
+          posPercent: -0.6,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [180, 345]
+        },
+        // 舰尾 120mm 高平炮 A
+        {
+          name: "UK/120/40/MK8/DP",
+          posPercent: -0.75,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        {
+          name: "UK/40/60",
+          posPercent: 0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/60",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.82,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    aircraft: {
+      deck: "BowSingleCatapultSeaplaneTender",
+      takeOffTime: 5,
+      groups: [
+        {
+          name: "Swordfish",
+          maxCount: 9
+        }
+      ]
+    }
+  },
   // 百眼巨人
   {
     name: "courageous",

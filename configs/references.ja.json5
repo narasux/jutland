@@ -235,6 +235,41 @@
     ],
   },
   {
+    name: "albatross",
+    displayName: "アルバトロス",
+    type: "水上機母艦",
+    armaments: [
+      {
+        label: "両用砲",
+        value: "4x1 120mm/40 Mk VIII",
+      },
+      {
+        label: "対空砲",
+        value: "4x1 40mm/60 Bofors",
+      },
+      {
+        label: "対空砲",
+        value: "2x4 40mm/39 2-pounder",
+      },
+      {
+        label: "雷撃機",
+        value: "9× Fairey Swordfish Mk I",
+      },
+    ],
+    description: "アルバトロスはオーストラリアで建造された水上機母艦で、1929年に就役した。1938年に英国海軍へ移管され、1942年には HMS Albatross として大西洋とインド洋で通商保護に従事し、艦首側の格納庫甲板から水上機を運用した。1944年に工作艦へ改装された後、同年8月にノルマンディー沖で魚雷攻撃を受け、戦後に売却解体された。",
+    author: "Portsmouth Bill, Bombhead, K.W. Vestergaard",
+    links: [
+      {
+        name: "Shipbucket - I22 Albatross 1942",
+        url: "http://www.shipbucket.com/drawings/5194",
+      },
+      {
+        name: "ウィキペディア — アルバトロス (水上機母艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%AB%E3%83%90%E3%83%88%E3%83%AD%E3%82%B9_%28%E6%B0%B4%E4%B8%8A%E6%A9%9F%E6%AF%8D%E8%89%A6%29",
+      },
+    ],
+  },
+  {
     name: "aoba",
     displayName: "青葉",
     type: "重巡洋艦",
