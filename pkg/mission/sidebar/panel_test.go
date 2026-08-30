@@ -102,6 +102,11 @@ func TestCalcLayoutDockedPanelGeometry(t *testing.T) {
 	if ui.Viewport.H <= 0 {
 		t.Fatalf("viewport height = %v, want positive", ui.Viewport.H)
 	}
+	// 小地图下方直接接战舰信息，中间不再留资金/舰队统计卡
+	wantViewportY := ui.Map.Y + ui.Map.H + 16
+	if ui.Viewport.Y != wantViewportY {
+		t.Fatalf("viewport Y = %v, want %v (immediately below map)", ui.Viewport.Y, wantViewportY)
+	}
 }
 
 func TestCalcLayoutKeepsMapAspectForNonSquareMap(t *testing.T) {

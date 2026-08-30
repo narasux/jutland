@@ -99,8 +99,8 @@ func planeCarrierLocalOffset(p *Plane, ship *BattleShip) carrierLocalOffset {
 }
 
 // landingTouchdownOffset 返回着舰回收点的航母局部地图坐标。
-func landingTouchdownOffset(ship *BattleShip) carrierLocalOffset {
-	return takeoffLandingPos(ship, ship.Aircraft.landingConfig())
+func landingTouchdownOffset(ship *BattleShip, landing LandingConfig) carrierLocalOffset {
+	return takeoffLandingPos(ship, landing)
 }
 
 // landingFinalStartOffset 返回最终直线进近段起点的舰长单位局部坐标。
@@ -117,16 +117,15 @@ func landingFinalStartOffset(ship *BattleShip, landing LandingConfig) carrierLoc
 }
 
 // landingFinalStartPos 返回最终直线进近段起点的地图坐标。
-func landingFinalStartPos(ship *BattleShip) objPos.MapPos {
-	landing := ship.Aircraft.landingConfig()
+func landingFinalStartPos(ship *BattleShip, landing LandingConfig) objPos.MapPos {
 	end := landingFinalStartOffset(ship, landing)
 	length := carrierLengthInMapBlocks(ship)
 	return carrierRelativePos2D(ship, end.forward*length, end.lateral*length)
 }
 
 // carrierLandingDeckEndPos 返回最终着舰回收点的地图坐标。
-func carrierLandingDeckEndPos(ship *BattleShip) objPos.MapPos {
-	touchdown := landingTouchdownOffset(ship)
+func carrierLandingDeckEndPos(ship *BattleShip, landing LandingConfig) objPos.MapPos {
+	touchdown := landingTouchdownOffset(ship, landing)
 	return carrierRelativePos2D(ship, touchdown.forward, touchdown.lateral)
 }
 
@@ -305,7 +304,7 @@ func landingApproachEntryReady(p *Plane, ship *BattleShip, gate carrierLocalOffs
 		math.Abs(start.lateral-gate.lateral) > landingGateLateralToleranceRatio {
 		return false
 	}
-	arc, ok := buildLandingApproachArc(start, ship, p.MaxSpeed, ship.Aircraft.landingConfig())
+	arc, ok := buildLandingApproachArc(start, ship, p.MaxSpeed, ship.Aircraft.landingConfigForSlot(p.LandingSlot))
 	if !ok {
 		return false
 	}

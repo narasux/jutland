@@ -68,23 +68,18 @@ func (p *Panel) ensureBuffer(region Rect) {
 // drawSections 按纵向分区绘制单位信息内容（到 offscreen 缓冲）。
 func (p *Panel) drawSections(screen *ebiten.Image, ms *state.MissionState) {
 	ships := selectedShips(ms)
-	ui := p.layout
-	if len(ships) == 0 {
-		p.drawCenteredText(screen, i18n.Text(i18n.MsgUnitPanelNoSelection), ui.Region, theme.SizeBody, colorx.Silver)
-		return
-	}
-
-	// 顶部标题：单舰显示舰名；多选显示当前焦点舰名，避免该位置留白。
-	title := ""
+	title := i18n.Text(i18n.MsgUnitPanelNoSelection)
 	if len(ships) == 1 {
 		title = objUnit.GetShipDisplayName(ships[0].Name)
 	} else if focus := focusedShip(ms); focus != nil {
 		title = objUnit.GetShipDisplayName(focus.Name)
 	}
-	if title != "" {
-		p.drawText(screen, title, ui.Header.X+4, ui.Header.Y+4, theme.SizeBody, theme.Title(), colorx.White)
+	p.drawHeader(screen, ms, title)
+	if len(ships) == 0 {
+		return
 	}
 
+	ui := p.layout
 	for _, area := range []Rect{ui.Visual, ui.Info, ui.Systems} {
 		if area.W == 0 || area.H == 0 {
 			continue
@@ -109,6 +104,36 @@ func (p *Panel) drawSections(screen *ebiten.Image, ms *state.MissionState) {
 	}
 	p.drawBasicInfo(screen, ms, ships)
 	p.drawSystems(screen, ms, ships)
+}
+
+// drawHeader 在舰名同一行右侧绘制当前资金与己方舰数，不展示敌方数量。
+func (p *Panel) drawHeader(screen *ebiten.Image, ms *state.MissionState, title string) {
+	area := p.layout.Header
+	funds := i18n.Format(i18n.MsgSidebarFunds, map[string]any{"Funds": ms.Player.CurFunds})
+	fleet := i18n.Format(i18n.MsgSidebarAllyFleet, map[string]any{
+		"Count": ms.Fleet(ms.Player.CurPlayer).Total,
+	})
+	stats := funds + "  " + fleet
+	statsSize := float64(theme.SizeCaption)
+	statsFace := theme.Body()
+	statsW := textLayout.CalcTextWidth(stats, statsSize, statsFace)
+	statsX := area.X + area.W - statsW
+	p.drawText(screen, stats, statsX, area.Y+8, statsSize, statsFace, colorx.Silver)
+
+	nameSize := float64(theme.SizeBody)
+	maxNameW := statsX - area.X - 12
+	if maxNameW < 36 {
+		maxNameW = 36
+	}
+	p.drawText(
+		screen,
+		p.fitText(title, maxNameW, nameSize, theme.Title()),
+		area.X+4,
+		area.Y+4,
+		nameSize,
+		theme.Title(),
+		colorx.White,
+	)
 }
 
 // drawShipVisual 复用增援点界面的朝向与缩放规则绘制侧视图和俯视图。

@@ -1,6 +1,7 @@
 package unit
 
 import (
+	"math"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/config"
@@ -21,6 +22,75 @@ func registerTestPlane(t *testing.T, name string, planeType PlaneType) {
 			delete(PlaneMap, name)
 		}
 	})
+}
+
+func TestLandingConfigForSlotAlternatesSeaSides(t *testing.T) {
+	sa := &ShipAircraft{}
+	sa.ResolveDeck(&CarrierDeck{
+		Name: "sea-sides",
+		Landing: LandingConfig{
+			Mode:           LandingModeSea,
+			Forward:        0.5,
+			Lateral:        1.1,
+			ApproachLength: 3,
+		},
+	})
+
+	left := sa.landingConfigForSlot(0)
+	right := sa.landingConfigForSlot(1)
+	if left.Lateral >= 0 || right.Lateral <= 0 {
+		t.Fatalf("sea slots should alternate sides: slot0=%v slot1=%v", left.Lateral, right.Lateral)
+	}
+	requireClose(t, math.Abs(left.Lateral), 1.1)
+	requireClose(t, math.Abs(right.Lateral), 1.1)
+
+	// 配置幅度不足舷外时，回落到默认 1.1 舰宽
+	sa.ResolveDeck(&CarrierDeck{
+		Name:    "sea-narrow",
+		Landing: LandingConfig{Mode: LandingModeSea, Forward: 0.5, Lateral: 0.2},
+	})
+	narrow := sa.landingConfigForSlot(0)
+	requireClose(t, narrow.Lateral, -1.1)
+
+	// 甲板回收不受槽位影响
+	sa.ResolveDeck(&CarrierDeck{
+		Name:    "deck",
+		Landing: LandingConfig{Mode: LandingModeDeck, Forward: 0.75, Lateral: 0.15},
+	})
+	deckLeft := sa.landingConfigForSlot(0)
+	deckRight := sa.landingConfigForSlot(1)
+	requireClose(t, deckLeft.Lateral, 0.15)
+	requireClose(t, deckRight.Lateral, 0.15)
+}
+
+func TestSeaLandingTouchdownUsesOppositeSides(t *testing.T) {
+	ship := &BattleShip{
+		Length:      256,
+		Width:       64,
+		CurPos:      objPos.NewR(50, 50),
+		CurRotation: 0,
+		Aircraft:    ShipAircraft{},
+	}
+	sa := &ShipAircraft{}
+	sa.ResolveDeck(&CarrierDeck{
+		Name: "seaplane-tender",
+		Landing: LandingConfig{
+			Mode:           LandingModeSea,
+			Forward:        0.5,
+			Lateral:        1.1,
+			ApproachLength: 3,
+		},
+	})
+	ship.Aircraft = *sa
+
+	left := takeoffLandingPos(ship, ship.Aircraft.landingConfigForSlot(0))
+	right := takeoffLandingPos(ship, ship.Aircraft.landingConfigForSlot(1))
+	if left.lateral >= 0 || right.lateral <= 0 {
+		t.Fatalf("sea touchdown should use both sides: left=%v right=%v", left.lateral, right.lateral)
+	}
+	requireClose(t, left.forward, 0)
+	requireClose(t, right.forward, 0)
+	requireClose(t, math.Abs(left.lateral), math.Abs(right.lateral))
 }
 
 func TestDeckValidateNormalizesFields(t *testing.T) {

@@ -1,7 +1,7 @@
 // Package sidebar 实现任务运行页右上角的停靠式下拉战术面板（参考红警 3 的小地图位置）。
 // 面板贴着屏幕顶缘与右缘（各留 12px 细缝保证镜头边缘滚动可用），从上方下拉展开，
 // 收起后只留底缘把手；由页签条划分为「地图 + 战舰信息」与「设置」两个页签，共用同一宽度；
-// 底部单位信息内容在页签 1 内纵向堆叠并支持滚动；面板底缘的把手负责展开/收起。
+// 资金与己方舰数画在战舰名称同一行；底部单位信息在页签 1 内纵向堆叠并支持滚动。
 package sidebar
 
 import (
@@ -57,7 +57,6 @@ const (
 var (
 	panelBgColor   = theme.PanelBackground
 	panelLineColor = theme.PanelBorder
-	cardBgColor    = theme.CardBackground
 	scrollbarTrack = color.RGBA{R: 28, G: 52, B: 59, A: 200}
 	scrollbarThumb = color.RGBA{R: 120, G: 160, B: 170, A: 230}
 )
@@ -80,7 +79,7 @@ func unitRect(r rect) unitpanel.Rect {
 type Tab int
 
 const (
-	// TabBattle 展示小地图 + 战场信息 + 战舰信息（可滚动）。
+	// TabBattle 展示小地图 + 战舰信息（可滚动）。
 	TabBattle Tab = iota
 	// TabSettings 展示两个游戏内显示选项。
 	TabSettings
@@ -92,7 +91,6 @@ type sidebarLayout struct {
 	Handle   rect
 	TabBar   rect
 	Map      rect
-	Battle   rect
 	Viewport rect
 }
 
@@ -234,7 +232,6 @@ func (p *Panel) drawPanel(screen *ebiten.Image, ms *state.MissionState) {
 	switch p.tab {
 	case TabBattle:
 		p.drawMinimap(screen, ms)
-		p.drawBattleInfo(screen, ms)
 		p.units.Draw(screen, ms, unitRect(ui.Viewport), p.scrollY)
 		p.drawScrollbar(screen, ms)
 	default:
@@ -454,42 +451,6 @@ func (p *Panel) drawMinimapPlanes(screen *ebiten.Image, ms *state.MissionState) 
 	}
 }
 
-func (p *Panel) drawBattleInfo(screen *ebiten.Image, ms *state.MissionState) {
-	ui := p.layout
-	p.drawCard(screen, ui.Battle.X, ui.Battle.Y, ui.Battle.W, ui.Battle.H)
-
-	selfFleet := ms.Fleet(ms.Player.CurPlayer)
-	enemyFleet := ms.Fleet(ms.Player.CurEnemy)
-	bodyFont := font.LocalizedUI(font.Kai)
-	p.drawText(
-		screen,
-		i18n.Format(i18n.MsgSidebarFunds, map[string]any{"Funds": ms.Player.CurFunds}),
-		ui.Battle.X+12,
-		ui.Battle.Y+14,
-		18,
-		bodyFont,
-		colorx.White,
-	)
-	p.drawText(
-		screen,
-		i18n.Format(i18n.MsgSidebarAllyFleet, map[string]any{"Count": selfFleet.Total}),
-		ui.Battle.X+12,
-		ui.Battle.Y+40,
-		16,
-		bodyFont,
-		colorx.Silver,
-	)
-	p.drawText(
-		screen,
-		i18n.Format(i18n.MsgSidebarEnemyFleet, map[string]any{"Count": enemyFleet.Total}),
-		ui.Battle.X+12,
-		ui.Battle.Y+64,
-		16,
-		bodyFont,
-		colorx.Silver,
-	)
-}
-
 func (p *Panel) drawScrollbar(screen *ebiten.Image, ms *state.MissionState) {
 	ui := p.layout
 	contentH := p.units.MeasureContent(ms, unitRect(ui.Viewport))
@@ -516,15 +477,6 @@ func (p *Panel) drawScrollbar(screen *ebiten.Image, ms *state.MissionState) {
 	}
 	thumbY := ui.Viewport.Y + (ui.Viewport.H-thumbH)*(p.scrollY/maxScroll)
 	theme.FillRoundedRect(screen, trackX, thumbY, scrollbarW, thumbH, scrollbarW/2, scrollbarThumb, scrollbarThumb, 1)
-}
-
-func (p *Panel) drawCard(screen *ebiten.Image, x, y, w, h float64) {
-	theme.FillRoundedRect(
-		screen,
-		x, y, w, h,
-		theme.CornerRadius,
-		cardBgColor, theme.CardBorder, theme.CardBorderWidth,
-	)
 }
 
 func (p *Panel) drawText(
@@ -602,8 +554,7 @@ func calcLayout(screen layout.ScreenLayout, expanded bool, tab Tab, mapAspect fl
 	}
 	tabBar := rect{X: panelX, Y: panelY, W: panelW, H: tabBarHeight}
 	mapR := rect{X: panelX + 16 + (mapMaxW-mapW)/2, Y: panelY + tabBarHeight + 20, W: mapW, H: mapH}
-	battle := rect{X: panelX + 16, Y: mapR.Y + mapH + 16, W: panelW - 32, H: 104}
-	viewportTop := battle.Y + battle.H + 16
+	viewportTop := mapR.Y + mapH + 16
 	viewport := rect{
 		X: panelX,
 		Y: viewportTop,
@@ -619,7 +570,6 @@ func calcLayout(screen layout.ScreenLayout, expanded bool, tab Tab, mapAspect fl
 		Handle:   handle,
 		TabBar:   tabBar,
 		Map:      mapR,
-		Battle:   battle,
 		Viewport: viewport,
 	}
 }

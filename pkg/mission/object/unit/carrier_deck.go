@@ -121,6 +121,25 @@ func (sa *ShipAircraft) landingOnWater() bool {
 	return sa.landingConfig().Mode == LandingModeSea
 }
 
+// landingConfigForSlot 返回指定回收槽位的降落配置。
+// 着水回收按进近通道左右交替选择舷侧水面；甲板回收仍使用模板原值。
+func (sa *ShipAircraft) landingConfigForSlot(slot int) LandingConfig {
+	cfg := sa.landingConfig()
+	if cfg.Mode != LandingModeSea {
+		return cfg
+	}
+	offset := math.Abs(cfg.Lateral)
+	if offset < 0.5 {
+		offset = 1.1
+	}
+	if landingLaneOffsetRatio(slot) < 0 {
+		cfg.Lateral = -offset
+	} else {
+		cfg.Lateral = offset
+	}
+	return cfg
+}
+
 // takeoffLandingPos 将着舰回收点配置换算为航母局部地图坐标。
 func takeoffLandingPos(ship *BattleShip, landing LandingConfig) carrierLocalOffset {
 	return carrierLocalOffset{

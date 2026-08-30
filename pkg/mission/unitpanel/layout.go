@@ -9,7 +9,7 @@ import (
 
 // 单位内容区各分区的固定尺寸（局部坐标系，相对滚动视口原点）。
 const (
-	// headerHeight 是内容区顶部「舰船名 / 已选数量」标题带的高度。
+	// headerHeight 是内容区顶部「舰名 + 资金 + 己方舰数」标题带的高度。
 	headerHeight = 30.0
 	// sectionGap 是内容区相邻分区之间的屏幕像素间距。
 	sectionGap = 12.0

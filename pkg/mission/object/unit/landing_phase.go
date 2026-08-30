@@ -67,7 +67,7 @@ func (p *Plane) StartLandingStaging(_ *mapcfg.MapCfg, ship *BattleShip, slot int
 
 // StartLandingApproach 开始单向定半径圆弧进近，并建立空中减速计划。
 func (p *Plane) StartLandingApproach(ship *BattleShip) {
-	landing := ship.Aircraft.landingConfig()
+	landing := ship.Aircraft.landingConfigForSlot(p.LandingSlot)
 	length := carrierLengthInMapBlocks(ship)
 	local := planeCarrierLocalOffset(p, ship)
 	arc, ok := buildLandingApproachArc(
@@ -87,7 +87,7 @@ func (p *Plane) StartLandingApproach(ship *BattleShip) {
 	p.startLandingArcPlan(ship, entry)
 	p.FlightPhase = PlaneFlightPhaseLandingApproach
 	p.FlightPhaseStartPos = p.CurPos.Copy()
-	p.FlightPhaseEndPos = landingFinalStartPos(ship)
+	p.FlightPhaseEndPos = landingFinalStartPos(ship, landing)
 	p.FlightPhaseElapsed = 0
 	p.FlightPhaseProgressValue = 0
 	p.FlightVisualScaleStart = 1
@@ -113,7 +113,7 @@ func (p *Plane) startLandingArcPlan(ship *BattleShip, entry float64) {
 
 // StartLandingDeck 初始化最终直线进近与着舰回收阶段。
 func (p *Plane) StartLandingDeck(ship *BattleShip) {
-	landing := ship.Aircraft.landingConfig()
+	landing := ship.Aircraft.landingConfigForSlot(p.LandingSlot)
 	length := carrierLengthInMapBlocks(ship)
 	// 圆弧出口速度作为刹车段初速，两段速度天然连续
 	entry := p.landingArcSpeed
@@ -132,7 +132,7 @@ func (p *Plane) StartLandingDeck(ship *BattleShip) {
 	currentScale := p.VisualScaleMultiplier()
 	p.FlightPhase = PlaneFlightPhaseLandingDeck
 	p.FlightPhaseStartPos = p.CurPos.Copy()
-	p.FlightPhaseEndPos = carrierLandingDeckEndPos(ship)
+	p.FlightPhaseEndPos = carrierLandingDeckEndPos(ship, landing)
 	p.FlightPhaseElapsed = 0
 	p.FlightPhaseProgressValue = 0
 	p.FlightVisualScaleStart = currentScale
@@ -161,7 +161,7 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, ship *BattleShip) bool {
 	p.FlightPhaseElapsed += gameSpeedMultiplier()
 	p.updateLandingCarrierTurnRate(ship)
 	length := carrierLengthInMapBlocks(ship)
-	landing := ship.Aircraft.landingConfig()
+	landing := ship.Aircraft.landingConfigForSlot(p.LandingSlot)
 	gate := landingGateLocalOffset(p.LandingSlot)
 	plannedArc, ok := buildLandingApproachArc(gate, ship, p.MaxSpeed, landing)
 	if !ok {
@@ -273,7 +273,7 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, ship *BattleShip) bool {
 func (p *Plane) updateLandingStagingEndPos(ship *BattleShip) {
 	length := carrierLengthInMapBlocks(ship)
 	gate := landingGateLocalOffset(p.LandingSlot)
-	arc, ok := buildLandingApproachArc(gate, ship, p.MaxSpeed, ship.Aircraft.landingConfig())
+	arc, ok := buildLandingApproachArc(gate, ship, p.MaxSpeed, ship.Aircraft.landingConfigForSlot(p.LandingSlot))
 	if !ok {
 		p.FlightPhaseEndPos = ship.Aircraft.landingStagingTarget(nil, ship, p.LandingSlot)
 		return
@@ -379,11 +379,12 @@ func (p *Plane) UpdateLandingDeck(ship *BattleShip) bool {
 	p.FlightPhaseProgressValue = timeProgress
 
 	// 起点 = 最终进近段起点（舰长单位局部坐标），沿进近方向前进已滑跑距离
-	end := landingFinalStartOffset(ship, ship.Aircraft.landingConfig())
+	landing := ship.Aircraft.landingConfigForSlot(p.LandingSlot)
+	end := landingFinalStartOffset(ship, landing)
 	length := carrierLengthInMapBlocks(ship)
 	forwardRatio := end.forward + p.landingRunTangent.forward*(p.landingRunDistance/length)
 	lateralRatio := end.lateral + p.landingRunTangent.lateral*(p.landingRunDistance/length)
-	p.FlightPhaseEndPos = carrierLandingDeckEndPos(ship)
+	p.FlightPhaseEndPos = carrierLandingDeckEndPos(ship, landing)
 	// 与圆弧段一致，机头航向使用低通转向速率合成，转向时机头贴合甲板进近线
 	p.advanceLandingAnimation(
 		ship,
@@ -391,6 +392,7 @@ func (p *Plane) UpdateLandingDeck(ship *BattleShip) bool {
 		lateralRatio,
 		landingRunWorldRotation(
 			ship,
+			p.LandingSlot,
 			forwardRatio,
 			lateralRatio,
 			p.landingRunSpeed,
@@ -403,10 +405,11 @@ func (p *Plane) UpdateLandingDeck(ship *BattleShip) bool {
 // landingRunWorldRotation 合成航母运动与直线刹车速度，返回甲板阶段的实际世界航向。
 func landingRunWorldRotation(
 	ship *BattleShip,
+	slot int,
 	forwardRatio, lateralRatio, relativeSpeed, turnRate float64,
 ) float64 {
 	// 相对速度沿进近方向，再叠加航母旋转产生的 omega×r 速度后转为世界航向
-	tangent := ship.Aircraft.landingConfig()
+	tangent := ship.Aircraft.landingConfigForSlot(slot)
 	tangentVec := landingApproachTangent(tangent)
 	length := carrierLengthInMapBlocks(ship)
 	velocity := carrierLocalOffset{
