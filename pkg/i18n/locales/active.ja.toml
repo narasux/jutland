@@ -142,6 +142,8 @@ other = "国籍"
 other = "艦種"
 [CollectionYear]
 other = "年"
+[CollectionDimensions]
+other = "全長×幅"
 [CollectionTonnage]
 other = "排水量"
 [CollectionSpeed]
@@ -178,6 +180,8 @@ other = "ダメージ軽減 {{.Value}}%"
 other = "航続距離 {{.Value}} km"
 [CollectionPlaneSpeed]
 other = "速度 {{.Value}} km/h"
+[CollectionPlaneDimensions]
+other = "全長 {{.Length}} m · 幅 {{.Width}} m"
 [CollectionWeaponConfig]
 other = "兵装構成"
 [CollectionCombatAbility]
@@ -390,6 +394,10 @@ other = "Backspace 建造取消"
 other = "マップをクリック：集結地点"
 [ValueKnots]
 other = "{{.Value}}ノット"
+[ValueMeters]
+other = "{{.Value}} m"
+[ValueLengthWidth]
+other = "{{.Length}} × {{.Width}} m"
 [ValueCost]
 other = "${{.Funds}} / {{.Seconds}}秒"
 [TypeWithAbbr]

@@ -251,6 +251,50 @@ func TestShipBlueprintWideTopViewDoesNotShrinkSharedScale(t *testing.T) {
 	require.Greater(t, midwayLength, legacyMidwayLength*1.5)
 }
 
+func TestShipArchiveInfoItemsIncludeLengthAndWidth(t *testing.T) {
+	items := shipArchiveInfoItems(&objUnit.BattleShip{
+		Nation: objUnit.NationUS,
+		Type:   objUnit.ShipTypeAircraftCarrier,
+		Year:   2030,
+		Length: 493,
+		Width:  54,
+	}, nil)
+	got := map[string]string{}
+	for _, item := range items {
+		got[item.Label] = item.Value
+	}
+	require.Equal(
+		t,
+		i18n.Format(i18n.MsgValueLengthWidth, map[string]any{"Length": "493", "Width": "54"}),
+		got[i18n.Text(i18n.MsgCollectionDimensions)],
+	)
+}
+
+func TestCollectionScaleBarUsesFixedHundredMeters(t *testing.T) {
+	require.Equal(t, 100.0, collectionBlueprintScaleMeters)
+	require.InDelta(t, 2.0, collectionPixelsPerMeter(986, 493), 1e-9)
+}
+
+func TestCollectionScaleBarHasEqualLeftAndBottomMargin(t *testing.T) {
+	rect := image.Rect(40, 20, 1140, 380)
+	x, y, barH, margin := collectionBlueprintScaleBarOrigin(rect, 1)
+	require.InDelta(t, margin, x-float64(rect.Min.X), 1e-9)
+	require.InDelta(t, margin, float64(rect.Max.Y)-(y+barH), 1e-9)
+	require.Less(t, barH, 5.0)
+}
+
+func TestCollectionShipLengthPixelsIgnoresPlaceholderSide(t *testing.T) {
+	side := shipImg.GetSide("waterdrop", 4)
+	top := shipImg.GetTop("waterdrop", 4)
+	require.NotNil(t, top)
+	require.NotNil(t, collectionUsableBlueprintImage(top))
+	require.Nil(t, collectionUsableBlueprintImage(side))
+
+	topW, _ := collectionImageRotatedSize(top, 90)
+	require.InDelta(t, topW, collectionShipLengthPixels(side, top, 1), 1e-9)
+	require.Greater(t, topW, 8.0)
+}
+
 func TestShipBlueprintViewGapGrowsWhenSpaceAllows(t *testing.T) {
 	_, innerH, minGap := collectionBlueprintInnerSize(image.Rect(0, 0, 1100, 360))
 	require.GreaterOrEqual(t, minGap, collectionBlueprintMinGap)

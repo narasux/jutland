@@ -142,6 +142,8 @@ other = "国籍"
 other = "舰种"
 [CollectionYear]
 other = "年份"
+[CollectionDimensions]
+other = "长宽"
 [CollectionTonnage]
 other = "排水量"
 [CollectionSpeed]
@@ -178,6 +180,8 @@ other = "减伤 {{.Value}}%"
 other = "航程 {{.Value}} km"
 [CollectionPlaneSpeed]
 other = "速度 {{.Value}} km/h"
+[CollectionPlaneDimensions]
+other = "长 {{.Length}} m · 宽 {{.Width}} m"
 [CollectionWeaponConfig]
 other = "武器配置"
 [CollectionCombatAbility]
@@ -390,6 +394,10 @@ other = "退格 取消增援"
 other = "点击地图 设集结点"
 [ValueKnots]
 other = "{{.Value}} 节"
+[ValueMeters]
+other = "{{.Value}} m"
+[ValueLengthWidth]
+other = "{{.Length}} × {{.Width}} m"
 [ValueCost]
 other = "${{.Funds}} / {{.Seconds}}s"
 [TypeWithAbbr]

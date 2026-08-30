@@ -766,6 +766,52 @@ func collectionBlueprintHalfHeight(innerH, gap float64) float64 {
 	return (innerH - gap) / 2
 }
 
+func collectionBlueprintScaleBarHeight(uiScale float64) float64 {
+	return max(3, 3*uiScale)
+}
+
+func collectionBlueprintScaleBarMargin(uiScale float64) float64 {
+	return max(16, 16*uiScale)
+}
+
+func collectionBlueprintScaleBarOrigin(blueprint image.Rectangle, uiScale float64) (x, y, barH, margin float64) {
+	margin = collectionBlueprintScaleBarMargin(uiScale)
+	barH = collectionBlueprintScaleBarHeight(uiScale)
+	x = float64(blueprint.Min.X) + margin
+	y = float64(blueprint.Max.Y) - margin - barH
+	return x, y, barH, margin
+}
+
+func collectionShipLengthPixels(sideImage, topImage *ebiten.Image, scale float64) float64 {
+	sideImage = collectionUsableBlueprintImage(sideImage)
+	topImage = collectionUsableBlueprintImage(topImage)
+	var lengthPx float64
+	if sideW, _ := collectionImageRotatedSize(sideImage, 0); sideW > 0 {
+		lengthPx = sideW * scale
+	}
+	if topW, _ := collectionImageRotatedSize(topImage, 90); topW > 0 {
+		lengthPx = max(lengthPx, topW*scale)
+	}
+	return lengthPx
+}
+
+func collectionUsableBlueprintImage(img *ebiten.Image) *ebiten.Image {
+	// 水滴、翻车鱼等彩蛋只有俯视，侧视是 1×1 占位图，不能当舰长。
+	if img == nil || img.Bounds().Dx() <= 2 || img.Bounds().Dy() <= 2 {
+		return nil
+	}
+	return img
+}
+
+func collectionPixelsPerMeter(lengthPx, lengthM float64) float64 {
+	if lengthPx <= 0 || lengthM <= 0 {
+		return 0
+	}
+	return lengthPx / lengthM
+}
+
+const collectionBlueprintScaleMeters = 100.0
+
 func collectionImageLengthFitScale(img *ebiten.Image, innerW float64) float64 {
 	// 俯视图舰艏朝上，Dy 是舰长；公共倍率只按这条长轴约束，避免片体全宽拖死全体舰船。
 	if img == nil || innerW <= 0 {
@@ -781,6 +827,8 @@ func collectionImageLengthFitScale(img *ebiten.Image, innerW float64) float64 {
 func collectionShipBlueprintFitScale(sideImage, topImage *ebiten.Image, innerW, innerH, gap float64) float64 {
 	// 侧视很扁、俯视旋转后可能很宽：两图共用一个倍率，按整块蓝图高度一起排，
 	// 不再各占一半，避免超宽俯视把整舰压得很小、左右留白。
+	sideImage = collectionUsableBlueprintImage(sideImage)
+	topImage = collectionUsableBlueprintImage(topImage)
 	sideW, sideH := collectionImageRotatedSize(sideImage, 0)
 	topW, topH := collectionImageRotatedSize(topImage, 90)
 	if sideW <= 0 && topW <= 0 {
@@ -1555,23 +1603,28 @@ func (c *CollectionUI) drawShipBlueprint(screen *ebiten.Image, ship *objUnit.Bat
 
 	innerX, innerY := float64(rect.Min.X+24), float64(rect.Min.Y+18)
 	innerW, innerH, minGap := collectionBlueprintInnerSize(rect)
-	sideImage := shipImg.GetSide(ship.Name, 4)
-	topImage := shipImg.GetTop(ship.Name, 4)
+	_, barY, _, _ := collectionBlueprintScaleBarOrigin(rect, c.metrics.Scale)
+	usableH := min(innerH, barY-8-innerY)
+	if usableH < 0 {
+		usableH = 0
+	}
+	sideImage := collectionUsableBlueprintImage(shipImg.GetSide(ship.Name, 4))
+	topImage := collectionUsableBlueprintImage(shipImg.GetTop(ship.Name, 4))
 	scale := collectionShipBlueprintDrawScale(
-		c.shipBlueprintScale, ship, sideImage, topImage, innerW, innerH, minGap,
+		c.shipBlueprintScale, ship, sideImage, topImage, innerW, usableH, minGap,
 	)
 	_, sideH := collectionImageRotatedSize(sideImage, 0)
 	_, topH := collectionImageRotatedSize(topImage, 90)
 	sideH *= scale
 	topH *= scale
-	gap := collectionBlueprintViewGap(innerH, sideH, topH, minGap)
+	gap := collectionBlueprintViewGap(usableH, sideH, topH, minGap)
 	contentH := sideH + topH
 	if sideH > 0 && topH > 0 {
 		contentH += gap
 	}
 	startY := innerY
-	if innerH > contentH {
-		startY += (innerH - contentH) / 2
+	if usableH > contentH {
+		startY += (usableH - contentH) / 2
 	}
 	if sideH > 0 {
 		c.drawer.drawCollectionImageScaled(screen, sideImage, innerX, startY, innerW, sideH, 0, scale)
@@ -1583,6 +1636,13 @@ func (c *CollectionUI) drawShipBlueprint(screen *ebiten.Image, ship *objUnit.Bat
 		}
 		c.drawer.drawCollectionImageScaled(screen, topImage, innerX, topY, innerW, topH, 90, scale)
 	}
+	c.drawer.drawCollectionScaleBar(
+		screen,
+		rect,
+		collectionShipLengthPixels(sideImage, topImage, scale),
+		ship.Length,
+		c.metrics.Scale,
+	)
 }
 
 func (c *CollectionUI) drawShipArchive(screen *ebiten.Image, ship *objUnit.BattleShip) {
@@ -1648,6 +1708,13 @@ func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []obj
 		{
 			Label: i18n.Text(i18n.MsgCollectionYear),
 			Value: lo.Ternary(ship.Year == 0, "--", fmt.Sprintf("%d", ship.Year)),
+		},
+		{
+			Label: i18n.Text(i18n.MsgCollectionDimensions),
+			Value: i18n.Format(i18n.MsgValueLengthWidth, map[string]any{
+				"Length": formatShipArchiveNumber(ship.Length),
+				"Width":  formatShipArchiveNumber(ship.Width),
+			}),
 		},
 		{Label: i18n.Text(i18n.MsgCollectionTonnage), Value: fmt.Sprintf("%.0f", ship.Tonnage)},
 		{
@@ -2046,6 +2113,10 @@ func (c *CollectionUI) drawPlaneCard(
 			i18n.MsgCollectionDamageReduction,
 			map[string]any{"Value": fmt.Sprintf("%.0f", plane.DamageReduction*100)},
 		),
+		i18n.Format(i18n.MsgCollectionPlaneDimensions, map[string]any{
+			"Length": formatShipArchiveNumber(plane.Length),
+			"Width":  formatShipArchiveNumber(plane.Width),
+		}),
 		i18n.Format(i18n.MsgCollectionPlaneSpeed, map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*5400)}),
 		i18n.Format(i18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}),
 	}
@@ -2056,7 +2127,7 @@ func (c *CollectionUI) drawPlaneCard(
 		)
 	}
 
-	weaponY := sectionY + int(math.Round(px(128)))
+	weaponY := sectionY + int(math.Round(px(150)))
 	c.drawPlaneSectionTitle(screen, x, weaponY, width, scale, i18n.Text(i18n.MsgCollectionWeaponConfig))
 	weaponLines := planeWeaponLines(plane)
 	const maxWeaponRows = 6

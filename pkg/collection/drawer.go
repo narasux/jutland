@@ -14,6 +14,7 @@ import (
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
@@ -112,6 +113,40 @@ func (d *Drawer) drawCollectionImageScaled(
 	opts.GeoM.Scale(scale, scale)
 	opts.GeoM.Translate(x+width/2, y+height/2)
 	screen.DrawImage(img, opts)
+}
+
+func (d *Drawer) drawCollectionScaleBar(
+	screen *ebiten.Image,
+	blueprint image.Rectangle,
+	lengthPx, lengthM, uiScale float64,
+) {
+	ppm := collectionPixelsPerMeter(lengthPx, lengthM)
+	if ppm <= 0 {
+		return
+	}
+	x, y, barH, _ := collectionBlueprintScaleBarOrigin(blueprint, uiScale)
+	barW := collectionBlueprintScaleMeters * ppm
+	segments := 4
+	segW := barW / float64(segments)
+	for i := 0; i < segments; i++ {
+		fill := colorx.Black
+		if i%2 == 1 {
+			fill = colorx.White
+		}
+		vector.FillRect(screen, float32(x+float64(i)*segW), float32(y), float32(segW), float32(barH), fill, false)
+	}
+	vector.StrokeRect(
+		screen, float32(x), float32(y), float32(barW), float32(barH), 1, colorx.Black, false,
+	)
+	label := i18n.Format(
+		i18n.MsgValueMeters,
+		map[string]any{"Value": formatShipArchiveNumber(collectionBlueprintScaleMeters)},
+	)
+	fontSize := max(11, 13*uiScale)
+	d.drawText(
+		screen, label, x+barW+8*uiScale, y+barH/2-fontSize/2,
+		fontSize, font.JetbrainsMono, color.RGBA{40, 34, 28, 255},
+	)
 }
 
 func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {

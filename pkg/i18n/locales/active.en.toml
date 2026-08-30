@@ -142,6 +142,8 @@ other = "Nation"
 other = "Type"
 [CollectionYear]
 other = "Year"
+[CollectionDimensions]
+other = "Size"
 [CollectionTonnage]
 other = "Tonnage"
 [CollectionSpeed]
@@ -178,6 +180,8 @@ other = "Damage reduction {{.Value}}%"
 other = "Range {{.Value}} km"
 [CollectionPlaneSpeed]
 other = "Speed {{.Value}} km/h"
+[CollectionPlaneDimensions]
+other = "Length {{.Length}} m · Width {{.Width}} m"
 [CollectionWeaponConfig]
 other = "Weapon Configuration"
 [CollectionCombatAbility]
@@ -390,6 +394,10 @@ other = "Backspace Cancel reinforcement"
 other = "Click map Set rally point"
 [ValueKnots]
 other = "{{.Value}} knots"
+[ValueMeters]
+other = "{{.Value}} m"
+[ValueLengthWidth]
+other = "{{.Length}} × {{.Width}} m"
 [ValueCost]
 other = "${{.Funds}} / {{.Seconds}}s"
 [TypeWithAbbr]

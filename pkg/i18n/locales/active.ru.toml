@@ -145,6 +145,8 @@ other = "Страна"
 other = "Тип"
 [CollectionYear]
 other = "Год"
+[CollectionDimensions]
+other = "Размеры"
 [CollectionTonnage]
 other = "Водоизмещение"
 [CollectionSpeed]
@@ -181,6 +183,8 @@ other = "Снижение урона {{.Value}}%"
 other = "Дальность {{.Value}} км"
 [CollectionPlaneSpeed]
 other = "Скорость {{.Value}} км/ч"
+[CollectionPlaneDimensions]
+other = "Длина {{.Length}} м · Ширина {{.Width}} м"
 [CollectionWeaponConfig]
 other = "Состав вооружения"
 [CollectionCombatAbility]
@@ -393,6 +397,10 @@ other = "Backspace Отменить"
 other = "Щелчок по карте: точка сбора"
 [ValueKnots]
 other = "{{.Value}} уз."
+[ValueMeters]
+other = "{{.Value}} м"
+[ValueLengthWidth]
+other = "{{.Length}} × {{.Width}} м"
 [ValueCost]
 other = "${{.Funds}} / {{.Seconds}}с"
 [TypeWithAbbr]
