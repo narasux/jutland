@@ -54,6 +54,7 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 |---|---|---|
 | `typeMultiplier` (fighter) | 1.00 | 战斗机单位战力费用最低 |
 | `typeMultiplier` (dive_bomber) | 1.15 | 俯冲轰炸机携带炸弹，费用略高 |
+| `typeMultiplier` (level_bomber) | 1.15 | 水平轰炸机同样携带炸弹，费用与俯冲机相同 |
 | `typeMultiplier` (torpedo_bomber) | 1.30 | 鱼雷轰炸机挂载最重，费用最高 |
 | `scaleFactor` | 0.10 | 将战力值映射到 3–30 资金区间的缩放系数（初始估算值） |
 | `fundsCost` 范围 | 3–30 | 最便宜飞机不低于 $3，最贵飞机不超过 $30；不做粗粒度分档 |

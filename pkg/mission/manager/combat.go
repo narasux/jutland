@@ -351,7 +351,7 @@ func (m *MissionManager) updateShotBullets() {
 							continue
 						}
 					} else {
-						// 鱼雷机/战斗机按 1/8 的概率被击中
+						// 鱼雷机/水平轰炸机/战斗机按 1/8 的概率被击中
 						if rand.Intn(8) != 0 {
 							continue
 						}

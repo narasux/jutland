@@ -195,6 +195,14 @@ func (p *Plane) liftoff(ship *BattleShip, runSpeed float64) {
 	)
 }
 
+// landingScaleCompleteAt 返回直线进近段降到最低视觉倍率时的路程比例。
+func (p *Plane) landingScaleCompleteAt() float64 {
+	if p.landingScaleCompleteRatio > 0 {
+		return p.landingScaleCompleteRatio
+	}
+	return landingDeckScaleDistanceRatio
+}
+
 // VisualScaleMultiplier 返回当前起降阶段相对常规飞机绘制比例的倍率。
 func (p *Plane) VisualScaleMultiplier() float64 {
 	if p.IsCruising() {
@@ -205,8 +213,8 @@ func (p *Plane) VisualScaleMultiplier() float64 {
 	}
 	progress := p.FlightPhaseProgress()
 	if p.FlightPhase == PlaneFlightPhaseLandingDeck {
-		// 着舰段按实际滑跑路程缩放：路程 80% 处降到最低视觉倍率（视为触舰/触水）
-		progress = smoothstep(clamp01(progress / landingDeckScaleDistanceRatio))
+		// 着舰段按实际滑跑路程缩放：到达触舰/触水路程后降到最低视觉倍率
+		progress = smoothstep(clamp01(progress / p.landingScaleCompleteAt()))
 	}
 	return p.FlightVisualScaleStart + (p.FlightVisualScaleEnd-p.FlightVisualScaleStart)*progress
 }

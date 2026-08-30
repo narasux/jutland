@@ -7306,7 +7306,7 @@
       takeOffTime: 5,
       groups: [
         {
-          name: "Swordfish",
+          name: "SeaOtter",
           maxCount: 9
         }
       ]

@@ -141,8 +141,8 @@ type PlaneWeapon struct {
 	TorpedoesMD []WeaponMetadata `json:"torpedoes"`
 	// 火箭弹元数据
 	RocketsMD []WeaponMetadata `json:"rockets"`
-	// 最小释放间隔
-	ReleaseInterval int64 `json:"releaseInterval"`
+	// 最小释放间隔（秒）
+	ReleaseInterval float64 `json:"releaseInterval"`
 	// 最近释放时间
 	LatestReleaseAt int64
 	// 固定机炮

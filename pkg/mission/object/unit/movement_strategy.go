@@ -34,7 +34,7 @@ func NewMovementStrategy(planeType PlaneType) MovementStrategy {
 }
 
 // BasicMovementStrategy 基础移动策略
-// 适用于俯冲轰炸机和鱼雷轰炸机，始终以最大速度飞行
+// 适用于俯冲/水平轰炸机和鱼雷轰炸机，始终以最大速度飞行
 type BasicMovementStrategy struct{}
 
 // MoveTo 实现基础移动策略，始终以最大速度飞行

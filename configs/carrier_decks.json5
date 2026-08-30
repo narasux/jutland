@@ -6,7 +6,7 @@
   //   lateral        横向位置，舰宽比例（0=中线，正=右舷，|0.5| 为舷边，>0.5 为舰外水面）
   //   runLength      滑跑距离（舰长倍数），飞机飞过该距离后升空
   //   launchAngle    弹射航向相对舰体航向的偏转角（度），正=右舷
-  //   planeTypes     该起飞点服务机型白名单（fighter/dive_bomber/torpedo_bomber），空=任意
+  //   planeTypes     该起飞点服务机型白名单（fighter/dive_bomber/level_bomber/torpedo_bomber），空=任意
   //   takeOffTime    该起飞点独立冷却（秒），缺省使用舰船 aircraft.takeOffTime
   //   landing.mode   着舰方式：deck 甲板回收 / sea 舷侧着水回收
   //   approachAngle  进近方向相对舰体航向的夹角（度），正=右舷偏转（斜角甲板）

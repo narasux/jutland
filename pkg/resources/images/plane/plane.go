@@ -54,6 +54,7 @@ func init() {
 	planeTypes := []string{
 		"fighter",
 		"dive_bomber",
+		"level_bomber",
 		"torpedo_bomber",
 	}
 

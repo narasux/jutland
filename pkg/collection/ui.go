@@ -82,6 +82,7 @@ const (
 	planeTypeAll     planeTypeFilter = "all"
 	planeTypeFighter planeTypeFilter = "fighter"
 	planeTypeDive    planeTypeFilter = "dive_bomber"
+	planeTypeLevel   planeTypeFilter = "level_bomber"
 	planeTypeTorpedo planeTypeFilter = "torpedo_bomber"
 )
 
@@ -91,6 +92,8 @@ func (f planeTypeFilter) display() string {
 		return i18n.Text(i18n.MsgPlaneTypeFighter)
 	case planeTypeDive:
 		return i18n.Text(i18n.MsgPlaneTypeDiveBomber)
+	case planeTypeLevel:
+		return i18n.Text(i18n.MsgPlaneTypeLevelBomber)
 	case planeTypeTorpedo:
 		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
 	default:
@@ -98,7 +101,9 @@ func (f planeTypeFilter) display() string {
 	}
 }
 
-var planeTypeFilters = []planeTypeFilter{planeTypeAll, planeTypeFighter, planeTypeDive, planeTypeTorpedo}
+var planeTypeFilters = []planeTypeFilter{
+	planeTypeAll, planeTypeFighter, planeTypeDive, planeTypeLevel, planeTypeTorpedo,
+}
 
 type collectionUILayout struct {
 	// Blueprint 是舰船页上半部分的主蓝图区域，只负责展示船体图，不塞额外信息。

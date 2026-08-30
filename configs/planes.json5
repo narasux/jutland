@@ -137,37 +137,7 @@
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/114",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/114",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/114",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/114",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/114",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/114",
+          name: "US/BB/907",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -181,7 +151,7 @@
           leftFiringArc: [335, 360]
         }
       ],
-      releaseInterval: 2,
+      releaseInterval: 0.3
     }
   },
   {
@@ -269,7 +239,7 @@
           leftFiringArc: [335, 360]
         }
       ],
-      releaseInterval: 5
+      releaseInterval: 0.3
     }
   },
   {
@@ -484,7 +454,7 @@
           leftFiringArc: [340, 360]
         }
       ],
-      releaseInterval: 5
+      releaseInterval: 2
     }
   },
   {
@@ -546,7 +516,7 @@
           leftFiringArc: [340, 360]
         }
       ],
-      releaseInterval: 5
+      releaseInterval: 2
     }
   },
   {
@@ -924,7 +894,7 @@
           leftFiringArc: [340, 360]
         }
       ],
-      releaseInterval: 5
+      releaseInterval: 2
     }
   },
   {
@@ -1004,8 +974,7 @@
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         }
-      ],
-      releaseInterval: 5
+      ]
     }
   },
   {
@@ -1101,8 +1070,7 @@
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         }
-      ],
-      releaseInterval: 5
+      ]
     }
   },
   {
@@ -1151,8 +1119,7 @@
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         }
-      ],
-      releaseInterval: 5
+      ]
     }
   },
   // FIXME 引入侦察系统
@@ -1508,6 +1475,74 @@
           leftFiringArc: [340, 360]
         }
       ]
+    }
+  },
+  {
+    // 海獭式 Mk I
+    name: "SeaOtter",
+    nation: "uk",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1943,
+    totalHP: 42,
+    damageReduction: 0.4,
+    maxSpeed: 262,
+    acceleration: 16,
+    rotateSpeed: 6,
+    length: 12.12,
+    width: 14.02,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 4.536,
+    range: 909,
+    weapon: {
+      guns: [
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "UK/BB/114",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/BB/114",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/BB/114",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/BB/114",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
     }
   },
   {

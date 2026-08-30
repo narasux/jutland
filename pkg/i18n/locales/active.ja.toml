@@ -102,6 +102,8 @@ other = "魚雷艇"
 other = "戦闘機"
 [PlaneTypeDiveBomber]
 other = "急降下爆撃機"
+[PlaneTypeLevelBomber]
+other = "水平爆撃機"
 [PlaneTypeTorpedoBomber]
 other = "雷撃機"
 [Unknown]

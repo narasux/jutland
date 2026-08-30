@@ -252,8 +252,8 @@
         value: "2x4 40mm/39 2-pounder",
       },
       {
-        label: "雷撃機",
-        value: "9× Fairey Swordfish Mk I",
+        label: "偵察/水平爆撃機",
+        value: "9× スーパーマリン シーオッター Mk I",
       },
     ],
     description: "アルバトロスはオーストラリアで建造された水上機母艦で、1929年に就役した。1938年に英国海軍へ移管され、1942年には HMS Albatross として大西洋とインド洋で通商保護に従事し、艦首側の格納庫甲板から水上機を運用した。1944年に工作艦へ改装された後、同年8月にノルマンディー沖で魚雷攻撃を受け、戦後に売却解体された。",
@@ -4797,6 +4797,32 @@
       {
         name: "Wikipedia - Hawker Sea Hurricane",
         url: "https://en.wikipedia.org/wiki/Hawker_Sea_Hurricane",
+      },
+    ],
+  },
+  {
+    name: "SeaOtter",
+    displayName: "シーオッター Mk I",
+    armaments: [
+      {
+        label: "機関銃（前方）",
+        value: "1 x 7.7mm ヴィッカース K",
+      },
+      {
+        label: "機関銃（後方）",
+        value: "2 x 7.7mm ヴィッカース K",
+      },
+      {
+        label: "爆弾",
+        value: "4 x 250lb",
+      },
+    ],
+    description: "スーパーマリン シーオッター Mk I はウォーラスの後継となる水陸両用複葉飛行艇で、1943年から量産され、海上救難・偵察・哨戒と艦上カタパルト発進に用いられました。ゲームでは水平爆撃機として扱い、機首先方と後方の 7.7mm ヴィッカース K 機銃と 250 ポンド爆弾 4 発を搭載し、急降下せず遠距離から水平投弾します。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — スーパーマリン シーオッター",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%9E%E3%83%AA%E3%83%B3_%E3%82%B7%E3%83%BC%E3%82%AA%E3%83%83%E3%82%BF%E3%83%BC",
       },
     ],
   },

@@ -27,6 +27,13 @@
     range: 1.5,
     bulletSpeed: 30,
   },
+  // 英国海军 250 磅（114kg）炸弹（水平投弹，远处投放）
+  {
+    name: "UK/BB/114",
+    bulletName: "US/BB/250/114",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
   // 日本海军 500kg 炸弹
   {
     name: "JP/BB/500",

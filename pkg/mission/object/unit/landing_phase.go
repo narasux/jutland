@@ -123,6 +123,8 @@ func (p *Plane) StartLandingDeck(ship *BattleShip) {
 	entry = max(entry, p.MaxSpeed*gameSpeedMultiplier()*landingMinRelativeSpeedRatio)
 	total := max(length*landing.ApproachLength, 0.001)
 
+	p.landingOnWater = ship.Aircraft.landingOnWater()
+	p.landingScaleCompleteRatio = landingScaleCompleteRatio(ship, landing)
 	p.landingRunTangent = landingApproachTangent(landing)
 	p.landingRunSpeed = entry
 	p.landingRunTotalLength = total
@@ -499,8 +501,8 @@ func (p *Plane) GenWaterWakeTrails() []*objTrail.Trail {
 	if !p.landingOnWater || p.FlightPhase != PlaneFlightPhaseLandingDeck {
 		return nil
 	}
-	// 低空缩放在路程 80% 处完成，视为已触水；触水前保持空中无尾流
-	if p.FlightPhaseProgressValue < landingDeckScaleDistanceRatio {
+	// 低空缩放完成后视为已触水；触水前保持空中无尾流
+	if p.FlightPhaseProgressValue < p.landingScaleCompleteAt() {
 		return nil
 	}
 	// 节流：每 3 个模拟帧生成一次，避免尾流过密

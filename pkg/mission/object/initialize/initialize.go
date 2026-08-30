@@ -256,7 +256,7 @@ func initPlaneMap() {
 		for _, rocket := range p.Weapon.Rockets {
 			if p.Type == objUnit.PlaneTypeFighter {
 				p.Weapon.MaxToPlaneRange = max(p.Weapon.MaxToPlaneRange, rocket.Range)
-			} else if p.Type == objUnit.PlaneTypeDiveBomber || p.Type == objUnit.PlaneTypeTorpedoBomber {
+			} else if p.Type.AttacksShips() {
 				p.Weapon.MaxToShipRange = max(p.Weapon.MaxToShipRange, rocket.Range)
 			}
 		}

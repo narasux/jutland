@@ -938,6 +938,34 @@ func moveTestCarrier(ship *BattleShip, rotationStep float64) {
 	)
 }
 
+func TestSeaLandingSplashdownIsBehindStern(t *testing.T) {
+	ship := &BattleShip{Length: 128, Width: 24, CurPos: objPos.NewR(50, 50)}
+	sa := &ShipAircraft{}
+	sa.ResolveDeck(&CarrierDeck{
+		Name: "seaplane-tender",
+		Landing: LandingConfig{
+			Mode:           LandingModeSea,
+			Forward:        0.5,
+			Lateral:        1.1,
+			ApproachLength: 3,
+		},
+	})
+	ship.Aircraft = *sa
+	landing := ship.Aircraft.landingConfigForSlot(0)
+
+	ratio := landingScaleCompleteRatio(ship, landing)
+	start := landingFinalStartOffset(ship, landing)
+	splashForward := start.forward + ratio*(0.5-landing.Forward-start.forward)
+	sternForward := -0.5
+	requireClose(t, splashForward, sternForward-seaLandingSplashdownAftOfSternRatio)
+
+	plane := &Plane{CurPos: objPos.NewR(50, 52), FlightPhase: PlaneFlightPhaseCruising}
+	plane.StartLandingDeck(ship)
+	requireClose(t, plane.landingScaleCompleteRatio, ratio)
+	plane.FlightPhaseProgressValue = ratio
+	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
+}
+
 func TestLandingVisualScaleInterpolation(t *testing.T) {
 	ship := &BattleShip{Length: 128, CurPos: objPos.NewR(50, 50)}
 	plane := &Plane{CurPos: objPos.NewR(50, 52), FlightPhase: PlaneFlightPhaseCruising}

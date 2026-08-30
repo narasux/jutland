@@ -26,6 +26,7 @@ TIME_MAX = 10
 TYPE_MULTIPLIERS = {
     'fighter': 1.00,
     'dive_bomber': 1.15,
+    'level_bomber': 1.15,
     'torpedo_bomber': 1.30,
 }
 

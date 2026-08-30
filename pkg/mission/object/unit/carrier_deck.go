@@ -47,7 +47,7 @@ type TakeoffPoint struct {
 	RunLength float64 `json:"runLength"`
 	// LaunchAngle 弹射航向相对舰体航向的偏转角（度），正=右舷
 	LaunchAngle float64 `json:"launchAngle"`
-	// PlaneTypes 服务机型白名单（fighter/dive_bomber/torpedo_bomber），空 = 任意机型
+	// PlaneTypes 服务机型白名单（fighter/dive_bomber/level_bomber/torpedo_bomber），空 = 任意机型
 	PlaneTypes []PlaneType `json:"planeTypes"`
 	// TakeOffTime 该点独立冷却（秒），<=0 时使用舰船的 takeOffTime
 	TakeOffTime float64 `json:"takeOffTime"`

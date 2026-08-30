@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jutland 飞机俯视图换涂装重绘"
+  short_description: "以低清俯视图为结构参考，重绘为游戏风格军绿/迷彩顶视图并保留细节"
+  default_prompt: "使用 $jutland-redraw-plane-livery 根据用户提供的低清俯视图重绘飞机顶视图，换成现有游戏涂装并保留原图比例与结构细节。"

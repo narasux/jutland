@@ -13,6 +13,7 @@ description: Recolor Jutland ship PNG drawings while preserving exact geometry, 
 - 不裁剪、不旋转、不缩放、不重绘设备，也不更新正式游戏资源或配置。
 - 默认输出独立的 `<stem>.recolored.png` 候选文件；只有用户明确要求时才更新已有候选文件。
 - 完成候选图和验证后停止，等待人工确认；不要在同一轮继续执行 `jutland-add-ship`。
+- 飞机低清俯视图换涂装不要用本 skill。那种图应走 `jutland-redraw-plane-livery`：按原图结构重绘，不要做多轮像素换色。
 
 ## 核心原则
 

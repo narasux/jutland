@@ -504,7 +504,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         runLength: 0.6,
         // 弹射航向相对舰体航向的偏转角（度），正=右舷（舷侧弹射器使用）
         launchAngle: 0,
-        // 服务机型白名单（fighter/dive_bomber/torpedo_bomber），
+        // 服务机型白名单（fighter/dive_bomber/level_bomber/torpedo_bomber），
         // 空 = 任意机型；可用于实现「长起飞点专供轰炸机 / 鱼雷机」
         planeTypes: [],
         // 该点独立冷却（单位：秒），<=0 时使用舰船的 takeOffTime
@@ -548,6 +548,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // 飞机类型，可选值：
     // fighter 战斗机
     // dive_bomber 俯冲轰炸机
+    // level_bomber 水平轰炸机
     // torpedo_bomber 鱼雷轰炸机
     type: "fighter",
     // 类型缩写

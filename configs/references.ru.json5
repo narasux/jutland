@@ -252,8 +252,8 @@
         value: "2x4 40mm/39 2-pounder",
       },
       {
-        label: "Торпедоносцы",
-        value: "9× Fairey Swordfish Mk I",
+        label: "Разведчики / горизонтальные бомбардировщики",
+        value: "9× Supermarine Sea Otter Mk I",
       },
     ],
     description: "HMAS Albatross — построенный в Австралии гидроавиатранспорт, вступивший в строй в 1929 году. В 1938 году корабль передали Королевскому флоту, и в 1942-м он как HMS Albatross охранял судоходство в Атлантике и Индийском океане, поднимая гидросамолёты с носовой ангарной палубы. В 1944 году его переоборудовали в плавмастерскую; в августе того же года он получил торпедное попадание у Нормандии и позднее был продан на слом.",
@@ -4797,6 +4797,32 @@
       {
         name: "Wikipedia - Hawker Sea Hurricane",
         url: "https://en.wikipedia.org/wiki/Hawker_Sea_Hurricane",
+      },
+    ],
+  },
+  {
+    name: "SeaOtter",
+    displayName: "Си Оттер Mk I",
+    armaments: [
+      {
+        label: "Пулемёт (вперёд)",
+        value: "1 x 7,7-мм Vickers K",
+      },
+      {
+        label: "Пулемёт (назад)",
+        value: "2 x 7,7-мм Vickers K",
+      },
+      {
+        label: "Бомбы",
+        value: "4 x 250lb",
+      },
+    ],
+    description: "Supermarine Sea Otter Mk I — преемник амфибии Walrus, запущенный в серию в 1943 году для спасения на море, разведки и патрулирования, в том числе с корабельной катапульты. В игре это горизонтальный бомбардировщик: носовой и два кормовых 7,7-мм пулемёта Vickers K и четыре 250-фунтовые бомбы, сбрасываемые с дистанции, без пикирования.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Википедия — Supermarine Sea Otter",
+        url: "https://en.wikipedia.org/wiki/Supermarine_Sea_Otter",
       },
     ],
   },

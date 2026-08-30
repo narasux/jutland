@@ -56,6 +56,7 @@ const (
 	MsgShipTypeTorpedoBoat       MessageID = "ShipTypeTorpedoBoat"
 	MsgPlaneTypeFighter          MessageID = "PlaneTypeFighter"
 	MsgPlaneTypeDiveBomber       MessageID = "PlaneTypeDiveBomber"
+	MsgPlaneTypeLevelBomber      MessageID = "PlaneTypeLevelBomber"
 	MsgPlaneTypeTorpedoBomber    MessageID = "PlaneTypeTorpedoBomber"
 	MsgUnknown                   MessageID = "Unknown"
 	MsgCollectionAll             MessageID = "CollectionAll"

@@ -26,6 +26,8 @@ const (
 	PlaneTypeFighter PlaneType = "fighter"
 	// PlaneTypeDiveBomber 俯冲轰炸机
 	PlaneTypeDiveBomber PlaneType = "dive_bomber"
+	// PlaneTypeLevelBomber 水平轰炸机
+	PlaneTypeLevelBomber PlaneType = "level_bomber"
 	// PlaneTypeTorpedoBomber 鱼雷轰炸机
 	PlaneTypeTorpedoBomber PlaneType = "torpedo_bomber"
 )
@@ -37,10 +39,22 @@ func (t PlaneType) ToDisplay() string {
 		return i18n.Text(i18n.MsgPlaneTypeFighter)
 	case PlaneTypeDiveBomber:
 		return i18n.Text(i18n.MsgPlaneTypeDiveBomber)
+	case PlaneTypeLevelBomber:
+		return i18n.Text(i18n.MsgPlaneTypeLevelBomber)
 	case PlaneTypeTorpedoBomber:
 		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
 	default:
 		return i18n.Text(i18n.MsgUnknown)
+	}
+}
+
+// AttacksShips 对舰攻击机种：俯冲/水平轰炸机与鱼雷机。
+func (t PlaneType) AttacksShips() bool {
+	switch t {
+	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber:
+		return true
+	default:
+		return false
 	}
 }
 
@@ -128,6 +142,8 @@ type Plane struct {
 	landingCarrierTurnRate float64
 	// 本次降落是否为舷侧着水回收（水上飞机）。
 	landingOnWater bool
+	// 直线进近段降到最低视觉倍率（触舰/触水）时的路程比例。
+	landingScaleCompleteRatio float64
 	// 起飞滑跑段长度（地图坐标）；滑跑结束后进入直线爬升段缓慢加满速度。
 	takeoffRunLength float64
 	// 弹射点配置副本：滑跑段绑定甲板推进，每帧按舰体当前姿态重算滑跑线。
@@ -227,7 +243,7 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	// 释放器类武器，有最小的释放间隔限制，且目前只能攻击战舰。
 	if enemy.ObjType() == object.TypeShip {
 		timeNow := time.Now().UnixMilli()
-		if timeNow > p.Weapon.LatestReleaseAt+p.Weapon.ReleaseInterval*1e3 {
+		if float64(timeNow-p.Weapon.LatestReleaseAt) > p.Weapon.ReleaseInterval*1e3 {
 			for _, releasers := range [2][]*Releaser{
 				p.Weapon.Bombs, p.Weapon.Torpedoes,
 			} {
@@ -298,7 +314,7 @@ func (p *Plane) MustReturn() bool {
 		return true
 	}
 	// 轰炸机 / 鱼雷机，只要没有进攻武器了，就返航（我滴任务完成啦！）
-	if p.Type == PlaneTypeDiveBomber || p.Type == PlaneTypeTorpedoBomber {
+	if p.Type.AttacksShips() {
 		for _, r := range p.Weapon.Bombs {
 			if !r.Released {
 				return false
@@ -374,7 +390,7 @@ func GetPlaneTargetObjType(name string) object.Type {
 	switch plane.Type {
 	case PlaneTypeFighter:
 		return object.TypePlane
-	case PlaneTypeDiveBomber, PlaneTypeTorpedoBomber:
+	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber:
 		return object.TypeShip
 	default:
 		return object.TypeNone

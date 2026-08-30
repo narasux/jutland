@@ -102,6 +102,8 @@ other = "Торпедный катер"
 other = "Истребитель"
 [PlaneTypeDiveBomber]
 other = "Пикирующий бомбардировщик"
+[PlaneTypeLevelBomber]
+other = "Горизонтальный бомбардировщик"
 [PlaneTypeTorpedoBomber]
 other = "Торпедоносец"
 [Unknown]

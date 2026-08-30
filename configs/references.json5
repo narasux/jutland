@@ -1467,8 +1467,8 @@
         value: "2x4 40mm/39 2 磅炮",
       },
       {
-        label: "鱼雷攻击机",
-        value: "9x 剑鱼式（Swordfish Mk I）",
+        label: "侦察/水平轰炸机",
+        value: "9x 海獭式（Sea Otter Mk I）",
       },
     ],
     description: "信天翁号是澳大利亚建造的水上飞机母舰，1929 年服役，1938 年移交英国皇家海军。1942 年以 HMS Albatross 之名在大西洋和印度洋执行贸易护航，并从舰体前部机库甲板运作水上飞机。1944 年改为修理舰后，同年 8 月在诺曼底附近被鱼雷击伤，战后出售拆解。",
@@ -5506,6 +5506,32 @@
       {
         name: "维基百科 - 超级马林海喷火",
         url: "https://en.wikipedia.org/wiki/Supermarine_Seafire",
+      },
+    ],
+  },
+  {
+    name: "SeaOtter",
+    displayName: "海獭式 Mk I",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "1 x 7.7mm 维克斯 K 型",
+      },
+      {
+        label: "机枪（后向）",
+        value: "2 x 7.7mm 维克斯 K 型",
+      },
+      {
+        label: "炸弹",
+        value: "4 x 250lb",
+      },
+    ],
+    description: "超级马林海獭式 Mk I 是海象式的后继水陆两栖双翼飞行艇，1943 年投产，用于海上救援、侦察与巡逻，并可从舰船弹射起飞。游戏中按水平轰炸机处理，配置一挺机首与两挺后向 7.7mm 维克斯 K 型机枪，以及四枚 250 磅炸弹，从较远距离水平投弹，不俯冲。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 超级马林海獭",
+        url: "https://en.wikipedia.org/wiki/Supermarine_Sea_Otter",
       },
     ],
   },

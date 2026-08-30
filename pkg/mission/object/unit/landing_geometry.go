@@ -47,6 +47,8 @@ const (
 	landingApproachMaxFrames = 180.0
 	// landingApproachSpeedRatio 是推导圆弧动画时长所用的参考速度比例。
 	landingApproachSpeedRatio = 0.40
+	// seaLandingSplashdownAftOfSternRatio 是水上飞机触水点在舰尾后方的舰长倍数。
+	seaLandingSplashdownAftOfSternRatio = 0.8
 )
 
 // carrierLocalOffset 是以航母为原点的局部坐标。
@@ -101,6 +103,22 @@ func planeCarrierLocalOffset(p *Plane, ship *BattleShip) carrierLocalOffset {
 // landingTouchdownOffset 返回着舰回收点的航母局部地图坐标。
 func landingTouchdownOffset(ship *BattleShip, landing LandingConfig) carrierLocalOffset {
 	return takeoffLandingPos(ship, landing)
+}
+
+// landingScaleCompleteRatio 返回直线进近段降到最低视觉倍率（触舰/触水）时的路程比例。
+// 甲板回收仍用固定 80%；着水回收把触水点放在舰尾后方 0.8 个舰长。
+func landingScaleCompleteRatio(ship *BattleShip, landing LandingConfig) float64 {
+	if landing.Mode != LandingModeSea {
+		return landingDeckScaleDistanceRatio
+	}
+	start := landingFinalStartOffset(ship, landing)
+	endForward := 0.5 - landing.Forward
+	splashForward := -0.5 - seaLandingSplashdownAftOfSternRatio
+	run := endForward - start.forward
+	if math.Abs(run) < 1e-6 {
+		return landingDeckScaleDistanceRatio
+	}
+	return max(0.05, min(0.95, (splashForward-start.forward)/run))
 }
 
 // landingFinalStartOffset 返回最终直线进近段起点的舰长单位局部坐标。
