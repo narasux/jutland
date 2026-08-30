@@ -310,7 +310,9 @@ func landingApproachEntryReady(p *Plane, ship *BattleShip, gate carrierLocalOffs
 		return false
 	}
 	entrySpeed := landingArcEntryTargetSpeed(arc, ship, p.landingCarrierTurnRate)
-	targetRotation := landingArcWorldRotation(arc, ship, 0, p.landingCarrierTurnRate)
+	// 航向容差与圆弧段机头合成使用同一低通转向速率，保证进入圆弧前后
+	// 机头目标航向连续；速度容差仍用原始速率，反映真实的相对闭合速度。
+	targetRotation := landingArcWorldRotation(arc, ship, 0, p.landingDisplayTurnRate)
 	if angleDifferenceDegrees(p.CurRotation, targetRotation) > landingGateHeadingTolerance {
 		return false
 	}

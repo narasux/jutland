@@ -89,9 +89,9 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
-	// 起飞阶段只沿母舰航向直线飞出一段距离，不立即转向接敌。
+	// 起飞阶段沿甲板弹射线滑跑，不立即转向接敌。
 	if attacker.FlightPhase == objUnit.PlaneFlightPhaseTakingOff {
-		attacker.UpdateTakeoff(missionState.Core.MissionMD.MapCfg)
+		attacker.UpdateTakeoff(missionState.Core.MissionMD.MapCfg, missionState.Arena.Ships[attacker.BelongShip])
 		return nil
 	}
 	if !attacker.IsCruising() {
@@ -200,7 +200,7 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	mapCfg := missionState.Core.MissionMD.MapCfg
 	switch plane.FlightPhase {
 	case objUnit.PlaneFlightPhaseTakingOff:
-		plane.UpdateTakeoff(mapCfg)
+		plane.UpdateTakeoff(mapCfg, ship)
 	case "", objUnit.PlaneFlightPhaseCruising:
 		slot := ship.Aircraft.RequestLanding(plane.Uid)
 		plane.StartLandingStaging(mapCfg, ship, slot)

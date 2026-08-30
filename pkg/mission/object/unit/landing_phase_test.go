@@ -872,6 +872,63 @@ func TestLandingStagingCanCatchCarrierAtPlaneMaxSpeed(t *testing.T) {
 	}
 }
 
+func TestLandingHeadingDoesNotSnapWhenCarrierStartsTurning(t *testing.T) {
+	useDefaultSettings(t)
+	ship := &BattleShip{
+		Length:      128,
+		CurPos:      objPos.NewR(50, 50),
+		CurRotation: 0,
+		CurSpeed:    0.03,
+	}
+	plane := &Plane{
+		MaxSpeed:     0.06,
+		Acceleration: 0.005,
+		RotateSpeed:  12,
+		CurHP:        100,
+		CurPos:       carrierRelativePos2D(ship, -3.5, 1.1),
+		CurRotation:  330,
+		CurSpeed:     0.05,
+		RemainRange:  100,
+	}
+	plane.StartLandingApproach(ship)
+	for range 30 {
+		plane.UpdateLandingApproach(ship)
+	}
+
+	// 航母从直航突然满舵：机头目标航向中的 omega×r 项是阶跃信号，
+	// 低通滤波必须把机头偏转摊到数十帧，单帧转角不允许出现数十度的甩头。
+	maxStep := 0.0
+	for range 60 {
+		moveTestCarrier(ship, 0.8)
+		before := plane.CurRotation
+		plane.UpdateLandingApproach(ship)
+		maxStep = max(maxStep, angleDifference(plane.CurRotation, before))
+	}
+	if maxStep > 8 {
+		t.Fatalf(
+			"landing heading snapped while carrier started turning: max step = %.2f degrees/frame",
+			maxStep,
+		)
+	}
+
+	// 滤波不能拖慢阶段推进：转向中仍应在有限时间内完成进近
+	finished := false
+	for range 800 {
+		moveTestCarrier(ship, 0.8)
+		if plane.UpdateLandingApproach(ship) {
+			finished = true
+			break
+		}
+	}
+	if !finished {
+		t.Fatal("landing approach did not finish while carrier was turning")
+	}
+	local := planeCarrierLocalOffset(plane, ship)
+	expectedEnd := landingFinalStartOffset(ship, ship.Aircraft.landingConfig())
+	requireClose(t, local.forward, carrierLengthInMapBlocks(ship)*expectedEnd.forward)
+	requireClose(t, local.lateral, 0)
+}
+
 func moveTestCarrier(ship *BattleShip, rotationStep float64) {
 	ship.CurRotation = normalizeAngle(ship.CurRotation + rotationStep)
 	radians := ship.CurRotation * math.Pi / 180

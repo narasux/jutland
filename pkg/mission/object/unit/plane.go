@@ -130,6 +130,17 @@ type Plane struct {
 	landingOnWater bool
 	// 起飞滑跑段长度（地图坐标）；滑跑结束后进入直线爬升段缓慢加满速度。
 	takeoffRunLength float64
+	// 弹射点配置副本：滑跑段绑定甲板推进，每帧按舰体当前姿态重算滑跑线。
+	takeoffPoint TakeoffPoint
+	// 起飞阶段计划总距离（滑跑 + 爬升，地图坐标）与已飞行距离。
+	takeoffTotalLength float64
+	takeoffDistance    float64
+	// 离舰瞬间合成的世界速度航向，爬升段机头以转向速率平滑过渡到该航向。
+	takeoffClimbHeading float64
+	// 降落机头合成使用的航母转向速率低通值。玩家满舵时舰体角速度是阶跃信号，
+	// 直接合成机头航向会让进近中的飞机在两三帧内甩动数十度；
+	// 滤波后阶跃被摊成数十帧的平滑偏航，机头始终贴合随舰旋转的进近航线。
+	landingDisplayTurnRate float64
 
 	// 圆弧进近段的等减速计划状态（相对航母速度，单位为地图坐标每模拟帧）。
 	landingArcSpeed       float64

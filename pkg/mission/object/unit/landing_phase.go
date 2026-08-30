@@ -29,6 +29,10 @@ const (
 	// landingMinRelativeSpeedRatio 是进近减速计划的最低相对速度保底比例，
 	// 防止低速机在减速积分中停滞。
 	landingMinRelativeSpeedRatio = 0.05
+	// landingTurnRateSmoothingRate 是机头合成所用航母转向速率的每帧低通增益
+	// （随游戏倍速放大）。玩家满舵时舰体角速度是阶跃信号，滤波把阶跃摊成
+	// 数十帧的平滑偏航，避免进近中的飞机瞬间甩头。
+	landingTurnRateSmoothingRate = 0.08
 )
 
 // landingStagingLeg 是 landing_staging 内部的两段引导，不对外增加飞行阶段。
@@ -56,6 +60,7 @@ func (p *Plane) StartLandingStaging(_ *mapcfg.MapCfg, ship *BattleShip, slot int
 	p.landingStagingLeg = landingStagingLegLeadIn
 	p.landingCarrierRotation = ship.CurRotation
 	p.landingCarrierTurnRate = 0
+	p.landingDisplayTurnRate = 0
 	p.resetLandingRunPlan()
 	p.updateLandingStagingEndPos(ship)
 }
@@ -308,12 +313,18 @@ func (p *Plane) landingRelativeSpeed(ship *BattleShip) float64 {
 	)
 }
 
-// updateLandingCarrierTurnRate 记录航母单个模拟帧内的实际航向变化。
+// updateLandingCarrierTurnRate 记录航母单个模拟帧内的实际航向变化，
+// 并维护机头合成使用的低通转向速率。
 func (p *Plane) updateLandingCarrierTurnRate(ship *BattleShip) {
 	// 使用最短角差跨越 0/360 度，结果以“每模拟帧弧度”保存供 omega×r 使用。
 	delta := math.Mod(ship.CurRotation-p.landingCarrierRotation+540, 360) - 180
-	p.landingCarrierTurnRate = delta * math.Pi / 180
+	turnRate := delta * math.Pi / 180
 	p.landingCarrierRotation = ship.CurRotation
+	// 原始转向速率保留给 staging 自由飞行的速度合成；机头航向只用于表现，
+	// 使用低通后的速率，使转向起止时机头的偏航变化连续平滑。
+	p.landingCarrierTurnRate = turnRate
+	p.landingDisplayTurnRate += (turnRate - p.landingDisplayTurnRate) *
+		min(1, landingTurnRateSmoothingRate*gameSpeedMultiplier())
 }
 
 // UpdateLandingApproach 沿定半径圆弧按等减速推进到最终直线进近起点。
@@ -336,6 +347,8 @@ func (p *Plane) UpdateLandingApproach(ship *BattleShip) bool {
 	)
 
 	arcPos := landingArcPoint(p.landingArc, timeProgress)
+	// 机头航向使用低通转向速率合成：位置已硬绑定随舰旋转的圆弧，
+	// 若跟随含原始 omega×r 的合成航向，转向起止时机会瞬间甩动数十度。
 	p.advanceLandingAnimation(
 		ship,
 		arcPos.forward,
@@ -344,7 +357,7 @@ func (p *Plane) UpdateLandingApproach(ship *BattleShip) bool {
 			p.landingArc,
 			ship,
 			timeProgress,
-			p.landingCarrierTurnRate,
+			p.landingDisplayTurnRate,
 		),
 	)
 	return timeProgress >= 1
@@ -371,6 +384,7 @@ func (p *Plane) UpdateLandingDeck(ship *BattleShip) bool {
 	forwardRatio := end.forward + p.landingRunTangent.forward*(p.landingRunDistance/length)
 	lateralRatio := end.lateral + p.landingRunTangent.lateral*(p.landingRunDistance/length)
 	p.FlightPhaseEndPos = carrierLandingDeckEndPos(ship)
+	// 与圆弧段一致，机头航向使用低通转向速率合成，转向时机头贴合甲板进近线
 	p.advanceLandingAnimation(
 		ship,
 		forwardRatio,
@@ -380,7 +394,7 @@ func (p *Plane) UpdateLandingDeck(ship *BattleShip) bool {
 			forwardRatio,
 			lateralRatio,
 			p.landingRunSpeed,
-			p.landingCarrierTurnRate,
+			p.landingDisplayTurnRate,
 		),
 	)
 	return timeProgress >= 1
