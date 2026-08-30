@@ -41,7 +41,11 @@ func TestWeaponRowsHideUnequippedAndReportMixedState(t *testing.T) {
 
 func TestWeaponActionEnablesMixedSelectionAndIgnoresUnequipped(t *testing.T) {
 	first := &objUnit.BattleShip{Uid: "a", CurHP: 1, Weapon: objUnit.ShipWeapon{MainGuns: []*objUnit.Gun{{}}}}
-	second := &objUnit.BattleShip{Uid: "b", CurHP: 1, Weapon: objUnit.ShipWeapon{MainGuns: []*objUnit.Gun{{}}, MainGunDisabled: true}}
+	second := &objUnit.BattleShip{
+		Uid:    "b",
+		CurHP:  1,
+		Weapon: objUnit.ShipWeapon{MainGuns: []*objUnit.Gun{{}}, MainGunDisabled: true},
+	}
 	third := &objUnit.BattleShip{Uid: "c", CurHP: 1}
 	missionState := panelTestState(first, second, third)
 

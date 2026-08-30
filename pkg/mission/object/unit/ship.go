@@ -102,6 +102,8 @@ type BattleShip struct {
 	Length float64 `json:"length"`
 	// 战舰宽度
 	Width float64 `json:"width"`
+	// 尾流船体；空则只在中线按舰宽生成舰艏/舰艉两点
+	WakeHulls []WakeHull `json:"wakeHulls"`
 	// 舰体费（不含舰载机）
 	FundsCost int64 `json:"fundsCost"`
 	// 耗时
@@ -331,27 +333,85 @@ func (s *BattleShip) GenTrails() []*objTrail.Trail {
 		return []*objTrail.Trail{}
 	}
 
-	offset := s.Length / constants.MapBlockSize
 	sinVal := math.Sin(s.CurRotation * math.Pi / 180)
 	cosVal := math.Cos(s.CurRotation * math.Pi / 180)
+	hulls := s.resolvedWakeHulls()
+	trails := make([]*objTrail.Trail, 0, len(hulls)*2)
+	for _, hull := range hulls {
+		trails = append(trails, s.emitHullWake(hull, sinVal, cosVal)...)
+	}
+	return trails
+}
 
-	frontPos, backPos := s.CurPos.Copy(), s.CurPos.Copy()
-	frontPos.AddRx(sinVal * offset * 0.25)
-	frontPos.SubRy(cosVal * offset * 0.25)
-	backPos.SubRx(sinVal * offset * 0.2)
-	backPos.AddRy(cosVal * offset * 0.2)
+// WakeHull 一条用于生成水面尾流的船体中心线。
+type WakeHull struct {
+	// 距舰体中线的横向偏移（米），右舷为正
+	Lateral float64 `json:"lateral"`
+	// 该船体尾流宽度（米）；0 则使用舰 width
+	Width float64 `json:"width"`
+	// 舰艏采样点：中点向前的舰长比例，默认 0.25
+	Front float64 `json:"front"`
+	// 舰艉采样点：中点向后的舰长比例，默认 -0.20
+	Back float64 `json:"back"`
+}
 
+func (s *BattleShip) resolvedWakeHulls() []WakeHull {
+	if len(s.WakeHulls) == 0 {
+		return []WakeHull{{Width: s.Width, Front: 0.25, Back: -0.20}}
+	}
+	hulls := make([]WakeHull, len(s.WakeHulls))
+	for i, hull := range s.WakeHulls {
+		if hull.Width <= 0 {
+			hull.Width = s.Width
+		}
+		if hull.Front == 0 {
+			hull.Front = 0.25
+		}
+		if hull.Back == 0 {
+			hull.Back = -0.20
+		}
+		hulls[i] = hull
+	}
+	return hulls
+}
+
+func (s *BattleShip) hullWakeLength(hull WakeHull) float64 {
+	// 单船体仍按整舰长度，避免改掉现有舰的尾流寿命。
+	if len(s.WakeHulls) <= 1 {
+		return s.Length
+	}
+	span := hull.Front - hull.Back
+	if span <= 0 {
+		return s.Length
+	}
+	return s.Length * span
+}
+
+func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objTrail.Trail {
+	lengthCells := s.Length / constants.MapBlockSize
+	lateralCells := hull.Lateral / constants.MapBlockSize
+
+	frontPos := s.CurPos.Copy()
+	frontPos.AddRx(sinVal*lengthCells*hull.Front + cosVal*lateralCells)
+	frontPos.SubRy(cosVal*lengthCells*hull.Front - sinVal*lateralCells)
+
+	backPos := s.CurPos.Copy()
+	backPos.AddRx(sinVal*lengthCells*hull.Back + cosVal*lateralCells)
+	backPos.SubRy(cosVal*lengthCells*hull.Back - sinVal*lateralCells)
+
+	wakeLength := s.hullWakeLength(hull)
+	// 与改造前相同：每船体每帧 2 个白色圆，life 兼透明度，避免大圆高 alpha 叠爆。
 	return []*objTrail.Trail{
 		objTrail.New(
 			frontPos, textureImg.TrailShapeCircle,
-			s.Width*0.6, 1.1,
-			s.Length/8+555*s.CurSpeed, 1,
+			hull.Width*0.6, 1.1,
+			wakeLength/8+555*s.CurSpeed, 1,
 			0, 0, nil,
 		),
 		objTrail.New(
 			backPos, textureImg.TrailShapeCircle,
-			s.Width, 0.6,
-			s.Length/9+380*s.CurSpeed, 1.5,
+			hull.Width, 0.6,
+			wakeLength/9+380*s.CurSpeed, 1.5,
 			0, 0, nil,
 		),
 	}

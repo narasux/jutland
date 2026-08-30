@@ -185,7 +185,11 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // 是否对舰
     antiShip: true,
     // 是否对空
-    antiAircraft: true
+    antiAircraft: true,
+    // 对空近炸触发半径（地图格）；仅编程引信弹药填写，二战直射炮省略
+    proximityRadius: 0.20,
+    // 对空爆炸伤害半径（地图格）；进入近炸后对半径内飞机结算伤害
+    blastRadius: 0.32,
   }
 ]
 ```
@@ -366,6 +370,12 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     length: 220,
     // 宽度（实际宽度，单位：米）
     width: 22,
+    // 可选：多体船尾流船体。不填则只在中线按 width 生成舰艏/舰艉两点。
+    // lateral 为距中线横向偏移（米，右舷为正）；front/back 为距中点的舰长比例。
+    wakeHulls: [
+      { lateral: 0, width: 54, front: 0.25, back: -0.45 },
+      { lateral: 93.5, width: 28, front: 0.08, back: -0.46 },
+    ],
     // 资金消耗
     fundsCost: 150,
     // 增援时间

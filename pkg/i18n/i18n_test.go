@@ -31,7 +31,11 @@ func TestDefaultAndFallbackLanguage(t *testing.T) {
 
 func TestFallbackLanguageOrder(t *testing.T) {
 	require.Equal(t, []Language{LanguageRussian, LanguageEnglish, LanguageZhHans}, FallbackLanguages(LanguageRussian))
-	require.Equal(t, []Language{LanguageJapanese, LanguageEnglish, LanguageZhHans}, FallbackLanguages(LanguageJapanese))
+	require.Equal(
+		t,
+		[]Language{LanguageJapanese, LanguageEnglish, LanguageZhHans},
+		FallbackLanguages(LanguageJapanese),
+	)
 	require.Equal(t, []Language{LanguageEnglish, LanguageZhHans}, FallbackLanguages(LanguageEnglish))
 	require.Equal(t, []Language{LanguageZhHans}, FallbackLanguages(LanguageZhHans))
 }

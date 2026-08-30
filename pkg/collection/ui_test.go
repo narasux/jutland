@@ -198,6 +198,72 @@ func TestShipBlueprintUsesSharedScaleAndKeepsCarrierLengthOrder(t *testing.T) {
 	require.InDelta(t, 275.0/266.0, saratogaLength/essexLength, 0.02)
 }
 
+func TestShipBlueprintWideTopViewDoesNotShrinkSharedScale(t *testing.T) {
+	previousShipMap := objUnit.ShipMap
+	previousShipNames := objUnit.AllShipNames
+	t.Cleanup(func() {
+		objUnit.ShipMap = previousShipMap
+		objUnit.AllShipNames = previousShipNames
+	})
+
+	objUnit.ShipMap = map[string]*objUnit.BattleShip{
+		"midway":  {Name: "midway", Nation: objUnit.NationUS, Type: objUnit.ShipTypeAircraftCarrier},
+		"essex":   {Name: "essex", Nation: objUnit.NationUS, Type: objUnit.ShipTypeAircraftCarrier},
+		"america": {Name: "america", Nation: objUnit.NationUS, Type: objUnit.ShipTypeAircraftCarrier},
+	}
+	objUnit.AllShipNames = []string{"midway", "essex", "america"}
+
+	rect := image.Rect(0, 0, 1100, 360)
+	innerW, innerH, gap := collectionBlueprintInnerSize(rect)
+	halfHeight := collectionBlueprintHalfHeight(innerH, gap)
+	sharedScale := collectionShipBlueprintScale(rect)
+	require.Positive(t, sharedScale)
+
+	cvxTop := shipImg.GetTop("america", 4)
+	cvxSide := shipImg.GetSide("america", 4)
+	midwayTop := shipImg.GetTop("midway", 4)
+	midwaySide := shipImg.GetSide("midway", 4)
+	require.NotNil(t, cvxTop)
+	require.NotNil(t, midwayTop)
+
+	wideFit := collectionImageFitScale(cvxTop, innerW, halfHeight, 90, false)
+	packedFit := collectionShipBlueprintFitScale(cvxSide, cvxTop, innerW, innerH, gap)
+	require.Positive(t, wideFit)
+	require.Positive(t, packedFit)
+	require.Greater(t, packedFit, wideFit)
+	require.Greater(t, sharedScale, wideFit*1.5)
+
+	midwayShip := objUnit.ShipMap["midway"]
+	cvxShip := objUnit.ShipMap["america"]
+	midwayScale := collectionShipBlueprintDrawScale(
+		sharedScale, midwayShip, midwaySide, midwayTop, innerW, innerH, gap,
+	)
+	cvxScale := collectionShipBlueprintDrawScale(
+		sharedScale, cvxShip, cvxSide, cvxTop, innerW, innerH, gap,
+	)
+
+	require.InDelta(t, sharedScale, midwayScale, 1e-9)
+	require.InDelta(t, packedFit, cvxScale, 1e-9)
+	require.Less(t, cvxScale, sharedScale)
+
+	midwayLength := float64(midwayTop.Bounds().Dy()) * midwayScale
+	legacyMidwayLength := float64(midwayTop.Bounds().Dy()) * wideFit
+	require.Greater(t, midwayLength, legacyMidwayLength*1.5)
+}
+
+func TestShipBlueprintViewGapGrowsWhenSpaceAllows(t *testing.T) {
+	_, innerH, minGap := collectionBlueprintInnerSize(image.Rect(0, 0, 1100, 360))
+	require.GreaterOrEqual(t, minGap, collectionBlueprintMinGap)
+	require.InDelta(t, minGap, collectionBlueprintMinViewGap(innerH), 1e-9)
+
+	require.InDelta(t, minGap, collectionBlueprintViewGap(innerH, 100, innerH-100-minGap, minGap), 1e-9)
+
+	roomy := collectionBlueprintViewGap(400, 40, 36, minGap)
+	require.Greater(t, roomy, minGap)
+	require.Less(t, roomy, 400.0-40.0-36.0)
+	require.LessOrEqual(t, roomy, 400.0*0.24)
+}
+
 func TestMovePlaneTypeSkipsEmptyTypesAndResetsPosition(t *testing.T) {
 	previousPlaneMap := objUnit.PlaneMap
 	previousPlaneNames := objUnit.AllPlaneNames

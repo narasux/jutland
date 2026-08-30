@@ -2524,6 +2524,7 @@
         belongPlayer: "HA",
         maxOncomingShip: 10,
         providedShipNames: [
+          "america",
           "midway",
           "illinois",
           "yorktown",
@@ -3107,6 +3108,12 @@
         belongPlayer: "HA"
       },
       // === US CV ===
+      {
+        name: "america",
+        pos: [28, 45],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
       {
         name: "midway",
         pos: [32, 45],

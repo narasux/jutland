@@ -397,7 +397,7 @@ func (m *MissionManager) updateShotBullets() {
 		return false
 	}
 
-	// resolveRocketDamage 处理火箭近炸破片范围伤害，并创建局部爆炸效果。
+	// resolveRocketDamage 处理火箭及对空编程炮弹的近炸破片范围伤害。
 	resolveRocketDamage := func(bt *objBullet.Bullet) {
 		for _, plane := range m.state.Arena.Planes {
 			if bt.Shooter == plane.Uid {
@@ -426,7 +426,7 @@ func (m *MissionManager) updateShotBullets() {
 
 	arrivedBullets, forwardingBullets := []*objBullet.Bullet{}, []*objBullet.Bullet{}
 	for _, bt := range m.state.Arena.ForwardingBullets {
-		if bt.Type == objBullet.TypeRocket && bt.TargetObjType == object.TypePlane {
+		if bt.HasAirburst() {
 			if rocketShouldExplode(bt) {
 				resolveRocketDamage(bt)
 				arrivedBullets = append(arrivedBullets, bt)

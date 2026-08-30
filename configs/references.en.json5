@@ -1149,6 +1149,33 @@
     ],
   },
   {
+    name: "america",
+    displayName: "USS America",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x1 155mm/62 Mk51",
+      },
+      {
+        label: "Dual-purpose Guns",
+        value: "4x1 76mm/62 SR",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x1 20mm/99 Mk15B1B",
+      },
+    ],
+    description: "CVX-100 USS America is a fictional fusion-powered trimaran supercarrier by bagera3005, laid down 22 June 2024 and commissioned 4 July 2030. The drawing’s 100-metre scale bar yields about 493 m length and a 54 m centre-hull beam; the posted 3,092 ft and 10,000 tons do not match. Displacement is estimated at about 230,000 tons. No air group is fitted yet.",
+    author: "bagera3005",
+    links: [
+      {
+        name: "DeviantArt - CVX-100 USS America",
+        url: "https://www.deviantart.com/bagera3005/art/CVX-100-USS-America-85696387",
+      },
+    ],
+  },
+  {
     name: "D3A1",
     displayName: "D3A Type 99",
     armaments: [
@@ -6380,6 +6407,20 @@
     links: [],
   },
   {
+    name: "US/155/62/MK51",
+    displayName: "155mm/62 Advanced Gun System Mk51",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy 155 mm/62 Mark 51 Advanced Gun System is a single-barrel, fully automatic, liquid-cooled naval gun with a sustained rate of 10 rpm. The game uses the unguided ballistic long-range projectile of about 90 kg, 825 m/s muzzle velocity, and 44 km surface range, not the unaffordable 150 km LRLAP guided round.",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 155 mm/62 Mark 51 AGS",
+        url: "https://www.navweaps.com/Weapons/WNUS_61-62_ags.php",
+      },
+    ],
+  },
+  {
     name: "US/152/47/3/MK16",
     displayName: "152mm/47 Triple Mount Mk16",
     type: "Weapon",
@@ -6405,6 +6446,20 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "US/20/99/MK15B1B",
+    displayName: "20mm/99 Phalanx CIWS Block 1B",
+    type: "Weapon",
+    armaments: [],
+    description: "The Mk 15 Phalanx Block 1B close-in weapon system uses a six-barrel 20 mm/99 Optimized Gun Barrel gatling selectable at 3,000 or 4,500 rpm and fires Mk 244 ELC tungsten APDS. Maximum range is about 5.5 km, with typical engagement around 1.5 km; the Block 1B FLIR also supports surface-mode fire against small craft.",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 20 mm Phalanx CIWS",
+        url: "https://www.navweaps.com/Weapons/WNUS_Phalanx.php",
+      },
+    ],
   },
   {
     name: "US/203/55/2/MK9",
@@ -6680,6 +6735,20 @@
     description: "A high-rate-of-fire U.S. twin 3-inch/70 anti-aircraft mounting represented here as the medium battery planned for the September 1945 CL-154 design.",
     author: "",
     links: [],
+  },
+  {
+    name: "US/76/62/SR",
+    displayName: "76mm/62 Super Rapid Dual-Purpose Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "Leonardo’s 76/62 Super Rapid is a single-barrel dual-purpose gun with a selectable rate of fire up to 120 rpm and about 925 m/s muzzle velocity. Against aircraft it fires programmable proximity-fragmentation shells (PFF / 3AP) that burst near the target and deal area damage, like AA rockets; surface fire remains a direct hit. Range follows the 16 km standard round, not SAPOMER or Vulcano.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - OTO Melara 76 mm",
+        url: "https://en.wikipedia.org/wiki/OTO_Melara_76_mm",
+      },
+    ],
   },
   {
     name: "US/AIR/RB/127/4",

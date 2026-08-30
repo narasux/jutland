@@ -56,7 +56,11 @@ func TestTargetButtonProducesExplicitCenterActionWithoutChangingFocus(t *testing
 }
 
 func TestAircraftActionIgnoresShipsWithoutAircraft(t *testing.T) {
-	carrier := &objUnit.BattleShip{Uid: "carrier", CurHP: 1, Aircraft: objUnit.ShipAircraft{HasPlane: true, Disable: true}}
+	carrier := &objUnit.BattleShip{
+		Uid:      "carrier",
+		CurHP:    1,
+		Aircraft: objUnit.ShipAircraft{HasPlane: true, Disable: true},
+	}
 	escort := &objUnit.BattleShip{Uid: "escort", CurHP: 1}
 	missionState := panelTestState(carrier, escort)
 	action := New().aircraftAction(missionState)

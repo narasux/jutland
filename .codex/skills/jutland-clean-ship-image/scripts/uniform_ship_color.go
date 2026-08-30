@@ -220,5 +220,12 @@ func main() {
 		}
 	}
 
-	fmt.Printf("size=%dx%d target_color=%s changed_pixels=%d output=%s\n", bounds.Dx(), bounds.Dy(), *targetColor, changed, *output)
+	fmt.Printf(
+		"size=%dx%d target_color=%s changed_pixels=%d output=%s\n",
+		bounds.Dx(),
+		bounds.Dy(),
+		*targetColor,
+		changed,
+		*output,
+	)
 }

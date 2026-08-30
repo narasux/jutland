@@ -100,10 +100,15 @@ type Bullet struct {
 	CriticalType CriticalType
 	// 击中的对象类型
 	HitObjType object.Type
-	// 近炸触发半径，仅火箭弹使用
+	// 近炸触发半径，火箭弹与对空编程炮弹使用
 	ProximityRadius float64
-	// 爆炸伤害半径，仅火箭弹使用
+	// 爆炸伤害半径，火箭弹与对空编程炮弹使用
 	BlastRadius float64
+}
+
+// HasAirburst 对空近炸破片：火箭弹及编程引信炮弹共用结算。
+func (b *Bullet) HasAirburst() bool {
+	return b.BlastRadius > 0 && b.TargetObjType == object.TypePlane
 }
 
 // Forward 弹药前进

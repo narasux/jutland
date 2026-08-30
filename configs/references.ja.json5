@@ -1149,6 +1149,33 @@
     ],
   },
   {
+    name: "america",
+    displayName: "アメリカ",
+    type: "空母",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x1 155mm/62 Mk51",
+      },
+      {
+        label: "両用砲",
+        value: "4x1 76mm/62 SR",
+      },
+      {
+        label: "対空砲",
+        value: "8x1 20mm/99 Mk15B1B",
+      },
+    ],
+    description: "CVX-100 アメリカは bagera3005 による架空の核融合三胴スーパーキャリアで、2024年6月22日起工、2030年7月4日就役。原図の100mスケールから全長約493m、中央船体幅約54mと読める。作者記載の3092フィートと排水量1万トンはスケールと一致しないため、喫水と方形係数から約23万トンとした。艦載機は未搭載。",
+    author: "bagera3005",
+    links: [
+      {
+        name: "DeviantArt - CVX-100 USS America",
+        url: "https://www.deviantart.com/bagera3005/art/CVX-100-USS-America-85696387",
+      },
+    ],
+  },
+  {
     name: "D3A1",
     displayName: "D3A 九九式艦爆",
     armaments: [
@@ -6380,6 +6407,20 @@
     links: [],
   },
   {
+    name: "US/155/62/MK51",
+    displayName: "155mm/62 Mk51 先進艦砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の155mm/62 Mark 51 先進艦砲（AGS）。単装の全自動水冷砲で、持続射速は毎分10発。ゲームでは無誘導の長射程弾（約90kg、初速825m/s、対水上射程約44km）を用い、高価で射程約150kmのLRLAP誘導弾は採用しない。",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 155 mm/62 Mark 51 AGS",
+        url: "https://www.navweaps.com/Weapons/WNUS_61-62_ags.php",
+      },
+    ],
+  },
+  {
     name: "US/152/47/3/MK16",
     displayName: "152mm/47 Mk16 三連装砲",
     type: "兵器",
@@ -6405,6 +6446,20 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "US/20/99/MK15B1B",
+    displayName: "20mm/99 ファランクス Block 1B",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍 Mk 15 ファランクス Block 1B 近接防御システム。20mm/99 の長砲身最適化ガトリング6門で、射速は毎分3000または4500発、弾薬は Mk 244 ELC タングステン徹甲弾。最大射程約5.5km、有効交戦約1.5km。Block 1B の赤外線光学は小型水上目標にも対応する。",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 20 mm Phalanx CIWS",
+        url: "https://www.navweaps.com/Weapons/WNUS_Phalanx.php",
+      },
+    ],
   },
   {
     name: "US/203/55/2/MK9",
@@ -6680,6 +6735,20 @@
     description: "米海軍が計画した高発射速度の 3インチ/70 連装対空砲。本作では 1945年9月の CL-154 級案の中口径対空砲として再現する。",
     author: "",
     links: [],
+  },
+  {
+    name: "US/76/62/SR",
+    displayName: "76mm/62 Super Rapid 速射砲",
+    type: "兵器",
+    armaments: [],
+    description: "Leonardo 76/62 Super Rapid は単装の両用速射砲で、射速は最大毎分120発、初速は約925m/s。対空ではプログラム近接信管の破片弾（PFF / 3AP）を使い、航空機に接近すると空爆して範囲ダメージを与える。対水上は直撃判定のまま。射程は標準弾の16kmで、SAPOMER や Vulcano 誘導弾は使わない。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - OTO Melara 76 mm",
+        url: "https://en.wikipedia.org/wiki/OTO_Melara_76_mm",
+      },
+    ],
   },
   {
     name: "US/AIR/RB/127/4",

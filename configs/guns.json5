@@ -370,6 +370,19 @@
     antiShip: true,
     antiAircraft: true,
   },
+  // 美国海军 155 mm/62 Mark 51 先进舰炮（AGS，单管；对海用无制导弹 44 km、10 rpm）
+  {
+    name: "US/155/62/MK51",
+    bulletName: "US/GB/155/2010",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 44,
+    bulletSpread: 40,
+    bulletSpeed: 825,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 US/127/38/MK12 双联装舰炮
   {
     name: "US/127/51/MK7",
@@ -525,6 +538,21 @@
     antiShip: true,
     antiAircraft: true
   },
+  // Leonardo 76/62 Super Rapid：对空用编程近炸，半径对齐火箭炮量级
+  {
+    name: "US/76/62/SR",
+    bulletName: "US/GB/76/1988",
+    bulletCount: 1,
+    reloadTime: 0.25,
+    range: 16,
+    bulletSpread: 25,
+    bulletSpeed: 925,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: true,
+    proximityRadius: 0.20,
+    blastRadius: 0.32,
+  },
   // 美国海军 US/40/60/4 四联装装高炮
   {
     name: "US/40/60/4",
@@ -600,6 +628,19 @@
     bulletSpread: 20,
     bulletSpeed: 910,
     fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 美国海军 Mk 15 Phalanx Block 1B，20 mm/99 六管加特林；4500 rpm 一轮约 0.08 s
+  {
+    name: "US/20/99/MK15B1B",
+    bulletName: "US/GB/20/2008",
+    bulletCount: 6,
+    reloadTime: 0.08,
+    range: 5.5,
+    bulletSpread: 12,
+    bulletSpeed: 1110,
+    fundsCost: 10,
     antiShip: true,
     antiAircraft: true
   },

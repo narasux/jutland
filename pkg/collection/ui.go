@@ -725,11 +725,119 @@ func (c *CollectionUI) resize(width, height int) {
 	c.buildUI()
 }
 
+const collectionBlueprintMinGap = 40.0
+
+func collectionBlueprintMinViewGap(innerH float64) float64 {
+	if innerH <= 0 {
+		return 0
+	}
+	// 素材贴边时固定 12px 看起来像黏在一起；按画布高度留出可见间隔。
+	return max(collectionBlueprintMinGap, innerH*0.12)
+}
+
+func collectionBlueprintInnerSize(rect image.Rectangle) (innerW, innerH, gap float64) {
+	innerW = float64(rect.Dx() - 48)
+	innerH = float64(rect.Dy() - 36)
+	gap = collectionBlueprintMinViewGap(innerH)
+	return innerW, innerH, gap
+}
+
+// collectionBlueprintViewGap 侧视与俯视的实际间距。
+// 空间紧时只用最小间隔，避免再挤缩放；留白多时把一部分余量放到两图中间。
+func collectionBlueprintViewGap(innerH, sideH, topH, minGap float64) float64 {
+	if sideH <= 0 || topH <= 0 {
+		return 0
+	}
+	leftover := innerH - sideH - topH
+	if leftover <= minGap {
+		return max(0, leftover)
+	}
+	gap := leftover * 0.5
+	if gap < minGap {
+		gap = minGap
+	}
+	// 至少留一点上下边距，并把间隔封顶，避免两图被拆到画布两端。
+	maxGap := leftover - minGap
+	cap := innerH * 0.24
+	return min(gap, maxGap, cap)
+}
+
+func collectionBlueprintHalfHeight(innerH, gap float64) float64 {
+	return (innerH - gap) / 2
+}
+
+func collectionImageLengthFitScale(img *ebiten.Image, innerW float64) float64 {
+	// 俯视图舰艏朝上，Dy 是舰长；公共倍率只按这条长轴约束，避免片体全宽拖死全体舰船。
+	if img == nil || innerW <= 0 {
+		return 0
+	}
+	length := float64(img.Bounds().Dy())
+	if length <= 0 {
+		return 0
+	}
+	return min(1, innerW/length)
+}
+
+func collectionShipBlueprintFitScale(sideImage, topImage *ebiten.Image, innerW, innerH, gap float64) float64 {
+	// 侧视很扁、俯视旋转后可能很宽：两图共用一个倍率，按整块蓝图高度一起排，
+	// 不再各占一半，避免超宽俯视把整舰压得很小、左右留白。
+	sideW, sideH := collectionImageRotatedSize(sideImage, 0)
+	topW, topH := collectionImageRotatedSize(topImage, 90)
+	if sideW <= 0 && topW <= 0 {
+		return 0
+	}
+	scale := 1.0
+	if sideW > 0 {
+		scale = min(scale, innerW/sideW)
+	}
+	if topW > 0 {
+		scale = min(scale, innerW/topW)
+	}
+	contentH := sideH + topH
+	if contentH > 0 && innerH > gap {
+		scale = min(scale, (innerH-gap)/contentH)
+	}
+	if scale <= 0 {
+		return 0
+	}
+	return min(1, scale)
+}
+
+func collectionImageRotatedSize(img *ebiten.Image, rotation float64) (float64, float64) {
+	if img == nil {
+		return 0, 0
+	}
+	width, height := float64(img.Bounds().Dx()), float64(img.Bounds().Dy())
+	if int(math.Mod(math.Abs(rotation), 180)) == 90 {
+		return height, width
+	}
+	return width, height
+}
+
+func collectionShipBlueprintDrawScale(
+	sharedScale float64,
+	ship *objUnit.BattleShip,
+	sideImage, topImage *ebiten.Image,
+	innerW, innerH, gap float64,
+) float64 {
+	fitScale := collectionShipBlueprintFitScale(sideImage, topImage, innerW, innerH, gap)
+	if sharedScale <= 0 || ship == nil ||
+		ship.Nation == objUnit.NationSpecial || ship.Type == objUnit.ShipTypeDefault {
+		// 彩蛋素材没有遵循常规舰船的统一像素比例，继续按自身画布适配。
+		return fitScale
+	}
+	if fitScale <= 0 {
+		return sharedScale
+	}
+	// 超宽舰在自身画布内再缩小，不回头压低其他舰的公共倍率。
+	return min(sharedScale, fitScale)
+}
+
 func collectionShipBlueprintScale(rect image.Rectangle) float64 {
 	// 常规舰船素材约按统一像素比例制作，因此图鉴也必须使用同一个绘制倍率。
-	// 取全体常规舰船都能放入蓝图区的最大倍率，避免切换舰名时各自重新塞满画布。
-	innerW := float64(rect.Dx() - 48)
-	halfHeight := (float64(rect.Dy()-36) - 12) / 2
+	// 公共倍率只按舰长和侧视高度取值，俯视舰宽留给单舰绘制时再 clamp。
+	innerW, innerH, gap := collectionBlueprintInnerSize(rect)
+	halfHeight := collectionBlueprintHalfHeight(innerH, gap)
 	if innerW <= 0 || halfHeight <= 0 {
 		return 0
 	}
@@ -743,7 +851,7 @@ func collectionShipBlueprintScale(rect image.Rectangle) float64 {
 		}
 		for _, candidate := range []float64{
 			collectionImageFitScale(shipImg.GetSide(name, 4), innerW, halfHeight, 0, false),
-			collectionImageFitScale(shipImg.GetTop(name, 4), innerW, halfHeight, 90, false),
+			collectionImageLengthFitScale(shipImg.GetTop(name, 4), innerW),
 		} {
 			if candidate <= 0 {
 				continue
@@ -1446,22 +1554,35 @@ func (c *CollectionUI) drawShipBlueprint(screen *ebiten.Image, ship *objUnit.Bat
 	)
 
 	innerX, innerY := float64(rect.Min.X+24), float64(rect.Min.Y+18)
-	innerW, innerH := float64(rect.Dx()-48), float64(rect.Dy()-36)
-	halfHeight := (innerH - 12) / 2
+	innerW, innerH, minGap := collectionBlueprintInnerSize(rect)
 	sideImage := shipImg.GetSide(ship.Name, 4)
 	topImage := shipImg.GetTop(ship.Name, 4)
-	sharedScale := c.shipBlueprintScale
-	if sharedScale <= 0 || ship.Nation == objUnit.NationSpecial || ship.Type == objUnit.ShipTypeDefault {
-		// 彩蛋素材没有遵循常规舰船的统一像素比例，继续按自身画布适配。
-		sharedScale = min(
-			collectionImageFitScale(sideImage, innerW, halfHeight, 0, false),
-			collectionImageFitScale(topImage, innerW, halfHeight, 90, false),
-		)
-	}
-	c.drawer.drawCollectionImageScaled(screen, sideImage, innerX, innerY, innerW, halfHeight, 0, sharedScale)
-	c.drawer.drawCollectionImageScaled(
-		screen, topImage, innerX, innerY+halfHeight+12, innerW, halfHeight, 90, sharedScale,
+	scale := collectionShipBlueprintDrawScale(
+		c.shipBlueprintScale, ship, sideImage, topImage, innerW, innerH, minGap,
 	)
+	_, sideH := collectionImageRotatedSize(sideImage, 0)
+	_, topH := collectionImageRotatedSize(topImage, 90)
+	sideH *= scale
+	topH *= scale
+	gap := collectionBlueprintViewGap(innerH, sideH, topH, minGap)
+	contentH := sideH + topH
+	if sideH > 0 && topH > 0 {
+		contentH += gap
+	}
+	startY := innerY
+	if innerH > contentH {
+		startY += (innerH - contentH) / 2
+	}
+	if sideH > 0 {
+		c.drawer.drawCollectionImageScaled(screen, sideImage, innerX, startY, innerW, sideH, 0, scale)
+	}
+	if topH > 0 {
+		topY := startY + sideH
+		if sideH > 0 {
+			topY += gap
+		}
+		c.drawer.drawCollectionImageScaled(screen, topImage, innerX, topY, innerW, topH, 90, scale)
+	}
 }
 
 func (c *CollectionUI) drawShipArchive(screen *ebiten.Image, ship *objUnit.BattleShip) {
@@ -2052,6 +2173,7 @@ func planeWeaponLines(plane *objUnit.Plane) []string {
 	}
 	return lines
 }
+
 func (c *CollectionUI) refreshShipAbilityScales() {
 	// 舰船雷达只和当前国籍、舰种筛选结果比较；舰名选择不会改变比较池。
 	ships := c.filteredShips()

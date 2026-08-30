@@ -211,14 +211,22 @@ func componentInAnyBox(comp component, boxes []box) bool {
 		return true
 	}
 	for _, current := range boxes {
-		if comp.minX >= current.minX && comp.maxX <= current.maxX && comp.minY >= current.minY && comp.maxY <= current.maxY {
+		if comp.minX >= current.minX && comp.maxX <= current.maxX && comp.minY >= current.minY &&
+			comp.maxY <= current.maxY {
 			return true
 		}
 	}
 	return false
 }
 
-func removeLargeComponents(img *image.NRGBA, components []component, minArea int, boxes []box, min uint8, maxSpread uint8) (int, int) {
+func removeLargeComponents(
+	img *image.NRGBA,
+	components []component,
+	minArea int,
+	boxes []box,
+	min uint8,
+	maxSpread uint8,
+) (int, int) {
 	if minArea <= 0 {
 		return 0, 0
 	}
@@ -345,7 +353,13 @@ func writePreviews(output string, img *image.NRGBA) error {
 	}
 
 	dark := image.NewNRGBA(bounds)
-	draw.Draw(dark, dark.Bounds(), &image.Uniform{C: color.NRGBA{R: 28, G: 18, B: 42, A: 255}}, image.Point{}, draw.Src)
+	draw.Draw(
+		dark,
+		dark.Bounds(),
+		&image.Uniform{C: color.NRGBA{R: 28, G: 18, B: 42, A: 255}},
+		image.Point{},
+		draw.Src,
+	)
 	draw.Draw(dark, dark.Bounds(), img, image.Point{}, draw.Over)
 	return savePNG(strings.TrimSuffix(output, filepath.Ext(output))+".preview-dark.png", dark)
 }
@@ -382,11 +396,23 @@ func main() {
 	edgeMin := flag.Int("edge-min", 245, "minimum RGB channel value for edge-connected background")
 	componentMin := flag.Int("component-min", 245, "minimum RGB channel value for residual near-white components")
 	maxSpread := flag.Int("max-spread", 12, "maximum RGB channel spread for low-saturation near-white pixels")
-	removeEnclosedMinArea := flag.Int("remove-enclosed-min-area", 0, "remove residual near-white components with at least this many pixels; 0 disables")
+	removeEnclosedMinArea := flag.Int(
+		"remove-enclosed-min-area",
+		0,
+		"remove residual near-white components with at least this many pixels; 0 disables",
+	)
 	componentLimit := flag.Int("component-limit", 40, "number of largest residual components to print")
-	analyzeOnly := flag.Bool("analyze-only", false, "print residual near-white components after edge cleanup without writing files")
+	analyzeOnly := flag.Bool(
+		"analyze-only",
+		false,
+		"print residual near-white components after edge cleanup without writing files",
+	)
 	previews := flag.Bool("previews", false, "write checker and dark-background previews when output is written")
-	backupBeforeAggressive := flag.Bool("backup-before-aggressive", false, "copy an existing output before enclosed-component cleanup")
+	backupBeforeAggressive := flag.Bool(
+		"backup-before-aggressive",
+		false,
+		"copy an existing output before enclosed-component cleanup",
+	)
 	var removeBoxes boxFlags
 	flag.Var(&removeBoxes, "remove-box", "limit enclosed component removal to a box minX,minY,maxX,maxY; repeatable")
 	flag.Parse()
@@ -394,7 +420,8 @@ func main() {
 	if *input == "" {
 		log.Fatal("-input is required")
 	}
-	if *edgeMin < 0 || *edgeMin > 255 || *componentMin < 0 || *componentMin > 255 || *maxSpread < 0 || *maxSpread > 255 {
+	if *edgeMin < 0 || *edgeMin > 255 || *componentMin < 0 || *componentMin > 255 || *maxSpread < 0 ||
+		*maxSpread > 255 {
 		log.Fatal("threshold values must be in 0..255")
 	}
 
@@ -428,7 +455,14 @@ func main() {
 				fmt.Printf("backup_before_aggressive_cleanup=%s\n", backup)
 			}
 		}
-		removedComponents, removedPixels = removeLargeComponents(img, components, *removeEnclosedMinArea, removeBoxes, uint8(*componentMin), uint8(*maxSpread))
+		removedComponents, removedPixels = removeLargeComponents(
+			img,
+			components,
+			*removeEnclosedMinArea,
+			removeBoxes,
+			uint8(*componentMin),
+			uint8(*maxSpread),
+		)
 	}
 
 	if err := savePNG(outPath, img); err != nil {
@@ -440,5 +474,10 @@ func main() {
 		}
 	}
 
-	fmt.Printf("output=%s removed_enclosed_components=%d removed_enclosed_pixels=%d\n", outPath, removedComponents, removedPixels)
+	fmt.Printf(
+		"output=%s removed_enclosed_components=%d removed_enclosed_pixels=%d\n",
+		outPath,
+		removedComponents,
+		removedPixels,
+	)
 }

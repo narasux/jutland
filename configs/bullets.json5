@@ -72,6 +72,14 @@
     damage: 450,
     criticalRate: 0.01
   },
+  // 155 mm/62 AGS 无制导远程弹，约 90 kg
+  {
+    name: "US/GB/155/2010",
+    type: "shell",
+    diameter: 155,
+    damage: 270,
+    criticalRate: 0.006
+  },
   {
     name: "US/GB/152/1939",
     type: "shell",
@@ -93,6 +101,14 @@
     damage: 35,
     criticalRate: 0.001
   },
+  // Leonardo 76/62 对空编程破片弹（PFF / 3AP），对空按近炸杀伤而不是弹重公式
+  {
+    name: "US/GB/76/1988",
+    type: "shell",
+    diameter: 76,
+    damage: 40,
+    criticalRate: 0.001
+  },
   {
     name: "US/GB/40/1930",
     type: "shell",
@@ -112,6 +128,14 @@
     type: "shell",
     diameter: 20,
     damage: 1.2,
+    criticalRate: 0.0001
+  },
+  // Phalanx Mk 244 ELC，钨合金穿甲弹芯约 0.15 kg；伤害按现有 20 mm 尺度随弹芯质量上调
+  {
+    name: "US/GB/20/2008",
+    type: "shell",
+    diameter: 20,
+    damage: 1.8,
     criticalRate: 0.0001
   },
   {

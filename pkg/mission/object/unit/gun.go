@@ -37,6 +37,10 @@ type Gun struct {
 	AntiShip bool `json:"antiShip"`
 	// 能否防空
 	AntiAircraft bool `json:"antiAircraft"`
+	// 对空近炸触发半径（地图格）；0 表示二战式直射命中
+	ProximityRadius float64 `json:"proximityRadius"`
+	// 对空爆炸伤害半径（地图格）；仅对空编程弹药使用
+	BlastRadius float64 `json:"blastRadius"`
 	// 相对位置
 	// 0.35 -> 从中心往舰首 35% 舰体长度
 	// -0.3 -> 从中心往舰尾 30% 舰体长度
@@ -140,14 +144,25 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 		// rand.Intn(3) - 1 算方向，rand.Float64() 算距离
 		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
 		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
-		bullets = append(bullets, objBullet.New(
+		bt := objBullet.New(
 			g.BulletName, curPos, pos,
 			shooter.ID(), shooter.ObjType(), shooter.Player(),
 			shotType, enemy.ObjType(), bulletSpeed, life,
-		))
+		)
+		g.applyAirburst(bt, enemy.ObjType())
+		bullets = append(bullets, bt)
 	}
 
 	return bullets
+}
+
+// applyAirburst 对空编程弹药挂上近炸与破片半径，对海仍走直射。
+func (g *Gun) applyAirburst(bt *objBullet.Bullet, target object.Type) {
+	if target != object.TypePlane || g.ProximityRadius <= 0 || g.BlastRadius <= 0 {
+		return
+	}
+	bt.ProximityRadius = g.ProximityRadius
+	bt.BlastRadius = g.BlastRadius
 }
 
 // GunMap 保存按配置名称索引的火炮模板；构造实例时会执行深拷贝。

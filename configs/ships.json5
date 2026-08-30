@@ -284,6 +284,129 @@
   // 航空母舰
   // 美国海军
   {
+    // CVX-100 美利坚号，概念超级航母；舰载机暂不编入
+    name: "america",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 2030,
+    totalHP: 250000,
+    horizontalDamageReduction: 0.45,
+    verticalDamageReduction: 0.35,
+    maxSpeed: 34,
+    acceleration: 0.20,
+    rotateSpeed: 0.42,
+    length: 493,
+    width: 54,
+    // 三体：中央舰体喷点贴近真实舰艉；侧体圆按可见艉宽放大，寿命按该船体前后跨度算。
+    wakeHulls: [
+      { lateral: 0, width: 54, front: 0.25, back: -0.45 },
+      { lateral: 93.5, width: 28, front: 0.08, back: -0.46 },
+      { lateral: -93.5, width: 28, front: 0.08, back: -0.46 },
+    ],
+    fundsCost: 860,
+    timeCost: 165,
+    weapon: {
+      mainGuns: [
+        // 左右舷各一门前向 155 mm/62 Mk51
+        {
+          name: "US/155/62/MK51",
+          posPercent: 0.29,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/155/62/MK51",
+          posPercent: 0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 舰桥前、右、左、后各一门 76/62 Super Rapid
+        {
+          name: "US/76/62/SR",
+          posPercent: -0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "US/76/62/SR",
+          posPercent: -0.43,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/62/SR",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/76/62/SR",
+          posPercent: -0.86,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 密集阵
+        // 主舰体前部左右
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: 0.64,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [300, 360]
+        },
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: 0.64,
+          rightFiringArc: [0, 60],
+          leftFiringArc: [210, 360]
+        },
+        // 舰桥前左右
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: -0.46,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [270, 360]
+        },
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: -0.46,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [200, 360]
+        },
+        // 桅杆左右 TODO 这里其实是海拉姆，后面支持导弹了再换吧
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: -0.72,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: -0.62,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后左右
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: -0.83,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "US/20/99/MK15B1B",
+          posPercent: -0.83,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    }
+  },
+  {
     // 萨拉托加
     name: "saratoga",
     nation: "us",

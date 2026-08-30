@@ -362,6 +362,33 @@
     ],
   },
   {
+    name: "america",
+    displayName: "美利坚号",
+    type: "航空母舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x1 155mm/62 Mk51",
+      },
+      {
+        label: "高平炮",
+        value: "4x1 76mm/62 SR",
+      },
+      {
+        label: "近防炮",
+        value: "8x1 20mm/99 Mk15B1B",
+      },
+    ],
+    description: "CVX-100 美利坚号是 bagera3005 绘制的未来概念超级航母，设定 2024 年 6 月 22 日铺龙骨、2030 年 7 月 4 日下水并服役，核融合动力、履带推进。原图顶部比例尺为 100 米；按此量得全长约 493 米、三体总宽约 255 米、中央舰体宽约 54 米。作者所写 3092 英尺与 1 万吨排水量和比例尺不符，游戏按侧视吃水与方形系数估为约 23 万吨。本配置暂未编入舰载机。",
+    author: "bagera3005",
+    links: [
+      {
+        name: "DeviantArt - CVX-100 USS America",
+        url: "https://www.deviantart.com/bagera3005/art/CVX-100-USS-America-85696387",
+      },
+    ],
+  },
+  {
     name: "princeton",
     displayName: "普林斯顿",
     type: "航空母舰",
@@ -5849,6 +5876,20 @@
     links: [],
   },
   {
+    name: "US/155/62/MK51",
+    displayName: "155mm/62 先进舰炮 Mk51",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 155 毫米/62 Mark 51 先进舰炮（AGS），单管全自动、水冷身管，持续射速 10 发/分。本游戏采用无制导远程弹：弹重约 90 千克、口初速 825 米/秒、对海射程约 44 千米；不使用造价过高、射程约 150 千米的 LRLAP 制导炮弹。",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 155 mm/62 Mark 51 AGS",
+        url: "https://www.navweaps.com/Weapons/WNUS_61-62_ags.php",
+      },
+    ],
+  },
+  {
     name: "US/127/38/2/MK12",
     displayName: "127mm/38 双联装舰炮 Mk12",
     type: "武器",
@@ -5967,6 +6008,20 @@
     links: [],
   },
   {
+    name: "US/76/62/SR",
+    displayName: "76mm/62 速射炮 Super Rapid",
+    type: "武器",
+    armaments: [],
+    description: "Leonardo 76/62 Super Rapid 单管高平两用速射炮，射速可选至 120 发/分，口初速约 925 米/秒。对空使用可编程近炸破片弹（PFF / 3AP），靠近飞机即空爆并造成范围伤害；对海仍按直射命中。射程按标准弹 16 千米，不采用 SAPOMER 或 Vulcano 制导弹。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - OTO Melara 76 mm",
+        url: "https://en.wikipedia.org/wiki/OTO_Melara_76_mm",
+      },
+    ],
+  },
+  {
     name: "US/40/60/4",
     displayName: "40mm/60 四联装高炮",
     type: "武器",
@@ -6010,6 +6065,20 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "US/20/99/MK15B1B",
+    displayName: "20mm/99 密集阵 Block 1B",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 Mk 15 Phalanx Block 1B 近防系统，采用加长的 20 毫米/99 优化身管六管加特林，射速可选 3000 或 4500 发/分，配 Mk 244 ELC 钨合金穿甲弹。最大射程约 5.5 千米，有效交战约 1.5 千米；Block 1B 红外光电可对水面小目标射击。",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 20 mm Phalanx CIWS",
+        url: "https://www.navweaps.com/Weapons/WNUS_Phalanx.php",
+      },
+    ],
   },
   {
     name: "US/20/70",

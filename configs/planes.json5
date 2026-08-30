@@ -1090,7 +1090,7 @@
     fundsCost: 28,
     timeCost: 10,
     tonnage: 5.7,
-    range: 3038,
+    range: 1852,
     weapon: {
       guns: [
         {

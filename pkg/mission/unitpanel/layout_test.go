@@ -150,7 +150,13 @@ func singleShipState() *state.MissionState {
 		Interaction: state.MissionInteractionState{SelectedShips: []string{"ship"}, FocusedShipUid: "ship"},
 		Arena: state.MissionArenaState{
 			Ships: map[string]*objUnit.BattleShip{
-				"ship": {Uid: "ship", Name: "bismarck", Type: objUnit.ShipTypeBattleShip, TotalHP: 10_000, CurHP: 8_200},
+				"ship": {
+					Uid:     "ship",
+					Name:    "bismarck",
+					Type:    objUnit.ShipTypeBattleShip,
+					TotalHP: 10_000,
+					CurHP:   8_200,
+				},
 			},
 			Planes: map[string]*objUnit.Plane{},
 		},

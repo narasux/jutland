@@ -47,8 +47,12 @@ func TestValidateLocalesAllowsLocalizedSourceURLs(t *testing.T) {
 
 func TestValidateLocalesRequiresEveryFormalLanguage(t *testing.T) {
 	locales := map[i18n.Language][]Reference{
-		i18n.LanguageZhHans:  {{Name: "test", DisplayName: "测试", Links: []Link{{Name: "来源", URL: "https://example.com/test"}}}},
-		i18n.LanguageEnglish: {{Name: "test", DisplayName: "Test", Links: []Link{{Name: "Source", URL: "https://example.com/test"}}}},
+		i18n.LanguageZhHans: {
+			{Name: "test", DisplayName: "测试", Links: []Link{{Name: "来源", URL: "https://example.com/test"}}},
+		},
+		i18n.LanguageEnglish: {
+			{Name: "test", DisplayName: "Test", Links: []Link{{Name: "Source", URL: "https://example.com/test"}}},
+		},
 	}
 
 	err := ValidateLocales(locales)

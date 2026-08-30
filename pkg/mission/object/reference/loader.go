@@ -94,7 +94,13 @@ func validateReferences(references []Reference, locale string) (map[string]Refer
 			}
 			parsed, err := url.ParseRequestURI(link.URL)
 			if err != nil || (parsed.Scheme != "http" && parsed.Scheme != "https") {
-				return nil, fmt.Errorf("%s reference %q link %d has invalid URL %q", locale, ref.Name, linkIdx, link.URL)
+				return nil, fmt.Errorf(
+					"%s reference %q link %d has invalid URL %q",
+					locale,
+					ref.Name,
+					linkIdx,
+					link.URL,
+				)
 			}
 		}
 		byName[ref.Name] = ref
