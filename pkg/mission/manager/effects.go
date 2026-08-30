@@ -40,6 +40,12 @@ func (m *MissionManager) updateObjectTrails() {
 			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
 		}
 	}
+	// 着水滑跑中的水上飞机产生水面尾流（泡沫 + 水痕）
+	for _, plane := range m.state.Arena.Planes {
+		if trails := plane.GenWaterWakeTrails(); trails != nil {
+			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
+		}
+	}
 	// 消亡中的飞机生成火焰 + 黑烟尾流（拉烟效果）
 	for _, plane := range m.state.Arena.DestroyedPlanes {
 		if plane.CurSpeed <= 0 {

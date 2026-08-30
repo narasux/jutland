@@ -1,0 +1,109 @@
+[
+  // 航母起降甲板模板。
+  // 舰船在 ships.json5 的 aircraft.deck 中按名称引用，缺失会在初始化时报错。
+  // 坐标约定：
+  //   forward        纵向位置，距舰艏的舰长比例（0=舰艏，1=舰尾）
+  //   lateral        横向位置，舰宽比例（0=中线，正=右舷，|0.5| 为舷边，>0.5 为舰外水面）
+  //   runLength      滑跑距离（舰长倍数），飞机飞过该距离后升空
+  //   launchAngle    弹射航向相对舰体航向的偏转角（度），正=右舷
+  //   planeTypes     该起飞点服务机型白名单（fighter/dive_bomber/torpedo_bomber），空=任意
+  //   takeOffTime    该起飞点独立冷却（秒），缺省使用舰船 aircraft.takeOffTime
+  //   landing.mode   着舰方式：deck 甲板回收 / sea 舷侧着水回收
+  //   approachAngle  进近方向相对舰体航向的夹角（度），正=右舷偏转（斜角甲板）
+  //   approachLength 最终直线进近段长度（舰长倍数），现实参考约 4~6，游戏压缩取 3
+  // 二战直通甲板航母：中前部逆风滑跑，舰尾中线直线进近、舰中回收
+  {
+    name: "StraightDeckNoCatapult",
+    takeoffPoints: [
+      {
+        forward: 0.4,
+        lateral: 0,
+        runLength: 0.6
+      }
+    ],
+    landing: {
+      mode: "deck",
+      forward: 0.5,
+      lateral: 0,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // TODO 此处数据不准，需要更新
+  // 现代弹射航母（尼米兹 / 福建舰式）：舰艏双弹射器并行 + 中部重载弹射器，
+  // 长弹射点专供轰炸机 / 鱼雷机；斜角甲板进近，落点偏离中线
+  {
+    name: "modernCatapult",
+    takeoffPoints: [
+      {
+        forward: 0.33,
+        lateral: -0.2,
+        runLength: 0.35,
+        planeTypes: ["fighter"]
+      },
+      {
+        forward: 0.33,
+        lateral: 0.2,
+        runLength: 0.35,
+        planeTypes: ["fighter"]
+      },
+      {
+        forward: 0.55,
+        lateral: -0.2,
+        runLength: 0.45,
+        planeTypes: ["dive_bomber", "torpedo_bomber"]
+      }
+    ],
+    landing: {
+      mode: "deck",
+      forward: 0.62,
+      lateral: -0.22,
+      approachAngle: -9,
+      approachLength: 3
+    }
+  },
+  // 航空战列舰（伊势级式）：后部短飞行甲板，两舷弹射器带外偏角起飞；
+  // 游戏简化：短后甲板视作可着舰，舰尾直线进近，落点靠舰尾避开舰桥
+  {
+    name: "IseAviationBattleship",
+    takeoffPoints: [
+      {
+        forward: 0.68,
+        lateral: -0.32,
+        runLength: 0.4,
+        launchAngle: -30
+      },
+      {
+        forward: 0.68,
+        lateral: 0.32,
+        runLength: 0.4,
+        launchAngle: 30
+      }
+    ],
+    landing: {
+      mode: "deck",
+      forward: 0.75,
+      lateral: 0,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 水上飞机母舰：弹射起飞，飞机返航时降落在舰侧水面并回收
+  {
+    name: "seaplaneTender",
+    takeoffPoints: [
+      {
+        forward: 0.35,
+        lateral: 0,
+        runLength: 0.5
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  }
+]

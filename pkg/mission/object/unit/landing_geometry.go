@@ -8,11 +8,10 @@ import (
 )
 
 const (
-	// carrierLandingFinalStartRatio 是最终直线着舰段起点，位于航母中心后方 1.5 个舰长。
-	carrierLandingFinalStartRatio = -1.5
-
 	// landingStagingBaseForwardRatio 是第一批飞机圆弧入口的纵向位置，单位为舰长。
-	landingStagingBaseForwardRatio = -3.5
+	// 圆弧终点（最终进近段起点）位于着舰点后方 approachLength 个舰长处，
+	// 入口必须保持在终点后方，因此基线取 -5.5 保留约 2 个舰长的圆弧纵深。
+	landingStagingBaseForwardRatio = -5.5
 	// landingStagingWaveStepRatio 是每满一组入口后向舰尾追加的纵向间距，单位为舰长。
 	landingStagingWaveStepRatio = 0.12
 	// landingApproachLanes 是每批左右交错的并行入口数量。
@@ -25,6 +24,13 @@ const (
 	landingLeadInLengthRatio = 1.5
 	// landingLeadInCaptureRadiusRatio 是从远端引导点切换到入口直线段的捕获半径。
 	landingLeadInCaptureRadiusRatio = 0.30
+	// landingLeadInMaxLeadRatio 是 lead-in 前瞻预测点的最大距离，单位为舰长。
+	// 限制预测跨度，避免目标位移估算在急转弯时把瞄准点甩得过远。
+	landingLeadInMaxLeadRatio = 3.0
+	// landingLeadInMotionCaptureFrames 是捕获半径随 lead-in 运动速度放大的折算帧数。
+	landingLeadInMotionCaptureFrames = 12.0
+	// landingGateErrorCorrectionShare 是横向误差较大时每帧至少修正的比例。
+	landingGateErrorCorrectionShare = 0.3
 	// landingGateForwardToleranceRatio 是进入圆弧前允许的纵向位置误差，单位为舰长。
 	landingGateForwardToleranceRatio = 0.25
 	// landingGateLateralToleranceRatio 是进入圆弧前允许的横向位置误差，单位为舰长。
@@ -38,7 +44,7 @@ const (
 	// landingApproachMinFrames 是圆弧进近允许的最短模拟帧数。
 	landingApproachMinFrames = 90.0
 	// landingApproachMaxFrames 是圆弧进近允许的最长模拟帧数。
-	landingApproachMaxFrames = 120.0
+	landingApproachMaxFrames = 180.0
 	// landingApproachSpeedRatio 是推导圆弧动画时长所用的参考速度比例。
 	landingApproachSpeedRatio = 0.40
 )
@@ -59,7 +65,8 @@ type landingApproachArc struct {
 	// startAngle 和 sweepAngle 使用弧度；sweepAngle 的符号表示转弯方向。
 	startAngle float64
 	sweepAngle float64
-	// frames 是动画时长，relativeSpeed 是飞机相对航母的圆弧切向速度。
+	// frames 是参考动画时长，relativeSpeed 是参考圆弧切向速度，
+	// 二者只用于入口引导的目标速度推导；实际进近按距离积分减速推进。
 	frames        float64
 	relativeSpeed float64
 	start         carrierLocalOffset
@@ -91,14 +98,36 @@ func planeCarrierLocalOffset(p *Plane, ship *BattleShip) carrierLocalOffset {
 	}
 }
 
-// carrierLandingFinalStartPos 返回舰尾后 1.5 个舰长处的最终直线着舰起点。
-func carrierLandingFinalStartPos(ship *BattleShip) objPos.MapPos {
-	return carrierRelativePos(ship, carrierLengthInMapBlocks(ship)*carrierLandingFinalStartRatio)
+// landingTouchdownOffset 返回着舰回收点的航母局部地图坐标。
+func landingTouchdownOffset(ship *BattleShip) carrierLocalOffset {
+	return takeoffLandingPos(ship, ship.Aircraft.landingConfig())
 }
 
-// carrierLandingDeckEndPos 返回最终回收点；当前设计固定为甲板中心。
+// landingFinalStartOffset 返回最终直线进近段起点的舰长单位局部坐标。
+// 起点 = 着舰点沿反进近方向后退 approachLength 个舰长，圆弧在此与直线段衔接。
+func landingFinalStartOffset(ship *BattleShip, landing LandingConfig) carrierLocalOffset {
+	length := carrierLengthInMapBlocks(ship)
+	touchdown := takeoffLandingPos(ship, landing)
+	tangent := landingApproachTangent(landing)
+	run := length * landing.ApproachLength
+	return carrierLocalOffset{
+		forward: (touchdown.forward - tangent.forward*run) / length,
+		lateral: (touchdown.lateral - tangent.lateral*run) / length,
+	}
+}
+
+// landingFinalStartPos 返回最终直线进近段起点的地图坐标。
+func landingFinalStartPos(ship *BattleShip) objPos.MapPos {
+	landing := ship.Aircraft.landingConfig()
+	end := landingFinalStartOffset(ship, landing)
+	length := carrierLengthInMapBlocks(ship)
+	return carrierRelativePos2D(ship, end.forward*length, end.lateral*length)
+}
+
+// carrierLandingDeckEndPos 返回最终着舰回收点的地图坐标。
 func carrierLandingDeckEndPos(ship *BattleShip) objPos.MapPos {
-	return ship.CurPos.Copy()
+	touchdown := landingTouchdownOffset(ship)
+	return carrierRelativePos2D(ship, touchdown.forward, touchdown.lateral)
 }
 
 // landingLaneOffsetRatio 将稳定槽位映射到左右交替的 16 条进近通道。
@@ -134,29 +163,46 @@ func landingGateLocalOffset(slot int) carrierLocalOffset {
 	}
 }
 
-// buildLandingApproachArc 构造一条从实际入口汇入舰尾中线的定半径圆弧。
-// 终点切线必须沿 forward 方向，因此圆心的 forward 坐标等于终点；再令圆心到
-// 起点和终点的距离相等，可得 R=(dx²+y²)/(2|y|)。该构造保证整段只向前转弯，
-// 横向偏差单调收敛到 0，不会形成 Bézier 曲线可能出现的反曲。
+// buildLandingApproachArc 构造一条从实际入口汇入最终直线进近段的定半径圆弧。
+// 圆弧终点为最终进近段起点，终点切线沿进近方向（approachAngle 决定），
+// 因此圆心位于终点法向上；再令圆心到起点和终点的距离相等可得 R=|w|²/(2·w·n)。
+// 该构造保证整段只向一侧转弯，横向偏差单调收敛，不会形成反曲。
 func buildLandingApproachArc(
 	start carrierLocalOffset,
-	length, maxSpeed float64,
+	ship *BattleShip,
+	maxSpeed float64,
+	landing LandingConfig,
 ) (landingApproachArc, bool) {
-	end := carrierLocalOffset{forward: carrierLandingFinalStartRatio}
-	side := 1.0
-	if start.lateral < 0 {
-		side = -1
+	length := carrierLengthInMapBlocks(ship)
+	end := landingFinalStartOffset(ship, landing)
+	tangent := landingApproachTangent(landing)
+
+	// 法向量取切线左侧；起点在右侧时翻转到右侧，保证 w·n > 0
+	normal := carrierLocalOffset{forward: -tangent.lateral, lateral: tangent.forward}
+	wf := start.forward - end.forward
+	wl := start.lateral - end.lateral
+	// 起点必须位于终点后方（沿反进近方向），否则无法前向汇入
+	if wf*tangent.forward+wl*tangent.lateral >= -0.001 {
+		return landingApproachArc{}, false
 	}
-	lateral := math.Abs(start.lateral)
-	forwardDistance := end.forward - start.forward
-	if lateral <= 0.001 || forwardDistance <= 0.001 {
+	dotNormal := wf*normal.forward + wl*normal.lateral
+	side := 1.0
+	if dotNormal < 0 {
+		side = -1
+		normal.forward, normal.lateral = -normal.forward, -normal.lateral
+		dotNormal = -dotNormal
+	}
+	if dotNormal <= 0.001 {
 		return landingApproachArc{}, false
 	}
 
-	radius := (forwardDistance*forwardDistance + lateral*lateral) / (2 * lateral)
-	center := carrierLocalOffset{forward: end.forward, lateral: side * radius}
+	radius := (wf*wf + wl*wl) / (2 * dotNormal)
+	center := carrierLocalOffset{
+		forward: end.forward + normal.forward*radius,
+		lateral: end.lateral + normal.lateral*radius,
+	}
 	startAngle := math.Atan2(start.lateral-center.lateral, start.forward-center.forward)
-	endAngle := -side * math.Pi / 2
+	endAngle := math.Atan2(-normal.lateral, -normal.forward)
 	sweepAngle := normalizeRadians(endAngle - startAngle)
 	if sweepAngle*side <= 0 || math.Abs(sweepAngle) >= math.Pi {
 		return landingApproachArc{}, false
@@ -259,7 +305,7 @@ func landingApproachEntryReady(p *Plane, ship *BattleShip, gate carrierLocalOffs
 		math.Abs(start.lateral-gate.lateral) > landingGateLateralToleranceRatio {
 		return false
 	}
-	arc, ok := buildLandingApproachArc(start, length, p.MaxSpeed)
+	arc, ok := buildLandingApproachArc(start, ship, p.MaxSpeed, ship.Aircraft.landingConfig())
 	if !ok {
 		return false
 	}

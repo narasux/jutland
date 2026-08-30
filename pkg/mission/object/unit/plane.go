@@ -126,8 +126,24 @@ type Plane struct {
 	landingCarrierRotation float64
 	// 航母当前每模拟帧的转向弧度。
 	landingCarrierTurnRate float64
-	// 最终直线进近的动态模拟帧数，仅在局内运行时计算。
-	landingDeckFrames float64
+	// 本次降落是否为舷侧着水回收（水上飞机）。
+	landingOnWater bool
+	// 起飞滑跑段长度（地图坐标）；滑跑结束后进入直线爬升段缓慢加满速度。
+	takeoffRunLength float64
+
+	// 圆弧进近段的等减速计划状态（相对航母速度，单位为地图坐标每模拟帧）。
+	landingArcSpeed       float64
+	landingArcExitSpeed   float64
+	landingArcTotalLength float64
+	landingArcDistance    float64
+	landingArcDecel       float64
+	// 最终直线进近段的等减速刹车计划状态。
+	landingRunSpeed       float64
+	landingRunTotalLength float64
+	landingRunDistance    float64
+	landingRunDecel       float64
+	// 最终直线进近方向的航母局部单位向量。
+	landingRunTangent carrierLocalOffset
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player

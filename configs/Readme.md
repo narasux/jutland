@@ -451,8 +451,11 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     },
     // 舰载机联队（仅航空母舰需要配置）
     aircraft: {
-      // 起飞间隔（单位：秒）
+      // 起飞间隔（单位：秒），作为所有起飞点的默认冷却
       takeOffTime: 1,
+      // 起降甲板模板名（需确保在 carrier_decks.json5 中存在；搭载舰载机时必填，
+      // 缺失会在初始化阶段直接报错退出）
+      deck: "StraightDeckNoCatapult",
       // 飞机编组
       groups: [
         {
@@ -474,6 +477,62 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   }
 ]
 ```
+
+## 航母起降甲板配置（carrier_decks.json5）
+
+定义航母起飞/降落的相对位置模板，供 `ships.json5` 中 `aircraft.deck` 按名称引用。
+多艘航母可共享同一模板，无需逐舰重复配置；模板缺失或结构不完整会在初始化阶段报错退出。
+
+坐标约定：
+- `forward`：距舰艏的舰长比例（0=舰艏，1=舰尾）
+- `lateral`：舰宽比例（0=中线，正值=右舷，|0.5| 为舷边，>0.5 为舰外水面）
+
+```json5
+[
+  {
+    // 模板名称（不可重复）
+    name: "StraightDeckNoCatapult",
+    // 起飞点列表（多弹射器并行且独享：各点独立计时冷却，同一时刻一个点只服务一架，
+    // 按配置顺序选用）
+    takeoffPoints: [
+      {
+        // 滑跑起点距舰艏的舰长比例
+        forward: 0.4,
+        // 滑跑起点横向舰宽比例
+        lateral: 0,
+        // 滑跑距离（舰长倍数），飞过该距离后升空
+        runLength: 0.6,
+        // 弹射航向相对舰体航向的偏转角（度），正=右舷（舷侧弹射器使用）
+        launchAngle: 0,
+        // 服务机型白名单（fighter/dive_bomber/torpedo_bomber），
+        // 空 = 任意机型；可用于实现「长起飞点专供轰炸机 / 鱼雷机」
+        planeTypes: [],
+        // 该点独立冷却（单位：秒），<=0 时使用舰船的 takeOffTime
+        takeOffTime: 0
+      }
+    ],
+    // 降落配置
+    landing: {
+      // 着舰方式：deck 甲板回收 / sea 舷侧着水回收（水上飞机降落到舰侧水面）
+      mode: "deck",
+      // 着舰回收点距舰艏的舰长比例（斜角甲板偏离中线时配合 lateral）
+      forward: 0.5,
+      // 着舰回收点横向舰宽比例
+      lateral: 0,
+      // 进近方向相对舰体航向的夹角（度），正=右舷偏转
+      approachAngle: 0,
+      // 最终直线进近段长度（舰长倍数），同时决定进近减速距离
+      approachLength: 3
+    }
+  }
+]
+```
+
+参考模板：
+- `StraightDeckNoCatapult`：二战直通甲板航母（舰体中部起飞，中线甲板回收）
+- `modernCatapult`：现代蒸汽/电磁弹射航母（舰艏双弹射点 + 舰体中部长点专供轰炸机，斜角甲板回收）
+- `IseAviationBattleship`：航空战列舰（伊势级，两舷弹射器带偏转角，短后甲板回收）
+- `seaplaneTender`：水上飞机母舰（甲板/弹射器起飞，舷侧着水回收）
 
 ## 飞机配置（planes.json5）
 

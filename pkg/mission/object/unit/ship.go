@@ -503,6 +503,13 @@ func NewShip(
 	s.BelongPlayer = player
 	// 战舰默认不编组
 	s.GroupID = object.GroupIDNone
+	// deepcopy 不会拷贝未导出字段，复制后的舰船需要重新绑定起降甲板模板；
+	// 模板在 init 阶段已校验过 deck 引用，这里查不到时保持未绑定即可
+	if s.Aircraft.HasPlane {
+		if deck, ok := DeckMap[s.Aircraft.Deck]; ok {
+			s.Aircraft.ResolveDeck(deck)
+		}
+	}
 	return &s
 }
 

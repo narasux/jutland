@@ -325,7 +325,7 @@ func TestLandingStagingMissedGateReturnsToLeadIn(t *testing.T) {
 	}
 	length := carrierLengthInMapBlocks(ship)
 	gate := landingGateLocalOffset(0)
-	arc, ok := buildLandingApproachArc(gate, length, 0.12)
+	arc, ok := buildLandingApproachArc(gate, ship, 0.12, ship.Aircraft.landingConfig())
 	if !ok {
 		t.Fatal("failed to build test landing arc")
 	}
@@ -366,7 +366,7 @@ func TestLandingGateSpeedConvergesWithoutJump(t *testing.T) {
 	}
 	length := carrierLengthInMapBlocks(ship)
 	gate := landingGateLocalOffset(0)
-	arc, ok := buildLandingApproachArc(gate, length, 0.12)
+	arc, ok := buildLandingApproachArc(gate, ship, 0.12, ship.Aircraft.landingConfig())
 	if !ok {
 		t.Fatal("failed to build test landing arc")
 	}
@@ -401,18 +401,22 @@ func TestLandingStagingSpeedUsesCarrierDistanceEnvelope(t *testing.T) {
 	ship := &BattleShip{Length: 128, CurSpeed: 0.04}
 	plane := &Plane{MaxSpeed: 0.12}
 	length := carrierLengthInMapBlocks(ship)
+	gate := landingGateLocalOffset(0)
+	gateDistance := length * math.Hypot(gate.forward, gate.lateral)
 	entrySpeed := 0.08
 	nearSpeed := plane.landingStagingTargetSpeed(
 		ship,
 		length,
-		length*landingStagingSlowdownInnerRatio,
+		gateDistance+length*landingStagingSlowdownInnerOffset,
+		gateDistance,
 		entrySpeed,
 		0,
 	)
 	farSpeed := plane.landingStagingTargetSpeed(
 		ship,
 		length,
-		length*landingStagingSlowdownOuterRatio,
+		gateDistance+length*(landingStagingSlowdownInnerOffset+landingStagingSlowdownOuterSpan),
+		gateDistance,
 		entrySpeed,
 		0,
 	)
@@ -429,7 +433,7 @@ func TestLandingApproachRejectsInvalidEntryPosition(t *testing.T) {
 	ship := &BattleShip{Length: 128, CurPos: objPos.NewR(50, 50), CurSpeed: 0.04}
 	length := carrierLengthInMapBlocks(ship)
 	gate := landingGateLocalOffset(0)
-	arc, ok := buildLandingApproachArc(gate, length, 0.12)
+	arc, ok := buildLandingApproachArc(gate, ship, 0.12, ship.Aircraft.landingConfig())
 	if !ok {
 		t.Fatal("failed to build test landing arc")
 	}
@@ -491,7 +495,7 @@ func TestLandingArcEndsTangentToDeck(t *testing.T) {
 
 	end := landingArcPoint(plane.landingArc, 1)
 	tangent := landingArcTangent(plane.landingArc, 1)
-	requireClose(t, end.forward, carrierLandingFinalStartRatio)
+	requireClose(t, end.forward, landingFinalStartOffset(ship, ship.Aircraft.landingConfig()).forward)
 	requireClose(t, end.lateral, 0)
 	requireClose(t, tangent.lateral, 0)
 	if tangent.forward <= 0 {
@@ -507,13 +511,13 @@ func TestLandingArcsAreMirroredAndMonotonic(t *testing.T) {
 	}
 	left := &Plane{
 		MaxSpeed:    0.12,
-		CurPos:      carrierRelativePos2D(ship, -3.5, -1.1),
+		CurPos:      carrierRelativePos2D(ship, -5.5, -1.1),
 		CurRotation: 30,
 		CurSpeed:    0.08,
 	}
 	right := &Plane{
 		MaxSpeed:    0.12,
-		CurPos:      carrierRelativePos2D(ship, -3.5, 1.1),
+		CurPos:      carrierRelativePos2D(ship, -5.5, 1.1),
 		CurRotation: 330,
 		CurSpeed:    0.08,
 	}
@@ -565,12 +569,14 @@ func TestLandingArcsAreMirroredAndMonotonic(t *testing.T) {
 }
 
 func TestLandingArcGeometryAcrossValidEntries(t *testing.T) {
-	for _, forward := range []float64{-3.8, -3.5, -3.2} {
+	ship := &BattleShip{Length: 256, CurPos: objPos.NewR(50, 50)}
+	for _, forward := range []float64{-5.8, -5.5, -5.2} {
 		for _, lateral := range []float64{-1.5, -0.7, 0.7, 1.5} {
 			arc, ok := buildLandingApproachArc(
 				carrierLocalOffset{forward: forward, lateral: lateral},
-				2,
+				ship,
 				0.12,
+				ship.Aircraft.landingConfig(),
 			)
 			if !ok {
 				t.Fatalf("valid entry did not produce arc: forward=%v lateral=%v", forward, lateral)
@@ -595,7 +601,7 @@ func TestLandingApproachStartsAtCurrentSpeed(t *testing.T) {
 	startLocal := carrierLocalOffset{forward: -3.5, lateral: 1.1}
 	start := carrierRelativePos2D(ship, startLocal.forward, startLocal.lateral)
 	for _, maxSpeed := range []float64{0.06, 0.12, 0.24} {
-		arc, ok := buildLandingApproachArc(startLocal, carrierLengthInMapBlocks(ship), maxSpeed)
+		arc, ok := buildLandingApproachArc(startLocal, ship, maxSpeed, ship.Aircraft.landingConfig())
 		if !ok {
 			t.Fatal("failed to build test landing arc")
 		}
@@ -643,16 +649,16 @@ func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 		RemainRange:  100,
 	}
 	plane.StartLandingApproach(ship)
-	if plane.landingDeckFrames < landingDeckMinFrames ||
-		plane.landingDeckFrames > landingDeckMaxFrames {
-		t.Fatalf("landing deck frames = %v", plane.landingDeckFrames)
+	if plane.landingArcTotalLength <= 0 || plane.landingArcExitSpeed <= 0 {
+		t.Fatalf("landing approach plan invalid: total=%v exit=%v",
+			plane.landingArcTotalLength, plane.landingArcExitSpeed)
 	}
-	for range int(math.Ceil(plane.landingArc.frames)) + 1 {
+	for range 800 {
 		if plane.UpdateLandingApproach(ship) {
 			break
 		}
 	}
-	approachSpeed := plane.CurSpeed
+	approachSpeed := plane.landingArcSpeed
 	approachRotation := plane.CurRotation
 	deckStart := plane.CurPos.Copy()
 
@@ -661,11 +667,12 @@ func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 		t.Fatalf("starting deck phase moved plane before the next frame")
 	}
 	plane.UpdateLandingDeck(ship)
-	if speedDelta := math.Abs(plane.CurSpeed-approachSpeed) / max(approachSpeed, 0.001); speedDelta > 0.1 {
+	// 圆弧末端存在被剩余距离钳制的显示速度尾步，这里校验运动学计划速度的连续性
+	if speedDelta := math.Abs(plane.landingRunSpeed-approachSpeed) / max(approachSpeed, 0.001); speedDelta > 0.1 {
 		t.Fatalf(
 			"landing speed jumped at deck transition: approach=%v deck=%v",
 			approachSpeed,
-			plane.CurSpeed,
+			plane.landingRunSpeed,
 		)
 	}
 	if rotationDelta := angleDifference(plane.CurRotation, approachRotation); rotationDelta > 1 {
@@ -677,27 +684,39 @@ func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 	}
 }
 
-func TestLandingDeckDurationMatchesArcExitSpeedAcrossAircraftSpeeds(t *testing.T) {
+func TestLandingDeckPlanMatchesArcExitSpeedAcrossAircraftSpeeds(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{Length: 128, CurPos: objPos.NewR(50, 50)}
 	length := carrierLengthInMapBlocks(ship)
 	start := carrierLocalOffset{forward: -3.5, lateral: 1.1}
 	for _, maxSpeed := range []float64{0.06, 0.12, 0.24} {
-		arc, ok := buildLandingApproachArc(start, length, maxSpeed)
+		arc, ok := buildLandingApproachArc(start, ship, maxSpeed, ship.Aircraft.landingConfig())
 		if !ok {
 			t.Fatal("failed to build test landing arc")
 		}
-		plane := &Plane{MaxSpeed: maxSpeed}
-		frames := plane.landingDeckDurationFrames(ship, arc.relativeSpeed)
-		deckEntrySpeed := 2 * -carrierLandingFinalStartRatio * length / frames
-		if delta := math.Abs(deckEntrySpeed-arc.relativeSpeed) / arc.relativeSpeed; delta > 0.1 {
+		plane := &Plane{MaxSpeed: maxSpeed, CurHP: 100}
+		plane.landingArc = arc
+		plane.startLandingArcPlan(ship, arc.relativeSpeed)
+		if plane.landingArcExitSpeed <= 0 ||
+			plane.landingArcExitSpeed > arc.relativeSpeed+1e-9 {
 			t.Fatalf(
-				"landing deck entry speed mismatch for max speed %.3f: arc=%.4f deck=%.4f frames=%.1f",
-				maxSpeed,
+				"arc exit speed = %v, want within (0, %.4f]",
+				plane.landingArcExitSpeed,
 				arc.relativeSpeed,
-				deckEntrySpeed,
-				frames,
 			)
+		}
+		plane.StartLandingDeck(ship)
+		if plane.landingRunSpeed != plane.landingArcSpeed {
+			t.Fatalf(
+				"deck entry speed %v != arc speed %v for max speed %.3f",
+				plane.landingRunSpeed,
+				plane.landingArcSpeed,
+				maxSpeed,
+			)
+		}
+		expectedTotal := length * ship.Aircraft.landingConfig().ApproachLength
+		if plane.landingRunTotalLength != expectedTotal {
+			t.Fatalf("deck run length = %v, want %v", plane.landingRunTotalLength, expectedTotal)
 		}
 	}
 }
@@ -720,13 +739,14 @@ func TestLandingDeckUsesLongMonotonicDecelerationAndScale(t *testing.T) {
 		RemainRange:  100,
 	}
 	plane.StartLandingApproach(ship)
-	for range int(math.Ceil(plane.landingArc.frames)) + 1 {
+	for range 800 {
 		if plane.UpdateLandingApproach(ship) {
 			break
 		}
 	}
 	local := planeCarrierLocalOffset(plane, ship)
-	requireClose(t, local.forward, carrierLengthInMapBlocks(ship)*carrierLandingFinalStartRatio)
+	expectedEnd := landingFinalStartOffset(ship, ship.Aircraft.landingConfig())
+	requireClose(t, local.forward, carrierLengthInMapBlocks(ship)*expectedEnd.forward)
 	requireClose(t, local.lateral, 0)
 
 	plane.StartLandingDeck(ship)
@@ -734,7 +754,7 @@ func TestLandingDeckUsesLongMonotonicDecelerationAndScale(t *testing.T) {
 	previousScale := plane.VisualScaleMultiplier()
 	previousForward := local.forward
 	finished := false
-	for range int(landingDeckMaxFrames) + 2 {
+	for range 800 {
 		finished = plane.UpdateLandingDeck(ship)
 		local = planeCarrierLocalOffset(plane, ship)
 		if plane.CurSpeed > previousSpeed+1e-9 {
@@ -784,7 +804,7 @@ func TestLandingAnimationTracksMovingTurningCarrier(t *testing.T) {
 	previousProgress := plane.FlightPhaseProgress()
 	previousRotation := plane.CurRotation
 	approachFinished := false
-	for range int(math.Ceil(plane.landingArc.frames)) + 2 {
+	for range 800 {
 		moveTestCarrier(ship, 0.25)
 		approachFinished = plane.UpdateLandingApproach(ship)
 		if progress := plane.FlightPhaseProgress(); progress < previousProgress {
@@ -804,12 +824,13 @@ func TestLandingAnimationTracksMovingTurningCarrier(t *testing.T) {
 		t.Fatalf("landing approach did not finish in fixed duration")
 	}
 	local := planeCarrierLocalOffset(plane, ship)
-	requireClose(t, local.forward, carrierLengthInMapBlocks(ship)*carrierLandingFinalStartRatio)
+	expectedEnd := landingFinalStartOffset(ship, ship.Aircraft.landingConfig())
+	requireClose(t, local.forward, carrierLengthInMapBlocks(ship)*expectedEnd.forward)
 	requireClose(t, local.lateral, 0)
 
 	plane.StartLandingDeck(ship)
 	deckFinished := false
-	for range int(plane.landingDeckFrames) + 2 {
+	for range 800 {
 		moveTestCarrier(ship, 0.25)
 		deckFinished = plane.UpdateLandingDeck(ship)
 		if deckFinished {
@@ -874,13 +895,13 @@ func TestLandingVisualScaleInterpolation(t *testing.T) {
 	plane.StartLandingDeck(ship)
 	requireClose(t, plane.VisualScaleMultiplier(), 1)
 
-	// ease-out 位移下，时间进度需要反算成指定的实际路程进度。
-	plane.FlightPhaseProgressValue = 1 - math.Sqrt(1-0.4)
+	// 着舰段进度为线性路程比例：80% 路程处降到最低视觉倍率
+	plane.FlightPhaseProgressValue = 0.4
 	requireClose(t, plane.VisualScaleMultiplier(), 0.75)
 
-	plane.FlightPhaseProgressValue = 1 - math.Sqrt(1-landingDeckScaleDistanceRatio)
+	plane.FlightPhaseProgressValue = landingDeckScaleDistanceRatio
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
-	plane.FlightPhaseProgressValue = 1 - math.Sqrt(1-0.9)
+	plane.FlightPhaseProgressValue = 0.9
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 	plane.FlightPhaseProgressValue = 1
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)

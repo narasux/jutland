@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/mohae/deepcopy"
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/narasux/jutland/pkg/config"
@@ -24,6 +25,7 @@ func init() {
 	initRocketLauncherMap()
 	initPlaneRocketLauncherMap()
 	initReleaserMap()
+	initCarrierDeckMap()
 	initPlaneMap()
 	initShipMap()
 	initReferenceMap()
@@ -157,6 +159,36 @@ func initReleaserMap() {
 		objUnit.ReleaserMap[r.Name] = &r
 	}
 	log.Println("releasers data loaded from json5 file")
+}
+
+func initCarrierDeckMap() {
+	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "carrier_decks.json5"))
+	if err != nil {
+		log.Fatal("failed to open carrier_decks.json5: ", err)
+	}
+	defer file.Close()
+
+	bytes, _ := io.ReadAll(file)
+
+	var decks []objUnit.CarrierDeck
+	if err = json5.Unmarshal(bytes, &decks); err != nil {
+		log.Fatal("failed to unmarshal carrier_decks.json5: ", err)
+	}
+
+	for _, deck := range decks {
+		if deck.Name == "" {
+			log.Fatal("carrier deck name is required in carrier_decks.json5")
+		}
+		if _, exists := objUnit.DeckMap[deck.Name]; exists {
+			log.Fatal("duplicated carrier deck name in carrier_decks.json5: ", deck.Name)
+		}
+		if len(deck.TakeoffPoints) == 0 {
+			log.Fatal("carrier deck must define at least one takeoff point: ", deck.Name)
+		}
+		deck.Validate()
+		objUnit.DeckMap[deck.Name] = &deck
+	}
+	log.Println("carrier decks data loaded from json5 file")
 }
 
 func initPlaneMap() {
@@ -337,6 +369,19 @@ func initShipMap() {
 			s.Aircraft.Groups[i].CurCount = s.Aircraft.Groups[i].MaxCount
 			// 根据飞机名称，设置飞机目标类型
 			s.Aircraft.Groups[i].TargetType = objUnit.GetPlaneTargetObjType(s.Aircraft.Groups[i].Name)
+		}
+		// 解析起降甲板模板；搭载舰载机的舰船必须显式配置 deck，缺失直接报错
+		if s.Aircraft.HasPlane {
+			deck, ok := objUnit.DeckMap[s.Aircraft.Deck]
+			if !ok {
+				log.Fatalf(
+					"ship %q has aircraft but deck %q not found in carrier_decks.json5",
+					s.Name, s.Aircraft.Deck,
+				)
+			}
+			// 模板只读共享，舰船实例各持有一份拷贝，起飞点冷却等运行期状态互相隔离
+			resolved := deepcopy.Copy(*deck).(objUnit.CarrierDeck)
+			s.Aircraft.ResolveDeck(&resolved)
 		}
 		// 初始化当前生命值
 		s.CurHP = s.TotalHP

@@ -147,7 +147,9 @@ func TestPlaneReturnRecoversOnlyAfterLandingDeck(t *testing.T) {
 }
 
 func TestPlaneReturnAllPlanesReachDeckBeforeRecovery(t *testing.T) {
-	const maxRecoveryFrames = 1200
+	// 着舰入口基线后移至 -5.5 舰长、进近与刹车段按实际路程推进后，
+	// 32 架两波次回收的整体时间线拉长，预算从 1200 帧放宽到 2000 帧。
+	const maxRecoveryFrames = 2000
 
 	ms, ship, planes := newLandingTestState(t, "test-landing-batch", 32)
 	ship.CurSpeed = 0.055

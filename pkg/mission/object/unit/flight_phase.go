@@ -27,20 +27,24 @@ const (
 )
 
 const (
-	// carrierTakeoffStartOffsetRatio 表示滑跑起点相对航母中心的舰长倍率，0 即甲板中部。
-	carrierTakeoffStartOffsetRatio = 0
-	// carrierTakeoffLaneRatio 表示飞机保持航母航向直飞的最短滑跑距离，单位为舰长。
-	carrierTakeoffLaneRatio = 2.0
-
 	// 低空 0.5 倍乘在常规飞机的 2 倍绘制比例上，视觉结果与舰船同级。
 	planeLowAltitudeVisualScale = 0.5
 	// landingDeckScaleDistanceRatio 是飞机缩放到最小时已完成的着舰路程比例。
 	landingDeckScaleDistanceRatio = 0.8
 
 	// takeoffInitialSpeedRatio 是静止航母上飞机的初始滑跑速度相对最大速度的比例。
-	takeoffInitialSpeedRatio = 0.15
-	// takeoffAccelerationFrames 是起飞 S 曲线加速持续的模拟帧数。
-	takeoffAccelerationFrames = 45.0
+	takeoffInitialSpeedRatio = 0.10
+	// takeoffLiftoffSpeedRatio 是滑跑离舰时的目标速度相对最大速度的比例；
+	// 剩余速度留到爬升段缓慢补满，避免起飞瞬间就逼近全速。
+	takeoffLiftoffSpeedRatio = 0.6
+	// takeoffAccelerationFrames 是滑跑段 S 曲线加速持续的模拟帧数。
+	takeoffAccelerationFrames = 60.0
+	// takeoffClimbSpeedStepRate 是爬升段每帧加速相对最大速度的比例，
+	// 让离舰后的剩余速度在数十帧内均匀补满。
+	takeoffClimbSpeedStepRate = 0.02
+	// takeoffClimbLength 是从滑跑起点到转入巡航的总距离（舰长倍数），
+	// 包含滑跑与离舰后的直线爬升段，视觉高度在整段距离内渐升到巡航高度。
+	takeoffClimbLength = 2.0
 
 	// phaseSpeedStepFallbackRate 是机型未配置加速度时的单帧保底变速比例。
 	phaseSpeedStepFallbackRate = 0.04
@@ -61,27 +65,44 @@ func gameSpeedMultiplier() float64 {
 	return config.G.SpeedMultiplier
 }
 
-// carrierTakeoffStartPos 返回甲板滑跑起点的地图坐标。
-func carrierTakeoffStartPos(ship *BattleShip) objPos.MapPos {
-	return carrierRelativePos(ship, carrierLengthInMapBlocks(ship)*carrierTakeoffStartOffsetRatio)
-}
-
-// carrierTakeoffEndPos 返回最短直线滑跑距离的终点；达到后仍需等待加速阶段完成。
-func carrierTakeoffEndPos(ship *BattleShip) objPos.MapPos {
-	return carrierRelativePos(
+// takeoffStartPos 返回起飞点滑跑起点的地图坐标。
+func takeoffStartPos(ship *BattleShip, point TakeoffPoint) objPos.MapPos {
+	// 配置纵向为距舰艏比例，内部以舰中为原点（正方向朝舰艏）
+	return carrierRelativePos2D(
 		ship,
-		carrierLengthInMapBlocks(ship)*(carrierTakeoffStartOffsetRatio+carrierTakeoffLaneRatio),
+		carrierLengthInMapBlocks(ship)*(0.5-point.Forward),
+		carrierWidthInMapBlocks(ship)*point.Lateral,
 	)
 }
 
-// StartTakeoff 从甲板中部开始滑跑，初始航向与航母一致。
-func (p *Plane) StartTakeoff(ship *BattleShip) {
-	startPos := carrierTakeoffStartPos(ship)
+// takeoffEndPos 返回沿弹射航向滑跑 runLength 个舰长后的升空点。
+func takeoffEndPos(start objPos.MapPos, launchRotation, runLength float64) objPos.MapPos {
+	radians := launchRotation * math.Pi / 180
+	return objPos.NewR(
+		start.RX+math.Sin(radians)*runLength,
+		start.RY-math.Cos(radians)*runLength,
+	)
+}
+
+// StartTakeoff 从指定起飞点滑跑起飞，弹射航向 = 舰体航向 + 偏转角。
+// 阶段终点延伸到爬升段末端：离舰后继续沿弹射航向直线爬升，
+// 视觉高度在整段距离内渐升，避免滑跑一结束就进入满高巡航。
+func (p *Plane) StartTakeoff(ship *BattleShip, point TakeoffPoint) {
+	startPos := takeoffStartPos(ship, point)
+	launchRotation := normalizeAngle(ship.CurRotation + point.LaunchAngle)
+	length := carrierLengthInMapBlocks(ship)
+	endPos := takeoffEndPos(
+		startPos,
+		launchRotation,
+		length*max(point.RunLength, takeoffClimbLength),
+	)
+	p.takeoffRunLength = length * point.RunLength
+
 	p.CurPos = startPos
-	p.CurRotation = ship.CurRotation
+	p.CurRotation = launchRotation
 	p.FlightPhase = PlaneFlightPhaseTakingOff
 	p.FlightPhaseStartPos = startPos
-	p.FlightPhaseEndPos = carrierTakeoffEndPos(ship)
+	p.FlightPhaseEndPos = endPos
 	p.FlightPhaseElapsed = 0
 	p.FlightPhaseProgressValue = 0
 	p.FlightVisualScaleStart = planeLowAltitudeVisualScale
@@ -103,7 +124,8 @@ func (p *Plane) FinishTakeoff() {
 	p.FlightVisualScaleEnd = 1
 }
 
-// UpdateTakeoff 使用 smoothstep 在固定模拟帧内加速；距离和加速过程都完成后才进入巡航。
+// UpdateTakeoff 分两段推进：滑跑段用 S 曲线加速到离舰速度，
+// 离舰后的爬升段按单帧变速限制缓慢加满，飞完爬升距离后进入巡航。
 func (p *Plane) UpdateTakeoff(mapCfg *mapcfg.MapCfg) bool {
 	if p.FlightPhase != PlaneFlightPhaseTakingOff {
 		return p.IsCruising()
@@ -113,14 +135,22 @@ func (p *Plane) UpdateTakeoff(mapCfg *mapcfg.MapCfg) bool {
 	}
 
 	multiplier := gameSpeedMultiplier()
-	p.FlightPhaseElapsed += multiplier
-	timeProgress := clamp01(p.FlightPhaseElapsed / takeoffAccelerationFrames)
-	speedProgress := smoothstep(timeProgress)
 	maxSpeed := p.MaxSpeed * multiplier
 	startSpeed := min(p.FlightPhaseStartSpeed, maxSpeed)
-	p.CurSpeed = startSpeed + (maxSpeed-startSpeed)*speedProgress
+	if p.FlightPhaseStartPos.Distance(p.CurPos) < p.takeoffRunLength {
+		// 滑跑段：S 曲线起步平缓，加速目标为离舰速度而非全速
+		p.FlightPhaseElapsed += multiplier
+		timeProgress := clamp01(p.FlightPhaseElapsed / takeoffAccelerationFrames)
+		p.CurSpeed = startSpeed +
+			(maxSpeed*takeoffLiftoffSpeedRatio-startSpeed)*smoothstep(timeProgress)
+	} else {
+		// 爬升段：离舰后继续沿弹射航向直线爬升，剩余速度均匀补满
+		p.CurSpeed = moveSpeedToward(
+			p.CurSpeed, maxSpeed, maxSpeed*takeoffClimbSpeedStepRate*multiplier,
+		)
+	}
 	p.forward(mapCfg, p.CurRotation, p.CurSpeed)
-	if p.FlightPhaseProgress() >= 1 && timeProgress >= 1 {
+	if p.FlightPhaseProgress() >= 1 {
 		p.FinishTakeoff()
 		return true
 	}
@@ -137,8 +167,8 @@ func (p *Plane) VisualScaleMultiplier() float64 {
 	}
 	progress := p.FlightPhaseProgress()
 	if p.FlightPhase == PlaneFlightPhaseLandingDeck {
-		distanceProgress := easeOutQuadratic(progress)
-		progress = smoothstep(clamp01(distanceProgress / landingDeckScaleDistanceRatio))
+		// 着舰段按实际滑跑路程缩放：路程 80% 处降到最低视觉倍率（视为触舰/触水）
+		progress = smoothstep(clamp01(progress / landingDeckScaleDistanceRatio))
 	}
 	return p.FlightVisualScaleStart + (p.FlightVisualScaleEnd-p.FlightVisualScaleStart)*progress
 }
@@ -202,12 +232,6 @@ func (p *Plane) forward(mapCfg *mapcfg.MapCfg, rotation, speed float64) {
 func smoothstep(progress float64) float64 {
 	progress = clamp01(progress)
 	return progress * progress * (3 - 2*progress)
-}
-
-// easeOutQuadratic 返回逐渐减速到终点的二次插值进度。
-func easeOutQuadratic(progress float64) float64 {
-	progress = clamp01(progress)
-	return 1 - (1-progress)*(1-progress)
 }
 
 // lerp 在 start 和 end 之间执行线性插值。
