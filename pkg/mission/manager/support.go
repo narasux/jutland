@@ -52,11 +52,19 @@ func (m *MissionManager) updateBuildings() {
 		}
 	}
 
-	// 陆地机场当然算是建筑物！自动生产推进（生产完成的飞机直接入库）
+	// 陆地机场当然算是建筑物！自动生产推进（生产完成的飞机直接入库；
+	// 出击中的按机型统计，与待命合计判断是否满编，只补充损失）
 	for _, af := range m.state.Arena.Airfields {
+		flying := make(map[string]int64, len(af.Aircraft.Groups))
+		for _, plane := range m.state.Arena.Planes {
+			if plane.BelongShip == af.Uid && plane.CurHP > 0 {
+				flying[plane.Name]++
+			}
+		}
 		completed := af.Update(
 			// FIXME 目前电脑玩家先不限制金钱（与增援点保持一致）
 			lo.Ternary(af.BelongPlayer == m.state.Player.CurPlayer, m.state.Player.CurFunds, int64(50000)),
+			flying,
 		)
 		for _, planeName := range completed {
 			if af.BelongPlayer == m.state.Player.CurPlayer {

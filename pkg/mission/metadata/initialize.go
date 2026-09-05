@@ -79,7 +79,6 @@ type rawInitAirfieldMetadata struct {
 	BelongPlayer string  `json:"belongPlayer"`
 	// Enabled 配置级开关，缺省 true；false 时该机场不生成
 	Enabled     *bool                          `json:"enabled"`
-	AlertRadius float64                        `json:"alertRadius"`
 	TakeOffTime float64                        `json:"takeOffTime"`
 	PlaneGroups []rawInitAirfieldGroupMetadata `json:"planeGroups"`
 }
@@ -224,7 +223,6 @@ func init() {
 				RunwayLength: afMD.RunwayLength,
 				RunwayWidth:  afMD.RunwayWidth,
 				BelongPlayer: faction.Player(afMD.BelongPlayer),
-				AlertRadius:  afMD.AlertRadius,
 				TakeOffTime:  afMD.TakeOffTime,
 				PlaneGroups:  groups,
 			})

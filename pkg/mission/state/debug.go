@@ -10,9 +10,12 @@ type DebugFlags struct {
 	ShowPlaneHP bool
 	// ShowHitBoxes 显示舰船和飞机的受打击范围
 	ShowHitBoxes bool
+	// ShowAirfieldRunway 选中机场时展示跑道方位线（白色带箭头直线）
+	ShowAirfieldRunway bool
 }
 
 // IsActive 判断是否有任何调试标志已启用
 func (f DebugFlags) IsActive() bool {
-	return f.DamageColorByTeam || f.ShowCursorPosObjInfo || f.ShowPlaneHP || f.ShowHitBoxes
+	return f.DamageColorByTeam || f.ShowCursorPosObjInfo ||
+		f.ShowPlaneHP || f.ShowHitBoxes || f.ShowAirfieldRunway
 }

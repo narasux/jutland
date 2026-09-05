@@ -57,6 +57,15 @@ var (
 	reinforceCardActive   = color.RGBA{R: 28, G: 57, B: 66, A: 228}
 	reinforceProgressBase = color.RGBA{R: 61, G: 77, B: 80, A: 255}
 	reinforceProgressFill = color.RGBA{R: 107, G: 151, B: 166, A: 255}
+	// reinforceFundsLowBorder 队首舰船资金不足时队列卡片的警示描边（暗红）
+	reinforceFundsLowBorder = color.RGBA{R: 176, G: 66, B: 66, A: 220}
+
+	// airfieldBadgeFill 机场标记徽章底色（深色半透明，与增援面板卡片一致）
+	airfieldBadgeFill = color.RGBA{R: 12, G: 28, B: 34, A: 190}
+	// airfieldMarkerRadius 机场标记徽章半径（地图格），视觉规格与油井图标相当
+	airfieldMarkerRadius = 0.26
+	// airfieldDebugFrameColor 调试跑道外框颜色（白色半透明细线框）
+	airfieldDebugFrameColor = color.RGBA{R: 255, G: 255, B: 255, A: 110}
 )
 
 // drawBuildingsInCamera 绘制镜头范围内的建筑对象和建筑状态
@@ -105,21 +114,140 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 			false,
 		)
 	}
-	// 陆地机场：地图素材已自带跑道与停机坪视觉，不重复绘制跑道图形；
-	// 停放/滑行的飞机实体即机场标识，常显警戒半径圈（警戒起飞开局常开）
+	// 陆地机场：常显机场定位标记（与油井图标同级，徽章尺寸只随缩放档位
+	// 变化，不随跑道长度放大）；与航母一致——待命飞机只入库不生成地面
+	// 贴图，起飞时在跑道刷新实体、降落后回收入库
 	for _, af := range ms.Arena.Airfields {
-		if af.AlertRadius <= 0 || !ms.View.Camera.Contains(af.Pos) {
+		if !ms.View.Camera.Contains(af.Pos) {
 			continue
 		}
 		x, y := ms.CameraPosToScreen(af.Pos)
-		vector.StrokeCircle(
+		selected := af.Uid == ms.Interaction.SelectedAirfieldUid
+		// 调试秘籍：开启后所有机场常显跑道外框，便于核对跑道几何与机位
+		// 排布；选中机场再叠加起飞方位线与箭头
+		if ms.UI.DebugFlags.ShowAirfieldRunway {
+			drawAirfieldRunwayFrame(screen, ms, af, x, y)
+		}
+		if selected {
+			drawAirfieldSelectionOverlay(screen, ms, af, x, y)
+		}
+		drawAirfieldMarker(screen, ms, af, x, y, selected)
+	}
+}
+
+// airfieldFactionColor 返回机场标记的阵营着色：己方绿色，敌方红色；
+// 机场停用时不按阵营着色，统一置灰提示不可用。
+func airfieldFactionColor(af *objBuilding.Airfield, ms *state.MissionState) color.RGBA {
+	if af.Disabled {
+		return colorx.Gray
+	}
+	return lo.Ternary(af.BelongPlayer == ms.Player.CurPlayer, colorx.Green, colorx.Red)
+}
+
+// drawAirfieldRunwayFrame 绘制机场跑道外框（旋转矩形轮廓），与选中机场的
+// 起飞方位线共用 show airfield runway 调试秘籍，覆盖所有机场。
+func drawAirfieldRunwayFrame(
+	screen *ebiten.Image, ms *state.MissionState, af *objBuilding.Airfield, x, y float64,
+) {
+	blockSize := ms.MapBlockDisplaySize()
+	corners := rotatedRectangleCorners(
+		x, y, af.RunwayLength*blockSize, af.RunwayWidth*blockSize, af.Rotation,
+	)
+	for idx, corner := range corners {
+		next := corners[(idx+1)%len(corners)]
+		vector.StrokeLine(
 			screen,
-			float32(x),
-			float32(y),
-			float32(af.AlertRadius*ms.MapBlockDisplaySize()),
-			2,
-			colorx.Green,
-			false,
+			float32(corner[0]), float32(corner[1]),
+			float32(next[0]), float32(next[1]),
+			1.5, airfieldDebugFrameColor, false,
+		)
+	}
+}
+
+// drawAirfieldMarker 绘制机场常显标记：圆形徽章 + 贴合跑道朝向的跑道图形。
+// 视觉规格与油井图标相当；选中时描边加粗以示高亮。
+func drawAirfieldMarker(
+	screen *ebiten.Image, ms *state.MissionState, af *objBuilding.Airfield,
+	x, y float64, selected bool,
+) {
+	clr := airfieldFactionColor(af, ms)
+	radius := airfieldMarkerRadius * ms.MapBlockDisplaySize()
+	vector.FillCircle(screen, float32(x), float32(y), float32(radius), airfieldBadgeFill, false)
+	vector.StrokeCircle(
+		screen, float32(x), float32(y), float32(radius),
+		lo.Ternary(selected, float32(3), float32(2)), clr, false,
+	)
+
+	// 徽章内跑道图形：沿跑道朝向的双边线 + 中线虚线
+	sinV, cosV := math.Sin(af.Rotation*math.Pi/180), math.Cos(af.Rotation*math.Pi/180)
+	dirX, dirY := sinV, -cosV
+	norX, norY := cosV, sinV
+	halfLen := radius * 0.55
+	halfWid := radius * 0.18
+	// 两条跑道边线
+	for _, side := range [...]float64{1, -1} {
+		strokeGlyphLine(
+			screen, x, y, dirX, dirY, norX, norY,
+			-halfLen, halfLen, halfWid*side, clr, 1.5,
+		)
+	}
+	// 中线三段虚线
+	for _, seg := range [...][2]float64{{-0.55, -0.25}, {-0.15, 0.15}, {0.25, 0.55}} {
+		strokeGlyphLine(
+			screen, x, y, dirX, dirY, norX, norY,
+			halfLen*seg[0], halfLen*seg[1], 0, clr, 1.5,
+		)
+	}
+}
+
+// strokeGlyphLine 在徽章局部坐标系（沿跑道方向 dir、垂直方向 nor）中画一条线段，
+// along 为跑道方向偏移、lateral 为横向偏移，单位为屏幕像素。
+func strokeGlyphLine(
+	screen *ebiten.Image, x, y, dirX, dirY, norX, norY, alongStart, alongEnd, lateral float64,
+	clr color.Color, width float32,
+) {
+	vector.StrokeLine(
+		screen,
+		float32(x+dirX*alongStart+norX*lateral), float32(y+dirY*alongStart+norY*lateral),
+		float32(x+dirX*alongEnd+norX*lateral), float32(y+dirY*alongEnd+norY*lateral),
+		width, clr, false,
+	)
+}
+
+// drawAirfieldSelectionOverlay 选中机场时展示的附加信息：跑道方位线
+// （白色带箭头直线，指向起飞离地端）属于调试信息，仅在开启
+// show airfield runway 调试秘籍时展示。
+func drawAirfieldSelectionOverlay(
+	screen *ebiten.Image, ms *state.MissionState, af *objBuilding.Airfield, x, y float64,
+) {
+	if !ms.UI.DebugFlags.ShowAirfieldRunway {
+		return
+	}
+
+	blockSize := ms.MapBlockDisplaySize()
+	sinV, cosV := math.Sin(af.Rotation*math.Pi/180), math.Cos(af.Rotation*math.Pi/180)
+	dirX, dirY := sinV, -cosV
+	halfLen := af.RunwayLength / 2 * blockSize
+	vector.StrokeLine(
+		screen,
+		float32(x-dirX*halfLen), float32(y-dirY*halfLen),
+		float32(x+dirX*halfLen), float32(y+dirY*halfLen),
+		2, colorx.White, false,
+	)
+
+	// 起飞方向箭头：箭杆两侧短斜线，指向跑道离地端
+	arrowLen := 0.35 * blockSize
+	for _, side := range [...]float64{1, -1} {
+		// 箭杆方向向左/右旋转 155 度得到箭头斜线方向（屏幕系 y 向下）
+		barbRadians := (155 * side) * math.Pi / 180
+		cosB, sinB := math.Cos(barbRadians), math.Sin(barbRadians)
+		barbX := dirX*cosB - dirY*sinB
+		barbY := dirX*sinB + dirY*cosB
+		vector.StrokeLine(
+			screen,
+			float32(x+dirX*halfLen), float32(y+dirY*halfLen),
+			float32(x+dirX*halfLen+barbX*arrowLen), float32(y+dirY*halfLen+barbY*arrowLen),
+			2, colorx.White, false,
 		)
 	}
 }
@@ -276,7 +404,7 @@ func (d *Drawer) drawSelectedProvidedShips(
 		ship,
 		ui.Info,
 	)
-	d.drawReinforceQueue(screen, rp.OncomingShips, ui.Queue)
+	d.drawReinforceQueue(screen, rp.OncomingShips, ui.Queue, ms.Player.CurFunds)
 	return tooltip
 }
 
@@ -489,8 +617,11 @@ func (d *Drawer) drawReinforceInfoCard(screen *ebiten.Image, panel reinforceUIPa
 	)
 }
 
-// drawReinforceQueue 绘制当前增援队列和队列中的舰船卡片
-func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.OncomingShip, panel reinforceUIPanel) {
+// drawReinforceQueue 绘制当前增援队列和队列中的舰船卡片；curFunds 用于
+// 判断队首舰船是否因资金不足而暂停（进度冻结）。
+func (d *Drawer) drawReinforceQueue(
+	screen *ebiten.Image, ships []*objBuilding.OncomingShip, panel reinforceUIPanel, curFunds int64,
+) {
 	cardInsetX := 16.0
 	cardInsetY := 18.0
 	card := reinforceUIPanel{
@@ -522,7 +653,9 @@ func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.O
 		col, row := idx%2, idx/2
 		x := card.X + 24 + float64(col)*(cardW+cardGap)
 		y := card.Y + 62 + float64(row)*(cardH+14)
-		d.drawQueueCard(screen, ships[idx], x, y, cardW, cardH, idx == 0)
+		// 队首是唯一在建造的舰船：资金不足时它开工不了 / 进度冻结，标红提示
+		fundsLow := idx == 0 && curFunds < ships[0].FundsCost
+		d.drawQueueCard(screen, ships[idx], x, y, cardW, cardH, idx == 0, fundsLow)
 	}
 	if len(ships) > maxItems {
 		d.drawText(
@@ -537,10 +670,16 @@ func (d *Drawer) drawReinforceQueue(screen *ebiten.Image, ships []*objBuilding.O
 	}
 }
 
-// drawQueueCard 绘制单个队列舰船的建造进度或费用信息
-func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingShip, x, y, w, h float64, active bool) {
+// drawQueueCard 绘制单个队列舰船的建造进度或费用信息；资金不足时队首卡片的
+// 进度百分比改显红色「资金不足」提示。
+func (d *Drawer) drawQueueCard(
+	screen *ebiten.Image, ship *objBuilding.OncomingShip, x, y, w, h float64, active, fundsLow bool,
+) {
 	bgColor := reinforceCardFill
 	borderColor := reinforcePanelBorder
+	if fundsLow {
+		borderColor = reinforceFundsLowBorder
+	}
 	if active {
 		bgColor = reinforceCardActive
 		borderColor = reinforceAccentMuted
@@ -569,6 +708,13 @@ func (d *Drawer) drawQueueCard(screen *ebiten.Image, ship *objBuilding.OncomingS
 			reinforceProgressFill,
 			false,
 		)
+		if fundsLow {
+			hint := i18n.Text(i18n.MsgFundsInsufficient)
+			hintFont := font.LocalizedUI(font.Kai)
+			hintX := x + w - 12 - layout.CalcTextWidth(hint, 15, hintFont)
+			d.drawText(screen, hint, hintX, y+12, 15, hintFont, colorx.Red)
+			return
+		}
 		d.drawText(screen, fmt.Sprintf("%.0f%%", progress), x+w-58, y+12, 16, font.JetbrainsMono, reinforceAccent)
 		return
 	}

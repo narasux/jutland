@@ -141,9 +141,10 @@ func (sa *ShipAircraft) landingConfigForSlot(slot int) LandingConfig {
 }
 
 // takeoffLandingPos 将着舰回收点配置换算为基地局部地图坐标。
+// 与进近/待场结构共用同一基准长度（封顶 4 格），保证比例空间换算一致。
 func takeoffLandingPos(base AircraftBase, landing LandingConfig) carrierLocalOffset {
 	return carrierLocalOffset{
-		forward: carrierLengthInMapBlocks(base) * (0.5 - landing.Forward),
+		forward: phaseUnitInMapBlocks(base) * (0.5 - landing.Forward),
 		lateral: carrierWidthInMapBlocks(base) * landing.Lateral,
 	}
 }

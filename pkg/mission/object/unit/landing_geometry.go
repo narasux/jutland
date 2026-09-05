@@ -52,8 +52,9 @@ const (
 )
 
 // carrierLocalOffset 是以航母为原点的局部坐标。
-// forward 朝舰艏为正，lateral 朝舰体右舷为正。圆弧结构中的坐标均以舰长为单位，
-// 只有转换为 MapPos 或计算实际速度时才乘以 carrierLengthInMapBlocks。
+// forward 朝舰艏为正，lateral 朝舰体右舷为正。圆弧结构中的坐标均以基准长
+// （航母舰长 / 机场跑道封顶基准，见 phaseUnitInMapBlocks）为单位，
+// 只有转换为 MapPos 或计算实际速度时才乘以该基准长度。
 type carrierLocalOffset struct {
 	forward float64
 	lateral float64
@@ -126,7 +127,7 @@ func landingScaleCompleteRatio(base AircraftBase, landing LandingConfig) float64
 // landingFinalStartOffset 返回最终直线进近段起点的舰长单位局部坐标。
 // 起点 = 着舰点沿反进近方向后退 approachLength 个舰长，圆弧在此与直线段衔接。
 func landingFinalStartOffset(base AircraftBase, landing LandingConfig) carrierLocalOffset {
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	touchdown := takeoffLandingPos(base, landing)
 	tangent := landingApproachTangent(landing)
 	run := length * landing.ApproachLength
@@ -139,7 +140,7 @@ func landingFinalStartOffset(base AircraftBase, landing LandingConfig) carrierLo
 // landingFinalStartPos 返回最终直线进近段起点的地图坐标。
 func landingFinalStartPos(base AircraftBase, landing LandingConfig) objPos.MapPos {
 	end := landingFinalStartOffset(base, landing)
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	return carrierRelativePos2D(base, end.forward*length, end.lateral*length)
 }
 
@@ -168,7 +169,7 @@ func (sa *ShipAircraft) landingStagingTarget(
 	base AircraftBase,
 	slot int,
 ) objPos.MapPos {
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	gate := landingGateLocalOffset(slot)
 	return carrierRelativePos2D(base, length*gate.forward, length*gate.lateral)
 }
@@ -192,7 +193,7 @@ func buildLandingApproachArc(
 	maxSpeed float64,
 	landing LandingConfig,
 ) (landingApproachArc, bool) {
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	end := landingFinalStartOffset(base, landing)
 	tangent := landingApproachTangent(landing)
 
@@ -290,7 +291,7 @@ func landingArcWorldVelocity(
 ) carrierLocalOffset {
 	tangent := landingArcTangent(arc, progress)
 	point := landingArcPoint(arc, progress)
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	return carrierLocalOffset{
 		forward: base.BaseSpeed() + tangent.forward*arc.relativeSpeed -
 			turnRate*point.lateral*length,
@@ -313,7 +314,7 @@ func landingArcWorldRotation(
 // landingApproachEntryReady 只允许位置、航向和速度都落入入口容差的飞机进入固定圆弧。
 // 不满足条件的飞机继续执行远端切线引导，避免从舰侧强行接入造成锐角转弯。
 func landingApproachEntryReady(p *Plane, base AircraftBase, gate carrierLocalOffset) bool {
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	local := planeCarrierLocalOffset(p, base)
 	start := carrierLocalOffset{
 		forward: local.forward / length,

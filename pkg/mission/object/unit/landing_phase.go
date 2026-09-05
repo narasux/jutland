@@ -68,7 +68,7 @@ func (p *Plane) StartLandingStaging(_ *mapcfg.MapCfg, base AircraftBase, slot in
 // StartLandingApproach 开始单向定半径圆弧进近，并建立空中减速计划。
 func (p *Plane) StartLandingApproach(base AircraftBase) {
 	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	local := planeCarrierLocalOffset(p, base)
 	arc, ok := buildLandingApproachArc(
 		carrierLocalOffset{forward: local.forward / length, lateral: local.lateral / length},
@@ -100,7 +100,7 @@ func (p *Plane) startLandingArcPlan(base AircraftBase, entry float64) {
 	entry = max(entry, p.MaxSpeed*multiplier*landingMinRelativeSpeedRatio)
 	exit := min(entry, p.MaxSpeed*multiplier*landingApproachTargetSpeedRatio)
 	total := max(p.landingArc.radius*math.Abs(p.landingArc.sweepAngle)*
-		carrierLengthInMapBlocks(base), 0.001)
+		phaseUnitInMapBlocks(base), 0.001)
 	// 单帧减速量：a = (v0²-vt²)/(2L)，恰好在线段末端降到出口速度
 	decel := (entry*entry - exit*exit) / (2 * total)
 
@@ -114,7 +114,7 @@ func (p *Plane) startLandingArcPlan(base AircraftBase, entry float64) {
 // StartLandingDeck 初始化最终直线进近与着舰回收阶段。
 func (p *Plane) StartLandingDeck(base AircraftBase) {
 	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	// 圆弧出口速度作为刹车段初速，两段速度天然连续
 	entry := p.landingArcSpeed
 	if entry <= 0 {
@@ -162,7 +162,7 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 	}
 	p.FlightPhaseElapsed += gameSpeedMultiplier()
 	p.updateLandingCarrierTurnRate(base)
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
 	gate := landingGateLocalOffset(p.LandingSlot)
 	plannedArc, ok := buildLandingApproachArc(gate, base, p.MaxSpeed, landing)
@@ -273,7 +273,7 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 
 // updateLandingStagingEndPos 初始化 landing_staging 的远端切线引导目标。
 func (p *Plane) updateLandingStagingEndPos(base AircraftBase) {
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	gate := landingGateLocalOffset(p.LandingSlot)
 	arc, ok := buildLandingApproachArc(gate, base, p.MaxSpeed, base.BaseAircraft().landingConfigForSlot(p.LandingSlot))
 	if !ok {
@@ -383,7 +383,7 @@ func (p *Plane) UpdateLandingDeck(base AircraftBase) bool {
 	// 起点 = 最终进近段起点（舰长单位局部坐标），沿进近方向前进已滑跑距离
 	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
 	end := landingFinalStartOffset(base, landing)
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	forwardRatio := end.forward + p.landingRunTangent.forward*(p.landingRunDistance/length)
 	lateralRatio := end.lateral + p.landingRunTangent.lateral*(p.landingRunDistance/length)
 	p.FlightPhaseEndPos = carrierLandingDeckEndPos(base, landing)
@@ -413,7 +413,7 @@ func landingRunWorldRotation(
 	// 相对速度沿进近方向，再叠加航母旋转产生的 omega×r 速度后转为世界航向
 	tangent := base.BaseAircraft().landingConfigForSlot(slot)
 	tangentVec := landingApproachTangent(tangent)
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	velocity := carrierLocalOffset{
 		forward: base.BaseSpeed() + tangentVec.forward*relativeSpeed -
 			turnRate*lateralRatio*length,
@@ -426,7 +426,7 @@ func landingRunWorldRotation(
 
 // executeLandingGateMovement 使用入口切线速度场推进飞机，并有限修正横向偏差。
 func (p *Plane) executeLandingGateMovement(base AircraftBase, arc landingApproachArc) {
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	local := planeCarrierLocalOffset(p, base)
 	current := carrierLocalOffset{forward: local.forward / length, lateral: local.lateral / length}
 	tangent := landingArcTangent(arc, 0)
@@ -542,7 +542,7 @@ func (p *Plane) advanceLandingAnimation(
 	forwardRatio, lateralRatio, targetRotation float64,
 ) {
 	// 动画点每帧从航母局部坐标重新映射，航母移动或转向时轨迹仍与甲板保持绑定。
-	length := carrierLengthInMapBlocks(base)
+	length := phaseUnitInMapBlocks(base)
 	nextPos := carrierRelativePos2D(base, length*forwardRatio, length*lateralRatio)
 	distance := p.CurPos.Distance(nextPos)
 	p.CurPos = nextPos

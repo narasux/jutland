@@ -4,9 +4,93 @@ import (
 	"sort"
 	"time"
 
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
+
+// selectedAirfield 返回仍存在的选中机场；未选中时返回 nil。
+func selectedAirfield(ms *state.MissionState) *objBuilding.Airfield {
+	if ms.Interaction.SelectedAirfieldUid == "" {
+		return nil
+	}
+	for _, af := range ms.Arena.Airfields {
+		if af.Uid == ms.Interaction.SelectedAirfieldUid {
+			return af
+		}
+	}
+	return nil
+}
+
+// airfieldSquadRow 是驻场机队单机型的展示行（兼作生产机型选择行）。
+type airfieldSquadRow struct {
+	Name      string
+	Stock     int64 // 机库库存
+	Max       int64 // 编制上限
+	Flying    int64 // 空中数量
+	Lost      int64 // 累计损失
+	Producing bool  // 是否为当前生产机型（满编自动顺延后的实际生产机型）
+	Progress  int   // 生产进度百分比（0-100，非生产机型为 0）
+}
+
+// airfieldSquadRows 统计选中机场各机型的库存、出击与损失数量及生产进度。
+func airfieldSquadRows(ms *state.MissionState, af *objBuilding.Airfield) []airfieldSquadRow {
+	flying := map[string]int64{}
+	for _, plane := range ms.Arena.Planes {
+		if plane.BelongShip == af.Uid && plane.CurHP > 0 {
+			flying[plane.Name]++
+		}
+	}
+	target := af.ProducingTargetIdx(flying)
+	rows := make([]airfieldSquadRow, 0, len(af.Aircraft.Groups))
+	for idx, group := range af.Aircraft.Groups {
+		rows = append(rows, airfieldSquadRow{
+			Name:   group.Name,
+			Stock:  group.CurCount,
+			Max:    group.MaxCount,
+			Flying: flying[group.Name],
+			Lost:   af.Losses[group.Name],
+			// 待命 + 出击 < 上限才生产（只补充损失）；指定机型满编后
+			// 自动顺延到下一个未满编机型，全部满编则无人标记
+			Producing: idx == target,
+			Progress:  af.ProductionProgress(group.Name),
+		})
+	}
+	return rows
+}
+
+// airfieldCapacityFull 全部机型满编（待命 + 出击 >= 上限）：无可生产机型。
+func airfieldCapacityFull(rows []airfieldSquadRow) bool {
+	for _, row := range rows {
+		if row.Stock+row.Flying < row.Max {
+			return false
+		}
+	}
+	return len(rows) > 0
+}
+
+// fundsLow 判断己方机场是否因资金不足而无法开工 / 暂停生产（与生产逻辑
+// 一致：按当前应生产机型的单价判断，满编顺延后即顺延后的机型；全部满编时
+// 无生产，不提示；敌方机场不提示）。
+func fundsLow(ms *state.MissionState, af *objBuilding.Airfield) bool {
+	if af.BelongPlayer != ms.Player.CurPlayer || len(af.Aircraft.Groups) == 0 {
+		return false
+	}
+	flying := map[string]int64{}
+	for _, plane := range ms.Arena.Planes {
+		if plane.BelongShip == af.Uid && plane.CurHP > 0 {
+			flying[plane.Name]++
+		}
+	}
+	target := af.ProducingTargetIdx(flying)
+	// 全部满编：没有生产，不需要资金提示
+	if target < 0 {
+		return false
+	}
+	group := af.Aircraft.Groups[target]
+	fundsCost, _ := objUnit.GetPlaneCost(group.Name)
+	return ms.Player.CurFunds < fundsCost
+}
 
 type toggleState int
 

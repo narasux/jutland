@@ -7,7 +7,8 @@
     displayNameEn: "Attack on Pearl Harbor - 1941",
     displayNameRu: "Нападение на Пёрл-Харбор — 1941",
     displayNameJa: "真珠湾攻撃―1941年",
-    initFunds: 0,
+    // 初始资金 5000：珍珠港没有油井收入，初始资金是机场自动生产的唯一经济来源
+    initFunds: 5000,
     initCameraPos: [64, 66],
     mapName: "pearl_harbor",
     maxShipCount: 65,
@@ -19,21 +20,21 @@
     initOilPlatforms: [],
     // 陆地机场：福特岛机场（美军，历史上驻有陆军航空队与海军巡逻机部队；
     // pos/rotation 对齐地图素材中福特岛中部的草地跑道条带：西南→东北走向
-    // （rotation 45），西端起飞滑跑、东北端朝海峡进近；停机位排跑道西北侧，
+    // （rotation 53，长度约为原标定的 3/5），西南端起飞滑跑、东北端朝海峡进近；
+    // 起飞端与原标定一致，中心沿新朝向后移；停机位排跑道西北侧，
     // 不绘制跑道图形；日军机动部队从右下方驶入）
     initAirfields: [
       {
-        pos: [55, 63],
-        rotation: 45,
-        runwayLength: 17,
-        runwayWidth: 0.8,
+        pos: [52, 66],
+        rotation: 49,
+        runwayLength: 9,
+        runwayWidth: 1,
         belongPlayer: "HA",
-        alertRadius: 30,
         takeOffTime: 2.5,
         planeGroups: [
           {
             name: "F4F-3",
-            maxCount: 6,
+            maxCount: 8,
           },
           {
             name: "SBD-3",
@@ -788,18 +789,21 @@
     // 停机位优先排布在跑道北侧的平坦区域，不绘制跑道图形）
     initAirfields: [
       {
-        pos: [81, 77],
-        rotation: 92,
+        pos: [81, 76],
+        rotation: 90,
         runwayLength: 9,
-        runwayWidth: 1,
+        runwayWidth: 0.8,
         belongPlayer: "HA",
-        alertRadius: 30,
         takeOffTime: 2,
         planeGroups: [
           {
             name: "F4F-3",
-            maxCount: 6,
+            maxCount: 10,
           },
+          {
+            name: "TBD-1",
+            maxCount: 10,
+          }
         ],
       },
     ],

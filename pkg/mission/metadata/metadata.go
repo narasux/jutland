@@ -80,7 +80,6 @@ type InitAirfieldMetadata struct {
 	RunwayLength float64
 	RunwayWidth  float64
 	BelongPlayer faction.Player
-	AlertRadius  float64
 	TakeOffTime  float64
 	PlaneGroups  []InitAirfieldGroupMetadata
 }

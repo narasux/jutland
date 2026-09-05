@@ -28,4 +28,5 @@ var DebugCheats = []Cheat{
 	&ShowCursorPosObjInfo{},
 	&ShowPlaneHP{},
 	&ShowHitBoxes{},
+	&ShowAirfieldRunway{},
 }

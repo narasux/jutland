@@ -27,6 +27,7 @@ func (c *DebugAll) Exec(misState *state.MissionState) string {
 		ShowCursorPosObjInfo: true,
 		ShowPlaneHP:          true,
 		ShowHitBoxes:         true,
+		ShowAirfieldRunway:   true,
 	}
 	return "Enabled all debug flags"
 }
@@ -124,3 +125,26 @@ func (c *ShowHitBoxes) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*ShowHitBoxes)(nil)
+
+// ShowAirfieldRunway -> 修改是否在选中机场时展示跑道方位线（白色带箭头直线）
+type ShowAirfieldRunway struct{}
+
+func (c *ShowAirfieldRunway) String() string {
+	return "show airfield runway"
+}
+
+func (c *ShowAirfieldRunway) Desc() string {
+	return "switch airfield runway direction line on/off (drawn when an airfield is selected)"
+}
+
+func (c *ShowAirfieldRunway) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *ShowAirfieldRunway) Exec(misState *state.MissionState) string {
+	nextState := !misState.UI.DebugFlags.ShowAirfieldRunway
+	misState.UI.DebugFlags.ShowAirfieldRunway = nextState
+	return "Toggled show airfield runway: " + lo.Ternary(nextState, "on", "off")
+}
+
+var _ Cheat = (*ShowAirfieldRunway)(nil)

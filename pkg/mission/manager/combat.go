@@ -220,47 +220,54 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 	}
 }
 
-// updateAirfieldAlertLaunch 机场警戒起飞：敌方进入警戒半径时从停机坪起飞迎战。
-// 与航母共用起飞点冷却与机型白名单（SelectLaunch），逐个提升停机坪上的停放实体；
-// 甲板设有双起飞点，一帧内可并行提升两架。提升的飞机先滑入跑道，滑行到位后再起飞。
+// updateAirfieldAlertLaunch 机场警戒起飞：不设警戒范围，只要场上存在敌机
+// 或敌舰就从跑道起飞迎战。对空 / 对舰目标独立择敌（各取距机场最近者）：
+// 战斗机拦截敌机、轰炸机打击敌舰，两路互不阻塞——避免敌机在空时轰炸机
+// 被无限期压在地面。与航母共用起飞点冷却（takeOffTime），双起飞点按
+// 「一前一后」单列弹射，每批次并行两架，按起飞间隔分批持续起飞。
 func (m *MissionManager) updateAirfieldAlertLaunch() {
 	for _, af := range m.state.Arena.Airfields {
 		if !af.CanAlertLaunch() {
 			continue
 		}
-		// 警戒半径内的敌人（敌机与敌舰同级，随机选择；敌方地面飞机不触发警戒）
-		inRangeEnemies := []objUnit.Hurtable{}
+		// 全场搜索敌人（敌方地面飞机不触发警戒），对空 / 对舰各取最近者
+		var airEnemy *objUnit.Plane
 		for _, enemy := range m.state.Arena.Planes {
 			if enemy.BelongPlayer == af.BelongPlayer || enemy.IsOnGround() {
 				continue
 			}
-			if af.Pos.Distance(enemy.CurPos) > af.AlertRadius {
-				continue
+			if airEnemy == nil || af.Pos.Distance(enemy.CurPos) < af.Pos.Distance(airEnemy.CurPos) {
+				airEnemy = enemy
 			}
-			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
+		var shipEnemy *objUnit.BattleShip
 		for _, enemy := range m.state.Arena.Ships {
 			if enemy.BelongPlayer == af.BelongPlayer {
 				continue
 			}
-			if af.Pos.Distance(enemy.CurPos) > af.AlertRadius {
-				continue
+			if shipEnemy == nil || af.Pos.Distance(enemy.CurPos) < af.Pos.Distance(shipEnemy.CurPos) {
+				shipEnemy = enemy
 			}
-			inRangeEnemies = append(inRangeEnemies, enemy)
 		}
-		if len(inRangeEnemies) == 0 {
-			continue
-		}
-		enemy := inRangeEnemies[rand.Intn(len(inRangeEnemies))]
-		// 与航母一致：直接在跑道起点刷新起飞（双起飞点 → 一帧最多两架）
-		for range 2 {
-			plane := af.Aircraft.TakeOff(af, enemy.ObjType())
-			if plane == nil {
-				break
+		// 对空 / 对舰两路各自弹射：TakeOff 按目标类型匹配机型编组，
+		// 无对应机型时该路自然为空；两个起飞点共享冷却，一帧最多两架，
+		// 逐帧持续起飞直到库存耗尽
+		launch := func(enemy objUnit.Hurtable) {
+			for range 2 {
+				plane := af.Aircraft.TakeOff(af, enemy.ObjType())
+				if plane == nil {
+					break
+				}
+				// 加入到对局飞机数据集中并下达攻击指令
+				m.state.Arena.Planes[plane.Uid] = plane
+				m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
 			}
-			// 加入到对局飞机数据集中并下达攻击指令
-			m.state.Arena.Planes[plane.Uid] = plane
-			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
+		}
+		if airEnemy != nil {
+			launch(airEnemy)
+		}
+		if shipEnemy != nil {
+			launch(shipEnemy)
 		}
 	}
 }

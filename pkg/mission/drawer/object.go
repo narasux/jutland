@@ -110,7 +110,8 @@ func drawUnitHitBox(screen *ebiten.Image, ms *state.MissionState, battleUnit obj
 		if battleUnit.Player() == ms.Player.CurPlayer {
 			clr = color.RGBA{G: 255, A: 80}
 		}
-		vector.StrokeLine(screen,
+		vector.StrokeLine(
+			screen,
 			float32(corner[0]), float32(corner[1]),
 			float32(nextCorner[0]), float32(nextCorner[1]),
 			1, clr, false,

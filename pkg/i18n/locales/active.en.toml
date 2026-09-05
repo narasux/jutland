@@ -259,7 +259,7 @@ other = "Status display"
 [SidebarDamageNumbers]
 other = "Damage numbers"
 [SidebarTabBattle]
-other = "Map / Ships"
+other = "Map / Units"
 [SidebarTabSettings]
 other = "Settings"
 [AirfieldPanelTitle]
@@ -278,6 +278,20 @@ other = "Alert launch"
 other = "On"
 [AirfieldOff]
 other = "Off"
+[AirfieldTakeOffInterval]
+other = "Takeoff Interval"
+[AirfieldStatusLabel]
+other = "Airfield"
+[AirfieldProducingTag]
+other = "Producing"
+[AirfieldSortie]
+other = "Sortie"
+[AirfieldCapacityFull]
+other = "Capacity full"
+[AirfieldSquadTitle]
+other = "Stationed Squadrons"
+[FundsInsufficient]
+other = "Insufficient funds"
 [UnitPanelNoSelection]
 other = "No ships selected"
 [UnitPanelOpen]

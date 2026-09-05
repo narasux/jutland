@@ -259,7 +259,7 @@ other = "状態表示"
 [SidebarDamageNumbers]
 other = "ダメージ表示"
 [SidebarTabBattle]
-other = "地図 / 艦船"
+other = "地図 / ユニット"
 [SidebarTabSettings]
 other = "設定"
 [AirfieldPanelTitle]
@@ -278,6 +278,20 @@ other = "警戒発進"
 other = "入"
 [AirfieldOff]
 other = "切"
+[AirfieldTakeOffInterval]
+other = "発艦間隔"
+[AirfieldStatusLabel]
+other = "飛行場状態"
+[AirfieldProducingTag]
+other = "製造中"
+[AirfieldSortie]
+other = "出撃"
+[AirfieldCapacityFull]
+other = "容量満杯"
+[AirfieldSquadTitle]
+other = "駐留機隊"
+[FundsInsufficient]
+other = "資金不足"
 [UnitPanelNoSelection]
 other = "艦艇未選択"
 [UnitPanelOpen]

@@ -3,6 +3,7 @@ package unitpanel
 import (
 	"math"
 
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/theme"
 )
@@ -54,6 +55,9 @@ type panelLayout struct {
 // sectionHeights 计算各分区在给定内容宽度下的自然高度。
 // 内容超出视口高度时由外层滚动条处理，而不是压缩行高。
 func (p *Panel) sectionHeights(ms *state.MissionState, width float64) (visualH, infoH, systemsH float64) {
+	if af := selectedAirfield(ms); af != nil {
+		return airfieldSectionHeights(ms, af, width)
+	}
 	ships := selectedShips(ms)
 	if len(ships) == 0 {
 		return 0, 0, 0
@@ -85,6 +89,43 @@ func (p *Panel) sectionHeights(ms *state.MissionState, width float64) (visualH, 
 		}
 	}
 	return
+}
+
+// airfieldInfoPad 是机场信息卡顶部内边距（无节标题，行直接开始）。
+const airfieldInfoPad = 8.0
+
+// airfieldLineH 是机场信息卡单行的屏幕像素高度；比常规信息行更松，
+// 保证起飞间隔与驻场机队各机型行之间有可读的行间距。
+const airfieldLineH = 22.0
+
+// airfieldSectionHeights 机场面板分区高度：信息行（起飞间隔 + 机场开关 +
+// 机队表格），无视图区与系统页签。
+func airfieldSectionHeights(
+	ms *state.MissionState,
+	af *objBuilding.Airfield,
+	width float64,
+) (visualH, infoH, systemsH float64) {
+	// 基础信息行 + 开关行 + 机队节标题 + 表头 + 各机型行
+	lines := len(airfieldInfoItems(af)) + 3 + len(airfieldSquadRows(ms, af))
+	infoH = airfieldInfoPad + float64(lines)*airfieldLineH
+	return 0, infoH, 0
+}
+
+// airfieldToggleRect 机场状态开关的点击区域（开关行右侧的状态圆点），
+// 绘制与命中检测共用，保证视觉与可点区域一致。
+func (p *Panel) airfieldToggleRect(af *objBuilding.Airfield) Rect {
+	area := p.layout.Info
+	y := area.Y + airfieldInfoPad + float64(len(airfieldInfoItems(af)))*airfieldLineH
+	return Rect{X: area.X + area.W - 30, Y: y + 2, W: 18, H: 18}
+}
+
+// airfieldSquadRowRect 第 index 个机型选择行的点击区域（整行）。
+func (p *Panel) airfieldSquadRowRect(af *objBuilding.Airfield, index int) Rect {
+	area := p.layout.Info
+	// 行偏移：基础信息行 + 开关行 + 机队节标题 + 表头
+	offset := len(airfieldInfoItems(af)) + 3 + index
+	y := area.Y + airfieldInfoPad + float64(offset)*airfieldLineH
+	return Rect{X: area.X + 4, Y: y, W: area.W - 8, H: airfieldLineH}
 }
 
 // calcLayout 计算滚动视口内各分区的纵向布局。

@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"math"
 	"slices"
 	"sort"
 
@@ -230,6 +231,10 @@ func (m *MissionManager) updateSelectedShips() {
 	if m.state.Interaction.SelectedGroupID != object.GroupIDNone && len(m.state.Interaction.SelectedShips) == 0 {
 		m.state.Interaction.SelectedGroupID = object.GroupIDNone
 	}
+	// 战舰与机场选择互斥：有任何战舰被选中时清空机场选中
+	if len(m.state.Interaction.SelectedShips) > 0 {
+		m.state.Interaction.SelectedAirfieldUid = ""
+	}
 	// 框选拖动过程中不能移动镜头，否则选区的地图坐标会发生跳变。
 	if !m.state.Interaction.IsAreaSelecting {
 		m.syncFocusedShip()
@@ -441,4 +446,47 @@ func (m *MissionManager) updateRallyPointRightClick() {
 		return
 	}
 	m.setReinforcePointRallyPos(rp, *pos)
+}
+
+// 更新陆地机场选中状态：点击跑道命中机场则选中，点击空白处取消选中。
+// 选中后由绘制层展示跑道方位线（调试秘籍）与单位面板的机场信息卡。
+func (m *MissionManager) updateAirfieldSelection() {
+	if m.state.Core.MissionStatus != state.MissionRunning {
+		return
+	}
+	pos := action.DetectMouseButtonClickOnMap(m.state, ebiten.MouseButtonLeft)
+	if pos == nil {
+		return
+	}
+	m.state.Interaction.SelectedAirfieldUid = ""
+	for _, af := range m.state.Arena.Airfields {
+		if hitAirfieldRunway(af, *pos) {
+			// 机场与战舰选择互斥：选中机场时清空战舰选择
+			m.state.Interaction.SelectedShips = []string{}
+			m.state.Interaction.FocusedShipUid = ""
+			m.state.Interaction.SelectedGroupID = object.GroupIDNone
+			m.state.Interaction.SelectedAirfieldUid = af.Uid
+			// 选中机场时自动展开战术面板并切到「地图 / 单位」页，直接展示机场信息卡
+			m.state.UI.SidebarExpanded = true
+			m.sidebar.OpenUnitsTab()
+			return
+		}
+	}
+}
+
+// hitAirfieldRunway 判断点击位置是否落在机场跑道（沿跑道轴的胶囊体）附近。
+// 跑道又细又长，命中判定以跑道轴线段为中心：纵向不超过端头外 1 格，
+// 横向不超过半宽外加少量余量，保证又长又窄的跑道也容易点中。
+func hitAirfieldRunway(af *objBuilding.Airfield, pos objPos.MapPos) bool {
+	radians := af.Rotation * math.Pi / 180
+	dirX, dirY := math.Sin(radians), -math.Cos(radians)
+	relX, relY := pos.RX-af.Pos.RX, pos.RY-af.Pos.RY
+	along := relX*dirX + relY*dirY
+	halfLength := af.RunwayLength / 2
+	if math.Abs(along) > halfLength+1 {
+		return false
+	}
+	perpX, perpY := relX-dirX*along, relY-dirY*along
+	halfWidth := max(af.RunwayWidth/2+0.8, 1.2)
+	return math.Hypot(perpX, perpY) <= halfWidth
 }

@@ -36,3 +36,34 @@ func TestDebugAllEnablesHitBoxes(t *testing.T) {
 		t.Fatal("DebugAll should enable the hit-box overlay")
 	}
 }
+
+func TestShowAirfieldRunway(t *testing.T) {
+	cheat := &ShowAirfieldRunway{}
+	if !cheat.Match("show AIRFIELD runway") {
+		t.Fatal("ShowAirfieldRunway should ignore case")
+	}
+
+	misState := &state.MissionState{}
+	if got := cheat.Exec(misState); got != "Toggled show airfield runway: on" {
+		t.Fatalf("unexpected enable output: %q", got)
+	}
+	if !misState.UI.DebugFlags.ShowAirfieldRunway {
+		t.Fatal("ShowAirfieldRunway should enable the runway overlay")
+	}
+
+	if got := cheat.Exec(misState); got != "Toggled show airfield runway: off" {
+		t.Fatalf("unexpected disable output: %q", got)
+	}
+	if misState.UI.DebugFlags.ShowAirfieldRunway {
+		t.Fatal("ShowAirfieldRunway should disable the runway overlay")
+	}
+}
+
+func TestDebugAllEnablesAirfieldRunway(t *testing.T) {
+	misState := &state.MissionState{}
+	(&DebugAll{}).Exec(misState)
+
+	if !misState.UI.DebugFlags.ShowAirfieldRunway {
+		t.Fatal("DebugAll should enable the airfield runway overlay")
+	}
+}

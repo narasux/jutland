@@ -42,7 +42,7 @@ const (
 	// takeoffClimbSpeedStepRate 是爬升段每帧加速相对最大速度的比例，
 	// 让离舰后的剩余速度在数十帧内均匀补满。
 	takeoffClimbSpeedStepRate = 0.02
-	// takeoffClimbLength 是从滑跑起点到转入巡航的总距离（舰长倍数），
+	// takeoffClimbLength 是从滑跑起点到转入巡航的总距离（基准长倍数），
 	// 包含滑跑与离舰后的直线爬升段，视觉高度在整段距离内渐升到巡航高度。
 	takeoffClimbLength = 2.0
 
@@ -50,11 +50,25 @@ const (
 	phaseSpeedStepFallbackRate = 0.04
 	// phaseSpeedStepMaxRate 限制单帧速度变化，防止阶段切换时速度突跳。
 	phaseSpeedStepMaxRate = 0.08
+
+	// maxPhaseUnitLength 起飞滑跑与进近待场几何的基准长度上限（地图格）。
+	// 既有航母舰长都在 4 格以内（最长约 3.85 格），按舰长缩放的几何不受影响；
+	// 陆地机场跑道长达十余格，若直接按跑道长度缩放待场点（舰尾后 5.5 个基准
+	// 长）、最终进近段（3 个基准长）等结构，会把它们放大到地图之外。
+	maxPhaseUnitLength = 4.0
 )
 
 // carrierLengthInMapBlocks 将基地长度换算为地图坐标长度，并避免零长度参与比例计算。
+// 返回值是基地的物理长度（如跑道/甲板的实际跨度），用于起飞点等物理位置绑定。
 func carrierLengthInMapBlocks(base AircraftBase) float64 {
 	return max(base.BaseLength()/constants.MapBlockSize, 0.1)
+}
+
+// phaseUnitInMapBlocks 返回起降阶段几何使用的基准长度（地图格）：
+// 基地物理长度与封顶值取小。滑跑距离、进近/待场结构按该基准缩放；
+// 跑道起点等物理位置仍按真实长度计算。
+func phaseUnitInMapBlocks(base AircraftBase) float64 {
+	return min(carrierLengthInMapBlocks(base), maxPhaseUnitLength)
 }
 
 // gameSpeedMultiplier 同时缩放位移和阶段时间，保证游戏倍速不会改变轨迹形状。
@@ -88,14 +102,14 @@ func takeoffRunPos(base AircraftBase, point TakeoffPoint, distance float64) objP
 }
 
 // StartTakeoff 从指定起飞点滑跑起飞，弹射航向 = 基地航向 + 偏转角。
-// 滑跑段绑定甲板推进，阶段总距离延伸到爬升段末端：离舰后沿合成航向直线爬升，
-// 视觉高度在整段距离内渐升，避免滑跑一结束就进入满高巡航。
+// 滑跑起点绑定基地真实长度的跑道端头；滑跑与爬升距离按基准长度（封顶 4 格）
+// 缩放，超长跑道不必以 45% 巡航速度爬完整条跑道，离地段之后沿跑道方向爬升。
 func (p *Plane) StartTakeoff(base AircraftBase, point TakeoffPoint) {
-	length := carrierLengthInMapBlocks(base)
+	unit := phaseUnitInMapBlocks(base)
 	launchRotation := normalizeAngle(base.BaseRotation() + point.LaunchAngle)
 	p.takeoffPoint = point
-	p.takeoffRunLength = length * point.RunLength
-	p.takeoffTotalLength = length * max(point.RunLength, takeoffClimbLength)
+	p.takeoffRunLength = unit * point.RunLength
+	p.takeoffTotalLength = unit * max(point.RunLength, takeoffClimbLength)
 	p.takeoffDistance = 0
 	p.takeoffClimbHeading = launchRotation
 

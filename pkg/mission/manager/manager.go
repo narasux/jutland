@@ -107,6 +107,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		if !m.state.UI.UIConsumesCursor {
 			m.updateRallyLineClick()
 			m.updateRallyPointRightClick()
+			m.updateAirfieldSelection()
 		}
 		m.updateGameOptions(m.state.UI.UIConsumesCursor)
 	case state.MissionInTerminal:
@@ -174,6 +175,14 @@ func (m *MissionManager) handleUnitPanelActions(actions []unitpanel.Action) {
 				} else {
 					m.instructionSet.Add(instr.NewDisableAircraft(shipUid))
 				}
+			}
+		case unitpanel.ActionToggleAirfield:
+			if af := m.state.Arena.Airfields[action.AirfieldUid]; af != nil {
+				af.Disabled = !af.Disabled
+			}
+		case unitpanel.ActionSetProducing:
+			if af := m.state.Arena.Airfields[action.AirfieldUid]; af != nil {
+				af.CurProducing = action.PlaneName
 			}
 		}
 	}

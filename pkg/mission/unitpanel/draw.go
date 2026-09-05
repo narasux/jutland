@@ -12,6 +12,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/object"
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -67,6 +68,11 @@ func (p *Panel) ensureBuffer(region Rect) {
 
 // drawSections 按纵向分区绘制单位信息内容（到 offscreen 缓冲）。
 func (p *Panel) drawSections(screen *ebiten.Image, ms *state.MissionState) {
+	// 选中机场时展示机场信息面板，与战舰面板互斥
+	if af := selectedAirfield(ms); af != nil {
+		p.drawAirfieldSections(screen, ms, af)
+		return
+	}
 	ships := selectedShips(ms)
 	title := i18n.Text(i18n.MsgUnitPanelNoSelection)
 	if len(ships) == 1 {
@@ -749,4 +755,190 @@ func (p *Panel) fitText(value string, maxWidth, size float64, source *text.GoTex
 		}
 	}
 	return "…"
+}
+
+// drawAirfieldSections 绘制选中机场的面板内容：标题 + 信息卡（起飞间隔 + 驻场机队）。
+func (p *Panel) drawAirfieldSections(screen *ebiten.Image, ms *state.MissionState, af *objBuilding.Airfield) {
+	p.drawHeader(screen, ms, i18n.Text(i18n.MsgAirfieldPanelTitle))
+	area := p.layout.Info
+	if area.W != 0 && area.H != 0 {
+		theme.FillRoundedRect(
+			screen,
+			area.X,
+			area.Y,
+			area.W,
+			area.H,
+			theme.CornerRadius,
+			sectionFill,
+			sectionBorder,
+			theme.CardBorderWidth,
+		)
+	}
+	p.drawAirfieldInfo(screen, ms, af)
+}
+
+// airfieldInfoItems 组装机场面板的基础信息行（起飞间隔）。
+// 跑道位置/朝向/尺寸在地图选中态即可直观看到，不在面板重复展示。
+func airfieldInfoItems(af *objBuilding.Airfield) []infoItem {
+	return []infoItem{
+		{
+			label:   i18n.Text(i18n.MsgAirfieldTakeOffInterval),
+			value:   fmt.Sprintf("%.1fs", af.Aircraft.TakeOffTime),
+			numeric: true,
+		},
+	}
+}
+
+// baselineOffsetY 混排段基线对齐偏移：text.Draw 以行框顶部定位，不同字体的
+// ascent 不同，同一 y 会让数字明显偏下；返回 target 字体相对 reference 字体
+// 需要附加的 y 偏移（画在 referenceY + 偏移处，两者基线一致）。
+func baselineOffsetY(reference, target *text.GoTextFaceSource, size float64) float64 {
+	rm := (&text.GoTextFace{Source: reference, Size: size}).Metrics()
+	tm := (&text.GoTextFace{Source: target, Size: size}).Metrics()
+	return rm.HAscent - tm.HAscent
+}
+
+// drawAirfieldInfo 绘制机场信息卡：起飞间隔、机场开关（可点击）、当前生产
+// 机型进度条、驻场机队机型行（可点击切换生产机型），行高统一 airfieldLineH。
+func (p *Panel) drawAirfieldInfo(screen *ebiten.Image, ms *state.MissionState, af *objBuilding.Airfield) {
+	area := p.layout.Info
+	if area.W == 0 || area.H == 0 {
+		return
+	}
+	labelW := math.Min(70.0, area.W*0.34)
+
+	y := area.Y + airfieldInfoPad
+	for _, item := range airfieldInfoItems(af) {
+		p.drawInfoRow(screen, y, airfieldLineH, labelW, item)
+		y += airfieldLineH
+	}
+
+	// 机场状态行：右侧状态圆点开关（绿=运行中，红=停用），停用时文字置灰
+	p.drawText(
+		screen, i18n.Text(i18n.MsgAirfieldStatusLabel),
+		area.X+10, y, theme.SizeBody, theme.Body(), colorx.Gold,
+	)
+	statusClr := colorx.White
+	statusText := i18n.MsgAirfieldOn
+	if af.Disabled {
+		statusClr, statusText = colorx.Silver, i18n.MsgAirfieldOff
+	}
+	p.drawText(
+		screen, i18n.Text(statusText),
+		area.X+10+labelW, y, theme.SizeBody, theme.Body(), statusClr,
+	)
+	if af.Disabled {
+		p.drawToggleDot(screen, p.airfieldToggleRect(af), toggleDisabled)
+	} else {
+		p.drawToggleDot(screen, p.airfieldToggleRect(af), toggleAllowed)
+	}
+	y += airfieldLineH
+
+	// 驻场机队节标题（金色，楷体）+ 机队表格；字号与上方信息行一致
+	// （SizeBody），不再用小一号的说明档
+	p.drawText(
+		screen,
+		i18n.Text(i18n.MsgAirfieldSquadTitle),
+		area.X+10,
+		y,
+		theme.SizeBody,
+		theme.Body(),
+		colorx.Gold,
+	)
+	y += airfieldLineH
+
+	// 机队表格：表头 + 各机型行，样式对齐舰载机页签的机型表
+	// （金色表头 + 分隔线；机型名楷体、数值列等宽，列内基线对齐）；
+	// 制造中列展示生产进度条（不显示百分比），资金不足时改显红色提示
+	columns := []float64{0, 0.3, 0.48, 0.64, 0.78}
+	headings := []string{
+		i18n.Text(i18n.MsgUnitPanelPlaneType),
+		i18n.Text(i18n.MsgUnitPanelStandby),
+		i18n.Text(i18n.MsgAirfieldSortie),
+		i18n.Text(i18n.MsgAirfieldLostCount),
+		i18n.Text(i18n.MsgAirfieldProducingTag),
+	}
+	for index, heading := range headings {
+		p.drawText(
+			screen,
+			heading,
+			area.X+10+columns[index]*area.W,
+			y,
+			theme.SizeBody,
+			theme.Body(),
+			colorx.Gold,
+		)
+	}
+	vector.StrokeLine(
+		screen,
+		float32(area.X+4),
+		float32(y+airfieldLineH-3),
+		float32(area.X+area.W-4),
+		float32(y+airfieldLineH-3),
+		1,
+		sectionBorder,
+		false,
+	)
+	y += airfieldLineH
+	rows := airfieldSquadRows(ms, af)
+	// 全部满编：无可生产机型，停止生产（在指定机型行提示容量已满）
+	capacityFull := airfieldCapacityFull(rows)
+	for index, row := range rows {
+		clr := colorx.Silver
+		if row.Producing {
+			// 当前生产机型金色高亮
+			clr = colorx.Gold
+		} else if p.cursorAt(p.airfieldSquadRowRect(af, index)) {
+			// 悬停反馈：可选生产机型提亮为白色
+			clr = colorx.White
+		}
+		// 机型列（楷体，超长截断）
+		p.drawText(
+			screen,
+			p.fitText(row.Name, columns[1]*area.W, theme.SizeBody, theme.Body()),
+			area.X+10,
+			y,
+			theme.SizeBody,
+			theme.Body(),
+			clr,
+		)
+		// 数值列（等宽字体，按楷体基线对齐）
+		values := []string{
+			fmt.Sprintf("%d/%d", row.Stock, row.Max),
+			fmt.Sprintf("%d", row.Flying),
+			fmt.Sprintf("%d", row.Lost),
+		}
+		numericY := y + baselineOffsetY(theme.Body(), theme.Numeric(), theme.SizeBody)
+		for vi, value := range values {
+			p.drawText(
+				screen,
+				value,
+				area.X+10+columns[vi+1]*area.W,
+				numericY,
+				theme.SizeBody,
+				theme.Numeric(),
+				clr,
+			)
+		}
+		// 制造中列：生产机型显示进度条；资金不足时改显红色「资金不足」；
+		// 全部满编时在指定机型行改显「容量已满」提示
+		if row.Producing {
+			if fundsLow(ms, af) {
+				hint := i18n.Text(i18n.MsgFundsInsufficient)
+				hintX := area.X + area.W - 12 - textLayout.CalcTextWidth(hint, theme.SizeBody, theme.Body())
+				p.drawText(screen, hint, hintX, y, theme.SizeBody, theme.Body(), colorx.Red)
+			} else {
+				barX := area.X + columns[4]*area.W
+				p.drawProgress(screen, Rect{
+					X: barX, Y: y + (airfieldLineH-6)/2,
+					W: area.W - 12 - (columns[4] * area.W), H: 6,
+				}, float64(row.Progress)/100)
+			}
+		} else if capacityFull && index == af.ProducingGroupIdx() {
+			hint := i18n.Text(i18n.MsgAirfieldCapacityFull)
+			hintX := area.X + area.W - 12 - textLayout.CalcTextWidth(hint, theme.SizeBody, theme.Body())
+			p.drawText(screen, hint, hintX, y, theme.SizeBody, theme.Body(), colorx.Silver)
+		}
+		y += airfieldLineH
+	}
 }

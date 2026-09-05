@@ -262,7 +262,7 @@ other = "Показывать состояние"
 [SidebarDamageNumbers]
 other = "Числа урона"
 [SidebarTabBattle]
-other = "Карта / Корабли"
+other = "Карта / Юниты"
 [SidebarTabSettings]
 other = "Настройки"
 [AirfieldPanelTitle]
@@ -281,6 +281,20 @@ other = "Тревога"
 other = "Вкл"
 [AirfieldOff]
 other = "Выкл"
+[AirfieldTakeOffInterval]
+other = "Интервал взлёта"
+[AirfieldStatusLabel]
+other = "Состояние"
+[AirfieldProducingTag]
+other = "производится"
+[AirfieldSortie]
+other = "Вылеты"
+[AirfieldCapacityFull]
+other = "Заполнено"
+[AirfieldSquadTitle]
+other = "Базовая авиагруппа"
+[FundsInsufficient]
+other = "Недостаточно средств"
 [UnitPanelNoSelection]
 other = "Не выбрано кораблей"
 [UnitPanelOpen]

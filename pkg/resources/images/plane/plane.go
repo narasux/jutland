@@ -18,9 +18,11 @@ import (
 )
 
 // 战机图片（各类缩放尺寸）
-var planeZoomImgMaps map[int]map[string]*ebiten.Image
-var planeOriginalImgMap map[string]*ebiten.Image
-var planeDisplayScaleMap map[string]float64
+var (
+	planeZoomImgMaps     map[int]map[string]*ebiten.Image
+	planeOriginalImgMap  map[string]*ebiten.Image
+	planeDisplayScaleMap map[string]float64
+)
 
 type planeImageSize struct {
 	Length float64 `json:"length"`

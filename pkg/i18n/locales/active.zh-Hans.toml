@@ -259,7 +259,7 @@ other = "状态显示"
 [SidebarDamageNumbers]
 other = "伤害数字"
 [SidebarTabBattle]
-other = "地图 / 战舰"
+other = "地图 / 单位"
 [SidebarTabSettings]
 other = "设置"
 [AirfieldPanelTitle]
@@ -278,6 +278,20 @@ other = "警戒起飞"
 other = "开"
 [AirfieldOff]
 other = "关"
+[AirfieldTakeOffInterval]
+other = "起飞间隔"
+[AirfieldStatusLabel]
+other = "机场状态"
+[AirfieldProducingTag]
+other = "制造中"
+[AirfieldSortie]
+other = "出击"
+[AirfieldCapacityFull]
+other = "容量已满"
+[AirfieldSquadTitle]
+other = "驻场机队"
+[FundsInsufficient]
+other = "资金不足"
 [UnitPanelNoSelection]
 other = "未选择战舰"
 [UnitPanelOpen]

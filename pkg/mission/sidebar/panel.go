@@ -258,6 +258,15 @@ func (p *Panel) tabRect(index int) rect {
 	return rect{X: ui.TabBar.X + float64(index)*w, Y: ui.TabBar.Y, W: w, H: ui.TabBar.H}
 }
 
+// OpenUnitsTab 把侧栏切到「地图 / 单位」页签（选中机场等展示型单位时由
+// manager 调用，配合 ms.UI.SidebarExpanded 让信息卡直接可见）。
+func (p *Panel) OpenUnitsTab() {
+	if p.tab != TabBattle {
+		p.tab = TabBattle
+		p.scrollY = 0
+	}
+}
+
 func (p *Panel) drawTabBar(screen *ebiten.Image) {
 	ui := p.layout
 	separatorY := ui.TabBar.Y + ui.TabBar.H
@@ -415,11 +424,17 @@ func (p *Panel) drawMinimapBuildings(screen *ebiten.Image, ms *state.MissionStat
 		x, y := p.mapToSidebar(ms, op.Pos.RX, op.Pos.RY)
 		vector.FillCircle(screen, float32(x), float32(y), 2.5, colorx.Gold, false)
 	}
-	// 陆地机场（按阵营着色的圆点）
+	// 陆地机场（按阵营着色的圆点，停用时置灰；当前选中的机场加白色外圈）
 	for _, af := range ms.Arena.Airfields {
-		clr := lo.Ternary(af.BelongPlayer == ms.Player.CurPlayer, colorx.Green, colorx.Red)
+		clr := colorx.Gray
+		if !af.Disabled {
+			clr = lo.Ternary(af.BelongPlayer == ms.Player.CurPlayer, colorx.Green, colorx.Red)
+		}
 		x, y := p.mapToSidebar(ms, af.Pos.RX, af.Pos.RY)
 		vector.FillCircle(screen, float32(x), float32(y), 3, clr, false)
+		if af.Uid == ms.Interaction.SelectedAirfieldUid {
+			vector.StrokeCircle(screen, float32(x), float32(y), 5, 1.5, colorx.White, false)
+		}
 	}
 }
 

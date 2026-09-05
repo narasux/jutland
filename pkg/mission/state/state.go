@@ -79,6 +79,8 @@ type MissionInteractionState struct {
 	SelectedReinforcePointUid string
 	// 被选中的增援战舰名称
 	SelectedSummonShipName string
+	// 被选中的陆地机场（Uid）：选中后在主地图展示跑道方位线（调试秘籍）
+	SelectedAirfieldUid string
 	// 被选中的战舰信息（Uid）
 	SelectedShips []string
 	// 当前在单位面板中聚焦的战舰 Uid；多选时与 SelectedShips 分离维护。
@@ -246,7 +248,6 @@ func NewMissionState(mission string) *MissionState {
 				md.RunwayLength,
 				md.RunwayWidth,
 				md.BelongPlayer,
-				md.AlertRadius,
 				md.TakeOffTime,
 				groups,
 			)
@@ -289,6 +290,7 @@ func NewMissionState(mission string) *MissionState {
 			IsGrouping:                false,
 			SelectedReinforcePointUid: selectedReinforcePointUid,
 			SelectedSummonShipName:    "",
+			SelectedAirfieldUid:       "",
 			SelectedShips:             []string{},
 			FocusedShipUid:            "",
 			SelectedGroupID:           object.GroupIDNone,

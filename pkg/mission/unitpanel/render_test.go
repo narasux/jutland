@@ -17,8 +17,10 @@ import (
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
-const renderTestEnv = "JUTLAND_UNITPANEL_RENDER_TEST"
-const captureDirEnv = "JUTLAND_UNITPANEL_CAPTURE_DIR"
+const (
+	renderTestEnv = "JUTLAND_UNITPANEL_RENDER_TEST"
+	captureDirEnv = "JUTLAND_UNITPANEL_CAPTURE_DIR"
+)
 
 var (
 	renderDrawCh = make(chan func())
@@ -76,15 +78,32 @@ func TestCaptureUnitPanelScenarios(t *testing.T) {
 		screen layout.ScreenLayout
 		state  *state.MissionState
 	}{
-		{name: "1280-battleship-weapons", screen: layout.ScreenLayout{Width: 1280, Height: 720}, state: captureState([]*objUnit.BattleShip{captureBattleship()})},
-		{name: "1280-carrier-aircraft", screen: layout.ScreenLayout{Width: 1280, Height: 720}, state: captureState([]*objUnit.BattleShip{captureCarrier()})},
-		{name: "1920-multi", screen: layout.ScreenLayout{Width: 1920, Height: 1080}, state: captureState([]*objUnit.BattleShip{captureBattleship(), captureCarrier()})},
+		{
+			name:   "1280-battleship-weapons",
+			screen: layout.ScreenLayout{Width: 1280, Height: 720},
+			state:  captureState([]*objUnit.BattleShip{captureBattleship()}),
+		},
+		{
+			name:   "1280-carrier-aircraft",
+			screen: layout.ScreenLayout{Width: 1280, Height: 720},
+			state:  captureState([]*objUnit.BattleShip{captureCarrier()}),
+		},
+		{
+			name:   "1920-multi",
+			screen: layout.ScreenLayout{Width: 1920, Height: 1080},
+			state:  captureState([]*objUnit.BattleShip{captureBattleship(), captureCarrier()}),
+		},
 	}
 	for _, scenario := range scenarios {
 		scenario := scenario
 		t.Run(scenario.name, func(t *testing.T) {
 			scenario.state.View.Layout = scenario.screen
-			region := Rect{X: float64(scenario.screen.Width) - 312, Y: 40, W: 280, H: float64(scenario.screen.Height) - 80}
+			region := Rect{
+				X: float64(scenario.screen.Width) - 312,
+				Y: 40,
+				W: 280,
+				H: float64(scenario.screen.Height) - 80,
+			}
 			runOnRenderFrame(func() {
 				screen := ebiten.NewImage(scenario.screen.Width, scenario.screen.Height)
 				screen.Fill(color.RGBA{R: 16, G: 48, B: 58, A: 255})
@@ -127,8 +146,16 @@ func captureState(ships []*objUnit.BattleShip) *state.MissionState {
 		if !ship.Aircraft.HasPlane {
 			continue
 		}
-		planes["fighter-active"] = &objUnit.Plane{Name: "F6F-3", BelongShip: ship.Uid, FlightPhase: objUnit.PlaneFlightPhaseCruising}
-		planes["fighter-return"] = &objUnit.Plane{Name: "F6F-3", BelongShip: ship.Uid, FlightPhase: objUnit.PlaneFlightPhaseLandingApproach}
+		planes["fighter-active"] = &objUnit.Plane{
+			Name:        "F6F-3",
+			BelongShip:  ship.Uid,
+			FlightPhase: objUnit.PlaneFlightPhaseCruising,
+		}
+		planes["fighter-return"] = &objUnit.Plane{
+			Name:        "F6F-3",
+			BelongShip:  ship.Uid,
+			FlightPhase: objUnit.PlaneFlightPhaseLandingApproach,
+		}
 	}
 	return &state.MissionState{
 		Core: state.MissionCoreState{MissionStatus: state.MissionRunning},

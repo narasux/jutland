@@ -42,7 +42,7 @@ func newAirfieldLandingTestState(
 	// 静态基地：跑道沿正北（rotation 0），长 6 格，位于地图中部
 	airfield := objBuilding.NewAirfield(
 		objPos.NewR(50, 50), 0, 6, 0.8,
-		faction.HumanAlpha, 14, 1,
+		faction.HumanAlpha, 1,
 		[]objUnit.PlaneGroup{{Name: planeName, MaxCount: maxCount}},
 	)
 	plane := objUnit.NewPlane(planeName, objPos.NewR(50, 54), 0, airfield.Uid, faction.HumanAlpha)

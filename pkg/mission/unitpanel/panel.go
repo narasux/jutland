@@ -35,16 +35,22 @@ const (
 	ActionToggleWeapon
 	// ActionToggleAircraft 批量允许或禁止舰载机起飞。
 	ActionToggleAircraft
+	// ActionToggleAirfield 机场停用/启用（停用时不警戒起飞、不生产）。
+	ActionToggleAirfield
+	// ActionSetProducing 设置机场当前生产机型。
+	ActionSetProducing
 )
 
 // Action 是单位面板输出的类型化操作，不直接修改战斗对象。
 type Action struct {
-	Kind       ActionKind
-	ShipUids   []string
-	FocusUid   string
-	TargetUid  string
-	WeaponType objUnit.WeaponType
-	Enable     bool
+	Kind        ActionKind
+	ShipUids    []string
+	FocusUid    string
+	TargetUid   string
+	WeaponType  objUnit.WeaponType
+	AirfieldUid string
+	PlaneName   string
+	Enable      bool
 }
 
 type hitKind int
@@ -59,13 +65,17 @@ const (
 	hitAllWeapons
 	hitWeapon
 	hitAircraft
+	hitAirfieldToggle
+	hitAirfieldProduce
 )
 
 type hitRegion struct {
-	Rect       Rect
-	Kind       hitKind
-	ShipUid    string
-	WeaponType objUnit.WeaponType
+	Rect        Rect
+	Kind        hitKind
+	ShipUid     string
+	WeaponType  objUnit.WeaponType
+	AirfieldUid string
+	PlaneName   string
 }
 
 // pointerInput 是面板本帧需要的最小鼠标快照。
@@ -118,7 +128,12 @@ func (p *Panel) Update(ms *state.MissionState, region Rect, scrollY float64) []A
 
 // updateWithPointer 使用显式鼠标快照刷新点击区域并处理本帧操作。
 // region 为滚动视口的屏幕坐标，pointer 为屏幕坐标；命中检测会换算到视口局部坐标。
-func (p *Panel) updateWithPointer(ms *state.MissionState, region Rect, scrollY float64, pointer pointerInput) []Action {
+func (p *Panel) updateWithPointer(
+	ms *state.MissionState,
+	region Rect,
+	scrollY float64,
+	pointer pointerInput,
+) []Action {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		p.hits = p.hits[:0]
 		return nil
@@ -157,8 +172,24 @@ func (p *Panel) syncDefaultTab(ms *state.MissionState) {
 // rebuildHits 根据本帧布局与数据重建全部可点击区域（局部坐标）。
 func (p *Panel) rebuildHits(ms *state.MissionState) {
 	p.hits = p.hits[:0]
+	if af := selectedAirfield(ms); af != nil {
+		// 机场面板：机场状态开关 + 生产机型选择行
+		p.hits = append(p.hits, hitRegion{
+			Rect: p.airfieldToggleRect(af), Kind: hitAirfieldToggle, AirfieldUid: af.Uid,
+		})
+		for index, row := range airfieldSquadRows(ms, af) {
+			p.hits = append(p.hits, hitRegion{
+				Rect:        p.airfieldSquadRowRect(af, index),
+				Kind:        hitAirfieldProduce,
+				AirfieldUid: af.Uid,
+				PlaneName:   row.Name,
+			})
+		}
+		return
+	}
 	weaponTab, aircraftTab := p.tabRects()
-	p.hits = append(p.hits,
+	p.hits = append(
+		p.hits,
 		hitRegion{Rect: weaponTab, Kind: hitWeaponTab},
 		hitRegion{Rect: aircraftTab, Kind: hitAircraftTab},
 	)
@@ -168,7 +199,8 @@ func (p *Panel) rebuildHits(ms *state.MissionState) {
 	}
 
 	if len(ships) > 1 {
-		p.hits = append(p.hits,
+		p.hits = append(
+			p.hits,
 			hitRegion{Rect: p.previousFocusRect(), Kind: hitPreviousFocus},
 			hitRegion{Rect: p.nextFocusRect(), Kind: hitNextFocus},
 		)
@@ -241,6 +273,14 @@ func (p *Panel) activate(ms *state.MissionState, hit hitRegion) []Action {
 		return []Action{p.weaponAction(ms, hit.WeaponType)}
 	case hitAircraft:
 		return []Action{p.aircraftAction(ms)}
+	case hitAirfieldToggle:
+		return []Action{{Kind: ActionToggleAirfield, AirfieldUid: hit.AirfieldUid}}
+	case hitAirfieldProduce:
+		return []Action{{
+			Kind:        ActionSetProducing,
+			AirfieldUid: hit.AirfieldUid,
+			PlaneName:   hit.PlaneName,
+		}}
 	default:
 		return nil
 	}
