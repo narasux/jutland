@@ -4,8 +4,6 @@ import (
 	"slices"
 	"time"
 
-	"github.com/narasux/jutland/pkg/config"
-
 	"github.com/narasux/jutland/pkg/mission/object"
 )
 
@@ -117,7 +115,7 @@ func (sa *ShipAircraft) CancelLanding(planeUID string) {
 // TakeOff 起飞战机（不区分飞机种类，只看打击对象类型）。
 // 多弹射器并行且独享：各起飞点独立计时冷却，同一时刻一个点只服务一架；
 // 点按配置顺序选用，planeTypes 白名单实现「长起飞点专供轰炸机 / 鱼雷机」。
-func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType object.Type) *Plane {
+func (sa *ShipAircraft) TakeOff(base AircraftBase, targetObjType object.Type) *Plane {
 	// 禁止起飞只阻止新飞机离舰，不影响已经出击飞机继续作战或返航。
 	if sa.Disable {
 		return nil
@@ -132,7 +130,7 @@ func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType object.Type) *Pl
 		// 判断起飞冷却，冷却中该弹射器被占用
 		cooldown := sa.takeOffCooldown(point)
 		if cooldown > 0 &&
-			sa.takeoffPointTimes[idx]+int64(cooldown*1e3/config.G.SpeedMultiplier) > timeNow {
+			sa.takeoffPointTimes[idx]+int64(cooldown*1e3/gameSpeedMultiplier()) > timeNow {
 			continue
 		}
 		groupIdx := sa.matchingGroupIdx(point, targetObjType)
@@ -143,19 +141,23 @@ func (sa *ShipAircraft) TakeOff(ship *BattleShip, targetObjType object.Type) *Pl
 		sa.Groups[groupIdx].CurCount--
 		sa.takeoffPointTimes[idx] = timeNow
 		sa.LatestTakeOffAt = timeNow
-		plane := NewPlane(sa.Groups[groupIdx].Name, ship.CurPos, ship.CurRotation, ship.Uid, ship.BelongPlayer)
-		plane.StartTakeoff(ship, point)
+		plane := NewPlane(
+			sa.Groups[groupIdx].Name,
+			base.BasePos(), base.BaseRotation(),
+			base.BaseUid(), base.BaseBelongPlayer(),
+		)
+		plane.StartTakeoff(base, point)
 		return plane
 	}
 	return nil
 }
 
-// Recovery 回收飞机
-func (sa *ShipAircraft) Recovery(plane *Plane) {
+// Recovery 回收飞机，返回是否恢复库存（飞机血量低于 15% 时无回收价值）。
+func (sa *ShipAircraft) Recovery(plane *Plane) bool {
 	sa.CancelLanding(plane.Uid)
 	// 飞机血量低于 15% 时，没有回收价值
 	if plane.CurHP/plane.TotalHP < 0.15 {
-		return
+		return false
 	}
 	// 逐个组按名称匹配
 	for idx, g := range sa.Groups {
@@ -167,6 +169,7 @@ func (sa *ShipAircraft) Recovery(plane *Plane) {
 		}
 		// 添加库存数量（非指针需要通过索引修改）
 		sa.Groups[idx].CurCount++
-		return
+		return true
 	}
+	return false
 }

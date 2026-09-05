@@ -97,9 +97,9 @@ func (d *CarrierDeck) validate() {
 	d.Landing.ApproachLength = max(minApproachLength, d.Landing.ApproachLength)
 }
 
-// carrierWidthInMapBlocks 将舰宽资源像素长度换算为地图坐标长度。
-func carrierWidthInMapBlocks(ship *BattleShip) float64 {
-	return max(ship.Width/constants.MapBlockSize, 0.1)
+// carrierWidthInMapBlocks 将基地宽度资源像素长度换算为地图坐标长度。
+func carrierWidthInMapBlocks(base AircraftBase) float64 {
+	return max(base.BaseWidth()/constants.MapBlockSize, 0.1)
 }
 
 // landingConfig 返回解析后的降落配置；未配置模板时回退到甲板中线降落。
@@ -140,11 +140,11 @@ func (sa *ShipAircraft) landingConfigForSlot(slot int) LandingConfig {
 	return cfg
 }
 
-// takeoffLandingPos 将着舰回收点配置换算为航母局部地图坐标。
-func takeoffLandingPos(ship *BattleShip, landing LandingConfig) carrierLocalOffset {
+// takeoffLandingPos 将着舰回收点配置换算为基地局部地图坐标。
+func takeoffLandingPos(base AircraftBase, landing LandingConfig) carrierLocalOffset {
 	return carrierLocalOffset{
-		forward: carrierLengthInMapBlocks(ship) * (0.5 - landing.Forward),
-		lateral: carrierWidthInMapBlocks(ship) * landing.Lateral,
+		forward: carrierLengthInMapBlocks(base) * (0.5 - landing.Forward),
+		lateral: carrierWidthInMapBlocks(base) * landing.Lateral,
 	}
 }
 

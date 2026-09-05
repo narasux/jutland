@@ -58,8 +58,19 @@ func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos
 func (r *Releaser) shotParameters(
 	shooter Attacker, enemy Hurtable,
 ) (UnitMovementState, objPos.MapPos, float64, bool) {
-	// 已释放 / 对象不是战舰，不可发射
-	if r.Released || enemy.ObjType() != object.TypeShip {
+	// 已释放，不可发射
+	if r.Released {
+		return UnitMovementState{}, objPos.MapPos{}, 0, false
+	}
+	// 目标门槛：战舰始终可攻击；地面飞机（停放/滑行）只能被炸弹攻击（鱼雷无法在陆地使用）。
+	switch enemy.ObjType() {
+	case object.TypeShip:
+	case object.TypePlane:
+		plane, ok := enemy.(*Plane)
+		if !ok || !plane.IsOnGround() || r.bulletType() == objBullet.TypeTorpedo {
+			return UnitMovementState{}, objPos.MapPos{}, 0, false
+		}
+	default:
 		return UnitMovementState{}, objPos.MapPos{}, 0, false
 	}
 
@@ -105,6 +116,11 @@ func (r *Releaser) pathCrossesLand(
 	return false
 }
 
+// bulletType 查询释放器装载的弹药类型（炸弹 / 航空鱼雷）。
+func (r *Releaser) bulletType() objBullet.Type {
+	return objBullet.GetType(r.BulletName)
+}
+
 // Fire 发射
 func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
 	sState, targetPos, bulletSpeed, ok := r.shotParameters(shooter, enemy)
@@ -114,7 +130,7 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 
 	// 成功释放弹药
 	r.Released = true
-	bulletType := objBullet.GetType(r.BulletName)
+	bulletType := r.bulletType()
 	shotType := lo.Ternary(
 		bulletType == objBullet.TypeBomb,
 		objBullet.ShotTypeArcing, objBullet.ShotTypeDirect,

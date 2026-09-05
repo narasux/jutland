@@ -19,6 +19,31 @@ import (
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
+// bombBlastRadius 炸弹/曲射炮弹落点的爆炸波及半径（地图格）：
+// 半径内的地面飞机（停放与滑行中）都会受到伤害，而不是要求落点
+// 精确落在机身矩形内。
+const bombBlastRadius = 1.0
+
+// damageGroundPlanesNear 落点爆炸波及范围内的地面飞机结算伤害，
+// excludeUid 用于排除已被直接命中的目标；返回是否造成伤害。
+func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid string) bool {
+	hit := false
+	for uid, plane := range m.state.Arena.Planes {
+		if uid == excludeUid || !plane.IsOnGround() {
+			continue
+		}
+		// 如果友军伤害没启用，则不对己方地面飞机造成伤害
+		if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
+			continue
+		}
+		if bt.CurPos.Distance(plane.CurPos) <= bombBlastRadius {
+			plane.HurtBy(bt)
+			hit = true
+		}
+	}
+	return hit
+}
+
 // 更新战舰武器开火相关状态
 // TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
 func (m *MissionManager) updateShipWeaponFire() {
@@ -173,6 +198,15 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 				}
 				inRangeEnemies = append(inRangeEnemies, enemy)
 			}
+			// 敌方地面飞机（停放/滑行）：轰炸机可将其作为攻击目标，鱼雷机除外
+			if plane.Type != objUnit.PlaneTypeTorpedoBomber {
+				for _, enemy := range m.state.Arena.Planes {
+					if plane.BelongPlayer == enemy.BelongPlayer || !enemy.IsOnGround() {
+						continue
+					}
+					inRangeEnemies = append(inRangeEnemies, enemy)
+				}
+			}
 		}
 		if total := len(inRangeEnemies); total != 0 {
 			// 射程内的敌人都会被攻击
@@ -182,6 +216,51 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		} else {
 			// 没有可攻击对象，返航
 			m.instructionSet.Add(instr.NewPlaneReturn(plane.Uid))
+		}
+	}
+}
+
+// updateAirfieldAlertLaunch 机场警戒起飞：敌方进入警戒半径时从停机坪起飞迎战。
+// 与航母共用起飞点冷却与机型白名单（SelectLaunch），逐个提升停机坪上的停放实体；
+// 甲板设有双起飞点，一帧内可并行提升两架。提升的飞机先滑入跑道，滑行到位后再起飞。
+func (m *MissionManager) updateAirfieldAlertLaunch() {
+	for _, af := range m.state.Arena.Airfields {
+		if !af.CanAlertLaunch() {
+			continue
+		}
+		// 警戒半径内的敌人（敌机与敌舰同级，随机选择；敌方地面飞机不触发警戒）
+		inRangeEnemies := []objUnit.Hurtable{}
+		for _, enemy := range m.state.Arena.Planes {
+			if enemy.BelongPlayer == af.BelongPlayer || enemy.IsOnGround() {
+				continue
+			}
+			if af.Pos.Distance(enemy.CurPos) > af.AlertRadius {
+				continue
+			}
+			inRangeEnemies = append(inRangeEnemies, enemy)
+		}
+		for _, enemy := range m.state.Arena.Ships {
+			if enemy.BelongPlayer == af.BelongPlayer {
+				continue
+			}
+			if af.Pos.Distance(enemy.CurPos) > af.AlertRadius {
+				continue
+			}
+			inRangeEnemies = append(inRangeEnemies, enemy)
+		}
+		if len(inRangeEnemies) == 0 {
+			continue
+		}
+		enemy := inRangeEnemies[rand.Intn(len(inRangeEnemies))]
+		// 与航母一致：直接在跑道起点刷新起飞（双起飞点 → 一帧最多两架）
+		for range 2 {
+			plane := af.Aircraft.TakeOff(af, enemy.ObjType())
+			if plane == nil {
+				break
+			}
+			// 加入到对局飞机数据集中并下达攻击指令
+			m.state.Arena.Planes[plane.Uid] = plane
+			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
 		}
 	}
 }
@@ -220,6 +299,19 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 					continue
 				}
 				inRangeEnemies = append(inRangeEnemies, enemy)
+			}
+			// 敌方地面飞机（停放/滑行）：轰炸机可用炸弹攻击，鱼雷机除外
+			if plane.Type != objUnit.PlaneTypeTorpedoBomber {
+				for _, enemy := range m.state.Arena.Planes {
+					if plane.BelongPlayer == enemy.BelongPlayer || !enemy.IsOnGround() {
+						continue
+					}
+					// 如果不在 对舰 最大射程内，跳过
+					if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToShipRange {
+						continue
+					}
+					inRangeEnemies = append(inRangeEnemies, enemy)
+				}
 			}
 		}
 		if total := len(inRangeEnemies); total != 0 {
@@ -333,6 +425,14 @@ func (m *MissionManager) updateShotBullets() {
 					}
 				}
 			}
+			// 曲射炮弹 / 炸弹落点爆炸波及地面飞机（停放与滑行）：按爆炸半径
+			// 结算，不要求落点精确落在机身矩形内（机场本体无敌，但地面
+			// 飞机会被炸毁）
+			if bt.ShotType == objBullet.ShotTypeArcing && bt.HitObjType == object.TypeNone {
+				if m.damageGroundPlanesNear(bt, "") {
+					bt.HitObjType = object.TypePlane
+				}
+			}
 		case object.TypePlane:
 			for _, plane := range m.state.Arena.Planes {
 				// 总不能不小心打死自己吧，真是不应该 :D
@@ -370,6 +470,10 @@ func (m *MissionManager) updateShotBullets() {
 				) {
 					plane.HurtBy(bt)
 					bt.HitObjType = object.TypePlane
+					// 炸弹直接命中一架地面飞机时，爆炸同时波及附近其他地面飞机
+					if bt.ShotType == objBullet.ShotTypeArcing {
+						m.damageGroundPlanesNear(bt, plane.Uid)
+					}
 					break
 				}
 			}

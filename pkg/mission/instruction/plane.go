@@ -89,9 +89,12 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
-	// 起飞阶段沿甲板弹射线滑跑，不立即转向接敌。
+	// 所属基地可以是航母或陆地机场；基地缺失（如航母被击沉）时退化为自由飞行
+	base, _ := missionState.FindAircraftBase(attacker.BelongShip)
+	mapCfg := missionState.Core.MissionMD.MapCfg
+	// 起飞阶段沿跑道 / 甲板弹射线滑跑，不立即转向接敌。
 	if attacker.FlightPhase == objUnit.PlaneFlightPhaseTakingOff {
-		attacker.UpdateTakeoff(missionState.Core.MissionMD.MapCfg, missionState.Arena.Ships[attacker.BelongShip])
+		attacker.UpdateTakeoff(mapCfg, base)
 		return nil
 	}
 	if !attacker.IsCruising() {
@@ -121,6 +124,16 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	if !enemyExists {
 		i.status = Executed
 		return nil
+	}
+
+	// 对舰机型（轰炸机/鱼雷机）只能攻击地面飞机（炸弹/鱼雷的投放门槛）；
+	// 锁定的地面目标一旦升空，继续追踪只会绕着机场空转，这里直接终止
+	// 指令，交由调度进程重新分配目标或触发返航。
+	if i.targetObjType == object.TypePlane && attacker.AttackObjType() == object.TypeShip {
+		if target, ok := enemy.(*objUnit.Plane); ok && !target.IsOnGround() {
+			i.status = Executed
+			return nil
+		}
 	}
 
 	// 一击脱离逻辑（仅对战舰目标生效，对飞机目标保持持续追踪直到击落）：
@@ -189,9 +202,9 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 		return nil
 	}
 
-	ship, ok := missionState.Arena.Ships[plane.BelongShip]
+	base, ok := missionState.FindAircraftBase(plane.BelongShip)
 	if !ok {
-		// FIXME 目前载舰如果沉没，则飞机也直接坠毁，后续考虑备降到其他地方
+		// FIXME 目前载具如果沉没，则飞机也直接坠毁，后续考虑备降到其他地方
 		plane.CurHP = 0
 		i.status = Executed
 		return nil
@@ -200,33 +213,34 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	mapCfg := missionState.Core.MissionMD.MapCfg
 	switch plane.FlightPhase {
 	case objUnit.PlaneFlightPhaseTakingOff:
-		plane.UpdateTakeoff(mapCfg, ship)
+		plane.UpdateTakeoff(mapCfg, base)
 	case "", objUnit.PlaneFlightPhaseCruising:
-		slot := ship.Aircraft.RequestLanding(plane.Uid)
-		plane.StartLandingStaging(mapCfg, ship, slot)
+		slot := base.BaseAircraft().RequestLanding(plane.Uid)
+		plane.StartLandingStaging(mapCfg, base, slot)
 	case objUnit.PlaneFlightPhaseLandingStaging:
-		if plane.UpdateLandingStaging(mapCfg, ship) {
-			plane.StartLandingApproach(ship)
+		if plane.UpdateLandingStaging(mapCfg, base) {
+			plane.StartLandingApproach(base)
 		}
 	case objUnit.PlaneFlightPhaseLandingApproach:
-		if plane.UpdateLandingApproach(ship) {
-			plane.StartLandingDeck(ship)
+		if plane.UpdateLandingApproach(base) {
+			plane.StartLandingDeck(base)
 		}
 	case objUnit.PlaneFlightPhaseLandingDeck:
-		if !plane.UpdateLandingDeck(ship) {
+		if !plane.UpdateLandingDeck(base) {
 			return nil
 		}
-		i.recoverPlane(missionState, ship, plane)
+		i.recoverPlane(missionState, base, plane)
 	}
 	return nil
 }
 
 func (i *PlaneReturn) recoverPlane(
 	missionState *state.MissionState,
-	ship *objUnit.BattleShip,
+	base objUnit.AircraftBase,
 	plane *objUnit.Plane,
 ) {
-	ship.Aircraft.Recovery(plane)
+	// 回收（航母与机场一致）：入库后移除活动实体；飞机无回收价值时按坠毁处理
+	base.BaseAircraft().Recovery(plane)
 	delete(missionState.Arena.Planes, i.planeUid)
 	i.status = Executed
 }

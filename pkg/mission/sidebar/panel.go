@@ -415,6 +415,12 @@ func (p *Panel) drawMinimapBuildings(screen *ebiten.Image, ms *state.MissionStat
 		x, y := p.mapToSidebar(ms, op.Pos.RX, op.Pos.RY)
 		vector.FillCircle(screen, float32(x), float32(y), 2.5, colorx.Gold, false)
 	}
+	// 陆地机场（按阵营着色的圆点）
+	for _, af := range ms.Arena.Airfields {
+		clr := lo.Ternary(af.BelongPlayer == ms.Player.CurPlayer, colorx.Green, colorx.Red)
+		x, y := p.mapToSidebar(ms, af.Pos.RX, af.Pos.RY)
+		vector.FillCircle(screen, float32(x), float32(y), 3, clr, false)
+	}
 }
 
 func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {

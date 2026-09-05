@@ -265,6 +265,22 @@ other = "Числа урона"
 other = "Карта / Корабли"
 [SidebarTabSettings]
 other = "Настройки"
+[AirfieldPanelTitle]
+other = "Аэродром"
+[AirfieldParkedCount]
+other = "На стоянке"
+[AirfieldFlyingCount]
+other = "В воздухе"
+[AirfieldLostCount]
+other = "Потери"
+[AirfieldProductionToggle]
+other = "Автопроизводство"
+[AirfieldAlertToggle]
+other = "Тревога"
+[AirfieldOn]
+other = "Вкл"
+[AirfieldOff]
+other = "Выкл"
 [UnitPanelNoSelection]
 other = "Не выбрано кораблей"
 [UnitPanelOpen]

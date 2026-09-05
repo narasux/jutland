@@ -105,6 +105,23 @@ func (d *Drawer) drawBuildingsInCamera(screen *ebiten.Image, ms *state.MissionSt
 			false,
 		)
 	}
+	// 陆地机场：地图素材已自带跑道与停机坪视觉，不重复绘制跑道图形；
+	// 停放/滑行的飞机实体即机场标识，常显警戒半径圈（警戒起飞开局常开）
+	for _, af := range ms.Arena.Airfields {
+		if af.AlertRadius <= 0 || !ms.View.Camera.Contains(af.Pos) {
+			continue
+		}
+		x, y := ms.CameraPosToScreen(af.Pos)
+		vector.StrokeCircle(
+			screen,
+			float32(x),
+			float32(y),
+			float32(af.AlertRadius*ms.MapBlockDisplaySize()),
+			2,
+			colorx.Green,
+			false,
+		)
+	}
 }
 
 // drawBuildingInterface 绘制增援点交互界面

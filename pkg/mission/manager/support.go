@@ -52,6 +52,21 @@ func (m *MissionManager) updateBuildings() {
 		}
 	}
 
+	// 陆地机场当然算是建筑物！自动生产推进（生产完成的飞机直接入库）
+	for _, af := range m.state.Arena.Airfields {
+		completed := af.Update(
+			// FIXME 目前电脑玩家先不限制金钱（与增援点保持一致）
+			lo.Ternary(af.BelongPlayer == m.state.Player.CurPlayer, m.state.Player.CurFunds, int64(50000)),
+		)
+		for _, planeName := range completed {
+			if af.BelongPlayer == m.state.Player.CurPlayer {
+				fundsCost, _ := objUnit.GetPlaneCost(planeName)
+				m.state.Player.CurFunds -= fundsCost
+			}
+			af.StockPlane(planeName)
+		}
+	}
+
 	// 油井当然算是建筑物！
 	fontSize := float64(24)
 	for _, op := range m.state.Arena.OilPlatforms {

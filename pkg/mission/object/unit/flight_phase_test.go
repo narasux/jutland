@@ -108,8 +108,9 @@ func TestTakeoffUsesSmoothMonotonicAcceleration(t *testing.T) {
 	if plane.FlightPhase != PlaneFlightPhaseCruising {
 		t.Fatalf("takeoff did not reach cruising phase")
 	}
-	if frames < 45 || frames > 90 {
-		t.Fatalf("takeoff duration = %d frames, want 45..90", frames)
+	// 慢加速起步（initial 0.04、120 帧 S 曲线）下完整起飞约 110~140 帧
+	if frames < 100 || frames > 150 {
+		t.Fatalf("takeoff duration = %d frames, want 100..150", frames)
 	}
 	if firstSpeedStep > plane.MaxSpeed*0.01 {
 		t.Fatalf("first takeoff speed step = %v, want <= %v", firstSpeedStep, plane.MaxSpeed*0.01)

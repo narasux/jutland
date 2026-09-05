@@ -262,6 +262,22 @@ other = "伤害数字"
 other = "地图 / 战舰"
 [SidebarTabSettings]
 other = "设置"
+[AirfieldPanelTitle]
+other = "机场"
+[AirfieldParkedCount]
+other = "停放"
+[AirfieldFlyingCount]
+other = "在飞"
+[AirfieldLostCount]
+other = "损失"
+[AirfieldProductionToggle]
+other = "自动生产"
+[AirfieldAlertToggle]
+other = "警戒起飞"
+[AirfieldOn]
+other = "开"
+[AirfieldOff]
+other = "关"
 [UnitPanelNoSelection]
 other = "未选择战舰"
 [UnitPanelOpen]

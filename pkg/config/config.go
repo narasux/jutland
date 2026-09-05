@@ -57,6 +57,8 @@ type GameSettings struct {
 	SpeedMultiplier float64 `json:"speedMultiplier"`
 	// Language 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja。
 	Language string `json:"language"`
+	// EnableLandAirfield 陆地机场功能总开关，false 时所有任务不生成机场
+	EnableLandAirfield bool `json:"enableLandAirfield"`
 }
 
 // G 游戏设置全局变量
@@ -65,8 +67,9 @@ var G *GameSettings
 // NewDefaultGameSettings 创建默认游戏设置
 func NewDefaultGameSettings() *GameSettings {
 	return &GameSettings{
-		SpeedMultiplier: 1.0,
-		Language:        "zh-Hans",
+		SpeedMultiplier:    1.0,
+		Language:           "zh-Hans",
+		EnableLandAirfield: true,
 	}
 }
 
@@ -112,6 +115,8 @@ func LoadGameSettings() {
 
 	// 解析 JSON5
 	var settings GameSettings
+	// 缺省开启陆地机场，配置中显式为 false 时才关闭
+	settings.EnableLandAirfield = true
 	decoder := json5.NewDecoder(file)
 	if err = decoder.Decode(&settings); err != nil {
 		log.Printf("[ERROR] Failed to parse game_settings.json5: %v, using default settings", err)
@@ -154,7 +159,8 @@ func SaveGameSettings() error {
 			"影响战舰、炮弹、鱼雷、飞机等移动/转向速度\n",
 	)
 	_, _ = file.WriteString("// 范围: 0.25 ~ 4.0，默认值: 1.0\n\n")
-	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n\n")
+	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n")
+	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

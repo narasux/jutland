@@ -174,7 +174,7 @@ type Plane struct {
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
-	// 所属战舰（uid）
+	// 所属基地（uid）：可以是航母，也可以是陆地机场
 	BelongShip string
 
 	// 移动策略（根据飞机类型自动设置）
@@ -240,13 +240,13 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	for i := 0; i < len(p.Weapon.Rockets); i++ {
 		shotBullets = append(shotBullets, p.Weapon.Rockets[i].Fire(p, enemy)...)
 	}
-	// 释放器类武器，有最小的释放间隔限制，且目前只能攻击战舰。
-	if enemy.ObjType() == object.TypeShip {
+	// 释放器类武器，有最小的释放间隔限制。
+	// 炸弹可攻击战舰与地面停放目标；鱼雷只能攻击战舰（无法在陆地使用）。
+	canRelease := enemy.ObjType() == object.TypeShip || isGroundHurtable(enemy)
+	if canRelease {
 		timeNow := time.Now().UnixMilli()
 		if float64(timeNow-p.Weapon.LatestReleaseAt) > p.Weapon.ReleaseInterval*1e3 {
-			for _, releasers := range [2][]*Releaser{
-				p.Weapon.Bombs, p.Weapon.Torpedoes,
-			} {
+			for _, releasers := range p.releaseGroups(enemy) {
 				for i := 0; i < len(releasers); i++ {
 					if bullets := releasers[i].Fire(p, enemy); len(bullets) > 0 {
 						shotBullets = append(shotBullets, bullets...)
@@ -258,6 +258,21 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 		}
 	}
 	return shotBullets
+}
+
+// releaseGroups 返回当前目标可用的释放器分组：对舰目标为炸弹 + 鱼雷，
+// 对地面停放目标仅炸弹（鱼雷入水即毁，不能攻击陆地目标）。
+func (p *Plane) releaseGroups(enemy Hurtable) [2][]*Releaser {
+	if enemy.ObjType() == object.TypeShip {
+		return [2][]*Releaser{p.Weapon.Bombs, p.Weapon.Torpedoes}
+	}
+	return [2][]*Releaser{p.Weapon.Bombs, nil}
+}
+
+// isGroundHurtable 判断目标是否为地面飞机（停放或滑行中，可被炸弹攻击的地面目标）。
+func isGroundHurtable(enemy Hurtable) bool {
+	plane, ok := enemy.(*Plane)
+	return ok && plane.IsOnGround()
 }
 
 // TorpedoPathCrossesLand 返回当前可投放的航空鱼雷航迹是否经过陆地。

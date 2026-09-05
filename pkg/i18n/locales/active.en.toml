@@ -262,6 +262,22 @@ other = "Damage numbers"
 other = "Map / Ships"
 [SidebarTabSettings]
 other = "Settings"
+[AirfieldPanelTitle]
+other = "Airfield"
+[AirfieldParkedCount]
+other = "Parked"
+[AirfieldFlyingCount]
+other = "Airborne"
+[AirfieldLostCount]
+other = "Lost"
+[AirfieldProductionToggle]
+other = "Auto production"
+[AirfieldAlertToggle]
+other = "Alert launch"
+[AirfieldOn]
+other = "On"
+[AirfieldOff]
+other = "Off"
 [UnitPanelNoSelection]
 other = "No ships selected"
 [UnitPanelOpen]

@@ -6,6 +6,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	"github.com/narasux/jutland/pkg/mission/object/trail"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
@@ -134,8 +135,12 @@ func (m *MissionManager) updateMissionPlanes() {
 	// 如果战机 HP 为 0，则需要走消亡流程
 	for uid, plane := range m.state.Arena.Planes {
 		if plane.CurHP <= 0 {
-			if ship := m.state.Arena.Ships[plane.BelongShip]; ship != nil {
-				ship.Aircraft.CancelLanding(uid)
+			if base, ok := m.state.FindAircraftBase(plane.BelongShip); ok {
+				// 机场飞机损失：库存已在起飞时扣减，这里仅累计损失统计
+				if af, isAirfield := base.(*objBuilding.Airfield); isAirfield {
+					af.RecordLoss(plane.Name)
+				}
+				base.BaseAircraft().CancelLanding(uid)
 			}
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			plane.CurHP = textureImg.MaxPlaneExplodeState

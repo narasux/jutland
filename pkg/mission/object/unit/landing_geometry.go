@@ -74,44 +74,46 @@ type landingApproachArc struct {
 	start         carrierLocalOffset
 }
 
-// carrierRelativePos 返回航母中线上指定前后偏移量对应的地图坐标。
-func carrierRelativePos(ship *BattleShip, offset float64) objPos.MapPos {
-	return carrierRelativePos2D(ship, offset, 0)
+// carrierRelativePos 返回基地中线上指定前后偏移量对应的地图坐标。
+func carrierRelativePos(base AircraftBase, offset float64) objPos.MapPos {
+	return carrierRelativePos2D(base, offset, 0)
 }
 
-// carrierRelativePos2D 将航母局部坐标旋转、平移到地图坐标。
-func carrierRelativePos2D(ship *BattleShip, forward, lateral float64) objPos.MapPos {
-	radians := ship.CurRotation * math.Pi / 180
+// carrierRelativePos2D 将基地局部坐标旋转、平移到地图坐标。
+func carrierRelativePos2D(base AircraftBase, forward, lateral float64) objPos.MapPos {
+	radians := base.BaseRotation() * math.Pi / 180
 	sinVal, cosVal := math.Sin(radians), math.Cos(radians)
+	pos := base.BasePos()
 	return objPos.NewR(
-		ship.CurPos.RX+sinVal*forward+cosVal*lateral,
-		ship.CurPos.RY-cosVal*forward+sinVal*lateral,
+		pos.RX+sinVal*forward+cosVal*lateral,
+		pos.RY-cosVal*forward+sinVal*lateral,
 	)
 }
 
 // planeCarrierLocalOffset 是 carrierRelativePos2D 的逆变换。
-func planeCarrierLocalOffset(p *Plane, ship *BattleShip) carrierLocalOffset {
-	radians := ship.CurRotation * math.Pi / 180
+func planeCarrierLocalOffset(p *Plane, base AircraftBase) carrierLocalOffset {
+	radians := base.BaseRotation() * math.Pi / 180
 	sinVal, cosVal := math.Sin(radians), math.Cos(radians)
-	dx, dy := p.CurPos.RX-ship.CurPos.RX, p.CurPos.RY-ship.CurPos.RY
+	pos := base.BasePos()
+	dx, dy := p.CurPos.RX-pos.RX, p.CurPos.RY-pos.RY
 	return carrierLocalOffset{
 		forward: dx*sinVal - dy*cosVal,
 		lateral: dx*cosVal + dy*sinVal,
 	}
 }
 
-// landingTouchdownOffset 返回着舰回收点的航母局部地图坐标。
-func landingTouchdownOffset(ship *BattleShip, landing LandingConfig) carrierLocalOffset {
-	return takeoffLandingPos(ship, landing)
+// landingTouchdownOffset 返回着舰回收点的基地局部地图坐标。
+func landingTouchdownOffset(base AircraftBase, landing LandingConfig) carrierLocalOffset {
+	return takeoffLandingPos(base, landing)
 }
 
 // landingScaleCompleteRatio 返回直线进近段降到最低视觉倍率（触舰/触水）时的路程比例。
 // 甲板回收仍用固定 80%；着水回收把触水点放在舰尾后方 0.8 个舰长。
-func landingScaleCompleteRatio(ship *BattleShip, landing LandingConfig) float64 {
+func landingScaleCompleteRatio(base AircraftBase, landing LandingConfig) float64 {
 	if landing.Mode != LandingModeSea {
 		return landingDeckScaleDistanceRatio
 	}
-	start := landingFinalStartOffset(ship, landing)
+	start := landingFinalStartOffset(base, landing)
 	endForward := 0.5 - landing.Forward
 	splashForward := -0.5 - seaLandingSplashdownAftOfSternRatio
 	run := endForward - start.forward
@@ -123,9 +125,9 @@ func landingScaleCompleteRatio(ship *BattleShip, landing LandingConfig) float64 
 
 // landingFinalStartOffset 返回最终直线进近段起点的舰长单位局部坐标。
 // 起点 = 着舰点沿反进近方向后退 approachLength 个舰长，圆弧在此与直线段衔接。
-func landingFinalStartOffset(ship *BattleShip, landing LandingConfig) carrierLocalOffset {
-	length := carrierLengthInMapBlocks(ship)
-	touchdown := takeoffLandingPos(ship, landing)
+func landingFinalStartOffset(base AircraftBase, landing LandingConfig) carrierLocalOffset {
+	length := carrierLengthInMapBlocks(base)
+	touchdown := takeoffLandingPos(base, landing)
 	tangent := landingApproachTangent(landing)
 	run := length * landing.ApproachLength
 	return carrierLocalOffset{
@@ -135,16 +137,16 @@ func landingFinalStartOffset(ship *BattleShip, landing LandingConfig) carrierLoc
 }
 
 // landingFinalStartPos 返回最终直线进近段起点的地图坐标。
-func landingFinalStartPos(ship *BattleShip, landing LandingConfig) objPos.MapPos {
-	end := landingFinalStartOffset(ship, landing)
-	length := carrierLengthInMapBlocks(ship)
-	return carrierRelativePos2D(ship, end.forward*length, end.lateral*length)
+func landingFinalStartPos(base AircraftBase, landing LandingConfig) objPos.MapPos {
+	end := landingFinalStartOffset(base, landing)
+	length := carrierLengthInMapBlocks(base)
+	return carrierRelativePos2D(base, end.forward*length, end.lateral*length)
 }
 
 // carrierLandingDeckEndPos 返回最终着舰回收点的地图坐标。
-func carrierLandingDeckEndPos(ship *BattleShip, landing LandingConfig) objPos.MapPos {
-	touchdown := landingTouchdownOffset(ship, landing)
-	return carrierRelativePos2D(ship, touchdown.forward, touchdown.lateral)
+func carrierLandingDeckEndPos(base AircraftBase, landing LandingConfig) objPos.MapPos {
+	touchdown := landingTouchdownOffset(base, landing)
+	return carrierRelativePos2D(base, touchdown.forward, touchdown.lateral)
 }
 
 // landingLaneOffsetRatio 将稳定槽位映射到左右交替的 16 条进近通道。
@@ -163,12 +165,12 @@ func landingLaneOffsetRatio(slot int) float64 {
 // landingStagingTarget 返回指定稳定槽位对应的圆弧入口地图坐标。
 func (sa *ShipAircraft) landingStagingTarget(
 	_ *mapcfg.MapCfg,
-	ship *BattleShip,
+	base AircraftBase,
 	slot int,
 ) objPos.MapPos {
-	length := carrierLengthInMapBlocks(ship)
+	length := carrierLengthInMapBlocks(base)
 	gate := landingGateLocalOffset(slot)
-	return carrierRelativePos2D(ship, length*gate.forward, length*gate.lateral)
+	return carrierRelativePos2D(base, length*gate.forward, length*gate.lateral)
 }
 
 // landingGateLocalOffset 返回槽位对应的航母局部入口；超过 16 架后按批次向舰尾错开。
@@ -186,12 +188,12 @@ func landingGateLocalOffset(slot int) carrierLocalOffset {
 // 该构造保证整段只向一侧转弯，横向偏差单调收敛，不会形成反曲。
 func buildLandingApproachArc(
 	start carrierLocalOffset,
-	ship *BattleShip,
+	base AircraftBase,
 	maxSpeed float64,
 	landing LandingConfig,
 ) (landingApproachArc, bool) {
-	length := carrierLengthInMapBlocks(ship)
-	end := landingFinalStartOffset(ship, landing)
+	length := carrierLengthInMapBlocks(base)
+	end := landingFinalStartOffset(base, landing)
 	tangent := landingApproachTangent(landing)
 
 	// 法向量取切线左侧；起点在右侧时翻转到右侧，保证 w·n > 0
@@ -272,25 +274,25 @@ func landingLeadInLocalOffset(arc landingApproachArc) carrierLocalOffset {
 // landingArcEntryTargetSpeed 返回飞机进入圆弧首帧所需的世界速度大小。
 func landingArcEntryTargetSpeed(
 	arc landingApproachArc,
-	ship *BattleShip,
+	base AircraftBase,
 	turnRate float64,
 ) float64 {
-	velocity := landingArcWorldVelocity(arc, ship, 0, turnRate)
+	velocity := landingArcWorldVelocity(arc, base, 0, turnRate)
 	return math.Hypot(velocity.forward, velocity.lateral)
 }
 
-// landingArcWorldVelocity 将相对航母的圆弧速度转换为实际地图速度：
-// 航母平移速度 + 圆弧切向速度 + 航母旋转产生的 omega×r 切向速度。
+// landingArcWorldVelocity 将相对基地的圆弧速度转换为实际地图速度：
+// 基地平移速度 + 圆弧切向速度 + 基地旋转产生的 omega×r 切向速度。
 func landingArcWorldVelocity(
 	arc landingApproachArc,
-	ship *BattleShip,
+	base AircraftBase,
 	progress, turnRate float64,
 ) carrierLocalOffset {
 	tangent := landingArcTangent(arc, progress)
 	point := landingArcPoint(arc, progress)
-	length := carrierLengthInMapBlocks(ship)
+	length := carrierLengthInMapBlocks(base)
 	return carrierLocalOffset{
-		forward: ship.CurSpeed + tangent.forward*arc.relativeSpeed -
+		forward: base.BaseSpeed() + tangent.forward*arc.relativeSpeed -
 			turnRate*point.lateral*length,
 		lateral: tangent.lateral*arc.relativeSpeed + turnRate*point.forward*length,
 	}
@@ -299,20 +301,20 @@ func landingArcWorldVelocity(
 // landingArcWorldRotation 将圆弧上的世界速度向量转换为游戏航向角。
 func landingArcWorldRotation(
 	arc landingApproachArc,
-	ship *BattleShip,
+	base AircraftBase,
 	progress, turnRate float64,
 ) float64 {
-	velocity := landingArcWorldVelocity(arc, ship, progress, turnRate)
+	velocity := landingArcWorldVelocity(arc, base, progress, turnRate)
 	return normalizeAngle(
-		ship.CurRotation + math.Atan2(velocity.lateral, velocity.forward)*180/math.Pi,
+		base.BaseRotation() + math.Atan2(velocity.lateral, velocity.forward)*180/math.Pi,
 	)
 }
 
 // landingApproachEntryReady 只允许位置、航向和速度都落入入口容差的飞机进入固定圆弧。
 // 不满足条件的飞机继续执行远端切线引导，避免从舰侧强行接入造成锐角转弯。
-func landingApproachEntryReady(p *Plane, ship *BattleShip, gate carrierLocalOffset) bool {
-	length := carrierLengthInMapBlocks(ship)
-	local := planeCarrierLocalOffset(p, ship)
+func landingApproachEntryReady(p *Plane, base AircraftBase, gate carrierLocalOffset) bool {
+	length := carrierLengthInMapBlocks(base)
+	local := planeCarrierLocalOffset(p, base)
 	start := carrierLocalOffset{
 		forward: local.forward / length,
 		lateral: local.lateral / length,
@@ -322,14 +324,16 @@ func landingApproachEntryReady(p *Plane, ship *BattleShip, gate carrierLocalOffs
 		math.Abs(start.lateral-gate.lateral) > landingGateLateralToleranceRatio {
 		return false
 	}
-	arc, ok := buildLandingApproachArc(start, ship, p.MaxSpeed, ship.Aircraft.landingConfigForSlot(p.LandingSlot))
+	arc, ok := buildLandingApproachArc(
+		start, base, p.MaxSpeed, base.BaseAircraft().landingConfigForSlot(p.LandingSlot),
+	)
 	if !ok {
 		return false
 	}
-	entrySpeed := landingArcEntryTargetSpeed(arc, ship, p.landingCarrierTurnRate)
+	entrySpeed := landingArcEntryTargetSpeed(arc, base, p.landingCarrierTurnRate)
 	// 航向容差与圆弧段机头合成使用同一低通转向速率，保证进入圆弧前后
 	// 机头目标航向连续；速度容差仍用原始速率，反映真实的相对闭合速度。
-	targetRotation := landingArcWorldRotation(arc, ship, 0, p.landingDisplayTurnRate)
+	targetRotation := landingArcWorldRotation(arc, base, 0, p.landingDisplayTurnRate)
 	if angleDifferenceDegrees(p.CurRotation, targetRotation) > landingGateHeadingTolerance {
 		return false
 	}

@@ -9,11 +9,12 @@
 | 文件 | 职责 |
 | --- | --- |
 | `plane.go` | 飞机数据、目标类型、伤害、武器、返航条件和移动策略入口 |
-| `aircraft.go` | 航母机库、起飞冷却、库存扣减、着舰槽位和飞机回收 |
+| `aircraft.go` | 机库、起飞冷却、库存扣减、着舰槽位和飞机回收 |
+| `aircraft_base.go` | `AircraftBase` 基地抽象：起降几何只依赖基地位置/朝向/长宽/速度，`BattleShip` 与陆地机场 `Airfield` 都实现该接口 |
 | `movement_strategy.go` | 巡航 / 交战阶段的普通移动和战斗机追踪 |
 | `flight_phase.go` | 飞行阶段定义、起飞流程、视觉倍率及通用插值函数 |
 | `landing_phase.go` | 降落阶段的初始化、状态推进、速度控制和动态时长 |
-| `landing_geometry.go` | 航母局部坐标、进近入口、定半径圆弧及世界速度换算 |
+| `landing_geometry.go` | 基地局部坐标、进近入口、定半径圆弧及世界速度换算 |
 | `../../instruction/plane.go` | `PlaneAttack` 和 `PlaneReturn` 指令的阶段调度 |
 | `../../manager/combat.go` | 飞机出动、自动接敌、自动返航和武器开火 |
 | `../../drawer/object.go` | 飞机绘制及起降视觉倍率应用 |
@@ -26,19 +27,26 @@
 taking_off
     |
     v
-cruising ---------------> landing_staging
-                               |
-                               v
-                        landing_approach
-                               |
-                               v
-                          landing_deck
-                               |
-                               v
-                     恢复库存并移除活动飞机
+cruising
+    |
+    v
+landing_staging
+    |
+    v
+landing_approach
+    |
+    v
+landing_deck
+    |
+    v
+入库（库存 +1，活动实体移除；航母与陆地机场一致）
+
+起飞时与回收对称：从机库库存直接在基地（航母甲板 / 陆地机场跑道）
+起点刷新实体，进入 `taking_off` 滑跑，不经过任何地面滑行阶段。
 ```
 
-- `taking_off`：沿航母航向完成甲板滑跑和加速。
+- `taking_off`：沿基地（航母甲板 / 陆地机场跑道）航向完成滑跑和加速；
+  滑跑中的飞机视为地面目标，可被炸弹/曲射炮弹波及。
 - `cruising`：正常巡航、接敌、追踪和开火。
 - `landing_staging`：捕获舰尾远端引导点，再沿入口切线进入圆弧起点。
 - `landing_approach`：沿单向定半径圆弧汇入航母中线。
@@ -238,6 +246,8 @@ frames = 2 * distance / relativeSpeed
 - 生命值不低于总生命值 `15%` 时，恢复对应机组一架库存。
 - 生命值低于 `15%` 时视为无回收价值，不恢复库存。
 - 无论是否恢复库存，已着舰飞机都会从活动飞机集合删除。
+- 陆地机场与航母回收行为一致：入库即移除活动实体；库存中的飞机在下次
+  警戒起飞时于跑道起点重新刷新。
 
 当前回收后仍沿用原有起飞冷却逻辑，本文档不涉及整备、维修或重新出动队列。
 

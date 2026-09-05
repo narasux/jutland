@@ -761,6 +761,35 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         yield: 25
       }
     ],
+    // 陆地机场（受 game_settings.json5 的 enableLandAirfield 总开关控制，false 时全部不生成）
+    initAirfields: [
+      {
+        // 机场中心位置；必须落在陆地格，否则启动时报错退出
+        pos: [76, 74],
+        // 跑道朝向（度），即起飞方向；0=北、90=东、180=南、270=西
+        rotation: 90,
+        // 跑道长度（格）；飞机从跑道后端滑跑整条跑道后离地
+        runwayLength: 8,
+        // 跑道宽度（格）
+        runwayWidth: 0.8,
+        // 所属方
+        belongPlayer: "HA",
+        // 警戒起飞半径（格）；敌方进入半径内时自动从跑道起飞迎战，0 表示不警戒
+        alertRadius: 22,
+        // 起飞冷却（秒）；两次起飞之间的最小间隔；甲板设双起飞点支持双机并行
+        takeOffTime: 2,
+        // 驻场机队；机型名称需在 planes.json5 中存在（机库存放，无实体停机坪）
+        planeGroups: [
+          {
+            name: "F4F-3",
+            // 最大数量
+            maxCount: 6,
+            // 初始库存数量；缺省（<=0）时等于 maxCount
+            initCount: 4
+          }
+        ]
+      }
+    ],
     initShips: [
       // 己方初始战舰
       {

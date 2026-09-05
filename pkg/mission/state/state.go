@@ -6,6 +6,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/object"
@@ -92,6 +93,8 @@ type MissionArenaState struct {
 	ReinforcePoints map[string]*objBuilding.ReinforcePoint
 	// 油井信息
 	OilPlatforms map[string]*objBuilding.OilPlatform
+	// 陆地机场信息
+	Airfields map[string]*objBuilding.Airfield
 	// 战舰信息（Key: Uid）
 	Ships map[string]*objUnit.BattleShip
 	// 战舰 Uid 生成器
@@ -143,6 +146,18 @@ func (s *MissionState) CameraPosBorder() (w float64, h float64) {
 	w = float64(s.Core.MissionMD.MapCfg.Width - s.View.Camera.Width - 1)
 	h = float64(s.Core.MissionMD.MapCfg.Height - s.View.Camera.Height - 1)
 	return w, h
+}
+
+// FindAircraftBase 按 舰船 → 陆地机场 的顺序解析飞机所属基地（BelongShip）。
+// 返回的基地可作为起降几何计算的统一入参；基地不存在（航母被击沉）时返回 false。
+func (s *MissionState) FindAircraftBase(uid string) (objUnit.AircraftBase, bool) {
+	if ship, ok := s.Arena.Ships[uid]; ok {
+		return ship, true
+	}
+	if airfield, ok := s.Arena.Airfields[uid]; ok {
+		return airfield, true
+	}
+	return nil, false
 }
 
 // CountShips 对同类战舰进行计数
@@ -213,6 +228,38 @@ func NewMissionState(mission string) *MissionState {
 		op := objBuilding.NewOilPlatform(md.Pos, md.Radius, md.Yield)
 		oilPlatforms[op.Uid] = op
 	}
+	// 初始化陆地机场与初始机库库存（全局功能开关关闭时不生成）
+	airfields := map[string]*objBuilding.Airfield{}
+	if config.G == nil || config.G.EnableLandAirfield {
+		for _, md := range missionMD.InitAirfields {
+			groups := make([]objUnit.PlaneGroup, 0, len(md.PlaneGroups))
+			for _, g := range md.PlaneGroups {
+				groups = append(groups, objUnit.PlaneGroup{
+					Name:     g.Name,
+					MaxCount: g.MaxCount,
+					CurCount: 0,
+				})
+			}
+			af := objBuilding.NewAirfield(
+				md.Pos,
+				md.Rotation,
+				md.RunwayLength,
+				md.RunwayWidth,
+				md.BelongPlayer,
+				md.AlertRadius,
+				md.TakeOffTime,
+				groups,
+			)
+			airfields[af.Uid] = af
+			// 初始库存（initCount，缺省为 maxCount）：飞机待命于机库，
+			// 起飞时直接在跑道起点刷新
+			for _, g := range md.PlaneGroups {
+				for i := int64(0); i < g.InitCount; i++ {
+					af.StockPlane(g.Name)
+				}
+			}
+		}
+	}
 
 	ms := &MissionState{
 		Core: MissionCoreState{
@@ -249,6 +296,7 @@ func NewMissionState(mission string) *MissionState {
 		Arena: MissionArenaState{
 			ReinforcePoints:   reinforcePoints,
 			OilPlatforms:      oilPlatforms,
+			Airfields:         airfields,
 			ShipUidGenerators: shipUidGenerators,
 			Ships:             ships,
 			DestroyedShips:    []*objUnit.BattleShip{},

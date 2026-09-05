@@ -283,6 +283,7 @@ func getAdjacentZooms(zoom int) []int {
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
 func (m *MissionManager) updateCombatPhase() {
 	m.weaponFirePlayer.Update()
+	m.updateAirfieldAlertLaunch()
 	m.updateShipWeaponFire()
 	m.updatePlaneAttackOrReturn()
 	m.updatePlaneWeaponFire()

@@ -401,7 +401,7 @@ func (m *MissionManager) setReinforcePointRallyPos(rp *objBuilding.ReinforcePoin
 	rp.SetRallyPos(pos)
 }
 
-// 更新集结线显示（游戏模式下点击己方增援点）
+// 更新集结线显示（游戏模式下点击己方增援点）。
 func (m *MissionManager) updateRallyLineClick() {
 	if m.state.Core.MissionStatus != state.MissionRunning {
 		return

@@ -262,6 +262,22 @@ other = "ダメージ表示"
 other = "地図 / 艦船"
 [SidebarTabSettings]
 other = "設定"
+[AirfieldPanelTitle]
+other = "飛行場"
+[AirfieldParkedCount]
+other = "駐機"
+[AirfieldFlyingCount]
+other = "飛行中"
+[AirfieldLostCount]
+other = "損失"
+[AirfieldProductionToggle]
+other = "自動生産"
+[AirfieldAlertToggle]
+other = "警戒発進"
+[AirfieldOn]
+other = "入"
+[AirfieldOff]
+other = "切"
 [UnitPanelNoSelection]
 other = "艦艇未選択"
 [UnitPanelOpen]

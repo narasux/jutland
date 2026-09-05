@@ -44,6 +44,8 @@ type MissionMetadata struct {
 	InitReinforcePoints []InitReinforcePointMetadata
 	// 初始油井
 	InitOilPlatforms []InitOilPlatformMetadata
+	// 初始陆地机场
+	InitAirfields []InitAirfieldMetadata
 }
 
 // InitShipMetadata ...
@@ -69,6 +71,27 @@ type InitOilPlatformMetadata struct {
 	Pos    objPos.MapPos
 	Radius int
 	Yield  int
+}
+
+// InitAirfieldMetadata 陆地机场元配置。
+type InitAirfieldMetadata struct {
+	Pos          objPos.MapPos
+	Rotation     float64
+	RunwayLength float64
+	RunwayWidth  float64
+	BelongPlayer faction.Player
+	AlertRadius  float64
+	TakeOffTime  float64
+	PlaneGroups  []InitAirfieldGroupMetadata
+}
+
+// InitAirfieldGroupMetadata 陆地机场驻场机队元配置。
+type InitAirfieldGroupMetadata struct {
+	Name string
+	// MaxCount 最大数量（同时决定停机坪容量）
+	MaxCount int64
+	// InitCount 初始停放数量（元数据阶段已把缺省值补齐为 MaxCount）
+	InitCount int64
 }
 
 var (

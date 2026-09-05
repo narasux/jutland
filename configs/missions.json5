@@ -17,6 +17,31 @@
     descriptionJa: "1941年12月7日午前7時55分頃、真珠湾の米太平洋艦隊は日本海軍第一航空艦隊の奇襲を受けた。本シナリオでは攻撃開始時の係留関係に基づき、戦艦8隻、巡洋艦8隻、駆逐艦29隻を港内に配置する。日本の空母機動部隊と近接護衛部隊はマップ右下の外洋から港へ向かう。未収録艦は同型艦を優先し、次に同じ艦種で排水量の近い艦を代用し、各代用を設定コメントに記した。",
     initReinforcePoints: [],
     initOilPlatforms: [],
+    // 陆地机场：福特岛机场（美军，历史上驻有陆军航空队与海军巡逻机部队；
+    // pos/rotation 对齐地图素材中福特岛中部的草地跑道条带：西南→东北走向
+    // （rotation 45），西端起飞滑跑、东北端朝海峡进近；停机位排跑道西北侧，
+    // 不绘制跑道图形；日军机动部队从右下方驶入）
+    initAirfields: [
+      {
+        pos: [55, 63],
+        rotation: 45,
+        runwayLength: 17,
+        runwayWidth: 0.8,
+        belongPlayer: "HA",
+        alertRadius: 30,
+        takeOffTime: 2.5,
+        planeGroups: [
+          {
+            name: "F4F-3",
+            maxCount: 6,
+          },
+          {
+            name: "SBD-3",
+            maxCount: 6,
+          },
+        ],
+      },
+    ],
     initShips: [
       // 坐标按 128x192 pearl_harbor.map 网格落位；0°=北、90°=东、180°=南、270°=西。
       // 港内窄泊位在地图中被压缩为岸格时，舰位移到最近的可航行格，并保持历史上的纵向顺序与内外舷关系。
@@ -756,6 +781,27 @@
         radius: 4,
         yield: 25
       }
+    ],
+    // 陆地机场：威克岛主岛机场（美军陆战队 VMF-211 野猫中队驻地，历史名场面；
+    // pos/rotation 对齐地图素材中自带的跑道条带：位于主岛中部的浅色水泥跑道，
+    // 走向接近正东（rotation 92），西端为起飞滑跑起点、东端朝向岛尖海面；
+    // 停机位优先排布在跑道北侧的平坦区域，不绘制跑道图形）
+    initAirfields: [
+      {
+        pos: [81, 77],
+        rotation: 92,
+        runwayLength: 9,
+        runwayWidth: 1,
+        belongPlayer: "HA",
+        alertRadius: 30,
+        takeOffTime: 2,
+        planeGroups: [
+          {
+            name: "F4F-3",
+            maxCount: 6,
+          },
+        ],
+      },
     ],
     initShips: [
       {
