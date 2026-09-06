@@ -657,6 +657,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 美国陆航/海军 US/12.7 双联装机枪（颚部/机背/机腹球/机尾炮塔用）
+  {
+    name: "US/12.7/2",
+    bulletName: "US/GB/12.7/1919",
+    bulletCount: 2,
+    reloadTime: 0.05,
+    range: 2.5,
+    bulletSpread: 15,
+    bulletSpeed: 930,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 美国海军 US/7.62 双联装机枪
   {
     name: "US/7.62/2",

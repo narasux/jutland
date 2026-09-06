@@ -27,11 +27,11 @@ python3 .agents/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py co
 
 ```text
 rawFunds  = combatPower * typeMultiplier * scaleFactor
-fundsCost = clamp(round(rawFunds), 3, 30)
-timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
+fundsCost = clamp(round(rawFunds), 3, 120)
+timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 50)
 ```
 
-费用按整数写回，不再做 `$5` 粗粒度分档。备用估算器使用 `fallbackScaleFactor = 0.30`，其 `cpEstimate` 仅用于无法取得 Go 图鉴战力时的替代评估。
+费用按整数写回，不再做 `$5` 粗粒度分档。备用估算器使用 `fallbackScaleFactor = 0.30`，其 `cpEstimate` 仅用于无法取得 Go 图鉴战力时的替代评估。`$30 / 10s` 仅约束普通机型；重型/大型轰炸机（如 B-17 家族）战力与载弹量高，允许明显超过该值（重型轰炸机就是贵）；`nation == special` 的彩蛋飞机保留手工价格，评估与 `--apply` 均不覆盖。
 
 ### 舰船费用（ships.json5）
 

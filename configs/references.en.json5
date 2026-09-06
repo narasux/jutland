@@ -1669,6 +1669,32 @@
     ],
   },
   {
+    name: "B-17G",
+    displayName: "B-17G Flying Fortress",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "4 x 12.7mm Browning (chin turret 2 + cheek 2)",
+      },
+      {
+        label: "Defensive Guns (All-round)",
+        value: "9 x 12.7mm Browning (dorsal 2, ball 2, waist 2, tail 2, radio 1)",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "2000 lb x2 + 1000 lb x4 (about 3.6 t)",
+      },
+    ],
+    description: "The Boeing B-17G Flying Fortress was the most-produced model of the B-17 family, entering service in 1943 and famed for its toughness and heavy defensive armament. Treated as a level bomber in game, armed with thirteen 12.7mm Browning M2 heavy machine guns (chin 2, cheek 2, dorsal 2, ball 2, waist 2, tail 2, radio 1) and four level-dropped bombs (2000 lb x2 + 1000 lb x4, about 3.6 t).",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — B-17 Flying Fortress",
+        url: "https://en.wikipedia.org/wiki/Boeing_B-17_Flying_Fortress",
+      },
+    ],
+  },
+  {
     name: "fargo",
     displayName: "Fargo",
     type: "Light Cruiser",

@@ -501,7 +501,7 @@
           leftFiringArc: [340, 360]
         }
       ],
-      releaseInterval: 2
+      releaseInterval: 0.2
     }
   },
   {
@@ -563,7 +563,7 @@
           leftFiringArc: [340, 360]
         }
       ],
-      releaseInterval: 2
+      releaseInterval: 0.2
     }
   },
   {
@@ -941,7 +941,7 @@
           leftFiringArc: [340, 360]
         }
       ],
-      releaseInterval: 2
+      releaseInterval: 0.15
     }
   },
   {
@@ -1584,6 +1584,122 @@
         },
         {
           name: "UK/BB/114",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 空中堡垒 B-17G
+    name: "B-17G",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1943,
+    totalHP: 115,
+    damageReduction: 0.5,
+    maxSpeed: 462,
+    acceleration: 18,
+    rotateSpeed: 6,
+    length: 22.5,
+    width: 31.6,
+    fundsCost: 114,
+    timeCost: 42,
+    tonnage: 29.7,
+    range: 3200,
+    weapon: {
+      guns: [
+        {
+          name: "US/12.7/2",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/12.7/2",
+          posPercent: 0.45,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/12.7/2",
+          posPercent: 0.5,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.3,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/12.7",
+          posPercent: 0.3,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/12.7/2",
+          posPercent: 0.05,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]

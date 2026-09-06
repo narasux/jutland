@@ -6,6 +6,20 @@
     range: 1.5,
     bulletSpeed: 30,
   },
+  // 美国陆军航空队 2000 磅（907kg）炸弹（水平投弹，远处投放）
+  {
+    name: "US/BB/907/LB",
+    bulletName: "US/BB/2000/907",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 美国陆军航空队 1000 磅（454kg）炸弹（水平投弹，远处投放）
+  {
+    name: "US/BB/454/LB",
+    bulletName: "US/BB/1000/454",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
   // 美国海军 1000 磅（454kg）炸弹
   {
     name: "US/BB/454",

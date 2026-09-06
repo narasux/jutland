@@ -44,8 +44,8 @@ bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
 
 ```
 rawFunds  = combatPower * typeMultiplier * scaleFactor
-fundsCost = clamp(round(rawFunds), 3, 30)
-timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
+fundsCost = clamp(round(rawFunds), 3, 120)
+timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 50)
 ```
 
 ### 参数说明
@@ -56,23 +56,26 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 | `typeMultiplier` (dive_bomber) | 1.15 | 俯冲轰炸机携带炸弹，费用略高 |
 | `typeMultiplier` (level_bomber) | 1.15 | 水平轰炸机同样携带炸弹，费用与俯冲机相同 |
 | `typeMultiplier` (torpedo_bomber) | 1.30 | 鱼雷轰炸机挂载最重，费用最高 |
-| `scaleFactor` | 0.10 | 将战力值映射到 3–30 资金区间的缩放系数（初始估算值） |
-| `fundsCost` 范围 | 3–30 | 最便宜飞机不低于 $3，最贵飞机不超过 $30；不做粗粒度分档 |
-| `timeCost` 范围 | 3–10 | 建造时间随资金线性增长，钳制在 3–10 秒 |
+| `scaleFactor` | 0.10 / 0.30 | 将战力值映射到资金区间；主路径 scaleFactor=0.10，Python 备用估算器 fallbackScaleFactor=0.30 |
+| `fundsCost` 范围 | 3–120 | 最便宜飞机不低于 $3；重型/大型轰炸机战力与载弹量高，允许显著超过 $30（如 B-17G ≈ $114），重型轰炸机就是贵 |
+| `timeCost` 范围 | 3–50 | 建造时间随资金线性增长，钳制在 3–50 秒 |
+| `nation == special` | 手工 | 彩蛋飞机保留手工价格，`--apply` 不覆盖（与舰船惯例一致） |
+| 机枪战力口径 | 按枪管数 | 备用估算器用 `guns.json5` 的 `bulletCount` 统计机枪管数（双联 `US/12.7/2` 计 2），与游戏 `gunDPS` 口径一致；单装飞机不受影响 |
 
 ### 比较基准
 
 - 最便宜的作战舰船（小型鱼雷艇）约 $3–5 资金、3–8 秒建造时间
 - 最贵的舰船（战列舰）约 $575–1200 资金、60–130 秒建造时间
-- 飞机费用应处于舰船费用的最下端，反映单架飞机的低造价和快速补充
+- 飞机费用应处于舰船费用的最下端，反映单架飞机的低造价和快速补充；但重型战略轰炸机（如 B-17 家族）战力与载弹量远超普通战斗机，允许明显更高
 
 ## 校准 scaleFactor
 
 首次运行脚本后，检查输出的 `combatPower` 列：
 
 1. 找到 `combatPower` 最低的飞机，其 `rawFunds` 应约等于或略低于 3
-2. 找到 `combatPower` 最高的飞机，其 `fundsCost` 应钳制在 ≤30
-3. 若最低战力飞机的 `fundsCost` 远低于 3（被钳制），或最高战力飞机的 `fundsCost` 远低于 30（浪费了区间），则调整 `scaleFactor` 并重新运行
+2. 找到 `combatPower` 最高的普通（非 special）飞机，其 `fundsCost` 应接近但不超过 120
+3. 若最低战力飞机的 `fundsCost` 远低于 3（被钳制），或最高战力飞机的 `fundsCost` 远低于 120（浪费了区间），则调整 `scaleFactor` 并重新运行
+4. `nation == special` 的彩蛋飞机只显示评估价，不作为写回依据（保留手工价格）
 
 校准公式：`scaleFactor = targetMinFunds / (minCombatPower * typeMultiplier)`，其中 `targetMinFunds ≈ 3`。
 

@@ -19,9 +19,10 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 # Fallback formula parameters (kept in sync with SKILL.md)
 SCALE_FACTOR = 0.30
 FUNDS_MIN = 3
-FUNDS_MAX = 30
+# 封顶仅约束普通机型；大型/重载轰炸机（如 B-17 家族）战力与载弹量高，允许超过旧上限
+FUNDS_MAX = 120
 TIME_MIN = 3
-TIME_MAX = 10
+TIME_MAX = 50
 
 TYPE_MULTIPLIERS = {
     'fighter': 1.00,
@@ -37,7 +38,18 @@ def parse_planes_json5(path: Path) -> list:
         return json5.loads(f.read())
 
 
-def estimate_combat_power(plane: dict) -> float:
+def load_gun_barrel_counts(guns_path: Path) -> dict:
+    """Load guns.json5 and return a map {gun_name: bulletCount}.
+
+    Used to weight twin/triple mounts by actual barrel count, matching the
+    game's DPS-based combat power rather than counting mounts as 1 each.
+    """
+    with guns_path.open('r') as f:
+        guns = json5.loads(f.read())
+    return {g.get('name', ''): int(g.get('bulletCount', 1)) for g in guns}
+
+
+def estimate_combat_power(plane: dict, gun_barrels: dict) -> float:
     """Estimate relative combat power from configurable attributes.
 
     Used for cost stratification, not expected to match combatpower.CalculatePlane exactly.
@@ -51,17 +63,17 @@ def estimate_combat_power(plane: dict) -> float:
     range_factor = math.sqrt(max(plane_range / 2000, 0.1))
 
     weapon = plane.get('weapon', {})
-    gun_count = len(weapon.get('guns', []))
+    gun_barrel_count = sum(gun_barrels.get(g.get('name', ''), 1) for g in weapon.get('guns', []))
     bomb_count = len(weapon.get('bombs', []))
     torpedo_count = len(weapon.get('torpedoes', []))
     rocket_count = len(weapon.get('rockets', []))
-    weapon_factor = 1.0 + 0.1 * gun_count + 0.3 * bomb_count + 0.4 * torpedo_count + 0.2 * rocket_count
+    weapon_factor = 1.0 + 0.1 * gun_barrel_count + 0.3 * bomb_count + 0.4 * torpedo_count + 0.2 * rocket_count
 
     return hp * speed_factor * range_factor * weapon_factor
 
 
-def calc_cost(plane: dict) -> tuple[int, int, float]:
-    cp_est = estimate_combat_power(plane)
+def calc_cost(plane: dict, gun_barrels: dict) -> tuple[int, int, float]:
+    cp_est = estimate_combat_power(plane, gun_barrels)
     multi = TYPE_MULTIPLIERS.get(plane.get('type', 'fighter'), 1.0)
 
     raw = cp_est * multi * SCALE_FACTOR
@@ -120,6 +132,7 @@ def main():
     if not path.is_absolute():
         path = REPO_ROOT / path
     planes = parse_planes_json5(path)
+    gun_barrels = load_gun_barrel_counts(REPO_ROOT / 'configs' / 'guns.json5')
 
     records = []
     apply_records = []
@@ -129,10 +142,12 @@ def main():
         nation = plane.get('nation', '')
         tonnage = float(plane.get('tonnage', 0))
 
-        funds, time_cost, cp_est = calc_cost(plane)
+        funds, time_cost, cp_est = calc_cost(plane, gun_barrels)
 
         records.append((name, ptype, nation, tonnage, funds, time_cost, cp_est))
-        apply_records.append((name, funds, time_cost))
+        # special 彩蛋飞机保留手工价格，不随公式评估覆盖（与舰船惯例一致）
+        if nation != 'special':
+            apply_records.append((name, funds, time_cost))
 
     records.sort(key=lambda r: r[0])
     apply_records.sort(key=lambda r: r[0])
