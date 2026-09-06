@@ -57,6 +57,8 @@ CPU / 显卡要求木有很高，但过低估计会卡帧（因为目前有些�
 
 战舰图片素材来自 [Tzoli](https://www.deviantart.com/tzoli/gallery)，[midnike](https://www.deviantart.com/midnike/gallery)，[shipbucket](https://www.deviantart.com/shipbucket/gallery)，[pinterest](https://jp.pinterest.com/FCZ_NN/pins/)，[bilibili](https://space.bilibili.com/650338906) 等
 
+机场图标来自 [Flaticon](https://www.flaticon.com/free-icon/airport_1259687)（Flaticon 免费图标，按其授权要求注明来源）
+
 以上素材中如有侵权烦请联系我删除，万分感谢！
 
 ## 开发指南

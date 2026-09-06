@@ -164,8 +164,9 @@ func drawAirfieldRunwayFrame(
 	}
 }
 
-// drawAirfieldMarker 绘制机场常显标记：圆形徽章 + 贴合跑道朝向的跑道图形。
-// 视觉规格与油井图标相当；选中时描边加粗以示高亮。
+// drawAirfieldMarker 绘制机场常显标记：深色圆形徽章 + 按阵营着色的
+// 机场图标（resources 图标，与油井同款白色线稿风格）；选中时描边加粗
+// 以示高亮。图标为整张贴图，不随跑道朝向逐线绘制，旋转不会错层。
 func drawAirfieldMarker(
 	screen *ebiten.Image, ms *state.MissionState, af *objBuilding.Airfield,
 	x, y float64, selected bool,
@@ -178,40 +179,17 @@ func drawAirfieldMarker(
 		lo.Ternary(selected, float32(3), float32(2)), clr, false,
 	)
 
-	// 徽章内跑道图形：沿跑道朝向的双边线 + 中线虚线
-	sinV, cosV := math.Sin(af.Rotation*math.Pi/180), math.Cos(af.Rotation*math.Pi/180)
-	dirX, dirY := sinV, -cosV
-	norX, norY := cosV, sinV
-	halfLen := radius * 0.55
-	halfWid := radius * 0.18
-	// 两条跑道边线
-	for _, side := range [...]float64{1, -1} {
-		strokeGlyphLine(
-			screen, x, y, dirX, dirY, norX, norY,
-			-halfLen, halfLen, halfWid*side, clr, 1.5,
-		)
-	}
-	// 中线三段虚线
-	for _, seg := range [...][2]float64{{-0.55, -0.25}, {-0.15, 0.15}, {0.25, 0.55}} {
-		strokeGlyphLine(
-			screen, x, y, dirX, dirY, norX, norY,
-			halfLen*seg[0], halfLen*seg[1], 0, clr, 1.5,
-		)
-	}
-}
-
-// strokeGlyphLine 在徽章局部坐标系（沿跑道方向 dir、垂直方向 nor）中画一条线段，
-// along 为跑道方向偏移、lateral 为横向偏移，单位为屏幕像素。
-func strokeGlyphLine(
-	screen *ebiten.Image, x, y, dirX, dirY, norX, norY, alongStart, alongEnd, lateral float64,
-	clr color.Color, width float32,
-) {
-	vector.StrokeLine(
-		screen,
-		float32(x+dirX*alongStart+norX*lateral), float32(y+dirY*alongStart+norY*lateral),
-		float32(x+dirX*alongEnd+norX*lateral), float32(y+dirY*alongEnd+norY*lateral),
-		width, clr, false,
+	// 徽章内机场图标：边长约为徽章直径的 2/3，白色线稿按阵营着色
+	img := buildingImg.Airfield
+	opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+	opts.GeoM.Translate(-float64(img.Bounds().Dx())/2, -float64(img.Bounds().Dy())/2)
+	scale := radius * 4 / 3 / float64(img.Bounds().Dx())
+	opts.GeoM.Scale(scale, scale)
+	opts.GeoM.Translate(x, y)
+	opts.ColorScale.Scale(
+		float32(clr.R)/255, float32(clr.G)/255, float32(clr.B)/255, 1,
 	)
+	screen.DrawImage(img, opts)
 }
 
 // drawAirfieldSelectionOverlay 选中机场时展示的附加信息：跑道方位线

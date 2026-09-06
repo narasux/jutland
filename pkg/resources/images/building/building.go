@@ -17,6 +17,9 @@ var (
 
 	// OilPlatform 油井
 	OilPlatform *ebiten.Image
+
+	// Airfield 陆地机场（白色线稿，绘制时按阵营着色）
+	Airfield *ebiten.Image
 )
 
 func init() {
@@ -36,6 +39,11 @@ func init() {
 
 	imgPath = "/buildings/oil_platform.png"
 	if OilPlatform, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+
+	imgPath = "/buildings/airfield.png"
+	if Airfield, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

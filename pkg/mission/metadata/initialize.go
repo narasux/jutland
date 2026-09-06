@@ -72,11 +72,12 @@ type rawInitOilPlatformMetadata struct {
 }
 
 type rawInitAirfieldMetadata struct {
-	Pos          [2]int  `json:"pos"`
-	Rotation     int     `json:"rotation"`
-	RunwayLength float64 `json:"runwayLength"`
-	RunwayWidth  float64 `json:"runwayWidth"`
-	BelongPlayer string  `json:"belongPlayer"`
+	// Pos 机场中心浮点格坐标（如 [52.4, 66.3]），对齐地图素材时不再受整数取整限制
+	Pos          [2]float64 `json:"pos"`
+	Rotation     int        `json:"rotation"`
+	RunwayLength float64    `json:"runwayLength"`
+	RunwayWidth  float64    `json:"runwayWidth"`
+	BelongPlayer string     `json:"belongPlayer"`
 	// Enabled 配置级开关，缺省 true；false 时该机场不生成
 	Enabled     *bool                          `json:"enabled"`
 	TakeOffTime float64                        `json:"takeOffTime"`
@@ -101,9 +102,11 @@ func validateAirfieldMetadata(mapCfg *mapcfg.MapCfg, afMD rawInitAirfieldMetadat
 	if mapCfg == nil {
 		log.Fatalf("airfield pos %v: mission map not found", afMD.Pos)
 	}
-	if !mapCfg.Map.IsLand(afMD.Pos[0], afMD.Pos[1]) {
+	// 浮点坐标落格判断取包含该点的格（向下取整）
+	cellX, cellY := int(math.Floor(afMD.Pos[0])), int(math.Floor(afMD.Pos[1]))
+	if !mapCfg.Map.IsLand(cellX, cellY) {
 		log.Fatalf(
-			"airfield pos (%d, %d) is not on land in map %s",
+			"airfield pos (%.2f, %.2f) is not on land in map %s",
 			afMD.Pos[0], afMD.Pos[1], mapCfg.Name,
 		)
 	}
@@ -134,8 +137,8 @@ func validateAirfieldMetadata(mapCfg *mapcfg.MapCfg, afMD rawInitAirfieldMetadat
 	halfLength := afMD.RunwayLength / 2
 	radians := float64(afMD.Rotation) * math.Pi / 180
 	for _, sign := range [][2]float64{{1, 1}, {-1, -1}} {
-		endX := float64(afMD.Pos[0]) + math.Sin(radians)*halfLength*sign[0]
-		endY := float64(afMD.Pos[1]) - math.Cos(radians)*halfLength*sign[1]
+		endX := afMD.Pos[0] + math.Sin(radians)*halfLength*sign[0]
+		endY := afMD.Pos[1] - math.Cos(radians)*halfLength*sign[1]
 		if endX < 0 || endY < 0 ||
 			endX > float64(mapCfg.Width-1) || endY > float64(mapCfg.Height-1) {
 			log.Fatalf(
@@ -218,7 +221,7 @@ func init() {
 				})
 			}
 			initAirfields = append(initAirfields, InitAirfieldMetadata{
-				Pos:          objPos.New(afMD.Pos[0], afMD.Pos[1]),
+				Pos:          objPos.NewR(afMD.Pos[0], afMD.Pos[1]),
 				Rotation:     float64(afMD.Rotation),
 				RunwayLength: afMD.RunwayLength,
 				RunwayWidth:  afMD.RunwayWidth,

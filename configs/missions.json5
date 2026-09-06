@@ -25,7 +25,7 @@
     // 不绘制跑道图形；日军机动部队从右下方驶入）
     initAirfields: [
       {
-        pos: [52, 66],
+        pos: [52, 66.2],
         rotation: 49,
         runwayLength: 9,
         runwayWidth: 1,
@@ -789,8 +789,8 @@
     // 停机位优先排布在跑道北侧的平坦区域，不绘制跑道图形）
     initAirfields: [
       {
-        pos: [81, 76],
-        rotation: 90,
+        pos: [81, 76.3],
+        rotation: 95,
         runwayLength: 9,
         runwayWidth: 0.8,
         belongPlayer: "HA",

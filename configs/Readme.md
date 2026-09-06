@@ -764,7 +764,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // 陆地机场（受 game_settings.json5 的 enableLandAirfield 总开关控制，false 时全部不生成）
     initAirfields: [
       {
-        // 机场中心位置；必须落在陆地格，否则启动时报错退出
+        // 机场中心位置；支持浮点格坐标（如 [76.5, 74.2]），便于与地图素材
+        // 精确对齐；落格判断取包含该点的格（向下取整），必须为陆地格，
+        // 否则启动时报错退出
         pos: [76, 74],
         // 跑道朝向（度），即起飞方向；0=北、90=东、180=南、270=西
         rotation: 90,
