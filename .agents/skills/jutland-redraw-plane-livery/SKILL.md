@@ -80,7 +80,7 @@ description: Redraw a Jutland plane top-view sprite from a low-resolution or off
 ### 4. 提取并写入资源
 
 ```bash
-python .codex/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
+python .agents/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
   --input "raw/<Name>-redraw.png" \
   --output "raw/<Name>-extract.png" \
   --crop <left,top,right,bottom> \

@@ -58,7 +58,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 示例：
 
 ```bash
-python3 .codex/skills/jutland-add-ship/scripts/resize_ship_image.py \
+python3 .agents/skills/jutland-add-ship/scripts/resize_ship_image.py \
   input.png output.png \
   --backup "example top.png" \
   --target-long-axis 1044 --mode line-art --preview-dir "$(mktemp -d)"

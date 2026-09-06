@@ -55,12 +55,12 @@ description: Design or revise Jutland missions on an existing map, including his
 6. **验证并交付。**
    - 运行：
      ```bash
-     go run .codex/skills/jutland-design-map-mission/scripts/validate_map_mission.go \
+     go run .agents/skills/jutland-design-map-mission/scripts/validate_map_mission.go \
        -mission <mission-name>
      ```
    - 对独立岛屿做比例检查时附加：
      ```bash
-     go run .codex/skills/jutland-design-map-mission/scripts/validate_map_mission.go \
+     go run .agents/skills/jutland-design-map-mission/scripts/validate_map_mission.go \
        -mission <mission-name> \
        -land-component <x,y> \
        -real-length <meters> \

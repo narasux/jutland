@@ -57,7 +57,7 @@ description: Add or revise Jutland map resources from raw raster tiles, includin
    - 脚本依赖 Pillow。若系统 `python3` 无法导入 `PIL`，先调用工作区依赖加载工具取得 bundled Python 路径，并用该解释器执行；不要为此修改项目依赖。
    - 按明确的行优先顺序运行：
      ```bash
-     python3 .codex/skills/jutland-add-map/scripts/build_map_assets.py \
+     python3 .agents/skills/jutland-add-map/scripts/build_map_assets.py \
        --tiles raw/map/tl.png raw/map/tr.png raw/map/bl.png raw/map/br.png \
        --columns 2 \
        --tile-size 2048 \
@@ -88,7 +88,7 @@ description: Add or revise Jutland map resources from raw raster tiles, includin
 6. **验证并交付。**
    - 运行：
      ```bash
-     python3 .codex/skills/jutland-add-map/scripts/validate_map_assets.py \
+     python3 .agents/skills/jutland-add-map/scripts/validate_map_assets.py \
        --image resources/images/map/abbrs/<source>.png \
        --map resources/maps/<map-name>.map \
        --cell-pixels 32 \

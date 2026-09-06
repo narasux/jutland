@@ -27,15 +27,15 @@ description: Evaluate and assign Jutland ship and weapon costs from runtime comb
 
 ```bash
 AUDIT_DIR="$(mktemp -d)"
-bash .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.sh \
+bash .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.sh \
   "$AUDIT_DIR"
 ```
 
 确认后写回：
 
 ```bash
-python3 .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py --apply
-python3 .codex/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py \
+python3 .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py --apply
+python3 .agents/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py \
   --costs "$AUDIT_DIR/ship_costs.json"
 ```
 
@@ -201,9 +201,9 @@ timeCost = clamp(
 ```bash
 PYCACHE_DIR="$(mktemp -d)"
 PYTHONPYCACHEPREFIX="$PYCACHE_DIR" python3 -m py_compile \
-  .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py \
-  .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.py \
-  .codex/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
+  .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py \
+  .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.py \
+  .agents/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
 rm -rf "$PYCACHE_DIR"
 ```
 

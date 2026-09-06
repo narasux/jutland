@@ -33,7 +33,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 - `scripts/extract_plane_top_view.py`：从用户提供的原图裁剪飞机顶视图，执行裁剪、旋转、白底透明化、保留最大连通飞机区域、裁去透明边界和可选缩放。该脚本只做确定性处理，不重绘、不补线、不改结构、不重新配色。
 - 使用示例：
   ```bash
-  python .codex/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
+  python .agents/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
     --input "raw/source.jpg" \
     --output resources/images/planes/fighter/A6M2.png \
     --crop 285,35,1015,780 \

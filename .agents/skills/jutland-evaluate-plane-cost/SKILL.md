@@ -28,7 +28,7 @@ description: Evaluate and assign fundsCost and timeCost for Jutland aircraft bas
 ### 使用方式
 
 ```bash
-bash .codex/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
+bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
 ```
 
 脚本输出格式为 TSV（制表符分隔），列依次为：`name`、`type`、`nation`、`combatPower`、`tonnage`、`fundsCost`、`timeCost`。
@@ -86,7 +86,7 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 
 ### 评估所有现有飞机
 
-1. 运行 `bash .codex/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh`
+1. 运行 `bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh`
 2. 检查输出表，确认费用分层合理：
    - 同一型号系列的费用应连贯（如 A6M2 → A6M3 → A7M2 递增）
    - 鱼雷轰炸机费用 > 俯冲轰炸机 > 战斗机（同年代比较）

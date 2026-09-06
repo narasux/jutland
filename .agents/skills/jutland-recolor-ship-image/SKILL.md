@@ -49,7 +49,7 @@ description: Recolor Jutland ship PNG drawings while preserving exact geometry, 
 - 使用分析脚本查看指定区域的高频颜色：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/analyze_ship_palette.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/analyze_ship_palette.go \
   -input <reference.png> \
   -box <minX,minY,maxX,maxY> \
   -top 30
@@ -58,7 +58,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/analyze_ship_palette.go 
 - 如需区分同色的不同对象，统计该颜色的连通组件：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/analyze_ship_palette.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/analyze_ship_palette.go \
   -input <target.png> \
   -box <minX,minY,maxX,maxY> \
   -color <R,G,B> \
@@ -92,7 +92,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/analyze_ship_palette.go 
 对于只包含一种材质的区域，可按精确 RGB 直接修改像素：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/recolor_ship_components.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/recolor_ship_components.go \
   -input <input.png> \
   -output <output.png> \
   -source-color <R,G,B> \
@@ -104,7 +104,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/recolor_ship_components.
 当同一源色同时出现在甲板和金属设备上时，必须按连通组件筛选：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/recolor_ship_components.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/recolor_ship_components.go \
   -input <input.png> \
   -output <output.png> \
   -source-color <R,G,B> \
@@ -127,7 +127,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/recolor_ship_components.
 大面积纯黑迷彩填充与纯黑线稿连通时，不要整组件替换。只修改同色邻居足够多的内部像素，保留一像素黑色边界：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/recolor_dense_fill.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/recolor_dense_fill.go \
   -input <input.png> -output <output.png> \
   -source-color 0,0,0 -target-color 174,174,174 \
   -min-neighbors 7 -include-box <minX,minY,maxX,maxY>
@@ -136,7 +136,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/recolor_dense_fill.go \
 木甲板缩小后出现大片黑影时，先判断是否为高密度一像素板缝。只处理上下均为木色、左右连续的水平线：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/adjust_deck_seams.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/adjust_deck_seams.go \
   -input <input.png> -output <output.png> \
   -line-color 0,0,0 \
   -wood-color 239,228,176 -wood-color 236,220,160 \
@@ -152,7 +152,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/adjust_deck_seams.go \
 俯视图的防鱼雷突出部或金属带一侧正确、另一侧误染时，优先使用镜像材质修复：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/mirror_ship_material.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/mirror_ship_material.go \
   -input <input.png> -output <output.png> \
   -axis-y <centerY> \
   -source-color <wrongR,wrongG,wrongB> \
@@ -176,7 +176,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/mirror_ship_material.go 
 - 比较修改前后图像：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/compare_ship_images.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/compare_ship_images.go \
   -before <before.png> \
   -after <after.png> \
   -allowed-box <minX,minY,maxX,maxY> \
@@ -200,7 +200,7 @@ go run .codex/skills/jutland-recolor-ship-image/scripts/compare_ship_images.go \
 - 即使所有像素均不透明，也要保留 RGBA PNG 编码：
 
 ```bash
-go run .codex/skills/jutland-recolor-ship-image/scripts/ensure_rgba_png.go \
+go run .agents/skills/jutland-recolor-ship-image/scripts/ensure_rgba_png.go \
   -input <candidate.png> -output <candidate.png>
 sips -g hasAlpha <candidate.png>
 ```
