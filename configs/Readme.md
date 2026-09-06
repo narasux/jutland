@@ -313,9 +313,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     bulletSpread: 140,
     // 火箭弹速度
     bulletSpeed: 700,
-    // 是否具备反舰能力
+    // 是否具备反舰能力；反舰火箭只能攻击战舰与地面停放目标
     antiShip: true,
-    // 是否具备防空能力；第一版实际目标仍由载机类型决定
+    // 是否具备防空能力；防空火箭只能攻击空中目标
     antiAircraft: false,
     // 近炸触发半径；实际只有对空目标会进入近炸分支
     proximityRadius: 0.22,
@@ -324,6 +324,11 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   },
 ]
 ```
+
+对海挂载（`antiShip: true, antiAircraft: false`）与对空挂载
+（`antiShip: false, antiAircraft: true`）是两种独立配置，按载机分工挂载：
+轰炸机/攻击机挂对海火箭，战斗机挂对空火箭；载机开火时只会有与
+目标类型匹配的挂载响应。
 
 ## 战舰配置（ships.json5）
 

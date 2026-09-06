@@ -24,6 +24,29 @@ import (
 // 精确落在机身矩形内。
 const bombBlastRadius = 1.0
 
+// 舰对空弹药的单发命中率（每结算帧独立判定，数值为平衡用常数）：
+//   - 小口径速射防空炮（≤40mm）：弹幕密集，命中率最高；
+//   - 中口径高平两用炮（≤155mm）：76~155mm 弹靠少量直击与近炸破片；
+//   - 大口径舰炮（>155mm）：弹丸散布远大于机体，直击概率极低。
+//
+// 俯冲轰炸机贴舰俯冲时姿态与高度变化剧烈，防空弹幕难以构成提前量，
+// 命中率统一再降为三分之一。
+func aaHitChance(diameter int, planeType objUnit.PlaneType) float64 {
+	var chance float64
+	switch {
+	case diameter <= 40:
+		chance = 1.0 / 6
+	case diameter <= 155:
+		chance = 1.0 / 12
+	default:
+		chance = 1.0 / 18
+	}
+	if planeType == objUnit.PlaneTypeDiveBomber {
+		chance /= 3
+	}
+	return chance
+}
+
 // damageGroundPlanesNear 落点爆炸波及范围内的地面飞机结算伤害，
 // excludeUid 用于排除已被直接命中的目标；返回是否造成伤害。
 func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid string) bool {
@@ -280,6 +303,9 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 		if !plane.IsCruising() {
 			continue
 		}
+		// 对舰机型飞行途中的自卫防空火力（与主目标攻击互不影响）
+		m.updatePlaneDefensiveFire(plane)
+
 		inRangeEnemies := []objUnit.Hurtable{}
 		if plane.AttackObjType() == object.TypePlane {
 			// 敌机
@@ -356,6 +382,39 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 	}
 
 	m.weaponFirePlayer.PlayPlaneFire(bombReleased, rocketLaunched, torpedoLaunched)
+}
+
+// updatePlaneDefensiveFire 对舰机型（轰炸机/鱼雷机）飞行途中的自卫防空火力：
+// 以往对空开火目标只来自 AttackObjType（对舰机型只会打敌舰与地面目标），
+// 导致轰炸机在空中被战斗机咬住时炮塔全程哑火、纯挨打。这里扫描射程内的
+// 空中敌机并还击，具体能否开火由武器自行过滤——Gun.Fire 只响应
+// antiAircraft 武器且要求目标在射界/射程内，炸弹/鱼雷释放器不会对空中
+// 目标投放，因此自卫火力不会误投弹药，也不打断既定的对舰攻击节奏。
+// 每帧至多集火一个自卫目标：一次开火后相关炮塔即进入装填，其余炮塔
+// 等下一帧再对其他目标开火，与 updateShipWeaponFire 等一帧一目标的
+// 择敌模式保持一致。
+func (m *MissionManager) updatePlaneDefensiveFire(plane *objUnit.Plane) {
+	// 战斗机的对空交战由主目标逻辑负责；无对空武力的机型 MaxToPlaneRange 为 0
+	if plane.AttackObjType() != object.TypeShip || plane.Weapon.MaxToPlaneRange <= 0 {
+		return
+	}
+	for _, enemy := range m.state.Arena.Planes {
+		// 只还击空中敌机：起飞/降落中的地面目标由对舰投放逻辑处理
+		if enemy.BelongPlayer == plane.BelongPlayer || !enemy.IsCruising() {
+			continue
+		}
+		// 不在对空火力射程内，跳过
+		if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
+			continue
+		}
+		// 该目标在所有炮塔射界内都无法开火时继续扫描，否则集火后结束本轮
+		bullets := plane.Fire(enemy)
+		if len(bullets) == 0 {
+			continue
+		}
+		m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
+		break
+	}
 }
 
 // retargetTorpedoBomber 让鱼雷机放弃当前不安全的投放对象，改为追踪其他敌舰。
@@ -450,18 +509,11 @@ func (m *MissionManager) updateShotBullets() {
 				if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
 					continue
 				}
-				// 如果是舰对空，需要设置 “擦肩而过” 率，现在命中率太高（昭和防空，十防九空）
+				// 如果是舰对空，需要设置 “擦肩而过” 率：命中率按弹药口径分级，
+				// 小口径速射防空炮弹幕密集，大口径舰炮弹散布远大于机体，直击罕见
 				if bt.ShooterObjType == object.TypeShip {
-					if plane.Type == objUnit.PlaneTypeDiveBomber {
-						// 俯冲轰炸机要飞得很近，插肩而过率得高一些
-						if rand.Intn(24) != 0 {
-							continue
-						}
-					} else {
-						// 鱼雷机/水平轰炸机/战斗机按 1/8 的概率被击中
-						if rand.Intn(8) != 0 {
-							continue
-						}
+					if rand.Float64() >= aaHitChance(bt.Diameter, plane.Type) {
+						continue
 					}
 				}
 

@@ -70,7 +70,8 @@
       ],
       rockets: [
         {
-          name: "US/AIR/RB/127/4",
+          // 对空火箭挂载（战斗机专用，近炸破片对空杀伤）
+          name: "US/AIR/RB/127/4/AA",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]

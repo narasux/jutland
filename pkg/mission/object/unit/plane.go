@@ -290,8 +290,16 @@ func (p *Plane) TorpedoPathCrossesLand(enemy Hurtable, terrain *mapcfg.MapData) 
 
 // HurtBy 受到伤害
 func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
-	// 计算真实伤害，飞机比较脆，所以伤害要再额外乘以 3
-	realDamage := bullet.Damage * (1 - p.DamageReduction) * 3
+	realDamage := bullet.Damage * (1 - p.DamageReduction)
+	if bullet.ShooterObjType == object.TypeShip {
+		// 舰对空：舰炮弹丸对飞机以破片/近炸毁伤为主，单发毁伤有上限
+		// （约四成血量），避免驱逐舰一发 127mm 舰炮弹直接击落满血重型轰炸机；
+		// 暴击代表直击要害（油箱/弹药舱），不受此限制
+		realDamage = min(realDamage, p.TotalHP*0.4)
+	} else {
+		// 空对空：飞机比较脆，所以伤害要再额外乘以 3
+		realDamage *= 3
+	}
 
 	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
 	criticalType := objBullet.CriticalTypeNone

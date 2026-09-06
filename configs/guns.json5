@@ -344,7 +344,21 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 155 mm/62 Mark 51 先进舰炮（AGS，单管；对海用无制导弹 44 km、10 rpm）
+  {
+    name: "US/155/62/MK51",
+    bulletName: "US/GB/155/2010",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 44,
+    bulletSpread: 40,
+    bulletSpeed: 825,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 6 英寸/47 Mark 16 三联装舰炮（St. Louis / Fargo 级）
+  // 历史上具备对空射击能力（高爆弹 + 时钟引信），但回旋/俯仰笨重
   {
     name: "US/152/47/3/MK16",
     bulletName: "US/GB/152/1939",
@@ -355,7 +369,7 @@
     bulletSpeed: 812,
     fundsCost: 10,
     antiShip: true,
-    antiAircraft: false,
+    antiAircraft: true,
   },
   // 美国海军 6 英寸/47 Mark 16DP 双联装高平两用舰炮（伍斯特级）
   {
@@ -369,19 +383,6 @@
     fundsCost: 10,
     antiShip: true,
     antiAircraft: true,
-  },
-  // 美国海军 155 mm/62 Mark 51 先进舰炮（AGS，单管；对海用无制导弹 44 km、10 rpm）
-  {
-    name: "US/155/62/MK51",
-    bulletName: "US/GB/155/2010",
-    bulletCount: 1,
-    reloadTime: 3,
-    range: 44,
-    bulletSpread: 40,
-    bulletSpeed: 825,
-    fundsCost: 5,
-    antiShip: true,
-    antiAircraft: false,
   },
   // 美国海军 US/127/38/MK12 双联装舰炮
   {

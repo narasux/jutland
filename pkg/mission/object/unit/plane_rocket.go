@@ -10,6 +10,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/utils/geometry"
@@ -54,6 +55,17 @@ type PlaneRocketLauncher struct {
 
 var _ AttackWeapon = (*PlaneRocketLauncher)(nil)
 
+// IsAvailableAntiType 是否能反制该类型
+func (r *PlaneRocketLauncher) IsAvailableAntiType(objType object.Type) bool {
+	if r.AntiAircraft && objType == object.TypePlane {
+		return true
+	}
+	if r.AntiShip && objType == object.TypeShip {
+		return true
+	}
+	return false
+}
+
 // Exhausted 是否已经打完整个挂载。
 func (r *PlaneRocketLauncher) Exhausted() bool {
 	return r.ShotCount >= r.RocketCount
@@ -78,7 +90,8 @@ func (r *PlaneRocketLauncher) InShotRange(planeCurRotation float64, curPos, targ
 
 // Fire 发射下一枚飞机火箭弹；目标类型由飞机当前目标规则决定。
 func (r *PlaneRocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
-	if !r.Reloaded() {
+	// 未重新装填 / 对象类型不匹配（如反舰火箭对空自卫），不可发射
+	if !r.Reloaded() || !r.IsAvailableAntiType(enemy.ObjType()) {
 		return nil
 	}
 

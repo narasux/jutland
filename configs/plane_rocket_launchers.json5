@@ -1,6 +1,6 @@
 [
   {
-    // 美国 127mm / 4 发飞机火箭挂载，实际对海或对空由载机类型决定
+    // 美国 127mm / 4 发对海火箭挂载（轰炸机/攻击机用）
     name: "US/AIR/RB/127/4",
     bulletName: "US/RB/127/1937",
     rocketCount: 4,
@@ -10,6 +10,18 @@
     bulletSpeed: 700,
     antiShip: true,
     antiAircraft: false,
+  },
+  {
+    // 美国 127mm / 4 发对空火箭挂载（战斗机用，近炸破片对空杀伤）
+    name: "US/AIR/RB/127/4/AA",
+    bulletName: "US/RB/127/1937",
+    rocketCount: 4,
+    shotInterval: 0.18,
+    range: 8,
+    bulletSpread: 140,
+    bulletSpeed: 700,
+    antiShip: false,
+    antiAircraft: true,
     proximityRadius: 0.22,
     blastRadius: 0.35,
   },
