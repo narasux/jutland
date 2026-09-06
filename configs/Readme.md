@@ -13,14 +13,14 @@
 主流程优先使用运行时战力数据：
 
 ```bash
-bash .codex/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
+bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
 ```
 
 如果当前环境因 Ebiten 图形初始化等问题无法运行 Go 测试导出，可使用备用配置估算器：
 
 ```bash
-python3 .codex/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5
-python3 .codex/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5 --apply
+python3 .agents/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5
+python3 .agents/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5 --apply
 ```
 
 当前飞机费用公式：
@@ -42,14 +42,14 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 10)
 查看建议费用：
 
 ```bash
-bash .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.sh
+bash .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.sh
 ```
 
 确认后写回：
 
 ```bash
-python3 .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py --apply
-python3 .codex/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
+python3 .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py --apply
+python3 .agents/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
 ```
 
 武器参考价同时考虑持续输出与首轮爆发：
@@ -120,10 +120,10 @@ make build
 
 ```bash
 PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
-  .codex/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py \
-  .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py \
-  .codex/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.py \
-  .codex/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
+  .agents/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py \
+  .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_weapon_costs.py \
+  .agents/skills/jutland-evaluate-ship-cost/scripts/evaluate_ship_costs.py \
+  .agents/skills/jutland-evaluate-ship-cost/scripts/apply_ship_costs.py
 ```
 
 ## 弹药配置（bullets.json5）

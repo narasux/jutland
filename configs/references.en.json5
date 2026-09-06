@@ -1651,6 +1651,24 @@
     ],
   },
   {
+    name: "P-40N",
+    displayName: "P-40N Warhawk",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "4 x 12.7mm",
+      },
+    ],
+    description: "The Curtiss P-40N Warhawk was the most-produced late variant of the P-40 family, entering service in 1943. Weight savings improved its climb and handling, and it served widely with the US Army Air Forces in China and the Pacific. Treated as a fighter in game, armed with four forward 12.7mm Browning machine guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — P-40 Warhawk",
+        url: "https://en.wikipedia.org/wiki/Curtiss_P-40_Warhawk",
+      },
+    ],
+  },
+  {
     name: "fargo",
     displayName: "Fargo",
     type: "Light Cruiser",

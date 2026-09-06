@@ -1651,6 +1651,24 @@
     ],
   },
   {
+    name: "P-40N",
+    displayName: "P-40N ウォーホーク",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "4 x 12.7mm",
+      },
+    ],
+    description: "カーチス P-40N ウォーホークは P-40 シリーズで最も生産された後期型で、1943 年に実戦配備された。軽量化により上昇力と運動性が改善され、中国戦線と太平洋のアメリカ陸軍航空隊で広く使用された。ゲーム内では戦闘機として扱われ、前方 12.7mm ブローニング機銃 4 挺を装備する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — P-40 ウォーホーク",
+        url: "https://en.wikipedia.org/wiki/Curtiss_P-40_Warhawk",
+      },
+    ],
+  },
+  {
     name: "fargo",
     displayName: "ファーゴ",
     type: "軽巡洋艦",

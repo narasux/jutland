@@ -5322,6 +5322,24 @@
     links: [],
   },
   {
+    name: "P-40N",
+    displayName: "战鹰 P-40N",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "4 x 12.7mm 勃朗宁",
+      },
+    ],
+    description: "柯蒂斯 P-40N 战鹰是 P-40 系列产量最大的末批大量生产型，1943 年服役。机体减重改善了爬升与机动，广泛装备中国战场与太平洋的美军陆军航空队。游戏中按战斗机处理，配置四挺前向 12.7mm 勃朗宁机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - P-40 战鹰",
+        url: "https://en.wikipedia.org/wiki/Curtiss_P-40_Warhawk",
+      },
+    ],
+  },
+  {
     name: "SBD-3",
     displayName: "无畏",
     armaments: [
