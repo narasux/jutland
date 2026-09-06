@@ -12,6 +12,7 @@ import (
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
+	planeImg "github.com/narasux/jutland/pkg/resources/images/plane"
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	"github.com/narasux/jutland/pkg/utils/layout"
 	"github.com/stretchr/testify/require"
@@ -346,4 +347,69 @@ func TestMovePlaneTypeSkipsEmptyTypesAndResetsPosition(t *testing.T) {
 	require.Equal(t, planeTypeTorpedo, ui.planeType)
 	require.Zero(t, ui.planeFirstIndex)
 	require.True(t, ui.pendingRebuild)
+}
+
+func TestCollectionPlaneCardScaleUnified(t *testing.T) {
+	// 统一比例尺必须让所有飞机按同一像素/米比例展示，且最大机型恰好占满卡片图片框。
+	// B-17G 长 22.5m、海獭式长 12.12m，若都各自填满固定框，二者会显示得一样大。
+	previousPlaneMap := objUnit.PlaneMap
+	previousPlaneNames := objUnit.AllPlaneNames
+	t.Cleanup(func() {
+		objUnit.PlaneMap = previousPlaneMap
+		objUnit.AllPlaneNames = previousPlaneNames
+	})
+
+	// 用真实素材名称构造最小集合，验证统一比例尺的等比规则（正式图鉴由初始化填充更多机型）。
+	objUnit.AllPlaneNames = []string{"B-17G", "SeaOtter"}
+	objUnit.PlaneMap = map[string]*objUnit.Plane{
+		"B-17G":    {Name: "B-17G", Nation: objUnit.NationUS},
+		"SeaOtter": {Name: "SeaOtter", Nation: objUnit.NationUS},
+	}
+
+	cardScale := 0.8
+	ratio := collectionPlaneCardScale(cardScale)
+	require.Greater(t, ratio, 0.0)
+
+	boxW := (340 - 48) * cardScale
+	boxH := 116 * cardScale
+	var maxDisplayW, maxDisplayH float64
+	var planes int
+	for _, name := range objUnit.AllPlaneNames {
+		plane := objUnit.PlaneMap[name]
+		if plane == nil || plane.Nation == objUnit.NationSpecial {
+			continue
+		}
+		img := planeImg.GetOriginal(name)
+		scale := planeImg.GetDisplayScale(name)
+		if img == nil || scale <= 0 {
+			continue
+		}
+		planes++
+		base := scale * ratio
+		h := float64(img.Bounds().Dy()) * base
+		w := float64(img.Bounds().Dx()) * base
+		require.LessOrEqual(t, h, boxH, "%s drawn height %.2f exceeds box %.2f", name, h, boxH)
+		require.LessOrEqual(t, w, boxW, "%s drawn width %.2f exceeds box %.2f", name, w, boxW)
+		maxDisplayH = max(maxDisplayH, h)
+		maxDisplayW = max(maxDisplayW, w)
+	}
+	require.Greater(t, planes, 0)
+
+	// 倍率应取到约束边界：最大机型要么顶到框高、要么顶到框宽，否则说明缩放没等比贴合。
+	require.True(t,
+		math.Abs(maxDisplayH-boxH) < 1e-6 || math.Abs(maxDisplayW-boxW) < 1e-6,
+		"expected largest plane to touch a box edge: maxH=%.3f (box %.3f), maxW=%.3f (box %.3f)",
+		maxDisplayH, boxH, maxDisplayW, boxW,
+	)
+
+	// 机体比例：B-17G（最长机型）应占满框高，海獭式按真实长度缩小（长度比 12.12/22.5≈0.54）。
+	b17 := planeImg.GetOriginal("B-17G")
+	seaOtter := planeImg.GetOriginal("SeaOtter")
+	if b17 != nil && seaOtter != nil {
+		b17H := float64(b17.Bounds().Dy()) * planeImg.GetDisplayScale("B-17G") * ratio
+		seaOtterH := float64(seaOtter.Bounds().Dy()) * planeImg.GetDisplayScale("SeaOtter") * ratio
+		require.InDelta(t, b17H, boxH, 1e-6, "B-17G (longest plane) should fill the card image box height")
+		require.InDelta(t, seaOtterH/b17H, 12.12/22.5, 0.15,
+			"Sea Otter should look proportionally smaller than B-17G")
+	}
 }

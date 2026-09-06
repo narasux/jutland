@@ -1695,6 +1695,62 @@
     ],
   },
   {
+    name: "A-26B",
+    displayName: "A-26B インベイダー",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "14 x 12.7mm（機鼻 2×四連装 8 + 機翼 2×三連装 6）",
+      },
+      {
+        label: "防御機銃",
+        value: "4 x 12.7mm（機背ターレット 2 + 機腹ターレット 2）",
+      },
+      {
+        label: "爆弾（水平爆撃）",
+        value: "内蔵弾倉 2000 ポンド x2 + 1000 ポンド x2（約 2.7 トン）；翼下ラックに 2000 ポンド追加可能",
+      },
+      {
+        label: "ロケット弾（翼下）",
+        value: "8 x 127mm HVAR",
+      },
+    ],
+    description: "ダグラス A-26 インベイダーは第二次大戦後期の米陸軍双発軽爆撃機/対地攻撃機で、1944 年に実戦配備。高速・大搭載量で、機首に多数の 12.7mm ブローニング機銃を備えた（図は第386爆撃航空群第552飛行隊の A-26B「Stinky」）。ゲーム内では水平爆撃機として扱われ、12.7mm ブローニング M2 を 18 挺（前方 14・防御 4）、内蔵弾倉約 2.7 トンの爆弾、翼下 2 基のラックに 8 発の 127mm HVAR ロケットを装備する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — A-26 インベイダー",
+        url: "https://en.wikipedia.org/wiki/Douglas_A-26_Invader",
+      },
+    ],
+  },
+  {
+    name: "B-26B",
+    displayName: "B-26B マローダー",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "6 x 12.7mm（胴体側面 4 + 機首固定/旋回 2）",
+      },
+      {
+        label: "防御機銃",
+        value: "6 x 12.7mm（機背 2・尾部 2・腰部 2）",
+      },
+      {
+        label: "爆弾（水平爆撃）",
+        value: "4000 ポンド（1000 ポンド x4、約 1.8 トン）標準；改良型は 6000 ポンドまで",
+      },
+    ],
+    description: "マーチン B-26 マローダーは米陸軍の中型爆撃機で、1941 年に実戦配備。高速・高機動で武装も強力（図は第386爆撃航空群第533飛行隊の B-26B「Rot poison」）。ゲーム内では水平爆撃機として扱われ、12.7mm ブローニング M2 を 12 挺（前方 6：胴体側面 4 + 機首 2；防御 6：機背 2・尾部 2・腰部 2）装備する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — B-26 マローダー",
+        url: "https://en.wikipedia.org/wiki/Martin_B-26_Marauder",
+      },
+    ],
+  },
+  {
     name: "fargo",
     displayName: "ファーゴ",
     type: "軽巡洋艦",
@@ -6358,6 +6414,33 @@
   {
     name: "US/12.7",
     displayName: "12.7mm 単装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/2",
+    displayName: "12.7mm 連装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/3",
+    displayName: "12.7mm 三連装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/4",
+    displayName: "12.7mm 四連装対空砲",
     type: "兵器",
     armaments: [],
     description: "",

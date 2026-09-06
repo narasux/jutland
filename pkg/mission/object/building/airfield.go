@@ -97,27 +97,58 @@ func NewAirfield(
 		airfield.CurProducing = airfield.Aircraft.Groups[0].Name
 	}
 
-	// 程序合成甲板模板：双起飞点「一前一后 + 一左一右」斜向错位——后机位
-	// 在跑道起点左舷，前机位前移 7.5% 跑道长、横错到右舷并等比缩短滑跑
-	// （双机离地位置一致），双机并行弹射时呈紧凑的斜向单列跟进而非并排；
-	// forward=1 即跑道起点（后端）
-	deck := &objUnit.CarrierDeck{
+	// 程序合成甲板模板；默认双起飞点（新机场缺省行为，见 newAirfieldDeck）
+	deck := newAirfieldDeck(0)
+	deck.Validate()
+	airfield.Aircraft.ResolveDeck(deck)
+	return airfield
+}
+
+// newAirfieldDeck 按起飞点数合成跑道甲板模板。
+//   - takeoffPoints==1：中线单机起飞——起飞点位于跑道起点（后端）中线，滑跑整条
+//     跑道，适合需要单架放飞的慢速重轰炸机（一次只起飞一架）；
+//   - 其余（缺省 0 或 >=2）：双起飞点「一前一后 + 一左一右」斜向错位——后机位在
+//     跑道起点左舷，前机位前移 7.5% 跑道长、横错到右舷并等比缩短滑跑（双机离地
+//     位置一致），双机并行弹射时呈紧凑的斜向单列跟进而非并排。
+//
+// forward=1 即跑道起点（后端）；降落沿跑道中线、中点回收、最终进近 3 个跑道长。
+func newAirfieldDeck(takeoffPoints int) *objUnit.CarrierDeck {
+	landing := objUnit.LandingConfig{
+		Mode:           objUnit.LandingModeDeck,
+		Forward:        0.5,
+		Lateral:        0,
+		ApproachAngle:  0,
+		ApproachLength: 3,
+	}
+	if takeoffPoints == 1 {
+		return &objUnit.CarrierDeck{
+			Name: "AirfieldRunway",
+			TakeoffPoints: []objUnit.TakeoffPoint{
+				{Forward: 1, Lateral: 0, RunLength: 1},
+			},
+			Landing: landing,
+		}
+	}
+	return &objUnit.CarrierDeck{
 		Name: "AirfieldRunway",
 		TakeoffPoints: []objUnit.TakeoffPoint{
 			{Forward: 1, Lateral: -0.18, RunLength: 1},
 			{Forward: 0.925, Lateral: 0.18, RunLength: 0.925},
 		},
-		Landing: objUnit.LandingConfig{
-			Mode:           objUnit.LandingModeDeck,
-			Forward:        0.5,
-			Lateral:        0,
-			ApproachAngle:  0,
-			ApproachLength: 3,
-		},
+		Landing: landing,
 	}
+}
+
+// SetTakeoffPoints 重建跑道起飞点数量（0 或负数为缺省、不改动，1 = 单机串行，
+// >=2 = 双机并行）。用于按机场配置调整起飞模式——重轰炸机（B-17/B-26）单架
+// 间隔起飞，战斗/俯冲轰炸机等轻型机保留双点并行。
+func (a *Airfield) SetTakeoffPoints(count int) {
+	if count <= 0 {
+		return
+	}
+	deck := newAirfieldDeck(count)
 	deck.Validate()
-	airfield.Aircraft.ResolveDeck(deck)
-	return airfield
+	a.Aircraft.ResolveDeck(deck)
 }
 
 // ---- AircraftBase 接口实现（静态基地） ----

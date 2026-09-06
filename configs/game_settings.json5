@@ -3,11 +3,10 @@
 // 范围: 0.25 ~ 4.0，默认值: 1.0
 
 // Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja
-
-// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场，默认值: true
+// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场
 
 {
-  "speedMultiplier": 1,
+  "speedMultiplier": 0.25,
   "language": "zh-Hans",
   "enableLandAirfield": true
 }

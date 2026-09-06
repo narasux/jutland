@@ -266,7 +266,7 @@ func initPlaneMap() {
 		// 折算速度（公里换成节）
 		p.MaxSpeed /= 3000 * 1.8
 		// 折算总航程
-		p.Range /= 8 * 1.8
+		p.Range /= 8
 		// 剩余航程
 		p.RemainRange = p.Range
 		p.Acceleration /= 600

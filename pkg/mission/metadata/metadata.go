@@ -81,7 +81,10 @@ type InitAirfieldMetadata struct {
 	RunwayWidth  float64
 	BelongPlayer faction.Player
 	TakeOffTime  float64
-	PlaneGroups  []InitAirfieldGroupMetadata
+	// TakeoffPoints 跑道起飞点数：<=0 缺省（双点并行），1 = 单机串行起飞，
+	// >=2 = 双机并行（缺省值）。用于重轰炸机单架间隔起飞。
+	TakeoffPoints int
+	PlaneGroups   []InitAirfieldGroupMetadata
 }
 
 // InitAirfieldGroupMetadata 陆地机场驻场机队元配置。

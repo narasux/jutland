@@ -1695,6 +1695,62 @@
     ],
   },
   {
+    name: "A-26B",
+    displayName: "A-26B Invader",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "14 x 12.7mm Browning (nose 2×quad=8 + wing 2×triple=6)",
+      },
+      {
+        label: "Defensive Guns",
+        value: "4 x 12.7mm Browning (dorsal turret 2 + ventral turret 2)",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "Internal bay 2000 lb x2 + 1000 lb x2 (about 2.7 t); wing racks can add 2000 lb",
+      },
+      {
+        label: "Rockets (Wing)",
+        value: "8 x 127mm HVAR",
+      },
+    ],
+    description: "The Douglas A-26 Invader was a late-WWII US twin-engined light bomber / ground-attack aircraft, entering service in 1944, fast and able to carry a large bombload with heavy nose gun batteries (the 386th Bomb Group 552nd BS A-26B \"Stinky\" shown). Treated as a level bomber in game, armed with eighteen 12.7mm Browning M2s (fourteen forward, four defensive), about 2.7 t of internal bombs and eight 127mm HVAR rockets on two wing racks.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — A-26 Invader",
+        url: "https://en.wikipedia.org/wiki/Douglas_A-26_Invader",
+      },
+    ],
+  },
+  {
+    name: "B-26B",
+    displayName: "B-26B Marauder",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "6 x 12.7mm Browning (fuselage sides 4 + nose fixed/flexible 2)",
+      },
+      {
+        label: "Defensive Guns",
+        value: "6 x 12.7mm Browning (dorsal 2, tail 2, waist 2)",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "4000 lb (1000 lb x4, about 1.8 t) standard; improved models up to 6000 lb",
+      },
+    ],
+    description: "The Martin B-26 Marauder was a US WWII medium bomber, entering service in 1941, noted for high speed and maneuverability with heavy armament (the 386th Bomb Group 533rd BS B-26B \"Rot poison\" shown). Treated as a level bomber in game, armed with twelve 12.7mm Browning M2s (six forward: four fuselage side + two nose; six defensive: two dorsal, two tail, two waist).",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — B-26 Marauder",
+        url: "https://en.wikipedia.org/wiki/Martin_B-26_Marauder",
+      },
+    ],
+  },
+  {
     name: "fargo",
     displayName: "Fargo",
     type: "Light Cruiser",
@@ -6358,6 +6414,33 @@
   {
     name: "US/12.7",
     displayName: "12.7mm Single AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/2",
+    displayName: "12.7mm Twin AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/3",
+    displayName: "12.7mm Triple AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/4",
+    displayName: "12.7mm Quad AA Mount",
     type: "Weapon",
     armaments: [],
     description: "",

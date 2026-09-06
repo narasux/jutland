@@ -252,6 +252,10 @@ func NewMissionState(mission string) *MissionState {
 				groups,
 			)
 			airfields[af.Uid] = af
+			// 按配置重建跑道起飞点数（1 = 单机串行，用于重轰炸机间隔起飞）
+			if md.TakeoffPoints > 0 {
+				af.SetTakeoffPoints(md.TakeoffPoints)
+			}
 			// 初始库存（initCount，缺省为 maxCount）：飞机待命于机库，
 			// 起飞时直接在跑道起点刷新
 			for _, g := range md.PlaneGroups {

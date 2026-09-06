@@ -292,3 +292,66 @@ func TestAirfieldProductionAutoSwitch(t *testing.T) {
 		t.Fatal("capacity full should stop production")
 	}
 }
+
+// TestAirfieldSetTakeoffPoints 验证跑道起飞点数配置：
+//   - 缺省（双点）同一 tick 可并行起飞两架；
+//   - SetTakeoffPoints(1) 退化为单机串行（同一 tick 只起飞一架，第二架因起飞点冷却被拒）；
+//   - SetTakeoffPoints(0) 是 no-op，不改动既有起飞模式。
+//
+// 用于重轰炸机（B-17/B-26）单架间隔起飞的需求。
+func TestAirfieldSetTakeoffPoints(t *testing.T) {
+	const planeName = "test-takeoff-bomber"
+	oldTemplate, hadTemplate := objUnit.PlaneMap[planeName]
+	objUnit.PlaneMap[planeName] = &objUnit.Plane{
+		Name:   planeName,
+		Type:   objUnit.PlaneTypeDiveBomber,
+		Weapon: objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{}}},
+	}
+	t.Cleanup(func() {
+		if hadTemplate {
+			objUnit.PlaneMap[planeName] = oldTemplate
+		} else {
+			delete(objUnit.PlaneMap, planeName)
+		}
+	})
+
+	target := objUnit.GetPlaneTargetObjType(planeName)
+	mk := func() *Airfield {
+		return NewAirfield(
+			objPos.New(50, 50), 90, 6, 0.8, faction.HumanAlpha, 10,
+			[]objUnit.PlaneGroup{{Name: planeName, MaxCount: 4}},
+		)
+	}
+	stock := func(af *Airfield) {
+		for i := 0; i < 4; i++ {
+			af.StockPlane(planeName)
+		}
+	}
+
+	// 缺省双起飞点：同一 tick 可并行起飞两架
+	af := mk()
+	stock(af)
+	if p1, p2 := af.Aircraft.TakeOff(af, target), af.Aircraft.TakeOff(af, target); p1 == nil || p2 == nil {
+		t.Fatalf("default airfield should allow parallel double takeoff, p1=%v p2=%v", p1 != nil, p2 != nil)
+	}
+
+	// SetTakeoffPoints(1)：单机串行——同一 tick 第二架因起飞点冷却被拒
+	af1 := mk()
+	af1.SetTakeoffPoints(1)
+	stock(af1)
+	if q1, q2 := af1.Aircraft.TakeOff(af1, target), af1.Aircraft.TakeOff(af1, target); q1 == nil || q2 != nil {
+		t.Fatalf("single-point airfield should take off one at a time, q1=%v q2=%v", q1 != nil, q2 != nil)
+	}
+	if got := af1.Aircraft.Groups[0].CurCount; got != 3 {
+		t.Fatalf("after single launch stock = %d, want 3", got)
+	}
+
+	// SetTakeoffPoints(0) 是 no-op：保持既有（单点）起飞模式
+	af2 := mk()
+	af2.SetTakeoffPoints(1)
+	af2.SetTakeoffPoints(0)
+	stock(af2)
+	if r1, r2 := af2.Aircraft.TakeOff(af2, target), af2.Aircraft.TakeOff(af2, target); r1 == nil || r2 != nil {
+		t.Fatalf("SetTakeoffPoints(0) should keep single-point takeoff, r1=%v r2=%v", r1 != nil, r2 != nil)
+	}
+}

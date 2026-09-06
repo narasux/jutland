@@ -31,6 +31,7 @@
         runwayLength: 9,
         runwayWidth: 1,
         belongPlayer: "HA",
+        takeoffPoints: 2,
         takeOffTime: 2.5,
         planeGroups: [
           {
@@ -799,6 +800,7 @@
         runwayLength: 9,
         runwayWidth: 0.8,
         belongPlayer: "HA",
+        takeoffPoints: 2,
         takeOffTime: 2,
         planeGroups: [
           {
@@ -1209,7 +1211,7 @@
     displayNameEn: "Battle of Midway - 1942",
     displayNameRu: "Битва за Мидуэй — 1942",
     displayNameJa: "ミッドウェー海戦―1942年",
-    initFunds: 0,
+    initFunds: 5000,
     initCameraPos: [188, 81],
     mapName: "midway",
     maxShipCount: 47,
@@ -1219,6 +1221,70 @@
     descriptionJa: "1942年6月4日05時45分、ミッドウェーのPBY哨戒機は北西180海里に日本海軍第一航空艦隊を発見し、北東には米第16・第17任務部隊が待機していた。本シナリオはこの時刻を歴史上の基準とし、数百海里に及ぶ空母戦を256×256グリッドへ圧縮する。ヨークタウン、エンタープライズ、ホーネットと護衛部隊を指揮し、赤城、加賀、蒼龍、飛龍および近接護衛部隊を迎撃せよ。未収録艦は同型艦または同艦種の近似艦で代用し、両軍の距離と隊形間隔は史実の正確な艦位ではなくゲーム上の近似である。",
     initReinforcePoints: [],
     initOilPlatforms: [],
+    // 中途岛陆地机场（美军）：沙岛（陆军航空队重/中轰炸机）与东岛（海军陆战队/
+    // 海军战斗与俯冲/鱼雷轰炸机）。史实上两岛机场是抵御日军空袭的关键；本关按
+    // 部署要求把 B-17/B-26 配属沙岛、战斗机与俯冲/鱼雷轰炸机配属东岛。
+    // 两机场均无实体停机坪：飞机与航母机库一致，以库存形式待命，起飞时在跑道
+    // 起点刷新滑跑、降落后直接回收入库；机场常显阵营色定位标记，跑道外框仅在
+    // 调试开关下绘制。
+    initAirfields: [
+      {
+        // 沙岛机场：跑道沿沙岛岛体主轴（东北—西南，约 66°）横贯中南部开阔沙地，
+        // 因驻场为慢速重轰炸机（B-17/B-26），起飞采用单机串行（takeoffPoints 1）
+        // 并拉大起飞间隔（takeOffTime 4s），避免重机密集齐飞、逐架滑跑放飞。
+        pos: [103, 156],
+        rotation: 270,
+        runwayLength: 11,
+        runwayWidth: 1.0,
+        belongPlayer: "HA",
+        takeoffPoints: 1,
+        takeOffTime: 4,
+        planeGroups: [
+          // 陆军航空队第 431 中队：B-17“空中堡垒”重型轰炸机，15 架，负责高空水平轰炸。
+          {
+            name: "B-17G",
+            maxCount: 15,
+          },
+          // 陆军航空队第 69 中队：B-26“劫掠者”中型轰炸机，4 架（5 月 29 日新到，改装用于反舰）。
+          {
+            name: "B-26B",
+            maxCount: 4,
+          },
+        ],
+      },
+      {
+        // 东岛机场：跑道对齐地图素材中西南—东北走向的可见跑道条带（约 60°）
+        pos: [161, 166],
+        rotation: 274,
+        runwayLength: 15,
+        runwayWidth: 0.8,
+        belongPlayer: "HA",
+        takeoffPoints: 2,
+        takeOffTime: 2,
+        planeGroups: [
+          // 海军陆战队 VMF-221 中队：F2A“水牛”战斗机，21 架，空防主力（性能相对落后）。
+          {
+            name: "F2A-3",
+            maxCount: 21,
+          },
+          // 海军陆战队 VMF-221 中队（5 月 26 日新到）：F4F“野猫”战斗机，7 架，性能较好。
+          {
+            name: "F4F-3",
+            maxCount: 7,
+          },
+          // 海军陆战队 VMSB-241 中队（5 月 26 日新到，用以替换旧机型）：SBD“无畏”俯冲轰炸机，18 架。
+          {
+            name: "SBD-3",
+            maxCount: 18,
+          },
+          // 海军 VT-8 分队（6 月 1 日新到，来自航母中队的分队）：TBF“复仇者”鱼雷轰炸机，6 架。
+          {
+            name: "TBF-1",
+            maxCount: 6,
+          },
+        ],
+      },
+    ],
     initShips: [
       // 坐标按 256x256 midway.map 网格落位；0°=北、90°=东、180°=南、270°=西。
       // 时间锚点为 1942-06-04 05:45（中途岛时区）；美军位于东北、日军位于西北。

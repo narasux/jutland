@@ -5366,6 +5366,62 @@
     ],
   },
   {
+    name: "A-26B",
+    displayName: "入侵者 A-26B",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "14 x 12.7mm 勃朗宁（机鼻 2×四联装 8 + 机翼 2×三联装 6）",
+      },
+      {
+        label: "防御机枪",
+        value: "4 x 12.7mm 勃朗宁（机背炮塔 2 + 机腹炮塔 2）",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "内部弹仓 2000 磅 x2 + 1000 磅 x2（约 2.7 吨）；机翼挂架可再挂 2000 磅",
+      },
+      {
+        label: "火箭弹（机翼挂架）",
+        value: "8 x 127mm HVAR 高速航空火箭",
+      },
+    ],
+    description: "道格拉斯 A-26 入侵者是二战后期美军双发轻型轰炸/对地攻击机，1944 年服役，速度快、载弹量大，机头装有多挺 12.7mm 勃朗宁机枪（图中为 386 轰炸航空群第 552 中队的 A-26B「Stinky」）。游戏中按水平轰炸机处理，配置十八挺 12.7mm 勃朗宁 M2（前向 14、防御 4）、内部弹仓约 2.7 吨炸弹与两具机翼挂架的 8 枚 127mm HVAR 火箭。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - A-26 入侵者",
+        url: "https://en.wikipedia.org/wiki/Douglas_A-26_Invader",
+      },
+    ],
+  },
+  {
+    name: "B-26B",
+    displayName: "掠夺者 B-26B",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "6 x 12.7mm 勃朗宁（机身侧方 4 + 机头固定/活动各 1）",
+      },
+      {
+        label: "防御机枪",
+        value: "6 x 12.7mm 勃朗宁（机背 2、机尾 2、腰部 2）",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "4000 磅（1000 磅 x4，约 1.8 吨）标配；改进型号可达 6000 磅",
+      },
+    ],
+    description: "马丁 B-26 掠夺者是美军二战中型轰炸机，1941 年服役，速度与机动性出色、火力凶猛（图中为 386 轰炸航空群第 533 中队的 B-26B「Rot poison」）。游戏中按水平轰炸机处理，配置十二挺 12.7mm 勃朗宁 M2（前向 6：机身侧方 4 + 机头 2；防御 6：机背 2、机尾 2、腰部 2）。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - B-26 掠夺者",
+        url: "https://en.wikipedia.org/wiki/Martin_B-26_Marauder",
+      },
+    ],
+  },
+  {
     name: "SBD-3",
     displayName: "无畏",
     armaments: [
@@ -6136,6 +6192,33 @@
   {
     name: "US/12.7",
     displayName: "12.7mm 单装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/2",
+    displayName: "12.7mm 双联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/3",
+    displayName: "12.7mm 三联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/12.7/4",
+    displayName: "12.7mm 四联装机枪",
     type: "武器",
     armaments: [],
     description: "",

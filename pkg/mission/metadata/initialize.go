@@ -79,9 +79,12 @@ type rawInitAirfieldMetadata struct {
 	RunwayWidth  float64    `json:"runwayWidth"`
 	BelongPlayer string     `json:"belongPlayer"`
 	// Enabled 配置级开关，缺省 true；false 时该机场不生成
-	Enabled     *bool                          `json:"enabled"`
-	TakeOffTime float64                        `json:"takeOffTime"`
-	PlaneGroups []rawInitAirfieldGroupMetadata `json:"planeGroups"`
+	Enabled     *bool   `json:"enabled"`
+	TakeOffTime float64 `json:"takeOffTime"`
+	// TakeoffPoints 跑道起飞点数：<=0 缺省（双点并行），1 = 单机串行起飞，
+	// >=2 = 双机并行（缺省值）。用于重轰炸机单架间隔起飞。
+	TakeoffPoints int                            `json:"takeoffPoints"`
+	PlaneGroups   []rawInitAirfieldGroupMetadata `json:"planeGroups"`
 }
 
 type rawInitAirfieldGroupMetadata struct {
@@ -115,6 +118,9 @@ func validateAirfieldMetadata(mapCfg *mapcfg.MapCfg, afMD rawInitAirfieldMetadat
 	}
 	if afMD.RunwayWidth <= 0 {
 		log.Fatalf("airfield runwayWidth must be positive, got %f", afMD.RunwayWidth)
+	}
+	if afMD.TakeoffPoints < 0 {
+		log.Fatalf("airfield takeoffPoints must be >= 0, got %d", afMD.TakeoffPoints)
 	}
 	if len(afMD.PlaneGroups) == 0 {
 		log.Fatalf("airfield at %v must have at least one plane group", afMD.Pos)
@@ -221,13 +227,14 @@ func init() {
 				})
 			}
 			initAirfields = append(initAirfields, InitAirfieldMetadata{
-				Pos:          objPos.NewR(afMD.Pos[0], afMD.Pos[1]),
-				Rotation:     float64(afMD.Rotation),
-				RunwayLength: afMD.RunwayLength,
-				RunwayWidth:  afMD.RunwayWidth,
-				BelongPlayer: faction.Player(afMD.BelongPlayer),
-				TakeOffTime:  afMD.TakeOffTime,
-				PlaneGroups:  groups,
+				Pos:           objPos.NewR(afMD.Pos[0], afMD.Pos[1]),
+				Rotation:      float64(afMD.Rotation),
+				RunwayLength:  afMD.RunwayLength,
+				RunwayWidth:   afMD.RunwayWidth,
+				BelongPlayer:  faction.Player(afMD.BelongPlayer),
+				TakeOffTime:   afMD.TakeOffTime,
+				TakeoffPoints: afMD.TakeoffPoints,
+				PlaneGroups:   groups,
 			})
 		}
 		// 统计计算

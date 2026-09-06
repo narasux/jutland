@@ -183,6 +183,10 @@ type CollectionUI struct {
 
 	shipBlueprintScale float64
 
+	// planeScaleRatio 是飞机图鉴卡片图片的统一缩放倍率，乘在每架飞机的
+	// GetDisplayScale 上，使所有飞机按统一像素/米比例展示，而不是各自填满固定卡片框。
+	planeScaleRatio float64
+
 	category collectionCategory
 
 	shipNation objUnit.Nation
@@ -720,6 +724,7 @@ func (c *CollectionUI) resize(width, height int) {
 	c.metrics = calculateCollectionMetrics(width, height)
 	c.layout = calculateCollectionUILayout(width, height)
 	c.shipBlueprintScale = collectionShipBlueprintScale(c.layout.Blueprint)
+	c.planeScaleRatio = collectionPlaneCardScale(c.calculatePlaneCardGeometry().Scale)
 	c.clampPlaneFirstIndex()
 	c.planeCanvas = ebiten.NewImage(c.layout.PlaneViewport.Dx(), c.layout.PlaneViewport.Dy())
 	c.buildUI()
@@ -1389,6 +1394,35 @@ func (c *CollectionUI) calculatePlaneCardGeometry() planeCardGeometry {
 		Scale: scale, Width: width, Height: height,
 		Gap: gap, Padding: padding, VisibleCount: visibleCount,
 	}
+}
+
+// collectionPlaneCardScale 返回飞机图鉴卡片图片的统一缩放倍率（乘在每架飞机的 GetDisplayScale 上）。
+// 每架飞机的 GetDisplayScale 已把各自素材归一到约 10 像素/米，但 drawPlaneCard 的“按卡片框等比缩放”
+// 会让不同大小的飞机各自填满固定图片框，导致长 22.5 米的 B-17G 和长 12.1 米的海獭式看起来一样大。
+// 这里取全体机型在 GetDisplayScale 下的最大展示尺寸，统一乘上同一个倍率严格正比于真实长度/翼展，
+// 使最大机型恰好占满卡片框，其余机型按真实比例缩小。special 测试机不参与计算（等同舰船蓝图处理）。
+func collectionPlaneCardScale(cardScale float64) float64 {
+	// 与 drawPlaneCard 的图片框一致：卡片基准宽 340，两侧各留 24，高 116。
+	boxW := (340 - 48) * cardScale
+	boxH := 116 * cardScale
+	var maxDisplayW, maxDisplayH float64
+	for _, name := range objUnit.AllPlaneNames {
+		plane := objUnit.PlaneMap[name]
+		if plane == nil || plane.Nation == objUnit.NationSpecial {
+			continue
+		}
+		img := planeImg.GetOriginal(name)
+		scale := planeImg.GetDisplayScale(name)
+		if img == nil || scale <= 0 || img.Bounds().Dx() <= 0 || img.Bounds().Dy() <= 0 {
+			continue
+		}
+		maxDisplayW = max(maxDisplayW, float64(img.Bounds().Dx())*scale)
+		maxDisplayH = max(maxDisplayH, float64(img.Bounds().Dy())*scale)
+	}
+	if maxDisplayW <= 0 || maxDisplayH <= 0 || boxW <= 0 || boxH <= 0 {
+		return 0
+	}
+	return min(boxW/maxDisplayW, boxH/maxDisplayH)
 }
 
 func (c *CollectionUI) maxPlaneFirstIndex() int {
@@ -2099,9 +2133,14 @@ func (c *CollectionUI) drawPlaneCard(
 			px(18), posFont, color.RGBA{175, 165, 150, 255},
 		)
 	}
+	baseScale := planeImg.GetDisplayScale(plane.Name) * c.planeScaleRatio
+	if baseScale <= 0 {
+		// 兜底：拿不到统一倍率时退回单机素材比例，避免飞机完全消失。
+		baseScale = planeImg.GetDisplayScale(plane.Name)
+	}
 	c.drawer.drawCollectionImageAtBaseScale(
 		screen, planeImg.GetOriginal(plane.Name), float64(x)+px(24), float64(y)+px(78),
-		float64(width)-px(48), px(116), 0, planeImg.GetDisplayScale(plane.Name),
+		float64(width)-px(48), px(116), 0, baseScale,
 	)
 
 	sectionY := y + int(math.Round(px(208)))
