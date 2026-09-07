@@ -1730,7 +1730,7 @@
     armaments: [
       {
         label: "Machine Guns (Forward)",
-        value: "6 x 12.7mm Browning (fuselage sides 4 + nose fixed/flexible 2)",
+        value: "6 x 12.7mm Browning (fuselage sides 4 + nose flexible 2)",
       },
       {
         label: "Defensive Guns",

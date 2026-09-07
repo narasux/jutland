@@ -300,9 +300,24 @@
     width: 54,
     // 三体：中央舰体喷点贴近真实舰艉；侧体圆按可见艉宽放大，寿命按该船体前后跨度算。
     wakeHulls: [
-      { lateral: 0, width: 54, front: 0.25, back: -0.45 },
-      { lateral: 93.5, width: 28, front: 0.08, back: -0.46 },
-      { lateral: -93.5, width: 28, front: 0.08, back: -0.46 },
+      {
+        lateral: 0,
+        width: 54,
+        front: 0.25,
+        back: -0.45
+      },
+      {
+        lateral: 93.5,
+        width: 28,
+        front: 0.08,
+        back: -0.46
+      },
+      {
+        lateral: -93.5,
+        width: 28,
+        front: 0.08,
+        back: -0.46
+      },
     ],
     fundsCost: 860,
     timeCost: 165,

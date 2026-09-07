@@ -1,4 +1,5 @@
 [
+  // 自定义
   {
     // 歼击机
     name: "F",
@@ -243,6 +244,7 @@
       releaseInterval: 0.3
     }
   },
+  // 美国海军 & 陆航
   {
     // 水牛
     name: "F2A-3",
@@ -605,6 +607,336 @@
           leftFiringArc: [340, 360]
         }
       ]
+    }
+  },
+  {
+    // 空中堡垒 B-17G
+    name: "B-17G",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1943,
+    totalHP: 115,
+    damageReduction: 0.5,
+    maxSpeed: 462,
+    acceleration: 18,
+    rotateSpeed: 3,
+    length: 22.5,
+    width: 31.6,
+    fundsCost: 114,
+    timeCost: 42,
+    tonnage: 29.7,
+    range: 3200,
+    weapon: {
+      guns: [
+        // 颚部 Bendix 动力炮塔（双联，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.95,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 颊部（单装，前向）
+        {
+          name: "US/12.7",
+          posPercent: 0.9,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [270, 360]
+        },
+        // 颊部（单装，前向）
+        {
+          name: "US/12.7",
+          posPercent: 0.85,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [360, 360]
+        },
+        // 机背炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 无线电舱（单装，后向）
+        {
+          name: "US/12.7",
+          posPercent: 0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腰部（单装，后向）
+        {
+          name: "US/12.7",
+          posPercent: -0.1,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 腰部（单装，后向）
+        {
+          name: "US/12.7",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 机腹球形炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.2,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机尾 Cheyenne 炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.95,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 入侵者 A-26B
+    name: "A-26B",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1944,
+    totalHP: 65,
+    damageReduction: 0.5,
+    maxSpeed: 570,
+    acceleration: 30,
+    rotateSpeed: 8,
+    length: 15.24,
+    width: 21.34,
+    fundsCost: 65,
+    timeCost: 25,
+    tonnage: 15.9,
+    range: 2300,
+    weapon: {
+      guns: [
+        // 机鼻“全能机鼻”（四联装，前向）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻“全能机鼻”（四联装，前向）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（三联装，每翼一组，前向）
+        {
+          name: "US/12.7/3",
+          posPercent: 0.45,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（三联装，每翼一组，前向）
+        {
+          name: "US/12.7/3",
+          posPercent: 0.45,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背遥控炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 机腹遥控炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.2,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        {
+          name: "US/AIR/RB/127/4",
+          posPercent: 0.7,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        },
+        {
+          name: "US/AIR/RB/127/4",
+          posPercent: 0.7,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 掠夺者 B-26B
+    name: "B-26B",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1941,
+    totalHP: 75,
+    damageReduction: 0.5,
+    maxSpeed: 455,
+    acceleration: 26,
+    rotateSpeed: 6,
+    length: 17.75,
+    width: 21.64,
+    fundsCost: 47,
+    timeCost: 18,
+    tonnage: 16.8,
+    range: 1850,
+    weapon: {
+      guns: [
+        // 机头（可活动，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.9,
+          rightFiringArc: [0, 60],
+          leftFiringArc: [300, 360]
+        },
+        // 机身侧方固定机枪（双联，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机身侧方固定机枪（双联，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 腰部/腹部机枪（单装，后向）
+        {
+          name: "US/12.7",
+          posPercent: -0.3,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腰部/腹部机枪（单装，后向）
+        {
+          name: "US/12.7",
+          posPercent: -0.3,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机背电动遥控炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.4,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机尾炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.95,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
     }
   },
   // 日本海军
@@ -1511,343 +1843,6 @@
         },
         {
           name: "UK/BB/114",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        }
-      ],
-      releaseInterval: 0.2
-    }
-  },
-  {
-    // 空中堡垒 B-17G
-    name: "B-17G",
-    nation: "us",
-    type: "level_bomber",
-    typeAbbr: "LB",
-    year: 1943,
-    totalHP: 115,
-    damageReduction: 0.5,
-    maxSpeed: 462,
-    acceleration: 18,
-    rotateSpeed: 3,
-    length: 22.5,
-    width: 31.6,
-    fundsCost: 114,
-    timeCost: 42,
-    tonnage: 29.7,
-    range: 3200,
-    weapon: {
-      guns: [
-        // 颚部 Bendix 动力炮塔（双联，前向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.85,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 颊部（单装，前向）
-        {
-          name: "US/12.7",
-          posPercent: 0.8,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 颊部（单装，前向）
-        {
-          name: "US/12.7",
-          posPercent: 0.8,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 无线电舱（单装，后向）
-        {
-          name: "US/12.7",
-          posPercent: 0.15,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 机背炮塔（双联，后向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.45,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 机腹球形炮塔（双联，后向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.5,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 腰部（单装，后向）
-        {
-          name: "US/12.7",
-          posPercent: 0.3,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 腰部（单装，后向）
-        {
-          name: "US/12.7",
-          posPercent: 0.3,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 机尾 Cheyenne 炮塔（双联，后向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.05,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        }
-      ],
-      bombs: [
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/907/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/907/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        }
-      ],
-      releaseInterval: 0.2
-    }
-  },
-  {
-    // 入侵者 A-26B
-    name: "A-26B",
-    nation: "us",
-    type: "level_bomber",
-    typeAbbr: "LB",
-    year: 1944,
-    totalHP: 65,
-    damageReduction: 0.5,
-    maxSpeed: 570,
-    acceleration: 30,
-    rotateSpeed: 8,
-    length: 15.24,
-    width: 21.34,
-    fundsCost: 65,
-    timeCost: 25,
-    tonnage: 15.9,
-    range: 2300,
-    weapon: {
-      guns: [
-        // 机鼻“全能机鼻”（四联装，前向）
-        {
-          name: "US/12.7/4",
-          posPercent: 0.85,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机鼻“全能机鼻”（四联装，前向）
-        {
-          name: "US/12.7/4",
-          posPercent: 0.85,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机翼（三联装，每翼一组，前向）
-        {
-          name: "US/12.7/3",
-          posPercent: 0.7,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机翼（三联装，每翼一组，前向）
-        {
-          name: "US/12.7/3",
-          posPercent: 0.7,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机背遥控炮塔（双联，后向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.45,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 机腹遥控炮塔（双联，后向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.5,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        }
-      ],
-      bombs: [
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/907/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/907/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        }
-      ],
-      rockets: [
-        {
-          name: "US/AIR/RB/127/4",
-          posPercent: 0.7,
-          rightFiringArc: [0, 25],
-          leftFiringArc: [335, 360]
-        },
-        {
-          name: "US/AIR/RB/127/4",
-          posPercent: 0.7,
-          rightFiringArc: [0, 25],
-          leftFiringArc: [335, 360]
-        }
-      ],
-      releaseInterval: 0.2
-    }
-  },
-  {
-    // 掠夺者 B-26B
-    name: "B-26B",
-    nation: "us",
-    type: "level_bomber",
-    typeAbbr: "LB",
-    year: 1941,
-    totalHP: 75,
-    damageReduction: 0.5,
-    maxSpeed: 455,
-    acceleration: 26,
-    rotateSpeed: 6,
-    length: 17.75,
-    width: 21.64,
-    fundsCost: 47,
-    timeCost: 18,
-    tonnage: 16.8,
-    range: 1850,
-    weapon: {
-      guns: [
-        // 机身侧方固定机枪（双联，前向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.6,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机身侧方固定机枪（双联，前向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.6,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机头（固定+可活动，前向）
-        {
-          name: "US/12.7",
-          posPercent: 0.9,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机头（固定+可活动，前向）
-        {
-          name: "US/12.7",
-          posPercent: 0.9,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机背电动遥控炮塔（双联，后向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.45,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 机尾炮塔（双联，后向）
-        {
-          name: "US/12.7/2",
-          posPercent: 0.05,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 腰部/腹部机枪（单装，后向）
-        {
-          name: "US/12.7",
-          posPercent: 0.3,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        },
-        // 腰部/腹部机枪（单装，后向）
-        {
-          name: "US/12.7",
-          posPercent: 0.3,
-          rightFiringArc: [100, 180],
-          leftFiringArc: [180, 260]
-        }
-      ],
-      bombs: [
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
