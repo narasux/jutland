@@ -5323,7 +5323,7 @@
   },
   {
     name: "P-40N",
-    displayName: "战鹰 P-40N",
+    displayName: "战鹰",
     armaments: [
       {
         label: "机枪（前向）",
@@ -5340,8 +5340,88 @@
     ],
   },
   {
+    name: "P-39N",
+    displayName: "空中眼镜蛇",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "1 x 37mm",
+      },
+      {
+        label: "机枪（前向）",
+        value: "2 x 12.7mm + 4 x 7.62mm 勃朗宁",
+      },
+    ],
+    description: "贝尔 P-39N 空中眼镜蛇是 P-39 系列产量最大的后期型，1942 年服役。采用中置发动机与机鼻机炮的独特布局，机动灵活但高空性能一般，美军评价不高；第 347 战斗大队第 68/70 中队曾于所罗门群岛作战，比尔·菲德勒中尉驾驶的 68 号机以机首髑髅徽记闻名。游戏中按战斗机处理，前向配置一门 37mm M4 机炮与两挺 12.7mm、四挺 7.62mm 勃朗宁机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - P-39 空中眼镜蛇",
+        url: "https://en.wikipedia.org/wiki/Bell_P-39_Airacobra",
+      },
+    ],
+  },
+  {
+    name: "P-38J",
+    displayName: "闪电",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "1 x 20mm",
+      },
+      {
+        label: "机枪（前向）",
+        value: "4 x 12.7mm 勃朗宁",
+      },
+    ],
+    description: "洛克希德 P-38J 闪电是美国二战著名的双发双尾撑战斗机，1943 年服役，以远程护航、高空性能与坚固著称，是太平洋与欧洲战场美军的主力远程战斗机。机鼻集中配置一门 20mm 机炮与四挺 12.7mm 勃朗宁机枪，火力集中于机头，辨识度极高的双尾撑外形也令其得名「闪电」。游戏中按战斗机处理，前向配置一门 20mm 机炮与四挺 12.7mm 勃朗宁机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - P-38 闪电",
+        url: "https://en.wikipedia.org/wiki/Lockheed_P-38_Lightning",
+      },
+    ],
+  },
+  {
+    name: "P-47D-30",
+    displayName: "雷电 D-30",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "8 x 12.7mm 勃朗宁",
+      },
+    ],
+    description: "共和 P-47D-30 雷电是美国陆军航空队二战后期的主力战斗机，1944 年底投入前线，以高空性能、大火力与坚固防护著称。八挺 12.7mm 勃朗宁机枪分列两侧机翼，气泡式座舱盖改善了视野。游戏中按战斗机处理，前向配置八挺 12.7mm 勃朗宁机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - P-47 雷电",
+        url: "https://en.wikipedia.org/wiki/Republic_P-47_Thunderbolt",
+      },
+    ],
+  },
+  {
+    name: "P-47D-2",
+    displayName: "雷电 D-2",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "8 x 12.7mm 勃朗宁",
+      },
+    ],
+    description: "共和 P-47D-2 雷电是 P-47D 的早期剃刀背批次，1943 年服役。第 348 战斗航空团指挥官尼尔·卡比中校驾驶该型机在太平洋战场屡建战功。游戏中按战斗机处理，前向配置八挺 12.7mm 勃朗宁机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - P-47 雷电",
+        url: "https://en.wikipedia.org/wiki/Republic_P-47_Thunderbolt",
+      },
+    ],
+  },
+  {
     name: "B-17G",
-    displayName: "空中堡垒 B-17G",
+    displayName: "空中堡垒",
     armaments: [
       {
         label: "机枪（前向）",
@@ -5367,7 +5447,7 @@
   },
   {
     name: "A-26B",
-    displayName: "入侵者 A-26B",
+    displayName: "入侵者",
     armaments: [
       {
         label: "机枪（前向）",
@@ -5397,7 +5477,7 @@
   },
   {
     name: "B-26B",
-    displayName: "掠夺者 B-26B",
+    displayName: "掠夺者",
     armaments: [
       {
         label: "机枪（前向）",
@@ -5541,7 +5621,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "海盗式 F4U-4",
+    displayName: "海盗式",
     armaments: [
       {
         label: "机枪（前向）",
@@ -6183,6 +6263,15 @@
   {
     name: "US/20/70",
     displayName: "20mm/70 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/37",
+    displayName: "37mm 单装机炮",
     type: "武器",
     armaments: [],
     description: "",

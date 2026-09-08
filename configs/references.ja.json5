@@ -1669,6 +1669,86 @@
     ],
   },
   {
+    name: "P-39N",
+    displayName: "P-39N エアラコブラ",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "1 x 37mm",
+      },
+      {
+        label: "機銃（前方）",
+        value: "2 x 12.7mm + 4 x 7.62mm",
+      },
+    ],
+    description: "ベル P-39N エアラコブラは P-39 シリーズで最も生産された後期型で、1942 年に実戦配備された。中置エンジンと機首機砲という独特のレイアウトから機動は機敏だが高空性能は振るわず、アメリカ軍の評価は高くなかった。第 347 戦闘航空群第 68/70 戦闘飛行隊はソロモン諸島で運用し、機首に髑髏の徽記を描いたビル・フィードラー中尉の 68 号機が知られる。ゲーム内では戦闘機として扱われ、前方 37mm M4 機関砲と 12.7mm 機銃 2 挺、7.62mm 機銃 4 挺を装備する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — P-39 エアラコブラ",
+        url: "https://en.wikipedia.org/wiki/Bell_P-39_Airacobra",
+      },
+    ],
+  },
+  {
+    name: "P-38J",
+    displayName: "P-38J ライトニング",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "1 x 20mm",
+      },
+      {
+        label: "機銃（前方）",
+        value: "4 x 12.7mm",
+      },
+    ],
+    description: "ロッキード P-38J ライトニングは第二次世界大戦で有名な双発双尾翼戦闘機で、1943 年に実戦配備された。長距離護衛、高空性能と頑丈さで知られ、太平洋とヨーロッパのアメリカ陸軍航空隊で広く運用された。機首には 20mm 機関砲 1 門と 12.7mm ブローニング機銃 4 挺を集中装備した。ゲーム内では戦闘機として扱われ、前方 20mm 機関砲と 12.7mm 機銃 4 挺を装備する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — P-38 ライトニング",
+        url: "https://en.wikipedia.org/wiki/Lockheed_P-38_Lightning",
+      },
+    ],
+  },
+  {
+    name: "P-47D-30",
+    displayName: "P-47D-30 サンダーボルト",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "8 x 12.7mm",
+      },
+    ],
+    description: "リパブリック P-47D-30 サンダーボルトは大戦後半のアメリカ陸軍航空隊主力戦闘機の一つで、1944 年末に実戦配備された。高速・大火力・重防御を誇り、翼に 12.7mm 機銃 8 挺を装備し、バブルキャノピーで視界を改善した。ゲーム内では戦闘機として扱われ、前方 12.7mm 機銃 8 挺を装備する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — P-47 サンダーボルト",
+        url: "https://en.wikipedia.org/wiki/Republic_P-47_Thunderbolt",
+      },
+    ],
+  },
+  {
+    name: "P-47D-2",
+    displayName: "P-47D-2 サンダーボルト",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "8 x 12.7mm",
+      },
+    ],
+    description: "リパブリック P-47D-2 サンダーボルトは P-47D の初期バッチで、レーザーバック（背の高い胴体）タイプとして 1943 年に実戦配備された。第 348 戦闘航空群司令ニール・カービー大佐はこの型で太平洋戦域で戦果を挙げた。ゲーム内では戦闘機として扱われ、前方 12.7mm 機銃 8 挺を装備する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — P-47 サンダーボルト",
+        url: "https://en.wikipedia.org/wiki/Republic_P-47_Thunderbolt",
+      },
+    ],
+  },
+  {
     name: "B-17G",
     displayName: "B-17G フライングフォートレス",
     armaments: [
@@ -6559,6 +6639,15 @@
   {
     name: "US/20/70",
     displayName: "20mm 単装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/37",
+    displayName: "37mm 単装機関砲",
     type: "兵器",
     armaments: [],
     description: "",

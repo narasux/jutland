@@ -130,6 +130,14 @@
     damage: 1.2,
     criticalRate: 0.0001
   },
+  // 美国陆航 37mm M4 机炮炮弹（P-39 飞蛇机头机炮，低速、大装药）
+  {
+    name: "US/GB/37/1941",
+    type: "shell",
+    diameter: 37,
+    damage: 3.2,
+    criticalRate: 0.0002
+  },
   // Phalanx Mk 244 ELC，钨合金穿甲弹芯约 0.15 kg；伤害按现有 20 mm 尺度随弹芯质量上调
   {
     name: "US/GB/20/2008",

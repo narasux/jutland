@@ -632,6 +632,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 美国陆航 37mm M4 机炮（P-39 飞蛇机头炮，低速大装药，约 150 rpm）
+  {
+    name: "US/37",
+    bulletName: "US/GB/37/1941",
+    bulletCount: 1,
+    reloadTime: 0.4,
+    range: 4,
+    bulletSpread: 30,
+    bulletSpeed: 650,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 美国海军 Mk 15 Phalanx Block 1B，20 mm/99 六管加特林；4500 rpm 一轮约 0.08 s
   {
     name: "US/20/99/MK15B1B",
@@ -684,7 +697,7 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国陆航/海军 US/12.7 四联装机枪（A-26B 机鼻"全能机鼻"）
+  // 美国陆航/海军 US/12.7 四联装机枪（机鼻集中火力或每翼四挺机翼用）
   {
     name: "US/12.7/4",
     bulletName: "US/GB/12.7/1919",

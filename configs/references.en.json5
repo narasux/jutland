@@ -1669,6 +1669,86 @@
     ],
   },
   {
+    name: "P-39N",
+    displayName: "P-39N Airacobra",
+    armaments: [
+      {
+        label: "Cannon (Forward)",
+        value: "1 x 37mm",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 12.7mm + 4 x 7.62mm",
+      },
+    ],
+    description: "The Bell P-39N Airacobra was the most-produced late variant of the P-39 family, entering service in 1942. Its mid-mounted engine and nose cannon gave agile handling but weak high-altitude performance, and US pilots rated it only moderately. The 68th and 70th Fighter Squadrons of the 347th Fighter Group flew it over the Solomons, where Lt. Bill Fiedler's serial 68 gained fame for its nose skull insignia. Treated as a fighter in game, it carries a forward 37mm M4 cannon with two 12.7mm and four 7.62mm Browning machine guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — P-39 Airacobra",
+        url: "https://en.wikipedia.org/wiki/Bell_P-39_Airacobra",
+      },
+    ],
+  },
+  {
+    name: "P-38J",
+    displayName: "P-38J Lightning",
+    armaments: [
+      {
+        label: "Cannon (Forward)",
+        value: "1 x 20mm",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "4 x 12.7mm",
+      },
+    ],
+    description: "The Lockheed P-38J Lightning was the United States' famous twin-engine, twin-boom fighter of World War II, entering service in 1943. Renowned for long-range escort, high-altitude performance and rugged construction, it served widely with the US Army Air Forces in the Pacific and Europe. Its concentrated nose armament paired a 20mm cannon with four 12.7mm Browning machine guns. Treated as a fighter in game, it carries a forward 20mm cannon and four 12.7mm Browning machine guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — P-38 Lightning",
+        url: "https://en.wikipedia.org/wiki/Lockheed_P-38_Lightning",
+      },
+    ],
+  },
+  {
+    name: "P-47D-30",
+    displayName: "P-47D-30 Thunderbolt",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "8 x 12.7mm",
+      },
+    ],
+    description: "The Republic P-47D-30 Thunderbolt was a mainstay US Army Air Forces fighter of the late war, reaching frontline units in late 1944. Renowned for high-altitude performance, heavy firepower and rugged protection, it carried eight .50 caliber Browning machine guns in the wings and a bubble canopy for improved visibility. Treated as a fighter in game, it carries eight forward-firing 12.7mm Browning machine guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — P-47 Thunderbolt",
+        url: "https://en.wikipedia.org/wiki/Republic_P-47_Thunderbolt",
+      },
+    ],
+  },
+  {
+    name: "P-47D-2",
+    displayName: "P-47D-2 Thunderbolt",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "8 x 12.7mm",
+      },
+    ],
+    description: "The Republic P-47D-2 Thunderbolt was an early razorback production block of the P-47D, entering service in 1943. Colonel Neel Kearby, commander of the 348th Fighter Group, scored notable victories over the Pacific flying this variant. Treated as a fighter in game, it carries eight forward-firing 12.7mm Browning machine guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — P-47 Thunderbolt",
+        url: "https://en.wikipedia.org/wiki/Republic_P-47_Thunderbolt",
+      },
+    ],
+  },
+  {
     name: "B-17G",
     displayName: "B-17G Flying Fortress",
     armaments: [
@@ -6559,6 +6639,15 @@
   {
     name: "US/20/70",
     displayName: "20mm Single AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/37",
+    displayName: "37mm Single Cannon",
     type: "Weapon",
     armaments: [],
     description: "",

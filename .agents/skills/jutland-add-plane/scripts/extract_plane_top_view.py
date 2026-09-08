@@ -10,6 +10,7 @@ invent aircraft structure.
 from __future__ import annotations
 
 import argparse
+from collections import deque
 from pathlib import Path
 
 import numpy as np
@@ -70,6 +71,38 @@ def dilate(mask: np.ndarray, radius: int) -> np.ndarray:
     return result
 
 
+def flood_background(rgb: np.ndarray) -> np.ndarray:
+    """Identify page background by flood fill from the image borders.
+
+    White/silver-painted aircraft have skin pixels as bright as the page
+    background, so a global white threshold would punch out the fuselage and
+    wing interiors. Only white pixels connected to the page border are
+    background; white enclosed by the line art is kept opaque.
+    """
+    span = rgb.max(axis=2) - rgb.min(axis=2)
+    bg_like = (rgb.min(axis=2) > 245) & (span < 15)
+    height, width = bg_like.shape
+    background = np.zeros_like(bg_like)
+    queue: deque[tuple[int, int]] = deque()
+    for x in range(width):
+        for y in (0, height - 1):
+            if bg_like[y, x] and not background[y, x]:
+                background[y, x] = True
+                queue.append((y, x))
+    for y in range(height):
+        for x in (0, width - 1):
+            if bg_like[y, x] and not background[y, x]:
+                background[y, x] = True
+                queue.append((y, x))
+    while queue:
+        y, x = queue.popleft()
+        for ny, nx in ((y - 1, x), (y + 1, x), (y, x - 1), (y, x + 1)):
+            if 0 <= ny < height and 0 <= nx < width and bg_like[ny, nx] and not background[ny, nx]:
+                background[ny, nx] = True
+                queue.append((ny, nx))
+    return background
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, type=Path, help="Source image path.")
@@ -87,6 +120,16 @@ def main() -> None:
     parser.add_argument("--white-threshold", type=int, default=246, help="RGB threshold for full transparency.")
     parser.add_argument("--near-white-threshold", type=int, default=236, help="RGB threshold for soft edge alpha.")
     parser.add_argument("--near-white-alpha", type=int, default=105, help="Alpha for near-white antialias pixels.")
+    parser.add_argument(
+        "--background",
+        choices=["white", "flood"],
+        default="white",
+        help=(
+            "Background removal mode. 'white' matches bright pixels globally (default). "
+            "'flood' flood-fills from the image borders, keeping white aircraft skin "
+            "enclosed by the line art; use for white/silver-painted aircraft."
+        ),
+    )
     parser.add_argument("--dilate", type=int, default=1, help="Pixel dilation after largest-component selection.")
     args = parser.parse_args()
 
@@ -103,19 +146,39 @@ def main() -> None:
     rgb = arr[..., :3].astype(np.int16)
     span = rgb.max(axis=2) - rgb.min(axis=2)
 
-    white = (
-        (rgb[..., 0] > args.white_threshold)
-        & (rgb[..., 1] > args.white_threshold)
-        & (rgb[..., 2] > args.white_threshold)
-        & (span < 13)
-    )
-    near_white = (
-        (rgb[..., 0] > args.near_white_threshold)
-        & (rgb[..., 1] > args.near_white_threshold)
-        & (rgb[..., 2] > args.near_white_threshold)
-        & (span < 17)
-        & (~white)
-    )
+    if args.background == "flood":
+        background = flood_background(rgb)
+        height, width = background.shape
+        pad = np.pad(background, 1, constant_values=False)
+        adjacent_bg = (
+            pad[0:height, 1 : width + 1]
+            | pad[2 : height + 2, 1 : width + 1]
+            | pad[1 : height + 1, 0:width]
+            | pad[1 : height + 1, 2 : width + 2]
+        )
+        near_white = (
+            (rgb[..., 0] > args.near_white_threshold)
+            & (rgb[..., 1] > args.near_white_threshold)
+            & (rgb[..., 2] > args.near_white_threshold)
+            & (span < 17)
+            & (~background)
+            & adjacent_bg
+        )
+        white = background
+    else:
+        white = (
+            (rgb[..., 0] > args.white_threshold)
+            & (rgb[..., 1] > args.white_threshold)
+            & (rgb[..., 2] > args.white_threshold)
+            & (span < 13)
+        )
+        near_white = (
+            (rgb[..., 0] > args.near_white_threshold)
+            & (rgb[..., 1] > args.near_white_threshold)
+            & (rgb[..., 2] > args.near_white_threshold)
+            & (span < 17)
+            & (~white)
+        )
 
     alpha = np.full(white.shape, 255, dtype=np.uint8)
     alpha[white] = 0

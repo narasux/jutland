@@ -265,16 +265,22 @@
     range: 1550,
     weapon: {
       guns: [
-        // 机翼（双联装，每翼一组，前向）
+        // 机首（双联装 12.7mm，机首上侧，前向）
         {
           name: "US/12.7/2",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（每翼 1 挺 12.7mm，前缘，前向）
+        {
+          name: "US/12.7",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
-        // 机翼（双联装，每翼一组，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -349,6 +355,168 @@
         // 机翼/机头（双联装，前向）
         {
           name: "US/12.7/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+    }
+  },
+  {
+    // 空中眼镜蛇
+    name: "P-39N",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1942,
+    totalHP: 36,
+    damageReduction: 0.5,
+    maxSpeed: 605,
+    acceleration: 32,
+    rotateSpeed: 12,
+    length: 9.2,
+    width: 10.4,
+    fundsCost: 7,
+    timeCost: 4,
+    tonnage: 3.7,
+    range: 1200,
+    weapon: {
+      guns: [
+        // 机鼻 37mm M4 机炮（前向）
+        {
+          name: "US/37",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻（双联装 12.7mm，发动机上方同步机枪，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（双联装 7.62mm，每翼一组，前向）
+        {
+          name: "US/7.62/2",
+          posPercent: 0.4,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（双联装 7.62mm，每翼一组，前向）
+        {
+          name: "US/7.62/2",
+          posPercent: 0.4,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+    }
+  },
+  {
+    // 闪电（双发双尾撑）
+    name: "P-38J",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 44,
+    damageReduction: 0.5,
+    maxSpeed: 666,
+    acceleration: 30,
+    rotateSpeed: 11,
+    length: 11.53,
+    width: 15.85,
+    fundsCost: 11,
+    timeCost: 6,
+    tonnage: 7.9,
+    range: 1600,
+    weapon: {
+      guns: [
+        // 机鼻 20mm M2 机炮（前向）
+        {
+          name: "US/20/70",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻集中火力（四联装，前向）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+    }
+  },
+  {
+    // 雷电（气泡座舱，高空高速重火力）
+    name: "P-47D-30",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 50,
+    damageReduction: 0.55,
+    maxSpeed: 697,
+    acceleration: 30,
+    rotateSpeed: 10,
+    length: 11.0,
+    width: 12.4,
+    fundsCost: 14,
+    timeCost: 7,
+    tonnage: 8.0,
+    range: 1600,
+    weapon: {
+      guns: [
+        // 机翼（四联装，每翼一组，前向）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（四联装，每翼一组，前向）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+    }
+  },
+  {
+    // 雷电（剃刀背，早期批次）
+    name: "P-47D-2",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 46,
+    damageReduction: 0.55,
+    maxSpeed: 660,
+    acceleration: 28,
+    rotateSpeed: 10,
+    length: 11.0,
+    width: 12.4,
+    fundsCost: 12,
+    timeCost: 6,
+    tonnage: 6.6,
+    range: 1300,
+    weapon: {
+      guns: [
+        // 机翼（四联装，每翼一组，前向）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（四联装，每翼一组，前向）
+        {
+          name: "US/12.7/4",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -867,16 +1035,9 @@
           rightFiringArc: [0, 60],
           leftFiringArc: [300, 360]
         },
-        // 机身侧方固定机枪（双联，前向）
+        // 机翼（四联装，前向）
         {
-          name: "US/12.7/2",
-          posPercent: 0.5,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机身侧方固定机枪（双联，前向）
-        {
-          name: "US/12.7/2",
+          name: "US/12.7/4",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
