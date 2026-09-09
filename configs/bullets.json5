@@ -765,6 +765,22 @@
     damage: 25,
     criticalRate: 0.0005
   },
+  // 日本海军 200mm 三式六番二七号火箭爆弹（60kg，对空）
+  {
+    name: "JP/RB/200/1944",
+    type: "rocket",
+    diameter: 200,
+    damage: 26,
+    criticalRate: 0.003
+  },
+  // 日本海军 100mm 三式一番二八号一型火箭爆弹（7.65kg，对空）
+  {
+    name: "JP/RB/100/1945",
+    type: "rocket",
+    diameter: 100,
+    damage: 8,
+    criticalRate: 0.001
+  },
   // 中国海军 122mm 舰载火箭弹
   {
     name: "CN/RB/122/1960",

@@ -107,6 +107,10 @@
         label: "Machine Guns (Forward)",
         value: "2 x 13mm",
       },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "4 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
+      },
     ],
     description: "",
     author: "",
@@ -1622,6 +1626,10 @@
         label: "Machine Guns (Forward)",
         value: "6 x 12.7mm Browning",
       },
+      {
+        label: "Rockets (Forward)",
+        value: "8 x 127mm proximity-fused AA rockets",
+      },
     ],
     description: "The Vought F4U-4 Corsair entered service in 1945 as a high-performance single-seat carrier fighter. In game it is treated as a fighter armed with six forward-firing 12.7mm Browning machine guns.",
     author: "Unknown",
@@ -1639,6 +1647,10 @@
       {
         label: "Machine Guns (Forward)",
         value: "6 x 12.7mm",
+      },
+      {
+        label: "Rockets (Forward)",
+        value: "6 x 127mm proximity-fused AA rockets",
       },
     ],
     description: "",
@@ -1702,6 +1714,10 @@
         label: "Machine Guns (Forward)",
         value: "4 x 12.7mm",
       },
+      {
+        label: "Rockets (Forward)",
+        value: "10 x 127mm proximity-fused AA rockets",
+      },
     ],
     description: "The Lockheed P-38J Lightning was the United States' famous twin-engine, twin-boom fighter of World War II, entering service in 1943. Renowned for long-range escort, high-altitude performance and rugged construction, it served widely with the US Army Air Forces in the Pacific and Europe. Its concentrated nose armament paired a 20mm cannon with four 12.7mm Browning machine guns. Treated as a fighter in game, it carries a forward 20mm cannon and four 12.7mm Browning machine guns.",
     author: "Unknown",
@@ -1719,6 +1735,10 @@
       {
         label: "Machine Guns (Forward)",
         value: "8 x 12.7mm",
+      },
+      {
+        label: "Rockets (Forward)",
+        value: "10 x 127mm proximity-fused AA rockets",
       },
     ],
     description: "The Republic P-47D-30 Thunderbolt was a mainstay US Army Air Forces fighter of the late war, reaching frontline units in late 1944. Renowned for high-altitude performance, heavy firepower and rugged protection, it carried eight .50 caliber Browning machine guns in the wings and a bubble canopy for improved visibility. Treated as a fighter in game, it carries eight forward-firing 12.7mm Browning machine guns.",
@@ -1738,6 +1758,10 @@
         label: "Machine Guns (Forward)",
         value: "8 x 12.7mm",
       },
+      {
+        label: "Rockets (Forward)",
+        value: "6 x 127mm proximity-fused AA rockets",
+      },
     ],
     description: "The Republic P-47D-2 Thunderbolt was an early razorback production block of the P-47D, entering service in 1943. Colonel Neel Kearby, commander of the 348th Fighter Group, scored notable victories over the Pacific flying this variant. Treated as a fighter in game, it carries eight forward-firing 12.7mm Browning machine guns.",
     author: "Unknown",
@@ -1745,6 +1769,50 @@
       {
         name: "Wikipedia — P-47 Thunderbolt",
         url: "https://en.wikipedia.org/wiki/Republic_P-47_Thunderbolt",
+      },
+    ],
+  },
+  {
+    name: "P-51B-5",
+    displayName: "P-51B-5 Mustang",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "4 x 12.7mm",
+      },
+      {
+        label: "Rockets (Forward)",
+        value: "6 x 127mm proximity-fused AA rockets",
+      },
+    ],
+    description: "The North American P-51B-5 Mustang was an early main production variant, entering service in 1943. Its razorback canopy and Merlin engine provided an effective balance of speed, range and high-altitude performance for long-range escort missions. Treated as a fighter in game, it carries four forward-firing 12.7mm Browning machine guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — P-51 Mustang",
+        url: "https://en.wikipedia.org/wiki/North_American_P-51_Mustang",
+      },
+    ],
+  },
+  {
+    name: "P-51D-20",
+    displayName: "P-51D-20 Mustang",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "6 x 12.7mm",
+      },
+      {
+        label: "Rockets (Forward)",
+        value: "6 x 127mm proximity-fused AA rockets",
+      },
+    ],
+    description: "The North American P-51D-20 Mustang was a late production P-51D, entering service in 1944. Its bubble canopy improved visibility and its wing armament increased to six 12.7mm machine guns, making it a key long-range escort fighter for the US Army Air Forces late in the war. Treated as a fighter in game, it carries six forward-firing 12.7mm Browning machine guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — P-51 Mustang",
+        url: "https://en.wikipedia.org/wiki/North_American_P-51_Mustang",
       },
     ],
   },
@@ -2581,6 +2649,10 @@
       {
         label: "Cannons (Forward)",
         value: "4 x 20mm",
+      },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "2 x 200mm Type 3 No.6 Mk 27 (60kg)",
       },
     ],
     description: "Imperial Japanese Navy local interceptor fighter emphasizing climb, speed, and firepower; represented in game as a fighter.",
@@ -3867,6 +3939,10 @@
       {
         label: "Cannons (Forward)",
         value: "4 x 20mm",
+      },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "2 x 200mm Type 3 No.6 Mk 27 (60kg)",
       },
     ],
     description: "Imperial Japanese Navy local fighter and the first production Shiden Kai variant; represented in game as a fighter.",
