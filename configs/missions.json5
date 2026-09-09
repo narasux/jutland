@@ -4021,5 +4021,416 @@
         belongPlayer: "CA"
       },
     ],
+  },
+  {
+    name: "MidwayFourCornersTest",
+    category: "test",
+    displayName: "陆地机场 vs 航空母舰",
+    displayNameEn: "Land Airfields vs Aircraft Carriers",
+    displayNameRu: "Наземные аэродромы против авианосцев",
+    displayNameJa: "陸上飛行場 vs 航空母艦",
+    initFunds: 10000,
+    initCameraPos: [128, 128],
+    mapName: "midway",
+    maxShipCount: 60,
+    description: "纯测试关卡，不复原历史。中途岛 256×256 地图上，我方控制左右两座陆地机场：左侧驻日本机群，右侧驻美国和英国的全部现役机型。海面四角各有一支电脑敌方舰队，左侧两支使用日本舰船，右侧两支使用美国舰船；每队均含 2 艘航母、2 艘战列舰、1 艘巡洋舰和 1 艘驱逐舰，四队合计 24 艘战舰，其中 8 艘航母。玩家舰队位于地图正中，含 2 艘战列舰、3 艘巡洋舰和 6 艘驱逐舰。当前运行时只初始化 HA/CA 两方，因此四个电脑编队统一归属 CA；国家差异只体现在舰船、舰载机和机场机型。无增援、无油井。",
+    descriptionEn: "A pure test scenario, not a historical reconstruction. On the 256×256 Midway map, the player controls both land airfields: the left hosts Japanese aircraft and the right hosts every U.S. and British aircraft type. Four computer enemy fleets occupy the sea corners: the two left-hand fleets use Japanese ships and the two right-hand fleets use U.S. ships. Each fleet has two carriers, two battleships, one cruiser, and one destroyer, for 24 enemy ships in total, including eight carriers. The player fleet starts in the center with two battleships, three cruisers, and six destroyers. The current runtime initializes only HA and CA, so all four computer fleets belong to CA; nationality is represented by ship, carrier-aircraft, and airfield aircraft types. No reinforcements or oil platforms.",
+    descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. На карте Мидуэя 256×256 игрок контролирует оба наземных аэродрома: левый занят японскими самолётами, правый — всеми типами американских и британских самолётов. В четырёх морских углах развёрнуты четыре компьютерных вражеских соединения: два левых используют японские корабли, два правых — американские. В каждом соединении два авианосца, два линкора, один крейсер и один эсминец: всего 24 вражеских корабля, включая восемь авианосцев. Флот игрока начинает в центре: два линкора, три крейсера и шесть эсминцев. Текущая версия инициализирует только стороны HA и CA, поэтому все компьютерные соединения относятся к CA; национальные различия выражены типами кораблей, палубной авиации и аэродромных самолётов. Подкреплений и нефтяных платформ нет.",
+    descriptionJa: "史実再現ではなく純粋な試験シナリオである。256×256の中途島マップでは、自軍が左右両方の陸上飛行場を管理する。左側には日本機、右側には米国と英国の全機種を配置する。海面四隅には四個のコンピューター敵艦隊を置き、左側二隊は日本艦艇、右側二隊は米国艦艇とする。各隊は空母2隻、戦艦2隻、巡洋艦1隻、駆逐艦1隻で、敵艦艇は合計24隻、うち空母8隻である。自軍艦隊はマップ中央に戦艦2隻、巡洋艦3隻、駆逐艦6隻で開始する。現行ランタイムはHAとCAのみを初期化するため、四個のコンピューター艦隊はすべてCA所属となる。国家の違いは艦船、空母航空隊、飛行場機種で表現する。増援と油井はない。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initAirfields: [
+      {
+        // 左侧中途岛机场（日本电脑机群）：沿用地图左岛可见跑道，机型覆盖旧式零战、
+        // 后期局地战斗机、俯冲轰炸机和舰攻/舰爆，便于测试新增的日式空对空火箭弹。
+        pos: [103, 156],
+        rotation: 270,
+        runwayLength: 11,
+        runwayWidth: 1.0,
+        belongPlayer: "HA",
+        takeoffPoints: 4,
+        takeOffTime: 0.5,
+        planeGroups: [
+          {
+            name: "A6M2",
+            maxCount: 8,
+          },
+          {
+            name: "A6M3",
+            maxCount: 8,
+          },
+          {
+            name: "J2M3",
+            maxCount: 8,
+          },
+          {
+            name: "N1K2",
+            maxCount: 8,
+          },
+          {
+            name: "A7M2",
+            maxCount: 8,
+          },
+          {
+            name: "D3A1",
+            maxCount: 8,
+          },
+          {
+            name: "D4Y3",
+            maxCount: 8,
+          },
+          {
+            name: "B6N2",
+            maxCount: 8,
+          },
+          {
+            name: "B7A2",
+            maxCount: 8,
+          },
+        ],
+      },
+      {
+        // 右侧中途岛机场（美国与英国电脑联合机群）：收录配置中全部 17 型美国飞机
+        // 与全部 9 型英国飞机，每型 4 架，用于统一测试美英机体的武器和挂载。
+        pos: [161, 166],
+        rotation: 274,
+        runwayLength: 15,
+        runwayWidth: 0.8,
+        belongPlayer: "HA",
+        takeoffPoints: 4,
+        takeOffTime: 0.5,
+        planeGroups: [
+          {
+            name: "F2A-3",
+            maxCount: 8,
+          },
+          {
+            name: "F4F-3",
+            maxCount: 8,
+          },
+          {
+            name: "P-40N",
+            maxCount: 8,
+          },
+          {
+            name: "P-39N",
+            maxCount: 8,
+          },
+          {
+            name: "P-38J",
+            maxCount: 8,
+          },
+          {
+            name: "P-47D-30",
+            maxCount: 8,
+          },
+          {
+            name: "P-47D-2",
+            maxCount: 8,
+          },
+          {
+            name: "P-51B-5",
+            maxCount: 8,
+          },
+          {
+            name: "P-51D-20",
+            maxCount: 8,
+          },
+          {
+            name: "F6F-3",
+            maxCount: 8,
+          },
+          {
+            name: "SBD-3",
+            maxCount: 8,
+          },
+          {
+            name: "SB2C-4",
+            maxCount: 8,
+          },
+          {
+            name: "TBD-1",
+            maxCount: 8,
+          },
+          {
+            name: "TBF-1",
+            maxCount: 8,
+          },
+          {
+            name: "B-17G",
+            maxCount: 8,
+          },
+          {
+            name: "A-26B",
+            maxCount: 8,
+          },
+          {
+            name: "B-26B",
+            maxCount: 8,
+          },
+          {
+            name: "F4U-4",
+            maxCount: 8,
+          },
+          {
+            name: "Fulmar",
+            maxCount: 8,
+          },
+          {
+            name: "SeaHurricane",
+            maxCount: 8,
+          },
+          {
+            name: "Seafire",
+            maxCount: 8,
+          },
+          {
+            name: "TBF-1-UK",
+            maxCount: 8,
+          },
+          {
+            name: "Swordfish",
+            maxCount: 8,
+          },
+          {
+            name: "Barracuda-II",
+            maxCount: 8,
+          },
+          {
+            name: "Mosquito",
+            maxCount: 8,
+          },
+          {
+            name: "SeaOtter",
+            maxCount: 8,
+          },
+        ],
+      },
+    ],
+    initShips: [
+      // 坐标按 256×256 midway.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 四个电脑编队从海面四角向中央展开：左侧日本，右侧美国，统一归 CA。
+      // 每队均为 2 航母 + 2 战列舰 + 1 巡洋舰 + 1 驱逐舰，四队共 24 艘、8 艘航母。
+
+      // === 日本电脑舰队：西北角，舰首 135°，向东南进入中央 ===
+      {
+        name: "akagi",
+        pos: [41, 39],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      {
+        name: "soryu",
+        pos: [39, 41],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      {
+        name: "kongo",
+        pos: [46, 39],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      {
+        name: "fuso",
+        pos: [39, 46],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      {
+        name: "tone",
+        pos: [42, 34],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yugumo",
+        pos: [34, 42],
+        rotation: 135,
+        belongPlayer: "CA"
+      },
+
+      // === 日本电脑舰队：西南角，舰首 45°，向东北进入中央 ===
+      {
+        name: "kaga",
+        pos: [39, 215],
+        rotation: 45,
+        belongPlayer: "CA"
+      },
+      {
+        name: "hiryu",
+        pos: [41, 217],
+        rotation: 45,
+        belongPlayer: "CA"
+      },
+      {
+        name: "nagato",
+        pos: [39, 210],
+        rotation: 45,
+        belongPlayer: "CA"
+      },
+      {
+        name: "ise",
+        pos: [46, 217],
+        rotation: 45,
+        belongPlayer: "CA"
+      },
+      {
+        name: "haguro",
+        pos: [34, 214],
+        rotation: 45,
+        belongPlayer: "CA"
+      },
+      {
+        name: "yukikaze",
+        pos: [42, 222],
+        rotation: 45,
+        belongPlayer: "CA"
+      },
+
+      // === 美国电脑舰队：东北角，舰首 225°，向西南进入中央 ===
+      {
+        name: "yorktown",
+        pos: [217, 41],
+        rotation: 225,
+        belongPlayer: "CA"
+      },
+      {
+        name: "essex",
+        pos: [215, 39],
+        rotation: 225,
+        belongPlayer: "CA"
+      },
+      {
+        name: "south_dakota",
+        pos: [217, 46],
+        rotation: 225,
+        belongPlayer: "CA"
+      },
+      {
+        name: "tennessee",
+        pos: [210, 39],
+        rotation: 225,
+        belongPlayer: "CA"
+      },
+      {
+        name: "astoria",
+        pos: [222, 42],
+        rotation: 225,
+        belongPlayer: "CA"
+      },
+      {
+        name: "hammann",
+        pos: [214, 34],
+        rotation: 225,
+        belongPlayer: "CA"
+      },
+
+      // === 美国电脑舰队：东南角，舰首 315°，向西北进入中央 ===
+      {
+        name: "saratoga",
+        pos: [215, 217],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "langley",
+        pos: [217, 215],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "maryland",
+        pos: [210, 217],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "new_mexico",
+        pos: [217, 210],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "northampton",
+        pos: [214, 222],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+      {
+        name: "porter",
+        pos: [222, 214],
+        rotation: 315,
+        belongPlayer: "CA"
+      },
+
+      // === 玩家舰队：地图正中，舰首 0°；质心为 [128, 128] ===
+      {
+        name: "lowa",
+        pos: [124, 123],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_dakota",
+        pos: [132, 123],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "baltimore",
+        pos: [121, 127],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "portland",
+        pos: [128, 129],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "astoria",
+        pos: [135, 127],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hammann",
+        pos: [119, 133],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "maury",
+        pos: [124, 135],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "porter",
+        pos: [132, 135],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "dewey",
+        pos: [137, 133],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "hammann",
+        pos: [124, 119],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+      {
+        name: "maury",
+        pos: [132, 119],
+        rotation: 0,
+        belongPlayer: "HA"
+      },
+    ],
   }
 ]

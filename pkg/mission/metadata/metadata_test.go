@@ -52,5 +52,6 @@ func TestConfiguredMissionOrder(t *testing.T) {
 	require.Equal(t, []string{
 		"TestAll",
 		"TestAntiAircraft",
+		"MidwayFourCornersTest",
 	}, AvailableMissions(MissionCategoryTest))
 }
