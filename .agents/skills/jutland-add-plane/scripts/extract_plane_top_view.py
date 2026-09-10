@@ -103,6 +103,70 @@ def flood_background(rgb: np.ndarray) -> np.ndarray:
     return background
 
 
+def remove_background(
+    rgb: np.ndarray,
+    background_mode: str,
+    white_threshold: int,
+    near_white_threshold: int,
+    near_white_alpha: int,
+) -> np.ndarray:
+    """Build an alpha mask from page background using the selected mode."""
+    span = rgb.max(axis=2) - rgb.min(axis=2)
+
+    if background_mode == "flood":
+        background = flood_background(rgb)
+        height, width = background.shape
+        pad = np.pad(background, 1, constant_values=False)
+        adjacent_bg = (
+            pad[0:height, 1 : width + 1]
+            | pad[2 : height + 2, 1 : width + 1]
+            | pad[1 : height + 1, 0:width]
+            | pad[1 : height + 1, 2 : width + 2]
+        )
+        near_white = (
+            (rgb[..., 0] > near_white_threshold)
+            & (rgb[..., 1] > near_white_threshold)
+            & (rgb[..., 2] > near_white_threshold)
+            & (span < 17)
+            & (~background)
+            & adjacent_bg
+        )
+        white = background
+    else:
+        white = (
+            (rgb[..., 0] > white_threshold)
+            & (rgb[..., 1] > white_threshold)
+            & (rgb[..., 2] > white_threshold)
+            & (span < 13)
+        )
+        near_white = (
+            (rgb[..., 0] > near_white_threshold)
+            & (rgb[..., 1] > near_white_threshold)
+            & (rgb[..., 2] > near_white_threshold)
+            & (span < 17)
+            & (~white)
+        )
+
+    alpha = np.full(white.shape, 255, dtype=np.uint8)
+    alpha[white] = 0
+    alpha[near_white] = np.uint8(near_white_alpha)
+    return alpha
+
+
+def crop_edge_sides(mask: np.ndarray) -> list[str]:
+    """Return crop sides touched by a mask before rotation."""
+    sides = []
+    if mask[:, 0].any():
+        sides.append("left")
+    if mask[:, -1].any():
+        sides.append("right")
+    if mask[0, :].any():
+        sides.append("top")
+    if mask[-1, :].any():
+        sides.append("bottom")
+    return sides
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, type=Path, help="Source image path.")
@@ -131,10 +195,33 @@ def main() -> None:
         ),
     )
     parser.add_argument("--dilate", type=int, default=1, help="Pixel dilation after largest-component selection.")
+    parser.add_argument(
+        "--allow-crop-edge",
+        action="store_true",
+        help="Allow the aircraft component to touch a crop edge; use only when the source itself is clipped.",
+    )
     args = parser.parse_args()
 
     img = Image.open(args.input).convert("RGBA")
     crop = img.crop(args.crop)
+    crop_arr = np.array(crop)
+    crop_alpha = remove_background(
+        crop_arr[..., :3].astype(np.int16),
+        args.background,
+        args.white_threshold,
+        args.near_white_threshold,
+        args.near_white_alpha,
+    )
+    crop_keep = largest_component(crop_alpha > 30)
+    touched_sides = crop_edge_sides(crop_keep)
+    if touched_sides and not args.allow_crop_edge:
+        sides = ", ".join(touched_sides)
+        raise SystemExit(
+            f"crop clips the largest aircraft component at: {sides}. "
+            "Expand --crop to leave a white margin around the whole aircraft; "
+            "use --allow-crop-edge only if the source image itself clips the aircraft."
+        )
+
     rotated = crop.rotate(
         args.rotate,
         resample=Image.Resampling.BICUBIC,
@@ -143,46 +230,13 @@ def main() -> None:
     )
 
     arr = np.array(rotated)
-    rgb = arr[..., :3].astype(np.int16)
-    span = rgb.max(axis=2) - rgb.min(axis=2)
-
-    if args.background == "flood":
-        background = flood_background(rgb)
-        height, width = background.shape
-        pad = np.pad(background, 1, constant_values=False)
-        adjacent_bg = (
-            pad[0:height, 1 : width + 1]
-            | pad[2 : height + 2, 1 : width + 1]
-            | pad[1 : height + 1, 0:width]
-            | pad[1 : height + 1, 2 : width + 2]
-        )
-        near_white = (
-            (rgb[..., 0] > args.near_white_threshold)
-            & (rgb[..., 1] > args.near_white_threshold)
-            & (rgb[..., 2] > args.near_white_threshold)
-            & (span < 17)
-            & (~background)
-            & adjacent_bg
-        )
-        white = background
-    else:
-        white = (
-            (rgb[..., 0] > args.white_threshold)
-            & (rgb[..., 1] > args.white_threshold)
-            & (rgb[..., 2] > args.white_threshold)
-            & (span < 13)
-        )
-        near_white = (
-            (rgb[..., 0] > args.near_white_threshold)
-            & (rgb[..., 1] > args.near_white_threshold)
-            & (rgb[..., 2] > args.near_white_threshold)
-            & (span < 17)
-            & (~white)
-        )
-
-    alpha = np.full(white.shape, 255, dtype=np.uint8)
-    alpha[white] = 0
-    alpha[near_white] = np.uint8(args.near_white_alpha)
+    alpha = remove_background(
+        arr[..., :3].astype(np.int16),
+        args.background,
+        args.white_threshold,
+        args.near_white_threshold,
+        args.near_white_alpha,
+    )
 
     keep = largest_component(alpha > 30)
     keep = dilate(keep, args.dilate)

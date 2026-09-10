@@ -58,6 +58,7 @@ func init() {
 		"dive_bomber",
 		"level_bomber",
 		"torpedo_bomber",
+		"other",
 	}
 
 	planeOriginalImgMap = map[string]*ebiten.Image{}

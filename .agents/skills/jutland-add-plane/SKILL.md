@@ -30,7 +30,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 
 ## 脚本
 
-- `scripts/extract_plane_top_view.py`：从用户提供的原图裁剪飞机顶视图，执行裁剪、旋转、白底透明化、保留最大连通飞机区域、裁去透明边界和可选缩放。该脚本只做确定性处理，不重绘、不补线、不改结构、不重新配色。
+- `scripts/extract_plane_top_view.py`：从用户提供的原图裁剪飞机顶视图，执行裁剪、旋转、白底透明化、保留最大连通飞机区域、裁去透明边界和可选缩放。脚本会在旋转前检查最大连通飞机区域是否碰到裁剪框边缘；若碰到则直接报错，避免机翼或尾翼被静默切平。该脚本只做确定性处理，不重绘、不补线、不改结构、不重新配色。
 - 使用示例：
   ```bash
   python .agents/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
@@ -42,6 +42,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
   ```
 - 角度说明：脚本沿用 Pillow 角度，正数为逆时针，顺时针 45 度写 `--rotate -45`。
 - 尺寸说明：原始 PNG 的机头到机尾垂直高度必须等于 `configs/planes.json5` 中该飞机 `length * 30` 像素；宽度按裁剪后原图比例自动确定，不强制压缩到配置 `width`。优先使用 `--target-height`，例如 `length: 9` 时传 `--target-height 270`。
+- 裁剪框必须在飞机四周保留可见白边，不能贴着翼尖、螺旋桨或尾翼。脚本若报告 `crop clips the largest aircraft component`，先扩大对应方向的 `--crop`；不要把裁剪边界当作透明边界，也不要用阈值调整掩盖截断。只有原图本身已经截断飞机时才可显式使用 `--allow-crop-edge`。
 - 该脚本输出后必须再用 `view_image` 预览。若方向、裁剪、白边或残片有问题，只调整 `--crop`、`--rotate`、阈值或目标高度；不要在脚本外重绘飞机结构。
 
 ## 工作流程
@@ -74,6 +75,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
    - 先检查现有同国飞机 PNG：透明 RGBA、机头朝上。
    - 原始 PNG 的垂直高度（机头到机尾）必须按 `planes.json5` 的 `length * 30` 像素生成；宽度由原素材比例决定，不为匹配配置宽度做非等比压缩。
    - 用户提供组合图时，优先裁取无遮挡、结构完整的同型机实例；若飞机互相遮挡，换用另一实例，不猜测被遮挡轮廓。
+   - 裁剪组合图时宁可留出较大空白，再用最大连通区域去掉文字和相邻机型；不要把翼尖、尾翼或炮管压在裁剪框边缘。成品出现平直边缘，通常首先检查源裁剪框是否截断，而不是线条或透明阈值问题。
    - 仅做裁剪、旋转、透明化、边缘清理、轻微去噪和按真实尺寸缩放，不重绘用户素材，除非用户明确要求生成新美术。
    - 不要为了匹配其他飞机素材而重建线稿、重绘机翼/机身/尾翼、补画结构线或重新设计涂装。历史线稿即使不完美，也应优先保留。
    - 不要把“从另一张清线合集裁一架相似飞机”当作处理用户图片；这会破坏素材来源约束。

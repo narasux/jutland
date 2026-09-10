@@ -30,6 +30,8 @@ const (
 	PlaneTypeLevelBomber PlaneType = "level_bomber"
 	// PlaneTypeTorpedoBomber 鱼雷轰炸机
 	PlaneTypeTorpedoBomber PlaneType = "torpedo_bomber"
+	// PlaneTypeOther 其他机
+	PlaneTypeOther PlaneType = "other"
 )
 
 // ToDisplay 飞机类型展示用名称。
@@ -43,6 +45,8 @@ func (t PlaneType) ToDisplay() string {
 		return i18n.Text(i18n.MsgPlaneTypeLevelBomber)
 	case PlaneTypeTorpedoBomber:
 		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
+	case PlaneTypeOther:
+		return i18n.Text(i18n.MsgPlaneTypeOther)
 	default:
 		return i18n.Text(i18n.MsgUnknown)
 	}
@@ -415,6 +419,8 @@ func GetPlaneTargetObjType(name string) object.Type {
 		return object.TypePlane
 	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber:
 		return object.TypeShip
+	case PlaneTypeOther:
+		return object.TypeNone
 	default:
 		return object.TypeNone
 	}

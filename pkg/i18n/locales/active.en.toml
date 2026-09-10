@@ -106,6 +106,8 @@ other = "Dive Bomber"
 other = "Level Bomber"
 [PlaneTypeTorpedoBomber]
 other = "Torpedo Bomber"
+[PlaneTypeOther]
+other = "Other"
 [Unknown]
 other = "Unknown"
 [CollectionAll]

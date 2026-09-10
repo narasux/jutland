@@ -106,6 +106,8 @@ other = "俯冲轰炸机"
 other = "水平轰炸机"
 [PlaneTypeTorpedoBomber]
 other = "鱼雷轰炸机"
+[PlaneTypeOther]
+other = "其他机"
 [Unknown]
 other = "未知"
 [CollectionAll]

@@ -6,7 +6,7 @@
 // EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场
 
 {
-  "speedMultiplier": 0.5,
+  "speedMultiplier": 0.25,
   "language": "zh-Hans",
   "enableLandAirfield": true
 }

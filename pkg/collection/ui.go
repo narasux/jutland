@@ -84,6 +84,7 @@ const (
 	planeTypeDive    planeTypeFilter = "dive_bomber"
 	planeTypeLevel   planeTypeFilter = "level_bomber"
 	planeTypeTorpedo planeTypeFilter = "torpedo_bomber"
+	planeTypeOther   planeTypeFilter = "other"
 )
 
 func (f planeTypeFilter) display() string {
@@ -96,6 +97,8 @@ func (f planeTypeFilter) display() string {
 		return i18n.Text(i18n.MsgPlaneTypeLevelBomber)
 	case planeTypeTorpedo:
 		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
+	case planeTypeOther:
+		return i18n.Text(i18n.MsgPlaneTypeOther)
 	default:
 		return i18n.Text(i18n.MsgCollectionAll)
 	}
@@ -103,6 +106,7 @@ func (f planeTypeFilter) display() string {
 
 var planeTypeFilters = []planeTypeFilter{
 	planeTypeAll, planeTypeFighter, planeTypeDive, planeTypeLevel, planeTypeTorpedo,
+	planeTypeOther,
 }
 
 type collectionUILayout struct {

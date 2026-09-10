@@ -5548,6 +5548,54 @@
     ],
   },
   {
+    name: "B-24D",
+    displayName: "解放者",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 12.7mm 勃朗宁（机鼻炮塔）",
+      },
+      {
+        label: "防御机枪（全周）",
+        value: "8 x 12.7mm 勃朗宁（机背 2、机腹球 2、腰部 2、尾部 2）",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "2000 磅 x2 + 1000 磅 x4（共约 3.6 吨）",
+      },
+    ],
+    description: "联合飞机 B-24D 解放者是二战美军四发重型轰炸机，1942 年服役，航程和载弹量优于 B-17，图中为第 376 轰炸航空群第 514 轰炸飞行队的 B-24D「Lady Be Good」。游戏中按水平轰炸机处理，配置十挺 12.7mm 勃朗宁 M2（机鼻炮塔 2、机背 2、机腹球 2、腰部 2、尾部 2）与 2000 磅 x2 + 1000 磅 x4 水平投弹炸弹（共约 3.6 吨）。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - B-24 解放者",
+        url: "https://en.wikipedia.org/wiki/Consolidated_B-24_Liberator",
+      },
+    ],
+  },
+  {
+    name: "B-29A",
+    displayName: "超级堡垒",
+    armaments: [
+      {
+        label: "防御机枪（全周）",
+        value: "12 x 12.7mm 勃朗宁（机背前炮塔 4 + 其他遥控炮塔 6 + 尾部炮塔 2）",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "2000 磅 x2（共约 1.8 吨）",
+      },
+    ],
+    description: "波音 B-29A 超级堡垒是二战后期美军四发远程战略轰炸机，1944 年服役，作战半径远、载弹量大，并采用遥控防御炮塔。游戏中按水平轰炸机处理，后期型配置 12 挺 12.7mm 勃朗宁机枪（机背前炮塔 4、其他遥控炮塔 6、尾部炮塔 2），取消尾部 20mm 炮，另挂 2 枚 2000 磅水平炸弹。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - B-29 超级堡垒",
+        url: "https://en.wikipedia.org/wiki/Boeing_B-29_Superfortress",
+      },
+    ],
+  },
+  {
     name: "B-26B",
     displayName: "掠夺者",
     armaments: [
@@ -5570,6 +5618,45 @@
       {
         name: "维基百科 - B-26 掠夺者",
         url: "https://en.wikipedia.org/wiki/Martin_B-26_Marauder",
+      },
+    ],
+  },
+  {
+    name: "C-47A",
+    displayName: "空中列车",
+    armaments: [],
+    description: "道格拉斯 C-47A 空中列车是二战美军主力运输机，1942 年服役，用于兵员与物资运输、空投和滑翔机牵引。当前游戏没有独立的运输机行为，暂按无武装其他机位置处理。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - C-47 空中列车",
+        url: "https://en.wikipedia.org/wiki/Douglas_C-47_Skytrain",
+      },
+    ],
+  },
+  {
+    name: "B-25C",
+    displayName: "米切尔",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "5 x 12.7mm 勃朗宁（机鼻 1 + 机身侧方固定机枪 4）",
+      },
+      {
+        label: "防御机枪",
+        value: "7 x 12.7mm 勃朗宁（机背 2、机腹 2、腰部 2、尾部 1）",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "1000 磅 x3（共约 1.36 吨）",
+      },
+    ],
+    description: "北美 B-25C 米切尔是美军二战双发中型轰炸机，1942 年服役，以稳定性、实用性和生存性著称，产量高于 B-26（图中为第 340 轰炸航空群第 488 轰炸飞行队的 B-25C「POON TANG」）。游戏中按水平轰炸机处理，配置十二挺 12.7mm 勃朗宁 M2（前向 5：机鼻 1、机身侧方 4；防御 7：机背 2、机腹 2、腰部 2、尾部 1）与 1000 磅 x3 水平投弹炸弹（共约 1.36 吨）。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - B-25 米切尔",
+        url: "https://en.wikipedia.org/wiki/North_American_B-25_Mitchell",
       },
     ],
   },

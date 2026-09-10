@@ -1031,6 +1031,182 @@
     }
   },
   {
+    // 超级堡垒 B-29A
+    name: "B-29A",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1944,
+    totalHP: 135,
+    damageReduction: 0.5,
+    maxSpeed: 570,
+    acceleration: 20,
+    rotateSpeed: 3,
+    length: 30.18,
+    width: 43.05,
+    fundsCost: 120,
+    timeCost: 44,
+    tonnage: 31.3,
+    range: 5200,
+    weapon: {
+      guns: [
+        // 机背前炮塔（四联）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.95,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 遥控炮塔（双联）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 遥控炮塔（双联）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 遥控炮塔（双联）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.6,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "US/12.7/2",
+          posPercent: -0.95,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 解放者 B-24D
+    name: "B-24D",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1942,
+    totalHP: 110,
+    damageReduction: 0.5,
+    maxSpeed: 488,
+    acceleration: 19,
+    rotateSpeed: 3,
+    length: 20.6,
+    width: 33.5,
+    fundsCost: 112,
+    timeCost: 41,
+    tonnage: 29.5,
+    range: 3700,
+    weapon: {
+      guns: [
+        // 机鼻 Emerson 动力炮塔（双联，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.95,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
+        },
+        // 机背 Martin 动力炮塔（双联，全周）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 机腹球形炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腰部（单装）
+        {
+          name: "US/12.7",
+          posPercent: -0.35,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 腰部（单装）
+        {
+          name: "US/12.7",
+          posPercent: -0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 机尾 Consolidated 动力炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.95,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
     // 入侵者 A-26B
     name: "A-26B",
     nation: "us",
@@ -1227,6 +1403,126 @@
       ],
       releaseInterval: 0.2
     }
+  },
+  {
+    // 米切尔 B-25C
+    name: "B-25C",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1942,
+    totalHP: 75,
+    damageReduction: 0.5,
+    maxSpeed: 457,
+    acceleration: 25,
+    rotateSpeed: 6,
+    length: 16.13,
+    width: 20.6,
+    fundsCost: 46,
+    timeCost: 18,
+    tonnage: 15.9,
+    range: 2170,
+    weapon: {
+      guns: [
+        // 机鼻（单装，前向）
+        {
+          name: "US/12.7",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻侧方固定机枪（双联，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻侧方固定机枪（双联，前向）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背炮塔（双联，全周）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 机腹炮塔（双联，后向）
+        {
+          name: "US/12.7/2",
+          posPercent: -0.05,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腰部（单装）
+        {
+          name: "US/12.7",
+          posPercent: -0.35,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 腰部（单装）
+        {
+          name: "US/12.7",
+          posPercent: -0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 机尾（单装，后向）
+        {
+          name: "US/12.7",
+          posPercent: -0.95,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 空中列车 C-47A
+    name: "C-47A",
+    nation: "us",
+    type: "other",
+    typeAbbr: "OTHER",
+    year: 1942,
+    totalHP: 60,
+    damageReduction: 0.4,
+    maxSpeed: 360,
+    acceleration: 22,
+    rotateSpeed: 6,
+    length: 19.63,
+    width: 29.11,
+    fundsCost: 6,
+    timeCost: 4,
+    tonnage: 7.5,
+    range: 2600,
+    weapon: {}
   },
   // 日本海军
   {
@@ -1771,8 +2067,8 @@
     // 彩云
     name: "C6N1",
     nation: "jp",
-    type: "fighter",
-    typeAbbr: "R",
+    type: "other",
+    typeAbbr: "OTHER",
     year: 1944,
     totalHP: 36,
     damageReduction: 0.35,

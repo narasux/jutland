@@ -1873,6 +1873,54 @@
     ],
   },
   {
+    name: "B-24D",
+    displayName: "B-24D Liberator",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 12.7mm Browning (nose turret)",
+      },
+      {
+        label: "Defensive Guns (All-round)",
+        value: "8 x 12.7mm Browning (dorsal 2, ball 2, waist 2, tail 2)",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "2000 lb x2 + 1000 lb x4 (about 3.6 t)",
+      },
+    ],
+    description: "The Consolidated B-24D Liberator was a US four-engined heavy bomber entering service in 1942, with greater range and bombload than the B-17; the aircraft shown is B-24D \"Lady Be Good\" of the 514th Bomb Squadron, 376th Bomb Group. Treated as a level bomber in game, it carries ten 12.7mm Browning M2s (nose turret 2, dorsal 2, ball 2, waist 2, tail 2) and six level-dropped bombs (2000 lb x2 + 1000 lb x4, about 3.6 t).",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — B-24 Liberator",
+        url: "https://en.wikipedia.org/wiki/Consolidated_B-24_Liberator",
+      },
+    ],
+  },
+  {
+    name: "B-29A",
+    displayName: "B-29A Superfortress",
+    armaments: [
+      {
+        label: "Defensive Guns (All-round)",
+        value: "12 x 12.7mm Browning (forward dorsal turret 4 + other remote turrets 6 + tail turret 2)",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "2000 lb x2 (about 1.8 t)",
+      },
+    ],
+    description: "The Boeing B-29A Superfortress was a late-WWII US four-engined long-range strategic bomber, entering service in 1944 with a long combat radius, large bombload, and remotely controlled defensive turrets. Treated as a level bomber in game, the late model carries twelve 12.7mm Browning machine guns (forward dorsal turret 4, other remote turrets 6, tail turret 2), omits the tail 20mm cannon, and has two 2000 lb level bombs.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — B-29 Superfortress",
+        url: "https://en.wikipedia.org/wiki/Boeing_B-29_Superfortress",
+      },
+    ],
+  },
+  {
     name: "B-26B",
     displayName: "B-26B Marauder",
     armaments: [
@@ -4979,6 +5027,45 @@
       {
         name: "Wikipedia — SB2C-4 Helldiver",
         url: "https://en.wikipedia.org/wiki/Curtiss%20SB2C%20Helldiver",
+      },
+    ],
+  },
+  {
+    name: "C-47A",
+    displayName: "C-47A Skytrain",
+    armaments: [],
+    description: "The Douglas C-47A Skytrain was the main US wartime transport aircraft, entering service in 1942 for troop and cargo movement, paradrops, and glider towing. The game has no dedicated transport behavior, so it is placed as an unarmed other-class aircraft.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — C-47 Skytrain",
+        url: "https://en.wikipedia.org/wiki/Douglas_C-47_Skytrain",
+      },
+    ],
+  },
+  {
+    name: "B-25C",
+    displayName: "B-25C Mitchell",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "5 x 12.7mm Browning (nose 1 + four fixed fuselage-side guns)",
+      },
+      {
+        label: "Defensive Guns",
+        value: "7 x 12.7mm Browning (dorsal 2, ventral 2, waist 2, tail 1)",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "1000 lb x3 (about 1.36 t)",
+      },
+    ],
+    description: "The North American B-25C Mitchell was a US twin-engined medium bomber entering service in 1942, prized for its stability, utility, and survivability and produced in greater numbers than the B-26; the aircraft shown is B-25C \"POON TANG\" of the 488th Bomb Squadron, 340th Bomb Group. Treated as a level bomber in game, it carries twelve 12.7mm Browning M2s (five forward: one nose and four fuselage-side package guns; seven defensive: dorsal 2, ventral 2, waist 2, tail 1) and three 1000 lb level bombs (about 1.36 t).",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — B-25 Mitchell",
+        url: "https://en.wikipedia.org/wiki/North_American_B-25_Mitchell",
       },
     ],
   },
