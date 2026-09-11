@@ -326,6 +326,98 @@
     }
   },
   {
+    // 海盗式 F4U-4（美国海军）
+    name: "F4U-4",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 50,
+    damageReduction: 0.6,
+    maxSpeed: 718,
+    acceleration: 40,
+    rotateSpeed: 13,
+    length: 10.3,
+    width: 12.5,
+    fundsCost: 17,
+    timeCost: 8,
+    tonnage: 6.59,
+    range: 1617,
+    weapon: {
+      guns: [
+        // 机翼（三联装，每翼一组，前向）
+        {
+          name: "US/12.7/3",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（三联装，每翼一组，前向）
+        {
+          name: "US/12.7/3",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 127mm 对空火箭挂载（8 发，前向）
+        {
+          name: "US/AIR/RB/127/8/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 熊猫 F8F-2（美国海军）
+    name: "F8F-2",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1948,
+    totalHP: 48,
+    damageReduction: 0.58,
+    maxSpeed: 678,
+    acceleration: 45,
+    rotateSpeed: 15,
+    length: 8.61,
+    width: 10.92,
+    fundsCost: 15,
+    timeCost: 7,
+    tonnage: 5.87,
+    range: 1778,
+    weapon: {
+      guns: [
+        // 机翼（双联装 20mm，前向）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（双联装 20mm，前向）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 127mm 对空火箭挂载（4 发，前向）
+        {
+          name: "US/AIR/RB/127/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
+    }
+  },
+  {
     // 战鹰
     name: "P-40N",
     nation: "us",
@@ -427,8 +519,8 @@
     rotateSpeed: 11,
     length: 11.53,
     width: 15.85,
-    fundsCost: 16,
-    timeCost: 8,
+    fundsCost: 21,
+    timeCost: 9,
     tonnage: 7.9,
     range: 1600,
     weapon: {
@@ -644,6 +736,117 @@
     }
   },
   {
+    // 夜间鹰 P-70（A-20 改装的夜间战斗机）
+    name: "P-70",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 52,
+    damageReduction: 0.5,
+    maxSpeed: 529,
+    acceleration: 26,
+    rotateSpeed: 8,
+    length: 14.63,
+    width: 18.69,
+    fundsCost: 12,
+    timeCost: 6,
+    tonnage: 9.7,
+    range: 1600,
+    weapon: {
+      guns: [
+        // 机头下方炸弹舱炮架（双联装 20mm，固定前射）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.65,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头下方炸弹舱炮架（双联装 20mm，固定前射）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.65,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻（双联装 12.7mm，固定前射）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背后上方（双联装 12.7mm，后半球）
+        {
+          name: "US/12.7/2",
+          posPercent: 0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机腹后下方（单装 12.7mm，后半球）
+        {
+          name: "US/12.7",
+          posPercent: -0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+    }
+  },
+  {
+    // 黑寡妇 P-61B-15
+    name: "P-61B-15",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 65,
+    damageReduction: 0.55,
+    maxSpeed: 589,
+    acceleration: 25,
+    rotateSpeed: 8,
+    length: 15.11,
+    width: 20.12,
+    fundsCost: 21,
+    timeCost: 9,
+    tonnage: 13.6,
+    range: 1900,
+    weapon: {
+      guns: [
+        // 机腹（双联装 20mm M-2，固定前射）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.65,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机腹（双联装 20mm M-2，固定前射）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.65,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背 GE A-4 遥控炮塔（四联装 12.7mm M2，全周）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 127mm 对空火箭挂载（8 发，前向）
+        {
+          name: "US/AIR/RB/127/8/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
+    }
+  },
+  {
     // 地狱猫
     name: "F6F-3",
     nation: "us",
@@ -685,6 +888,50 @@
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
+        }
+      ],
+    }
+  },
+  {
+    // 虎猫 F7F-3N（双发夜间战斗机）
+    name: "F7F-3N",
+    nation: "us",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 58,
+    damageReduction: 0.55,
+    maxSpeed: 700,
+    acceleration: 37,
+    rotateSpeed: 11,
+    length: 13.83,
+    width: 15.7,
+    fundsCost: 16,
+    timeCost: 8,
+    tonnage: 11.67,
+    range: 1900,
+    weapon: {
+      guns: [
+        // 翼根（双联装 20mm，前向）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（双联装 20mm，前向）
+        {
+          name: "US/20/70/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻（四联装 12.7mm，前向）
+        {
+          name: "US/12.7/4",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
         }
       ],
     }
@@ -1041,7 +1288,7 @@
     damageReduction: 0.5,
     maxSpeed: 570,
     acceleration: 20,
-    rotateSpeed: 3,
+    rotateSpeed: 4,
     length: 30.18,
     width: 43.05,
     fundsCost: 120,
@@ -1094,6 +1341,42 @@
         },
         {
           name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/907/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1190,6 +1473,72 @@
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/454/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 浩劫 A-20B
+    name: "A-20B",
+    nation: "us",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1942,
+    totalHP: 60,
+    damageReduction: 0.5,
+    maxSpeed: 538,
+    acceleration: 27,
+    rotateSpeed: 7,
+    length: 14.63,
+    width: 18.69,
+    fundsCost: 26,
+    timeCost: 11,
+    tonnage: 12.3,
+    range: 1800,
+    weapon: {
+      guns: [
+        // 机鼻（双联装 7.62mm，前向）
+        {
+          name: "US/7.62/2",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻（双联装 7.62mm，前向）
+        {
+          name: "US/7.62/2",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背（单装 7.62mm，后向）
+        {
+          name: "US/7.62",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 机腹（单装 7.62mm，后向）
+        {
+          name: "US/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
         {
           name: "US/BB/454/LB",
           posPercent: 0.3,
@@ -2084,52 +2433,6 @@
     weapon: {}
   },
   // 英国海军
-  {
-    // 海盗式 F4U-4
-    name: "F4U-4",
-    nation: "uk",
-    type: "fighter",
-    typeAbbr: "F",
-    year: 1945,
-    totalHP: 50,
-    damageReduction: 0.6,
-    maxSpeed: 718,
-    acceleration: 40,
-    rotateSpeed: 13,
-    length: 10.3,
-    width: 12.5,
-    fundsCost: 17,
-    timeCost: 8,
-    tonnage: 6.59,
-    range: 1617,
-    weapon: {
-      guns: [
-        // 机翼（三联装，每翼一组，前向）
-        {
-          name: "US/12.7/3",
-          posPercent: 0.5,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        // 机翼（三联装，每翼一组，前向）
-        {
-          name: "US/12.7/3",
-          posPercent: 0.5,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        }
-      ],
-      rockets: [
-        // 机翼 127mm 对空火箭挂载（8 发，前向）
-        {
-          name: "US/AIR/RB/127/8/AA",
-          posPercent: 0.25,
-          rightFiringArc: [0, 25],
-          leftFiringArc: [335, 360]
-        }
-      ]
-    }
-  },
   {
     // 英国复仇者式 Mk I
     name: "TBF-1-UK",

@@ -1620,7 +1620,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "Vought F4U-4 Corsair",
+    displayName: "Vought F4U-4 Corsair (US Navy)",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1631,7 +1631,7 @@
         value: "8 x 127mm proximity-fused AA rockets",
       },
     ],
-    description: "The Vought F4U-4 Corsair entered service in 1945 as a high-performance single-seat carrier fighter. In game it is treated as a fighter armed with six forward-firing 12.7mm Browning machine guns.",
+    description: "The Vought F4U-4 Corsair entered US Navy service in 1945 as a high-performance single-seat carrier fighter. In game it is treated as a US Navy fighter armed with six forward-firing 12.7mm Browning machine guns and eight forward-firing proximity-fused air-to-air rockets.",
     author: "Unknown",
     links: [
       {
@@ -1659,6 +1659,50 @@
       {
         name: "Wikipedia — F6F-3 Hellcat",
         url: "https://en.wikipedia.org/wiki/Grumman%20F6F%20Hellcat",
+      },
+    ],
+  },
+  {
+    name: "F8F-2",
+    displayName: "Grumman F8F-2 Bearcat",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 20mm M3",
+      },
+      {
+        label: "Rockets (Forward)",
+        value: "4 x 127mm proximity-fused AA rockets",
+      },
+    ],
+    description: "The Grumman F8F-2 Bearcat was a light, high-performance US Navy carrier fighter introduced after World War II. Entering service in 1948, the F8F-2 combined a powerful engine and rapid climb with four 20mm cannon and revised equipment. In game it is treated as a US Navy fighter with four forward-firing 20mm cannon and four forward-firing proximity-fused air-to-air rockets.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Grumman F8F Bearcat",
+        url: "https://en.wikipedia.org/wiki/Grumman_F8F_Bearcat",
+      },
+    ],
+  },
+  {
+    name: "F7F-3N",
+    displayName: "Tigercat",
+    armaments: [
+      {
+        label: "Cannons (Wing Roots)",
+        value: "4 x 20mm",
+      },
+      {
+        label: "Machine Guns (Nose)",
+        value: "4 x 12.7mm Browning",
+      },
+    ],
+    description: "The Grumman F7F-3N Tigercat was a two-seat, twin-engine night fighter used by the US Marine Corps, entering service in 1945. In game it is treated as a fighter with four 20mm cannon in the wing roots and four forward-firing 12.7mm Browning machine guns in the nose.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Grumman F7F Tigercat",
+        url: "https://en.wikipedia.org/wiki/Grumman_F7F_Tigercat",
       },
     ],
   },
@@ -1817,6 +1861,88 @@
     ],
   },
   {
+    name: "A-20B",
+    displayName: "A-20B Havoc",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "4 x 7.62mm Browning",
+      },
+      {
+        label: "Defensive Guns",
+        value: "2 x 7.62mm Browning (dorsal and ventral)",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "1000 lb x2 (about 0.9 t)",
+      },
+    ],
+    description: "The Douglas A-20B Havoc was a US twin-engined light bomber and attack aircraft entering service in 1942. Fast at low level and rugged, it was used widely for ground support and anti-shipping strikes. Treated as a level bomber in game, it carries four forward-firing 7.62mm Browning machine guns, one dorsal and one ventral defensive machine gun, and two 1000 lb level bombs.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - A-20 Havoc",
+        url: "https://en.wikipedia.org/wiki/Douglas_A-20_Havoc",
+      },
+    ],
+  },
+  {
+    name: "P-70",
+    displayName: "P-70 Nighthawk",
+    armaments: [
+      {
+        label: "Cannons (Fixed Forward Under Nose)",
+        value: "4 x 20mm",
+      },
+      {
+        label: "Machine Guns (Fixed Forward)",
+        value: "2 x 12.7mm",
+      },
+      {
+        label: "Machine Guns (Upper Rear)",
+        value: "2 x 12.7mm",
+      },
+      {
+        label: "Machine Gun (Lower Rear)",
+        value: "1 x 12.7mm",
+      },
+    ],
+    description: "The Douglas P-70 Nighthawk was an interim US Army night fighter converted from the A-20 attack aircraft, entering service in 1943. Its primary armament was four 20mm M-2 cannon on a bomb-bay rack under the nose, with 240 rounds for short, precise radar-directed bursts. Accounts of its defensive armament differ; in game it follows the fuller official record with two fixed forward-firing 12.7mm M2 machine guns, two upper-rear 12.7mm M2 guns and one lower-rear 12.7mm M2 gun.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - A-20 Havoc / P-70",
+        url: "https://en.wikipedia.org/wiki/Douglas_A-20_Havoc",
+      },
+    ],
+  },
+  {
+    name: "P-61B-15",
+    displayName: "P-61B-15 Black Widow",
+    armaments: [
+      {
+        label: "Cannons (Fixed Forward Belly)",
+        value: "4 x 20mm",
+      },
+      {
+        label: "Machine Guns (Dorsal Turret)",
+        value: "4 x 12.7mm",
+      },
+      {
+        label: "Rockets (Underwing)",
+        value: "8 x 127mm proximity-fused AA rockets",
+      },
+    ],
+    description: "The Northrop P-61B-15 Black Widow was a large twin-engined US Army Air Forces night fighter entering service in 1944. Four fixed 20mm M-2 cannon were mounted in the belly, while a General Electric A-4 remote-controlled dorsal turret carried four 12.7mm M2 machine guns for forward augmentation or all-around defense. Treated as a fighter in game, it carries four forward-firing 20mm cannon, four full-traverse dorsal 12.7mm machine guns and eight underwing 127mm proximity-fused AA rockets.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - P-61 Black Widow",
+        url: "https://en.wikipedia.org/wiki/Northrop_P-61_Black_Widow",
+      },
+    ],
+  },
+  {
     name: "B-17G",
     displayName: "B-17G Flying Fortress",
     armaments: [
@@ -1908,10 +2034,10 @@
       },
       {
         label: "Bombs (Level)",
-        value: "2000 lb x2 (about 1.8 t)",
+        value: "2000 lb x4 + 1000 lb x4 (about 5.4 t)",
       },
     ],
-    description: "The Boeing B-29A Superfortress was a late-WWII US four-engined long-range strategic bomber, entering service in 1944 with a long combat radius, large bombload, and remotely controlled defensive turrets. Treated as a level bomber in game, the late model carries twelve 12.7mm Browning machine guns (forward dorsal turret 4, other remote turrets 6, tail turret 2), omits the tail 20mm cannon, and has two 2000 lb level bombs.",
+    description: "The Boeing B-29A Superfortress was a late-WWII US four-engined long-range strategic bomber, entering service in 1944 with a long combat radius, large bombload, and remotely controlled defensive turrets. Treated as a level bomber in game, the late model carries twelve 12.7mm Browning machine guns (forward dorsal turret 4, other remote turrets 6, tail turret 2), omits the tail 20mm cannon, and has four 2000 lb and four 1000 lb level bombs.",
     author: "Unknown",
     links: [
       {
@@ -2576,7 +2702,7 @@
       },
       {
         label: "Fighters",
-        value: "20× Vought F4U-4 Corsair",
+        value: "20× Vought F4U-4 Corsair (F4U-4)",
       },
       {
         label: "Fighters",
@@ -3818,7 +3944,7 @@
       },
       {
         label: "Fighters",
-        value: "12× F4U-4",
+        value: "12× Vought F4U-4 Corsair (F4U-4)",
       },
       {
         label: "Fighters",
@@ -7285,7 +7411,7 @@
       },
       {
         label: "Fighters",
-        value: "18× Vought F4U-4 Corsair",
+        value: "18× Vought F4U-4 Corsair (F4U-4)",
       },
       {
         label: "Fighters",
