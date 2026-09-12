@@ -2293,6 +2293,33 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK108",
+    displayName: "30mm MK 108 Cannon",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MG151",
+    displayName: "20mm MG 151/20 Cannon",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/7.92/MG81Z",
+    displayName: "7.92mm MG 81Z Twin Machine Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/203/60/2",
     displayName: "203mm Twin Mount",
     type: "Weapon",
@@ -8148,5 +8175,164 @@
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
+  },
+  {
+    name: "Bf-110-G-4",
+    displayName: "Messerschmitt Bf 110 G-4 Night Fighter",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 30mm MK 108 + 2 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Gun (Rear)",
+        value: "1 x twin 7.92mm MG 81Z",
+      },
+    ],
+    description: "The Messerschmitt Bf 110 G-4 was a two-seat night fighter that entered service in 1944 with FuG 220 Lichtenstein SN-2 radar. Its fixed forward armament comprised two 30 mm MK 108 and two 20 mm MG 151/20 cannon. A twin 7.92 mm MG 81Z machine gun provided rear defence. In game, the two cannon types fire forward while the MG 81Z covers the rear hemisphere.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Bf 110",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_110",
+      },
+      {
+        name: "Wikipedia - Lichtenstein radar",
+        url: "https://en.wikipedia.org/wiki/Lichtenstein_radar",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-B-1",
+    displayName: "Messerschmitt Bf 109 B-1",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 7.92mm MG 17",
+      },
+    ],
+    description: "The Bf 109 B-1 was the first production version, entering service in 1937 and serving with the Condor Legion in Spain. It used a 670 PS Jumo 210D engine and a two-blade fixed-pitch propeller, reaching about 465 km/h with two synchronized 7.92mm MG 17 machine guns above the engine.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-E-4",
+    displayName: "Messerschmitt Bf 109 E-4",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm MG FF/M",
+      },
+    ],
+    description: "The Bf 109 E-4 entered service in 1940 with the DB 601Aa engine, a squared-off canopy and improved MG FF/M wing cannon. Its standard armament was two synchronized 7.92mm MG 17 machine guns and two 20mm wing cannon, giving a maximum level speed of about 560 km/h.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-F-4",
+    displayName: "Messerschmitt Bf 109 F-4",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "Cannon (Forward)",
+        value: "1 x 20mm MG 151/20",
+      },
+    ],
+    description: "The Bf 109 F-4 reached frontline units in the summer of 1941 with the DB 601E engine and a 20mm MG 151/20 Motorkanone replacing the F-2's 15mm weapon. Its standard armament was two cowl MG 17s and one engine-mounted cannon, with about 635 km/h under the initial service rating.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-G-14",
+    displayName: "Messerschmitt Bf 109 G-14",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "Cannon (Forward)",
+        value: "1 x 20mm MG 151/20",
+      },
+    ],
+    description: "The Bf 109 G-14 reached the Western Front in July 1944 to standardize the many late G-6 modifications. Its DB 605AM engine used MW 50 emergency boost while retaining two MG 131 machine guns and one MG 151/20 cannon; maximum speed at 5,000 metres was about 665 km/h.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-K-4",
+    displayName: "Messerschmitt Bf 109 K-4",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "Cannon (Forward)",
+        value: "1 x 30mm MK 108",
+      },
+    ],
+    description: "The Bf 109 K-4 was the only mass-produced K-series model, with deliveries beginning in October 1944. With the DB 605DB/DC engine and MW 50 it reached about 710 km/h; armament consisted of two 13mm MG 131 machine guns and one 30mm MK 108 Motorkanone.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "GER/AIR/7.92/MG17",
+    displayName: "7.92mm MG 17 aircraft machine gun",
+    type: "Weapon",
+    armaments: [],
+    description: "German synchronized 7.92mm aircraft machine gun with a nominal rate of fire of about 1,200 rounds per minute.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/13/MG131",
+    displayName: "13mm MG 131 aircraft machine gun",
+    type: "Weapon",
+    armaments: [],
+    description: "German synchronized 13mm aircraft machine gun with a nominal rate of fire of about 900 rounds per minute.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MGFFM",
+    displayName: "20mm MG FF/M aircraft cannon",
+    type: "Weapon",
+    armaments: [],
+    description: "German 20mm wing cannon capable of firing thin-walled mine shells at a nominal rate of about 520 rounds per minute.",
+    author: "",
+    links: [],
   },
 ]

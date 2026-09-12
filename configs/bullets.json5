@@ -379,10 +379,38 @@
     criticalRate: 0.001
   },
   {
+    name: "GER/GB/30/1943",
+    type: "shell",
+    diameter: 30,
+    damage: 2.6,
+    criticalRate: 0.0003
+  },
+  {
     name: "GER/GB/20/1940",
     type: "shell",
     diameter: 20,
     damage: 1.2,
+    criticalRate: 0
+  },
+  {
+    name: "GER/GB/7.92/1938",
+    type: "shell",
+    diameter: 8,
+    damage: 0.12,
+    criticalRate: 0
+  },
+  {
+    name: "GER/GB/7.92/1934",
+    type: "shell",
+    diameter: 8,
+    damage: 0.12,
+    criticalRate: 0
+  },
+  {
+    name: "GER/GB/13/1940",
+    type: "shell",
+    diameter: 13,
+    damage: 0.2,
     criticalRate: 0
   },
   {

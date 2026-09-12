@@ -2927,6 +2927,270 @@
     range: 5308,
     weapon: {}
   },
+  // 德国空军
+  {
+    // Bf 109 B-1（Jumo 210D，两叶定距螺旋桨）
+    name: "Bf-109-B-1",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1937,
+    totalHP: 20,
+    damageReduction: 0.2,
+    maxSpeed: 465,
+    acceleration: 24,
+    rotateSpeed: 18,
+    length: 8.55,
+    width: 9.87,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.2,
+    range: 690,
+    weapon: {
+      guns: [
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // Bf 109 E-4（DB 601Aa，方形座舱，MG FF/M 机翼炮）
+    name: "Bf-109-E-4",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1940,
+    totalHP: 29,
+    damageReduction: 0.35,
+    maxSpeed: 560,
+    acceleration: 30,
+    rotateSpeed: 15,
+    length: 8.64,
+    width: 9.87,
+    fundsCost: 4,
+    timeCost: 3,
+    tonnage: 2.665,
+    range: 660,
+    weapon: {
+      guns: [
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/20/MGFFM",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/20/MGFFM",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // Bf 109 F-4（DB 601E，MG 151/20 桨毂炮）
+    name: "Bf-109-F-4",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1941,
+    totalHP: 34,
+    damageReduction: 0.4,
+    maxSpeed: 635,
+    acceleration: 35,
+    rotateSpeed: 14,
+    length: 8.94,
+    width: 9.92,
+    fundsCost: 6,
+    timeCost: 4,
+    tonnage: 3,
+    range: 850,
+    weapon: {
+      guns: [
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // Bf 109 G-14（DB 605AM，MW 50 加力）
+    name: "Bf-109-G-14",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 43,
+    damageReduction: 0.48,
+    maxSpeed: 665,
+    acceleration: 38,
+    rotateSpeed: 12,
+    length: 8.95,
+    width: 9.925,
+    fundsCost: 8,
+    timeCost: 5,
+    tonnage: 3.2,
+    range: 1000,
+    weapon: {
+      guns: [
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // Bf 109 K-4（DB 605DB/DC，MW 50，MK 108 桨毂炮）
+    name: "Bf-109-K-4",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 46,
+    damageReduction: 0.5,
+    maxSpeed: 710,
+    acceleration: 40,
+    rotateSpeed: 12,
+    length: 8.95,
+    width: 9.925,
+    fundsCost: 9,
+    timeCost: 5,
+    tonnage: 3.375,
+    range: 1000,
+    weapon: {
+      guns: [
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // Bf 110 G-4 夜间战斗机
+    name: "Bf-110-G-4",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 55,
+    damageReduction: 0.5,
+    maxSpeed: 550,
+    acceleration: 24,
+    rotateSpeed: 8,
+    length: 12.1,
+    width: 16.25,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 9.9,
+    range: 2100,
+    weapon: {
+      guns: [
+        // 机鼻（30mm MK 108，前向）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻（30mm MK 108，前向）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻（20mm MG 151/20，前向）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机鼻（20mm MG 151/20，前向）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 座舱后方（双联 7.92mm MG 81Z，后半球）
+        {
+          name: "GER/AIR/7.92/MG81Z",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
   // 英国海军
   {
     // 英国复仇者式 Mk I
@@ -3367,5 +3631,5 @@
         }
       ]
     }
-  }
+  },
 ]

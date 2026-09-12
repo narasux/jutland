@@ -2293,6 +2293,33 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK108",
+    displayName: "30mm MK 108 機関砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MG151",
+    displayName: "20mm MG 151/20 機関砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/7.92/MG81Z",
+    displayName: "7.92mm MG 81Z 連装機関銃",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/203/60/2",
     displayName: "203mm 連装砲",
     type: "兵器",
@@ -8148,5 +8175,164 @@
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
+  },
+  {
+    name: "Bf-110-G-4",
+    displayName: "メッサーシュミット Bf 110 G-4 夜間戦闘機",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "2 x 30mm MK 108 + 2 x 20mm MG 151/20",
+      },
+      {
+        label: "機関銃（後方）",
+        value: "1 x 7.92mm MG 81Z 連装機関銃",
+      },
+    ],
+    description: "メッサーシュミット Bf 110 G-4 は、FuG 220 リヒテンシュタイン SN-2 レーダーを装備し、1944年に就役した複座夜間戦闘機である。固定前方武装は30mm MK 108機関砲2門と20mm MG 151/20機関砲2門で、後方防御用に7.92mm MG 81Z連装機関銃1挺を装備した。ゲーム内では前向きの機関砲と後半球用機関銃をこの構成で再現する。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア - メッサーシュミット Bf 110",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_110",
+      },
+      {
+        name: "ウィキペディア - リヒテンシュタイン・レーダー",
+        url: "https://en.wikipedia.org/wiki/Lichtenstein_radar",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-B-1",
+    displayName: "メッサーシュミット Bf 109 B-1",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "2 x 7.92mm MG 17",
+      },
+    ],
+    description: "Bf 109 B-1 は最初の量産型で、1937年に就役し、スペイン内戦ではコンドル軍団に所属した。670 PS のユンカース Jumo 210D エンジンと2枚羽根固定ピッチプロペラを備え、機首上の同期 7.92mm MG 17 機関銃2挺で最大水平速度約 465 km/h を発揮した。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-E-4",
+    displayName: "メッサーシュミット Bf 109 E-4",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "機関砲（前方）",
+        value: "2 x 20mm MG FF/M",
+      },
+    ],
+    description: "Bf 109 E-4 は1940年に就役し、DB 601Aa エンジン、角型風防、改良型 MG FF/M 主翼砲を採用した。標準武装は同期 7.92mm MG 17 機関銃2挺と 20mm 主翼砲2門で、最大水平速度は約 560 km/h だった。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-F-4",
+    displayName: "メッサーシュミット Bf 109 F-4",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "機関砲（前方）",
+        value: "1 x 20mm MG 151/20",
+      },
+    ],
+    description: "Bf 109 F-4 は1941年夏に前線へ到着し、DB 601E エンジンを搭載した。F-2 の 15mm モーターカノンは 20mm MG 151/20 に変更され、機首 MG 17 機関銃2挺と合わせて装備した。初期運用定格での最大水平速度は約 635 km/h である。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-G-14",
+    displayName: "メッサーシュミット Bf 109 G-14",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "機関砲（前方）",
+        value: "1 x 20mm MG 151/20",
+      },
+    ],
+    description: "Bf 109 G-14 は1944年7月に西部戦線へ到着し、後期 G-6 の各種改修を標準化した。DB 605AM エンジンは MW 50 緊急出力を使用でき、MG 131 機関銃2挺と MG 151/20 機関砲1門を装備した。高度 5,000 m での最大速度は約 665 km/h である。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-K-4",
+    displayName: "メッサーシュミット Bf 109 K-4",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "機関砲（前方）",
+        value: "1 x 30mm MK 108",
+      },
+    ],
+    description: "Bf 109 K-4 は K 系列で唯一量産された型で、1944年10月から引き渡された。DB 605DB/DC エンジンと MW 50 の併用で最大水平速度約 710 km/h を発揮し、13mm MG 131 機関銃2挺と 30mm MK 108 モーターカノン1門を装備した。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "GER/AIR/7.92/MG17",
+    displayName: "7.92mm MG 17 航空機銃",
+    type: "武器",
+    armaments: [],
+    description: "ドイツ空軍の同期式 7.92mm 航空機銃で、公称発射速度は毎分約 1,200 発。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/13/MG131",
+    displayName: "13mm MG 131 航空機銃",
+    type: "武器",
+    armaments: [],
+    description: "ドイツ空軍の同期式 13mm 航空機銃で、公称発射速度は毎分約 900 発。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MGFFM",
+    displayName: "20mm MG FF/M 航空機関砲",
+    type: "武器",
+    armaments: [],
+    description: "薄殻炸裂弾を使用できるドイツ空軍の 20mm 主翼砲で、公称発射速度は毎分約 520 発。",
+    author: "",
+    links: [],
   },
 ]

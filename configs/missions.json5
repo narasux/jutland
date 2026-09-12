@@ -4033,10 +4033,10 @@
     initCameraPos: [128, 128],
     mapName: "midway",
     maxShipCount: 60,
-    description: "纯测试关卡，不复原历史。中途岛 256×256 地图上，我方控制左右两座陆地机场：左侧驻日本机群，右侧驻美国和英国的全部现役机型。海面四角各有一支电脑敌方舰队，左侧两支使用日本舰船，右侧两支使用美国舰船；每队均含 2 艘航母、2 艘战列舰、1 艘巡洋舰和 1 艘驱逐舰，四队合计 24 艘战舰，其中 8 艘航母。玩家舰队位于地图正中，含 2 艘战列舰、3 艘巡洋舰和 6 艘驱逐舰。当前运行时只初始化 HA/CA 两方，因此四个电脑编队统一归属 CA；国家差异只体现在舰船、舰载机和机场机型。无增援、无油井。",
-    descriptionEn: "A pure test scenario, not a historical reconstruction. On the 256×256 Midway map, the player controls both land airfields: the left hosts Japanese aircraft and the right hosts every U.S. and British aircraft type. Four computer enemy fleets occupy the sea corners: the two left-hand fleets use Japanese ships and the two right-hand fleets use U.S. ships. Each fleet has two carriers, two battleships, one cruiser, and one destroyer, for 24 enemy ships in total, including eight carriers. The player fleet starts in the center with two battleships, three cruisers, and six destroyers. The current runtime initializes only HA and CA, so all four computer fleets belong to CA; nationality is represented by ship, carrier-aircraft, and airfield aircraft types. No reinforcements or oil platforms.",
-    descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. На карте Мидуэя 256×256 игрок контролирует оба наземных аэродрома: левый занят японскими самолётами, правый — всеми типами американских и британских самолётов. В четырёх морских углах развёрнуты четыре компьютерных вражеских соединения: два левых используют японские корабли, два правых — американские. В каждом соединении два авианосца, два линкора, один крейсер и один эсминец: всего 24 вражеских корабля, включая восемь авианосцев. Флот игрока начинает в центре: два линкора, три крейсера и шесть эсминцев. Текущая версия инициализирует только стороны HA и CA, поэтому все компьютерные соединения относятся к CA; национальные различия выражены типами кораблей, палубной авиации и аэродромных самолётов. Подкреплений и нефтяных платформ нет.",
-    descriptionJa: "史実再現ではなく純粋な試験シナリオである。256×256の中途島マップでは、自軍が左右両方の陸上飛行場を管理する。左側には日本機、右側には米国と英国の全機種を配置する。海面四隅には四個のコンピューター敵艦隊を置き、左側二隊は日本艦艇、右側二隊は米国艦艇とする。各隊は空母2隻、戦艦2隻、巡洋艦1隻、駆逐艦1隻で、敵艦艇は合計24隻、うち空母8隻である。自軍艦隊はマップ中央に戦艦2隻、巡洋艦3隻、駆逐艦6隻で開始する。現行ランタイムはHAとCAのみを初期化するため、四個のコンピューター艦隊はすべてCA所属となる。国家の違いは艦船、空母航空隊、飛行場機種で表現する。増援と油井はない。",
+    description: "纯测试关卡，不复原历史。中途岛 256×256 地图上，我方控制左右两座陆地机场：左侧驻日本机群，右侧驻美国、英国和德国的全部现役机型。海面四角各有一支电脑敌方舰队，左侧两支使用日本舰船，右侧两支使用美国舰船；每队均含 2 艘航母、2 艘战列舰、1 艘巡洋舰和 1 艘驱逐舰，四队合计 24 艘战舰，其中 8 艘航母。玩家舰队位于地图正中，含 2 艘战列舰、3 艘巡洋舰和 6 艘驱逐舰。当前运行时只初始化 HA/CA 两方，因此四个电脑编队统一归属 CA；国家差异只体现在舰船、舰载机和机场机型。无增援、无油井。",
+    descriptionEn: "A pure test scenario, not a historical reconstruction. On the 256×256 Midway map, the player controls both land airfields: the left hosts Japanese aircraft and the right hosts every U.S., British, and German aircraft type. Four computer enemy fleets occupy the sea corners: the two left-hand fleets use Japanese ships and the two right-hand fleets use U.S. ships. Each fleet has two carriers, two battleships, one cruiser, and one destroyer, for 24 enemy ships in total, including eight carriers. The player fleet starts in the center with two battleships, three cruisers, and six destroyers. The current runtime initializes only HA and CA, so all four computer fleets belong to CA; nationality is represented by ship, carrier-aircraft, and airfield aircraft types. No reinforcements or oil platforms.",
+    descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. На карте Мидуэя 256×256 игрок контролирует оба наземных аэродрома: левый занят японскими самолётами, правый — всеми типами американских, британских и немецких самолётов. В четырёх морских углах развёрнуты четыре компьютерных вражеских соединения: два левых используют японские корабли, два правых — американские. В каждом соединении два авианосца, два линкора, один крейсер и один эсминец: всего 24 вражеских корабля, включая восемь авианосцев. Флот игрока начинает в центре: два линкора, три крейсера и шесть эсминцев. Текущая версия инициализирует только стороны HA и CA, поэтому все компьютерные соединения относятся к CA; национальные различия выражены типами кораблей, палубной авиации и аэродромных самолётов. Подкреплений и нефтяных платформ нет.",
+    descriptionJa: "史実再現ではなく純粋な試験シナリオである。256×256の中途島マップでは、自軍が左右両方の陸上飛行場を管理する。左側には日本機、右側には米国、英国、ドイツの全機種を配置する。海面四隅には四個のコンピューター敵艦隊を置き、左側二隊は日本艦艇、右側二隊は米国艦艇とする。各隊は空母2隻、戦艦2隻、巡洋艦1隻、駆逐艦1隻で、敵艦艇は合計24隻、うち空母8隻である。自軍艦隊はマップ中央に戦艦2隻、巡洋艦3隻、駆逐艦6隻で開始する。現行ランタイムはHAとCAのみを初期化するため、四個のコンピューター艦隊はすべてCA所属となる。国家の違いは艦船、空母航空隊、飛行場機種で表現する。増援と油井はない。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initAirfields: [
@@ -4122,8 +4122,8 @@
         ],
       },
       {
-        // 右侧中途岛机场（美国与英国电脑联合机群）：收录 26 型美国飞机
-        // 与全部 8 型英国飞机，每型 8 架，用于统一测试美英机体的武器和挂载。
+        // 右侧中途岛机场（美国、英国与德国电脑联合机群）：收录 26 型美国飞机、
+        // 8 型英国飞机与 5 型德国飞机，每型 8 架，用于统一测试各国机体的武器和挂载。
         pos: [161, 166],
         rotation: 274,
         runwayLength: 15,
@@ -4266,6 +4266,26 @@
           },
           {
             name: "SeaOtter",
+            maxCount: 8,
+          },
+          {
+            name: "Bf-109-B-1",
+            maxCount: 8,
+          },
+          {
+            name: "Bf-109-E-4",
+            maxCount: 8,
+          },
+          {
+            name: "Bf-109-F-4",
+            maxCount: 8,
+          },
+          {
+            name: "Bf-109-G-14",
+            maxCount: 8,
+          },
+          {
+            name: "Bf-109-K-4",
             maxCount: 8,
           },
         ],

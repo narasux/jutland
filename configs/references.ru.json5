@@ -2293,6 +2293,33 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK108",
+    displayName: "30mm пушка MK 108",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MG151",
+    displayName: "20mm пушка MG 151/20",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/7.92/MG81Z",
+    displayName: "7,92mm спаренный пулемёт MG 81Z",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/203/60/2",
     displayName: "203mm двуствольная установка",
     type: "Оружие",
@@ -8148,5 +8175,164 @@
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
+  },
+  {
+    name: "Bf-110-G-4",
+    displayName: "Messerschmitt Bf 110 G-4 ночной истребитель",
+    armaments: [
+      {
+        label: "Пушки (вперёд)",
+        value: "2 x 30-мм MK 108 + 2 x 20-мм MG 151/20",
+      },
+      {
+        label: "Пулемёт (назад)",
+        value: "1 x спаренный 7,92-мм MG 81Z",
+      },
+    ],
+    description: "Messerschmitt Bf 110 G-4 — двухместный ночной истребитель, поступивший на вооружение в 1944 году с радаром FuG 220 Lichtenstein SN-2. Его неподвижное переднее вооружение состояло из двух 30-мм пушек MK 108 и двух 20-мм пушек MG 151/20. Спаренный 7,92-мм пулемёт MG 81Z защищал заднюю полусферу. В игре пушки стреляют вперёд, а MG 81Z прикрывает заднюю полусферу.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Bf 110",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_110",
+      },
+      {
+        name: "Wikipedia - Lichtenstein radar",
+        url: "https://en.wikipedia.org/wiki/Lichtenstein_radar",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-B-1",
+    displayName: "Messerschmitt Bf 109 B-1",
+    armaments: [
+      {
+        label: "Пулемёты (носовые)",
+        value: "2 x 7,92-мм MG 17",
+      },
+    ],
+    description: "Bf 109 B-1 стал первой серийной версией и поступил на службу в 1937 году, участвуя в гражданской войне в Испании в составе легиона «Кондор». Самолёт имел двигатель Jumo 210D мощностью 670 л. с. и двухлопастный винт фиксированного шага; два синхронных 7,92-мм пулемёта MG 17 обеспечивали скорость до 465 км/ч.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Википедия — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-E-4",
+    displayName: "Messerschmitt Bf 109 E-4",
+    armaments: [
+      {
+        label: "Пулемёты (носовые)",
+        value: "2 x 7,92-мм MG 17",
+      },
+      {
+        label: "Пушки (крыльевые)",
+        value: "2 x 20-мм MG FF/M",
+      },
+    ],
+    description: "Bf 109 E-4 поступил на службу в 1940 году с двигателем DB 601Aa, угловатым фонарём кабины и улучшенными крыльевыми пушками MG FF/M. Штатное вооружение состояло из двух синхронных 7,92-мм пулемётов MG 17 и двух 20-мм пушек, а максимальная скорость достигала примерно 560 км/ч.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Википедия — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-F-4",
+    displayName: "Messerschmitt Bf 109 F-4",
+    armaments: [
+      {
+        label: "Пулемёты (носовые)",
+        value: "2 x 7,92-мм MG 17",
+      },
+      {
+        label: "Пушка (носовая)",
+        value: "1 x 20-мм MG 151/20",
+      },
+    ],
+    description: "Bf 109 F-4 поступил на фронт летом 1941 года с двигателем DB 601E, а 15-мм мотор-пушку F-2 заменили на 20-мм MG 151/20. Штатное вооружение включало два носовых MG 17 и одну мотор-пушку; при первоначальном эксплуатационном режиме скорость составляла около 635 км/ч.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Википедия — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-G-14",
+    displayName: "Messerschmitt Bf 109 G-14",
+    armaments: [
+      {
+        label: "Пулемёты (носовые)",
+        value: "2 x 13-мм MG 131",
+      },
+      {
+        label: "Пушка (носовая)",
+        value: "1 x 20-мм MG 151/20",
+      },
+    ],
+    description: "Bf 109 G-14 прибыл на Западный фронт в июле 1944 года, чтобы стандартизировать многочисленные доработки поздних G-6. Двигатель DB 605AM использовал аварийный форсаж MW 50; вооружение оставалось из двух MG 131 и одной MG 151/20, а скорость на высоте 5000 метров достигала примерно 665 км/ч.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Википедия — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-K-4",
+    displayName: "Messerschmitt Bf 109 K-4",
+    armaments: [
+      {
+        label: "Пулемёты (носовые)",
+        value: "2 x 13-мм MG 131",
+      },
+      {
+        label: "Пушка (носовая)",
+        value: "1 x 30-мм MK 108",
+      },
+    ],
+    description: "Bf 109 K-4 стал единственной массово выпускавшейся моделью серии K; поставки начались в октябре 1944 года. С двигателем DB 605DB/DC и MW 50 он развивал около 710 км/ч и нёс два 13-мм MG 131 и одну 30-мм мотор-пушку MK 108.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Википедия — Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "GER/AIR/7.92/MG17",
+    displayName: "7,92-мм авиапулемёт MG 17",
+    type: "Оружие",
+    armaments: [],
+    description: "Немецкий синхронный 7,92-мм авиационный пулемёт с темпом стрельбы около 1200 выстрелов в минуту.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/13/MG131",
+    displayName: "13-мм авиапулемёт MG 131",
+    type: "Оружие",
+    armaments: [],
+    description: "Немецкий синхронный 13-мм авиационный пулемёт с темпом стрельбы около 900 выстрелов в минуту.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MGFFM",
+    displayName: "20-мм авиапушка MG FF/M",
+    type: "Оружие",
+    armaments: [],
+    description: "Немецкая 20-мм крыльевая пушка, способная применять тонкостенные осколочно-фугасные снаряды, с темпом около 520 выстрелов в минуту.",
+    author: "",
+    links: [],
   },
 ]

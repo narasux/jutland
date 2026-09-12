@@ -7199,6 +7199,33 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK108",
+    displayName: "30mm MK 108 机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MG151",
+    displayName: "20mm MG 151/20 机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/7.92/MG81Z",
+    displayName: "7.92mm MG 81Z 双联机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "UK/406/45/3",
     displayName: "406mm/45 三联装舰炮",
     type: "武器",
@@ -8027,5 +8054,164 @@
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
+  },
+  {
+    name: "Bf-110-G-4",
+    displayName: "Bf 110 G-4 夜间战斗机",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 30mm MK 108 + 2 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（后向）",
+        value: "1 x 双联装 7.92mm MG 81Z",
+      },
+    ],
+    description: "梅塞施密特 Bf 110 G-4 是 1944 年服役的双座夜间战斗机，配备 FuG 220 利希滕斯坦 SN-2 雷达。固定前向武器为两门 30mm MK 108 和两门 20mm MG 151/20 机炮，座舱后方另有一挺双联 7.92mm MG 81Z 机枪负责后半球防御。游戏中按该配置接入前向机炮与后射机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 梅塞施密特 Bf 110",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_110",
+      },
+      {
+        name: "维基百科 - 利希滕斯坦雷达",
+        url: "https://en.wikipedia.org/wiki/Lichtenstein_radar",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-B-1",
+    displayName: "Bf 109 B-1",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 7.92mm MG 17",
+      },
+    ],
+    description: "Bf 109 B-1 是 Bf 109 首个批量生产型，1937 年服役并随秃鹰军团参加西班牙内战。该型装一台 670 PS 的 Jumo 210D 发动机和两叶定距螺旋桨，最大平飞速度约 465 km/h，固定武器仅为机头上方两挺同步 7.92mm MG 17。",
+    author: "未知",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-E-4",
+    displayName: "Bf 109 E-4",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm MG FF/M",
+      },
+    ],
+    description: "Bf 109 E-4 于 1940 年服役，改用 DB 601Aa 发动机、方形座舱盖和威力更高的 MG FF/M 机翼炮。标准武器为两挺同步 MG 17 与两门机翼 20mm 机炮，最大平飞速度约 560 km/h。",
+    author: "未知",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-F-4",
+    displayName: "Bf 109 F-4",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "机炮（前向）",
+        value: "1 x 20mm MG 151/20",
+      },
+    ],
+    description: "Bf 109 F-4 于 1941 年夏季进入前线，换装 DB 601E 发动机，并以 20mm MG 151/20 取代 F-2 的 15mm 桨毂炮。标准武器为两挺机头 MG 17 和一门桨毂炮，初期额定功率下的最大平飞速度约 635 km/h。",
+    author: "未知",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-G-14",
+    displayName: "Bf 109 G-14",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "机炮（前向）",
+        value: "1 x 20mm MG 151/20",
+      },
+    ],
+    description: "Bf 109 G-14 于 1944 年 7 月抵达西线，用于统一晚期 G-6 的分散改装标准。DB 605AM 发动机配合 MW 50 应急加力，标准武器仍为两挺 MG 131 和一门 MG 151/20，在 5000 米高度的最大平飞速度约 665 km/h。",
+    author: "未知",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Bf-109-K-4",
+    displayName: "Bf 109 K-4",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "机炮（前向）",
+        value: "1 x 30mm MK 108",
+      },
+    ],
+    description: "Bf 109 K-4 是 K 系列唯一批量生产的型号，1944 年 10 月开始交付。DB 605DB/DC 发动机配合 MW 50 时，最大平飞速度达到约 710 km/h；固定武器为两挺 MG 131 和一门 30mm MK 108 桨毂炮。",
+    author: "未知",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Bf 109 variants",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "GER/AIR/7.92/MG17",
+    displayName: "7.92mm MG 17 航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "德国空军 7.92mm 同步机枪，理论射速约 1200 发/分。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/13/MG131",
+    displayName: "13mm MG 131 航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "德国空军 13mm 同步机枪，理论射速约 900 发/分。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/20/MGFFM",
+    displayName: "20mm MG FF/M 航空机炮",
+    type: "武器",
+    armaments: [],
+    description: "德国空军 20mm 机翼机炮，可发射薄壳爆破弹，理论射速约 520 发/分。",
+    author: "",
+    links: [],
   },
 ]
