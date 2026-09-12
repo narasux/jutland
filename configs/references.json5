@@ -7217,6 +7217,15 @@
     links: [],
   },
   {
+    name: "GER/AIR/20/4/MG151",
+    displayName: "20mm MG 151/20 四联装机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/7.92/MG81Z",
     displayName: "7.92mm MG 81Z 双联机枪",
     type: "武器",
@@ -8213,5 +8222,179 @@
     description: "德国空军 20mm 机翼机炮，可发射薄壳爆破弹，理论射速约 520 发/分。",
     author: "",
     links: [],
+  },
+  {
+    name: "Me262A",
+    displayName: "Me262A",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "梅塞施密特 Me 262 A-1a 是首款投入实战的喷气式战斗机，1944 年服役，两台容克 Jumo 004B 涡喷发动机可使其最大速度达到约 900 km/h。机首集中配置四门 30mm MK 108 机炮，作战航程约 1050 km。游戏中按战斗机使用，不配置 R4M 等可选挂载。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 梅塞施密特 Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "维基百科 - MK 108 机炮",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me262B",
+    displayName: "Me262B",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "梅塞施密特 Me 262 B-1a/U1 由双座教练机改装为临时夜间战斗机，增加雷达操作员并安装 FuG 218 海王星雷达，机首仍保留四门 30mm MK 108。双座设备与雷达天线增加了阻力和重量，使最大速度低于单座 A-1a。游戏中按战斗机使用，不配置斜射机炮。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 梅塞施密特 Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "维基百科 - MK 108 机炮",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "He219A",
+    displayName: "He219A",
+    armaments: [
+      {
+        label: "机炮（翼根前向）",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "机炮（机腹前向）",
+        value: "4 x 20mm MG 151/20",
+      },
+    ],
+    description: "亨克尔 He 219 A-0 是 Uhu 夜间战斗机的首批生产型，1943 年投入使用，采用两台 DB 603A 发动机。早期 A-0 的典型火力为翼根两门和机腹武器舱四门 20mm MG 151/20，并配用利希滕斯坦雷达。游戏中按战斗机处理；斜射 MK 108 属于后期型号，因此未混入 A-0 配置。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 亨克尔 He 219",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_219_Uhu",
+      },
+      {
+        name: "维基百科 - MG 151 机炮",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me410A",
+    displayName: "Me410A",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "4 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（后向）",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "梅塞施密特 Me 410 A-1/U2 是用于拦截轰炸机的重型战斗机改装型，1943 年服役，两台 DB 603A 发动机使其最大速度达到约 624 km/h。标准前向火力为机首两门和机腹武器舱两门 20mm MG 151/20，机身两侧另有两挺后向遥控 13mm MG 131。游戏中按战斗机处理并保留后射界。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 梅塞施密特 Me 410",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_410_Hornisse",
+      },
+      {
+        name: "维基百科 - MG 151 机炮",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Fw190A",
+    displayName: "Fw 190A 百舌鸟",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "4 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（前向）",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "福克-沃尔夫 Fw 190A-8 是 Fw 190A 系列在 1944 年大量服役的后期型，采用 BMW 801D-2 星型发动机，低中空加速和滚转性能突出。标准火力为翼根与外翼的 4 门 20mm MG 151/20 机炮，以及发动机上方的 2 挺 13mm MG 131 机枪。游戏按昼间战斗机处理，配置固定前向武器。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "维基百科 - Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Fw190D",
+    displayName: "Fw 190D 长鼻子多拉",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（前向）",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "Fw 190D-9 以 Jumo 213A 液冷 V12 发动机取代 A 系列的星型发动机，加长的机首和尾部改善了平衡与高空性能，1944 年 9 月开始服役。标准武器为翼根两门 20mm MG 151/20 机炮和发动机上方两挺 13mm MG 131 机枪。它在中空具备优秀速度与爬升能力，游戏按无挂载昼间战斗机配置。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "维基百科 - Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Ta152H",
+    displayName: "Ta 152H 高空战斗机",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "1 x 30mm MK 108",
+      },
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm MG 151/20",
+      },
+    ],
+    description: "Ta 152H-1 是在 Fw 190D-9 基础上发展的高空战斗机，采用 Jumo 213E 发动机和加长机翼，1945 年由 JG 301 少量投入作战。标准火力包括桨毂内一门 30mm MK 108 机炮和翼根两门 20mm MG 151/20 机炮。游戏按高空截击型战斗机处理，配置固定前向武器。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Focke-Wulf Ta 152",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_152",
+      },
+      {
+        name: "维基百科 - Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
   },
 ]

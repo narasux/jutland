@@ -2311,6 +2311,15 @@
     links: [],
   },
   {
+    name: "GER/AIR/20/4/MG151",
+    displayName: "20mm счетверённая пушка MG 151/20",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/7.92/MG81Z",
     displayName: "7,92mm спаренный пулемёт MG 81Z",
     type: "Оружие",
@@ -8334,5 +8343,179 @@
     description: "Немецкая 20-мм крыльевая пушка, способная применять тонкостенные осколочно-фугасные снаряды, с темпом около 520 выстрелов в минуту.",
     author: "",
     links: [],
+  },
+  {
+    name: "Me262A",
+    displayName: "Me262A",
+    armaments: [
+      {
+        label: "Пушечное вооружение (носовое)",
+        value: "4 x 30-мм MK 108",
+      },
+    ],
+    description: "Messerschmitt Me 262 A-1a стал первым вступившим в бой реактивным истребителем и поступил на службу в 1944 году. Два двигателя Jumo 004B обеспечивали максимальную скорость около 900 км/ч, а в носу устанавливались четыре 30-мм пушки MK 108. В игре самолёт представлен как истребитель без дополнительных ракет R4M.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "Wikipedia - MK 108 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me262B",
+    displayName: "Me262B",
+    armaments: [
+      {
+        label: "Пушечное вооружение (носовое)",
+        value: "4 x 30-мм MK 108",
+      },
+    ],
+    description: "Messerschmitt Me 262 B-1a/U1 был двухместным учебным самолётом, переоборудованным в импровизированный ночной истребитель с РЛС FuG 218 Neptun и оператором радара. Четыре 30-мм пушки MK 108 сохранились в носу, но второй член экипажа, оборудование и антенны снизили максимальную скорость по сравнению с одноместным A-1a.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "Wikipedia - MK 108 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "He219A",
+    displayName: "He219A",
+    armaments: [
+      {
+        label: "Пушки в корне крыла",
+        value: "2 x 20-мм MG 151/20",
+      },
+      {
+        label: "Пушки в нижней части фюзеляжа",
+        value: "4 x 20-мм MG 151/20",
+      },
+    ],
+    description: "Heinkel He 219 A-0 стал первой серийной версией ночного истребителя Uhu и поступил на службу в 1943 году с двумя двигателями DB 603A. Ранние A-0 обычно несли две 20-мм пушки MG 151/20 в корне крыла и четыре такие же пушки в нижнем отсеке, используя РЛС Lichtenstein. Поздняя установка наклонных MK 108 в конфигурацию A-0 не включена.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Heinkel He 219",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_219_Uhu",
+      },
+      {
+        name: "Wikipedia - MG 151 cannon",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me410A",
+    displayName: "Me410A",
+    armaments: [
+      {
+        label: "Пушечное вооружение (вперёд)",
+        value: "4 x 20-мм MG 151/20",
+      },
+      {
+        label: "Пулемёты (назад)",
+        value: "2 x 13-мм MG 131",
+      },
+    ],
+    description: "Messerschmitt Me 410 A-1/U2 представлял собой тяжёлый истребитель-охотник за бомбардировщиками, поступивший на службу в 1943 году с двумя двигателями DB 603A и максимальной скоростью около 624 км/ч. Две 20-мм пушки MG 151/20 стояли в носу, ещё две — в нижнем отсеке, а по бортам находились две дистанционно управляемые 13-мм установки MG 131 для стрельбы назад. В игре самолёт имеет задние секторы обстрела.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 410",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_410_Hornisse",
+      },
+      {
+        name: "Wikipedia - MG 151 cannon",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Fw190A",
+    displayName: "Focke-Wulf Fw 190A",
+    armaments: [
+      {
+        label: "Пушки (носовые)",
+        value: "4 x 20-мм MG 151/20",
+      },
+      {
+        label: "Пулемёты (носовые)",
+        value: "2 x 13-мм MG 131",
+      },
+    ],
+    description: "Focke-Wulf Fw 190A-8 — массовый поздний истребитель серии A с двигателем BMW 801D-2. Его штатное вооружение состояло из четырёх 20-мм пушек MG 151/20 в корне и внешних частях крыльев и двух синхронизированных 13-мм пулемётов MG 131 над двигателем. Самолёт широко применялся с 1944 года и отличался сильным разгоном и хорошей управляемостью на малых и средних высотах.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Fw190D",
+    displayName: "Focke-Wulf Fw 190D «Дора»",
+    armaments: [
+      {
+        label: "Пушки (носовые)",
+        value: "2 x 20-мм MG 151/20",
+      },
+      {
+        label: "Пулемёты (носовые)",
+        value: "2 x 13-мм MG 131",
+      },
+    ],
+    description: "Focke-Wulf Fw 190D-9 «Дора» получил двигатель Jumo 213A вместо звездообразного мотора серии A. Удлинённые нос и хвост улучшили балансировку и высотные характеристики; самолёт поступил в части в сентябре 1944 года. Штатное вооружение включало две 20-мм пушки MG 151/20 в корне крыла и два 13-мм пулемёта MG 131.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Ta152H",
+    displayName: "Focke-Wulf Ta 152H",
+    armaments: [
+      {
+        label: "Пушка (носовая)",
+        value: "1 x 30-мм MK 108",
+      },
+      {
+        label: "Пушки (носовые)",
+        value: "2 x 20-мм MG 151/20",
+      },
+    ],
+    description: "Focke-Wulf Ta 152H-1 — высотный истребитель, созданный на основе Fw 190D-9 с двигателем Jumo 213E и крылом большого размаха. В 1945 году небольшое число машин поступило в JG 301. Вооружение состояло из одной 30-мм пушки MK 108, стрелявшей через втулку винта, и двух 20-мм пушек MG 151/20 в корне крыла.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Ta 152",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_152",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
   },
 ]

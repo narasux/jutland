@@ -1399,6 +1399,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国空军 20mm MG 151/20 四联装机炮
+  {
+    name: "GER/AIR/20/4/MG151",
+    bulletName: "GER/GB/20/1940",
+    bulletCount: 4,
+    reloadTime: 0.09,
+    range: 3.5,
+    bulletSpread: 22,
+    bulletSpeed: 750,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国空军 双联 7.92mm MG 81Z 机枪
   {
     name: "GER/AIR/7.92/MG81Z",

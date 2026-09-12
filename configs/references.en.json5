@@ -2311,6 +2311,15 @@
     links: [],
   },
   {
+    name: "GER/AIR/20/4/MG151",
+    displayName: "20mm MG 151/20 Quad Cannon",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/7.92/MG81Z",
     displayName: "7.92mm MG 81Z Twin Machine Gun",
     type: "Weapon",
@@ -8334,5 +8343,179 @@
     description: "German 20mm wing cannon capable of firing thin-walled mine shells at a nominal rate of about 520 rounds per minute.",
     author: "",
     links: [],
+  },
+  {
+    name: "Me262A",
+    displayName: "Me262A",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "The Messerschmitt Me 262 A-1a was the first jet fighter to enter combat, serving from 1944 with two Jumo 004B turbojets and a maximum speed of about 900 km/h. Four 30mm MK 108 cannon were grouped in the nose, with a combat range of about 1,050 km. It is represented as a fighter without optional R4M rockets.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "Wikipedia - MK 108 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me262B",
+    displayName: "Me262B",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "The Messerschmitt Me 262 B-1a/U1 was a two-seat trainer converted into a provisional night fighter with FuG 218 Neptun radar and a radar operator. It retained four nose-mounted 30mm MK 108 cannon, while the extra crew, equipment, and antenna drag reduced speed below that of the single-seat A-1a.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "Wikipedia - MK 108 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "He219A",
+    displayName: "He219A",
+    armaments: [
+      {
+        label: "Cannons (Wing Roots, Forward)",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "Cannons (Ventral, Forward)",
+        value: "4 x 20mm MG 151/20",
+      },
+    ],
+    description: "The Heinkel He 219 A-0 was the first production version of the Uhu night fighter, entering service in 1943 with two DB 603A engines. Early A-0 aircraft typically carried two wing-root and four ventral 20mm MG 151/20 cannon with Lichtenstein radar. The later oblique-firing MK 108 installation is not included.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Heinkel He 219",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_219_Uhu",
+      },
+      {
+        name: "Wikipedia - MG 151 cannon",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me410A",
+    displayName: "Me410A",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Guns (Rear)",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "The Messerschmitt Me 410 A-1/U2 was a bomber-destroyer conversion that entered service in 1943 with two DB 603A engines and a maximum speed of about 624 km/h. It carried two nose and two under-nose 20mm MG 151/20 cannon, plus two remotely operated rear-firing 13mm MG 131 machine guns. It is represented as a fighter with rear arcs.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 410",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_410_Hornisse",
+      },
+      {
+        name: "Wikipedia - MG 151 cannon",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Fw190A",
+    displayName: "Focke-Wulf Fw 190A",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "The Focke-Wulf Fw 190A-8 was a widely produced late A-series fighter powered by the BMW 801D-2 radial engine. Its standard armament comprised four 20 mm MG 151/20 cannon in the wing roots and outer wings, plus two synchronized 13 mm MG 131 machine guns above the engine. It entered widespread service in 1944 and excelled at low and medium altitudes.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Fw190D",
+    displayName: "Focke-Wulf Fw 190D",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "The Focke-Wulf Fw 190D-9, known as the Long-Nose Dora, replaced the A-series radial engine with the Jumo 213A V-12. It entered service in September 1944 with improved speed, climb and altitude performance. Standard armament was two 13 mm MG 131 machine guns and two 20 mm MG 151/20 cannon.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Ta152H",
+    displayName: "Focke-Wulf Ta 152H",
+    armaments: [
+      {
+        label: "Cannon (Forward)",
+        value: "1 x 30mm MK 108",
+      },
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm MG 151/20",
+      },
+    ],
+    description: "The Focke-Wulf Ta 152H-1 was a high-altitude fighter developed from the Fw 190D-9, with a Jumo 213E engine and exceptionally long wings. It entered limited Luftwaffe service with JG 301 in 1945. Armament comprised one 30 mm MK 108 engine cannon and two 20 mm MG 151/20 wing-root cannon.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Ta 152",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_152",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
   },
 ]

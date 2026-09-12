@@ -2311,6 +2311,15 @@
     links: [],
   },
   {
+    name: "GER/AIR/20/4/MG151",
+    displayName: "20mm MG 151/20 四連装機関砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/7.92/MG81Z",
     displayName: "7.92mm MG 81Z 連装機関銃",
     type: "兵器",
@@ -8334,5 +8343,179 @@
     description: "薄殻炸裂弾を使用できるドイツ空軍の 20mm 主翼砲で、公称発射速度は毎分約 520 発。",
     author: "",
     links: [],
+  },
+  {
+    name: "Me262A",
+    displayName: "Me262A",
+    armaments: [
+      {
+        label: "機首機関砲",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "メッサーシュミット Me 262 A-1a は実戦投入された最初のジェット戦闘機で、1944年に就役した。Jumo 004B 双発により最高速度は約900km/hに達し、機首に30mm MK 108を4門集中装備した。作戦航続距離は約1,050kmで、本作ではR4Mなどの任意兵装を加えず戦闘機として扱う。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "Wikipedia - MK 108 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me262B",
+    displayName: "Me262B",
+    armaments: [
+      {
+        label: "機首機関砲",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "メッサーシュミット Me 262 B-1a/U1 は複座練習機を暫定夜間戦闘機へ改造した型で、FuG 218 ネプチューン・レーダーとレーダー操作員を追加した。機首の30mm MK 108 4門は維持されたが、複座化と装備・アンテナによる抵抗増加で単座A-1aより最高速度が低下した。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 262",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_262",
+      },
+      {
+        name: "Wikipedia - MK 108 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "He219A",
+    displayName: "He219A",
+    armaments: [
+      {
+        label: "主翼根機関砲",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "機腹機関砲",
+        value: "4 x 20mm MG 151/20",
+      },
+    ],
+    description: "ハインケル He 219 A-0 は夜間戦闘機ウーフの最初の量産型で、1943年にDB 603A双発で就役した。初期のA-0は主翼根2門と機腹兵器倉4門の20mm MG 151/20を搭載し、リヒテンシュタイン・レーダーを使用した。後期型の斜め上方射撃用MK 108は本作のA-0には含めていない。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - Heinkel He 219",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_219_Uhu",
+      },
+      {
+        name: "Wikipedia - MG 151 cannon",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me410A",
+    displayName: "Me410A",
+    armaments: [
+      {
+        label: "前方機関砲",
+        value: "4 x 20mm MG 151/20",
+      },
+      {
+        label: "後方機関銃",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "メッサーシュミット Me 410 A-1/U2 は爆撃機迎撃用の重戦闘機型で、1943年にDB 603A双発で就役し、最高速度は約624km/hだった。機首2門と機腹兵器倉2門の20mm MG 151/20を前方装備し、胴体両側の遠隔操作銃塔に後方射撃用13mm MG 131を2挺備えた。本作では後方射界を持つ戦闘機として扱う。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 410",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_410_Hornisse",
+      },
+      {
+        name: "Wikipedia - MG 151 cannon",
+        url: "https://en.wikipedia.org/wiki/MG_151_cannon",
+      },
+    ],
+  },
+  {
+    name: "Fw190A",
+    displayName: "フォッケウルフ Fw 190A",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "4 x 20mm MG 151/20",
+      },
+      {
+        label: "機関銃（前方）",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "フォッケウルフ Fw 190A-8 は BMW 801D-2 星型エンジンを搭載し、1944年に多数生産・配備された A シリーズ後期型である。翼根と外翼に 20mm MG 151/20 機関砲4門、エンジン上部に同期式13mm MG 131 機関銃2挺を装備した。中・低高度で優れた加速とロール性能を示し、本作では固定前向武装の戦闘機として扱う。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Fw190D",
+    displayName: "フォッケウルフ Fw 190D",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "機関銃（前方）",
+        value: "2 x 13mm MG 131",
+      },
+    ],
+    description: "Fw 190D-9 は A シリーズの星型エンジンを Jumo 213A V12 に換装し、機首と尾部を延長した長鼻型戦闘機である。1944年9月から実戦部隊へ配備され、速度、上昇力、中高度性能を改善した。標準武装は翼根の20mm MG 151/20 機関砲2門と、機首上部の13mm MG 131 機関銃2挺で、本作では固定前向武装のみを扱う。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Fw 190",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_190",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
+  },
+  {
+    name: "Ta152H",
+    displayName: "フォッケウルフ Ta 152H",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "1 x 30mm MK 108",
+      },
+      {
+        label: "機関砲（前方）",
+        value: "2 x 20mm MG 151/20",
+      },
+    ],
+    description: "Ta 152H-1 は Fw 190D-9 を基に Jumo 213E エンジンと長大な主翼を備えた高高度戦闘機である。1945年に JG 301 へ少数が配備され、実戦投入された。武装はプロペラ軸内の30mm MK 108 機関砲1門と、翼根の20mm MG 151/20 機関砲2門で、本作では固定前向武装の戦闘機として扱う。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Ta 152",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_152",
+      },
+      {
+        name: "Wikipedia - Junkers Jumo 213",
+        url: "https://en.wikipedia.org/wiki/Junkers_Jumo_213",
+      },
+    ],
   },
 ]

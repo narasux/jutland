@@ -3632,4 +3632,375 @@
       ]
     }
   },
+  {
+    // 梅塞施密特 Me 262 A-1a（德国空军喷气战斗机）
+    name: "Me262A",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 50,
+    damageReduction: 0.5,
+    maxSpeed: 900,
+    acceleration: 50,
+    rotateSpeed: 11,
+    length: 10.6,
+    width: 12.6,
+    fundsCost: 12,
+    timeCost: 6,
+    tonnage: 7.13,
+    range: 1050,
+    weapon: {
+      guns: [
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 梅塞施密特 Me 262 B-1a/U1（德国空军喷气夜间战斗机）
+    name: "Me262B",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 54,
+    damageReduction: 0.52,
+    maxSpeed: 800,
+    acceleration: 45,
+    rotateSpeed: 10,
+    length: 10.6,
+    width: 12.6,
+    fundsCost: 12,
+    timeCost: 6,
+    tonnage: 7.4,
+    range: 1050,
+    weapon: {
+      guns: [
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 亨克尔 He 219 A-0（德国空军夜间战斗机）
+    name: "He219A",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 65,
+    damageReduction: 0.55,
+    maxSpeed: 616,
+    acceleration: 28,
+    rotateSpeed: 8,
+    length: 15.5,
+    width: 18.5,
+    fundsCost: 18,
+    timeCost: 8,
+    tonnage: 13.5,
+    range: 1545,
+    weapon: {
+      guns: [
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机腹武器舱（20mm MG 151/20 四联装，固定前射）
+        {
+          name: "GER/AIR/20/4/MG151",
+          posPercent: 0.4,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 梅塞施密特 Me 410 A-1/U2（德国空军重型战斗机）
+    name: "Me410A",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 60,
+    damageReduction: 0.5,
+    maxSpeed: 624,
+    acceleration: 25,
+    rotateSpeed: 7,
+    length: 12.484,
+    width: 16.3513,
+    fundsCost: 17,
+    timeCost: 8,
+    tonnage: 11.244,
+    range: 1690,
+    weapon: {
+      guns: [
+        // 机首（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机腹武器舱（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.4,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机腹武器舱（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.4,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机身两侧遥控炮塔（13mm MG 131，后向）
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机身两侧遥控炮塔（13mm MG 131，后向）
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 百舌鸟（后期主力型）
+    name: "Fw190A",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 47,
+    damageReduction: 0.52,
+    maxSpeed: 652,
+    acceleration: 32,
+    rotateSpeed: 13,
+    length: 8.95,
+    width: 10.51,
+    fundsCost: 10,
+    timeCost: 6,
+    tonnage: 4.9,
+    range: 900,
+    weapon: {
+      guns: [
+        // 机首（13mm MG 131，固定前射）
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（13mm MG 131，固定前射）
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 外翼（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 外翼（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 长鼻子多拉（高空型）
+    name: "Fw190D",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 46,
+    damageReduction: 0.5,
+    maxSpeed: 685,
+    acceleration: 36,
+    rotateSpeed: 14,
+    length: 10.2,
+    width: 10.5,
+    fundsCost: 8,
+    timeCost: 5,
+    tonnage: 4.84,
+    range: 835,
+    weapon: {
+      guns: [
+        // 机首（13mm MG 131，固定前射）
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（13mm MG 131，固定前射）
+        {
+          name: "GER/AIR/13/MG131",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 高空战斗机（长翼型）
+    name: "Ta152H",
+    nation: "de",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 44,
+    damageReduction: 0.48,
+    maxSpeed: 759,
+    acceleration: 38,
+    rotateSpeed: 11,
+    length: 10.82,
+    width: 14.44,
+    fundsCost: 12,
+    timeCost: 6,
+    tonnage: 5.217,
+    range: 2000,
+    weapon: {
+      guns: [
+        // 桨毂（30mm MK 108，固定前射）
+        {
+          name: "GER/AIR/30/MK108",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼根（20mm MG 151/20，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.55,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
 ]
