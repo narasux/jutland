@@ -264,6 +264,53 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	return shotBullets
 }
 
+// AttackLeadSpeed 返回当前机载武器计算提前量时应使用的代表弹速。
+// 追击移动与实际开火共用该速度，避免机头指向和机炮射界使用不同提前点。
+func (p *Plane) AttackLeadSpeed(targetType object.Type) float64 {
+	maxSpeed := 0.0
+	if targetType == object.TypeShip {
+		for _, bomb := range p.Weapon.Bombs {
+			if !bomb.Released && bomb.BulletSpeed > maxSpeed {
+				maxSpeed = bomb.BulletSpeed
+			}
+		}
+		for _, torpedo := range p.Weapon.Torpedoes {
+			if !torpedo.Released && torpedo.BulletSpeed > maxSpeed {
+				maxSpeed = torpedo.BulletSpeed
+			}
+		}
+		for _, rocket := range p.Weapon.Rockets {
+			if rocket.AntiShip && rocket.BulletSpeed > maxSpeed {
+				maxSpeed = rocket.BulletSpeed
+			}
+		}
+	} else if targetType == object.TypePlane {
+		if p.Type == PlaneTypeFighter {
+			for _, gun := range p.Weapon.Guns {
+				if gun.AntiAircraft && gun.BulletSpeed > maxSpeed {
+					maxSpeed = gun.BulletSpeed
+				}
+			}
+			for _, rocket := range p.Weapon.Rockets {
+				if rocket.AntiAircraft && rocket.BulletSpeed > maxSpeed {
+					maxSpeed = rocket.BulletSpeed
+				}
+			}
+		} else {
+			// 对舰机攻击地面飞机时优先按炸弹投放射界进场，不能按自卫机枪弹速选进近点。
+			for _, bomb := range p.Weapon.Bombs {
+				if !bomb.Released && bomb.BulletSpeed > maxSpeed {
+					maxSpeed = bomb.BulletSpeed
+				}
+			}
+		}
+	}
+	if maxSpeed > 0 {
+		return maxSpeed
+	}
+	return p.CurSpeed
+}
+
 // releaseGroups 返回当前目标可用的释放器分组：对舰目标为炸弹 + 鱼雷，
 // 对地面停放目标仅炸弹（鱼雷入水即毁，不能攻击陆地目标）。
 func (p *Plane) releaseGroups(enemy Hurtable) [2][]*Releaser {

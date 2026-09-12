@@ -29,4 +29,5 @@ var DebugCheats = []Cheat{
 	&ShowPlaneHP{},
 	&ShowHitBoxes{},
 	&ShowAirfieldRunway{},
+	&DumpMisState{},
 }

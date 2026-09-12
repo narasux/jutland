@@ -11,6 +11,7 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/mission/targeting"
 )
 
 // registerAlertTestBomber 注册测试用俯冲轰炸机模板（目标类型为舰船）。
@@ -52,6 +53,19 @@ func newAlertTestManager(t *testing.T) (*MissionManager, *objBuilding.Airfield) 
 	return &MissionManager{state: ms, instructionSet: NewInstructionSet()}, af
 }
 
+// refreshAlertTargetPlan 为同步测试显式构建一次计划，避免测试依赖后台 goroutine 时序。
+func refreshAlertTargetPlan(manager *MissionManager) {
+	manager.simTick++
+	manager.targetingPlan = targeting.BuildPlan(manager.buildTargetingSnapshot())
+	manager.targetingDirty = false
+	manager.clampTargetingCursors()
+}
+
+func updateAirfieldAlertLaunchWithTargetPlan(manager *MissionManager) {
+	refreshAlertTargetPlan(manager)
+	manager.updateAirfieldAlertLaunch()
+}
+
 // TestAirfieldDisabledNoAlertLaunch 停用机场不自动起飞：敌舰在场也不响应；
 // 恢复启用后立即正常警戒起飞。
 func TestAirfieldDisabledNoAlertLaunch(t *testing.T) {
@@ -67,13 +81,13 @@ func TestAirfieldDisabledNoAlertLaunch(t *testing.T) {
 		CurPos:       objPos.New(90, 90),
 		BelongPlayer: faction.ComputerAlpha,
 	}
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 	if len(manager.state.Arena.Planes) != 0 {
 		t.Fatalf("disabled airfield should stay parked, planes = %d", len(manager.state.Arena.Planes))
 	}
 
 	af.Disabled = false
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 	if len(manager.state.Arena.Planes) != 1 {
 		t.Fatalf("re-enabled airfield should launch, planes = %d", len(manager.state.Arena.Planes))
 	}
@@ -88,7 +102,7 @@ func TestAirfieldAlertLaunchWithoutRadius(t *testing.T) {
 
 	// 无敌人：不起飞
 	manager, af := newAlertTestManager(t)
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 	if len(manager.state.Arena.Planes) != 0 {
 		t.Fatalf("no enemy should keep planes parked, got %d airborne", len(manager.state.Arena.Planes))
 	}
@@ -104,7 +118,7 @@ func TestAirfieldAlertLaunchWithoutRadius(t *testing.T) {
 		BelongPlayer: faction.ComputerAlpha,
 	}
 	manager.state.Arena.Ships[enemyShip.Uid] = enemyShip
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 
 	if len(manager.state.Arena.Planes) != 1 {
 		t.Fatalf("enemy ship should trigger takeoff, got %d planes", len(manager.state.Arena.Planes))
@@ -158,7 +172,7 @@ func TestAirfieldAlertLaunchDecoupledTargets(t *testing.T) {
 		BelongPlayer: faction.ComputerAlpha,
 	}
 	manager.state.Arena.Ships[enemyShip.Uid] = enemyShip
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 	if len(manager.state.Arena.Planes) != 2 { // 1 架滑跑敌机 + 1 架我方起飞
 		t.Fatalf("ground enemy should not block launch, planes = %d", len(manager.state.Arena.Planes))
 	}
@@ -167,7 +181,7 @@ func TestAirfieldAlertLaunchDecoupledTargets(t *testing.T) {
 	manager, af = newAlertTestManager(t)
 	manager.state.Arena.Ships[enemyShip.Uid] = enemyShip
 	manager.state.Arena.Planes[airEnemy().Uid] = airEnemy()
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 	if af.Aircraft.Groups[0].CurCount != 0 {
 		t.Fatalf("air enemy must not pin bombers down, stock = %d", af.Aircraft.Groups[0].CurCount)
 	}
@@ -181,7 +195,7 @@ func TestAirfieldAlertLaunchDecoupledTargets(t *testing.T) {
 	// 只有空中敌机（无敌舰）：本场只有轰炸机，无机可拦，保持待命
 	manager, af = newAlertTestManager(t)
 	manager.state.Arena.Planes[airEnemy().Uid] = airEnemy()
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 	if af.Aircraft.Groups[0].CurCount != 1 {
 		t.Fatalf("bomber airfield with no ship target should stay parked, stock = %d", af.Aircraft.Groups[0].CurCount)
 	}
@@ -245,7 +259,7 @@ func TestAirfieldAlertLaunchSplitByTargetType(t *testing.T) {
 		FlightPhase:  objUnit.PlaneFlightPhaseCruising,
 		BelongPlayer: faction.ComputerAlpha,
 	}
-	manager.updateAirfieldAlertLaunch()
+	updateAirfieldAlertLaunchWithTargetPlan(manager)
 
 	fighters, bombers := 0, 0
 	for _, plane := range manager.state.Arena.Planes {

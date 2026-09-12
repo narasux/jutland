@@ -100,6 +100,7 @@ func (m *MissionManager) updateMissionShips() {
 	// 如果战舰 HP 为 0，则需要走消亡流程
 	for uid, ship := range m.state.Arena.Ships {
 		if ship.CurHP <= 0 {
+			m.markTargetingDirty()
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			ship.CurHP = textureImg.MaxShipExplodeState
 
@@ -135,6 +136,7 @@ func (m *MissionManager) updateMissionPlanes() {
 	// 如果战机 HP 为 0，则需要走消亡流程
 	for uid, plane := range m.state.Arena.Planes {
 		if plane.CurHP <= 0 {
+			m.markTargetingDirty()
 			if base, ok := m.state.FindAircraftBase(plane.BelongShip); ok {
 				// 机场飞机损失：库存已在起飞时扣减，这里仅累计损失统计
 				if af, isAirfield := base.(*objBuilding.Airfield); isAirfield {

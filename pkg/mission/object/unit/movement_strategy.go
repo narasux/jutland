@@ -49,7 +49,7 @@ func (s *BasicMovementStrategy) MoveTo(
 }
 
 // FighterPursuitStrategy 战斗机追踪策略
-// 根据与目标的距离动态调整速度，避免飞过头
+// 根据武器提前点追踪目标，并按距离动态调整速度，避免飞过头。
 type FighterPursuitStrategy struct{}
 
 // tailDistance 目标咬尾距离（地图坐标单位）
@@ -64,14 +64,9 @@ const tailApproachDistance = 1.0
 // 飞机速度不得低于最大速度的此比例，否则会失速
 const stallSpeedRatio = 0.5
 
-// deflectionOffset 偏转攻击的横向偏移量（地图坐标单位）
-// 战斗机在追踪距离内会向侧面偏移此距离，实现偏转射击而非正后方尾追
-// 这样战斗机的机头可以指向敌机，使前置机枪进入射界
-const deflectionOffset = 0.3
-
 // MoveTo 实现战斗机追踪策略
-// 在远距离时全速追击，进入追踪距离后采用偏转攻击：
-// 不直接从正后方跟随，而是从侧面切入，让前置机枪能对准敌机
+// 在远距离时全速追击，进入追踪距离后减速贴近。
+// targetPos 使用实际武器弹速计算，机头对准该点即可同时满足前置机炮射界。
 func (s *FighterPursuitStrategy) MoveTo(
 	plane *Plane, mapCfg *mapcfg.MapCfg, targetPos, enemyPos objPos.MapPos, targetSpeed float64,
 ) {
@@ -82,46 +77,7 @@ func (s *FighterPursuitStrategy) MoveTo(
 	// 使用敌人当前位置计算距离（而非提前量位置），确保减速逻辑正确
 	distance := plane.CurPos.Distance(enemyPos)
 	speed := adjustSpeedForPlanePursuit(distance, maxSpeed, targetSpeed)
-
-	// 偏转攻击：在追踪距离内，给目标位置加横向偏移
-	// 战斗机不再从正后方跟随（导致前置机枪无法射击），而是从侧面切入
-	// 偏移方向根据 UID 哈希固定为左或右，避免战斗机频繁切换方向
-	if distance <= tailApproachDistance {
-		targetPos = calcDeflectionTarget(plane, targetPos, enemyPos, distance)
-	}
-
 	executePlaneMovement(plane, mapCfg, targetPos, speed)
-}
-
-// calcDeflectionTarget 计算偏转攻击的目标位置
-// 在原始目标位置（提前量位置）的基础上，加一个垂直于"战斗机→敌机"方向的横向偏移
-// 使战斗机从侧面接近，而非正后方尾追
-//
-// 参数 distance 是调用方已计算好的战斗机到敌机距离，复用以避免重复计算 math.Sqrt
-// targetPos 为值传递，可以直接修改而无需 Copy
-func calcDeflectionTarget(plane *Plane, targetPos, enemyPos objPos.MapPos, distance float64) objPos.MapPos {
-	if distance < 0.001 {
-		return targetPos
-	}
-
-	// 计算战斗机到敌机的归一化方向向量（复用已有 distance，避免重复 math.Sqrt）
-	dx := (enemyPos.RX - plane.CurPos.RX) / distance
-	dy := (enemyPos.RY - plane.CurPos.RY) / distance
-
-	// 垂直方向（顺时针旋转90°）：(dx, dy) -> (dy, -dx)
-	// 根据 UID 哈希决定偏转方向（左/右），保证同一架飞机始终往同一方向偏
-	perpX, perpY := dy, -dx
-	if plane.Uid[0]%2 == 0 {
-		perpX, perpY = -perpX, -perpY
-	}
-
-	// 直接在值类型副本上操作 RX/RY，最后一次性计算 MX/MY
-	// 避免 Copy() + 多次 AddRx/AddRy 中重复调用 math.Floor
-	targetPos.RX += perpX * deflectionOffset
-	targetPos.RY += perpY * deflectionOffset
-	targetPos.MX = int(math.Floor(targetPos.RX))
-	targetPos.MY = int(math.Floor(targetPos.RY))
-	return targetPos
 }
 
 // adjustSpeedForPlanePursuit 根据距离调整战斗机速度

@@ -291,15 +291,54 @@ func TestTakeOffRoutesPlaneTypesToWhitelistedPoints(t *testing.T) {
 			dive2.CurPos.String())
 	}
 
-	// 长点冷却中：轰炸机回落到无白名单的备用点
-	dive3 := sa.TakeOff(ship, object.TypeShip)
-	if dive3 == nil || dive3.Name != "test-route-dive" {
-		t.Fatalf("fallback dive bomber takeoff = %v, want test-route-dive", dive3)
+	// 长点冷却中：同目标类型的下一个机种轮转到无白名单的备用点
+	torpedoFallback := sa.TakeOff(ship, object.TypeShip)
+	if torpedoFallback == nil || torpedoFallback.Name != "test-route-torpedo" {
+		t.Fatalf("fallback torpedo bomber takeoff = %v, want test-route-torpedo", torpedoFallback)
 	}
 	expectedStart = takeoffStartPos(ship, deck.TakeoffPoints[2])
-	if dive3.CurPos.Distance(expectedStart) > 0.01 {
-		t.Fatalf("fallback dive bomber should use the unwhitelisted point: %s",
-			dive3.CurPos.String())
+	if torpedoFallback.CurPos.Distance(expectedStart) > 0.01 {
+		t.Fatalf("fallback torpedo bomber should use the unwhitelisted point: %s",
+			torpedoFallback.CurPos.String())
+	}
+}
+
+func TestTakeOffWithinRangeSkipsShortRangeGroups(t *testing.T) {
+	useDefaultSettings(t)
+	const shortName = "test-range-short"
+	const longName = "test-range-long"
+	registerTestPlane(t, shortName, PlaneTypeDiveBomber)
+	registerTestPlane(t, longName, PlaneTypeDiveBomber)
+	PlaneMap[shortName].Range = 20
+	PlaneMap[longName].Range = 100
+
+	deck := &CarrierDeck{
+		Name: "range-test",
+		TakeoffPoints: []TakeoffPoint{
+			{Forward: 0.5, Lateral: 0, RunLength: 0.5},
+		},
+		Landing: LandingConfig{Mode: LandingModeDeck, Forward: 0.5, ApproachLength: 3},
+	}
+	ship := &BattleShip{
+		Uid:         "carrier-range-test",
+		Length:      256,
+		Width:       64,
+		CurPos:      objPos.NewR(50, 50),
+		CurRotation: 0,
+	}
+	sa := &ShipAircraft{
+		TakeOffTime: 60,
+		Groups: []PlaneGroup{
+			{Name: shortName, MaxCount: 1, CurCount: 1, TargetType: object.TypeShip},
+			{Name: longName, MaxCount: 1, CurCount: 1, TargetType: object.TypeShip},
+		},
+	}
+	sa.ResolveDeck(deck)
+	ship.Aircraft = *sa
+
+	plane := sa.TakeOffWithinRange(ship, object.TypeShip, 80)
+	if plane == nil || plane.Name != longName {
+		t.Fatalf("plane = %v, want long-range group for an 80-cell target", plane)
 	}
 }
 

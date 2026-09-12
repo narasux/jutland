@@ -232,15 +232,16 @@
 
 `updateCombatPhase()` 的执行顺序固定为：
 
-1. `weaponFirePlayer.Update`
-2. `updateShipWeaponFire`
-3. `updatePlaneAttackOrReturn`
-4. `updatePlaneWeaponFire`
-5. `updateObjectTrails`
-6. `updateShotBullets`
-7. `updateExplosions`
-8. `updateMissionShips`
-9. `updateMissionPlanes`
+1. `updateTargetPlanning`
+2. `weaponFirePlayer.Update`
+3. `updateShipWeaponFire`
+4. `updatePlaneAttackOrReturn`
+5. `updatePlaneWeaponFire`
+6. `updateObjectTrails`
+7. `updateShotBullets`
+8. `updateExplosions`
+9. `updateMissionShips`
+10. `updateMissionPlanes`
 
 这个顺序很重要：本帧先产生新弹药和飞机指令，再更新尾流、推进弹药、结算命中，最后把 HP 归零的单位移入消亡队列。
 
@@ -270,9 +271,10 @@
 第一段遍历携带飞机的舰船：
 
 - 没有飞机能力的舰船跳过。
-- 如果舰船有 `AttackTarget`，直接作为候选目标。
-- 否则从所有敌机和敌舰中随机选目标。
-- 调用 `ship.Aircraft.TakeOff(ship, enemy.ObjType())` 起飞合适飞机。
+- 如果舰船有 `AttackTarget`，优先使用该明确目标。
+- 否则从异步目标计划的基地队列中按机种取下一个目标。
+- 调用 `ship.Aircraft.TakeOff(ship, targetType)` 起飞合适飞机。
+- 航母在“对空 / 对舰”目标类型之间轮转；同一目标类型下也会在不同机型编组之间轮转，避免首个战斗机编组长期占用全部出击位。
 - 起飞成功后加入 `Arena.Planes`。
 - 立即添加 `PlaneAttack` 指令。
 
@@ -280,11 +282,23 @@
 
 - 如果 `plane.MustReturn()`，添加 `PlaneReturn` 指令。
 - 如果已有 `PlaneAttack` 指令，跳过。
-- 否则根据飞机攻击对象类型选择敌机或敌舰作为新目标。
+- 否则从所属基地的目标队列取下一个同目标类型的目标。
 - 有目标则添加新的 `PlaneAttack` 指令。
 - 没有目标则添加 `PlaneReturn` 指令。
 
 当前飞机目标选择不检查作战半径，代码中已有 TODO。
+
+### 异步攻击目标调度
+
+目标候选、舰队聚类、评分和基地目标队列由 `pkg/mission/targeting` 在后台计算。
+主循环最多每 30 个模拟帧提交一次快照，且只在前一次计算完成后提交下一次；
+主线程通过容量为 1 的结果通道非阻塞获取新计划，不等待 `BuildPlan` 完成。
+
+- 敌舰按 20 格连通距离自动聚类，首轮覆盖四个舰队，再按均衡、价值和距离填充基地队列。
+- 对空目标按威胁、距离和当前分配量排序。
+- 每个基地、每种目标类型最多保留 12 个目标。
+- 目标距离不得超过该基地同类型可用机型中最低的总航程，避免短腿机飞到一半因燃油耗尽返航。
+- 飞机消费基地队列游标后标记计划脏，目标消失或队列耗尽不会在主线程重新全场扫描。
 
 ### 飞机开火
 
@@ -292,7 +306,8 @@
 
 - 空战飞机收集 `MaxToPlaneRange` 内敌机。
 - 对舰飞机收集 `MaxToShipRange` 内敌舰。
-- 候选不为空时随机选择目标并调用 `plane.Fire(enemy)`。
+- 若 `CurAttackTarget` 仍在对应武器的最大射程内，优先对它开火；否则才从其他候选随机选择。
+- 调用 `plane.Fire(enemy)`，战斗机的追击航向和机炮判定共用该目标的实际武器弹速提前点。
 - 生成弹药加入 `Arena.ForwardingBullets`。
 - 只有飞机在相机内时，才统计炸弹、火箭、鱼雷音效。
 - 每类飞机音效本帧只需记录一次，最后调用 `PlayPlaneFire`。

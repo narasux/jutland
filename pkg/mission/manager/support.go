@@ -41,6 +41,7 @@ func (m *MissionManager) updateBuildings() {
 			lo.Ternary(rp.BelongPlayer == m.state.Player.CurPlayer, m.state.Player.CurFunds, 50000),
 		); ship != nil {
 			m.state.Arena.Ships[ship.Uid] = ship
+			m.markTargetingDirty()
 			if rp.BelongPlayer == m.state.Player.CurPlayer {
 				fundsCost, _ := objUnit.GetShipCost(ship.Name)
 				m.state.Player.CurFunds -= fundsCost

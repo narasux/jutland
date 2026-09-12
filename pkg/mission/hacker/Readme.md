@@ -171,6 +171,13 @@ Enter 的详细流程：
 - `italic` 使用 `font.JetbrainsMonoItalic`。
 - 其他值回退到 `font.JetbrainsMono`。
 
+### DumpMisState
+
+- 命令：`dump mission state`
+- 直接将当前完整 `MissionState` 以缩进 JSON 写入 `<仓库>/debug/mission-state-<时间戳>.json`。
+- 导出包含任务元数据、地图、交互状态、舰队、飞机、机场、建筑、弹药、标记和 UI 状态等全部公开字段。
+- 命令只依赖 `MissionState`，由 `cheat.DebugCheats` 注册，不需要 `MissionManager` 注入回调。
+
 ## Cheat 接口
 
 `cheat.Cheat` 是所有秘籍的统一接口：

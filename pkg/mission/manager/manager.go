@@ -11,8 +11,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/hacker"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
+	"github.com/narasux/jutland/pkg/mission/object"
 	"github.com/narasux/jutland/pkg/mission/sidebar"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/mission/targeting"
 	"github.com/narasux/jutland/pkg/mission/unitpanel"
 	mapBlockImg "github.com/narasux/jutland/pkg/resources/images/mapblock"
 	"github.com/narasux/jutland/pkg/utils/magnify"
@@ -44,12 +46,21 @@ type MissionManager struct {
 	mapBlockPrewarmFocusY     int
 	mapBlockPrewarmFocusW     int
 	mapBlockPrewarmFocusH     int
+
+	simTick                  int64
+	targetingPlan            targeting.Plan
+	targetingResults         chan targeting.Plan
+	targetingBusy            bool
+	targetingDirty           bool
+	targetingLastRequestTick int64
+	targetingCursors         map[string]map[object.Type]int
+	takeoffTypeCursors       map[string]int
 }
 
 // New 创建任务管理器
 func New(mission string) *MissionManager {
 	magnify.Init()
-	return &MissionManager{
+	manager := &MissionManager{
 		state:          state.NewMissionState(mission),
 		drawer:         drawer.NewDrawer(mission),
 		sidebar:        sidebar.New(mission),
@@ -59,7 +70,12 @@ func New(mission string) *MissionManager {
 		playerAlphaHandler: human.NewHandler(faction.HumanAlpha),
 		playerBetaHandler:  computer.NewHandler(faction.ComputerAlpha),
 		weaponFirePlayer:   audioPlayer.NewWeaponFire(),
+		targetingResults:   make(chan targeting.Plan, 1),
+		targetingDirty:     true,
+		targetingCursors:   map[string]map[object.Type]int{},
+		takeoffTypeCursors: map[string]int{},
 	}
+	return manager
 }
 
 // Resize 将 Ebiten 的真实逻辑屏幕尺寸同步到任务布局，并刷新相机视野范围。
@@ -119,6 +135,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	}
 
 	if missionStatusRunsSimulation(status) {
+		m.simTick++
 		m.updateCommandPhase()
 		switch status {
 		case state.MissionRunning:
@@ -291,6 +308,7 @@ func getAdjacentZooms(zoom int) []int {
 
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
 func (m *MissionManager) updateCombatPhase() {
+	m.updateTargetPlanning()
 	m.weaponFirePlayer.Update()
 	m.updateAirfieldAlertLaunch()
 	m.updateShipWeaponFire()

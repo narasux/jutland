@@ -1,6 +1,13 @@
 package cheat
 
 import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"time"
+
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -148,3 +155,36 @@ func (c *ShowAirfieldRunway) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*ShowAirfieldRunway)(nil)
+
+// DumpMisState 将当前帧的完整 MissionState 写入 debug 目录。
+type DumpMisState struct{}
+
+func (c *DumpMisState) String() string {
+	return "dump mission state"
+}
+
+func (c *DumpMisState) Desc() string {
+	return "export the complete mission state as JSON"
+}
+
+func (c *DumpMisState) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *DumpMisState) Exec(misState *state.MissionState) string {
+	data, err := json.MarshalIndent(misState, "", "  ")
+	if err != nil {
+		return fmt.Sprintf("dump mission state failed: %v", err)
+	}
+	dir := filepath.Join(config.BaseDir, "debug")
+	if err = os.MkdirAll(dir, 0o755); err != nil {
+		return fmt.Sprintf("dump mission state failed: %v", err)
+	}
+	path := filepath.Join(dir, fmt.Sprintf("mission-state-%s.json", time.Now().Format(time.RFC3339)))
+	if err = os.WriteFile(path, append(data, '\n'), 0o644); err != nil {
+		return fmt.Sprintf("dump mission state failed: %v", err)
+	}
+	return "mission state dumped to " + path
+}
+
+var _ Cheat = (*DumpMisState)(nil)

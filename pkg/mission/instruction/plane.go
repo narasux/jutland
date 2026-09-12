@@ -25,7 +25,7 @@ type PlaneAttack struct {
 	snapshotTaken    bool   // 标记是否已拍摄快照，避免重复拍摄覆盖初始状态
 }
 
-// NewPlaneAttack ...
+// NewPlaneAttack 创建飞机攻击指令。
 func NewPlaneAttack(planeUid string, targetObjType object.Type, targetUid string) *PlaneAttack {
 	return &PlaneAttack{
 		planeUid:      planeUid,
@@ -80,7 +80,9 @@ func (i *PlaneAttack) hasNewRelease(plane *objUnit.Plane) bool {
 	return false
 }
 
-// Exec 执行指令
+// Exec 执行飞机攻击指令。
+// 起飞阶段只推进滑跑；巡航阶段持续追踪目标，对舰武器释放后结束当前指令，
+// 由 MissionManager 在下一帧重新分配目标或安排返航。
 func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	// 获取攻击方飞机
 	attacker, ok := missionState.Arena.Planes[i.planeUid]
@@ -153,9 +155,10 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 
 	// 如果目标存在，则战机应该冲上去贴贴
 	eState := enemy.MovementState()
-	// 考虑提前量（依赖敌舰 / 敌机速度，角度）
+	// 用实际机载武器弹速计算提前点；追击航向与开火判定共用同一落点。
+	leadSpeed := attacker.AttackLeadSpeed(i.targetObjType)
 	_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
-		attacker.CurPos.RX, attacker.CurPos.RY, attacker.CurSpeed,
+		attacker.CurPos.RX, attacker.CurPos.RY, leadSpeed,
 		eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
 	)
 	targetPos := objPos.NewR(targetRx, targetRY)
@@ -164,17 +167,17 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	return nil
 }
 
-// Executed 返回指令是否已经执行
+// Executed 返回攻击指令是否已经执行完成。
 func (i *PlaneAttack) Executed() bool {
 	return i.status == Executed
 }
 
-// Uid 返回指令唯一ID
+// Uid 返回攻击指令的唯一 ID。
 func (i *PlaneAttack) Uid() string {
 	return GenInstrUid(NamePlaneAttack, i.planeUid)
 }
 
-// String 返回指令的描述
+// String 返回攻击指令的可读描述。
 func (i *PlaneAttack) String() string {
 	return fmt.Sprintf("Plane %s attack %s", i.planeUid, i.targetUid)
 }
@@ -185,14 +188,15 @@ type PlaneReturn struct {
 	status   InstrStatus
 }
 
-// NewPlaneReturn ...
+// NewPlaneReturn 创建飞机返航指令。
 func NewPlaneReturn(planeUid string) *PlaneReturn {
 	return &PlaneReturn{planeUid: planeUid}
 }
 
 var _ Instruction = (*PlaneReturn)(nil)
 
-// Exec 执行指令
+// Exec 执行飞机返航指令。
+// 根据当前飞行阶段推进待场、进近和着舰流程，最终从任务状态中移除并回收飞机。
 func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	// 获取飞机
 	plane, ok := missionState.Arena.Planes[i.planeUid]
@@ -234,6 +238,7 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	return nil
 }
 
+// recoverPlane 将返航飞机归还基地库存，并从在场飞机集合中移除。
 func (i *PlaneReturn) recoverPlane(
 	missionState *state.MissionState,
 	base objUnit.AircraftBase,
@@ -245,17 +250,17 @@ func (i *PlaneReturn) recoverPlane(
 	i.status = Executed
 }
 
-// Executed 返回指令是否已经执行
+// Executed 返回返航指令是否已经执行完成。
 func (i *PlaneReturn) Executed() bool {
 	return i.status == Executed
 }
 
-// Uid 返回指令唯一ID
+// Uid 返回返航指令的唯一 ID。
 func (i *PlaneReturn) Uid() string {
 	return GenInstrUid(NamePlaneReturn, i.planeUid)
 }
 
-// String 返回指令的描述
+// String 返回返航指令的可读描述。
 func (i *PlaneReturn) String() string {
 	return fmt.Sprintf("Plane %s return", i.planeUid)
 }
