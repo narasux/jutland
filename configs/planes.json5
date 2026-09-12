@@ -21,25 +21,25 @@
     weapon: {
       guns: [
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -101,19 +101,19 @@
     weapon: {
       guns: [
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: -0.8,
           rightFiringArc: [0, 90],
           leftFiringArc: [180, 270]
@@ -177,31 +177,31 @@
     weapon: {
       guns: [
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: -0.8,
           rightFiringArc: [0, 90],
           leftFiringArc: [180, 270]
@@ -393,14 +393,14 @@
       guns: [
         // 机翼（双联装 20mm，前向）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（双联装 20mm，前向）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -527,7 +527,7 @@
       guns: [
         // 机鼻 20mm M2 机炮（前向）
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -757,14 +757,14 @@
       guns: [
         // 机头下方炸弹舱炮架（双联装 20mm，固定前射）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.65,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头下方炸弹舱炮架（双联装 20mm，固定前射）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.65,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -815,14 +815,14 @@
       guns: [
         // 机腹（双联装 20mm M-2，固定前射）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.65,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机腹（双联装 20mm M-2，固定前射）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.65,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -906,22 +906,22 @@
     rotateSpeed: 11,
     length: 13.83,
     width: 15.7,
-    fundsCost: 16,
-    timeCost: 8,
+    fundsCost: 23,
+    timeCost: 10,
     tonnage: 11.67,
     range: 1900,
     weapon: {
       guns: [
         // 翼根（双联装 20mm，前向）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 翼根（双联装 20mm，前向）
         {
-          name: "US/20/70/2",
+          name: "US/AIR/20/70/2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -932,6 +932,15 @@
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 127mm 对空火箭挂载（8 发，前向）
+        {
+          name: "US/AIR/RB/127/8/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
         }
       ],
     }
@@ -1019,13 +1028,13 @@
     weapon: {
       guns: [
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/20/70",
+          name: "US/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2580,25 +2589,25 @@
     weapon: {
       guns: [
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2627,13 +2636,13 @@
     weapon: {
       guns: [
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2839,25 +2848,25 @@
     weapon: {
       guns: [
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "UK/20/70",
+          name: "UK/AIR/20/70",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]

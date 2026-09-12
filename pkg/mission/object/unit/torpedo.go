@@ -15,6 +15,9 @@ import (
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
+// torpedoFireRangeRatio 预留 20% 最大射程作为敌舰规避缓冲，避免极限距离发射。
+const torpedoFireRangeRatio = 0.8
+
 // TorpedoLauncher 表示舰船鱼雷发射器的配置和局内装填状态。
 type TorpedoLauncher struct {
 	// 发射器名称
@@ -74,7 +77,7 @@ func (lc *TorpedoLauncher) Reloaded() bool {
 // InShotRange 是否在射程 & 射界内
 func (lc *TorpedoLauncher) InShotRange(shipCurRotation float64, curPos, targetPos objPos.MapPos) bool {
 	// 不在射程内，不可发射
-	if curPos.Distance(targetPos) > lc.Range {
+	if curPos.Distance(targetPos) > lc.Range*torpedoFireRangeRatio {
 		return false
 	}
 	// 不在射界范围内，不可发射

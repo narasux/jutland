@@ -619,9 +619,35 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 美国陆航 20mm 双联航空机关炮
+  {
+    name: "US/AIR/20/70/2",
+    bulletName: "US/GB/20/1940",
+    bulletCount: 2,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 美国海军 US/20/70 单装高炮
   {
     name: "US/20/70",
+    bulletName: "US/GB/20/1940",
+    bulletCount: 1,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 美国陆航 20mm 航空机关炮
+  {
+    name: "US/AIR/20/70",
     bulletName: "US/GB/20/1940",
     bulletCount: 1,
     reloadTime: 0.2,
@@ -1682,6 +1708,19 @@
   // 英国海军 UK/20/70 单装高炮
   {
     name: "UK/20/70",
+    bulletName: "UK/GB/20/1940",
+    bulletCount: 1,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 英国皇家海军/皇家空军 20mm 航空机关炮
+  {
+    name: "UK/AIR/20/70",
     bulletName: "UK/GB/20/1940",
     bulletCount: 1,
     reloadTime: 0.2,

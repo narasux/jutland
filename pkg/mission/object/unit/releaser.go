@@ -15,12 +15,17 @@ import (
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
+// aerialTorpedoReleaseRangeRatio 预留 20% 最大射程作为敌舰规避缓冲。
+const aerialTorpedoReleaseRangeRatio = 0.8
+
 // Releaser （飞机）释放器
 type Releaser struct {
 	// 名称
 	Name string `json:"name"`
 	// 弹药名称
 	BulletName string `json:"bulletName"`
+	// BulletType 是弹药类型缓存，初始化时写入，避免热路径反复查询
+	BulletType objBullet.Type `json:"-"`
 	// 类别
 	Type ShipType `json:"type"`
 	// 射程
@@ -43,8 +48,12 @@ var _ AttackWeapon = (*Releaser)(nil)
 
 // InShotRange 是否在射程 & 射界内
 func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos.MapPos) bool {
+	maxRange := r.Range
+	if r.bulletType() == objBullet.TypeTorpedo {
+		maxRange *= aerialTorpedoReleaseRangeRatio
+	}
 	// 不在射程内，不可发射
-	if curPos.Distance(targetPos) > r.Range {
+	if curPos.Distance(targetPos) > maxRange {
 		return false
 	}
 	// 不在射界范围内，不可发射
@@ -118,6 +127,9 @@ func (r *Releaser) pathCrossesLand(
 
 // bulletType 查询释放器装载的弹药类型（炸弹 / 航空鱼雷）。
 func (r *Releaser) bulletType() objBullet.Type {
+	if r.BulletType != "" {
+		return r.BulletType
+	}
 	return objBullet.GetType(r.BulletName)
 }
 
@@ -161,5 +173,6 @@ func NewReleaser(name string, posPercent float64, leftFireArc, rightFireArc Firi
 	r.PosPercent = posPercent
 	r.LeftFiringArc = leftFireArc
 	r.RightFiringArc = rightFireArc
+	r.BulletType = objBullet.GetType(r.BulletName)
 	return &r
 }
