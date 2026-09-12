@@ -96,6 +96,28 @@
     ],
   },
   {
+    name: "A6M5",
+    displayName: "A6M5 Zero Model 52",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "3 x 13.2mm",
+      },
+    ],
+    description: "",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Mitsubishi A6M Zero",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi%20A6M%20Zero",
+      },
+    ],
+  },
+  {
     name: "A7M2",
     displayName: "A7M2 Reppū",
     armaments: [
@@ -2850,13 +2872,77 @@
         label: "Cannons (Forward)",
         value: "4 x 30mm Type 5",
       },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "8 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
+      },
     ],
-    description: "The Kyūshū J7W1 Shinden was a Japanese Navy single-seat interceptor designed around a canard, rear-mounted engine, and six-bladed pusher propeller. Intended to engage high-altitude B-29 bombers, it was armed with four forward-firing 30 mm Type 5 cannon. Only two prototypes were completed; the first flew on 3 August 1945 and the type never entered combat service.",
+    description: "The Kyūshū J7W1 Shinden was a Japanese Navy single-seat interceptor designed around a canard, rear-mounted engine, and six-bladed pusher propeller. Intended to engage high-altitude B-29 bombers, it was armed with four forward-firing 30 mm Type 5 cannon. Only two prototypes were completed; the first flew on 3 August 1945 and the type never entered combat service. In game it can carry two four-round 100 mm Type 3 rocket-bomb mounts, for eight anti-aircraft rockets.",
     author: "",
     links: [
       {
         name: "Wikipedia — Kyūshū J7W Shinden",
         url: "https://en.wikipedia.org/wiki/Ky%C5%ABsh%C5%AB_J7W_Shinden",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J5N1",
+    displayName: "Nakajima J5N1 Tenrai",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 30mm Type 5",
+      },
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm Type 99 Model 2",
+      },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "8 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
+      },
+    ],
+    description: "The Nakajima J5N1 Tenrai was a twin-engine heavy interceptor designed to engage B-29 bombers. Its two NK9H Homare 21 engines and concentrated nose armament of two 30 mm Type 5 and two 20 mm Type 99 Model 2 cannon were intended to combine speed with heavy firepower, but engine limitations kept performance below the design target. Only prototypes were completed before development ended. In game it can carry two four-round 100 mm Type 3 rocket-bomb mounts, for eight anti-aircraft rockets.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Nakajima J5N",
+        url: "https://en.wikipedia.org/wiki/Nakajima_J5N",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J9N1",
+    displayName: "Nakajima J9N1 Kikka",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 30mm Type 5",
+      },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "2 x 200mm Type 3 No.6 Mk 27 (60kg)",
+      },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "8 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
+      },
+    ],
+    description: "The Nakajima J9N1 Kikka was Japan's first jet aircraft, developed with influence from the Me 262 for high-speed anti-ship attack and homeland defense. Four fixed 30 mm Type 5 cannon were mounted in the nose. It flew in 1945 but never entered combat; in game it is represented as a fighter. Its configured loadout adds one two-round 200 mm and two four-round 100 mm rocket-bomb mounts, for two 200 mm and eight 100 mm anti-aircraft rockets.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Nakajima Kikka",
+        url: "https://en.wikipedia.org/wiki/Nakajima_Kikka",
       },
       {
         name: "Wikipedia — Type 5 cannon",
@@ -2880,8 +2966,12 @@
         label: "Cannons (Rear)",
         value: "2 x 20mm Type 99 Model 2",
       },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "4 x 200mm Type 3 No.6 Mk 27 (60kg)",
+      },
     ],
-    description: "The Aichi S1A1 Denkō was a twin-engine night fighter developed for the Imperial Japanese Navy to intercept B-29 bombers. It carried two 30 mm and two 20 mm forward-firing cannon, plus a remotely operated dorsal turret with two 20 mm cannon. Only prototypes were completed before the war ended, and the type never entered service.",
+    description: "The Aichi S1A1 Denkō was a twin-engine night fighter developed for the Imperial Japanese Navy to intercept B-29 bombers. It carried two 30 mm and two 20 mm forward-firing cannon, plus a remotely operated dorsal turret with two 20 mm cannon. Only prototypes were completed before the war ended, and the type never entered service. In game it can carry two twin 200 mm Type 3 rocket-bomb mounts, for four anti-aircraft rockets.",
     author: "",
     links: [
       {
@@ -8000,6 +8090,62 @@
       {
         name: "Wikipedia — Z11 Bernd von Arnim",
         url: "https://en.wikipedia.org/wiki/German%20destroyer%20Z11%20Bernd%20von%20Arnim",
+      },
+    ],
+  },
+  {
+    name: "J6K1",
+    displayName: "Kawanishi J6K1 Jinpū",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 30mm Type 5",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 13.2mm Type 3",
+      },
+      {
+        label: "Rocket Bombs (Forward)",
+        value: "8 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
+      },
+    ],
+    description: "The Kawanishi J6K1 Jinpū was a land-based high-altitude interceptor designed for the Imperial Japanese Navy to counter the B-29. Developed from the J3K and powered by a 2,200 hp Nakajima Homare 42, it was planned to carry two 30 mm Type 5 cannon and two 13.2 mm Type 3 machine guns. Only one unarmed prototype was completed before the programme was cancelled. In game it can carry two four-round 100 mm Type 3 rocket-bomb mounts, for eight anti-aircraft rockets.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Kawanishi J6K",
+        url: "https://en.wikipedia.org/wiki/Kawanishi_J6K",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J4M",
+    displayName: "Mitsubishi J4M Senden",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm Type 99",
+      },
+      {
+        label: "Cannon (Forward)",
+        value: "1 x 30mm Type 5",
+      },
+    ],
+    description: "The Mitsubishi J4M Senden was a proposed land-based interceptor for the Imperial Japanese Navy, using a single pusher engine and twin-boom layout to concentrate its armament in the nose. It was designed to carry two 20 mm Type 99 cannon and one 30 mm Type 5 cannon. Development ended in 1944 with only a wooden mock-up completed.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Mitsubishi J4M Senden",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi_J4M_Senden",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
   },

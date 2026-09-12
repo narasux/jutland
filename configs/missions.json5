@@ -4060,6 +4060,10 @@
             maxCount: 8,
           },
           {
+            name: "A6M5",
+            maxCount: 8,
+          },
+          {
             name: "J2M3",
             maxCount: 8,
           },
@@ -4072,11 +4076,27 @@
             maxCount: 8,
           },
           {
+            name: "J6K1",
+            maxCount: 8,
+          },
+          {
+            name: "J4M",
+            maxCount: 8,
+          },
+          {
             name: "S1A1",
             maxCount: 8,
           },
           {
             name: "J8M1",
+            maxCount: 8,
+          },
+          {
+            name: "J5N1",
+            maxCount: 8,
+          },
+          {
+            name: "J9N1",
             maxCount: 8,
           },
           {

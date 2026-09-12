@@ -586,7 +586,7 @@
       },
       {
         label: "制空战斗机",
-        value: "24x 零式舰战（A6M2）",
+        value: "24x 零式舰战（A6M5）",
       },
       {
         label: "俯冲轰炸机",
@@ -758,7 +758,7 @@
       },
       {
         label: "制空战斗机",
-        value: "20x 零式舰战（A6M2）",
+        value: "20x 零式舰战（A6M5）",
       },
       {
         label: "俯冲轰炸机",
@@ -5116,6 +5116,23 @@
     links: [],
   },
   {
+    name: "A6M5",
+    displayName: "零式 52 型",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm",
+      },
+      {
+        label: "机枪（前向）",
+        value: "3 x 13.2mm",
+      },
+    ],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "J2M3",
     displayName: "雷电二一型",
     armaments: [
@@ -5145,8 +5162,12 @@
         label: "机炮（前向）",
         value: "4 x 30mm 五式",
       },
+      {
+        label: "火箭爆弹（前向）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
     ],
-    description: "日本海军为拦截 B-29 研制的单座局地战斗机，采用前翼、后置发动机与六叶推进式螺旋桨。仅完成两架原型机，1945 年 8 月首飞，未投入实战。",
+    description: "日本海军为拦截 B-29 研制的单座局地战斗机，采用前翼、后置发动机与六叶推进式螺旋桨。仅完成两架原型机，1945 年 8 月首飞，未投入实战。游戏配置为两个 100mm 三式一番二八号一型四发挂架，共 8 枚对空火箭。",
     author: "",
     links: [
       {
@@ -5160,8 +5181,68 @@
     ],
   },
   {
+    name: "J5N1",
+    displayName: "天雷",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 30mm 五式",
+      },
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm 九九式二号",
+      },
+      {
+        label: "火箭爆弹（前向）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
+    ],
+    description: "日本海军为拦截 B-29 研制的双发重型截击机，配备两台 NK9H 誉二一型发动机，并将 2 门 30mm 五式与 2 门 20mm 九九式二号机炮集中在机首。受发动机性能限制，最大速度未达到设计要求；仅完成试作机，未投入量产和实战。游戏配置为两个 100mm 三式一番二八号一型四发挂架，共 8 枚对空火箭。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Nakajima J5N",
+        url: "https://en.wikipedia.org/wiki/Nakajima_J5N",
+      },
+      {
+        name: "Wikipedia - Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J9N1",
+    displayName: "橘花",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "4 x 30mm 五式",
+      },
+      {
+        label: "火箭爆弹（前向）",
+        value: "2 x 200mm 三式六番二七号（60kg）",
+      },
+      {
+        label: "火箭爆弹（前向）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
+    ],
+    description: "日本海军研制的首款喷气式飞机，在 Me 262 的布局资料影响下采用双发喷气配置，计划用于高速对舰攻击和本土防空。机首固定装备 4 门 30mm 五式机炮；1945 年完成试飞后未投入实战，游戏中按战斗机使用。游戏配置为一个 200mm 双发挂架和两个 100mm 四发挂架，共 2 枚 200mm 与 8 枚 100mm 对空火箭。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Nakajima Kikka",
+        url: "https://en.wikipedia.org/wiki/Nakajima_Kikka",
+      },
+      {
+        name: "Wikipedia - Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
     name: "S1A1",
-    displayName: "爱知 S1A1 电光",
+    displayName: "电光",
     armaments: [
       {
         label: "机炮（前向）",
@@ -5175,8 +5256,12 @@
         label: "机炮（后向）",
         value: "2 x 20mm 九九式二号",
       },
+      {
+        label: "火箭爆弹（前向）",
+        value: "4 x 200mm 三式六番二七号（60kg）",
+      },
     ],
-    description: "日本海军为拦截 B-29 研制的双发重型夜间战斗机，采用专门设计的机身和机载雷达。原型机完成时战争已接近尾声，尚未量产便告终战。",
+    description: "日本海军为拦截 B-29 研制的双发重型夜间战斗机，采用专门设计的机身和机载雷达。原型机完成时战争已接近尾声，尚未量产便告终战。游戏配置为两个 200mm 三式六番二七号双发挂架，共 4 枚对空火箭。",
     author: "",
     links: [
       {
@@ -5191,7 +5276,7 @@
   },
   {
     name: "J8M1",
-    displayName: "三菱 J8M1 秋水",
+    displayName: "秋水",
     armaments: [
       {
         label: "机炮（前向）",
@@ -5213,7 +5298,7 @@
   },
   {
     name: "N1K2",
-    displayName: "紫电二一型（改）",
+    displayName: "紫电 21 甲型",
     armaments: [
       {
         label: "机炮（前向）",
@@ -7886,5 +7971,61 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "J6K1",
+    displayName: "阵风",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 30mm 五式",
+      },
+      {
+        label: "机枪（前向）",
+        value: "2 x 13.2mm 三式",
+      },
+      {
+        label: "火箭爆弹（前向）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
+    ],
+    description: "日本海军为拦截 B-29 研制的高空高速岸基战斗机，由 J3K 发展而来并换装中岛誉 42 发动机。设计标准火力为两门 30mm 五式机炮和两挺 13.2mm 三式机枪，但仅完成一架未装武器的样机，项目尚未试飞便告取消。游戏配置为两个 100mm 三式一番二八号一型四发挂架，共 8 枚对空火箭。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Kawanishi J6K",
+        url: "https://en.wikipedia.org/wiki/Kawanishi_J6K",
+      },
+      {
+        name: "Wikipedia - Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J4M",
+    displayName: "闪电",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm 九九式",
+      },
+      {
+        label: "机炮（前向）",
+        value: "1 x 30mm 五式",
+      },
+    ],
+    description: "日本海军计划用于本土防空的推进式局地战斗机，采用单发后置螺旋桨和双尾撑布局，使全部固定武器集中于机首。设计配置为两门 20mm 九九式机炮和一门 30mm 五式机炮，但项目仅完成木制模型，并未制造原型机。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Mitsubishi J4M Senden",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi_J4M_Senden",
+      },
+      {
+        name: "Wikipedia - Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
   },
 ]

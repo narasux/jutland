@@ -30,7 +30,7 @@ const (
 	PlaneTypeLevelBomber PlaneType = "level_bomber"
 	// PlaneTypeTorpedoBomber 鱼雷轰炸机
 	PlaneTypeTorpedoBomber PlaneType = "torpedo_bomber"
-	// PlaneTypeOther 其他机
+	// PlaneTypeOther 其他
 	PlaneTypeOther PlaneType = "other"
 )
 

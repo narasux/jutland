@@ -2013,6 +2013,59 @@
     }
   },
   {
+    // 零式舰战五二型
+    name: "A6M5",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 30,
+    damageReduction: 0.38,
+    maxSpeed: 565,
+    acceleration: 32,
+    rotateSpeed: 15,
+    length: 9.12,
+    width: 11,
+    fundsCost: 8,
+    timeCost: 5,
+    tonnage: 2.733,
+    range: 1920,
+    weapon: {
+      guns: [
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/13",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/13",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/13",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
     // 雷电二一型
     name: "J2M3",
     nation: "jp",
@@ -2138,8 +2191,8 @@
     rotateSpeed: 11,
     length: 9.66,
     width: 11.114,
-    fundsCost: 8,
-    timeCost: 5,
+    fundsCost: 10,
+    timeCost: 6,
     tonnage: 4.928,
     range: 852,
     weapon: {
@@ -2162,6 +2215,200 @@
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        },
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 天雷（试作双发重型局地战斗机）
+    name: "J5N1",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 52,
+    damageReduction: 0.5,
+    maxSpeed: 597,
+    acceleration: 30,
+    rotateSpeed: 9,
+    length: 11.46,
+    width: 14.4,
+    fundsCost: 21,
+    timeCost: 9,
+    tonnage: 7.3,
+    range: 2750,
+    weapon: {
+      guns: [
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm 九九式二号，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm 九九式二号，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        },
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 阵风（试作岸基局地战斗机）
+    name: "J6K1",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 40,
+    damageReduction: 0.46,
+    maxSpeed: 685,
+    acceleration: 36,
+    rotateSpeed: 12,
+    length: 10.11,
+    width: 12.5,
+    fundsCost: 15,
+    timeCost: 7,
+    tonnage: 4.886,
+    range: 2055,
+    weapon: {
+      guns: [
+        // 机翼（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机身（13.2mm 三式，固定前射）
+        {
+          name: "JP/13",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机身（13.2mm 三式，固定前射）
+        {
+          name: "JP/13",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        },
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 闪电（试作推进式局地战斗机）
+    name: "J4M",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 40,
+    damageReduction: 0.45,
+    maxSpeed: 759,
+    acceleration: 34,
+    rotateSpeed: 10,
+    length: 12.98,
+    width: 12.49,
+    fundsCost: 9,
+    timeCost: 5,
+    tonnage: 4.4,
+    range: 1300,
+    weapon: {
+      guns: [
+        // 机首（20mm 九九式，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm 九九式，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm 五式，固定前射）
         {
           name: "JP/30/Type5",
           posPercent: 0.85,
@@ -2383,8 +2630,8 @@
     rotateSpeed: 8,
     length: 15.1,
     width: 17.5,
-    fundsCost: 16,
-    timeCost: 8,
+    fundsCost: 20,
+    timeCost: 9,
     tonnage: 11.51,
     range: 1697,
     weapon: {
@@ -2431,6 +2678,22 @@
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         }
+      ],
+      rockets: [
+        // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
+        {
+          name: "JP/AIR/RB/200/2/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        },
+        // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
+        {
+          name: "JP/AIR/RB/200/2/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
       ]
     }
   },
@@ -2467,6 +2730,80 @@
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 橘花（试作喷气攻击机，游戏内按战斗机使用）
+    name: "J9N1",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 34,
+    damageReduction: 0.4,
+    maxSpeed: 696,
+    acceleration: 48,
+    rotateSpeed: 14,
+    length: 9.25,
+    width: 10,
+    fundsCost: 18,
+    timeCost: 8,
+    tonnage: 4.088,
+    range: 1778,
+    weapon: {
+      guns: [
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      rockets: [
+        // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
+        {
+          name: "JP/AIR/RB/200/2/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        },
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        },
+        // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
+        {
+          name: "JP/AIR/RB/100/4/AA",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
         }
       ]
     }

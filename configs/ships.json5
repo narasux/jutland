@@ -3113,7 +3113,7 @@
       takeOffTime: 1.8,
       groups: [
         {
-          name: "A6M2",
+          name: "A6M5",
           maxCount: 24
         },
         {
@@ -4664,7 +4664,7 @@
       takeOffTime: 1.7,
       groups: [
         {
-          name: "A6M2",
+          name: "A6M5",
           maxCount: 20
         },
         {

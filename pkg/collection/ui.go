@@ -1429,6 +1429,32 @@ func collectionPlaneCardScale(cardScale float64) float64 {
 	return min(boxW/maxDisplayW, boxH/maxDisplayH)
 }
 
+// collectionPlaneCardMinImageFill 是小尺寸飞机在卡片图片框内的最低填充比例。
+// 全体飞机共用一个真实比例尺时，轻型战斗机会因 B-29 等大型机占满基准而显得过小。
+const collectionPlaneCardMinImageFill = 0.62
+
+// collectionPlaneCardDrawScale 返回单架飞机在卡片中使用的最终绘制倍率。
+// 大机型继续使用全体飞机的统一比例尺，较小机型至少放大到图片框的 62%。
+func collectionPlaneCardDrawScale(name string, ratio, cardScale float64) float64 {
+	img := planeImg.GetOriginal(name)
+	displayScale := planeImg.GetDisplayScale(name)
+	if img == nil || displayScale <= 0 || img.Bounds().Dx() <= 0 || img.Bounds().Dy() <= 0 {
+		return 0
+	}
+
+	baseScale := displayScale * ratio
+	if cardScale <= 0 {
+		return baseScale
+	}
+	boxW := (340 - 48) * cardScale
+	boxH := 116 * cardScale
+	minimumScale := collectionPlaneCardMinImageFill * min(
+		boxW/float64(img.Bounds().Dx()),
+		boxH/float64(img.Bounds().Dy()),
+	)
+	return max(baseScale, minimumScale)
+}
+
 func (c *CollectionUI) maxPlaneFirstIndex() int {
 	return max(0, len(c.filteredPlanes())-c.calculatePlaneCardGeometry().VisibleCount)
 }
@@ -2137,7 +2163,7 @@ func (c *CollectionUI) drawPlaneCard(
 			px(18), posFont, color.RGBA{175, 165, 150, 255},
 		)
 	}
-	baseScale := planeImg.GetDisplayScale(plane.Name) * c.planeScaleRatio
+	baseScale := collectionPlaneCardDrawScale(plane.Name, c.planeScaleRatio, scale)
 	if baseScale <= 0 {
 		// 兜底：拿不到统一倍率时退回单机素材比例，避免飞机完全消失。
 		baseScale = planeImg.GetDisplayScale(plane.Name)
@@ -2156,9 +2182,12 @@ func (c *CollectionUI) drawPlaneCard(
 			i18n.MsgCollectionDamageReduction,
 			map[string]any{"Value": fmt.Sprintf("%.0f", plane.DamageReduction*100)},
 		),
-		i18n.Format(i18n.MsgCollectionPlaneDimensions, map[string]any{
-			"Length": formatShipArchiveNumber(plane.Length),
-			"Width":  formatShipArchiveNumber(plane.Width),
+		i18n.Format(i18n.MsgLabelValue, map[string]any{
+			"Label": i18n.Text(i18n.MsgCollectionDimensions),
+			"Value": i18n.Format(i18n.MsgValueLengthWidth, map[string]any{
+				"Length": formatShipArchiveNumber(plane.Length),
+				"Width":  formatShipArchiveNumber(plane.Width),
+			}),
 		}),
 		i18n.Format(i18n.MsgCollectionPlaneSpeed, map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*5400)}),
 		i18n.Format(i18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}),

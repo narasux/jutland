@@ -96,6 +96,28 @@
     ],
   },
   {
+    name: "A6M5",
+    displayName: "A6M5 零戦五二型",
+    armaments: [
+      {
+        label: "機首砲",
+        value: "2 x 20mm",
+      },
+      {
+        label: "機銃（前方）",
+        value: "3 x 13.2mm",
+      },
+    ],
+    description: "",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — A6M5 零戦五二型",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi%20A6M%20Zero",
+      },
+    ],
+  },
+  {
     name: "A7M2",
     displayName: "A7M2 烈風",
     armaments: [
@@ -2850,13 +2872,77 @@
         label: "機首機銃",
         value: "4 x 30mm 五式",
       },
+      {
+        label: "ロケット爆弾（前方）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
     ],
-    description: "J7W1 震電は、前翼と後部推進式六枚羽根プロペラを備えた日本海軍の単座局地戦闘機である。B-29迎撃を目的として機首に30mm五式機銃を4門搭載する計画だったが、完成した試作機は2機のみで、1945年8月3日の初飛行後に終戦を迎え、実戦には投入されなかった。",
+    description: "J7W1 震電は、前翼と後部推進式六枚羽根プロペラを備えた日本海軍の単座局地戦闘機である。B-29迎撃を目的として機首に30mm五式機銃を4門搭載する計画だったが、完成した試作機は2機のみで、1945年8月3日の初飛行後に終戦を迎え、実戦には投入されなかった。ゲーム内では100mm三式一番二八号一型の4発掛架2基、計8発の対空ロケット爆弾を装備する。",
     author: "",
     links: [
       {
         name: "ウィキペディア — 震電",
         url: "https://ja.wikipedia.org/wiki/%E9%9C%87%E9%9B%BB",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J5N1",
+    displayName: "J5N1 天雷",
+    armaments: [
+      {
+        label: "機首機銃",
+        value: "2 x 30mm 五式",
+      },
+      {
+        label: "機首機銃",
+        value: "2 x 20mm 九九式二号",
+      },
+      {
+        label: "ロケット爆弾（前方）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
+    ],
+    description: "J5N1 天雷は、B-29迎撃のために開発された双発重型局地戦闘機である。NK9H 誉二一型2基と、機首に集中配置した30mm五式2門・20mm九九式二号2門を備える。エンジン性能の不足により最高速度は目標に達せず、試作機のみで開発を終えた。ゲーム内では100mm三式一番二八号一型の4発掛架2基、計8発の対空ロケット爆弾を装備する。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Nakajima J5N",
+        url: "https://en.wikipedia.org/wiki/Nakajima_J5N",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J9N1",
+    displayName: "J9N1 橘花",
+    armaments: [
+      {
+        label: "機首機銃",
+        value: "4 x 30mm 五式",
+      },
+      {
+        label: "ロケット爆弾（前方）",
+        value: "2 x 200mm 三式六番二七号（60kg）",
+      },
+      {
+        label: "ロケット爆弾（前方）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
+    ],
+    description: "J9N1 橘花は、Me 262の資料を参考に日本海軍が開発した初のジェット機である。高速対艦攻撃と本土防空を目的とし、機首に30mm五式4門を固定装備した。1945年に試験飛行へ成功したが実戦には投入されず、本作では装備構成に合わせて戦闘機として扱う。ゲーム内では200mm三式六番二七号の2発掛架1基と100mm三式一番二八号一型の4発掛架2基を装備し、200mm弾2発と100mm弾8発を運用する。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Nakajima Kikka",
+        url: "https://en.wikipedia.org/wiki/Nakajima_Kikka",
       },
       {
         name: "Wikipedia — Type 5 cannon",
@@ -2880,8 +2966,12 @@
         label: "後方機銃",
         value: "2 x 20mm 九九式二号",
       },
+      {
+        label: "ロケット爆弾（前方）",
+        value: "4 x 200mm 三式六番二七号（60kg）",
+      },
     ],
-    description: "S1A1 電光は、B-29迎撃のために日本海軍が開発した双発夜間戦闘機である。機首に30mm五式2門と20mm九九式一号2門を固定装備し、機背の遠隔操作銃塔に20mm九九式二号2門を備えた。試作機のみで終戦を迎え、実戦には投入されなかった。",
+    description: "S1A1 電光は、B-29迎撃のために日本海軍が開発した双発夜間戦闘機である。機首に30mm五式2門と20mm九九式一号2門を固定装備し、機背の遠隔操作銃塔に20mm九九式二号2門を備えた。試作機のみで終戦を迎え、実戦には投入されなかった。ゲーム内では200mm三式六番二七号の2発掛架2基、計4発の対空ロケット爆弾を装備する。",
     author: "",
     links: [
       {
@@ -8000,6 +8090,62 @@
       {
         name: "ウィキペディア — Z11 ベルント・フォン・アルニム",
         url: "https://en.wikipedia.org/wiki/German%20destroyer%20Z11%20Bernd%20von%20Arnim",
+      },
+    ],
+  },
+  {
+    name: "J6K1",
+    displayName: "川西 J6K1 陣風",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "2 x 30mm 五式",
+      },
+      {
+        label: "機関銃（前方）",
+        value: "2 x 13.2mm 三式",
+      },
+      {
+        label: "ロケット爆弾（前方）",
+        value: "8 x 100mm 三式一番二八号一型（7.65kg）",
+      },
+    ],
+    description: "川西 J6K1 陣風は、B-29迎撃を目的として日本海軍が計画した陸上基地用の高空高速戦闘機である。J3Kを発展させ、中島「誉」42を搭載する設計で、30mm五式機銃2門と13.2mm三式機関銃2挺を装備する予定だった。武装未搭載の試作機1機のみが完成し、初飛行前に計画は中止された。ゲーム内では100mm三式一番二八号一型の4発掛架2基、計8発の対空ロケット爆弾を装備する。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Kawanishi J6K",
+        url: "https://en.wikipedia.org/wiki/Kawanishi_J6K",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J4M",
+    displayName: "三菱 J4M 閃電",
+    armaments: [
+      {
+        label: "機銃（前方）",
+        value: "2 x 20mm 九九式",
+      },
+      {
+        label: "機銃（前方）",
+        value: "1 x 30mm 五式",
+      },
+    ],
+    description: "三菱 J4M 閃電は、日本海軍が本土防空用に計画した単発推進式の局地戦闘機である。後部の推進プロペラと双ブーム尾部により機首へ武装を集中し、20mm九九式機銃2門と30mm五式機銃1門を搭載する予定だった。1944年に開発は中止され、木製模型のみが作られた。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Mitsubishi J4M Senden",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi_J4M_Senden",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
   },
