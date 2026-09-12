@@ -7217,6 +7217,24 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK103",
+    displayName: "30mm MK 103 机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/RB/55/24/AA",
+    displayName: "55mm R4M 二十四发航空对空火箭弹",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/20/4/MG151",
     displayName: "20mm MG 151/20 四联装机炮",
     type: "武器",
@@ -8065,7 +8083,7 @@
     ],
   },
   {
-    name: "Bf-110-G-4",
+    name: "Bf110G",
     displayName: "Bf 110 G-4 夜间战斗机",
     armaments: [
       {
@@ -8091,7 +8109,7 @@
     ],
   },
   {
-    name: "Bf-109-B-1",
+    name: "Bf109B",
     displayName: "Bf 109 B-1",
     armaments: [
       {
@@ -8109,7 +8127,7 @@
     ],
   },
   {
-    name: "Bf-109-E-4",
+    name: "Bf109E",
     displayName: "Bf 109 E-4",
     armaments: [
       {
@@ -8131,7 +8149,7 @@
     ],
   },
   {
-    name: "Bf-109-F-4",
+    name: "Bf109F",
     displayName: "Bf 109 F-4",
     armaments: [
       {
@@ -8153,7 +8171,7 @@
     ],
   },
   {
-    name: "Bf-109-G-14",
+    name: "Bf109G",
     displayName: "Bf 109 G-14",
     armaments: [
       {
@@ -8175,7 +8193,7 @@
     ],
   },
   {
-    name: "Bf-109-K-4",
+    name: "Bf109K",
     displayName: "Bf 109 K-4",
     armaments: [
       {
@@ -8193,6 +8211,181 @@
       {
         name: "Wikipedia - Messerschmitt Bf 109 variants",
         url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Ho229",
+    displayName: "霍滕 Ho 229 飞翼战斗轰炸机",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 30mm MK 108",
+      },
+    ],
+    description: "霍滕 Ho 229 是德国后期研制的喷气飞翼战斗轰炸机，原型于 1944 年试飞，V3 被美军缴获后未再完成量产。计划中的 A-0 量产型在翼根安装两门 30mm MK 108，公开资料给出的最大速度约 960 km/h、最大航程约 1900 km。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 霍滕 Ho 229",
+        url: "https://en.wikipedia.org/wiki/Horten_Ho_229",
+      },
+      {
+        name: "史密森尼国家航空航天博物馆 - Ho 229 V3",
+        url: "https://airandspace.si.edu/collection-objects/horten-ho-229-v3/nasm_A19600324000",
+      },
+    ],
+  },
+  {
+    name: "Ta183",
+    displayName: "福克-沃尔夫 Ta 183 胡克拜因",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "Ta 183 是福克-沃尔夫为德国紧急战斗机计划设计的后掠翼喷气截击机，计划以四门 30mm MK 108 围绕机首进气道布置。战争结束时只完成风洞模型，未造出原型机；公开设计数据为最大速度约 955 km/h、升限约 14000 m。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 福克-沃尔夫 Ta 183",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_183",
+      },
+      {
+        name: "维基百科 - FMA IAe 33 Pulqui II",
+        url: "https://en.wikipedia.org/wiki/FMA_IAe_33_Pulqui_II",
+      },
+    ],
+  },
+  {
+    name: "Ba349",
+    displayName: "巴赫姆 Ba 349 蝮蛇",
+    armaments: [
+      {
+        label: "火箭弹（前向）",
+        value: "24 x 55mm R4M",
+      },
+    ],
+    description: "Ba 349 是采用垂直发射架起飞的火箭动力点防御截击机，机鼻火箭巢可齐射 24 枚 R4M 对空火箭。1945 年 3 月唯一一次载人垂直试飞以飞行员丧生告终，计划中的作战出击没有实施；历史动力段后航程约 40-60 km。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 巴赫姆 Ba 349",
+        url: "https://en.wikipedia.org/wiki/Bachem_Ba_349_Natter",
+      },
+      {
+        name: "维基百科 - R4M 火箭",
+        url: "https://en.wikipedia.org/wiki/R4M",
+      },
+    ],
+  },
+  {
+    name: "He162A",
+    displayName: "亨克尔 He 162 A-2 国民战斗机",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm MG 151/20",
+      },
+    ],
+    description: "He 162 A-2 是德国战争末期批量生产的单发喷气战斗机，以木质结构、BMW 003 发动机和简化生产为特点。A-2 标准武装为两门 20mm MG 151/20，公开资料给出的最大速度约 840 km/h、航程约 975 km。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 亨克尔 He 162",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_162_Volksj%C3%A4ger",
+      },
+      {
+        name: "维基百科 - BMW 003",
+        url: "https://en.wikipedia.org/wiki/BMW_003",
+      },
+    ],
+  },
+  {
+    name: "Me163B",
+    displayName: "梅塞施密特 Me 163 B-1 彗星",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 30mm MK 108",
+      },
+    ],
+    description: "Me 163 B-1 是唯一投入实战的火箭动力战斗机量产型，翼根安装两门 30mm MK 108，最大速度约 900 km/h，爬升率极高。Walter 火箭发动机的动力时间只有数分钟，游戏沿用同类火箭截击机的归一化航程以保证可出击性。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 梅塞施密特 Me 163",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_163_Komet",
+      },
+      {
+        name: "维基百科 - MK 108 机炮",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me209V",
+    displayName: "梅塞施密特 Me 209 V1 竞速机",
+    armaments: [],
+    description: "Me 209 V1 是为冲击活塞动力飞机速度纪录而设计的无武装竞速机，1938 年首飞，并于 1939 年创造约 755 km/h 的纪录。该机没有作战航程数据，游戏依据其约 30 分钟的冷却液限制折算为 360 km。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 梅塞施密特 Me 209",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_209",
+      },
+      {
+        name: "维基百科 - 戴姆勒-奔驰 DB 601",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_601",
+      },
+    ],
+  },
+  {
+    name: "Me309V",
+    displayName: "梅塞施密特 Me 309 V1",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "1 x 30mm MK 108 + 2 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（前向）",
+        value: "4 x 13mm MG 131",
+      },
+    ],
+    description: "Me 309 是 1942 年首飞的 Bf 109 后继机试作方案，采用前三点起落架、增压座舱和 DB 603G 发动机。公开资料列出的计划武装为一门 30mm MK 108、两门 20mm MG 151/20 和四挺 13mm MG 131，最大速度约 733 km/h。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 梅塞施密特 Me 309",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_309",
+      },
+      {
+        name: "维基百科 - 戴姆勒-奔驰 DB 603",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_603",
+      },
+    ],
+  },
+  {
+    name: "Do335V",
+    displayName: "多尼尔 Do 335 V13 箭式",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "3 x 30mm MK 103 + 2 x 20mm MG 151/20",
+      },
+    ],
+    description: "Do 335 V13 是 B-2 重武装型的武器原型，采用前后串列发动机和推拉式螺旋桨布局，最大速度约 770 km/h。该机按图中配置搭载三门 30mm MK 103 和两门 20mm MG 151/20，战争结束前没有投入实战。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 多尼尔 Do 335",
+        url: "https://en.wikipedia.org/wiki/Dornier_Do_335",
+      },
+      {
+        name: "维基百科 - MK 103 机炮",
+        url: "https://en.wikipedia.org/wiki/MK_103_cannon",
       },
     ],
   },

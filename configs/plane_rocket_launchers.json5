@@ -95,4 +95,18 @@
     proximityRadius: 0.16,
     blastRadius: 0.25,
   },
+  {
+    // 德国 55mm / 24 发 R4M 对空火箭弹（Ba 349 机鼻齐射）
+    name: "GER/AIR/RB/55/24/AA",
+    bulletName: "GER/RB/55/1945",
+    rocketCount: 24,
+    shotInterval: 0.08,
+    range: 6,
+    bulletSpread: 210,
+    bulletSpeed: 525,
+    antiShip: false,
+    antiAircraft: true,
+    proximityRadius: 0.18,
+    blastRadius: 0.3,
+  },
 ]

@@ -2311,6 +2311,24 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK103",
+    displayName: "30mm пушка MK 103",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/RB/55/24/AA",
+    displayName: "55mm 24-зарядная авиационная ракета R4M",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/20/4/MG151",
     displayName: "20mm счетверённая пушка MG 151/20",
     type: "Оружие",
@@ -8186,7 +8204,7 @@
     ],
   },
   {
-    name: "Bf-110-G-4",
+    name: "Bf110G",
     displayName: "Messerschmitt Bf 110 G-4 ночной истребитель",
     armaments: [
       {
@@ -8212,7 +8230,7 @@
     ],
   },
   {
-    name: "Bf-109-B-1",
+    name: "Bf109B",
     displayName: "Messerschmitt Bf 109 B-1",
     armaments: [
       {
@@ -8230,7 +8248,7 @@
     ],
   },
   {
-    name: "Bf-109-E-4",
+    name: "Bf109E",
     displayName: "Messerschmitt Bf 109 E-4",
     armaments: [
       {
@@ -8252,7 +8270,7 @@
     ],
   },
   {
-    name: "Bf-109-F-4",
+    name: "Bf109F",
     displayName: "Messerschmitt Bf 109 F-4",
     armaments: [
       {
@@ -8274,7 +8292,7 @@
     ],
   },
   {
-    name: "Bf-109-G-14",
+    name: "Bf109G",
     displayName: "Messerschmitt Bf 109 G-14",
     armaments: [
       {
@@ -8296,7 +8314,7 @@
     ],
   },
   {
-    name: "Bf-109-K-4",
+    name: "Bf109K",
     displayName: "Messerschmitt Bf 109 K-4",
     armaments: [
       {
@@ -8314,6 +8332,181 @@
       {
         name: "Википедия — Messerschmitt Bf 109 variants",
         url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Ho229",
+    displayName: "Horten Ho 229 — реактивный истребитель-бомбардировщик «летающее крыло»",
+    armaments: [
+      {
+        label: "Пушки (вперёд)",
+        value: "2 x 30-мм MK 108",
+      },
+    ],
+    description: "Horten Ho 229 — поздний немецкий реактивный истребитель-бомбардировщик схемы «летающее крыло». Прототип совершил первый полёт в 1944 году, а планировавшийся серийный A-0 должен был нести две 30-мм пушки MK 108 в корне крыла; по публикациям скорость достигала около 960 км/ч, максимальная дальность — около 1900 км.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Horten Ho 229",
+        url: "https://en.wikipedia.org/wiki/Horten_Ho_229",
+      },
+      {
+        name: "Smithsonian National Air and Space Museum - Ho 229 V3",
+        url: "https://airandspace.si.edu/collection-objects/horten-ho-229-v3/nasm_A19600324000",
+      },
+    ],
+  },
+  {
+    name: "Ta183",
+    displayName: "Focke-Wulf Ta 183 Huckebein",
+    armaments: [
+      {
+        label: "Пушки (вперёд)",
+        value: "4 x 30-мм MK 108",
+      },
+    ],
+    description: "Ta 183 был проектом реактивного перехватчика со стреловидным крылом для немецкой программы срочного создания истребителя; вокруг воздухозаборника планировалось разместить четыре 30-мм пушки MK 108. До конца войны изготовили только модели для аэродинамической трубы, а расчётная скорость составляла около 955 км/ч.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Ta 183",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_183",
+      },
+      {
+        name: "Wikipedia - FMA IAe 33 Pulqui II",
+        url: "https://en.wikipedia.org/wiki/FMA_IAe_33_Pulqui_II",
+      },
+    ],
+  },
+  {
+    name: "Ba349",
+    displayName: "Bachem Ba 349 Natter",
+    armaments: [
+      {
+        label: "Ракеты (вперёд)",
+        value: "24 x 55-мм R4M",
+      },
+    ],
+    description: "Ba 349 был ракетным перехватчиком точечной обороны, стартовавшим вертикально; его носовая батарея могла выпустить двадцать четыре зенитные ракеты R4M. Единственный пилотируемый вертикальный полёт 1 марта 1945 года закончился гибелью лётчика, боевых вылетов не было, а историческая дальность после набора высоты составляла лишь около 40-60 км.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Bachem Ba 349",
+        url: "https://en.wikipedia.org/wiki/Bachem_Ba_349_Natter",
+      },
+      {
+        name: "Wikipedia - ракета R4M",
+        url: "https://en.wikipedia.org/wiki/R4M",
+      },
+    ],
+  },
+  {
+    name: "He162A",
+    displayName: "Heinkel He 162 A-2 Volksjäger",
+    armaments: [
+      {
+        label: "Пушки (вперёд)",
+        value: "2 x 20-мм MG 151/20",
+      },
+    ],
+    description: "He 162 A-2 — массовый поздний немецкий реактивный истребитель с упрощённым деревянным планером и двигателем BMW 003. Штатное вооружение состояло из двух 20-мм пушек MG 151/20; по публикациям максимальная скорость достигала около 840 км/ч, а дальность — около 975 км.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Heinkel He 162",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_162_Volksj%C3%A4ger",
+      },
+      {
+        name: "Wikipedia - BMW 003",
+        url: "https://en.wikipedia.org/wiki/BMW_003",
+      },
+    ],
+  },
+  {
+    name: "Me163B",
+    displayName: "Messerschmitt Me 163 B-1 Komet",
+    armaments: [
+      {
+        label: "Пушки (вперёд)",
+        value: "2 x 30-мм MK 108",
+      },
+    ],
+    description: "Me 163 B-1 — серийная версия единственного применявшегося в бою ракетного истребителя, несшая две 30-мм пушки MK 108 в корне крыла и развивавшая около 900 км/ч. Ракетный двигатель Walter работал лишь несколько минут, поэтому дальность в игре приведена к уровню аналогичного перехватчика.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 163 Komet",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_163_Komet",
+      },
+      {
+        name: "Wikipedia - пушка MK 108",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me209V",
+    displayName: "Messerschmitt Me 209 V1 — гоночный самолёт",
+    armaments: [],
+    description: "Невооружённый Me 209 V1 был создан исключительно для установления абсолютного рекорда скорости среди самолётов с поршневым двигателем. Он впервые полетел в 1938 году, а в 1939-м достиг около 755 км/ч; поскольку практической дальности у машины не было, в игре принята оценка 360 км по примерно тридцатиминутному ресурсу охлаждающей жидкости.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 209",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_209",
+      },
+      {
+        name: "Wikipedia - Daimler-Benz DB 601",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_601",
+      },
+    ],
+  },
+  {
+    name: "Me309V",
+    displayName: "Messerschmitt Me 309 V1",
+    armaments: [
+      {
+        label: "Пушки (вперёд)",
+        value: "1 x 30-мм MK 108 + 2 x 20-мм MG 151/20",
+      },
+      {
+        label: "Пулемёты (вперёд)",
+        value: "4 x 13-мм MG 131",
+      },
+    ],
+    description: "Me 309 был прототипом истребителя 1942 года, предназначенным заменить Bf 109; он получил трёхопорное шасси с носовым колесом, герметичную кабину и двигатель DB 603G. В опубликованных спецификациях указаны одна 30-мм MK 108, две 20-мм MG 151/20 и четыре 13-мм MG 131 при максимальной скорости около 733 км/ч.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 309",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_309",
+      },
+      {
+        name: "Wikipedia - Daimler-Benz DB 603",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_603",
+      },
+    ],
+  },
+  {
+    name: "Do335V",
+    displayName: "Dornier Do 335 V13 Pfeil",
+    armaments: [
+      {
+        label: "Пушки (вперёд)",
+        value: "3 x 30-мм MK 103 + 2 x 20-мм MG 151/20",
+      },
+    ],
+    description: "Do 335 V13 был тяжеловооружённым прототипом варианта B-2, использовавшим необычную тандемную схему с тянущим и толкающим винтами и развивавшим около 770 км/ч. По приведённому исходному изображению самолёт несёт три 30-мм пушки MK 103 и две 20-мм MG 151/20, но в бой так и не вступил.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Wikipedia - Dornier Do 335",
+        url: "https://en.wikipedia.org/wiki/Dornier_Do_335",
+      },
+      {
+        name: "Wikipedia - пушка MK 103",
+        url: "https://en.wikipedia.org/wiki/MK_103_cannon",
       },
     ],
   },

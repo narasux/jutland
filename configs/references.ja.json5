@@ -2311,6 +2311,24 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK103",
+    displayName: "30mm MK 103 機関砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/RB/55/24/AA",
+    displayName: "55mm R4M 24発航空対空ロケット弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/20/4/MG151",
     displayName: "20mm MG 151/20 四連装機関砲",
     type: "兵器",
@@ -8186,7 +8204,7 @@
     ],
   },
   {
-    name: "Bf-110-G-4",
+    name: "Bf110G",
     displayName: "メッサーシュミット Bf 110 G-4 夜間戦闘機",
     armaments: [
       {
@@ -8212,7 +8230,7 @@
     ],
   },
   {
-    name: "Bf-109-B-1",
+    name: "Bf109B",
     displayName: "メッサーシュミット Bf 109 B-1",
     armaments: [
       {
@@ -8230,7 +8248,7 @@
     ],
   },
   {
-    name: "Bf-109-E-4",
+    name: "Bf109E",
     displayName: "メッサーシュミット Bf 109 E-4",
     armaments: [
       {
@@ -8252,7 +8270,7 @@
     ],
   },
   {
-    name: "Bf-109-F-4",
+    name: "Bf109F",
     displayName: "メッサーシュミット Bf 109 F-4",
     armaments: [
       {
@@ -8274,7 +8292,7 @@
     ],
   },
   {
-    name: "Bf-109-G-14",
+    name: "Bf109G",
     displayName: "メッサーシュミット Bf 109 G-14",
     armaments: [
       {
@@ -8296,7 +8314,7 @@
     ],
   },
   {
-    name: "Bf-109-K-4",
+    name: "Bf109K",
     displayName: "メッサーシュミット Bf 109 K-4",
     armaments: [
       {
@@ -8314,6 +8332,181 @@
       {
         name: "ウィキペディア — Messerschmitt Bf 109 variants",
         url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Ho229",
+    displayName: "ホルテン Ho 229 全翼戦闘爆撃機",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "2 x 30mm MK 108",
+      },
+    ],
+    description: "ホルテン Ho 229 は、第二次大戦後期に開発されたドイツのジェット推進全翼戦闘爆撃機である。1944年に原型機が初飛行し、量産予定の A-0 型は主翼根部に30mm MK 108機関砲2門を搭載する計画だった。公開資料では最大速度約960 km/h、最大航程約1900 kmとされる。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - ホルテン Ho 229",
+        url: "https://en.wikipedia.org/wiki/Horten_Ho_229",
+      },
+      {
+        name: "スミソニアン国立航空宇宙博物館 - Ho 229 V3",
+        url: "https://airandspace.si.edu/collection-objects/horten-ho-229-v3/nasm_A19600324000",
+      },
+    ],
+  },
+  {
+    name: "Ta183",
+    displayName: "フォッケウルフ Ta 183 フッケバイン",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "Ta 183 はドイツ緊急戦闘機計画向けに設計された後退翼ジェット迎撃機で、機首インテーク周囲に30mm MK 108機関砲4門を搭載する計画だった。終戦までに完成したのは風洞模型のみで、原型機は製造されず、計画最大速度は約955 km/hだった。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - フォッケウルフ Ta 183",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_183",
+      },
+      {
+        name: "Wikipedia - FMA IAe 33 プルキー II",
+        url: "https://en.wikipedia.org/wiki/FMA_IAe_33_Pulqui_II",
+      },
+    ],
+  },
+  {
+    name: "Ba349",
+    displayName: "バッヘム Ba 349 ナッター",
+    armaments: [
+      {
+        label: "ロケット弾（前方）",
+        value: "24 x 55mm R4M",
+      },
+    ],
+    description: "Ba 349 は垂直発射架から打ち上げるロケット動力の局地迎撃機で、機首のロケット発射筒から R4M 対空ロケット弾24発を一斉発射できた。1945年3月の唯一の有人垂直試験飛行は墜落事故となり、実戦出撃は行われず、動力飛行後の実用航程は約40-60 kmだった。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - バッヘム Ba 349",
+        url: "https://en.wikipedia.org/wiki/Bachem_Ba_349_Natter",
+      },
+      {
+        name: "Wikipedia - R4M ロケット",
+        url: "https://en.wikipedia.org/wiki/R4M",
+      },
+    ],
+  },
+  {
+    name: "He162A",
+    displayName: "ハインケル He 162 A-2 フォルクスイェーガー",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "2 x 20mm MG 151/20",
+      },
+    ],
+    description: "He 162 A-2 は、木製構造と BMW 003 ジェットエンジンを用いて大量生産を狙った第二次大戦末期のドイツ単発ジェット戦闘機である。標準武装は20mm MG 151/20機関砲2門で、公開資料では最大速度約840 km/h、航程約975 kmとされる。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - ハインケル He 162",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_162_Volksj%C3%A4ger",
+      },
+      {
+        name: "Wikipedia - BMW 003",
+        url: "https://en.wikipedia.org/wiki/BMW_003",
+      },
+    ],
+  },
+  {
+    name: "Me163B",
+    displayName: "メッサーシュミット Me 163 B-1 コメート",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "2 x 30mm MK 108",
+      },
+    ],
+    description: "Me 163 B-1 は実戦投入された唯一のロケット戦闘機の量産型で、主翼根部に30mm MK 108機関砲2門を搭載し、最大速度は約900 km/hだった。Walter ロケット機関の作動時間は数分に限られるため、ゲームでは同種の迎撃機と揃えた航程へ正規化している。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - メッサーシュミット Me 163",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_163_Komet",
+      },
+      {
+        name: "Wikipedia - MK 108 機関砲",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me209V",
+    displayName: "メッサーシュミット Me 209 V1 競速機",
+    armaments: [],
+    description: "Me 209 V1 は piston 機関機の絶対速度記録を狙うためだけに造られた非武装の競速機である。1938年に初飛行し、1939年には約755 km/hを記録した。実用航程は存在しないため、ゲームでは約30分の冷却液使用制限から360 kmとして近似している。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - メッサーシュミット Me 209",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_209",
+      },
+      {
+        name: "Wikipedia - ダイムラー・ベンツ DB 601",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_601",
+      },
+    ],
+  },
+  {
+    name: "Me309V",
+    displayName: "メッサーシュミット Me 309 V1",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "1 x 30mm MK 108 + 2 x 20mm MG 151/20",
+      },
+      {
+        label: "機関銃（前方）",
+        value: "4 x 13mm MG 131",
+      },
+    ],
+    description: "Me 309 は Bf 109 の後継を目指し、前輪式脚、与圧コックピット、DB 603G エンジンを採用して1942年に初飛行した試作戦闘機である。公開仕様の計画武装は30mm MK 108機関砲1門、20mm MG 151/20機関砲2門、13mm MG 131機関銃4挺で、最大速度は約733 km/hだった。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - メッサーシュミット Me 309",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_309",
+      },
+      {
+        name: "Wikipedia - ダイムラー・ベンツ DB 603",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_603",
+      },
+    ],
+  },
+  {
+    name: "Do335V",
+    displayName: "ドルニエ Do 335 V13 プファイル",
+    armaments: [
+      {
+        label: "機関砲（前方）",
+        value: "3 x 30mm MK 103 + 2 x 20mm MG 151/20",
+      },
+    ],
+    description: "Do 335 V13 は B-2 重武装型の武器原型で、前後にエンジンを直列配置するプッシュプル方式と並外れた速度性能を持つ。資料図の構成どおり30mm MK 103機関砲3門と20mm MG 151/20機関砲2門を搭載し、最大速度は約770 km/hだったが実戦には参加しなかった。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - ドルニエ Do 335",
+        url: "https://en.wikipedia.org/wiki/Dornier_Do_335",
+      },
+      {
+        name: "Wikipedia - MK 103 機関砲",
+        url: "https://en.wikipedia.org/wiki/MK_103_cannon",
       },
     ],
   },

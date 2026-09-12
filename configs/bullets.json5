@@ -816,6 +816,14 @@
     damage: 8,
     criticalRate: 0.001
   },
+  // 德国空军 55mm R4M 对空火箭弹
+  {
+    name: "GER/RB/55/1945",
+    type: "rocket",
+    diameter: 55,
+    damage: 4,
+    criticalRate: 0.0008
+  },
   // 中国海军 122mm 舰载火箭弹
   {
     name: "CN/RB/122/1960",

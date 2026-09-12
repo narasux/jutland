@@ -1334,6 +1334,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国空军 30mm MK 103 机炮（高初速，Do 335 B 系列使用）
+  {
+    name: "GER/AIR/30/MK103",
+    bulletName: "GER/GB/30/1943",
+    bulletCount: 1,
+    reloadTime: 0.08,
+    range: 5,
+    bulletSpread: 18,
+    bulletSpeed: 860,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国海军 GER/20/70 单装高炮
   {
     name: "GER/20/70",

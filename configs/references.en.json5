@@ -2311,6 +2311,24 @@
     links: [],
   },
   {
+    name: "GER/AIR/30/MK103",
+    displayName: "30mm MK 103 Cannon",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/RB/55/24/AA",
+    displayName: "55mm R4M 24-Round Aircraft Anti-Air Rocket",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/20/4/MG151",
     displayName: "20mm MG 151/20 Quad Cannon",
     type: "Weapon",
@@ -8186,7 +8204,7 @@
     ],
   },
   {
-    name: "Bf-110-G-4",
+    name: "Bf110G",
     displayName: "Messerschmitt Bf 110 G-4 Night Fighter",
     armaments: [
       {
@@ -8212,7 +8230,7 @@
     ],
   },
   {
-    name: "Bf-109-B-1",
+    name: "Bf109B",
     displayName: "Messerschmitt Bf 109 B-1",
     armaments: [
       {
@@ -8230,7 +8248,7 @@
     ],
   },
   {
-    name: "Bf-109-E-4",
+    name: "Bf109E",
     displayName: "Messerschmitt Bf 109 E-4",
     armaments: [
       {
@@ -8252,7 +8270,7 @@
     ],
   },
   {
-    name: "Bf-109-F-4",
+    name: "Bf109F",
     displayName: "Messerschmitt Bf 109 F-4",
     armaments: [
       {
@@ -8274,7 +8292,7 @@
     ],
   },
   {
-    name: "Bf-109-G-14",
+    name: "Bf109G",
     displayName: "Messerschmitt Bf 109 G-14",
     armaments: [
       {
@@ -8296,7 +8314,7 @@
     ],
   },
   {
-    name: "Bf-109-K-4",
+    name: "Bf109K",
     displayName: "Messerschmitt Bf 109 K-4",
     armaments: [
       {
@@ -8314,6 +8332,181 @@
       {
         name: "Wikipedia — Messerschmitt Bf 109 variants",
         url: "https://en.wikipedia.org/wiki/Messerschmitt_Bf_109_variants",
+      },
+    ],
+  },
+  {
+    name: "Ho229",
+    displayName: "Horten Ho 229 Flying-Wing Fighter-Bomber",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 30mm MK 108",
+      },
+    ],
+    description: "The Horten Ho 229 was a late-war German jet-powered flying-wing fighter-bomber. Its first prototype flew in 1944, while the planned A-0 production version carried two 30 mm MK 108 cannon in the wing roots; published figures give about 960 km/h and a maximum range near 1,900 km.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Horten Ho 229",
+        url: "https://en.wikipedia.org/wiki/Horten_Ho_229",
+      },
+      {
+        name: "Smithsonian National Air and Space Museum - Ho 229 V3",
+        url: "https://airandspace.si.edu/collection-objects/horten-ho-229-v3/nasm_A19600324000",
+      },
+    ],
+  },
+  {
+    name: "Ta183",
+    displayName: "Focke-Wulf Ta 183 Huckebein",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 30mm MK 108",
+      },
+    ],
+    description: "The Ta 183 was a swept-wing jet interceptor designed by Focke-Wulf for Germany's Emergency Fighter Program, with four 30 mm MK 108 cannon planned around the nose intake. The war ended before a prototype was completed, leaving only wind-tunnel models; the projected maximum speed was about 955 km/h.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Ta 183",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Ta_183",
+      },
+      {
+        name: "Wikipedia - FMA IAe 33 Pulqui II",
+        url: "https://en.wikipedia.org/wiki/FMA_IAe_33_Pulqui_II",
+      },
+    ],
+  },
+  {
+    name: "Ba349",
+    displayName: "Bachem Ba 349 Natter",
+    armaments: [
+      {
+        label: "Rockets (Forward)",
+        value: "24 x 55mm R4M",
+      },
+    ],
+    description: "The Ba 349 was a vertically launched rocket-powered point-defence interceptor whose nose battery could fire twenty-four R4M anti-aircraft rockets. Its only manned vertical flight, on 1 March 1945, ended in the pilot's death, and no operational sorties followed; its historical powered range was only about 40-60 km.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Bachem Ba 349",
+        url: "https://en.wikipedia.org/wiki/Bachem_Ba_349_Natter",
+      },
+      {
+        name: "Wikipedia - R4M rocket",
+        url: "https://en.wikipedia.org/wiki/R4M",
+      },
+    ],
+  },
+  {
+    name: "He162A",
+    displayName: "Heinkel He 162 A-2 Volksjäger",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm MG 151/20",
+      },
+    ],
+    description: "The He 162 A-2 was a mass-produced late-war German jet fighter built around a simple wooden airframe and the BMW 003 engine. Its standard armament was two 20 mm MG 151/20 cannon, and published performance figures include about 840 km/h and a range near 975 km.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Heinkel He 162",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_162_Volksj%C3%A4ger",
+      },
+      {
+        name: "Wikipedia - BMW 003",
+        url: "https://en.wikipedia.org/wiki/BMW_003",
+      },
+    ],
+  },
+  {
+    name: "Me163B",
+    displayName: "Messerschmitt Me 163 B-1 Komet",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 30mm MK 108",
+      },
+    ],
+    description: "The Me 163 B-1 was the production version of history's only operational rocket-powered fighter, with two 30 mm MK 108 cannon in the wing roots and a maximum speed around 900 km/h. Its Walter rocket motor provided only a few minutes of powered flight, so the game normalizes its endurance range for playability.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 163 Komet",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_163_Komet",
+      },
+      {
+        name: "Wikipedia - MK 108 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_108_cannon",
+      },
+    ],
+  },
+  {
+    name: "Me209V",
+    displayName: "Messerschmitt Me 209 V1 Racing Aircraft",
+    armaments: [],
+    description: "The unarmed Me 209 V1 was built solely to capture the absolute speed record for piston-engine aircraft. It first flew in 1938 and reached about 755 km/h in 1939; because it had no service range, the game derives a 360 km endurance figure from its roughly thirty-minute coolant limit.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 209",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_209",
+      },
+      {
+        name: "Wikipedia - Daimler-Benz DB 601",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_601",
+      },
+    ],
+  },
+  {
+    name: "Me309V",
+    displayName: "Messerschmitt Me 309 V1",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "1 x 30mm MK 108 + 2 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "4 x 13mm MG 131",
+      },
+    ],
+    description: "The Me 309 was a 1942 prototype intended to replace the Bf 109, introducing tricycle landing gear, a pressurized cockpit, and the DB 603G engine. Published specifications list one 30 mm MK 108, two 20 mm MG 151/20, and four 13 mm MG 131 guns, with a maximum speed near 733 km/h.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Messerschmitt Me 309",
+        url: "https://en.wikipedia.org/wiki/Messerschmitt_Me_309",
+      },
+      {
+        name: "Wikipedia - Daimler-Benz DB 603",
+        url: "https://en.wikipedia.org/wiki/Daimler-Benz_DB_603",
+      },
+    ],
+  },
+  {
+    name: "Do335V",
+    displayName: "Dornier Do 335 V13 Pfeil",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "3 x 30mm MK 103 + 2 x 20mm MG 151/20",
+      },
+    ],
+    description: "The Do 335 V13 was the heavily armed prototype for the B-2, using the Pfeil's unusual tandem-engine push-pull layout and reaching about 770 km/h. As shown in the supplied reference, it is configured with three 30 mm MK 103 cannon and two 20 mm MG 151/20; it never entered combat.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Dornier Do 335",
+        url: "https://en.wikipedia.org/wiki/Dornier_Do_335",
+      },
+      {
+        name: "Wikipedia - MK 103 cannon",
+        url: "https://en.wikipedia.org/wiki/MK_103_cannon",
       },
     ],
   },
