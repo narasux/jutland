@@ -5138,6 +5138,80 @@
     ],
   },
   {
+    name: "J7W1",
+    displayName: "震电",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "4 x 30mm 五式",
+      },
+    ],
+    description: "日本海军为拦截 B-29 研制的单座局地战斗机，采用前翼、后置发动机与六叶推进式螺旋桨。仅完成两架原型机，1945 年 8 月首飞，未投入实战。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 震电战斗机",
+        url: "https://zh.wikipedia.org/wiki/%E9%9C%87%E7%94%B5%E6%88%98%E6%96%97%E6%9C%BA",
+      },
+      {
+        name: "维基百科 - 五式机炮",
+        url: "https://zh.wikipedia.org/wiki/%E4%BA%94%E5%BC%8F%E6%A9%9F%E7%82%AE",
+      },
+    ],
+  },
+  {
+    name: "S1A1",
+    displayName: "爱知 S1A1 电光",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 30mm 五式",
+      },
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm 九九式一号",
+      },
+      {
+        label: "机炮（后向）",
+        value: "2 x 20mm 九九式二号",
+      },
+    ],
+    description: "日本海军为拦截 B-29 研制的双发重型夜间战斗机，采用专门设计的机身和机载雷达。原型机完成时战争已接近尾声，尚未量产便告终战。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Aichi S1A",
+        url: "https://en.wikipedia.org/wiki/Aichi_S1A",
+      },
+      {
+        name: "Wikipedia - Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J8M1",
+    displayName: "三菱 J8M1 秋水",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 30mm 五式（每门 53 发）",
+      },
+    ],
+    description: "日本海军依据 Me 163 资料研制的火箭动力截击机，采用无水平尾翼布局和 KR-10 液体火箭发动机。首架原型机在 1945 年首次动力试飞时坠毁，战争结束前未投入实战。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Mitsubishi J8M",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi_J8M",
+      },
+      {
+        name: "Wikipedia - Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
     name: "N1K2",
     displayName: "紫电二一型（改）",
     armaments: [
@@ -6862,6 +6936,15 @@
   {
     name: "JP/25/60",
     displayName: "25mm/60 单装机炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "JP/30/Type5",
+    displayName: "30mm 五式单装机炮",
     type: "武器",
     armaments: [],
     description: "",

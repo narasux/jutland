@@ -4068,6 +4068,18 @@
             maxCount: 8,
           },
           {
+            name: "J7W1",
+            maxCount: 8,
+          },
+          {
+            name: "S1A1",
+            maxCount: 8,
+          },
+          {
+            name: "J8M1",
+            maxCount: 8,
+          },
+          {
             name: "A7M2",
             maxCount: 8,
           },

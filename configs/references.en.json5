@@ -2843,6 +2843,80 @@
     ],
   },
   {
+    name: "J7W1",
+    displayName: "J7W1 Shinden",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "4 x 30mm Type 5",
+      },
+    ],
+    description: "The Kyūshū J7W1 Shinden was a Japanese Navy single-seat interceptor designed around a canard, rear-mounted engine, and six-bladed pusher propeller. Intended to engage high-altitude B-29 bombers, it was armed with four forward-firing 30 mm Type 5 cannon. Only two prototypes were completed; the first flew on 3 August 1945 and the type never entered combat service.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Kyūshū J7W Shinden",
+        url: "https://en.wikipedia.org/wiki/Ky%C5%ABsh%C5%AB_J7W_Shinden",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "S1A1",
+    displayName: "Aichi S1A1 Denkō",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 30mm Type 5",
+      },
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm Type 99 Model 1",
+      },
+      {
+        label: "Cannons (Rear)",
+        value: "2 x 20mm Type 99 Model 2",
+      },
+    ],
+    description: "The Aichi S1A1 Denkō was a twin-engine night fighter developed for the Imperial Japanese Navy to intercept B-29 bombers. It carried two 30 mm and two 20 mm forward-firing cannon, plus a remotely operated dorsal turret with two 20 mm cannon. Only prototypes were completed before the war ended, and the type never entered service.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Aichi S1A",
+        url: "https://en.wikipedia.org/wiki/Aichi_S1A",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J8M1",
+    displayName: "Mitsubishi J8M1 Shūsui",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 30mm Type 5 (53 rounds per gun)",
+      },
+    ],
+    description: "The Mitsubishi J8M1 Shūsui was a rocket-powered interceptor developed from German Me 163 data for the Imperial Japanese Navy. Its tailless airframe carried two 30 mm Type 5 cannon, but the KR-10 rocket motor gave only about five and a half minutes of powered flight. The first prototype crashed during its initial powered flight in July 1945, and the type never entered combat.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Mitsubishi J8M Shūsui",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi_J8M",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
     name: "jiujiang",
     displayName: "Jiujiang",
     type: "Frigate",
@@ -3002,6 +3076,15 @@
   {
     name: "JP/20",
     displayName: "20mm Single AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "JP/30/Type5",
+    displayName: "30mm Type 5 Cannon",
     type: "Weapon",
     armaments: [],
     description: "",

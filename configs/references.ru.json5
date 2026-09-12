@@ -2843,6 +2843,80 @@
     ],
   },
   {
+    name: "J7W1",
+    displayName: "J7W1 Синдэн",
+    armaments: [
+      {
+        label: "Пушки (носовые)",
+        value: "4 x 30-мм Тип 5",
+      },
+    ],
+    description: "Kyūshū J7W1 Shinden — японский одноместный истребитель-перехватчик схемы «утка» с задним расположением двигателя и шестилопастным толкающим винтом. Он создавался для борьбы с высотными B-29 и должен был нести четыре 30-мм пушки Тип 5. До конца войны построили только два прототипа; первый полёт состоялся 3 августа 1945 года, в бой самолёт не вступал.",
+    author: "",
+    links: [
+      {
+        name: "Википедия — Kyushu J7W Shinden",
+        url: "https://ru.wikipedia.org/wiki/Kyushu_J7W_Shinden",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "S1A1",
+    displayName: "Aichi S1A1 «Дэнко»",
+    armaments: [
+      {
+        label: "Пушки (носовые)",
+        value: "2 x 30-мм Тип 5",
+      },
+      {
+        label: "Пушки (носовые)",
+        value: "2 x 20-мм Тип 99 модель 1",
+      },
+      {
+        label: "Пушки (задние)",
+        value: "2 x 20-мм Тип 99 модель 2",
+      },
+    ],
+    description: "Aichi S1A1 Denkō — японский двухмоторный ночной истребитель, созданный для Императорского флота для перехвата B-29. Он нёс две 30-мм и две 20-мм пушки в носу, а также дистанционно управляемую башню с двумя 20-мм пушками. До конца войны успели построить только прототипы, и самолёт не поступил на вооружение.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Aichi S1A",
+        url: "https://en.wikipedia.org/wiki/Aichi_S1A",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J8M1",
+    displayName: "Mitsubishi J8M1 «Сюсуй»",
+    armaments: [
+      {
+        label: "Пушки (крыльевые)",
+        value: "2 x 30-мм Тип 5 (по 53 снаряда)",
+      },
+    ],
+    description: "Mitsubishi J8M1 Shūsui — ракетный истребитель-перехватчик Императорского флота, созданный на основе немецких материалов по Me 163. Бесхвостый планер нёс две 30-мм пушки Тип 5, но запас топлива KR-10 обеспечивал лишь около пяти с половиной минут работы двигателя. Первый прототип разбился во время первого полёта с работающим двигателем в июле 1945 года, и в бой самолёт не вступал.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Mitsubishi J8M Shūsui",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi_J8M",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
     name: "jiujiang",
     displayName: "Цзюцзян",
     type: "Фрегат",
@@ -3002,6 +3076,15 @@
   {
     name: "JP/20",
     displayName: "20mm одноствольная зенитная установка",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "JP/30/Type5",
+    displayName: "30-мм пушка Тип 5",
     type: "Оружие",
     armaments: [],
     description: "",

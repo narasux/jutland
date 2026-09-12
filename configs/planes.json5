@@ -2125,6 +2125,53 @@
     }
   },
   {
+    // 震电（试作局地战斗机）
+    name: "J7W1",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 40,
+    damageReduction: 0.45,
+    maxSpeed: 750,
+    acceleration: 35,
+    rotateSpeed: 11,
+    length: 9.66,
+    width: 11.114,
+    fundsCost: 8,
+    timeCost: 5,
+    tonnage: 4.928,
+    range: 852,
+    weapon: {
+      guns: [
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
     // 九九式
     name: "D3A1",
     nation: "jp",
@@ -2318,6 +2365,108 @@
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 电光（试作双发夜间战斗机）
+    name: "S1A1",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 58,
+    damageReduction: 0.55,
+    maxSpeed: 580,
+    acceleration: 26,
+    rotateSpeed: 8,
+    length: 15.1,
+    width: 17.5,
+    fundsCost: 16,
+    timeCost: 8,
+    tonnage: 11.51,
+    range: 1697,
+    weapon: {
+      guns: [
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（30mm 五式，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm 九九式一号，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm 九九式一号，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背遥控炮塔（20mm 九九式二号，后半球）
+        {
+          name: "JP/20",
+          posPercent: 0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机背遥控炮塔（20mm 九九式二号，后半球）
+        {
+          name: "JP/20",
+          posPercent: 0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 秋水（试作火箭动力局地战斗机）
+    name: "J8M1",
+    nation: "jp",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 27,
+    damageReduction: 0.35,
+    maxSpeed: 900,
+    acceleration: 55,
+    rotateSpeed: 13,
+    length: 6.03,
+    width: 9.47,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 3.87,
+    range: 365,
+    weapon: {
+      guns: [
+        // 机翼（30mm 五式，各 53 发，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（30mm 五式，各 53 发，固定前射）
+        {
+          name: "JP/30/Type5",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
         }
       ]
     }

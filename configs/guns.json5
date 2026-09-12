@@ -1068,6 +1068,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 日本海军 五式 30mm 机炮
+  {
+    name: "JP/30/Type5",
+    bulletName: "JP/GB/30/1945",
+    bulletCount: 1,
+    reloadTime: 0.12,
+    range: 3,
+    bulletSpread: 25,
+    bulletSpeed: 750,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 日本海军 三联装 25 毫米机炮
   {
     name: "JP/25/60/3",

@@ -2843,6 +2843,80 @@
     ],
   },
   {
+    name: "J7W1",
+    displayName: "J7W1 震電",
+    armaments: [
+      {
+        label: "機首機銃",
+        value: "4 x 30mm 五式",
+      },
+    ],
+    description: "J7W1 震電は、前翼と後部推進式六枚羽根プロペラを備えた日本海軍の単座局地戦闘機である。B-29迎撃を目的として機首に30mm五式機銃を4門搭載する計画だったが、完成した試作機は2機のみで、1945年8月3日の初飛行後に終戦を迎え、実戦には投入されなかった。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 震電",
+        url: "https://ja.wikipedia.org/wiki/%E9%9C%87%E9%9B%BB",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "S1A1",
+    displayName: "S1A1 電光",
+    armaments: [
+      {
+        label: "機首機銃",
+        value: "2 x 30mm 五式",
+      },
+      {
+        label: "機首機銃",
+        value: "2 x 20mm 九九式一号",
+      },
+      {
+        label: "後方機銃",
+        value: "2 x 20mm 九九式二号",
+      },
+    ],
+    description: "S1A1 電光は、B-29迎撃のために日本海軍が開発した双発夜間戦闘機である。機首に30mm五式2門と20mm九九式一号2門を固定装備し、機背の遠隔操作銃塔に20mm九九式二号2門を備えた。試作機のみで終戦を迎え、実戦には投入されなかった。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Aichi S1A",
+        url: "https://en.wikipedia.org/wiki/Aichi_S1A",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
+    name: "J8M1",
+    displayName: "J8M1 秋水",
+    armaments: [
+      {
+        label: "機翼砲",
+        value: "2 x 30mm 五式（各53発）",
+      },
+    ],
+    description: "J8M1 秋水は、ドイツのMe 163の資料を基に日本海軍が開発したロケット動力の局地戦闘機である。無尾翼の機体に30mm五式2門を搭載したが、KR-10ロケット機関の作動時間は約5分30秒に限られた。1945年7月の初の動力飛行で試作1号機を失い、実戦には投入されなかった。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — Mitsubishi J8M Shūsui",
+        url: "https://en.wikipedia.org/wiki/Mitsubishi_J8M",
+      },
+      {
+        name: "Wikipedia — Type 5 cannon",
+        url: "https://en.wikipedia.org/wiki/Type_5_cannon",
+      },
+    ],
+  },
+  {
     name: "jiujiang",
     displayName: "九江",
     type: "フリゲート",
@@ -3002,6 +3076,15 @@
   {
     name: "JP/20",
     displayName: "20mm 単装機銃",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "JP/30/Type5",
+    displayName: "30mm 五式機銃",
     type: "兵器",
     armaments: [],
     description: "",
