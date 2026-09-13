@@ -58,6 +58,14 @@
     damage: 2050,
     criticalRate: 0.01
   },
+  // 美国海军 13 英寸/35 穿甲弹（奇尔沙治级）
+  {
+    name: "US/GB/330/1900",
+    type: "shell",
+    diameter: 330,
+    damage: 1900,
+    criticalRate: 0.012
+  },
   {
     name: "US/GB/305/1942",
     type: "shell",
@@ -71,6 +79,14 @@
     diameter: 203,
     damage: 450,
     criticalRate: 0.01
+  },
+  // 美国海军 7 英寸/44 穿甲弹（康涅狄格级）
+  {
+    name: "US/GB/178/1910",
+    type: "shell",
+    diameter: 178,
+    damage: 300,
+    criticalRate: 0.008
   },
   // 155 mm/62 AGS 无制导远程弹，约 90 kg
   {

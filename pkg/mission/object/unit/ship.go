@@ -73,6 +73,10 @@ func (t ShipType) ToDisplay() string {
 // HospitalShipEffectRange 医疗船效果范围（地图三格）
 const HospitalShipEffectRange = 3
 
+// ShipSpeedScale 是 ships.json5 中 maxSpeed（节）折算为内部速度的除数，
+// 图鉴档案、编队补充卡与单位信息面板都用它把内部速度还原回配置的节数。
+const ShipSpeedScale = 600 * 2
+
 // BattleShip 战舰
 type BattleShip struct {
 	// 名称

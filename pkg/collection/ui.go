@@ -1785,7 +1785,7 @@ func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []obj
 			Label: i18n.Text(i18n.MsgCollectionSpeed),
 			Value: i18n.Format(
 				i18n.MsgValueKnots,
-				map[string]any{"Value": formatShipArchiveNumber(ship.MaxSpeed * 600)},
+				map[string]any{"Value": formatShipArchiveNumber(ship.MaxSpeed * objUnit.ShipSpeedScale)},
 			),
 		},
 		{
@@ -2189,7 +2189,10 @@ func (c *CollectionUI) drawPlaneCard(
 				"Width":  formatShipArchiveNumber(plane.Width),
 			}),
 		}),
-		i18n.Format(i18n.MsgCollectionPlaneSpeed, map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*5400)}),
+		i18n.Format(
+			i18n.MsgCollectionPlaneSpeed,
+			map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*objUnit.PlaneSpeedScale)},
+		),
 		i18n.Format(i18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}),
 	}
 	for idx, line := range basicLines {

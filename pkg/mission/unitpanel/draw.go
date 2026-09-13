@@ -349,8 +349,12 @@ func (p *Panel) shipGroups(ms *state.MissionState, ship *objUnit.BattleShip) []i
 		{label: i18n.Text(i18n.MsgUnitPanelType), value: ship.Type.ToDisplay()},
 		{label: "HP", value: fmt.Sprintf("%.0f%%", ship.CurHP/ship.TotalHP*100), numeric: true},
 		{
-			label:   i18n.Text(i18n.MsgUnitPanelSpeed),
-			value:   fmt.Sprintf("%.1f / %.1f", ship.CurSpeed*600, ship.MaxSpeed*600),
+			label: i18n.Text(i18n.MsgUnitPanelSpeed),
+			value: fmt.Sprintf(
+				"%.1f / %.1f",
+				ship.CurSpeed*objUnit.ShipSpeedScale,
+				ship.MaxSpeed*objUnit.ShipSpeedScale,
+			),
 			numeric: true,
 		},
 		{
@@ -383,7 +387,7 @@ func (p *Panel) fleetGroup(ships []*objUnit.BattleShip) infoGroup {
 	var hpPercent, speed float64
 	for _, ship := range ships {
 		hpPercent += ship.CurHP / ship.TotalHP * 100
-		speed += ship.CurSpeed * 600
+		speed += ship.CurSpeed * objUnit.ShipSpeedScale
 	}
 	focusName := i18n.Text(i18n.MsgUnitPanelNoTarget)
 	if ship := focusedShipFromSlice(ships, p.lastFocus); ship != nil {

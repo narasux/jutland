@@ -1140,6 +1140,45 @@
     links: [],
   },
   {
+    name: "connecticut",
+    displayName: "Connecticut",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x2 305mm/45",
+      },
+      {
+        label: "Secondary Guns",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "Secondary Guns",
+        value: "12x1 178mm/44",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "20x1 76mm/50",
+      },
+      {
+        label: "Torpedoes",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "USS Connecticut (BB-18) was the lead ship of her pre-dreadnought class, commissioned in 1906 and long-serving flagship of the Atlantic Fleet, which she led on the 1907-1909 Great White Fleet cruise. She carried four 305mm/45 and eight 203mm/45 guns in twin turrets, twelve 178mm/44 and twenty 76mm/50 secondary guns, and four submerged 533mm torpedo tubes. She was decommissioned in 1919 and scrapped in 1923.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-18 Connecticut 1909",
+        url: "https://www.shipbucket.com/drawings/7450",
+      },
+      {
+        name: "Wikipedia — USS Connecticut (BB-18)",
+        url: "https://en.wikipedia.org/wiki/USS_Connecticut_(BB-18)",
+      },
+    ],
+  },
+  {
     name: "courageous",
     displayName: "Courageous",
     type: "Aircraft Carrier",
@@ -3548,23 +3587,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "8x2 133mm/50",
+        value: "8x2 133mm (5.25in) QF Mark I",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x4 40mm/39",
+        value: "2x8 + 2x4 40mm Pom-pom (2-pdr Mark VIII)",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x8 40mm/39",
-      },
-      {
-        label: "Dual-purpose Guns",
-        value: "4x4 1910mm",
+        value: "4x4 12.7mm (MG Mark III)",
       },
       {
         label: "Torpedoes",
-        value: "2x4 533mm",
+        value: "2x3 533mm",
       },
     ],
     description: "K-25 was one of several British cruiser studies explored during development of the Crown Colony class in the mid-1930s. The proposal examined fitting twin 5.25-inch dual-purpose turrets to a protected cruiser hull of roughly 8,000 tons. It remained a design study and was not selected for construction.",
@@ -3620,6 +3655,37 @@
       {
         name: "Wikipedia — Kaga",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Kaga",
+      },
+    ],
+  },
+  {
+    name: "kentucky",
+    displayName: "Kentucky",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x2 330mm/35",
+      },
+      {
+        label: "Secondary Guns",
+        value: "2x2 203mm/35",
+      },
+      {
+        label: "Secondary Guns",
+        value: "18x1 127mm/40",
+      },
+    ],
+    description: "USS Kentucky (BB-6) was the second Kearsarge-class pre-dreadnought, commissioned in 1900 with an unusual two-storey turret arrangement: a twin 203mm/35 turret superposed on each twin 330mm/35 main turret, backed by eighteen 127mm/40 secondary guns. By 1915 her torpedo tubes had been removed and she carried no anti-aircraft armament. She served as a training ship in the First World War, was decommissioned in 1920 and scrapped in 1923.",
+    author: "Darth Panda, David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-6 Kentucky 1915",
+        url: "https://www.shipbucket.com/drawings/7441",
+      },
+      {
+        name: "Wikipedia — USS Kentucky (BB-6)",
+        url: "https://en.wikipedia.org/wiki/USS_Kentucky_(BB-6)",
       },
     ],
   },
@@ -5124,6 +5190,41 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "south_carolina",
+    displayName: "South Carolina",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 305mm/45",
+      },
+      {
+        label: "Secondary Guns",
+        value: "12x1 76mm/50",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 76mm/50",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x1 533mm",
+      },
+    ],
+    description: "USS South Carolina (BB-26) was the first American dreadnought and lead ship of her class, commissioned in 1910. She replaced the intermediate battery with four twin 305mm/45 turrets on the centreline, but congressional tonnage limits held her to 18.5 knots. The 1920 fit keeps twelve 76mm/50 secondary guns and two anti-aircraft guns added in 1918. She was decommissioned in 1921 and scrapped in 1924.",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-26 South Carolina 1920",
+        url: "https://www.shipbucket.com/drawings/7455",
+      },
+      {
+        name: "Wikipedia — USS South Carolina (BB-26)",
+        url: "https://en.wikipedia.org/wiki/USS_South_Carolina_(BB-26)",
+      },
+    ],
   },
   {
     name: "thanet",
@@ -7174,6 +7275,15 @@
     links: [],
   },
   {
+    name: "US/127/40/MK3",
+    displayName: "127mm/40 Single Mount Mk 3",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 5-inch/40 Mark 3 gun served as the anti-torpedo-boat battery of pre-dreadnoughts such as the Kearsarge class. In game it is modelled with a 6-second reload, 14 km range and 730 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/127/51/MK15",
     displayName: "127mm/51 Single Mount Mk15",
     type: "Weapon",
@@ -7224,6 +7334,15 @@
     links: [],
   },
   {
+    name: "US/152/50/MK6",
+    displayName: "152mm/50 Single Mount Mk 6",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 6-inch/50 Mark 6 gun served as the secondary battery of the Virginia-class battleships. In game it is modelled with a 7-second reload, 18 km range and 850 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/155/62/MK51",
     displayName: "155mm/62 Advanced Gun System Mk51",
     type: "Weapon",
@@ -7243,6 +7362,15 @@
     type: "Weapon",
     armaments: [],
     description: "The triple mounting for the U.S. Navy 6-inch/47 Mk16 gun equipped Brooklyn-, St. Louis-, Cleveland-, and Fargo-class light cruisers. In the game it is modeled for surface fire, unlike the later twin Mk16DP dual-purpose mounting.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/178/44/MK2",
+    displayName: "178mm/44 Single Mount Mk 2",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 7-inch/44 Mark 2 gun served as the secondary battery of the Connecticut-class battleships. In game it is modelled with a 9-second reload, 17 km range and 820 m/s muzzle velocity.",
     author: "",
     links: [],
   },
@@ -7304,6 +7432,24 @@
         url: "https://www.navweaps.com/Weapons/WNUS_Phalanx.php",
       },
     ],
+  },
+  {
+    name: "US/203/35/2/MK4",
+    displayName: "203mm/35 Twin Mount Mk 4",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 8-inch/35 Mark 4 gun was mounted superposed on the 13-inch turrets of the Kearsarge class and turned with them. In game it is modelled with a 12-second reload, 15 km range and 640 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/203/45/2/MK6",
+    displayName: "203mm/45 Twin Mount Mk 6",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 8-inch/45 Mark 6 gun formed the intermediate battery of the Connecticut- and Virginia-class battleships. In game it is modelled with a 10-second reload, 20 km range and 840 m/s muzzle velocity.",
+    author: "",
+    links: [],
   },
   {
     name: "US/203/55/2/MK9",
@@ -7369,6 +7515,24 @@
     links: [],
   },
   {
+    name: "US/305/40/2/MK3",
+    displayName: "305mm/40 Twin Mount Mk 3",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 12-inch/40 Mark 3 gun armed pre-dreadnoughts such as the Virginia and Connecticut classes. In game it is modelled with an 18-second reload, 22 km range and 730 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/305/45/2/MK5",
+    displayName: "305mm/45 Twin Mount Mk 5",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 12-inch/45 Mark 5 gun armed battleships of the South Carolina and Connecticut classes. In game it is modelled with a 16-second reload, 26 km range and 823 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/305/50/2/MK7",
     displayName: "305mm/50 Twin Mount Mk 7",
     type: "Weapon",
@@ -7397,6 +7561,15 @@
     type: "Weapon",
     armaments: [],
     description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/330/35/2/MK2",
+    displayName: "330mm/35 Twin Mount Mk 2",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 13-inch/35 Mark 2 gun armed the Kearsarge-class battleships in twin turrets. Hampered by low muzzle velocity and limited elevation, it is modelled with a 24-second reload, 20 km range and 640 m/s muzzle velocity.",
     author: "",
     links: [],
   },
@@ -7747,6 +7920,45 @@
     ],
   },
   {
+    name: "vermont",
+    displayName: "Vermont",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x2 305mm/45",
+      },
+      {
+        label: "Secondary Guns",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "Secondary Guns",
+        value: "12x1 178mm/44",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "20x1 76mm/50",
+      },
+      {
+        label: "Torpedoes",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "USS Vermont (BB-20) was the last Connecticut-class pre-dreadnought, commissioned in 1907 with a mixed battery of four 305mm/45 and eight 203mm/45 guns in twin turrets. Her 1917 fit retains twelve 178mm/44 secondary guns, twenty 76mm/50 light guns and four submerged 533mm torpedo tubes. She served as a training ship in the First World War, was decommissioned in 1920 and scrapped in 1923.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-20 Vermont",
+        url: "https://www.shipbucket.com/drawings/7451",
+      },
+      {
+        name: "Wikipedia — USS Vermont (BB-20)",
+        url: "https://en.wikipedia.org/wiki/USS_Vermont_(BB-20)",
+      },
+    ],
+  },
+  {
     name: "vickers",
     displayName: "Vickers 758A",
     type: "Light Cruiser",
@@ -7829,6 +8041,45 @@
       {
         name: "Wikipedia — HMS Victorious",
         url: "https://en.wikipedia.org/wiki/HMS_Victorious_%28R38%29",
+      },
+    ],
+  },
+  {
+    name: "virginia",
+    displayName: "Virginia",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x2 305mm/40",
+      },
+      {
+        label: "Secondary Guns",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "Secondary Guns",
+        value: "12x1 152mm/50",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "12x1 76mm/50",
+      },
+      {
+        label: "Torpedoes",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "USS Virginia (BB-13) was the lead ship of her pre-dreadnought class, commissioned in 1906 and present at the 1914 Veracruz incident. She mounted two twin 305mm/40 turrets, four twin 203mm/45 turrets, two of them superposed on the main turrets, twelve 152mm/50 and twelve 76mm/50 guns, plus four submerged 533mm torpedo tubes. She was decommissioned in 1920 and sunk as a target in 1922.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-13 Virginia 1913",
+        url: "https://www.shipbucket.com/drawings/7447",
+      },
+      {
+        name: "Wikipedia — USS Virginia (BB-13)",
+        url: "https://en.wikipedia.org/wiki/USS_Virginia_(BB-13)",
       },
     ],
   },

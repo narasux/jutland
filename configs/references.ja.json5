@@ -1140,6 +1140,45 @@
     links: [],
   },
   {
+    name: "connecticut",
+    displayName: "コネチカット",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x2 305mm/45",
+      },
+      {
+        label: "副砲",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "副砲",
+        value: "12x1 178mm/44",
+      },
+      {
+        label: "対空砲",
+        value: "20x1 76mm/50",
+      },
+      {
+        label: "魚雷",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "コネチカット（BB-18）はコネチカット級前弩級戦艦の一番艦で、1906 年就役。大西洋艦隊旗艦として 1907 年から 1909 年の世界巡航を率いた。兵装は 305mm/45 主砲 4 門、203mm/45 連装副砲塔 4 基、178mm/44 副砲 12 門、76mm/50 軽砲 20 門、533mm 水中魚雷発射管 4 門。1919 年退役、1923 年解体。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-18 Connecticut 1909",
+        url: "https://www.shipbucket.com/drawings/7450",
+      },
+      {
+        name: "ウィキペディア — USS Connecticut (BB-18)",
+        url: "https://en.wikipedia.org/wiki/USS_Connecticut_(BB-18)",
+      },
+    ],
+  },
+  {
     name: "courageous",
     displayName: "カレイジャス",
     type: "空母",
@@ -3548,23 +3587,19 @@
     armaments: [
       {
         label: "主砲",
-        value: "8x2 133mm/50",
+        value: "8x2 133mm (5.25in) QF Mark I",
       },
       {
         label: "対空砲",
-        value: "2x4 40mm/39",
+        value: "2x8 + 2x4 40mm Pom-pom (2-pdr Mark VIII)",
       },
       {
         label: "対空砲",
-        value: "2x8 40mm/39",
-      },
-      {
-        label: "両用砲",
-        value: "4x4 1910mm",
+        value: "4x4 12.7mm (MG Mark III)",
       },
       {
         label: "魚雷",
-        value: "2x4 533mm",
+        value: "2x3 533mm",
       },
     ],
     description: "K-25は、1930年代半ばにクラウン・コロニー級を開発する過程で検討された英国巡洋艦案の一つである。約8,000トンの防御巡洋艦船体に、5.25インチ連装両用砲塔を搭載する構想だった。設計研究に留まり、建造案には採用されなかった。",
@@ -3620,6 +3655,37 @@
       {
         name: "ウィキペディア — 加賀",
         url: "https://en.wikipedia.org/wiki/Japanese%20aircraft%20carrier%20Kaga",
+      },
+    ],
+  },
+  {
+    name: "kentucky",
+    displayName: "ケンタッキー",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x2 330mm/35",
+      },
+      {
+        label: "副砲",
+        value: "2x2 203mm/35",
+      },
+      {
+        label: "副砲",
+        value: "18x1 127mm/40",
+      },
+    ],
+    description: "ケンタッキー（BB-6）はキアサージ級前弩級戦艦の二番艦で、1900 年就役。330mm/35 連装主砲塔の上に 203mm/35 連装副砲塔を載せた珍しい二段式砲塔を採用し、127mm/40 副砲 18 門を備えた。1915 年時点で魚雷発射管はすべて撤去され、対空兵装もない。第一次世界大戦では練習任務に就き、1920 年退役、1923 年解体。",
+    author: "Darth Panda, David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-6 Kentucky 1915",
+        url: "https://www.shipbucket.com/drawings/7441",
+      },
+      {
+        name: "ウィキペディア — ケンタッキー (BB-6)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B1%E3%83%B3%E3%82%BF%E3%83%83%E3%82%AD%E3%83%BC_(BB-6)",
       },
     ],
   },
@@ -5124,6 +5190,41 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "south_carolina",
+    displayName: "サウスカロライナ",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 305mm/45",
+      },
+      {
+        label: "副砲",
+        value: "12x1 76mm/50",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 76mm/50",
+      },
+      {
+        label: "魚雷",
+        value: "2x1 533mm",
+      },
+    ],
+    description: "サウスカロライナ（BB-26）はアメリカ海軍初のドレッドノートであり、同級の一番艦。1910 年就役。中間砲を廃して 305mm/45 連装砲塔 4 基を中心線上に背負式で配置したが、議会の排水量制限により速力は 18.5 ノットにとどまった。1920 年時点では 76mm/50 副砲 12 門と 1918 年追加の高角砲 2 門を装備し、1921 年退役、1924 年解体。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-26 South Carolina 1920",
+        url: "https://www.shipbucket.com/drawings/7455",
+      },
+      {
+        name: "ウィキペディア — サウスカロライナ級戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%82%A6%E3%82%B9%E3%82%AB%E3%83%AD%E3%83%A9%E3%82%A4%E3%83%8A%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
   },
   {
     name: "thanet",
@@ -7174,6 +7275,15 @@
     links: [],
   },
   {
+    name: "US/127/40/MK3",
+    displayName: "127mm/40 Mk 3 単装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の5インチ40口径Mk 3砲はキアサージ級などの前弩級戦艦の水雷艇防御砲であった。本作では装填6秒、射程14km、初速730m/s。",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/127/51/MK15",
     displayName: "127mm/51 Mk15 単装砲",
     type: "兵器",
@@ -7224,6 +7334,15 @@
     links: [],
   },
   {
+    name: "US/152/50/MK6",
+    displayName: "152mm/50 Mk 6 単装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の6インチ50口径Mk 6砲はバージニア級戦艦の副砲であった。本作では装填7秒、射程18km、初速850m/s。",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/155/62/MK51",
     displayName: "155mm/62 Mk51 先進艦砲",
     type: "兵器",
@@ -7243,6 +7362,15 @@
     type: "兵器",
     armaments: [],
     description: "米海軍の6インチ/47 Mk16砲を収める三連装砲塔で、ブルックリン級、セントルイス級、クリーブランド級、ファーゴ級軽巡洋艦の主砲として用いられた。ゲームでは対水上用として扱い、後の連装Mk16DPのような両用性能は持たない。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/178/44/MK2",
+    displayName: "178mm/44 Mk 2 単装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の7インチ44口径Mk 2砲はコネチカット級戦艦の副砲であった。本作では装填9秒、射程17km、初速820m/s。",
     author: "",
     links: [],
   },
@@ -7304,6 +7432,24 @@
         url: "https://www.navweaps.com/Weapons/WNUS_Phalanx.php",
       },
     ],
+  },
+  {
+    name: "US/203/35/2/MK4",
+    displayName: "203mm/35 Mk 4 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の8インチ35口径Mk 4砲はキアサージ級の13インチ主砲塔上に背負式で搭載され、主砲塔と共に旋回した。本作では装填12秒、射程15km、初速640m/s。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/203/45/2/MK6",
+    displayName: "203mm/45 Mk 6 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の8インチ45口径Mk 6砲はコネチカット級・バージニア級戦艦の中間砲であった。本作では装填10秒、射程20km、初速840m/s。",
+    author: "",
+    links: [],
   },
   {
     name: "US/203/55/2/MK9",
@@ -7369,6 +7515,24 @@
     links: [],
   },
   {
+    name: "US/305/40/2/MK3",
+    displayName: "305mm/40 Mk 3 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の12インチ40口径Mk 3砲はバージニア級やコネチカット級などの前弩級戦艦に搭載された。本作では装填18秒、射程22km、初速730m/s。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/305/45/2/MK5",
+    displayName: "305mm/45 Mk 5 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の12インチ45口径Mk 5砲はサウスカロライナ級やコネチカット級などの戦艦に搭載された。本作では装填16秒、射程26km、初速823m/s。",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/305/50/2/MK7",
     displayName: "305mm/50 Mk 7 連装砲",
     type: "兵器",
@@ -7397,6 +7561,15 @@
     type: "兵器",
     armaments: [],
     description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/330/35/2/MK2",
+    displayName: "330mm/35 Mk 2 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の13インチ35口径Mk 2砲はキアサージ級戦艦に連装砲塔で搭載された。低初速・低仰角のため、本作では装填24秒、射程20km、初速640m/sとして表現される。",
     author: "",
     links: [],
   },
@@ -7747,6 +7920,45 @@
     ],
   },
   {
+    name: "vermont",
+    displayName: "ヴァーモント",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x2 305mm/45",
+      },
+      {
+        label: "副砲",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "副砲",
+        value: "12x1 178mm/44",
+      },
+      {
+        label: "対空砲",
+        value: "20x1 76mm/50",
+      },
+      {
+        label: "魚雷",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "ヴァーモント（BB-20）はコネチカット級前弩級戦艦の最後の一隻で、1907 年就役。305mm/45 主砲 4 門と 203mm/45 連装副砲塔 4 基という混載兵装を備える。1917 年時点では 178mm/44 副砲 12 門、76mm/50 軽砲 20 門、533mm 水中魚雷発射管 4 門を保持した。第一次世界大戦では練習艦任務に就き、1920 年退役、1923 年解体。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-20 Vermont",
+        url: "https://www.shipbucket.com/drawings/7451",
+      },
+      {
+        name: "ウィキペディア — ヴァーモント (戦艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A1%E3%83%BC%E3%83%A2%E3%83%B3%E3%83%88_(%E6%88%A6%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "vickers",
     displayName: "ビッカース758A",
     type: "軽巡洋艦",
@@ -7829,6 +8041,45 @@
       {
         name: "ウィキペディア — ヴィクトリアス",
         url: "https://en.wikipedia.org/wiki/HMS_Victorious_%28R38%29",
+      },
+    ],
+  },
+  {
+    name: "virginia",
+    displayName: "バージニア",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x2 305mm/40",
+      },
+      {
+        label: "副砲",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "副砲",
+        value: "12x1 152mm/50",
+      },
+      {
+        label: "対空砲",
+        value: "12x1 76mm/50",
+      },
+      {
+        label: "魚雷",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "バージニア（BB-13）はバージニア級前弩級戦艦の一番艦で、1906 年就役。1914 年のベラクルス事件に参加した。305mm/40 連装主砲塔 2 基、203mm/45 連装副砲塔 4 基（うち 2 基は主砲塔上に背負式）、152mm/50 副砲 12 門、76mm/50 軽砲 12 門、533mm 水中魚雷発射管 4 門を装備した。1920 年退役、1922 年に標的艦として撃沈。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket — BB-13 Virginia 1913",
+        url: "https://www.shipbucket.com/drawings/7447",
+      },
+      {
+        name: "ウィキペディア — バージニア (戦艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%82%B8%E3%83%8B%E3%82%A2_(%E6%88%A6%E8%89%A6)",
       },
     ],
   },

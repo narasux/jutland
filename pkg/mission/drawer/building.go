@@ -469,7 +469,7 @@ func (d *Drawer) drawReinforceShipInfo(
 				label: i18n.Text(i18n.MsgReinforceSpeed),
 				value: i18n.Format(
 					i18n.MsgValueKnots,
-					map[string]any{"Value": fmt.Sprintf("%.1f", ship.MaxSpeed*600)},
+					map[string]any{"Value": fmt.Sprintf("%.1f", ship.MaxSpeed*objUnit.ShipSpeedScale)},
 				),
 			},
 			{

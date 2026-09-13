@@ -2708,6 +2708,11 @@
           "nevada",
           "new_york",
           "arkansas",
+          "south_carolina",
+          "vermont",
+          "connecticut",
+          "virginia",
+          "kentucky",
           "edo",
           "satsuma",
           "yamato",
@@ -3350,156 +3355,187 @@
         rotation: 90,
         belongPlayer: "HA"
       },
+      // === US BB ===
       {
         name: "nevada",
-        pos: [35, 55],
+        pos: [38, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "new_york",
-        pos: [34, 56],
+        pos: [37, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "arkansas",
-        pos: [35, 57],
+        pos: [38, 47],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "south_carolina",
+        pos: [37, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "vermont",
+        pos: [38, 49],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "connecticut",
+        pos: [37, 50],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "virginia",
+        pos: [38, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "kentucky",
+        pos: [37, 52],
         rotation: 90,
         belongPlayer: "HA"
       },
       // === US CA ===
       {
         name: "puerto_rico",
-        pos: [38, 45],
+        pos: [40, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "alaska",
-        pos: [37, 46],
+        pos: [39, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "des_moines",
-        pos: [38, 47],
+        pos: [40, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "oregon_city",
-        pos: [37, 48],
+        pos: [39, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "baltimore",
-        pos: [38, 49],
+        pos: [40, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "astoria",
-        pos: [37, 50],
+        pos: [39, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "northampton",
-        pos: [38, 51],
+        pos: [40, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "portland",
-        pos: [37, 52],
+        pos: [39, 52],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "pensacola",
-        pos: [38, 53],
+        pos: [40, 53],
         rotation: 90,
         belongPlayer: "HA"
       },
       // === US CL ===
       {
         name: "long_beach",
-        pos: [41, 45],
+        pos: [43, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "long_beach_scheme_D",
-        pos: [40, 46],
+        pos: [42, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "uss_worcester_1958",
-        pos: [41, 47],
+        pos: [43, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "fargo",
-        pos: [40, 48],
+        pos: [42, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "charlotte",
-        pos: [41, 49],
+        pos: [43, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "atlanta",
-        pos: [40, 50],
+        pos: [42, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "st_louis",
-        pos: [41, 51],
+        pos: [43, 51],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "brooklyn",
-        pos: [40, 52],
+        pos: [42, 52],
         rotation: 90,
         belongPlayer: "HA"
       },
       // === US TB/DD ===
       {
         name: "hammann",
-        pos: [43, 45],
+        pos: [45, 45],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "maury",
-        pos: [42, 46],
+        pos: [44, 46],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "porter",
-        pos: [43, 47],
+        pos: [45, 47],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "dewey",
-        pos: [42, 48],
+        pos: [44, 48],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "PT_791",
-        pos: [43, 49],
+        pos: [45, 49],
         rotation: 90,
         belongPlayer: "HA"
       },

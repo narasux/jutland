@@ -13568,6 +13568,1168 @@
       ]
     }
   },
+  // 美国海军 - 前无畏舰与无畏舰
+  {
+    // 南卡罗来纳号（BB-26）
+    name: "south_carolina",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1920,
+    totalHP: 17617,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 18.5,
+    acceleration: 0.24,
+    rotateSpeed: 0.8,
+    length: 138,
+    width: 24,
+    fundsCost: 340,
+    timeCost: 85,
+    weapon: {
+      mainGuns: [
+        // 4 座双联装 305mm/45 Mark 5 主炮（背负式）
+        // 前主炮 A
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: 0.5,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 前主炮 B（超射）
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: 0.33,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮 C（超射）
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: -0.47,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        // 后主炮 D
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: -0.64,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 12 门 76mm/50 单装炮（两舷）
+        {
+          name: "US/76/50",
+          posPercent: 0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 2 门 76mm/50 单装高炮（两舷）
+        {
+          name: "US/76/50",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 2 具 533mm 水下鱼雷发射管（两舷）
+        // 右舷鱼雷
+        {
+          name: "US/533/1",
+          posPercent: -0.1,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷
+        {
+          name: "US/533/1",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        }
+      ],
+      rockets: [],
+    }
+  },
+  {
+    // 佛蒙特号（BB-20）
+    name: "vermont",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1917,
+    totalHP: 17666,
+    horizontalDamageReduction: 0.26,
+    verticalDamageReduction: 0.18,
+    maxSpeed: 18,
+    acceleration: 0.24,
+    rotateSpeed: 0.8,
+    length: 139,
+    width: 24,
+    fundsCost: 360,
+    timeCost: 87,
+    weapon: {
+      mainGuns: [
+        // 2 座双联装 305mm/45 Mark 5 主炮
+        // 前主炮 A
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: 0.44,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮 B
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: -0.5,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 4 座双联装 203mm/45 Mark 6 副炮塔（两舷）+ 12 门 178mm/44 Mark 2
+        // 右舷前副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: 0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 20 门 76mm/50 单装炮（两舷）
+        {
+          name: "US/76/50",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 4 具 533mm 水下鱼雷发射管（两舷）
+        // 右舷鱼雷 A
+        {
+          name: "US/533/1",
+          posPercent: 0.15,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "US/533/1",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        },
+        // 右舷鱼雷 B
+        {
+          name: "US/533/1",
+          posPercent: -0.15,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          name: "US/533/1",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        }
+      ],
+      rockets: [],
+    }
+  },
+  {
+    // 康涅狄格号（BB-18）
+    name: "connecticut",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1909,
+    totalHP: 17666,
+    horizontalDamageReduction: 0.26,
+    verticalDamageReduction: 0.18,
+    maxSpeed: 18,
+    acceleration: 0.24,
+    rotateSpeed: 0.8,
+    length: 139,
+    width: 24,
+    fundsCost: 360,
+    timeCost: 87,
+    weapon: {
+      mainGuns: [
+        // 2 座双联装 305mm/45 Mark 5 主炮
+        // 前主炮 A
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: 0.44,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮 B
+        {
+          name: "US/305/45/2/MK5",
+          posPercent: -0.5,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 4 座双联装 203mm/45 Mark 6 副炮塔（两舷）+ 12 门 178mm/44 Mark 2
+        // 右舷前副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: 0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: 0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/178/44/MK2",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 20 门 76mm/50 单装炮（两舷）
+        {
+          name: "US/76/50",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 4 具 533mm 水下鱼雷发射管（两舷）
+        // 右舷鱼雷 A
+        {
+          name: "US/533/1",
+          posPercent: 0.15,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "US/533/1",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        },
+        // 右舷鱼雷 B
+        {
+          name: "US/533/1",
+          posPercent: -0.15,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          name: "US/533/1",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        }
+      ],
+      rockets: [],
+    }
+  },
+  {
+    // 弗吉尼亚号（BB-13）
+    name: "virginia",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1913,
+    totalHP: 16094,
+    horizontalDamageReduction: 0.26,
+    verticalDamageReduction: 0.18,
+    maxSpeed: 19,
+    acceleration: 0.26,
+    rotateSpeed: 0.82,
+    length: 134,
+    width: 23,
+    fundsCost: 345,
+    timeCost: 85,
+    weapon: {
+      mainGuns: [
+        // 2 座双联装 305mm/40 Mark 3 主炮
+        // 前主炮 A
+        {
+          name: "US/305/40/2/MK3",
+          posPercent: 0.44,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮 B
+        {
+          name: "US/305/40/2/MK3",
+          posPercent: -0.49,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 4 座双联装 203mm/45 Mark 6 + 12 门 152mm/50 Mark 6 副炮
+        // 前主炮塔背负副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: 0.44,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮塔背负副炮
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: -0.49,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        // 右舷副炮塔
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮塔
+        {
+          name: "US/203/45/2/MK6",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: -0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/152/50/MK6",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 12 门 76mm/50 单装炮（两舷）
+        {
+          name: "US/76/50",
+          posPercent: 0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/76/50",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 4 具 533mm 水下鱼雷发射管（两舷）
+        // 右舷鱼雷 A
+        {
+          name: "US/533/1",
+          posPercent: 0.15,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "US/533/1",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        },
+        // 右舷鱼雷 B
+        {
+          name: "US/533/1",
+          posPercent: -0.15,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 B
+        {
+          name: "US/533/1",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 315]
+        }
+      ],
+      rockets: [],
+    }
+  },
+  {
+    // 肯塔基号（BB-6）
+    name: "kentucky",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1915,
+    totalHP: 12850,
+    horizontalDamageReduction: 0.22,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 16,
+    acceleration: 0.28,
+    rotateSpeed: 0.85,
+    length: 114,
+    width: 22,
+    fundsCost: 290,
+    timeCost: 85,
+    weapon: {
+      mainGuns: [
+        // 2 座双联装 330mm/35 Mark 2 主炮（双层炮塔）
+        // 前主炮 A
+        {
+          name: "US/330/35/2/MK2",
+          posPercent: 0.47,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮 B
+        {
+          name: "US/330/35/2/MK2",
+          posPercent: -0.54,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 2 座双联装 203mm/35 Mark 4（背负于主炮塔）+ 18 门 127mm/40 Mark 3
+        // 前主炮塔背负副炮
+        {
+          name: "US/203/35/2/MK4",
+          posPercent: 0.47,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后主炮塔背负副炮
+        {
+          name: "US/203/35/2/MK4",
+          posPercent: -0.54,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: 0.0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.18,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/40/MK3",
+          posPercent: -0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [],
+      torpedoes: [],
+      rockets: [],
+    }
+  },
   // 日本海军
   {
     // 金刚
@@ -28610,14 +29772,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "UK/533/4",
+          name: "UK/533/3",
           posPercent: -0.34,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "UK/533/4",
+          name: "UK/533/3",
           posPercent: -0.34,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]

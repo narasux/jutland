@@ -9,6 +9,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/narasux/jutland/pkg/i18n"
+	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -299,6 +300,22 @@ func TestShipArchiveInfoItemsIncludeLengthAndWidth(t *testing.T) {
 		i18n.Format(i18n.MsgValueLengthWidth, map[string]any{"Length": "493", "Width": "54"}),
 		got[i18n.Text(i18n.MsgCollectionDimensions)],
 	)
+}
+
+func TestShipArchiveSpeedShowsConfiguredKnots(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+
+	// 衣阿华在 ships.json5 中配置的最高航速为 33 节，档案卡必须显示 33，
+	// 而不是初始化折算（除以 ShipSpeedScale）后未还原的一半数值。
+	ship := objUnit.ShipMap["lowa"]
+	require.NotNil(t, ship)
+	got := map[string]string{}
+	for _, item := range shipArchiveInfoItems(ship, nil) {
+		got[item.Label] = item.Value
+	}
+	require.Equal(t, "33 节", got[i18n.Text(i18n.MsgCollectionSpeed)])
 }
 
 func TestCollectionScaleBarUsesFixedHundredMeters(t *testing.T) {

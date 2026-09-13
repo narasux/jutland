@@ -62,6 +62,10 @@ func (t PlaneType) AttacksShips() bool {
 	}
 }
 
+// PlaneSpeedScale 是 planes.json5 中 maxSpeed（km/h）折算为内部速度的除数，
+// 图鉴档案用它把内部速度还原回配置的 km/h。
+const PlaneSpeedScale = 3000 * 1.8 * 2
+
 // Plane 战机
 type Plane struct {
 	// 名称

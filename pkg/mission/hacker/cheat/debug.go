@@ -156,22 +156,22 @@ func (c *ShowAirfieldRunway) Exec(misState *state.MissionState) string {
 
 var _ Cheat = (*ShowAirfieldRunway)(nil)
 
-// DumpMisState 将当前帧的完整 MissionState 写入 debug 目录。
-type DumpMisState struct{}
+// DumpMissionState 将当前帧的完整 MissionState 写入 debug 目录。
+type DumpMissionState struct{}
 
-func (c *DumpMisState) String() string {
+func (c *DumpMissionState) String() string {
 	return "dump mission state"
 }
 
-func (c *DumpMisState) Desc() string {
+func (c *DumpMissionState) Desc() string {
 	return "export the complete mission state as JSON"
 }
 
-func (c *DumpMisState) Match(cmd string) bool {
+func (c *DumpMissionState) Match(cmd string) bool {
 	return isCommandEqual(c.String(), cmd)
 }
 
-func (c *DumpMisState) Exec(misState *state.MissionState) string {
+func (c *DumpMissionState) Exec(misState *state.MissionState) string {
 	data, err := json.MarshalIndent(misState, "", "  ")
 	if err != nil {
 		return fmt.Sprintf("dump mission state failed: %v", err)
@@ -187,4 +187,4 @@ func (c *DumpMisState) Exec(misState *state.MissionState) string {
 	return "mission state dumped to " + path
 }
 
-var _ Cheat = (*DumpMisState)(nil)
+var _ Cheat = (*DumpMissionState)(nil)

@@ -2201,6 +2201,189 @@
     ],
   },
   {
+    name: "south_carolina",
+    displayName: "南卡罗来纳",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 305mm/45",
+      },
+      {
+        label: "副炮",
+        value: "12x1 76mm/50",
+      },
+      {
+        label: "高炮",
+        value: "2x1 76mm/50",
+      },
+      {
+        label: "鱼雷",
+        value: "2x1 533mm",
+      },
+    ],
+    description: "南卡罗来纳号（BB-26）是美国海军第一艘无畏舰，也是南卡罗来纳级首舰，1910 年服役。它取消中间口径炮，改为 4 座双联装 305mm/45 主炮沿中线背负布置，但受国会吨位限制，航速只有 18.5 节。1920 年状态保留 12 门 76mm/50 副炮和 1918 年加装的 2 门高炮，1921 年退役，1924 年出售拆解。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - BB-26 South Carolina 1920",
+        url: "https://www.shipbucket.com/drawings/7455",
+      },
+      {
+        name: "维基百科 - 南卡羅萊納號戰艦",
+        url: "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%8D%A1%E7%BE%85%E8%90%8A%E7%B4%8D%E8%99%9F%E6%88%B0%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "vermont",
+    displayName: "佛蒙特",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x2 305mm/45",
+      },
+      {
+        label: "副炮",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "副炮",
+        value: "12x1 178mm/44",
+      },
+      {
+        label: "高炮",
+        value: "20x1 76mm/50",
+      },
+      {
+        label: "鱼雷",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "佛蒙特号（BB-20）是康涅狄格级前无畏舰的末舰，1907 年服役，同级采用 4 门 305mm/45 主炮与 8 门 203mm/45 副炮塔的混装布局。1917 年状态保留 12 门 178mm/44 副炮、20 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。该舰在第一次世界大战中承担训练任务，1920 年退役，1923 年拆解。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - BB-20 Vermont",
+        url: "https://www.shipbucket.com/drawings/7451",
+      },
+      {
+        name: "维基百科 - 佛蒙特號戰艦",
+        url: "https://zh.wikipedia.org/wiki/%E4%BD%9B%E8%92%99%E7%89%B9%E8%99%9F%E6%88%B0%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "connecticut",
+    displayName: "康涅狄格",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x2 305mm/45",
+      },
+      {
+        label: "副炮",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "副炮",
+        value: "12x1 178mm/44",
+      },
+      {
+        label: "高炮",
+        value: "20x1 76mm/50",
+      },
+      {
+        label: "鱼雷",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "康涅狄格号（BB-18）是康涅狄格级前无畏舰首舰，1906 年服役，长期担任大西洋舰队旗舰并率队完成 1907 至 1909 年环球航行。武备为 4 门 305mm/45 主炮、8 门 203mm/45 副炮塔、12 门 178mm/44 副炮、20 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。1919 年退役，1923 年拆解。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - BB-18 Connecticut 1909",
+        url: "https://www.shipbucket.com/drawings/7450",
+      },
+      {
+        name: "维基百科 - 康涅狄格號戰艦",
+        url: "https://zh.wikipedia.org/wiki/%E5%BA%B7%E6%B6%85%E7%8B%84%E6%A0%BC%E8%99%9F%E6%88%B0%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "virginia",
+    displayName: "弗吉尼亚",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x2 305mm/40",
+      },
+      {
+        label: "副炮",
+        value: "4x2 203mm/45",
+      },
+      {
+        label: "副炮",
+        value: "12x1 152mm/50",
+      },
+      {
+        label: "高炮",
+        value: "12x1 76mm/50",
+      },
+      {
+        label: "鱼雷",
+        value: "4x1 533mm",
+      },
+    ],
+    description: "弗吉尼亚号（BB-13）是弗吉尼亚级前无畏舰首舰，1906 年服役，1914 年参加韦拉克鲁斯事件。它装备 2 座双联装 305mm/40 主炮、4 座双联装 203mm/45 副炮塔（其中 2 座背负于主炮塔之上）、12 门 152mm/50 副炮、12 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。1920 年退役，1922 年作为靶舰击沉。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - BB-13 Virginia 1913",
+        url: "https://www.shipbucket.com/drawings/7447",
+      },
+      {
+        name: "维基百科 - 維珍尼亞號戰艦",
+        url: "https://zh.wikipedia.org/wiki/%E7%B6%AD%E7%8F%8D%E5%B0%BC%E4%BA%9E%E8%99%9F%E6%88%B0%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "kentucky",
+    displayName: "肯塔基",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x2 330mm/35",
+      },
+      {
+        label: "副炮",
+        value: "2x2 203mm/35",
+      },
+      {
+        label: "副炮",
+        value: "18x1 127mm/40",
+      },
+    ],
+    description: "肯塔基号（BB-6）是奇尔沙治级前无畏舰二号舰，1900 年服役，采用罕见的双层炮塔：每座双联装 330mm/35 主炮塔上都背负 1 座双联装 203mm/35 副炮，另有 18 门 127mm/40 副炮。1915 年状态已拆除全部鱼雷发射管，也没有防空武器。该舰在第一次世界大战中执行训练任务，1920 年退役，1923 年拆解。",
+    author: "Darth Panda, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - BB-6 Kentucky 1915",
+        url: "https://www.shipbucket.com/drawings/7441",
+      },
+      {
+        name: "维基百科 - 肯塔基號戰艦_(BB-6)",
+        url: "https://zh.wikipedia.org/wiki/%E8%82%AF%E5%A1%94%E5%9F%BA%E8%99%9F%E6%88%B0%E8%89%A6_(BB-6)",
+      },
+    ],
+  },
+  {
     name: "kongo",
     displayName: "金刚",
     type: "战列巡洋舰",
@@ -4251,23 +4434,19 @@
     armaments: [
       {
         label: "主炮",
-        value: "8x2 133mm/50",
+        value: "8x2 133mm (5.25英寸) QF Mark I",
       },
       {
         label: "高炮",
-        value: "2x4 40mm/39",
+        value: "2x8 + 2x4 40mm Pom-pom (2-pdr Mark VIII)",
       },
       {
         label: "高炮",
-        value: "2x8 40mm/39",
-      },
-      {
-        label: "高平炮",
-        value: "4x4 1910mm",
+        value: "4x4 12.7mm (MG Mark III)",
       },
       {
         label: "鱼雷",
-        value: "2x4 533mm",
+        value: "2x3 533mm",
       },
     ],
     description: "K-25 是英国皇家海军于 1936 年在皇冠殖民地级设计发展过程中提出的一组轻巡研究方案，核心思路是在约 8000 吨舰体上探索搭载化双联 133mm 炮塔的可能，体现出英国在战前对防护型高平两用巡洋舰路线的尝试。",
@@ -6332,6 +6511,15 @@
     links: [],
   },
   {
+    name: "US/127/40/MK3",
+    displayName: "127mm/40 单装舰炮 Mk3",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 5 英寸/40 Mark 3 舰炮，是奇尔沙治级等前无畏舰的反雷击炮。游戏中按 6 秒装填、14 千米射程与 730 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/457/45/3/MK1",
     displayName: "457mm/45 三联装舰炮 Mk1",
     type: "武器",
@@ -6404,11 +6592,38 @@
     links: [],
   },
   {
+    name: "US/330/35/2/MK2",
+    displayName: "330mm/35 双联装舰炮 Mk2",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 13 英寸/35 Mark 2 舰炮，以双联装炮塔装备奇尔沙治级战列舰。该炮初速与仰角偏低，游戏中按 24 秒装填、20 千米射程与 640 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
     name: "US/356/45/2/MK1",
     displayName: "356mm/45 双联装舰炮 Mk1",
     type: "武器",
     armaments: [],
     description: "美国海军 14 英寸/45 Mk 1 双联装舰炮，游戏中用于纽约号战列舰。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/305/40/2/MK3",
+    displayName: "305mm/40 双联装舰炮 Mk3",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 12 英寸/40 Mark 3 舰炮，装备弗吉尼亚级与康涅狄格级等前无畏舰。游戏中按 18 秒装填、22 千米射程与 730 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/305/45/2/MK5",
+    displayName: "305mm/45 双联装舰炮 Mk5",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 12 英寸/45 Mark 5 舰炮，装备南卡罗来纳级与康涅狄格级等战列舰。游戏中按 16 秒装填、26 千米射程与 823 m/s 初速表现。",
     author: "",
     links: [],
   },
@@ -6432,6 +6647,24 @@
     type: "武器",
     armaments: [],
     description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/203/35/2/MK4",
+    displayName: "203mm/35 双联装舰炮 Mk4",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 8 英寸/35 Mark 4 舰炮，安装在奇尔沙治级 13 英寸主炮塔之上，随主炮塔一同回旋。游戏中按 12 秒装填、15 千米射程与 640 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/203/45/2/MK6",
+    displayName: "203mm/45 双联装舰炮 Mk6",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 8 英寸/45 Mark 6 舰炮，是康涅狄格级与弗吉尼亚级战列舰的二级主炮。游戏中按 10 秒装填、20 千米射程与 840 m/s 初速表现。",
     author: "",
     links: [],
   },
@@ -6504,6 +6737,15 @@
     type: "武器",
     armaments: [],
     description: "伍斯特级采用的双联装 6 英寸/47 Mk16DP，具备全角装填与高俯仰、训练速度，可兼顾对海和远程防空射击。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/152/50/MK6",
+    displayName: "152mm/50 单装舰炮 Mk6",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 6 英寸/50 Mark 6 舰炮，是弗吉尼亚级战列舰的副炮。游戏中按 7 秒装填、18 千米射程与 850 m/s 初速表现。",
     author: "",
     links: [],
   },
@@ -6711,6 +6953,15 @@
         url: "https://www.navweaps.com/Weapons/WNUS_Phalanx.php",
       },
     ],
+  },
+  {
+    name: "US/178/44/MK2",
+    displayName: "178mm/44 单装舰炮 Mk2",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 7 英寸/44 Mark 2 舰炮，是康涅狄格级战列舰的副炮。游戏中按 9 秒装填、17 千米射程与 820 m/s 初速表现。",
+    author: "",
+    links: [],
   },
   {
     name: "US/20/70",

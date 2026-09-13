@@ -264,7 +264,7 @@ func initPlaneMap() {
 		// 当前生命值
 		p.CurHP = p.TotalHP
 		// 折算移动速度（公里换成节）
-		p.MaxSpeed /= 3000 * 1.8 * 2
+		p.MaxSpeed /= objUnit.PlaneSpeedScale
 		// 折算总航程
 		p.Range /= 8
 		// 剩余航程
@@ -391,7 +391,7 @@ func initShipMap() {
 		// 计算吨位（即最大生命值）
 		s.Tonnage = s.TotalHP
 		// 折算移动速度
-		s.MaxSpeed /= 600 * 2
+		s.MaxSpeed /= objUnit.ShipSpeedScale
 		// 折算加速度
 		s.Acceleration /= 600 * 2
 		// 折算转向速度
