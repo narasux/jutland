@@ -6,7 +6,6 @@ import (
 	goTextFont "github.com/go-text/typesetting/font"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/narasux/jutland/pkg/i18n"
-	"github.com/narasux/jutland/pkg/utils/layout"
 	"github.com/stretchr/testify/require"
 )
 
@@ -30,10 +29,22 @@ func TestForTextFallsBackForCJKContent(t *testing.T) {
 	require.Same(t, ZenKakuGothicNew, ForText("日本語インターフェース 艦戦闘機", JetbrainsMono))
 }
 
-func TestLanguageSelectorCoversLanguageNames(t *testing.T) {
-	for _, value := range []string{"中文", "English", "Русский", "日本語"} {
-		require.NotZero(t, layout.CalcTextWidth(value, 22, LanguageSelector()))
+func TestLanguageSelectorCoversSettingsText(t *testing.T) {
+	sources := []*text.GoTextFaceSource{Kai, ZenKakuGothicNew, GolosText}
+	for _, value := range []string{"慢", "标准", "快", "中文", "English", "Русский", "日本語"} {
+		for _, r := range value {
+			covered := false
+			for _, source := range sources {
+				face := source.UnsafeInternal().(*goTextFont.Face)
+				if _, ok := face.Cmap.Lookup(r); ok {
+					covered = true
+					break
+				}
+			}
+			require.Truef(t, covered, "no selector font covers %q in %q", r, value)
+		}
 	}
+	require.NotNil(t, LanguageSelectorFace(22))
 }
 
 func TestLocalizedUIFontsContainDropdownArrow(t *testing.T) {

@@ -76,9 +76,18 @@ func LocalizedTitle(chinese *text.GoTextFaceSource) *text.GoTextFaceSource {
 	}
 }
 
-// LanguageSelector 返回能覆盖四种语言自称的设置页字体。
-func LanguageSelector() *text.GoTextFaceSource {
-	return ZenKakuGothicNew
+// LanguageSelectorFace 返回能覆盖设置页文本的四语言复合字体。
+func LanguageSelectorFace(size float64) text.Face {
+	sources := []*text.GoTextFaceSource{Kai, ZenKakuGothicNew, GolosText}
+	faces := make([]text.Face, len(sources))
+	for idx, source := range sources {
+		faces[idx] = &text.GoTextFace{Source: source, Size: size}
+	}
+	face, err := text.NewMultiFace(faces...)
+	if err != nil {
+		log.Fatalf("failed to create language selector face: %v", err)
+	}
+	return face
 }
 
 // ForText 按实际文本内容选择能覆盖字形的字体。

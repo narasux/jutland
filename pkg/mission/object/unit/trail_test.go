@@ -1,9 +1,11 @@
 package unit
 
 import (
+	"math"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
@@ -80,6 +82,36 @@ func TestSurfaceShipWakeMatchesOriginalWhitePair(t *testing.T) {
 	}
 	if trails[0].CurLife != ship.Length/8+555*ship.CurSpeed {
 		t.Fatalf("default bow life=%v, want full ship length", trails[0].CurLife)
+	}
+}
+
+func TestSurfaceShipWakeLengthIsIndependentOfGlobalSpeed(t *testing.T) {
+	previous := config.G
+	t.Cleanup(func() { config.G = previous })
+
+	var wantLength float64
+	for idx, multiplier := range []float64{
+		config.SpeedSlowMultiplier,
+		config.SpeedStandardMultiplier,
+		config.SpeedFastMultiplier,
+	} {
+		config.G = &config.GameSettings{SpeedMultiplier: multiplier}
+		ship := &BattleShip{
+			Length:   128,
+			Width:    20,
+			MaxSpeed: 0.1,
+			CurSpeed: 0.1 * multiplier,
+			CurPos:   objPos.NewR(10, 10),
+		}
+		trails := ship.GenTrails()
+		gotLength := ship.CurSpeed * trails[0].CurLife / (trails[0].LifeReductionRate * multiplier)
+		if idx == 0 {
+			wantLength = gotLength
+			continue
+		}
+		if math.Abs(gotLength-wantLength) > 1e-9 {
+			t.Fatalf("wake length at multiplier %v = %v, want %v", multiplier, gotLength, wantLength)
+		}
 	}
 }
 

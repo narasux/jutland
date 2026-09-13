@@ -9,6 +9,15 @@ import (
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 )
 
+const (
+	// SpeedSlowMultiplier 慢档全局速度倍率。
+	SpeedSlowMultiplier = 0.50
+	// SpeedStandardMultiplier 标准档全局速度倍率。
+	SpeedStandardMultiplier = 1.00
+	// SpeedFastMultiplier 快档全局速度倍率。
+	SpeedFastMultiplier = 2.00
+)
+
 var BaseDir = detectBaseDir()
 
 // detectBaseDir 兼容从仓库子目录启动的 Go 测试，同时保留从可执行文件旁加载资源的能力。
@@ -53,7 +62,7 @@ var (
 // GameSettings 游戏设置配置
 type GameSettings struct {
 	// SpeedMultiplier 全局速度倍率，影响战舰、炮弹、鱼雷、飞机等移动速度
-	// 默认值为 1.0，0.25 ~ 4.0
+	// 可选值为 0.50 / 1.00 / 2.00
 	SpeedMultiplier float64 `json:"speedMultiplier"`
 	// Language 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja。
 	Language string `json:"language"`
@@ -67,20 +76,29 @@ var G *GameSettings
 // NewDefaultGameSettings 创建默认游戏设置
 func NewDefaultGameSettings() *GameSettings {
 	return &GameSettings{
-		SpeedMultiplier:    1.0,
+		SpeedMultiplier:    SpeedStandardMultiplier,
 		Language:           "zh-Hans",
 		EnableLandAirfield: true,
 	}
 }
 
+func normalizeSpeedMultiplier(value float64) float64 {
+	if math.IsNaN(value) {
+		return SpeedStandardMultiplier
+	}
+	switch {
+	case value <= (SpeedSlowMultiplier+SpeedStandardMultiplier)/2:
+		return SpeedSlowMultiplier
+	case value <= (SpeedStandardMultiplier+SpeedFastMultiplier)/2:
+		return SpeedStandardMultiplier
+	default:
+		return SpeedFastMultiplier
+	}
+}
+
 // validate 校验并修正游戏设置
 func (s *GameSettings) validate() {
-	// 处理 NaN 特殊情况（NaN 无法通过 min/max 处理）
-	if math.IsNaN(s.SpeedMultiplier) {
-		s.SpeedMultiplier = 1.0
-	}
-	// 限制范围 0.25 ~ 4.0
-	s.SpeedMultiplier = math.Max(0.25, math.Min(4.0, s.SpeedMultiplier))
+	s.SpeedMultiplier = normalizeSpeedMultiplier(s.SpeedMultiplier)
 	switch s.Language {
 	case "zh-Hans", "en", "ru", "ja":
 	default:
@@ -155,10 +173,10 @@ func SaveGameSettings() error {
 	// 写入JSON5格式的注释头部
 	_, _ = file.WriteString("// 游戏设置配置文件\n")
 	_, _ = file.WriteString(
-		"// SpeedMultiplier: 全局速度倍率（极慢=0.25 / 慢=0.50 / 正常=1.00 / 快=2.00 / 极快=4.00），" +
+		"// SpeedMultiplier: 全局速度倍率（慢=0.50 / 标准=1.00 / 快=2.00），" +
 			"影响战舰、炮弹、鱼雷、飞机等移动/转向速度\n",
 	)
-	_, _ = file.WriteString("// 范围: 0.25 ~ 4.0，默认值: 1.0\n\n")
+	_, _ = file.WriteString("// 范围: 0.50 ~ 2.00，默认值: 1.00\n\n")
 	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n")
 	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n\n")
 

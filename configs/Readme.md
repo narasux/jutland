@@ -688,8 +688,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 {
   // 全局速度倍率
   // 影响战舰、炮弹、鱼雷、飞机等移动/转向速度
-  // 范围: 0.25 ~ 4.0，默认值: 1.0
-  "speedMultiplier": 1.0,
+  // 可选值: 慢=0.50 / 标准=1.00 / 快=2.00
+  // 范围: 0.50 ~ 2.00，默认值: 1.00
+  "speedMultiplier": 1.00,
   // 游戏界面语言；当前正式启用 zh-Hans / en / ru / ja
   "language": "zh-Hans"
 }

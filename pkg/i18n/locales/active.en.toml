@@ -59,7 +59,7 @@ other = "Very Slow"
 [SpeedSlow]
 other = "Slow"
 [SpeedNormal]
-other = "Normal"
+other = "Standard"
 [SpeedFast]
 other = "Fast"
 [SpeedVeryFast]

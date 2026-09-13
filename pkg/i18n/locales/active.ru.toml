@@ -59,7 +59,7 @@ other = "Очень медленно"
 [SpeedSlow]
 other = "Медленно"
 [SpeedNormal]
-other = "Нормально"
+other = "Стандартно"
 [SpeedFast]
 other = "Быстро"
 [SpeedVeryFast]

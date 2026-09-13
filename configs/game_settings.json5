@@ -1,12 +1,12 @@
 // 游戏设置配置文件
-// SpeedMultiplier: 全局速度倍率（极慢=0.25 / 慢=0.50 / 正常=1.00 / 快=2.00 / 极快=4.00），影响战舰、炮弹、鱼雷、飞机等移动/转向速度
-// 范围: 0.25 ~ 4.0，默认值: 1.0
+// SpeedMultiplier: 全局速度倍率（慢=0.50 / 标准=1.00 / 快=2.00），影响战舰、炮弹、鱼雷、飞机等移动/转向速度
+// 范围: 0.50 ~ 2.00，默认值: 1.00
 
 // Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja
 // EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场
 
 {
-  "speedMultiplier": 0.5,
+  "speedMultiplier": 2,
   "language": "zh-Hans",
   "enableLandAirfield": true
 }

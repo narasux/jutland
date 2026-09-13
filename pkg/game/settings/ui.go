@@ -36,11 +36,9 @@ type speedOption struct {
 
 // 速度选项定义
 var speedOptions = []speedOption{
-	{i18n.MsgSpeedVerySlow, 0.25},
-	{i18n.MsgSpeedSlow, 0.50},
-	{i18n.MsgSpeedNormal, 1.00},
-	{i18n.MsgSpeedFast, 2.00},
-	{i18n.MsgSpeedVeryFast, 4.00},
+	{i18n.MsgSpeedSlow, config.SpeedSlowMultiplier},
+	{i18n.MsgSpeedNormal, config.SpeedStandardMultiplier},
+	{i18n.MsgSpeedFast, config.SpeedFastMultiplier},
 }
 
 // UI 游戏设置 UI
@@ -171,12 +169,14 @@ func (s *UI) buildUI() {
 		speedEntries[idx] = speedOptions[idx]
 	}
 	if selectedIndex < 0 {
-		selectedIndex = 2
+		selectedIndex = 1
 	}
+	// 速度与语言下拉框统一使用能覆盖四种语言字形的字体。
+	comboFaceValue := font.LanguageSelectorFace(buttonFontSize)
 	speedCombo := newSettingsCombo(
 		speedEntries,
 		speedOptions[selectedIndex],
-		buttonFace,
+		&comboFaceValue,
 		func(entry any) string { return i18n.Text(entry.(speedOption).Label) },
 		func(entry any) string { return i18n.Text(entry.(speedOption).Label) },
 		func(entry any) { s.selectSpeed(entry.(speedOption).Value) },
@@ -194,12 +194,10 @@ func (s *UI) buildUI() {
 	for idx := range languages {
 		languageEntries[idx] = languages[idx]
 	}
-	// 语言列表固定使用能完整覆盖中文、拉丁、西里尔和日文字形的字体。
-	languageFaceValue := text.Face(&text.GoTextFace{Source: font.LanguageSelector(), Size: buttonFontSize})
 	languageCombo := newSettingsCombo(
 		languageEntries,
 		s.localLanguage,
-		&languageFaceValue,
+		&comboFaceValue,
 		func(entry any) string { return entry.(i18n.Language).NativeName() },
 		func(entry any) string { return entry.(i18n.Language).NativeName() },
 		func(entry any) { s.selectLanguage(entry.(i18n.Language)) },

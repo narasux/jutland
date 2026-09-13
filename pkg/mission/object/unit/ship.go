@@ -322,7 +322,7 @@ func (s *BattleShip) GenTrails() []*objTrail.Trail {
 			objTrail.New(
 				s.CurPos, textureImg.TrailShapeRect,
 				(0.4+(s.CurSpeed/s.MaxSpeed))*s.Width*0.5, -2,
-				s.Length/6+150*s.CurSpeed, 5,
+				s.Length/6+150*s.baseCurSpeed(), 5,
 				0, s.CurRotation, colorx.SkyBlue,
 			),
 		}
@@ -387,6 +387,15 @@ func (s *BattleShip) hullWakeLength(hull WakeHull) float64 {
 	return s.Length * span
 }
 
+// baseCurSpeed 返回未乘全局速度倍率的当前航速，用于生成与倍率无关的尾流寿命。
+func (s *BattleShip) baseCurSpeed() float64 {
+	multiplier := 1.0
+	if config.G != nil {
+		multiplier = max(config.G.SpeedMultiplier, 0.001)
+	}
+	return s.CurSpeed / multiplier
+}
+
 func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objTrail.Trail {
 	lengthCells := s.Length / constants.MapBlockSize
 	lateralCells := hull.Lateral / constants.MapBlockSize
@@ -405,13 +414,13 @@ func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objT
 		objTrail.New(
 			frontPos, textureImg.TrailShapeCircle,
 			hull.Width*0.6, 1.1,
-			wakeLength/8+555*s.CurSpeed, 1,
+			wakeLength/8+555*s.baseCurSpeed(), 1,
 			0, 0, nil,
 		),
 		objTrail.New(
 			backPos, textureImg.TrailShapeCircle,
 			hull.Width, 0.6,
-			wakeLength/9+380*s.CurSpeed, 1.5,
+			wakeLength/9+380*s.baseCurSpeed(), 1.5,
 			0, 0, nil,
 		),
 	}

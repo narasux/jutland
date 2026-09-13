@@ -263,13 +263,16 @@ func initPlaneMap() {
 
 		// 当前生命值
 		p.CurHP = p.TotalHP
-		// 折算速度（公里换成节）
-		p.MaxSpeed /= 3000 * 1.8
+		// 折算移动速度（公里换成节）
+		p.MaxSpeed /= 3000 * 1.8 * 2
 		// 折算总航程
 		p.Range /= 8
 		// 剩余航程
 		p.RemainRange = p.Range
-		p.Acceleration /= 600
+		// 折算加速度
+		p.Acceleration /= 600 * 2
+		// 折算转向速度
+		p.RotateSpeed /= 2
 		// 检查伤害减免值不能超过 1
 		p.DamageReduction = min(1, p.DamageReduction)
 		objUnit.PlaneMap[p.Name] = &p
@@ -387,9 +390,12 @@ func initShipMap() {
 		s.CurHP = s.TotalHP
 		// 计算吨位（即最大生命值）
 		s.Tonnage = s.TotalHP
-		// 折算速度
-		s.MaxSpeed /= 600
-		s.Acceleration /= 600
+		// 折算移动速度
+		s.MaxSpeed /= 600 * 2
+		// 折算加速度
+		s.Acceleration /= 600 * 2
+		// 折算转向速度
+		s.RotateSpeed /= 2
 		// 检查伤害减免值不能超过 1
 		s.HorizontalDamageReduction = min(1, s.HorizontalDamageReduction)
 		s.VerticalDamageReduction = min(1, s.VerticalDamageReduction)
