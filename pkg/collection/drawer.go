@@ -162,10 +162,14 @@ func planeArmamentItems(plane *objUnit.Plane) []objRef.InfoItem {
 			counts[name]++
 		}
 		for _, name := range order {
+			displayName := name
+			if ref := objRef.GetReference(name); ref != nil && ref.DisplayName != "" {
+				displayName = ref.DisplayName
+			}
 			items = append(items, objRef.InfoItem{
 				Label: label,
 				Value: i18n.Format(i18n.MsgItemCount, map[string]any{
-					"Name": name, "Count": counts[name],
+					"Name": displayName, "Count": counts[name],
 				}),
 			})
 		}

@@ -2008,7 +2008,7 @@
       },
       {
         label: "爆弾（水平爆撃）",
-        value: "内蔵弾倉 2000 ポンド x2 + 1000 ポンド x2（約 2.7 トン）；翼下ラックに 2000 ポンド追加可能",
+        value: "2000 ポンド x2 + 1000 ポンド x2（約 2.7 トン）",
       },
       {
         label: "ロケット弾（翼下）",
@@ -2086,7 +2086,7 @@
       },
       {
         label: "爆弾（水平爆撃）",
-        value: "4000 ポンド（1000 ポンド x4、約 1.8 トン）標準；改良型は 6000 ポンドまで",
+        value: "1000 ポンド x4（約 1.8 トン）",
       },
     ],
     description: "マーチン B-26 マローダーは米陸軍の中型爆撃機で、1941 年に実戦配備。高速・高機動で武装も強力（図は第386爆撃航空群第533飛行隊の B-26B「Rot poison」）。ゲーム内では水平爆撃機として扱われ、12.7mm ブローニング M2 を 12 挺（前方 6：胴体側面 4 + 機首 2；防御 6：機背 2・尾部 2・腰部 2）装備する。",
@@ -2338,8 +2338,89 @@
     links: [],
   },
   {
+    name: "GER/AIR/7.92/MG81",
+    displayName: "7.92mm MG 81 航空機関銃",
+    type: "兵器",
+    armaments: [],
+    description: "ドイツ空軍の7.92mm旋回機関銃。公称発射速度は毎分約1,600発。",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/7.92/MG81Z",
     displayName: "7.92mm MG 81Z 連装機関銃",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/50",
+    displayName: "50kg SC 50 航空爆弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/250",
+    displayName: "250kg SC 250 航空爆弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/50/LB",
+    displayName: "50kg SC 50 航空爆弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/250/LB",
+    displayName: "250kg SC 250 航空爆弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/500/LB",
+    displayName: "500kg SC 500 航空爆弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/1000/LB",
+    displayName: "1000kg SC 1000 航空爆弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/1400/LB",
+    displayName: "1400kg PC 1400 フリッツX 誘導爆弾",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/BB/1800/LB",
+    displayName: "1800kg SC 1800 航空爆弾",
     type: "兵器",
     armaments: [],
     description: "",
@@ -2939,7 +3020,7 @@
         url: "https://ja.wikipedia.org/wiki/%E9%9C%87%E9%9B%BB",
       },
       {
-        name: "Wikipedia — Type 5 cannon",
+        name: "ウィキペディア — 五式機関砲",
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
@@ -2965,11 +3046,11 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — Nakajima J5N",
+        name: "ウィキペディア — 中島 J5N 天雷",
         url: "https://en.wikipedia.org/wiki/Nakajima_J5N",
       },
       {
-        name: "Wikipedia — Type 5 cannon",
+        name: "ウィキペディア — 五式機関砲",
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
@@ -2995,11 +3076,11 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — Nakajima Kikka",
+        name: "ウィキペディア — 中島 橘花",
         url: "https://en.wikipedia.org/wiki/Nakajima_Kikka",
       },
       {
-        name: "Wikipedia — Type 5 cannon",
+        name: "ウィキペディア — 五式機関砲",
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
@@ -3029,11 +3110,11 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — Aichi S1A",
+        name: "ウィキペディア — 愛知 S1A 電光",
         url: "https://en.wikipedia.org/wiki/Aichi_S1A",
       },
       {
-        name: "Wikipedia — Type 5 cannon",
+        name: "ウィキペディア — 五式機関砲",
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
@@ -3051,11 +3132,11 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — Mitsubishi J8M Shūsui",
+        name: "ウィキペディア — 三菱 J8M 秋水",
         url: "https://en.wikipedia.org/wiki/Mitsubishi_J8M",
       },
       {
-        name: "Wikipedia — Type 5 cannon",
+        name: "ウィキペディア — 五式機関砲",
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
@@ -8168,11 +8249,11 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — Kawanishi J6K",
+        name: "ウィキペディア — 川西 J6K 陣風",
         url: "https://en.wikipedia.org/wiki/Kawanishi_J6K",
       },
       {
-        name: "Wikipedia — Type 5 cannon",
+        name: "ウィキペディア — 五式機関砲",
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
@@ -8194,11 +8275,11 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — Mitsubishi J4M Senden",
+        name: "ウィキペディア — 三菱 J4M 閃電",
         url: "https://en.wikipedia.org/wiki/Mitsubishi_J4M_Senden",
       },
       {
-        name: "Wikipedia — Type 5 cannon",
+        name: "ウィキペディア — 五式機関砲",
         url: "https://en.wikipedia.org/wiki/Type_5_cannon",
       },
     ],
@@ -8516,6 +8597,15 @@
     type: "武器",
     armaments: [],
     description: "ドイツ空軍の同期式 7.92mm 航空機銃で、公称発射速度は毎分約 1,200 発。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/AIR/7.92/MG15",
+    displayName: "7.92mm MG 15 航空機銃",
+    type: "武器",
+    armaments: [],
+    description: "ドイツ空軍の 7.92mm 旋回機銃で、公称発射速度は毎分約 1,050 発。",
     author: "",
     links: [],
   },

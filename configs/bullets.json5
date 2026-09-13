@@ -758,6 +758,50 @@
     damage: 125,
     criticalRate: 0.002
   },
+  // 德国航空炸弹（伤害按装药量和现有炸弹尺度归一化）
+  {
+    name: "GER/BB/50/1937",
+    type: "bomb",
+    diameter: 200,
+    damage: 170,
+    criticalRate: 0.003
+  },
+  {
+    name: "GER/BB/250/1938",
+    type: "bomb",
+    diameter: 380,
+    damage: 800,
+    criticalRate: 0.015
+  },
+  {
+    name: "GER/BB/500/1940",
+    type: "bomb",
+    diameter: 470,
+    damage: 1800,
+    criticalRate: 0.04
+  },
+  {
+    name: "GER/BB/1000/1941",
+    type: "bomb",
+    diameter: 660,
+    damage: 3600,
+    criticalRate: 0.08
+  },
+  // Fritz X (PC 1400) 无线电制导炸弹；游戏暂以普通水平炸弹近似
+  {
+    name: "GER/BB/1400/1943",
+    type: "bomb",
+    diameter: 850,
+    damage: 5000,
+    criticalRate: 0.15
+  },
+  {
+    name: "GER/BB/1800/1942",
+    type: "bomb",
+    diameter: 800,
+    damage: 6000,
+    criticalRate: 0.12
+  },
   // 镭射
   // 50mm 镭射
   {

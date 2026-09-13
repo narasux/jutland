@@ -128,6 +128,38 @@ func TestEveryConfiguredGunHasLocalizedReference(t *testing.T) {
 	}
 }
 
+func TestEveryConfiguredGermanBombHasLocalizedReference(t *testing.T) {
+	configDir := filepath.Join("..", "..", "..", "..", "configs")
+	data, err := os.ReadFile(filepath.Join(configDir, "releasers.json5"))
+	require.NoError(t, err)
+	var releasers []struct {
+		Name string `json:"name"`
+	}
+	require.NoError(t, json5.Unmarshal(data, &releasers))
+
+	for _, lang := range i18n.SupportedLanguages() {
+		fileName := "references." + string(lang) + ".json5"
+		if lang == i18n.LanguageZhHans {
+			fileName = "references.json5"
+		}
+		references, err := Load(filepath.Join(configDir, fileName))
+		require.NoError(t, err)
+		byName := make(map[string]Reference, len(references))
+		for _, ref := range references {
+			byName[ref.Name] = ref
+		}
+		for _, releaser := range releasers {
+			if !strings.HasPrefix(releaser.Name, "GER/BB/") {
+				continue
+			}
+			require.Containsf(
+				t, byName, releaser.Name, "%s is missing German bomb reference %q",
+				lang, releaser.Name,
+			)
+		}
+	}
+}
+
 func TestLocalizedReferencesUseCompleteDescriptions(t *testing.T) {
 	loadLocale := func(t *testing.T, locale string) map[string]Reference {
 		t.Helper()

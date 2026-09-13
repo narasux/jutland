@@ -4041,8 +4041,8 @@
     initOilPlatforms: [],
     initAirfields: [
       {
-        // 左侧中途岛机场（日本与德国电脑联合机群）：沿用地图左岛可见跑道，日机覆盖旧式零战、
-        // 后期局地战斗机、俯冲轰炸机和舰攻/舰爆，并编入全部德国机型。
+        // 左侧中途岛机场（日本与德国电脑联合机群）：沿用地图左岛可见跑道，
+        // 收录全部日本与德国机型，每型 8 架，用于统一测试两国机体的武器和挂载。
         pos: [103, 156],
         rotation: 270,
         runwayLength: 11,
@@ -4051,6 +4051,10 @@
         takeoffPoints: 4,
         takeOffTime: 0.5,
         planeGroups: [
+          {
+            name: "A5M2",
+            maxCount: 8,
+          },
           {
             name: "A6M2",
             maxCount: 8,
@@ -4112,11 +4116,19 @@
             maxCount: 8,
           },
           {
+            name: "B5N2",
+            maxCount: 8,
+          },
+          {
             name: "B6N2",
             maxCount: 8,
           },
           {
             name: "B7A2",
+            maxCount: 8,
+          },
+          {
+            name: "C6N1",
             maxCount: 8,
           },
           {
@@ -4175,10 +4187,84 @@
             name: "Do335V",
             maxCount: 8,
           },
+          // 补齐其余德国空军战斗机与截击机。
+          {
+            name: "Fw190A",
+            maxCount: 8,
+          },
+          {
+            name: "Fw190D",
+            maxCount: 8,
+          },
+          {
+            name: "Ta152H",
+            maxCount: 8,
+          },
+          {
+            name: "Me262A",
+            maxCount: 8,
+          },
+          {
+            name: "Me262B",
+            maxCount: 8,
+          },
+          {
+            name: "Me410A",
+            maxCount: 8,
+          },
+          {
+            name: "He219A",
+            maxCount: 8,
+          },
+          // 德国空军轰炸机：3 型俯冲/对地攻击机与 8 型水平轰炸机，每型 8 架。
+          {
+            name: "Hs123A",
+            maxCount: 8,
+          },
+          {
+            name: "Ju87B",
+            maxCount: 8,
+          },
+          {
+            name: "Hs129B",
+            maxCount: 8,
+          },
+          {
+            name: "Ar234B",
+            maxCount: 8,
+          },
+          {
+            name: "Do17E",
+            maxCount: 8,
+          },
+          {
+            name: "Ju88A",
+            maxCount: 8,
+          },
+          {
+            name: "He111P",
+            maxCount: 8,
+          },
+          {
+            name: "BC138C",
+            maxCount: 8,
+          },
+          {
+            name: "Do217K",
+            maxCount: 8,
+          },
+          {
+            name: "Fw200C",
+            maxCount: 8,
+          },
+          {
+            name: "He177A",
+            maxCount: 8,
+          },
         ],
       },
       {
-        // 右侧中途岛机场（美国与英国电脑联合机群）：收录 26 型美国飞机与
+        // 右侧中途岛机场（美国与英国电脑联合机群）：收录 27 型美国飞机与
         // 8 型英国飞机，每型 8 架，用于统一测试两国机体的武器和挂载。
         pos: [161, 166],
         rotation: 274,
@@ -4290,6 +4376,10 @@
           },
           {
             name: "B-29A",
+            maxCount: 8,
+          },
+          {
+            name: "C-47A",
             maxCount: 8,
           },
           {

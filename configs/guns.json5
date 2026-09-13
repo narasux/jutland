@@ -1373,6 +1373,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国空军 7.92mm MG 15 活动机枪
+  {
+    name: "GER/AIR/7.92/MG15",
+    bulletName: "GER/GB/7.92/1934",
+    bulletCount: 1,
+    reloadTime: 0.045,
+    range: 1.6,
+    bulletSpread: 22,
+    bulletSpeed: 755,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国空军 13mm MG 131 同步机枪
   {
     name: "GER/AIR/13/MG131",
@@ -1422,6 +1435,19 @@
     bulletSpread: 22,
     bulletSpeed: 750,
     fundsCost: 4,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 德国空军 7.92mm MG 81 活动机枪
+  {
+    name: "GER/AIR/7.92/MG81",
+    bulletName: "GER/GB/7.92/1938",
+    bulletCount: 1,
+    reloadTime: 0.04,
+    range: 1.6,
+    bulletSpread: 20,
+    bulletSpeed: 850,
+    fundsCost: 1,
     antiShip: true,
     antiAircraft: true
   },

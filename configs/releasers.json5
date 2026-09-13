@@ -103,5 +103,61 @@
     bulletName: "UK/TB/457/1942",
     range: 4.5,
     bulletSpeed: 40,
+  },
+  // 德国空军 50kg 炸弹
+  {
+    name: "GER/BB/50",
+    bulletName: "GER/BB/50/1937",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  // 德国空军 250kg 炸弹
+  {
+    name: "GER/BB/250",
+    bulletName: "GER/BB/250/1938",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  // 德国空军 50kg 炸弹（水平投弹）
+  {
+    name: "GER/BB/50/LB",
+    bulletName: "GER/BB/50/1937",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 德国空军 250kg 炸弹（水平投弹）
+  {
+    name: "GER/BB/250/LB",
+    bulletName: "GER/BB/250/1938",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 德国空军 500kg 炸弹（水平投弹）
+  {
+    name: "GER/BB/500/LB",
+    bulletName: "GER/BB/500/1940",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 德国空军 1000kg 炸弹（水平投弹）
+  {
+    name: "GER/BB/1000/LB",
+    bulletName: "GER/BB/1000/1941",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 德国空军 Fritz X (PC 1400) 制导炸弹；暂用水平投放近似
+  {
+    name: "GER/BB/1400/LB",
+    bulletName: "GER/BB/1400/1943",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 德国空军 1800kg 炸弹（水平投弹）
+  {
+    name: "GER/BB/1800/LB",
+    bulletName: "GER/BB/1800/1942",
+    range: 4.5,
+    bulletSpeed: 30,
   }
 ]

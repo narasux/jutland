@@ -33,6 +33,36 @@ func TestLocalizedContributionNameUsesCurrentLanguage(t *testing.T) {
 	require.Equal(t, "テスト機 ×12", localizedContributionName(contribution))
 }
 
+func TestPlaneArmamentItemsUseLocalizedReferenceNames(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	const gunName = "test-localized-plane-gun"
+	const bombName = "test-localized-plane-bomb"
+	objRef.SetReference(i18n.LanguageZhHans, gunName, &objRef.Reference{DisplayName: "测试机炮"})
+	objRef.SetReference(i18n.LanguageEnglish, gunName, &objRef.Reference{DisplayName: "Test Cannon"})
+	objRef.SetReference(i18n.LanguageZhHans, bombName, &objRef.Reference{DisplayName: "测试炸弹"})
+	objRef.SetReference(i18n.LanguageEnglish, bombName, &objRef.Reference{DisplayName: "Test Bomb"})
+	plane := &objUnit.Plane{
+		Weapon: objUnit.PlaneWeapon{
+			Guns:  []*objUnit.Gun{{Name: gunName}, {Name: gunName}},
+			Bombs: []*objUnit.Releaser{{Name: bombName}},
+		},
+	}
+
+	i18n.SetLanguage(string(i18n.LanguageEnglish))
+	require.Equal(t, []objRef.InfoItem{
+		{Label: "Gun", Value: "Test Cannon x 2"},
+		{Label: "Bomb", Value: "Test Bomb x 1"},
+	}, planeArmamentItems(plane))
+
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+	require.Equal(t, []objRef.InfoItem{
+		{Label: "机炮", Value: "测试机炮 x 2"},
+		{Label: "炸弹", Value: "测试炸弹 x 1"},
+	}, planeArmamentItems(plane))
+}
+
 func TestTruncateCollectionTextKeepsEllipsisWithinWidth(t *testing.T) {
 	fontSize := 18.0
 	maxWidth := estimateCollectionTextWidth("Main Battery 3x3", fontSize)
