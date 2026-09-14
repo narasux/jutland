@@ -2211,18 +2211,14 @@
       },
       {
         label: "副炮",
-        value: "12x1 76mm/50",
-      },
-      {
-        label: "高炮",
-        value: "2x1 76mm/50",
+        value: "20x1 76mm/50",
       },
       {
         label: "鱼雷",
         value: "2x1 533mm",
       },
     ],
-    description: "南卡罗来纳号（BB-26）是美国海军第一艘无畏舰，也是南卡罗来纳级首舰，1910 年服役。它取消中间口径炮，改为 4 座双联装 305mm/45 主炮沿中线背负布置，但受国会吨位限制，航速只有 18.5 节。1920 年状态保留 12 门 76mm/50 副炮和 1918 年加装的 2 门高炮，1921 年退役，1924 年出售拆解。",
+    description: "南卡罗来纳号（BB-26）是美国海军第一艘无畏舰，也是南卡罗来纳级首舰，1910 年服役。它取消中间口径炮，改为 4 座双联装 305mm/45 主炮沿中线背负布置，但受国会吨位限制，航速只有 18.5 节。1920 年状态保留 20 门 76mm/50 副炮，1921 年退役，1924 年出售拆解。",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -2232,45 +2228,6 @@
       {
         name: "维基百科 - 南卡羅萊納號戰艦",
         url: "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%8D%A1%E7%BE%85%E8%90%8A%E7%B4%8D%E8%99%9F%E6%88%B0%E8%89%A6",
-      },
-    ],
-  },
-  {
-    name: "vermont",
-    displayName: "佛蒙特",
-    type: "战列舰",
-    armaments: [
-      {
-        label: "主炮",
-        value: "2x2 305mm/45",
-      },
-      {
-        label: "副炮",
-        value: "4x2 203mm/45",
-      },
-      {
-        label: "副炮",
-        value: "12x1 178mm/44",
-      },
-      {
-        label: "高炮",
-        value: "20x1 76mm/50",
-      },
-      {
-        label: "鱼雷",
-        value: "4x1 533mm",
-      },
-    ],
-    description: "佛蒙特号（BB-20）是康涅狄格级前无畏舰的末舰，1907 年服役，同级采用 4 门 305mm/45 主炮与 8 门 203mm/45 副炮塔的混装布局。1917 年状态保留 12 门 178mm/44 副炮、20 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。该舰在第一次世界大战中承担训练任务，1920 年退役，1923 年拆解。",
-    author: "David Latuch",
-    links: [
-      {
-        name: "Shipbucket - BB-20 Vermont",
-        url: "https://www.shipbucket.com/drawings/7451",
-      },
-      {
-        name: "维基百科 - 佛蒙特號戰艦",
-        url: "https://zh.wikipedia.org/wiki/%E4%BD%9B%E8%92%99%E7%89%B9%E8%99%9F%E6%88%B0%E8%89%A6",
       },
     ],
   },
@@ -2293,14 +2250,14 @@
       },
       {
         label: "高炮",
-        value: "20x1 76mm/50",
+        value: "12x1 76mm/50",
       },
       {
         label: "鱼雷",
         value: "4x1 533mm",
       },
     ],
-    description: "康涅狄格号（BB-18）是康涅狄格级前无畏舰首舰，1906 年服役，长期担任大西洋舰队旗舰并率队完成 1907 至 1909 年环球航行。武备为 4 门 305mm/45 主炮、8 门 203mm/45 副炮塔、12 门 178mm/44 副炮、20 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。1919 年退役，1923 年拆解。",
+    description: "康涅狄格号（BB-18）是康涅狄格级前无畏舰首舰，1906 年服役，长期担任大西洋舰队旗舰并率队完成 1907 至 1909 年环球航行。武备为 4 门 305mm/45 主炮、8 门 203mm/45 副炮塔、12 门 178mm/44 副炮、12 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。1919 年退役，1923 年拆解。",
     author: "David Latuch",
     links: [
       {
@@ -2332,14 +2289,14 @@
       },
       {
         label: "高炮",
-        value: "12x1 76mm/50",
+        value: "10x1 76mm/50",
       },
       {
         label: "鱼雷",
         value: "4x1 533mm",
       },
     ],
-    description: "弗吉尼亚号（BB-13）是弗吉尼亚级前无畏舰首舰，1906 年服役，1914 年参加韦拉克鲁斯事件。它装备 2 座双联装 305mm/40 主炮、4 座双联装 203mm/45 副炮塔（其中 2 座背负于主炮塔之上）、12 门 152mm/50 副炮、12 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。1920 年退役，1922 年作为靶舰击沉。",
+    description: "弗吉尼亚号（BB-13）是弗吉尼亚级前无畏舰首舰，1906 年服役，1914 年参加韦拉克鲁斯事件。它装备 2 座双联装 305mm/40 主炮、4 座双联装 203mm/45 副炮塔（其中 2 座背负于主炮塔之上）、12 门 152mm/50 副炮、10 门 76mm/50 轻炮和 4 具 533mm 水下鱼雷发射管。1920 年退役，1922 年作为靶舰击沉。",
     author: "David Latuch",
     links: [
       {
@@ -6248,7 +6205,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "海盗式",
+    displayName: "海盗式（美国海军）",
     armaments: [
       {
         label: "机枪（前向）",
@@ -8548,7 +8505,7 @@
   },
   {
     name: "Ho229",
-    displayName: "霍滕 Ho 229 飞翼战斗轰炸机",
+    displayName: "Ho 229 飞翼战斗轰炸机",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8570,7 +8527,7 @@
   },
   {
     name: "Ta183",
-    displayName: "福克-沃尔夫 Ta 183 胡克拜因",
+    displayName: "Ta 183 胡克拜因",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8592,7 +8549,7 @@
   },
   {
     name: "Ba349",
-    displayName: "巴赫姆 Ba 349 蝮蛇",
+    displayName: "Ba 349 蝮蛇",
     armaments: [
       {
         label: "火箭弹（前向）",
@@ -8614,7 +8571,7 @@
   },
   {
     name: "He162A",
-    displayName: "亨克尔 He 162 A-2 国民战斗机",
+    displayName: "He 162 A-2 国民战斗机",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8636,7 +8593,7 @@
   },
   {
     name: "Me163B",
-    displayName: "梅塞施密特 Me 163 B-1 彗星",
+    displayName: "Me 163 B-1 彗星",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8658,7 +8615,7 @@
   },
   {
     name: "Me209V",
-    displayName: "梅塞施密特 Me 209 V1 竞速机",
+    displayName: "Me 209 V1 竞速机",
     armaments: [],
     description: "Me 209 V1 是为冲击活塞动力飞机速度纪录而设计的无武装竞速机，1938 年首飞，并于 1939 年创造约 755 km/h 的纪录。该机没有作战航程数据，游戏依据其约 30 分钟的冷却液限制折算为 360 km。",
     author: "未知",
@@ -8675,7 +8632,7 @@
   },
   {
     name: "Me309V",
-    displayName: "梅塞施密特 Me 309 V1",
+    displayName: "Me 309 V1",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8701,7 +8658,7 @@
   },
   {
     name: "Do335V",
-    displayName: "多尼尔 Do 335 V13 箭式",
+    displayName: "Do 335 V13 箭式",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8759,7 +8716,7 @@
   },
   {
     name: "Me262A",
-    displayName: "Me262A",
+    displayName: "Me 262 A-1a 燕",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8781,7 +8738,7 @@
   },
   {
     name: "Me262B",
-    displayName: "Me262B",
+    displayName: "Me 262 B-1a/U1 夜战型",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8803,7 +8760,7 @@
   },
   {
     name: "He219A",
-    displayName: "He219A",
+    displayName: "He 219 A-7 夜枭",
     armaments: [
       {
         label: "机炮（翼根前向）",
@@ -8829,7 +8786,7 @@
   },
   {
     name: "Me410A",
-    displayName: "Me410A",
+    displayName: "Me 410 A-1 大黄蜂",
     armaments: [
       {
         label: "机炮（前向）",

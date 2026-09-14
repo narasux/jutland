@@ -35,7 +35,7 @@
   },
   {
     name: "A5M2",
-    displayName: "A5M2 九六式艦戦",
+    displayName: "九六式艦戦",
     armaments: [
       {
         label: "機銃（前方）",
@@ -53,7 +53,7 @@
   },
   {
     name: "A6M2",
-    displayName: "A6M2 零戦二一型",
+    displayName: "零戦二一型",
     armaments: [
       {
         label: "機首砲",
@@ -75,7 +75,7 @@
   },
   {
     name: "A6M3",
-    displayName: "A6M3 零戦三二型",
+    displayName: "零戦三二型",
     armaments: [
       {
         label: "機首砲",
@@ -97,7 +97,7 @@
   },
   {
     name: "A6M5",
-    displayName: "A6M5 零戦五二型",
+    displayName: "零戦五二型",
     armaments: [
       {
         label: "機首砲",
@@ -119,7 +119,7 @@
   },
   {
     name: "A7M2",
-    displayName: "A7M2 烈風",
+    displayName: "烈風",
     armaments: [
       {
         label: "機首砲",
@@ -665,7 +665,7 @@
   },
   {
     name: "B5N2",
-    displayName: "B5N2 九七式艦攻",
+    displayName: "九七式艦攻",
     armaments: [
       {
         label: "機銃（後方）",
@@ -687,7 +687,7 @@
   },
   {
     name: "B6N2",
-    displayName: "B6N2 天山",
+    displayName: "天山",
     armaments: [
       {
         label: "機銃（背部）",
@@ -713,7 +713,7 @@
   },
   {
     name: "B7A2",
-    displayName: "B7A2 流星",
+    displayName: "流星",
     armaments: [
       {
         label: "翼砲",
@@ -951,7 +951,7 @@
   },
   {
     name: "C6N1",
-    displayName: "C6N1 彩雲",
+    displayName: "彩雲",
     armaments: [
       {
         label: "兵装",
@@ -1158,14 +1158,14 @@
       },
       {
         label: "対空砲",
-        value: "20x1 76mm/50",
+        value: "12x1 76mm/50",
       },
       {
         label: "魚雷",
         value: "4x1 533mm",
       },
     ],
-    description: "コネチカット（BB-18）はコネチカット級前弩級戦艦の一番艦で、1906 年就役。大西洋艦隊旗艦として 1907 年から 1909 年の世界巡航を率いた。兵装は 305mm/45 主砲 4 門、203mm/45 連装副砲塔 4 基、178mm/44 副砲 12 門、76mm/50 軽砲 20 門、533mm 水中魚雷発射管 4 門。1919 年退役、1923 年解体。",
+    description: "コネチカット（BB-18）はコネチカット級前弩級戦艦の一番艦で、1906 年就役。大西洋艦隊旗艦として 1907 年から 1909 年の世界巡航を率いた。兵装は 305mm/45 主砲 4 門、203mm/45 連装副砲塔 4 基、178mm/44 副砲 12 門、76mm/50 軽砲 12 門、533mm 水中魚雷発射管 4 門。1919 年退役、1923 年解体。",
     author: "David Latuch",
     links: [
       {
@@ -1242,7 +1242,7 @@
   },
   {
     name: "D3A1",
-    displayName: "D3A 九九式艦爆",
+    displayName: "九九式艦爆",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1268,7 +1268,7 @@
   },
   {
     name: "D4Y3",
-    displayName: "D4Y3 彗星",
+    displayName: "彗星",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1645,7 +1645,7 @@
   },
   {
     name: "F2A-3",
-    displayName: "F2A-3 バッファロー",
+    displayName: "バッファロー",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1663,7 +1663,7 @@
   },
   {
     name: "F4F-3",
-    displayName: "F4F-3 ワイルドキャット",
+    displayName: "ワイルドキャット",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1703,7 +1703,7 @@
   },
   {
     name: "F6F-3",
-    displayName: "F6F-3 ヘルキャット",
+    displayName: "ヘルキャット",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1747,7 +1747,7 @@
   },
   {
     name: "F7F-3N",
-    displayName: "タイガーキャット",
+    displayName: "タイガーキャット（夜戦型）",
     armaments: [
       {
         label: "機関砲（翼根前方）",
@@ -1773,7 +1773,7 @@
   },
   {
     name: "P-40N",
-    displayName: "P-40N ウォーホーク",
+    displayName: "ウォーホーク",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1791,7 +1791,7 @@
   },
   {
     name: "P-39N",
-    displayName: "P-39N エアラコブラ",
+    displayName: "エアラコブラ",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -1813,7 +1813,7 @@
   },
   {
     name: "P-38J",
-    displayName: "P-38J ライトニング",
+    displayName: "ライトニング",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -1839,7 +1839,7 @@
   },
   {
     name: "P-47D-30",
-    displayName: "P-47D-30 サンダーボルト",
+    displayName: "サンダーボルト",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1861,7 +1861,7 @@
   },
   {
     name: "P-47D-2",
-    displayName: "P-47D-2 サンダーボルト",
+    displayName: "サンダーボルト",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1883,7 +1883,7 @@
   },
   {
     name: "P-51B-5",
-    displayName: "P-51B-5 ムスタング",
+    displayName: "ムスタング",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1905,7 +1905,7 @@
   },
   {
     name: "P-51D-20",
-    displayName: "P-51D-20 ムスタング",
+    displayName: "ムスタング",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1927,7 +1927,7 @@
   },
   {
     name: "A-20B",
-    displayName: "A-20B ハボック",
+    displayName: "ハボック",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1983,7 +1983,7 @@
   },
   {
     name: "P-61B-15",
-    displayName: "P-61B-15 ブラックウィドウ",
+    displayName: "ブラックウィドウ",
     armaments: [
       {
         label: "機関砲（機腹固定前射）",
@@ -2009,7 +2009,7 @@
   },
   {
     name: "B-17G",
-    displayName: "B-17G フライングフォートレス",
+    displayName: "フライングフォートレス",
     armaments: [
       {
         label: "機銃（前方）",
@@ -2035,7 +2035,7 @@
   },
   {
     name: "A-26B",
-    displayName: "A-26B インベイダー",
+    displayName: "インベイダー",
     armaments: [
       {
         label: "機銃（前方）",
@@ -2065,7 +2065,7 @@
   },
   {
     name: "B-24D",
-    displayName: "B-24D リベレーター",
+    displayName: "リベレーター",
     armaments: [
       {
         label: "機銃（前方）",
@@ -2091,7 +2091,7 @@
   },
   {
     name: "B-29A",
-    displayName: "B-29A スーパーフォートレス",
+    displayName: "スーパーフォートレス",
     armaments: [
       {
         label: "防御機銃（全周）",
@@ -2113,7 +2113,7 @@
   },
   {
     name: "B-26B",
-    displayName: "B-26B マローダー",
+    displayName: "マローダー",
     armaments: [
       {
         label: "機銃（前方）",
@@ -3018,7 +3018,7 @@
   },
   {
     name: "J2M3",
-    displayName: "J2M3 雷電二一型",
+    displayName: "雷電二一型",
     armaments: [
       {
         label: "機首砲",
@@ -3040,7 +3040,7 @@
   },
   {
     name: "J7W1",
-    displayName: "J7W1 震電",
+    displayName: "震電",
     armaments: [
       {
         label: "機首機銃",
@@ -3066,7 +3066,7 @@
   },
   {
     name: "J5N1",
-    displayName: "J5N1 天雷",
+    displayName: "中島 J5N1 天雷",
     armaments: [
       {
         label: "機首機銃",
@@ -3096,7 +3096,7 @@
   },
   {
     name: "J9N1",
-    displayName: "J9N1 橘花",
+    displayName: "中島 J9N1 橘花",
     armaments: [
       {
         label: "機首機銃",
@@ -3126,7 +3126,7 @@
   },
   {
     name: "S1A1",
-    displayName: "S1A1 電光",
+    displayName: "愛知 S1A1 電光",
     armaments: [
       {
         label: "機首機銃",
@@ -3160,7 +3160,7 @@
   },
   {
     name: "J8M1",
-    displayName: "J8M1 秋水",
+    displayName: "三菱 J8M1 秋水",
     armaments: [
       {
         label: "機翼砲",
@@ -4486,7 +4486,7 @@
   },
   {
     name: "N1K2",
-    displayName: "N1K2-J 紫電改二一型",
+    displayName: "紫電改二一型",
     armaments: [
       {
         label: "機首砲",
@@ -5202,18 +5202,14 @@
       },
       {
         label: "副砲",
-        value: "12x1 76mm/50",
-      },
-      {
-        label: "対空砲",
-        value: "2x1 76mm/50",
+        value: "20x1 76mm/50",
       },
       {
         label: "魚雷",
         value: "2x1 533mm",
       },
     ],
-    description: "サウスカロライナ（BB-26）はアメリカ海軍初のドレッドノートであり、同級の一番艦。1910 年就役。中間砲を廃して 305mm/45 連装砲塔 4 基を中心線上に背負式で配置したが、議会の排水量制限により速力は 18.5 ノットにとどまった。1920 年時点では 76mm/50 副砲 12 門と 1918 年追加の高角砲 2 門を装備し、1921 年退役、1924 年解体。",
+    description: "サウスカロライナ（BB-26）はアメリカ海軍初のドレッドノートであり、同級の一番艦。1910 年就役。中間砲を廃して 305mm/45 連装砲塔 4 基を中心線上に背負式で配置したが、議会の排水量制限により速力は 18.5 ノットにとどまった。1920 年時点では 76mm/50 副砲 20 門を装備し、1921 年退役、1924 年解体。",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -5545,7 +5541,7 @@
   },
   {
     name: "SB2C-4",
-    displayName: "SB2C-4 ヘルダイバー",
+    displayName: "ヘルダイバー",
     armaments: [
       {
         label: "機首砲",
@@ -5571,7 +5567,7 @@
   },
   {
     name: "C-47A",
-    displayName: "C-47A スカイトレイン",
+    displayName: "スカイトレイン",
     armaments: [],
     description: "ダグラス C-47A スカイトレインは第二次大戦のアメリカ陸軍輸送機の主力で、1942 年に実戦配備された。兵員・物資輸送、空挺降下、グライダー曳航などに使用された。ゲーム内には独立した輸送機行動がないため、現在は非武装のその他クラスとして扱う。",
     author: "不明",
@@ -5584,7 +5580,7 @@
   },
   {
     name: "B-25C",
-    displayName: "B-25C ミッチェル",
+    displayName: "ミッチェル",
     armaments: [
       {
         label: "機銃（前方）",
@@ -5610,7 +5606,7 @@
   },
   {
     name: "SBD-3",
-    displayName: "SBD-3 ドーントレス",
+    displayName: "ドーントレス",
     armaments: [
       {
         label: "機銃（前方）",
@@ -6522,7 +6518,7 @@
   },
   {
     name: "TBD-1",
-    displayName: "TBD-1 デバステーター",
+    displayName: "デバステーター",
     armaments: [
       {
         label: "機銃（前方）",
@@ -6548,7 +6544,7 @@
   },
   {
     name: "TBF-1",
-    displayName: "TBF-1 アベンジャー",
+    displayName: "アベンジャー",
     armaments: [
       {
         label: "機銃（前方）",
@@ -7920,45 +7916,6 @@
     ],
   },
   {
-    name: "vermont",
-    displayName: "ヴァーモント",
-    type: "戦艦",
-    armaments: [
-      {
-        label: "主砲",
-        value: "2x2 305mm/45",
-      },
-      {
-        label: "副砲",
-        value: "4x2 203mm/45",
-      },
-      {
-        label: "副砲",
-        value: "12x1 178mm/44",
-      },
-      {
-        label: "対空砲",
-        value: "20x1 76mm/50",
-      },
-      {
-        label: "魚雷",
-        value: "4x1 533mm",
-      },
-    ],
-    description: "ヴァーモント（BB-20）はコネチカット級前弩級戦艦の最後の一隻で、1907 年就役。305mm/45 主砲 4 門と 203mm/45 連装副砲塔 4 基という混載兵装を備える。1917 年時点では 178mm/44 副砲 12 門、76mm/50 軽砲 20 門、533mm 水中魚雷発射管 4 門を保持した。第一次世界大戦では練習艦任務に就き、1920 年退役、1923 年解体。",
-    author: "David Latuch",
-    links: [
-      {
-        name: "Shipbucket — BB-20 Vermont",
-        url: "https://www.shipbucket.com/drawings/7451",
-      },
-      {
-        name: "ウィキペディア — ヴァーモント (戦艦)",
-        url: "https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A1%E3%83%BC%E3%83%A2%E3%83%B3%E3%83%88_(%E6%88%A6%E8%89%A6)",
-      },
-    ],
-  },
-  {
     name: "vickers",
     displayName: "ビッカース758A",
     type: "軽巡洋艦",
@@ -8063,14 +8020,14 @@
       },
       {
         label: "対空砲",
-        value: "12x1 76mm/50",
+        value: "10x1 76mm/50",
       },
       {
         label: "魚雷",
         value: "4x1 533mm",
       },
     ],
-    description: "バージニア（BB-13）はバージニア級前弩級戦艦の一番艦で、1906 年就役。1914 年のベラクルス事件に参加した。305mm/40 連装主砲塔 2 基、203mm/45 連装副砲塔 4 基（うち 2 基は主砲塔上に背負式）、152mm/50 副砲 12 門、76mm/50 軽砲 12 門、533mm 水中魚雷発射管 4 門を装備した。1920 年退役、1922 年に標的艦として撃沈。",
+    description: "バージニア（BB-13）はバージニア級前弩級戦艦の一番艦で、1906 年就役。1914 年のベラクルス事件に参加した。305mm/40 連装主砲塔 2 基、203mm/45 連装副砲塔 4 基（うち 2 基は主砲塔上に背負式）、152mm/50 副砲 12 門、76mm/50 軽砲 10 門、533mm 水中魚雷発射管 4 門を装備した。1920 年退役、1922 年に標的艦として撃沈。",
     author: "David Latuch",
     links: [
       {
@@ -8880,7 +8837,7 @@
   },
   {
     name: "Me262A",
-    displayName: "Me262A",
+    displayName: "メッサーシュミット Me 262 A-1a シュヴァルベ",
     armaments: [
       {
         label: "機首機関砲",
@@ -8902,7 +8859,7 @@
   },
   {
     name: "Me262B",
-    displayName: "Me262B",
+    displayName: "メッサーシュミット Me 262 B-1a/U1 夜戦型",
     armaments: [
       {
         label: "機首機関砲",
@@ -8924,7 +8881,7 @@
   },
   {
     name: "He219A",
-    displayName: "He219A",
+    displayName: "ハインケル He 219 A-7 ウーフー",
     armaments: [
       {
         label: "主翼根機関砲",
@@ -8950,7 +8907,7 @@
   },
   {
     name: "Me410A",
-    displayName: "Me410A",
+    displayName: "メッサーシュミット Me 410 A-1 ホルニッセ",
     armaments: [
       {
         label: "前方機関砲",
@@ -9002,7 +8959,7 @@
   },
   {
     name: "Fw190D",
-    displayName: "フォッケウルフ Fw 190D",
+    displayName: "フォッケウルフ Fw 190D ドーラ",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -9028,7 +8985,7 @@
   },
   {
     name: "Ta152H",
-    displayName: "フォッケウルフ Ta 152H",
+    displayName: "フォッケウルフ Ta 152H 高空戦闘機",
     armaments: [
       {
         label: "機関砲（前方）",

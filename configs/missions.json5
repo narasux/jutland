@@ -2709,7 +2709,6 @@
           "new_york",
           "arkansas",
           "south_carolina",
-          "vermont",
           "connecticut",
           "virginia",
           "kentucky",
@@ -3381,26 +3380,20 @@
         belongPlayer: "HA"
       },
       {
-        name: "vermont",
+        name: "connecticut",
         pos: [38, 49],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "connecticut",
+        name: "virginia",
         pos: [37, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "virginia",
-        pos: [38, 51],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
         name: "kentucky",
-        pos: [37, 52],
+        pos: [38, 51],
         rotation: 90,
         belongPlayer: "HA"
       },

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -483,6 +484,61 @@ func GetPlaneDisplayName(name string) string {
 		return ref.DisplayName
 	}
 	return name
+}
+
+// GetPlaneTitle 获取战机图鉴标题，把配置里的编号和可读名称拼成“编号 名称”。
+// 雷达图、编队列表等窄栏仍应使用 GetPlaneDisplayName，避免标题被挤爆。
+func GetPlaneTitle(name string) string {
+	ref := objRef.GetReference(name)
+	if ref == nil {
+		return name
+	}
+	// 编号里没有数字的条目（如测试用的 F / B / A）只是占位名称，不参与拼接
+	if !strings.ContainsAny(name, "0123456789") || ref.DisplayName == "" {
+		return ref.DisplayName
+	}
+	// displayName 已以编号（或去掉变体后缀的基型）开头时不再重复拼接，
+	// 覆盖“Bf 109 B-1”这类编号本身即名称的条目，以及“Fw 190A”这类空格写法差异。
+	for idx, code := range planeCodeVariants(name) {
+		if startsWithPlaneCode(ref.DisplayName, code, idx > 0) {
+			return ref.DisplayName
+		}
+		// 厂商名在编号之前的写法，把编号插到厂商名之后，例如
+		// F4U-4 + “ヴォート F4U-4 コルセア（米海軍）”
+		if pos := strings.Index(ref.DisplayName, " "+code+" "); pos >= 0 {
+			return ref.DisplayName[:pos] + " " + code + ref.DisplayName[pos+len(code)+1:]
+		}
+	}
+	// 兜底：编号出现在名称中段（如 Sea Mosquito 对应 Mosquito），避免重复展示
+	if strings.Contains(ref.DisplayName, name) {
+		return ref.DisplayName
+	}
+	return name + " " + ref.DisplayName
+}
+
+// planeCodeVariants 返回编号本身，以及去掉“-1 / -II / -J”等变体后缀后的基型。
+func planeCodeVariants(code string) []string {
+	variants := []string{code}
+	base := code
+	if idx := strings.LastIndex(base, "-"); idx > 0 && !strings.ContainsAny(base[idx+1:], "-.") {
+		base = base[:idx]
+	}
+	if base != code {
+		variants = append(variants, base)
+	}
+	return variants
+}
+
+// startsWithPlaneCode 判断展示名是否以编号开头，忽略空格和连字符的写法差异。
+// isBase 表示当前比较的是基型（如 F2A-3 的 F2A），过短时不做前缀折叠匹配，避免误判。
+func startsWithPlaneCode(displayName, code string, isBase bool) bool {
+	normalize := func(value string) string {
+		return strings.NewReplacer(" ", "", "-", "").Replace(value)
+	}
+	if !isBase && len(code) < 3 {
+		return strings.HasPrefix(displayName, code)
+	}
+	return strings.HasPrefix(normalize(displayName), normalize(code))
 }
 
 // GetPlaneCost 获取飞机成本

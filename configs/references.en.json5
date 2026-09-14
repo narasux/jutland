@@ -35,7 +35,7 @@
   },
   {
     name: "A5M2",
-    displayName: "A5M2 Type 96",
+    displayName: "Type 96",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -53,7 +53,7 @@
   },
   {
     name: "A6M2",
-    displayName: "A6M2 Zero Model 21",
+    displayName: "Zero Model 21",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -75,7 +75,7 @@
   },
   {
     name: "A6M3",
-    displayName: "A6M3 Zero Model 32",
+    displayName: "Zero Model 32",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -97,7 +97,7 @@
   },
   {
     name: "A6M5",
-    displayName: "A6M5 Zero Model 52",
+    displayName: "Zero Model 52",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -119,7 +119,7 @@
   },
   {
     name: "A7M2",
-    displayName: "A7M2 Reppū",
+    displayName: "Reppū",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -665,7 +665,7 @@
   },
   {
     name: "B5N2",
-    displayName: "B5N2 Type 97",
+    displayName: "Type 97",
     armaments: [
       {
         label: "Machine Gun (Rear)",
@@ -687,7 +687,7 @@
   },
   {
     name: "B6N2",
-    displayName: "B6N2 Tenzan",
+    displayName: "Tenzan",
     armaments: [
       {
         label: "Machine Guns (Dorsal)",
@@ -713,7 +713,7 @@
   },
   {
     name: "B7A2",
-    displayName: "B7A2 Ryūsei",
+    displayName: "Ryūsei",
     armaments: [
       {
         label: "Wing Cannons",
@@ -774,7 +774,7 @@
   },
   {
     name: "Barracuda-II",
-    displayName: "Fairey Barracuda Mk II",
+    displayName: "Barracuda Mk II",
     armaments: [
       {
         label: "Machine Guns (Rear)",
@@ -951,7 +951,7 @@
   },
   {
     name: "C6N1",
-    displayName: "C6N1 Saiun",
+    displayName: "Saiun",
     armaments: [
       {
         label: "Armament",
@@ -1158,14 +1158,14 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "20x1 76mm/50",
+        value: "12x1 76mm/50",
       },
       {
         label: "Torpedoes",
         value: "4x1 533mm",
       },
     ],
-    description: "USS Connecticut (BB-18) was the lead ship of her pre-dreadnought class, commissioned in 1906 and long-serving flagship of the Atlantic Fleet, which she led on the 1907-1909 Great White Fleet cruise. She carried four 305mm/45 and eight 203mm/45 guns in twin turrets, twelve 178mm/44 and twenty 76mm/50 secondary guns, and four submerged 533mm torpedo tubes. She was decommissioned in 1919 and scrapped in 1923.",
+    description: "USS Connecticut (BB-18) was the lead ship of her pre-dreadnought class, commissioned in 1906 and long-serving flagship of the Atlantic Fleet, which she led on the 1907-1909 Great White Fleet cruise. She carried four 305mm/45 and eight 203mm/45 guns in twin turrets, twelve 178mm/44 secondary and twelve 76mm/50 light guns, and four submerged 533mm torpedo tubes. She was decommissioned in 1919 and scrapped in 1923.",
     author: "David Latuch",
     links: [
       {
@@ -1242,7 +1242,7 @@
   },
   {
     name: "D3A1",
-    displayName: "D3A Type 99",
+    displayName: "Type 99",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1268,7 +1268,7 @@
   },
   {
     name: "D4Y3",
-    displayName: "D4Y3 Suisei",
+    displayName: "Suisei",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1645,7 +1645,7 @@
   },
   {
     name: "F2A-3",
-    displayName: "F2A-3 Buffalo",
+    displayName: "Buffalo",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1663,7 +1663,7 @@
   },
   {
     name: "F4F-3",
-    displayName: "F4F-3 Wildcat",
+    displayName: "Wildcat",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1681,7 +1681,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "Vought F4U-4 Corsair (US Navy)",
+    displayName: "Corsair (US Navy)",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1703,7 +1703,7 @@
   },
   {
     name: "F6F-3",
-    displayName: "F6F-3 Hellcat",
+    displayName: "Hellcat",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1725,7 +1725,7 @@
   },
   {
     name: "F8F-2",
-    displayName: "Grumman F8F-2 Bearcat",
+    displayName: "Bearcat",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -1747,7 +1747,7 @@
   },
   {
     name: "F7F-3N",
-    displayName: "Tigercat",
+    displayName: "Tigercat (night fighter)",
     armaments: [
       {
         label: "Cannons (Wing Roots)",
@@ -1773,7 +1773,7 @@
   },
   {
     name: "P-40N",
-    displayName: "P-40N Warhawk",
+    displayName: "Warhawk",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1791,7 +1791,7 @@
   },
   {
     name: "P-39N",
-    displayName: "P-39N Airacobra",
+    displayName: "Airacobra",
     armaments: [
       {
         label: "Cannon (Forward)",
@@ -1813,7 +1813,7 @@
   },
   {
     name: "P-38J",
-    displayName: "P-38J Lightning",
+    displayName: "Lightning",
     armaments: [
       {
         label: "Cannon (Forward)",
@@ -1839,7 +1839,7 @@
   },
   {
     name: "P-47D-30",
-    displayName: "P-47D-30 Thunderbolt",
+    displayName: "Thunderbolt",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1861,7 +1861,7 @@
   },
   {
     name: "P-47D-2",
-    displayName: "P-47D-2 Thunderbolt",
+    displayName: "Thunderbolt",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1883,7 +1883,7 @@
   },
   {
     name: "P-51B-5",
-    displayName: "P-51B-5 Mustang",
+    displayName: "Mustang",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1905,7 +1905,7 @@
   },
   {
     name: "P-51D-20",
-    displayName: "P-51D-20 Mustang",
+    displayName: "Mustang",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1927,7 +1927,7 @@
   },
   {
     name: "A-20B",
-    displayName: "A-20B Havoc",
+    displayName: "Havoc",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1953,7 +1953,7 @@
   },
   {
     name: "P-70",
-    displayName: "P-70 Nighthawk",
+    displayName: "Nighthawk",
     armaments: [
       {
         label: "Cannons (Fixed Forward Under Nose)",
@@ -1983,7 +1983,7 @@
   },
   {
     name: "P-61B-15",
-    displayName: "P-61B-15 Black Widow",
+    displayName: "Black Widow",
     armaments: [
       {
         label: "Cannons (Fixed Forward Belly)",
@@ -2009,7 +2009,7 @@
   },
   {
     name: "B-17G",
-    displayName: "B-17G Flying Fortress",
+    displayName: "Flying Fortress",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -2035,7 +2035,7 @@
   },
   {
     name: "A-26B",
-    displayName: "A-26B Invader",
+    displayName: "Invader",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -2065,7 +2065,7 @@
   },
   {
     name: "B-24D",
-    displayName: "B-24D Liberator",
+    displayName: "Liberator",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -2091,7 +2091,7 @@
   },
   {
     name: "B-29A",
-    displayName: "B-29A Superfortress",
+    displayName: "Superfortress",
     armaments: [
       {
         label: "Defensive Guns (All-round)",
@@ -2113,7 +2113,7 @@
   },
   {
     name: "B-26B",
-    displayName: "B-26B Marauder",
+    displayName: "Marauder",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -2183,7 +2183,7 @@
   },
   {
     name: "Fulmar",
-    displayName: "Fairey Fulmar Mk I",
+    displayName: "Fulmar Mk I",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -3018,7 +3018,7 @@
   },
   {
     name: "J2M3",
-    displayName: "J2M3 Raiden Model 21",
+    displayName: "Raiden Model 21",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -3040,7 +3040,7 @@
   },
   {
     name: "J7W1",
-    displayName: "J7W1 Shinden",
+    displayName: "Shinden",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -4486,7 +4486,7 @@
   },
   {
     name: "N1K2",
-    displayName: "N1K2-J Shiden Kai Model 21",
+    displayName: "Shiden Kai Model 21",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -5202,18 +5202,14 @@
       },
       {
         label: "Secondary Guns",
-        value: "12x1 76mm/50",
-      },
-      {
-        label: "Anti-aircraft Guns",
-        value: "2x1 76mm/50",
+        value: "20x1 76mm/50",
       },
       {
         label: "Torpedoes",
         value: "2x1 533mm",
       },
     ],
-    description: "USS South Carolina (BB-26) was the first American dreadnought and lead ship of her class, commissioned in 1910. She replaced the intermediate battery with four twin 305mm/45 turrets on the centreline, but congressional tonnage limits held her to 18.5 knots. The 1920 fit keeps twelve 76mm/50 secondary guns and two anti-aircraft guns added in 1918. She was decommissioned in 1921 and scrapped in 1924.",
+    description: "USS South Carolina (BB-26) was the first American dreadnought and lead ship of her class, commissioned in 1910. She replaced the intermediate battery with four twin 305mm/45 turrets on the centreline, but congressional tonnage limits held her to 18.5 knots. The 1920 fit keeps twenty 76mm/50 secondary guns. She was decommissioned in 1921 and scrapped in 1924.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -5545,7 +5541,7 @@
   },
   {
     name: "SB2C-4",
-    displayName: "SB2C-4 Helldiver",
+    displayName: "Helldiver",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -5571,7 +5567,7 @@
   },
   {
     name: "C-47A",
-    displayName: "C-47A Skytrain",
+    displayName: "Skytrain",
     armaments: [],
     description: "The Douglas C-47A Skytrain was the main US wartime transport aircraft, entering service in 1942 for troop and cargo movement, paradrops, and glider towing. The game has no dedicated transport behavior, so it is placed as an unarmed other-class aircraft.",
     author: "Unknown",
@@ -5584,7 +5580,7 @@
   },
   {
     name: "B-25C",
-    displayName: "B-25C Mitchell",
+    displayName: "Mitchell",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -5610,7 +5606,7 @@
   },
   {
     name: "SBD-3",
-    displayName: "SBD-3 Dauntless",
+    displayName: "Dauntless",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -5671,7 +5667,7 @@
   },
   {
     name: "Seafire",
-    displayName: "Seafire Mk III",
+    displayName: "Mk III",
     armaments: [
       {
         label: "Cannons (forward)",
@@ -6395,7 +6391,7 @@
   },
   {
     name: "Swordfish",
-    displayName: "Fairey Swordfish Mk I",
+    displayName: "Swordfish Mk I",
     armaments: [
       {
         label: "Machine Gun (Forward)",
@@ -6522,7 +6518,7 @@
   },
   {
     name: "TBD-1",
-    displayName: "TBD-1 Devastator",
+    displayName: "Devastator",
     armaments: [
       {
         label: "Machine Gun (Forward)",
@@ -6548,7 +6544,7 @@
   },
   {
     name: "TBF-1",
-    displayName: "TBF-1 Avenger",
+    displayName: "Avenger",
     armaments: [
       {
         label: "Machine Gun (Forward)",
@@ -6578,7 +6574,7 @@
   },
   {
     name: "TBF-1-UK",
-    displayName: "Grumman Avenger Mk I",
+    displayName: "Avenger Mk I",
     armaments: [
       {
         label: "Machine Gun (Forward)",
@@ -7920,45 +7916,6 @@
     ],
   },
   {
-    name: "vermont",
-    displayName: "Vermont",
-    type: "Battleship",
-    armaments: [
-      {
-        label: "Main Battery",
-        value: "2x2 305mm/45",
-      },
-      {
-        label: "Secondary Guns",
-        value: "4x2 203mm/45",
-      },
-      {
-        label: "Secondary Guns",
-        value: "12x1 178mm/44",
-      },
-      {
-        label: "Anti-aircraft Guns",
-        value: "20x1 76mm/50",
-      },
-      {
-        label: "Torpedoes",
-        value: "4x1 533mm",
-      },
-    ],
-    description: "USS Vermont (BB-20) was the last Connecticut-class pre-dreadnought, commissioned in 1907 with a mixed battery of four 305mm/45 and eight 203mm/45 guns in twin turrets. Her 1917 fit retains twelve 178mm/44 secondary guns, twenty 76mm/50 light guns and four submerged 533mm torpedo tubes. She served as a training ship in the First World War, was decommissioned in 1920 and scrapped in 1923.",
-    author: "David Latuch",
-    links: [
-      {
-        name: "Shipbucket — BB-20 Vermont",
-        url: "https://www.shipbucket.com/drawings/7451",
-      },
-      {
-        name: "Wikipedia — USS Vermont (BB-20)",
-        url: "https://en.wikipedia.org/wiki/USS_Vermont_(BB-20)",
-      },
-    ],
-  },
-  {
     name: "vickers",
     displayName: "Vickers 758A",
     type: "Light Cruiser",
@@ -8063,14 +8020,14 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "12x1 76mm/50",
+        value: "10x1 76mm/50",
       },
       {
         label: "Torpedoes",
         value: "4x1 533mm",
       },
     ],
-    description: "USS Virginia (BB-13) was the lead ship of her pre-dreadnought class, commissioned in 1906 and present at the 1914 Veracruz incident. She mounted two twin 305mm/40 turrets, four twin 203mm/45 turrets, two of them superposed on the main turrets, twelve 152mm/50 and twelve 76mm/50 guns, plus four submerged 533mm torpedo tubes. She was decommissioned in 1920 and sunk as a target in 1922.",
+    description: "USS Virginia (BB-13) was the lead ship of her pre-dreadnought class, commissioned in 1906 and present at the 1914 Veracruz incident. She mounted two twin 305mm/40 turrets, four twin 203mm/45 turrets, two of them superposed on the main turrets, twelve 152mm/50 and ten 76mm/50 guns, plus four submerged 533mm torpedo tubes. She was decommissioned in 1920 and sunk as a target in 1922.",
     author: "David Latuch",
     links: [
       {
@@ -8537,7 +8494,7 @@
   },
   {
     name: "Bf110G",
-    displayName: "Messerschmitt Bf 110 G-4 Night Fighter",
+    displayName: "Bf 110 G-4 Night Fighter",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8563,7 +8520,7 @@
   },
   {
     name: "Bf109B",
-    displayName: "Messerschmitt Bf 109 B-1",
+    displayName: "Bf 109 B-1",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -8581,7 +8538,7 @@
   },
   {
     name: "Bf109E",
-    displayName: "Messerschmitt Bf 109 E-4",
+    displayName: "Bf 109 E-4",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -8603,7 +8560,7 @@
   },
   {
     name: "Bf109F",
-    displayName: "Messerschmitt Bf 109 F-4",
+    displayName: "Bf 109 F-4",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -8625,7 +8582,7 @@
   },
   {
     name: "Bf109G",
-    displayName: "Messerschmitt Bf 109 G-14",
+    displayName: "Bf 109 G-14",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -8647,7 +8604,7 @@
   },
   {
     name: "Bf109K",
-    displayName: "Messerschmitt Bf 109 K-4",
+    displayName: "Bf 109 K-4",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -8669,7 +8626,7 @@
   },
   {
     name: "Ho229",
-    displayName: "Horten Ho 229 Flying-Wing Fighter-Bomber",
+    displayName: "Ho 229 Flying-Wing Fighter-Bomber",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8691,7 +8648,7 @@
   },
   {
     name: "Ta183",
-    displayName: "Focke-Wulf Ta 183 Huckebein",
+    displayName: "Ta 183 Huckebein",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8713,7 +8670,7 @@
   },
   {
     name: "Ba349",
-    displayName: "Bachem Ba 349 Natter",
+    displayName: "Ba 349 Natter",
     armaments: [
       {
         label: "Rockets (Forward)",
@@ -8735,7 +8692,7 @@
   },
   {
     name: "He162A",
-    displayName: "Heinkel He 162 A-2 Volksjäger",
+    displayName: "He 162 A-2 Volksjäger",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8757,7 +8714,7 @@
   },
   {
     name: "Me163B",
-    displayName: "Messerschmitt Me 163 B-1 Komet",
+    displayName: "Me 163 B-1 Komet",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8779,7 +8736,7 @@
   },
   {
     name: "Me209V",
-    displayName: "Messerschmitt Me 209 V1 Racing Aircraft",
+    displayName: "Me 209 V1 Racing Aircraft",
     armaments: [],
     description: "The unarmed Me 209 V1 was built solely to capture the absolute speed record for piston-engine aircraft. It first flew in 1938 and reached about 755 km/h in 1939; because it had no service range, the game derives a 360 km endurance figure from its roughly thirty-minute coolant limit.",
     author: "Unknown",
@@ -8796,7 +8753,7 @@
   },
   {
     name: "Me309V",
-    displayName: "Messerschmitt Me 309 V1",
+    displayName: "Me 309 V1",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8822,7 +8779,7 @@
   },
   {
     name: "Do335V",
-    displayName: "Dornier Do 335 V13 Pfeil",
+    displayName: "Do 335 V13 Pfeil",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8880,7 +8837,7 @@
   },
   {
     name: "Me262A",
-    displayName: "Me262A",
+    displayName: "Me 262 A-1a Schwalbe",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8902,7 +8859,7 @@
   },
   {
     name: "Me262B",
-    displayName: "Me262B",
+    displayName: "Me 262 B-1a/U1 Night Fighter",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8924,7 +8881,7 @@
   },
   {
     name: "He219A",
-    displayName: "He219A",
+    displayName: "He 219 A-7 Uhu",
     armaments: [
       {
         label: "Cannons (Wing Roots, Forward)",
@@ -8950,7 +8907,7 @@
   },
   {
     name: "Me410A",
-    displayName: "Me410A",
+    displayName: "Me 410 A-1 Hornisse",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -8976,7 +8933,7 @@
   },
   {
     name: "Fw190A",
-    displayName: "Focke-Wulf Fw 190A",
+    displayName: "Fw 190A",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -9002,7 +8959,7 @@
   },
   {
     name: "Fw190D",
-    displayName: "Focke-Wulf Fw 190D",
+    displayName: "Fw 190D Dora",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -9028,7 +8985,7 @@
   },
   {
     name: "Ta152H",
-    displayName: "Focke-Wulf Ta 152H",
+    displayName: "Ta 152H",
     armaments: [
       {
         label: "Cannon (Forward)",

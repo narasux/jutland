@@ -2145,7 +2145,7 @@ func (c *CollectionUI) drawPlaneCard(
 		false,
 	)
 	c.drawFittedText(
-		screen, objUnit.GetPlaneDisplayName(plane.Name), float64(x)+px(20), float64(y)+px(20),
+		screen, objUnit.GetPlaneTitle(plane.Name), float64(x)+px(20), float64(y)+px(20),
 		float64(width)-px(40), px(27), font.LocalizedUI(font.Hang), colorx.White, screenOffset, nil,
 	)
 	c.drawFittedText(
