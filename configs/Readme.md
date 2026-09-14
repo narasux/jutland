@@ -173,6 +173,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     bulletCount: 1,
     // 装填时间（单位：秒）
     // 推荐值：现实装填速度 / 2
+    // 注：多管炮的 reloadTime 是整座炮的装填时间，各管同一次齐射，
+    //     因此每管射速 = bulletCount / reloadTime，同型单装/多装不应出现几倍差距
     reloadTime: 1,
     // 射程（地图格数）
     // 推荐值：现实射程（km）

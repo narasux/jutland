@@ -210,8 +210,8 @@
     rotateSpeed: 0.6,
     length: 135,
     width: 17,
-    fundsCost: 60,
-    timeCost: 23,
+    fundsCost: 55,
+    timeCost: 21,
     weapon: {
       mainGuns: [
         {
@@ -319,8 +319,8 @@
         back: -0.46
       },
     ],
-    fundsCost: 860,
-    timeCost: 165,
+    fundsCost: 665,
+    timeCost: 130,
     weapon: {
       mainGuns: [
         // 左右舷各一门前向 155 mm/62 Mk51
@@ -436,8 +436,8 @@
     rotateSpeed: 0.8,
     length: 275,
     width: 34,
-    fundsCost: 285,
-    timeCost: 110,
+    fundsCost: 270,
+    timeCost: 104,
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -781,8 +781,8 @@
     rotateSpeed: 0.8,
     length: 247,
     width: 34,
-    fundsCost: 215,
-    timeCost: 84,
+    fundsCost: 205,
+    timeCost: 82,
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -1133,8 +1133,8 @@
     rotateSpeed: 0.78,
     length: 266,
     width: 28,
-    fundsCost: 275,
-    timeCost: 107,
+    fundsCost: 245,
+    timeCost: 98,
     weapon: {
       mainGuns: [
         // 双联装高平炮 A
@@ -1560,8 +1560,8 @@
     rotateSpeed: 0.82,
     length: 270,
     width: 33,
-    fundsCost: 340,
-    timeCost: 130,
+    fundsCost: 335,
+    timeCost: 129,
     weapon: {
       mainGuns: [
         // 舰岛右舷双联装高平炮
@@ -1745,8 +1745,8 @@
     rotateSpeed: 0.72,
     length: 295,
     width: 34,
-    fundsCost: 405,
-    timeCost: 130,
+    fundsCost: 325,
+    timeCost: 129,
     weapon: {
       mainGuns: [
         // 127mm/54 单装高平炮
@@ -2146,7 +2146,7 @@
     length: 190,
     width: 22,
     fundsCost: 150,
-    timeCost: 58,
+    timeCost: 59,
     weapon: {
       mainGuns: [
         // 40mm 博福斯
@@ -2708,8 +2708,8 @@
     rotateSpeed: 0.75,
     length: 270,
     width: 30,
-    fundsCost: 335,
-    timeCost: 129,
+    fundsCost: 255,
+    timeCost: 101,
     weapon: {
       mainGuns: [
         // 右前主炮 A
@@ -2959,8 +2959,8 @@
     rotateSpeed: 0.8,
     length: 261,
     width: 30,
-    fundsCost: 300,
-    timeCost: 116,
+    fundsCost: 250,
+    timeCost: 99,
     weapon: {
       mainGuns: [
         {
@@ -3142,7 +3142,7 @@
     rotateSpeed: 0.6,
     length: 266,
     width: 36,
-    fundsCost: 615,
+    fundsCost: 385,
     timeCost: 130,
     weapon: {
       mainGuns: [
@@ -3633,8 +3633,8 @@
     rotateSpeed: 0.8,
     length: 261,
     width: 32,
-    fundsCost: 260,
-    timeCost: 103,
+    fundsCost: 250,
+    timeCost: 100,
     weapon: {
       mainGuns: [
         // 右主炮 A
@@ -3859,8 +3859,8 @@
     rotateSpeed: 0.8,
     length: 240,
     width: 33,
-    fundsCost: 285,
-    timeCost: 113,
+    fundsCost: 255,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         // 右主炮 A
@@ -4141,8 +4141,8 @@
     rotateSpeed: 1,
     length: 228,
     width: 22,
-    fundsCost: 200,
-    timeCost: 81,
+    fundsCost: 175,
+    timeCost: 72,
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -4315,8 +4315,8 @@
     rotateSpeed: 1,
     length: 228,
     width: 22,
-    fundsCost: 225,
-    timeCost: 90,
+    fundsCost: 185,
+    timeCost: 76,
     weapon: {
       mainGuns: [
         // 右高炮 A
@@ -4483,8 +4483,8 @@
     rotateSpeed: 0.85,
     length: 258,
     width: 26,
-    fundsCost: 285,
-    timeCost: 113,
+    fundsCost: 230,
+    timeCost: 93,
     weapon: {
       mainGuns: [
         // 右前高平炮 A
@@ -4693,8 +4693,8 @@
     rotateSpeed: 0.95,
     length: 227,
     width: 22,
-    fundsCost: 260,
-    timeCost: 102,
+    fundsCost: 185,
+    timeCost: 76,
     weapon: {
       mainGuns: [
         // 右高角炮 A
@@ -4945,8 +4945,8 @@
     rotateSpeed: 0.75,
     length: 219,
     width: 27,
-    fundsCost: 230,
-    timeCost: 91,
+    fundsCost: 210,
+    timeCost: 85,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -5329,8 +5329,8 @@
     rotateSpeed: 0.9,
     length: 186,
     width: 22,
-    fundsCost: 175,
-    timeCost: 68,
+    fundsCost: 145,
+    timeCost: 58,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -5465,8 +5465,8 @@
     rotateSpeed: 0.7,
     length: 180,
     width: 23,
-    fundsCost: 175,
-    timeCost: 68,
+    fundsCost: 170,
+    timeCost: 66,
     weapon: {
       mainGuns: [
         // 右舷高炮 A
@@ -5601,8 +5601,8 @@
     rotateSpeed: 0.7,
     length: 198,
     width: 26,
-    fundsCost: 185,
-    timeCost: 72,
+    fundsCost: 175,
+    timeCost: 68,
     weapon: {
       mainGuns: [
         // 右前高平炮
@@ -5737,8 +5737,8 @@
     rotateSpeed: 1.05,
     length: 168,
     width: 18,
-    fundsCost: 140,
-    timeCost: 55,
+    fundsCost: 125,
+    timeCost: 50,
     weapon: {
       mainGuns: [
         // 右前主炮
@@ -5846,8 +5846,8 @@
     rotateSpeed: 0.7,
     length: 234,
     width: 29,
-    fundsCost: 255,
-    timeCost: 101,
+    fundsCost: 230,
+    timeCost: 95,
     weapon: {
       mainGuns: [
         // 前后各两座、左右舷对称布置的 114mm 高平炮
@@ -6099,8 +6099,8 @@
     rotateSpeed: 0.7,
     length: 228,
     width: 32,
-    fundsCost: 250,
-    timeCost: 97,
+    fundsCost: 220,
+    timeCost: 89,
     weapon: {
       mainGuns: [
         // 右舷高平炮 A
@@ -6405,8 +6405,8 @@
     rotateSpeed: 0.7,
     length: 244,
     width: 32,
-    fundsCost: 245,
-    timeCost: 93,
+    fundsCost: 210,
+    timeCost: 81,
     weapon: {
       mainGuns: [
         // 右舷高平炮
@@ -6585,7 +6585,7 @@
     length: 212,
     width: 24,
     fundsCost: 165,
-    timeCost: 66,
+    timeCost: 65,
     weapon: {
       secondaryGuns: [
         // 前部四联装 pom-pom 2 座
@@ -7366,8 +7366,8 @@
     rotateSpeed: 1,
     length: 135,
     width: 18,
-    fundsCost: 88,
-    timeCost: 40,
+    fundsCost: 110,
+    timeCost: 41,
     weapon: {
       mainGuns: [
         // 右舷前 120mm 高平炮
@@ -7465,8 +7465,8 @@
     rotateSpeed: 0.7,
     length: 240,
     width: 27,
-    fundsCost: 210,
-    timeCost: 81,
+    fundsCost: 200,
+    timeCost: 77,
     weapon: {
       mainGuns: [
         // 右舷 120mm 高平炮 A
@@ -7752,7 +7752,7 @@
     length: 151,
     width: 21,
     fundsCost: 150,
-    timeCost: 59,
+    timeCost: 58,
     weapon: {
       mainGuns: [],
       secondaryGuns: [
@@ -8094,7 +8094,7 @@
     length: 147,
     width: 19,
     fundsCost: 135,
-    timeCost: 50,
+    timeCost: 52,
     weapon: {
       mainGuns: [
         {
@@ -8186,7 +8186,7 @@
     length: 135,
     width: 18,
     fundsCost: 135,
-    timeCost: 50,
+    timeCost: 52,
     weapon: {
       mainGuns: [
         {
@@ -8267,8 +8267,8 @@
     rotateSpeed: 0.85,
     length: 270,
     width: 33,
-    fundsCost: 720,
-    timeCost: 134,
+    fundsCost: 620,
+    timeCost: 121,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -8832,8 +8832,8 @@
     rotateSpeed: 0.8,
     length: 282,
     width: 37,
-    fundsCost: 830,
-    timeCost: 148,
+    fundsCost: 710,
+    timeCost: 132,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -9600,8 +9600,8 @@
     rotateSpeed: 0.8,
     length: 285,
     width: 39,
-    fundsCost: 660,
-    timeCost: 126,
+    fundsCost: 580,
+    timeCost: 115,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10074,8 +10074,8 @@
     rotateSpeed: 0.75,
     length: 207,
     width: 33,
-    fundsCost: 625,
-    timeCost: 121,
+    fundsCost: 545,
+    timeCost: 111,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10695,8 +10695,8 @@
     rotateSpeed: 0.58,
     length: 190,
     width: 35,
-    fundsCost: 525,
-    timeCost: 108,
+    fundsCost: 480,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         {
@@ -11230,8 +11230,8 @@
     rotateSpeed: 0.62,
     length: 190,
     width: 33,
-    fundsCost: 500,
-    timeCost: 105,
+    fundsCost: 455,
+    timeCost: 99,
     weapon: {
       mainGuns: [
         {
@@ -11534,8 +11534,8 @@
     rotateSpeed: 0.65,
     length: 190,
     width: 30,
-    fundsCost: 465,
-    timeCost: 100,
+    fundsCost: 440,
+    timeCost: 97,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11828,8 +11828,8 @@
     rotateSpeed: 0.68,
     length: 190,
     width: 32,
-    fundsCost: 460,
-    timeCost: 100,
+    fundsCost: 430,
+    timeCost: 96,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -12061,8 +12061,8 @@
     rotateSpeed: 0.65,
     length: 185,
     width: 32,
-    fundsCost: 450,
-    timeCost: 98,
+    fundsCost: 420,
+    timeCost: 95,
     weapon: {
       mainGuns: [
         {
@@ -12334,8 +12334,8 @@
     rotateSpeed: 0.65,
     length: 185,
     width: 32,
-    fundsCost: 445,
-    timeCost: 98,
+    fundsCost: 415,
+    timeCost: 94,
     weapon: {
       mainGuns: [
         {
@@ -12543,8 +12543,8 @@
     rotateSpeed: 0.75,
     length: 178,
     width: 33,
-    fundsCost: 475,
-    timeCost: 102,
+    fundsCost: 435,
+    timeCost: 97,
     weapon: {
       mainGuns: [
         // 前主炮 A（三联装）
@@ -12986,8 +12986,8 @@
     rotateSpeed: 0.65,
     length: 175,
     width: 32,
-    fundsCost: 410,
-    timeCost: 93,
+    fundsCost: 375,
+    timeCost: 89,
     weapon: {
       mainGuns: [
         {
@@ -13241,8 +13241,8 @@
     rotateSpeed: 0.7,
     length: 171,
     width: 32,
-    fundsCost: 425,
-    timeCost: 95,
+    fundsCost: 385,
+    timeCost: 90,
     weapon: {
       mainGuns: [
         {
@@ -13778,8 +13778,8 @@
     rotateSpeed: 0.8,
     length: 139,
     width: 24,
-    fundsCost: 360,
-    timeCost: 87,
+    fundsCost: 340,
+    timeCost: 85,
     weapon: {
       mainGuns: [
         // 2 座双联装 305mm/45 Mark 5 主炮
@@ -14027,7 +14027,7 @@
     rotateSpeed: 0.82,
     length: 134,
     width: 23,
-    fundsCost: 345,
+    fundsCost: 335,
     timeCost: 85,
     weapon: {
       mainGuns: [
@@ -14444,8 +14444,8 @@
     rotateSpeed: 0.8,
     length: 220,
     width: 31,
-    fundsCost: 560,
-    timeCost: 113,
+    fundsCost: 415,
+    timeCost: 94,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14806,8 +14806,8 @@
     rotateSpeed: 0.75,
     length: 210,
     width: 33,
-    fundsCost: 585,
-    timeCost: 116,
+    fundsCost: 430,
+    timeCost: 96,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15182,8 +15182,8 @@
     rotateSpeed: 0.75,
     length: 220,
     width: 34,
-    fundsCost: 570,
-    timeCost: 121,
+    fundsCost: 385,
+    timeCost: 97,
     weapon: {
       mainGuns: [
         // 一号主炮
@@ -15609,8 +15609,8 @@
     rotateSpeed: 0.72,
     length: 225,
     width: 35,
-    fundsCost: 610,
-    timeCost: 119,
+    fundsCost: 455,
+    timeCost: 99,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16073,8 +16073,8 @@
     rotateSpeed: 0.8,
     length: 263,
     width: 39,
-    fundsCost: 945,
-    timeCost: 163,
+    fundsCost: 600,
+    timeCost: 118,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16554,8 +16554,8 @@
     rotateSpeed: 0.8,
     length: 275,
     width: 41,
-    fundsCost: 930,
-    timeCost: 161,
+    fundsCost: 730,
+    timeCost: 135,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16974,8 +16974,8 @@
     rotateSpeed: 0.8,
     length: 287,
     width: 41,
-    fundsCost: 1105,
-    timeCost: 180,
+    fundsCost: 955,
+    timeCost: 164,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17549,8 +17549,8 @@
     rotateSpeed: 0.8,
     length: 251,
     width: 36,
-    fundsCost: 745,
-    timeCost: 137,
+    fundsCost: 665,
+    timeCost: 126,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17699,8 +17699,8 @@
     rotateSpeed: 1,
     length: 235,
     width: 30,
-    fundsCost: 605,
-    timeCost: 119,
+    fundsCost: 545,
+    timeCost: 111,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17865,8 +17865,8 @@
     rotateSpeed: 1.3,
     length: 186,
     width: 22,
-    fundsCost: 415,
-    timeCost: 94,
+    fundsCost: 385,
+    timeCost: 90,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17997,8 +17997,8 @@
     rotateSpeed: 0.8,
     length: 262,
     width: 32,
-    fundsCost: 540,
-    timeCost: 110,
+    fundsCost: 495,
+    timeCost: 104,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -18233,8 +18233,8 @@
     rotateSpeed: 0.7,
     length: 217,
     width: 32,
-    fundsCost: 540,
-    timeCost: 110,
+    fundsCost: 475,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -18863,8 +18863,8 @@
     rotateSpeed: 0.75,
     length: 305,
     width: 37,
-    fundsCost: 810,
-    timeCost: 145,
+    fundsCost: 695,
+    timeCost: 130,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19206,8 +19206,8 @@
     rotateSpeed: 0.85,
     length: 259,
     width: 34,
-    fundsCost: 640,
-    timeCost: 123,
+    fundsCost: 570,
+    timeCost: 114,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19414,8 +19414,8 @@
     rotateSpeed: 0.8,
     length: 227,
     width: 34,
-    fundsCost: 540,
-    timeCost: 110,
+    fundsCost: 480,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19713,8 +19713,8 @@
     rotateSpeed: 0.7,
     length: 197,
     width: 28,
-    fundsCost: 435,
-    timeCost: 97,
+    fundsCost: 405,
+    timeCost: 93,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19851,8 +19851,8 @@
     rotateSpeed: 0.8,
     length: 215,
     width: 28,
-    fundsCost: 395,
-    timeCost: 91,
+    fundsCost: 375,
+    timeCost: 89,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20018,8 +20018,8 @@
     rotateSpeed: 0.85,
     length: 269,
     width: 36,
-    fundsCost: 705,
-    timeCost: 132,
+    fundsCost: 625,
+    timeCost: 121,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20219,8 +20219,8 @@
     rotateSpeed: 0.85,
     length: 260,
     width: 34,
-    fundsCost: 645,
-    timeCost: 124,
+    fundsCost: 575,
+    timeCost: 115,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20399,8 +20399,8 @@
     rotateSpeed: 0.85,
     length: 282,
     width: 40,
-    fundsCost: 895,
-    timeCost: 156,
+    fundsCost: 750,
+    timeCost: 138,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20754,8 +20754,8 @@
     rotateSpeed: 0.8,
     length: 324,
     width: 36,
-    fundsCost: 955,
-    timeCost: 164,
+    fundsCost: 820,
+    timeCost: 147,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -21063,8 +21063,8 @@
     rotateSpeed: 1.5,
     length: 262,
     width: 32,
-    fundsCost: 470,
-    timeCost: 142,
+    fundsCost: 385,
+    timeCost: 130,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -21579,8 +21579,8 @@
     rotateSpeed: 1.2,
     length: 246,
     width: 28,
-    fundsCost: 380,
-    timeCost: 130,
+    fundsCost: 315,
+    timeCost: 112,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -21968,8 +21968,8 @@
     rotateSpeed: 1.4,
     length: 218,
     width: 23,
-    fundsCost: 340,
-    timeCost: 121,
+    fundsCost: 285,
+    timeCost: 102,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -22227,8 +22227,8 @@
     rotateSpeed: 1.35,
     length: 205,
     width: 22,
-    fundsCost: 260,
-    timeCost: 93,
+    fundsCost: 215,
+    timeCost: 77,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -22522,8 +22522,8 @@
     rotateSpeed: 1.35,
     length: 205,
     width: 22,
-    fundsCost: 255,
-    timeCost: 91,
+    fundsCost: 210,
+    timeCost: 76,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -22851,8 +22851,8 @@
     rotateSpeed: 1.6,
     length: 180,
     width: 19,
-    fundsCost: 185,
-    timeCost: 67,
+    fundsCost: 160,
+    timeCost: 58,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23052,8 +23052,8 @@
     rotateSpeed: 1.6,
     length: 186,
     width: 20,
-    fundsCost: 185,
-    timeCost: 67,
+    fundsCost: 160,
+    timeCost: 58,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23288,8 +23288,8 @@
     rotateSpeed: 1.7,
     length: 183,
     width: 20,
-    fundsCost: 175,
-    timeCost: 63,
+    fundsCost: 150,
+    timeCost: 54,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23453,8 +23453,8 @@
     rotateSpeed: 1.6,
     length: 180,
     width: 19,
-    fundsCost: 180,
-    timeCost: 65,
+    fundsCost: 155,
+    timeCost: 56,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23634,8 +23634,8 @@
     rotateSpeed: 1.7,
     length: 185,
     width: 19,
-    fundsCost: 195,
-    timeCost: 70,
+    fundsCost: 170,
+    timeCost: 61,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23869,8 +23869,8 @@
     rotateSpeed: 1.7,
     length: 185,
     width: 19,
-    fundsCost: 180,
-    timeCost: 65,
+    fundsCost: 165,
+    timeCost: 60,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -24008,8 +24008,8 @@
     rotateSpeed: 1.8,
     length: 165,
     width: 16,
-    fundsCost: 175,
-    timeCost: 63,
+    fundsCost: 155,
+    timeCost: 56,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -24190,8 +24190,8 @@
     rotateSpeed: 1.7,
     length: 186,
     width: 19,
-    fundsCost: 215,
-    timeCost: 77,
+    fundsCost: 190,
+    timeCost: 68,
     weapon: {
       mainGuns: [
         {
@@ -24348,8 +24348,8 @@
     rotateSpeed: 1.6,
     length: 186,
     width: 20,
-    fundsCost: 205,
-    timeCost: 74,
+    fundsCost: 185,
+    timeCost: 67,
     weapon: {
       mainGuns: [
         {
@@ -24551,8 +24551,8 @@
     rotateSpeed: 1.5,
     length: 207,
     width: 22,
-    fundsCost: 245,
-    timeCost: 88,
+    fundsCost: 205,
+    timeCost: 74,
     weapon: {
       mainGuns: [
         {
@@ -24694,8 +24694,8 @@
     rotateSpeed: 1.6,
     length: 220,
     width: 22,
-    fundsCost: 130,
-    timeCost: 48,
+    fundsCost: 120,
+    timeCost: 44,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -24748,8 +24748,8 @@
     rotateSpeed: 1.8,
     length: 177,
     width: 17,
-    fundsCost: 125,
-    timeCost: 46,
+    fundsCost: 115,
+    timeCost: 42,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -24804,8 +24804,8 @@
     rotateSpeed: 2,
     length: 181,
     width: 17,
-    fundsCost: 190,
-    timeCost: 68,
+    fundsCost: 155,
+    timeCost: 56,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -24937,8 +24937,8 @@
     rotateSpeed: 2,
     length: 185,
     width: 18,
-    fundsCost: 220,
-    timeCost: 79,
+    fundsCost: 160,
+    timeCost: 58,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -25112,8 +25112,8 @@
     rotateSpeed: 1.6,
     length: 206,
     width: 22,
-    fundsCost: 295,
-    timeCost: 105,
+    fundsCost: 215,
+    timeCost: 77,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -25399,8 +25399,8 @@
     rotateSpeed: 1.6,
     length: 204,
     width: 22,
-    fundsCost: 310,
-    timeCost: 110,
+    fundsCost: 220,
+    timeCost: 79,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -25770,8 +25770,8 @@
     rotateSpeed: 1.6,
     length: 201,
     width: 21,
-    fundsCost: 285,
-    timeCost: 102,
+    fundsCost: 200,
+    timeCost: 72,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -26099,8 +26099,8 @@
     rotateSpeed: 1.6,
     length: 201,
     width: 21,
-    fundsCost: 285,
-    timeCost: 102,
+    fundsCost: 205,
+    timeCost: 74,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -26414,8 +26414,8 @@
     rotateSpeed: 1.6,
     length: 202,
     width: 22,
-    fundsCost: 280,
-    timeCost: 100,
+    fundsCost: 200,
+    timeCost: 72,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -26751,8 +26751,8 @@
     rotateSpeed: 2.2,
     length: 142,
     width: 12,
-    fundsCost: 120,
-    timeCost: 44,
+    fundsCost: 110,
+    timeCost: 40,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -26841,8 +26841,8 @@
     rotateSpeed: 2.2,
     length: 162,
     width: 14,
-    fundsCost: 140,
-    timeCost: 51,
+    fundsCost: 120,
+    timeCost: 44,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -26973,8 +26973,8 @@
     rotateSpeed: 1.5,
     length: 160,
     width: 14,
-    fundsCost: 255,
-    timeCost: 91,
+    fundsCost: 195,
+    timeCost: 70,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -27316,8 +27316,8 @@
     rotateSpeed: 2,
     length: 162,
     width: 14,
-    fundsCost: 215,
-    timeCost: 77,
+    fundsCost: 190,
+    timeCost: 68,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -27455,8 +27455,8 @@
     rotateSpeed: 2,
     length: 162,
     width: 14,
-    fundsCost: 190,
-    timeCost: 68,
+    fundsCost: 125,
+    timeCost: 46,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -27671,8 +27671,8 @@
     rotateSpeed: 2,
     length: 162,
     width: 14,
-    fundsCost: 165,
-    timeCost: 60,
+    fundsCost: 125,
+    timeCost: 46,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -27888,8 +27888,8 @@
     rotateSpeed: 2,
     length: 162,
     width: 14,
-    fundsCost: 150,
-    timeCost: 54,
+    fundsCost: 120,
+    timeCost: 44,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -28041,8 +28041,8 @@
     rotateSpeed: 2.2,
     length: 140,
     width: 12,
-    fundsCost: 150,
-    timeCost: 54,
+    fundsCost: 120,
+    timeCost: 44,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -28152,8 +28152,8 @@
     rotateSpeed: 2,
     length: 175,
     width: 15,
-    fundsCost: 215,
-    timeCost: 77,
+    fundsCost: 145,
+    timeCost: 53,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -28465,8 +28465,8 @@
     rotateSpeed: 2,
     length: 192,
     width: 17,
-    fundsCost: 215,
-    timeCost: 77,
+    fundsCost: 135,
+    timeCost: 49,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -28618,8 +28618,8 @@
     rotateSpeed: 1.6,
     length: 217,
     width: 22,
-    fundsCost: 285,
-    timeCost: 102,
+    fundsCost: 245,
+    timeCost: 88,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -28742,8 +28742,8 @@
     rotateSpeed: 2,
     length: 177,
     width: 16,
-    fundsCost: 220,
-    timeCost: 79,
+    fundsCost: 195,
+    timeCost: 70,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -28839,8 +28839,8 @@
     rotateSpeed: 0.8,
     length: 201,
     width: 25,
-    fundsCost: 235,
-    timeCost: 84,
+    fundsCost: 190,
+    timeCost: 68,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29089,8 +29089,8 @@
     rotateSpeed: 1,
     length: 217,
     width: 24,
-    fundsCost: 320,
-    timeCost: 114,
+    fundsCost: 265,
+    timeCost: 95,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29234,8 +29234,8 @@
     rotateSpeed: 1.8,
     length: 160,
     width: 16,
-    fundsCost: 160,
-    timeCost: 58,
+    fundsCost: 145,
+    timeCost: 53,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29346,8 +29346,8 @@
     rotateSpeed: 2,
     length: 169,
     width: 19,
-    fundsCost: 180,
-    timeCost: 65,
+    fundsCost: 150,
+    timeCost: 54,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29501,8 +29501,8 @@
     rotateSpeed: 1.5,
     length: 210,
     width: 22,
-    fundsCost: 240,
-    timeCost: 86,
+    fundsCost: 210,
+    timeCost: 76,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29611,8 +29611,8 @@
     rotateSpeed: 1.6,
     length: 191,
     width: 18,
-    fundsCost: 170,
-    timeCost: 61,
+    fundsCost: 150,
+    timeCost: 54,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29716,8 +29716,8 @@
     rotateSpeed: 2.2,
     length: 116,
     width: 11,
-    fundsCost: 105,
-    timeCost: 39,
+    fundsCost: 100,
+    timeCost: 37,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29783,8 +29783,8 @@
     rotateSpeed: 2.2,
     length: 104,
     width: 11,
-    fundsCost: 110,
-    timeCost: 40,
+    fundsCost: 105,
+    timeCost: 39,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29864,8 +29864,8 @@
     rotateSpeed: 2.2,
     length: 106,
     width: 11,
-    fundsCost: 100,
-    timeCost: 37,
+    fundsCost: 95,
+    timeCost: 35,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29931,8 +29931,8 @@
     rotateSpeed: 2.2,
     length: 104,
     width: 10,
-    fundsCost: 100,
-    timeCost: 37,
+    fundsCost: 95,
+    timeCost: 35,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30053,8 +30053,8 @@
     rotateSpeed: 2.2,
     length: 118,
     width: 11,
-    fundsCost: 125,
-    timeCost: 46,
+    fundsCost: 115,
+    timeCost: 42,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30113,8 +30113,8 @@
     rotateSpeed: 2.2,
     length: 119,
     width: 11,
-    fundsCost: 125,
-    timeCost: 46,
+    fundsCost: 115,
+    timeCost: 42,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30173,8 +30173,8 @@
     rotateSpeed: 2.2,
     length: 119,
     width: 11,
-    fundsCost: 125,
-    timeCost: 46,
+    fundsCost: 115,
+    timeCost: 42,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30234,8 +30234,8 @@
     rotateSpeed: 2.2,
     length: 119,
     width: 11,
-    fundsCost: 125,
-    timeCost: 46,
+    fundsCost: 115,
+    timeCost: 42,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30309,8 +30309,8 @@
     rotateSpeed: 2.3,
     length: 111,
     width: 12,
-    fundsCost: 95,
-    timeCost: 35,
+    fundsCost: 85,
+    timeCost: 32,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30376,8 +30376,8 @@
     rotateSpeed: 2.2,
     length: 121,
     width: 12,
-    fundsCost: 100,
-    timeCost: 37,
+    fundsCost: 90,
+    timeCost: 34,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30429,8 +30429,8 @@
     rotateSpeed: 2.5,
     length: 99,
     width: 10,
-    fundsCost: 100,
-    timeCost: 37,
+    fundsCost: 95,
+    timeCost: 35,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30511,8 +30511,8 @@
     rotateSpeed: 2.4,
     length: 84,
     width: 8,
-    fundsCost: 70,
-    timeCost: 26,
+    fundsCost: 65,
+    timeCost: 25,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30579,8 +30579,8 @@
     rotateSpeed: 2.3,
     length: 99,
     width: 10,
-    fundsCost: 85,
-    timeCost: 32,
+    fundsCost: 75,
+    timeCost: 28,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30668,8 +30668,8 @@
     rotateSpeed: 2.3,
     length: 99,
     width: 10,
-    fundsCost: 95,
-    timeCost: 35,
+    fundsCost: 90,
+    timeCost: 34,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30750,8 +30750,8 @@
     rotateSpeed: 2.3,
     length: 115,
     width: 11,
-    fundsCost: 95,
-    timeCost: 35,
+    fundsCost: 90,
+    timeCost: 34,
     weapon: {
       mainGuns: [
         // 前主炮 A（双联装）
@@ -30835,8 +30835,8 @@
     rotateSpeed: 2.4,
     length: 126,
     width: 13,
-    fundsCost: 130,
-    timeCost: 48,
+    fundsCost: 120,
+    timeCost: 44,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30890,8 +30890,8 @@
     rotateSpeed: 2,
     length: 103.2,
     width: 10.8,
-    fundsCost: 45,
-    timeCost: 18,
+    fundsCost: 40,
+    timeCost: 16,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -31213,8 +31213,8 @@
     rotateSpeed: 6,
     length: 25,
     width: 6,
-    fundsCost: 35,
-    timeCost: 14,
+    fundsCost: 30,
+    timeCost: 12,
     weapon: {
       mainGuns: [
         // 主炮 A

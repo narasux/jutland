@@ -22,6 +22,12 @@ const (
 	shipProjectionKilometersPerMapUnit = 2.0
 	// 飞机航程初始化时除以 14.4 转成运行时距离。
 	planeProjectionKilometersPerMapUnit = 14.4
+	// 对舰口径效能以 127mm 为满值基准：这个口径以上才谈得上稳定破坏舰体结构。
+	caliberReference = 127.0
+	// 口径效能衰减指数，使 25mm 机炮约 0.32、40mm 约 0.45、76mm 约 0.70。
+	caliberExponent = 0.7
+	// 口径效能下限，保证极小口径仍有可比较的近距离压制价值，不会被完全抹平。
+	caliberFloor = 0.10
 )
 
 type powerAccumulator struct {
@@ -57,11 +63,11 @@ func CalculatePlane(plane *objUnit.Plane, bullets map[string]*objBullet.Bullet) 
 	acc := newPowerAccumulator()
 	for _, gun := range plane.Weapon.Guns {
 		if gun.AntiShip {
-			effectiveness := gunEffectiveness(gun, false, true)
+			effectiveness := gunEffectiveness(gun, bullets, false, true)
 			acc.addAntiShip(gun.Name, gunDPS(gun, bullets)*effectiveness, gunBurst(gun, bullets)*effectiveness)
 		}
 		if gun.AntiAircraft {
-			effectiveness := gunEffectiveness(gun, true, true)
+			effectiveness := gunEffectiveness(gun, bullets, true, true)
 			acc.addAntiAir(gun.Name, gunDPS(gun, bullets)*effectiveness, gunBurst(gun, bullets)*effectiveness)
 		}
 	}
@@ -131,11 +137,11 @@ func CalculateShip(
 	} {
 		for _, gun := range guns {
 			if gun.AntiShip {
-				effectiveness := gunEffectiveness(gun, false, false)
+				effectiveness := gunEffectiveness(gun, bullets, false, false)
 				acc.addAntiShip(gun.Name, gunDPS(gun, bullets)*effectiveness, gunBurst(gun, bullets)*effectiveness)
 			}
 			if gun.AntiAircraft {
-				effectiveness := gunEffectiveness(gun, true, false)
+				effectiveness := gunEffectiveness(gun, bullets, true, false)
 				acc.addAntiAir(gun.Name, gunDPS(gun, bullets)*effectiveness, gunBurst(gun, bullets)*effectiveness)
 			}
 			acc.maxProjectionRange = max(acc.maxProjectionRange, gun.Range)
@@ -471,7 +477,9 @@ func planeRocketBurst(launcher *objUnit.PlaneRocketLauncher, bullets map[string]
 	return float64(launcher.RocketCount) * expectedDamage(launcher.BulletName, bullets)
 }
 
-func gunEffectiveness(gun *objUnit.Gun, antiAir, planeShooter bool) float64 {
+func gunEffectiveness(
+	gun *objUnit.Gun, bullets map[string]*objBullet.Bullet, antiAir, planeShooter bool,
+) float64 {
 	// 命中系数把基础命中率、散布、射界和射程合在一起，得到一个可比较的有效输出倍率。
 	if gun == nil {
 		return 0
@@ -483,9 +491,33 @@ func gunEffectiveness(gun *objUnit.Gun, antiAir, planeShooter bool) float64 {
 			hitRate = 0.55
 		}
 	}
-	return weaponEffectiveness(
+	effectiveness := weaponEffectiveness(
 		hitRate, gun.BulletSpread, gun.Range,
 		gun.LeftFiringArc, gun.RightFiringArc, antiAir,
+	)
+	if antiAir {
+		return effectiveness
+	}
+	// 小口径炮弹打不穿舰体装甲，只能压制上层建筑，所以对舰输出还要乘口径效能。
+	return effectiveness * caliberEffectiveness(bulletDiameter(gun.BulletName, bullets))
+}
+
+// bulletDiameter 返回炮弹口径，查不到时返回 0 表示不做口径折算。
+func bulletDiameter(bulletName string, bullets map[string]*objBullet.Bullet) int {
+	bullet, ok := bullets[bulletName]
+	if !ok || bullet == nil {
+		return 0
+	}
+	return bullet.Diameter
+}
+
+// caliberEffectiveness 计算对舰口径效能，以 127mm 为满值基准按幂次衰减。
+func caliberEffectiveness(diameter int) float64 {
+	if diameter <= 0 {
+		return 1
+	}
+	return clamp(
+		math.Pow(float64(diameter)/caliberReference, caliberExponent), caliberFloor, 1,
 	)
 }
 

@@ -58,13 +58,18 @@ referenceScore = salvoDamage × (
   + 0.30 / referenceCycle
   ) × weaponTypeFactor
 weaponCost = clamp(
-    roundTo5(referenceScore / 5),
+    quantize(referenceScore / 5),
     1,
     100,
 )
+
+quantize(x) = round(x)      # x < 10 时用 $1 步进
+            = roundTo5(x)   # x >= 10 时用 $5 步进
 ```
 
 `referenceScore` 是武器强弱比较分，不直接等同于游戏资金。除以 `5` 后再写入 `fundsCost`，避免一座发射器或炮塔的显示价格接近整艘主力舰。
+
+`$5` 步进在低分段太粗：参考分 0~12.5 会被一起抹成 0，导致 6 英寸单装副炮与机枪同价，因此 `$10` 以下改用 `$1` 步进（`COST_FINE_STEP` / `COST_FINE_STEP_LIMIT`）。即便如此，三管 25mm 机炮的参考分只有 `1.6`，仍会与 7.7mm 机枪同价，所以再单独为 25mm 机炮设置最低参考价 `$2`（见 `MIN_GUN_COST_BY_CALIBER`）；机枪（参考分 < 0.5，取整后仍为 `0`）保持 `$1`。
 
 | 武器 | actualCycle | referenceCycle | weaponTypeFactor |
 |---|---|---:|---:|
@@ -72,7 +77,7 @@ weaponCost = clamp(
 | 鱼雷 | `reloadTime + (count - 1) × shotInterval` | 60s | 1.00 |
 | 舰载火箭 | 装填、组内间隔、组间间隔组成的完整周期 | 60s | 0.70 |
 
-带 `/` 的标准武器统一计算。`RailGun`、`RushYa`、`RunYa`、`FlyYa`、`LeiYa`、`Impact`、`YaLei`、`ShanDa`、`DuckRocket` 等特殊武器没有阵营路径，保留手工价格，但超过 `$100` 时压到全局上限。
+带 `/` 的标准武器统一计算。`RailGun`、`RushYa`、`RunYa`、`FlyYa`、`LeiYa`、`Impact`、`YaLei`、`ShanDa`、`DuckRocket` 等特殊武器没有阵营路径，保留手工价格，但同样被压到 `$1–100` 的全局范围内。
 
 ## 舰船费用
 

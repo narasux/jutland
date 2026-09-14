@@ -26,7 +26,28 @@ REFERENCE_CYCLES = {
 COST_MIN = 1
 COST_MAX = 100
 COST_STEP = 5
+# $5 步进在低分段太粗：参考分 0~12.5 会一起被抹成 0，导致 6 英寸单装副炮与机枪同价。
+# 因此 $10 以下改用 $1 步进，$10 及以上仍按 $5 分档。
+COST_FINE_STEP = 1
+COST_FINE_STEP_LIMIT = 10
 REFERENCE_SCORE_PER_FUND = 5.0
+# 25mm 机炮的参考分（单装 0.5 / 双联 1.0 / 三联 1.6）低于 $5 步进，会被抹平到 $1，
+# 与 12.7/13mm 机枪同价。因此单独为 25mm 机炮设置最低参考价：
+# 其他口径（含 37/40/76mm 舰炮与各类机枪）仍按公式结果，不受此表影响。
+MIN_GUN_COST_BY_CALIBER = ((25, 25, 2),)
+
+
+def quantize_cost(raw):
+    if raw < COST_FINE_STEP_LIMIT:
+        return round_to_step(raw, COST_FINE_STEP)
+    return round_to_step(raw, COST_STEP)
+
+
+def min_gun_cost(diameter):
+    for min_diameter, max_diameter, cost in MIN_GUN_COST_BY_CALIBER:
+        if min_diameter <= diameter <= max_diameter:
+            return cost
+    return COST_MIN
 
 TARGETS = (
     ("GUN ", "configs/guns.json5", "guns", "bulletCount", "gun"),
@@ -93,7 +114,7 @@ def weapon_unit_cost(damage, count, cycle, weapon_type):
     )
     return max(
         COST_MIN,
-        min(COST_MAX, round_to_step(raw, COST_STEP)),
+        min(COST_MAX, quantize_cost(raw)),
     )
 
 
@@ -114,6 +135,9 @@ def evaluate_target(bullets, relative_path, count_key, weapon_type):
         )
         if "/" in weapon["name"]:
             cost = weapon_unit_cost(damage, count, cycle, weapon_type)
+        if weapon_type == "gun":
+            diameter = bullets.get(weapon["bulletName"], {}).get("diameter", 0)
+            cost = max(cost, min_gun_cost(diameter))
         costs[weapon["name"]] = cost
         rows.append(
             (

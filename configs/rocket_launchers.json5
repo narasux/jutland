@@ -67,7 +67,7 @@
     bulletSpeed: 680,
     proximityRadius: 0.2,
     blastRadius: 0.5,
-    fundsCost: 5,
+    fundsCost: 3,
     antiShip: true,
     antiAircraft: false
   },

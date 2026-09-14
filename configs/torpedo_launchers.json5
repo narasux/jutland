@@ -227,7 +227,7 @@
     reloadTime: 30,
     range: 13,
     bulletSpeed: 45,
-    fundsCost: 45
+    fundsCost: 50
   },
   // 苏联海军 533mm 五联装 鱼雷
   {

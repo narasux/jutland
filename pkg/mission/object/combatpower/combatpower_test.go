@@ -130,7 +130,7 @@ func TestPlaneFormationAndWeaponCapabilities(t *testing.T) {
 	if math.Abs(fighterPower.Details.EffectiveHP-wantEHP) > 1e-9 {
 		t.Fatalf("fighter formation EHP = %v, want %v", fighterPower.Details.EffectiveHP, wantEHP)
 	}
-	wantAntiAirDPS := gunDPS(gun, bullets) * gunEffectiveness(gun, true, true) * planeFormationSize
+	wantAntiAirDPS := gunDPS(gun, bullets) * gunEffectiveness(gun, bullets, true, true) * planeFormationSize
 	if math.Abs(fighterPower.Details.AntiAirDPS-wantAntiAirDPS) > 1e-9 {
 		t.Fatalf("fighter formation anti-air DPS = %v, want %v", fighterPower.Details.AntiAirDPS, wantAntiAirDPS)
 	}
@@ -249,6 +249,56 @@ func TestWeightedTotalKeepsArmedUnitVisible(t *testing.T) {
 	}
 	if got := weightedTotal(0, 0); got != 0 {
 		t.Fatalf("weightedTotal(0, 0) = %d, want 0", got)
+	}
+}
+
+func TestCaliberEffectivenessDiscountsSmallShells(t *testing.T) {
+	// 未知口径不做折算，127mm 及以上视为满值。
+	if got := caliberEffectiveness(0); got != 1 {
+		t.Fatalf("caliberEffectiveness(0) = %v, want 1", got)
+	}
+	if got := caliberEffectiveness(127); got != 1 {
+		t.Fatalf("caliberEffectiveness(127) = %v, want 1", got)
+	}
+	if got := caliberEffectiveness(460); got != 1 {
+		t.Fatalf("caliberEffectiveness(460) = %v, want 1", got)
+	}
+	// 小口径按幂次衰减，且不超过下限。
+	if got, want := caliberEffectiveness(25), math.Pow(25.0/127, caliberExponent); math.Abs(got-want) > 1e-9 {
+		t.Fatalf("caliberEffectiveness(25) = %v, want %v", got, want)
+	}
+	if got := caliberEffectiveness(1); got != caliberFloor {
+		t.Fatalf("caliberEffectiveness(1) = %v, want floor %v", got, caliberFloor)
+	}
+	if !(caliberEffectiveness(25) < caliberEffectiveness(76) &&
+		caliberEffectiveness(76) < caliberEffectiveness(127)) {
+		t.Fatal("caliber effectiveness should increase with caliber")
+	}
+}
+
+func TestGunEffectivenessAppliesCaliberToAntiShipOnly(t *testing.T) {
+	bullets := map[string]*objBullet.Bullet{
+		"mg":   {Name: "mg", Damage: 2, Diameter: 25},
+		"main": {Name: "main", Damage: 400, Diameter: 200},
+	}
+	mount := func(bulletName string) *objUnit.Gun {
+		return &objUnit.Gun{
+			BulletName: bulletName, BulletCount: 1, ReloadTime: 5, Range: 10, BulletSpread: 50,
+			LeftFiringArc:  objUnit.FiringArc{Start: 180, End: 360},
+			RightFiringArc: objUnit.FiringArc{Start: 0, End: 180},
+		}
+	}
+	mg, main := gunEffectiveness(mount("mg"), bullets, false, false), gunEffectiveness(mount("main"), bullets, false, false)
+	if want := main * caliberEffectiveness(25); math.Abs(mg-want) > 1e-9 {
+		t.Fatalf("small caliber anti-ship effectiveness = %v, want %v", mg, want)
+	}
+	if mg >= main {
+		t.Fatalf("small caliber anti-ship effectiveness %v should be below main gun %v", mg, main)
+	}
+	// 对空不吃口径惩罚，两种口径只差基础命中率之外的参数。
+	if got, want := gunEffectiveness(mount("mg"), bullets, true, false),
+		gunEffectiveness(mount("main"), bullets, true, false); math.Abs(got-want) > 1e-9 {
+		t.Fatalf("anti-air effectiveness should not depend on caliber: %v vs %v", got, want)
 	}
 }
 
