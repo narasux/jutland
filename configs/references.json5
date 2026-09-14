@@ -8888,4 +8888,278 @@
       },
     ],
   },
+  {
+    name: "Hs123A",
+    displayName: "亨舍尔 Hs 123 A-1 俯冲轰炸机",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "炸弹",
+        value: "1 x 250kg，4 x 50kg",
+      },
+    ],
+    description: "Hs 123 A-1 是德国第一种俯冲轰炸机，也是德国空军最后一种双翼作战机，1936 年服役。它装一台 880 PS 的 BMW 132Dc 星型发动机，机头两挺 7.92mm MG 17 机枪，翼下可挂 1 枚 250kg 加 4 枚 50kg 炸弹。该机在西班牙内战与东线担任近距空中支援，结构坚固、低速操控性好，但 1940 年即停产，损耗无法补充。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Hs 123俯冲轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/Hs_123%E4%BF%AF%E8%A1%9D%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "Ju87B",
+    displayName: "容克 Ju 87 B-1 斯图卡",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "机枪（后向）",
+        value: "1 x 7.92mm MG 15",
+      },
+      {
+        label: "炸弹",
+        value: "1 x 250kg，4 x 50kg",
+      },
+    ],
+    description: "Ju 87 B-1 是斯图卡系列首个大批量生产型，1938 年起装备德国空军，机翼下的耶利哥号角在俯冲时发出啸叫，成为闪击战的心理战标志。它装一台 Jumo 211 发动机，两翼各一挺 7.92mm MG 17 前射机枪、后座一挺 MG 15 活动机枪，机身中线挂架带 1 枚 250kg 炸弹，翼下另挂 4 枚 50kg。该型在波兰、法国与不列颠空战中损失惨重，暴露了低速与自卫火力弱的缺陷。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Ju 87俯冲轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/Ju_87%E4%BF%AF%E8%A1%9D%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "Hs129B",
+    displayName: "亨舍尔 Hs 129 B-2 攻击机",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（前向）",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "炸弹",
+        value: "6 x 50kg",
+      },
+    ],
+    description: "Hs 129 B-2 是专为东线反坦克任务改装的对地攻击机，1942 年服役。两台 700 PS 的 Gnome-Rhône 14M 发动机功率不足，机头装两门 20mm MG 151/20 机炮与两挺 7.92mm MG 17 机枪，翼下可挂 6 枚 50kg 炸弹。座舱用装甲包成狭小的「浴缸」、视野很差，但座舱与油箱都有装甲保护，主要活跃于东线，装备数量太少，未能改变战局。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Hs 129攻击机",
+        url: "https://zh.wikipedia.org/zh-cn/Hs_129%E6%94%BB%E6%93%8A%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "Ar234B",
+    displayName: "阿拉多 Ar 234 B-2 闪电",
+    armaments: [
+      {
+        label: "炸弹（水平投弹）",
+        value: "3 x 500kg",
+      },
+    ],
+    description: "Ar 234 B-2 是世界上第一种投入实战的喷气式轰炸机，1944 年 9 月服役。两台 Jumo 004B 涡喷发动机让它最大速度超过 700 km/h，活塞式战斗机极难拦截。该机最初作为高速侦察机使用，因为机身油箱占满内部空间而没有弹舱，1.5 吨炸弹全部外挂；1945 年 3 月对雷马根鲁登道夫桥的反复攻击是它最著名的轰炸行动。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Ar 234轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/Ar_234%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "Do17E",
+    displayName: "多尼尔 Do 17 E-1 飞行铅笔",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "2 x 7.92mm MG 15",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "1 x 500kg，10 x 50kg",
+      },
+    ],
+    description: "Do 17 E-1 是 Do 17 系列最早的量产轰炸型，1937 年服役，细长机身使它得到「飞行铅笔」的绰号。它装两台 750 PS 的 BMW VI 7.3D 发动机，实际最大速度约 330 km/h，机背一挺双联装 7.92mm MG 15 自卫，弹舱可带 10 枚 50kg 炸弹，机腹挂架另带 1 枚 500kg。该机在波兰与法国战役中大量使用，但载弹量偏小，很快被 Do 217 取代。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Do 17轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/Do_17%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "Ju88A",
+    displayName: "容克 Ju 88 A-5 中型轰炸机",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "3 x 7.92mm MG 15",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "2 x 500kg，4 x 250kg",
+      },
+    ],
+    description: "Ju 88 A-5 是 Ju 88 系列产量最大的轰炸改型，1940 年在不列颠空战期间投入一线。它是旧 A-1 机身配上 A-4 加长机翼的过渡型号，两台 Jumo 211 发动机与紧凑机身使它兼具速度、载弹量和多用途性。三挺 7.92mm MG 15 活动机枪分别布置在机头、机背与机腹，弹舱内可带 2 枚 500kg 与 4 枚 250kg 炸弹，是德国空军的主力中型轰炸机。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Ju 88轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/Ju_88%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "He111P",
+    displayName: "亨克尔 He 111 P-2 中型轰炸机",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "5 x 7.92mm MG 15",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "4 x 250kg",
+      },
+    ],
+    description: "He 111 P-2 是 He 111 改用 DB 601 发动机的改型，1939 年服役，首次采用全玻璃无阶式机鼻，成为它最易辨认的特征。五挺 7.92mm MG 15 活动机枪覆盖机头、机背、机腹与两侧射界，弹舱内可带 4 枚 250kg 炸弹。该机在不列颠空战中损失严重，此后多转用于夜间轰炸与运输。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - He 111轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/He_111%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "BC138C",
+    displayName: "布洛姆-福斯 BV 138 C-1 飞行木鞋",
+    armaments: [
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（前向）",
+        value: "1 x 13mm MG 131",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "3 x 50kg",
+      },
+    ],
+    description: "BV 138 C-1 是德国海军的三发远程海上侦察水上飞机，1941 年 3 月服役，船形机身与短翼让它在大西洋与北海长时间巡逻，搜索盟军船团并引导 U 艇。三台 Jumo 205D 柴油机便于从潜艇补给燃油。武装为两门 20mm MG 151/20、一挺 13mm MG 131 与两挺 7.92mm MG 15 活动机枪，翼下挂载 3 枚 50kg 炸弹；速度慢、自卫弱，是盟军战斗机容易得手的目标。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 布洛姆+福斯",
+        url: "https://zh.wikipedia.org/zh-cn/%E5%B8%83%E6%B4%9B%E5%A7%86%2B%E7%A6%8F%E6%96%AF",
+      },
+    ],
+  },
+  {
+    name: "Do217K",
+    displayName: "多尼尔 Do 217 K-2 中型轰炸机",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "1 x 7.92mm MG 81Z",
+      },
+      {
+        label: "机枪（机背）",
+        value: "2 x 7.92mm MG 81",
+      },
+      {
+        label: "机枪（后向）",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "2 x 1400kg",
+      },
+    ],
+    description: "Do 217 K-2 是 Do 217 系列为反舰任务改装的后期型，1943 年服役，采用 DB 603 发动机与无框座舱，最大速度约 530 km/h。它专为挂载 Fritz X 无线电制导滑翔炸弹设计，1943 年 9 月参加攻击意大利舰队，击沉战列舰罗马号，是最早实战投放精确制导武器的机型之一。自卫火力为 1 挺 7.92mm MG 81Z 双联机枪、2 挺 MG 81 与 2 挺 13mm MG 131，弹舱可带 2 枚 1400kg 炸弹。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Do 217轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/Do_217%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "Fw200C",
+    displayName: "福克-沃尔夫 Fw 200 C-1 兀鹰",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "4 x 7.92mm MG 15",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "4 x 250kg",
+      },
+    ],
+    description: "Fw 200 C-1 由 Fw 200 远程客机改装而来，1940 年服役，四台 BMW 132 发动机带来 3500 km 以上的航程。它曾在大西洋上远程攻击盟军商船，被丘吉尔称作「大西洋之鞭」，1940 年 10 月击沉 Empress of Britain 号是著名战例。该机以 4 挺 7.92mm MG 15 活动机枪自卫，弹舱可带 4 枚 250kg 炸弹，但机身结构脆弱、低空机动性差，遇到盟军护航战斗机时损失很大。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Fw 200侦察机",
+        url: "https://zh.wikipedia.org/zh-cn/Fw_200%E5%81%B5%E5%AF%9F%E6%A9%9F",
+      },
+    ],
+  },
+  {
+    name: "He177A",
+    displayName: "亨克尔 He 177 A-5 狮鹫",
+    armaments: [
+      {
+        label: "机枪（前向）",
+        value: "1 x 7.92mm MG 81",
+      },
+      {
+        label: "机炮（前向）",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "机枪（机背）",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "机枪（机腹前向）",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "机炮（后向）",
+        value: "1 x 13mm MG 131",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "2 x 1800kg，2 x 1000kg",
+      },
+    ],
+    description: "He 177 A-5 是德国唯一投入批量生产的重型轰炸机，1943 年 12 月起生产。两台 DB 610 双联发动机各驱动一副四叶桨，因散热不良与要求具备俯冲能力而长期受发动机起火困扰，得名「帝国火炬」。公开资料给出的最大速度约 488 km/h，航程 5500–6000 km；自卫火力为机头 1 挺 7.92mm MG 81、前上方 2 门 20mm MG 151/20、机背与机腹各 2 挺、机尾 1 挺 13mm MG 131，弹舱可带 2 枚 1800kg 与 2 枚 1000kg 炸弹。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - He 177轰炸机",
+        url: "https://zh.wikipedia.org/zh-cn/He_177%E8%BD%9F%E7%82%B8%E6%A9%9F",
+      },
+    ],
+  },
 ]

@@ -9009,4 +9009,278 @@
       },
     ],
   },
+  {
+    name: "Hs123A",
+    displayName: "Henschel Hs 123 A-1",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "Bombs",
+        value: "1 x 250 kg, 4 x 50 kg",
+      },
+    ],
+    description: "The Hs 123 A-1 was Germany's first dive bomber and the Luftwaffe's last operational biplane, entering service in 1936. A BMW 132Dc radial of 880 PS drove a rugged airframe armed with two 7.92mm MG 17 machine guns and up to one 250 kg plus four 50 kg bombs. It gave close support in Spain and on the Eastern Front but went out of production in 1940.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Henschel Hs 123",
+        url: "https://en.wikipedia.org/wiki/Henschel_Hs_123",
+      },
+    ],
+  },
+  {
+    name: "Ju87B",
+    displayName: "Junkers Ju 87 B-1 Stuka",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "Machine Guns (Rear)",
+        value: "1 x 7.92mm MG 15",
+      },
+      {
+        label: "Bombs",
+        value: "1 x 250 kg, 4 x 50 kg",
+      },
+    ],
+    description: "The Ju 87 B-1 was the first mass-produced Stuka, joining the Luftwaffe in 1938; the Jericho-Trompete sirens on its wings made the dive a weapon of psychological warfare. A Jumo 211 powered two 7.92mm MG 17 guns in the wings, one MG 15 aft, a 250 kg centreline bomb and four 50 kg bombs. Poland, France and Britain exposed its slow speed and weak defences.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Junkers Ju 87",
+        url: "https://en.wikipedia.org/wiki/Junkers_Ju_87",
+      },
+    ],
+  },
+  {
+    name: "Hs129B",
+    displayName: "Henschel Hs 129 B-2",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 7.92mm MG 17",
+      },
+      {
+        label: "Bombs",
+        value: "6 x 50 kg",
+      },
+    ],
+    description: "The Hs 129 B-2 was a ground-attack aircraft adapted for anti-tank work on the Eastern Front, entering service in 1942. Its two 700 PS Gnome-Rhône 14M engines were underpowered, and it carried two 20mm MG 151/20 cannon and two 7.92mm MG 17 machine guns in the nose with six 50 kg bombs. The armoured «bathtub» cockpit had poor visibility, and its small numbers could not change the course of the fighting.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Henschel Hs 129",
+        url: "https://en.wikipedia.org/wiki/Henschel_Hs_129",
+      },
+    ],
+  },
+  {
+    name: "Ar234B",
+    displayName: "Arado Ar 234 B-2 Blitz",
+    armaments: [
+      {
+        label: "Bombs (Level)",
+        value: "3 x 500 kg",
+      },
+    ],
+    description: "The Ar 234 B-2 was the world's first jet bomber to see combat, entering service in September 1944. Two Jumo 004B turbojets gave it a speed above 700 km/h that piston-engined fighters could barely match. It began as a high-speed reconnaissance aircraft; its fuel tanks filled the fuselage, so all 1,500 kg of bombs hung externally. Repeated attacks on the Remagen bridge in March 1945 were its best-known bombing missions.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Arado Ar 234 Blitz",
+        url: "https://en.wikipedia.org/wiki/Arado_Ar_234_Blitz",
+      },
+    ],
+  },
+  {
+    name: "Do17E",
+    displayName: "Dornier Do 17 E-1",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "2 x 7.92mm MG 15",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "1 x 500 kg, 10 x 50 kg",
+      },
+    ],
+    description: "The Do 17 E-1 was the earliest production bomber of the Do 17 family, entering service in 1937; its slender fuselage earned the nickname «Flying Pencil». Two 750 PS BMW VI 7.3D engines gave it a top speed of only about 330 km/h. A twin 7.92mm MG 15 on the dorsal position was its only defence, with ten 50 kg bombs internally and one 500 kg externally. It flew over Poland and France but was soon replaced.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Dornier Do 17",
+        url: "https://en.wikipedia.org/wiki/Dornier_Do_17",
+      },
+    ],
+  },
+  {
+    name: "Ju88A",
+    displayName: "Junkers Ju 88 A-5",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "3 x 7.92mm MG 15",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "2 x 500 kg, 4 x 250 kg",
+      },
+    ],
+    description: "The Ju 88 A-5 was the most numerous bomber variant of the Ju 88, reaching the front during the Battle of Britain in 1940. It was a transitional type, mating the old A-1 fuselage to the longer A-4 wing, and two Jumo 211 engines gave it speed, bomb load and versatility. Three 7.92mm MG 15 machine guns covered nose, dorsal and ventral positions, and two 500 kg with four 250 kg bombs fitted the bay.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Junkers Ju 88",
+        url: "https://en.wikipedia.org/wiki/Junkers_Ju_88",
+      },
+    ],
+  },
+  {
+    name: "He111P",
+    displayName: "Heinkel He 111 P-2",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "5 x 7.92mm MG 15",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "4 x 250 kg",
+      },
+    ],
+    description: "The He 111 P-2 was the DB 601-powered version of the He 111, entering service in 1939 with the first fully glazed «stepless» cockpit that became its most recognisable feature. Five 7.92mm MG 15 machine guns covered the nose, dorsal, ventral and beam positions, and the bay carried four 250 kg bombs. Heavy losses over Britain relegated it to night bombing and transport work.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Heinkel He 111",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_111",
+      },
+    ],
+  },
+  {
+    name: "BC138C",
+    displayName: "Blohm & Voss BV 138 C-1",
+    armaments: [
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Guns (Forward)",
+        value: "1 x 13mm MG 131",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "3 x 50 kg",
+      },
+    ],
+    description: "The BV 138 C-1 was the German Navy's three-engined long-range maritime reconnaissance flying boat, entering service in March 1941. Boat hull and stub wings let it patrol the Atlantic and North Sea for long periods, hunting convoys and directing U-boats onto them, and its Jumo 205D diesels could be refuelled from submarines. Two 20mm MG 151/20, one 13mm MG 131 and two 7.92mm MG 15 defended it, with three 50 kg bombs under the wings; slow and lightly armed, it was easy prey.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Blohm & Voss BV 138",
+        url: "https://en.wikipedia.org/wiki/Blohm_%26_Voss_BV_138",
+      },
+    ],
+  },
+  {
+    name: "Do217K",
+    displayName: "Dornier Do 217 K-2",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "1 x 7.92mm MG 81Z",
+      },
+      {
+        label: "Machine Guns (Dorsal)",
+        value: "2 x 7.92mm MG 81",
+      },
+      {
+        label: "Machine Guns (Rear)",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "2 x 1400 kg",
+      },
+    ],
+    description: "The Do 217 K-2 was a late anti-shipping variant of the Do 217, entering service in 1943 with DB 603 engines and a frameless cockpit giving about 530 km/h. It was built to carry the Fritz X radio-guided glide bomb, and in September 1943 it attacked the Italian fleet, sinking the battleship Roma — one of the first operational uses of a precision-guided weapon. One twin 7.92mm MG 81Z, two MG 81 and two 13mm MG 131 defended it.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Dornier Do 217",
+        url: "https://en.wikipedia.org/wiki/Dornier_Do_217",
+      },
+    ],
+  },
+  {
+    name: "Fw200C",
+    displayName: "Focke-Wulf Fw 200 C-1 Condor",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "4 x 7.92mm MG 15",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "4 x 250 kg",
+      },
+    ],
+    description: "The Fw 200 C-1 was converted from the Fw 200 long-range airliner and entered service in 1940, its four BMW 132 engines giving a range beyond 3,500 km. It hunted Allied shipping far out in the Atlantic, earning Churchill's name «scourge of the Atlantic», and sank the liner Empress of Britain in October 1940. Four 7.92mm MG 15 machine guns and four 250 kg bombs armed it, but its structure was weak and losses to escort fighters heavy.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Focke-Wulf Fw 200 Condor",
+        url: "https://en.wikipedia.org/wiki/Focke-Wulf_Fw_200_Condor",
+      },
+    ],
+  },
+  {
+    name: "He177A",
+    displayName: "Heinkel He 177 A-5 Greif",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "1 x 7.92mm MG 81",
+      },
+      {
+        label: "Cannons (Forward)",
+        value: "2 x 20mm MG 151/20",
+      },
+      {
+        label: "Machine Guns (Dorsal)",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "Machine Guns (Ventral, Forward)",
+        value: "2 x 13mm MG 131",
+      },
+      {
+        label: "Cannons (Rear)",
+        value: "1 x 13mm MG 131",
+      },
+      {
+        label: "Bombs (Level)",
+        value: "2 x 1800 kg, 2 x 1000 kg",
+      },
+    ],
+    description: "The He 177 A-5 was the only German heavy bomber to reach mass production, built from December 1943. Two paired DB 610 engines each drove a four-bladed propeller, and poor cooling plus a dive-bombing requirement left it plagued by engine fires and the nickname «Reich's torch». Published figures give about 488 km/h and a range of 5,500-6,000 km; defensive armament ran from a 7.92mm MG 81 in the nose to 20mm MG 151/20 and 13mm MG 131 guns.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Heinkel He 177 Greif",
+        url: "https://en.wikipedia.org/wiki/Heinkel_He_177_Greif",
+      },
+    ],
+  },
 ]
