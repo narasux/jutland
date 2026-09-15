@@ -3212,6 +3212,41 @@
     ],
   },
   {
+    name: "johnston",
+    displayName: "ジョンストン",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x1 127mm/38",
+      },
+      {
+        label: "対空砲",
+        value: "5x2 40mm/60",
+      },
+      {
+        label: "対空砲",
+        value: "7x1 20mm/70",
+      },
+      {
+        label: "魚雷",
+        value: "2x5 533mm",
+      },
+    ],
+    description: "USS ジョンストン（DD-557）はフレッチャー級駆逐艦で、1943年10月に就役し、翌年「タフィ3」護衛空母部隊に配属された。1944年10月25日のサマール沖海戦では、アーネスト・E・エヴァンス中佐の指揮のもと栗田艦隊へ魚雷突撃を敢行して重巡「熊野」を大破させ、その後も5インチ砲で戦艦や巡洋艦と撃ち合いを続けた末に沈没した。大統領部隊感状を受け、エヴァンス中佐は死後名誉勲章を授与された。",
+    author: "Ian Roberts",
+    links: [
+      {
+        name: "Shipbucket — DD-557 Johnston",
+        url: "https://www.shipbucket.com/drawings/51",
+      },
+      {
+        name: "ウィキペディア — ジョンストン (DD-557)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%B9%E3%83%88%E3%83%B3_%28DD-557%29",
+      },
+    ],
+  },
+  {
     name: "JP/100/65/2/Type98/DP",
     displayName: "九八式 100mm 連装高角砲",
     type: "兵器",

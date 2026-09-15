@@ -31,6 +31,17 @@
     bulletSpeed: 45,
     fundsCost: 55
   },
+  // 美国海军 533mm 5联装 鱼雷（弗莱彻级 Mk 15 发射管）
+  {
+    name: "US/533/5",
+    bulletName: "US/TB/533/1931",
+    bulletCount: 5,
+    shotInterval: 1,
+    reloadTime: 90,
+    range: 12,
+    bulletSpeed: 45,
+    fundsCost: 60
+  },
   // 美国海军 533mm 单装鱼雷
   {
     name: "US/533/1",

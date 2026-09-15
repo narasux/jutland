@@ -30037,6 +30037,163 @@
       ]
     }
   },
+  {
+    // 约翰斯顿
+    name: "johnston",
+    nation: "us",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1944,
+    totalHP: 2500,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 36.5,
+    acceleration: 1.2,
+    rotateSpeed: 2.2,
+    length: 115,
+    width: 12,
+    fundsCost: 105,
+    timeCost: 39,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.64,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 前主炮 B
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.52,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 C
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.35,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 D
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.53,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        },
+        // 后主炮 E
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.68,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [
+        // 右舷 40mm 双联装 A
+        {
+          name: "US/40/60/2",
+          posPercent: 0.43,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 40mm 双联装 A
+        {
+          name: "US/40/60/2",
+          posPercent: 0.43,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷 40mm 双联装 B
+        {
+          name: "US/40/60/2",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 40mm 双联装 B
+        {
+          name: "US/40/60/2",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 中轴 40mm 双联装 C
+        {
+          name: "US/40/60/2",
+          posPercent: -0.44,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+      ],
+      antiAircraftGuns: [
+        // 右舷 20mm 单装  2 座
+        {
+          name: "US/20/70",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左舷 20mm 单装 2 座
+        {
+          name: "US/20/70",
+          posPercent: -0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰尾 20mm 单装 3 座
+        {
+          name: "US/20/70",
+          posPercent: -0.83,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.83,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.88,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中轴鱼雷 A
+        {
+          name: "US/533/5",
+          posPercent: 0.12,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中轴鱼雷 B
+        {
+          name: "US/533/5",
+          posPercent: -0.05,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
   // 日本海军
   {
     // 朝潮

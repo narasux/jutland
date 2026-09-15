@@ -506,6 +506,41 @@
     ],
   },
   {
+    name: "arkansas_m_7",
+    displayName: "Arkansas (BM-7)",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "1x2 305mm/40 Mk 3",
+      },
+      {
+        label: "Secondary Battery",
+        value: "4x1 102mm/50 Mk 9",
+      },
+      {
+        label: "Secondary Battery",
+        value: "3x1 57mm/40",
+      },
+      {
+        label: "Secondary Battery",
+        value: "4x1 37mm/40 one-pounder",
+      },
+    ],
+    description: "USS Arkansas (BM-7) was the lead ship of the Arkansas-class monitors, commissioned in 1902. She displaced about 3,225 tons, measured roughly 78 metres and made 12.5 knots. Her entire main battery was a single forward twin 305mm/40 turret, backed by 102mm/50 guns, 57mm six-pounders and 37mm one-pounder rapid-fire guns. Renamed Ozark in 1909 to free the name for a new battleship, she became a submarine tender in 1913 and was decommissioned in 1919.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Artwork Source - Shipbucket BM-7 Arkansas",
+        url: "https://www.shipbucket.com/drawings/7269",
+      },
+      {
+        name: "Wikipedia - USS Arkansas (BM-7)",
+        url: "https://en.wikipedia.org/wiki/USS_Arkansas_%28BM-7%29",
+      },
+    ],
+  },
+  {
     name: "asashio",
     displayName: "Asashio",
     type: "Destroyer",
@@ -3208,6 +3243,41 @@
       {
         name: "Wikipedia — Jiujiang",
         url: "https://en.wikipedia.org/wiki/Type%20053H%20frigate",
+      },
+    ],
+  },
+  {
+    name: "johnston",
+    displayName: "Johnston",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x1 127mm/38",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "5x2 40mm/60",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "7x1 20mm/70",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x5 533mm",
+      },
+    ],
+    description: "USS Johnston (DD-557) was a Fletcher-class destroyer commissioned in October 1943 and assigned to the escort carriers of Taffy 3 a year later. At the Battle off Samar on 25 October 1944, Commander Ernest E. Evans led her in a torpedo charge against Kurita's centre force that crippled the heavy cruiser Kumano, and she kept firing her 5-inch battery at battleships and cruisers until she was sunk. Johnston received a Presidential Unit Citation and Evans a posthumous Medal of Honor.",
+    author: "Ian Roberts",
+    links: [
+      {
+        name: "Shipbucket — DD-557 Johnston",
+        url: "https://www.shipbucket.com/drawings/51",
+      },
+      {
+        name: "Wikipedia — Johnston",
+        url: "https://en.wikipedia.org/wiki/USS%20Johnston%20%28DD-557%29",
       },
     ],
   },

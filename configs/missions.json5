@@ -2386,23 +2386,23 @@
         belongPlayer: "HA"
       },
 
-      // Johnston DD-557 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫北侧。
+      // Johnston DD-557：弗莱彻级；屏卫北侧。
       {
-        name: "maury",
+        name: "johnston",
         pos: [61, 68],
         rotation: 90,
         belongPlayer: "HA"
       },
-      // Hoel DD-533 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫中央。
+      // Hoel DD-533：弗莱彻级；屏卫中央。
       {
-        name: "maury",
+        name: "johnston",
         pos: [62, 73],
         rotation: 90,
         belongPlayer: "HA"
       },
-      // Heermann DD-532 -> maury：缺少 Fletcher 级，以同年代、同舰种且尺寸接近的美军驱逐舰替代；屏卫南侧。
+      // Heermann DD-532：弗莱彻级；屏卫南侧。
       {
-        name: "maury",
+        name: "johnston",
         pos: [62, 78],
         rotation: 90,
         belongPlayer: "HA"
@@ -2797,6 +2797,7 @@
           "maury",
           "hammann",
           "dewey",
+          "johnston",
           "asashio",
           "yugumo",
           "yukikaze",
@@ -3523,6 +3524,12 @@
       {
         name: "dewey",
         pos: [44, 48],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "johnston",
+        pos: [44, 50],
         rotation: 90,
         belongPlayer: "HA"
       },
