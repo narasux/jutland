@@ -400,6 +400,46 @@ func (s *BattleShip) baseCurSpeed() float64 {
 	return s.CurSpeed / multiplier
 }
 
+// 战舰水面尾流的几何与寿命参数。
+// 尾流点的寿命 / 透明度衰减 / 尺寸扩散都由“期望航迹长度 ÷ 每帧航程”折算，
+// 而不是按帧数硬编码，这样内部速度单位（ShipSpeedScale）与全局速度倍率变化时，
+// 尾迹在屏幕上的长度都不变；低速时尾迹等比缩短变淡，不会糊成又白又圆的泡沫团。
+const (
+	// bowWakeTrailRatio / sternWakeTrailRatio 尾流点的设计航迹长度（舰长比例）。
+	// 舰艏点在舰体投影前方 0.25 舰长、舰艉点在后方 0.20 舰长，
+	// 分别要后退 0.75 / 0.30 舰长才能露出舰体，之后还要在舰艉后方留下可见尾迹。
+	bowWakeTrailRatio   = 1.35
+	sternWakeTrailRatio = 0.9
+	// maxWakeFrames 尾流点最长存活帧数：低速航行时尾迹按此上限缩短，而不是无限拖长。
+	maxWakeFrames = 130
+	// wakeAlpha 尾迹完全展开时尾流点的初始透明度（life 兼透明度，随寿命线性衰减到 0）。
+	wakeAlpha = 100
+	// 尾流点尺寸：舰艏点从 0.6 舰宽扩散到 2.0 舰宽，舰艉点从 1.0 舰宽扩散到 1.6 舰宽。
+	// 舰艏点扩散更快，尾迹向后才会明显变宽。
+	bowWakeStartWidth   = 0.6
+	bowWakeEndWidth     = 2
+	sternWakeStartWidth = 1
+	sternWakeEndWidth   = 1.6
+)
+
+// hullWakeParams 由设计航迹长度反推尾流点的 (初始寿命, 寿命衰减速度, 尺寸扩散速度)。
+// 三个量都按航迹长度折算：透明度与尺寸在走完整条尾迹时刚好到 0 / 目标宽度，
+// 因此既不受全局速度倍率影响，也不会在低速时出现又白又圆的泡沫团。
+func hullWakeParams(trailLength, width, startWidthRatio, endWidthRatio, speed float64) (
+	life, lifeReduction, diffusion float64,
+) {
+	trailFrames := trailLength / constants.MapBlockSize / speed
+	if trailFrames <= 0 || math.IsInf(trailFrames, 0) {
+		return 0, 1, 0
+	}
+	// 每帧衰减量固定，等价于“每单位航程的透明度衰减固定”；
+	// 低速时只缩短寿命，尾迹随之更短更淡。
+	lifeReduction = wakeAlpha / trailFrames
+	life = lifeReduction * min(trailFrames, maxWakeFrames)
+	diffusion = width * (endWidthRatio - startWidthRatio) / trailFrames
+	return life, lifeReduction, diffusion
+}
+
 func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objTrail.Trail {
 	lengthCells := s.Length / constants.MapBlockSize
 	lateralCells := hull.Lateral / constants.MapBlockSize
@@ -413,18 +453,27 @@ func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objT
 	backPos.SubRy(cosVal*lengthCells*hull.Back - sinVal*lateralCells)
 
 	wakeLength := s.hullWakeLength(hull)
-	// 与改造前相同：每船体每帧 2 个白色圆，life 兼透明度，避免大圆高 alpha 叠爆。
+	// 用基础航速换算，保证尾迹长度不受全局倍率影响；
+	// 每船体每帧 2 个白色圆，life 兼透明度，避免大圆高 alpha 叠爆。
+	speed := s.baseCurSpeed()
+	bowLife, bowLifeReduction, bowDiffusion := hullWakeParams(
+		wakeLength*bowWakeTrailRatio, hull.Width, bowWakeStartWidth, bowWakeEndWidth, speed,
+	)
+	sternLife, sternLifeReduction, sternDiffusion := hullWakeParams(
+		wakeLength*sternWakeTrailRatio, hull.Width, sternWakeStartWidth, sternWakeEndWidth, speed,
+	)
+
 	return []*objTrail.Trail{
 		objTrail.New(
 			frontPos, textureImg.TrailShapeCircle,
-			hull.Width*0.6, 1.1,
-			wakeLength/8+555*s.baseCurSpeed(), 1,
+			hull.Width*bowWakeStartWidth, bowDiffusion,
+			bowLife, bowLifeReduction,
 			0, 0, nil,
 		),
 		objTrail.New(
 			backPos, textureImg.TrailShapeCircle,
-			hull.Width, 0.6,
-			wakeLength/9+380*s.baseCurSpeed(), 1.5,
+			hull.Width*sternWakeStartWidth, sternDiffusion,
+			sternLife, sternLifeReduction,
 			0, 0, nil,
 		),
 	}
