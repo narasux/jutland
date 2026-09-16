@@ -2131,6 +2131,72 @@
     ],
   },
   {
+    name: "monterey_m_6",
+    displayName: "蒙特雷",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x2 305mm/35",
+      },
+      {
+        label: "副炮",
+        value: "1x2 254mm/30",
+      },
+      {
+        label: "副炮",
+        value: "6x1 57mm/40",
+      },
+    ],
+    description: "蒙特雷号（USS Monterey, BM-6）是美国海军 1890 年代建造的浅水重炮舰，1893 年服役。全长约 79.25 米、舰宽约 17.98 米、排水量约 4,084 吨、最大航速 13.6 节。火力核心为舰艏双联装 305mm/35 炮塔与舰艉双联装 254mm/30 炮塔，低干舷与厚重装甲使其适合港岸炮击。该舰 1898 年参加美西战争，1921 年退役。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket BM-6 Monterey 1893",
+        url: "https://www.shipbucket.com/drawings/7266",
+      },
+      {
+        name: "维基百科 - 蒙特雷号浅水重炮舰",
+        url: "https://en.wikipedia.org/wiki/USS_Monterey_%28BM-6%29",
+      },
+    ],
+  },
+  {
+    name: "arkansas_m_7",
+    displayName: "阿肯色（BM-7）",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x2 305mm/40 Mk 3",
+      },
+      {
+        label: "副炮",
+        value: "4x1 102mm/50 Mk 9",
+      },
+      {
+        label: "副炮",
+        value: "3x1 57mm/40",
+      },
+      {
+        label: "副炮",
+        value: "2x1 37mm/40 1 磅炮",
+      },
+    ],
+    description: "阿肯色号（USS Arkansas, BM-7）是美国海军阿肯色级浅水重炮舰的首舰，1902 年服役。全长约 77.76 米、舰宽约 15.24 米、标准排水量约 3,225 吨、最大航速 12.5 节。全舰只设一座舰艏双联装 305mm/40 Mark 3 炮塔，另配 102mm/50 副炮、57mm 6 磅炮与 37mm 1 磅炮。1909 年为把舰名让给新建战列舰而更名奥扎克号，1913 年改装为潜艇母舰，1919 年退役。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket BM-7 Arkansas",
+        url: "https://www.shipbucket.com/drawings/7269",
+      },
+      {
+        name: "维基百科 - 阿肯色号浅水重炮舰",
+        url: "https://en.wikipedia.org/wiki/USS_Arkansas_%28BM-7%29",
+      },
+    ],
+  },
+  {
     name: "nevada",
     displayName: "内华达",
     type: "战列舰",
@@ -6606,7 +6672,43 @@
     displayName: "305mm/40 双联装舰炮 Mk3",
     type: "武器",
     armaments: [],
-    description: "美国海军 12 英寸/40 Mark 3 舰炮，装备弗吉尼亚级与康涅狄格级等前无畏舰。游戏中按 18 秒装填、22 千米射程与 730 m/s 初速表现。",
+    description: "美国海军 12 英寸/40 Mark 3 舰炮，装备弗吉尼亚级与康涅狄格级等前无畏舰，以及阿肯色级浅水重炮舰。游戏中按 18 秒装填、22 千米射程与 730 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/305/35/2",
+    displayName: "305mm/35 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 12 英寸/35 舰炮，是监视舰蒙特雷号的前主炮。1890 年代炮塔的射速与初速均偏低，游戏中按 26 秒装填、18 千米射程与 640 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/254/30/2",
+    displayName: "254mm/30 双联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 10 英寸/30 舰炮，装备监视舰蒙特雷号的后炮塔。游戏中按 22 秒装填、15 千米射程与 610 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/57/40",
+    displayName: "57mm/40 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 6 磅炮（57mm/40），19 世纪末用于反雷击舰。游戏中按 3 秒装填、8 千米射程与 550 m/s 初速表现。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/37/40",
+    displayName: "37mm/40 单装舰炮（1 磅炮）",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 1 磅炮（37mm/40 Hotchkiss）速射炮，19 世纪末用于反雷击舰。游戏中按 1 秒装填、4 千米射程与 610 m/s 初速表现。",
     author: "",
     links: [],
   },
@@ -6810,7 +6912,7 @@
     displayName: "102mm/50 单装舰炮 Mk9",
     type: "武器",
     armaments: [],
-    description: "美国海军 4 英寸/50 Mk 9 单装舰炮；本游戏用于表现英国护航航空母舰比特号装备的三座美制 4 英寸炮。",
+    description: "美国海军 4 英寸/50 Mk 9 单装舰炮；本游戏用于表现英国护航航空母舰比特号装备的三座美制 4 英寸炮，以及阿肯色号浅水重炮舰的四门副炮。",
     author: "",
     links: [
       {

@@ -208,6 +208,32 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 12 英寸/35 双联装舰炮（监视舰蒙特雷号；1890 年代炮塔，射速与初速低于 /40 型）
+  {
+    name: "US/305/35/2",
+    bulletName: "US/GB/305/1942",
+    bulletCount: 2,
+    reloadTime: 26,
+    range: 18,
+    bulletSpread: 170,
+    bulletSpeed: 640,
+    fundsCost: 15,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  // 美国海军 10 英寸/30 双联装舰炮（监视舰蒙特雷号后炮塔）
+  {
+    name: "US/254/30/2",
+    bulletName: "US/GB/254/1890",
+    bulletCount: 2,
+    reloadTime: 22,
+    range: 15,
+    bulletSpread: 160,
+    bulletSpeed: 610,
+    fundsCost: 9,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 8 英寸/45 Mark 6 双联装舰炮（康涅狄格级、弗吉尼亚级、佛蒙特号）
   {
     name: "US/203/45/2/MK6",
@@ -603,6 +629,32 @@
     fundsCost: 3,
     antiShip: true,
     antiAircraft: true
+  },
+  // 美国海军 6 磅炮（57mm/40）单装，19 世纪末反雷击舰炮
+  {
+    name: "US/57/40",
+    bulletName: "US/GB/57/1890",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 8,
+    bulletSpread: 55,
+    bulletSpeed: 550,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 美国海军 1 磅炮（37mm/40 Hotchkiss）单装速射炮，19 世纪末反雷击舰炮
+  {
+    name: "US/37/40",
+    bulletName: "US/GB/37/1890",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 4,
+    bulletSpread: 40,
+    bulletSpeed: 610,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false
   },
   // 美国海军 US/76/50/2/MK22 双联装高平两用炮（Mark 22）
   {

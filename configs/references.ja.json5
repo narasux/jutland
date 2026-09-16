@@ -506,6 +506,41 @@
     ],
   },
   {
+    name: "arkansas_m_7",
+    displayName: "アーカンソー（BM-7）",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x2 305mm/40 Mk 3",
+      },
+      {
+        label: "副砲",
+        value: "4x1 102mm/50 Mk 9",
+      },
+      {
+        label: "副砲",
+        value: "3x1 57mm/40",
+      },
+      {
+        label: "副砲",
+        value: "2x1 37mm/40 1ポンド砲",
+      },
+    ],
+    description: "USS アーカンソー（BM-7）はアーカンソー級モニターの一番艦で、1902年に就役した。基準排水量約3,225トン、全長約78メートル、最大速力12.5ノット。主砲は前部の双連305mm/40砲塔1基のみで、102mm/50砲、57mm六ポンド砲、37mm一ポンド速射砲で補われた。1909年、新建造の戦艦に艦名を譲るためオザークと改名され、1913年に潜水母艦へ改装、1919年に除籍された。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "素材出典 - Shipbucket BM-7 Arkansas",
+        url: "https://www.shipbucket.com/drawings/7269",
+      },
+      {
+        name: "Wikipedia - USS Arkansas (BM-7)",
+        url: "https://en.wikipedia.org/wiki/USS_Arkansas_%28BM-7%29",
+      },
+    ],
+  },
+  {
     name: "asashio",
     displayName: "朝潮",
     type: "駆逐艦",
@@ -4475,6 +4510,37 @@
     ],
   },
   {
+    name: "monterey_m_6",
+    displayName: "モントレー",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x2 305mm/35",
+      },
+      {
+        label: "副砲",
+        value: "1x2 254mm/30",
+      },
+      {
+        label: "副砲",
+        value: "6x1 57mm/40",
+      },
+    ],
+    description: "USS モントレー（BM-6）は1890年代に建造されたアメリカ海軍のモニターで、1893年に就役した。排水量約4,084トン、全長約79メートル、最大速力13.6ノット。前部に双連305mm/35砲塔、後部に双連254mm/30砲塔を備え、低い乾舷と厚い装甲は沿岸砲撃に適していた。1898年の米西戦争に参加し、1921年に除籍された。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "素材出典 - Shipbucket BM-6 Monterey 1893",
+        url: "https://www.shipbucket.com/drawings/7266",
+      },
+      {
+        name: "Wikipedia - USS Monterey (BM-6)",
+        url: "https://en.wikipedia.org/wiki/USS_Monterey_%28BM-6%29",
+      },
+    ],
+  },
+  {
     name: "Mosquito",
     displayName: "シーモスキート TR.33",
     armaments: [
@@ -7224,7 +7290,7 @@
     displayName: "102mm/50 単装砲 Mk 9",
     type: "兵器",
     armaments: [],
-    description: "米海軍の4インチ50口径Mk 9単装砲で、本作ではHMS バイターが搭載した米国製4インチ砲3基を表現するために使用されている。",
+    description: "米海軍の4インチ50口径Mk 9単装砲で、本作ではHMS バイターが搭載した米国製4インチ砲3基と、モニター、アーカンソー号の副砲4門を表現するために使用されている。",
     author: "",
     links: [
       {
@@ -7550,7 +7616,43 @@
     displayName: "305mm/40 Mk 3 連装砲",
     type: "兵器",
     armaments: [],
-    description: "米海軍の12インチ40口径Mk 3砲はバージニア級やコネチカット級などの前弩級戦艦に搭載された。本作では装填18秒、射程22km、初速730m/s。",
+    description: "米海軍の12インチ40口径Mk 3砲はバージニア級やコネチカット級などの前弩級戦艦、アーカンソー級モニターに搭載された。本作では装填18秒、射程22km、初速730m/s。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/305/35/2",
+    displayName: "305mm/35 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の12インチ35口径砲はモニター、モントレー号の前部主砲である。1890年代の砲塔のため発射速度と初速は低く、本作では装填26秒、射程18km、初速640m/s。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/254/30/2",
+    displayName: "254mm/30 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の10インチ30口径砲はモニター、モントレー号の後部砲塔に搭載された。本作では装填22秒、射程15km、初速610m/s。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/57/40",
+    displayName: "57mm/40 単装砲",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の6ポンド砲（57mm/40）は19世紀末の水雷艇防御用火砲である。本作では装填3秒、射程8km、初速550m/s。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/37/40",
+    displayName: "37mm/40 単装砲（1ポンド砲）",
+    type: "兵器",
+    armaments: [],
+    description: "米海軍の1ポンド砲（37mm/40 ホッチキス）は19世紀末の水雷艇防御用速射砲である。本作では装填1秒、射程4km、初速610m/s。",
     author: "",
     links: [],
   },

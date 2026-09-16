@@ -524,7 +524,7 @@
       },
       {
         label: "Secondary Battery",
-        value: "4x1 37mm/40 one-pounder",
+        value: "2x1 37mm/40 one-pounder",
       },
     ],
     description: "USS Arkansas (BM-7) was the lead ship of the Arkansas-class monitors, commissioned in 1902. She displaced about 3,225 tons, measured roughly 78 metres and made 12.5 knots. Her entire main battery was a single forward twin 305mm/40 turret, backed by 102mm/50 guns, 57mm six-pounders and 37mm one-pounder rapid-fire guns. Renamed Ozark in 1909 to free the name for a new battleship, she became a submarine tender in 1913 and was decommissioned in 1919.",
@@ -4510,6 +4510,37 @@
     ],
   },
   {
+    name: "monterey_m_6",
+    displayName: "Monterey",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "1x2 305mm/35",
+      },
+      {
+        label: "Secondary Battery",
+        value: "1x2 254mm/30",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x1 57mm/40",
+      },
+    ],
+    description: "USS Monterey (BM-6) was a late-1890s United States Navy monitor commissioned in 1893. She displaced about 4,084 tons, measured roughly 79 metres and made 13.6 knots. A forward twin 305mm/35 turret and an aft twin 254mm/30 turret formed her battery, while low freeboard and heavy armour suited her to shore bombardment. She saw service in the 1898 Spanish-American War and was decommissioned in 1921.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Artwork Source - Shipbucket BM-6 Monterey 1893",
+        url: "https://www.shipbucket.com/drawings/7266",
+      },
+      {
+        name: "Wikipedia - USS Monterey (BM-6)",
+        url: "https://en.wikipedia.org/wiki/USS_Monterey_%28BM-6%29",
+      },
+    ],
+  },
+  {
     name: "Mosquito",
     displayName: "Sea Mosquito TR.33",
     armaments: [
@@ -7259,7 +7290,7 @@
     displayName: "102mm/50 Single Mount Mk 9",
     type: "Weapon",
     armaments: [],
-    description: "A U.S. Navy 4-inch/50 Mk 9 single gun used in the game to represent the three American-built 4-inch mounts carried by HMS Biter.",
+    description: "A U.S. Navy 4-inch/50 Mk 9 single gun used in the game to represent the three American-built 4-inch mounts carried by HMS Biter and the four secondary guns of the monitor USS Arkansas.",
     author: "",
     links: [
       {
@@ -7585,7 +7616,43 @@
     displayName: "305mm/40 Twin Mount Mk 3",
     type: "Weapon",
     armaments: [],
-    description: "The U.S. Navy's 12-inch/40 Mark 3 gun armed pre-dreadnoughts such as the Virginia and Connecticut classes. In game it is modelled with an 18-second reload, 22 km range and 730 m/s muzzle velocity.",
+    description: "The U.S. Navy's 12-inch/40 Mark 3 gun armed pre-dreadnoughts such as the Virginia and Connecticut classes and the Arkansas-class monitors. In game it is modelled with an 18-second reload, 22 km range and 730 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/305/35/2",
+    displayName: "305mm/35 Twin Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 12-inch/35 gun formed the forward main battery of the monitor USS Monterey. Its 1890s turret gave a low rate of fire and muzzle velocity; in game it uses a 26-second reload, 18 km range and 640 m/s.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/254/30/2",
+    displayName: "254mm/30 Twin Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 10-inch/30 gun armed the aft turret of the monitor USS Monterey. In game it is modelled with a 22-second reload, 15 km range and 610 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/57/40",
+    displayName: "57mm/40 Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's six-pounder (57mm/40) was a late-19th-century anti-torpedo-boat gun. In game it uses a 3-second reload, 8 km range and 550 m/s muzzle velocity.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "US/37/40",
+    displayName: "37mm/40 Single Mount (one-pounder)",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's one-pounder (37mm/40 Hotchkiss) rapid-fire gun served against torpedo boats at the end of the 19th century. In game it uses a 1-second reload, 4 km range and 610 m/s muzzle velocity.",
     author: "",
     links: [],
   },

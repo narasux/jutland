@@ -70,6 +70,7 @@ var shipIconSpecs = map[string]shipIconSpec{
 	"CB":        {sil: silHull, mark: markSlashHeavy},
 	"BB":        {sil: silHull, mark: markSlash2},
 	"BC":        {sil: silHull, mark: markSlash2},
+	"BM":        {sil: silHull, mark: markDot},
 	"CV":        {sil: silCarrier, mark: markCarrier},
 	"CVL":       {sil: silCarrier, mark: markCarrier},
 	"CVB":       {sil: silCarrier, mark: markCarrier},

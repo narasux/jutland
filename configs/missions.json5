@@ -2712,6 +2712,8 @@
           "connecticut",
           "virginia",
           "kentucky",
+          "monterey_m_6",
+          "arkansas_m_7",
           "edo",
           "satsuma",
           "yamato",
@@ -3395,6 +3397,18 @@
       {
         name: "kentucky",
         pos: [38, 51],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "monterey_m_6",
+        pos: [37, 52],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "arkansas_m_7",
+        pos: [38, 53],
         rotation: 90,
         belongPlayer: "HA"
       },

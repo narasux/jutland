@@ -73,6 +73,14 @@
     damage: 1600,
     criticalRate: 0.01
   },
+  // 美国海军 10 英寸/30 炮弹（监视舰蒙特雷号）
+  {
+    name: "US/GB/254/1890",
+    type: "shell",
+    diameter: 254,
+    damage: 900,
+    criticalRate: 0.008
+  },
   {
     name: "US/GB/203/1939",
     type: "shell",
@@ -124,6 +132,22 @@
     diameter: 76,
     damage: 40,
     criticalRate: 0.001
+  },
+  // 美国海军 6 磅炮（57mm）炮弹，19 世纪末反雷击舰用
+  {
+    name: "US/GB/57/1890",
+    type: "shell",
+    diameter: 57,
+    damage: 18,
+    criticalRate: 0.0004
+  },
+  // 美国海军 1 磅炮（37mm）炮弹，19 世纪末反雷击舰用速射炮
+  {
+    name: "US/GB/37/1890",
+    type: "shell",
+    diameter: 37,
+    damage: 3,
+    criticalRate: 0.0003
   },
   {
     name: "US/GB/40/1930",

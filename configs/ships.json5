@@ -14428,6 +14428,180 @@
       rockets: [],
     }
   },
+  // 美国海军浅水重炮舰
+  {
+    // 蒙特雷号（BM-6）
+    name: "monterey_m_6",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BM",
+    year: 1893,
+    totalHP: 4084,
+    horizontalDamageReduction: 0.24,
+    verticalDamageReduction: 0.14,
+    maxSpeed: 13.6,
+    acceleration: 0.22,
+    rotateSpeed: 0.8,
+    length: 79.25,
+    width: 17.98,
+    fundsCost: 255,
+    timeCost: 85,
+    weapon: {
+      mainGuns: [
+        // 前主炮塔：双联装 305mm/35
+        {
+          name: "US/305/35/2",
+          posPercent: 0.26,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        },
+        // 后炮塔：双联装 254mm/30
+        {
+          name: "US/254/30/2",
+          posPercent: -0.43,
+          rightFiringArc: [50, 180],
+          leftFiringArc: [180, 310]
+        }
+      ],
+      secondaryGuns: [
+        // 57mm 6 磅炮
+        // 舰桥前部 2 门
+        {
+          name: "US/57/40",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/57/40",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 桅杆 2 门
+        {
+          name: "US/57/40",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/57/40",
+          posPercent: -0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后部 2 门
+        {
+          name: "US/57/40",
+          posPercent: -0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/57/40",
+          posPercent: -0.32,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [],
+      torpedoes: [],
+      rockets: [],
+    }
+  },
+  {
+    // 阿肯色号（BM-7，1909 年改名奥扎克号）
+    name: "arkansas_m_7",
+    nation: "us",
+    type: "battleship",
+    typeAbbr: "BM",
+    year: 1902,
+    totalHP: 3225,
+    horizontalDamageReduction: 0.2,
+    verticalDamageReduction: 0.12,
+    maxSpeed: 12.5,
+    acceleration: 0.2,
+    rotateSpeed: 0.8,
+    length: 77.76,
+    width: 15.24,
+    fundsCost: 255,
+    timeCost: 85,
+    weapon: {
+      mainGuns: [
+        // 前主炮塔：双联装 305mm/40 Mark 3
+        {
+          name: "US/305/40/2/MK3",
+          posPercent: 0.31,
+          rightFiringArc: [0, 130],
+          leftFiringArc: [230, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 4 门 102mm/50 Mark 9，左右舷各 2 门
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.67,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 3 门 57mm 6 磅炮：左右舷各 1 门 + 舰尾 1 门
+        {
+          name: "US/57/40",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/57/40",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/57/40",
+          posPercent: -0.44,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 2 门 37mm 1 磅炮，左右舷各 1 门
+        {
+          name: "US/37/40",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/37/40",
+          posPercent: 0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [],
+      rockets: [],
+    }
+  },
   // 日本海军
   {
     // 金刚
