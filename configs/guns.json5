@@ -1477,6 +1477,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 GER/37/83 双联装高炮（3.7cm SK C/30，初速高但射速低）
+  {
+    name: "GER/37/83/2",
+    bulletName: "GER/GB/37/1935",
+    bulletCount: 2,
+    reloadTime: 2,
+    range: 8,
+    bulletSpread: 16,
+    bulletSpeed: 1000,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国空军 30mm MK 108 机炮
   {
     name: "GER/AIR/30/MK108",
@@ -1512,6 +1525,19 @@
     range: 4,
     bulletSpread: 20,
     bulletSpeed: 910,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 德国海军 GER/20/65 单装高炮（2cm C/30，射速低于 Flak 38）
+  {
+    name: "GER/20/65",
+    bulletName: "GER/GB/20/1940",
+    bulletCount: 1,
+    reloadTime: 0.25,
+    range: 4,
+    bulletSpread: 22,
+    bulletSpeed: 880,
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true

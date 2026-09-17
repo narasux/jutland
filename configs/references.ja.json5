@@ -4262,8 +4262,8 @@
     ],
   },
   {
-    name: "lutzow",
-    displayName: "リュッツォウ",
+    name: "admiral_graf_spee",
+    displayName: "アドミラル・グラーフ・シュペー",
     type: "装甲艦",
     armaments: [
       {
@@ -4279,16 +4279,28 @@
         value: "3x2 105mm/65",
       },
       {
+        label: "対空砲",
+        value: "4x2 37mm/83",
+      },
+      {
+        label: "対空砲",
+        value: "12x1 20mm/65",
+      },
+      {
         label: "魚雷",
         value: "2x4 533mm",
       },
     ],
-    description: "リュッツォウはドイッチュラント級装甲艦のネームシップで、1933年にドイッチュラントとして就役した。28cm砲6門と長い航続力を組み合わせ、通商破壊を目的としていた。1939年に改名後は主にノルウェーとバルト海で活動し、1945年の激しい空襲後に自沈処分された。",
-    author: "不明",
+    description: "アドミラル・グラーフ・シュペーはドイッチュラント級装甲艦の三番艦で、1936年に就役した。同級で唯一、塔型艦橋上に球型測距儀を備えていた。28cm砲6門と高速・長大な航続力を活かした通商破壊を目的とし、1939年の改装後に南大西洋へ進出して多数の商船を撃沈、同年末のラプラタ沖海戦で損傷後に自沈した。",
+    author: "Maomatic",
     links: [
       {
-        name: "ウィキペディア — リュッツォウ",
-        url: "https://en.wikipedia.org/wiki/German%20cruiser%20Deutschland",
+        name: "ShipBucket — Admiral Graf Spee 1939-08",
+        url: "https://www.shipbucket.com/drawings/6665",
+      },
+      {
+        name: "ウィキペディア — アドミラル・グラーフ・シュペー",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%89%E3%83%9F%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%A9%E3%83%BC%E3%83%95%E3%83%BB%E3%82%B7%E3%83%A5%E3%83%9A%E3%83%BC_(%E8%A3%85%E7%94%B2%E8%89%A6)",
       },
     ],
   },

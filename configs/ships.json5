@@ -18025,13 +18025,13 @@
     }
   },
   {
-    // 吕佐
-    name: "lutzow",
+    // 格拉夫·施佩海军上将
+    name: "admiral_graf_spee",
     nation: "de",
     type: "battleship",
     typeAbbr: "BB",
-    year: 1933,
-    totalHP: 16200,
+    year: 1939,
+    totalHP: 16020,
     horizontalDamageReduction: 0.35,
     verticalDamageReduction: 0.2,
     maxSpeed: 28.5,
@@ -18046,14 +18046,14 @@
         // 前主炮 A
         {
           name: "GER/283/52/3",
-          posPercent: 0.6,
+          posPercent: 0.5,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
         // 后主炮 B
         {
           name: "GER/283/52/3",
-          posPercent: -0.55,
+          posPercent: -0.47,
           rightFiringArc: [45, 180],
           leftFiringArc: [180, 315]
         },
@@ -18062,93 +18062,209 @@
         // 右前副炮 A
         {
           name: "GER/150/60",
-          posPercent: 0.16,
+          posPercent: 0.2,
           rightFiringArc: [0, 120],
           leftFiringArc: [360, 360]
         },
         // 左前副炮 A
         {
           name: "GER/150/60",
-          posPercent: 0.16,
+          posPercent: 0.2,
           rightFiringArc: [0, 0],
           leftFiringArc: [240, 360]
         },
         // 右前副炮 B
         {
           name: "GER/150/60",
-          posPercent: 0.08,
+          posPercent: 0.13,
           rightFiringArc: [0, 120],
           leftFiringArc: [360, 360]
         },
         // 左前副炮 B
         {
           name: "GER/150/60",
-          posPercent: 0.08,
+          posPercent: 0.13,
           rightFiringArc: [0, 0],
           leftFiringArc: [240, 360]
         },
         // 右后副炮 C
         {
           name: "GER/150/60",
-          posPercent: -0.08,
+          posPercent: -0.09,
           rightFiringArc: [60, 180],
           leftFiringArc: [360, 360]
         },
         // 左后副炮 C
         {
           name: "GER/150/60",
-          posPercent: -0.08,
+          posPercent: -0.09,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 300]
         },
         // 右前副炮 D
         {
           name: "GER/150/60",
-          posPercent: -0.16,
+          posPercent: -0.17,
           rightFiringArc: [60, 180],
           leftFiringArc: [360, 360]
         },
         // 左前副炮 D
         {
           name: "GER/150/60",
-          posPercent: -0.16,
+          posPercent: -0.17,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 300]
         },
         // 右高平两用炮 A
         {
           name: "GER/105/65/2/DP",
-          posPercent: 0,
+          posPercent: 0.07,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 210]
         },
         // 左高平两用炮 A
         {
           name: "GER/105/65/2/DP",
-          posPercent: 0,
+          posPercent: 0.07,
           rightFiringArc: [150, 180],
           leftFiringArc: [180, 360]
         },
         // 后高平两用炮 B
         {
           name: "GER/105/65/2/DP",
-          posPercent: -0.45,
+          posPercent: -0.36,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
+      ],
+      antiAircraftGuns: [
+        // 4 座双联装 37 炮
+        // 右高炮 A
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [315, 360]
+        },
+        // 左高炮 A
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.28,
+          rightFiringArc: [0, 45],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 12 座单装 20 炮
+        // 前高炮 A
+        {
+          name: "GER/20/65",
+          posPercent: 0.77,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "GER/20/65",
+          posPercent: 0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 B
+        {
+          name: "GER/20/65",
+          posPercent: 0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "GER/20/65",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 C
+        {
+          name: "GER/20/65",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "GER/20/65",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 D
+        {
+          name: "GER/20/65",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "GER/20/65",
+          posPercent: -0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 E
+        {
+          name: "GER/20/65",
+          posPercent: -0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 F
+        {
+          name: "GER/20/65",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 F
+        {
+          name: "GER/20/65",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 后高炮 G
+        {
+          name: "GER/20/65",
+          posPercent: -0.85,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ],
       torpedoes: [
         // 右舷鱼雷 A
         {
           name: "GER/533/4",
-          posPercent: -0.8,
+          posPercent: -0.77,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
           name: "GER/533/4",
-          posPercent: -0.8,
+          posPercent: -0.77,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },

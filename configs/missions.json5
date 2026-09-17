@@ -2727,7 +2727,7 @@
           "slava",
           "bismarck",
           "scharnhorst",
-          "lutzow",
+          "admiral_graf_spee",
           "hood",
           "nelson",
           "lion",
@@ -2942,7 +2942,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "lutzow",
+        name: "admiral_graf_spee",
         pos: [24, 28],
         rotation: 90,
         belongPlayer: "HA"

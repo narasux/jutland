@@ -4262,8 +4262,8 @@
     ],
   },
   {
-    name: "lutzow",
-    displayName: "Lützow",
+    name: "admiral_graf_spee",
+    displayName: "Admiral Graf Spee",
     type: "Panzerschiff",
     armaments: [
       {
@@ -4279,16 +4279,28 @@
         value: "3x2 105mm/65",
       },
       {
+        label: "Anti-aircraft Guns",
+        value: "4x2 37mm/83",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "12x1 20mm/65",
+      },
+      {
         label: "Torpedoes",
         value: "2x4 533mm",
       },
     ],
-    description: "Lützow was the lead Deutschland-class Panzerschiff, originally commissioned as Deutschland in 1933. Combining six 28 cm guns with long cruising range, she was intended for commerce warfare. Renamed in 1939, she later operated mainly in Norwegian and Baltic waters and was scuttled after heavy air attack in 1945.",
-    author: "Unknown",
+    description: "Admiral Graf Spee was the third Deutschland-class Panzerschiff, commissioned in 1936 and the only ship of the class fitted with a spherical rangefinder on her tower bridge. Her six 28 cm guns, high speed and very long cruising range were intended for commerce warfare. After her 1939 refit she sailed for the South Atlantic, sank several merchantmen, and was scuttled after the Battle of the River Plate in December 1939.",
+    author: "Maomatic",
     links: [
       {
-        name: "Wikipedia — Lützow",
-        url: "https://en.wikipedia.org/wiki/German%20cruiser%20Deutschland",
+        name: "ShipBucket — Admiral Graf Spee 1939-08",
+        url: "https://www.shipbucket.com/drawings/6665",
+      },
+      {
+        name: "Wikipedia — German cruiser Admiral Graf Spee",
+        url: "https://en.wikipedia.org/wiki/German_cruiser_Admiral_Graf_Spee",
       },
     ],
   },

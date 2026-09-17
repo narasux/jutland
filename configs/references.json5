@@ -2750,8 +2750,8 @@
     ],
   },
   {
-    name: "lutzow",
-    displayName: "吕佐",
+    name: "admiral_graf_spee",
+    displayName: "格拉夫·施佩海军上将",
     type: "袖珍战列舰",
     armaments: [
       {
@@ -2767,16 +2767,28 @@
         value: "3x2 105mm/65",
       },
       {
+        label: "防空炮",
+        value: "4x2 37mm/83",
+      },
+      {
+        label: "防空炮",
+        value: "12x1 20mm/65",
+      },
+      {
         label: "鱼雷",
         value: "2x4 533mm",
       },
     ],
-    description: "吕佐夫号是德国海军德意志级装甲舰首舰，1933 年服役，原名为德意志号，后被希特勒下令改名以避免沉没带来的宣传损失。其装备 280mm 主炮且航程极远，二战期间活跃于大西洋破交作战与北欧海域，1945 年 5 月在施韦因蒙德被炸沉。",
-    author: "未知",
+    description: "格拉夫·施佩海军上将号是德国海军德意志级装甲舰三号舰，1936 年服役，是同级中唯一采用球型测距仪塔式舰桥的一艘。该舰装备 280mm 主炮，航速高、航程极远，专为远洋破交设计。1939 年 8 月完成改装后赴南大西洋执行破交作战，数月内击沉多艘商船，同年底在拉普拉塔河口海战受创后自沉。",
+    author: "Maomatic",
     links: [
       {
-        name: "维基百科 - 德国级装甲舰",
-        url: "https://zh.wikipedia.org/wiki/%E5%BE%B7%E5%9B%BD%E7%BA%A7%E8%A3%85%E7%94%B2%E8%88%B0",
+        name: "ShipBucket - Admiral Graf Spee 1939-08",
+        url: "https://www.shipbucket.com/drawings/6665",
+      },
+      {
+        name: "维基百科 - 施佩伯爵将军号装甲舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%96%BD%E4%BD%A9%E4%BC%AF%E7%88%B5%E5%B0%86%E5%86%9B%E5%8F%B7%E8%A3%85%E7%94%B2%E8%88%B0",
       },
     ],
   },
