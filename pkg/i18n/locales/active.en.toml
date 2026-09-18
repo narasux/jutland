@@ -96,6 +96,8 @@ other = "Frigate"
 other = "Hospital Ship"
 [ShipTypeCargo]
 other = "Cargo Ship"
+[ShipTypeRepair]
+other = "Repair Ship"
 [ShipTypeTorpedoBoat]
 other = "Torpedo Boat"
 [PlaneTypeFighter]
@@ -114,8 +116,6 @@ other = "Unknown"
 other = "All"
 [CollectionSpecial]
 other = "Special"
-[CollectionAuxiliary]
-other = "Auxiliary Ship"
 [CollectionShip]
 other = "Ships"
 [CollectionPlane]

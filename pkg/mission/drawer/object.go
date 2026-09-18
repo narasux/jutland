@@ -119,11 +119,12 @@ func drawUnitHitBox(screen *ebiten.Image, ms *state.MissionState, battleUnit obj
 	}
 }
 
-// 绘制医疗船治疗范围圈（仅在选中己方医疗船时显示）
+// 绘制支援舰治疗范围圈（仅在选中己方医疗船或维修船时显示）
 func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.MissionState) {
 	for _, ship := range ms.Arena.Ships {
-		// 只绘制己方存活的医疗船
-		if ship.Type != objUnit.ShipTypeHospital || ship.BelongPlayer != ms.Player.CurPlayer || ship.CurHP <= 0 {
+		// 只绘制己方存活的医疗船或维修船
+		if (ship.Type != objUnit.ShipTypeHospital && ship.Type != objUnit.ShipTypeRepair) ||
+			ship.BelongPlayer != ms.Player.CurPlayer || ship.CurHP <= 0 {
 			continue
 		}
 		// 检查是否被选中

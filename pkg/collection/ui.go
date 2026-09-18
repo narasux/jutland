@@ -44,7 +44,9 @@ const (
 	shipClassDestroyer  shipClassFilter = "destroyer"
 	shipClassFrigate    shipClassFilter = "frigate"
 	shipClassTorpedo    shipClassFilter = "torpedo_boat"
-	shipClassAuxiliary  shipClassFilter = "auxiliary"
+	shipClassCargo      shipClassFilter = "cargo"
+	shipClassHospital   shipClassFilter = "hospital"
+	shipClassRepair     shipClassFilter = "repair"
 	shipClassSpecial    shipClassFilter = "special"
 )
 
@@ -62,8 +64,12 @@ func (f shipClassFilter) display() string {
 		return i18n.Text(i18n.MsgShipTypeFrigate)
 	case shipClassTorpedo:
 		return i18n.Text(i18n.MsgShipTypeTorpedoBoat)
-	case shipClassAuxiliary:
-		return i18n.Text(i18n.MsgCollectionAuxiliary)
+	case shipClassCargo:
+		return i18n.Text(i18n.MsgShipTypeCargo)
+	case shipClassHospital:
+		return i18n.Text(i18n.MsgShipTypeHospital)
+	case shipClassRepair:
+		return i18n.Text(i18n.MsgShipTypeRepair)
 	case shipClassSpecial:
 		return i18n.Text(i18n.MsgCollectionSpecial)
 	default:
@@ -73,7 +79,8 @@ func (f shipClassFilter) display() string {
 
 var shipClassFilters = []shipClassFilter{
 	shipClassAll, shipClassCarrier, shipClassBattleship, shipClassCruiser,
-	shipClassDestroyer, shipClassFrigate, shipClassTorpedo, shipClassAuxiliary, shipClassSpecial,
+	shipClassDestroyer, shipClassFrigate, shipClassTorpedo, shipClassCargo, shipClassHospital,
+	shipClassRepair, shipClassSpecial,
 }
 
 type planeTypeFilter string
@@ -1533,8 +1540,12 @@ func matchShipClass(shipType objUnit.ShipType, filter shipClassFilter) bool {
 		return shipType == objUnit.ShipTypeFrigate
 	case shipClassTorpedo:
 		return shipType == objUnit.ShipTypeTorpedoBoat
-	case shipClassAuxiliary:
-		return shipType == objUnit.ShipTypeCargo || shipType == objUnit.ShipTypeHospital
+	case shipClassCargo:
+		return shipType == objUnit.ShipTypeCargo
+	case shipClassHospital:
+		return shipType == objUnit.ShipTypeHospital
+	case shipClassRepair:
+		return shipType == objUnit.ShipTypeRepair
 	case shipClassSpecial:
 		return shipType == objUnit.ShipTypeDefault
 	default:

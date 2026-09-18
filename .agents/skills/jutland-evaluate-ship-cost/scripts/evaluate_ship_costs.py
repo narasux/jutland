@@ -18,6 +18,7 @@ COMBAT_BASE_COST = {
     "battleship": 230,
     "aircraft_carrier": 80,
     "cargo": 20,
+    "repair": 20,
 }
 COMBAT_POWER_FACTOR = {
     "torpedo_boat": 1.20,
@@ -27,6 +28,7 @@ COMBAT_POWER_FACTOR = {
     "battleship": 0.55,
     "aircraft_carrier": 0.55,
     "cargo": 0.80,
+    "repair": 0.80,
 }
 HULL_FLOOR_MULTIPLIER = {
     "default": 0.00,
@@ -37,6 +39,7 @@ HULL_FLOOR_MULTIPLIER = {
     "battleship": 0.80,
     "aircraft_carrier": 0.65,
     "cargo": 0.30,
+    "repair": 0.30,
     "hospital": 0.50,
 }
 HULL_FLOOR_SCALE = 3.0

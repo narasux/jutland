@@ -281,6 +281,24 @@
       ]
     }
   },
+  // 诺德奈
+  {
+    name: "norderney",
+    nation: "de",
+    type: "cargo",
+    typeAbbr: "Cargo",
+    year: 1915,
+    totalHP: 2864,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 10,
+    acceleration: 0.1,
+    rotateSpeed: 0.5,
+    length: 75,
+    width: 11,
+    fundsCost: 30,
+    timeCost: 12,
+  },
   // 航空母舰
   // 美国海军
   {
@@ -31697,6 +31715,25 @@
         }
       ]
     }
+  },
+  // 维修船
+  // 火神
+  {
+    name: "vulkan",
+    nation: "de",
+    type: "repair",
+    typeAbbr: "AR",
+    year: 1908,
+    totalHP: 1595,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 12,
+    acceleration: 0.1,
+    rotateSpeed: 0.5,
+    length: 85,
+    width: 17,
+    fundsCost: 25,
+    timeCost: 11,
   },
   // 医疗船
   {

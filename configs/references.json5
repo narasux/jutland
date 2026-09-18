@@ -9311,4 +9311,50 @@
       },
     ],
   },
+   {
+    name: "vulkan",
+    displayName: "火神号",
+    type: "维修船",
+    armaments: [
+      {
+        label: "武装",
+        value: "无",
+      },
+    ],
+    description: "火神号是德意志帝国海军于 1908 年服役的潜艇打捞与维修船，采用双体船布局，起重机可从两体之间吊起并托载失事潜艇进行修理。它配备四台锅炉、两台蒸汽轮机和两台推进电机，满载排水量约 1595 吨，最大航速 12 节。第一次世界大战后作为赔偿舰移交英国，1919 年 4 月 6 日在航渡途中沉没。",
+    author: "Maomatic",
+    links: [
+      {
+        name: "Shipbucket - Vulkan (Maomatic)",
+        url: "https://www.shipbucket.com/drawings/9132",
+      },
+      {
+        name: "Wikipedia - SMS Vulkan",
+        url: "https://en.wikipedia.org/wiki/SMS_Vulkan",
+      },
+    ],
+  },
+  {
+    name: "norderney",
+    displayName: "诺德奈号",
+    type: "油轮",
+    armaments: [
+      {
+        label: "武装",
+        value: "无",
+      },
+    ],
+    description: "诺德奈号是一艘德国小型油轮，1915 年以 W 84 的名称服役，同年底更名为诺德奈号，负责为德国沿海港口和锚地中的帝国海军舰艇补给燃油。该舰长 75.08 米、宽 10.5 米，排水量约 2864 吨，最大航速 10 节，没有武装。1920 年它被改装为铺缆船，1945 年成为英国战利品并改名 Alert，1960 年拆解。",
+    author: "Eswube",
+    links: [
+      {
+        name: "Shipbucket - Norderney (Eswube)",
+        url: "https://www.shipbucket.com/drawings/11067",
+      },
+      {
+        name: "Wikipedia - Oil tanker",
+        url: "https://en.wikipedia.org/wiki/Oil_tanker",
+      },
+    ],
+  },
 ]

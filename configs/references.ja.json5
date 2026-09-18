@@ -9432,4 +9432,50 @@
       },
     ],
   },
+  {
+    name: "vulkan",
+    displayName: "フォルカン",
+    type: "工作艦",
+    armaments: [
+      {
+        label: "武装",
+        value: "なし",
+      },
+    ],
+    description: "フォルカンは 1908 年に就役したドイツ帝国海軍の潜水艦救難・工作艦で、双胴船の間に 500 トン級クレーンで沈没潜水艦を引き上げ、輸送と修理を行えるよう設計されていた。4 基のボイラー、2 基の蒸気タービン、2 基の推進電動機を備え、排水量約 1595 トン、最大速力 12 ノット。第一次世界大戦後は賠償艦として英国へ引き渡され、1919 年 4 月 6 日の回航中に沈没した。",
+    author: "Maomatic",
+    links: [
+      {
+        name: "Shipbucket - Vulkan (Maomatic)",
+        url: "https://www.shipbucket.com/drawings/9132",
+      },
+      {
+        name: "Wikipedia - SMS Vulkan",
+        url: "https://en.wikipedia.org/wiki/SMS_Vulkan",
+      },
+    ],
+  },
+  {
+    name: "norderney",
+    displayName: "ノルダーナイ",
+    type: "油槽船",
+    armaments: [
+      {
+        label: "武装",
+        value: "なし",
+      },
+    ],
+    description: "ノルダーナイは 1915 年に W 84 として就役し、同年末に改名されたドイツの小型油槽船である。ドイツ沿岸の港や停泊地にいる帝国海軍艦艇へ燃料を補給した。全長 75.08 メートル、幅 10.5 メートル、排水量約 2864 トン、最大速力 10 ノットで武装はない。1920 年に敷設船へ改装され、1945 年に英国の戦利品として Alert と改名され、1960 年に解体された。",
+    author: "Eswube",
+    links: [
+      {
+        name: "Shipbucket - Norderney (Eswube)",
+        url: "https://www.shipbucket.com/drawings/11067",
+      },
+      {
+        name: "Wikipedia - Oil tanker",
+        url: "https://en.wikipedia.org/wiki/Oil_tanker",
+      },
+    ],
+  },
 ]

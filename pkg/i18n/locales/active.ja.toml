@@ -96,6 +96,8 @@ other = "フリゲート"
 other = "病院船"
 [ShipTypeCargo]
 other = "貨物船"
+[ShipTypeRepair]
+other = "工作艦"
 [ShipTypeTorpedoBoat]
 other = "魚雷艇"
 [PlaneTypeFighter]
@@ -114,8 +116,6 @@ other = "不明"
 other = "すべて"
 [CollectionSpecial]
 other = "特殊"
-[CollectionAuxiliary]
-other = "補助艦艇"
 [CollectionShip]
 other = "艦船"
 [CollectionPlane]

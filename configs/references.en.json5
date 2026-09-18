@@ -9432,4 +9432,50 @@
       },
     ],
   },
+  {
+    name: "vulkan",
+    displayName: "Vulkan",
+    type: "Repair Ship",
+    armaments: [
+      {
+        label: "Armament",
+        value: "None",
+      },
+    ],
+    description: "Vulkan was a submarine salvage and repair ship commissioned by the Imperial German Navy in 1908. Its catamaran hull allowed a 500-ton crane to lift a disabled submarine between the two hulls for transport and repair. Four boilers drove two turbo-generators and two propulsion motors, giving the 1,595-ton ship a maximum speed of 12 knots. After World War I she was handed over to Britain as reparations and sank during the voyage on 6 April 1919.",
+    author: "Maomatic",
+    links: [
+      {
+        name: "Shipbucket - Vulkan (Maomatic)",
+        url: "https://www.shipbucket.com/drawings/9132",
+      },
+      {
+        name: "Wikipedia - SMS Vulkan",
+        url: "https://en.wikipedia.org/wiki/SMS_Vulkan",
+      },
+    ],
+  },
+  {
+    name: "norderney",
+    displayName: "Norderney",
+    type: "Oil Tanker",
+    armaments: [
+      {
+        label: "Armament",
+        value: "None",
+      },
+    ],
+    description: "Norderney was a small German oil tanker commissioned in 1915 as W 84 and renamed Norderney later that year. She supplied fuel to Imperial German warships in coastal ports and anchorages. The 75.08 by 10.5 metre ship displaced about 2,864 tons, reached 10 knots and carried no armament. In 1920 she was converted into a cable ship, became the British prize Alert in 1945 and was scrapped in 1960.",
+    author: "Eswube",
+    links: [
+      {
+        name: "Shipbucket - Norderney (Eswube)",
+        url: "https://www.shipbucket.com/drawings/11067",
+      },
+      {
+        name: "Wikipedia - Oil tanker",
+        url: "https://en.wikipedia.org/wiki/Oil_tanker",
+      },
+    ],
+  },
 ]

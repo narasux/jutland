@@ -41,6 +41,8 @@ const (
 	ShipTypeTorpedoBoat ShipType = "torpedo_boat"
 	// ShipTypeCargo 货轮
 	ShipTypeCargo ShipType = "cargo"
+	// ShipTypeRepair 维修船
+	ShipTypeRepair ShipType = "repair"
 	// ShipTypeHospital 医疗船
 	ShipTypeHospital ShipType = "hospital"
 )
@@ -62,6 +64,8 @@ func (t ShipType) ToDisplay() string {
 		return i18n.Text(i18n.MsgShipTypeHospital)
 	case ShipTypeCargo:
 		return i18n.Text(i18n.MsgShipTypeCargo)
+	case ShipTypeRepair:
+		return i18n.Text(i18n.MsgShipTypeRepair)
 	case ShipTypeTorpedoBoat:
 		return i18n.Text(i18n.MsgShipTypeTorpedoBoat)
 	case ShipTypeDefault:
@@ -70,7 +74,7 @@ func (t ShipType) ToDisplay() string {
 	return i18n.Text(i18n.MsgShipTypeDefault)
 }
 
-// HospitalShipEffectRange 医疗船效果范围（地图三格）
+// HospitalShipEffectRange 医疗船和维修船效果范围（地图三格）
 const HospitalShipEffectRange = 3
 
 // ShipSpeedScale 是 ships.json5 中 maxSpeed（节）折算为内部速度的除数，
@@ -144,7 +148,7 @@ type BattleShip struct {
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
-	// 上次治疗的 Unix 毫秒时间戳，用于计算固定间隔（仅医疗船使用）
+	// 上次治疗的 Unix 毫秒时间戳，用于计算固定间隔（医疗船和维修船使用）
 	LastHealAt int64
 }
 

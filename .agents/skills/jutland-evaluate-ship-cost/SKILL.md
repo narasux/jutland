@@ -117,6 +117,7 @@ fundsCost  = max(5, combatCost, hullFloor)
 | battleship | 230 | 0.55 | 0.80 |
 | aircraft_carrier | 80 | 0.55 | 0.65 |
 | cargo | 20 | 0.80 | 0.30 |
+| repair | 20 | 0.80 | 0.30 |
 | hospital | — | — | 0.50 |
 
 医疗船没有武器，常规战力为零。其价格使用：

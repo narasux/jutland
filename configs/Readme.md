@@ -80,7 +80,7 @@ aircraftCost = sum(planeCount * planeFundsCost)
 totalCost    = fundsCost + aircraftCost
 ```
 
-医疗船的常规战力为零，使用 `roundTo5(hullFloor + 25)`，其中 `$25` 表示治疗设施和支援价值。`nation == special` 的彩蛋舰船保留手工价格。
+医疗船的常规战力为零，使用 `roundTo5(hullFloor + 25)`，其中 `$25` 表示治疗设施和支援价值。维修船当前与货轮使用相同的费用系数。`nation == special` 的彩蛋舰船保留手工价格。
 
 少数科技树终局舰可以在用户确认后使用显式战略倍率。当前 `satsuma=1.10`，用于让其价格贴近大和；`edo=1.15`，用于确保江户明显高于大和。此类例外只解决科技树层级，不应改动全局战列舰系数。
 
@@ -350,6 +350,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // destroyer 驱逐舰
     // frigate 护卫舰
     // cargo 货轮
+    // repair 维修船
     // torpedo_boat 快艇
     // submarine 潜艇（未来可期）
     type: "cruiser",

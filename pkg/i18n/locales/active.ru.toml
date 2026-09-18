@@ -96,6 +96,8 @@ other = "Фрегат"
 other = "Госпитальное судно"
 [ShipTypeCargo]
 other = "Грузовое судно"
+[ShipTypeRepair]
+other = "Ремонтное судно"
 [ShipTypeTorpedoBoat]
 other = "Торпедный катер"
 [PlaneTypeFighter]
@@ -114,8 +116,6 @@ other = "Неизвестно"
 other = "Все"
 [CollectionSpecial]
 other = "Особые"
-[CollectionAuxiliary]
-other = "Вспомогательные"
 [CollectionShip]
 other = "Корабли"
 [CollectionPlane]

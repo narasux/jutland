@@ -2633,6 +2633,8 @@
           "waterdrop",
           "molamola",
           "liberty",
+          "norderney",
+          "vulkan",
           "mercy",
           "peace_ark",
           "britannic",
@@ -2925,6 +2927,18 @@
       {
         name: "liberty",
         pos: [10, 12],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "norderney",
+        pos: [11, 12],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "vulkan",
+        pos: [12, 12],
         rotation: 90,
         belongPlayer: "HA"
       },

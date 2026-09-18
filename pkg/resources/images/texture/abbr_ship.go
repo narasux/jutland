@@ -79,6 +79,7 @@ var shipIconSpecs = map[string]shipIconSpec{
 	"SS":        {sil: silSub},
 	"HS":        {sil: silHull, mark: markCross, glyphScale: 0.55},
 	"Cargo":     {sil: silHull, mark: markC, glyphScale: 0.55},
+	"AR":        {sil: silHull, mark: markBars, glyphScale: 0.55},
 	"IX":        {sil: silHull, mark: markX, glyphScale: 0.55},
 	"Duck":      {sil: silHull, mark: markX},
 	"WaterDrop": {sil: silHull, mark: markX},

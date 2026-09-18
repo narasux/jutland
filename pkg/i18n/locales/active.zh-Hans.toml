@@ -96,6 +96,8 @@ other = "护卫舰"
 other = "医疗船"
 [ShipTypeCargo]
 other = "货轮"
+[ShipTypeRepair]
+other = "维修船"
 [ShipTypeTorpedoBoat]
 other = "鱼雷艇"
 [PlaneTypeFighter]
@@ -114,8 +116,6 @@ other = "未知"
 other = "全部"
 [CollectionSpecial]
 other = "特殊"
-[CollectionAuxiliary]
-other = "辅助舰"
 [CollectionShip]
 other = "舰船"
 [CollectionPlane]

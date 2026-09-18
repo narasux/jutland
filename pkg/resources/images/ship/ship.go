@@ -25,6 +25,7 @@ func init() {
 		"frigate",
 		"torpedo_boat",
 		"cargo",
+		"repair",
 		"hospital",
 	}
 

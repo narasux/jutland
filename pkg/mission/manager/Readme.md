@@ -219,14 +219,14 @@
 - 油井会检测附近己方货轮；货轮在油井半径内时加入装载列表，不在时移除。
 - 装载计时完成后增加玩家资金，并生成金色收益文字。
 
-`updateHospitalShipHealing()` 更新医疗船治疗：
+`updateHospitalShipHealing()` 更新医疗船和维修船治疗：
 
-- 只处理存活的医疗船。
+- 只处理存活的医疗船或维修船。
 - 治疗间隔使用真实时间 `time.Now().UnixMilli()`，固定为 5000ms，不受游戏速度倍率影响。
 - 目标必须同阵营、存活、未满血、位于 `HospitalShipEffectRange` 内。
 - 治疗量为 `ship.Length * ship.Width / 6`，不会超过目标最大 HP。
 - 治疗时生成绿色浮动文字。
-- 一艘医疗船完成一轮扫描后更新 `LastHealAt`。
+- 一艘支援舰完成一轮扫描后更新 `LastHealAt`。
 
 ## 战斗阶段
 
