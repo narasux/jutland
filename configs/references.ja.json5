@@ -2367,6 +2367,15 @@
     links: [],
   },
   {
+    name: "GER/20/65",
+    displayName: "20mm 単装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/30/MK108",
     displayName: "30mm MK 108 機関砲",
     type: "兵器",
@@ -2522,6 +2531,15 @@
   {
     name: "GER/283/55/3",
     displayName: "283mm 三連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/37/83/2",
+    displayName: "37mm 連装対空砲",
     type: "兵器",
     armaments: [],
     description: "",
@@ -5765,16 +5783,28 @@
         value: "7x2 105mm/65",
       },
       {
+        label: "対空砲",
+        value: "13x2 37mm/83",
+      },
+      {
+        label: "対空砲",
+        value: "10x1 20mm/65",
+      },
+      {
         label: "魚雷",
         value: "2x3 533mm",
       },
     ],
-    description: "シャルンホルストは28cm砲9門を備えたドイツの高速主力艦である。通商破壊やノルウェー作戦に従事したのち、北方海域へ戻った。1943年12月の北岬沖海戦でHMS デューク・オブ・ヨーク以下の部隊に捕捉・撃沈され、生存者は36名だった。",
-    author: "不明",
+    description: "シャルンホルストは28cm砲9門を備えたドイツの高速主力艦である。1943年には中小口径の対空火力が強化された。通商破壊やノルウェー作戦に従事したのち北方海域へ移り、1943年12月の北岬沖海戦でHMS デューク・オブ・ヨーク以下の部隊に捕捉・撃沈され、生存者は36名だった。",
+    author: "Maomatic",
     links: [
       {
-        name: "ウィキペディア — シャルンホルスト",
-        url: "https://en.wikipedia.org/wiki/German%20battleship%20Scharnhorst",
+        name: "ShipBucket - Scharnhorst 1943-12",
+        url: "https://www.shipbucket.com/drawings/6469",
+      },
+      {
+        name: "ウィキペディア — シャルンホルスト (戦艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%B3%E3%83%9B%E3%83%AB%E3%82%B9%E3%83%88_%28%E6%88%A6%E8%89%A6%29",
       },
     ],
   },

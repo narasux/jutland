@@ -2367,6 +2367,15 @@
     links: [],
   },
   {
+    name: "GER/20/65",
+    displayName: "20mm Single AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/AIR/30/MK108",
     displayName: "30mm MK 108 Cannon",
     type: "Weapon",
@@ -2522,6 +2531,15 @@
   {
     name: "GER/283/55/3",
     displayName: "283mm Triple Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/37/83/2",
+    displayName: "37mm Twin AA Mount",
     type: "Weapon",
     armaments: [],
     description: "",
@@ -5765,15 +5783,27 @@
         value: "7x2 105mm/65",
       },
       {
+        label: "Anti-aircraft Guns",
+        value: "13x2 37mm/83",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x1 20mm/65",
+      },
+      {
         label: "Torpedoes",
         value: "2x3 533mm",
       },
     ],
-    description: "Scharnhorst was a fast German capital ship armed with nine 28 cm guns. She conducted commerce-raiding operations and fought in the Norwegian campaign before returning to northern waters. At the Battle of the North Cape in December 1943, HMS Duke of York and accompanying forces overtook and sank her; only 36 survived.",
-    author: "Unknown",
+    description: "Scharnhorst was a fast German capital ship armed with nine 28 cm guns and, by 1943, a heavy anti-aircraft battery. After commerce-raiding operations and the Norwegian campaign she moved to northern waters to threaten the Arctic convoys. In December 1943, at the Battle of the North Cape, HMS Duke of York and accompanying forces caught and sank her; only 36 of her crew survived.",
+    author: "Maomatic",
     links: [
       {
-        name: "Wikipedia — Scharnhorst",
+        name: "ShipBucket - Scharnhorst 1943-12",
+        url: "https://www.shipbucket.com/drawings/6469",
+      },
+      {
+        name: "Wikipedia — German battleship Scharnhorst",
         url: "https://en.wikipedia.org/wiki/German%20battleship%20Scharnhorst",
       },
     ],

@@ -17882,7 +17882,7 @@
     nation: "de",
     type: "battleship",
     typeAbbr: "BC",
-    year: 1939,
+    year: 1943,
     totalHP: 38100,
     horizontalDamageReduction: 0.4,
     verticalDamageReduction: 0.25,
@@ -17912,7 +17912,7 @@
         // 后主炮 C
         {
           name: "GER/283/55/3",
-          posPercent: -0.6,
+          posPercent: -0.58,
           rightFiringArc: [45, 180],
           leftFiringArc: [180, 315]
         },
@@ -17977,28 +17977,28 @@
         // 右高平两用炮 A
         {
           name: "GER/105/65/2/DP",
-          posPercent: 0.03,
+          posPercent: 0.05,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左高平两用炮 A
         {
           name: "GER/105/65/2/DP",
-          posPercent: 0.03,
+          posPercent: 0.05,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右高平两用炮 B
         {
           name: "GER/105/65/2/DP",
-          posPercent: 0.05,
+          posPercent: -0.05,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左高平两用炮 B
         {
           name: "GER/105/65/2/DP",
-          posPercent: 0.05,
+          posPercent: -0.05,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
@@ -18024,18 +18024,183 @@
           leftFiringArc: [180, 330]
         },
       ],
+      antiAircraftGuns: [
+        // 13 座双联装 37 炮
+        // 右高炮 A
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.29,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [315, 360]
+        },
+        // 左高炮 A
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.29,
+          rightFiringArc: [0, 45],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 C
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 烟囱后高炮 D
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.12,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 右高炮 E
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.27,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 E
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.27,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 F
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 F
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 G
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 G
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 12 座单装 20 炮
+        // 右高炮 A
+        {
+          name: "GER/20/65",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 A
+        {
+          name: "GER/20/65",
+          posPercent: 0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 B
+        {
+          name: "GER/20/65",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 B
+        {
+          name: "GER/20/65",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 C
+        {
+          name: "GER/20/65",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 C
+        {
+          name: "GER/20/65",
+          posPercent: -0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 D
+        {
+          name: "GER/20/65",
+          posPercent: 0.47,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左高炮 D
+        {
+          name: "GER/20/65",
+          posPercent: 0.47,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右高炮 E
+        {
+          name: "GER/20/65",
+          posPercent: -0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左高炮 E
+        {
+          name: "GER/20/65",
+          posPercent: -0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
       torpedoes: [
         // 右舷鱼雷 A
         {
           name: "GER/533/3",
-          posPercent: -0.2,
+          posPercent: -0.19,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
           name: "GER/533/3",
-          posPercent: -0.2,
+          posPercent: -0.19,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         }

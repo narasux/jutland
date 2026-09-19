@@ -2736,16 +2736,28 @@
         value: "7x2 105mm/65",
       },
       {
+        label: "防空炮",
+        value: "13x2 37mm/83",
+      },
+      {
+        label: "防空炮",
+        value: "10x1 20mm/65",
+      },
+      {
         label: "鱼雷",
         value: "2x3 533mm",
       },
     ],
-    description: "沙恩霍斯特号是德国海军沙恩霍斯特级战列巡洋舰首舰，1939 年服役，装备 280mm 主炮但航速高达 32 节，以出色的机动性与生存能力著称。1943 年 12 月在北角海战中遭遇英军约克公爵号战列舰编队围攻，最终沉没，仅 36 人生还。",
-    author: "未知",
+    description: "沙恩霍斯特号是德国海军沙恩霍斯特级战列巡洋舰首舰，1939 年服役，装备 283mm 主炮，航速约 31 节，以出色的机动性与生存能力著称。1943 年状态强化了中小口径防空火力。同年 12 月在北角海战中遭遇英军约克公爵号战列舰编队围攻，最终沉没，仅 36 人生还。",
+    author: "Maomatic",
     links: [
       {
-        name: "维基百科 - 沙恩霍斯特号战列舰",
-        url: "https://zh.wikipedia.org/wiki/%E6%B2%99%E6%81%A9%E9%9C%8D%E6%96%AF%E7%89%B9%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0",
+        name: "ShipBucket - Scharnhorst 1943-12",
+        url: "https://www.shipbucket.com/drawings/6469",
+      },
+      {
+        name: "维基百科 - 沙恩霍斯特号战舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%B2%99%E6%81%A9%E9%9C%8D%E6%96%AF%E7%89%B9%E8%99%9F%E6%88%B0%E8%89%A6",
       },
     ],
   },
@@ -7538,6 +7550,15 @@
     links: [],
   },
   {
+    name: "GER/37/83/2",
+    displayName: "37mm/83 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/37/57",
     displayName: "37mm/57 单装高炮",
     type: "武器",
@@ -7549,6 +7570,15 @@
   {
     name: "GER/20/70",
     displayName: "20mm/70 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/20/65",
+    displayName: "20mm/65 单装高炮",
     type: "武器",
     armaments: [],
     description: "",
