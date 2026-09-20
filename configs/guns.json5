@@ -1542,6 +1542,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 GER/20/70 四联装高炮（Flakvierling 38）
+  {
+    name: "GER/20/70/4",
+    bulletName: "GER/GB/20/1940",
+    bulletCount: 4,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国空军 7.92mm MG 17 同步机枪
   {
     name: "GER/AIR/7.92/MG17",

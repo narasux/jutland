@@ -17741,8 +17741,8 @@
     rotateSpeed: 0.8,
     length: 251,
     width: 36,
-    fundsCost: 665,
-    timeCost: 126,
+    fundsCost: 670,
+    timeCost: 127,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17817,62 +17817,210 @@
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
-        // 右高平两用炮 A
+        // 右前高平两用炮 A（SK C/33）
         {
           name: "GER/105/65/2/DP",
           posPercent: 0.15,
           rightFiringArc: [0, 150],
           leftFiringArc: [360, 360]
         },
-        // 左高平两用炮 A
+        // 左前高平两用炮 A（SK C/33）
         {
           name: "GER/105/65/2/DP",
           posPercent: 0.15,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 360]
         },
-        // 右高平两用炮 B
+        // 右前高平两用炮 B（SK C/33）
         {
           name: "GER/105/65/2/DP",
           posPercent: 0,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
-        // 左高平两用炮 B
+        // 左前高平两用炮 B（SK C/33）
         {
           name: "GER/105/65/2/DP",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
-        // 右高平两用炮 C
+        // 右后高平两用炮 C（SK C/37）
         {
           name: "GER/105/65/2/DP",
           posPercent: -0.12,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
-        // 左高平两用炮 C
+        // 左后高平两用炮 C（SK C/37）
         {
           name: "GER/105/65/2/DP",
           posPercent: -0.12,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
-        // 右高平两用炮 D
+        // 右后高平两用炮 D（SK C/37）
         {
           name: "GER/105/65/2/DP",
           posPercent: -0.25,
           rightFiringArc: [0, 150],
           leftFiringArc: [360, 360]
         },
-        // 左高平两用炮 D
+        // 左后高平两用炮 D（SK C/37）
         {
           name: "GER/105/65/2/DP",
           posPercent: -0.25,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 360]
         },
+      ],
+      antiAircraftGuns: [
+        // 8 座双联装 37mm SK C/30 高炮
+        // 布鲁诺炮塔后方两侧
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [315, 360]
+        },
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 45],
+          leftFiringArc: [180, 360]
+        },
+        // 布鲁诺炮塔顶部桅杆甲板
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "GER/37/83/2",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 后部上层建筑低舰桥甲板两侧
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 凯撒炮塔后方两侧
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/37/83/2",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 2 座四联装 20mm Flak 30/C/38 高炮
+        // 前甲板上部建筑主桅杆甲板两侧
+        {
+          name: "GER/20/70/4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "GER/20/70/4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 10 座单装 20mm Flak 30/C/38 高炮
+        // 左右高炮 A
+        {
+          name: "GER/20/65",
+          posPercent: 0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/20/65",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左右高炮 B
+        {
+          name: "GER/20/65",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "GER/20/65",
+          posPercent: 0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 左右高炮 C
+        {
+          name: "GER/20/65",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/20/65",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左右高炮 D
+        {
+          name: "GER/20/65",
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/20/65",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左右高炮 E
+        {
+          name: "GER/20/65",
+          posPercent: -0.36,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/20/65",
+          posPercent: -0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左右高炮 F
+        {
+          name: "GER/20/65",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/20/65",
+          posPercent: -0.55,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },

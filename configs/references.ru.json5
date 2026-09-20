@@ -879,15 +879,27 @@
       },
       {
         label: "Универсальные орудия",
-        value: "8x2 105mm/65",
+        value: "8x2 105mm/65 (4x SK C/33, 4x SK C/37)",
+      },
+      {
+        label: "Средняя зенитная артиллерия",
+        value: "8x2 37mm/83 SK C/30",
+      },
+      {
+        label: "Легкая зенитная артиллерия",
+        value: "2x4 + 10x1 20mm/65 Flak 30/C/38",
       },
     ],
     description: "Bismarck был головным кораблём крупнейшего типа немецких линкоров. В первом походе в мае 1941 года он потопил линейный крейсер HMS Hood в Датском проливе. Британская авиация повредила его рулевое управление, после чего преследующие линкоры и крейсеры настигли и потопили его 27 мая.",
-    author: "Неизвестно",
+    author: "Maomatic",
     links: [
       {
+        name: "Shipbucket — Bismarck 1941-05-27 (Maomatic)",
+        url: "https://www.shipbucket.com/drawings/6474",
+      },
+      {
         name: "Википедия — Бисмарк",
-        url: "https://en.wikipedia.org/wiki/German%20battleship%20Bismarck",
+        url: "https://ru.wikipedia.org/wiki/%D0%91%D0%B8%D1%81%D0%BC%D0%B0%D1%80%D0%BA_(%D0%BB%D0%B8%D0%BD%D0%BA%D0%BE%D1%80)",
       },
     ],
   },
@@ -2369,6 +2381,15 @@
   {
     name: "GER/20/65",
     displayName: "20mm одноствольная зенитная установка",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/20/70/4",
+    displayName: "20mm счетверённая зенитная установка",
     type: "Оружие",
     armaments: [],
     description: "",

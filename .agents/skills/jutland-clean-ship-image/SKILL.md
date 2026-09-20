@@ -39,8 +39,9 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
      `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -remove-enclosed-min-area <pixels>`
      脚本默认直接覆盖输出文件；只有显式传入 `-backup-before-aggressive` 时才会生成 `<stem>.before-aggressive-cleanup.png` 备份。
    - 如需清理索具、吊臂等局部围住的小块背景，使用一个或多个 `-remove-box minX,minY,maxX,maxY` 限定人工确认区域，避免误删甲板标线、文字和飞机细节；脚本仍按连通组件删除，不按矩形逐像素清空。
-   - 如果栅栏/索具内仍有纯白斑点，可更激进地只清纯白小组件：提高 `-component-min` 到 `250` 左右，降低 `-remove-enclosed-min-area` 到 `1`，并必须配合精确 `-remove-box`。示例：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -edge-min 235 -component-min 250 -remove-enclosed-min-area 1 -remove-box <minX,minY,maxX,maxY>`
+   - 如果栅栏/索具内仍有纯白斑点，可更激进地只清纯白小组件：提高 `-component-min` 到 `250` 左右，降低 `-remove-enclosed-min-area` 到 `1`，用 `-max-area` 只删除小口袋，并用 `-remove-box` / `-exclude-box` 限定与保护区域。示例：
+     `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -component-min 250 -remove-enclosed-min-area 1 -max-area 150 -remove-box <minX,minY,maxX,maxY> -exclude-box <minX,minY,maxX,maxY>`
+   - `-max-area 0`（默认）表示不限制面积上限；`-exclude-box` 只跳过包围盒与保护框相交的组件，可重复传入，用于保住旗帜、飞机、比例尺和文字。
    - 使用纯白小组件清理时，框选区域要避开旗帜、比例尺、文字、飞机、高光和甲板白色标线；若这些内容位于同一区域，先缩小或拆分 `-remove-box`，不要全图执行。
    - 用户指出局部残留时，重新分析该区域的连通组件，不要逐像素猜测；发现误删则从最近备份恢复。
 
@@ -57,6 +58,15 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
 - 舰载机附近的白色组件必须按坐标区分。例如同一小片区域内，上方可能是吊臂后的背景，下方紧邻的较长横向组件可能是飞机机翼；先查看包围盒和深色裁剪预览，再用不接触机翼包围盒的微型框处理。
 - 脚本在执行封闭组件删除前打印 `residual_nearwhite_*` 统计，因此该统计不是最终输出的残留量。写出候选后必须对输出文件再执行一次 `-analyze-only`，确认侧视区域残留已收敛到需要保留的飞机、旗帜、文字或细线抗锯齿组件。
 - 最终必须检查整图深色预览和侧视图局部裁剪。白色画布预览无法可靠暴露栏杆后的小白块；深色背景下应能看到栏杆孔隙连续透出背景，同时飞机、旗帜、舰名、比例尺和浅灰结构仍完整。
+
+### 侧视图栏杆缝隙与缆绳间白块
+
+- 甲板栏杆（围栏）的白色格子是薄结构围住的封闭背景，外部泛洪清不掉；桅杆缆绳之间也常有小片纯白。它们通常是纯 `255`、面积很小（常见 2~40 像素，少数合并到约 100~150），并沿甲板线以约 5x2 的规律重复。
+- 先用 `-analyze-only` 列出这些小组件的包围盒，确认它们都落在栏杆带 / 缆绳区，并确认该视图的中部上层建筑在 `-max-area` 范围内没有需要保留的近白组件。Shipbucket 侧视图上层建筑多用 `213/228/244/247`，几乎不带纯 `255`，因此 `-component-min 250` 通常很安全；俯视图和艏艉正视图则可能整片接近纯白，不要纳入。
+- 然后用覆盖侧视图的 `-remove-box`，配合 `-exclude-box` 跳过飞机、旗帜、作者署名和比例尺。示例（按实际合图坐标调整）：
+  `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <candidate.png> -output <candidate.png> -component-min 250 -remove-enclosed-min-area 1 -max-area 150 -remove-box 40,78,1760,470 -exclude-box 30,30,410,230 -exclude-box 628,98,718,152 -remove-box 40,1280,1760,1700 -exclude-box 1045,1260,1535,1470`
+- `-remove-box` 要求组件包围盒完全落入框内。栏杆带沿舰体有斜度，必要时用相邻多个框覆盖，而不是一个很大的矩形。
+- 完成后再次 `-analyze-only`，并用深色背景检查侧视图：栏杆孔隙应连续透出背景，缆绳之间无白斑，旗帜、飞机与浅灰结构完整。
 
 4. 可选：统一迷彩颜色。
    - 仅在用户明确要求时执行。不要全图换色，必须用一个或多个 `-recolor-box` 限定舰体或上层建筑区域。

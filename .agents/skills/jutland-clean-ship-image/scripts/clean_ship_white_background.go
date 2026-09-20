@@ -219,11 +219,23 @@ func componentInAnyBox(comp component, boxes []box) bool {
 	return false
 }
 
+func componentIntersectsAnyBox(comp component, boxes []box) bool {
+	for _, current := range boxes {
+		if comp.minX <= current.maxX && comp.maxX >= current.minX &&
+			comp.minY <= current.maxY && comp.maxY >= current.minY {
+			return true
+		}
+	}
+	return false
+}
+
 func removeLargeComponents(
 	img *image.NRGBA,
 	components []component,
 	minArea int,
+	maxArea int,
 	boxes []box,
+	excludeBoxes []box,
 	min uint8,
 	maxSpread uint8,
 ) (int, int) {
@@ -237,7 +249,13 @@ func removeLargeComponents(
 		if comp.area < minArea {
 			continue
 		}
+		if maxArea > 0 && comp.area > maxArea {
+			continue
+		}
 		if !componentInAnyBox(comp, boxes) {
+			continue
+		}
+		if componentIntersectsAnyBox(comp, excludeBoxes) {
 			continue
 		}
 		if !nearWhite(nrgbaAt(img, comp.seedX, comp.seedY), min, maxSpread) {
@@ -415,6 +433,13 @@ func main() {
 	)
 	var removeBoxes boxFlags
 	flag.Var(&removeBoxes, "remove-box", "limit enclosed component removal to a box minX,minY,maxX,maxY; repeatable")
+	var excludeBoxes boxFlags
+	flag.Var(&excludeBoxes, "exclude-box", "protect a box minX,minY,maxX,maxY from enclosed component removal; repeatable")
+	maxArea := flag.Int(
+		"max-area",
+		0,
+		"only remove enclosed near-white components with at most this many pixels; 0 disables the upper bound",
+	)
 	flag.Parse()
 
 	if *input == "" {
@@ -459,7 +484,9 @@ func main() {
 			img,
 			components,
 			*removeEnclosedMinArea,
+			*maxArea,
 			removeBoxes,
+			excludeBoxes,
 			uint8(*componentMin),
 			uint8(*maxSpread),
 		)

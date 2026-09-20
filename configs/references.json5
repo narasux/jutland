@@ -2702,15 +2702,27 @@
       },
       {
         label: "高平炮",
-        value: "8x2 105mm/65",
+        value: "8x2 105mm/65（前部4座 SK C/33 / 后部4座 SK C/37）",
+      },
+      {
+        label: "37mm高炮",
+        value: "8x2 37mm/83 SK C/30",
+      },
+      {
+        label: "20mm高炮",
+        value: "2x4 + 10x1 20mm/65 Flak 30/C/38",
       },
     ],
     description: "俾斯麦号是纳粹德国海军战列舰首舰，是二战时期德国最大的战舰之一。其 1941 年首次出击就表现卓越，击沉英国皇家海军胡德号战列巡洋舰，后在追击中被英军舰队击沉。",
-    author: "未知",
+    author: "Maomatic",
     links: [
       {
-        name: "维基百科 - 俾斯麦号战列舰",
-        url: "https://zh.wikipedia.org/wiki/%E4%BF%98%E6%96%AF%E9%BA%A6%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0",
+        name: "Shipbucket - 俾斯麦 1941-05-27（Maomatic）",
+        url: "https://www.shipbucket.com/drawings/6474",
+      },
+      {
+        name: "维基百科 - 俾斯麦号战舰",
+        url: "https://zh.wikipedia.org/wiki/%E4%BF%BE%E6%96%AF%E9%BA%A5%E8%99%9F%E6%88%B0%E8%89%A6",
       },
     ],
   },
@@ -7579,6 +7591,15 @@
   {
     name: "GER/20/65",
     displayName: "20mm/65 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/20/70/4",
+    displayName: "20mm/70 四联装高炮",
     type: "武器",
     armaments: [],
     description: "",

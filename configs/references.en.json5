@@ -879,15 +879,27 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x2 105mm/65",
+        value: "8x2 105mm/65 (4x SK C/33, 4x SK C/37)",
+      },
+      {
+        label: "Medium AA Guns",
+        value: "8x2 37mm/83 SK C/30",
+      },
+      {
+        label: "Light AA Guns",
+        value: "2x4 + 10x1 20mm/65 Flak 30/C/38",
       },
     ],
     description: "Bismarck was the lead ship of Germany's largest class of battleships. On her first operation in May 1941, she sank the battlecruiser HMS Hood in the Denmark Strait. British aircraft damaged her steering, allowing pursuing battleships and cruisers to close and sink her after a sustained engagement on 27 May.",
-    author: "Unknown",
+    author: "Maomatic",
     links: [
       {
+        name: "Shipbucket — Bismarck 1941-05-27 (Maomatic)",
+        url: "https://www.shipbucket.com/drawings/6474",
+      },
+      {
         name: "Wikipedia — Bismarck",
-        url: "https://en.wikipedia.org/wiki/German%20battleship%20Bismarck",
+        url: "https://en.wikipedia.org/wiki/German_battleship_Bismarck",
       },
     ],
   },
@@ -2369,6 +2381,15 @@
   {
     name: "GER/20/65",
     displayName: "20mm Single AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/20/70/4",
+    displayName: "20mm Quad AA Mount",
     type: "Weapon",
     armaments: [],
     description: "",

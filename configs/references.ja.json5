@@ -879,15 +879,27 @@
       },
       {
         label: "両用砲",
-        value: "8x2 105mm/65",
+        value: "8x2 105mm/65（前部4基 SK C/33、後部4基 SK C/37）",
+      },
+      {
+        label: "中口径高角砲",
+        value: "8x2 37mm/83 SK C/30",
+      },
+      {
+        label: "小口径機銃",
+        value: "2x4 + 10x1 20mm/65 Flak 30/C/38",
       },
     ],
     description: "ビスマルクはドイツ最大の戦艦級のネームシップである。1941年5月の初作戦でデンマーク海峡において巡洋戦艦HMS フッドを撃沈した。その後、英国機の攻撃で舵を損傷し、追撃する戦艦・巡洋艦との長時間の戦闘の末、5月27日に沈没した。",
-    author: "不明",
+    author: "Maomatic",
     links: [
       {
+        name: "Shipbucket - ビスマルク 1941-05-27（Maomatic）",
+        url: "https://www.shipbucket.com/drawings/6474",
+      },
+      {
         name: "ウィキペディア — ビスマルク",
-        url: "https://en.wikipedia.org/wiki/German%20battleship%20Bismarck",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%93%E3%82%B9%E3%83%9E%E3%83%AB%E3%82%AF_(%E6%88%A6%E8%89%A6)",
       },
     ],
   },
@@ -2369,6 +2381,15 @@
   {
     name: "GER/20/65",
     displayName: "20mm 単装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/20/70/4",
+    displayName: "20mm 四連装対空砲",
     type: "兵器",
     armaments: [],
     description: "",
