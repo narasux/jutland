@@ -8650,6 +8650,10 @@
         value: "5x1 127mm/45",
       },
       {
+        label: "対空兵装",
+        value: "2x2 37mm + 4x1 20mm",
+      },
+      {
         label: "魚雷",
         value: "2x4 533mm",
       },
@@ -8660,6 +8664,37 @@
       {
         name: "ウィキペディア — Z11 ベルント・フォン・アルニム",
         url: "https://en.wikipedia.org/wiki/German%20destroyer%20Z11%20Bernd%20von%20Arnim",
+      },
+    ],
+  },
+  {
+    name: "z_22",
+    displayName: "Z22 アントン・シュミット",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x1 127mm/45",
+      },
+      {
+        label: "対空兵装",
+        value: "2x2 37mm + 4x1 20mm",
+      },
+      {
+        label: "魚雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "Z22 アントン・シュミットは1939年に就役したドイツの1936型駆逐艦である。1940年4月のノルウェー侵攻時、第1次ナルヴィク海戦で英国駆逐艦に撃沈された。",
+    author: "ユーザー提供素材、作者不明",
+    links: [
+      {
+        name: "Wikimedia Commons — 同型艦 Z21",
+        url: "https://commons.wikimedia.org/wiki/File:Z21_Wilhelm_Heidkamp_-_NH_83980.jpg",
+      },
+      {
+        name: "ウィキペディア — アントン・シュミット",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%88%E3%83%B3%E3%83%BB%E3%82%B7%E3%83%A5%E3%83%9F%E3%83%83%E3%83%88_(%E9%A7%86%E9%80%90%E8%89%A6)",
       },
     ],
   },

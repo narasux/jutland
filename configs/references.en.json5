@@ -8650,6 +8650,10 @@
         value: "5x1 127mm/45",
       },
       {
+        label: "Anti-Aircraft",
+        value: "2x2 37mm + 4x1 20mm",
+      },
+      {
         label: "Torpedoes",
         value: "2x4 533mm",
       },
@@ -8660,6 +8664,37 @@
       {
         name: "Wikipedia — Z11 Bernd von Arnim",
         url: "https://en.wikipedia.org/wiki/German%20destroyer%20Z11%20Bernd%20von%20Arnim",
+      },
+    ],
+  },
+  {
+    name: "z_22",
+    displayName: "Z22 Anton Schmitt",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x1 127mm/45",
+      },
+      {
+        label: "Anti-Aircraft",
+        value: "2x2 37mm + 4x1 20mm",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "Z22 Anton Schmitt was a German Type 1936 destroyer commissioned in September 1939. During the German invasion of Norway, British destroyers sank her in the First Battle of Narvik on 10 April 1940.",
+    author: "User-provided artwork; author unknown",
+    links: [
+      {
+        name: "Wikimedia Commons — Z21 sister ship",
+        url: "https://commons.wikimedia.org/wiki/File:Z21_Wilhelm_Heidkamp_-_NH_83980.jpg",
+      },
+      {
+        name: "Wikipedia — Z22 Anton Schmitt",
+        url: "https://en.wikipedia.org/wiki/German_destroyer_Z22_Anton_Schmitt",
       },
     ],
   },

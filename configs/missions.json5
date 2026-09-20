@@ -2808,6 +2808,7 @@
           "yugumo",
           "yukikaze",
           "z_11",
+          "z_22",
           "v",
           "y",
           "ardent",
@@ -2990,6 +2991,12 @@
       {
         name: "z_11",
         pos: [26, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "z_22",
+        pos: [27, 29],
         rotation: 90,
         belongPlayer: "HA"
       },

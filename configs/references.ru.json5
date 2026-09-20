@@ -8650,6 +8650,10 @@
         value: "5x1 127mm/45",
       },
       {
+        label: "Противовоздушная оборона",
+        value: "2x2 37mm + 4x1 20mm",
+      },
+      {
         label: "Торпеды",
         value: "2x4 533mm",
       },
@@ -8660,6 +8664,37 @@
       {
         name: "Википедия — Z11 Бернд фон Арним",
         url: "https://en.wikipedia.org/wiki/German%20destroyer%20Z11%20Bernd%20von%20Arnim",
+      },
+    ],
+  },
+  {
+    name: "z_22",
+    displayName: "Z22 Антон Шмитт",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главная батарея",
+        value: "5x1 127mm/45",
+      },
+      {
+        label: "Противовоздушная оборона",
+        value: "2x2 37mm + 4x1 20mm",
+      },
+      {
+        label: "Торпеды",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "Z22 «Антон Шмитт» — немецкий эсминец типа 1936, вступивший в строй в сентябре 1939 года. Во время вторжения в Норвегию он был потоплен британскими эсминцами в Первом сражении при Нарвике 10 апреля 1940 года.",
+    author: "Материал предоставлен пользователем; автор неизвестен",
+    links: [
+      {
+        name: "Wikimedia Commons — однотипный Z21",
+        url: "https://commons.wikimedia.org/wiki/File:Z21_Wilhelm_Heidkamp_-_NH_83980.jpg",
+      },
+      {
+        name: "Википедия — Z-22 Anton Schmitt",
+        url: "https://ru.wikipedia.org/wiki/Z-22_Anton_Schmitt",
       },
     ],
   },
