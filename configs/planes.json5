@@ -4741,6 +4741,52 @@
     range: 360,
     weapon: {}
   },
+  // 德国海军 - 舰载鱼雷机
+  {
+    // 费泽勒 Fi 167 A 舰载鱼雷机
+    name: "Fi167A",
+    nation: "de",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1939,
+    totalHP: 42,
+    damageReduction: 0.4,
+    maxSpeed: 325,
+    acceleration: 16,
+    rotateSpeed: 7,
+    length: 11.4,
+    width: 13.5,
+    fundsCost: 8,
+    timeCost: 5,
+    tonnage: 4.86,
+    range: 1500,
+    weapon: {
+      guns: [
+        // 机头 7.92mm MG 17 前射机枪
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座 7.92mm MG 15 活动机枪
+        {
+          name: "GER/AIR/7.92/MG15",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "GER/AST/450/1938",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
   // 英国海军
   {
     // 英国复仇者式 Mk I

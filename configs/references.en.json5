@@ -9529,4 +9529,78 @@
       },
     ],
   },
+  {
+    name: "graf_zeppelin",
+    displayName: "Graf Zeppelin",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Main Guns",
+        value: "8x2 150mm/60",
+      },
+      {
+        label: "Dual-purpose Guns",
+        value: "6x2 105mm/65",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "11x2 37mm/83",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "7x4 20mm/70",
+      },
+      {
+        label: "Fighters",
+        value: "12x Bf 109 G-14",
+      },
+      {
+        label: "Dive Bombers",
+        value: "10x Ju 87 B-1",
+      },
+      {
+        label: "Torpedo Bombers",
+        value: "20x Fi 167 A-0",
+      },
+    ],
+    description: "Graf Zeppelin was the lead ship of Germany's Graf Zeppelin-class aircraft carriers. Launched in 1938, she was taken in hand again in 1942 for modification to the revised carrier-aircraft plan, but major work stopped after January 1943 and the ship never entered service. In its 1943 design state the carrier displaced about 33,550 long tons, measured 262.5 metres overall with a 36.2-metre beam, and had a designed speed of 33.8 knots. The original air group included Fi 167 torpedo bombers, while the 1942 revision replaced them with Bf 109 and Ju 87 aircraft.",
+    author: "DG_Alpha",
+    links: [
+      {
+        name: "Shipbucket - Graf Zeppelin final design 1943",
+        url: "https://www.shipbucket.com/drawings/6694",
+      },
+      {
+        name: "Wikipedia - German aircraft carrier Graf Zeppelin",
+        url: "https://en.wikipedia.org/wiki/German_aircraft_carrier_Graf_Zeppelin",
+      },
+    ],
+  },
+  {
+    name: "Fi167A",
+    displayName: "Fi 167 A",
+    type: "Carrier Torpedo Bomber",
+    armaments: [
+      {
+        label: "Machine Guns (Forward)",
+        value: "1 x 7.92mm MG 17",
+      },
+      {
+        label: "Machine Guns (Rear)",
+        value: "1 x 7.92mm MG 15",
+      },
+      {
+        label: "Aerial Torpedo",
+        value: "1 x 45cm LT F5b",
+      },
+    ],
+    description: "The Fieseler Fi 167 was a biplane carrier torpedo bomber and reconnaissance aircraft developed for Graf Zeppelin. Its prototype first flew in 1938, and the pre-production aircraft combined strong low-speed control with short take-off and landing performance. Maximum level speed was about 325 km/h; armament comprised one forward-firing 7.92mm MG 17, one rear 7.92mm MG 15 and a single approximately 45cm aerial torpedo.",
+    author: "The War'tist (Vincent Bourguignon)",
+    links: [
+      {
+        name: "Wikipedia - Fieseler Fi 167",
+        url: "https://en.wikipedia.org/wiki/Fieseler_Fi_167",
+      },
+    ],
+  },
 ]

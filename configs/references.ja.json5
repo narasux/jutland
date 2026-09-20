@@ -9529,4 +9529,78 @@
       },
     ],
   },
+  {
+    name: "graf_zeppelin",
+    displayName: "グラーフ・ツェッペリン",
+    type: "空母",
+    armaments: [
+      {
+        label: "主砲",
+        value: "8x2 150mm/60",
+      },
+      {
+        label: "両用砲",
+        value: "6x2 105mm/65",
+      },
+      {
+        label: "対空砲",
+        value: "11x2 37mm/83",
+      },
+      {
+        label: "対空砲",
+        value: "7x4 20mm/70",
+      },
+      {
+        label: "艦上戦闘機",
+        value: "12x Bf 109 G-14",
+      },
+      {
+        label: "急降下爆撃機",
+        value: "10x Ju 87 B-1",
+      },
+      {
+        label: "雷撃機",
+        value: "20x Fi 167 A-0",
+      },
+    ],
+    description: "グラーフ・ツェッペリンはドイツ海軍のグラーフ・ツェッペリン級航空母艦の一番艦である。1938年に進水し、1942年には改訂された艦載機計画に合わせて工事が再開されたが、1943年1月以降に主要工事が再び停止し、就役することはなかった。1943年設計時の満載排水量は約33,550長トン、全長262.5メートル、艦体幅36.2メートル、最大速力33.8ノットだった。当初の航空隊にはFi 167雷撃機が含まれ、1942年の改訂でBf 109とJu 87の構成に変更された。",
+    author: "DG_Alpha",
+    links: [
+      {
+        name: "Shipbucket - Graf Zeppelin final design 1943",
+        url: "https://www.shipbucket.com/drawings/6694",
+      },
+      {
+        name: "ウィキペディア - グラーフ・ツェッペリン (空母)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%A9%E3%83%BC%E3%83%95%E3%83%BB%E3%83%84%E3%82%A7%E3%83%83%E3%83%9A%E3%83%AA%E3%83%B3_(%E7%A9%BA%E6%AF%8D)",
+      },
+    ],
+  },
+  {
+    name: "Fi167A",
+    displayName: "Fi 167 A",
+    type: "艦上雷撃機",
+    armaments: [
+      {
+        label: "機関銃（前方）",
+        value: "1 x 7.92mm MG 17",
+      },
+      {
+        label: "機関銃（後方）",
+        value: "1 x 7.92mm MG 15",
+      },
+      {
+        label: "航空魚雷",
+        value: "1 x 45cm LT F5b",
+      },
+    ],
+    description: "フィーゼラー Fi 167 は、グラーフ・ツェッペリン用に開発された複葉の艦上雷撃機兼偵察機である。原型機は1938年に初飛行し、量産先行型は優れた低速操縦性と短距離離着陸性能を備えていた。最大水平速度は約325 km/hで、前方固定の7.92mm MG 17一挺、後方の7.92mm MG 15一挺、約45cm航空魚雷一発を搭載した。",
+    author: "The War'tist (Vincent Bourguignon)",
+    links: [
+      {
+        name: "ウィキペディア - フィーゼラー Fi 167",
+        url: "https://en.wikipedia.org/wiki/Fieseler_Fi_167",
+      },
+    ],
+  },
 ]

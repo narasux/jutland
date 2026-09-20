@@ -104,6 +104,13 @@
     range: 4.5,
     bulletSpeed: 40,
   },
+  // 德国海军 450mm 航空鱼雷
+  {
+    name: "GER/AST/450/1938",
+    bulletName: "GER/TB/450/1938",
+    range: 3.5,
+    bulletSpeed: 35,
+  },
   // 德国空军 50kg 炸弹
   {
     name: "GER/BB/50",

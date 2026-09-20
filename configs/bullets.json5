@@ -707,6 +707,13 @@
     criticalRate: 0.07
   },
   {
+    name: "GER/TB/450/1938",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3000,
+    criticalRate: 0.035
+  },
+  {
     name: "UK/TB/457/1935",
     type: "torpedo",
     diameter: 457,

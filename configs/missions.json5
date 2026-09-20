@@ -2687,7 +2687,8 @@
           "queen",
           "biter",
           "empire_maccoll",
-          "empire_macrae"
+          "empire_macrae",
+          "graf_zeppelin"
         ],
       },
       {
@@ -2944,20 +2945,26 @@
       },
       // === German ===
       {
-        name: "bismarck",
+        name: "graf_zeppelin",
         pos: [24, 26],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "scharnhorst",
+        name: "bismarck",
         pos: [25, 27],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "admiral_graf_spee",
+        name: "scharnhorst",
         pos: [24, 28],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "admiral_graf_spee",
+        pos: [25, 29],
         rotation: 90,
         belongPlayer: "HA"
       },
