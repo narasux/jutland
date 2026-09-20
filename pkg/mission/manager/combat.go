@@ -395,10 +395,6 @@ func (m *MissionManager) updateShotBullets() {
 
 	// 结算伤害
 	resolveDamage := func(bt *objBullet.Bullet) bool {
-		prevPos := bt.CurPos.Copy()
-		prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
-		prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
-
 		switch bt.TargetObjType {
 		case object.TypeShip:
 			for _, ship := range m.state.Arena.Ships {
@@ -413,6 +409,9 @@ func (m *MissionManager) updateShotBullets() {
 
 				if bt.ShotType == objBullet.ShotTypeDirect {
 					// 直射则检查线段是否与矩形相交
+					prevPos := bt.CurPos.Copy()
+					prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
+					prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
 					if geometry.IsSegmentIntersectRotatedRectangle(
 						prevPos.RX, prevPos.RY,
 						bt.CurPos.RX, bt.CurPos.RY,
@@ -427,9 +426,9 @@ func (m *MissionManager) updateShotBullets() {
 						break
 					}
 				} else if bt.ShotType == objBullet.ShotTypeArcing {
-					// 弧线炮弹，只要命中一个目标，就不再继续搜索
+					// 曲射只认最终落点；弹道虽穿过舰体，但最终落空仍然属于跨式。
 					if geometry.IsPointInRotatedRectangle(
-						prevPos.RX, prevPos.RY,
+						bt.CurPos.RX, bt.CurPos.RY,
 						ship.CurPos.RX, ship.CurPos.RY,
 						// 转换成实际地图上的尺寸
 						ship.Length/constants.MapBlockSize,
@@ -469,6 +468,9 @@ func (m *MissionManager) updateShotBullets() {
 				}
 
 				// 对空射击都认为是直射，检查线段是否与矩形相交
+				prevPos := bt.CurPos.Copy()
+				prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
+				prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
 				if geometry.IsSegmentIntersectRotatedRectangle(
 					prevPos.RX, prevPos.RY,
 					bt.CurPos.RX, bt.CurPos.RY,

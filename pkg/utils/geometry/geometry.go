@@ -132,7 +132,7 @@ func signFunc(f float64) int {
 // 判断两线段是否相交（x1, y1）到 (x2, y2) 和 (x3, y3) 到 (x4, y4) 是否相交
 func isSegmentsIntersect(x1, y1, x2, y2, x3, y3, x4, y4 float64) bool {
 	// 快速排斥实验
-	if max(x1, x2) < max(x3, x4) || min(x1, x2) > max(x3, x4) ||
+	if max(x1, x2) < min(x3, x4) || min(x1, x2) > max(x3, x4) ||
 		max(y1, y2) < min(y3, y4) || min(y1, y2) > max(y3, y4) {
 		return false
 	}

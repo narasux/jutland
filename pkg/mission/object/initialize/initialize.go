@@ -324,12 +324,22 @@ func initShipMap() {
 		}
 		s.Weapon.HasAntiAircraftGun = len(s.Weapon.AntiAircraftGuns) > 0
 		// 鱼雷发射器
+		torpedoSlotCount := 0
 		for _, torpedoMD := range s.Weapon.TorpedoesMD {
-			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, objUnit.NewTorpedoLauncher(
+			if launcher := objUnit.TorpedoLauncherMap[torpedoMD.Name]; launcher != nil {
+				torpedoSlotCount += launcher.BulletCount
+			}
+		}
+		torpedoSlot := 0
+		for _, torpedoMD := range s.Weapon.TorpedoesMD {
+			launcher := objUnit.NewTorpedoLauncher(
 				torpedoMD.Name, torpedoMD.PosPercent,
 				objUnit.FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
 				objUnit.FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
-			))
+				torpedoSlot, torpedoSlotCount,
+			)
+			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, launcher)
+			torpedoSlot += launcher.BulletCount
 		}
 		s.Weapon.HasTorpedo = len(s.Weapon.Torpedoes) > 0
 		// 火箭炮

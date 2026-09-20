@@ -95,6 +95,7 @@ func TestIsSegmentIntersectRotatedRectangle(t *testing.T) {
 	assert.False(t, geometry.IsSegmentIntersectRotatedRectangle(6, -1, 5, 4, cx, cy, 10, 4, 90))
 	assert.True(t, geometry.IsSegmentIntersectRotatedRectangle(2, 2, 5, 5, cx, cy, 10, 4, 135))
 	assert.True(t, geometry.IsSegmentIntersectRotatedRectangle(2, 2, 10, 5, cx, cy, 10, 4, 135))
+	assert.True(t, geometry.IsSegmentIntersectRotatedRectangle(10, 11, 10, 9, 10, 10, 0.4, 0.1, 0))
 
 	// 线段完全在矩形内部
 	assert.True(t, geometry.IsSegmentIntersectRotatedRectangle(-1, -1, 1, 1, cx, cy, 10, 4, 0))

@@ -10,6 +10,11 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
+func primeWakeEmission(ship *BattleShip) {
+	ship.lastWakeEmitPos = objPos.NewR(ship.CurPos.RX-1, ship.CurPos.RY)
+	ship.wakeTrailInitialized = true
+}
+
 func TestSwordfishTrailsFollowTailAnimationWithoutPerTickStacking(t *testing.T) {
 	ship := &BattleShip{
 		TypeAbbr: "Swordfish",
@@ -63,6 +68,7 @@ func TestSurfaceShipWakeMatchesOriginalWhitePair(t *testing.T) {
 		CurSpeed: 0.05,
 		CurPos:   objPos.NewR(10, 10),
 	}
+	primeWakeEmission(ship)
 
 	trails := ship.GenTrails()
 	if len(trails) != 2 {
@@ -70,6 +76,12 @@ func TestSurfaceShipWakeMatchesOriginalWhitePair(t *testing.T) {
 	}
 	if trails[0].Color != nil || trails[1].Color != nil {
 		t.Fatalf("original foam is default white, got %v %v", trails[0].Color, trails[1].Color)
+	}
+	if trails[0].OwnerUid != ship.Uid || trails[1].OwnerUid != ship.Uid {
+		t.Fatalf(
+			"wake owners = %q/%q, want ship uid %q",
+			trails[0].OwnerUid, trails[1].OwnerUid, ship.Uid,
+		)
 	}
 	if trails[0].CurSize != ship.Width*0.6 || trails[1].CurSize != ship.Width {
 		t.Fatalf("unexpected wake size: %v %v", trails[0].CurSize, trails[1].CurSize)
@@ -82,7 +94,7 @@ func TestSurfaceShipWakeMatchesOriginalWhitePair(t *testing.T) {
 	}
 	// 尾迹总长 = 设计航迹长度（life / 衰减速度 = 航迹需要的帧数）
 	travelCells := ship.CurSpeed * trails[0].CurLife / trails[0].LifeReductionRate
-	wantCells := ship.Length * bowWakeTrailRatio / constants.MapBlockSize
+	wantCells := ship.Length * bowWakeTrailRatio / constants.MapBlockSize * ship.CurSpeed / ship.MaxSpeed
 	if math.Abs(travelCells-wantCells) > 1e-9 {
 		t.Fatalf("default bow trail=%v cells, want %v", travelCells, wantCells)
 	}
@@ -118,6 +130,7 @@ func TestSurfaceShipWakeIsVisibleBehindHull(t *testing.T) {
 			CurSpeed: speed,
 			CurPos:   objPos.NewR(20, 20),
 		}
+		primeWakeEmission(ship)
 		trails := ship.GenTrails()
 		if len(trails) != 2 {
 			t.Fatalf("%s: trails=%d, want 2", tc.name, len(trails))
@@ -144,7 +157,14 @@ func TestSurfaceShipWakeIsVisibleBehindHull(t *testing.T) {
 // 不会因为低速时寿命变长而膨成又白又圆的泡沫团。
 func TestSlowShipWakeStaysNarrowAndFaint(t *testing.T) {
 	newShip := func(knots float64) *BattleShip {
-		return &BattleShip{Length: 175, Width: 32, CurSpeed: knots / ShipSpeedScale, CurPos: objPos.NewR(20, 20)}
+		speed := knots / ShipSpeedScale
+		ship := &BattleShip{
+			Length: 175, Width: 32,
+			MaxSpeed: speed, CurSpeed: speed,
+			CurPos: objPos.NewR(20, 20),
+		}
+		primeWakeEmission(ship)
+		return ship
 	}
 	fast, slow := newShip(21), newShip(4)
 	fastTrails, slowTrails := fast.GenTrails(), slow.GenTrails()
@@ -191,6 +211,7 @@ func TestSurfaceShipWakeLengthIsIndependentOfGlobalSpeed(t *testing.T) {
 			CurSpeed: 0.1 * multiplier,
 			CurPos:   objPos.NewR(10, 10),
 		}
+		primeWakeEmission(ship)
 		trails := ship.GenTrails()
 		gotLength := ship.CurSpeed * trails[0].CurLife / (trails[0].LifeReductionRate * multiplier)
 		if idx == 0 {
@@ -200,6 +221,36 @@ func TestSurfaceShipWakeLengthIsIndependentOfGlobalSpeed(t *testing.T) {
 		if math.Abs(gotLength-wantLength) > 1e-9 {
 			t.Fatalf("wake length at multiplier %v = %v, want %v", multiplier, gotLength, wantLength)
 		}
+	}
+}
+
+func TestSurfaceShipWakeDoesNotStackAtLowSpeed(t *testing.T) {
+	previous := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = previous })
+
+	ship := &BattleShip{
+		Length:   128,
+		Width:    20,
+		MaxSpeed: 0.03,
+		CurSpeed: 0.003,
+		CurPos:   objPos.NewR(10, 10),
+	}
+	if trails := ship.GenTrails(); trails != nil {
+		t.Fatalf("initial stationary position generated %d trails, want none", len(trails))
+	}
+
+	emitted := 0
+	for range 100 {
+		ship.CurPos.AddRy(ship.CurSpeed)
+		if trails := ship.GenTrails(); len(trails) > 0 {
+			emitted++
+		}
+	}
+
+	// 100 帧只航行 0.3 格，按半个舰艏圆半径采样不应逐帧堆出一百组白点。
+	if emitted >= 10 {
+		t.Fatalf("low-speed wake emitted %d groups in 100 frames", emitted)
 	}
 }
 
@@ -216,6 +267,7 @@ func TestConfiguredWakeHullsEmitPerHull(t *testing.T) {
 			{Lateral: -93.5, Width: 28, Front: 0.08, Back: -0.46},
 		},
 	}
+	primeWakeEmission(ship)
 	trails := ship.GenTrails()
 	if len(trails) != 6 {
 		t.Fatalf("trimaran trails=%d, want 6", len(trails))
@@ -241,12 +293,44 @@ func TestConfiguredWakeHullsEmitPerHull(t *testing.T) {
 	// 侧船体航迹比主船体短；初始透明度一致（长度差异由寿命衰减速度体现）。
 	fullShipBowCells := ship.CurSpeed * trails[0].CurLife / trails[0].LifeReductionRate
 	wantSideCells := sideWakeLength * sternWakeTrailRatio / constants.MapBlockSize
+	wantSideCells *= ship.CurSpeed / ship.MaxSpeed
 	sideCells := ship.CurSpeed * sideStern.CurLife / sideStern.LifeReductionRate
 	if sideCells >= fullShipBowCells || math.Abs(sideCells-wantSideCells) > 1e-9 {
 		t.Fatalf(
 			"side wake=%v cells, want hull-span trail %v shorter than full ship %v",
 			sideCells, wantSideCells, fullShipBowCells,
 		)
+	}
+}
+
+func TestSurfaceShipWakeLifetimeUsesMaxSpeed(t *testing.T) {
+	newShip := func(speed float64) *BattleShip {
+		ship := &BattleShip{
+			Length:   128,
+			Width:    20,
+			MaxSpeed: 0.1,
+			CurSpeed: speed,
+			CurPos:   objPos.NewR(10, 10),
+		}
+		primeWakeEmission(ship)
+		return ship
+	}
+
+	slowTrails := newShip(0.01).GenTrails()
+	fastTrails := newShip(0.1).GenTrails()
+	for idx := range slowTrails {
+		if slowTrails[idx].LifeReductionRate != fastTrails[idx].LifeReductionRate {
+			t.Fatalf(
+				"trail %d slow fade rate=%v, fast=%v; lifetime must use max speed",
+				idx, slowTrails[idx].LifeReductionRate, fastTrails[idx].LifeReductionRate,
+			)
+		}
+		if slowTrails[idx].DiffusionRate != fastTrails[idx].DiffusionRate {
+			t.Fatalf(
+				"trail %d slow diffusion=%v, fast=%v; diffusion must use max speed",
+				idx, slowTrails[idx].DiffusionRate, fastTrails[idx].DiffusionRate,
+			)
+		}
 	}
 }
 

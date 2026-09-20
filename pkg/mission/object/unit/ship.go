@@ -141,6 +141,10 @@ type BattleShip struct {
 	AnimationAge float64
 	// 上一次生成专用尾流时的采样步，用于避免每帧重复堆叠
 	LastTrailAnimationStep int
+	// 上一次生成普通水面尾流时的舰体位置
+	lastWakeEmitPos objPos.MapPos
+	// 是否已经记录过普通水面尾流位置
+	wakeTrailInitialized bool
 	// 分组ID
 	GroupID object.GroupID
 	// 攻击目标（敌舰 Uid）
@@ -344,6 +348,9 @@ func (s *BattleShip) GenTrails() []*objTrail.Trail {
 	sinVal := math.Sin(s.CurRotation * math.Pi / 180)
 	cosVal := math.Cos(s.CurRotation * math.Pi / 180)
 	hulls := s.resolvedWakeHulls()
+	if !s.shouldEmitHullWake(hulls) {
+		return nil
+	}
 	trails := make([]*objTrail.Trail, 0, len(hulls)*2)
 	for _, hull := range hulls {
 		trails = append(trails, s.emitHullWake(hull, sinVal, cosVal)...)
@@ -393,6 +400,34 @@ func (s *BattleShip) hullWakeLength(hull WakeHull) float64 {
 		return s.Length
 	}
 	return s.Length * span
+}
+
+// shouldEmitHullWake 按实际航程控制普通水面尾流采样频率。
+// 低速时舰体每帧只移动非常短的距离，若仍逐帧生成舰艏、舰艉圆点，
+// 会在舰尾叠成两个高亮白点；这里至少移动半个最小尾流圆半径才重新采样。
+func (s *BattleShip) shouldEmitHullWake(hulls []WakeHull) bool {
+	if len(hulls) == 0 {
+		return false
+	}
+	if !s.wakeTrailInitialized {
+		// 首次只记录起点，不发点；必须等舰体真正离开起点后才开始尾流。
+		s.lastWakeEmitPos = s.CurPos.Copy()
+		s.wakeTrailInitialized = true
+		return false
+	}
+
+	spacing := math.MaxFloat64
+	for _, hull := range hulls {
+		spacing = min(
+			spacing,
+			hull.Width*bowWakeStartWidth/(2*constants.MapBlockSize),
+		)
+	}
+	if s.CurPos.Distance(s.lastWakeEmitPos) < spacing {
+		return false
+	}
+	s.lastWakeEmitPos = s.CurPos.Copy()
+	return true
 }
 
 // baseCurSpeed 返回未乘全局速度倍率的当前航速，用于生成与倍率无关的尾流寿命。
@@ -457,17 +492,20 @@ func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objT
 	backPos.SubRy(cosVal*lengthCells*hull.Back - sinVal*lateralCells)
 
 	wakeLength := s.hullWakeLength(hull)
-	// 用基础航速换算，保证尾迹长度不受全局倍率影响；
-	// 每船体每帧 2 个白色圆，life 兼透明度，避免大圆高 alpha 叠爆。
-	speed := s.baseCurSpeed()
+	// 用最大航速作为统一寿命基准，保证低速起步点不会因为寿命过长而
+	// 被高速航行甩在原地；实际航迹长度仍自然随当前航速缩短。
+	referenceSpeed := s.MaxSpeed
+	if referenceSpeed <= 0 {
+		referenceSpeed = s.baseCurSpeed()
+	}
 	bowLife, bowLifeReduction, bowDiffusion := hullWakeParams(
-		wakeLength*bowWakeTrailRatio, hull.Width, bowWakeStartWidth, bowWakeEndWidth, speed,
+		wakeLength*bowWakeTrailRatio, hull.Width, bowWakeStartWidth, bowWakeEndWidth, referenceSpeed,
 	)
 	sternLife, sternLifeReduction, sternDiffusion := hullWakeParams(
-		wakeLength*sternWakeTrailRatio, hull.Width, sternWakeStartWidth, sternWakeEndWidth, speed,
+		wakeLength*sternWakeTrailRatio, hull.Width, sternWakeStartWidth, sternWakeEndWidth, referenceSpeed,
 	)
 
-	return []*objTrail.Trail{
+	trails := []*objTrail.Trail{
 		objTrail.New(
 			frontPos, textureImg.TrailShapeCircle,
 			hull.Width*bowWakeStartWidth, bowDiffusion,
@@ -481,6 +519,10 @@ func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objT
 			0, 0, nil,
 		),
 	}
+	for _, trail := range trails {
+		trail.OwnerUid = s.Uid
+	}
+	return trails
 }
 
 // genSwordfishTrails 模拟鲔形游动在尾鳍后方形成的水体扰动与涡流。

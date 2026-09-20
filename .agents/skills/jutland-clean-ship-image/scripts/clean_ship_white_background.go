@@ -295,6 +295,38 @@ func removeLargeComponents(
 	return removedComponents, removedPixels
 }
 
+func countComponents(
+	components []component,
+	minArea int,
+	maxArea int,
+	boxes []box,
+	excludeBoxes []box,
+) (int, int) {
+	if minArea <= 0 {
+		return 0, 0
+	}
+
+	count := 0
+	pixels := 0
+	for _, comp := range components {
+		if comp.area < minArea {
+			continue
+		}
+		if maxArea > 0 && comp.area > maxArea {
+			continue
+		}
+		if !componentInAnyBox(comp, boxes) {
+			continue
+		}
+		if componentIntersectsAnyBox(comp, excludeBoxes) {
+			continue
+		}
+		count++
+		pixels += comp.area
+	}
+	return count, pixels
+}
+
 func loadPNG(path string) (*image.NRGBA, error) {
 	in, err := os.Open(path)
 	if err != nil {
@@ -495,6 +527,28 @@ func main() {
 	if err := savePNG(outPath, img); err != nil {
 		log.Fatal(err)
 	}
+
+	finalComponents := findComponents(img, uint8(*componentMin), uint8(*maxSpread))
+	finalPixels := 0
+	for _, comp := range finalComponents {
+		finalPixels += comp.area
+	}
+	eligibleComponents, eligiblePixels := countComponents(
+		finalComponents,
+		*removeEnclosedMinArea,
+		*maxArea,
+		removeBoxes,
+		excludeBoxes,
+	)
+	fmt.Printf(
+		"final_nearwhite_components=%d final_nearwhite_pixels=%d "+
+			"final_eligible_enclosed_components=%d final_eligible_enclosed_pixels=%d\n",
+		len(finalComponents),
+		finalPixels,
+		eligibleComponents,
+		eligiblePixels,
+	)
+
 	if *previews {
 		if err := writePreviews(outPath, img); err != nil {
 			log.Fatal(err)

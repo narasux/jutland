@@ -14,9 +14,24 @@ import (
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
+const stoppedShipWakeFadeFrames = 30
+
 // 更新尾流状态（战舰，鱼雷，炮弹）
 func (m *MissionManager) updateObjectTrails() {
+	stationaryShips := map[string]bool{}
+	for uid, ship := range m.state.Arena.Ships {
+		if ship.CurSpeed <= 0 {
+			stationaryShips[uid] = true
+		}
+	}
 	for i := 0; i < len(m.state.Arena.Trails); i++ {
+		trail := m.state.Arena.Trails[i]
+		if trail.OwnerUid != "" {
+			_, exists := m.state.Arena.Ships[trail.OwnerUid]
+			if !exists || stationaryShips[trail.OwnerUid] {
+				trail.BeginStopFade(stoppedShipWakeFadeFrames)
+			}
+		}
 		m.state.Arena.Trails[i].Update()
 	}
 	// 生命周期结束的，不再需要

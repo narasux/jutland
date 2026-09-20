@@ -18,6 +18,17 @@ import (
 // torpedoFireRangeRatio 预留 20% 最大射程作为敌舰规避缓冲，避免极限距离发射。
 const torpedoFireRangeRatio = 0.8
 
+const (
+	// 鱼雷扇形按目标类型使用不同的基础角度和整舰最大跨度。
+	torpedoFanBaseAngleFast    = 4.0
+	torpedoFanBaseAngleCruiser = 3.0
+	torpedoFanBaseAngleCapital = 2.0
+
+	torpedoFanMaxSpanFast    = 24.0
+	torpedoFanMaxSpanCruiser = 18.0
+	torpedoFanMaxSpanCapital = 12.0
+)
+
 // TorpedoLauncher 表示舰船鱼雷发射器的配置和局内装填状态。
 type TorpedoLauncher struct {
 	// 发射器名称
@@ -54,6 +65,11 @@ type TorpedoLauncher struct {
 	LatestFireAt int64
 	// 本次装填鱼雷已发射数量
 	ShotCountBeforeReload int
+
+	// 该发射器第一根鱼雷在全舰鱼雷管序列中的槽位
+	FanSlot int `json:"-"`
+	// 所属舰船的鱼雷管总槽位数
+	FanSlotCount int `json:"-"`
 }
 
 var _ AttackWeapon = (*TorpedoLauncher)(nil)
@@ -116,6 +132,13 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	if !lc.InShotRange(sState.CurRotation, curPos, targetPos) {
 		return
 	}
+
+	targetType := ShipTypeDefault
+	if target, ok := enemy.(*BattleShip); ok {
+		targetType = target.Type
+	}
+	fanAngleOffset := lc.fanAngleOffset(targetType)
+
 	// 鱼雷不是齐射的，是一个一个来的
 	lc.ShotCountBeforeReload++
 
@@ -130,6 +153,8 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	// 鱼雷的生命值就是最大射程（+5 预留）
 	life := int(lc.Range/bulletSpeed) + 5
 
+	targetPos = rotateTargetPos(curPos, targetPos, fanAngleOffset)
+
 	// 注：鱼雷只有直射的情况，哪来的曲射？
 	return []*objBullet.Bullet{objBullet.New(
 		lc.BulletName, curPos, targetPos,
@@ -139,11 +164,57 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	)}
 }
 
+// torpedoFanProfile 返回目标类型对应的鱼雷扇形基础步长和最大总跨度。
+func torpedoFanProfile(targetType ShipType) (float64, float64) {
+	switch targetType {
+	case ShipTypeDestroyer, ShipTypeFrigate, ShipTypeTorpedoBoat:
+		return torpedoFanBaseAngleFast, torpedoFanMaxSpanFast
+	case ShipTypeBattleShip, ShipTypeAircraftCarrier,
+		ShipTypeCargo, ShipTypeRepair, ShipTypeHospital:
+		return torpedoFanBaseAngleCapital, torpedoFanMaxSpanCapital
+	case ShipTypeCruiser, ShipTypeDefault:
+		return torpedoFanBaseAngleCruiser, torpedoFanMaxSpanCruiser
+	default:
+		return torpedoFanBaseAngleCruiser, torpedoFanMaxSpanCruiser
+	}
+}
+
+// fanAngleOffset 返回当前鱼雷管相对全舰扇形中心的角度偏移。
+func (lc *TorpedoLauncher) fanAngleOffset(targetType ShipType) float64 {
+	if lc.FanSlotCount <= 1 {
+		return 0
+	}
+
+	slot := min(max(lc.FanSlot+lc.ShotCountBeforeReload, 0), lc.FanSlotCount-1)
+	baseStep, maxSpan := torpedoFanProfile(targetType)
+	step := min(baseStep, maxSpan/float64(lc.FanSlotCount-1))
+	return (float64(slot) - float64(lc.FanSlotCount-1)/2) * step
+}
+
+// rotateTargetPos 以 origin 为中心旋转目标方向，保持原预计命中距离不变。
+func rotateTargetPos(origin, target objPos.MapPos, degrees float64) objPos.MapPos {
+	if degrees == 0 {
+		return target
+	}
+
+	distance := origin.Distance(target)
+	angle := math.Mod(origin.Angle(target)+degrees+360, 360)
+	radians := angle * math.Pi / 180
+	return objPos.NewR(
+		origin.RX+math.Sin(radians)*distance,
+		origin.RY-math.Cos(radians)*distance,
+	)
+}
+
 // TorpedoLauncherMap 保存按配置名称索引的鱼雷发射器模板。
 var TorpedoLauncherMap = map[string]*TorpedoLauncher{}
 
 // NewTorpedoLauncher 从模板创建独立发射器实例，并设置安装位置和左右射界。
-func NewTorpedoLauncher(name string, posPercent float64, leftFireArc, rightFireArc FiringArc) *TorpedoLauncher {
+func NewTorpedoLauncher(
+	name string, posPercent float64,
+	leftFireArc, rightFireArc FiringArc,
+	fanSlot, fanSlotCount int,
+) *TorpedoLauncher {
 	launcher, ok := TorpedoLauncherMap[name]
 	if !ok {
 		log.Fatalf("torpedo launcher %s no found", name)
@@ -152,5 +223,7 @@ func NewTorpedoLauncher(name string, posPercent float64, leftFireArc, rightFireA
 	lc.PosPercent = posPercent
 	lc.LeftFiringArc = leftFireArc
 	lc.RightFiringArc = rightFireArc
+	lc.FanSlot = max(fanSlot, 0)
+	lc.FanSlotCount = max(fanSlotCount, 1)
 	return &lc
 }

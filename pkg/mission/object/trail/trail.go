@@ -12,6 +12,8 @@ import (
 type Trail struct {
 	Pos   objPos.MapPos
 	Shape textureImg.TrailShape
+	// OwnerUid 标识持续生成该尾流的对象；舰船尾流停船后需要统一淡出。
+	OwnerUid string `json:"-"`
 	// 当前尺寸 & 尺寸扩散速度
 	CurSize       float64
 	DiffusionRate float64
@@ -24,6 +26,8 @@ type Trail struct {
 	Rotation float64
 	// 颜色（nil 为默认白色）
 	Color color.Color
+
+	stopFade bool
 }
 
 // New 创建尾流对象
@@ -56,6 +60,19 @@ func (t *Trail) Update() {
 	}
 	t.CurSize += t.DiffusionRate * config.G.SpeedMultiplier
 	t.CurLife -= t.LifeReductionRate * config.G.SpeedMultiplier
+}
+
+// BeginStopFade 让舰船停下后残留的整组尾流在指定帧数内同步淡出。
+func (t *Trail) BeginStopFade(frames float64) {
+	if t.stopFade || t.CurLife <= 0 {
+		return
+	}
+	t.stopFade = true
+	if frames <= 0 {
+		t.CurLife = 0
+		return
+	}
+	t.LifeReductionRate = max(t.LifeReductionRate, t.CurLife/frames)
 }
 
 // IsAlive ...
