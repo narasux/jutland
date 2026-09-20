@@ -2736,7 +2736,7 @@
           "nelson",
           "lion",
           "lioness",
-          "king_george_v",
+          "duke_of_york",
           "warspite",
           "tiger",
         ],
@@ -3117,7 +3117,7 @@
         belongPlayer: "HA"
       },
       {
-        name: "king_george_v",
+        name: "duke_of_york",
         pos: [15, 28],
         rotation: 90,
         belongPlayer: "HA"

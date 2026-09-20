@@ -1737,6 +1737,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 英国海军 14 英寸/45 Mk VII 四联装 Mk III 炮塔（英王乔治五世级）
+  {
+    name: "UK/356/45/4/MK3",
+    bulletName: "UK/GB/356/1933",
+    bulletCount: 4,
+    reloadTime: 15,
+    range: 38,
+    bulletSpread: 115,
+    bulletSpeed: 785,
+    fundsCost: 60,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 英国海军 UK/356/45 双联装舰炮
   {
     name: "UK/356/45/2",
@@ -1747,6 +1760,19 @@
     bulletSpread: 120,
     bulletSpeed: 800,
     fundsCost: 35,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  // 英国海军 14 英寸/45 Mk VII 双联装 Mk II 炮塔（英王乔治五世级）
+  {
+    name: "UK/356/45/2/MK2",
+    bulletName: "UK/GB/356/1933",
+    bulletCount: 2,
+    reloadTime: 15,
+    range: 38,
+    bulletSpread: 115,
+    bulletSpeed: 785,
+    fundsCost: 30,
     antiShip: true,
     antiAircraft: false,
   },
@@ -1838,6 +1864,19 @@
     bulletSpread: 70,
     bulletSpeed: 810,
     fundsCost: 7,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 英国海军 QF 5.25 英寸/50 Mk I 双联装 Mk I 高平两用炮
+  {
+    name: "UK/133/50/2/MK1",
+    bulletName: "UK/GB/133/1935",
+    bulletCount: 2,
+    reloadTime: 7.5,
+    range: 24,
+    bulletSpread: 72,
+    bulletSpeed: 814,
+    fundsCost: 3,
     antiShip: true,
     antiAircraft: true
   },
@@ -1997,6 +2036,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 40mm/56 Bofors Mk II 四联装高炮
+  {
+    name: "UK/40/56/4/MK2",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 4,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 881,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 英国海军 UK/40/39 八联装高炮
   {
     name: "UK/40/39/8",
@@ -2010,6 +2062,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 QF 2 磅炮 Mk VIII 八联装 Mk VI 高炮
+  {
+    name: "UK/40/39/8/MK6",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 8,
+    reloadTime: 0.6,
+    range: 4.6,
+    bulletSpread: 32,
+    bulletSpeed: 732,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 英国海军 UK/40/39 四联装高炮
   {
     name: "UK/40/39/4",
@@ -2019,6 +2084,19 @@
     range: 3,
     bulletSpread: 40,
     bulletSpeed: 585,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 英国海军 QF 2 磅炮 Mk VIII 四联装 Mk VII 高炮
+  {
+    name: "UK/40/39/4/MK7",
+    bulletName: "UK/GB/40/1930",
+    bulletCount: 4,
+    reloadTime: 0.6,
+    range: 4.6,
+    bulletSpread: 32,
+    bulletSpeed: 732,
     fundsCost: 2,
     antiShip: true,
     antiAircraft: true
