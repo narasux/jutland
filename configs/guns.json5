@@ -1490,6 +1490,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 GER/40/56 单装高炮
+  {
+    name: "GER/40/56",
+    bulletName: "GER/GB/40/1935",
+    bulletCount: 1,
+    reloadTime: 0.4,
+    range: 8,
+    bulletSpread: 20,
+    bulletSpeed: 880,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国海军 GER/37/57 高炮
   {
     name: "GER/37/57",
@@ -1542,6 +1555,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 GER/20/70 四联装高炮（Flakvierling 38）
+  {
+    name: "GER/20/70/4",
+    bulletName: "GER/GB/20/1940",
+    bulletCount: 4,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国海军 GER/20/70 单装高炮
   {
     name: "GER/20/70",
@@ -1565,19 +1591,6 @@
     bulletSpread: 22,
     bulletSpeed: 880,
     fundsCost: 1,
-    antiShip: true,
-    antiAircraft: true
-  },
-  // 德国海军 GER/20/70 四联装高炮（Flakvierling 38）
-  {
-    name: "GER/20/70/4",
-    bulletName: "GER/GB/20/1940",
-    bulletCount: 4,
-    reloadTime: 0.2,
-    range: 4,
-    bulletSpread: 20,
-    bulletSpeed: 910,
-    fundsCost: 4,
     antiShip: true,
     antiAircraft: true
   },

@@ -2595,6 +2595,15 @@
     links: [],
   },
   {
+    name: "GER/40/56",
+    displayName: "40mm/56 Single AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/37/57",
     displayName: "37mm Single Mount",
     type: "Weapon",
@@ -5251,13 +5260,25 @@
         value: "6x2 105mm/65",
       },
       {
+        label: "Anti-aircraft Guns",
+        value: "18x1 40mm/56",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x4 20mm/70",
+      },
+      {
         label: "Torpedoes",
         value: "4x3 533mm",
       },
     ],
     description: "Prinz Eugen was the third Admiral Hipper-class heavy cruiser. She accompanied Bismarck during the Battle of the Denmark Strait and later operated in Norwegian and Baltic waters. Surrendered to the United States after the war, she survived two Operation Crossroads nuclear tests before capsizing at Kwajalein Atoll.",
-    author: "Unknown",
+    author: "Antonio Bonomi",
     links: [
+      {
+        name: "Kbismarck - A ship history: Prinz Eugen",
+        url: "https://www.kbismarck.org/forum/viewtopic.php?t=470",
+      },
       {
         name: "Wikipedia — Prinz Eugen",
         url: "https://en.wikipedia.org/wiki/German%20cruiser%20Prinz%20Eugen",

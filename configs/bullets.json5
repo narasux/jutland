@@ -409,6 +409,13 @@
     type: "shell",
     diameter: 88,
     damage: 40,
+    criticalRate: 0.0015
+  },
+  {
+    name: "GER/GB/40/1935",
+    type: "shell",
+    diameter: 40,
+    damage: 5,
     criticalRate: 0.001
   },
   {

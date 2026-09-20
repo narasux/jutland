@@ -2595,6 +2595,15 @@
     links: [],
   },
   {
+    name: "GER/40/56",
+    displayName: "40mm/56 単装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/37/57",
     displayName: "37mm 単装砲",
     type: "兵器",
@@ -5251,16 +5260,28 @@
         value: "6x2 105mm/65",
       },
       {
+        label: "対空砲",
+        value: "18x1 40mm/56",
+      },
+      {
+        label: "対空砲",
+        value: "6x4 20mm/70",
+      },
+      {
         label: "魚雷",
         value: "4x3 533mm",
       },
     ],
     description: "プリンツ・オイゲンはアドミラル・ヒッパー級重巡洋艦の三番艦である。デンマーク海峡海戦でビスマルクと行動し、その後はノルウェーとバルト海で活動した。戦後米国へ引き渡され、クロスロード作戦の核実験2回を生き延びたのち、クェゼリン環礁で転覆した。",
-    author: "不明",
+    author: "Antonio Bonomi",
     links: [
       {
+        name: "Kbismarck - 艦歴：プリンツ・オイゲン",
+        url: "https://www.kbismarck.org/forum/viewtopic.php?t=470",
+      },
+      {
         name: "ウィキペディア — プリンツ・オイゲン",
-        url: "https://en.wikipedia.org/wiki/German%20cruiser%20Prinz%20Eugen",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%83%B3%E3%83%84%E3%83%BB%E3%82%AA%E3%82%A4%E3%82%B2%E3%83%B3_(%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6)",
       },
     ],
   },

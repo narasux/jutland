@@ -4357,13 +4357,25 @@
         value: "6x2 105mm/65",
       },
       {
+        label: "高炮",
+        value: "18x1 40mm/56",
+      },
+      {
+        label: "高炮",
+        value: "6x4 20mm/70",
+      },
+      {
         label: "鱼雷",
         value: "4x3 533mm",
       },
     ],
-    description: "欧根亲王号是德国海军希佩尔海军上将级重巡洋舰三号舰，1940 年服役，1941 年 5 月随俾斯麦号出击丹麦海峡并击沉胡德号。她是唯一一艘在二战全程幸存的大型德国战舰，战后移交美国并于比基尼环礁核试验中沉没。",
-    author: "未知",
+    description: "欧根亲王号是德国海军希佩尔海军上将级重巡洋舰三号舰，1940 年服役，1941 年 5 月随俾斯麦号出击丹麦海峡并参与击沉胡德号。她是唯一一艘在二战全程幸存的大型德国战舰，战后移交美国，在比基尼环礁参加十字路口行动核试验，随后在夸贾林环礁倾覆。",
+    author: "Antonio Bonomi",
     links: [
+      {
+        name: "Kbismarck - A ship history: Prinz Eugen",
+        url: "https://www.kbismarck.org/forum/viewtopic.php?t=470",
+      },
       {
         name: "维基百科 - 欧根亲王号重巡洋舰",
         url: "https://zh.wikipedia.org/wiki/%E6%AC%A7%E6%A0%B9%E4%BA%B2%E7%8E%8B%E5%8F%B7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0",
@@ -4797,7 +4809,7 @@
   },
   {
     name: "z_11",
-    displayName: "Z-11",
+    displayName: "Z-11 贝恩德·冯·阿尼姆",
     type: "驱逐舰",
     armaments: [
       {
@@ -7626,6 +7638,15 @@
   {
     name: "GER/37/83/2",
     displayName: "37mm/83 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/40/56",
+    displayName: "40mm/56 单装高炮",
     type: "武器",
     armaments: [],
     description: "",

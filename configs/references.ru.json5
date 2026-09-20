@@ -2595,6 +2595,15 @@
     links: [],
   },
   {
+    name: "GER/40/56",
+    displayName: "40mm/56 одноствольная зенитная установка",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/37/57",
     displayName: "37mm одноствольная установка",
     type: "Оружие",
@@ -5251,16 +5260,28 @@
         value: "6x2 105mm/65",
       },
       {
+        label: "Зенитные орудия",
+        value: "18x1 40mm/56",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "6x4 20mm/70",
+      },
+      {
         label: "Торпеды",
         value: "4x3 533mm",
       },
     ],
     description: "Prinz Eugen был третьим тяжёлым крейсером типа Admiral Hipper. Он сопровождал Bismarck в Датском проливе, а затем действовал у Норвегии и на Балтике. После войны корабль передали США; он пережил два ядерных испытания Crossroads, а позднее опрокинулся у атолла Кваджалейн.",
-    author: "Неизвестно",
+    author: "Antonio Bonomi",
     links: [
       {
+        name: "Kbismarck — История корабля: «Принц Ойген»",
+        url: "https://www.kbismarck.org/forum/viewtopic.php?t=470",
+      },
+      {
         name: "Википедия — Принц Ойген",
-        url: "https://en.wikipedia.org/wiki/German%20cruiser%20Prinz%20Eugen",
+        url: "https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86_%D0%9E%D0%B9%D0%B3%D0%B5%D0%BD_(%D1%82%D1%8F%D0%B6%D1%91%D0%BB%D1%8B%D0%B9_%D0%BA%D1%80%D0%B5%D0%B9%D1%81%D0%B5%D1%80)",
       },
     ],
   },
