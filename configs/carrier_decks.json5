@@ -105,5 +105,24 @@
       approachAngle: 0,
       approachLength: 3
     }
+  },
+  // 无弹射器水上飞机母舰：飞机由舷侧水面滑跑起飞，返航时在左右舷水面着水回收
+  {
+    name: "SeaplaneWaterNoCatapult",
+    takeoffPoints: [
+      {
+        forward: 0.5,
+        lateral: 0.5,
+        runLength: 0.8,
+        launchAngle: 90
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
   }
 ]

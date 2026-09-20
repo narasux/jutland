@@ -2688,7 +2688,8 @@
           "biter",
           "empire_maccoll",
           "empire_macrae",
-          "graf_zeppelin"
+          "graf_zeppelin",
+          "stuttgart"
         ],
       },
       {
@@ -2944,6 +2945,12 @@
         belongPlayer: "HA"
       },
       // === German ===
+      {
+        name: "stuttgart",
+        pos: [23, 25],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
       {
         name: "graf_zeppelin",
         pos: [24, 26],

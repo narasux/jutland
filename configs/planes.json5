@@ -4741,6 +4741,26 @@
     range: 360,
     weapon: {}
   },
+  {
+    // 腓特烈港 FF.33e（无武装水上侦察机）
+    name: "FF33E",
+    nation: "de",
+    type: "other",
+    typeAbbr: "OTHER",
+    year: 1915,
+    totalHP: 24,
+    damageReduction: 0.25,
+    maxSpeed: 124,
+    acceleration: 8,
+    rotateSpeed: 7,
+    length: 10.27,
+    width: 16.8,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 1.675,
+    range: 650,
+    weapon: {}
+  },
   // 德国海军 - 舰载鱼雷机
   {
     // 费泽勒 Fi 167 A 舰载鱼雷机

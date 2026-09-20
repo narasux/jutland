@@ -2334,6 +2334,33 @@
     links: [],
   },
   {
+    name: "GER/105/40",
+    displayName: "105-мм/40 SK L/40 одноствольная установка",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/88/45/AA",
+    displayName: "88-мм/45 SK L/45 одноствольная зенитная установка",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/450/1",
+    displayName: "450-мм однотрубный подводный торпедный аппарат",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/127/45",
     displayName: "127mm одноствольная установка",
     type: "Оружие",
@@ -9530,6 +9557,41 @@
     ],
   },
   {
+    name: "stuttgart",
+    displayName: "Штутгарт",
+    type: "Гидроавиатранспорт",
+    armaments: [
+      {
+        label: "Главные орудия",
+        value: "4x1 105mm/40 SK L/40",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "2x1 88mm/45 SK L/45",
+      },
+      {
+        label: "Торпеды",
+        value: "2x1 450mm",
+      },
+      {
+        label: "Разведывательные гидросамолёты",
+        value: "3x FF.33e",
+      },
+    ],
+    description: "«Штутгарт» был третьим лёгким крейсером типа «Кёнигсберг» Императорского военно-морского флота Германии. В 1918 году корабль перестроили в быстроходный гидроавиатранспорт: сняли шесть 105-мм орудий, установили в носу два 88-мм зенитных орудия и оборудовали в корме два ангара для трёх гидросамолётов. Катапульты не было: самолёты спускали на воду для взлёта и поднимали краном после посадки. В мае 1918 года «Штутгарт» вновь вступил в строй, вёл разведку в Гельголандской бухте, а в 1920 году был передан Великобритании.",
+    author: "DG_Alpha",
+    links: [
+      {
+        name: "Shipbucket - SMS Stuttgart as seaplane mothership",
+        url: "https://www.shipbucket.com/drawings/6197",
+      },
+      {
+        name: "Wikipedia - SMS Stuttgart",
+        url: "https://en.wikipedia.org/wiki/SMS_Stuttgart",
+      },
+    ],
+  },
+  {
     name: "graf_zeppelin",
     displayName: "Граф Цеппелин",
     type: "Авианосец",
@@ -9600,6 +9662,20 @@
       {
         name: "Википедия - Fieseler Fi 167",
         url: "https://en.wikipedia.org/wiki/Fieseler_Fi_167",
+      },
+    ],
+  },
+  {
+    name: "FF33E",
+    displayName: "Friedrichshafen FF.33e",
+    type: "Гидросамолёт-разведчик",
+    armaments: [],
+    description: "Friedrichshafen FF.33e был основной серийной разведывательной модификацией немецкого двухпоплавкового гидросамолёта, созданного для Императорского флота в годы Первой мировой войны. Оснащённый двигателем Benz Bz.III мощностью 150 л.с., он нёс радиопередатчик вместо вооружения и развивал скорость около 124 км/ч. Было построено примерно 180 машин.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Википедия - Friedrichshafen FF.33",
+        url: "https://en.wikipedia.org/wiki/Friedrichshafen_FF.33",
       },
     ],
   },

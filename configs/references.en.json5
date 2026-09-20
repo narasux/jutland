@@ -2334,6 +2334,33 @@
     links: [],
   },
   {
+    name: "GER/105/40",
+    displayName: "105mm/40 SK L/40 Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/88/45/AA",
+    displayName: "88mm/45 SK L/45 Single Anti-Aircraft Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/450/1",
+    displayName: "450mm Single Submerged Torpedo Tube",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/127/45",
     displayName: "127mm Single Mount",
     type: "Weapon",
@@ -9530,6 +9557,41 @@
     ],
   },
   {
+    name: "stuttgart",
+    displayName: "Stuttgart",
+    type: "Seaplane Tender",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x1 105mm/40 SK L/40",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 88mm/45 SK L/45",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x1 450mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "3x FF.33e",
+      },
+    ],
+    description: "Stuttgart was the third Königsberg-class light cruiser of the Imperial German Navy. In 1918 she was rebuilt as a fast seaplane tender: six 105 mm guns were removed, two 88 mm anti-aircraft guns were fitted forward, and two hangars for three seaplanes were installed aft. Without a catapult, each aircraft had to be lowered to the water for take-off and hoisted aboard after landing. Recommissioned in May 1918, she flew reconnaissance sorties in the German Bight and was surrendered to Britain in 1920.",
+    author: "DG_Alpha",
+    links: [
+      {
+        name: "Shipbucket - SMS Stuttgart as seaplane mothership",
+        url: "https://www.shipbucket.com/drawings/6197",
+      },
+      {
+        name: "Wikipedia - SMS Stuttgart",
+        url: "https://en.wikipedia.org/wiki/SMS_Stuttgart",
+      },
+    ],
+  },
+  {
     name: "graf_zeppelin",
     displayName: "Graf Zeppelin",
     type: "Aircraft Carrier",
@@ -9600,6 +9662,20 @@
       {
         name: "Wikipedia - Fieseler Fi 167",
         url: "https://en.wikipedia.org/wiki/Fieseler_Fi_167",
+      },
+    ],
+  },
+  {
+    name: "FF33E",
+    displayName: "Friedrichshafen FF.33e",
+    type: "Reconnaissance Seaplane",
+    armaments: [],
+    description: "The Friedrichshafen FF.33e was the principal production reconnaissance variant of a German twin-float seaplane developed for the Imperial Navy during World War I. Powered by a 150 hp Benz Bz.III, it traded armament for a radio transmitter and had a maximum speed of about 124 km/h. Roughly 180 FF.33e aircraft were built.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Friedrichshafen FF.33",
+        url: "https://en.wikipedia.org/wiki/Friedrichshafen_FF.33",
       },
     ],
   },

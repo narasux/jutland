@@ -551,6 +551,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 - `modernCatapult`：现代蒸汽/电磁弹射航母（舰艏双弹射点 + 舰体中部长点专供轰炸机，斜角甲板回收）
 - `IseAviationBattleship`：航空战列舰（伊势级，两舷弹射器带偏转角，短后甲板回收）
 - `BowSingleCatapultSeaplaneTender`：舰艏单弹射器水上飞机母舰（舰艏中线弹射起飞，左右舷水面着水回收）
+- `SeaplaneWaterNoCatapult`：无弹射器水上飞机母舰（舷侧水面滑跑起飞，左右舷水面着水回收）
 
 ## 飞机配置（planes.json5）
 

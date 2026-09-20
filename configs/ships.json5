@@ -6101,6 +6101,97 @@
       ]
     }
   },
+  // 斯图加特（水上飞机母舰）
+  {
+    name: "stuttgart",
+    nation: "de",
+    type: "aircraft_carrier",
+    typeAbbr: "AV",
+    year: 1918,
+    totalHP: 4002,
+    horizontalDamageReduction: 0.08,
+    verticalDamageReduction: 0.03,
+    maxSpeed: 23,
+    acceleration: 0.1,
+    rotateSpeed: 1.8,
+    length: 117.4,
+    width: 13.3,
+    fundsCost: 145,
+    timeCost: 54,
+    weapon: {
+      mainGuns: [
+        // 前部 105mm 2 座
+        {
+          name: "GER/105/40",
+          posPercent: 0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "GER/105/40",
+          posPercent: 0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 中部 105mm 2 座
+        {
+          name: "GER/105/40",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 105mm
+        {
+          name: "GER/105/40",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 右舷前部 88mm 高炮
+        {
+          name: "GER/88/45/AA",
+          posPercent: 0.63,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 左舷前部 88mm 高炮
+        {
+          name: "GER/88/45/AA",
+          posPercent: 0.63,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      torpedoes: [
+        // 右舷水下 450mm 鱼雷管
+        {
+          name: "GER/450/1",
+          posPercent: 0,
+          rightFiringArc: [60, 120],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷水下 450mm 鱼雷管
+        {
+          name: "GER/450/1",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [240, 300]
+        }
+      ]
+    },
+    aircraft: {
+      deck: "SeaplaneWaterNoCatapult",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "FF33E",
+          maxCount: 3
+        }
+      ]
+    }
+  },
   // 英国海军
   // 皇家方舟
   {

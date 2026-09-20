@@ -1438,6 +1438,32 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 GER/105/40 单装舰炮（第一次世界大战）
+  {
+    name: "GER/105/40",
+    bulletName: "GER/GB/105/1937",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 12,
+    bulletSpread: 95,
+    bulletSpeed: 690,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 德国海军 GER/88/45 单装高射炮（第一次世界大战）
+  {
+    name: "GER/88/45/AA",
+    bulletName: "GER/GB/88/1935",
+    bulletCount: 1,
+    reloadTime: 2.5,
+    range: 8,
+    bulletSpread: 35,
+    bulletSpeed: 770,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国海军 GER/105/65 双联装高平两用炮
   {
     name: "GER/105/65/2/DP",

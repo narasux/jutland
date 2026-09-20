@@ -7553,6 +7553,33 @@
     links: [],
   },
   {
+    name: "GER/105/40",
+    displayName: "105mm/40 SK L/40 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/88/45/AA",
+    displayName: "88mm/45 SK L/45 单装高射炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/450/1",
+    displayName: "450mm 单装水下鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/88/56/2/DP",
     displayName: "88mm/56 双联装高平两用炮",
     type: "武器",
@@ -9409,6 +9436,41 @@
     ],
   },
   {
+    name: "stuttgart",
+    displayName: "斯图加特",
+    type: "水上飞机母舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x1 105mm/40 SK L/40",
+      },
+      {
+        label: "高炮",
+        value: "2x1 88mm/45 SK L/45",
+      },
+      {
+        label: "鱼雷",
+        value: "2x1 450mm",
+      },
+      {
+        label: "水上侦察机",
+        value: "3x FF.33e",
+      },
+    ],
+    description: "斯图加特号是德意志帝国海军柯尼斯堡级小巡洋舰的三号舰。1918 年该舰被改装为高速水上飞机母舰：拆除六门 105mm 舰炮，在前部加装两门 88mm 高炮，并在后部设置两座机库以搭载三架水上飞机。该舰没有弹射器，水上飞机需先放到水面自行起飞，返航着水后再由吊车回收。它于 1918 年 5 月重新服役，在德国湾执行侦察任务，1920 年作为战争赔偿移交给英国。",
+    author: "DG_Alpha",
+    links: [
+      {
+        name: "Shipbucket - SMS Stuttgart as seaplane mothership",
+        url: "https://www.shipbucket.com/drawings/6197",
+      },
+      {
+        name: "维基百科 - 斯图加特号小巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%96%AF%E5%9B%BE%E5%8A%A0%E7%89%B9%E5%8F%B7%E5%B0%8F%E5%B7%A1%E6%B4%8B%E8%88%B0",
+      },
+    ],
+  },
+  {
     name: "graf_zeppelin",
     displayName: "格拉夫·齐柏林",
     type: "航空母舰",
@@ -9479,6 +9541,20 @@
       {
         name: "维基百科 - 费泽勒 Fi 167",
         url: "https://en.wikipedia.org/wiki/Fieseler_Fi_167",
+      },
+    ],
+  },
+  {
+    name: "FF33E",
+    displayName: "腓特烈港 FF.33e",
+    type: "水上侦察机",
+    armaments: [],
+    description: "腓特烈港 FF.33e 是德国第一次世界大战期间的主力双浮筒水上侦察机改型。该机采用 150 马力 Benz Bz.III 发动机，以无线电设备取代武装，最大速度约 124 km/h，主要承担舰队海上侦察任务。FF.33e 约生产 180 架。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Friedrichshafen FF.33",
+        url: "https://en.wikipedia.org/wiki/Friedrichshafen_FF.33",
       },
     ],
   },

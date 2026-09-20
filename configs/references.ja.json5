@@ -2334,6 +2334,33 @@
     links: [],
   },
   {
+    name: "GER/105/40",
+    displayName: "105mm/40 SK L/40 単装砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/88/45/AA",
+    displayName: "88mm/45 SK L/45 単装高角砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "GER/450/1",
+    displayName: "450mm 単装水中魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "GER/127/45",
     displayName: "127mm 単装砲",
     type: "兵器",
@@ -9530,6 +9557,41 @@
     ],
   },
   {
+    name: "stuttgart",
+    displayName: "シュトゥットガルト",
+    type: "水上機母艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x1 105mm/40 SK L/40",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 88mm/45 SK L/45",
+      },
+      {
+        label: "魚雷",
+        value: "2x1 450mm",
+      },
+      {
+        label: "水上偵察機",
+        value: "3x FF.33e",
+      },
+    ],
+    description: "シュトゥットガルトはドイツ帝国海軍ケーニヒスベルク級小型巡洋艦の三番艦である。1918年に高速水上機母艦へ改装され、105mm砲6門を撤去して88mm高角砲2門を前部へ装備し、後部に水上機3機分の格納庫2基を設けた。カタパルトはなく、水上機は水面へ降ろして自力離水し、着水後にクレーンで収容した。1918年5月に再就役してドイツ湾で偵察任務に就き、1920年に英国へ引き渡された。",
+    author: "DG_Alpha",
+    links: [
+      {
+        name: "Shipbucket - SMS Stuttgart as seaplane mothership",
+        url: "https://www.shipbucket.com/drawings/6197",
+      },
+      {
+        name: "ウィキペディア - ケーニヒスベルク級小型巡洋艦 (初代)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B1%E3%83%BC%E3%83%8B%E3%83%92%E3%82%B9%E3%83%99%E3%83%AB%E3%82%AF%E7%B4%9A%E5%B0%8F%E5%9E%8B%E5%B7%A1%E6%B4%8B%E8%89%A6_(%E5%88%9D%E4%BB%A3)",
+      },
+    ],
+  },
+  {
     name: "graf_zeppelin",
     displayName: "グラーフ・ツェッペリン",
     type: "空母",
@@ -9600,6 +9662,20 @@
       {
         name: "ウィキペディア - フィーゼラー Fi 167",
         url: "https://en.wikipedia.org/wiki/Fieseler_Fi_167",
+      },
+    ],
+  },
+  {
+    name: "FF33E",
+    displayName: "フリードリヒスハーフェン FF.33e",
+    type: "水上偵察機",
+    armaments: [],
+    description: "フリードリヒスハーフェン FF.33e は、第一次世界大戦中にドイツ帝国海軍向けに開発された双浮舟水上偵察機の主力生産型である。150 馬力の Benz Bz.III を搭載し、武装の代わりに無線送信機を装備した。最大速度は約 124 km/h で、約 180 機が生産された。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア - Friedrichshafen FF.33",
+        url: "https://en.wikipedia.org/wiki/Friedrichshafen_FF.33",
       },
     ],
   },
