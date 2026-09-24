@@ -2876,6 +2876,129 @@
     ],
   },
   {
+    name: "bretagne",
+    displayName: "ブレタニー",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x2 340mm/45 Mle 1912",
+      },
+      {
+        label: "副砲",
+        value: "14x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "対空砲",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "対空砲",
+        value: "4x4 13.2mm Hotchkiss",
+      },
+      {
+        label: "対空砲",
+        value: "1x2 + 7x1 20mm Oerlikon",
+      },
+    ],
+    description: "ブレタニーはフランス海軍のブレタニー級ドレッドノートの初艦。1916年就役、全長166m、幅27m、満載排水量約26,600t、設計速力21ノット。中央線に5基の連装340mm砲塔を備え、1940年7月3日メルスエルケビールで沈没した。",
+    author: "Novice, Karle94, Garlicdesign, Latuch",
+    links: [
+      {
+        name: "Shipbucket - Bretagne 1940",
+        url: "https://www.shipbucket.com/drawings/3583",
+      },
+      {
+        name: "ウィキペディア — ブレタニー (戦艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%96%E3%83%AC%E3%82%BF%E3%83%8B%E3%83%BC_(%E6%88%A6%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "FR/340/45/2",
+    displayName: "340mm/45 Mle 1912 連装主砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の45口径340mm Mle 1912 艦砲。ブレタニー級戦艦などに搭載され、初速は約800 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 340mm/45 Modèle 1912 gun",
+        url: "https://en.wikipedia.org/wiki/340mm/45_Mod%C3%A8le_1912_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/55",
+    displayName: "138.6mm/55 Mle 1910 単装副砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の55口径138.6mm Mle 1910 艦砲。ブレタニー級では舷側砲郭に搭載され、初速は約790 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 138 mm Modèle 1910",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1910_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/75/50",
+    displayName: "75mm/50 Mle 1922 単装高射砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の50口径75mm M1922 高射砲。左右の甲板砲座に計8門を搭載し、初速は約850 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 75 mm modèle 1924",
+        url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/13.2/4",
+    displayName: "13.2mm Hotchkiss 四連装高射機関銃",
+    type: "兵器",
+    armaments: [],
+    description: "フランスの13.2mm Hotchkiss M1929 系四連装高射機関銃。初速は約800 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Hotchkiss 13.2 mm machine gun",
+        url: "https://en.wikipedia.org/wiki/Hotchkiss_13.2_mm_machine_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70",
+    displayName: "20mm/70 Oerlikon 単装高射機関砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍で使用された20mm/70 Oerlikon 単装高射機関砲。初速は約910 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70/2",
+    displayName: "20mm/70 Oerlikon 連装高射機関砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍で使用された20mm/70 Oerlikon 連装高射機関砲。初速は約910 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
     name: "hood",
     displayName: "フッド",
     type: "巡洋戦艦",

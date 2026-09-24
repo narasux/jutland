@@ -18946,6 +18946,280 @@
       ]
     }
   },
+  // 法国海军
+  {
+    // 布列塔尼
+    name: "bretagne",
+    nation: "fr",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1940,
+    totalHP: 26600,
+    horizontalDamageReduction: 0.35,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 21,
+    acceleration: 0.24,
+    rotateSpeed: 0.75,
+    length: 166,
+    width: 27,
+    fundsCost: 390,
+    timeCost: 92,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "FR/340/45/2",
+          posPercent: 0.64,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "FR/340/45/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 中部主炮 C
+        {
+          name: "FR/340/45/2",
+          posPercent: 0.03,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 后主炮 D
+        {
+          name: "FR/340/45/2",
+          posPercent: -0.44,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 E
+        {
+          name: "FR/340/45/2",
+          posPercent: -0.59,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 右舷副炮 A-G
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.41,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.36,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.17,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.11,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.11,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.17,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷副炮 A-G
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        }
+      ],
+      antiAircraftGuns: [
+        // 75mm/50 Mle 1922 单装高炮 A-D（甲板炮）
+        {
+          name: "FR/75/50",
+          posPercent: 0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 13.2mm Hotchkiss 四联装机枪 A-D
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm/70 Oerlikon 双联装机炮
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.45,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm/70 Oerlikon 单装机炮 A-G
+        {
+          name: "FR/20/70",
+          posPercent: 0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70",
+          posPercent: 0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/20/70",
+          posPercent: 0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70",
+          posPercent: 0.05,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/20/70",
+          posPercent: -0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [],
+      rockets: []
+    }
+  },
   // 英国海军
   {
     // 胡德

@@ -2739,6 +2739,7 @@
           "duke_of_york",
           "warspite",
           "tiger",
+          "bretagne",
         ],
       },
       {
@@ -3211,6 +3212,13 @@
       {
         name: "MTB_77",
         pos: [19, 32],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      // === French ===
+      {
+        name: "bretagne",
+        pos: [14, 35],
         rotation: 90,
         belongPlayer: "HA"
       },

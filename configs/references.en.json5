@@ -2876,6 +2876,129 @@
     ],
   },
   {
+    name: "bretagne",
+    displayName: "Bretagne",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x2 340mm/45 Mle 1912",
+      },
+      {
+        label: "Secondary Battery",
+        value: "14x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x4 13.2mm Hotchkiss",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "1x2 + 7x1 20mm Oerlikon",
+      },
+    ],
+    description: "Bretagne was the lead ship of the French Navy's Bretagne-class dreadnoughts. Commissioned in 1916, she measured 166 m by 27 m, displaced about 26,600 tons at full load, and was designed for 21 knots. Five twin 340 mm turrets were arranged on the centerline; she was sunk at Mers-el-Kébir on 3 July 1940.",
+    author: "Novice, Karle94, Garlicdesign, Latuch",
+    links: [
+      {
+        name: "Shipbucket - Bretagne 1940",
+        url: "https://www.shipbucket.com/drawings/3583",
+      },
+      {
+        name: "Wikipedia — French battleship Bretagne",
+        url: "https://en.wikipedia.org/wiki/French_battleship_Bretagne",
+      },
+    ],
+  },
+  {
+    name: "FR/340/45/2",
+    displayName: "340mm/45 Mle 1912 Twin Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 340 mm (13.4 in) 45-caliber Mle 1912 naval gun used by the Bretagne-class battleships, with a muzzle velocity of about 800 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 340mm/45 Modèle 1912 gun",
+        url: "https://en.wikipedia.org/wiki/340mm/45_Mod%C3%A8le_1912_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/55",
+    displayName: "138.6mm/55 Mle 1910 Single Secondary Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 138.6 mm (5.46 in) 55-caliber Mle 1910 naval gun mounted in Bretagne-class casemates, with a muzzle velocity of about 790 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 138 mm Modèle 1910",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1910_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/75/50",
+    displayName: "75mm/50 Mle 1922 Single Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 75 mm/50 M1922 anti-aircraft gun, with eight mounted on the port and starboard deck positions. Muzzle velocity was about 850 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 75 mm modèle 1924",
+        url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/13.2/4",
+    displayName: "13.2mm Hotchkiss Quadruple Anti-aircraft Machine Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 13.2 mm Hotchkiss M1929-series quadruple anti-aircraft machine gun, with a muzzle velocity of about 800 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Hotchkiss 13.2 mm machine gun",
+        url: "https://en.wikipedia.org/wiki/Hotchkiss_13.2_mm_machine_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70",
+    displayName: "20mm/70 Oerlikon Single Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 20 mm/70 Oerlikon single anti-aircraft gun, with a muzzle velocity of about 910 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70/2",
+    displayName: "20mm/70 Oerlikon Twin Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 20 mm/70 Oerlikon twin anti-aircraft gun, with a muzzle velocity of about 910 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
     name: "hood",
     displayName: "Hood",
     type: "Battlecruiser",

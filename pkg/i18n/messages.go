@@ -42,6 +42,7 @@ const (
 	MsgNationUnitedStates        MessageID = "NationUnitedStates"
 	MsgNationJapan               MessageID = "NationJapan"
 	MsgNationGermany             MessageID = "NationGermany"
+	MsgNationFrance              MessageID = "NationFrance"
 	MsgNationUnitedKingdom       MessageID = "NationUnitedKingdom"
 	MsgNationSovietUnion         MessageID = "NationSovietUnion"
 	MsgNationSpecial             MessageID = "NationSpecial"

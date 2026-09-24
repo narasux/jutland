@@ -74,6 +74,8 @@ other = "アメリカ"
 other = "日本"
 [NationGermany]
 other = "ドイツ"
+[NationFrance]
+other = "フランス"
 [NationUnitedKingdom]
 other = "イギリス"
 [NationSovietUnion]

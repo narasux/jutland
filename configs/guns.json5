@@ -2438,5 +2438,83 @@
     fundsCost: 2,
     antiShip: true,
     antiAircraft: true
+  },
+  // 法国海军 340mm/45 Mle 1912 双联装主炮
+  {
+    name: "FR/340/45/2",
+    bulletName: "FR/GB/340/1912",
+    bulletCount: 2,
+    reloadTime: 30,
+    range: 25,
+    bulletSpread: 130,
+    bulletSpeed: 800,
+    fundsCost: 25,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 法国海军 138.6mm/55 Mle 1910 单装副炮
+  {
+    name: "FR/138.6/55",
+    bulletName: "FR/GB/138.6/1910",
+    bulletCount: 1,
+    reloadTime: 10,
+    range: 16,
+    bulletSpread: 70,
+    bulletSpeed: 790,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 法国海军 75mm/50 Mle 1922 单装高炮
+  {
+    name: "FR/75/50",
+    bulletName: "FR/GB/75/1922",
+    bulletCount: 1,
+    reloadTime: 6,
+    range: 14,
+    bulletSpread: 55,
+    bulletSpeed: 850,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 13.2mm Hotchkiss 四联装机枪
+  {
+    name: "FR/13.2/4",
+    bulletName: "FR/GB/13.2/1930",
+    bulletCount: 4,
+    reloadTime: 0.3,
+    range: 4.2,
+    bulletSpread: 20,
+    bulletSpeed: 800,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 20mm/70 Oerlikon 单装机炮
+  {
+    name: "FR/20/70",
+    bulletName: "FR/GB/20/1939",
+    bulletCount: 1,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 20mm/70 Oerlikon 双联装机炮
+  {
+    name: "FR/20/70/2",
+    bulletName: "FR/GB/20/1939",
+    bulletCount: 2,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
   }
 ]

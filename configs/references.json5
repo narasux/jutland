@@ -2817,6 +2817,129 @@
     ],
   },
   {
+    name: "bretagne",
+    displayName: "布列塔尼",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "5x2 340mm/45 Mle 1912",
+      },
+      {
+        label: "副炮",
+        value: "14x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "防空炮",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "防空炮",
+        value: "4x4 13.2mm Hotchkiss",
+      },
+      {
+        label: "防空炮",
+        value: "1x2 + 7x1 20mm Oerlikon",
+      },
+    ],
+    description: "布列塔尼号是法国海军布列塔尼级首舰，1916 年服役，满载排水量约 26,600 吨，舰长 166 米、宽 27 米，设计航速 21 节。五座双联装 340 毫米主炮沿中线布置；1940 年驻泊梅尔斯-凯比尔，7 月 3 日遭英军攻击后沉没。",
+    author: "Novice, Karle94, Garlicdesign, Latuch",
+    links: [
+      {
+        name: "Shipbucket - Bretagne 1940",
+        url: "https://www.shipbucket.com/drawings/3583",
+      },
+      {
+        name: "维基百科 - 布列塔尼號戰列艦",
+        url: "https://zh.wikipedia.org/wiki/%E5%B8%83%E5%88%97%E5%A1%94%E5%B0%BC%E8%99%9F%E6%88%B0%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "FR/340/45/2",
+    displayName: "340mm/45 Mle 1912 双联装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 340 毫米/45 倍径 Mle 1912 舰炮，装备布列塔尼级等法国战列舰，炮弹初速约 800 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 340mm/45 Modèle 1912 gun",
+        url: "https://en.wikipedia.org/wiki/340mm/45_Mod%C3%A8le_1912_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/55",
+    displayName: "138.6mm/55 Mle 1910 单装副炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 138.6 毫米/55 倍径 Mle 1910 舰炮，布列塔尼级以舷侧炮廓安装，炮弹初速约 790 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 138 mm Modèle 1910",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1910_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/75/50",
+    displayName: "75mm/50 Mle 1922 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 75 毫米/50 倍径 M1922 高射炮，甲板两侧共 8 门，炮弹初速约 850 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 75 mm modèle 1924",
+        url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/13.2/4",
+    displayName: "13.2mm Hotchkiss 四联装防空机枪",
+    type: "武器",
+    armaments: [],
+    description: "法国 Hotchkiss M1929 系列 13.2 毫米四联装防空机枪，炮弹初速约 800 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Hotchkiss 13.2 mm machine gun",
+        url: "https://en.wikipedia.org/wiki/Hotchkiss_13.2_mm_machine_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70",
+    displayName: "20mm/70 Oerlikon 单装防空机炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军使用的 20 毫米/70 倍径 Oerlikon 单装防空机炮，炮弹初速约 910 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70/2",
+    displayName: "20mm/70 Oerlikon 双联装防空机炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军使用的 20 毫米/70 倍径 Oerlikon 双联装防空机炮，炮弹初速约 910 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
     name: "hood",
     displayName: "胡德",
     type: "战列巡洋舰",

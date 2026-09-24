@@ -74,6 +74,8 @@ other = "США"
 other = "Япония"
 [NationGermany]
 other = "Германия"
+[NationFrance]
+other = "Франция"
 [NationUnitedKingdom]
 other = "Великобритания"
 [NationSovietUnion]

@@ -74,6 +74,8 @@ other = "United States"
 other = "Japan"
 [NationGermany]
 other = "Germany"
+[NationFrance]
+other = "France"
 [NationUnitedKingdom]
 other = "United Kingdom"
 [NationSovietUnion]

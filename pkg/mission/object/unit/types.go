@@ -37,6 +37,8 @@ const (
 	NationJP Nation = "jp"
 	// NationDE 表示德国。
 	NationDE Nation = "de"
+	// NationFR 表示法国。
+	NationFR Nation = "fr"
 	// NationUK 表示英国。
 	NationUK Nation = "uk"
 	// NationSU 表示苏联。
@@ -56,6 +58,8 @@ func (n Nation) ToDisplay() string {
 		return i18n.Text(i18n.MsgNationJapan)
 	case NationDE:
 		return i18n.Text(i18n.MsgNationGermany)
+	case NationFR:
+		return i18n.Text(i18n.MsgNationFrance)
 	case NationUK:
 		return i18n.Text(i18n.MsgNationUnitedKingdom)
 	case NationSU:
@@ -67,7 +71,7 @@ func (n Nation) ToDisplay() string {
 
 // AvailableNations 返回图鉴筛选使用的稳定国籍顺序。
 func AvailableNations() []Nation {
-	return []Nation{NationAll, NationCN, NationUS, NationJP, NationDE, NationUK, NationSU, NationSpecial}
+	return []Nation{NationAll, NationCN, NationUS, NationJP, NationDE, NationFR, NationUK, NationSU, NationSpecial}
 }
 
 // CombatPowerInfo 单位的静态战力评估，仅用于图鉴与平衡分析。

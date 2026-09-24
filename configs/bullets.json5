@@ -881,6 +881,46 @@
     damage: 4,
     criticalRate: 0.001
   },
+  // 法国海军 340mm/45 Mle 1912 主炮弹
+  {
+    name: "FR/GB/340/1912",
+    type: "shell",
+    diameter: 340,
+    damage: 1800,
+    criticalRate: 0.015
+  },
+  // 法国海军 138.6mm/55 Mle 1910 副炮弹
+  {
+    name: "FR/GB/138.6/1910",
+    type: "shell",
+    diameter: 139,
+    damage: 145,
+    criticalRate: 0.003
+  },
+  // 法国海军 75mm/50 Mle 1922 高炮弹
+  {
+    name: "FR/GB/75/1922",
+    type: "shell",
+    diameter: 75,
+    damage: 35,
+    criticalRate: 0.001
+  },
+  // 法国海军 20mm/70 Oerlikon 机关炮弹
+  {
+    name: "FR/GB/20/1939",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
+  },
+  // 法国海军 13.2mm Hotchkiss 机枪弹
+  {
+    name: "FR/GB/13.2/1930",
+    type: "shell",
+    diameter: 13,
+    damage: 0.2,
+    criticalRate: 0
+  },
   // 火箭弹
   // 美国海军 127mm 防空火箭弹
   {
