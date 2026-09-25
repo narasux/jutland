@@ -2659,5 +2659,18 @@
     fundsCost: 2,
     antiShip: true,
     antiAircraft: true
+  },
+  // 法国海军 20mm/70 Oerlikon 四联装机炮
+  {
+    name: "FR/20/70/4",
+    bulletName: "FR/GB/20/1939",
+    bulletCount: 4,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
   }
 ]

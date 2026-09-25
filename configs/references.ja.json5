@@ -3090,6 +3090,49 @@
     ],
   },
   {
+    name: "alsace",
+    displayName: "アルザス",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "副砲",
+        value: "3x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "対空砲",
+        value: "10x2 37mm/70 Mle 1935",
+      },
+      {
+        label: "対空砲",
+        value: "9x2 20mm/70 Oerlikon",
+      },
+      {
+        label: "対空砲",
+        value: "2x4 20mm/70 Oerlikon",
+      },
+    ],
+    description: "アルザス級は、1939年末にドイツ海軍のH級戦艦への対抗策として検討されたフランス海軍の高速戦艦である。1940年4月に2隻が認められたが、フランス降伏までに起工されず計画は中止された。第3案は38cm四連装主砲塔3基を備え、基準排水量約45,000トン、全長265m、幅35.5m、設計速力31ノット。本作はShipbucketの1945-1946年暫定完成案を採用し、100mm連装8基、37mm連装10基、20mm機銃11基は同案の仮想武装で、歴史的な最終案ではない。",
+    author: "Ganlucdesign, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Alsace tentative completion",
+        url: "https://www.shipbucket.com/drawings/3723",
+      },
+      {
+        name: "ウィキペディア - アルザス級戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%AB%E3%82%B6%E3%82%B9%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "ロレーヌ",
     type: "戦艦",
@@ -3358,6 +3401,20 @@
     type: "兵器",
     armaments: [],
     description: "フランス海軍で使用された20mm/70 Oerlikon 連装高射機関砲。初速は約910 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70/4",
+    displayName: "20mm/70 Oerlikon 四連装高射機関砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍で使用された20mm/70 Oerlikon 四連装高射機関砲。初速は約910 m/s。",
     author: "",
     links: [
       {

@@ -821,6 +821,7 @@ TYPE_LABELS = {
     "aa132t": "13.2mm 双联装机枪",
     "aa20": "20mm 机炮",
     "aa20d": "20mm 双联",
+    "aa20q": "20mm 四联",
     "torpedo": "鱼雷",
     "rocket": "火箭炮",
     "custom": "自定义",

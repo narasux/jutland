@@ -3090,6 +3090,49 @@
     ],
   },
   {
+    name: "alsace",
+    displayName: "Alsace",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "Secondary Battery",
+        value: "3x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x2 37mm/70 Mle 1935",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "9x2 20mm/70 Oerlikon",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x4 20mm/70 Oerlikon",
+      },
+    ],
+    description: "The Alsace class was a pair of fast battleships studied by the French Navy from late 1939 in response to the German H-class battleships. Two ships were authorized in April 1940, but neither was laid down before the fall of France ended the program. The No. 3 proposal mounted three quadruple 380 mm turrets on a hull of about 265 by 35.5 metres, with a standard displacement of about 45,000 long tons and a designed speed of 31 knots. This ship follows Shipbucket's tentative 1945-1946 completion study; its eight twin 100 mm, ten twin 37 mm and eleven 20 mm mounts are an alternate-history fit rather than a finalized historical battery.",
+    author: "Ganlucdesign, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Alsace tentative completion",
+        url: "https://www.shipbucket.com/drawings/3723",
+      },
+      {
+        name: "Wikipedia - Alsace-class battleship",
+        url: "https://en.wikipedia.org/wiki/Alsace-class_battleship",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "Lorraine",
     type: "Battleship",
@@ -3358,6 +3401,20 @@
     type: "Weapon",
     armaments: [],
     description: "French 20 mm/70 Oerlikon twin anti-aircraft gun, with a muzzle velocity of about 910 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Oerlikon 20 mm cannon",
+        url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/20/70/4",
+    displayName: "20mm/70 Oerlikon Quadruple Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 20 mm/70 Oerlikon quadruple anti-aircraft gun, with a muzzle velocity of about 910 m/s.",
     author: "",
     links: [
       {
