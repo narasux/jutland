@@ -124,5 +124,86 @@
       approachAngle: 0,
       approachLength: 3
     }
+  },
+  // 法国战列舰单弹射器：艉部中线向后弹射，返航在舰侧水面回收
+  {
+    name: "FrenchSingleCatapultSeaplane",
+    takeoffPoints: [
+      {
+        forward: 0.68,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 法国战列舰/巡洋舰双弹射器：艉部左右交错布置，均向舰尾方向弹射
+  {
+    name: "FrenchTwinCatapultSeaplane",
+    takeoffPoints: [
+      {
+        forward: 0.64,
+        lateral: 0.18,
+        runLength: 0.22,
+        launchAngle: 180
+      },
+      {
+        forward: 0.72,
+        lateral: -0.18,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 塔斯特指挥官四弹射器：舯部两舷前后各一，向舷外弹射
+  {
+    name: "FrenchQuadCatapultSeaplaneTender",
+    takeoffPoints: [
+      {
+        forward: 0.44,
+        lateral: -0.32,
+        runLength: 0.18,
+        launchAngle: -90
+      },
+      {
+        forward: 0.44,
+        lateral: 0.32,
+        runLength: 0.18,
+        launchAngle: 90
+      },
+      {
+        forward: 0.58,
+        lateral: -0.32,
+        runLength: 0.18,
+        launchAngle: -90
+      },
+      {
+        forward: 0.58,
+        lateral: 0.32,
+        runLength: 0.18,
+        launchAngle: 90
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
   }
 ]

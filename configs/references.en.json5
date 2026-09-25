@@ -2972,10 +2972,10 @@
       },
       {
         label: "Aircraft",
-        value: "FF33E x4",
+        value: "Loire130 x4",
       },
     ],
-    description: "De Grasse was the lead ship of a class of light cruisers planned by the French Navy in 1937-38 as enlarged, improved versions of the La Galissonnière class. This is her 1938 design: 8,000 tons standard, 176.3 by 18 metres and 33 knots. The armament comprised three twin 152 mm main turrets, three twin 100 mm dual-purpose mounts, six single 25 mm AA guns, two twin 13.2 mm machine-gun mounts, two triple 550 mm torpedo tubes, two catapults and four seaplanes.",
+    description: "De Grasse was the lead ship of a class of light cruisers planned by the French Navy in 1937-38 as enlarged, improved versions of the La Galissonnière class. This is her 1938 design: 8,000 tons standard, 176.3 by 18 metres and 33 knots. The armament comprised three twin 152 mm main turrets, three twin 100 mm dual-purpose mounts, six single 25 mm AA guns, two twin 13.2 mm machine-gun mounts, two triple 550 mm torpedo tubes, two catapults and four Loire 130 seaplanes.",
     author: "David Latuch",
     links: [
       {
@@ -3046,10 +3046,10 @@
       },
       {
         label: "Aircraft",
-        value: "FF33E x6 / TBF-1-UK x8",
+        value: "Loire130 x6 / Late298 x8",
       },
     ],
-    description: "Commandant Teste was a large French Navy seaplane tender commissioned in 1932. She displaced 10,000 long tons standard and 12,134 tonnes at full load, measured 167 by 27 metres, and was designed for 21 knots. This 1939 configuration carries twelve single 100 mm dual-purpose guns, eight 37 mm AA guns and two twin 13.2 mm machine-gun mounts, with an air group of six FF33E and eight TBF-1-UK aircraft.",
+    description: "Commandant Teste was a large French Navy seaplane tender commissioned in 1932. She displaced 10,000 long tons standard and 12,134 tonnes at full load, measured 167 by 27 metres, and was designed for 21 knots. This 1939 configuration carries twelve single 100 mm dual-purpose guns, eight 37 mm AA guns and two twin 13.2 mm machine-gun mounts, with an air group of six Loire 130 and eight Latécoère 298 aircraft.",
     author: "David Latuch",
     links: [
       {
@@ -3085,10 +3085,10 @@
       },
       {
         label: "Aircraft",
-        value: "F4F-3 x8 / SBD-3 x12 / TBF-1-UK x12",
+        value: "V-156F x8 / LN401 x8",
       },
     ],
-    description: "Béarn was a French Navy aircraft carrier converted from an incomplete Normandie-class battleship and commissioned in 1928. She displaced 22,146 long tons standard and 28,400 long tons at full load, measured 182.5 by 27.2 metres, and had a designed speed of 21.5 knots. This 1939 configuration carries eight single 155 mm casemate guns, six 75 mm AA guns, eight 37 mm AA guns and six twin 13.2 mm machine-gun mounts, with an air group of eight F4F-3 fighters, twelve SBD-3 dive bombers and twelve TBF-1-UK torpedo bombers.",
+    description: "Béarn was a French Navy aircraft carrier converted from an incomplete Normandie-class battleship and commissioned in 1928. She displaced 22,146 long tons standard and 28,400 long tons at full load, measured 182.5 by 27.2 metres, and had a designed speed of 21.5 knots. This 1939 configuration carries eight single 155 mm casemate guns, six 75 mm AA guns, eight 37 mm AA guns and six twin 13.2 mm machine-gun mounts, with an air group of eight V-156F and eight LN 401 aircraft.",
     author: "Novice, David Latuch",
     links: [
       {
@@ -3192,8 +3192,12 @@
         label: "Anti-aircraft Guns",
         value: "8x4 13.2mm Hotchkiss",
       },
+      {
+        label: "Aircraft",
+        value: "Loire130 x2",
+      },
     ],
-    description: "Dunkerque was the lead ship of France's first class of fast battleships. The final 1932 design was approved before her keel was laid, and she entered service in 1937. Full-load displacement was about 35,500 tons, with dimensions of 214.5 by 31.08 metres and a designed speed of 29.5 knots. Both quadruple 330 mm turrets were mounted forward, while three quadruple and two twin 130 mm dual-purpose mounts provided the secondary and heavy anti-aircraft battery.",
+    description: "Dunkerque was the lead ship of France's first class of fast battleships. The final 1932 design was approved before her keel was laid, and she entered service in 1937. Full-load displacement was about 35,500 tons, with dimensions of 214.5 by 31.08 metres and a designed speed of 29.5 knots. Both quadruple 330 mm turrets were mounted forward, while three quadruple and two twin 130 mm dual-purpose mounts provided the secondary and heavy anti-aircraft battery. A stern catapult operated two Loire 130 scout seaplanes.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -3231,8 +3235,12 @@
         label: "Anti-aircraft Guns",
         value: "9x4 13.2mm Hotchkiss",
       },
+      {
+        label: "Aircraft",
+        value: "Loire130 x4",
+      },
     ],
-    description: "Clemenceau was the third Richelieu-class battleship, laid down in 1939 to the modified Project A design. She retained two quadruple 380 mm turrets but mounted four triple 152 mm dual-purpose turrets and a heavier close-range battery. Captured incomplete at Brest in 1940, she was never finished and was scrapped in 1948. This depiction shows a tentative 1942 completion with nine quadruple 13.2 mm machine guns.",
+    description: "Clemenceau was the third Richelieu-class battleship, laid down in 1939 to the modified Project A design. She retained two quadruple 380 mm turrets but mounted four triple 152 mm dual-purpose turrets and a heavier close-range battery. Captured incomplete at Brest in 1940, she was never finished and was scrapped in 1948. This depiction shows a tentative 1942 completion with nine quadruple 13.2 mm machine guns and a Richelieu-style aviation outfit of four Loire 130 scout seaplanes.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -3266,8 +3274,12 @@
         label: "Anti-aircraft Guns",
         value: "6x4 13.2mm Hotchkiss",
       },
+      {
+        label: "Aircraft",
+        value: "Loire130 x4",
+      },
     ],
-    description: "Richelieu was the lead ship of France's last battleship class, represented here in its final 1936 design state. Full-load displacement was about 44,698 tons, with dimensions of 247.85 by 33.08 metres and a designed speed of 32 knots. Both quadruple 380 mm turrets were mounted forward, while five triple 152 mm dual-purpose turrets, six twin 37 mm mounts and six quadruple 13.2 mm machine-gun mounts completed the battery.",
+    description: "Richelieu was the lead ship of France's last battleship class, represented here in its final 1936 design state. Full-load displacement was about 44,698 tons, with dimensions of 247.85 by 33.08 metres and a designed speed of 32 knots. Both quadruple 380 mm turrets were mounted forward, while five triple 152 mm dual-purpose turrets, six twin 37 mm mounts and six quadruple 13.2 mm machine-gun mounts completed the battery. The quarterdeck aviation facilities operated four Loire 130 scout seaplanes.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -3344,8 +3356,12 @@
         label: "Anti-aircraft Guns",
         value: "2x4 20mm/70 Oerlikon",
       },
+      {
+        label: "Aircraft",
+        value: "Loire130 x4",
+      },
     ],
-    description: "The Alsace class was a pair of fast battleships studied by the French Navy from late 1939 in response to the German H-class battleships. Two ships were authorized in April 1940, but neither was laid down before the fall of France ended the program. The No. 3 proposal mounted three quadruple 380 mm turrets on a hull of about 265 by 35.5 metres, with a standard displacement of about 45,000 long tons and a designed speed of 31 knots. This ship follows Shipbucket's tentative 1945-1946 completion study; its eight twin 100 mm, ten twin 37 mm and eleven 20 mm mounts are an alternate-history fit rather than a finalized historical battery.",
+    description: "The Alsace class was a pair of fast battleships studied by the French Navy from late 1939 in response to the German H-class battleships. Two ships were authorized in April 1940, but neither was laid down before the fall of France ended the program. The No. 3 proposal mounted three quadruple 380 mm turrets on a hull of about 265 by 35.5 metres, with a standard displacement of about 45,000 long tons and a designed speed of 31 knots. This ship follows Shipbucket's tentative 1945-1946 completion study; its eight twin 100 mm, ten twin 37 mm and eleven 20 mm mounts are an alternate-history fit rather than a finalized historical battery. Four Loire 130 scout seaplanes complete the game configuration.",
     author: "Ganlucdesign, David Latuch",
     links: [
       {

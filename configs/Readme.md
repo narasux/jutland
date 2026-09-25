@@ -106,7 +106,7 @@ timeCost = clamp(
 )
 ```
 
-当前适配时间国家倍率：`us=0.75`、`uk=0.90`、`jp/de=1.00`、`ru/su=1.05`、`cn=0.50`。
+当前适配时间国家倍率：`us=0.75`、`uk=0.90`、`jp/de/fr=1.00`、`ru/su=1.05`、`cn=0.50`。
 
 ### 验证
 
@@ -552,6 +552,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 - `IseAviationBattleship`：航空战列舰（伊势级，两舷弹射器带偏转角，短后甲板回收）
 - `BowSingleCatapultSeaplaneTender`：舰艏单弹射器水上飞机母舰（舰艏中线弹射起飞，左右舷水面着水回收）
 - `SeaplaneWaterNoCatapult`：无弹射器水上飞机母舰（舷侧水面滑跑起飞，左右舷水面着水回收）
+- `FrenchSingleCatapultSeaplane`：法国战列舰单弹射器（艉部中线向后弹射，水面回收）
+- `FrenchTwinCatapultSeaplane`：法国战列舰/巡洋舰双弹射器（艉部左右交错，水面回收）
+- `FrenchQuadCatapultSeaplaneTender`：法国水上飞机母舰四弹射器（舯部两舷向外弹射，水面回收）
 
 ## 飞机配置（planes.json5）
 

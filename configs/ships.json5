@@ -18963,7 +18963,7 @@
     length: 265,
     width: 36,
     fundsCost: 560,
-    timeCost: 113,
+    timeCost: 114,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19199,6 +19199,16 @@
       ],
       torpedoes: [],
       rockets: []
+    },
+    aircraft: {
+      deck: "FrenchTwinCatapultSeaplane",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Loire130",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -19217,7 +19227,7 @@
     length: 248,
     width: 33,
     fundsCost: 480,
-    timeCost: 102,
+    timeCost: 103,
     weapon: {
       mainGuns: [
         // 前主炮 B（超射）
@@ -19402,6 +19412,16 @@
       ],
       torpedoes: [],
       rockets: []
+    },
+    aircraft: {
+      deck: "FrenchTwinCatapultSeaplane",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Loire130",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -19641,7 +19661,7 @@
     length: 248,
     width: 33,
     fundsCost: 480,
-    timeCost: 102,
+    timeCost: 103,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19776,6 +19796,16 @@
       ],
       torpedoes: [],
       rockets: []
+    },
+    aircraft: {
+      deck: "FrenchTwinCatapultSeaplane",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Loire130",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -19794,7 +19824,7 @@
     length: 215,
     width: 31,
     fundsCost: 440,
-    timeCost: 97,
+    timeCost: 98,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19928,6 +19958,16 @@
       ],
       torpedoes: [],
       rockets: []
+    },
+    aircraft: {
+      deck: "FrenchSingleCatapultSeaplane",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Loire130",
+          maxCount: 2
+        }
+      ]
     }
   },
   {
@@ -21581,11 +21621,11 @@
       rockets: []
     },
     aircraft: {
-      deck: "SeaplaneWaterNoCatapult",
+      deck: "FrenchTwinCatapultSeaplane",
       takeOffTime: 8,
       groups: [
         {
-          name: "FF33E",
+          name: "Loire130",
           maxCount: 4
         }
       ]
@@ -21747,7 +21787,7 @@
     length: 167,
     width: 27,
     fundsCost: 150,
-    timeCost: 56,
+    timeCost: 58,
     weapon: {
       mainGuns: [
         // 前部 100mm 单装高平两用炮：中线 / 两舷
@@ -21899,15 +21939,15 @@
       rockets: []
     },
     aircraft: {
-      deck: "BowSingleCatapultSeaplaneTender",
+      deck: "FrenchQuadCatapultSeaplaneTender",
       takeOffTime: 5,
       groups: [
         {
-          name: "FF33E",
+          name: "Loire130",
           maxCount: 6
         },
         {
-          name: "TBF-1-UK",
+          name: "Late298",
           maxCount: 8
         }
       ]
@@ -22119,16 +22159,12 @@
       takeOffTime: 3.5,
       groups: [
         {
-          name: "F4F-3",
+          name: "V-156F",
           maxCount: 8
         },
         {
-          name: "SBD-3",
-          maxCount: 12
-        },
-        {
-          name: "TBF-1-UK",
-          maxCount: 12
+          name: "LN401",
+          maxCount: 8
         }
       ]
     }
