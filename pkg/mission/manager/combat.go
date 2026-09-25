@@ -35,11 +35,11 @@ func aaHitChance(diameter int, planeType objUnit.PlaneType) float64 {
 	var chance float64
 	switch {
 	case diameter <= 40:
-		chance = 1.0 / 6
+		chance = 1.0 / 3
 	case diameter <= 155:
-		chance = 1.0 / 12
+		chance = 1.0 / 6
 	default:
-		chance = 1.0 / 18
+		chance = 1.0 / 9
 	}
 	if planeType == objUnit.PlaneTypeDiveBomber {
 		chance /= 3

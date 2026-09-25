@@ -198,13 +198,32 @@ HTML = r"""<!doctype html>
       gap: 7px;
       margin-top: 8px;
     }
-    .arc-grid label {
+    .arc-field {
       display: flex;
       flex-direction: column;
       gap: 3px;
+      min-width: 0;
+    }
+    .arc-field label {
       color: var(--muted);
     }
-    .arc-grid input { width: 100%; }
+    .arc-field input { width: 100%; }
+    .angle-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+    .angle-presets button {
+      min-width: 38px;
+      padding: 3px 6px;
+      color: var(--muted);
+      background: #1d222c;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+    .angle-presets button:hover { color: var(--text); }
+    .angle-presets button:disabled { cursor: default; opacity: .45; }
     .actions { display: flex; flex-wrap: wrap; gap: 7px; }
     .footnote { color: var(--muted); font-size: 12px; }
     @media (max-width: 900px) {
@@ -254,10 +273,58 @@ HTML = r"""<!doctype html>
           <button id="applyArc">应用到所选标记</button>
         </div>
         <div class="arc-grid">
-          <label>右舷起<input id="rightStart" type="number" step="1"></label>
-          <label>右舷止<input id="rightEnd" type="number" step="1"></label>
-          <label>左舷起<input id="leftStart" type="number" step="1"></label>
-          <label>左舷止<input id="leftEnd" type="number" step="1"></label>
+          <div class="arc-field">
+            <label for="rightStart">右舷起</label>
+            <input id="rightStart" type="number" step="1">
+            <div class="angle-presets" aria-label="右舷起常用角度">
+              <button type="button" data-input="rightStart" data-angle="0">0°</button>
+              <button type="button" data-input="rightStart" data-angle="30">30°</button>
+              <button type="button" data-input="rightStart" data-angle="45">45°</button>
+              <button type="button" data-input="rightStart" data-angle="90">90°</button>
+              <button type="button" data-input="rightStart" data-angle="135">135°</button>
+              <button type="button" data-input="rightStart" data-angle="150">150°</button>
+              <button type="button" data-input="rightStart" data-angle="180">180°</button>
+            </div>
+          </div>
+          <div class="arc-field">
+            <label for="rightEnd">右舷止</label>
+            <input id="rightEnd" type="number" step="1">
+            <div class="angle-presets" aria-label="右舷止常用角度">
+              <button type="button" data-input="rightEnd" data-angle="0">0°</button>
+              <button type="button" data-input="rightEnd" data-angle="30">30°</button>
+              <button type="button" data-input="rightEnd" data-angle="45">45°</button>
+              <button type="button" data-input="rightEnd" data-angle="90">90°</button>
+              <button type="button" data-input="rightEnd" data-angle="135">135°</button>
+              <button type="button" data-input="rightEnd" data-angle="150">150°</button>
+              <button type="button" data-input="rightEnd" data-angle="180">180°</button>
+            </div>
+          </div>
+          <div class="arc-field">
+            <label for="leftStart">左舷起</label>
+            <input id="leftStart" type="number" step="1">
+            <div class="angle-presets" aria-label="左舷起常用角度">
+              <button type="button" data-input="leftStart" data-angle="180">180°</button>
+              <button type="button" data-input="leftStart" data-angle="210">210°</button>
+              <button type="button" data-input="leftStart" data-angle="225">225°</button>
+              <button type="button" data-input="leftStart" data-angle="270">270°</button>
+              <button type="button" data-input="leftStart" data-angle="315">315°</button>
+              <button type="button" data-input="leftStart" data-angle="330">330°</button>
+              <button type="button" data-input="leftStart" data-angle="360">360°</button>
+            </div>
+          </div>
+          <div class="arc-field">
+            <label for="leftEnd">左舷止</label>
+            <input id="leftEnd" type="number" step="1">
+            <div class="angle-presets" aria-label="左舷止常用角度">
+              <button type="button" data-input="leftEnd" data-angle="180">180°</button>
+              <button type="button" data-input="leftEnd" data-angle="210">210°</button>
+              <button type="button" data-input="leftEnd" data-angle="225">225°</button>
+              <button type="button" data-input="leftEnd" data-angle="270">270°</button>
+              <button type="button" data-input="leftEnd" data-angle="315">315°</button>
+              <button type="button" data-input="leftEnd" data-angle="330">330°</button>
+              <button type="button" data-input="leftEnd" data-angle="360">360°</button>
+            </div>
+          </div>
         </div>
         <div class="actions" style="margin-top: 8px;">
           <button id="copyProject" class="primary">复制项目 JSON</button>
@@ -620,6 +687,9 @@ HTML = r"""<!doctype html>
     }
 
     function fillArcs(marker) {
+      document.querySelectorAll(".angle-presets button").forEach(button => {
+        button.disabled = !marker;
+      });
       if (!marker) {
         Object.values(arcInputs).forEach(input => { input.value = ""; });
         return;
@@ -742,6 +812,15 @@ HTML = r"""<!doctype html>
 
     Object.values(arcInputs).forEach(input => {
       input.addEventListener("input", syncArcInputs);
+    });
+
+    document.querySelector(".arc-grid").addEventListener("click", event => {
+      const button = event.target.closest("button[data-angle]");
+      if (!button || !selectedMarker()) return;
+      const input = arcInputs[button.dataset.input];
+      if (!input) return;
+      input.value = button.dataset.angle;
+      input.dispatchEvent(new Event("input"));
     });
 
     async function copyText(text, label) {

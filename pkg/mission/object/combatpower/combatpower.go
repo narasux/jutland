@@ -486,7 +486,7 @@ func gunEffectiveness(
 	}
 	hitRate := 0.60
 	if antiAir {
-		hitRate = 0.11
+		hitRate = 0.22
 		if planeShooter {
 			hitRate = 0.55
 		}
