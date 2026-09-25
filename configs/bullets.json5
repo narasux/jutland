@@ -913,6 +913,22 @@
     damage: 1800,
     criticalRate: 0.015
   },
+  // 法国海军 203mm/50 Mle 1924 主炮弹
+  {
+    name: "FR/GB/203/1924",
+    type: "shell",
+    diameter: 203,
+    damage: 440,
+    criticalRate: 0.01
+  },
+  // 法国海军 155mm/50 Mle 1920 主炮弹
+  {
+    name: "FR/GB/155/1920",
+    type: "shell",
+    diameter: 155,
+    damage: 230,
+    criticalRate: 0.005
+  },
   // 法国海军 138.6mm/55 Mle 1910 副炮弹
   {
     name: "FR/GB/138.6/1910",

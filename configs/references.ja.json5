@@ -2876,6 +2876,76 @@
     ],
   },
   {
+    name: "duquesne",
+    displayName: "デュケーヌ",
+    type: "重巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 203mm/50 Mle 1924",
+      },
+      {
+        label: "対空砲",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "対空砲",
+        value: "6x1 40mm/60 Bofors",
+      },
+      {
+        label: "対空砲",
+        value: "20x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "デュケーヌはフランス海軍デュケーヌ級重巡洋艦のネームシップで、1929年に就役した。全長191m、幅19m、設計速力34ノットの条約型巡洋艦である。本作は1945年状態で、20.3cm連装主砲4基、75mm高射砲8門、40mmボフォース6門、20mmエリコン20門を装備し、魚雷発射管、水上機、カタパルトは撤去されている。",
+    author: "Garlicdesign, Ari Saarinen, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Duquesne 1945",
+        url: "https://www.shipbucket.com/drawings/3665",
+      },
+      {
+        name: "ウィキペディア - デュケーヌ (重巡洋艦)",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_Duquesne_(1925)",
+      },
+    ],
+  },
+  {
+    name: "jeanne_d_arc",
+    displayName: "ジャンヌ・ダルク",
+    type: "軽巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 155mm/50 Mle 1920",
+      },
+      {
+        label: "対空砲",
+        value: "4x1 75mm/50",
+      },
+      {
+        label: "対空砲",
+        value: "10x1 40mm/60 Bofors",
+      },
+      {
+        label: "対空砲",
+        value: "18x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "ジャンヌ・ダルクはフランス海軍の練習巡洋艦で、1931年に就役した。基準排水量約6,496トン、満載約8,928トン、全長170m、幅17.5m、設計速力25ノット。1943年に連合軍側へ加わった後、水上機を撤去して対空兵装を強化した。本作は1944年6月状態で、15.5cm連装主砲4基、75mm高射砲4門、40mmボフォース10門、20mmエリコン18門を装備する。",
+    author: "Jabba, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Jeanne d'Arc 1944",
+        url: "https://www.shipbucket.com/drawings/3674",
+      },
+      {
+        name: "ウィキペディア - ジャンヌ・ダルク (軽巡洋艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%8C%E3%83%BB%E3%83%80%E3%83%AB%E3%82%AF_(%E8%BB%BD%E5%B7%A1%E6%B4%8B%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "bretagne",
     displayName: "ブレタニー",
     type: "戦艦",
@@ -3168,6 +3238,34 @@
       {
         name: "ウィキペディア - French battleship Lorraine",
         url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
+    name: "FR/203/50/2",
+    displayName: "203mm/50 Mle 1924 連装主砲",
+    type: "兵器",
+    armaments: [],
+    description: "デュケーヌ級重巡洋艦に搭載されたフランス海軍の203mm/50 Mle 1924 連装砲。発射速度は毎分約4〜5発、初速約850m/s、最大射程約31.4km。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 203mm/50 Modèle 1924 gun",
+        url: "https://en.wikipedia.org/wiki/203mm/50_Mod%C3%A8le_1924_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/155/50/2/Mle1920",
+    displayName: "155mm/50 Mle 1920 連装主砲",
+    type: "武器",
+    armaments: [],
+    description: "フランス海軍の155mm/50口径 Mle 1920 連装艦砲。ジャンヌ・ダルク練習巡洋艦とデュゲ＝トルアン級軽巡洋艦に搭載された。発射速度は毎分約3～5発、初速約850m/s、最大射程約26.1km。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 155 mm Modèle 1920",
+        url: "https://en.wikipedia.org/wiki/Canon_de_155_mm_Mod%C3%A8le_1920",
       },
     ],
   },

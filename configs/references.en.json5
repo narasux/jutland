@@ -2876,6 +2876,76 @@
     ],
   },
   {
+    name: "duquesne",
+    displayName: "Duquesne",
+    type: "Heavy Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 203mm/50 Mle 1924",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x1 40mm/60 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "20x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "Duquesne was the lead ship of the French Navy's Duquesne-class heavy cruisers, commissioned in 1929. The treaty cruiser measured 191 by 19 metres and had a designed speed of 34 knots. This ship is shown in her 1945 configuration with four twin 203 mm main turrets, eight 75 mm AA guns, six 40 mm Bofors and twenty 20 mm Oerlikon guns; torpedo tubes, seaplanes and the catapult had been removed.",
+    author: "Garlicdesign, Ari Saarinen, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Duquesne 1945",
+        url: "https://www.shipbucket.com/drawings/3665",
+      },
+      {
+        name: "Wikipedia - French cruiser Duquesne (1925)",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_Duquesne_(1925)",
+      },
+    ],
+  },
+  {
+    name: "jeanne_d_arc",
+    displayName: "Jeanne d'Arc",
+    type: "Light Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 155mm/50 Mle 1920",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x1 75mm/50",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x1 40mm/60 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "18x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "Jeanne d'Arc was a training cruiser built for the French Navy and commissioned in 1931. She displaced 6,496 long tons standard and 8,928 tonnes at deep load, measured 170 by 17.5 metres, and was designed for 25 knots. After joining the Allies in 1943, her seaplanes were removed and her anti-aircraft armament was modernised. This June 1944 configuration carries four twin 155 mm main turrets, four 75 mm AA guns, ten 40 mm Bofors and eighteen 20 mm Oerlikon guns.",
+    author: "Jabba, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Jeanne d'Arc 1944",
+        url: "https://www.shipbucket.com/drawings/3674",
+      },
+      {
+        name: "Wikipedia - French cruiser Jeanne d'Arc (1930)",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_Jeanne_d%27Arc_(1930)",
+      },
+    ],
+  },
+  {
     name: "bretagne",
     displayName: "Bretagne",
     type: "Battleship",
@@ -3168,6 +3238,34 @@
       {
         name: "Wikipedia - French battleship Lorraine",
         url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
+    name: "FR/203/50/2",
+    displayName: "203mm/50 Mle 1924 Twin Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 203 mm/50 Mle 1924 twin naval gun used by the Duquesne-class heavy cruisers. Rate of fire was about 4-5 rounds per minute, muzzle velocity about 850 m/s and maximum range about 31.4 km.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 203mm/50 Modèle 1924 gun",
+        url: "https://en.wikipedia.org/wiki/203mm/50_Mod%C3%A8le_1924_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/155/50/2/Mle1920",
+    displayName: "155 mm/50 Mle 1920 Twin Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 155 mm/50 Mle 1920 twin naval gun used by the Jeanne d'Arc training cruiser and Duguay-Trouin-class cruisers. Rate of fire was about 3-5 rounds per minute, muzzle velocity about 850 m/s and maximum range about 26.1 km.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 155 mm Modèle 1920",
+        url: "https://en.wikipedia.org/wiki/Canon_de_155_mm_Mod%C3%A8le_1920",
       },
     ],
   },

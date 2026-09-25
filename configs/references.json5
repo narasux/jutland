@@ -2817,6 +2817,76 @@
     ],
   },
   {
+    name: "duquesne",
+    displayName: "迪凯纳",
+    type: "重巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 203mm/50 Mle 1924",
+      },
+      {
+        label: "防空炮",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "防空炮",
+        value: "6x1 40mm/60 Bofors",
+      },
+      {
+        label: "防空炮",
+        value: "20x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "迪凯纳号是法国海军迪凯纳级重巡洋舰首舰，1929 年服役。该级标准排水量约 10,160 吨，舰长 191 米、宽 19 米，设计航速 34 节。本作采用 1945 年状态：四座双联装 203 毫米主炮、八门 75 毫米高炮、六门 40 毫米博福斯高炮和二十门 20 毫米厄利孔机炮；鱼雷发射管、水上飞机和弹射器均已拆除。",
+    author: "Garlicdesign, Ari Saarinen, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Duquesne 1945",
+        url: "https://www.shipbucket.com/drawings/3665",
+      },
+      {
+        name: "维基百科 - 迪凯纳号重巡洋舰",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_Duquesne_(1925)",
+      },
+    ],
+  },
+  {
+    name: "jeanne_d_arc",
+    displayName: "圣女贞德",
+    type: "轻巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 155mm/50 Mle 1920",
+      },
+      {
+        label: "防空炮",
+        value: "4x1 75mm/50",
+      },
+      {
+        label: "防空炮",
+        value: "10x1 40mm/60 Bofors",
+      },
+      {
+        label: "防空炮",
+        value: "18x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "圣女贞德号是法国海军为海军学员建造的练习巡洋舰，1931 年服役。该舰标准排水量约 6,496 吨，满载约 8,928 吨，舰长 170 米、宽 17.5 米，设计航速 25 节。1943 年加入盟军后拆除水上飞机并强化防空火力；本作采用 1944 年 6 月状态，装备四座双联装 155 毫米主炮、四门 75 毫米高炮、十门 40 毫米博福斯和十八门 20 毫米厄利孔。",
+    author: "Jabba, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Jeanne d'Arc 1944",
+        url: "https://www.shipbucket.com/drawings/3674",
+      },
+      {
+        name: "维基百科 - French cruiser Jeanne d'Arc (1930)",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_Jeanne_d%27Arc_(1930)",
+      },
+    ],
+  },
+  {
     name: "bretagne",
     displayName: "布列塔尼",
     type: "战列舰",
@@ -3109,6 +3179,34 @@
       {
         name: "维基百科 - 洛林号战列舰",
         url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
+    name: "FR/203/50/2",
+    displayName: "203mm/50 Mle 1924 双联装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 203 毫米/50 倍径 Mle 1924 双联装舰炮，装备迪凯纳级重巡洋舰。射速约每分钟 4 至 5 发，炮弹初速约 850 米/秒，最大射程约 31.4 公里。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 203mm/50 Modèle 1924 gun",
+        url: "https://en.wikipedia.org/wiki/203mm/50_Mod%C3%A8le_1924_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/155/50/2/Mle1920",
+    displayName: "155mm/50 Mle 1920 双联装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 155 毫米/50 倍径 Mle 1920 双联装舰炮，装备圣女贞德号练习巡洋舰和杜盖-特鲁安级轻巡洋舰。射速约每分钟 3 至 5 发，炮弹初速约 850 米/秒，最大射程约 26.1 公里。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 155 mm Modèle 1920",
+        url: "https://en.wikipedia.org/wiki/Canon_de_155_mm_Mod%C3%A8le_1920",
       },
     ],
   },

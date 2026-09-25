@@ -2798,6 +2798,8 @@
           "k_25",
           "sverdlov",
           "kirov",
+          "duquesne",
+          "jeanne_d_arc",
         ],
       },
       {
@@ -3268,6 +3270,18 @@
       {
         name: "courbet",
         pos: [11, 40],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "duquesne",
+        pos: [13, 33],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "jeanne_d_arc",
+        pos: [14, 34],
         rotation: 90,
         belongPlayer: "HA"
       },

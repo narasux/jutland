@@ -2491,6 +2491,32 @@
     antiShip: true,
     antiAircraft: false
   },
+  // 法国海军 203mm/50 Mle 1924 双联装主炮
+  {
+    name: "FR/203/50/2",
+    bulletName: "FR/GB/203/1924",
+    bulletCount: 2,
+    reloadTime: 12,
+    range: 31.4,
+    bulletSpread: 115,
+    bulletSpeed: 850,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 法国海军 155mm/50 Mle 1920 双联装主炮
+  {
+    name: "FR/155/50/2/Mle1920",
+    bulletName: "FR/GB/155/1920",
+    bulletCount: 2,
+    reloadTime: 15,
+    range: 26.1,
+    bulletSpread: 80,
+    bulletSpeed: 850,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 法国海军 138.6mm/55 Mle 1910 单装副炮
   {
     name: "FR/138.6/55",
