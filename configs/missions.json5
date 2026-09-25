@@ -2739,9 +2739,10 @@
           "duke_of_york",
           "warspite",
           "tiger",
-          "bretagne",
           "courbet",
+          "bretagne",
           "lorraine",
+          "dunkerque",
         ],
       },
       {
@@ -3233,6 +3234,12 @@
       {
         name: "lorraine",
         pos: [10, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "dunkerque",
+        pos: [11, 38],
         rotation: 90,
         belongPlayer: "HA"
       },

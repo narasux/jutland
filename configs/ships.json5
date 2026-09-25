@@ -19932,6 +19932,154 @@
       rockets: []
     }
   },
+  {
+    // 敦刻尔克
+    name: "dunkerque",
+    nation: "fr",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1932,
+    totalHP: 35500,
+    horizontalDamageReduction: 0.4,
+    verticalDamageReduction: 0.25,
+    maxSpeed: 29.5,
+    acceleration: 0.3,
+    rotateSpeed: 0.8,
+    length: 215,
+    width: 31,
+    fundsCost: 440,
+    timeCost: 97,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "FR/330/50/4",
+          posPercent: 0.47,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B（超射）
+        {
+          name: "FR/330/50/4",
+          posPercent: 0.21,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+      ],
+      secondaryGuns: [
+        // 130mm 双联装炮塔
+        {
+          name: "FR/130/45/2",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/130/45/2",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 130mm 四联装炮塔
+        {
+          name: "FR/130/45/4",
+          posPercent: -0.46,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/130/45/4",
+          posPercent: -0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/130/45/4",
+          posPercent: -0.54,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+      ],
+      antiAircraftGuns: [
+        // 37mm 双联装高炮
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.34,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 13.2mm Hotchkiss 四联装机枪
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.31,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.4,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+      ],
+      torpedoes: [],
+      rockets: []
+    }
+  },
   // 英国海军
   {
     // 胡德

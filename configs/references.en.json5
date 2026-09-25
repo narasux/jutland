@@ -2946,6 +2946,41 @@
     ],
   },
   {
+    name: "dunkerque",
+    displayName: "Dunkerque",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x4 330mm/50 Mle 1931",
+      },
+      {
+        label: "Secondary Battery",
+        value: "3x4 + 2x2 130mm/45 Mle 1932",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "Dunkerque was the lead ship of France's first class of fast battleships. The final 1932 design was approved before her keel was laid, and she entered service in 1937. Full-load displacement was about 35,500 tons, with dimensions of 214.5 by 31.08 metres and a designed speed of 29.5 knots. Both quadruple 330 mm turrets were mounted forward, while three quadruple and two twin 130 mm dual-purpose mounts provided the secondary and heavy anti-aircraft battery.",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Dunkerque 1932 final design",
+        url: "https://www.shipbucket.com/drawings/3707",
+      },
+      {
+        name: "Wikipedia - French battleship Dunkerque",
+        url: "https://en.wikipedia.org/wiki/French_battleship_Dunkerque",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "Lorraine",
     type: "Battleship",
@@ -2999,6 +3034,20 @@
     ],
   },
   {
+    name: "FR/330/50/4",
+    displayName: "330mm/50 Mle 1931 Quadruple Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 330 mm (13 in) 50-caliber Mle 1931 naval gun used by the Dunkerque-class battleships. Each quadruple turret contained two twin-gun cradles; muzzle velocity was about 870 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 330mm/50 Modèle 1931 gun",
+        url: "https://en.wikipedia.org/wiki/330mm/50_Mod%C3%A8le_1931_gun",
+      },
+    ],
+  },
+  {
     name: "FR/340/45/2",
     displayName: "340mm/45 Mle 1912 Twin Main Gun",
     type: "Weapon",
@@ -3027,6 +3076,34 @@
     ],
   },
   {
+    name: "FR/130/45/4",
+    displayName: "130mm/45 Mle 1932 Quadruple Dual-purpose Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 130 mm/45 Mle 1932 dual-purpose gun in a quadruple turret comprising two twin-gun cradles. Rate of fire was about 10 rounds per minute, maximum range about 20.9 km and muzzle velocity about 800 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 130 mm Modèle 1932 and 1935",
+        url: "https://en.wikipedia.org/wiki/Canon_de_130_mm_Mod%C3%A8le_1932_and_1935",
+      },
+    ],
+  },
+  {
+    name: "FR/130/45/2",
+    displayName: "130mm/45 Mle 1932 Twin Dual-purpose Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 130 mm/45 Mle 1932 dual-purpose gun in a twin mounting. Rate of fire was about 10 rounds per minute, maximum range about 20.9 km and muzzle velocity about 800 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 130 mm Modèle 1932 and 1935",
+        url: "https://en.wikipedia.org/wiki/Canon_de_130_mm_Mod%C3%A8le_1932_and_1935",
+      },
+    ],
+  },
+  {
     name: "FR/75/50",
     displayName: "75mm/50 Mle 1922 Single Anti-aircraft Gun",
     type: "Weapon",
@@ -3037,6 +3114,20 @@
       {
         name: "Wikipedia - Canon de 75 mm modèle 1924",
         url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/37/50/2",
+    displayName: "37mm/50 Mle 1925 Twin Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 37 mm/50 Mle 1925 anti-aircraft gun in a twin mounting. Rate of fire was about 15-21 rounds per minute, effective range about 5.4 km and muzzle velocity about 810 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 37 mm Modèle 1925",
+        url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
       },
     ],
   },

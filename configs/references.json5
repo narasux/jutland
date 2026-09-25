@@ -2887,6 +2887,41 @@
     ],
   },
   {
+    name: "dunkerque",
+    displayName: "敦刻尔克",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x4 330mm/50 Mle 1931",
+      },
+      {
+        label: "副炮",
+        value: "3x4 + 2x2 130mm/45 Mle 1932",
+      },
+      {
+        label: "防空炮",
+        value: "4x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "防空炮",
+        value: "8x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "敦刻尔克号是法国海军敦刻尔克级快速战列舰首舰，最终设计于 1932 年获批并在 1937 年服役。满载排水量约 35,500 吨，舰长 214.5 米、宽 31.08 米，设计航速 29.5 节。两座四联装 330 毫米主炮全部前置，三座四联装和两座双联装 130 毫米两用炮承担对舰与防空任务。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Dunkerque 1932 final design",
+        url: "https://www.shipbucket.com/drawings/3707",
+      },
+      {
+        name: "维基百科 - 敦克爾克號戰列艦",
+        url: "https://zh.wikipedia.org/wiki/%E6%95%A6%E5%85%8B%E7%88%BE%E5%85%8B%E8%99%9F%E6%88%B0%E5%88%97%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "洛林",
     type: "战列舰",
@@ -2940,6 +2975,20 @@
     ],
   },
   {
+    name: "FR/330/50/4",
+    displayName: "330mm/50 Mle 1931 四联装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 330 毫米/50 倍径 Mle 1931 舰炮，装备敦刻尔克级战列舰，四联装炮塔分为两组双联装炮架，炮弹初速约 870 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 330mm/50 Modèle 1931 gun",
+        url: "https://en.wikipedia.org/wiki/330mm/50_Mod%C3%A8le_1931_gun",
+      },
+    ],
+  },
+  {
     name: "FR/340/45/2",
     displayName: "340mm/45 Mle 1912 双联装主炮",
     type: "武器",
@@ -2968,6 +3017,34 @@
     ],
   },
   {
+    name: "FR/130/45/4",
+    displayName: "130mm/45 Mle 1932 四联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 130 毫米/45 倍径 Mle 1932 高平两用炮，四联装炮塔包含两组双联装炮架，射速约每分钟 10 发，最大射程约 20.9 公里，炮弹初速约 800 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 130 mm Modèle 1932 and 1935",
+        url: "https://en.wikipedia.org/wiki/Canon_de_130_mm_Mod%C3%A8le_1932_and_1935",
+      },
+    ],
+  },
+  {
+    name: "FR/130/45/2",
+    displayName: "130mm/45 Mle 1932 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 130 毫米/45 倍径 Mle 1932 高平两用炮，双联装炮塔使用一组共用炮架，射速约每分钟 10 发，最大射程约 20.9 公里，炮弹初速约 800 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 130 mm Modèle 1932 and 1935",
+        url: "https://en.wikipedia.org/wiki/Canon_de_130_mm_Mod%C3%A8le_1932_and_1935",
+      },
+    ],
+  },
+  {
     name: "FR/75/50",
     displayName: "75mm/50 Mle 1922 单装高炮",
     type: "武器",
@@ -2978,6 +3055,20 @@
       {
         name: "维基百科 - Canon de 75 mm modèle 1924",
         url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/37/50/2",
+    displayName: "37mm/50 Mle 1925 双联装高射炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 37 毫米/50 倍径 Mle 1925 高射炮，双联装炮座共两门，射速约每分钟 15 至 21 发，有效射程约 5.4 公里，炮弹初速约 810 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 37 mm Modèle 1925",
+        url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
       },
     ],
   },
