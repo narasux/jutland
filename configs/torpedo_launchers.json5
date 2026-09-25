@@ -251,6 +251,17 @@
     bulletSpeed: 45,
     fundsCost: 50
   },
+  // 法国海军 550mm 三联装鱼雷
+  {
+    name: "FR/550/3",
+    bulletName: "FR/TB/550/1923",
+    bulletCount: 3,
+    shotInterval: 1,
+    reloadTime: 54,
+    range: 14,
+    bulletSpeed: 54,
+    fundsCost: 55
+  },
   // 苏联海军 533mm 五联装 鱼雷
   {
     name: "SU/533/5",

@@ -2530,6 +2530,19 @@
     antiShip: true,
     antiAircraft: false
   },
+  // 法国海军 138.6mm/40 Mle 1923 单装主炮
+  {
+    name: "FR/138.6/40",
+    bulletName: "FR/GB/138.6/1923M",
+    bulletCount: 1,
+    reloadTime: 7,
+    range: 18.2,
+    bulletSpread: 70,
+    bulletSpeed: 700,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 法国海军 130mm/45 Mle 1932 四联装高平两用炮
   {
     name: "FR/130/45/4",
@@ -2569,9 +2582,61 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 法国海军 152mm/55 Mle 1930 双联装主炮
+  {
+    name: "FR/152/55/2",
+    bulletName: "FR/GB/152/1930",
+    bulletCount: 2,
+    reloadTime: 12,
+    range: 26,
+    bulletSpread: 65,
+    bulletSpeed: 870,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 法国海军 155mm/50 Mle 1921 单装舰炮
+  {
+    name: "FR/155/50/Mle1921",
+    bulletName: "FR/GB/155/1920",
+    bulletCount: 1,
+    reloadTime: 15,
+    range: 26,
+    bulletSpread: 60,
+    bulletSpeed: 850,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 法国海军 100mm/45 Mle 1930 双联装高平两用炮
   {
     name: "FR/100/45/2/Mle1930",
+    bulletName: "FR/GB/100/1930",
+    bulletCount: 2,
+    reloadTime: 4,
+    range: 15.8,
+    bulletSpread: 55,
+    bulletSpeed: 755,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 100mm/45 Mle 1927 单装高平两用炮
+  {
+    name: "FR/100/45/Mle1927",
+    bulletName: "FR/GB/100/1930",
+    bulletCount: 1,
+    reloadTime: 6,
+    range: 15,
+    bulletSpread: 55,
+    bulletSpeed: 755,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 100mm/45 Mle 1933 双联装高平两用炮
+  {
+    name: "FR/100/45/2/Mle1933",
     bulletName: "FR/GB/100/1930",
     bulletCount: 2,
     reloadTime: 4,
@@ -2621,6 +2686,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 法国海军 37mm/50 Mle 1925 单装高炮
+  {
+    name: "FR/37/50",
+    bulletName: "FR/GB/37/1925",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 7,
+    bulletSpread: 25,
+    bulletSpeed: 810,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 法国海军 37mm/70 ACAD Mle 1935 双联装全自动高炮
   {
     name: "FR/37/70/2/Mle1935",
@@ -2631,6 +2709,19 @@
     bulletSpread: 20,
     bulletSpeed: 825,
     fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 25mm/60 Mle 1938 单装高炮
+  {
+    name: "FR/25/60",
+    bulletName: "FR/GB/25/1938",
+    bulletCount: 1,
+    reloadTime: 0.4,
+    range: 3,
+    bulletSpread: 20,
+    bulletSpeed: 900,
+    fundsCost: 1,
     antiShip: true,
     antiAircraft: true
   },
@@ -2657,6 +2748,19 @@
     bulletSpread: 20,
     bulletSpeed: 800,
     fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 13.2mm Hotchkiss 双联装机枪
+  {
+    name: "FR/13.2/2",
+    bulletName: "FR/GB/13.2/1930",
+    bulletCount: 2,
+    reloadTime: 0.3,
+    range: 4.2,
+    bulletSpread: 20,
+    bulletSpeed: 800,
+    fundsCost: 1,
     antiShip: true,
     antiAircraft: true
   },

@@ -2946,6 +2946,162 @@
     ],
   },
   {
+    name: "de_grasse",
+    displayName: "De Grasse",
+    type: "Light Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x2 152mm/55 Mle 1930",
+      },
+      {
+        label: "Secondary Battery",
+        value: "3x2 100mm/45 Mle 1933",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x1 25mm/60 Mle 1938",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 550mm",
+      },
+      {
+        label: "Aircraft",
+        value: "FF33E x4",
+      },
+    ],
+    description: "De Grasse was the lead ship of a class of light cruisers planned by the French Navy in 1937-38 as enlarged, improved versions of the La Galissonnière class. This is her 1938 design: 8,000 tons standard, 176.3 by 18 metres and 33 knots. The armament comprised three twin 152 mm main turrets, three twin 100 mm dual-purpose mounts, six single 25 mm AA guns, two twin 13.2 mm machine-gun mounts, two triple 550 mm torpedo tubes, two catapults and four seaplanes.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - De Grasse 1938 as designed",
+        url: "https://www.shipbucket.com/drawings/3724",
+      },
+      {
+        name: "Wikipedia - French cruiser De Grasse",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_De_Grasse",
+      },
+    ],
+  },
+  {
+    name: "pluton",
+    displayName: "Pluton",
+    type: "Minelaying Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x1 138.6mm/40 Mle 1923",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "7x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "Mines",
+        value: "220-270",
+      },
+    ],
+    description: "Pluton was a fast minelaying cruiser ordered under the French Navy's 1925 programme and commissioned in 1932. She displaced 5,300 long tons standard and 6,214 tonnes at full load, measured 152.5 by 15.5 metres, and was designed for 30 knots. Her training-ship armament comprised four single 138.6 mm main guns, four 75 mm AA guns, two stern 37 mm AA guns and multiple 13.2 mm machine-gun mounts. This ship is represented in her August 1939 configuration, retaining her fast mine deck and minelaying role.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Pluton August 1939",
+        url: "https://www.shipbucket.com/drawings/10446",
+      },
+      {
+        name: "Wikipedia - French cruiser Pluton",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_Pluton",
+      },
+    ],
+  },
+  {
+    name: "commandant_teste",
+    displayName: "Commandant Teste",
+    type: "Seaplane Tender",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "12x1 100mm/45 Mle 1927",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "Aircraft",
+        value: "FF33E x6 / TBF-1-UK x8",
+      },
+    ],
+    description: "Commandant Teste was a large French Navy seaplane tender commissioned in 1932. She displaced 10,000 long tons standard and 12,134 tonnes at full load, measured 167 by 27 metres, and was designed for 21 knots. This 1939 configuration carries twelve single 100 mm dual-purpose guns, eight 37 mm AA guns and two twin 13.2 mm machine-gun mounts, with an air group of six FF33E and eight TBF-1-UK aircraft.",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Commandant Teste Summer 1939",
+        url: "https://www.shipbucket.com/drawings/3567",
+      },
+      {
+        name: "Wikipedia - French seaplane carrier Commandant Teste",
+        url: "https://en.wikipedia.org/wiki/French_seaplane_carrier_Commandant_Teste",
+      },
+    ],
+  },
+  {
+    name: "bearn",
+    displayName: "Béarn",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "8x1 155mm/50 Mle 1921",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "Aircraft",
+        value: "F4F-3 x8 / SBD-3 x12 / TBF-1-UK x12",
+      },
+    ],
+    description: "Béarn was a French Navy aircraft carrier converted from an incomplete Normandie-class battleship and commissioned in 1928. She displaced 22,146 long tons standard and 28,400 long tons at full load, measured 182.5 by 27.2 metres, and had a designed speed of 21.5 knots. This 1939 configuration carries eight single 155 mm casemate guns, six 75 mm AA guns, eight 37 mm AA guns and six twin 13.2 mm machine-gun mounts, with an air group of eight F4F-3 fighters, twelve SBD-3 dive bombers and twelve TBF-1-UK torpedo bombers.",
+    author: "Novice, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Béarn Summer 1939-Early 1940",
+        url: "https://www.shipbucket.com/drawings/3678",
+      },
+      {
+        name: "Wikipedia - French aircraft carrier Béarn",
+        url: "https://en.wikipedia.org/wiki/French_aircraft_carrier_B%C3%A9arn",
+      },
+    ],
+  },
+  {
     name: "bretagne",
     displayName: "Bretagne",
     type: "Battleship",
@@ -3270,6 +3426,20 @@
     ],
   },
   {
+    name: "FR/155/50/Mle1921",
+    displayName: "155mm/50 Mle 1921 Single Naval Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 155 mm/50 Mle 1921 single naval gun mounted in the casemates of the aircraft carrier Béarn. Rate of fire was about 3-5 rounds per minute, muzzle velocity about 850 m/s and maximum range about 26.1 km.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 155 mm Modèle 1920",
+        url: "https://en.wikipedia.org/wiki/Canon_de_155_mm_Mod%C3%A8le_1920",
+      },
+    ],
+  },
+  {
     name: "FR/305/45/2",
     displayName: "305mm/45 Mle 1906 Twin Main Gun",
     type: "Weapon",
@@ -3387,6 +3557,20 @@
     type: "Weapon",
     armaments: [],
     description: "French 100 mm/45 Mle 1930 twin dual-purpose gun. Rate of fire was about 10-15 rounds per minute, maximum range about 15.8 km and muzzle velocity about 755 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 100 mm",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/Mle1927",
+    displayName: "100mm/45 Mle 1927 Single Dual-purpose Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 100 mm/45 Mle 1927 single dual-purpose gun used by the seaplane tender Commandant Teste. Rate of fire was about 10 rounds per minute, maximum range about 15 km and muzzle velocity about 755 m/s.",
     author: "",
     links: [
       {
@@ -3518,6 +3702,104 @@
       {
         name: "Wikipedia - Oerlikon 20 mm cannon",
         url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/152/55/2",
+    displayName: "152mm/55 Mle 1930 Twin Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 152 mm/55 Mle 1930 twin naval gun used by the De Grasse-class light cruisers. Each turret contained two independently elevating cradles; rate of fire was about 3-5 rounds per minute, muzzle velocity about 870 m/s and maximum range about 26.1 km.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 152 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/2/Mle1933",
+    displayName: "100mm/45 Mle 1933 Twin Dual-purpose Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 100 mm/45 Mle 1933 twin dual-purpose gun used by the De Grasse-class light cruisers. Rate of fire was about 10-15 rounds per minute, muzzle velocity about 755 m/s and maximum range about 15.8 km.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 100 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_100_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/40",
+    displayName: "138.6mm/40 Mle 1923 Single Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 138.6 mm/40 Mle 1923 single naval gun used by the minelaying cruiser Pluton. Rate of fire was about 8-9 rounds per minute, muzzle velocity about 700 m/s and maximum range about 18.2 km.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 138 mm Modèle 1923",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1923",
+      },
+    ],
+  },
+  {
+    name: "FR/37/50",
+    displayName: "37mm/50 Mle 1925 Single Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 37 mm/50 Mle 1925 single semi-automatic anti-aircraft gun. Rate of fire was about 15-21 rounds per minute, effective range about 5.4 km and muzzle velocity about 810 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 37 mm Modèle 1925",
+        url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
+      },
+    ],
+  },
+  {
+    name: "FR/25/60",
+    displayName: "25mm/60 Mle 1938 Single Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French Hotchkiss 25 mm/60 Mle 1938 single anti-aircraft gun designed for close-range defence. Its theoretical rate of fire was about 200 rounds per minute and muzzle velocity about 900 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 25 mm Hotchkiss anti-aircraft gun",
+        url: "https://en.wikipedia.org/wiki/25_mm_Hotchkiss_anti-aircraft_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/13.2/2",
+    displayName: "13.2mm Hotchkiss Twin Anti-aircraft Machine Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 13.2 mm Hotchkiss M1929-series twin anti-aircraft machine gun, with a cyclic rate of about 450 rounds per minute and muzzle velocity about 800 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Hotchkiss 13.2 mm machine gun",
+        url: "https://en.wikipedia.org/wiki/Hotchkiss_13.2_mm_machine_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/550/3",
+    displayName: "550mm Triple Torpedo Tube",
+    type: "Weapon",
+    armaments: [],
+    description: "French 550 mm triple torpedo tube used by the 1938 De Grasse-class design. Torpedo range was about 14 km at a speed of about 54 knots in game units.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - French destroyer Ouragan",
+        url: "https://en.wikipedia.org/wiki/French_destroyer_Ouragan",
       },
     ],
   },

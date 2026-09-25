@@ -2689,7 +2689,9 @@
           "empire_maccoll",
           "empire_macrae",
           "graf_zeppelin",
-          "stuttgart"
+          "stuttgart",
+          "commandant_teste",
+          "bearn"
         ],
       },
       {
@@ -2800,6 +2802,8 @@
           "kirov",
           "duquesne",
           "jeanne_d_arc",
+          "de_grasse",
+          "pluton",
         ],
       },
       {
@@ -3282,6 +3286,30 @@
       {
         name: "jeanne_d_arc",
         pos: [14, 34],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "de_grasse",
+        pos: [15, 35],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "pluton",
+        pos: [16, 36],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "commandant_teste",
+        pos: [15, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "bearn",
+        pos: [16, 38],
         rotation: 90,
         belongPlayer: "HA"
       },

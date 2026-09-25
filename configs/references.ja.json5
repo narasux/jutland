@@ -2946,6 +2946,162 @@
     ],
   },
   {
+    name: "de_grasse",
+    displayName: "ド・グラース",
+    type: "軽巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x2 152mm/55 Mle 1930",
+      },
+      {
+        label: "副砲",
+        value: "3x2 100mm/45 Mle 1933",
+      },
+      {
+        label: "対空砲",
+        value: "6x1 25mm/60 Mle 1938",
+      },
+      {
+        label: "対空砲",
+        value: "2x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 550mm",
+      },
+      {
+        label: "艦載機",
+        value: "FF33E x4",
+      },
+    ],
+    description: "ド・グラースは、ラ・ガリソニエール級を拡大改良したフランス海軍の 1937～38 年計画軽巡洋艦のネームシップである。本作は 1938 年設計状態で、基準排水量約8,000トン、全長176.3m、幅18m、設計速力33ノット。15.2cm連装主砲3基、10cm連装両用砲3基、25mm単装高射砲6門、13.2mm連装機銃2基、55cm三連装魚雷発射管2基を装備し、カタパルト2基と水上機4機を搭載する。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - De Grasse 1938 as designed",
+        url: "https://www.shipbucket.com/drawings/3724",
+      },
+      {
+        name: "ウィキペディア - ド・グラース級軽巡洋艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%BB%E3%82%B0%E3%83%A9%E3%83%BC%E3%82%B9%E7%B4%9A%E8%BB%BD%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "pluton",
+    displayName: "プリュトン",
+    type: "敷設巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x1 138.6mm/40 Mle 1923",
+      },
+      {
+        label: "対空砲",
+        value: "4x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "対空砲",
+        value: "7x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "機雷",
+        value: "220-270発",
+      },
+    ],
+    description: "プリュトンはフランス海軍の1925年度計画で建造された高速敷設巡洋艦で、1932年に就役した。基準排水量約5,300トン、満載約6,214トン、全長152.5m、幅15.5m、設計速力30ノット。練習艦改装後の兵装は13.86cm単装主砲4門、75mm高射砲4門、艦艉37mm高射砲2門、複数の13.2mm機銃で構成された。本作は1939年8月状態で、高速機雷甲板と敷設任務を保持している。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Pluton August 1939",
+        url: "https://www.shipbucket.com/drawings/10446",
+      },
+      {
+        name: "ウィキペディア - プリュトン (軽巡洋艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%83%A5%E3%83%88%E3%83%B3_(%E8%BB%BD%E5%B7%A1%E6%B4%8B%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "commandant_teste",
+    displayName: "コマンダン・テスト",
+    type: "水上機母艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "12x1 100mm/45 Mle 1927",
+      },
+      {
+        label: "対空砲",
+        value: "8x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "対空砲",
+        value: "2x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "艦載機",
+        value: "FF33E x6 / TBF-1-UK x8",
+      },
+    ],
+    description: "コマンダン・テストはフランス海軍の大型水上機母艦で、1932年に就役した。基準排水量約10,000トン、満載約12,134トン、全長167m、幅27m、設計速力21ノット。本作は1939年状態で、100mm単装高平両用砲12門、37mm高射砲8門、13.2mm連装機銃2基を装備し、艦載機はFF33E 6機とTBF-1-UK 8機で構成される。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Commandant Teste Summer 1939",
+        url: "https://www.shipbucket.com/drawings/3567",
+      },
+      {
+        name: "ウィキペディア - コマンダン・テスト (水上機母艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%80%E3%83%B3%E3%83%BB%E3%83%86%E3%82%B9%E3%83%88_(%E6%B0%B4%E4%B8%8A%E6%A9%9F%E6%AF%8D%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "bearn",
+    displayName: "ベアルン",
+    type: "航空母艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "8x1 155mm/50 Mle 1921",
+      },
+      {
+        label: "対空砲",
+        value: "6x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "対空砲",
+        value: "8x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "対空砲",
+        value: "6x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "艦載機",
+        value: "F4F-3 x8 / SBD-3 x12 / TBF-1-UK x12",
+      },
+    ],
+    description: "ベアルンは未完成のノルマンディー級戦艦から改装されたフランス海軍の航空母艦で、1928年に就役した。基準排水量約22,146トン、満載約28,400トン、全長182.5m、艦体幅27.2m、設計速力21.5ノット。本作は1939年状態で、155mm単装砲郭砲8門、75mm高射砲6門、37mm高射砲8門、13.2mm連装機銃6基を装備し、F4F-3 8機、SBD-3 12機、TBF-1-UK 12機を搭載する。",
+    author: "Novice, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Béarn Summer 1939-Early 1940",
+        url: "https://www.shipbucket.com/drawings/3678",
+      },
+      {
+        name: "ウィキペディア - ベアルン (空母)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%99%E3%82%A2%E3%83%AB%E3%83%B3_(%E7%A9%BA%E6%AF%8D)",
+      },
+    ],
+  },
+  {
     name: "bretagne",
     displayName: "ブレタニー",
     type: "戦艦",
@@ -3270,6 +3426,20 @@
     ],
   },
   {
+    name: "FR/155/50/Mle1921",
+    displayName: "155mm/50 Mle 1921 単装艦砲",
+    type: "兵器",
+    armaments: [],
+    description: "航空母艦ベアルンの砲郭に搭載されたフランス海軍の155mm/50 Mle 1921 単装艦砲。発射速度は毎分約3～5発、初速約850m/s、最大射程約26.1km。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 155 mm Modèle 1920",
+        url: "https://en.wikipedia.org/wiki/Canon_de_155_mm_Mod%C3%A8le_1920",
+      },
+    ],
+  },
+  {
     name: "FR/305/45/2",
     displayName: "305mm/45 Mle 1906 連装主砲",
     type: "兵器",
@@ -3387,6 +3557,20 @@
     type: "兵器",
     armaments: [],
     description: "フランス海軍の45口径100mm Mle 1930 連装高平両用砲。発射速度は毎分約10～15発、最大射程約15.8km、初速約755 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 100 mm",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/Mle1927",
+    displayName: "100mm/45 Mle 1927 単装高平両用砲",
+    type: "兵器",
+    armaments: [],
+    description: "水上機母艦コマンダン・テストに搭載されたフランス海軍の100mm/45 Mle 1927 単装高平両用砲。発射速度は毎分約10発、最大射程約15km、初速約755m/s。",
     author: "",
     links: [
       {
@@ -3518,6 +3702,104 @@
       {
         name: "ウィキペディア - Oerlikon 20 mm cannon",
         url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/152/55/2",
+    displayName: "152mm/55 Mle 1930 連装主砲",
+    type: "兵器",
+    armaments: [],
+    description: "ド・グラース級軽巡洋艦に搭載されたフランス海軍の152mm/55 Mle 1930 連装砲。各砲塔は独立俯仰する2組の砲架を持ち、発射速度は毎分約3～5発、初速約870m/s、最大射程約26.1km。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 152 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/2/Mle1933",
+    displayName: "100mm/45 Mle 1933 連装両用砲",
+    type: "兵器",
+    armaments: [],
+    description: "ド・グラース級軽巡洋艦に搭載されたフランス海軍の100mm/45 Mle 1933 連装高平両用砲。発射速度は毎分約10～15発、初速約755m/s、最大射程約15.8km。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 100 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_100_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/40",
+    displayName: "138.6mm/40 Mle 1923 単装主砲",
+    type: "兵器",
+    armaments: [],
+    description: "敷設巡洋艦プリュトンに搭載されたフランス海軍の138.6mm/40 Mle 1923 単装砲。発射速度は毎分約8～9発、初速約700m/s、最大射程約18.2km。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 138 mm Modèle 1923",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1923",
+      },
+    ],
+  },
+  {
+    name: "FR/37/50",
+    displayName: "37mm/50 Mle 1925 単装高射砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の37mm/50 Mle 1925 単装半自動高射砲。発射速度は毎分約15～21発、有効射程約5.4km、初速約810m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 37 mm Modèle 1925",
+        url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
+      },
+    ],
+  },
+  {
+    name: "FR/25/60",
+    displayName: "25mm/60 Mle 1938 単装高射砲",
+    type: "兵器",
+    armaments: [],
+    description: "近距離防空用のフランス Hotchkiss 25mm/60 Mle 1938 単装高射砲。理論発射速度は毎分約200発、初速約900m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 25 mm Hotchkiss anti-aircraft gun",
+        url: "https://en.wikipedia.org/wiki/25_mm_Hotchkiss_anti-aircraft_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/13.2/2",
+    displayName: "13.2mm Hotchkiss 連装高射機関銃",
+    type: "兵器",
+    armaments: [],
+    description: "フランスの13.2mm Hotchkiss M1929 系連装高射機関銃。理論発射速度は毎分約450発、初速約800m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Hotchkiss 13.2 mm machine gun",
+        url: "https://en.wikipedia.org/wiki/Hotchkiss_13.2_mm_machine_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/550/3",
+    displayName: "550mm 三連装魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "1938年設計のド・グラース級軽巡洋艦に搭載されたフランス海軍の550mm三連装魚雷発射管。ゲーム内では射程約14km、魚雷速度約54ノット。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - French destroyer Ouragan",
+        url: "https://en.wikipedia.org/wiki/French_destroyer_Ouragan",
       },
     ],
   },

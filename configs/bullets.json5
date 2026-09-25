@@ -651,6 +651,13 @@
   },
   // 鱼雷
   {
+    name: "FR/TB/550/1923",
+    type: "torpedo",
+    diameter: 550,
+    damage: 4800,
+    criticalRate: 0.07
+  },
+  {
     name: "US/TB/570/1938",
     type: "torpedo",
     diameter: 570,
@@ -937,6 +944,14 @@
     damage: 145,
     criticalRate: 0.003
   },
+  // 法国海军 138.6mm/40 Mle 1923 主炮弹
+  {
+    name: "FR/GB/138.6/1923M",
+    type: "shell",
+    diameter: 139,
+    damage: 140,
+    criticalRate: 0.003
+  },
   // 法国海军 130mm/45 Mle 1932 高平两用炮弹
   {
     name: "FR/GB/130/1932",
@@ -992,6 +1007,14 @@
     diameter: 37,
     damage: 4,
     criticalRate: 0.001
+  },
+  // 法国海军 25mm/60 Mle 1938 高炮弹
+  {
+    name: "FR/GB/25/1938",
+    type: "shell",
+    diameter: 25,
+    damage: 2,
+    criticalRate: 0.0005
   },
   // 法国海军 20mm/70 Oerlikon 机关炮弹
   {

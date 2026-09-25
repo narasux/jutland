@@ -2887,6 +2887,162 @@
     ],
   },
   {
+    name: "de_grasse",
+    displayName: "德格拉斯",
+    type: "轻巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x2 152mm/55 Mle 1930",
+      },
+      {
+        label: "副炮",
+        value: "3x2 100mm/45 Mle 1933",
+      },
+      {
+        label: "防空炮",
+        value: "6x1 25mm/60 Mle 1938",
+      },
+      {
+        label: "防空炮",
+        value: "2x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 550mm",
+      },
+      {
+        label: "舰载机",
+        value: "FF33E x4",
+      },
+    ],
+    description: "德格拉斯号是法国海军 1937 至 1938 年计划建造的轻巡洋舰首舰，采用拉加利索尼埃级的放大改进设计。本作按 1938 年设计状态：标准排水量约 8,000 吨，舰长 176.3 米、宽 18 米，设计航速 33 节；装备三座双联装 152 毫米主炮、三座双联装 100 毫米高平两用炮、六门 25 毫米单装高炮、两座双联装 13.2 毫米机枪和两座三联装 550 毫米鱼雷发射管，并设有两座弹射器和四架水上飞机。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - De Grasse 1938 as designed",
+        url: "https://www.shipbucket.com/drawings/3724",
+      },
+      {
+        name: "维基百科 - 德格拉斯號輕巡洋艦",
+        url: "https://zh.wikipedia.org/wiki/%E5%BE%B7%E6%A0%BC%E6%8B%89%E6%96%AF%E8%99%9F%E8%BC%95%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "pluton",
+    displayName: "普路托",
+    type: "布雷巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x1 138.6mm/40 Mle 1923",
+      },
+      {
+        label: "防空炮",
+        value: "4x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "防空炮",
+        value: "2x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "防空炮",
+        value: "7x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "水雷",
+        value: "220-270 枚",
+      },
+    ],
+    description: "普路托号是法国海军为 1925 年度计划建造的高速布雷巡洋舰，1932 年服役。该舰标准排水量约 5,300 吨，满载约 6,214 吨，舰长 152.5 米、宽 15.5 米，设计航速 30 节。作为训练舰改装后安装四门 138.6 毫米单装主炮、四门 75 毫米高炮、两门舰艉 37 毫米高炮和多座 13.2 毫米机枪；本作采用 1939 年 8 月状态，并保留其高速水雷甲板与布雷任务定位。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Pluton August 1939",
+        url: "https://www.shipbucket.com/drawings/10446",
+      },
+      {
+        name: "英文维基百科 - French cruiser Pluton",
+        url: "https://en.wikipedia.org/wiki/French_cruiser_Pluton",
+      },
+    ],
+  },
+  {
+    name: "commandant_teste",
+    displayName: "塔斯特指挥官",
+    type: "水上飞机母舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "12x1 100mm/45 Mle 1927",
+      },
+      {
+        label: "防空炮",
+        value: "8x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "防空炮",
+        value: "2x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "舰载机",
+        value: "FF33E x6 / TBF-1-UK x8",
+      },
+    ],
+    description: "塔斯特指挥官号是法国海军建造的大型水上飞机母舰，1932 年服役。该舰标准排水量约 10,000 吨，满载约 12,134 吨，舰长 167 米、宽 27 米，设计航速 21 节。本作采用 1939 年状态，装备十二门 100 毫米单装高平两用炮、八门 37 毫米高炮和两座双联 13.2 毫米机枪；舰载机编成为六架 FF33E 与八架 TBF-1-UK。",
+    author: "David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Commandant Teste Summer 1939",
+        url: "https://www.shipbucket.com/drawings/3567",
+      },
+      {
+        name: "维基百科 - 塔斯特指挥官号水上飞机母舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%A1%94%E6%96%AF%E7%89%B9%E6%8C%87%E6%8F%AE%E5%AE%98%E8%99%9F%E6%B0%B4%E4%B8%8A%E9%A3%9B%E6%A9%9F%E6%AF%8D%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "bearn",
+    displayName: "贝亚恩",
+    type: "航空母舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "8x1 155mm/50 Mle 1921",
+      },
+      {
+        label: "防空炮",
+        value: "6x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "防空炮",
+        value: "8x1 37mm/50 Mle 1925",
+      },
+      {
+        label: "防空炮",
+        value: "6x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "舰载机",
+        value: "F4F-3 x8 / SBD-3 x12 / TBF-1-UK x12",
+      },
+    ],
+    description: "贝亚恩号是法国海军由未完工的诺曼底级战列舰改装而成的航空母舰，1928 年服役。该舰标准排水量约 22,146 吨，满载约 28,400 吨，舰长 182.5 米，舰体宽 27.2 米，设计航速 21.5 节。本作采用 1939 年状态，装备八门 155 毫米单装炮廓炮、六门 75 毫米高炮、八门 37 毫米高炮和六座双联 13.2 毫米机枪；舰载机编成为八架 F4F-3、十二架 SBD-3 与十二架 TBF-1-UK。",
+    author: "Novice, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Béarn Summer 1939-Early 1940",
+        url: "https://www.shipbucket.com/drawings/3678",
+      },
+      {
+        name: "维基百科 - 贝亚恩号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%B2%9D%E4%BA%9E%E6%81%A9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "bretagne",
     displayName: "布列塔尼",
     type: "战列舰",
@@ -3211,6 +3367,20 @@
     ],
   },
   {
+    name: "FR/155/50/Mle1921",
+    displayName: "155mm/50 Mle 1921 单装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 155 毫米/50 倍径 Mle 1921 单装舰炮，装备贝亚恩号航空母舰的炮廓炮位。射速约每分钟 3 至 5 发，炮弹初速约 850 米/秒，最大射程约 26.1 公里。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 155 mm Modèle 1920",
+        url: "https://en.wikipedia.org/wiki/Canon_de_155_mm_Mod%C3%A8le_1920",
+      },
+    ],
+  },
+  {
     name: "FR/305/45/2",
     displayName: "305mm/45 Mle 1906 双联装主炮",
     type: "武器",
@@ -3328,6 +3498,20 @@
     type: "武器",
     armaments: [],
     description: "法国海军 100 毫米/45 倍径 Mle 1930 双联装高平两用炮，射速约每分钟 10 至 15 发，最大射程约 15.8 公里，炮弹初速约 755 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 100 mm",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/Mle1927",
+    displayName: "100mm/45 Mle 1927 单装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 100 毫米/45 倍径 Mle 1927 单装高平两用炮，装备塔斯特指挥官号水上飞机母舰。射速约每分钟 10 发，最大射程约 15 公里，炮弹初速约 755 米/秒。",
     author: "",
     links: [
       {
@@ -3459,6 +3643,104 @@
       {
         name: "维基百科 - Oerlikon 20 mm cannon",
         url: "https://en.wikipedia.org/wiki/Oerlikon_20_mm_cannon",
+      },
+    ],
+  },
+  {
+    name: "FR/152/55/2",
+    displayName: "152mm/55 Mle 1930 双联装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 152 毫米/55 倍径 Mle 1930 双联装舰炮，装备德格拉斯级轻巡洋舰。每座炮塔有两组独立炮架，射速约每分钟 3 至 5 发，炮弹初速约 870 米/秒，最大射程约 26.1 公里。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 152 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/2/Mle1933",
+    displayName: "100mm/45 Mle 1933 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 100 毫米/45 倍径 Mle 1933 双联装高平两用炮，装备德格拉斯级轻巡洋舰。射速约每分钟 10 至 15 发，炮弹初速约 755 米/秒，最大射程约 15.8 公里。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 100 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_100_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/40",
+    displayName: "138.6mm/40 Mle 1923 单装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 138.6 毫米/40 倍径 Mle 1923 单装舰炮，装备普路托号布雷巡洋舰。射速约每分钟 8 至 9 发，炮弹初速约 700 米/秒，最大射程约 18.2 公里。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 138 mm Modèle 1923",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1923",
+      },
+    ],
+  },
+  {
+    name: "FR/37/50",
+    displayName: "37mm/50 Mle 1925 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 37 毫米/50 倍径 Mle 1925 单装半自动高炮。射速约每分钟 15 至 21 发，有效射程约 5.4 公里，炮弹初速约 810 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 37 mm Modèle 1925",
+        url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
+      },
+    ],
+  },
+  {
+    name: "FR/25/60",
+    displayName: "25mm/60 Mle 1938 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "法国 Hotchkiss 25 毫米/60 倍径 Mle 1938 单装高炮，设计用于近程防空。理论射速约每分钟 200 发，炮弹初速约 900 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 25 mm Hotchkiss anti-aircraft gun",
+        url: "https://en.wikipedia.org/wiki/25_mm_Hotchkiss_anti-aircraft_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/13.2/2",
+    displayName: "13.2mm Hotchkiss 双联装防空机枪",
+    type: "武器",
+    armaments: [],
+    description: "法国 Hotchkiss M1929 系列 13.2 毫米双联装防空机枪，理论射速约每分钟 450 发，炮弹初速约 800 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Hotchkiss 13.2 mm machine gun",
+        url: "https://en.wikipedia.org/wiki/Hotchkiss_13.2_mm_machine_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/550/3",
+    displayName: "550mm 三联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 550 毫米三联装鱼雷发射管，装备 1938 年设计的德格拉斯级轻巡洋舰。射程约 14 公里，鱼雷航速约 54 节。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - French destroyer Ouragan",
+        url: "https://en.wikipedia.org/wiki/French_destroyer_Ouragan",
       },
     ],
   },
