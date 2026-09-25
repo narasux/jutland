@@ -3016,6 +3016,41 @@
     ],
   },
   {
+    name: "jean_bart",
+    displayName: "Jean Bart",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "Secondary Battery",
+        value: "3x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "12x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "14x2 57mm/60 Mle 1951",
+      },
+    ],
+    description: "Jean Bart was the second Richelieu-class fast battleship. Left incomplete when France fell in 1940, she was finished after the war to a revised design and commissioned in 1955. Full-load displacement was about 49,196 tons, with dimensions of 247.85 by 33.08 metres and a designed speed of 32 knots. Her 1955 battery comprised two quadruple 380 mm turrets, three triple 152 mm dual-purpose turrets, twelve twin 100 mm mounts and fourteen twin 57 mm anti-aircraft mounts.",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Jean Bart 1955",
+        url: "https://www.shipbucket.com/drawings/3604",
+      },
+      {
+        name: "Wikipedia - French battleship Jean Bart (1940)",
+        url: "https://en.wikipedia.org/wiki/French_battleship_Jean_Bart_(1940)",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "Lorraine",
     type: "Battleship",
@@ -3163,6 +3198,34 @@
       {
         name: "Wikipedia - Canon de 152 mm Modèle 1930",
         url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/2/Mle1930",
+    displayName: "100mm/45 Mle 1930 Twin Dual-purpose Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 100 mm/45 Mle 1930 twin dual-purpose gun. Rate of fire was about 10-15 rounds per minute, maximum range about 15.8 km and muzzle velocity about 755 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 100 mm",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/57/60/2/Mle1951",
+    displayName: "57mm/60 Mle 1951 Twin Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 57 mm/60 Mle 1951 twin anti-aircraft gun derived from the Bofors 57 mm L/60. Each barrel had a theoretical rate of fire of about 120 rounds per minute and a muzzle velocity of about 900 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Bofors 57 mm Naval Automatic Gun L/60",
+        url: "https://en.wikipedia.org/wiki/Bofors_57_mm_Naval_Automatic_Gun_L/60",
       },
     ],
   },

@@ -461,10 +461,53 @@ HTML = r"""<!doctype html>
       return best;
     }
 
+    function nearestOppositeSameType(raw, side) {
+      if (!snap.checked || side === "center") return null;
+      const tolerance = Number(snapTolerance.value);
+      let best = null;
+      let bestDistance = Infinity;
+      for (const marker of state.markers) {
+        if (marker.type !== state.type || marker.side === side || marker.side === "center") continue;
+        const distance = Math.abs(marker.raw - raw);
+        if (distance <= tolerance && distance < bestDistance) {
+          best = marker;
+          bestDistance = distance;
+        }
+      }
+      return best;
+    }
+
+    function mirrorArc(start, end) {
+      if (start === 0 && end === 0) return [360, 360];
+      if (start === 360 && end === 360) return [0, 0];
+      let mirroredStart = start + 180;
+      let mirroredEnd = end + 180;
+      if (mirroredStart >= 360 && mirroredEnd > 360) {
+        mirroredStart -= 360;
+        mirroredEnd -= 360;
+      }
+      return [mirroredStart, mirroredEnd];
+    }
+
+    function mirrorArcs(arcs) {
+      const [rightStart, rightEnd] = mirrorArc(arcs.leftStart, arcs.leftEnd);
+      const [leftStart, leftEnd] = mirrorArc(arcs.rightStart, arcs.rightEnd);
+      return { rightStart, rightEnd, leftStart, leftEnd };
+    }
+
     function addMarker(x, y) {
       const raw = calcPos(longitudinalCoord(x, y));
       const nearest = nearestSameType(raw);
+      const side = sideFor(x, y);
+      const opposite = nearestOppositeSameType(raw, side);
       const pos = nearest ? nearest.pos : Number(raw.toFixed(Number(precision.value)));
+      let arcs = recommendArc(state.type, pos, side);
+      if (nearest) {
+        const arcSource = opposite ?? nearest;
+        arcs = arcSource.side !== side && arcSource.side !== "center" && side !== "center"
+          ? mirrorArcs(arcSource.arcs)
+          : { ...arcSource.arcs };
+      }
       const marker = {
         id: crypto.randomUUID(),
         type: state.type,
@@ -472,14 +515,14 @@ HTML = r"""<!doctype html>
         y,
         raw,
         pos,
-        side: sideFor(x, y),
+        side,
         snapped: Boolean(nearest),
-        arcs: recommendArc(state.type, pos, sideFor(x, y))
+        arcs
       };
       state.markers.push(marker);
       state.selected = marker.id;
       status.textContent = nearest
-        ? `已吸附到已有 ${state.type} 标记，posPercent=${fmt(pos)}`
+        ? `已吸附到已有 ${state.type} 标记，posPercent=${fmt(pos)}${opposite ? "，射界已按对侧镜像" : ""}`
         : `已添加 ${state.type}，posPercent=${fmt(pos)}`;
       render();
       saveState();

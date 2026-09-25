@@ -2744,6 +2744,7 @@
           "lorraine",
           "dunkerque",
           "richelieu",
+          "jean_bart",
         ],
       },
       {
@@ -3247,6 +3248,12 @@
       {
         name: "richelieu",
         pos: [9, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "jean_bart",
+        pos: [8, 38],
         rotation: 90,
         belongPlayer: "HA"
       },

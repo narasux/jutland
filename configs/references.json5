@@ -2957,6 +2957,41 @@
     ],
   },
   {
+    name: "jean_bart",
+    displayName: "让巴尔",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "副炮",
+        value: "3x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "防空炮",
+        value: "12x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "防空炮",
+        value: "14x2 57mm/60 Mle 1951",
+      },
+    ],
+    description: "让巴尔号是黎塞留级二号舰，1940 年法国战败时尚未完工，战后按照改进的防空方案继续建造，并于 1955 年正式服役。满载排水量约 49,196 吨，舰长 247.85 米、宽 33.08 米，设计航速 32 节。1955 年状态装备两座四联装 380 毫米主炮、三座三联装 152 毫米两用炮，以及十二座双联装 100 毫米和十四座双联装 57 毫米高炮。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Jean Bart 1955",
+        url: "https://www.shipbucket.com/drawings/3604",
+      },
+      {
+        name: "维基百科 - 让·巴尔号战列舰 (1940年)",
+        url: "https://zh.wikipedia.org/wiki/%E8%AE%A9%C2%B7%E5%B7%B4%E5%B0%94%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0_(1940%E5%B9%B4)",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "洛林",
     type: "战列舰",
@@ -3104,6 +3139,34 @@
       {
         name: "维基百科 - Canon de 152 mm Modèle 1930",
         url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
+      },
+    ],
+  },
+  {
+    name: "FR/100/45/2/Mle1930",
+    displayName: "100mm/45 Mle 1930 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 100 毫米/45 倍径 Mle 1930 双联装高平两用炮，射速约每分钟 10 至 15 发，最大射程约 15.8 公里，炮弹初速约 755 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 100 mm",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/57/60/2/Mle1951",
+    displayName: "57mm/60 Mle 1951 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 57 毫米/60 倍径 Mle 1951 双联装高射炮，源自 Bofors 57 mm L/60 设计，单管理论射速约每分钟 120 发，炮弹初速约 900 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Bofors 57 mm Naval Automatic Gun L/60",
+        url: "https://en.wikipedia.org/wiki/Bofors_57_mm_Naval_Automatic_Gun_L/60",
       },
     ],
   },

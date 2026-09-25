@@ -41,7 +41,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 - 裁剪后确认最外层非透明像素不贴边，但舰艏、舰艉只保留防止截断所需的小安全边，通常为原图 2~6 px，且不得超过舰体长轴的 1%。不要把整张素材画布或大段透明区域带入缩放；否则按真实长度生成的资源会让可见舰体偏小。
 - 以主视图的 alpha 边界核对舰艏、舰艉裁切位置，忽略签名、网址、比例尺和其他视图的零散像素。若原图某端已经贴边，在该端补 2~4 px 透明安全边，不得继续裁掉船体。
 - 按现有资源方向统一：俯视图舰艏朝上，侧视图舰艏朝右。只旋转或裁剪，不改变舰体比例。
-- 俯视图必须根据原始几何判断舰艏：横向原图舰艏朝右时逆时针旋转 90°（Pillow `rotate(90, expand=True)`），舰艏朝左时顺时针旋转 90°。不得只凭裁剪框左右端点或首尾轮廓猜测，要用炮塔/上层建筑布局、舰艏外飘、锚位和原图说明二次核对。
+- 用户提供的舰船图默认舰艏朝右，测试图不旋转；拆分出的俯视图逆时针旋转 90°（Pillow `rotate(90, expand=True)`）后写入游戏资源。只有用户明确说明该图方向不同时才按特殊方向处理。
 - 若此时发现白底残留，返回 `jutland-clean-ship-image` 处理并等待用户重新确认，不在本 skill 内清理。
 
 ### 3. 备份并等比例缩放
@@ -68,14 +68,14 @@ python3 .agents/skills/jutland-add-ship/scripts/resize_ship_image.py \
 ### 4. 浏览器确认武器位置
 
 - 正式俯视图缩放完成后、写入 `ships.json5` 前，必须启动 `utils/turret_marker/server.py`，让用户在浏览器中确认所有武器挂点；不得仅凭侧视图或俯视图目测直接填写 `posPercent`。
-- 游戏资源保持舰艏朝上；标记页用 `--rotate 90` 将预览顺时针转到舰艏朝右，再让用户点击。若预览舰艏方向仍不对，先修正俯视图方向或启动参数，不要继续标记。
+- 游戏资源保持舰艏朝上；标记页使用未旋转的横向俯视图，舰艏朝右，并保持默认 `--rotate 0` 直接让用户点击。不要把游戏资源中的竖向俯视图传给标记页，也不要靠标记参数改变方向。
 - 启动时用 `--types` 写明武器类型和预期数量，例如：
 
 ```bash
 python3 utils/turret_marker/server.py \
-  resources/images/ships/top/battleship/example.png \
-  --types 'main:5,secondary:14,aa75:8' \
-  --rotate 90
+  '/tmp/example top bow-right.png' \
+  --bow right \
+  --types 'main:5,secondary:14,aa75:8'
 ```
 
 - 用户完成标记后导出“项目 JSON”；其中的 `posPercent`、`side`、数量和类型是权威输入，按原值写入配置。不得用历史资料、目测结果或预期数量覆盖用户确认的数据。

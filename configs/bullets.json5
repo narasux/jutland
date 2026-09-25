@@ -937,6 +937,22 @@
     damage: 220,
     criticalRate: 0.005
   },
+  // 法国海军 100mm/45 Mle 1930 高平两用炮弹
+  {
+    name: "FR/GB/100/1930",
+    type: "shell",
+    diameter: 100,
+    damage: 80,
+    criticalRate: 0.0015
+  },
+  // 法国海军 57mm/60 Mle 1951 高炮弹
+  {
+    name: "FR/GB/57/1951",
+    type: "shell",
+    diameter: 57,
+    damage: 10,
+    criticalRate: 0
+  },
   // 法国海军 75mm/50 Mle 1922 高炮弹
   {
     name: "FR/GB/75/1922",
