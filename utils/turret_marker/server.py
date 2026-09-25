@@ -68,6 +68,9 @@ HTML = r"""<!doctype html>
     button:hover { border-color: var(--accent); }
     button.primary { background: #1d4f78; border-color: #2c76ad; }
     button.active { background: #285f8d; border-color: var(--accent); }
+    .type-buttons { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+    .type-count { color: var(--muted); margin-left: 5px; }
+    .type.active .type-count { color: var(--text); }
     input[type="number"] { width: 74px; }
     input[type="checkbox"] { accent-color: var(--accent); }
     main {
@@ -119,6 +122,7 @@ HTML = r"""<!doctype html>
       position: absolute;
       width: 15px;
       height: 15px;
+      background: #d0d0d0;
       border: 2px solid #fff;
       border-radius: 50%;
       transform: translate(-50%, -50%);
@@ -200,12 +204,7 @@ HTML = r"""<!doctype html>
 
   <div class="toolbar">
     <span>武器类型：</span>
-    <button class="type active" data-type="main">主炮</button>
-    <button class="type" data-type="secondary">副炮</button>
-    <button class="type" data-type="aa">防空炮</button>
-    <button class="type" data-type="torpedo">鱼雷</button>
-    <button class="type" data-type="rocket">火箭炮</button>
-    <button class="type" data-type="custom">自定义</button>
+    <span id="typeButtons" class="type-buttons"></span>
     <label><input id="snap" type="checkbox" checked> 对称吸附</label>
     <label>吸附阈值 <input id="snapTolerance" type="number" min="0" max="0.2" step="0.005" value="0.03"></label>
     <label>精度 <input id="precision" type="number" min="1" max="6" step="1" value="2"></label>
@@ -251,6 +250,7 @@ HTML = r"""<!doctype html>
         <div class="actions">
           <button id="copy" class="primary">复制当前类型</button>
           <button id="copyAll">复制全部</button>
+          <button id="copyProject">复制项目 JSON</button>
         </div>
         <div id="copyStatus" class="footnote"></div>
       </section>
@@ -259,9 +259,11 @@ HTML = r"""<!doctype html>
 
   <script>
     const meta = __META__;
+    const typeDefs = meta.types;
+    const storageKey = `jutland-turret-marker:${meta.key}`;
     const state = {
       markers: [],
-      type: "main",
+      type: typeDefs[0]?.name ?? "main",
       selected: null,
       calibrating: false,
       calPoints: [],
@@ -274,6 +276,7 @@ HTML = r"""<!doctype html>
     const markerList = document.getElementById("markerList");
     const output = document.getElementById("output");
     const copyStatus = document.getElementById("copyStatus");
+    const typeButtons = document.getElementById("typeButtons");
     const snap = document.getElementById("snap");
     const snapTolerance = document.getElementById("snapTolerance");
     const precision = document.getElementById("precision");
@@ -301,6 +304,94 @@ HTML = r"""<!doctype html>
       let ratio = (coord - center) / half;
       if (meta.bow === "top" || meta.bow === "left") ratio = -ratio;
       return Math.max(-1, Math.min(1, ratio));
+    }
+
+    function typeDefinition(name) {
+      return typeDefs.find(item => item.name === name) ?? {name, label: name, expected: null};
+    }
+
+    function markerCount(name) {
+      return state.markers.filter(marker => marker.type === name).length;
+    }
+
+    function sideFor(x, y) {
+      const transverse = meta.axis === "y" ? x : y;
+      const span = meta.axis === "y" ? meta.width : meta.height;
+      const center = span / 2;
+      const tolerance = Math.max(2, span * 0.025);
+      if (Math.abs(transverse - center) <= tolerance) return "center";
+      const lowSideIsPort = meta.axis === "y" ? meta.bow === "top" : meta.bow === "right";
+      return (transverse < center) === lowSideIsPort ? "port" : "starboard";
+    }
+
+    function projectData() {
+      return {
+        image: meta.name,
+        imagePath: meta.path,
+        bow: meta.bow,
+        axis: meta.axis,
+        bounds: {start: state.start, end: state.end},
+        precision: Number(precision.value),
+        types: typeDefs.map(item => ({
+          ...item,
+          actual: markerCount(item.name)
+        })),
+        markers: state.markers.map((marker, index) => ({
+          index: index + 1,
+          id: marker.id,
+          type: marker.type,
+          side: marker.side,
+          x: Number(marker.x.toFixed(2)),
+          y: Number(marker.y.toFixed(2)),
+          posPercent: Number(fmt(marker.pos)),
+          snapped: marker.snapped
+        }))
+      };
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify({
+          markers: state.markers,
+          start: state.start,
+          end: state.end,
+          type: state.type
+        }));
+      } catch {
+        copyStatus.textContent = "浏览器无法保存标注状态。";
+      }
+    }
+
+    function restoreState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey));
+        if (!saved || !Array.isArray(saved.markers)) return;
+        state.markers = saved.markers;
+        state.start = Number(saved.start ?? meta.start);
+        state.end = Number(saved.end ?? meta.end);
+        for (const marker of state.markers) {
+          if (!typeDefs.some(item => item.name === marker.type)) {
+            typeDefs.push({name: marker.type, label: marker.type, expected: null});
+          }
+        }
+        if (typeDefs.some(item => item.name === saved.type)) state.type = saved.type;
+      } catch {
+        localStorage.removeItem(storageKey);
+      }
+    }
+
+    function renderTypeButtons() {
+      typeButtons.innerHTML = "";
+      for (const definition of typeDefs) {
+        const count = markerCount(definition.name);
+        const button = document.createElement("button");
+        button.className = `type${state.type === definition.name ? " active" : ""}`;
+        button.dataset.type = definition.name;
+        button.textContent = definition.expected == null
+          ? `${definition.label} ${count}`
+          : `${definition.label} ${count}/${definition.expected}`;
+        typeButtons.appendChild(button);
+      }
     }
 
     function recommendArc(type, pos) {
@@ -344,6 +435,7 @@ HTML = r"""<!doctype html>
         y,
         raw,
         pos,
+        side: sideFor(x, y),
         snapped: Boolean(nearest),
         arcs: recommendArc(state.type, pos)
       };
@@ -353,6 +445,7 @@ HTML = r"""<!doctype html>
         ? `已吸附到已有 ${state.type} 标记，posPercent=${fmt(pos)}`
         : `已添加 ${state.type}，posPercent=${fmt(pos)}`;
       render();
+      saveState();
     }
 
     function updateOutput() {
@@ -396,7 +489,7 @@ HTML = r"""<!doctype html>
         const row = document.createElement("div");
         row.className = "marker-row";
         const label = document.createElement("span");
-        label.textContent = `${index + 1}. ${marker.type}: ${fmt(marker.pos)}${marker.snapped ? " *" : ""}`;
+        label.textContent = `${index + 1}. ${marker.type} [${marker.side ?? sideFor(marker.x, marker.y)}]: ${fmt(marker.pos)}${marker.snapped ? " *" : ""}`;
         label.style.cursor = "pointer";
         label.addEventListener("click", () => selectMarker(marker.id));
         const remove = document.createElement("button");
@@ -406,6 +499,7 @@ HTML = r"""<!doctype html>
           state.markers = state.markers.filter(item => item.id !== marker.id);
           if (state.selected === marker.id) state.selected = state.markers.at(-1)?.id ?? null;
           render();
+          saveState();
         });
         row.append(label, remove);
         item.appendChild(row);
@@ -435,6 +529,7 @@ HTML = r"""<!doctype html>
     }
 
     function render() {
+      renderTypeButtons();
       renderOverlay();
       renderList();
       updateOutput();
@@ -455,6 +550,7 @@ HTML = r"""<!doctype html>
           state.calibrating = false;
           status.textContent = `手动校准完成：${state.start} -> ${state.end}`;
           render();
+          saveState();
         } else {
           status.textContent = "已记录第一个校准点，请点击另一个首尾端点。";
         }
@@ -463,14 +559,13 @@ HTML = r"""<!doctype html>
       addMarker(x, y);
     });
 
-    document.querySelectorAll(".type").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".type").forEach(item => item.classList.remove("active"));
-        button.classList.add("active");
-        state.type = button.dataset.type;
-        status.textContent = `当前类型：${button.textContent}`;
-        render();
-      });
+    typeButtons.addEventListener("click", event => {
+      const button = event.target.closest(".type");
+      if (!button) return;
+      state.type = button.dataset.type;
+      status.textContent = `当前类型：${typeDefinition(state.type).label}`;
+      render();
+      saveState();
     });
 
     document.getElementById("autoCalibrate").addEventListener("click", () => {
@@ -480,6 +575,7 @@ HTML = r"""<!doctype html>
       state.calPoints = [];
       status.textContent = `自动校准完成：${state.start} -> ${state.end}`;
       render();
+      saveState();
     });
 
     document.getElementById("manualCalibrate").addEventListener("click", () => {
@@ -494,6 +590,7 @@ HTML = r"""<!doctype html>
       state.selected = null;
       status.textContent = "已清空标记。";
       render();
+      saveState();
     });
 
     document.getElementById("recommendArc").addEventListener("click", () => {
@@ -521,6 +618,7 @@ HTML = r"""<!doctype html>
       };
       status.textContent = "已应用人工修正的射界（仅保留在当前会话）。";
       renderList();
+      saveState();
     });
 
     async function copyText(text, label) {
@@ -528,9 +626,15 @@ HTML = r"""<!doctype html>
         await navigator.clipboard.writeText(text);
         copyStatus.textContent = `${label}已复制。`;
       } catch {
-        output.focus();
-        output.select();
+        const helper = document.createElement("textarea");
+        helper.value = text;
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.focus();
+        helper.select();
         document.execCommand("copy");
+        helper.remove();
         copyStatus.textContent = `${label}已尝试复制。`;
       }
     }
@@ -544,9 +648,16 @@ HTML = r"""<!doctype html>
       copyText(text, "全部 posPercent");
     });
 
+    document.getElementById("copyProject").addEventListener("click", () => {
+      copyText(JSON.stringify(projectData(), null, 2), "项目 JSON");
+    });
+
     precision.addEventListener("change", render);
     snapTolerance.addEventListener("change", render);
-    status.textContent = `自动边界：${meta.start} -> ${meta.end}；舰艏方向：${meta.bow}`;
+    restoreState();
+    status.textContent = meta.edgeWarning
+      ? `警告：${meta.edgeWarning}；自动边界：${state.start} -> ${state.end}；舰艏方向：${meta.bow}`
+      : `自动边界：${state.start} -> ${state.end}；舰艏方向：${meta.bow}`;
     render();
   </script>
 </body>
@@ -567,9 +678,60 @@ def parse_args() -> argparse.Namespace:
         default=0,
         help="rotate the browser preview clockwise without changing the source image",
     )
+    parser.add_argument(
+        "--types",
+        default="main,secondary,aa,torpedo,rocket,custom",
+        help="comma-separated type names with optional expected counts, e.g. main:5,aa75:8",
+    )
     parser.add_argument("--check", action="store_true", help="print image metadata and exit")
     parser.add_argument("--no-open", action="store_true", help="do not open the browser automatically")
     return parser.parse_args()
+
+
+TYPE_LABELS = {
+    "main": "主炮",
+    "secondary": "副炮",
+    "aa": "防空炮",
+    "aa75": "75mm 高炮",
+    "aa40": "40mm 高炮",
+    "aa132": "13.2mm 机枪",
+    "aa20": "20mm 机炮",
+    "aa20d": "20mm 双联",
+    "torpedo": "鱼雷",
+    "rocket": "火箭炮",
+    "custom": "自定义",
+}
+
+
+def parse_types(value: str) -> list[dict]:
+    """Parse comma-separated marker types and optional expected counts."""
+    result: list[dict] = []
+    seen: set[str] = set()
+    for raw_item in value.split(","):
+        item = raw_item.strip()
+        if not item:
+            continue
+        name, separator, count_text = item.partition(":")
+        name = name.strip()
+        if not name or name in seen:
+            continue
+        expected = None
+        if separator:
+            try:
+                expected = int(count_text)
+            except ValueError as exc:
+                raise ValueError(f"invalid expected count for type {name!r}: {count_text!r}") from exc
+            if expected < 0:
+                raise ValueError(f"expected count for type {name!r} must be non-negative")
+        seen.add(name)
+        result.append({
+            "name": name,
+            "label": TYPE_LABELS.get(name, name),
+            "expected": expected,
+        })
+    if not result:
+        raise ValueError("--types must include at least one type")
+    return result
 
 
 def rotated_bow(bow: str, rotation: int) -> str:
@@ -604,6 +766,12 @@ def load_meta(image: Image.Image, name: str, bow: str) -> dict:
     end = bottom if axis == "y" else right
     if end <= start:
         raise ValueError("image has no usable longitudinal extent")
+    axis_length = image.height if axis == "y" else image.width
+    edge_warnings = []
+    if start <= 1:
+        edge_warnings.append("舰艉或首个端点贴边")
+    if end >= axis_length - 2:
+        edge_warnings.append("舰艏或末端端点贴边")
     return {
         "name": name,
         "width": image.width,
@@ -612,6 +780,7 @@ def load_meta(image: Image.Image, name: str, bow: str) -> dict:
         "start": start,
         "end": end,
         "bow": bow,
+        "edgeWarning": "；".join(edge_warnings),
     }
 
 
@@ -660,6 +829,9 @@ def main() -> None:
         raise FileNotFoundError(image_path)
     image = load_image(image_path, args.rotate)
     meta = load_meta(image, image_path.name, rotated_bow(args.bow, args.rotate))
+    meta["path"] = str(image_path)
+    meta["key"] = str(image_path)
+    meta["types"] = parse_types(args.types)
     if args.check:
         print(json.dumps(meta, ensure_ascii=False, indent=2))
         return

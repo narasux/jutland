@@ -2478,6 +2478,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 法国海军 40mm/60 Bofors 单装高炮
+  {
+    name: "FR/40/60",
+    bulletName: "FR/GB/40/1930",
+    bulletCount: 1,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 880,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 法国海军 13.2mm Hotchkiss 四联装机枪
   {
     name: "FR/13.2/4",

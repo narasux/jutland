@@ -2915,6 +2915,45 @@
     ],
   },
   {
+    name: "lorraine",
+    displayName: "Лоррейн",
+    type: "Линкор",
+    armaments: [
+      {
+        label: "Главная батарея",
+        value: "4x2 340mm/45 Mle 1912",
+      },
+      {
+        label: "Вспомогательная батарея",
+        value: "14x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "14x1 40mm/60 Bofors",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "24x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "«Лоррейн» — третий линкор типа «Бретань», вступивший в строй в 1916 году. В 1935 году среднюю башню 340 мм заменили катапультой и ангаром для гидросамолётов; во время модернизации 1944 года авиационное оборудование сняли и значительно усилили зенитную артиллерию. Корабль поддерживал операцию «Драгун» и обстрел Ла-Рошели.",
+    author: "Novice, Karle94, Garlicdesigned, Latuch",
+    links: [
+      {
+        name: "Shipbucket - Lorraine 1944",
+        url: "https://www.shipbucket.com/drawings/3585",
+      },
+      {
+        name: "Википедия - French battleship Lorraine",
+        url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
     name: "FR/340/45/2",
     displayName: "340mm/45 Mle 1912, спаренная главная башня",
     type: "Оружие",
@@ -2953,6 +2992,20 @@
       {
         name: "Википедия - Canon de 75 mm modèle 1924",
         url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/40/60",
+    displayName: "40mm/60 Bofors, одиночное зенитное орудие",
+    type: "Оружие",
+    armaments: [],
+    description: "Французское 40 mm/60 Bofors в одиночной установке, принятое на вооружение при модернизации 1944 года.",
+    author: "",
+    links: [
+      {
+        name: "Википедия - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
       },
     ],
   },

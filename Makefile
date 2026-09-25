@@ -82,4 +82,4 @@ $(GOFUMPT): $(LOCALBIN)
 # launch the browser-based ship turret position marker
 turret-marker:
 	@test -n "$(IMAGE)" || (echo "Usage: make turret-marker IMAGE=path/to/top.png" && exit 1)
-	python3 utils/turret_marker/server.py "$(IMAGE)" $(if $(ROTATE),--rotate $(ROTATE),)
+	python3 utils/turret_marker/server.py "$(IMAGE)" $(if $(ROTATE),--rotate $(ROTATE),) $(if $(TYPES),--types '$(TYPES)',)

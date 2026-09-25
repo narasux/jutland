@@ -36,6 +36,15 @@ python3 utils/turret_marker/server.py path/to/top.png --no-open
 make turret-marker IMAGE=path/to/top.png ROTATE=90
 ```
 
+推荐在启动时同时给出武器类型和预期数量，界面会显示“已标/应有”，并阻止靠肉眼漏项：
+
+```bash
+make turret-marker \
+  IMAGE=path/to/top.png \
+  ROTATE=90 \
+  TYPES='main:5,secondary:14,aa75:8,aa132:4,aa20:7,aa20d:2'
+```
+
 只检查图片边界，不启动服务：
 
 ```bash
@@ -50,8 +59,11 @@ python3 utils/turret_marker/server.py path/to/top.png --check
 4. 选择武器类型，然后点击炮塔位置。
 5. 右侧列表显示每个标记的 `posPercent`，可删除错误标记。
 6. 点击“复制当前类型”只复制当前武器类型的 `posPercent`，每行一个数值；点击“复制全部”复制所有标记的数值。
+7. 点击“复制项目 JSON”导出包含类型、左右舷、像素坐标、两位小数 `posPercent` 和数量校验的结构化结果。
 
 `posPercent` 的计算与运行时一致：以校准中心为 `0`，向舰艏为正、向舰艉为负，范围约为 `-1..1`。默认舰艏在上方；如果舰艏在下方，启动时增加 `--bow bottom`。
+
+标记状态会自动保存在当前浏览器的本地存储中，刷新页面不会丢失。若图片的长轴端点贴边，页面顶部状态栏会显示裁切警告。
 
 ## 对称火炮
 
@@ -79,6 +91,7 @@ python3 utils/turret_marker/server.py path/to/top.png --check
 --port PORT                 默认 8765
 --bow top|bottom|left|right 舰艏方向，默认 top
 --rotate 0|90|180|270       浏览器预览顺时针旋转角度，默认 0
+--types TYPE[:COUNT],...     武器类型及预期数量，默认 main,secondary,aa,torpedo,rocket,custom
 --check                     只打印图片边界并退出
 --no-open                   不自动打开浏览器
 ```

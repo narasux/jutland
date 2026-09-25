@@ -905,6 +905,14 @@
     damage: 35,
     criticalRate: 0.001
   },
+  // 法国海军 40mm/60 Bofors 高炮弹
+  {
+    name: "FR/GB/40/1930",
+    type: "shell",
+    diameter: 40,
+    damage: 4,
+    criticalRate: 0
+  },
   // 法国海军 20mm/70 Oerlikon 机关炮弹
   {
     name: "FR/GB/20/1939",

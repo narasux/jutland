@@ -2613,7 +2613,7 @@
     displayNameRu: "Очень много кораблей",
     displayNameJa: "とてもたくさんの船",
     initFunds: 10000,
-    initCameraPos: [5, 32],
+    initCameraPos: [15, 32],
     mapName: "darwin",
     maxShipCount: 30,
     description: "舰队司令部 1941 年度全面战备检验——代号「怒海」，达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，超过百艘的各型舰艇参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
@@ -2740,6 +2740,7 @@
           "warspite",
           "tiger",
           "bretagne",
+          "lorraine",
         ],
       },
       {
@@ -2888,43 +2889,43 @@
       // === SP ===
       {
         name: "duck",
-        pos: [17, 38],
+        pos: [27, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "swordfish",
-        pos: [19, 36],
+        pos: [29, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "waterdrop",
-        pos: [19, 40],
+        pos: [29, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "molamola",
-        pos: [12, 38],
+        pos: [22, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "mercy",
-        pos: [16, 36],
+        pos: [26, 36],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "peace_ark",
-        pos: [15, 38],
+        pos: [25, 38],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "britannic",
-        pos: [16, 40],
+        pos: [26, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
@@ -3218,7 +3219,13 @@
       // === French ===
       {
         name: "bretagne",
-        pos: [14, 35],
+        pos: [10, 35],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "lorraine",
+        pos: [11, 36],
         rotation: 90,
         belongPlayer: "HA"
       },

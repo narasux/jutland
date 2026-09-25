@@ -2850,8 +2850,47 @@
         url: "https://www.shipbucket.com/drawings/3583",
       },
       {
-        name: "维基百科 - 布列塔尼號戰列艦",
+        name: "维基百科 - 布列塔尼号战列舰",
         url: "https://zh.wikipedia.org/wiki/%E5%B8%83%E5%88%97%E5%A1%94%E5%B0%BC%E8%99%9F%E6%88%B0%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "lorraine",
+    displayName: "洛林",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 340mm/45 Mle 1912",
+      },
+      {
+        label: "副炮",
+        value: "14x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "防空炮",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "防空炮",
+        value: "14x1 40mm/60 Bofors",
+      },
+      {
+        label: "防空炮",
+        value: "24x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "洛林号是法国海军布列塔尼级三号舰，1916 年服役。1935 年拆除中部 340mm 主炮塔，改为弹射器与水上飞机机库；1944 年改装时拆除航空设施并强化防空火力，随后参加法国南部的龙骑兵行动和拉罗谢尔炮击。",
+    author: "Novice, Karle94, Garlicdesigned, Latuch",
+    links: [
+      {
+        name: "Shipbucket - Lorraine 1944",
+        url: "https://www.shipbucket.com/drawings/3585",
+      },
+      {
+        name: "维基百科 - 洛林号战列舰",
+        url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
       },
     ],
   },
@@ -2894,6 +2933,20 @@
       {
         name: "维基百科 - Canon de 75 mm modèle 1924",
         url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/40/60",
+    displayName: "40mm/60 Bofors 单装高炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军在 1944 年改装中采用的 40 毫米/60 倍径 Bofors 单装防空炮。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
       },
     ],
   },

@@ -2915,6 +2915,45 @@
     ],
   },
   {
+    name: "lorraine",
+    displayName: "Lorraine",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 340mm/45 Mle 1912",
+      },
+      {
+        label: "Secondary Battery",
+        value: "14x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x1 75mm/50 Mle 1922",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "14x1 40mm/60 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "24x1 20mm/70 Oerlikon",
+      },
+    ],
+    description: "Lorraine was the third Bretagne-class battleship of the French Navy, commissioned in 1916. Her amidships 340 mm turret was replaced in 1935 by a catapult and seaplane hangar; the aircraft facilities were removed during the 1944 refit, which greatly strengthened her anti-aircraft armament before she supported Operation Dragoon and the bombardment of La Rochelle.",
+    author: "Novice, Karle94, Garlicdesigned, Latuch",
+    links: [
+      {
+        name: "Shipbucket - Lorraine 1944",
+        url: "https://www.shipbucket.com/drawings/3585",
+      },
+      {
+        name: "Wikipedia - French battleship Lorraine",
+        url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
     name: "FR/340/45/2",
     displayName: "340mm/45 Mle 1912 Twin Main Gun",
     type: "Weapon",
@@ -2953,6 +2992,20 @@
       {
         name: "Wikipedia - Canon de 75 mm modèle 1924",
         url: "https://en.wikipedia.org/wiki/Canon_de_75_mm_mod%C3%A8le_1924",
+      },
+    ],
+  },
+  {
+    name: "FR/40/60",
+    displayName: "40mm/60 Bofors Single Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French-operated 40 mm/60 Bofors single anti-aircraft gun adopted during the 1944 refit.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
       },
     ],
   },
