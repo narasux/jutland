@@ -2922,6 +2922,45 @@
     ],
   },
   {
+    name: "clemenceau",
+    displayName: "克莱蒙梭",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "副炮",
+        value: "4x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "防空炮",
+        value: "6x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "防空炮",
+        value: "6x2 37mm/70 Mle 1935",
+      },
+      {
+        label: "防空炮",
+        value: "9x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "克莱蒙梭号是法国海军黎塞留级三号舰，按 1938 年度计划以改进 A 方案建造，副炮改为四座三联装 152 毫米两用炮并强化近程防空火力。该舰 1939 年开工，法国战败后未完工，最终于 1948 年拆解。本作采用 1942 年暂定完工状态，装备两座四联装 380 毫米主炮、六座双联装 100 毫米与 37 毫米高炮，以及九座四联装 13.2 毫米机枪。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Clemenceau 1942 tentative completion",
+        url: "https://www.shipbucket.com/drawings/3716",
+      },
+      {
+        name: "维基百科 - 黎塞留级战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%BB%8E%E5%A1%9E%E7%95%99%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+      },
+    ],
+  },
+  {
     name: "richelieu",
     displayName: "黎塞留",
     type: "战列舰",
@@ -3195,6 +3234,20 @@
       {
         name: "维基百科 - Canon de 37 mm Modèle 1925",
         url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
+      },
+    ],
+  },
+  {
+    name: "FR/37/70/2/Mle1935",
+    displayName: "37mm/70 ACAD Mle 1935 双联装全自动高射炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 37 毫米/70 倍径 ACAD Mle 1935 双联装全自动高射炮。射速约每分钟 165 至 172 发，炮弹初速约 825 米/秒；因研制延迟，未能在法国战败前量产服役。",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 37 mm/70 AA Gun Model 1935",
+        url: "https://www.navweaps.com/Weapons/WNFR_37mm_m1935.php",
       },
     ],
   },

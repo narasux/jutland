@@ -2743,6 +2743,7 @@
           "bretagne",
           "lorraine",
           "dunkerque",
+          "clemenceau",
           "richelieu",
           "jean_bart",
         ],
@@ -3247,13 +3248,19 @@
       },
       {
         name: "richelieu",
-        pos: [9, 37],
+        pos: [10, 39],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "jean_bart",
-        pos: [8, 38],
+        pos: [11, 40],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "clemenceau",
+        pos: [10, 41],
         rotation: 90,
         belongPlayer: "HA"
       },

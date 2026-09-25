@@ -2981,6 +2981,45 @@
     ],
   },
   {
+    name: "clemenceau",
+    displayName: "クレマンソー",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "副砲",
+        value: "4x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "対空砲",
+        value: "6x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "対空砲",
+        value: "6x2 37mm/70 Mle 1935",
+      },
+      {
+        label: "対空砲",
+        value: "9x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "クレマンソーはリシュリュー級戦艦の三番艦で、1938年度計画の改正A案として1939年に起工した。前部に四連装380mm主砲塔2基を維持しつつ、副砲を三連装152mm両用砲4基とし、近接対空火器を強化する設計だった。1940年にブレストで未完成のままドイツ軍に捕獲され、戦後に解体された。本作では1942年に暫定完成した姿として、四連装13.2mm機銃9基を含む兵装を搭載する。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Clemenceau 1942 tentative completion",
+        url: "https://www.shipbucket.com/drawings/3716",
+      },
+      {
+        name: "ウィキペディア - クレマンソー (戦艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AC%E3%83%9E%E3%83%B3%E3%82%BD%E3%83%BC_(%E6%88%A6%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "richelieu",
     displayName: "リシュリュー",
     type: "戦艦",
@@ -3254,6 +3293,20 @@
       {
         name: "ウィキペディア - Canon de 37 mm Modèle 1925",
         url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
+      },
+    ],
+  },
+  {
+    name: "FR/37/70/2/Mle1935",
+    displayName: "37mm/70 ACAD Mle 1935 連装全自動高射砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の37mm/70 ACAD Mle 1935 連装全自動高射砲。発射速度は毎分約165～172発、初速は約825 m/s。開発遅延のため、フランス敗戦までに量産配備されなかった。",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 37 mm/70 AA Gun Model 1935",
+        url: "https://www.navweaps.com/Weapons/WNFR_37mm_m1935.php",
       },
     ],
   },

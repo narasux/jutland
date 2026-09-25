@@ -2595,6 +2595,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 法国海军 37mm/70 ACAD Mle 1935 双联装全自动高炮
+  {
+    name: "FR/37/70/2/Mle1935",
+    bulletName: "FR/GB/37/1925",
+    bulletCount: 2,
+    reloadTime: 0.35,
+    range: 8,
+    bulletSpread: 20,
+    bulletSpeed: 825,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 法国海军 40mm/60 Bofors 单装高炮
   {
     name: "FR/40/60",

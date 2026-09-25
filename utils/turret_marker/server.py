@@ -480,13 +480,8 @@ HTML = r"""<!doctype html>
     function mirrorArc(start, end) {
       if (start === 0 && end === 0) return [360, 360];
       if (start === 360 && end === 360) return [0, 0];
-      let mirroredStart = start + 180;
-      let mirroredEnd = end + 180;
-      if (mirroredStart >= 360 && mirroredEnd > 360) {
-        mirroredStart -= 360;
-        mirroredEnd -= 360;
-      }
-      return [mirroredStart, mirroredEnd];
+      // 按舰体艏艉轴镜像：舰艏/舰艉方向不变，左右舷互换。
+      return [360 - end, 360 - start];
     }
 
     function mirrorArcs(arcs) {
@@ -771,11 +766,10 @@ HTML = r"""<!doctype html>
       const mismatches = typeDefs
         .filter(item => item.expected != null && markerCount(item.name) !== item.expected)
         .map(item => `${item.label} ${markerCount(item.name)}/${item.expected}`);
-      if (mismatches.length > 0) {
-        copyStatus.textContent = `数量不匹配，请先修正：${mismatches.join("，")}`;
-        return;
-      }
-      copyText(JSON.stringify(projectData(), null, 2), "项目 JSON");
+      const label = mismatches.length > 0
+        ? `项目 JSON（数量提示：${mismatches.join("，")}）`
+        : "项目 JSON";
+      copyText(JSON.stringify(projectData(), null, 2), label);
     });
 
     precision.addEventListener("change", render);

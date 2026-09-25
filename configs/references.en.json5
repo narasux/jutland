@@ -2981,6 +2981,45 @@
     ],
   },
   {
+    name: "clemenceau",
+    displayName: "Clemenceau",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "Secondary Battery",
+        value: "4x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x2 37mm/70 Mle 1935",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "9x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "Clemenceau was the third Richelieu-class battleship, laid down in 1939 to the modified Project A design. She retained two quadruple 380 mm turrets but mounted four triple 152 mm dual-purpose turrets and a heavier close-range battery. Captured incomplete at Brest in 1940, she was never finished and was scrapped in 1948. This depiction shows a tentative 1942 completion with nine quadruple 13.2 mm machine guns.",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Clemenceau 1942 tentative completion",
+        url: "https://www.shipbucket.com/drawings/3716",
+      },
+      {
+        name: "Wikipedia - Richelieu-class battleship",
+        url: "https://en.wikipedia.org/wiki/Richelieu-class_battleship",
+      },
+    ],
+  },
+  {
     name: "richelieu",
     displayName: "Richelieu",
     type: "Battleship",
@@ -3254,6 +3293,20 @@
       {
         name: "Wikipedia - Canon de 37 mm Modèle 1925",
         url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
+      },
+    ],
+  },
+  {
+    name: "FR/37/70/2/Mle1935",
+    displayName: "37mm/70 ACAD Mle 1935 Twin Automatic Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 37 mm/70 ACAD Mle 1935 twin fully automatic anti-aircraft gun. It fired at about 165-172 rounds per minute with a muzzle velocity of about 825 m/s; development delays prevented it from entering series service before the fall of France.",
+    author: "",
+    links: [
+      {
+        name: "NavWeaps - 37 mm/70 AA Gun Model 1935",
+        url: "https://www.navweaps.com/Weapons/WNFR_37mm_m1935.php",
       },
     ],
   },
