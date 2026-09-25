@@ -18948,245 +18948,253 @@
   },
   // 法国海军
   {
-    // 孤拔
-    name: "courbet",
+    // 阿尔萨斯（1945 年暂定完工状态）
+    name: "alsace",
     nation: "fr",
     type: "battleship",
     typeAbbr: "BB",
-    year: 1932,
-    totalHP: 25579,
-    horizontalDamageReduction: 0.34,
-    verticalDamageReduction: 0.2,
-    maxSpeed: 18.2,
-    acceleration: 0.22,
-    rotateSpeed: 0.72,
-    length: 166,
-    width: 27,
-    fundsCost: 375,
-    timeCost: 89,
+    year: 1945,
+    totalHP: 50000,
+    horizontalDamageReduction: 0.5,
+    verticalDamageReduction: 0.25,
+    maxSpeed: 31,
+    acceleration: 0.35,
+    rotateSpeed: 0.8,
+    length: 265,
+    width: 36,
+    fundsCost: 560,
+    timeCost: 113,
     weapon: {
       mainGuns: [
-        // 主炮 A
+        // 前主炮 A
         {
-          name: "FR/305/45/2",
-          posPercent: 0.59,
+          name: "FR/380/45/4",
+          posPercent: 0.44,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
-        // 主炮 B
+        // 前主炮 B（超射）
         {
-          name: "FR/305/45/2",
-          posPercent: 0.46,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
+          name: "FR/380/45/4",
+          posPercent: 0.24,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
         },
-        // 左舷中部炮塔
+        // 后主炮 C
         {
-          name: "FR/305/45/2",
-          posPercent: 0.01,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 右舷中部炮塔
-        {
-          name: "FR/305/45/2",
-          posPercent: 0.01,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 主炮 E
-        {
-          name: "FR/305/45/2",
-          posPercent: -0.46,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 主炮 F
-        {
-          name: "FR/305/45/2",
-          posPercent: -0.59,
+          name: "FR/380/45/4",
+          posPercent: -0.51,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
       ],
       secondaryGuns: [
-        // 22 门 138.6mm 单装副炮（两舷炮廓）
+        // 前部中线 152mm 三联装副炮
         {
-          name: "FR/138.6/55",
-          posPercent: 0.54,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
+          name: "FR/152/55/3",
+          posPercent: 0.13,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
         },
+        // 后部中线 152mm 三联装副炮
         {
-          name: "FR/138.6/55",
-          posPercent: 0.54,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.49,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.49,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.44,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.44,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.25,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.2,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.2,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.14,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.14,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.06,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.06,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.09,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.09,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.13,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.13,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.5,
+          name: "FR/152/55/3",
+          posPercent: -0.32,
           rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.5,
-          rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
+        // 舰艉中线 152mm 三联装副炮
         {
-          name: "FR/138.6/55",
-          posPercent: -0.55,
+          name: "FR/152/55/3",
+          posPercent: -0.4,
           rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.55,
-          rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
       ],
       antiAircraftGuns: [
-        // 7 门 75mm/50 Mle 1922 单装高炮
+        // 前部 100mm 双联装高炮：左舷 / 右舷
         {
-          name: "FR/75/50",
-          posPercent: 0.46,
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.13,
           rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
+          leftFiringArc: [180, 360]
         },
         {
-          name: "FR/75/50",
-          posPercent: 0.46,
-          rightFiringArc: [30, 150],
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "FR/75/50",
-          posPercent: 0.28,
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.06,
           rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
+          leftFiringArc: [180, 360]
         },
         {
-          name: "FR/75/50",
-          posPercent: 0.28,
-          rightFiringArc: [30, 150],
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部 100mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "FR/75/50",
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.29,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 前部 37mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: 0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: 0.3,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥后方 37mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部 37mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/37/70/2/Mle1935",
           posPercent: -0.33,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
         {
-          name: "FR/75/50",
+          name: "FR/37/70/2/Mle1935",
           posPercent: -0.33,
           rightFiringArc: [45, 180],
           leftFiringArc: [360, 360]
         },
+        // 前部 20mm 双联装机炮：左舷 / 右舷
         {
-          name: "FR/75/50",
-          posPercent: -0.82,
-          rightFiringArc: [45, 180],
+          name: "FR/20/70/2",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70/2",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舯部中线 20mm 双联装机炮
+        {
+          name: "FR/20/70/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 舰桥两侧 20mm 双联装机炮：左舷 / 右舷
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.06,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部 20mm 四联装机炮：左舷 / 右舷
+        {
+          name: "FR/20/70/4",
+          posPercent: -0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70/4",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艉 20mm 双联装机炮：左舷 / 右舷
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.67,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.67,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.89,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.89,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
         },
       ],
       torpedoes: [],
@@ -19194,290 +19202,728 @@
     }
   },
   {
-    // 布列塔尼
-    name: "bretagne",
+    // 克莱蒙梭（1942 年暂定完工状态）
+    name: "clemenceau",
     nation: "fr",
     type: "battleship",
     typeAbbr: "BB",
-    year: 1940,
-    totalHP: 26600,
-    horizontalDamageReduction: 0.35,
-    verticalDamageReduction: 0.2,
-    maxSpeed: 21,
-    acceleration: 0.24,
-    rotateSpeed: 0.75,
-    length: 166,
-    width: 27,
-    fundsCost: 390,
-    timeCost: 92,
+    year: 1942,
+    totalHP: 44800,
+    horizontalDamageReduction: 0.5,
+    verticalDamageReduction: 0.25,
+    maxSpeed: 32,
+    acceleration: 0.35,
+    rotateSpeed: 0.8,
+    length: 248,
+    width: 33,
+    fundsCost: 480,
+    timeCost: 102,
     weapon: {
       mainGuns: [
-        // 主炮 A
+        // 前主炮 B（超射）
         {
-          name: "FR/340/45/2",
-          posPercent: 0.64,
+          name: "FR/380/45/4",
+          posPercent: 0.4,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
-        // 主炮 B
+        // 前主炮 A
         {
-          name: "FR/340/45/2",
-          posPercent: 0.5,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 主炮 C
-        {
-          name: "FR/340/45/2",
-          posPercent: 0.03,
-          rightFiringArc: [45, 135],
-          leftFiringArc: [225, 315]
-        },
-        // 主炮 D
-        {
-          name: "FR/340/45/2",
-          posPercent: -0.44,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-        // 主炮 E
-        {
-          name: "FR/340/45/2",
-          posPercent: -0.59,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
+          name: "FR/380/45/4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
         },
       ],
       secondaryGuns: [
-        // 副炮 A：右舷 / 左舷同坐标
+        // 舯部 152mm 三联装副炮：左舷 / 右舷
         {
-          name: "FR/138.6/55",
-          posPercent: 0.41,
-          rightFiringArc: [30, 150],
+          name: "FR/152/55/3",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.15,
+          rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
+        // 后部 152mm 三联装副炮：前炮塔 / 后炮塔
         {
-          name: "FR/138.6/55",
-          posPercent: 0.41,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        // 副炮 B：右舷 / 左舷同坐标
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.36,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.36,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        // 副炮 C：右舷 / 左舷同坐标
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.2,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.2,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        // 副炮 D：右舷 / 左舷同坐标
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.17,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.17,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        // 副炮 E：右舷 / 左舷同坐标
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.11,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: 0.11,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 330]
-        },
-        // 副炮 F：右舷 / 左舷同坐标
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.11,
+          name: "FR/152/55/3",
+          posPercent: -0.41,
           rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.11,
-          rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
-        // 副炮 G：右舷 / 左舷同坐标
         {
-          name: "FR/138.6/55",
-          posPercent: -0.17,
+          name: "FR/152/55/3",
+          posPercent: -0.53,
           rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/138.6/55",
-          posPercent: -0.17,
-          rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
       ],
       antiAircraftGuns: [
-        // 75mm/50 Mle 1922 甲板高炮
-        // 炮座 A：甲板炮座 / 甲板炮座同坐标
+        // 舰桥前方 100mm 双联装高炮：左舷 / 右舷
         {
-          name: "FR/75/50",
-          posPercent: 0.17,
-          rightFiringArc: [0, 180],
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.03,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [225, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.03,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [270, 360]
+        },
+        // 后部上层建筑 100mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.3,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.37,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥前方 37mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/37/70/2/Mle1935",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "FR/75/50",
-          posPercent: 0.17,
+          name: "FR/37/70/2/Mle1935",
+          posPercent: 0.12,
           rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
+          leftFiringArc: [360, 360]
         },
-        // 炮座 B：甲板炮座 / 甲板炮座同坐标
+        // 后部上层建筑 37mm 双联装高炮：左舷 / 右舷
         {
-          name: "FR/75/50",
-          posPercent: 0.07,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/75/50",
-          posPercent: 0.07,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 炮座 C：甲板炮座 / 甲板炮座同坐标
-        {
-          name: "FR/75/50",
-          posPercent: -0.03,
-          rightFiringArc: [0, 180],
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.23,
+          rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "FR/75/50",
-          posPercent: -0.03,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 炮座 D：甲板炮座 / 甲板炮座同坐标
-        {
-          name: "FR/75/50",
-          posPercent: -0.11,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/75/50",
-          posPercent: -0.11,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 13.2mm Hotchkiss 四联装机枪
-        // 炮座 A：炮塔顶/中线 / 炮塔顶/中线同坐标
-        {
-          name: "FR/13.2/4",
-          posPercent: 0.05,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: 0.05,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 炮座 B：炮塔顶/中线 / 炮塔顶/中线同坐标
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.08,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.08,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 20mm/70 Oerlikon 双联机炮
-        // 炮座 A：炮塔顶/中线
-        {
-          name: "FR/20/70/2",
-          posPercent: -0.45,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 20mm/70 Oerlikon 机炮
-        // 炮座 A：炮塔顶/中线
-        {
-          name: "FR/20/70",
-          posPercent: 0.64,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 炮座 B：炮塔顶/中线
-        {
-          name: "FR/20/70",
-          posPercent: 0.5,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 炮座 C：右舷 / 左舷同坐标
-        {
-          name: "FR/20/70",
-          posPercent: 0.38,
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.23,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "FR/20/70",
-          posPercent: 0.38,
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.33,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
-        // 炮座 D：炮塔顶/中线
         {
-          name: "FR/20/70",
-          posPercent: 0.05,
-          rightFiringArc: [30, 150],
-          leftFiringArc: [210, 330]
+          name: "FR/37/70/2/Mle1935",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
         },
-        // 炮座 E：炮塔顶/中线
+        // 舰桥两侧 13.2mm 四联装机枪：左舷 / 右舷
         {
-          name: "FR/20/70",
-          posPercent: -0.5,
+          name: "FR/13.2/4",
+          posPercent: -0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舯部平台 13.2mm 四联装机枪
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.05,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 后部上层建筑 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.11,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.11,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 后部平台 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.6,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
-        // 炮座 F：炮塔顶/中线
         {
-          name: "FR/20/70",
-          posPercent: -0.64,
+          name: "FR/13.2/4",
+          posPercent: -0.6,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        },
+        // 舰艉平台 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.65,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.65,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      torpedoes: [],
+      rockets: []
+    }
+  },
+  {
+    // 让巴尔（1955 年改装完成状态）
+    name: "jean_bart",
+    nation: "fr",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1955,
+    totalHP: 49196,
+    horizontalDamageReduction: 0.5,
+    verticalDamageReduction: 0.25,
+    maxSpeed: 32,
+    acceleration: 0.35,
+    rotateSpeed: 0.8,
+    length: 248,
+    width: 33,
+    fundsCost: 560,
+    timeCost: 113,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "FR/380/45/4",
+          posPercent: 0.39,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B（超射）
+        {
+          name: "FR/380/45/4",
+          posPercent: 0.13,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+      ],
+      secondaryGuns: [
+        // 后部中线 152mm 三联装副炮
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.43,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        // 舰艉 152mm 三联装副炮：右舷 / 左舷
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.53,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.53,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 舯部 100mm 双联装高射炮：右舷 / 左舷
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.39,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.39,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.32,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.32,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后方 57mm 双联装高炮：右舷 / 左舷
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: 0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.3,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 360]
+        },
+        // 舰艉 57mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.78,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.78,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.88,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/57/60/2/Mle1951",
+          posPercent: -0.88,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      torpedoes: [],
+      rockets: []
+    }
+  },
+  {
+    // 黎塞留
+    name: "richelieu",
+    nation: "fr",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1936,
+    totalHP: 44698,
+    horizontalDamageReduction: 0.5,
+    verticalDamageReduction: 0.25,
+    maxSpeed: 32,
+    acceleration: 0.35,
+    rotateSpeed: 0.8,
+    length: 248,
+    width: 33,
+    fundsCost: 480,
+    timeCost: 102,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "FR/380/45/4",
+          posPercent: 0.39,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B（超射）
+        {
+          name: "FR/380/45/4",
+          posPercent: 0.13,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+      ],
+      secondaryGuns: [
+        // 舯部 152mm 三联装副炮：左舷 / 右舷
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部中线 152mm 三联装副炮
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.41,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        // 舰艉 152mm 三联装副炮：左舷 / 右舷
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.54,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/152/55/3",
+          posPercent: -0.54,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 舰桥前方 37mm 高炮：左舷 / 右舷
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥后方 37mm 高炮：右舷 / 左舷
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.29,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部 37mm 高炮：右舷 / 左舷
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.36,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥两侧 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部平台 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艉 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.26,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+      ],
+      torpedoes: [],
+      rockets: []
+    }
+  },
+  {
+    // 敦刻尔克
+    name: "dunkerque",
+    nation: "fr",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1932,
+    totalHP: 35500,
+    horizontalDamageReduction: 0.4,
+    verticalDamageReduction: 0.25,
+    maxSpeed: 29.5,
+    acceleration: 0.3,
+    rotateSpeed: 0.8,
+    length: 215,
+    width: 31,
+    fundsCost: 440,
+    timeCost: 97,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "FR/330/50/4",
+          posPercent: 0.47,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B（超射）
+        {
+          name: "FR/330/50/4",
+          posPercent: 0.21,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+      ],
+      secondaryGuns: [
+        // 130mm 双联装炮塔
+        {
+          name: "FR/130/45/2",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/130/45/2",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 130mm 四联装炮塔
+        {
+          name: "FR/130/45/4",
+          posPercent: -0.46,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/130/45/4",
+          posPercent: -0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/130/45/4",
+          posPercent: -0.54,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+      ],
+      antiAircraftGuns: [
+        // 前部 37mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部 37mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.34,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 前部 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舯部 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.31,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艉 13.2mm 四联装机枪：左舷 / 右舷
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.4,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
         },
       ],
       torpedoes: [],
@@ -19933,982 +20379,536 @@
     }
   },
   {
-    // 敦刻尔克
-    name: "dunkerque",
+    // 布列塔尼
+    name: "bretagne",
+    nation: "fr",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1940,
+    totalHP: 26600,
+    horizontalDamageReduction: 0.35,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 21,
+    acceleration: 0.24,
+    rotateSpeed: 0.75,
+    length: 166,
+    width: 27,
+    fundsCost: 390,
+    timeCost: 92,
+    weapon: {
+      mainGuns: [
+        // 主炮 A
+        {
+          name: "FR/340/45/2",
+          posPercent: 0.64,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 主炮 B
+        {
+          name: "FR/340/45/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 主炮 C
+        {
+          name: "FR/340/45/2",
+          posPercent: 0.03,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 主炮 D
+        {
+          name: "FR/340/45/2",
+          posPercent: -0.44,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 主炮 E
+        {
+          name: "FR/340/45/2",
+          posPercent: -0.59,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+      ],
+      secondaryGuns: [
+        // 副炮 A：右舷 / 左舷同坐标
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.41,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 副炮 B：右舷 / 左舷同坐标
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.36,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.36,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 副炮 C：右舷 / 左舷同坐标
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 副炮 D：右舷 / 左舷同坐标
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.17,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 副炮 E：右舷 / 左舷同坐标
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.11,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        // 副炮 F：右舷 / 左舷同坐标
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.11,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        // 副炮 G：右舷 / 左舷同坐标
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.17,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+      ],
+      antiAircraftGuns: [
+        // 75mm/50 Mle 1922 甲板高炮
+        // 炮座 A：甲板炮座 / 甲板炮座同坐标
+        {
+          name: "FR/75/50",
+          posPercent: 0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 B：甲板炮座 / 甲板炮座同坐标
+        {
+          name: "FR/75/50",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 C：甲板炮座 / 甲板炮座同坐标
+        {
+          name: "FR/75/50",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 D：甲板炮座 / 甲板炮座同坐标
+        {
+          name: "FR/75/50",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 13.2mm Hotchkiss 四联装机枪
+        // 炮座 A：炮塔顶/中线 / 炮塔顶/中线同坐标
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 B：炮塔顶/中线 / 炮塔顶/中线同坐标
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/13.2/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm/70 Oerlikon 双联机炮
+        // 炮座 A：炮塔顶/中线
+        {
+          name: "FR/20/70/2",
+          posPercent: -0.45,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm/70 Oerlikon 机炮
+        // 炮座 A：炮塔顶/中线
+        {
+          name: "FR/20/70",
+          posPercent: 0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 B：炮塔顶/中线
+        {
+          name: "FR/20/70",
+          posPercent: 0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 C：右舷 / 左舷同坐标
+        {
+          name: "FR/20/70",
+          posPercent: 0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/20/70",
+          posPercent: 0.38,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 D：炮塔顶/中线
+        {
+          name: "FR/20/70",
+          posPercent: 0.05,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 炮座 E：炮塔顶/中线
+        {
+          name: "FR/20/70",
+          posPercent: -0.5,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 炮座 F：炮塔顶/中线
+        {
+          name: "FR/20/70",
+          posPercent: -0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      torpedoes: [],
+      rockets: []
+    }
+  },
+  {
+    // 孤拔
+    name: "courbet",
     nation: "fr",
     type: "battleship",
     typeAbbr: "BB",
     year: 1932,
-    totalHP: 35500,
-    horizontalDamageReduction: 0.4,
-    verticalDamageReduction: 0.25,
-    maxSpeed: 29.5,
-    acceleration: 0.3,
-    rotateSpeed: 0.8,
-    length: 215,
-    width: 31,
-    fundsCost: 440,
-    timeCost: 97,
+    totalHP: 25579,
+    horizontalDamageReduction: 0.34,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 18.2,
+    acceleration: 0.22,
+    rotateSpeed: 0.72,
+    length: 166,
+    width: 27,
+    fundsCost: 375,
+    timeCost: 89,
     weapon: {
       mainGuns: [
-        // 前主炮 A
+        // 主炮 A
         {
-          name: "FR/330/50/4",
-          posPercent: 0.47,
+          name: "FR/305/45/2",
+          posPercent: 0.59,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
-        // 前主炮 B（超射）
+        // 主炮 B
         {
-          name: "FR/330/50/4",
-          posPercent: 0.21,
-          rightFiringArc: [45, 135],
-          leftFiringArc: [225, 315]
-        },
-      ],
-      secondaryGuns: [
-        // 130mm 双联装炮塔
-        {
-          name: "FR/130/45/2",
-          posPercent: -0.1,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/130/45/2",
-          posPercent: -0.1,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 130mm 四联装炮塔
-        {
-          name: "FR/130/45/4",
-          posPercent: -0.46,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/130/45/4",
-          posPercent: -0.46,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/130/45/4",
-          posPercent: -0.54,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-      ],
-      antiAircraftGuns: [
-        // 前部 37mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/37/50/2",
-          posPercent: 0.21,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/50/2",
-          posPercent: 0.21,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部 37mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/37/50/2",
-          posPercent: -0.34,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/37/50/2",
-          posPercent: -0.34,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 前部 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: 0.08,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: 0.08,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舯部 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.21,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.21,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.31,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.31,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舰艉 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.4,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.4,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-      ],
-      torpedoes: [],
-      rockets: []
-    }
-  },
-  {
-    // 克莱蒙梭（1942 年暂定完工状态）
-    name: "clemenceau",
-    nation: "fr",
-    type: "battleship",
-    typeAbbr: "BB",
-    year: 1942,
-    totalHP: 44800,
-    horizontalDamageReduction: 0.5,
-    verticalDamageReduction: 0.25,
-    maxSpeed: 32,
-    acceleration: 0.35,
-    rotateSpeed: 0.8,
-    length: 248,
-    width: 33,
-    fundsCost: 480,
-    timeCost: 102,
-    weapon: {
-      mainGuns: [
-        // 前主炮 B（超射）
-        {
-          name: "FR/380/45/4",
-          posPercent: 0.4,
+          name: "FR/305/45/2",
+          posPercent: 0.46,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
-        // 前主炮 A
+        // 左舷中部炮塔
         {
-          name: "FR/380/45/4",
-          posPercent: 0.14,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-      ],
-      secondaryGuns: [
-        // 舯部 152mm 三联装副炮：左舷 / 右舷
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.15,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.15,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部 152mm 三联装副炮：前炮塔 / 后炮塔
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.41,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.53,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-      ],
-      antiAircraftGuns: [
-        // 舰桥前方 100mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: 0.03,
-          rightFiringArc: [0, 90],
-          leftFiringArc: [225, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: 0.03,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [270, 360]
-        },
-        // 后部上层建筑 100mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.3,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.3,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.37,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.37,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舰桥前方 37mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: 0.12,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: 0.12,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部上层建筑 37mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.23,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.23,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.33,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.33,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舰桥两侧 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.01,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.01,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舯部平台 13.2mm 四联装机枪
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.05,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-        // 后部上层建筑 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.11,
-          rightFiringArc: [90, 180],
-          leftFiringArc: [180, 330]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.11,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 270]
-        },
-        // 后部平台 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.6,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.6,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        // 舰艉平台 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.65,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.65,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-      ],
-      torpedoes: [],
-      rockets: []
-    }
-  },
-  {
-    // 黎塞留
-    name: "richelieu",
-    nation: "fr",
-    type: "battleship",
-    typeAbbr: "BB",
-    year: 1936,
-    totalHP: 44698,
-    horizontalDamageReduction: 0.5,
-    verticalDamageReduction: 0.25,
-    maxSpeed: 32,
-    acceleration: 0.35,
-    rotateSpeed: 0.8,
-    length: 248,
-    width: 33,
-    fundsCost: 480,
-    timeCost: 102,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "FR/380/45/4",
-          posPercent: 0.39,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 前主炮 B（超射）
-        {
-          name: "FR/380/45/4",
-          posPercent: 0.13,
-          rightFiringArc: [45, 135],
-          leftFiringArc: [225, 315]
-        },
-      ],
-      secondaryGuns: [
-        // 舯部 152mm 三联装副炮：左舷 / 右舷
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.13,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.13,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部中线 152mm 三联装副炮
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.41,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-        // 舰艉 152mm 三联装副炮：左舷 / 右舷
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.54,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.54,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-      ],
-      antiAircraftGuns: [
-        // 舰桥前方 37mm 高炮：左舷 / 右舷
-        {
-          name: "FR/37/50/2",
-          posPercent: 0.22,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/50/2",
-          posPercent: 0.22,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舰桥后方 37mm 高炮：右舷 / 左舷
-        {
-          name: "FR/37/50/2",
-          posPercent: -0.29,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/37/50/2",
-          posPercent: -0.29,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部 37mm 高炮：右舷 / 左舷
-        {
-          name: "FR/37/50/2",
-          posPercent: -0.36,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/37/50/2",
-          posPercent: -0.36,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舰桥两侧 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.01,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.01,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部平台 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.23,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.23,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舰艉 13.2mm 四联装机枪：左舷 / 右舷
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.26,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/13.2/4",
-          posPercent: -0.26,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-      ],
-      torpedoes: [],
-      rockets: []
-    }
-  },
-  {
-    // 让巴尔（1955 年改装完成状态）
-    name: "jean_bart",
-    nation: "fr",
-    type: "battleship",
-    typeAbbr: "BB",
-    year: 1955,
-    totalHP: 49196,
-    horizontalDamageReduction: 0.5,
-    verticalDamageReduction: 0.25,
-    maxSpeed: 32,
-    acceleration: 0.35,
-    rotateSpeed: 0.8,
-    length: 248,
-    width: 33,
-    fundsCost: 560,
-    timeCost: 113,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "FR/380/45/4",
-          posPercent: 0.39,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 前主炮 B（超射）
-        {
-          name: "FR/380/45/4",
-          posPercent: 0.13,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-      ],
-      secondaryGuns: [
-        // 后部中线 152mm 三联装副炮
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.43,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-        // 舰艉 152mm 三联装副炮：右舷 / 左舷
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.53,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.53,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
-        },
-      ],
-      antiAircraftGuns: [
-        // 舯部 100mm 双联装高射炮：右舷 / 左舷
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.39,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.39,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [225, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.32,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.32,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [225, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.25,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.25,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.17,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.17,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.1,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.1,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.03,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.03,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        // 舰桥后方 57mm 双联装高炮：右舷 / 左舷
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: 0.23,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: 0.23,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: 0.08,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: 0.08,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.13,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.13,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.2,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.2,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.3,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.3,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [225, 360]
-        },
-        // 舰艉 57mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.78,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.78,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.88,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/57/60/2/Mle1951",
-          posPercent: -0.88,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
-        },
-      ],
-      torpedoes: [],
-      rockets: []
-    }
-  },
-  {
-    // 阿尔萨斯（1945 年暂定完工状态）
-    name: "alsace",
-    nation: "fr",
-    type: "battleship",
-    typeAbbr: "BB",
-    year: 1945,
-    totalHP: 50000,
-    horizontalDamageReduction: 0.5,
-    verticalDamageReduction: 0.25,
-    maxSpeed: 31,
-    acceleration: 0.35,
-    rotateSpeed: 0.8,
-    length: 265,
-    width: 36,
-    fundsCost: 560,
-    timeCost: 113,
-    weapon: {
-      mainGuns: [
-        // 前主炮 A
-        {
-          name: "FR/380/45/4",
-          posPercent: 0.44,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 前主炮 B（超射）
-        {
-          name: "FR/380/45/4",
-          posPercent: 0.24,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
-        },
-        // 后主炮 C
-        {
-          name: "FR/380/45/4",
-          posPercent: -0.51,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
-        },
-      ],
-      secondaryGuns: [
-        // 前部中线 152mm 三联装副炮
-        {
-          name: "FR/152/55/3",
-          posPercent: 0.13,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [210, 360]
-        },
-        // 后部中线 152mm 三联装副炮
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.32,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-        // 舰艉中线 152mm 三联装副炮
-        {
-          name: "FR/152/55/3",
-          posPercent: -0.4,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
-        },
-      ],
-      antiAircraftGuns: [
-        // 前部 100mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: 0.13,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: 0.13,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: 0.06,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: 0.06,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部 100mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.21,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.21,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.29,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/100/45/2/Mle1930",
-          posPercent: -0.29,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 前部 37mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: 0.3,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: 0.3,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
-        },
-        // 舰桥后方 37mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.03,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.03,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.11,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.11,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 后部 37mm 双联装高炮：左舷 / 右舷
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.24,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.24,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.33,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 315]
-        },
-        {
-          name: "FR/37/70/2/Mle1935",
-          posPercent: -0.33,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 前部 20mm 双联装机炮：左舷 / 右舷
-        {
-          name: "FR/20/70/2",
-          posPercent: 0.2,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
-        },
-        {
-          name: "FR/20/70/2",
-          posPercent: 0.2,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舯部中线 20mm 双联装机炮
-        {
-          name: "FR/20/70/2",
+          name: "FR/305/45/2",
           posPercent: 0.01,
-          rightFiringArc: [0, 135],
-          leftFiringArc: [225, 360]
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
         },
-        // 舰桥两侧 20mm 双联装机炮：左舷 / 右舷
+        // 右舷中部炮塔
         {
-          name: "FR/20/70/2",
+          name: "FR/305/45/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 主炮 E
+        {
+          name: "FR/305/45/2",
+          posPercent: -0.46,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 主炮 F
+        {
+          name: "FR/305/45/2",
+          posPercent: -0.59,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+      ],
+      secondaryGuns: [
+        // 22 门 138.6mm 单装副炮（两舷炮廓）
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.54,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.54,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.49,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.49,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.44,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
           posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.5,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.5,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 315]
         },
         {
-          name: "FR/20/70/2",
-          posPercent: -0.06,
+          name: "FR/138.6/55",
+          posPercent: -0.55,
           rightFiringArc: [45, 180],
           leftFiringArc: [360, 360]
         },
-        // 后部 20mm 四联装机炮：左舷 / 右舷
         {
-          name: "FR/20/70/4",
-          posPercent: -0.22,
+          name: "FR/138.6/55",
+          posPercent: -0.55,
           rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
+          leftFiringArc: [180, 315]
         },
+      ],
+      antiAircraftGuns: [
+        // 7 门 75mm/50 Mle 1922 单装高炮
         {
-          name: "FR/20/70/4",
-          posPercent: -0.22,
-          rightFiringArc: [0, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 舰艉 20mm 双联装机炮：左舷 / 右舷
-        {
-          name: "FR/20/70/2",
-          posPercent: -0.67,
+          name: "FR/75/50",
+          posPercent: 0.46,
           rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
+          leftFiringArc: [210, 330]
         },
         {
-          name: "FR/20/70/2",
-          posPercent: -0.67,
-          rightFiringArc: [0, 180],
+          name: "FR/75/50",
+          posPercent: 0.46,
+          rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         {
-          name: "FR/20/70/2",
-          posPercent: -0.89,
+          name: "FR/75/50",
+          posPercent: 0.28,
           rightFiringArc: [0, 0],
-          leftFiringArc: [180, 360]
+          leftFiringArc: [210, 330]
         },
         {
-          name: "FR/20/70/2",
-          posPercent: -0.89,
-          rightFiringArc: [0, 180],
+          name: "FR/75/50",
+          posPercent: 0.28,
+          rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.33,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.82,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
         },
       ],
       torpedoes: [],

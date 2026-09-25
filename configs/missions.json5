@@ -2613,7 +2613,7 @@
     displayNameRu: "Очень много кораблей",
     displayNameJa: "とてもたくさんの船",
     initFunds: 10000,
-    initCameraPos: [15, 32],
+    initCameraPos: [20, 32],
     mapName: "darwin",
     maxShipCount: 30,
     description: "舰队司令部 1941 年度全面战备检验——代号「怒海」，达尔文港海域集结了盟军与轴心两大阵营全部现役作战舰艇，从超级战列舰到鱼雷快艇、从舰队航母到医疗船，超过百艘的各型舰艇参演演习目标：逐舰检验火控系统、航行性能与损伤模型在跨阵营环境下的适配性全部七个增援点开放，可召唤涵盖所有类别的战舰进行补充——这是对联合舰队战备状态的全面检验，也是各位指挥官熟悉全系舰船的最佳练兵场。",
@@ -2739,14 +2739,14 @@
           "duke_of_york",
           "warspite",
           "tiger",
-          "courbet",
-          "bretagne",
-          "lorraine",
-          "dunkerque",
-          "richelieu",
-          "jean_bart",
-          "clemenceau",
           "alsace",
+          "clemenceau",
+          "jean_bart",
+          "richelieu",
+          "dunkerque",
+          "lorraine",
+          "bretagne",
+          "courbet",
         ],
       },
       {
@@ -3224,50 +3224,50 @@
       },
       // === French ===
       {
-        name: "courbet",
-        pos: [10, 35],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "bretagne",
-        pos: [11, 36],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "lorraine",
-        pos: [10, 37],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "dunkerque",
-        pos: [11, 38],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "richelieu",
-        pos: [10, 39],
-        rotation: 90,
-        belongPlayer: "HA"
-      },
-      {
-        name: "jean_bart",
-        pos: [11, 40],
+        name: "alsace",
+        pos: [10, 33],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
         name: "clemenceau",
-        pos: [10, 41],
+        pos: [11, 34],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "alsace",
-        pos: [11, 42],
+        name: "jean_bart",
+        pos: [10, 35],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "richelieu",
+        pos: [11, 36],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "dunkerque",
+        pos: [10, 37],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "lorraine",
+        pos: [11, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "bretagne",
+        pos: [10, 39],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "courbet",
+        pos: [11, 40],
         rotation: 90,
         belongPlayer: "HA"
       },
