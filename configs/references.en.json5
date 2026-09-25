@@ -2981,6 +2981,41 @@
     ],
   },
   {
+    name: "richelieu",
+    displayName: "Richelieu",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "Secondary Battery",
+        value: "5x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "Richelieu was the lead ship of France's last battleship class, represented here in its final 1936 design state. Full-load displacement was about 44,698 tons, with dimensions of 247.85 by 33.08 metres and a designed speed of 32 knots. Both quadruple 380 mm turrets were mounted forward, while five triple 152 mm dual-purpose turrets, six twin 37 mm mounts and six quadruple 13.2 mm machine-gun mounts completed the battery.",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Richelieu 1936 final design",
+        url: "https://www.shipbucket.com/drawings/3714",
+      },
+      {
+        name: "Wikipedia - French battleship Richelieu",
+        url: "https://en.wikipedia.org/wiki/French_battleship_Richelieu",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "Lorraine",
     type: "Battleship",
@@ -3048,6 +3083,20 @@
     ],
   },
   {
+    name: "FR/380/45/4",
+    displayName: "380mm/45 Mle 1935 Quadruple Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 380 mm/45 Mle 1935 naval gun used by the Richelieu-class battleships. Each quadruple turret contained two independently elevating twin-gun cradles; muzzle velocity was about 830 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 380 mm/45 Modèle 1935 gun",
+        url: "https://en.wikipedia.org/wiki/380_mm/45_Mod%C3%A8le_1935_gun",
+      },
+    ],
+  },
+  {
     name: "FR/340/45/2",
     displayName: "340mm/45 Mle 1912 Twin Main Gun",
     type: "Weapon",
@@ -3100,6 +3149,20 @@
       {
         name: "Wikipedia - Canon de 130 mm Modèle 1932 and 1935",
         url: "https://en.wikipedia.org/wiki/Canon_de_130_mm_Mod%C3%A8le_1932_and_1935",
+      },
+    ],
+  },
+  {
+    name: "FR/152/55/3",
+    displayName: "152mm/55 Mle 1930 Triple Dual-purpose Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 152 mm/55 Mle 1930 dual-purpose gun in a triple turret with an independent cradle for each barrel. Rate of fire was about 3-5 rounds per minute, maximum range about 26.1 km and muzzle velocity about 870 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 152 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
       },
     ],
   },

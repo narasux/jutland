@@ -2452,6 +2452,19 @@
     antiShip: true,
     antiAircraft: false
   },
+  // 法国海军 380mm/45 Mle 1935 四联装主炮
+  {
+    name: "FR/380/45/4",
+    bulletName: "FR/GB/380/1935",
+    bulletCount: 4,
+    reloadTime: 33,
+    range: 41.7,
+    bulletSpread: 190,
+    bulletSpeed: 830,
+    fundsCost: 40,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 法国海军 330mm/50 Mle 1931 四联装主炮
   {
     name: "FR/330/50/4",
@@ -2514,6 +2527,19 @@
     bulletSpread: 55,
     bulletSpeed: 800,
     fundsCost: 3,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国海军 152mm/55 Mle 1930 三联装高平两用炮
+  {
+    name: "FR/152/55/3",
+    bulletName: "FR/GB/152/1930",
+    bulletCount: 3,
+    reloadTime: 12,
+    range: 26,
+    bulletSpread: 75,
+    bulletSpeed: 870,
+    fundsCost: 5,
     antiShip: true,
     antiAircraft: true
   },

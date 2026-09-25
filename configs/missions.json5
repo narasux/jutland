@@ -2743,6 +2743,7 @@
           "bretagne",
           "lorraine",
           "dunkerque",
+          "richelieu",
         ],
       },
       {
@@ -3240,6 +3241,12 @@
       {
         name: "dunkerque",
         pos: [11, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "richelieu",
+        pos: [9, 37],
         rotation: 90,
         belongPlayer: "HA"
       },

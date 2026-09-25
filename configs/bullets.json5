@@ -889,6 +889,14 @@
     damage: 1600,
     criticalRate: 0.01
   },
+  // 法国海军 380mm/45 Mle 1935 主炮弹
+  {
+    name: "FR/GB/380/1935",
+    type: "shell",
+    diameter: 380,
+    damage: 2600,
+    criticalRate: 0.02
+  },
   // 法国海军 330mm/50 Mle 1931 主炮弹
   {
     name: "FR/GB/330/1931",
@@ -920,6 +928,14 @@
     diameter: 130,
     damage: 125,
     criticalRate: 0.002
+  },
+  // 法国海军 152mm/55 Mle 1930 高平两用炮弹
+  {
+    name: "FR/GB/152/1930",
+    type: "shell",
+    diameter: 152,
+    damage: 220,
+    criticalRate: 0.005
   },
   // 法国海军 75mm/50 Mle 1922 高炮弹
   {

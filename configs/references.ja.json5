@@ -2981,6 +2981,41 @@
     ],
   },
   {
+    name: "richelieu",
+    displayName: "リシュリュー",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "副砲",
+        value: "5x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "対空砲",
+        value: "6x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "対空砲",
+        value: "6x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "リシュリューはフランス海軍最後の戦艦級の一番艦で、本作では1936年の最終設計状態を採用する。満載排水量約44,698トン、全長247.85m、幅33.08m、設計速力32ノット。四連装380mm主砲塔2基を艦首側に集中配置し、152mm三連装両用砲5基、37mm連装高射砲6基、13.2mm四連装機関銃6基を搭載する。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Richelieu 1936 final design",
+        url: "https://www.shipbucket.com/drawings/3714",
+      },
+      {
+        name: "ウィキペディア - リシュリュー級戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%AA%E3%82%B7%E3%83%A5%E3%83%AA%E3%83%A5%E3%83%BC%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "ロレーヌ",
     type: "戦艦",
@@ -3048,6 +3083,20 @@
     ],
   },
   {
+    name: "FR/380/45/4",
+    displayName: "380mm/45 Mle 1935 四連装主砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の45口径380mm Mle 1935 艦砲。リシュリュー級戦艦の四連装砲塔に搭載され、内部は独立俯仰する2組の連装砲架に分かれていた。初速は約830 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 380 mm/45 Modèle 1935 gun",
+        url: "https://en.wikipedia.org/wiki/380_mm/45_Mod%C3%A8le_1935_gun",
+      },
+    ],
+  },
+  {
     name: "FR/340/45/2",
     displayName: "340mm/45 Mle 1912 連装主砲",
     type: "兵器",
@@ -3100,6 +3149,20 @@
       {
         name: "ウィキペディア - Canon de 130 mm Modèle 1932 and 1935",
         url: "https://en.wikipedia.org/wiki/Canon_de_130_mm_Mod%C3%A8le_1932_and_1935",
+      },
+    ],
+  },
+  {
+    name: "FR/152/55/3",
+    displayName: "152mm/55 Mle 1930 三連装両用砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の55口径152mm Mle 1930 高平両用砲。三連装砲塔は各砲が独立した砲架を持ち、発射速度は毎分約3～5発、最大射程約26.1km、初速約870 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 152 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
       },
     ],
   },

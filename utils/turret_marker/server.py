@@ -75,7 +75,7 @@ HTML = r"""<!doctype html>
     input[type="checkbox"] { accent-color: var(--accent); }
     main {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 340px;
+      grid-template-columns: minmax(0, 1fr);
       gap: 14px;
       padding: 14px 18px 24px;
     }
@@ -111,6 +111,32 @@ HTML = r"""<!doctype html>
       inset: 0;
       pointer-events: none;
     }
+    #arcPreview {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .arc-circle {
+      fill: none;
+      stroke: rgba(255, 255, 255, .38);
+      stroke-width: 1;
+      stroke-dasharray: 4 4;
+      vector-effect: non-scaling-stroke;
+    }
+    .arc-sector {
+      stroke-width: 1.5;
+      vector-effect: non-scaling-stroke;
+    }
+    .arc-sector.starboard {
+      fill: rgba(98, 214, 167, .18);
+      stroke: rgba(98, 214, 167, .95);
+    }
+    .arc-sector.port {
+      fill: rgba(101, 183, 255, .18);
+      stroke: rgba(101, 183, 255, .95);
+    }
     .cal-line {
       position: absolute;
       background: var(--accent);
@@ -141,9 +167,10 @@ HTML = r"""<!doctype html>
       color: var(--muted);
     }
     .side {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(340px, 1.2fr);
       gap: 12px;
+      align-items: start;
     }
     h2 { margin: 0 0 8px; font-size: 15px; }
     .hint { color: var(--muted); margin: 0 0 8px; }
@@ -179,20 +206,10 @@ HTML = r"""<!doctype html>
     }
     .arc-grid input { width: 100%; }
     .actions { display: flex; flex-wrap: wrap; gap: 7px; }
-    textarea {
-      width: 100%;
-      min-height: 92px;
-      resize: vertical;
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      background: #11151c;
-      color: var(--text);
-      padding: 8px;
-      font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
     .footnote { color: var(--muted); font-size: 12px; }
     @media (max-width: 900px) {
       main { grid-template-columns: 1fr; }
+      .side { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -230,8 +247,8 @@ HTML = r"""<!doctype html>
       </section>
 
       <section class="panel">
-        <h2>射界参考（不导出）</h2>
-        <p class="hint">按同类舰常见配置推荐，可人工修正；主输出仍然只有 posPercent。</p>
+        <h2>射界参考</h2>
+        <p class="hint">选中炮位后在地图上实时显示半透明射界，并写入项目 JSON；推荐值也可人工修正。</p>
         <div class="actions">
           <button id="recommendArc">按当前位置推荐</button>
           <button id="applyArc">应用到所选标记</button>
@@ -242,15 +259,8 @@ HTML = r"""<!doctype html>
           <label>左舷起<input id="leftStart" type="number" step="1"></label>
           <label>左舷止<input id="leftEnd" type="number" step="1"></label>
         </div>
-      </section>
-
-      <section class="panel">
-        <h2>当前类型 posPercent</h2>
-        <textarea id="output" readonly></textarea>
-        <div class="actions">
-          <button id="copy" class="primary">复制当前类型</button>
-          <button id="copyAll">复制全部</button>
-          <button id="copyProject">复制项目 JSON</button>
+        <div class="actions" style="margin-top: 8px;">
+          <button id="copyProject" class="primary">复制项目 JSON</button>
         </div>
         <div id="copyStatus" class="footnote"></div>
       </section>
@@ -275,7 +285,6 @@ HTML = r"""<!doctype html>
     const overlay = document.getElementById("overlay");
     const status = document.getElementById("status");
     const markerList = document.getElementById("markerList");
-    const output = document.getElementById("output");
     const copyStatus = document.getElementById("copyStatus");
     const typeButtons = document.getElementById("typeButtons");
     const snap = document.getElementById("snap");
@@ -476,15 +485,52 @@ HTML = r"""<!doctype html>
       saveState();
     }
 
-    function updateOutput() {
-      const values = state.markers
-        .filter(marker => marker.type === state.type)
-        .map(marker => fmt(marker.pos));
-      output.value = values.join("\n");
-    }
-
     function renderOverlay() {
       overlay.innerHTML = "";
+      const marker = selectedMarker();
+      if (marker) {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.id = "arcPreview";
+        svg.setAttribute("viewBox", `0 0 ${meta.width} ${meta.height}`);
+        svg.setAttribute("preserveAspectRatio", "none");
+
+        // 射界圆周至少延伸到离当前炮位最远的画布角落。
+        const radius = Math.max(
+          Math.hypot(marker.x, marker.y),
+          Math.hypot(meta.width - marker.x, marker.y),
+          Math.hypot(marker.x, meta.height - marker.y),
+          Math.hypot(meta.width - marker.x, meta.height - marker.y),
+        );
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", marker.x);
+        circle.setAttribute("cy", marker.y);
+        circle.setAttribute("r", radius);
+        circle.setAttribute("class", "arc-circle");
+        svg.appendChild(circle);
+
+        const point = angle => {
+          const radians = angle * Math.PI / 180;
+          return [marker.x + radius * Math.cos(radians), marker.y + radius * Math.sin(radians)];
+        };
+        const addSector = (start, end, side) => {
+          start = Math.max(0, Math.min(360, Number(start)));
+          end = Math.max(0, Math.min(360, Number(end)));
+          if (end <= start) return;
+          const [startX, startY] = point(start);
+          const [endX, endY] = point(end);
+          const largeArc = end - start > 180 ? 1 : 0;
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute(
+            "d",
+            `M ${marker.x} ${marker.y} L ${startX} ${startY} A ${radius} ${radius} 0 ${largeArc} 1 ${endX} ${endY} Z`,
+          );
+          path.setAttribute("class", `arc-sector ${side}`);
+          svg.appendChild(path);
+        };
+        addSector(marker.arcs.rightStart, marker.arcs.rightEnd, "starboard");
+        addSector(marker.arcs.leftStart, marker.arcs.leftEnd, "port");
+        overlay.appendChild(svg);
+      }
       const span = meta.axis === "y" ? meta.height : meta.width;
       for (const [coord, className] of [[state.start, "start"], [state.end, "end"]]) {
         const line = document.createElement("div");
@@ -546,6 +592,19 @@ HTML = r"""<!doctype html>
       arcInputs.leftEnd.value = marker.arcs.leftEnd;
     }
 
+    function syncArcInputs() {
+      const marker = selectedMarker();
+      if (!marker) return;
+      marker.arcs = {
+        rightStart: Number(arcInputs.rightStart.value),
+        rightEnd: Number(arcInputs.rightEnd.value),
+        leftStart: Number(arcInputs.leftStart.value),
+        leftEnd: Number(arcInputs.leftEnd.value)
+      };
+      renderOverlay();
+      saveState();
+    }
+
     function selectedMarker() {
       return state.markers.find(marker => marker.id === state.selected) ?? null;
     }
@@ -560,7 +619,6 @@ HTML = r"""<!doctype html>
       renderTypeButtons();
       renderOverlay();
       renderList();
-      updateOutput();
       fillArcs(selectedMarker());
     }
 
@@ -638,15 +696,14 @@ HTML = r"""<!doctype html>
         status.textContent = "请先选择一个标记。";
         return;
       }
-      marker.arcs = {
-        rightStart: Number(arcInputs.rightStart.value),
-        rightEnd: Number(arcInputs.rightEnd.value),
-        leftStart: Number(arcInputs.leftStart.value),
-        leftEnd: Number(arcInputs.leftEnd.value)
-      };
+      syncArcInputs();
       status.textContent = "已应用人工修正的射界（仅保留在当前会话）。";
-      renderList();
+      render();
       saveState();
+    });
+
+    Object.values(arcInputs).forEach(input => {
+      input.addEventListener("input", syncArcInputs);
     });
 
     async function copyText(text, label) {
@@ -667,16 +724,14 @@ HTML = r"""<!doctype html>
       }
     }
 
-    document.getElementById("copy").addEventListener("click", () => {
-      copyText(output.value, "当前类型 posPercent");
-    });
-
-    document.getElementById("copyAll").addEventListener("click", () => {
-      const text = state.markers.map(marker => fmt(marker.pos)).join("\n");
-      copyText(text, "全部 posPercent");
-    });
-
     document.getElementById("copyProject").addEventListener("click", () => {
+      const mismatches = typeDefs
+        .filter(item => item.expected != null && markerCount(item.name) !== item.expected)
+        .map(item => `${item.label} ${markerCount(item.name)}/${item.expected}`);
+      if (mismatches.length > 0) {
+        copyStatus.textContent = `数量不匹配，请先修正：${mismatches.join("，")}`;
+        return;
+      }
       copyText(JSON.stringify(projectData(), null, 2), "项目 JSON");
     });
 
@@ -722,8 +777,11 @@ TYPE_LABELS = {
     "aa": "防空炮",
     "aa75": "75mm 高炮",
     "aa37": "37mm 高炮",
+    "aa100": "100mm 高炮",
     "aa40": "40mm 高炮",
     "aa132": "13.2mm 机枪",
+    "aa132q": "13.2mm 四联装机枪",
+    "aa132t": "13.2mm 双联装机枪",
     "aa20": "20mm 机炮",
     "aa20d": "20mm 双联",
     "torpedo": "鱼雷",

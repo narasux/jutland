@@ -2922,6 +2922,41 @@
     ],
   },
   {
+    name: "richelieu",
+    displayName: "黎塞留",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x4 380mm/45 Mle 1935",
+      },
+      {
+        label: "副炮",
+        value: "5x3 152mm/55 Mle 1930",
+      },
+      {
+        label: "防空炮",
+        value: "6x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "防空炮",
+        value: "6x4 13.2mm Hotchkiss",
+      },
+    ],
+    description: "黎塞留号是法国海军黎塞留级快速战列舰首舰，本作采用其 1936 年最终设计状态。满载排水量约 44,698 吨，舰长 247.85 米、宽 33.08 米，设计航速 32 节。两座四联装 380 毫米主炮全部前置，五座三联装 152 毫米两用炮、六座双联装 37 毫米高炮和六座四联装 13.2 毫米机枪构成副炮与防空火力。",
+    author: "Redhorse, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Richelieu 1936 final design",
+        url: "https://www.shipbucket.com/drawings/3714",
+      },
+      {
+        name: "维基百科 - 黎胥留號戰列艦",
+        url: "https://zh.wikipedia.org/wiki/%E9%BB%8E%E8%83%A5%E7%95%99%E8%99%9F%E6%88%B0%E5%88%97%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "洛林",
     type: "战列舰",
@@ -2989,6 +3024,20 @@
     ],
   },
   {
+    name: "FR/380/45/4",
+    displayName: "380mm/45 Mle 1935 四联装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 380 毫米/45 倍径 Mle 1935 舰炮，装备黎塞留级战列舰，四联装炮塔由两组双联装炮架构成，炮弹初速约 830 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 380 mm/45 Modèle 1935 gun",
+        url: "https://en.wikipedia.org/wiki/380_mm/45_Mod%C3%A8le_1935_gun",
+      },
+    ],
+  },
+  {
     name: "FR/340/45/2",
     displayName: "340mm/45 Mle 1912 双联装主炮",
     type: "武器",
@@ -3041,6 +3090,20 @@
       {
         name: "维基百科 - Canon de 130 mm Modèle 1932 and 1935",
         url: "https://en.wikipedia.org/wiki/Canon_de_130_mm_Mod%C3%A8le_1932_and_1935",
+      },
+    ],
+  },
+  {
+    name: "FR/152/55/3",
+    displayName: "152mm/55 Mle 1930 三联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 152 毫米/55 倍径 Mle 1930 高平两用炮，三联装炮塔每门炮拥有独立炮架，射速约每分钟 3 至 5 发，最大射程约 26.1 公里，炮弹初速约 870 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 152 mm Modèle 1930",
+        url: "https://en.wikipedia.org/wiki/Canon_de_152_mm_Mod%C3%A8le_1930",
       },
     ],
   },
