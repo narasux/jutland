@@ -2915,6 +2915,37 @@
     ],
   },
   {
+    name: "courbet",
+    displayName: "クールベ",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "6x2 305mm/45 Mle 1906",
+      },
+      {
+        label: "副砲",
+        value: "22x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "対空砲",
+        value: "7x1 75mm/50 Mle 1922",
+      },
+    ],
+    description: "クールベはフランス海軍初の弩級戦艦級の一番艦で、1914年に就役した。1927年から1931年の大改修後は満載排水量約24,748トン、全長166m、幅27m、公試速力18.2ノット。前後と両舷中部に連装305mm主砲塔を計6基備え、改装後の対空兵装は75mm単装砲7門となった。1931年に射撃訓練部隊へ編入された。",
+    author: "Karle94, Garlicdesign, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Courbet 1932",
+        url: "https://www.shipbucket.com/drawings/3589",
+      },
+      {
+        name: "ウィキペディア - クールベ級戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%BC%E3%83%AB%E3%83%99%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "ロレーヌ",
     type: "戦艦",
@@ -2950,6 +2981,20 @@
       {
         name: "ウィキペディア - French battleship Lorraine",
         url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
+    name: "FR/305/45/2",
+    displayName: "305mm/45 Mle 1906 連装主砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の45口径305mm Mle 1906-1910 艦砲。クールベ級戦艦に搭載され、初速は約780 m/s。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 305mm/45 Modèle 1906 gun",
+        url: "https://en.wikipedia.org/wiki/305mm/45_Mod%C3%A8le_1906_gun",
       },
     ],
   },

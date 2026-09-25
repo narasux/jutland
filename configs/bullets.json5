@@ -881,6 +881,14 @@
     damage: 4,
     criticalRate: 0.001
   },
+  // 法国海军 305mm/45 Mle 1906 主炮弹
+  {
+    name: "FR/GB/305/1906",
+    type: "shell",
+    diameter: 305,
+    damage: 1600,
+    criticalRate: 0.01
+  },
   // 法国海军 340mm/45 Mle 1912 主炮弹
   {
     name: "FR/GB/340/1912",

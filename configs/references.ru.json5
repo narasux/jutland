@@ -2915,6 +2915,37 @@
     ],
   },
   {
+    name: "courbet",
+    displayName: "Курбе",
+    type: "Линкор",
+    armaments: [
+      {
+        label: "Главная батарея",
+        value: "6x2 305mm/45 Mle 1906",
+      },
+      {
+        label: "Вспомогательная батарея",
+        value: "22x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "7x1 75mm/50 Mle 1922",
+      },
+    ],
+    description: "«Курбе» — головной корабль первого французского типа дредноутов, вступивший в строй в 1914 году. После модернизации 1927-1931 годов полное водоизмещение составляло около 24 748 т, длина 166 м, ширина 27 м, а скорость на испытаниях — 18,2 узла. Шесть спаренных 305-мм башен располагались в носу, корме и по бортам; зенитная батарея состояла из семи 75-мм орудий. В 1931 году корабль вошёл в состав артиллерийской учебной дивизии.",
+    author: "Karle94, Garlicdesign, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Courbet 1932",
+        url: "https://www.shipbucket.com/drawings/3589",
+      },
+      {
+        name: "Википедия - Линкоры типа «Курбе»",
+        url: "https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%BA%D0%BE%D1%80%D1%8B_%D1%82%D0%B8%D0%BF%D0%B0_%C2%AB%D0%9A%D1%83%D1%80%D0%B1%D0%B5%C2%BB",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "Лоррейн",
     type: "Линкор",
@@ -2950,6 +2981,20 @@
       {
         name: "Википедия - French battleship Lorraine",
         url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
+    name: "FR/305/45/2",
+    displayName: "305mm/45 Mle 1906, спаренная главная башня",
+    type: "Оружие",
+    armaments: [],
+    description: "Французское морское орудие 305 мм/45 Mle 1906-1910, применявшееся на линкорах типа «Курбе». Начальная скорость снаряда около 780 м/с.",
+    author: "",
+    links: [
+      {
+        name: "Википедия - 305mm/45 Modèle 1906 gun",
+        url: "https://en.wikipedia.org/wiki/305mm/45_Mod%C3%A8le_1906_gun",
       },
     ],
   },

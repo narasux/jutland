@@ -2740,6 +2740,7 @@
           "warspite",
           "tiger",
           "bretagne",
+          "courbet",
           "lorraine",
         ],
       },
@@ -3218,14 +3219,20 @@
       },
       // === French ===
       {
-        name: "bretagne",
+        name: "courbet",
         pos: [10, 35],
         rotation: 90,
         belongPlayer: "HA"
       },
       {
-        name: "lorraine",
+        name: "bretagne",
         pos: [11, 36],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "lorraine",
+        pos: [10, 37],
         rotation: 90,
         belongPlayer: "HA"
       },

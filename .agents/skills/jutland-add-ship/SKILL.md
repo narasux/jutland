@@ -41,6 +41,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 - 裁剪后确认最外层非透明像素不贴边，但舰艏、舰艉只保留防止截断所需的小安全边，通常为原图 2~6 px，且不得超过舰体长轴的 1%。不要把整张素材画布或大段透明区域带入缩放；否则按真实长度生成的资源会让可见舰体偏小。
 - 以主视图的 alpha 边界核对舰艏、舰艉裁切位置，忽略签名、网址、比例尺和其他视图的零散像素。若原图某端已经贴边，在该端补 2~4 px 透明安全边，不得继续裁掉船体。
 - 按现有资源方向统一：俯视图舰艏朝上，侧视图舰艏朝右。只旋转或裁剪，不改变舰体比例。
+- 俯视图必须根据原始几何判断舰艏：横向原图舰艏朝右时逆时针旋转 90°（Pillow `rotate(90, expand=True)`），舰艏朝左时顺时针旋转 90°。不得只凭裁剪框左右端点或首尾轮廓猜测，要用炮塔/上层建筑布局、舰艏外飘、锚位和原图说明二次核对。
 - 若此时发现白底残留，返回 `jutland-clean-ship-image` 处理并等待用户重新确认，不在本 skill 内清理。
 
 ### 3. 备份并等比例缩放
@@ -64,7 +65,24 @@ python3 .agents/skills/jutland-add-ship/scripts/resize_ship_image.py \
   --target-long-axis 1044 --mode line-art --preview-dir "$(mktemp -d)"
 ```
 
-### 4. 添加舰船配置
+### 4. 浏览器确认武器位置
+
+- 正式俯视图缩放完成后、写入 `ships.json5` 前，必须启动 `utils/turret_marker/server.py`，让用户在浏览器中确认所有武器挂点；不得仅凭侧视图或俯视图目测直接填写 `posPercent`。
+- 游戏资源保持舰艏朝上；标记页用 `--rotate 90` 将预览顺时针转到舰艏朝右，再让用户点击。若预览舰艏方向仍不对，先修正俯视图方向或启动参数，不要继续标记。
+- 启动时用 `--types` 写明武器类型和预期数量，例如：
+
+```bash
+python3 utils/turret_marker/server.py \
+  resources/images/ships/top/battleship/example.png \
+  --types 'main:5,secondary:14,aa75:8' \
+  --rotate 90
+```
+
+- 用户完成标记后导出“项目 JSON”；按其中的 `posPercent`、`side`、数量和类型写入配置。标记数量或左右舷与资料、图片不一致时先回到浏览器修正，不得手工补一个近似值。
+- 炮廓炮和其他舷侧武器必须按 `side` 单舷配置：左舷只让 `leftFiringArc` 有效并写 `rightFiringArc: [0, 0]`，右舷只让 `rightFiringArc` 有效并写 `leftFiringArc: [360, 360]`。不得让同一条舷侧炮同时拥有左右两段有效射界。
+- 默认端口被占用时改用 `--port`，不要终止来源不明的既有服务。
+
+### 5. 添加舰船配置
 
 - 将条目放到同舰种、同阵营附近。
 - `totalHP` 优先使用满载排水量；`maxSpeed` 使用节。费用、时间、减伤、加速度和转向从选定基准推导。
@@ -78,14 +96,14 @@ python3 .agents/skills/jutland-add-ship/scripts/resize_ship_image.py \
 - 弹药可复用最接近的现有条目；按历史射速、射程和散布调整性能，`bulletCount` 表示每座炮的炮管数。
 - 口径 `>=40mm` 的专用防空炮保留 Mark 标识；更小口径沿用通用条目。同步更新图鉴武装描述。
 
-### 5. 处理混合舰种
+### 6. 处理混合舰种
 
 - 航空战列舰、航空巡洋舰按主要水面身份选择现有 `type`，航空能力通过 `aircraft` 表达。
 - 只有独立 UI 分类、资源路由或玩法规则确实需要时，才扩展 Go 枚举和加载器。
 - 图片保留甲板、弹射器和舷外平台的原始比例；配置 `width` 仍使用舰体宽度。
 - 不为单舰修改全局起降、返航或回收逻辑。`TestAll` 只按主 `type` 分组一次。
 
-### 6. 更新图鉴与 TestAll
+### 7. 更新图鉴与 TestAll
 
 - 在所有正式语言的 references 文件中添加同名条目：规格、游戏中实际武装、简短历史、作者，以及资料链接。
 - 每个舰船图鉴的 `links` 统一只保留两项且顺序固定：第一项是用户提供或原作者发布的素材来源；第二项是目标语言维基百科中与该舰、舰级或型号最直接相关的条目。目标语言没有对应条目时，第二项回退到英文维基百科。
@@ -93,9 +111,10 @@ python3 .agents/skills/jutland-add-ship/scripts/resize_ship_image.py \
 - 在 `TestAll` 对应 `providedShipNames` 添加舰名，并在同舰种网格中增加一艘己方 `HA` 初始舰，避免重叠。
 - 除非用户明确要求，不修改其他任务。
 
-### 7. 验证
+### 8. 验证
 
 - 确认原尺寸备份和正式俯视/侧视 PNG 均存在，方向正确，缩放保持长宽比；正式图舰艏、舰艉不得有会使可见舰体明显小于 `length*4` 的透明留白。
+- 确认炮塔标记项目 JSON 已由用户确认，且 `ships.json5` 中的 `posPercent`、左右舷和武器数量与导出结果一致。
 - 搜索舰名，确认 `ships.json5`、`references.json5`、`TestAll` 和 PNG 文件名一致且没有重复定义。
 - 搜索所有武器、弹药、发射器和飞机引用，确认上游配置存在。
 - 用 `view_image` 检查正式 PNG 的完整轮廓和透明边缘；用 `git diff --check` 检查文本问题。

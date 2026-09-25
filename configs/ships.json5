@@ -18948,6 +18948,252 @@
   },
   // 法国海军
   {
+    // 孤拔
+    name: "courbet",
+    nation: "fr",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1932,
+    totalHP: 25579,
+    horizontalDamageReduction: 0.34,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 18.2,
+    acceleration: 0.22,
+    rotateSpeed: 0.72,
+    length: 166,
+    width: 27,
+    fundsCost: 375,
+    timeCost: 89,
+    weapon: {
+      mainGuns: [
+        // 主炮 A
+        {
+          name: "FR/305/45/2",
+          posPercent: 0.59,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 主炮 B
+        {
+          name: "FR/305/45/2",
+          posPercent: 0.46,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 左舷中部炮塔
+        {
+          name: "FR/305/45/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部炮塔
+        {
+          name: "FR/305/45/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 主炮 E
+        {
+          name: "FR/305/45/2",
+          posPercent: -0.46,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 主炮 F
+        {
+          name: "FR/305/45/2",
+          posPercent: -0.59,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+      ],
+      secondaryGuns: [
+        // 22 门 138.6mm 单装副炮（两舷炮廓）
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.54,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.54,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.49,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.49,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.44,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: 0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.5,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.5,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.55,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/138.6/55",
+          posPercent: -0.55,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+      ],
+      antiAircraftGuns: [
+        // 7 门 75mm/50 Mle 1922 单装高炮
+        {
+          name: "FR/75/50",
+          posPercent: 0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.46,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 330]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: 0.28,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.33,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/75/50",
+          posPercent: -0.82,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+      ],
+      torpedoes: [],
+      rockets: []
+    }
+  },
+  {
     // 布列塔尼
     name: "bretagne",
     nation: "fr",

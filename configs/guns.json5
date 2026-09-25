@@ -2439,6 +2439,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 法国海军 305mm/45 Mle 1906 双联装主炮
+  {
+    name: "FR/305/45/2",
+    bulletName: "FR/GB/305/1906",
+    bulletCount: 2,
+    reloadTime: 40,
+    range: 26,
+    bulletSpread: 150,
+    bulletSpeed: 780,
+    fundsCost: 10,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 法国海军 340mm/45 Mle 1912 双联装主炮
   {
     name: "FR/340/45/2",

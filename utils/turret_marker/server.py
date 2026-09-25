@@ -261,6 +261,7 @@ HTML = r"""<!doctype html>
     const meta = __META__;
     const typeDefs = meta.types;
     const storageKey = `jutland-turret-marker:${meta.key}`;
+    const arcRulesVersion = 2;
     const state = {
       markers: [],
       type: typeDefs[0]?.name ?? "main",
@@ -344,6 +345,7 @@ HTML = r"""<!doctype html>
           x: Number(marker.x.toFixed(2)),
           y: Number(marker.y.toFixed(2)),
           posPercent: Number(fmt(marker.pos)),
+          arcs: marker.arcs,
           snapped: marker.snapped
         }))
       };
@@ -355,7 +357,8 @@ HTML = r"""<!doctype html>
           markers: state.markers,
           start: state.start,
           end: state.end,
-          type: state.type
+          type: state.type,
+          arcRulesVersion
         }));
       } catch {
         copyStatus.textContent = "浏览器无法保存标注状态。";
@@ -366,7 +369,16 @@ HTML = r"""<!doctype html>
       try {
         const saved = JSON.parse(localStorage.getItem(storageKey));
         if (!saved || !Array.isArray(saved.markers)) return;
-        state.markers = saved.markers;
+        state.markers = saved.markers.map(marker => {
+          const side = marker.side ?? sideFor(marker.x, marker.y);
+          return {
+            ...marker,
+            side,
+            arcs: saved.arcRulesVersion === arcRulesVersion
+              ? marker.arcs
+              : recommendArc(marker.type, marker.pos, side)
+          };
+        });
         state.start = Number(saved.start ?? meta.start);
         state.end = Number(saved.end ?? meta.end);
         for (const marker of state.markers) {
@@ -394,18 +406,34 @@ HTML = r"""<!doctype html>
       }
     }
 
-    function recommendArc(type, pos) {
+    function recommendArc(type, pos, side = "center") {
+      let arcs;
       if (type === "torpedo") {
-        return { rightStart: 30, rightEnd: 150, leftStart: 210, leftEnd: 330 };
+        arcs = { rightStart: 30, rightEnd: 150, leftStart: 210, leftEnd: 330 };
+      } else if (type === "main") {
+        if (side !== "center") {
+          arcs = { rightStart: 0, rightEnd: 180, leftStart: 180, leftEnd: 360 };
+        } else if (pos > 0.25) {
+          arcs = { rightStart: 0, rightEnd: 150, leftStart: 210, leftEnd: 360 };
+        } else if (pos < -0.25) {
+          arcs = { rightStart: 30, rightEnd: 180, leftStart: 180, leftEnd: 330 };
+        } else {
+          arcs = { rightStart: 45, rightEnd: 135, leftStart: 225, leftEnd: 315 };
+        }
+      } else if (pos > 0.25) {
+        arcs = { rightStart: 30, rightEnd: 150, leftStart: 210, leftEnd: 330 };
+      } else if (pos < -0.25) {
+        arcs = { rightStart: 45, rightEnd: 180, leftStart: 180, leftEnd: 315 };
+      } else {
+        arcs = { rightStart: 0, rightEnd: 180, leftStart: 180, leftEnd: 360 };
       }
-      if (type === "main") {
-        if (pos > 0.25) return { rightStart: 0, rightEnd: 150, leftStart: 210, leftEnd: 360 };
-        if (pos < -0.25) return { rightStart: 30, rightEnd: 180, leftStart: 180, leftEnd: 330 };
-        return { rightStart: 45, rightEnd: 135, leftStart: 225, leftEnd: 315 };
+      if (side === "starboard") {
+        return { ...arcs, leftStart: 360, leftEnd: 360 };
       }
-      if (pos > 0.25) return { rightStart: 0, rightEnd: 150, leftStart: 210, leftEnd: 360 };
-      if (pos < -0.25) return { rightStart: 30, rightEnd: 180, leftStart: 180, leftEnd: 330 };
-      return { rightStart: 0, rightEnd: 180, leftStart: 180, leftEnd: 360 };
+      if (side === "port") {
+        return { ...arcs, rightStart: 0, rightEnd: 0 };
+      }
+      return arcs;
     }
 
     function nearestSameType(raw) {
@@ -437,7 +465,7 @@ HTML = r"""<!doctype html>
         pos,
         side: sideFor(x, y),
         snapped: Boolean(nearest),
-        arcs: recommendArc(state.type, pos)
+        arcs: recommendArc(state.type, pos, sideFor(x, y))
       };
       state.markers.push(marker);
       state.selected = marker.id;
@@ -599,7 +627,7 @@ HTML = r"""<!doctype html>
         status.textContent = "请先选择一个标记。";
         return;
       }
-      marker.arcs = recommendArc(marker.type, marker.pos);
+      marker.arcs = recommendArc(marker.type, marker.pos, marker.side);
       fillArcs(marker);
       status.textContent = "已按当前位置重新推荐射界。";
     });

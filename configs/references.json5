@@ -2856,6 +2856,37 @@
     ],
   },
   {
+    name: "courbet",
+    displayName: "孤拔",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "6x2 305mm/45 Mle 1906",
+      },
+      {
+        label: "副炮",
+        value: "22x1 138.6mm/55 Mle 1910",
+      },
+      {
+        label: "防空炮",
+        value: "7x1 75mm/50 Mle 1922",
+      },
+    ],
+    description: "孤拔号是法国海军孤拔级战列舰首舰，1914 年服役。1927 至 1931 年大修后满载排水量约 24,748 吨，舰长 166 米、宽 27 米，试航航速约 18.2 节。六座双联装 305 毫米主炮分列前后与两舷中部，改装后以七门 75 毫米高炮承担防空任务，并于 1931 年转入射击训练舰队。",
+    author: "Karle94, Garlicdesign, David Latuch",
+    links: [
+      {
+        name: "Shipbucket - Courbet 1932",
+        url: "https://www.shipbucket.com/drawings/3589",
+      },
+      {
+        name: "维基百科 - 孤拔号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%BA%93%E5%B0%94%E8%B4%9D%E5%8F%B7%E6%88%98%E8%88%B0",
+      },
+    ],
+  },
+  {
     name: "lorraine",
     displayName: "洛林",
     type: "战列舰",
@@ -2891,6 +2922,20 @@
       {
         name: "维基百科 - 洛林号战列舰",
         url: "https://en.wikipedia.org/wiki/French_battleship_Lorraine",
+      },
+    ],
+  },
+  {
+    name: "FR/305/45/2",
+    displayName: "305mm/45 Mle 1906 双联装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 305 毫米/45 倍径 Mle 1906-1910 舰炮，装备孤拔级战列舰，炮弹初速约 780 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 305mm/45 Modèle 1906 gun",
+        url: "https://en.wikipedia.org/wiki/305mm/45_Mod%C3%A8le_1906_gun",
       },
     ],
   },
