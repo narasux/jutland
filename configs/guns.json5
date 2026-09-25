@@ -2802,5 +2802,44 @@
     fundsCost: 2,
     antiShip: true,
     antiAircraft: true
+  },
+  // 法国空军 20mm HS.404 航空机关炮
+  {
+    name: "FR/AIR/20/HS404",
+    bulletName: "FR/GB/20/1938",
+    bulletCount: 1,
+    reloadTime: 0.09,
+    range: 3.5,
+    bulletSpread: 22,
+    bulletSpeed: 880,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国空军 7.5mm MAC 1934 航空机枪
+  {
+    name: "FR/AIR/7.5/MAC1934",
+    bulletName: "FR/GB/7.5/1929",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 1.5,
+    bulletSpread: 15,
+    bulletSpeed: 830,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 法国空军 7.5mm Darne 航空机枪
+  {
+    name: "FR/AIR/7.5/Darne",
+    bulletName: "FR/GB/7.5/1929",
+    bulletCount: 1,
+    reloadTime: 0.055,
+    range: 1.5,
+    bulletSpread: 16,
+    bulletSpeed: 830,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
   }
 ]

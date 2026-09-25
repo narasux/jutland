@@ -5248,4 +5248,328 @@
       ]
     }
   },
+  // 法国空军 / 海军航空兵
+  {
+    // 波泰 Potez 631 C.3 双发重型战斗机
+    name: "Potez631",
+    nation: "fr",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1938,
+    totalHP: 42,
+    damageReduction: 0.35,
+    maxSpeed: 443,
+    acceleration: 22,
+    rotateSpeed: 7,
+    length: 10.93,
+    width: 16,
+    fundsCost: 7,
+    timeCost: 4,
+    tonnage: 3.76,
+    range: 1220,
+    weapon: {
+      guns: [
+        // 机腹（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.7,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机腹（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.7,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.5mm MAC 1934，后半球自卫）
+        {
+          name: "FR/AIR/7.5/MAC1934",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 卢瓦尔-纽波特 LN 401 舰载俯冲轰炸机
+    name: "LN401",
+    nation: "fr",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    year: 1939,
+    totalHP: 34,
+    damageReduction: 0.38,
+    maxSpeed: 380,
+    acceleration: 18,
+    rotateSpeed: 6,
+    length: 9.75,
+    width: 14,
+    fundsCost: 7,
+    timeCost: 4,
+    tonnage: 2.835,
+    range: 1200,
+    weapon: {
+      guns: [
+        // 桨毂（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（7.5mm Darne，固定前射）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（7.5mm Darne，固定前射）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      bombs: [
+        {
+          name: "FR/BB/225",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 拉泰科埃尔 Late 298 水上鱼雷机
+    name: "Late298",
+    nation: "fr",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1938,
+    totalHP: 48,
+    damageReduction: 0.48,
+    maxSpeed: 295,
+    acceleration: 18,
+    rotateSpeed: 6,
+    length: 12.56,
+    width: 15.5,
+    fundsCost: 10,
+    timeCost: 6,
+    tonnage: 4.533,
+    range: 1000,
+    weapon: {
+      guns: [
+        // 机翼（7.5mm Darne，固定前射）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（7.5mm Darne，固定前射）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.5mm Darne，后半球自卫）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "FR/AST/400/1926",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 卢瓦尔 Loire 130 水上侦察机
+    name: "Loire130",
+    nation: "fr",
+    type: "other",
+    typeAbbr: "OTHER",
+    year: 1937,
+    totalHP: 30,
+    damageReduction: 0.35,
+    maxSpeed: 245,
+    acceleration: 12,
+    rotateSpeed: 6,
+    length: 11.3,
+    width: 16,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 3.5,
+    range: 1100,
+    weapon: {
+      guns: [
+        // 机首（7.5mm Darne，固定前射）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.7,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.5mm Darne，后半球自卫）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 布雷盖 Br.521 Bizerte 远程水上侦察机
+    name: "Br521",
+    nation: "fr",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1935,
+    totalHP: 70,
+    damageReduction: 0.4,
+    maxSpeed: 243,
+    acceleration: 14,
+    rotateSpeed: 5,
+    length: 20.48,
+    width: 35.18,
+    fundsCost: 27,
+    timeCost: 11,
+    tonnage: 15.094,
+    range: 2100,
+    weapon: {
+      guns: [
+        // 机首（7.5mm Darne，固定前射）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.7,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背前部（7.5mm Darne，上方自卫）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.1,
+          rightFiringArc: [40, 180],
+          leftFiringArc: [180, 320]
+        },
+        // 机背后部（7.5mm Darne，后方自卫）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: -0.2,
+          rightFiringArc: [80, 180],
+          leftFiringArc: [180, 280]
+        },
+        // 机腹前部（7.5mm Darne，下方自卫）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.1,
+          rightFiringArc: [40, 180],
+          leftFiringArc: [180, 320]
+        },
+        // 机腹后部（7.5mm Darne，下方自卫）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: -0.2,
+          rightFiringArc: [80, 180],
+          leftFiringArc: [180, 280]
+        }
+      ],
+      bombs: [
+        {
+          name: "FR/BB/75/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "FR/BB/75/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "FR/BB/75/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "FR/BB/75/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 沃特 V-156F 法国海军舰载侦察俯冲轰炸机
+    name: "V-156F",
+    nation: "fr",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    year: 1939,
+    totalHP: 32,
+    damageReduction: 0.38,
+    maxSpeed: 375,
+    acceleration: 18,
+    rotateSpeed: 6,
+    length: 10.3,
+    width: 12.8,
+    fundsCost: 6,
+    timeCost: 4,
+    tonnage: 2.948,
+    range: 1169,
+    weapon: {
+      guns: [
+        // 机翼（7.5mm Darne，固定前射）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.5mm Darne，后半球自卫）
+        {
+          name: "FR/AIR/7.5/Darne",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        {
+          name: "FR/BB/225",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "FR/BB/225",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
 ]

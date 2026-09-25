@@ -10600,4 +10600,189 @@
       },
     ],
   },
+  {
+    name: "Potez631",
+    displayName: "波泰 631 C.3",
+    type: "重型战斗机",
+    armaments: [
+      {
+        label: "机炮（机腹固定前射）",
+        value: "2 x 20mm HS.404",
+      },
+      {
+        label: "机枪（后座）",
+        value: "1 x 7.5mm MAC 1934",
+      },
+    ],
+    description: "波泰 631 C.3 是法国空军在 1930 年代后期装备的双发三座重型战斗机，1938 年服役。该机采用两台 Gnome-Rhône 14M 发动机，最大速度约 440 km/h，主要武装为机腹两门 20mm HS.404 机炮，并保留后座一挺 7.5mm MAC 1934 自卫机枪。受发动机功率和机体阻力限制，它的速度与爬升性能不如同期单发战斗机，但在 1940 年法国战役中仍承担昼间护航、夜战和战斗机编队指挥任务。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Potez 630 系列",
+        url: "https://en.wikipedia.org/wiki/Potez_630",
+      },
+      {
+        name: "History of War - Potez 631",
+        url: "https://www.historyofwar.org/articles/weapons_potez_631.html",
+      },
+    ],
+  },
+  {
+    name: "LN401",
+    displayName: "卢瓦尔-纽波特 LN 401",
+    type: "舰载俯冲轰炸机",
+    armaments: [
+      {
+        label: "机炮（机鼻固定前射）",
+        value: "1 x 20mm HS.404",
+      },
+      {
+        label: "机枪（机翼固定前射）",
+        value: "2 x 7.5mm Darne",
+      },
+      {
+        label: "炸弹",
+        value: "1 x 225kg",
+      },
+    ],
+    description: "卢瓦尔-纽波特 LN 401 是法国海军在 1939 年采用的单座舰载俯冲轰炸机。该机采用倒鸥翼和 Hispano-Suiza 12Xcrs 发动机，最大速度约 380 km/h，固定武装为一门 20mm HS.404 机炮和两挺 7.5mm Darne 机枪，机腹挂架可携带一枚 225kg 炸弹。它在 1940 年法国战役中用于攻击德军纵队，损失很大；游戏中按俯冲轰炸机接入。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Loire-Nieuport LN.40",
+        url: "https://en.wikipedia.org/wiki/Loire-Nieuport_LN.40",
+      },
+    ],
+  },
+  {
+    name: "FR/AIR/20/HS404",
+    displayName: "20mm HS.404 航空机关炮",
+    type: "武器",
+    armaments: [],
+    description: "法国 Hispano-Suiza HS.404 20 毫米航空机炮，使用 20×110mm 弹药，理论射速约 600 至 700 发/分，是法国战斗机及后续英美 Hispano 系列的重要基础。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "FR/AIR/7.5/MAC1934",
+    displayName: "7.5mm MAC 1934 航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "法国 MAC 1934 7.5 毫米航空机枪，使用 7.5×54mm 弹药，射速约 750 至 850 发/分，常见于法国军机的固定和活动枪架。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "FR/AIR/7.5/Darne",
+    displayName: "7.5mm Darne 航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "法国 Darne 7.5 毫米航空机枪，使用 7.5×54mm 弹药，结构紧凑、射速较高，装备 LN 401 等法国军机。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "Late298",
+    displayName: "拉泰科埃尔 Late 298",
+    type: "水上鱼雷机",
+    armaments: [
+      {
+        label: "机枪（机翼固定前射）",
+        value: "2 x 7.5mm Darne",
+      },
+      {
+        label: "机枪（后座）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "航空鱼雷",
+        value: "1 x 400mm 1926 年式 DA",
+      },
+    ],
+    description: "拉泰科埃尔 Late 298 是法国海军在 1938 年装备的单发双浮筒水上鱼雷机，也可执行俯冲轰炸和海上侦察任务。该机采用 880 马力的 Hispano-Suiza 12Ycrs 发动机，最大速度约 295 km/h，固定武装为两挺前射 7.5mm Darne 机枪，后座另有一挺活动机枪，机腹挂架可携带一枚 400mm 1926 年式 DA 航空鱼雷。它曾部署在法国本土基地和塔斯特指挥官号水上飞机母舰上，是法国海军二战中最成功的水上军机之一。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Latécoère 298",
+        url: "https://en.wikipedia.org/wiki/Lat%C3%A9co%C3%A8re_298",
+      },
+    ],
+  },
+  {
+    name: "Loire130",
+    displayName: "卢瓦尔 130",
+    type: "水上侦察机",
+    armaments: [
+      {
+        label: "机枪（机首固定前射）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "机枪（后座）",
+        value: "1 x 7.5mm Darne",
+      },
+    ],
+    description: "卢瓦尔 130 是法国海军在 1937 年装备的单发上单翼水上侦察机，主要由战列舰、巡洋舰和塔斯特指挥官号水上飞机母舰弹射或吊放使用。该机采用 Hispano-Suiza 12 缸液冷发动机，最大速度约 245 km/h，航程约 1,100 km，可执行舰队侦察、观察和联络任务。本作目前没有独立侦察行为，因此按其他类飞机接入；图鉴保留机首和后座各一挺 7.5mm Darne 机枪。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Loire 130",
+        url: "https://en.wikipedia.org/wiki/Loire_130",
+      },
+    ],
+  },
+  {
+    name: "Br521",
+    displayName: "布雷盖 Br.521 Bizerte",
+    type: "水平轰炸机",
+    armaments: [
+      {
+        label: "机枪（前向与自卫炮位）",
+        value: "5 x 7.5mm Darne",
+      },
+      {
+        label: "炸弹（水平投弹）",
+        value: "4 x 75kg",
+      },
+    ],
+    description: "布雷盖 Br.521 Bizerte 是法国海军在 1935 年装备的三发水上侦察巡逻机，采用中央船形机身和上下双翼布局，主要为舰队执行远程搜索、巡逻和反潜任务。该机装有三台 900 马力 Gnome-Rhône 14Kirs 发动机，最大速度约 243 km/h，正常巡航航程约 2,100 km。本作按水平轰炸机使用，配置五挺 7.5mm Darne 机枪和四枚 75kg 水平炸弹。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Bréguet 521 Bizerte",
+        url: "https://en.wikipedia.org/wiki/Br%C3%A9guet_521_Bizerte",
+      },
+    ],
+  },
+  {
+    name: "V-156F",
+    displayName: "沃特 V-156F",
+    type: "舰载俯冲轰炸机",
+    armaments: [
+      {
+        label: "机枪（机翼固定前射）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "机枪（后座）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "炸弹（俯冲投弹）",
+        value: "2 x 225kg",
+      },
+    ],
+    description: "沃特 V-156F 是美国 Vought 公司为法国海军研制的 SB2U Vindicator 出口型，1939 年开始交付，主要装备贝亚恩号航空母舰 AB 1 和 AB 3 中队，也从岸上基地执行海上巡逻、反潜和对地攻击任务。该机采用 825 马力 Pratt & Whitney R-1535 发动机，海平面最大速度约 375 km/h，航程约 1,169 km；法国型安装法国电台、7.5mm Darne 机枪和翼型减速板。由于机腹炸弹投放装置未能按计划安装，实战中主要使用翼下挂架；游戏中按俯冲轰炸机接入。",
+    author: "未知",
+    links: [
+      {
+        name: "Vought - V-156F",
+        url: "https://www.vought.org/products/html/v-156-f.html",
+      },
+      {
+        name: "维基百科 - Vought SB2U Vindicator",
+        url: "https://en.wikipedia.org/wiki/Vought_SB2U_Vindicator",
+      },
+    ],
+  },
 ]

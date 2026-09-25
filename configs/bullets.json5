@@ -657,6 +657,14 @@
     damage: 4800,
     criticalRate: 0.07
   },
+  // 法国海军 1926 年式 400mm 航空鱼雷
+  {
+    name: "FR/TB/400/1926",
+    type: "torpedo",
+    diameter: 400,
+    damage: 3000,
+    criticalRate: 0.03
+  },
   {
     name: "US/TB/570/1938",
     type: "torpedo",
@@ -863,6 +871,22 @@
     damage: 6000,
     criticalRate: 0.12
   },
+  // 法国海军 LN 401 使用的 225kg 航空炸弹
+  {
+    name: "FR/BB/225/1938",
+    type: "bomb",
+    diameter: 350,
+    damage: 720,
+    criticalRate: 0.015
+  },
+  // 法国海军 Br.521 使用的 75kg 航空炸弹
+  {
+    name: "FR/BB/75/1935",
+    type: "bomb",
+    diameter: 220,
+    damage: 250,
+    criticalRate: 0.004
+  },
   // 镭射
   // 50mm 镭射
   {
@@ -1031,6 +1055,22 @@
     diameter: 13,
     damage: 0.2,
     criticalRate: 0
+  },
+  // 法国空军 7.5mm 航空机枪弹
+  {
+    name: "FR/GB/7.5/1929",
+    type: "shell",
+    diameter: 8,
+    damage: 0.12,
+    criticalRate: 0
+  },
+  // 法国空军 20mm HS.404 机关炮弹
+  {
+    name: "FR/GB/20/1938",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
   },
   // 火箭弹
   // 美国海军 127mm 防空火箭弹

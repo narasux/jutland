@@ -10721,4 +10721,189 @@
       },
     ],
   },
+  {
+    name: "Potez631",
+    displayName: "ポテ 631 C.3",
+    type: "重戦闘機",
+    armaments: [
+      {
+        label: "機関砲（胴体下面固定前射）",
+        value: "2 x 20mm HS.404",
+      },
+      {
+        label: "機関銃（後席）",
+        value: "1 x 7.5mm MAC 1934",
+      },
+    ],
+    description: "ポテ 631 C.3 は1938年にフランス空軍で就役した双発・三座の重戦闘機である。Gnome-Rhône 14M エンジン2基を搭載し、最大速度は約440 km/h。主武装は胴体下面のゴンドラに装備した前射20mm HS.404 機関砲2門で、後席に7.5mm MAC 1934 機関銃1挺を備えた。速度と上昇力は同時期の単発戦闘機に劣ったが、1940年のフランス戦役では昼間護衛、夜間戦闘、戦闘機隊指揮に使用された。",
+    author: "Unknown",
+    links: [
+      {
+        name: "ウィキペディア - Potez 630 シリーズ",
+        url: "https://en.wikipedia.org/wiki/Potez_630",
+      },
+      {
+        name: "History of War - Potez 631",
+        url: "https://www.historyofwar.org/articles/weapons_potez_631.html",
+      },
+    ],
+  },
+  {
+    name: "LN401",
+    displayName: "ロワール＝ニューポール LN 401",
+    type: "艦載急降下爆撃機",
+    armaments: [
+      {
+        label: "機関砲（機首固定前射）",
+        value: "1 x 20mm HS.404",
+      },
+      {
+        label: "機関銃（主翼固定前射）",
+        value: "2 x 7.5mm Darne",
+      },
+      {
+        label: "爆弾",
+        value: "1 x 225kg",
+      },
+    ],
+    description: "ロワール＝ニューポール LN 401 は1939年にフランス海軍が採用した単座艦載急降下爆撃機である。逆ガル翼と Hispano-Suiza 12Xcrs エンジンを採用し、最大速度は約380 km/h。固定武装は20mm HS.404 機関砲1門と7.5mm Darne 機関銃2挺で、胴体下面のラックに225kg爆弾1発を搭載した。1940年のフランス戦役ではドイツ軍縦隊への攻撃で大きな損害を受け、ゲーム内では急降下爆撃機として扱う。",
+    author: "Unknown",
+    links: [
+      {
+        name: "ウィキペディア - Loire-Nieuport LN.40",
+        url: "https://en.wikipedia.org/wiki/Loire-Nieuport_LN.40",
+      },
+    ],
+  },
+  {
+    name: "FR/AIR/20/HS404",
+    displayName: "20mm HS.404 航空機関砲",
+    type: "武器",
+    armaments: [],
+    description: "フランスの Hispano-Suiza HS.404 20mm 航空機関砲。20×110mm 弾を使用し、理論発射速度は毎分約600～700発。後の英米製 Hispano 系機関砲の基礎となった。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "FR/AIR/7.5/MAC1934",
+    displayName: "7.5mm MAC 1934 航空機関銃",
+    type: "武器",
+    armaments: [],
+    description: "フランスの MAC 1934 7.5mm 航空機関銃。7.5×54mm 弾を使用し、発射速度は毎分約750～850発。フランス軍機の固定銃座と旋回銃座で広く使用された。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "FR/AIR/7.5/Darne",
+    displayName: "7.5mm Darne 航空機関銃",
+    type: "武器",
+    armaments: [],
+    description: "フランスの Darne 7.5mm 航空機関銃。7.5×54mm 弾を使用し、小型で発射速度が高い。LN 401 などのフランス軍機に装備された。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "Late298",
+    displayName: "ラテコエール 298",
+    type: "水上雷撃機",
+    armaments: [
+      {
+        label: "機関銃（主翼固定前射）",
+        value: "2 x 7.5mm Darne",
+      },
+      {
+        label: "機関銃（後席）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "航空魚雷",
+        value: "1 x 400mm 1926年式 DA",
+      },
+    ],
+    description: "ラテコエール 298 は1938年にフランス海軍が採用した単発双フロートの水上雷撃機で、急降下爆撃や海上偵察にも使用された。880 hp の Hispano-Suiza 12Ycrs を搭載し、最大速度は約295 km/h。主翼に固定前射7.5mm Darne 機関銃2挺、後席に旋回式7.5mm Darne 機関銃1挺を備え、胴体下面ラックに400mm 1926年式 DA 航空魚雷1発を搭載した。フランス沿岸基地と水上機母艦タステ司令官に配備され、フランス海軍の第二次大戦における最も成功した水上機の一つとなった。",
+    author: "Unknown",
+    links: [
+      {
+        name: "ウィキペディア - Latécoère 298",
+        url: "https://en.wikipedia.org/wiki/Lat%C3%A9co%C3%A8re_298",
+      },
+    ],
+  },
+  {
+    name: "Loire130",
+    displayName: "ロワール 130",
+    type: "水上偵察機",
+    armaments: [
+      {
+        label: "機関銃（機首固定前射）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "機関銃（後席）",
+        value: "1 x 7.5mm Darne",
+      },
+    ],
+    description: "ロワール 130 は1937年にフランス海軍が採用した単発高翼の水上偵察機で、戦艦、巡洋艦、水上機母艦タステ司令官からカタパルト発進またはクレーンで運用された。Hispano-Suiza 製液冷V12を搭載し、最大速度は約245 km/h、航続距離は約1,100 km。艦隊偵察、観測、連絡任務に用いられた。本作には専用の偵察挙動がないためその他機として扱うが、図鑑には機首固定式と後席旋回式の7.5mm Darne 機関銃各1挺を記載する。",
+    author: "Unknown",
+    links: [
+      {
+        name: "ウィキペディア - Loire 130",
+        url: "https://en.wikipedia.org/wiki/Loire_130",
+      },
+    ],
+  },
+  {
+    name: "Br521",
+    displayName: "ブレゲー Br.521 ビゼルト",
+    type: "水平爆撃機",
+    armaments: [
+      {
+        label: "機関銃（前向および防御銃座）",
+        value: "5 x 7.5mm Darne",
+      },
+      {
+        label: "爆弾（水平投弾）",
+        value: "4 x 75kg",
+      },
+    ],
+    description: "ブレゲー Br.521 ビゼルトは1935年にフランス海軍が採用した三発の水上偵察哨戒機で、中央の船形胴体と上下翼を持つセスキプラン構造を特徴とする。900 hp の Gnome-Rhône 14Kirs エンジン3基を搭載し、最大速度は約243 km/h、通常巡航航続距離は約2,100 km。艦隊の広域搜索、哨戒、対潜任務に用いられた。本作では水平爆撃機として扱い、7.5mm Darne 機関銃5挺と75kg爆弾4発を搭載する。",
+    author: "Unknown",
+    links: [
+      {
+        name: "ウィキペディア - Bréguet 521 Bizerte",
+        url: "https://en.wikipedia.org/wiki/Br%C3%A9guet_521_Bizerte",
+      },
+    ],
+  },
+  {
+    name: "V-156F",
+    displayName: "ヴォート V-156F",
+    type: "艦載急降下爆撃機",
+    armaments: [
+      {
+        label: "機関銃（主翼固定前射）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "機関銃（後席）",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "爆弾（急降下投弾）",
+        value: "2 x 225kg",
+      },
+    ],
+    description: "ヴォート V-156F は SB2U Vindicator のフランス海軍向け輸出版で、1939年から納入された。空母ベアルンのAB1およびAB3飛行隊に配備され、沿岸基地から海上哨戒、対潜、対地攻撃にも使用された。825 hp の Pratt & Whitney R-1535 を搭載し、海面高度での最大速度は約375 km/h、航続距離は約1,169 km。フランス型は仏製無線、7.5mm Darne 機関銃、主翼のフィンス型減速板を装備した。機腹中央の爆弾投入装置が計画どおり設置されなかったため、実戦では主翼下ラックを使用し、本作では急降下爆撃機として扱う。",
+    author: "Unknown",
+    links: [
+      {
+        name: "Vought - V-156F",
+        url: "https://www.vought.org/products/html/v-156-f.html",
+      },
+      {
+        name: "ウィキペディア - Vought SB2U Vindicator",
+        url: "https://en.wikipedia.org/wiki/Vought_SB2U_Vindicator",
+      },
+    ],
+  },
 ]

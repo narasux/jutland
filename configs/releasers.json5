@@ -166,5 +166,26 @@
     bulletName: "GER/BB/1800/1942",
     range: 4.5,
     bulletSpeed: 30,
+  },
+  // 法国海军 225kg 航空炸弹（俯冲投弹）
+  {
+    name: "FR/BB/225",
+    bulletName: "FR/BB/225/1938",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  // 法国海军 400mm 1926 年式航空鱼雷
+  {
+    name: "FR/AST/400/1926",
+    bulletName: "FR/TB/400/1926",
+    range: 3.5,
+    bulletSpeed: 35,
+  },
+  // 法国海军 75kg 航空炸弹（水平投弹）
+  {
+    name: "FR/BB/75/LB",
+    bulletName: "FR/BB/75/1935",
+    range: 4.5,
+    bulletSpeed: 30,
   }
 ]

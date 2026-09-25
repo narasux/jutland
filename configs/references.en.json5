@@ -10721,4 +10721,189 @@
       },
     ],
   },
+  {
+    name: "Potez631",
+    displayName: "Potez 631 C.3",
+    type: "Heavy Fighter",
+    armaments: [
+      {
+        label: "Cannons (Fixed Forward, Under Fuselage)",
+        value: "2 x 20mm HS.404",
+      },
+      {
+        label: "Machine Gun (Rear Cockpit)",
+        value: "1 x 7.5mm MAC 1934",
+      },
+    ],
+    description: "The Potez 631 C.3 was a twin-engine, three-seat heavy fighter introduced by the French Air Force in 1938. Powered by two Gnome-Rhône 14M engines, it had a maximum speed of about 440 km/h and carried two forward-firing 20mm HS.404 cannon in under-fuselage gondolas plus a 7.5mm MAC 1934 machine gun in the rear cockpit. It was slower and climbed worse than contemporary single-engine fighters, but served in day escort, night-fighter and fighter-direction roles during the 1940 Battle of France.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Potez 630 family",
+        url: "https://en.wikipedia.org/wiki/Potez_630",
+      },
+      {
+        name: "History of War - Potez 631",
+        url: "https://www.historyofwar.org/articles/weapons_potez_631.html",
+      },
+    ],
+  },
+  {
+    name: "LN401",
+    displayName: "Loire-Nieuport LN 401",
+    type: "Carrier Dive Bomber",
+    armaments: [
+      {
+        label: "Cannon (Fixed Forward, Nose)",
+        value: "1 x 20mm HS.404",
+      },
+      {
+        label: "Machine Guns (Fixed Forward, Wings)",
+        value: "2 x 7.5mm Darne",
+      },
+      {
+        label: "Bomb",
+        value: "1 x 225kg",
+      },
+    ],
+    description: "The Loire-Nieuport LN 401 was a single-seat carrier dive bomber accepted by the French Navy in 1939. Its inverted-gull wing and Hispano-Suiza 12Xcrs engine gave a maximum speed of about 380 km/h. Fixed armament comprised one 20mm HS.404 cannon and two 7.5mm Darne machine guns, while the centreline rack carried one 225 kg bomb. It suffered heavy losses attacking German columns during the 1940 Battle of France and is represented in game as a dive bomber.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Loire-Nieuport LN.40",
+        url: "https://en.wikipedia.org/wiki/Loire-Nieuport_LN.40",
+      },
+    ],
+  },
+  {
+    name: "FR/AIR/20/HS404",
+    displayName: "20mm HS.404 Aircraft Cannon",
+    type: "Weapon",
+    armaments: [],
+    description: "French Hispano-Suiza HS.404 20mm aircraft cannon using 20 x 110 mm ammunition, with a theoretical rate of fire of about 600 to 700 rounds per minute. It formed the basis of later British and American Hispano installations.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "FR/AIR/7.5/MAC1934",
+    displayName: "7.5mm MAC 1934 Aircraft Machine Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French MAC 1934 7.5mm aircraft machine gun using 7.5 x 54 mm ammunition. Its rate of fire was about 750 to 850 rounds per minute, and it was widely used in fixed and flexible mounts on French aircraft.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "FR/AIR/7.5/Darne",
+    displayName: "7.5mm Darne Aircraft Machine Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French Darne 7.5mm aircraft machine gun using 7.5 x 54 mm ammunition. Compact and fast-firing, it armed French aircraft including the LN 401.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "Late298",
+    displayName: "Latécoère 298",
+    type: "Torpedo Seaplane",
+    armaments: [
+      {
+        label: "Machine Guns (Fixed Forward, Wings)",
+        value: "2 x 7.5mm Darne",
+      },
+      {
+        label: "Machine Gun (Rear Cockpit)",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "Aerial Torpedo",
+        value: "1 x 400mm Type 1926 DA",
+      },
+    ],
+    description: "The Latécoère 298 was a single-engine twin-float torpedo seaplane introduced by the French Navy in 1938, also used for dive bombing and maritime reconnaissance. Powered by an 880 hp Hispano-Suiza 12Ycrs, it had a maximum speed of about 295 km/h. Two fixed forward-firing 7.5mm Darne machine guns were mounted in the wings and a third served as a flexible rear gun; the ventral crutch carried one 400mm Type 1926 DA aerial torpedo. It operated from French coastal bases and the seaplane tender Commandant Teste, becoming one of the French Navy's most successful wartime seaplanes.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Latécoère 298",
+        url: "https://en.wikipedia.org/wiki/Lat%C3%A9co%C3%A8re_298",
+      },
+    ],
+  },
+  {
+    name: "Loire130",
+    displayName: "Loire 130",
+    type: "Reconnaissance Flying Boat",
+    armaments: [
+      {
+        label: "Machine Gun (Fixed Forward, Bow)",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "Machine Gun (Rear Cockpit)",
+        value: "1 x 7.5mm Darne",
+      },
+    ],
+    description: "The Loire 130 was a single-engine high-wing reconnaissance flying boat introduced by the French Navy in 1937 and operated from battleships, cruisers and the seaplane tender Commandant Teste. Its Hispano-Suiza liquid-cooled V12 gave a maximum speed of about 245 km/h and a range of about 1,100 km, supporting fleet reconnaissance, observation and liaison duties. The game has no dedicated reconnaissance behaviour, so it is represented as an other-type aircraft; its reference data retains one fixed forward and one rear flexible 7.5mm Darne machine gun.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Loire 130",
+        url: "https://en.wikipedia.org/wiki/Loire_130",
+      },
+    ],
+  },
+  {
+    name: "Br521",
+    displayName: "Bréguet 521 Bizerte",
+    type: "Level Bomber",
+    armaments: [
+      {
+        label: "Machine Guns (Forward and Defensive Mounts)",
+        value: "5 x 7.5mm Darne",
+      },
+      {
+        label: "Bombs (Level Bombing)",
+        value: "4 x 75kg",
+      },
+    ],
+    description: "The Bréguet 521 Bizerte was a three-engine maritime reconnaissance flying boat introduced by the French Navy in 1935. Its sesquiplane layout and central boat hull supported long-range fleet search, patrol and anti-submarine duties. Three 900 hp Gnome-Rhône 14Kirs engines gave a maximum speed of about 243 km/h and a normal cruising range of about 2,100 km. In the game it is represented as a level bomber carrying five 7.5mm Darne machine guns and four 75 kg bombs.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Bréguet 521 Bizerte",
+        url: "https://en.wikipedia.org/wiki/Br%C3%A9guet_521_Bizerte",
+      },
+    ],
+  },
+  {
+    name: "V-156F",
+    displayName: "Vought V-156F",
+    type: "Carrier Dive Bomber",
+    armaments: [
+      {
+        label: "Machine Gun (Fixed Forward, Wing)",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "Machine Gun (Rear Cockpit)",
+        value: "1 x 7.5mm Darne",
+      },
+      {
+        label: "Bomb (Dive Bombing)",
+        value: "2 x 225kg",
+      },
+    ],
+    description: "The Vought V-156F was the French Navy export version of the SB2U Vindicator, beginning delivery in 1939. It served with the AB 1 and AB 3 escadrilles of the carrier Béarn and later from shore bases on maritime patrol, anti-submarine and strike duties. An 825 hp Pratt & Whitney R-1535 gave a sea-level maximum speed of about 375 km/h and the aircraft had a range of about 1,169 km. The French version used French radio equipment, 7.5mm Darne guns and wing fence-type dive brakes. Because the centreline bomb displacement gear was not installed as planned, most combat missions relied on underwing racks; the aircraft is represented as a dive bomber in game.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Vought - V-156F",
+        url: "https://www.vought.org/products/html/v-156-f.html",
+      },
+      {
+        name: "Wikipedia - Vought SB2U Vindicator",
+        url: "https://en.wikipedia.org/wiki/Vought_SB2U_Vindicator",
+      },
+    ],
+  },
 ]
