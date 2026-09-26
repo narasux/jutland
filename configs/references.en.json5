@@ -10922,4 +10922,50 @@
       },
     ],
   },
+  {
+    name: "Nord1500",
+    displayName: "Nord 1500 Noréclair",
+    type: "Attack Aircraft",
+    armaments: [
+      {
+        label: "Cannon (Fixed Forward, Wings)",
+        value: "2 x 20mm MG 151",
+      },
+      {
+        label: "Cannon (Rear Turret)",
+        value: "2 x 20mm MG 151",
+      },
+      {
+        label: "Bombs (Dive Bombing)",
+        value: "2 x 1000kg",
+      },
+    ],
+    description: "The Nord 1500 Noréclair was a French twin-engined carrier attack aircraft prototype first flown in 1949. Two 1,600 hp Gnome-Rhône 14R piston engines gave a maximum speed of about 540 km/h and a practical range of about 3,450 km. It could carry either one 450mm aerial torpedo or 2,000 kg of bombs, with two 20mm MG 151 cannon in the wings and two more in a tail turret. The type did not enter series production. In game it is represented as a dive attack aircraft using the higher-damage 2 x 1000 kg bomb load.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Nord 1500 Noréclair",
+        url: "https://en.wikipedia.org/wiki/Nord_1500_Nor%C3%A9clair",
+      },
+    ],
+  },
+  {
+    name: "VB10",
+    displayName: "Arsenal VB.10",
+    type: "Twin-Engine Heavy Interceptor",
+    armaments: [
+      {
+        label: "Cannon (Fixed Forward, Nose)",
+        value: "4 x 20mm HS.404",
+      },
+    ],
+    description: "The Arsenal VB.10 was a French twin-engined heavy interceptor developed at the end of World War II, first flying on 7 July 1945. Two 1,150 hp Hispano-Suiza 12Zars engines were mounted in tandem inside the fuselage and drove a coaxial six-blade contra-rotating propeller, giving a maximum speed of about 700 km/h and a range of about 1,700 km. The production version carried four 20mm HS.404 cannon. Although 200 aircraft were ordered, the maturing jet fighter made the design obsolete and the order was cancelled in 1948 after six aircraft had been built. In game it is represented as a heavily armed high-speed fighter.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Arsenal VB 10",
+        url: "https://en.wikipedia.org/wiki/Arsenal_VB_10",
+      },
+    ],
+  },
 ]

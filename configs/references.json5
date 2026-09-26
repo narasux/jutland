@@ -10801,4 +10801,50 @@
       },
     ],
   },
+  {
+    name: "Nord1500",
+    displayName: "诺克莱尔",
+    type: "攻击机",
+    armaments: [
+      {
+        label: "机炮（机翼固定前射）",
+        value: "2 x 20mm MG 151",
+      },
+      {
+        label: "机炮（尾部炮塔后向）",
+        value: "2 x 20mm MG 151",
+      },
+      {
+        label: "炸弹（俯冲投弹）",
+        value: "2 x 1000kg",
+      },
+    ],
+    description: "Nord 1500 诺克莱尔是法国在二战后研制的双发舰载攻击机原型，1949 年首飞。该机采用两台 1,600 马力 Gnome-Rhône 14R 活塞发动机，最大速度约 540 km/h，实用航程约 3,450 km，可在 450mm 航空鱼雷或 2,000kg 炸弹之间选择挂载，并在机翼和尾部炮塔各安装两门 20mm MG 151。它未进入批量生产。游戏中按俯冲攻击机接入，并选用当前伤害更高的 2 x 1000kg 炸弹挂载。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Nord 1500 Noréclair",
+        url: "https://en.wikipedia.org/wiki/Nord_1500_Nor%C3%A9clair",
+      },
+    ],
+  },
+  {
+    name: "VB10",
+    displayName: "阿森纳 VB.10",
+    type: "双发重型截击机",
+    armaments: [
+      {
+        label: "机炮（机首固定前射）",
+        value: "4 x 20mm HS.404",
+      },
+    ],
+    description: "阿森纳 VB.10 是法国在第二次世界大战末期研制的双发重型截击机，1945 年 7 月首飞。该机在机体内串联安装两台 1,150 马力 Hispano-Suiza 12Zars 发动机，通过共轴六叶对转螺旋桨输出动力，最大速度约 700 km/h，航程约 1,700 km。量产型配置四门 20mm HS.404 机炮，计划订购 200 架，但喷气战斗机的成熟使订单在 1948 年取消，总产量为 6 架。游戏中按重火力高速战斗机接入。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - Arsenal VB 10",
+        url: "https://en.wikipedia.org/wiki/Arsenal_VB_10",
+      },
+    ],
+  },
 ]

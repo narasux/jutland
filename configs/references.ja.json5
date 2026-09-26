@@ -10922,4 +10922,50 @@
       },
     ],
   },
+  {
+    name: "Nord1500",
+    displayName: "ノール 1500 ノレクレール",
+    type: "攻撃機",
+    armaments: [
+      {
+        label: "機関砲（主翼固定前射）",
+        value: "2 x 20mm MG 151",
+      },
+      {
+        label: "機関砲（尾部砲塔後向）",
+        value: "2 x 20mm MG 151",
+      },
+      {
+        label: "爆弾（急降下投弾）",
+        value: "2 x 1000kg",
+      },
+    ],
+    description: "ノール 1500 ノレクレールは、第二次大戦後にフランスで開発された双発艦載攻撃機の試作機で、1949年に初飛行した。1,600 hp の Gnome-Rhône 14R レシプロエンジン2基を搭載し、最大速度は約540 km/h、実用航続距離は約3,450 km。450mm 航空魚雷1発、または2,000kg の爆弾を搭載でき、主翼と尾部砲塔に20mm MG 151 機関砲を各2門装備した。量産には至っていない。本作では急降下攻撃機として扱い、より高ダメージの2 x 1000kg 爆弾装備を選ぶ。",
+    author: "Unknown",
+    links: [
+      {
+        name: "ウィキペディア - Nord 1500 Noréclair",
+        url: "https://en.wikipedia.org/wiki/Nord_1500_Nor%C3%A9clair",
+      },
+    ],
+  },
+  {
+    name: "VB10",
+    displayName: "アルスナル VB.10",
+    type: "双発重戦闘機",
+    armaments: [
+      {
+        label: "機関砲（機首固定前射）",
+        value: "4 x 20mm HS.404",
+      },
+    ],
+    description: "アルスナル VB.10 は第二次世界大戦末期にフランスで開発された双発重戦闘機で、1945年7月7日に初飛行した。1,150 hp の Hispano-Suiza 12Zars エンジン2基を胴体内に縦列配置し、同軸六枚の二重反転プロペラを駆動した。最大速度は約700 km/h、航続距離は約1,700 km。量産型は20mm HS.404 機関砲4門を装備した。200機が発注されたが、ジェット戦闘機の実用化により1948年に注文は取消され、総生産数は6機だった。本作では高速・重武装の戦闘機として扱う。",
+    author: "Unknown",
+    links: [
+      {
+        name: "ウィキペディア - Arsenal VB 10",
+        url: "https://en.wikipedia.org/wiki/Arsenal_VB_10",
+      },
+    ],
+  },
 ]

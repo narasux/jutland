@@ -887,6 +887,14 @@
     damage: 250,
     criticalRate: 0.004
   },
+  // Nord 1500 使用的 1000kg 航空炸弹
+  {
+    name: "FR/BB/1000/1949",
+    type: "bomb",
+    diameter: 660,
+    damage: 3600,
+    criticalRate: 0.08
+  },
   // 镭射
   // 50mm 镭射
   {

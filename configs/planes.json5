@@ -5572,4 +5572,122 @@
       releaseInterval: 0.2
     }
   },
+  {
+    // 北方 Nord 1500 诺克莱尔舰载攻击机
+    name: "Nord1500",
+    nation: "fr",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    year: 1949,
+    totalHP: 70,
+    damageReduction: 0.48,
+    maxSpeed: 540,
+    acceleration: 24,
+    rotateSpeed: 6,
+    length: 14.25,
+    width: 19.7,
+    fundsCost: 38,
+    timeCost: 15,
+    tonnage: 11.989,
+    range: 3450,
+    weapon: {
+      guns: [
+        // 机翼（20mm MG 151，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（20mm MG 151，固定前射）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 尾部炮塔（20mm MG 151，后半球自卫）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: -0.9,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 尾部炮塔（20mm MG 151，后半球自卫）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: -0.9,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        // 2 x 1000kg 炸弹，合计 2 吨挂载
+        {
+          name: "FR/BB/1000",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "FR/BB/1000",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 阿森纳 VB.10 双发重型截击机
+    name: "VB10",
+    nation: "fr",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1945,
+    totalHP: 56,
+    damageReduction: 0.5,
+    maxSpeed: 700,
+    acceleration: 32,
+    rotateSpeed: 10,
+    length: 12.98,
+    width: 15.49,
+    fundsCost: 15,
+    timeCost: 7,
+    tonnage: 9.523,
+    range: 1700,
+    weapon: {
+      guns: [
+        // 机首（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机首（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
 ]
