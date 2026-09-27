@@ -21,14 +21,14 @@ func TestAaHitChanceCaliberTiers(t *testing.T) {
 			large,
 		)
 	}
-	if small != 1.0/3 {
-		t.Fatalf("small caliber (<=40mm) hit chance = %.4f, want %.4f", small, 1.0/3)
+	if small != 1.0/6 {
+		t.Fatalf("small caliber (<=40mm) hit chance = %.4f, want %.4f", small, 1.0/6)
 	}
-	if medium != 1.0/6 {
-		t.Fatalf("medium caliber (<=155mm) hit chance = %.4f, want %.4f", medium, 1.0/6)
+	if medium != 1.0/12 {
+		t.Fatalf("medium caliber (<=155mm) hit chance = %.4f, want %.4f", medium, 1.0/12)
 	}
-	if large != 1.0/9 {
-		t.Fatalf("large caliber (>155mm) hit chance = %.4f, want %.4f", large, 1.0/9)
+	if large != 1.0/18 {
+		t.Fatalf("large caliber (>155mm) hit chance = %.4f, want %.4f", large, 1.0/18)
 	}
 	// 边界值：40mm 归小口径，155mm 归中口径，156mm 起归大口径。
 	if aaHitChance(40, objUnit.PlaneTypeLevelBomber) != small {

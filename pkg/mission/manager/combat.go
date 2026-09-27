@@ -35,13 +35,14 @@ func aaHitChance(diameter int, planeType objUnit.PlaneType) float64 {
 	var chance float64
 	switch {
 	case diameter <= 40:
-		chance = 1.0 / 3
+		chance = 1.0 / 5
 	case diameter <= 155:
-		chance = 1.0 / 6
-	default:
 		chance = 1.0 / 9
+	default:
+		chance = 1.0 / 14
 	}
-	if planeType == objUnit.PlaneTypeDiveBomber {
+	// 俯冲轰炸机、高空轰炸机收到放空炮火的伤害低一点
+	if planeType == objUnit.PlaneTypeDiveBomber || planeType == objUnit.PlaneTypeLevelBomber {
 		chance /= 3
 	}
 	return chance
@@ -442,8 +443,7 @@ func (m *MissionManager) updateShotBullets() {
 				}
 			}
 			// 曲射炮弹 / 炸弹落点爆炸波及地面飞机（停放与滑行）：按爆炸半径
-			// 结算，不要求落点精确落在机身矩形内（机场本体无敌，但地面
-			// 飞机会被炸毁）
+			// 结算，不要求落点精确落在机身矩形内（机场本体无敌，但地面飞机会被炸毁）
 			if bt.ShotType == objBullet.ShotTypeArcing && bt.HitObjType == object.TypeNone {
 				if m.damageGroundPlanesNear(bt, "") {
 					bt.HitObjType = object.TypePlane
