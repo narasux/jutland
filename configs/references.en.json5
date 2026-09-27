@@ -3063,6 +3063,41 @@
     ],
   },
   {
+    name: "neptune",
+    displayName: "Neptune",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "6x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "Anti-aircraft Machine Guns",
+        value: "12x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "Aircraft",
+        value: "VB10 x20 / Nord1500 x18",
+      },
+    ],
+    description: "Neptune is the possible 1940 depiction of the French PA4 aircraft-carrier design, with a standard displacement of about 35,000 tons, an asset length of about 218 metres and a designed air group of 38 aircraft. The source gives no speed; this configuration assumes a high-speed fleet carrier at 30 knots, with a straight deck and three anti-aircraft weapon types: six twin 100mm/45 dual-purpose guns, six twin 37mm/50 AA guns and twelve twin 13.2mm Hotchkiss machine-gun mounts, with VB10 fighters and Nord1500 carrier bombers.",
+    author: "Garlicdesign",
+    links: [
+      {
+        name: "Shipbucket - Neptune PA4 possible 1940 depiction",
+        url: "https://www.shipbucket.com/drawings/1981",
+      },
+      {
+        name: "Wikipedia - French aircraft carrier Béarn",
+        url: "https://en.wikipedia.org/wiki/French_aircraft_carrier_B%C3%A9arn",
+      },
+    ],
+  },
+  {
     name: "bearn",
     displayName: "Béarn",
     type: "Aircraft Carrier",

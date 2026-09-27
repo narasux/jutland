@@ -2691,7 +2691,8 @@
           "graf_zeppelin",
           "stuttgart",
           "commandant_teste",
-          "bearn"
+          "bearn",
+          "neptune"
         ],
       },
       {
@@ -3310,6 +3311,12 @@
       {
         name: "bearn",
         pos: [16, 38],
+        rotation: 90,
+        belongPlayer: "HA"
+      },
+      {
+        name: "neptune",
+        pos: [17, 39],
         rotation: 90,
         belongPlayer: "HA"
       },

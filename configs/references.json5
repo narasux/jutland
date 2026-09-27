@@ -3004,6 +3004,41 @@
     ],
   },
   {
+    name: "neptune",
+    displayName: "海王星",
+    type: "航空母舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "6x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "防空炮",
+        value: "6x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "防空机枪",
+        value: "12x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "舰载机",
+        value: "VB10 x20 / Nord1500 x18",
+      },
+    ],
+    description: "海王星号是法国海军 PA4 航空母舰方案的 1940 年可能状态，按方案标准排水量约 35,000 吨、素材舰长约 218 米，可搭载约 38 架飞机。资料未给出航速，本作按高速舰队航母取 30 节；采用直通甲板和三层防空配置：6 座 100mm/45 双联装高平两用炮、6 座 37mm/50 双联装高炮、12 座双联 13.2mm 机枪；舰载机为 VB10 战斗机和 Nord1500 舰载轰炸机。",
+    author: "Garlicdesign",
+    links: [
+      {
+        name: "Shipbucket - Neptune PA4 possible 1940 depiction",
+        url: "https://www.shipbucket.com/drawings/1981",
+      },
+      {
+        name: "维基百科 - 贝亚恩号航空母舰",
+        url: "https://zh.wikipedia.org/wiki/%E8%B2%9D%E4%BA%9E%E6%81%A9%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "bearn",
     displayName: "贝亚恩",
     type: "航空母舰",

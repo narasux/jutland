@@ -3063,6 +3063,41 @@
     ],
   },
   {
+    name: "neptune",
+    displayName: "ネプチューン",
+    type: "航空母艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "6x2 100mm/45 Mle 1930",
+      },
+      {
+        label: "対空砲",
+        value: "6x2 37mm/50 Mle 1925",
+      },
+      {
+        label: "対空機銃",
+        value: "12x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "艦載機",
+        value: "VB10 x20 / Nord1500 x18",
+      },
+    ],
+    description: "ネプチューンはフランス海軍のPA4航空母艦案を1940年の可能性として描いたもので、基準排水量約35,000トン、素材上の全長約218m、搭載機数38機とされる。資料に速力の記載はないため、本作では高速舰队空母として30ノットとし、直通甲板と100mm/45連装両用砲6基、37mm/50連装対空砲6基、13.2mm連装機銃12基を採用、VB10戦闘機とNord1500艦載爆撃機を搭載する。",
+    author: "Garlicdesign",
+    links: [
+      {
+        name: "Shipbucket - Neptune PA4 possible 1940 depiction",
+        url: "https://www.shipbucket.com/drawings/1981",
+      },
+      {
+        name: "ウィキペディア - ベアルン (空母)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%99%E3%82%A2%E3%83%AB%E3%83%B3_(%E7%A9%BA%E6%AF%8D)",
+      },
+    ],
+  },
+  {
     name: "bearn",
     displayName: "ベアルン",
     type: "航空母艦",

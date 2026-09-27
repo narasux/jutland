@@ -21954,6 +21954,198 @@
     }
   },
   {
+    // 海王星（PA4 方案，1940 年可能状态）
+    name: "neptune",
+    nation: "fr",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1940,
+    totalHP: 35000,
+    horizontalDamageReduction: 0.16,
+    verticalDamageReduction: 0.05,
+    // PA3/PA4 资料未给出航速，30 节按高速舰队航母玩法假设
+    maxSpeed: 30,
+    acceleration: 0.3,
+    rotateSpeed: 0.7,
+    length: 218,
+    width: 27,
+    fundsCost: 230,
+    timeCost: 91,
+    weapon: {
+      mainGuns: [
+        // 舰艏 100mm 双联装高平两用炮：左舷 / 右舷
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.76,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.76,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艏后方 100mm 双联装高平两用炮：左舷 / 右舷
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.7,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [195, 360]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: 0.7,
+          rightFiringArc: [0, 165],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艉前方 100mm 双联装高平两用炮：左舷 / 右舷
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.89,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 340]
+        },
+        {
+          name: "FR/100/45/2/Mle1930",
+          posPercent: -0.89,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [360, 360]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舰艏 37mm 双联装高炮：右舷
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.55,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: 0.51,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艉 37mm 双联装高炮：左舷 / 右舷
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.71,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.71,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.77,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "FR/37/50/2",
+          posPercent: -0.77,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艏与两舷 13.2mm 双联装机枪
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.83,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [225, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.83,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.72,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.72,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.46,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.46,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.19,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: 0.19,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: -0.94,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: -0.94,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: -0.97,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "FR/13.2/2",
+          posPercent: -0.97,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        }
+      ],
+      torpedoes: [],
+      rockets: []
+    },
+    aircraft: {
+      deck: "StraightDeckNoCatapult",
+      takeOffTime: 3.5,
+      groups: [
+        {
+          name: "VB10",
+          maxCount: 20
+        },
+        {
+          name: "Nord1500",
+          maxCount: 18
+        }
+      ]
+    }
+  },
+  {
     // 贝亚恩（1939 年状态）
     name: "bearn",
     nation: "fr",
