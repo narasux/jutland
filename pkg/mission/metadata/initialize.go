@@ -25,7 +25,7 @@ type rawMissionMetadata struct {
 	DisplayNameRu       string                          `json:"displayNameRu"`
 	DisplayNameJa       string                          `json:"displayNameJa"`
 	InitFunds           int64                           `json:"initFunds"`
-	InitCameraPos       [2]int                          `json:"initCameraPos"`
+	InitCameraPos       [2][2]int                       `json:"initCameraPos"`
 	MapName             string                          `json:"mapName"`
 	MaxShipCount        int                             `json:"maxShipCount"`
 	Description         string                          `json:"description"`
@@ -50,17 +50,17 @@ func normalizeMissionCategory(raw string) (MissionCategory, error) {
 }
 
 type rawInitShipMetadata struct {
-	Name         string `json:"name"`
-	Pos          [2]int `json:"pos"`
-	Rotation     int    `json:"rotation"`
-	BelongPlayer string `json:"belongPlayer"`
+	Name       string `json:"name"`
+	Pos        [2]int `json:"pos"`
+	Rotation   int    `json:"rotation"`
+	BelongSide string `json:"belongPlayer"`
 }
 
 type rawInitReinforcePointMetadata struct {
 	Pos               [2]int   `json:"pos"`
 	Rotation          int      `json:"rotation"`
 	RallyPos          [2]int   `json:"rallyPos"`
-	BelongPlayer      string   `json:"belongPlayer"`
+	BelongSide        string   `json:"belongPlayer"`
 	MaxOncomingShip   int      `json:"maxOncomingShip"`
 	ProvidedShipNames []string `json:"providedShipNames"`
 }
@@ -77,7 +77,7 @@ type rawInitAirfieldMetadata struct {
 	Rotation     int        `json:"rotation"`
 	RunwayLength float64    `json:"runwayLength"`
 	RunwayWidth  float64    `json:"runwayWidth"`
-	BelongPlayer string     `json:"belongPlayer"`
+	BelongSide   string     `json:"belongPlayer"`
 	// Enabled 配置级开关，缺省 true；false 时该机场不生成
 	Enabled     *bool   `json:"enabled"`
 	TakeOffTime float64 `json:"takeOffTime"`
@@ -94,9 +94,13 @@ type rawInitAirfieldGroupMetadata struct {
 	InitCount int64 `json:"initCount"`
 }
 
-// isAllyPlayer 判定是否为友方玩家
-func isAllyPlayer(p faction.Player) bool {
-	return p == faction.HumanAlpha || p == faction.HumanBeta
+// parseMissionSide 校验任务配置中的中立阵营。
+func parseMissionSide(raw string, missionName string) faction.Side {
+	side := faction.Side(raw)
+	if !side.IsValid() {
+		log.Fatalf("invalid belongPlayer %q in mission %q", raw, missionName)
+	}
+	return side
 }
 
 // validateAirfieldMetadata 校验机场配置：位置必须落在陆地格、跑道长度为正、
@@ -181,10 +185,10 @@ func init() {
 		initShips := []InitShipMetadata{}
 		for _, shipMD := range md.InitShips {
 			initShips = append(initShips, InitShipMetadata{
-				ShipName:     shipMD.Name,
-				Pos:          objPos.New(shipMD.Pos[0], shipMD.Pos[1]),
-				Rotation:     float64(shipMD.Rotation),
-				BelongPlayer: faction.Player(shipMD.BelongPlayer),
+				ShipName:   shipMD.Name,
+				Pos:        objPos.New(shipMD.Pos[0], shipMD.Pos[1]),
+				Rotation:   float64(shipMD.Rotation),
+				BelongSide: parseMissionSide(shipMD.BelongSide, md.Name),
 			})
 		}
 		// 增援点
@@ -194,7 +198,7 @@ func init() {
 				Pos:               objPos.New(rpMD.Pos[0], rpMD.Pos[1]),
 				Rotation:          float64(rpMD.Rotation),
 				RallyPos:          objPos.New(rpMD.RallyPos[0], rpMD.RallyPos[1]),
-				BelongPlayer:      faction.Player(rpMD.BelongPlayer),
+				BelongSide:        parseMissionSide(rpMD.BelongSide, md.Name),
 				MaxOncomingShip:   rpMD.MaxOncomingShip,
 				ProvidedShipNames: rpMD.ProvidedShipNames,
 			})
@@ -231,56 +235,66 @@ func init() {
 				Rotation:      float64(afMD.Rotation),
 				RunwayLength:  afMD.RunwayLength,
 				RunwayWidth:   afMD.RunwayWidth,
-				BelongPlayer:  faction.Player(afMD.BelongPlayer),
+				BelongSide:    parseMissionSide(afMD.BelongSide, md.Name),
 				TakeOffTime:   afMD.TakeOffTime,
 				TakeoffPoints: afMD.TakeoffPoints,
 				PlaneGroups:   groups,
 			})
 		}
-		// 统计计算
-		allyShips, enemyShips := 0, 0
+		// 分阵营统计
+		sideStats := map[faction.Side]MissionSideStats{}
+		presentSides := map[faction.Side]bool{}
 		for _, s := range initShips {
-			if isAllyPlayer(s.BelongPlayer) {
-				allyShips++
-			} else {
-				enemyShips++
+			stats := sideStats[s.BelongSide]
+			stats.ShipCount++
+			sideStats[s.BelongSide] = stats
+			presentSides[s.BelongSide] = true
+		}
+		totalSlots := 0
+		for _, rp := range initReinforcePoints {
+			stats := sideStats[rp.BelongSide]
+			stats.ReinforceCount++
+			sideStats[rp.BelongSide] = stats
+			presentSides[rp.BelongSide] = true
+			totalSlots += rp.MaxOncomingShip
+		}
+		for _, af := range initAirfields {
+			presentSides[af.BelongSide] = true
+		}
+		playerSides := make([]faction.Side, 0, 2)
+		for _, side := range []faction.Side{faction.SideP1, faction.SideP2} {
+			if presentSides[side] {
+				playerSides = append(playerSides, side)
 			}
 		}
-		allyReinforce, enemyReinforce, totalSlots := 0, 0, 0
-		for _, rp := range initReinforcePoints {
-			if isAllyPlayer(rp.BelongPlayer) {
-				allyReinforce++
-			} else {
-				enemyReinforce++
-			}
-			totalSlots += rp.MaxOncomingShip
+		initCameraPositions := map[faction.Side]objPos.MapPos{
+			faction.SideP1: objPos.New(md.InitCameraPos[0][0], md.InitCameraPos[0][1]),
+			faction.SideP2: objPos.New(md.InitCameraPos[1][0], md.InitCameraPos[1][1]),
 		}
 		// 元数据
 		missionMetadata[md.Name] = MissionMetadata{
-			Name:        md.Name,
-			DisplayName: md.DisplayName,
-			Category:    category,
+			Name:                md.Name,
+			DisplayName:         md.DisplayName,
+			Category:            category,
+			InitCameraPositions: initCameraPositions,
 			displayNames: map[i18n.Language]string{
 				i18n.LanguageZhHans:   md.DisplayName,
 				i18n.LanguageEnglish:  md.DisplayNameEn,
 				i18n.LanguageRussian:  md.DisplayNameRu,
 				i18n.LanguageJapanese: md.DisplayNameJa,
 			},
-			MaxShipCount:  md.MaxShipCount,
-			InitFunds:     md.InitFunds,
-			InitCameraPos: objPos.New(md.InitCameraPos[0], md.InitCameraPos[1]),
-			MapCfg:        mapCfg,
-			Description:   md.Description,
+			MaxShipCount: md.MaxShipCount,
+			InitFunds:    md.InitFunds,
+			MapCfg:       mapCfg,
+			Description:  md.Description,
 			descriptions: map[i18n.Language]string{
 				i18n.LanguageZhHans:   md.Description,
 				i18n.LanguageEnglish:  md.DescriptionEn,
 				i18n.LanguageRussian:  md.DescriptionRu,
 				i18n.LanguageJapanese: md.DescriptionJa,
 			},
-			AllyShipCount:       allyShips,
-			EnemyShipCount:      enemyShips,
-			AllyReinforceCount:  allyReinforce,
-			EnemyReinforceCount: enemyReinforce,
+			PlayerSides:         playerSides,
+			SideStats:           sideStats,
 			OilPlatformCount:    len(initOilPlatforms),
 			TotalReinforceSlots: totalSlots,
 			InitShips:           initShips,

@@ -722,8 +722,11 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     displayNameJa: "デフォルト",
     // 初始资金
     initFunds: 10000,
-    // 初始相机视角位置（需在地图范围内）
-    initCameraPos: [30, 30],
+    // 初始相机视角位置，按 [P1 坐标, P2 坐标] 配置（均需在地图范围内）
+    initCameraPos: [
+      [30, 30], // P1
+      [70, 70] // P2
+    ],
     // 地图名称（需确保存在）
     mapName: "default",
     // 最大战舰数量（目前不生效）
@@ -744,8 +747,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         rotation: 90,
         // 集结点
         rallyPos: [25, 35],
-        // 所属方
-        belongPlayer: "HA",
+        // 任务配置所属方：P1 / P2；进入关卡时选择的阵营会映射为运行时 HA
+        belongPlayer: "P1",
         // 最大队列数量
         maxOncomingShip: 10,
         // 可选择的战舰名称
@@ -789,8 +792,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         runwayLength: 8,
         // 跑道宽度（格）
         runwayWidth: 0.8,
-        // 所属方
-        belongPlayer: "HA",
+        // 任务配置所属方：P1 / P2；进入关卡时选择的阵营会映射为运行时 HA
+        belongPlayer: "P1",
         // 起飞冷却（秒）；两次起飞之间的最小间隔；双起飞点「一前一后 +
         // 一左一右」斜向错位，双机并行弹射时斜向单列跟进而非并排
         takeOffTime: 2,
@@ -809,21 +812,19 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       }
     ],
     initShips: [
-      // 己方初始战舰
+      // P1 初始战舰；选择 P1 时由玩家控制，否则由电脑控制
       {
         name: "default",
         pos: [40, 33],
         rotation: 90,
-        // 指定所属玩家为本人（humanAlpha）
-        belongPlayer: "HA"
+        belongPlayer: "P1"
       },
-      // 敌人初始战舰
+      // P2 初始战舰；选择 P2 时由玩家控制，否则由电脑控制
       {
         name: "default",
         pos: [70, 35],
         rotation: 90,
-        // 指定所属玩家为电脑（computerAlpha）      
-        belongPlayer: "CA"
+        belongPlayer: "P2"
       }
     ]
   }

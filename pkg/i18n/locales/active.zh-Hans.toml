@@ -26,6 +26,8 @@ other = "开始任务"
 other = "经典"
 [MissionCategoryTest]
 other = "测试"
+[MissionPlayerSide]
+other = "阵营"
 [Back]
 other = "返回"
 [MissionStats]

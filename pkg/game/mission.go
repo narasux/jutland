@@ -8,6 +8,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -29,6 +30,12 @@ func (g *Game) handleMissionSelect() error {
 		}
 		if isHoverArea(ui.TestButton) {
 			g.selectMissionCategory(metadata.MissionCategoryTest)
+			return nil
+		}
+		if isHoverArea(ui.SideP1Button) && g.selectMissionPlayerSide(faction.SideP1) {
+			return nil
+		}
+		if isHoverArea(ui.SideP2Button) && g.selectMissionPlayerSide(faction.SideP2) {
 			return nil
 		}
 	}
@@ -64,6 +71,7 @@ func (g *Game) handleMissionSelect() error {
 	}
 
 	g.curMission = cycleMission(missions, g.curMission, offset)
+	g.normalizeMissionPlayerSide()
 
 	// 确定：Enter 键或点击「开始任务」
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
@@ -108,6 +116,31 @@ func (g *Game) selectMissionCategory(category metadata.MissionCategory) bool {
 	}
 	g.curMissionCategory = category
 	g.curMission = missions[0]
+	g.normalizeMissionPlayerSide()
+	return true
+}
+
+// normalizeMissionPlayerSide 将当前选择修正为任务可用的 P1/P2。
+func (g *Game) normalizeMissionPlayerSide() {
+	if g.curMission == "" {
+		g.curMissionPlayerSide = faction.SideP1
+		return
+	}
+	g.curMissionPlayerSide = metadata.Get(g.curMission).NormalizePlayerSide(g.curMissionPlayerSide)
+}
+
+// currentMissionPlayerSide 返回本次进入关卡使用的配置阵营。
+func (g *Game) currentMissionPlayerSide() faction.Side {
+	g.normalizeMissionPlayerSide()
+	return g.curMissionPlayerSide
+}
+
+// selectMissionPlayerSide 记录玩家选择的配置阵营。
+func (g *Game) selectMissionPlayerSide(side faction.Side) bool {
+	if !metadata.Get(g.curMission).HasPlayerSide(side) {
+		return false
+	}
+	g.curMissionPlayerSide = side
 	return true
 }
 
@@ -120,7 +153,7 @@ func (g *Game) handleMissionLoading() error {
 		return nil
 	}
 	if g.missionMgr == nil {
-		g.missionMgr = manager.New(g.curMission)
+		g.missionMgr = manager.New(g.curMission, g.currentMissionPlayerSide())
 	}
 	if !g.missionMgr.WarmupMapBlocks() {
 		return nil

@@ -117,6 +117,8 @@ func (i *loadingInterface) Reset() {
 type missionSelectUI struct {
 	LeftArrow     clickableArea
 	RightArrow    clickableArea
+	SideP1Button  clickableArea
+	SideP2Button  clickableArea
 	StartButton   clickableArea
 	BackButton    clickableArea
 	ClassicButton clickableArea

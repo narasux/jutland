@@ -26,16 +26,14 @@ type MissionMetadata struct {
 	MaxShipCount int
 	// 初始资金
 	InitFunds int64
-	// 初始位置
-	InitCameraPos objPos.MapPos
+	// 各配置阵营的初始相机位置
+	InitCameraPositions map[faction.Side]objPos.MapPos
 	// 关卡描述
 	Description  string
 	descriptions map[i18n.Language]string
-	// 统计信息（加载时计算）
-	AllyShipCount       int // 我方初始舰船数
-	EnemyShipCount      int // 敌方初始舰船数
-	AllyReinforceCount  int // 我方增援点数量
-	EnemyReinforceCount int // 敌方增援点数量
+	// 可选阵营与分阵营统计信息（加载时计算）
+	PlayerSides         []faction.Side
+	SideStats           map[faction.Side]MissionSideStats
 	OilPlatformCount    int // 油井数量
 	TotalReinforceSlots int // 全部增援槽位总数
 	// 初始战舰
@@ -48,12 +46,18 @@ type MissionMetadata struct {
 	InitAirfields []InitAirfieldMetadata
 }
 
+// MissionSideStats 单个任务阵营的统计信息。
+type MissionSideStats struct {
+	ShipCount      int
+	ReinforceCount int
+}
+
 // InitShipMetadata ...
 type InitShipMetadata struct {
-	ShipName     string
-	Pos          objPos.MapPos
-	Rotation     float64
-	BelongPlayer faction.Player
+	ShipName   string
+	Pos        objPos.MapPos
+	Rotation   float64
+	BelongSide faction.Side
 }
 
 // InitReinforcePointMetadata ...
@@ -61,7 +65,7 @@ type InitReinforcePointMetadata struct {
 	Pos               objPos.MapPos
 	Rotation          float64
 	RallyPos          objPos.MapPos
-	BelongPlayer      faction.Player
+	BelongSide        faction.Side
 	MaxOncomingShip   int
 	ProvidedShipNames []string
 }
@@ -79,7 +83,7 @@ type InitAirfieldMetadata struct {
 	Rotation     float64
 	RunwayLength float64
 	RunwayWidth  float64
-	BelongPlayer faction.Player
+	BelongSide   faction.Side
 	TakeOffTime  float64
 	// TakeoffPoints 跑道起飞点数：<=0 缺省（双点并行），1 = 单机串行起飞，
 	// >=2 = 双机并行（缺省值）。用于重轰炸机单架间隔起飞。
@@ -111,6 +115,54 @@ func Get(mission string) MissionMetadata {
 		md.Description = value
 	}
 	return md
+}
+
+// NormalizePlayerSide 将阵营修正为该任务可选的阵营。
+func (m MissionMetadata) NormalizePlayerSide(side faction.Side) faction.Side {
+	if m.HasPlayerSide(side) {
+		return side
+	}
+	if len(m.PlayerSides) > 0 {
+		return m.PlayerSides[0]
+	}
+	return faction.SideP1
+}
+
+// HasPlayerSide 判断任务是否包含指定阵营。
+func (m MissionMetadata) HasPlayerSide(side faction.Side) bool {
+	for _, playerSide := range m.PlayerSides {
+		if playerSide == side {
+			return true
+		}
+	}
+	return false
+}
+
+// StatsForPlayerSide 按所选阵营返回我方与敌方统计信息。
+func (m MissionMetadata) StatsForPlayerSide(side faction.Side) (
+	ally MissionSideStats,
+	enemy MissionSideStats,
+) {
+	side = m.NormalizePlayerSide(side)
+	for _, playerSide := range m.PlayerSides {
+		stats := m.SideStats[playerSide]
+		if playerSide == side {
+			ally = stats
+		} else {
+			enemy.ShipCount += stats.ShipCount
+			enemy.ReinforceCount += stats.ReinforceCount
+		}
+	}
+	return ally, enemy
+}
+
+// CameraPosForPlayerSide 返回所选配置阵营的初始相机位置。
+func (m MissionMetadata) CameraPosForPlayerSide(side faction.Side) objPos.MapPos {
+	side = m.NormalizePlayerSide(side)
+	if pos, ok := m.InitCameraPositions[side]; ok {
+		return pos
+	}
+	return objPos.New(0, 0)
 }
 
 // AvailableMissions 获取可用任务列表

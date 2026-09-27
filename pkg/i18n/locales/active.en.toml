@@ -26,6 +26,8 @@ other = "Start Mission"
 other = "Classic"
 [MissionCategoryTest]
 other = "Test"
+[MissionPlayerSide]
+other = "Side"
 [Back]
 other = "Back"
 [MissionStats]

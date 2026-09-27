@@ -17,6 +17,7 @@ import (
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/game/settings"
 	"github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
@@ -42,6 +43,8 @@ type Game struct {
 	curMission string
 	// 当前任务分类
 	curMissionCategory metadata.MissionCategory
+	// 当前任务选择的配置阵营（P1/P2）
+	curMissionPlayerSide faction.Side
 	// 任务管理
 	missionMgr *manager.MissionManager
 	// 设置界面
@@ -57,15 +60,16 @@ func New() *Game {
 	config.G.Language = string(i18n.SetLanguage(config.G.Language))
 	emptyUIRoot := widget.NewContainer(widget.ContainerOpts.Layout(widget.NewAnchorLayout()))
 	g := &Game{
-		mode:               GameModeStart,
-		drawer:             NewDrawer(),
-		player:             audio.NewPlayer(audio.Context),
-		objStates:          nil,
-		curMission:         "",
-		curMissionCategory: metadata.MissionCategoryClassic,
-		missionMgr:         nil,
-		settingUI:          settings.New(),
-		emptyUIRoot:        emptyUIRoot,
+		mode:                 GameModeStart,
+		drawer:               NewDrawer(),
+		player:               audio.NewPlayer(audio.Context),
+		objStates:            nil,
+		curMission:           "",
+		curMissionCategory:   metadata.MissionCategoryClassic,
+		curMissionPlayerSide: faction.SideP1,
+		missionMgr:           nil,
+		settingUI:            settings.New(),
+		emptyUIRoot:          emptyUIRoot,
 		ui: &ebitenui.UI{
 			Container:           emptyUIRoot,
 			DisableDefaultFocus: true,
@@ -130,7 +134,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawer.drawBackground(screen, bgImg.GameMenu)
 		g.drawer.drawGameMenu(screen, g.objStates.MenuButton)
 	case GameModeMissionSelect:
-		g.drawer.drawMissionSelect(screen, g.curMission, g.curMissionCategory, g.objStates)
+		g.drawer.drawMissionSelect(
+			screen,
+			g.curMission,
+			g.curMissionCategory,
+			g.currentMissionPlayerSide(),
+			g.objStates,
+		)
 	case GameModeMissionLoading:
 		g.drawer.drawBackground(screen, bgImg.MissionStart)
 		g.drawer.drawGameTip(screen, i18n.Text(i18n.MsgLoading))

@@ -57,11 +57,11 @@ type MissionManager struct {
 	takeoffTypeCursors       map[string]int
 }
 
-// New 创建任务管理器
-func New(mission string) *MissionManager {
+// New 创建任务管理器，playerSide 为玩家在任务配置中选择的阵营。
+func New(mission string, playerSide faction.Side) *MissionManager {
 	magnify.Init()
 	manager := &MissionManager{
-		state:          state.NewMissionState(mission),
+		state:          state.NewMissionState(mission, playerSide),
 		drawer:         drawer.NewDrawer(mission),
 		sidebar:        sidebar.New(mission),
 		terminal:       hacker.NewTerminal(),

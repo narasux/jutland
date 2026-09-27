@@ -186,9 +186,10 @@ func (s *MissionState) Fleet(player faction.Player) Fleet {
 	return Fleet{Player: player, Total: len(ships), Classes: classes}
 }
 
-// NewMissionState ...
-func NewMissionState(mission string) *MissionState {
+// NewMissionState 创建任务状态，并把配置层 P1/P2 映射为运行时 HA/CA。
+func NewMissionState(mission string, playerSide faction.Side) *MissionState {
 	missionMD := metadata.Get(mission)
+	playerSide = missionMD.NormalizePlayerSide(playerSide)
 	misLayout := layout.NewScreenLayout()
 	// 初始化战舰 Uid 生成器
 	shipUidGenerators := map[faction.Player]*objUnit.ShipUidGenerator{
@@ -198,12 +199,13 @@ func NewMissionState(mission string) *MissionState {
 	// 初始化战舰
 	ships := map[string]*objUnit.BattleShip{}
 	for _, md := range missionMD.InitShips {
+		runtimePlayer := md.BelongSide.RuntimePlayer(playerSide)
 		ship := objUnit.NewShip(
-			shipUidGenerators[md.BelongPlayer],
+			shipUidGenerators[runtimePlayer],
 			md.ShipName,
 			md.Pos,
 			md.Rotation,
-			md.BelongPlayer,
+			runtimePlayer,
 		)
 		ships[ship.Uid] = ship
 	}
@@ -211,16 +213,17 @@ func NewMissionState(mission string) *MissionState {
 	selectedReinforcePointUid := ""
 	reinforcePoints := map[string]*objBuilding.ReinforcePoint{}
 	for _, md := range missionMD.InitReinforcePoints {
+		runtimePlayer := md.BelongSide.RuntimePlayer(playerSide)
 		rp := objBuilding.NewReinforcePoint(
 			md.Pos,
 			md.Rotation,
 			md.RallyPos,
-			md.BelongPlayer,
+			runtimePlayer,
 			md.MaxOncomingShip,
 			md.ProvidedShipNames,
 		)
 		reinforcePoints[rp.Uid] = rp
-		if rp.BelongPlayer == faction.HumanAlpha {
+		if md.BelongSide == playerSide {
 			selectedReinforcePointUid = rp.Uid
 		}
 	}
@@ -234,6 +237,7 @@ func NewMissionState(mission string) *MissionState {
 	airfields := map[string]*objBuilding.Airfield{}
 	if config.G == nil || config.G.EnableLandAirfield {
 		for _, md := range missionMD.InitAirfields {
+			runtimePlayer := md.BelongSide.RuntimePlayer(playerSide)
 			groups := make([]objUnit.PlaneGroup, 0, len(md.PlaneGroups))
 			for _, g := range md.PlaneGroups {
 				groups = append(groups, objUnit.PlaneGroup{
@@ -247,7 +251,7 @@ func NewMissionState(mission string) *MissionState {
 				md.Rotation,
 				md.RunwayLength,
 				md.RunwayWidth,
-				md.BelongPlayer,
+				runtimePlayer,
 				md.TakeOffTime,
 				groups,
 			)
@@ -276,7 +280,7 @@ func NewMissionState(mission string) *MissionState {
 		View: MissionViewState{
 			Layout: misLayout,
 			Camera: Camera{
-				Pos: missionMD.InitCameraPos,
+				Pos: missionMD.CameraPosForPlayerSide(playerSide),
 				// 地图资源，多展示一行 & 列，避免出现黑边
 				Width:  misLayout.Width/constants.MapBlockSize + 1,
 				Height: misLayout.Height/constants.MapBlockSize + 1,

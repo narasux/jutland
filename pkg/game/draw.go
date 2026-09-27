@@ -10,6 +10,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
 	"github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
@@ -46,6 +47,7 @@ func (d *Drawer) drawMissionSelect(
 	screen *ebiten.Image,
 	curMission string,
 	category metadata.MissionCategory,
+	playerSide faction.Side,
 	states *objStates,
 ) {
 	screenW, screenH := float64(screen.Bounds().Dx()), float64(screen.Bounds().Dy())
@@ -145,9 +147,10 @@ func (d *Drawer) drawMissionSelect(
 
 	curY += float64(len(dataLines))*statsLineHeight + 4
 	// 战力对比
+	allyStats, enemyStats := misMD.StatsForPlayerSide(playerSide)
 	battleLine := i18n.Format(i18n.MsgMissionBattleStats, map[string]any{
-		"AllyShips": misMD.AllyShipCount, "EnemyShips": misMD.EnemyShipCount,
-		"AllyPoints": misMD.AllyReinforceCount, "EnemyPoints": misMD.EnemyReinforceCount,
+		"AllyShips": allyStats.ShipCount, "EnemyShips": enemyStats.ShipCount,
+		"AllyPoints": allyStats.ReinforceCount, "EnemyPoints": enemyStats.ReinforceCount,
 	})
 	battleLines := wrapText(battleLine, statsMaxWidth, statsFontSize)
 	for idx, line := range battleLines {
@@ -259,6 +262,63 @@ func (d *Drawer) drawMissionSelect(
 	)
 	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, backFont, backColor)
 
+	// 阵营选择：配置层选择 P1/P2，进入关卡后再映射到 HA/CA。
+	sideFont := font.LocalizedUI(font.Hang)
+	sideFontSize := 20.0
+	sideButtonW := 54.0
+	sideButtonGap := 6.0
+	sideLabel := i18n.Text(i18n.MsgMissionPlayerSide)
+	sideLabelW := layout.CalcTextWidth(sideLabel, sideFontSize, sideFont)
+	showSideLabel := screenW >= 900
+	sideSelectorW := sideButtonW*2 + sideButtonGap
+	if showSideLabel {
+		sideSelectorW += sideLabelW + 12
+	}
+	sideX := screenW - sideSelectorW - 50
+	sideY := startY
+
+	if showSideLabel {
+		d.drawText(screen, sideLabel, sideX, sideY+10, sideFontSize, sideFont, labelClr)
+		sideX += sideLabelW + 12
+	}
+
+	drawSideButton := func(text string, side faction.Side, x float64) clickableArea {
+		button := clickableArea{X: x, Y: sideY, W: sideButtonW, H: buttonH}
+		textW := layout.CalcTextWidth(text, sideFontSize, sideFont)
+		textColor, buttonBorderColor := bodyClr, subtitleClr
+		if playerSide == side {
+			vector.FillRect(
+				screen,
+				float32(button.X), float32(button.Y), float32(button.W), float32(button.H),
+				color.RGBA{R: 68, G: 116, B: 138, A: 90}, false,
+			)
+			textColor, buttonBorderColor = colorx.SkyBlue, colorx.SkyBlue
+		} else if isHoverArea(button) {
+			textColor, buttonBorderColor = colorx.White, colorx.SkyBlue
+		}
+		vector.StrokeRect(
+			screen,
+			float32(button.X), float32(button.Y), float32(button.W), float32(button.H),
+			1, buttonBorderColor, false,
+		)
+		d.drawText(
+			screen,
+			text,
+			button.X+(button.W-textW)/2,
+			button.Y+10,
+			sideFontSize,
+			sideFont,
+			textColor,
+		)
+		return button
+	}
+	sideP1Button := drawSideButton(string(faction.SideP1), faction.SideP1, sideX)
+	sideP2Button := drawSideButton(
+		string(faction.SideP2),
+		faction.SideP2,
+		sideX+sideButtonW+sideButtonGap,
+	)
+
 	// 左下角任务分类切换
 	categoryFont := font.LocalizedUI(font.Hang)
 	categoryFontSize := 20.0
@@ -314,6 +374,8 @@ func (d *Drawer) drawMissionSelect(
 		states.MissionSelectUI = &missionSelectUI{
 			LeftArrow:     leftArrow,
 			RightArrow:    rightArrow,
+			SideP1Button:  sideP1Button,
+			SideP2Button:  sideP2Button,
 			StartButton:   startBtn,
 			BackButton:    backBtn,
 			ClassicButton: classicButton,

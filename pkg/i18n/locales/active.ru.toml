@@ -26,6 +26,8 @@ other = "Начать миссию"
 other = "Классика"
 [MissionCategoryTest]
 other = "Тесты"
+[MissionPlayerSide]
+other = "Сторона"
 [Back]
 other = "Назад"
 [MissionStats]
