@@ -2897,7 +2897,7 @@
         value: "20x1 20mm/70 Oerlikon",
       },
     ],
-    description: "Duquesne was the lead ship of the French Navy's Duquesne-class heavy cruisers, commissioned in 1929. The treaty cruiser measured 191 by 19 metres and had a designed speed of 34 knots. This ship is shown in her 1945 configuration with four twin 203 mm main turrets, eight 75 mm AA guns, six 40 mm Bofors and twenty 20 mm Oerlikon guns; torpedo tubes, seaplanes and the catapult had been removed.",
+    description: "Duquesne was the lead ship of the French Navy's Duquesne-class heavy cruisers, commissioned in 1929. This entry shows her 1945 state.",
     author: "Garlicdesign, Ari Saarinen, David Latuch",
     links: [
       {
@@ -2932,7 +2932,7 @@
         value: "18x1 20mm/70 Oerlikon",
       },
     ],
-    description: "Jeanne d'Arc was a training cruiser built for the French Navy and commissioned in 1931. She displaced 6,496 long tons standard and 8,928 tonnes at deep load, measured 170 by 17.5 metres, and was designed for 25 knots. After joining the Allies in 1943, her seaplanes were removed and her anti-aircraft armament was modernised. This June 1944 configuration carries four twin 155 mm main turrets, four 75 mm AA guns, ten 40 mm Bofors and eighteen 20 mm Oerlikon guns.",
+    description: "Jeanne d'Arc was a training cruiser built for the French Navy and commissioned in 1931. After joining the Allies in 1943, her seaplanes were removed and her anti-aircraft armament was modernised. This entry shows the June 1944 state.",
     author: "Jabba, David Latuch",
     links: [
       {
@@ -2975,7 +2975,7 @@
         value: "Loire130 x4",
       },
     ],
-    description: "De Grasse was the lead ship of a class of light cruisers planned by the French Navy in 1937-38 as enlarged, improved versions of the La Galissonnière class. This is her 1938 design: 8,000 tons standard, 176.3 by 18 metres and 33 knots. The armament comprised three twin 152 mm main turrets, three twin 100 mm dual-purpose mounts, six single 25 mm AA guns, two twin 13.2 mm machine-gun mounts, two triple 550 mm torpedo tubes, two catapults and four Loire 130 seaplanes.",
+    description: "De Grasse was the lead ship of a class of light cruisers planned by the French Navy in 1937-38 as enlarged, improved versions of the La Galissonnière class. This entry uses the 1938 design state.",
     author: "David Latuch",
     links: [
       {
@@ -3014,7 +3014,7 @@
         value: "220-270",
       },
     ],
-    description: "Pluton was a fast minelaying cruiser ordered under the French Navy's 1925 programme and commissioned in 1932. She displaced 5,300 long tons standard and 6,214 tonnes at full load, measured 152.5 by 15.5 metres, and was designed for 30 knots. Her training-ship armament comprised four single 138.6 mm main guns, four 75 mm AA guns, two stern 37 mm AA guns and multiple 13.2 mm machine-gun mounts. This ship is represented in her August 1939 configuration, retaining her fast mine deck and minelaying role.",
+    description: "Pluton was a fast minelaying cruiser ordered under the French Navy's 1925 programme and commissioned in 1932. Converted for training, she retained her fast mine deck and minelaying role; this entry represents August 1939.",
     author: "David Latuch",
     links: [
       {
@@ -3049,7 +3049,7 @@
         value: "Loire130 x6 / Late298 x8",
       },
     ],
-    description: "Commandant Teste was a large French Navy seaplane tender commissioned in 1932. She displaced 10,000 long tons standard and 12,134 tonnes at full load, measured 167 by 27 metres, and was designed for 21 knots. This 1939 configuration carries twelve single 100 mm dual-purpose guns, eight 37 mm AA guns and two twin 13.2 mm machine-gun mounts, with an air group of six Loire 130 and eight Latécoère 298 aircraft.",
+    description: "Commandant Teste was a large French Navy seaplane tender commissioned in 1932. This entry represents her 1939 state.",
     author: "David Latuch",
     links: [
       {
@@ -3084,7 +3084,7 @@
         value: "VB10 x20 / Nord1500 x18",
       },
     ],
-    description: "Neptune is the possible 1940 depiction of the French PA4 aircraft-carrier design, with a standard displacement of about 35,000 tons, an asset length of about 218 metres and a designed air group of 38 aircraft. The source gives no speed; this configuration assumes a high-speed fleet carrier at 30 knots, with a straight deck and three anti-aircraft weapon types: six twin 100mm/45 dual-purpose guns, six twin 37mm/50 AA guns and twelve twin 13.2mm Hotchkiss machine-gun mounts, with VB10 fighters and Nord1500 carrier bombers.",
+    description: "Neptune is the possible 1940 depiction of the French PA4 aircraft-carrier design; the source gives no speed, so this entry assumes a high-speed fleet carrier at 30 knots.",
     author: "Garlicdesign",
     links: [
       {
@@ -3094,6 +3094,41 @@
       {
         name: "Wikipedia - French aircraft carrier Béarn",
         url: "https://en.wikipedia.org/wiki/French_aircraft_carrier_B%C3%A9arn",
+      },
+    ],
+  },
+  {
+    name: "joffre",
+    displayName: "Joffre",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 130mm/45 Mle 1932",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x4 37mm/50 Mle 1925",
+      },
+      {
+        label: "Anti-aircraft Machine Guns",
+        value: "22x2 13.2mm Hotchkiss",
+      },
+      {
+        label: "Aircraft",
+        value: "VB10 x15 / Nord1500 x25",
+      },
+    ],
+    description: "Joffre was the lead ship of the French Joffre-class carriers, authorized under the PA16 design before the Second World War but never laid down.",
+    author: "Garlicdesign",
+    links: [
+      {
+        name: "Shipbucket - Painlevé PA16 possible 1945 depiction",
+        url: "https://www.shipbucket.com/drawings/1979",
+      },
+      {
+        name: "Wikipedia - Joffre-class aircraft carrier",
+        url: "https://en.wikipedia.org/wiki/Joffre-class_aircraft_carrier",
       },
     ],
   },
@@ -3123,7 +3158,7 @@
         value: "V-156F x8 / LN401 x8",
       },
     ],
-    description: "Béarn was a French Navy aircraft carrier converted from an incomplete Normandie-class battleship and commissioned in 1928. She displaced 22,146 long tons standard and 28,400 long tons at full load, measured 182.5 by 27.2 metres, and had a designed speed of 21.5 knots. This 1939 configuration carries eight single 155 mm casemate guns, six 75 mm AA guns, eight 37 mm AA guns and six twin 13.2 mm machine-gun mounts, with an air group of eight V-156F and eight LN 401 aircraft.",
+    description: "Béarn was a French Navy aircraft carrier converted from an incomplete Normandie-class battleship and commissioned in 1928. This entry represents her 1939 state.",
     author: "Novice, David Latuch",
     links: [
       {
@@ -3162,7 +3197,7 @@
         value: "1x2 + 7x1 20mm Oerlikon",
       },
     ],
-    description: "Bretagne was the lead ship of the French Navy's Bretagne-class dreadnoughts. Commissioned in 1916, she measured 166 m by 27 m, displaced about 26,600 tons at full load, and was designed for 21 knots. Five twin 340 mm turrets were arranged on the centerline; she was sunk at Mers-el-Kébir on 3 July 1940.",
+    description: "Bretagne was the lead ship of the French Navy's Bretagne-class dreadnoughts, commissioned in 1916. She was sunk at Mers-el-Kébir on 3 July 1940.",
     author: "Novice, Karle94, Garlicdesign, Latuch",
     links: [
       {
@@ -3193,7 +3228,7 @@
         value: "7x1 75mm/50 Mle 1922",
       },
     ],
-    description: "Courbet was the lead ship of France's first dreadnought class, commissioned in 1914. Her 1927-1931 reconstruction left a full-load displacement of about 24,748 tons, dimensions of 166 by 27 metres, and a trial speed of 18.2 knots. Six twin 305 mm turrets were disposed fore, aft and amidships, while seven 75 mm guns provided the rebuilt anti-aircraft battery. She joined the gunnery training division in 1931.",
+    description: "Courbet was the lead ship of France's first dreadnought class, commissioned in 1914. She underwent reconstruction from 1927 to 1931 and joined the gunnery training division in 1931.",
     author: "Karle94, Garlicdesign, David Latuch",
     links: [
       {
@@ -3232,7 +3267,7 @@
         value: "Loire130 x2",
       },
     ],
-    description: "Dunkerque was the lead ship of France's first class of fast battleships. The final 1932 design was approved before her keel was laid, and she entered service in 1937. Full-load displacement was about 35,500 tons, with dimensions of 214.5 by 31.08 metres and a designed speed of 29.5 knots. Both quadruple 330 mm turrets were mounted forward, while three quadruple and two twin 130 mm dual-purpose mounts provided the secondary and heavy anti-aircraft battery. A stern catapult operated two Loire 130 scout seaplanes.",
+    description: "Dunkerque was the lead ship of France's first class of fast battleships. The final 1932 design was approved before her keel was laid, and she entered service in 1937.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -3275,7 +3310,7 @@
         value: "Loire130 x4",
       },
     ],
-    description: "Clemenceau was the third Richelieu-class battleship, laid down in 1939 to the modified Project A design. She retained two quadruple 380 mm turrets but mounted four triple 152 mm dual-purpose turrets and a heavier close-range battery. Captured incomplete at Brest in 1940, she was never finished and was scrapped in 1948. This depiction shows a tentative 1942 completion with nine quadruple 13.2 mm machine guns and a Richelieu-style aviation outfit of four Loire 130 scout seaplanes.",
+    description: "Clemenceau was the third Richelieu-class battleship, laid down in 1939 to the modified Project A design. Captured incomplete at Brest in 1940, she was never finished and was scrapped in 1948. This depiction shows a tentative 1942 completion.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -3314,7 +3349,7 @@
         value: "Loire130 x4",
       },
     ],
-    description: "Richelieu was the lead ship of France's last battleship class, represented here in its final 1936 design state. Full-load displacement was about 44,698 tons, with dimensions of 247.85 by 33.08 metres and a designed speed of 32 knots. Both quadruple 380 mm turrets were mounted forward, while five triple 152 mm dual-purpose turrets, six twin 37 mm mounts and six quadruple 13.2 mm machine-gun mounts completed the battery. The quarterdeck aviation facilities operated four Loire 130 scout seaplanes.",
+    description: "Richelieu was the lead ship of France's last battleship class, represented here in its final 1936 design state.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -3349,7 +3384,7 @@
         value: "14x2 57mm/60 Mle 1951",
       },
     ],
-    description: "Jean Bart was the second Richelieu-class fast battleship. Left incomplete when France fell in 1940, she was finished after the war to a revised design and commissioned in 1955. Full-load displacement was about 49,196 tons, with dimensions of 247.85 by 33.08 metres and a designed speed of 32 knots. Her 1955 battery comprised two quadruple 380 mm turrets, three triple 152 mm dual-purpose turrets, twelve twin 100 mm mounts and fourteen twin 57 mm anti-aircraft mounts.",
+    description: "Jean Bart was the second Richelieu-class fast battleship. Left incomplete when France fell in 1940, she was finished after the war to a revised design and commissioned in 1955. This entry shows her 1955 state.",
     author: "Redhorse, David Latuch",
     links: [
       {
@@ -3396,7 +3431,7 @@
         value: "Loire130 x4",
       },
     ],
-    description: "The Alsace class was a pair of fast battleships studied by the French Navy from late 1939 in response to the German H-class battleships. Two ships were authorized in April 1940, but neither was laid down before the fall of France ended the program. The No. 3 proposal mounted three quadruple 380 mm turrets on a hull of about 265 by 35.5 metres, with a standard displacement of about 45,000 long tons and a designed speed of 31 knots. This ship follows Shipbucket's tentative 1945-1946 completion study; its eight twin 100 mm, ten twin 37 mm and eleven 20 mm mounts are an alternate-history fit rather than a finalized historical battery. Four Loire 130 scout seaplanes complete the game configuration.",
+    description: "The Alsace class was a pair of fast battleships studied by the French Navy from late 1939 in response to the German H-class battleships. Two ships were authorized in April 1940, but neither was laid down before the fall of France ended the program. This entry follows Shipbucket's tentative 1945-1946 completion study.",
     author: "Ganlucdesign, David Latuch",
     links: [
       {
@@ -3435,7 +3470,7 @@
         value: "24x1 20mm/70 Oerlikon",
       },
     ],
-    description: "Lorraine was the third Bretagne-class battleship of the French Navy, commissioned in 1916. Her amidships 340 mm turret was replaced in 1935 by a catapult and seaplane hangar; the aircraft facilities were removed during the 1944 refit, which greatly strengthened her anti-aircraft armament before she supported Operation Dragoon and the bombardment of La Rochelle.",
+    description: "Lorraine was the third Bretagne-class battleship of the French Navy, commissioned in 1916. She was converted for seaplane operations in 1935, refitted again in 1944, and supported Operation Dragoon and the bombardment of La Rochelle.",
     author: "Novice, Karle94, Garlicdesigned, Latuch",
     links: [
       {
@@ -3664,6 +3699,20 @@
     type: "Weapon",
     armaments: [],
     description: "French 37 mm/50 Mle 1925 anti-aircraft gun in a twin mounting. Rate of fire was about 15-21 rounds per minute, effective range about 5.4 km and muzzle velocity about 810 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 37 mm Modèle 1925",
+        url: "https://en.wikipedia.org/wiki/Canon_de_37_mm_Mod%C3%A8le_1925",
+      },
+    ],
+  },
+  {
+    name: "FR/37/50/4",
+    displayName: "37mm/50 Mle 1925 Quadruple Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 37 mm/50 Mle 1925 anti-aircraft gun in a quadruple mounting. Rate of fire was about 15-21 rounds per minute, effective range about 5.4 km and muzzle velocity about 810 m/s.",
     author: "",
     links: [
       {

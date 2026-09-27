@@ -10,8 +10,10 @@
     // 初始资金 5000：珍珠港没有油井收入，初始资金是机场自动生产的唯一经济来源
     initFunds: 5000,
     initCameraPos: [
-      [64, 66], // P1
-      [101, 146] // P2
+      // P1
+      [64, 66],
+      // P2
+      [101, 146]
     ],
     mapName: "pearl_harbor",
     maxShipCount: 65,
@@ -533,8 +535,10 @@
     displayNameJa: "マニラ湾防衛戦―1941年",
     initFunds: 0,
     initCameraPos: [
-      [54, 67], // P1
-      [29, 11] // P2
+      // P1
+      [54, 67],
+      // P2
+      [29, 11]
     ],
     mapName: "manila",
     maxShipCount: 20,
@@ -704,8 +708,10 @@
     displayNameJa: "ウェーク島―1941年",
     initFunds: 5500,
     initCameraPos: [
-      [28, 30], // P1
-      [105, 45] // P2
+      // P1
+      [28, 30],
+      // P2
+      [105, 45]
     ],
     mapName: "wake",
     maxShipCount: 30,
@@ -925,8 +931,10 @@
     displayNameJa: "ダーウィン港―1942年",
     initFunds: 4600,
     initCameraPos: [
-      [28, 30], // P1
-      [86, 52] // P2
+      // P1
+      [28, 30],
+      // P2
+      [86, 52]
     ],
     mapName: "darwin",
     maxShipCount: 30,
@@ -1225,8 +1233,10 @@
     displayNameJa: "ミッドウェー海戦―1942年",
     initFunds: 5000,
     initCameraPos: [
-      [188, 81], // P1
-      [69, 84] // P2
+      // P1
+      [188, 81],
+      // P2
+      [69, 84]
     ],
     mapName: "midway",
     maxShipCount: 47,
@@ -1652,8 +1662,10 @@
     displayNameJa: "島嶼群遭遇戦―1942年",
     initFunds: 0,
     initCameraPos: [
-      [64, 58], // P1
-      [117, 77] // P2
+      // P1
+      [64, 58],
+      // P2
+      [117, 77]
     ],
     mapName: "island_chain",
     maxShipCount: 15,
@@ -1788,8 +1800,10 @@
     displayNameJa: "グアム沖迎撃―1944年",
     initFunds: 0,
     initCameraPos: [
-      [16, 54], // P1
-      [28, 97] // P2
+      // P1
+      [16, 54],
+      // P2
+      [28, 97]
     ],
     mapName: "guam",
     maxShipCount: 14,
@@ -1916,8 +1930,10 @@
     displayNameJa: "サイパン沖海戦―1944年",
     initFunds: 0,
     initCameraPos: [
-      [14, 21], // P1
-      [98, 92] // P2
+      // P1
+      [14, 21],
+      // P2
+      [98, 92]
     ],
     mapName: "saipan",
     maxShipCount: 26,
@@ -2129,8 +2145,10 @@
     displayNameJa: "パラオ諸島―1944年",
     initFunds: 8000,
     initCameraPos: [
-      [18, 45], // P1
-      [89, 105] // P2
+      // P1
+      [18, 45],
+      // P2
+      [89, 105]
     ],
     mapName: "peleliu",
     maxShipCount: 24,
@@ -2355,8 +2373,10 @@
     displayNameJa: "サマール沖海戦―1944年",
     initFunds: 0,
     initCameraPos: [
-      [58, 64], // P1
-      [44, 60] // P2
+      // P1
+      [58, 64],
+      // P2
+      [44, 60]
     ],
     mapName: "leyte_gulf",
     maxShipCount: 36,
@@ -2644,8 +2664,10 @@
     displayNameJa: "とてもたくさんの船",
     initFunds: 10000,
     initCameraPos: [
-      [20, 32], // P1
-      [84, 56] // P2
+      // P1
+      [20, 32],
+      // P2
+      [84, 56]
     ],
     mapName: "darwin",
     maxShipCount: 30,
@@ -2725,7 +2747,8 @@
           "stuttgart",
           "commandant_teste",
           "bearn",
-          "neptune"
+          "neptune",
+          "joffre"
         ],
       },
       {
@@ -3264,6 +3287,30 @@
       },
       // === French ===
       {
+        name: "commandant_teste",
+        pos: [7, 33],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "bearn",
+        pos: [8, 34],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "neptune",
+        pos: [7, 33],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "joffre",
+        pos: [8, 34],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
         name: "alsace",
         pos: [10, 33],
         rotation: 90,
@@ -3332,24 +3379,6 @@
       {
         name: "pluton",
         pos: [16, 36],
-        rotation: 90,
-        belongPlayer: "P1"
-      },
-      {
-        name: "commandant_teste",
-        pos: [15, 37],
-        rotation: 90,
-        belongPlayer: "P1"
-      },
-      {
-        name: "bearn",
-        pos: [16, 38],
-        rotation: 90,
-        belongPlayer: "P1"
-      },
-      {
-        name: "neptune",
-        pos: [17, 39],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -4122,8 +4151,10 @@
     displayNameJa: "対空試験―ウェーク島",
     initFunds: 10000,
     initCameraPos: [
-      [58, 58], // P1
-      [63, 51] // P2
+      // P1
+      [58, 58],
+      // P2
+      [63, 51]
     ],
     mapName: "wake",
     maxShipCount: 29,
@@ -4258,8 +4289,10 @@
     displayNameJa: "陸上飛行場 vs 航空母艦",
     initFunds: 10000,
     initCameraPos: [
-      [128, 128], // P1
-      [128, 128] // P2
+      // P1
+      [128, 128],
+      // P2
+      [128, 128]
     ],
     mapName: "midway",
     maxShipCount: 60,
