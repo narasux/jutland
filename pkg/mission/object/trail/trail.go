@@ -30,7 +30,9 @@ type Trail struct {
 	stopFade bool
 }
 
-// New 创建尾流对象
+var trailPool []*Trail
+
+// New 创建尾流对象。优先复用已经消亡的实例。
 func New(
 	pos objPos.MapPos,
 	Shape textureImg.TrailShape,
@@ -39,7 +41,14 @@ func New(
 	delay, rotation float64,
 	clr color.Color,
 ) *Trail {
-	return &Trail{
+	var t *Trail
+	if n := len(trailPool); n > 0 {
+		t = trailPool[n-1]
+		trailPool = trailPool[:n-1]
+	} else {
+		t = &Trail{}
+	}
+	*t = Trail{
 		Pos:               pos,
 		Shape:             Shape,
 		CurSize:           size,
@@ -50,6 +59,16 @@ func New(
 		Rotation:          rotation,
 		Color:             clr,
 	}
+	return t
+}
+
+// Release 把消亡尾迹放回池里。调用后不能再使用这只指针。
+func Release(t *Trail) {
+	if t == nil {
+		return
+	}
+	*t = Trail{}
+	trailPool = append(trailPool, t)
 }
 
 // Update ...

@@ -34,12 +34,14 @@ func (m *MissionManager) updateObjectTrails() {
 		}
 		m.state.Arena.Trails[i].Update()
 	}
-	// 生命周期结束的，不再需要
+	// 生命周期结束的放回对象池，不再留在战场列表里
 	trails := m.state.Arena.Trails[:0]
 	for _, t := range m.state.Arena.Trails {
 		if t.IsAlive() {
 			trails = append(trails, t)
+			continue
 		}
+		trail.Release(t)
 	}
 	m.state.Arena.Trails = trails
 	for _, ship := range m.state.Arena.Ships {

@@ -39,6 +39,24 @@ func drawImageCentered(
 	screen.DrawImage(img, opts)
 }
 
+// drawImageCenteredColored 以指定屏幕坐标为中心绘制，并用 ColorScale 上色。
+func drawImageCenteredColored(
+	screen *ebiten.Image, img *ebiten.Image, centerX, centerY, rotation, scale float64,
+	red, green, blue, alpha float32,
+) {
+	if img == nil {
+		return
+	}
+	w, h := img.Bounds().Dx(), img.Bounds().Dy()
+	opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+	opts.GeoM.Translate(-float64(w)/2, -float64(h)/2)
+	opts.GeoM.Rotate(rotation * degToRad)
+	opts.GeoM.Scale(scale, scale)
+	opts.GeoM.Translate(centerX, centerY)
+	opts.ColorScale.Scale(red, green, blue, alpha)
+	screen.DrawImage(img, opts)
+}
+
 // drawImageCenteredAtMapPos 以地图坐标为中心绘制图片。
 // 它先通过任务视图换算得到屏幕坐标，再复用中心绘制逻辑
 func drawImageCenteredAtMapPos(

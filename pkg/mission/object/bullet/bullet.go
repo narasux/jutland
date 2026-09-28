@@ -100,6 +100,8 @@ type Bullet struct {
 	ProximityRadius float64
 	// 爆炸伤害半径，火箭弹与对空编程炮弹使用
 	BlastRadius float64
+	// 离上次留下炮弹或鱼雷尾迹又飞过的距离，单位是地图格
+	trailCarry float64
 }
 
 // HasAirburst 对空近炸破片：火箭弹及编程引信炮弹共用结算。
@@ -130,6 +132,12 @@ func (b *Bullet) Forward() {
 	b.ForwardAge++
 }
 
+const (
+	// 炮弹和鱼雷大约每飞过半个地图格留一个尾迹点，一拍最多一个。
+	trailSampleDistance = 0.5
+	rocketTrailInterval = 3
+)
+
 // GenTrails 生成尾流
 func (b *Bullet) GenTrails() []*trail.Trail {
 	// 已经命中的没有尾流
@@ -139,14 +147,16 @@ func (b *Bullet) GenTrails() []*trail.Trail {
 	if b.Type == TypeRocket {
 		return b.genRocketTrails()
 	}
-	// 刚刚发射的不添加尾流
-	if b.ForwardAge <= 10 {
+	// 刚刚发射的不添加尾流，镭射也没有尾流
+	if b.ForwardAge <= 10 || b.Type == TypeLaser {
 		return nil
 	}
-	// 镭射弹药没有尾流
-	if b.Type == TypeLaser {
+	b.trailCarry += b.Speed
+	if b.trailCarry < trailSampleDistance {
 		return nil
 	}
+	b.trailCarry -= trailSampleDistance
+
 	// 不同类型的尾流特性不同
 	diffusionRate, multipleSizeAsLife, lifeReductionRate := 0.1, 7.0, 2.0
 	if b.Type == TypeTorpedo {
@@ -163,49 +173,38 @@ func (b *Bullet) GenTrails() []*trail.Trail {
 	}
 }
 
-// genRocketTrails 生成火箭专属尾流：短促尾焰叠加连续深灰烟点，和炮弹的线状尾流区分开。
+// genRocketTrails 每 3 拍留一个圆点，尾焰和灰烟交替。
 func (b *Bullet) genRocketTrails() []*trail.Trail {
-	if b.ForwardAge <= 1 {
+	if b.ForwardAge <= 1 || b.ForwardAge%rocketTrailInterval != 0 {
 		return nil
 	}
 
 	sinVal := math.Sin(b.Rotation * math.Pi / 180)
 	cosVal := math.Cos(b.Rotation * math.Pi / 180)
-	tailPos := func(distance float64) objPos.MapPos {
-		pos := b.CurPos.Copy()
-		pos.SubRx(sinVal * b.Speed * distance)
-		pos.AddRy(cosVal * b.Speed * distance)
-		return pos
+	pos := b.CurPos.Copy()
+	if (b.ForwardAge/rocketTrailInterval)%2 == 1 {
+		pos.SubRx(sinVal * b.Speed * 0.9)
+		pos.AddRy(cosVal * b.Speed * 0.9)
+		return []*trail.Trail{
+			trail.New(
+				pos, textureImg.TrailShapeCircle,
+				3.2, 0.18,
+				120, 7.5,
+				0, 0, colorx.Orange,
+			),
+		}
 	}
 
-	trails := []*trail.Trail{
+	pos.SubRx(sinVal * b.Speed * 1.5)
+	pos.AddRy(cosVal * b.Speed * 1.5)
+	return []*trail.Trail{
 		trail.New(
-			tailPos(0.9), textureImg.TrailShapeCircle,
-			3.2, 0.18,
-			120, 7.5,
-			0, 0, colorx.Orange,
-		),
-	}
-	if b.ForwardAge%2 != 0 {
-		return trails
-	}
-
-	trails = append(
-		trails,
-		trail.New(
-			tailPos(1.5), textureImg.TrailShapeCircle,
+			pos, textureImg.TrailShapeCircle,
 			5.5, 0.10,
 			105, 3.0,
 			0, 0, colorx.DarkSilver,
 		),
-		trail.New(
-			tailPos(2.4), textureImg.TrailShapeCircle,
-			4.6, 0.08,
-			82, 2.6,
-			0, 0, colorx.Gray,
-		),
-	)
-	return trails
+	}
 }
 
 // Map 弹药表

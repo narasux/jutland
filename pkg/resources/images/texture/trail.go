@@ -1,88 +1,83 @@
 package texture
 
 import (
-	"fmt"
+	"image"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
 	"github.com/narasux/jutland/pkg/utils/colorx"
-	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
-/*
-尾流是一个尺寸为 Size，透明度为 Life 的白色圆形，应该支持缓存而不是每次都重新生成
+const (
+	// TrailCircleDiameter 是共用圆形尾迹模板的直径。绘制时再按 CurSize 缩放。
+	TrailCircleDiameter = 32
+	// 矩形模板宽 1、高 30，只涂下半段，使居中旋转后色块从弹丸向后伸出 15 倍宽度。
+	trailRectWidth       = 1
+	trailRectImageHeight = 30
+)
 
-注：尝试过 golang-lru，比 Map 慢 5% 以内，但如果出现换页则性能直线下降
-如果 LRU 还要避免换页，不如直接 Map，反正吃不了多少内存 :D
-*/
-var trailImgCache = map[string]*ebiten.Image{}
+var (
+	trailCircle     *ebiten.Image
+	trailRect       *ebiten.Image
+	trailRectPixels *image.NRGBA
+)
 
-// 不合法的尾流应该直接暴露出来
-var invalidTrail = ebutil.NewImageWithColor(25, 25, colorx.Red)
+func init() {
+	trailCircle = ebiten.NewImage(TrailCircleDiameter, TrailCircleDiameter)
+	radius := float32(TrailCircleDiameter) / 2
+	vector.DrawFilledCircle(trailCircle, radius, radius, radius, colorx.White, false)
+
+	// 下半段纯白，上半段保持透明。用普通图片生成，避免 1 像素矩形被抗锯齿涂脏。
+	trailRectPixels = image.NewNRGBA(image.Rect(0, 0, trailRectWidth, trailRectImageHeight))
+	for y := trailRectImageHeight / 2; y < trailRectImageHeight; y++ {
+		trailRectPixels.SetNRGBA(0, y, color.NRGBA{R: 255, G: 255, B: 255, A: 255})
+	}
+	trailRect = ebiten.NewImageFromImage(trailRectPixels)
+}
 
 type TrailShape int
 
 const (
-	// 圆形尾流
+	// TrailShapeCircle 圆形尾流
 	TrailShapeCircle TrailShape = iota
-	// 矩形尾流（长度 = 宽度 15 倍，折半）
+	// TrailShapeRect 矩形尾流（长度 = 宽度 15 倍，色块只占图片下半）
 	TrailShapeRect
 )
 
-// GetTrail 获取尾流图片
-func GetTrail(shape TrailShape, size, life float64, clr color.Color) *ebiten.Image {
-	if size < 0 || life < 0 {
-		return invalidTrail
+// TrailImage 返回该形状共用的白色模板。
+func TrailImage(shape TrailShape) *ebiten.Image {
+	switch shape {
+	case TrailShapeCircle:
+		return trailCircle
+	case TrailShapeRect:
+		return trailRect
+	default:
+		return nil
 	}
+}
 
-	key := fmt.Sprintf("%d:%d:%d", shape, int(size), int(life))
-	if clr != nil {
-		r, g, b, _ := clr.RGBA()
-		key += fmt.Sprintf(":%d:%d:%d", r, g, b)
-	}
-	// 尝试从缓存取
-	if img, ok := trailImgCache[key]; ok {
-		return img
-	}
-
-	// 缓存取不到，则重新生成并且加入到缓存
+// TrailDrawScale 把尾迹当前尺寸换成相对白色模板的缩放。
+func TrailDrawScale(shape TrailShape, size float64) float64 {
 	if shape == TrailShapeCircle {
-		trailImgCache[key] = getCircle(size, life, clr)
-	} else if shape == TrailShapeRect {
-		trailImgCache[key] = getHalfRect(size, 15, life, clr)
+		return size / float64(TrailCircleDiameter)
 	}
-
-	return trailImgCache[key]
+	return size / float64(trailRectWidth)
 }
 
-func getCircle(diameter, life float64, clr color.Color) *ebiten.Image {
-	radius := float32(diameter / 2)
-	trailImg := ebiten.NewImage(int(diameter), int(diameter))
-	// 默认颜色
+// TrailAlphaByte 对齐原来烤进贴图的 uint8(life)，包括超过 255 时的截断。
+func TrailAlphaByte(life float64) uint8 {
+	return uint8(life)
+}
+
+// TrailColorScale 返回绘制时的预乘颜色。nil 颜色按白色。
+// ColorScale 乘在已经预乘过的像素上，RGB 不随透明度一起缩小的话，尾迹会一直是实心白。
+func TrailColorScale(clr color.Color, life float64) (red, green, blue, alpha float32) {
 	if clr == nil {
 		clr = colorx.White
 	}
-	// 基于基础颜色，添加透明度
 	r, g, b, _ := clr.RGBA()
-	clr = color.NRGBA{uint8(r), uint8(g), uint8(b), uint8(life)}
-	// 绘制圆形
-	vector.DrawFilledCircle(trailImg, radius, radius, radius, clr, false)
-	return trailImg
-}
-
-func getHalfRect(width, multipleWidthAsHeight, life float64, clr color.Color) *ebiten.Image {
-	height := int(width * multipleWidthAsHeight)
-	trailImg := ebiten.NewImage(int(width), height*2)
-	// 默认颜色
-	if clr == nil {
-		clr = colorx.White
-	}
-	// 基于基础颜色，添加透明度
-	r, g, b, _ := clr.RGBA()
-	clr = color.NRGBA{uint8(r), uint8(g), uint8(b), uint8(life)}
-	// 绘制矩形
-	vector.FillRect(trailImg, 0, float32(height), float32(width), float32(height), clr, false)
-	return trailImg
+	alpha = float32(TrailAlphaByte(life)) / 255
+	return float32(r) / 65535 * alpha, float32(g) / 65535 * alpha, float32(b) / 65535 * alpha, alpha
 }

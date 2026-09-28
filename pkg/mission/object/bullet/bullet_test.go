@@ -1,6 +1,7 @@
 package bullet
 
 import (
+	"image/color"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -8,6 +9,9 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	"github.com/narasux/jutland/pkg/mission/object/trail"
+	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
 func TestHasAirburst(t *testing.T) {
@@ -65,4 +69,60 @@ func TestNewCopiesTemplateByValue(t *testing.T) {
 	assert.Equal(t, 1.5, b.Speed)
 	assert.Equal(t, 20, b.Life)
 	assert.Equal(t, faction.HumanAlpha, b.BelongPlayer)
+}
+
+func TestShellTrailWaitsForHalfCell(t *testing.T) {
+	bt := &Bullet{
+		Type:       TypeShell,
+		ForwardAge: 11,
+		Speed:      0.2,
+		HitObjType: object.TypeNone,
+	}
+	if trails := bt.GenTrails(); trails != nil {
+		t.Fatalf("first step trails = %d, want 0", len(trails))
+	}
+	if trails := bt.GenTrails(); trails != nil {
+		t.Fatalf("second step trails = %d, want 0", len(trails))
+	}
+	trails := bt.GenTrails()
+	if len(trails) != 1 {
+		t.Fatalf("third step trails = %d, want 1", len(trails))
+	}
+	if trails[0].Shape != textureImg.TrailShapeRect {
+		t.Fatalf("shape = %v, want rect", trails[0].Shape)
+	}
+}
+
+func TestRocketTrailAlternatesEveryThirdTick(t *testing.T) {
+	bt := &Bullet{
+		Type:       TypeRocket,
+		Speed:      0.4,
+		HitObjType: object.TypeNone,
+		CurPos:     objPos.NewR(1, 1),
+	}
+	bt.ForwardAge = 2
+	if trails := bt.GenTrails(); trails != nil {
+		t.Fatalf("age 2 trails = %d, want 0", len(trails))
+	}
+	bt.ForwardAge = 3
+	flame := bt.GenTrails()
+	if len(flame) != 1 || flame[0].Color != colorx.Orange {
+		t.Fatalf("age 3 trails = %d color %v, want one orange flame", len(flame), colorOf(flame))
+	}
+	bt.ForwardAge = 4
+	if trails := bt.GenTrails(); trails != nil {
+		t.Fatalf("age 4 trails = %d, want 0", len(trails))
+	}
+	bt.ForwardAge = 6
+	smoke := bt.GenTrails()
+	if len(smoke) != 1 || smoke[0].Color != colorx.DarkSilver {
+		t.Fatalf("age 6 trails = %d color %v, want one smoke puff", len(smoke), colorOf(smoke))
+	}
+}
+
+func colorOf(trails []*trail.Trail) color.Color {
+	if len(trails) == 0 {
+		return nil
+	}
+	return trails[0].Color
 }

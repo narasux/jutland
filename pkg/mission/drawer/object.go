@@ -153,8 +153,11 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 			continue
 		}
 
-		trailImg := textureImg.GetTrail(trail.Shape, trail.CurSize, trail.CurLife, trail.Color)
-		drawImageCenteredAtMapPos(screen, ms, trailImg, trail.Pos, trail.Rotation, ms.ZoomScale())
+		trailImg := textureImg.TrailImage(trail.Shape)
+		scale := textureImg.TrailDrawScale(trail.Shape, trail.CurSize) * ms.ZoomScale()
+		x, y := ms.CameraPosToScreen(trail.Pos)
+		red, green, blue, alpha := textureImg.TrailColorScale(trail.Color, trail.CurLife)
+		drawImageCenteredColored(screen, trailImg, x, y, trail.Rotation, scale, red, green, blue, alpha)
 	}
 }
 
