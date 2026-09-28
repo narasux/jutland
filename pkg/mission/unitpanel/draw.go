@@ -49,7 +49,7 @@ func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState, region Rect, 
 	if region.W <= 0 || region.H <= 0 {
 		return
 	}
-	p.layout = p.calcLayout(ms, region, scrollY)
+	p.layout = p.ensureLayout(ms, region, scrollY)
 	p.viewport = region
 	p.ensureBuffer(region)
 	p.drawSections(p.renderBuf, ms)
@@ -464,7 +464,7 @@ func (p *Panel) drawTab(screen *ebiten.Image, area Rect, label string, active bo
 }
 
 func (p *Panel) drawWeapons(screen *ebiten.Image, ms *state.MissionState, ships []*objUnit.BattleShip) {
-	rows := weaponRows(ms, nowMillis())
+	rows := weaponRows(ms, objUnit.SimTick())
 	if len(rows) == 0 {
 		p.drawCenteredText(
 			screen,

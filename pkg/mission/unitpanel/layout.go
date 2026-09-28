@@ -2,8 +2,10 @@ package unitpanel
 
 import (
 	"math"
+	"strings"
 
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/utils/theme"
 )
@@ -81,7 +83,7 @@ func (p *Panel) sectionHeights(ms *state.MissionState, width float64) (visualH, 
 			systemsH = systemTabH + 42
 		}
 	} else {
-		if rows := weaponRows(ms, nowMillis()); len(rows) > 0 {
+		if rows := weaponRows(ms, objUnit.SimTick()); len(rows) > 0 {
 			// 页签条 + 全部武器开关 + 各行。
 			systemsH = systemTabH + 46 + float64(len(rows))*weaponRowH
 		} else {
@@ -128,9 +130,29 @@ func (p *Panel) airfieldSquadRowRect(af *objBuilding.Airfield, index int) Rect {
 	return Rect{X: area.X + 4, Y: y, W: area.W - 8, H: airfieldLineH}
 }
 
-// calcLayout 计算滚动视口内各分区的纵向布局。
-// region 为外层传入的视口（屏幕坐标），本函数将其归一化到以自身左上角为原点的局部坐标，
-// 并按 scrollY 上移，便于在离屏缓冲里做裁剪。
+type unitLayoutKey struct {
+	x, y, w, h float64
+	scroll     float64
+	tab        Tab
+	focused    string
+	selected   string
+}
+
+func (p *Panel) ensureLayout(ms *state.MissionState, region Rect, scrollY float64) panelLayout {
+	selected := strings.Join(ms.Interaction.SelectedShips, "\x00")
+	key := unitLayoutKey{
+		x: region.X, y: region.Y, w: region.W, h: region.H,
+		scroll: scrollY, tab: p.tab, focused: ms.Interaction.FocusedShipUid, selected: selected,
+	}
+	if p.layoutReady && p.layoutKey == key {
+		return p.layout
+	}
+	p.layout = p.calcLayout(ms, region, scrollY)
+	p.layoutKey = key
+	p.layoutReady = true
+	return p.layout
+}
+
 func (p *Panel) calcLayout(ms *state.MissionState, region Rect, scrollY float64) panelLayout {
 	visualH, infoH, systemsH := p.sectionHeights(ms, region.W)
 	innerX := contentPad

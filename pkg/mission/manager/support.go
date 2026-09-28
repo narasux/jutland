@@ -40,7 +40,7 @@ func (m *MissionManager) updateBuildings() {
 			// FIXME 目前电脑玩家先不限制金钱
 			lo.Ternary(rp.BelongPlayer == m.state.Player.CurPlayer, m.state.Player.CurFunds, 50000),
 		); ship != nil {
-			m.state.Arena.Ships[ship.Uid] = ship
+			m.state.Arena.PutShip(ship)
 			m.markTargetingDirty()
 			if rp.BelongPlayer == m.state.Player.CurPlayer {
 				fundsCost, _ := objUnit.GetShipCost(ship.Name)
@@ -55,12 +55,25 @@ func (m *MissionManager) updateBuildings() {
 
 	// 陆地机场当然算是建筑物！自动生产推进（生产完成的飞机直接入库；
 	// 出击中的按机型统计，与待命合计判断是否满编，只补充损失）
-	for _, af := range m.state.Arena.Airfields {
-		flying := make(map[string]int64, len(af.Aircraft.Groups))
+	var flyingByField map[string]map[string]int64
+	if len(m.state.Arena.Airfields) > 0 {
+		flyingByField = make(map[string]map[string]int64, len(m.state.Arena.Airfields))
 		for _, plane := range m.state.Arena.Planes {
-			if plane.BelongShip == af.Uid && plane.CurHP > 0 {
-				flying[plane.Name]++
+			if plane.BelongShip == "" || plane.CurHP <= 0 {
+				continue
 			}
+			byName := flyingByField[plane.BelongShip]
+			if byName == nil {
+				byName = map[string]int64{}
+				flyingByField[plane.BelongShip] = byName
+			}
+			byName[plane.Name]++
+		}
+	}
+	for _, af := range m.state.Arena.Airfields {
+		flying := flyingByField[af.Uid]
+		if flying == nil {
+			flying = map[string]int64{}
 		}
 		completed := af.Update(
 			// FIXME 目前电脑玩家先不限制金钱（与增援点保持一致）

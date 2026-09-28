@@ -5,7 +5,6 @@ import (
 	"log"
 	"math/rand"
 	"strings"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
@@ -253,13 +252,15 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	// 炸弹可攻击战舰与地面停放目标；鱼雷只能攻击战舰（无法在陆地使用）。
 	canRelease := enemy.ObjType() == object.TypeShip || isGroundHurtable(enemy)
 	if canRelease {
-		timeNow := time.Now().UnixMilli()
-		if float64(timeNow-p.Weapon.LatestReleaseAt) > p.Weapon.ReleaseInterval*1e3 {
+		if ticksReady(p.Weapon.LatestReleaseTick, p.Weapon.ReleaseInterval) {
 			for _, releasers := range p.releaseGroups(enemy) {
 				for i := 0; i < len(releasers); i++ {
 					if bullets := releasers[i].Fire(p, enemy); len(bullets) > 0 {
 						shotBullets = append(shotBullets, bullets...)
-						p.Weapon.LatestReleaseAt = timeNow
+						p.Weapon.LatestReleaseTick = SimTick()
+						if p.Weapon.LatestReleaseTick == 0 {
+							p.Weapon.LatestReleaseTick = 1
+						}
 						break
 					}
 				}

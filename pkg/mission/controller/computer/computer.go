@@ -30,6 +30,10 @@ var _ controller.InputHandler = (*ComputerDecisionHandler)(nil)
 func (h *ComputerDecisionHandler) Handle(
 	curInstructions map[string]instr.Instruction, misState *state.MissionState,
 ) map[string]instr.Instruction {
+	// 每 8 拍决定一次。已经在走的航线留在指令集里，这里不发新命令。
+	if misState.Core.SimTick%8 != 1 {
+		return nil
+	}
 	instructions := map[string]instr.Instruction{}
 
 	// AI 指令：扫描所有增援点，只要可用，就随机召唤增援

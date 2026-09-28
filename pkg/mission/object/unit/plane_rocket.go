@@ -4,7 +4,6 @@ import (
 	"log"
 	"math"
 	"math/rand"
-	"time"
 
 	"github.com/mohae/deepcopy"
 
@@ -49,6 +48,8 @@ type PlaneRocketLauncher struct {
 
 	// 已发射数量，飞机火箭弹不在空中重装
 	ShotCount int
+	// 最近发射的游戏拍。0 表示还没发射。
+	LatestFireTick int64
 	// 最近发射时间（毫秒时间戳）
 	LatestFireAt int64
 }
@@ -76,7 +77,7 @@ func (r *PlaneRocketLauncher) Reloaded() bool {
 	if r.Exhausted() {
 		return false
 	}
-	return float64(time.Now().UnixMilli()-r.LatestFireAt)*config.G.SpeedMultiplier >= r.ShotInterval*1e3
+	return ticksReady(r.LatestFireTick, r.ShotInterval)
 }
 
 // InShotRange 是否在射程 / 射界内。
@@ -129,7 +130,10 @@ func (r *PlaneRocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []
 	bullets = append(bullets, bt)
 
 	r.ShotCount++
-	r.LatestFireAt = time.Now().UnixMilli()
+	r.LatestFireTick = SimTick()
+	if r.LatestFireTick == 0 {
+		r.LatestFireTick = 1
+	}
 	return bullets
 }
 

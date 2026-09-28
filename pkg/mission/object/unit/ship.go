@@ -112,6 +112,8 @@ type BattleShip struct {
 	Width float64 `json:"width"`
 	// 尾流船体；空则只在中线按舰宽生成舰艏/舰艉两点
 	WakeHulls []WakeHull `json:"wakeHulls"`
+	// 生成时算好的尾流船体，尾流每拍只读这一份
+	cachedWakeHulls []WakeHull `json:"-"`
 	// 舰体费（不含舰载机）
 	FundsCost int64 `json:"fundsCost"`
 	// 耗时
@@ -371,8 +373,12 @@ type WakeHull struct {
 }
 
 func (s *BattleShip) resolvedWakeHulls() []WakeHull {
+	if s.cachedWakeHulls != nil {
+		return s.cachedWakeHulls
+	}
 	if len(s.WakeHulls) == 0 {
-		return []WakeHull{{Width: s.Width, Front: 0.25, Back: -0.20}}
+		s.cachedWakeHulls = []WakeHull{{Width: s.Width, Front: 0.25, Back: -0.20}}
+		return s.cachedWakeHulls
 	}
 	hulls := make([]WakeHull, len(s.WakeHulls))
 	for i, hull := range s.WakeHulls {
@@ -387,7 +393,8 @@ func (s *BattleShip) resolvedWakeHulls() []WakeHull {
 		}
 		hulls[i] = hull
 	}
-	return hulls
+	s.cachedWakeHulls = hulls
+	return s.cachedWakeHulls
 }
 
 func (s *BattleShip) hullWakeLength(hull WakeHull) float64 {
@@ -678,6 +685,7 @@ func NewShip(
 			s.Aircraft.ResolveDeck(deck)
 		}
 	}
+	s.resolvedWakeHulls()
 	return &s
 }
 

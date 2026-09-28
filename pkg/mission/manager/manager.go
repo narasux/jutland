@@ -12,6 +12,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/hacker"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/object"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/sidebar"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/mission/targeting"
@@ -138,6 +139,8 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 
 	if missionStatusRunsSimulation(status) {
 		m.simTick++
+		m.state.Core.SimTick = m.simTick
+		objUnit.SetSimTick(m.simTick)
 		m.updateCommandPhase()
 		switch status {
 		case state.MissionRunning:

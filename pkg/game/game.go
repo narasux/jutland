@@ -54,6 +54,8 @@ type Game struct {
 	// 全游戏唯一的 EbitenUI 主实例
 	ui          *ebitenui.UI
 	emptyUIRoot widget.Containerer
+	fpsLine     string
+	fpsFrame    int
 }
 
 func New() *Game {
@@ -174,7 +176,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.collectionUI.DrawOverlay(screen)
 	}
 
-	ebitenutil.DebugPrint(screen, fmt.Sprintf("VER %s FPS %0.2f", version.Version, ebiten.ActualFPS()))
+	ebitenutil.DebugPrint(screen, g.fpsText())
+}
+
+func (g *Game) fpsText() string {
+	if g.fpsFrame%15 == 0 || g.fpsLine == "" {
+		g.fpsLine = fmt.Sprintf("VER %s FPS %0.2f", version.Version, ebiten.ActualFPS())
+	}
+	g.fpsFrame++
+	return g.fpsLine
 }
 
 func (g *Game) syncUIContainer() {

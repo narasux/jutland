@@ -1,6 +1,10 @@
 package unit
 
-import "math"
+import (
+	"math"
+
+	"github.com/narasux/jutland/pkg/common/constants"
+)
 
 // WeaponReloadStatus 汇总一种舰载武器在指定时刻的装填与启停状态。
 // Progress 表示下一座武器可发射前的进度，取值范围为 [0, 1]。
@@ -13,8 +17,9 @@ type WeaponReloadStatus struct {
 }
 
 type reloadGate struct {
-	startAt  int64
-	duration int64
+	startAt   int64
+	duration  int64
+	tickClock bool
 }
 
 func (g reloadGate) readyAt() int64 {
@@ -23,6 +28,14 @@ func (g reloadGate) readyAt() int64 {
 
 func (g reloadGate) remainingAt(now int64) int64 {
 	return max(0, g.readyAt()-now)
+}
+
+func (g reloadGate) remainingMillis(now int64) int64 {
+	left := g.remainingAt(now)
+	if g.tickClock {
+		return left * 1000 / constants.MaxTPS
+	}
+	return left
 }
 
 func (g reloadGate) progressAt(now int64) float64 {
@@ -40,10 +53,24 @@ func laterReloadGate(a, b reloadGate) reloadGate {
 }
 
 func gunReloadGate(g *Gun) reloadGate {
-	return reloadGate{startAt: g.ReloadStartAt, duration: int64(g.ReloadTime * 1e3)}
+	if g.ReloadStartTick > 0 {
+		return reloadGate{startAt: g.ReloadStartTick, duration: ReloadTicks(g.ReloadTime), tickClock: true}
+	}
+	if g.ReloadStartAt > 0 {
+		return reloadGate{startAt: g.ReloadStartAt, duration: int64(g.ReloadTime * 1e3)}
+	}
+	return reloadGate{}
 }
 
 func torpedoReloadGate(launcher *TorpedoLauncher) reloadGate {
+	if launcher.ReloadStartTick > 0 || launcher.LatestFireTick > 0 {
+		reload := reloadGate{tickClock: true}
+		if launcher.ReloadStartTick > 0 {
+			reload = reloadGate{startAt: launcher.ReloadStartTick, duration: ReloadTicks(launcher.ReloadTime), tickClock: true}
+		}
+		interval := reloadGate{startAt: launcher.LatestFireTick, duration: ReloadTicks(launcher.ShotInterval), tickClock: true}
+		return laterReloadGate(reload, interval)
+	}
 	reload := reloadGate{
 		startAt:  launcher.ReloadStartAt,
 		duration: int64(launcher.ReloadTime * 1e3),
@@ -56,6 +83,21 @@ func torpedoReloadGate(launcher *TorpedoLauncher) reloadGate {
 }
 
 func rocketReloadGate(launcher *RocketLauncher) reloadGate {
+	if launcher.ReloadStartTick > 0 || launcher.LatestFireTick > 0 {
+		reload := reloadGate{tickClock: true}
+		if launcher.ReloadStartTick > 0 {
+			reload = reloadGate{startAt: launcher.ReloadStartTick, duration: ReloadTicks(launcher.ReloadTime), tickClock: true}
+		}
+		if launcher.ShotCountBeforeReload <= 0 {
+			return reload
+		}
+		intervalSeconds := launcher.ShotInterval
+		if launcher.ShotCountBeforeReload%launcher.groupSize() == 0 {
+			intervalSeconds = launcher.GroupInterval
+		}
+		interval := reloadGate{startAt: launcher.LatestFireTick, duration: ReloadTicks(intervalSeconds), tickClock: true}
+		return laterReloadGate(reload, interval)
+	}
 	reload := reloadGate{
 		startAt:  launcher.ReloadStartAt,
 		duration: int64(launcher.ReloadTime * 1e3),
@@ -87,7 +129,7 @@ func aggregateReloadStatus(disabled bool, gates []reloadGate, now int64) WeaponR
 
 	nextRemaining := int64(math.MaxInt64)
 	for _, gate := range gates {
-		remaining := gate.remainingAt(now)
+		remaining := gate.remainingMillis(now)
 		if remaining == 0 {
 			status.Ready++
 			continue

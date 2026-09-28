@@ -127,7 +127,7 @@ func (m *MissionManager) updateMissionShips() {
 			}
 
 			m.state.Arena.DestroyedShips = append(m.state.Arena.DestroyedShips, ship)
-			delete(m.state.Arena.Ships, uid)
+			m.state.Arena.RemoveShip(uid)
 		}
 	}
 
@@ -169,7 +169,7 @@ func (m *MissionManager) updateMissionPlanes() {
 			plane.RemainRange = rand.Float64() - 0.5
 
 			m.state.Arena.DestroyedPlanes = append(m.state.Arena.DestroyedPlanes, plane)
-			delete(m.state.Arena.Planes, uid)
+			m.state.Arena.RemovePlane(uid)
 		}
 	}
 

@@ -246,7 +246,7 @@ func (i *PlaneReturn) recoverPlane(
 ) {
 	// 回收（航母与机场一致）：入库后移除活动实体；飞机无回收价值时按坠毁处理
 	base.BaseAircraft().Recovery(plane)
-	delete(missionState.Arena.Planes, i.planeUid)
+	missionState.Arena.RemovePlane(i.planeUid)
 	i.status = Executed
 }
 

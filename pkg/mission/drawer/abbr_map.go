@@ -2,8 +2,6 @@ package drawer
 
 import (
 	"fmt"
-	"slices"
-	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -174,12 +172,7 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
 	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	ships := lo.Values(ms.Arena.Ships)
-	slices.SortFunc(ships, func(a, b *objUnit.BattleShip) int {
-		return strings.Compare(a.Uid, b.Uid)
-	})
-
-	for _, s := range ships {
+	for _, s := range ms.Arena.OrderedShips() {
 		sImg := textureImg.GetAbbrShip(s.TypeAbbr, s.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
@@ -197,12 +190,7 @@ func (d *Drawer) drawAbbrPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
 	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
-	planes := lo.Values(ms.Arena.Planes)
-	slices.SortFunc(planes, func(a, b *objUnit.Plane) int {
-		return strings.Compare(a.Uid, b.Uid)
-	})
-
-	for _, p := range planes {
+	for _, p := range ms.Arena.OrderedPlanes() {
 		pImg := textureImg.GetAbbrPlane(p.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)

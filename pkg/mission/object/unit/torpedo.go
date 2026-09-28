@@ -3,7 +3,6 @@ package unit
 import (
 	"log"
 	"math"
-	"time"
 
 	"github.com/mohae/deepcopy"
 
@@ -58,9 +57,12 @@ type TorpedoLauncher struct {
 
 	// 动态参数
 	// 当前鱼雷是否可用（如战损 / 禁用）
-	Disable bool
+	Disable         bool
+	ReloadStartTick int64
 	// 开始装填时间（时间戳）
 	ReloadStartAt int64
+	// 最近发射的游戏拍
+	LatestFireTick int64
 	// 最近发射时间（时间戳）
 	LatestFireAt int64
 	// 本次装填鱼雷已发射数量
@@ -76,15 +78,10 @@ var _ AttackWeapon = (*TorpedoLauncher)(nil)
 
 // Reloaded 是否在重新装填 / 发射间隔
 func (lc *TorpedoLauncher) Reloaded() bool {
-	// 注：鱼雷是需要考虑发射间隔的，比如每秒一发之类，全部打完才是重新装填
-	timeNow := time.Now().UnixMilli()
-	speedMult := config.G.SpeedMultiplier
-	// 在重新装填，不可发射
-	if float64(timeNow-lc.ReloadStartAt)*speedMult < lc.ReloadTime*1e3 {
+	if !ticksReady(lc.ReloadStartTick, lc.ReloadTime) {
 		return false
 	}
-	// 小于发射间隔也是不行的
-	if float64(timeNow-lc.LatestFireAt)*speedMult < lc.ShotInterval*1e3 {
+	if !ticksReady(lc.LatestFireTick, lc.ShotInterval) {
 		return false
 	}
 	return lc.ShotCountBeforeReload < lc.BulletCount
@@ -142,12 +139,14 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	// 鱼雷不是齐射的，是一个一个来的
 	lc.ShotCountBeforeReload++
 
-	timeNow := time.Now().UnixMilli()
-	lc.LatestFireAt = timeNow
+	lc.LatestFireTick = SimTick()
+	if lc.LatestFireTick == 0 {
+		lc.LatestFireTick = 1
+	}
 	// 弹药打完了，重新装填
 	if lc.ShotCountBeforeReload >= lc.BulletCount {
 		lc.ShotCountBeforeReload = 0
-		lc.ReloadStartAt = timeNow
+		lc.ReloadStartTick = lc.LatestFireTick
 	}
 
 	// 鱼雷的生命值就是最大射程（+5 预留）

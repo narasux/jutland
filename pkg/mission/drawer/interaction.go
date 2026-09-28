@@ -6,6 +6,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/font"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
@@ -47,7 +48,7 @@ func (d *Drawer) drawArrowOnMapWhenHover(screen *ebiten.Image, ms *state.Mission
 
 // 绘制选择框
 func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) {
-	area := action.DetectCursorSelectArea(ms)
+	area := action.CurrentSelectArea(ms)
 	if area == nil || !ms.Interaction.IsAreaSelecting {
 		return
 	}
@@ -61,6 +62,11 @@ func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) 
 func (d *Drawer) drawMarks(screen *ebiten.Image, ms *state.MissionState) {
 	for _, mark := range ms.UI.GameMarks {
 		if !ms.View.Camera.ContainsMargin(mark.Pos, markViewMargin) {
+			continue
+		}
+		if mark.Text != "" {
+			x, y := ms.CameraPosToScreen(mark.Pos)
+			d.drawText(screen, mark.Text, x, y, mark.FontSize, font.Hang, mark.Color)
 			continue
 		}
 		drawImageCenteredAtMapPos(screen, ms, mark.Img, mark.Pos, 0, ms.ZoomScale())

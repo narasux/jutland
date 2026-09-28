@@ -4,7 +4,6 @@ import (
 	"log"
 	"math"
 	"math/rand"
-	"time"
 
 	"github.com/mohae/deepcopy"
 
@@ -56,9 +55,12 @@ type RocketLauncher struct {
 	RightFiringArc FiringArc
 
 	// 当前火箭炮是否可用（如战损 / 禁用）
-	Disable bool
+	Disable         bool
+	ReloadStartTick int64
 	// 装填开始时间（毫秒时间戳）
 	ReloadStartAt int64
+	// 最近发射的游戏拍
+	LatestFireTick int64
 	// 最近发射时间（毫秒时间戳）
 	LatestFireAt int64
 	// 本次装填已发射数量
@@ -80,21 +82,18 @@ func (r *RocketLauncher) IsAvailableAntiType(objType object.Type) bool {
 
 // Reloaded 是否已装填并满足下一枚火箭弹的发射间隔
 func (r *RocketLauncher) Reloaded() bool {
-	timeNow := time.Now().UnixMilli()
-	speedMult := config.G.SpeedMultiplier
-	if float64(timeNow-r.ReloadStartAt)*speedMult < r.ReloadTime*1e3 {
+	if !ticksReady(r.ReloadStartTick, r.ReloadTime) {
 		return false
 	}
 	if r.ShotCountBeforeReload <= 0 {
 		return true
 	}
-
 	groupSize := r.groupSize()
 	interval := r.ShotInterval
 	if r.ShotCountBeforeReload%groupSize == 0 {
 		interval = r.GroupInterval
 	}
-	if float64(timeNow-r.LatestFireAt)*speedMult < interval*1e3 {
+	if !ticksReady(r.LatestFireTick, interval) {
 		return false
 	}
 	return r.ShotCountBeforeReload < r.RocketCount
@@ -154,11 +153,13 @@ func (r *RocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objB
 	bullets = append(bullets, bt)
 
 	r.ShotCountBeforeReload++
-	timeNow := time.Now().UnixMilli()
-	r.LatestFireAt = timeNow
+	r.LatestFireTick = SimTick()
+	if r.LatestFireTick == 0 {
+		r.LatestFireTick = 1
+	}
 	if r.ShotCountBeforeReload >= r.RocketCount {
 		r.ShotCountBeforeReload = 0
-		r.ReloadStartAt = timeNow
+		r.ReloadStartTick = r.LatestFireTick
 	}
 
 	return bullets

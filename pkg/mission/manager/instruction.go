@@ -4,8 +4,6 @@ import (
 	"log"
 	"sync"
 
-	"github.com/samber/lo"
-
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/state"
 )
@@ -34,9 +32,14 @@ func (s *InstructionSet) Add(instr instr.Instruction) {
 
 // Assign 批量添加指令（覆盖合并）
 func (s *InstructionSet) Assign(instructions map[string]instr.Instruction) {
+	if len(instructions) == 0 {
+		return
+	}
 	s.Lock()
 	defer s.Unlock()
-	s.instructions = lo.Assign(s.instructions, instructions)
+	for uid, instruction := range instructions {
+		s.instructions[uid] = instruction
+	}
 }
 
 // Remove 删除指令
@@ -50,9 +53,11 @@ func (s *InstructionSet) Remove(uid string) {
 func (s *InstructionSet) RemoveExecuted() {
 	s.Lock()
 	defer s.Unlock()
-	s.instructions = lo.PickBy(s.instructions, func(key string, instruction instr.Instruction) bool {
-		return !instruction.Executed()
-	})
+	for uid, instruction := range s.instructions {
+		if instruction.Executed() {
+			delete(s.instructions, uid)
+		}
+	}
 }
 
 // Items 获取指令集

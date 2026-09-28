@@ -7,8 +7,6 @@ package sidebar
 import (
 	"image/color"
 	"math"
-	"slices"
-	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -19,7 +17,6 @@ import (
 	"github.com/narasux/jutland/pkg/i18n"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
-	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/mission/unitpanel"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -103,6 +100,8 @@ type Panel struct {
 	tab       Tab
 	scrollY   float64
 	units     *unitpanel.Panel
+	layoutKey sidebarLayoutKey
+	layoutOK  bool
 }
 
 // New 创建任务侧栏。
@@ -129,7 +128,7 @@ func (p *Panel) Update(ms *state.MissionState) []unitpanel.Action {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return nil
 	}
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	p.layout = p.ensureLayout(ms)
 	sx, sy := ebiten.CursorPosition()
 	leftPressed := inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
 
@@ -195,7 +194,7 @@ func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState) {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return
 	}
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	p.layout = p.ensureLayout(ms)
 	if ms.UI.SidebarExpanded {
 		p.drawPanel(screen, ms)
 	}
@@ -213,7 +212,7 @@ func (p *Panel) consumesCursorAt(ms *state.MissionState, sx, sy int) bool {
 	if ms.Core.MissionStatus != state.MissionRunning {
 		return false
 	}
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	ui := p.ensureLayout(ms)
 	if ui.Handle.contains(sx, sy) {
 		return true
 	}
@@ -338,7 +337,7 @@ func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, c
 }
 
 func (p *Panel) drawHandleFrame(screen *ebiten.Image, ms *state.MissionState) {
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	ui := p.ensureLayout(ms)
 	sx, sy := ebiten.CursorPosition()
 	fill := theme.HandleFill
 	if ui.Handle.contains(sx, sy) {
@@ -358,7 +357,7 @@ func (p *Panel) drawHandleFrame(screen *ebiten.Image, ms *state.MissionState) {
 
 // drawHandleArrow 在把手中心绘制 V 形折线箭头：收起时朝下提示「下拉展开」，展开时朝上提示「收起」。
 func (p *Panel) drawHandleArrow(screen *ebiten.Image, ms *state.MissionState) {
-	ui := calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	ui := p.ensureLayout(ms)
 	dir := theme.TriangleDown
 	if ms.UI.SidebarExpanded {
 		dir = theme.TriangleUp
@@ -439,11 +438,7 @@ func (p *Panel) drawMinimapBuildings(screen *ebiten.Image, ms *state.MissionStat
 }
 
 func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {
-	ships := lo.Values(ms.Arena.Ships)
-	slices.SortFunc(ships, func(a, b *objUnit.BattleShip) int {
-		return strings.Compare(a.Uid, b.Uid)
-	})
-	for _, ship := range ships {
+	for _, ship := range ms.Arena.OrderedShips() {
 		img := textureImg.GetAbbrShip(ship.TypeAbbr, ship.BelongPlayer != ms.Player.CurPlayer)
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		ebutil.SetOptsCenterRotation(opts, img, ship.CurRotation)
@@ -456,11 +451,7 @@ func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {
 }
 
 func (p *Panel) drawMinimapPlanes(screen *ebiten.Image, ms *state.MissionState) {
-	planes := lo.Values(ms.Arena.Planes)
-	slices.SortFunc(planes, func(a, b *objUnit.Plane) int {
-		return strings.Compare(a.Uid, b.Uid)
-	})
-	for _, plane := range planes {
+	for _, plane := range ms.Arena.OrderedPlanes() {
 		img := textureImg.GetAbbrPlane(plane.BelongPlayer != ms.Player.CurPlayer)
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		ebutil.SetOptsCenterRotation(opts, img, plane.CurRotation)
@@ -543,6 +534,30 @@ func tabLabel(tab Tab) string {
 		return i18n.Text(i18n.MsgSidebarTabSettings)
 	}
 	return i18n.Text(i18n.MsgSidebarTabBattle)
+}
+
+type sidebarLayoutKey struct {
+	width, height int
+	expanded      bool
+	tab           Tab
+	aspect        float64
+}
+
+func (p *Panel) ensureLayout(ms *state.MissionState) sidebarLayout {
+	key := sidebarLayoutKey{
+		width:    ms.View.Layout.Width,
+		height:   ms.View.Layout.Height,
+		expanded: ms.UI.SidebarExpanded,
+		tab:      p.tab,
+		aspect:   p.mapAspect,
+	}
+	if p.layoutOK && p.layoutKey == key {
+		return p.layout
+	}
+	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	p.layoutKey = key
+	p.layoutOK = true
+	return p.layout
 }
 
 func calcLayout(screen layout.ScreenLayout, expanded bool, tab Tab, mapAspect float64) sidebarLayout {

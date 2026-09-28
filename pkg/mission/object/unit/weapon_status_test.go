@@ -93,7 +93,8 @@ func TestAnyReloadedSkipsDisabledAndReloadingGuns(t *testing.T) {
 	if config.G == nil {
 		config.G = config.NewDefaultGameSettings()
 	}
-	reloading := &Gun{ReloadTime: 100, ReloadStartAt: 1 << 62, AntiShip: true}
+	SetSimTick(10)
+	reloading := &Gun{ReloadTime: 100, ReloadStartTick: 10, AntiShip: true}
 	if (&ShipWeapon{MainGuns: []*Gun{reloading}}).AnyReloaded() {
 		t.Fatal("reloading gun reported ready")
 	}

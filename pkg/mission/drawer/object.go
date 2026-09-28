@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"image/color"
 	"math"
-	"slices"
 	"strconv"
-	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -121,6 +119,7 @@ func drawUnitHitBox(screen *ebiten.Image, ms *state.MissionState, battleUnit obj
 
 // 绘制支援舰治疗范围圈（仅在选中己方医疗船或维修船时显示）
 func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.MissionState) {
+	selected := selectedShipSet(ms.Interaction.SelectedShips)
 	for _, ship := range ms.Arena.Ships {
 		// 只绘制己方存活的医疗船或维修船
 		if (ship.Type != objUnit.ShipTypeHospital && ship.Type != objUnit.ShipTypeRepair) ||
@@ -128,7 +127,7 @@ func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.Missi
 			continue
 		}
 		// 检查是否被选中
-		if !slices.Contains(ms.Interaction.SelectedShips, ship.Uid) {
+		if _, ok := selected[ship.Uid]; !ok {
 			continue
 		}
 		// 只有在屏幕中的才渲染
@@ -175,13 +174,8 @@ func (d *Drawer) drawExplosions(screen *ebiten.Image, ms *state.MissionState) {
 
 // 绘制战舰
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
-	// 战舰排序，确保渲染顺序是一致的（否则重叠战舰会出现问题）
-	ships := lo.Values(ms.Arena.Ships)
-	slices.SortFunc(ships, func(a, b *objUnit.BattleShip) int {
-		return strings.Compare(a.Uid, b.Uid)
-	})
-
-	for _, s := range ships {
+	selected := selectedShipSet(ms.Interaction.SelectedShips)
+	for _, s := range ms.Arena.OrderedShips() {
 		// 只有在屏幕中的才渲染
 		if !ms.View.Camera.Contains(s.CurPos) {
 			continue
@@ -195,7 +189,10 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 		}
 
 		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP，武器状态
-		isShipSelected := slices.Contains(ms.Interaction.SelectedShips, s.Uid)
+		isShipSelected := false
+		if _, ok := selected[s.Uid]; ok {
+			isShipSelected = true
+		}
 		if (ms.UI.GameOpts.ForceDisplayState || isShipSelected) && s.BelongPlayer == ms.Player.CurPlayer {
 			sceneScale := ms.ZoomScale()
 			// 绘制当前生命值
@@ -348,15 +345,17 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 	}
 }
 
+func selectedShipSet(ids []string) map[string]struct{} {
+	set := make(map[string]struct{}, len(ids))
+	for _, id := range ids {
+		set[id] = struct{}{}
+	}
+	return set
+}
+
 // 绘制飞机
 func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) {
-	// 飞机排序，确保渲染顺序是一致的（否则重叠会出现问题）
-	planes := lo.Values(ms.Arena.Planes)
-	slices.SortFunc(planes, func(a, b *objUnit.Plane) int {
-		return strings.Compare(a.Uid, b.Uid)
-	})
-
-	for _, p := range planes {
+	for _, p := range ms.Arena.OrderedPlanes() {
 		// 只有在屏幕中的才渲染
 		if !ms.View.Camera.Contains(p.CurPos) {
 			continue

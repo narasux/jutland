@@ -2,7 +2,6 @@ package unitpanel
 
 import (
 	"sort"
-	"time"
 
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -307,5 +306,3 @@ func aircraftRows(ms *state.MissionState) ([]objUnit.AircraftGroupStatus, objUni
 	}
 	return rows, total
 }
-
-func nowMillis() int64 { return time.Now().UnixMilli() }

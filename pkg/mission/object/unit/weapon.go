@@ -189,7 +189,8 @@ type PlaneWeapon struct {
 	// 最小释放间隔（秒）
 	ReleaseInterval float64 `json:"releaseInterval"`
 	// 最近释放时间
-	LatestReleaseAt int64
+	LatestReleaseTick int64
+	LatestReleaseAt   int64
 	// 固定机炮
 	Guns []*Gun
 	// 炸弹

@@ -68,7 +68,15 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 // 游戏地图上的选区
 var sArea = SelectedArea{}
 
-// 探测游戏地图上的鼠标选区
+// CurrentSelectArea 返回 Update 里已经探测好的选区。没有在框选时返回 nil。
+func CurrentSelectArea(misState *state.MissionState) *SelectedArea {
+	if !misState.Interaction.IsAreaSelecting {
+		return nil
+	}
+	return &sArea
+}
+
+// DetectCursorSelectArea 探测游戏地图上的鼠标选区，并更新是否正在框选。
 func DetectCursorSelectArea(misState *state.MissionState) *SelectedArea {
 	if misState.UI.UIConsumesCursor {
 		misState.Interaction.IsAreaSelecting = false

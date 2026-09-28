@@ -1,12 +1,8 @@
 package manager
 
 import (
-	"fmt"
 	"math"
 	"math/rand"
-	"strconv"
-
-	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
@@ -159,7 +155,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 				continue
 			}
 			// 加入到对局飞机数据集中
-			m.state.Arena.Planes[plane.Uid] = plane
+			m.state.Arena.PutPlane(plane)
 			// 给飞机下达攻击指令
 			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, object.TypeShip, target.ID()))
 			continue
@@ -167,7 +163,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 
 		plane, targetType, targetUID, ok := m.takeOffFromBase(ship)
 		if ok {
-			m.state.Arena.Planes[plane.Uid] = plane
+			m.state.Arena.PutPlane(plane)
 			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
 		}
 	}
@@ -215,7 +211,7 @@ func (m *MissionManager) updateAirfieldAlertLaunch() {
 			if !ok {
 				break
 			}
-			m.state.Arena.Planes[plane.Uid] = plane
+			m.state.Arena.PutPlane(plane)
 			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
 		}
 	}
@@ -659,12 +655,7 @@ func (m *MissionManager) updateShotBullets() {
 					clr = colorx.DarkRed
 				}
 			}
-			// 如果是大于 1 的，则取整，否则保留两位小数
-			flagText := lo.Ternary(
-				bt.RealDamage > 1,
-				strconv.Itoa(int(bt.RealDamage)),
-				fmt.Sprintf("%.2f", bt.RealDamage),
-			)
+			flagText := objMark.DamageFlagText(bt.RealDamage)
 			mark := objMark.NewText(bt.CurPos, flagText, fontSize, clr, 20)
 			m.state.UI.GameMarks[mark.ID] = mark
 		}

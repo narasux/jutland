@@ -4,7 +4,6 @@ import (
 	"log"
 	"math"
 	"math/rand"
-	"time"
 
 	"github.com/mohae/deepcopy"
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -52,6 +51,8 @@ type Gun struct {
 
 	// 当前火炮是否可用（如战损 / 禁用）
 	Disable bool
+	// 装填开始的游戏拍。0 表示还没开过火，视为已装填。
+	ReloadStartTick int64
 	// 装填开始时间（毫秒时间戳)
 	ReloadStartAt int64
 }
@@ -71,8 +72,7 @@ func (g *Gun) IsAvailableAntiType(objType object.Type) bool {
 
 // Reloaded 是否已装填完成
 func (g *Gun) Reloaded() bool {
-	elapsed := time.Now().UnixMilli() - g.ReloadStartAt
-	return float64(elapsed)*config.G.SpeedMultiplier >= g.ReloadTime*1e3
+	return ticksReady(g.ReloadStartTick, g.ReloadTime)
 }
 
 // InShotRange 是否在射程 / 射界内
@@ -117,7 +117,10 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 	if !g.InShotRange(sState.CurRotation, curPos, targetPos) {
 		return
 	}
-	g.ReloadStartAt = time.Now().UnixMilli()
+	g.ReloadStartTick = SimTick()
+	if g.ReloadStartTick == 0 {
+		g.ReloadStartTick = 1
+	}
 
 	distance := curPos.Distance(targetPos)
 	// 火炮炮弹生命值与目标距离相关，15 对于 0.4 速度的炮弹来说，相当于 6 格地图，在大多数火炮散布范围之内

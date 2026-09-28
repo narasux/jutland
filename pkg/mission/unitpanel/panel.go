@@ -98,7 +98,9 @@ type Panel struct {
 	// renderBuf 是用于裁剪滚动内容的离屏缓冲，尺寸随视口变化。
 	renderBuf *ebiten.Image
 	// viewport 是本帧内容所在的滚动视口（屏幕坐标），用于把光标换算到局部坐标做悬停。
-	viewport Rect
+	viewport    Rect
+	layoutKey   unitLayoutKey
+	layoutReady bool
 }
 
 // cursorAt 判断屏幕光标（换算到视口局部坐标）是否落在 area 内。
@@ -113,7 +115,7 @@ func New() *Panel { return &Panel{tab: TabWeapons} }
 // MeasureContent 返回当前状态下内容相对于滚动视口的自然总高度，供外层计算滚动条范围。
 // 视口高度 region.H 不会被用于压缩内容；溢出交由滚动条处理。
 func (p *Panel) MeasureContent(ms *state.MissionState, region Rect) float64 {
-	return p.calcLayout(ms, region, 0).contentHeight
+	return p.ensureLayout(ms, region, 0).contentHeight
 }
 
 // Update 读取鼠标输入并返回本帧产生的面板操作。
@@ -138,7 +140,7 @@ func (p *Panel) updateWithPointer(
 		p.hits = p.hits[:0]
 		return nil
 	}
-	p.layout = p.calcLayout(ms, region, scrollY)
+	p.layout = p.ensureLayout(ms, region, scrollY)
 	p.viewport = region
 	p.syncDefaultTab(ms)
 	p.rebuildHits(ms)
@@ -236,7 +238,7 @@ func (p *Panel) rebuildHits(ms *state.MissionState) {
 		return
 	}
 
-	rows := weaponRows(ms, nowMillis())
+	rows := weaponRows(ms, objUnit.SimTick())
 	if len(rows) == 0 {
 		return
 	}

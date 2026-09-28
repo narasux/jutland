@@ -47,6 +47,8 @@ type MissionCoreState struct {
 	ConfirmQuitMission bool
 	// 任务关卡元数据
 	MissionMD metadata.MissionMetadata
+	// 当前游戏拍。武器装填和电脑决策读这一拍，不读墙钟。
+	SimTick int64
 }
 
 // MissionViewState 任务视图状态
@@ -111,6 +113,9 @@ type MissionArenaState struct {
 	Explosions []*objExplosion.Explosion
 	// 飞机
 	Planes map[string]*objUnit.Plane
+	// 按 UID 排好的绘制名单。只在增删时更新。
+	orderedShips  []*objUnit.BattleShip
+	orderedPlanes []*objUnit.Plane
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*objBullet.Bullet
 }
