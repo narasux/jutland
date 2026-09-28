@@ -388,6 +388,19 @@ func (m *MissionManager) retargetTorpedoBomber(plane *objUnit.Plane, skippedTarg
 	m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
 }
 
+// targetHitRadius 返回目标矩形中心到角点的距离，单位是地图格。
+// 半长不够：弹道擦过舷侧角点时，到舰心的距离可以大于舰长的一半。
+func targetHitRadius(length, width float64) float64 {
+	return 0.5 * math.Hypot(length, width) / constants.MapBlockSize
+}
+
+// beyondHitReach 用距离平方判断这一拍是否不可能相交。
+func beyondHitReach(bx, by, tx, ty, reach float64) bool {
+	dx := bx - tx
+	dy := by - ty
+	return dx*dx+dy*dy > reach*reach
+}
+
 // 更新弹药状态
 func (m *MissionManager) updateShotBullets() {
 	for i := 0; i < len(m.state.Arena.ForwardingBullets); i++ {
@@ -396,6 +409,12 @@ func (m *MissionManager) updateShotBullets() {
 
 	// 结算伤害
 	resolveDamage := func(bt *objBullet.Bullet) bool {
+		// 这一拍的飞行方向只算一次，粗筛和精确相交共用。
+		sinR := math.Sin(bt.Rotation * math.Pi / 180)
+		cosR := math.Cos(bt.Rotation * math.Pi / 180)
+		prevRX := bt.CurPos.RX - sinR*bt.Speed
+		prevRY := bt.CurPos.RY + cosR*bt.Speed
+
 		switch bt.TargetObjType {
 		case object.TypeShip:
 			for _, ship := range m.state.Arena.Ships {
@@ -409,12 +428,13 @@ func (m *MissionManager) updateShotBullets() {
 				}
 
 				if bt.ShotType == objBullet.ShotTypeDirect {
-					// 直射则检查线段是否与矩形相交
-					prevPos := bt.CurPos.Copy()
-					prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
-					prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
+					// 直射则检查线段是否与矩形相交。先用对角线半径丢掉够不着的船。
+					reach := targetHitRadius(ship.Length, ship.Width) + bt.Speed
+					if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY, reach) {
+						continue
+					}
 					if geometry.IsSegmentIntersectRotatedRectangle(
-						prevPos.RX, prevPos.RY,
+						prevRX, prevRY,
 						bt.CurPos.RX, bt.CurPos.RY,
 						ship.CurPos.RX, ship.CurPos.RY,
 						// 转换成实际地图上的尺寸
@@ -428,6 +448,10 @@ func (m *MissionManager) updateShotBullets() {
 					}
 				} else if bt.ShotType == objBullet.ShotTypeArcing {
 					// 曲射只认最终落点；弹道虽穿过舰体，但最终落空仍然属于跨式。
+					reach := targetHitRadius(ship.Length, ship.Width)
+					if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY, reach) {
+						continue
+					}
 					if geometry.IsPointInRotatedRectangle(
 						bt.CurPos.RX, bt.CurPos.RY,
 						ship.CurPos.RX, ship.CurPos.RY,
@@ -467,12 +491,14 @@ func (m *MissionManager) updateShotBullets() {
 					}
 				}
 
-				// 对空射击都认为是直射，检查线段是否与矩形相交
-				prevPos := bt.CurPos.Copy()
-				prevPos.SubRx(math.Sin(bt.Rotation*math.Pi/180) * bt.Speed)
-				prevPos.AddRy(math.Cos(bt.Rotation*math.Pi/180) * bt.Speed)
+				// 对空射击都认为是直射，检查线段是否与矩形相交。
+				// 随机数仍按原顺序消耗，距离过滤放在它后面，避免改谁被打中。
+				reach := targetHitRadius(plane.Length, plane.Width) + bt.Speed
+				if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, plane.CurPos.RX, plane.CurPos.RY, reach) {
+					continue
+				}
 				if geometry.IsSegmentIntersectRotatedRectangle(
-					prevPos.RX, prevPos.RY,
+					prevRX, prevRY,
 					bt.CurPos.RX, bt.CurPos.RY,
 					plane.CurPos.RX, plane.CurPos.RY,
 					// 转换成实际地图上的尺寸

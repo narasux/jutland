@@ -60,6 +60,9 @@ func (d *Drawer) drawSelectedArea(screen *ebiten.Image, ms *state.MissionState) 
 // 绘制标识
 func (d *Drawer) drawMarks(screen *ebiten.Image, ms *state.MissionState) {
 	for _, mark := range ms.UI.GameMarks {
+		if !ms.View.Camera.ContainsMargin(mark.Pos, markViewMargin) {
+			continue
+		}
 		drawImageCenteredAtMapPos(screen, ms, mark.Img, mark.Pos, 0, ms.ZoomScale())
 	}
 }

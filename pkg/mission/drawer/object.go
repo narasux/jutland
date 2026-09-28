@@ -404,9 +404,26 @@ func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionStat
 	}
 }
 
+const (
+	// 炮弹贴图小于一格，外扩一格避免贴边被切掉。
+	shotBulletViewMargin = 1
+	// 激光贴图高 1000 像素，约 7.82 个地图格，沿射击方向整段伸出。
+	laserViewMargin = 8
+	// 伤害数字和地图标识都很小。
+	markViewMargin = 1
+)
+
 // 绘制已发射的弹丸
 func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 	for _, b := range ms.Arena.ForwardingBullets {
+		margin := shotBulletViewMargin
+		if b.Type == objBullet.TypeLaser {
+			margin = laserViewMargin
+		}
+		if !ms.View.Camera.ContainsMargin(b.CurPos, margin) {
+			continue
+		}
+
 		img := objBullet.GetImg(b.Type, b.Diameter)
 
 		rotation := b.Rotation

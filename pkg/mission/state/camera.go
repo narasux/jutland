@@ -18,3 +18,11 @@ func (c *Camera) Contains(pos objPos.MapPos) bool {
 		pos.MY < c.Pos.MY ||
 		pos.MY > c.Pos.MY+c.Height)
 }
+
+// ContainsMargin 判断坐标是否在视野内，四周各外扩 margin 个地图格。
+func (c *Camera) ContainsMargin(pos objPos.MapPos, margin int) bool {
+	return !(pos.MX < c.Pos.MX-margin ||
+		pos.MX > c.Pos.MX+c.Width+margin ||
+		pos.MY < c.Pos.MY-margin ||
+		pos.MY > c.Pos.MY+c.Height+margin)
+}

@@ -4,9 +4,7 @@ import (
 	"log"
 	"math"
 
-	"github.com/google/uuid"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/mohae/deepcopy"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -70,8 +68,6 @@ type Bullet struct {
 	// 生命（前进太多要消亡）
 	Life int
 
-	// 唯一标识
-	Uid string
 	// 当前位置
 	CurPos objPos.MapPos
 	// 目标位置
@@ -227,9 +223,12 @@ func New(
 	speed float64,
 	life int,
 ) *Bullet {
-	b := deepcopy.Copy(*Map[name]).(Bullet)
+	tpl, ok := Map[name]
+	if !ok {
+		log.Fatalf("bullet %s no found", name)
+	}
+	b := *tpl
 
-	b.Uid = uuid.New().String()
 	b.CurPos = curPos
 	b.TargetPos = targetPos
 	b.ShotType = shotType
