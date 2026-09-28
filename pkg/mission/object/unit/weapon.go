@@ -131,6 +131,51 @@ func (w *ShipWeapon) RocketLauncherReloaded() bool {
 	return false
 }
 
+// AnyReloaded 是否还有一门没被禁用、并且已经能开火的武器。
+func (w *ShipWeapon) AnyReloaded() bool {
+	return gunsReady(w.MainGunDisabled, w.MainGuns) ||
+		gunsReady(w.SecondaryGunDisabled, w.SecondaryGuns) ||
+		gunsReady(w.AntiAircraftGunDisabled, w.AntiAircraftGuns) ||
+		torpedoesReady(w.TorpedoDisabled, w.Torpedoes) ||
+		rocketsReady(w.RocketDisabled, w.Rockets)
+}
+
+func gunsReady(groupDisabled bool, guns []*Gun) bool {
+	if groupDisabled {
+		return false
+	}
+	for _, gun := range guns {
+		if gun != nil && !gun.Disable && gun.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
+func torpedoesReady(groupDisabled bool, launchers []*TorpedoLauncher) bool {
+	if groupDisabled {
+		return false
+	}
+	for _, launcher := range launchers {
+		if launcher != nil && !launcher.Disable && launcher.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
+func rocketsReady(groupDisabled bool, launchers []*RocketLauncher) bool {
+	if groupDisabled {
+		return false
+	}
+	for _, launcher := range launchers {
+		if launcher != nil && !launcher.Disable && launcher.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
 // PlaneWeapon 战机武器系统
 type PlaneWeapon struct {
 	// 机炮元数据
@@ -156,6 +201,53 @@ type PlaneWeapon struct {
 	// 最大射程（各类武器射程最大值）
 	MaxToShipRange  float64
 	MaxToPlaneRange float64
+}
+
+// AnyReloaded 是否还有机炮、未投放的炸弹或鱼雷、或能发射的火箭。
+func (w *PlaneWeapon) AnyReloaded() bool {
+	for _, gun := range w.Guns {
+		if gun != nil && !gun.Disable && gun.Reloaded() {
+			return true
+		}
+	}
+	if w.hasUnreleasedOrdnance() {
+		return true
+	}
+	for _, rocket := range w.Rockets {
+		if rocket != nil && rocket.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
+// AntiAircraftReady 是否还有能对空开火的机炮或火箭。
+func (w *PlaneWeapon) AntiAircraftReady() bool {
+	for _, gun := range w.Guns {
+		if gun != nil && !gun.Disable && gun.AntiAircraft && gun.Reloaded() {
+			return true
+		}
+	}
+	for _, rocket := range w.Rockets {
+		if rocket != nil && rocket.AntiAircraft && rocket.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
+func (w *PlaneWeapon) hasUnreleasedOrdnance() bool {
+	for _, bomb := range w.Bombs {
+		if bomb != nil && !bomb.Released {
+			return true
+		}
+	}
+	for _, torpedo := range w.Torpedoes {
+		if torpedo != nil && !torpedo.Released {
+			return true
+		}
+	}
+	return false
 }
 
 // PlaneGroup 飞机分组

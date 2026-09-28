@@ -10,6 +10,7 @@ import (
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
+	"github.com/narasux/jutland/pkg/mission/state"
 )
 
 func TestDirectShellHitsCornerBeyondHalfLength(t *testing.T) {
@@ -67,6 +68,63 @@ func TestDirectShellHitsCornerBeyondHalfLength(t *testing.T) {
 	}
 	if bullet.HitObjType != object.TypeShip {
 		t.Fatalf("hit type = %v, want ship", bullet.HitObjType)
+	}
+}
+
+func TestDirectShellIgnoresShipOutsideItsBuckets(t *testing.T) {
+	const (
+		speed    = 1.0
+		rotation = 135.0
+		length   = 256.0
+		width    = 256.0
+	)
+	start := objPos.NewR(10.99, 10.99)
+	target := &objUnit.BattleShip{
+		Uid:          "target",
+		TotalHP:      100,
+		CurHP:        100,
+		Length:       length,
+		Width:        width,
+		CurPos:       objPos.NewR(10, 10),
+		BelongPlayer: faction.ComputerAlpha,
+	}
+	far := &objUnit.BattleShip{
+		Uid:          "far",
+		TotalHP:      100,
+		CurHP:        100,
+		Length:       length,
+		Width:        width,
+		CurPos:       objPos.NewR(80, 10),
+		BelongPlayer: faction.ComputerAlpha,
+	}
+	bullet := &objBullet.Bullet{
+		Type:          objBullet.TypeShell,
+		Damage:        10,
+		ShotType:      objBullet.ShotTypeDirect,
+		TargetObjType: object.TypeShip,
+		Shooter:       "shooter",
+		BelongPlayer:  faction.HumanAlpha,
+		CurPos:        start,
+		Rotation:      rotation,
+		Speed:         speed,
+		Life:          10,
+	}
+	manager := &MissionManager{state: &state.MissionState{
+		Arena: state.MissionArenaState{
+			Ships: map[string]*objUnit.BattleShip{
+				target.Uid: target,
+				far.Uid:    far,
+			},
+			ForwardingBullets: []*objBullet.Bullet{bullet},
+		},
+	}}
+	manager.updateShotBullets()
+
+	if target.CurHP != 90 {
+		t.Fatalf("near HP = %.1f, want 90", target.CurHP)
+	}
+	if far.CurHP != 100 {
+		t.Fatalf("far HP = %.1f, want 100", far.CurHP)
 	}
 }
 

@@ -47,6 +47,7 @@ type MissionManager struct {
 	mapBlockPrewarmFocusW     int
 	mapBlockPrewarmFocusH     int
 	mapBlockPrewarmSettled    bool
+	combatBuckets             combatIndex
 
 	simTick                  int64
 	targetingPlan            targeting.Plan
@@ -313,6 +314,10 @@ func getAdjacentZooms(zoom int) []int {
 		return zooms
 	}
 	return nil
+}
+
+func (m *MissionManager) rebuildCombatBuckets() {
+	m.combatBuckets.rebuild(m.state.Arena.Ships, m.state.Arena.Planes)
 }
 
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态

@@ -3,6 +3,8 @@ package unit
 import (
 	"math"
 	"testing"
+
+	"github.com/narasux/jutland/pkg/config"
 )
 
 func TestShipWeaponReloadStatusUsesNextReadyMount(t *testing.T) {
@@ -84,5 +86,22 @@ func TestReloadStatusAllReady(t *testing.T) {
 	status := weapon.ReloadStatus(WeaponTypeSecondaryGun, 10_000)
 	if status.Ready != 1 || status.Progress != 1 || status.RemainingMillis != 0 {
 		t.Fatalf("status = %+v, want fully ready", status)
+	}
+}
+
+func TestAnyReloadedSkipsDisabledAndReloadingGuns(t *testing.T) {
+	if config.G == nil {
+		config.G = config.NewDefaultGameSettings()
+	}
+	reloading := &Gun{ReloadTime: 100, ReloadStartAt: 1 << 62, AntiShip: true}
+	if (&ShipWeapon{MainGuns: []*Gun{reloading}}).AnyReloaded() {
+		t.Fatal("reloading gun reported ready")
+	}
+	ready := &Gun{ReloadTime: 0, ReloadStartAt: 0, AntiShip: true}
+	if (&ShipWeapon{MainGunDisabled: true, MainGuns: []*Gun{ready}}).AnyReloaded() {
+		t.Fatal("disabled group reported ready")
+	}
+	if !(&ShipWeapon{MainGuns: []*Gun{ready}}).AnyReloaded() {
+		t.Fatal("ready gun was skipped")
 	}
 }

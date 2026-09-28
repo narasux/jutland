@@ -1,6 +1,7 @@
 package grid
 
 import (
+	"container/heap"
 	"math"
 
 	"github.com/samber/lo"
@@ -17,26 +18,32 @@ func NewGrid(cells Cells) *Grid {
 	return &Grid{cells: cells}
 }
 
+// Prepare 按地形预计算跳点。起点和终点不参与，海图保持只读。
+func (g *Grid) Prepare() {
+	if g.jumpPoints != nil {
+		return
+	}
+	g.preProcess()
+}
+
 // Search 搜索可行路径
 func (g *Grid) Search(start, goal Point) []Point {
 	if !g.validateEndpoints(start, goal) {
 		return []Point{}
 	}
-	// 预处理
-	g.setEndpoints(start, goal)
-	g.preProcess()
+	g.Prepare()
 
-	openSet := []Node{{start, 0, g.heuristic(start, goal)}}
+	openSet := &openHeap{}
+	heap.Init(openSet)
+	heap.Push(openSet, Node{start, 0, g.heuristic(start, goal)})
 	cameFrom := map[Point]Point{}
-	gScore, fScore := map[Point]float64{}, map[Point]float64{}
-	gScore[start], fScore[start] = 0, g.heuristic(start, goal)
+	gScore := map[Point]float64{}
+	gScore[start] = 0
 
-	for len(openSet) > 0 {
-		cur := openSet[0]
-		for _, node := range openSet {
-			if node.G+node.H < cur.G+cur.H {
-				cur = node
-			}
+	for openSet.Len() > 0 {
+		cur := heap.Pop(openSet).(Node)
+		if known, ok := gScore[cur.Point]; ok && cur.G > known {
+			continue
 		}
 
 		if cur.Point == goal {
@@ -48,21 +55,13 @@ func (g *Grid) Search(start, goal Point) []Point {
 			return g.mergePathWithCheckPoint(g.mergePathWithSameM(path))
 		}
 
-		// 从列表中移除 Cur
-		for i := len(openSet) - 1; i >= 0; i-- {
-			if openSet[i].Point == cur.Point {
-				openSet = append(openSet[:i], openSet[i+1:]...)
-			}
-		}
-
 		neighbors := g.getNeighbors(cur.Point)
 		for _, neighbor := range neighbors {
 			tentativeGScore := gScore[cur.Point] + g.heuristic(cur.Point, neighbor)
 			if _, ok := gScore[neighbor]; !ok || tentativeGScore < gScore[neighbor] {
 				cameFrom[neighbor] = cur.Point
 				gScore[neighbor] = tentativeGScore
-				fScore[neighbor] = tentativeGScore + g.heuristic(neighbor, goal)
-				openSet = append(openSet, Node{neighbor, tentativeGScore, fScore[neighbor]})
+				heap.Push(openSet, Node{neighbor, tentativeGScore, tentativeGScore + g.heuristic(neighbor, goal)})
 			}
 		}
 
@@ -71,8 +70,7 @@ func (g *Grid) Search(start, goal Point) []Point {
 			if _, ok := gScore[jp]; !ok || tentativeGScore+g.heuristic(cur.Point, jp) < gScore[jp] {
 				cameFrom[jp] = cur.Point
 				gScore[jp] = tentativeGScore
-				fScore[jp] = tentativeGScore + g.heuristic(jp, goal)
-				openSet = append(openSet, Node{jp, tentativeGScore, fScore[jp]})
+				heap.Push(openSet, Node{jp, tentativeGScore, tentativeGScore + g.heuristic(jp, goal)})
 			}
 		}
 	}
@@ -92,11 +90,6 @@ func (g *Grid) validateEndpoints(start, goal Point) bool {
 		return false
 	}
 	return true
-}
-
-func (g *Grid) setEndpoints(start, goal Point) {
-	g.cells[start.Y][start.X] = S
-	g.cells[goal.Y][goal.X] = E
 }
 
 // 计算启发式函数值
@@ -213,20 +206,37 @@ func (g *Grid) getJumpPoint(p Point, direction Point) Point {
 	if y < 0 || y >= len(g.cells) || x < 0 || x >= len(g.cells[0]) || g.cells[y][x] == W {
 		return Point{-1, -1}
 	}
-	if g.cells[y][x] == E {
-		return Point{x, y}
-	}
 	if direction.X != 0 && direction.Y != 0 {
-		if g.cells[p.Y][x] == O || g.cells[p.Y][x] == E {
+		if g.cells[p.Y][x] == O {
 			if jp := g.getJumpPoint(Point{x, y}, Point{direction.X, 0}); jp.IsValid() {
 				return Point{x, y}
 			}
 		}
-		if g.cells[y][p.X] == O || g.cells[y][p.X] == E {
+		if g.cells[y][p.X] == O {
 			if jp := g.getJumpPoint(Point{x, y}, Point{0, direction.Y}); jp.IsValid() {
 				return Point{x, y}
 			}
 		}
 	}
 	return g.getJumpPoint(Point{x, y}, direction)
+}
+
+type openHeap []Node
+
+func (h openHeap) Len() int { return len(h) }
+
+func (h openHeap) Less(i, j int) bool {
+	return h[i].G+h[i].H < h[j].G+h[j].H
+}
+
+func (h openHeap) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
+
+func (h *openHeap) Push(x any) { *h = append(*h, x.(Node)) }
+
+func (h *openHeap) Pop() any {
+	old := *h
+	n := len(old)
+	item := old[n-1]
+	*h = old[:n-1]
+	return item
 }

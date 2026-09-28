@@ -51,64 +51,69 @@ func aaHitChance(diameter int, planeType objUnit.PlaneType) float64 {
 // damageGroundPlanesNear 落点爆炸波及范围内的地面飞机结算伤害，
 // excludeUid 用于排除已被直接命中的目标；返回是否造成伤害。
 func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid string) bool {
+	m.rebuildCombatBuckets()
 	hit := false
-	for uid, plane := range m.state.Arena.Planes {
-		if uid == excludeUid || !plane.IsOnGround() {
-			continue
+	m.combatBuckets.eachPlane(bt.CurPos.RX, bt.CurPos.RY, bombBlastRadius, func(plane *objUnit.Plane) bool {
+		if plane.Uid == excludeUid || !plane.IsOnGround() {
+			return false
 		}
-		// 如果友军伤害没启用，则不对己方地面飞机造成伤害
 		if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
-			continue
+			return false
 		}
 		if bt.CurPos.Distance(plane.CurPos) <= bombBlastRadius {
 			plane.HurtBy(bt)
 			hit = true
 		}
-	}
+		return false
+	})
 	return hit
 }
 
 // 更新战舰武器开火相关状态
 // TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
 func (m *MissionManager) updateShipWeaponFire() {
+	m.rebuildCombatBuckets()
 	maxBulletDiameter := 0
 	isTorpedoLaunched := false
 	isRocketLaunched := false
 
 	for _, ship := range m.state.Arena.Ships {
+		if !ship.Weapon.AnyReloaded() {
+			continue
+		}
 		inRangeEnemies := []objUnit.Hurtable{}
 
 		target := m.state.Arena.Ships[ship.AttackTarget]
-		// 若有指定攻击目标且在射程内，则优先攻击该目标；否则扫描沿途其他敌人
+		// 若有指定攻击目标且在射程内，则优先攻击该目标；否则只看射程能盖到的格子
 		if target != nil && ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange {
 			inRangeEnemies = append(inRangeEnemies, target)
 		} else {
-			// 敌机
-			for _, enemy := range m.state.Arena.Planes {
-				// 不能攻击己方的战机
-				if ship.BelongPlayer == enemy.BelongPlayer {
-					continue
-				}
-				// 如果不在 对空 最大射程内，跳过
-				if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToPlaneRange {
-					continue
-				}
-				inRangeEnemies = append(inRangeEnemies, enemy)
-			}
-
-			// 敌舰
-			for enemyUid, enemy := range m.state.Arena.Ships {
-				// 不能主动炮击己方的战舰（包括自己），目标敌人的也可以跳过（前面已处理）
-				if ship.BelongPlayer == enemy.BelongPlayer ||
-					enemyUid == ship.AttackTarget {
-					continue
-				}
-				// 如果不在 对舰 最大射程内，跳过
-				if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToShipRange {
-					continue
-				}
-				inRangeEnemies = append(inRangeEnemies, enemy)
-			}
+			m.combatBuckets.eachPlane(
+				ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToPlaneRange,
+				func(enemy *objUnit.Plane) bool {
+					if ship.BelongPlayer == enemy.BelongPlayer {
+						return false
+					}
+					if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToPlaneRange {
+						return false
+					}
+					inRangeEnemies = append(inRangeEnemies, enemy)
+					return false
+				},
+			)
+			m.combatBuckets.eachShip(
+				ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToShipRange,
+				func(enemy *objUnit.BattleShip) bool {
+					if ship.BelongPlayer == enemy.BelongPlayer || enemy.Uid == ship.AttackTarget {
+						return false
+					}
+					if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToShipRange {
+						return false
+					}
+					inRangeEnemies = append(inRangeEnemies, enemy)
+					return false
+				},
+			)
 		}
 
 		if total := len(inRangeEnemies); total != 0 {
@@ -218,6 +223,7 @@ func (m *MissionManager) updateAirfieldAlertLaunch() {
 
 // 更新战机武器开火相关状态
 func (m *MissionManager) updatePlaneWeaponFire() {
+	m.rebuildCombatBuckets()
 	bombReleased, rocketLaunched, torpedoLaunched := false, false, false
 
 	for _, plane := range m.state.Arena.Planes {
@@ -291,25 +297,40 @@ func (m *MissionManager) preferredPlaneFireTarget(plane *objUnit.Plane) objUnit.
 
 // planeFireCandidates 收集飞机当前最大射程内、且类型符合攻击模式的敌我目标。
 func (m *MissionManager) planeFireCandidates(plane *objUnit.Plane) []objUnit.Hurtable {
+	if !plane.Weapon.AnyReloaded() {
+		return nil
+	}
 	candidates := []objUnit.Hurtable{}
 	switch plane.AttackObjType() {
 	case object.TypePlane:
-		for _, enemy := range m.state.Arena.Planes {
-			if canPlaneFireAtTarget(plane, enemy) {
-				candidates = append(candidates, enemy)
-			}
-		}
+		m.combatBuckets.eachPlane(
+			plane.CurPos.RX, plane.CurPos.RY, plane.Weapon.MaxToPlaneRange,
+			func(enemy *objUnit.Plane) bool {
+				if canPlaneFireAtTarget(plane, enemy) {
+					candidates = append(candidates, enemy)
+				}
+				return false
+			},
+		)
 	case object.TypeShip:
-		for _, enemy := range m.state.Arena.Ships {
-			if canPlaneFireAtTarget(plane, enemy) {
-				candidates = append(candidates, enemy)
-			}
-		}
-		for _, enemy := range m.state.Arena.Planes {
-			if canPlaneFireAtTarget(plane, enemy) {
-				candidates = append(candidates, enemy)
-			}
-		}
+		m.combatBuckets.eachShip(
+			plane.CurPos.RX, plane.CurPos.RY, plane.Weapon.MaxToShipRange,
+			func(enemy *objUnit.BattleShip) bool {
+				if canPlaneFireAtTarget(plane, enemy) {
+					candidates = append(candidates, enemy)
+				}
+				return false
+			},
+		)
+		m.combatBuckets.eachPlane(
+			plane.CurPos.RX, plane.CurPos.RY, plane.Weapon.MaxToShipRange,
+			func(enemy *objUnit.Plane) bool {
+				if canPlaneFireAtTarget(plane, enemy) {
+					candidates = append(candidates, enemy)
+				}
+				return false
+			},
+		)
 	}
 	return candidates
 }
@@ -350,23 +371,27 @@ func (m *MissionManager) updatePlaneDefensiveFire(plane *objUnit.Plane) {
 	if plane.AttackObjType() != object.TypeShip || plane.Weapon.MaxToPlaneRange <= 0 {
 		return
 	}
-	for _, enemy := range m.state.Arena.Planes {
-		// 只还击空中敌机：起飞/降落中的地面目标由对舰投放逻辑处理
-		if enemy.BelongPlayer == plane.BelongPlayer || !enemy.IsCruising() {
-			continue
-		}
-		// 不在对空火力射程内，跳过
-		if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
-			continue
-		}
-		// 该目标在所有炮塔射界内都无法开火时继续扫描，否则集火后结束本轮
-		bullets := plane.Fire(enemy)
-		if len(bullets) == 0 {
-			continue
-		}
-		m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
-		break
+	if !plane.Weapon.AntiAircraftReady() {
+		return
 	}
+	m.combatBuckets.eachPlane(
+		plane.CurPos.RX, plane.CurPos.RY, plane.Weapon.MaxToPlaneRange,
+		func(enemy *objUnit.Plane) bool {
+			// 只还击空中敌机：起飞/降落中的地面目标由对舰投放逻辑处理
+			if enemy.BelongPlayer == plane.BelongPlayer || !enemy.IsCruising() {
+				return false
+			}
+			if plane.CurPos.Distance(enemy.CurPos) > plane.Weapon.MaxToPlaneRange {
+				return false
+			}
+			bullets := plane.Fire(enemy)
+			if len(bullets) == 0 {
+				return false
+			}
+			m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
+			return true
+		},
+	)
 }
 
 // retargetTorpedoBomber 让鱼雷机放弃当前不安全的投放对象，改为追踪其他敌舰。
@@ -406,6 +431,7 @@ func (m *MissionManager) updateShotBullets() {
 	for i := 0; i < len(m.state.Arena.ForwardingBullets); i++ {
 		m.state.Arena.ForwardingBullets[i].Forward()
 	}
+	m.rebuildCombatBuckets()
 
 	// 结算伤害
 	resolveDamage := func(bt *objBullet.Bullet) bool {
@@ -414,107 +440,100 @@ func (m *MissionManager) updateShotBullets() {
 		cosR := math.Cos(bt.Rotation * math.Pi / 180)
 		prevRX := bt.CurPos.RX - sinR*bt.Speed
 		prevRY := bt.CurPos.RY + cosR*bt.Speed
+		// 查询半径要盖住舰体对角线，不能只按弹速，否则桶边缘的船会被漏掉。
+		shipQuery := bt.Speed + maxHullHitRadius
+		if bt.ShotType == objBullet.ShotTypeArcing {
+			shipQuery = maxHullHitRadius
+		}
 
 		switch bt.TargetObjType {
 		case object.TypeShip:
-			for _, ship := range m.state.Arena.Ships {
-				// 总不能不小心打死自己吧，真是不应该 :D
+			m.combatBuckets.eachShip(bt.CurPos.RX, bt.CurPos.RY, shipQuery, func(ship *objUnit.BattleShip) bool {
 				if bt.Shooter == ship.Uid {
-					continue
+					return false
 				}
-				// 如果友军伤害没启用，则不对己方战舰造成伤害
 				if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
-					continue
+					return false
 				}
 
 				if bt.ShotType == objBullet.ShotTypeDirect {
-					// 直射则检查线段是否与矩形相交。先用对角线半径丢掉够不着的船。
 					reach := targetHitRadius(ship.Length, ship.Width) + bt.Speed
 					if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY, reach) {
-						continue
+						return false
 					}
 					if geometry.IsSegmentIntersectRotatedRectangle(
 						prevRX, prevRY,
 						bt.CurPos.RX, bt.CurPos.RY,
 						ship.CurPos.RX, ship.CurPos.RY,
-						// 转换成实际地图上的尺寸
 						ship.Length/constants.MapBlockSize,
 						ship.Width/constants.MapBlockSize,
 						ship.CurRotation,
 					) {
 						ship.HurtBy(bt)
 						bt.HitObjType = object.TypeShip
-						break
+						return true
 					}
 				} else if bt.ShotType == objBullet.ShotTypeArcing {
-					// 曲射只认最终落点；弹道虽穿过舰体，但最终落空仍然属于跨式。
 					reach := targetHitRadius(ship.Length, ship.Width)
 					if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY, reach) {
-						continue
+						return false
 					}
 					if geometry.IsPointInRotatedRectangle(
 						bt.CurPos.RX, bt.CurPos.RY,
 						ship.CurPos.RX, ship.CurPos.RY,
-						// 转换成实际地图上的尺寸
 						ship.Length/constants.MapBlockSize,
 						ship.Width/constants.MapBlockSize,
 						ship.CurRotation,
 					) {
 						ship.HurtBy(bt)
 						bt.HitObjType = object.TypeShip
-						break
+						return true
 					}
 				}
-			}
-			// 曲射炮弹 / 炸弹落点爆炸波及地面飞机（停放与滑行）：按爆炸半径
-			// 结算，不要求落点精确落在机身矩形内（机场本体无敌，但地面飞机会被炸毁）
+				return false
+			})
 			if bt.ShotType == objBullet.ShotTypeArcing && bt.HitObjType == object.TypeNone {
 				if m.damageGroundPlanesNear(bt, "") {
 					bt.HitObjType = object.TypePlane
 				}
 			}
 		case object.TypePlane:
-			for _, plane := range m.state.Arena.Planes {
-				// 总不能不小心打死自己吧，真是不应该 :D
-				if bt.Shooter == plane.Uid {
-					continue
-				}
-				// 如果友军伤害没启用，则不对己方战舰造成伤害
-				if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
-					continue
-				}
-				// 如果是舰对空，需要设置 “擦肩而过” 率：命中率按弹药口径分级，
-				// 小口径速射防空炮弹幕密集，大口径舰炮弹散布远大于机体，直击罕见
-				if bt.ShooterObjType == object.TypeShip {
-					if rand.Float64() >= aaHitChance(bt.Diameter, plane.Type) {
-						continue
+			m.combatBuckets.eachPlane(
+				bt.CurPos.RX, bt.CurPos.RY, bt.Speed+maxHullHitRadius,
+				func(plane *objUnit.Plane) bool {
+					if bt.Shooter == plane.Uid {
+						return false
 					}
-				}
-
-				// 对空射击都认为是直射，检查线段是否与矩形相交。
-				// 随机数仍按原顺序消耗，距离过滤放在它后面，避免改谁被打中。
-				reach := targetHitRadius(plane.Length, plane.Width) + bt.Speed
-				if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, plane.CurPos.RX, plane.CurPos.RY, reach) {
-					continue
-				}
-				if geometry.IsSegmentIntersectRotatedRectangle(
-					prevRX, prevRY,
-					bt.CurPos.RX, bt.CurPos.RY,
-					plane.CurPos.RX, plane.CurPos.RY,
-					// 转换成实际地图上的尺寸
-					plane.Length/constants.MapBlockSize,
-					plane.Width/constants.MapBlockSize,
-					plane.CurRotation,
-				) {
-					plane.HurtBy(bt)
-					bt.HitObjType = object.TypePlane
-					// 炸弹直接命中一架地面飞机时，爆炸同时波及附近其他地面飞机
-					if bt.ShotType == objBullet.ShotTypeArcing {
-						m.damageGroundPlanesNear(bt, plane.Uid)
+					if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
+						return false
 					}
-					break
-				}
-			}
+					if bt.ShooterObjType == object.TypeShip {
+						if rand.Float64() >= aaHitChance(bt.Diameter, plane.Type) {
+							return false
+						}
+					}
+					reach := targetHitRadius(plane.Length, plane.Width) + bt.Speed
+					if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, plane.CurPos.RX, plane.CurPos.RY, reach) {
+						return false
+					}
+					if geometry.IsSegmentIntersectRotatedRectangle(
+						prevRX, prevRY,
+						bt.CurPos.RX, bt.CurPos.RY,
+						plane.CurPos.RX, plane.CurPos.RY,
+						plane.Length/constants.MapBlockSize,
+						plane.Width/constants.MapBlockSize,
+						plane.CurRotation,
+					) {
+						plane.HurtBy(bt)
+						bt.HitObjType = object.TypePlane
+						if bt.ShotType == objBullet.ShotTypeArcing {
+							m.damageGroundPlanesNear(bt, plane.Uid)
+						}
+						return true
+					}
+					return false
+				},
+			)
 		default:
 			return false
 		}
@@ -525,35 +544,39 @@ func (m *MissionManager) updateShotBullets() {
 		if bt.Life <= 0 || bt.CurPos.Near(bt.TargetPos, bt.ProximityRadius) {
 			return true
 		}
-		for _, plane := range m.state.Arena.Planes {
+		found := false
+		m.combatBuckets.eachPlane(bt.CurPos.RX, bt.CurPos.RY, bt.ProximityRadius, func(plane *objUnit.Plane) bool {
 			if bt.Shooter == plane.Uid {
-				continue
+				return false
 			}
 			if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
-				continue
+				return false
 			}
 			if bt.CurPos.Distance(plane.CurPos) <= bt.ProximityRadius {
+				found = true
 				return true
 			}
-		}
-		return false
+			return false
+		})
+		return found
 	}
 
 	// resolveRocketDamage 处理火箭及对空编程炮弹的近炸破片范围伤害。
 	resolveRocketDamage := func(bt *objBullet.Bullet) {
-		for _, plane := range m.state.Arena.Planes {
+		m.combatBuckets.eachPlane(bt.CurPos.RX, bt.CurPos.RY, bt.BlastRadius, func(plane *objUnit.Plane) bool {
 			if bt.Shooter == plane.Uid {
-				continue
+				return false
 			}
 			if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == plane.BelongPlayer {
-				continue
+				return false
 			}
 			if bt.CurPos.Distance(plane.CurPos) > bt.BlastRadius {
-				continue
+				return false
 			}
 			plane.HurtBy(bt)
 			bt.HitObjType = object.TypePlane
-		}
+			return false
+		})
 		if bt.HitObjType == object.TypeNone {
 			bt.HitObjType = object.TypeWater
 		}

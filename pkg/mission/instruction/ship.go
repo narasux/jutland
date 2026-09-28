@@ -213,6 +213,7 @@ type ShipMovePath struct {
 	status    InstrStatus
 	// 创建指令时战舰的当前速度，用于路径就绪后恢复速度
 	initSpeed float64
+	result    chan []grid.Point
 }
 
 // NewShipMovePath ...
@@ -224,7 +225,8 @@ var _ Instruction = (*ShipMovePath)(nil)
 
 // Exec ...
 func (i *ShipMovePath) Exec(s *state.MissionState) error {
-	// 寻路失败（genPath 异步标记为 Executing），主线程中重置速度后标记完成
+	i.consumePathResult()
+	// 寻路失败（异步标记为 Executing），主线程中重置速度后标记完成
 	if i.status == Executing {
 		if ship, ok := s.Arena.Ships[i.shipUid]; ok {
 			ship.CurSpeed = 0
@@ -239,7 +241,13 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	if i.status != Ready {
 		if i.status != Preparing {
 			i.status = Preparing
-			go i.genPath(s)
+			i.result = make(chan []grid.Point, 1)
+			pathSearches.submit(pathSearchJob{
+				grid:  s.Core.MissionMD.MapCfg.PreparedGrid(),
+				start: grid.Point{i.curPos.MX, i.curPos.MY},
+				goal:  grid.Point{i.targetPos.MX, i.targetPos.MY},
+				reply: i.result,
+			})
 		}
 		// Preparing 状态下，让战舰继续朝目标方向直线移动作为过渡
 		if ship, ok := s.Arena.Ships[i.shipUid]; ok && ship.CurSpeed > 0 {
@@ -298,12 +306,28 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	return nil
 }
 
-// genPath 生成战舰移动的路径
+// consumePathResult 在主线程取回已经算完的航线。
+func (i *ShipMovePath) consumePathResult() {
+	if i.result == nil {
+		return
+	}
+	select {
+	case points := <-i.result:
+		i.applyPoints(points)
+		i.result = nil
+	default:
+	}
+}
+
+// genPath 生成战舰移动的路径。测试直接调用；对局里由寻路线程算完后在主线程套用。
 func (i *ShipMovePath) genPath(misState *state.MissionState) {
-	points := misState.Core.MissionMD.MapCfg.GenPath(
+	i.applyPoints(misState.Core.MissionMD.MapCfg.GenPath(
 		grid.Point{i.curPos.MX, i.curPos.MY},
 		grid.Point{i.targetPos.MX, i.targetPos.MY},
-	)
+	))
+}
+
+func (i *ShipMovePath) applyPoints(points []grid.Point) {
 	// 寻路失败，标记为 Executing 让主线程的 Exec 处理速度重置
 	// 不能直接标记 Executed，否则会被 RemoveExecuted 在 Exec 之前清除，导致速度无法重置
 	if len(points) < 2 {

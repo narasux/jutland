@@ -92,6 +92,8 @@ type MapCfg struct {
 	Map MapData
 	// 地图网格数据
 	Cells grid.Cells
+	// pathGrid 是按地形预计算好的只读寻路网格
+	pathGrid *grid.Grid
 	// 地图宽度
 	Width int
 	// 地图高度
@@ -138,11 +140,22 @@ func (cfg *MapCfg) initMapCells() {
 	cfg.Cells = cfg.Map.ToGridCells()
 	cfg.Width = width
 	cfg.Height = len(cfg.Map)
+	cfg.pathGrid = grid.NewGrid(cfg.Cells)
+	cfg.pathGrid.Prepare()
+}
+
+// PreparedGrid 返回这张地图只读的寻路网格。
+func (cfg *MapCfg) PreparedGrid() *grid.Grid {
+	if cfg.pathGrid == nil {
+		cfg.pathGrid = grid.NewGrid(cfg.Cells)
+		cfg.pathGrid.Prepare()
+	}
+	return cfg.pathGrid
 }
 
 // GenPath 生成路径
 func (cfg *MapCfg) GenPath(start, end grid.Point) []grid.Point {
-	return grid.NewGrid(cfg.Cells).Search(start, end)
+	return cfg.PreparedGrid().Search(start, end)
 }
 
 var maps map[string]*MapCfg
