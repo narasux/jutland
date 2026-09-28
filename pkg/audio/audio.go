@@ -10,6 +10,40 @@ import (
 
 var Context = audio.NewContext(constants.AudioSampleRate)
 
+const maxConcurrentShortSounds = 8
+
+// shortVoicePool 管理同时播放的短音效，播完就关掉，满了就丢掉新的一声。
+type shortVoicePool struct {
+	players []*audio.Player
+}
+
+var voices shortVoicePool
+
+func (p *shortVoicePool) Play(ads types.AudioStream, volume float64) {
+	alive := p.players[:0]
+	for _, player := range p.players {
+		if player.IsPlaying() {
+			alive = append(alive, player)
+			continue
+		}
+		if err := player.Close(); err != nil {
+			log.Fatal("failed to close audio: ", err)
+		}
+	}
+	p.players = alive
+	if len(p.players) >= maxConcurrentShortSounds {
+		return
+	}
+
+	player, err := Context.NewPlayer(ads)
+	if err != nil {
+		log.Fatal("failed to play audio: ", err)
+	}
+	player.SetVolume(volume)
+	player.Play()
+	p.players = append(p.players, player)
+}
+
 // PlayAudioToEnd 音频播放（一次性使用，可并发，播放到完成，只能用于短音频）
 func PlayAudioToEnd(ads types.AudioStream) {
 	PlayAudioToEndWithVolume(ads, 0.3)
@@ -20,11 +54,7 @@ func PlayAudioToEndWithVolume(ads types.AudioStream, volume float64) {
 	if ads.Length() > constants.AudioSampleRate*30 {
 		log.Fatalf("audio too long for PlayAudioToEnd: %d", ads.Length())
 	}
-	go func() {
-		p, _ := Context.NewPlayer(ads)
-		p.SetVolume(volume)
-		p.Play()
-	}()
+	voices.Play(ads, volume)
 }
 
 // Player 音频播放

@@ -46,6 +46,7 @@ type MissionManager struct {
 	mapBlockPrewarmFocusY     int
 	mapBlockPrewarmFocusW     int
 	mapBlockPrewarmFocusH     int
+	mapBlockPrewarmSettled    bool
 
 	simTick                  int64
 	targetingPlan            targeting.Plan
@@ -232,11 +233,12 @@ func (m *MissionManager) updateSupportPhase() {
 func (m *MissionManager) updateMapBlockPrewarm() bool {
 	camera := m.state.View.Camera
 	zoom := state.NormalizeZoom(m.state.UI.GameOpts.Zoom)
-	if m.mapBlockPrewarmZoom != zoom ||
+	focusChanged := m.mapBlockPrewarmZoom != zoom ||
 		m.mapBlockPrewarmFocusX != camera.Pos.MX ||
 		m.mapBlockPrewarmFocusY != camera.Pos.MY ||
 		m.mapBlockPrewarmFocusW != camera.Width ||
-		m.mapBlockPrewarmFocusH != camera.Height {
+		m.mapBlockPrewarmFocusH != camera.Height
+	if focusChanged {
 		mapBlockImg.SceneBlockCache.ResetPrewarmQueue()
 		m.mapBlockPrewarmZoom = zoom
 		m.mapBlockPrewarmFocusX = camera.Pos.MX
@@ -244,6 +246,9 @@ func (m *MissionManager) updateMapBlockPrewarm() bool {
 		m.mapBlockPrewarmFocusW = camera.Width
 		m.mapBlockPrewarmFocusH = camera.Height
 		m.mapBlockPrewarmBurstTicks = mapBlockPrewarmZoomTicks
+		m.mapBlockPrewarmSettled = false
+	} else if m.mapBlockPrewarmSettled {
+		return true
 	}
 
 	budget := mapBlockPrewarmIdleBudget
@@ -265,15 +270,18 @@ func (m *MissionManager) updateMapBlockPrewarm() bool {
 		zoom,
 		mapBlockPrewarmMargin,
 	) {
+		m.mapBlockPrewarmSettled = false
 		return false
 	}
 
 	remainingBudget := budget - processed
 	if remainingBudget <= 0 {
+		// 当前视野已经齐，但这一拍没有余量去排相邻缩放，下一拍再排。
 		return true
 	}
 	adjacentZooms := getAdjacentZooms(zoom)
 	if len(adjacentZooms) == 0 {
+		m.mapBlockPrewarmSettled = mapBlockImg.SceneBlockCache.PrewarmQueueLen() == 0
 		return true
 	}
 	mapBlockImg.SceneBlockCache.SchedulePrewarmAround(
@@ -283,6 +291,7 @@ func (m *MissionManager) updateMapBlockPrewarm() bool {
 		mapBlockPrewarmMargin,
 	)
 	mapBlockImg.SceneBlockCache.StepPrewarm(remainingBudget)
+	m.mapBlockPrewarmSettled = mapBlockImg.SceneBlockCache.PrewarmQueueLen() == 0
 	return true
 }
 

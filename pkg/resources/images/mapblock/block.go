@@ -74,20 +74,53 @@ func init() {
 	}
 
 	zoomBlocks = genZoomBlockMap(blocks)
+	indexWaterImages()
 
 	log.Println("map block image resources loaded")
 }
 
+var (
+	seaByZoom     = map[int][seaBlockCount]*ebiten.Image{}
+	deepSeaByZoom = map[int][deepSeaBlockCount]*ebiten.Image{}
+)
+
+// indexWaterImages 把浅海、深海按缩放档放进下标，绘制时不再拼图片名。
+func indexWaterImages() {
+	for _, zoom := range supportedZooms {
+		var sea [seaBlockCount]*ebiten.Image
+		var deep [deepSeaBlockCount]*ebiten.Image
+		for i := 0; i < seaBlockCount; i++ {
+			key := fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, i)
+			sea[i] = zoomBlocks[zoom][key]
+			if sea[i] == nil {
+				log.Fatalf("missing zoomed sea block %s at zoom %d", key, zoom)
+			}
+		}
+		for i := 0; i < deepSeaBlockCount; i++ {
+			key := fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, i)
+			deep[i] = zoomBlocks[zoom][key]
+			if deep[i] == nil {
+				log.Fatalf("missing zoomed deep sea block %s at zoom %d", key, zoom)
+			}
+		}
+		seaByZoom[zoom] = sea
+		deepSeaByZoom[zoom] = deep
+	}
+}
+
 type sceneBlockCache struct {
 	mapName       string
-	data          map[string]*ebiten.Image
-	zoomData      map[int]map[string]*ebiten.Image
+	data          map[uint64]*ebiten.Image
+	zoomData      map[int]map[uint64]*ebiten.Image
 	prewarmJobs   []sceneBlockPrewarmJob
-	prewarmQueued map[string]bool
+	prewarmQueued map[uint64]bool
+	waterVariants []byte
+	variantWidth  int
+	variantHeight int
 }
 
 type sceneBlockPrewarmJob struct {
-	key  string
+	x, y int
 	zoom int
 }
 
@@ -110,10 +143,11 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 	}
 	c.mapName = cfg.Name
 	// 丢弃上一个关卡的地图贴图数据
-	c.data = map[string]*ebiten.Image{}
-	c.zoomData = map[int]map[string]*ebiten.Image{}
+	c.data = map[uint64]*ebiten.Image{}
+	c.zoomData = map[int]map[uint64]*ebiten.Image{}
 	c.prewarmJobs = nil
-	c.prewarmQueued = map[string]bool{}
+	c.prewarmQueued = map[uint64]bool{}
+	c.initWaterVariants(cfg.Width, cfg.Height)
 
 	imgPath := fmt.Sprintf("/map/abbrs/%s.png", cfg.Source)
 	imgData, err := os.ReadFile(config.ImgResBaseDir + imgPath)
@@ -159,7 +193,7 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 			opts.GeoM.Scale(scaleX, scaleY)
 			blockImg.DrawImage(ebiten.NewImageFromImage(subImg), opts)
 
-			c.data[c.genKey(x, y)] = blockImg
+			c.data[cellKey(x, y)] = blockImg
 		}
 	}
 	log.Printf("mission %s map scene blocks loaded, total size: %d\n", cfg.Name, len(c.data))
@@ -168,7 +202,7 @@ func (c *sceneBlockCache) Init(cfg *mapcfg.MapCfg) error {
 
 // Get 根据坐标获取地图块
 func (c *sceneBlockCache) Get(x, y int) *ebiten.Image {
-	return c.data[c.genKey(x, y)]
+	return c.data[cellKey(x, y)]
 }
 
 // GetZoom 根据坐标和缩放档位获取已缓存的场景地图块
@@ -179,7 +213,7 @@ func (c *sceneBlockCache) GetZoom(x, y int, zoom int) *ebiten.Image {
 	if zoomMap == nil {
 		return nil
 	}
-	return zoomMap[c.genKey(x, y)]
+	return zoomMap[cellKey(x, y)]
 }
 
 // GetZoomDrawBlock 获取场景地图块绘制层；缓存未就绪时返回原始图和临时缩放比例。
@@ -200,25 +234,31 @@ func (c *sceneBlockCache) GetZoomDrawBlock(x, y int, zoom int) DrawBlock {
 
 // SchedulePrewarmAround 把相机附近的场景地图块加入预热队列；已缓存或已排队的块会被跳过。
 func (c *sceneBlockCache) SchedulePrewarmAround(minX, minY, width, height int, zooms []int, margin int) {
+	if c.zoomData == nil {
+		c.zoomData = map[int]map[uint64]*ebiten.Image{}
+	}
+	if c.prewarmQueued == nil {
+		c.prewarmQueued = map[uint64]bool{}
+	}
 	for _, zoom := range zooms {
 		zoom = normalizeZoom(zoom)
 		zoomMap := c.zoomData[zoom]
 		if zoomMap == nil {
-			zoomMap = map[string]*ebiten.Image{}
+			zoomMap = map[uint64]*ebiten.Image{}
 			c.zoomData[zoom] = zoomMap
 		}
 		for x := minX - margin; x <= minX+width+margin; x++ {
 			for y := minY - margin; y <= minY+height+margin; y++ {
-				key := c.genKey(x, y)
+				key := cellKey(x, y)
 				if c.data[key] == nil || zoomMap[key] != nil {
 					continue
 				}
-				queueKey := c.prewarmQueueKey(key, zoom)
-				if c.prewarmQueued[queueKey] {
+				queued := queueKey(x, y, zoom)
+				if c.prewarmQueued[queued] {
 					continue
 				}
-				c.prewarmQueued[queueKey] = true
-				c.prewarmJobs = append(c.prewarmJobs, sceneBlockPrewarmJob{key: key, zoom: zoom})
+				c.prewarmQueued[queued] = true
+				c.prewarmJobs = append(c.prewarmJobs, sceneBlockPrewarmJob{x: x, y: y, zoom: zoom})
 			}
 		}
 	}
@@ -233,7 +273,7 @@ func (c *sceneBlockCache) HasMissingAround(minX, minY, width, height int, zoom i
 	}
 	for x := minX - margin; x <= minX+width+margin; x++ {
 		for y := minY - margin; y <= minY+height+margin; y++ {
-			key := c.genKey(x, y)
+			key := cellKey(x, y)
 			if c.data[key] != nil && zoomMap[key] == nil {
 				return true
 			}
@@ -245,7 +285,25 @@ func (c *sceneBlockCache) HasMissingAround(minX, minY, width, height int, zoom i
 // ResetPrewarmQueue 清空待预热队列，用于缩放变更后丢弃旧优先级任务。
 func (c *sceneBlockCache) ResetPrewarmQueue() {
 	c.prewarmJobs = nil
-	c.prewarmQueued = map[string]bool{}
+	c.prewarmQueued = map[uint64]bool{}
+}
+
+// PrewarmQueueLen 返回还没生成缩放缓存的任务数。
+func (c *sceneBlockCache) PrewarmQueueLen() int {
+	return len(c.prewarmJobs)
+}
+
+// Clear 丢掉当前关卡的陆地块、海面变体和预热队列。
+func (c *sceneBlockCache) Clear() {
+	*c = sceneBlockCache{}
+}
+
+// PutBaseBlock 放入一块陆地原图，测试用来制造尚未预热的缺口。
+func (c *sceneBlockCache) PutBaseBlock(x, y int, img *ebiten.Image) {
+	if c.data == nil {
+		c.data = map[uint64]*ebiten.Image{}
+	}
+	c.data[cellKey(x, y)] = img
 }
 
 // StepPrewarm 按预算生成场景地图块缩放缓存，避免在单帧集中创建过多图片。
@@ -254,34 +312,83 @@ func (c *sceneBlockCache) StepPrewarm(budget int) int {
 	for budget > 0 && len(c.prewarmJobs) > 0 {
 		job := c.prewarmJobs[0]
 		c.prewarmJobs = c.prewarmJobs[1:]
-		delete(c.prewarmQueued, c.prewarmQueueKey(job.key, job.zoom))
+		delete(c.prewarmQueued, queueKey(job.x, job.y, job.zoom))
 
-		baseImg := c.data[job.key]
+		cell := cellKey(job.x, job.y)
+		baseImg := c.data[cell]
 		if baseImg == nil {
 			continue
 		}
 		zoomMap := c.zoomData[job.zoom]
 		if zoomMap == nil {
-			zoomMap = map[string]*ebiten.Image{}
+			zoomMap = map[uint64]*ebiten.Image{}
 			c.zoomData[job.zoom] = zoomMap
 		}
-		if zoomMap[job.key] != nil {
+		if zoomMap[cell] != nil {
 			continue
 		}
-		zoomMap[job.key] = genZoomBlock(baseImg, job.zoom)
+		zoomMap[cell] = genZoomBlock(baseImg, job.zoom)
 		budget--
 		processed++
 	}
 	return processed
 }
 
-func (c *sceneBlockCache) prewarmQueueKey(key string, zoom int) string {
-	return fmt.Sprintf("%d:%s", zoom, key)
+// cellKey 把坐标收成整数。x、y 各占 32 位，负坐标不会和正坐标撞在一起。
+func cellKey(x, y int) uint64 {
+	return uint64(uint32(int32(x)))<<32 | uint64(uint32(int32(y)))
 }
 
-// 生成缓存键
-func (c *sceneBlockCache) genKey(x, y int) string {
-	return fmt.Sprintf("%d:%d", x, y)
+// queueKey 高 8 位是缩放档，x、y 各占 28 位。地图和视野外扩都在这个范围里。
+func queueKey(x, y, zoom int) uint64 {
+	const coordMask = (uint64(1) << 28) - 1
+	return uint64(uint8(zoom))<<56 |
+		(uint64(uint32(int32(x)))&coordMask)<<28 |
+		(uint64(uint32(int32(y))) & coordMask)
+}
+
+// waterVariantByte 是海面花纹用的那一字节，算法和原来每帧现算的 MD5 相同。
+func waterVariantByte(x, y int) byte {
+	hash := md5.Sum([]byte(fmt.Sprintf("%d:%d", x, y)))
+	return hash[0]
+}
+
+func (c *sceneBlockCache) initWaterVariants(width, height int) {
+	if width <= 0 || height <= 0 {
+		c.waterVariants = nil
+		c.variantWidth = 0
+		c.variantHeight = 0
+		return
+	}
+	variants := make([]byte, width*height)
+	for y := 0; y < height; y++ {
+		row := y * width
+		for x := 0; x < width; x++ {
+			variants[row+x] = waterVariantByte(x, y)
+		}
+	}
+	c.waterVariants = variants
+	c.variantWidth = width
+	c.variantHeight = height
+}
+
+func (c *sceneBlockCache) waterVariant(x, y int) byte {
+	if c.waterVariants == nil || x < 0 || y < 0 || x >= c.variantWidth || y >= c.variantHeight {
+		return waterVariantByte(x, y)
+	}
+	return c.waterVariants[y*c.variantWidth+x]
+}
+
+func seaDrawImage(x, y, zoom int) *ebiten.Image {
+	zoom = normalizeZoom(zoom)
+	index := int(SceneBlockCache.waterVariant(x, y)) % seaBlockCount
+	return seaByZoom[zoom][index]
+}
+
+func deepSeaDrawImage(x, y, zoom int) *ebiten.Image {
+	zoom = normalizeZoom(zoom)
+	index := int(SceneBlockCache.waterVariant(x, y)) % deepSeaBlockCount
+	return deepSeaByZoom[zoom][index]
 }
 
 // GetByCharAndPos 根据指定字符 & 坐标，获取地图块资源
@@ -291,31 +398,22 @@ func GetByCharAndPos(c rune, x, y int) []*ebiten.Image {
 
 // GetByCharAndPosZoom 根据指定字符、坐标和缩放档位获取地图块资源
 func GetByCharAndPosZoom(c rune, x, y int, zoom int) []*ebiten.Image {
-	hash := md5.Sum([]byte(fmt.Sprintf("%d:%d", x, y)))
 	zoom = normalizeZoom(zoom)
 
 	posBlocks := []*ebiten.Image{}
-	// 字符映射关系：. 浅海 o 深海 # 陆地
+	// 字符映射关系：. 浅海 O 深海 L 陆地
 	switch c {
 	case mapcfg.ChrSea:
-		index := int(hash[0]) % seaBlockCount
-		img := zoomBlocks[zoom][fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks, img)
+		posBlocks = append(posBlocks, seaDrawImage(x, y, zoom))
 	case mapcfg.ChrDeepSea:
-		index := int(hash[0]) % deepSeaBlockCount
-		img := zoomBlocks[zoom][fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks, img)
+		posBlocks = append(posBlocks, deepSeaDrawImage(x, y, zoom))
 	case mapcfg.ChrLand:
 		posBlocks = append(posBlocks, SceneBlockCache.GetZoom(x, y, zoom))
 	case mapcfg.ChrShallow:
 		fallthrough
 	case mapcfg.ChrCoast:
 		// 浅滩/海岸需要现有海洋贴图，再贴陆地/沙滩贴图
-		index := int(hash[0]) % seaBlockCount
-		img := zoomBlocks[zoom][fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks, img, SceneBlockCache.GetZoom(x, y, zoom))
-		// 调试地图浅海/海岸用（人工标记法 orz）
-		// posBlocks = append(posBlocks, blocks[fmt.Sprintf("char_%s", strings.ToLower(string(c)))])
+		posBlocks = append(posBlocks, seaDrawImage(x, y, zoom), SceneBlockCache.GetZoom(x, y, zoom))
 	}
 
 	return posBlocks
@@ -323,34 +421,25 @@ func GetByCharAndPosZoom(c rune, x, y int, zoom int) []*ebiten.Image {
 
 // GetDrawBlocksByCharAndPosZoom 根据指定字符、坐标和缩放档位获取可绘制地图块层。
 func GetDrawBlocksByCharAndPosZoom(c rune, x, y int, zoom int) []DrawBlock {
-	hash := md5.Sum([]byte(fmt.Sprintf("%d:%d", x, y)))
 	zoom = normalizeZoom(zoom)
 
-	posBlocks := []DrawBlock{}
 	switch c {
 	case mapcfg.ChrSea:
-		index := int(hash[0]) % seaBlockCount
-		img := zoomBlocks[zoom][fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks, DrawBlock{Image: img, Scale: 1})
+		return []DrawBlock{{Image: seaDrawImage(x, y, zoom), Scale: 1}}
 	case mapcfg.ChrDeepSea:
-		index := int(hash[0]) % deepSeaBlockCount
-		img := zoomBlocks[zoom][fmt.Sprintf("deep_sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(posBlocks, DrawBlock{Image: img, Scale: 1})
+		return []DrawBlock{{Image: deepSeaDrawImage(x, y, zoom), Scale: 1}}
 	case mapcfg.ChrLand:
-		posBlocks = append(posBlocks, SceneBlockCache.GetZoomDrawBlock(x, y, zoom))
+		return []DrawBlock{SceneBlockCache.GetZoomDrawBlock(x, y, zoom)}
 	case mapcfg.ChrShallow:
 		fallthrough
 	case mapcfg.ChrCoast:
-		index := int(hash[0]) % seaBlockCount
-		img := zoomBlocks[zoom][fmt.Sprintf("sea_%d_%d", constants.MapBlockSize, index)]
-		posBlocks = append(
-			posBlocks,
-			DrawBlock{Image: img, Scale: 1},
+		return []DrawBlock{
+			{Image: seaDrawImage(x, y, zoom), Scale: 1},
 			SceneBlockCache.GetZoomDrawBlock(x, y, zoom),
-		)
+		}
 	}
 
-	return posBlocks
+	return nil
 }
 
 // genZoomBlockMap 为一组地图块生成所有支持缩放档位的缓存。

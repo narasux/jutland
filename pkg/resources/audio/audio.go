@@ -1,17 +1,44 @@
 package audio
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"log"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/common/types"
 	"github.com/narasux/jutland/pkg/loader"
 )
 
+// 对局里会反复播放的短音效。启动时解码一次，长 BGM 不放进这里。
+var shortAudioPaths = []string{
+	"/button_hover.wav",
+	"/button_click.wav",
+	"/loaded.wav",
+	"/cheating.wav",
+	"/hit/ship_explode.wav",
+	"/fire/gun_silent.wav",
+	"/fire/gun_small.wav",
+	"/fire/gun_medium.wav",
+	"/fire/gun_large.wav",
+	"/fire/gun_rail.wav",
+	"/fire/bomb_spawn.wav",
+	"/fire/torpedo_launch.wav",
+	"/fire/rocketspawn.wav",
+	"/hit/rocketgroundexplo.wav",
+}
+
+var shortClips = map[string][]byte{}
+
 func init() {
 	log.Println("testing audio resources...")
 
-	// 测试资源是否正确加载
+	for _, path := range shortAudioPaths {
+		cacheShortClip(path)
+	}
+
+	// 测试资源是否正确加载。长背景音乐仍在每次播放时解码。
 	NewGameStartBackground()
 	NewGameEndBackground()
 	NewMenuBackground()
@@ -29,6 +56,35 @@ func init() {
 	NewHarborNeutral()
 
 	log.Println("audio resources tested")
+}
+
+// pcmStream 在同一段 PCM 上新建读取位置，避免两个 player 共用一个 reader。
+type pcmStream struct {
+	*bytes.Reader
+}
+
+func (s *pcmStream) Length() int64 {
+	return s.Size()
+}
+
+func cacheShortClip(path string) {
+	stream := mustNewAudio(path)
+	if stream.Length() > constants.AudioSampleRate*30 {
+		log.Fatalf("audio too long to cache %s: %d", path, stream.Length())
+	}
+	buf := make([]byte, stream.Length())
+	if _, err := io.ReadFull(stream, buf); err != nil {
+		log.Fatalf("decode %s: %s", path, err)
+	}
+	shortClips[path] = buf
+}
+
+func mustCachedAudio(path string) types.AudioStream {
+	data, ok := shortClips[path]
+	if !ok {
+		log.Fatalf("short audio %s was not cached", path)
+	}
+	return &pcmStream{Reader: bytes.NewReader(data)}
 }
 
 // 由于同一 Audio 资源不能被多个 player 同时播放，因此每次都给新的实例
@@ -62,22 +118,22 @@ func NewMissionsBackground() types.AudioStream {
 
 // NewMenuButtonHover 鼠标悬停菜单按钮
 func NewMenuButtonHover() types.AudioStream {
-	return mustNewAudio("/button_hover.wav")
+	return mustCachedAudio("/button_hover.wav")
 }
 
 // NewMenuButtonClick 鼠标点击菜单按钮
 func NewMenuButtonClick() types.AudioStream {
-	return mustNewAudio("/button_click.wav")
+	return mustCachedAudio("/button_click.wav")
 }
 
 // NewMissionLoaded 关卡加载完成
 func NewMissionLoaded() types.AudioStream {
-	return mustNewAudio("/loaded.wav")
+	return mustCachedAudio("/loaded.wav")
 }
 
 // NewCheating 开始作弊
 func NewCheating() types.AudioStream {
-	return mustNewAudio("/cheating.wav")
+	return mustCachedAudio("/cheating.wav")
 }
 
 // NewMissionSuccess 任务成功
@@ -92,7 +148,7 @@ func NewMissionFailed() types.AudioStream {
 
 // NewShipExplode 战舰爆炸
 func NewShipExplode() types.AudioStream {
-	return mustNewAudio("/hit/ship_explode.wav")
+	return mustCachedAudio("/hit/ship_explode.wav")
 }
 
 // NewHarborUS 美国港口
@@ -149,25 +205,25 @@ func NewGunFire(bulletDiameter int) types.AudioStream {
 	} else if bulletDiameter >= smallGunBulletDiameterThreshold {
 		audioType = "small"
 	}
-	return mustNewAudio(fmt.Sprintf("/fire/gun_%s.wav", audioType))
+	return mustCachedAudio(fmt.Sprintf("/fire/gun_%s.wav", audioType))
 }
 
 // NewBombSpawn 炸弹投放
 func NewBombSpawn() types.AudioStream {
-	return mustNewAudio("/fire/bomb_spawn.wav")
+	return mustCachedAudio("/fire/bomb_spawn.wav")
 }
 
 // NewTorpedoLaunch 鱼雷发射
 func NewTorpedoLaunch() types.AudioStream {
-	return mustNewAudio("/fire/torpedo_launch.wav")
+	return mustCachedAudio("/fire/torpedo_launch.wav")
 }
 
 // NewRocketSpawn 火箭弹发射
 func NewRocketSpawn() types.AudioStream {
-	return mustNewAudio("/fire/rocketspawn.wav")
+	return mustCachedAudio("/fire/rocketspawn.wav")
 }
 
 // NewRocketExplode 火箭弹爆炸
 func NewRocketExplode() types.AudioStream {
-	return mustNewAudio("/hit/rocketgroundexplo.wav")
+	return mustCachedAudio("/hit/rocketgroundexplo.wav")
 }
