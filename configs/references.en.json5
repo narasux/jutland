@@ -3045,8 +3045,12 @@
         value: "2x2 13.2mm Hotchkiss",
       },
       {
-        label: "Aircraft",
-        value: "Loire130 x6 / Late298 x8",
+        label: "Reconnaissance Aircraft",
+        value: "Loire 130 x6",
+      },
+      {
+        label: "Torpedo Bombers",
+        value: "Latécoère 298 x8",
       },
     ],
     description: "Commandant Teste was a large French Navy seaplane tender commissioned in 1932. This entry represents her 1939 state.",
@@ -3080,8 +3084,12 @@
         value: "12x2 13.2mm Hotchkiss",
       },
       {
-        label: "Aircraft",
-        value: "VB10 x20 / Nord1500 x18",
+        label: "Fighters",
+        value: "Arsenal VB.10 x20",
+      },
+      {
+        label: "Dive Bombers",
+        value: "Nord 1500 Noréclair x18",
       },
     ],
     description: "Neptune is the possible 1940 depiction of the French PA4 aircraft-carrier design; the source gives no speed, so this entry assumes a high-speed fleet carrier at 30 knots.",
@@ -3115,8 +3123,12 @@
         value: "22x2 13.2mm Hotchkiss",
       },
       {
-        label: "Aircraft",
-        value: "VB10 x15 / Nord1500 x25",
+        label: "Fighters",
+        value: "Arsenal VB.10 x15",
+      },
+      {
+        label: "Dive Bombers",
+        value: "Nord 1500 Noréclair x25",
       },
     ],
     description: "Joffre was the lead ship of the French Joffre-class carriers, authorized under the PA16 design before the Second World War but never laid down.",
@@ -3129,6 +3141,41 @@
       {
         name: "Wikipedia - Joffre-class aircraft carrier",
         url: "https://en.wikipedia.org/wiki/Joffre-class_aircraft_carrier",
+      },
+    ],
+  },
+  {
+    name: "clemenceau_pa28",
+    displayName: "Clemenceau (PA28)",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "8x2 100mm/55 Mle 1953",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 57mm/60 Mle 1951",
+      },
+      {
+        label: "Fighters",
+        value: "Arsenal VB.10 x22",
+      },
+      {
+        label: "Dive Bombers",
+        value: "Nord 1500 Noréclair x22",
+      },
+    ],
+    description: "The PA28 was a French postwar light-carrier design approved in 1947 and cancelled before construction in 1949; this entry uses its planned state.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Shipbucket - Clemenceau PA28",
+        url: "https://www.shipbucket.com/drawings/3726",
+      },
+      {
+        name: "Wikipedia - Clemenceau (PA 28)",
+        url: "https://fr.wikipedia.org/wiki/Clemenceau_(PA_28)",
       },
     ],
   },
@@ -3154,8 +3201,12 @@
         value: "6x2 13.2mm Hotchkiss",
       },
       {
-        label: "Aircraft",
-        value: "V-156F x8 / LN401 x8",
+        label: "Dive Bombers",
+        value: "Vought V-156F x8",
+      },
+      {
+        label: "Dive Bombers",
+        value: "Loire-Nieuport LN 401 x8",
       },
     ],
     description: "Béarn was a French Navy aircraft carrier converted from an incomplete Normandie-class battleship and commissioned in 1928. This entry represents her 1939 state.",
@@ -3662,6 +3713,20 @@
       {
         name: "Wikipedia - Canon de 100 mm",
         url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/100/55/2/Mle1953",
+    displayName: "100mm/55 Mle 1953 Twin Dual-purpose Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 100 mm/55 Mle 1953 twin dual-purpose gun. Each barrel had a rate of fire of about 60 rounds per minute, maximum range about 17 km, and muzzle velocity about 870 m/s.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 100 mm modèle 53",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm_mod%C3%A8le_53",
       },
     ],
   },

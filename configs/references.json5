@@ -2986,8 +2986,12 @@
         value: "2x2 13.2mm Hotchkiss",
       },
       {
-        label: "舰载机",
-        value: "Loire130 x6 / Late298 x8",
+        label: "侦察机",
+        value: "卢瓦尔 130 x6",
+      },
+      {
+        label: "鱼雷攻击机",
+        value: "拉泰科埃尔 Late 298 x8",
       },
     ],
     description: "塔斯特指挥官号是法国海军建造的大型水上飞机母舰，1932 年服役。本作采用 1939 年状态。",
@@ -3021,8 +3025,12 @@
         value: "12x2 13.2mm Hotchkiss",
       },
       {
-        label: "舰载机",
-        value: "VB10 x20 / Nord1500 x18",
+        label: "制空战斗机",
+        value: "阿森纳 VB.10 x20",
+      },
+      {
+        label: "俯冲轰炸机",
+        value: "诺克莱尔（Nord1500）x18",
       },
     ],
     description: "海王星号是法国海军 PA4 航空母舰方案的 1940 年可能状态；资料未给出航速，本作按高速舰队航母取 30 节。",
@@ -3056,8 +3064,12 @@
         value: "22x2 13.2mm Hotchkiss",
       },
       {
-        label: "舰载机",
-        value: "VB10 x15 / Nord1500 x25",
+        label: "制空战斗机",
+        value: "阿森纳 VB.10 x15",
+      },
+      {
+        label: "俯冲轰炸机",
+        value: "诺克莱尔（Nord1500）x25",
       },
     ],
     description: "霞飞号是法国 Joffre 级计划首舰，PA16 方案于二战前获批但未开工。",
@@ -3070,6 +3082,41 @@
       {
         name: "Wikipedia - Joffre-class aircraft carrier",
         url: "https://en.wikipedia.org/wiki/Joffre-class_aircraft_carrier",
+      },
+    ],
+  },
+  {
+    name: "clemenceau_pa28",
+    displayName: "克莱蒙梭（PA28）",
+    type: "航空母舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "8x2 100mm/55 Mle 1953",
+      },
+      {
+        label: "防空炮",
+        value: "8x2 57mm/60 Mle 1951",
+      },
+      {
+        label: "制空战斗机",
+        value: "阿森纳 VB.10 x22",
+      },
+      {
+        label: "俯冲轰炸机",
+        value: "诺克莱尔（Nord1500）x22",
+      },
+    ],
+    description: "PA28 是法国战后轻型航空母舰方案，1947 年获批、1949 年因预算不足在开工前取消；本作采用该方案的计划状态。",
+    author: "未知",
+    links: [
+      {
+        name: "Shipbucket - Clemenceau PA28",
+        url: "https://www.shipbucket.com/drawings/3726",
+      },
+      {
+        name: "Wikipedia - Clemenceau (PA 28)",
+        url: "https://fr.wikipedia.org/wiki/Clemenceau_(PA_28)",
       },
     ],
   },
@@ -3095,8 +3142,12 @@
         value: "6x2 13.2mm Hotchkiss",
       },
       {
-        label: "舰载机",
-        value: "V-156F x8 / LN401 x8",
+        label: "俯冲轰炸机",
+        value: "沃特 V-156F x8",
+      },
+      {
+        label: "俯冲轰炸机",
+        value: "卢瓦尔-纽波特 LN 401 x8",
       },
     ],
     description: "贝亚恩号是法国海军由未完工的诺曼底级战列舰改装而成的航空母舰，1928 年服役。本作采用 1939 年状态。",
@@ -3603,6 +3654,20 @@
       {
         name: "维基百科 - Canon de 100 mm",
         url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/100/55/2/Mle1953",
+    displayName: "100mm/55 Mle 1953 双联装高平两用炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 100 毫米/55 倍径 Mle 1953 双联装高平两用炮，单管射速约每分钟 60 发，最大射程约 17 公里，炮弹初速约 870 米/秒。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 100 mm modèle 53",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm_mod%C3%A8le_53",
       },
     ],
   },

@@ -3045,8 +3045,12 @@
         value: "2x2 13.2mm Hotchkiss",
       },
       {
-        label: "Авиация",
-        value: "Loire130 x6 / Late298 x8",
+        label: "Разведывательные самолёты",
+        value: "Loire 130 x6",
+      },
+      {
+        label: "Торпедоносцы",
+        value: "Latécoère 298 x8",
       },
     ],
     description: "«Командан Тест» — крупный гидроавианосец французского флота, вступивший в строй в 1932 году. В игре представлено состояние 1939 года.",
@@ -3080,8 +3084,12 @@
         value: "12x2 13.2mm Hotchkiss",
       },
       {
-        label: "Авиация",
-        value: "VB10 x20 / Nord1500 x18",
+        label: "Истребители",
+        value: "Arsenal VB.10 x20",
+      },
+      {
+        label: "Пикирующие бомбардировщики",
+        value: "Nord 1500 Noréclair x18",
       },
     ],
     description: "«Нептун» — возможное изображение 1940 года французского проекта авианосца PA4; источник не приводит скорости, поэтому в игре принято допущение о 30 узлах для быстроходного авианосца.",
@@ -3115,8 +3123,12 @@
         value: "22x2 13.2mm Hotchkiss",
       },
       {
-        label: "Авиация",
-        value: "VB10 x15 / Nord1500 x25",
+        label: "Истребители",
+        value: "Arsenal VB.10 x15",
+      },
+      {
+        label: "Пикирующие бомбардировщики",
+        value: "Nord 1500 Noréclair x25",
       },
     ],
     description: "«Жоффр» — головной французский авианосец типа «Жоффр», запланированный по проекту PA16 накануне Второй мировой войны, но так и не заложенный.",
@@ -3129,6 +3141,41 @@
       {
         name: "Wikipedia - Joffre-class aircraft carrier",
         url: "https://en.wikipedia.org/wiki/Joffre-class_aircraft_carrier",
+      },
+    ],
+  },
+  {
+    name: "clemenceau_pa28",
+    displayName: "Клемансо (PA28)",
+    type: "Авианосец",
+    armaments: [
+      {
+        label: "Главная батарея",
+        value: "8x2 100mm/55 Mle 1953",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "8x2 57mm/60 Mle 1951",
+      },
+      {
+        label: "Истребители",
+        value: "Arsenal VB.10 x22",
+      },
+      {
+        label: "Пикирующие бомбардировщики",
+        value: "Nord 1500 Noréclair x22",
+      },
+    ],
+    description: "PA28 — французский проект лёгкого авианосца послевоенного периода, одобренный в 1947 году и отменённый до закладки в 1949 году; в игре использовано плановое состояние.",
+    author: "Неизвестно",
+    links: [
+      {
+        name: "Shipbucket - Clemenceau PA28",
+        url: "https://www.shipbucket.com/drawings/3726",
+      },
+      {
+        name: "Wikipedia - Clemenceau (PA 28)",
+        url: "https://fr.wikipedia.org/wiki/Clemenceau_(PA_28)",
       },
     ],
   },
@@ -3154,8 +3201,12 @@
         value: "6x2 13.2mm Hotchkiss",
       },
       {
-        label: "Авиация",
-        value: "V-156F x8 / LN401 x8",
+        label: "Пикирующие бомбардировщики",
+        value: "Vought V-156F x8",
+      },
+      {
+        label: "Пикирующие бомбардировщики",
+        value: "Loire-Nieuport LN 401 x8",
       },
     ],
     description: "«Беарн» — авианосец французского флота, переоборудованный из недостроенного линкора типа «Норманди», вступил в строй в 1928 году. В игре представлено состояние 1939 года.",
@@ -3662,6 +3713,20 @@
       {
         name: "Википедия - Canon de 100 mm",
         url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm",
+      },
+    ],
+  },
+  {
+    name: "FR/100/55/2/Mle1953",
+    displayName: "100мм/55 Mle 1953, спаренная универсальная установка",
+    type: "Оружие",
+    armaments: [],
+    description: "Французская спаренная универсальная установка 100 мм/55 Mle 1953. Темп стрельбы каждого ствола около 60 выстрелов в минуту, максимальная дальность около 17 км, начальная скорость около 870 м/с.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 100 mm modèle 53",
+        url: "https://fr.wikipedia.org/wiki/Canon_de_100_mm_mod%C3%A8le_53",
       },
     ],
   },

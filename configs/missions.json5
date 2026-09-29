@@ -2748,7 +2748,8 @@
           "commandant_teste",
           "bearn",
           "neptune",
-          "joffre"
+          "joffre",
+          "clemenceau_pa28"
         ],
       },
       {
@@ -3307,6 +3308,12 @@
       {
         name: "joffre",
         pos: [8, 34],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "clemenceau_pa28",
+        pos: [9, 34],
         rotation: 90,
         belongPlayer: "P1"
       },
