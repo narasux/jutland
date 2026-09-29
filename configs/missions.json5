@@ -2888,7 +2888,8 @@
           "garland",
           "hero",
           "gurkha",
-          "rapid"
+          "rapid",
+          "le_fantasque"
         ],
       },
       {
@@ -3386,6 +3387,12 @@
       {
         name: "pluton",
         pos: [16, 36],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "le_fantasque",
+        pos: [12, 41],
         rotation: 90,
         belongPlayer: "P1"
       },

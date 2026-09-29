@@ -3476,6 +3476,41 @@
     ],
   },
   {
+    name: "le_fantasque",
+    displayName: "空想",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "5x1 138.6mm/40 Mle 1929",
+      },
+      {
+        label: "防空炮",
+        value: "1x4 + 2x2 40mm/60 Bofors",
+      },
+      {
+        label: "防空炮",
+        value: "8x1 20mm/70 Oerlikon",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 550mm",
+      },
+    ],
+    description: "空想号是法国海军空想级大型驱逐舰首舰，1936 年服役。该级为对抗意大利高速轻巡而设计，试航中创下常规舰体的高速纪录。本作采用 1943 年波士顿改装后的状态，拆除后部鱼雷管并换装博福斯与厄利孔防空炮。",
+    author: "AI 增强生成",
+    links: [
+      {
+        name: "AI 增强生成素材（用户提供）",
+        url: "https://chatgpt.com/",
+      },
+      {
+        name: "维基百科 - 空想号驱逐舰",
+        url: "https://en.wikipedia.org/wiki/French_destroyer_Le_Fantasque",
+      },
+    ],
+  },
+  {
     name: "FR/203/50/2",
     displayName: "203mm/50 Mle 1924 双联装主炮",
     type: "武器",
@@ -3756,6 +3791,34 @@
     ],
   },
   {
+    name: "FR/40/60/2",
+    displayName: "40mm/60 Bofors 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军改装中采用的 40 毫米/60 倍径 Bofors 双联装防空炮。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/40/60/4",
+    displayName: "40mm/60 Bofors 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军改装中采用的 40 毫米/60 倍径 Bofors 四联装防空炮。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
     name: "FR/13.2/4",
     displayName: "13.2mm Hotchkiss 四联装防空机枪",
     type: "武器",
@@ -3850,6 +3913,20 @@
       {
         name: "维基百科 - Canon de 138 mm Modèle 1923",
         url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1923",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/40/Mle1929",
+    displayName: "138.6mm/40 Mle 1929 单装主炮",
+    type: "武器",
+    armaments: [],
+    description: "法国海军 138.6 毫米/40 倍径 Mle 1929 单装舰炮，装备空想级大型驱逐舰。射速约每分钟 7 发，炮弹初速约 800 米/秒，最大射程约 20 公里。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Canon de 138 mm Modèle 1929",
+        url: "https://zh.wikipedia.org/wiki/138%E6%AF%AB%E7%B1%B3%E5%8F%A3%E5%BE%9150%E5%80%8D%E5%BE%911929%E5%B9%B4%E5%9E%8B%E7%81%AB%E7%82%AE",
       },
     ],
   },

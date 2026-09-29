@@ -984,6 +984,14 @@
     damage: 140,
     criticalRate: 0.003
   },
+  // 法国海军 138.6mm/40 Mle 1929 主炮弹
+  {
+    name: "FR/GB/138.6/1929",
+    type: "shell",
+    diameter: 139,
+    damage: 145,
+    criticalRate: 0.003
+  },
   // 法国海军 130mm/45 Mle 1932 高平两用炮弹
   {
     name: "FR/GB/130/1932",

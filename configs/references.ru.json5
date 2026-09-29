@@ -3535,6 +3535,41 @@
     ],
   },
   {
+    name: "le_fantasque",
+    displayName: "«Ле Фантаск»",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главный калибр",
+        value: "5x1 138.6mm/40 Mle 1929",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "1x4 + 2x2 40mm/60 Bofors",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "8x1 20mm/70 Oerlikon",
+      },
+      {
+        label: "Торпеды",
+        value: "2x3 550mm",
+      },
+    ],
+    description: "«Ле Фантаск» — головной корабль больших эсминцев типа Le Fantasque ВМС Франции, вступивший в строй в 1936 году. Корабли проектировались для противодействия быстроходным итальянским лёгким крейсерам и во время испытаний установили рекорд скорости для кораблей с обычным корпусом. В игре представлен после бостонской модернизации 1943 года, когда кормовые торпедные аппараты сняли, а на корабль установили зенитные установки Bofors и Oerlikon.",
+    author: "AI-усиленная генерация",
+    links: [
+      {
+        name: "Материал AI-усиленной генерации (предоставлен пользователем)",
+        url: "https://chatgpt.com/",
+      },
+      {
+        name: "Википедия - French destroyer Le Fantasque",
+        url: "https://en.wikipedia.org/wiki/French_destroyer_Le_Fantasque",
+      },
+    ],
+  },
+  {
     name: "FR/203/50/2",
     displayName: "203mm/50 Mle 1924, спаренное главное орудие",
     type: "Оружие",
@@ -3815,6 +3850,34 @@
     ],
   },
   {
+    name: "FR/40/60/2",
+    displayName: "40mm/60 Bofors, спаренное зенитное орудие",
+    type: "Оружие",
+    armaments: [],
+    description: "Французская спаренная 40-мм/60 зенитная установка Bofors, применявшаяся при военной модернизации.",
+    author: "",
+    links: [
+      {
+        name: "Википедия - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/40/60/4",
+    displayName: "40mm/60 Bofors, счетверённое зенитное орудие",
+    type: "Оружие",
+    armaments: [],
+    description: "Французская счетверённая 40-мм/60 зенитная установка Bofors, применявшаяся при военной модернизации.",
+    author: "",
+    links: [
+      {
+        name: "Википедия - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
     name: "FR/13.2/4",
     displayName: "13.2mm Hotchkiss, счетверённая зенитная установка",
     type: "Оружие",
@@ -3909,6 +3972,20 @@
       {
         name: "Википедия - Canon de 138 mm Modèle 1923",
         url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1923",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/40/Mle1929",
+    displayName: "138.6mm/40 Mle 1929, одиночное главное орудие",
+    type: "Оружие",
+    armaments: [],
+    description: "Французское одиночное орудие 138,6 мм/40 Mle 1929, применявшееся на больших эсминцах типа Le Fantasque. Скорострельность около 7 выстрелов в минуту, начальная скорость около 800 м/с, максимальная дальность около 20 км.",
+    author: "",
+    links: [
+      {
+        name: "Википедия - Canon de 138 mm Modèle 1929",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1929",
       },
     ],
   },

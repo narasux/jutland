@@ -3535,6 +3535,41 @@
     ],
   },
   {
+    name: "le_fantasque",
+    displayName: "Le Fantasque",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x1 138.6mm/40 Mle 1929",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "1x4 + 2x2 40mm/60 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x1 20mm/70 Oerlikon",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 550mm",
+      },
+    ],
+    description: "Le Fantasque was the lead ship of the French Navy's Le Fantasque-class large destroyers, commissioned in 1936. Designed to counter fast Italian light cruisers, the class set a speed record for conventionally hulled ships during trials. This entry represents her Boston refit of 1943, when the aft torpedo tubes were removed and Bofors and Oerlikon anti-aircraft guns were installed.",
+    author: "AI-enhanced generation",
+    links: [
+      {
+        name: "AI-enhanced source (user supplied)",
+        url: "https://chatgpt.com/",
+      },
+      {
+        name: "Wikipedia - French destroyer Le Fantasque",
+        url: "https://en.wikipedia.org/wiki/French_destroyer_Le_Fantasque",
+      },
+    ],
+  },
+  {
     name: "FR/203/50/2",
     displayName: "203mm/50 Mle 1924 Twin Main Gun",
     type: "Weapon",
@@ -3815,6 +3850,34 @@
     ],
   },
   {
+    name: "FR/40/60/2",
+    displayName: "40mm/60 Bofors Twin Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French-operated 40 mm/60 Bofors twin anti-aircraft gun adopted during wartime refits.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/40/60/4",
+    displayName: "40mm/60 Bofors Quadruple Anti-aircraft Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French-operated 40 mm/60 Bofors quadruple anti-aircraft gun adopted during wartime refits.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
     name: "FR/13.2/4",
     displayName: "13.2mm Hotchkiss Quadruple Anti-aircraft Machine Gun",
     type: "Weapon",
@@ -3909,6 +3972,20 @@
       {
         name: "Wikipedia - Canon de 138 mm Modèle 1923",
         url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1923",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/40/Mle1929",
+    displayName: "138.6mm/40 Mle 1929 Single Main Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "French 138.6 mm/40 Mle 1929 single naval gun used by the Le Fantasque-class large destroyers. Rate of fire was about 7 rounds per minute, muzzle velocity about 800 m/s and maximum range about 20 km.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Canon de 138 mm Modèle 1929",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1929",
       },
     ],
   },

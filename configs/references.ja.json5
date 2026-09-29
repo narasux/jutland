@@ -3535,6 +3535,41 @@
     ],
   },
   {
+    name: "le_fantasque",
+    displayName: "ル・ファンタスク",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x1 138.6mm/40 Mle 1929",
+      },
+      {
+        label: "対空砲",
+        value: "1x4 + 2x2 40mm/60 Bofors",
+      },
+      {
+        label: "対空砲",
+        value: "8x1 20mm/70 Oerlikon",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 550mm",
+      },
+    ],
+    description: "ル・ファンタスクはフランス海軍の大型駆逐艦ル・ファンタスク級の一番艦で、1936年に就役した。高速なイタリア軽巡洋艦に対抗するため設計され、公試では通常船体の速度記録を樹立した。本作は1943年のボストン改装後の状態で、後部魚雷発射管を撤去し、BoforsとOerlikonの対空火器を装備している。",
+    author: "AI 強化生成",
+    links: [
+      {
+        name: "AI 強化生成素材（ユーザー提供）",
+        url: "https://chatgpt.com/",
+      },
+      {
+        name: "ウィキペディア - フランス駆逐艦ル・ファンタスク",
+        url: "https://en.wikipedia.org/wiki/French_destroyer_Le_Fantasque",
+      },
+    ],
+  },
+  {
     name: "FR/203/50/2",
     displayName: "203mm/50 Mle 1924 連装主砲",
     type: "兵器",
@@ -3815,6 +3850,34 @@
     ],
   },
   {
+    name: "FR/40/60/2",
+    displayName: "40mm/60 Bofors 連装高射砲",
+    type: "兵器",
+    armaments: [],
+    description: "戦時改装で採用された40mm/60 Bofors 連装高射砲。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
+    name: "FR/40/60/4",
+    displayName: "40mm/60 Bofors 四連装高射砲",
+    type: "兵器",
+    armaments: [],
+    description: "戦時改装で採用された40mm/60 Bofors 四連装高射砲。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Bofors 40 mm L/60 gun",
+        url: "https://en.wikipedia.org/wiki/Bofors_40_mm_L/60_gun",
+      },
+    ],
+  },
+  {
     name: "FR/13.2/4",
     displayName: "13.2mm Hotchkiss 四連装高射機関銃",
     type: "兵器",
@@ -3909,6 +3972,20 @@
       {
         name: "ウィキペディア - Canon de 138 mm Modèle 1923",
         url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1923",
+      },
+    ],
+  },
+  {
+    name: "FR/138.6/40/Mle1929",
+    displayName: "138.6mm/40 Mle 1929 単装主砲",
+    type: "兵器",
+    armaments: [],
+    description: "フランス海軍の138.6mm/40 Mle 1929 単装砲。ル・ファンタスク級大型駆逐艦に搭載され、発射速度は毎分約7発、初速約800m/s、最大射程約20km。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Canon de 138 mm Modèle 1929",
+        url: "https://en.wikipedia.org/wiki/Canon_de_138_mm_Mod%C3%A8le_1929",
       },
     ],
   },
