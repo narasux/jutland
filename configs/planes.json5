@@ -5399,6 +5399,73 @@
     }
   },
   {
+    // 布雷盖 Br.810 舰载鱼雷机
+    // 该型为 Br.693 的舰载改型，未完成原型；性能按 Br.693 基准近似。
+    name: "Br810",
+    nation: "fr",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1939,
+    totalHP: 50,
+    damageReduction: 0.48,
+    maxSpeed: 490,
+    acceleration: 24,
+    rotateSpeed: 7,
+    length: 9.67,
+    width: 15.37,
+    fundsCost: 17,
+    timeCost: 8,
+    tonnage: 4.9,
+    range: 1350,
+    weapon: {
+      guns: [
+        // 机首（20mm HS.404，固定前射）
+        {
+          name: "FR/AIR/20/HS404",
+          posPercent: 0.7,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（7.5mm MAC 1934，固定前射）
+        {
+          name: "FR/AIR/7.5/MAC1934",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（7.5mm MAC 1934，固定前射）
+        {
+          name: "FR/AIR/7.5/MAC1934",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.5mm MAC 1934，后半球自卫）
+        {
+          name: "FR/AIR/7.5/MAC1934",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机腹后向（7.5mm MAC 1934，固定后射）
+        {
+          name: "FR/AIR/7.5/MAC1934",
+          posPercent: -0.15,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        {
+          name: "FR/AST/400/1926",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
     // 卢瓦尔 Loire 130 水上侦察机
     name: "Loire130",
     nation: "fr",

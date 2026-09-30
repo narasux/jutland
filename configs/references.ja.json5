@@ -11112,6 +11112,41 @@
     ],
   },
   {
+    name: "Br810",
+    displayName: "ブレゲー Br.810",
+    type: "艦上雷撃機",
+    armaments: [
+      {
+        label: "機関砲（機首固定前射）",
+        value: "1 x 20mm HS.404",
+      },
+      {
+        label: "機関銃（主翼固定前射）",
+        value: "2 x 7.5mm MAC 1934",
+      },
+      {
+        label: "機関銃（後席および機腹後方）",
+        value: "2 x 7.5mm MAC 1934",
+      },
+      {
+        label: "航空魚雷",
+        value: "1 x 400mm 1926年型 DA",
+      },
+    ],
+    description: "ブレゲー Br.810 は、1939年にフランス海軍がジョッフル級空母向けに選定した双発艦上雷撃機である。Br.693 攻撃機を基に着艦フック、急降下制動板、折り畳み翼を追加し、水平爆撃、雷撃、長距離偵察を担う計画だったが、1940年の休戦までに原型機は完成しなかった。ゲーム内性能は Br.693 の公開値をもとに、艦載装備と魚雷搭載状態を近似した。",
+    author: "不明",
+    links: [
+      {
+        name: "ウィキペディア - ブレゲー 693",
+        url: "https://en.wikipedia.org/wiki/Br%C3%A9guet_693",
+      },
+      {
+        name: "ウィキペディア - ジョッフル級航空母艦",
+        url: "https://en.wikipedia.org/wiki/Joffre-class_aircraft_carrier",
+      },
+    ],
+  },
+  {
     name: "Loire130",
     displayName: "ロワール 130",
     type: "水上偵察機",

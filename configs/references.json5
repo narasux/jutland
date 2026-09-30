@@ -10991,6 +10991,41 @@
     ],
   },
   {
+    name: "Br810",
+    displayName: "布雷盖 Br.810",
+    type: "舰载鱼雷机",
+    armaments: [
+      {
+        label: "机炮（机首固定前射）",
+        value: "1 x 20mm HS.404",
+      },
+      {
+        label: "机枪（机翼固定前射）",
+        value: "2 x 7.5mm MAC 1934",
+      },
+      {
+        label: "机枪（后座与机腹后向）",
+        value: "2 x 7.5mm MAC 1934",
+      },
+      {
+        label: "航空鱼雷",
+        value: "1 x 400mm 1926 年式 DA",
+      },
+    ],
+    description: "布雷盖 Br.810 是法国海军在 1939 年为霞飞级航母选定的双发舰载鱼雷机，由 Br.693 攻击机发展而来，增加着舰钩、减速板和折叠翼，可执行水平轰炸、鱼雷攻击与远程侦察。由于 1940 年法国战败，原型机未及完成。游戏数值以 Br.693 的公开性能为基准，按舰载化和挂载鱼雷后的近似状态接入。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - 布雷盖 693",
+        url: "https://en.wikipedia.org/wiki/Br%C3%A9guet_693",
+      },
+      {
+        name: "维基百科 - 霞飞级航空母舰",
+        url: "https://en.wikipedia.org/wiki/Joffre-class_aircraft_carrier",
+      },
+    ],
+  },
+  {
     name: "Loire130",
     displayName: "卢瓦尔 130",
     type: "水上侦察机",

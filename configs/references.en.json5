@@ -11112,6 +11112,41 @@
     ],
   },
   {
+    name: "Br810",
+    displayName: "Bréguet Br.810",
+    type: "Carrier Torpedo Bomber",
+    armaments: [
+      {
+        label: "Cannon (Fixed Forward, Nose)",
+        value: "1 x 20mm HS.404",
+      },
+      {
+        label: "Machine Guns (Fixed Forward, Wings)",
+        value: "2 x 7.5mm MAC 1934",
+      },
+      {
+        label: "Machine Guns (Rear Cockpit and Ventral Aft)",
+        value: "2 x 7.5mm MAC 1934",
+      },
+      {
+        label: "Aerial Torpedo",
+        value: "1 x 400mm Model 1926 DA",
+      },
+    ],
+    description: "The Bréguet Br.810 was a twin-engine carrier torpedo bomber selected by the French Navy in 1939 for the Joffre-class carriers. Derived from the Br.693 attack aircraft, it added an arrestor hook, dive brakes and folding wings for level bombing, torpedo attacks and long-range scouting. The prototype was not completed before the 1940 armistice. Game performance is approximated from the Br.693 and adjusted for carrier equipment and torpedo carriage.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Bréguet 693",
+        url: "https://en.wikipedia.org/wiki/Br%C3%A9guet_693",
+      },
+      {
+        name: "Wikipedia - Joffre-class aircraft carrier",
+        url: "https://en.wikipedia.org/wiki/Joffre-class_aircraft_carrier",
+      },
+    ],
+  },
+  {
     name: "Loire130",
     displayName: "Loire 130",
     type: "Reconnaissance Flying Boat",
