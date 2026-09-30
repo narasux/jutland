@@ -4842,6 +4842,15 @@
     links: [],
   },
   {
+    name: "JP/610/5",
+    displayName: "九三式 610mm 五連装魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "JP/7.62",
     displayName: "7.62mm 単装機銃",
     type: "兵器",
@@ -9886,6 +9895,37 @@
       {
         name: "ウィキペディア — 雪風",
         url: "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Yukikaze%20%281939%29",
+      },
+    ],
+  },
+  {
+    name: "shimakaze",
+    displayName: "島風",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x2 127mm/50 三年式",
+      },
+      {
+        label: "対空砲",
+        value: "4x3 25mm/60 九六式 + 1x2 25mm/60 九六式",
+      },
+      {
+        label: "魚雷",
+        value: "3x5 610mm 九三式",
+      },
+    ],
+    description: "島風は島風型駆逐艦の唯一の完成艦で、高速力と重雷装を両立させる実験艦として1943年に就役した。1944年11月、オルモック湾で米軍機の攻撃を受け沈没した。",
+    author: "不明",
+    links: [
+      {
+        name: "Combined Fleet — Shimakaze",
+        url: "https://www.combinedfleet.com/shimak_t.htm",
+      },
+      {
+        name: "ウィキペディア — 島風",
+        url: "https://ja.wikipedia.org/wiki/%E5%B3%B6%E9%A2%A8_(%E5%B3%B6%E9%A2%A8%E5%9E%8B%E9%A7%86%E9%80%90%E8%89%A6)",
       },
     ],
   },

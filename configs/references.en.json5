@@ -4842,6 +4842,15 @@
     links: [],
   },
   {
+    name: "JP/610/5",
+    displayName: "610mm Quintuple Type 93 Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "JP/7.62",
     displayName: "7.62mm Single AA Mount",
     type: "Weapon",
@@ -9886,6 +9895,37 @@
       {
         name: "Wikipedia — Yukikaze",
         url: "https://en.wikipedia.org/wiki/Japanese%20destroyer%20Yukikaze%20%281939%29",
+      },
+    ],
+  },
+  {
+    name: "shimakaze",
+    displayName: "Shimakaze",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x2 127mm/50 3rd Year Type",
+      },
+      {
+        label: "Anti-Aircraft",
+        value: "4x3 25mm/60 Type 96 + 1x2 25mm/60 Type 96",
+      },
+      {
+        label: "Torpedoes",
+        value: "3x5 610mm Type 93",
+      },
+    ],
+    description: "Shimakaze was the only completed destroyer of her experimental class, entering service in 1943 to combine high speed with a heavy torpedo battery. She was sunk in Ormoc Bay in November 1944 after attacks by American carrier aircraft.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Combined Fleet — Shimakaze",
+        url: "https://www.combinedfleet.com/shimak_t.htm",
+      },
+      {
+        name: "Wikipedia — Shimakaze",
+        url: "https://en.wikipedia.org/wiki/Japanese_destroyer_Shimakaze_(1942)",
       },
     ],
   },

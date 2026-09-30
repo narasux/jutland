@@ -5982,6 +5982,37 @@
     ],
   },
   {
+    name: "shimakaze",
+    displayName: "岛风",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x2 127mm/50 三年式",
+      },
+      {
+        label: "防空炮",
+        value: "4x3 25mm/60 九六式 + 1x2 25mm/60 九六式",
+      },
+      {
+        label: "鱼雷",
+        value: "3x5 610mm 九三式",
+      },
+    ],
+    description: "岛风号是日本海军岛风型驱逐舰唯一建成舰，1943 年服役，承担高速雷击与新型轮机验证任务。1944 年 11 月在奥尔莫克湾遭美军舰载机攻击后沉没。",
+    author: "未知",
+    links: [
+      {
+        name: "Combined Fleet — Shimakaze",
+        url: "https://www.combinedfleet.com/shimak_t.htm",
+      },
+      {
+        name: "维基百科 - 岛风号驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%B3%B6%E9%A2%A8%E8%99%9F%E9%A9%85%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "z_11",
     displayName: "Z-11 贝恩德·冯·阿尼姆",
     type: "驱逐舰",
@@ -9568,6 +9599,15 @@
   {
     name: "JP/610/4",
     displayName: "610mm 四联装酸素鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "JP/610/5",
+    displayName: "610mm 五联装酸素鱼雷",
     type: "武器",
     armaments: [],
     description: "",

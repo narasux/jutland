@@ -2879,6 +2879,7 @@
           "asashio",
           "yugumo",
           "yukikaze",
+          "shimakaze",
           "z_11",
           "z_22",
           "v",
@@ -4034,8 +4035,14 @@
         belongPlayer: "P1"
       },
       {
-        name: "T_14",
+        name: "shimakaze",
         pos: [25, 47],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "T_14",
+        pos: [24, 48],
         rotation: 90,
         belongPlayer: "P1"
       },

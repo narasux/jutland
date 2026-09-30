@@ -35558,6 +35558,109 @@
       ]
     }
   },
+  {
+    // 岛风
+    name: "shimakaze",
+    nation: "jp",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1944,
+    totalHP: 3324,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 40.9,
+    acceleration: 1.3,
+    rotateSpeed: 2.2,
+    length: 129.5,
+    width: 11.2,
+    fundsCost: 145,
+    timeCost: 53,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/127/50/2/Type3",
+          posPercent: 0.63,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 前主炮 B
+        {
+          name: "JP/127/50/2/Type3",
+          posPercent: 0.51,
+          rightFiringArc: [5, 180],
+          leftFiringArc: [180, 355]
+        },
+        // 后主炮 C
+        {
+          name: "JP/127/50/2/Type3",
+          posPercent: -0.62,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舰桥后方 25mm 三联装：右舷 / 左舷
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.23,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 舯部 25mm 三联装：右舷 / 左舷
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.03,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 舰尾 25mm 双联装
+        {
+          name: "JP/25/60/2",
+          posPercent: -0.52,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        }
+      ],
+      torpedoes: [
+        // 中轴五联装鱼雷 A
+        {
+          name: "JP/610/5",
+          posPercent: 0.34,
+          rightFiringArc: [45, 160],
+          leftFiringArc: [200, 315]
+        },
+        // 中轴五联装鱼雷 B
+        {
+          name: "JP/610/5",
+          posPercent: 0.14,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 中轴五联装鱼雷 C
+        {
+          name: "JP/610/5",
+          posPercent: -0.11,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: []
+    }
+  },
   // 德国海军
   {
     // Z-11
