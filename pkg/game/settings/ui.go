@@ -2,6 +2,7 @@
 package settings
 
 import (
+	"fmt"
 	stdimg "image"
 	"image/color"
 	"math"
@@ -26,7 +27,9 @@ const (
 	labelFontSize  = 24
 	buttonFontSize = 22
 
-	controlWidth = 140
+	controlHeight = 52
+	controlPadX   = 36
+	strategyCount = 5
 )
 
 type speedOption struct {
@@ -46,6 +49,7 @@ type UI struct {
 	container     widget.Containerer
 	localValue    float64 // 本地副本，保存时才写回 config.G
 	localLanguage i18n.Language
+	localAI       config.AIStrategies
 	backPressed   bool
 }
 
@@ -54,6 +58,7 @@ func New() *UI {
 	s := &UI{
 		localValue:    config.G.SpeedMultiplier,
 		localLanguage: i18n.NormalizeLanguage(config.G.Language),
+		localAI:       config.EnabledAIStrategies(),
 	}
 	s.buildUI()
 	return s
@@ -74,6 +79,7 @@ func (s *UI) BackPressed() bool { return s.backPressed }
 func (s *UI) Reset() {
 	s.localValue = config.G.SpeedMultiplier
 	s.localLanguage = i18n.NormalizeLanguage(config.G.Language)
+	s.localAI = config.EnabledAIStrategies()
 	s.backPressed = false
 	s.buildUI()
 }
@@ -173,10 +179,12 @@ func (s *UI) buildUI() {
 	}
 	// 速度与语言下拉框统一使用能覆盖四种语言字形的字体。
 	comboFaceValue := font.LanguageSelectorFace(buttonFontSize)
+	boxWidth := closedControlWidth(comboFaceValue)
 	speedCombo := newSettingsCombo(
 		speedEntries,
 		speedOptions[selectedIndex],
 		&comboFaceValue,
+		boxWidth,
 		func(entry any) string { return i18n.Text(entry.(speedOption).Label) },
 		func(entry any) string { return i18n.Text(entry.(speedOption).Label) },
 		func(entry any) { s.selectSpeed(entry.(speedOption).Value) },
@@ -198,6 +206,7 @@ func (s *UI) buildUI() {
 		languageEntries,
 		s.localLanguage,
 		&comboFaceValue,
+		boxWidth,
 		func(entry any) string { return entry.(i18n.Language).NativeName() },
 		func(entry any) string { return entry.(i18n.Language).NativeName() },
 		func(entry any) { s.selectLanguage(entry.(i18n.Language)) },
@@ -212,6 +221,7 @@ func (s *UI) buildUI() {
 			s.backPressed = true
 			config.G.SpeedMultiplier = s.localValue
 			config.G.Language = string(s.localLanguage)
+			config.G.AI = s.localAI
 			_ = config.SaveGameSettings()
 		}),
 	)
@@ -246,6 +256,7 @@ func (s *UI) buildUI() {
 	topContent.AddChild(speedCombo)
 	topContent.AddChild(languageLabel)
 	topContent.AddChild(languageCombo)
+	topContent.AddChild(s.strategyBox(&comboFaceValue, boxWidth))
 
 	// ====== 底部内容（操作按钮 + 提示） ======
 	bottomContent := widget.NewContainer(
@@ -296,10 +307,151 @@ func (s *UI) buildUI() {
 	s.container = rootContainer
 }
 
+type strategyOption struct {
+	label i18n.MessageID
+	flag  *bool
+}
+
+func closedControlWidth(face text.Face) int {
+	labels := []string{"5/5"}
+	for _, option := range speedOptions {
+		labels = append(labels, i18n.Text(option.Label))
+	}
+	labels = append(labels, i18n.CurrentLanguage().NativeName())
+	widest := 0
+	for _, label := range labels {
+		width := int(text.Advance(label, face) + 0.5)
+		if width > widest {
+			widest = width
+		}
+	}
+	return widest + controlPadX
+}
+
+func (s *UI) strategyBox(face *text.Face, boxWidth int) *widget.Container {
+	box := widget.NewContainer(
+		widget.ContainerOpts.Layout(widget.NewRowLayout(
+			widget.RowLayoutOpts.Direction(widget.DirectionVertical),
+			widget.RowLayoutOpts.Spacing(12),
+		)),
+	)
+	box.AddChild(widget.NewLabel(
+		widget.LabelOpts.Text(
+			i18n.Text(i18n.MsgSettingsAI),
+			face,
+			&widget.LabelColor{Idle: colorx.White, Disabled: colorx.White},
+		),
+	))
+	box.AddChild(s.strategyCombo(face, boxWidth))
+	return box
+}
+
+func (s *UI) strategyCombo(face *text.Face, boxWidth int) *widget.ComboButton {
+	options := []strategyOption{
+		{i18n.MsgAIStrategyAttack, &s.localAI.Attack},
+		{i18n.MsgAIStrategyDefend, &s.localAI.Defend},
+		{i18n.MsgAIStrategyCounter, &s.localAI.Counter},
+		{i18n.MsgAIStrategyRaid, &s.localAI.Raid},
+		{i18n.MsgAIStrategyScout, &s.localAI.Scout},
+	}
+	border := color.RGBA{R: 212, G: 180, B: 112, A: 255}
+	buttonImage := &widget.ButtonImage{
+		Idle:    image.NewBorderedNineSliceColor(color.RGBA{R: 20, G: 22, B: 25, A: 250}, border, 2),
+		Hover:   image.NewBorderedNineSliceColor(color.RGBA{R: 45, G: 42, B: 35, A: 255}, colorx.Silver, 2),
+		Pressed: image.NewBorderedNineSliceColor(color.RGBA{R: 12, G: 14, B: 17, A: 255}, colorx.Silver, 2),
+	}
+	textColor := &widget.ButtonTextColor{
+		Idle: colorx.White, Hover: colorx.White, Pressed: colorx.White,
+		Disabled: color.RGBA{R: 120, G: 110, B: 100, A: 255},
+	}
+	rowOff := strategyRowImage(false)
+	rowOn := strategyRowImage(true)
+	menu := widget.NewContainer(
+		widget.ContainerOpts.BackgroundImage(
+			image.NewBorderedNineSliceColor(color.RGBA{R: 13, G: 15, B: 18, A: 255}, border, 2),
+		),
+		widget.ContainerOpts.Layout(widget.NewRowLayout(
+			widget.RowLayoutOpts.Direction(widget.DirectionVertical),
+			widget.RowLayoutOpts.Padding(&widget.Insets{Top: 4, Bottom: 4}),
+		)),
+	)
+	var combo *widget.ComboButton
+	for _, option := range options {
+		option := option
+		rowColor := &widget.ButtonTextColor{
+			Idle: colorx.White, Hover: colorx.Gold, Pressed: colorx.Gold,
+			Disabled: color.RGBA{R: 120, G: 110, B: 100, A: 255},
+		}
+		var row *widget.Button
+		row = widget.NewButton(
+			widget.ButtonOpts.WidgetOpts(widget.WidgetOpts.MinSize(boxWidth, 40)),
+			widget.ButtonOpts.Image(strategyRowImage(*option.flag)),
+			widget.ButtonOpts.Text(i18n.Text(option.label), face, rowColor),
+			widget.ButtonOpts.TextPadding(&widget.Insets{Left: 18, Right: 18, Top: 8, Bottom: 8}),
+			widget.ButtonOpts.ClickedHandler(func(*widget.ButtonClickedEventArgs) {
+				*option.flag = !*option.flag
+				if *option.flag {
+					row.SetImage(rowOn)
+					rowColor.Idle = colorx.Gold
+				} else {
+					row.SetImage(rowOff)
+					rowColor.Idle = colorx.White
+				}
+				combo.SetLabel(s.strategySummary())
+			}),
+		)
+		if *option.flag {
+			rowColor.Idle = colorx.Gold
+		}
+		menu.AddChild(row)
+	}
+	combo = widget.NewComboButton(
+		widget.ComboButtonOpts.MaxContentHeight(240),
+		widget.ComboButtonOpts.Content(menu),
+		widget.ComboButtonOpts.ButtonOpts(
+			widget.ButtonOpts.WidgetOpts(
+				widget.WidgetOpts.MinSize(boxWidth, controlHeight),
+				widget.WidgetOpts.LayoutData(widget.RowLayoutData{MaxWidth: boxWidth, MaxHeight: controlHeight}),
+			),
+			widget.ButtonOpts.Image(buttonImage),
+			widget.ButtonOpts.Text(s.strategySummary(), face, textColor),
+			widget.ButtonOpts.TextPadding(&widget.Insets{Left: 18, Right: 18, Top: 12, Bottom: 12}),
+		),
+	)
+	return combo
+}
+
+func (s *UI) strategySummary() string {
+	selected := 0
+	for _, option := range []strategyOption{
+		{i18n.MsgAIStrategyAttack, &s.localAI.Attack},
+		{i18n.MsgAIStrategyDefend, &s.localAI.Defend},
+		{i18n.MsgAIStrategyCounter, &s.localAI.Counter},
+		{i18n.MsgAIStrategyRaid, &s.localAI.Raid},
+		{i18n.MsgAIStrategyScout, &s.localAI.Scout},
+	} {
+		if option.flag != nil && *option.flag {
+			selected++
+		}
+	}
+	return fmt.Sprintf("%d/%d", selected, strategyCount)
+}
+
+func strategyRowImage(selected bool) *widget.ButtonImage {
+	if selected {
+		on := image.NewNineSliceColor(color.RGBA{R: 76, G: 65, B: 47, A: 255})
+		return &widget.ButtonImage{Idle: on, Hover: on, Pressed: on}
+	}
+	idle := image.NewNineSliceColor(color.RGBA{R: 20, G: 22, B: 25, A: 250})
+	hover := image.NewNineSliceColor(color.RGBA{R: 45, G: 42, B: 35, A: 255})
+	return &widget.ButtonImage{Idle: idle, Hover: hover, Pressed: hover}
+}
+
 func newSettingsCombo(
 	entries []any,
 	selected any,
 	face *text.Face,
+	boxWidth int,
 	buttonLabel func(any) string,
 	entryLabel func(any) string,
 	selectedHandler func(any),
@@ -333,16 +485,20 @@ func newSettingsCombo(
 	fixedHandleSize := 0
 
 	return widget.NewListComboButton(
-		widget.ListComboButtonOpts.WidgetOpts(widget.WidgetOpts.MinSize(controlWidth, 52)),
+		widget.ListComboButtonOpts.WidgetOpts(
+			widget.WidgetOpts.MinSize(boxWidth, controlHeight),
+			widget.WidgetOpts.LayoutData(widget.RowLayoutData{MaxWidth: boxWidth, MaxHeight: controlHeight}),
+		),
 		widget.ListComboButtonOpts.Entries(entries),
 		widget.ListComboButtonOpts.InitialEntry(selected),
 		widget.ListComboButtonOpts.ButtonParams(&widget.ButtonParams{
 			Image:       buttonImage,
 			TextPadding: &widget.Insets{Left: 18, Right: 18, Top: 12, Bottom: 12},
+			MinSize:     &stdimg.Point{X: boxWidth, Y: controlHeight},
 		}),
 		widget.ListComboButtonOpts.Text(face, nil, textColor),
 		widget.ListComboButtonOpts.ListParams(&widget.ListParams{
-			MinSize:              &stdimg.Point{X: controlWidth, Y: 0},
+			MinSize:              &stdimg.Point{X: boxWidth, Y: 0},
 			ScrollContainerImage: listImage,
 			ScrollContainerPadding: &widget.Insets{
 				Left: 2, Right: 2, Top: 2, Bottom: 2,

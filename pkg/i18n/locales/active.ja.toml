@@ -56,6 +56,20 @@ other = "言語"
 other = "保存"
 [SettingsCancel]
 other = "キャンセル"
+[SettingsAI]
+other = "AI戦略"
+[SettingsAINone]
+other = "未選択"
+[AIStrategyAttack]
+other = "攻撃"
+[AIStrategyDefend]
+other = "防御"
+[AIStrategyCounter]
+other = "反撃"
+[AIStrategyRaid]
+other = "襲撃"
+[AIStrategyScout]
+other = "偵察"
 [SpeedVerySlow]
 other = "非常に遅い"
 [SpeedSlow]

@@ -56,6 +56,20 @@ other = "语言"
 other = "保存"
 [SettingsCancel]
 other = "取消"
+[SettingsAI]
+other = "电脑策略"
+[SettingsAINone]
+other = "未选择"
+[AIStrategyAttack]
+other = "进攻"
+[AIStrategyDefend]
+other = "防守"
+[AIStrategyCounter]
+other = "反击"
+[AIStrategyRaid]
+other = "袭击"
+[AIStrategyScout]
+other = "侦察"
 [SpeedVerySlow]
 other = "极慢"
 [SpeedSlow]

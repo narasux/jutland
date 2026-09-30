@@ -56,6 +56,20 @@ other = "Language"
 other = "Save"
 [SettingsCancel]
 other = "Cancel"
+[SettingsAI]
+other = "AI Strategies"
+[SettingsAINone]
+other = "None"
+[AIStrategyAttack]
+other = "Attack"
+[AIStrategyDefend]
+other = "Defend"
+[AIStrategyCounter]
+other = "Counterattack"
+[AIStrategyRaid]
+other = "Raid"
+[AIStrategyScout]
+other = "Recon"
 [SpeedVerySlow]
 other = "Very Slow"
 [SpeedSlow]

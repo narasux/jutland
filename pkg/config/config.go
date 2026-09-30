@@ -59,6 +59,20 @@ var (
 	ConfigBaseDir = filepath.Join(BaseDir, "configs")
 )
 
+// AIStrategies 是电脑舰队可以同时启用的策略。未出现在配置里的项保持默认开启。
+type AIStrategies struct {
+	Attack  bool `json:"attack"`
+	Defend  bool `json:"defend"`
+	Counter bool `json:"counter"`
+	Raid    bool `json:"raid"`
+	Scout   bool `json:"scout"`
+}
+
+// DefaultAIStrategies 五种策略全部开启，和未写配置时的行为一致。
+func DefaultAIStrategies() AIStrategies {
+	return AIStrategies{Attack: true, Defend: true, Counter: true, Raid: true, Scout: true}
+}
+
 // GameSettings 游戏设置配置
 type GameSettings struct {
 	// SpeedMultiplier 全局速度倍率，影响战舰、炮弹、鱼雷、飞机等移动速度
@@ -68,6 +82,8 @@ type GameSettings struct {
 	Language string `json:"language"`
 	// EnableLandAirfield 陆地机场功能总开关，false 时所有任务不生成机场
 	EnableLandAirfield bool `json:"enableLandAirfield"`
+	// AI 电脑舰队允许使用的策略。
+	AI AIStrategies `json:"aiStrategies"`
 }
 
 // G 游戏设置全局变量
@@ -79,7 +95,16 @@ func NewDefaultGameSettings() *GameSettings {
 		SpeedMultiplier:    SpeedStandardMultiplier,
 		Language:           "zh-Hans",
 		EnableLandAirfield: true,
+		AI:                 DefaultAIStrategies(),
 	}
+}
+
+// EnabledAIStrategies 返回当前设置里的电脑策略。设置还没加载时五种都算开启。
+func EnabledAIStrategies() AIStrategies {
+	if G == nil {
+		return DefaultAIStrategies()
+	}
+	return G.AI
 }
 
 func normalizeSpeedMultiplier(value float64) float64 {
@@ -131,10 +156,8 @@ func LoadGameSettings() {
 	}
 	defer file.Close()
 
-	// 解析 JSON5
-	var settings GameSettings
-	// 缺省开启陆地机场，配置中显式为 false 时才关闭
-	settings.EnableLandAirfield = true
+	// 从默认值开始解析，这样旧配置里没写的策略开关保持开启。
+	settings := *NewDefaultGameSettings()
 	decoder := json5.NewDecoder(file)
 	if err = decoder.Decode(&settings); err != nil {
 		log.Printf("[ERROR] Failed to parse game_settings.json5: %v, using default settings", err)
@@ -178,7 +201,8 @@ func SaveGameSettings() error {
 	)
 	_, _ = file.WriteString("// 范围: 0.50 ~ 2.00，默认值: 1.00\n\n")
 	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n")
-	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n\n")
+	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n")
+	_, _ = file.WriteString("// aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

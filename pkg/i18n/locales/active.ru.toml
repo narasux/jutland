@@ -56,6 +56,20 @@ other = "Язык"
 other = "Сохранить"
 [SettingsCancel]
 other = "Отмена"
+[SettingsAI]
+other = "Стратегии ИИ"
+[SettingsAINone]
+other = "Не выбрано"
+[AIStrategyAttack]
+other = "Атака"
+[AIStrategyDefend]
+other = "Оборона"
+[AIStrategyCounter]
+other = "Контратака"
+[AIStrategyRaid]
+other = "Набег"
+[AIStrategyScout]
+other = "Разведка"
 [SpeedVerySlow]
 other = "Очень медленно"
 [SpeedSlow]
