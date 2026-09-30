@@ -3302,19 +3302,19 @@
       },
       {
         name: "neptune",
-        pos: [7, 33],
+        pos: [7, 35],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "joffre",
-        pos: [8, 34],
+        pos: [8, 36],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "clemenceau_pa28",
-        pos: [9, 34],
+        pos: [7, 37],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -3380,19 +3380,19 @@
       },
       {
         name: "de_grasse",
-        pos: [15, 35],
+        pos: [13, 35],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "pluton",
-        pos: [16, 36],
+        pos: [14, 36],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "le_fantasque",
-        pos: [12, 41],
+        pos: [13, 37],
         rotation: 90,
         belongPlayer: "P1"
       },

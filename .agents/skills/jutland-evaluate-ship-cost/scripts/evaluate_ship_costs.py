@@ -54,6 +54,7 @@ STRATEGIC_COST_MULTIPLIER = {
     "satsuma": 1.10,
     "edo": 1.15,
     "illinois": 1.10,
+    "clemenceau_pa28": 1.25,
 }
 
 DEFAULT_TIME_FACTOR = 0.35

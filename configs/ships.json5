@@ -22763,8 +22763,8 @@
     rotateSpeed: 0.8,
     length: 215,
     width: 25,
-    fundsCost: 180,
-    timeCost: 75,
+    fundsCost: 225,
+    timeCost: 91,
     weapon: {
       mainGuns: [
         // 舰艏后方两舷 100mm 双联装高平两用炮：右舷 / 左舷
