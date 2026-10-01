@@ -1,4 +1,7 @@
 [
+  // 注：USCatapult_<舰名> 这些模板的弹射点坐标是逐舰在战舰俯视图上标注出来的
+  // （工具见 utils/turret_marker，清单 utils/turret_marker/catapult_batch.json），
+  // 所以每艘美国主力舰一个模板、不共用；弹射方向统一为相对舰艏 60°，单台向左舷。
   // 航母起降甲板模板。
   // 舰船在 ships.json5 的 aircraft.deck 中按名称引用，缺失会在初始化时报错。
   // 坐标约定：
@@ -205,5 +208,575 @@
       approachAngle: 0,
       approachLength: 3
     }
-  }
+  },
+  // alaska：舯部两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_alaska",
+    takeoffPoints: [
+      {
+        forward: 0.512,
+        lateral: -0.305,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.51,
+        lateral: 0.323,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // arizona：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_arizona",
+    takeoffPoints: [
+      {
+        forward: 0.903,
+        lateral: 0.002,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.694,
+        lateral: 0.057,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // astoria：舯部两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_astoria",
+    takeoffPoints: [
+      {
+        forward: 0.6,
+        lateral: -0.287,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.596,
+        lateral: 0.302,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // baltimore：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_baltimore",
+    takeoffPoints: [
+      {
+        forward: 0.891,
+        lateral: -0.284,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.887,
+        lateral: 0.318,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // brooklyn：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_brooklyn",
+    takeoffPoints: [
+      {
+        forward: 0.876,
+        lateral: -0.268,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.876,
+        lateral: 0.255,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // des_moines：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_des_moines",
+    takeoffPoints: [
+      {
+        forward: 0.886,
+        lateral: -0.321,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.885,
+        lateral: 0.294,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // fargo：单台，左舷弹射，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_fargo",
+    takeoffPoints: [
+      {
+        forward: 0.883,
+        lateral: -0.354,
+        runLength: 0.22,
+        launchAngle: -60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // lexington：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_lexington",
+    takeoffPoints: [
+      {
+        forward: 0.923,
+        lateral: -0.154,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.919,
+        lateral: 0.16,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // lowa：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_lowa",
+    takeoffPoints: [
+      {
+        forward: 0.93,
+        lateral: -0.265,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.929,
+        lateral: 0.285,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // maryland：单台，左舷弹射，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_maryland",
+    takeoffPoints: [
+      {
+        forward: 0.919,
+        lateral: 0.005,
+        runLength: 0.22,
+        launchAngle: -60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // montana：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_montana",
+    takeoffPoints: [
+      {
+        forward: 0.937,
+        lateral: -0.276,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.935,
+        lateral: 0.266,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // nevada：单台，左舷弹射，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_nevada",
+    takeoffPoints: [
+      {
+        forward: 0.915,
+        lateral: 0.025,
+        runLength: 0.22,
+        launchAngle: -60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // new_mexico：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_new_mexico",
+    takeoffPoints: [
+      {
+        forward: 0.915,
+        lateral: 0.014,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.71,
+        lateral: 0.025,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // new_york：单台，左舷弹射，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_new_york",
+    takeoffPoints: [
+      {
+        forward: 0.603,
+        lateral: 0.078,
+        runLength: 0.22,
+        launchAngle: -60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // northampton：舯部两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_northampton",
+    takeoffPoints: [
+      {
+        forward: 0.475,
+        lateral: -0.285,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.477,
+        lateral: 0.307,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // oregon_city：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_oregon_city",
+    takeoffPoints: [
+      {
+        forward: 0.908,
+        lateral: -0.325,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.904,
+        lateral: 0.298,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // pennsylvania：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_pennsylvania",
+    takeoffPoints: [
+      {
+        forward: 0.916,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.693,
+        lateral: 0.08,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // pensacola：舯部两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_pensacola",
+    takeoffPoints: [
+      {
+        forward: 0.457,
+        lateral: -0.25,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.461,
+        lateral: 0.311,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // portland：舯部两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_portland",
+    takeoffPoints: [
+      {
+        forward: 0.487,
+        lateral: -0.273,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.481,
+        lateral: 0.316,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // puerto_rico：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_puerto_rico",
+    takeoffPoints: [
+      {
+        forward: 0.939,
+        lateral: -0.214,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.939,
+        lateral: 0.177,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // south_dakota：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_south_dakota",
+    takeoffPoints: [
+      {
+        forward: 0.912,
+        lateral: -0.282,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.91,
+        lateral: 0.278,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // st_louis：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_st_louis",
+    takeoffPoints: [
+      {
+        forward: 0.879,
+        lateral: -0.266,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.875,
+        lateral: 0.3,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // tennessee：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_tennessee",
+    takeoffPoints: [
+      {
+        forward: 0.919,
+        lateral: -0.007,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.706,
+        lateral: 0.052,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // west_virginia：单台，左舷弹射，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_west_virginia",
+    takeoffPoints: [
+      {
+        forward: 0.92,
+        lateral: -0.015,
+        runLength: 0.22,
+        launchAngle: -60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
 ]

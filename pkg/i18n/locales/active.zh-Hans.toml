@@ -126,6 +126,8 @@ other = "俯冲轰炸机"
 other = "水平轰炸机"
 [PlaneTypeTorpedoBomber]
 other = "鱼雷轰炸机"
+[PlaneTypeScout]
+other = "侦察机"
 [PlaneTypeOther]
 other = "其他"
 [Unknown]

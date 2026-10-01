@@ -88,6 +88,32 @@ python3 utils/turret_marker/server.py path/to/top.png --check
 具体数值仍应以同型舰和实际炮位为准。
 炮廓炮和其他舷侧武器会按标记的左右舷只保留一侧射界；另一侧以 `[0, 0]` 或 `[360, 360]` 禁用。
 
+## 批量标注
+
+一次加载多张俯视图时，页面顶部会出现舰船下拉框；切换舰船只改 URL 上的 `?i=`，**标注按图片路径分别存在本机浏览器里**，切回来还在。全部标完后点“复制全部舰船 JSON”，一次导出所有已标图片。
+
+也可以用清单文件批量启动，顺带给每张图各自的预期数量（界面显示“已标/应有”）：
+
+```bash
+python3 utils/turret_marker/server.py --batch utils/turret_marker/catapult_batch.json
+```
+
+清单格式（严格 JSON，不含注释；`_` 开头的字段只作备注，不计入预期数量；图片相对路径按当前工作目录解析）：
+
+```json
+{
+  "types": "catapult",
+  "rotate": 90,
+  "ships": [
+    { "image": "resources/images/ships/top/battleship/lowa.png", "catapult": 2, "_note": "舰尾两舷" }
+  ]
+}
+```
+
+`rotate` 是清单里的默认预览旋转（顺时针），命令行显式给 `--rotate` 时以命令行为准。舰船俯视图长轴朝上时，用 `"rotate": 90` 横置预览、舰艏朝右，标注时不用上下滚动。**只旋转预览，源图片不会被改写**（游戏里的贴图必须保持舰艏朝上）。
+
+`--batch` 和位置参数可以同时给，会按顺序合并。
+
 ## 命令行参数
 
 ```text
@@ -96,6 +122,9 @@ python3 utils/turret_marker/server.py path/to/top.png --check
 --bow top|bottom|left|right 舰艏方向，默认 top
 --rotate 0|90|180|270       浏览器预览顺时针旋转角度，默认 0
 --types TYPE[:COUNT],...     武器类型及预期数量，默认 main,secondary,aa,torpedo,rocket,custom
+--batch FILE                JSON 清单：图片列表 + 每张图的预期数量
 --check                     只打印图片边界并退出
 --no-open                   不自动打开浏览器
 ```
+
+`--check` 在多图/批量模式下打印一个 JSON 数组。

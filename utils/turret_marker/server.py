@@ -236,6 +236,10 @@ HTML = r"""<!doctype html>
   <header>
     <h1>Jutland posPercent Marker</h1>
     <div class="subtitle">点击俯视图标记火炮纵向位置；图片会按比例放大到画布最大宽度。</div>
+    <div id="shipPickerRow" style="margin-top: 8px; display: none;">
+      <label>当前舰船：<select id="shipPicker"></select></label>
+      <span id="shipPickerHint" class="footnote">切换舰船只换图片，标注按图片分别保存在本机浏览器里。</span>
+    </div>
   </header>
 
   <div class="toolbar">
@@ -265,7 +269,7 @@ HTML = r"""<!doctype html>
         <ol id="markerList"></ol>
       </section>
 
-      <section class="panel">
+      <section class="panel" id="arcPanel">
         <h2>射界参考</h2>
         <p class="hint">选中炮位后在地图上实时显示半透明射界，并写入项目 JSON；推荐值也可人工修正。</p>
         <div class="actions">
@@ -326,8 +330,14 @@ HTML = r"""<!doctype html>
             </div>
           </div>
         </div>
-        <div class="actions" style="margin-top: 8px;">
-          <button id="copyProject" class="primary">复制项目 JSON</button>
+      </section>
+
+      <section class="panel">
+        <h2>导出</h2>
+        <p class="hint">导出内容含图片路径与像素坐标，刷新或换舰都不会丢；“全部舰船”会一次导出本机所有已标图片。</p>
+        <div class="actions">
+          <button id="copyProject" class="primary">复制本项目 JSON</button>
+          <button id="copyAll" class="primary">复制全部舰船 JSON</button>
         </div>
         <div id="copyStatus" class="footnote"></div>
       </section>
@@ -364,8 +374,26 @@ HTML = r"""<!doctype html>
       leftEnd: document.getElementById("leftEnd")
     };
 
-    ship.src = "/image";
+    // 批量模式下图片要带上索引，否则切舰后仍取第 0 张。
+    ship.src = `/image?i=${meta.index ?? 0}`;
     ship.alt = meta.name;
+
+    // 批量模式：多张图时给一个舰船下拉框，切换只改 URL 查询参数，重新载入本页。
+    if (meta.ships && meta.ships.length > 1) {
+      const row = document.getElementById("shipPickerRow");
+      const picker = document.getElementById("shipPicker");
+      meta.ships.forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = String(item.index);
+        opt.textContent = `${item.index + 1}/${meta.ships.length}　${item.name}`;
+        if (item.index === meta.index) opt.selected = true;
+        picker.appendChild(opt);
+      });
+      row.style.display = "";
+      picker.addEventListener("change", () => {
+        window.location.search = `?i=${picker.value}`;
+      });
+    }
 
     function fmt(value) {
       return Number(value).toFixed(Number(precision.value));
@@ -728,6 +756,14 @@ HTML = r"""<!doctype html>
       renderOverlay();
       renderList();
       fillArcs(selectedMarker());
+      syncArcPanel();
+    }
+
+    // 弹射器只关心位置和左右舷，射出方向由配置统一给（相对舰艏 60°），
+    // 所以选中 catapult 时把射界面板收起来，避免误以为要填。
+    function syncArcPanel() {
+      document.getElementById("arcPanel").style.display =
+        state.type === "catapult" ? "none" : "";
     }
 
     ship.addEventListener("click", event => {
@@ -851,6 +887,24 @@ HTML = r"""<!doctype html>
       copyText(JSON.stringify(projectData(), null, 2), label);
     });
 
+    document.getElementById("copyAll").addEventListener("click", () => {
+      const prefix = "jutland-turret-marker:";
+      const out = {};
+      for (let i = 0; i < localStorage.length; i += 1) {
+        const key = localStorage.key(i);
+        if (!key || !key.startsWith(prefix)) continue;
+        try {
+          out[key.slice(prefix.length)] = JSON.parse(localStorage.getItem(key));
+        } catch {
+          out[key.slice(prefix.length)] = null;
+        }
+      }
+      copyText(
+        JSON.stringify(out, null, 2),
+        `全部舰船 JSON（本机已标 ${Object.keys(out).length} 张图）`
+      );
+    });
+
     precision.addEventListener("change", render);
     snapTolerance.addEventListener("change", render);
     restoreState();
@@ -866,7 +920,12 @@ HTML = r"""<!doctype html>
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Mark ship weapon posPercent values in a browser.")
-    parser.add_argument("image", type=Path, help="top-view PNG path")
+    parser.add_argument("image", type=Path, nargs="*", help="one or more top-view PNG paths")
+    parser.add_argument(
+        "--batch",
+        type=Path,
+        help="JSON manifest with an image list and per-image expected counts",
+    )
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--bow", choices=("top", "bottom", "left", "right"), default="top")
@@ -874,7 +933,7 @@ def parse_args() -> argparse.Namespace:
         "--rotate",
         type=int,
         choices=(0, 90, 180, 270),
-        default=0,
+        default=None,
         help="rotate the browser preview clockwise without changing the source image",
     )
     parser.add_argument(
@@ -891,6 +950,7 @@ TYPE_LABELS = {
     "main": "主炮",
     "secondary": "副炮",
     "aa": "防空炮",
+    "catapult": "弹射器",
     "aa75": "75mm 高炮",
     "aa37": "37mm 高炮",
     "aa100": "100mm 高炮",
@@ -905,6 +965,39 @@ TYPE_LABELS = {
     "rocket": "火箭炮",
     "custom": "自定义",
 }
+
+
+def load_batch(path: Path) -> tuple[list[Path], dict[str, dict[str, int]], str, int]:
+    """读取批量清单：图片路径、每张图的类型预期数量、类型名、以及预览旋转角度。
+
+    清单形如：
+        {"types": "catapult", "rotate": 90,
+         "ships": [{"image": "a.png", "catapult": 2, "_note": "舰尾两舷"}]}
+    以 "_" 开头的字段是给人看的备注，不进预期数量。图片相对路径按当前工作目录解析。
+    `rotate` 只旋转浏览器预览（顺时针），不改源文件；命令行显式给了 --rotate 时以命令行为准。
+    """
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError("--batch 需要一个 JSON 对象")
+    images: list[Path] = []
+    expectations: dict[str, dict[str, int]] = {}
+    for item in data.get("ships", []):
+        if isinstance(item, str):
+            images.append(Path(item))
+            continue
+        rel = item.get("image")
+        if not rel:
+            raise ValueError("--batch 里每一项都要有 image")
+        image = Path(rel)
+        images.append(image)
+        counts = {
+            key: int(value)
+            for key, value in item.items()
+            if key != "image" and not key.startswith("_")
+        }
+        if counts:
+            expectations[image.stem] = counts
+    return images, expectations, data.get("types", "catapult"), int(data.get("rotate", 0))
 
 
 def parse_types(value: str) -> list[dict]:
@@ -995,21 +1088,30 @@ def encode_png(image: Image.Image) -> bytes:
     return output.getvalue()
 
 
-def make_handler(image_bytes: bytes, image_type: str, meta: dict) -> type[BaseHTTPRequestHandler]:
-    html = HTML.replace("__META__", json.dumps(meta, ensure_ascii=False))
-
+def make_handler(entries: list[dict]) -> type[BaseHTTPRequestHandler]:
     class Handler(BaseHTTPRequestHandler):
+        def query_index(self) -> int:
+            query = urlparse(self.path).query
+            params = dict(pair.split("=", 1) for pair in query.split("&") if "=" in pair)
+            try:
+                index = int(params.get("i", "0"))
+            except ValueError:
+                index = 0
+            return index if 0 <= index < len(entries) else 0
+
         def do_GET(self) -> None:
             path = urlparse(self.path).path
+            entry = entries[self.query_index()]
             if path == "/":
+                html = HTML.replace("__META__", json.dumps(entry["meta"], ensure_ascii=False))
                 payload = html.encode("utf-8")
                 content_type = "text/html; charset=utf-8"
             elif path == "/meta":
-                payload = json.dumps(meta, ensure_ascii=False).encode("utf-8")
+                payload = json.dumps(entry["meta"], ensure_ascii=False).encode("utf-8")
                 content_type = "application/json; charset=utf-8"
             elif path == "/image":
-                payload = image_bytes
-                content_type = image_type
+                payload = entry["bytes"]
+                content_type = entry["type"]
             else:
                 self.send_error(404)
                 return
@@ -1028,21 +1130,53 @@ def make_handler(image_bytes: bytes, image_type: str, meta: dict) -> type[BaseHT
 
 def main() -> None:
     args = parse_args()
-    image_path = args.image.resolve()
-    if not image_path.is_file():
-        raise FileNotFoundError(image_path)
-    image = load_image(image_path, args.rotate)
-    meta = load_meta(image, image_path.name, rotated_bow(args.bow, args.rotate))
-    meta["path"] = str(image_path)
-    meta["key"] = str(image_path)
-    meta["types"] = parse_types(args.types)
+    images = list(args.image)
+    expectations: dict[str, dict[str, int]] = {}
+    types_spec = args.types
+    batch_rotate = 0
+    if args.batch is not None:
+        batch_images, expectations, batch_types, batch_rotate = load_batch(args.batch)
+        images.extend(batch_images)
+        types_spec = batch_types
+    if not images:
+        raise SystemExit("至少给一张俯视图，或用 --batch 指定清单")
+    # 命令行显式给了 --rotate 就以命令行为准，否则用清单里的。
+    rotate = args.rotate if args.rotate is not None else batch_rotate
+    bow = rotated_bow(args.bow, rotate)
+
+    entries: list[dict] = []
+    for raw_path in images:
+        image_path = raw_path.resolve()
+        if not image_path.is_file():
+            raise FileNotFoundError(image_path)
+        image = load_image(image_path, rotate)
+        meta = load_meta(image, image_path.stem, bow)
+        meta["path"] = str(image_path)
+        meta["key"] = str(image_path)
+        meta["types"] = parse_types(types_spec)
+        # 清单里给了这张图的预期数量就覆盖全局默认值，界面按舰显示「已标/应有」。
+        for item in meta["types"]:
+            if image_path.stem in expectations and item["name"] in expectations[image_path.stem]:
+                item["expected"] = expectations[image_path.stem][item["name"]]
+        meta["index"] = len(entries)
+        entries.append(
+            {
+                "meta": meta,
+                "bytes": encode_png(image),
+                "type": mimetypes.guess_type(image_path.name)[0] or "application/octet-stream",
+            }
+        )
+
+    # 批量模式下每张图的 meta 都带上完整舰船清单，前端据此生成切换下拉框。
+    ships = [{"index": item["meta"]["index"], "name": item["meta"]["name"]} for item in entries]
+    for item in entries:
+        item["meta"]["ships"] = ships
+
     if args.check:
-        print(json.dumps(meta, ensure_ascii=False, indent=2))
+        print(json.dumps([item["meta"] for item in entries], ensure_ascii=False, indent=2))
         return
 
-    image_bytes = encode_png(image)
-    image_type = mimetypes.guess_type(image_path.name)[0] or "application/octet-stream"
-    handler = make_handler(image_bytes, image_type, meta)
+    handler = make_handler(entries)
     server = ThreadingHTTPServer((args.host, args.port), handler)
     actual_port = server.server_address[1]
     display_host = "127.0.0.1" if args.host in ("0.0.0.0", "::") else args.host

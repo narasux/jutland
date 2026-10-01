@@ -2958,6 +2958,11 @@
         {
           name: "B7A2",
           maxCount: 24
+        },
+        {
+          // 彩云：后期航母的舰载侦察机，迷雾下由此起飞搜索
+          name: "C6N1",
+          maxCount: 4
         }
       ]
     }
@@ -3141,6 +3146,11 @@
         {
           name: "B6N2",
           maxCount: 20
+        },
+        {
+          // 彩云：后期航母的舰载侦察机，迷雾下由此起飞搜索
+          name: "C6N1",
+          maxCount: 4
         }
       ]
     }
@@ -4944,6 +4954,11 @@
         {
           name: "B6N2",
           maxCount: 24
+        },
+        {
+          // 彩云：后期航母的舰载侦察机，迷雾下由此起飞搜索
+          name: "C6N1",
+          maxCount: 4
         }
       ]
     }
@@ -8620,7 +8635,7 @@
     nation: "us",
     type: "battleship",
     typeAbbr: "BB",
-    year: 1943,
+    year: 1945,
     totalHP: 58000,
     horizontalDamageReduction: 0.5,
     verticalDamageReduction: 0.3,
@@ -9175,6 +9190,17 @@
           posPercent: -0.75,
           rightFiringArc: [90, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_lowa",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SC-1",
+          maxCount: 4
         }
       ]
     }
@@ -9945,6 +9971,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_montana",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SC-1",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -10417,6 +10454,17 @@
           posPercent: -0.75,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_lexington",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
         }
       ]
     }
@@ -11040,6 +11088,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_south_dakota",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -11575,6 +11634,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_west_virginia",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -11879,6 +11949,17 @@
           leftFiringArc: [360, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_maryland",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -12173,6 +12254,17 @@
           leftFiringArc: [225, 315]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_tennessee",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -12404,6 +12496,17 @@
           posPercent: -0.25,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_new_mexico",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SOC",
+          maxCount: 4
         }
       ]
     }
@@ -12679,6 +12782,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_pennsylvania",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -12886,6 +13000,17 @@
           posPercent: -0.26,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_arizona",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
         }
       ]
     }
@@ -13331,6 +13456,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_nevada",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -13584,6 +13720,17 @@
           posPercent: -0.75,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_new_york",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SOC",
+          maxCount: 4
         }
       ]
     }
@@ -13928,7 +14075,7 @@
           leftFiringArc: [180, 360]
         }
       ]
-    }
+    },
   },
   // 美国海军 - 前无畏舰与无畏舰
   {
@@ -22312,6 +22459,11 @@
         {
           name: "LN401",
           maxCount: 8
+        },
+        {
+          // 卢瓦尔 130：法国舰载水侦，迷雾下由此起飞搜索
+          name: "Loire130",
+          maxCount: 4
         }
       ]
     }
@@ -22744,6 +22896,11 @@
         {
           name: "Nord1500",
           maxCount: 25
+        },
+        {
+          // 卢瓦尔 130：法国舰载水侦，迷雾下由此起飞搜索
+          name: "Loire130",
+          maxCount: 4
         }
       ]
     }
@@ -22891,6 +23048,11 @@
         {
           name: "Nord1500",
           maxCount: 22
+        },
+        {
+          // 卢瓦尔 130：法国舰载水侦，迷雾下由此起飞搜索
+          name: "Loire130",
+          maxCount: 4
         }
       ]
     }
@@ -26583,6 +26745,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_puerto_rico",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SC-1",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -26972,6 +27145,17 @@
           leftFiringArc: [180, 360]
         },
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_alaska",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -27229,6 +27413,17 @@
           posPercent: -0.63,
           rightFiringArc: [90, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_des_moines",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SC-1",
+          maxCount: 4
         }
       ]
     }
@@ -27524,6 +27719,17 @@
           posPercent: -0.67,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_oregon_city",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SC-1",
+          maxCount: 4
         }
       ]
     }
@@ -27855,6 +28061,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_baltimore",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "OS2U",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -28054,6 +28271,17 @@
           posPercent: -0.57,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_astoria",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SOC",
+          maxCount: 4
         }
       ]
     }
@@ -28292,6 +28520,17 @@
           leftFiringArc: [180, 330]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_portland",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SOC",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -28455,6 +28694,17 @@
           posPercent: -0.9,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_northampton",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SOC",
+          maxCount: 4
         }
       ]
     }
@@ -28635,6 +28885,17 @@
           posPercent: -0.62,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_pensacola",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SOC",
+          maxCount: 4
         }
       ]
     }
@@ -28873,6 +29134,17 @@
           leftFiringArc: [180, 360]
         },
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_brooklyn",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SC-1",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -29010,6 +29282,17 @@
           posPercent: -0.48,
           rightFiringArc: [90, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_st_louis",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SOC",
+          maxCount: 4
         }
       ]
     }
@@ -29352,7 +29635,7 @@
           leftFiringArc: [180, 360]
         }
       ]
-    }
+    },
   },
   {
     // 法戈号（1950 年状态）
@@ -29554,6 +29837,17 @@
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_fargo",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "SC-1",
+          maxCount: 3
+        }
       ]
     }
   },
