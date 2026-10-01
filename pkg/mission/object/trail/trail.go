@@ -4,6 +4,7 @@ import (
 	"image/color"
 
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
@@ -14,6 +15,8 @@ type Trail struct {
 	Shape textureImg.TrailShape
 	// OwnerUid 标识持续生成该尾流的对象；舰船尾流停船后需要统一淡出。
 	OwnerUid string `json:"-"`
+	// BelongPlayer 是产生这条尾流的玩家，迷雾下据此决定要不要画。
+	BelongPlayer faction.Player `json:"-"`
 	// 当前尺寸 & 尺寸扩散速度
 	CurSize       float64
 	DiffusionRate float64

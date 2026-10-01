@@ -17,6 +17,7 @@ import (
 type Drawer struct {
 	mission string
 	abbrMap *ebiten.Image
+	fogImg  *ebiten.Image
 }
 
 // NewDrawer ...
@@ -62,6 +63,7 @@ func (d *Drawer) Draw(
 	default:
 		// 相机视野
 		d.drawCameraView(screen, misState)
+		d.drawFog(screen, misState)
 		// 地图元素
 		d.drawBuildingsInCamera(screen, misState)
 		d.drawShotBullets(screen, misState)

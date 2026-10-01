@@ -110,6 +110,8 @@ type BattleShip struct {
 	Length float64 `json:"length"`
 	// 战舰宽度
 	Width float64 `json:"width"`
+	// 视距（地图格）。0 表示按舰种默认值，初始化时再封顶到主炮射程。
+	SightRange float64 `json:"sightRange"`
 	// 尾流船体；空则只在中线按舰宽生成舰艏/舰艉两点
 	WakeHulls []WakeHull `json:"wakeHulls"`
 	// 生成时算好的尾流船体，尾流每拍只读这一份

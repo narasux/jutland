@@ -32,7 +32,7 @@ func (c *AngelicaSinensis) Exec(misState *state.MissionState) string {
 
 var _ Cheat = (*AngelicaSinensis)(nil)
 
-// BlackSheepWall 黑羊之墙 -> 地图全开（目前没用）
+// BlackSheepWall 黑羊之墙 -> 当前玩家本局忽略迷雾
 type BlackSheepWall struct{}
 
 func (c *BlackSheepWall) String() string {
@@ -47,8 +47,9 @@ func (c *BlackSheepWall) Match(cmd string) bool {
 	return isCommandEqual(c.String(), cmd)
 }
 
-func (c *BlackSheepWall) Exec(_ *state.MissionState) string {
-	return "Not Implemented"
+func (c *BlackSheepWall) Exec(misState *state.MissionState) string {
+	misState.Player.IgnoreFog = true
+	return "Fog of war removed."
 }
 
 var _ Cheat = (*BlackSheepWall)(nil)

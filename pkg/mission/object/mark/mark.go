@@ -1,6 +1,7 @@
 package mark
 
 import (
+	"fmt"
 	"image/color"
 	"strconv"
 
@@ -37,9 +38,12 @@ func NewImg(id ID, pos objPos.MapPos, img *ebiten.Image, life int) *Mark {
 	return &Mark{ID: id, Pos: pos, Img: img, Life: life}
 }
 
-// DamageFlagText 伤害飘字一律取整，不把小数串送进纹理缓存。
+// DamageFlagText 伤害大于 1 时取整，否则保留两位小数，避免小额伤害显示成 0。
 func DamageFlagText(realDamage float64) string {
-	return strconv.Itoa(int(realDamage))
+	if realDamage > 1 {
+		return strconv.Itoa(int(realDamage))
+	}
+	return fmt.Sprintf("%.2f", realDamage)
 }
 
 // NewText 创建直接绘制的文字标记，不把字符串烤进纹理缓存。

@@ -92,9 +92,13 @@ type CombatPowerInfo struct {
 
 // CombatPowerDetails 战力各维度的原始值和武器贡献，用于图鉴说明。
 type CombatPowerDetails struct {
-	EffectiveHP             float64
-	AntiShipDPS             float64
-	AntiAirDPS              float64
+	EffectiveHP float64
+	AntiShipDPS float64
+	AntiAirDPS  float64
+	// AntiShipThreat / AntiAirThreat 是未取整的综合战力分量（含生存与机动），
+	// 只在航母折算舰载机时使用；图鉴的对舰 / 对空轴用的是不含生存的火力值。
+	AntiShipThreat          float64
+	AntiAirThreat           float64
 	MaxProjectionRange      float64
 	MaxProjectionDistanceKM float64
 	BurstDamage             float64

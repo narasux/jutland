@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -100,7 +101,7 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 		if plane.CurHP <= 0 {
 			continue
 		}
-		if plane.IsCruising() {
+		if plane.IsCruising() && m.opponentCanSee(plane.BelongPlayer, plane.CurPos.MX, plane.CurPos.MY) {
 			threat := float64(plane.CombatPower.Total) / 100
 			if threat <= 0 {
 				threat = 0.5
@@ -130,6 +131,9 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 		if ship.CurHP <= 0 {
 			continue
 		}
+		if !m.opponentCanSee(ship.BelongPlayer, ship.CurPos.MX, ship.CurPos.MY) {
+			continue
+		}
 		snapshot.EnemyShips = append(snapshot.EnemyShips, targeting.EnemyShip{
 			UID:    ship.Uid,
 			Player: ship.BelongPlayer,
@@ -138,6 +142,23 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 		})
 	}
 	return snapshot
+}
+
+// opponentCanSee 敌方单位是否被某个对手看见。
+// 两方各打对方，所以一艘船只要对手没开迷雾，或者对手的可见格盖到它，就进入快照。
+func (m *MissionManager) opponentCanSee(owner faction.Player, mx, my int) bool {
+	if !m.state.Core.FogOfWar {
+		return true
+	}
+	for player := range m.state.Player.Visions {
+		if player == owner {
+			continue
+		}
+		if m.state.SeenBy(player, mx, my) {
+			return true
+		}
+	}
+	return false
 }
 
 // snapshotPlaneTargetType 返回飞机运行时使用的攻击目标类型。

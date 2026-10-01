@@ -325,6 +325,8 @@ func (m *MissionManager) rebuildCombatBuckets() {
 
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
 func (m *MissionManager) updateCombatPhase() {
+	m.updateVision()
+	m.updateAutoScout()
 	m.updateTargetPlanning()
 	m.weaponFirePlayer.Update()
 	m.updateAirfieldAlertLaunch()

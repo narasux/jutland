@@ -80,14 +80,19 @@ func (m *MissionManager) updateShipWeaponFire() {
 		inRangeEnemies := []objUnit.Hurtable{}
 
 		target := m.state.Arena.Ships[ship.AttackTarget]
-		// 若有指定攻击目标且在射程内，则优先攻击该目标；否则只看射程能盖到的格子
-		if target != nil && ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange {
+		// 锁定目标要在射程内，开了迷雾时还得当前可见。看不见就改打别的可见敌人。
+		if target != nil &&
+			ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange &&
+			m.state.SeenBy(ship.BelongPlayer, target.CurPos.MX, target.CurPos.MY) {
 			inRangeEnemies = append(inRangeEnemies, target)
 		} else {
 			m.combatBuckets.eachPlane(
 				ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToPlaneRange,
 				func(enemy *objUnit.Plane) bool {
 					if ship.BelongPlayer == enemy.BelongPlayer {
+						return false
+					}
+					if !m.state.SeenBy(ship.BelongPlayer, enemy.CurPos.MX, enemy.CurPos.MY) {
 						return false
 					}
 					if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToPlaneRange {
@@ -101,6 +106,9 @@ func (m *MissionManager) updateShipWeaponFire() {
 				ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToShipRange,
 				func(enemy *objUnit.BattleShip) bool {
 					if ship.BelongPlayer == enemy.BelongPlayer || enemy.Uid == ship.AttackTarget {
+						return false
+					}
+					if !m.state.SeenBy(ship.BelongPlayer, enemy.CurPos.MX, enemy.CurPos.MY) {
 						return false
 					}
 					if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToShipRange {
@@ -148,7 +156,8 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 			continue
 		}
 
-		if target := m.state.Arena.Ships[ship.AttackTarget]; target != nil {
+		if target := m.state.Arena.Ships[ship.AttackTarget]; target != nil &&
+			m.state.SeenBy(ship.BelongPlayer, target.CurPos.MX, target.CurPos.MY) {
 			plane := ship.Aircraft.TakeOff(ship, object.TypeShip)
 			// 没有合适的飞机，那就跳过
 			if plane == nil {
@@ -172,6 +181,12 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		if !plane.IsCruising() {
 			continue
 		}
+		// 侦察 / 搜索中的飞机本来就没有攻击指令，不能当成「没目标」叫它回家。
+		scoutUid := instr.GenInstrUid(instr.NamePlaneScout, plane.Uid)
+		scouting := false
+		if scout := m.instructionSet.Get(scoutUid); scout != nil && !scout.Executed() {
+			scouting = true
+		}
 		// 剩余燃料为 0，需要返航
 		if plane.MustReturn() {
 			// 添加返航指令
@@ -190,12 +205,21 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 			continue
 		}
 
-		if targetUID, ok := m.nextTargetUIDForPlane(plane); ok {
-			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
-		} else {
+		targetUID, ok := m.nextTargetUIDForPlane(plane)
+		if !ok {
+			// 搜索中的飞机没找到目标是正常的，让它继续搜索；其余飞机返航。
+			if scouting {
+				continue
+			}
 			// 没有可攻击对象，返航
 			m.instructionSet.Add(instr.NewPlaneReturn(plane.Uid))
+			continue
 		}
+		// 搜索机一旦发现能打的敌人，立刻结束搜索转去攻击。
+		if scouting {
+			m.instructionSet.Remove(scoutUid)
+		}
+		m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
 	}
 }
 
@@ -578,7 +602,7 @@ func (m *MissionManager) updateShotBullets() {
 		}
 		m.state.Arena.Explosions = append(
 			m.state.Arena.Explosions,
-			objExplosion.NewRocket(bt.CurPos.Copy(), bt.Rotation),
+			objExplosion.NewRocket(bt.CurPos.Copy(), bt.Rotation, bt.BelongPlayer),
 		)
 		if m.state.View.Camera.Contains(bt.CurPos) {
 			m.weaponFirePlayer.PlayRocketExplode()

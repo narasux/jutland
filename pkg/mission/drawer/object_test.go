@@ -4,7 +4,37 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/narasux/jutland/pkg/mission/faction"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
+	"github.com/narasux/jutland/pkg/mission/state"
 )
+
+// 敌舰尾流要被迷雾藏住，否则顺着尾流就能看出看不见的舰队在哪。
+func TestTrailHiddenByFog(t *testing.T) {
+	vision := state.NewFactionVision(16, 16)
+	vision.Stamp(5, 5, 1)
+	ms := &state.MissionState{
+		Core: state.MissionCoreState{FogOfWar: true},
+		Player: state.MissionPlayerState{
+			CurPlayer: faction.HumanAlpha,
+			Visions:   map[faction.Player]*state.FactionVision{faction.HumanAlpha: vision},
+		},
+	}
+
+	assert.True(t,
+		trailHiddenByFog(ms, &objTrail.Trail{BelongPlayer: faction.ComputerAlpha, Pos: objPos.New(9, 9)}),
+		"unseen enemy wake should be hidden")
+	assert.False(t,
+		trailHiddenByFog(ms, &objTrail.Trail{BelongPlayer: faction.ComputerAlpha, Pos: objPos.New(5, 5)}),
+		"enemy wake inside the sight circle should still draw")
+	assert.False(t,
+		trailHiddenByFog(ms, &objTrail.Trail{BelongPlayer: faction.HumanAlpha, Pos: objPos.New(9, 9)}),
+		"own wake is never hidden")
+	assert.False(t, trailHiddenByFog(ms, &objTrail.Trail{Pos: objPos.New(9, 9)}),
+		"trail without an owner stays as before")
+}
 
 func TestRotatedRectangleCorners(t *testing.T) {
 	tests := []struct {

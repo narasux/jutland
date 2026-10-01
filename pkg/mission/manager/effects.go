@@ -6,6 +6,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	"github.com/narasux/jutland/pkg/mission/object/trail"
@@ -46,7 +47,7 @@ func (m *MissionManager) updateObjectTrails() {
 	m.state.Arena.Trails = trails
 	for _, ship := range m.state.Arena.Ships {
 		if trails := ship.GenTrails(); trails != nil {
-			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
+			m.state.Arena.Trails = append(m.state.Arena.Trails, ownTrails(trails, ship.BelongPlayer)...)
 		}
 	}
 	for _, bt := range m.state.Arena.ForwardingBullets {
@@ -55,13 +56,13 @@ func (m *MissionManager) updateObjectTrails() {
 			continue
 		}
 		if trails := bt.GenTrails(); trails != nil {
-			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
+			m.state.Arena.Trails = append(m.state.Arena.Trails, ownTrails(trails, bt.BelongPlayer)...)
 		}
 	}
 	// 着水滑跑中的水上飞机产生水面尾流（泡沫 + 水痕）
 	for _, plane := range m.state.Arena.Planes {
 		if trails := plane.GenWaterWakeTrails(); trails != nil {
-			m.state.Arena.Trails = append(m.state.Arena.Trails, trails...)
+			m.state.Arena.Trails = append(m.state.Arena.Trails, ownTrails(trails, plane.BelongPlayer)...)
 		}
 	}
 	// 消亡中的飞机生成火焰 + 黑烟尾流（拉烟效果）
@@ -78,22 +79,32 @@ func (m *MissionManager) updateObjectTrails() {
 		tailPos.AddRy(cosVal * tailOffset)
 
 		// 火焰尾流（橙红色，较小，扩散快，生命短）
-		m.state.Arena.Trails = append(m.state.Arena.Trails, trail.New(
+		flame := trail.New(
 			tailPos, textureImg.TrailShapeCircle,
 			3.0, 0.8, // 初始尺寸 3，扩散速度 0.8
 			80, 3.0, // 生命值 80，衰减速度 3.0
 			0, 0,
 			colorx.Orange,
-		))
+		)
 		// 黑烟尾流（深灰色，较大，扩散慢，生命长）
-		m.state.Arena.Trails = append(m.state.Arena.Trails, trail.New(
+		smoke := trail.New(
 			tailPos, textureImg.TrailShapeCircle,
 			2.0, 0.5, // 初始尺寸 2，扩散速度 0.5
 			120, 2.0, // 生命值 120，衰减速度 2.0
 			2, 0, // 延迟 2 帧出现（略慢于火焰）
 			colorx.DarkSilver,
-		))
+		)
+		flame.BelongPlayer, smoke.BelongPlayer = plane.BelongPlayer, plane.BelongPlayer
+		m.state.Arena.Trails = append(m.state.Arena.Trails, flame, smoke)
 	}
+}
+
+// ownTrails 给刚生成的尾流标上归属玩家，迷雾下据此决定遮挡。
+func ownTrails(trails []*trail.Trail, player faction.Player) []*trail.Trail {
+	for _, t := range trails {
+		t.BelongPlayer = player
+	}
+	return trails
 }
 
 // updateExplosions 推进并清理短生命周期的局部爆炸效果

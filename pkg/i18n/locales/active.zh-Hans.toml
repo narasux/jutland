@@ -52,6 +52,12 @@ other = "游戏设置"
 other = "全局速度倍率"
 [SettingsLanguage]
 other = "语言"
+[SettingsFogOfWar]
+other = "战争迷雾"
+[SettingsOn]
+other = "开"
+[SettingsOff]
+other = "关"
 [SettingsSave]
 other = "保存"
 [SettingsCancel]

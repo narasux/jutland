@@ -277,8 +277,9 @@ Enter 的详细流程：
 `BlackSheepWall`
 
 - 命令：`black sheep wall`
-- 设计目标是移除战争迷雾并显示所有敌军。
-- 当前返回 `Not Implemented`。
+- 把当前玩家的 `IgnoreFog` 置位，本局该玩家不再使用迷雾。
+- 不修改游戏设置，电脑一侧的迷雾保持原样。
+- 设置关闭时迷雾本来就不计算，这条秘籍只留下标记。
 
 `BathtubWar`
 

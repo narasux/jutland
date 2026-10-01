@@ -23,6 +23,7 @@ import (
 func (d *Drawer) drawAbbreviationMap(screen *ebiten.Image, ms *state.MissionState) {
 	// 绘制左/右背景 + 居中展示缩略地图
 	d.drawAbbrMapAndBackground(screen, ms)
+	d.drawAbbrFog(screen, ms)
 	// 舰队概览
 	d.drawAbbrFleetOverview(screen, ms)
 	// 绘制当前视野范围
@@ -173,6 +174,9 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
 	for _, s := range ms.Arena.OrderedShips() {
+		if ms.ConcealsEnemy(s.BelongPlayer, s.CurPos.MX, s.CurPos.MY) {
+			continue
+		}
 		sImg := textureImg.GetAbbrShip(s.TypeAbbr, s.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, sImg, s.CurRotation)
@@ -191,6 +195,9 @@ func (d *Drawer) drawAbbrPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
 	for _, p := range ms.Arena.OrderedPlanes() {
+		if ms.ConcealsEnemy(p.BelongPlayer, p.CurPos.MX, p.CurPos.MY) {
+			continue
+		}
 		pImg := textureImg.GetAbbrPlane(p.BelongPlayer != ms.Player.CurPlayer)
 		opts := d.genDefaultDrawImageOptions()
 		ebutil.SetOptsCenterRotation(opts, pImg, p.CurRotation)

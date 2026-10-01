@@ -49,6 +49,8 @@ type MissionCoreState struct {
 	MissionMD metadata.MissionMetadata
 	// 当前游戏拍。武器装填和电脑决策读这一拍，不读墙钟。
 	SimTick int64
+	// 本局是否启用迷雾，开局从游戏设置拷贝。关闭时不建视野图。
+	FogOfWar bool
 }
 
 // MissionViewState 任务视图状态
@@ -68,6 +70,10 @@ type MissionPlayerState struct {
 	// 当前敌人
 	// TODO 支持多个敌对势力
 	CurEnemy faction.Player
+	// 当前玩家本局忽略迷雾。只由 black sheep wall 置位，不改游戏设置。
+	IgnoreFog bool
+	// 各玩家的已探索和可见。迷雾关闭时保持 nil。
+	Visions map[faction.Player]*FactionVision
 }
 
 // MissionInteractionState 任务交互状态
@@ -146,6 +152,35 @@ type MissionState struct {
 	Interaction MissionInteractionState
 	Arena       MissionArenaState
 	UI          MissionUIState
+}
+
+// fogOfWarFromSettings 开局拷贝设置。配置还没加载时视为关闭，避免任务里碰到空指针。
+func fogOfWarFromSettings() bool {
+	return config.G != nil && config.G.EnableFogOfWar
+}
+
+// UsesFog 该玩家这一拍要不要跑迷雾。
+// 热路径先调用它：返回 false 时保持全图可见，不分配视野图，也不扫描单位。
+func (s *MissionState) UsesFog(player faction.Player) bool {
+	if !s.Core.FogOfWar {
+		return false
+	}
+	// 秘籍只揭开当前玩家，电脑仍按迷雾决策。
+	if player == s.Player.CurPlayer && s.Player.IgnoreFog {
+		return false
+	}
+	return true
+}
+
+// allocateVisions 只在本局开启迷雾时为双方建图。关闭时保持 nil，热路径不再扫描。
+func (s *MissionState) allocateVisions(width, height int) {
+	if !s.Core.FogOfWar || width <= 0 || height <= 0 {
+		return
+	}
+	s.Player.Visions = map[faction.Player]*FactionVision{
+		faction.HumanAlpha:    NewFactionVision(width, height),
+		faction.ComputerAlpha: NewFactionVision(width, height),
+	}
 }
 
 // CameraPosBorder 获取相机视野边界
@@ -281,6 +316,7 @@ func NewMissionState(mission string, playerSide faction.Side) *MissionState {
 			MissionStatus:      MissionRunning,
 			ConfirmQuitMission: false,
 			MissionMD:          missionMD,
+			FogOfWar:           fogOfWarFromSettings(),
 		},
 		View: MissionViewState{
 			Layout: misLayout,
@@ -340,5 +376,8 @@ func NewMissionState(mission string, playerSide faction.Side) *MissionState {
 		},
 	}
 	ms.RefreshCameraSize()
+	if missionMD.MapCfg != nil {
+		ms.allocateVisions(missionMD.MapCfg.Width, missionMD.MapCfg.Height)
+	}
 	return ms
 }

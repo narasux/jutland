@@ -269,6 +269,7 @@ func initPlaneMap() {
 		p.Range /= 8
 		// 剩余航程
 		p.RemainRange = p.Range
+		p.SightRange = objUnit.ResolvePlaneSight(p.Type, p.SightRange)
 		// 折算加速度
 		p.Acceleration /= 600 * 2
 		// 折算转向速度
@@ -375,6 +376,14 @@ func initShipMap() {
 				s.Weapon.MaxToPlaneRange = max(s.Weapon.MaxToPlaneRange, rocket.Range)
 			}
 		}
+		mainGunRange := 0.0
+		for _, gun := range s.Weapon.MainGuns {
+			if gun != nil && gun.AntiShip {
+				mainGunRange = max(mainGunRange, gun.Range)
+			}
+		}
+		// 视距在武器折算之后定，主炮射程已经是地图格。
+		s.SightRange = objUnit.ResolveShipSight(s.Type, s.SightRange, mainGunRange)
 		// 飞机相关状态
 		s.Aircraft.HasPlane = len(s.Aircraft.Groups) > 0
 		for i := 0; i < len(s.Aircraft.Groups); i++ {

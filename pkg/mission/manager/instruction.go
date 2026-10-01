@@ -75,6 +75,13 @@ func (s *InstructionSet) Exists(uid string) bool {
 	return ok
 }
 
+// Get 按 uid 取指令，不存在时返回 nil。
+func (s *InstructionSet) Get(uid string) instr.Instruction {
+	s.RLock()
+	defer s.RUnlock()
+	return s.instructions[uid]
+}
+
 // ExecAll 执行所有指令
 func (s *InstructionSet) ExecAll(state *state.MissionState) {
 	s.RLock()

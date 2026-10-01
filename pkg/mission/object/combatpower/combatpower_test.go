@@ -103,6 +103,43 @@ func TestEffectiveHP(t *testing.T) {
 	}
 }
 
+func TestAntiShipAndAntiAirIgnoreHullAndMobility(t *testing.T) {
+	bullets := testBullets("gun", 100, 0)
+	gun := &objUnit.Gun{
+		BulletName: "gun", BulletCount: 2, ReloadTime: 2, Range: 10,
+		AntiShip: true, AntiAircraft: true,
+		LeftFiringArc:  objUnit.FiringArc{Start: 180, End: 360},
+		RightFiringArc: objUnit.FiringArc{Start: 0, End: 180},
+	}
+	// 两艘船使用完全相同的武器，只有舰体生存和机动不同。
+	frail := &objUnit.BattleShip{
+		TotalHP: 1, HorizontalDamageReduction: 1, VerticalDamageReduction: 1,
+		MaxSpeed: 1000, RotateSpeed: 360, Acceleration: 25,
+		Weapon: objUnit.ShipWeapon{MainGuns: []*objUnit.Gun{gun}},
+	}
+	tough := &objUnit.BattleShip{
+		TotalHP:  100000,
+		MaxSpeed: 50, RotateSpeed: 2, Acceleration: 1,
+		Weapon: objUnit.ShipWeapon{MainGuns: []*objUnit.Gun{gun}},
+	}
+	frailPower, toughPower := CalculateShip(frail, nil, bullets), CalculateShip(tough, nil, bullets)
+
+	if frailPower.AntiShip != toughPower.AntiShip || frailPower.AntiAir != toughPower.AntiAir {
+		t.Fatalf(
+			"identical weapons must give identical anti-ship / anti-air: %+v vs %+v",
+			frailPower, toughPower,
+		)
+	}
+	effectiveDPS := gunDPS(gun, bullets) * gunEffectiveness(gun, bullets, false, false)
+	if got, want := frailPower.AntiShip, firepowerScore(effectiveDPS); got != want {
+		t.Fatalf("anti-ship = %d, want sqrt(effective DPS) = %d", got, want)
+	}
+	// 舰体差异不能一起被抹平：生存和综合战力仍要区分两者。
+	if frailPower.Survival == toughPower.Survival || frailPower.Total == toughPower.Total {
+		t.Fatalf("hull differences must stay visible: %+v vs %+v", frailPower, toughPower)
+	}
+}
+
 func TestPlaneFormationAndWeaponCapabilities(t *testing.T) {
 	bullets := testBullets("gun", 10, 0)
 	gun := &objUnit.Gun{
@@ -169,6 +206,7 @@ func TestCarrierScalesStandardFormationByAircraftCount(t *testing.T) {
 			FormationSize: 10, Total: 85, AntiShip: 100, AntiAir: 50,
 			Details: objUnit.CombatPowerDetails{
 				AntiShipDPS: 10, AntiAirDPS: 5, BurstDamage: 100,
+				AntiShipThreat: 100, AntiAirThreat: 50,
 			},
 		},
 	}

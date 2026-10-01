@@ -43,6 +43,10 @@ func (h *HumanInputHandler) Handle(
 		return instructions
 	}
 
+	instructions = lo.Assign(instructions, h.handleScout(misState))
+	if len(instructions) != 0 {
+		return instructions
+	}
 	instructions = lo.Assign(instructions, h.handleShipMove(misState))
 
 	return instructions
@@ -67,6 +71,9 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 		pos := action.DetectCursorPosOnMap(misState)
 		for _, ship := range misState.Arena.Ships {
 			if ship.BelongPlayer == misState.Player.CurPlayer {
+				continue
+			}
+			if misState.ConcealsEnemy(ship.BelongPlayer, ship.CurPos.MX, ship.CurPos.MY) {
 				continue
 			}
 			if geometry.IsPointInRotatedRectangle(

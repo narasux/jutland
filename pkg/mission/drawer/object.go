@@ -13,6 +13,7 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
@@ -144,11 +145,24 @@ func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.Missi
 	}
 }
 
+// trailHiddenByFog 判断这条尾流要不要被当前玩家的迷雾藏起来。
+// 尾流不带归属（旧数据或测试造的对象）时照旧渲染。
+func trailHiddenByFog(ms *state.MissionState, trail *objTrail.Trail) bool {
+	if trail.BelongPlayer == "" {
+		return false
+	}
+	return ms.ConcealsEnemy(trail.BelongPlayer, trail.Pos.MX, trail.Pos.MY)
+}
+
 // 绘制尾流（战舰，鱼雷，炮弹）
 func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) {
 	for _, trail := range ms.Arena.Trails {
 		// 只有在屏幕中，且不处于延迟/消亡的尾流才渲染
 		if !(ms.View.Camera.Contains(trail.Pos) && trail.IsActive()) {
+			continue
+		}
+		// 敌舰尾流同样受迷雾遮挡，否则顺着尾流就能看出敌方舰队在哪
+		if trailHiddenByFog(ms, trail) {
 			continue
 		}
 
@@ -163,7 +177,8 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 // drawExplosions 绘制火箭弹等局部爆炸效果
 func (d *Drawer) drawExplosions(screen *ebiten.Image, ms *state.MissionState) {
 	for _, explosion := range ms.Arena.Explosions {
-		if !ms.View.Camera.Contains(explosion.Pos) {
+		if !ms.View.Camera.Contains(explosion.Pos) ||
+			ms.ConcealsEnemy(explosion.BelongPlayer, explosion.Pos.MX, explosion.Pos.MY) {
 			continue
 		}
 		explodeImg := textureImg.GetPlaneExplode(explosion.FrameHP())
@@ -176,8 +191,8 @@ func (d *Drawer) drawExplosions(screen *ebiten.Image, ms *state.MissionState) {
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	selected := selectedShipSet(ms.Interaction.SelectedShips)
 	for _, s := range ms.Arena.OrderedShips() {
-		// 只有在屏幕中的才渲染
-		if !ms.View.Camera.Contains(s.CurPos) {
+		// 只有在屏幕中、且没有被当前玩家迷雾挡住的才渲染
+		if !ms.View.Camera.Contains(s.CurPos) || ms.ConcealsEnemy(s.BelongPlayer, s.CurPos.MX, s.CurPos.MY) {
 			continue
 		}
 
@@ -330,8 +345,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 // 绘制消亡中的战舰
 func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState) {
 	for _, s := range ms.Arena.DestroyedShips {
-		// 只有在屏幕中的才渲染
-		if !ms.View.Camera.Contains(s.CurPos) {
+		if !ms.View.Camera.Contains(s.CurPos) || ms.ConcealsEnemy(s.BelongPlayer, s.CurPos.MX, s.CurPos.MY) {
 			continue
 		}
 
@@ -356,8 +370,7 @@ func selectedShipSet(ids []string) map[string]struct{} {
 // 绘制飞机
 func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	for _, p := range ms.Arena.OrderedPlanes() {
-		// 只有在屏幕中的才渲染
-		if !ms.View.Camera.Contains(p.CurPos) {
+		if !ms.View.Camera.Contains(p.CurPos) || ms.ConcealsEnemy(p.BelongPlayer, p.CurPos.MX, p.CurPos.MY) {
 			continue
 		}
 
@@ -391,8 +404,7 @@ func (d *Drawer) drawFlyingPlanes(screen *ebiten.Image, ms *state.MissionState) 
 // 绘制消亡中的战机
 func (d *Drawer) drawDestroyedPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	for _, p := range ms.Arena.DestroyedPlanes {
-		// 只有在屏幕中的才渲染
-		if !ms.View.Camera.Contains(p.CurPos) {
+		if !ms.View.Camera.Contains(p.CurPos) || ms.ConcealsEnemy(p.BelongPlayer, p.CurPos.MX, p.CurPos.MY) {
 			continue
 		}
 
@@ -422,7 +434,7 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		if b.Type == objBullet.TypeLaser {
 			margin = laserViewMargin
 		}
-		if !ms.View.Camera.ContainsMargin(b.CurPos, margin) {
+		if !ms.View.Camera.ContainsMargin(b.CurPos, margin) || ms.ConcealsEnemy(b.BelongPlayer, b.CurPos.MX, b.CurPos.MY) {
 			continue
 		}
 

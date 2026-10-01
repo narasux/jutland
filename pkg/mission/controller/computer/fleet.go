@@ -18,18 +18,23 @@ type battleSnapshot struct {
 	enemy  []*objUnit.BattleShip
 	byUID  map[string]*objUnit.BattleShip
 	points []*objBuilding.ReinforcePoint
+	// misState 这一拍的战场状态，迷雾下靠它查视野图和接触。
+	misState *state.MissionState
 }
 
 func (h *ComputerDecisionHandler) snapshot(misState *state.MissionState) *battleSnapshot {
-	snap := &battleSnapshot{byUID: map[string]*objUnit.BattleShip{}}
+	snap := &battleSnapshot{byUID: map[string]*objUnit.BattleShip{}, misState: misState}
 	for _, ship := range misState.Arena.Ships {
 		if ship == nil || ship.CurHP <= 0 {
 			continue
 		}
-		snap.byUID[ship.Uid] = ship
 		if ship.BelongPlayer == h.player {
+			snap.byUID[ship.Uid] = ship
 			snap.own = append(snap.own, ship)
-		} else {
+		} else if misState.SeenBy(h.player, ship.CurPos.MX, ship.CurPos.MY) {
+			// 迷雾关闭时 SeenBy 恒为真，候选和原来一样是全部活着的敌舰。
+			// 看不见的敌舰不进 byUID，追击和沉没判定就自然按「跟丢了」处理。
+			snap.byUID[ship.Uid] = ship
 			snap.enemy = append(snap.enemy, ship)
 		}
 	}
@@ -295,6 +300,7 @@ func (h *ComputerDecisionHandler) makeCounter(
 	if target == nil {
 		order.pressing = false
 		order.fellBack = prev != nil && prev.fellBack
+		// 反击是守锚点的策略，看不见敌人就地待命，不主动出去搜。
 		return order
 	}
 	order.targetUID = target.Uid
@@ -403,6 +409,8 @@ func (h *ComputerDecisionHandler) makeAttack(
 	if target == nil {
 		order.pressing = false
 		order.fellBack = prev != nil && prev.fellBack
+		// 看不见敌人时别再回锚点罚站，整队转去搜索推进。
+		order.searching = true
 		return order
 	}
 	order.targetUID = target.Uid

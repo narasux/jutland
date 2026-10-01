@@ -15,6 +15,7 @@ const (
 	NameShipSummon      = "ShipSummon"
 	NamePlaneAttack     = "PlaneAttack"
 	NamePlaneReturn     = "PlaneReturn"
+	NamePlaneScout      = "PlaneScout"
 )
 
 // InstrStatus 指令状态

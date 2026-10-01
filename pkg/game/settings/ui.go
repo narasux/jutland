@@ -37,11 +37,22 @@ type speedOption struct {
 	Value float64
 }
 
+type toggleOption struct {
+	Label i18n.MessageID
+	Value bool
+}
+
 // 速度选项定义
 var speedOptions = []speedOption{
 	{i18n.MsgSpeedSlow, config.SpeedSlowMultiplier},
 	{i18n.MsgSpeedNormal, config.SpeedStandardMultiplier},
 	{i18n.MsgSpeedFast, config.SpeedFastMultiplier},
+}
+
+// 关在前，和默认关闭一致。
+var fogOptions = []toggleOption{
+	{i18n.MsgSettingsOff, false},
+	{i18n.MsgSettingsOn, true},
 }
 
 // UI 游戏设置 UI
@@ -50,6 +61,7 @@ type UI struct {
 	localValue    float64 // 本地副本，保存时才写回 config.G
 	localLanguage i18n.Language
 	localAI       config.AIStrategies
+	localFog      bool
 	backPressed   bool
 }
 
@@ -59,6 +71,7 @@ func New() *UI {
 		localValue:    config.G.SpeedMultiplier,
 		localLanguage: i18n.NormalizeLanguage(config.G.Language),
 		localAI:       config.EnabledAIStrategies(),
+		localFog:      fogSetting(),
 	}
 	s.buildUI()
 	return s
@@ -80,6 +93,7 @@ func (s *UI) Reset() {
 	s.localValue = config.G.SpeedMultiplier
 	s.localLanguage = i18n.NormalizeLanguage(config.G.Language)
 	s.localAI = config.EnabledAIStrategies()
+	s.localFog = fogSetting()
 	s.backPressed = false
 	s.buildUI()
 }
@@ -97,6 +111,13 @@ func (s *UI) selectSpeed(value float64) {
 
 func (s *UI) selectLanguage(value i18n.Language) {
 	s.localLanguage = value
+}
+
+func fogSetting() bool {
+	if config.G == nil {
+		return false
+	}
+	return config.G.EnableFogOfWar
 }
 
 // speedOptionIndex 返回当前 localValue 匹配的速度选项索引，不匹配时返回 -1
@@ -212,6 +233,31 @@ func (s *UI) buildUI() {
 		func(entry any) { s.selectLanguage(entry.(i18n.Language)) },
 	)
 
+	fogLabel := widget.NewLabel(
+		widget.LabelOpts.Text(
+			i18n.Text(i18n.MsgSettingsFogOfWar),
+			labelFace,
+			&widget.LabelColor{Idle: colorx.White, Disabled: colorx.White},
+		),
+	)
+	selectedFog := fogOptions[0]
+	if s.localFog {
+		selectedFog = fogOptions[1]
+	}
+	fogEntries := make([]any, len(fogOptions))
+	for idx := range fogOptions {
+		fogEntries[idx] = fogOptions[idx]
+	}
+	fogCombo := newSettingsCombo(
+		fogEntries,
+		selectedFog,
+		&comboFaceValue,
+		boxWidth,
+		func(entry any) string { return i18n.Text(entry.(toggleOption).Label) },
+		func(entry any) string { return i18n.Text(entry.(toggleOption).Label) },
+		func(entry any) { s.localFog = entry.(toggleOption).Value },
+	)
+
 	// ====== 按钮栏 ======
 	saveBtn := widget.NewButton(
 		widget.ButtonOpts.Image(normalBtnImage),
@@ -222,6 +268,7 @@ func (s *UI) buildUI() {
 			config.G.SpeedMultiplier = s.localValue
 			config.G.Language = string(s.localLanguage)
 			config.G.AI = s.localAI
+			config.G.EnableFogOfWar = s.localFog
 			_ = config.SaveGameSettings()
 		}),
 	)
@@ -256,6 +303,8 @@ func (s *UI) buildUI() {
 	topContent.AddChild(speedCombo)
 	topContent.AddChild(languageLabel)
 	topContent.AddChild(languageCombo)
+	topContent.AddChild(fogLabel)
+	topContent.AddChild(fogCombo)
 	topContent.AddChild(s.strategyBox(&comboFaceValue, boxWidth))
 
 	// ====== 底部内容（操作按钮 + 提示） ======

@@ -174,6 +174,93 @@ func (sa *ShipAircraft) TakeOff(base AircraftBase, targetObjType object.Type) *P
 	return sa.takeOff(base, targetObjType, 0)
 }
 
+// TakeOffScout 起飞一架侦察机，并把剩余航程翻倍。模板上的航程不变。
+func (sa *ShipAircraft) TakeOffScout(base AircraftBase) *Plane {
+	if sa.Disable || sa.deck == nil || len(sa.deck.TakeoffPoints) == 0 {
+		return nil
+	}
+	sa.ensureTakeoffPointTimes()
+	timeNow := time.Now().UnixMilli()
+	for idx, point := range sa.deck.TakeoffPoints {
+		// 这个起飞点还在冷却就换下一个，避免两架挤在同一个点。
+		cooldown := sa.takeOffCooldown(point)
+		if cooldown > 0 &&
+			sa.takeoffPointTimes[idx]+int64(cooldown*1e3/gameSpeedMultiplier()) > timeNow {
+			continue
+		}
+		// 只从类型为 scout 的编组里扣一架。
+		groupIdx := sa.scoutGroupIdx()
+		if groupIdx < 0 {
+			continue
+		}
+		sa.Groups[groupIdx].CurCount--
+		sa.takeoffPointTimes[idx] = timeNow
+		sa.LatestTakeOffAt = timeNow
+		plane := NewPlane(
+			sa.Groups[groupIdx].Name,
+			base.BasePos(), base.BaseRotation(),
+			base.BaseUid(), base.BaseBelongPlayer(),
+		)
+		// 只加这一架的剩余航程。模板上的航程留给图鉴，不改。
+		plane.RemainRange *= 2
+		plane.StartTakeoff(base, point)
+		return plane
+	}
+	return nil
+}
+
+func (sa *ShipAircraft) scoutGroupIdx() int {
+	for idx, group := range sa.Groups {
+		if group.CurCount <= 0 {
+			continue
+		}
+		plane, ok := PlaneMap[group.Name]
+		if ok && plane.Type == PlaneTypeScout {
+			return idx
+		}
+	}
+	return -1
+}
+
+func (sa *ShipAircraft) ScoutStock() int {
+	total := 0
+	for _, group := range sa.Groups {
+		plane, ok := PlaneMap[group.Name]
+		if ok && plane.Type == PlaneTypeScout {
+			total += int(group.CurCount)
+		}
+	}
+	return total
+}
+
+// searchMinStock 搜索出击的最低库存：起飞后甲板上还要留一架。
+const searchMinStock = 2
+
+// CanSearch 这个基地现在能不能派搜索机。库存不够时把最后几架留在甲板上。
+func (sa *ShipAircraft) CanSearch() bool { return sa.SearchStock() >= searchMinStock }
+
+// SearchStock 返回这个基地还能拿来搜索出击的飞机数。
+// 侦察机够用就只算侦察机，否则退回全部可用机——二战航母本来也常用鱼雷机做搜索。
+func (sa *ShipAircraft) SearchStock() int {
+	if total := sa.ScoutStock(); total >= searchMinStock {
+		return total
+	}
+	total := 0
+	for _, group := range sa.Groups {
+		total += int(group.CurCount)
+	}
+	return total
+}
+
+// TakeOffSearch 起飞一架搜索机：侦察机够用就派侦察机（剩余航程翻倍），
+// 否则用打击机顶上。
+func (sa *ShipAircraft) TakeOffSearch(base AircraftBase) *Plane {
+	if sa.ScoutStock() >= searchMinStock {
+		return sa.TakeOffScout(base)
+	}
+	return sa.TakeOff(base, object.TypeShip)
+}
+
 // TakeOffWithinRange 起飞一架能够到达指定距离的飞机。
 func (sa *ShipAircraft) TakeOffWithinRange(
 	base AircraftBase,

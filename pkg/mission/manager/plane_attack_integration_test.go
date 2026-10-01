@@ -168,7 +168,7 @@ func TestAirfieldDoesNotLaunchBomberBeyondRange(t *testing.T) {
 }
 
 func TestPearlHarborAirfieldHasReachableStrikeTargets(t *testing.T) {
-	manager := New("PearlHarbor1941")
+	manager := New("PearlHarbor1941", faction.SideP1)
 	refreshAlertTargetPlan(manager)
 
 	for _, airfield := range manager.state.Arena.Airfields {
@@ -185,7 +185,7 @@ func TestPearlHarborAirfieldHasReachableStrikeTargets(t *testing.T) {
 }
 
 func TestPearlHarborEveryStrikeBaseHasReachableTargets(t *testing.T) {
-	manager := New("PearlHarbor1941")
+	manager := New("PearlHarbor1941", faction.SideP1)
 	refreshAlertTargetPlan(manager)
 
 	for uid, ship := range manager.state.Arena.Ships {

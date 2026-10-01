@@ -109,6 +109,42 @@ func TestJapanese25mmRateMatchesHistory(t *testing.T) {
 	}
 }
 
+// TestWaterDropAndSwordfishShareIdenticalFirepower 固定报告过的“同武器、对舰对空差 7.5 倍”回归。
+// 水滴与巨型剑鱼都用 Impact 撞击炮，但水滴是 1 HP + 100% 减伤、剑鱼是 100000 HP，
+// 对舰 / 对空能力值曾把自身 EHP 和机动乘进去，于是同武器被拉开 7.5 倍。
+func TestWaterDropAndSwordfishShareIdenticalFirepower(t *testing.T) {
+	waterdrop, swordfish := objUnit.ShipMap["waterdrop"], objUnit.ShipMap["swordfish"]
+	if waterdrop == nil || swordfish == nil {
+		t.Fatal("waterdrop or swordfish not found")
+	}
+
+	if waterdrop.CombatPower.AntiShip != swordfish.CombatPower.AntiShip ||
+		waterdrop.CombatPower.AntiAir != swordfish.CombatPower.AntiAir {
+		t.Fatalf(
+			"waterdrop anti-ship/anti-air = %d/%d, swordfish = %d/%d: identical weapons must match",
+			waterdrop.CombatPower.AntiShip, waterdrop.CombatPower.AntiAir,
+			swordfish.CombatPower.AntiShip, swordfish.CombatPower.AntiAir,
+		)
+	}
+	if waterdrop.CombatPower.AntiShip <= 0 || waterdrop.CombatPower.AntiAir <= 0 {
+		t.Fatalf("armed special ship must keep positive firepower: %+v", waterdrop.CombatPower)
+	}
+	if waterdrop.CombatPower.Details.AntiShipDPS != swordfish.CombatPower.Details.AntiShipDPS {
+		t.Fatalf(
+			"effective anti-ship DPS differs: %v vs %v",
+			waterdrop.CombatPower.Details.AntiShipDPS, swordfish.CombatPower.Details.AntiShipDPS,
+		)
+	}
+	// 生存与综合战力仍要体现舰体差距，避免把“同武器”修成“同战力”。
+	if waterdrop.CombatPower.Survival == swordfish.CombatPower.Survival ||
+		swordfish.CombatPower.Total <= waterdrop.CombatPower.Total {
+		t.Fatalf(
+			"hull differences must stay visible: waterdrop = %+v, swordfish = %+v",
+			waterdrop.CombatPower, swordfish.CombatPower,
+		)
+	}
+}
+
 func hasNonAutocannonContribution(contributions []objUnit.CombatPowerContribution) bool {
 	for _, c := range contributions {
 		if diameter := gunBulletDiameter(c.Name); diameter == 0 || diameter > autocannonDiameter {

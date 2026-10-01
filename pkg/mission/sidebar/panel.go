@@ -15,6 +15,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/mission/drawer"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -94,6 +95,7 @@ type sidebarLayout struct {
 // Panel 是任务运行中的右上角停靠式下拉战术面板。
 type Panel struct {
 	abbrMap *ebiten.Image
+	fogImg  *ebiten.Image
 	// mapAspect 是地图实际宽高比（宽/高），用于让小地图保持地图原始比例。
 	mapAspect float64
 	layout    sidebarLayout
@@ -386,6 +388,7 @@ func (p *Panel) drawMinimap(screen *ebiten.Image, ms *state.MissionState) {
 	opts.GeoM.Scale(ui.Map.W/float64(p.abbrMap.Bounds().Dx()), ui.Map.H/float64(p.abbrMap.Bounds().Dy()))
 	opts.GeoM.Translate(ui.Map.X, ui.Map.Y)
 	screen.DrawImage(p.abbrMap, opts)
+	p.drawMinimapFog(screen, ms)
 
 	vector.StrokeRect(
 		screen,
@@ -401,6 +404,20 @@ func (p *Panel) drawMinimap(screen *ebiten.Image, ms *state.MissionState) {
 	p.drawMinimapBuildings(screen, ms)
 	p.drawMinimapShips(screen, ms)
 	p.drawMinimapPlanes(screen, ms)
+}
+
+func (p *Panel) drawMinimapFog(screen *ebiten.Image, ms *state.MissionState) {
+	if ms.Core.MissionMD.MapCfg == nil {
+		return
+	}
+	ui := p.layout
+	mapW := float64(ms.Core.MissionMD.MapCfg.Width)
+	mapH := float64(ms.Core.MissionMD.MapCfg.Height)
+	drawer.BlitFog(
+		screen, ms, &p.fogImg,
+		ui.Map.W/(mapW*4), ui.Map.H/(mapH*4),
+		ui.Map.X, ui.Map.Y,
+	)
 }
 
 func (p *Panel) drawMinimapCamera(screen *ebiten.Image, ms *state.MissionState) {
@@ -439,6 +456,9 @@ func (p *Panel) drawMinimapBuildings(screen *ebiten.Image, ms *state.MissionStat
 
 func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {
 	for _, ship := range ms.Arena.OrderedShips() {
+		if ms.ConcealsEnemy(ship.BelongPlayer, ship.CurPos.MX, ship.CurPos.MY) {
+			continue
+		}
 		img := textureImg.GetAbbrShip(ship.TypeAbbr, ship.BelongPlayer != ms.Player.CurPlayer)
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		ebutil.SetOptsCenterRotation(opts, img, ship.CurRotation)
@@ -452,6 +472,9 @@ func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {
 
 func (p *Panel) drawMinimapPlanes(screen *ebiten.Image, ms *state.MissionState) {
 	for _, plane := range ms.Arena.OrderedPlanes() {
+		if ms.ConcealsEnemy(plane.BelongPlayer, plane.CurPos.MX, plane.CurPos.MY) {
+			continue
+		}
 		img := textureImg.GetAbbrPlane(plane.BelongPlayer != ms.Player.CurPlayer)
 		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
 		ebutil.SetOptsCenterRotation(opts, img, plane.CurRotation)

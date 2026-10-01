@@ -181,7 +181,10 @@ func CalculateShip(
 	result := hull
 	result.Hull = hull.Total
 
+	// 航空贡献拆成两套口径：对舰 / 对空轴吃舰载机的火力值，
+	// 综合战力吃舰载机的威胁分量，保持“综合含生存、火力轴不含生存”的一致口径。
 	aviationAntiShip, aviationAntiAir := 0.0, 0.0
+	aviationThreatShip, aviationThreatAir := 0.0, 0.0
 	for _, group := range ship.Aircraft.Groups {
 		plane, ok := planes[group.Name]
 		if !ok || plane == nil || group.MaxCount <= 0 {
@@ -192,6 +195,8 @@ func CalculateShip(
 		aircraftFactor := count / formationSize * aviationFactor
 		aviationAntiShip += float64(plane.CombatPower.AntiShip) * aircraftFactor
 		aviationAntiAir += float64(plane.CombatPower.AntiAir) * aircraftFactor
+		aviationThreatShip += plane.CombatPower.Details.AntiShipThreat * aircraftFactor
+		aviationThreatAir += plane.CombatPower.Details.AntiAirThreat * aircraftFactor
 		result.Details.AntiShipDPS += plane.CombatPower.Details.AntiShipDPS * aircraftFactor
 		result.Details.AntiAirDPS += plane.CombatPower.Details.AntiAirDPS * aircraftFactor
 		result.Details.BurstDamage += plane.CombatPower.Details.BurstDamage * aircraftFactor
@@ -214,11 +219,11 @@ func CalculateShip(
 		)
 	}
 
-	aviationShip := int(math.Round(aviationAntiShip))
-	aviationAir := int(math.Round(aviationAntiAir))
-	result.AntiShip += aviationShip
-	result.AntiAir += aviationAir
-	result.Aviation = weightedTotal(aviationShip, aviationAir)
+	result.AntiShip += nonNegativeRound(aviationAntiShip)
+	result.AntiAir += nonNegativeRound(aviationAntiAir)
+	result.Aviation = weightedTotal(
+		nonNegativeRound(aviationThreatShip), nonNegativeRound(aviationThreatAir),
+	)
 	result.Total = result.Hull + result.Aviation
 	result.Projection = projectionScore(result.Details.MaxProjectionRange)
 	result.Burst = burstScore(result.Details.BurstDamage)
@@ -305,22 +310,22 @@ func addSortedContribution(
 func buildPowerInfo(
 	ehp, mobility, maxProjectionRange float64, formationSize int, acc *powerAccumulator,
 ) objUnit.CombatPowerInfo {
-	// 这里统一把“存活能力 + 目标效率 + 机动修正”换算成最终对舰 / 对空战力。
+	// 对舰 / 对空维度只反映武器火力，综合战力才把“存活能力 + 火力 + 机动修正”合并。
 	// 任何辅助字段都只保存在 Details 中，方便图鉴和 tooltip 解释来源。
 	formationSize = max(1, formationSize)
 	formationFactor := float64(formationSize)
 	formationEHP := ehp * formationFactor
 	antiShipDPS := acc.antiShipDPS * formationFactor
 	antiAirDPS := acc.antiAirDPS * formationFactor
-	antiShip := combatScore(formationEHP, antiShipDPS, mobility)
-	antiAir := combatScore(formationEHP, antiAirDPS, mobility)
+	antiShipThreat := threatValue(formationEHP, antiShipDPS, mobility)
+	antiAirThreat := threatValue(formationEHP, antiAirDPS, mobility)
 	burstDamage, burstContributions := acc.burst()
 	burstDamage *= formationFactor
 	return objUnit.CombatPowerInfo{
 		FormationSize: formationSize,
-		Total:         weightedTotal(antiShip, antiAir),
-		AntiShip:      antiShip,
-		AntiAir:       antiAir,
+		Total:         weightedTotal(nonNegativeRound(antiShipThreat), nonNegativeRound(antiAirThreat)),
+		AntiShip:      firepowerScore(antiShipDPS),
+		AntiAir:       firepowerScore(antiAirDPS),
 		Survival:      nonNegativeRound(math.Sqrt(max(0, formationEHP))),
 		Mobility:      nonNegativeRound(100 * mobility),
 		Projection:    projectionScore(maxProjectionRange),
@@ -329,6 +334,8 @@ func buildPowerInfo(
 			EffectiveHP:           formationEHP,
 			AntiShipDPS:           antiShipDPS,
 			AntiAirDPS:            antiAirDPS,
+			AntiShipThreat:        antiShipThreat,
+			AntiAirThreat:         antiAirThreat,
 			MaxProjectionRange:    maxProjectionRange,
 			BurstDamage:           burstDamage,
 			AntiShipContributions: scaledContributions(sortedContributions(acc.antiShip), formationFactor),
@@ -360,12 +367,23 @@ func weightedTotal(antiShip, antiAir int) int {
 	return total
 }
 
-func combatScore(ehp, dps, mobility float64) int {
-	// 采用 sqrt(EHP * DPS) 的形式，让“更硬”与“更能打”共同抬高分数，但不会被单项极端拉爆。
+// threatValue 是综合战力的分量：sqrt(EHP × DPS) 让“更硬”与“更能打”共同抬高分数，
+// 但不会被单项极端拉爆。它不参与对舰 / 对空两个火力轴，只用于 Total / Hull / Aviation。
+func threatValue(ehp, dps, mobility float64) float64 {
 	if ehp <= 0 || dps <= 0 || mobility <= 0 {
 		return 0
 	}
-	return nonNegativeRound(math.Sqrt(ehp*dps) * mobility / 10)
+	return math.Sqrt(ehp*dps) * mobility / 10
+}
+
+// firepowerScore 把有效 DPS 折算成图鉴的对舰 / 对空能力值。
+// 这里刻意不掺入自身 EHP 与机动：同一种武器在不同舰体上必须得到相同的能力值，
+// 生存与机动分别由 Survival、Mobility 两个独立维度表达。
+func firepowerScore(dps float64) int {
+	if dps <= 0 {
+		return 0
+	}
+	return nonNegativeRound(math.Sqrt(dps))
 }
 
 func projectionScore(maxProjectionRange float64) int {

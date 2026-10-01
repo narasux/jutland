@@ -52,6 +52,12 @@ other = "ゲーム設定"
 other = "全体速度倍率"
 [SettingsLanguage]
 other = "言語"
+[SettingsFogOfWar]
+other = "戦場の霧"
+[SettingsOn]
+other = "オン"
+[SettingsOff]
+other = "オフ"
 [SettingsSave]
 other = "保存"
 [SettingsCancel]

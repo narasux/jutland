@@ -1,25 +1,28 @@
 package explosion
 
 import (
+	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
 // Explosion 表示短生命周期的局部爆炸效果。
 type Explosion struct {
-	Pos      objPos.MapPos
-	Rotation float64
-	Age      int
-	Life     int
+	Pos          objPos.MapPos
+	Rotation     float64
+	Age          int
+	Life         int
+	BelongPlayer faction.Player
 }
 
 // NewRocket 创建火箭弹空爆效果，复用较轻的飞机爆炸帧序列
-func NewRocket(pos objPos.MapPos, rotation float64) *Explosion {
+func NewRocket(pos objPos.MapPos, rotation float64, owner faction.Player) *Explosion {
 	return &Explosion{
-		Pos:      pos,
-		Rotation: rotation,
-		Age:      0,
-		Life:     textureImg.MaxPlaneExplodeState,
+		Pos:          pos,
+		Rotation:     rotation,
+		Age:          0,
+		Life:         textureImg.MaxPlaneExplodeState,
+		BelongPlayer: owner,
 	}
 }
 

@@ -30,6 +30,8 @@ const (
 	PlaneTypeLevelBomber PlaneType = "level_bomber"
 	// PlaneTypeTorpedoBomber 鱼雷轰炸机
 	PlaneTypeTorpedoBomber PlaneType = "torpedo_bomber"
+	// PlaneTypeScout 侦察机。从 other 拆出，不参与自动攻击。
+	PlaneTypeScout PlaneType = "scout"
 	// PlaneTypeOther 其他
 	PlaneTypeOther PlaneType = "other"
 )
@@ -45,6 +47,8 @@ func (t PlaneType) ToDisplay() string {
 		return i18n.Text(i18n.MsgPlaneTypeLevelBomber)
 	case PlaneTypeTorpedoBomber:
 		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
+	case PlaneTypeScout:
+		return i18n.Text(i18n.MsgPlaneTypeScout)
 	case PlaneTypeOther:
 		return i18n.Text(i18n.MsgPlaneTypeOther)
 	default:
@@ -91,6 +95,8 @@ type Plane struct {
 	RotateSpeed float64 `json:"rotateSpeed"`
 	// 总航程
 	Range float64 `json:"range"`
+	// 视距（地图格）。0 表示按机种默认值。
+	SightRange float64 `json:"sightRange"`
 	// 战机长度
 	Length float64 `json:"length"`
 	// 战机宽度
@@ -122,6 +128,10 @@ type Plane struct {
 	RemainRange float64
 	// 当前攻击目标 (uid)
 	CurAttackTarget string
+	// 玩家手动派出的侦察。自动侦察为 false。
+	ScoutManual bool
+	// 侦察结束或被追击时置位，下一拍走现有返航。
+	ForceReturn bool
 	// 飞行阶段（起飞 / 巡航 / 降落）
 	FlightPhase PlaneFlightPhase
 	// 当前飞行阶段起点
@@ -389,8 +399,7 @@ func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos, enemyPos objPos.MapPos,
 
 // MustReturn 必须返航
 func (p *Plane) MustReturn() bool {
-	// 如果剩余航程 <= 0，必须返航
-	if p.RemainRange <= 0 {
+	if p.ForceReturn || p.RemainRange <= 0 {
 		return true
 	}
 	// 轰炸机 / 鱼雷机，只要没有进攻武器了，就返航（我滴任务完成啦！）
@@ -460,6 +469,9 @@ func GetPlaneTargetObjType(name string) object.Type {
 	if !ok {
 		log.Fatalf("plane %s no found", name)
 	}
+	if plane.Type == PlaneTypeScout {
+		return object.TypeNone
+	}
 	// 侦察机等无武装飞机不应被自动派出参与攻击。
 	// FIXME 未来会有其他用途
 	if len(plane.Weapon.Guns) == 0 && len(plane.Weapon.Bombs) == 0 &&
@@ -472,7 +484,7 @@ func GetPlaneTargetObjType(name string) object.Type {
 		return object.TypePlane
 	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber:
 		return object.TypeShip
-	case PlaneTypeOther:
+	case PlaneTypeScout, PlaneTypeOther:
 		return object.TypeNone
 	default:
 		return object.TypeNone

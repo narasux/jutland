@@ -52,6 +52,12 @@ other = "Game Settings"
 other = "Global Speed Multiplier"
 [SettingsLanguage]
 other = "Language"
+[SettingsFogOfWar]
+other = "Fog of War"
+[SettingsOn]
+other = "On"
+[SettingsOff]
+other = "Off"
 [SettingsSave]
 other = "Save"
 [SettingsCancel]

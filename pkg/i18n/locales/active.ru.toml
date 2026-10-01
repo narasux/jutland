@@ -52,6 +52,12 @@ other = "Настройки игры"
 other = "Общий множитель скорости"
 [SettingsLanguage]
 other = "Язык"
+[SettingsFogOfWar]
+other = "Туман войны"
+[SettingsOn]
+other = "Вкл."
+[SettingsOff]
+other = "Выкл."
 [SettingsSave]
 other = "Сохранить"
 [SettingsCancel]

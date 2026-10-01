@@ -45,6 +45,11 @@ type fleetOrder struct {
 	needsReselect bool
 	pressing      bool
 	fellBack      bool
+	// 没有可见目标时转入搜索推进：整队朝最近的接触或未探索海面开。
+	// searchDest 是本轮编组算出来的推进点，全队共用，下一轮编组重算。
+	searching  bool
+	searchDest objPos.MapPos
+	searchSet  bool
 }
 
 // routeMemory 记录这艘舰上次下发的目的地，用来判断目标是否已经挪过 8 格。
@@ -245,7 +250,10 @@ func (h *ComputerDecisionHandler) issueMembers(
 			continue
 		}
 		desired, ok := h.desiredRoute(ship, index, order, kind, snap)
-		if !ok || !h.shouldIssue(cur, ship, desired) {
+		if !ok {
+			continue
+		}
+		if !h.shouldIssue(cur, ship, desired) {
 			continue
 		}
 		h.setRoute(out, ship, desired)
@@ -288,6 +296,14 @@ func (h *ComputerDecisionHandler) desiredRoute(
 				return route, true
 			}
 		}
+		// 中途发现了目标就退出搜索，交回阵位 / 追击逻辑。
+		if order.searching {
+			if target := snap.byUID[order.targetUID]; target != nil && target.CurHP > 0 {
+				order.searching = false
+			} else if route, ok := h.searchRoute(order, ship, snap); ok {
+				return route, true
+			}
+		}
 		slot := formationPos(h.anchor, h.garrisonCount()+index)
 		return h.anchorRoute(ship, slot, snap)
 	case routeCounter:
@@ -320,6 +336,37 @@ func (h *ComputerDecisionHandler) desiredRoute(
 		slot := formationPos(h.anchor, index)
 		return h.anchorRoute(ship, slot, snap)
 	}
+}
+
+// searchRoute 搜索推进：整队朝同一个搜索点开，到了就等下一轮编组换点。
+func (h *ComputerDecisionHandler) searchRoute(
+	order *fleetOrder, ship *objUnit.BattleShip, snap *battleSnapshot,
+) (shipRoute, bool) {
+	dest, ok := h.searchPoint(order, snap)
+	if !ok || ship.CurPos.Near(dest, arrivalDistance) {
+		return shipRoute{}, false
+	}
+	return shipRoute{dest: dest}, true
+}
+
+// searchPoint 本轮搜索推进点：最近的未过期接触优先，其次未探索海面的重心。
+// 每轮编组只算一次并全队共用，避免各舰朝各自最近的前线散开成一片。
+func (h *ComputerDecisionHandler) searchPoint(
+	order *fleetOrder, snap *battleSnapshot,
+) (objPos.MapPos, bool) {
+	if order.searchSet {
+		return order.searchDest, true
+	}
+	if snap.misState == nil || !snap.misState.UsesFog(h.player) {
+		return objPos.MapPos{}, false
+	}
+	vision := snap.misState.Player.Visions[h.player]
+	dest, ok := searchAdvancePoint(vision, h.anchor, snap.misState.Core.SimTick)
+	if !ok {
+		return objPos.MapPos{}, false
+	}
+	order.searchDest, order.searchSet = dest, true
+	return dest, true
 }
 
 func (h *ComputerDecisionHandler) scoutRoute(
