@@ -1882,6 +1882,119 @@
     range: 2600,
     weapon: {}
   },
+  // 美国海军 - 侦察机（战列舰 / 巡洋舰弹射起飞的水上飞机）
+  {
+    // 翠鸟：战列舰主力观测/侦察机，单浮筒单翼，不能折翼所以不上巡洋舰机库
+    // 航程取海军部实战口径的侦察任务值（约 805 mi / 1295 km），不是宣传的最大航程
+    name: "OS2U",
+    nation: "us",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1940,
+    totalHP: 30,
+    damageReduction: 0.35,
+    maxSpeed: 264,
+    acceleration: 12,
+    rotateSpeed: 6,
+    length: 10.3,
+    width: 10.95,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.72,
+    range: 1295,
+    weapon: {
+      guns: [
+        // 机首（7.62mm M1919，固定前射）
+        {
+          name: "US/7.62",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.62mm M1919，观察员活动机枪，后半球自卫）
+        {
+          name: "US/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 海鸥：巡洋舰观测/侦察机，双翼，外翼可后折收进机库
+    name: "SOC",
+    nation: "us",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1935,
+    totalHP: 28,
+    damageReduction: 0.3,
+    maxSpeed: 266,
+    acceleration: 11,
+    rotateSpeed: 7,
+    length: 9.6,
+    width: 10.97,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.47,
+    range: 1086,
+    weapon: {
+      guns: [
+        // 机首（7.62mm AN/M2，固定前射）
+        {
+          name: "US/7.62",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.62mm AN/M2，观察员活动机枪，后半球自卫）
+        {
+          name: "US/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 海鹰：末代舰载水侦，单座，速度接近战斗机，只赶上战争最后几个月
+    name: "SC-1",
+    nation: "us",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1945,
+    totalHP: 34,
+    damageReduction: 0.35,
+    maxSpeed: 504,
+    acceleration: 30,
+    rotateSpeed: 10,
+    length: 11,
+    width: 12.5,
+    fundsCost: 4,
+    timeCost: 3,
+    tonnage: 4.08,
+    range: 1755,
+    weapon: {
+      guns: [
+        // 机翼（12.7mm M2，每翼一挺，固定前射）
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（12.7mm M2，每翼一挺，固定前射）
+        {
+          name: "US/12.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
   // 日本海军
   {
     // 九六式舰战
@@ -2906,13 +3019,45 @@
       ]
     }
   },
-  // FIXME 引入侦察系统
+  // 日本海军 - 侦察机
+  {
+    // 零式水上侦察机（E13A1），1941 年服役
+    // 战列舰/巡洋舰弹射起飞的三座水侦，航程取维基百科的 2089 km 作战口径
+    // 仅配置后座 7.7mm 九二式活动机枪；E13A1c 的腹下 20mm 机炮未配置，故不写入描述
+    name: "E13A",
+    nation: "jp",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1941,
+    totalHP: 34,
+    damageReduction: 0.35,
+    maxSpeed: 376,
+    acceleration: 15,
+    rotateSpeed: 7,
+    length: 11.3,
+    width: 14.5,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 4.0,
+    range: 2089,
+    weapon: {
+      guns: [
+        // 后座（7.7mm 九二式，后半球自卫）
+        {
+          name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
   {
     // 彩云
     name: "C6N1",
     nation: "jp",
-    type: "other",
-    typeAbbr: "OTHER",
+    type: "scout",
+    typeAbbr: "SC",
     year: 1944,
     totalHP: 36,
     damageReduction: 0.35,
@@ -4745,8 +4890,8 @@
     // 腓特烈港 FF.33e（无武装水上侦察机）
     name: "FF33E",
     nation: "de",
-    type: "other",
-    typeAbbr: "OTHER",
+    type: "scout",
+    typeAbbr: "SC",
     year: 1915,
     totalHP: 24,
     damageReduction: 0.25,
@@ -4760,6 +4905,45 @@
     tonnage: 1.675,
     range: 650,
     weapon: {}
+  },
+  {
+    // 阿拉多 Ar 196 A-5 舰载水上侦察机
+    // 德国主力弹射水侦，A-2 起加装机首固定机枪，这里按 A-2/A-5 的机首 + 后座武装配置
+    // A-5 原有 2 x 20mm MG FF/M 翼炮属对舰强化，侦察机口径下未配置，故不写入描述
+    name: "Ar196",
+    nation: "de",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1939,
+    totalHP: 38,
+    damageReduction: 0.4,
+    maxSpeed: 332,
+    acceleration: 15,
+    rotateSpeed: 8,
+    length: 11,
+    width: 12.4,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 3.72,
+    range: 1080,
+    weapon: {
+      guns: [
+        // 机首（7.92mm MG 17，固定前射）
+        {
+          name: "GER/AIR/7.92/MG17",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.92mm MG 15，后半球自卫）
+        {
+          name: "GER/AIR/7.92/MG15",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
   },
   // 德国海军 - 舰载鱼雷机
   {
@@ -5151,6 +5335,45 @@
     }
   },
   {
+    // 海象式 Mk I 舰载水上侦察机
+    // 英联邦海军弹射起飞的双翼水机，速度低但结构结实；600 mi / 970 km 为巡航航程口径
+    // 6 x 100 lb 深弹/炸弹属对舰挂载，侦察机口径下未配置，故不写入描述
+    name: "Walrus",
+    nation: "uk",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1935,
+    totalHP: 40,
+    damageReduction: 0.4,
+    maxSpeed: 217,
+    acceleration: 12,
+    rotateSpeed: 7,
+    length: 11.46,
+    width: 13.97,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 3.651,
+    range: 970,
+    weapon: {
+      guns: [
+        // 机鼻（.303 维克斯 K，前向）
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0.85,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼后（.303 维克斯 K，后半球自卫）
+        {
+          name: "UK/7.7/VickersK",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
     // 梭鱼式 Mk II
     name: "Barracuda-II",
     nation: "uk",
@@ -5469,8 +5692,8 @@
     // 卢瓦尔 Loire 130 水上侦察机
     name: "Loire130",
     nation: "fr",
-    type: "other",
-    typeAbbr: "OTHER",
+    type: "scout",
+    typeAbbr: "SC",
     year: 1937,
     totalHP: 30,
     damageReduction: 0.35,

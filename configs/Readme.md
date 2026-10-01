@@ -354,6 +354,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // torpedo_boat 快艇
     // submarine 潜艇（未来可期）
     type: "cruiser",
+    // 视距（地图格）。0 或不写时用舰种默认值；有主炮时不超过主炮射程。
+    // 单艘可写大于 0 的值覆盖默认。测试船 type 为 default 时不套用默认表。
+    sightRange: 0,
     // 类型缩写
     typeAbbr: "CL",
     // 初始生命值
@@ -474,7 +477,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       // 起降甲板模板名（需确保在 carrier_decks.json5 中存在；搭载舰载机时必填，
       // 缺失会在初始化阶段直接报错退出）
       deck: "StraightDeckNoCatapult",
-      // 飞机编组
+      // 飞机编组。开战争迷雾时电脑会从这里派搜索机：
+      // 编组里有 scout 型飞机（至少 2 架）就派侦察机，剩余航程翻倍；
+      // 没有 scout 型就从打击编组里起飞一架顶替，剩余航程不加成。
       groups: [
         {
           // 飞机名称（需确保在 planes.json5 中存在）
@@ -572,6 +577,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // dive_bomber 俯冲轰炸机
     // level_bomber 水平轰炸机
     // torpedo_bomber 鱼雷轰炸机
+    // scout 侦察机
     // other 其他
     type: "fighter",
     // 类型缩写
@@ -600,6 +606,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     tonnage: 3.367,
     // 总航程
     range: 1360,
+    // 视距（地图格）。0 或不写时：侦察机 36，战斗机 22，轰炸机 26。
+    sightRange: 0,
     // 武器配置
     weapon: {
       // 机炮（参数与舰炮武器挂载点相同）

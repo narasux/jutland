@@ -6936,6 +6936,25 @@
     author: "",
     links: [],
   },
+    {
+    "name": "E13A",
+    "displayName": "零式水上侦察机",
+    "type": "水上侦察机",
+    "armaments": [
+      {
+        "label": "机枪（后座）",
+        "value": "1 x 7.7mm 九二式"
+      }
+    ],
+    "description": "爱知 E13A 零式水上侦察机是日本海军 1941 年服役的三座双浮筒水侦，从战列舰、巡洋舰和水上飞机母舰弹射起飞，承担舰队侦察、着弹观测、反潜巡逻和联络任务，共生产约 1,418 架。该机最大速度约 376 km/h，航程约 2,089 km，机身中部的单浮筒与翼下辅助浮筒是其外形特征。游戏中归类为侦察机，仅配置后座一挺 7.7mm 九二式活动机枪；E13A1c 的腹下 20mm 机炮与 250kg 炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Aichi E13A",
+        "url": "https://en.wikipedia.org/wiki/Aichi_E13A"
+      }
+    ]
+  },
   {
     name: "D3A1",
     displayName: "九九式",
@@ -6988,6 +7007,53 @@
       },
     ],
     description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "OS2U",
+    displayName: "翠鸟",
+    armaments: [
+      {
+        label: "机枪（机首固定前射）",
+        value: "1 x 7.62mm M1919",
+      },
+      {
+        label: "机枪（后座）",
+        value: "1 x 7.62mm M1919",
+      },
+    ],
+    description: "翠鸟式 OS2U 是美国海军 1940 年服役的弹射起飞水上侦察机，主要配属战列舰与巡洋舰执行舰队侦察、着弹观测和海上救援，共生产 1,519 架。该机最大速度约 275 km/h，航程约 1,300 km，机体经过防腐蚀处理，可承受弹射起飞与水面降落。游戏中归类为侦察机，配置机首一挺 7.62mm M1919 固定机枪与后座观察员一挺同型活动机枪；650 磅炸弹或深弹挂载未配置，图鉴不做记载。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SOC",
+    displayName: "海鸥",
+    armaments: [
+      {
+        label: "机枪（机首固定前射）",
+        value: "1 x 7.62mm AN/M2",
+      },
+      {
+        label: "机枪（后座）",
+        value: "1 x 7.62mm AN/M2",
+      },
+    ],
+    description: "海鸥式 SOC 是美国海军 1935 年服役的双翼水上侦察机，外翼可向后折叠以收入巡洋舰机库，由弹射器起飞并用吊车回收，主要承担舰队侦察与着弹观测，共生产约 322 架。该机最大速度约 266 km/h，航程约 1,086 km，双翼布局带来良好的低速与水面操纵性。游戏中归类为侦察机，配置机首一挺 7.62mm AN/M2 固定机枪与后座观察员一挺同型活动机枪；2 x 100 磅炸弹或 325 磅深弹挂载未配置，图鉴不做记载。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SC-1",
+    displayName: "海鹰",
+    armaments: [
+      {
+        label: "机枪（机翼固定前射）",
+        value: "2 x 12.7mm M2",
+      },
+    ],
+    description: "海鹰式 SC-1 是美国海军在二战末期服役的单座水上侦察机，1944 年首飞，可从战列舰与巡洋舰弹射起飞或由水面起降，兼顾侦察、着弹观测与海上救援，共生产约 577 架。该机最大速度约 378 km/h、接近同期舰载战斗机，是美军最晚也是性能最好的舰载水侦。游戏中归类为侦察机，配置机翼两挺 12.7mm M2 固定前射机枪；2 x 325 磅炸弹挂载未配置，图鉴不做记载。",
     author: "",
     links: [],
   },
@@ -7718,6 +7784,29 @@
         url: "https://en.wikipedia.org/wiki/Supermarine_Sea_Otter",
       },
     ],
+  },
+    {
+    "name": "Walrus",
+    "displayName": "海象式 Mk I",
+    "type": "水上侦察机",
+    "armaments": [
+      {
+        "label": "机枪（机鼻）",
+        "value": "1 x 7.7mm 维克斯 K 型"
+      },
+      {
+        "label": "机枪（翼后）",
+        "value": "1 x 7.7mm 维克斯 K 型"
+      }
+    ],
+    "description": "超级马林海象式 Mk I 是英国皇家海军与英联邦海军使用的双翼水陆两栖飞行艇，1935 年服役，由舰船弹射起飞或水面起降，承担舰队侦察、着弹观测和海上救援任务。该机采用推进式布局，最大速度约 217 km/h，航程约 970 km，虽速度不高却以结构结实和适航性好著称。游戏中归类为侦察机，配置机鼻与翼后各一挺 .303 英寸维克斯 K 型机枪；6 x 100 磅炸弹或深弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Supermarine Walrus",
+        "url": "https://en.wikipedia.org/wiki/Supermarine_Walrus"
+      }
+    ]
   },
   {
     name: "Swordfish",
@@ -10881,6 +10970,29 @@
         url: "https://en.wikipedia.org/wiki/Friedrichshafen_FF.33",
       },
     ],
+  },
+    {
+    "name": "Ar196",
+    "displayName": "Ar 196",
+    "type": "水上侦察机",
+    "armaments": [
+      {
+        "label": "机枪（机首固定前射）",
+        "value": "1 x 7.92mm MG 17"
+      },
+      {
+        "label": "机枪（后座）",
+        "value": "1 x 7.92mm MG 15"
+      }
+    ],
+    "description": "阿拉多 Ar 196 是德国海军在二战期间全程使用的舰载水上侦察机，双浮筒下单翼布局，从战列舰和巡洋舰弹射起飞，也可由岸基中队执行海上侦察与反潜巡逻，共生产 541 架。该机最大速度约 332 km/h，航程约 1,080 km，机身结构坚固、水面操纵性良好。游戏中归类为侦察机，按 A-2/A-5 配置机首一挺 7.92mm MG 17 固定机枪与后座一挺 7.92mm MG 15 活动机枪；A-5 的 2 x 20mm MG FF/M 翼炮与炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Arado Ar 196",
+        "url": "https://en.wikipedia.org/wiki/Arado_Ar_196"
+      }
+    ]
   },
   {
     name: "Potez631",

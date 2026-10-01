@@ -1014,6 +1014,25 @@
       },
     ],
   },
+    {
+    "name": "E13A",
+    "displayName": "Type 0 Reconnaissance Seaplane",
+    "type": "Reconnaissance Floatplane",
+    "armaments": [
+      {
+        "label": "Machine Gun (Rear Cockpit)",
+        "value": "1 x 7.7mm Type 92"
+      }
+    ],
+    "description": "The Aichi E13A, Navy Type 0 Reconnaissance Seaplane, was a three-seat twin-float seaplane that entered Imperial Japanese Navy service in 1941 and was catapult-launched from battleships, cruisers and seaplane tenders for fleet reconnaissance, gunnery spotting, anti-submarine patrol and liaison. About 1,418 were built. Its maximum speed was about 376 km/h with a range of about 2,089 km, and the single central float with wingtip outriggers gave the type its distinctive profile. In game it is a scout, armed with one flexible 7.7mm Type 92 machine gun in the rear cockpit; the E13A1c's belly-mounted 20mm cannon and 250 kg bomb load are not configured and are not listed in the reference.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Aichi E13A",
+        "url": "https://en.wikipedia.org/wiki/Aichi_E13A"
+      }
+    ]
+  },
   {
     name: "card",
     displayName: "Card",
@@ -1705,6 +1724,68 @@
       {
         name: "Wikipedia — F2A-3 Buffalo",
         url: "https://en.wikipedia.org/wiki/Brewster%20F2A%20Buffalo",
+      },
+    ],
+  },
+  {
+    name: "OS2U",
+    displayName: "Kingfisher",
+    armaments: [
+      {
+        label: "Machine Gun (Fixed Forward, Bow)",
+        value: "1 x 7.62mm M1919",
+      },
+      {
+        label: "Machine Gun (Rear Observer)",
+        value: "1 x 7.62mm M1919",
+      },
+    ],
+    description: "The Vought OS2U Kingfisher was a catapult-launched scout floatplane that entered US Navy service in 1940 aboard battleships and cruisers for fleet reconnaissance, gunnery spotting and air-sea rescue, with 1,519 built. Maximum speed was about 275 km/h and range about 1,300 km, and the corrosion-proofed airframe was stressed for catapult launches and open-water landings. In game it is a scout with a fixed forward 7.62mm M1919 in the bow and a flexible 7.62mm M1919 for the observer; its 650 lb bomb or depth charge load is not configured and is not listed in the reference.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — OS2U Kingfisher",
+        url: "https://en.wikipedia.org/wiki/Vought%20OS2U%20Kingfisher",
+      },
+    ],
+  },
+  {
+    name: "SOC",
+    displayName: "Seagull",
+    armaments: [
+      {
+        label: "Machine Gun (Fixed Forward, Bow)",
+        value: "1 x 7.62mm AN/M2",
+      },
+      {
+        label: "Machine Gun (Rear Observer)",
+        value: "1 x 7.62mm AN/M2",
+      },
+    ],
+    description: "The Curtiss SOC Seagull was a two-seat biplane scout that entered US Navy service in 1935; its outer wings folded aft to fit cruiser hangars and it was catapult-launched and crane-recovered for fleet reconnaissance and gunnery spotting, with about 322 built. Maximum speed was about 266 km/h and range about 1,086 km, and the biplane layout gave good low-speed and water handling. In game it is a scout with a fixed forward 7.62mm AN/M2 in the bow and a flexible 7.62mm AN/M2 for the observer; its two 100 lb bombs or 325 lb depth charges are not configured and are not listed in the reference.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — SOC Seagull",
+        url: "https://en.wikipedia.org/wiki/Curtiss%20SOC%20Seagull",
+      },
+    ],
+  },
+  {
+    name: "SC-1",
+    displayName: "Seahawk",
+    armaments: [
+      {
+        label: "Machine Gun (Fixed Forward, Wings)",
+        value: "2 x 12.7mm M2",
+      },
+    ],
+    description: "The Curtiss SC-1 Seahawk was a single-seat scout floatplane that first flew in 1944 and entered US Navy service in the final months of the war, operating from battleships and cruisers by catapult or from the water for reconnaissance, spotting and rescue, with about 577 built. Its maximum speed of about 378 km/h approached contemporary carrier fighters, making it the Navy's last and most capable catapult scout. In game it is a scout with two fixed forward 12.7mm M2 machine guns in the wings; its two 325 lb bombs are not configured and are not listed in the reference.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — SC Seahawk",
+        url: "https://en.wikipedia.org/wiki/Curtiss%20SC%20Seahawk",
       },
     ],
   },
@@ -7126,6 +7207,29 @@
       },
     ],
   },
+    {
+    "name": "Walrus",
+    "displayName": "Walrus Mk I",
+    "type": "Reconnaissance Amphibian",
+    "armaments": [
+      {
+        "label": "Machine Gun (Bow)",
+        "value": "1 x 7.7mm Vickers K"
+      },
+      {
+        "label": "Machine Gun (Behind Wings)",
+        "value": "1 x 7.7mm Vickers K"
+      }
+    ],
+    "description": "The Supermarine Walrus Mk I was a biplane amphibian flown by the Royal Navy's Fleet Air Arm and Commonwealth navies from 1935, catapult-launched from ships or operating from the water for fleet reconnaissance, gunnery spotting and air-sea rescue. Its pusher layout gave a maximum speed of about 217 km/h and a range of about 970 km; it was slow but famously sturdy and seaworthy. In game it is a scout with one .303-inch Vickers K gun in the bow and one behind the wings; its six 100 lb bombs or depth charges are not configured and are not listed in the reference.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Supermarine Walrus",
+        "url": "https://en.wikipedia.org/wiki/Supermarine_Walrus"
+      }
+    ]
+  },
   {
     name: "ShanDa",
     displayName: "533mm 20-Tube ShanDa Torpedo",
@@ -11002,6 +11106,29 @@
         url: "https://en.wikipedia.org/wiki/Friedrichshafen_FF.33",
       },
     ],
+  },
+    {
+    "name": "Ar196",
+    "displayName": "Ar 196",
+    "type": "Reconnaissance Floatplane",
+    "armaments": [
+      {
+        "label": "Machine Gun (Fixed Forward, Cowling)",
+        "value": "1 x 7.92mm MG 17"
+      },
+      {
+        "label": "Machine Gun (Rear Cockpit)",
+        "value": "1 x 7.92mm MG 15"
+      }
+    ],
+    "description": "The Arado Ar 196 was the standard Kriegsmarine shipboard observation floatplane and the only German seaplane in service throughout the Second World War. The twin-float low-wing monoplane was catapult-launched from capital ships and cruisers and also flew coastal reconnaissance and anti-submarine patrols from shore bases, with 541 built. Maximum speed was about 332 km/h and range about 1,080 km, with a rugged airframe and good water handling. In game it is a scout armed as an A-2/A-5 with one fixed forward 7.92mm MG 17 in the cowling and one flexible 7.92mm MG 15 in the rear cockpit; the A-5's two 20mm MG FF/M wing cannon and bomb load are not configured and are not listed in the reference.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Arado Ar 196",
+        "url": "https://en.wikipedia.org/wiki/Arado_Ar_196"
+      }
+    ]
   },
   {
     name: "Potez631",
