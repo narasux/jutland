@@ -1014,6 +1014,29 @@
       },
     ],
   },
+  {
+    "name": "F1M2",
+    "displayName": "Type 0 Observation Seaplane",
+    "type": "Observation Floatplane",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 7.7mm Type 97"
+      },
+      {
+        "label": "Machine Gun (Rear Cockpit)",
+        "value": "1 x 7.7mm Type 92"
+      }
+    ],
+    "description": "The Mitsubishi F1M2, Navy Type Zero Observation Seaplane, was a two-seat biplane floatplane that entered service in 1941, with 944 built. Catapult-launched from warships, it performed gunnery spotting, reconnaissance and anti-submarine patrol. Its maximum speed was about 368 km/h with a range of 740 km. In game it is a scout with two fixed forward and one flexible rear 7.7 mm machine guns; its 60 kg bombs are not configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Mitsubishi F1M",
+        "url": "https://en.wikipedia.org/wiki/Mitsubishi_F1M"
+      }
+    ]
+  },
     {
     "name": "E13A",
     "displayName": "Type 0 Reconnaissance Seaplane",
@@ -1030,6 +1053,29 @@
       {
         "name": "Wikipedia - Aichi E13A",
         "url": "https://en.wikipedia.org/wiki/Aichi_E13A"
+      }
+    ]
+  },
+  {
+    "name": "E16A",
+    "displayName": "Zuiun",
+    "type": "Reconnaissance Floatplane",
+    "armaments": [
+      {
+        "label": "Wing Cannons",
+        "value": "2 x 20mm Type 99"
+      },
+      {
+        "label": "Machine Gun (Rear)",
+        "value": "1 x 13mm Type 2"
+      }
+    ],
+    "description": "The Aichi E16A Zuiun was a two-seat floatplane, the E13A's successor, introduced in February 1944 with 256 built. Catapult-launched from warships, it performed reconnaissance and gunnery spotting, and could dive-bomb with its dive brakes. Maximum speed was about 439 km/h, range 1,176 km. In game it is a scout with two wing 20 mm Type 99 cannons and one rear 13 mm Type 2 machine gun; its 250 kg bombs are not configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Aichi E16A",
+        "url": "https://en.wikipedia.org/wiki/Aichi_E16A_Zuiun"
       }
     ]
   },

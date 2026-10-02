@@ -6936,6 +6936,29 @@
     author: "",
     links: [],
   },
+  {
+    "name": "F1M2",
+    "displayName": "零式水上观测机",
+    "type": "水上观测机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 7.7mm 九七式"
+      },
+      {
+        "label": "机枪（后座）",
+        "value": "1 x 7.7mm 九二式"
+      }
+    ],
+    "description": "三菱 F1M2 零式水上观测机是日本海军 1941 年服役的双座双翼水侦（盟军代号 Pete），共生产 944 架，从战列舰、巡洋舰弹射起飞，承担弹着观测、舰队侦察与反潜巡逻，战时也常被临时用于对海攻击。该机最大速度约 368 km/h，航程约 740 km，机长 9.5 m、翼展 11 m，是海军最后的双翼机。游戏中归类为侦察机，配置两挺翼内 7.7mm 九七式固定前射机枪与后座一挺 7.7mm 九二式活动机枪；2 x 60kg 炸弹未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Mitsubishi F1M",
+        "url": "https://zh.wikipedia.org/wiki/%E9%9B%B6%E5%BC%8F%E6%B0%B4%E4%B8%8A%E8%A7%80%E6%B8%AC%E6%A9%9F"
+      }
+    ]
+  },
     {
     "name": "E13A",
     "displayName": "零式水上侦察机",
@@ -6952,6 +6975,29 @@
       {
         "name": "维基百科 - Aichi E13A",
         "url": "https://en.wikipedia.org/wiki/Aichi_E13A"
+      }
+    ]
+  },
+  {
+    "name": "E16A",
+    "displayName": "瑞云",
+    "type": "水上侦察机",
+    "armaments": [
+      {
+        "label": "机炮（机翼）",
+        "value": "2 x 20mm 九九式"
+      },
+      {
+        "label": "机枪（后座）",
+        "value": "1 x 13mm 二式"
+      }
+    ],
+    "description": "爱知 E16A 瑞云是日本海军 1944 年 2 月服役的双座双浮筒水侦（盟军代号 Paul），作为 E13A 的后继机共生产 256 架，从战列舰、巡洋舰弹射起飞，承担舰队侦察与弹着观测，配备俯冲减速板也可执行俯冲轰炸，战争末期大量消耗于冲绳方向。该机最大速度约 439 km/h，航程约 1,176 km，机长 10.83 m、翼展 12.81 m。游戏中归类为侦察机，配置翼内 20mm 九九式机炮两门与后座一挺 13mm 二式机枪；250kg 炸弹未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Aichi E16A",
+        "url": "https://zh.wikipedia.org/wiki/%E7%91%9E%E9%9B%B2%E6%B0%B4%E4%B8%8A%E5%81%B5%E5%AF%9F%E6%A9%9F"
       }
     ]
   },

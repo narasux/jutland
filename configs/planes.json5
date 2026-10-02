@@ -3021,6 +3021,52 @@
   },
   // 日本海军 - 侦察机
   {
+    // 零式水上观测机（F1M2），1941 年服役，海军最后的双翼水侦
+    // 速度取维基百科正文口径 368 km/h（规格表 370 km/h），航程取规格表 740 km（正文另有无外挂 1072 km）
+    // 两挺 7.7mm 九七式按翼内固定前射近似；2 x 60kg 炸弹未配置，故不写入描述
+    name: "F1M2",
+    nation: "jp",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1941,
+    totalHP: 30,
+    damageReduction: 0.3,
+    maxSpeed: 368,
+    acceleration: 15,
+    rotateSpeed: 8,
+    length: 9.5,
+    width: 11,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.55,
+    range: 740,
+    weapon: {
+      guns: [
+        // 翼内（7.7mm 九七式，固定前射）
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼内（7.7mm 九七式，固定前射）
+        {
+          name: "JP/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.7mm 九二式，后半球自卫）
+        {
+          name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
     // 零式水上侦察机（E13A1），1941 年服役
     // 战列舰/巡洋舰弹射起飞的三座水侦，航程取维基百科的 2089 km 作战口径
     // 仅配置后座 7.7mm 九二式活动机枪；E13A1c 的腹下 20mm 机炮未配置，故不写入描述
@@ -3045,6 +3091,52 @@
         // 后座（7.7mm 九二式，后半球自卫）
         {
           name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // 瑞云（E16A1 瑞云11型），1944 年 2 月服役，E13A 的后继双座水侦
+    // 带俯冲减速板的低翼单翼水侦，速度/航程/重量取维基百科规格表 439 km/h、1176 km、正常起飞重量 3.9 t
+    // 仅配置量产型武器：翼内 20mm 九九式二号机炮 x2 与后座 13mm 二式机枪 x1；250kg 炸弹未配置，故不写入描述
+    name: "E16A",
+    nation: "jp",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1944,
+    totalHP: 36,
+    damageReduction: 0.35,
+    maxSpeed: 439,
+    acceleration: 20,
+    rotateSpeed: 9,
+    length: 10.833,
+    width: 12.81,
+    fundsCost: 6,
+    timeCost: 4,
+    tonnage: 3.9,
+    range: 1176,
+    weapon: {
+      guns: [
+        // 翼内（20mm 九九式二号，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 翼内（20mm 九九式二号，固定前射）
+        {
+          name: "JP/20",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（13mm 二式，后半球自卫）
+        {
+          name: "JP/13",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
