@@ -11609,4 +11609,279 @@
       },
     ],
   },
+  {
+    name: "IT/7.7",
+    displayName: "7.7mm Breda-SAFAT 航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/12.7",
+    displayName: "12.7mm Breda-SAFAT 航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    "name": "CR.42",
+    "displayName": "CR.42 猎鹰",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "菲亚特 CR.42 Falco（猎鹰）是意大利空军 1939 年服役的单座双翼战斗机，采用管形钢架与织物蒙皮结构，是战争初期意大利空军的主力，也是各国最后大批量生产的双翼战斗机之一。最大速度约 441 km/h，航程 780 km，机长 8.25 m、翼展 9.7 m。游戏中归类为战斗机，配置机首两挺 12.7mm Breda-SAFAT 同步机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Fiat_CR.42",
+        "url": "https://en.wikipedia.org/wiki/Fiat_CR.42"
+      }
+    ]
+  },
+  {
+    "name": "G.50",
+    "displayName": "G.50 箭",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "菲亚特 G.50 Freccia（箭）是意大利空军 1940 年服役的单座下单翼战斗机，采用星形发动机，是意大利首批现代化单翼战斗机之一。最大速度约 470 km/h，航程 445 km，机长 8.01 m、翼展 10.99 m。游戏中归类为战斗机，配置机首两挺 12.7mm Breda-SAFAT 同步机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Fiat_G.50",
+        "url": "https://en.wikipedia.org/wiki/Fiat_G.50"
+      }
+    ]
+  },
+  {
+    "name": "C.200",
+    "displayName": "C.200 闪电",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "马基 C.200 Saetta（闪电）是意大利空军 1939 年服役的单座下单翼战斗机，星形发动机布局，以结构坚固、操纵灵活著称。最大速度约 504 km/h，航程 570 km，机长 8.25 m、翼展 10.58 m。游戏中归类为战斗机，配置机首两挺 12.7mm Breda-SAFAT 同步机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Macchi_C.200",
+        "url": "https://en.wikipedia.org/wiki/Macchi_C.200"
+      }
+    ]
+  },
+  {
+    "name": "C.202",
+    "displayName": "C.202 闪电",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机枪（机翼固定前射）",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "马基 C.202 Folgore（闪电）是 C.200 的液冷动力发展型，1941 年服役，使用阿尔法·罗密欧授权生产的 DB 601 发动机，速度较 C.200 大幅提升，1942-43 年间是意大利空军的主力战斗机。最大速度约 600 km/h，航程 765 km，机长 8.85 m、翼展 10.58 m。游戏中归类为战斗机，配置机首两挺 12.7mm 与机翼两挺 7.7mm 机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Macchi_C.202",
+        "url": "https://en.wikipedia.org/wiki/Macchi_C.202"
+      }
+    ]
+  },
+  {
+    "name": "Re.2005",
+    "displayName": "Re.2005 人马座",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机炮（机翼与桨毂）",
+        "value": "3 x 20mm MG 151/20"
+      }
+    ],
+    "description": "雷吉亚 Re.2005 Sagittario（人马座）1943 年服役，采用菲亚特授权生产的 DB 605 发动机，是意大利战时性能最出色的活塞战斗机之一。最大速度约 628 km/h，航程 980 km（内油），机长 8.73 m、翼展 11.0 m。游戏中归类为战斗机，配置两挺 12.7mm 机首机枪与三门 20mm MG 151/20（桨毂一门、机翼两门）；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Reggiane_Re.2005",
+        "url": "https://en.wikipedia.org/wiki/Reggiane_Re.2005"
+      }
+    ]
+  },
+  {
+    "name": "Re.2002",
+    "displayName": "Re.2002 公羊",
+    "type": "俯冲轰炸机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机枪（机翼固定前射）",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "炸弹",
+        "value": "2 x 250kg"
+      }
+    ],
+    "description": "雷吉亚 Re.2002 Ariete（公羊）1942 年服役，是 Re.2001 战斗机的星形发动机对地打击发展型，主要用于轰炸、对地攻击与反舰任务。最大速度约 530 km/h，航程 1,100 km，机长 8.16 m、翼展 11.0 m。游戏中归类为俯冲轰炸机，配置机首两挺 12.7mm、机翼两挺 7.7mm 机枪与两枚 250kg 炸弹。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Reggiane_Re.2002",
+        "url": "https://en.wikipedia.org/wiki/Reggiane_Re.2002"
+      }
+    ]
+  },
+  {
+    "name": "BR.20",
+    "displayName": "BR.20 鹳",
+    "type": "水平轰炸机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "1 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机枪（后向）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "炸弹",
+        "value": "3 x 500kg"
+      }
+    ],
+    "description": "菲亚特 BR.20 Cicogna（鹳）是意大利 1936 年服役的双发中型轰炸机，玻璃机鼻与双垂尾布局，战争初期随意军参加不列颠空战与巴尔干作战。最大速度约 440 km/h（BR.20M），航程 2,750 km，机长 16.68 m、翼展 21.56 m。游戏中归类为水平轰炸机，配置机首与背腹三挺 12.7mm 机枪与三枚 500kg 炸弹。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Fiat_BR.20",
+        "url": "https://en.wikipedia.org/wiki/Fiat_BR.20"
+      }
+    ]
+  },
+  {
+    "name": "Z.1007bis",
+    "displayName": "Z.1007bis 翠鸟",
+    "type": "水平轰炸机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机枪（后向）",
+        "value": "2 x 12.7mm Breda-SAFAT, 1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "炸弹",
+        "value": "4 x 500kg"
+      }
+    ],
+    "description": "坎特 Z.1007bis Alcione（翠鸟）是意大利 1939 年服役的三发中型轰炸机，木质结构机身，与 SM.79、BR.20 同为战争初期意大利的主力中型轰炸机。最大速度约 458 km/h，航程 1,795 km，机长 18.35 m、翼展 24.8 m。游戏中归类为水平轰炸机，配置机首 7.7mm、背部与腹部各一门 12.7mm、腰部一挺 7.7mm 机枪，以及四枚 500kg 炸弹。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - CANT_Z.1007",
+        "url": "https://en.wikipedia.org/wiki/CANT_Z.1007"
+      }
+    ]
+  },
+  {
+    "name": "SM.79bis",
+    "displayName": "SM.79bis 食雀鹰",
+    "type": "鱼雷轰炸机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "1 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机枪（后向）",
+        "value": "1 x 12.7mm Breda-SAFAT, 2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "鱼雷",
+        "value": "2 x 450mm"
+      }
+    ],
+    "description": "萨伏伊-马基 SM.79bis Sparviero（食雀鹰）由 1936 年服役的三发中型轰炸机发展而来，SM.79-III 即鱼雷型（与 bis 同义），1942 年底投入反舰作战，是意大利鱼雷机部队的主力。最大速度约 460 km/h，航程 2,600 km，机长 16.2 m、翼展 20.2 m。游戏中归类为鱼雷轰炸机，配置机首与背部 12.7mm、腰部两挺 7.7mm 机枪和两枚 450mm 鱼雷；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - Savoia-Marchetti_SM.79",
+        "url": "https://en.wikipedia.org/wiki/Savoia-Marchetti_SM.79"
+      }
+    ]
+  },
+  {
+    "name": "Ro.37bis",
+    "displayName": "Ro.37bis 山猫",
+    "type": "侦察机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机枪（后座）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "IMAM Ro.37bis Lince（山猫）是意大利陆军航空 1930 年代中期使用的双座双翼侦察机，承担战场侦察与联络任务。最大速度约 330 km/h，航程 1,120 km，机长 8.57 m、翼展 11.08 m。游戏中归类为侦察机，配置机首两挺与后座一挺 7.7mm 机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - IMAM_Ro.37",
+        "url": "https://en.wikipedia.org/wiki/IMAM_Ro.37"
+      }
+    ]
+  },
+  {
+    "name": "Ro.43",
+    "displayName": "Ro.43",
+    "type": "水上侦察机",
+    "armaments": [
+      {
+        "label": "机枪（前向）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "机枪（后座）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "IMAM Ro.43 是意大利海军 1935 年服役的舰载弹射侦察水上飞机，由巡洋舰和战列舰弹射起飞执行远程侦察，采用中央主浮筒与翼尖辅助浮筒布局。最大速度约 300 km/h，航程约 800-1,500 km，机长 9.71 m、翼展 11.57 m。游戏中归类为水上侦察机，配置机首一挺与后座一挺 7.7mm 机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 - IMAM_Ro.43",
+        "url": "https://en.wikipedia.org/wiki/IMAM_Ro.43"
+      }
+    ]
+  }
 ]

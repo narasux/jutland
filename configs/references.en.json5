@@ -11745,4 +11745,279 @@
       },
     ],
   },
+  {
+    name: "IT/7.7",
+    displayName: "7.7mm Breda-SAFAT Aircraft MG",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/12.7",
+    displayName: "12.7mm Breda-SAFAT Aircraft MG",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    "name": "CR.42",
+    "displayName": "Fiat CR.42 Falco",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "The Fiat CR.42 Falco was a single-seat biplane fighter that entered service with the Italian Air Force in 1939. Built on a steel-tube frame with fabric covering, it was Italy's frontline fighter at the start of the war and one of the last biplane fighters produced in large numbers. Maximum speed was about 441 km/h with a range of 780 km. In game it is a fighter armed with two forward-firing 12.7 mm Breda-SAFAT machine guns; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Fiat_CR.42",
+        "url": "https://en.wikipedia.org/wiki/Fiat_CR.42"
+      }
+    ]
+  },
+  {
+    "name": "G.50",
+    "displayName": "Fiat G.50 Freccia",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "The Fiat G.50 Freccia was a single-seat monoplane fighter that entered service in 1940, among Italy's first modern low-wing fighters, powered by a radial engine. Maximum speed was about 470 km/h with a range of 445 km. In game it is a fighter armed with two forward-firing 12.7 mm Breda-SAFAT machine guns; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Fiat_G.50",
+        "url": "https://en.wikipedia.org/wiki/Fiat_G.50"
+      }
+    ]
+  },
+  {
+    "name": "C.200",
+    "displayName": "Macchi C.200 Saetta",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "The Macchi C.200 Saetta was a single-seat monoplane fighter that entered service in 1939. Its radial engine and robust airframe gave it excellent handling, and it supported the Italian fighter force early in the war. Maximum speed was about 504 km/h with a range of 570 km. In game it is a fighter armed with two forward-firing 12.7 mm Breda-SAFAT machine guns; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Macchi_C.200",
+        "url": "https://en.wikipedia.org/wiki/Macchi_C.200"
+      }
+    ]
+  },
+  {
+    "name": "C.202",
+    "displayName": "Macchi C.202 Folgore",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Machine Guns (Fixed Forward, Wings)",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "The Macchi C.202 Folgore was the liquid-cooled development of the C.200, entering service in 1941 with an Alfa Romeo-built DB 601 engine. Far faster than its predecessor, it became Italy's principal fighter through 1942-43. Maximum speed was about 600 km/h with a range of 765 km. In game it is a fighter armed with two 12.7 mm nose machine guns and two 7.7 mm wing guns; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Macchi_C.202",
+        "url": "https://en.wikipedia.org/wiki/Macchi_C.202"
+      }
+    ]
+  },
+  {
+    "name": "Re.2005",
+    "displayName": "Reggiane Re.2005 Sagittario",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Cannon (Wings and Propeller Hub)",
+        "value": "3 x 20mm MG 151/20"
+      }
+    ],
+    "description": "The Reggiane Re.2005 Sagittario entered service in 1943 with a Fiat-built DB 605 engine and ranks among the finest Italian piston fighters of the war. Maximum speed was about 628 km/h with an internal-fuel range of 980 km. In game it is a fighter armed with two 12.7 mm nose machine guns and three 20 mm MG 151/20 cannon, one in the hub and two in the wings; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Reggiane_Re.2005",
+        "url": "https://en.wikipedia.org/wiki/Reggiane_Re.2005"
+      }
+    ]
+  },
+  {
+    "name": "Re.2002",
+    "displayName": "Reggiane Re.2002 Ariete",
+    "type": "Dive Bomber",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Machine Guns (Fixed Forward, Wings)",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Bombs",
+        "value": "2 x 250kg"
+      }
+    ],
+    "description": "The Reggiane Re.2002 Ariete entered service in 1942 as the radial-engined strike development of the Re.2001 fighter, used for bombing, ground attack and anti-shipping work. Maximum speed was about 530 km/h with a range of 1,100 km. In game it is a dive bomber armed with two 12.7 mm nose guns, two 7.7 mm wing guns and two 250 kg bombs.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Reggiane_Re.2002",
+        "url": "https://en.wikipedia.org/wiki/Reggiane_Re.2002"
+      }
+    ]
+  },
+  {
+    "name": "BR.20",
+    "displayName": "Fiat BR.20 Cicogna",
+    "type": "Level Bomber",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "1 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Machine Gun (Rear)",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Bombs",
+        "value": "3 x 500kg"
+      }
+    ],
+    "description": "The Fiat BR.20 Cicogna was a twin-engined medium bomber that entered service in 1936, recognised by its glazed nose and twin tail. It flew with the Regia Aeronautica over Britain and the Balkans early in the war. Maximum speed was about 440 km/h with a range of 2,750 km. In game it is a level bomber armed with three 12.7 mm machine guns and three 500 kg bombs.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Fiat_BR.20",
+        "url": "https://en.wikipedia.org/wiki/Fiat_BR.20"
+      }
+    ]
+  },
+  {
+    "name": "Z.1007bis",
+    "displayName": "Cant Z.1007bis Alcione",
+    "type": "Level Bomber",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Machine Gun (Rear)",
+        "value": "2 x 12.7mm Breda-SAFAT, 1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Bombs",
+        "value": "4 x 500kg"
+      }
+    ],
+    "description": "The Cant Z.1007bis Alcione was a three-engined medium bomber that entered service in 1939, notable for its wooden airframe. Together with the SM.79 and BR.20 it formed Italy's medium bomber force early in the war. Maximum speed was about 458 km/h with a range of 1,795 km. In game it is a level bomber armed with one forward 7.7 mm gun, dorsal and ventral 12.7 mm guns, one waist gun and four 500 kg bombs.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - CANT_Z.1007",
+        "url": "https://en.wikipedia.org/wiki/CANT_Z.1007"
+      }
+    ]
+  },
+  {
+    "name": "SM.79bis",
+    "displayName": "Savoia-Marchetti SM.79bis Sparviero",
+    "type": "Torpedo Bomber",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "1 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Machine Gun (Rear)",
+        "value": "1 x 12.7mm Breda-SAFAT, 2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Torpedo",
+        "value": "2 x 450mm"
+      }
+    ],
+    "description": "The Savoia-Marchetti SM.79bis Sparviero developed from the three-engined medium bomber that entered service in 1936; the SM.79-III torpedo variant, also known as bis, joined anti-shipping service in late 1942 and became the backbone of Italy's torpedo bombers. Maximum speed was about 460 km/h with a range of 2,600 km. In game it is a torpedo bomber armed with 12.7 mm nose and dorsal guns, two 7.7 mm waist guns and two 450 mm torpedoes; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Savoia-Marchetti_SM.79",
+        "url": "https://en.wikipedia.org/wiki/Savoia-Marchetti_SM.79"
+      }
+    ]
+  },
+  {
+    "name": "Ro.37bis",
+    "displayName": "IMAM Ro.37bis Lince",
+    "type": "Reconnaissance Aircraft",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Machine Gun (Rear Cockpit)",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "The IMAM Ro.37bis Lince was a two-seat biplane used by Italian army aviation in the mid-1930s for battlefield reconnaissance and liaison work. Maximum speed was about 330 km/h with a range of 1,120 km. In game it is a scout armed with two forward 7.7 mm guns and one rear-cockpit gun; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - IMAM_Ro.37",
+        "url": "https://en.wikipedia.org/wiki/IMAM_Ro.37"
+      }
+    ]
+  },
+  {
+    "name": "Ro.43",
+    "displayName": "IMAM Ro.43",
+    "type": "Reconnaissance Floatplane",
+    "armaments": [
+      {
+        "label": "Machine Guns (Forward-Firing)",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "Machine Gun (Rear Cockpit)",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "The IMAM Ro.43 was a catapult-launched shipboard reconnaissance floatplane that entered Italian naval service in 1935, flown from cruisers and battleships for long-range scouting on a central main float with wingtip floats. Maximum speed was about 300 km/h with a range of 800-1,500 km. In game it is a scout armed with one forward and one rear-cockpit 7.7 mm gun; no bombs are configured.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - IMAM_Ro.43",
+        "url": "https://en.wikipedia.org/wiki/IMAM_Ro.43"
+      }
+    ]
+  }
 ]

@@ -194,5 +194,26 @@
     bulletName: "FR/BB/75/1935",
     range: 4.5,
     bulletSpeed: 30,
+  },
+  // 意大利 250kg 航空炸弹（俯冲投弹，近距）
+  {
+    name: "IT/BB/250",
+    bulletName: "IT/BB/250",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  // 意大利 500kg 航空炸弹（水平投弹，远处投放）
+  {
+    name: "IT/BB/500/LB",
+    bulletName: "IT/BB/500",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 意大利 450mm 航空鱼雷
+  {
+    name: "IT/AST/450",
+    bulletName: "IT/TB/450",
+    range: 4,
+    bulletSpeed: 35,
   }
 ]

@@ -6105,4 +6105,577 @@
       ]
     }
   },
+  // 意大利皇家空军 - 战斗机
+  {
+    // 猎鹰 CR.42
+    name: "CR.42",
+    nation: "it",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1939,
+    totalHP: 20,
+    damageReduction: 0.3,
+    maxSpeed: 441,
+    acceleration: 26,
+    rotateSpeed: 15,
+    length: 8.25,
+    width: 9.7,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.3,
+    range: 780,
+    weapon: {
+      guns: [
+        // 机首（双联 12.7mm Breda-SAFAT，同步射击）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 箭 G.50 Freccia
+    name: "G.50",
+    nation: "it",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1940,
+    totalHP: 24,
+    damageReduction: 0.3,
+    maxSpeed: 470,
+    acceleration: 28,
+    rotateSpeed: 15,
+    length: 8.01,
+    width: 10.99,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.4,
+    range: 445,
+    weapon: {
+      guns: [
+        // 机首（双联 12.7mm Breda-SAFAT，同步射击）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 闪电 C.200 Saetta
+    name: "C.200",
+    nation: "it",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1939,
+    totalHP: 26,
+    damageReduction: 0.35,
+    maxSpeed: 504,
+    acceleration: 30,
+    rotateSpeed: 15,
+    length: 8.25,
+    width: 10.58,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.4,
+    range: 570,
+    weapon: {
+      guns: [
+        // 机首（双联 12.7mm Breda-SAFAT，同步射击）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 闪电 C.202 Folgore
+    name: "C.202",
+    nation: "it",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1941,
+    totalHP: 32,
+    damageReduction: 0.4,
+    maxSpeed: 600,
+    acceleration: 33,
+    rotateSpeed: 14,
+    length: 8.85,
+    width: 10.58,
+    fundsCost: 5,
+    timeCost: 4,
+    tonnage: 2.93,
+    range: 765,
+    weapon: {
+      guns: [
+        // 机首（双联 12.7mm Breda-SAFAT，同步射击）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（每翼 1 挺 7.7mm，前缘）
+        {
+          name: "IT/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 人马座 Re.2005 Sagittario
+    name: "Re.2005",
+    nation: "it",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1943,
+    totalHP: 36,
+    damageReduction: 0.45,
+    maxSpeed: 628,
+    acceleration: 35,
+    rotateSpeed: 13,
+    length: 8.73,
+    width: 11,
+    fundsCost: 7,
+    timeCost: 4,
+    tonnage: 3.61,
+    range: 980,
+    weapon: {
+      guns: [
+        // 机首（双联 12.7mm Breda-SAFAT，同步射击）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 桨毂（20mm MG 151/20，德制授权生产）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（每翼 1 门 20mm MG 151/20）
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "GER/AIR/20/MG151",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  // 意大利皇家空军 - 俯冲轰炸机
+  {
+    // 公羊 Re.2002 Ariete
+    name: "Re.2002",
+    nation: "it",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    year: 1942,
+    totalHP: 40,
+    damageReduction: 0.45,
+    maxSpeed: 530,
+    acceleration: 24,
+    rotateSpeed: 7,
+    length: 8.16,
+    width: 11,
+    fundsCost: 12,
+    timeCost: 6,
+    tonnage: 3.24,
+    range: 1100,
+    weapon: {
+      guns: [
+        // 机首（双联 12.7mm Breda-SAFAT，同步射击）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（每翼 1 挺 7.7mm，前缘）
+        {
+          name: "IT/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      bombs: [
+        // 翼下 2×250kg（合计 500kg，近似历史 650kg 挂载）
+        {
+          name: "IT/BB/250",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/BB/250",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  // 意大利皇家空军 - 水平轰炸机
+  {
+    // 鹳 BR.20 Cicogna
+    name: "BR.20",
+    nation: "it",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1936,
+    totalHP: 30,
+    damageReduction: 0.4,
+    maxSpeed: 440,
+    acceleration: 16,
+    rotateSpeed: 5,
+    length: 16.68,
+    width: 21.56,
+    fundsCost: 14,
+    timeCost: 7,
+    tonnage: 10.1,
+    range: 2750,
+    weapon: {
+      guns: [
+        // 机首（12.7mm，前射）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 背部（12.7mm，后射）
+        {
+          name: "IT/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腹部（12.7mm，后射）
+        {
+          name: "IT/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        // 弹舱 3×500kg（水平投弹）
+        {
+          name: "IT/BB/500/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/BB/500/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/BB/500/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 翠鸟 Z.1007bis Alcione
+    name: "Z.1007bis",
+    nation: "it",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1939,
+    totalHP: 44,
+    damageReduction: 0.45,
+    maxSpeed: 458,
+    acceleration: 17,
+    rotateSpeed: 5,
+    length: 18.35,
+    width: 24.8,
+    fundsCost: 21,
+    timeCost: 9,
+    tonnage: 13.62,
+    range: 1795,
+    weapon: {
+      guns: [
+        // 机首（7.7mm，前射）
+        {
+          name: "IT/7.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 背部（12.7mm，后射）
+        {
+          name: "IT/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腹部（12.7mm，后射）
+        {
+          name: "IT/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腰部（7.7mm，后射）
+        {
+          name: "IT/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        // 内部弹舱 4×500kg（水平投弹）
+        {
+          name: "IT/BB/500/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/BB/500/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/BB/500/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/BB/500/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  // 意大利皇家空军 - 鱼雷轰炸机
+  {
+    // 食雀鹰 SM.79bis Sparviero
+    name: "SM.79bis",
+    nation: "it",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1942,
+    totalHP: 48,
+    damageReduction: 0.5,
+    maxSpeed: 460,
+    acceleration: 20,
+    rotateSpeed: 6,
+    length: 16.2,
+    width: 20.2,
+    fundsCost: 21,
+    timeCost: 9,
+    tonnage: 10.05,
+    range: 2600,
+    weapon: {
+      guns: [
+        // 机首（12.7mm，前射）
+        {
+          name: "IT/12.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 背部（12.7mm，后射）
+        {
+          name: "IT/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 腰部（每侧 1 挺 7.7mm，后射）
+        {
+          name: "IT/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        {
+          name: "IT/7.7",
+          posPercent: 0.5,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        // 翼下双硬点 450mm 鱼雷 ×2（左右各一）
+        {
+          name: "IT/AST/450",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/AST/450",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  // 意大利皇家空军 - 侦察机
+  {
+    // 山猫 Ro.37bis Lince
+    name: "Ro.37bis",
+    nation: "it",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1935,
+    totalHP: 22,
+    damageReduction: 0.3,
+    maxSpeed: 330,
+    acceleration: 12,
+    rotateSpeed: 7,
+    length: 8.57,
+    width: 11.08,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.42,
+    range: 1120,
+    weapon: {
+      guns: [
+        // 机首（2 挺 7.7mm 固定前射）
+        {
+          name: "IT/7.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "IT/7.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（1 挺 7.7mm，活动枪架）
+        {
+          name: "IT/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // Ro.43 舰载侦察机（弹射起飞）
+    name: "Ro.43",
+    nation: "it",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1935,
+    totalHP: 26,
+    damageReduction: 0.3,
+    maxSpeed: 300,
+    acceleration: 12,
+    rotateSpeed: 6,
+    length: 9.71,
+    width: 11.57,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 2.4,
+    range: 1000,
+    weapon: {
+      guns: [
+        // 机首下（1 挺 7.7mm 固定前射）
+        {
+          name: "IT/7.7",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（1 挺 7.7mm，活动枪架）
+        {
+          name: "IT/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
 ]

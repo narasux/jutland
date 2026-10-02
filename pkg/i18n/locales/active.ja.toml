@@ -102,6 +102,8 @@ other = "フランス"
 other = "イギリス"
 [NationSovietUnion]
 other = "ソビエト連邦"
+[NationItaly]
+other = "イタリア"
 [NationSpecial]
 other = "特殊"
 [ShipTypeDefault]

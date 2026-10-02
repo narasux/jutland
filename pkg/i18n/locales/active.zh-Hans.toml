@@ -102,6 +102,8 @@ other = "法国"
 other = "英国"
 [NationSovietUnion]
 other = "苏联"
+[NationItaly]
+other = "意大利"
 [NationSpecial]
 other = "特殊"
 [ShipTypeDefault]

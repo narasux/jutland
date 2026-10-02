@@ -102,6 +102,8 @@ other = "France"
 other = "United Kingdom"
 [NationSovietUnion]
 other = "Soviet Union"
+[NationItaly]
+other = "Italy"
 [NationSpecial]
 other = "Special"
 [ShipTypeDefault]

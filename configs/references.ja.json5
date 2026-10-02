@@ -11686,4 +11686,279 @@
       },
     ],
   },
+  {
+    name: "IT/7.7",
+    displayName: "7.7mm Breda-SAFAT 航空機銃",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/12.7",
+    displayName: "12.7mm Breda-SAFAT 航空機銃",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    "name": "CR.42",
+    "displayName": "フィアット CR.42 ファルコ",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "フィアット CR.42 ファルコは1939年にイタリア空軍就役した単座複葉戦闘機で、鋼管ファブリック構造を採用し、開戦時のイタリア空軍の主力機だった。最大速度は約441 km/h、航程780 km、全長8.25 m、翼幅9.7 m。本作では戦闘機として扱い、機首に12.7mmブレダ-SAFAT機関銃を2挺装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - フィアット_CR.42",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%82%A2%E3%83%83%E3%83%88_CR.42"
+      }
+    ]
+  },
+  {
+    "name": "G.50",
+    "displayName": "フィアット G.50 フレッキア",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "フィアット G.50 フレッキアは1940年に就役した単座単葉戦闘機で、星型エンジンを搭載したイタリア初期の近代的な下翼戦闘機の一つ。最大速度は約470 km/h、航程445 km、全長8.01 m、翼幅10.99 m。本作では戦闘機として扱い、機首に12.7mmブレダ-SAFAT機関銃を2挺装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - フィアット_G.50",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%82%A2%E3%83%83%E3%83%88_G.50"
+      }
+    ]
+  },
+  {
+    "name": "C.200",
+    "displayName": "マッキ C.200 サエッタ",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "マッキ C.200 サエッタは1939年に就役した単座単葉戦闘機。星型エンジンと頑丈な機体で操縦性に定評があり、開戦初期のイタリア空軍を支えた。最大速度は約504 km/h、航程570 km、全長8.25 m、翼幅10.58 m。本作では戦闘機として扱い、機首に12.7mmブレダ-SAFAT機関銃を2挺装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - マッキ_C.200",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%83%E3%82%AD_C.200"
+      }
+    ]
+  },
+  {
+    "name": "C.202",
+    "displayName": "マッキ C.202 フォルゴレ",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機関銃（主翼固定）",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "マッキ C.202 フォルゴレはC.200の液冷機版で、1941年にアルファ・ロメオ製DB 601エンジンを搭載して就役した。大幅に高速化し、1942〜43年のイタリア空軍の主力となった。最大速度は約600 km/h、航程765 km、全長8.85 m、翼幅10.58 m。本作では戦闘機として扱い、機首に12.7mm機関銃2挺、主翼に7.7mm機関銃2挺を装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - マッキ_C.202",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%83%E3%82%AD_C.202"
+      }
+    ]
+  },
+  {
+    "name": "Re.2005",
+    "displayName": "Re.2005 サジッタリオ",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機関砲（翼・ハブ）",
+        "value": "3 x 20mm MG 151/20"
+      }
+    ],
+    "description": "レギア Re.2005 サジッタリオは1943年に就役した戦闘機で、フィアット製DB 605エンジンを搭載。イタリアのレシプロ戦闘機として最優秀級の性能を持つ。最大速度は約628 km/h、航程（内蔵燃料）980 km、全長8.73 m、翼幅11.0 m。本作では戦闘機として扱い、機首に12.7mm機関銃2挺、プロペラハブに20mm MG 151/20を1門、主翼に同2門を装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - Re.2005",
+        "url": "https://ja.wikipedia.org/wiki/Re.2005"
+      }
+    ]
+  },
+  {
+    "name": "Re.2002",
+    "displayName": "Re.2002 アリエテ",
+    "type": "急降下爆撃機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機関銃（主翼固定）",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "爆弾",
+        "value": "2 x 250kg"
+      }
+    ],
+    "description": "レギア Re.2002 アリエテは1942年に就役した攻撃機で、Re.2001戦闘機に星型エンジンを積んだ対地打撃型。爆撃・対地攻撃・対艦任務に投入された。最大速度は約530 km/h、航程1,100 km、全長8.16 m、翼幅11.0 m。本作では急降下爆撃機として扱い、機首に12.7mm機関銃2挺、主翼に7.7mm機関銃2挺、250kg爆弾2発を装備する。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - Reggiane_Re.2002",
+        "url": "https://en.wikipedia.org/wiki/Reggiane_Re.2002"
+      }
+    ]
+  },
+  {
+    "name": "BR.20",
+    "displayName": "フィアット BR.20 シコーニャ",
+    "type": "水平爆撃機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "1 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "2 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "爆弾",
+        "value": "3 x 500kg"
+      }
+    ],
+    "description": "フィアット BR.20 シコーニャは1936年に就役した双発中爆撃機で、ガラス張りの機首と双垂直尾翼が特徴。開戦直後に英国およびバルカン方面で使用された。最大速度は約440 km/h、航程2,750 km、全長16.68 m、翼幅21.56 m。本作では水平爆撃機として扱い、12.7mm機関銃3挺と500kg爆弾3発を装備する。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - フィアット_BR.20",
+        "url": "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%82%A2%E3%83%83%E3%83%88_BR.20"
+      }
+    ]
+  },
+  {
+    "name": "Z.1007bis",
+    "displayName": "CANT Z.1007bis アルチオーネ",
+    "type": "水平爆撃機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "2 x 12.7mm Breda-SAFAT, 1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "爆弾",
+        "value": "4 x 500kg"
+      }
+    ],
+    "description": "CANT Z.1007bis アルチオーネは1939年に就役した三発中爆撃機で、木製機体が特徴。SM.79、BR.20と並ぶ開戦初期のイタリアの中爆撃機である。最大速度は約458 km/h、航程1,795 km、全長18.35 m、翼幅24.8 m。本作では水平爆撃機として扱い、機首に7.7mm機関銃、背・腹に12.7mm機関銃、腰部に7.7mm機関銃、500kg爆弾4発を装備する。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - CANT_Z.1007",
+        "url": "https://ja.wikipedia.org/wiki/CANT_Z.1007"
+      }
+    ]
+  },
+  {
+    "name": "SM.79bis",
+    "displayName": "サヴォイア・マルケッティ SM.79bis スパルヴィエロ",
+    "type": "魚雷攻撃機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "1 x 12.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機銃（後方）",
+        "value": "1 x 12.7mm Breda-SAFAT, 2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "魚雷",
+        "value": "2 x 450mm"
+      }
+    ],
+    "description": "サヴォイア・マルケッティ SM.79bis スパルヴィエロは1936年就役の三発中爆撃機の派生型で、SM.79-III魚雷型（bisと同義）が1942年末に対艦攻撃に投入され、イタリアの魚雷攻撃機の主力となった。最大速度は約460 km/h、航程2,600 km、全長16.2 m、翼幅20.2 m。本作では魚雷攻撃機として扱い、機首・背部に12.7mm機関銃、腰部に7.7mm機関銃2挺、450mm魚雷2発を装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - SM.79",
+        "url": "https://ja.wikipedia.org/wiki/SM.79"
+      }
+    ]
+  },
+  {
+    "name": "Ro.37bis",
+    "displayName": "IMAM Ro.37bis リンス",
+    "type": "偵察機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "2 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機関銃（後席）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "IMAM Ro.37bis リンスは1930年代半ばのイタリア陸軍航空が使用した複座複葉偵察機で、戦場偵察と連絡任務にあたった。最大速度は約330 km/h、航程1,120 km、全長8.57 m、翼幅11.08 m。本作では偵察機として扱い、機首に7.7mm機関銃2挺、後席に1挺を装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - IMAM_Ro.37",
+        "url": "https://en.wikipedia.org/wiki/IMAM_Ro.37"
+      }
+    ]
+  },
+  {
+    "name": "Ro.43",
+    "displayName": "IMAM Ro.43",
+    "type": "水上偵察機",
+    "armaments": [
+      {
+        "label": "機関銃（前方）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      },
+      {
+        "label": "機関銃（後席）",
+        "value": "1 x 7.7mm Breda-SAFAT"
+      }
+    ],
+    "description": "IMAM Ro.43は1935年にイタリア海軍就役した艦載カタパルト式水上偵察機で、巡洋艦・戦艦から発射されて遠距離偵察に従事した。中央フロートと翼端フロートを備える。最大速度は約300 km/h、航程800〜1,500 km、全長9.71 m、翼幅11.57 m。本作では水上偵察機として扱い、機首と後席に7.7mm機関銃を各1挺装備する。爆弾は未搭載のため図鑑には記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア - IMAM_Ro.43",
+        "url": "https://en.wikipedia.org/wiki/IMAM_Ro.43"
+      }
+    ]
+  }
 ]

@@ -2906,5 +2906,31 @@
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true
+  },
+  // 意大利皇家空军 7.7mm Breda-SAFAT 航空机枪
+  {
+    name: "IT/7.7",
+    bulletName: "IT/GB/7.7",
+    bulletCount: 1,
+    reloadTime: 0.04,
+    range: 1.6,
+    bulletSpread: 15,
+    bulletSpeed: 750,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利皇家空军 12.7mm Breda-SAFAT 航空机枪
+  {
+    name: "IT/12.7",
+    bulletName: "IT/GB/12.7",
+    bulletCount: 1,
+    reloadTime: 0.05,
+    range: 2.5,
+    bulletSpread: 15,
+    bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
   }
 ]
