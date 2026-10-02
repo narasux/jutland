@@ -8431,6 +8431,22 @@
         value: "12x1 152mm/45",
       },
       {
+        label: "両用砲",
+        value: "4x2 102mm/45",
+      },
+      {
+        label: "対空砲",
+        value: "4x8 40mm/39",
+      },
+      {
+        label: "対空砲",
+        value: "3x4 20mm/70",
+      },
+      {
+        label: "対空機銃",
+        value: "6x4 12.7mm",
+      },
+      {
         label: "魚雷",
         value: "4x1 533mm",
       },
@@ -9899,6 +9915,22 @@
       {
         label: "副砲",
         value: "8x1 152mm/45",
+      },
+      {
+        label: "両用砲",
+        value: "4x2 102mm/45",
+      },
+      {
+        label: "対空砲",
+        value: "4x8 40mm/39",
+      },
+      {
+        label: "対空砲",
+        value: "2x2 20mm/70",
+      },
+      {
+        label: "対空砲",
+        value: "10x1 20mm/70",
       },
       {
         label: "魚雷",

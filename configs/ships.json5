@@ -25044,14 +25044,14 @@
     rotateSpeed: 0.7,
     length: 197,
     width: 28,
-    fundsCost: 405,
-    timeCost: 93,
+    fundsCost: 435,
+    timeCost: 97,
     weapon: {
       mainGuns: [
         // 前主炮 A
         {
           name: "UK/381/42/2",
-          posPercent: 0.55,
+          posPercent: 0.54,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
@@ -25062,77 +25062,199 @@
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
-        // 后主炮 C
+        // 后主炮 X
         {
           name: "UK/381/42/2",
-          posPercent: -0.45,
+          posPercent: -0.47,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
-        // 后主炮 D
+        // 后主炮 Y
         {
           name: "UK/381/42/2",
-          posPercent: -0.6,
+          posPercent: -0.62,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         }
       ],
       secondaryGuns: [
-        // 右前副炮 A
+        // 152mm 炮廓炮：右舷 4 座，由前向后
         {
           name: "UK/152/45",
-          posPercent: 0.3,
+          posPercent: 0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷 4 座，由前向后
+        {
+          name: "UK/152/45",
+          posPercent: 0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.19,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.19,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 双联 102mm 高平炮：右前、左前
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后、左后
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 八联装 2 磅砰砰炮：右舷前、后各 1 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 225]
+        },
+        // 左舷前、后各 1 座
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.05,
+          rightFiringArc: [135, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: -0.02,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 双联：右、左
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.17,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装
+        {
+          name: "UK/20/70",
+          posPercent: 0.37,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [225, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.37,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.28,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [330, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.28,
+          rightFiringArc: [0, 30],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.2,
           rightFiringArc: [0, 150],
           leftFiringArc: [360, 360]
         },
-        // 左前副炮 A
         {
-          name: "UK/152/45",
-          posPercent: 0.3,
+          name: "UK/20/70",
+          posPercent: 0.2,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 360]
         },
-        // 右前副炮 B
         {
-          name: "UK/152/45",
-          posPercent: 0.22,
-          rightFiringArc: [0, 150],
+          name: "UK/20/70",
+          posPercent: -0.45,
+          rightFiringArc: [30, 180],
           leftFiringArc: [360, 360]
         },
-        // 左前副炮 B
         {
-          name: "UK/152/45",
-          posPercent: 0.22,
+          name: "UK/20/70",
+          posPercent: -0.45,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [180, 340]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: -0.45,
           rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
+          leftFiringArc: [180, 330]
         },
-        // 右前副炮 C
         {
-          name: "UK/152/45",
-          posPercent: 0.16,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
-        },
-        // 左前副炮 C
-        {
-          name: "UK/152/45",
-          posPercent: 0.16,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
-        },
-        // 右前副炮 D
-        {
-          name: "UK/152/45",
-          posPercent: 0.1,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
-        },
-        // 左前副炮 D
-        {
-          name: "UK/152/45",
-          posPercent: 0.1,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
+          name: "UK/20/70",
+          posPercent: -0.45,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 350]
         },
       ],
       torpedoes: [
@@ -25182,14 +25304,14 @@
     rotateSpeed: 0.8,
     length: 215,
     width: 28,
-    fundsCost: 375,
-    timeCost: 89,
+    fundsCost: 415,
+    timeCost: 94,
     weapon: {
       mainGuns: [
         // 前主炮 A
         {
           name: "UK/343/45/2",
-          posPercent: 0.54,
+          posPercent: 0.53,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
@@ -25200,106 +25322,204 @@
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
-        // 后主炮 C
+        // 后主炮 Q
         {
           name: "UK/343/45/2",
+          posPercent: -0.21,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 X
+        {
+          name: "UK/343/45/2",
+          posPercent: -0.62,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [
+        // 152mm 炮廓炮：右舷前部 2 座、左舷前部 2 座
+        {
+          name: "UK/152/45",
+          posPercent: 0.21,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.21,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        // 右舷、左舷
+        {
+          name: "UK/152/45",
+          posPercent: 0.13,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: -0.31,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/152/45",
+          posPercent: -0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        },
+        // 双联 102mm 高平炮：右、左
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/102/45/2/DP",
+          posPercent: 0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 八联装 2 磅砰砰炮：右、左
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 270]
+        },
+        {
+          name: "UK/40/39/8",
+          posPercent: 0.02,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 四联：右、左、中
+        {
+          name: "UK/20/70/4",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "UK/20/70/4",
+          posPercent: 0.2,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "UK/20/70/4",
+          posPercent: -0.12,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        // .5 英寸四联高射机枪：炮塔顶 B、Q、X
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.39,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [225, 360]
+        },
+        {
+          name: "UK/12.7/4",
+          posPercent: 0.39,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "UK/12.7/4",
           posPercent: -0.2,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
-        // 后主炮 D
         {
-          name: "UK/343/45/2",
-          posPercent: -0.6,
+          name: "UK/12.7/4",
+          posPercent: -0.2,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
-        }
-      ],
-      secondaryGuns: [
-        // 右前副炮 A
-        {
-          name: "UK/152/45",
-          posPercent: 0.3,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
         },
-        // 左前副炮 A
         {
-          name: "UK/152/45",
-          posPercent: 0.3,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
+          name: "UK/12.7/4",
+          posPercent: -0.61,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [180, 350]
         },
-        // 右前副炮 B
         {
-          name: "UK/152/45",
-          posPercent: 0.22,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
+          name: "UK/12.7/4",
+          posPercent: -0.61,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [180, 350]
         },
-        // 左前副炮 B
-        {
-          name: "UK/152/45",
-          posPercent: 0.22,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
-        },
-        // 右前副炮 C
-        {
-          name: "UK/152/45",
-          posPercent: 0.15,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
-        },
-        // 左前副炮 C
-        {
-          name: "UK/152/45",
-          posPercent: 0.15,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
-        },
-        // 右前副炮 D
-        {
-          name: "UK/152/45",
-          posPercent: 0.05,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
-        },
-        // 左前副炮 D
-        {
-          name: "UK/152/45",
-          posPercent: 0.05,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
-        },
-        // 右前副炮 E
-        {
-          name: "UK/152/45",
-          posPercent: -0.05,
-          rightFiringArc: [0, 150],
-          leftFiringArc: [360, 360]
-        },
-        // 左前副炮 E
-        {
-          name: "UK/152/45",
-          posPercent: -0.05,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
-        },
-        // 右前副炮 F
-        {
-          name: "UK/152/45",
-          posPercent: -0.3,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [360, 360]
-        },
-        // 左前副炮 F
-        {
-          name: "UK/152/45",
-          posPercent: -0.3,
-          rightFiringArc: [0, 0],
-          leftFiringArc: [180, 330]
-        }
       ],
       torpedoes: [
         // 右舷鱼雷 A
