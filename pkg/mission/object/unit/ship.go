@@ -602,16 +602,18 @@ func (s *BattleShip) CanOnLand() bool {
 	return s.TypeAbbr == "WaterDrop"
 }
 
-// MoveTo 移动到指定位置
-func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, nearGoal bool) (arrive bool) {
+// MoveTo 移动到指定位置。
+// arrive 表示已到达目标附近；blocked 表示下一步会踏进海岸/陆地格被拦停，
+// 需要上层从当前位置重新规划，调用方不应把 blocked 当作到达处理。
+func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, nearGoal bool) (arrive, blocked bool) {
 	// 如果生命值为 0，肯定是走不动，直接返回
 	if s.CurHP <= 0 {
-		return true
+		return true, false
 	}
 	// 差不多到目标位置即可，不要强求准确，否则需要微调，视觉效果不佳
 	if s.CurPos.Near(targetPos, 0.6) {
 		s.CurSpeed = 0
-		return true
+		return true, false
 	}
 
 	// 应用全局速度倍率
@@ -650,15 +652,19 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	nextPos.SubRy(math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed)
 	// 防止出边界
 	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
-	// 特殊船舶是可以在陆地上的（飞起来的那些）
-	if nearGoal && mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) && !s.CanOnLand() {
+	// 普通舰船撞岸即停：中心点还在水里时，不允许下一步踏进海岸/陆地格，
+	// 否则寻路只认中心点，一旦压进海岸格就再也寻不出路（搁浅锁死）。
+	// 中心点已经落在陆格上的搁浅舰，则放行一切位移，靠吸附寻路退回水中。
+	// 特殊船舶（飞起来的那些）不受限制。
+	if !s.CanOnLand() && !mapCfg.Map.IsLand(s.CurPos.MX, s.CurPos.MY) &&
+		mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) {
 		s.CurSpeed = 0
-		return true
+		return false, true
 	}
 	// 移动到新位置
 	s.CurPos = nextPos
 
-	return false
+	return false, false
 }
 
 // ShipMap 保存按配置名称索引的舰船模板。

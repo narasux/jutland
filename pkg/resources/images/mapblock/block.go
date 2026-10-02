@@ -7,6 +7,7 @@ import (
 	"image"
 	"log"
 	"os"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/pkg/errors"
@@ -282,10 +283,23 @@ func (c *sceneBlockCache) HasMissingAround(minX, minY, width, height int, zoom i
 	return false
 }
 
-// ResetPrewarmQueue 清空待预热队列，用于缩放变更后丢弃旧优先级任务。
-func (c *sceneBlockCache) ResetPrewarmQueue() {
-	c.prewarmJobs = nil
-	c.prewarmQueued = map[uint64]bool{}
+// ResetPrewarmQueue 丢弃待预热队列里不属于 keepZooms 的任务。
+// 缩放变更后旧档位的排队任务已无意义；但相邻档预热排进来的当前档位任务
+// 是现成成果，全部清空会让"首次缩放"总是从冷缓存开始。
+func (c *sceneBlockCache) ResetPrewarmQueue(keepZooms ...int) {
+	keep := make(map[int]bool, len(keepZooms))
+	for _, zoom := range keepZooms {
+		keep[normalizeZoom(zoom)] = true
+	}
+	kept := c.prewarmJobs[:0]
+	for _, job := range c.prewarmJobs {
+		if keep[job.zoom] {
+			kept = append(kept, job)
+			continue
+		}
+		delete(c.prewarmQueued, queueKey(job.x, job.y, job.zoom))
+	}
+	c.prewarmJobs = kept
 }
 
 // PrewarmQueueLen 返回还没生成缩放缓存的任务数。
@@ -306,8 +320,10 @@ func (c *sceneBlockCache) PutBaseBlock(x, y int, img *ebiten.Image) {
 	c.data[cellKey(x, y)] = img
 }
 
-// StepPrewarm 按预算生成场景地图块缩放缓存，避免在单帧集中创建过多图片。
-func (c *sceneBlockCache) StepPrewarm(budget int) int {
+// StepPrewarm 按预算张数和时间片生成场景地图块缩放缓存，避免在单帧集中创建过多图片。
+// 时间片兜底纹理创建变慢的场景（如显存压力较大时），不让单帧开销失控。
+func (c *sceneBlockCache) StepPrewarm(budget int, timeSlice time.Duration) int {
+	deadline := time.Now().Add(timeSlice)
 	processed := 0
 	for budget > 0 && len(c.prewarmJobs) > 0 {
 		job := c.prewarmJobs[0]
@@ -330,6 +346,9 @@ func (c *sceneBlockCache) StepPrewarm(budget int) int {
 		zoomMap[cell] = genZoomBlock(baseImg, job.zoom)
 		budget--
 		processed++
+		if time.Now().After(deadline) {
+			break
+		}
 	}
 	return processed
 }
@@ -440,6 +459,34 @@ func GetDrawBlocksByCharAndPosZoom(c rune, x, y int, zoom int) []DrawBlock {
 	}
 
 	return nil
+}
+
+// ForDrawBlocksByCharAndPosZoom 遍历指定格要绘制的地图块层。
+// 回调式接口让绘制方免掉每帧每格的切片分配，主战场热路径用它。
+func ForDrawBlocksByCharAndPosZoom(
+	c rune, x, y int, zoom int, draw func(img *ebiten.Image, scale float64),
+) {
+	zoom = normalizeZoom(zoom)
+
+	switch c {
+	case mapcfg.ChrSea:
+		draw(seaDrawImage(x, y, zoom), 1)
+	case mapcfg.ChrDeepSea:
+		draw(deepSeaDrawImage(x, y, zoom), 1)
+	case mapcfg.ChrLand:
+		forDrawBlock(SceneBlockCache.GetZoomDrawBlock(x, y, zoom), draw)
+	case mapcfg.ChrShallow:
+		fallthrough
+	case mapcfg.ChrCoast:
+		draw(seaDrawImage(x, y, zoom), 1)
+		forDrawBlock(SceneBlockCache.GetZoomDrawBlock(x, y, zoom), draw)
+	}
+}
+
+func forDrawBlock(b DrawBlock, draw func(img *ebiten.Image, scale float64)) {
+	if b.Image != nil {
+		draw(b.Image, b.Scale)
+	}
 }
 
 // genZoomBlockMap 为一组地图块生成所有支持缩放档位的缓存。

@@ -182,7 +182,10 @@ func (i *ShipMove) Exec(s *state.MissionState) error {
 		return nil
 	}
 
-	if ship.MoveTo(s.Core.MissionMD.MapCfg, i.targetPos, true) {
+	// 直线移动指令（方向键/散开/可上陆的特殊船）没有重寻路的概念：
+	// 到达即完成；被地形拦停也视为完成，避免指令永久滞留。
+	arrive, blocked := ship.MoveTo(s.Core.MissionMD.MapCfg, i.targetPos, true)
+	if arrive || blocked {
 		i.status = Executed
 	}
 	return nil
@@ -203,6 +206,13 @@ func (i *ShipMove) String() string {
 	return fmt.Sprintf("Ship %s move to %s", i.shipUid, i.targetPos.String())
 }
 
+// 撞岸受阻后的重新规划节奏：每 blockedRepathInterval 拍重寻一次，
+// 连续 blockedRepathMaxTries 次仍然受阻就放弃本次机动。
+const (
+	blockedRepathInterval = 20
+	blockedRepathMaxTries = 3
+)
+
 // ShipMovePath 按照指定路径移动
 type ShipMovePath struct {
 	shipUid   string
@@ -214,6 +224,9 @@ type ShipMovePath struct {
 	// 创建指令时战舰的当前速度，用于路径就绪后恢复速度
 	initSpeed float64
 	result    chan []grid.Point
+	// 撞岸受阻计数（拍）与已重试次数，用于限频重寻路和最终放弃
+	blockedTicks int
+	repathTries  int
 }
 
 // NewShipMovePath ...
@@ -296,14 +309,45 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 		i.curIdx = bestIdx
 	}
 
-	if ship.MoveTo(
+	arrive, blocked := ship.MoveTo(
 		s.Core.MissionMD.MapCfg,
 		i.path[i.curIdx],
 		i.curIdx == len(i.path)-1,
-	) {
+	)
+	if blocked {
+		i.blockedTicks++
+		// 撞岸被地形拦停：不推进航点，限频地按当前位置重新规划；
+		// 反复受阻则放弃本次机动。
+		if i.blockedTicks >= blockedRepathInterval {
+			i.blockedTicks = 0
+			i.repathTries++
+			if i.repathTries > blockedRepathMaxTries {
+				ship.CurSpeed = 0
+				i.status = Executed
+				return nil
+			}
+			i.repathFrom(s, ship.CurPos)
+		}
+		return nil
+	}
+	if arrive {
 		i.curIdx++
 	}
 	return nil
+}
+
+// repathFrom 撞岸恢复：以战舰当前位置为起点重新提交寻路。
+// 起点吸附（GenPath.snapToSea）保证中心点已压进海岸格的搁浅舰也能退出。
+func (i *ShipMovePath) repathFrom(s *state.MissionState, curPos objPos.MapPos) {
+	i.curPos = curPos
+	i.status = Preparing
+	i.result = make(chan []grid.Point, 1)
+	pathSearches.submit(pathSearchJob{
+		grid:  s.Core.MissionMD.MapCfg.PreparedGrid(),
+		start: grid.Point{curPos.MX, curPos.MY},
+		goal:  grid.Point{i.targetPos.MX, i.targetPos.MY},
+		reply: i.result,
+	})
 }
 
 // consumePathResult 在主线程取回已经算完的航线。
@@ -328,6 +372,13 @@ func (i *ShipMovePath) genPath(misState *state.MissionState) {
 }
 
 func (i *ShipMovePath) applyPoints(points []grid.Point) {
+	// 起点与终点在同一格（或吸附到同一格）：直接对精确目标点做最后一段直线逼近。
+	if len(points) == 1 {
+		i.path = []objPos.MapPos{i.targetPos}
+		i.curIdx = 0
+		i.status = Ready
+		return
+	}
 	// 寻路失败，标记为 Executing 让主线程的 Exec 处理速度重置
 	// 不能直接标记 Executed，否则会被 RemoveExecuted 在 Exec 之前清除，导致速度无法重置
 	if len(points) < 2 {
@@ -336,11 +387,16 @@ func (i *ShipMovePath) applyPoints(points []grid.Point) {
 	}
 	// 寻路期间战舰会继续向新目标转向、移动；命令下达时的位置已经在身后，
 	// 不能再作为航点，否则大地图寻路较慢时战舰会折返并在近距离原地掉头。
+	// 中间航点取路径格中心而不是格角：舰体从偏离折线的位置"追赶"航点时，
+	// 同格内的直线段不会踏进相邻的海岸/陆地格（格角航点会切角）。
 	i.path = make([]objPos.MapPos, 0, len(points)-1)
 	for _, p := range points[1 : len(points)-1] {
-		i.path = append(i.path, objPos.New(p.X, p.Y))
+		i.path = append(i.path, objPos.NewR(float64(p.X)+0.5, float64(p.Y)+0.5))
 	}
 	i.path = append(i.path, i.targetPos)
+	// 重寻路（撞岸恢复）会套用新路径，航点游标必须归零；
+	// 首次套用的"跳过已经过的点"由 Exec 的 initSpeed 首帧逻辑负责。
+	i.curIdx = 0
 
 	i.status = Ready
 }

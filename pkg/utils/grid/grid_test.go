@@ -2,6 +2,51 @@ package grid
 
 import "testing"
 
+// 对角移动要求两个正交邻格均可通行：贴着墙角不允许斜穿。
+func TestDiagonalNeighborsRequireBothOrthogonalOpen(t *testing.T) {
+	cells := make(Cells, 3)
+	for y := range cells {
+		cells[y] = make([]int, 3)
+	}
+	// 布局（上下正中是墙）：
+	// . W .
+	// . . .
+	// . W .
+	cells[0][1] = W
+	cells[2][1] = W
+	g := NewGrid(cells)
+
+	nbrs := g.getNeighbors(Point{X: 1, Y: 1})
+	// 只剩左右两个直行邻居，四个对角全被正交墙挡住
+	want := []Point{{X: 0, Y: 1}, {X: 2, Y: 1}}
+	if len(nbrs) != len(want) {
+		t.Fatalf("neighbors = %v, want %v", nbrs, want)
+	}
+	for i := range want {
+		if nbrs[i] != want[i] {
+			t.Fatalf("neighbors = %v, want %v", nbrs, want)
+		}
+	}
+}
+
+// 线段校验与 MapPos 的 floor 取整一致：正好擦着墙格角点经过也算受阻。
+func TestSegmentBlockedDetectsCornerGrazing(t *testing.T) {
+	cells := make(Cells, 3)
+	for y := range cells {
+		cells[y] = make([]int, 4)
+	}
+	// 对角线段 (3,2)→(1,0) 恰好经过 (2,1) 的角点
+	cells[1][2] = W
+	g := NewGrid(cells)
+
+	if !g.segmentBlocked(Point{X: 3, Y: 2}, Point{X: 1, Y: 0}) {
+		t.Fatal("擦过墙格角点的线段应当被判定为受阻")
+	}
+	if g.segmentBlocked(Point{X: 3, Y: 2}, Point{X: 3, Y: 0}) {
+		t.Fatal("完全在开阔区的线段不应被判为受阻")
+	}
+}
+
 func TestSearchLeavesShallowCellsUntouched(t *testing.T) {
 	cells := make(Cells, 5)
 	for y := range cells {

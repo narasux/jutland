@@ -173,6 +173,7 @@ func (s *MissionState) UsesFog(player faction.Player) bool {
 }
 
 // allocateVisions 只在本局开启迷雾时为双方建图。关闭时保持 nil，热路径不再扫描。
+// 只有当前玩家的视野要生成迷雾蒙层（RendersShade），电脑侧只算逻辑格。
 func (s *MissionState) allocateVisions(width, height int) {
 	if !s.Core.FogOfWar || width <= 0 || height <= 0 {
 		return
@@ -180,6 +181,10 @@ func (s *MissionState) allocateVisions(width, height int) {
 	s.Player.Visions = map[faction.Player]*FactionVision{
 		faction.HumanAlpha:    NewFactionVision(width, height),
 		faction.ComputerAlpha: NewFactionVision(width, height),
+	}
+	// 只有当前玩家的蒙层会被绘制；电脑侧跳过 Light/ExploredLight/蒙层的每拍开销。
+	for player, vision := range s.Player.Visions {
+		vision.RendersShade = player == s.Player.CurPlayer
 	}
 }
 

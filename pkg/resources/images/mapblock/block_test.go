@@ -61,7 +61,7 @@ func TestMissingZoomCacheStaysMissingWithoutBudget(t *testing.T) {
 	if cache.PrewarmQueueLen() != 1 {
 		t.Fatalf("queue = %d, want 1", cache.PrewarmQueueLen())
 	}
-	if cache.StepPrewarm(0) != 0 {
+	if cache.StepPrewarm(0, 0) != 0 {
 		t.Fatal("zero budget should not build a zoom block")
 	}
 	if !cache.HasMissingAround(0, 0, 0, 0, 4, 0) {

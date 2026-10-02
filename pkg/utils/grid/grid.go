@@ -98,7 +98,8 @@ func (g *Grid) heuristic(a, b Point) float64 {
 	return lo.Ternary(g.cells[a.Y][a.X] == SD, h+5, h)
 }
 
-// 获取邻居
+// 获取邻居。对角移动要求两个正交邻格均可通行，避免从两块陆地的夹角处斜穿，
+// 否则合并后的直线路径段会切过陆地格，把舰体中心带进墙里。
 func (g *Grid) getNeighbors(p Point) []Point {
 	directions := []Point{
 		{-1, 0},
@@ -114,6 +115,10 @@ func (g *Grid) getNeighbors(p Point) []Point {
 	for _, dir := range directions {
 		x, y := p.X+dir.X, p.Y+dir.Y
 		if y >= 0 && y < len(g.cells) && x >= 0 && x < len(g.cells[0]) && g.cells[y][x] != W {
+			if dir.X != 0 && dir.Y != 0 &&
+				(g.cells[p.Y][x] == W || g.cells[y][p.X] == W) {
+				continue
+			}
 			neighbors = append(neighbors, Point{x, y})
 		}
 	}
@@ -147,7 +152,6 @@ func (g *Grid) mergePathWithSameM(path []Point) []Point {
 }
 
 // 对于相邻的三个点，如果中间没有障碍物（检查点法），应该跳过中间点
-// FIXME 这个函数感觉还是有问题
 func (g *Grid) mergePathWithCheckPoint(path []Point) []Point {
 	pathLen := len(path)
 	if pathLen < 3 {
@@ -160,21 +164,38 @@ func (g *Grid) mergePathWithCheckPoint(path []Point) []Point {
 		cur := path[curIdx]
 		may := path[idx]
 
-		distance := math.Sqrt(math.Pow(float64(may.X-cur.X), 2) + math.Pow(float64(may.Y-cur.Y), 2))
-		for i := 1; i < int(distance); i++ {
-			x := int(float64(i)/distance*float64(may.X-cur.X) + float64(cur.X))
-			y := int(float64(i)/distance*float64(may.Y-cur.Y) + float64(cur.Y))
-			if g.cells[y][x] == W {
-				mergedPath = append(mergedPath, path[nextIdx])
-				curIdx = nextIdx
-				break
-			}
+		if g.segmentBlocked(cur, may) {
+			mergedPath = append(mergedPath, path[nextIdx])
+			curIdx = nextIdx
 		}
 		nextIdx = idx
 	}
 
 	return append(mergedPath, path[pathLen-1])
 }
+
+// segmentBlocked 沿 a→b 线段以 0.1 格步长逐点检查扫过的格子是否撞墙。
+// 取整规则与 MapPos 的 floor 换算保持一致：采样点落在哪个格，
+// 舰体中心在运动中就会登记到哪个格，因此贴边掠过陆地的路径段也能被拦下。
+func (g *Grid) segmentBlocked(a, b Point) bool {
+	distance := math.Hypot(float64(b.X-a.X), float64(b.Y-a.Y))
+	if distance == 0 {
+		return false
+	}
+	steps := int(math.Ceil(distance / segmentCheckStep))
+	for i := 0; i <= steps; i++ {
+		t := float64(i) / float64(steps)
+		x := a.X + int(math.Floor(t*float64(b.X-a.X)))
+		y := a.Y + int(math.Floor(t*float64(b.Y-a.Y)))
+		if g.cells[y][x] == W {
+			return true
+		}
+	}
+	return false
+}
+
+// segmentCheckStep 线段校验的采样步长（格）。足够细以捕捉贴角掠过的路径段。
+const segmentCheckStep = 0.1
 
 // 预处理
 func (g *Grid) preProcess() {

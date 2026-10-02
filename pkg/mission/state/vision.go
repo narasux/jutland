@@ -21,18 +21,26 @@ type FactionVision struct {
 	// 蒙层用它区分看过和没看过，边界跟照亮圆一样是渲染分辨率上的渐变，
 	// 不会像按格读 Explored 那样留下整格的阶梯。
 	ExploredLight []byte
+	// RendersShade 这一侧的视野是否要生成迷雾蒙层。
+	// 只有当前玩家的蒙层会被绘制；电脑侧只需要逻辑格，
+	// 跳过 Light/ExploredLight/蒙层可以省掉每拍数毫秒的白算。
+	RendersShade bool
+	// frameSeq 本侧视野的拍计数，用于蒙层像素的降频合成。
+	frameSeq int64
 	// Contacts 离开可见后仍记住的敌舰位置。
 	Contacts map[string]Contact
 }
 
 // NewFactionVision 按地图尺寸分配两张字节图。
+// 蒙层默认渲染；电脑侧视野由 allocateVisions 按玩家关掉。
 func NewFactionVision(width, height int) *FactionVision {
 	n := width * height
 	return &FactionVision{
-		Width:    width,
-		Height:   height,
-		Explored: make([]byte, n),
-		Visible:  make([]byte, n),
+		Width:        width,
+		Height:       height,
+		Explored:     make([]byte, n),
+		Visible:      make([]byte, n),
+		RendersShade: true,
 	}
 }
 
@@ -72,18 +80,39 @@ func (v *FactionVision) ExploredAt(mx, my int) bool {
 	return v.Explored[my*v.Width+mx] != 0
 }
 
-const visionRenderScale = 4
+const (
+	visionRenderScale = 4
+	// shadeComposeInterval 蒙层像素的合成降频（拍）。蒙层是缓慢变化的软边渐变，
+	// 30Hz 的刷新肉眼无感，能把每拍全图合成与 WritePixels 的上传开销减半。
+	shadeComposeInterval = 2
+)
+
+func (v *FactionVision) composeShadeIfDue() {
+	if !v.RendersShade {
+		return
+	}
+	// 首拍立即合成，之后按间隔降频。
+	v.frameSeq++
+	if v.frameSeq != 1 && v.frameSeq%shadeComposeInterval != 0 {
+		return
+	}
+	v.composeShade()
+}
 
 func (v *FactionVision) renderSize() (int, int) {
 	return v.Width * visionRenderScale, v.Height * visionRenderScale
 }
 
 // BeginFrame 清掉这一拍的可见格子和软边亮度。已探索保留。
+// 不渲染蒙层的一侧不清 Light（它根本不会被盖章）。
 func (v *FactionVision) BeginFrame() {
 	if v == nil {
 		return
 	}
 	v.ClearVisible()
+	if !v.RendersShade {
+		return
+	}
 	rw, rh := v.renderSize()
 	n := rw * rh
 	if len(v.Light) != n {
@@ -96,18 +125,19 @@ func (v *FactionVision) BeginFrame() {
 	}
 }
 
-// FinishFrame 合并已探索，并生成蒙层像素。
+// FinishFrame 合并已探索，并按降频节奏生成蒙层像素。
 func (v *FactionVision) FinishFrame() {
 	if v == nil {
 		return
 	}
 	v.CommitExplored()
-	v.composeShade()
+	v.composeShadeIfDue()
 }
 
 // StampLight 往渲染图上盖一张预先算好的圆形衰减，重叠取最大。
+// 不渲染蒙层的一侧直接跳过，省掉每拍数毫秒的圆盘合并。
 func (v *FactionVision) StampLight(rx, ry, radius float64) {
-	if v == nil || radius <= 0 || len(v.Light) == 0 {
+	if v == nil || !v.RendersShade || radius <= 0 || len(v.Light) == 0 {
 		return
 	}
 	outer := int(math.Ceil(radius * visionRenderScale))

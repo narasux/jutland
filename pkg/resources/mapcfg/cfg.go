@@ -153,9 +153,48 @@ func (cfg *MapCfg) PreparedGrid() *grid.Grid {
 	return cfg.pathGrid
 }
 
-// GenPath 生成路径
+// GenPath 生成路径。
+// 起终点落在海岸/陆地格上时（如点击码头、或舰船中心已搁浅），
+// 先吸附到最近的可航行格再寻路，保证搁浅舰也能退回水中继续机动。
 func (cfg *MapCfg) GenPath(start, end grid.Point) []grid.Point {
-	return cfg.PreparedGrid().Search(start, end)
+	return cfg.PreparedGrid().Search(cfg.snapToSea(start), cfg.snapToSea(end))
+}
+
+// snapToSeaSnapRadius 吸附搜索的最大半径（格）。
+// 舰体中心最多压进岸边一两格，这个范围足够覆盖搁浅恢复场景。
+const snapToSeaSnapRadius = 5
+
+// snapToSea 把点吸附到切比雪夫半径内最近的可航行格；找不到时原样返回，
+// 交给 Grid.Search 按原有语义判定失败。
+func (cfg *MapCfg) snapToSea(p grid.Point) grid.Point {
+	if cfg.Map.IsSea(p.X, p.Y) {
+		return p
+	}
+	for radius := 1; radius <= snapToSeaSnapRadius; radius++ {
+		for dy := -radius; dy <= radius; dy++ {
+			for dx := -radius; dx <= radius; dx++ {
+				// 只扫外圈，避免同一格被多圈重复检查。
+				if max(abs(dx), abs(dy)) != radius {
+					continue
+				}
+				x, y := p.X+dx, p.Y+dy
+				if x < 0 || y < 0 || y >= cfg.Height || x >= cfg.Width {
+					continue
+				}
+				if cfg.Map.IsSea(x, y) {
+					return grid.Point{X: x, Y: y}
+				}
+			}
+		}
+	}
+	return p
+}
+
+func abs(v int) int {
+	if v < 0 {
+		return -v
+	}
+	return v
 }
 
 var maps map[string]*MapCfg

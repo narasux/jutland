@@ -19,18 +19,18 @@ func (d *Drawer) drawCameraView(screen *ebiten.Image, ms *state.MissionState) {
 
 			mapX, mapY := ms.View.Camera.Pos.MX+x, ms.View.Camera.Pos.MY+y
 			char := ms.Core.MissionMD.MapCfg.Map.Get(mapX, mapY)
-			blocks := mapBlockImg.GetDrawBlocksByCharAndPosZoom(char, mapX, mapY, ms.UI.GameOpts.Zoom)
-			for _, block := range blocks {
-				if block.Image == nil {
-					continue
-				}
-				opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterNearest}
-				if block.Scale != 1 {
-					opts.GeoM.Scale(block.Scale, block.Scale)
-				}
-				opts.GeoM.Translate(drawX, drawY)
-				screen.DrawImage(block.Image, opts)
-			}
+			// 回调式取块，避免每帧每格分配切片
+			mapBlockImg.ForDrawBlocksByCharAndPosZoom(
+				char, mapX, mapY, ms.UI.GameOpts.Zoom,
+				func(img *ebiten.Image, scale float64) {
+					opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterNearest}
+					if scale != 1 {
+						opts.GeoM.Scale(scale, scale)
+					}
+					opts.GeoM.Translate(drawX, drawY)
+					screen.DrawImage(img, opts)
+				},
+			)
 		}
 	}
 }

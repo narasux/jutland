@@ -43,6 +43,8 @@ const (
 	NationUK Nation = "uk"
 	// NationSU 表示苏联。
 	NationSU Nation = "su"
+	// NationIT 表示意大利。
+	NationIT Nation = "it"
 )
 
 // ToDisplay 国籍展示用名称。
@@ -64,6 +66,8 @@ func (n Nation) ToDisplay() string {
 		return i18n.Text(i18n.MsgNationUnitedKingdom)
 	case NationSU:
 		return i18n.Text(i18n.MsgNationSovietUnion)
+	case NationIT:
+		return i18n.Text(i18n.MsgNationItaly)
 	default:
 		return i18n.Text(i18n.MsgNationSpecial)
 	}
@@ -71,7 +75,7 @@ func (n Nation) ToDisplay() string {
 
 // AvailableNations 返回图鉴筛选使用的稳定国籍顺序。
 func AvailableNations() []Nation {
-	return []Nation{NationAll, NationCN, NationUS, NationJP, NationDE, NationFR, NationUK, NationSU, NationSpecial}
+	return []Nation{NationAll, NationCN, NationUS, NationJP, NationDE, NationFR, NationUK, NationSU, NationIT, NationSpecial}
 }
 
 // CombatPowerInfo 单位的静态战力评估，仅用于图鉴与平衡分析。

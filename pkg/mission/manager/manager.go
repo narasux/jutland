@@ -1,6 +1,8 @@
 package manager
 
 import (
+	"time"
+
 	"github.com/hajimehoshi/ebiten/v2"
 
 	audioPlayer "github.com/narasux/jutland/pkg/audio/player"
@@ -26,7 +28,10 @@ const (
 	mapBlockPrewarmIdleBudget = 4
 	mapBlockPrewarmZoomBudget = 24
 	mapBlockPrewarmZoomTicks  = 45
-	wheelZoomCooldownTicks    = 8
+	// mapBlockPrewarmTimeSlice 每拍预热的时间片上限；预算张数仍是硬上限，
+	// 纹理创建变慢时靠时间片兜底，不让单帧开销失控。
+	mapBlockPrewarmTimeSlice = 3 * time.Millisecond
+	wheelZoomCooldownTicks   = 8
 )
 
 // MissionManager 任务管理器
@@ -234,22 +239,29 @@ func (m *MissionManager) updateSupportPhase() {
 }
 
 // updateMapBlockPrewarm 分帧预热相机附近场景地图块的缩放缓存，返回当前缩放是否就绪。
+// 相机平移不重置队列：平移只是补充新视野的任务，已有排队任务（含相邻档位）
+// 继续消化；只有缩放档位真正变化时才丢弃其他档位的任务并触发一轮爆发。
 func (m *MissionManager) updateMapBlockPrewarm() bool {
 	camera := m.state.View.Camera
 	zoom := state.NormalizeZoom(m.state.UI.GameOpts.Zoom)
-	focusChanged := m.mapBlockPrewarmZoom != zoom ||
+	zoomChanged := m.mapBlockPrewarmZoom != zoom
+	focusChanged := zoomChanged ||
 		m.mapBlockPrewarmFocusX != camera.Pos.MX ||
 		m.mapBlockPrewarmFocusY != camera.Pos.MY ||
 		m.mapBlockPrewarmFocusW != camera.Width ||
 		m.mapBlockPrewarmFocusH != camera.Height
+	if zoomChanged {
+		mapBlockImg.SceneBlockCache.ResetPrewarmQueue(zoom)
+	}
 	if focusChanged {
-		mapBlockImg.SceneBlockCache.ResetPrewarmQueue()
-		m.mapBlockPrewarmZoom = zoom
 		m.mapBlockPrewarmFocusX = camera.Pos.MX
 		m.mapBlockPrewarmFocusY = camera.Pos.MY
 		m.mapBlockPrewarmFocusW = camera.Width
 		m.mapBlockPrewarmFocusH = camera.Height
-		m.mapBlockPrewarmBurstTicks = mapBlockPrewarmZoomTicks
+		if zoomChanged {
+			m.mapBlockPrewarmZoom = zoom
+			m.mapBlockPrewarmBurstTicks = mapBlockPrewarmZoomTicks
+		}
 		m.mapBlockPrewarmSettled = false
 	} else if m.mapBlockPrewarmSettled {
 		return true
@@ -267,7 +279,7 @@ func (m *MissionManager) updateMapBlockPrewarm() bool {
 		[]int{zoom},
 		mapBlockPrewarmMargin,
 	)
-	processed := mapBlockImg.SceneBlockCache.StepPrewarm(budget)
+	processed := mapBlockImg.SceneBlockCache.StepPrewarm(budget, mapBlockPrewarmTimeSlice)
 	if mapBlockImg.SceneBlockCache.HasMissingAround(
 		camera.Pos.MX, camera.Pos.MY,
 		camera.Width, camera.Height,
@@ -294,7 +306,7 @@ func (m *MissionManager) updateMapBlockPrewarm() bool {
 		adjacentZooms,
 		mapBlockPrewarmMargin,
 	)
-	mapBlockImg.SceneBlockCache.StepPrewarm(remainingBudget)
+	mapBlockImg.SceneBlockCache.StepPrewarm(remainingBudget, mapBlockPrewarmTimeSlice)
 	m.mapBlockPrewarmSettled = mapBlockImg.SceneBlockCache.PrewarmQueueLen() == 0
 	return true
 }
