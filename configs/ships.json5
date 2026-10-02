@@ -35575,6 +35575,55 @@
         }
       ],
       secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 40mm 博福斯四联：中线
+        {
+          name: "US/40/60/4",
+          posPercent: 0.42,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 后部 40mm 博福斯四联：左舷
+        {
+          name: "US/40/60/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 360]
+        },
+        // 舯部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "US/20/70",
+          posPercent: -0.02,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 后部 20mm 厄利孔单装
+        {
+          name: "US/20/70",
+          posPercent: -0.35,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 舰尾 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "US/20/70",
+          posPercent: -0.42,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        }
+      ],
       torpedoes: [
         // 中轴鱼雷 A
         {
@@ -35642,6 +35691,47 @@
         }
       ],
       secondaryGuns: [],
+      antiAircraftGuns: [
+        // 前部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "US/20/70",
+          posPercent: 0.43,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.43,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 舯部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "US/20/70",
+          posPercent: -0.01,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 舰尾 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "US/20/70",
+          posPercent: -0.49,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.49,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        }
+      ],
       torpedoes: [
         // 左舷鱼雷 A
         {
@@ -35723,6 +35813,34 @@
         }
       ],
       secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "US/20/70",
+          posPercent: 0.46,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: 0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 后部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "US/20/70",
+          posPercent: -0.35,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        }
+      ],
       torpedoes: [
         // 中轴鱼雷 A
         {
@@ -36062,6 +36180,21 @@
         }
       ],
       secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 25mm 双联：右舷 / 左舷
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/2",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
       torpedoes: [
         // 中轴鱼雷 A
         {
@@ -36182,6 +36315,21 @@
         }
       ],
       secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 25mm 三联：右舷 / 左舷
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
       torpedoes: [
         // 中轴鱼雷 A
         {
@@ -36594,6 +36742,35 @@
         }
       ],
       secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 2磅砰砰炮四联：中线
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.04,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 后部 2磅砰砰炮四联：中线
+        {
+          name: "UK/40/39/4",
+          posPercent: -0.36,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 舯部 20mm 厄利孔双联：右舷 / 左舷
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70/2",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
       torpedoes: [
         // 中轴鱼雷 A
         {
@@ -36647,6 +36824,48 @@
         }
       ],
       secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 40mm 博福斯四联：左舷
+        {
+          name: "UK/40/56/4",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部 40mm 博福斯四联：右舷
+        {
+          name: "UK/40/56/4",
+          posPercent: -0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舯部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "UK/20/70",
+          posPercent: 0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "UK/20/70",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
       torpedoes: [
         // 中轴鱼雷 A
         {
@@ -36706,17 +36925,18 @@
           leftFiringArc: [210, 360]
         }
       ],
-      secondaryGuns: [
+      secondaryGuns: [],
+      antiAircraftGuns: [
         // 高炮 A
         {
-          name: "UK/40/60",
+          name: "UK/40/39",
           posPercent: 0.04,
           rightFiringArc: [20, 180],
           leftFiringArc: [210, 270]
         },
         // 高炮 B
         {
-          name: "UK/40/60",
+          name: "UK/40/39",
           posPercent: 0,
           rightFiringArc: [90, 150],
           leftFiringArc: [180, 340]
@@ -36781,7 +37001,8 @@
           leftFiringArc: [180, 330]
         }
       ],
-      secondaryGuns: [
+      secondaryGuns: [],
+      antiAircraftGuns: [
         // 2磅砰砰炮
         {
           name: "UK/40/39",
@@ -36856,7 +37077,34 @@
           leftFiringArc: [180, 330]
         }
       ],
-      secondaryGuns: [
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "UK/20/70",
+          posPercent: 0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部 20mm 厄利孔单装：右舷 / 左舷
+        {
+          name: "UK/20/70",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "UK/20/70",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
         // 四联装 .50 高射机枪 A
         {
           name: "UK/12.7/4",
@@ -36945,19 +37193,19 @@
           leftFiringArc: [180, 330]
         }
       ],
-      secondaryGuns: [
-        // 四联装 .50 高射机枪
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舯部 2磅砰砰炮单装：右舷 / 左舷
         {
-          name: "UK/12.7/4",
-          posPercent: 0.07,
+          name: "UK/40/39",
+          posPercent: 0.05,
           rightFiringArc: [0, 180],
-          leftFiringArc: [180, 360]
+          leftFiringArc: [360, 360]
         },
-        // 四联装 .50 高射机枪
         {
-          name: "UK/12.7/4",
-          posPercent: 0.07,
-          rightFiringArc: [0, 180],
+          name: "UK/40/39",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         }
       ],
