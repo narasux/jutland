@@ -12003,5 +12003,286 @@
         "url": "https://en.wikipedia.org/wiki/IMAM_Ro.43"
       }
     ]
-  }
+  },
+  {
+    "name": "MiG-1",
+    "displayName": "米格-1",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机头（12.7mm UBS 同步机枪）",
+        "value": "1 x 12.7mm UBS",
+      },
+      {
+        "label": "机头（7.62mm ShKAS 双联装同步机枪）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "米格-1（I-200 定型）是米高扬-格列维奇设计局 1940 年投产的高空截击机，装备 AM-35A 发动机，高空最大速度可达 636 km/h，但低空机动性差、航程仅约 580 km。武装为机头同步的 1 挺 12.7mm UBS 与 2 挺 7.62mm ShKAS。游戏中归类为战斗机，只配置机头同步机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — MiG-1",
+        "url": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-1",
+      },
+    ]
+  },
+  {
+    "name": "MiG-3",
+    "displayName": "米格-3",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机头（12.7mm UBS 同步机枪）",
+        "value": "1 x 12.7mm UBS",
+      },
+      {
+        "label": "机头（7.62mm ShKAS 双联装同步机枪）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "米格-3 是米格-1 的改进量产型，1941 年服役，同样偏重高空性能而低空笨重，最大速度 640 km/h，航程约 820 km，机长 8.25 m、翼展 10.20 m。武装与米格-1 相同，为机头同步的 1 挺 12.7mm UBS 与 2 挺 7.62mm ShKAS。游戏中归类为战斗机，只配置机头同步机枪；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — MiG-3",
+        "url": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-3",
+      },
+    ]
+  },
+  {
+    "name": "La-5",
+    "displayName": "拉-5",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机头整流罩（20mm ShVAK 双联装同步机炮）",
+        "value": "2 x 20mm ShVAK",
+      }
+    ],
+    "description": "拉-5 是拉沃契金设计局 1942 年把拉格-3 换装 M-82 星型发动机后的改型，低空爬升与盘旋性能明显改善，最大速度约 580 km/h；本作航程按 La-5FN 的 765 km 保守取值。机头整流罩内装 2 门 20mm 施瓦克机炮。游戏中归类为战斗机，配置机头双联 20mm 机炮；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — La-5",
+        "url": "https://en.wikipedia.org/wiki/Lavochkin_La-5",
+      },
+    ]
+  },
+  {
+    "name": "La-7",
+    "displayName": "拉-7",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机头整流罩（20mm B-20 三联装机炮）",
+        "value": "3 x 20mm B-20",
+      }
+    ],
+    "description": "拉-7 是拉-5 的深度改进型，1944 年服役，最大速度 661 km/h，是苏联低空性能最好的活塞战斗机之一。1945 年起换装 3 门 20mm B-20 机炮，本作即按该武装配置。游戏中归类为战斗机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — La-7",
+        "url": "https://en.wikipedia.org/wiki/Lavochkin_La-7",
+      },
+    ]
+  },
+  {
+    "name": "Yak-1",
+    "displayName": "雅克-1",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "桨毂（20mm ShVAK，穿过螺旋桨轴射击）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "机头（7.62mm ShKAS 双联装同步机枪）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "雅克-1 是雅科夫列夫设计局 1940 年首飞的单座战斗机，1941 年成为苏联空军主力，最大速度约 571 km/h，航程 700 km。早期型的武装为桨毂 1 门 20mm 施瓦克机炮与机头 2 挺 7.62mm ShKAS。游戏中归类为战斗机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Yak-1",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-1",
+      },
+    ]
+  },
+  {
+    "name": "Yak-3",
+    "displayName": "雅克-3",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "桨毂（20mm ShVAK）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "机头（12.7mm UBS 双联装同步机枪）",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "雅克-3 是 1944 年服役的轻量化格斗机，凭借极高的推重比在低空盘旋与爬升上压过同期德军战斗机，最大速度 646 km/h，但航程仅约 550 km。武装为桨毂 1 门 20mm 施瓦克与机头 2 挺 12.7mm UBS。游戏中归类为战斗机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Yak-3",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-3",
+      },
+    ]
+  },
+  {
+    "name": "Yak-7",
+    "displayName": "雅克-7",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "桨毂（20mm ShVAK）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "机头（12.7mm UBS 双联装同步机枪）",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "雅克-7 由雅克-7УТИ 教练机发展而来，1942 年的主力量产型雅克-7B 换装 M-105PF 发动机，最大速度约 599 km/h。武装为桨毂 1 门 20mm 施瓦克机炮与机头 2 挺 12.7mm UBS。游戏中归类为战斗机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Yak-7",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-7",
+      },
+    ]
+  },
+  {
+    "name": "Yak-9U",
+    "displayName": "雅克-9U",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "桨毂（20mm ShVAK）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "机头（12.7mm UBS 双联装同步机枪）",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "雅克-9U 是雅克-9 家族 1944 年的最终高速改型，换装 VK-107A 发动机后最大速度提高到 690 km/h，航程约 675 km。武装为桨毂 1 门 20mm 施瓦克与机头 2 挺 12.7mm UBS。游戏中归类为战斗机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Yak-9U",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-9",
+      },
+    ]
+  },
+  {
+    "name": "Be-4",
+    "displayName": "别-4",
+    "type": "水上侦察机",
+    "armaments": [
+      {
+        "label": "后座（7.62mm ShKAS 活动机枪）",
+        "value": "1 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "别-4（KOR-2）是别里耶夫设计局 1942 年服役的舰载弹射水上侦察机，由巡洋舰与战列舰的弹射器起飞、水面回收，最大速度约 356 km/h，航程约 1,150 km，机长 10.50 m、翼展 12.00 m。仅装备 1 挺 7.62mm ShKAS 后座活动机枪。游戏中归类为水上侦察机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Be-4",
+        "url": "https://en.wikipedia.org/wiki/Beriev_Be-4",
+      },
+    ]
+  },
+  {
+    "name": "MBR-2",
+    "displayName": "MBR-2",
+    "type": "水上侦察机",
+    "armaments": [
+      {
+        "label": "艇首（7.62mm PV-1 固定前射）",
+        "value": "1 x 7.62mm PV-1",
+      },
+      {
+        "label": "背塔（7.62mm ShKAS 活动机枪）",
+        "value": "1 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "MBR-2（别-2）是别里耶夫设计局 1930 年代研制的岸基远程水上侦察机，后期量产型 MBR-2bis 换装 AM-34NB 发动机，最大速度 275 km/h，航程可达 1,600 km，机长 13.50 m、翼展 19.00 m。艇首装 1 挺 7.62mm PV-1，背塔装 1 挺 7.62mm ShKAS。游戏中归类为水上侦察机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — MBR-2",
+        "url": "https://en.wikipedia.org/wiki/Beriev_MBR-2",
+      },
+    ]
+  },
+  {
+    "name": "SU/7.62",
+    "displayName": "7.62mm ShKAS 航空机枪",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/7.62/2",
+    "displayName": "7.62mm ShKAS 双联装航空机枪",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/12.7",
+    "displayName": "12.7mm 别列津 UBS 航空机枪",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/12.7/2",
+    "displayName": "12.7mm 别列津 UBS 双联装航空机枪",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20",
+    "displayName": "20mm 施瓦克 ShVAK 航空机炮",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20/2",
+    "displayName": "20mm 施瓦克 ShVAK 双联装航空机炮",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20/B20/3",
+    "displayName": "20mm B-20 三联装航空机炮",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
 ]

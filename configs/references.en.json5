@@ -12139,5 +12139,286 @@
         "url": "https://en.wikipedia.org/wiki/IMAM_Ro.43"
       }
     ]
-  }
+  },
+  {
+    "name": "MiG-1",
+    "displayName": "MiG-1",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Nose (12.7mm UBS, synchronized)",
+        "value": "1 x 12.7mm UBS",
+      },
+      {
+        "label": "Nose (2 x 7.62mm ShKAS, synchronized)",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "The Mikoyan-Gurevich MiG-1 (I-200) was a high-altitude interceptor that entered production in 1940. Powered by an AM-35A, it reached about 636 km/h at altitude but handled poorly at low level and had a range of only some 580 km. Armament was one synchronized 12.7mm UBS and two 7.62mm ShKAS machine guns in the nose. In game it is treated as a fighter armed only with its synchronized nose machine guns; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — MiG-1",
+        "url": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-1",
+      },
+    ]
+  },
+  {
+    "name": "MiG-3",
+    "displayName": "MiG-3",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Nose (12.7mm UBS, synchronized)",
+        "value": "1 x 12.7mm UBS",
+      },
+      {
+        "label": "Nose (2 x 7.62mm ShKAS, synchronized)",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "The MiG-3 was the improved production development of the MiG-1, entering service in 1941. It was likewise optimized for altitude and clumsy at low level, with a maximum speed of 640 km/h, a range of about 820 km, a length of 8.25 m and a span of 10.20 m. Armament matched the MiG-1: one synchronized 12.7mm UBS and two 7.62mm ShKAS in the nose. In game it is treated as a fighter armed only with its synchronized nose machine guns; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — MiG-3",
+        "url": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-3",
+      },
+    ]
+  },
+  {
+    "name": "La-5",
+    "displayName": "La-5",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Nose Cowl (2 x 20mm ShVAK, synchronized)",
+        "value": "2 x 20mm ShVAK",
+      }
+    ],
+    "description": "The La-5 was Lavochkin's 1942 re-engining of the LaGG-3 with the M-82 radial, which markedly improved climb and turning performance at low level; maximum speed was about 580 km/h. For this game the range is conservatively taken as the La-5FN's 765 km. Armament was two 20mm ShVAK cannon in the nose cowl. In game it is treated as a fighter with twin nose cannon; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — La-5",
+        "url": "https://en.wikipedia.org/wiki/Lavochkin_La-5",
+      },
+    ]
+  },
+  {
+    "name": "La-7",
+    "displayName": "La-7",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Nose Cowl (3 x 20mm B-20)",
+        "value": "3 x 20mm B-20",
+      }
+    ],
+    "description": "The La-7 was a thorough refinement of the La-5 that entered service in 1944. With a maximum speed of 661 km/h it was one of the best low-altitude piston fighters of the war. From January 1945 it was fitted with three 20mm B-20 cannon, which is the armament configured here. In game it is treated as a fighter; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — La-7",
+        "url": "https://en.wikipedia.org/wiki/Lavochkin_La-7",
+      },
+    ]
+  },
+  {
+    "name": "Yak-1",
+    "displayName": "Yak-1",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Propeller Hub (20mm ShVAK)",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "Nose (2 x 7.62mm ShKAS, synchronized)",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "The Yak-1 first flew in 1940 and became the backbone of the Soviet fighter force in 1941. Maximum speed was about 571 km/h with a range of 700 km. Early production aircraft carried one 20mm ShVAK firing through the propeller hub and two synchronized 7.62mm ShKAS in the nose, which is the fit configured here. In game it is treated as a fighter; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Yak-1",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-1",
+      },
+    ]
+  },
+  {
+    "name": "Yak-3",
+    "displayName": "Yak-3",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Propeller Hub (20mm ShVAK)",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "Nose (2 x 12.7mm UBS, synchronized)",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "The Yak-3 entered service in 1944 as a lightened dogfighter. Its very high power-to-weight ratio let it out-turn and out-climb contemporary German fighters at low altitude, with a maximum speed of 646 km/h, although range was only about 550 km. Armament was one 20mm ShVAK through the propeller hub and two synchronized 12.7mm UBS in the nose. In game it is treated as a fighter; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Yak-3",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-3",
+      },
+    ]
+  },
+  {
+    "name": "Yak-7",
+    "displayName": "Yak-7",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Propeller Hub (20mm ShVAK)",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "Nose (2 x 12.7mm UBS, synchronized)",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "The Yak-7 was developed from the Yak-7UTI trainer. The main production Yak-7B of 1942 introduced the M-105PF engine and reached about 599 km/h. Armament was one 20mm ShVAK through the propeller hub and two synchronized 12.7mm UBS in the nose. In game it is treated as a fighter; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Yak-7",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-7",
+      },
+    ]
+  },
+  {
+    "name": "Yak-9U",
+    "displayName": "Yak-9U",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Propeller Hub (20mm ShVAK)",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "Nose (2 x 12.7mm UBS, synchronized)",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "The Yak-9U was the final high-speed development of the Yak-9 family, appearing in 1944. The VK-107A raised maximum speed to 690 km/h with a range of about 675 km. Armament was one 20mm ShVAK through the propeller hub and two synchronized 12.7mm UBS in the nose. In game it is treated as a fighter; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Yak-9U",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-9",
+      },
+    ]
+  },
+  {
+    "name": "Be-4",
+    "displayName": "Be-4 (KOR-2)",
+    "type": "Reconnaissance Flying Boat",
+    "armaments": [
+      {
+        "label": "Rear Cockpit (7.62mm ShKAS, trainable)",
+        "value": "1 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "The Beriev Be-4 (KOR-2) was a catapult-launched shipboard reconnaissance flying boat that entered service in 1942, operating from cruiser and battleship catapults and recovering on the water. Maximum speed was about 356 km/h with a range of some 1,150 km, a length of 10.50 m and a span of 12.00 m. Its only armament was a single trainable 7.62mm ShKAS in the rear cockpit. In game it is treated as a reconnaissance flying boat; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Be-4",
+        "url": "https://en.wikipedia.org/wiki/Beriev_Be-4",
+      },
+    ]
+  },
+  {
+    "name": "MBR-2",
+    "displayName": "MBR-2",
+    "type": "Reconnaissance Flying Boat",
+    "armaments": [
+      {
+        "label": "Bow (7.62mm PV-1, fixed forward)",
+        "value": "1 x 7.62mm PV-1",
+      },
+      {
+        "label": "Dorsal Turret (7.62mm ShKAS, trainable)",
+        "value": "1 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "The Beriev MBR-2 was a shore-based long-range reconnaissance flying boat of the 1930s. The later MBR-2bis production variant introduced the AM-34NB engine, giving a maximum speed of 275 km/h and a range of up to 1,600 km, with a length of 13.50 m and a span of 19.00 m. Armament was one 7.62mm PV-1 in the bow and one 7.62mm ShKAS in a dorsal turret. In game it is treated as a reconnaissance flying boat; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — MBR-2",
+        "url": "https://en.wikipedia.org/wiki/Beriev_MBR-2",
+      },
+    ]
+  },
+  {
+    "name": "SU/7.62",
+    "displayName": "7.62mm ShKAS Aircraft Machine Gun",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/7.62/2",
+    "displayName": "Twin 7.62mm ShKAS Aircraft Machine Gun",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/12.7",
+    "displayName": "12.7mm Berezin UBS Aircraft Machine Gun",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/12.7/2",
+    "displayName": "Twin 12.7mm Berezin UBS Aircraft Machine Gun",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20",
+    "displayName": "20mm ShVAK Aircraft Cannon",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20/2",
+    "displayName": "Twin 20mm ShVAK Aircraft Cannon",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20/B20/3",
+    "displayName": "Triple 20mm B-20 Aircraft Cannon",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
 ]

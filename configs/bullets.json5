@@ -657,6 +657,30 @@
     damage: 2,
     criticalRate: 0.0005
   },
+  // 苏联 7.62mm ShKAS 航空机枪弹（射速极高，弹头轻）
+  {
+    name: "SU/GB/7.62/1932",
+    type: "shell",
+    diameter: 8,
+    damage: 0.11,
+    criticalRate: 0
+  },
+  // 苏联 12.7mm 别列津 UB 航空机枪弹
+  {
+    name: "SU/GB/12.7/1941",
+    type: "shell",
+    diameter: 13,
+    damage: 0.25,
+    criticalRate: 0
+  },
+  // 苏联 20mm 施瓦克 ShVAK / B-20 航空机炮炮弹（两炮同弹种）
+  {
+    name: "SU/GB/20/1936",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
+  },
   // 鱼雷
   {
     name: "FR/TB/550/1923",

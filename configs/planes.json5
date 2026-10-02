@@ -6678,4 +6678,357 @@
       ]
     }
   },
+  // ===== 苏联空军 =====
+  {
+    // 米格-1（I-200 定型）高空截击机，武器为 1 挺 12.7mm UBS + 2 挺 7.62mm ShKAS，全部机头同步
+    // 长度/翼展/速度/航程/满载取维基规格表（636 km/h、580 km、3099 kg）
+    name: "MiG-1",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1940,
+    totalHP: 28,
+    damageReduction: 0.5,
+    maxSpeed: 636,
+    acceleration: 28,
+    rotateSpeed: 11,
+    length: 8.16,
+    width: 10.2,
+    fundsCost: 4,
+    timeCost: 3,
+    tonnage: 3.099,
+    range: 580,
+    weapon: {
+      guns: [
+        // 机头（12.7mm UBS，发动机上方同步机枪）
+        {
+          name: "SU/12.7",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头（7.62mm ShKAS 双联装，同步机枪）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 米格-3：米格-1 的改进量产型，高空性能好但低空笨重
+    name: "MiG-3",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1941,
+    totalHP: 32,
+    damageReduction: 0.5,
+    maxSpeed: 640,
+    acceleration: 30,
+    rotateSpeed: 11,
+    length: 8.25,
+    width: 10.2,
+    fundsCost: 5,
+    timeCost: 4,
+    tonnage: 3.355,
+    range: 820,
+    weapon: {
+      guns: [
+        // 机头（12.7mm UBS，同步机枪）
+        {
+          name: "SU/12.7",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头（7.62mm ShKAS 双联装，同步机枪）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 拉-5（M-82 基础型）：拉格-3 换装星型发动机的改型，低空性能明显改善
+    // 维基无基础型规格表，长度/翼展/速度取 airwar.ru，航程按 La-5FN 的 765 km 保守取值
+    name: "La-5",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1942,
+    totalHP: 40,
+    damageReduction: 0.5,
+    maxSpeed: 580,
+    acceleration: 32,
+    rotateSpeed: 13,
+    length: 8.67,
+    width: 9.8,
+    fundsCost: 6,
+    timeCost: 4,
+    tonnage: 3.36,
+    range: 765,
+    weapon: {
+      guns: [
+        // 机头整流罩（20mm ShVAK 双联装同步机炮）
+        {
+          name: "SU/20/2",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 拉-7：拉-5 的深度改进型，1944 年服役；1945 年起换装 3 门 20mm B-20
+    name: "La-7",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 46,
+    damageReduction: 0.5,
+    maxSpeed: 661,
+    acceleration: 38,
+    rotateSpeed: 14,
+    length: 8.6,
+    width: 9.8,
+    fundsCost: 8,
+    timeCost: 5,
+    tonnage: 3.315,
+    range: 665,
+    weapon: {
+      guns: [
+        // 机头整流罩（20mm B-20 三联装）
+        {
+          name: "SU/20/B20/3",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 雅克-1（1941 年 M-105PA 早期型）：1 门桨毂 20mm ShVAK + 2 挺 7.62mm ShKAS
+    name: "Yak-1",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1941,
+    totalHP: 30,
+    damageReduction: 0.45,
+    maxSpeed: 571,
+    acceleration: 32,
+    rotateSpeed: 15,
+    length: 8.48,
+    width: 10,
+    fundsCost: 4,
+    timeCost: 3,
+    tonnage: 2.95,
+    range: 700,
+    weapon: {
+      guns: [
+        // 桨毂（20mm ShVAK，穿过螺旋桨轴射击）
+        {
+          name: "SU/20",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头（7.62mm ShKAS 双联装，同步机枪）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 雅克-3：1944 年服役的轻量化格斗机，低空盘旋性能优异但航程短
+    name: "Yak-3",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 40,
+    damageReduction: 0.5,
+    maxSpeed: 646,
+    acceleration: 40,
+    rotateSpeed: 16,
+    length: 8.5,
+    width: 9.2,
+    fundsCost: 7,
+    timeCost: 5,
+    tonnage: 2.697,
+    range: 550,
+    weapon: {
+      guns: [
+        // 桨毂（20mm ShVAK）
+        {
+          name: "SU/20",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头（12.7mm UBS 双联装，同步机枪）
+        {
+          name: "SU/12.7/2",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 雅克-7B（1942 年主力量产型）：由雅克-7УТИ 教练机发展而来，火力加强为 1 门 20mm + 2 挺 12.7mm
+    name: "Yak-7",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1942,
+    totalHP: 34,
+    damageReduction: 0.5,
+    maxSpeed: 599,
+    acceleration: 33,
+    rotateSpeed: 14,
+    length: 8.48,
+    width: 10,
+    fundsCost: 5,
+    timeCost: 4,
+    tonnage: 2.935,
+    range: 643,
+    weapon: {
+      guns: [
+        // 桨毂（20mm ShVAK）
+        {
+          name: "SU/20",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头（12.7mm UBS 双联装，同步机枪）
+        {
+          name: "SU/12.7/2",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 雅克-9U（1944 年型，VK-107A）：雅克-9 家族的最终高速改型
+    // 长度/翼展/速度/航程/满载取维基 Yak-9U 规格表（690 km/h、675 km、3204 kg）
+    name: "Yak-9U",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1944,
+    totalHP: 38,
+    damageReduction: 0.5,
+    maxSpeed: 690,
+    acceleration: 34,
+    rotateSpeed: 14,
+    length: 8.55,
+    width: 9.74,
+    fundsCost: 8,
+    timeCost: 5,
+    tonnage: 3.204,
+    range: 675,
+    weapon: {
+      guns: [
+        // 桨毂（20mm ShVAK）
+        {
+          name: "SU/20",
+          posPercent: 0.95,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头（12.7mm UBS 双联装，同步机枪）
+        {
+          name: "SU/12.7/2",
+          posPercent: 0.78,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 别-4（KOR-2）：舰载弹射起飞水上侦察机，仅 1 挺 7.62mm ShKAS 后座活动枪
+    name: "Be-4",
+    nation: "su",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1942,
+    totalHP: 30,
+    damageReduction: 0.35,
+    maxSpeed: 356,
+    acceleration: 12,
+    rotateSpeed: 7,
+    length: 10.5,
+    width: 12,
+    fundsCost: 4,
+    timeCost: 3,
+    tonnage: 2.76,
+    range: 1150,
+    weapon: {
+      guns: [
+        // 后座（7.62mm ShKAS，活动枪架，后半球自卫）
+        {
+          name: "SU/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
+    // MBR-2bis：岸基远程水上侦察机，艇首 1 挺 7.62mm PV-1 + 背塔 1 挺 7.62mm ShKAS
+    name: "MBR-2",
+    nation: "su",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1935,
+    totalHP: 40,
+    damageReduction: 0.3,
+    maxSpeed: 275,
+    acceleration: 9,
+    rotateSpeed: 6,
+    length: 13.5,
+    width: 19,
+    fundsCost: 4,
+    timeCost: 3,
+    tonnage: 4.245,
+    range: 1600,
+    weapon: {
+      guns: [
+        // 艇首（7.62mm PV-1，固定前射）
+        {
+          name: "SU/7.62",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 背塔（7.62mm ShKAS，活动枪架，后半球自卫）
+        {
+          name: "SU/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
 ]

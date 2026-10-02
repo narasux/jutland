@@ -2504,6 +2504,97 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 苏联 7.62mm ShKAS 航空机枪（机头同步或后座自卫，约 1800 rpm）
+  {
+    name: "SU/7.62",
+    bulletName: "SU/GB/7.62/1932",
+    bulletCount: 1,
+    reloadTime: 0.04,
+    range: 1.7,
+    bulletSpread: 14,
+    bulletSpeed: 850,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联 7.62mm ShKAS 双联装机枪（机头同步）
+  {
+    name: "SU/7.62/2",
+    bulletName: "SU/GB/7.62/1932",
+    bulletCount: 2,
+    reloadTime: 0.04,
+    range: 1.7,
+    bulletSpread: 14,
+    bulletSpeed: 850,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联 12.7mm 别列津 UBS 航空机枪（机头同步，约 800 rpm）
+  {
+    name: "SU/12.7",
+    bulletName: "SU/GB/12.7/1941",
+    bulletCount: 1,
+    reloadTime: 0.06,
+    range: 2.4,
+    bulletSpread: 16,
+    bulletSpeed: 850,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联 12.7mm 别列津 UBS 双联装机枪（机头同步）
+  {
+    name: "SU/12.7/2",
+    bulletName: "SU/GB/12.7/1941",
+    bulletCount: 2,
+    reloadTime: 0.06,
+    range: 2.4,
+    bulletSpread: 16,
+    bulletSpeed: 850,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联 20mm 施瓦克 ShVAK 航空机炮（桨毂或机头整流罩，约 750 rpm）
+  {
+    name: "SU/20",
+    bulletName: "SU/GB/20/1936",
+    bulletCount: 1,
+    reloadTime: 0.16,
+    range: 3.6,
+    bulletSpread: 20,
+    bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联 20mm 施瓦克 ShVAK 双联装机炮（La-5 机头整流罩）
+  {
+    name: "SU/20/2",
+    bulletName: "SU/GB/20/1936",
+    bulletCount: 2,
+    reloadTime: 0.16,
+    range: 3.6,
+    bulletSpread: 20,
+    bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联 20mm B-20 三联装机炮（La-7 1945 年型，弹种与 ShVAK 相同）
+  {
+    name: "SU/20/B20/3",
+    bulletName: "SU/GB/20/1936",
+    bulletCount: 3,
+    reloadTime: 0.16,
+    range: 3.6,
+    bulletSpread: 20,
+    bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 法国海军 305mm/45 Mle 1906 双联装主炮
   {
     name: "FR/305/45/2",

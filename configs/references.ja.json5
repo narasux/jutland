@@ -12080,5 +12080,286 @@
         "url": "https://en.wikipedia.org/wiki/IMAM_Ro.43"
       }
     ]
-  }
+  },
+  {
+    "name": "MiG-1",
+    "displayName": "MiG-1",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機首（12.7mm UBS 同調）",
+        "value": "1 x 12.7mm UBS",
+      },
+      {
+        "label": "機首（7.62mm ShKAS 連装同調）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "MiG-1（I-200）は1940年に生産が始まった高高度迎撃戦闘機で、AM-35A を搭載して高高度では約636 km/h を発揮したが、低空での運動性は悪く、航続距離も約580 km にとどまった。武装は機首同調の12.7mm UBS 一挺と7.62mm ShKAS 二挺。本作では戦闘機として扱い、機首同調機銃のみを装備する。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — MiG-1",
+        "url": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-1",
+      },
+    ]
+  },
+  {
+    "name": "MiG-3",
+    "displayName": "MiG-3",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機首（12.7mm UBS 同調）",
+        "value": "1 x 12.7mm UBS",
+      },
+      {
+        "label": "機首（7.62mm ShKAS 連装同調）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "MiG-3 は MiG-1 の改良量産型で1941年に就役した。同様に高高度性能を重視したため低空では鈍重で、最大速度640 km/h、航続距離約820 km、全長8.25 m、翼幅10.20 m。武装は MiG-1 と同じく機首同調の12.7mm UBS 一挺と7.62mm ShKAS 二挺。本作では戦闘機として扱い、機首同調機銃のみを装備する。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — MiG-3",
+        "url": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-3",
+      },
+    ]
+  },
+  {
+    "name": "La-5",
+    "displayName": "La-5",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機首（20mm ShVAK 連装同調）",
+        "value": "2 x 20mm ShVAK",
+      }
+    ],
+    "description": "La-5 は1942年に LaGG-3 を M-82 星型エンジンに換装した改良型で、低空での上昇・旋回性能が大きく向上し、最大速度は約580 km/h。本作の航続距離は La-5FN の765 km を保守的に採用した。武装は機首カウリング内の20mm ShVAK 二門。本作では戦闘機として扱い、機首連装機関砲を装備する。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — La-5",
+        "url": "https://en.wikipedia.org/wiki/Lavochkin_La-5",
+      },
+    ]
+  },
+  {
+    "name": "La-7",
+    "displayName": "La-7",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "機首（20mm B-20 三連装）",
+        "value": "3 x 20mm B-20",
+      }
+    ],
+    "description": "La-7 は La-5 を大幅に改良した型で1944年に就役し、最大速度661 km/h を発揮して大戦中最良の低空レシプロ戦闘機の一つとなった。1945年1月以降は20mm B-20 三門を装備し、本作もその武装で設定している。本作では戦闘機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — La-7",
+        "url": "https://en.wikipedia.org/wiki/Lavochkin_La-7",
+      },
+    ]
+  },
+  {
+    "name": "Yak-1",
+    "displayName": "Yak-1",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "プロペラ軸（20mm ShVAK）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "機首（7.62mm ShKAS 連装同調）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "Yak-1 は1940年に初飛行し、1941年にはソ連戦闘機隊の中核となった。最大速度は約571 km/h、航続距離700 km。初期生産型の武装はプロペラ軸を通る20mm ShVAK 一門と機首同調の7.62mm ShKAS 二挺で、本作もこの構成で設定している。本作では戦闘機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Yak-1",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-1",
+      },
+    ]
+  },
+  {
+    "name": "Yak-3",
+    "displayName": "Yak-3",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "プロペラ軸（20mm ShVAK）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "機首（12.7mm UBS 連装同調）",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "Yak-3 は軽量化された格闘戦闘機として1944年に就役した。高い推重比により低空での旋回・上昇で同時期のドイツ戦闘機を上回り、最大速度646 km/h を発揮したが、航続距離は約550 km にとどまった。武装はプロペラ軸の20mm ShVAK 一門と機首同調の12.7mm UBS 二挺。本作では戦闘機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Yak-3",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-3",
+      },
+    ]
+  },
+  {
+    "name": "Yak-7",
+    "displayName": "Yak-7",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "プロペラ軸（20mm ShVAK）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "機首（12.7mm UBS 連装同調）",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "Yak-7 は練習機 Yak-7UTI から発展した型で、1942年の主力量産型 Yak-7B は M-105PF を搭載して約599 km/h を発揮した。武装はプロペラ軸の20mm ShVAK 一門と機首同調の12.7mm UBS 二挺。本作では戦闘機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Yak-7",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-7",
+      },
+    ]
+  },
+  {
+    "name": "Yak-9U",
+    "displayName": "Yak-9U",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "プロペラ軸（20mm ShVAK）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "機首（12.7mm UBS 連装同調）",
+        "value": "2 x 12.7mm UBS",
+      }
+    ],
+    "description": "Yak-9U は1944年に登場した Yak-9 系列の最終高速型である。VK-107A により最大速度は690 km/h に達し、航続距離は約675 km。武装はプロペラ軸の20mm ShVAK 一門と機首同調の12.7mm UBS 二挺。本作では戦闘機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Yak-9U",
+        "url": "https://en.wikipedia.org/wiki/Yakovlev_Yak-9",
+      },
+    ]
+  },
+  {
+    "name": "Be-4",
+    "displayName": "Be-4（KOR-2）",
+    "type": "水上偵察機",
+    "armaments": [
+      {
+        "label": "後座（7.62mm ShKAS 旋回）",
+        "value": "1 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "Be-4（KOR-2）は1942年に就役した艦載カタパルト発進の水上偵察機で、巡洋艦や戦艦のカタパルトから発進し水面に帰着した。最大速度約356 km/h、航続距離約1,150 km、全長10.50 m、翼幅12.00 m。武装は後座の7.62mm ShKAS 旋回機銃一挺のみ。本作では水上偵察機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Be-4",
+        "url": "https://en.wikipedia.org/wiki/Beriev_Be-4",
+      },
+    ]
+  },
+  {
+    "name": "MBR-2",
+    "displayName": "MBR-2",
+    "type": "水上偵察機",
+    "armaments": [
+      {
+        "label": "艇首（7.62mm PV-1 固定前射）",
+        "value": "1 x 7.62mm PV-1",
+      },
+      {
+        "label": "背塔（7.62mm ShKAS 旋回）",
+        "value": "1 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "MBR-2 は1930年代の沿岸基地用長距離水上偵察機である。後期量産型 MBR-2bis は AM-34NB を搭載し、最大速度275 km/h、航続距離は最大1,600 km、全長13.50 m、翼幅19.00 m。武装は艇首の7.62mm PV-1 一挺と背塔の7.62mm ShKAS 一挺。本作では水上偵察機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — MBR-2",
+        "url": "https://en.wikipedia.org/wiki/Beriev_MBR-2",
+      },
+    ]
+  },
+  {
+    "name": "SU/7.62",
+    "displayName": "7.62mm ShKAS 航空機関銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/7.62/2",
+    "displayName": "7.62mm ShKAS 連装航空機関銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/12.7",
+    "displayName": "12.7mm ベレジン UBS 航空機関銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/12.7/2",
+    "displayName": "12.7mm ベレジン UBS 連装航空機関銃",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20",
+    "displayName": "20mm ShVAK 航空機関砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20/2",
+    "displayName": "20mm ShVAK 連装航空機関砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/20/B20/3",
+    "displayName": "20mm B-20 三連装航空機関砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
 ]
