@@ -917,7 +917,11 @@
         label: "Light AA Guns",
         value: "2x4 + 10x1 20mm/65 Flak 30/C/38",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× Ar196",
+      },],
     description: "Bismarck was the lead ship of Germany's largest class of battleships. On her first operation in May 1941, she sank the battlecruiser HMS Hood in the Denmark Strait. British aircraft damaged her steering, allowing pursuing battleships and cruisers to close and sink her after a sustained engagement on 27 May.",
     author: "Maomatic",
     links: [
@@ -1221,7 +1225,11 @@
         label: "Anti-aircraft Guns",
         value: "16x2 20mm/70",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "3× Walrus",
+      },],
     description: "Cheshire represents an artistic interpretation of a late British wartime heavy-cruiser study associated with the cancelled Admiral concepts. Its aviation facilities, fire-control equipment, and large-caliber cruiser battery illustrate attempts to modernize reconnaissance and gunnery arrangements. The ship was not constructed and should be treated as a design reconstruction.",
     author: "Tzoli",
     links: [
@@ -5135,7 +5143,11 @@
         label: "Torpedoes",
         value: "2x3 533mm",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "3× Walrus",
+      },],
     description: "K-25 was one of several British cruiser studies explored during development of the Crown Colony class in the mid-1930s. The proposal examined fitting twin 5.25-inch dual-purpose turrets to a protected cruiser hull of roughly 8,000 tons. It remained a design study and was not selected for construction.",
     author: "Tzoli",
     links: [
@@ -5485,7 +5497,11 @@
         label: "Torpedoes",
         value: "4x3 533mm",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× Ar196",
+      },],
     description: "Leipzig was the lead ship of a small class of German light cruisers completed between the world wars. She performed training, minelaying, and escort duties, and was severely damaged in a 1944 collision with Prinz Eugen. Loaded with chemical munitions after the war, Leipzig was scuttled in the North Sea in 1946.",
     author: "Unknown",
     links: [
@@ -5642,7 +5658,11 @@
         label: "Anti-aircraft Guns",
         value: "6x2 20mm/70",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× Walrus",
+      },],
     description: "Lioness is a fictional derivative of Britain's Lion-class battleship studies. The design trades gun caliber for a larger number of 14-inch weapons, seeking high volume of fire while retaining heavy protection and roughly 30-knot speed. It is an artistic design study rather than an approved Royal Navy construction project.",
     author: "TZoli",
     links: [
@@ -5778,7 +5798,11 @@
         label: "Torpedoes",
         value: "2x4 533mm",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× Ar196",
+      },],
     description: "Admiral Graf Spee was the third Deutschland-class Panzerschiff, commissioned in 1936 and the only ship of the class fitted with a spherical rangefinder on her tower bridge. Her six 28 cm guns, high speed and very long cruising range were intended for commerce warfare. After her 1939 refit she sailed for the South Atlantic, sank several merchantmen, and was scuttled after the Battle of the River Plate in December 1939.",
     author: "Maomatic",
     links: [
@@ -6744,7 +6768,11 @@
         label: "Torpedoes",
         value: "4x3 533mm",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "3× Ar196",
+      },],
     description: "Prinz Eugen was the third Admiral Hipper-class heavy cruiser. She accompanied Bismarck during the Battle of the Denmark Strait and later operated in Norwegian and Baltic waters. Surrendered to the United States after the war, she survived two Operation Crossroads nuclear tests before capsizing at Kwajalein Atoll.",
     author: "Antonio Bonomi",
     links: [
@@ -7348,7 +7376,11 @@
         label: "Torpedoes",
         value: "2x3 533mm",
       },
-    ],
+    
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "3× Ar196",
+      },],
     description: "Scharnhorst was a fast German capital ship armed with nine 28 cm guns and, by 1943, a heavy anti-aircraft battery. After commerce-raiding operations and the Norwegian campaign she moved to northern waters to threaten the Arctic convoys. In December 1943, at the Battle of the North Cape, HMS Duke of York and accompanying forces caught and sank her; only 36 of her crew survived.",
     author: "Maomatic",
     links: [

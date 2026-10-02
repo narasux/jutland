@@ -18613,6 +18613,18 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "DECatapult_bismarck",
+      takeOffTime: 8,
+      groups: [
+        // 阿拉多 Ar 196：德军主力舰标准弹射水侦
+        {
+          name: "Ar196",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -18944,6 +18956,18 @@
           leftFiringArc: [210, 330]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "DECatapult_scharnhorst",
+      takeOffTime: 8,
+      groups: [
+        // 阿拉多 Ar 196：德军主力舰标准弹射水侦
+        {
+          name: "Ar196",
+          maxCount: 3
+        }
+      ]
     }
   },
   {
@@ -19190,6 +19214,18 @@
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "DECatapult_admiral_graf_spee",
+      takeOffTime: 8,
+      groups: [
+        // 阿拉多 Ar 196：德军主力舰标准弹射水侦
+        {
+          name: "Ar196",
+          maxCount: 2
+        }
       ]
     }
   },
@@ -24571,6 +24607,18 @@
           posPercent: -0.41,
           rightFiringArc: [45, 180],
           leftFiringArc: [180, 315]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "UKCatapult_lioness",
+      takeOffTime: 8,
+      groups: [
+        // 海象式：英军战列舰标准弹射水侦
+        {
+          name: "Walrus",
+          maxCount: 4
         }
       ]
     }
@@ -34454,6 +34502,18 @@
           leftFiringArc: [360, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "DECatapult_prinz_eugen",
+      takeOffTime: 8,
+      groups: [
+        // 阿拉多 Ar 196：德军主力舰标准弹射水侦
+        {
+          name: "Ar196",
+          maxCount: 3
+        }
+      ]
     }
   },
   {
@@ -34548,6 +34608,18 @@
           posPercent: 0,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "DECatapult_leipzig",
+      takeOffTime: 8,
+      groups: [
+        // 阿拉多 Ar 196：德军轻巡标准弹射水侦
+        {
+          name: "Ar196",
+          maxCount: 2
         }
       ]
     }
@@ -34799,6 +34871,18 @@
           posPercent: -0.95,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "UKCatapult_cheshire",
+      takeOffTime: 8,
+      groups: [
+        // 海象式：英军战列舰 / 巡洋舰标准弹射水侦
+        {
+          name: "Walrus",
+          maxCount: 3
         }
       ]
     }
@@ -35210,6 +35294,18 @@
           posPercent: -0.34,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "UKCatapult_k_25",
+      takeOffTime: 8,
+      groups: [
+        // 海象式：英军轻巡标准弹射水侦
+        {
+          name: "Walrus",
+          maxCount: 3
         }
       ]
     }
