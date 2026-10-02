@@ -5224,6 +5224,49 @@
     ],
   },
   {
+    name: "ansaldo_su",
+    displayName: "アンサルド大型巡洋艦",
+    type: "大型巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x3 250mm/55",
+      },
+      {
+        label: "副砲",
+        value: "6x2 130mm/50 B-2LM",
+      },
+      {
+        label: "両用砲",
+        value: "6x2 100mm/50 Minizini",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 45mm 41-K",
+      },
+      {
+        label: "対空砲",
+        value: "16x1 45mm 21-K",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "1936年、遠洋海軍の整備を進めていたソ連に対し、イタリアのアンサルド社は「巡洋艦キラー」案を提示した。250mm主砲で敵重巡洋艦の射程外からこれを撃破する構想である。船体と機関はイタリア式、兵装はすべてソ連製で、カタパルト2基と水上機4機を備えた。ソ連独自の69号計画大型巡洋艦と競合し、建造されず図面のみが残った。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Ansaldo Big Gun Cruiser Design for Russia",
+        url: "https://www.deviantart.com/tzoli/art/Ansaldo-Big-Gun-Cruiser-Design-for-Russia-725546481",
+      },
+      {
+        name: "ウィキペディア — クロンシュタット級重巡洋艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%83%B3%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%83%E3%83%88%E7%B4%9A%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "kirov",
     displayName: "キーロフ",
     type: "軽巡洋艦",
@@ -7863,6 +7906,15 @@
     ],
   },
   {
+    name: "SU/100/50/2/Minizini",
+    displayName: "100mm 連装両用砲架 (Minizini)",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "SU/100/56/2/DP",
     displayName: "100mm Twin 両用砲架",
     type: "兵器",
@@ -7883,6 +7935,15 @@
   {
     name: "SU/100/70/2/DP",
     displayName: "100mm Twin 両用砲架",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/130/50/2/B2LM",
+    displayName: "130mm 連装砲 (B-2LM)",
     type: "兵器",
     armaments: [],
     description: "",
@@ -7953,6 +8014,15 @@
     links: [],
   },
   {
+    name: "SU/250/55/3",
+    displayName: "250mm 三連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "SU/37/57/2",
     displayName: "37mm 連装砲",
     type: "兵器",
@@ -7973,6 +8043,24 @@
   {
     name: "SU/406/50/3",
     displayName: "406mm 三連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/45/46/1/21K",
+    displayName: "45mm 単装高角砲 (21-K)",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/45/46/2/41K",
+    displayName: "45mm 連装高角砲 (41-K)",
     type: "兵器",
     armaments: [],
     description: "",

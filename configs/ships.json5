@@ -35744,6 +35744,325 @@
       ]
     }
   },
+  {
+    // 安萨尔多 1936 年大型巡洋舰方案（苏联）
+    name: "ansaldo_su",
+    nation: "su",
+    type: "cruiser",
+    typeAbbr: "CB",
+    year: 1936,
+    totalHP: 26700,
+    horizontalDamageReduction: 0.34,
+    verticalDamageReduction: 0.19,
+    maxSpeed: 37,
+    acceleration: 0.5,
+    rotateSpeed: 1.25,
+    length: 242,
+    width: 28,
+    fundsCost: 265,
+    timeCost: 95,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "SU/250/55/3",
+          posPercent: 0.54,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "SU/250/55/3",
+          posPercent: 0.4,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "SU/250/55/3",
+          posPercent: -0.46,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 130mm/50 副炮
+        // 右舷前部副炮 A
+        {
+          name: "SU/130/50/2/B2LM",
+          posPercent: 0.26,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部副炮 A
+        {
+          name: "SU/130/50/2/B2LM",
+          posPercent: 0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 右舷前部副炮 B
+        {
+          name: "SU/130/50/2/B2LM",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部副炮 B
+        {
+          name: "SU/130/50/2/B2LM",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部副炮 C
+        {
+          name: "SU/130/50/2/B2LM",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部副炮 C
+        {
+          name: "SU/130/50/2/B2LM",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 100mm/50 高平两用炮
+        // 右舷前部高平炮 D
+        {
+          name: "SU/100/50/2/Minizini",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部高平炮 D
+        {
+          name: "SU/100/50/2/Minizini",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前部高平炮 E
+        {
+          name: "SU/100/50/2/Minizini",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部高平炮 E
+        {
+          name: "SU/100/50/2/Minizini",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部高平炮 F
+        {
+          name: "SU/100/50/2/Minizini",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部高平炮 F
+        {
+          name: "SU/100/50/2/Minizini",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 45mm 高炮（双联 41-K）
+        // 右舷前部双联 A
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: 0.48,
+          rightFiringArc: [0, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部双联 A
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: 0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 360]
+        },
+        // 右舷前部双联 B
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: 0.35,
+          rightFiringArc: [0, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部双联 B
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: 0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 360]
+        },
+        // 45mm 高炮（单装 21-K）
+        // 右舷前部单装 A
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部单装 A
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前部单装 B
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部单装 B
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前部单装 C
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部单装 C
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部单装 D
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部单装 D
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部单装 E
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部单装 E
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部单装 F
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部单装 F
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部单装 G
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部单装 G
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部单装 H
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部单装 H
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部双联 C
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: -0.53,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部双联 C
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: -0.53,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 345]
+        },
+        // 右舷后部双联 D
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: -0.65,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部双联 D
+        {
+          name: "SU/45/46/2/41K",
+          posPercent: -0.65,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 350]
+        }
+      ],
+      torpedoes: [
+        // 右舷鱼雷 A
+        {
+          name: "SU/533/3",
+          posPercent: -0.46,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "SU/533/3",
+          posPercent: -0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        }
+      ]
+    }
+  },
   // 驱逐舰
   // 美国海军
   {

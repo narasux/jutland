@@ -2858,6 +2858,7 @@
           "k_25",
           "sverdlov",
           "kirov",
+          "ansaldo_su",
           "duquesne",
           "jeanne_d_arc",
           "de_grasse",
@@ -3443,6 +3444,12 @@
       {
         name: "P_6",
         pos: [38, 28],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "ansaldo_su",
+        pos: [37, 29],
         rotation: 90,
         belongPlayer: "P1"
       },

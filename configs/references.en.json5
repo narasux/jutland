@@ -5283,6 +5283,49 @@
     ],
   },
   {
+    name: "ansaldo_su",
+    displayName: "Ansaldo Large Cruiser",
+    type: "Large Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x3 250mm/55",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x2 130mm/50 B-2LM",
+      },
+      {
+        label: "Dual-purpose Guns",
+        value: "6x2 100mm/50 Minizini",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 45mm 41-K",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "16x1 45mm 21-K",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "In 1936 the Italian firm Ansaldo offered the Soviet Union, then building an ocean-going Red Navy, a cruiser-killer design: 250 mm main guns intended to outrange and overwhelm foreign heavy cruisers. The hull and machinery followed Italian practice while the armament was entirely Soviet, with two catapults and four seaplanes. The proposal competed with the Soviet Union's own Project 69 large cruiser and was never built.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Ansaldo Big Gun Cruiser Design for Russia",
+        url: "https://www.deviantart.com/tzoli/art/Ansaldo-Big-Gun-Cruiser-Design-for-Russia-725546481",
+      },
+      {
+        name: "Wikipedia — Kronshtadt-class battlecruiser",
+        url: "https://en.wikipedia.org/wiki/Kronshtadt-class_battlecruiser",
+      },
+    ],
+  },
+  {
     name: "kirov",
     displayName: "Kirov",
     type: "Light Cruiser",
@@ -7922,6 +7965,15 @@
     ],
   },
   {
+    name: "SU/100/50/2/Minizini",
+    displayName: "100mm Twin Dual-Purpose Mount (Minizini)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "SU/100/56/2/DP",
     displayName: "100mm Twin Dual-Purpose Mount",
     type: "Weapon",
@@ -7942,6 +7994,15 @@
   {
     name: "SU/100/70/2/DP",
     displayName: "100mm Twin Dual-Purpose Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/130/50/2/B2LM",
+    displayName: "130mm Twin Mount (B-2LM)",
     type: "Weapon",
     armaments: [],
     description: "",
@@ -8012,6 +8073,15 @@
     links: [],
   },
   {
+    name: "SU/250/55/3",
+    displayName: "250mm Triple Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "SU/37/57/2",
     displayName: "37mm Twin Mount",
     type: "Weapon",
@@ -8032,6 +8102,24 @@
   {
     name: "SU/406/50/3",
     displayName: "406mm Triple Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/45/46/1/21K",
+    displayName: "45mm Single Anti-aircraft Mount (21-K)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/45/46/2/41K",
+    displayName: "45mm Twin Anti-aircraft Mount (41-K)",
     type: "Weapon",
     armaments: [],
     description: "",

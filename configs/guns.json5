@@ -2257,6 +2257,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 苏联海军 SU/250/55 三联装主炮（安萨尔多 1936 年大型巡洋舰方案，纸面设计）
+  {
+    name: "SU/250/55/3",
+    bulletName: "SU/GB/250/1936",
+    bulletCount: 3,
+    reloadTime: 11,
+    range: 34,
+    bulletSpread: 110,
+    bulletSpeed: 900,
+    fundsCost: 20,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 苏联海军 SU/180/57 三联装舰炮
   {
     name: "SU/180/57/3",
@@ -2322,6 +2335,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 苏联海军 SU/130/50 双联装舰炮（B-2LM，1936 年设计，用于安萨尔多大型巡洋舰方案）
+  {
+    name: "SU/130/50/2/B2LM",
+    bulletName: "SU/GB/130/1935",
+    bulletCount: 2,
+    reloadTime: 3,
+    range: 24,
+    bulletSpread: 80,
+    bulletSpeed: 900,
+    fundsCost: 6,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 苏联海军 SU/100/70 双联装高平两用炮
   {
     name: "SU/100/70/2/DP",
@@ -2361,6 +2387,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 苏联海军 SU/100/50 双联装高平两用炮（Minizini 1928/30，意大利进口炮座）
+  {
+    name: "SU/100/50/2/Minizini",
+    bulletName: "SU/GB/100/1940",
+    bulletCount: 2,
+    reloadTime: 1.6,
+    range: 15,
+    bulletSpread: 55,
+    bulletSpeed: 850,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 苏联海军 SU/57/72/4 四联装高炮
   {
     name: "SU/57/72/4",
@@ -2384,6 +2423,32 @@
     bulletSpread: 25,
     bulletSpeed: 1200,
     fundsCost: 3,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联海军 SU/45/46 双联装高炮（41-K，1932 年型）
+  {
+    name: "SU/45/46/2/41K",
+    bulletName: "SU/GB/45/1945",
+    bulletCount: 2,
+    reloadTime: 1.6,
+    range: 8,
+    bulletSpread: 40,
+    bulletSpeed: 760,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联海军 SU/45/46 单装高炮（21-K，1932 年型）
+  {
+    name: "SU/45/46/1/21K",
+    bulletName: "SU/GB/45/1945",
+    bulletCount: 1,
+    reloadTime: 1.6,
+    range: 8,
+    bulletSpread: 40,
+    bulletSpeed: 760,
+    fundsCost: 1,
     antiShip: true,
     antiAircraft: true
   },

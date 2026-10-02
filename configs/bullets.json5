@@ -593,6 +593,14 @@
     damage: 3750,
     criticalRate: 0.03
   },
+  // 苏联海军 250mm/55 安萨尔多大型巡洋舰方案主炮弹（1936 年纸面设计，无实弹）
+  {
+    name: "SU/GB/250/1936",
+    type: "shell",
+    diameter: 250,
+    damage: 860,
+    criticalRate: 0.01
+  },
   {
     name: "SU/GB/180/1935",
     type: "shell",

@@ -6003,6 +6003,49 @@
     ],
   },
   {
+    name: "ansaldo_su",
+    displayName: "安萨尔多大型巡洋舰",
+    type: "大型巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x3 250mm/55",
+      },
+      {
+        label: "副炮",
+        value: "6x2 130mm/50 B-2LM",
+      },
+      {
+        label: "高平炮",
+        value: "6x2 100mm/50 Minizini",
+      },
+      {
+        label: "高炮",
+        value: "8x2 45mm 41-K",
+      },
+      {
+        label: "高炮",
+        value: "16x1 45mm 21-K",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "1936 年，正在筹建远洋红海军的苏联向国外寻求技术，意大利安萨尔多公司为此提交了一型“巡洋舰杀手”方案：以 250mm 主炮在敌方重巡洋舰的防护圈外开火。舰体与动力沿用意大利设计，武备则全部选用苏联型号，并配有双弹射器与四架水上飞机。该方案与苏联自研的 69 工程大型巡洋舰同期竞争，未获建造，仅存图纸。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Ansaldo Big Gun Cruiser Design for Russia",
+        url: "https://www.deviantart.com/tzoli/art/Ansaldo-Big-Gun-Cruiser-Design-for-Russia-725546481",
+      },
+      {
+        name: "维基百科 - 喀琅施塔得级战列巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%96%80%E7%90%85%E6%96%BD%E5%A1%94%E5%BE%97%E7%BA%A7%E6%88%98%E5%88%97%E5%B7%A1%E6%B4%8B%E8%88%B0",
+      },
+    ],
+  },
+  {
     name: "kirov",
     displayName: "基洛夫",
     type: "轻巡洋舰",
@@ -9887,6 +9930,15 @@
     links: [],
   },
   {
+    name: "SU/250/55/3",
+    displayName: "250mm/55 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "SU/180/57/3",
     displayName: "180mm/57 三联装舰炮",
     type: "武器",
@@ -9932,6 +9984,15 @@
     links: [],
   },
   {
+    name: "SU/130/50/2/B2LM",
+    displayName: "130mm/50 双联装舰炮（B-2LM）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "SU/100/70/2/DP",
     displayName: "100mm/70 双联装高平两用炮",
     type: "武器",
@@ -9959,6 +10020,15 @@
     links: [],
   },
   {
+    name: "SU/100/50/2/Minizini",
+    displayName: "100mm/50 双联装高平两用炮（Minizini）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "SU/57/72/4",
     displayName: "57mm/72 四联装高炮",
     type: "武器",
@@ -9970,6 +10040,24 @@
   {
     name: "SU/45/78/4",
     displayName: "45mm/78 四联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/45/46/2/41K",
+    displayName: "45mm/46 双联装高炮（41-K）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/45/46/1/21K",
+    displayName: "45mm/46 单装高炮（21-K）",
     type: "武器",
     armaments: [],
     description: "",

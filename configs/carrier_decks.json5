@@ -175,6 +175,32 @@
       approachLength: 3
     }
   },
+  // 安萨尔多大型巡洋舰方案：艉部左右并排两台弹射器，均向舰尾方向弹射，
+  // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.78 两舷）
+  {
+    name: "SUCatapult_ansaldo_su",
+    takeoffPoints: [
+      {
+        forward: 0.889,
+        lateral: -0.209,
+        runLength: 0.22,
+        launchAngle: 180
+      },
+      {
+        forward: 0.887,
+        lateral: 0.212,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
   // 塔斯特指挥官四弹射器：舯部两舷前后各一，向舷外弹射
   {
     name: "FrenchQuadCatapultSeaplaneTender",
