@@ -1,7 +1,8 @@
 [
-  // 注：USCatapult_<舰名> 这些模板的弹射点坐标是逐舰在战舰俯视图上标注出来的
-  // （工具见 utils/turret_marker，清单 utils/turret_marker/catapult_batch.json），
-  // 所以每艘美国主力舰一个模板、不共用；弹射方向统一为相对舰艏 60°，单台向左舷。
+  // 注：USCatapult_<舰名> / JPCatapult_<舰名> 这些模板的弹射点坐标是逐舰在战舰俯视图上标注出来的
+  // （工具见 utils/turret_marker，清单 catapult_batch.json（美军）/ catapult_batch_jp.json（日军）），
+  // 所以每艘主力舰一个模板、不共用；美军弹射方向统一为相对舰艏 60° 外偏，
+  // 日军按史实：中线单台向舰尾 180°，两舷并排向舷外 ±90°。
   // 航母起降甲板模板。
   // 舰船在 ships.json5 的 aircraft.deck 中按名称引用，缺失会在初始化时报错。
   // 坐标约定：
@@ -66,19 +67,20 @@
     }
   },
   // 航空战列舰（伊势级式）：后部短飞行甲板，两舷弹射器带外偏角起飞；
-  // 游戏简化：短后甲板视作可着舰，舰尾直线进近，落点靠舰尾避开舰桥
+  // 游戏简化：短后甲板视作可着舰，舰尾直线进近，落点靠舰尾避开舰桥；
+  // 两个弹射点坐标按伊势俯视图逐舰标注
   {
     name: "IseAviationBattleship",
     takeoffPoints: [
       {
-        forward: 0.68,
-        lateral: -0.32,
+        forward: 0.634,
+        lateral: -0.37,
         runLength: 0.4,
         launchAngle: -30
       },
       {
-        forward: 0.68,
-        lateral: 0.32,
+        forward: 0.633,
+        lateral: 0.34,
         runLength: 0.4,
         launchAngle: 30
       }
@@ -769,6 +771,378 @@
         lateral: -0.015,
         runLength: 0.22,
         launchAngle: -60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 以下 JPCatapult_<舰名> 为日本战列舰/巡洋舰弹射器，坐标逐舰标注，约定见文件开头
+  // aoba：中线单台，三号炮塔正前方，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_aoba",
+    takeoffPoints: [
+      {
+        forward: 0.746,
+        lateral: 0.016,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // atago：两舷并排，主桅与四号炮塔之间，向舷外弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_atago",
+    takeoffPoints: [
+      {
+        forward: 0.62,
+        lateral: -0.37,
+        runLength: 0.22,
+        launchAngle: -90
+      },
+      {
+        forward: 0.62,
+        lateral: 0.375,
+        runLength: 0.22,
+        launchAngle: 90
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // edo：舰尾两舷并排（虚构超战列舰），向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_edo",
+    takeoffPoints: [
+      {
+        forward: 0.947,
+        lateral: -0.216,
+        runLength: 0.22,
+        launchAngle: 180
+      },
+      {
+        forward: 0.945,
+        lateral: 0.241,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // furutaka：中线单台，后主炮前飞机甲板，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_furutaka",
+    takeoffPoints: [
+      {
+        forward: 0.644,
+        lateral: 0.014,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // fuso：中线单台，舰尾，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_fuso",
+    takeoffPoints: [
+      {
+        forward: 0.93,
+        lateral: 0.137,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // haguro：两舷并排（1934-36 年改装后状态），向舷外弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_haguro",
+    takeoffPoints: [
+      {
+        forward: 0.629,
+        lateral: -0.412,
+        runLength: 0.22,
+        launchAngle: -90
+      },
+      {
+        forward: 0.628,
+        lateral: 0.439,
+        runLength: 0.22,
+        launchAngle: 90
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // kongo：中线单台，三号与四号炮塔之间工作甲板，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_kongo",
+    takeoffPoints: [
+      {
+        forward: 0.72,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // kuma：中线单台（1932 年加装状态），五、六号 140mm 炮之间，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_kuma",
+    takeoffPoints: [
+      {
+        forward: 0.698,
+        lateral: 0.011,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // mogami：两舷并排处理甲板，向舷外弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_mogami",
+    takeoffPoints: [
+      {
+        forward: 0.635,
+        lateral: -0.352,
+        runLength: 0.22,
+        launchAngle: -90
+      },
+      {
+        forward: 0.638,
+        lateral: 0.413,
+        runLength: 0.22,
+        launchAngle: 90
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // nagato：中线单台，主桅与三号炮塔之间，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_nagato",
+    takeoffPoints: [
+      {
+        forward: 0.658,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // ooyodo：中线单台，后甲板长弹射器，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_ooyodo",
+    takeoffPoints: [
+      {
+        forward: 0.748,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // satsuma：舰尾两舷并排（A-150 纸面设计），向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_satsuma",
+    takeoffPoints: [
+      {
+        forward: 0.948,
+        lateral: -0.238,
+        runLength: 0.22,
+        launchAngle: 180
+      },
+      {
+        forward: 0.945,
+        lateral: 0.261,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // shintsu：中线单台（1933-34 年改装状态），七号炮位附近靠舰尾，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_shintsu",
+    takeoffPoints: [
+      {
+        forward: 0.819,
+        lateral: 0.03,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // suzuya：两舷并排处理甲板，向舷外弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_suzuya",
+    takeoffPoints: [
+      {
+        forward: 0.635,
+        lateral: -0.368,
+        runLength: 0.22,
+        launchAngle: -90
+      },
+      {
+        forward: 0.634,
+        lateral: 0.375,
+        runLength: 0.22,
+        launchAngle: 90
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // tone：两舷并排，主桅后方，向舷外弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_tone",
+    takeoffPoints: [
+      {
+        forward: 0.703,
+        lateral: -0.347,
+        runLength: 0.22,
+        launchAngle: -90
+      },
+      {
+        forward: 0.703,
+        lateral: 0.38,
+        runLength: 0.22,
+        launchAngle: 90
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // yahagi：中线单台，后部飞行甲板末端，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_yahagi",
+    takeoffPoints: [
+      {
+        forward: 0.686,
+        lateral: 0.009,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // yamato：舰尾两舷并排，向舰尾弹射，返航舰侧水面回收
+  {
+    name: "JPCatapult_yamato",
+    takeoffPoints: [
+      {
+        forward: 0.941,
+        lateral: -0.242,
+        runLength: 0.22,
+        launchAngle: 180
+      },
+      {
+        forward: 0.939,
+        lateral: 0.26,
+        runLength: 0.22,
+        launchAngle: 180
       }
     ],
     landing: {

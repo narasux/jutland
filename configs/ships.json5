@@ -15472,6 +15472,23 @@
           leftFiringArc: [180, 315]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_kongo",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索主力
+        {
+          name: "E13A",
+          maxCount: 2
+        },
+        // 零式观测机：1943 年起配备
+        {
+          name: "F1M2",
+          maxCount: 1
+        }
+      ]
     }
   },
   {
@@ -15846,6 +15863,23 @@
           posPercent: -0.48,
           rightFiringArc: [90, 180],
           leftFiringArc: [180, 315]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_fuso",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索
+        {
+          name: "E13A",
+          maxCount: 1
+        },
+        // 零式观测机：1942 年起配备
+        {
+          name: "F1M2",
+          maxCount: 2
         }
       ]
     }
@@ -16262,17 +16296,15 @@
       deck: "IseAviationBattleship",
       takeOffTime: 6,
       groups: [
+        // 瑞云：计划编成 11 架
         {
-          name: "A6M2",
-          maxCount: 6
+          name: "E16A",
+          maxCount: 11
         },
+        // 彗星：计划编成 11 架（游戏简化可甲板回收）
         {
-          name: "D3A1",
-          maxCount: 8
-        },
-        {
-          name: "B5N2",
-          maxCount: 8
+          name: "D4Y3",
+          maxCount: 11
         }
       ]
     }
@@ -16737,6 +16769,23 @@
           posPercent: -0.72,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_nagato",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索
+        {
+          name: "E13A",
+          maxCount: 1
+        },
+        // 零式观测机：1943 年起替换九五式
+        {
+          name: "F1M2",
+          maxCount: 2
         }
       ]
     }
@@ -17220,6 +17269,23 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_yamato",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索主力
+        {
+          name: "E13A",
+          maxCount: 4
+        },
+        // 零式观测机：短程观测校射
+        {
+          name: "F1M2",
+          maxCount: 3
+        }
+      ]
     }
   },
   {
@@ -17638,6 +17704,23 @@
           posPercent: -0.99,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_satsuma",
+      takeOffTime: 8,
+      groups: [
+        // 瑞云：纸面舰按大和式编成外推
+        {
+          name: "E16A",
+          maxCount: 4
+        },
+        // 零式观测机
+        {
+          name: "F1M2",
+          maxCount: 3
         }
       ]
     }
@@ -18212,6 +18295,23 @@
           posPercent: -0.99,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_edo",
+      takeOffTime: 8,
+      groups: [
+        // 瑞云：虚构舰按大和式编成外推
+        {
+          name: "E16A",
+          maxCount: 4
+        },
+        // 零式观测机
+        {
+          name: "F1M2",
+          maxCount: 3
         }
       ]
     }
@@ -30235,6 +30335,17 @@
           leftFiringArc: [210, 330]
         },
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_furutaka",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "E13A",
+          maxCount: 2
+        }
+      ]
     }
   },
   {
@@ -30410,6 +30521,17 @@
           leftFiringArc: [210, 330]
         },
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_aoba",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "E13A",
+          maxCount: 2
+        }
+      ]
     }
   },
   {
@@ -30418,7 +30540,7 @@
     nation: "jp",
     type: "cruiser",
     typeAbbr: "CA",
-    year: 1929,
+    year: 1944,
     totalHP: 15479,
     horizontalDamageReduction: 0.25,
     verticalDamageReduction: 0.2,
@@ -30695,6 +30817,23 @@
           posPercent: -0.34,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_haguro",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索
+        {
+          name: "E13A",
+          maxCount: 2
+        },
+        // 零式观测机：后期混编
+        {
+          name: "F1M2",
+          maxCount: 1
         }
       ]
     }
@@ -31068,6 +31207,23 @@
           leftFiringArc: [210, 330]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_atago",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索
+        {
+          name: "E13A",
+          maxCount: 2
+        },
+        // 零式观测机：后期口径混编
+        {
+          name: "F1M2",
+          maxCount: 1
+        }
+      ]
     }
   },
   {
@@ -31397,6 +31553,23 @@
           leftFiringArc: [210, 330]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_mogami",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索
+        {
+          name: "E13A",
+          maxCount: 2
+        },
+        // 零式观测机：后期口径混编
+        {
+          name: "F1M2",
+          maxCount: 1
+        }
+      ]
     }
   },
   {
@@ -31710,6 +31883,23 @@
           posPercent: -0.32,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_suzuya",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索
+        {
+          name: "E13A",
+          maxCount: 2
+        },
+        // 零式观测机：后期口径混编
+        {
+          name: "F1M2",
+          maxCount: 1
         }
       ]
     }
@@ -32048,6 +32238,23 @@
           leftFiringArc: [210, 330]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_tone",
+      takeOffTime: 8,
+      groups: [
+        // 三座水侦：远程搜索
+        {
+          name: "E13A",
+          maxCount: 2
+        },
+        // 零式观测机：1941 年后混编
+        {
+          name: "F1M2",
+          maxCount: 2
+        }
+      ]
     }
   },
   // 轻巡洋舰
@@ -32269,6 +32476,17 @@
           posPercent: -0.25,
           rightFiringArc: [0, 0],
           leftFiringArc: [240, 300]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_kuma",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "E13A",
+          maxCount: 2
         }
       ]
     }
@@ -33339,6 +33557,17 @@
           leftFiringArc: [210, 330]
         },
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_shintsu",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "E13A",
+          maxCount: 2
+        }
+      ]
     }
   },
   {
@@ -33763,6 +33992,17 @@
           leftFiringArc: [210, 330]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_yahagi",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "E13A",
+          maxCount: 2
+        }
+      ]
     }
   },
   {
@@ -33913,6 +34153,18 @@
           posPercent: -0.85,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "JPCatapult_ooyodo",
+      takeOffTime: 8,
+      groups: [
+        // 紫云：设计计划编成 6 架（格纳库 4 + 甲板 2），按计划口径配置
+        {
+          name: "E15K1",
+          maxCount: 6
         }
       ]
     }

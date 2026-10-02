@@ -246,6 +246,10 @@
         label: "Anti-aircraft Guns",
         value: "32x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
+      },
     ],
     description: "USS Alaska (CB-1) was the lead ship of the Alaska-class large cruisers and entered service in 1944. In 1945 she screened fast carriers during the Iwo Jima and Okinawa campaigns, conducted shore bombardments, and swept the East China and Yellow Seas. She earned three battle stars before being decommissioned in 1947 and was later sold for scrapping.",
     author: "Ian Roberts",
@@ -315,6 +319,10 @@
       {
         label: "Torpedoes",
         value: "2x4 610mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
       },
     ],
     description: "Aoba was the lead ship of an improved development of the Furutaka class, built with twin 203 mm turrets and more capable fire control. She served extensively around the Solomon Islands and survived repeated damage. American carrier aircraft bombed her at Kure in July 1945, leaving the cruiser settled in shallow water.",
@@ -412,6 +420,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "8x1 12.7mm/90 M1921",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
       },
     ],
     description: "USS Arizona (BB-39) was the second Pennsylvania-class battleship, commissioned in 1916 and modernized in 1929–31. The game depicts her on 7 December 1941, before the planned CXAM radar and quadruple 1.1-inch mounts were fitted, leaving eight 5-inch/25 guns and eight .50-caliber machine guns as her antiaircraft battery. Her forward magazines exploded during the Pearl Harbor attack, killing 1,177 aboard; the wreck later became a memorial.",
@@ -584,6 +596,10 @@
         label: "Anti-aircraft Guns",
         value: "10x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SOC",
+      },
     ],
     description: "USS Astoria (CA-34) was a New Orleans-class heavy cruiser commissioned in 1934. She escorted USS Yorktown at the Battle of the Coral Sea and fought at Midway. During the Battle of Savo Island in August 1942, Japanese cruiser gunfire caused uncontrollable fires and damage that sank Astoria the following day.",
     author: "Midnike",
@@ -622,6 +638,14 @@
       {
         label: "Torpedoes",
         value: "4x4 610mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "1× F1M2",
       },
     ],
     description: "Atago was the second Takao-class heavy cruiser and frequently served as flagship of Japan's Second Fleet. Her ten 203 mm guns and massive bridge made the class powerful but top-heavy. USS Darter torpedoed and sank Atago in the Palawan Passage on 23 October 1944 as the fleet approached Leyte Gulf.",
@@ -792,6 +816,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "22x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
       },
     ],
     description: "USS Baltimore (CA-68) was the lead ship of the United States Navy's largest wartime heavy-cruiser class. Commissioned in 1943, she screened fast carriers and supported attacks across the Central Pacific, Philippines, Okinawa, and Japan. The class combined reliable 8-inch firepower with stronger protection and anti-aircraft batteries than earlier treaty cruisers.",
@@ -981,6 +1009,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "10x2 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SC-1",
       },
     ],
     description: "USS Brooklyn (CL-40) was the lead ship of the Brooklyn-class light cruisers, commissioned in 1937. During World War II she served chiefly in the Atlantic and Mediterranean on convoy and shore-bombardment duties, supporting the invasions of North Africa, Sicily, Anzio, and southern France and earning four battle stars. Transferred to Chile as O'Higgins in 1951, she served until 1992 and sank later that year while under tow to scrapping.",
@@ -1444,6 +1476,10 @@
         label: "Anti-aircraft Guns",
         value: "12x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SC-1",
+      },
     ],
     description: "USS Des Moines (CA-134) led the final class of all-gun heavy cruisers completed for the United States Navy. Her automatic 8-inch/55 Mk 16 guns achieved a much higher rate of fire than earlier cruiser weapons. Commissioned too late for the Second World War, she later served as a Sixth Fleet flagship in the Mediterranean.",
     author: "Tzoli",
@@ -1620,6 +1656,14 @@
       {
         label: "Anti-aircraft Rockets",
         value: "12x21 120mm 5th Year Type",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× E16A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "3× F1M2",
       },
     ],
     description: "Edo is a fictional Japanese super-battleship created for the game. Its name evokes the historic province and the political center of Tokugawa Japan, while the design exaggerates capital-ship scale, armor, and firepower beyond practical wartime limits. It should be read as naval fantasy rather than a documented Imperial Japanese Navy project.",
@@ -2351,6 +2395,10 @@
         label: "Anti-aircraft Guns",
         value: "10x2 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "3× SC-1",
+      },
     ],
     description: "USS Fargo (CL-106) led an improved Cleveland-class design whose lower, compact superstructure enhanced stability and anti-aircraft arcs. Commissioned in 1945, she served mainly in the postwar Mediterranean and Atlantic before decommissioning in 1950.",
     author: "Tzoli",
@@ -2421,6 +2469,10 @@
         label: "Torpedoes",
         value: "2x4 610mm",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
     ],
     description: "Furutaka was the lead ship of Japan's first class of modern heavy cruisers. Originally armed with six single 200 mm turrets, she was reconstructed with twin 203 mm mounts and improved machinery. American cruisers and destroyers fatally damaged her during the Battle of Cape Esperance in October 1942.",
     author: "Unknown",
@@ -2455,6 +2507,14 @@
       {
         label: "Anti-aircraft Guns",
         value: "4x2 25mm/60 Type 96",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "1× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "2× F1M2",
       },
     ],
     description: "Fusō was the lead ship of Japan's first class of domestically built super-dreadnought battleships. Her six twin 14-inch turrets and towering reconstructed superstructure gave her a distinctive appearance. During the Battle of Surigao Strait in October 1944, destroyer torpedoes fatally damaged her before the main American battle line engaged.",
@@ -2827,6 +2887,14 @@
       {
         label: "Torpedoes",
         value: "4x4 610mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "1× F1M2",
       },
     ],
     description: "Haguro was the fourth Myōkō-class heavy cruiser and served in numerous campaigns from the Dutch East Indies to Leyte Gulf. In May 1945, British destroyers intercepted her in the Malacca Strait during Operation Dukedom. Gunfire and torpedoes sank Haguro, making her one of the last major Japanese warships lost in surface combat.",
@@ -4386,16 +4454,12 @@
         value: "6x28 120mm 4th Year Type",
       },
       {
-        label: "Fighters",
-        value: "A6M2 Zero Model 21 x6",
+        label: "Reconnaissance Seaplanes",
+        value: "11× E16A",
       },
       {
         label: "Dive Bombers",
-        value: "D3A x8",
-      },
-      {
-        label: "Torpedo Bombers",
-        value: "B5N2 x8",
+        value: "11× D4Y3",
       },
     ],
     description: "Ise was the lead ship of the Ise-class battleships. After Midway, her two aftermost main turrets were removed and replaced by a short flight deck, hangar, and catapults, creating a hybrid aviation battleship. Aircraft and trained crews were unavailable, so the planned air group never became operational in combat.",
@@ -5281,6 +5345,14 @@
         label: "Anti-aircraft Guns",
         value: "6x2 25mm/60 Type 96",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "1× F1M2",
+      },
     ],
     description: "Kongō was the lead ship of Japan's Kongō-class battlecruisers and the last Japanese capital ship built abroad. Completed by Vickers in Britain in 1913, she underwent major reconstructions that transformed her into a fast battleship. USS Sealion torpedoed and sank her in the Taiwan Strait in November 1944.",
     author: "Alexpl",
@@ -5346,6 +5418,10 @@
       {
         label: "Torpedoes",
         value: "4x2 533mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
       },
     ],
     description: "Kuma was the lead ship of Japan's first group of 5,500-ton light cruisers. Designed as a fast destroyer-flotilla leader, she later performed transport and escort duties in Southeast Asian waters. The British submarine HMS Tally-Ho torpedoed and sank Kuma off Penang in January 1944 after years of wartime service.",
@@ -5452,6 +5528,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "34x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
       },
     ],
     description: "This Lexington is an alternate-history battlecruiser created by the artist Moscow Jelly, imagining the class completed instead of converted under the Washington Naval Treaty. The design emphasizes an exceptionally heavy battery of three triple 18-inch gun turrets. It is a fictional interpretation rather than a historical United States Navy configuration.",
@@ -5651,6 +5731,10 @@
         label: "Anti-aircraft Guns",
         value: "44x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SC-1",
+      },
     ],
     description: "USS Iowa (BB-61) was the lead ship of the Iowa-class fast battleships and served in the Second World War, Korea, and the 1980s. Her speed allowed her to escort fast carrier groups while nine 16-inch guns provided heavy bombardment. Decommissioned in 1990, she is preserved as a museum ship in Los Angeles.",
     author: "TZoli",
@@ -5728,6 +5812,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "21x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
       },
     ],
     description: "USS Maryland (BB-46) was the second Colorado-class battleship and entered service in 1921. The game entry is dated 1944 and its current loadout uses eight twin 5-inch/38 Mk 12 dual-purpose mounts, ten quadruple plus two twin 40 mm mounts, and twenty-one single 20 mm guns. Lightly damaged at Pearl Harbor, she later fought across the Central Pacific and at Surigao Strait, earning seven battle stars during the Second World War.",
@@ -5861,6 +5949,14 @@
         label: "Torpedoes",
         value: "4x3 610mm",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "1× F1M2",
+      },
     ],
     description: "Mogami was the lead ship of a cruiser class built with fifteen 155 mm guns under treaty rules. After treaty restrictions ended, five twin 203 mm turrets converted her into a heavy cruiser. She was crippled by collision, gunfire, and air attack during the Battle of Surigao Strait and was subsequently scuttled.",
     author: "Unknown",
@@ -5910,6 +6006,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "72x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SC-1",
       },
     ],
     description: "The Montana class was planned as the United States Navy's largest and most heavily armed battleship design. Twelve 16-inch guns and stronger protection offered greater broadside power than the Iowa class, at the cost of speed and Panama Canal compatibility. All five authorized ships were cancelled in 1943 before construction began.",
@@ -6052,6 +6152,14 @@
         label: "Anti-aircraft Guns",
         value: "24x1 25mm/60 Type 96",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "1× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "2× F1M2",
+      },
     ],
     description: "Nagato was the lead ship of her class and one of the first battleships armed with 410 mm guns. She served as Combined Fleet flagship during the early Pacific War and survived the Battle of Leyte Gulf. Seized after Japan's surrender, she sank at Bikini Atoll following the Operation Crossroads nuclear tests.",
     author: "Alexpl",
@@ -6134,6 +6242,10 @@
         label: "Anti-aircraft Guns",
         value: "38x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
+      },
     ],
     description: "USS Nevada (BB-36) was the lead ship of her class and a pioneer of the U.S. Standard-type battleships. She was the only battleship to get underway during the Pearl Harbor attack. Rebuilt in 1942, she later supported the Aleutian, Normandy, Southern France, Iwo Jima, and Okinawa campaigns before surviving the Crossroads nuclear tests and being sunk as a target in 1948.",
     author: "Karle94, David Latuch",
@@ -6168,6 +6280,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "8x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SOC",
       },
     ],
     description: "USS New Mexico (BB-40) was the lead ship of her battleship class. Reconstructed from 1931 to 1933, she received a tower bridge, stronger protection, and improved anti-aircraft armament; the game depicts her in 1936. She later supported campaigns from the Aleutians to Okinawa and earned six battle stars during the Second World War.",
@@ -6208,6 +6324,10 @@
         label: "Anti-aircraft Guns",
         value: "12x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SOC",
+      },
     ],
     description: "USS New York was the lead ship of her battleship class and entered service in 1914. Modernized during the 1920s, she joined the Atlantic Neutrality Patrol in 1939 and later escorted convoys and provided shore bombardment in North Africa, at Iwo Jima, and at Okinawa. After Operation Crossroads, she was sunk as a target in 1948. The game depicts her 1939 configuration.",
     author: "Karle94, David Latuch",
@@ -6246,6 +6366,10 @@
       {
         label: "Torpedoes",
         value: "2x3 533mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SOC",
       },
     ],
     description: "USS Northampton (CA-26) was the lead ship of a class initially designated light cruisers and reclassified after the 1930 London Naval Treaty. She escorted American carriers at Midway and the Santa Cruz Islands. Japanese Type 93 torpedoes sank her during the Battle of Tassafaronga on 30 November 1942.",
@@ -6309,6 +6433,10 @@
         label: "Anti-aircraft Guns",
         value: "12x3 25mm/60 Type 96",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "6× E15K1",
+      },
     ],
     description: "Ōyodo was a unique light cruiser designed to command submarine forces and operate long-range reconnaissance seaplanes from a large after deck. She instead became a Combined Fleet flagship and received extensive communications facilities. American carrier aircraft sank her in shallow water at Kure during the July 1945 raids.",
     author: "Unknown",
@@ -6339,6 +6467,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "16x2 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SC-1",
       },
     ],
     description: "USS Oregon City (CA-122) was the lead ship of a modified Baltimore-class design distinguished by a single funnel and rearranged superstructure. Commissioned in 1946, she briefly served as Fourth Fleet flagship before entering reserve in 1947. Two sister hulls were completed in substantially different command-ship configurations.",
@@ -6425,6 +6557,10 @@
         label: "Anti-aircraft Guns",
         value: "14x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
+      },
     ],
     description: "USS Pennsylvania (BB-38) was the lead ship of her class, commissioned in 1916 and modernized in 1929–31. This entry depicts her pre-overhaul 1942 fit, after light damage at Pearl Harbor and before twin 5-inch/38 mounts replaced her older secondary battery. She later supported amphibious operations across the Pacific and fought at Surigao Strait.",
     author: "Karle94, David Latuch",
@@ -6463,6 +6599,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "6x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SOC",
       },
     ],
     description: "USS Pensacola (CA-24) was the lead ship of the United States Navy's first class of treaty cruisers. Her unusual arrangement of twin and triple 8-inch turrets reflected efforts to maximize firepower within displacement limits. She served through the Pacific War, survived, and was later expended during the Operation Crossroads tests.",
@@ -6525,6 +6665,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "15x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SOC",
       },
     ],
     description: "USS Portland (CA-33) was the lead ship of her heavy-cruiser class. She fought at the Coral Sea, Midway, Guadalcanal, Leyte Gulf, and in later Pacific campaigns. Despite severe torpedo damage during the Naval Battle of Guadalcanal, she returned to service and finished the war with sixteen battle stars.",
@@ -6661,6 +6805,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "44x1 20mm/70",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SC-1",
       },
     ],
     description: "Puerto Rico is a fictional development of the historical Alaska-class large cruiser created by TZoli; the game assigns it the name originally planned for CB-5. The design adds a fourth triple 12-inch turret and increases displacement and protection, pushing the concept closer to a battlecruiser. It was never an approved United States Navy configuration.",
@@ -7054,6 +7202,14 @@
         label: "Anti-aircraft Rockets",
         value: "10x21 120mm 5th Year Type",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× E16A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "3× F1M2",
+      },
     ],
     description: "Satsuma represents a game interpretation of Design A-150, a proposed successor to Japan's Yamato class. Surviving studies suggest even larger guns, commonly associated with a 510 mm caliber, and protection intended to defeat contemporary battleships. Wartime priorities prevented the concept from progressing beyond preliminary design work.",
     author: "TZoli",
@@ -7368,6 +7524,10 @@
         label: "Torpedoes",
         value: "2x4 610mm",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
     ],
     description: "Jintsū was the second Sendai-class light cruiser and a long-serving flagship of the Second Destroyer Squadron. During the Battle of Kolombangara in July 1943, she illuminated the Allied force and drew concentrated cruiser fire. Jintsū sank after sustaining numerous shell hits and at least one torpedo strike.",
     author: "Unknown",
@@ -7582,6 +7742,10 @@
         label: "Anti-aircraft Guns",
         value: "57x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
+      },
     ],
     description: "USS South Dakota (BB-57) was the lead ship of a compact class of treaty battleships. Commissioned in 1942, she fought in the Guadalcanal campaign and later supported carrier operations and amphibious assaults across the Pacific. She earned thirteen battle stars and was present in Tokyo Bay when Japan formally surrendered.",
     author: "Ronald Yoshioka",
@@ -7682,6 +7846,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "8x1 12.7mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× SOC",
       },
     ],
     description: "USS St. Louis (CL-49) was the lead ship of the St. Louis subclass of Brooklyn-class light cruisers, commissioned in 1939 with unit machinery and four twin 5-inch/38 mounts. She escaped Pearl Harbor during the attack, fought throughout the Pacific, and earned eleven battle stars. Transferred to Brazil as Almirante Tamandaré in 1951, she served until 1976 and sank under tow to scrapping in 1980.",
@@ -7892,6 +8060,14 @@
       {
         label: "Torpedoes",
         value: "4x3 610mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "1× F1M2",
       },
     ],
     description: "Suzuya was the third Mogami-class cruiser, completed with design improvements after structural problems in the first ships. Re-armed with 203 mm guns, she served as a heavy cruiser throughout the Pacific War. Near Samar in October 1944, air attack triggered torpedo explosions that fatally damaged her, and the crew abandoned ship.",
@@ -8195,6 +8371,10 @@
         label: "Torpedoes",
         value: "2x1 533mm",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
+      },
     ],
     description: "USS Tennessee (BB-43) was the lead ship of her battleship class. Damaged and trapped at Pearl Harbor, she returned to service after repairs and an anti-aircraft upgrade in early 1942, the configuration represented here. A major reconstruction followed, and she supported campaigns from the Aleutians and Leyte Gulf to Iwo Jima and Okinawa, earning ten battle stars.",
     author: "Karle94, David Latuch",
@@ -8291,6 +8471,14 @@
       {
         label: "Torpedoes",
         value: "4x3 610mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "2× F1M2",
       },
     ],
     description: "Tone was the lead ship of a class that concentrated all four 203 mm turrets forward, leaving the stern for an extensive seaplane deck. This arrangement supported long-range reconnaissance for Japanese carrier forces. American carrier aircraft sank her in shallow water during attacks on Kure in July 1945.",
@@ -9761,6 +9949,10 @@
         label: "Anti-aircraft Guns",
         value: "60x1 20mm/70",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× OS2U",
+      },
     ],
     description: "USS West Virginia (BB-48) was the third completed Colorado-class battleship and entered service in 1923. Sunk in shallow water by torpedoes and bombs at Pearl Harbor, she was salvaged and comprehensively rebuilt with a tower superstructure, torpedo bulges, radar, and twin 5-inch/38 dual-purpose mounts; the game depicts her final 1945 configuration. After returning to action, her radar-directed battery led the American battle line at Surigao Strait, and she later supported the Lingayen Gulf, Iwo Jima, and Okinawa campaigns before entering Tokyo Bay after Japan's surrender. She earned five battle stars during the Second World War.",
     author: "Karle94, David Latuch",
@@ -9889,6 +10081,10 @@
         label: "Torpedoes",
         value: "2x4 610mm",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× E13A",
+      },
     ],
     description: "Yahagi was the second Agano-class light cruiser, a modern destroyer-squadron leader commissioned in 1943. She accompanied the battleship Yamato during Operation Ten-Go, Japan's final major sortie toward Okinawa. American carrier aircraft overwhelmed the force on 7 April 1945, sinking Yahagi after multiple bomb and torpedo hits.",
     author: "Unknown",
@@ -9928,6 +10124,14 @@
       {
         label: "Anti-aircraft Guns",
         value: "48x3 25mm/60 Type 96",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× E13A",
+      },
+      {
+        label: "Observation Seaplanes",
+        value: "3× F1M2",
       },
     ],
     description: "Yamato was the lead ship of the largest and most heavily armed battleships ever completed. Her nine 460 mm guns were the biggest mounted on a warship, while armor and displacement exceeded contemporary rivals. American carrier aircraft sank her on 7 April 1945 during Operation Ten-Go, before she could reach Okinawa.",
