@@ -261,6 +261,33 @@ func (sa *ShipAircraft) TakeOffSearch(base AircraftBase) *Plane {
 	return sa.TakeOff(base, object.TypeShip)
 }
 
+// CanManualScout 玩家手动侦察现在能不能派机。
+// 与自动搜索不同，玩家明确下单时不再保留甲板库存。
+func (sa *ShipAircraft) CanManualScout() bool {
+	return sa.ScoutStock() >= 1 || sa.strikeStock() >= 1
+}
+
+// TakeOffManualScout 起飞一架手动侦察机：有侦察机就优先派侦察机
+// （剩余航程翻倍），没有就派一架对舰打击机顶上，和历史上一线航母
+// 拿鱼雷机 / 轰炸机做搜索的做法一致。
+func (sa *ShipAircraft) TakeOffManualScout(base AircraftBase) *Plane {
+	if sa.ScoutStock() >= 1 {
+		return sa.TakeOffScout(base)
+	}
+	return sa.TakeOff(base, object.TypeShip)
+}
+
+// strikeStock 基地上还能出击的对舰打击机数量。
+func (sa *ShipAircraft) strikeStock() int {
+	total := 0
+	for _, group := range sa.Groups {
+		if group.TargetType == object.TypeShip {
+			total += int(group.CurCount)
+		}
+	}
+	return total
+}
+
 // TakeOffWithinRange 起飞一架能够到达指定距离的飞机。
 func (sa *ShipAircraft) TakeOffWithinRange(
 	base AircraftBase,

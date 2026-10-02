@@ -43,8 +43,11 @@ func (h *HumanInputHandler) Handle(
 		return instructions
 	}
 
-	instructions = lo.Assign(instructions, h.handleScout(misState))
-	if len(instructions) != 0 {
+	// Shift + 右键是侦察指令：一旦选中列表里有航空基地，这次点击就被侦察消费，
+	// 不能再落回下面的舰船移动 / 攻击，免得航母自己冲向目标点。
+	scoutInstructions, scouted := h.handleScout(misState)
+	instructions = lo.Assign(instructions, scoutInstructions)
+	if scouted {
 		return instructions
 	}
 	instructions = lo.Assign(instructions, h.handleShipMove(misState))

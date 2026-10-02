@@ -9,6 +9,16 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+const (
+	// scoutThreatRange 敌机靠近到这个距离就转入规避机动，取侦察视距的一半。
+	scoutThreatRange = objUnit.SightRangeScout / 2
+	// scoutSafeRange 拉开到这个距离才恢复侦察航线，取四分之三视距，
+	// 比战斗机视距更远，避免刚回到航线又被咬上。
+	scoutSafeRange = objUnit.SightRangeScout * 3 / 4
+	// scoutEvadeStep 规避目标点取在背离敌机方向的这个距离上。
+	scoutEvadeStep = 6.0
+)
+
 // PlaneScout 侦察机飞向一个海面点，并按可见情况跟踪或巡逻。
 type PlaneScout struct {
 	planeUid        string
@@ -17,6 +27,8 @@ type PlaneScout struct {
 	status          InstrStatus
 	loiterUntil     int64
 	lastPursuitDist float64
+	// evading 正在规避逼近的敌机，期间不飞向侦察点也不返航。
+	evading bool
 }
 
 // NewPlaneScout 创建侦察指令。manual 为真时再次指定同一架飞机会改飞向。
@@ -35,6 +47,8 @@ func (i *PlaneScout) Retarget(point objPos.MapPos) {
 	i.point = point
 	i.loiterUntil = 0
 	i.status = Ready
+	i.evading = false
+	i.lastPursuitDist = math.MaxFloat64
 }
 
 func (i *PlaneScout) Exec(ms *state.MissionState) error {
@@ -57,10 +71,9 @@ func (i *PlaneScout) Exec(ms *state.MissionState) error {
 		return nil
 	}
 	vision := ms.Player.Visions[plane.BelongPlayer]
-	// 敌机进入半个侦察视距并且还在靠近，停止侦察并返航。
-	if i.pursued(ms, plane) {
-		plane.ForceReturn = true
-		i.status = Executed
+	// 敌机逼近时先做规避机动继续侦察，不放弃任务直接返航：
+	// 提前返航会把侦察机送进慢速进近，反而更容易在母舰附近被咬住击落。
+	if i.evade(ms, plane) {
 		return nil
 	}
 	// 看得见敌舰就改去跟踪舰队，不再飞原来的点。
@@ -104,19 +117,54 @@ func (i *PlaneScout) Exec(ms *state.MissionState) error {
 	return nil
 }
 
-func (i *PlaneScout) pursued(ms *state.MissionState, plane *objUnit.Plane) bool {
-	nearest := math.MaxFloat64
+// evade 遇到敌机时朝背离方向规避，而不是中止侦察返航。
+// 返回 true 表示这一拍用规避机动代替了飞向侦察点。
+func (i *PlaneScout) evade(ms *state.MissionState, plane *objUnit.Plane) bool {
+	threat, dist := nearestEnemyPlane(ms, plane)
+	if threat == nil {
+		i.evading, i.lastPursuitDist = false, math.MaxFloat64
+		return false
+	}
+	if !i.evading {
+		// 还没被咬上时，只有敌机靠得够近而且在接近才动手，避免对着远去的敌机乱转向。
+		closing := dist < i.lastPursuitDist
+		i.lastPursuitDist = dist
+		if dist > scoutThreatRange || !closing {
+			return false
+		}
+		i.evading = true
+	} else if dist > scoutSafeRange {
+		// 已经拉开到安全距离，交还给下面的侦察航线。
+		i.evading, i.lastPursuitDist = false, math.MaxFloat64
+		return false
+	}
+	// 背离最近敌机设一个规避点，每拍按敌机新位置重算，飞出一条连续转弯的脱离航线。
+	bearing := threat.CurPos.Angle(plane.CurPos) * math.Pi / 180
+	plane.MoveTo(
+		ms.Core.MissionMD.MapCfg,
+		objPos.NewR(
+			plane.CurPos.RX+math.Sin(bearing)*scoutEvadeStep,
+			plane.CurPos.RY-math.Cos(bearing)*scoutEvadeStep,
+		),
+		plane.CurPos,
+		0,
+	)
+	return true
+}
+
+// nearestEnemyPlane 返回离这架飞机最近的敌机及距离，没有敌机时返回 nil。
+func nearestEnemyPlane(ms *state.MissionState, plane *objUnit.Plane) (*objUnit.Plane, float64) {
+	var nearest *objUnit.Plane
+	dist := math.MaxFloat64
 	for _, other := range ms.Arena.Planes {
 		if other.Uid == plane.Uid || other.BelongPlayer == plane.BelongPlayer || other.CurHP <= 0 {
 			continue
 		}
-		if dist := plane.CurPos.Distance(other.CurPos); dist < nearest {
-			nearest = dist
+		if d := plane.CurPos.Distance(other.CurPos); d < dist {
+			nearest, dist = other, d
 		}
 	}
-	closing := nearest < i.lastPursuitDist
-	i.lastPursuitDist = nearest
-	return nearest <= objUnit.SightRangeScout/2 && closing
+	return nearest, dist
 }
 
 func (i *PlaneScout) Executed() bool { return i.status == Executed }

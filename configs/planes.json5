@@ -4991,12 +4991,12 @@
   },
   // 德国空军 - 其他（侦察机）
   {
-    // Messerschmitt Me 209 V1（无武装竞速机，游戏归入侦察类）
+    // Messerschmitt Me 209 V1（无武装竞速机，游戏作为陆基侦察机使用）
     // 该机没有服役航程数据，游戏用 30 分钟冷却液限制折算为 360 km。
     name: "Me209V",
     nation: "de",
-    type: "other",
-    typeAbbr: "OTHER",
+    type: "scout",
+    typeAbbr: "SC",
     year: 1938,
     totalHP: 24,
     damageReduction: 0.3,

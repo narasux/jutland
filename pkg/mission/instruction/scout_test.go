@@ -3,6 +3,7 @@ package instruction
 import (
 	"testing"
 
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -64,5 +65,84 @@ func TestTrackFleetHoldsOutsideAntiAir(t *testing.T) {
 	move, hold := trackFleet(ms, plane, vision)
 	if !move || hold {
 		t.Fatal("scout outside anti-air should close on the fleet")
+	}
+}
+
+// evadeTestState 造一架在 (3,3) 朝北巡航的侦察机，以及点在正东的敌机。
+func evadeTestState(t *testing.T) (*state.MissionState, *objUnit.Plane, *objUnit.Plane) {
+	t.Helper()
+	previous := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = previous })
+
+	const name = "scout-evade-test"
+	old, had := objUnit.PlaneMap[name]
+	objUnit.PlaneMap[name] = &objUnit.Plane{
+		Name: name, Type: objUnit.PlaneTypeScout, TotalHP: 20, CurHP: 20,
+		MaxSpeed: 1, RotateSpeed: 45, RemainRange: 80,
+		SightRange: objUnit.SightRangeScout,
+	}
+	t.Cleanup(func() {
+		if had {
+			objUnit.PlaneMap[name] = old
+			return
+		}
+		delete(objUnit.PlaneMap, name)
+	})
+
+	plane := objUnit.NewPlane(name, objPos.NewR(3, 3), 0, "carrier", faction.HumanAlpha)
+	// 敌机只作为威胁源，不需要移动策略。
+	enemy := &objUnit.Plane{
+		Uid: "enemy-fighter", Type: objUnit.PlaneTypeFighter, CurHP: 10, MaxSpeed: 1,
+		CurPos: objPos.NewR(11, 3), BelongPlayer: faction.ComputerAlpha,
+	}
+	ms := &state.MissionState{
+		Core: state.MissionCoreState{SimTick: 10},
+		Arena: state.MissionArenaState{
+			Planes: map[string]*objUnit.Plane{plane.Uid: plane, enemy.Uid: enemy},
+		},
+	}
+	return ms, plane, enemy
+}
+
+// 遇到敌机应该规避继续侦察，而不是当场放弃任务返航。
+func TestPlaneScoutEvadesThreatInsteadOfReturning(t *testing.T) {
+	ms, plane, _ := evadeTestState(t)
+	order := NewPlaneScout(plane.Uid, objPos.New(3, 9), true)
+	if err := order.Exec(ms); err != nil {
+		t.Fatal(err)
+	}
+	if plane.ForceReturn || order.Executed() {
+		t.Fatal("遇敌应转入规避继续侦察，而不是返航")
+	}
+	// 敌机在正东，规避应把机头转向西半边。
+	if plane.CurRotation <= 180 {
+		t.Fatalf("应该朝背离敌机的方向转弯，rotation = %v", plane.CurRotation)
+	}
+}
+
+// 威胁解除后应回到侦察航线继续飞向侦察点。
+func TestPlaneScoutResumesMissionAfterThreatClears(t *testing.T) {
+	ms, plane, enemy := evadeTestState(t)
+	order := NewPlaneScout(plane.Uid, objPos.New(3, 9), true)
+	if err := order.Exec(ms); err != nil {
+		t.Fatal(err)
+	}
+	if !order.evading {
+		t.Fatal("敌机在威胁距离内时应该处于规避状态")
+	}
+
+	// 敌机拉开到安全距离之外，侦察点在南边，机头应保持朝南继续任务。
+	enemy.CurPos = objPos.NewR(3+objUnit.SightRangeScout, 3)
+	plane.CurPos = objPos.NewR(3, 3)
+	plane.CurRotation = 180
+	if err := order.Exec(ms); err != nil {
+		t.Fatal(err)
+	}
+	if order.evading || plane.ForceReturn || order.Executed() {
+		t.Fatal("威胁解除后应结束规避并继续侦察")
+	}
+	if plane.CurRotation != 180 {
+		t.Fatalf("应该继续朝侦察点飞，rotation = %v, want 180", plane.CurRotation)
 	}
 }

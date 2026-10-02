@@ -218,6 +218,8 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		// 搜索机一旦发现能打的敌人，立刻结束搜索转去攻击。
 		if scouting {
 			m.instructionSet.Remove(scoutUid)
+			// 手动侦察身份一并结束，否则玩家再点侦察会同时挂上攻击和侦察两条指令。
+			plane.ScoutManual = false
 		}
 		m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
 	}

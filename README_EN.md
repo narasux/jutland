@@ -20,6 +20,7 @@ CPU / graphics card requirements are not very high, but too low will probably ca
 
 - Press and hold the left mouse button to drag and select an area, selecting all warships within that area.
 - Right-click on a location on the map to move the **currently selected warships** to that location.
+- Hold <kbd>Shift</kbd> and right-click on a location on the map to send a scout plane from the **currently selected carrier / airfield** to reconnoiter it (a torpedo or dive bomber fills in when no dedicated scout is available).
 - Hold down <kbd>Ctrl</kbd> to enter formation mode, then press numbers <kbd>0-9</kbd> to form a group with the currently selected warships.
 - Press numbers <kbd>0-9</kbd> to quickly select an already grouped fleet. If a fleet is already selected, pressing the grouping key again will move the camera to the location of that fleet.
 - If the **selected warships** are stationary, press the <kbd>X</kbd> key to disperse them (useful for overlapping ships).

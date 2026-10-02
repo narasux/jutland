@@ -93,7 +93,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
    - 如果需要调整清晰度，优先保留更高原始分辨率，或做轻微对比/锐化；避免阈值化导致线条断裂、黑点噪声或细节丢失。
    - 颜色掩膜不能只保留高饱和机身。逐项检查黑色发动机整流罩、螺旋桨、座舱、轮廓线、尾翼和武器等低饱和部件。
    - 去除甲板线、网格、升降机边框和相邻飞机残片。预览透明 PNG，并在黑底或棋盘格上检查白边、断裂和漏选。
-   - 按类型保存：`fighter`、`dive_bomber`、`level_bomber` 或 `torpedo_bomber`；文件名必须是 `<name>.png`。
+   - 按类型保存：`fighter`、`dive_bomber`、`level_bomber`、`torpedo_bomber`、`scout`；`other` 只放运输机等无战斗行为的机型。文件名必须是 `<name>.png`。
 
 4. 添加飞机配置。
    - 从 1-3 架同阵营、同年代、同任务飞机推导 HP、减伤、加速度、转向、费用和建造时间。

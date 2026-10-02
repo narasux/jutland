@@ -10662,7 +10662,7 @@
     name: "Me209V",
     displayName: "Me 209 V1 Racing Aircraft",
     armaments: [],
-    description: "The unarmed Me 209 V1 was built solely to capture the absolute speed record for piston-engine aircraft. It first flew in 1938 and reached about 755 km/h in 1939; because it had no service range, the game derives a 360 km endurance figure from its roughly thirty-minute coolant limit.",
+    description: "The unarmed Me 209 V1 was built solely to capture the absolute speed record for piston-engine aircraft. It first flew in 1938 and reached about 755 km/h in 1939; because it had no service range, the game derives a 360 km endurance figure from its roughly thirty-minute coolant limit. Having no armament, it serves as a land-based scout in the game.",
     author: "Unknown",
     links: [
       {

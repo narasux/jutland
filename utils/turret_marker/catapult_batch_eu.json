@@ -1,0 +1,81 @@
+{
+  "types": "catapult",
+  "rotate": 90,
+  "ships": [
+    {
+      "image": "resources/images/ships/top/battleship/bismarck.png",
+      "catapult": 2,
+      "_note": "俾斯麦 1941：烟囱两舷各一，斜向外；画图左舷已画绿色 Ar196"
+    },
+    {
+      "image": "resources/images/ships/top/battleship/scharnhorst.png",
+      "catapult": 1,
+      "_note": "沙恩霍斯特 1943：烟囱后中线单台"
+    },
+    {
+      "image": "resources/images/ships/top/battleship/admiral_graf_spee.png",
+      "catapult": 1,
+      "_note": "格拉夫施佩 1939：烟囱后中线单台；画图已画绿色 Ar196"
+    },
+    {
+      "image": "resources/images/ships/top/cruiser/prinz_eugen.png",
+      "catapult": 1,
+      "_note": "欧根亲王 1940：烟囱后中线单台"
+    },
+    {
+      "image": "resources/images/ships/top/cruiser/leipzig.png",
+      "catapult": 1,
+      "_note": "莱比锡 1931：烟囱后中线单台"
+    },
+    {
+      "image": "resources/images/ships/top/battleship/bretagne.png",
+      "catapult": 1,
+      "_note": "布列塔尼 1940：艉甲板中线单台"
+    },
+    {
+      "image": "resources/images/ships/top/cruiser/duquesne.png",
+      "catapult": 1,
+      "_note": "迪凯纳 1945：艉部单台"
+    },
+    {
+      "image": "resources/images/ships/top/cruiser/pluton.png",
+      "catapult": 1,
+      "_note": "普路托 1939-08：中线单台"
+    },
+    {
+      "image": "resources/images/ships/top/battleship/nelson.png",
+      "catapult": 1,
+      "_note": "纳尔逊 1945：中后部格架处单台"
+    },
+    {
+      "image": "resources/images/ships/top/battleship/duke_of_york.png",
+      "catapult": 1,
+      "_note": "约克公爵 1945：艉部单台"
+    },
+    {
+      "image": "resources/images/ships/top/battleship/lion.png",
+      "catapult": 1,
+      "_note": "狮级 1944 方案：艉部单台"
+    },
+    {
+      "image": "resources/images/ships/top/battleship/lioness.png",
+      "catapult": 1,
+      "_note": "雌狮级 1944 方案：艉部单台"
+    },
+    {
+      "image": "resources/images/ships/top/cruiser/cheshire.png",
+      "catapult": 1,
+      "_note": "柴郡 1944 方案：中后部单台"
+    },
+    {
+      "image": "resources/images/ships/top/cruiser/worcester.png",
+      "catapult": 1,
+      "_note": "伍斯特 R 方案：艉部单台"
+    },
+    {
+      "image": "resources/images/ships/top/cruiser/k_25.png",
+      "catapult": 1,
+      "_note": "K-25 1936 方案：艉部单台"
+    }
+  ]
+}

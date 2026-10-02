@@ -50,16 +50,19 @@ func GetDisplayScale(name string) float64 {
 	return 1
 }
 
+// planeTypes 战机图片的机型目录，与 planes.json5 的 type 取值一一对应。
+// 新增机型时这里和资源目录要一起加，否则图鉴和绘制会取不到图片。
+var planeTypes = []string{
+	"fighter",
+	"dive_bomber",
+	"level_bomber",
+	"torpedo_bomber",
+	"scout",
+	"other",
+}
+
 func init() {
 	log.Println("loading plane image resources...")
-
-	planeTypes := []string{
-		"fighter",
-		"dive_bomber",
-		"level_bomber",
-		"torpedo_bomber",
-		"other",
-	}
 
 	planeOriginalImgMap = map[string]*ebiten.Image{}
 	planeDisplayScaleMap = map[string]float64{}

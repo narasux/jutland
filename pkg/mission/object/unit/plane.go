@@ -130,7 +130,8 @@ type Plane struct {
 	CurAttackTarget string
 	// 玩家手动派出的侦察。自动侦察为 false。
 	ScoutManual bool
-	// 侦察结束或被追击时置位，下一拍走现有返航。
+	// 侦察任务结束（盘旋完毕或油尽）时置位，下一拍走现有返航。
+	// 搜索中的飞机发现可打目标转去攻击时会清掉。
 	ForceReturn bool
 	// 飞行阶段（起飞 / 巡航 / 降落）
 	FlightPhase PlaneFlightPhase

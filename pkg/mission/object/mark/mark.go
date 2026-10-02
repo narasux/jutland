@@ -20,6 +20,8 @@ const (
 	IDLockOn ID = "lockOn"
 	// IDAttack 攻击标记
 	IDAttack ID = "attack"
+	// IDScout 侦察标记
+	IDScout ID = "scout"
 )
 
 // Mark 标记（如目标地点等，会存在一定时间后消失）

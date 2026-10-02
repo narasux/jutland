@@ -48,6 +48,8 @@ var (
 	LockOnTarget *ebiten.Image
 	// AttackTarget 攻击目标标志图片
 	AttackTarget *ebiten.Image
+	// ScoutTarget 侦察目标标志图片
+	ScoutTarget *ebiten.Image
 )
 
 func init() {
@@ -124,6 +126,11 @@ func init() {
 	// 攻击目标标志图片
 	imgPath = "/textures/flag/attack_target.png"
 	if AttackTarget, err = loader.LoadImage(imgPath); err != nil {
+		log.Fatalf("missing %s: %s", imgPath, err)
+	}
+	// 侦察目标标志图片
+	imgPath = "/textures/flag/scout_target.png"
+	if ScoutTarget, err = loader.LoadImage(imgPath); err != nil {
 		log.Fatalf("missing %s: %s", imgPath, err)
 	}
 

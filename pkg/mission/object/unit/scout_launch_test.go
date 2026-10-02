@@ -139,3 +139,72 @@ func TestSearchNeedsTwoPlanesOnDeck(t *testing.T) {
 		t.Fatal("只剩一架时应低于搜索出击门槛，把最后一架留在甲板上")
 	}
 }
+
+// 玩家手动侦察没有侦察机时，应该派一架打击机顶上，而不是派不出飞机。
+func TestManualScoutFallsBackToStrikePlane(t *testing.T) {
+	const bomber = "bomber-manual-test"
+	registerSearchTestPlane(t, bomber, PlaneTypeTorpedoBomber, 30)
+
+	aircraft := &ShipAircraft{
+		Groups: []PlaneGroup{{
+			Name: bomber, CurCount: 12, MaxCount: 12, TargetType: object.TypeShip,
+		}},
+		deck: &CarrierDeck{TakeoffPoints: []TakeoffPoint{{RunLength: 0.2}}},
+	}
+	if !aircraft.CanManualScout() {
+		t.Fatal("有打击机库存时手动侦察应该可以派机")
+	}
+	plane := aircraft.TakeOffManualScout(&BattleShip{
+		Uid: "carrier", Length: 128, Width: 20, BelongPlayer: faction.HumanAlpha,
+	})
+	if plane == nil || plane.Type != PlaneTypeTorpedoBomber {
+		t.Fatalf("plane = %v, want the torpedo bomber", plane)
+	}
+}
+
+// 手动侦察不受「甲板留一架」限制：只剩一架侦察机时也要能派出去。
+func TestManualScoutLaunchesTheLastScout(t *testing.T) {
+	const scout = "scout-manual-test"
+	registerSearchTestPlane(t, scout, PlaneTypeScout, 10)
+
+	aircraft := &ShipAircraft{
+		Groups: []PlaneGroup{{Name: scout, CurCount: 1, MaxCount: 4, TargetType: object.TypeNone}},
+		deck:   &CarrierDeck{TakeoffPoints: []TakeoffPoint{{RunLength: 0.2}}},
+	}
+	if aircraft.CanSearch() {
+		t.Fatal("自动搜索这时应该留在甲板上")
+	}
+	if !aircraft.CanManualScout() {
+		t.Fatal("玩家手动侦察应该允许派最后一架侦察机")
+	}
+	plane := aircraft.TakeOffManualScout(&BattleShip{
+		Uid: "carrier", Length: 128, Width: 20, BelongPlayer: faction.HumanAlpha,
+	})
+	if plane == nil || plane.Type != PlaneTypeScout {
+		t.Fatalf("plane = %v, want a dedicated scout", plane)
+	}
+	if plane.RemainRange != 20 {
+		t.Fatalf("remain range = %v, want 20", plane.RemainRange)
+	}
+}
+
+// 只有战斗机的航母派不出侦察机：制空机不拿去顶侦察。
+func TestManualScoutRejectsFighterOnlyCarrier(t *testing.T) {
+	const fighter = "fighter-manual-test"
+	registerSearchTestPlane(t, fighter, PlaneTypeFighter, 10)
+
+	aircraft := &ShipAircraft{
+		Groups: []PlaneGroup{{
+			Name: fighter, CurCount: 12, MaxCount: 12, TargetType: object.TypePlane,
+		}},
+		deck: &CarrierDeck{TakeoffPoints: []TakeoffPoint{{RunLength: 0.2}}},
+	}
+	if aircraft.CanManualScout() {
+		t.Fatal("只有战斗机时不该认为可以派侦察机")
+	}
+	if plane := aircraft.TakeOffManualScout(&BattleShip{
+		Uid: "carrier", Length: 128, Width: 20, BelongPlayer: faction.HumanAlpha,
+	}); plane != nil {
+		t.Fatalf("plane = %v, want nil", plane)
+	}
+}
