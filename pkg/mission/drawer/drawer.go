@@ -17,7 +17,7 @@ import (
 type Drawer struct {
 	mission string
 	abbrMap *ebiten.Image
-	fogImg  *ebiten.Image
+	fog     FogImageCache
 }
 
 // NewDrawer ...

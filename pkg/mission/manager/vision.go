@@ -30,13 +30,12 @@ func (m *MissionManager) updateVision() {
 }
 
 func (m *MissionManager) stampPlayerVision(player faction.Player, vision *state.FactionVision) {
-	// 活着的舰船按自己的视距照两层：逻辑格给判定，软边亮度给蒙层。
+	// 活着的舰船按自己的视距盖格。软边蒙层由格级并集统一合成，这里不用逐源处理。
 	for _, ship := range m.state.Arena.Ships {
 		if ship.BelongPlayer != player || ship.CurHP <= 0 || ship.SightRange <= 0 {
 			continue
 		}
 		vision.Stamp(ship.CurPos.RX, ship.CurPos.RY, ship.SightRange)
-		vision.StampLight(ship.CurPos.RX, ship.CurPos.RY, ship.SightRange)
 	}
 	// 只算还在空中的飞机。甲板滑跑和着舰回收跟着载舰，不再单独照。
 	for _, plane := range m.state.Arena.Planes {
@@ -44,7 +43,6 @@ func (m *MissionManager) stampPlayerVision(player faction.Player, vision *state.
 			continue
 		}
 		vision.Stamp(plane.CurPos.RX, plane.CurPos.RY, plane.SightRange)
-		vision.StampLight(plane.CurPos.RX, plane.CurPos.RY, plane.SightRange)
 	}
 	// 停用只关起飞和生产，机场本身仍照固定半径。
 	for _, airfield := range m.state.Arena.Airfields {
@@ -52,7 +50,6 @@ func (m *MissionManager) stampPlayerVision(player faction.Player, vision *state.
 			continue
 		}
 		vision.Stamp(airfield.Pos.RX, airfield.Pos.RY, objUnit.SightRangeAirfield)
-		vision.StampLight(airfield.Pos.RX, airfield.Pos.RY, objUnit.SightRangeAirfield)
 	}
 }
 

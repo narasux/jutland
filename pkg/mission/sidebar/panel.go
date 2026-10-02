@@ -95,7 +95,7 @@ type sidebarLayout struct {
 // Panel 是任务运行中的右上角停靠式下拉战术面板。
 type Panel struct {
 	abbrMap *ebiten.Image
-	fogImg  *ebiten.Image
+	fog     drawer.FogImageCache
 	// mapAspect 是地图实际宽高比（宽/高），用于让小地图保持地图原始比例。
 	mapAspect float64
 	layout    sidebarLayout
@@ -414,7 +414,7 @@ func (p *Panel) drawMinimapFog(screen *ebiten.Image, ms *state.MissionState) {
 	mapW := float64(ms.Core.MissionMD.MapCfg.Width)
 	mapH := float64(ms.Core.MissionMD.MapCfg.Height)
 	drawer.BlitFog(
-		screen, ms, &p.fogImg,
+		screen, ms, &p.fog,
 		ui.Map.W/(mapW*4), ui.Map.H/(mapH*4),
 		ui.Map.X, ui.Map.Y,
 	)

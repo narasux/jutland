@@ -48,7 +48,6 @@ func TestShadeEdgeIsSmoothAcrossCells(t *testing.T) {
 	vision := NewFactionVision(32, 32)
 	vision.BeginFrame()
 	vision.Stamp(16, 16, 5)
-	vision.StampLight(16, 16, 5)
 	vision.FinishFrame()
 	// 第二拍不再照亮，只看已探索留下的边界。
 	vision.BeginFrame()
@@ -84,16 +83,69 @@ func TestShadeKeepsExploredSeaFromGoingDarker(t *testing.T) {
 	for _, x := range []float64{16, 17} {
 		vision.BeginFrame()
 		vision.Stamp(x, 16, 5)
-		vision.StampLight(x, 16, 5)
 		vision.FinishFrame()
 	}
 
-	for i := range vision.Light {
-		if vision.ExploredLight[i] < 255 {
-			continue
+	rw, rh := vision.renderSize()
+	for py := 0; py < rh; py++ {
+		for px := 0; px < rw; px++ {
+			cx, cy := px/visionRenderScale, py/visionRenderScale
+			// 四角都已探索的像素必须压到 shadeExplored，不能更黑。
+			if fullExploredAround(vision, cx, cy) {
+				if alpha := int(vision.Shade[(py*rw+px)*4+3]); alpha > shadeExplored {
+					t.Fatalf("已探索格子在第 %d,%d 个渲染像素被画出 %d 的暗度", px, py, alpha)
+				}
+			}
+			// 反过来，从没探索过的海面不能被画得比未知更亮。
+			if alpha := int(vision.Shade[(py*rw+px)*4+3]); alpha > shadeUnknown {
+				t.Fatalf("第 %d,%d 个渲染像素暗度 %d 超过未知海面", px, py, alpha)
+			}
 		}
-		if alpha := int(vision.Shade[i*4+3]); alpha > shadeExplored {
-			t.Fatalf("已探索格子被画出 %d 的暗度，视野边缘会出现黑环", alpha)
+	}
+}
+
+// fullExploredAround 判断渲染像素四角的格子是否全部已探索。
+func fullExploredAround(v *FactionVision, cx, cy int) bool {
+	for _, d := range [4][2]int{{0, 0}, {1, 0}, {0, 1}, {1, 1}} {
+		x, y := cx+d[0], cy+d[1]
+		if x >= v.Width {
+			x = v.Width - 1
 		}
+		if y >= v.Height {
+			y = v.Height - 1
+		}
+		if !v.ExploredAt(x, y) {
+			return false
+		}
+	}
+	return true
+}
+
+// 蒙层的三个基准状态不能串：看得见完全透明，看过但这一拍看不见是 shadeExplored，
+// 从没看过是 shadeUnknown。查表合成后这三个值必须精确落在格心像素上。
+func TestShadeBaseLevels(t *testing.T) {
+	vision := NewFactionVision(32, 32)
+	vision.BeginFrame()
+	vision.Stamp(8, 8, 3)
+	vision.FinishFrame()
+	// 第二拍只照亮别处，让 (8,8) 变成「看过但现在看不见」。
+	vision.BeginFrame()
+	vision.Stamp(24, 24, 3)
+	vision.FinishFrame()
+
+	center := func(cx, cy int) int {
+		px := cx*visionRenderScale + visionRenderScale/2
+		py := cy*visionRenderScale + visionRenderScale/2
+		rw, _ := vision.renderSize()
+		return int(vision.Shade[(py*rw+px)*4+3])
+	}
+	if got := center(8, 8); got != shadeExplored {
+		t.Fatalf("已探索但当前不可见的海面暗度 = %d, want %d", got, shadeExplored)
+	}
+	if got := center(24, 24); got != 0 {
+		t.Fatalf("当前可见的海面暗度 = %d, want 0", got)
+	}
+	if got := center(16, 16); got != shadeUnknown {
+		t.Fatalf("从没探索过的海面暗度 = %d, want %d", got, shadeUnknown)
 	}
 }

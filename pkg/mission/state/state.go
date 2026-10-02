@@ -182,7 +182,7 @@ func (s *MissionState) allocateVisions(width, height int) {
 		faction.HumanAlpha:    NewFactionVision(width, height),
 		faction.ComputerAlpha: NewFactionVision(width, height),
 	}
-	// 只有当前玩家的蒙层会被绘制；电脑侧跳过 Light/ExploredLight/蒙层的每拍开销。
+	// 只有当前玩家的蒙层会被绘制；电脑侧跳过蒙层合成的每拍开销。
 	for player, vision := range s.Player.Visions {
 		vision.RendersShade = player == s.Player.CurPlayer
 	}

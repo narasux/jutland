@@ -14,16 +14,15 @@ type FactionVision struct {
 	Height   int
 	Explored []byte
 	Visible  []byte
-	// Light 是 4 倍分辨率的照亮强度，重叠取最大。Shade 是可直接上传的 RGBA。
-	Light []byte
+	// Shade 是 4 倍分辨率、可直接上传的 RGBA 蒙层像素。
+	// 它由格级的 Visible / Explored 并集一次性合成，不按视野源逐个盖圆。
 	Shade []byte
-	// ExploredLight 是同样 4 倍分辨率的「曾经照亮」强度，只增不减。
-	// 蒙层用它区分看过和没看过，边界跟照亮圆一样是渲染分辨率上的渐变，
-	// 不会像按格读 Explored 那样留下整格的阶梯。
-	ExploredLight []byte
+	// ShadeStamp 每次重新合成蒙层时递增。绘制层记录已上传的版本号，
+	// 同一份像素在主视图和小地图之间不会重复上传。
+	ShadeStamp int64
 	// RendersShade 这一侧的视野是否要生成迷雾蒙层。
 	// 只有当前玩家的蒙层会被绘制；电脑侧只需要逻辑格，
-	// 跳过 Light/ExploredLight/蒙层可以省掉每拍数毫秒的白算。
+	// 跳过蒙层合成可以省掉每拍的全图遍历与像素上传。
 	RendersShade bool
 	// frameSeq 本侧视野的拍计数，用于蒙层像素的降频合成。
 	frameSeq int64
@@ -103,8 +102,8 @@ func (v *FactionVision) renderSize() (int, int) {
 	return v.Width * visionRenderScale, v.Height * visionRenderScale
 }
 
-// BeginFrame 清掉这一拍的可见格子和软边亮度。已探索保留。
-// 不渲染蒙层的一侧不清 Light（它根本不会被盖章）。
+// BeginFrame 清掉这一拍的可见格子。已探索和蒙层缓冲保留。
+// 不渲染蒙层的一侧不分配蒙层缓冲。
 func (v *FactionVision) BeginFrame() {
 	if v == nil {
 		return
@@ -114,14 +113,8 @@ func (v *FactionVision) BeginFrame() {
 		return
 	}
 	rw, rh := v.renderSize()
-	n := rw * rh
-	if len(v.Light) != n {
-		v.Light = make([]byte, n)
-		v.Shade = make([]byte, n*4)
-		// 已探索亮度是累积的，只在尺寸变化时重建，之后不再清空。
-		v.ExploredLight = make([]byte, n)
-	} else {
-		clear(v.Light)
+	if len(v.Shade) != rw*rh*4 {
+		v.Shade = make([]byte, rw*rh*4)
 	}
 }
 
@@ -134,93 +127,101 @@ func (v *FactionVision) FinishFrame() {
 	v.composeShadeIfDue()
 }
 
-// StampLight 往渲染图上盖一张预先算好的圆形衰减，重叠取最大。
-// 不渲染蒙层的一侧直接跳过，省掉每拍数毫秒的圆盘合并。
-func (v *FactionVision) StampLight(rx, ry, radius float64) {
-	if v == nil || !v.RendersShade || radius <= 0 || len(v.Light) == 0 {
-		return
-	}
-	outer := int(math.Ceil(radius * visionRenderScale))
-	if outer < 1 {
-		outer = 1
-	}
-	stamp := softVisionCircle(outer)
-	side := 2*outer + 1
-	rw, rh := v.renderSize()
-	originX := int(math.Round(rx*visionRenderScale)) - outer
-	originY := int(math.Round(ry*visionRenderScale)) - outer
-	for y := 0; y < side; y++ {
-		py := originY + y
-		if py < 0 || py >= rh {
-			continue
-		}
-		row := py * rw
-		stampRow := y * side
-		for x := 0; x < side; x++ {
-			px := originX + x
-			if px < 0 || px >= rw {
-				continue
-			}
-			if a := stamp[stampRow+x]; a > v.Light[row+px] {
-				v.Light[row+px] = a
-				// Light 每一拍清空，ExploredLight 只增不减，所以这里顺手取最大就够。
-				if a > v.ExploredLight[row+px] {
-					v.ExploredLight[row+px] = a
-				}
-			}
-		}
-	}
-}
-
 // 蒙层的两个基准暗度：看过但这一拍看不见，和从没看过。
 const (
 	shadeExplored = 140
 	shadeUnknown  = 220
 )
 
-func (v *FactionVision) composeShade() {
-	for i := range v.Light {
-		// 已探索程度按渲染分辨率渐变，未知海面的边界因此不会整格跳变；
-		// 再用这一拍的照亮强度把看得见的部分挖空。两者都平滑，接缝处就不会
-		// 出现一圈比周围更黑的硬边。
-		base := shadeUnknown - (shadeUnknown-shadeExplored)*int(v.ExploredLight[i])/255
-		alpha := base * (255 - int(v.Light[i])) / 255
-		o := i * 4
-		v.Shade[o] = 0
-		v.Shade[o+1] = 0
-		v.Shade[o+2] = 0
-		v.Shade[o+3] = byte(alpha)
+// shadeLUT 预计算「可见与已探索的 2×2 格组合 × 各渲染子像素」的最终暗度。
+// 蒙层的每个渲染像素只取决于它所在格的四个角（本格与右、下、右下邻居），
+// 角点状态是 0/1，因此整张蒙层可以退化成查表：不再需要给每个视野源
+// 盖一张软边圆盘，开销与视野源数量无关。
+// 下标依次是可见组合、已探索组合、子像素序号（行主序）。
+var shadeLUT [16][16][16]byte
+
+// 表尺寸写死了 visionRenderScale = 4 的 16 个子像素；改分辨率时这里会编译失败。
+const _ = uint(16 - visionRenderScale*visionRenderScale)
+
+func init() {
+	for visible := 0; visible < 16; visible++ {
+		for explored := 0; explored < 16; explored++ {
+			for qy := 0; qy < visionRenderScale; qy++ {
+				for qx := 0; qx < visionRenderScale; qx++ {
+					tx := (float64(qx) + 0.5) / visionRenderScale
+					ty := (float64(qy) + 0.5) / visionRenderScale
+					// 已探索程度决定底色，这一拍的照亮把看得见的部分挖空；
+					// 两者都在同一格内平滑过渡，接缝处不会出现更黑的硬边。
+					seen := smoothStep01(bilinearCorners(explored, tx, ty))
+					lit := smoothStep01(bilinearCorners(visible, tx, ty))
+					base := float64(shadeUnknown) - float64(shadeUnknown-shadeExplored)*seen
+					shadeLUT[visible][explored][qy*visionRenderScale+qx] = byte(base * (1 - lit))
+				}
+			}
+		}
 	}
 }
 
-var softVisionCircles = map[int][]byte{}
+// bilinearCorners 在 2×2 的 0/1 角点上做双线性插值。位序与 quadIndex 一致。
+func bilinearCorners(bits int, tx, ty float64) float64 {
+	top := float64(bits&1)*(1-tx) + float64((bits>>1)&1)*tx
+	bottom := float64((bits>>2)&1)*(1-tx) + float64((bits>>3)&1)*tx
+	return top*(1-ty) + bottom*ty
+}
 
-func softVisionCircle(outer int) []byte {
-	if stamp, ok := softVisionCircles[outer]; ok {
-		return stamp
+func smoothStep01(t float64) float64 {
+	return t * t * (3 - 2*t)
+}
+
+// quadIndex 把格 (cx, cy) 与右、下、右下三个邻居的 0/1 状态打包成 4 位下标。
+// 越界按边界格补齐，免得地图外缘多出一圈半亮的假边界。
+func quadIndex(field []byte, width, height, cx, cy int) int {
+	right, below := cx+1, cy+1
+	if right >= width {
+		right = width - 1
 	}
-	inner := outer - visionRenderScale
-	if inner < 0 {
-		inner = 0
+	if below >= height {
+		below = height - 1
 	}
-	side := 2*outer + 1
-	stamp := make([]byte, side*side)
-	for y := 0; y < side; y++ {
-		for x := 0; x < side; x++ {
-			dist := math.Hypot(float64(x-outer), float64(y-outer))
-			alpha := 0.0
-			if dist <= float64(inner) {
-				alpha = 255
-			} else if inner < outer && dist < float64(outer) {
-				t := (dist - float64(inner)) / float64(outer-inner)
-				t = t * t * (3 - 2*t)
-				alpha = 255 * (1 - t)
+	index := 0
+	if field[cy*width+cx] != 0 {
+		index |= 1
+	}
+	if field[cy*width+right] != 0 {
+		index |= 2
+	}
+	if field[below*width+cx] != 0 {
+		index |= 4
+	}
+	if field[below*width+right] != 0 {
+		index |= 8
+	}
+	return index
+}
+
+// composeShade 按格合成整张蒙层。可见与已探索都只取格级并集，
+// 软边在同一格内统一生成，因此不再随视野源数量线性变慢。
+func (v *FactionVision) composeShade() {
+	rw, rh := v.renderSize()
+	if len(v.Shade) != rw*rh*4 {
+		v.Shade = make([]byte, rw*rh*4)
+	}
+	for cy := 0; cy < v.Height; cy++ {
+		for cx := 0; cx < v.Width; cx++ {
+			visible := quadIndex(v.Visible, v.Width, v.Height, cx, cy)
+			explored := quadIndex(v.Explored, v.Width, v.Height, cx, cy)
+			alphas := &shadeLUT[visible][explored]
+			for qy := 0; qy < visionRenderScale; qy++ {
+				offset := ((cy*visionRenderScale+qy)*rw + cx*visionRenderScale) * 4
+				for qx := 0; qx < visionRenderScale; qx++ {
+					v.Shade[offset], v.Shade[offset+1], v.Shade[offset+2] = 0, 0, 0
+					v.Shade[offset+3] = alphas[qy*visionRenderScale+qx]
+					offset += 4
+				}
 			}
-			stamp[y*side+x] = byte(alpha)
 		}
 	}
-	softVisionCircles[outer] = stamp
-	return stamp
+	v.ShadeStamp++
 }
 
 // UnexploredCentroid 返回还没探索过的海面重心，给舰队一个「往哪推」的方向。

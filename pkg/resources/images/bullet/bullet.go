@@ -29,7 +29,7 @@ var torpedoDiameters = []int{324, 450, 457, 533, 550, 570, 610, 622, 1350}
 var torpedoes = make(map[int]*ebiten.Image)
 
 // bombDiameters 支持的炸弹口径列表
-var bombDiameters = []int{610, 450, 380, 360, 280, 250, 70}
+var bombDiameters = []int{660, 610, 450, 380, 360, 280, 250, 70}
 
 // bombs 炸弹图片映射表
 var bombs = make(map[int]*ebiten.Image)
