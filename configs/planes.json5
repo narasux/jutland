@@ -3145,6 +3145,39 @@
     }
   },
   {
+    // 紫云（E15K1 紫云11型），1944 年 4 月服役，为潜水战队旗舰大淀研制的远程高速水侦
+    // 主浮筒可在空中抛弃、翼下辅助浮筒可收放，但浮筒机构故障频发，仅完成 15 架便停产
+    // 速度/航程取维基百科规格表 469 km/h、3371 km，机长 11.587 m、翼展 14 m、正常起飞重量 4.1 t
+    // 仅配置后座 1 挺 7.7mm 九二式活动机枪；无前射武器与炸弹挂载，故不写入描述
+    name: "E15K1",
+    nation: "jp",
+    type: "scout",
+    typeAbbr: "SC",
+    year: 1944,
+    totalHP: 36,
+    damageReduction: 0.35,
+    maxSpeed: 469,
+    acceleration: 21,
+    rotateSpeed: 9,
+    length: 11.587,
+    width: 14,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 4.1,
+    range: 3371,
+    weapon: {
+      guns: [
+        // 后座（7.7mm 九二式，后半球自卫）
+        {
+          name: "JP/7.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ]
+    }
+  },
+  {
     // 彩云
     name: "C6N1",
     nation: "jp",

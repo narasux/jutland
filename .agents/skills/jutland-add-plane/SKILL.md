@@ -15,6 +15,17 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 - 不替换、压缩或清理用户未要求处理的现有素材。
 - 历史资料存在冲突时，说明采用的型号、数据口径和游戏近似；不要伪造精确值。
 
+## 时间压缩（实测教训）
+
+单架飞机的合理耗时是十几分钟；一次“两架飞机花了近一小时”的复盘结论如下，按此执行。
+
+- 同会话默认值直接复用：同一批请求中用户已确认的口径（如“侦察机不挂舰船”“不配置炸弹”“素材只用用户给的图”），后续同类飞机直接沿用并在最终说明里复述，不再提问；只有出现新歧义（新挂载、新阵营、要求实际出击）才询问。
+- 素材一次成型：`extract_plane_top_view.py` 跑一次 + `view_image` 预览一次即收工。预览只判断四件事：机头朝上、无相邻视图或文字残片、四周有白边、深色部件完整。
+- 不做像素级取证：禁止为“找裂缝”追加 alpha 孔洞统计、连通域坐标反算回原图、多倍放大逐区目检、海面/棋盘格多版本合成对比。1px 级边缘差异在游戏显示尺寸下不可见，肉眼预览没看到即视为合格；确有白边或残片问题，只回脚本参数（`--crop`/`--rotate`/阈值）再修一轮。
+- 裁剪框一次算准：行列剖面或连通域 bounding box 用一次脚本调用定位，直接写 `--crop`；旋转角度按用户描述换算一次，不凭目测反复试。
+- 资料只取规格：用 Wikipedia REST `page/summary` 或指定章节拿性能/武备数据，不要 `web_fetch` 整篇条目（几万 token 会拖慢之后每一步）；`web_search` 认证失败（401）时立即改走 `web_fetch`，不重试。
+- 互不依赖的检查合批：图片尺寸、引用链 grep、`git diff --check` 等放在同一条 bash 调用里发，不逐条串行。
+
 ## 目标文件
 
 - 飞机配置：`configs/planes.json5`
@@ -105,5 +116,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
    - 搜索每个机炮、炸弹、鱼雷和火箭名称，确认上游配置存在。
    - 逐张使用 `view_image` 检查完整轮廓、朝向、透明边缘及发动机/螺旋桨等深色部件。
    - 对用户提供图片生成的素材，最终说明必须写清楚素材来源、执行的旋转角度、是否只做确定性处理，以及是否发生过换源或重绘；若没有用户明确授权，不得声称重绘/生成版本是最终结果。
+   - 本机沙箱禁写 `~/Library/Caches/go-build`：`go build` / `go test` 先加 `GOCACHE=/tmp/jutland-gocache`；首次冷启动会全量重编译 Ebiten/CGO（几分钟），属正常耗时，不要误判为卡死。
+   - 测试出现失败时只做一次基线比对：`git archive HEAD | tar -x -C /tmp/<dir>` 后在基线副本跑同一批包，判定既有/新增并记录结论即止；不要逐包重复建基线，也不要顺手修复既有失败。Ebiten 相关包（`pkg/game`、`pkg/mission/manager`、`pkg/mission/object/unit`）在无图形会话时会在 UI 初始化处 panic，属环境问题，直接引用基线结论。
    - 运行 `go build ./pkg/...`。修改 Go 行为时再运行相关单元测试和 `gofmt`。
    - 最终说明新增型号、类型近似、舰船编组变化、素材来源处理和实际执行的验证。

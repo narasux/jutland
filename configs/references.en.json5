@@ -1080,6 +1080,25 @@
     ]
   },
   {
+    "name": "E15K1",
+    "displayName": "Shiun",
+    "type": "Reconnaissance Floatplane",
+    "armaments": [
+      {
+        "label": "Machine Gun (Rear)",
+        "value": "1 x 7.7mm Type 92"
+      }
+    ],
+    "description": "The Kawanishi E15K1 Shiun was a two-seat high-speed reconnaissance floatplane that entered service in April 1944 for the submarine-flotilla flagship Ōyodo. Its jettisonable central float and retractable wing floats failed repeatedly, and only fifteen were completed before production ended in February 1944, so it never operated from Ōyodo as planned. Maximum speed was about 469 km/h, range about 3,371 km. In game it is a scout with one rear 7.7 mm Type 92 machine gun and no bombs.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia - Kawanishi E15K Shiun",
+        "url": "https://en.wikipedia.org/wiki/Kawanishi_E15K_Shiun"
+      }
+    ]
+  },
+  {
     name: "card",
     displayName: "Card",
     type: "Aircraft Carrier",

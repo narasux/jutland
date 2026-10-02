@@ -33,6 +33,10 @@ bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
 
 脚本输出格式为 TSV（制表符分隔），列依次为：`name`、`type`、`nation`、`combatPower`、`tonnage`、`fundsCost`、`timeCost`。
 
+- 主路径的 Go 导出器依赖 Ebiten 图形环境：本机 `go run` 常在 `internal/ui` 的 `currentMouseLocation` 空指针处 panic（无图形会话时同样会让 `go test` 的 Ebiten 包 panic）。**失败一次就直接改用备用估算器**，不要去翻 Ebiten 源码找原因、不要反复重跑主路径。
+- 备用估算器只读取建议值、不回写：`python3 .agents/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5`（确认要写回时才加 `--apply`）。
+- 交付前与既有配置对表：备用估算器与仓库现值在多数机型上完全一致，若新机型建议值与同类既有机型（同 type、同年代、战力接近）明显冲突，按同类既有分层取值并在最终说明里记录差异。
+
 ### 脚本内部流程
 
 1. 运行 `go run export_plane_cost_data.go`，加载游戏初始化数据

@@ -52,6 +52,7 @@ description: Localize and maintain Jutland encyclopedia reference data across co
    - 每个舰船或飞机图鉴的 `links` 统一只保留两项且顺序固定：第一项为用户提供或原作者发布的素材来源；第二项为目标语言维基百科中与对象、舰级或型号最直接相关的条目。
    - 目标语言没有对应维基条目时，第二项回退到英文维基百科。允许各语言使用不同的第二项 URL；第一项素材来源 URL 必须一致。
    - 用 Wikipedia API、搜索结果或实际打开页面确认链接存在或可重定向，不凭标题猜 URL。
+   - 校验链接要省流：多语言条目合并成一条命令批量打 REST 摘要接口（`curl -s -o /dev/null -w "%{http_code}" https://xx.wikipedia.org/api/rest_v1/page/summary/<title>`），非 ASCII 标题先 `urllib.parse.quote`；不要为确认链接 `web_fetch` 整篇文章，`web_search` 认证失败（401）时直接改走 `web_fetch`/`curl`，不重试。
    - DeviantArt、Shipbucket、Wikimedia Commons、Bilibili 等素材来源保持原 URL，并保留真实作者署名。
 
 5. 处理布局与混合语言。
