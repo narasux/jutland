@@ -75,6 +75,17 @@
     bulletSpeed: 36,
     fundsCost: 100
   },
+  // 日本海军 610mm 7联装 酸素鱼雷（岛风级 F-52 初期方案）
+  {
+    name: "JP/610/7",
+    bulletName: "JP/TB/610/1933",
+    bulletCount: 7,
+    shotInterval: 0.8,
+    reloadTime: 115,
+    range: 22,
+    bulletSpeed: 54,
+    fundsCost: 100
+  },
   // 日本海军 610mm 5联装 酸素鱼雷
   {
     name: "JP/610/5",

@@ -5018,6 +5018,15 @@
     links: [],
   },
   {
+    name: "JP/610/7",
+    displayName: "九三式 610mm 七連装魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "JP/7.62",
     displayName: "7.62mm 単装機銃",
     type: "兵器",
@@ -10483,6 +10492,37 @@
       {
         name: "Combined Fleet — Shimakaze",
         url: "https://www.combinedfleet.com/shimak_t.htm",
+      },
+      {
+        name: "ウィキペディア — 島風",
+        url: "https://ja.wikipedia.org/wiki/%E5%B3%B6%E9%A2%A8_(%E5%B3%B6%E9%A2%A8%E5%9E%8B%E9%A7%86%E9%80%90%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "akitsukaze",
+    displayName: "秋津風",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x2 10cm/65 九八式",
+      },
+      {
+        label: "対空砲",
+        value: "3x2 25mm/60 九六式",
+      },
+      {
+        label: "魚雷",
+        value: "2x7 610mm 九三式",
+      },
+    ],
+    description: "秋津風は島風型二番艦としての架空の艦名である。史実では島風型は島風のみが完成し、続く計画艦は1942年に中止されて艦名を与えられなかった。本記事はtzoliによる島風型F-52設計の初期方案第2案（1941年）をもとにした設定で、多連装魚雷発射管と新型高角砲を核とした同方案は建造されることなかった。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Shimakaze Preliminary Designs",
+        url: "https://www.deviantart.com/tzoli/art/Shimakaze-Preliminary-Designs-1346308097",
       },
       {
         name: "ウィキペディア — 島風",

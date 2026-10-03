@@ -5077,6 +5077,15 @@
     links: [],
   },
   {
+    name: "JP/610/7",
+    displayName: "610mm Seven-Tube Type 93 Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "JP/7.62",
     displayName: "7.62mm Single AA Mount",
     type: "Weapon",
@@ -10542,6 +10551,37 @@
       {
         name: "Combined Fleet — Shimakaze",
         url: "https://www.combinedfleet.com/shimak_t.htm",
+      },
+      {
+        name: "Wikipedia — Shimakaze",
+        url: "https://en.wikipedia.org/wiki/Japanese_destroyer_Shimakaze_(1942)",
+      },
+    ],
+  },
+  {
+    name: "akitsukaze",
+    displayName: "Akitsukaze",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x2 10cm/65 Type 98",
+      },
+      {
+        label: "Anti-Aircraft",
+        value: "3x2 25mm/60 Type 96",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x7 610mm Type 93",
+      },
+    ],
+    description: "Akitsukaze is a fictional second member of the Shimakaze class: only Shimakaze herself was completed, and the planned follow-up hulls were cancelled in 1942 without ever receiving names. This entry represents tzoli's 1941 preliminary variant 2 of the F-52 design, an unbuilt study centred on a heavy multi-tube torpedo battery and new dual-purpose guns.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Shimakaze Preliminary Designs",
+        url: "https://www.deviantart.com/tzoli/art/Shimakaze-Preliminary-Designs-1346308097",
       },
       {
         name: "Wikipedia — Shimakaze",

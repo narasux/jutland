@@ -6399,6 +6399,37 @@
     ],
   },
   {
+    name: "akitsukaze",
+    displayName: "秋津风",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x2 10cm/65 九八式",
+      },
+      {
+        label: "防空炮",
+        value: "3x2 25mm/60 九六式",
+      },
+      {
+        label: "鱼雷",
+        value: "2x7 610mm 九三式",
+      },
+    ],
+    description: "秋津风是岛风级二号舰的架空命名：史实中该级仅岛风一艘建成，后续计划舰于 1942 年取消并改判他型，从未获得舰名。本舰取材于 tzoli 绘制的岛风级 F-52 设计 1941 年第 2 号初步方案图，该方案以多联装鱼雷发射管与新型高角炮为核心，从未建成。游戏内按假设的二号舰编制记录，武器配置依该方案图整理。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Shimakaze Preliminary Designs",
+        url: "https://www.deviantart.com/tzoli/art/Shimakaze-Preliminary-Designs-1346308097",
+      },
+      {
+        name: "维基百科 - 岛风号驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%B3%B6%E9%A2%A8%E8%99%9F%E9%A9%85%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "z_11",
     displayName: "Z-11 贝恩德·冯·阿尼姆",
     type: "驱逐舰",
@@ -10213,6 +10244,15 @@
   {
     name: "JP/610/5",
     displayName: "610mm 五联装酸素鱼雷",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "JP/610/7",
+    displayName: "610mm 七联装酸素鱼雷",
     type: "武器",
     armaments: [],
     description: "",
