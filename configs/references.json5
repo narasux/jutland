@@ -11588,6 +11588,111 @@
     ],
   },
   {
+    name: "tramontana",
+    displayName: "特拉蒙塔纳",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "5x1 120mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "高炮",
+        value: "4x2 20mm/65 Breda",
+      },
+      {
+        label: "鱼雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "本舰是安萨尔多公司 1939 年向意大利皇家海军提交的驱逐舰方案，以兼顾水面交战与防空为设计出发点，主炮炮座沿用了同期 90mm 高炮的封闭炮塔形式，因此也常被视作防空驱逐舰思路的延伸。该方案没有留下建造或命名记录，画作者依据当时书刊中的零散数据复原，全案仅存图纸。该方案没有留下舰名，本作沿用意大利皇家海军驱逐舰以风命名的传统，称其为“特拉蒙塔纳”（北风）。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Italian Destroyer Design 1939",
+        url: "https://www.deviantart.com/tzoli/art/Italian-Destroyer-Design-1939-779653886",
+      },
+      {
+        name: "Wikipedia - Maestrale-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Maestrale-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "venezia",
+    displayName: "威尼斯",
+    type: "大型巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x3 280mm/53",
+      },
+      {
+        label: "副炮",
+        value: "6x2 120mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "高炮",
+        value: "8x2 40mm/56 Bofors",
+      },
+      {
+        label: "高炮",
+        value: "8x2 20mm/65 Breda",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 533mm",
+      },
+      {
+        label: "水上侦察机",
+        value: "2x IMAM Ro.43",
+      },
+    ],
+    description: "UP-102 是安萨尔多 1937 年向罗马尼亚推荐的“重炮巡洋舰”方案，思路与德国装甲舰一脉相承：以少量大口径主炮实施远距离打击，并用单一口径的高平两用副炮取代德国舰上混装的 150mm 与 105mm 火炮。主炮塔两侧另设封闭式 40mm 博福斯炮座，以免装填作业被主炮炮口暴风波及。该案面向出口市场，最终未获订货；画作同时给出意大利与罗马尼亚两种涂装，本作采用意大利旗版本。画中罗马尼亚版本的另一架德制水上侦察机，在本作中以同级意制机型代替。方案本身没有舰名，本作按意大利重巡洋舰以城市命名的惯例采用“威尼斯”。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Design UP-102 Big Gun Cruiser",
+        url: "https://www.deviantart.com/tzoli/art/Design-UP-102-Big-Gun-Cruiser-713771763",
+      },
+      {
+        name: "维基百科 - 德国级装甲舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%BE%B7%E5%9B%BD%E7%BA%A7%E8%A3%85%E7%94%B2%E8%88%B0",
+      },
+    ],
+  },
+  {
+    name: "giuseppe_garibaldi",
+    displayName: "朱塞佩·加里波第",
+    type: "防空巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "高炮",
+        value: "4x4 76mm/62 OTO-Melara Sovrapposto",
+      },
+      {
+        label: "高炮",
+        value: "4x2 40mm/70 OTO-Breda",
+      },
+    ],
+    description: "这是 1950 年代把巡洋舰朱塞佩·加里波第号改装为防空巡洋舰的方案，出现时间早于最终实施的“小猎犬”导弹改装。方案设想以新型自动装填舰炮与计划中的四联装 76mm“Sovrapposto”炮座重建全舰防空，但这种四联装炮座从未投产，而列装“半人马座”级的双联装型号可靠性很差，很快被后续型号取代。改装计划最终没有实施，画作者以现代化改装后的加里波第号为蓝本复原了这一方案。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Giuseppe Garibaldi AA Cruiser Design",
+        url: "https://www.deviantart.com/tzoli/art/Giuseppe-Garibaldi-AA-Cruiser-Design-1221169920",
+      },
+      {
+        name: "维基百科 - 阿布鲁齐公爵号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%B8%83%E9%AD%AF%E9%BD%8A%E5%85%AC%E7%88%B5%E8%99%9F%E8%BC%95%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "腓特烈港",
     type: "水上侦察机",
@@ -11947,6 +12052,60 @@
   {
     name: "IT/20/65/2/M1932",
     displayName: "20mm/65 双联装机炮（布雷达 1932 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/M1939",
+    displayName: "120mm/50 单装高平两用炮（安萨尔多 1939 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/2/M1939",
+    displayName: "120mm/50 双联装高平两用炮（安萨尔多 1939 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/280/53/3",
+    displayName: "280mm/53 三联装舰炮（安萨尔多 UP-102 方案）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/76/62/4",
+    displayName: "76mm/62 四联装高炮（Sovrapposto）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/70/2",
+    displayName: "40mm/70 双联装高炮（OTO-Breda）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/56/2",
+    displayName: "40mm/56 双联装高炮（博福斯）",
     type: "武器",
     armaments: [],
     description: "",

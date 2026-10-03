@@ -11724,6 +11724,111 @@
     ],
   },
   {
+    name: "tramontana",
+    displayName: "Tramontana",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x1 120mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x2 20mm/65 Breda",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "This is the destroyer design Ansaldo submitted to the Regia Marina in 1939. It was conceived to combine surface action with a strong anti-aircraft battery, and its main-battery turrets re-used the enclosed mount form of the contemporary 90 mm anti-aircraft gun, so the proposal is often read as an extension of the anti-aircraft destroyer idea. No order, name or builder was ever recorded; the artist reconstructed it from scattered data published at the time, and the design remained on paper. The proposal left no ship name; following the Regia Marina's custom of naming destroyers after winds, this entry calls it Tramontana, the north wind.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Italian Destroyer Design 1939",
+        url: "https://www.deviantart.com/tzoli/art/Italian-Destroyer-Design-1939-779653886",
+      },
+      {
+        name: "Wikipedia — Maestrale-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Maestrale-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "venezia",
+    displayName: "Venezia",
+    type: "Large Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x3 280mm/53",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x2 120mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 40mm/56 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 20mm/65 Breda",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 533mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2x IMAM Ro.43",
+      },
+    ],
+    description: "Project UP-102 is the big-gun cruiser Ansaldo offered to Romania in 1937. Its concept follows the German Panzerschiffe: a small number of heavy guns for long-range engagement, with a dual-purpose secondary battery of one calibre replacing the mixed 15 cm and 10.5 cm guns of the German ships. Enclosed 40 mm Bofors mounts were worked in beside the main turrets so that loading would not be disrupted by the blast of the main battery. The offer was aimed at the export market and was never ordered; the drawing shows both the Italian and Romanian versions, and this entry follows the Italian-flagged one. The artist's second German floatplane on the Romanian version is represented here by a second Italian aircraft of the same role. The project itself carried no ship name; following the Italian custom of naming heavy cruisers after cities, this entry uses Venezia.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Design UP-102 Big Gun Cruiser",
+        url: "https://www.deviantart.com/tzoli/art/Design-UP-102-Big-Gun-Cruiser-713771763",
+      },
+      {
+        name: "Wikipedia — Deutschland-class cruiser",
+        url: "https://en.wikipedia.org/wiki/Deutschland-class_cruiser",
+      },
+    ],
+  },
+  {
+    name: "giuseppe_garibaldi",
+    displayName: "Giuseppe Garibaldi",
+    type: "Anti-aircraft Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x4 76mm/62 OTO-Melara Sovrapposto",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x2 40mm/70 OTO-Breda",
+      },
+    ],
+    description: "This is a 1950s proposal to rebuild the cruiser Giuseppe Garibaldi as an anti-aircraft cruiser, predating the Terrier missile conversion that was eventually carried out. The plan would have re-armed the ship with new automatic guns and the projected quadruple 76 mm Sovrapposto mounting, but that quadruple mount was never produced, and the twin version that did enter service aboard the Centauro class proved unreliable and was soon superseded. The conversion was never carried out; the artist reconstructed the proposal on the basis of the modernised Garibaldi.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Giuseppe Garibaldi AA Cruiser Design",
+        url: "https://www.deviantart.com/tzoli/art/Giuseppe-Garibaldi-AA-Cruiser-Design-1221169920",
+      },
+      {
+        name: "Wikipedia — Italian cruiser Giuseppe Garibaldi (1936)",
+        url: "https://en.wikipedia.org/wiki/Italian_cruiser_Giuseppe_Garibaldi_(1936)",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "Friedrichshafen",
     type: "Reconnaissance Seaplane",
@@ -12083,6 +12188,60 @@
   {
     name: "IT/20/65/2/M1932",
     displayName: "20mm Twin Autocannon (Breda Model 1932)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/M1939",
+    displayName: "120mm Single Dual-purpose Mount (Ansaldo Model 1939)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/2/M1939",
+    displayName: "120mm Twin Dual-purpose Mount (Ansaldo Model 1939)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/280/53/3",
+    displayName: "280mm Triple Mount (Ansaldo UP-102)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/76/62/4",
+    displayName: "76mm Quadruple Mount (Sovrapposto)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/70/2",
+    displayName: "40mm Twin Mount (OTO-Breda)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/56/2",
+    displayName: "40mm Twin Mount (Bofors)",
     type: "Weapon",
     armaments: [],
     description: "",

@@ -36123,8 +36123,8 @@
     rotateSpeed: 1.25,
     length: 242,
     width: 28,
-    fundsCost: 220,
-    timeCost: 80,
+    fundsCost: 250,
+    timeCost: 91,
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -36533,6 +36533,341 @@
           maxCount: 4
         }
       ]
+    }
+  },
+  {
+    // 威尼斯：安萨尔多 UP-102 重炮巡洋舰方案（1937 年向罗马尼亚兜售，纸面设计）
+    name: "venezia",
+    nation: "it",
+    type: "cruiser",
+    typeAbbr: "CB",
+    year: 1937,
+    totalHP: 13500,
+    horizontalDamageReduction: 0.25,
+    verticalDamageReduction: 0.16,
+    maxSpeed: 31,
+    acceleration: 0.6,
+    rotateSpeed: 1.5,
+    length: 187.5,
+    width: 21,
+    fundsCost: 195,
+    timeCost: 71,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "IT/280/53/3",
+          posPercent: 0.4,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 B
+        {
+          name: "IT/280/53/3",
+          posPercent: -0.42,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 120mm/50 高平两用副炮
+        // 右舷前部副炮 A
+        {
+          name: "IT/120/50/2/M1939",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部副炮 A
+        {
+          name: "IT/120/50/2/M1939",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部副炮 B
+        {
+          name: "IT/120/50/2/M1939",
+          posPercent: -0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部副炮 B
+        {
+          name: "IT/120/50/2/M1939",
+          posPercent: -0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部副炮 C
+        {
+          name: "IT/120/50/2/M1939",
+          posPercent: -0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部副炮 C
+        {
+          name: "IT/120/50/2/M1939",
+          posPercent: -0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 40mm/56 博福斯双联装高炮
+        // 右舷前部 40mm A
+        {
+          name: "IT/40/56/2",
+          posPercent: 0.51,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 40mm A
+        {
+          name: "IT/40/56/2",
+          posPercent: 0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前部 40mm B
+        {
+          name: "IT/40/56/2",
+          posPercent: 0.42,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 40mm B
+        {
+          name: "IT/40/56/2",
+          posPercent: 0.42,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部 40mm C
+        {
+          name: "IT/40/56/2",
+          posPercent: -0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 40mm C
+        {
+          name: "IT/40/56/2",
+          posPercent: -0.53,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷舰尾 40mm D
+        {
+          name: "IT/40/56/2",
+          posPercent: -0.62,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舰尾 40mm D
+        {
+          name: "IT/40/56/2",
+          posPercent: -0.62,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm/65 布雷达双联装机炮
+        // 右舷前部 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前中部 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前中部 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后中部 20mm C
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后中部 20mm C
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部 20mm D
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 20mm D
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 右舷三联装鱼雷管
+        {
+          name: "IT/533/3",
+          posPercent: -0.35,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷三联装鱼雷管
+        {
+          name: "IT/533/3",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        }
+      ]
+    },
+    aircraft: {
+      deck: "ITCatapult_venezia",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Ro.43",
+          maxCount: 2
+        }
+      ]
+    }
+  },
+  {
+    // 朱塞佩·加里波第：1950 年代防空巡洋舰改装方案（未实施）
+    name: "giuseppe_garibaldi",
+    nation: "it",
+    type: "cruiser",
+    typeAbbr: "CLAA",
+    year: 1955,
+    totalHP: 11600,
+    horizontalDamageReduction: 0.24,
+    verticalDamageReduction: 0.17,
+    maxSpeed: 30,
+    acceleration: 0.65,
+    rotateSpeed: 1.7,
+    length: 187,
+    width: 18.9,
+    fundsCost: 150,
+    timeCost: 54,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.46,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.36,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.38,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 D
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.48,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 76mm/62 Sovrapposto 四联装高炮
+        // 右舷中部 76mm A
+        {
+          name: "IT/76/62/4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部 76mm A
+        {
+          name: "IT/76/62/4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部 76mm B
+        {
+          name: "IT/76/62/4",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 76mm B
+        {
+          name: "IT/76/62/4",
+          posPercent: -0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 40mm/70 OTO-Breda 双联装高炮
+        // 前部中线 40mm A
+        {
+          name: "IT/40/70/2",
+          posPercent: 0.3,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 右舷中部 40mm B
+        {
+          name: "IT/40/70/2",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部 40mm B
+        {
+          name: "IT/40/70/2",
+          posPercent: 0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部中线 40mm C
+        {
+          name: "IT/40/70/2",
+          posPercent: -0.33,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      torpedoes: []
     }
   },
   // 驱逐舰
@@ -38652,6 +38987,112 @@
           posPercent: -0.26,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
+  // 意大利海军
+  {
+    // 特拉蒙塔纳：1939 年安萨尔多驱逐舰方案（未建成）
+    name: "tramontana",
+    nation: "it",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1939,
+    totalHP: 2200,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 34,
+    acceleration: 1.2,
+    rotateSpeed: 2.2,
+    length: 120,
+    width: 12,
+    fundsCost: 95,
+    timeCost: 35,
+    weapon: {
+      mainGuns: [
+        // 舰首主炮 No.1
+        {
+          name: "IT/120/50/M1939",
+          posPercent: 0.65,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 舰首主炮 No.2
+        {
+          name: "IT/120/50/M1939",
+          posPercent: 0.54,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 中部主炮 No.3
+        {
+          name: "IT/120/50/M1939",
+          posPercent: -0.3,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [180, 350]
+        },
+        // 舰尾主炮 No.4
+        {
+          name: "IT/120/50/M1939",
+          posPercent: -0.64,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 舰尾主炮 No.5
+        {
+          name: "IT/120/50/M1939",
+          posPercent: -0.75,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 20mm/65 布雷达双联装机炮
+        // 右舷舰桥后 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舰桥后 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中部四联装鱼雷管 A
+        {
+          name: "IT/533/4",
+          posPercent: -0.18,
+          rightFiringArc: [45, 150],
+          leftFiringArc: [210, 315]
+        },
+        // 中部四联装鱼雷管 B
+        {
+          name: "IT/533/4",
+          posPercent: -0.43,
+          rightFiringArc: [30, 135],
+          leftFiringArc: [225, 330]
         }
       ]
     }

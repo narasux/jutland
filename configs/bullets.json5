@@ -1339,5 +1339,37 @@
     diameter: 533,
     damage: 4800,
     criticalRate: 0.08
+  },
+  // 意大利海军 120mm/50 安萨尔多 1939 年型舰炮弹（1939 年驱逐舰方案与 UP-102 副炮共用）
+  {
+    name: "IT/GB/120/1939",
+    type: "shell",
+    diameter: 120,
+    damage: 90,
+    criticalRate: 0.001
+  },
+  // 意大利海军 280mm 主炮弹（安萨尔多 UP-102 方案，纸面设计）
+  {
+    name: "IT/GB/280",
+    type: "shell",
+    diameter: 280,
+    damage: 1300,
+    criticalRate: 0.01
+  },
+  // 意大利海军 76mm/62 舰炮弹（加里波第防空巡洋舰方案）
+  {
+    name: "IT/GB/76",
+    type: "shell",
+    diameter: 76,
+    damage: 38,
+    criticalRate: 0.001
+  },
+  // 意大利海军 40mm 高炮弹（UP-102 博福斯与加里波第 OTO 40/70 共用）
+  {
+    name: "IT/GB/40",
+    type: "shell",
+    diameter: 40,
+    damage: 4,
+    criticalRate: 0
   }
 ]

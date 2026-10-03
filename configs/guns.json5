@@ -3102,6 +3102,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 意大利海军 280mm/53 三联装主炮（安萨尔多 UP-102 方案，纸面设计）
+  {
+    name: "IT/280/53/3",
+    bulletName: "IT/GB/280",
+    bulletCount: 3,
+    reloadTime: 9,
+    range: 33,
+    bulletSpread: 105,
+    bulletSpeed: 900,
+    fundsCost: 35,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 意大利海军 253mm/55 安萨尔多 1936 年型三联装主炮（安萨尔多大型巡洋舰方案，纸面设计）
   {
     name: "IT/253/55/3/M1936",
@@ -3128,6 +3141,32 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 意大利海军 120mm/50 安萨尔多 1939 年型单装高平两用炮（1939 年驱逐舰方案）
+  {
+    name: "IT/120/50/M1939",
+    bulletName: "IT/GB/120/1939",
+    bulletCount: 1,
+    reloadTime: 2,
+    range: 14,
+    bulletSpread: 60,
+    bulletSpeed: 830,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 120mm/50 安萨尔多 1939 年型双联装高平两用炮（UP-102 方案）
+  {
+    name: "IT/120/50/2/M1939",
+    bulletName: "IT/GB/120/1939",
+    bulletCount: 2,
+    reloadTime: 2,
+    range: 15,
+    bulletSpread: 55,
+    bulletSpeed: 830,
+    fundsCost: 7,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 意大利海军 90mm/50 安萨尔多 1939 年型双联装高平两用炮
   {
     name: "IT/90/50/2/M1939",
@@ -3141,6 +3180,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 意大利海军 76mm/62 Sovrapposto 四联装高炮（加里波第防空巡洋舰方案）
+  {
+    name: "IT/76/62/4",
+    bulletName: "IT/GB/76",
+    bulletCount: 4,
+    reloadTime: 0.6,
+    range: 12,
+    bulletSpread: 28,
+    bulletSpeed: 950,
+    fundsCost: 20,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 意大利海军 37mm/54 布雷达 1932/1938 年型双联装高炮
   {
     name: "IT/37/54/2/M1932",
@@ -3150,6 +3202,32 @@
     range: 4,
     bulletSpread: 30,
     bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 40mm/70 OTO-Breda 双联装高炮（加里波第防空巡洋舰方案）
+  {
+    name: "IT/40/70/2",
+    bulletName: "IT/GB/40",
+    bulletCount: 2,
+    reloadTime: 0.35,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 900,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 40mm/56 博福斯双联装高炮（UP-102 方案，出口配置）
+  {
+    name: "IT/40/56/2",
+    bulletName: "IT/GB/40",
+    bulletCount: 2,
+    reloadTime: 0.5,
+    range: 7,
+    bulletSpread: 20,
+    bulletSpeed: 880,
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true

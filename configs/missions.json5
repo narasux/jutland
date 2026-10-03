@@ -132,9 +132,9 @@
         rotation: 225,
         belongPlayer: "P1"
       },
-      // Phoenix CL-46 -> portland：Brooklyn 级未收录；以同类别、近似万吨级现有巡洋舰替代。C-6，舰首西南。
+      // Phoenix CL-46 -> brooklyn：同属 Brooklyn 级；现有资源为 1945 年防空改装形态。C-6，舰首西南。
       {
-        name: "portland",
+        name: "brooklyn",
         pos: [87, 55],
         rotation: 225,
         belongPlayer: "P1"
@@ -160,9 +160,9 @@
         rotation: 225,
         belongPlayer: "P1"
       },
-      // Honolulu CL-48 -> portland：Brooklyn 级未收录；同类别近似吨位替代。B-21 内侧。
+      // Honolulu CL-48 -> brooklyn：同属 Brooklyn 级；现有资源为 1945 年防空改装形态。B-21 内侧。
       {
-        name: "portland",
+        name: "brooklyn",
         pos: [78, 84],
         rotation: 225,
         belongPlayer: "P1"
@@ -648,16 +648,16 @@
         rotation: 135,
         belongPlayer: "P2"
       },
-      // Natori -> shintsu：Nagara 级未收录；以同国同轻巡洋舰类别、尺寸接近的 Sendai 级资源替代。
+      // Natori -> abukuma：同属 Nagara 级；以同名级现有轻巡洋舰资源替代。
       {
-        name: "shintsu",
+        name: "abukuma",
         pos: [40, 10],
         rotation: 135,
         belongPlayer: "P2"
       },
-      // Nagara -> shintsu：沿用同国同轻巡洋舰替代策略；巡洋舰线南翼。
+      // Nagara -> abukuma：同属 Nagara 级；巡洋舰线南翼。
       {
-        name: "shintsu",
+        name: "abukuma",
         pos: [45, 12],
         rotation: 135,
         belongPlayer: "P2"
@@ -1833,9 +1833,9 @@
         rotation: 180,
         belongPlayer: "P1"
       },
-      // Honolulu CL-48 -> portland：Brooklyn 级未收录；以同类别、舰长接近的现有美军巡洋舰替代。
+      // Honolulu CL-48 -> brooklyn：同属 Brooklyn 级；现有资源为 1945 年防空改装形态。
       {
-        name: "portland",
+        name: "brooklyn",
         pos: [14, 56],
         rotation: 180,
         belongPlayer: "P1"
@@ -2034,9 +2034,9 @@
         rotation: 135,
         belongPlayer: "P1"
       },
-      // Newcomb DD-586 -> porter：Fletcher 级未收录；以同类别、长度接近的 Porter 级资源替代。
+      // Newcomb DD-586 -> johnston：同属 Fletcher 级；以同名级现有驱逐舰资源替代。
       {
-        name: "porter",
+        name: "johnston",
         pos: [22, 34],
         rotation: 135,
         belongPlayer: "P1"
@@ -2860,6 +2860,8 @@
           "kirov",
           "sevastopol",
           "genova",
+          "venezia",
+          "giuseppe_garibaldi",
           "duquesne",
           "jeanne_d_arc",
           "de_grasse",
@@ -2895,7 +2897,8 @@
           "hero",
           "gurkha",
           "rapid",
-          "le_fantasque"
+          "le_fantasque",
+          "tramontana"
         ],
       },
       {
@@ -3467,7 +3470,25 @@
       // Italy
       {
         name: "genova",
-        pos: [24, 38],
+        pos: [24, 34],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "venezia",
+        pos: [23, 35],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "giuseppe_garibaldi",
+        pos: [24, 36],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "tramontana",
+        pos: [23, 37],
         rotation: 90,
         belongPlayer: "P1"
       },

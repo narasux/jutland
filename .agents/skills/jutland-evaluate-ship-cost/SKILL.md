@@ -92,13 +92,13 @@ quantize(x) = round(x)      # x < 10 时用 $1 步进
 - 舰船速度、转向和加速度
 - 鱼雷/火箭完整发射周期
 
-对不含舰载机贡献的舰船：
+对不带打击型舰载机（含无舰载机）的舰船：
 
 ```text
 economicPower = HullPower + 0.25 × Burst + 0.10 × Projection
 ```
 
-航母和其他含舰载机单位的 `Burst` / `Projection` 已混入航空贡献，为避免与运行时飞机资金重复计价，只使用 `HullPower`。
+以舰载机承担打击任务的单位（`aircraft_carrier`，以及搭载非 `scout` 机型的航空战列舰等混合舰）其 `Burst` / `Projection` 已混入航空贡献，为避免与运行时飞机资金重复计价，只使用 `HullPower`。判定依据是舰载机机型（`planes.json5` 的 `type`）而不是运行时航空战力分：仅带侦察机（`scout`）的舰船其航空贡献可忽略，仍按完整口径计价，`aviation` 四舍五入到 0 还是 1 不影响结论。
 
 ### 战力价与耐久保底
 

@@ -11665,6 +11665,111 @@
     ],
   },
   {
+    name: "tramontana",
+    displayName: "トラモンターナ",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x1 120mm/50 アンサルド 1939 年型",
+      },
+      {
+        label: "対空砲",
+        value: "4x2 20mm/65 ブレダ",
+      },
+      {
+        label: "魚雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "本艦は1939年にアンサルド社がイタリア王立海軍へ提出した駆逐艦計画である。水上戦と防空の両立を狙い、主砲塔には同時期の90mm高角砲と同じ密閉型砲塔を流用しており、防空駆逐艦構想の延長として見ることもできる。発注・命名・建造の記録はなく、当時の刊行物に残る断片的なデータを基に画作者が復元した紙上計画である。計画には艦名が残されていないため、イタリア王立海軍の駆逐艦が風名を採る伝統に倣い、本項目では「トラモンターナ」（北風）と呼ぶ。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Italian Destroyer Design 1939",
+        url: "https://www.deviantart.com/tzoli/art/Italian-Destroyer-Design-1939-779653886",
+      },
+      {
+        name: "ウィキペディア — マエストラーレ級駆逐艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A8%E3%82%B9%E3%83%88%E3%83%A9%E3%83%BC%E3%83%AC%E7%B4%9A%E9%A7%86%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "venezia",
+    displayName: "ヴェネツィア",
+    type: "大型巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x3 280mm/53",
+      },
+      {
+        label: "副砲",
+        value: "6x2 120mm/50 アンサルド 1939 年型",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 40mm/56 ボフォース",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 20mm/65 ブレダ",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 533mm",
+      },
+      {
+        label: "水上偵察機",
+        value: "2x IMAM Ro.43",
+      },
+    ],
+    description: "UP-102 は1937年にアンサルド社がルーマニアへ提案した大型砲装巡洋艦である。少数の大口径砲で遠距離射撃を行い、副砲を単一口径の両用砲に統一するという、ドイツの装甲艦と同じ発想に基づく。主砲塔の脇には密閉式40mmボフォース砲座を置き、装填が主砲の爆風に妨げられないようにしている。輸出向けの提案であり発注には至らなかった。画図にはイタリア旗とルーマニア旗の二種が描かれているが、本項目はイタリア旗のものを採用している。図中のルーマニア版にもう一機描かれたドイツ製水上偵察機は、本作では同任務のイタリア機で代用している。計画自体に艦名はなく、イタリア重巡洋艦が都市名を採る慣例に倣い、本項目では「ヴェネツィア」とする。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Design UP-102 Big Gun Cruiser",
+        url: "https://www.deviantart.com/tzoli/art/Design-UP-102-Big-Gun-Cruiser-713771763",
+      },
+      {
+        name: "ウィキペディア — ドイッチュラント級装甲艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%89%E3%82%A4%E3%83%83%E3%83%81%E3%83%A5%E3%83%A9%E3%83%B3%E3%83%88%E7%B4%9A%E8%A3%85%E7%94%B2%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "giuseppe_garibaldi",
+    displayName: "ジュゼッペ・ガリバルディ",
+    type: "防空巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 135mm/45 アンサルド 1938 年型",
+      },
+      {
+        label: "対空砲",
+        value: "4x4 76mm/62 OTOメラーラ ソヴラッポスト",
+      },
+      {
+        label: "対空砲",
+        value: "4x2 40mm/70 OTOブレダ",
+      },
+    ],
+    description: "本項目は1950年代に巡洋艦ジュゼッペ・ガリバルディを防空巡洋艦へ改装する計画で、実際に実施されたテリア・ミサイル改装より前に検討されたものである。新型の自動装填砲と計画中の四連装76mm「ソヴラッポスト」砲塔で対空火力を再構成する構想だったが、この四連装砲塔は製造されず、チェンタウロ級に搭載された連装型も信頼性が低く短期間で後継型に置き換えられた。改装は実現せず、画作者は近代化改装後のガリバルディを下敷きにこの計画を復元した。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Giuseppe Garibaldi AA Cruiser Design",
+        url: "https://www.deviantart.com/tzoli/art/Giuseppe-Garibaldi-AA-Cruiser-Design-1221169920",
+      },
+      {
+        name: "ウィキペディア — ジュゼッペ・ガリバルディ (軽巡洋艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A5%E3%82%BC%E3%83%83%E3%83%9A%E3%83%BB%E3%82%AC%E3%83%AA%E3%83%90%E3%83%AB%E3%83%87%E3%82%A3_(%E8%BB%BD%E5%B7%A1%E6%B4%8B%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "フリードリヒスハーフェン",
     type: "水上偵察機",
@@ -12024,6 +12129,60 @@
   {
     name: "IT/20/65/2/M1932",
     displayName: "20mm 連装機関砲（ブレダ 1932 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/M1939",
+    displayName: "120mm 単装両用砲（アンサルド 1939 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/2/M1939",
+    displayName: "120mm 連装両用砲（アンサルド 1939 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/280/53/3",
+    displayName: "280mm 三連装砲（アンサルド UP-102）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/76/62/4",
+    displayName: "76mm 四連装高角砲（ソヴラッポスト）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/70/2",
+    displayName: "40mm 連装高角砲（OTOブレダ）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/56/2",
+    displayName: "40mm 連装高角砲（ボフォース）",
     type: "兵器",
     armaments: [],
     description: "",

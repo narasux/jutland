@@ -91,6 +91,22 @@ def aircraft_total(ship, plane_costs):
     )
 
 
+def carries_strike_air_wing(ship, plane_types):
+    """航空兵力是否承担打击任务（航母，或搭载非侦察机的航空战列舰等混合舰）。
+
+    只有这类单位的 Burst / Projection 会混入航空贡献，才需要改用 HullPower 计价；
+    仅搭载侦察机（scout）的舰船其舰载机战力可忽略，仍按舰体战力计价。
+    """
+    if ship.get("type") == "aircraft_carrier":
+        return True
+    for group in ship.get("aircraft", {}).get("groups", []):
+        if group.get("maxCount", 0) <= 0:
+            continue
+        if plane_types.get(group.get("name", ""), "scout") != "scout":
+            return True
+    return False
+
+
 def air_wing_fit_penalty(ship, plane_times):
     groups = [
         group
@@ -157,7 +173,7 @@ def ship_time_cost(ship, funds, fit_penalty):
     )
 
 
-def calculate_ship_cost(ship, power, plane_costs, plane_times):
+def calculate_ship_cost(ship, power, plane_costs, plane_times, plane_types):
     aircraft = aircraft_total(ship, plane_costs)
     if ship.get("nation") == "special":
         funds = int(ship.get("fundsCost", 0))
@@ -183,8 +199,10 @@ def calculate_ship_cost(ship, power, plane_costs, plane_times):
         )
     else:
         economic_power = float(power.get("hullPower", 0))
-        # 含舰载机单位的 Burst / Projection 已混入航空贡献，避免重复计价。
-        if int(power.get("aviation", 0)) <= 0:
+        # 以舰载机承担打击任务的单位（航母、航空战列舰等），其 Burst / Projection
+        # 已混入航空贡献，避免与运行时飞机资金重复计价，只取 HullPower；
+        # 只带侦察机的舰船按完整口径计价。
+        if not carries_strike_air_wing(ship, plane_types):
             economic_power += (
                 BURST_POWER_WEIGHT * float(power.get("burst", 0))
                 + PROJECTION_POWER_WEIGHT
@@ -244,10 +262,12 @@ def main():
 
     plane_costs = {}
     plane_times = {}
+    plane_types = {}
     with (REPO_ROOT / "configs/planes.json5").open() as file:
         for plane in json5.loads(file.read()):
             plane_costs[plane["name"]] = plane.get("fundsCost", 10)
             plane_times[plane["name"]] = plane.get("timeCost", 6)
+            plane_types[plane["name"]] = plane.get("type", "scout")
 
     records = []
     cost_map = {}
@@ -260,6 +280,7 @@ def main():
             power,
             plane_costs,
             plane_times,
+            plane_types,
         )
         records.append((ship, power, result))
         cost_map[ship["name"]] = result
