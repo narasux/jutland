@@ -86,13 +86,14 @@ var shipClassFilters = []shipClassFilter{
 type planeTypeFilter string
 
 const (
-	planeTypeAll     planeTypeFilter = "all"
-	planeTypeFighter planeTypeFilter = "fighter"
-	planeTypeDive    planeTypeFilter = "dive_bomber"
-	planeTypeLevel   planeTypeFilter = "level_bomber"
-	planeTypeTorpedo planeTypeFilter = "torpedo_bomber"
-	planeTypeScout   planeTypeFilter = "scout"
-	planeTypeOther   planeTypeFilter = "other"
+	planeTypeAll      planeTypeFilter = "all"
+	planeTypeFighter  planeTypeFilter = "fighter"
+	planeTypeDive     planeTypeFilter = "dive_bomber"
+	planeTypeLevel    planeTypeFilter = "level_bomber"
+	planeTypeTorpedo  planeTypeFilter = "torpedo_bomber"
+	planeTypeAttacker planeTypeFilter = "attacker"
+	planeTypeScout    planeTypeFilter = "scout"
+	planeTypeOther    planeTypeFilter = "other"
 )
 
 func (f planeTypeFilter) display() string {
@@ -105,6 +106,8 @@ func (f planeTypeFilter) display() string {
 		return i18n.Text(i18n.MsgPlaneTypeLevelBomber)
 	case planeTypeTorpedo:
 		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
+	case planeTypeAttacker:
+		return i18n.Text(i18n.MsgPlaneTypeAttacker)
 	case planeTypeScout:
 		return i18n.Text(i18n.MsgPlaneTypeScout)
 	case planeTypeOther:
@@ -116,7 +119,7 @@ func (f planeTypeFilter) display() string {
 
 var planeTypeFilters = []planeTypeFilter{
 	planeTypeAll, planeTypeFighter, planeTypeDive, planeTypeLevel, planeTypeTorpedo,
-	planeTypeScout, planeTypeOther,
+	planeTypeAttacker, planeTypeScout, planeTypeOther,
 }
 
 type collectionUILayout struct {

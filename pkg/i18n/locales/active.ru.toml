@@ -134,6 +134,8 @@ other = "Пикирующий бомбардировщик"
 other = "Горизонтальный бомбардировщик"
 [PlaneTypeTorpedoBomber]
 other = "Торпедоносец"
+[PlaneTypeAttacker]
+other = "Штурмовик"
 [PlaneTypeScout]
 other = "Разведчик"
 [PlaneTypeOther]

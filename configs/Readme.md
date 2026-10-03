@@ -577,6 +577,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // dive_bomber 俯冲轰炸机
     // level_bomber 水平轰炸机
     // torpedo_bomber 鱼雷轰炸机
+    // attacker 攻击机（对舰机炮/火箭/小型炸弹，复用对舰攻击流程）
     // scout 侦察机
     // other 其他
     type: "fighter",

@@ -200,11 +200,10 @@ func CalculateShip(
 		result.Details.AntiShipDPS += plane.CombatPower.Details.AntiShipDPS * aircraftFactor
 		result.Details.AntiAirDPS += plane.CombatPower.Details.AntiAirDPS * aircraftFactor
 		result.Details.BurstDamage += plane.CombatPower.Details.BurstDamage * aircraftFactor
-		result.Details.MaxProjectionRange = max(result.Details.MaxProjectionRange, plane.Range)
-		result.Details.MaxProjectionDistanceKM = max(
-			result.Details.MaxProjectionDistanceKM,
-			plane.Range*planeProjectionKilometersPerMapUnit,
-		)
+		// 舰船投送距离只取自身武器射程，不并入舰载机航程：
+		// gun.Range 是配置值/2，plane.Range 是配置值/8，两者不是同一换算尺度；
+		// 混入会把侦察机航程当成舰船投送射程（9~21 -> 200+），进而虚高舰船费用。
+		// 舰载机的投送与火力价值由飞机自身战力与上面的 Aviation 项表达。
 		addSortedContribution(
 			&result.Details.AntiShipContributions, plane.Name, group.MaxCount,
 			plane.CombatPower.Details.AntiShipDPS*aircraftFactor,

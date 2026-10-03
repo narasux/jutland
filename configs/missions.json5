@@ -4796,7 +4796,7 @@
             name: "VB10",
             maxCount: 8,
           },
-          // 苏联机群（2024 年新增，暂驻右侧盟军机场统一测试）
+          // 苏联机群
           {
             name: "MiG-1",
             maxCount: 8,
@@ -4835,6 +4835,42 @@
           },
           {
             name: "MBR-2",
+            maxCount: 8,
+          },
+          {
+            name: "I-15",
+            maxCount: 8,
+          },
+          {
+            name: "I-16",
+            maxCount: 8,
+          },
+          {
+            name: "Il-2",
+            maxCount: 8,
+          },
+          {
+            name: "Il-10",
+            maxCount: 8,
+          },
+          {
+            name: "Su-2",
+            maxCount: 8,
+          },
+          {
+            name: "Pe-2",
+            maxCount: 8,
+          },
+          {
+            name: "Il-4",
+            maxCount: 8,
+          },
+          {
+            name: "Pe-8",
+            maxCount: 8,
+          },
+          {
+            name: "Yer-2",
             maxCount: 8,
           },
         ],

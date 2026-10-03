@@ -58,6 +58,7 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 50)
 |---|---|---|
 | `typeMultiplier` (fighter) | 1.00 | 战斗机单位战力费用最低 |
 | `typeMultiplier` (dive_bomber) | 1.15 | 俯冲轰炸机携带炸弹，费用略高 |
+| `typeMultiplier` (attacker) | 1.20 | 攻击机同时挂机炮、火箭与小型炸弹，且装甲减伤高 |
 | `typeMultiplier` (level_bomber) | 1.15 | 水平轰炸机同样携带炸弹，费用与俯冲机相同 |
 | `typeMultiplier` (torpedo_bomber) | 1.30 | 鱼雷轰炸机挂载最重，费用最高 |
 | `scaleFactor` | 0.10 / 0.30 | 将战力值映射到资金区间；主路径 scaleFactor=0.10，Python 备用估算器 fallbackScaleFactor=0.30 |

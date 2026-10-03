@@ -76,7 +76,7 @@ func ResolvePlaneSight(planeType PlaneType, configured float64) float64 {
 		return SightRangeScout
 	case PlaneTypeFighter:
 		return SightRangeFighter
-	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber:
+	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber, PlaneTypeAttacker:
 		return SightRangeBomber
 	default:
 		return 0

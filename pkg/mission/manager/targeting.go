@@ -171,7 +171,10 @@ func snapshotPlaneTargetType(plane *objUnit.Plane) object.Type {
 	switch plane.Type {
 	case objUnit.PlaneTypeFighter:
 		return object.TypePlane
-	case objUnit.PlaneTypeDiveBomber, objUnit.PlaneTypeLevelBomber, objUnit.PlaneTypeTorpedoBomber:
+	case objUnit.PlaneTypeDiveBomber,
+		objUnit.PlaneTypeLevelBomber,
+		objUnit.PlaneTypeTorpedoBomber,
+		objUnit.PlaneTypeAttacker:
 		return object.TypeShip
 	default:
 		return object.TypeNone

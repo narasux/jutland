@@ -57,6 +57,7 @@ var planeTypes = []string{
 	"dive_bomber",
 	"level_bomber",
 	"torpedo_bomber",
+	"attacker",
 	"scout",
 	"other",
 }

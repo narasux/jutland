@@ -12392,6 +12392,281 @@
     ]
   },
   {
+    "name": "I-15",
+    "displayName": "I-15",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "上翼（7.62mm PV-1 連装固定前射）",
+        "value": "2 x 7.62mm PV-1",
+      },
+      {
+        "label": "機体（7.62mm PV-1 連装同調）",
+        "value": "2 x 7.62mm PV-1",
+      }
+    ],
+    "description": "I-15 はポリカールポフ設計局が開発した複葉戦闘機で、1933年に初飛行し1934年に就役した。最大速度367 km/h、航続距離510 km、全長6.10 m、翼幅9.75 m。上翼と機体に7.62mm PV-1 機関銃を合わせて4挺装備し、スペイン内戦とノモンハン事件でソ連軍の主力を担ったが、1941年にはすでに旧式化していた。本作では戦闘機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — I-15",
+        "url": "https://en.wikipedia.org/wiki/Polikarpov_I-15",
+      },
+    ]
+  },
+  {
+    "name": "I-16",
+    "displayName": "I-16",
+    "type": "戦闘機",
+    "armaments": [
+      {
+        "label": "主翼（20mm ShVAK 連装固定前射）",
+        "value": "2 x 20mm ShVAK",
+      },
+      {
+        "label": "機首（7.62mm ShKAS 連装同調）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "I-16（I-16 Type 28）はポリカールポフ設計局が1933年に初飛行させた低翼単葉戦闘機で、1940年型は主翼内に20mm ShVAK 機関砲2門を装備し、機首に7.62mm ShKAS 機関銃2挺を残した。最大速度は約470 km/h、航続距離700 km、全長6.13 m、翼幅9.00 m。スペイン内戦で最速級の戦闘機の一つとなり、中国空軍とソ連志願航空隊の主力でもあった。本作では戦闘機として扱う。爆弾搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — I-16",
+        "url": "https://en.wikipedia.org/wiki/Polikarpov_I-16",
+      },
+    ]
+  },
+  {
+    "name": "Il-2",
+    "displayName": "Il-2",
+    "type": "攻撃機",
+    "armaments": [
+      {
+        "label": "主翼（23mm VYa-23 連装固定前射）",
+        "value": "2 x 23mm VYa-23",
+      },
+      {
+        "label": "主翼（7.62mm ShKAS 連装）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "後座（12.7mm UBT 旋回機銃）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "翼下ロケット（RS-82）",
+        "value": "8 x RS-82",
+      },
+      {
+        "label": "爆弾倉（100kg 航空爆弾）",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "Il-2（Il-2M3）はイリューシン設計局が1939年に初飛行させた装甲強撃機で、1941年に就役した。最大速度410 km/h、航続距離765 km、全長11.65 m、翼幅14.60 m。4～12mm の AB-1 鋼板を溶接した耐荷重装甲胴体を持ち、第二次大戦で最も多く生産された軍用機で、黒海艦隊第23強撃航空連隊が対艦攻撃に使用した。本作では攻撃機として扱い、装甲によるダメージ軽減は同世代機より高く、23mm 機関砲、RS-82 ロケット、100kg 爆弾を装備する。魚雷搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Il-2",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-2",
+      },
+    ]
+  },
+  {
+    "name": "Il-10",
+    "displayName": "Il-10",
+    "type": "攻撃機",
+    "armaments": [
+      {
+        "label": "主翼（23mm VYa-23 連装固定前射）",
+        "value": "2 x 23mm VYa-23",
+      },
+      {
+        "label": "主翼（7.62mm ShKAS 連装）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "後座（20mm B-20 旋回機関砲）",
+        "value": "1 x 20mm B-20",
+      },
+      {
+        "label": "翼下ロケット（RS-132）",
+        "value": "4 x RS-132",
+      },
+      {
+        "label": "爆弾倉（100kg 航空爆弾）",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "Il-10 は Il-2 の後継型で1944年に就役し、最大速度551 km/h、航続距離800 km、全長11.06 m、翼幅13.40 m。全金属の耐荷重装甲殻を踏襲しつつ4～8mm に薄型化したことで速度と運動性が大きく改善し、1945年には太平洋艦隊第26強撃航空連隊が済州島や羅津港の艦船を攻撃した。本作では攻撃機として扱い、23mm 機関砲、RS-132 ロケット、100kg 爆弾を装備する。魚雷搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Il-10",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-10",
+      },
+    ]
+  },
+  {
+    "name": "Su-2",
+    "displayName": "Su-2",
+    "type": "攻撃機",
+    "armaments": [
+      {
+        "label": "主翼（7.62mm ShKAS 連装 ×2、計4挺）",
+        "value": "4 x 7.62mm ShKAS",
+      },
+      {
+        "label": "後座（7.62mm ShKAS 旋回銃架）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "翼下ロケット（RS-82）",
+        "value": "8 x RS-82",
+      },
+      {
+        "label": "爆弾倉（100kg 航空爆弾）",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "Su-2（Su-2、原型は BB-1）はスホーイ設計局が1937年に初飛行させた軽爆撃・強撃機で、1939年に就役した。M-88B 型の最大速度485 km/h、航続距離1,100 km、全長10.46 m、翼幅14.30 m。主翼に7.62mm ShKAS を4挺装備し、RS-82 ロケット10発と600kg 爆弾を搭載可能で、操縦士と後座には9mm の装甲があった。開戦初期に近接支援任務を数多く担った。本作では攻撃機として扱い、機関砲、RS-82 ロケット、100kg 爆弾を装備する。魚雷搭載は設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Su-2",
+        "url": "https://en.wikipedia.org/wiki/Sukhoi_Su-2",
+      },
+    ]
+  },
+  {
+    "name": "Pe-2",
+    "displayName": "Pe-2",
+    "type": "急降下爆撃機",
+    "armaments": [
+      {
+        "label": "機首（7.62mm ShKAS 連装固定前射）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "背塔（12.7mm UBT 旋回機銃）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "機腹（7.62mm ShKAS 旋回銃架）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "爆弾倉（500kg 主爆弾 + 100kg 爆弾 ×2）",
+        "value": "1 x 500kg + 2 x 100kg",
+      }
+    ],
+    "description": "Pe-2（Pe-2FT）はペトリャコフ設計局が開発し1941年に就役した。最大速度540 km/h、航続距離1,315 km、全長12.66 m、翼幅17.16 m。もともと高空迎撃用の双発戦闘機として設計されたが、急降下用ダイブブレーキを追加してソ連空軍の主力急降下爆撃機となり、黒海艦隊航空隊も対艦攻撃に使用したが、装甲が薄く生存性に難があった。本作では急降下爆撃機として扱い、500kg と100kg の近距離爆弾を装備する。魚雷とロケットは設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Pe-2",
+        "url": "https://en.wikipedia.org/wiki/Petlyakov_Pe-2",
+      },
+    ]
+  },
+  {
+    "name": "Il-4",
+    "displayName": "Il-4",
+    "type": "魚雷攻撃機",
+    "armaments": [
+      {
+        "label": "機首（7.62mm ShKAS 固定前射）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "背塔（12.7mm UBT 旋回機銃）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "機腹（7.62mm ShKAS 旋回銃架）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "爆弾倉（45-36 型 450mm 航空魚雷）",
+        "value": "1 x 45-36 torpedo",
+      }
+    ],
+    "description": "Il-4（Il-4/DB-3F）はイリューシン設計局が1939年に初飛行させた双発長距離爆撃機で、1940年に就役した。最大速度410 km/h、1,000kg 爆弾搭載時の航続距離2,600 km、全長14.76 m、翼幅21.44 m。爆弾倉の加熱装置を外し燃料系統を改めた Il-4T 型は機腹に45-36 型450mm 航空魚雷1本を搭載でき、ソ連海軍航空隊の水雷魚雷連隊の主力となった。本作では魚雷攻撃機として扱い、魚雷と自衛機銃のみを装備する。爆弾とロケットは設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Il-4",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-4",
+      },
+    ]
+  },
+  {
+    "name": "Pe-8",
+    "displayName": "Pe-8",
+    "type": "水平爆撃機",
+    "armaments": [
+      {
+        "label": "機首（7.62mm ShKAS 連装前向）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "機背前後塔（20mm ShVAK 旋回機関砲）",
+        "value": "2 x 20mm ShVAK",
+      },
+      {
+        "label": "機尾（20mm ShVAK 尾部砲塔）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "エンジンナセル（12.7mm UBT 連装砲塔 ×2）",
+        "value": "4 x 12.7mm UBT",
+      },
+      {
+        "label": "爆弾倉（2000kg + 1000kg 航空爆弾）",
+        "value": "2 x 2000kg + 1 x 1000kg",
+      }
+    ],
+    "description": "Pe-8（Pe-8）はペトリャコフ設計局が開発した四発重爆撃機で1940年に就役した。最大速度443 km/h、航続距離3,700 km、全長23.20 m、翼幅39.13 m。常用搭載2,000～4,000kg、最大5,000kg で、ベルリンやドイツ本土への長距離爆撃に投入され、ソ連の外交使節団を輸送したこともある。固定前射武器はなく、多数の砲塔による自衛に依存する。本作では水平爆撃機として扱い、5,000kg 満載の遠距離爆弾を装備する。魚雷とロケットは設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Pe-8",
+        "url": "https://en.wikipedia.org/wiki/Petlyakov_Pe-8",
+      },
+    ]
+  },
+  {
+    "name": "Yer-2",
+    "displayName": "Yer-2",
+    "type": "水平爆撃機",
+    "armaments": [
+      {
+        "label": "機首（12.7mm UBT 前向）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "背塔（20mm ShVAK 旋回機関砲）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "機腹（12.7mm UBT 旋回機銃）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "爆弾倉（1000kg 航空爆弾 ×2）",
+        "value": "2 x 1000kg FAB-1000",
+      }
+    ],
+    "description": "Yer-2（Yer-2、原型は DB-240）はエルモラエフ設計局が1940年に初飛行させた長距離爆撃機で1941年に就役した。最大速度420 km/h、1,000kg 爆弾搭載時の航続距離は約4,100 km、全長16.42 m、翼幅23.00 m。常用搭載1,000～2,000kg、最大5,000kg で、ACh-30B ディーゼル型は超長距離爆撃に用いられ、1941年8月のベルリン初空襲に参加した。本作では水平爆撃機として扱う。魚雷とロケットは設定しておらず、図鑑にも記載しない。",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "ウィキペディア — Yer-2",
+        "url": "https://en.wikipedia.org/wiki/Yermolayev_Yer-2",
+      },
+    ]
+  },
+  {
     "name": "SU/7.62",
     "displayName": "7.62mm ShKAS 航空機関銃",
     "type": "兵器",
@@ -12448,6 +12723,15 @@
   {
     "name": "SU/20/B20/3",
     "displayName": "20mm B-20 三連装航空機関砲",
+    "type": "兵器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/23/2",
+    "displayName": "23mm VYa-23 連装航空機関砲",
     "type": "兵器",
     "armaments": [],
     "description": "",

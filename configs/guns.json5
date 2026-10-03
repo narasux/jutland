@@ -2595,6 +2595,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 苏联 23mm 沃罗希洛夫 VYa-23 双联装航空机炮（Il-2 / Il-10 机翼固定前向火力）
+  {
+    name: "SU/23/2",
+    bulletName: "SU/GB/23/1941",
+    bulletCount: 2,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 22,
+    bulletSpeed: 810,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 法国海军 305mm/45 Mle 1906 双联装主炮
   {
     name: "FR/305/45/2",

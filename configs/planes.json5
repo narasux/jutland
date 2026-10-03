@@ -7031,4 +7031,575 @@
       ]
     }
   },
+  // ===== 苏联空军：1930 年代战斗机补充 =====
+  {
+    // 伊-15（I-15）：1934 年服役的双翼战斗机，4 挺 7.62mm PV-1 机枪（上翼与机身各 2 挺）
+    // 长度/翼展/速度/航程/满载取维基规格表（367 km/h、510 km、1385 kg）
+    name: "I-15",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1934,
+    totalHP: 22,
+    damageReduction: 0.45,
+    maxSpeed: 367,
+    acceleration: 30,
+    rotateSpeed: 18,
+    length: 6.1,
+    width: 9.75,
+    fundsCost: 3,
+    timeCost: 3,
+    tonnage: 1.385,
+    range: 510,
+    weapon: {
+      guns: [
+        // 上翼（7.62mm PV-1 双联装，固定前射）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机身（7.62mm PV-1 双联装同步机枪）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.7,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 伊-16（I-16 Type 28）：1940 年型，翼内 2 门 20mm ShVAK + 机头 2 挺 7.62mm ShKAS
+    // 长度/翼展/航程/满载取维基 Type 24 规格（470 km/h 为 Type 28 折中值）
+    name: "I-16",
+    nation: "su",
+    type: "fighter",
+    typeAbbr: "F",
+    year: 1940,
+    totalHP: 26,
+    damageReduction: 0.48,
+    maxSpeed: 470,
+    acceleration: 32,
+    rotateSpeed: 17,
+    length: 6.13,
+    width: 9.0,
+    fundsCost: 4,
+    timeCost: 3,
+    tonnage: 1.941,
+    range: 700,
+    weapon: {
+      guns: [
+        // 机翼（20mm ShVAK 双联装，固定前射）
+        {
+          name: "SU/20/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机头（7.62mm ShKAS 双联装同步机枪）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.75,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  // ===== 苏联空军：攻击机 =====
+  {
+    // 伊尔-2（Il-2M3）：装甲强击机，2 门 23mm VYa-23 + 2 挺 7.62mm ShKAS，
+    // 8 发 RS-82 火箭与 100kg 炸弹；装甲浴盆使减伤高于同代机
+    name: "Il-2",
+    nation: "su",
+    type: "attacker",
+    typeAbbr: "A",
+    year: 1941,
+    totalHP: 75,
+    damageReduction: 0.62,
+    maxSpeed: 410,
+    acceleration: 18,
+    rotateSpeed: 6,
+    length: 11.65,
+    width: 14.6,
+    fundsCost: 23,
+    timeCost: 10,
+    tonnage: 6.36,
+    range: 765,
+    weapon: {
+      guns: [
+        // 机翼（23mm VYa-23 双联装，对舰扫射主火力）
+        {
+          name: "SU/23/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机翼（7.62mm ShKAS 双联装）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（12.7mm UBT 活动机枪，后半球自卫）
+        {
+          name: "SU/12.7",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      rockets: [
+        // 翼下（8 发 RS-82 对舰火箭）
+        {
+          name: "SU/AIR/RB/82/8",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
+      bombs: [
+        // 弹舱（100kg 航空炸弹，近距投放）
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 伊尔-10（Il-10）：伊尔-2 的后继型，速度更快、装甲略薄；
+    // 2 门 23mm VYa-23 + 2 挺 7.62mm ShKAS，4 发 RS-132 火箭与 100kg 炸弹
+    name: "Il-10",
+    nation: "su",
+    type: "attacker",
+    typeAbbr: "A",
+    year: 1944,
+    totalHP: 70,
+    damageReduction: 0.58,
+    maxSpeed: 551,
+    acceleration: 24,
+    rotateSpeed: 7,
+    length: 11.06,
+    width: 13.4,
+    fundsCost: 25,
+    timeCost: 11,
+    tonnage: 6.335,
+    range: 800,
+    weapon: {
+      guns: [
+        {
+          name: "SU/23/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（20mm B-20 活动机炮，后半球自卫）
+        {
+          name: "SU/20",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      rockets: [
+        // 翼下（4 发 RS-132 对舰火箭）
+        {
+          name: "SU/AIR/RB/132/4",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
+      bombs: [
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 苏-2（Su-2 M-88B）：轻轰炸/强击机，翼内 4 挺 7.62mm ShKAS，
+    // 10 发 RS-82 火箭与 600kg 炸弹，仅 9mm 装甲
+    name: "Su-2",
+    nation: "su",
+    type: "attacker",
+    typeAbbr: "A",
+    year: 1939,
+    totalHP: 45,
+    damageReduction: 0.5,
+    maxSpeed: 485,
+    acceleration: 22,
+    rotateSpeed: 8,
+    length: 10.46,
+    width: 14.3,
+    fundsCost: 18,
+    timeCost: 8,
+    tonnage: 4.7,
+    range: 1100,
+    weapon: {
+      guns: [
+        // 机翼（7.62mm ShKAS 双联装 ×2，共 4 挺）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.5,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 后座（7.62mm ShKAS 活动枪架，后半球自卫）
+        {
+          name: "SU/7.62",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      rockets: [
+        {
+          name: "SU/AIR/RB/82/8",
+          posPercent: 0.25,
+          rightFiringArc: [0, 25],
+          leftFiringArc: [335, 360]
+        }
+      ],
+      bombs: [
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  // ===== 苏联空军：俯冲/水平/鱼雷轰炸机 =====
+  {
+    // 佩-2（Pe-2FT）：苏联主力俯冲轰炸机，机头 2 挺 7.62mm ShKAS 前射，
+    // 背塔 12.7mm UBT + 机腹 7.62mm ShKAS 自卫；装甲薄弱
+    name: "Pe-2",
+    nation: "su",
+    type: "dive_bomber",
+    typeAbbr: "DB",
+    year: 1941,
+    totalHP: 55,
+    damageReduction: 0.48,
+    maxSpeed: 540,
+    acceleration: 26,
+    rotateSpeed: 8,
+    length: 12.66,
+    width: 17.16,
+    fundsCost: 21,
+    timeCost: 9,
+    tonnage: 7.536,
+    range: 1315,
+    weapon: {
+      guns: [
+        // 机头（7.62mm ShKAS 双联装，固定前射）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.8,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 背塔（12.7mm UBT 活动机枪，后半球自卫）
+        {
+          name: "SU/12.7",
+          posPercent: 0.1,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机腹（7.62mm ShKAS 活动枪架，后下方自卫）
+        {
+          name: "SU/7.62",
+          posPercent: -0.2,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        // 弹舱（500kg 主弹 + 2 枚 100kg，近距俯冲投放）
+        {
+          name: "SU/BB/500",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/100",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.2
+    }
+  },
+  {
+    // 伊尔-4（Il-4T）：苏联海军主力水鱼雷机，1 条 45-36 型 450mm 航空鱼雷；
+    // 艇首 7.62mm ShKAS + 背塔 12.7mm UBT + 机腹 7.62mm ShKAS 自卫
+    name: "Il-4",
+    nation: "su",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1940,
+    totalHP: 85,
+    damageReduction: 0.5,
+    maxSpeed: 410,
+    acceleration: 16,
+    rotateSpeed: 4,
+    length: 14.76,
+    width: 21.44,
+    fundsCost: 34,
+    timeCost: 14,
+    tonnage: 12.12,
+    range: 2600,
+    weapon: {
+      guns: [
+        // 机鼻（7.62mm ShKAS，固定前射）
+        {
+          name: "SU/7.62",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 背塔（12.7mm UBT 活动机枪，后半球自卫）
+        {
+          name: "SU/12.7",
+          posPercent: 0.1,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机腹（7.62mm ShKAS 活动枪架，后下方自卫）
+        {
+          name: "SU/7.62",
+          posPercent: -0.2,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        // 弹舱（45-36 型 450mm 航空鱼雷，贴水投放）
+        {
+          name: "SU/AST/450",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
+  {
+    // 佩-8（Pe-8）：四发重型轰炸机，正常挂弹 2000～4000kg，最大 5000kg；
+    // 无固定前射武器，仅做水平投弹与自卫火力
+    name: "Pe-8",
+    nation: "su",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1940,
+    totalHP: 130,
+    damageReduction: 0.5,
+    maxSpeed: 443,
+    acceleration: 14,
+    rotateSpeed: 3,
+    length: 23.2,
+    width: 39.13,
+    fundsCost: 93,
+    timeCost: 35,
+    tonnage: 27.0,
+    range: 3700,
+    weapon: {
+      guns: [
+        // 机鼻（7.62mm ShKAS 双联装，前向）
+        {
+          name: "SU/7.62/2",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 机背前塔（20mm ShVAK，后向）
+        {
+          name: "SU/20",
+          posPercent: 0.3,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机背后塔（20mm ShVAK，后向）
+        {
+          name: "SU/20",
+          posPercent: 0.0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机尾（20mm ShVAK，尾炮塔）
+        {
+          name: "SU/20",
+          posPercent: -0.5,
+          rightFiringArc: [90, 180],
+          leftFiringArc: [180, 270]
+        },
+        // 发动机短舱（12.7mm UBT 双联装炮塔，侧后向）
+        {
+          name: "SU/12.7/2",
+          posPercent: 0.4,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 发动机短舱（12.7mm UBT 双联装炮塔，侧后向）
+        {
+          name: "SU/12.7/2",
+          posPercent: 0.4,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        // 弹舱（2000kg 级 + 1000kg 级，水平远距投放，满载 5000kg）
+        {
+          name: "SU/BB/2000/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/2000/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/1000/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.3
+    }
+  },
+  {
+    // 叶-2（Yer-2 ACh-30B）：远程水平轰炸机，正常挂弹 1000～2000kg；
+    // 机鼻 12.7mm UBT + 背塔 20mm ShVAK + 机腹 12.7mm UBT 自卫
+    name: "Yer-2",
+    nation: "su",
+    type: "level_bomber",
+    typeAbbr: "LB",
+    year: 1941,
+    totalHP: 95,
+    damageReduction: 0.5,
+    maxSpeed: 420,
+    acceleration: 16,
+    rotateSpeed: 4,
+    length: 16.42,
+    width: 23.0,
+    fundsCost: 47,
+    timeCost: 18,
+    tonnage: 18.58,
+    range: 4100,
+    weapon: {
+      guns: [
+        // 机鼻（12.7mm UBT，前向自卫）
+        {
+          name: "SU/12.7",
+          posPercent: 0.9,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        // 背塔（20mm ShVAK，后半球自卫）
+        {
+          name: "SU/20",
+          posPercent: 0.2,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        },
+        // 机腹（12.7mm UBT，后下方自卫）
+        {
+          name: "SU/12.7",
+          posPercent: -0.2,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      bombs: [
+        // 弹舱（1000kg 级航空炸弹，水平远距投放，正常挂弹 2000kg）
+        {
+          name: "SU/BB/1000/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "SU/BB/1000/LB",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ],
+      releaseInterval: 0.3
+    }
+  },
 ]

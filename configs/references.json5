@@ -12315,6 +12315,281 @@
     ]
   },
   {
+    "name": "I-15",
+    "displayName": "伊-15",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "上翼（7.62mm PV-1 双联装固定前射）",
+        "value": "2 x 7.62mm PV-1",
+      },
+      {
+        "label": "机身（7.62mm PV-1 双联装同步机枪）",
+        "value": "2 x 7.62mm PV-1",
+      }
+    ],
+    "description": "伊-15（I-15）是波利卡尔波夫设计局研制的双翼战斗机，1933 年首飞、1934 年服役，最大速度 367 km/h，航程 510 km，机长 6.10 m、翼展 9.75 m。上翼与机身共装 4 挺 7.62mm PV-1 机枪，曾在西班牙内战与诺门罕战役中充当苏军主力，到 1941 年已明显落后。游戏中归类为战斗机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — I-15",
+        "url": "https://en.wikipedia.org/wiki/Polikarpov_I-15",
+      },
+    ]
+  },
+  {
+    "name": "I-16",
+    "displayName": "伊-16",
+    "type": "战斗机",
+    "armaments": [
+      {
+        "label": "机翼（20mm ShVAK 双联装固定前射）",
+        "value": "2 x 20mm ShVAK",
+      },
+      {
+        "label": "机头（7.62mm ShKAS 双联装同步机枪）",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "伊-16（I-16 Type 28）是波利卡尔波夫设计局 1933 年首飞的低单翼战斗机，1940 年型在机翼内换装 2 门 20mm ShVAK 机炮，机头保留 2 挺 7.62mm ShKAS，最大速度约 470 km/h，航程 700 km，机长 6.13 m、翼展 9.00 m。它是西班牙内战中最快的战斗机之一，也是中国空军与苏联志愿航空队的主力机型。游戏中归类为战斗机；炸弹挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — I-16",
+        "url": "https://en.wikipedia.org/wiki/Polikarpov_I-16",
+      },
+    ]
+  },
+  {
+    "name": "Il-2",
+    "displayName": "伊尔-2",
+    "type": "攻击机",
+    "armaments": [
+      {
+        "label": "机翼（23mm VYa-23 双联装固定前射）",
+        "value": "2 x 23mm VYa-23",
+      },
+      {
+        "label": "机翼（7.62mm ShKAS 双联装）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "后座（12.7mm UBT 活动机枪）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "翼下火箭（RS-82）",
+        "value": "8 x RS-82",
+      },
+      {
+        "label": "弹舱（100kg 航空炸弹）",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "伊尔-2（Il-2M3）是伊留申设计局 1939 年首飞的装甲强击机，1941 年服役，最大速度 410 km/h，航程 765 km，机长 11.65 m、翼展 14.60 m。承载式装甲浴盆由 4～12mm AB-1 钢板焊接而成，是二战产量最大的军用飞机，黑海舰队第 23 强击航空团曾用它攻击舰船。游戏中归类为攻击机，装甲减伤高于同代机型，配置 23mm 机炮、RS-82 火箭与 100kg 炸弹；鱼雷挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Il-2",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-2",
+      },
+    ]
+  },
+  {
+    "name": "Il-10",
+    "displayName": "伊尔-10",
+    "type": "攻击机",
+    "armaments": [
+      {
+        "label": "机翼（23mm VYa-23 双联装固定前射）",
+        "value": "2 x 23mm VYa-23",
+      },
+      {
+        "label": "机翼（7.62mm ShKAS 双联装）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "后座（20mm B-20 活动机炮）",
+        "value": "1 x 20mm B-20",
+      },
+      {
+        "label": "翼下火箭（RS-132）",
+        "value": "4 x RS-132",
+      },
+      {
+        "label": "弹舱（100kg 航空炸弹）",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "伊尔-10 是伊尔-2 的后继型，1944 年服役，最大速度 551 km/h，航程 800 km，机长 11.06 m、翼展 13.40 m。它沿用全金属承力装甲壳体但减薄到 4～8mm，速度与机动性明显改善，1945 年太平洋舰队第 26 强击航空团曾用它攻击济州岛与罗津港的舰船。游戏中归类为攻击机，配置 23mm 机炮、RS-132 火箭与 100kg 炸弹；鱼雷挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Il-10",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-10",
+      },
+    ]
+  },
+  {
+    "name": "Su-2",
+    "displayName": "苏-2",
+    "type": "攻击机",
+    "armaments": [
+      {
+        "label": "机翼（7.62mm ShKAS 双联装 ×2，共 4 挺）",
+        "value": "4 x 7.62mm ShKAS",
+      },
+      {
+        "label": "后座（7.62mm ShKAS 活动枪架）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "翼下火箭（RS-82）",
+        "value": "8 x RS-82",
+      },
+      {
+        "label": "弹舱（100kg 航空炸弹）",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "苏-2（Su-2，原型称 BB-1）是苏霍伊设计局 1937 年首飞的轻型轰炸/强击机，1939 年服役，M-88B 型最大速度 485 km/h，航程 1,100 km，机长 10.46 m、翼展 14.30 m。机翼装 4 挺 7.62mm ShKAS，可挂 10 发 RS-82 火箭与 600kg 炸弹，飞行员与后座有 9mm 装甲保护，在战争初期承担了大量近距支援任务。游戏中归类为攻击机，配置机炮、RS-82 火箭与 100kg 炸弹；鱼雷挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Su-2",
+        "url": "https://en.wikipedia.org/wiki/Sukhoi_Su-2",
+      },
+    ]
+  },
+  {
+    "name": "Pe-2",
+    "displayName": "佩-2",
+    "type": "俯冲轰炸机",
+    "armaments": [
+      {
+        "label": "机头（7.62mm ShKAS 双联装固定前射）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "背塔（12.7mm UBT 活动机枪）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "机腹（7.62mm ShKAS 活动枪架）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "弹舱（500kg 主弹 + 100kg 炸弹 ×2）",
+        "value": "1 x 500kg + 2 x 100kg",
+      }
+    ],
+    "description": "佩-2（Pe-2FT）由佩特利亚科夫设计局研制，1941 年服役，最大速度 540 km/h，航程 1,315 km，机长 12.66 m、翼展 17.16 m。它本来是为高空截击设计的双发战斗机，加装俯冲减速板后成为苏联空军最主要的俯冲轰炸机，黑海舰队航空兵也用它攻击舰船，缺点是装甲薄弱、生存性差。游戏中归类为俯冲轰炸机，配置 500kg 与 100kg 近距炸弹；鱼雷与火箭挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Pe-2",
+        "url": "https://en.wikipedia.org/wiki/Petlyakov_Pe-2",
+      },
+    ]
+  },
+  {
+    "name": "Il-4",
+    "displayName": "伊尔-4",
+    "type": "鱼雷轰炸机",
+    "armaments": [
+      {
+        "label": "机鼻（7.62mm ShKAS 固定前射）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "背塔（12.7mm UBT 活动机枪）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "机腹（7.62mm ShKAS 活动枪架）",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "弹舱（45-36 型 450mm 航空鱼雷）",
+        "value": "1 x 45-36 torpedo",
+      }
+    ],
+    "description": "伊尔-4（Il-4/DB-3F）是伊留申设计局 1939 年首飞的双发远程轰炸机，1940 年服役，最大速度 410 km/h，带 1,000kg 炸弹时航程 2,600 km，机长 14.76 m、翼展 21.44 m。取消炸弹舱加热与燃油系统改装后的 Il-4T 型可在机腹挂 1 条 45-36 型 450mm 航空鱼雷，是苏联海军航空兵水鱼雷团的主力机型。游戏中归类为鱼雷轰炸机，仅配置鱼雷与自卫机枪；炸弹与火箭挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Il-4",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-4",
+      },
+    ]
+  },
+  {
+    "name": "Pe-8",
+    "displayName": "佩-8",
+    "type": "水平轰炸机",
+    "armaments": [
+      {
+        "label": "机鼻（7.62mm ShKAS 双联装前向）",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "机背前后塔（20mm ShVAK 活动机炮）",
+        "value": "2 x 20mm ShVAK",
+      },
+      {
+        "label": "机尾（20mm ShVAK 尾炮塔）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "发动机短舱（12.7mm UBT 双联装炮塔 ×2）",
+        "value": "4 x 12.7mm UBT",
+      },
+      {
+        "label": "弹舱（2000kg + 1000kg 航空炸弹）",
+        "value": "2 x 2000kg + 1 x 1000kg",
+      }
+    ],
+    "description": "佩-8（Pe-8）是佩特利亚科夫设计局研制的四发重型轰炸机，1940 年服役，最大速度 443 km/h，航程 3,700 km，机长 23.20 m、翼展 39.13 m。正常挂弹 2,000～4,000kg、最大 5,000kg，曾执行对柏林与德国本土的远程轰炸，并运载过苏联外交代表团；它没有固定前射武器，全靠多座炮塔自卫。游戏中归类为水平轰炸机，按 5,000kg 满载配置远距炸弹；鱼雷与火箭挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Pe-8",
+        "url": "https://en.wikipedia.org/wiki/Petlyakov_Pe-8",
+      },
+    ]
+  },
+  {
+    "name": "Yer-2",
+    "displayName": "叶-2",
+    "type": "水平轰炸机",
+    "armaments": [
+      {
+        "label": "机鼻（12.7mm UBT 前向）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "背塔（20mm ShVAK 活动机炮）",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "机腹（12.7mm UBT 活动机枪）",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "弹舱（1000kg 航空炸弹 ×2）",
+        "value": "2 x 1000kg FAB-1000",
+      }
+    ],
+    "description": "叶-2（Yer-2，原型称 DB-240）是叶尔莫拉耶夫设计局 1940 年首飞的远程轰炸机，1941 年服役，最大速度 420 km/h，带 1,000kg 炸弹时航程约 4,100 km，机长 16.42 m、翼展 23.00 m。它正常挂弹 1,000～2,000kg、最大 5,000kg，ACh-30B 柴油型曾被用于超远程轰炸，1941 年 8 月参与了对柏林的首次空袭。游戏中归类为水平轰炸机；鱼雷与火箭挂载未配置，图鉴不做记载。",
+    "author": "未知",
+    "links": [
+      {
+        "name": "维基百科 — Yer-2",
+        "url": "https://en.wikipedia.org/wiki/Yermolayev_Yer-2",
+      },
+    ]
+  },
+  {
     "name": "SU/7.62",
     "displayName": "7.62mm ShKAS 航空机枪",
     "type": "武器",
@@ -12371,6 +12646,15 @@
   {
     "name": "SU/20/B20/3",
     "displayName": "20mm B-20 三联装航空机炮",
+    "type": "武器",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/23/2",
+    "displayName": "23mm 沃罗希洛夫 VYa-23 双联装航空机炮",
     "type": "武器",
     "armaments": [],
     "description": "",

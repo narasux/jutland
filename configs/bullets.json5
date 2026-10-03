@@ -681,6 +681,14 @@
     damage: 1.2,
     criticalRate: 0.0001
   },
+  // 苏联 23mm 沃罗希洛夫 VYa-23 航空机炮炮弹（Il-2 / Il-10 前向火力）
+  {
+    name: "SU/GB/23/1941",
+    type: "shell",
+    diameter: 23,
+    damage: 1.5,
+    criticalRate: 0.0002
+  },
   // 鱼雷
   {
     name: "FR/TB/550/1923",
@@ -809,6 +817,14 @@
     damage: 4800,
     criticalRate: 0.08
   },
+  // 苏联 45-36 型 450mm 航空鱼雷（Il-4T 挂载，弹头 200kg）
+  {
+    name: "SU/TB/450/1939",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3400,
+    criticalRate: 0.04
+  },
   // 炸弹
   {
     name: "US/BB/2000/907",
@@ -926,6 +942,49 @@
     diameter: 660,
     damage: 3600,
     criticalRate: 0.08
+  },
+  // 苏联航空炸弹 FAB 系列（伤害按装药量与现有美德炸弹尺度对齐）
+  {
+    name: "SU/BB/100/1938",
+    type: "bomb",
+    diameter: 250,
+    damage: 330,
+    criticalRate: 0.005
+  },
+  {
+    name: "SU/BB/250/1938",
+    type: "bomb",
+    diameter: 380,
+    damage: 780,
+    criticalRate: 0.015
+  },
+  {
+    name: "SU/BB/500/1938",
+    type: "bomb",
+    diameter: 470,
+    damage: 1600,
+    criticalRate: 0.04
+  },
+  {
+    name: "SU/BB/1000/1938",
+    type: "bomb",
+    diameter: 660,
+    damage: 3200,
+    criticalRate: 0.08
+  },
+  {
+    name: "SU/BB/2000/1938",
+    type: "bomb",
+    diameter: 800,
+    damage: 6000,
+    criticalRate: 0.15
+  },
+  {
+    name: "SU/BB/5000/1938",
+    type: "bomb",
+    diameter: 1100,
+    damage: 16000,
+    criticalRate: 0.3
   },
   // 镭射
   // 50mm 镭射
@@ -1176,6 +1235,22 @@
     diameter: 250,
     damage: 95,
     criticalRate: 0.001
+  },
+  // 苏联空军 RS-82 82mm 航空火箭弹（Il-2 / Su-2 对舰/对地）
+  {
+    name: "SU/RB/82/1937",
+    type: "rocket",
+    diameter: 82,
+    damage: 10,
+    criticalRate: 0.0003
+  },
+  // 苏联空军 RS-132 132mm 航空火箭弹（Il-2 / Il-10 对舰）
+  {
+    name: "SU/RB/132/1938",
+    type: "rocket",
+    diameter: 132,
+    damage: 22,
+    criticalRate: 0.0006
   },
   // 意大利皇家空军 7.7mm Breda-SAFAT 航空机枪弹
   {

@@ -23,11 +23,30 @@ func TestPlaneTypeAttacksShips(t *testing.T) {
 		t.Fatal("fighter should not attack ships")
 	}
 	for _, planeType := range []PlaneType{
-		PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber,
+		PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber, PlaneTypeAttacker,
 	} {
 		if !planeType.AttacksShips() {
 			t.Fatalf("%s should attack ships", planeType)
 		}
+	}
+}
+
+func TestGetPlaneTargetObjTypeAttacker(t *testing.T) {
+	previous := PlaneMap
+	t.Cleanup(func() { PlaneMap = previous })
+
+	PlaneMap = map[string]*Plane{
+		"Il-2": {
+			Name:   "Il-2",
+			Type:   PlaneTypeAttacker,
+			Weapon: PlaneWeapon{Guns: []*Gun{{}}, Rockets: []*PlaneRocketLauncher{{}}},
+		},
+	}
+	if got := GetPlaneTargetObjType("Il-2"); got != object.TypeShip {
+		t.Fatalf("attacker target = %v, want ship", got)
+	}
+	if got := ResolvePlaneSight(PlaneTypeAttacker, 0); got != SightRangeBomber {
+		t.Fatalf("attacker sight = %v, want %v", got, SightRangeBomber)
 	}
 }
 

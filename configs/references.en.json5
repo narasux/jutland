@@ -12451,6 +12451,281 @@
     ]
   },
   {
+    "name": "I-15",
+    "displayName": "I-15",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Upper Wing (2 x 7.62mm PV-1, fixed forward)",
+        "value": "2 x 7.62mm PV-1",
+      },
+      {
+        "label": "Fuselage (2 x 7.62mm PV-1, synchronized)",
+        "value": "2 x 7.62mm PV-1",
+      }
+    ],
+    "description": "The I-15 was a Polikarpov biplane fighter that first flew in 1933 and reached 367 km/h with a range of 510 km. Four 7.62mm PV-1 machine guns were mounted in the upper wing and fuselage. It was a mainstay in Spain and at Khalkhin Gol but was obsolete by 1941. In game it is treated as a fighter; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — I-15",
+        "url": "https://en.wikipedia.org/wiki/Polikarpov_I-15",
+      },
+    ]
+  },
+  {
+    "name": "I-16",
+    "displayName": "I-16",
+    "type": "Fighter",
+    "armaments": [
+      {
+        "label": "Wings (2 x 20mm ShVAK, fixed forward)",
+        "value": "2 x 20mm ShVAK",
+      },
+      {
+        "label": "Nose (2 x 7.62mm ShKAS, synchronized)",
+        "value": "2 x 7.62mm ShKAS",
+      }
+    ],
+    "description": "The I-16 was a low-wing monoplane fighter that first flew in 1933; its 1940 Type 28 carried two 20mm ShVAK cannon and two 7.62mm ShKAS. Maximum speed was 470 km/h with a range of 700 km. One of the fastest fighters in Spain, it also served with Chinese and Soviet volunteer units. In game it is treated as a fighter; bomb racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — I-16",
+        "url": "https://en.wikipedia.org/wiki/Polikarpov_I-16",
+      },
+    ]
+  },
+  {
+    "name": "Il-2",
+    "displayName": "Il-2",
+    "type": "Attacker",
+    "armaments": [
+      {
+        "label": "Wings (2 x 23mm VYa-23, fixed forward)",
+        "value": "2 x 23mm VYa-23",
+      },
+      {
+        "label": "Wings (2 x 7.62mm ShKAS)",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Rear Cockpit (12.7mm UBT, trainable)",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "Underwing Rockets (RS-82)",
+        "value": "8 x RS-82",
+      },
+      {
+        "label": "Bomb Bay (100kg bombs)",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "The Il-2M3 was an Ilyushin armoured ground-attack aircraft that entered service in 1941. Its welded 4–12mm AB-1 steel armour tub made it the most produced military aircraft of the war, and Black Sea Fleet crews flew it against shipping. In game it is treated as an attacker with above-average armour, carrying 23mm cannon, RS-82 rockets and 100kg bombs; torpedoes are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Il-2",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-2",
+      },
+    ]
+  },
+  {
+    "name": "Il-10",
+    "displayName": "Il-10",
+    "type": "Attacker",
+    "armaments": [
+      {
+        "label": "Wings (2 x 23mm VYa-23, fixed forward)",
+        "value": "2 x 23mm VYa-23",
+      },
+      {
+        "label": "Wings (2 x 7.62mm ShKAS)",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Rear Cockpit (20mm B-20, trainable)",
+        "value": "1 x 20mm B-20",
+      },
+      {
+        "label": "Underwing Rockets (RS-132)",
+        "value": "4 x RS-132",
+      },
+      {
+        "label": "Bomb Bay (100kg bombs)",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "The Il-10 was the Il-2's successor and entered service in 1944, reaching 551 km/h with a range of 800 km. Its all-metal armour shell was thinned to 4–8mm for improved speed; in 1945 Pacific Fleet crews flew it against shipping at Jeju Island and Rajin. In game it is treated as an attacker carrying 23mm cannon, RS-132 rockets and 100kg bombs; torpedoes are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Il-10",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-10",
+      },
+    ]
+  },
+  {
+    "name": "Su-2",
+    "displayName": "Su-2",
+    "type": "Attacker",
+    "armaments": [
+      {
+        "label": "Wings (4 x 7.62mm ShKAS in two twin mounts)",
+        "value": "4 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Rear Cockpit (7.62mm ShKAS, trainable)",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Underwing Rockets (RS-82)",
+        "value": "8 x RS-82",
+      },
+      {
+        "label": "Bomb Bay (100kg bombs)",
+        "value": "3 x 100kg FAB-100",
+      }
+    ],
+    "description": "The Su-2 (prototype BB-1) was a Sukhoi light bomber and ground-attack aircraft that entered service in 1939. Its M-88B variant reached 485 km/h and carried four 7.62mm ShKAS, 10 RS-82 rockets and 600 kg of bombs, with 9mm armour. In game it is treated as an attacker with cannon, RS-82 rockets and 100kg bombs; torpedoes are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Su-2",
+        "url": "https://en.wikipedia.org/wiki/Sukhoi_Su-2",
+      },
+    ]
+  },
+  {
+    "name": "Pe-2",
+    "displayName": "Pe-2",
+    "type": "Dive Bomber",
+    "armaments": [
+      {
+        "label": "Nose (2 x 7.62mm ShKAS, fixed forward)",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Dorsal Turret (12.7mm UBT, trainable)",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "Ventral (7.62mm ShKAS, trainable)",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Bomb Bay (1 x 500kg and 2 x 100kg bombs)",
+        "value": "1 x 500kg + 2 x 100kg",
+      }
+    ],
+    "description": "The Pe-2FT was a Petlyakov design that entered service in 1941, reaching 540 km/h. Conceived as a high-altitude interceptor, it gained dive brakes and became the Soviet Air Force's principal dive bomber; Black Sea Fleet aviation also used it against shipping. In game it is treated as a dive bomber with 500kg and 100kg short-range bombs; torpedo and rocket racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Pe-2",
+        "url": "https://en.wikipedia.org/wiki/Petlyakov_Pe-2",
+      },
+    ]
+  },
+  {
+    "name": "Il-4",
+    "displayName": "Il-4",
+    "type": "Torpedo Bomber",
+    "armaments": [
+      {
+        "label": "Nose (7.62mm ShKAS, fixed forward)",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Dorsal Turret (12.7mm UBT, trainable)",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "Ventral (7.62mm ShKAS, trainable)",
+        "value": "1 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Bomb Bay (45-36 450mm aerial torpedo)",
+        "value": "1 x 45-36 torpedo",
+      }
+    ],
+    "description": "The Il-4 (DB-3F) was an Ilyushin long-range bomber that entered service in 1940, reaching 410 km/h with a 1,000 kg load. The Il-4T variant, with its fuel system modified, carried one 45-36 450mm torpedo and was the main Soviet naval torpedo bomber. In game it is treated as a torpedo bomber with only a torpedo and defensive machine guns; bombs and rockets are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Il-4",
+        "url": "https://en.wikipedia.org/wiki/Ilyushin_Il-4",
+      },
+    ]
+  },
+  {
+    "name": "Pe-8",
+    "displayName": "Pe-8",
+    "type": "Level Bomber",
+    "armaments": [
+      {
+        "label": "Nose (2 x 7.62mm ShKAS, forward-firing)",
+        "value": "2 x 7.62mm ShKAS",
+      },
+      {
+        "label": "Dorsal Fore and Aft Turrets (20mm ShVAK, trainable)",
+        "value": "2 x 20mm ShVAK",
+      },
+      {
+        "label": "Tail (20mm ShVAK tail turret)",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "Engine Nacelles (2 x twin 12.7mm UBT turrets)",
+        "value": "4 x 12.7mm UBT",
+      },
+      {
+        "label": "Bomb Bay (2 x 2000kg and 1 x 1000kg bombs)",
+        "value": "2 x 2000kg + 1 x 1000kg",
+      }
+    ],
+    "description": "The Pe-8 was a Petlyakov four-engined heavy bomber that entered service in 1940, reaching 443 km/h. It carried a normal 2,000–4,000 kg and up to 5,000 kg, flew long-range raids against Berlin and relied entirely on multiple turrets for defence. In game it is treated as a level bomber configured with a 5,000 kg long-range load; torpedo and rocket racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Pe-8",
+        "url": "https://en.wikipedia.org/wiki/Petlyakov_Pe-8",
+      },
+    ]
+  },
+  {
+    "name": "Yer-2",
+    "displayName": "Yer-2",
+    "type": "Level Bomber",
+    "armaments": [
+      {
+        "label": "Nose (12.7mm UBT, forward-firing)",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "Dorsal Turret (20mm ShVAK, trainable)",
+        "value": "1 x 20mm ShVAK",
+      },
+      {
+        "label": "Ventral (12.7mm UBT, trainable)",
+        "value": "1 x 12.7mm UBT",
+      },
+      {
+        "label": "Bomb Bay (2 x 1000kg bombs)",
+        "value": "2 x 1000kg FAB-1000",
+      }
+    ],
+    "description": "The Yer-2 (prototype DB-240) was a Yermolayev long-range bomber that entered service in 1941, reaching 420 km/h with a range of about 4,100 km. It carried a normal 1,000–2,000 kg and up to 5,000 kg, and took part in the first Berlin raid in August 1941. In game it is treated as a level bomber; torpedo and rocket racks are not configured and are not listed here.",
+    "author": "Unknown",
+    "links": [
+      {
+        "name": "Wikipedia — Yer-2",
+        "url": "https://en.wikipedia.org/wiki/Yermolayev_Yer-2",
+      },
+    ]
+  },
+  {
     "name": "SU/7.62",
     "displayName": "7.62mm ShKAS Aircraft Machine Gun",
     "type": "Weapon",
@@ -12507,6 +12782,15 @@
   {
     "name": "SU/20/B20/3",
     "displayName": "Triple 20mm B-20 Aircraft Cannon",
+    "type": "Weapon",
+    "armaments": [],
+    "description": "",
+    "author": "",
+    "links": [],
+  },
+  {
+    "name": "SU/23/2",
+    "displayName": "Twin 23mm VYa-23 Aircraft Cannon",
     "type": "Weapon",
     "armaments": [],
     "description": "",

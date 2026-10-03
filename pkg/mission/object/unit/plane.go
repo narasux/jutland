@@ -30,6 +30,8 @@ const (
 	PlaneTypeLevelBomber PlaneType = "level_bomber"
 	// PlaneTypeTorpedoBomber 鱼雷轰炸机
 	PlaneTypeTorpedoBomber PlaneType = "torpedo_bomber"
+	// PlaneTypeAttacker 攻击机。低空对舰扫射/火箭攻击，复用现有对舰攻击流程。
+	PlaneTypeAttacker PlaneType = "attacker"
 	// PlaneTypeScout 侦察机。从 other 拆出，不参与自动攻击。
 	PlaneTypeScout PlaneType = "scout"
 	// PlaneTypeOther 其他
@@ -47,6 +49,8 @@ func (t PlaneType) ToDisplay() string {
 		return i18n.Text(i18n.MsgPlaneTypeLevelBomber)
 	case PlaneTypeTorpedoBomber:
 		return i18n.Text(i18n.MsgPlaneTypeTorpedoBomber)
+	case PlaneTypeAttacker:
+		return i18n.Text(i18n.MsgPlaneTypeAttacker)
 	case PlaneTypeScout:
 		return i18n.Text(i18n.MsgPlaneTypeScout)
 	case PlaneTypeOther:
@@ -56,10 +60,10 @@ func (t PlaneType) ToDisplay() string {
 	}
 }
 
-// AttacksShips 对舰攻击机种：俯冲/水平轰炸机与鱼雷机。
+// AttacksShips 对舰攻击机种：俯冲/水平轰炸机、鱼雷机与攻击机。
 func (t PlaneType) AttacksShips() bool {
 	switch t {
-	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber:
+	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber, PlaneTypeAttacker:
 		return true
 	default:
 		return false
@@ -483,7 +487,7 @@ func GetPlaneTargetObjType(name string) object.Type {
 	switch plane.Type {
 	case PlaneTypeFighter:
 		return object.TypePlane
-	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber:
+	case PlaneTypeDiveBomber, PlaneTypeLevelBomber, PlaneTypeTorpedoBomber, PlaneTypeAttacker:
 		return object.TypeShip
 	case PlaneTypeScout, PlaneTypeOther:
 		return object.TypeNone

@@ -215,5 +215,50 @@
     bulletName: "IT/TB/450",
     range: 4,
     bulletSpeed: 35,
+  },
+  // 苏联航空炸弹 FAB 系列（攻击机/俯冲轰炸机近距投弹）
+  {
+    name: "SU/BB/100",
+    bulletName: "SU/BB/100/1938",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  {
+    name: "SU/BB/250",
+    bulletName: "SU/BB/250/1938",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  {
+    name: "SU/BB/500",
+    bulletName: "SU/BB/500/1938",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  // 苏联航空炸弹 FAB 系列（水平轰炸机远距投放）
+  {
+    name: "SU/BB/1000/LB",
+    bulletName: "SU/BB/1000/1938",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  {
+    name: "SU/BB/2000/LB",
+    bulletName: "SU/BB/2000/1938",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  {
+    name: "SU/BB/5000/LB",
+    bulletName: "SU/BB/5000/1938",
+    range: 4.5,
+    bulletSpeed: 30,
+  },
+  // 苏联 45-36 型 450mm 航空鱼雷（Il-4T）
+  {
+    name: "SU/AST/450",
+    bulletName: "SU/TB/450/1939",
+    range: 3,
+    bulletSpeed: 35,
   }
 ]

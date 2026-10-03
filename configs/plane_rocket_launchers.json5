@@ -109,4 +109,28 @@
     proximityRadius: 0.18,
     blastRadius: 0.3,
   },
+  {
+    // 苏联 82mm / 8 发 RS-82 对舰火箭挂载（Il-2、Su-2）
+    name: "SU/AIR/RB/82/8",
+    bulletName: "SU/RB/82/1937",
+    rocketCount: 8,
+    shotInterval: 0.16,
+    range: 7,
+    bulletSpread: 150,
+    bulletSpeed: 650,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  {
+    // 苏联 132mm / 4 发 RS-132 对舰火箭挂载（Il-2、Il-10）
+    name: "SU/AIR/RB/132/4",
+    bulletName: "SU/RB/132/1938",
+    rocketCount: 4,
+    shotInterval: 0.22,
+    range: 8.5,
+    bulletSpread: 160,
+    bulletSpeed: 620,
+    antiShip: true,
+    antiAircraft: false,
+  },
 ]

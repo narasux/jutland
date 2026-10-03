@@ -237,17 +237,74 @@ func TestCarrierScalesStandardFormationByAircraftCount(t *testing.T) {
 			if math.Abs(power.Details.AntiShipDPS-tt.wantDPS) > 1e-9 {
 				t.Fatalf("carrier anti-ship DPS = %v, want %v", power.Details.AntiShipDPS, tt.wantDPS)
 			}
-			if power.Projection != 200 || power.Burst <= 0 || len(power.Details.BurstContributions) != 1 {
-				t.Fatalf("carrier projection, burst or contribution details missing: %+v", power)
+			// 投送只取舰船自身武器射程：这艘航母没有舰炮，舰载机航程不得并入舰船投送。
+			if power.Projection != 0 || power.Details.MaxProjectionDistanceKM != 0 {
+				t.Fatalf(
+					"carrier projection = %d / %.0f km, want 0: aircraft range must not leak into ship projection",
+					power.Projection, power.Details.MaxProjectionDistanceKM,
+				)
 			}
-			if power.Details.MaxProjectionDistanceKM != 288 {
-				t.Fatalf("carrier projection distance = %.0f km, want 288", power.Details.MaxProjectionDistanceKM)
+			if power.Burst <= 0 || len(power.Details.BurstContributions) != 1 {
+				t.Fatalf("carrier burst or contribution details missing: %+v", power)
 			}
 			contribution := power.Details.AntiShipContributions[0]
 			if contribution.Name != "plane" || contribution.Count != tt.count {
 				t.Fatalf("carrier contribution = %+v, want stable plane ID and count %d", contribution, tt.count)
 			}
 		})
+	}
+}
+
+// TestShipProjectionUsesWeaponRangeOnly 锁定舰船投送射程的单位口径。
+// 舰船投送 = 自身武器射程（配置值/2 后的地图格），不并入舰载机航程（配置值/8 后的地图格）。
+// 两者混用会让挂着远程侦察机的舰船投送从 9~21 跳到 200+，把船只费用抬高一个量级。
+func TestShipProjectionUsesWeaponRangeOnly(t *testing.T) {
+	bullets := testBullets("gun", 100, 0)
+	newShip := func(gunRange float64) *objUnit.BattleShip {
+		gun := &objUnit.Gun{
+			BulletName: "gun", BulletCount: 1, ReloadTime: 1, Range: gunRange,
+			AntiShip: true, AntiAircraft: true,
+			LeftFiringArc:  objUnit.FiringArc{Start: 180, End: 360},
+			RightFiringArc: objUnit.FiringArc{Start: 0, End: 180},
+		}
+		return &objUnit.BattleShip{
+			TotalHP: 1000, MaxSpeed: 100, RotateSpeed: 10, Acceleration: 10,
+			Weapon: objUnit.ShipWeapon{MainGuns: []*objUnit.Gun{gun}},
+		}
+	}
+	// 无武装远程侦察机：不产生 aviation，航程（地图格）远超舰炮射程。
+	scout := &objUnit.Plane{Name: "scout", Type: objUnit.PlaneTypeScout, Range: 261.125}
+	planes := map[string]*objUnit.Plane{"scout": scout}
+
+	shortPower := CalculateShip(newShip(9), planes, bullets)
+	longPower := CalculateShip(newShip(21), planes, bullets)
+	withScout := newShip(9)
+	withScout.Aircraft = objUnit.ShipAircraft{
+		Groups: []objUnit.PlaneGroup{{Name: "scout", MaxCount: 2}},
+	}
+	scoutPower := CalculateShip(withScout, planes, bullets)
+
+	if got, want := shortPower.Projection, projectionScore(9); got != want {
+		t.Fatalf("short-range ship projection = %d, want %d", got, want)
+	}
+	if longPower.Projection <= shortPower.Projection {
+		t.Fatalf(
+			"projection must follow weapon range: %d (range 21) vs %d (range 9)",
+			longPower.Projection, shortPower.Projection,
+		)
+	}
+	if scoutPower.Projection != shortPower.Projection {
+		t.Fatalf(
+			"scout aircraft must not change ship projection: %d with scout vs %d without",
+			scoutPower.Projection, shortPower.Projection,
+		)
+	}
+	if got, want := scoutPower.Details.MaxProjectionRange, 9.0; got != want {
+		t.Fatalf("ship MaxProjectionRange = %v, want %v", got, want)
+	}
+	wantKM := 9 * shipProjectionKilometersPerMapUnit
+	if got := scoutPower.Details.MaxProjectionDistanceKM; got != wantKM {
+		t.Fatalf("ship projection distance = %v km, want %v km", got, wantKM)
 	}
 }
 
