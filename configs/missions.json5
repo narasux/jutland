@@ -2610,9 +2610,9 @@
         rotation: 120,
         belongPlayer: "P2"
       },
-      // Shimakaze -> yukikaze：仓库无同级舰，以同舰种且尺寸接近的高速驱逐舰近似；驱逐舰外圈中央。
+      // Shimakaze 现有同名资源；驱逐舰外圈中央。
       {
-        name: "yukikaze",
+        name: "shimakaze",
         pos: [46, 68],
         rotation: 120,
         belongPlayer: "P2"
@@ -2883,6 +2883,8 @@
           "yukikaze",
           "shimakaze",
           "akitsukaze",
+          "kirizuki",
+          "minekaze",
           "z_11",
           "z_22",
           "v",
@@ -4063,8 +4065,20 @@
         belongPlayer: "P1"
       },
       {
-        name: "T_14",
+        name: "kirizuki",
         pos: [25, 49],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "minekaze",
+        pos: [24, 50],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "T_14",
+        pos: [25, 51],
         rotation: 90,
         belongPlayer: "P1"
       },

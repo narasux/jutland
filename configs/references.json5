@@ -6446,6 +6446,64 @@
     ],
   },
   {
+    name: "kirizuki",
+    displayName: "雾月",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "5x2 10cm/65 九八式",
+      },
+      {
+        label: "防空炮",
+        value: "8x3 25mm/60 九六式",
+      },
+      {
+        label: "鱼雷",
+        value: "1x4 610mm 九三式",
+      },
+    ],
+    description: "雾月是设定中岛风级的后继型号：史实的岛风级仅岛风一艘建成，本舰作为其后续改进方案的假想舰，按战末高速舰体与新型高角炮的思路设计。舰容与武装取材于 tzoli 绘制的超秋月型彩色方案图，与岛风级实舰无直接对应。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Super Akizuki Coloured",
+        url: "https://www.deviantart.com/tzoli/art/Super-Akizuki-Coloured-466086557",
+      },
+      {
+        name: "维基百科 - 岛风号驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%B3%B6%E9%A2%A8%E8%99%9F%E9%A9%85%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "minekaze",
+    displayName: "峯风",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "鱼雷",
+        value: "3x2 533mm",
+      },
+    ],
+    description: "峯风级是日本海军八四舰队计划于 1917—1920 年批准建造的一等驱逐舰，1920 年服役，充任高速战列巡洋舰的护航力量，其船体与动力布局直接为后续神风、睦月等型沿用。至太平洋战争时已属二线，多改任哨戒、运输与回天母舰，15 艘中 11 艘战沉。本舰舰容与武装依据 tzoli 的绘制图。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Minekaze Class Destroyer",
+        url: "https://www.deviantart.com/tzoli/art/Minekaze-Class-Destroyer-1218919925",
+      },
+      {
+        name: "维基百科 - 峯風型驅逐艦",
+        url: "https://zh.wikipedia.org/wiki/%E5%B3%AF%E9%A2%A8%E5%9E%8B%E9%A9%85%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "z_11",
     displayName: "Z-11 贝恩德·冯·阿尼姆",
     type: "驱逐舰",

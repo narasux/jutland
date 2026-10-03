@@ -37472,7 +37472,7 @@
     totalHP: 3324,
     horizontalDamageReduction: 0,
     verticalDamageReduction: 0,
-    maxSpeed: 39, // 设计航速；实舰公试为 40.9 节
+    maxSpeed: 39,
     acceleration: 1.3,
     rotateSpeed: 2.2,
     length: 129.5,
@@ -37544,6 +37544,202 @@
         }
       ],
       rockets: []
+    }
+  },
+  {
+    // 雾月（岛风级后继型号，架空）
+    name: "kirizuki",
+    nation: "jp",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1946,
+    totalHP: 3580,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 36.7,
+    acceleration: 1.3,
+    rotateSpeed: 2.2,
+    length: 134,
+    width: 12,
+    fundsCost: 100,
+    timeCost: 37,
+    weapon: {
+      mainGuns: [
+        // 舰首主炮 No.1
+        {
+          name: "JP/100/65/2/Type98/DP",
+          posPercent: 0.62,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 舰首主炮 No.2
+        {
+          name: "JP/100/65/2/Type98/DP",
+          posPercent: 0.51,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 中部主炮 No.3
+        {
+          name: "JP/100/65/2/Type98/DP",
+          posPercent: -0.25,
+          rightFiringArc: [15, 135],
+          leftFiringArc: [225, 345]
+        },
+        // 舰尾主炮 No.4
+        {
+          name: "JP/100/65/2/Type98/DP",
+          posPercent: -0.46,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 舰尾主炮 No.5
+        {
+          name: "JP/100/65/2/Type98/DP",
+          posPercent: -0.59,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舰桥两舷 25mm 双联：右舷 / 左舷
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.42,
+          rightFiringArc: [0, 165],
+          leftFiringArc: [345, 360]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.42,
+          rightFiringArc: [0, 15],
+          leftFiringArc: [195, 360]
+        },
+        // 烟囱两舷 25mm 双联：右舷 / 左舷
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.11,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 210]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: 0.11,
+          rightFiringArc: [150, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 中部舷侧（小艇旁）25mm 双联：右舷 / 左舷
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 315]
+        },
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.03,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰尾后部 25mm 双联：右舷（右舷单舷）
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰尾后部 25mm 双联：左舷（左舷单舷）
+        {
+          name: "JP/25/60/3",
+          posPercent: -0.39,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中线四联装鱼雷管
+        {
+          name: "JP/610/4",
+          posPercent: -0.11,
+          rightFiringArc: [45, 150],
+          leftFiringArc: [210, 315]
+        }
+      ]
+    }
+  },
+  {
+    // 峯風
+    name: "minekaze",
+    nation: "jp",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1920,
+    totalHP: 1676,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 39,
+    acceleration: 1.2,
+    rotateSpeed: 2.2,
+    length: 102.6,
+    width: 9,
+    fundsCost: 95,
+    timeCost: 35,
+    weapon: {
+      mainGuns: [
+        // 舰首主炮 No.1
+        {
+          name: "JP/120/45/Type10",
+          posPercent: 0.69,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 烟囱间主炮 No.2
+        {
+          name: "JP/120/45/Type10",
+          posPercent: 0.15,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 后烟囱之后主炮 No.3
+        {
+          name: "JP/120/45/Type10",
+          posPercent: -0.1,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 舰尾主炮 No.4
+        {
+          name: "JP/120/45/Type10",
+          posPercent: -0.61,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [],
+      torpedoes: [
+        // 舰桥前甲板凹处鱼雷管
+        {
+          name: "JP/533/2",
+          posPercent: 0.57,
+          rightFiringArc: [45, 150],
+          leftFiringArc: [210, 315]
+        },
+        // 舰尾中线鱼雷管 A
+        {
+          name: "JP/533/2",
+          posPercent: -0.2,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        },
+        // 舰尾中线鱼雷管 B
+        {
+          name: "JP/533/2",
+          posPercent: -0.45,
+          rightFiringArc: [45, 135],
+          leftFiringArc: [225, 315]
+        }
+      ]
     }
   },
   // 德国海军

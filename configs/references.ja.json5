@@ -10547,6 +10547,64 @@
     ],
   },
   {
+    name: "kirizuki",
+    displayName: "霧月",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x2 10cm/65 九八式",
+      },
+      {
+        label: "対空砲",
+        value: "8x3 25mm/60 九六式",
+      },
+      {
+        label: "魚雷",
+        value: "1x4 610mm 九三式",
+      },
+    ],
+    description: "霧月は島風型の後継型として設定された架空の駆逐艦である。史実の島風型は島風のみが完成しており、本艦はその後継となる計画艦に相当する。艦容と兵装はtzoliによる超秋月型のカラー絵図をもとにしており、島風型の実在艦と直接の対応はない。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Super Akizuki Coloured",
+        url: "https://www.deviantart.com/tzoli/art/Super-Akizuki-Coloured-466086557",
+      },
+      {
+        name: "ウィキペディア — 島風",
+        url: "https://ja.wikipedia.org/wiki/%E5%B3%B6%E9%A2%A8_(%E5%B3%B6%E9%A2%A8%E5%9E%8B%E9%A7%86%E9%80%90%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "minekaze",
+    displayName: "峯風",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "魚雷",
+        value: "3x2 533mm",
+      },
+    ],
+    description: "峯風型駆逐艦は八四計画により1917年から1920年にかけて建造された日本海軍の第一等駆逐艦である。就役後は高速な巡洋戦艦の護衛を主任務とし、その船体と機関配置は後の神風型・睦月型・若竹型に踏襲された。太平洋戦争勃発時には第二線の艦として哨戒・輸送や回天母艦などに充当され、15隻中11隻が失われた。艦容と兵装はtzoliの絵図に基づく。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Minekaze Class Destroyer",
+        url: "https://www.deviantart.com/tzoli/art/Minekaze-Class-Destroyer-1218919925",
+      },
+      {
+        name: "ウィキペディア — 峯風型駆逐艦",
+        url: "https://ja.wikipedia.org/wiki/%E5%B3%AF%E9%A2%A8%E5%9E%8B%E9%A7%86%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "z_11",
     displayName: "Z11 ベルント・フォン・アルニム",
     type: "駆逐艦",

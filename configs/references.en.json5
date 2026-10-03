@@ -10606,6 +10606,64 @@
     ],
   },
   {
+    name: "kirizuki",
+    displayName: "Kirizuki",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x2 10cm/65 Type 98",
+      },
+      {
+        label: "Anti-Aircraft",
+        value: "8x3 25mm/60 Type 96",
+      },
+      {
+        label: "Torpedoes",
+        value: "1x4 610mm Type 93",
+      },
+    ],
+    description: "Kirizuki is a fictional successor design to the Shimakaze class: only Shimakaze herself was ever completed, and this entry stands in for a planned follow-up destroyer with a late-war high-speed hull and new dual-purpose guns. Its layout and armament are taken from tzoli's coloured Super Akizuki drawing and match no real Shimakaze-class vessel.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Super Akizuki Coloured",
+        url: "https://www.deviantart.com/tzoli/art/Super-Akizuki-Coloured-466086557",
+      },
+      {
+        name: "Wikipedia — Shimakaze",
+        url: "https://en.wikipedia.org/wiki/Japanese_destroyer_Shimakaze_(1942)",
+      },
+    ],
+  },
+  {
+    name: "minekaze",
+    displayName: "Minekaze",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x1 120mm/45",
+      },
+      {
+        label: "Torpedoes",
+        value: "3x2 533mm",
+      },
+    ],
+    description: "The Minekaze class were first-class destroyers built for the Imperial Japanese Navy under the 8-4 Fleet Program between 1917 and 1920, serving as fast escorts for the battlecruiser squadrons and providing the hull and machinery layout that the following Kamikaze, Mutsuki and Wakatake classes reused. By the Pacific War they had been relegated to second-line duties such as patrol, transport and kaiten carrier, and eleven of the fifteen were lost. The ship's layout and armament follow tzoli's drawing.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Minekaze Class Destroyer",
+        url: "https://www.deviantart.com/tzoli/art/Minekaze-Class-Destroyer-1218919925",
+      },
+      {
+        name: "Wikipedia — Minekaze-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Minekaze_class_destroyer",
+      },
+    ],
+  },
+  {
     name: "z_11",
     displayName: "Z11 Bernd von Arnim",
     type: "Destroyer",
