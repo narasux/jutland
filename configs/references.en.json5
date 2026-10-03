@@ -5320,6 +5320,10 @@
         label: "Torpedoes",
         value: "2x3 533mm",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× Be-4",
+      },
     ],
     description: "Sevastopol is the Project 69 large cruiser design offered to the Soviet Union by the Italian firm Ansaldo in 1936: hull and machinery followed Italian practice while the armament was Soviet. She takes her name from the second ship of the Kronshtadt class. The proposal was never built and remained on paper.",
     author: "Tzoli",
@@ -5397,6 +5401,10 @@
       {
         label: "Torpedoes",
         value: "2x3 533mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× Be-4",
       },
     ],
     description: "Kirov was the lead ship of the Soviet Project 26 cruisers, developed with Italian technical assistance. Her unusual triple turrets mounted nine 180 mm guns with long range. During the Second World War she primarily supported ground forces around Leningrad, survived heavy damage, and remained in service into the postwar period.",
@@ -7936,6 +7944,10 @@
         label: "Anti-aircraft Guns",
         value: "10x4 37mm/57",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× Be-4",
+      },
     ],
     description: "The Sovetsky Soyuz class was designed to give the Soviet Navy modern battleships comparable with foreign capital ships. The Project 23 design carried nine 406 mm guns and extensive armor on a very large hull. Four ships were laid down, but the German invasion halted construction and none was completed.",
     author: "TZoli",
@@ -7970,6 +7982,10 @@
       {
         label: "Anti-aircraft Guns",
         value: "9x4 37mm/57",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× Be-4",
       },
     ],
     description: "Nelsonski is a fictional alternative arrangement of the Soviet Project 23 battleship. It groups the main battery forward in a layout reminiscent of Britain's Nelson class while retaining the scale and protection associated with Sovetsky Soyuz. The configuration is an artistic proposal and was not built by the Soviet Navy.",

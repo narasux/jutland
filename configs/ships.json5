@@ -25753,6 +25753,17 @@
           leftFiringArc: [180, 360]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "SUCatapult_soviet_union",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Be-4",
+          maxCount: 4
+        }
+      ]
     }
   },
   {
@@ -25932,6 +25943,17 @@
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
         },
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "SUCatapult_soviet_union_nelsonski",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Be-4",
+          maxCount: 4
+        }
       ]
     }
   },
@@ -35742,6 +35764,17 @@
           leftFiringArc: [210, 330]
         }
       ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "SUCatapult_kirov",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Be-4",
+          maxCount: 2
+        }
+      ]
     }
   },
   {
@@ -36059,6 +36092,17 @@
           posPercent: -0.46,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 330]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "SUCatapult_sevastopol",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Be-4",
+          maxCount: 2
         }
       ]
     }
