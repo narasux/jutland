@@ -36,7 +36,7 @@ description: Redraw a Jutland plane top-view sprite from a low-resolution or off
 
 ### 1. 确认输入
 
-- 把用户图存到 `raw/<Name>-src.*`，需要时先用 `extract_plane_top_view.py` 抽出透明俯视图，只为看清结构和量比例，不当最终成品。
+- 把用户图存到 `raw_resources/<Name>-src.*`，需要时先用 `extract_plane_top_view.py` 抽出透明俯视图，只为看清结构和量比例，不当最终成品。
 - 记录原图包围盒宽高比。机头朝上后，宽度/高度应接近翼展/机长。
 - 从 `configs/planes.json5` 读 `length`，目标高度 = `length * 30`。宽度跟原图比例，不压成配置 `width`。
 - 列出必须保留的结构：座舱格数/形状、发动机位置与桨叶数、翼肋、副翼、浮筒、尾翼形状、机头舱盖。
@@ -81,8 +81,8 @@ description: Redraw a Jutland plane top-view sprite from a low-resolution or off
 
 ```bash
 python .agents/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
-  --input "raw/<Name>-redraw.png" \
-  --output "raw/<Name>-extract.png" \
+  --input "raw_resources/<Name>-redraw.png" \
+  --output "raw_resources/<Name>-extract.png" \
   --crop <left,top,right,bottom> \
   --rotate 0 \
   --target-height <length*30>

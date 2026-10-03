@@ -9,6 +9,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 
 - 在仓库根目录工作。先阅读 `AGENTS.md` 并执行 `git status --short`，保留所有无关用户改动。
 - 所有项目路径以仓库根目录为基准；脚本不得写死机器绝对路径，外部输入和输出路径由调用者显式传入。
+- 用户提供的原始图片和中间产物放在 `raw_resources/` 下，不要放在仓库根目录；正式顶视图输出到 `resources/`。
 - 先检查同阵营、同任务类型的现有飞机，再按现有命名、数值和素材风格做最小修改。
 - 保持配置引用链完整：弹药 -> 机炮/释放器/火箭发射器 -> 飞机 -> 舰船编组。
 - 保持飞机 `name`、PNG 文件名和舰船编组引用完全一致。
@@ -45,7 +46,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 - 使用示例：
   ```bash
   python .agents/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
-    --input "raw/source.jpg" \
+    --input "raw_resources/source.jpg" \
     --output resources/images/planes/fighter/A6M2.png \
     --crop 285,35,1015,780 \
     --rotate -45 \

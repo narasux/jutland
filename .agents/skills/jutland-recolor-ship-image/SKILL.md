@@ -8,10 +8,11 @@ description: Recolor Jutland ship PNG drawings while preserving exact geometry, 
 ## 范围
 
 - 在仓库根目录执行命令；项目路径以仓库根目录为基准，脚本不得写死机器绝对路径。
+- 来源图和候选输出统一放在 `raw_resources/` 下（例如 `raw_resources/<stem>.recolored.png`），不要放在仓库根目录；只有正式图片写入 `resources/`。
 - 只修改用户指定的涂装或材质颜色；保留舰型、视图布局、尺寸、比例、线稿和透明通道。
 - 默认保留红色水下舰体、黑色轮廓、旗帜、文字、比例尺、舷号、舷窗和来源署名。
 - 不裁剪、不旋转、不缩放、不重绘设备，也不更新正式游戏资源或配置。
-- 默认输出独立的 `<stem>.recolored.png` 候选文件；只有用户明确要求时才更新已有候选文件。
+- 默认在 `raw_resources/` 输出独立的 `<stem>.recolored.png` 候选文件；只有用户明确要求时才更新已有候选文件。
 - 完成候选图和验证后停止，等待人工确认；不要在同一轮继续执行 `jutland-add-ship`。
 - 飞机低清俯视图换涂装不要用本 skill。那种图应走 `jutland-redraw-plane-livery`：按原图结构重绘，不要做多轮像素换色。
 

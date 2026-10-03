@@ -9,7 +9,7 @@ description: Add or revise Jutland map resources from raw raster tiles, includin
 
 - 在仓库根目录工作。先阅读 `AGENTS.md` 并运行 `git status --short`，保留用户已有改动。
 - 默认只修改地图资源、`configs/maps.json5` 和必要的通用地图代码。不要修改 `configs/missions.json5`、舰队位置或关卡信息，除非用户明确要求。
-- 原始素材保留在 `raw/map/`；运行时资源使用：
+- 原始素材保留在 `raw_resources/map/`；运行时资源使用：
   - `resources/images/map/abbrs/<source>.png`
   - `resources/maps/<map-name>.map`
   - `configs/maps.json5`
@@ -58,7 +58,7 @@ description: Add or revise Jutland map resources from raw raster tiles, includin
    - 按明确的行优先顺序运行：
      ```bash
      python3 .agents/skills/jutland-add-map/scripts/build_map_assets.py \
-       --tiles raw/map/tl.png raw/map/tr.png raw/map/bl.png raw/map/br.png \
+       --tiles raw_resources/map/tl.png raw_resources/map/tr.png raw_resources/map/bl.png raw_resources/map/br.png \
        --columns 2 \
        --tile-size 2048 \
        --cell-pixels 32 \

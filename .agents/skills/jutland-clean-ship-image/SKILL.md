@@ -8,11 +8,12 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
 ## 范围
 
 - 在仓库根目录执行命令；项目路径以仓库根目录为基准，脚本不得写死机器绝对路径。
+- 来源图和候选输出统一放在 `raw_resources/` 下（例如 `raw_resources/<stem>.cleaned.png`），不要放在仓库根目录或其它临时位置；输入若在别处，先复制到 `raw_resources/` 再处理。
 - 只把白色或近白色背景变为透明；保留原始画布尺寸、方向、比例和图中内容。
 - 不裁剪、不拆分视图、不判断俯视/侧视、不旋转、不缩放、不更新配置，也不覆盖正式游戏资源。
 - 不重绘、补画、风格化或删除飞机、标注等非背景内容。边界不确定时停止并请用户判断。
 - 只有用户明确要求时，才允许对限定区域做颜色统一，例如把侧视图舰体迷彩替换为统一海军蓝；必须保留线稿、红色水下船体、旗帜、飞机和文字。
-- 始终保留输入文件，输出独立的 `<stem>.cleaned.png` 候选文件；除用户明确要求外，不在仓库中保留预览、备份或其他中间版本。
+- 始终保留输入文件，在 `raw_resources/` 输出独立的 `<stem>.cleaned.png` 候选文件；除用户明确要求外，不在仓库中保留预览、备份或其他中间版本。
 - 完成预览后停止，等待用户人工确认；不要在同一轮继续执行 `jutland-add-ship`。
 
 ## 工作流程
@@ -76,11 +77,11 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
      `go run .agents/skills/jutland-clean-ship-image/scripts/uniform_ship_color.go -input <image.png> -output <stem>.cleaned.png -recolor-box <minX,minY,maxX,maxY>`
    - 用 `-skip-box` 避开飞机、旗帜、文字、比例尺、作者署名和其他不应调色的局部。默认保留近黑线稿和饱和红色区域，避免破坏船底红色、防空炮线稿和旗帜。
    - Princeton 类似合图的侧视图示例：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/uniform_ship_color.go -input princeton.png -output princeton.png -recolor-box 15,168,1280,455 -skip-box 745,185,770,205 -skip-box 925,278,1165,318`
+     `go run .agents/skills/jutland-clean-ship-image/scripts/uniform_ship_color.go -input raw_resources/princeton.png -output raw_resources/princeton.png -recolor-box 15,168,1280,455 -skip-box 745,185,770,205 -skip-box 925,278,1165,318`
    - 如果仍有很浅的灰色迷彩图块未统一，可适当提高 `-max-luma` 或增大/细分 `-recolor-box`；如果误伤文字、飞机或标线，优先增加 `-skip-box`，不要放宽到全图处理。
 
 5. 输出确认材料。
-   - 保存未缩放的透明 PNG 候选文件，不覆盖输入或 `resources/images/ships/...` 正式资源；仓库中只保留 `<stem>.cleaned.png`。
+   - 保存未缩放的透明 PNG 候选文件于 `raw_resources/`，不覆盖输入或 `resources/images/ships/...` 正式资源；仓库中只保留 `raw_resources/<stem>.cleaned.png`。
    - 用 `view_image` 检查透明 PNG；如需高对比背景预览，输出到 `mktemp -d` 动态创建的临时目录，完成前删除，不保留在仓库。
    - 报告原始/输出尺寸、删除的像素或组件数量、调色像素数量，以及仍需人工判断的区域。
    - 明确请求用户确认，然后停止。
