@@ -89,6 +89,9 @@ python .agents/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
 ```
 
 - 用 `view_image` 看提取结果，并在黑底、品红底上检查白边和破洞。
+- 提取脚本会自动摆正机身轴线（输出行打印前后倾角）；入库前再跑一次
+  `python .agents/skills/jutland-add-plane/scripts/check_plane_sprite.py <PNG>`，
+  确认机头朝上且倾角在容差内（`OK`），否则先修 `--crop`/`--rotate` 再交付。
 - 宽度与原图比例差在 5% 内可以轻微缩放；超过就回到第 2 步。
 - 用户要求替换现有飞机时，写入 `resources/images/planes/<type>/<name>.png`。
 - 用 `ensure_rgba_png.go` 保证 RGBA。高度必须等于 `length * 30`。

@@ -13,6 +13,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 - 先检查同阵营、同任务类型的现有飞机，再按现有命名、数值和素材风格做最小修改。
 - 保持配置引用链完整：弹药 -> 机炮/释放器/火箭发射器 -> 飞机 -> 舰船编组。
 - 保持飞机 `name`、PNG 文件名和舰船编组引用完全一致。
+- 顶视图素材必须**机头朝上、机身轴线竖直**：由 `extract_plane_top_view.py` 自动摆正，入库前用 `check_plane_sprite.py` 复验（`|倾角| ≤ 0.15°`）。
 - 不替换、压缩或清理用户未要求处理的现有素材。
 - 历史资料存在冲突时，说明采用的型号、数据口径和游戏近似；不要伪造精确值。
 
@@ -21,8 +22,9 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 单架飞机的合理耗时是十几分钟；一次“两架飞机花了近一小时”的复盘结论如下，按此执行。
 
 - 同会话默认值直接复用：同一批请求中用户已确认的口径（如“侦察机不挂舰船”“不配置炸弹”“素材只用用户给的图”），后续同类飞机直接沿用并在最终说明里复述，不再提问；只有出现新歧义（新挂载、新阵营、要求实际出击）才询问。
-- 素材一次成型：`extract_plane_top_view.py` 跑一次 + `view_image` 预览一次即收工。预览只判断四件事：机头朝上、无相邻视图或文字残片、四周有白边、深色部件完整。
+- 素材一次成型：`extract_plane_top_view.py` 跑一次 + `view_image` 预览一次即收工。倾斜由脚本自动量测并摆正（输出行会打印前后倾角），预览只判断四件事：机头朝上、无相邻视图或文字残片、四周有白边、深色部件完整。
 - 不做像素级取证：禁止为“找裂缝”追加 alpha 孔洞统计、连通域坐标反算回原图、多倍放大逐区目检、海面/棋盘格多版本合成对比。1px 级边缘差异在游戏显示尺寸下不可见，肉眼预览没看到即视为合格；确有白边或残片问题，只回脚本参数（`--crop`/`--rotate`/阈值）再修一轮。
+- 倾斜不要靠肉眼反复试角：角度由脚本/`check_plane_sprite.py` 量测给出（`机身轴倾角`），一次修正即到位；目测只在判定「机头是否朝上」时使用。
 - 裁剪框一次算准：行列剖面或连通域 bounding box 用一次脚本调用定位，直接写 `--crop`；旋转角度按用户描述换算一次，不凭目测反复试。
 - 资料只取规格：用 Wikipedia REST `page/summary` 或指定章节拿性能/武备数据，不要 `web_fetch` 整篇条目（几万 token 会拖慢之后每一步）；`web_search` 认证失败（401）时立即改走 `web_fetch`，不重试。
 - 互不依赖的检查合批：图片尺寸、引用链 grep、`git diff --check` 等放在同一条 bash 调用里发，不逐条串行。
@@ -42,7 +44,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 
 ## 脚本
 
-- `scripts/extract_plane_top_view.py`：从用户提供的原图裁剪飞机顶视图，执行裁剪、旋转、白底透明化、保留最大连通飞机区域、裁去透明边界和可选缩放。脚本会在旋转前检查最大连通飞机区域是否碰到裁剪框边缘；若碰到则直接报错，避免机翼或尾翼被静默切平。该脚本只做确定性处理，不重绘、不补线、不改结构、不重新配色。
+- `scripts/extract_plane_top_view.py`：从用户提供的原图裁剪飞机顶视图，执行裁剪、旋转、白底透明化、保留最大连通飞机区域、裁去透明边界、**自动摆正机身轴线**和可选缩放。脚本会在旋转前检查最大连通飞机区域是否碰到裁剪框边缘；若碰到则直接报错，避免机翼或尾翼被静默切平。该脚本只做确定性处理，不重绘、不补线、不改结构、不重新配色。
 - 使用示例：
   ```bash
   python .agents/skills/jutland-add-plane/scripts/extract_plane_top_view.py \
@@ -52,10 +54,30 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
     --rotate -45 \
     --target-height 270
   ```
+- `scripts/clean_plane_sprite.py`：清理已透明化素材上残留的白点与白边。只保留最大连通飞机区域（去除全部离散白点/残片），并把仍带白底 RGB 的半透明边缘像素重绘为最近机身色，不动尺寸、轮廓和结构。用法：
+  ```bash
+  python .agents/skills/jutland-add-plane/scripts/clean_plane_sprite.py --input <sprite.png>   # 原地清理
+  ```
 - 角度说明：脚本沿用 Pillow 角度，正数为逆时针，顺时针 45 度写 `--rotate -45`。
 - 尺寸说明：原始 PNG 的机头到机尾垂直高度必须等于 `configs/planes.json5` 中该飞机 `length * 30` 像素；宽度按裁剪后原图比例自动确定，不强制压缩到配置 `width`。优先使用 `--target-height`，例如 `length: 9` 时传 `--target-height 270`。
 - 裁剪框必须在飞机四周保留可见白边，不能贴着翼尖、螺旋桨或尾翼。脚本若报告 `crop clips the largest aircraft component`，先扩大对应方向的 `--crop`；不要把裁剪边界当作透明边界，也不要用阈值调整掩盖截断。只有原图本身已经截断飞机时才可显式使用 `--allow-crop-edge`。
 - 该脚本输出后必须再用 `view_image` 预览。若方向、裁剪、白边或残片有问题，只调整 `--crop`、`--rotate`、阈值或目标高度；不要在脚本外重绘飞机结构。
+
+### 机头朝向与倾斜（脚本自动保证）
+
+- **成品必须机头朝上且机身轴线竖直**：`|机身轴倾角| ≤ 0.05°`（脚本自动达成的量级），验收上限 0.15°。
+- 摆正是自动的：脚本裁掉透明边后会量一次机身轴倾角，若 `0.05° < |倾角| ≤ --max-straighten-angle（默认 5°）`，就用预乘 alpha 方式反向旋转并重新裁边，输出行会打印 `机身轴倾角 +x.xxx° -> 旋转 ±y.yyy° -> ±z.zzz°`。所以 `--rotate` 只要大致对（差几度）也能得到完全竖直的成品。
+- 倾角超过 5° 时不自动转，只报警：这通常说明 `--rotate` 把机头转反了（差 90°/180°），必须显式修正，不能让脚本静默猜朝向。
+- `--no-straighten` 可关闭自动摆正；`--tilt-tolerance`（默认 0.15°）控制摆正后的报警阈值。
+- **倾角量测对 180° 不敏感**（机身轴是一条线），所以「机头朝上」仍必须靠 `view_image` 预览确认；脚本会在最宽一行落在画布 0.55 之后（偏尾端）时给出 `机头可能朝下` 的提示（飞翼、无尾布局本就是机翼靠后，可忽略）。
+- 量测口径：只跟踪靠近中轴线、宽度 ≤ 10% 画幅的窄行（排除机翼、尾翼、桨叶、发动机短舱），两轮拟合后残差应 ≤ 0.3px。**若摆正后残差或倾角仍偏大，说明画稿本身机翼与机身不一致（剪切形变），必须回到原图重新裁剪旋转，不能靠继续旋转补救。** 典型反例：SBD‑3 机身轴 −5.47° 而机翼线 −0.07°。
+- `scripts/check_plane_sprite.py`：校验一个文件、一批文件或整个 `resources/images/planes` 目录的机头/倾斜状态，打印机身轴倾角、拟合残差、最宽行位置，并对超差项给出应旋转的角度；有 FAIL 时退出码 1。
+  ```bash
+  python .agents/skills/jutland-add-plane/scripts/check_plane_sprite.py \
+    resources/images/planes/fighter/A6M2.png
+  python .agents/skills/jutland-add-plane/scripts/check_plane_sprite.py --tolerance 0.25 resources/images/planes
+  ```
+- 新增素材入库前跑一次 `check_plane_sprite.py <该文件>`；批量审计历史素材时用 `--tolerance 0.25`（0.15–0.25° 属画稿噪声，不必处理）。
 
 ## 工作流程
 
@@ -86,6 +108,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 3. 生成顶视图素材。
    - 先检查现有同国飞机 PNG：透明 RGBA、机头朝上。
    - 原始 PNG 的垂直高度（机头到机尾）必须按 `planes.json5` 的 `length * 30` 像素生成；宽度由原素材比例决定，不为匹配配置宽度做非等比压缩。
+   - 机头朝向与倾斜由脚本负责：`extract_plane_top_view.py` 输出后机身轴线应已竖直（打印的前后倾角应 ≈0），再用 `check_plane_sprite.py <PNG>` 复验；若脚本报「倾角超过上限」「摆正后仍偏」或 `check` 报 FAIL，先修 `--crop`/`--rotate`/原图来源，不要交付歪的素材。
    - 用户提供组合图时，优先裁取无遮挡、结构完整的同型机实例；若飞机互相遮挡，换用另一实例，不猜测被遮挡轮廓。
    - 裁剪组合图时宁可留出较大空白，再用最大连通区域去掉文字和相邻机型；不要把翼尖、尾翼或炮管压在裁剪框边缘。成品出现平直边缘，通常首先检查源裁剪框是否截断，而不是线条或透明阈值问题。
    - 仅做裁剪、旋转、透明化、边缘清理、轻微去噪和按真实尺寸缩放，不重绘用户素材，除非用户明确要求生成新美术。
@@ -113,6 +136,7 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
 6. 验证。
    - 用 `git diff --check` 检查文本问题，用 `file` 或 `sips` 确认 PNG 为 RGBA 且尺寸合理。
    - 对每张新增或更新的飞机 PNG，确认像素高度等于 `planes.json5` 中该飞机 `length * 30`；宽度只检查是否保持等比和视觉比例正常。
+   - 对每张新增或更新的飞机 PNG 运行 `check_plane_sprite.py <PNG>`，确认机头朝上、机身轴倾角在容差内（脚本应打印 `OK`）。
    - 搜索每个新飞机名，确认配置、资源和所有舰船引用一致且没有重复定义。
    - 搜索每个机炮、炸弹、鱼雷和火箭名称，确认上游配置存在。
    - 逐张使用 `view_image` 检查完整轮廓、朝向、透明边缘及发动机/螺旋桨等深色部件。
