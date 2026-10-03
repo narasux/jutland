@@ -5326,6 +5326,53 @@
     ],
   },
   {
+    name: "ansaldo_it",
+    displayName: "Ansaldo Large Cruiser (Italy)",
+    type: "Large Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x3 253mm/55 Ansaldo Model 1936",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x2 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "Dual-purpose Guns",
+        value: "6x2 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "14x2 37mm/54 Breda Model 1932/1938",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "24x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 533mm",
+      },
+      {
+        label: "Seaplanes",
+        value: "4x IMAM Ro.43",
+      },
+    ],
+    description: "This is a hypothetical late-war Italian variant of the cruiser-killer design Ansaldo submitted to the Soviet Union in 1936: the hull and machinery follow the original proposal, while the armament was replaced with Italian-made guns and reorganised to late-Second-World-War anti-aircraft standards. The original proposal lost the Soviet competition and remained on paper only; this late configuration is an artist's extrapolation that never entered any building programme.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Ansaldo Big Gun Cruiser Design for Russia",
+        url: "https://www.deviantart.com/tzoli/art/Ansaldo-Big-Gun-Cruiser-Design-for-Russia-725546481",
+      },
+      {
+        name: "Wikipedia — Ansaldo",
+        url: "https://en.wikipedia.org/wiki/Ansaldo",
+      },
+    ],
+  },
+  {
     name: "kirov",
     displayName: "Kirov",
     type: "Light Cruiser",
@@ -11877,6 +11924,51 @@
   {
     name: "IT/12.7",
     displayName: "12.7mm Breda-SAFAT Aircraft MG",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/253/55/3/M1936",
+    displayName: "253mm Triple Mount (Ansaldo Model 1936)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/135/45/2/M1938",
+    displayName: "135mm Twin Mount (Ansaldo Model 1938)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/90/50/2/M1939",
+    displayName: "90mm Twin Dual-purpose Mount (Ansaldo Model 1939)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/37/54/2/M1932",
+    displayName: "37mm Twin AA Mount (Breda Model 1932/1938)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/2/M1932",
+    displayName: "20mm Twin Autocannon (Breda Model 1932)",
     type: "Weapon",
     armaments: [],
     description: "",

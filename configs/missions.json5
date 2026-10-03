@@ -2859,6 +2859,7 @@
           "sverdlov",
           "kirov",
           "ansaldo_su",
+          "ansaldo_it",
           "duquesne",
           "jeanne_d_arc",
           "de_grasse",
@@ -2962,43 +2963,43 @@
       // === SP ===
       {
         name: "duck",
-        pos: [27, 38],
+        pos: [43, 38],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "swordfish",
-        pos: [29, 36],
+        pos: [45, 36],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "waterdrop",
-        pos: [29, 40],
+        pos: [45, 40],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "molamola",
-        pos: [22, 38],
+        pos: [38, 38],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "mercy",
-        pos: [26, 36],
+        pos: [42, 36],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "peace_ark",
-        pos: [25, 38],
+        pos: [41, 38],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "britannic",
-        pos: [26, 40],
+        pos: [42, 40],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -3017,6 +3018,13 @@
       {
         name: "vulkan",
         pos: [12, 12],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      // === Chinese ===
+      {
+        name: "jiujiang",
+        pos: [34, 38],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -3424,39 +3432,39 @@
         belongPlayer: "P1"
       },
       {
-        name: "sverdlov",
+        name: "ansaldo_su",
         pos: [37, 25],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "kirov",
+        name: "sverdlov",
         pos: [38, 26],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "rapid",
+        name: "kirov",
         pos: [37, 27],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "P_6",
+        name: "rapid",
         pos: [38, 28],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "ansaldo_su",
+        name: "P_6",
         pos: [37, 29],
         rotation: 90,
         belongPlayer: "P1"
       },
-      // === Chinese ===
+      // Italy
       {
-        name: "jiujiang",
-        pos: [32, 38],
+        name: "ansaldo_it",
+        pos: [24, 38],
         rotation: 90,
         belongPlayer: "P1"
       },

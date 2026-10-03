@@ -1216,5 +1216,53 @@
     diameter: 450,
     damage: 3000,
     criticalRate: 0.03
+  },
+  // 意大利海军 253mm/55 安萨尔多 1936 年型主炮弹（安萨尔多大型巡洋舰方案，纸面设计）
+  {
+    name: "IT/GB/253/1936",
+    type: "shell",
+    diameter: 253,
+    damage: 880,
+    criticalRate: 0.01
+  },
+  // 意大利海军 135mm/45 安萨尔多 1938 年型舰炮弹
+  {
+    name: "IT/GB/135/1938",
+    type: "shell",
+    diameter: 135,
+    damage: 130,
+    criticalRate: 0.002
+  },
+  // 意大利海军 90mm/50 安萨尔多 1939 年型高平两用炮弹
+  {
+    name: "IT/GB/90/1939",
+    type: "shell",
+    diameter: 90,
+    damage: 42,
+    criticalRate: 0.001
+  },
+  // 意大利海军 37mm/54 布雷达 1932/1938 年型高炮弹
+  {
+    name: "IT/GB/37/1932",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
+    criticalRate: 0.001
+  },
+  // 意大利海军 20mm/65 布雷达 1932 年型机炮弹
+  {
+    name: "IT/GB/20/1932",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
+  },
+  // 意大利海军 533mm 鱼雷（安萨尔多大型巡洋舰方案）
+  {
+    name: "IT/TB/533/1932",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4800,
+    criticalRate: 0.08
   }
 ]

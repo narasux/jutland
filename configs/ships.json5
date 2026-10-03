@@ -36063,6 +36063,434 @@
       ]
     }
   },
+  // 意大利海军
+  {
+    // 安萨尔多大型巡洋舰方案（意大利，二战末期改装型）
+    name: "ansaldo_it",
+    nation: "it",
+    type: "cruiser",
+    typeAbbr: "CB",
+    year: 1945,
+    totalHP: 26700,
+    horizontalDamageReduction: 0.34,
+    verticalDamageReduction: 0.19,
+    maxSpeed: 37,
+    acceleration: 0.5,
+    rotateSpeed: 1.25,
+    length: 242,
+    width: 28,
+    fundsCost: 220,
+    timeCost: 80,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "IT/253/55/3/M1936",
+          posPercent: 0.53,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "IT/253/55/3/M1936",
+          posPercent: 0.4,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 C
+        {
+          name: "IT/253/55/3/M1936",
+          posPercent: -0.47,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 135mm/45 副炮
+        // 右舷前部副炮 A
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.26,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部副炮 A
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 右舷前中部副炮 B
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前中部副炮 B
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部副炮 C
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部副炮 C
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 90mm/50 高平两用炮
+        // 右舷舰桥前高平炮 A
+        {
+          name: "IT/90/50/2/M1939",
+          posPercent: 0.03,
+          rightFiringArc: [10, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舰桥前高平炮 A
+        {
+          name: "IT/90/50/2/M1939",
+          posPercent: 0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 350]
+        },
+        // 右舷舯部高平炮 B
+        {
+          name: "IT/90/50/2/M1939",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯部高平炮 B
+        {
+          name: "IT/90/50/2/M1939",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部高平炮 C
+        {
+          name: "IT/90/50/2/M1939",
+          posPercent: -0.1,
+          rightFiringArc: [30, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部高平炮 C
+        {
+          name: "IT/90/50/2/M1939",
+          posPercent: -0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 330]
+        }
+      ],
+      antiAircraftGuns: [
+        // 37mm 双联装高炮
+        // 右舷前部 37mm A
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.47,
+          rightFiringArc: [0, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 37mm A
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.47,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 360]
+        },
+        // 前部中线 37mm B
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.38,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 右舷前部 37mm C
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.35,
+          rightFiringArc: [0, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 37mm C
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 360]
+        },
+        // 右舷后部 37mm D
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.4,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 37mm D
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+        // 后部中线 37mm E
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.45,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 右舷后部 37mm F
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.52,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 37mm F
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.52,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        },
+        // 右舷艉部 37mm G
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.66,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷艉部 37mm G
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.66,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷艉端 37mm H
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.92,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷艉端 37mm H
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.92,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 双联装机炮
+        // 前甲板中线 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.78,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 前甲板中线 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.69,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 右舷前部 20mm C
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.6,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 20mm C
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.6,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前部 20mm D
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 20mm D
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前中部 20mm E
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.19,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前中部 20mm E
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.19,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷舰桥部 20mm F
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舰桥部 20mm F
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷舯前部 20mm G
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯前部 20mm G
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷舯部 20mm H
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯部 20mm H
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.04,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷舯部 20mm I
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯部 20mm I
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷舯后部 20mm J
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯后部 20mm J
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.05,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部 20mm K
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 20mm K
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部 20mm L（外侧）
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 20mm L（外侧）
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部 20mm M（内侧）
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.16,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 20mm M（内侧）
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.16,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        }
+      ],
+      torpedoes: [
+        // 右舷鱼雷 A
+        {
+          name: "IT/533/3",
+          posPercent: -0.44,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷鱼雷 A
+        {
+          name: "IT/533/3",
+          posPercent: -0.44,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        }
+      ]
+    },
+    aircraft: {
+      deck: "ITCatapult_ansaldo_it",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Ro.43",
+          maxCount: 4
+        }
+      ]
+    }
+  },
   // 驱逐舰
   // 美国海军
   {

@@ -5267,6 +5267,53 @@
     ],
   },
   {
+    name: "ansaldo_it",
+    displayName: "Большой крейсер Ansaldo (Италия)",
+    type: "Большой крейсер",
+    armaments: [
+      {
+        label: "Главная батарея",
+        value: "3x3 253mm/55 Ansaldo Model 1936",
+      },
+      {
+        label: "Вспомогательная батарея",
+        value: "6x2 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "Универсальные орудия",
+        value: "6x2 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "14x2 37mm/54 Breda Model 1932/1938",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "24x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "Торпеды",
+        value: "2x3 533mm",
+      },
+      {
+        label: "Гидросамолёты",
+        value: "4x IMAM Ro.43",
+      },
+    ],
+    description: "Итальянский позднеевоенный вариант проекта «убийцы крейсеров», предложенного компанией Ansaldo СССР в 1936 году: корпус и механизмы унаследованы от первоначального проекта, а вооружение заменено на итальянские орудия и перестроено по антивоздушным стандартам конца Второй мировой войны. Первоначальный проект проиграл советский конкурс и остался лишь на бумаге; поздняя версия — авторская реконструкция, не включённая ни в один план строительства.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Ansaldo Big Gun Cruiser Design for Russia",
+        url: "https://www.deviantart.com/tzoli/art/Ansaldo-Big-Gun-Cruiser-Design-for-Russia-725546481",
+      },
+      {
+        name: "Википедия — Gio. Ansaldo & C.",
+        url: "https://ru.wikipedia.org/wiki/Gio._Ansaldo_%26_C.",
+      },
+    ],
+  },
+  {
     name: "kirov",
     displayName: "Киров",
     type: "Лёгкий крейсер",
@@ -11818,6 +11865,51 @@
   {
     name: "IT/12.7",
     displayName: "12.7mm Breda-SAFAT авиационный пулемёт",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/253/55/3/M1936",
+    displayName: "253-мм тройная установка (Ansaldo, модель 1936)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/135/45/2/M1938",
+    displayName: "135-мм спаренная установка (Ansaldo, модель 1938)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/90/50/2/M1939",
+    displayName: "90-мм спаренная универсальная установка (Ansaldo, модель 1939)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/37/54/2/M1932",
+    displayName: "37-мм спаренная зенитная установка (Breda, модель 1932/1938)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/2/M1932",
+    displayName: "20-мм спаренная автоматическая установка (Breda, модель 1932)",
     type: "Оружие",
     armaments: [],
     description: "",

@@ -305,5 +305,16 @@
     range: 18,
     bulletSpeed: 50,
     fundsCost: 50
+  },
+  // 意大利海军 533mm 三联装鱼雷（安萨尔多大型巡洋舰方案）
+  {
+    name: "IT/533/3",
+    bulletName: "IT/TB/533/1932",
+    bulletCount: 3,
+    shotInterval: 1,
+    reloadTime: 56,
+    range: 18,
+    bulletSpeed: 50,
+    fundsCost: 60
   }
 ]

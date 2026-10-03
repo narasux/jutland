@@ -6046,6 +6046,53 @@
     ],
   },
   {
+    name: "ansaldo_it",
+    displayName: "安萨尔多大型巡洋舰（意大利）",
+    type: "大型巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x3 253mm/55 Ansaldo Model 1936",
+      },
+      {
+        label: "副炮",
+        value: "6x2 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "高平炮",
+        value: "6x2 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "高炮",
+        value: "14x2 37mm/54 Breda Model 1932/1938",
+      },
+      {
+        label: "高炮",
+        value: "24x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 533mm",
+      },
+      {
+        label: "水上侦察机",
+        value: "4x IMAM Ro.43",
+      },
+    ],
+    description: "本舰是安萨尔多 1936 年向苏联提交的“巡洋舰杀手”方案的意大利自用假想改型：舰体与动力沿用原案，武备改用意大利自产火炮，并按第二次世界大战末期的标准重新编成防空。原案在苏联选型中落选，仅存图纸；这一后期状态是画作者推演的假想版本，从未进入任何建造计划。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Ansaldo Big Gun Cruiser Design for Russia",
+        url: "https://www.deviantart.com/tzoli/art/Ansaldo-Big-Gun-Cruiser-Design-for-Russia-725546481",
+      },
+      {
+        name: "维基百科 - 安萨尔多",
+        url: "https://zh.wikipedia.org/wiki/%E5%AE%89%E8%90%A8%E7%88%BE%E5%A4%9A",
+      },
+    ],
+  },
+  {
     name: "kirov",
     displayName: "基洛夫",
     type: "轻巡洋舰",
@@ -11741,6 +11788,51 @@
   {
     name: "IT/12.7",
     displayName: "12.7mm Breda-SAFAT 航空机枪",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/253/55/3/M1936",
+    displayName: "253mm/55 三联装舰炮（安萨尔多 1936 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/135/45/2/M1938",
+    displayName: "135mm/45 双联装舰炮（安萨尔多 1938 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/90/50/2/M1939",
+    displayName: "90mm/50 双联装高平两用炮（安萨尔多 1939 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/37/54/2/M1932",
+    displayName: "37mm/54 双联装高炮（布雷达 1932/1938 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/2/M1932",
+    displayName: "20mm/65 双联装机炮（布雷达 1932 年型）",
     type: "武器",
     armaments: [],
     description: "",

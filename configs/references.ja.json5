@@ -5267,6 +5267,53 @@
     ],
   },
   {
+    name: "ansaldo_it",
+    displayName: "アンサルド大型巡洋艦（イタリア）",
+    type: "大型巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x3 253mm/55 Ansaldo Model 1936",
+      },
+      {
+        label: "副砲",
+        value: "6x2 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "両用砲",
+        value: "6x2 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "対空砲",
+        value: "14x2 37mm/54 Breda Model 1932/1938",
+      },
+      {
+        label: "対空砲",
+        value: "24x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 533mm",
+      },
+      {
+        label: "水上機",
+        value: "4x IMAM Ro.43",
+      },
+    ],
+    description: "本艦は1936年にアンサルド社がソ連へ提示した「巡洋艦キラー」案をイタリア海軍向けに引き直した、第二次世界大戦末期の仮想状態である。船体と機関は原案に従い、兵装はイタリア製の砲へ置き換えて対空中心に再編された。原案はソ連の選定に敗れ図面のみが残り、この後期型は作者が推定した仮想の姿で、いずれの計画にも採用されなかった。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Ansaldo Big Gun Cruiser Design for Russia",
+        url: "https://www.deviantart.com/tzoli/art/Ansaldo-Big-Gun-Cruiser-Design-for-Russia-725546481",
+      },
+      {
+        name: "ウィキペディア — アンサルド",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%82%B5%E3%83%AB%E3%83%89",
+      },
+    ],
+  },
+  {
     name: "kirov",
     displayName: "キーロフ",
     type: "軽巡洋艦",
@@ -11818,6 +11865,51 @@
   {
     name: "IT/12.7",
     displayName: "12.7mm Breda-SAFAT 航空機銃",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/253/55/3/M1936",
+    displayName: "253mm 三連装砲（アンサルド 1936 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/135/45/2/M1938",
+    displayName: "135mm 連装砲（アンサルド 1938 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/90/50/2/M1939",
+    displayName: "90mm 連装両用砲（アンサルド 1939 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/37/54/2/M1932",
+    displayName: "37mm 連装高角砲（ブレダ 1932/1938 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/2/M1932",
+    displayName: "20mm 連装機関砲（ブレダ 1932 年型）",
     type: "兵器",
     armaments: [],
     description: "",
