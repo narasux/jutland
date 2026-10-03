@@ -240,6 +240,8 @@ other = "Survival"
 other = "Mobility"
 [RadarProjection]
 other = "Projection"
+[RadarPlaneRange]
+other = "Range"
 [RadarBurst]
 other = "Burst"
 [RadarFormationScope]

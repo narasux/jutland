@@ -219,7 +219,7 @@ other = "武器配置"
 [CollectionCombatAbility]
 other = "作战能力"
 [CollectionFormationNote]
-other = "{{.Count}}架标准编队 · 相对能力（按当前筛选结果 P95 归一化）"
+other = "{{.Count}}架标准编队 · 相对能力\n（按当前筛选结果 P95 归一化）"
 [CollectionFormationPower]
 other = "编队战力（{{.Count}}架）"
 [WeaponGun]
@@ -240,6 +240,8 @@ other = "生存"
 other = "机动"
 [RadarProjection]
 other = "投送"
+[RadarPlaneRange]
+other = "航程"
 [RadarBurst]
 other = "爆发"
 [RadarFormationScope]

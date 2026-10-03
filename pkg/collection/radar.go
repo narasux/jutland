@@ -22,7 +22,18 @@ type abilityDimension struct {
 	// ID 用作缩放缓存的键，Label 用作图上展示，Value 决定这个维度从战力信息中取哪个字段。
 	ID      string
 	LabelID i18n.MessageID
-	Value   func(objUnit.CombatPowerInfo) float64
+	// PlaneLabelID 是飞机图鉴中该维度的替代名称，为空时沿用 LabelID。
+	PlaneLabelID i18n.MessageID
+	Value        func(objUnit.CombatPowerInfo) float64
+}
+
+// labelID 返回当前对象应使用的维度名称。
+// 飞机的“投送”取值就是机体航程，单列为航程以免和舰船的投送距离混淆。
+func (d abilityDimension) labelID(subject radarSubject) i18n.MessageID {
+	if subject.IsPlane && d.PlaneLabelID != "" {
+		return d.PlaneLabelID
+	}
+	return d.LabelID
 }
 
 // collectionAbilityDimensions 是图鉴雷达图唯一的维度定义入口。
@@ -49,9 +60,10 @@ var collectionAbilityDimensions = []abilityDimension{
 		Value:   func(power objUnit.CombatPowerInfo) float64 { return float64(power.Mobility) },
 	},
 	{
-		ID:      "projection",
-		LabelID: i18n.MsgRadarProjection,
-		Value:   func(power objUnit.CombatPowerInfo) float64 { return float64(power.Projection) },
+		ID:           "projection",
+		LabelID:      i18n.MsgRadarProjection,
+		PlaneLabelID: i18n.MsgRadarPlaneRange,
+		Value:        func(power objUnit.CombatPowerInfo) float64 { return float64(power.Projection) },
 	},
 	{
 		ID:      "burst",
@@ -212,7 +224,7 @@ func (d *Drawer) drawAbilityRadar(
 	for idx, dimension := range collectionAbilityDimensions {
 		labelOffset := 18 * labelFontSize / 16
 		x, y := pointAt(idx, radius+labelOffset)
-		label := i18n.Text(dimension.LabelID)
+		label := i18n.Text(dimension.labelID(subject))
 		labelFont := font.LocalizedUI(font.Kai)
 		labelWidth := layout.CalcTextWidth(label, labelFontSize, labelFont)
 		labelX, labelY := x-labelWidth/2, y-labelFontSize/2
@@ -328,7 +340,7 @@ func radarTooltipLines(dimension abilityDimension, subject radarSubject, scale f
 	value := int(math.Round(dimension.Value(power)))
 	percent := int(math.Round(min(1, max(0, dimension.Value(power))/max(1, scale)) * 100))
 	lines := []string{i18n.Format(i18n.MsgRadarSubjectDimension, map[string]any{
-		"Name": subject.Name, "Dimension": i18n.Text(dimension.LabelID),
+		"Name": subject.Name, "Dimension": i18n.Text(dimension.labelID(subject)),
 	})}
 	if subject.IsPlane && power.FormationSize > 1 {
 		lines = append(lines, i18n.Format(i18n.MsgRadarFormationScope, map[string]any{"Count": power.FormationSize}))

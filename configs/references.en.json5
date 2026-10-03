@@ -35,7 +35,7 @@
   },
   {
     name: "A5M2",
-    displayName: "Type 96",
+    displayName: "Claude",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -53,7 +53,7 @@
   },
   {
     name: "A6M2",
-    displayName: "Zero Model 21",
+    displayName: "Zeke",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -75,7 +75,7 @@
   },
   {
     name: "A6M3",
-    displayName: "Zero Model 32",
+    displayName: "Hamp",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -97,7 +97,7 @@
   },
   {
     name: "A6M5",
-    displayName: "Zero Model 52",
+    displayName: "Zeke 52",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -119,7 +119,7 @@
   },
   {
     name: "A7M2",
-    displayName: "Reppū",
+    displayName: "Sam",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -138,7 +138,7 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — A7M2 Reppū",
+        name: "Wikipedia — A7M2 Sam",
         url: "https://en.wikipedia.org/wiki/Mitsubishi%20A7M",
       },
     ],
@@ -201,7 +201,7 @@
       },
       {
         label: "Fighters",
-        value: "28× A6M2 Zero Model 21",
+        value: "28× A6M2 Zeke",
       },
       {
         label: "Dive Bombers",
@@ -728,7 +728,7 @@
   },
   {
     name: "B5N2",
-    displayName: "Type 97",
+    displayName: "Kate",
     armaments: [
       {
         label: "Machine Gun (Rear)",
@@ -750,7 +750,7 @@
   },
   {
     name: "B6N2",
-    displayName: "Tenzan",
+    displayName: "Jill",
     armaments: [
       {
         label: "Machine Guns (Dorsal)",
@@ -769,14 +769,14 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — B6N2 Tenzan",
+        name: "Wikipedia — B6N2 Jill",
         url: "https://en.wikipedia.org/wiki/Nakajima%20B6N",
       },
     ],
   },
   {
     name: "B7A2",
-    displayName: "Ryūsei",
+    displayName: "Grace",
     armaments: [
       {
         label: "Wing Cannons",
@@ -795,7 +795,7 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — B7A2 Ryūsei",
+        name: "Wikipedia — B7A2 Grace",
         url: "https://en.wikipedia.org/wiki/Aichi%20B7A",
       },
     ],
@@ -1038,7 +1038,7 @@
   },
   {
     name: "C6N1",
-    displayName: "Saiun",
+    displayName: "Myrt",
     armaments: [
       {
         label: "Armament",
@@ -1049,14 +1049,14 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — C6N1 Saiun",
+        name: "Wikipedia — C6N1 Myrt",
         url: "https://en.wikipedia.org/wiki/Nakajima%20C6N",
       },
     ],
   },
   {
     "name": "F1M2",
-    "displayName": "Type 0 Observation Seaplane",
+    "displayName": "Pete",
     "type": "Observation Floatplane",
     "armaments": [
       {
@@ -1068,7 +1068,7 @@
         "value": "1 x 7.7mm Type 92"
       }
     ],
-    "description": "The Mitsubishi F1M2, Navy Type Zero Observation Seaplane, was a two-seat biplane floatplane that entered service in 1941, with 944 built. Catapult-launched from warships, it performed gunnery spotting, reconnaissance and anti-submarine patrol. Its maximum speed was about 368 km/h with a range of 740 km. In game it is a scout with two fixed forward and one flexible rear 7.7 mm machine guns; its 60 kg bombs are not configured.",
+    "description": "The F1M2, Navy Type Zero Observation Seaplane, was a two-seat biplane floatplane that entered service in 1941, with 944 built. Catapult-launched from warships, it performed gunnery spotting, reconnaissance and anti-submarine patrol. Its maximum speed was about 368 km/h with a range of 740 km. In game it is a scout with two fixed forward and one flexible rear 7.7 mm machine guns; its 60 kg bombs are not configured.",
     "author": "Unknown",
     "links": [
       {
@@ -1079,7 +1079,7 @@
   },
     {
     "name": "E13A",
-    "displayName": "Type 0 Reconnaissance Seaplane",
+    "displayName": "Jake",
     "type": "Reconnaissance Floatplane",
     "armaments": [
       {
@@ -1087,7 +1087,7 @@
         "value": "1 x 7.7mm Type 92"
       }
     ],
-    "description": "The Aichi E13A, Navy Type 0 Reconnaissance Seaplane, was a three-seat twin-float seaplane that entered Imperial Japanese Navy service in 1941 and was catapult-launched from battleships, cruisers and seaplane tenders for fleet reconnaissance, gunnery spotting, anti-submarine patrol and liaison. About 1,418 were built. Its maximum speed was about 376 km/h with a range of about 2,089 km, and the single central float with wingtip outriggers gave the type its distinctive profile. In game it is a scout, armed with one flexible 7.7mm Type 92 machine gun in the rear cockpit; the E13A1c's belly-mounted 20mm cannon and 250 kg bomb load are not configured and are not listed in the reference.",
+    "description": "The E13A, Navy Type 0 Reconnaissance Seaplane, was a three-seat twin-float seaplane that entered Imperial Japanese Navy service in 1941 and was catapult-launched from battleships, cruisers and seaplane tenders for fleet reconnaissance, gunnery spotting, anti-submarine patrol and liaison. About 1,418 were built. Its maximum speed was about 376 km/h with a range of about 2,089 km, and the single central float with wingtip outriggers gave the type its distinctive profile. In game it is a scout, armed with one flexible 7.7mm Type 92 machine gun in the rear cockpit; the E13A1c's belly-mounted 20mm cannon and 250 kg bomb load are not configured and are not listed in the reference.",
     "author": "Unknown",
     "links": [
       {
@@ -1098,7 +1098,7 @@
   },
   {
     "name": "E16A",
-    "displayName": "Zuiun",
+    "displayName": "Paul",
     "type": "Reconnaissance Floatplane",
     "armaments": [
       {
@@ -1110,7 +1110,7 @@
         "value": "1 x 13mm Type 2"
       }
     ],
-    "description": "The Aichi E16A Zuiun was a two-seat floatplane, the E13A's successor, introduced in February 1944 with 256 built. Catapult-launched from warships, it performed reconnaissance and gunnery spotting, and could dive-bomb with its dive brakes. Maximum speed was about 439 km/h, range 1,176 km. In game it is a scout with two wing 20 mm Type 99 cannons and one rear 13 mm Type 2 machine gun; its 250 kg bombs are not configured.",
+    "description": "The E16A Zuiun was a two-seat floatplane, the E13A's successor, introduced in February 1944 with 256 built. Catapult-launched from warships, it performed reconnaissance and gunnery spotting, and could dive-bomb with its dive brakes. Maximum speed was about 439 km/h, range 1,176 km. In game it is a scout with two wing 20 mm Type 99 cannons and one rear 13 mm Type 2 machine gun; its 250 kg bombs are not configured.",
     "author": "Unknown",
     "links": [
       {
@@ -1121,7 +1121,7 @@
   },
   {
     "name": "E15K1",
-    "displayName": "Shiun",
+    "displayName": "Norm",
     "type": "Reconnaissance Floatplane",
     "armaments": [
       {
@@ -1129,7 +1129,7 @@
         "value": "1 x 7.7mm Type 92"
       }
     ],
-    "description": "The Kawanishi E15K1 Shiun was a two-seat high-speed reconnaissance floatplane that entered service in April 1944 for the submarine-flotilla flagship Ōyodo. Its jettisonable central float and retractable wing floats failed repeatedly, and only fifteen were completed before production ended in February 1944, so it never operated from Ōyodo as planned. Maximum speed was about 469 km/h, range about 3,371 km. In game it is a scout with one rear 7.7 mm Type 92 machine gun and no bombs.",
+    "description": "The E15K1 Shiun was a two-seat high-speed reconnaissance floatplane that entered service in April 1944 for the submarine-flotilla flagship Ōyodo. Its jettisonable central float and retractable wing floats failed repeatedly, and only fifteen were completed before production ended in February 1944, so it never operated from Ōyodo as planned. Maximum speed was about 469 km/h, range about 3,371 km. In game it is a scout with one rear 7.7 mm Type 92 machine gun and no bombs.",
     "author": "Unknown",
     "links": [
       {
@@ -1262,7 +1262,7 @@
       },
       {
         label: "Fighters",
-        value: "21× A6M2 Zero Model 21",
+        value: "21× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -1417,7 +1417,7 @@
   },
   {
     name: "D3A1",
-    displayName: "Type 99",
+    displayName: "Val",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1443,7 +1443,7 @@
   },
   {
     name: "D4Y3",
-    displayName: "Suisei",
+    displayName: "Judy",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -1462,7 +1462,7 @@
     author: "",
     links: [
       {
-        name: "Wikipedia — D4Y3 Suisei",
+        name: "Wikipedia — D4Y3 Judy",
         url: "https://en.wikipedia.org/wiki/Yokosuka%20D4Y",
       },
     ],
@@ -1930,7 +1930,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "Corsair (US Navy)",
+    displayName: "Corsair",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -2933,15 +2933,15 @@
       },
       {
         label: "Fighters",
-        value: "24× A7M2 Reppū",
+        value: "24× A7M2 Sam",
       },
       {
         label: "Dive Bombers",
-        value: "12× D4Y3 Suisei",
+        value: "12× D4Y3 Judy",
       },
       {
         label: "Attack Aircraft",
-        value: "24× B7A2 Ryūsei",
+        value: "24× B7A2 Grace",
       },
     ],
     description: "Hakuryū is the game's name for an enlarged development of Japan's wartime G-15 carrier design. The concept builds on the armored flight deck and protected aviation facilities of Taihō while expanding the hull and air group. No ship of this design was laid down before Japan's carrier program collapsed.",
@@ -3081,7 +3081,7 @@
       },
       {
         label: "Fighters",
-        value: "15× A6M2 Zero Model 21",
+        value: "15× A6M2 Zeke",
       },
       {
         label: "Dive Bombers",
@@ -4321,7 +4321,7 @@
       },
       {
         label: "Fighters",
-        value: "8× A6M2 Zero Model 21",
+        value: "8× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -4524,7 +4524,7 @@
   },
   {
     name: "J2M3",
-    displayName: "Raiden Model 21",
+    displayName: "Jack",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -4572,7 +4572,7 @@
   },
   {
     name: "J5N1",
-    displayName: "Nakajima J5N1 Tenrai",
+    displayName: "Tenrai",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -4587,7 +4587,7 @@
         value: "8 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
       },
     ],
-    description: "The Nakajima J5N1 Tenrai was a twin-engine heavy interceptor designed to engage B-29 bombers. Its two NK9H Homare 21 engines and concentrated nose armament of two 30 mm Type 5 and two 20 mm Type 99 Model 2 cannon were intended to combine speed with heavy firepower, but engine limitations kept performance below the design target. Only prototypes were completed before development ended. In game it can carry two four-round 100 mm Type 3 rocket-bomb mounts, for eight anti-aircraft rockets.",
+    description: "The J5N1 Tenrai was a twin-engine heavy interceptor designed to engage B-29 bombers. Its two NK9H Homare 21 engines and concentrated nose armament of two 30 mm Type 5 and two 20 mm Type 99 Model 2 cannon were intended to combine speed with heavy firepower, but engine limitations kept performance below the design target. Only prototypes were completed before development ended. In game it can carry two four-round 100 mm Type 3 rocket-bomb mounts, for eight anti-aircraft rockets.",
     author: "",
     links: [
       {
@@ -4602,7 +4602,7 @@
   },
   {
     name: "J9N1",
-    displayName: "Nakajima J9N1 Kikka",
+    displayName: "Kikka",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -4617,7 +4617,7 @@
         value: "8 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
       },
     ],
-    description: "The Nakajima J9N1 Kikka was Japan's first jet aircraft, developed with influence from the Me 262 for high-speed anti-ship attack and homeland defense. Four fixed 30 mm Type 5 cannon were mounted in the nose. It flew in 1945 but never entered combat; in game it is represented as a fighter. Its configured loadout adds one two-round 200 mm and two four-round 100 mm rocket-bomb mounts, for two 200 mm and eight 100 mm anti-aircraft rockets.",
+    description: "The J9N1 Kikka was Japan's first jet aircraft, developed with influence from the Me 262 for high-speed anti-ship attack and homeland defense. Four fixed 30 mm Type 5 cannon were mounted in the nose. It flew in 1945 but never entered combat; in game it is represented as a fighter. Its configured loadout adds one two-round 200 mm and two four-round 100 mm rocket-bomb mounts, for two 200 mm and eight 100 mm anti-aircraft rockets.",
     author: "",
     links: [
       {
@@ -4632,7 +4632,7 @@
   },
   {
     name: "S1A1",
-    displayName: "Aichi S1A1 Denkō",
+    displayName: "Denkō",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -4651,7 +4651,7 @@
         value: "4 x 200mm Type 3 No.6 Mk 27 (60kg)",
       },
     ],
-    description: "The Aichi S1A1 Denkō was a twin-engine night fighter developed for the Imperial Japanese Navy to intercept B-29 bombers. It carried two 30 mm and two 20 mm forward-firing cannon, plus a remotely operated dorsal turret with two 20 mm cannon. Only prototypes were completed before the war ended, and the type never entered service. In game it can carry two twin 200 mm Type 3 rocket-bomb mounts, for four anti-aircraft rockets.",
+    description: "The S1A1 Denkō was a twin-engine night fighter developed for the Imperial Japanese Navy to intercept B-29 bombers. It carried two 30 mm and two 20 mm forward-firing cannon, plus a remotely operated dorsal turret with two 20 mm cannon. Only prototypes were completed before the war ended, and the type never entered service. In game it can carry two twin 200 mm Type 3 rocket-bomb mounts, for four anti-aircraft rockets.",
     author: "",
     links: [
       {
@@ -4666,14 +4666,14 @@
   },
   {
     name: "J8M1",
-    displayName: "Mitsubishi J8M1 Shūsui",
+    displayName: "Shūsui",
     armaments: [
       {
         label: "Cannons (Forward)",
         value: "2 x 30mm Type 5 (53 rounds per gun)",
       },
     ],
-    description: "The Mitsubishi J8M1 Shūsui was a rocket-powered interceptor developed from German Me 163 data for the Imperial Japanese Navy. Its tailless airframe carried two 30 mm Type 5 cannon, but the KR-10 rocket motor gave only about five and a half minutes of powered flight. The first prototype crashed during its initial powered flight in July 1945, and the type never entered combat.",
+    description: "The J8M1 Shūsui was a rocket-powered interceptor developed from German Me 163 data for the Imperial Japanese Navy. Its tailless airframe carried two 30 mm Type 5 cannon, but the KR-10 rocket motor gave only about five and a half minutes of powered flight. The first prototype crashed during its initial powered flight in July 1945, and the type never entered combat.",
     author: "",
     links: [
       {
@@ -5197,7 +5197,7 @@
       },
       {
         label: "Fighters",
-        value: "24× A6M2 Zero Model 21",
+        value: "24× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -6238,7 +6238,7 @@
   },
   {
     name: "N1K2",
-    displayName: "Shiden Kai Model 21",
+    displayName: "George",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -7238,7 +7238,7 @@
       },
       {
         label: "Fighters",
-        value: "18× A6M2 Zero Model 21",
+        value: "18× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -7634,19 +7634,19 @@
       },
       {
         label: "Fighters",
-        value: "32× A7M2 Reppū",
+        value: "32× A7M2 Sam",
       },
       {
         label: "Dive Bombers",
-        value: "16× D4Y3 Suisei",
+        value: "16× D4Y3 Judy",
       },
       {
         label: "Attack Aircraft",
-        value: "32× B7A2 Ryūsei",
+        value: "32× B7A2 Grace",
       },
       {
         label: "Reconnaissance Aircraft",
-        value: "4× C6N1 Saiun",
+        value: "4× C6N1 Myrt",
       },
     ],
     description: "Shinano was converted from the incomplete third Yamato-class battleship into a heavily protected aircraft carrier. She left Yokosuka in November 1944 before fitting-out was complete. Torpedoes from USS Archerfish exposed poor watertight integrity and damage control, causing the enormous carrier to capsize and sink the following morning.",
@@ -7708,7 +7708,7 @@
       },
       {
         label: "Fighters",
-        value: "18× A6M2 Zero Model 21",
+        value: "18× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -7743,7 +7743,7 @@
       },
       {
         label: "Fighters",
-        value: "21× A6M2 Zero Model 21",
+        value: "21× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -7774,7 +7774,7 @@
       },
       {
         label: "Fighters",
-        value: "20× A6M2 Zero Model 21",
+        value: "20× A6M2 Zeke",
       },
       {
         label: "Dive Bombers",
@@ -7782,7 +7782,7 @@
       },
       {
         label: "Torpedo Bombers",
-        value: "32× B6N2 Tenzan",
+        value: "32× B6N2 Jill",
       },
     ],
     description: "Shōkaku was the lead ship of a fast, capable class of Japanese fleet carriers commissioned shortly before the Pacific War. Together with Zuikaku she fought at Pearl Harbor, the Coral Sea, and the Santa Cruz Islands. USS Cavalla torpedoed her during the Battle of the Philippine Sea in June 1944.",
@@ -7852,7 +7852,7 @@
       },
       {
         label: "Fighters",
-        value: "21× A6M2 Zero Model 21",
+        value: "21× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -8397,7 +8397,7 @@
       },
       {
         label: "Fighters",
-        value: "24× A6M2 Zero Model 21",
+        value: "24× A6M2 Zeke",
       },
       {
         label: "Dive Bombers",
@@ -8405,7 +8405,7 @@
       },
       {
         label: "Torpedo Bombers",
-        value: "20× B6N2 Tenzan",
+        value: "20× B6N2 Jill",
       },
     ],
     description: "Taihō was the Imperial Japanese Navy's first fleet carrier built with an armored flight deck. Commissioned in March 1944, she joined the First Mobile Fleet for the Battle of the Philippine Sea. A torpedo from USS Albacore ruptured aviation-fuel systems, and accumulated vapors later exploded, sinking the carrier on 19 June.",
@@ -8440,7 +8440,7 @@
       },
       {
         label: "Fighters",
-        value: "18× A6M2 Zero Model 21",
+        value: "18× A6M2 Zeke",
       },
       {
         label: "Torpedo Bombers",
@@ -9182,15 +9182,15 @@
       },
       {
         label: "Fighters",
-        value: "24× A7M2 Reppū",
+        value: "24× A7M2 Sam",
       },
       {
         label: "Dive Bombers",
-        value: "6× D4Y3 Suisei",
+        value: "6× D4Y3 Judy",
       },
       {
         label: "Torpedo Bombers",
-        value: "24× B6N2 Tenzan",
+        value: "24× B6N2 Jill",
       },
     ],
     description: "Unryū was the lead ship of a wartime carrier class derived from Hiryū and simplified for mass production. Commissioned in August 1944, she never operated as a fleet carrier because Japan lacked trained aircrew and aircraft. In December 1944, USS Redfish torpedoed her while she was transporting Ōka special-attack aircraft to the Philippines.",
@@ -10649,7 +10649,7 @@
   },
   {
     name: "J6K1",
-    displayName: "Kawanishi J6K1 Jinpū",
+    displayName: "Jinpū",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -10664,7 +10664,7 @@
         value: "8 x 100mm Type 3 No.1 Mk 28 Model 1 (7.65kg)",
       },
     ],
-    description: "The Kawanishi J6K1 Jinpū was a land-based high-altitude interceptor designed for the Imperial Japanese Navy to counter the B-29. Developed from the J3K and powered by a 2,200 hp Nakajima Homare 42, it was planned to carry two 30 mm Type 5 cannon and two 13.2 mm Type 3 machine guns. Only one unarmed prototype was completed before the programme was cancelled. In game it can carry two four-round 100 mm Type 3 rocket-bomb mounts, for eight anti-aircraft rockets.",
+    description: "The J6K1 Jinpū was a land-based high-altitude interceptor designed for the Imperial Japanese Navy to counter the B-29. Developed from the J3K and powered by a 2,200 hp Homare 42, it was planned to carry two 30 mm Type 5 cannon and two 13.2 mm Type 3 machine guns. Only one unarmed prototype was completed before the programme was cancelled. In game it can carry two four-round 100 mm Type 3 rocket-bomb mounts, for eight anti-aircraft rockets.",
     author: "",
     links: [
       {
@@ -10679,7 +10679,7 @@
   },
   {
     name: "J4M",
-    displayName: "Mitsubishi J4M Senden",
+    displayName: "Senden",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -10690,7 +10690,7 @@
         value: "1 x 30mm Type 5",
       },
     ],
-    description: "The Mitsubishi J4M Senden was a proposed land-based interceptor for the Imperial Japanese Navy, using a single pusher engine and twin-boom layout to concentrate its armament in the nose. It was designed to carry two 20 mm Type 99 cannon and one 30 mm Type 5 cannon. Development ended in 1944 with only a wooden mock-up completed.",
+    description: "The J4M Senden was a proposed land-based interceptor for the Imperial Japanese Navy, using a single pusher engine and twin-boom layout to concentrate its armament in the nose. It was designed to carry two 20 mm Type 99 cannon and one 30 mm Type 5 cannon. Development ended in 1944 with only a wooden mock-up completed.",
     author: "",
     links: [
       {

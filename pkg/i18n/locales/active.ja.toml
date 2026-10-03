@@ -219,7 +219,7 @@ other = "兵装構成"
 [CollectionCombatAbility]
 other = "戦闘能力"
 [CollectionFormationNote]
-other = "標準{{.Count}}機編隊 · 相対戦力（現在の抽出結果のP95で正規化）"
+other = "標準{{.Count}}機編隊 · 相対戦力\n（現在の抽出結果のP95で正規化）"
 [CollectionFormationPower]
 other = "編隊戦力（{{.Count}}機）"
 [WeaponGun]
@@ -240,6 +240,8 @@ other = "生存性"
 other = "機動性"
 [RadarProjection]
 other = "展開力"
+[RadarPlaneRange]
+other = "航続距離"
 [RadarBurst]
 other = "瞬発力"
 [RadarFormationScope]

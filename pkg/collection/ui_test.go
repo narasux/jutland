@@ -460,3 +460,38 @@ func TestCollectionPlaneCardScaleUnified(t *testing.T) {
 			"Sea Otter should look proportionally smaller than B-17G")
 	}
 }
+
+func TestRadarScaleNoteBreaksFormationNoteIntoTwoCleanLines(t *testing.T) {
+	// 飞机卡片的雷达说明按字宽换行会把 "P95" 拆到两行，这里要求按文案中的换行符断成两行。
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+
+	note := i18n.Format(i18n.MsgCollectionFormationNote, map[string]any{"Count": 10})
+	lines := radarScaleNoteLines(note, 300, 14)
+
+	require.Len(t, lines, 2)
+	require.Contains(t, lines[1], "P95")
+	require.NotContains(t, lines[0], "P95")
+}
+
+func TestPlaneRadarProjectionIsLabelledRange(t *testing.T) {
+	// 飞机的投送取值就是机体航程，图鉴里应显示为“航程”；舰船仍使用投送，避免两者混用。
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+
+	var projection abilityDimension
+	for _, dimension := range collectionAbilityDimensions {
+		if dimension.ID == "projection" {
+			projection = dimension
+		}
+	}
+	require.Equal(t, "projection", projection.ID)
+
+	plane := radarSubject{Name: "测试机", IsPlane: true}
+	ship := radarSubject{Name: "测试舰"}
+	require.Equal(t, "航程", i18n.Text(projection.labelID(plane)))
+	require.Equal(t, "投送", i18n.Text(projection.labelID(ship)))
+	require.Equal(t, "测试机 · 航程", radarTooltipLines(projection, plane, 100)[0])
+}

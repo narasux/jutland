@@ -125,6 +125,7 @@ const (
 	MsgRadarSurvival             MessageID = "RadarSurvival"
 	MsgRadarMobility             MessageID = "RadarMobility"
 	MsgRadarProjection           MessageID = "RadarProjection"
+	MsgRadarPlaneRange           MessageID = "RadarPlaneRange"
 	MsgRadarBurst                MessageID = "RadarBurst"
 	MsgRadarFormationScope       MessageID = "RadarFormationScope"
 	MsgRadarAbilityValue         MessageID = "RadarAbilityValue"

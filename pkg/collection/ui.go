@@ -1904,7 +1904,7 @@ func (c *CollectionUI) drawRadarScaleNote(
 	screen *ebiten.Image, x, y, width, fontSize float64, note string,
 ) {
 	lineHeight := fontSize * 1.25
-	for idx, line := range wrapCollectionText(note, width, fontSize) {
+	for idx, line := range radarScaleNoteLines(note, width, fontSize) {
 		if idx >= 2 {
 			break
 		}
@@ -1914,6 +1914,19 @@ func (c *CollectionUI) drawRadarScaleNote(
 			fontSize, font.LocalizedUI(font.Kai), color.RGBA{175, 165, 150, 255},
 		)
 	}
+}
+
+// radarScaleNoteLines 将雷达说明拆成最多两行。
+// 文案中的换行符用于指定断行位置，避免中文按字宽换行时把 P95 这类短词拆开。
+func radarScaleNoteLines(note string, width, fontSize float64) []string {
+	lines := make([]string, 0, 2)
+	for _, paragraph := range strings.Split(note, "\n") {
+		if len(lines) >= 2 {
+			break
+		}
+		lines = append(lines, wrapCollectionText(paragraph, width, fontSize)...)
+	}
+	return lines
 }
 
 func (c *CollectionUI) drawCompactInfoItems(
