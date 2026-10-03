@@ -175,10 +175,10 @@
       approachLength: 3
     }
   },
-  // 安萨尔多大型巡洋舰方案：艉部左右并排两台弹射器，均向舰尾方向弹射，
+  // 塞瓦斯托波尔（意大利提供的 69 型大型巡洋舰方案）：艉部左右并排两台弹射器，均向舰尾方向弹射，
   // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.78 两舷）
   {
-    name: "SUCatapult_ansaldo_su",
+    name: "SUCatapult_sevastopol",
     takeoffPoints: [
       {
         forward: 0.889,
@@ -201,10 +201,10 @@
       approachLength: 3
     }
   },
-  // 意大利版安萨尔多大型巡洋舰：艉部左右并排两台弹射器，均向舰尾方向弹射，
+  // 热那亚（安萨尔多大型巡洋舰方案，意大利版）：艉部左右并排两台弹射器，均向舰尾方向弹射，
   // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.78 两舷）
   {
-    name: "ITCatapult_ansaldo_it",
+    name: "ITCatapult_genova",
     takeoffPoints: [
       {
         forward: 0.888,

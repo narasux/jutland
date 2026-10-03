@@ -5283,8 +5283,8 @@
     ],
   },
   {
-    name: "ansaldo_su",
-    displayName: "Ansaldo Large Cruiser",
+    name: "sevastopol",
+    displayName: "Sevastopol",
     type: "Large Cruiser",
     armaments: [
       {
@@ -5312,7 +5312,7 @@
         value: "2x3 533mm",
       },
     ],
-    description: "In 1936 the Italian firm Ansaldo offered the Soviet Union, then building an ocean-going Red Navy, a cruiser-killer design: 250 mm main guns intended to outrange and overwhelm foreign heavy cruisers. The hull and machinery followed Italian practice while the armament was entirely Soviet, with two catapults and four seaplanes. The proposal competed with the Soviet Union's own Project 69 large cruiser and was never built.",
+    description: "Sevastopol is the Project 69 large cruiser design offered to the Soviet Union by the Italian firm Ansaldo in 1936: hull and machinery followed Italian practice while the armament was Soviet. She takes her name from the second ship of the Kronshtadt class. The proposal was never built and remained on paper.",
     author: "Tzoli",
     links: [
       {
@@ -5326,8 +5326,8 @@
     ],
   },
   {
-    name: "ansaldo_it",
-    displayName: "Ansaldo Large Cruiser (Italy)",
+    name: "genova",
+    displayName: "Genova",
     type: "Large Cruiser",
     armaments: [
       {

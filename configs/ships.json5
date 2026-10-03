@@ -35745,8 +35745,8 @@
     }
   },
   {
-    // 安萨尔多 1936 年大型巡洋舰方案（苏联）
-    name: "ansaldo_su",
+    // 塞瓦斯托波尔：意大利提供的 69 型大型巡洋舰方案（苏联）
+    name: "sevastopol",
     nation: "su",
     type: "cruiser",
     typeAbbr: "CB",
@@ -36065,8 +36065,8 @@
   },
   // 意大利海军
   {
-    // 安萨尔多大型巡洋舰方案（意大利，二战末期改装型）
-    name: "ansaldo_it",
+    // 热那亚：安萨尔多大型巡洋舰方案（意大利，二战末期改装型）
+    name: "genova",
     nation: "it",
     type: "cruiser",
     typeAbbr: "CB",
@@ -36481,7 +36481,7 @@
       ]
     },
     aircraft: {
-      deck: "ITCatapult_ansaldo_it",
+      deck: "ITCatapult_genova",
       takeOffTime: 8,
       groups: [
         {

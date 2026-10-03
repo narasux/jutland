@@ -2858,8 +2858,8 @@
           "k_25",
           "sverdlov",
           "kirov",
-          "ansaldo_su",
-          "ansaldo_it",
+          "sevastopol",
+          "genova",
           "duquesne",
           "jeanne_d_arc",
           "de_grasse",
@@ -3432,7 +3432,7 @@
         belongPlayer: "P1"
       },
       {
-        name: "ansaldo_su",
+        name: "sevastopol",
         pos: [37, 25],
         rotation: 90,
         belongPlayer: "P1"
@@ -3463,7 +3463,7 @@
       },
       // Italy
       {
-        name: "ansaldo_it",
+        name: "genova",
         pos: [24, 38],
         rotation: 90,
         belongPlayer: "P1"
