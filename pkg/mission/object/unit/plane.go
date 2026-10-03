@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
@@ -214,10 +215,19 @@ func (p *Plane) ID() string {
 }
 
 // Detail 详细信息
+// CurSpeed 是世界系速度（已乘全局速度倍率），所以比较基准也必须乘倍率，
+// 否则在“快”倍速下调试面板会把每架巡航中的飞机都显示成超过速度上限。
+// 同时打印飞行阶段：起降阶段（滑跑 / 待场 / 进近）的速度是世界系位移，
+// 允许高于设计上限，看阶段就能区分。
 func (p *Plane) Detail() string {
+	maxSpeed := p.MaxSpeed
+	if config.G != nil {
+		maxSpeed *= config.G.SpeedMultiplier
+	}
 	return fmt.Sprintf(
-		"Plane %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f, AttackTarget: %s",
-		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.CurSpeed, p.MaxSpeed, p.CurHP, p.TotalHP, p.CurAttackTarget,
+		"Plane %s(%s): Pos: %s, Rotation: %.2f, Phase: %s, Speed: %.2f/%.2f, HP: %.2f/%.2f, AttackTarget: %s",
+		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.FlightPhase,
+		p.CurSpeed, maxSpeed, p.CurHP, p.TotalHP, p.CurAttackTarget,
 	)
 }
 

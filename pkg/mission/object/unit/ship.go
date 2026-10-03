@@ -170,10 +170,15 @@ func (s *BattleShip) ID() string {
 }
 
 // Detail 详细信息
+// 与飞机一致：CurSpeed 已乘全局速度倍率，上限也要乘，避免“快”倍速下显示成超速。
 func (s *BattleShip) Detail() string {
+	maxSpeed := s.MaxSpeed
+	if config.G != nil {
+		maxSpeed *= config.G.SpeedMultiplier
+	}
 	return fmt.Sprintf(
 		"Ship %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f",
-		s.Name, s.Uid, s.CurPos.String(), s.CurRotation, s.CurSpeed, s.MaxSpeed, s.CurHP, s.TotalHP,
+		s.Name, s.Uid, s.CurPos.String(), s.CurRotation, s.CurSpeed, maxSpeed, s.CurHP, s.TotalHP,
 	)
 }
 
