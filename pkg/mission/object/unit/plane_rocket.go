@@ -123,7 +123,7 @@ func (r *PlaneRocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []
 	bt := objBullet.New(
 		r.BulletName, curPos, pos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
-		objBullet.ShotTypeDirect, enemy.ObjType(), bulletSpeed, life,
+		enemy.ObjType(), bulletSpeed, life, 0,
 	)
 	bt.ProximityRadius = r.ProximityRadius
 	bt.BlastRadius = r.BlastRadius

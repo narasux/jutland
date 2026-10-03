@@ -300,14 +300,10 @@ func (s *BattleShip) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 
 // HurtBy 受到伤害
 func (s *BattleShip) HurtBy(bullet *objBullet.Bullet) {
-	realDamage := 0.0
-	if bullet.ShotType == objBullet.ShotTypeDirect {
-		// 平射打击水平装甲带
-		realDamage = bullet.Damage * (1 - s.HorizontalDamageReduction)
-	} else {
-		// 曲射打击垂直装甲带
-		realDamage = bullet.Damage * (1 - s.VerticalDamageReduction)
-	}
+	// 平射打水平装甲带，吊射打垂直装甲带；按弹道落角连续过渡，
+	// 避免在某条固定射程上装甲带与伤害系数突变。
+	reduction := s.HorizontalDamageReduction*(1-bullet.Plunge) + s.VerticalDamageReduction*bullet.Plunge
+	realDamage := bullet.Damage * (1 - reduction)
 
 	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
 	criticalType := objBullet.CriticalTypeNone

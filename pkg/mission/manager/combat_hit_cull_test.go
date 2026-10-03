@@ -51,7 +51,6 @@ func TestDirectShellHitsCornerBeyondHalfLength(t *testing.T) {
 	bullet := &objBullet.Bullet{
 		Type:          objBullet.TypeShell,
 		Damage:        10,
-		ShotType:      objBullet.ShotTypeDirect,
 		TargetObjType: object.TypeShip,
 		Shooter:       "shooter",
 		BelongPlayer:  faction.HumanAlpha,
@@ -100,7 +99,6 @@ func TestDirectShellIgnoresShipOutsideItsBuckets(t *testing.T) {
 	bullet := &objBullet.Bullet{
 		Type:          objBullet.TypeShell,
 		Damage:        10,
-		ShotType:      objBullet.ShotTypeDirect,
 		TargetObjType: object.TypeShip,
 		Shooter:       "shooter",
 		BelongPlayer:  faction.HumanAlpha,
@@ -141,7 +139,6 @@ func TestDirectShellSkipsDistantShip(t *testing.T) {
 	bullet := &objBullet.Bullet{
 		Type:          objBullet.TypeShell,
 		Damage:        10,
-		ShotType:      objBullet.ShotTypeDirect,
 		TargetObjType: object.TypeShip,
 		Shooter:       "shooter",
 		BelongPlayer:  faction.HumanAlpha,

@@ -2,6 +2,7 @@ package bullet
 
 import (
 	"image/color"
+	"math"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -52,10 +53,10 @@ func TestNewCopiesTemplateByValue(t *testing.T) {
 		"shooter",
 		object.TypeShip,
 		faction.HumanAlpha,
-		ShotTypeDirect,
 		object.TypeShip,
 		1.5,
 		20,
+		0.4,
 	)
 	b.Damage = 99
 
@@ -65,10 +66,66 @@ func TestNewCopiesTemplateByValue(t *testing.T) {
 	assert.Equal(t, 127, b.Diameter)
 	assert.Equal(t, 3.0, b.CurPos.RX)
 	assert.Equal(t, 4.0, b.CurPos.RY)
-	assert.Equal(t, ShotTypeDirect, b.ShotType)
+	assert.Equal(t, 0.4, b.Plunge)
 	assert.Equal(t, 1.5, b.Speed)
 	assert.Equal(t, 20, b.Life)
 	assert.Equal(t, faction.HumanAlpha, b.BelongPlayer)
+}
+
+// 落角必须随射程单调不减，且近距离完全是平射。
+func TestPlungeForRangeIsMonotonic(t *testing.T) {
+	if got := PlungeForRange(0); got != 0 {
+		t.Fatalf("plunge at 0 range = %v, want 0", got)
+	}
+	if got := PlungeForRange(PlungeRangeStart); got != 0 {
+		t.Fatalf("plunge at start range = %v, want 0", got)
+	}
+	if got := PlungeForRange(1); got != 1 {
+		t.Fatalf("plunge at max range = %v, want 1", got)
+	}
+	prev := -1.0
+	for p := 0.0; p <= 1.0; p += 0.02 {
+		got := PlungeForRange(p)
+		if got < prev {
+			t.Fatalf("plunge decreases at rangePercent=%v: %v < %v", p, got, prev)
+		}
+		if got < 0 || got > 1 {
+			t.Fatalf("plunge out of range at %v: %v", p, got)
+		}
+		prev = got
+	}
+}
+
+// 危险界随落角收窄：平射不限制，吊射收敛到几十米。
+func TestDangerSpaceShrinksWithPlunge(t *testing.T) {
+	flat := &Bullet{Plunge: 0}
+	if !math.IsInf(flat.DangerSpace(), 1) {
+		t.Fatalf("flat danger space = %v, want +Inf", flat.DangerSpace())
+	}
+	steep := &Bullet{Plunge: 1}
+	if got, want := steep.DangerSpace(), dangerHeight/dangerTanRef; math.Abs(got-want) > 1e-9 {
+		t.Fatalf("steep danger space = %v, want %v", got, want)
+	}
+	mid := &Bullet{Plunge: PlungeForRange(0.55)}
+	if mid.DangerSpace() <= steep.DangerSpace() {
+		t.Fatalf("mid danger space = %v, want larger than steep %v", mid.DangerSpace(), steep.DangerSpace())
+	}
+}
+
+// 平射弹药永远不算越过瞄准点，吊射弹药越过一个危险界即落水。
+func TestPassedAimOnlyForPlunging(t *testing.T) {
+	flat := &Bullet{Plunge: 0, Rotation: 0, TargetPos: objPos.NewR(10, 10), CurPos: objPos.NewR(10, 1)}
+	if flat.PassedAim() {
+		t.Fatal("flat bullet should never pass its aim point")
+	}
+	steep := &Bullet{Plunge: 1, Rotation: 0, TargetPos: objPos.NewR(10, 10), CurPos: objPos.NewR(10, 1)}
+	if !steep.PassedAim() {
+		t.Fatal("steep bullet should pass its aim point after a danger space")
+	}
+	near := &Bullet{Plunge: 1, Rotation: 0, TargetPos: objPos.NewR(10, 10), CurPos: objPos.NewR(10, 9.99)}
+	if near.PassedAim() {
+		t.Fatal("steep bullet at the aim point should not have passed it yet")
+	}
 }
 
 func TestShellTrailWaitsForHalfCell(t *testing.T) {

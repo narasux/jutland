@@ -11,8 +11,9 @@ import (
 )
 
 // pearlHarborContactTick 是电脑找到并打到我方之前允许跑的任务帧数。
-// 1500 拍约 25 秒，实测 3600 拍左右接火，这里留足余量。
-const pearlHarborContactTick = 4800
+// 实测首次接触约 2750 拍、首次造成伤害约 3490 拍；伤害取决于攻击是否命中，
+// 未命中的分支会拖到 5200 拍左右，这里取 7200 留足余量。
+const pearlHarborContactTick = 7200
 
 // useFogSettings 打开战争迷雾跑一个测试，结束后还原全局设置。
 func useFogSettings(t *testing.T) {

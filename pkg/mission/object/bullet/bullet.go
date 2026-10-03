@@ -5,7 +5,6 @@ import (
 	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
@@ -32,16 +31,6 @@ const (
 	TypeLaser Type = "laser"
 )
 
-// ShotType 射击方式
-type ShotType int
-
-const (
-	// ShotTypeDirect 直射
-	ShotTypeDirect ShotType = iota
-	// ShotTypeArcing 曲射（抛物线射击）
-	ShotTypeArcing
-)
-
 type CriticalType int
 
 const (
@@ -51,6 +40,20 @@ const (
 	CriticalTypeThreeTimes
 	// CriticalTypeTenTimes 十倍暴击
 	CriticalTypeTenTimes
+)
+
+// 弹道落角参数：0 表示完全平射，1 表示垂直落下。
+// 开火时由射程百分比连续算出，同时决定命中判定、危险界与装甲带，
+// 避免在某个固定射程上硬切换直射 / 曲射。
+const (
+	// PlungeRangeStart 平射阶段的上界（射程百分比）：更近的射击一律按平射处理
+	PlungeRangeStart = 0.50
+	// PlungeRangeRef 落角达到参考值的射程百分比
+	PlungeRangeRef = 0.65
+	// dangerHeight 目标有效高度（地图格，约 26 m）：跨射带宽度由它除以落角正切得到
+	dangerHeight = 0.20
+	// dangerTanRef 参考落角的正切（约 35°）
+	dangerTanRef = 0.70
 )
 
 // 火炮 / 鱼雷弹药
@@ -76,8 +79,8 @@ type Bullet struct {
 	Rotation float64
 	// 速度
 	Speed float64
-	// 射击方式
-	ShotType ShotType
+	// 弹道落角参数 0~1：0 平射（危险界不限制、打水平装甲带），1 垂直落下（跨射带最窄、打垂直装甲带）
+	Plunge float64
 	// 目标对象类型
 	TargetObjType object.Type
 	// 前进周期数
@@ -109,23 +112,42 @@ func (b *Bullet) HasAirburst() bool {
 	return b.BlastRadius > 0 && b.TargetObjType == object.TypePlane
 }
 
-// Forward 弹药前进
+// PlungeForRange 由射程百分比换算弹道落角参数。
+// 近距离弹道低伸，落角接近 0；远距离落角变陡，0.65R 附近接近垂直落下。
+func PlungeForRange(rangePercent float64) float64 {
+	progress := (rangePercent - PlungeRangeStart) / (PlungeRangeRef - PlungeRangeStart)
+	progress = min(1, max(0, progress))
+	// smoothstep：两端斜率为 0，落角与装甲带都不会在某个射程上突然变化
+	return progress * progress * (3 - 2*progress)
+}
+
+// DangerSpace 沿弹道方向的命中容差（地图格）。
+// 平射时弹道低伸，炮弹总能从舰体上扫过，返回 +Inf 表示不限制；
+// 落角越陡，危险界越窄，打远 / 打近就会脱靶。
+func (b *Bullet) DangerSpace() float64 {
+	if b.Plunge <= 0 {
+		return math.Inf(1)
+	}
+	return dangerHeight / (b.Plunge * dangerTanRef)
+}
+
+// PassedAim 沿弹道方向是否已经越过瞄准点一个危险界的距离。
+// 平射弹药永不成立（会一直飞到寿命结束），吊射弹药据此判定落水。
+func (b *Bullet) PassedAim() bool {
+	radians := b.Rotation * math.Pi / 180
+	along := (b.CurPos.RX-b.TargetPos.RX)*math.Sin(radians) -
+		(b.CurPos.RY-b.TargetPos.RY)*math.Cos(radians)
+	return along > b.DangerSpace()
+}
+
+// Forward 弹药前进。
+// 所有弹药都沿直线飞行，能否命中由危险界与舰体几何决定；
+// 越过瞄准点的吊射弹药由 PassedAim 判定落水。
 func (b *Bullet) Forward() {
-	// 修改位置
 	nextPos := b.CurPos.Copy()
 	nextPos.AddRx(math.Sin(b.Rotation*math.Pi/180) * b.Speed)
 	nextPos.SubRy(math.Cos(b.Rotation*math.Pi/180) * b.Speed)
-
-	// 直射的弹药只要一直塔塔开就好了，曲射的要考虑的就多了去了 :）
-	if b.ShotType == ShotTypeDirect {
-		b.CurPos = nextPos
-	} else if b.ShotType == ShotTypeArcing {
-		curDist, nextDist := b.CurPos.Distance(b.TargetPos), nextPos.Distance(b.TargetPos)
-		// 离目标地点越来越远，说明下一个位置已经过了，曲射就是已经命中
-		b.CurPos = lo.Ternary(nextDist > curDist, b.TargetPos, nextPos)
-	} else {
-		log.Fatal("unknown bullet shot type: ", b.ShotType)
-	}
+	b.CurPos = nextPos
 
 	// 修改生命 & 前进周期数
 	b.Life--
@@ -217,10 +239,10 @@ func New(
 	shooterUid string,
 	shooterObjType object.Type,
 	shooterBelongPlayer faction.Player,
-	shotType ShotType,
 	targetObjectType object.Type,
 	speed float64,
 	life int,
+	plunge float64,
 ) *Bullet {
 	tpl, ok := Map[name]
 	if !ok {
@@ -230,7 +252,7 @@ func New(
 
 	b.CurPos = curPos
 	b.TargetPos = targetPos
-	b.ShotType = shotType
+	b.Plunge = plunge
 	b.TargetObjType = targetObjectType
 
 	b.Rotation = curPos.Angle(targetPos)

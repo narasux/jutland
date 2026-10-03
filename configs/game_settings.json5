@@ -4,14 +4,13 @@
 
 // Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja
 // EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场
-// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾
 // aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用
+// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾
 
 {
   "speedMultiplier": 1,
   "language": "zh-Hans",
   "enableLandAirfield": true,
-  "enableFogOfWar": true,
   "aiStrategies": {
     "attack": true,
     "defend": true,
@@ -19,4 +18,5 @@
     "raid": true,
     "scout": true
   },
+  "enableFogOfWar": true
 }

@@ -6478,7 +6478,7 @@
   },
   {
     name: "minekaze",
-    displayName: "峯风",
+    displayName: "峰风",
     type: "驱逐舰",
     armaments: [
       {
@@ -6490,7 +6490,7 @@
         value: "3x2 533mm",
       },
     ],
-    description: "峯风级是日本海军八四舰队计划于 1917—1920 年批准建造的一等驱逐舰，1920 年服役，充任高速战列巡洋舰的护航力量，其船体与动力布局直接为后续神风、睦月等型沿用。至太平洋战争时已属二线，多改任哨戒、运输与回天母舰，15 艘中 11 艘战沉。本舰舰容与武装依据 tzoli 的绘制图。",
+    description: "峰风级是日本海军八四舰队计划于 1917—1920 年批准建造的一等驱逐舰，1920 年服役，充任高速战列巡洋舰的护航力量，其船体与动力布局直接为后续神风、睦月等型沿用。至太平洋战争时已属二线，多改任哨戒、运输与回天母舰，15 艘中 11 艘战沉。本舰舰容与武装依据 tzoli 的绘制图。",
     author: "Tzoli",
     links: [
       {
@@ -6498,7 +6498,7 @@
         url: "https://www.deviantart.com/tzoli/art/Minekaze-Class-Destroyer-1218919925",
       },
       {
-        name: "维基百科 - 峯風型驅逐艦",
+        name: "维基百科 - 峰风级驱逐舰",
         url: "https://zh.wikipedia.org/wiki/%E5%B3%AF%E9%A2%A8%E5%9E%8B%E9%A9%85%E9%80%90%E8%89%A6",
       },
     ],
@@ -7687,7 +7687,7 @@
   },
   {
     name: "F7F-3N",
-    displayName: "虎猫（夜战型）",
+    displayName: "虎猫",
     armaments: [
       {
         label: "机炮（翼根前向）",
@@ -7779,7 +7779,7 @@
   },
   {
     name: "P-47D-30",
-    displayName: "雷电 D-30",
+    displayName: "雷电",
     armaments: [
       {
         label: "机枪（前向）",
@@ -7801,7 +7801,7 @@
   },
   {
     name: "P-47D-2",
-    displayName: "雷电 D-2",
+    displayName: "雷电",
     armaments: [
       {
         label: "机枪（前向）",
@@ -7823,7 +7823,7 @@
   },
   {
     name: "P-51B-5",
-    displayName: "野马 B-5",
+    displayName: "野马",
     armaments: [
       {
         label: "机枪（前向）",
@@ -7845,7 +7845,7 @@
   },
   {
     name: "P-51D-20",
-    displayName: "野马 D-20",
+    displayName: "野马",
     armaments: [
       {
         label: "机枪（前向）",
@@ -7923,7 +7923,7 @@
   },
   {
     name: "P-61B-15",
-    displayName: "黑寡妇 B-15",
+    displayName: "黑寡妇",
     armaments: [
       {
         label: "机炮（机腹固定前射）",
@@ -8206,7 +8206,7 @@
   },
   {
     name: "TBF-1-UK",
-    displayName: "复仇者式 Mk I（英）",
+    displayName: "复仇者 Mk I",
     armaments: [
       {
         label: "机枪（前向）",
@@ -8236,7 +8236,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "海盗式,
+    displayName: "海盗",
     armaments: [
       {
         label: "机枪（前向）",
@@ -8258,7 +8258,7 @@
   },
   {
     name: "Fulmar",
-    displayName: "海燕式 Mk I",
+    displayName: "海燕 Mk I",
     armaments: [
       {
         label: "机枪（前向）",
@@ -8275,7 +8275,7 @@
   },
   {
     name: "Mosquito",
-    displayName: "海蚊式 TR.33",
+    displayName: "海蚊 TR.33",
     armaments: [
       {
         label: "机炮（前向）",
@@ -8337,7 +8337,7 @@
   },
   {
     name: "SeaOtter",
-    displayName: "海獭式 Mk I",
+    displayName: "海獭 Mk I",
     armaments: [
       {
         label: "机枪（前向）",
@@ -8363,7 +8363,7 @@
   },
     {
     "name": "Walrus",
-    "displayName": "海象式 Mk I",
+    "displayName": "海象 Mk I",
     "type": "水上侦察机",
     "armaments": [
       {
@@ -8386,7 +8386,7 @@
   },
   {
     name: "Swordfish",
-    displayName: "剑鱼式 Mk I",
+    displayName: "剑鱼 Mk I",
     armaments: [
       {
         label: "机枪（前向）",
@@ -8416,7 +8416,7 @@
   },
   {
     name: "Barracuda-II",
-    displayName: "梭鱼式 Mk II",
+    displayName: "梭鱼 Mk II",
     armaments: [
       {
         label: "机枪（后向）",
@@ -10643,7 +10643,7 @@
   },
   {
     name: "Bf110G",
-    displayName: "Bf 110 G-4 夜间战斗机",
+    displayName: "Bf 110",
     armaments: [
       {
         label: "机炮（前向）",
@@ -10669,7 +10669,7 @@
   },
   {
     name: "Bf109B",
-    displayName: "Bf 109 B-1",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "机枪（前向）",
@@ -10687,7 +10687,7 @@
   },
   {
     name: "Bf109E",
-    displayName: "Bf 109 E-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "机枪（前向）",
@@ -10709,7 +10709,7 @@
   },
   {
     name: "Bf109F",
-    displayName: "Bf 109 F-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "机枪（前向）",
@@ -10731,7 +10731,7 @@
   },
   {
     name: "Bf109G",
-    displayName: "Bf 109 G-14",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "机枪（前向）",
@@ -10753,7 +10753,7 @@
   },
   {
     name: "Bf109K",
-    displayName: "Bf 109 K-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "机枪（前向）",
@@ -10775,7 +10775,7 @@
   },
   {
     name: "Ho229",
-    displayName: "Ho 229 飞翼战斗轰炸机",
+    displayName: "飞翼",
     armaments: [
       {
         label: "机炮（前向）",
@@ -10797,7 +10797,7 @@
   },
   {
     name: "Ta183",
-    displayName: "Ta 183 胡克拜因",
+    displayName: "胡克拜因",
     armaments: [
       {
         label: "机炮（前向）",
@@ -10819,7 +10819,7 @@
   },
   {
     name: "Ba349",
-    displayName: "Ba 349 蝮蛇",
+    displayName: "蝮蛇",
     armaments: [
       {
         label: "火箭弹（前向）",
@@ -10841,7 +10841,7 @@
   },
   {
     name: "He162A",
-    displayName: "He 162 A-2 国民战斗机",
+    displayName: "国民战斗机",
     armaments: [
       {
         label: "机炮（前向）",
@@ -10863,7 +10863,7 @@
   },
   {
     name: "Me163B",
-    displayName: "Me 163 B-1 彗星",
+    displayName: "彗星",
     armaments: [
       {
         label: "机炮（前向）",
@@ -10885,7 +10885,7 @@
   },
   {
     name: "Me209V",
-    displayName: "Me 209 V1 竞速机",
+    displayName: "竞速机",
     armaments: [],
     description: "Me 209 V1 是为冲击活塞动力飞机速度纪录而设计的无武装竞速机，1938 年首飞，并于 1939 年创造约 755 km/h 的纪录。该机没有作战航程数据，游戏依据其约 30 分钟的冷却液限制折算为 360 km。因无武装，游戏中作为陆基侦察机使用。",
     author: "未知",
@@ -10902,7 +10902,7 @@
   },
   {
     name: "Me309V",
-    displayName: "Me 309 V1",
+    displayName: "Me 309",
     armaments: [
       {
         label: "机炮（前向）",
@@ -10928,7 +10928,7 @@
   },
   {
     name: "Do335V",
-    displayName: "Do 335 V13 箭式",
+    displayName: "箭式",
     armaments: [
       {
         label: "机炮（前向）",
@@ -10986,7 +10986,7 @@
   },
   {
     name: "Me262A",
-    displayName: "Me 262 A-1a 燕",
+    displayName: "燕",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11008,7 +11008,7 @@
   },
   {
     name: "Me262B",
-    displayName: "Me 262 B-1a/U1 夜战型",
+    displayName: "燕",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11030,7 +11030,7 @@
   },
   {
     name: "He219A",
-    displayName: "He 219 A-7 夜枭",
+    displayName: "夜枭",
     armaments: [
       {
         label: "机炮（翼根前向）",
@@ -11056,7 +11056,7 @@
   },
   {
     name: "Me410A",
-    displayName: "Me 410 A-1 大黄蜂",
+    displayName: "大黄蜂",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11082,7 +11082,7 @@
   },
   {
     name: "Fw190A",
-    displayName: "Fw 190A 百舌鸟",
+    displayName: "百舌鸟",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11108,7 +11108,7 @@
   },
   {
     name: "Fw190D",
-    displayName: "Fw 190D 长鼻子多拉",
+    displayName: "多拉",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11134,7 +11134,7 @@
   },
   {
     name: "Ta152H",
-    displayName: "Ta 152H 高空战斗机",
+    displayName: "Ta 152",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11160,7 +11160,7 @@
   },
   {
     name: "Hs123A",
-    displayName: "亨舍尔 Hs 123 A-1 俯冲轰炸机",
+    displayName: "Hs 123",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11182,7 +11182,7 @@
   },
   {
     name: "Ju87B",
-    displayName: "容克 Ju 87 B-1 斯图卡",
+    displayName: "斯图卡",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11208,7 +11208,7 @@
   },
   {
     name: "Hs129B",
-    displayName: "亨舍尔 Hs 129 B-2 攻击机",
+    displayName: "Hs 129",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11234,7 +11234,7 @@
   },
   {
     name: "Ar234B",
-    displayName: "阿拉多 Ar 234 B-2 闪电",
+    displayName: "闪电",
     armaments: [
       {
         label: "炸弹（水平投弹）",
@@ -11252,7 +11252,7 @@
   },
   {
     name: "Do17E",
-    displayName: "多尼尔 Do 17 E-1 飞行铅笔",
+    displayName: "飞行铅笔",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11274,7 +11274,7 @@
   },
   {
     name: "Ju88A",
-    displayName: "容克 Ju 88 A-5 中型轰炸机",
+    displayName: "Ju 88",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11296,7 +11296,7 @@
   },
   {
     name: "He111P",
-    displayName: "亨克尔 He 111 P-2 中型轰炸机",
+    displayName: "He 111",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11318,7 +11318,7 @@
   },
   {
     name: "BC138C",
-    displayName: "布洛姆-福斯 BV 138 C-1 飞行木鞋",
+    displayName: "飞行木鞋",
     armaments: [
       {
         label: "机炮（前向）",
@@ -11344,7 +11344,7 @@
   },
   {
     name: "Do217K",
-    displayName: "多尼尔 Do 217 K-2 中型轰炸机",
+    displayName: "Do 217",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11374,7 +11374,7 @@
   },
   {
     name: "Fw200C",
-    displayName: "福克-沃尔夫 Fw 200 C-1 兀鹰",
+    displayName: "兀鹰",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11396,7 +11396,7 @@
   },
   {
     name: "He177A",
-    displayName: "亨克尔 He 177 A-5 狮鹫",
+    displayName: "狮鹫",
     armaments: [
       {
         label: "机枪（前向）",
@@ -11589,7 +11589,7 @@
   },
   {
     name: "FF33E",
-    displayName: "腓特烈港 FF.33e",
+    displayName: "腓特烈港",
     type: "水上侦察机",
     armaments: [],
     description: "腓特烈港 FF.33e 是德国第一次世界大战期间的主力双浮筒水上侦察机改型。该机采用 150 马力 Benz Bz.III 发动机，以无线电设备取代武装，最大速度约 124 km/h，主要承担舰队海上侦察任务。FF.33e 约生产 180 架。",
@@ -11626,7 +11626,7 @@
   },
   {
     name: "Potez631",
-    displayName: "波泰 631 C.3",
+    displayName: "波泰 631",
     type: "重型战斗机",
     armaments: [
       {
@@ -11653,7 +11653,7 @@
   },
   {
     name: "LN401",
-    displayName: "卢瓦尔-纽波特 LN 401",
+    displayName: "LN 401",
     type: "舰载俯冲轰炸机",
     armaments: [
       {
@@ -11707,7 +11707,7 @@
   },
   {
     name: "Late298",
-    displayName: "拉泰科埃尔 Late 298",
+    displayName: "Late 298",
     type: "水上鱼雷机",
     armaments: [
       {
@@ -11734,7 +11734,7 @@
   },
   {
     name: "Br810",
-    displayName: "布雷盖 Br.810",
+    displayName: "Br.810",
     type: "舰载鱼雷机",
     armaments: [
       {
@@ -11792,7 +11792,7 @@
   },
   {
     name: "Br521",
-    displayName: "布雷盖 Br.521 Bizerte",
+    displayName: "比塞大",
     type: "水平轰炸机",
     armaments: [
       {
@@ -11815,7 +11815,7 @@
   },
   {
     name: "V-156F",
-    displayName: "沃特 V-156F",
+    displayName: "V-156F",
     type: "舰载俯冲轰炸机",
     armaments: [
       {
@@ -11873,7 +11873,7 @@
   },
   {
     name: "VB10",
-    displayName: "阿森纳 VB.10",
+    displayName: "VB.10",
     type: "双发重型截击机",
     armaments: [
       {
@@ -11955,7 +11955,7 @@
   },
   {
     "name": "CR.42",
-    "displayName": "CR.42 猎鹰",
+    "displayName": "猎鹰",
     "type": "战斗机",
     "armaments": [
       {
@@ -11974,7 +11974,7 @@
   },
   {
     "name": "G.50",
-    "displayName": "G.50 箭",
+    "displayName": "箭",
     "type": "战斗机",
     "armaments": [
       {
@@ -11993,7 +11993,7 @@
   },
   {
     "name": "C.200",
-    "displayName": "C.200 闪电",
+    "displayName": "闪电",
     "type": "战斗机",
     "armaments": [
       {
@@ -12012,7 +12012,7 @@
   },
   {
     "name": "C.202",
-    "displayName": "C.202 闪电",
+    "displayName": "闪电",
     "type": "战斗机",
     "armaments": [
       {
@@ -12035,7 +12035,7 @@
   },
   {
     "name": "Re.2005",
-    "displayName": "Re.2005 人马座",
+    "displayName": "人马座",
     "type": "战斗机",
     "armaments": [
       {
@@ -12058,7 +12058,7 @@
   },
   {
     "name": "Re.2002",
-    "displayName": "Re.2002 公羊",
+    "displayName": "公羊",
     "type": "俯冲轰炸机",
     "armaments": [
       {
@@ -12085,7 +12085,7 @@
   },
   {
     "name": "BR.20",
-    "displayName": "BR.20 鹳",
+    "displayName": "鹳",
     "type": "水平轰炸机",
     "armaments": [
       {
@@ -12112,7 +12112,7 @@
   },
   {
     "name": "Z.1007bis",
-    "displayName": "Z.1007bis 翠鸟",
+    "displayName": "翠鸟",
     "type": "水平轰炸机",
     "armaments": [
       {
@@ -12139,7 +12139,7 @@
   },
   {
     "name": "SM.79bis",
-    "displayName": "SM.79bis 食雀鹰",
+    "displayName": "食雀鹰",
     "type": "鱼雷轰炸机",
     "armaments": [
       {
@@ -12166,7 +12166,7 @@
   },
   {
     "name": "Ro.37bis",
-    "displayName": "Ro.37bis 山猫",
+    "displayName": "山猫",
     "type": "侦察机",
     "armaments": [
       {

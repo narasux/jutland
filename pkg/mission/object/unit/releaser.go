@@ -5,7 +5,6 @@ import (
 	"math"
 
 	"github.com/mohae/deepcopy"
-	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/object"
@@ -143,10 +142,11 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 	// 成功释放弹药
 	r.Released = true
 	bulletType := r.bulletType()
-	shotType := lo.Ternary(
-		bulletType == objBullet.TypeBomb,
-		objBullet.ShotTypeArcing, objBullet.ShotTypeDirect,
-	)
+	// 炸弹垂直落下，航空鱼雷平射
+	plunge := 0.0
+	if bulletType == objBullet.TypeBomb {
+		plunge = 1
+	}
 	life := int(r.Range/bulletSpeed) + 5
 	if bulletType == objBullet.TypeTorpedo {
 		// 航空鱼雷只行驶到预计命中点附近，额外一帧确保到达后仍会结算碰撞。
@@ -156,7 +156,7 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 	return []*objBullet.Bullet{objBullet.New(
 		r.BulletName, sState.CurPos, targetPos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
-		shotType, enemy.ObjType(), bulletSpeed, life,
+		enemy.ObjType(), bulletSpeed, life, plunge,
 	)}
 }
 

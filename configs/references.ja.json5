@@ -841,7 +841,7 @@
   },
   {
     name: "Barracuda-II",
-    displayName: "フェアリー・バラクーダ Mk II",
+    displayName: "バラクーダ Mk II",
     armaments: [
       {
         label: "機銃（後方）",
@@ -1871,7 +1871,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "ヴォート F4U-4 コルセア",
+    displayName: "コルセア",
     armaments: [
       {
         label: "機銃（前方）",
@@ -1915,7 +1915,7 @@
   },
   {
     name: "F8F-2",
-    displayName: "グラマン F8F-2 ベアキャット",
+    displayName: "ベアキャット",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -2377,7 +2377,7 @@
   },
   {
     name: "Fulmar",
-    displayName: "フェアリー・フルマー Mk I",
+    displayName: "フルマー Mk I",
     armaments: [
       {
         label: "機銃（前方）",
@@ -8288,7 +8288,7 @@
   },
   {
     name: "Swordfish",
-    displayName: "フェアリー・ソードフィッシュ Mk I",
+    displayName: "ソードフィッシュ Mk I",
     armaments: [
       {
         label: "機銃（前方）",
@@ -8471,7 +8471,7 @@
   },
   {
     name: "TBF-1-UK",
-    displayName: "グラマン・アベンジャー Mk I",
+    displayName: "アベンジャー Mk I",
     armaments: [
       {
         label: "機銃（前方）",
@@ -10720,7 +10720,7 @@
   },
   {
     name: "Bf110G",
-    displayName: "メッサーシュミット Bf 110 G-4 夜間戦闘機",
+    displayName: "Bf 110",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -10746,7 +10746,7 @@
   },
   {
     name: "Bf109B",
-    displayName: "メッサーシュミット Bf 109 B-1",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "機銃（前方）",
@@ -10764,7 +10764,7 @@
   },
   {
     name: "Bf109E",
-    displayName: "メッサーシュミット Bf 109 E-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "機銃（前方）",
@@ -10786,7 +10786,7 @@
   },
   {
     name: "Bf109F",
-    displayName: "メッサーシュミット Bf 109 F-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "機銃（前方）",
@@ -10808,7 +10808,7 @@
   },
   {
     name: "Bf109G",
-    displayName: "メッサーシュミット Bf 109 G-14",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "機銃（前方）",
@@ -10830,7 +10830,7 @@
   },
   {
     name: "Bf109K",
-    displayName: "メッサーシュミット Bf 109 K-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "機銃（前方）",
@@ -10852,7 +10852,7 @@
   },
   {
     name: "Ho229",
-    displayName: "ホルテン Ho 229 全翼戦闘爆撃機",
+    displayName: "全翼機",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -10874,7 +10874,7 @@
   },
   {
     name: "Ta183",
-    displayName: "フォッケウルフ Ta 183 フッケバイン",
+    displayName: "フッケバイン",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -10896,7 +10896,7 @@
   },
   {
     name: "Ba349",
-    displayName: "バッヘム Ba 349 ナッター",
+    displayName: "ナッター",
     armaments: [
       {
         label: "ロケット弾（前方）",
@@ -10918,7 +10918,7 @@
   },
   {
     name: "He162A",
-    displayName: "ハインケル He 162 A-2 フォルクスイェーガー",
+    displayName: "フォルクスイェーガー",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -10940,7 +10940,7 @@
   },
   {
     name: "Me163B",
-    displayName: "メッサーシュミット Me 163 B-1 コメート",
+    displayName: "コメート",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -10962,7 +10962,7 @@
   },
   {
     name: "Me209V",
-    displayName: "メッサーシュミット Me 209 V1 競速機",
+    displayName: "競速機",
     armaments: [],
     description: "Me 209 V1 は piston 機関機の絶対速度記録を狙うためだけに造られた非武装の競速機である。1938年に初飛行し、1939年には約755 km/hを記録した。実用航程は存在しないため、ゲームでは約30分の冷却液使用制限から360 kmとして近似している。武装がないため、ゲーム内では陸上偵察機として運用する。",
     author: "不明",
@@ -10979,7 +10979,7 @@
   },
   {
     name: "Me309V",
-    displayName: "メッサーシュミット Me 309 V1",
+    displayName: "Me 309",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -11005,7 +11005,7 @@
   },
   {
     name: "Do335V",
-    displayName: "ドルニエ Do 335 V13 プファイル",
+    displayName: "プファイル",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -11063,7 +11063,7 @@
   },
   {
     name: "Me262A",
-    displayName: "メッサーシュミット Me 262 A-1a シュヴァルベ",
+    displayName: "シュヴァルベ",
     armaments: [
       {
         label: "機首機関砲",
@@ -11085,7 +11085,7 @@
   },
   {
     name: "Me262B",
-    displayName: "メッサーシュミット Me 262 B-1a/U1 夜戦型",
+    displayName: "シュヴァルベ",
     armaments: [
       {
         label: "機首機関砲",
@@ -11107,7 +11107,7 @@
   },
   {
     name: "He219A",
-    displayName: "ハインケル He 219 A-7 ウーフー",
+    displayName: "ウーフー",
     armaments: [
       {
         label: "主翼根機関砲",
@@ -11133,7 +11133,7 @@
   },
   {
     name: "Me410A",
-    displayName: "メッサーシュミット Me 410 A-1 ホルニッセ",
+    displayName: "ホルニッセ",
     armaments: [
       {
         label: "前方機関砲",
@@ -11159,7 +11159,7 @@
   },
   {
     name: "Fw190A",
-    displayName: "フォッケウルフ Fw 190A",
+    displayName: "Fw 190",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -11185,7 +11185,7 @@
   },
   {
     name: "Fw190D",
-    displayName: "フォッケウルフ Fw 190D ドーラ",
+    displayName: "ドーラ",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -11211,7 +11211,7 @@
   },
   {
     name: "Ta152H",
-    displayName: "フォッケウルフ Ta 152H 高空戦闘機",
+    displayName: "Ta 152",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -11237,7 +11237,7 @@
   },
   {
     name: "Hs123A",
-    displayName: "ヘンシェル Hs 123 A-1",
+    displayName: "Hs 123",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11259,7 +11259,7 @@
   },
   {
     name: "Ju87B",
-    displayName: "ユンカース Ju 87 B-1 スツーカ",
+    displayName: "スツーカ",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11285,7 +11285,7 @@
   },
   {
     name: "Hs129B",
-    displayName: "ヘンシェル Hs 129 B-2",
+    displayName: "Hs 129",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -11311,7 +11311,7 @@
   },
   {
     name: "Ar234B",
-    displayName: "アラド Ar 234 B-2 ブリッツ",
+    displayName: "ブリッツ",
     armaments: [
       {
         label: "爆弾（水平爆撃）",
@@ -11329,7 +11329,7 @@
   },
   {
     name: "Do17E",
-    displayName: "ドルニエ Do 17 E-1",
+    displayName: "Do 17",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11351,7 +11351,7 @@
   },
   {
     name: "Ju88A",
-    displayName: "ユンカース Ju 88 A-5",
+    displayName: "Ju 88",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11373,7 +11373,7 @@
   },
   {
     name: "He111P",
-    displayName: "ハインケル He 111 P-2",
+    displayName: "He 111",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11395,7 +11395,7 @@
   },
   {
     name: "BC138C",
-    displayName: "ブローム・ウント・フォス BV 138 C-1",
+    displayName: "BV 138",
     armaments: [
       {
         label: "機関砲（前方）",
@@ -11421,7 +11421,7 @@
   },
   {
     name: "Do217K",
-    displayName: "ドルニエ Do 217 K-2",
+    displayName: "Do 217",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11451,7 +11451,7 @@
   },
   {
     name: "Fw200C",
-    displayName: "フォッケウルフ Fw 200 C-1 コンドル",
+    displayName: "コンドル",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11473,7 +11473,7 @@
   },
   {
     name: "He177A",
-    displayName: "ハインケル He 177 A-5 グライフ",
+    displayName: "グライフ",
     armaments: [
       {
         label: "機銃（前方）",
@@ -11666,7 +11666,7 @@
   },
   {
     name: "FF33E",
-    displayName: "フリードリヒスハーフェン FF.33e",
+    displayName: "フリードリヒスハーフェン",
     type: "水上偵察機",
     armaments: [],
     description: "フリードリヒスハーフェン FF.33e は、第一次世界大戦中にドイツ帝国海軍向けに開発された双浮舟水上偵察機の主力生産型である。150 馬力の Benz Bz.III を搭載し、武装の代わりに無線送信機を装備した。最大速度は約 124 km/h で、約 180 機が生産された。",
@@ -11703,7 +11703,7 @@
   },
   {
     name: "Potez631",
-    displayName: "ポテ 631 C.3",
+    displayName: "ポテ 631",
     type: "重戦闘機",
     armaments: [
       {
@@ -11730,7 +11730,7 @@
   },
   {
     name: "LN401",
-    displayName: "ロワール＝ニューポール LN 401",
+    displayName: "LN 401",
     type: "艦載急降下爆撃機",
     armaments: [
       {
@@ -11784,7 +11784,7 @@
   },
   {
     name: "Late298",
-    displayName: "ラテコエール 298",
+    displayName: "Late 298",
     type: "水上雷撃機",
     armaments: [
       {
@@ -11811,7 +11811,7 @@
   },
   {
     name: "Br810",
-    displayName: "ブレゲー Br.810",
+    displayName: "Br.810",
     type: "艦上雷撃機",
     armaments: [
       {
@@ -11869,7 +11869,7 @@
   },
   {
     name: "Br521",
-    displayName: "ブレゲー Br.521 ビゼルト",
+    displayName: "ビゼルト",
     type: "水平爆撃機",
     armaments: [
       {
@@ -11892,7 +11892,7 @@
   },
   {
     name: "V-156F",
-    displayName: "ヴォート V-156F",
+    displayName: "V-156F",
     type: "艦載急降下爆撃機",
     armaments: [
       {
@@ -11923,7 +11923,7 @@
   },
   {
     name: "Nord1500",
-    displayName: "ノール 1500 ノレクレール",
+    displayName: "ノレクレール",
     type: "攻撃機",
     armaments: [
       {
@@ -11950,7 +11950,7 @@
   },
   {
     name: "VB10",
-    displayName: "アルスナル VB.10",
+    displayName: "VB.10",
     type: "双発重戦闘機",
     armaments: [
       {
@@ -12032,7 +12032,7 @@
   },
   {
     "name": "CR.42",
-    "displayName": "フィアット CR.42 ファルコ",
+    "displayName": "ファルコ",
     "type": "戦闘機",
     "armaments": [
       {
@@ -12051,7 +12051,7 @@
   },
   {
     "name": "G.50",
-    "displayName": "フィアット G.50 フレッキア",
+    "displayName": "フレッキア",
     "type": "戦闘機",
     "armaments": [
       {
@@ -12070,7 +12070,7 @@
   },
   {
     "name": "C.200",
-    "displayName": "マッキ C.200 サエッタ",
+    "displayName": "サエッタ",
     "type": "戦闘機",
     "armaments": [
       {
@@ -12089,7 +12089,7 @@
   },
   {
     "name": "C.202",
-    "displayName": "マッキ C.202 フォルゴレ",
+    "displayName": "フォルゴレ",
     "type": "戦闘機",
     "armaments": [
       {
@@ -12112,7 +12112,7 @@
   },
   {
     "name": "Re.2005",
-    "displayName": "Re.2005 サジッタリオ",
+    "displayName": "サジッタリオ",
     "type": "戦闘機",
     "armaments": [
       {
@@ -12135,7 +12135,7 @@
   },
   {
     "name": "Re.2002",
-    "displayName": "Re.2002 アリエテ",
+    "displayName": "アリエテ",
     "type": "急降下爆撃機",
     "armaments": [
       {
@@ -12162,7 +12162,7 @@
   },
   {
     "name": "BR.20",
-    "displayName": "フィアット BR.20 シコーニャ",
+    "displayName": "シコーニャ",
     "type": "水平爆撃機",
     "armaments": [
       {
@@ -12189,7 +12189,7 @@
   },
   {
     "name": "Z.1007bis",
-    "displayName": "CANT Z.1007bis アルチオーネ",
+    "displayName": "アルチオーネ",
     "type": "水平爆撃機",
     "armaments": [
       {
@@ -12216,7 +12216,7 @@
   },
   {
     "name": "SM.79bis",
-    "displayName": "サヴォイア・マルケッティ SM.79bis スパルヴィエロ",
+    "displayName": "スパルヴィエロ",
     "type": "魚雷攻撃機",
     "armaments": [
       {
@@ -12243,7 +12243,7 @@
   },
   {
     "name": "Ro.37bis",
-    "displayName": "IMAM Ro.37bis リンス",
+    "displayName": "リンス",
     "type": "偵察機",
     "armaments": [
       {
@@ -12266,7 +12266,7 @@
   },
   {
     "name": "Ro.43",
-    "displayName": "IMAM Ro.43",
+    "displayName": "Ro.43",
     "type": "水上偵察機",
     "armaments": [
       {

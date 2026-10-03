@@ -158,8 +158,7 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	return []*objBullet.Bullet{objBullet.New(
 		lc.BulletName, curPos, targetPos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
-		objBullet.ShotTypeDirect,
-		enemy.ObjType(), bulletSpeed, life,
+		enemy.ObjType(), bulletSpeed, life, 0,
 	)}
 }
 

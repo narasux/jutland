@@ -128,19 +128,9 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 	// 炮弹散布的半径，散布应该随着距离减小而减小
 	rangePercent := distance / g.Range
 	radius := float64(g.BulletSpread) / constants.MapBlockSize * rangePercent
-
-	shotType := objBullet.ShotTypeArcing
-	// 某些情况下使用直射
-	if g.Name == "RailGun" {
-		shotType = objBullet.ShotTypeDirect
-	} else {
-		diameter := objBullet.Map[g.BulletName].Diameter
-		if rangePercent < 0.65 || diameter <= 100 ||
-			(diameter <= 200 && rangePercent < 0.8) ||
-			(diameter <= 300 && rangePercent < 0.65) {
-			shotType = objBullet.ShotTypeDirect
-		}
-	}
+	// 弹道落角随射程连续变陡：近距离平射（危险界不限制），远距离吊射（只保留跨射带），
+	// 不再按口径 / 射程阈值切换直射与曲射。
+	plunge := objBullet.PlungeForRange(rangePercent)
 
 	for i := 0; i < g.BulletCount; i++ {
 		pos := targetPos.Copy()
@@ -150,7 +140,7 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 		bt := objBullet.New(
 			g.BulletName, curPos, pos,
 			shooter.ID(), shooter.ObjType(), shooter.Player(),
-			shotType, enemy.ObjType(), bulletSpeed, life,
+			enemy.ObjType(), bulletSpeed, life, plunge,
 		)
 		g.applyAirburst(bt, enemy.ObjType())
 		bullets = append(bullets, bt)

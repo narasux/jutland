@@ -782,6 +782,48 @@ func TestLandingDeckUsesLongMonotonicDecelerationAndScale(t *testing.T) {
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }
 
+// 最终进近刹车段的速度倍率决定飞机滞留降落阶段的时间：出口速度取最大速度的
+// landingApproachTargetSpeedRatio 时，3 个基准长的刹车段约需 2L/v 帧。
+// 这条测试防止倍率被调回低速，让飞机又在降落阶段磨蹭很久。
+func TestLandingDeckBrakingSegmentStaysShort(t *testing.T) {
+	useDefaultSettings(t)
+	ship := &BattleShip{
+		Length:      128,
+		CurPos:      objPos.NewR(50, 50),
+		CurRotation: 0,
+	}
+	plane := &Plane{
+		MaxSpeed:     0.12,
+		Acceleration: 0.005,
+		RotateSpeed:  12,
+		CurHP:        100,
+		CurPos:       carrierRelativePos2D(ship, -3.5, 1.1),
+		CurRotation:  330,
+		CurSpeed:     0.08,
+		RemainRange:  100,
+	}
+	plane.StartLandingApproach(ship)
+	for range 800 {
+		if plane.UpdateLandingApproach(ship) {
+			break
+		}
+	}
+	plane.StartLandingDeck(ship)
+	frames := 0
+	for ; frames < 800; frames++ {
+		if plane.UpdateLandingDeck(ship) {
+			break
+		}
+	}
+	if frames >= 800 {
+		t.Fatal("landing deck did not finish")
+	}
+	// 0.60 倍速下理论时长约 83 帧；0.30 倍速会涨到约 167 帧。
+	if frames > 120 {
+		t.Fatalf("最终进近刹车段用了 %d 帧，落地速度倍率可能被调回低速", frames)
+	}
+}
+
 func TestLandingAnimationTracksMovingTurningCarrier(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{

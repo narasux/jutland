@@ -331,7 +331,12 @@ func landingApproachEntryReady(p *Plane, base AircraftBase, gate carrierLocalOff
 	if !ok {
 		return false
 	}
-	entrySpeed := landingArcEntryTargetSpeed(arc, base, p.landingCarrierTurnRate)
+	// 与 landingStagingTargetSpeed 共用同一包线：入口速度里基地转向的 omega×r
+	// 分量不参与判定，否则飞机被包线限速后永远达不到该速度，只能反复重引导。
+	entrySpeed := min(
+		landingArcEntryTargetSpeed(arc, base, p.landingCarrierTurnRate),
+		p.landingSpeedCeiling(base),
+	)
 	// 航向容差与圆弧段机头合成使用同一低通转向速率，保证进入圆弧前后
 	// 机头目标航向连续；速度容差仍用原始速率，反映真实的相对闭合速度。
 	targetRotation := landingArcWorldRotation(arc, base, 0, p.landingDisplayTurnRate)

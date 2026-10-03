@@ -25,7 +25,9 @@ const (
 	landingStagingSlowdownOuterSpan = 2.0
 	// landingApproachTargetSpeedRatio 是圆弧进近段的目标出口速度相对最大速度的比例。
 	// 空中先平滑减速到该速度，触舰后再由刹车段减到 0，避免以最高速着舰。
-	landingApproachTargetSpeedRatio = 0.30
+	// 该出口速度同时是最终直线刹车段的入口速度，刹车时长按 2L/v 随它成反比：
+	// 取 0.60（原 0.30 的两倍）把最后的进近滑跑提速一倍，缩短飞机滞留降落阶段的时间。
+	landingApproachTargetSpeedRatio = 0.60
 	// landingMinRelativeSpeedRatio 是进近减速计划的最低相对速度保底比例，
 	// 防止低速机在减速积分中停滞。
 	landingMinRelativeSpeedRatio = 0.05
@@ -33,6 +35,11 @@ const (
 	// （随游戏倍速放大）。玩家满舵时舰体角速度是阶跃信号，滤波把阶跃摊成
 	// 数十帧的平滑偏航，避免进近中的飞机瞬间甩头。
 	landingTurnRateSmoothingRate = 0.08
+	// landingInterceptSampleFrames 是求解旋转参考点拦截位置时的预测采样步长（帧）。
+	landingInterceptSampleFrames = 5.0
+	// landingInterceptMaxFrames 是拦截预测的最长提前量（帧），按一圈上限截断，
+	// 避免极慢转向时把采样拉到无限长。
+	landingInterceptMaxFrames = 600.0
 )
 
 // landingStagingLeg 是 landing_staging 内部的两段引导，不对外增加飞行阶段。
@@ -198,7 +205,9 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 		p.FlightPhaseEndPos = leadInPos
 	}
 
-	// lead-in 会随航母平移和转向。复用上一帧目标可估算其世界速度，避免低速机追不上移动入口。
+	// 参考点随航母平移与转向。世界系"追点"会与旋转入口形成尾随平衡，比例前瞻
+	// 又会在低速时把瞄准点甩到目标前方，因此 lead-in 段改为求解旋转参考点在飞机
+	// 包线内的拦截位置；gate 段仍沿入口切线速度场收敛。
 	targetMotion := 0.0
 	aimPos := p.FlightPhaseEndPos
 	if previousLeg == p.landingStagingLeg {
@@ -207,30 +216,7 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 		if p.landingStagingLeg == landingStagingLegGate {
 			targetMotion = previousTarget.Distance(gatePos)
 		} else {
-			// lead-in 随航母平移与转向，世界系追踪容易与旋转入口形成尾随平衡。
-			// 按当前间距估算抵达帧数进行比例前瞻，瞄准目标的预测位置切弦收敛。
-			gap := p.CurPos.Distance(leadInPos)
-			motionForward := leadInPos.RX - previousTarget.RX
-			motionLateral := leadInPos.RY - previousTarget.RY
-			pursuitSpeed := p.approachSpeed(p.landingStagingTargetSpeed(
-				base,
-				length,
-				p.CurPos.Distance(base.BasePos()),
-				gatePos.Distance(base.BasePos()),
-				entrySpeed,
-				targetMotion,
-			))
-			leadScale := gap / max(pursuitSpeed, 1e-6)
-			leadForward := motionForward * leadScale
-			leadLateral := motionLateral * leadScale
-			// 预测点距离不超过上限，避免急转弯时把瞄准点甩得过远
-			leadMagnitude := math.Hypot(leadForward, leadLateral)
-			maxLead := length * landingLeadInMaxLeadRatio
-			if leadMagnitude > maxLead && leadMagnitude > 0 {
-				leadForward *= maxLead / leadMagnitude
-				leadLateral *= maxLead / leadMagnitude
-			}
-			aimPos = objPos.NewR(leadInPos.RX+leadForward, leadInPos.RY+leadLateral)
+			aimPos = p.landingInterceptPos(base, leadIn, p.landingSpeedCeiling(base))
 		}
 	}
 	if p.landingStagingLeg == landingStagingLegGate {
@@ -284,6 +270,74 @@ func (p *Plane) updateLandingStagingEndPos(base AircraftBase) {
 	p.FlightPhaseEndPos = carrierRelativePos2D(base, length*target.forward, length*target.lateral)
 }
 
+// landingTurnRateDegrees 返回上一模拟帧内基地的实际航向变化（度，带符号）。
+func (p *Plane) landingTurnRateDegrees(base AircraftBase) float64 {
+	return math.Mod(base.BaseRotation()-p.landingCarrierRotation+540, 360) - 180
+}
+
+// landingInterceptPos 求飞机按给定速度最早能到达的基地局部参考点世界位置。
+//
+// 参考点固定在基地局部系，世界系里它绕基地中心以当前转向角速度旋转、并随基地
+// 平移：满舵时舰尾后方数舰长的参考点扫掠速度可以超过飞机最大速度，直接"追点"
+// 会形成尾随平衡；按当前间距做比例前瞻又会把瞄准点甩到目标前方，低速飞机永远
+// 追不上。这里按当前航向与转向速率采样预测参考点未来一圈的位置，取飞机最早可达
+// 的那一点：飞机于是切进参考点的运动圆周，等它转过来，而不是吊在它后面。
+func (p *Plane) landingInterceptPos(
+	base AircraftBase, local carrierLocalOffset, speed float64,
+) objPos.MapPos {
+	length := phaseUnitInMapBlocks(base)
+	turnRate := p.landingTurnRateDegrees(base)
+	baseSpeed := base.BaseSpeed()
+	speed = max(speed, 1e-6)
+
+	// 预测窗口：不转向时只需看当前位置，转向时最多看一圈（并有帧数上限）。
+	maxTau := 0.0
+	if math.Abs(turnRate) > 1e-9 {
+		maxTau = math.Abs(360 / turnRate)
+	}
+	maxTau = min(maxTau, landingInterceptMaxFrames)
+
+	// 逐帧推进基地位置与朝向，按采样步长取参考点世界位置与可达性。
+	pos := base.BasePos()
+	carrierX, carrierY, rotation := pos.RX, pos.RY, base.BaseRotation()
+	bestX, bestY := 0.0, 0.0
+	bestSlack := math.MaxFloat64
+	for tau := 0.0; ; tau += landingInterceptSampleFrames {
+		radians := rotation * math.Pi / 180
+		sinVal, cosVal := math.Sin(radians), math.Cos(radians)
+		refX := carrierX + sinVal*length*local.forward + cosVal*length*local.lateral
+		refY := carrierY - cosVal*length*local.forward + sinVal*length*local.lateral
+		// 至少按一帧的可达距离判定，避免 tau=0 时贴合当前位置导致抖振。
+		slack := p.CurPos.Distance(objPos.NewR(refX, refY)) - speed*max(tau, 1)
+		if slack <= 0 {
+			return objPos.NewR(refX, refY)
+		}
+		if slack < bestSlack {
+			bestSlack, bestX, bestY = slack, refX, refY
+		}
+		if tau >= maxTau {
+			break
+		}
+		for step := 0.0; step < landingInterceptSampleFrames; step++ {
+			radians = rotation * math.Pi / 180
+			carrierX += math.Sin(radians) * baseSpeed
+			carrierY -= math.Cos(radians) * baseSpeed
+			rotation += turnRate
+		}
+	}
+	// 一圈内没有严格可达点（参考点扫得比飞机快）：瞄准可达性最好的采样点。
+	return objPos.NewR(bestX, bestY)
+}
+
+// landingSpeedCeiling 返回飞机返航进近时允许使用的世界速度上限。
+// 飞机自身不应超过最大速度；只有基地（航母）比飞机更快时才追加一点闭合余量，
+// 否则低速舰载机永远追不上母舰。基地转向在长力臂上产生的切向速度（omega×r）
+// 不参与该上限：把参考点的扫掠速度当作速度指令会让飞机以数倍最大速度飞行。
+func (p *Plane) landingSpeedCeiling(base AircraftBase) float64 {
+	maxSpeed := p.MaxSpeed * gameSpeedMultiplier()
+	return max(maxSpeed, base.BaseSpeed()+maxSpeed*landingCatchupClosureRatio)
+}
+
 // landingStagingTargetSpeed 根据距 gate 入口的径向距离，在远端追赶速度和入口速度之间平滑插值。
 func (p *Plane) landingStagingTargetSpeed(
 	base AircraftBase,
@@ -303,7 +357,8 @@ func (p *Plane) landingStagingTargetSpeed(
 	innerRadius := gateDistance + length*landingStagingSlowdownInnerOffset
 	outerRadius := max(innerRadius+length*landingStagingSlowdownOuterSpan, innerRadius+0.5)
 	slowdownProgress := clamp01((distance - innerRadius) / (outerRadius - innerRadius))
-	return lerp(entrySpeed, catchupSpeed, smoothstep(slowdownProgress))
+	// 参考点扫掠速度不参与速度指令，最终速度不越过飞机自己的包线。
+	return min(lerp(entrySpeed, catchupSpeed, smoothstep(slowdownProgress)), p.landingSpeedCeiling(base))
 }
 
 // landingRelativeSpeed 返回飞机相对航母的速度大小，用于缺少圆弧数据时的时长回退计算。
@@ -470,7 +525,7 @@ func (p *Plane) executeLandingGateMovement(base AircraftBase, arc landingApproac
 	executeLandingMovementOnHeading(
 		p,
 		targetRotation,
-		p.approachSpeed(math.Hypot(velocity.forward, velocity.lateral)),
+		p.approachSpeed(min(math.Hypot(velocity.forward, velocity.lateral), p.landingSpeedCeiling(base))),
 	)
 }
 

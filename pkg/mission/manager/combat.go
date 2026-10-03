@@ -464,9 +464,6 @@ func (m *MissionManager) updateShotBullets() {
 		prevRY := bt.CurPos.RY + cosR*bt.Speed
 		// 查询半径要盖住舰体对角线，不能只按弹速，否则桶边缘的船会被漏掉。
 		shipQuery := bt.Speed + maxHullHitRadius
-		if bt.ShotType == objBullet.ShotTypeArcing {
-			shipQuery = maxHullHitRadius
-		}
 
 		switch bt.TargetObjType {
 		case object.TypeShip:
@@ -478,47 +475,31 @@ func (m *MissionManager) updateShotBullets() {
 					return false
 				}
 
-				if bt.ShotType == objBullet.ShotTypeDirect {
-					reach := targetHitRadius(ship.Length, ship.Width) + bt.Speed
-					if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY, reach) {
-						return false
-					}
-					if geometry.IsSegmentIntersectRotatedRectangle(
-						prevRX, prevRY,
-						bt.CurPos.RX, bt.CurPos.RY,
-						ship.CurPos.RX, ship.CurPos.RY,
-						ship.Length/constants.MapBlockSize,
-						ship.Width/constants.MapBlockSize,
-						ship.CurRotation,
-					) {
-						ship.HurtBy(bt)
-						bt.HitObjType = object.TypeShip
-						return true
-					}
-				} else if bt.ShotType == objBullet.ShotTypeArcing {
-					reach := targetHitRadius(ship.Length, ship.Width)
-					if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY, reach) {
-						return false
-					}
-					if geometry.IsPointInRotatedRectangle(
-						bt.CurPos.RX, bt.CurPos.RY,
-						ship.CurPos.RX, ship.CurPos.RY,
-						ship.Length/constants.MapBlockSize,
-						ship.Width/constants.MapBlockSize,
-						ship.CurRotation,
-					) {
-						ship.HurtBy(bt)
-						bt.HitObjType = object.TypeShip
-						return true
-					}
+				reach := targetHitRadius(ship.Length, ship.Width) + bt.Speed
+				if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, ship.CurPos.RX, ship.CurPos.RY, reach) {
+					return false
 				}
-				return false
+				// 危险界：舰心沿弹道方向离瞄准点太远就是打远 / 打近了。
+				// 平射时弹道低伸、危险界不限制，吊射时危险界只有几十米，
+				// 于是"附近落水也算跨射命中"，而"打远一个舰身"就真的脱靶。
+				along := (ship.CurPos.RX-bt.TargetPos.RX)*sinR - (ship.CurPos.RY-bt.TargetPos.RY)*cosR
+				if math.Abs(along) > bt.DangerSpace() {
+					return false
+				}
+				if !geometry.IsSegmentIntersectRotatedRectangle(
+					prevRX, prevRY,
+					bt.CurPos.RX, bt.CurPos.RY,
+					ship.CurPos.RX, ship.CurPos.RY,
+					ship.Length/constants.MapBlockSize,
+					ship.Width/constants.MapBlockSize,
+					ship.CurRotation,
+				) {
+					return false
+				}
+				ship.HurtBy(bt)
+				bt.HitObjType = object.TypeShip
+				return true
 			})
-			if bt.ShotType == objBullet.ShotTypeArcing && bt.HitObjType == object.TypeNone {
-				if m.damageGroundPlanesNear(bt, "") {
-					bt.HitObjType = object.TypePlane
-				}
-			}
 		case object.TypePlane:
 			m.combatBuckets.eachPlane(
 				bt.CurPos.RX, bt.CurPos.RY, bt.Speed+maxHullHitRadius,
@@ -548,7 +529,7 @@ func (m *MissionManager) updateShotBullets() {
 					) {
 						plane.HurtBy(bt)
 						bt.HitObjType = object.TypePlane
-						if bt.ShotType == objBullet.ShotTypeArcing {
+						if bt.Plunge > 0 {
 							m.damageGroundPlanesNear(bt, plane.Uid)
 						}
 						return true
@@ -628,29 +609,26 @@ func (m *MissionManager) updateShotBullets() {
 			bt.HitObjType = object.TypeWater
 			continue
 		}
-		if bt.ShotType == objBullet.ShotTypeArcing {
-			// 曲射炮弹只要到达目的地，就不会再走了（只有到目的地才有伤害）
-			if bt.CurPos.Near(bt.TargetPos, 0.05) {
-				if !resolveDamage(bt) {
-					// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-					bt.HitObjType = object.TypeWater
-				}
-				arrivedBullets = append(arrivedBullets, bt)
-			} else {
-				forwardingBullets = append(forwardingBullets, bt)
-			}
-		} else if bt.ShotType == objBullet.ShotTypeDirect {
-			// 鱼雷碰撞到陆地，应该不再前进
-			if bt.Type == objBullet.TypeTorpedo && m.state.Core.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
-				bt.HitObjType = object.TypeLand
-				arrivedBullets = append(arrivedBullets, bt)
-			} else if resolveDamage(bt) {
-				// 鱼雷 / 直射炮弹没有目的地的说法，碰到就爆炸
-				arrivedBullets = append(arrivedBullets, bt)
-			} else {
-				forwardingBullets = append(forwardingBullets, bt)
-			}
+		// 鱼雷碰撞到陆地，应该不再前进
+		if bt.Type == objBullet.TypeTorpedo && m.state.Core.MissionMD.MapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
+			bt.HitObjType = object.TypeLand
+			arrivedBullets = append(arrivedBullets, bt)
+			continue
 		}
+		// 平射弹药碰到就爆炸，吊射弹药在瞄准点附近结算跨射
+		if resolveDamage(bt) {
+			arrivedBullets = append(arrivedBullets, bt)
+			continue
+		}
+		// 越过瞄准点的吊射弹药落水：结算落点爆炸，不再前进（平射弹药 DangerSpace 无限，永不触发）
+		if bt.PassedAim() {
+			if !m.damageGroundPlanesNear(bt, "") {
+				bt.HitObjType = object.TypeWater
+			}
+			arrivedBullets = append(arrivedBullets, bt)
+			continue
+		}
+		forwardingBullets = append(forwardingBullets, bt)
 	}
 
 	// 继续塔塔开的，保留

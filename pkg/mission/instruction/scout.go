@@ -7,6 +7,7 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
 const (
@@ -17,6 +18,16 @@ const (
 	scoutSafeRange = objUnit.SightRangeScout * 3 / 4
 	// scoutEvadeStep 规避目标点取在背离敌机方向的这个距离上。
 	scoutEvadeStep = 6.0
+	// scoutArriveRadius 是判定「已到达侦察点」的距离（地图格）。
+	scoutArriveRadius = 1.5
+	// scoutLoiterRadius 是到达侦察点后的盘旋半径（地图格）。必须明显小于
+	// scoutArriveRadius，否则飞机绕到远端会被重新判成「还没到达」而直飞圆心。
+	scoutLoiterRadius = 1.0
+	// scoutLoiterLookahead 是盘旋瞄准点在切向前方的距离（地图格）。
+	scoutLoiterLookahead = 1.0
+	// scoutLoiterRadialGain 把盘旋半径误差折算成瞄准点的外向/内向偏移比例，
+	// 与切向分量合成一条收敛到 scoutLoiterRadius 的盘旋航线。
+	scoutLoiterRadialGain = 0.8
 )
 
 // PlaneScout 侦察机飞向一个海面点，并按可见情况跟踪或巡逻。
@@ -88,7 +99,7 @@ func (i *PlaneScout) Exec(ms *state.MissionState) error {
 		}
 	}
 	// 还没到目标点就继续飞。到达后的盘旋从这一拍开始计 30 秒任务时间。
-	if plane.CurPos.Distance(i.point) > 1.5 {
+	if plane.CurPos.Distance(i.point) > scoutArriveRadius {
 		plane.MoveTo(mapCfg, i.point, plane.CurPos, 0)
 		return nil
 	}
@@ -96,6 +107,8 @@ func (i *PlaneScout) Exec(ms *state.MissionState) error {
 		i.loiterUntil = ms.Core.SimTick + objUnit.ReloadTicks(30)
 	}
 	if ms.Core.SimTick < i.loiterUntil {
+		// 飞机到了点位也不能停下，绕着侦察点盘旋，保持视野扫过整片区域。
+		i.orbit(plane, mapCfg)
 		return nil
 	}
 	// 自动侦察盘旋结束后换下一段：先揭未探索，没有就去最远的已探索海面。
@@ -150,6 +163,35 @@ func (i *PlaneScout) evade(ms *state.MissionState, plane *objUnit.Plane) bool {
 		0,
 	)
 	return true
+}
+
+// orbit 让飞机绕着侦察点盘旋。瞄准点由顺时针切向分量与半径误差的径向修正合成：
+// 半径偏小时朝外偏、偏大时朝内偏，飞机按自身转向与速度自然收敛到一条圆航线，
+// 而不是在圆心原地悬停。
+func (i *PlaneScout) orbit(plane *objUnit.Plane, mapCfg *mapcfg.MapCfg) {
+	dx, dy := plane.CurPos.RX-i.point.RX, plane.CurPos.RY-i.point.RY
+	distance := math.Hypot(dx, dy)
+	if distance < 1e-6 {
+		// 正好压在圆心上时方位角没有意义，先朝正北飞出去，下一拍自然进入圆周。
+		dx, dy, distance = 0, -1, 1
+	}
+	// 单位径向（圆心 -> 飞机）与顺时针切向（地图坐标 y 向下）。
+	radialX, radialY := dx/distance, dy/distance
+	tangentX, tangentY := -radialY, radialX
+	radialCorrection := scoutLoiterRadialGain * (scoutLoiterRadius - distance)
+	// 盘旋只是原地绕圈，不额外消耗任务航程：侦察续航沿用到达前的预算。
+	// 否则每段 30 秒盘旋要飞掉几十格航程，侦察机会提前返航、开图范围缩水。
+	remainRange := plane.RemainRange
+	plane.MoveTo(
+		mapCfg,
+		objPos.NewR(
+			plane.CurPos.RX+scoutLoiterLookahead*(tangentX+radialCorrection*radialX),
+			plane.CurPos.RY+scoutLoiterLookahead*(tangentY+radialCorrection*radialY),
+		),
+		plane.CurPos,
+		0,
+	)
+	plane.RemainRange = remainRange
 }
 
 // nearestEnemyPlane 返回离这架飞机最近的敌机及距离，没有敌机时返回 nil。

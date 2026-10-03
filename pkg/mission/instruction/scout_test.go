@@ -1,6 +1,7 @@
 package instruction
 
 import (
+	"math"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/config"
@@ -10,19 +11,41 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-func TestPlaneScoutLoitersThenReturns(t *testing.T) {
-	point := objPos.New(3, 3)
-	plane := &objUnit.Plane{
-		Uid: "scout", Type: objUnit.PlaneTypeScout, CurHP: 10, RemainRange: 80,
-		CurPos: point, FlightPhase: objUnit.PlaneFlightPhaseCruising, SightRange: 36,
-		BelongPlayer: faction.HumanAlpha,
+// newLoiterTestState 造一架带移动策略、停在侦察点上的侦察机，用于盘旋相关测试。
+func newLoiterTestState(t *testing.T, point objPos.MapPos) (*state.MissionState, *objUnit.Plane) {
+	t.Helper()
+	previous := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = previous })
+
+	const name = "scout-loiter-test"
+	old, had := objUnit.PlaneMap[name]
+	objUnit.PlaneMap[name] = &objUnit.Plane{
+		Name: name, Type: objUnit.PlaneTypeScout, TotalHP: 20, CurHP: 20,
+		MaxSpeed: 0.1, RotateSpeed: 30, RemainRange: 80,
+		SightRange: objUnit.SightRangeScout,
 	}
+	t.Cleanup(func() {
+		if had {
+			objUnit.PlaneMap[name] = old
+			return
+		}
+		delete(objUnit.PlaneMap, name)
+	})
+
+	plane := objUnit.NewPlane(name, point, 0, "carrier", faction.HumanAlpha)
 	ms := &state.MissionState{
 		Core: state.MissionCoreState{SimTick: 10},
 		Arena: state.MissionArenaState{
 			Planes: map[string]*objUnit.Plane{plane.Uid: plane},
 		},
 	}
+	return ms, plane
+}
+
+func TestPlaneScoutLoitersThenReturns(t *testing.T) {
+	point := objPos.New(3, 3)
+	ms, plane := newLoiterTestState(t, point)
 	order := NewPlaneScout(plane.Uid, point, true)
 	if err := order.Exec(ms); err != nil {
 		t.Fatal(err)
@@ -36,6 +59,41 @@ func TestPlaneScoutLoitersThenReturns(t *testing.T) {
 	}
 	if !plane.ForceReturn || !order.Executed() {
 		t.Fatal("loiter should end in a return")
+	}
+}
+
+// 到达侦察点后飞机应该绕着点位盘旋，而不是原地悬停。
+func TestPlaneScoutCirclesInsteadOfHovering(t *testing.T) {
+	point := objPos.New(3, 3)
+	ms, plane := newLoiterTestState(t, point)
+	order := NewPlaneScout(plane.Uid, point, true)
+	if err := order.Exec(ms); err != nil {
+		t.Fatal(err)
+	}
+
+	start := plane.CurPos.Copy()
+	turned, moved := 0.0, false
+	previous := point.Angle(plane.CurPos)
+	for range 240 {
+		ms.Core.SimTick++
+		if err := order.Exec(ms); err != nil {
+			t.Fatal(err)
+		}
+		bearing := point.Angle(plane.CurPos)
+		turned += math.Mod(bearing-previous+540, 360) - 180
+		previous = bearing
+		if plane.CurPos.Distance(start) > 0.05 {
+			moved = true
+		}
+		if distance := plane.CurPos.Distance(point); distance > 2*scoutLoiterRadius {
+			t.Fatalf("盘旋时飞离侦察点过远: distance = %v", distance)
+		}
+	}
+	if !moved {
+		t.Fatal("到达侦察点后飞机应该在盘旋，而不是停在原地")
+	}
+	if turned < 180 {
+		t.Fatalf("盘旋应该扫过一整圈方位角，实际累计 %v 度", turned)
 	}
 }
 

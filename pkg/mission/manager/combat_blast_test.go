@@ -60,7 +60,7 @@ func TestBombBlastDamagesNearbyGroundPlanes(t *testing.T) {
 	bt := objBullet.New(
 		bulletName, objPos.NewR(9, 10), objPos.NewR(10, 10),
 		"shooter-1", object.TypePlane, faction.ComputerAlpha,
-		objBullet.ShotTypeArcing, object.TypePlane, 0.4, 10,
+		object.TypePlane, 0.4, 10, 1,
 	)
 	bt.CurPos = objPos.NewR(10, 10)
 

@@ -1996,7 +1996,7 @@
   },
   {
     name: "F7F-3N",
-    displayName: "Tigercat (night fighter)",
+    displayName: "Tigercat",
     armaments: [
       {
         label: "Cannons (Wing Roots)",
@@ -7527,7 +7527,7 @@
   },
   {
     name: "Seafire",
-    displayName: "Mk III",
+    displayName: "Seafire Mk III",
     armaments: [
       {
         label: "Cannons (forward)",
@@ -10779,7 +10779,7 @@
   },
   {
     name: "Bf110G",
-    displayName: "Bf 110 G-4 Night Fighter",
+    displayName: "Bf 110",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -10805,7 +10805,7 @@
   },
   {
     name: "Bf109B",
-    displayName: "Bf 109 B-1",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -10823,7 +10823,7 @@
   },
   {
     name: "Bf109E",
-    displayName: "Bf 109 E-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -10845,7 +10845,7 @@
   },
   {
     name: "Bf109F",
-    displayName: "Bf 109 F-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -10867,7 +10867,7 @@
   },
   {
     name: "Bf109G",
-    displayName: "Bf 109 G-14",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -10889,7 +10889,7 @@
   },
   {
     name: "Bf109K",
-    displayName: "Bf 109 K-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -10911,7 +10911,7 @@
   },
   {
     name: "Ho229",
-    displayName: "Ho 229 Flying-Wing Fighter-Bomber",
+    displayName: "Flying Wing",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -10933,7 +10933,7 @@
   },
   {
     name: "Ta183",
-    displayName: "Ta 183 Huckebein",
+    displayName: "Huckebein",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -10955,7 +10955,7 @@
   },
   {
     name: "Ba349",
-    displayName: "Ba 349 Natter",
+    displayName: "Natter",
     armaments: [
       {
         label: "Rockets (Forward)",
@@ -10977,7 +10977,7 @@
   },
   {
     name: "He162A",
-    displayName: "He 162 A-2 Volksjäger",
+    displayName: "Volksjäger",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -10999,7 +10999,7 @@
   },
   {
     name: "Me163B",
-    displayName: "Me 163 B-1 Komet",
+    displayName: "Komet",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11021,7 +11021,7 @@
   },
   {
     name: "Me209V",
-    displayName: "Me 209 V1 Racing Aircraft",
+    displayName: "Me 209",
     armaments: [],
     description: "The unarmed Me 209 V1 was built solely to capture the absolute speed record for piston-engine aircraft. It first flew in 1938 and reached about 755 km/h in 1939; because it had no service range, the game derives a 360 km endurance figure from its roughly thirty-minute coolant limit. Having no armament, it serves as a land-based scout in the game.",
     author: "Unknown",
@@ -11038,7 +11038,7 @@
   },
   {
     name: "Me309V",
-    displayName: "Me 309 V1",
+    displayName: "Me 309",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11064,7 +11064,7 @@
   },
   {
     name: "Do335V",
-    displayName: "Do 335 V13 Pfeil",
+    displayName: "Pfeil",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11122,7 +11122,7 @@
   },
   {
     name: "Me262A",
-    displayName: "Me 262 A-1a Schwalbe",
+    displayName: "Schwalbe",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11144,7 +11144,7 @@
   },
   {
     name: "Me262B",
-    displayName: "Me 262 B-1a/U1 Night Fighter",
+    displayName: "Schwalbe",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11166,7 +11166,7 @@
   },
   {
     name: "He219A",
-    displayName: "He 219 A-7 Uhu",
+    displayName: "Uhu",
     armaments: [
       {
         label: "Cannons (Wing Roots, Forward)",
@@ -11192,7 +11192,7 @@
   },
   {
     name: "Me410A",
-    displayName: "Me 410 A-1 Hornisse",
+    displayName: "Hornisse",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11218,7 +11218,7 @@
   },
   {
     name: "Fw190A",
-    displayName: "Fw 190A",
+    displayName: "Fw 190",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11244,7 +11244,7 @@
   },
   {
     name: "Fw190D",
-    displayName: "Fw 190D Dora",
+    displayName: "Dora",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11270,7 +11270,7 @@
   },
   {
     name: "Ta152H",
-    displayName: "Ta 152H",
+    displayName: "Ta 152",
     armaments: [
       {
         label: "Cannon (Forward)",
@@ -11296,7 +11296,7 @@
   },
   {
     name: "Hs123A",
-    displayName: "Henschel Hs 123 A-1",
+    displayName: "Hs 123",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11318,7 +11318,7 @@
   },
   {
     name: "Ju87B",
-    displayName: "Junkers Ju 87 B-1 Stuka",
+    displayName: "Stuka",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11344,7 +11344,7 @@
   },
   {
     name: "Hs129B",
-    displayName: "Henschel Hs 129 B-2",
+    displayName: "Hs 129",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11370,7 +11370,7 @@
   },
   {
     name: "Ar234B",
-    displayName: "Arado Ar 234 B-2 Blitz",
+    displayName: "Blitz",
     armaments: [
       {
         label: "Bombs (Level)",
@@ -11388,7 +11388,7 @@
   },
   {
     name: "Do17E",
-    displayName: "Dornier Do 17 E-1",
+    displayName: "Do 17",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11410,7 +11410,7 @@
   },
   {
     name: "Ju88A",
-    displayName: "Junkers Ju 88 A-5",
+    displayName: "Ju 88",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11432,7 +11432,7 @@
   },
   {
     name: "He111P",
-    displayName: "Heinkel He 111 P-2",
+    displayName: "He 111",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11454,7 +11454,7 @@
   },
   {
     name: "BC138C",
-    displayName: "Blohm & Voss BV 138 C-1",
+    displayName: "BV 138",
     armaments: [
       {
         label: "Cannons (Forward)",
@@ -11480,7 +11480,7 @@
   },
   {
     name: "Do217K",
-    displayName: "Dornier Do 217 K-2",
+    displayName: "Do 217",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11510,7 +11510,7 @@
   },
   {
     name: "Fw200C",
-    displayName: "Focke-Wulf Fw 200 C-1 Condor",
+    displayName: "Condor",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11532,7 +11532,7 @@
   },
   {
     name: "He177A",
-    displayName: "Heinkel He 177 A-5 Greif",
+    displayName: "Greif",
     armaments: [
       {
         label: "Machine Guns (Forward)",
@@ -11725,7 +11725,7 @@
   },
   {
     name: "FF33E",
-    displayName: "Friedrichshafen FF.33e",
+    displayName: "Friedrichshafen",
     type: "Reconnaissance Seaplane",
     armaments: [],
     description: "The Friedrichshafen FF.33e was the principal production reconnaissance variant of a German twin-float seaplane developed for the Imperial Navy during World War I. Powered by a 150 hp Benz Bz.III, it traded armament for a radio transmitter and had a maximum speed of about 124 km/h. Roughly 180 FF.33e aircraft were built.",
@@ -11762,7 +11762,7 @@
   },
   {
     name: "Potez631",
-    displayName: "Potez 631 C.3",
+    displayName: "Potez 631",
     type: "Heavy Fighter",
     armaments: [
       {
@@ -11789,7 +11789,7 @@
   },
   {
     name: "LN401",
-    displayName: "Loire-Nieuport LN 401",
+    displayName: "LN 401",
     type: "Carrier Dive Bomber",
     armaments: [
       {
@@ -11843,7 +11843,7 @@
   },
   {
     name: "Late298",
-    displayName: "Latécoère 298",
+    displayName: "Late 298",
     type: "Torpedo Seaplane",
     armaments: [
       {
@@ -11870,7 +11870,7 @@
   },
   {
     name: "Br810",
-    displayName: "Bréguet Br.810",
+    displayName: "Br.810",
     type: "Carrier Torpedo Bomber",
     armaments: [
       {
@@ -11928,7 +11928,7 @@
   },
   {
     name: "Br521",
-    displayName: "Bréguet 521 Bizerte",
+    displayName: "Bizerte",
     type: "Level Bomber",
     armaments: [
       {
@@ -11951,7 +11951,7 @@
   },
   {
     name: "V-156F",
-    displayName: "Vought V-156F",
+    displayName: "V-156F",
     type: "Carrier Dive Bomber",
     armaments: [
       {
@@ -11982,7 +11982,7 @@
   },
   {
     name: "Nord1500",
-    displayName: "Nord 1500 Noréclair",
+    displayName: "Noréclair",
     type: "Attack Aircraft",
     armaments: [
       {
@@ -12009,7 +12009,7 @@
   },
   {
     name: "VB10",
-    displayName: "Arsenal VB.10",
+    displayName: "VB.10",
     type: "Twin-Engine Heavy Interceptor",
     armaments: [
       {
@@ -12091,7 +12091,7 @@
   },
   {
     "name": "CR.42",
-    "displayName": "Fiat CR.42 Falco",
+    "displayName": "Falco",
     "type": "Fighter",
     "armaments": [
       {
@@ -12110,7 +12110,7 @@
   },
   {
     "name": "G.50",
-    "displayName": "Fiat G.50 Freccia",
+    "displayName": "Freccia",
     "type": "Fighter",
     "armaments": [
       {
@@ -12129,7 +12129,7 @@
   },
   {
     "name": "C.200",
-    "displayName": "Macchi C.200 Saetta",
+    "displayName": "Saetta",
     "type": "Fighter",
     "armaments": [
       {
@@ -12148,7 +12148,7 @@
   },
   {
     "name": "C.202",
-    "displayName": "Macchi C.202 Folgore",
+    "displayName": "Folgore",
     "type": "Fighter",
     "armaments": [
       {
@@ -12171,7 +12171,7 @@
   },
   {
     "name": "Re.2005",
-    "displayName": "Reggiane Re.2005 Sagittario",
+    "displayName": "Sagittario",
     "type": "Fighter",
     "armaments": [
       {
@@ -12194,7 +12194,7 @@
   },
   {
     "name": "Re.2002",
-    "displayName": "Reggiane Re.2002 Ariete",
+    "displayName": "Ariete",
     "type": "Dive Bomber",
     "armaments": [
       {
@@ -12221,7 +12221,7 @@
   },
   {
     "name": "BR.20",
-    "displayName": "Fiat BR.20 Cicogna",
+    "displayName": "Cicogna",
     "type": "Level Bomber",
     "armaments": [
       {
@@ -12248,7 +12248,7 @@
   },
   {
     "name": "Z.1007bis",
-    "displayName": "Cant Z.1007bis Alcione",
+    "displayName": "Alcione",
     "type": "Level Bomber",
     "armaments": [
       {
@@ -12275,7 +12275,7 @@
   },
   {
     "name": "SM.79bis",
-    "displayName": "Savoia-Marchetti SM.79bis Sparviero",
+    "displayName": "Sparviero",
     "type": "Torpedo Bomber",
     "armaments": [
       {
@@ -12302,7 +12302,7 @@
   },
   {
     "name": "Ro.37bis",
-    "displayName": "IMAM Ro.37bis Lince",
+    "displayName": "Lince",
     "type": "Reconnaissance Aircraft",
     "armaments": [
       {
@@ -12325,7 +12325,7 @@
   },
   {
     "name": "Ro.43",
-    "displayName": "IMAM Ro.43",
+    "displayName": "Ro.43",
     "type": "Reconnaissance Floatplane",
     "armaments": [
       {

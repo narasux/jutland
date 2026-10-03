@@ -841,7 +841,7 @@
   },
   {
     name: "Barracuda-II",
-    displayName: "Фэйри Барракуда Mk II",
+    displayName: "Барракуда Mk II",
     armaments: [
       {
         label: "Пулемёты (кормовые)",
@@ -1871,7 +1871,7 @@
   },
   {
     name: "F4U-4",
-    displayName: "Воут F4U-4 Корсар",
+    displayName: "Корсар",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -1915,7 +1915,7 @@
   },
   {
     name: "F8F-2",
-    displayName: "Grumman F8F-2 «Биркэт»",
+    displayName: "«Биркэт»",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -2377,7 +2377,7 @@
   },
   {
     name: "Fulmar",
-    displayName: "Фэйри Фулмар Mk I",
+    displayName: "Фулмар Mk I",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -7468,7 +7468,7 @@
   },
   {
     name: "Seafire",
-    displayName: "Mk III",
+    displayName: "Seafire Mk III",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -8288,7 +8288,7 @@
   },
   {
     name: "Swordfish",
-    displayName: "Фэйри Суордфиш Mk I",
+    displayName: "Суордфиш Mk I",
     armaments: [
       {
         label: "Пулемёт (носовой)",
@@ -8471,7 +8471,7 @@
   },
   {
     name: "TBF-1-UK",
-    displayName: "Грумман Эвенджер Mk I",
+    displayName: "Эвенджер Mk I",
     armaments: [
       {
         label: "Пулемёт (носовой)",
@@ -10720,7 +10720,7 @@
   },
   {
     name: "Bf110G",
-    displayName: "Messerschmitt Bf 110 G-4 ночной истребитель",
+    displayName: "Bf 110",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -10746,7 +10746,7 @@
   },
   {
     name: "Bf109B",
-    displayName: "Messerschmitt Bf 109 B-1",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -10764,7 +10764,7 @@
   },
   {
     name: "Bf109E",
-    displayName: "Messerschmitt Bf 109 E-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -10786,7 +10786,7 @@
   },
   {
     name: "Bf109F",
-    displayName: "Messerschmitt Bf 109 F-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -10808,7 +10808,7 @@
   },
   {
     name: "Bf109G",
-    displayName: "Messerschmitt Bf 109 G-14",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -10830,7 +10830,7 @@
   },
   {
     name: "Bf109K",
-    displayName: "Messerschmitt Bf 109 K-4",
+    displayName: "Bf 109",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -10852,7 +10852,7 @@
   },
   {
     name: "Ho229",
-    displayName: "Horten Ho 229 — реактивный истребитель-бомбардировщик «летающее крыло»",
+    displayName: "летающее крыло",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -10874,7 +10874,7 @@
   },
   {
     name: "Ta183",
-    displayName: "Focke-Wulf Ta 183 Huckebein",
+    displayName: "Huckebein",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -10896,7 +10896,7 @@
   },
   {
     name: "Ba349",
-    displayName: "Bachem Ba 349 Natter",
+    displayName: "Natter",
     armaments: [
       {
         label: "Ракеты (вперёд)",
@@ -10918,7 +10918,7 @@
   },
   {
     name: "He162A",
-    displayName: "Heinkel He 162 A-2 Volksjäger",
+    displayName: "Volksjäger",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -10940,7 +10940,7 @@
   },
   {
     name: "Me163B",
-    displayName: "Messerschmitt Me 163 B-1 Komet",
+    displayName: "Komet",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -10962,7 +10962,7 @@
   },
   {
     name: "Me209V",
-    displayName: "Messerschmitt Me 209 V1 — гоночный самолёт",
+    displayName: "гоночный самолёт",
     armaments: [],
     description: "Невооружённый Me 209 V1 был создан исключительно для установления абсолютного рекорда скорости среди самолётов с поршневым двигателем. Он впервые полетел в 1938 году, а в 1939-м достиг около 755 км/ч; поскольку практической дальности у машины не было, в игре принята оценка 360 км по примерно тридцатиминутному ресурсу охлаждающей жидкости. Не имея вооружения, в игре он используется как наземный самолёт-разведчик.",
     author: "Неизвестно",
@@ -10979,7 +10979,7 @@
   },
   {
     name: "Me309V",
-    displayName: "Messerschmitt Me 309 V1",
+    displayName: "Me 309",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -11005,7 +11005,7 @@
   },
   {
     name: "Do335V",
-    displayName: "Dornier Do 335 V13 Pfeil",
+    displayName: "Pfeil",
     armaments: [
       {
         label: "Пушки (вперёд)",
@@ -11063,7 +11063,7 @@
   },
   {
     name: "Me262A",
-    displayName: "Messerschmitt Me 262 A-1a Schwalbe",
+    displayName: "Schwalbe",
     armaments: [
       {
         label: "Пушечное вооружение (носовое)",
@@ -11085,7 +11085,7 @@
   },
   {
     name: "Me262B",
-    displayName: "Messerschmitt Me 262 B-1a/U1 ночной истребитель",
+    displayName: "Schwalbe",
     armaments: [
       {
         label: "Пушечное вооружение (носовое)",
@@ -11107,7 +11107,7 @@
   },
   {
     name: "He219A",
-    displayName: "Heinkel He 219 A-7 Uhu",
+    displayName: "Uhu",
     armaments: [
       {
         label: "Пушки в корне крыла",
@@ -11133,7 +11133,7 @@
   },
   {
     name: "Me410A",
-    displayName: "Messerschmitt Me 410 A-1 Hornisse",
+    displayName: "Hornisse",
     armaments: [
       {
         label: "Пушечное вооружение (вперёд)",
@@ -11159,7 +11159,7 @@
   },
   {
     name: "Fw190A",
-    displayName: "Focke-Wulf Fw 190A",
+    displayName: "Fw 190",
     armaments: [
       {
         label: "Пушки (носовые)",
@@ -11185,7 +11185,7 @@
   },
   {
     name: "Fw190D",
-    displayName: "Focke-Wulf Fw 190D «Дора»",
+    displayName: "«Дора»",
     armaments: [
       {
         label: "Пушки (носовые)",
@@ -11211,7 +11211,7 @@
   },
   {
     name: "Ta152H",
-    displayName: "Focke-Wulf Ta 152H",
+    displayName: "Ta 152",
     armaments: [
       {
         label: "Пушка (носовая)",
@@ -11237,7 +11237,7 @@
   },
   {
     name: "Hs123A",
-    displayName: "Henschel Hs 123 A-1",
+    displayName: "Hs 123",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11259,7 +11259,7 @@
   },
   {
     name: "Ju87B",
-    displayName: "Junkers Ju 87 B-1 «Штука»",
+    displayName: "«Штука»",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11285,7 +11285,7 @@
   },
   {
     name: "Hs129B",
-    displayName: "Henschel Hs 129 B-2",
+    displayName: "Hs 129",
     armaments: [
       {
         label: "Пушечное вооружение (вперёд)",
@@ -11311,7 +11311,7 @@
   },
   {
     name: "Ar234B",
-    displayName: "Arado Ar 234 B-2 «Блиц»",
+    displayName: "«Блиц»",
     armaments: [
       {
         label: "Бомбы (горизонтально)",
@@ -11329,7 +11329,7 @@
   },
   {
     name: "Do17E",
-    displayName: "Dornier Do 17 E-1",
+    displayName: "Do 17",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11351,7 +11351,7 @@
   },
   {
     name: "Ju88A",
-    displayName: "Junkers Ju 88 A-5",
+    displayName: "Ju 88",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11373,7 +11373,7 @@
   },
   {
     name: "He111P",
-    displayName: "Heinkel He 111 P-2",
+    displayName: "He 111",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11395,7 +11395,7 @@
   },
   {
     name: "BC138C",
-    displayName: "Blohm & Voss BV 138 C-1",
+    displayName: "BV 138",
     armaments: [
       {
         label: "Пушечное вооружение (вперёд)",
@@ -11421,7 +11421,7 @@
   },
   {
     name: "Do217K",
-    displayName: "Dornier Do 217 K-2",
+    displayName: "Do 217",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11451,7 +11451,7 @@
   },
   {
     name: "Fw200C",
-    displayName: "Focke-Wulf Fw 200 C-1 «Кондор»",
+    displayName: "«Кондор»",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11473,7 +11473,7 @@
   },
   {
     name: "He177A",
-    displayName: "Heinkel He 177 A-5 «Грайф»",
+    displayName: "«Грайф»",
     armaments: [
       {
         label: "Пулемёты (носовые)",
@@ -11666,7 +11666,7 @@
   },
   {
     name: "FF33E",
-    displayName: "Friedrichshafen FF.33e",
+    displayName: "Friedrichshafen",
     type: "Гидросамолёт-разведчик",
     armaments: [],
     description: "Friedrichshafen FF.33e был основной серийной разведывательной модификацией немецкого двухпоплавкового гидросамолёта, созданного для Императорского флота в годы Первой мировой войны. Оснащённый двигателем Benz Bz.III мощностью 150 л.с., он нёс радиопередатчик вместо вооружения и развивал скорость около 124 км/ч. Было построено примерно 180 машин.",
@@ -11703,7 +11703,7 @@
   },
   {
     name: "Potez631",
-    displayName: "Potez 631 C.3",
+    displayName: "Potez 631",
     type: "Тяжёлый истребитель",
     armaments: [
       {
@@ -11730,7 +11730,7 @@
   },
   {
     name: "LN401",
-    displayName: "Loire-Nieuport LN 401",
+    displayName: "LN 401",
     type: "Палубный пикирующий бомбардировщик",
     armaments: [
       {
@@ -11784,7 +11784,7 @@
   },
   {
     name: "Late298",
-    displayName: "Latécoère 298",
+    displayName: "Late 298",
     type: "Поплавковый торпедоносец",
     armaments: [
       {
@@ -11811,7 +11811,7 @@
   },
   {
     name: "Br810",
-    displayName: "Bréguet Br.810",
+    displayName: "Br.810",
     type: "Палубный торпедоносец",
     armaments: [
       {
@@ -11869,7 +11869,7 @@
   },
   {
     name: "Br521",
-    displayName: "Bréguet 521 Bizerte",
+    displayName: "Bizerte",
     type: "Горизонтальный бомбардировщик",
     armaments: [
       {
@@ -11892,7 +11892,7 @@
   },
   {
     name: "V-156F",
-    displayName: "Vought V-156F",
+    displayName: "V-156F",
     type: "Палубный пикирующий бомбардировщик",
     armaments: [
       {
@@ -11923,7 +11923,7 @@
   },
   {
     name: "Nord1500",
-    displayName: "Nord 1500 Noréclair",
+    displayName: "Noréclair",
     type: "Ударный самолёт",
     armaments: [
       {
@@ -11950,7 +11950,7 @@
   },
   {
     name: "VB10",
-    displayName: "Arsenal VB.10",
+    displayName: "VB.10",
     type: "Тяжёлый двухмоторный перехватчик",
     armaments: [
       {
@@ -12032,7 +12032,7 @@
   },
   {
     "name": "CR.42",
-    "displayName": "Fiat CR.42 Falco",
+    "displayName": "Falco",
     "type": "Истребитель",
     "armaments": [
       {
@@ -12051,7 +12051,7 @@
   },
   {
     "name": "G.50",
-    "displayName": "Fiat G.50 Freccia",
+    "displayName": "Freccia",
     "type": "Истребитель",
     "armaments": [
       {
@@ -12070,7 +12070,7 @@
   },
   {
     "name": "C.200",
-    "displayName": "Macchi C.200 Saetta",
+    "displayName": "Saetta",
     "type": "Истребитель",
     "armaments": [
       {
@@ -12089,7 +12089,7 @@
   },
   {
     "name": "C.202",
-    "displayName": "Macchi C.202 Folgore",
+    "displayName": "Folgore",
     "type": "Истребитель",
     "armaments": [
       {
@@ -12112,7 +12112,7 @@
   },
   {
     "name": "Re.2005",
-    "displayName": "Reggiane Re.2005 Sagittario",
+    "displayName": "Sagittario",
     "type": "Истребитель",
     "armaments": [
       {
@@ -12135,7 +12135,7 @@
   },
   {
     "name": "Re.2002",
-    "displayName": "Reggiane Re.2002 Ariete",
+    "displayName": "Ariete",
     "type": "Пикирующий бомбардировщик",
     "armaments": [
       {
@@ -12162,7 +12162,7 @@
   },
   {
     "name": "BR.20",
-    "displayName": "Fiat BR.20 Cicogna",
+    "displayName": "Cicogna",
     "type": "Бомбардировщик горизонтального полёта",
     "armaments": [
       {
@@ -12189,7 +12189,7 @@
   },
   {
     "name": "Z.1007bis",
-    "displayName": "Cant Z.1007bis Alcione",
+    "displayName": "Alcione",
     "type": "Бомбардировщик горизонтального полёта",
     "armaments": [
       {
@@ -12216,7 +12216,7 @@
   },
   {
     "name": "SM.79bis",
-    "displayName": "Savoia-Marchetti SM.79bis Sparviero",
+    "displayName": "Sparviero",
     "type": "Торпедоносец",
     "armaments": [
       {
@@ -12243,7 +12243,7 @@
   },
   {
     "name": "Ro.37bis",
-    "displayName": "IMAM Ro.37bis Lince",
+    "displayName": "Lince",
     "type": "Разведывательный самолёт",
     "armaments": [
       {
@@ -12266,7 +12266,7 @@
   },
   {
     "name": "Ro.43",
-    "displayName": "IMAM Ro.43",
+    "displayName": "Ro.43",
     "type": "Гидросамолёт-разведчик",
     "armaments": [
       {
