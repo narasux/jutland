@@ -2927,6 +2927,7 @@
           "MTB_77",
           "P_6",
           "stefano_turr",
+          "lupo",
         ],
       },
       {
@@ -3511,6 +3512,12 @@
       {
         name: "stefano_turr",
         pos: [24, 38],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "lupo",
+        pos: [23, 38],
         rotation: 90,
         belongPlayer: "P1"
       },

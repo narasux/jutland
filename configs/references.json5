@@ -302,7 +302,7 @@
       },
     ],
     description: "伊利诺伊号是以未完工的衣阿华级 BB-65 为舰名、按 1942 年 S-511-54 航母改造研究设想的架空完工舰。该方案采用约 263×33 米飞行甲板、两部升降机和一具弹射器，但因载机量较少、成本高于新造埃塞克斯级而取消。",
-    author: "Takács Zoltán (TZoli)",
+    author: "TZoli",
     links: [
       {
         name: "Iowa class Aircraft Carrier Design by TZoli",
@@ -349,7 +349,7 @@
       },
     ],
     description: "肯塔基号（BB-66）是衣阿华级六号舰，1942 年动工后因主机优先供应登陆舰而长期停工，战后未再续建，1958 年作为废钢出售。本图表现的是以该舰舰体改装的航空战列舰设想：舰艏保留主炮塔，其余甲板改为机库、飞行甲板与两部升降机，是战时研究过的衣阿华级舰体航母改造方案的同源架空设计。",
-    author: "Takács Zoltán (TZoli)",
+    author: "TZoli",
     links: [
       {
         name: "Hypothetical Iowa Battle Carrier by TZoli",
@@ -11758,6 +11758,37 @@
       {
         name: "Wikipedia - Maestrale-class destroyer",
         url: "https://en.wikipedia.org/wiki/Maestrale-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "lupo",
+    displayName: "卢波",
+    type: "鱼雷艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x1 100mm/47 OTO",
+      },
+      {
+        label: "防空炮",
+        value: "4x2 20mm/65 布雷达",
+      },
+      {
+        label: "鱼雷",
+        value: "4x1 450mm",
+      },
+    ],
+    description: "卢波号是意大利皇家海军角宿一星级（Spica 级）阿尔奇奥内子级鱼雷艇，1938 年服役。1941 年 5 月，她是驶往克里特岛运兵船队的唯一护航舰，在遭遇英国巡洋舰队时单舰迎战，施放烟幕掩护船队撤离，虽遭重创仍安全返航；1942 年 12 月 2 日于突尼斯海岸附近被英国舰队击沉。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Pinterest - Italian torpedo boat Lupo",
+        url: "https://jp.pinterest.com/pin/759278818401433627/",
+      },
+      {
+        name: "Wikipedia - Italian torpedo boat Lupo",
+        url: "https://en.wikipedia.org/wiki/Italian_torpedo_boat_Lupo",
       },
     ],
   },

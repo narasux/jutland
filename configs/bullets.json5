@@ -1356,6 +1356,14 @@
     damage: 90,
     criticalRate: 0.001
   },
+  // 意大利海军 100mm/47 OTO 单装高平两用炮弹（角宿一星级鱼雷艇）
+  {
+    name: "IT/GB/100",
+    type: "shell",
+    diameter: 100,
+    damage: 53,
+    criticalRate: 0.001
+  },
   // 意大利海军 280mm 主炮弹（安萨尔多 UP-102 方案，纸面设计）
   {
     name: "IT/GB/280",

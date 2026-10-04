@@ -3270,5 +3270,31 @@
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true
+  },
+  // 意大利海军 20mm/65 布雷达 1932 年型单装机炮（天鹰号）
+  {
+    name: "IT/20/65/1",
+    bulletName: "IT/GB/20/1932",
+    bulletCount: 1,
+    reloadTime: 0.5,
+    range: 3,
+    bulletSpread: 25,
+    bulletSpeed: 830,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 13.2mm 布雷达 1931 年型双联装机枪（Freccia 与 Folgore 级驱逐舰）
+  {
+    name: "IT/13.2/2",
+    bulletName: "IT/GB/12.7",
+    bulletCount: 2,
+    reloadTime: 0.04,
+    range: 2,
+    bulletSpread: 12,
+    bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
   }
 ]

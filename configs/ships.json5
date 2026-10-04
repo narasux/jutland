@@ -40343,6 +40343,110 @@
       ]
     }
   },
+  {
+    // Lupo
+    name: "lupo",
+    nation: "it",
+    type: "torpedo_boat",
+    typeAbbr: "TB",
+    year: 1938,
+    totalHP: 1050,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 34,
+    acceleration: 1.1,
+    rotateSpeed: 2.4,
+    length: 81,
+    width: 8,
+    fundsCost: 55,
+    timeCost: 21,
+    weapon: {
+      mainGuns: [
+        // 舰艏中线 100mm
+        {
+          name: "IT/100/47",
+          posPercent: 0.55,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 中后部 100mm A
+        {
+          name: "IT/100/47",
+          posPercent: -0.51,
+          rightFiringArc: [5, 180],
+          leftFiringArc: [180, 355]
+        },
+        // 舰艉 100mm B
+        {
+          name: "IT/100/47",
+          posPercent: -0.63,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 前部右舷 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 前部左舷 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 中段左舷 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 345]
+        },
+        // 中后部中线 20mm C
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.14,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [180, 345]
+        }
+      ],
+      torpedoes: [
+        // 中段右舷 450mm 雷槽 A
+        {
+          name: "IT/450/1",
+          posPercent: -0.12,
+          rightFiringArc: [10, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 中段左舷 450mm 雷槽 A
+        {
+          name: "IT/450/1",
+          posPercent: -0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 350]
+        },
+        // 中后部右舷 450mm 雷槽 B
+        {
+          name: "IT/450/1",
+          posPercent: -0.3,
+          rightFiringArc: [10, 170],
+          leftFiringArc: [360, 360]
+        },
+        // 中后部左舷 450mm 雷槽 B
+        {
+          name: "IT/450/1",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 350]
+        }
+      ]
+    }
+  },
   // 维修船
   // 火神
   {

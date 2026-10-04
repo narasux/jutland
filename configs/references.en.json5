@@ -4368,7 +4368,7 @@
       },
     ],
     description: "Illinois is a fictional completion of the unbuilt Iowa-class BB-65 based on the U.S. Navy's 1942 S-511-54 carrier-conversion study. The proposal had an approximately 263-by-33-metre flight deck, two elevators, and one catapult, but was rejected because it carried fewer aircraft and cost more than a new Essex-class carrier.",
-    author: "Takács Zoltán (TZoli)",
+    author: "TZoli",
     links: [
       {
         name: "Iowa class Aircraft Carrier Design by TZoli",
@@ -4415,7 +4415,7 @@
       },
     ],
     description: "Kentucky (BB-66) was the sixth Iowa-class battleship. Laid down in 1942, her construction stalled when her main machinery was diverted to landing craft, and she was never completed, being sold for scrap in 1958. This drawing shows a battlecarrier conversion of that hull: the forward turret is retained while the rest of the ship becomes a hangar, a flight deck, and two elevators. It is a fictional design in the same line as the wartime studies for converting Iowa-class hulls into carriers.",
-    author: "Takács Zoltán (TZoli)",
+    author: "TZoli",
     links: [
       {
         name: "Hypothetical Iowa Battle Carrier by TZoli",
@@ -11894,6 +11894,37 @@
       {
         name: "Wikipedia — Maestrale-class destroyer",
         url: "https://en.wikipedia.org/wiki/Maestrale-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "lupo",
+    displayName: "Lupo",
+    type: "Motor Torpedo Boat",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x1 100mm/47 OTO",
+      },
+      {
+        label: "Anti-Aircraft Guns",
+        value: "4x2 20mm/65 Breda",
+      },
+      {
+        label: "Torpedoes",
+        value: "4x1 450mm",
+      },
+    ],
+    description: "Lupo was a Spica-class (Alcione subgroup) torpedo boat of the Regia Marina, commissioned in 1938. In May 1941 she was the sole escort of a troop convoy bound for Crete; meeting British cruisers she fought them alone, laying smoke to cover the convoy's withdrawal and returning damaged but afloat. She was sunk off Tunisia on 2 December 1942.",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Pinterest — Italian torpedo boat Lupo",
+        url: "https://jp.pinterest.com/pin/759278818401433627/",
+      },
+      {
+        name: "Wikipedia — Italian torpedo boat Lupo",
+        url: "https://en.wikipedia.org/wiki/Italian_torpedo_boat_Lupo",
       },
     ],
   },

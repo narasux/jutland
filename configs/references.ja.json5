@@ -4309,7 +4309,7 @@
       },
     ],
     description: "イリノイは、未完成のアイオワ級BB-65を艦名に採り、米海軍の1942年S-511-54空母改装研究を基に完成を想定した架空艦である。計画は約263×33メートルの飛行甲板、2基のエレベーター、1基のカタパルトを備える一方、搭載機数と費用の面でエセックス級新造艦に劣るため中止された。",
-    author: "Takács Zoltán (TZoli)",
+    author: "TZoli",
     links: [
       {
         name: "Iowa class Aircraft Carrier Design by TZoli",
@@ -4356,7 +4356,7 @@
       },
     ],
     description: "ケンタッキー（BB-66）はアイオワ級戦艦の6番艦。1942年に起工したが、主機が上陸用舟艇へ優先配分されたため工事が中断し、未成のまま1958年に解体された。本図はその船体を航空戦艦へ改装した想定図で、艦首の主砲塔を残し、残りを格納庫・飛行甲板・二基のエレベーターとしている。戦時中のアイオワ級船体の空母改装研究と同系統の架空設計である。",
-    author: "Takács Zoltán (TZoli)",
+    author: "TZoli",
     links: [
       {
         name: "Hypothetical Iowa Battle Carrier by TZoli",
@@ -11835,6 +11835,37 @@
       {
         name: "ウィキペディア — マエストラーレ級駆逐艦",
         url: "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A8%E3%82%B9%E3%83%88%E3%83%A9%E3%83%BC%E3%83%AC%E7%B4%9A%E9%A7%86%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "lupo",
+    displayName: "ルポ",
+    type: "魚雷艇",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x1 100mm/47 OTO",
+      },
+      {
+        label: "対空機銃",
+        value: "4x2 20mm/65 ブレダ",
+      },
+      {
+        label: "魚雷",
+        value: "4x1 450mm",
+      },
+    ],
+    description: "ルポはイタリア王立海軍のスピカ級（アルチオーネ型）魚雷艇で、1938年に就役した。1941年5月、クレタ島へ向かう輸送船団の唯一の護衛としてイギリス巡洋艦隊と遭遇し、単艦で交戦しながら煙幕で船団の退避を援護、大破しながらも生還した。1942年12月2日、チュニジア沖で撃沈された。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Pinterest — Italian torpedo boat Lupo",
+        url: "https://jp.pinterest.com/pin/759278818401433627/",
+      },
+      {
+        name: "ウィキペディア — ルポ (水雷艇)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%AB%E3%83%9D_(%E6%B0%B4%E9%9B%B7%E8%89%87)",
       },
     ],
   },
