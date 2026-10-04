@@ -4381,6 +4381,53 @@
     ],
   },
   {
+    name: "kentucky_bb66",
+    displayName: "Kentucky",
+    type: "Battlecarrier",
+    armaments: [
+      {
+        label: "Main Guns",
+        value: "1x3 406mm/45 Mark 6",
+      },
+      {
+        label: "Dual-purpose Guns",
+        value: "4x2 + 4x1 127mm/38",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "17x4 40mm/60",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "30x2 20mm/70",
+      },
+      {
+        label: "Fighters",
+        value: "18× F6F-3",
+      },
+      {
+        label: "Torpedo Bombers",
+        value: "12× TBF-1",
+      },
+      {
+        label: "Dive Bombers",
+        value: "16× SB2C-4",
+      },
+    ],
+    description: "Kentucky (BB-66) was the sixth Iowa-class battleship. Laid down in 1942, her construction stalled when her main machinery was diverted to landing craft, and she was never completed, being sold for scrap in 1958. This drawing shows a battlecarrier conversion of that hull: the forward turret is retained while the rest of the ship becomes a hangar, a flight deck, and two elevators. It is a fictional design in the same line as the wartime studies for converting Iowa-class hulls into carriers.",
+    author: "Takács Zoltán (TZoli)",
+    links: [
+      {
+        name: "Hypothetical Iowa Battle Carrier by TZoli",
+        url: "https://www.deviantart.com/tzoli/art/Hypothetical-Iowa-Battle-Carrier-1315943994",
+      },
+      {
+        name: "Wikipedia — USS Kentucky (BB-66)",
+        url: "https://en.wikipedia.org/wiki/USS_Kentucky_%28BB-66%29",
+      },
+    ],
+  },
+  {
     name: "Impact",
     displayName: "Impact Ram",
     type: "Weapon",

@@ -2705,6 +2705,7 @@
           "america",
           "midway",
           "illinois",
+          "kentucky_bb66",
           "yorktown",
           "saratoga",
           "essex",
@@ -3571,6 +3572,12 @@
       {
         name: "wolverine",
         pos: [32, 53],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "kentucky_bb66",
+        pos: [31, 54],
         rotation: 90,
         belongPlayer: "P1"
       },

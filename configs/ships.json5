@@ -1749,6 +1749,390 @@
     }
   },
   {
+    // 肯塔基（衣阿华级航空战列舰改造案）
+    name: "kentucky_bb66",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1946,
+    totalHP: 50000,
+    horizontalDamageReduction: 0.42,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 27,
+    acceleration: 0.28,
+    rotateSpeed: 0.75,
+    length: 270,
+    width: 33,
+    fundsCost: 310,
+    timeCost: 118,
+    weapon: {
+      mainGuns: [
+        // 舰艏 16 英寸三联装主炮
+        {
+          name: "US/406/45/3/MK6",
+          posPercent: 0.45,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+      ],
+      secondaryGuns: [
+        // 5 英寸高平炮（前部双联装 4 座，舰尾单装 4 座，左右舷成对）
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.2,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: 0.14,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.3,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/38/2/MK12",
+          posPercent: -0.36,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.8,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.8,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.86,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 40mm 四联装博福斯（舰艏中线 1 座，前部两舷 2 座，舯后与舰尾两舷 14 座）
+        {
+          name: "US/40/60/4",
+          posPercent: 0.96,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.65,
+          rightFiringArc: [0, 175],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.65,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [185, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.07,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: 0.0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.21,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.26,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.38,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.65,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.75,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.75,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.75,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/40/60/4",
+          posPercent: -0.75,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 双联装厄尔利孔，沿飞行甲板两舷与舰尾成对布置
+        {
+          name: "US/20/70/2",
+          posPercent: 0.71,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.71,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.44,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.48,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.48,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.48,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/2",
+          posPercent: -0.48,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ]
+    },
+    aircraft: {
+      deck: "StraightDeckNoCatapult",
+      takeOffTime: 1.7,
+      groups: [
+        {
+          name: "F6F-3",
+          maxCount: 18
+        },
+        {
+          name: "TBF-1",
+          maxCount: 12
+        },
+        {
+          name: "SB2C-4",
+          maxCount: 16
+        }
+      ]
+    }
+  },
+  {
     // 中途岛
     name: "midway",
     nation: "us",

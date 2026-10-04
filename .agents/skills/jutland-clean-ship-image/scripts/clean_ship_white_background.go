@@ -295,6 +295,121 @@ func removeLargeComponents(
 	return removedComponents, removedPixels
 }
 
+// clearBoxRegions 强制清除显式指定区域内的所有像素，用于删除用户确认要移除的标注内容。
+func clearBoxRegions(img *image.NRGBA, boxes []box) int {
+	if len(boxes) == 0 {
+		return 0
+	}
+	bounds := img.Bounds()
+	w, h := bounds.Dx(), bounds.Dy()
+	cleared := 0
+	for _, current := range boxes {
+		minX, minY, maxX, maxY := current.minX, current.minY, current.maxX, current.maxY
+		if minX < 0 {
+			minX = 0
+		}
+		if minY < 0 {
+			minY = 0
+		}
+		if maxX > w-1 {
+			maxX = w - 1
+		}
+		if maxY > h-1 {
+			maxY = h - 1
+		}
+		for y := minY; y <= maxY; y++ {
+			for x := minX; x <= maxX; x++ {
+				c := nrgbaAt(img, x, y)
+				if c.A == 0 {
+					continue
+				}
+				img.SetNRGBA(x, y, color.NRGBA{R: c.R, G: c.G, B: c.B, A: 0})
+				cleared++
+			}
+		}
+	}
+	return cleared
+}
+
+func bordersTransparent(alpha []uint8, w, h, x, y int) bool {
+	if x > 0 && alpha[y*w+x-1] == 0 {
+		return true
+	}
+	if x < w-1 && alpha[y*w+x+1] == 0 {
+		return true
+	}
+	if y > 0 && alpha[(y-1)*w+x] == 0 {
+		return true
+	}
+	if y < h-1 && alpha[(y+1)*w+x] == 0 {
+		return true
+	}
+	return false
+}
+
+// defringeEdges 把与透明背景相邻、平均通道值不低于 minLuma 的边缘像素按白度降低不透明度，
+// 消除白底清理后在轮廓外侧残留的浅色描边；只作用于透明边界，不改变内部像素。
+func defringeEdges(img *image.NRGBA, minLuma int, passes int) int {
+	if passes <= 0 {
+		return 0
+	}
+	bounds := img.Bounds()
+	w, h := bounds.Dx(), bounds.Dy()
+	span := 255.0 - float64(minLuma)
+	if span <= 0 {
+		span = 1
+	}
+
+	changed := 0
+	for pass := 0; pass < passes; pass++ {
+		alpha := make([]uint8, w*h)
+		for y := 0; y < h; y++ {
+			for x := 0; x < w; x++ {
+				alpha[y*w+x] = nrgbaAt(img, x, y).A
+			}
+		}
+
+		type pendingPixel struct {
+			x int
+			y int
+			a uint8
+		}
+		updates := make([]pendingPixel, 0, w)
+		for y := 0; y < h; y++ {
+			for x := 0; x < w; x++ {
+				a := alpha[y*w+x]
+				if a == 0 || !bordersTransparent(alpha, w, h, x, y) {
+					continue
+				}
+				c := nrgbaAt(img, x, y)
+				luma := (float64(c.R) + float64(c.G) + float64(c.B)) / 3
+				if luma < float64(minLuma) {
+					continue
+				}
+				whiteness := (luma - float64(minLuma)) / span
+				if whiteness > 1 {
+					whiteness = 1
+				}
+				next := uint8(float64(a)*(1-whiteness) + 0.5)
+				if next >= a {
+					continue
+				}
+				updates = append(updates, pendingPixel{x: x, y: y, a: next})
+			}
+		}
+
+		for _, u := range updates {
+			c := nrgbaAt(img, u.x, u.y)
+			img.SetNRGBA(u.x, u.y, color.NRGBA{R: c.R, G: c.G, B: c.B, A: u.a})
+		}
+		changed += len(updates)
+		if len(updates) == 0 {
+			break
+		}
+	}
+	return changed
+}
+
 func countComponents(
 	components []component,
 	minArea int,
@@ -472,13 +587,30 @@ func main() {
 		0,
 		"only remove enclosed near-white components with at most this many pixels; 0 disables the upper bound",
 	)
+	var clearBoxes boxFlags
+	flag.Var(
+		&clearBoxes,
+		"clear-box",
+		"force full transparency over a box minX,minY,maxX,maxY regardless of color; repeatable",
+	)
+	defringe := flag.Bool(
+		"defringe",
+		false,
+		"feather light pixels bordering transparent background to remove leftover white fringe",
+	)
+	defringeMin := flag.Int(
+		"defringe-min",
+		230,
+		"minimum average channel value for a bordering pixel to be feathered",
+	)
+	defringePasses := flag.Int("defringe-passes", 1, "number of defringe passes")
 	flag.Parse()
 
 	if *input == "" {
 		log.Fatal("-input is required")
 	}
 	if *edgeMin < 0 || *edgeMin > 255 || *componentMin < 0 || *componentMin > 255 || *maxSpread < 0 ||
-		*maxSpread > 255 {
+		*maxSpread > 255 || *defringeMin < 0 || *defringeMin > 255 {
 		log.Fatal("threshold values must be in 0..255")
 	}
 
@@ -488,8 +620,15 @@ func main() {
 	}
 
 	removedEdge := floodEdgeBackground(img, uint8(*edgeMin), uint8(*maxSpread))
+	clearedPixels := clearBoxRegions(img, clearBoxes)
 	components := findComponents(img, uint8(*componentMin), uint8(*maxSpread))
-	fmt.Printf("size=%dx%d removed_edge_connected_pixels=%d\n", img.Bounds().Dx(), img.Bounds().Dy(), removedEdge)
+	fmt.Printf(
+		"size=%dx%d removed_edge_connected_pixels=%d cleared_box_pixels=%d\n",
+		img.Bounds().Dx(),
+		img.Bounds().Dy(),
+		removedEdge,
+		clearedPixels,
+	)
 	printComponents(components, *componentLimit)
 
 	if *analyzeOnly {
@@ -524,6 +663,11 @@ func main() {
 		)
 	}
 
+	defringedPixels := 0
+	if *defringe {
+		defringedPixels = defringeEdges(img, *defringeMin, *defringePasses)
+	}
+
 	if err := savePNG(outPath, img); err != nil {
 		log.Fatal(err)
 	}
@@ -556,9 +700,10 @@ func main() {
 	}
 
 	fmt.Printf(
-		"output=%s removed_enclosed_components=%d removed_enclosed_pixels=%d\n",
+		"output=%s removed_enclosed_components=%d removed_enclosed_pixels=%d defringed_pixels=%d\n",
 		outPath,
 		removedComponents,
 		removedPixels,
+		defringedPixels,
 	)
 }

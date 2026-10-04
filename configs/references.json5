@@ -315,6 +315,53 @@
     ],
   },
   {
+    name: "kentucky_bb66",
+    displayName: "肯塔基",
+    type: "航空战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x3 406mm/45 Mark 6",
+      },
+      {
+        label: "高平炮",
+        value: "4x2 + 4x1 127mm/38",
+      },
+      {
+        label: "高炮",
+        value: "17x4 40mm/60",
+      },
+      {
+        label: "高炮",
+        value: "30x2 20mm/70",
+      },
+      {
+        label: "制空战斗机",
+        value: "18x 地狱猫（F6F-3）",
+      },
+      {
+        label: "鱼雷攻击机",
+        value: "12x 复仇者（TBF-1）",
+      },
+      {
+        label: "俯冲轰炸机",
+        value: "16x 地狱俯冲者（SB2C-4）",
+      },
+    ],
+    description: "肯塔基号（BB-66）是衣阿华级六号舰，1942 年动工后因主机优先供应登陆舰而长期停工，战后未再续建，1958 年作为废钢出售。本图表现的是以该舰舰体改装的航空战列舰设想：舰艏保留主炮塔，其余甲板改为机库、飞行甲板与两部升降机，是战时研究过的衣阿华级舰体航母改造方案的同源架空设计。",
+    author: "Takács Zoltán (TZoli)",
+    links: [
+      {
+        name: "Hypothetical Iowa Battle Carrier by TZoli",
+        url: "https://www.deviantart.com/tzoli/art/Hypothetical-Iowa-Battle-Carrier-1315943994",
+      },
+      {
+        name: "维基百科 - 肯塔基號戰艦 (BB-66)",
+        url: "https://zh.wikipedia.org/wiki/%E8%82%AF%E5%A1%94%E5%9F%BA%E8%99%9F%E6%88%B0%E8%89%A6_%28BB-66%29",
+      },
+    ],
+  },
+  {
     name: "midway",
     displayName: "中途岛",
     type: "航空母舰",

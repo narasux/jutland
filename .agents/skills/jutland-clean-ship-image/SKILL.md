@@ -11,7 +11,8 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
 - 来源图和候选输出统一放在 `raw_resources/` 下（例如 `raw_resources/<stem>.cleaned.png`），不要放在仓库根目录或其它临时位置；输入若在别处，先复制到 `raw_resources/` 再处理。
 - 只把白色或近白色背景变为透明；保留原始画布尺寸、方向、比例和图中内容。
 - 不裁剪、不拆分视图、不判断俯视/侧视、不旋转、不缩放、不更新配置，也不覆盖正式游戏资源。
-- 不重绘、补画、风格化或删除飞机、标注等非背景内容。边界不确定时停止并请用户判断。
+- 不重绘、补画、风格化或删除飞机、标注等非背景内容。边界不确定时停止并请用户判断。只有用户明确要求“只保留舰体”时，才允许用 `-clear-box` 删除标注。
+- 允许按要求做有限的边缘处理：`-defringe` 只羽化紧贴透明背景的浅色描边像素，不改变舰体内部像素。
 - 只有用户明确要求时，才允许对限定区域做颜色统一，例如把侧视图舰体迷彩替换为统一海军蓝；必须保留线稿、红色水下船体、旗帜、飞机和文字。
 - 始终保留输入文件，在 `raw_resources/` 输出独立的 `<stem>.cleaned.png` 候选文件；除用户明确要求外，不在仓库中保留预览、备份或其他中间版本。
 - 完成预览后停止，等待用户人工确认；不要在同一轮继续执行 `jutland-add-ship`。
@@ -70,7 +71,18 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
 - `-remove-box` 要求组件包围盒完全落入框内。栏杆带沿舰体有斜度，必要时用相邻多个框覆盖，而不是一个很大的矩形。
 - 完成后再次 `-analyze-only`，并用深色背景检查侧视图：栏杆孔隙应连续透出背景，缆绳之间无白斑，旗帜、飞机与浅灰结构完整。
 
-4. 可选：统一迷彩颜色。
+4. 去除轮廓残留的白边（用户反馈“边缘不干净”时）。
+   - 白底清理后，轮廓外常残留一圈 JPEG 抗锯齿浅色像素，在深色或海面背景上表现为白色描边。用 `-defringe` 只羽化“与透明背景相邻且平均通道值不低于阈值”的像素，不改动内部像素。
+   - 默认参数为 `-defringe-min 230 -defringe-passes 1`；合图里若仍有明显白线，可降到 `-defringe-min 200 -defringe-passes 2`。`200` 只略微软化 200~215 的浅灰结构边缘，明显轻于 `230` 留下的白圈。
+   - 示例：`go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -remove-enclosed-min-area <pixels> -remove-box <...> -defringe -defringe-min 200 -defringe-passes 2`
+   - 验证方式：统计“与透明相邻且亮度 >= 阈值”的像素数量应明显下降，且俯视图红白识别条纹、比例尺白格、图徽白锚等白色内容的像素数保持不变；羽化像素必须全部落在原轮廓 1~3 像素带内，不得进入舰体内部。
+
+5. 可选：按用户要求删除标注内容。
+   - 仅在用户明确要求只保留舰体时执行；默认必须保留标题、图注、图徽、比例尺等标注。
+   - 用 `-clear-box minX,minY,maxX,maxY`（可重复）按矩形强制透明，不受颜色阈值限制。框必须包含标注的全部笔画与抗锯齿边缘，且不得压到舰体、索具或水线。
+   - 先用 `-analyze-only` 或逐行墨迹统计确认框内只有标注、框外相邻区域没有舰体内容；标题与桅杆缆绳、图徽与舰艉旗杆常常挨得很近，必要时把文字拆成多个框。
+
+6. 可选：统一迷彩颜色。
    - 仅在用户明确要求时执行。不要全图换色，必须用一个或多个 `-recolor-box` 限定舰体或上层建筑区域。
    - 默认海军蓝为 Princeton 任务中使用的取样色 `56,68,93`；如用户给定新色样，可先取样再传入 `-target-color R,G,B`。
    - 使用脚本：
@@ -80,7 +92,7 @@ description: Remove white or near-white backgrounds from ship drawings and PNG a
      `go run .agents/skills/jutland-clean-ship-image/scripts/uniform_ship_color.go -input raw_resources/princeton.png -output raw_resources/princeton.png -recolor-box 15,168,1280,455 -skip-box 745,185,770,205 -skip-box 925,278,1165,318`
    - 如果仍有很浅的灰色迷彩图块未统一，可适当提高 `-max-luma` 或增大/细分 `-recolor-box`；如果误伤文字、飞机或标线，优先增加 `-skip-box`，不要放宽到全图处理。
 
-5. 输出确认材料。
+7. 输出确认材料。
    - 保存未缩放的透明 PNG 候选文件于 `raw_resources/`，不覆盖输入或 `resources/images/ships/...` 正式资源；仓库中只保留 `raw_resources/<stem>.cleaned.png`。
    - 用 `view_image` 检查透明 PNG；如需高对比背景预览，输出到 `mktemp -d` 动态创建的临时目录，完成前删除，不保留在仓库。
    - 报告原始/输出尺寸、删除的像素或组件数量、调色像素数量，以及仍需人工判断的区域。
