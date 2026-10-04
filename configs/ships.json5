@@ -36107,6 +36107,415 @@
       ]
     }
   },
+  {
+    // 斯大林格勒 X：82 型大型巡洋舰 X 方案（苏联，TZoli 图纸复原，四联装主炮全部前置）
+    name: "stalingrad_x",
+    nation: "su",
+    type: "cruiser",
+    typeAbbr: "CB",
+    year: 1948,
+    totalHP: 24300,
+    horizontalDamageReduction: 0.32,
+    verticalDamageReduction: 0.18,
+    maxSpeed: 36,
+    acceleration: 0.5,
+    rotateSpeed: 1.25,
+    length: 242.25,
+    width: 26.5,
+    fundsCost: 220,
+    timeCost: 80,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "SU/220/65/4/SM40",
+          posPercent: 0.46,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "SU/220/65/4/SM40",
+          posPercent: 0.31,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 130mm/60 双联装副炮
+        // 右舷中前部副炮 A
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中前部副炮 A
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中后部副炮 B
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中后部副炮 B
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部中线副炮 C
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.49,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后部中线副炮 D
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.56,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      antiAircraftGuns: [
+        // 45mm/78 四联装高炮
+        // 前部中线四联装 A
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.23,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前部中线四联装 B
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.18,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 后部中线四联装 C
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.39,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        // 后部中线四联装 D
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.44,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        // 25mm/79 四联装高炮
+        // 右舷中前部四联装 A
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中前部四联装 A
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.1,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部四联装 B
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部四联装 B
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中后部四联装 C
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.25,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中后部四联装 C
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.25,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部四联装 D
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部四联装 D
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "SUCatapult_stalingrad_x",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Be-4",
+          maxCount: 4
+        }
+      ]
+    }
+  },
+  {
+    // 斯大林格勒 XI：82 型大型巡洋舰 XI 方案（苏联，TZoli 图纸复原，前 3 后 2 主炮塔）
+    name: "stalingrad_xi",
+    nation: "su",
+    type: "cruiser",
+    typeAbbr: "CB",
+    year: 1948,
+    totalHP: 25100,
+    horizontalDamageReduction: 0.32,
+    verticalDamageReduction: 0.18,
+    maxSpeed: 36,
+    acceleration: 0.5,
+    rotateSpeed: 1.25,
+    length: 247.25,
+    width: 26.5,
+    fundsCost: 255,
+    timeCost: 92,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "SU/180/60/3/CM48",
+          posPercent: 0.48,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "SU/180/60/3/CM48",
+          posPercent: 0.37,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 C
+        {
+          name: "SU/180/60/3/CM48",
+          posPercent: 0.27,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [225, 360]
+        },
+        // 后主炮 D
+        {
+          name: "SU/180/60/3/CM48",
+          posPercent: -0.5,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        },
+        // 后主炮 E
+        {
+          name: "SU/180/60/3/CM48",
+          posPercent: -0.61,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 130mm/60 双联装副炮
+        // 前部中线副炮 A
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.19,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 右舷中部副炮 B
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部副炮 B
+        {
+          name: "SU/130/60/2",
+          posPercent: 0.0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中后部副炮 C
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.31,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中后部副炮 C
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部中线副炮 D
+        {
+          name: "SU/130/60/2",
+          posPercent: -0.44,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [180, 315]
+        }
+      ],
+      antiAircraftGuns: [
+        // 45mm/78 四联装高炮
+        // 右舷中前部四联装 A
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中前部四联装 A
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.21,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部四联装 B
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部四联装 B
+        {
+          name: "SU/45/78/4",
+          posPercent: 0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中后部四联装 C
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中后部四联装 C
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部四联装 D
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.43,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部四联装 D
+        {
+          name: "SU/45/78/4",
+          posPercent: -0.43,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 345]
+        },
+        // 25mm/79 四联装高炮
+        // 右舷中前部四联装 E
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中前部四联装 E
+        {
+          name: "SU/25/65/4",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部四联装 F
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部四联装 F
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中后部四联装 G
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.35,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中后部四联装 G
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 345]
+        },
+        // 右舷后部四联装 H
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.35,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部四联装 H
+        {
+          name: "SU/25/65/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 345]
+        }
+      ]
+    },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "SUCatapult_stalingrad_xi",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Be-4",
+          maxCount: 4
+        }
+      ]
+    }
+  },
   // 意大利海军
   {
     // 热那亚：安萨尔多大型巡洋舰方案（意大利，二战末期改装型）

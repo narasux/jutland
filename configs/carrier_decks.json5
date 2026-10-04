@@ -4,7 +4,7 @@
   // catapult_batch.json（美军）/ catapult_batch_jp.json（日军）/ catapult_batch_eu.json（德军 + 英军）
   // / catapult_batch_su.json（苏军）），所以每艘主力舰一个模板、不共用；
   // 美军弹射方向统一为相对舰艏 60° 外偏，日军按史实：中线单台向舰尾 180°，两舷并排向舷外 ±90°
-  // （德军、英军沿用后两条）；苏军弹射器均沿舰体纵轴布置，统一向舰尾 180°。
+  // （德军、英军沿用后两条）；苏军弹射器统一为相对舰艏 60° 外偏（两舷分别为 -60 / +60）。
   // 航母起降甲板模板。
   // 舰船在 ships.json5 的 aircraft.deck 中按名称引用，缺失会在初始化时报错。
   // 坐标约定：
@@ -176,7 +176,7 @@
       approachLength: 3
     }
   },
-  // 塞瓦斯托波尔（意大利提供的 69 型大型巡洋舰方案）：艉部左右并排两台弹射器，均向舰尾方向弹射，
+  // 塞瓦斯托波尔（意大利提供的 69 型大型巡洋舰方案）：艉部左右并排两台弹射器，均向舰艏 60° 外偏弹射，
   // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.78 两舷）
   {
     name: "SUCatapult_sevastopol",
@@ -185,13 +185,13 @@
         forward: 0.889,
         lateral: -0.209,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: -60
       },
       {
         forward: 0.887,
         lateral: 0.212,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: 60
       }
     ],
     landing: {
@@ -202,7 +202,7 @@
       approachLength: 3
     }
   },
-  // 苏维埃联盟（23 型）：舰尾两舷各 1 台，均向舰尾方向弹射，返航舰侧水面回收，
+  // 苏维埃联盟（23 型）：舰尾两舷各 1 台，均向舰艏 60° 外偏弹射，返航舰侧水面回收，
   // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.89 两舷）
   {
     name: "SUCatapult_soviet_union",
@@ -211,13 +211,13 @@
         forward: 0.943,
         lateral: -0.202,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: -60
       },
       {
         forward: 0.941,
         lateral: 0.206,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: 60
       }
     ],
     landing: {
@@ -228,7 +228,7 @@
       approachLength: 3
     }
   },
-  // 苏联（纳尔逊型）：三座主炮全部前置，航空设施退到舰尾，两舷各 1 台均向舰尾方向弹射，
+  // 苏联（纳尔逊型）：三座主炮全部前置，航空设施退到舰尾，两舷各 1 台均向舰艏 60° 外偏弹射，
   // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.79 两舷）
   {
     name: "SUCatapult_soviet_union_nelsonski",
@@ -237,13 +237,13 @@
         forward: 0.895,
         lateral: -0.202,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: -60
       },
       {
         forward: 0.894,
         lateral: 0.197,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: 60
       }
     ],
     landing: {
@@ -254,7 +254,7 @@
       approachLength: 3
     }
   },
-  // 基洛夫（26 型）：舯部中线 1 台（史实为 Heinkel K-12 弹射器），向舰尾方向弹射，
+  // 基洛夫（26 型）：舯部中线 1 台（史实为 Heinkel K-12 弹射器），向舰艏右前方 60° 弹射，
   // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.01 中线）
   {
     name: "SUCatapult_kirov",
@@ -263,7 +263,59 @@
         forward: 0.507,
         lateral: 0.026,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 斯大林格勒 X（82 型大型巡洋舰 X 方案，TZoli 图纸）：艉部左右并排两台弹射器，向舰艏 60° 外偏方向弹射，
+  // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.83 两舷）
+  {
+    name: "SUCatapult_stalingrad_x",
+    takeoffPoints: [
+      {
+        forward: 0.915,
+        lateral: -0.286,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.915,
+        lateral: 0.289,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 斯大林格勒 XI（82 型大型巡洋舰 XI 方案，TZoli 图纸）：弹射器布置同 X 方案，均向舰艏 60° 外偏弹射，
+  // 弹射点坐标按该舰俯视图逐舰标注（舰艏朝右的横向俯视图，posPercent -0.83 两舷）
+  {
+    name: "SUCatapult_stalingrad_xi",
+    takeoffPoints: [
+      {
+        forward: 0.915,
+        lateral: -0.282,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.916,
+        lateral: 0.278,
+        runLength: 0.22,
+        launchAngle: 60
       }
     ],
     landing: {

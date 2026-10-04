@@ -2859,6 +2859,8 @@
           "sverdlov",
           "kirov",
           "sevastopol",
+          "stalingrad_x",
+          "stalingrad_xi",
           "genova",
           "venezia",
           "giuseppe_garibaldi",
@@ -3457,14 +3459,26 @@
         belongPlayer: "P1"
       },
       {
-        name: "rapid",
+        name: "stalingrad_x",
         pos: [38, 28],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "P_6",
+        name: "stalingrad_xi",
         pos: [37, 29],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "rapid",
+        pos: [39, 25],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "P_6",
+        pos: [40, 26],
         rotation: 90,
         belongPlayer: "P1"
       },

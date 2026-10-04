@@ -601,6 +601,14 @@
     damage: 860,
     criticalRate: 0.01
   },
+  // 苏联海军 220mm/65 主炮弹（SM-40 型 1953 年纸面设计，无实弹）
+  {
+    name: "SU/GB/220/1953",
+    type: "shell",
+    diameter: 220,
+    damage: 580,
+    criticalRate: 0.012
+  },
   {
     name: "SU/GB/180/1935",
     type: "shell",

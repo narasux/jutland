@@ -5280,6 +5280,84 @@
     ],
   },
   {
+    name: "stalingrad_x",
+    displayName: "スターリングラード X",
+    type: "大型巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x4 220mm/65 SM-40",
+      },
+      {
+        label: "副砲",
+        value: "6x2 130mm/60 BL-109",
+      },
+      {
+        label: "対空砲",
+        value: "4x4 45mm/78 SM-20-ZIF",
+      },
+      {
+        label: "対空砲",
+        value: "8x4 25mm/79 110-PM",
+      },
+      {
+        label: "水上偵察機",
+        value: "4× Be-4",
+      },
+    ],
+    description: "「スターリングラード X」は、TZoli が 82 号計画大型巡洋艦の初期スケッチ案の一つを復元したものである。1947〜1948 年にかけて 82 号計画では複数の主砲構成が検討され、本方案は小口径・高発射速度で主砲塔をすべて前部に集中させる方向を採った。305mm 方案の採用後、これらのスケッチ案はいずれも図面のみに終わり、起工されなかった。原図には寸法・排水量の記載がなく、本項目の数値は作者の想定値である。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Project 82 Design X",
+        url: "https://www.deviantart.com/tzoli/art/Project-82-Design-X-1196435469",
+      },
+      {
+        name: "ウィキペディア — スターリングラード級重巡洋艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%A9%E3%83%BC%E3%83%89%E7%B4%9A%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "stalingrad_xi",
+    displayName: "スターリングラード XI",
+    type: "大型巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x3 180mm/60 CM-48",
+      },
+      {
+        label: "副砲",
+        value: "6x2 130mm/60 BL-109",
+      },
+      {
+        label: "対空砲",
+        value: "8x4 45mm/78 SM-20-ZIF",
+      },
+      {
+        label: "対空砲",
+        value: "8x4 25mm/79 110-PM",
+      },
+      {
+        label: "水上偵察機",
+        value: "4× Be-4",
+      },
+    ],
+    description: "「スターリングラード XI」は、TZoli が 82 号計画大型巡洋艦のもう一つの初期スケッチ案を復元したもので、口径を下げて主砲数を増やし、前部と後部に砲塔群を分けて配置している。X 案と同様に建造されなかった。原図には寸法・排水量の記載がなく、本項目の数値は作者の想定値である。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Project 82 Design XI",
+        url: "https://www.deviantart.com/tzoli/art/Project-82-Design-XI-1196846743",
+      },
+      {
+        name: "ウィキペディア — スターリングラード級重巡洋艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%A9%E3%83%BC%E3%83%89%E7%B4%9A%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "genova",
     displayName: "ジェノヴァ",
     type: "大型巡洋艦",
@@ -8052,6 +8130,24 @@
   {
     name: "SU/152/57/3",
     displayName: "152mm 三連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/180/60/3/CM48",
+    displayName: "180mm/60 三連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/220/65/4/SM40",
+    displayName: "220mm 四連装砲",
     type: "兵器",
     armaments: [],
     description: "",

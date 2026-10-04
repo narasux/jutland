@@ -6058,6 +6058,84 @@
     ],
   },
   {
+    name: "stalingrad_x",
+    displayName: "斯大林格勒 X",
+    type: "大型巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x4 220mm/65 SM-40",
+      },
+      {
+        label: "副炮",
+        value: "6x2 130mm/60 BL-109",
+      },
+      {
+        label: "高炮",
+        value: "4x4 45mm/78 SM-20-ZIF",
+      },
+      {
+        label: "高炮",
+        value: "8x4 25mm/79 110-PM",
+      },
+      {
+        label: "水上侦察机",
+        value: "4x 别-4（Be-4）",
+      },
+    ],
+    description: "斯大林格勒 X 是 TZoli 复原的 82 型大型巡洋舰早期草图方案之一。1947 至 1948 年间 82 型先后研究过多种主炮配置，该方案走的是小口径、高射速、主炮全部前置的路线；305mm 方案获批准后，这些草图方案都停留在图纸上。原图纸未标注尺度与排水量，本作中的规格与装甲为作者的假定值。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Project 82 Design X",
+        url: "https://www.deviantart.com/tzoli/art/Project-82-Design-X-1196435469",
+      },
+      {
+        name: "维基百科 - 斯大林格勒级战列巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8F%B2%E9%81%94%E6%9E%97%E6%A0%BC%E5%8B%92%E7%B4%9A%E6%88%B0%E9%AC%A5%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "stalingrad_xi",
+    displayName: "斯大林格勒 XI",
+    type: "大型巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "5x3 180mm/60 CM-48",
+      },
+      {
+        label: "副炮",
+        value: "6x2 130mm/60 BL-109",
+      },
+      {
+        label: "高炮",
+        value: "8x4 45mm/78 SM-20-ZIF",
+      },
+      {
+        label: "高炮",
+        value: "8x4 25mm/79 110-PM",
+      },
+      {
+        label: "水上侦察机",
+        value: "4x 别-4（Be-4）",
+      },
+    ],
+    description: "斯大林格勒 XI 是 TZoli 复原的 82 型大型巡洋舰另一份早期草图方案，以数量更多、口径更小的主炮沿舰体前后分置，换取火力密度与持续投射。该方案与 X 方案一样未进入建造阶段。原图纸未标注尺度与排水量，本作中的规格与装甲为作者的假定值。",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Project 82 Design XI",
+        url: "https://www.deviantart.com/tzoli/art/Project-82-Design-XI-1196846743",
+      },
+      {
+        name: "维基百科 - 斯大林格勒级战列巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8F%B2%E9%81%94%E6%9E%97%E6%A0%BC%E5%8B%92%E7%B4%9A%E6%88%B0%E9%AC%A5%E5%B7%A1%E6%B4%8B%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "genova",
     displayName: "热那亚",
     type: "大型巡洋舰",
@@ -10084,6 +10162,24 @@
   {
     name: "SU/250/55/3",
     displayName: "250mm/55 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/220/65/4/SM40",
+    displayName: "220mm/65 四联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/180/60/3/CM48",
+    displayName: "180mm/60 三联装舰炮",
     type: "武器",
     armaments: [],
     description: "",

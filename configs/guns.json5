@@ -2270,6 +2270,32 @@
     antiShip: true,
     antiAircraft: false
   },
+  // 苏联海军 SU/220/65 四联装主炮（SM-40 型 1953 年纸面设计，82 型大型巡洋舰 X 方案）
+  {
+    name: "SU/220/65/4/SM40",
+    bulletName: "SU/GB/220/1953",
+    bulletCount: 4,
+    reloadTime: 10,
+    range: 36,
+    bulletSpread: 110,
+    bulletSpeed: 950,
+    fundsCost: 20,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 苏联海军 SU/180/60 三联装主炮（CM-48 型 1955 年纸面设计，82 型大型巡洋舰 XI 方案）
+  {
+    name: "SU/180/60/3/CM48",
+    bulletName: "SU/GB/180/1935",
+    bulletCount: 3,
+    reloadTime: 5,
+    range: 38,
+    bulletSpread: 100,
+    bulletSpeed: 1000,
+    fundsCost: 15,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 苏联海军 SU/180/57 三联装舰炮
   {
     name: "SU/180/57/3",

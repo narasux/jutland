@@ -5339,6 +5339,84 @@
     ],
   },
   {
+    name: "stalingrad_x",
+    displayName: "Stalingrad X",
+    type: "Large Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x4 220mm/65 SM-40",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x2 130mm/60 BL-109",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x4 45mm/78 SM-20-ZIF",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x4 25mm/79 110-PM",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× Be-4",
+      },
+    ],
+    description: "Stalingrad X is TZoli's reconstruction of one of the early Project 82 large cruiser sketch designs. Between 1947 and 1948 the project was studied with several different main batteries; this variant took the small-calibre, high-rate-of-fire route with all main turrets grouped forward. Once the 305mm design was approved these sketch variants were abandoned, and none of them was laid down. The original drawing gives no dimensions or displacement, so the figures used here are the artist's assumptions.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Project 82 Design X",
+        url: "https://www.deviantart.com/tzoli/art/Project-82-Design-X-1196435469",
+      },
+      {
+        name: "Wikipedia — Stalingrad-class battlecruiser",
+        url: "https://en.wikipedia.org/wiki/Stalingrad-class_battlecruiser",
+      },
+    ],
+  },
+  {
+    name: "stalingrad_xi",
+    displayName: "Stalingrad XI",
+    type: "Large Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x3 180mm/60 CM-48",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x2 130mm/60 BL-109",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x4 45mm/78 SM-20-ZIF",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x4 25mm/79 110-PM",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "4× Be-4",
+      },
+    ],
+    description: "Stalingrad XI is TZoli's reconstruction of another early Project 82 large cruiser sketch design, trading calibre for a larger number of main guns divided between forward and aft turret groups. Like the other sketch variants it never left the drawing board. The original drawing gives no dimensions or displacement, so the figures used here are the artist's assumptions.",
+    author: "Tzoli",
+    links: [
+      {
+        name: "Project 82 Design XI",
+        url: "https://www.deviantart.com/tzoli/art/Project-82-Design-XI-1196846743",
+      },
+      {
+        name: "Wikipedia — Stalingrad-class battlecruiser",
+        url: "https://en.wikipedia.org/wiki/Stalingrad-class_battlecruiser",
+      },
+    ],
+  },
+  {
     name: "genova",
     displayName: "Genova",
     type: "Large Cruiser",
@@ -8111,6 +8189,24 @@
   {
     name: "SU/152/57/3",
     displayName: "152mm Triple Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/180/60/3/CM48",
+    displayName: "180mm/60 Triple Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/220/65/4/SM40",
+    displayName: "220mm Quadruple Mount",
     type: "Weapon",
     armaments: [],
     description: "",
