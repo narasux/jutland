@@ -338,5 +338,16 @@
     range: 18,
     bulletSpeed: 50,
     fundsCost: 60
+  },
+  // 意大利海军 450mm 单装鱼雷发射管（Stefano Türr 等摩托鱼雷艇的舷侧雷槽）
+  {
+    name: "IT/450/1",
+    bulletName: "IT/TB/450",
+    bulletCount: 1,
+    shotInterval: 1,
+    reloadTime: 35,
+    range: 10,
+    bulletSpeed: 45,
+    fundsCost: 15
   }
 ]

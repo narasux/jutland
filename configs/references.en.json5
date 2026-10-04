@@ -11755,6 +11755,33 @@
     ],
   },
   {
+    name: "stefano_turr",
+    displayName: "Stefano Türr",
+    type: "Motor Torpedo Boat",
+    armaments: [
+      {
+        label: "Machine Guns",
+        value: "3x1 13.2mm/76 Breda",
+      },
+      {
+        label: "Torpedoes",
+        value: "4x1 450mm",
+      },
+    ],
+    description: "Stefano Türr was an experimental motor torpedo boat completed for the Regia Marina in 1937. Designed by Baglietto and built by CMA at Marina di Pisa, she used aluminium alloys extensively in the hull structure to save weight, yet still fell short of her designed 34 knots, and the boat was discarded in July 1941. She was named after the Hungarian-born Italian patriot István Türr.",
+    author: "Eswube",
+    links: [
+      {
+        name: "Shipbucket — Stefano Türr 1937",
+        url: "https://www.shipbucket.com/drawings/8512",
+      },
+      {
+        name: "Wikipedia — Motor torpedo boat",
+        url: "https://en.wikipedia.org/wiki/Motor_torpedo_boat",
+      },
+    ],
+  },
+  {
     name: "venezia",
     displayName: "Venezia",
     type: "Large Cruiser",

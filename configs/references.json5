@@ -11619,6 +11619,33 @@
     ],
   },
   {
+    name: "stefano_turr",
+    displayName: "斯特凡诺·图尔",
+    type: "鱼雷艇",
+    armaments: [
+      {
+        label: "机枪",
+        value: "3x1 13.2mm/76 布雷达",
+      },
+      {
+        label: "鱼雷",
+        value: "4x1 450mm",
+      },
+    ],
+    description: "斯特凡诺·图尔号是意大利皇家海军 1937 年建成的一艘实验性摩托鱼雷艇，由巴列托（Baglietto）设计、CMA 在比萨海滨建造。为压低重量，艇体结构大量使用铝合金，但最终仍未达到 34 节的设计航速，同级仅此一艘，1941 年 7 月除籍。艇名取自匈牙利裔意大利爱国者伊什特万·图尔（Stefano Türr）。",
+    author: "Eswube",
+    links: [
+      {
+        name: "Shipbucket - Stefano Türr 1937",
+        url: "https://www.shipbucket.com/drawings/8512",
+      },
+      {
+        name: "维基百科 - 鱼雷艇",
+        url: "https://zh.wikipedia.org/wiki/%E9%B1%BC%E9%9B%B7%E8%89%87",
+      },
+    ],
+  },
+  {
     name: "venezia",
     displayName: "威尼斯",
     type: "大型巡洋舰",

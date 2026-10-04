@@ -39475,6 +39475,81 @@
       ]
     }
   },
+  // 意大利海军
+  {
+    // Stefano Türr
+    name: "stefano_turr",
+    nation: "it",
+    type: "torpedo_boat",
+    typeAbbr: "TB",
+    year: 1937,
+    totalHP: 64,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 30,
+    acceleration: 2.5,
+    rotateSpeed: 6,
+    length: 32,
+    width: 6,
+    fundsCost: 33,
+    timeCost: 13,
+    weapon: {
+      mainGuns: [
+        // 13.2mm/76 单装机枪，右舷中段
+        {
+          name: "IT/12.7",
+          posPercent: 0.64,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 13.2mm/76 单装机枪，左舷中段
+        {
+          name: "IT/12.7",
+          posPercent: 0.52,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 13.2mm/76 单装机枪，舰尾中轴
+        {
+          name: "IT/12.7",
+          posPercent: -0.77,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [],
+      torpedoes: [
+        // 450mm 舷侧雷槽，右舷前
+        {
+          name: "IT/450/1",
+          posPercent: -0.17,
+          rightFiringArc: [0, 30],
+          leftFiringArc: [360, 360]
+        },
+        // 450mm 舷侧雷槽，左舷前
+        {
+          name: "IT/450/1",
+          posPercent: -0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [330, 360]
+        },
+        // 450mm 舷侧雷槽，右舷后
+        {
+          name: "IT/450/1",
+          posPercent: -0.51,
+          rightFiringArc: [0, 30],
+          leftFiringArc: [360, 360]
+        },
+        // 450mm 舷侧雷槽，左舷后
+        {
+          name: "IT/450/1",
+          posPercent: -0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [330, 360]
+        }
+      ]
+    }
+  },
   // 维修船
   // 火神
   {

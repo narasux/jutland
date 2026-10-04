@@ -11696,6 +11696,33 @@
     ],
   },
   {
+    name: "stefano_turr",
+    displayName: "ステファノ・テュル",
+    type: "魚雷艇",
+    armaments: [
+      {
+        label: "機関銃",
+        value: "3x1 13.2mm/76 ブレダ",
+      },
+      {
+        label: "魚雷",
+        value: "4x1 450mm",
+      },
+    ],
+    description: "ステファノ・テュルは1937年にイタリア王立海軍へ引き渡された実験的なモーター水雷艇である。バリエットが設計し、CMA がマリーナ・ディ・ピサで建造した。重量軽減のため船体構造にアルミニウム合金を多用したが、設計速力34ノットには届かず、1941年7月に除籍された。艇名はハンガリー出身のイタリアの愛国者イシュトヴァーン・テュルにちなむ。",
+    author: "Eswube",
+    links: [
+      {
+        name: "Shipbucket — Stefano Türr 1937",
+        url: "https://www.shipbucket.com/drawings/8512",
+      },
+      {
+        name: "ウィキペディア — 魚雷艇",
+        url: "https://ja.wikipedia.org/wiki/%E9%AD%9A%E9%9B%B7%E8%89%87",
+      },
+    ],
+  },
+  {
     name: "venezia",
     displayName: "ヴェネツィア",
     type: "大型巡洋艦",

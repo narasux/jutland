@@ -2923,6 +2923,7 @@
           "S_100",
           "MTB_77",
           "P_6",
+          "stefano_turr",
         ],
       },
       {
@@ -3489,6 +3490,12 @@
       {
         name: "tramontana",
         pos: [23, 37],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "stefano_turr",
+        pos: [24, 38],
         rotation: 90,
         belongPlayer: "P1"
       },
