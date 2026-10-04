@@ -2866,6 +2866,7 @@
           "genova",
           "venezia",
           "giuseppe_garibaldi",
+          "bolzano",
           "duquesne",
           "jeanne_d_arc",
           "de_grasse",
@@ -3503,6 +3504,12 @@
       {
         name: "venezia",
         pos: [23, 35],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "bolzano",
+        pos: [24, 36],
         rotation: 90,
         belongPlayer: "P1"
       },

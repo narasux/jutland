@@ -12126,6 +12126,45 @@
     ],
   },
   {
+    name: "bolzano",
+    displayName: "ボルツァーノ",
+    type: "重巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 203mm/53 アンサルド 1929 年型",
+      },
+      {
+        label: "副砲",
+        value: "6x2 100mm/47 OTO 1928 年型",
+      },
+      {
+        label: "対空砲",
+        value: "4x1 40mm/39 ヴィッカース＝テルニ 1917 年型",
+      },
+      {
+        label: "魚雷",
+        value: "2x4 533mm",
+      },
+      {
+        label: "水上機",
+        value: "3x IMAM Ro.43",
+      },
+    ],
+    description: "トレント級の3番艦だが、ザラ級風の船首楼、ポーラ型の艦橋、そしてカタパルトを2本の煙突の中間に移すなど設計変更が大きく、しばしば別扱いされる。1941年と1942年8月に英潜水艦の魚雷を2度受け、2度目の大破でパナレーア島に座礁、ラスペツィアに曳航された際も修復は完了していなかった。1943年のイタリア降伏時にドイツ軍に接収され、1944年6月、連合国側に付いたイタリアの水中爆破要員が人間魚雷で港内にて撃沈、戦後引き揚げ解体された。",
+    author: "Gemini 3.6 Flash",
+    links: [
+      {
+        name: "RN Bolzano [Heavy Cruiser] (1933)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/92154/view/rn_bolzano_heavy_cruiser_1933/",
+      },
+      {
+        name: "ウィキペディア — ボルツァーノ (重巡洋艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%AB%E3%83%84%E3%82%A1%E3%83%BC%E3%83%8E_(%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "フリードリヒスハーフェン",
     type: "水上偵察機",
@@ -12518,6 +12557,24 @@
     author: "",
     links: [
     ],
+  },
+  {
+    name: "IT/100/47/2",
+    displayName: "100mm/47 連装両用砲（OTO 1928 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/203/53/2",
+    displayName: "203mm/53 連装砲（アンサルド 1929 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
   },
   {
     name: "IT/37/54/2/M1932",

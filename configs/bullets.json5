@@ -1308,6 +1308,14 @@
     damage: 880,
     criticalRate: 0.01
   },
+  // 意大利海军 203mm/53 安萨尔多 1929 年型主炮弹（博尔扎诺）
+  {
+    name: "IT/GB/203/1929",
+    type: "shell",
+    diameter: 203,
+    damage: 440,
+    criticalRate: 0.01
+  },
   // 意大利海军 135mm/45 安萨尔多 1938 年型舰炮弹
   {
     name: "IT/GB/135/1938",

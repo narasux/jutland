@@ -12049,6 +12049,45 @@
     ],
   },
   {
+    name: "bolzano",
+    displayName: "博尔扎诺",
+    type: "重巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 203mm/53 Ansaldo Model 1929",
+      },
+      {
+        label: "副炮",
+        value: "6x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "高炮",
+        value: "4x1 40mm/39 Vickers-Terni Model 1917",
+      },
+      {
+        label: "鱼雷",
+        value: "2x4 533mm",
+      },
+      {
+        label: "水上侦察机",
+        value: "3x IMAM Ro.43",
+      },
+    ],
+    description: "特伦托级的第三艘，但改用扎拉级式舰艏、波拉式舰桥，并把弹射器移到两烟囱之间的舯部，设计差异较大，常被单独看待。1941 与 1942 年两度遭英国潜艇鱼雷重创，第二次重伤后搁浅于帕纳雷阿岛，拖至拉斯佩齐亚时修复工作仍未完成；1943 年意大利投降之际被德军俘获，1944 年 6 月由加入盟军的意大利蛙人以人操鱼雷潜入港内击沉，战后打捞拆解。",
+    author: "Gemini 3.6 Flash",
+    links: [
+      {
+        name: "RN Bolzano [Heavy Cruiser] (1933)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/92154/view/rn_bolzano_heavy_cruiser_1933/",
+      },
+      {
+        name: "维基百科 - 特伦托级重巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%89%B9%E4%BC%A6%E6%89%98%E7%BA%A7%E9%87%8D%E5%B7%A1%E6%B4%8B%E8%88%B0",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "腓特烈港",
     type: "水上侦察机",
@@ -12441,6 +12480,24 @@
     author: "",
     links: [
     ],
+  },
+  {
+    name: "IT/100/47/2",
+    displayName: "100mm/47 双联装高平两用炮（OTO 1928 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/203/53/2",
+    displayName: "203mm/53 双联装舰炮（安萨尔多 1929 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
   },
   {
     name: "IT/37/54/2/M1932",

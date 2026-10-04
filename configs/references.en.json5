@@ -12185,6 +12185,45 @@
     ],
   },
   {
+    name: "bolzano",
+    displayName: "Bolzano",
+    type: "Heavy Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 203mm/53 Ansaldo Model 1929",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x1 40mm/39 Vickers-Terni Model 1917",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x4 533mm",
+      },
+      {
+        label: "Seaplanes",
+        value: "3x IMAM Ro.43",
+      },
+    ],
+    description: "The third ship of the Trento class, but with a Zara-style forecastle, a Pola-style bridge and the catapult moved amidships between the funnels, so her design differs enough that she is often treated on her own. She was torpedoed by British submarines in 1941 and again in August 1942; the second hit ran her aground near Panarea, and when she was towed to La Spezia her repairs were still incomplete. Germany captured her after the Italian armistice in 1943, and she was sunk in harbour in June 1944 by Italian frogmen using human torpedoes; the wreck was raised and broken up after the war.",
+    author: "Gemini 3.6 Flash",
+    links: [
+      {
+        name: "RN Bolzano [Heavy Cruiser] (1933)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/92154/view/rn_bolzano_heavy_cruiser_1933/",
+      },
+      {
+        name: "Wikipedia — Italian cruiser Bolzano",
+        url: "https://en.wikipedia.org/wiki/Italian_cruiser_Bolzano",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "Friedrichshafen",
     type: "Reconnaissance Seaplane",
@@ -12577,6 +12616,24 @@
     author: "",
     links: [
     ],
+  },
+  {
+    name: "IT/100/47/2",
+    displayName: "100mm/47 Twin Dual-purpose Mount (OTO Model 1928)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/203/53/2",
+    displayName: "203mm/53 Twin Mount (Ansaldo Model 1929)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
   },
   {
     name: "IT/37/54/2/M1932",
