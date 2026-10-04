@@ -8389,6 +8389,16 @@
     ],
   },
   {
+    name: "IT/533/2",
+    displayName: "533mm Twin Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "IT/450/1",
     displayName: "450mm Single Torpedo Launcher",
     type: "Weapon",
@@ -12224,6 +12234,84 @@
     ],
   },
   {
+    name: "muzio_attendolo",
+    displayName: "Muzio Attendolo",
+    type: "Light Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 152mm/53 Ansaldo Model 1929",
+      },
+      {
+        label: "Secondary Battery",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x2 533mm",
+      },
+      {
+        label: "Seaplanes",
+        value: "2x IMAM Ro.43",
+      },
+    ],
+    description: "The second ship of the Raimondo Montecuccoli class, the third batch of Italy’s Condottieri light cruisers, named after the 15th-century condottiero Muzio Attendolo Sforza. This batch traded a little speed for a real side belt and turret armour. While intercepting the Pedestal convoy in August 1942 she was torpedoed by HMS Unbroken and lost her entire bow, but damage control brought her back to port; before repairs were finished, a US B-24 bomb hit her at Naples on 4 December 1942 and she capsized. The wreck was raised and broken up after the war.",
+    author: "Gemini 3.6 Flash",
+    links: [
+      {
+        name: "RN Muzio Attendolo [Light Cruiser] (1941)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/89549/view/rn_muzio_attendolo_light_cruiser_1941/",
+      },
+      {
+        name: "Wikipedia — Italian cruiser Muzio Attendolo",
+        url: "https://en.wikipedia.org/wiki/Italian_cruiser_Muzio_Attendolo",
+      },
+    ],
+  },
+  {
+    name: "bartolomeo_colleoni",
+    displayName: "Bartolomeo Colleoni",
+    type: "Light Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 152mm/53 Ansaldo Model 1926",
+      },
+      {
+        label: "Secondary Battery",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "The second ship of the Giussano class and the first batch of the Condottieri light cruisers. Built for speed, she carried only a very thin side belt and ran about 40 knots on trials. In the Battle of Cape Spada on 19 July 1940 she and her sister Giovanni dalle Bande Nere met the Australian light cruiser Sydney and a British destroyer flotilla; a shell in her engine room left her without power or steering, and British destroyers finished her with torpedoes. About 121 of her crew were killed and some 555 were rescued. The drawing shows her as she was in 1940, without catapult or seaplane.",
+    author: "Sam#28",
+    links: [
+      {
+        name: "RN Bartolomeo Colleoni [Cruiser] (1933)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/15225/view/rn_bartolomeo_colleoni_cruiser/",
+      },
+      {
+        name: "Wikipedia — Italian cruiser Bartolomeo Colleoni",
+        url: "https://en.wikipedia.org/wiki/Italian_cruiser_Bartolomeo_Colleoni",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "Friedrichshafen",
     type: "Reconnaissance Seaplane",
@@ -12629,6 +12717,24 @@
   {
     name: "IT/203/53/2",
     displayName: "203mm/53 Twin Mount (Ansaldo Model 1929)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1929",
+    displayName: "152mm/53 Twin Mount (Ansaldo Model 1929)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1926",
+    displayName: "152mm/53 Twin Mount (Ansaldo Model 1926)",
     type: "Weapon",
     armaments: [],
     description: "",

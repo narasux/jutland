@@ -1316,6 +1316,14 @@
     damage: 440,
     criticalRate: 0.01
   },
+  // 意大利海军 152mm/53 安萨尔多 1926/1929 年型舰炮弹（佣兵队长级轻巡洋舰共用弹种）
+  {
+    name: "IT/GB/152/1929",
+    type: "shell",
+    diameter: 152,
+    damage: 165,
+    criticalRate: 0.004
+  },
   // 意大利海军 135mm/45 安萨尔多 1938 年型舰炮弹
   {
     name: "IT/GB/135/1938",

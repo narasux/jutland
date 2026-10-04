@@ -8330,6 +8330,16 @@
     ],
   },
   {
+    name: "IT/533/2",
+    displayName: "533mm Twin торпедный аппарат",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "IT/450/1",
     displayName: "450mm Single торпедный аппарат",
     type: "Оружие",
@@ -12165,6 +12175,84 @@
     ],
   },
   {
+    name: "muzio_attendolo",
+    displayName: "Муцио Аттендоло",
+    type: "Лёгкий крейсер",
+    armaments: [
+      {
+        label: "Главная батарея",
+        value: "4x2 152mm/53 Ansaldo Model 1929",
+      },
+      {
+        label: "Вспомогательная батарея",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "4x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "Торпеды",
+        value: "2x2 533mm",
+      },
+      {
+        label: "Гидросамолёты",
+        value: "2x IMAM Ro.43",
+      },
+    ],
+    description: "Второй корабль типа «Раймондо Монтекукколи» — третьей серии итальянских лёгких крейсеров «Кондоттьери»; назван в честь кондотьера XV века Муцио Аттендоло Сфорца. В этой серии впервые усилили бортовую и башенную броню. В августе 1942 года при перехвате конвоя операции «Пьедестал» крейсер был торпедирован британской подлодкой HMS Unbroken и лишился носовой оконечности, но его довели до порта; ремонт не был завершён, и 4 декабря 1942 года в Неаполе корабль опрокинулся после прямого попадания бомбы американского B-24. После войны корпус подняли и разобрали.",
+    author: "Gemini 3.6 Flash",
+    links: [
+      {
+        name: "RN Muzio Attendolo [Light Cruiser] (1941)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/89549/view/rn_muzio_attendolo_light_cruiser_1941/",
+      },
+      {
+        name: "Википедия — Муцио Аттендоло (крейсер)",
+        url: "https://ru.wikipedia.org/wiki/%D0%9C%D1%83%D1%86%D0%B8%D0%BE_%D0%90%D1%82%D1%82%D0%B5%D0%BD%D0%B4%D0%BE%D0%BB%D0%BE_%28%D0%BA%D1%80%D0%B5%D0%B9%D1%81%D0%B5%D1%80%29",
+      },
+    ],
+  },
+  {
+    name: "bartolomeo_colleoni",
+    displayName: "Бартоломео Коллеони",
+    type: "Лёгкий крейсер",
+    armaments: [
+      {
+        label: "Главная батарея",
+        value: "4x2 152mm/53 Ansaldo Model 1926",
+      },
+      {
+        label: "Вспомогательная батарея",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "Второй корабль типа «Джуссано» и первая серия лёгких крейсеров «Кондоттьери». Ради скорости броневой пояс был минимальным, на испытаниях корабль держал около 40 узлов. В бою у мыса Спада 19 июля 1940 года он вместе с «Джованни делле Банде Нере» столкнулся с австралийским лёгким крейсером «Сидней» и британскими эсминцами; попадание в машинное отделение лишило его хода и управления, после чего эсминцы добили крейсер торпедами. Погибли около 121 человека, около 555 были спасены. Рисунок отражает состояние на 1940 год, без катапульты и гидросамолёта.",
+    author: "Sam#28",
+    links: [
+      {
+        name: "RN Bartolomeo Colleoni [Cruiser] (1933)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/15225/view/rn_bartolomeo_colleoni_cruiser/",
+      },
+      {
+        name: "Википедия — Бартоломео Коллеони (крейсер)",
+        url: "https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D1%80%D1%82%D0%BE%D0%BB%D0%BE%D0%BC%D0%B5%D0%BE_%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BE%D0%BD%D0%B8_%28%D0%BA%D1%80%D0%B5%D0%B9%D1%81%D0%B5%D1%80%29",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "Friedrichshafen",
     type: "Гидросамолёт-разведчик",
@@ -12570,6 +12658,24 @@
   {
     name: "IT/203/53/2",
     displayName: "203-мм спаренная установка (Ansaldo, модель 1929)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1929",
+    displayName: "152-мм спаренная установка (Ansaldo, модель 1929)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1926",
+    displayName: "152-мм спаренная установка (Ansaldo, модель 1926)",
     type: "Оружие",
     armaments: [],
     description: "",

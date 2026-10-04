@@ -339,6 +339,17 @@
     bulletSpeed: 50,
     fundsCost: 60
   },
+  // 意大利海军 533mm 双联装鱼雷发射管（佣兵队长级轻巡洋舰舯部两舷）
+  {
+    name: "IT/533/2",
+    bulletName: "IT/TB/533/1932",
+    bulletCount: 2,
+    shotInterval: 1,
+    reloadTime: 50,
+    range: 18,
+    bulletSpeed: 50,
+    fundsCost: 45
+  },
   // 意大利海军 450mm 单装鱼雷发射管（Stefano Türr 等摩托鱼雷艇的舷侧雷槽）
   {
     name: "IT/450/1",

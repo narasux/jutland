@@ -2867,6 +2867,8 @@
           "venezia",
           "giuseppe_garibaldi",
           "bolzano",
+          "muzio_attendolo",
+          "bartolomeo_colleoni",
           "duquesne",
           "jeanne_d_arc",
           "de_grasse",
@@ -3515,7 +3517,19 @@
       },
       {
         name: "giuseppe_garibaldi",
-        pos: [24, 36],
+        pos: [23, 37],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "muzio_attendolo",
+        pos: [24, 38],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "bartolomeo_colleoni",
+        pos: [23, 39],
         rotation: 90,
         belongPlayer: "P1"
       },

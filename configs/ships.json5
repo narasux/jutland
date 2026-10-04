@@ -38119,6 +38119,287 @@
       ]
     }
   },
+  {
+    // 穆齐奥·阿滕多洛：莱蒙多·蒙特库科利级轻巡洋舰（意大利，1941 年状态）
+    name: "muzio_attendolo",
+    nation: "it",
+    type: "cruiser",
+    typeAbbr: "CL",
+    year: 1941,
+    totalHP: 8994,
+    horizontalDamageReduction: 0.22,
+    verticalDamageReduction: 0.15,
+    maxSpeed: 37,
+    acceleration: 0.68,
+    rotateSpeed: 1.75,
+    length: 182,
+    width: 16.6,
+    fundsCost: 125,
+    timeCost: 47,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "IT/152/53/2/M1929",
+          posPercent: 0.61,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "IT/152/53/2/M1929",
+          posPercent: 0.51,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 Y
+        {
+          name: "IT/152/53/2/M1929",
+          posPercent: -0.52,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 X
+        {
+          name: "IT/152/53/2/M1929",
+          posPercent: -0.63,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 100mm/47 OTO 1928 年型双联装高平两用炮
+        // 右舷后部 100mm A
+        {
+          name: "IT/100/47/2",
+          posPercent: -0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 100mm A
+        {
+          name: "IT/100/47/2",
+          posPercent: -0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部中线 100mm B
+        {
+          name: "IT/100/47/2",
+          posPercent: -0.42,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      antiAircraftGuns: [
+        // 37mm/54 布雷达双联装高炮
+        // 右舷前部 37mm A
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.37,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 37mm A
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.37,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前部 37mm B
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 37mm B
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.33,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm/65 布雷达双联装机炮
+        // 右舷后部 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.26,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 20mm A
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.26,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后部 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 20mm B
+        {
+          name: "IT/20/65/2/M1932",
+          posPercent: -0.3,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 右舷舯部 533mm 双联装鱼雷
+        {
+          name: "IT/533/2",
+          posPercent: 0.09,
+          rightFiringArc: [15, 165],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯部 533mm 双联装鱼雷
+        {
+          name: "IT/533/2",
+          posPercent: 0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [195, 345]
+        }
+      ]
+    },
+    aircraft: {
+      deck: "ITCatapult_muzio_attendolo",
+      takeOffTime: 8,
+      groups: [
+        {
+          name: "Ro.43",
+          maxCount: 2
+        }
+      ]
+    }
+  },
+  {
+    // 巴托洛梅奥·科莱奥尼：朱桑诺级轻巡洋舰（意大利，1940 年状态）
+    name: "bartolomeo_colleoni",
+    nation: "it",
+    type: "cruiser",
+    typeAbbr: "CL",
+    year: 1940,
+    totalHP: 6954,
+    horizontalDamageReduction: 0.1,
+    verticalDamageReduction: 0.08,
+    maxSpeed: 40.9,
+    acceleration: 0.75,
+    rotateSpeed: 1.9,
+    length: 169,
+    width: 15.5,
+    fundsCost: 115,
+    timeCost: 42,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "IT/152/53/2/M1926",
+          posPercent: 0.61,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "IT/152/53/2/M1926",
+          posPercent: 0.51,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 Y
+        {
+          name: "IT/152/53/2/M1926",
+          posPercent: -0.5,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 X
+        {
+          name: "IT/152/53/2/M1926",
+          posPercent: -0.62,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 100mm/47 OTO 1928 年型双联装高平两用炮
+        // 右舷舯部 100mm A
+        {
+          name: "IT/100/47/2",
+          posPercent: 0.09,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯部 100mm A
+        {
+          name: "IT/100/47/2",
+          posPercent: 0.09,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舯部中线 100mm B
+        {
+          name: "IT/100/47/2",
+          posPercent: -0.05,
+          rightFiringArc: [10, 160],
+          leftFiringArc: [200, 350]
+        }
+      ],
+      antiAircraftGuns: [
+        // 37mm/54 布雷达双联装高炮
+        // 右舷前部 37mm A
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.39,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前部 37mm A
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: 0.39,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 右舷后部 37mm B
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后部 37mm B
+        {
+          name: "IT/37/54/2/M1932",
+          posPercent: -0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 右舷舯部 533mm 双联装鱼雷
+        {
+          name: "IT/533/2",
+          posPercent: -0.11,
+          rightFiringArc: [20, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷舯部 533mm 双联装鱼雷
+        {
+          name: "IT/533/2",
+          posPercent: -0.11,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 340]
+        }
+      ]
+    }
+  },
   // 驱逐舰
   // 美国海军
   {

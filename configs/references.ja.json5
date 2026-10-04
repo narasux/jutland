@@ -8330,6 +8330,16 @@
     ],
   },
   {
+    name: "IT/533/2",
+    displayName: "533mm Twin 魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "IT/450/1",
     displayName: "450mm Single 魚雷発射管",
     type: "兵器",
@@ -12165,6 +12175,84 @@
     ],
   },
   {
+    name: "muzio_attendolo",
+    displayName: "ムツィオ・アッテンドーロ",
+    type: "軽巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 152mm/53 Ansaldo Model 1929",
+      },
+      {
+        label: "副砲",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "対空砲",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "対空砲",
+        value: "4x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "魚雷",
+        value: "2x2 533mm",
+      },
+      {
+        label: "水上機",
+        value: "2x IMAM Ro.43",
+      },
+    ],
+    description: "レアモンド・モンテクッコリ級の2番艦で、イタリア「コンドッティエリ」型軽巡洋艦の第3バッチにあたる。艦名は15世紀の傭兵隊長ムツィオ・アッテンドーロ・スフォルツァに由来する。このバッチは速度偏重を改め、舷側と砲塔に装甲を施した。1942年8月、ペデスタル作戦の船団迎撃中に英潜水艦「アンブロークン」の雷撃で艦首を失ったが、応急処置で帰港。修理が終わらないうちに、同年12月4日ナポリで米軍B-24の爆弾が直撃して転覆沈没した。戦後、残骸は引き揚げられ解体された。",
+    author: "Gemini 3.6 Flash",
+    links: [
+      {
+        name: "RN Muzio Attendolo [Light Cruiser] (1941)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/89549/view/rn_muzio_attendolo_light_cruiser_1941/",
+      },
+      {
+        name: "ウィキペディア — ムツィオ・アッテンドーロ (軽巡洋艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%A0%E3%83%84%E3%82%A3%E3%82%AA%E3%83%BB%E3%82%A2%E3%83%83%E3%83%86%E3%83%B3%E3%83%89%E3%83%BC%E3%83%AD_%28%E8%BB%BD%E5%B7%A1%E6%B4%8B%E8%89%A6%29",
+      },
+    ],
+  },
+  {
+    name: "bartolomeo_colleoni",
+    displayName: "バルトロメオ・コレオーニ",
+    type: "軽巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 152mm/53 Ansaldo Model 1926",
+      },
+      {
+        label: "副砲",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "対空砲",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "対空砲",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "ジュッサーノ級の2番艦で、「コンドッティエリ」型軽巡洋艦の第1バッチ。高速重視のため舷側装甲はきわめて薄く、公試では約40ノットを記録した。1940年7月19日のスパダ岬沖海戦で、姉妹艦ジョヴァンニ・デッレ・バンデ・ネーレとともに豪軽巡シドニーと英駆逐隊と交戦。機関室への直撃で動力と操舵を失い、英駆逐艦の魚雷で沈没した。戦死者は約121名、約555名が救助された。本図は1940年状態で、カタパルトと水上機は描かれていない。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "RN Bartolomeo Colleoni [Cruiser] (1933)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/15225/view/rn_bartolomeo_colleoni_cruiser/",
+      },
+      {
+        name: "ウィキペディア — バルトロメオ・コレオーニ (軽巡洋艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%AB%E3%83%88%E3%83%AD%E3%83%A1%E3%82%AA%E3%83%BB%E3%82%B3%E3%83%AC%E3%82%AA%E3%83%BC%E3%83%8B_%28%E8%BB%BD%E5%B7%A1%E6%B4%8B%E8%89%A6%29",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "フリードリヒスハーフェン",
     type: "水上偵察機",
@@ -12570,6 +12658,24 @@
   {
     name: "IT/203/53/2",
     displayName: "203mm/53 連装砲（アンサルド 1929 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1929",
+    displayName: "152mm/53 連装砲（アンサルド 1929 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1926",
+    displayName: "152mm/53 連装砲（アンサルド 1926 年型）",
     type: "兵器",
     armaments: [],
     description: "",

@@ -10661,6 +10661,16 @@
     ],
   },
   {
+    name: "IT/533/2",
+    displayName: "533mm 双联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "IT/450/1",
     displayName: "450mm 单装鱼雷发射管",
     type: "武器",
@@ -12088,6 +12098,84 @@
     ],
   },
   {
+    name: "muzio_attendolo",
+    displayName: "穆齐奥·阿滕多洛",
+    type: "轻巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 152mm/53 Ansaldo Model 1929",
+      },
+      {
+        label: "副炮",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "高炮",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "高炮",
+        value: "4x2 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "鱼雷",
+        value: "2x2 533mm",
+      },
+      {
+        label: "水上侦察机",
+        value: "2x IMAM Ro.43",
+      },
+    ],
+    description: "莱蒙多·蒙特库科利级的二号舰，属意大利“佣兵队长”系列轻巡洋舰的第三批次，舰名取自 15 世纪雇佣兵领袖穆齐奥·阿滕多洛·斯福尔扎。该批不再一味求快，为舷侧与炮塔补上了装甲。1942 年 8 月拦截“基座行动”护航队时，它被英国潜艇“不破”号（HMS Unbroken）的鱼雷炸掉整个舰艏，靠损管抢拖回港；修复尚未完成，同年 12 月 4 日又在那不勒斯被美军 B-24 投下的炸弹直接命中而倾覆沉没，战后残骸被打捞拆解。",
+    author: "Gemini 3.6 Flash",
+    links: [
+      {
+        name: "RN Muzio Attendolo [Light Cruiser] (1941)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/89549/view/rn_muzio_attendolo_light_cruiser_1941/",
+      },
+      {
+        name: "英文维基百科 - Italian cruiser Muzio Attendolo",
+        url: "https://en.wikipedia.org/wiki/Italian_cruiser_Muzio_Attendolo",
+      },
+    ],
+  },
+  {
+    name: "bartolomeo_colleoni",
+    displayName: "巴托洛梅奥·科莱奥尼",
+    type: "轻巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x2 152mm/53 Ansaldo Model 1926",
+      },
+      {
+        label: "副炮",
+        value: "3x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "高炮",
+        value: "4x2 37mm/54 Breda Model 1932",
+      },
+      {
+        label: "高炮",
+        value: "2x2 533mm",
+      },
+    ],
+    description: "朱桑诺级的二号舰，也是“佣兵队长”系列的第一批次。为追求高航速，该级只装了很薄的舷侧装甲，试航中曾持续跑出约 40 节。1940 年 7 月 19 日斯帕达角海战中，它与姊妹舰“乔瓦尼·德莱·班德·内雷”号一同遭遇澳大利亚轻巡洋舰“悉尼”号与英国驱逐舰编队；轮机舱被炮弹命中后失去动力和操舵能力，随后被英国驱逐舰的鱼雷击沉，约 121 名官兵阵亡、约 555 人获救。本舰图按 1940 年状态绘制，图上未画弹射器与水上飞机。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "RN Bartolomeo Colleoni [Cruiser] (1933)",
+        url: "https://www.the-blueprints.com/blueprints/ships/ships-italy/15225/view/rn_bartolomeo_colleoni_cruiser/",
+      },
+      {
+        name: "英文维基百科 - Italian cruiser Bartolomeo Colleoni",
+        url: "https://en.wikipedia.org/wiki/Italian_cruiser_Bartolomeo_Colleoni",
+      },
+    ],
+  },
+  {
     name: "FF33E",
     displayName: "腓特烈港",
     type: "水上侦察机",
@@ -12493,6 +12581,24 @@
   {
     name: "IT/203/53/2",
     displayName: "203mm/53 双联装舰炮（安萨尔多 1929 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1929",
+    displayName: "152mm/53 双联装舰炮（安萨尔多 1929 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/53/2/M1926",
+    displayName: "152mm/53 双联装舰炮（安萨尔多 1926 年型）",
     type: "武器",
     armaments: [],
     description: "",

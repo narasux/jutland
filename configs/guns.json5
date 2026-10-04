@@ -3167,6 +3167,33 @@
     antiShip: true,
     antiAircraft: false
   },
+  // 意大利海军 152mm/53 安萨尔多 1929 年型双联装主炮塔（蒙特库科利级轻巡洋舰）
+  {
+    name: "IT/152/53/2/M1929",
+    bulletName: "IT/GB/152/1929",
+    bulletCount: 2,
+    reloadTime: 5,
+    range: 24,
+    bulletSpread: 95,
+    bulletSpeed: 870,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 152mm/53 安萨尔多 1926 年型双联装主炮塔（朱桑诺级轻巡洋舰）
+  // 炮座仰角与射程略低于 1929 年型，差异体现在 range 与 reloadTime
+  {
+    name: "IT/152/53/2/M1926",
+    bulletName: "IT/GB/152/1929",
+    bulletCount: 2,
+    reloadTime: 5.5,
+    range: 22,
+    bulletSpread: 100,
+    bulletSpeed: 850,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 意大利海军 135mm/45 安萨尔多 1938 年型双联装舰炮
   {
     name: "IT/135/45/2/M1938",
