@@ -74,6 +74,11 @@ type ComputerDecisionHandler struct {
 	anchor      objPos.MapPos
 	anchorFixed bool
 
+	// stations 记录初始舰队各舰的任务给定站位。没有增援集结点时，锚点只是初始
+	// 舰队自己的重心，AI 应保持任务布置好的阵型（含朝向），而不是把整队重排成
+	// 锚点外的环形阵位。
+	stations map[string]objPos.MapPos
+
 	routes map[string]routeMemory
 }
 
@@ -274,7 +279,7 @@ func (h *ComputerDecisionHandler) issueRetreats(
 		if ship == nil {
 			continue
 		}
-		slot := h.retreatSlot(uid)
+		slot := h.retreatSlot(snap, ship)
 		if ship.CurPos.Near(slot, arrivalDistance) {
 			continue
 		}
@@ -304,7 +309,7 @@ func (h *ComputerDecisionHandler) desiredRoute(
 				return route, true
 			}
 		}
-		slot := formationPos(h.anchor, h.garrisonCount()+index)
+		slot := h.stationPos(snap, ship, h.garrisonCount()+index)
 		return h.anchorRoute(ship, slot, snap)
 	case routeCounter:
 		if order.pressing {
@@ -312,13 +317,13 @@ func (h *ComputerDecisionHandler) desiredRoute(
 				return route, true
 			}
 		}
-		slot := formationPos(h.anchor, h.garrisonCount()+index)
+		slot := h.stationPos(snap, ship, h.garrisonCount()+index)
 		return h.anchorRoute(ship, slot, snap)
 	case routeRaid:
 		if route, ok := h.pursue(order, snap); ok {
 			return route, true
 		}
-		slot := formationPos(h.anchor, h.anchorOccupants()+index)
+		slot := h.stationPos(snap, ship, h.anchorOccupants()+index)
 		if ship.CurPos.Near(slot, arrivalDistance) {
 			return shipRoute{}, false
 		}
@@ -327,13 +332,13 @@ func (h *ComputerDecisionHandler) desiredRoute(
 		if route, ok := h.scoutRoute(ship, order, snap); ok {
 			return route, true
 		}
-		slot := formationPos(h.anchor, h.anchorOccupants()+index)
+		slot := h.stationPos(snap, ship, h.anchorOccupants()+index)
 		if ship.CurPos.Near(slot, arrivalDistance) {
 			return shipRoute{}, false
 		}
 		return shipRoute{dest: slot}, true
 	default:
-		slot := formationPos(h.anchor, index)
+		slot := h.stationPos(snap, ship, index)
 		return h.anchorRoute(ship, slot, snap)
 	}
 }
@@ -462,25 +467,40 @@ func (h *ComputerDecisionHandler) anchorOccupants() int {
 	return n
 }
 
-func (h *ComputerDecisionHandler) retreatSlot(uid string) objPos.MapPos {
-	anchor := h.retreats[uid]
+func (h *ComputerDecisionHandler) retreatSlot(snap *battleSnapshot, ship *objUnit.BattleShip) objPos.MapPos {
+	anchor := h.retreats[ship.Uid]
 	index := 0
 	for _, id := range h.retreatOrder {
-		if id == uid {
+		if id == ship.Uid {
 			break
 		}
 		if samePos(h.retreats[id], anchor) {
 			index++
 		}
 	}
-	base := 0
-	if samePos(anchor, h.anchor) {
-		base = h.anchorOccupants()
-		if h.raid != nil && h.raid.targetUID == "" {
-			base += len(h.raid.members)
+	if !samePos(anchor, h.anchor) {
+		return formationPos(anchor, index)
+	}
+	base := h.anchorOccupants()
+	if h.raid != nil && h.raid.targetUID == "" {
+		base += len(h.raid.members)
+	}
+	return h.stationPos(snap, ship, base+index)
+}
+
+// stationPos 返回舰船的锚点阵位。没有增援集结点时，锚点只是初始舰队自己的重心，
+// 此时初始舰队保留任务布置的站位：航母这类长舰不会再被 2 格间距的环形阵位挤到
+// 一起、也不会为了排队而各自转向。有集结点时，以及后加入、没有初始站位的舰船，
+// 仍使用锚点外的环形阵位。
+func (h *ComputerDecisionHandler) stationPos(
+	snap *battleSnapshot, ship *objUnit.BattleShip, index int,
+) objPos.MapPos {
+	if len(snap.points) == 0 {
+		if station, ok := h.stations[ship.Uid]; ok {
+			return station
 		}
 	}
-	return formationPos(anchor, base+index)
+	return formationPos(h.anchor, index)
 }
 
 func phaseDue(tick int64, index int) bool {

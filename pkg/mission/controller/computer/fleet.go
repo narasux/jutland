@@ -47,6 +47,13 @@ func (h *ComputerDecisionHandler) snapshot(misState *state.MissionState) *battle
 	sort.Slice(snap.points, func(i, j int) bool {
 		return snap.points[i].Uid < snap.points[j].Uid
 	})
+	// 第一拍记下初始舰队的任务给定站位：没有增援集结点时靠它保持原始阵型。
+	if h.stations == nil && len(snap.points) == 0 {
+		h.stations = make(map[string]objPos.MapPos, len(snap.own))
+		for _, ship := range snap.own {
+			h.stations[ship.Uid] = ship.CurPos
+		}
+	}
 	return snap
 }
 
@@ -258,7 +265,7 @@ func shouldRetreat(ship *objUnit.BattleShip, nearby []*objUnit.BattleShip) bool 
 func (h *ComputerDecisionHandler) retreatAnchorFor(
 	ship *objUnit.BattleShip, snap *battleSnapshot, anchor objPos.MapPos, anchorOK bool,
 ) objPos.MapPos {
-	if h.onStation(ship) {
+	if h.onStation(snap, ship) {
 		if len(snap.points) > 0 {
 			return snap.points[0].RallyPos
 		}
@@ -276,7 +283,7 @@ func (h *ComputerDecisionHandler) retreatAnchorFor(
 	return ship.CurPos
 }
 
-func (h *ComputerDecisionHandler) onStation(ship *objUnit.BattleShip) bool {
+func (h *ComputerDecisionHandler) onStation(snap *battleSnapshot, ship *objUnit.BattleShip) bool {
 	if h.garrison == nil {
 		return false
 	}
@@ -284,7 +291,7 @@ func (h *ComputerDecisionHandler) onStation(ship *objUnit.BattleShip) bool {
 	if index < 0 {
 		return false
 	}
-	slot := formationPos(h.anchor, index)
+	slot := h.stationPos(snap, ship, index)
 	return ship.CurPos.Near(slot, arrivalDistance) || ship.CurPos.Near(h.anchor, arrivalDistance)
 }
 

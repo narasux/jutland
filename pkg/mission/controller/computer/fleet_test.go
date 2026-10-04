@@ -594,3 +594,20 @@ func summonNames(instructions map[string]instr.Instruction) []string {
 	sort.Strings(names)
 	return names
 }
+
+// TestGarrisonKeepsInitialStationWithoutRallyPoint 锁定：没有增援集结点时，锚点就是
+// 初始舰队自己的重心，AI 不该把任务布置好的初始阵型重排成锚点外的环形阵位——
+// 航母这类长舰会被 2 格间距的环挤在一起、还各自转向，非常难看。
+func TestGarrisonKeepsInitialStationWithoutRallyPoint(t *testing.T) {
+	carriers := []*objUnit.BattleShip{
+		makeShip("cv1", faction.ComputerAlpha, objUnit.ShipTypeAircraftCarrier, 10, 10),
+		makeShip("cv2", faction.ComputerAlpha, objUnit.ShipTypeAircraftCarrier, 20, 10),
+	}
+	handler := NewHandler(faction.ComputerAlpha)
+	for tick := int64(0); tick <= 30; tick++ {
+		got := handler.Handle(nil, newMission(tick, carriers, nil))
+		if len(got) != 0 {
+			t.Fatalf("tick %d: 初始舰队被重新排阵: %v", tick, got)
+		}
+	}
+}
