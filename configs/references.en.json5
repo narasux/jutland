@@ -8369,6 +8369,36 @@
     links: [],
   },
   {
+    name: "IT/533/4",
+    displayName: "533mm Quadruple Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/533/3",
+    displayName: "533mm Triple Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/450/1",
+    displayName: "450mm Single Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "SU/533/3",
     displayName: "533mm Triple Torpedo Launcher",
     type: "Weapon",
@@ -9208,6 +9238,16 @@
     links: [],
   },
   {
+    name: "UK/533/2",
+    displayName: "533mm Twin Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "UK/533/3",
     displayName: "533mm Triple Torpedo Launcher",
     type: "Weapon",
@@ -9911,6 +9951,16 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "US/533/5",
+    displayName: "533mm Quintuple Torpedo Launcher",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "US/7.62",
@@ -11840,6 +11890,49 @@
     ],
   },
   {
+    name: "aquila",
+    displayName: "Aquila",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Main Guns",
+        value: "8x1 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "Secondary Guns",
+        value: "12x1 65mm/64 Ansaldo Model 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "21x1 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "Fighters",
+        value: "24x Re.2005",
+      },
+      {
+        label: "Dive Bombers",
+        value: "15x Re.2002",
+      },
+      {
+        label: "Torpedo Bombers",
+        value: "12x SM.79bis",
+      },
+    ],
+    description: "Aquila was converted during the Second World War from the requisitioned Italian liner Roma, the only Italian aircraft carrier carried to an advanced stage of construction. Work began in 1941 and was halted in 1943 as the war situation deteriorated; the ship never entered service and was scrapped after the war. The entry follows the 1943 design state; Re.2001 is not in the repository, so period aircraft stand in for it.",
+    author: "Yoshioka Ronald",
+    links: [
+      {
+        name: "Pinterest - Italy, Aquila Class (Ex Roma)",
+        url: "https://jp.pinterest.com/pin/290130400990369413/",
+      },
+      {
+        name: "Wikipedia - Italian aircraft carrier Aquila",
+        url: "https://en.wikipedia.org/wiki/Italian_aircraft_carrier_Aquila",
+      },
+    ],
+  },
+  {
     name: "Fi167A",
     displayName: "Fi 167 A",
     type: "Carrier Torpedo Bomber",
@@ -11894,6 +11987,68 @@
       {
         name: "Wikipedia — Maestrale-class destroyer",
         url: "https://en.wikipedia.org/wiki/Maestrale-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "folgore",
+    displayName: "Folgore",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x2 120mm/50 Ansaldo Model 1926",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 40mm/39, 2x2 13.2mm Breda Model 1931",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "Folgore was the lead ship of the four-destroyer Folgore class, generally treated as the second series of the Freccia (Dardo) class. Commissioned in 1932 she served with Fulmine, Lampo and Baleno in the VIII Torpedo Destroyer Flotilla, the four sharing the motto Folgor in hostem — lightning upon the enemy. She sailed from Taranto in July 1940 to cover the convoy to Libya and took part in the Battle of Punta Stilo; a 1941 refit removed all of the original machine guns. The artwork combines the side and top views and follows the pre-war Regia Marina scheme used in 1940.",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Folgore",
+        url: "https://jp.pinterest.com/pin/759278818413468169/",
+      },
+      {
+        name: "Wikipedia — Folgore-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Folgore-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "dardo",
+    displayName: "Dardo",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x2 120mm/50 Ansaldo Model 1926",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 40mm/39, 2x2 13.2mm Breda Model 1931",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "Dardo was one of the four Freccia (Dardo) class destroyers, commissioned in January 1932 and serving with Freccia, Saetta and Strale in the VII Torpedo Destroyer Flotilla. Through the war she escorted Mediterranean convoys to Libya; after the September 1943 armistice Germany took her over as TA31, and she was lost in April 1945. The artwork combines the side and top views, was drawn by Jerzy Lewandowski and is marked as representing her in 1940.",
+    author: "Jerzy Lewandowski",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Dardo",
+        url: "https://jp.pinterest.com/pin/690035974126479478/",
+      },
+      {
+        name: "Wikipedia — Italian destroyer Dardo (1930)",
+        url: "https://en.wikipedia.org/wiki/Italian_destroyer_Dardo_(1930)",
       },
     ],
   },
@@ -12351,6 +12506,15 @@
     links: [],
   },
   {
+    name: "IT/13.2/2",
+    displayName: "13.2mm Twin Machine Gun (Breda Model 1931)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/253/55/3/M1936",
     displayName: "253mm Triple Mount (Ansaldo Model 1936)",
     type: "Weapon",
@@ -12369,6 +12533,33 @@
     links: [],
   },
   {
+    name: "IT/135/45/1/M1938",
+    displayName: "135mm Single Mount (Ansaldo Model 1938)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/65/64/1/M1939",
+    displayName: "65mm Single AA Mount (Ansaldo Model 1939)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/1",
+    displayName: "20mm Single Mount (Breda)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/90/50/2/M1939",
     displayName: "90mm Twin Dual-purpose Mount (Ansaldo Model 1939)",
     type: "Weapon",
@@ -12376,6 +12567,16 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "IT/100/47",
+    displayName: "100mm Single Dual-purpose Mount (OTO)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "IT/37/54/2/M1932",
@@ -12414,6 +12615,15 @@
     links: [],
   },
   {
+    name: "IT/120/50/2/M1926",
+    displayName: "120mm Twin Turret (Ansaldo Model 1926)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/280/53/3",
     displayName: "280mm Triple Mount (Ansaldo UP-102)",
     type: "Weapon",
@@ -12443,6 +12653,15 @@
   {
     name: "IT/40/56/2",
     displayName: "40mm Twin Mount (Bofors)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/39",
+    displayName: "40mm Single Mount (Vickers-Terni)",
     type: "Weapon",
     armaments: [],
     description: "",

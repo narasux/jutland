@@ -1380,6 +1380,14 @@
     damage: 38,
     criticalRate: 0.001
   },
+  // 意大利海军 65mm/64 安萨尔多 1939 年型高炮弹（天鹰号单装高炮）
+  {
+    name: "IT/GB/65/1939",
+    type: "shell",
+    diameter: 65,
+    damage: 24,
+    criticalRate: 0.001
+  },
   // 意大利海军 40mm 高炮弹（UP-102 博福斯与加里波第 OTO 40/70 共用）
   {
     name: "IT/GB/40",

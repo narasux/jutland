@@ -10423,6 +10423,16 @@
     links: [],
   },
   {
+    name: "US/533/5",
+    displayName: "533mm 五联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "US/533/1",
     displayName: "533mm 单装鱼雷发射管",
     type: "武器",
@@ -10594,6 +10604,16 @@
     links: [],
   },
   {
+    name: "UK/533/2",
+    displayName: "533mm 双联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "SU/533/5",
     displayName: "533mm 五联装鱼雷发射管",
     type: "武器",
@@ -10619,6 +10639,36 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "IT/533/4",
+    displayName: "533mm 四联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/533/3",
+    displayName: "533mm 三联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/450/1",
+    displayName: "450mm 单装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "DuckRocket",
@@ -11704,6 +11754,49 @@
     ],
   },
   {
+    name: "aquila",
+    displayName: "鹫座",
+    type: "航空母舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "8x1 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "副炮",
+        value: "12x1 65mm/64 Ansaldo Model 1939",
+      },
+      {
+        label: "防空炮",
+        value: "21x1 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "制空战斗机",
+        value: "24x Re.2005",
+      },
+      {
+        label: "俯冲轰炸机",
+        value: "15x Re.2002",
+      },
+      {
+        label: "鱼雷轰炸机",
+        value: "12x SM.79bis",
+      },
+    ],
+    description: "鹫座号是意大利海军以战时征用的“罗马”号邮轮改建的航空母舰，1941 年开工，1943 年战局恶化时主体接近完工却被迫停工，战后拆解，是意大利海军唯一推进到此进度的航母方案。本条与原图按 1943 年设计状态还原；Re.2001 未入库，舰载机以同期机型代入。",
+    author: "Yoshioka Ronald",
+    links: [
+      {
+        name: "Pinterest - Italy, Aquila Class (Ex Roma)",
+        url: "https://jp.pinterest.com/pin/290130400990369413/",
+      },
+      {
+        name: "維基百科 - 鷲座號航空母艦",
+        url: "https://zh.wikipedia.org/wiki/%E9%B7%B2%E5%BA%A7%E8%99%9F%E8%88%AA%E7%A9%BA%E6%AF%8D%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "Fi167A",
     displayName: "Fi 167 A",
     type: "舰载鱼雷机",
@@ -11758,6 +11851,68 @@
       {
         name: "Wikipedia - Maestrale-class destroyer",
         url: "https://en.wikipedia.org/wiki/Maestrale-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "folgore",
+    displayName: "闪电",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x2 120mm/50 Ansaldo Model 1926",
+      },
+      {
+        label: "高炮",
+        value: "2x1 40mm/39、2x2 13.2mm Breda Model 1931",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "闪电号是 Folgore 级驱逐舰首舰，该级通常被视为 Freccia 级（也作 Dardo 级）的第二批。1932 年服役后与富尔米内、拉姆波、巴莱诺组成第八鱼雷驱逐舰中队，四舰共用格言 Folgor in hostem（以闪电击敌）。1940 年 7 月随舰队自塔兰托出航，为驶往利比亚的船队护航并参加了 Punta Stilo 海战；1941 年的改装拆除了全部老式机枪。素材为侧视与俯视合图，按 1940 年意大利皇家海军战前涂装绘制。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Folgore",
+        url: "https://jp.pinterest.com/pin/759278818413468169/",
+      },
+      {
+        name: "Wikipedia - Folgore-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Folgore-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "dardo",
+    displayName: "达尔多",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x2 120mm/50 Ansaldo Model 1926",
+      },
+      {
+        label: "高炮",
+        value: "2x1 40mm/39、2x2 13.2mm Breda Model 1931",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "达尔多号是 Freccia 级（也作 Dardo 级）驱逐舰之一，1932 年 1 月服役，与弗雷恰、萨埃塔、斯特拉莱编成第七鱼雷驱逐舰中队。大战期间主要在地中海为驶往利比亚的船队护航；1943 年 9 月停战后被德国接收，改用 TA31 之名继续使用，1945 年 4 月沉没。素材为侧视与俯视合图，由 Jerzy Lewandowski 绘制，画面标注为 1940 年状态。",
+    author: "Jerzy Lewandowski",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Dardo",
+        url: "https://jp.pinterest.com/pin/690035974126479478/",
+      },
+      {
+        name: "Wikipedia - Italian destroyer Dardo (1930)",
+        url: "https://en.wikipedia.org/wiki/Italian_destroyer_Dardo_(1930)",
       },
     ],
   },
@@ -12215,6 +12370,15 @@
     links: [],
   },
   {
+    name: "IT/13.2/2",
+    displayName: "13.2mm 双联装机枪（布雷达 1931 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/253/55/3/M1936",
     displayName: "253mm/55 三联装舰炮（安萨尔多 1936 年型）",
     type: "武器",
@@ -12233,6 +12397,33 @@
     links: [],
   },
   {
+    name: "IT/135/45/1/M1938",
+    displayName: "135mm/45 单装舰炮（安萨尔多 1938 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/65/64/1/M1939",
+    displayName: "65mm/64 单装高炮（安萨尔多 1939 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/1",
+    displayName: "20mm/65 单装机炮（布雷达）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/90/50/2/M1939",
     displayName: "90mm/50 双联装高平两用炮（安萨尔多 1939 年型）",
     type: "武器",
@@ -12240,6 +12431,16 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "IT/100/47",
+    displayName: "100mm/47 单装高平两用炮（OTO）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "IT/37/54/2/M1932",
@@ -12278,6 +12479,15 @@
     links: [],
   },
   {
+    name: "IT/120/50/2/M1926",
+    displayName: "120mm/50 双联装炮塔（安萨尔多 1926 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/280/53/3",
     displayName: "280mm/53 三联装舰炮（安萨尔多 UP-102 方案）",
     type: "武器",
@@ -12307,6 +12517,15 @@
   {
     name: "IT/40/56/2",
     displayName: "40mm/56 双联装高炮（博福斯）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/39",
+    displayName: "40mm/39 单装高炮（维克斯-特尔尼）",
     type: "武器",
     armaments: [],
     description: "",

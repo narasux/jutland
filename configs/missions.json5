@@ -2750,7 +2750,8 @@
           "bearn",
           "neptune",
           "joffre",
-          "clemenceau_pa28"
+          "clemenceau_pa28",
+          "aquila"
         ],
       },
       {
@@ -2901,7 +2902,9 @@
           "gurkha",
           "rapid",
           "le_fantasque",
-          "tramontana"
+          "tramontana",
+          "folgore",
+          "dardo"
         ],
       },
       {
@@ -3486,6 +3489,12 @@
       },
       // Italy
       {
+        name: "aquila",
+        pos: [21, 34],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
         name: "genova",
         pos: [24, 34],
         rotation: 90,
@@ -3505,19 +3514,31 @@
       },
       {
         name: "tramontana",
-        pos: [23, 37],
+        pos: [26, 34],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "stefano_turr",
-        pos: [24, 38],
+        name: "folgore",
+        pos: [25, 35],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "dardo",
+        pos: [26, 36],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "lupo",
-        pos: [23, 38],
+        pos: [25, 37],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "stefano_turr",
+        pos: [26, 38],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -3541,13 +3562,13 @@
         belongPlayer: "P1"
       },
       {
-        name: "essex",
+        name: "kentucky_bb66",
         pos: [32, 47],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "yorktown",
+        name: "essex",
         pos: [31, 48],
         rotation: 90,
         belongPlayer: "P1"
@@ -3559,31 +3580,31 @@
         belongPlayer: "P1"
       },
       {
-        name: "princeton",
+        name: "yorktown",
         pos: [31, 50],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "card",
+        name: "princeton",
         pos: [32, 51],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "langley",
+        name: "card",
         pos: [31, 52],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "wolverine",
+        name: "langley",
         pos: [32, 53],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "kentucky_bb66",
+        name: "wolverine",
         pos: [31, 54],
         rotation: 90,
         belongPlayer: "P1"

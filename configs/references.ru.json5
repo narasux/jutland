@@ -8310,6 +8310,36 @@
     links: [],
   },
   {
+    name: "IT/533/4",
+    displayName: "533mm Quadruple торпедный аппарат",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/533/3",
+    displayName: "533mm Triple торпедный аппарат",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/450/1",
+    displayName: "450mm Single торпедный аппарат",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "SU/533/3",
     displayName: "533mm Triple торпедный аппарат",
     type: "Оружие",
@@ -9149,6 +9179,16 @@
     links: [],
   },
   {
+    name: "UK/533/2",
+    displayName: "533mm Twin торпедный аппарат",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "UK/533/3",
     displayName: "533mm Triple торпедный аппарат",
     type: "Оружие",
@@ -9852,6 +9892,16 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "US/533/5",
+    displayName: "533mm Quintuple торпедный аппарат",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "US/7.62",
@@ -11781,6 +11831,49 @@
     ],
   },
   {
+    name: "aquila",
+    displayName: "Аквила",
+    type: "Авианосец",
+    armaments: [
+      {
+        label: "Главные орудия",
+        value: "8x1 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "Вспомогательная батарея",
+        value: "12x1 65mm/64 Ansaldo Model 1939",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "21x1 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "Истребители",
+        value: "24x Re.2005",
+      },
+      {
+        label: "Пикирующие бомбардировщики",
+        value: "15x Re.2002",
+      },
+      {
+        label: "Торпедоносцы",
+        value: "12x SM.79bis",
+      },
+    ],
+    description: "«Аквила» — единственный итальянский авианосец, доведённый до высокой степени готовности: он строился в годы войны на основе реквизированного лайнера «Рома». Строительство началось в 1941 году, а в 1943-м из-за ухудшения обстановки его пришлось остановить; корабль так и не вступил в строй и был разобран после войны. Запись повторяет состояние проекта 1943 года; Re.2001 в репозитории отсутствует, поэтому его заменяют самолёты той же эпохи.",
+    author: "Yoshioka Ronald",
+    links: [
+      {
+        name: "Pinterest - Italy, Aquila Class (Ex Roma)",
+        url: "https://jp.pinterest.com/pin/290130400990369413/",
+      },
+      {
+        name: "Википедия - Аквила (авианосец)",
+        url: "https://ru.wikipedia.org/wiki/%D0%90%D0%BA%D0%B2%D0%B8%D0%BB%D0%B0_(%D0%B0%D0%B2%D0%B8%D0%B0%D0%BD%D0%BE%D1%81%D0%B5%D1%86)",
+      },
+    ],
+  },
+  {
     name: "tramontana",
     displayName: "Трамонтана",
     type: "Эсминец",
@@ -11808,6 +11901,68 @@
       {
         name: "Википедия — Maestrale-class destroyer",
         url: "https://en.wikipedia.org/wiki/Maestrale-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "folgore",
+    displayName: "Фольгоре",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главный калибр",
+        value: "2x2 120mm/50 Ansaldo Model 1926",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "2x1 40mm/39, 2x2 13.2mm Breda Model 1931",
+      },
+      {
+        label: "Торпеды",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "«Фольгоре» — головной эсминец из четырёх кораблей типа «Фольгоре», который нередко рассматривают как вторую серию эсминцев типа «Дардо». Корабль вошёл в строй в 1932 году и служил в 8-й флотилии вместе с «Фульмине», «Лампо» и «Балено»; все четыре эсминца носили девиз «Folgor in hostem» (молнией во врага). В июле 1940 года он вышел из Таранто в составе прикрытия ливийского конвоя и участвовал в бою у мыса Пунта-Стило, а при ремонте 1941 года сняли все старые пулемёты. Изображение совмещает бортовой и верхний виды и выполнено по довоенной окраске итальянских кораблей 1940 года.",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Folgore",
+        url: "https://jp.pinterest.com/pin/759278818413468169/",
+      },
+      {
+        name: "Википедия — Эскадренные миноносцы типа «Фольгоре»",
+        url: "https://ru.wikipedia.org/wiki/%D0%AD%D1%81%D0%BA%D0%B0%D0%B4%D1%80%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5_%D0%BC%D0%B8%D0%BD%D0%BE%D0%BD%D0%BE%D1%81%D1%86%D1%8B_%D1%82%D0%B8%D0%BF%D0%B0_%C2%AB%D0%A4%D0%BE%D0%BB%D1%8C%D0%B3%D0%BE%D1%80%D0%B5%C2%BB",
+      },
+    ],
+  },
+  {
+    name: "dardo",
+    displayName: "Дардо",
+    type: "Эсминец",
+    armaments: [
+      {
+        label: "Главный калибр",
+        value: "2x2 120mm/50 Ansaldo Model 1926",
+      },
+      {
+        label: "Зенитные орудия",
+        value: "2x1 40mm/39, 2x2 13.2mm Breda Model 1931",
+      },
+      {
+        label: "Торпеды",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "«Дардо» — один из четырёх эсминцев типа «Дардо» (в западной литературе — типа «Фреккиа»), вступивший в строй в январе 1932 года и служивший в 7-й флотилии вместе с «Фреккиа», «Саэтта» и «Страле». В ходе войны он охранял средиземноморские конвои в Ливию, после перемирия сентября 1943 года был передан Германии под обозначением TA31 и погиб в апреле 1945 года. Изображение совмещает бортовой и верхний виды: нарисовано Jerzy Lewandowski и помечено как состояние 1940 года.",
+    author: "Jerzy Lewandowski",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Dardo",
+        url: "https://jp.pinterest.com/pin/690035974126479478/",
+      },
+      {
+        name: "Википедия — Эскадренные миноносцы типа «Дардо»",
+        url: "https://ru.wikipedia.org/wiki/%D0%AD%D1%81%D0%BA%D0%B0%D0%B4%D1%80%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5_%D0%BC%D0%B8%D0%BD%D0%BE%D0%BD%D0%BE%D1%81%D1%86%D1%8B_%D1%82%D0%B8%D0%BF%D0%B0_%C2%AB%D0%94%D0%B0%D1%80%D0%B4%D0%BE%C2%BB",
       },
     ],
   },
@@ -12292,6 +12447,15 @@
     links: [],
   },
   {
+    name: "IT/13.2/2",
+    displayName: "13.2-мм спаренный пулемёт (Breda, модель 1931)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/253/55/3/M1936",
     displayName: "253-мм тройная установка (Ansaldo, модель 1936)",
     type: "Оружие",
@@ -12310,6 +12474,33 @@
     links: [],
   },
   {
+    name: "IT/135/45/1/M1938",
+    displayName: "135-мм одиночная установка (Ansaldo, модель 1938)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/65/64/1/M1939",
+    displayName: "65-мм одиночная зенитная установка (Ansaldo, модель 1939)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/1",
+    displayName: "20-мм одиночная установка (Breda)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/90/50/2/M1939",
     displayName: "90-мм спаренная универсальная установка (Ansaldo, модель 1939)",
     type: "Оружие",
@@ -12317,6 +12508,16 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "IT/100/47",
+    displayName: "100-мм одиночная универсальная установка (OTO)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "IT/37/54/2/M1932",
@@ -12355,6 +12556,15 @@
     links: [],
   },
   {
+    name: "IT/120/50/2/M1926",
+    displayName: "120-мм спаренная башня (Ansaldo, модель 1926)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/280/53/3",
     displayName: "280-мм трёхорудийная башня (Ansaldo UP-102)",
     type: "Оружие",
@@ -12384,6 +12594,15 @@
   {
     name: "IT/40/56/2",
     displayName: "40-мм спаренная зенитная установка (Bofors)",
+    type: "Оружие",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/39",
+    displayName: "40-мм одиночная зенитная установка (Vickers-Terni)",
     type: "Оружие",
     armaments: [],
     description: "",

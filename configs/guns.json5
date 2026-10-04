@@ -3167,6 +3167,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 意大利海军 135mm/45 安萨尔多 1938 年型单装舰炮（天鹰号两舷舷台）
+  {
+    name: "IT/135/45/1/M1938",
+    bulletName: "IT/GB/135/1938",
+    bulletCount: 1,
+    reloadTime: 5,
+    range: 20,
+    bulletSpread: 55,
+    bulletSpeed: 850,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 意大利海军 120mm/50 安萨尔多 1939 年型单装高平两用炮（1939 年驱逐舰方案）
   {
     name: "IT/120/50/M1939",
@@ -3190,6 +3203,33 @@
     bulletSpread: 55,
     bulletSpeed: 830,
     fundsCost: 7,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 120mm/50 安萨尔多 1926 年型双联装炮塔（Freccia 与 Folgore 级驱逐舰主炮）
+  // 仰角约 36°，只能对海；与 1939 年型高平两用炮的差异体现在 antiAircraft
+  {
+    name: "IT/120/50/2/M1926",
+    bulletName: "IT/GB/120/1939",
+    bulletCount: 2,
+    reloadTime: 2,
+    range: 15,
+    bulletSpread: 60,
+    bulletSpeed: 850,
+    fundsCost: 7,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 100mm/47 OTO 单装高平两用炮（角宿一星级鱼雷艇）
+  {
+    name: "IT/100/47",
+    bulletName: "IT/GB/100",
+    bulletCount: 1,
+    reloadTime: 2.5,
+    range: 13,
+    bulletSpread: 48,
+    bulletSpeed: 850,
+    fundsCost: 2,
     antiShip: true,
     antiAircraft: true
   },
@@ -3219,6 +3259,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 意大利海军 65mm/64 安萨尔多 1939 年型单装高炮（天鹰号飞行甲板以下舷台）
+  {
+    name: "IT/65/64/1/M1939",
+    bulletName: "IT/GB/65/1939",
+    bulletCount: 1,
+    reloadTime: 2.5,
+    range: 7,
+    bulletSpread: 35,
+    bulletSpeed: 950,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 意大利海军 37mm/54 布雷达 1932/1938 年型双联装高炮
   {
     name: "IT/37/54/2/M1932",
@@ -3228,6 +3281,19 @@
     range: 4,
     bulletSpread: 30,
     bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 40mm/39 维克斯-特尔尼单装高炮（Freccia 与 Folgore 级驱逐舰中段两舷）
+  {
+    name: "IT/40/39",
+    bulletName: "IT/GB/40",
+    bulletCount: 1,
+    reloadTime: 0.5,
+    range: 3,
+    bulletSpread: 40,
+    bulletSpeed: 585,
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true

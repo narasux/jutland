@@ -9011,6 +9011,310 @@
       ]
     }
   },
+  // 意大利海军
+  {
+    // 天鹰：罗马号邮轮改装，1943 年停工时接近完工，从未服役
+    name: "aquila",
+    nation: "it",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1943,
+    totalHP: 28000,
+    horizontalDamageReduction: 0.22,
+    verticalDamageReduction: 0.08,
+    maxSpeed: 30,
+    acceleration: 0.3,
+    rotateSpeed: 0.72,
+    length: 235.5,
+    width: 30,
+    fundsCost: 215,
+    timeCost: 85,
+    weapon: {
+      mainGuns: [
+        // 前部舷台 A（右舷、左舷各一座 135mm 单装）
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: 0.29,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: 0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 前部舷台 B
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: 0.29,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: 0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 后部舷台 A
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: -0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: -0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 后部舷台 B
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: -0.31,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/135/45/1/M1938",
+          posPercent: -0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      secondaryGuns: [
+        // 飞行甲板以下 65mm 单装舷台，由艏向艉两舷成对
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: 0.57,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: 0.57,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: 0.51,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: 0.51,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: 0.41,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: 0.41,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: -0.45,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: -0.45,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: -0.54,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: -0.54,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: -0.61,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/65/64/1/M1939",
+          posPercent: -0.61,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰艏中线 20mm 单装
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.95,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 舰岛前方两舷
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.8,
+          rightFiringArc: [0, 170],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.8,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [190, 360]
+        },
+        // 舰岛两侧：右舷炮位比左舷多，位置也略靠前
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.29,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.26,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.2,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.17,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰岛后方右舷
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.01,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰岛后方左舷
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 舰岛后方右舷靠内
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.12,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.15,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.15,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 舰艉两舷
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.79,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/20/65/1",
+          posPercent: -0.79,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 350]
+        }
+      ]
+    },
+    aircraft: {
+      deck: "StraightDeckNoCatapult",
+      takeOffTime: 2.5,
+      groups: [
+        {
+          // 原型为 Re.2001 舰载战斗机，仓库暂无该型，改用同期雷贾内战斗机
+          name: "Re.2005",
+          maxCount: 24
+        },
+        {
+          name: "Re.2002",
+          maxCount: 15
+        },
+        {
+          name: "SM.79bis",
+          maxCount: 12
+        }
+      ]
+    }
+  },
   // 战列舰
   // 美国海军
   {
@@ -39886,6 +40190,168 @@
           posPercent: -0.43,
           rightFiringArc: [30, 135],
           leftFiringArc: [225, 330]
+        }
+      ]
+    }
+  },
+  {
+    // 闪电：1932 年服役的 Folgore 级驱逐舰首舰，VIII 鱼雷驱逐舰中队
+    name: "folgore",
+    nation: "it",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1932,
+    totalHP: 2090,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 30,
+    acceleration: 1,
+    rotateSpeed: 2.4,
+    length: 96,
+    width: 9,
+    fundsCost: 90,
+    timeCost: 34,
+    weapon: {
+      mainGuns: [
+        // 舰首主炮
+        {
+          name: "IT/120/50/2/M1926",
+          posPercent: 0.62,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 舰尾主炮
+        {
+          name: "IT/120/50/2/M1926",
+          posPercent: -0.63,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 中段两舷 40mm 高炮
+        {
+          name: "IT/40/39",
+          posPercent: -0.06,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/40/39",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 舰桥后平台左右 13.2mm 双联机枪
+        {
+          name: "IT/13.2/2",
+          posPercent: 0.31,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/13.2/2",
+          posPercent: 0.31,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        }
+      ],
+      torpedoes: [
+        // 中部三联鱼雷发射管 A
+        {
+          name: "IT/533/3",
+          posPercent: -0.16,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中部三联鱼雷发射管 B
+        {
+          name: "IT/533/3",
+          posPercent: -0.41,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        }
+      ]
+    }
+  },
+  {
+    // 达尔多：1932 年服役的 Freccia 级驱逐舰，1943 年停战后被德国接收为 TA31
+    name: "dardo",
+    nation: "it",
+    type: "destroyer",
+    typeAbbr: "DD",
+    year: 1932,
+    totalHP: 2150,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 30,
+    acceleration: 1,
+    rotateSpeed: 2.4,
+    length: 96,
+    width: 10,
+    fundsCost: 90,
+    timeCost: 34,
+    weapon: {
+      mainGuns: [
+        // 舰首主炮
+        {
+          name: "IT/120/50/2/M1926",
+          posPercent: 0.6,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 舰尾主炮
+        {
+          name: "IT/120/50/2/M1926",
+          posPercent: -0.65,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 中段两舷 40mm 高炮
+        {
+          name: "IT/40/39",
+          posPercent: -0.07,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "IT/40/39",
+          posPercent: -0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 舰桥后平台左右 13.2mm 双联机枪
+        {
+          name: "IT/13.2/2",
+          posPercent: 0.29,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "IT/13.2/2",
+          posPercent: 0.29,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中部三联鱼雷发射管 A
+        {
+          name: "IT/533/3",
+          posPercent: -0.19,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 中部三联鱼雷发射管 B
+        {
+          name: "IT/533/3",
+          posPercent: -0.44,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
         }
       ]
     }

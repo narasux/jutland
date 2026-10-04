@@ -3240,7 +3240,7 @@
   {
     name: "neptune",
     displayName: "ネプチューン",
-    type: "航空母艦",
+    type: "空母",
     armaments: [
       {
         label: "主砲",
@@ -3279,7 +3279,7 @@
   {
     name: "joffre",
     displayName: "ジョフレ",
-    type: "航空母艦",
+    type: "空母",
     armaments: [
       {
         label: "主砲",
@@ -3318,7 +3318,7 @@
   {
     name: "clemenceau_pa28",
     displayName: "クレマンソー（PA28）",
-    type: "航空母艦",
+    type: "空母",
     armaments: [
       {
         label: "主砲",
@@ -3353,7 +3353,7 @@
   {
     name: "bearn",
     displayName: "ベアルン",
-    type: "航空母艦",
+    type: "空母",
     armaments: [
       {
         label: "主砲",
@@ -8310,6 +8310,36 @@
     links: [],
   },
   {
+    name: "IT/533/4",
+    displayName: "533mm Quadruple 魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/533/3",
+    displayName: "533mm Triple 魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
+    name: "IT/450/1",
+    displayName: "450mm Single 魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "SU/533/3",
     displayName: "533mm Triple 魚雷発射管",
     type: "兵器",
@@ -9149,6 +9179,16 @@
     links: [],
   },
   {
+    name: "UK/533/2",
+    displayName: "533mm Twin 魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
+  },
+  {
     name: "UK/533/3",
     displayName: "533mm Triple 魚雷発射管",
     type: "兵器",
@@ -9852,6 +9892,16 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "US/533/5",
+    displayName: "533mm Quintuple 魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "US/7.62",
@@ -11781,6 +11831,49 @@
     ],
   },
   {
+    name: "aquila",
+    displayName: "アキラ",
+    type: "空母",
+    armaments: [
+      {
+        label: "主砲",
+        value: "8x1 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "副砲",
+        value: "12x1 65mm/64 Ansaldo Model 1939",
+      },
+      {
+        label: "対空砲",
+        value: "21x1 20mm/65 Breda Model 1932",
+      },
+      {
+        label: "艦上戦闘機",
+        value: "24x Re.2005",
+      },
+      {
+        label: "急降下爆撃機",
+        value: "15x Re.2002",
+      },
+      {
+        label: "雷撃機",
+        value: "12x SM.79bis",
+      },
+    ],
+    description: "アキラは第二次大戦中に徴用された客船ローマを改装したイタリア海軍唯一の航空母艦で、1941年に起工されたが1943年に戦況悪化で工事は中止され、就役することなく戦後に解体された。本項目は1943年設計時の状態を再現し、リポジトリに存在しないRe.2001は同時期の機体で代用している。",
+    author: "Yoshioka Ronald",
+    links: [
+      {
+        name: "Pinterest - Italy, Aquila Class (Ex Roma)",
+        url: "https://jp.pinterest.com/pin/290130400990369413/",
+      },
+      {
+        name: "ウィキペディア - アキラ (空母)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AD%E3%83%A9_(%E7%A9%BA%E6%AF%8D)",
+      },
+    ],
+  },
+  {
     name: "Fi167A",
     displayName: "Fi 167 A",
     type: "艦上雷撃機",
@@ -11835,6 +11928,68 @@
       {
         name: "ウィキペディア — マエストラーレ級駆逐艦",
         url: "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A8%E3%82%B9%E3%83%88%E3%83%A9%E3%83%BC%E3%83%AC%E7%B4%9A%E9%A7%86%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "folgore",
+    displayName: "フォルゴレ",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x2 120mm/50 アンサルド 1926 年型",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 40mm/39、2x2 13.2mm ブレダ 1931 年型",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "フォルゴレは4隻建造されたフォルゴレ級駆逐艦の1番艦で、一般的にはフレッキア級（ダルド級）の第二グループに位置づけられる。1932年に就役するとフルミネ、ランポ、バレーノと共に第8駆逐戦隊を編成し、四艦は共通の標語 Folgor in hostem（敵に雷光を）を掲げた。1940年7月はタラントから出撃してリビア船団を護衛し、プンタ・スィロー沖海戦に参加、1941年の改装では旧式機銃がすべて撤去された。図は側面図と俯瞰図を合わせたもので、1940年時点のイタリア王立海軍の戦前の塗装に従っている。",
+    author: "Sam#28",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Folgore",
+        url: "https://jp.pinterest.com/pin/759278818413468169/",
+      },
+      {
+        name: "ウィキペディア — ダルド級駆逐艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%AB%E3%83%89%E7%B4%9A%E9%A7%86%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "dardo",
+    displayName: "ダルド",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x2 120mm/50 アンサルド 1926 年型",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 40mm/39、2x2 13.2mm ブレダ 1931 年型",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 533mm",
+      },
+    ],
+    description: "ダルドはフレッキア級（ダルド級）駆逐艦の1隻で、1932年1月に就役し、フレッキア、サエッタ、ストラーレと共に第7駆逐戦隊を編成した。大戦中はリビア向けの地中海船団を護衛し、1943年9月の休戦後はドイツがTA31として接収して運用、1945年4月に沈没した。図はJerzy Lewandowskiによる側面図と俯瞰図の合図で、1940年の状態と記されている。",
+    author: "Jerzy Lewandowski",
+    links: [
+      {
+        name: "Pinterest - Italian destroyer Dardo",
+        url: "https://jp.pinterest.com/pin/690035974126479478/",
+      },
+      {
+        name: "ウィキペディア — ダルド (駆逐艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%AB%E3%83%89_(%E9%A7%86%E9%80%90%E8%89%A6)",
       },
     ],
   },
@@ -12292,6 +12447,15 @@
     links: [],
   },
   {
+    name: "IT/13.2/2",
+    displayName: "13.2mm 連装機銃（ブレダ 1931 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/253/55/3/M1936",
     displayName: "253mm 三連装砲（アンサルド 1936 年型）",
     type: "兵器",
@@ -12310,6 +12474,33 @@
     links: [],
   },
   {
+    name: "IT/135/45/1/M1938",
+    displayName: "135mm 単装砲（アンサルド 1938 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/65/64/1/M1939",
+    displayName: "65mm 単装高角砲（アンサルド 1939 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/20/65/1",
+    displayName: "20mm 単装機関砲（ブレダ）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/90/50/2/M1939",
     displayName: "90mm 連装両用砲（アンサルド 1939 年型）",
     type: "兵器",
@@ -12317,6 +12508,16 @@
     description: "",
     author: "",
     links: [],
+  },
+  {
+    name: "IT/100/47",
+    displayName: "100mm 単装両用砲（OTO）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [
+    ],
   },
   {
     name: "IT/37/54/2/M1932",
@@ -12355,6 +12556,15 @@
     links: [],
   },
   {
+    name: "IT/120/50/2/M1926",
+    displayName: "120mm 連装砲塔（アンサルド 1926 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/280/53/3",
     displayName: "280mm 三連装砲（アンサルド UP-102）",
     type: "兵器",
@@ -12384,6 +12594,15 @@
   {
     name: "IT/40/56/2",
     displayName: "40mm 連装高角砲（ボフォース）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/40/39",
+    displayName: "40mm 単装高角砲（ヴィッカース＝テルニ）",
     type: "兵器",
     armaments: [],
     description: "",
