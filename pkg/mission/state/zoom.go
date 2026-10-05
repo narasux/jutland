@@ -65,6 +65,10 @@ func (s *MissionState) RefreshCameraSize() {
 	s.View.Camera.Width = int(math.Ceil(float64(s.View.Layout.Width)/blockSize)) + 1
 	s.View.Camera.Height = int(math.Ceil(float64(s.View.Layout.Height)/blockSize)) + 1
 	s.View.Camera.Pos.EnsureBorder(s.CameraPosBorder())
+	// 视野范围变了，进行中的定位目标也要重新约束，否则相机会朝界外的旧目标空跑。
+	if s.View.Camera.Target != nil {
+		s.View.Camera.Target.EnsureBorder(s.CameraPosBorder())
+	}
 }
 
 // StepZoomAtScreenPoint 按固定档位缩放，并保持屏幕点下的地图位置尽量不变

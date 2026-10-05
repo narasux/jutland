@@ -2,7 +2,6 @@ package manager
 
 import (
 	"math"
-	"math/rand"
 	"slices"
 	"sort"
 
@@ -37,6 +36,8 @@ func (m *MissionManager) updateGameOptions(skipCursorInput bool) {
 		return
 	}
 	sx, sy := ebiten.CursorPosition()
+	// 缩放是玩家手动操作，放弃进行中的相机定位，避免缩放锚点与定位目标互相拖拽。
+	m.cancelCameraMove()
 	m.state.StepZoomAtScreenPoint(direction, sx, sy)
 }
 
@@ -89,28 +90,47 @@ func (m *MissionManager) updateInstructions() {
 
 // 计算下一帧相机位置
 func (m *MissionManager) updateCameraPosition() {
-	var nextPos *objPos.MapPos
 	// 游戏模式 / 全屏地图模式走不同的相机位置更新模式
 	if m.state.Core.MissionStatus == state.MissionInMap {
-		nextPos = m.getNextCameraPosInFullMapMode()
-		// 如果是全屏地图模式，且点击位置相同，则退出全屏（模拟双击效果）
-		if nextPos != nil && m.state.View.Camera.Pos.MEqual(*nextPos) {
+		// 全屏地图模式由点击直接定位，退出全屏依赖位置精确相等（模拟双击效果），
+		// 因此这里不做平滑定位，并放弃进行中的定位避免两者抢相机。
+		m.cancelCameraMove()
+		nextPos := m.getNextCameraPosInFullMapMode()
+		if nextPos == nil {
+			return
+		}
+		if m.state.View.Camera.Pos.MEqual(*nextPos) {
 			m.state.Core.MissionStatus = state.MissionRunning
 		}
-	} else {
-		nextPos = m.getNextCameraPosInGameMode()
+		m.state.View.Camera.Pos.AssignRxy(
+			snapCameraCoord(m.state, nextPos.RX), snapCameraCoord(m.state, nextPos.RY),
+		)
+		return
 	}
 
+	// 程序化定位（编队键、面板定位）优先推进：即使鼠标停在 UI 面板上也要把这一段走完。
+	if m.advanceCameraMove() {
+		return
+	}
+
+	nextPos := m.getNextCameraPosInGameMode()
 	// 无法获取下一帧相机位置，不更新
 	if nextPos == nil {
 		return
 	}
 
-	// 剪掉小尾巴，避免出现黑边
-	moveSpeed := m.state.View.Camera.BaseMoveSpeed
-	rx := float64(int(nextPos.RX/moveSpeed)) * moveSpeed
-	ry := float64(int(nextPos.RY/moveSpeed)) * moveSpeed
-	m.state.View.Camera.Pos.AssignRxy(rx, ry)
+	m.state.View.Camera.Pos.AssignRxy(
+		snapCameraCoord(m.state, nextPos.RX), snapCameraCoord(m.state, nextPos.RY),
+	)
+}
+
+// snapCameraCoord 把相机坐标剪到移动速度的整数倍，避免出现黑边。
+func snapCameraCoord(ms *state.MissionState, value float64) float64 {
+	moveSpeed := ms.View.Camera.BaseMoveSpeed
+	if moveSpeed <= 0 {
+		return value
+	}
+	return float64(int(value/moveSpeed)) * moveSpeed
 }
 
 // 计算下一帧相机位置（全屏地图模式）
@@ -248,8 +268,8 @@ func (m *MissionManager) syncFocusedShip() {
 }
 
 // selectShipsByGroup 用编组键（0-9）选中该编组的我方战舰。
-// 若该编组本就处于选中状态（即再次按下同一编组键），把相机移动到编组内
-// 随机一艘仍存活战舰的位置，方便快速把视野切回舰队。
+// 第一次按下只选中；再次按下同一编组键时，把相机平滑定位到编队中心。
+// 定位目标取存活舰船包围盒的中心，是确定性的：连按同一个编组键不会在编队内乱跳。
 func (m *MissionManager) selectShipsByGroup(groupID object.GroupID) {
 	m.state.Interaction.SelectedShips = m.state.Interaction.SelectedShips[:0]
 	for _, ship := range m.state.Arena.Ships {
@@ -258,28 +278,89 @@ func (m *MissionManager) selectShipsByGroup(groupID object.GroupID) {
 		}
 	}
 
-	// 第一次按下该编组键：只记录当前选中的编组
+	// 第一次按下该编组键：只记录当前选中的编组，不动相机
 	if m.state.Interaction.SelectedGroupID != groupID {
 		m.state.Interaction.SelectedGroupID = groupID
 		return
 	}
 
-	// 再次按下同一编组键：随机挑一艘仍存活的战舰并把相机移过去
-	alive := make([]objPos.MapPos, 0, len(m.state.Interaction.SelectedShips))
-	for _, uid := range m.state.Interaction.SelectedShips {
-		if ship := m.state.Arena.Ships[uid]; ship != nil && ship.CurHP > 0 {
-			alive = append(alive, ship.CurPos)
-		}
-	}
-	if len(alive) == 0 {
+	// 再次按下同一编组键：定位到编队包围盒中心
+	center, ok := m.formationCenter(m.state.Interaction.SelectedShips)
+	if !ok {
 		return
 	}
-	m.centerCameraOn(alive[rand.Intn(len(alive))])
+	m.centerCameraOn(center)
 }
 
-// centerCameraOn 将地图坐标放到战场视野中心。
+// formationCenter 返回编队内存活舰船包围盒的中心，全灭时返回 false。
+// 用包围盒中心而不是某艘船，保证一次定位就能把整个编队带进视野。
+func (m *MissionManager) formationCenter(uids []string) (objPos.MapPos, bool) {
+	var (
+		minX, minY float64
+		maxX, maxY float64
+		found      bool
+	)
+	for _, uid := range uids {
+		ship := m.state.Arena.Ships[uid]
+		if ship == nil || ship.CurHP <= 0 {
+			continue
+		}
+		x, y := ship.CurPos.RX, ship.CurPos.RY
+		if !found {
+			minX, minY, maxX, maxY = x, y, x, y
+			found = true
+			continue
+		}
+		minX, minY = min(minX, x), min(minY, y)
+		maxX, maxY = max(maxX, x), max(maxY, y)
+	}
+	if !found {
+		return objPos.MapPos{}, false
+	}
+	return objPos.NewR((minX+maxX)/2, (minY+maxY)/2), true
+}
+
+const (
+	// cameraMoveEase 是相机每次更新向目标推进的比例；越接近目标步子越小，形成平滑定位。
+	cameraMoveEase = 0.2
+	// cameraMoveSnap 是判定定位已经完成的距离阈值（地图格），避免浮点尾巴长期轻微抖动。
+	cameraMoveSnap = 0.02
+)
+
+// centerCameraOn 将地图坐标设为相机定位目标，由 updateCameraPosition 逐帧平滑推进。
 func (m *MissionManager) centerCameraOn(pos objPos.MapPos) {
-	m.state.View.Camera.Pos = centeredCameraPos(m.state, pos)
+	target := centeredCameraPos(m.state, pos)
+	m.state.View.Camera.Target = &target
+}
+
+// cancelCameraMove 放弃进行中的相机定位，用于玩家手动操作（缩放、小地图点击、框选）接管相机。
+func (m *MissionManager) cancelCameraMove() {
+	m.state.View.Camera.Target = nil
+}
+
+// advanceCameraMove 向定位目标推进一帧，返回是否仍在移动中。
+// 框选拖动依赖相机静止，此时直接放弃定位。
+func (m *MissionManager) advanceCameraMove() bool {
+	camera := &m.state.View.Camera
+	target := camera.Target
+	if target == nil {
+		return false
+	}
+	if m.state.Interaction.IsAreaSelecting {
+		camera.Target = nil
+		return false
+	}
+
+	dx := target.RX - camera.Pos.RX
+	dy := target.RY - camera.Pos.RY
+	if math.Abs(dx) <= cameraMoveSnap && math.Abs(dy) <= cameraMoveSnap {
+		camera.Pos.AssignRxy(target.RX, target.RY)
+		camera.Target = nil
+		return false
+	}
+
+	camera.Pos.AssignRxy(camera.Pos.RX+dx*cameraMoveEase, camera.Pos.RY+dy*cameraMoveEase)
+	return true
 }
 
 // centeredCameraPos 计算将目标放在战场视野中心后的相机左上角坐标。
