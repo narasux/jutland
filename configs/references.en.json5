@@ -232,19 +232,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 305mm/50 Mk 8",
+        value: "3x3 305mm/50 Mk8",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x2 127mm/38 Mk 12",
+        value: "6x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "14x4 40mm/60",
+        value: "14x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "32x1 20mm/70",
+        value: "32x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -279,7 +279,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x4 40mm/39 2-pounder",
+        value: "2x4 40mm/39 Mk VIII 2-pounder",
       },
       {
         label: "Reconnaissance / Level Bombers",
@@ -341,11 +341,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x1 120mm/45",
+        value: "4x1 120mm/45 Mk IX",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x1 40mm/39",
+        value: "2x1 40mm/39 Mk VIII",
       },
       {
         label: "Torpedoes",
@@ -368,15 +368,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "4x1 102mm/45",
+        value: "4x1 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x2 20mm/70",
+        value: "6x2 20mm/70 Oerlikon",
       },
       {
         label: "Anti-aircraft Machine Guns",
-        value: "2x4 12.7mm",
+        value: "2x4 12.7mm Mk III",
       },
       {
         label: "Fighters",
@@ -407,15 +407,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x3 356mm/45 Mk 10",
+        value: "4x3 356mm/45 Mk10",
       },
       {
         label: "Secondary Battery",
-        value: "10x1 127mm/51 Mk 15",
+        value: "10x1 127mm/51 Mk15",
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x1 127mm/25 Mk 10",
+        value: "8x1 127mm/25 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
@@ -446,15 +446,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "8x2 114mm/45",
+        value: "8x2 114mm/45 Mk I",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x8 40mm/39",
+        value: "6x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Machine Guns",
-        value: "8x4 12.7mm",
+        value: "8x4 12.7mm Mk III",
       },
       {
         label: "Fighters",
@@ -485,23 +485,23 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "6x2 305mm/50 Mk 7",
+        value: "6x2 305mm/50 Mk7",
       },
       {
         label: "Secondary Battery",
-        value: "6x1 127mm/51 Mk 7",
+        value: "6x1 127mm/51 Mk7",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x1 76mm/50",
+        value: "8x1 76mm/50 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x4 40mm/60",
+        value: "8x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "24x1 20mm/70",
+        value: "24x1 20mm/70 Mk4",
       },
     ],
     description: "USS Arkansas (BB-33), the second Wyoming-class battleship, entered service in 1912. Represented in her 1944 configuration, she displaced about 31,900 tons fully loaded, measured roughly 171 metres long, and could make 20.5 knots. She bombarded Normandy and Cherbourg, later supported the Iwo Jima and Okinawa landings, and was sunk during Operation Crossroads at Bikini Atoll in 1946.",
@@ -524,11 +524,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "1x2 305mm/40 Mk 3",
+        value: "1x2 305mm/40 Mk3",
       },
       {
         label: "Secondary Battery",
-        value: "4x1 102mm/50 Mk 9",
+        value: "4x1 102mm/50 Mk9",
       },
       {
         label: "Secondary Battery",
@@ -590,15 +590,15 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x1 127mm/25",
+        value: "8x1 127mm/25 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x1 20mm/70",
+        value: "10x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -668,15 +668,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "8x2 127mm/38",
+        value: "8x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x1 20mm/70",
+        value: "8x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -815,11 +815,11 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "12x4 40mm/60",
+        value: "12x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "22x1 20mm/70",
+        value: "22x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -849,7 +849,7 @@
       },
       {
         label: "Torpedo",
-        value: "1 x 18-inch Mark XV",
+        value: "1 x 18-inch Mk XV",
       },
     ],
     description: "The Fairey Barracuda Mk II entered Fleet Air Arm service in 1943 as a carrier-borne torpedo and dive bomber. It became the definitive Merlin 32-powered variant and took part in major operations including the 1944 strikes against Tirpitz. In game it is treated as a torpedo bomber, carrying two rear-firing .303-inch Vickers K machine guns and one 18-inch Mark XV aerial torpedo.",
@@ -872,11 +872,11 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "8x1 102mm/45",
+        value: "8x1 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x4 40mm/39 2-pounder",
+        value: "6x4 40mm/39 Mk VIII 2-pounder",
       },
       {
         label: "Fighters",
@@ -903,11 +903,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 381mm/52",
+        value: "4x2 381mm/52 SK C/34",
       },
       {
         label: "Secondary Battery",
-        value: "6x2 150mm/60",
+        value: "6x2 150mm/60 SK C/28",
       },
       {
         label: "Dual-purpose Guns",
@@ -946,7 +946,7 @@
     armaments: [
       {
         label: "Deck Guns",
-        value: "3x1 102mm/50 Mk 9",
+        value: "3x1 102mm/50 Mk9",
       },
       {
         label: "Anti-aircraft Guns",
@@ -1008,15 +1008,15 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 40mm/60",
+        value: "4x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x2 40mm/60",
+        value: "6x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x2 20mm/70",
+        value: "10x2 20mm/70 Mk24",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -1145,15 +1145,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "2x1 127mm/38",
+        value: "2x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x2 40mm/60",
+        value: "8x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "20x1 20mm/70",
+        value: "20x1 20mm/70 Mk4",
       },
       {
         label: "Fighters",
@@ -1192,7 +1192,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x1 20mm/70",
+        value: "8x1 20mm/70 Mk4",
       },
     ],
     description: "The CL-154 class was the U.S. Navy's late-war 'Super Atlanta' anti-aircraft cruiser project. Its game configuration combines six twin 5-inch/54 mounts, seven twin 3-inch/70 mounts, and eight single 20mm guns. The class was never built or officially named, so the game follows the U.S. light-cruiser city-naming tradition and assigns the fictional name Charlotte, North Carolina.",
@@ -1215,19 +1215,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 203mm/50",
+        value: "3x3 203mm/50 Mk VIII",
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x2 102mm/45",
+        value: "8x2 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "5x8 40mm/39",
+        value: "5x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "16x2 20mm/70",
+        value: "16x2 20mm/70 Oerlikon",
       },
     
       {
@@ -1331,19 +1331,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x2 305mm/45",
+        value: "2x2 305mm/45 Mk5",
       },
       {
         label: "Secondary Guns",
-        value: "4x2 203mm/45",
+        value: "4x2 203mm/45 Mk6",
       },
       {
         label: "Secondary Guns",
-        value: "12x1 178mm/44",
+        value: "12x1 178mm/44 Mk2",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "12x1 76mm/50",
+        value: "12x1 76mm/50 Mk3",
       },
       {
         label: "Torpedoes",
@@ -1374,7 +1374,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "3x8 40mm/39",
+        value: "3x8 40mm/39 Mk VIII",
       },
       {
         label: "Fighters",
@@ -1496,7 +1496,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "12x1 20mm/70",
+        value: "12x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -1523,11 +1523,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x1 127mm/38",
+        value: "4x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x1 20mm/70",
+        value: "4x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -1622,15 +1622,15 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "4x1 102mm/45",
+        value: "4x1 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x8 40mm/39",
+        value: "2x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Machine Guns",
-        value: "3x4 12.7mm",
+        value: "3x4 12.7mm Mk III",
       },
       {
         label: "Fighters",
@@ -1661,7 +1661,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x3 510mm/45",
+        value: "4x3 510mm/45 九八式",
       },
       {
         label: "Secondary Battery",
@@ -1778,15 +1778,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "4x2 + 4x1 127mm/38",
+        value: "4x2 + 4x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x4 40mm/60",
+        value: "10x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "42x1 20mm/70",
+        value: "42x1 20mm/70 Mk4",
       },
       {
         label: "Fighters",
@@ -2411,11 +2411,11 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x4 + 2x2 40mm/60",
+        value: "6x4 + 2x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x2 20mm/70",
+        value: "10x2 20mm/70 Mk24",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -2477,15 +2477,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x2 203mm/50",
+        value: "3x2 203mm/50 三年式",
       },
       {
         label: "Dual-purpose Guns",
-        value: "4x2 127mm/40",
+        value: "4x2 127mm/40 八九式",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x2 25mm/60",
+        value: "6x2 25mm/60 九六式",
       },
       {
         label: "Torpedoes",
@@ -3444,11 +3444,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x1 127mm/38",
+        value: "4x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x1 20mm/70",
+        value: "4x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -3475,15 +3475,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "6x1 140mm/50",
+        value: "6x1 140mm/50 Mk I",
       },
       {
         label: "Dual-purpose Guns",
-        value: "3x1 102mm/45",
+        value: "3x1 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Machine Guns",
-        value: "3x4 12.7mm",
+        value: "3x4 12.7mm Mk III",
       },
       {
         label: "Fighters",
@@ -3631,7 +3631,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x1 75mm/50",
+        value: "4x1 75mm/50 Mle 1922",
       },
       {
         label: "Anti-aircraft Guns",
@@ -4757,15 +4757,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 381mm/42",
+        value: "4x2 381mm/42 Mk I",
       },
       {
         label: "Secondary Battery",
-        value: "16x1 140mm/50",
+        value: "16x1 140mm/50 Mk I",
       },
       {
         label: "Dual-purpose Guns",
-        value: "4x1 102mm/45",
+        value: "4x1 102mm/45 Mk XVI",
       },
       {
         label: "Torpedoes",
@@ -4819,15 +4819,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "4x2 + 4x1 127mm/38",
+        value: "4x2 + 4x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x4 40mm/60",
+        value: "6x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x2 20mm/70",
+        value: "8x2 20mm/70 Mk24",
       },
       {
         label: "Fighters",
@@ -4862,19 +4862,19 @@
     armaments: [
       {
         label: "Main Guns",
-        value: "1x3 406mm/45 Mark 6",
+        value: "1x3 406mm/45 Mk6",
       },
       {
         label: "Dual-purpose Guns",
-        value: "4x2 + 4x1 127mm/38",
+        value: "4x2 + 4x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "17x4 40mm/60",
+        value: "17x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "30x2 20mm/70",
+        value: "30x2 20mm/70 Mk24",
       },
       {
         label: "Fighters",
@@ -4918,11 +4918,11 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "8x2 114mm/45",
+        value: "8x2 114mm/45 Mk I",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "5x8 40mm/39 2-pounders",
+        value: "5x8 40mm/39 Mk VIII 2-pounders",
       },
       {
         label: "Anti-aircraft Guns",
@@ -5219,7 +5219,7 @@
       },
       {
         label: "Secondary Battery",
-        value: "2x2 37mm",
+        value: "2x2 37mm 76A 式",
       },
       {
         label: "Rockets",
@@ -5246,15 +5246,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "5x1 127mm/38",
+        value: "5x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "5x2 40mm/60",
+        value: "5x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "7x1 20mm/70",
+        value: "7x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -5831,15 +5831,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "8x2 133mm (5.25in) QF Mark I",
+        value: "8x2 133mm (5.25in) QF Mk I",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x8 + 2x4 40mm Pom-pom (2-pdr Mark VIII)",
+        value: "2x8 + 2x4 40mm Pom-pom (2-pdr Mk VIII)",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 12.7mm (MG Mark III)",
+        value: "4x4 12.7mm (MG Mk III)",
       },
       {
         label: "Torpedoes",
@@ -5913,15 +5913,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x2 330mm/35",
+        value: "2x2 330mm/35 Mk2",
       },
       {
         label: "Secondary Guns",
-        value: "2x2 203mm/35",
+        value: "2x2 203mm/35 Mk4",
       },
       {
         label: "Secondary Guns",
-        value: "18x1 127mm/40",
+        value: "18x1 127mm/40 Mk3",
       },
     ],
     description: "USS Kentucky (BB-6) was the second Kearsarge-class pre-dreadnought, commissioned in 1900 with an unusual two-storey turret arrangement: a twin 203mm/35 turret superposed on each twin 330mm/35 main turret, backed by eighteen 127mm/40 secondary guns. By 1915 her torpedo tubes had been removed and she carried no anti-aircraft armament. She served as a training ship in the First World War, was decommissioned in 1920 and scrapped in 1923.",
@@ -6155,11 +6155,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 180mm/57",
+        value: "3x3 180mm/57 B-1-P",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x1 100mm/56",
+        value: "6x1 100mm/56 B-34",
       },
       {
         label: "Torpedoes",
@@ -6264,19 +6264,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 406mm/50",
+        value: "3x3 406mm/50 B-37",
       },
       {
         label: "Dual-purpose Guns",
-        value: "12x2 130mm/60",
+        value: "12x2 130mm/60 BL-109A",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "14x4 45mm/78",
+        value: "14x4 45mm/78 SM-20-ZIF",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "18x4 25mm/65",
+        value: "18x4 25mm/65 84-KM",
       },
     ],
     description: "Kremlin represents a fictional culmination of Soviet large-battleship concepts. Its massive hull, heavy armor, and large-caliber battery draw loosely on wartime and postwar design studies but do not correspond to a completed historical project. In the game it serves as the Soviet faction's extreme high-tier capital ship.",
@@ -6330,7 +6330,7 @@
     armaments: [
       {
         label: "Guns",
-        value: "4×1 102 mm/50 Mk 9",
+        value: "4×1 102 mm/50 Mk9",
       },
       {
         label: "Fighters",
@@ -6365,11 +6365,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 150mm/60",
+        value: "3x3 150mm/60 SK C/25",
       },
       {
         label: "Dual-purpose Guns",
-        value: "3x2 88mm/56",
+        value: "3x2 88mm/56 SK C/32",
       },
       {
         label: "Torpedoes",
@@ -6409,19 +6409,19 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "10x2 127mm/38",
+        value: "10x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "13x4 40mm/60",
+        value: "13x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x2 40mm/60",
+        value: "4x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "34x1 20mm/70",
+        value: "34x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -6448,15 +6448,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "1x1 127mm/25",
+        value: "1x1 127mm/25 Mk10",
       },
       {
         label: "Dual-purpose Guns",
-        value: "1x1 76mm/50",
+        value: "1x1 76mm/50 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x1 20mm/70",
+        value: "8x1 20mm/70 Mk4",
       },
     ],
     description: "Liberty ships were standardized American cargo vessels mass-produced during the Second World War. Designed for rapid, inexpensive construction, they replaced merchant tonnage lost to U-boats and supplied Allied nations through Lend-Lease. Eighteen American shipyards completed 2,710 of the ships between 1941 and 1945 for worldwide wartime service.",
@@ -6475,23 +6475,23 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 406mm/45",
+        value: "3x3 406mm/45 Mk I",
       },
       {
         label: "Dual-purpose Guns",
-        value: "12x2 114mm/45",
+        value: "12x2 114mm/45 Mk I",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x6 40mm/56",
+        value: "10x6 40mm/56 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x2 40mm/60",
+        value: "8x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x1 40mm/60",
+        value: "10x1 40mm/60 Bofors",
       },
       {
         label: "Torpedoes",
@@ -6518,23 +6518,23 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x4 356mm/45",
+        value: "4x4 356mm/45 Mk VII",
       },
       {
         label: "Secondary Battery",
-        value: "8x2 133mm/50",
+        value: "8x2 133mm/50 Mk I",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x8 40mm/39",
+        value: "4x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 20mm/70",
+        value: "4x4 20mm/70 Oerlikon",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x2 20mm/70",
+        value: "6x2 20mm/70 Oerlikon",
       },
     
       {
@@ -6561,7 +6561,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x1 127mm/38",
+        value: "2x1 127mm/38 Mk12",
       },
       {
         label: "Torpedoes",
@@ -6588,7 +6588,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x1 127mm/38",
+        value: "2x1 127mm/38 Mk12",
       },
       {
         label: "Torpedoes",
@@ -6615,19 +6615,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 406mm/50",
+        value: "3x3 406mm/50 Mk7",
       },
       {
         label: "Dual-purpose Guns",
-        value: "10x2 127mm/38",
+        value: "10x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "20x4 40mm/60",
+        value: "20x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "44x1 20mm/70",
+        value: "44x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -6654,23 +6654,23 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x3 283mm/52",
+        value: "2x3 283mm/52 SK C/28",
       },
       {
         label: "Secondary Battery",
-        value: "8x1 150mm/60",
+        value: "8x1 150mm/60 SK C/28",
       },
       {
         label: "Dual-purpose Guns",
-        value: "3x2 105mm/65",
+        value: "3x2 105mm/65 SK C/33",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x2 37mm/83",
+        value: "4x2 37mm/83 SK C/30",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "12x1 20mm/65",
+        value: "12x1 20mm/65 C/30",
       },
       {
         label: "Torpedoes",
@@ -6709,11 +6709,11 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x4 + 2x2 40mm/60",
+        value: "10x4 + 2x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "21x1 20mm/70",
+        value: "21x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -6740,11 +6740,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x1 127mm/38",
+        value: "4x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x1 20mm/70",
+        value: "6x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -6790,15 +6790,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "18x1 127mm/54 Mk 16",
+        value: "18x1 127mm/54 Mk16",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "20x4 40mm/60",
+        value: "20x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "18x2 20mm/70",
+        value: "18x2 20mm/70 Mk24",
       },
       {
         label: "Fighters",
@@ -6899,19 +6899,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x3 406mm/50",
+        value: "4x3 406mm/50 Mk7",
       },
       {
         label: "Dual-purpose Guns",
-        value: "10x2 127mm/54",
+        value: "10x2 127mm/54 Mk39",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "20x4 40mm/60",
+        value: "20x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "72x1 20mm/70",
+        value: "72x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -6938,11 +6938,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "1x2 305mm/35",
+        value: "1x2 305mm/35 Mk1",
       },
       {
         label: "Secondary Battery",
-        value: "1x2 254mm/30",
+        value: "1x2 254mm/30 Mk2",
       },
       {
         label: "Secondary Battery",
@@ -6972,7 +6972,7 @@
       },
       {
         label: "Torpedo",
-        value: "1 × 457mm Mark XV",
+        value: "1 × 457mm Mk XV",
       },
     ],
     description: "The de Havilland Sea Mosquito TR.33 was a carrier-borne torpedo-reconnaissance variant of the Mosquito fighter-bomber, first flown in 1945 and entering Fleet Air Arm service in 1946. Equipped with folding wings and an arrestor hook, it carried one 457mm Mark XV aerial torpedo for anti-ship strikes while retaining four forward-firing 20mm Hispano cannons. In the game it is treated as a torpedo bomber.",
@@ -6991,7 +6991,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "1x2 12.7mm",
+        value: "1x2 12.7mm Mk III",
       },
       {
         label: "Torpedoes",
@@ -7087,27 +7087,27 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 406mm/45",
+        value: "3x3 406mm/45 Mk I",
       },
       {
         label: "Secondary Battery",
-        value: "6x2 152mm/50",
+        value: "6x2 152mm/50 Mk XXIII",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x1 120mm/45",
+        value: "6x1 120mm/45 Mk IX",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x8 40mm/39",
+        value: "6x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 40mm/56",
+        value: "4x4 40mm/56 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "59x1 20mm/70",
+        value: "59x1 20mm/70 Oerlikon",
       },
       {
         label: "Torpedoes",
@@ -7134,19 +7134,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x3 + 2x2 356mm/45 Mark 8",
+        value: "2x3 + 2x2 356mm/45 Mk8",
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x2 127mm/38 Mark 12",
+        value: "8x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "9x4 40mm/60",
+        value: "9x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "38x1 20mm/70",
+        value: "38x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7185,7 +7185,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x1 20mm/70",
+        value: "8x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7212,23 +7212,23 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "5x2 356mm/45 Mk 1",
+        value: "5x2 356mm/45 Mk1",
       },
       {
         label: "Secondary Battery",
-        value: "6x1 127mm/51 Mk 7",
+        value: "6x1 127mm/51 Mk7",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x1 76mm/50",
+        value: "10x1 76mm/50 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "12x1 20mm/70",
+        value: "12x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7259,15 +7259,15 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x1 127mm/25",
+        value: "8x1 127mm/25 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x1 20mm/70",
+        value: "6x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -7333,7 +7333,7 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "3x2 105mm/65",
+        value: "3x2 105mm/65 SK C/33",
       },
       {
         label: "Anti-aircraft Guns",
@@ -7368,11 +7368,11 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "11x4 + 2x2 40mm/60",
+        value: "11x4 + 2x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "16x2 20mm/70",
+        value: "16x2 20mm/70 Mk24",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7399,7 +7399,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x2 25mm/65",
+        value: "2x2 25mm/65 2M-3",
       },
       {
         label: "Torpedoes",
@@ -7445,23 +7445,23 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x3 356mm/45",
+        value: "4x3 356mm/45 Mk8",
       },
       {
         label: "Secondary Battery",
-        value: "10x1 127mm/51",
+        value: "10x1 127mm/51 Mk7",
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x1 127mm/25",
+        value: "8x1 127mm/25 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "14x1 20mm/70",
+        value: "14x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7496,15 +7496,15 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x1 127mm/25",
+        value: "8x1 127mm/25 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x1 20mm/70",
+        value: "6x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7531,15 +7531,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 127mm/38",
+        value: "4x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x4 40mm/60",
+        value: "2x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "5x1 20mm/70",
+        value: "5x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -7570,15 +7570,15 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x1 127mm/25",
+        value: "8x1 127mm/25 Mk10",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "15x1 20mm/70",
+        value: "15x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7605,11 +7605,11 @@
     armaments: [
       {
         label: "Anti-aircraft Guns",
-        value: "2x4 + 9x2 40mm/60",
+        value: "2x4 + 9x2 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "18x1 20mm/70",
+        value: "18x1 20mm/70 Mk4",
       },
       {
         label: "Fighters",
@@ -7640,19 +7640,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 203mm/60",
+        value: "4x2 203mm/60 SK C/34",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x2 105mm/65",
+        value: "6x2 105mm/65 SK C/33",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "18x1 40mm/56",
+        value: "18x1 40mm/56 Flak 28",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x4 20mm/70",
+        value: "6x4 20mm/70 C/38",
       },
       {
         label: "Torpedoes",
@@ -7683,11 +7683,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "1x1 40mm/60",
+        value: "1x1 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x1 20mm/70",
+        value: "2x1 20mm/70 Mk4",
       },
       {
         label: "Torpedoes",
@@ -7710,19 +7710,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x3 305mm/50 Mk 8",
+        value: "4x3 305mm/50 Mk8",
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x2 127mm/38",
+        value: "8x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "14x4 40mm/60",
+        value: "14x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "44x1 20mm/70",
+        value: "44x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -7793,11 +7793,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 305mm/45",
+        value: "4x2 305mm/45 Mk5",
       },
       {
         label: "Secondary Guns",
-        value: "20x1 76mm/50",
+        value: "20x1 76mm/50 Mk3",
       },
       {
         label: "Torpedoes",
@@ -7824,11 +7824,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x1 102mm/40",
+        value: "3x1 102mm/40 Mk IV",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "1x1 40mm/39",
+        value: "1x1 40mm/39 Mk VIII",
       },
       {
         label: "Torpedoes",
@@ -7855,15 +7855,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x1 120mm/45",
+        value: "4x1 120mm/45 Mk IX",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 12.7mm",
+        value: "4x4 12.7mm Mk III",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x1 20mm/70",
+        value: "4x1 20mm/70 Oerlikon",
       },
       {
         label: "Torpedoes",
@@ -7890,11 +7890,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x1 120mm/45",
+        value: "4x1 120mm/45 Mk IX",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x1 40mm/39",
+        value: "2x1 40mm/39 Mk VIII",
       },
       {
         label: "Torpedoes",
@@ -7921,11 +7921,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 120mm/45",
+        value: "4x2 120mm/45 Mk XII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "1x4 40mm/39 + 2x4 12.7mm",
+        value: "1x4 40mm/39 Mk VIII + 2x4 12.7mm Mk III",
       },
       {
         label: "Torpedoes",
@@ -7952,7 +7952,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x2 130mm/58",
+        value: "2x2 130mm/58 B-2LM",
       },
       {
         label: "Torpedoes",
@@ -8032,11 +8032,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "1x1 37mm/57",
+        value: "1x1 37mm/57 M43",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x1 20mm/70",
+        value: "2x1 20mm/70 C/38",
       },
       {
         label: "Torpedoes",
@@ -8059,15 +8059,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "12x1 127mm/38",
+        value: "12x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "11x4 40mm/60",
+        value: "11x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "20x2 20mm/70",
+        value: "20x2 20mm/70 Mk24",
       },
       {
         label: "Fighters",
@@ -8102,7 +8102,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 510mm/45",
+        value: "4x2 510mm/45 九八式",
       },
       {
         label: "Secondary Battery",
@@ -8244,27 +8244,27 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 283mm/55",
+        value: "3x3 283mm/55 SK C/34",
       },
       {
         label: "Secondary Battery",
-        value: "4x2 150mm/60",
+        value: "4x2 150mm/60 SK C/28",
       },
       {
         label: "Secondary Battery",
-        value: "4x1 150mm/60",
+        value: "4x1 150mm/60 SK C/28",
       },
       {
         label: "Dual-purpose Guns",
-        value: "7x2 105mm/65",
+        value: "7x2 105mm/65 SK C/33",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "13x2 37mm/83",
+        value: "13x2 37mm/83 SK C/30",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x1 20mm/65",
+        value: "10x1 20mm/65 C/30",
       },
       {
         label: "Torpedoes",
@@ -8393,7 +8393,7 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "8x2 100mm/60",
+        value: "8x2 100mm/60 九八式",
       },
       {
         label: "Anti-aircraft Guns",
@@ -8580,19 +8580,19 @@
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x2 130mm/58",
+        value: "8x2 130mm/58 SM-2-1",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x4 57mm/72",
+        value: "8x4 57mm/72 ZIF-75",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "12x4 37mm/57",
+        value: "12x4 37mm/57 46-K",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x2 37mm/57",
+        value: "8x2 37mm/57 V-11",
       },
     ],
     description: "Slava is a fictional Soviet battleship interpretation emphasizing long-range gunnery and high shell velocity. The design borrows visual and technical ideas from late Soviet capital-ship studies, but no matching vessel was laid down. Its in-game characteristics should not be treated as a documented historical configuration.",
@@ -8654,19 +8654,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 406mm/45",
+        value: "3x3 406mm/45 Mk6",
       },
       {
         label: "Dual-purpose Guns",
-        value: "8x2 127mm/38",
+        value: "8x2 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "17x4 40mm/60",
+        value: "17x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "57x1 20mm/70",
+        value: "57x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -8693,19 +8693,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 406mm/50",
+        value: "3x3 406mm/50 B-37",
       },
       {
         label: "Secondary Battery",
-        value: "6x2 152mm/57",
+        value: "6x2 152mm/57 B-38",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x2 100mm/56",
+        value: "6x2 100mm/56 MZ-14",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x4 37mm/57",
+        value: "10x4 37mm/57 46-K",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -8732,19 +8732,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x3 406mm/50",
+        value: "3x3 406mm/50 B-37",
       },
       {
         label: "Secondary Battery",
-        value: "4x3 152mm/57",
+        value: "4x3 152mm/57 B-38",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x2 100mm/56",
+        value: "6x2 100mm/56 MZ-14",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "9x4 37mm/57",
+        value: "9x4 37mm/57 46-K",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -8779,7 +8779,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x1 12.7mm",
+        value: "8x1 12.7mm M2",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -9311,11 +9311,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x3 152mm/57",
+        value: "4x3 152mm/57 B-38",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x2 100mm/70",
+        value: "6x2 100mm/70 SM-5-1",
       },
       {
         label: "Torpedoes",
@@ -9368,7 +9368,7 @@
       },
       {
         label: "Torpedo",
-        value: "1 x 457mm Mark XII",
+        value: "1 x 457mm Mk XII",
       },
     ],
     description: "The Fairey Swordfish Mk I was a carrier-based torpedo bomber used by the Royal Navy's Fleet Air Arm. Despite its low speed and biplane construction, its excellent low-speed handling contributed to the attack on Taranto and the pursuit of Bismarck. The game configuration carries two .303-inch machine guns and one Mark XII aerial torpedo.",
@@ -9586,7 +9586,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 28mm/75",
+        value: "4x4 28mm/75 Mk1",
       },
       {
         label: "Anti-aircraft Guns",
@@ -9652,27 +9652,27 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 343mm/45",
+        value: "4x2 343mm/45 Mk V",
       },
       {
         label: "Secondary Battery",
-        value: "12x1 152mm/45",
+        value: "12x1 152mm/45 Mk VII",
       },
       {
         label: "Dual-purpose Guns",
-        value: "4x2 102mm/45",
+        value: "4x2 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x8 40mm/39",
+        value: "4x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "3x4 20mm/70",
+        value: "3x4 20mm/70 Oerlikon",
       },
       {
         label: "Anti-aircraft Machine Guns",
-        value: "6x4 12.7mm",
+        value: "6x4 12.7mm Mk III",
       },
       {
         label: "Torpedoes",
@@ -10327,7 +10327,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x8 40mm/39 2-pounder",
+        value: "4x8 40mm/39 Mk VIII 2-pounder",
       },
       {
         label: "Anti-aircraft Guns",
@@ -11446,15 +11446,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "5x1 120mm/45",
+        value: "5x1 120mm/45 Mk IX",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x4 40mm/39",
+        value: "2x4 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x2 20mm/70",
+        value: "2x2 20mm/70 Oerlikon",
       },
       {
         label: "Torpedoes",
@@ -11477,11 +11477,11 @@
     armaments: [
       {
         label: "Anti-aircraft Guns",
-        value: "6x4 40mm/39",
+        value: "6x4 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x2 + 10x1 20mm/70",
+        value: "10x2 + 10x1 20mm/70 Oerlikon",
       },
       {
         label: "Fighters",
@@ -11512,15 +11512,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 152mm/50",
+        value: "4x2 152mm/50 Mk XXIII",
       },
       {
         label: "Dual-purpose Guns",
-        value: "2x1 102mm/45",
+        value: "2x1 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x1 40mm/39",
+        value: "2x1 40mm/39 Mk VIII",
       },
       {
         label: "Torpedoes",
@@ -11547,19 +11547,19 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "8x2 114mm/45",
+        value: "8x2 114mm/45 Mk I",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "5x8 40mm/39",
+        value: "5x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "1x2 + 4x1 40mm/60",
+        value: "1x2 + 4x1 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "16x2 + 6x1 20mm/70",
+        value: "16x2 + 6x1 20mm/70 Oerlikon",
       },
       {
         label: "Fighters",
@@ -11598,19 +11598,19 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x2 305mm/40",
+        value: "2x2 305mm/40 Mk3",
       },
       {
         label: "Secondary Guns",
-        value: "4x2 203mm/45",
+        value: "4x2 203mm/45 Mk6",
       },
       {
         label: "Secondary Guns",
-        value: "12x1 152mm/50",
+        value: "12x1 152mm/50 Mk6",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x1 76mm/50",
+        value: "10x1 76mm/50 Mk3",
       },
       {
         label: "Torpedoes",
@@ -11637,27 +11637,27 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x2 381mm/42",
+        value: "4x2 381mm/42 Mk I",
       },
       {
         label: "Secondary Battery",
-        value: "8x1 152mm/45",
+        value: "8x1 152mm/45 Mk XII",
       },
       {
         label: "Dual-purpose Guns",
-        value: "4x2 102mm/45",
+        value: "4x2 102mm/45 Mk XVI",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x8 40mm/39",
+        value: "4x8 40mm/39 Mk VIII",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x2 20mm/70",
+        value: "2x2 20mm/70 Oerlikon",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x1 20mm/70",
+        value: "10x1 20mm/70 Oerlikon",
       },
       {
         label: "Torpedoes",
@@ -11707,11 +11707,11 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x4 40mm/60",
+        value: "10x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "60x1 20mm/70",
+        value: "60x1 20mm/70 Mk4",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -11773,7 +11773,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "5x2 152mm/50",
+        value: "5x2 152mm/50 Mk XXIII",
       },
       {
         label: "Dual-purpose Guns",
@@ -11804,15 +11804,15 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x1 120mm/45",
+        value: "3x1 120mm/45 Mk IX",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x4 40mm/56",
+        value: "2x4 40mm/56 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x1 20mm/70",
+        value: "4x1 20mm/70 Oerlikon",
       },
       {
         label: "Torpedoes",
@@ -11926,15 +11926,15 @@
     armaments: [
       {
         label: "Dual-purpose Guns",
-        value: "8x1 127mm/38",
+        value: "8x1 127mm/38 Mk12",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x4 40mm/60",
+        value: "4x4 40mm/60 Bofors",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "32x2 20mm/70",
+        value: "32x2 20mm/70 Mk24",
       },
       {
         label: "Fighters",
@@ -12151,7 +12151,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "4x1 120mm/45",
+        value: "4x1 120mm/45 十年式",
       },
       {
         label: "Torpedoes",
@@ -12178,11 +12178,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "5x1 127mm/45",
+        value: "5x1 127mm/45 SK C/34",
       },
       {
         label: "Anti-Aircraft",
-        value: "2x2 37mm + 4x1 20mm",
+        value: "2x2 37mm SK C/30 + 4x1 20mm C/30",
       },
       {
         label: "Torpedoes",
@@ -12205,11 +12205,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "5x1 127mm/45",
+        value: "5x1 127mm/45 SK C/34",
       },
       {
         label: "Anti-Aircraft",
-        value: "2x2 37mm + 4x1 20mm",
+        value: "2x2 37mm SK C/30 + 4x1 20mm C/30",
       },
       {
         label: "Torpedoes",
@@ -13184,19 +13184,19 @@
     armaments: [
       {
         label: "Main Guns",
-        value: "8x2 150mm/60",
+        value: "8x2 150mm/60 SK C/28",
       },
       {
         label: "Dual-purpose Guns",
-        value: "6x2 105mm/65",
+        value: "6x2 105mm/65 SK C/33",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "11x2 37mm/83",
+        value: "11x2 37mm/83 SK C/30",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "7x4 20mm/70",
+        value: "7x4 20mm/70 C/38",
       },
       {
         label: "Fighters",
@@ -13305,7 +13305,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "4x2 20mm/65 Breda",
+        value: "4x2 20mm/65 Breda Model 1932",
       },
       {
         label: "Torpedoes",
@@ -13398,7 +13398,7 @@
       },
       {
         label: "Anti-Aircraft Guns",
-        value: "4x2 20mm/65 Breda",
+        value: "4x2 20mm/65 Breda Model 1932",
       },
       {
         label: "Torpedoes",
@@ -13452,7 +13452,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x3 280mm/53",
+        value: "2x3 280mm/53 Ansaldo UP-102",
       },
       {
         label: "Secondary Battery",
@@ -13464,7 +13464,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x2 20mm/65 Breda",
+        value: "8x2 20mm/65 Breda Model 1932",
       },
       {
         label: "Torpedoes",
@@ -15113,11 +15113,11 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "10x2 37mm/54 Breda",
+        value: "10x2 37mm/54 Breda Model 1932/1938",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x2 20mm/65 Breda",
+        value: "8x2 20mm/65 Breda Model 1932",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -15144,7 +15144,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x3 320mm/44 + 2x2 320mm/44 Model 1934",
+        value: "2x3 320mm/44 Model 1934 + 2x2 320mm/44 Model 1934",
       },
       {
         label: "Secondary Battery",
@@ -15156,11 +15156,11 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "8x2 37mm/54 Breda",
+        value: "8x2 37mm/54 Breda Model 1932/1938",
       },
       {
         label: "Anti-aircraft Guns",
-        value: "2x2 20mm/65 Breda",
+        value: "2x2 20mm/65 Breda Model 1932",
       },
       {
         label: "Reconnaissance Seaplanes",
@@ -15187,7 +15187,7 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "2x3 320mm/44 + 2x2 320mm/44 Model 1934",
+        value: "2x3 320mm/44 Model 1934 + 2x2 320mm/44 Model 1934",
       },
       {
         label: "Secondary Battery",
@@ -15199,7 +15199,7 @@
       },
       {
         label: "Anti-aircraft Guns",
-        value: "6x2 37mm/54 Breda",
+        value: "6x2 37mm/54 Breda Model 1932/1938",
       },
       {
         label: "Reconnaissance Seaplanes",
