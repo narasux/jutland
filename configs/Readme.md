@@ -138,7 +138,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // RB (rocket bullet) 表示火箭弹
     // 127 表示口径 127mm
     // 1932 表示 1932 年研制（不一定准确，主要是做区分）
+    // 末段为可选的型号（如 Mk15 / Type93Mod1 / G7a / F5 / SC50 / R4M），
+    // 无官方型号的弹药（如意、法按重量称名的炸弹）省略该段
     name: "US/GB/127/1932",
+    // name: "US/TB/533/1935/Mk15"
     // 弹药类型
     // shell 炮弹
     // torpedo 鱼雷
@@ -237,7 +240,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   {
     // 鱼雷发射器名称
     // US 是所属阵营，533 表示口径，4 表示管数
+    // 末段为可选的型号（如 Mk15 / Type92Mod1 / C34 / PTA53-30BIS），
+    // 史料无官方型号的发射管（如意、英、法的多数型号）省略该段
     name: "US/533/4",
+    // name: "US/533/5/Mk15"
     // 鱼雷名称
     bulletName: "US/TB/533/1931",
     // 发射器管数
@@ -264,7 +270,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 [
   {
     // 火箭发射器名称
-    name: "JP/120/21/Type5/AA",
+    // 末段为可选的型号（如 Type4 / Type65）
+    name: "JP/120/21/Type4/AA",
     // 火箭弹名称
     bulletName: "JP/RB/120/1944",
     // 单轮装填火箭弹数量
@@ -302,9 +309,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   {
     // 飞机火箭发射器名称
     // 名称建议包含总备弹数量，如 127/4 表示 127mm / 4 发挂载
-    name: "US/AIR/RB/127/4",
+    // 末段为可选的型号（如 HVAR / MightyMouse / R4M / RS82）
+    name: "US/AIR/RB/127/4/HVAR",
     // 火箭弹名称
-    bulletName: "US/RB/127/1937",
+    bulletName: "US/RB/127/1944/HVAR",
     // 挂载总数；飞机火箭弹不会在空中重装
     rocketCount: 4,
     // 单发发射间隔（单位：秒）
@@ -453,7 +461,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "US/533/4",
+          name: "US/533/5/Mk15",
           posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -463,7 +471,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       rockets: [
         // 右防空火箭炮 A
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
@@ -628,7 +636,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       bombs: [
         {
           // 释放器名称（需确保在 releasers.json5 中存在）
-          name: "US/BB/907",
+          name: "US/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -638,7 +646,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       torpedoes: [
         {
           // 释放器名称（需确保在 releasers.json5 中存在）
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -647,7 +655,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       // 火箭弹（参数与机炮挂载点相同，名称需确保在 plane_rocket_launchers.json5 中存在）
       rockets: [
         {
-          name: "US/AIR/RB/127/4",
+          name: "US/AIR/RB/127/4/HVAR",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -667,7 +675,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   {
     // 释放器名称（不可重复）
     // US 是所属阵营，BB 表示炸弹，AST 表示航空鱼雷
-    name: "US/BB/907",
+    // 末段为可选的型号（如 AN-M66 / SC50 / Type91Mod2 / MkXII），
+    // 无官方型号的（如意、法按重量称名的炸弹）省略该段
+    name: "US/BB/907/AN-M66",
     // 弹药名称（需确保在 bullets.json5 中存在）
     bulletName: "US/BB/2000/907",
     // 射程（地图格数）

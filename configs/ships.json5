@@ -3928,39 +3928,39 @@
         // 舰艏
         // 防空火箭炮 A
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.91,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.91,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 防空火箭炮 B
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.88,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.88,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 防空火箭炮 C
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.85,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.85,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
@@ -3968,39 +3968,39 @@
         // 舰艉
         // 防空火箭炮 D
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.89,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.89,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 防空火箭炮 E
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.92,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.92,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 防空火箭炮 F
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.95,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.95,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
@@ -5286,37 +5286,37 @@
       ],
       rockets: [
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: 0.77,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: 0.77,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: 0.74,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: 0.74,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: 0.7,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: 0.7,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
@@ -6566,14 +6566,14 @@
       torpedoes: [
         // 右舷水下 450mm 鱼雷管
         {
-          name: "GER/450/1",
+          name: "GER/450/1/WWI",
           posPercent: 0,
           rightFiringArc: [60, 120],
           leftFiringArc: [360, 360]
         },
         // 左舷水下 450mm 鱼雷管
         {
-          name: "GER/450/1",
+          name: "GER/450/1/WWI",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [240, 300]
@@ -12930,13 +12930,13 @@
       ],
       torpedoes: [
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0,
           rightFiringArc: [45, 135],
           leftFiringArc: [360, 360]
         },
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [225, 315]
@@ -14944,14 +14944,14 @@
         // 2 具 533mm 水下鱼雷发射管（两舷）
         // 右舷鱼雷
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0,
           rightFiringArc: [45, 135],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [225, 315]
@@ -15179,28 +15179,28 @@
         // 4 具 533mm 水下鱼雷发射管（两舷）
         // 右舷鱼雷 A
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0.73,
           rightFiringArc: [0, 45],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0.73,
           rightFiringArc: [0, 0],
           leftFiringArc: [315, 360]
         },
         // 右舷鱼雷 B
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: -0.73,
           rightFiringArc: [135, 180],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: -0.73,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 225]
@@ -15429,28 +15429,28 @@
         // 4 具 533mm 水下鱼雷发射管（两舷）
         // 右舷鱼雷 A
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0.73,
           rightFiringArc: [0, 45],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: 0.73,
           rightFiringArc: [0, 0],
           leftFiringArc: [315, 360]
         },
         // 右舷鱼雷 B
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: -0.73,
           rightFiringArc: [135, 180],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "US/533/1",
+          name: "US/533/1/Submerged",
           posPercent: -0.73,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 225]
@@ -16941,39 +16941,39 @@
       rockets: [
         // 左右防空火箭炮 A
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: -0.84,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: -0.84,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 左右防空火箭炮 B
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: -0.87,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: -0.87,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 左右防空火箭炮 C
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: -0.9,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         {
-          name: "JP/120/28/Type5/AA",
+          name: "JP/120/28/Type4/AA",
           posPercent: -0.9,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
@@ -18325,70 +18325,70 @@
       rockets: [
         // 右防空火箭炮 A
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.3,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 左防空火箭炮 A
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.3,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 B
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.35,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 左防空火箭炮 B
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.35,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 C
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.76,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 C
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.76,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 D
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.8,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 D
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.8,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 E
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.99,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 E
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.99,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
@@ -18902,84 +18902,84 @@
       rockets: [
         // 右防空火箭炮 A
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.35,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 A
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.35,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 B
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.31,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 B
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.31,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 C
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.08,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 C
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: 0.08,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 D
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.76,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 D
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.76,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 E
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.8,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 E
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.8,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         // 右防空火箭炮 F
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.99,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
         // 左防空火箭炮 F
         {
-          name: "JP/120/21/Type5/AA",
+          name: "JP/120/21/Type4/AA",
           posPercent: -0.99,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
@@ -19890,14 +19890,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "GER/533/4",
+          name: "GER/533/4/C34",
           posPercent: -0.77,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "GER/533/4",
+          name: "GER/533/4/C34",
           posPercent: -0.77,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -24075,42 +24075,42 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: 0.1,
           rightFiringArc: [30, 60],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: 0.1,
           rightFiringArc: [0, 0],
           leftFiringArc: [300, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: 0,
           rightFiringArc: [30, 60],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [300, 330]
         },
         // 右舷鱼雷 C
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.05,
           rightFiringArc: [30, 60],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 C
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.05,
           rightFiringArc: [0, 0],
           leftFiringArc: [300, 330]
@@ -25948,28 +25948,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [30, 60],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [0, 0],
           leftFiringArc: [300, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [30, 60],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [0, 0],
           leftFiringArc: [300, 330]
@@ -26212,28 +26212,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [30, 60],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [0, 0],
           leftFiringArc: [300, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [30, 60],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Submerged",
           posPercent: -0.2,
           rightFiringArc: [0, 0],
           leftFiringArc: [300, 330]
@@ -31111,14 +31111,14 @@
       torpedoes: [
         // 右舷鱼雷
         {
-          name: "US/324/3",
+          name: "US/324/3/Mk32",
           posPercent: 0.18,
           rightFiringArc: [20, 160],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷
         {
-          name: "US/324/3",
+          name: "US/324/3/Mk32",
           posPercent: 0.18,
           rightFiringArc: [0, 0],
           leftFiringArc: [200, 340]
@@ -31165,14 +31165,14 @@
       torpedoes: [
         // 右舷鱼雷
         {
-          name: "US/324/3",
+          name: "US/324/3/Mk32",
           posPercent: 0.22,
           rightFiringArc: [20, 160],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷
         {
-          name: "US/324/3",
+          name: "US/324/3/Mk32",
           posPercent: 0.22,
           rightFiringArc: [0, 0],
           leftFiringArc: [200, 340]
@@ -31300,14 +31300,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.24,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.24,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -31486,14 +31486,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.34,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.34,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -31770,28 +31770,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.18,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.18,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.34,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.34,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -32158,28 +32158,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: 0.15,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: 0.15,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.03,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod1",
           posPercent: -0.03,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -32504,28 +32504,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.12,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.12,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.32,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.32,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -32836,28 +32836,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.12,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.12,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.32,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.32,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -33189,28 +33189,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.28,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.28,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.48,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/610/3",
+          name: "JP/610/3/Type90Mod3",
           posPercent: -0.48,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -33429,28 +33429,28 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/533/2",
+          name: "JP/533/2/Type6Mod2",
           posPercent: 0.35,
           rightFiringArc: [60, 120],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/533/2",
+          name: "JP/533/2/Type6Mod2",
           posPercent: 0.35,
           rightFiringArc: [0, 0],
           leftFiringArc: [240, 300]
         },
         // 右舷鱼雷 B
         {
-          name: "JP/533/2",
+          name: "JP/533/2/Type6Mod2",
           posPercent: -0.25,
           rightFiringArc: [60, 120],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/533/2",
+          name: "JP/533/2/Type6Mod2",
           posPercent: -0.25,
           rightFiringArc: [0, 0],
           leftFiringArc: [240, 300]
@@ -33880,70 +33880,70 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: 0.18,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: 0.18,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: 0.03,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: 0.03,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 C
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: -0.15,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 C
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: -0.15,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 D
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: -0.33,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 D
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: -0.33,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 右舷鱼雷 E
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: -0.52,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 E
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod3",
           posPercent: -0.52,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -34152,14 +34152,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.23,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.23,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -34369,14 +34369,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.25,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.25,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -34522,14 +34522,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.23,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.23,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -34644,14 +34644,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/2",
+          name: "JP/610/2/Type8Mod2",
           posPercent: -0.18,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/2",
+          name: "JP/610/2/Type8Mod2",
           posPercent: -0.37,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -34957,14 +34957,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.09,
           rightFiringArc: [60, 120],
           leftFiringArc: [240, 300]
         },
         // 左舷鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.29,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -36336,14 +36336,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "SU/533/5",
+          name: "SU/533/5/PTA53-30BIS",
           posPercent: 0.05,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "SU/533/5",
+          name: "SU/533/5/PTA53-30BIS",
           posPercent: 0.05,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -36439,14 +36439,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "SU/533/3",
+          name: "SU/533/3/1N",
           posPercent: -0.05,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "SU/533/3",
+          name: "SU/533/3/1N",
           posPercent: -0.05,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
@@ -36769,14 +36769,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "SU/533/3",
+          name: "SU/533/3/1N",
           posPercent: -0.46,
           rightFiringArc: [30, 180],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "SU/533/3",
+          name: "SU/533/3/1N",
           posPercent: -0.46,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 330]
@@ -38094,14 +38094,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "IT/533/4",
+          name: "IT/533/4/Paper",
           posPercent: -0.22,
           rightFiringArc: [20, 160],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 A
         {
-          name: "IT/533/4",
+          name: "IT/533/4/Paper",
           posPercent: -0.22,
           rightFiringArc: [0, 0],
           leftFiringArc: [200, 340]
@@ -38998,14 +38998,14 @@
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "US/533/5",
+          name: "US/533/5/Mk15",
           posPercent: 0.12,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
-          name: "US/533/5",
+          name: "US/533/5/Mk15",
           posPercent: -0.05,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -39074,14 +39074,14 @@
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod2",
           posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod2",
           posPercent: -0.2,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -39134,14 +39134,14 @@
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.2,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -39209,14 +39209,14 @@
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.2,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -39304,21 +39304,21 @@
       torpedoes: [
         // 中轴五联装鱼雷 A
         {
-          name: "JP/610/5",
+          name: "JP/610/5/Type0Mod5",
           posPercent: 0.34,
           rightFiringArc: [45, 160],
           leftFiringArc: [200, 315]
         },
         // 中轴五联装鱼雷 B
         {
-          name: "JP/610/5",
+          name: "JP/610/5/Type0Mod5",
           posPercent: 0.14,
           rightFiringArc: [45, 135],
           leftFiringArc: [225, 315]
         },
         // 中轴五联装鱼雷 C
         {
-          name: "JP/610/5",
+          name: "JP/610/5/Type0Mod5",
           posPercent: -0.11,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -39395,14 +39395,14 @@
       torpedoes: [
         // 中轴七联装鱼雷 A
         {
-          name: "JP/610/7",
+          name: "JP/610/7/Paper",
           posPercent: 0.11,
           rightFiringArc: [45, 150],
           leftFiringArc: [210, 315]
         },
         // 中轴七联装鱼雷 B
         {
-          name: "JP/610/7",
+          name: "JP/610/7/Paper",
           posPercent: -0.15,
           rightFiringArc: [45, 150],
           leftFiringArc: [210, 315]
@@ -39525,7 +39525,7 @@
       torpedoes: [
         // 中线四联装鱼雷管
         {
-          name: "JP/610/4",
+          name: "JP/610/4/Type92Mod4",
           posPercent: -0.11,
           rightFiringArc: [45, 150],
           leftFiringArc: [210, 315]
@@ -39585,21 +39585,21 @@
       torpedoes: [
         // 舰桥前甲板凹处鱼雷管
         {
-          name: "JP/533/2",
+          name: "JP/533/2/Type6Mod2",
           posPercent: 0.57,
           rightFiringArc: [45, 150],
           leftFiringArc: [210, 315]
         },
         // 舰尾中线鱼雷管 A
         {
-          name: "JP/533/2",
+          name: "JP/533/2/Type6Mod2",
           posPercent: -0.2,
           rightFiringArc: [45, 135],
           leftFiringArc: [225, 315]
         },
         // 舰尾中线鱼雷管 B
         {
-          name: "JP/533/2",
+          name: "JP/533/2/Type6Mod2",
           posPercent: -0.45,
           rightFiringArc: [45, 135],
           leftFiringArc: [225, 315]
@@ -39710,14 +39710,14 @@
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "GER/533/4",
+          name: "GER/533/4/C34",
           posPercent: 0.12,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
-          name: "GER/533/4",
+          name: "GER/533/4/C34",
           posPercent: -0.3,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -39826,14 +39826,14 @@
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "GER/533/4",
+          name: "GER/533/4/C34",
           posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
-          name: "GER/533/4",
+          name: "GER/533/4/C34",
           posPercent: -0.3,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -40506,14 +40506,14 @@
       torpedoes: [
         // 中轴鱼雷 A
         {
-          name: "SU/533/5",
+          name: "SU/533/5/PTA53-30BIS",
           posPercent: 0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
         // 中轴鱼雷 B
         {
-          name: "SU/533/5",
+          name: "SU/533/5/PTA53-30BIS",
           posPercent: -0.26,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
@@ -40612,14 +40612,14 @@
       torpedoes: [
         // 中部四联装鱼雷管 A
         {
-          name: "IT/533/4",
+          name: "IT/533/3",
           posPercent: -0.18,
           rightFiringArc: [45, 150],
           leftFiringArc: [210, 315]
         },
         // 中部四联装鱼雷管 B
         {
-          name: "IT/533/4",
+          name: "IT/533/3",
           posPercent: -0.43,
           rightFiringArc: [30, 135],
           leftFiringArc: [225, 330]
@@ -40942,14 +40942,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "US/533/1",
+          name: "US/533/1/Mk18",
           posPercent: 0,
           rightFiringArc: [0, 30],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "US/533/1",
+          name: "US/533/1/Mk18",
           posPercent: 0,
           rightFiringArc: [0, 0],
           leftFiringArc: [330, 360]
@@ -40989,14 +40989,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "JP/450/1",
+          name: "JP/450/1/Type44",
           posPercent: -0.7,
           rightFiringArc: [0, 30],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "JP/450/1",
+          name: "JP/450/1/Type44",
           posPercent: -0.7,
           rightFiringArc: [0, 0],
           leftFiringArc: [330, 360]
@@ -41051,14 +41051,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "GER/533/1",
+          name: "GER/533/1/C35",
           posPercent: 0.5,
           rightFiringArc: [0, 30],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "GER/533/1",
+          name: "GER/533/1/C35",
           posPercent: 0.5,
           rightFiringArc: [0, 0],
           leftFiringArc: [330, 360]
@@ -41098,14 +41098,14 @@
       torpedoes: [
         // 右舷鱼雷 A
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Deck",
           posPercent: 0.5,
           rightFiringArc: [0, 30],
           leftFiringArc: [360, 360]
         },
         // 左舷鱼雷 B
         {
-          name: "UK/533/1",
+          name: "UK/533/1/Deck",
           posPercent: 0.5,
           rightFiringArc: [0, 0],
           leftFiringArc: [330, 360]

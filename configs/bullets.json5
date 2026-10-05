@@ -697,137 +697,177 @@
     damage: 1.5,
     criticalRate: 0.0002
   },
-  // 鱼雷
+  // 法国海军 550mm Mle 1923D/23DT 鱼雷（23D 巡洋舰、23DT 驱逐舰；战斗部 310kg）
   {
-    name: "FR/TB/550/1923",
+    name: "FR/TB/550/1923/Mle1923D",
     type: "torpedo",
     diameter: 550,
     damage: 4800,
     criticalRate: 0.07
   },
-  // 法国海军 1926 年式 400mm 航空鱼雷
+  // 法国海军 400mm Mle 1926DA 航空鱼雷（机投，带尾整流环，投放高度约 80m）
   {
-    name: "FR/TB/400/1926",
+    name: "FR/TB/400/1926/Mle1926DA",
     type: "torpedo",
     diameter: 400,
     damage: 3000,
     criticalRate: 0.03
   },
+  // 美国海军 22.4 英寸（569mm）Mk 13 航空鱼雷（1938 年服役；游戏按 570mm 取整）
   {
-    name: "US/TB/570/1938",
+    name: "US/TB/570/1938/Mk13",
     type: "torpedo",
     diameter: 570,
     damage: 4800,
     criticalRate: 0.075
   },
+  // 美国海军 21 英寸 Mk 15 鱼雷（1935 年服役，驱逐舰/巡洋舰用；1931 年的 Mk 14 是潜艇鱼雷）
   {
-    name: "US/TB/533/1931",
+    name: "US/TB/533/1935/Mk15",
     type: "torpedo",
     diameter: 533,
     damage: 4300,
     criticalRate: 0.05
   },
+  // 美国海军 21 英寸 Mk 8 鱼雷（1911 年服役，一战至二战长期在役；PT 艇与老式驱逐舰用）
   {
-    name: "US/TB/324/1957",
+    name: "US/TB/533/1911/Mk8",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4300,
+    criticalRate: 0.05
+  },
+  // 美国海军 12.75 英寸（324mm）Mk 44 反潜鱼雷（Mk 46 为 1966 年）
+  {
+    name: "US/TB/324/1957/Mk44",
     type: "torpedo",
     diameter: 324,
     damage: 1400,
     criticalRate: 0.02
   },
+  // 日本海军 回天一型人操鱼雷（基于九三式三型，战斗部 1550kg；1944 年 11 月首次实战）
   {
-    name: "JP/TB/Kaiten/1944",
+    name: "JP/TB/Kaiten/1944/Type1",
     type: "torpedo",
     diameter: 1350,
     damage: 24233,
     criticalRate: 0.5
   },
+  // 日本海军 61cm 九三式一型酸素鱼雷（1933 设计／1935 服役，战斗部 490kg）
   {
-    name: "JP/TB/610/1933",
+    name: "JP/TB/610/1933/Type93Mod1",
     type: "torpedo",
     diameter: 610,
     damage: 6250,
     criticalRate: 0.1
   },
+  // 日本海军 53cm 六年式鱼雷（1918 年服役，战斗部 203kg）
   {
-    name: "JP/TB/533/1921",
+    name: "JP/TB/533/1921/Type6",
     type: "torpedo",
     diameter: 533,
     damage: 4400,
     criticalRate: 0.05
   },
+  // 日本海军 45cm 四四式鱼雷（1911 年服役；1928 年时已属老旧，同期主力已换 53/61cm）
   {
-    name: "JP/TB/450/1928",
+    name: "JP/TB/450/1928/Type44",
     type: "torpedo",
     diameter: 450,
     damage: 2700,
     criticalRate: 0.02
   },
+  // 日本海军 45cm 九一式二型航空鱼雷（1940 设计／1941 服役，935kg，战斗部 205kg）
   {
-    name: "JP/TB/450/1943",
+    name: "JP/TB/450/1940/Type91Mod2",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3400,
+    criticalRate: 0.04
+  },
+  // 日本海军 45cm 二式鱼雷（1943 年服役，甲标的与鱼雷艇用；九五式是 53cm 潜艇鱼雷）
+  {
+    name: "JP/TB/450/1943/Type2",
     type: "torpedo",
     diameter: 450,
     damage: 3800,
     criticalRate: 0.03
   },
+  // 德国海军 53.3cm G7a（T1）蒸汽鱼雷（水面舰用；潜艇以电动 G7e 为主）
   {
-    name: "GER/TB/533/1940",
+    name: "GER/TB/533/1940/G7a",
     type: "torpedo",
     diameter: 533,
     damage: 4750,
     criticalRate: 0.07
   },
+  // 德国 45cm F5 航空鱼雷（1939 年服役；F5b 为 1941 年。德国无 45cm 潜艇鱼雷）
   {
-    name: "GER/TB/450/1938",
+    name: "GER/TB/450/1938/F5",
     type: "torpedo",
     diameter: 450,
     damage: 3000,
     criticalRate: 0.035
   },
+  // 英国海军 18 英寸（45cm）Mk XII 航空鱼雷（设计 1935／服役 1937）
   {
-    name: "UK/TB/457/1935",
+    name: "UK/TB/457/1935/MkXII",
     type: "torpedo",
     diameter: 457,
     damage: 3000,
     criticalRate: 0.03
   },
+  // 英国海军 18 英寸（45cm）Mk XV 航空鱼雷（设计 1942／服役 1943，战斗部 247kg Torpex）
   {
-    name: "UK/TB/457/1942",
+    name: "UK/TB/457/1942/MkXV",
     type: "torpedo",
     diameter: 457,
     damage: 4050,
     criticalRate: 0.06
   },
+  // 英国海军 24.5 英寸（622mm）Mk I 鱼雷（纳尔逊级专用，氧气富化空气动力，战斗部 337kg）
   {
-    name: "UK/TB/622/1925",
+    name: "UK/TB/622/1925/MkI",
     type: "torpedo",
     diameter: 622,
     damage: 5450,
     criticalRate: 0.08
   },
+  // 英国海军 21 英寸 Mk IX 鱼雷（设计 1928／服役 1930，巡洋舰与后期驱逐舰用；Mk VIII 为潜艇/MTB 用）
   {
-    name: "UK/TB/533/1928",
+    name: "UK/TB/533/1928/MkIX",
     type: "torpedo",
     diameter: 533,
     damage: 4600,
     criticalRate: 0.07
   },
+  // 英国海军 21 英寸 Mk VIII 鱼雷（服役 1927；潜艇与 MTB 主力，Mk VIII** 为二战最主力）
   {
-    name: "UK/TB/533/1918",
+    name: "UK/TB/533/1927/MkVIII",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4600,
+    criticalRate: 0.07
+  },
+  // 英国海军 21 英寸 Mk V 鱼雷（1918 年服役；一战主力实为 Mk IV*）
+  {
+    name: "UK/TB/533/1918/MkV",
     type: "torpedo",
     diameter: 533,
     damage: 4000,
     criticalRate: 0.04
   },
+  // 苏联 533mm 53-27 鱼雷（1927 年服役；53-36 设计年为 1932，53-38 服役 1938）
   {
-    name: "SU/TB/533/1932",
+    name: "SU/TB/533/1932/53-27",
     type: "torpedo",
     diameter: 533,
     damage: 4800,
     criticalRate: 0.08
   },
-  // 苏联 45-36 型 450mm 航空鱼雷（Il-4T 挂载，弹头 200kg）
+  // 苏联 45-36 型 450mm 航空鱼雷（АН 低空型 1939 年服役；基型 45-36Н 为 1936 年舰/潜用）
   {
-    name: "SU/TB/450/1939",
+    name: "SU/TB/450/1939/45-36AN",
     type: "torpedo",
     diameter: 450,
     damage: 3400,
@@ -1187,34 +1227,42 @@
     damage: 1.2,
     criticalRate: 0.0001
   },
-  // 火箭弹
+  // 美国 5 英寸（127mm）HVAR 高速航空火箭弹（1944 年服役；无制导空对地）
   // 美国海军 127mm 防空火箭弹
   {
-    name: "US/RB/127/1937",
+    name: "US/RB/127/1944/HVAR",
     type: "rocket",
     diameter: 127,
     damage: 22,
     criticalRate: 0.0005
   },
-  // 日本海军 12cm 5式防空火箭弹
+  // 美国 2.75 英寸（70mm）Mighty Mouse 航空火箭弹（1948 年服役，近炸引信；本作作为战斗机对空火箭使用）
   {
-    name: "JP/RB/120/1940",
+    name: "US/RB/70/1948/MightyMouse",
+    type: "rocket",
+    diameter: 70,
+    damage: 6,
+    criticalRate: 0.0005
+  },
+  // 日本海军 12cm 四式十二糎焼霰火箭弹（1943 研制／1944 服役；原写「五式」非标准名）
+  {
+    name: "JP/RB/120/1944/Type4",
     type: "rocket",
     diameter: 120,
     damage: 25,
     criticalRate: 0.0005
   },
-  // 日本海军 200mm 三式六番二七号火箭爆弹（60kg，对空）
+  // 日本海军 200mm 三式六番二七号火箭爆弹（约 69kg，对空）
   {
-    name: "JP/RB/200/1944",
+    name: "JP/RB/200/1944/Type3No27",
     type: "rocket",
     diameter: 200,
     damage: 26,
     criticalRate: 0.003
   },
-  // 日本海军 100mm 三式一番二八号一型火箭爆弹（7.65kg，对空）
+  // 日本海军 100mm 三式一番二八号爆弾一型（7.65kg，对空）
   {
-    name: "JP/RB/100/1945",
+    name: "JP/RB/100/1945/Type3No28",
     type: "rocket",
     diameter: 100,
     damage: 8,
@@ -1222,13 +1270,13 @@
   },
   // 德国空军 55mm R4M 对空火箭弹
   {
-    name: "GER/RB/55/1945",
+    name: "GER/RB/55/1945/R4M",
     type: "rocket",
     diameter: 55,
     damage: 4,
     criticalRate: 0.0008
   },
-  // 中国海军 122mm 舰载火箭弹
+  // 中国海军 122mm 舰载火箭弹【型号未证实】——疑为 70 式 122 毫米火箭（1970）
   {
     name: "CN/RB/122/1960",
     type: "rocket",
@@ -1238,23 +1286,23 @@
   },
   // 中国海军 250mm 65 式反潜火箭弹
   {
-    name: "CN/RB/250/1965",
+    name: "CN/RB/250/1965/Type65",
     type: "rocket",
     diameter: 250,
     damage: 95,
     criticalRate: 0.001
   },
-  // 苏联空军 RS-82 82mm 航空火箭弹（Il-2 / Su-2 对舰/对地）
+  // 苏联空军 RS-82 82mm 航空火箭弹（1937 定型；Il-2 / Su-2 对舰/对地）
   {
-    name: "SU/RB/82/1937",
+    name: "SU/RB/82/1937/RS82",
     type: "rocket",
     diameter: 82,
     damage: 10,
     criticalRate: 0.0003
   },
-  // 苏联空军 RS-132 132mm 航空火箭弹（Il-2 / Il-10 对舰）
+  // 苏联空军 RS-132 132mm 航空火箭弹（1938 定型；Il-2 / Il-10 对舰）
   {
-    name: "SU/RB/132/1938",
+    name: "SU/RB/132/1938/RS132",
     type: "rocket",
     diameter: 132,
     damage: 22,
@@ -1292,9 +1340,9 @@
     damage: 2000,
     criticalRate: 0.07
   },
-  // 意大利 450mm 航空鱼雷
+  // 意大利 450mm F200/450 x 5.46 航空鱼雷（Whitehead 阜姆；德国编号 F5W）
   {
-    name: "IT/TB/450",
+    name: "IT/TB/450/F200-450",
     type: "torpedo",
     diameter: 450,
     damage: 3000,
@@ -1356,9 +1404,9 @@
     damage: 1.2,
     criticalRate: 0.0001
   },
-  // 意大利海军 533mm 鱼雷（安萨尔多大型巡洋舰方案）
+  // 意大利 533.4mm Si 270/533.4 x 7.2 鱼雷（Silurificio Italiano；意各型服役年约 1935-39）
   {
-    name: "IT/TB/533/1932",
+    name: "IT/TB/533/1932/Si270",
     type: "torpedo",
     diameter: 533,
     damage: 4800,

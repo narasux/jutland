@@ -1,263 +1,267 @@
 [
-  // 美国海军 2000 磅（907kg）炸弹
+  // 美国海军 2000 磅（907kg）AN-M66 通用炸弹
   {
-    name: "US/BB/907",
+    name: "US/BB/907/AN-M66",
     bulletName: "US/BB/2000/907",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 美国陆军航空队 2000 磅（907kg）炸弹（水平投弹，远处投放）
+  // 美国陆军航空队 2000 磅（907kg）AN-M66 炸弹（水平投弹，远处投放）
   {
-    name: "US/BB/907/LB",
+    name: "US/BB/907/LB/AN-M66",
     bulletName: "US/BB/2000/907",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 美国陆军航空队 1000 磅（454kg）炸弹（水平投弹，远处投放）
+  // 美国陆军航空队 1000 磅（454kg）AN-M65 炸弹（水平投弹，远处投放）
   {
-    name: "US/BB/454/LB",
+    name: "US/BB/454/LB/AN-M65",
     bulletName: "US/BB/1000/454",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 美国海军 1000 磅（454kg）炸弹
+  // 美国海军 1000 磅（454kg）AN-M65 炸弹（当前无舰船/飞机引用）
   {
-    name: "US/BB/454",
+    name: "US/BB/454/AN-M65",
     bulletName: "US/BB/1000/454",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 美国海军 500 磅（227kg）炸弹
+  // 美国海军 500 磅（227kg）AN-M64 炸弹
   {
-    name: "US/BB/227",
+    name: "US/BB/227/AN-M64",
     bulletName: "US/BB/500/227",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 美国海军 250 磅（113kg）炸弹
+  // 美国海军 250 磅（113kg）AN-M57 炸弹
   {
-    name: "US/BB/114",
+    name: "US/BB/114/AN-M57",
     bulletName: "US/BB/250/114",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 英国海军 250 磅（114kg）炸弹（水平投弹，远处投放）
+  // 英国海军 250 磅（114kg）炸弹（水平投弹；英制 250 lb 弹无成体系型号，本作沿用美制 AN-M57 弹体）
   {
     name: "UK/BB/114",
     bulletName: "US/BB/250/114",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 日本海军 500kg 炸弹
+  // 日本海军 500kg 五〇番通常爆弾二型（507.3kg，下瀬火薬 221kg）
   {
-    name: "JP/BB/500",
+    name: "JP/BB/500/Type50No2",
     bulletName: "JP/BB/500",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 日本海军 250kg 炸弹
+  // 日本海军 250kg 九九式二五番通常爆弾一型（251.1kg，1939 年采用）
   {
-    name: "JP/BB/250",
+    name: "JP/BB/250/Type99No25",
     bulletName: "JP/BB/250",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 日本海军 60kg 炸弹
+  // 日本海军 60kg 九七式六番陸用爆弾（60.4kg，1937 年采用）
   {
-    name: "JP/BB/60",
+    name: "JP/BB/60/Type97No6",
     bulletName: "JP/BB/60",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 美国海军 570mm 航空鱼雷
+  // 美国海军 22.4 英寸（569mm）Mk 13 航空鱼雷
   {
-    name: "US/AST/570",
-    bulletName: "US/TB/570/1938",
+    name: "US/AST/570/Mk13",
+    bulletName: "US/TB/570/1938/Mk13",
     range: 3,
     bulletSpeed: 35,
   },
-  // 日本海军 450mm 航空鱼雷
+  // 日本海军 45cm 九一式二型航空鱼雷（1940 设计／1941 服役）
   {
-    name: "JP/AST/450/1940",
-    bulletName: "JP/TB/450/1928",
+    name: "JP/AST/450/1940/Type91Mod2",
+    bulletName: "JP/TB/450/1940/Type91Mod2",
     range: 4,
     bulletSpeed: 40,
   },
-  // 日本海军新式 450mm 航空鱼雷
+  // 日本海军 45cm 九一式三型／三型改航空鱼雷（1942-43 服役；四式是 1944 年）
   {
-    name: "JP/AST/450/1943",
-    bulletName: "JP/TB/450/1943",
+    name: "JP/AST/450/1943/Type91Mod3",
+    bulletName: "JP/TB/450/1943/Type2",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 英国海军 457mm Mark XII 航空鱼雷
+  // 英国海军 18 英寸（45cm）Mk XII 航空鱼雷（剑鱼、大青花鱼）
   {
-    name: "UK/AST/457/1935",
-    bulletName: "UK/TB/457/1935",
+    name: "UK/AST/457/1935/MkXII",
+    bulletName: "UK/TB/457/1935/MkXII",
     range: 3.5,
     bulletSpeed: 40,
   },
-  // 英国海军 457mm Mark XV 航空鱼雷
+  // 英国海军 18 英寸（45cm）Mk XV 航空鱼雷（梭鱼、复仇者、英俊战士）
   {
-    name: "UK/AST/457/1942",
-    bulletName: "UK/TB/457/1942",
+    name: "UK/AST/457/1942/MkXV",
+    bulletName: "UK/TB/457/1942/MkXV",
     range: 4.5,
     bulletSpeed: 40,
   },
-  // 德国海军 450mm 航空鱼雷
+  // 德国空军 45cm F5 航空鱼雷（1939 年服役；F5b 为 1941 年）
   {
-    name: "GER/AST/450/1938",
-    bulletName: "GER/TB/450/1938",
+    name: "GER/AST/450/1938/F5",
+    bulletName: "GER/TB/450/1938/F5",
     range: 3.5,
     bulletSpeed: 35,
   },
-  // 德国空军 50kg 炸弹
+  // 德国空军 50kg SC 50 航空炸弹
   {
-    name: "GER/BB/50",
+    name: "GER/BB/50/SC50",
     bulletName: "GER/BB/50/1937",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 德国空军 250kg 炸弹
+  // 德国空军 250kg SC 250 航空炸弹
   {
-    name: "GER/BB/250",
+    name: "GER/BB/250/SC250",
     bulletName: "GER/BB/250/1938",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 德国空军 50kg 炸弹（水平投弹）
+  // 德国空军 50kg SC 50 航空炸弹（水平投弹）
   {
-    name: "GER/BB/50/LB",
+    name: "GER/BB/50/LB/SC50",
     bulletName: "GER/BB/50/1937",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 德国空军 250kg 炸弹（水平投弹）
+  // 德国空军 250kg SC 250 航空炸弹（水平投弹）
   {
-    name: "GER/BB/250/LB",
+    name: "GER/BB/250/LB/SC250",
     bulletName: "GER/BB/250/1938",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 德国空军 500kg 炸弹（水平投弹）
+  // 德国空军 500kg SC 500 航空炸弹（水平投弹）
   {
-    name: "GER/BB/500/LB",
+    name: "GER/BB/500/LB/SC500",
     bulletName: "GER/BB/500/1940",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 德国空军 1000kg 炸弹（水平投弹）
+  // 德国空军 1000kg SC 1000 "Hermann" 航空炸弹（水平投弹）
   {
-    name: "GER/BB/1000/LB",
+    name: "GER/BB/1000/LB/SC1000",
     bulletName: "GER/BB/1000/1941",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 德国空军 Fritz X (PC 1400) 制导炸弹；暂用水平投放近似
+  // 德国空军 PC 1400 X（Fritz X）无线电制导炸弹；暂用水平投放近似
   {
-    name: "GER/BB/1400/LB",
+    name: "GER/BB/1400/LB/PC1400X",
     bulletName: "GER/BB/1400/1943",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 德国空军 1800kg 炸弹（水平投弹）
+  // 德国空军 1800kg SC 1800 "Satan" 航空炸弹（水平投弹）
   {
-    name: "GER/BB/1800/LB",
+    name: "GER/BB/1800/LB/SC1800",
     bulletName: "GER/BB/1800/1942",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 法国海军 225kg 航空炸弹（俯冲投弹）
+  // 法国海军 225kg 航空炸弹（LN 401、V-156F 使用；法军按重量称名，无型号代码）
   {
     name: "FR/BB/225",
     bulletName: "FR/BB/225/1938",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 法国海军 Nord 1500 使用的 1000kg 航空炸弹（俯冲投弹）
+  // 法国海军 1000kg 航空炸弹（俯冲投弹；法军按重量称名，无型号代码）
   {
     name: "FR/BB/1000",
     bulletName: "FR/BB/1000/1949",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 法国海军 400mm 1926 年式航空鱼雷
+  // 法国海军 400mm Mle 1926DA 航空鱼雷（机投）
   {
-    name: "FR/AST/400/1926",
-    bulletName: "FR/TB/400/1926",
+    name: "FR/AST/400/1926/Mle1926DA",
+    bulletName: "FR/TB/400/1926/Mle1926DA",
     range: 3.5,
     bulletSpeed: 35,
   },
-  // 法国海军 75kg 航空炸弹（水平投弹）
+  // 法国海军 75kg 航空炸弹（水平投弹；法军按重量称名，无型号代码）
   {
     name: "FR/BB/75/LB",
     bulletName: "FR/BB/75/1935",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 意大利 250kg 航空炸弹（俯冲投弹，近距）
+  // 意大利 250kg 航空炸弹（俯冲投弹，近距；意军按重量称名，无型号代码）
   {
     name: "IT/BB/250",
     bulletName: "IT/BB/250",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 意大利 500kg 航空炸弹（水平投弹，远处投放）
+  // 意大利 500kg 航空炸弹（水平投弹，远处投放；意军按重量称名，无型号代码）
   {
     name: "IT/BB/500/LB",
     bulletName: "IT/BB/500",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 意大利 450mm 航空鱼雷
+  // 意大利 450mm F200/450 x 5.46 航空鱼雷（Whitehead 阜姆）
   {
-    name: "IT/AST/450",
-    bulletName: "IT/TB/450",
+    name: "IT/AST/450/F200-450",
+    bulletName: "IT/TB/450/F200-450",
     range: 4,
     bulletSpeed: 35,
   },
-  // 苏联航空炸弹 FAB 系列（攻击机/俯冲轰炸机近距投弹）
+  // 苏联航空炸弹 ФАБ-100（攻击机/俯冲轰炸机近距投弹）
   {
-    name: "SU/BB/100",
+    name: "SU/BB/100/FAB100",
     bulletName: "SU/BB/100/1938",
     range: 1.5,
     bulletSpeed: 30,
   },
+  // 苏联航空炸弹 ФАБ-250（当前无舰船/飞机引用）
   {
-    name: "SU/BB/250",
+    name: "SU/BB/250/FAB250",
     bulletName: "SU/BB/250/1938",
     range: 1.5,
     bulletSpeed: 30,
   },
+  // 苏联航空炸弹 ФАБ-500
   {
-    name: "SU/BB/500",
+    name: "SU/BB/500/FAB500",
     bulletName: "SU/BB/500/1938",
     range: 1.5,
     bulletSpeed: 30,
   },
-  // 苏联航空炸弹 FAB 系列（水平轰炸机远距投放）
+  // 苏联航空炸弹 ФАБ-1000（水平轰炸机远距投放）
   {
-    name: "SU/BB/1000/LB",
+    name: "SU/BB/1000/LB/FAB1000",
     bulletName: "SU/BB/1000/1938",
     range: 4.5,
     bulletSpeed: 30,
   },
+  // 苏联航空炸弹 ФАБ-2000（1941 年后）
   {
-    name: "SU/BB/2000/LB",
+    name: "SU/BB/2000/LB/FAB2000",
     bulletName: "SU/BB/2000/1938",
     range: 4.5,
     bulletSpeed: 30,
   },
+  // 苏联航空炸弹 ФАБ-5000НГ（1943 年首批 5 枚，Pe-8 投放，1943 年 4 月首用于柯尼斯堡；当前无舰船/飞机引用）
   {
-    name: "SU/BB/5000/LB",
+    name: "SU/BB/5000/LB/FAB5000NG",
     bulletName: "SU/BB/5000/1938",
     range: 4.5,
     bulletSpeed: 30,
   },
-  // 苏联 45-36 型 450mm 航空鱼雷（Il-4T）
+  // 苏联 45-36 型 450mm 航空鱼雷（АН 低空型；Il-4T 挂载）
   {
-    name: "SU/AST/450",
-    bulletName: "SU/TB/450/1939",
+    name: "SU/AST/450/45-36AN",
+    bulletName: "SU/TB/450/1939/45-36AN",
     range: 3,
     bulletSpeed: 35,
   }

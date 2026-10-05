@@ -1,8 +1,8 @@
 [
+  // 美国 127mm（5 英寸）HVAR 对海火箭挂载（轰炸机/攻击机用）
   {
-    // 美国 127mm / 4 发对海火箭挂载（轰炸机/攻击机用）
-    name: "US/AIR/RB/127/4",
-    bulletName: "US/RB/127/1937",
+    name: "US/AIR/RB/127/4/HVAR",
+    bulletName: "US/RB/127/1944/HVAR",
     rocketCount: 4,
     shotInterval: 0.18,
     range: 8,
@@ -11,10 +11,10 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（战斗机用；史实为 1948 年服役，本作作为对空手段保留）
   {
-    // 美国 127mm / 4 发对空火箭挂载（战斗机用，近炸破片对空杀伤）
-    name: "US/AIR/RB/127/4/AA",
-    bulletName: "US/RB/127/1937",
+    name: "US/AIR/RB/70/4/AA/MightyMouse",
+    bulletName: "US/RB/70/1948/MightyMouse",
     rocketCount: 4,
     shotInterval: 0.18,
     range: 8,
@@ -25,10 +25,10 @@
     proximityRadius: 0.22,
     blastRadius: 0.35,
   },
+  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（P-51/F6F 等）
   {
-    // 美国 127mm / 6 发对空火箭挂载（P-51/F6F 等）
-    name: "US/AIR/RB/127/6/AA",
-    bulletName: "US/RB/127/1937",
+    name: "US/AIR/RB/70/6/AA/MightyMouse",
+    bulletName: "US/RB/70/1948/MightyMouse",
     rocketCount: 6,
     shotInterval: 0.18,
     range: 8,
@@ -39,10 +39,10 @@
     proximityRadius: 0.22,
     blastRadius: 0.35,
   },
+  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（F4U 等）
   {
-    // 美国 127mm / 8 发对空火箭挂载（F4U 等）
-    name: "US/AIR/RB/127/8/AA",
-    bulletName: "US/RB/127/1937",
+    name: "US/AIR/RB/70/8/AA/MightyMouse",
+    bulletName: "US/RB/70/1948/MightyMouse",
     rocketCount: 8,
     shotInterval: 0.18,
     range: 8,
@@ -53,10 +53,10 @@
     proximityRadius: 0.22,
     blastRadius: 0.35,
   },
+  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（P-38/P-47 等）
   {
-    // 美国 127mm / 10 发对空火箭挂载（P-38/P-47 等）
-    name: "US/AIR/RB/127/10/AA",
-    bulletName: "US/RB/127/1937",
+    name: "US/AIR/RB/70/10/AA/MightyMouse",
+    bulletName: "US/RB/70/1948/MightyMouse",
     rocketCount: 10,
     shotInterval: 0.18,
     range: 8,
@@ -67,10 +67,10 @@
     proximityRadius: 0.22,
     blastRadius: 0.35,
   },
+  // 日本 200mm 三式六番二七号火箭爆弹 ×2（约 69kg，射出 135 个黄燐弾子）
   {
-    // 日本 200mm / 2 发三式六番二七号对空火箭爆弹（60kg，紫电改、雷电后期拦截配置近似）
-    name: "JP/AIR/RB/200/2/AA",
-    bulletName: "JP/RB/200/1944",
+    name: "JP/AIR/RB/200/2/AA/Type3No27",
+    bulletName: "JP/RB/200/1944/Type3No27",
     rocketCount: 2,
     shotInterval: 0.3,
     range: 6,
@@ -81,10 +81,10 @@
     proximityRadius: 0.20,
     blastRadius: 0.32,
   },
+  // 日本 100mm 三式一番二八号爆弾一型 ×4（7.65kg，战斗机翼下对空）
   {
-    // 日本 100mm / 4 发三式一番二八号对空火箭爆弹（7.65kg，烈风）
-    name: "JP/AIR/RB/100/4/AA",
-    bulletName: "JP/RB/100/1945",
+    name: "JP/AIR/RB/100/4/AA/Type3No28",
+    bulletName: "JP/RB/100/1945/Type3No28",
     rocketCount: 4,
     shotInterval: 0.22,
     range: 5,
@@ -95,10 +95,10 @@
     proximityRadius: 0.16,
     blastRadius: 0.25,
   },
+  // 德国 55mm R4M 对空火箭弹 24 发（Me 262 机翼挂架）
   {
-    // 德国 55mm / 24 发 R4M 对空火箭弹（Ba 349 机鼻齐射）
-    name: "GER/AIR/RB/55/24/AA",
-    bulletName: "GER/RB/55/1945",
+    name: "GER/AIR/RB/55/24/AA/R4M",
+    bulletName: "GER/RB/55/1945/R4M",
     rocketCount: 24,
     shotInterval: 0.08,
     range: 6,
@@ -109,10 +109,10 @@
     proximityRadius: 0.18,
     blastRadius: 0.3,
   },
+  // 苏联 82mm RS-82 对舰火箭挂载（Il-2、Su-2）
   {
-    // 苏联 82mm / 8 发 RS-82 对舰火箭挂载（Il-2、Su-2）
-    name: "SU/AIR/RB/82/8",
-    bulletName: "SU/RB/82/1937",
+    name: "SU/AIR/RB/82/8/RS82",
+    bulletName: "SU/RB/82/1937/RS82",
     rocketCount: 8,
     shotInterval: 0.16,
     range: 7,
@@ -121,10 +121,10 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 苏联 132mm RS-132 对舰火箭挂载（Il-2、Il-10）
   {
-    // 苏联 132mm / 4 发 RS-132 对舰火箭挂载（Il-2、Il-10）
-    name: "SU/AIR/RB/132/4",
-    bulletName: "SU/RB/132/1938",
+    name: "SU/AIR/RB/132/4/RS132",
+    bulletName: "SU/RB/132/1938/RS132",
     rocketCount: 4,
     shotInterval: 0.22,
     range: 8.5,

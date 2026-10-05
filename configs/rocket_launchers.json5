@@ -2,7 +2,7 @@
   // 鸭子火箭
   {
     name: "DuckRocket",
-    bulletName: "JP/RB/120/1940",
+    bulletName: "JP/RB/120/1944/Type4",
     rocketCount: 42,
     groupCount: 6,
     shotInterval: 0.06,
@@ -17,10 +17,10 @@
     antiShip: false,
     antiAircraft: true
   },
-  // 日本海军 28 发 12cm 5式防空火箭炮
+  // 日本海军 12cm 28 联装喷进炮（正式名 十二糎二八連装噴進砲，1943 研制／1944 服役；弹为四式十二糎焼霰。游戏原写「五式」非标准名）
   {
-    name: "JP/120/28/Type5/AA",
-    bulletName: "JP/RB/120/1940",
+    name: "JP/120/28/Type4/AA",
+    bulletName: "JP/RB/120/1944/Type4",
     rocketCount: 28,
     groupCount: 4,
     shotInterval: 0.06,
@@ -35,10 +35,10 @@
     antiShip: false,
     antiAircraft: true
   },
-  // 日本海军 21 发 12cm 5式防空火箭炮
+  // 日本海军 12cm 21 联装喷进炮（同上；21 联装配置的出处弱于 28/30 联装）
   {
-    name: "JP/120/21/Type5/AA",
-    bulletName: "JP/RB/120/1940",
+    name: "JP/120/21/Type4/AA",
+    bulletName: "JP/RB/120/1944/Type4",
     rocketCount: 21,
     groupCount: 3,
     shotInterval: 0.06,
@@ -53,7 +53,7 @@
     antiShip: false,
     antiAircraft: true
   },
-  // 中国海军 50 管舰载火箭炮
+  // 中国海军 50 管舰载火箭炮【型号未证实】——可查者为 70 式 122 毫米火箭炮（1970，陆基），1960 年舰载 122mm 型号未见正式记录
   {
     name: "CN/122/50",
     bulletName: "CN/RB/122/1960",
@@ -71,10 +71,10 @@
     antiShip: true,
     antiAircraft: false
   },
-  // 中国海军 65 式 250mm 五管反潜火箭发射器
+  // 中国海军 65 式 250mm 五管反潜火箭深弹发射装置（仿苏联 RBU-1200，1965 年定型）
   {
     name: "CN/250/5/Type65",
-    bulletName: "CN/RB/250/1965",
+    bulletName: "CN/RB/250/1965/Type65",
     rocketCount: 5,
     groupCount: 1,
     shotInterval: 0.08,

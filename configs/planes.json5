@@ -72,7 +72,7 @@
       rockets: [
         {
           // 对空火箭挂载（战斗机专用，近炸破片对空杀伤）
-          name: "US/AIR/RB/127/4/AA",
+          name: "US/AIR/RB/70/4/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -121,25 +121,25 @@
       ],
       bombs: [
         {
-          name: "US/BB/907",
+          name: "US/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/BB/907",
+          name: "US/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/BB/907",
+          name: "US/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/BB/907",
+          name: "US/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
@@ -147,7 +147,7 @@
       ],
       rockets: [
         {
-          name: "US/AIR/RB/127/4",
+          name: "US/AIR/RB/127/4/HVAR",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -209,25 +209,25 @@
       ],
       torpedoes: [
         {
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
@@ -235,7 +235,7 @@
       ],
       rockets: [
         {
-          name: "US/AIR/RB/127/4",
+          name: "US/AIR/RB/127/4/HVAR",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -363,7 +363,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（8 发，前向）
         {
-          name: "US/AIR/RB/127/8/AA",
+          name: "US/AIR/RB/70/8/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -409,7 +409,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（4 发，前向）
         {
-          name: "US/AIR/RB/127/4/AA",
+          name: "US/AIR/RB/70/4/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -543,7 +543,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（10 发，前向）
         {
-          name: "US/AIR/RB/127/10/AA",
+          name: "US/AIR/RB/70/10/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -589,7 +589,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（10 发，前向）
         {
-          name: "US/AIR/RB/127/10/AA",
+          name: "US/AIR/RB/70/10/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -635,7 +635,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（6 发，前向）
         {
-          name: "US/AIR/RB/127/6/AA",
+          name: "US/AIR/RB/70/6/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -681,7 +681,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（6 发，前向）
         {
-          name: "US/AIR/RB/127/6/AA",
+          name: "US/AIR/RB/70/6/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -727,7 +727,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（6 发，前向）
         {
-          name: "US/AIR/RB/127/6/AA",
+          name: "US/AIR/RB/70/6/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -838,7 +838,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（8 发，前向）
         {
-          name: "US/AIR/RB/127/8/AA",
+          name: "US/AIR/RB/70/8/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -884,7 +884,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（6 发，前向）
         {
-          name: "US/AIR/RB/127/6/AA",
+          name: "US/AIR/RB/70/6/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -937,7 +937,7 @@
       rockets: [
         // 机翼 127mm 对空火箭挂载（8 发，前向）
         {
-          name: "US/AIR/RB/127/8/AA",
+          name: "US/AIR/RB/70/8/AA/MightyMouse",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -986,19 +986,19 @@
       ],
       bombs: [
         {
-          name: "US/BB/907",
+          name: "US/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/114",
+          name: "US/BB/114/AN-M57",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/114",
+          name: "US/BB/114/AN-M57",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1048,19 +1048,19 @@
       ],
       bombs: [
         {
-          name: "US/BB/907",
+          name: "US/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/227",
+          name: "US/BB/227/AN-M64",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/227",
+          name: "US/BB/227/AN-M64",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1104,7 +1104,7 @@
       ],
       torpedoes: [
         {
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1153,7 +1153,7 @@
       ],
       torpedoes: [
         {
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1247,37 +1247,37 @@
       ],
       bombs: [
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1343,49 +1343,49 @@
       ],
       bombs: [
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1459,37 +1459,37 @@
       ],
       bombs: [
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1549,13 +1549,13 @@
       ],
       bombs: [
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1629,25 +1629,25 @@
       ],
       bombs: [
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/907/LB",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1655,13 +1655,13 @@
       ],
       rockets: [
         {
-          name: "US/AIR/RB/127/4",
+          name: "US/AIR/RB/127/4/HVAR",
           posPercent: 0.7,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
         },
         {
-          name: "US/AIR/RB/127/4",
+          name: "US/AIR/RB/127/4/HVAR",
           posPercent: 0.7,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -1735,25 +1735,25 @@
       ],
       bombs: [
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -1841,19 +1841,19 @@
       ],
       bombs: [
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB",
+          name: "US/BB/454/LB/AN-M65",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2226,7 +2226,7 @@
       rockets: [
         // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
         {
-          name: "JP/AIR/RB/200/2/AA",
+          name: "JP/AIR/RB/200/2/AA/Type3No27",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2282,7 +2282,7 @@
       rockets: [
         // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
         {
-          name: "JP/AIR/RB/200/2/AA",
+          name: "JP/AIR/RB/200/2/AA/Type3No27",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2338,14 +2338,14 @@
       rockets: [
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
         },
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2405,14 +2405,14 @@
       rockets: [
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
         },
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2472,14 +2472,14 @@
       rockets: [
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
         },
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2572,19 +2572,19 @@
       ],
       bombs: [
         {
-          name: "JP/BB/250",
+          name: "JP/BB/250/Type99No25",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/BB/60",
+          name: "JP/BB/60/Type97No6",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/BB/60",
+          name: "JP/BB/60/Type97No6",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2622,7 +2622,7 @@
       ],
       torpedoes: [
         {
-          name: "JP/AST/450/1940",
+          name: "JP/AST/450/1940/Type91Mod2",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2665,7 +2665,7 @@
       ],
       torpedoes: [
         {
-          name: "JP/AST/450/1943",
+          name: "JP/AST/450/1943/Type91Mod3",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2721,7 +2721,7 @@
       rockets: [
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2795,14 +2795,14 @@
       rockets: [
         // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
         {
-          name: "JP/AIR/RB/200/2/AA",
+          name: "JP/AIR/RB/200/2/AA/Type3No27",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
         },
         // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
         {
-          name: "JP/AIR/RB/200/2/AA",
+          name: "JP/AIR/RB/200/2/AA/Type3No27",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2899,21 +2899,21 @@
       rockets: [
         // 机翼 200mm 三式六番二七号对空火箭爆弹（60kg，2 发，前向）
         {
-          name: "JP/AIR/RB/200/2/AA",
+          name: "JP/AIR/RB/200/2/AA/Type3No27",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
         },
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
         },
         // 机翼 100mm 三式一番二八号对空火箭爆弹（7.65kg，4 发，前向）
         {
-          name: "JP/AIR/RB/100/4/AA",
+          name: "JP/AIR/RB/100/4/AA/Type3No28",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -2962,7 +2962,7 @@
       ],
       bombs: [
         {
-          name: "JP/BB/500",
+          name: "JP/BB/500/Type50No2",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -3011,7 +3011,7 @@
       ],
       torpedoes: [
         {
-          name: "JP/AST/450/1943",
+          name: "JP/AST/450/1943/Type91Mod3",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -3256,7 +3256,7 @@
       rockets: [
         // 机鼻 24 管 R4M 对空火箭发射巢，前向齐射
         {
-          name: "GER/AIR/RB/55/24/AA",
+          name: "GER/AIR/RB/55/24/AA/R4M",
           posPercent: 0.85,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4192,31 +4192,31 @@
       ],
       bombs: [
         {
-          name: "GER/BB/250",
+          name: "GER/BB/250/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4266,31 +4266,31 @@
       ],
       bombs: [
         {
-          name: "GER/BB/250",
+          name: "GER/BB/250/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4346,37 +4346,37 @@
       ],
       bombs: [
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50",
+          name: "GER/BB/50/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4408,19 +4408,19 @@
       guns: [],
       bombs: [
         {
-          name: "GER/BB/500/LB",
+          name: "GER/BB/500/LB/SC500",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/500/LB",
+          name: "GER/BB/500/LB/SC500",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/500/LB",
+          name: "GER/BB/500/LB/SC500",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4464,67 +4464,67 @@
       ],
       bombs: [
         {
-          name: "GER/BB/500/LB",
+          name: "GER/BB/500/LB/SC500",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4574,37 +4574,37 @@
       ],
       bombs: [
         {
-          name: "GER/BB/500/LB",
+          name: "GER/BB/500/LB/SC500",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/500/LB",
+          name: "GER/BB/500/LB/SC500",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4666,25 +4666,25 @@
       ],
       bombs: [
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4734,19 +4734,19 @@
       ],
       bombs: [
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/50/LB",
+          name: "GER/BB/50/LB/SC50",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4808,13 +4808,13 @@
       ],
       bombs: [
         {
-          name: "GER/BB/1400/LB",
+          name: "GER/BB/1400/LB/PC1400X",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/1400/LB",
+          name: "GER/BB/1400/LB/PC1400X",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4870,25 +4870,25 @@
       ],
       bombs: [
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/250/LB",
+          name: "GER/BB/250/LB/SC250",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -4962,25 +4962,25 @@
       ],
       bombs: [
         {
-          name: "GER/BB/1800/LB",
+          name: "GER/BB/1800/LB/SC1800",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/1800/LB",
+          name: "GER/BB/1800/LB/SC1800",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/1000/LB",
+          name: "GER/BB/1000/LB/SC1000",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "GER/BB/1000/LB",
+          name: "GER/BB/1000/LB/SC1000",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -5108,7 +5108,7 @@
       ],
       torpedoes: [
         {
-          name: "GER/AST/450/1938",
+          name: "GER/AST/450/1938/F5",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -5158,7 +5158,7 @@
       ],
       torpedoes: [
         {
-          name: "US/AST/570",
+          name: "US/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -5383,7 +5383,7 @@
       ],
       torpedoes: [
         {
-          name: "UK/AST/457/1935",
+          name: "UK/AST/457/1935/MkXII",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -5533,7 +5533,7 @@
       ],
       torpedoes: [
         {
-          name: "UK/AST/457/1942",
+          name: "UK/AST/457/1942/MkXV",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -5588,7 +5588,7 @@
       ],
       torpedoes: [
         {
-          name: "UK/AST/457/1942",
+          name: "UK/AST/457/1942/MkXV",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -5738,7 +5738,7 @@
       ],
       torpedoes: [
         {
-          name: "FR/AST/400/1926",
+          name: "FR/AST/400/1926/Mle1926DA",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -5805,7 +5805,7 @@
       ],
       torpedoes: [
         {
-          name: "FR/AST/400/1926",
+          name: "FR/AST/400/1926/Mle1926DA",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6583,13 +6583,13 @@
       torpedoes: [
         // 翼下双硬点 450mm 鱼雷 ×2（左右各一）
         {
-          name: "IT/AST/450",
+          name: "IT/AST/450/F200-450",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/AST/450",
+          name: "IT/AST/450/F200-450",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7155,7 +7155,7 @@
       rockets: [
         // 翼下（8 发 RS-82 对舰火箭）
         {
-          name: "SU/AIR/RB/82/8",
+          name: "SU/AIR/RB/82/8/RS82",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -7164,19 +7164,19 @@
       bombs: [
         // 弹舱（100kg 航空炸弹，近距投放）
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7229,7 +7229,7 @@
       rockets: [
         // 翼下（4 发 RS-132 对舰火箭）
         {
-          name: "SU/AIR/RB/132/4",
+          name: "SU/AIR/RB/132/4/RS132",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -7237,19 +7237,19 @@
       ],
       bombs: [
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7302,7 +7302,7 @@
       ],
       rockets: [
         {
-          name: "SU/AIR/RB/82/8",
+          name: "SU/AIR/RB/82/8/RS82",
           posPercent: 0.25,
           rightFiringArc: [0, 25],
           leftFiringArc: [335, 360]
@@ -7310,19 +7310,19 @@
       ],
       bombs: [
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7378,19 +7378,19 @@
       bombs: [
         // 弹舱（500kg 主弹 + 2 枚 100kg，近距俯冲投放）
         {
-          name: "SU/BB/500",
+          name: "SU/BB/500/FAB500",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/100",
+          name: "SU/BB/100/FAB100",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7445,7 +7445,7 @@
       torpedoes: [
         // 弹舱（45-36 型 450mm 航空鱼雷，贴水投放）
         {
-          name: "SU/AST/450",
+          name: "SU/AST/450/45-36AN",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7520,19 +7520,19 @@
       bombs: [
         // 弹舱（2000kg 级 + 1000kg 级，水平远距投放，满载 5000kg）
         {
-          name: "SU/BB/2000/LB",
+          name: "SU/BB/2000/LB/FAB2000",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/2000/LB",
+          name: "SU/BB/2000/LB/FAB2000",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/1000/LB",
+          name: "SU/BB/1000/LB/FAB1000",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7587,13 +7587,13 @@
       bombs: [
         // 弹舱（1000kg 级航空炸弹，水平远距投放，正常挂弹 2000kg）
         {
-          name: "SU/BB/1000/LB",
+          name: "SU/BB/1000/LB/FAB1000",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/BB/1000/LB",
+          name: "SU/BB/1000/LB/FAB1000",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
