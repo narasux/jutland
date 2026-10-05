@@ -1323,7 +1323,7 @@
   },
   // 德国海军 GER/380/52 双联装舰炮
   {
-    name: "GER/380/52/2",
+    name: "GER/380/52/2/SKC34",
     bulletName: "GER/GB/380/1939",
     bulletCount: 2,
     reloadTime: 10,
@@ -1336,7 +1336,7 @@
   },
   // 德国海军 GER/283/55 三联装舰炮
   {
-    name: "GER/283/55/3",
+    name: "GER/283/54.5/3/SKC34",
     bulletName: "GER/GB/283/1937",
     bulletCount: 3,
     reloadTime: 8,
@@ -1349,7 +1349,7 @@
   },
   // 德国海军 GER/283/52 三联装舰炮
   {
-    name: "GER/283/52/3",
+    name: "GER/283/52/3/SKC28",
     bulletName: "GER/GB/283/1925",
     bulletCount: 3,
     reloadTime: 12,
@@ -1362,7 +1362,7 @@
   },
   // 德国海军 GER/203/60 双联装舰炮
   {
-    name: "GER/203/60/2",
+    name: "GER/203/60/2/SKC34",
     bulletName: "GER/GB/203/1939",
     bulletCount: 2,
     reloadTime: 6,
@@ -1375,7 +1375,7 @@
   },
   // 德国海军 GER/150/60 三联装舰炮
   {
-    name: "GER/150/60/3",
+    name: "GER/150/60/3/SKC25",
     bulletName: "GER/GB/150/1932",
     bulletCount: 3,
     reloadTime: 1.3,
@@ -1386,9 +1386,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/150/60 双联装舰炮
+  // 德国海军 15 cm/55 SK C/28 双联装副炮（俾斯麦级、沙恩霍斯特级、齐柏林伯爵号）
   {
-    name: "GER/150/60/2",
+    name: "GER/150/55/2/SKC28",
     bulletName: "GER/GB/150/1932",
     bulletCount: 2,
     reloadTime: 1.4,
@@ -1399,9 +1399,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/150/60 单裝舰炮
+  // 德国海军 15 cm/55 SK C/28 单装副炮（施佩伯爵号等德意志级）
   {
-    name: "GER/150/60",
+    name: "GER/150/55/SKC28",
     bulletName: "GER/GB/150/1932",
     bulletCount: 1,
     reloadTime: 1.5,
@@ -1412,9 +1412,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/127/45 单裝舰炮
+  // 德国海军 GER/127/45/SKC34 单裝舰炮
   {
-    name: "GER/127/45",
+    name: "GER/127/45/SKC34",
     bulletName: "GER/GB/127/1924",
     bulletCount: 1,
     reloadTime: 1,
@@ -1425,9 +1425,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/105/40 单装舰炮（第一次世界大战）
+  // 德国海军 GER/105/40/SKL40 单装舰炮（第一次世界大战）
   {
-    name: "GER/105/40",
+    name: "GER/105/40/SKL40",
     bulletName: "GER/GB/105/1937",
     bulletCount: 1,
     reloadTime: 3,
@@ -1440,7 +1440,7 @@
   },
   // 德国海军 GER/88/45 单装高射炮（第一次世界大战）
   {
-    name: "GER/88/45/AA",
+    name: "GER/88/45/SKL45",
     bulletName: "GER/GB/88/1935",
     bulletCount: 1,
     reloadTime: 2.5,
@@ -1453,7 +1453,7 @@
   },
   // 德国海军 GER/105/65 双联装高平两用炮
   {
-    name: "GER/105/65/2/DP",
+    name: "GER/105/65/2/SKC33",
     bulletName: "GER/GB/105/1937",
     bulletCount: 2,
     reloadTime: 1,
@@ -1466,7 +1466,7 @@
   },
   // 德国海军 GER/88/56 双联装高平两用炮
   {
-    name: "GER/88/56/2/DP",
+    name: "GER/88/76/2/SKC32",
     bulletName: "GER/GB/88/1935",
     bulletCount: 2,
     reloadTime: 0.5,
@@ -1477,9 +1477,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/40/56 单装高炮
+  // 德国海军 GER/40/56/Flak28 单装高炮
   {
-    name: "GER/40/56",
+    name: "GER/40/56/Flak28",
     bulletName: "GER/GB/40/1935",
     bulletCount: 1,
     reloadTime: 0.4,
@@ -1490,9 +1490,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/37/57 高炮
+  // 德国海军 GER/37/57/M43 高炮
   {
-    name: "GER/37/57",
+    name: "GER/37/57/M43",
     bulletName: "GER/GB/37/1935",
     bulletCount: 1,
     reloadTime: 0.6,
@@ -1505,7 +1505,7 @@
   },
   // 德国海军 GER/37/83 双联装高炮（3.7cm SK C/30，初速高但射速低）
   {
-    name: "GER/37/83/2",
+    name: "GER/37/83/2/SKC30",
     bulletName: "GER/GB/37/1935",
     bulletCount: 2,
     reloadTime: 2,
@@ -1542,9 +1542,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/20/70 四联装高炮（Flakvierling 38）
+  // 德国海军 GER/20/65/C30/C38 四联装高炮（Flakvierling 38）
   {
-    name: "GER/20/70/4",
+    name: "GER/20/65/4/C38",
     bulletName: "GER/GB/20/1940",
     bulletCount: 4,
     reloadTime: 0.2,
@@ -1555,9 +1555,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/20/70 单装高炮
+  // 德国海军 GER/20/65/C30/C38 单装高炮
   {
-    name: "GER/20/70",
+    name: "GER/20/65/C38",
     bulletName: "GER/GB/20/1940",
     bulletCount: 1,
     reloadTime: 0.2,
@@ -1568,9 +1568,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 德国海军 GER/20/65 单装高炮（2cm C/30，射速低于 Flak 38）
+  // 德国海军 GER/20/65/C30 单装高炮（2cm C/30，射速低于 Flak 38）
   {
-    name: "GER/20/65",
+    name: "GER/20/65/C30",
     bulletName: "GER/GB/20/1940",
     bulletCount: 1,
     reloadTime: 0.25,
@@ -1687,7 +1687,7 @@
   },
   // 英国海军 UK/406/45 三联装舰炮
   {
-    name: "UK/406/45/3",
+    name: "UK/406/45/3/MK1",
     bulletName: "UK/GB/406/1922",
     bulletCount: 3,
     reloadTime: 18,
@@ -1700,7 +1700,7 @@
   },
   // 英国海军 UK/381/42 双联装舰炮
   {
-    name: "UK/381/42/2",
+    name: "UK/381/42/2/MK1",
     bulletName: "UK/GB/381/1918",
     bulletCount: 2,
     reloadTime: 14,
@@ -1711,22 +1711,9 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 英国海军 UK/356/45 四联装舰炮
-  {
-    name: "UK/356/45/4",
-    bulletName: "UK/GB/356/1933",
-    bulletCount: 4,
-    reloadTime: 13,
-    range: 33,
-    bulletSpread: 120,
-    bulletSpeed: 800,
-    fundsCost: 65,
-    antiShip: true,
-    antiAircraft: false,
-  },
   // 英国海军 14 英寸/45 Mk VII 四联装 Mk III 炮塔（英王乔治五世级）
   {
-    name: "UK/356/45/4/MK3",
+    name: "UK/356/45/4/MK7",
     bulletName: "UK/GB/356/1933",
     bulletCount: 4,
     reloadTime: 15,
@@ -1737,22 +1724,9 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 英国海军 UK/356/45 双联装舰炮
-  {
-    name: "UK/356/45/2",
-    bulletName: "UK/GB/356/1933",
-    bulletCount: 2,
-    reloadTime: 13,
-    range: 33,
-    bulletSpread: 120,
-    bulletSpeed: 800,
-    fundsCost: 35,
-    antiShip: true,
-    antiAircraft: false,
-  },
   // 英国海军 14 英寸/45 Mk VII 双联装 Mk II 炮塔（英王乔治五世级）
   {
-    name: "UK/356/45/2/MK2",
+    name: "UK/356/45/2/MK7",
     bulletName: "UK/GB/356/1933",
     bulletCount: 2,
     reloadTime: 15,
@@ -1765,7 +1739,7 @@
   },
   // 英国海军 UK/343/45 双联装舰炮
   {
-    name: "UK/343/45/2",
+    name: "UK/343/45/2/MK5",
     bulletName: "UK/GB/343/1910",
     bulletCount: 2,
     reloadTime: 15,
@@ -1778,7 +1752,7 @@
   },
   // 英国海军 UK/203/50 三联装舰炮
   {
-    name: "UK/203/50/3",
+    name: "UK/203/50/3/MK8",
     bulletName: "UK/GB/203/1940",
     bulletCount: 3,
     reloadTime: 7,
@@ -1791,7 +1765,7 @@
   },
   // 英国海军 UK/152/50 双联装舰炮
   {
-    name: "UK/152/50/2",
+    name: "UK/152/50/2/MK23",
     bulletName: "UK/GB/152/1935",
     bulletCount: 2,
     reloadTime: 4,
@@ -1815,9 +1789,9 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 英国海军 UK/152/45 单装舰炮
+  // 英国海军 UK/152/45/MK12 单装舰炮
   {
-    name: "UK/152/45",
+    name: "UK/152/45/MK12",
     bulletName: "UK/GB/152/1910",
     bulletCount: 1,
     reloadTime: 6,
@@ -1828,9 +1802,22 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 英国海军 UK/140/50 单装舰炮
+  // 英国海军 BL 6 英寸/45 Mark VII 单装舰炮（Tiger 等）
   {
-    name: "UK/140/50",
+    name: "UK/152/45/MK7",
+    bulletName: "UK/GB/152/1910",
+    bulletCount: 1,
+    reloadTime: 6,
+    range: 17,
+    bulletSpread: 120,
+    bulletSpeed: 750,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 英国海军 UK/140/50/MK1 单装舰炮
+  {
+    name: "UK/140/50/MK1",
     bulletName: "UK/GB/140/1935",
     bulletCount: 1,
     reloadTime: 4,
@@ -1841,35 +1828,9 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 英国海军 UK/133/50 双联装高平两用炮
-  {
-    name: "UK/133/50/2/DP",
-    bulletName: "UK/GB/133/1935",
-    bulletCount: 2,
-    reloadTime: 2.4,
-    range: 21,
-    bulletSpread: 70,
-    bulletSpeed: 810,
-    fundsCost: 7,
-    antiShip: true,
-    antiAircraft: true
-  },
-  // 英国海军 QF 5.25 英寸/50 Mk I 双联装 Mk I 高平两用炮
-  {
-    name: "UK/133/50/2/MK1",
-    bulletName: "UK/GB/133/1935",
-    bulletCount: 2,
-    reloadTime: 7.5,
-    range: 24,
-    bulletSpread: 72,
-    bulletSpeed: 814,
-    fundsCost: 3,
-    antiShip: true,
-    antiAircraft: true
-  },
   // 英国海军 UK/120/45 单裝高平两用炮
   {
-    name: "UK/120/45/DP",
+    name: "UK/120/45/MK9",
     bulletName: "UK/GB/120/1932",
     bulletCount: 1,
     reloadTime: 1,
@@ -1882,7 +1843,7 @@
   },
   // 英国海军 QF 4.7-inch Mk IX/XII 双联装舰炮
   {
-    name: "UK/120/45/2",
+    name: "UK/120/45/2/MK12",
     bulletName: "UK/GB/120/1932",
     bulletCount: 2,
     reloadTime: 1,
@@ -1906,9 +1867,22 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 英国海军 QF 5.25 英寸/50 Mk I 双联装高平两用炮（英王乔治五世级 Mk I 炮座、狄多级 Mk II 炮座）
+  {
+    name: "UK/133/50/2/MK1",
+    bulletName: "UK/GB/133/1935",
+    bulletCount: 2,
+    reloadTime: 7.5,
+    range: 24,
+    bulletSpread: 72,
+    bulletSpeed: 814,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 英国海军 UK/114/45 双联装高平两用炮
   {
-    name: "UK/114/45/2/DP",
+    name: "UK/114/45/2/MK1",
     bulletName: "UK/GB/114/1940",
     bulletCount: 2,
     reloadTime: 1,
@@ -1921,7 +1895,7 @@
   },
   // 英国海军 UK/102/45 双联装高平两用炮
   {
-    name: "UK/102/45/2/DP",
+    name: "UK/102/45/2/MK16",
     bulletName: "UK/GB/102/1930",
     bulletCount: 2,
     reloadTime: 1,
@@ -1934,7 +1908,7 @@
   },
   // 英国海军 UK/102/45 单装高平两用炮
   {
-    name: "UK/102/45/DP",
+    name: "UK/102/45/MK16",
     bulletName: "UK/GB/102/1930",
     bulletCount: 1,
     reloadTime: 1,
@@ -1971,9 +1945,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 英国海军 UK/40/60 双联装高炮
+  // 英国海军 UK/40/56 双联装高炮
   {
-    name: "UK/40/60/2",
+    name: "UK/40/56/2",
     bulletName: "UK/GB/40/1930",
     bulletCount: 2,
     reloadTime: 0.5,
@@ -1984,9 +1958,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 英国海军 UK/40/60 单装高炮
+  // 英国海军 UK/40/56 单装高炮
   {
-    name: "UK/40/60",
+    name: "UK/40/56",
     bulletName: "UK/GB/40/1930",
     bulletCount: 1,
     reloadTime: 0.5,
@@ -2023,22 +1997,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 英国海军 40mm/56 Bofors Mk II 四联装高炮
+  // 英国海军 UK/40/39/MK8 八联装高炮
   {
-    name: "UK/40/56/4/MK2",
-    bulletName: "UK/GB/40/1930",
-    bulletCount: 4,
-    reloadTime: 0.5,
-    range: 7,
-    bulletSpread: 20,
-    bulletSpeed: 881,
-    fundsCost: 2,
-    antiShip: true,
-    antiAircraft: true
-  },
-  // 英国海军 UK/40/39 八联装高炮
-  {
-    name: "UK/40/39/8",
+    name: "UK/40/39/8/MK8",
     bulletName: "UK/GB/40/1930",
     bulletCount: 8,
     reloadTime: 0.6,
@@ -2049,22 +2010,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 英国海军 QF 2 磅炮 Mk VIII 八联装 Mk VI 高炮
+  // 英国海军 UK/40/39/MK8 四联装高炮
   {
-    name: "UK/40/39/8/MK6",
-    bulletName: "UK/GB/40/1930",
-    bulletCount: 8,
-    reloadTime: 0.6,
-    range: 4.6,
-    bulletSpread: 32,
-    bulletSpeed: 732,
-    fundsCost: 4,
-    antiShip: true,
-    antiAircraft: true
-  },
-  // 英国海军 UK/40/39 四联装高炮
-  {
-    name: "UK/40/39/4",
+    name: "UK/40/39/4/MK8",
     bulletName: "UK/GB/40/1930",
     bulletCount: 4,
     reloadTime: 0.6,
@@ -2075,22 +2023,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 英国海军 QF 2 磅炮 Mk VIII 四联装 Mk VII 高炮
+  // 英国海军 UK/40/39/MK8 单装高炮
   {
-    name: "UK/40/39/4/MK7",
-    bulletName: "UK/GB/40/1930",
-    bulletCount: 4,
-    reloadTime: 0.6,
-    range: 4.6,
-    bulletSpread: 32,
-    bulletSpeed: 732,
-    fundsCost: 2,
-    antiShip: true,
-    antiAircraft: true
-  },
-  // 英国海军 UK/40/39 单装高炮
-  {
-    name: "UK/40/39",
+    name: "UK/40/39/MK8",
     bulletName: "UK/GB/40/1930",
     bulletCount: 1,
     reloadTime: 0.5,
@@ -2155,7 +2090,7 @@
   },
   // 英国海军 UK/12.7 四联装机枪
   {
-    name: "UK/12.7/4",
+    name: "UK/12.7/4/MK3",
     bulletName: "UK/GB/12.7/1910",
     bulletCount: 4,
     reloadTime: 0.02,
@@ -2168,7 +2103,7 @@
   },
   // 英国海军 UK/12.7 双联装机枪
   {
-    name: "UK/12.7/2",
+    name: "UK/12.7/2/MK3",
     bulletName: "UK/GB/12.7/1910",
     bulletCount: 2,
     reloadTime: 0.02,
@@ -2233,7 +2168,7 @@
   },
   // 苏联海军 SU/406/50 三联装舰炮
   {
-    name: "SU/406/50/3",
+    name: "SU/406/50/3/B37",
     bulletName: "SU/GB/406/1939",
     bulletCount: 3,
     reloadTime: 12,
@@ -2285,7 +2220,7 @@
   },
   // 苏联海军 SU/180/57 三联装舰炮
   {
-    name: "SU/180/57/3",
+    name: "SU/180/57/3/B1P",
     bulletName: "SU/GB/180/1935",
     bulletCount: 3,
     reloadTime: 6,
@@ -2298,7 +2233,7 @@
   },
   // 苏联海军 SU/152/57 三联装舰炮
   {
-    name: "SU/152/57/3",
+    name: "SU/152/57/3/B38",
     bulletName: "SU/GB/152/1938",
     bulletCount: 3,
     reloadTime: 4.5,
@@ -2311,7 +2246,7 @@
   },
   // 苏联海军 SU/152/57 双联装舰炮
   {
-    name: "SU/152/57/2",
+    name: "SU/152/57/2/B38",
     bulletName: "SU/GB/152/1938",
     bulletCount: 2,
     reloadTime: 4.5,
@@ -2324,7 +2259,7 @@
   },
   // 苏联海军 SU/130/60 双联装舰炮
   {
-    name: "SU/130/60/2",
+    name: "SU/130/58/2/BL109A",
     bulletName: "SU/GB/130/1935",
     bulletCount: 2,
     reloadTime: 2,
@@ -2337,7 +2272,7 @@
   },
   // 苏联海军 SU/130/58 双联装舰炮
   {
-    name: "SU/130/58/2",
+    name: "SU/130/58/2/SM21",
     bulletName: "SU/GB/130/1935",
     bulletCount: 2,
     reloadTime: 1.8,
@@ -2363,7 +2298,7 @@
   },
   // 苏联海军 SU/100/70 双联装高平两用炮
   {
-    name: "SU/100/70/2/DP",
+    name: "SU/100/70/2/SM51",
     bulletName: "SU/GB/100/1940",
     bulletCount: 2,
     reloadTime: 0.8,
@@ -2376,7 +2311,7 @@
   },
   // 苏联海军 SU/100/56 二联装高平两用炮
   {
-    name: "SU/100/56/2/DP",
+    name: "SU/100/56/2/MZ14",
     bulletName: "SU/GB/100/1940",
     bulletCount: 2,
     reloadTime: 1,
@@ -2389,7 +2324,7 @@
   },
   // 苏联海军 SU/100/56 单装高平两用炮
   {
-    name: "SU/100/56/DP",
+    name: "SU/100/56/B34",
     bulletName: "SU/GB/100/1940",
     bulletCount: 1,
     reloadTime: 1,
@@ -2413,9 +2348,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 苏联海军 SU/57/72/4 四联装高炮
+  // 苏联海军 SU/57/81/4/ZIF75 四联装高炮
   {
-    name: "SU/57/72/4",
+    name: "SU/57/81/4/ZIF75",
     bulletName: "SU/GB/57/1945",
     bulletCount: 4,
     reloadTime: 1,
@@ -2426,9 +2361,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 苏联海军 SU/45/78/4 四联装高炮
+  // 苏联海军 SU/45/78/4/SM20ZIF 四联装高炮
   {
-    name: "SU/45/78/4",
+    name: "SU/45/78/4/SM20ZIF",
     bulletName: "SU/GB/45/1945",
     bulletCount: 4,
     reloadTime: 0.7,
@@ -2465,9 +2400,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 苏联海军 SU/37/57/4 四联装高炮
+  // 苏联海军 SU/37/67/4/46K 四联装高炮
   {
-    name: "SU/37/57/4",
+    name: "SU/37/67/4/46K",
     bulletName: "SU/GB/37/1946",
     bulletCount: 4,
     reloadTime: 0.6,
@@ -2478,9 +2413,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 苏联海军 SU/37/57/2 双联装高炮
+  // 苏联海军 SU/37/67/2/V11 双联装高炮
   {
-    name: "SU/37/57/2",
+    name: "SU/37/67/2/V11",
     bulletName: "SU/GB/37/1946",
     bulletCount: 2,
     reloadTime: 0.6,
@@ -2491,9 +2426,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 苏联海军 SU/25/65/4 四联装高炮
+  // 苏联海军 SU/25/76/4/84KM 四联装高炮
   {
-    name: "SU/25/65/4",
+    name: "SU/25/76/4/84KM",
     bulletName: "SU/GB/25/1940",
     bulletCount: 4,
     reloadTime: 0.2,
@@ -2504,9 +2439,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 苏联海军 SU/25/65/2 双联装高炮
+  // 苏联海军 SU/25/79/2/2M3 双联装高炮
   {
-    name: "SU/25/65/2",
+    name: "SU/25/79/2/2M3",
     bulletName: "SU/GB/25/1940",
     bulletCount: 2,
     reloadTime: 0.2,
@@ -2519,7 +2454,7 @@
   },
   // 苏联 7.62mm ShKAS 航空机枪（机头同步或后座自卫，约 1800 rpm）
   {
-    name: "SU/7.62",
+    name: "SU/7.62/ShKAS",
     bulletName: "SU/GB/7.62/1932",
     bulletCount: 1,
     reloadTime: 0.04,
@@ -2532,7 +2467,7 @@
   },
   // 苏联 7.62mm ShKAS 双联装机枪（机头同步）
   {
-    name: "SU/7.62/2",
+    name: "SU/7.62/2/ShKAS",
     bulletName: "SU/GB/7.62/1932",
     bulletCount: 2,
     reloadTime: 0.04,
@@ -2545,7 +2480,7 @@
   },
   // 苏联 12.7mm 别列津 UBS 航空机枪（机头同步，约 800 rpm）
   {
-    name: "SU/12.7",
+    name: "SU/12.7/UBS",
     bulletName: "SU/GB/12.7/1941",
     bulletCount: 1,
     reloadTime: 0.06,
@@ -2558,7 +2493,7 @@
   },
   // 苏联 12.7mm 别列津 UBS 双联装机枪（机头同步）
   {
-    name: "SU/12.7/2",
+    name: "SU/12.7/2/UBS",
     bulletName: "SU/GB/12.7/1941",
     bulletCount: 2,
     reloadTime: 0.06,
@@ -2571,7 +2506,7 @@
   },
   // 苏联 20mm 施瓦克 ShVAK 航空机炮（桨毂或机头整流罩，约 750 rpm）
   {
-    name: "SU/20",
+    name: "SU/20/ShVAK",
     bulletName: "SU/GB/20/1936",
     bulletCount: 1,
     reloadTime: 0.16,
@@ -2584,7 +2519,7 @@
   },
   // 苏联 20mm 施瓦克 ShVAK 双联装机炮（La-5 机头整流罩）
   {
-    name: "SU/20/2",
+    name: "SU/20/2/ShVAK",
     bulletName: "SU/GB/20/1936",
     bulletCount: 2,
     reloadTime: 0.16,
@@ -2610,7 +2545,7 @@
   },
   // 苏联 23mm 沃罗希洛夫 VYa-23 双联装航空机炮（Il-2 / Il-10 机翼固定前向火力）
   {
-    name: "SU/23/2",
+    name: "SU/23/2/VYa23",
     bulletName: "SU/GB/23/1941",
     bulletCount: 2,
     reloadTime: 0.2,
@@ -2623,7 +2558,7 @@
   },
   // 法国海军 305mm/45 Mle 1906 双联装主炮
   {
-    name: "FR/305/45/2",
+    name: "FR/305/45/2/Mle1906",
     bulletName: "FR/GB/305/1906",
     bulletCount: 2,
     reloadTime: 40,
@@ -2636,7 +2571,7 @@
   },
   // 法国海军 380mm/45 Mle 1935 四联装主炮
   {
-    name: "FR/380/45/4",
+    name: "FR/380/45/4/Mle1935",
     bulletName: "FR/GB/380/1935",
     bulletCount: 4,
     reloadTime: 33,
@@ -2649,7 +2584,7 @@
   },
   // 法国海军 330mm/50 Mle 1931 四联装主炮
   {
-    name: "FR/330/50/4",
+    name: "FR/330/50/4/Mle1931",
     bulletName: "FR/GB/330/1931",
     bulletCount: 4,
     reloadTime: 30,
@@ -2662,7 +2597,7 @@
   },
   // 法国海军 340mm/45 Mle 1912 双联装主炮
   {
-    name: "FR/340/45/2",
+    name: "FR/340/45/2/Mle1912",
     bulletName: "FR/GB/340/1912",
     bulletCount: 2,
     reloadTime: 30,
@@ -2675,7 +2610,7 @@
   },
   // 法国海军 203mm/50 Mle 1924 双联装主炮
   {
-    name: "FR/203/50/2",
+    name: "FR/203/50/2/Mle1924",
     bulletName: "FR/GB/203/1924",
     bulletCount: 2,
     reloadTime: 12,
@@ -2701,7 +2636,7 @@
   },
   // 法国海军 138.6mm/55 Mle 1910 单装副炮
   {
-    name: "FR/138.6/55",
+    name: "FR/138.6/55/Mle1910",
     bulletName: "FR/GB/138.6/1910",
     bulletCount: 1,
     reloadTime: 10,
@@ -2714,7 +2649,7 @@
   },
   // 法国海军 138.6mm/40 Mle 1923 单装主炮
   {
-    name: "FR/138.6/40",
+    name: "FR/138.6/40/Mle1923",
     bulletName: "FR/GB/138.6/1923M",
     bulletCount: 1,
     reloadTime: 7,
@@ -2740,7 +2675,7 @@
   },
   // 法国海军 130mm/45 Mle 1932 四联装高平两用炮
   {
-    name: "FR/130/45/4",
+    name: "FR/130/45/4/Mle1932",
     bulletName: "FR/GB/130/1932",
     bulletCount: 4,
     reloadTime: 6,
@@ -2753,7 +2688,7 @@
   },
   // 法国海军 130mm/45 Mle 1932 双联装高平两用炮
   {
-    name: "FR/130/45/2",
+    name: "FR/130/45/2/Mle1932",
     bulletName: "FR/GB/130/1932",
     bulletCount: 2,
     reloadTime: 6,
@@ -2766,7 +2701,7 @@
   },
   // 法国海军 152mm/55 Mle 1930 三联装高平两用炮
   {
-    name: "FR/152/55/3",
+    name: "FR/152/55/3/Mle1930",
     bulletName: "FR/GB/152/1930",
     bulletCount: 3,
     reloadTime: 12,
@@ -2779,7 +2714,7 @@
   },
   // 法国海军 152mm/55 Mle 1930 双联装主炮
   {
-    name: "FR/152/55/2",
+    name: "FR/152/55/2/Mle1930",
     bulletName: "FR/GB/152/1930",
     bulletCount: 2,
     reloadTime: 12,
@@ -2870,7 +2805,7 @@
   },
   // 法国海军 75mm/50 Mle 1922 单装高炮
   {
-    name: "FR/75/50",
+    name: "FR/75/50/Mle1922",
     bulletName: "FR/GB/75/1922",
     bulletCount: 1,
     reloadTime: 6,
@@ -2883,7 +2818,7 @@
   },
   // 法国海军 37mm/50 Mle 1925 双联装高炮
   {
-    name: "FR/37/50/2",
+    name: "FR/37/50/2/Mle1925",
     bulletName: "FR/GB/37/1925",
     bulletCount: 2,
     reloadTime: 3,
@@ -2896,7 +2831,7 @@
   },
   // 法国海军 37mm/50 Mle 1925 四联装高炮
   {
-    name: "FR/37/50/4",
+    name: "FR/37/50/4/Mle1925",
     bulletName: "FR/GB/37/1925",
     bulletCount: 4,
     reloadTime: 3,
@@ -2909,7 +2844,7 @@
   },
   // 法国海军 37mm/50 Mle 1925 单装高炮
   {
-    name: "FR/37/50",
+    name: "FR/37/50/Mle1925",
     bulletName: "FR/GB/37/1925",
     bulletCount: 1,
     reloadTime: 3,
@@ -2935,7 +2870,7 @@
   },
   // 法国海军 25mm/60 Mle 1938 单装高炮
   {
-    name: "FR/25/60",
+    name: "FR/25/60/Mle1938",
     bulletName: "FR/GB/25/1938",
     bulletCount: 1,
     reloadTime: 0.4,
@@ -2948,7 +2883,7 @@
   },
   // 法国海军 40mm/60 Bofors 单装高炮
   {
-    name: "FR/40/60",
+    name: "FR/40/60/Bofors",
     bulletName: "FR/GB/40/1930",
     bulletCount: 1,
     reloadTime: 0.5,
@@ -2961,7 +2896,7 @@
   },
   // 法国海军 40mm/60 Bofors 双联装高炮
   {
-    name: "FR/40/60/2",
+    name: "FR/40/60/2/Bofors",
     bulletName: "FR/GB/40/1930",
     bulletCount: 2,
     reloadTime: 0.5,
@@ -2974,7 +2909,7 @@
   },
   // 法国海军 40mm/60 Bofors 四联装高炮
   {
-    name: "FR/40/60/4",
+    name: "FR/40/60/4/Bofors",
     bulletName: "FR/GB/40/1930",
     bulletCount: 4,
     reloadTime: 0.5,
@@ -2987,7 +2922,7 @@
   },
   // 法国海军 13.2mm Hotchkiss 四联装机枪
   {
-    name: "FR/13.2/4",
+    name: "FR/13.2/4/Hotchkiss",
     bulletName: "FR/GB/13.2/1930",
     bulletCount: 4,
     reloadTime: 0.3,
@@ -3000,7 +2935,7 @@
   },
   // 法国海军 13.2mm Hotchkiss 双联装机枪
   {
-    name: "FR/13.2/2",
+    name: "FR/13.2/2/Hotchkiss",
     bulletName: "FR/GB/13.2/1930",
     bulletCount: 2,
     reloadTime: 0.3,
@@ -3013,7 +2948,7 @@
   },
   // 法国海军 20mm/70 Oerlikon 单装机炮
   {
-    name: "FR/20/70",
+    name: "FR/20/70/Oerlikon",
     bulletName: "FR/GB/20/1939",
     bulletCount: 1,
     reloadTime: 0.2,
@@ -3026,7 +2961,7 @@
   },
   // 法国海军 20mm/70 Oerlikon 双联装机炮
   {
-    name: "FR/20/70/2",
+    name: "FR/20/70/2/Oerlikon",
     bulletName: "FR/GB/20/1939",
     bulletCount: 2,
     reloadTime: 0.2,
@@ -3039,7 +2974,7 @@
   },
   // 法国海军 20mm/70 Oerlikon 四联装机炮
   {
-    name: "FR/20/70/4",
+    name: "FR/20/70/4/Oerlikon",
     bulletName: "FR/GB/20/1939",
     bulletCount: 4,
     reloadTime: 0.2,
@@ -3091,7 +3026,7 @@
   },
   // 意大利皇家空军 7.7mm Breda-SAFAT 航空机枪
   {
-    name: "IT/7.7",
+    name: "IT/7.7/BredaSAFAT",
     bulletName: "IT/GB/7.7",
     bulletCount: 1,
     reloadTime: 0.04,
@@ -3104,7 +3039,7 @@
   },
   // 意大利皇家空军 12.7mm Breda-SAFAT 航空机枪
   {
-    name: "IT/12.7",
+    name: "IT/12.7/BredaSAFAT",
     bulletName: "IT/GB/12.7",
     bulletCount: 1,
     reloadTime: 0.05,
@@ -3117,7 +3052,7 @@
   },
   // 意大利海军 280mm/53 三联装主炮（安萨尔多 UP-102 方案，纸面设计）
   {
-    name: "IT/280/53/3",
+    name: "IT/280/53/3/UP102",
     bulletName: "IT/GB/280",
     bulletCount: 3,
     reloadTime: 9,
@@ -3143,7 +3078,7 @@
   },
   // 意大利海军 203mm/53 安萨尔多 1929 年型双联装主炮塔（博尔扎诺）
   {
-    name: "IT/203/53/2",
+    name: "IT/203/53/2/M1929",
     bulletName: "IT/GB/203/1929",
     bulletCount: 2,
     reloadTime: 9,
@@ -3249,7 +3184,7 @@
   },
   // 意大利海军 100mm/47 OTO 单装高平两用炮（角宿一星级鱼雷艇）
   {
-    name: "IT/100/47",
+    name: "IT/100/47/OTO",
     bulletName: "IT/GB/100",
     bulletCount: 1,
     reloadTime: 2.5,
@@ -3288,7 +3223,7 @@
   },
   // 意大利海军 76mm/62 Sovrapposto 四联装高炮（加里波第防空巡洋舰方案）
   {
-    name: "IT/76/62/4",
+    name: "IT/76/62/4/Sovrapposto",
     bulletName: "IT/GB/76",
     bulletCount: 4,
     reloadTime: 0.6,
@@ -3327,7 +3262,7 @@
   },
   // 意大利海军 40mm/39 维克斯-特尔尼单装高炮（Freccia 与 Folgore 级驱逐舰中段两舷）
   {
-    name: "IT/40/39",
+    name: "IT/40/39/VickersTerni",
     bulletName: "IT/GB/40",
     bulletCount: 1,
     reloadTime: 0.5,
@@ -3340,7 +3275,7 @@
   },
   // 意大利海军 40mm/70 OTO-Breda 双联装高炮（加里波第防空巡洋舰方案）
   {
-    name: "IT/40/70/2",
+    name: "IT/40/70/2/OTOBreda",
     bulletName: "IT/GB/40",
     bulletCount: 2,
     reloadTime: 0.35,
@@ -3353,7 +3288,7 @@
   },
   // 意大利海军 40mm/56 博福斯双联装高炮（UP-102 方案，出口配置）
   {
-    name: "IT/40/56/2",
+    name: "IT/40/56/2/Bofors",
     bulletName: "IT/GB/40",
     bulletCount: 2,
     reloadTime: 0.5,
@@ -3379,7 +3314,7 @@
   },
   // 意大利海军 20mm/65 布雷达 1932 年型单装机炮（天鹰号）
   {
-    name: "IT/20/65/1",
+    name: "IT/20/65/1/M1932",
     bulletName: "IT/GB/20/1932",
     bulletCount: 1,
     reloadTime: 0.5,
@@ -3392,7 +3327,7 @@
   },
   // 意大利海军 13.2mm 布雷达 1931 年型双联装机枪（Freccia 与 Folgore 级驱逐舰）
   {
-    name: "IT/13.2/2",
+    name: "IT/13.2/2/M1931",
     bulletName: "IT/GB/12.7",
     bulletCount: 2,
     reloadTime: 0.04,
@@ -3480,19 +3415,6 @@
     fundsCost: 4,
     antiShip: true,
     antiAircraft: false
-  },
-  // 意大利海军 100mm/47 OTO 1928 年型双联装高平两用炮（加富尔级）
-  {
-    name: "IT/100/47/2",
-    bulletName: "IT/GB/100",
-    bulletCount: 2,
-    reloadTime: 2.5,
-    range: 13,
-    bulletSpread: 45,
-    bulletSpeed: 850,
-    fundsCost: 4,
-    antiShip: true,
-    antiAircraft: true
   },
   // 意大利海军 90mm/50 安萨尔多 1939 年型单装高平两用炮（维内托级与卡约·杜伊利奥级）
   {

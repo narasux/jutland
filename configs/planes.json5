@@ -6128,13 +6128,13 @@
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6164,13 +6164,13 @@
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6200,13 +6200,13 @@
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6236,26 +6236,26 @@
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（每翼 1 挺 7.7mm，前缘）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6285,13 +6285,13 @@
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6342,26 +6342,26 @@
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（每翼 1 挺 7.7mm，前缘）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6408,21 +6408,21 @@
       guns: [
         // 机首（12.7mm，前射）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 背部（12.7mm，后射）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腹部（12.7mm，后射）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -6474,28 +6474,28 @@
       guns: [
         // 机首（7.7mm，前射）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 背部（12.7mm，后射）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腹部（12.7mm，后射）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腰部（7.7mm，后射）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.5,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -6554,27 +6554,27 @@
       guns: [
         // 机首（12.7mm，前射）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 背部（12.7mm，后射）
         {
-          name: "IT/12.7",
+          name: "IT/12.7/BredaSAFAT",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腰部（每侧 1 挺 7.7mm，后射）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.5,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.5,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -6620,20 +6620,20 @@
       guns: [
         // 机首（2 挺 7.7mm 固定前射）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（1 挺 7.7mm，活动枪架）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -6663,14 +6663,14 @@
       guns: [
         // 机首下（1 挺 7.7mm 固定前射）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（1 挺 7.7mm，活动枪架）
         {
-          name: "IT/7.7",
+          name: "IT/7.7/BredaSAFAT",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -6702,14 +6702,14 @@
       guns: [
         // 机头（12.7mm UBS，发动机上方同步机枪）
         {
-          name: "SU/12.7",
+          name: "SU/12.7/UBS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头（7.62mm ShKAS 双联装，同步机枪）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6739,14 +6739,14 @@
       guns: [
         // 机头（12.7mm UBS，同步机枪）
         {
-          name: "SU/12.7",
+          name: "SU/12.7/UBS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头（7.62mm ShKAS 双联装，同步机枪）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6777,7 +6777,7 @@
       guns: [
         // 机头整流罩（20mm ShVAK 双联装同步机炮）
         {
-          name: "SU/20/2",
+          name: "SU/20/2/ShVAK",
           posPercent: 0.8,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6837,14 +6837,14 @@
       guns: [
         // 桨毂（20mm ShVAK，穿过螺旋桨轴射击）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头（7.62mm ShKAS 双联装，同步机枪）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6874,14 +6874,14 @@
       guns: [
         // 桨毂（20mm ShVAK）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头（12.7mm UBS 双联装，同步机枪）
         {
-          name: "SU/12.7/2",
+          name: "SU/12.7/2/UBS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6911,14 +6911,14 @@
       guns: [
         // 桨毂（20mm ShVAK）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头（12.7mm UBS 双联装，同步机枪）
         {
-          name: "SU/12.7/2",
+          name: "SU/12.7/2/UBS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6949,14 +6949,14 @@
       guns: [
         // 桨毂（20mm ShVAK）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头（12.7mm UBS 双联装，同步机枪）
         {
-          name: "SU/12.7/2",
+          name: "SU/12.7/2/UBS",
           posPercent: 0.78,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -6986,7 +6986,7 @@
       guns: [
         // 后座（7.62mm ShKAS，活动枪架，后半球自卫）
         {
-          name: "SU/7.62",
+          name: "SU/7.62/ShKAS",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7016,14 +7016,14 @@
       guns: [
         // 艇首（7.62mm PV-1，固定前射）
         {
-          name: "SU/7.62",
+          name: "SU/7.62/ShKAS",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 背塔（7.62mm ShKAS，活动枪架，后半球自卫）
         {
-          name: "SU/7.62",
+          name: "SU/7.62/ShKAS",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7055,14 +7055,14 @@
       guns: [
         // 上翼（7.62mm PV-1 双联装，固定前射）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机身（7.62mm PV-1 双联装同步机枪）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.7,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7093,14 +7093,14 @@
       guns: [
         // 机翼（20mm ShVAK 双联装，固定前射）
         {
-          name: "SU/20/2",
+          name: "SU/20/2/ShVAK",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机头（7.62mm ShKAS 双联装同步机枪）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -7132,21 +7132,21 @@
       guns: [
         // 机翼（23mm VYa-23 双联装，对舰扫射主火力）
         {
-          name: "SU/23/2",
+          name: "SU/23/2/VYa23",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（7.62mm ShKAS 双联装）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（12.7mm UBT 活动机枪，后半球自卫）
         {
-          name: "SU/12.7",
+          name: "SU/12.7/UBS",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7207,20 +7207,20 @@
     weapon: {
       guns: [
         {
-          name: "SU/23/2",
+          name: "SU/23/2/VYa23",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（20mm B-20 活动机炮，后半球自卫）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7281,20 +7281,20 @@
       guns: [
         // 机翼（7.62mm ShKAS 双联装 ×2，共 4 挺）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（7.62mm ShKAS 活动枪架，后半球自卫）
         {
-          name: "SU/7.62",
+          name: "SU/7.62/ShKAS",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7355,21 +7355,21 @@
       guns: [
         // 机头（7.62mm ShKAS 双联装，固定前射）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.8,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 背塔（12.7mm UBT 活动机枪，后半球自卫）
         {
-          name: "SU/12.7",
+          name: "SU/12.7/UBS",
           posPercent: 0.1,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机腹（7.62mm ShKAS 活动枪架，后下方自卫）
         {
-          name: "SU/7.62",
+          name: "SU/7.62/ShKAS",
           posPercent: -0.2,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7422,21 +7422,21 @@
       guns: [
         // 机鼻（7.62mm ShKAS，固定前射）
         {
-          name: "SU/7.62",
+          name: "SU/7.62/ShKAS",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 背塔（12.7mm UBT 活动机枪，后半球自卫）
         {
-          name: "SU/12.7",
+          name: "SU/12.7/UBS",
           posPercent: 0.1,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机腹（7.62mm ShKAS 活动枪架，后下方自卫）
         {
-          name: "SU/7.62",
+          name: "SU/7.62/ShKAS",
           posPercent: -0.2,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7476,42 +7476,42 @@
       guns: [
         // 机鼻（7.62mm ShKAS 双联装，前向）
         {
-          name: "SU/7.62/2",
+          name: "SU/7.62/2/ShKAS",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机背前塔（20mm ShVAK，后向）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0.3,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机背后塔（20mm ShVAK，后向）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0.0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机尾（20mm ShVAK，尾炮塔）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: -0.5,
           rightFiringArc: [90, 180],
           leftFiringArc: [180, 270]
         },
         // 发动机短舱（12.7mm UBT 双联装炮塔，侧后向）
         {
-          name: "SU/12.7/2",
+          name: "SU/12.7/2/UBS",
           posPercent: 0.4,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 发动机短舱（12.7mm UBT 双联装炮塔，侧后向）
         {
-          name: "SU/12.7/2",
+          name: "SU/12.7/2/UBS",
           posPercent: 0.4,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -7564,21 +7564,21 @@
       guns: [
         // 机鼻（12.7mm UBT，前向自卫）
         {
-          name: "SU/12.7",
+          name: "SU/12.7/UBS",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 背塔（20mm ShVAK，后半球自卫）
         {
-          name: "SU/20",
+          name: "SU/20/ShVAK",
           posPercent: 0.2,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机腹（12.7mm UBT，后下方自卫）
         {
-          name: "SU/12.7",
+          name: "SU/12.7/UBS",
           posPercent: -0.2,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
