@@ -2665,7 +2665,7 @@
     initFunds: 10000,
     initCameraPos: [
       // P1
-      [20, 32],
+      [35, 34],
       // P2
       [84, 56]
     ],
@@ -2809,6 +2809,9 @@
           "lorraine",
           "bretagne",
           "courbet",
+          "littorio",
+          "caio_duilio",
+          "giulio_cesare",
         ],
       },
       {
@@ -3494,6 +3497,24 @@
       {
         name: "aquila",
         pos: [21, 34],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "littorio",
+        pos: [20, 35],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "caio_duilio",
+        pos: [21, 36],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "giulio_cesare",
+        pos: [20, 37],
         rotation: 90,
         belongPlayer: "P1"
       },

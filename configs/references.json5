@@ -12560,6 +12560,69 @@
     links: [],
   },
   {
+    name: "IT/381/50/3/M1934",
+    displayName: "381mm/50 三联装主炮（安萨尔多 1934 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/320/44/3/M1934",
+    displayName: "320mm/44 三联装主炮（1934 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/320/44/2/M1934",
+    displayName: "320mm/44 双联装主炮（1934 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/55/3/M1934",
+    displayName: "152mm/55 三联装副炮（安萨尔多 1934 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/135/45/3/M1938",
+    displayName: "135mm/45 三联装副炮（安萨尔多 1938 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/2/M1933",
+    displayName: "120mm/50 双联装副炮（OTO 1933 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/90/50/1/M1939",
+    displayName: "90mm/50 单装高平两用炮（安萨尔多 1939 年型）",
+    type: "武器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/100/47",
     displayName: "100mm/47 单装高平两用炮（OTO）",
     type: "武器",
@@ -13516,5 +13579,130 @@
     "description": "",
     "author": "",
     "links": [],
+  },
+  {
+    name: "littorio",
+    displayName: "利托里奥",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x3 381mm/50 Ansaldo Model 1934",
+      },
+      {
+        label: "副炮",
+        value: "4x3 152mm/55 Ansaldo Model 1934",
+      },
+      {
+        label: "高炮",
+        value: "12x1 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "高炮",
+        value: "10x2 37mm/54 Breda",
+      },
+      {
+        label: "高炮",
+        value: "8x2 20mm/65 Breda",
+      },
+      {
+        label: "水上侦察机",
+        value: "3x IMAM Ro.43",
+      },
+    ],
+    description: "利托里奥号是维托里奥·维内托级的首舰，1934 年 10 月开工、1940 年 5 月服役，是意大利为回应法国敦刻尔克级而设计的高速战列舰，采用普列塞式水下防护，舷侧中部装甲带厚 350 毫米。1940 年 11 月塔兰托夜袭中被鱼雷击中坐沉，1941 年 3 月修复归队，1943 年 7 月改名意大利号，同年 9 月随舰队驶往马耳他，1948 年除籍拆解。",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Littorio class",
+        url: "https://www.voodoo-world.cz/battleships/italy/italia.html",
+      },
+      {
+        name: "维基百科 - 维托里奥·维内托级战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%BB%B4%E6%89%98%E9%87%8C%E5%A5%A5%C2%B7%E7%BB%B4%E5%86%85%E6%89%98%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+      },
+    ],
+  },
+  {
+    name: "caio_duilio",
+    displayName: "卡约·杜伊利奥",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x3 320mm/44 + 2x2 320mm/44 Model 1934",
+      },
+      {
+        label: "副炮",
+        value: "4x3 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "高炮",
+        value: "10x1 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "高炮",
+        value: "8x2 37mm/54 Breda",
+      },
+      {
+        label: "高炮",
+        value: "2x2 20mm/65 Breda",
+      },
+      {
+        label: "水上侦察机",
+        value: "1x IMAM Ro.43",
+      },
+    ],
+    description: "卡约·杜伊利奥号与安德烈亚·多里亚号同属一战时期建造的安德烈亚·多里亚级（也常称卡约·杜伊利奥级）。该舰 1937 年至 1940 年在热那亚接受彻底改装：拆除中部炮塔、更换锅炉与主机、重建舰桥并加强水平装甲与水下防护，从此具备伴随新式战列舰行动的能力。改装后编入第一战列舰分队，参与多次护航与舰队出击，1942 年燃油紧缺后长期停泊，1956 年除籍拆解。",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Caio Duilio class",
+        url: "https://www.voodoo-world.cz/battleships/italy/doria.html",
+      },
+      {
+        name: "维基百科 - 安德烈亚·多里亚级战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BE%B7%E7%83%88%E4%BA%9A%C2%B7%E5%A4%9A%E9%87%8C%E4%BA%9A%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+      },
+    ],
+  },
+  {
+    name: "giulio_cesare",
+    displayName: "朱利奥·凯撒号",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x3 320mm/44 + 2x2 320mm/44 Model 1934",
+      },
+      {
+        label: "副炮",
+        value: "6x2 120mm/50 OTO Model 1933",
+      },
+      {
+        label: "高炮",
+        value: "4x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "高炮",
+        value: "6x2 37mm/54 Breda",
+      },
+      {
+        label: "水上侦察机",
+        value: "1x IMAM Ro.43",
+      },
+    ],
+    description: "朱利奥·凯撒号是加富尔伯爵级的二号舰，一战时期服役，1933 年至 1937 年在热那亚完成与多里亚级类似的大改装，航速与防空火力大幅提升。1940 年 7 月 9 日庞塔斯蒂洛海战中，该舰在约 24 公里外被英国战列舰厌战号命中，是动对动远距离命中的著名战例。此后主要执行护航与牵制任务，1948 年除籍，次年在的里雅斯特一带完成移交，作为战争赔偿交给苏联。",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Conte di Cavour class",
+        url: "https://www.voodoo-world.cz/battleships/italy/cesare.html",
+      },
+      {
+        name: "维基百科 - 加富尔伯爵级战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E5%8A%A0%E5%AF%8C%E5%B0%94%E4%BC%AF%E7%88%B5%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+      },
+    ],
   },
 ]

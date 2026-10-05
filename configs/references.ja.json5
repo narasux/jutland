@@ -12637,6 +12637,69 @@
     links: [],
   },
   {
+    name: "IT/381/50/3/M1934",
+    displayName: "381mm/50 三連装主砲（アンサルド 1934 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/320/44/3/M1934",
+    displayName: "320mm/44 三連装主砲（1934 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/320/44/2/M1934",
+    displayName: "320mm/44 連装主砲（1934 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/55/3/M1934",
+    displayName: "152mm/55 三連装副砲（アンサルド 1934 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/135/45/3/M1938",
+    displayName: "135mm/45 三連装副砲（アンサルド 1938 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/2/M1933",
+    displayName: "120mm/50 連装副砲（OTO 1933 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/90/50/1/M1939",
+    displayName: "90mm/50 単装両用砲（アンサルド 1939 年型）",
+    type: "兵器",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/100/47",
     displayName: "100mm 単装両用砲（OTO）",
     type: "兵器",
@@ -13593,5 +13656,130 @@
     "description": "",
     "author": "",
     "links": [],
+  },
+  {
+    name: "littorio",
+    displayName: "リットリオ",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x3 381mm/50 アンサルド 1934 年型",
+      },
+      {
+        label: "副砲",
+        value: "4x3 152mm/55 アンサルド 1934 年型",
+      },
+      {
+        label: "対空砲",
+        value: "12x1 90mm/50 アンサルド 1939 年型",
+      },
+      {
+        label: "対空砲",
+        value: "10x2 37mm/54 ブレダ",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 20mm/65 ブレダ",
+      },
+      {
+        label: "水上偵察機",
+        value: "3x IMAM Ro.43",
+      },
+    ],
+    description: "リットリオはヴィットリオ・ヴェネト級の一番艦で、1934年10月起工、1940年5月に就役した。フランスのダンケルク級に対抗する高速戦艦であり、プンリエーゼ式水中防御と中部350mmの舷側装甲を備える。1940年11月のタラント夜襲で雷撃を受けて着底、1941年3月に復帰した。1943年7月にイタリアと改名し、休戦後はマルタへ回航、1948年に除籍・解体された。",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Littorio class",
+        url: "https://www.voodoo-world.cz/battleships/italy/italia.html",
+      },
+      {
+        name: "ウィキペディア - ヴィットリオ・ヴェネト級戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A3%E3%83%83%E3%83%88%E3%83%AA%E3%82%AA%E3%83%BB%E3%83%B4%E3%82%A7%E3%83%8D%E3%83%88%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "caio_duilio",
+    displayName: "カイオ・ドゥイリオ",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x3 320mm/44 + 2x2 320mm/44 1934 年型",
+      },
+      {
+        label: "副砲",
+        value: "4x3 135mm/45 アンサルド 1938 年型",
+      },
+      {
+        label: "対空砲",
+        value: "10x1 90mm/50 アンサルド 1939 年型",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 37mm/54 ブレダ",
+      },
+      {
+        label: "対空砲",
+        value: "2x2 20mm/65 ブレダ",
+      },
+      {
+        label: "水上偵察機",
+        value: "1x IMAM Ro.43",
+      },
+    ],
+    description: "カイオ・ドゥイリオは第一次大戦前に起工したアンドレア・ドリア級に属し、同級はカイオ・ドゥイリオ級とも呼ばれる。1937年から1940年にかけてジェノヴァで大改装を受け、中部砲塔を撤去、缶と主機を換装し、艦橋を一新するとともに水平装甲と水中防御を強化した。これにより新造戦艦と行動を共にできる速力を得て、第一戦艦部隊として船団護衛や艦隊出撃に参加したが、1942年以降は燃料不足で係留が続き、1956年に除籍・解体された。",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Caio Duilio class",
+        url: "https://www.voodoo-world.cz/battleships/italy/doria.html",
+      },
+      {
+        name: "ウィキペディア - アンドレア・ドリア級戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%89%E3%83%AC%E3%82%A2%E3%83%BB%E3%83%89%E3%83%AA%E3%82%A2%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "giulio_cesare",
+    displayName: "ジュリオ・チェザーレ",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x3 320mm/44 + 2x2 320mm/44 1934 年型",
+      },
+      {
+        label: "副砲",
+        value: "6x2 120mm/50 OTO 1933 年型",
+      },
+      {
+        label: "対空砲",
+        value: "4x2 100mm/47 OTO 1928 年型",
+      },
+      {
+        label: "対空砲",
+        value: "6x2 37mm/54 ブレダ",
+      },
+      {
+        label: "水上偵察機",
+        value: "1x IMAM Ro.43",
+      },
+    ],
+    description: "ジュリオ・チェザーレはコンテ・ディ・カヴール級の二番艦で、第一次大戦期から就役していた。1933年から1937年にジェノヴァでドリア級と同様の大改装を受け、速力と対空火力を大幅に強化した。1940年7月9日のプンタ・スティーロ海戦では、約24kmの距離からイギリス戦列艦ウォースパイトの砲弾が命中し、移動目標への長距離命中として知られる。以後は船団護衛や牽制任務に従事し、1948年に除籍、翌年に戦時賠償としてソ連へ引き渡された。",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Conte di Cavour class",
+        url: "https://www.voodoo-world.cz/battleships/italy/cesare.html",
+      },
+      {
+        name: "ウィキペディア - コンテ・ディ・カヴール級戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%BB%E3%83%87%E3%82%A3%E3%83%BB%E3%82%AB%E3%83%B4%E3%82%A9%E3%82%A6%E3%83%AB%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
   },
 ]

@@ -3415,5 +3415,109 @@
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true
-  }
+  },
+  // 意大利海军 381mm/50 安萨尔多 1934 年型三联装主炮（维托里奥·维内托级）
+  {
+    name: "IT/381/50/3/M1934",
+    bulletName: "IT/GB/381",
+    bulletCount: 3,
+    reloadTime: 20,
+    range: 40,
+    bulletSpread: 140,
+    bulletSpeed: 850,
+    fundsCost: 60,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 320mm/44 1934 年型三联装主炮（改装战列舰的前部炮塔）
+  {
+    name: "IT/320/44/3/M1934",
+    bulletName: "IT/GB/320",
+    bulletCount: 3,
+    reloadTime: 14,
+    range: 32,
+    bulletSpread: 120,
+    bulletSpeed: 830,
+    fundsCost: 30,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 320mm/44 1934 年型双联装主炮（改装战列舰的后部炮塔）
+  {
+    name: "IT/320/44/2/M1934",
+    bulletName: "IT/GB/320",
+    bulletCount: 2,
+    reloadTime: 14,
+    range: 32,
+    bulletSpread: 110,
+    bulletSpeed: 830,
+    fundsCost: 20,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 152mm/55 安萨尔多 1934 年型三联装副炮（维托里奥·维内托级）
+  {
+    name: "IT/152/55/3/M1934",
+    bulletName: "IT/GB/152/1929",
+    bulletCount: 3,
+    reloadTime: 6,
+    range: 24,
+    bulletSpread: 80,
+    bulletSpeed: 850,
+    fundsCost: 6,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 135mm/45 安萨尔多 1938 年型三联装副炮（卡约·杜伊利奥级）
+  {
+    name: "IT/135/45/3/M1938",
+    bulletName: "IT/GB/135/1938",
+    bulletCount: 3,
+    reloadTime: 5,
+    range: 20,
+    bulletSpread: 60,
+    bulletSpeed: 850,
+    fundsCost: 6,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 120mm/50 OTO 1933 年型双联装副炮（加富尔级）
+  {
+    name: "IT/120/50/2/M1933",
+    bulletName: "IT/GB/120/1939",
+    bulletCount: 2,
+    reloadTime: 3,
+    range: 17,
+    bulletSpread: 60,
+    bulletSpeed: 830,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 100mm/47 OTO 1928 年型双联装高平两用炮（加富尔级）
+  {
+    name: "IT/100/47/2",
+    bulletName: "IT/GB/100",
+    bulletCount: 2,
+    reloadTime: 2.5,
+    range: 13,
+    bulletSpread: 45,
+    bulletSpeed: 850,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 90mm/50 安萨尔多 1939 年型单装高平两用炮（维内托级与卡约·杜伊利奥级）
+  {
+    name: "IT/90/50/1/M1939",
+    bulletName: "IT/GB/90/1939",
+    bulletCount: 1,
+    reloadTime: 2.4,
+    range: 13,
+    bulletSpread: 35,
+    bulletSpeed: 860,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
 ]

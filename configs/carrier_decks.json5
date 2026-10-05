@@ -1568,4 +1568,62 @@
       approachLength: 3
     }
   },
+  // 利托里奥（维托里奥·维内托级）：舰尾甲板中线单台弹射器，向舰尾方向弹射，
+  // 弹射点坐标按该舰俯视图标注（舰艏朝右的横向俯视图，posPercent -0.86 中线）
+  {
+    name: "ITCatapult_littorio",
+    takeoffPoints: [
+      {
+        forward: 0.93,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 卡约·杜伊利奥（安德烈亚·多里亚级）：改装后舰尾甲板中线弹射器
+  {
+    name: "ITCatapult_caio_duilio",
+    takeoffPoints: [
+      {
+        forward: 0.9,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
+  // 朱利奥·凯撒号（加富尔伯爵级）：改装后舰尾甲板中线弹射器
+  {
+    name: "ITCatapult_giulio_cesare",
+    takeoffPoints: [
+      {
+        forward: 0.9,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: 180
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
 ]

@@ -123,26 +123,26 @@
         {
           name: "US/BB/907",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
         {
           name: "US/BB/907",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
         {
           name: "US/BB/907",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
         {
           name: "US/BB/907",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         }
       ],
       rockets: [
@@ -211,26 +211,26 @@
         {
           name: "US/AST/570",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
         {
           name: "US/AST/570",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
         {
           name: "US/AST/570",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         },
         {
           name: "US/AST/570",
           posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
+          rightFiringArc: [0, 90],
+          leftFiringArc: [270, 360]
         }
       ],
       rockets: [

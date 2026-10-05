@@ -12696,6 +12696,69 @@
     links: [],
   },
   {
+    name: "IT/381/50/3/M1934",
+    displayName: "381mm/50 Triple Turret (Ansaldo Model 1934)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/320/44/3/M1934",
+    displayName: "320mm/44 Triple Turret (Model 1934)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/320/44/2/M1934",
+    displayName: "320mm/44 Twin Turret (Model 1934)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/152/55/3/M1934",
+    displayName: "152mm/55 Triple Turret (Ansaldo Model 1934)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/135/45/3/M1938",
+    displayName: "135mm/45 Triple Turret (Ansaldo Model 1938)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/120/50/2/M1933",
+    displayName: "120mm/50 Twin Turret (OTO Model 1933)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
+    name: "IT/90/50/1/M1939",
+    displayName: "90mm/50 Single Dual-purpose Mount (Ansaldo Model 1939)",
+    type: "Weapon",
+    armaments: [],
+    description: "",
+    author: "",
+    links: [],
+  },
+  {
     name: "IT/100/47",
     displayName: "100mm Single Dual-purpose Mount (OTO)",
     type: "Weapon",
@@ -13652,5 +13715,130 @@
     "description": "",
     "author": "",
     "links": [],
+  },
+  {
+    name: "littorio",
+    displayName: "Littorio",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x3 381mm/50 Ansaldo Model 1934",
+      },
+      {
+        label: "Secondary Battery",
+        value: "4x3 152mm/55 Ansaldo Model 1934",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "12x1 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x2 37mm/54 Breda",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 20mm/65 Breda",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "3x IMAM Ro.43",
+      },
+    ],
+    description: "Littorio was the lead ship of the Vittorio Veneto class, laid down in October 1934 and commissioned in May 1940 as Italy's answer to the French Dunkerque class. She was the first Italian battleship with the Pugliese underwater protection system and carried a 350 mm midships belt. Torpedoed and beached at Taranto in November 1940, she rejoined the fleet in March 1941, was renamed Italia in July 1943, sailed to Malta under the armistice, and was scrapped in 1948.",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Littorio class",
+        url: "https://www.voodoo-world.cz/battleships/italy/italia.html",
+      },
+      {
+        name: "Wikipedia - Littorio-class battleship",
+        url: "https://en.wikipedia.org/wiki/Littorio-class_battleship",
+      },
+    ],
+  },
+  {
+    name: "caio_duilio",
+    displayName: "Caio Duilio",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x3 320mm/44 + 2x2 320mm/44 Model 1934",
+      },
+      {
+        label: "Secondary Battery",
+        value: "4x3 135mm/45 Ansaldo Model 1938",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x1 90mm/50 Ansaldo Model 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 37mm/54 Breda",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x2 20mm/65 Breda",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "1x IMAM Ro.43",
+      },
+    ],
+    description: "Caio Duilio belonged to the Andrea Doria class, also called the Caio Duilio class, both laid down before the First World War. Between 1937 and 1940 she was rebuilt at Genoa: the amidships turret was removed, boilers and machinery were replaced, the bridge was redesigned and horizontal protection and underwater defence were strengthened, which made her fast enough to operate with the new battleships. She served in the First Battleship Division on convoy and fleet sorties, lay idle after 1942 for lack of fuel, and was scrapped in 1956.",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Caio Duilio class",
+        url: "https://www.voodoo-world.cz/battleships/italy/doria.html",
+      },
+      {
+        name: "Wikipedia - Andrea Doria-class battleship",
+        url: "https://en.wikipedia.org/wiki/Andrea_Doria-class_battleship",
+      },
+    ],
+  },
+  {
+    name: "giulio_cesare",
+    displayName: "Giulio Cesare",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x3 320mm/44 + 2x2 320mm/44 Model 1934",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x2 120mm/50 OTO Model 1933",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x2 100mm/47 OTO Model 1928",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x2 37mm/54 Breda",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "1x IMAM Ro.43",
+      },
+    ],
+    description: "Giulio Cesare was the second ship of the Conte di Cavour class and served from the First World War. Rebuilt at Genoa between 1933 and 1937 along the same lines as the Andrea Doria class, she gained speed and a far stronger anti-aircraft battery. On 9 July 1940, during the action off Punta Stilo, she was hit at about 24,000 metres by the British battleship Warspite, one of the best known long-range hits on a moving target. She spent the rest of the war on convoy and diversion duties, was struck from the list in 1948 and handed to the Soviet Union as war reparations.",
+    author: "voodoo",
+    links: [
+      {
+        name: "voodoo-world.cz - Conte di Cavour class",
+        url: "https://www.voodoo-world.cz/battleships/italy/cesare.html",
+      },
+      {
+        name: "Wikipedia - Conte di Cavour-class battleship",
+        url: "https://en.wikipedia.org/wiki/Conte_di_Cavour-class_battleship",
+      },
+    ],
   },
 ]

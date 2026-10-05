@@ -927,7 +927,7 @@
     damage: 6000,
     criticalRate: 0.12
   },
-  // 法国海军 LN 401 使用的 225kg 航空炸弹
+  // 法国海军 LN 401, V-156F 使用的 225kg 航空炸弹
   {
     name: "FR/BB/225/1938",
     type: "bomb",
@@ -1387,6 +1387,22 @@
     diameter: 280,
     damage: 1300,
     criticalRate: 0.01
+  },
+  // 意大利海军 381mm/50 安萨尔多 1934 年型主炮弹（维托里奥·维内托级）
+  {
+    name: "IT/GB/381",
+    type: "shell",
+    diameter: 381,
+    damage: 2750,
+    criticalRate: 0.02
+  },
+  // 意大利海军 320mm/44 1934 年型主炮弹（由 305mm 扩膛，改装后的加富尔级与卡约·杜伊利奥级）
+  {
+    name: "IT/GB/320",
+    type: "shell",
+    diameter: 320,
+    damage: 1800,
+    criticalRate: 0.015
   },
   // 意大利海军 76mm/62 舰炮弹（加里波第防空巡洋舰方案）
   {
