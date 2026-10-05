@@ -8,7 +8,9 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
+	weaponImg "github.com/narasux/jutland/pkg/resources/images/weapon"
 )
 
 // 敌舰尾流要被迷雾藏住，否则顺着尾流就能看出看不见的舰队在哪。
@@ -83,4 +85,59 @@ func TestRotatedRectangleCorners(t *testing.T) {
 			}
 		})
 	}
+}
+
+// 舰载机图标只表达状态：甲板有备机=绿，甲板空但飞机在空=黄，关闭或全灭=灰。
+func TestPlaneIconStatus(t *testing.T) {
+	tests := []struct {
+		name     string
+		aircraft objUnit.ShipAircraft
+		airborne int
+		want     weaponImg.WeaponStatus
+	}{
+		{
+			name:     "甲板有备机时可以起飞",
+			aircraft: objUnit.ShipAircraft{Groups: []objUnit.PlaneGroup{{Name: "F", CurCount: 3}}},
+			want:     weaponImg.WeaponStatusLoaded,
+		},
+		{
+			name:     "甲板已空但飞机在空或返航",
+			aircraft: objUnit.ShipAircraft{Groups: []objUnit.PlaneGroup{{Name: "F", CurCount: 0}}},
+			airborne: 6,
+			want:     weaponImg.WeaponStatusReloading,
+		},
+		{
+			name:     "甲板已空且飞机全部损失",
+			aircraft: objUnit.ShipAircraft{Groups: []objUnit.PlaneGroup{{Name: "F", CurCount: 0}}},
+			want:     weaponImg.WeaponStatusDisabled,
+		},
+		{
+			name: "起飞被关闭时满甲板也显示禁用",
+			aircraft: objUnit.ShipAircraft{
+				Disable: true,
+				Groups:  []objUnit.PlaneGroup{{Name: "F", CurCount: 12}},
+			},
+			airborne: 4,
+			want:     weaponImg.WeaponStatusDisabled,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equal(t, tt.want, planeIconStatus(&tt.aircraft, tt.airborne))
+		})
+	}
+}
+
+// 空中飞机数按归属舰船聚合，回收后飞机已从集合里移除，不需要再扣减。
+func TestAirbornePlaneCounts(t *testing.T) {
+	planes := map[string]*objUnit.Plane{
+		"p1": {Uid: "p1", BelongShip: "a"},
+		"p2": {Uid: "p2", BelongShip: "a"},
+		"p3": {Uid: "p3", BelongShip: "b"},
+		"p4": nil,
+	}
+
+	assert.Equal(t, map[string]int{"a": 2, "b": 1}, airbornePlaneCounts(planes))
+	assert.Empty(t, airbornePlaneCounts(nil))
 }

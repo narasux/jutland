@@ -21,6 +21,8 @@ const (
 	WeaponTypeAntiAircraftGun WeaponType = "antiaircraft_gun"
 	WeaponTypeTorpedo         WeaponType = "torpedo"
 	WeaponTypeRocket          WeaponType = "rocket"
+	// WeaponTypePlane 舰载机，复用武器图标槽位展示航空状态
+	WeaponTypePlane WeaponType = "plane"
 )
 
 // WeaponStatus 武器状态
@@ -53,6 +55,7 @@ func loadWeaponIcons(cache map[string]*ebiten.Image) {
 		WeaponTypeAntiAircraftGun,
 		WeaponTypeTorpedo,
 		WeaponTypeRocket,
+		WeaponTypePlane,
 	}
 
 	statuses := []WeaponStatus{

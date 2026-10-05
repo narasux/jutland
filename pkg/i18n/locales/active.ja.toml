@@ -424,6 +424,8 @@ other = "味方"
 other = "敵"
 [MapFleetCount]
 other = "{{.Side}}（{{.Count}}）"
+[OrderUnreachable]
+other = "その地点には到達できません"
 [RallyLandBlocked]
 other = "陸上には集結地点を設定できません"
 [ReinforceShipArchive]

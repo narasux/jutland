@@ -11,6 +11,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/mission/metadata"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	"github.com/narasux/jutland/pkg/mission/object/combatpower"
 	ObjRef "github.com/narasux/jutland/pkg/mission/object/reference"
@@ -30,6 +31,37 @@ func init() {
 	initShipMap()
 	initReferenceMap()
 	initCombatPower()
+	validateMissionShipPlacement()
+}
+
+// validateMissionShipPlacement 启动期校验各任务初始舰位：中心点落在陆格上直接报错，
+// 舰体压岸只告警（系泊位是有意为之，例如珍珠港 1941 的码头泊位）。
+// 与 validateAirfieldMetadata 一样，把配置错误挡在启动阶段，而不是等玩家点进去才发现。
+func validateMissionShipPlacement() {
+	for _, mission := range metadata.AllMissions() {
+		md := metadata.Get(mission)
+		if md.MapCfg == nil {
+			continue
+		}
+		for _, initShip := range md.InitShips {
+			ship, ok := objUnit.ShipMap[initShip.ShipName]
+			if !ok {
+				log.Fatalf("mission %q init ship %q not found", mission, initShip.ShipName)
+			}
+			if md.MapCfg.Map.IsLand(initShip.Pos.MX, initShip.Pos.MY) {
+				log.Fatalf(
+					"mission %q init ship %q pos (%d,%d) is on land in map %s",
+					mission, initShip.ShipName, initShip.Pos.MX, initShip.Pos.MY, md.MapCfg.Name,
+				)
+			}
+			if objUnit.HullLandOverlapSamples(md.MapCfg, initShip.Pos, initShip.Rotation, ship.Length) > 0 {
+				log.Printf(
+					"[WARN] mission %q init ship %q pos (%d,%d) rot %.0f: hull overlaps land (moored?)",
+					mission, initShip.ShipName, initShip.Pos.MX, initShip.Pos.MY, initShip.Rotation,
+				)
+			}
+		}
+	}
 }
 
 func initBulletMap() {

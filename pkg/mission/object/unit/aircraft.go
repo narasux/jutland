@@ -233,6 +233,15 @@ func (sa *ShipAircraft) ScoutStock() int {
 	return total
 }
 
+// StandbyCount 返回甲板上仍可出击的飞机总数，供战舰图标行判断航空状态。
+func (sa *ShipAircraft) StandbyCount() int {
+	total := 0
+	for _, group := range sa.Groups {
+		total += int(group.CurCount)
+	}
+	return total
+}
+
 // searchMinStock 搜索出击的最低库存：起飞后甲板上还要留一架。
 const searchMinStock = 2
 
@@ -265,6 +274,15 @@ func (sa *ShipAircraft) TakeOffSearch(base AircraftBase) *Plane {
 // 与自动搜索不同，玩家明确下单时不再保留甲板库存。
 func (sa *ShipAircraft) CanManualScout() bool {
 	return sa.ScoutStock() >= 1 || sa.strikeStock() >= 1
+}
+
+// TakeoffPointCount 返回起飞点（弹射器）数量，玩家手动侦察同时出动的上限。
+// 没有甲板模板的旧单位返回 0，由调用方退化为 1 架。
+func (sa *ShipAircraft) TakeoffPointCount() int {
+	if sa == nil || sa.deck == nil {
+		return 0
+	}
+	return len(sa.deck.TakeoffPoints)
 }
 
 // TakeOffManualScout 起飞一架手动侦察机：有侦察机就优先派侦察机

@@ -41,6 +41,21 @@ func newScoutTestCarrier(uid string, groups []objUnit.PlaneGroup) *objUnit.Battl
 	return ship
 }
 
+// newScoutTestCatapultShip 造一艘带若干起飞点（弹射器）的航空战舰。
+func newScoutTestCatapultShip(uid string, points int, groups []objUnit.PlaneGroup) *objUnit.BattleShip {
+	ship := &objUnit.BattleShip{
+		Uid: uid, Length: 100, Width: 16, CurPos: objPos.NewR(4, 4),
+		BelongPlayer: faction.HumanAlpha,
+		Aircraft:     objUnit.ShipAircraft{Groups: groups, HasPlane: len(groups) > 0},
+	}
+	takeoffPoints := make([]objUnit.TakeoffPoint, points)
+	for idx := range takeoffPoints {
+		takeoffPoints[idx] = objUnit.TakeoffPoint{RunLength: 0.2}
+	}
+	ship.Aircraft.ResolveDeck(&objUnit.CarrierDeck{TakeoffPoints: takeoffPoints})
+	return ship
+}
+
 func newScoutTestState(ships ...*objUnit.BattleShip) *state.MissionState {
 	shipMap := make(map[string]*objUnit.BattleShip, len(ships))
 	selected := make([]string, 0, len(ships))
@@ -121,6 +136,161 @@ func TestScoutOrderRetargetsFlyingScout(t *testing.T) {
 	}
 	if len(ms.Arena.Planes) != 1 {
 		t.Fatalf("planes = %d, want no second takeoff", len(ms.Arena.Planes))
+	}
+}
+
+// 有多个起飞点（弹射器）的航空战舰可以同时放出多架手动侦察机；
+// 名额占满后再次下单只改离点击点最近那架的目标点。
+func TestScoutOrderLaunchesUpToTakeoffPoints(t *testing.T) {
+	const scout = "scout-multi-order-test"
+	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
+
+	cruiser := newScoutTestCatapultShip("cruiser", 2, []objUnit.PlaneGroup{
+		{Name: scout, CurCount: 4, MaxCount: 4, TargetType: object.TypeNone},
+	})
+	ms := newScoutTestState(cruiser)
+
+	if orders, _ := scoutAt(ms, objPos.New(20, 20)); len(orders) != 1 {
+		t.Fatalf("orders = %d, want a first takeoff", len(orders))
+	}
+	if orders, _ := scoutAt(ms, objPos.New(30, 30)); len(orders) != 1 {
+		t.Fatalf("orders = %d, want a second takeoff", len(orders))
+	}
+	if len(ms.Arena.Planes) != 2 {
+		t.Fatalf("planes = %d, want two manual scouts for two catapults", len(ms.Arena.Planes))
+	}
+
+	// 两个起飞点都在飞：这一拍只改最近那架的目标点，不再起飞第三架。
+	orders, scouted := scoutAt(ms, objPos.New(40, 40))
+	if !scouted || len(orders) != 1 {
+		t.Fatalf("scouted = %v, orders = %d, want a single retarget order", scouted, len(orders))
+	}
+	if len(ms.Arena.Planes) != 2 {
+		t.Fatalf("planes = %d, want no third takeoff", len(ms.Arena.Planes))
+	}
+	for _, order := range orders {
+		if order.Uid() == "" || order.Executed() {
+			t.Fatalf("order = %v, want a retarget order for a flying scout", order)
+		}
+	}
+}
+
+// manualScoutsOf 数某艘舰现在有几架手动侦察机在天上。
+func manualScoutsOf(ms *state.MissionState, shipUid string) int {
+	count := 0
+	for _, plane := range ms.Arena.Planes {
+		if plane.BelongShip == shipUid && plane.ScoutManual {
+			count++
+		}
+	}
+	return count
+}
+
+// 选中一个编队连续点击时应该一艘接一艘轮着派：还没派过的基地优先，
+// 而不是每次都用离点击点最近的那艘（派满名额后它就只能改点）。
+func TestScoutOrderRotatesAcrossSelectedBases(t *testing.T) {
+	const scout = "scout-rotation-order-test"
+	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
+
+	near := newScoutTestCarrier("carrier-near", []objUnit.PlaneGroup{
+		{Name: scout, CurCount: 2, MaxCount: 2, TargetType: object.TypeNone},
+	})
+	far := newScoutTestCarrier("carrier-far", []objUnit.PlaneGroup{
+		{Name: scout, CurCount: 2, MaxCount: 2, TargetType: object.TypeNone},
+	})
+	far.CurPos = objPos.NewR(20, 4)
+	ms := newScoutTestState(near, far)
+
+	// 第一次：两艘都没派过，点击靠近谁就先派谁。
+	if orders, _ := scoutAt(ms, objPos.New(4, 4)); len(orders) != 1 {
+		t.Fatalf("orders = %d, want a first takeoff", len(orders))
+	}
+	if got := manualScoutsOf(ms, near.Uid); got != 1 {
+		t.Fatalf("near carrier scouts = %d, want 1", got)
+	}
+
+	// 第二次：仍然点在同一位置，但近的那艘名额已满，改派还没派过的那艘。
+	if orders, _ := scoutAt(ms, objPos.New(4, 4)); len(orders) != 1 {
+		t.Fatalf("orders = %d, want a second takeoff", len(orders))
+	}
+	if got := manualScoutsOf(ms, far.Uid); got != 1 {
+		t.Fatalf("far carrier scouts = %d, want 1 (never launched first)", got)
+	}
+	if len(ms.Arena.Planes) != 2 {
+		t.Fatalf("planes = %d, want two manual scouts", len(ms.Arena.Planes))
+	}
+
+	// 第三次：两艘都满了，才对离点击点最近的那架改点。
+	orders, scouted := scoutAt(ms, objPos.New(4, 4))
+	if !scouted || len(orders) != 1 {
+		t.Fatalf("scouted = %v, orders = %d, want a single retarget order", scouted, len(orders))
+	}
+	if len(ms.Arena.Planes) != 2 {
+		t.Fatalf("planes = %d, want no third takeoff", len(ms.Arena.Planes))
+	}
+}
+
+// 「还没派过」优先于「还有名额」：刚派过一架的战列舰不该抢在没派过的航母前面。
+func TestScoutOrderPrefersNeverLaunchedBase(t *testing.T) {
+	const scout = "scout-priority-order-test"
+	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
+
+	carrier := newScoutTestCarrier("carrier", []objUnit.PlaneGroup{
+		{Name: scout, CurCount: 2, MaxCount: 2, TargetType: object.TypeNone},
+	})
+	carrier.CurPos = objPos.NewR(30, 30)
+	battleship := newScoutTestCatapultShip("battleship", 2, []objUnit.PlaneGroup{
+		{Name: scout, CurCount: 3, MaxCount: 3, TargetType: object.TypeNone},
+	})
+	battleship.CurPos = objPos.NewR(4, 4)
+	ms := newScoutTestState(carrier, battleship)
+	// 战列舰已经放出一架，还剩一个弹射器空位。
+	ms.Arena.PutPlane(&objUnit.Plane{
+		Uid: "battleship-scout", Type: objUnit.PlaneTypeScout, CurHP: 10, RemainRange: 30,
+		BelongShip: battleship.Uid, ScoutManual: true, BelongPlayer: faction.HumanAlpha,
+	})
+
+	// 点击贴近战列舰：它有剩余名额，但航母还没派过，应该先派航母。
+	if orders, _ := scoutAt(ms, objPos.New(4, 4)); len(orders) != 1 {
+		t.Fatalf("orders = %d, want a takeoff from the never-launched carrier", len(orders))
+	}
+	if got := manualScoutsOf(ms, carrier.Uid); got != 1 {
+		t.Fatalf("carrier scouts = %d, want 1", got)
+	}
+	if got := manualScoutsOf(ms, battleship.Uid); got != 1 {
+		t.Fatalf("battleship scouts = %d, want it left untouched", got)
+	}
+}
+
+// 排在前面的基地这一拍什么都做不了（弹射器冷却、又没有在飞的侦察机）时，
+// 指令要顺延给下一个候选，不能白白吞掉这次点击。
+func TestScoutOrderFallsThroughToNextBase(t *testing.T) {
+	const scout = "scout-fallthrough-order-test"
+	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
+
+	cooling := newScoutTestCarrier("cooling", []objUnit.PlaneGroup{
+		{Name: scout, CurCount: 2, MaxCount: 2, TargetType: object.TypeNone},
+	})
+	// 起飞点刚起飞过，还在冷却；这一拍派不出第二架。
+	cooling.Aircraft.TakeOffTime = 60
+	if plane := cooling.Aircraft.TakeOffScout(cooling); plane == nil {
+		t.Fatal("准备阶段应该能起飞一架侦察机")
+	}
+	fresh := newScoutTestCarrier("fresh", []objUnit.PlaneGroup{
+		{Name: scout, CurCount: 2, MaxCount: 2, TargetType: object.TypeNone},
+	})
+	fresh.CurPos = objPos.NewR(20, 4)
+	ms := newScoutTestState(cooling, fresh)
+
+	// 点击贴着还在冷却的那艘：它优先，但派不出也改不了点，指令顺延给另一艘。
+	if orders, _ := scoutAt(ms, objPos.New(4, 4)); len(orders) != 1 {
+		t.Fatalf("orders = %d, want a takeoff from the other base", len(orders))
+	}
+	if got := manualScoutsOf(ms, fresh.Uid); got != 1 {
+		t.Fatalf("fresh base scouts = %d, want 1", got)
+	}
+	if got := manualScoutsOf(ms, cooling.Uid); got != 0 {
+		t.Fatalf("cooling base scouts = %d, want 0", got)
 	}
 }
 

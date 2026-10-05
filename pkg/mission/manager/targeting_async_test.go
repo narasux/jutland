@@ -158,7 +158,7 @@ func TestTakeOffFromBaseRotatesTargetTypes(t *testing.T) {
 		takeoffTypeCursors: map[string]int{},
 	}
 
-	_, firstType, _, ok := manager.takeOffFromBase(airfield)
+	_, firstType, _, ok := manager.takeOffFromBase(airfield, nil)
 	if !ok || firstType != object.TypePlane {
 		t.Fatalf(
 			"first sortie type = %v, %v; want plane; groups=%+v plan=%+v",
@@ -168,7 +168,7 @@ func TestTakeOffFromBaseRotatesTargetTypes(t *testing.T) {
 			manager.targetingPlan.BaseQueues[airfield.Uid],
 		)
 	}
-	_, secondType, _, ok := manager.takeOffFromBase(airfield)
+	_, secondType, _, ok := manager.takeOffFromBase(airfield, nil)
 	if !ok || secondType != object.TypeShip {
 		t.Fatalf("second sortie type = %v, %v; want ship", secondType, ok)
 	}
@@ -235,7 +235,7 @@ func TestTakeOffFromBaseChoosesPlaneThatCanReachTarget(t *testing.T) {
 		takeoffTypeCursors: map[string]int{},
 	}
 
-	plane, targetType, targetUID, ok := manager.takeOffFromBase(airfield)
+	plane, targetType, targetUID, ok := manager.takeOffFromBase(airfield, nil)
 	if !ok || targetType != object.TypeShip || targetUID != enemyShip.Uid {
 		t.Fatalf("takeoff = %v, %v, %q; want ship target %s", plane, targetType, targetUID, enemyShip.Uid)
 	}

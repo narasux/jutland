@@ -11,7 +11,9 @@ const pathSearchWorkers = 2
 type pathSearchJob struct {
 	grid        *grid.Grid
 	start, goal grid.Point
-	reply       chan []grid.Point
+	// costScale 贴岸代价缩放：大舰需要更多离岸余量，小艇可以贴着岸走
+	costScale float64
+	reply     chan []grid.Point
 }
 
 // pathSearchPool 同时只跑有限个寻路，结果经 channel 交回主线程。
@@ -53,7 +55,7 @@ func (p *pathSearchPool) worker() {
 			job := p.pending[0]
 			p.pending = p.pending[1:]
 			p.mu.Unlock()
-			job.reply <- job.grid.Search(job.start, job.goal)
+			job.reply <- job.grid.SearchWithCostScale(job.start, job.goal, job.costScale)
 		}
 	}
 }

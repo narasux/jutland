@@ -76,6 +76,37 @@ func TestBuildPlanDoesNotMutateSnapshotOrder(t *testing.T) {
 	}
 }
 
+// 同一架敌机在基地对空队列里只能出现一次。重复写入会让一个基地的整个 CAP
+// 一起扑向同一架飞机（例如 4 艘航母各派 10 架零式围殴一架手动侦察机）。
+func TestBuildPlanDoesNotRepeatAirTargets(t *testing.T) {
+	snapshot := Snapshot{
+		Tick: 1,
+		Bases: []Base{{
+			UID: "base", Player: faction.HumanAlpha, Pos: Point{X: 0, Y: 0},
+			Groups: []Group{{TargetType: object.TypePlane, Available: 12, Range: 3000}},
+		}},
+		EnemyPlanes: []EnemyPlane{
+			{UID: "scout", Player: faction.ComputerAlpha, Pos: Point{X: 5, Y: 0}, Threat: 0.5, Airborne: true},
+			{UID: "bomber", Player: faction.ComputerAlpha, Pos: Point{X: 8, Y: 0}, Threat: 0.5, Airborne: true},
+		},
+	}
+
+	plan := BuildPlan(snapshot)
+	queue := plan.BaseQueues["base"][object.TypePlane]
+	if len(queue) != 2 {
+		t.Fatalf("air queue = %+v, want each enemy plane exactly once", queue)
+	}
+	seen := map[string]int{}
+	for _, ref := range queue {
+		seen[ref.UID]++
+	}
+	for uid, count := range seen {
+		if count != 1 {
+			t.Fatalf("air queue repeats %s %d times: %+v", uid, count, queue)
+		}
+	}
+}
+
 func TestBuildPlanSkipsOutOfRangeTargets(t *testing.T) {
 	snapshot := Snapshot{
 		Tick: 1,

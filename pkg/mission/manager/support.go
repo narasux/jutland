@@ -46,10 +46,15 @@ func (m *MissionManager) updateBuildings() {
 				fundsCost, _ := objUnit.GetShipCost(ship.Name)
 				m.state.Player.CurFunds -= fundsCost
 			}
-			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围（通过 ShipMove 指令实现）
+			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围。
+			// 走寻路而不是直线指令：直线撞岸会被当作“已到达”而停在岸边，
+			// 之后再也不会重试；抖动落点落在陆格上时退回集结点本身。
 			x, y := rand.Intn(7)-3, rand.Intn(7)-3
 			targetPos := objPos.New(rp.RallyPos.MX+x, rp.RallyPos.MY+y)
-			m.instructionSet.Add(instr.NewShipMove(ship.Uid, targetPos))
+			if m.state.Core.MissionMD.MapCfg.Map.IsLand(targetPos.MX, targetPos.MY) {
+				targetPos = rp.RallyPos
+			}
+			m.instructionSet.Add(instr.NewShipMovePath(ship.Uid, ship.CurPos, targetPos, ship.CurSpeed))
 		}
 	}
 

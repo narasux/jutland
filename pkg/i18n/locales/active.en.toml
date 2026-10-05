@@ -424,6 +424,8 @@ other = "Ally"
 other = "Enemy"
 [MapFleetCount]
 other = "{{.Side}} ({{.Count}})"
+[OrderUnreachable]
+other = "Cannot reach that position"
 [RallyLandBlocked]
 other = "Cannot set a rally point on land"
 [ReinforceShipArchive]

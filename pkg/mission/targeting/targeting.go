@@ -272,6 +272,8 @@ func fillShipQueue(
 
 // appendAirQueues 为每个基地生成对空目标队列。
 // 敌机按分配均衡、威胁和距离评分，同一敌机被越多基地选中，后续得分越低。
+// 同一架敌机在一个基地的队列里只出现一次：队列是让基地内飞机轮流领目标的，
+// 重复写入同一架敌机会让这个基地的整个 CAP 一起扑向它（见 MissionManager 的追击名额）。
 func appendAirQueues(snapshot Snapshot, activeCounts map[object.Type]map[string]int, plan *Plan) {
 	assignedInPlan := make(map[string]int)
 	for _, plane := range snapshot.Planes {
@@ -317,6 +319,8 @@ func appendAirQueues(snapshot Snapshot, activeCounts map[object.Type]map[string]
 				Score:      bestScore,
 			})
 			assignedInPlan[enemy.UID]++
+			// 选过的敌机立刻移出候选，避免同一架敌机刷满整个队列。
+			candidates = append(candidates[:bestIdx], candidates[bestIdx+1:]...)
 		}
 		plan.BaseQueues[base.UID][object.TypePlane] = queue
 	}

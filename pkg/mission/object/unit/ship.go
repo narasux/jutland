@@ -603,6 +603,33 @@ func (s *BattleShip) CanOnLand() bool {
 	return s.TypeAbbr == "WaterDrop"
 }
 
+// hullSampleCount 舰体中心线的单侧采样点数（合计 2*count+1 个采样点）。
+const hullSampleCount = 4
+
+// HullLandOverlapSamples 沿给定舰体（长度 lengthM）的中心线采样，
+// 返回压进陆格的采样点数（0 表示舰体完全在水面）。舰体细长，中线采样
+// 足以判断“舰艏/舰艉是否已经压上岸”；启动期配置校验与运行期阻挡判定共用这一份实现。
+func HullLandOverlapSamples(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, rotation, lengthM float64) int {
+	halfLengthCells := lengthM / constants.MapBlockSize / 2
+	sinVal := math.Sin(rotation * math.Pi / 180)
+	cosVal := math.Cos(rotation * math.Pi / 180)
+	overlap := 0
+	for i := -hullSampleCount; i <= hullSampleCount; i++ {
+		t := float64(i) / hullSampleCount
+		px := pos.RX + sinVal*halfLengthCells*t
+		py := pos.RY - cosVal*halfLengthCells*t
+		if mapCfg.Map.IsLand(int(math.Floor(px)), int(math.Floor(py))) {
+			overlap++
+		}
+	}
+	return overlap
+}
+
+// hullLandOverlap 沿本舰中心线采样，返回压进陆格的采样点数。
+func (s *BattleShip) hullLandOverlap(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, rotation float64) int {
+	return HullLandOverlapSamples(mapCfg, pos, rotation, s.Length)
+}
+
 // MoveTo 移动到指定位置。
 // arrive 表示已到达目标附近；blocked 表示下一步会踏进海岸/陆地格被拦停，
 // 需要上层从当前位置重新规划，调用方不应把 blocked 当作到达处理。
@@ -632,18 +659,11 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 		s.CurSpeed = max(acceleration*20, s.CurSpeed-acceleration*10)
 	}
 	targetRotation := s.CurPos.Angle(targetPos)
-	// 逐渐转向
+	// 逐渐转向：沿最短方向转，单帧最多转 rotateSpeed 度
 	if s.CurRotation != targetRotation {
-		// 默认顺时针旋转
-		rotateFlag := RotateFlagClockwise
-		// 如果逆时针夹角小于顺时针夹角，则需要逆时针旋转
-		if math.Mod(targetRotation-s.CurRotation+360, 360) > 180 {
-			rotateFlag = RotateFlagAnticlockwise
-		}
-		s.CurRotation += float64(rotateFlag) * min(math.Abs(targetRotation-s.CurRotation), rotateSpeed)
-		s.CurRotation = math.Mod(s.CurRotation+360, 360)
+		s.CurRotation = rotateAngleToward(s.CurRotation, targetRotation, rotateSpeed)
 		// 如果距离太近，则原地旋转到差不多角度，才开始移动
-		if s.CurPos.Near(targetPos, 4) && math.Abs(s.CurRotation-targetRotation) > 1 {
+		if s.CurPos.Near(targetPos, 4) && angleDifferenceDegrees(s.CurRotation, targetRotation) > 1 {
 			s.CurSpeed = 0
 		}
 	}
@@ -651,16 +671,36 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	// 修改位置
 	nextPos.AddRx(math.Sin(s.CurRotation*math.Pi/180) * s.CurSpeed)
 	nextPos.SubRy(math.Cos(s.CurRotation*math.Pi/180) * s.CurSpeed)
+	// 这一步是否让舰体更靠近目标。必须在边界夹取之前判断，
+	// 否则贴边地图上夹取产生的假位移会把“向目标靠近”误判成远离。
+	approachingTarget := nextPos.Distance(targetPos) < s.CurPos.Distance(targetPos)
 	// 防止出边界
 	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
 	// 普通舰船撞岸即停：中心点还在水里时，不允许下一步踏进海岸/陆地格，
 	// 否则寻路只认中心点，一旦压进海岸格就再也寻不出路（搁浅锁死）。
-	// 中心点已经落在陆格上的搁浅舰，则放行一切位移，靠吸附寻路退回水中。
 	// 特殊船舶（飞起来的那些）不受限制。
 	if !s.CanOnLand() && !mapCfg.Map.IsLand(s.CurPos.MX, s.CurPos.MY) &&
 		mapCfg.Map.IsLand(nextPos.MX, nextPos.MY) {
 		s.CurSpeed = 0
 		return false, true
+	}
+	// 中心点已经压在陆格上的搁浅舰：允许移动，但只允许向目标点靠近。
+	// 转向不受限制，舰船可以原地转到位再退出来；限制位移方向是为了避免
+	// 舰体在陆地上横向漂移，甚至漂进另一片不连通的港湾，之后再怎么寻路都失败。
+	if !s.CanOnLand() && mapCfg.Map.IsLand(s.CurPos.MX, s.CurPos.MY) && !approachingTarget {
+		s.CurSpeed = 0
+		return false, true
+	}
+	// 舰体已经压上岸的舰船（系泊位、擦岸）：不允许把压岸程度进一步加深，
+	// 但仍允许平移与退出，避免把系泊中的舰船锁死在岸边。
+	// 只在贴岸一格内才做舰体采样，开阔水域直接跳过。
+	if !s.CanOnLand() && !mapCfg.Map.IsLand(s.CurPos.MX, s.CurPos.MY) &&
+		mapCfg.ClearanceAt(s.CurPos.MX, s.CurPos.MY) <= 1 {
+		if overlap := s.hullLandOverlap(mapCfg, s.CurPos, s.CurRotation); overlap > 0 &&
+			s.hullLandOverlap(mapCfg, nextPos, s.CurRotation) > overlap {
+			s.CurSpeed = 0
+			return false, true
+		}
 	}
 	// 移动到新位置
 	s.CurPos = nextPos
