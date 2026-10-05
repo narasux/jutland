@@ -1,107 +1,75 @@
 ---
 name: jutland-clean-ship-image
-description: Remove white or near-white backgrounds from ship drawings and PNG assets for Jutland while preserving image dimensions, orientation, scale, and artwork. Also supports user-requested bounded recoloring such as replacing ship camouflage with a uniform navy blue. Use before jutland-add-ship when source images still have a white background, or when a user asks only for transparent-background cleanup and a reviewable preview.
+description: Remove white/near-white backgrounds from Jutland ship PNGs while preserving canvas size, orientation, scale and artwork; also supports user-requested bounded recoloring (recolor, navy blue, e.g. camouflage → uniform navy). Use before jutland-add-ship or for clean/白底/透明背景 cleanup with a reviewable preview.
 ---
 
 # Jutland 清理战舰图片白底
 
 ## 范围
 
-- 在仓库根目录执行命令；项目路径以仓库根目录为基准，脚本不得写死机器绝对路径。
-- 来源图和候选输出统一放在 `raw_resources/` 下（例如 `raw_resources/<stem>.cleaned.png`），不要放在仓库根目录或其它临时位置；输入若在别处，先复制到 `raw_resources/` 再处理。
-- 只把白色或近白色背景变为透明；保留原始画布尺寸、方向、比例和图中内容。
-- 不裁剪、不拆分视图、不判断俯视/侧视、不旋转、不缩放、不更新配置，也不覆盖正式游戏资源。
-- 不重绘、补画、风格化或删除飞机、标注等非背景内容。边界不确定时停止并请用户判断。只有用户明确要求“只保留舰体”时，才允许用 `-clear-box` 删除标注。
-- 允许按要求做有限的边缘处理：`-defringe` 只羽化紧贴透明背景的浅色描边像素，不改变舰体内部像素。
-- 只有用户明确要求时，才允许对限定区域做颜色统一，例如把侧视图舰体迷彩替换为统一海军蓝；必须保留线稿、红色水下船体、旗帜、飞机和文字。
-- 始终保留输入文件，在 `raw_resources/` 输出独立的 `<stem>.cleaned.png` 候选文件；除用户明确要求外，不在仓库中保留预览、备份或其他中间版本。
+- 来源图与候选输出统一放在 `raw_resources/` 下，候选为 `raw_resources/<stem>.cleaned.png`；输入在别处时先复制进来。始终保留输入文件，除用户明确要求外不在仓库保留预览、备份或其他中间版本。
+- 只把白色或近白色背景变为透明，保留原始画布尺寸、方向、比例和图中内容：不裁剪、不拆分视图、不判断俯视/侧视、不旋转、不缩放、不更新配置、不覆盖 `resources/images/ships/...` 正式资源。
+- 只做确定性像素处理：不重绘、不补画、不风格化、不删除飞机和标注等非背景内容；边界不确定时停止并请用户判断。允许的例外只有两处：`-defringe` 只羽化紧贴透明背景的浅色描边像素、不改变舰体内部像素；以及用户明确要求时对限定区域统一颜色（例如把侧视图舰体迷彩替换为统一海军蓝，必须保留线稿、红色水下船体、旗帜、飞机和文字）。
+- 只有用户明确要求“只保留舰体”时，才允许用 `-clear-box` 删除标注。
 - 完成预览后停止，等待用户人工确认；不要在同一轮继续执行 `jutland-add-ship`。
 
 ## 工作流程
 
-1. 检查输入。
-   - 在仓库根目录阅读 `AGENTS.md`，执行 `git status --short`，保留无关用户改动。
-   - 用 `sips` 或等效工具记录尺寸和色彩模式，并用 `view_image` 检查白底、浅灰结构、白色标线和细线区域。
+1. 检查输入：用 `sips` 或等效工具记录尺寸和色彩模式，并用 `view_image` 检查白底、浅灰结构、白色标线和细线区域。
 
-2. 清理外部连通背景。
-   - 转为 RGBA，但不得改变像素尺寸。
-   - 优先从画布边缘泛洪，只删除与边缘连通的低饱和近白色像素。
+2. 清理外部连通背景：转为 RGBA 但不改变像素尺寸，优先从画布边缘泛洪，只删除与边缘连通的低饱和近白色像素。
    - 从保守阈值开始，例如每个 RGB 通道 `>=245` 且通道差值较小；不要用单纯亮度阈值删除浅灰结构。
-   - 优先复用脚本：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png`
-   - 脚本默认只做边缘连通背景清理，并输出残留近白连通组件统计；默认不生成 checker/dark 预览。
+   - 复用脚本：`go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png`
+   - 脚本默认只做边缘连通背景清理，并输出残留近白连通组件统计；默认不生成 checker/dark 预览。加 `-analyze-only` 可只分析不写文件。
 
-3. 处理封闭白底。
-   - 统计残留近白色连通组件的像素数和包围盒，再决定处理范围。
-   - 可先只分析不写文件：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -analyze-only`
-   - 只删除能明确判断为背景的组件。栅栏、索具、吊臂等细线包围区域可在原始分辨率下使用约 `225~235` 的低饱和亮色阈值，但必须保留深灰、黑色和抗锯齿线条。
-   - 每次放宽阈值或扩大区域前，如需人工对比，可用 `mktemp -d` 动态创建临时目录保存候选文件，或显式使用 `-backup-before-aggressive`；完成前必须删除中间版本，仓库中只保留最终 `<stem>.cleaned.png`。
-   - 如需删除明确的大块封闭背景，使用脚本的显式面积阈值，例如：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -remove-enclosed-min-area <pixels>`
-     脚本默认直接覆盖输出文件；只有显式传入 `-backup-before-aggressive` 时才会生成 `<stem>.before-aggressive-cleanup.png` 备份。
-   - 如需清理索具、吊臂等局部围住的小块背景，使用一个或多个 `-remove-box minX,minY,maxX,maxY` 限定人工确认区域，避免误删甲板标线、文字和飞机细节；脚本仍按连通组件删除，不按矩形逐像素清空。
-   - 如果栅栏/索具内仍有纯白斑点，可更激进地只清纯白小组件：提高 `-component-min` 到 `250` 左右，降低 `-remove-enclosed-min-area` 到 `1`，用 `-max-area` 只删除小口袋，并用 `-remove-box` / `-exclude-box` 限定与保护区域。示例：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -component-min 250 -remove-enclosed-min-area 1 -max-area 150 -remove-box <minX,minY,maxX,maxY> -exclude-box <minX,minY,maxX,maxY>`
-   - `-max-area 0`（默认）表示不限制面积上限；`-exclude-box` 只跳过包围盒与保护框相交的组件，可重复传入，用于保住旗帜、飞机、比例尺和文字。
-   - 使用纯白小组件清理时，框选区域要避开旗帜、比例尺、文字、飞机、高光和甲板白色标线；若这些内容位于同一区域，先缩小或拆分 `-remove-box`，不要全图执行。
+3. 处理封闭白底：统计残留近白色连通组件的像素数和包围盒，再决定处理范围，只删除能明确判断为背景的组件。
+   - 栅栏、索具、吊臂等细线包围区域可在原始分辨率下使用约 `225~235` 的低饱和亮色阈值，但必须保留深灰、黑色和抗锯齿线条。
+   - 删除明确的大块封闭背景用 `-remove-enclosed-min-area <pixels>`；脚本默认直接覆盖输出文件，只有显式传入 `-backup-before-aggressive` 时才生成 `<stem>.before-aggressive-cleanup.png` 备份。需要人工对比时也可用 `mktemp -d` 动态创建临时目录，完成前删除中间版本。
+   - 清理索具、吊臂等局部围住的小块背景用一个或多个 `-remove-box minX,minY,maxX,maxY` 限定人工确认区域，避免误删甲板标线、文字和飞机细节；脚本仍按连通组件删除，不按矩形逐像素清空。
+   - 更激进地只清纯白小组件：提高 `-component-min` 到 `250` 左右，降低 `-remove-enclosed-min-area` 到 `1`，用 `-max-area` 只删除小口袋，并用 `-remove-box` / `-exclude-box` 限定与保护区域。
+   - `-max-area 0`（默认）表示不限制面积上限；`-exclude-box` 只跳过包围盒与保护框相交的组件，可重复传入，用于保住旗帜、飞机、比例尺和文字。框选区域要避开这些内容，若同一区域混有需保留内容，先缩小或拆分 `-remove-box`，不要全图执行。
    - 用户指出局部残留时，重新分析该区域的连通组件，不要逐像素猜测；发现误删则从最近备份恢复。
 
-### 侧视图栏杆与围杆复清经验
+### 侧视图栏杆与缆绳间白块复清
 
-- 已经做过一次大块封闭白底清理的合图，不要从原图重新全局放宽阈值。应以当前候选为输入重新分析，只处理侧视图残留，避免把俯视图和已经确认的区域再次纳入风险范围。
-- 侧视图复清优先拆成三类框，而不是用一个覆盖整艘舰的矩形：
+- 特征：甲板栏杆（围栏）的白色格子和桅杆缆绳之间的小片纯白是薄结构围住的封闭背景，外部泛洪清不掉；它们通常是纯 `255`、面积很小（常见 2~40 像素，少数合并到约 100~150），并沿甲板线以约 5x2 的规律重复。
+- 输入纪律：已经做过一次大块封闭白底清理的合图，不要从原图重新全局放宽阈值；以当前候选为输入重新分析，只处理侧视图残留，避免把俯视图和已确认区域再次纳入风险范围。
+- 先用 `-analyze-only` 列出这些小组件的包围盒，确认它们都落在栏杆带 / 缆绳区，并确认该视图的中部上层建筑在 `-max-area` 范围内没有需要保留的近白组件。Shipbucket 侧视图上层建筑多用 `213/228/244/247`，几乎不带纯 `255`，因此 `-component-min 250` 通常很安全；俯视图和艏艉正视图则可能整片接近纯白，不要纳入。
+- 用多个精确小框，而不是一个覆盖整舰的矩形：
   1. 上层建筑、塔楼和吊臂所在的中央框；
   2. 沿主甲板栏杆布置的窄横框；
   3. 针对单个吊臂、围杆或索具封闭白块的微型框。
-  这样可以绕开舰艉/舰艏旗帜、比例尺、舰名、飞机白色机翼和其他需要保留的白色细节。
-- 对已经清过的大块区域，先用 `-component-min 250` 清纯白小组件；深色预览中仍有明显白底时，可在同一组精确框内降到 `245`。不要直接在整张侧视图使用 `225~235`，因为浅灰上层建筑和抗锯齿结构也可能被误删；更低阈值只用于非常窄且人工确认过的栏杆带。
-- `-remove-box` 只删除包围盒完全落入框内的连通组件。若一个竖向白块从栏杆带延伸到相邻甲板，框的边界没有覆盖它的完整包围盒，该组件会原样保留；应根据分析输出扩展或拆分框，不要误以为阈值无效。
-- 舰载机附近的白色组件必须按坐标区分。例如同一小片区域内，上方可能是吊臂后的背景，下方紧邻的较长横向组件可能是飞机机翼；先查看包围盒和深色裁剪预览，再用不接触机翼包围盒的微型框处理。
-- 脚本在执行封闭组件删除前打印 `residual_nearwhite_*` 统计，因此该统计不是最终输出的残留量。写出候选后脚本会重新扫描并打印 `final_nearwhite_*` 与 `final_eligible_enclosed_*`；最后一项必须为 `0`，否则不得交付，也不得只凭透明 PNG 的白色预览判断完成。
-- 对旧版脚本或需要人工复核时，写出候选后必须对输出文件再执行一次 `-analyze-only`，确认侧视区域残留已收敛到需要保留的飞机、旗帜、文字或细线抗锯齿组件。
-- 最终必须检查整图深色预览和侧视图局部裁剪。白色画布预览无法可靠暴露栏杆后的小白块；深色背景下应能看到栏杆孔隙连续透出背景，同时飞机、旗帜、舰名、比例尺和浅灰结构仍完整。
+- 这样可以绕开舰艉/舰艏旗帜、比例尺、舰名、飞机白色机翼等需要保留的白色细节，并用 `-exclude-box` 跳过飞机、旗帜、作者署名和比例尺。参数为 `-component-min 250`、`-remove-enclosed-min-area 1`、`-max-area 150`：
 
-### 侧视图栏杆缝隙与缆绳间白块
+  ```bash
+  go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go \
+    -input <candidate.png> -output <candidate.png> \
+    -component-min 250 -remove-enclosed-min-area 1 -max-area 150 \
+    -remove-box 40,78,1760,470 -exclude-box 30,30,410,230 -exclude-box 628,98,718,152 \
+    -remove-box 40,1280,1760,1700 -exclude-box 1045,1260,1535,1470
+  ```
 
-- 甲板栏杆（围栏）的白色格子是薄结构围住的封闭背景，外部泛洪清不掉；桅杆缆绳之间也常有小片纯白。它们通常是纯 `255`、面积很小（常见 2~40 像素，少数合并到约 100~150），并沿甲板线以约 5x2 的规律重复。
-- 先用 `-analyze-only` 列出这些小组件的包围盒，确认它们都落在栏杆带 / 缆绳区，并确认该视图的中部上层建筑在 `-max-area` 范围内没有需要保留的近白组件。Shipbucket 侧视图上层建筑多用 `213/228/244/247`，几乎不带纯 `255`，因此 `-component-min 250` 通常很安全；俯视图和艏艉正视图则可能整片接近纯白，不要纳入。
-- 然后用覆盖侧视图的 `-remove-box`，配合 `-exclude-box` 跳过飞机、旗帜、作者署名和比例尺。示例（按实际合图坐标调整）：
-  `go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <candidate.png> -output <candidate.png> -component-min 250 -remove-enclosed-min-area 1 -max-area 150 -remove-box 40,78,1760,470 -exclude-box 30,30,410,230 -exclude-box 628,98,718,152 -remove-box 40,1280,1760,1700 -exclude-box 1045,1260,1535,1470`
-- `-remove-box` 要求组件包围盒完全落入框内。栏杆带沿舰体有斜度，必要时用相邻多个框覆盖，而不是一个很大的矩形。
-- 完成后再次 `-analyze-only`，并用深色背景检查侧视图：栏杆孔隙应连续透出背景，缆绳之间无白斑，旗帜、飞机与浅灰结构完整。
+  坐标需按实际合图调整。
+- `-remove-box` 要求组件包围盒完全落入框内：若一个竖向白块从栏杆带延伸到相邻甲板，框的边界没有覆盖它的完整包围盒，该组件会原样保留，应根据分析输出扩展或拆分框，不要误以为阈值无效；栏杆带沿舰体有斜度时用相邻多个框覆盖。
+- 阈值纪律：不要在整张侧视图使用 `225~235`，浅灰上层建筑和抗锯齿结构可能被误删；更低阈值只用于非常窄且人工确认过的栏杆带。深色预览仍有明显白底时，在同一组精确框内降到 `245`。
+- 舰载机附近的白色组件必须按坐标区分：例如同一小片区域内，上方可能是吊臂后的背景，下方紧邻的较长横向组件可能是飞机机翼；先查看包围盒和深色裁剪预览，再用不接触机翼包围盒的微型框处理。
+- 验收：脚本在执行封闭组件删除前打印的 `residual_nearwhite_*` 统计不是最终输出的残留量；写出候选后脚本会重新扫描并打印 `final_nearwhite_*` 与 `final_eligible_enclosed_*`，最后一项必须为 `0`，否则不得交付，也不得只凭透明 PNG 的白色预览判断完成。必要时对输出文件再跑一次 `-analyze-only`，确认侧视区域残留已收敛到需要保留的飞机、旗帜、文字或细线抗锯齿组件。
+- 最终必须检查整图深色预览和侧视图局部裁剪：白色画布预览无法可靠暴露栏杆后的小白块，深色背景下应能看到栏杆孔隙连续透出背景，同时飞机、旗帜、舰名、比例尺和浅灰结构仍完整。
 
-4. 去除轮廓残留的白边（用户反馈“边缘不干净”时）。
-   - 白底清理后，轮廓外常残留一圈 JPEG 抗锯齿浅色像素，在深色或海面背景上表现为白色描边。用 `-defringe` 只羽化“与透明背景相邻且平均通道值不低于阈值”的像素，不改动内部像素。
+4. 去除轮廓残留的白边（用户反馈“边缘不干净”时）：白底清理后，轮廓外常残留一圈 JPEG 抗锯齿浅色像素，在深色或海面背景上表现为白色描边。用 `-defringe` 只羽化“与透明背景相邻且平均通道值不低于阈值”的像素，不改动内部像素。
    - 默认参数为 `-defringe-min 230 -defringe-passes 1`；合图里若仍有明显白线，可降到 `-defringe-min 200 -defringe-passes 2`。`200` 只略微软化 200~215 的浅灰结构边缘，明显轻于 `230` 留下的白圈。
-   - 示例：`go run .agents/skills/jutland-clean-ship-image/scripts/clean_ship_white_background.go -input <image.png> -output <stem>.cleaned.png -remove-enclosed-min-area <pixels> -remove-box <...> -defringe -defringe-min 200 -defringe-passes 2`
    - 验证方式：统计“与透明相邻且亮度 >= 阈值”的像素数量应明显下降，且俯视图红白识别条纹、比例尺白格、图徽白锚等白色内容的像素数保持不变；羽化像素必须全部落在原轮廓 1~3 像素带内，不得进入舰体内部。
 
-5. 可选：按用户要求删除标注内容。
-   - 仅在用户明确要求只保留舰体时执行；默认必须保留标题、图注、图徽、比例尺等标注。
-   - 用 `-clear-box minX,minY,maxX,maxY`（可重复）按矩形强制透明，不受颜色阈值限制。框必须包含标注的全部笔画与抗锯齿边缘，且不得压到舰体、索具或水线。
-   - 先用 `-analyze-only` 或逐行墨迹统计确认框内只有标注、框外相邻区域没有舰体内容；标题与桅杆缆绳、图徽与舰艉旗杆常常挨得很近，必要时把文字拆成多个框。
+5. 可选：按用户要求删除标注内容。仅在用户明确要求只保留舰体时执行；默认必须保留标题、图注、图徽、比例尺等标注。用 `-clear-box minX,minY,maxX,maxY`（可重复）按矩形强制透明，不受颜色阈值限制；框必须包含标注的全部笔画与抗锯齿边缘，且不得压到舰体、索具或水线。先用 `-analyze-only` 或逐行墨迹统计确认框内只有标注、框外相邻区域没有舰体内容；标题与桅杆缆绳、图徽与舰艉旗杆常常挨得很近，必要时把文字拆成多个框。
 
-6. 可选：统一迷彩颜色。
-   - 仅在用户明确要求时执行。不要全图换色，必须用一个或多个 `-recolor-box` 限定舰体或上层建筑区域。
-   - 默认海军蓝为 Princeton 任务中使用的取样色 `56,68,93`；如用户给定新色样，可先取样再传入 `-target-color R,G,B`。
-   - 使用脚本：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/uniform_ship_color.go -input <image.png> -output <stem>.cleaned.png -recolor-box <minX,minY,maxX,maxY>`
-   - 用 `-skip-box` 避开飞机、旗帜、文字、比例尺、作者署名和其他不应调色的局部。默认保留近黑线稿和饱和红色区域，避免破坏船底红色、防空炮线稿和旗帜。
-   - Princeton 类似合图的侧视图示例：
-     `go run .agents/skills/jutland-clean-ship-image/scripts/uniform_ship_color.go -input raw_resources/princeton.png -output raw_resources/princeton.png -recolor-box 15,168,1280,455 -skip-box 745,185,770,205 -skip-box 925,278,1165,318`
-   - 如果仍有很浅的灰色迷彩图块未统一，可适当提高 `-max-luma` 或增大/细分 `-recolor-box`；如果误伤文字、飞机或标线，优先增加 `-skip-box`，不要放宽到全图处理。
+6. 可选：统一迷彩颜色。仅在用户明确要求时执行；不要全图换色，必须用一个或多个 `-recolor-box` 限定舰体或上层建筑区域。用 `-skip-box` 避开飞机、旗帜、文字、比例尺、作者署名和其他不应调色的局部；默认保留近黑线稿和饱和红色区域，避免破坏船底红色、防空炮线稿和旗帜。默认海军蓝为 Princeton 任务中使用的取样色 `56,68,93`；如用户给定新色样，可先取样再传入 `-target-color R,G,B`。如果仍有很浅的灰色迷彩图块未统一，可适当提高 `-max-luma` 或增大/细分 `-recolor-box`；如果误伤文字、飞机或标线，优先增加 `-skip-box`，不要放宽到全图处理。Princeton 类似合图的侧视图示例：
+   `go run .agents/skills/jutland-clean-ship-image/scripts/uniform_ship_color.go -input raw_resources/princeton.png -output raw_resources/princeton.png -recolor-box 15,168,1280,455 -skip-box 745,185,770,205 -skip-box 925,278,1165,318`
 
-7. 输出确认材料。
-   - 保存未缩放的透明 PNG 候选文件于 `raw_resources/`，不覆盖输入或 `resources/images/ships/...` 正式资源；仓库中只保留 `raw_resources/<stem>.cleaned.png`。
-   - 用 `view_image` 检查透明 PNG；如需高对比背景预览，输出到 `mktemp -d` 动态创建的临时目录，完成前删除，不保留在仓库。
-   - 报告原始/输出尺寸、删除的像素或组件数量、调色像素数量，以及仍需人工判断的区域。
-   - 明确请求用户确认，然后停止。
+7. 输出确认材料：保存未缩放的透明 PNG 候选文件于 `raw_resources/<stem>.cleaned.png`，用 `view_image` 检查；如需高对比背景预览，输出到 `mktemp -d` 动态创建的临时目录，完成前删除。报告原始/输出尺寸、删除的像素或组件数量、调色像素数量，以及仍需人工判断的区域，然后明确请求用户确认并停止。
 
 ## 验证
 
-- 输入文件未改变，输出为 RGBA PNG。
-- 输出尺寸、方向和比例与输入完全一致。
-- 外部白底已透明，细线和非背景白色内容仍保留。
-- 高对比背景下没有明显白块；无法可靠区分的区域已留给用户确认。
+- 输入文件未改变，输出为 RGBA PNG，尺寸、方向和比例与输入完全一致。
+- 外部白底已透明，细线和非背景白色内容仍保留；高对比背景下没有明显白块。
 - 如执行调色，调色只发生在用户指定区域内，飞机、旗帜、文字、比例尺、红色水下船体和黑色线稿未被误改。
+- 无法可靠区分的区域已留给用户确认。
