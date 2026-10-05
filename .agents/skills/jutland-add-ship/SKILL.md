@@ -17,7 +17,7 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 
 ## 目标文件
 
-- 舰船：`configs/ships.json5`
+- 舰船：`configs/ships.json5`（数组顺序即图鉴顺序，插入位置见「5. 添加舰船配置 → 插入位置」）
 - 武器：`configs/guns.json5` 及其弹药/发射器配置
 - 图鉴：`configs/references.json5`
 - 测试任务：`configs/missions.json5` 中的 `TestAll`
@@ -25,13 +25,14 @@ description: Add or update a Jutland ship from user-confirmed transparent source
 - 缩放前原尺寸图：放 `raw_resources/`，命名为 `<ship name> side.png`、`<ship name> top.png`，例如 `raw_resources/princeton side.png`、`raw_resources/princeton top.png`
 - 缩放脚本：`scripts/resize_ship_image.py`
 
-`type` 必须匹配 `pkg/resources/images/ship/ship.go` 扫描的现有目录，例如 `aircraft_carrier`、`battleship`、`cruiser`、`destroyer`、`frigate`、`torpedo_boat`、`cargo`、`hospital`。
+`type` 必须匹配 `pkg/resources/images/ship/ship.go` 扫描的现有目录，例如 `aircraft_carrier`、`battleship`、`cruiser`、`destroyer`、`frigate`、`torpedo_boat`、`cargo`、`hospital`、`repair`。
 
 ## 工作流程
 
 ### 1. 确认输入与现有模式
 
 - 确定 `name`、展示名、国家、`type`、`typeAbbr`、资料链接、素材来源和作者。常用舰名转换为 snake_case；高风险命名歧义在写文件前确认。
+- 先按「插入位置」的三层规则（国家 → 舰种 → 舰级代际）定位新舰在 `ships.json5` 中要插入的小节和代际位置，再开始处理图片。
 - 阅读相邻的舰船、图鉴和 `TestAll` 条目，选择 1~3 艘同阵营、同年代、同定位舰船作为费用、减伤、加速度和转向基准。
 - 优先读取用户提供的资料链接；无法访问时索要长度、舰体宽度、排水量、速度和武装等必要数据。
 
@@ -85,11 +86,37 @@ python3 utils/turret_marker/server.py \
 
 ### 5. 添加舰船配置
 
-- 将条目放到同舰种、同阵营附近。
+- 按下面的「插入位置」把条目插到正确的国家/舰种/舰级位置，**不要追加到文件末尾**，也不要为图省事放到同舰种块的最后。
 - `totalHP` 优先使用满载排水量；`maxSpeed` 使用节。费用、时间、减伤、加速度和转向从选定基准推导。
 - 按资料与图片配置主炮、副炮、防空炮、鱼雷、火箭和舰载机挂点。只引用存在的配置名称，并核对 `posPercent`、射界和数量。
 - 主炮按 `posPercent` 从大到小排列；副炮和防空炮先按武器口径从大到小分组，同口径内再按 `posPercent` 从大到小排列。同一炮座组或同一区域（如“前炮塔左右”“舰桥左右”“后部平台左右”）的条目必须相邻，并用简短注释标明区域。
 - 航空母舰只编入仓库已有飞机；缺少历史机型时复用同阵营、同任务角色的可用机型。图鉴直接列出实际配置，不添加模板化免责声明。
+
+#### 插入位置（ships.json5 排序规则）
+
+初始化按数组顺序依次 append 到 `objUnit.AllShipNames`，图鉴列表直接沿用该顺序，因此**位置错了图鉴顺序就错**。`configs/ships.json5` 固定为三层排序：
+
+1. **国家**：中国 `cn` → 苏联 `su` → 美国 `us` → 德国 `de` → 法国 `fr` → 日本 `jp` → 英国 `uk` → 意大利 `it` → 特殊 `special`。
+   该顺序与 `pkg/mission/object/unit/types.go` 的 `AvailableNations()` 必须一致；新增国家时两处同步修改。
+2. **舰种**：航空母舰 `aircraft_carrier` → 战列舰 `battleship` → 重巡洋舰 → 轻巡洋舰 → 驱逐舰 `destroyer` → 护卫舰 `frigate` → 鱼雷艇 `torpedo_boat` → 其他。
+   - 巡洋舰共用 `type: "cruiser"`，按 `typeAbbr` 归段：`CA`/`CB` 属重巡洋舰段，`CL`/`CLAA`/`CM`/`CGN` 属轻巡洋舰段。
+   - “其他”指 `cargo`、`repair`、`hospital` 与测试用 `default`，内部按 货轮 → 维修船 → 医疗船 → 测试单位。
+3. **舰级代际（逆序）**：越新锐越靠前。同一国家同一舰种内按舰级家族分段，家族之间按最新型号逆序，家族内部按代际逆序；**同一舰级的多艘舰不排序**，保持既有相对顺序。例：美国战列舰 `montana → lowa → south_dakota → … → south_carolina → connecticut → virginia → kentucky`；日本战列舰 `edo → satsuma → yamato → nagato → ise → fuso → kongo`。
+   判断代际时以该舰的舰级（见相邻条目的 `// <舰名>` 注释、references 的精细舰种、历史资料）为准，**不要用 `year` 字段直接排序**：`year` 是配置年份，同级改型、纸面方案和改装舰会互相矛盾。
+
+子段约定（除注明外，子段排在主线之后、段内同样逆序）：
+
+- 航母：正规航母（`CV`/`CVB`）→ 轻母 `CVL` → 护航航母 `CVE` → 商船航母 `MAC` → 水上飞机母舰 `AV` → 训练航母 `IX`。
+- 重巡洋舰：`CB`（大型巡洋舰）排在 `CA` 之前。
+- 轻巡洋舰：段内**统一按舰级代际逆序**，不要把防空巡洋舰 `CLAA`、布雷巡洋舰 `CM`、导弹巡洋舰 `CGN` 固定排在段首或段尾。例：美国 `long_beach（CGN 1961）→ uss_worcester_1958 → fargo → charlotte（CL-154 1945 方案）→ atlanta（1941）→ st_louis（1939）→ brooklyn（1937）`。
+- 战列巡洋舰 `BC`（如 `lexington`、`kongo`、`hood`、`tiger`、`scharnhorst`）没有独立舰种，按设计年代插进该国战列舰线内。
+- 实操方法：先读该「国家 × 舰种」小节**现有条目的先后**（多数小节按代际由旧到新书写），再决定新舰插在哪两艘之间；不要按 `typeAbbr` 另立子段规则，除非该小节原本就这么分段（如航母的 CVL/CVE/MAC/AV 子段）。
+
+分组横幅注释必须同步：
+
+- 每个「国家 × 舰种」小节以 `// <国家>海军` + `// --------- <舰种> ----------` 开头，子段写作 `// --------- 航空母舰 · 轻母（CVL） ----------`。
+- 目标小节已存在时，直接在该小节内的代际位置插入条目，并保留该舰自己的 `// <舰名>` 注释；不要新建重复横幅。
+- 确实需要新建国家或舰种小节时，横幅位置同样遵循上面的三层顺序。
 
 #### Mark 专用武器
 
@@ -119,6 +146,7 @@ python3 utils/turret_marker/server.py \
 - 确认原尺寸备份和正式俯视/侧视 PNG 均存在，方向正确，缩放保持长宽比；正式图舰艏、舰艉不得有会使可见舰体明显小于 `length*4` 的透明留白。
 - 确认炮塔标记项目 JSON 已由用户确认，且 `ships.json5` 中的 `posPercent`、左右舷和武器数量与导出结果一致。
 - 搜索舰名，确认 `ships.json5`、`references.json5`、`TestAll` 和 PNG 文件名一致且没有重复定义。
+- 确认新舰插入到了正确的国家/舰种/舰级位置（国家 → 舰种 → 舰级代际逆序），没有落到文件末尾或同舰种块尾部，也没有打乱同小节既有条目的相对顺序；需要时用工具打印各「国家 × 舰种」小节的舰船列表核对。
 - 搜索所有武器、弹药、发射器和飞机引用，确认上游配置存在。
 - 用 `view_image` 检查正式 PNG 的完整轮廓和透明边缘；用 `git diff --check` 检查文本问题。
 - 运行 `go build ./pkg/...`。最终说明资料来源、配置选择和未验证的视觉区域。

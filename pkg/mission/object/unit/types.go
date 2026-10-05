@@ -73,9 +73,9 @@ func (n Nation) ToDisplay() string {
 	}
 }
 
-// AvailableNations 返回图鉴筛选使用的稳定国籍顺序。
+// AvailableNations 返回图鉴筛选使用的稳定国籍顺序，与 ships.json5 的分组顺序保持一致。
 func AvailableNations() []Nation {
-	return []Nation{NationAll, NationCN, NationUS, NationJP, NationDE, NationFR, NationUK, NationSU, NationIT, NationSpecial}
+	return []Nation{NationAll, NationCN, NationSU, NationUS, NationDE, NationFR, NationJP, NationUK, NationIT, NationSpecial}
 }
 
 // CombatPowerInfo 单位的静态战力评估，仅用于图鉴与平衡分析。
