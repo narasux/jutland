@@ -2,6 +2,7 @@ package manager
 
 import (
 	"math"
+	"math/rand"
 	"slices"
 	"sort"
 
@@ -196,17 +197,8 @@ func (m *MissionManager) updateSelectedShips() {
 	// 正在分组中，不可用
 	if !m.state.Interaction.IsGrouping {
 		// 通过分组选中战舰
-		groupID := action.GetGroupIDByPressedKey()
-		if groupID != object.GroupIDNone {
-			m.state.Interaction.SelectedShips = m.state.Interaction.SelectedShips[:0]
-			for _, ship := range m.state.Arena.Ships {
-				if ship.BelongPlayer == m.state.Player.CurPlayer && ship.GroupID == groupID {
-					m.state.Interaction.SelectedShips = append(m.state.Interaction.SelectedShips, ship.Uid)
-				}
-			}
-
-			// 如果当前选中的分组不是当前按键的分组，则更新记录
-			m.state.Interaction.SelectedGroupID = groupID
+		if groupID := action.GetGroupIDByPressedKey(); groupID != object.GroupIDNone {
+			m.selectShipsByGroup(groupID)
 		}
 	}
 
@@ -253,6 +245,36 @@ func (m *MissionManager) syncFocusedShip() {
 		return
 	}
 	m.state.Interaction.FocusedShipUid = selected[0]
+}
+
+// selectShipsByGroup 用编组键（0-9）选中该编组的我方战舰。
+// 若该编组本就处于选中状态（即再次按下同一编组键），把相机移动到编组内
+// 随机一艘仍存活战舰的位置，方便快速把视野切回舰队。
+func (m *MissionManager) selectShipsByGroup(groupID object.GroupID) {
+	m.state.Interaction.SelectedShips = m.state.Interaction.SelectedShips[:0]
+	for _, ship := range m.state.Arena.Ships {
+		if ship.BelongPlayer == m.state.Player.CurPlayer && ship.GroupID == groupID {
+			m.state.Interaction.SelectedShips = append(m.state.Interaction.SelectedShips, ship.Uid)
+		}
+	}
+
+	// 第一次按下该编组键：只记录当前选中的编组
+	if m.state.Interaction.SelectedGroupID != groupID {
+		m.state.Interaction.SelectedGroupID = groupID
+		return
+	}
+
+	// 再次按下同一编组键：随机挑一艘仍存活的战舰并把相机移过去
+	alive := make([]objPos.MapPos, 0, len(m.state.Interaction.SelectedShips))
+	for _, uid := range m.state.Interaction.SelectedShips {
+		if ship := m.state.Arena.Ships[uid]; ship != nil && ship.CurHP > 0 {
+			alive = append(alive, ship.CurPos)
+		}
+	}
+	if len(alive) == 0 {
+		return
+	}
+	m.centerCameraOn(alive[rand.Intn(len(alive))])
 }
 
 // centerCameraOn 将地图坐标放到战场视野中心。
