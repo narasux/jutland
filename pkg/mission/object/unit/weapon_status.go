@@ -66,9 +66,17 @@ func torpedoReloadGate(launcher *TorpedoLauncher) reloadGate {
 	if launcher.ReloadStartTick > 0 || launcher.LatestFireTick > 0 {
 		reload := reloadGate{tickClock: true}
 		if launcher.ReloadStartTick > 0 {
-			reload = reloadGate{startAt: launcher.ReloadStartTick, duration: ReloadTicks(launcher.ReloadTime), tickClock: true}
+			reload = reloadGate{
+				startAt:   launcher.ReloadStartTick,
+				duration:  ReloadTicks(launcher.ReloadTime),
+				tickClock: true,
+			}
 		}
-		interval := reloadGate{startAt: launcher.LatestFireTick, duration: ReloadTicks(launcher.ShotInterval), tickClock: true}
+		interval := reloadGate{
+			startAt:   launcher.LatestFireTick,
+			duration:  ReloadTicks(launcher.ShotInterval),
+			tickClock: true,
+		}
 		return laterReloadGate(reload, interval)
 	}
 	reload := reloadGate{
@@ -86,7 +94,11 @@ func rocketReloadGate(launcher *RocketLauncher) reloadGate {
 	if launcher.ReloadStartTick > 0 || launcher.LatestFireTick > 0 {
 		reload := reloadGate{tickClock: true}
 		if launcher.ReloadStartTick > 0 {
-			reload = reloadGate{startAt: launcher.ReloadStartTick, duration: ReloadTicks(launcher.ReloadTime), tickClock: true}
+			reload = reloadGate{
+				startAt:   launcher.ReloadStartTick,
+				duration:  ReloadTicks(launcher.ReloadTime),
+				tickClock: true,
+			}
 		}
 		if launcher.ShotCountBeforeReload <= 0 {
 			return reload
@@ -95,7 +107,11 @@ func rocketReloadGate(launcher *RocketLauncher) reloadGate {
 		if launcher.ShotCountBeforeReload%launcher.groupSize() == 0 {
 			intervalSeconds = launcher.GroupInterval
 		}
-		interval := reloadGate{startAt: launcher.LatestFireTick, duration: ReloadTicks(intervalSeconds), tickClock: true}
+		interval := reloadGate{
+			startAt:   launcher.LatestFireTick,
+			duration:  ReloadTicks(intervalSeconds),
+			tickClock: true,
+		}
 		return laterReloadGate(reload, interval)
 	}
 	reload := reloadGate{

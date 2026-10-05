@@ -253,18 +253,32 @@ func (m *MissionManager) nextTargetUID(baseUID string, targetType object.Type) (
 }
 
 // nextTargetUIDForPlane 为已起飞飞机选择当前 RemainRange 足够到达的下一个目标。
-func (m *MissionManager) nextTargetUIDForPlane(plane *objUnit.Plane) (string, bool) {
+// attackers 是本帧各架敌机的追击名额占用情况，用于跳过已经被抢满的空中目标。
+func (m *MissionManager) nextTargetUIDForPlane(plane *objUnit.Plane, attackers map[string]int) (string, bool) {
 	targetType := plane.AttackObjType()
 	idx, uid, ok := m.findTargetAtCursorWhere(
 		plane.BelongShip,
 		targetType,
-		func(uid string) bool { return m.targetReachableByPlane(plane, uid, targetType) },
+		func(uid string) bool {
+			return m.airTargetHasSlotFor(targetType, uid, attackers) &&
+				m.targetReachableByPlane(plane, uid, targetType)
+		},
 	)
 	if !ok {
 		return "", false
 	}
 	m.advanceTargetCursor(plane.BelongShip, targetType, idx)
 	return uid, true
+}
+
+// airTargetHasSlotFor 判断这个目标还能不能再分给一架飞机。
+// 只有空中目标有名额限制：敌机在迷雾下常常只有一两架可见，
+// 不限制的话整个 CAP 会一起扑向同一架飞机。
+func (m *MissionManager) airTargetHasSlotFor(targetType object.Type, uid string, attackers map[string]int) bool {
+	if targetType != object.TypePlane || attackers == nil {
+		return true
+	}
+	return attackers[uid] < maxAirAttackersPerTarget
 }
 
 // findTargetAtCursor 从基地游标开始查找第一个仍然存在的目标。
@@ -412,7 +426,11 @@ func takeoffTargetTypes(aircraft *objUnit.ShipAircraft) []object.Type {
 
 // takeOffFromBase 从基地派出一架飞机并领取基地队列目标。
 // 目标类型按批次轮转；具体机型必须满足目标距离，起飞后才推进目标游标。
-func (m *MissionManager) takeOffFromBase(base objUnit.AircraftBase) (*objUnit.Plane, object.Type, string, bool) {
+// attackers 为空中目标的追击名额占用情况，名额满的敌机不会被派机。
+func (m *MissionManager) takeOffFromBase(
+	base objUnit.AircraftBase,
+	attackers map[string]int,
+) (*objUnit.Plane, object.Type, string, bool) {
 	if base == nil {
 		return nil, object.TypeNone, "", false
 	}
@@ -431,6 +449,9 @@ func (m *MissionManager) takeOffFromBase(base objUnit.AircraftBase) (*objUnit.Pl
 		aircraft := base.BaseAircraft()
 		targetRange := 0.0
 		targetUID, ok := m.peekTargetUIDWhere(baseUID, targetType, func(uid string) bool {
+			if !m.airTargetHasSlotFor(targetType, uid, attackers) {
+				return false
+			}
 			distance, exists := m.targetDistanceFrom(base.BasePos(), uid, targetType)
 			if !exists || !aircraft.CanTakeOffWithinRange(targetType, distance) {
 				return false

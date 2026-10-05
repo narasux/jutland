@@ -427,6 +427,8 @@ other = "Союзники"
 other = "Противник"
 [MapFleetCount]
 other = "{{.Side}} ({{.Count}})"
+[OrderUnreachable]
+other = "Невозможно достичь этой точки"
 [RallyLandBlocked]
 other = "Нельзя назначить точку сбора на суше"
 [ReinforceShipArchive]

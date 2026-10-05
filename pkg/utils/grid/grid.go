@@ -11,11 +11,32 @@ import (
 type Grid struct {
 	cells      Cells
 	jumpPoints [][]Point
+	// extraCost 每格额外通行代价（行优先展平），nil 表示所有格代价相同
+	extraCost []float32
 }
 
 // NewGrid 创建网格
 func NewGrid(cells Cells) *Grid {
 	return &Grid{cells: cells}
+}
+
+// SetExtraCost 设置每格额外通行代价（行优先展平）。
+// 长度与网格不符时忽略，寻路退回只按距离计算代价。
+func (g *Grid) SetExtraCost(costs []float32) {
+	if len(g.cells) == 0 || len(g.cells[0]) == 0 || len(costs) != len(g.cells)*len(g.cells[0]) {
+		return
+	}
+	g.extraCost = costs
+}
+
+// stepCost 从 from 走到 to 的代价：距离 + 目标格的额外代价（按 scale 缩放）。
+// 额外代价是软约束（有限值），不会让任何原本可达的格变得不可达。
+func (g *Grid) stepCost(from, to Point, scale float64) float64 {
+	cost := g.heuristic(from, to)
+	if g.extraCost != nil {
+		cost += float64(g.extraCost[to.Y*len(g.cells[0])+to.X]) * scale
+	}
+	return cost
 }
 
 // Prepare 按地形预计算跳点。起点和终点不参与，海图保持只读。
@@ -26,12 +47,22 @@ func (g *Grid) Prepare() {
 	g.preProcess()
 }
 
-// Search 搜索可行路径
+// Search 搜索可行路径（按基准代价）。
 func (g *Grid) Search(start, goal Point) []Point {
+	return g.SearchWithCostScale(start, goal, 1)
+}
+
+// SearchWithCostScale 搜索可行路径，并按 scale 缩放每格额外代价。
+// 大舰需要更多离岸余量（scale > 1），小艇可以贴着岸走（scale < 1）；
+// 代价始终是有限值，缩放不会改变可达性。
+func (g *Grid) SearchWithCostScale(start, goal Point, scale float64) []Point {
 	if !g.validateEndpoints(start, goal) {
 		return []Point{}
 	}
 	g.Prepare()
+	if scale <= 0 {
+		scale = 1
+	}
 
 	openSet := &openHeap{}
 	heap.Init(openSet)
@@ -57,7 +88,7 @@ func (g *Grid) Search(start, goal Point) []Point {
 
 		neighbors := g.getNeighbors(cur.Point)
 		for _, neighbor := range neighbors {
-			tentativeGScore := gScore[cur.Point] + g.heuristic(cur.Point, neighbor)
+			tentativeGScore := gScore[cur.Point] + g.stepCost(cur.Point, neighbor, scale)
 			if _, ok := gScore[neighbor]; !ok || tentativeGScore < gScore[neighbor] {
 				cameFrom[neighbor] = cur.Point
 				gScore[neighbor] = tentativeGScore
@@ -66,8 +97,8 @@ func (g *Grid) Search(start, goal Point) []Point {
 		}
 
 		if jp := g.jumpPoints[cur.Point.Y][cur.Point.X]; jp.IsValid() {
-			tentativeGScore := gScore[cur.Point] + g.heuristic(cur.Point, jp)
-			if _, ok := gScore[jp]; !ok || tentativeGScore+g.heuristic(cur.Point, jp) < gScore[jp] {
+			tentativeGScore := gScore[cur.Point] + g.stepCost(cur.Point, jp, scale)
+			if _, ok := gScore[jp]; !ok || tentativeGScore < gScore[jp] {
 				cameFrom[jp] = cur.Point
 				gScore[jp] = tentativeGScore
 				heap.Push(openSet, Node{jp, tentativeGScore, tentativeGScore + g.heuristic(jp, goal)})
@@ -175,8 +206,9 @@ func (g *Grid) mergePathWithCheckPoint(path []Point) []Point {
 }
 
 // segmentBlocked 沿 a→b 线段以 0.1 格步长逐点检查扫过的格子是否撞墙。
-// 取整规则与 MapPos 的 floor 换算保持一致：采样点落在哪个格，
-// 舰体中心在运动中就会登记到哪个格，因此贴边掠过陆地的路径段也能被拦下。
+// 采样点连同其 8 邻格一起检查：合并后的直线段必须留出一格余量。
+// 舰体并不总是压在航线格心上（转向弧线、被拦停后重新起步都会偏出半格），
+// 只校验中心线会让合并出的直线段贴着岸线，舰体一偏就切进陆格、顶着岸边磨。
 func (g *Grid) segmentBlocked(a, b Point) bool {
 	distance := math.Hypot(float64(b.X-a.X), float64(b.Y-a.Y))
 	if distance == 0 {
@@ -187,8 +219,25 @@ func (g *Grid) segmentBlocked(a, b Point) bool {
 		t := float64(i) / float64(steps)
 		x := a.X + int(math.Floor(t*float64(b.X-a.X)))
 		y := a.Y + int(math.Floor(t*float64(b.Y-a.Y)))
-		if g.cells[y][x] == W {
+		if g.cellNearWall(x, y) {
 			return true
+		}
+	}
+	return false
+}
+
+// cellNearWall 判断格 (x, y) 及其 8 邻格中是否有墙；地图外不算墙
+// （舰船位置本身会被 EnsureBorder 夹在地图内，边缘一格仍可正常通行）。
+func (g *Grid) cellNearWall(x, y int) bool {
+	for dy := -1; dy <= 1; dy++ {
+		for dx := -1; dx <= 1; dx++ {
+			nx, ny := x+dx, y+dy
+			if ny < 0 || ny >= len(g.cells) || nx < 0 || nx >= len(g.cells[ny]) {
+				continue
+			}
+			if g.cells[ny][nx] == W {
+				return true
+			}
 		}
 	}
 	return false

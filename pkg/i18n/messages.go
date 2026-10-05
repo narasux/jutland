@@ -219,6 +219,7 @@ const (
 	MsgMapEnemy              MessageID = "MapEnemy"
 	MsgMapFleetCount         MessageID = "MapFleetCount"
 	MsgRallyLandBlocked      MessageID = "RallyLandBlocked"
+	MsgOrderUnreachable      MessageID = "OrderUnreachable"
 	MsgReinforceShipArchive  MessageID = "ReinforceShipArchive"
 	MsgReinforceWeaponConfig MessageID = "ReinforceWeaponConfig"
 	MsgReinforceType         MessageID = "ReinforceType"

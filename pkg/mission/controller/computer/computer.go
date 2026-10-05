@@ -7,6 +7,7 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
 const (
@@ -258,10 +259,13 @@ func (h *ComputerDecisionHandler) issueMembers(
 		if !ok {
 			continue
 		}
+		// 先吸附再比较：路由记忆里存的是吸附后的落点，比较也必须用同一个口径，
+		// 否则落在陆地上的阵位会每次都判定为“目标挪了”，反复重下同一条指令。
+		desired.dest = navigableDest(snap, ship, desired.dest)
 		if !h.shouldIssue(cur, ship, desired) {
 			continue
 		}
-		h.setRoute(out, ship, desired)
+		h.setRoute(out, ship, desired, snap)
 	}
 }
 
@@ -283,11 +287,11 @@ func (h *ComputerDecisionHandler) issueRetreats(
 		if ship.CurPos.Near(slot, arrivalDistance) {
 			continue
 		}
-		desired := shipRoute{dest: slot}
+		desired := shipRoute{dest: navigableDest(snap, ship, slot)}
 		if !h.shouldIssue(cur, ship, desired) {
 			continue
 		}
-		h.setRoute(out, ship, desired)
+		h.setRoute(out, ship, desired, snap)
 	}
 }
 
@@ -429,16 +433,35 @@ func (h *ComputerDecisionHandler) shouldIssue(
 }
 
 func (h *ComputerDecisionHandler) setRoute(
-	out map[string]instr.Instruction, ship *objUnit.BattleShip, desired shipRoute,
+	out map[string]instr.Instruction, ship *objUnit.BattleShip, desired shipRoute, snap *battleSnapshot,
 ) {
-	h.routes[ship.Uid] = routeMemory{dest: desired.dest, targetUID: desired.targetUID}
+	dest := navigableDest(snap, ship, desired.dest)
+	h.routes[ship.Uid] = routeMemory{dest: dest, targetUID: desired.targetUID}
 	var ins instr.Instruction
 	if ship.CanOnLand() {
-		ins = instr.NewShipMove(ship.Uid, desired.dest)
+		ins = instr.NewShipMove(ship.Uid, dest)
 	} else {
-		ins = instr.NewShipMovePath(ship.Uid, ship.CurPos, desired.dest, ship.CurSpeed)
+		ins = instr.NewShipMovePath(ship.Uid, ship.CurPos, dest, ship.CurSpeed)
 	}
 	out[ins.Uid()] = ins
+}
+
+// navigableDest 把 AI 的目标点吸附到与舰船同一片水域的可航行格心。
+// 环形阵位、撤退点、搜索推进点都可能落在陆地上，直接下发会变成“永远到不了”的
+// 指令：舰船停在岸边水面，AI 认为没到位，于是每轮决策反复重下同一条指令。
+func navigableDest(snap *battleSnapshot, ship *objUnit.BattleShip, dest objPos.MapPos) objPos.MapPos {
+	if snap == nil || snap.misState == nil {
+		return dest
+	}
+	mapCfg := snap.misState.Core.MissionMD.MapCfg
+	if mapCfg == nil || mapCfg.Map.IsSea(dest.MX, dest.MY) {
+		return dest
+	}
+	_, goal := mapCfg.SnapPathEndpoints(
+		grid.Point{X: ship.CurPos.MX, Y: ship.CurPos.MY},
+		grid.Point{X: dest.MX, Y: dest.MY},
+	)
+	return objPos.NewR(float64(goal.X)+0.5, float64(goal.Y)+0.5)
 }
 
 func (h *ComputerDecisionHandler) ownShip(snap *battleSnapshot, uid string) *objUnit.BattleShip {
@@ -500,7 +523,9 @@ func (h *ComputerDecisionHandler) stationPos(
 			return station
 		}
 	}
-	return formationPos(h.anchor, index)
+	// 环形阵位可能落在岸上，吸附到与舰船同域的水面：AI 的到位判定与实际下发的
+	// 目的地必须一致，否则会在岸边反复重下同一条指令。
+	return navigableDest(snap, ship, formationPos(h.anchor, index))
 }
 
 func phaseDue(tick int64, index int) bool {

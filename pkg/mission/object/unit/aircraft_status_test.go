@@ -36,3 +36,20 @@ func TestDisabledAircraftCannotTakeOff(t *testing.T) {
 		t.Fatal("disabled aircraft group took off")
 	}
 }
+
+// 甲板备机总数只统计库存，不含已出击与返航中的飞机。
+func TestStandbyCount(t *testing.T) {
+	aircraft := ShipAircraft{Groups: []PlaneGroup{
+		{Name: "fighter", MaxCount: 10, CurCount: 4},
+		{Name: "bomber", MaxCount: 6, CurCount: 0},
+		{Name: "torpedo", MaxCount: 8, CurCount: 3},
+	}}
+
+	if got := aircraft.StandbyCount(); got != 7 {
+		t.Fatalf("StandbyCount() = %d, want 7", got)
+	}
+	empty := ShipAircraft{}
+	if got := empty.StandbyCount(); got != 0 {
+		t.Fatalf("empty StandbyCount() = %d, want 0", got)
+	}
+}

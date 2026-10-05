@@ -20,6 +20,11 @@ import (
 // 精确落在机身矩形内。
 const bombBlastRadius = 1.0
 
+// maxAirAttackersPerTarget 同一架敌机同时最多被几架飞机追击。
+// 敌机在迷雾下常常只有一两架可见，没有名额限制时一个基地的整个 CAP
+// 都会扑向同一架飞机（例如 4 艘航母各派 10 架零式围殴一架手动侦察机）。
+const maxAirAttackersPerTarget = 2
+
 // 舰对空弹药的单发命中率（每结算帧独立判定，数值为平衡用常数）：
 //   - 小口径速射防空炮（≤40mm）：弹幕密集，命中率最高；
 //   - 中口径高平两用炮（≤155mm）：76~155mm 弹靠少量直击与近炸破片；
@@ -150,6 +155,11 @@ func (m *MissionManager) updateShipWeaponFire() {
 // updatePlaneAttackOrReturn 负责飞机出动、目标重分配和返航决策。
 // 出动机型由基地队列决定；已经锁定有效目标的飞机保持目标粘性。
 func (m *MissionManager) updatePlaneAttackOrReturn() {
+	// 空中追击名额：同一架敌机最多被 maxAirAttackersPerTarget 架飞机追击。
+	// 名额在出动、改派和下面拆超编三处共用，避免同一帧里过量分配。
+	attackers := m.airAttackerCounts()
+	m.releaseSurplusAirAttackers(attackers)
+
 	for _, ship := range m.state.Arena.Ships {
 		// 战舰上没有飞机的，跳过
 		if !ship.Aircraft.HasPlane {
@@ -170,10 +180,13 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 			continue
 		}
 
-		plane, targetType, targetUID, ok := m.takeOffFromBase(ship)
+		plane, targetType, targetUID, ok := m.takeOffFromBase(ship, attackers)
 		if ok {
 			m.state.Arena.PutPlane(plane)
 			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
+			if targetType == object.TypePlane {
+				attackers[targetUID]++
+			}
 		}
 	}
 
@@ -186,6 +199,12 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		scouting := false
 		if scout := m.instructionSet.Get(scoutUid); scout != nil && !scout.Executed() {
 			scouting = true
+		}
+		// 正在战斗巡逻（CAP）的飞机同样没有攻击指令，保持盘旋。
+		patrolUid := instr.GenInstrUid(instr.NamePlanePatrol, plane.Uid)
+		patrolling := false
+		if patrol := m.instructionSet.Get(patrolUid); patrol != nil && !patrol.Executed() {
+			patrolling = true
 		}
 		// 剩余燃料为 0，需要返航
 		if plane.MustReturn() {
@@ -205,10 +224,18 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 			continue
 		}
 
-		targetUID, ok := m.nextTargetUIDForPlane(plane)
+		targetUID, ok := m.nextTargetUIDForPlane(plane, attackers)
 		if !ok {
 			// 搜索中的飞机没找到目标是正常的，让它继续搜索；其余飞机返航。
 			if scouting {
+				continue
+			}
+			// 战斗机没有可打的目标时留在基地 / 舰队上空巡逻：目标随时会出现，
+			// 整个 CAP 直接降落待命等于把制空权让出去。
+			if targetType == object.TypePlane {
+				if !patrolling {
+					m.instructionSet.Add(instr.NewPlanePatrol(plane.Uid))
+				}
 				continue
 			}
 			// 没有可攻击对象，返航
@@ -221,24 +248,72 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 			// 手动侦察身份一并结束，否则玩家再点侦察会同时挂上攻击和侦察两条指令。
 			plane.ScoutManual = false
 		}
+		// 巡逻中的飞机接到新目标就脱离巡逻。
+		if patrolling {
+			m.instructionSet.Remove(patrolUid)
+		}
 		m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
+		if targetType == object.TypePlane {
+			attackers[targetUID]++
+		}
+	}
+}
+
+// airAttackerCounts 统计当前各架敌机已经被多少架飞机锁定为空中目标。
+// 只有追击空中目标的飞机占名额；对舰飞机的目标是敌舰，不参与这里的统计。
+func (m *MissionManager) airAttackerCounts() map[string]int {
+	counts := make(map[string]int)
+	for _, plane := range m.state.Arena.Planes {
+		if plane.CurHP <= 0 || plane.CurAttackTarget == "" {
+			continue
+		}
+		if plane.AttackObjType() != object.TypePlane {
+			continue
+		}
+		if m.state.Arena.Planes[plane.CurAttackTarget] == nil {
+			continue
+		}
+		counts[plane.CurAttackTarget]++
+	}
+	return counts
+}
+
+// releaseSurplusAirAttackers 拆掉同一架敌机上超编的追击。
+// 名额按当前在空飞机统计，多出来的飞机放掉锁定目标，交给
+// updatePlaneAttackOrReturn 重新分配：有别的敌机就改派，没有就转去巡逻。
+func (m *MissionManager) releaseSurplusAirAttackers(attackers map[string]int) {
+	for _, plane := range m.state.Arena.Planes {
+		if plane.CurHP <= 0 || plane.CurAttackTarget == "" {
+			continue
+		}
+		if plane.AttackObjType() != object.TypePlane ||
+			attackers[plane.CurAttackTarget] <= maxAirAttackersPerTarget {
+			continue
+		}
+		attackers[plane.CurAttackTarget]--
+		m.instructionSet.Remove(instr.GenInstrUid(instr.NamePlaneAttack, plane.Uid))
+		plane.CurAttackTarget = ""
 	}
 }
 
 // updateAirfieldAlertLaunch 机场警戒起飞：不设警戒范围，从异步目标计划中
 // 消费对空 / 对舰基地队列。无计划时保持待命，不在主循环扫描全场敌人。
 func (m *MissionManager) updateAirfieldAlertLaunch() {
+	attackers := m.airAttackerCounts()
 	for _, af := range m.state.Arena.Airfields {
 		if !af.CanAlertLaunch() {
 			continue
 		}
 		for range 2 {
-			plane, targetType, targetUID, ok := m.takeOffFromBase(af)
+			plane, targetType, targetUID, ok := m.takeOffFromBase(af, attackers)
 			if !ok {
 				break
 			}
 			m.state.Arena.PutPlane(plane)
 			m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, targetType, targetUID))
+			if targetType == object.TypePlane {
+				attackers[targetUID]++
+			}
 		}
 	}
 }

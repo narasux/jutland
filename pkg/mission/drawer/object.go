@@ -24,6 +24,10 @@ import (
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
+// weaponIconBaseSize 武器图标在 1x（zoom=4）下的显示边长，
+// 与 resources/images/weapons 的 16px 资源档一致，用于计算整行图标宽度
+const weaponIconBaseSize = 16.0
+
 // closestResourceZoom 选择最接近目标显示倍率的资源档位。
 // 这样可以优先复用已有缓存图片，再用少量 GeoM 缩放补齐剩余比例
 func closestResourceZoom(target float64, candidates []int) int {
@@ -187,9 +191,39 @@ func (d *Drawer) drawExplosions(screen *ebiten.Image, ms *state.MissionState) {
 	}
 }
 
+// planeIconStatus 决定舰载机图标颜色：
+// 绿=甲板有备机可以起飞，黄=甲板已空但飞机仍在空中/返航，灰=起飞被关闭或已无机可用。
+func planeIconStatus(aircraft *objUnit.ShipAircraft, airborne int) weaponImg.WeaponStatus {
+	if aircraft.Disable {
+		return weaponImg.WeaponStatusDisabled
+	}
+	if aircraft.StandbyCount() > 0 {
+		return weaponImg.WeaponStatusLoaded
+	}
+	if airborne > 0 {
+		return weaponImg.WeaponStatusReloading
+	}
+	return weaponImg.WeaponStatusDisabled
+}
+
+// airbornePlaneCounts 统计每艘战舰当前仍在空中的飞机数量。
+// 飞机回收入库后会从 Arena.Planes 移除，因此集合里的飞机都属于「已离舰」状态。
+func airbornePlaneCounts(planes map[string]*objUnit.Plane) map[string]int {
+	counts := make(map[string]int, len(planes))
+	for _, plane := range planes {
+		if plane == nil {
+			continue
+		}
+		counts[plane.BelongShip]++
+	}
+	return counts
+}
+
 // 绘制战舰
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	selected := selectedShipSet(ms.Interaction.SelectedShips)
+	// 各舰仍在空中的飞机数（含出击、作战与返航）一次性统计，避免逐舰遍历飞机表
+	airbornePlaneCnt := airbornePlaneCounts(ms.Arena.Planes)
 	for _, s := range ms.Arena.OrderedShips() {
 		// 只有在屏幕中、且没有被当前玩家迷雾挡住的才渲染
 		if !ms.View.Camera.Contains(s.CurPos) || ms.ConcealsEnemy(s.BelongPlayer, s.CurPos.MX, s.CurPos.MY) {
@@ -220,6 +254,7 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 
 			// 渲染武器状态时候的 X 方向间隙大小
 			var weaponInterstitialSpacing float64
+			hasPlane := s.Aircraft.HasPlane
 			weaponCnt := len(lo.Filter(
 				[]bool{
 					s.Weapon.HasMainGun,
@@ -227,13 +262,14 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 					s.Weapon.HasAntiAircraftGun,
 					s.Weapon.HasTorpedo,
 					s.Weapon.HasRocket,
+					hasPlane,
 				},
 				func(b bool, _ int) bool {
 					return b
 				},
 			))
 			switch weaponCnt {
-			case 5:
+			case 6, 5:
 				weaponInterstitialSpacing = 12.0
 			case 4:
 				weaponInterstitialSpacing = 15.0
@@ -242,12 +278,14 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			default:
 				weaponInterstitialSpacing = 35.0
 			}
-			weaponX := shipX - 45*sceneScale
+			// 整行按实际格数居中，避免格数变化时图标行整体偏向一侧
+			weaponX := shipX -
+				(float64(weaponCnt-1)*weaponInterstitialSpacing+weaponIconBaseSize)*sceneScale/2
 
 			// drawWeaponIcon 在游标处绘制一张图标，然后统一右移一个间距，
 			// 保证无论战舰是否拥有主炮，图标都从第一个槽位开始依次排列。
 			drawWeaponIcon := func(weaponIcon *ebiten.Image, weaponScale float64) {
-				drawImageAtScale(screen, weaponIcon, weaponX+20*sceneScale, shipY-60*sceneScale, weaponScale)
+				drawImageAtScale(screen, weaponIcon, weaponX, shipY-60*sceneScale, weaponScale)
 				weaponX += weaponInterstitialSpacing * sceneScale
 			}
 
@@ -319,6 +357,14 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				}
 
 				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeRocket, status, ms.UI.GameOpts.Zoom)
+				drawWeaponIcon(weaponIcon, weaponScale)
+			}
+
+			// 绘制舰载机状态：绿=甲板有备机，黄=甲板已空但飞机仍在空中/返航，
+			// 灰=起飞被关闭或飞机已全部损失。不展示数量，精确数量交给航空面板。
+			if hasPlane {
+				status := planeIconStatus(&s.Aircraft, airbornePlaneCnt[s.Uid])
+				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypePlane, status, ms.UI.GameOpts.Zoom)
 				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 
@@ -434,7 +480,8 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 		if b.Type == objBullet.TypeLaser {
 			margin = laserViewMargin
 		}
-		if !ms.View.Camera.ContainsMargin(b.CurPos, margin) || ms.ConcealsEnemy(b.BelongPlayer, b.CurPos.MX, b.CurPos.MY) {
+		if !ms.View.Camera.ContainsMargin(b.CurPos, margin) ||
+			ms.ConcealsEnemy(b.BelongPlayer, b.CurPos.MX, b.CurPos.MY) {
 			continue
 		}
 

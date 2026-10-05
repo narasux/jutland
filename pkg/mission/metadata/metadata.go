@@ -170,6 +170,13 @@ func AvailableMissions(category MissionCategory) []string {
 	return availableMissions(missionMetadata, missionOrder, category)
 }
 
+// AllMissions 获取全部任务名称（按 missions.json5 书写顺序），供启动期配置校验使用。
+func AllMissions() []string {
+	names := make([]string, len(missionOrder))
+	copy(names, missionOrder)
+	return names
+}
+
 func availableMissions(
 	metadata map[string]MissionMetadata,
 	order []string,
