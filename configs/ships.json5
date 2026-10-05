@@ -1,7 +1,7 @@
 [
-  // 默认分类（测试用）
+  // --------- 默认分类（测试用） ----------
+  // Duck
   {
-    // Duck
     name: "duck",
     nation: "special",
     type: "default",
@@ -104,8 +104,8 @@
     }
   },
   // 水滴！攻击物是水滴！！！
+  // WaterDrop
   {
-    // WaterDrop
     name: "waterdrop",
     nation: "special",
     type: "default",
@@ -177,7 +177,6 @@
   },
   // 翻车鱼，好吃的翻车鱼！
   {
-    // 翻车鱼
     name: "molamola",
     nation: "special",
     type: "default",
@@ -196,7 +195,6 @@
   },
   // 自由轮
   {
-    // 自由轮
     name: "liberty",
     nation: "us",
     type: "cargo",
@@ -299,10 +297,10 @@
     fundsCost: 30,
     timeCost: 12,
   },
-  // 航空母舰
   // 美国海军
+  // --------- 航空母舰 ----------
+  // CVX-100 美利坚号，概念超级航母；舰载机暂不编入
   {
-    // CVX-100 美利坚号，概念超级航母；舰载机暂不编入
     name: "america",
     nation: "us",
     type: "aircraft_carrier",
@@ -439,8 +437,8 @@
       ]
     }
   },
+  // 萨拉托加
   {
-    // 萨拉托加
     name: "saratoga",
     nation: "us",
     type: "aircraft_carrier",
@@ -784,8 +782,8 @@
       ]
     }
   },
+  // 约克城
   {
-    // 约克城
     name: "yorktown",
     nation: "us",
     type: "aircraft_carrier",
@@ -1136,8 +1134,8 @@
       ]
     }
   },
+  // 埃塞克斯
   {
-    // 埃塞克斯
     name: "essex",
     nation: "us",
     type: "aircraft_carrier",
@@ -1563,8 +1561,8 @@
       ]
     }
   },
+  // 伊利诺伊（衣阿华级航母改造案）
   {
-    // 伊利诺伊（衣阿华级航母改造案）
     name: "illinois",
     nation: "us",
     type: "aircraft_carrier",
@@ -1748,8 +1746,8 @@
       ]
     }
   },
+  // 肯塔基（衣阿华级航空战列舰改造案）
   {
-    // 肯塔基（衣阿华级航空战列舰改造案）
     name: "kentucky_bb66",
     nation: "us",
     type: "aircraft_carrier",
@@ -2132,8 +2130,8 @@
       ]
     }
   },
+  // 中途岛
   {
-    // 中途岛
     name: "midway",
     nation: "us",
     type: "aircraft_carrier",
@@ -2532,8 +2530,8 @@
       ]
     }
   },
+  // 普林斯顿
   {
-    // 普林斯顿
     name: "princeton",
     nation: "us",
     type: "aircraft_carrier",
@@ -2751,8 +2749,8 @@
       ]
     }
   },
+  // 卡德
   {
-    // 卡德
     name: "card",
     nation: "us",
     type: "aircraft_carrier",
@@ -2983,8 +2981,8 @@
       ]
     }
   },
+  // 兰利
   {
-    // 兰利
     name: "langley",
     nation: "us",
     type: "aircraft_carrier",
@@ -3053,8 +3051,8 @@
       ]
     }
   },
+  // 狼獾
   {
-    // 狼獾
     name: "wolverine",
     nation: "us",
     type: "aircraft_carrier",
@@ -3095,8 +3093,9 @@
     }
   },
   // 日本海军
+  // --------- 航空母舰 ----------
+  // 白龙
   {
-    // 白龙
     name: "hakuryu",
     nation: "jp",
     type: "aircraft_carrier",
@@ -3351,8 +3350,8 @@
       ]
     }
   },
+  // 大凤
   {
-    // 大凤
     name: "taiho",
     nation: "jp",
     type: "aircraft_carrier",
@@ -3539,8 +3538,8 @@
       ]
     }
   },
+  // 信浓
   {
-    // 信浓
     name: "shinano",
     nation: "jp",
     type: "aircraft_carrier",
@@ -4030,8 +4029,8 @@
       ]
     }
   },
+  // 赤城
   {
-    // 赤城
     name: "akagi",
     nation: "jp",
     type: "aircraft_carrier",
@@ -4256,8 +4255,8 @@
       ]
     }
   },
+  // 加贺
   {
-    // 加贺
     name: "kaga",
     nation: "jp",
     type: "aircraft_carrier",
@@ -4538,8 +4537,8 @@
       ]
     }
   },
+  // 苍龙
   {
-    // 苍龙
     name: "soryu",
     nation: "jp",
     type: "aircraft_carrier",
@@ -4712,8 +4711,8 @@
       ]
     }
   },
+  // 飞龙
   {
-    // 飞龙
     name: "hiryu",
     nation: "jp",
     type: "aircraft_carrier",
@@ -4880,8 +4879,8 @@
       ]
     }
   },
+  // 翔鹤
   {
-    // 翔鹤
     name: "shokaku",
     nation: "jp",
     type: "aircraft_carrier",
@@ -5090,8 +5089,8 @@
       ]
     }
   },
+  // 云龙
   {
-    // 云龙
     name: "unryu",
     nation: "jp",
     type: "aircraft_carrier",
@@ -5347,8 +5346,8 @@
       ]
     }
   },
+  // 飞鹰
   {
-    // 飞鹰
     name: "hiyo",
     nation: "jp",
     type: "aircraft_carrier",
@@ -5515,8 +5514,8 @@
       ]
     }
   },
+  // 龙骧
   {
-    // 龙骧
     name: "ryujo",
     nation: "jp",
     type: "aircraft_carrier",
@@ -5637,8 +5636,8 @@
       ]
     }
   },
+  // 祥凤
   {
-    // 祥凤
     name: "shoho",
     nation: "jp",
     type: "aircraft_carrier",
@@ -5731,8 +5730,8 @@
       ]
     }
   },
+  // 千岁
   {
-    // 千岁
     name: "chitose",
     nation: "jp",
     type: "aircraft_carrier",
@@ -5867,8 +5866,8 @@
       ]
     }
   },
+  // 大鹰
   {
-    // 大鹰
     name: "taiyo",
     nation: "jp",
     type: "aircraft_carrier",
@@ -6003,8 +6002,8 @@
       ]
     }
   },
+  // 神鹰
   {
-    // 神鹰
     name: "shinyo",
     nation: "jp",
     type: "aircraft_carrier",
@@ -6139,8 +6138,8 @@
       ]
     }
   },
+  // 凤翔
   {
-    // 凤翔
     name: "hosho",
     nation: "jp",
     type: "aircraft_carrier",
@@ -6248,8 +6247,9 @@
     }
   },
   // 德国海军
+  // --------- 航空母舰 ----------
+  // 格拉夫·齐柏林
   {
-    // 格拉夫·齐柏林
     name: "graf_zeppelin",
     nation: "de",
     type: "aircraft_carrier",
@@ -6592,6 +6592,7 @@
     }
   },
   // 英国海军
+  // --------- 航空母舰 ----------
   // 皇家方舟
   {
     name: "implacable",
@@ -9012,8 +9013,9 @@
     }
   },
   // 意大利海军
+  // --------- 航空母舰 ----------
+  // 鹫座：罗马号邮轮改装，1943 年停工时接近完工，从未服役
   {
-    // 鹫座：罗马号邮轮改装，1943 年停工时接近完工，从未服役
     name: "aquila",
     nation: "it",
     type: "aircraft_carrier",
@@ -9315,10 +9317,10 @@
       ]
     }
   },
-  // 战列舰
   // 美国海军
+  // --------- 战列舰 ----------
+  // 衣阿华
   {
-    // 衣阿华
     name: "lowa",
     nation: "us",
     type: "battleship",
@@ -9893,8 +9895,8 @@
       ]
     }
   },
+  // 蒙大拿
   {
-    // 蒙大拿
     name: "montana",
     nation: "us",
     type: "battleship",
@@ -10672,8 +10674,8 @@
       ]
     }
   },
+  // 列克星敦
   {
-    // 列克星敦
     name: "lexington",
     nation: "us",
     type: "battleship",
@@ -11157,8 +11159,8 @@
       ]
     }
   },
+  // 南达科他
   {
-    // 南达科他
     name: "south_dakota",
     nation: "us",
     type: "battleship",
@@ -11789,8 +11791,8 @@
       ]
     }
   },
+  // 西弗吉尼亚（1945 年最终状态）
   {
-    // 西弗吉尼亚（1945 年最终状态）
     name: "west_virginia",
     nation: "us",
     type: "battleship",
@@ -12335,8 +12337,8 @@
       ]
     }
   },
+  // 马里兰（1944 年春季改装状态）
   {
-    // 马里兰（1944 年春季改装状态）
     name: "maryland",
     nation: "us",
     type: "battleship",
@@ -12650,8 +12652,8 @@
       ]
     }
   },
+  // 田纳西
   {
-    // 田纳西
     name: "tennessee",
     nation: "us",
     type: "battleship",
@@ -12955,8 +12957,8 @@
       ]
     }
   },
+  // 新墨西哥（1936）
   {
-    // 新墨西哥（1936）
     name: "new_mexico",
     nation: "us",
     type: "battleship",
@@ -13199,8 +13201,8 @@
       ]
     }
   },
+  // 宾夕法尼亚（1942 年大改装前）
   {
-    // 宾夕法尼亚（1942 年大改装前）
     name: "pennsylvania",
     nation: "us",
     type: "battleship",
@@ -13483,8 +13485,8 @@
       ]
     }
   },
+  // 亚利桑那（1941 年 12 月 7 日）
   {
-    // 亚利桑那（1941 年 12 月 7 日）
     name: "arizona",
     nation: "us",
     type: "battleship",
@@ -13703,8 +13705,8 @@
       ]
     }
   },
+  // 内华达
   {
-    // 内华达
     name: "nevada",
     nation: "us",
     type: "battleship",
@@ -14157,8 +14159,8 @@
       ]
     }
   },
+  // 纽约（1939）
   {
-    // 纽约（1939）
     name: "new_york",
     nation: "us",
     type: "battleship",
@@ -14423,8 +14425,8 @@
       ]
     }
   },
+  // 阿肯色（1944）
   {
-    // 阿肯色（1944）
     name: "arkansas",
     nation: "us",
     type: "battleship",
@@ -14765,9 +14767,11 @@
       ]
     },
   },
-  // 美国海军 - 前无畏舰与无畏舰
+  // 美国海军
+  // --------- 战列舰 ----------
+  // 前无畏舰与无畏舰
+  // 南卡罗来纳号（BB-26）
   {
-    // 南卡罗来纳号（BB-26）
     name: "south_carolina",
     nation: "us",
     type: "battleship",
@@ -14960,8 +14964,8 @@
       rockets: [],
     }
   },
+  // 康涅狄格号（BB-18）
   {
-    // 康涅狄格号（BB-18）
     name: "connecticut",
     nation: "us",
     type: "battleship",
@@ -15209,8 +15213,8 @@
       rockets: [],
     }
   },
+  // 弗吉尼亚号（BB-13）
   {
-    // 弗吉尼亚号（BB-13）
     name: "virginia",
     nation: "us",
     type: "battleship",
@@ -15459,8 +15463,8 @@
       rockets: [],
     }
   },
+  // 肯塔基号（BB-6）
   {
-    // 肯塔基号（BB-6）
     name: "kentucky",
     nation: "us",
     type: "battleship",
@@ -15625,9 +15629,11 @@
       rockets: [],
     }
   },
-  // 美国海军浅水重炮舰
+  // 美国海军
+  // --------- 战列舰 ----------
+  // 浅水重炮舰
+  // 蒙特雷号（BM-6）
   {
-    // 蒙特雷号（BM-6）
     name: "monterey_m_6",
     nation: "us",
     type: "battleship",
@@ -15707,8 +15713,8 @@
       rockets: [],
     }
   },
+  // 阿肯色号（BM-7，1909 年改名奥扎克号）
   {
-    // 阿肯色号（BM-7，1909 年改名奥扎克号）
     name: "arkansas_m_7",
     nation: "us",
     type: "battleship",
@@ -15800,8 +15806,9 @@
     }
   },
   // 日本海军
+  // --------- 战列舰 ----------
+  // 金刚
   {
-    // 金刚
     name: "kongo",
     nation: "jp",
     type: "battleship",
@@ -16179,8 +16186,8 @@
       ]
     }
   },
+  // 扶桑
   {
-    // 扶桑
     name: "fuso",
     nation: "jp",
     type: "battleship",
@@ -16572,8 +16579,8 @@
       ]
     }
   },
+  // 伊势
   {
-    // 伊势
     name: "ise",
     nation: "jp",
     type: "battleship",
@@ -16997,8 +17004,8 @@
       ]
     }
   },
+  // 长门
   {
-    // 长门
     name: "nagato",
     nation: "jp",
     type: "battleship",
@@ -17478,8 +17485,8 @@
       ]
     }
   },
+  // 大和
   {
-    // 大和
     name: "yamato",
     nation: "jp",
     type: "battleship",
@@ -17976,8 +17983,8 @@
       ]
     }
   },
+  // 萨摩
   {
-    // 萨摩
     name: "satsuma",
     nation: "jp",
     type: "battleship",
@@ -18413,8 +18420,8 @@
       ]
     }
   },
+  // 江户
   {
-    // 江户
     name: "edo",
     nation: "jp",
     type: "battleship",
@@ -19005,8 +19012,9 @@
     }
   },
   // 德国海军
+  // --------- 战列舰 ----------
+  // 俾斯麦
   {
-    // 俾斯麦
     name: "bismarck",
     nation: "de",
     type: "battleship",
@@ -19315,8 +19323,8 @@
       ]
     }
   },
+  // 沙恩霍特斯
   {
-    // 沙恩霍特斯
     name: "scharnhorst",
     nation: "de",
     type: "battleship",
@@ -19658,8 +19666,8 @@
       ]
     }
   },
+  // 格拉夫·施佩海军上将
   {
-    // 格拉夫·施佩海军上将
     name: "admiral_graf_spee",
     nation: "de",
     type: "battleship",
@@ -19918,8 +19926,9 @@
     }
   },
   // 法国海军
+  // --------- 战列舰 ----------
+  // 阿尔萨斯（1945 年暂定完工状态）
   {
-    // 阿尔萨斯（1945 年暂定完工状态）
     name: "alsace",
     nation: "fr",
     type: "battleship",
@@ -20182,8 +20191,8 @@
       ]
     }
   },
+  // 克莱蒙梭（1942 年暂定完工状态）
   {
-    // 克莱蒙梭（1942 年暂定完工状态）
     name: "clemenceau",
     nation: "fr",
     type: "battleship",
@@ -20395,8 +20404,8 @@
       ]
     }
   },
+  // 让巴尔（1955 年改装完成状态）
   {
-    // 让巴尔（1955 年改装完成状态）
     name: "jean_bart",
     nation: "fr",
     type: "battleship",
@@ -20616,8 +20625,8 @@
       rockets: []
     }
   },
+  // 黎塞留
   {
-    // 黎塞留
     name: "richelieu",
     nation: "fr",
     type: "battleship",
@@ -20779,8 +20788,8 @@
       ]
     }
   },
+  // 敦刻尔克
   {
-    // 敦刻尔克
     name: "dunkerque",
     nation: "fr",
     type: "battleship",
@@ -20941,8 +20950,8 @@
       ]
     }
   },
+  // 洛林
   {
-    // 洛林
     name: "lorraine",
     nation: "fr",
     type: "battleship",
@@ -21389,8 +21398,8 @@
       rockets: []
     }
   },
+  // 布列塔尼
   {
-    // 布列塔尼
     name: "bretagne",
     nation: "fr",
     type: "battleship",
@@ -21680,8 +21689,8 @@
       rockets: []
     }
   },
+  // 孤拔
   {
-    // 孤拔
     name: "courbet",
     nation: "fr",
     type: "battleship",
@@ -21926,8 +21935,8 @@
       rockets: []
     }
   },
+  // 迪凯纳（1945 年状态）
   {
-    // 迪凯纳（1945 年状态）
     name: "duquesne",
     nation: "fr",
     type: "cruiser",
@@ -22197,8 +22206,8 @@
       rockets: []
     }
   },
+  // 圣女贞德（1944 年状态）
   {
-    // 圣女贞德（1944 年状态）
     name: "jeanne_d_arc",
     nation: "fr",
     type: "cruiser",
@@ -22456,8 +22465,8 @@
       rockets: []
     }
   },
+  // 德格拉斯（1938 年设计状态）
   {
-    // 德格拉斯（1938 年设计状态）
     name: "de_grasse",
     nation: "fr",
     type: "cruiser",
@@ -22602,8 +22611,8 @@
       ]
     }
   },
+  // 普路托（1939 年状态）
   {
-    // 普路托（1939 年状态）
     name: "pluton",
     nation: "fr",
     type: "cruiser",
@@ -22742,8 +22751,8 @@
       rockets: []
     }
   },
+  // 空想（1943 年波士顿改装后状态）
   {
-    // 空想（1943 年波士顿改装后状态）
     name: "le_fantasque",
     nation: "fr",
     type: "destroyer",
@@ -22889,8 +22898,8 @@
       rockets: []
     }
   },
+  // 塔斯特指挥官（1939 年状态）
   {
-    // 塔斯特指挥官（1939 年状态）
     name: "commandant_teste",
     nation: "fr",
     type: "aircraft_carrier",
@@ -23071,8 +23080,8 @@
       ]
     }
   },
+  // 贝亚恩（1939 年状态）
   {
-    // 贝亚恩（1939 年状态）
     name: "bearn",
     nation: "fr",
     type: "aircraft_carrier",
@@ -23292,8 +23301,8 @@
       ]
     }
   },
+  // 海王星（PA4 方案，1940 年可能状态）
   {
-    // 海王星（PA4 方案，1940 年可能状态）
     name: "neptune",
     nation: "fr",
     type: "aircraft_carrier",
@@ -23483,8 +23492,8 @@
       ]
     }
   },
+  // 霞飞（PA16）
   {
-    // 霞飞（PA16）
     name: "joffre",
     nation: "fr",
     type: "aircraft_carrier",
@@ -23729,8 +23738,8 @@
       ]
     }
   },
+  // 克莱蒙梭（PA28 轻型航母方案，1947 年获批、1949 年取消）
   {
-    // 克莱蒙梭（PA28 轻型航母方案，1947 年获批、1949 年取消）
     name: "clemenceau_pa28",
     nation: "fr",
     type: "aircraft_carrier",
@@ -23882,8 +23891,9 @@
     }
   },
   // 英国海军
+  // --------- 战列舰 ----------
+  // 胡德
   {
-    // 胡德
     name: "hood",
     nation: "uk",
     type: "battleship",
@@ -24118,8 +24128,8 @@
       ]
     }
   },
+  // 纳尔逊
   {
-    // 纳尔逊
     name: "nelson",
     nation: "uk",
     type: "battleship",
@@ -24748,8 +24758,8 @@
       ]
     }
   },
+  // 狮
   {
-    // 狮
     name: "lion",
     nation: "uk",
     type: "battleship",
@@ -25091,8 +25101,8 @@
       ]
     }
   },
+  // 雌狮
   {
-    // 雌狮
     name: "lioness",
     nation: "uk",
     type: "battleship",
@@ -25311,8 +25321,8 @@
       ]
     }
   },
+  // 约克公爵（1945 年状态）
   {
-    // 约克公爵（1945 年状态）
     name: "duke_of_york",
     nation: "uk",
     type: "battleship",
@@ -25717,8 +25727,8 @@
       ]
     }
   },
+  // 厌战
   {
-    // 厌战
     name: "warspite",
     nation: "uk",
     type: "battleship",
@@ -25977,8 +25987,8 @@
       ]
     }
   },
+  // 虎
   {
-    // 虎
     name: "tiger",
     nation: "uk",
     type: "battleship",
@@ -26242,8 +26252,9 @@
     }
   },
   // 苏联海军
+  // --------- 战列舰 ----------
+  // 苏联
   {
-    // 苏联
     name: "soviet_union",
     nation: "su",
     type: "battleship",
@@ -26454,8 +26465,8 @@
       ]
     }
   },
+  // 苏联（纳尔逊型）
   {
-    // 苏联（纳尔逊型）
     name: "soviet_union_nelsonski",
     nation: "su",
     type: "battleship",
@@ -26645,8 +26656,8 @@
       ]
     }
   },
+  // 克里姆林
   {
-    // 克里姆林
     name: "kremlin",
     nation: "su",
     type: "battleship",
@@ -27000,8 +27011,8 @@
       ]
     }
   },
+  // 光荣
   {
-    // 光荣
     name: "slava",
     nation: "su",
     type: "battleship",
@@ -27306,11 +27317,11 @@
       ]
     }
   },
-  // 巡洋舰
   // 美国海军
+  // --------- 巡洋舰 ----------
   // 重巡洋舰
+  // 波多黎各
   {
-    // 波多黎各
     name: "puerto_rico",
     nation: "us",
     type: "cruiser",
@@ -27836,8 +27847,8 @@
       ]
     }
   },
+  // 阿拉斯加
   {
-    // 阿拉斯加
     name: "alaska",
     nation: "us",
     type: "cruiser",
@@ -28236,8 +28247,8 @@
       ]
     }
   },
+  // 得梅因
   {
-    // 得梅因
     name: "des_moines",
     nation: "us",
     type: "cruiser",
@@ -28506,8 +28517,8 @@
       ]
     }
   },
+  // 俄勒冈城
   {
-    // 俄勒冈城
     name: "oregon_city",
     nation: "us",
     type: "cruiser",
@@ -28812,8 +28823,8 @@
       ]
     }
   },
+  // 巴尔的摩
   {
-    // 巴尔的摩
     name: "baltimore",
     nation: "us",
     type: "cruiser",
@@ -29152,8 +29163,8 @@
       ]
     }
   },
+  // 阿斯托里亚
   {
-    // 阿斯托里亚
     name: "astoria",
     nation: "us",
     type: "cruiser",
@@ -29364,8 +29375,8 @@
       ]
     }
   },
+  // 波特兰
   {
-    // 波特兰
     name: "portland",
     nation: "us",
     type: "cruiser",
@@ -29611,8 +29622,8 @@
       ]
     }
   },
+  // 北安普顿
   {
-    // 北安普顿
     name: "northampton",
     nation: "us",
     type: "cruiser",
@@ -29787,8 +29798,8 @@
       ]
     }
   },
+  // 彭萨科拉
   {
-    // 彭萨科拉
     name: "pensacola",
     nation: "us",
     type: "cruiser",
@@ -29979,8 +29990,8 @@
     }
   },
   // 轻巡洋舰
+  // 布鲁克林（1945 年状态）
   {
-    // 布鲁克林（1945 年状态）
     name: "brooklyn",
     nation: "us",
     type: "cruiser",
@@ -30225,8 +30236,8 @@
       ]
     }
   },
+  // 圣路易斯
   {
-    // 圣路易斯
     name: "st_louis",
     nation: "us",
     type: "cruiser",
@@ -30375,8 +30386,8 @@
       ]
     }
   },
+  // 亚特兰大
   {
-    // 亚特兰大
     name: "atlanta",
     nation: "us",
     type: "cruiser",
@@ -30557,8 +30568,8 @@
       ]
     },
   },
+  // 夏洛特（CL-154 级 1945 年方案）
   {
-    // 夏洛特（CL-154 级 1945 年方案）
     name: "charlotte",
     nation: "us",
     type: "cruiser",
@@ -30715,8 +30726,8 @@
       ]
     },
   },
+  // 法戈号（1950 年状态）
   {
-    // 法戈号（1950 年状态）
     name: "fargo",
     nation: "us",
     type: "cruiser",
@@ -30929,8 +30940,8 @@
       ]
     }
   },
+  // USS Worcester（1958 年状态）
   {
-    // USS Worcester（1958 年状态）
     name: "uss_worcester_1958",
     nation: "us",
     type: "cruiser",
@@ -31072,8 +31083,8 @@
     }
   },
   // 导弹巡洋舰
+  // 长滩
   {
-    // 长滩
     name: "long_beach",
     nation: "us",
     type: "cruiser",
@@ -31126,8 +31137,8 @@
       ]
     }
   },
+  // 长滩（D 型）
   {
-    // 长滩（D 型）
     name: "long_beach_scheme_D",
     nation: "us",
     type: "cruiser",
@@ -31181,9 +31192,10 @@
     }
   },
   // 日本海军
+  // --------- 巡洋舰 ----------
   // 重巡洋舰
+  // 古鹰
   {
-    // 古鹰
     name: "furutaka",
     nation: "jp",
     type: "cruiser",
@@ -31326,8 +31338,8 @@
       ]
     }
   },
+  // 青叶
   {
-    // 青叶
     name: "aoba",
     nation: "jp",
     type: "cruiser",
@@ -31512,8 +31524,8 @@
       ]
     }
   },
+  // 羽黑
   {
-    // 羽黑
     name: "haguro",
     nation: "jp",
     type: "cruiser",
@@ -31816,8 +31828,8 @@
       ]
     }
   },
+  // 爱宕
   {
-    // 爱宕
     name: "atago",
     nation: "jp",
     type: "cruiser",
@@ -32204,8 +32216,8 @@
       ]
     }
   },
+  // 最上
   {
-    // 最上
     name: "mogami",
     nation: "jp",
     type: "cruiser",
@@ -32550,8 +32562,8 @@
       ]
     }
   },
+  // 铃谷
   {
-    // 铃谷
     name: "suzuya",
     nation: "jp",
     type: "cruiser",
@@ -32882,8 +32894,8 @@
       ]
     }
   },
+  // 利根
   {
-    // 利根
     name: "tone",
     nation: "jp",
     type: "cruiser",
@@ -33236,8 +33248,8 @@
     }
   },
   // 轻巡洋舰
+  // 天龙
   {
-    // 天龙
     name: "tenryu",
     nation: "jp",
     type: "cruiser",
@@ -33326,8 +33338,8 @@
       ]
     }
   },
+  // 球磨
   {
-    // 球磨
     name: "kuma",
     nation: "jp",
     type: "cruiser",
@@ -33469,8 +33481,8 @@
       ]
     }
   },
+  // 北上
   {
-    // 北上
     name: "kitakami",
     nation: "jp",
     type: "cruiser",
@@ -33812,8 +33824,8 @@
       ]
     }
   },
+  // 大井
   {
-    // 大井
     name: "ooi",
     nation: "jp",
     type: "cruiser",
@@ -33951,8 +33963,8 @@
       ]
     }
   },
+  // 五十铃
   {
-    // 五十铃
     name: "isuzu",
     nation: "jp",
     type: "cruiser",
@@ -34167,8 +34179,8 @@
       ]
     }
   },
+  // 阿武隈
   {
-    // 阿武隈
     name: "abukuma",
     nation: "jp",
     type: "cruiser",
@@ -34384,8 +34396,8 @@
       ]
     }
   },
+  // 神通
   {
-    // 神通
     name: "shintsu",
     nation: "jp",
     type: "cruiser",
@@ -34548,8 +34560,8 @@
       ]
     }
   },
+  // 夕张
   {
-    // 夕张
     name: "yubari",
     nation: "jp",
     type: "cruiser",
@@ -34659,8 +34671,8 @@
       ]
     }
   },
+  // 矢矧
   {
-    // 矢矧
     name: "yahagi",
     nation: "jp",
     type: "cruiser",
@@ -34983,8 +34995,8 @@
       ]
     }
   },
+  // 大淀
   {
-    // 大淀
     name: "ooyodo",
     nation: "jp",
     type: "cruiser",
@@ -35148,8 +35160,9 @@
     }
   },
   // 德国海军
+  // --------- 巡洋舰 ----------
+  // 欧根亲王
   {
-    // 欧根亲王
     name: "prinz_eugen",
     nation: "de",
     type: "cruiser",
@@ -35446,8 +35459,8 @@
       ]
     }
   },
+  // 莱比锡
   {
-    // 莱比锡
     name: "leipzig",
     nation: "de",
     type: "cruiser",
@@ -35555,8 +35568,9 @@
     }
   },
   // 英国海军
+  // --------- 巡洋舰 ----------
+  // 柴郡
   {
-    // 柴郡
     name: "cheshire",
     nation: "uk",
     type: "cruiser",
@@ -35817,8 +35831,8 @@
       ]
     }
   },
+  // 伍斯特
   {
-    // 伍斯特
     name: "worcester",
     nation: "uk",
     type: "cruiser",
@@ -35962,8 +35976,8 @@
       ]
     }
   },
+  // 维克斯
   {
-    // 维克斯
     name: "vickers",
     nation: "uk",
     type: "cruiser",
@@ -36074,8 +36088,8 @@
       ]
     }
   },
+  // K-25
   {
-    // K-25
     name: "k_25",
     nation: "uk",
     type: "cruiser",
@@ -36241,8 +36255,9 @@
     }
   },
   // 苏联海军
+  // --------- 巡洋舰 ----------
+  // 斯维尔德洛夫
   {
-    // 斯维尔德洛夫
     name: "sverdlov",
     nation: "su",
     type: "cruiser",
@@ -36351,8 +36366,8 @@
       ]
     }
   },
+  // 基洛夫
   {
-    // 基洛夫
     name: "kirov",
     nation: "su",
     type: "cruiser",
@@ -36465,8 +36480,8 @@
       ]
     }
   },
+  // 塞瓦斯托波尔：意大利提供的 69 型大型巡洋舰方案（苏联）
   {
-    // 塞瓦斯托波尔：意大利提供的 69 型大型巡洋舰方案（苏联）
     name: "sevastopol",
     nation: "su",
     type: "cruiser",
@@ -36795,8 +36810,8 @@
       ]
     }
   },
+  // 斯大林格勒 X：82 型大型巡洋舰 X 方案（苏联，TZoli 图纸复原，四联装主炮全部前置）
   {
-    // 斯大林格勒 X：82 型大型巡洋舰 X 方案（苏联，TZoli 图纸复原，四联装主炮全部前置）
     name: "stalingrad_x",
     nation: "su",
     type: "cruiser",
@@ -36975,8 +36990,8 @@
       ]
     }
   },
+  // 斯大林格勒 XI：82 型大型巡洋舰 XI 方案（苏联，TZoli 图纸复原，前 3 后 2 主炮塔）
   {
-    // 斯大林格勒 XI：82 型大型巡洋舰 XI 方案（苏联，TZoli 图纸复原，前 3 后 2 主炮塔）
     name: "stalingrad_xi",
     nation: "su",
     type: "cruiser",
@@ -37205,8 +37220,9 @@
     }
   },
   // 意大利海军
+  // --------- 巡洋舰 ----------
+  // 热那亚：安萨尔多大型巡洋舰方案（意大利，二战末期改装型）
   {
-    // 热那亚：安萨尔多大型巡洋舰方案（意大利，二战末期改装型）
     name: "genova",
     nation: "it",
     type: "cruiser",
@@ -37632,8 +37648,8 @@
       ]
     }
   },
+  // 威尼斯：安萨尔多 UP-102 重炮巡洋舰方案（1937 年向罗马尼亚兜售，纸面设计）
   {
-    // 威尼斯：安萨尔多 UP-102 重炮巡洋舰方案（1937 年向罗马尼亚兜售，纸面设计）
     name: "venezia",
     nation: "it",
     type: "cruiser",
@@ -37855,8 +37871,8 @@
       ]
     }
   },
+  // 朱塞佩·加里波第：1950 年代防空巡洋舰改装方案（未实施）
   {
-    // 朱塞佩·加里波第：1950 年代防空巡洋舰改装方案（未实施）
     name: "giuseppe_garibaldi",
     nation: "it",
     type: "cruiser",
@@ -37967,8 +37983,8 @@
       torpedoes: []
     }
   },
+  // 博尔扎诺：特伦托级改进型重巡洋舰（意大利，1933 年服役状态）
   {
-    // 博尔扎诺：特伦托级改进型重巡洋舰（意大利，1933 年服役状态）
     name: "bolzano",
     nation: "it",
     type: "cruiser",
@@ -38119,8 +38135,8 @@
       ]
     }
   },
+  // 穆齐奥·阿滕多洛：莱蒙多·蒙特库科利级轻巡洋舰（意大利，1941 年状态）
   {
-    // 穆齐奥·阿滕多洛：莱蒙多·蒙特库科利级轻巡洋舰（意大利，1941 年状态）
     name: "muzio_attendolo",
     nation: "it",
     type: "cruiser",
@@ -38279,8 +38295,8 @@
       ]
     }
   },
+  // 巴托洛梅奥·科莱奥尼：朱桑诺级轻巡洋舰（意大利，1940 年状态）
   {
-    // 巴托洛梅奥·科莱奥尼：朱桑诺级轻巡洋舰（意大利，1940 年状态）
     name: "bartolomeo_colleoni",
     nation: "it",
     type: "cruiser",
@@ -38400,10 +38416,10 @@
       ]
     }
   },
-  // 驱逐舰
   // 美国海军
+  // --------- 驱逐舰 ----------
+  // 波特
   {
-    // 波特
     name: "porter",
     nation: "us",
     type: "destroyer",
@@ -38518,8 +38534,8 @@
       ]
     },
   },
+  // 莫雷
   {
-    // 莫雷
     name: "maury",
     nation: "us",
     type: "destroyer",
@@ -38640,8 +38656,8 @@
       ]
     },
   },
+  // 哈曼
   {
-    // 哈曼
     name: "hammann",
     nation: "us",
     type: "destroyer",
@@ -38735,8 +38751,8 @@
       ]
     },
   },
+  // 杜威
   {
-    // 杜威
     name: "dewey",
     nation: "us",
     type: "destroyer",
@@ -38856,8 +38872,8 @@
       ]
     }
   },
+  // 约翰斯顿
   {
-    // 约翰斯顿
     name: "johnston",
     nation: "us",
     type: "destroyer",
@@ -39014,8 +39030,9 @@
     }
   },
   // 日本海军
+  // --------- 驱逐舰 ----------
+  // 朝潮
   {
-    // 朝潮
     name: "asashio",
     nation: "jp",
     type: "destroyer",
@@ -39089,8 +39106,8 @@
       ]
     }
   },
+  // 夕云
   {
-    // 夕云
     name: "yugumo",
     nation: "jp",
     type: "destroyer",
@@ -39149,8 +39166,8 @@
       ]
     }
   },
+  // 雪风
   {
-    // 雪风
     name: "yukikaze",
     nation: "jp",
     type: "destroyer",
@@ -39224,8 +39241,8 @@
       ]
     }
   },
+  // 岛风
   {
-    // 岛风
     name: "shimakaze",
     nation: "jp",
     type: "destroyer",
@@ -39327,8 +39344,8 @@
       rockets: []
     }
   },
+  // 秋津风（岛风级二号舰，架空；F-52 初期方案 2 号）
   {
-    // 秋津风（岛风级二号舰，架空；F-52 初期方案 2 号）
     name: "akitsukaze",
     nation: "jp",
     type: "destroyer",
@@ -39411,8 +39428,8 @@
       rockets: []
     }
   },
+  // 雾月（岛风级后继型号，架空）
   {
-    // 雾月（岛风级后继型号，架空）
     name: "kirizuki",
     nation: "jp",
     type: "destroyer",
@@ -39533,8 +39550,8 @@
       ]
     }
   },
+  // 峯風
   {
-    // 峯風
     name: "minekaze",
     nation: "jp",
     type: "destroyer",
@@ -39608,8 +39625,9 @@
     }
   },
   // 德国海军
+  // --------- 驱逐舰 ----------
+  // Z-11
   {
-    // Z-11
     name: "z_11",
     nation: "de",
     type: "destroyer",
@@ -39725,8 +39743,8 @@
       ]
     }
   },
+  // Z-22
   {
-    // Z-22
     name: "z_22",
     nation: "de",
     type: "destroyer",
@@ -39842,8 +39860,9 @@
     }
   },
   // 英国海军
+  // --------- 驱逐舰 ----------
+  // V
   {
-    // V
     name: "v",
     nation: "uk",
     type: "destroyer",
@@ -39938,8 +39957,8 @@
       ]
     }
   },
+  // Y
   {
-    // Y
     name: "y",
     nation: "uk",
     type: "destroyer",
@@ -40033,8 +40052,8 @@
       ]
     }
   },
+  // 热心
   {
-    // 热心
     name: "ardent",
     nation: "uk",
     type: "destroyer",
@@ -40116,8 +40135,8 @@
       ]
     }
   },
+  // 赛尼特
   {
-    // 赛尼特
     name: "thanet",
     nation: "uk",
     type: "destroyer",
@@ -40185,8 +40204,8 @@
       ]
     }
   },
+  // 花环
   {
-    // 花环
     name: "garland",
     nation: "uk",
     type: "destroyer",
@@ -40301,8 +40320,8 @@
       ]
     }
   },
+  // 英雄
   {
-    // 英雄
     name: "hero",
     nation: "uk",
     type: "destroyer",
@@ -40383,8 +40402,8 @@
       ]
     }
   },
+  // 廓尔喀
   {
-    // 廓尔喀
     name: "gurkha",
     nation: "uk",
     type: "destroyer",
@@ -40468,8 +40487,9 @@
     }
   },
   // 苏联海军
+  // --------- 驱逐舰 ----------
+  // 快速
   {
-    // 快速
     name: "rapid",
     nation: "su",
     type: "destroyer",
@@ -40522,8 +40542,9 @@
     }
   },
   // 意大利海军
+  // --------- 驱逐舰 ----------
+  // 特拉蒙塔纳：1939 年安萨尔多驱逐舰方案（未建成）
   {
-    // 特拉蒙塔纳：1939 年安萨尔多驱逐舰方案（未建成）
     name: "tramontana",
     nation: "it",
     type: "destroyer",
@@ -40627,8 +40648,8 @@
       ]
     }
   },
+  // 闪电：1932 年服役的 Folgore 级驱逐舰首舰，VIII 鱼雷驱逐舰中队
   {
-    // 闪电：1932 年服役的 Folgore 级驱逐舰首舰，VIII 鱼雷驱逐舰中队
     name: "folgore",
     nation: "it",
     type: "destroyer",
@@ -40708,8 +40729,8 @@
       ]
     }
   },
+  // 达尔多：1932 年服役的 Freccia 级驱逐舰，1943 年停战后被德国接收为 TA31
   {
-    // 达尔多：1932 年服役的 Freccia 级驱逐舰，1943 年停战后被德国接收为 TA31
     name: "dardo",
     nation: "it",
     type: "destroyer",
@@ -40789,10 +40810,10 @@
       ]
     }
   },
-  // 护卫舰
   // 中国海军
+  // --------- 护卫舰 ----------
+  // 九江
   {
-    // 九江
     name: "jiujiang",
     nation: "cn",
     type: "frigate",
@@ -40894,10 +40915,10 @@
       ]
     }
   },
-  // 鱼雷艇
   // 美国海军
+  // --------- 鱼雷艇 ----------
+  // PT-791
   {
-    // PT-791
     name: "PT_791",
     nation: "us",
     type: "torpedo_boat",
@@ -40958,8 +40979,9 @@
     }
   },
   // 日本海军
+  // --------- 鱼雷艇 ----------
+  // T-14
   {
-    // T-14
     name: "T_14",
     nation: "jp",
     type: "torpedo_boat",
@@ -41005,8 +41027,9 @@
     }
   },
   // 德国海军
+  // --------- 鱼雷艇 ----------
+  // S-100
   {
-    // S-100
     name: "S_100",
     nation: "de",
     type: "torpedo_boat",
@@ -41067,8 +41090,9 @@
     }
   },
   // 英国海军
+  // --------- 鱼雷艇 ----------
+  // MTB-77
   {
-    // MTB-77
     name: "MTB_77",
     nation: "uk",
     type: "torpedo_boat",
@@ -41114,8 +41138,9 @@
     }
   },
   // 苏联海军
+  // --------- 鱼雷艇 ----------
+  // P-6
   {
-    // P-6
     name: "P_6",
     nation: "su",
     type: "torpedo_boat",
@@ -41168,8 +41193,9 @@
     }
   },
   // 意大利海军
+  // --------- 鱼雷艇 ----------
+  // Stefano Türr
   {
-    // Stefano Türr
     name: "stefano_turr",
     nation: "it",
     type: "torpedo_boat",
@@ -41242,8 +41268,8 @@
       ]
     }
   },
+  // Lupo
   {
-    // Lupo
     name: "lupo",
     nation: "it",
     type: "torpedo_boat",
@@ -41346,8 +41372,8 @@
       ]
     }
   },
+  // 利托里奥：维托里奥·维内托级战列舰首舰，1940 年 5 月服役
   {
-    // 利托里奥：维托里奥·维内托级战列舰首舰，1940 年 5 月服役
     name: "littorio",
     nation: "it",
     type: "battleship",
@@ -41586,8 +41612,8 @@
       ]
     }
   },
+  // 卡约·杜伊利奥：安德烈亚·多里亚级（卡约·杜伊利奥级）战列舰，1937-1940 年大改装
   {
-    // 卡约·杜伊利奥：安德烈亚·多里亚级（卡约·杜伊利奥级）战列舰，1937-1940 年大改装
     name: "caio_duilio",
     nation: "it",
     type: "battleship",
@@ -41833,8 +41859,8 @@
       ]
     }
   },
+  // 朱利奥·凯撒号：加富尔伯爵级战列舰，1933-1937 年大改装
   {
-    // 朱利奥·凯撒号：加富尔伯爵级战列舰，1933-1937 年大改装
     name: "giulio_cesare",
     nation: "it",
     type: "battleship",
@@ -42007,7 +42033,7 @@
       ]
     }
   },
-  // 维修船
+  // --------- 维修船 ----------
   // 火神
   {
     name: "vulkan",
@@ -42026,9 +42052,9 @@
     fundsCost: 25,
     timeCost: 11,
   },
-  // 医疗船
+  // --------- 医疗船 ----------
+  // 仁慈
   {
-    // 仁慈
     name: "mercy",
     nation: "us",
     type: "hospital",
@@ -42045,8 +42071,8 @@
     fundsCost: 255,
     timeCost: 91,
   },
+  // 和平方舟
   {
-    // 和平方舟
     name: "peace_ark",
     nation: "cn",
     type: "hospital",
@@ -42063,8 +42089,8 @@
     fundsCost: 135,
     timeCost: 49,
   },
+  // 不列颠
   {
-    // 不列颠
     name: "britannic",
     nation: "uk",
     type: "hospital",

@@ -1294,10 +1294,10 @@
   },
   {
     name: "CN/122/50",
-    displayName: "122mm 50-Tube Shipboard Rocket Launcher (designation unconfirmed)",
+    displayName: "Type 81 122mm 50-Tube Shipboard Rocket Launcher",
     type: "Weapon",
     armaments: [],
-    description: "The Chinese Navy 50-tube 122 mm shipborne rocket launcher is an unverified design: the only documented weapon is the ground-based Type 70 122 mm rocket launcher adopted in 1970, and no official record of a 1960s naval 122 mm type exists.",
+    description: "Chinese Navy Type 81 122 mm shipboard rocket launcher, which fired the M-21OF rocket copied from the Soviet BM-21 Grad. It was fitted only to the fire-support ship Jiujiang (516), a frigate rebuilt to bombard shorelines with five 50-tube launchers before amphibious landings.",
     author: "",
     links: [],
   },
