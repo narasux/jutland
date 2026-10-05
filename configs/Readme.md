@@ -164,9 +164,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 [
   {
     // 舰炮名称（不可重复）
-    // US 是所属阵营，127 是口径，38 是倍径，MK45 是型号（可选）
+    // US 是所属阵营，127 是口径，38 是倍径，MK12 是型号（可选）
     // 注：如果是多管炮，则追加炮管数量，如：UK/152/50/2
-    name: "US/127/38/MK45",
+    name: "US/127/38/MK12",
     // 弹药名称（需确保一定存在）
     bulletName: "US/GB/127/1932",
     // 炮管数量
@@ -411,7 +411,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         // 前主炮 A
         {
           // 舰炮名称，需保证存在
-          name: "US/127/38/MK45",
+          name: "US/127/38/MK12",
           // 相对位置
           // 0.35 -> 从中心往舰首 35% 舰体长度
           // -0.3 -> 从中心往舰尾 30% 舰体长度
@@ -423,7 +423,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         },
         // 后主炮 B
         {
-          name: "US/127/38/MK45",
+          name: "US/127/38/MK12",
           posPercent: -0.5,
           rightFiringArc: [30, 180],
           leftFiringArc: [180, 330]
@@ -433,7 +433,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       secondaryGuns: [
         // 副炮 A
         {
-          name: "US/76/50",
+          name: "US/76/50/MK10",
           posPercent: 0.3,
           rightFiringArc: [0, 120],
           leftFiringArc: [240, 360]
@@ -443,7 +443,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       antiAircraftGuns: [
         // 防空炮 A
         {
-          name: "US/20/70",
+          name: "US/20/70/MK4",
           posPercent: 0.5,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
@@ -615,7 +615,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       guns: [
         {
           // 舰炮名称，需保证存在
-          name: "US/12.7",
+          name: "US/12.7/M2",
           // 相对位置（与战舰武器位置参数含义相同）
           posPercent: 0.5,
           // 右侧射界

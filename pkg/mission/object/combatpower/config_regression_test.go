@@ -86,7 +86,7 @@ func TestJapanese25mmRateMatchesHistory(t *testing.T) {
 	const minRate, maxRate = 3.0, 4.2
 
 	perBarrel := map[string]float64{}
-	for _, name := range []string{"JP/25/60", "JP/25/60/2", "JP/25/60/3"} {
+	for _, name := range []string{"JP/25/60/Type96", "JP/25/60/2/Type96", "JP/25/60/3/Type96"} {
 		gun := objUnit.GunMap[name]
 		if gun == nil {
 			t.Fatalf("gun %s not found", name)
@@ -99,11 +99,11 @@ func TestJapanese25mmRateMatchesHistory(t *testing.T) {
 			)
 		}
 	}
-	for _, name := range []string{"JP/25/60/2", "JP/25/60/3"} {
-		if perBarrel[name] != perBarrel["JP/25/60"] {
+	for _, name := range []string{"JP/25/60/2/Type96", "JP/25/60/3/Type96"} {
+		if perBarrel[name] != perBarrel["JP/25/60/Type96"] {
 			t.Fatalf(
 				"%s per-barrel rate %.2f differs from single mount %.2f",
-				name, perBarrel[name], perBarrel["JP/25/60"],
+				name, perBarrel[name], perBarrel["JP/25/60/Type96"],
 			)
 		}
 	}

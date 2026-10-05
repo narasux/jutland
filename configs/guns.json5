@@ -103,19 +103,6 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/127/38/MK45 单裝舰炮
-  {
-    name: "US/127/38/MK45",
-    bulletName: "US/GB/127/1932",
-    bulletCount: 1,
-    reloadTime: 1,
-    range: 22,
-    bulletSpread: 50,
-    bulletSpeed: 800,
-    fundsCost: 9,
-    antiShip: true,
-    antiAircraft: true
-  },
   // 美国海军 US/457/45/3/MK1
   // 三联装舰炮（列克星敦级 Mark 1）
   {
@@ -208,9 +195,9 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 美国海军 12 英寸/35 双联装舰炮（监视舰蒙特雷号；1890 年代炮塔，射速与初速低于 /40 型）
+  // 美国海军 12 英寸/35 Mark 1 双联装舰炮（监视舰蒙特雷号；1890 年代炮塔，射速与初速低于 /40 型）
   {
-    name: "US/305/35/2",
+    name: "US/305/35/2/MK1",
     bulletName: "US/GB/305/1942",
     bulletCount: 2,
     reloadTime: 26,
@@ -221,9 +208,9 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 美国海军 10 英寸/30 双联装舰炮（监视舰蒙特雷号后炮塔）
+  // 美国海军 10 英寸/30 Mark 2 双联装舰炮（监视舰蒙特雷号后炮塔）
   {
-    name: "US/254/30/2",
+    name: "US/254/30/2/MK2",
     bulletName: "US/GB/254/1890",
     bulletCount: 2,
     reloadTime: 22,
@@ -617,9 +604,22 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/76/50 单装舰炮
+  // 美国海军 3 英寸/50 低仰角型（Mark 3/5/6 系）单装轻炮，前无畏舰反雷击用，不能对空
   {
-    name: "US/76/50",
+    name: "US/76/50/MK3",
+    bulletName: "US/GB/76/1910",
+    bulletCount: 1,
+    reloadTime: 1,
+    range: 13,
+    bulletSpread: 70,
+    bulletSpeed: 820,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 美国海军 3 英寸/50 高平两用型（Mark 10/17/18/20 系）单装炮
+  {
+    name: "US/76/50/MK10",
     bulletName: "US/GB/76/1910",
     bulletCount: 1,
     reloadTime: 1,
@@ -710,9 +710,9 @@
     proximityRadius: 0.20,
     blastRadius: 0.32,
   },
-  // 美国海军 US/40/60/4 四联装装高炮
+  // 美国海军 40mm/56（Bofors L/60）四联装高炮
   {
-    name: "US/40/60/4",
+    name: "US/40/56/4",
     bulletName: "US/GB/40/1930",
     bulletCount: 4,
     reloadTime: 0.5,
@@ -723,9 +723,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/40/60/2 双联装装高炮
+  // 美国海军 40mm/56（Bofors L/60）双联装高炮
   {
-    name: "US/40/60/2",
+    name: "US/40/56/2",
     bulletName: "US/GB/40/1930",
     bulletCount: 2,
     reloadTime: 0.5,
@@ -736,9 +736,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/40/60 单装高炮
+  // 美国海军 40mm/56（Bofors L/60）单装高炮
   {
-    name: "US/40/60",
+    name: "US/40/56",
     bulletName: "US/GB/40/1930",
     bulletCount: 1,
     reloadTime: 0.5,
@@ -749,9 +749,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/28/75 四联装高炮
+  // 美国海军 1.1 英寸/75 Mark 1 四联装高炮
   {
-    name: "US/28/75/4",
+    name: "US/28/75/4/MK1",
     bulletName: "US/GB/28/1928",
     bulletCount: 4,
     reloadTime: 0.4,
@@ -762,9 +762,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/20/70/2 双装高炮
+  // 美国海军 20mm/70 厄利孔 Mk 24 双联装高炮
   {
-    name: "US/20/70/2",
+    name: "US/20/70/2/MK24",
     bulletName: "US/GB/20/1940",
     bulletCount: 2,
     reloadTime: 0.2,
@@ -788,9 +788,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/20/70 单装高炮
+  // 美国海军 20mm/70 厄利孔 Mk 4 单装高炮（后期 Mk 10 炮座性能相同，不另列）
   {
-    name: "US/20/70",
+    name: "US/20/70/MK4",
     bulletName: "US/GB/20/1940",
     bulletCount: 1,
     reloadTime: 0.2,
@@ -840,9 +840,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/12.7 单装机枪
+  // 美国海军 12.7mm M2 勃朗宁单装机枪
   {
-    name: "US/12.7",
+    name: "US/12.7/M2",
     bulletName: "US/GB/12.7/1919",
     bulletCount: 1,
     reloadTime: 0.05,
@@ -853,9 +853,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国陆航/海军 US/12.7 双联装机枪（颚部/机背/机腹球/机尾炮塔用）
+  // 美国陆航/海军 12.7mm M2 勃朗宁双联装机枪（颚部/机背/机腹球/机尾炮塔用）
   {
-    name: "US/12.7/2",
+    name: "US/12.7/2/M2",
     bulletName: "US/GB/12.7/1919",
     bulletCount: 2,
     reloadTime: 0.05,
@@ -866,9 +866,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国陆航/海军 US/12.7 三联装机枪（A-26B 机翼，每翼 3 挺）
+  // 美国陆航/海军 12.7mm M2 勃朗宁三联装机枪（A-26B 机翼，每翼 3 挺）
   {
-    name: "US/12.7/3",
+    name: "US/12.7/3/M2",
     bulletName: "US/GB/12.7/1919",
     bulletCount: 3,
     reloadTime: 0.05,
@@ -879,9 +879,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国陆航/海军 US/12.7 四联装机枪（机鼻集中火力或每翼四挺机翼用）
+  // 美国陆航/海军 12.7mm M2 勃朗宁四联装机枪（机鼻集中火力或每翼四挺机翼用）
   {
-    name: "US/12.7/4",
+    name: "US/12.7/4/M2",
     bulletName: "US/GB/12.7/1919",
     bulletCount: 4,
     reloadTime: 0.05,
@@ -892,9 +892,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/7.62 双联装机枪
+  // 美国海军/陆航 7.62mm M2 勃朗宁双联装机枪
   {
-    name: "US/7.62/2",
+    name: "US/7.62/2/M2",
     bulletName: "US/GB/7.62/1925",
     bulletCount: 2,
     reloadTime: 0.05,
@@ -905,9 +905,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 美国海军 US/7.62 单装机枪
+  // 美国海军/陆航 7.62mm M2 勃朗宁单装机枪
   {
-    name: "US/7.62",
+    name: "US/7.62/M2",
     bulletName: "US/GB/7.62/1925",
     bulletCount: 1,
     reloadTime: 0.05,
@@ -1100,7 +1100,7 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 日本海军 三年式 12.7cm 炮
+  // 日本海军 五十口径三年式十二糎七砲（平射/高平炮座通用，标准初速 915–920 m/s）
   {
     name: "JP/127/50/2/Type3",
     bulletName: "JP/GB/127/1926",
@@ -1110,19 +1110,6 @@
     bulletSpread: 70,
     bulletSpeed: 920,
     fundsCost: 8,
-    antiShip: true,
-    antiAircraft: true
-  },
-  // 日本海军 三年式 12.7cm 高平炮
-  {
-    name: "JP/127/50/2/Type3/DP",
-    bulletName: "JP/GB/127/1929",
-    bulletCount: 2,
-    reloadTime: 3,
-    range: 18,
-    bulletSpread: 70,
-    bulletSpeed: 800,
-    fundsCost: 5,
     antiShip: true,
     antiAircraft: true
   },
@@ -1165,9 +1152,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 九八式 7.6cm 高角炮
+  // 日本海军 九八式 8cm/60 高角炮（阿贺野级等；原误写 65 倍径）
   {
-    name: "JP/76/65/2/Type98",
+    name: "JP/76/60/2/Type98",
     bulletName: "JP/GB/76/1936",
     bulletCount: 2,
     reloadTime: 1.4,
@@ -1191,9 +1178,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 4 厘米高炮
+  // 日本海军 五式 40mm/60 双联装高炮
   {
-    name: "JP/40/60/2",
+    name: "JP/40/60/2/Type5",
     bulletName: "JP/GB/40/1936",
     bulletCount: 2,
     reloadTime: 0.5,
@@ -1217,9 +1204,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 三联装 25 毫米机炮
+  // 日本海军 九六式 25mm/60 三联装机炮
   {
-    name: "JP/25/60/3",
+    name: "JP/25/60/3/Type96",
     bulletName: "JP/GB/25/1936",
     bulletCount: 3,
     reloadTime: 0.27,
@@ -1230,9 +1217,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 双联装 25 毫米机炮
+  // 日本海军 九六式 25mm/60 双联装机炮
   {
-    name: "JP/25/60/2",
+    name: "JP/25/60/2/Type96",
     bulletName: "JP/GB/25/1936",
     bulletCount: 2,
     reloadTime: 0.27,
@@ -1243,9 +1230,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 25 毫米机炮
+  // 日本海军 九六式 25mm/60 单装机炮
   {
-    name: "JP/25/60",
+    name: "JP/25/60/Type96",
     bulletName: "JP/GB/25/1936",
     bulletCount: 1,
     reloadTime: 0.27,
@@ -1256,9 +1243,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 20 毫米机炮
+  // 日本海军 九九式 20mm 单装机炮（二号，Oerlikon FFL）
   {
-    name: "JP/20",
+    name: "JP/20/Type99",
     bulletName: "JP/GB/20/1938",
     bulletCount: 1,
     reloadTime: 0.08,
@@ -1269,9 +1256,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 四联装 13 毫米机枪
+  // 日本海军 九三式 13mm/76 四联装机枪
   {
-    name: "JP/13/4",
+    name: "JP/13/4/Type93",
     bulletName: "JP/GB/13/1935",
     bulletCount: 4,
     reloadTime: 0.05,
@@ -1282,9 +1269,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 13 毫米机枪
+  // 日本海军 九三式 13mm/76 单装机枪
   {
-    name: "JP/13",
+    name: "JP/13/Type93",
     bulletName: "JP/GB/13/1935",
     bulletCount: 1,
     reloadTime: 0.05,
@@ -1295,9 +1282,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 7.92 毫米机枪
+  // 日本海军 一式 7.92mm 旋回机枪
   {
-    name: "JP/7.92",
+    name: "JP/7.92/Type1",
     bulletName: "JP/GB/7.92/1930",
     bulletCount: 1,
     reloadTime: 0.05,
@@ -1308,9 +1295,9 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 7.7 毫米机枪
+  // 日本海军 九七式 7.7mm 固定机枪
   {
-    name: "JP/7.7",
+    name: "JP/7.7/Type97",
     bulletName: "JP/GB/7.7/1922",
     bulletCount: 1,
     reloadTime: 0.04,

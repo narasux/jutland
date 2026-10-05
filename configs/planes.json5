@@ -45,25 +45,25 @@
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -267,20 +267,20 @@
       guns: [
         // 机首（双联装 12.7mm，机首上侧，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（每翼 1 挺 12.7mm，前缘，前向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -310,14 +310,14 @@
       guns: [
         // 机翼（双联装，每翼一组，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（双联装，每翼一组，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -347,14 +347,14 @@
       guns: [
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -439,14 +439,14 @@
       guns: [
         // 机翼/机头（双联装，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼/机头（双联装，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -483,21 +483,21 @@
         },
         // 机鼻（双联装 12.7mm，发动机上方同步机枪，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（双联装 7.62mm，每翼一组，前向）
         {
-          name: "US/7.62/2",
+          name: "US/7.62/2/M2",
           posPercent: 0.4,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（双联装 7.62mm，每翼一组，前向）
         {
-          name: "US/7.62/2",
+          name: "US/7.62/2/M2",
           posPercent: 0.4,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -534,7 +534,7 @@
         },
         // 机鼻集中火力（四联装，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -573,14 +573,14 @@
       guns: [
         // 机翼（四联装，每翼一组，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（四联装，每翼一组，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -619,14 +619,14 @@
       guns: [
         // 机翼（四联装，每翼一组，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（四联装，每翼一组，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -665,14 +665,14 @@
       guns: [
         // 机翼（双联装，每翼一组，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（双联装，每翼一组，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -711,14 +711,14 @@
       guns: [
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -771,21 +771,21 @@
         },
         // 机鼻（双联装 12.7mm，固定前射）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机背后上方（双联装 12.7mm，后半球）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.15,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机腹后下方（单装 12.7mm，后半球）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.15,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -829,7 +829,7 @@
         },
         // 机背 GE A-4 遥控炮塔（四联装 12.7mm M2，全周）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.15,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
@@ -868,14 +868,14 @@
       guns: [
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -928,7 +928,7 @@
         },
         // 机鼻（四联装 12.7mm，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -966,19 +966,19 @@
     weapon: {
       guns: [
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/7.62/2",
+          name: "US/7.62/2/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1040,7 +1040,7 @@
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/7.62/2",
+          name: "US/7.62/2/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1090,13 +1090,13 @@
     weapon: {
       guns: [
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1133,19 +1133,19 @@
     weapon: {
       guns: [
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1183,63 +1183,63 @@
       guns: [
         // 颚部 Bendix 动力炮塔（双联，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 颊部（单装，前向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.9,
           rightFiringArc: [0, 0],
           leftFiringArc: [270, 360]
         },
         // 颊部（单装，前向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.85,
           rightFiringArc: [0, 90],
           leftFiringArc: [360, 360]
         },
         // 机背炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.55,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 无线电舱（单装，后向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.15,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腰部（单装，后向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.1,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 腰部（单装，后向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.2,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 机腹球形炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.2,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机尾 Cheyenne 炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.95,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1308,34 +1308,34 @@
       guns: [
         // 机背前炮塔（四联）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 遥控炮塔（双联）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.55,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 遥控炮塔（双联）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.25,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 遥控炮塔（双联）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.6,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.95,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1416,42 +1416,42 @@
       guns: [
         // 机鼻 Emerson 动力炮塔（双联，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         // 机背 Martin 动力炮塔（双联，全周）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.3,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 机腹球形炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.15,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腰部（单装）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.35,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 腰部（单装）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.45,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 机尾 Consolidated 动力炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.95,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1520,28 +1520,28 @@
       guns: [
         // 机鼻（双联装 7.62mm，前向）
         {
-          name: "US/7.62/2",
+          name: "US/7.62/2/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机鼻（双联装 7.62mm，前向）
         {
-          name: "US/7.62/2",
+          name: "US/7.62/2/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机背（单装 7.62mm，后向）
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0.25,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 机腹（单装 7.62mm，后向）
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1586,42 +1586,42 @@
       guns: [
         // 机鼻“全能机鼻”（四联装，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机鼻“全能机鼻”（四联装，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.45,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（三联装，每翼一组，前向）
         {
-          name: "US/12.7/3",
+          name: "US/12.7/3/M2",
           posPercent: 0.45,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机背遥控炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 机腹遥控炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.2,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1692,42 +1692,42 @@
       guns: [
         // 机头（可活动，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.9,
           rightFiringArc: [0, 60],
           leftFiringArc: [300, 360]
         },
         // 机翼（四联装，前向）
         {
-          name: "US/12.7/4",
+          name: "US/12.7/4/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 腰部/腹部机枪（单装，后向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.3,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腰部/腹部机枪（单装，后向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.3,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机背电动遥控炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.4,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机尾炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.95,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1784,56 +1784,56 @@
       guns: [
         // 机鼻（单装，前向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.95,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机鼻侧方固定机枪（双联，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.8,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机鼻侧方固定机枪（双联，前向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.8,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机背炮塔（双联，全周）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: 0.35,
           rightFiringArc: [0, 180],
           leftFiringArc: [180, 360]
         },
         // 机腹炮塔（双联，后向）
         {
-          name: "US/12.7/2",
+          name: "US/12.7/2/M2",
           posPercent: -0.05,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 腰部（单装）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.35,
           rightFiringArc: [30, 150],
           leftFiringArc: [360, 360]
         },
         // 腰部（单装）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.45,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
         },
         // 机尾（单装，后向）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: -0.95,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1906,14 +1906,14 @@
       guns: [
         // 机首（7.62mm M1919，固定前射）
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（7.62mm M1919，观察员活动机枪，后半球自卫）
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1943,14 +1943,14 @@
       guns: [
         // 机首（7.62mm AN/M2，固定前射）
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0.9,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（7.62mm AN/M2，观察员活动机枪，后半球自卫）
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -1980,14 +1980,14 @@
       guns: [
         // 机翼（12.7mm M2，每翼一挺，固定前射）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机翼（12.7mm M2，每翼一挺，固定前射）
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2017,13 +2017,13 @@
     weapon: {
       guns: [
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2052,25 +2052,25 @@
     weapon: {
       guns: [
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2099,25 +2099,25 @@
     weapon: {
       guns: [
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2146,31 +2146,31 @@
     weapon: {
       guns: [
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2199,25 +2199,25 @@
     weapon: {
       guns: [
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2255,25 +2255,25 @@
     weapon: {
       guns: [
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2389,14 +2389,14 @@
         },
         // 机首（20mm 九九式二号，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.8,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机首（20mm 九九式二号，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.8,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2456,14 +2456,14 @@
         },
         // 机身（13.2mm 三式，固定前射）
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机身（13.2mm 三式，固定前射）
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2509,14 +2509,14 @@
       guns: [
         // 机首（20mm 九九式，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.85,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机首（20mm 九九式，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.85,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2552,19 +2552,19 @@
     weapon: {
       guns: [
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -2651,13 +2651,13 @@
     weapon: {
       guns: [
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -2694,25 +2694,25 @@
     weapon: {
       guns: [
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2765,28 +2765,28 @@
         },
         // 机首（20mm 九九式一号，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机首（20mm 九九式一号，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.75,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 机背遥控炮塔（20mm 九九式二号，后半球）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.15,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         // 机背遥控炮塔（20mm 九九式二号，后半球）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.15,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -2942,19 +2942,19 @@
     weapon: {
       guns: [
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/7.92",
+          name: "JP/7.92/Type1",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -2991,19 +2991,19 @@
     weapon: {
       guns: [
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -3044,21 +3044,21 @@
       guns: [
         // 翼内（7.7mm 九七式，固定前射）
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 翼内（7.7mm 九七式，固定前射）
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（7.7mm 九二式，后半球自卫）
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -3090,7 +3090,7 @@
       guns: [
         // 后座（7.7mm 九二式，后半球自卫）
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -3122,21 +3122,21 @@
       guns: [
         // 翼内（20mm 九九式二号，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 翼内（20mm 九九式二号，固定前射）
         {
-          name: "JP/20",
+          name: "JP/20/Type99",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         // 后座（13mm 二式，后半球自卫）
         {
-          name: "JP/13",
+          name: "JP/13/Type93",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -3169,7 +3169,7 @@
       guns: [
         // 后座（7.7mm 九二式，后半球自卫）
         {
-          name: "JP/7.7",
+          name: "JP/7.7/Type97",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
@@ -5138,19 +5138,19 @@
     weapon: {
       guns: [
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/12.7",
+          name: "US/12.7/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
         },
         {
-          name: "US/7.62",
+          name: "US/7.62/M2",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
