@@ -1,4 +1,5 @@
 [
+  // 特殊 / 彩蛋与测试
   // 电磁轨道炮 炮弹
   {
     name: "SE/GB/1024/2048",
@@ -15,6 +16,251 @@
     damage: 99999,
     criticalRate: 0.5
   },
+  // 中国
+  // --------- 炮弹 ----------
+  // 中国海军 100mm 舰炮弹
+  {
+    name: "CN/GB/100/1960",
+    type: "shell",
+    diameter: 100,
+    damage: 55,
+    criticalRate: 0.001
+  },
+  // 中国海军 37mm 舰炮弹
+  {
+    name: "CN/GB/37/1960",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
+    criticalRate: 0.001
+  },
+  // --------- 火箭弹 ----------
+  // 中国海军 250mm 65 式反潜火箭弹
+  {
+    name: "CN/RB/250/1965/Type65",
+    type: "rocket",
+    diameter: 250,
+    damage: 95,
+    criticalRate: 0.001
+  },
+  // 中国海军 81 式 122mm 舰载火箭弹（仿苏 BM-21「冰雹」M-21OF；仅 516 九江舰对陆火力支援舰使用）
+  {
+    name: "CN/RB/122/1960",
+    type: "rocket",
+    diameter: 122,
+    damage: 28,
+    criticalRate: 0.0005
+  },
+  // --------- 镭射 ----------
+  // 镭射
+  // 50mm 镭射
+  {
+    name: "CN/LASER/50/2048",
+    type: "laser",
+    diameter: 50,
+    damage: 90,
+    criticalRate: 0
+  },
+  // 苏联
+  // --------- 炮弹 ----------
+  {
+    name: "SU/GB/500/1945",
+    type: "shell",
+    diameter: 500,
+    damage: 6500,
+    criticalRate: 0.05
+  },
+  {
+    name: "SU/GB/406/1939",
+    type: "shell",
+    diameter: 406,
+    damage: 3750,
+    criticalRate: 0.03
+  },
+  // 苏联海军 250mm/55 安萨尔多大型巡洋舰方案主炮弹（1936 年纸面设计，无实弹）
+  {
+    name: "SU/GB/250/1936",
+    type: "shell",
+    diameter: 250,
+    damage: 860,
+    criticalRate: 0.01
+  },
+  // 苏联海军 220mm/65 主炮弹（SM-40 型 1953 年纸面设计，无实弹）
+  {
+    name: "SU/GB/220/1953",
+    type: "shell",
+    diameter: 220,
+    damage: 580,
+    criticalRate: 0.012
+  },
+  {
+    name: "SU/GB/180/1935",
+    type: "shell",
+    diameter: 180,
+    damage: 320,
+    criticalRate: 0.01
+  },
+  {
+    name: "SU/GB/152/1938",
+    type: "shell",
+    diameter: 152,
+    damage: 180,
+    criticalRate: 0.005
+  },
+  {
+    name: "SU/GB/130/1935",
+    type: "shell",
+    diameter: 130,
+    damage: 125,
+    criticalRate: 0.002
+  },
+  {
+    name: "SU/GB/100/1940",
+    type: "shell",
+    diameter: 100,
+    damage: 55,
+    criticalRate: 0.001
+  },
+  {
+    name: "SU/GB/57/1945",
+    type: "shell",
+    diameter: 57,
+    damage: 14,
+    criticalRate: 0.001
+  },
+  {
+    name: "SU/GB/45/1945",
+    type: "shell",
+    diameter: 45,
+    damage: 8,
+    criticalRate: 0.001
+  },
+  {
+    name: "SU/GB/37/1946",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
+    criticalRate: 0.001
+  },
+  {
+    name: "SU/GB/25/1940",
+    type: "shell",
+    diameter: 25,
+    damage: 2,
+    criticalRate: 0.0005
+  },
+  // 苏联 23mm 沃罗希洛夫 VYa-23 航空机炮炮弹（Il-2 / Il-10 前向火力）
+  {
+    name: "SU/GB/23/1941",
+    type: "shell",
+    diameter: 23,
+    damage: 1.5,
+    criticalRate: 0.0002
+  },
+  // 苏联 20mm 施瓦克 ShVAK / B-20 航空机炮炮弹（两炮同弹种）
+  {
+    name: "SU/GB/20/1936",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
+  },
+  // 苏联 12.7mm 别列津 UB 航空机枪弹
+  {
+    name: "SU/GB/12.7/1941",
+    type: "shell",
+    diameter: 13,
+    damage: 0.25,
+    criticalRate: 0
+  },
+  // 苏联 7.62mm ShKAS 航空机枪弹（射速极高，弹头轻）
+  {
+    name: "SU/GB/7.62/1932",
+    type: "shell",
+    diameter: 8,
+    damage: 0.11,
+    criticalRate: 0
+  },
+  // --------- 鱼雷 ----------
+  // 苏联 533mm 53-27 鱼雷（1927 年服役；53-36 设计年为 1932，53-38 服役 1938）
+  {
+    name: "SU/TB/533/1932/53-27",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4800,
+    criticalRate: 0.08
+  },
+  // 苏联 45-36 型 450mm 航空鱼雷（АН 低空型 1939 年服役；基型 45-36Н 为 1936 年舰/潜用）
+  {
+    name: "SU/TB/450/1939/45-36AN",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3400,
+    criticalRate: 0.04
+  },
+  // --------- 炸弹 ----------
+  {
+    name: "SU/BB/5000/1938",
+    type: "bomb",
+    diameter: 1100,
+    damage: 16000,
+    criticalRate: 0.3
+  },
+  {
+    name: "SU/BB/2000/1938",
+    type: "bomb",
+    diameter: 800,
+    damage: 6000,
+    criticalRate: 0.15
+  },
+  {
+    name: "SU/BB/1000/1938",
+    type: "bomb",
+    diameter: 660,
+    damage: 3200,
+    criticalRate: 0.08
+  },
+  {
+    name: "SU/BB/500/1938",
+    type: "bomb",
+    diameter: 470,
+    damage: 1600,
+    criticalRate: 0.04
+  },
+  {
+    name: "SU/BB/250/1938",
+    type: "bomb",
+    diameter: 380,
+    damage: 780,
+    criticalRate: 0.015
+  },
+  // 苏联航空炸弹 FAB 系列（伤害按装药量与现有美德炸弹尺度对齐）
+  {
+    name: "SU/BB/100/1938",
+    type: "bomb",
+    diameter: 250,
+    damage: 330,
+    criticalRate: 0.005
+  },
+  // --------- 火箭弹 ----------
+  // 苏联空军 RS-132 132mm 航空火箭弹（1938 定型；Il-2 / Il-10 对舰）
+  {
+    name: "SU/RB/132/1938/RS132",
+    type: "rocket",
+    diameter: 132,
+    damage: 22,
+    criticalRate: 0.0006
+  },
+  // 苏联空军 RS-82 82mm 航空火箭弹（1937 定型；Il-2 / Su-2 对舰/对地）
+  {
+    name: "SU/RB/82/1937/RS82",
+    type: "rocket",
+    diameter: 82,
+    damage: 10,
+    criticalRate: 0.0003
+  },
+  // 美国
+  // --------- 炮弹 ----------
   // 常规炮弹
   {
     name: "US/GB/457/1922",
@@ -118,19 +364,19 @@
     damage: 120,
     criticalRate: 0.002
   },
-  {
-    name: "US/GB/76/1910",
-    type: "shell",
-    diameter: 76,
-    damage: 35,
-    criticalRate: 0.001
-  },
   // Leonardo 76/62 对空编程破片弹（PFF / 3AP），对空按近炸杀伤而不是弹重公式
   {
     name: "US/GB/76/1988",
     type: "shell",
     diameter: 76,
     damage: 40,
+    criticalRate: 0.001
+  },
+  {
+    name: "US/GB/76/1910",
+    type: "shell",
+    diameter: 76,
+    damage: 35,
     criticalRate: 0.001
   },
   // 美国海军 6 磅炮（57mm）炮弹，19 世纪末反雷击舰用
@@ -141,34 +387,12 @@
     damage: 18,
     criticalRate: 0.0004
   },
-  // 美国海军 1 磅炮（37mm）炮弹，19 世纪末反雷击舰用速射炮
-  {
-    name: "US/GB/37/1890",
-    type: "shell",
-    diameter: 37,
-    damage: 3,
-    criticalRate: 0.0003
-  },
   {
     name: "US/GB/40/1930",
     type: "shell",
     diameter: 40,
     damage: 4,
     criticalRate: 0.0005
-  },
-  {
-    name: "US/GB/28/1928",
-    type: "shell",
-    diameter: 28,
-    damage: 2,
-    criticalRate: 0.0002
-  },
-  {
-    name: "US/GB/20/1940",
-    type: "shell",
-    diameter: 20,
-    damage: 1.2,
-    criticalRate: 0.0001
   },
   // 美国陆航 37mm M4 机炮炮弹（P-39 飞蛇机头机炮，低速、大装药）
   {
@@ -178,12 +402,34 @@
     damage: 3.2,
     criticalRate: 0.0002
   },
+  // 美国海军 1 磅炮（37mm）炮弹，19 世纪末反雷击舰用速射炮
+  {
+    name: "US/GB/37/1890",
+    type: "shell",
+    diameter: 37,
+    damage: 3,
+    criticalRate: 0.0003
+  },
+  {
+    name: "US/GB/28/1928",
+    type: "shell",
+    diameter: 28,
+    damage: 2,
+    criticalRate: 0.0002
+  },
   // Phalanx Mk 244 ELC，钨合金穿甲弹芯约 0.15 kg；伤害按现有 20 mm 尺度随弹芯质量上调
   {
     name: "US/GB/20/2008",
     type: "shell",
     diameter: 20,
     damage: 1.8,
+    criticalRate: 0.0001
+  },
+  {
+    name: "US/GB/20/1940",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
     criticalRate: 0.0001
   },
   {
@@ -200,160 +446,89 @@
     damage: 0.1,
     criticalRate: 0
   },
+  // --------- 鱼雷 ----------
+  // 美国海军 22.4 英寸（569mm）Mk 13 航空鱼雷（1938 年服役；游戏按 570mm 取整）
   {
-    name: "JP/GB/510/1945",
-    type: "shell",
-    diameter: 510,
-    damage: 6600,
+    name: "US/TB/570/1938/Mk13",
+    type: "torpedo",
+    diameter: 570,
+    damage: 4800,
+    criticalRate: 0.075
+  },
+  // 美国海军 21 英寸 Mk 15 鱼雷（1935 年服役，驱逐舰/巡洋舰用；1931 年的 Mk 14 是潜艇鱼雷）
+  {
+    name: "US/TB/533/1935/Mk15",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4300,
+    criticalRate: 0.05
+  },
+  // 美国海军 21 英寸 Mk 8 鱼雷（1911 年服役，一战至二战长期在役；PT 艇与老式驱逐舰用）
+  {
+    name: "US/TB/533/1911/Mk8",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4300,
+    criticalRate: 0.05
+  },
+  // 美国海军 12.75 英寸（324mm）Mk 44 反潜鱼雷（Mk 46 为 1966 年）
+  {
+    name: "US/TB/324/1957/Mk44",
+    type: "torpedo",
+    diameter: 324,
+    damage: 1400,
+    criticalRate: 0.02
+  },
+  // --------- 炸弹 ----------
+  // 炸弹
+  {
+    name: "US/BB/2000/907",
+    type: "bomb",
+    diameter: 610,
+    damage: 4000,
+    criticalRate: 0.1
+  },
+  {
+    name: "US/BB/1000/454",
+    type: "bomb",
+    diameter: 450,
+    damage: 1800,
     criticalRate: 0.05
   },
   {
-    name: "JP/GB/460/1942",
-    type: "shell",
-    diameter: 460,
-    damage: 4500,
-    criticalRate: 0.03
+    name: "US/BB/500/227",
+    type: "bomb",
+    diameter: 360,
+    damage: 800,
+    criticalRate: 0.02
   },
   {
-    name: "JP/GB/410/1921",
-    type: "shell",
-    diameter: 410,
-    damage: 3200,
-    criticalRate: 0.025
+    name: "US/BB/250/114",
+    type: "bomb",
+    diameter: 250,
+    damage: 335,
+    criticalRate: 0.005
   },
+  // --------- 火箭弹 ----------
+  // 美国 5 英寸（127mm）HVAR 高速航空火箭弹（1944 年服役；无制导空对地）
+  // 美国海军 127mm 防空火箭弹
   {
-    name: "JP/GB/356/1935",
-    type: "shell",
-    diameter: 356,
-    damage: 2040,
-    criticalRate: 0.01
-  },
-  {
-    name: "JP/GB/203/1937",
-    type: "shell",
-    diameter: 203,
-    damage: 380,
-    criticalRate: 0.007
-  },
-  {
-    name: "JP/GB/200/1944",
-    type: "shell",
-    diameter: 200,
-    damage: 375,
-    criticalRate: 0.007
-  },
-  {
-    name: "JP/GB/155/1934",
-    type: "shell",
-    diameter: 155,
-    damage: 200,
-    criticalRate: 0.004
-  },
-  {
-    name: "JP/GB/152/1912",
-    type: "shell",
-    diameter: 152,
-    damage: 180,
-    criticalRate: 0.004
-  },
-  {
-    name: "JP/GB/140/1914",
-    type: "shell",
-    diameter: 140,
-    damage: 140,
-    criticalRate: 0.003
-  },
-  {
-    name: "JP/GB/127/1926",
-    type: "shell",
+    name: "US/RB/127/1944/HVAR",
+    type: "rocket",
     diameter: 127,
-    damage: 140,
-    criticalRate: 0.002
-  },
-  {
-    name: "JP/GB/127/1929",
-    type: "shell",
-    diameter: 127,
-    damage: 100,
-    criticalRate: 0.002
-  },
-  {
-    name: "JP/GB/120/1922",
-    type: "shell",
-    diameter: 120,
-    damage: 90,
-    criticalRate: 0.001
-  },
-  {
-    name: "JP/GB/100/1933",
-    type: "shell",
-    diameter: 100,
-    damage: 55,
-    criticalRate: 0.002
-  },
-  {
-    name: "JP/GB/76/1936",
-    type: "shell",
-    diameter: 76,
-    damage: 32,
-    criticalRate: 0.001
-  },
-  {
-    name: "JP/GB/40/1936",
-    type: "shell",
-    diameter: 40,
-    damage: 4,
+    damage: 22,
     criticalRate: 0.0005
   },
+  // 美国 2.75 英寸（70mm）Mighty Mouse 航空火箭弹（1948 年服役，近炸引信；本作作为战斗机对空火箭使用）
   {
-    name: "JP/GB/30/1945",
-    type: "shell",
-    diameter: 30,
-    damage: 2.4,
-    criticalRate: 0.0003
+    name: "US/RB/70/1948/MightyMouse",
+    type: "rocket",
+    diameter: 70,
+    damage: 6,
+    criticalRate: 0.0005
   },
-  {
-    name: "JP/GB/25/1936",
-    type: "shell",
-    diameter: 25,
-    damage: 1.8,
-    criticalRate: 0.0003
-  },
-  {
-    name: "JP/GB/20/1938",
-    type: "shell",
-    diameter: 20,
-    damage: 1.3,
-    criticalRate: 0.0002
-  },
-  {
-    name: "JP/GB/13/1935",
-    type: "shell",
-    diameter: 13,
-    damage: 0.2,
-    criticalRate: 0
-  },
-  {
-    name: "JP/GB/7.92/1930",
-    type: "shell",
-    diameter: 8,
-    damage: 0.12,
-    criticalRate: 0
-  },
-  {
-    name: "JP/GB/7.7/1922",
-    type: "shell",
-    diameter: 8,
-    damage: 0.11,
-    criticalRate: 0
-  },
-  {
-    name: "JP/GB/7.62/1925",
-    type: "shell",
-    diameter: 8,
-    damage: 0.1,
-    criticalRate: 0
-  },
+  // 德国
+  // --------- 炮弹 ----------
   {
     name: "GER/GB/380/1939",
     type: "shell",
@@ -440,6 +615,13 @@
     criticalRate: 0
   },
   {
+    name: "GER/GB/13/1940",
+    type: "shell",
+    diameter: 13,
+    damage: 0.2,
+    criticalRate: 0
+  },
+  {
     name: "GER/GB/7.92/1938",
     type: "shell",
     diameter: 8,
@@ -453,13 +635,543 @@
     damage: 0.12,
     criticalRate: 0
   },
+  // --------- 鱼雷 ----------
+  // 德国海军 53.3cm G7a（T1）蒸汽鱼雷（水面舰用；潜艇以电动 G7e 为主）
   {
-    name: "GER/GB/13/1940",
+    name: "GER/TB/533/1940/G7a",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4750,
+    criticalRate: 0.07
+  },
+  // 德国 45cm F5 航空鱼雷（1939 年服役；F5b 为 1941 年。德国无 45cm 潜艇鱼雷）
+  {
+    name: "GER/TB/450/1938/F5",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3000,
+    criticalRate: 0.035
+  },
+  // --------- 炸弹 ----------
+  {
+    name: "GER/BB/1800/1942",
+    type: "bomb",
+    diameter: 800,
+    damage: 6000,
+    criticalRate: 0.12
+  },
+  // Fritz X (PC 1400) 无线电制导炸弹；游戏暂以普通水平炸弹近似
+  {
+    name: "GER/BB/1400/1943",
+    type: "bomb",
+    diameter: 850,
+    damage: 5000,
+    criticalRate: 0.15
+  },
+  {
+    name: "GER/BB/1000/1941",
+    type: "bomb",
+    diameter: 660,
+    damage: 3600,
+    criticalRate: 0.08
+  },
+  {
+    name: "GER/BB/500/1940",
+    type: "bomb",
+    diameter: 470,
+    damage: 1800,
+    criticalRate: 0.04
+  },
+  {
+    name: "GER/BB/250/1938",
+    type: "bomb",
+    diameter: 380,
+    damage: 800,
+    criticalRate: 0.015
+  },
+  // 德国航空炸弹（伤害按装药量和现有炸弹尺度归一化）
+  {
+    name: "GER/BB/50/1937",
+    type: "bomb",
+    diameter: 200,
+    damage: 170,
+    criticalRate: 0.003
+  },
+  // --------- 火箭弹 ----------
+  // 德国空军 55mm R4M 对空火箭弹
+  {
+    name: "GER/RB/55/1945/R4M",
+    type: "rocket",
+    diameter: 55,
+    damage: 4,
+    criticalRate: 0.0008
+  },
+  // 法国
+  // --------- 炮弹 ----------
+  // 法国海军 380mm/45 Mle 1935 主炮弹
+  {
+    name: "FR/GB/380/1935",
+    type: "shell",
+    diameter: 380,
+    damage: 2600,
+    criticalRate: 0.02
+  },
+  // 法国海军 340mm/45 Mle 1912 主炮弹
+  {
+    name: "FR/GB/340/1912",
+    type: "shell",
+    diameter: 340,
+    damage: 1800,
+    criticalRate: 0.015
+  },
+  // 法国海军 330mm/50 Mle 1931 主炮弹
+  {
+    name: "FR/GB/330/1931",
+    type: "shell",
+    diameter: 330,
+    damage: 1900,
+    criticalRate: 0.015
+  },
+  // 法国海军 305mm/45 Mle 1906 主炮弹
+  {
+    name: "FR/GB/305/1906",
+    type: "shell",
+    diameter: 305,
+    damage: 1600,
+    criticalRate: 0.01
+  },
+  // 法国海军 203mm/50 Mle 1924 主炮弹
+  {
+    name: "FR/GB/203/1924",
+    type: "shell",
+    diameter: 203,
+    damage: 440,
+    criticalRate: 0.01
+  },
+  // 法国海军 155mm/50 Mle 1920 主炮弹
+  {
+    name: "FR/GB/155/1920",
+    type: "shell",
+    diameter: 155,
+    damage: 230,
+    criticalRate: 0.005
+  },
+  // 法国海军 152mm/55 Mle 1930 高平两用炮弹
+  {
+    name: "FR/GB/152/1930",
+    type: "shell",
+    diameter: 152,
+    damage: 220,
+    criticalRate: 0.005
+  },
+  // 法国海军 138.6mm/40 Mle 1929 主炮弹
+  {
+    name: "FR/GB/138.6/1929",
+    type: "shell",
+    diameter: 139,
+    damage: 145,
+    criticalRate: 0.003
+  },
+  // 法国海军 138.6mm/40 Mle 1923 主炮弹
+  {
+    name: "FR/GB/138.6/1923M",
+    type: "shell",
+    diameter: 139,
+    damage: 140,
+    criticalRate: 0.003
+  },
+  // 法国海军 138.6mm/55 Mle 1910 副炮弹
+  {
+    name: "FR/GB/138.6/1910",
+    type: "shell",
+    diameter: 139,
+    damage: 145,
+    criticalRate: 0.003
+  },
+  // 法国海军 130mm/45 Mle 1932 高平两用炮弹
+  {
+    name: "FR/GB/130/1932",
+    type: "shell",
+    diameter: 130,
+    damage: 125,
+    criticalRate: 0.002
+  },
+  // 法国海军 100mm/45 Mle 1930 高平两用炮弹
+  {
+    name: "FR/GB/100/1930",
+    type: "shell",
+    diameter: 100,
+    damage: 80,
+    criticalRate: 0.0015
+  },
+  // 法国海军 75mm/50 Mle 1922 高炮弹
+  {
+    name: "FR/GB/75/1922",
+    type: "shell",
+    diameter: 75,
+    damage: 35,
+    criticalRate: 0.001
+  },
+  // 法国海军 57mm/60 Mle 1951 高炮弹
+  {
+    name: "FR/GB/57/1951",
+    type: "shell",
+    diameter: 57,
+    damage: 10,
+    criticalRate: 0
+  },
+  // 法国海军 40mm/60 Bofors 高炮弹
+  {
+    name: "FR/GB/40/1930",
+    type: "shell",
+    diameter: 40,
+    damage: 4,
+    criticalRate: 0
+  },
+  // 法国海军 37mm/50 Mle 1925 高炮弹
+  {
+    name: "FR/GB/37/1925",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
+    criticalRate: 0.001
+  },
+  // 法国海军 25mm/60 Mle 1938 高炮弹
+  {
+    name: "FR/GB/25/1938",
+    type: "shell",
+    diameter: 25,
+    damage: 2,
+    criticalRate: 0.0005
+  },
+  // 法国海军 20mm/70 Oerlikon 机关炮弹
+  {
+    name: "FR/GB/20/1939",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
+  },
+  // 法国空军 20mm HS.404 机关炮弹
+  {
+    name: "FR/GB/20/1938",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
+  },
+  // 法国海军 13.2mm Hotchkiss 机枪弹
+  {
+    name: "FR/GB/13.2/1930",
     type: "shell",
     diameter: 13,
     damage: 0.2,
     criticalRate: 0
   },
+  // 法国空军 7.5mm 航空机枪弹
+  {
+    name: "FR/GB/7.5/1929",
+    type: "shell",
+    diameter: 8,
+    damage: 0.12,
+    criticalRate: 0
+  },
+  // --------- 鱼雷 ----------
+  // 法国海军 550mm Mle 1923D/23DT 鱼雷（23D 巡洋舰、23DT 驱逐舰；战斗部 310kg）
+  {
+    name: "FR/TB/550/1923/Mle1923D",
+    type: "torpedo",
+    diameter: 550,
+    damage: 4800,
+    criticalRate: 0.07
+  },
+  // 法国海军 400mm Mle 1926DA 航空鱼雷（机投，带尾整流环，投放高度约 80m）
+  {
+    name: "FR/TB/400/1926/Mle1926DA",
+    type: "torpedo",
+    diameter: 400,
+    damage: 3000,
+    criticalRate: 0.03
+  },
+  // --------- 炸弹 ----------
+  // Nord 1500 使用的 1000kg 航空炸弹
+  {
+    name: "FR/BB/1000/1949",
+    type: "bomb",
+    diameter: 660,
+    damage: 3600,
+    criticalRate: 0.08
+  },
+  // 法国海军 LN 401, V-156F 使用的 225kg 航空炸弹
+  {
+    name: "FR/BB/225/1938",
+    type: "bomb",
+    diameter: 350,
+    damage: 720,
+    criticalRate: 0.015
+  },
+  // 法国海军 Br.521 使用的 75kg 航空炸弹
+  {
+    name: "FR/BB/75/1935",
+    type: "bomb",
+    diameter: 220,
+    damage: 250,
+    criticalRate: 0.004
+  },
+  // 日本
+  // --------- 炮弹 ----------
+  {
+    name: "JP/GB/510/1945",
+    type: "shell",
+    diameter: 510,
+    damage: 6600,
+    criticalRate: 0.05
+  },
+  {
+    name: "JP/GB/460/1942",
+    type: "shell",
+    diameter: 460,
+    damage: 4500,
+    criticalRate: 0.03
+  },
+  {
+    name: "JP/GB/410/1921",
+    type: "shell",
+    diameter: 410,
+    damage: 3200,
+    criticalRate: 0.025
+  },
+  {
+    name: "JP/GB/356/1935",
+    type: "shell",
+    diameter: 356,
+    damage: 2040,
+    criticalRate: 0.01
+  },
+  {
+    name: "JP/GB/203/1937",
+    type: "shell",
+    diameter: 203,
+    damage: 380,
+    criticalRate: 0.007
+  },
+  {
+    name: "JP/GB/200/1944",
+    type: "shell",
+    diameter: 200,
+    damage: 375,
+    criticalRate: 0.007
+  },
+  {
+    name: "JP/GB/155/1934",
+    type: "shell",
+    diameter: 155,
+    damage: 200,
+    criticalRate: 0.004
+  },
+  {
+    name: "JP/GB/152/1912",
+    type: "shell",
+    diameter: 152,
+    damage: 180,
+    criticalRate: 0.004
+  },
+  {
+    name: "JP/GB/140/1914",
+    type: "shell",
+    diameter: 140,
+    damage: 140,
+    criticalRate: 0.003
+  },
+  {
+    name: "JP/GB/127/1929",
+    type: "shell",
+    diameter: 127,
+    damage: 100,
+    criticalRate: 0.002
+  },
+  {
+    name: "JP/GB/127/1926",
+    type: "shell",
+    diameter: 127,
+    damage: 140,
+    criticalRate: 0.002
+  },
+  {
+    name: "JP/GB/120/1922",
+    type: "shell",
+    diameter: 120,
+    damage: 90,
+    criticalRate: 0.001
+  },
+  {
+    name: "JP/GB/100/1933",
+    type: "shell",
+    diameter: 100,
+    damage: 55,
+    criticalRate: 0.002
+  },
+  {
+    name: "JP/GB/76/1936",
+    type: "shell",
+    diameter: 76,
+    damage: 32,
+    criticalRate: 0.001
+  },
+  {
+    name: "JP/GB/40/1936",
+    type: "shell",
+    diameter: 40,
+    damage: 4,
+    criticalRate: 0.0005
+  },
+  {
+    name: "JP/GB/30/1945",
+    type: "shell",
+    diameter: 30,
+    damage: 2.4,
+    criticalRate: 0.0003
+  },
+  {
+    name: "JP/GB/25/1936",
+    type: "shell",
+    diameter: 25,
+    damage: 1.8,
+    criticalRate: 0.0003
+  },
+  {
+    name: "JP/GB/20/1938",
+    type: "shell",
+    diameter: 20,
+    damage: 1.3,
+    criticalRate: 0.0002
+  },
+  {
+    name: "JP/GB/13/1935",
+    type: "shell",
+    diameter: 13,
+    damage: 0.2,
+    criticalRate: 0
+  },
+  {
+    name: "JP/GB/7.92/1930",
+    type: "shell",
+    diameter: 8,
+    damage: 0.12,
+    criticalRate: 0
+  },
+  {
+    name: "JP/GB/7.7/1922",
+    type: "shell",
+    diameter: 8,
+    damage: 0.11,
+    criticalRate: 0
+  },
+  {
+    name: "JP/GB/7.62/1925",
+    type: "shell",
+    diameter: 8,
+    damage: 0.1,
+    criticalRate: 0
+  },
+  // --------- 鱼雷 ----------
+  // 日本海军 回天一型人操鱼雷（基于九三式三型，战斗部 1550kg；1944 年 11 月首次实战）
+  {
+    name: "JP/TB/Kaiten/1944/Type1",
+    type: "torpedo",
+    diameter: 1350,
+    damage: 24233,
+    criticalRate: 0.5
+  },
+  // 日本海军 61cm 九三式一型酸素鱼雷（1933 设计／1935 服役，战斗部 490kg）
+  {
+    name: "JP/TB/610/1933/Type93Mod1",
+    type: "torpedo",
+    diameter: 610,
+    damage: 6250,
+    criticalRate: 0.1
+  },
+  // 日本海军 53cm 六年式鱼雷（1918 年服役，战斗部 203kg）
+  {
+    name: "JP/TB/533/1921/Type6",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4400,
+    criticalRate: 0.05
+  },
+  // 日本海军 45cm 二式鱼雷（1943 年服役，甲标的与鱼雷艇用；九五式是 53cm 潜艇鱼雷）
+  {
+    name: "JP/TB/450/1943/Type2",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3800,
+    criticalRate: 0.03
+  },
+  // 日本海军 45cm 九一式二型航空鱼雷（1940 设计／1941 服役，935kg，战斗部 205kg）
+  {
+    name: "JP/TB/450/1940/Type91Mod2",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3400,
+    criticalRate: 0.04
+  },
+  // 日本海军 45cm 四四式鱼雷（1911 年服役；1928 年时已属老旧，同期主力已换 53/61cm）
+  {
+    name: "JP/TB/450/1928/Type44",
+    type: "torpedo",
+    diameter: 450,
+    damage: 2700,
+    criticalRate: 0.02
+  },
+  // --------- 炸弹 ----------
+  {
+    name: "JP/BB/500",
+    type: "bomb",
+    diameter: 380,
+    damage: 2000,
+    criticalRate: 0.07
+  },
+  {
+    name: "JP/BB/250",
+    type: "bomb",
+    diameter: 280,
+    damage: 910,
+    criticalRate: 0.03
+  },
+  {
+    name: "JP/BB/60",
+    type: "bomb",
+    diameter: 70,
+    damage: 125,
+    criticalRate: 0.002
+  },
+  // --------- 火箭弹 ----------
+  // 日本海军 200mm 三式六番二七号火箭爆弹（约 69kg，对空）
+  {
+    name: "JP/RB/200/1944/Type3No27",
+    type: "rocket",
+    diameter: 200,
+    damage: 26,
+    criticalRate: 0.003
+  },
+  // 日本海军 12cm 四式十二糎焼霰火箭弹（1943 研制／1944 服役；原写「五式」非标准名）
+  {
+    name: "JP/RB/120/1944/Type4",
+    type: "rocket",
+    diameter: 120,
+    damage: 25,
+    criticalRate: 0.0005
+  },
+  // 日本海军 100mm 三式一番二八号爆弾一型（7.65kg，对空）
+  {
+    name: "JP/RB/100/1945/Type3No28",
+    type: "rocket",
+    diameter: 100,
+    damage: 8,
+    criticalRate: 0.001
+  },
+  // 英国
+  // --------- 炮弹 ----------
   {
     name: "UK/GB/406/1922",
     type: "shell",
@@ -579,252 +1291,7 @@
     damage: 0.08,
     criticalRate: 0
   },
-  {
-    name: "SU/GB/500/1945",
-    type: "shell",
-    diameter: 500,
-    damage: 6500,
-    criticalRate: 0.05
-  },
-  {
-    name: "SU/GB/406/1939",
-    type: "shell",
-    diameter: 406,
-    damage: 3750,
-    criticalRate: 0.03
-  },
-  // 苏联海军 250mm/55 安萨尔多大型巡洋舰方案主炮弹（1936 年纸面设计，无实弹）
-  {
-    name: "SU/GB/250/1936",
-    type: "shell",
-    diameter: 250,
-    damage: 860,
-    criticalRate: 0.01
-  },
-  // 苏联海军 220mm/65 主炮弹（SM-40 型 1953 年纸面设计，无实弹）
-  {
-    name: "SU/GB/220/1953",
-    type: "shell",
-    diameter: 220,
-    damage: 580,
-    criticalRate: 0.012
-  },
-  {
-    name: "SU/GB/180/1935",
-    type: "shell",
-    diameter: 180,
-    damage: 320,
-    criticalRate: 0.01
-  },
-  {
-    name: "SU/GB/152/1938",
-    type: "shell",
-    diameter: 152,
-    damage: 180,
-    criticalRate: 0.005
-  },
-  {
-    name: "SU/GB/130/1935",
-    type: "shell",
-    diameter: 130,
-    damage: 125,
-    criticalRate: 0.002
-  },
-  {
-    name: "SU/GB/100/1940",
-    type: "shell",
-    diameter: 100,
-    damage: 55,
-    criticalRate: 0.001
-  },
-  {
-    name: "SU/GB/57/1945",
-    type: "shell",
-    diameter: 57,
-    damage: 14,
-    criticalRate: 0.001
-  },
-  {
-    name: "SU/GB/45/1945",
-    type: "shell",
-    diameter: 45,
-    damage: 8,
-    criticalRate: 0.001
-  },
-  {
-    name: "SU/GB/37/1946",
-    type: "shell",
-    diameter: 37,
-    damage: 4,
-    criticalRate: 0.001
-  },
-  {
-    name: "SU/GB/25/1940",
-    type: "shell",
-    diameter: 25,
-    damage: 2,
-    criticalRate: 0.0005
-  },
-  // 苏联 7.62mm ShKAS 航空机枪弹（射速极高，弹头轻）
-  {
-    name: "SU/GB/7.62/1932",
-    type: "shell",
-    diameter: 8,
-    damage: 0.11,
-    criticalRate: 0
-  },
-  // 苏联 12.7mm 别列津 UB 航空机枪弹
-  {
-    name: "SU/GB/12.7/1941",
-    type: "shell",
-    diameter: 13,
-    damage: 0.25,
-    criticalRate: 0
-  },
-  // 苏联 20mm 施瓦克 ShVAK / B-20 航空机炮炮弹（两炮同弹种）
-  {
-    name: "SU/GB/20/1936",
-    type: "shell",
-    diameter: 20,
-    damage: 1.2,
-    criticalRate: 0.0001
-  },
-  // 苏联 23mm 沃罗希洛夫 VYa-23 航空机炮炮弹（Il-2 / Il-10 前向火力）
-  {
-    name: "SU/GB/23/1941",
-    type: "shell",
-    diameter: 23,
-    damage: 1.5,
-    criticalRate: 0.0002
-  },
-  // 法国海军 550mm Mle 1923D/23DT 鱼雷（23D 巡洋舰、23DT 驱逐舰；战斗部 310kg）
-  {
-    name: "FR/TB/550/1923/Mle1923D",
-    type: "torpedo",
-    diameter: 550,
-    damage: 4800,
-    criticalRate: 0.07
-  },
-  // 法国海军 400mm Mle 1926DA 航空鱼雷（机投，带尾整流环，投放高度约 80m）
-  {
-    name: "FR/TB/400/1926/Mle1926DA",
-    type: "torpedo",
-    diameter: 400,
-    damage: 3000,
-    criticalRate: 0.03
-  },
-  // 美国海军 22.4 英寸（569mm）Mk 13 航空鱼雷（1938 年服役；游戏按 570mm 取整）
-  {
-    name: "US/TB/570/1938/Mk13",
-    type: "torpedo",
-    diameter: 570,
-    damage: 4800,
-    criticalRate: 0.075
-  },
-  // 美国海军 21 英寸 Mk 15 鱼雷（1935 年服役，驱逐舰/巡洋舰用；1931 年的 Mk 14 是潜艇鱼雷）
-  {
-    name: "US/TB/533/1935/Mk15",
-    type: "torpedo",
-    diameter: 533,
-    damage: 4300,
-    criticalRate: 0.05
-  },
-  // 美国海军 21 英寸 Mk 8 鱼雷（1911 年服役，一战至二战长期在役；PT 艇与老式驱逐舰用）
-  {
-    name: "US/TB/533/1911/Mk8",
-    type: "torpedo",
-    diameter: 533,
-    damage: 4300,
-    criticalRate: 0.05
-  },
-  // 美国海军 12.75 英寸（324mm）Mk 44 反潜鱼雷（Mk 46 为 1966 年）
-  {
-    name: "US/TB/324/1957/Mk44",
-    type: "torpedo",
-    diameter: 324,
-    damage: 1400,
-    criticalRate: 0.02
-  },
-  // 日本海军 回天一型人操鱼雷（基于九三式三型，战斗部 1550kg；1944 年 11 月首次实战）
-  {
-    name: "JP/TB/Kaiten/1944/Type1",
-    type: "torpedo",
-    diameter: 1350,
-    damage: 24233,
-    criticalRate: 0.5
-  },
-  // 日本海军 61cm 九三式一型酸素鱼雷（1933 设计／1935 服役，战斗部 490kg）
-  {
-    name: "JP/TB/610/1933/Type93Mod1",
-    type: "torpedo",
-    diameter: 610,
-    damage: 6250,
-    criticalRate: 0.1
-  },
-  // 日本海军 53cm 六年式鱼雷（1918 年服役，战斗部 203kg）
-  {
-    name: "JP/TB/533/1921/Type6",
-    type: "torpedo",
-    diameter: 533,
-    damage: 4400,
-    criticalRate: 0.05
-  },
-  // 日本海军 45cm 四四式鱼雷（1911 年服役；1928 年时已属老旧，同期主力已换 53/61cm）
-  {
-    name: "JP/TB/450/1928/Type44",
-    type: "torpedo",
-    diameter: 450,
-    damage: 2700,
-    criticalRate: 0.02
-  },
-  // 日本海军 45cm 九一式二型航空鱼雷（1940 设计／1941 服役，935kg，战斗部 205kg）
-  {
-    name: "JP/TB/450/1940/Type91Mod2",
-    type: "torpedo",
-    diameter: 450,
-    damage: 3400,
-    criticalRate: 0.04
-  },
-  // 日本海军 45cm 二式鱼雷（1943 年服役，甲标的与鱼雷艇用；九五式是 53cm 潜艇鱼雷）
-  {
-    name: "JP/TB/450/1943/Type2",
-    type: "torpedo",
-    diameter: 450,
-    damage: 3800,
-    criticalRate: 0.03
-  },
-  // 德国海军 53.3cm G7a（T1）蒸汽鱼雷（水面舰用；潜艇以电动 G7e 为主）
-  {
-    name: "GER/TB/533/1940/G7a",
-    type: "torpedo",
-    diameter: 533,
-    damage: 4750,
-    criticalRate: 0.07
-  },
-  // 德国 45cm F5 航空鱼雷（1939 年服役；F5b 为 1941 年。德国无 45cm 潜艇鱼雷）
-  {
-    name: "GER/TB/450/1938/F5",
-    type: "torpedo",
-    diameter: 450,
-    damage: 3000,
-    criticalRate: 0.035
-  },
-  // 英国海军 18 英寸（45cm）Mk XII 航空鱼雷（设计 1935／服役 1937）
-  {
-    name: "UK/TB/457/1935/MkXII",
-    type: "torpedo",
-    diameter: 457,
-    damage: 3000,
-    criticalRate: 0.03
-  },
-  // 英国海军 18 英寸（45cm）Mk XV 航空鱼雷（设计 1942／服役 1943，战斗部 247kg Torpex）
-  {
-    name: "UK/TB/457/1942/MkXV",
-    type: "torpedo",
-    diameter: 457,
-    damage: 4050,
-    criticalRate: 0.06
-  },
+  // --------- 鱼雷 ----------
   // 英国海军 24.5 英寸（622mm）Mk I 鱼雷（纳尔逊级专用，氧气富化空气动力，战斗部 337kg）
   {
     name: "UK/TB/622/1925/MkI",
@@ -857,496 +1324,47 @@
     damage: 4000,
     criticalRate: 0.04
   },
-  // 苏联 533mm 53-27 鱼雷（1927 年服役；53-36 设计年为 1932，53-38 服役 1938）
+  // 英国海军 18 英寸（45cm）Mk XV 航空鱼雷（设计 1942／服役 1943，战斗部 247kg Torpex）
   {
-    name: "SU/TB/533/1932/53-27",
+    name: "UK/TB/457/1942/MkXV",
     type: "torpedo",
-    diameter: 533,
-    damage: 4800,
-    criticalRate: 0.08
+    diameter: 457,
+    damage: 4050,
+    criticalRate: 0.06
   },
-  // 苏联 45-36 型 450mm 航空鱼雷（АН 低空型 1939 年服役；基型 45-36Н 为 1936 年舰/潜用）
+  // 英国海军 18 英寸（45cm）Mk XII 航空鱼雷（设计 1935／服役 1937）
   {
-    name: "SU/TB/450/1939/45-36AN",
+    name: "UK/TB/457/1935/MkXII",
     type: "torpedo",
-    diameter: 450,
-    damage: 3400,
-    criticalRate: 0.04
-  },
-  // 炸弹
-  {
-    name: "US/BB/2000/907",
-    type: "bomb",
-    diameter: 610,
-    damage: 4000,
-    criticalRate: 0.1
-  },
-  {
-    name: "US/BB/1000/454",
-    type: "bomb",
-    diameter: 450,
-    damage: 1800,
-    criticalRate: 0.05
-  },
-  {
-    name: "US/BB/500/227",
-    type: "bomb",
-    diameter: 360,
-    damage: 800,
-    criticalRate: 0.02
-  },
-  {
-    name: "US/BB/250/114",
-    type: "bomb",
-    diameter: 250,
-    damage: 335,
-    criticalRate: 0.005
-  },
-  {
-    name: "JP/BB/500",
-    type: "bomb",
-    diameter: 380,
-    damage: 2000,
-    criticalRate: 0.07
-  },
-  {
-    name: "JP/BB/250",
-    type: "bomb",
-    diameter: 280,
-    damage: 910,
-    criticalRate: 0.03
-  },
-  {
-    name: "JP/BB/60",
-    type: "bomb",
-    diameter: 70,
-    damage: 125,
-    criticalRate: 0.002
-  },
-  // 德国航空炸弹（伤害按装药量和现有炸弹尺度归一化）
-  {
-    name: "GER/BB/50/1937",
-    type: "bomb",
-    diameter: 200,
-    damage: 170,
-    criticalRate: 0.003
-  },
-  {
-    name: "GER/BB/250/1938",
-    type: "bomb",
-    diameter: 380,
-    damage: 800,
-    criticalRate: 0.015
-  },
-  {
-    name: "GER/BB/500/1940",
-    type: "bomb",
-    diameter: 470,
-    damage: 1800,
-    criticalRate: 0.04
-  },
-  {
-    name: "GER/BB/1000/1941",
-    type: "bomb",
-    diameter: 660,
-    damage: 3600,
-    criticalRate: 0.08
-  },
-  // Fritz X (PC 1400) 无线电制导炸弹；游戏暂以普通水平炸弹近似
-  {
-    name: "GER/BB/1400/1943",
-    type: "bomb",
-    diameter: 850,
-    damage: 5000,
-    criticalRate: 0.15
-  },
-  {
-    name: "GER/BB/1800/1942",
-    type: "bomb",
-    diameter: 800,
-    damage: 6000,
-    criticalRate: 0.12
-  },
-  // 法国海军 LN 401, V-156F 使用的 225kg 航空炸弹
-  {
-    name: "FR/BB/225/1938",
-    type: "bomb",
-    diameter: 350,
-    damage: 720,
-    criticalRate: 0.015
-  },
-  // 法国海军 Br.521 使用的 75kg 航空炸弹
-  {
-    name: "FR/BB/75/1935",
-    type: "bomb",
-    diameter: 220,
-    damage: 250,
-    criticalRate: 0.004
-  },
-  // Nord 1500 使用的 1000kg 航空炸弹
-  {
-    name: "FR/BB/1000/1949",
-    type: "bomb",
-    diameter: 660,
-    damage: 3600,
-    criticalRate: 0.08
-  },
-  // 苏联航空炸弹 FAB 系列（伤害按装药量与现有美德炸弹尺度对齐）
-  {
-    name: "SU/BB/100/1938",
-    type: "bomb",
-    diameter: 250,
-    damage: 330,
-    criticalRate: 0.005
-  },
-  {
-    name: "SU/BB/250/1938",
-    type: "bomb",
-    diameter: 380,
-    damage: 780,
-    criticalRate: 0.015
-  },
-  {
-    name: "SU/BB/500/1938",
-    type: "bomb",
-    diameter: 470,
-    damage: 1600,
-    criticalRate: 0.04
-  },
-  {
-    name: "SU/BB/1000/1938",
-    type: "bomb",
-    diameter: 660,
-    damage: 3200,
-    criticalRate: 0.08
-  },
-  {
-    name: "SU/BB/2000/1938",
-    type: "bomb",
-    diameter: 800,
-    damage: 6000,
-    criticalRate: 0.15
-  },
-  {
-    name: "SU/BB/5000/1938",
-    type: "bomb",
-    diameter: 1100,
-    damage: 16000,
-    criticalRate: 0.3
-  },
-  // 镭射
-  // 50mm 镭射
-  {
-    name: "CN/LASER/50/2048",
-    type: "laser",
-    diameter: 50,
-    damage: 90,
-    criticalRate: 0
-  },
-  // 中国海军 100mm 舰炮弹
-  {
-    name: "CN/GB/100/1960",
-    type: "shell",
-    diameter: 100,
-    damage: 55,
-    criticalRate: 0.001
-  },
-  // 中国海军 37mm 舰炮弹
-  {
-    name: "CN/GB/37/1960",
-    type: "shell",
-    diameter: 37,
-    damage: 4,
-    criticalRate: 0.001
-  },
-  // 法国海军 305mm/45 Mle 1906 主炮弹
-  {
-    name: "FR/GB/305/1906",
-    type: "shell",
-    diameter: 305,
-    damage: 1600,
-    criticalRate: 0.01
-  },
-  // 法国海军 380mm/45 Mle 1935 主炮弹
-  {
-    name: "FR/GB/380/1935",
-    type: "shell",
-    diameter: 380,
-    damage: 2600,
-    criticalRate: 0.02
-  },
-  // 法国海军 330mm/50 Mle 1931 主炮弹
-  {
-    name: "FR/GB/330/1931",
-    type: "shell",
-    diameter: 330,
-    damage: 1900,
-    criticalRate: 0.015
-  },
-  // 法国海军 340mm/45 Mle 1912 主炮弹
-  {
-    name: "FR/GB/340/1912",
-    type: "shell",
-    diameter: 340,
-    damage: 1800,
-    criticalRate: 0.015
-  },
-  // 法国海军 203mm/50 Mle 1924 主炮弹
-  {
-    name: "FR/GB/203/1924",
-    type: "shell",
-    diameter: 203,
-    damage: 440,
-    criticalRate: 0.01
-  },
-  // 法国海军 155mm/50 Mle 1920 主炮弹
-  {
-    name: "FR/GB/155/1920",
-    type: "shell",
-    diameter: 155,
-    damage: 230,
-    criticalRate: 0.005
-  },
-  // 法国海军 138.6mm/55 Mle 1910 副炮弹
-  {
-    name: "FR/GB/138.6/1910",
-    type: "shell",
-    diameter: 139,
-    damage: 145,
-    criticalRate: 0.003
-  },
-  // 法国海军 138.6mm/40 Mle 1923 主炮弹
-  {
-    name: "FR/GB/138.6/1923M",
-    type: "shell",
-    diameter: 139,
-    damage: 140,
-    criticalRate: 0.003
-  },
-  // 法国海军 138.6mm/40 Mle 1929 主炮弹
-  {
-    name: "FR/GB/138.6/1929",
-    type: "shell",
-    diameter: 139,
-    damage: 145,
-    criticalRate: 0.003
-  },
-  // 法国海军 130mm/45 Mle 1932 高平两用炮弹
-  {
-    name: "FR/GB/130/1932",
-    type: "shell",
-    diameter: 130,
-    damage: 125,
-    criticalRate: 0.002
-  },
-  // 法国海军 152mm/55 Mle 1930 高平两用炮弹
-  {
-    name: "FR/GB/152/1930",
-    type: "shell",
-    diameter: 152,
-    damage: 220,
-    criticalRate: 0.005
-  },
-  // 法国海军 100mm/45 Mle 1930 高平两用炮弹
-  {
-    name: "FR/GB/100/1930",
-    type: "shell",
-    diameter: 100,
-    damage: 80,
-    criticalRate: 0.0015
-  },
-  // 法国海军 57mm/60 Mle 1951 高炮弹
-  {
-    name: "FR/GB/57/1951",
-    type: "shell",
-    diameter: 57,
-    damage: 10,
-    criticalRate: 0
-  },
-  // 法国海军 75mm/50 Mle 1922 高炮弹
-  {
-    name: "FR/GB/75/1922",
-    type: "shell",
-    diameter: 75,
-    damage: 35,
-    criticalRate: 0.001
-  },
-  // 法国海军 40mm/60 Bofors 高炮弹
-  {
-    name: "FR/GB/40/1930",
-    type: "shell",
-    diameter: 40,
-    damage: 4,
-    criticalRate: 0
-  },
-  // 法国海军 37mm/50 Mle 1925 高炮弹
-  {
-    name: "FR/GB/37/1925",
-    type: "shell",
-    diameter: 37,
-    damage: 4,
-    criticalRate: 0.001
-  },
-  // 法国海军 25mm/60 Mle 1938 高炮弹
-  {
-    name: "FR/GB/25/1938",
-    type: "shell",
-    diameter: 25,
-    damage: 2,
-    criticalRate: 0.0005
-  },
-  // 法国海军 20mm/70 Oerlikon 机关炮弹
-  {
-    name: "FR/GB/20/1939",
-    type: "shell",
-    diameter: 20,
-    damage: 1.2,
-    criticalRate: 0.0001
-  },
-  // 法国海军 13.2mm Hotchkiss 机枪弹
-  {
-    name: "FR/GB/13.2/1930",
-    type: "shell",
-    diameter: 13,
-    damage: 0.2,
-    criticalRate: 0
-  },
-  // 法国空军 7.5mm 航空机枪弹
-  {
-    name: "FR/GB/7.5/1929",
-    type: "shell",
-    diameter: 8,
-    damage: 0.12,
-    criticalRate: 0
-  },
-  // 法国空军 20mm HS.404 机关炮弹
-  {
-    name: "FR/GB/20/1938",
-    type: "shell",
-    diameter: 20,
-    damage: 1.2,
-    criticalRate: 0.0001
-  },
-  // 美国 5 英寸（127mm）HVAR 高速航空火箭弹（1944 年服役；无制导空对地）
-  // 美国海军 127mm 防空火箭弹
-  {
-    name: "US/RB/127/1944/HVAR",
-    type: "rocket",
-    diameter: 127,
-    damage: 22,
-    criticalRate: 0.0005
-  },
-  // 美国 2.75 英寸（70mm）Mighty Mouse 航空火箭弹（1948 年服役，近炸引信；本作作为战斗机对空火箭使用）
-  {
-    name: "US/RB/70/1948/MightyMouse",
-    type: "rocket",
-    diameter: 70,
-    damage: 6,
-    criticalRate: 0.0005
-  },
-  // 日本海军 12cm 四式十二糎焼霰火箭弹（1943 研制／1944 服役；原写「五式」非标准名）
-  {
-    name: "JP/RB/120/1944/Type4",
-    type: "rocket",
-    diameter: 120,
-    damage: 25,
-    criticalRate: 0.0005
-  },
-  // 日本海军 200mm 三式六番二七号火箭爆弹（约 69kg，对空）
-  {
-    name: "JP/RB/200/1944/Type3No27",
-    type: "rocket",
-    diameter: 200,
-    damage: 26,
-    criticalRate: 0.003
-  },
-  // 日本海军 100mm 三式一番二八号爆弾一型（7.65kg，对空）
-  {
-    name: "JP/RB/100/1945/Type3No28",
-    type: "rocket",
-    diameter: 100,
-    damage: 8,
-    criticalRate: 0.001
-  },
-  // 德国空军 55mm R4M 对空火箭弹
-  {
-    name: "GER/RB/55/1945/R4M",
-    type: "rocket",
-    diameter: 55,
-    damage: 4,
-    criticalRate: 0.0008
-  },
-  // 中国海军 81 式 122mm 舰载火箭弹（仿苏 BM-21「冰雹」M-21OF；仅 516 九江舰对陆火力支援舰使用）
-  {
-    name: "CN/RB/122/1960",
-    type: "rocket",
-    diameter: 122,
-    damage: 28,
-    criticalRate: 0.0005
-  },
-  // 中国海军 250mm 65 式反潜火箭弹
-  {
-    name: "CN/RB/250/1965/Type65",
-    type: "rocket",
-    diameter: 250,
-    damage: 95,
-    criticalRate: 0.001
-  },
-  // 苏联空军 RS-82 82mm 航空火箭弹（1937 定型；Il-2 / Su-2 对舰/对地）
-  {
-    name: "SU/RB/82/1937/RS82",
-    type: "rocket",
-    diameter: 82,
-    damage: 10,
-    criticalRate: 0.0003
-  },
-  // 苏联空军 RS-132 132mm 航空火箭弹（1938 定型；Il-2 / Il-10 对舰）
-  {
-    name: "SU/RB/132/1938/RS132",
-    type: "rocket",
-    diameter: 132,
-    damage: 22,
-    criticalRate: 0.0006
-  },
-  // 意大利皇家空军 7.7mm Breda-SAFAT 航空机枪弹
-  {
-    name: "IT/GB/7.7",
-    type: "shell",
-    diameter: 8,
-    damage: 0.1,
-    criticalRate: 0
-  },
-  // 意大利皇家空军 12.7mm Breda-SAFAT 航空机枪弹
-  {
-    name: "IT/GB/12.7",
-    type: "shell",
-    diameter: 13,
-    damage: 0.25,
-    criticalRate: 0
-  },
-  // 意大利 250kg 航空炸弹
-  {
-    name: "IT/BB/250",
-    type: "bomb",
-    diameter: 280,
-    damage: 910,
-    criticalRate: 0.03
-  },
-  // 意大利 500kg 航空炸弹
-  {
-    name: "IT/BB/500",
-    type: "bomb",
-    diameter: 380,
-    damage: 2000,
-    criticalRate: 0.07
-  },
-  // 意大利 450mm F200/450 x 5.46 航空鱼雷（Whitehead 阜姆；德国编号 F5W）
-  {
-    name: "IT/TB/450/F200-450",
-    type: "torpedo",
-    diameter: 450,
+    diameter: 457,
     damage: 3000,
     criticalRate: 0.03
+  },
+  // 意大利
+  // --------- 炮弹 ----------
+  // 意大利海军 381mm/50 安萨尔多 1934 年型主炮弹（维托里奥·维内托级）
+  {
+    name: "IT/GB/381",
+    type: "shell",
+    diameter: 381,
+    damage: 2750,
+    criticalRate: 0.02
+  },
+  // 意大利海军 320mm/44 1934 年型主炮弹（由 305mm 扩膛，改装后的加富尔级与卡约·杜伊利奥级）
+  {
+    name: "IT/GB/320",
+    type: "shell",
+    diameter: 320,
+    damage: 1800,
+    criticalRate: 0.015
+  },
+  // 意大利海军 280mm 主炮弹（安萨尔多 UP-102 方案，纸面设计）
+  {
+    name: "IT/GB/280",
+    type: "shell",
+    diameter: 280,
+    damage: 1300,
+    criticalRate: 0.01
   },
   // 意大利海军 253mm/55 安萨尔多 1936 年型主炮弹（安萨尔多大型巡洋舰方案，纸面设计）
   {
@@ -1380,38 +1398,6 @@
     damage: 130,
     criticalRate: 0.002
   },
-  // 意大利海军 90mm/50 安萨尔多 1939 年型高平两用炮弹
-  {
-    name: "IT/GB/90/1939",
-    type: "shell",
-    diameter: 90,
-    damage: 42,
-    criticalRate: 0.001
-  },
-  // 意大利海军 37mm/54 布雷达 1932/1938 年型高炮弹
-  {
-    name: "IT/GB/37/1932",
-    type: "shell",
-    diameter: 37,
-    damage: 4,
-    criticalRate: 0.001
-  },
-  // 意大利海军 20mm/65 布雷达 1932 年型机炮弹
-  {
-    name: "IT/GB/20/1932",
-    type: "shell",
-    diameter: 20,
-    damage: 1.2,
-    criticalRate: 0.0001
-  },
-  // 意大利 533.4mm Si 270/533.4 x 7.2 鱼雷（Silurificio Italiano；意各型服役年约 1935-39）
-  {
-    name: "IT/TB/533/1932/Si270",
-    type: "torpedo",
-    diameter: 533,
-    damage: 4800,
-    criticalRate: 0.08
-  },
   // 意大利海军 120mm/50 安萨尔多 1939 年型舰炮弹（1939 年驱逐舰方案与 UP-102 副炮共用）
   {
     name: "IT/GB/120/1939",
@@ -1428,29 +1414,13 @@
     damage: 53,
     criticalRate: 0.001
   },
-  // 意大利海军 280mm 主炮弹（安萨尔多 UP-102 方案，纸面设计）
+  // 意大利海军 90mm/50 安萨尔多 1939 年型高平两用炮弹
   {
-    name: "IT/GB/280",
+    name: "IT/GB/90/1939",
     type: "shell",
-    diameter: 280,
-    damage: 1300,
-    criticalRate: 0.01
-  },
-  // 意大利海军 381mm/50 安萨尔多 1934 年型主炮弹（维托里奥·维内托级）
-  {
-    name: "IT/GB/381",
-    type: "shell",
-    diameter: 381,
-    damage: 2750,
-    criticalRate: 0.02
-  },
-  // 意大利海军 320mm/44 1934 年型主炮弹（由 305mm 扩膛，改装后的加富尔级与卡约·杜伊利奥级）
-  {
-    name: "IT/GB/320",
-    type: "shell",
-    diameter: 320,
-    damage: 1800,
-    criticalRate: 0.015
+    diameter: 90,
+    damage: 42,
+    criticalRate: 0.001
   },
   // 意大利海军 76mm/62 舰炮弹（加里波第防空巡洋舰方案）
   {
@@ -1475,5 +1445,71 @@
     diameter: 40,
     damage: 4,
     criticalRate: 0
-  }
+  },
+  // 意大利海军 37mm/54 布雷达 1932/1938 年型高炮弹
+  {
+    name: "IT/GB/37/1932",
+    type: "shell",
+    diameter: 37,
+    damage: 4,
+    criticalRate: 0.001
+  },
+  // 意大利海军 20mm/65 布雷达 1932 年型机炮弹
+  {
+    name: "IT/GB/20/1932",
+    type: "shell",
+    diameter: 20,
+    damage: 1.2,
+    criticalRate: 0.0001
+  },
+  // 意大利皇家空军 12.7mm Breda-SAFAT 航空机枪弹
+  {
+    name: "IT/GB/12.7",
+    type: "shell",
+    diameter: 13,
+    damage: 0.25,
+    criticalRate: 0
+  },
+  // 意大利皇家空军 7.7mm Breda-SAFAT 航空机枪弹
+  {
+    name: "IT/GB/7.7",
+    type: "shell",
+    diameter: 8,
+    damage: 0.1,
+    criticalRate: 0
+  },
+  // --------- 鱼雷 ----------
+  // 意大利 533.4mm Si 270/533.4 x 7.2 鱼雷（Silurificio Italiano；意各型服役年约 1935-39）
+  {
+    name: "IT/TB/533/1932/Si270",
+    type: "torpedo",
+    diameter: 533,
+    damage: 4800,
+    criticalRate: 0.08
+  },
+  // 意大利 450mm F200/450 x 5.46 航空鱼雷（Whitehead 阜姆；德国编号 F5W）
+  {
+    name: "IT/TB/450/F200-450",
+    type: "torpedo",
+    diameter: 450,
+    damage: 3000,
+    criticalRate: 0.03
+  },
+  // --------- 炸弹 ----------
+  // 意大利 500kg 航空炸弹
+  {
+    name: "IT/BB/500",
+    type: "bomb",
+    diameter: 380,
+    damage: 2000,
+    criticalRate: 0.07
+  },
+  // 意大利 250kg 航空炸弹
+  {
+    name: "IT/BB/250",
+    type: "bomb",
+    diameter: 280,
+    damage: 910,
+    criticalRate: 0.03
+  },
 ]
