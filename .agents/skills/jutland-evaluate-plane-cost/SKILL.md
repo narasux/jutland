@@ -1,17 +1,14 @@
 ---
 name: jutland-evaluate-plane-cost
-description: Evaluate and assign fundsCost and timeCost for Jutland aircraft based on combat power data. Use when adding new planes, rebalancing costs, or when plane costs need to be derived from combat power statistics.
+description: Evaluate and assign fundsCost and timeCost for Jutland aircraft from combat power data. Use when adding planes, deriving plane costs from combat power statistics, or rebalancing aircraft cost.
 ---
 
 # Jutland 飞机花费评估
 
 ## 核心规则
 
-- 在仓库根目录工作。先阅读 `AGENTS.md` 并执行 `git status --short`，保留所有无关用户改动。
-- 所有项目路径以仓库根目录为基准；脚本不得写死机器绝对路径，中间产物使用动态临时路径。
-- 花费评估必须基于实际战力数据（通过脚本提取），不做凭空估算。
-- 公式参数在本文件中集中维护；修改公式时必须同步更新脚本与本文档。
-- 不删除、不替换、不清理用户未要求处理的现有配置。
+- 花费评估必须基于脚本提取的实际战力数据，不做凭空估算。
+- 公式参数集中维护在本文件；修改公式时必须同步更新脚本与本文档。
 
 ## 目标文件
 
@@ -21,28 +18,19 @@ description: Evaluate and assign fundsCost and timeCost for Jutland aircraft bas
 
 ## 脚本
 
-- `scripts/evaluate_plane_costs.sh`：编排脚本，负责提取战力数据、套用花费公式、输出建议值。
+- `scripts/evaluate_plane_costs.sh`：编排脚本，提取战力数据、套用花费公式、输出建议值。
 - `export_plane_cost_data.go`：普通 Go 导出器，加载初始化后的飞机并输出结构化战力数据；不向业务包复制临时测试。
-- `scripts/plane_cost_calc.py`：备用配置估算器；当 Go 导出器因本机图形环境触发 Ebiten 初始化失败时使用。追加 `--apply` 可用备用估算器写回 `configs/planes.json5`。
+- `scripts/plane_cost_calc.py`：备用配置估算器，Go 导出器因本机图形环境触发 Ebiten 初始化失败时使用；追加 `--apply` 才写回 `configs/planes.json5`。
 
-### 使用方式
+流程：运行 `go run export_plane_cost_data.go` 加载初始化数据，解析导出 JSON 的 `name`、`type`、`nation`、`combatPower`、`tonnage`，套用下方公式后输出 TSV，列依次为 `name`、`type`、`nation`、`combatPower`、`tonnage`、`fundsCost`、`timeCost`。
 
 ```bash
 bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh
 ```
 
-脚本输出格式为 TSV（制表符分隔），列依次为：`name`、`type`、`nation`、`combatPower`、`tonnage`、`fundsCost`、`timeCost`。
-
-- 主路径的 Go 导出器依赖 Ebiten 图形环境：本机 `go run` 常在 `internal/ui` 的 `currentMouseLocation` 空指针处 panic（无图形会话时同样会让 `go test` 的 Ebiten 包 panic）。**失败一次就直接改用备用估算器**，不要去翻 Ebiten 源码找原因、不要反复重跑主路径。
-- 备用估算器只读取建议值、不回写：`python3 .agents/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5`（确认要写回时才加 `--apply`）。
-- 交付前与既有配置对表：备用估算器与仓库现值在多数机型上完全一致，若新机型建议值与同类既有机型（同 type、同年代、战力接近）明显冲突，按同类既有分层取值并在最终说明里记录差异。
-
-### 脚本内部流程
-
-1. 运行 `go run export_plane_cost_data.go`，加载游戏初始化数据
-2. 解析导出的 JSON，提取 `name`、`type`、`nation`、`combatPower`、`tonnage`
-3. 套用花费公式计算 `fundsCost` 与 `timeCost`
-4. 输出 TSV 结果表
+- 主路径依赖 Ebiten 图形环境：本机 `go run` 常在 `internal/ui` 的 `currentMouseLocation` 空指针处 panic（无图形会话时 `go test` 的 Ebiten 包同样 panic）。**失败一次就直接改用备用估算器**，不要翻 Ebiten 源码找原因，也不要反复重跑主路径。
+- 备用估算器默认只读建议值：`python3 .agents/skills/jutland-evaluate-plane-cost/scripts/plane_cost_calc.py configs/planes.json5`。
+- 交付前与既有配置对表：多数机型与仓库现值一致；新机型建议值若与同类既有机型（同 type、同年代、战力接近）明显冲突，按同类既有分层取值并在最终说明里记录差异。
 
 ## 花费公式
 
@@ -52,8 +40,6 @@ fundsCost = clamp(round(rawFunds), 3, 120)
 timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 50)
 ```
 
-### 参数说明
-
 | 参数 | 值 | 说明 |
 |---|---|---|
 | `typeMultiplier` (fighter) | 1.00 | 战斗机单位战力费用最低 |
@@ -61,60 +47,27 @@ timeCost  = clamp(round(fundsCost * 0.35 + 2), 3, 50)
 | `typeMultiplier` (attacker) | 1.20 | 攻击机同时挂机炮、火箭与小型炸弹，且装甲减伤高 |
 | `typeMultiplier` (level_bomber) | 1.15 | 水平轰炸机同样携带炸弹，费用与俯冲机相同 |
 | `typeMultiplier` (torpedo_bomber) | 1.30 | 鱼雷轰炸机挂载最重，费用最高 |
-| `scaleFactor` | 0.10 / 0.30 | 将战力值映射到资金区间；主路径 scaleFactor=0.10，Python 备用估算器 fallbackScaleFactor=0.30 |
-| `fundsCost` 范围 | 3–120 | 最便宜飞机不低于 $3；重型/大型轰炸机战力与载弹量高，允许显著超过 $30（如 B-17G ≈ $114），重型轰炸机就是贵 |
+| `scaleFactor` | 0.10 / 0.30 | 主路径 scaleFactor=0.10，Python 备用估算器 fallbackScaleFactor=0.30 |
+| `fundsCost` 范围 | 3–120 | 最便宜飞机不低于 $3；重型轰炸机战力与载弹量高，允许显著超过 $30（如 B-17G ≈ $114） |
 | `timeCost` 范围 | 3–50 | 建造时间随资金线性增长，钳制在 3–50 秒 |
 | `nation == special` | 手工 | 彩蛋飞机保留手工价格，`--apply` 不覆盖（与舰船惯例一致） |
 | 机枪战力口径 | 按枪管数 | 备用估算器用 `guns.json5` 的 `bulletCount` 统计机枪管数（双联 `US/12.7/2` 计 2），与游戏 `gunDPS` 口径一致；单装飞机不受影响 |
 
-### 比较基准
+## 比较基准与校准
 
-- 最便宜的作战舰船（小型鱼雷艇）约 $3–5 资金、3–8 秒建造时间
-- 最贵的舰船（战列舰）约 $575–1200 资金、60–130 秒建造时间
-- 飞机费用应处于舰船费用的最下端，反映单架飞机的低造价和快速补充；但重型战略轰炸机（如 B-17 家族）战力与载弹量远超普通战斗机，允许明显更高
+- 最便宜的作战舰船（小型鱼雷艇）约 $3–5 资金、3–8 秒；最贵的舰船（战列舰）约 $575–1200 资金、60–130 秒。飞机费用应处于舰船费用最下端；重型战略轰炸机（如 B-17 家族）战力与载弹量远超普通战斗机，允许明显更高，`fundsCost` 120 / `timeCost` 50 的上限已覆盖这类机型。
+- 首次运行脚本后检查 `combatPower` 列：最低战力飞机的 `rawFunds` 应约等于或略低于 3，最高战力的普通（非 special）飞机 `fundsCost` 应接近但不超过 120；若最低战力被钳制到远低于 3，或最高战力远低于 120（浪费了区间），调整 `scaleFactor` 后重跑。
+- 校准公式：`scaleFactor = targetMinFunds / (minCombatPower * typeMultiplier)`，其中 `targetMinFunds ≈ 3`。
+- 当前参数：scaleFactor 0.10（初始估算，首次运行后校准）；fallbackScaleFactor 0.30（仅用于 Python 配置估算器，其 `cpEstimate` 尺度低于 Go 图鉴战力）；fallbackFundsMin 3。
+- `nation == special` 的彩蛋飞机只显示评估价，不作为写回依据（保留手工价格）。
 
-## 校准 scaleFactor
+## 工作流程与验证
 
-首次运行脚本后，检查输出的 `combatPower` 列：
+评估所有现有飞机：运行 `bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh`，检查费用分层（同一型号系列费用连贯，如 A6M2 → A6M3 → A7M2 递增；鱼雷轰炸机 > 俯冲轰炸机 > 战斗机，同年代比较；所有飞机落在 `$3–120 / 3–50s` 区间内），据此更新 `configs/planes.json5` 中每架飞机的 `fundsCost` 与 `timeCost`，移除条目中的 `// TODO 确认资金`、`// TODO 确认时间` 注释。
 
-1. 找到 `combatPower` 最低的飞机，其 `rawFunds` 应约等于或略低于 3
-2. 找到 `combatPower` 最高的普通（非 special）飞机，其 `fundsCost` 应接近但不超过 120
-3. 若最低战力飞机的 `fundsCost` 远低于 3（被钳制），或最高战力飞机的 `fundsCost` 远低于 120（浪费了区间），则调整 `scaleFactor` 并重新运行
-4. `nation == special` 的彩蛋飞机只显示评估价，不作为写回依据（保留手工价格）
+添加或修改单架飞机：先完成武器、性能等全部配置，再运行脚本获取完整战力数据，从输出中提取该机建议费用填入 `planes.json5` 对应条目。
 
-校准公式：`scaleFactor = targetMinFunds / (minCombatPower * typeMultiplier)`，其中 `targetMinFunds ≈ 3`。
-
-### 当前校准状态
-
-- scaleFactor: 0.10（初始估算，首次运行后校准）
-- fallbackScaleFactor: 0.30（仅用于 Python 配置估算器；其 `cpEstimate` 尺度低于 Go 图鉴战力）
-- fallbackFundsMin: 3
-
-## 工作流程
-
-### 评估所有现有飞机
-
-1. 运行 `bash .agents/skills/jutland-evaluate-plane-cost/scripts/evaluate_plane_costs.sh`
-2. 检查输出表，确认费用分层合理：
-   - 同一型号系列的费用应连贯（如 A6M2 → A6M3 → A7M2 递增）
-   - 鱼雷轰炸机费用 > 俯冲轰炸机 > 战斗机（同年代比较）
-   - 无任何飞机超出 $3–30 / 3–10s 范围
-3. 根据脚本输出更新 `configs/planes.json5` 中每架飞机的 `fundsCost` 与 `timeCost`
-4. 移除 `planes.json5` 中各飞机条目中的 `// TODO 确认资金` 与 `// TODO 确认时间` 注释
-5. 运行 `make build` 验证配置解析正确
-
-### 添加或修改单架飞机时
-
-1. 先完成飞机的所有配置（武器、性能参数等）
-2. 运行脚本获取新的完整战力数据
-3. 从脚本输出中提取该飞机的建议费用
-4. 填写到 `planes.json5` 对应条目
-
-## 验证
-
-- `make build`：验证 JSON5 解析无误、字段映射正确
-- `go test ./pkg/mission/object/unit/`：验证 `GetPlaneCost` 函数行为
-- 手动检查：同机型系列费用连贯，类型间费用梯度合理，费用在钳制范围内
+验证：`make build` 检查 JSON5 解析与字段映射，`go test ./pkg/mission/object/unit/` 检查 `GetPlaneCost` 行为，并手动确认同机型系列费用连贯、类型间梯度合理、费用在钳制范围内。
 
 ## 备选方案
 
