@@ -1,4 +1,5 @@
 [
+  // 特殊 / 彩蛋与测试
   // 鸭雷山大
   {
     name: "YaLei",
@@ -20,17 +21,43 @@
     bulletSpeed: 45,
     fundsCost: 100
   },
-  // 美国海军 21 英寸（533mm）四联装甲板式可回转鱼雷发射管（1930 年代驱逐舰与轻巡；发射管 Mk 号无可及史料，仅知为 above-water quadruple mount）
+  // 苏联
+  // --------- 鱼雷 ----------
+  // 苏联海军 533mm 五联装鱼雷发射管（30-бис 型实装型号 ПТА-53-30БИС；同族方案期型号 2-Н，2+3 上下叠放）
   {
-    name: "US/533/4",
-    bulletName: "US/TB/533/1935/Mk15",
-    bulletCount: 4,
+    name: "SU/533/5/PTA53-30BIS",
+    bulletName: "SU/TB/533/1932/53-27",
+    bulletCount: 5,
     shotInterval: 1,
-    reloadTime: 75,
-    range: 12,
-    bulletSpeed: 45,
-    fundsCost: 55
+    reloadTime: 80,
+    range: 18,
+    bulletSpeed: 50,
+    fundsCost: 80
   },
+  // 苏联海军 533mm 三联装鱼雷发射管（1-Н；7 型驱逐舰首装，26/26-бис 型巡洋舰同系，部分资料记作 39-Ю）
+  {
+    name: "SU/533/3/1N",
+    bulletName: "SU/TB/533/1932/53-27",
+    bulletCount: 3,
+    shotInterval: 1,
+    reloadTime: 56,
+    range: 18,
+    bulletSpeed: 50,
+    fundsCost: 60
+  },
+  // 苏联海军 533mm 单装鱼雷发射管（潜艇艏/艉管；苏联潜艇管无统一型号，按艇级描述）
+  {
+    name: "SU/533/1",
+    bulletName: "SU/TB/533/1932/53-27",
+    bulletCount: 1,
+    shotInterval: 1,
+    reloadTime: 18,
+    range: 18,
+    bulletSpeed: 50,
+    fundsCost: 50
+  },
+  // 美国
+  // --------- 鱼雷 ----------
   // 美国海军 21 英寸（533mm）五联装甲板式鱼雷发射管（Mk 15，弗莱彻/萨姆纳/基林级标准；较早的五联装为 Mk 14）
   {
     name: "US/533/5/Mk15",
@@ -42,10 +69,21 @@
     bulletSpeed: 45,
     fundsCost: 60
   },
-  // 美国海军 21 英寸单管甲板式可回转鱼雷发射管（Mk 18；PT 艇等小型艇，配 Mk 8/Mk 13 鱼雷）
+  // 美国海军 21 英寸（533mm）四联装甲板式可回转鱼雷发射管（1930 年代驱逐舰与轻巡；发射管 Mk 号无可及史料，仅知为 above-water quadruple mount）
   {
-    name: "US/533/1/Mk18",
-    bulletName: "US/TB/533/1911/Mk8",
+    name: "US/533/4",
+    bulletName: "US/TB/533/1935/Mk15",
+    bulletCount: 4,
+    shotInterval: 1,
+    reloadTime: 75,
+    range: 12,
+    bulletSpeed: 45,
+    fundsCost: 55
+  },
+  // 美国海军 21 英寸单装水下/舷侧固定鱼雷发射管（老式战列舰与巡洋舰，1900-1920 年代；属 submerged tube 序列）
+  {
+    name: "US/533/1/Submerged",
+    bulletName: "US/TB/533/1935/Mk15",
     bulletCount: 1,
     shotInterval: 1,
     reloadTime: 25,
@@ -53,10 +91,10 @@
     bulletSpeed: 45,
     fundsCost: 30
   },
-  // 美国海军 21 英寸单装水下/舷侧固定鱼雷发射管（老式战列舰与巡洋舰，1900-1920 年代；属 submerged tube 序列）
+  // 美国海军 21 英寸单管甲板式可回转鱼雷发射管（Mk 18；PT 艇等小型艇，配 Mk 8/Mk 13 鱼雷）
   {
-    name: "US/533/1/Submerged",
-    bulletName: "US/TB/533/1935/Mk15",
+    name: "US/533/1/Mk18",
+    bulletName: "US/TB/533/1911/Mk8",
     bulletCount: 1,
     shotInterval: 1,
     reloadTime: 25,
@@ -75,6 +113,67 @@
     bulletSpeed: 50,
     fundsCost: 25
   },
+  // 德国
+  // --------- 鱼雷 ----------
+  // 德国海军 53.3cm 四联装鱼雷发射管（Torpedorohrsatz C/34，Z 级驱逐舰 2 座 8 门，发射 G7a；C/xx 为二手文献写法）
+  {
+    name: "GER/533/4/C34",
+    bulletName: "GER/TB/533/1940/G7a",
+    bulletCount: 4,
+    shotInterval: 1,
+    reloadTime: 70,
+    range: 15,
+    bulletSpeed: 50,
+    fundsCost: 65
+  },
+  // 德国海军 533mm 3联装 鱼雷
+  {
+    name: "GER/533/3",
+    bulletName: "GER/TB/533/1940/G7a",
+    bulletCount: 3,
+    shotInterval: 1,
+    reloadTime: 52,
+    range: 15,
+    bulletSpeed: 50,
+    fundsCost: 60
+  },
+  // 德国海军 53.3cm 单装鱼雷发射管（Torpedorohr C/35；S 艇艏部单管与 U 艇艏艉水下管）
+  {
+    name: "GER/533/1/C35",
+    bulletName: "GER/TB/533/1940/G7a",
+    bulletCount: 1,
+    shotInterval: 1,
+    reloadTime: 20,
+    range: 15,
+    bulletSpeed: 50,
+    fundsCost: 45
+  },
+  // 德国 45cm 单装水下鱼雷发射管【一战帝国海军 UB-I 级；二战德国 U 艇无 450mm 管】——本作挂在 1918 年的斯图加特号上，史实上柯尼斯堡级轻巡应为 50cm 管，此处按「保留条目、标注性质」处理。
+  {
+    name: "GER/450/1/WWI",
+    bulletName: "GER/TB/450/1938/F5",
+    bulletCount: 1,
+    shotInterval: 1,
+    reloadTime: 40,
+    range: 8,
+    bulletSpeed: 35,
+    fundsCost: 15
+  },
+  // 法国
+  // --------- 鱼雷 ----------
+  // 法国海军 550mm 三联装水面鱼雷发射装置（空想级 3×3 等；三联装置本身无 Mle 号，Mle 1929T 是双联型）
+  {
+    name: "FR/550/3",
+    bulletName: "FR/TB/550/1923/Mle1923D",
+    bulletCount: 3,
+    shotInterval: 1,
+    reloadTime: 54,
+    range: 14,
+    bulletSpeed: 54,
+    fundsCost: 55
+  },
+  // 日本
+  // --------- 鱼雷 ----------
   // 日本海军 回天（人操鱼雷）搭载发射装置——回天无专用发射管型号，正式名即「回天一型」；发射方式为甲板自走 或 由潜艇既有 53cm 鱼雷发射管射出。
   {
     name: "JP/Kaiten/4",
@@ -207,50 +306,8 @@
     bulletSpeed: 45,
     fundsCost: 15
   },
-  // 德国海军 53.3cm 四联装鱼雷发射管（Torpedorohrsatz C/34，Z 级驱逐舰 2 座 8 门，发射 G7a；C/xx 为二手文献写法）
-  {
-    name: "GER/533/4/C34",
-    bulletName: "GER/TB/533/1940/G7a",
-    bulletCount: 4,
-    shotInterval: 1,
-    reloadTime: 70,
-    range: 15,
-    bulletSpeed: 50,
-    fundsCost: 65
-  },
-  // 德国海军 533mm 3联装 鱼雷
-  {
-    name: "GER/533/3",
-    bulletName: "GER/TB/533/1940/G7a",
-    bulletCount: 3,
-    shotInterval: 1,
-    reloadTime: 52,
-    range: 15,
-    bulletSpeed: 50,
-    fundsCost: 60
-  },
-  // 德国海军 53.3cm 单装鱼雷发射管（Torpedorohr C/35；S 艇艏部单管与 U 艇艏艉水下管）
-  {
-    name: "GER/533/1/C35",
-    bulletName: "GER/TB/533/1940/G7a",
-    bulletCount: 1,
-    shotInterval: 1,
-    reloadTime: 20,
-    range: 15,
-    bulletSpeed: 50,
-    fundsCost: 45
-  },
-  // 德国 45cm 单装水下鱼雷发射管【一战帝国海军 UB-I 级；二战德国 U 艇无 450mm 管】——本作挂在 1918 年的斯图加特号上，史实上柯尼斯堡级轻巡应为 50cm 管，此处按「保留条目、标注性质」处理。
-  {
-    name: "GER/450/1/WWI",
-    bulletName: "GER/TB/450/1938/F5",
-    bulletCount: 1,
-    shotInterval: 1,
-    reloadTime: 40,
-    range: 8,
-    bulletSpeed: 35,
-    fundsCost: 15
-  },
+  // 英国
+  // --------- 鱼雷 ----------
   // 英国海军 622mm（24.5 英寸）单装固定鱼雷发射管（纳尔逊级左右舷各 1 具，发射 24.5 英寸 Mk I 鱼雷；发射管本身无 Mk 号）
   {
     name: "UK/622/1",
@@ -295,17 +352,6 @@
     bulletSpeed: 50,
     fundsCost: 60
   },
-  // 英国海军 21 英寸单装固定水下/舷侧鱼雷发射管（胡德、伊丽莎白女王级、虎级等主力舰；非甲板回转管）
-  {
-    name: "UK/533/1/Submerged",
-    bulletName: "UK/TB/533/1918/MkV",
-    bulletCount: 1,
-    shotInterval: 1,
-    reloadTime: 16,
-    range: 13,
-    bulletSpeed: 45,
-    fundsCost: 45
-  },
   // 英国海军 21 英寸单管甲板式鱼雷发射装置（MTB 等小型艇；皇家海军二战几乎不用可回转单管）
   {
     name: "UK/533/1/Deck",
@@ -328,50 +374,19 @@
     bulletSpeed: 45,
     fundsCost: 50
   },
-  // 法国海军 550mm 三联装水面鱼雷发射装置（空想级 3×3 等；三联装置本身无 Mle 号，Mle 1929T 是双联型）
+  // 英国海军 21 英寸单装固定水下/舷侧鱼雷发射管（胡德、伊丽莎白女王级、虎级等主力舰；非甲板回转管）
   {
-    name: "FR/550/3",
-    bulletName: "FR/TB/550/1923/Mle1923D",
-    bulletCount: 3,
-    shotInterval: 1,
-    reloadTime: 54,
-    range: 14,
-    bulletSpeed: 54,
-    fundsCost: 55
-  },
-  // 苏联海军 533mm 五联装鱼雷发射管（30-бис 型实装型号 ПТА-53-30БИС；同族方案期型号 2-Н，2+3 上下叠放）
-  {
-    name: "SU/533/5/PTA53-30BIS",
-    bulletName: "SU/TB/533/1932/53-27",
-    bulletCount: 5,
-    shotInterval: 1,
-    reloadTime: 80,
-    range: 18,
-    bulletSpeed: 50,
-    fundsCost: 80
-  },
-  // 苏联海军 533mm 三联装鱼雷发射管（1-Н；7 型驱逐舰首装，26/26-бис 型巡洋舰同系，部分资料记作 39-Ю）
-  {
-    name: "SU/533/3/1N",
-    bulletName: "SU/TB/533/1932/53-27",
-    bulletCount: 3,
-    shotInterval: 1,
-    reloadTime: 56,
-    range: 18,
-    bulletSpeed: 50,
-    fundsCost: 60
-  },
-  // 苏联海军 533mm 单装鱼雷发射管（潜艇艏/艉管；苏联潜艇管无统一型号，按艇级描述）
-  {
-    name: "SU/533/1",
-    bulletName: "SU/TB/533/1932/53-27",
+    name: "UK/533/1/Submerged",
+    bulletName: "UK/TB/533/1918/MkV",
     bulletCount: 1,
     shotInterval: 1,
-    reloadTime: 18,
-    range: 18,
-    bulletSpeed: 50,
-    fundsCost: 50
+    reloadTime: 16,
+    range: 13,
+    bulletSpeed: 45,
+    fundsCost: 45
   },
+  // 意大利
+  // --------- 鱼雷 ----------
   // 意大利海军 533mm 四联装鱼雷发射管【未证实方案，无史实对应】——意海军在役 533mm 发射装置只有双联与三联；1939-40 年新驱逐舰方案（Comandanti Medaglie d'Oro 级）在部分二手资料里被写成 2×4，无可靠佐证。
   {
     name: "IT/533/4/Paper",
@@ -415,5 +430,5 @@
     range: 10,
     bulletSpeed: 45,
     fundsCost: 15
-  }
+  },
 ]

@@ -1,4 +1,32 @@
 [
+  // 苏联
+  // --------- 火箭弹 ----------
+  // 苏联 132mm RS-132 对舰火箭挂载（Il-2、Il-10）
+  {
+    name: "SU/AIR/RB/132/4/RS132",
+    bulletName: "SU/RB/132/1938/RS132",
+    rocketCount: 4,
+    shotInterval: 0.22,
+    range: 8.5,
+    bulletSpread: 160,
+    bulletSpeed: 620,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  // 苏联 82mm RS-82 对舰火箭挂载（Il-2、Su-2）
+  {
+    name: "SU/AIR/RB/82/8/RS82",
+    bulletName: "SU/RB/82/1937/RS82",
+    rocketCount: 8,
+    shotInterval: 0.16,
+    range: 7,
+    bulletSpread: 150,
+    bulletSpeed: 650,
+    antiShip: true,
+    antiAircraft: false,
+  },
+  // 美国
+  // --------- 火箭弹 ----------
   // 美国 127mm（5 英寸）HVAR 对海火箭挂载（轰炸机/攻击机用）
   {
     name: "US/AIR/RB/127/4/HVAR",
@@ -11,25 +39,11 @@
     antiShip: true,
     antiAircraft: false,
   },
-  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（战斗机用；史实为 1948 年服役，本作作为对空手段保留）
+  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（P-38/P-47 等）
   {
-    name: "US/AIR/RB/70/4/AA/MightyMouse",
+    name: "US/AIR/RB/70/10/AA/MightyMouse",
     bulletName: "US/RB/70/1948/MightyMouse",
-    rocketCount: 4,
-    shotInterval: 0.18,
-    range: 8,
-    bulletSpread: 140,
-    bulletSpeed: 700,
-    antiShip: false,
-    antiAircraft: true,
-    proximityRadius: 0.22,
-    blastRadius: 0.35,
-  },
-  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（P-51/F6F 等）
-  {
-    name: "US/AIR/RB/70/6/AA/MightyMouse",
-    bulletName: "US/RB/70/1948/MightyMouse",
-    rocketCount: 6,
+    rocketCount: 10,
     shotInterval: 0.18,
     range: 8,
     bulletSpread: 140,
@@ -53,11 +67,11 @@
     proximityRadius: 0.22,
     blastRadius: 0.35,
   },
-  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（P-38/P-47 等）
+  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（P-51/F6F 等）
   {
-    name: "US/AIR/RB/70/10/AA/MightyMouse",
+    name: "US/AIR/RB/70/6/AA/MightyMouse",
     bulletName: "US/RB/70/1948/MightyMouse",
-    rocketCount: 10,
+    rocketCount: 6,
     shotInterval: 0.18,
     range: 8,
     bulletSpread: 140,
@@ -67,6 +81,38 @@
     proximityRadius: 0.22,
     blastRadius: 0.35,
   },
+  // 美国 70mm（2.75 英寸）Mighty Mouse 对空火箭挂载（战斗机用；史实为 1948 年服役，本作作为对空手段保留）
+  {
+    name: "US/AIR/RB/70/4/AA/MightyMouse",
+    bulletName: "US/RB/70/1948/MightyMouse",
+    rocketCount: 4,
+    shotInterval: 0.18,
+    range: 8,
+    bulletSpread: 140,
+    bulletSpeed: 700,
+    antiShip: false,
+    antiAircraft: true,
+    proximityRadius: 0.22,
+    blastRadius: 0.35,
+  },
+  // 德国
+  // --------- 火箭弹 ----------
+  // 德国 55mm R4M 对空火箭弹 24 发（Me 262 机翼挂架）
+  {
+    name: "GER/AIR/RB/55/24/AA/R4M",
+    bulletName: "GER/RB/55/1945/R4M",
+    rocketCount: 24,
+    shotInterval: 0.08,
+    range: 6,
+    bulletSpread: 210,
+    bulletSpeed: 525,
+    antiShip: false,
+    antiAircraft: true,
+    proximityRadius: 0.18,
+    blastRadius: 0.3,
+  },
+  // 日本
+  // --------- 火箭弹 ----------
   // 日本 200mm 三式六番二七号火箭爆弹 ×2（约 69kg，射出 135 个黄燐弾子）
   {
     name: "JP/AIR/RB/200/2/AA/Type3No27",
@@ -94,43 +140,5 @@
     antiAircraft: true,
     proximityRadius: 0.16,
     blastRadius: 0.25,
-  },
-  // 德国 55mm R4M 对空火箭弹 24 发（Me 262 机翼挂架）
-  {
-    name: "GER/AIR/RB/55/24/AA/R4M",
-    bulletName: "GER/RB/55/1945/R4M",
-    rocketCount: 24,
-    shotInterval: 0.08,
-    range: 6,
-    bulletSpread: 210,
-    bulletSpeed: 525,
-    antiShip: false,
-    antiAircraft: true,
-    proximityRadius: 0.18,
-    blastRadius: 0.3,
-  },
-  // 苏联 82mm RS-82 对舰火箭挂载（Il-2、Su-2）
-  {
-    name: "SU/AIR/RB/82/8/RS82",
-    bulletName: "SU/RB/82/1937/RS82",
-    rocketCount: 8,
-    shotInterval: 0.16,
-    range: 7,
-    bulletSpread: 150,
-    bulletSpeed: 650,
-    antiShip: true,
-    antiAircraft: false,
-  },
-  // 苏联 132mm RS-132 对舰火箭挂载（Il-2、Il-10）
-  {
-    name: "SU/AIR/RB/132/4/RS132",
-    bulletName: "SU/RB/132/1938/RS132",
-    rocketCount: 4,
-    shotInterval: 0.22,
-    range: 8.5,
-    bulletSpread: 160,
-    bulletSpeed: 620,
-    antiShip: true,
-    antiAircraft: false,
   },
 ]

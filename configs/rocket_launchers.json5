@@ -1,4 +1,5 @@
 [
+  // 特殊 / 彩蛋与测试
   // 鸭子火箭
   {
     name: "DuckRocket",
@@ -17,6 +18,46 @@
     antiShip: false,
     antiAircraft: true
   },
+  // 中国
+  // --------- 火箭弹 ----------
+  // 中国海军 65 式 250mm 五管反潜火箭深弹发射装置（仿苏联 RBU-1200，1965 年定型）
+  {
+    name: "CN/250/5/Type65",
+    bulletName: "CN/RB/250/1965/Type65",
+    rocketCount: 5,
+    groupCount: 1,
+    shotInterval: 0.08,
+    groupInterval: 0.3,
+    reloadTime: 45,
+    range: 8,
+    bulletSpread: 120,
+    bulletSpeed: 520,
+    proximityRadius: 0.25,
+    blastRadius: 0.75,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 中国海军 81 式 122mm 舰载 50 管火箭炮（仿苏 BM-21「冰雹」M-21OF 弹；仅 516 九江舰对陆火力支援舰装备 5 座）
+  {
+    name: "CN/122/50",
+    bulletName: "CN/RB/122/1960",
+    rocketCount: 50,
+    groupCount: 5,
+    shotInterval: 0.04,
+    groupInterval: 0.3,
+    reloadTime: 80,
+    range: 14,
+    bulletSpread: 300,
+    bulletSpeed: 680,
+    proximityRadius: 0.2,
+    blastRadius: 0.5,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 日本
+  // --------- 火箭弹 ----------
   // 日本海军 12cm 28 联装喷进炮（正式名 十二糎二八連装噴進砲，1943 研制／1944 服役；弹为四式十二糎焼霰。游戏原写「五式」非标准名）
   {
     name: "JP/120/28/Type4/AA",
@@ -52,41 +93,5 @@
     fundsCost: 1,
     antiShip: false,
     antiAircraft: true
-  },
-  // 中国海军 81 式 122mm 舰载 50 管火箭炮（仿苏 BM-21「冰雹」M-21OF 弹；仅 516 九江舰对陆火力支援舰装备 5 座）
-  {
-    name: "CN/122/50",
-    bulletName: "CN/RB/122/1960",
-    rocketCount: 50,
-    groupCount: 5,
-    shotInterval: 0.04,
-    groupInterval: 0.3,
-    reloadTime: 80,
-    range: 14,
-    bulletSpread: 300,
-    bulletSpeed: 680,
-    proximityRadius: 0.2,
-    blastRadius: 0.5,
-    fundsCost: 3,
-    antiShip: true,
-    antiAircraft: false
-  },
-  // 中国海军 65 式 250mm 五管反潜火箭深弹发射装置（仿苏联 RBU-1200，1965 年定型）
-  {
-    name: "CN/250/5/Type65",
-    bulletName: "CN/RB/250/1965/Type65",
-    rocketCount: 5,
-    groupCount: 1,
-    shotInterval: 0.08,
-    groupInterval: 0.3,
-    reloadTime: 45,
-    range: 8,
-    bulletSpread: 120,
-    bulletSpeed: 520,
-    proximityRadius: 0.25,
-    blastRadius: 0.75,
-    fundsCost: 1,
-    antiShip: true,
-    antiAircraft: false
   },
 ]
