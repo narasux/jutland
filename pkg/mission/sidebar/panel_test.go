@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/narasux/jutland/pkg/mission/metadata"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
 	mapcfg "github.com/narasux/jutland/pkg/resources/mapcfg"
 	"github.com/narasux/jutland/pkg/utils/layout"
@@ -200,6 +201,7 @@ func TestCenterCameraAtMinimapCentersClickedPoint(t *testing.T) {
 		mapW    = 128.0
 		mapH    = 192.0
 	)
+	staleTarget := objPos.NewR(999, 999)
 	ms := &state.MissionState{
 		Core: state.MissionCoreState{
 			MissionStatus: state.MissionRunning,
@@ -207,7 +209,7 @@ func TestCenterCameraAtMinimapCentersClickedPoint(t *testing.T) {
 		},
 		View: state.MissionViewState{
 			Layout: layout.ScreenLayout{Width: int(screenW), Height: int(screenH)},
-			Camera: state.Camera{Width: 11, Height: 7},
+			Camera: state.Camera{Width: 11, Height: 7, Target: &staleTarget},
 		},
 	}
 	panel := newTestPanel(TabBattle, mapW/mapH)
@@ -226,5 +228,9 @@ func TestCenterCameraAtMinimapCentersClickedPoint(t *testing.T) {
 	}
 	if ms.View.Camera.Pos.RX < 0 {
 		t.Fatalf("camera RX = %v, want clamped >= 0", ms.View.Camera.Pos.RX)
+	}
+	// 手动点击小地图要放弃进行中的相机定位，否则两者会抢相机。
+	if ms.View.Camera.Target != nil {
+		t.Fatalf("camera target not cleared by minimap click: %+v", ms.View.Camera.Target)
 	}
 }

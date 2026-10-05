@@ -543,6 +543,8 @@ func (p *Panel) centerCameraAtMinimap(ms *state.MissionState, sx, sy int) {
 
 	nextPos := objPos.NewR(rx-float64(ms.View.Camera.Width)/2, ry-float64(ms.View.Camera.Height)/2)
 	nextPos.EnsureBorder(ms.CameraPosBorder())
+	// 小地图点击是玩家手动定位，放弃进行中的相机定位，避免两者抢相机。
+	ms.View.Camera.Target = nil
 	ms.View.Camera.Pos = nextPos
 }
 

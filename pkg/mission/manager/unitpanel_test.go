@@ -126,8 +126,17 @@ func TestExplicitTargetActionMovesCameraWithoutChangingFocus(t *testing.T) {
 	missionManager.handleUnitPanelActions([]unitpanel.Action{{
 		Kind: unitpanel.ActionCenterTarget, TargetUid: target.Uid,
 	}})
-	if missionState.View.Camera.Pos == initialCamera {
-		t.Fatal("explicit target action did not move camera")
+	// 定位是渐进的：这一帧只设目标，随后逐帧推进到居中。
+	if missionState.View.Camera.Target == nil {
+		t.Fatal("explicit target action did not set camera target")
+	}
+	if missionState.View.Camera.Pos != initialCamera {
+		t.Fatalf("explicit target action teleported camera to %+v", missionState.View.Camera.Pos)
+	}
+	for missionManager.advanceCameraMove() {
+	}
+	if want := centeredCameraPos(missionState, target.CurPos); missionState.View.Camera.Pos != want {
+		t.Fatalf("camera = %+v, want centered on target %+v", missionState.View.Camera.Pos, want)
 	}
 	if missionState.Interaction.FocusedShipUid != ally.Uid || len(missionState.Interaction.SelectedShips) != 1 {
 		t.Fatalf("explicit target action changed selection: %+v", missionState.Interaction)

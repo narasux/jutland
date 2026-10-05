@@ -149,9 +149,9 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 		m.updateCommandPhase()
 		switch status {
 		case state.MissionRunning:
-			if !m.state.UI.UIConsumesCursor {
-				m.updateCameraPosition()
-			}
+			// 是否响应鼠标边缘滚动由 getNextCameraPosInGameMode 内部判断；
+			// 这里必须每帧调用，否则鼠标停在 UI 面板上时进行中的相机定位会卡住。
+			m.updateCameraPosition()
 		case state.MissionInMap:
 			m.updateCameraPosition()
 		case state.MissionInBuilding:

@@ -9,6 +9,9 @@ type Camera struct {
 	Width         int
 	Height        int
 	BaseMoveSpeed float64
+	// Target 是程序化定位（编队键、面板定位等）的相机目标，为 nil 表示没有进行中的定位。
+	// 定位由 manager 逐帧平滑推进，玩家手动操作相机会取消它。
+	Target *objPos.MapPos
 }
 
 // Contains 判断坐标是否在视野内
