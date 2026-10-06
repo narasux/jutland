@@ -98,8 +98,12 @@ func TestEffectiveHP(t *testing.T) {
 	invulnerable := &objUnit.BattleShip{
 		TotalHP: 1, HorizontalDamageReduction: 1, VerticalDamageReduction: 1,
 	}
-	if got := shipEHP(invulnerable); got != 1000 || math.IsInf(got, 0) || math.IsNaN(got) {
-		t.Fatalf("shipEHP() for full reduction = %v, want finite 1000", got)
+	// 完全免疫单位不吃伤害，生存值取固定的最高档，而不是随 1 点 HP 缩水的伪 EHP。
+	if got := shipEHP(invulnerable); got != invulnerableEHP || math.IsInf(got, 0) || math.IsNaN(got) {
+		t.Fatalf("shipEHP() for full reduction = %v, want finite %d", got, invulnerableEHP)
+	}
+	if got := planeEHP(&objUnit.Plane{TotalHP: 90, DamageReduction: 1}); got != invulnerableEHP {
+		t.Fatalf("planeEHP() for full reduction = %v, want %d", got, invulnerableEHP)
 	}
 }
 
@@ -135,6 +139,7 @@ func TestAntiShipAndAntiAirIgnoreHullAndMobility(t *testing.T) {
 		t.Fatalf("anti-ship = %d, want sqrt(effective DPS) = %d", got, want)
 	}
 	// 舰体差异不能一起被抹平：生存和综合战力仍要区分两者。
+	// frail 是 100% 免伤，生存值取最高档；tough 只是高 HP，两者仍应不同。
 	if frailPower.Survival == toughPower.Survival || frailPower.Total == toughPower.Total {
 		t.Fatalf("hull differences must stay visible: %+v vs %+v", frailPower, toughPower)
 	}
