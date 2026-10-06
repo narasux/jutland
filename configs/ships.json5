@@ -2809,16 +2809,18 @@
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1946,
-    totalHP: 50000,
+    // 保留战列舰防护与舰艏主炮塔，满载排水量接近衣阿华级战列舰
+    totalHP: 57000,
     horizontalDamageReduction: 0.42,
     verticalDamageReduction: 0.2,
-    maxSpeed: 27,
+    // 与伊利诺伊同为衣阿华级舰体，主机功率相同，取同级设计航速
+    maxSpeed: 33,
     acceleration: 0.28,
     rotateSpeed: 0.75,
     length: 270,
     width: 33,
-    fundsCost: 310,
-    timeCost: 118,
+    fundsCost: 325,
+    timeCost: 124,
     weapon: {
       mainGuns: [
         // 舰艏 16 英寸三联装主炮
@@ -3193,9 +3195,11 @@
     type: "aircraft_carrier",
     typeAbbr: "CV",
     year: 1944,
+    // 拆除全部主炮与炮塔装甲，满载排水量轻于肯塔基的航空战列舰改装案
     totalHP: 50000,
     horizontalDamageReduction: 0.4,
     verticalDamageReduction: 0.18,
+    // 与肯塔基同为衣阿华级舰体，取同级设计航速
     maxSpeed: 33,
     acceleration: 0.3,
     rotateSpeed: 0.82,
