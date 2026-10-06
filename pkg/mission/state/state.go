@@ -159,6 +159,12 @@ func fogOfWarFromSettings() bool {
 	return config.G != nil && config.G.EnableFogOfWar
 }
 
+// minimapFromSettings 开局是否展开战术面板展示小地图。小地图默认打开，
+// 配置还没加载时同样按打开处理。
+func minimapFromSettings() bool {
+	return config.G == nil || config.G.EnableMinimap
+}
+
 // UsesFog 该玩家这一拍要不要跑迷雾。
 // 热路径先调用它：返回 false 时保持全图可见，不分配视野图，也不扫描单位。
 func (s *MissionState) UsesFog(player faction.Player) bool {
@@ -364,7 +370,7 @@ func NewMissionState(mission string, playerSide faction.Side) *MissionState {
 		},
 		UI: MissionUIState{
 			GameMarks:             map[objMark.ID]*objMark.Mark{},
-			SidebarExpanded:       false,
+			SidebarExpanded:       minimapFromSettings(), // 小地图默认打开：开局直接展开右上战术面板
 			UIConsumesCursor:      false,
 			ShowRallyLinePointUid: "",
 			RallySetFailedTick:    0,

@@ -6,6 +6,7 @@
 // EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场
 // aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用
 // EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾
+// EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图
 
 {
   "speedMultiplier": 1,
@@ -18,5 +19,6 @@
     "raid": true,
     "scout": true
   },
-  "enableFogOfWar": true
+  "enableFogOfWar": true,
+  "enableMinimap": false
 }

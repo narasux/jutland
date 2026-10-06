@@ -54,6 +54,8 @@ other = "Global Speed Multiplier"
 other = "Language"
 [SettingsFogOfWar]
 other = "Fog of War"
+[SettingsMinimap]
+other = "Minimap"
 [SettingsOn]
 other = "On"
 [SettingsOff]

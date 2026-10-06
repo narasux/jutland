@@ -40,3 +40,26 @@ func TestMissingAIStrategiesStayEnabled(t *testing.T) {
 		t.Fatalf("partial strategies = %+v", settings.AI)
 	}
 }
+
+// 小地图默认打开；老配置文件里没写 enableMinimap 时也要保持打开。
+func TestMinimapDefaultsToOpen(t *testing.T) {
+	if !NewDefaultGameSettings().EnableMinimap {
+		t.Fatal("minimap should default to open")
+	}
+
+	settings := *NewDefaultGameSettings()
+	if err := json5.Unmarshal([]byte(`{"language":"en"}`), &settings); err != nil {
+		t.Fatalf("decode defaults: %v", err)
+	}
+	if !settings.EnableMinimap {
+		t.Fatal("missing enableMinimap should stay open")
+	}
+
+	settings = *NewDefaultGameSettings()
+	if err := json5.Unmarshal([]byte(`{"enableMinimap":false}`), &settings); err != nil {
+		t.Fatalf("decode disable: %v", err)
+	}
+	if settings.EnableMinimap {
+		t.Fatal("explicit false should keep the minimap closed")
+	}
+}

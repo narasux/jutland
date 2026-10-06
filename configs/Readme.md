@@ -724,7 +724,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   // 范围: 0.50 ~ 2.00，默认值: 1.00
   "speedMultiplier": 1.00,
   // 游戏界面语言；当前正式启用 zh-Hans / en / ru / ja
-  "language": "zh-Hans"
+  "language": "zh-Hans",
+  // 小地图总开关；默认开启，开启时开局自动展开右上战术面板显示小地图
+  "enableMinimap": true
 }
 ```
 
