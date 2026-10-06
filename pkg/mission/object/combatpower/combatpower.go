@@ -12,8 +12,13 @@ import (
 const (
 	// 战力评估默认以 60 秒为观察窗口，既能覆盖飞机有限弹药，也能稳定折算持续火力。
 	evaluationWindow = 60.0
-	// 最小减伤下限防止 100% 减伤单位在公式里出现除零。
+	// 最小漏伤率下限：减伤接近 100% 时避免除零，并保证结果有限。
 	minimumDamageRate = 0.001
+	// invulnerableEHP 是完全免疫（水平与垂直减伤均为 100%）单位的有效生存值。
+	// 这类单位在 HurtBy 中承受的实际伤害恒为 0，HP 已无法表达其生存能力；
+	// 若继续按 HP / 最小漏伤率计算，1 HP 的水滴只能得到 1000，雷达生存轴反而低于普通坦克，
+	// 因此改用一个固定的最高档数值。
+	invulnerableEHP = 10_000_000
 	// 航母航空战力不按满值直接相加，保留 0.7 的折扣是为了避免航空编队把舰体价值完全淹没。
 	aviationFactor = 0.7
 	// 飞机图鉴统一按 10 架标准编队评估，减少单机小数在过早取整时的信息损失。
@@ -590,8 +595,12 @@ func shipEHP(ship *objUnit.BattleShip) float64 {
 	if ship == nil || ship.TotalHP <= 0 {
 		return 0
 	}
-	horizontal := ship.TotalHP / max(minimumDamageRate, 1-ship.HorizontalDamageReduction)
-	vertical := ship.TotalHP / max(minimumDamageRate, 1-ship.VerticalDamageReduction)
+	// 完全免疫单位不吃任何伤害，HP 不再决定其生存能力，统一取最高档有效生存。
+	if ship.HorizontalDamageReduction >= 1 && ship.VerticalDamageReduction >= 1 {
+		return invulnerableEHP
+	}
+	horizontal := ship.TotalHP / damageRate(ship.HorizontalDamageReduction)
+	vertical := ship.TotalHP / damageRate(ship.VerticalDamageReduction)
 	return 0.6*horizontal + 0.4*vertical
 }
 
@@ -600,7 +609,15 @@ func planeEHP(plane *objUnit.Plane) float64 {
 	if plane == nil || plane.TotalHP <= 0 {
 		return 0
 	}
-	return plane.TotalHP / (3 * max(minimumDamageRate, 1-plane.DamageReduction))
+	if plane.DamageReduction >= 1 {
+		return invulnerableEHP
+	}
+	return plane.TotalHP / (3 * damageRate(plane.DamageReduction))
+}
+
+// damageRate 返回减伤后仍然生效的伤害比例，并用 minimumDamageRate 保证恒大于 0。
+func damageRate(reduction float64) float64 {
+	return max(minimumDamageRate, 1-reduction)
 }
 
 func shipMobility(ship *objUnit.BattleShip) float64 {

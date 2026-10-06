@@ -135,11 +135,12 @@ func TestWaterDropAndSwordfishShareIdenticalFirepower(t *testing.T) {
 			waterdrop.CombatPower.Details.AntiShipDPS, swordfish.CombatPower.Details.AntiShipDPS,
 		)
 	}
-	// 生存与综合战力仍要体现舰体差距，避免把“同武器”修成“同战力”。
-	if waterdrop.CombatPower.Survival == swordfish.CombatPower.Survival ||
-		swordfish.CombatPower.Total <= waterdrop.CombatPower.Total {
+	// 生存与综合战力仍要体现舰体差距：水滴 100% 免伤，生存应高于只有高 HP 的剑鱼；
+	// 综合战力随有效生存一起上升，不能再被 1 点 HP 拉低。
+	if waterdrop.CombatPower.Survival <= swordfish.CombatPower.Survival ||
+		waterdrop.CombatPower.Total <= swordfish.CombatPower.Total {
 		t.Fatalf(
-			"hull differences must stay visible: waterdrop = %+v, swordfish = %+v",
+			"invulnerable hull must outrank pure high-HP hull: waterdrop = %+v, swordfish = %+v",
 			waterdrop.CombatPower, swordfish.CombatPower,
 		)
 	}
