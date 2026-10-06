@@ -929,19 +929,19 @@
     displayNameEn: "Darwin Harbour - 1942",
     displayNameRu: "Порт-Дарвин — 1942",
     displayNameJa: "ダーウィン港―1942年",
-    initFunds: 4600,
+    initFunds: 6000,
     initCameraPos: [
-      // P1
-      [28, 30],
+      // P1（含两艘约克城级航母与两艘防空巡洋舰后的舰队质心）
+      [29, 33],
       // P2
-      [86, 52]
+      [101, 46]
     ],
     mapName: "darwin",
     maxShipCount: 30,
-    description: "1942 年 2 月 19 日，日军出动 242 架战机对澳大利亚达尔文港发动大规模空袭，史称「澳大利亚的珍珠港」——这是二战期间对澳大利亚本土最猛烈的军事打击日军以赤城、加贺、飞龙、苍龙四艘航母为核心的第一航空战队自帕劳起航，意图摧毁盟军在西南太平洋最重要的海军支点盟军事先截获情报，紧急调派南达科他号战列舰率领巡洋舰队驰援达尔文，在港外紧急布设三道海上防线，以逸待劳迎击日军南下编队本关即为这一虚构历史转折点：盟军主力舰队抢先抵达达尔文港海域，与从东北方向逼近的日军机动部队展开正面决战你的使命——指挥盟军舰队守住达尔文港，歼灭来犯之敌。",
-    descriptionEn: "On 19 February 1942, Japanese carrier aircraft launched the first major air raid against Darwin, the key Allied naval base in northern Australia. In this alternate battle, Allied intelligence gives South Dakota and a cruiser force time to establish three defensive lines outside the harbour. Akagi, Kaga, Hiryū, and Sōryū now approach from the northeast with the First Air Fleet. Hold Darwin Harbour and destroy the attacking force.",
-    descriptionRu: "19 февраля 1942 года японская палубная авиация нанесла первый крупный удар по Дарвину — главной базе союзников на севере Австралии. В этом альтернативном сражении разведка успела предупредить союзников, и линкор «Саут Дакота» с крейсерами развернул три оборонительных рубежа у входа в гавань. С северо-востока приближается Первый воздушный флот с авианосцами «Акаги», «Кага», «Хирю» и «Сорю». Удержите порт Дарвин и уничтожьте атакующую группировку.",
-    descriptionJa: "1942年2月19日、日本海軍の艦載機部隊はオーストラリア北部の連合軍重要拠点ダーウィンを大規模に空襲した。本作戦では連合軍が事前に情報をつかみ、戦艦サウスダコタと巡洋艦部隊が港外に三重の防衛線を展開している。北東からは赤城、加賀、飛龍、蒼龍を中核とする第一航空艦隊が接近中だ。ダーウィン港を守り、敵攻撃部隊を撃滅せよ。",
+    description: "1942 年 2 月 19 日，日军出动 242 架战机对澳大利亚达尔文港发动大规模空袭，史称「澳大利亚的珍珠港」——这是二战期间对澳大利亚本土最猛烈的军事打击日军以赤城、加贺、飞龙、苍龙四艘航母为核心的第一航空战队自帕劳起航，意图摧毁盟军在西南太平洋最重要的海军支点盟军事先截获情报，紧急调派南达科他号战列舰、两艘约克城级航母与巡洋舰队驰援达尔文，在港外紧急布设三道海上防线，以逸待劳迎击日军南下编队本关即为这一虚构历史转折点：盟军主力舰队抢先抵达达尔文港海域，与从东北方向逼近的日军机动部队展开正面决战你的使命——指挥盟军舰队守住达尔文港，歼灭来犯之敌。",
+    descriptionEn: "On 19 February 1942, Japanese carrier aircraft launched the first major air raid against Darwin, the key Allied naval base in northern Australia. In this alternate battle, Allied intelligence gives South Dakota, two Yorktown-class carriers and a cruiser force time to establish three defensive lines outside the harbour. Akagi, Kaga, Hiryū, and Sōryū now approach from the northeast with the First Air Fleet. Hold Darwin Harbour and destroy the attacking force.",
+    descriptionRu: "19 февраля 1942 года японская палубная авиация нанесла первый крупный удар по Дарвину — главной базе союзников на севере Австралии. В этом альтернативном сражении разведка успела предупредить союзников, и линкор «Саут Дакота», два авианосца типа «Йорктаун» и крейсера развернули три оборонительных рубежа у входа в гавань. С северо-востока приближается Первый воздушный флот с авианосцами «Акаги», «Кага», «Хирю» и «Сорю». Удержите порт Дарвин и уничтожьте атакующую группировку.",
+    descriptionJa: "1942年2月19日、日本海軍の艦載機部隊はオーストラリア北部の連合軍重要拠点ダーウィンを大規模に空襲した。本作戦では連合軍が事前に情報をつかみ、戦艦サウスダコタ、ヨークタウン級空母二隻と巡洋艦部隊が港外に三重の防衛線を展開している。北東からは赤城、加賀、飛龍、蒼龍を中核とする第一航空艦隊が接近中だ。ダーウィン港を守り、敵攻撃部隊を撃滅せよ。",
     initReinforcePoints: [
       {
         pos: [1, 20],
@@ -972,30 +972,36 @@
           "liberty",
         ],
       },
+      // P2 增援点：第一航空舰队的后续增援。集结点必须留在航母作业区（东北海域）——
+      // AI 会把增援点的集结点当作整支舰队的驻泊点（fleet.go 的 currentAnchor 取
+      // points[0].RallyPos，按 UID 排序即随机取一个点），原配置的 [90,50]/[100,60]
+      // 会把日本舰队整体拉到盟军方向的前沿，增援舰也会直接开进交战区。
+      // 池 1 = 第一水雷戦隊补充（阿武隈 + 阳炎型/朝潮型驱逐舰）。
       {
-        pos: [125, 20],
+        pos: [125, 30],
         rotation: 270,
-        rallyPos: [90, 50],
+        rallyPos: [110, 46],
+        belongPlayer: "P2",
+        maxOncomingShip: 5,
+        providedShipNames: [
+          "yukikaze",
+          "asashio",
+          "abukuma",
+        ],
+      },
+      // 池 2 = 近藤部队后续增援（史实：2/21 抵达斯塔林湾的第三戦隊第二小隊 金刚/榛名 +
+      // 第四戦隊 爱宕/摩耶/高雄 + 6 驱逐舰）。金刚级与爱宕级只出现在增援池，不进入开场编队；
+      // 资源替代：榛名→kongo、摩耶/高雄→atago（同级代表舰）。
+      {
+        pos: [125, 86],
+        rotation: 270,
+        rallyPos: [112, 56],
         belongPlayer: "P2",
         maxOncomingShip: 5,
         providedShipNames: [
           "kongo",
-          "mogami",
+          "atago",
           "asashio",
-          "yugumo",
-        ],
-      },
-      {
-        pos: [125, 90],
-        rotation: 270,
-        rallyPos: [100, 60],
-        belongPlayer: "P2",
-        maxOncomingShip: 5,
-        providedShipNames: [
-          "mogami",
-          "asashio",
-          "yugumo",
-          "T_14"
         ],
       }
     ],
@@ -1132,93 +1138,132 @@
         rotation: 90,
         belongPlayer: "P1"
       },
+      // === 盟军增援舰队的航空兵（架空）===
+      // 史实：1942-02-19 达尔文附近没有盟军航母（TF 11 的列克星敦号正驶向拉包尔，
+      // TF 17 的约克城号在太平洋方向）。本关沿用「盟军提前截获情报、增援舰队先期抵达」
+      // 的既有架空设定，把两艘约克城级编入驰援舰队，使盟军有能力对抗第一航空舰队。
+      // 资源替代：两艘均为 yorktown（约克城级），第二艘代同型舰。
+      // 舰位在主力编队西南侧（背向东北方向的日军），航向 90°，由防空巡洋舰掩护。
       {
-        name: "liberty",
-        pos: [38, 70],
-        rotation: 270,
-        belongPlayer: "P2"
+        name: "yorktown",
+        pos: [28, 43],
+        rotation: 90,
+        belongPlayer: "P1"
       },
       {
-        name: "liberty",
-        pos: [40, 70],
-        rotation: 270,
-        belongPlayer: "P2"
+        name: "yorktown",
+        pos: [33, 46],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      // 亚特兰大级防空巡洋舰 ×2：史实上未参加达尔文防御，此处作为航母与舰队的防空
+      // 掩护加入增援舰队（同类替代，舰种保持轻巡洋舰）。
+      {
+        name: "atlanta",
+        pos: [25, 46],
+        rotation: 90,
+        belongPlayer: "P1"
       },
       {
-        name: "liberty",
-        pos: [42, 70],
-        rotation: 270,
-        belongPlayer: "P2"
+        name: "atlanta",
+        pos: [36, 43],
+        rotation: 90,
+        belongPlayer: "P1"
       },
-      {
-        name: "yugumo",
-        pos: [80, 42],
-        rotation: 180,
-        belongPlayer: "P2"
-      },
-      {
-        name: "yugumo",
-        pos: [77, 58],
-        rotation: 0,
-        belongPlayer: "P2"
-      },
-      {
-        name: "mogami",
-        pos: [76, 58],
-        rotation: 0,
-        belongPlayer: "P2"
-      },
+      // === 日军：第一航空舰队机动部队（1942-02-19 达尔文空袭）===
+      // 史实编成（戦史叢書26巻；英文维基 infobox 记为 4 航母 + 2 重巡 + 1 轻巡 + 7 驱逐舰）：
+      //   第一航空戦隊 赤城、加贺 / 第二航空戦隊 飞龙、苍龙
+      //   第八戦隊 利根、筑摩 / 第一水雷戦隊 阿武隈（旗舰）
+      //   第十七駆逐隊 浦风、矶风、谷风、浜风 / 第十八駆逐隊 霞、不知火（阳炎型）、霰（朝潮型）
+      // 未建模：3 艘潜艇，以及从安汶/肯达里起飞的 54 架陆基轰炸机（游戏无 G3M/G4M）。
+      // 资源替代：筑摩→tone（利根型同型）；浦风/矶风/谷风/浜风/不知火→yukikaze（阳炎型
+      // 代表舰）；霞/霰→asashio（朝潮型代表舰）。
+      // 原配置的最上×3、金刚×2、大井、自由轮×3 均不在当天达尔文海域，已移除：
+      // 最上/三隈 2/28–3/1 才在巽他海峡参战；金刚/榛名随近藤部队 2/21 抵达斯塔林湾
+      // （改列入增援池）；大井当时在新加坡方向。
+      // 舰位在达尔文东北海域，航向 270°（向西）：水雷戦隊在西侧面向盟军方向成幕，
+      // 航母留在后方；最近敌我舰距约 56 格。
       {
         name: "asashio",
-        pos: [103, 42],
-        rotation: 270,
-        belongPlayer: "P2"
-      },
-      {
-        name: "asashio",
-        pos: [101, 47],
+        pos: [92, 42],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
         name: "yukikaze",
-        pos: [108, 42],
+        pos: [92, 46],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "asashio",
+        pos: [92, 50],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
         name: "yukikaze",
-        pos: [104, 48],
+        pos: [96, 40],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
-        name: "mogami",
-        pos: [101, 45],
+        name: "yukikaze",
+        pos: [96, 44],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
-        name: "mogami",
-        pos: [102, 43],
+        name: "yukikaze",
+        pos: [96, 48],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
-        name: "kongo",
-        pos: [105, 46],
+        name: "yukikaze",
+        pos: [96, 52],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
-        name: "kongo",
-        pos: [107, 44],
+        name: "tone",
+        pos: [100, 38],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
-        name: "ooi",
-        pos: [107, 48],
+        name: "abukuma",
+        pos: [100, 46],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "tone",
+        pos: [100, 54],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "akagi",
+        pos: [110, 42],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "kaga",
+        pos: [110, 50],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "soryu",
+        pos: [116, 42],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "hiryu",
+        pos: [116, 50],
         rotation: 270,
         belongPlayer: "P2"
       }
