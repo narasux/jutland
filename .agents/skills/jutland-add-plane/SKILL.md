@@ -131,12 +131,17 @@ description: Add aircraft to the Jutland game from supplied drawings, reference 
    - 用户要求可实际出击或任务上下文指向某艘航母时，更新该舰 `aircraft.groups`。
    - 同目标类型的多个编组按数组顺序消耗；据此安排战斗机、侦察机和不同攻击机的顺序。
    - 同步更新对应 `references.json5` 舰载机名称与数量。不要改动无关舰船或任务。
+   - **必须同步补进全机型测试关卡的机场**：把新机型加进 `configs/missions.json5` 中 `MidwayAllTypesDuelTest`
+     的对应机场 `planeGroups`（左侧机场属 P2 轴心国 = 日本 / 德国 / 意大利，右侧机场属 P1 同盟国 =
+     美国 / 英国 / 法国 / 苏联），每型 `maxCount: 8`，并插到该机场内同国籍小节里。
+     `special`（无国籍的特殊/自定义机）不加入任何一侧。`MidwayFourCornersTest` 沿用同一套清单，建议一并补齐以保持一致。
 
 6. 验证。
    - 用 `git diff --check` 检查文本问题，用 `file` 或 `sips` 确认 PNG 为 RGBA 且尺寸合理。
    - 确认新条目落在正确的「国家 × 机种 × 机型系列」段内（对照根目录 `planes-order-plan.md` 的完整顺序），并且同系列改型相邻、组内代际逆序。
    - 对每张新增或更新的飞机 PNG，确认像素高度等于 `planes.json5` 中该飞机 `length * 30`；宽度只检查是否保持等比和视觉比例正常。
    - 搜索每个新飞机名，确认配置、资源和所有舰船引用一致且没有重复定义；搜索每个机炮、炸弹、鱼雷和火箭名称，确认上游配置存在。
+   - 确认新飞机已出现在 `MidwayAllTypesDuelTest` 对应阵营机场的 `planeGroups` 中（`special` 机型除外）。
    - 逐张使用 `view_image` 检查完整轮廓、朝向、透明边缘及发动机/螺旋桨等深色部件。
    - 对用户提供图片生成的素材，最终说明必须写清素材来源、执行的旋转角度、是否只做确定性处理，以及是否发生过换源或重绘；没有用户明确授权时，不得声称重绘/生成版本是最终结果。
    - 本机沙箱禁写 `~/Library/Caches/go-build`：`go build` / `go test` 先加 `GOCACHE=/tmp/jutland-gocache`；首次冷启动会全量重编译 Ebiten/CGO（几分钟），属正常耗时，不要误判为卡死。

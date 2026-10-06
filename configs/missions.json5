@@ -5286,5 +5286,1003 @@
         belongPlayer: "P1"
       },
     ],
+  },
+  {
+    name: "MidwayAllTypesDuelTest",
+    category: "test",
+    displayName: "海空全机型对决-中途岛",
+    displayNameEn: "Sea and Air All-Types Duel - Midway",
+    displayNameRu: "Дуэль всех типов в море и воздухе — Мидуэй",
+    displayNameJa: "海空全機種対決―ミッドウェー",
+    initFunds: 10000,
+    initCameraPos: [
+      // P1：同盟国航母队列质心（31 艘，x 均值 7580/31≈244.52 → 245，y 均值 128）
+      [245, 128],
+      // P2：轴心国航母队列质心（31 艘，x 均值 325/31≈10.48 → 10，y 均值 128）
+      [10, 128]
+    ],
+    mapName: "midway",
+    maxShipCount: 60,
+    description: "纯测试关卡，不复原历史。沿用第三个测试关卡的中途岛地图与两座机场坐标，但对调归属：左机场 [103, 156] 属 P2，驻全部轴心国（日本、德国、意大利）机型；右机场 [161, 166] 属 P1，驻全部同盟国（美国、英国、法国、苏联）机型，每型 8 架（含前一测试关漏收的水上侦察机/鱼雷机）。海面上双方只有航母：轴心国 31 艘（日本 16、德国 10、意大利 5）距左边缘 10 格，同盟国 31 艘（美国 11、英国 15、法国 5）距右边缘 10 格，两列交错 1 格排开，舰首一律朝地图中央。P1 为玩家方（右侧），初始镜头对准 [245, 128]。两列相距约 233 格（≈29.8 km），航程不足的机型要等双方接近后才能出击。两座机场收录各自阵营全部机型；无国籍的 2024 特殊测试机不收录，后续新增飞机需同步补进本关。无增援、无油井。",
+    descriptionEn: "A pure test scenario, not a historical reconstruction. It reuses the Midway map and both airfield positions of the third test scenario but swaps their ownership: the left airfield [103, 156] belongs to P2 and hosts every Axis (Japanese, German, Italian) type, while the right [161, 166] belongs to P1 and hosts every Allied (U.S., British, French, Soviet) type, eight of each, including the seaplane and torpedo types the previous test missed. The sea holds no other warships, only carriers: 31 Axis (16 Japanese, 10 German, 5 Italian) ten tiles from the left edge against 31 Allied (11 U.S., 15 British, 5 French) ten tiles from the right edge, both columns staggered one tile apart with every bow facing the map centre. P1 is the player side (right column), opening camera at [245, 128]. The columns start about 233 tiles (roughly 29.8 km) apart, so short-range types must wait for the fleets to close. Both airfields list every type of their faction; the factionless 2024 special test aircraft are excluded, and aircraft added later must also be added here. No reinforcements and no oil platforms.",
+    descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. Используются карта Мидуэй и координаты обоих аэродромов третьего испытательного сценария, но их принадлежность меняется: левый аэродром [103, 156] переходит к P2 и принимает все типы стран Оси (Япония, Германия, Италия), правый [161, 166] остаётся у P1 и принимает все типы союзников (США, Великобритания, Франция, СССР) по восемь машин каждого типа, включая пропущенные ранее гидросамолёты и торпедоносцы. Других кораблей нет: 31 авианосец Оси (16 японских, 10 немецких, 5 итальянских) в десяти клетках от левого края против 31 авианосца союзников (11 американских, 15 британских, 5 французских) в десяти клетках от правого; оба строя идут в шахматном порядке с шагом в одну клетку, носы развёрнуты к центру карты. P1 — сторона игрока (правый строй), начальная камера на [245, 128]. Строй отделяют около 233 клеток (примерно 29,8 км), поэтому самолёты с малой дальностью ждут сближения флотов. Оба аэродрома содержат все типы своей стороны; внефракционные специальные машины 2024 года не включены, а новые самолёты нужно добавлять на оба аэродрома. Подкреплений и нефтяных платформ нет.",
+    descriptionJa: "史実再現ではなく純粋な試験シナリオ。第三試験シナリオの中途島マップと両陸上飛行場の座標を流用し、所属だけを入れ替える。左飛行場[103, 156]はP2所属となり枢軸国（日本・ドイツ・イタリア）の全機種を、右飛行場[161, 166]はP1所属となり連合国（米国・英国・フランス・ソ連）の全機種を各8機ずつ収容する（第三試験で漏れていた水上偵察機・雷撃機を含む）。海上には他の軍艦を置かず、空母のみを出す。左端から10マスに枢軸国空母31隻（日本16・ドイツ10・イタリア5）、右端から10マスに連合国空母31隻（米国11・英国15・フランス5）を、1マス刻みの千鳥配置で並べ、艦首はすべてマップ中央へ向ける。P1がプレイヤー側（右列）で、初期カメラは[245, 128]。両列は約233マス（約29.8km）離れており、航続距離の短い機種は接近を待たねば敵に届かない。両飛行場は自陣営の全機種を収録する。国籍を持たない2024年の特殊試験機は収録せず、今後追加される航空機も本シナリオの飛行場へ追加すること。増援と油井はない。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initAirfields: [
+      {
+        // 左侧中途岛机场：沿用第三个测试关卡（MidwayFourCornersTest）的坐标与跑道参数，归属改为 P2。
+        // 收录全部日本、德国与意大利机型，每型 8 架；E16A/E15K1/F1M2/E13A/Fi167A/Ar196/FF33E
+        // 是第三个测试关卡漏收的 7 型水上侦察机/鱼雷机，本关补齐。
+        pos: [103, 156],
+        rotation: 270,
+        runwayLength: 11,
+        runwayWidth: 1.0,
+        belongPlayer: "P2",
+        takeoffPoints: 4,
+        takeOffTime: 0.5,
+        planeGroups: [
+          // --------- 日本 ----------
+          {
+            name: "A5M2",
+            maxCount: 8,
+          },
+          {
+            name: "A6M2",
+            maxCount: 8,
+          },
+          {
+            name: "A6M3",
+            maxCount: 8,
+          },
+          {
+            name: "A6M5",
+            maxCount: 8,
+          },
+          {
+            name: "J2M3",
+            maxCount: 8,
+          },
+          {
+            name: "N1K2",
+            maxCount: 8,
+          },
+          {
+            name: "J7W1",
+            maxCount: 8,
+          },
+          {
+            name: "J6K1",
+            maxCount: 8,
+          },
+          {
+            name: "J4M",
+            maxCount: 8,
+          },
+          {
+            name: "S1A1",
+            maxCount: 8,
+          },
+          {
+            name: "J8M1",
+            maxCount: 8,
+          },
+          {
+            name: "J5N1",
+            maxCount: 8,
+          },
+          {
+            name: "J9N1",
+            maxCount: 8,
+          },
+          {
+            name: "A7M2",
+            maxCount: 8,
+          },
+          {
+            name: "D3A1",
+            maxCount: 8,
+          },
+          {
+            name: "D4Y3",
+            maxCount: 8,
+          },
+          {
+            name: "B5N2",
+            maxCount: 8,
+          },
+          {
+            name: "B6N2",
+            maxCount: 8,
+          },
+          {
+            name: "B7A2",
+            maxCount: 8,
+          },
+          {
+            name: "C6N1",
+            maxCount: 8,
+          },
+          {
+            name: "E16A",
+            maxCount: 8,
+          },
+          {
+            name: "E15K1",
+            maxCount: 8,
+          },
+          {
+            name: "F1M2",
+            maxCount: 8,
+          },
+          {
+            name: "E13A",
+            maxCount: 8,
+          },
+
+          // --------- 德国 ----------
+          {
+            name: "Bf109B",
+            maxCount: 8,
+          },
+          {
+            name: "Bf109E",
+            maxCount: 8,
+          },
+          {
+            name: "Bf109F",
+            maxCount: 8,
+          },
+          {
+            name: "Bf109G",
+            maxCount: 8,
+          },
+          {
+            name: "Bf109K",
+            maxCount: 8,
+          },
+          {
+            name: "Bf110G",
+            maxCount: 8,
+          },
+          {
+            name: "Ho229",
+            maxCount: 8,
+          },
+          {
+            name: "Ta183",
+            maxCount: 8,
+          },
+          {
+            name: "Ba349",
+            maxCount: 8,
+          },
+          {
+            name: "He162A",
+            maxCount: 8,
+          },
+          {
+            name: "Me163B",
+            maxCount: 8,
+          },
+          {
+            name: "Me209V",
+            maxCount: 8,
+          },
+          {
+            name: "Me309V",
+            maxCount: 8,
+          },
+          {
+            name: "Do335V",
+            maxCount: 8,
+          },
+          {
+            name: "Fw190A",
+            maxCount: 8,
+          },
+          {
+            name: "Fw190D",
+            maxCount: 8,
+          },
+          {
+            name: "Ta152H",
+            maxCount: 8,
+          },
+          {
+            name: "Me262A",
+            maxCount: 8,
+          },
+          {
+            name: "Me262B",
+            maxCount: 8,
+          },
+          {
+            name: "Me410A",
+            maxCount: 8,
+          },
+          {
+            name: "He219A",
+            maxCount: 8,
+          },
+          {
+            name: "Hs123A",
+            maxCount: 8,
+          },
+          {
+            name: "Ju87B",
+            maxCount: 8,
+          },
+          {
+            name: "Hs129B",
+            maxCount: 8,
+          },
+          {
+            name: "Ar234B",
+            maxCount: 8,
+          },
+          {
+            name: "Do17E",
+            maxCount: 8,
+          },
+          {
+            name: "Ju88A",
+            maxCount: 8,
+          },
+          {
+            name: "He111P",
+            maxCount: 8,
+          },
+          {
+            name: "BC138C",
+            maxCount: 8,
+          },
+          {
+            name: "Do217K",
+            maxCount: 8,
+          },
+          {
+            name: "Fw200C",
+            maxCount: 8,
+          },
+          {
+            name: "He177A",
+            maxCount: 8,
+          },
+          {
+            name: "Fi167A",
+            maxCount: 8,
+          },
+          {
+            name: "Ar196",
+            maxCount: 8,
+          },
+          {
+            name: "FF33E",
+            maxCount: 8,
+          },
+
+          // --------- 意大利 ----------
+          {
+            name: "CR.42",
+            maxCount: 8,
+          },
+          {
+            name: "G.50",
+            maxCount: 8,
+          },
+          {
+            name: "C.200",
+            maxCount: 8,
+          },
+          {
+            name: "C.202",
+            maxCount: 8,
+          },
+          {
+            name: "Re.2005",
+            maxCount: 8,
+          },
+          {
+            name: "Re.2002",
+            maxCount: 8,
+          },
+          {
+            name: "BR.20",
+            maxCount: 8,
+          },
+          {
+            name: "Z.1007bis",
+            maxCount: 8,
+          },
+          {
+            name: "SM.79bis",
+            maxCount: 8,
+          },
+          {
+            name: "Ro.37bis",
+            maxCount: 8,
+          },
+          {
+            name: "Ro.43",
+            maxCount: 8,
+          },
+        ],
+      },
+      {
+        // 右侧中途岛机场：沿用第三个测试关卡（MidwayFourCornersTest）的坐标与跑道参数，归属为 P1。
+        // 收录美国、英国、法国与苏联全部机型，每型 8 架；SC-1/OS2U/SOC/Walrus
+        // 是第三个测试关卡漏收的 4 型水上侦察机，本关补齐。
+        pos: [161, 166],
+        rotation: 274,
+        runwayLength: 15,
+        runwayWidth: 0.8,
+        belongPlayer: "P1",
+        takeoffPoints: 4,
+        takeOffTime: 0.5,
+        planeGroups: [
+          // --------- 美国 ----------
+          {
+            name: "F2A-3",
+            maxCount: 8,
+          },
+          {
+            name: "F4F-3",
+            maxCount: 8,
+          },
+          {
+            name: "P-40N",
+            maxCount: 8,
+          },
+          {
+            name: "P-39N",
+            maxCount: 8,
+          },
+          {
+            name: "P-38J",
+            maxCount: 8,
+          },
+          {
+            name: "P-47D-30",
+            maxCount: 8,
+          },
+          {
+            name: "P-47D-2",
+            maxCount: 8,
+          },
+          {
+            name: "P-51B-5",
+            maxCount: 8,
+          },
+          {
+            name: "P-51D-20",
+            maxCount: 8,
+          },
+          {
+            name: "F4U-4",
+            maxCount: 8,
+          },
+          {
+            name: "F8F-2",
+            maxCount: 8,
+          },
+          {
+            name: "F6F-3",
+            maxCount: 8,
+          },
+          {
+            name: "F7F-3N",
+            maxCount: 8,
+          },
+          {
+            name: "P-70",
+            maxCount: 8,
+          },
+          {
+            name: "P-61B-15",
+            maxCount: 8,
+          },
+          {
+            name: "SBD-3",
+            maxCount: 8,
+          },
+          {
+            name: "SB2C-4",
+            maxCount: 8,
+          },
+          {
+            name: "TBD-1",
+            maxCount: 8,
+          },
+          {
+            name: "TBF-1",
+            maxCount: 8,
+          },
+          {
+            name: "A-20B",
+            maxCount: 8,
+          },
+          {
+            name: "B-17G",
+            maxCount: 8,
+          },
+          {
+            name: "B-24D",
+            maxCount: 8,
+          },
+          {
+            name: "B-25C",
+            maxCount: 8,
+          },
+          {
+            name: "A-26B",
+            maxCount: 8,
+          },
+          {
+            name: "B-26B",
+            maxCount: 8,
+          },
+          {
+            name: "B-29A",
+            maxCount: 8,
+          },
+          {
+            name: "C-47A",
+            maxCount: 8,
+          },
+          {
+            name: "SC-1",
+            maxCount: 8,
+          },
+          {
+            name: "OS2U",
+            maxCount: 8,
+          },
+          {
+            name: "SOC",
+            maxCount: 8,
+          },
+
+          // --------- 英国 ----------
+          {
+            name: "Fulmar",
+            maxCount: 8,
+          },
+          {
+            name: "SeaHurricane",
+            maxCount: 8,
+          },
+          {
+            name: "Seafire",
+            maxCount: 8,
+          },
+          {
+            name: "TBF-1-UK",
+            maxCount: 8,
+          },
+          {
+            name: "Swordfish",
+            maxCount: 8,
+          },
+          {
+            name: "Barracuda-II",
+            maxCount: 8,
+          },
+          {
+            name: "Mosquito",
+            maxCount: 8,
+          },
+          {
+            name: "SeaOtter",
+            maxCount: 8,
+          },
+          {
+            name: "Walrus",
+            maxCount: 8,
+          },
+
+          // --------- 法国 ----------
+          {
+            name: "Potez631",
+            maxCount: 8,
+          },
+          {
+            name: "LN401",
+            maxCount: 8,
+          },
+          {
+            name: "Late298",
+            maxCount: 8,
+          },
+          {
+            name: "Br810",
+            maxCount: 8,
+          },
+          {
+            name: "Loire130",
+            maxCount: 8,
+          },
+          {
+            name: "Br521",
+            maxCount: 8,
+          },
+          {
+            name: "V-156F",
+            maxCount: 8,
+          },
+          {
+            name: "Nord1500",
+            maxCount: 8,
+          },
+          {
+            name: "VB10",
+            maxCount: 8,
+          },
+
+          // --------- 苏联 ----------
+          {
+            name: "MiG-1",
+            maxCount: 8,
+          },
+          {
+            name: "MiG-3",
+            maxCount: 8,
+          },
+          {
+            name: "La-5",
+            maxCount: 8,
+          },
+          {
+            name: "La-7",
+            maxCount: 8,
+          },
+          {
+            name: "Yak-1",
+            maxCount: 8,
+          },
+          {
+            name: "Yak-3",
+            maxCount: 8,
+          },
+          {
+            name: "Yak-7",
+            maxCount: 8,
+          },
+          {
+            name: "Yak-9U",
+            maxCount: 8,
+          },
+          {
+            name: "Be-4",
+            maxCount: 8,
+          },
+          {
+            name: "MBR-2",
+            maxCount: 8,
+          },
+          {
+            name: "I-15",
+            maxCount: 8,
+          },
+          {
+            name: "I-16",
+            maxCount: 8,
+          },
+          {
+            name: "Il-2",
+            maxCount: 8,
+          },
+          {
+            name: "Il-10",
+            maxCount: 8,
+          },
+          {
+            name: "Su-2",
+            maxCount: 8,
+          },
+          {
+            name: "Pe-2",
+            maxCount: 8,
+          },
+          {
+            name: "Il-4",
+            maxCount: 8,
+          },
+          {
+            name: "Pe-8",
+            maxCount: 8,
+          },
+          {
+            name: "Yer-2",
+            maxCount: 8,
+          },
+        ],
+      },
+    ],
+    initShips: [
+      // 坐标按 256×256 midway.map 网格落位；0°=北、90°=东、180°=南、270°=西。
+      // 本关只有航母，没有任何其他战舰。两列航母分别距左/右地图边缘 10 格，舰首朝地图中央，
+      // 相邻两舰按 1 格交错排开：奇数序号比偶数序号向地图外方向偏移 1 格（左列 x 在 10/11、
+      // 右列 x 在 245/244 之间交替），纵向每舰递增 1 格，两列纵列都以 y=128 为中心。
+      // 全图无搁浅风险：midway.map 的陆地只占 x∈[94,173]、y∈[137,174]，两列航母全在水面上。
+
+      // === 轴心国航母队列（P2，距左边缘 10 格，舰首 90° 向东，队列质心 [10, 128]） ===
+      // 日本 16 艘：hakuryu(CV)、shinano(CV)、taiho(CV)、unryu(CV)、shokaku(CV)、hiryu(CV)、soryu(CV)、kaga(CV)、akagi(CV)、hiyo(CV)、chitose(CVL)、shoho(CVL)、ryujo(CVL)、hosho(CVL)、shinyo(CVE)、taiyo(CVE)；德国 10 艘：graf_zeppelin(CV)×5、stuttgart(AV)×5；意大利 5 艘：aquila(CV)×5（德、意航母为复制扩充），合计 31 艘与同盟国持平
+      {
+        name: "hakuryu",
+        pos: [10, 113],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "shinano",
+        pos: [11, 114],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "taiho",
+        pos: [10, 115],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "unryu",
+        pos: [11, 116],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "shokaku",
+        pos: [10, 117],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "hiryu",
+        pos: [11, 118],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "soryu",
+        pos: [10, 119],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "kaga",
+        pos: [11, 120],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "akagi",
+        pos: [10, 121],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "hiyo",
+        pos: [11, 122],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "chitose",
+        pos: [10, 123],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "shoho",
+        pos: [11, 124],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "ryujo",
+        pos: [10, 125],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "hosho",
+        pos: [11, 126],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "shinyo",
+        pos: [10, 127],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "taiyo",
+        pos: [11, 128],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "graf_zeppelin",
+        pos: [10, 129],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "stuttgart",
+        pos: [11, 130],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "aquila",
+        pos: [10, 131],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "graf_zeppelin",
+        pos: [11, 132],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "stuttgart",
+        pos: [10, 133],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "aquila",
+        pos: [11, 134],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "graf_zeppelin",
+        pos: [10, 135],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "stuttgart",
+        pos: [11, 136],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "aquila",
+        pos: [10, 137],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "graf_zeppelin",
+        pos: [11, 138],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "stuttgart",
+        pos: [10, 139],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "aquila",
+        pos: [11, 140],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "graf_zeppelin",
+        pos: [10, 141],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "stuttgart",
+        pos: [11, 142],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+      {
+        name: "aquila",
+        pos: [10, 143],
+        rotation: 90,
+        belongPlayer: "P2"
+      },
+
+      // === 同盟国航母队列（P1，距右边缘 10 格，舰首 270° 向西，队列质心 [245, 128]） ===
+      // 美国 11 艘：america(CV)、midway(CVB)、kentucky_bb66(CV)、illinois(CV)、essex(CV)、yorktown(CV)、saratoga(CV)、langley(CV)、princeton(CVL)、card(CVE)、wolverine(IX)；英国 15 艘：implacable(CV)、victorious(CV)、ark_royal(CV)、courageous(CV)、eagle(CV)、hermes(CV)、argus(CV)、vengeance(CVL)、unicorn(CVL)、bicorn(CVL)、queen(CVE)、biter(CVE)、empire_maccoll(MAC)、empire_macrae(MAC)、albatross(AV)；法国 5 艘：clemenceau_pa28(CV)、joffre(CV)、neptune(CV)、bearn(CV)、commandant_teste(AV)
+      {
+        name: "america",
+        pos: [245, 113],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "midway",
+        pos: [244, 114],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "kentucky_bb66",
+        pos: [245, 115],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "illinois",
+        pos: [244, 116],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "essex",
+        pos: [245, 117],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "yorktown",
+        pos: [244, 118],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "saratoga",
+        pos: [245, 119],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "langley",
+        pos: [244, 120],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "princeton",
+        pos: [245, 121],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "card",
+        pos: [244, 122],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "wolverine",
+        pos: [245, 123],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "implacable",
+        pos: [244, 124],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "victorious",
+        pos: [245, 125],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "ark_royal",
+        pos: [244, 126],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "courageous",
+        pos: [245, 127],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "eagle",
+        pos: [244, 128],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "hermes",
+        pos: [245, 129],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "argus",
+        pos: [244, 130],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "vengeance",
+        pos: [245, 131],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "unicorn",
+        pos: [244, 132],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "bicorn",
+        pos: [245, 133],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "queen",
+        pos: [244, 134],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "biter",
+        pos: [245, 135],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "empire_maccoll",
+        pos: [244, 136],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "empire_macrae",
+        pos: [245, 137],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "albatross",
+        pos: [244, 138],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "clemenceau_pa28",
+        pos: [245, 139],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "joffre",
+        pos: [244, 140],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "neptune",
+        pos: [245, 141],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "bearn",
+        pos: [244, 142],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+      {
+        name: "commandant_teste",
+        pos: [245, 143],
+        rotation: 270,
+        belongPlayer: "P1"
+      },
+    ],
   }
 ]
