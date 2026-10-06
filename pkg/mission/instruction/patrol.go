@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 
+	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -18,6 +19,10 @@ const (
 	// patrolRadialGain 把盘旋半径误差折算成瞄准点的外向 / 内向偏移比例，
 	// 与切向分量合成一条收敛到 patrolRadius 的圆航线。
 	patrolRadialGain = 0.8
+	// patrolForwardOffset 是盘旋圆心相对基地朝敌情方向前出的距离（地图格）。
+	// 只守基地上空的 CAP 在迷雾下几乎碰不到敌人（战机视距只有二十余格），
+	// 圆心前出到基地朝敌一侧可以扩大搜索面，敌机靠近时更早接战。
+	patrolForwardOffset = 10.0
 )
 
 // PlanePatrol 战斗机没有可打目标时的战斗巡逻（CAP）：绕所属基地 / 航母盘旋
@@ -59,8 +64,57 @@ func (i *PlanePatrol) Exec(ms *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
-	i.orbit(plane, mapCfg, base.BasePos())
+	i.orbit(plane, mapCfg, i.patrolCenter(ms, plane, base))
 	return nil
+}
+
+// patrolCenter 返回战斗巡逻的圆心：基地位置沿「基地 -> 敌情方向」前出 patrolForwardOffset 格。
+// 敌情优先取本方尚未过期的敌舰接触（与电脑舰队的推进点同源）；没有接触时朝地图中心前出；
+// 两者都拿不到（无视野数据、无地图）时退回基地自身位置。
+func (i *PlanePatrol) patrolCenter(
+	ms *state.MissionState, plane *objUnit.Plane, base objUnit.AircraftBase,
+) objPos.MapPos {
+	center := base.BasePos()
+	target, ok := patrolBearingTarget(ms, plane.BelongPlayer, center)
+	if !ok {
+		return center
+	}
+	dx, dy := target.RX-center.RX, target.RY-center.RY
+	distance := math.Hypot(dx, dy)
+	if distance < 1e-6 {
+		return center
+	}
+	return objPos.NewR(
+		center.RX+dx/distance*patrolForwardOffset,
+		center.RY+dy/distance*patrolForwardOffset,
+	)
+}
+
+// patrolBearingTarget 返回巡逻前出的参考点：最近的未过期敌舰接触，其次地图中心。
+func patrolBearingTarget(
+	ms *state.MissionState, player faction.Player, from objPos.MapPos,
+) (objPos.MapPos, bool) {
+	if vision := ms.Player.Visions[player]; vision != nil {
+		best := math.MaxFloat64
+		var pos objPos.MapPos
+		found := false
+		for _, contact := range vision.Contacts {
+			if contact.ExpireTick <= ms.Core.SimTick {
+				continue
+			}
+			candidate := objPos.NewR(contact.RX, contact.RY)
+			if distance := from.Distance(candidate); distance < best {
+				best, pos, found = distance, candidate, true
+			}
+		}
+		if found {
+			return pos, true
+		}
+	}
+	if mapCfg := ms.Core.MissionMD.MapCfg; mapCfg != nil {
+		return objPos.NewR(float64(mapCfg.Width)/2, float64(mapCfg.Height)/2), true
+	}
+	return objPos.MapPos{}, false
 }
 
 // orbit 让飞机绕着基地盘旋。瞄准点由顺时针切向分量与半径误差的径向修正合成：

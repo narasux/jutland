@@ -469,10 +469,23 @@ func (p *Plane) executeLandingGateMovement(base AircraftBase, arc landingApproac
 	targetRotation := normalizeAngle(
 		base.BaseRotation() + math.Atan2(velocity.lateral, velocity.forward)*180/math.Pi,
 	)
+	// 横向修正项最多能把速度顶到 1.75 倍切向速度。宽转弯的重机被它加速后转弯半径
+	// 同步变大，反而永远追不上入口；但航母转向时入口点本身带有 omega×r 的运动，
+	// 飞机必须跟得上，所以上限以不含修正项的运动学速度为基准给一点余量。
+	kinematic := carrierLocalOffset{
+		forward: base.BaseSpeed() + tangent.forward*arc.relativeSpeed -
+			p.landingCarrierTurnRate*current.lateral*length,
+		lateral: tangent.lateral*arc.relativeSpeed +
+			p.landingCarrierTurnRate*current.forward*length,
+	}
+	targetSpeed := min(
+		math.Hypot(velocity.forward, velocity.lateral),
+		math.Hypot(kinematic.forward, kinematic.lateral)*(1+landingGateCorrectionSpeedAllowance),
+	)
 	executeLandingMovementOnHeading(
 		p,
 		targetRotation,
-		p.approachSpeed(math.Hypot(velocity.forward, velocity.lateral)),
+		p.approachSpeed(targetSpeed),
 	)
 }
 

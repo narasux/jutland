@@ -1033,3 +1033,26 @@ func TestLandingVisualScaleInterpolation(t *testing.T) {
 	plane.FlightPhaseProgressValue = 1
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }
+
+// 宽转弯机型的入口容差必须随转弯半径放大：重机的 RotateSpeed 只有 1~2°/帧，
+// 用舰载机级别的固定容差会让它们在待场与入口之间无限重引导（永远进不了圆弧）。
+func TestLandingGateToleranceScaleGrowsWithTurnRadius(t *testing.T) {
+	useDefaultSettings(t)
+	const length = 4.0
+	fighter := &Plane{MaxSpeed: 0.05, RotateSpeed: 6, CurSpeed: 0.05}
+	heavy := &Plane{MaxSpeed: 0.043, RotateSpeed: 1.5, CurSpeed: 0.043}
+	straightFlying := &Plane{MaxSpeed: 0.1, RotateSpeed: 0, CurSpeed: 0.1}
+	extreme := &Plane{MaxSpeed: 0.1, RotateSpeed: 1, CurSpeed: 0.1}
+
+	fighterScale := landingGateToleranceScale(fighter, length)
+	heavyScale := landingGateToleranceScale(heavy, length)
+	if fighterScale < 1 || heavyScale <= fighterScale {
+		t.Fatalf("容差倍数应随转弯半径单调放大: fighter=%.2f heavy=%.2f", fighterScale, heavyScale)
+	}
+	if got := landingGateToleranceScale(straightFlying, length); got != 1 {
+		t.Fatalf("转向速度为 0 时应退回基准容差, got %.2f", got)
+	}
+	if got := landingGateToleranceScale(extreme, length); got != landingGateToleranceMaxScale {
+		t.Fatalf("容差倍数应封顶在 %.1f, got %.2f", landingGateToleranceMaxScale, got)
+	}
+}
