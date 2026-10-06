@@ -28,6 +28,10 @@ const (
 	// scoutLoiterRadialGain 把盘旋半径误差折算成瞄准点的外向/内向偏移比例，
 	// 与切向分量合成一条收敛到 scoutLoiterRadius 的盘旋航线。
 	scoutLoiterRadialGain = 0.8
+	// scoutHoldHysteresis 是「保持距离」状态的滞回带（地图格）。盘旋圆的远端会
+	// 比接触点远约一个盘旋半径，留出这段余量，飞机才不会每拍在保持距离和继续
+	// 靠近之间来回切换、把盘旋航线抖成折线。
+	scoutHoldHysteresis = 2 * scoutLoiterRadius
 )
 
 // PlaneScout 侦察机飞向一个海面点，并按可见情况跟踪或巡逻。
@@ -40,6 +44,10 @@ type PlaneScout struct {
 	lastPursuitDist float64
 	// evading 正在规避逼近的敌机，期间不飞向侦察点也不返航。
 	evading bool
+	// holding 正在敌方舰队防空圈外沿保持距离；holdPoint 是此时的盘旋圆心，
+	// 在刚接触防空圈时定下，飞机绕它盘旋而不是原地悬停。
+	holding   bool
+	holdPoint objPos.MapPos
 }
 
 // NewPlaneScout 创建侦察指令。manual 为真时再次指定同一架飞机会改飞向。
@@ -59,6 +67,7 @@ func (i *PlaneScout) Retarget(point objPos.MapPos) {
 	i.loiterUntil = 0
 	i.status = Ready
 	i.evading = false
+	i.holding = false
 	i.lastPursuitDist = math.MaxFloat64
 }
 
@@ -85,18 +94,32 @@ func (i *PlaneScout) Exec(ms *state.MissionState) error {
 	// 敌机逼近时先做规避机动继续侦察，不放弃任务直接返航：
 	// 提前返航会把侦察机送进慢速进近，反而更容易在母舰附近被咬住击落。
 	if i.evade(ms, plane) {
+		// 脱离航线可能已经飞离接触点，盘圆心作废，回来重新定。
+		i.holding = false
 		return nil
 	}
 	// 看得见敌舰就改去跟踪舰队，不再飞原来的点。
-	// 已经贴到防空圈外沿就停住，避免再靠近挨打。
+	// 已经贴到防空圈外沿就保持距离：飞机不能悬停，绕接触点盘旋继续观察，
+	// 盘旋照常消耗航程，侦察机不会无限期停在同一支舰队外侧。
 	if vision != nil {
-		if move, hold := trackFleet(ms, plane, vision); move || hold {
-			if !hold {
-				plane.MoveTo(mapCfg, fleetHoldPoint(ms, plane, vision), plane.CurPos, 0)
-			}
+		slack := 0.0
+		if i.holding {
+			slack = scoutHoldHysteresis
+		}
+		if move, hold := trackFleet(ms, plane, vision, slack); move || hold {
 			i.loiterUntil = 0
+			if hold {
+				if !i.holding {
+					i.holding, i.holdPoint = true, plane.CurPos
+				}
+				i.orbitAt(plane, i.holdPoint, mapCfg)
+				return nil
+			}
+			i.holding = false
+			plane.MoveTo(mapCfg, fleetHoldPoint(ms, plane, vision), plane.CurPos, 0)
 			return nil
 		}
+		i.holding = false
 	}
 	// 还没到目标点就继续飞。到达后的盘旋从这一拍开始计 30 秒任务时间。
 	if plane.CurPos.Distance(i.point) > scoutArriveRadius {
@@ -165,11 +188,20 @@ func (i *PlaneScout) evade(ms *state.MissionState, plane *objUnit.Plane) bool {
 	return true
 }
 
-// orbit 让飞机绕着侦察点盘旋。瞄准点由顺时针切向分量与半径误差的径向修正合成：
+// orbit 让飞机绕着侦察点盘旋。盘旋只是原地绕圈，不额外消耗任务航程：
+// 侦察续航沿用到达前的预算。否则每段 30 秒盘旋要飞掉几十格航程，
+// 侦察机会提前返航、开图范围缩水。
+func (i *PlaneScout) orbit(plane *objUnit.Plane, mapCfg *mapcfg.MapCfg) {
+	remainRange := plane.RemainRange
+	i.orbitAt(plane, i.point, mapCfg)
+	plane.RemainRange = remainRange
+}
+
+// orbitAt 让飞机绕着 center 盘旋。瞄准点由顺时针切向分量与半径误差的径向修正合成：
 // 半径偏小时朝外偏、偏大时朝内偏，飞机按自身转向与速度自然收敛到一条圆航线，
 // 而不是在圆心原地悬停。
-func (i *PlaneScout) orbit(plane *objUnit.Plane, mapCfg *mapcfg.MapCfg) {
-	dx, dy := plane.CurPos.RX-i.point.RX, plane.CurPos.RY-i.point.RY
+func (i *PlaneScout) orbitAt(plane *objUnit.Plane, center objPos.MapPos, mapCfg *mapcfg.MapCfg) {
+	dx, dy := plane.CurPos.RX-center.RX, plane.CurPos.RY-center.RY
 	distance := math.Hypot(dx, dy)
 	if distance < 1e-6 {
 		// 正好压在圆心上时方位角没有意义，先朝正北飞出去，下一拍自然进入圆周。
@@ -179,9 +211,6 @@ func (i *PlaneScout) orbit(plane *objUnit.Plane, mapCfg *mapcfg.MapCfg) {
 	radialX, radialY := dx/distance, dy/distance
 	tangentX, tangentY := -radialY, radialX
 	radialCorrection := scoutLoiterRadialGain * (scoutLoiterRadius - distance)
-	// 盘旋只是原地绕圈，不额外消耗任务航程：侦察续航沿用到达前的预算。
-	// 否则每段 30 秒盘旋要飞掉几十格航程，侦察机会提前返航、开图范围缩水。
-	remainRange := plane.RemainRange
 	plane.MoveTo(
 		mapCfg,
 		objPos.NewR(
@@ -191,7 +220,6 @@ func (i *PlaneScout) orbit(plane *objUnit.Plane, mapCfg *mapcfg.MapCfg) {
 		plane.CurPos,
 		0,
 	)
-	plane.RemainRange = remainRange
 }
 
 // nearestEnemyPlane 返回离这架飞机最近的敌机及距离，没有敌机时返回 nil。
@@ -227,14 +255,19 @@ func (i *PlaneScout) String() string {
 
 var _ Instruction = (*PlaneScout)(nil)
 
-func trackFleet(ms *state.MissionState, plane *objUnit.Plane, vision *state.FactionVision) (move, hold bool) {
+// trackFleet 看得见敌舰时返回 move=true；slack 是已经进入保持距离状态时额外
+// 放宽的距离，飞机到达防空圈外沿（最远防空射程 + 2 格 + slack）内就返回
+// hold=true，表示只保持距离、不再靠近。
+func trackFleet(
+	ms *state.MissionState, plane *objUnit.Plane, vision *state.FactionVision, slack float64,
+) (move, hold bool) {
 	// 当前可见的敌舰合成一群。没有就回到飞向侦察点的逻辑。
 	ships := visibleEnemyShips(ms, plane, vision)
 	if len(ships) == 0 {
 		return false, false
 	}
 	// 停在这群舰最远防空射程再加 2 格之外，能看进舰队又打不着侦察机。
-	limit := maxAntiAir(ships) + 2
+	limit := maxAntiAir(ships) + 2 + slack
 	nearest := math.MaxFloat64
 	for _, ship := range ships {
 		if dist := plane.CurPos.Distance(ship.CurPos); dist < nearest {
