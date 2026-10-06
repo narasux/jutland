@@ -39,6 +39,12 @@ const (
 	landingGateMissDistanceRatio = 0.25
 	// landingGateHeadingTolerance 是进入圆弧前允许的航向误差，单位为度。
 	landingGateHeadingTolerance = 8.0
+	// landingGateCorrectionSpeedAllowance 是入口段横向修正允许超出运动学速度的比例。
+	landingGateCorrectionSpeedAllowance = 0.5
+	// landingGateToleranceTurnGain 是入口容差按「转弯半径 / 基准长度」放大的增益。
+	landingGateToleranceTurnGain = 6.0
+	// landingGateToleranceMaxScale 是入口容差放大上限，避免彻底取消入口检查。
+	landingGateToleranceMaxScale = 8.0
 	// landingGateSpeedTolerance 是进入圆弧前允许的速度相对误差。
 	landingGateSpeedTolerance = 0.10
 	// landingApproachMinFrames 是圆弧进近允许的最短模拟帧数。
@@ -313,6 +319,8 @@ func landingArcWorldRotation(
 
 // landingApproachEntryReady 只允许位置、航向和速度都落入入口容差的飞机进入固定圆弧。
 // 不满足条件的飞机继续执行远端切线引导，避免从舰侧强行接入造成锐角转弯。
+// 容差按机型转弯能力放大（见 landingGateToleranceScale）：宽转弯的重机在入口直线段
+// 里做不出舰载机级别的对齐，固定容差会让它们永远在待场与入口之间反复重引导。
 func landingApproachEntryReady(p *Plane, base AircraftBase, gate carrierLocalOffset) bool {
 	length := phaseUnitInMapBlocks(base)
 	local := planeCarrierLocalOffset(p, base)
@@ -320,9 +328,15 @@ func landingApproachEntryReady(p *Plane, base AircraftBase, gate carrierLocalOff
 		forward: local.forward / length,
 		lateral: local.lateral / length,
 	}
+	scale := landingGateToleranceScale(p, length)
+	// 纵向窗口是非对称的：越过入口（沿进近方向在前）意味着这一轮窗口已经关闭，
+	// 必须回远端重新建立切线（见 UpdateLandingStaging 的错过判定）；而「还差一点
+	// 才到入口」按转弯能力放宽——圆弧按飞机实际位置重建，从更远处切进来同样成立。
+	forwardError := start.forward - gate.forward
 	if start.lateral*gate.lateral <= 0 ||
-		math.Abs(start.forward-gate.forward) > landingGateForwardToleranceRatio ||
-		math.Abs(start.lateral-gate.lateral) > landingGateLateralToleranceRatio {
+		forwardError > landingGateForwardToleranceRatio ||
+		forwardError < -landingGateForwardToleranceRatio*scale ||
+		math.Abs(start.lateral-gate.lateral) > landingGateLateralToleranceRatio*scale {
 		return false
 	}
 	arc, ok := buildLandingApproachArc(
@@ -335,9 +349,28 @@ func landingApproachEntryReady(p *Plane, base AircraftBase, gate carrierLocalOff
 	// 航向容差与圆弧段机头合成使用同一低通转向速率，保证进入圆弧前后
 	// 机头目标航向连续；速度容差仍用原始速率，反映真实的相对闭合速度。
 	targetRotation := landingArcWorldRotation(arc, base, 0, p.landingDisplayTurnRate)
-	if angleDifferenceDegrees(p.CurRotation, targetRotation) > landingGateHeadingTolerance {
+	if angleDifferenceDegrees(p.CurRotation, targetRotation) > landingGateHeadingTolerance*scale {
 		return false
 	}
-	speedTolerance := max(entrySpeed*landingGateSpeedTolerance, p.phaseSpeedStep(entrySpeed))
+	// 速度容差按转弯容差平方放宽：宽转弯的重机在入口修正段本就压不回切向速度，
+	// 而圆弧段以飞机实际速度为初速重新规划减速，速度偏差不会造成轨迹跳变。
+	speedTolerance := max(
+		entrySpeed*landingGateSpeedTolerance*scale*scale,
+		p.phaseSpeedStep(entrySpeed),
+	)
 	return math.Abs(p.CurSpeed-entrySpeed) <= speedTolerance
+}
+
+// landingGateToleranceScale 按机型转弯能力返回入口容差的放大倍数。
+// 转弯半径 r = v / ω 越大，单位路程里能改变的航向越小；重型轰炸机的
+// rotateSpeed 只有 1~2°/帧，实测转弯半径可达基准长度的 0.4~0.9 倍，
+// 在入口直线段内无法收敛到固定容差，30 秒都进不了圆弧。
+// 圆弧按飞机实际位置重建，放宽入口容差只决定「何时开始进近」，不改变进近几何。
+func landingGateToleranceScale(p *Plane, length float64) float64 {
+	radiansPerFrame := p.RotateSpeed * gameSpeedMultiplier() * math.Pi / 180
+	if radiansPerFrame <= 0 || length <= 0 {
+		return 1
+	}
+	turnRadius := p.CurSpeed / radiansPerFrame
+	return max(1, min(1+landingGateToleranceTurnGain*turnRadius/length, landingGateToleranceMaxScale))
 }

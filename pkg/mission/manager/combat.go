@@ -23,7 +23,11 @@ const bombBlastRadius = 1.0
 // maxAirAttackersPerTarget 同一架敌机同时最多被几架飞机追击。
 // 敌机在迷雾下常常只有一两架可见，没有名额限制时一个基地的整个 CAP
 // 都会扑向同一架飞机（例如 4 艘航母各派 10 架零式围殴一架手动侦察机）。
-const maxAirAttackersPerTarget = 2
+// 但名额过小时，大机群交战里可见敌机会被瞬间占满，剩下的 CAP 在敌机旁边
+// 也领不到目标：50 艘航母规模的关卡实测「47 架可见敌机 × 2 名额 = 94 架接战」
+// 之后，另有 115 架战斗机在可见敌机 22 格内盘旋却全程不接敌。
+// 放宽到 4 后同样局面可接战约 188 架，仍保留「不整队围殴一架」的初衷。
+const maxAirAttackersPerTarget = 4
 
 // 舰对空弹药的单发命中率（每结算帧独立判定，数值为平衡用常数）：
 //   - 小口径速射防空炮（≤40mm）：弹幕密集，命中率最高；
@@ -261,10 +265,11 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 
 // airAttackerCounts 统计当前各架敌机已经被多少架飞机锁定为空中目标。
 // 只有追击空中目标的飞机占名额；对舰飞机的目标是敌舰，不参与这里的统计。
+// 滑跑中的飞机已经认领目标，也计入名额，避免同一架敌机在它起飞的几秒里被反复超额分配。
 func (m *MissionManager) airAttackerCounts() map[string]int {
 	counts := make(map[string]int)
 	for _, plane := range m.state.Arena.Planes {
-		if plane.CurHP <= 0 || plane.CurAttackTarget == "" {
+		if plane.CurHP <= 0 || plane.CurAttackTarget == "" || !plane.IsCruising() {
 			continue
 		}
 		if plane.AttackObjType() != object.TypePlane {
@@ -281,9 +286,12 @@ func (m *MissionManager) airAttackerCounts() map[string]int {
 // releaseSurplusAirAttackers 拆掉同一架敌机上超编的追击。
 // 名额按当前在空飞机统计，多出来的飞机放掉锁定目标，交给
 // updatePlaneAttackOrReturn 重新分配：有别的敌机就改派，没有就转去巡逻。
+// 仍在滑跑（起飞阶段）的飞机不拆：updatePlaneAttackOrReturn 只处理巡航机，
+// 拆掉之后没有任何指令会再调用 UpdateTakeoff，飞机会永远停在跑道上不动
+// （实测 900 帧后仍停在跑道、速度为 0）。它们离地后由下一拍回收名额。
 func (m *MissionManager) releaseSurplusAirAttackers(attackers map[string]int) {
 	for _, plane := range m.state.Arena.Planes {
-		if plane.CurHP <= 0 || plane.CurAttackTarget == "" {
+		if plane.CurHP <= 0 || plane.CurAttackTarget == "" || !plane.IsCruising() {
 			continue
 		}
 		if plane.AttackObjType() != object.TypePlane ||

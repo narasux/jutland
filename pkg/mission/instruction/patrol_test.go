@@ -9,6 +9,7 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
 // newPatrolTestState 造一艘停着的基地和一架在空巡航的战斗机，用于巡逻相关测试。
@@ -112,5 +113,79 @@ func TestPlanePatrolEndsOnReturnConditions(t *testing.T) {
 	}
 	if !order.Executed() || !plane.ForceReturn {
 		t.Fatal("基地消失后巡逻应该结束并转为返航")
+	}
+}
+
+// withPatrolIntel 给巡逻测试状态补上视野接触与地图尺寸，用于前出圆心相关断言。
+func withPatrolIntel(
+	ms *state.MissionState, contacts map[string]state.Contact, width, height int,
+) {
+	ms.Core.SimTick = 100
+	ms.Core.MissionMD.MapCfg = &mapcfg.MapCfg{Width: width, Height: height}
+	ms.Player.Visions = map[faction.Player]*state.FactionVision{
+		faction.HumanAlpha: {Width: width, Height: height, Contacts: contacts},
+	}
+}
+
+// 有敌舰接触时，巡逻圆心前出到基地朝敌一侧，而不是死守基地上空。
+func TestPlanePatrolCenterAdvancesTowardEnemyContact(t *testing.T) {
+	ms, plane := newPatrolTestState(t, 0)
+	base := ms.Arena.Ships["carrier"]
+	withPatrolIntel(ms, map[string]state.Contact{
+		// 接触点在正东 80 格处：圆心应沿 +x 前出 patrolForwardOffset 格。
+		"enemy": {RX: base.CurPos.RX + 80, RY: base.CurPos.RY, ExpireTick: 1000},
+	}, 256, 256)
+	order := NewPlanePatrol(plane.Uid)
+
+	for range 900 {
+		ms.Core.SimTick++
+		if err := order.Exec(ms); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	distance := plane.CurPos.Distance(base.CurPos)
+	if distance < patrolForwardOffset-patrolRadius-1 || distance > patrolForwardOffset+patrolRadius+1 {
+		t.Fatalf("巡逻应停在基地朝敌方向 %v 格附近盘旋，实际距离 %v", patrolForwardOffset, distance)
+	}
+	if plane.CurPos.RX <= base.CurPos.RX {
+		t.Fatalf("敌情在正东，巡逻不该停在基地西侧: pos = %v", plane.CurPos)
+	}
+}
+
+// 没有敌舰接触时朝地图中心前出，让 CAP 面向双方相向展开的方向。
+func TestPlanePatrolCenterFallsBackToMapCenter(t *testing.T) {
+	ms, plane := newPatrolTestState(t, 0)
+	base := ms.Arena.Ships["carrier"]
+	withPatrolIntel(ms, nil, 256, 256)
+	order := NewPlanePatrol(plane.Uid)
+
+	for range 900 {
+		ms.Core.SimTick++
+		if err := order.Exec(ms); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	distance := plane.CurPos.Distance(base.CurPos)
+	if distance < patrolForwardOffset-patrolRadius-1 || distance > patrolForwardOffset+patrolRadius+1 {
+		t.Fatalf("无接触时应朝地图中心前出 %v 格盘旋，实际距离 %v", patrolForwardOffset, distance)
+	}
+	if plane.CurPos.RX <= base.CurPos.RX {
+		t.Fatalf("地图中心在基地东侧，巡逻不该停在西侧: pos = %v", plane.CurPos)
+	}
+}
+
+// 过期的敌舰接触不能作为前出方向。
+func TestPlanePatrolCenterIgnoresExpiredContact(t *testing.T) {
+	ms, plane := newPatrolTestState(t, 0)
+	withPatrolIntel(ms, map[string]state.Contact{
+		"enemy": {RX: 250, RY: 10, ExpireTick: ms.Core.SimTick - 1},
+	}, 256, 256)
+
+	center := NewPlanePatrol(plane.Uid).patrolCenter(ms, plane, ms.Arena.Ships["carrier"])
+	// 过期接触被忽略：参考点退回地图中心 (128,128)，基地在 (10,10)，方向应指向东南。
+	if center.RX <= 10 || center.RY <= 10 {
+		t.Fatalf("过期接触不该参与前出方向: center = %v", center)
 	}
 }

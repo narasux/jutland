@@ -13,8 +13,24 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
+// airfieldTestPlaneStats 是测试机型的运行期数值（与 planes.json5 的口径一致）。
+type airfieldTestPlaneStats struct {
+	maxSpeed     float64
+	acceleration float64
+	rotateSpeed  float64
+}
+
 func newAirfieldLandingTestState(
 	t *testing.T, planeName string, maxCount int64,
+) (*state.MissionState, *objBuilding.Airfield, *objUnit.Plane) {
+	t.Helper()
+	return newAirfieldLandingTestStateWithStats(t, planeName, maxCount, airfieldTestPlaneStats{
+		maxSpeed: 0.12, acceleration: 0.01, rotateSpeed: 12,
+	})
+}
+
+func newAirfieldLandingTestStateWithStats(
+	t *testing.T, planeName string, maxCount int64, stats airfieldTestPlaneStats,
 ) (*state.MissionState, *objBuilding.Airfield, *objUnit.Plane) {
 	t.Helper()
 	oldSettings := config.G
@@ -26,9 +42,9 @@ func newAirfieldLandingTestState(
 		Name:         planeName,
 		TotalHP:      100,
 		CurHP:        100,
-		MaxSpeed:     0.12,
-		Acceleration: 0.01,
-		RotateSpeed:  12,
+		MaxSpeed:     stats.maxSpeed,
+		Acceleration: stats.acceleration,
+		RotateSpeed:  stats.rotateSpeed,
 		RemainRange:  100,
 	}
 	t.Cleanup(func() {
@@ -106,6 +122,28 @@ func TestPlaneReturnRecoversAtAirfield(t *testing.T) {
 	// 机场回收（与航母一致）：着舰后直接入库，活动实体移除、库存 +1
 	if _, ok := ms.Arena.Planes[plane.Uid]; ok {
 		t.Fatal("recovered plane entity should be removed from the arena")
+	}
+	if airfield.Aircraft.Groups[0].CurCount != 1 {
+		t.Fatalf("CurCount = %d, want 1 after airfield recovery", airfield.Aircraft.Groups[0].CurCount)
+	}
+}
+
+// 宽转弯的重型轰炸机（RotateSpeed 只有 1~2°/帧）也必须能在陆地机场完成返航回收：
+// 入口容差按转弯能力放宽之前，它们会永远在待场与入口之间反复重引导。
+func TestPlaneReturnRecoversAtAirfieldForWideTurningHeavyBomber(t *testing.T) {
+	// 数值取自 B-17G / He177A 一档的重型轰炸机。
+	stats := airfieldTestPlaneStats{maxSpeed: 0.0428, acceleration: 0.015, rotateSpeed: 1.5}
+	ms, airfield, plane := newAirfieldLandingTestStateWithStats(t, "test-heavy-bomber", 2, stats)
+	returnInstr := NewPlaneReturn(plane.Uid)
+
+	// 从跑道外侧进场，给足着舰流程需要的帧数（重机待场与进近都更慢）。
+	for frame := 0; frame < 12000 && !returnInstr.Executed(); frame++ {
+		if err := returnInstr.Exec(ms); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if !returnInstr.Executed() {
+		t.Fatalf("重型轰炸机未能完成着舰，phase = %s pos = %s", plane.FlightPhase, plane.CurPos.String())
 	}
 	if airfield.Aircraft.Groups[0].CurCount != 1 {
 		t.Fatalf("CurCount = %d, want 1 after airfield recovery", airfield.Aircraft.Groups[0].CurCount)
