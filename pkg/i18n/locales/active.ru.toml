@@ -54,6 +54,8 @@ other = "Общий множитель скорости"
 other = "Язык"
 [SettingsFogOfWar]
 other = "Туман войны"
+[SettingsMinimap]
+other = "Мини-карта"
 [SettingsOn]
 other = "Вкл."
 [SettingsOff]

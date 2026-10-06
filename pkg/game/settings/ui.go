@@ -49,8 +49,8 @@ var speedOptions = []speedOption{
 	{i18n.MsgSpeedFast, config.SpeedFastMultiplier},
 }
 
-// 关在前，和默认关闭一致。
-var fogOptions = []toggleOption{
+// 开/关选项，关在前，便于默认关闭的选项显示为关。
+var toggleOptions = []toggleOption{
 	{i18n.MsgSettingsOff, false},
 	{i18n.MsgSettingsOn, true},
 }
@@ -62,6 +62,7 @@ type UI struct {
 	localLanguage i18n.Language
 	localAI       config.AIStrategies
 	localFog      bool
+	localMinimap  bool
 	backPressed   bool
 }
 
@@ -72,6 +73,7 @@ func New() *UI {
 		localLanguage: i18n.NormalizeLanguage(config.G.Language),
 		localAI:       config.EnabledAIStrategies(),
 		localFog:      fogSetting(),
+		localMinimap:  minimapSetting(),
 	}
 	s.buildUI()
 	return s
@@ -94,6 +96,7 @@ func (s *UI) Reset() {
 	s.localLanguage = i18n.NormalizeLanguage(config.G.Language)
 	s.localAI = config.EnabledAIStrategies()
 	s.localFog = fogSetting()
+	s.localMinimap = minimapSetting()
 	s.backPressed = false
 	s.buildUI()
 }
@@ -118,6 +121,14 @@ func fogSetting() bool {
 		return false
 	}
 	return config.G.EnableFogOfWar
+}
+
+// minimapSetting 小地图默认开启，配置还没加载时也按开启处理。
+func minimapSetting() bool {
+	if config.G == nil {
+		return true
+	}
+	return config.G.EnableMinimap
 }
 
 // speedOptionIndex 返回当前 localValue 匹配的速度选项索引，不匹配时返回 -1
@@ -240,13 +251,13 @@ func (s *UI) buildUI() {
 			&widget.LabelColor{Idle: colorx.White, Disabled: colorx.White},
 		),
 	)
-	selectedFog := fogOptions[0]
+	selectedFog := toggleOptions[0]
 	if s.localFog {
-		selectedFog = fogOptions[1]
+		selectedFog = toggleOptions[1]
 	}
-	fogEntries := make([]any, len(fogOptions))
-	for idx := range fogOptions {
-		fogEntries[idx] = fogOptions[idx]
+	fogEntries := make([]any, len(toggleOptions))
+	for idx := range toggleOptions {
+		fogEntries[idx] = toggleOptions[idx]
 	}
 	fogCombo := newSettingsCombo(
 		fogEntries,
@@ -257,6 +268,41 @@ func (s *UI) buildUI() {
 		func(entry any) string { return i18n.Text(entry.(toggleOption).Label) },
 		func(entry any) { s.localFog = entry.(toggleOption).Value },
 	)
+
+	minimapLabel := widget.NewLabel(
+		widget.LabelOpts.Text(
+			i18n.Text(i18n.MsgSettingsMinimap),
+			labelFace,
+			&widget.LabelColor{Idle: colorx.White, Disabled: colorx.White},
+		),
+	)
+	selectedMinimap := toggleOptions[0]
+	if s.localMinimap {
+		selectedMinimap = toggleOptions[1]
+	}
+	minimapEntries := make([]any, len(toggleOptions))
+	for idx := range toggleOptions {
+		minimapEntries[idx] = toggleOptions[idx]
+	}
+	minimapCombo := newSettingsCombo(
+		minimapEntries,
+		selectedMinimap,
+		&comboFaceValue,
+		boxWidth,
+		func(entry any) string { return i18n.Text(entry.(toggleOption).Label) },
+		func(entry any) string { return i18n.Text(entry.(toggleOption).Label) },
+		func(entry any) { s.localMinimap = entry.(toggleOption).Value },
+	)
+
+	// 战争迷雾与小地图并排成一行：竖排两行会在矮屏上把保存按钮挤出屏幕。
+	toggleRow := widget.NewContainer(
+		widget.ContainerOpts.Layout(widget.NewRowLayout(
+			widget.RowLayoutOpts.Direction(widget.DirectionHorizontal),
+			widget.RowLayoutOpts.Spacing(40),
+		)),
+	)
+	toggleRow.AddChild(toggleColumn(fogLabel, fogCombo))
+	toggleRow.AddChild(toggleColumn(minimapLabel, minimapCombo))
 
 	// ====== 按钮栏 ======
 	saveBtn := widget.NewButton(
@@ -269,6 +315,7 @@ func (s *UI) buildUI() {
 			config.G.Language = string(s.localLanguage)
 			config.G.AI = s.localAI
 			config.G.EnableFogOfWar = s.localFog
+			config.G.EnableMinimap = s.localMinimap
 			_ = config.SaveGameSettings()
 		}),
 	)
@@ -303,8 +350,7 @@ func (s *UI) buildUI() {
 	topContent.AddChild(speedCombo)
 	topContent.AddChild(languageLabel)
 	topContent.AddChild(languageCombo)
-	topContent.AddChild(fogLabel)
-	topContent.AddChild(fogCombo)
+	topContent.AddChild(toggleRow)
 	topContent.AddChild(s.strategyBox(&comboFaceValue, boxWidth))
 
 	// ====== 底部内容（操作按钮 + 提示） ======
@@ -375,6 +421,19 @@ func closedControlWidth(face text.Face) int {
 		}
 	}
 	return widest + controlPadX
+}
+
+// toggleColumn 把开关标签和它的开/关下拉框竖排成一列，便于两个开关并排摆放。
+func toggleColumn(label *widget.Label, combo *widget.ListComboButton) *widget.Container {
+	column := widget.NewContainer(
+		widget.ContainerOpts.Layout(widget.NewRowLayout(
+			widget.RowLayoutOpts.Direction(widget.DirectionVertical),
+			widget.RowLayoutOpts.Spacing(12),
+		)),
+	)
+	column.AddChild(label)
+	column.AddChild(combo)
+	return column
 }
 
 func (s *UI) strategyBox(face *text.Face, boxWidth int) *widget.Container {

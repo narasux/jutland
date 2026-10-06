@@ -32,6 +32,7 @@ const (
 	MsgSettingsSpeed             MessageID = "SettingsSpeed"
 	MsgSettingsLanguage          MessageID = "SettingsLanguage"
 	MsgSettingsFogOfWar          MessageID = "SettingsFogOfWar"
+	MsgSettingsMinimap           MessageID = "SettingsMinimap"
 	MsgSettingsOn                MessageID = "SettingsOn"
 	MsgSettingsOff               MessageID = "SettingsOff"
 	MsgSettingsSave              MessageID = "SettingsSave"

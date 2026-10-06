@@ -54,6 +54,8 @@ other = "全体速度倍率"
 other = "言語"
 [SettingsFogOfWar]
 other = "戦場の霧"
+[SettingsMinimap]
+other = "ミニマップ"
 [SettingsOn]
 other = "オン"
 [SettingsOff]

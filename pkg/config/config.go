@@ -80,12 +80,15 @@ type GameSettings struct {
 	SpeedMultiplier float64 `json:"speedMultiplier"`
 	// Language 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja。
 	Language string `json:"language"`
-	// EnableLandAirfield 陆地机场功能总开关，false 时所有任务不生成机场
-	EnableLandAirfield bool `json:"enableLandAirfield"`
 	// AI 电脑舰队允许使用的策略。
 	AI AIStrategies `json:"aiStrategies"`
+	// EnableLandAirfield 陆地机场功能总开关，false 时所有任务不生成机场
+	EnableLandAirfield bool `json:"enableLandAirfield"`
 	// EnableFogOfWar 战争迷雾总开关。关闭时任务不建视野图，逻辑与全图可见一致。
 	EnableFogOfWar bool `json:"enableFogOfWar"`
+	// EnableMinimap 小地图总开关。默认开启：开局自动展开右上战术面板展示小地图；
+	// 关闭后依然可以点面板把手手动展开。
+	EnableMinimap bool `json:"enableMinimap"`
 }
 
 // G 游戏设置全局变量
@@ -96,8 +99,9 @@ func NewDefaultGameSettings() *GameSettings {
 	return &GameSettings{
 		SpeedMultiplier:    SpeedStandardMultiplier,
 		Language:           "zh-Hans",
-		EnableLandAirfield: true,
 		AI:                 DefaultAIStrategies(),
+		EnableLandAirfield: true,
+		EnableMinimap:      true,
 	}
 }
 
@@ -205,7 +209,8 @@ func SaveGameSettings() error {
 	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n")
 	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n")
 	_, _ = file.WriteString("// aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用\n")
-	_, _ = file.WriteString("// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾\n\n")
+	_, _ = file.WriteString("// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾\n")
+	_, _ = file.WriteString("// EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

@@ -44,3 +44,24 @@ func TestStrategySummaryListsEnabledStrategies(t *testing.T) {
 		t.Fatalf("empty summary = %q", got)
 	}
 }
+
+// 设置页的小地图开关默认显示为「开」，并跟随已保存的配置。
+func TestMinimapSettingDefaultsToOpen(t *testing.T) {
+	previous := config.G
+	t.Cleanup(func() { config.G = previous })
+
+	config.G = nil
+	if !minimapSetting() {
+		t.Fatal("without settings the minimap switch should show open")
+	}
+
+	config.G = config.NewDefaultGameSettings()
+	if !minimapSetting() {
+		t.Fatal("default settings should show the minimap switch open")
+	}
+
+	config.G.EnableMinimap = false
+	if minimapSetting() {
+		t.Fatal("saved false should show the minimap switch closed")
+	}
+}
