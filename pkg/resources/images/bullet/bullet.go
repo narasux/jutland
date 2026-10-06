@@ -22,20 +22,20 @@ var shellDiameters = []int{
 // shells 炮弹图片映射表
 var shells = make(map[int]*ebiten.Image)
 
-// torpedoDiameters 支持的鱼雷口径列表
+// torpedoDiameters 支持的鱼雷直径列表
 var torpedoDiameters = []int{324, 400, 450, 457, 533, 550, 570, 610, 622, 1350}
 
 // torpedoes 鱼雷图片映射表
 var torpedoes = make(map[int]*ebiten.Image)
 
-// bombDiameters 支持的炸弹口径列表
+// bombDiameters 支持的炸弹直径列表
 var bombDiameters = []int{1100, 850, 800, 660, 610, 470, 450, 380, 360, 350, 280, 250, 200, 70}
 
 // bombs 炸弹图片映射表
 var bombs = make(map[int]*ebiten.Image)
 
-// rocketDiameters 支持的火箭弹口径列表
-var rocketDiameters = []int{100, 120, 122, 127, 200, 250}
+// rocketDiameters 支持的火箭弹直径列表
+var rocketDiameters = []int{55, 70, 82, 100, 120, 122, 127, 132, 200, 250}
 
 // rockets 火箭弹图片映射表
 var rockets = make(map[int]*ebiten.Image)
