@@ -115,14 +115,86 @@ func TestTrackFleetHoldsOutsideAntiAir(t *testing.T) {
 		CurPos:       objPos.NewR(10, 16.5),
 		SightRange:   36,
 	}
-	_, hold := trackFleet(ms, plane, vision)
+	_, hold := trackFleet(ms, plane, vision, 0)
 	if !hold {
 		t.Fatal("scout inside the anti-air margin should hold")
 	}
 	plane.CurPos = objPos.NewR(10, 22)
-	move, hold := trackFleet(ms, plane, vision)
+	move, hold := trackFleet(ms, plane, vision, 0)
 	if !move || hold {
 		t.Fatal("scout outside anti-air should close on the fleet")
+	}
+}
+
+// 发现敌方舰队后侦察机会贴到防空圈外沿保持距离，但飞机不能在空中悬停：
+// 曾经 hold 分支直接 return 不发移动指令，敌我侦察机都会停在舰队旁边不动。
+func TestPlaneScoutCirclesWhileHoldingNearFleet(t *testing.T) {
+	previous := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = previous })
+
+	const name = "scout-hold-test"
+	old, had := objUnit.PlaneMap[name]
+	objUnit.PlaneMap[name] = &objUnit.Plane{
+		Name: name, Type: objUnit.PlaneTypeScout, TotalHP: 20, CurHP: 20,
+		MaxSpeed: 0.1, RotateSpeed: 30, RemainRange: 400,
+		SightRange: objUnit.SightRangeScout,
+	}
+	t.Cleanup(func() {
+		if had {
+			objUnit.PlaneMap[name] = old
+			return
+		}
+		delete(objUnit.PlaneMap, name)
+	})
+
+	ship := &objUnit.BattleShip{
+		Uid: "fleet", CurHP: 100, BelongPlayer: faction.ComputerAlpha,
+		CurPos: objPos.New(12, 30),
+		Weapon: objUnit.ShipWeapon{MaxToPlaneRange: 6},
+	}
+	vision := state.NewFactionVision(64, 64)
+	vision.Stamp(ship.CurPos.RX, ship.CurPos.RY, 20)
+	// 侦察机已经在防空圈（6 格）加 2 格安全边之外，不能再往里飞。
+	plane := objUnit.NewPlane(name, objPos.NewR(12, 38), 0, "carrier", faction.HumanAlpha)
+	ms := &state.MissionState{
+		Core: state.MissionCoreState{SimTick: 10},
+		Arena: state.MissionArenaState{
+			Planes: map[string]*objUnit.Plane{plane.Uid: plane},
+			Ships:  map[string]*objUnit.BattleShip{ship.Uid: ship},
+		},
+		Player: state.MissionPlayerState{
+			Visions: map[faction.Player]*state.FactionVision{faction.HumanAlpha: vision},
+		},
+	}
+	order := NewPlaneScout(plane.Uid, objPos.New(12, 50), false)
+	if err := order.Exec(ms); err != nil {
+		t.Fatal(err)
+	}
+	if !order.holding {
+		t.Fatal("贴到防空圈外沿时应该转入保持距离")
+	}
+
+	anchor := plane.CurPos.Copy()
+	moved := false
+	for range 240 {
+		ms.Core.SimTick++
+		if err := order.Exec(ms); err != nil {
+			t.Fatal(err)
+		}
+		anchorDistance := plane.CurPos.Distance(anchor)
+		if anchorDistance > 0.5 {
+			moved = true
+		}
+		if anchorDistance > 2*scoutLoiterRadius {
+			t.Fatalf("保持距离盘旋时不该飞离接触点过远: distance = %v", anchorDistance)
+		}
+		if distance := plane.CurPos.Distance(ship.CurPos); distance <= ship.Weapon.MaxToPlaneRange {
+			t.Fatalf("保持距离时不能钻进防空圈: distance = %v", distance)
+		}
+	}
+	if !moved {
+		t.Fatal("贴到防空圈外沿后飞机应该绕圈保持观察，而不是原地悬停")
 	}
 }
 
