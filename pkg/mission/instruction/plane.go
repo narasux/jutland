@@ -18,9 +18,10 @@ type PlaneAttack struct {
 	targetObjType object.Type
 	targetUid     string
 	status        InstrStatus
-	// 一击脱离（Hit-and-Run）相关字段：
-	// 飞机攻击战舰时，释放鱼雷/炸弹后应立即脱离，由 daemon 分配下一个目标，
-	// 而非持续追踪同一目标直到其被击沉。通过快照比对方式检测武器释放事件。
+	// 投放-脱离（Hit-and-Run）相关字段：
+	// 飞机攻击战舰时，炸弹要整舱投完才脱离（一次通场把载弹全部投给同一目标），
+	// 鱼雷保持一次通场投一雷即脱离；脱离后由 daemon 分配下一个目标或安排返航。
+	// 通过快照比对方式检测武器释放进度。
 	releaserSnapshot []bool // 指令创建时各释放器（炸弹+鱼雷）的 Released 状态快照
 	snapshotTaken    bool   // 标记是否已拍摄快照，避免重复拍摄覆盖初始状态
 }
@@ -39,7 +40,7 @@ var _ Instruction = (*PlaneAttack)(nil)
 
 // takeReleaserSnapshot 拍摄释放器状态快照
 // 按 Bombs → Torpedoes 的顺序，记录每个释放器当前的 Released 状态，
-// 后续通过 hasNewRelease 比对，发现从 false → true 的变化即视为完成了一次攻击
+// 后续通过 shouldDisengage 比对，判断是否已完成投放、应该脱离
 func (i *PlaneAttack) takeReleaserSnapshot(plane *objUnit.Plane) {
 	if i.snapshotTaken {
 		return
@@ -57,19 +58,29 @@ func (i *PlaneAttack) takeReleaserSnapshot(plane *objUnit.Plane) {
 	}
 }
 
-// hasNewRelease 检测是否有新的释放（鱼雷/炸弹）
-// 将当前释放器状态与快照逐一比对，任一释放器从 false（快照时未释放）
-// 变为 true（当前已释放），即认为飞机已完成一次攻击投弹，应脱离目标
-func (i *PlaneAttack) hasNewRelease(plane *objUnit.Plane) bool {
+// shouldDisengage 判断本次攻击是否已完成投放、应该脱离：
+//   - 炸弹：指令开始时还有未投的炸弹，且现在全部投完，才算完成一次完整投弹，
+//     中途不脱离，保证整舱投给同一个目标（中途脱离会让飞机每次通场只丢一枚）；
+//   - 鱼雷：任一鱼雷新释放即脱离，鱼雷机一次通场只投一雷。
+//
+// 指令开始时炸弹就已投完（如纯鱼雷机后续通场），不走炸弹脱离，避免刚接敌就掉头。
+func (i *PlaneAttack) shouldDisengage(plane *objUnit.Plane) bool {
 	if !i.snapshotTaken {
 		return false
 	}
 	idx := 0
+	bombsPendingAtStart, bombsAllReleased := false, true
 	for _, b := range plane.Weapon.Bombs {
-		if idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] && b.Released {
-			return true
+		if idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] {
+			bombsPendingAtStart = true
+		}
+		if !b.Released {
+			bombsAllReleased = false
 		}
 		idx++
+	}
+	if bombsPendingAtStart && bombsAllReleased {
+		return true
 	}
 	for _, t := range plane.Weapon.Torpedoes {
 		if idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] && t.Released {
@@ -81,8 +92,8 @@ func (i *PlaneAttack) hasNewRelease(plane *objUnit.Plane) bool {
 }
 
 // Exec 执行飞机攻击指令。
-// 起飞阶段只推进滑跑；巡航阶段持续追踪目标，对舰武器释放后结束当前指令，
-// 由 MissionManager 在下一帧重新分配目标或安排返航。
+// 起飞阶段只推进滑跑；巡航阶段持续追踪目标，整舱炸弹投完（或投出一雷）后
+// 结束当前指令，由 MissionManager 在下一帧重新分配目标或安排返航。
 func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	// 获取攻击方飞机
 	attacker, ok := missionState.Arena.Planes[i.planeUid]
@@ -141,15 +152,16 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		}
 	}
 
-	// 一击脱离逻辑（仅对战舰目标生效，对飞机目标保持持续追踪直到击落）：
-	// 飞机对战舰的攻击本质上是投弹/投雷后即脱离，不需要像空战那样持续缠斗。
+	// 投放-脱离逻辑（仅对战舰目标生效，对飞机目标保持持续追踪直到击落）：
+	// 飞机对战舰的攻击是把整舱炸弹投给同一个目标（鱼雷则一次通场一雷），
+	// 投完即脱离，不需要持续追踪同一目标直到其被击沉。
 	// 脱离后 daemon 进程（updatePlaneAttackOrReturn）会在下一帧检测到该飞机
 	// 无攻击指令，并为其重新分配目标或触发返航。
 	if i.targetObjType == object.TypeShip {
 		// 首次执行时拍摄快照，记录此刻各释放器的状态作为基准线
 		i.takeReleaserSnapshot(attacker)
-		// 检测是否有新的鱼雷/炸弹释放，如果有则一击脱离
-		if i.hasNewRelease(attacker) {
+		// 炸弹投完 / 鱼雷新释放时脱离目标
+		if i.shouldDisengage(attacker) {
 			attacker.CurAttackTarget = ""
 			i.status = Executed
 			return nil
