@@ -3,6 +3,7 @@ package manager
 import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/targeting"
@@ -220,6 +221,64 @@ func shipTargetingValue(ship *objUnit.BattleShip) float64 {
 	}
 }
 
+// payloadDamage 返回一架飞机尚未投放的对舰弹药总伤害（炸弹 + 鱼雷），
+// 用于判断这一波载弹能否一波带走目标；未注册的弹药按 0 计。
+func payloadDamage(plane *objUnit.Plane) float64 {
+	if plane == nil {
+		return 0
+	}
+	total := 0.0
+	for _, bomb := range plane.Weapon.Bombs {
+		if bomb != nil && !bomb.Released {
+			total += bulletDamage(bomb.BulletName)
+		}
+	}
+	for _, torpedo := range plane.Weapon.Torpedoes {
+		if torpedo != nil && !torpedo.Released {
+			total += bulletDamage(torpedo.BulletName)
+		}
+	}
+	return total
+}
+
+// maxGroupPayloadDamage 返回基地指定目标类型下，可出机型模板中的最大单机载弹伤害。
+func maxGroupPayloadDamage(aircraft *objUnit.ShipAircraft, targetType object.Type) float64 {
+	if aircraft == nil {
+		return 0
+	}
+	best := 0.0
+	for _, group := range aircraft.Groups {
+		if group.CurCount <= 0 || group.TargetType != targetType {
+			continue
+		}
+		if plane, ok := objUnit.PlaneMap[group.Name]; ok {
+			best = max(best, payloadDamage(plane))
+		}
+	}
+	return best
+}
+
+// bulletDamage 查询弹药面板伤害，未注册的弹药按 0 计。
+func bulletDamage(bulletName string) float64 {
+	if bullet, ok := objBullet.Map[bulletName]; ok && bullet != nil {
+		return bullet.Damage
+	}
+	return 0
+}
+
+// oneSalvoKillablePrefer 返回「剩余载弹一波能带走」的候选判定函数；
+// 载弹伤害为 0 时返回 nil，目标选择保持原有轮转行为。
+func (m *MissionManager) oneSalvoKillablePrefer(payload float64) func(string) bool {
+	if payload <= 0 {
+		return nil
+	}
+	return func(uid string) bool {
+		// 按面板伤害估算，未计装甲减免与散布，仅作偏好而非硬保证
+		target := m.state.Arena.Ships[uid]
+		return target != nil && target.CurHP > 0 && target.CurHP <= payload
+	}
+}
+
 // peekTargetUID 查看基地游标处第一个有效目标，但不推进游标。
 func (m *MissionManager) peekTargetUID(baseUID string, targetType object.Type) (string, bool) {
 	idx, uid, ok := m.findTargetAtCursor(baseUID, targetType)
@@ -230,12 +289,14 @@ func (m *MissionManager) peekTargetUID(baseUID string, targetType object.Type) (
 }
 
 // peekTargetUIDWhere 查看游标后第一个满足条件的有效目标，但不推进游标。
+// prefer 非空时优先返回满足 prefer 的候选，没有则回退到第一个满足 accept 的目标。
 func (m *MissionManager) peekTargetUIDWhere(
 	baseUID string,
 	targetType object.Type,
 	accept func(string) bool,
+	prefer func(string) bool,
 ) (string, bool) {
-	idx, uid, ok := m.findTargetAtCursorWhere(baseUID, targetType, accept)
+	idx, uid, ok := m.findTargetAtCursorWhere(baseUID, targetType, accept, prefer)
 	if ok {
 		m.setTargetCursor(baseUID, targetType, idx)
 	}
@@ -254,16 +315,19 @@ func (m *MissionManager) nextTargetUID(baseUID string, targetType object.Type) (
 
 // nextTargetUIDForPlane 为已起飞飞机选择当前 RemainRange 足够到达的下一个目标。
 // attackers 是本帧各架敌机的追击名额占用情况，用于跳过已经被抢满的空中目标。
+// 对舰目标优先挑选「剩余载弹一波能带走」的敌舰：伤害不溢出（超出部分直接浪费），
+// 整舱投给残血目标可以减少过量伤害；没有合适目标时回退到游标轮转顺序。
 func (m *MissionManager) nextTargetUIDForPlane(plane *objUnit.Plane, attackers map[string]int) (string, bool) {
 	targetType := plane.AttackObjType()
-	idx, uid, ok := m.findTargetAtCursorWhere(
-		plane.BelongShip,
-		targetType,
-		func(uid string) bool {
-			return m.airTargetHasSlotFor(targetType, uid, attackers) &&
-				m.targetReachableByPlane(plane, uid, targetType)
-		},
-	)
+	accept := func(uid string) bool {
+		return m.airTargetHasSlotFor(targetType, uid, attackers) &&
+			m.targetReachableByPlane(plane, uid, targetType)
+	}
+	var prefer func(string) bool
+	if targetType == object.TypeShip {
+		prefer = m.oneSalvoKillablePrefer(payloadDamage(plane))
+	}
+	idx, uid, ok := m.findTargetAtCursorWhere(plane.BelongShip, targetType, accept, prefer)
 	if !ok {
 		return "", false
 	}
@@ -283,15 +347,17 @@ func (m *MissionManager) airTargetHasSlotFor(targetType object.Type, uid string,
 
 // findTargetAtCursor 从基地游标开始查找第一个仍然存在的目标。
 func (m *MissionManager) findTargetAtCursor(baseUID string, targetType object.Type) (int, string, bool) {
-	return m.findTargetAtCursorWhere(baseUID, targetType, nil)
+	return m.findTargetAtCursorWhere(baseUID, targetType, nil, nil)
 }
 
 // findTargetAtCursorWhere 从基地游标开始查找满足 accept 条件的第一个有效目标。
-// 返回其在队列中的下标；扫描完整圈仍无结果时会将游标归零并标记计划失效。
+// prefer 非空时优先返回满足 prefer 的候选（游标起扫一整圈），否则回退到
+// 第一个满足 accept 的目标；扫描完整圈仍无结果时会将游标归零并标记计划失效。
 func (m *MissionManager) findTargetAtCursorWhere(
 	baseUID string,
 	targetType object.Type,
 	accept func(string) bool,
+	prefer func(string) bool,
 ) (int, string, bool) {
 	if m.targetingPlan.BaseQueues == nil {
 		m.markTargetingDirty()
@@ -304,12 +370,22 @@ func (m *MissionManager) findTargetAtCursorWhere(
 	}
 
 	cursor := m.targetCursor(baseUID, targetType)
+	fallback := -1
 	for offset := 0; offset < len(queue); offset++ {
 		idx := (cursor + offset) % len(queue)
 		uid := queue[idx].UID
-		if m.targetExists(uid, targetType) && (accept == nil || accept(uid)) {
-			return idx, queue[idx].UID, true
+		if !m.targetExists(uid, targetType) || (accept != nil && !accept(uid)) {
+			continue
 		}
+		if prefer == nil || prefer(uid) {
+			return idx, uid, true
+		}
+		if fallback < 0 {
+			fallback = idx
+		}
+	}
+	if fallback >= 0 {
+		return fallback, queue[fallback].UID, true
 	}
 	m.setTargetCursor(baseUID, targetType, 0)
 	m.markTargetingDirty()
@@ -448,6 +524,11 @@ func (m *MissionManager) takeOffFromBase(
 		targetType := targetTypes[idx]
 		aircraft := base.BaseAircraft()
 		targetRange := 0.0
+		// 起飞目标同样优先「一波能带走」的敌舰，与在空飞机的重新分配保持一致
+		var prefer func(string) bool
+		if targetType == object.TypeShip {
+			prefer = m.oneSalvoKillablePrefer(maxGroupPayloadDamage(aircraft, targetType))
+		}
 		targetUID, ok := m.peekTargetUIDWhere(baseUID, targetType, func(uid string) bool {
 			if !m.airTargetHasSlotFor(targetType, uid, attackers) {
 				return false
@@ -458,7 +539,7 @@ func (m *MissionManager) takeOffFromBase(
 			}
 			targetRange = distance
 			return true
-		})
+		}, prefer)
 		if !ok {
 			continue
 		}

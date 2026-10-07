@@ -5296,17 +5296,17 @@
     displayNameJa: "海空全機種対決―ミッドウェー",
     initFunds: 10000,
     initCameraPos: [
-      // P1：同盟国航母队列质心（31 艘，x 均值 7580/31≈244.52 → 245，y 均值 128）
-      [245, 128],
-      // P2：轴心国航母队列质心（31 艘，x 均值 325/31≈10.48 → 10，y 均值 128）
-      [10, 128]
+      // P1：同盟国航母队列质心
+      [220, 128],
+      // P2：轴心国航母队列质心
+      [25, 128]
     ],
     mapName: "midway",
     maxShipCount: 60,
-    description: "纯测试关卡，不复原历史。沿用第三个测试关卡的中途岛地图与两座机场坐标，但对调归属：左机场 [103, 156] 属 P2，驻全部轴心国（日本、德国、意大利）机型；右机场 [161, 166] 属 P1，驻全部同盟国（美国、英国、法国、苏联）机型，每型 8 架（含前一测试关漏收的水上侦察机/鱼雷机）。海面上双方只有航母：轴心国 31 艘（日本 16、德国 10、意大利 5）距左边缘 10 格，同盟国 31 艘（美国 11、英国 15、法国 5）距右边缘 10 格，两列交错 1 格排开，舰首一律朝地图中央。P1 为玩家方（右侧），初始镜头对准 [245, 128]。两列相距约 233 格（≈29.8 km），航程不足的机型要等双方接近后才能出击。两座机场收录各自阵营全部机型；无国籍的 2024 特殊测试机不收录，后续新增飞机需同步补进本关。无增援、无油井。",
-    descriptionEn: "A pure test scenario, not a historical reconstruction. It reuses the Midway map and both airfield positions of the third test scenario but swaps their ownership: the left airfield [103, 156] belongs to P2 and hosts every Axis (Japanese, German, Italian) type, while the right [161, 166] belongs to P1 and hosts every Allied (U.S., British, French, Soviet) type, eight of each, including the seaplane and torpedo types the previous test missed. The sea holds no other warships, only carriers: 31 Axis (16 Japanese, 10 German, 5 Italian) ten tiles from the left edge against 31 Allied (11 U.S., 15 British, 5 French) ten tiles from the right edge, both columns staggered one tile apart with every bow facing the map centre. P1 is the player side (right column), opening camera at [245, 128]. The columns start about 233 tiles (roughly 29.8 km) apart, so short-range types must wait for the fleets to close. Both airfields list every type of their faction; the factionless 2024 special test aircraft are excluded, and aircraft added later must also be added here. No reinforcements and no oil platforms.",
-    descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. Используются карта Мидуэй и координаты обоих аэродромов третьего испытательного сценария, но их принадлежность меняется: левый аэродром [103, 156] переходит к P2 и принимает все типы стран Оси (Япония, Германия, Италия), правый [161, 166] остаётся у P1 и принимает все типы союзников (США, Великобритания, Франция, СССР) по восемь машин каждого типа, включая пропущенные ранее гидросамолёты и торпедоносцы. Других кораблей нет: 31 авианосец Оси (16 японских, 10 немецких, 5 итальянских) в десяти клетках от левого края против 31 авианосца союзников (11 американских, 15 британских, 5 французских) в десяти клетках от правого; оба строя идут в шахматном порядке с шагом в одну клетку, носы развёрнуты к центру карты. P1 — сторона игрока (правый строй), начальная камера на [245, 128]. Строй отделяют около 233 клеток (примерно 29,8 км), поэтому самолёты с малой дальностью ждут сближения флотов. Оба аэродрома содержат все типы своей стороны; внефракционные специальные машины 2024 года не включены, а новые самолёты нужно добавлять на оба аэродрома. Подкреплений и нефтяных платформ нет.",
-    descriptionJa: "史実再現ではなく純粋な試験シナリオ。第三試験シナリオの中途島マップと両陸上飛行場の座標を流用し、所属だけを入れ替える。左飛行場[103, 156]はP2所属となり枢軸国（日本・ドイツ・イタリア）の全機種を、右飛行場[161, 166]はP1所属となり連合国（米国・英国・フランス・ソ連）の全機種を各8機ずつ収容する（第三試験で漏れていた水上偵察機・雷撃機を含む）。海上には他の軍艦を置かず、空母のみを出す。左端から10マスに枢軸国空母31隻（日本16・ドイツ10・イタリア5）、右端から10マスに連合国空母31隻（米国11・英国15・フランス5）を、1マス刻みの千鳥配置で並べ、艦首はすべてマップ中央へ向ける。P1がプレイヤー側（右列）で、初期カメラは[245, 128]。両列は約233マス（約29.8km）離れており、航続距離の短い機種は接近を待たねば敵に届かない。両飛行場は自陣営の全機種を収録する。国籍を持たない2024年の特殊試験機は収録せず、今後追加される航空機も本シナリオの飛行場へ追加すること。増援と油井はない。",
+    description: "纯测试关卡，不复原历史。沿用第三个测试关卡的中途岛地图与两座机场坐标，但对调归属：左机场 [103, 156] 属 P2，驻全部轴心国（日本、德国、意大利）机型；右机场 [161, 166] 属 P1，驻全部同盟国（美国、英国、法国、苏联）机型，每型 8 架（含前一测试关漏收的水上侦察机/鱼雷机）。海面上双方只有航母：轴心国 31 艘（日本 16、德国 10、意大利 5）距左边缘 30 格，同盟国 31 艘（美国 11、英国 15、法国 5）距右边缘 30 格，两列交错 1 格排开，舰首一律朝地图中央。P1 为玩家方（右侧），初始镜头对准 [225, 128]。两列相距约 193 格（≈24.7 km），航程不足的机型要等双方接近后才能出击。两座机场收录各自阵营全部机型；无国籍的 2024 特殊测试机不收录，后续新增飞机需同步补进本关。无增援、无油井。",
+    descriptionEn: "A pure test scenario, not a historical reconstruction. It reuses the Midway map and both airfield positions of the third test scenario but swaps their ownership: the left airfield [103, 156] belongs to P2 and hosts every Axis (Japanese, German, Italian) type, while the right [161, 166] belongs to P1 and hosts every Allied (U.S., British, French, Soviet) type, eight of each, including the seaplane and torpedo types the previous test missed. The sea holds no other warships, only carriers: 31 Axis (16 Japanese, 10 German, 5 Italian) thirty tiles from the left edge against 31 Allied (11 U.S., 15 British, 5 French) thirty tiles from the right edge, both columns staggered one tile apart with every bow facing the map centre. P1 is the player side (right column), opening camera at [225, 128]. The columns start about 193 tiles (roughly 24.7 km) apart, so short-range types must wait for the fleets to close. Both airfields list every type of their faction; the factionless 2024 special test aircraft are excluded, and aircraft added later must also be added here. No reinforcements and no oil platforms.",
+    descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. Используются карта Мидуэй и координаты обоих аэродромов третьего испытательного сценария, но их принадлежность меняется: левый аэродром [103, 156] переходит к P2 и принимает все типы стран Оси (Япония, Германия, Италия), правый [161, 166] остаётся у P1 и принимает все типы союзников (США, Великобритания, Франция, СССР) по восемь машин каждого типа, включая пропущенные ранее гидросамолёты и торпедоносцы. Других кораблей нет: 31 авианосец Оси (16 японских, 10 немецких, 5 итальянских) в тридцати клетках от левого края против 31 авианосца союзников (11 американских, 15 британских, 5 французских) в тридцати клетках от правого; оба строя идут в шахматном порядке с шагом в одну клетку, носы развёрнуты к центру карты. P1 — сторона игрока (правый строй), начальная камера на [225, 128]. Строй отделяют около 193 клеток (примерно 24,7 км), поэтому самолёты с малой дальностью ждут сближения флотов. Оба аэродрома содержат все типы своей стороны; внефракционные специальные машины 2024 года не включены, а новые самолёты нужно добавлять на оба аэродрома. Подкреплений и нефтяных платформ нет.",
+    descriptionJa: "史実再現ではなく純粋な試験シナリオ。第三試験シナリオの中途島マップと両陸上飛行場の座標を流用し、所属だけを入れ替える。左飛行場[103, 156]はP2所属となり枢軸国（日本・ドイツ・イタリア）の全機種を、右飛行場[161, 166]はP1所属となり連合国（米国・英国・フランス・ソ連）の全機種を各8機ずつ収容する（第三試験で漏れていた水上偵察機・雷撃機を含む）。海上には他の軍艦を置かず、空母のみを出す。左端から30マスに枢軸国空母31隻（日本16・ドイツ10・イタリア5）、右端から30マスに連合国空母31隻（米国11・英国15・フランス5）を、1マス刻みの千鳥配置で並べ、艦首はすべてマップ中央へ向ける。P1がプレイヤー側（右列）で、初期カメラは[225, 128]。両列は約193マス（約24.7km）離れており、航続距離の短い機種は接近を待たねば敵に届かない。両飛行場は自陣営の全機種を収録する。国籍を持たない2024年の特殊試験機は収録せず、今後追加される航空機も本シナリオの飛行場へ追加すること。増援と油井はない。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initAirfields: [
@@ -5315,7 +5315,7 @@
         // 收录全部日本、德国与意大利机型，每型 8 架；E16A/E15K1/F1M2/E13A/Fi167A/Ar196/FF33E
         // 是第三个测试关卡漏收的 7 型水上侦察机/鱼雷机，本关补齐。
         pos: [103, 156],
-        rotation: 270,
+        rotation: 90,
         runwayLength: 11,
         runwayWidth: 1.0,
         belongPlayer: "P2",
@@ -5901,385 +5901,385 @@
     ],
     initShips: [
       // 坐标按 256×256 midway.map 网格落位；0°=北、90°=东、180°=南、270°=西。
-      // 本关只有航母，没有任何其他战舰。两列航母分别距左/右地图边缘 10 格，舰首朝地图中央，
-      // 相邻两舰按 1 格交错排开：奇数序号比偶数序号向地图外方向偏移 1 格（左列 x 在 10/11、
-      // 右列 x 在 245/244 之间交替），纵向每舰递增 1 格，两列纵列都以 y=128 为中心。
+      // 本关只有航母，没有任何其他战舰。两列航母分别距左/右地图边缘 30 格，舰首朝地图中央，
+      // 相邻两舰按 1 格交错排开：奇数序号比偶数序号向地图外方向偏移 1 格（左列 x 在 30/31、
+      // 右列 x 在 225/224 之间交替），纵向每舰递增 1 格，两列纵列都以 y=128 为中心。
       // 全图无搁浅风险：midway.map 的陆地只占 x∈[94,173]、y∈[137,174]，两列航母全在水面上。
 
-      // === 轴心国航母队列（P2，距左边缘 10 格，舰首 90° 向东，队列质心 [10, 128]） ===
+      // === 轴心国航母队列（P2，距左边缘 30 格，舰首 90° 向东，队列质心 [30, 128]） ===
       // 日本 16 艘：hakuryu(CV)、shinano(CV)、taiho(CV)、unryu(CV)、shokaku(CV)、hiryu(CV)、soryu(CV)、kaga(CV)、akagi(CV)、hiyo(CV)、chitose(CVL)、shoho(CVL)、ryujo(CVL)、hosho(CVL)、shinyo(CVE)、taiyo(CVE)；德国 10 艘：graf_zeppelin(CV)×5、stuttgart(AV)×5；意大利 5 艘：aquila(CV)×5（德、意航母为复制扩充），合计 31 艘与同盟国持平
       {
         name: "hakuryu",
-        pos: [10, 113],
+        pos: [30, 113],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "shinano",
-        pos: [11, 114],
+        pos: [31, 114],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "taiho",
-        pos: [10, 115],
+        pos: [30, 115],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "unryu",
-        pos: [11, 116],
+        pos: [31, 116],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "shokaku",
-        pos: [10, 117],
+        pos: [30, 117],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "hiryu",
-        pos: [11, 118],
+        pos: [31, 118],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "soryu",
-        pos: [10, 119],
+        pos: [30, 119],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "kaga",
-        pos: [11, 120],
+        pos: [31, 120],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "akagi",
-        pos: [10, 121],
+        pos: [30, 121],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "hiyo",
-        pos: [11, 122],
+        pos: [31, 122],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "chitose",
-        pos: [10, 123],
+        pos: [30, 123],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "shoho",
-        pos: [11, 124],
+        pos: [31, 124],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "ryujo",
-        pos: [10, 125],
+        pos: [30, 125],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "hosho",
-        pos: [11, 126],
+        pos: [31, 126],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "shinyo",
-        pos: [10, 127],
+        pos: [30, 127],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "taiyo",
-        pos: [11, 128],
+        pos: [31, 128],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "graf_zeppelin",
-        pos: [10, 129],
+        pos: [30, 129],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "stuttgart",
-        pos: [11, 130],
+        pos: [31, 130],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "aquila",
-        pos: [10, 131],
+        pos: [30, 131],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "graf_zeppelin",
-        pos: [11, 132],
+        pos: [31, 132],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "stuttgart",
-        pos: [10, 133],
+        pos: [30, 133],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "aquila",
-        pos: [11, 134],
+        pos: [31, 134],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "graf_zeppelin",
-        pos: [10, 135],
+        pos: [30, 135],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "stuttgart",
-        pos: [11, 136],
+        pos: [31, 136],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "aquila",
-        pos: [10, 137],
+        pos: [30, 137],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "graf_zeppelin",
-        pos: [11, 138],
+        pos: [31, 138],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "stuttgart",
-        pos: [10, 139],
+        pos: [30, 139],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "aquila",
-        pos: [11, 140],
+        pos: [31, 140],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "graf_zeppelin",
-        pos: [10, 141],
+        pos: [30, 141],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "stuttgart",
-        pos: [11, 142],
+        pos: [31, 142],
         rotation: 90,
         belongPlayer: "P2"
       },
       {
         name: "aquila",
-        pos: [10, 143],
+        pos: [30, 143],
         rotation: 90,
         belongPlayer: "P2"
       },
 
-      // === 同盟国航母队列（P1，距右边缘 10 格，舰首 270° 向西，队列质心 [245, 128]） ===
+      // === 同盟国航母队列（P1，距右边缘 30 格，舰首 270° 向西，队列质心 [225, 128]） ===
       // 美国 11 艘：america(CV)、midway(CVB)、kentucky_bb66(CV)、illinois(CV)、essex(CV)、yorktown(CV)、saratoga(CV)、langley(CV)、princeton(CVL)、card(CVE)、wolverine(IX)；英国 15 艘：implacable(CV)、victorious(CV)、ark_royal(CV)、courageous(CV)、eagle(CV)、hermes(CV)、argus(CV)、vengeance(CVL)、unicorn(CVL)、bicorn(CVL)、queen(CVE)、biter(CVE)、empire_maccoll(MAC)、empire_macrae(MAC)、albatross(AV)；法国 5 艘：clemenceau_pa28(CV)、joffre(CV)、neptune(CV)、bearn(CV)、commandant_teste(AV)
       {
         name: "america",
-        pos: [245, 113],
+        pos: [225, 111],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "midway",
-        pos: [244, 114],
+        pos: [224, 114],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "kentucky_bb66",
-        pos: [245, 115],
+        pos: [225, 115],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "illinois",
-        pos: [244, 116],
+        pos: [224, 116],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "essex",
-        pos: [245, 117],
+        pos: [225, 117],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "yorktown",
-        pos: [244, 118],
+        pos: [224, 118],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "saratoga",
-        pos: [245, 119],
+        pos: [225, 119],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "langley",
-        pos: [244, 120],
+        pos: [224, 120],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "princeton",
-        pos: [245, 121],
+        pos: [225, 121],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "card",
-        pos: [244, 122],
+        pos: [224, 122],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "wolverine",
-        pos: [245, 123],
+        pos: [225, 123],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "implacable",
-        pos: [244, 124],
+        pos: [224, 124],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "victorious",
-        pos: [245, 125],
+        pos: [225, 125],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "ark_royal",
-        pos: [244, 126],
+        pos: [224, 126],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "courageous",
-        pos: [245, 127],
+        pos: [225, 127],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "eagle",
-        pos: [244, 128],
+        pos: [224, 128],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "hermes",
-        pos: [245, 129],
+        pos: [225, 129],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "argus",
-        pos: [244, 130],
+        pos: [224, 130],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "vengeance",
-        pos: [245, 131],
+        pos: [225, 131],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "unicorn",
-        pos: [244, 132],
+        pos: [224, 132],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "bicorn",
-        pos: [245, 133],
+        pos: [225, 133],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "queen",
-        pos: [244, 134],
+        pos: [224, 134],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "biter",
-        pos: [245, 135],
+        pos: [225, 135],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "empire_maccoll",
-        pos: [244, 136],
+        pos: [224, 136],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "empire_macrae",
-        pos: [245, 137],
+        pos: [225, 137],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "albatross",
-        pos: [244, 138],
+        pos: [224, 138],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "clemenceau_pa28",
-        pos: [245, 139],
+        pos: [225, 139],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "joffre",
-        pos: [244, 140],
+        pos: [224, 140],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "neptune",
-        pos: [245, 141],
+        pos: [225, 141],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "bearn",
-        pos: [244, 142],
+        pos: [224, 142],
         rotation: 270,
         belongPlayer: "P1"
       },
       {
         name: "commandant_teste",
-        pos: [245, 143],
+        pos: [225, 143],
         rotation: 270,
         belongPlayer: "P1"
       },
