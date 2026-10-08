@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"strconv"
 	"strings"
 
 	"github.com/google/uuid"
@@ -214,21 +215,157 @@ func (p *Plane) ID() string {
 	return p.Uid
 }
 
-// Detail 详细信息
+// DetailContext 是调试面板需要的外部上下文，字段都可缺省（零值表示没有该上下文）。
+// 用一个结构体而不是多个可空参数，避免调用点排出一串 nil。
+type DetailContext struct {
+	// Enemy 飞机当前的攻击目标
+	Enemy Hurtable
+	// Terrain 当前任务地图数据，用于航空鱼雷的陆地阻挡判定
+	Terrain *mapcfg.MapData
+	// BaseLabel 所属基地的可读标识（例如 carrier akagi(c001) / airfield@(103,156)(af01)）。
+	// 基地类型定义在 building 包，unit 不能反向依赖，只能由调用方解析后传入；
+	// 空串表示基地已不存在（航母被击沉等），面板会退化成 missing + 裸 uuid。
+	BaseLabel string
+}
+
+// Detail 详细信息（无外部上下文），供 BattleUnit 接口与调试面板使用。
+func (p *Plane) Detail() string {
+	return strings.Join(p.DetailLines(DetailContext{}), "\n")
+}
+
+// DetailLines 生成调试用的多行信息。
+// ctx.Enemy 非空时逐枚释放器给出投放判定，用于定位“为什么不投弹”；
+// ctx.Terrain 非空时再追加航空鱼雷的陆地阻挡判定；ctx.BaseLabel 用于把所属基地的
+// 裸 uuid 换成可读标识。
+//
 // CurSpeed 是世界系速度（已乘全局速度倍率），所以比较基准也必须乘倍率，
 // 否则在“快”倍速下调试面板会把每架巡航中的飞机都显示成超过速度上限。
 // 同时打印飞行阶段：起降阶段（滑跑 / 待场 / 进近）的速度是世界系位移，
 // 允许高于设计上限，看阶段就能区分。
-func (p *Plane) Detail() string {
+func (p *Plane) DetailLines(ctx DetailContext) []string {
 	maxSpeed := p.MaxSpeed
 	if config.G != nil {
 		maxSpeed *= config.G.SpeedMultiplier
 	}
-	return fmt.Sprintf(
+	lines := []string{fmt.Sprintf(
 		"Plane %s(%s): Pos: %s, Rotation: %.2f, Phase: %s, Speed: %.2f/%.2f, HP: %.2f/%.2f, AttackTarget: %s",
 		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.FlightPhase,
 		p.CurSpeed, maxSpeed, p.CurHP, p.TotalHP, p.CurAttackTarget,
-	)
+	)}
+	lines = append(lines, fmt.Sprintf(
+		"  Flight: progress %.2f, elapsed %.1f, height %.2f, cruising %t, onGround %t, sight %t, scout %t, forceReturn %t",
+		p.FlightPhaseProgress(), p.FlightPhaseElapsed, p.CurHeight,
+		p.IsCruising(), p.IsOnGround(), p.ProvidesSight(), p.ScoutManual, p.ForceReturn,
+	))
+	// 剩余航程归零或 ForceReturn 置位时飞机已经/即将返航，MustReturn 是两者的汇总。
+	lines = append(lines, fmt.Sprintf(
+		"  Fuel: %.2f/%.2f, MustReturn: %t, LandingSlot: %d",
+		p.RemainRange, p.Range, p.MustReturn(), p.LandingSlot,
+	))
+	// 所属基地单独一行：可读标识带完整 uuid，和 Fuel 挤在一起会折成两行。
+	lines = append(lines, "  Base: "+p.baseDetail(ctx.BaseLabel))
+	// 投放间隔闸门：Plane.Fire 每拍只放行一次投放，闸门未开时释放器状态再正常也不会投。
+	lines = append(lines, fmt.Sprintf(
+		"  ReleaseGate: ready %t, interval %.2fs, latestTick %d",
+		ticksReady(p.Weapon.LatestReleaseTick, p.Weapon.ReleaseInterval),
+		p.Weapon.ReleaseInterval, p.Weapon.LatestReleaseTick,
+	))
+	lines = append(lines, ordnanceDetailLines("Bombs", p.Weapon.Bombs, p, ctx.Enemy, ctx.Terrain)...)
+	lines = append(lines, ordnanceDetailLines("Torpedoes", p.Weapon.Torpedoes, p, ctx.Enemy, ctx.Terrain)...)
+
+	readyGuns := 0
+	for _, gun := range p.Weapon.Guns {
+		if gun != nil && !gun.Disable && gun.Reloaded() {
+			readyGuns++
+		}
+	}
+	lines = append(lines, fmt.Sprintf(
+		"  Guns: %d (ready %d), MaxToShipRange: %.2f, MaxToPlaneRange: %.2f",
+		len(p.Weapon.Guns), readyGuns, p.Weapon.MaxToShipRange, p.Weapon.MaxToPlaneRange,
+	))
+	if len(p.Weapon.Rockets) > 0 {
+		shot, total := 0, 0
+		for _, rocket := range p.Weapon.Rockets {
+			if rocket == nil {
+				continue
+			}
+			shot += rocket.ShotCount
+			total += rocket.RocketCount
+		}
+		lines = append(lines, fmt.Sprintf("  Rockets: %d/%d fired", shot, total))
+	}
+	return lines
+}
+
+// baseDetail 返回所属基地的调试文本。label 由调用方解析（unit 认不出 building 包的类型）；
+// 基地已不存在时退化成 missing + 裸 uuid，顺着这条 uuid 能查到是哪艘航母沉了。
+func (p *Plane) baseDetail(label string) string {
+	if label != "" {
+		return label
+	}
+	if p.BelongShip == "" {
+		return "none"
+	}
+	return "missing " + p.BelongShip
+}
+
+// ordnanceDetailLines 生成一类释放器（炸弹 / 鱼雷）的调试行；未装备时返回空。
+//
+// 渲染结果完全相同的释放器合并成一组展示（如 8 枚炸弹其实只是同两种弹的重复），
+// 否则整舱挂载会把面板撑到半个屏幕高。合并只针对逐字相同的行，因此单枚差异
+// （例如某一枚已投放）仍会各自成组，不会丢失信息。
+func ordnanceDetailLines(
+	label string, releasers []*Releaser, shooter Attacker, enemy Hurtable, terrain *mapcfg.MapData,
+) []string {
+	if len(releasers) == 0 {
+		return nil
+	}
+	released := 0
+	for _, r := range releasers {
+		if r != nil && r.Released {
+			released++
+		}
+	}
+
+	type ordnanceGroup struct {
+		indices []int
+		parts   []string
+	}
+	var groups []ordnanceGroup
+	groupAt := map[string]int{}
+	for idx, r := range releasers {
+		if r == nil {
+			continue
+		}
+		parts := r.detailLines(shooter, enemy, terrain)
+		key := strings.Join(parts, "\n")
+		if at, ok := groupAt[key]; ok {
+			groups[at].indices = append(groups[at].indices, idx+1)
+			continue
+		}
+		groupAt[key] = len(groups)
+		groups = append(groups, ordnanceGroup{indices: []int{idx + 1}, parts: parts})
+	}
+
+	lines := []string{fmt.Sprintf("  %s %d/%d released:", label, released, len(releasers))}
+	for _, group := range groups {
+		lines = append(lines, fmt.Sprintf(
+			"    %s %s", formatOrdnanceIndices(group.indices), group.parts[0],
+		))
+		for _, part := range group.parts[1:] {
+			lines = append(lines, "        "+part)
+		}
+	}
+	return lines
+}
+
+// formatOrdnanceIndices 把合并展示的释放器序号格式化成 [1,3,5,7]。
+func formatOrdnanceIndices(indices []int) string {
+	parts := make([]string, 0, len(indices))
+	for _, idx := range indices {
+		parts = append(parts, strconv.Itoa(idx))
+	}
+	return "[" + strings.Join(parts, ",") + "]"
 }
 
 // Player 所属玩家
