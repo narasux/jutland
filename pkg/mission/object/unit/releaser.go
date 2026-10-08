@@ -1,6 +1,7 @@
 package unit
 
 import (
+	"fmt"
 	"log"
 	"math"
 
@@ -45,22 +46,90 @@ type Releaser struct {
 
 var _ AttackWeapon = (*Releaser)(nil)
 
-// InShotRange 是否在射程 & 射界内
-func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos.MapPos) bool {
+// inRange 是否在射程内；航空鱼雷只投放至 80% 最大射程，预留敌舰规避缓冲。
+func (r *Releaser) inRange(curPos, targetPos objPos.MapPos) bool {
 	maxRange := r.Range
 	if r.bulletType() == objBullet.TypeTorpedo {
 		maxRange *= aerialTorpedoReleaseRangeRatio
 	}
-	// 不在射程内，不可发射
-	if curPos.Distance(targetPos) > maxRange {
-		return false
-	}
-	// 不在射界范围内，不可发射
+	return curPos.Distance(targetPos) <= maxRange
+}
+
+// inArc 是否在左右投放射界内
+func (r *Releaser) inArc(shipCurRotation float64, curPos, targetPos objPos.MapPos) bool {
 	rotation := math.Mod(curPos.Angle(targetPos)-shipCurRotation+360, 360)
-	if !r.LeftFiringArc.Contains(rotation) && !r.RightFiringArc.Contains(rotation) {
+	return r.LeftFiringArc.Contains(rotation) || r.RightFiringArc.Contains(rotation)
+}
+
+// InShotRange 是否在射程 & 射界内
+func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos.MapPos) bool {
+	return r.inRange(curPos, targetPos) && r.inArc(shipCurRotation, curPos, targetPos)
+}
+
+// targetAcceptable 目标是否满足投放门槛：战舰始终可攻击；地面飞机（停放/滑行）
+// 只能被炸弹攻击（鱼雷无法在陆地使用）。
+func (r *Releaser) targetAcceptable(enemy Hurtable) bool {
+	switch enemy.ObjType() {
+	case object.TypeShip:
+		return true
+	case object.TypePlane:
+		plane, ok := enemy.(*Plane)
+		return ok && plane.IsOnGround() && r.bulletType() != objBullet.TypeTorpedo
+	default:
 		return false
 	}
-	return true
+}
+
+// detailLines 生成单枚释放器的调试文本：第一行是身份与挂载，第二行是当前能否
+// 投放的逐项判定。enemy 为空时只输出第一行。
+//
+// 判定口径与 Fire 一致：提前量落点、目标门槛、射程、射界；terrain 非空时再追加
+// 航空鱼雷的陆地阻挡判定。飞机级的投放间隔闸门不在本函数范围内：Plane.Fire 每拍
+// 只放行一次投放，闸门未开时即使 canDrop 为真也不会投，由调用方单独展示。
+func (r *Releaser) detailLines(
+	shooter Attacker, enemy Hurtable, terrain *mapcfg.MapData,
+) []string {
+	state := "ready"
+	if r.Released {
+		state = "released"
+	}
+	identity := fmt.Sprintf(
+		"%s (%s, %s): %s, range %.2f, speed %.2f",
+		r.Name, r.BulletName, r.bulletType(), state, r.Range, r.BulletSpeed,
+	)
+	if enemy == nil {
+		return []string{identity}
+	}
+	if !r.targetAcceptable(enemy) {
+		return []string{identity, "targetOK false (not droppable target)"}
+	}
+
+	sState, eState := shooter.MovementState(), enemy.MovementState()
+	// 与 Fire 相同的口径：弹速要乘全局速度倍率，落点取提前量位置。
+	bulletSpeed := r.BulletSpeed
+	if config.G != nil {
+		bulletSpeed *= config.G.SpeedMultiplier
+	}
+	targetPos := eState.CurPos.Copy()
+	if bulletSpeed > 0 {
+		_, targetRx, targetRY := geometry.CalcWeaponFireAngle(
+			sState.CurPos.RX, sState.CurPos.RY, bulletSpeed,
+			eState.CurPos.RX, eState.CurPos.RY, eState.CurSpeed, eState.CurRotation,
+		)
+		targetPos = objPos.NewR(targetRx, targetRY)
+	}
+	inRange := r.inRange(sState.CurPos, targetPos)
+	inArc := r.inArc(sState.CurRotation, sState.CurPos, targetPos)
+	// dist 是到提前量落点的距离，不是到目标的距离：弹速慢时落点会远得多，
+	// inRange 也按落点判定，所以飞机可能贴近目标却始终投不下去。
+	verdict := fmt.Sprintf(
+		"dist %.2f (lead point), inRange %t, inArc %t, canDrop %t",
+		sState.CurPos.Distance(targetPos), inRange, inArc, !r.Released && inRange && inArc,
+	)
+	if r.bulletType() == objBullet.TypeTorpedo && terrain != nil {
+		verdict += fmt.Sprintf(", landBlocked %t", r.pathCrossesLand(shooter, enemy, terrain))
+	}
+	return []string{identity, verdict}
 }
 
 func (r *Releaser) shotParameters(
@@ -70,15 +139,8 @@ func (r *Releaser) shotParameters(
 	if r.Released {
 		return UnitMovementState{}, objPos.MapPos{}, 0, false
 	}
-	// 目标门槛：战舰始终可攻击；地面飞机（停放/滑行）只能被炸弹攻击（鱼雷无法在陆地使用）。
-	switch enemy.ObjType() {
-	case object.TypeShip:
-	case object.TypePlane:
-		plane, ok := enemy.(*Plane)
-		if !ok || !plane.IsOnGround() || r.bulletType() == objBullet.TypeTorpedo {
-			return UnitMovementState{}, objPos.MapPos{}, 0, false
-		}
-	default:
+	// 目标门槛不通过，不可发射
+	if !r.targetAcceptable(enemy) {
 		return UnitMovementState{}, objPos.MapPos{}, 0, false
 	}
 

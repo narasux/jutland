@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"strings"
 
 	"github.com/mohae/deepcopy"
 
@@ -169,17 +170,43 @@ func (s *BattleShip) ID() string {
 	return s.Uid
 }
 
-// Detail 详细信息
-// 与飞机一致：CurSpeed 已乘全局速度倍率，上限也要乘，避免“快”倍速下显示成超速。
+// Detail 详细信息（供 BattleUnit 接口与调试面板使用）。
 func (s *BattleShip) Detail() string {
+	return strings.Join(s.DetailLines(), "\n")
+}
+
+// DetailLines 生成调试用的多行信息：身份 / 归属与攻击目标，以及各类武器的
+// 就绪数与下一座装填进度（口径与单位面板一致，都读 SimTick）。
+// CurSpeed 已乘全局速度倍率，上限也要乘，避免“快”倍速下显示成超速。
+func (s *BattleShip) DetailLines() []string {
 	maxSpeed := s.MaxSpeed
 	if config.G != nil {
 		maxSpeed *= config.G.SpeedMultiplier
 	}
-	return fmt.Sprintf(
+	lines := []string{fmt.Sprintf(
 		"Ship %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f",
 		s.Name, s.Uid, s.CurPos.String(), s.CurRotation, s.CurSpeed, maxSpeed, s.CurHP, s.TotalHP,
-	)
+	)}
+	lines = append(lines, fmt.Sprintf(
+		"  Player: %s, GroupID: %d, AttackTarget: %s", s.BelongPlayer, s.GroupID, s.AttackTarget,
+	))
+	now := SimTick()
+	for _, weaponType := range []WeaponType{
+		WeaponTypeMainGun, WeaponTypeSecondaryGun, WeaponTypeAntiAircraftGun,
+		WeaponTypeTorpedo, WeaponTypeRocket,
+	} {
+		status := s.Weapon.ReloadStatus(weaponType, now)
+		if status.Equipped == 0 {
+			continue
+		}
+		// RemainingMillis 是下一座可发射武器的剩余时间，配百分比更直观。
+		lines = append(lines, fmt.Sprintf(
+			"  %s: ready %d/%d, next %.2fs (%.0f%%), disabled %t",
+			weaponType, status.Ready, status.Equipped,
+			float64(status.RemainingMillis)/1000, status.Progress*100, status.Disabled,
+		))
+	}
+	return lines
 }
 
 // Player 所属玩家
