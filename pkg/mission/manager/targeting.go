@@ -392,13 +392,28 @@ func (m *MissionManager) findTargetAtCursorWhere(
 	return 0, "", false
 }
 
-// targetReachableByPlane 判断飞机当前剩余航程是否足够到达目标。
+// targetReachableByPlane 判断飞机的剩余航程是否够飞抵目标并返航（作战半径检查）。
+// 基地已不存在（航母被击沉等）时退回单程可达判定：飞机本就无处可返，
+// 返航段交给消亡与着陆流程处理。
 func (m *MissionManager) targetReachableByPlane(plane *objUnit.Plane, uid string, targetType object.Type) bool {
 	if plane == nil || plane.RemainRange <= 0 {
 		return false
 	}
 	targetDistance, ok := m.targetDistanceFrom(plane.CurPos, uid, targetType)
-	return ok && targetDistance <= plane.RemainRange
+	if !ok {
+		return false
+	}
+	base, ok := m.state.FindAircraftBase(plane.BelongShip)
+	if !ok {
+		return targetDistance <= plane.RemainRange
+	}
+	// 回程按「目标到基地」的真实距离计算，而不是把去程翻倍：航母会移动，
+	// 飞机也可能从目标另一侧返航，两点间距离更接近实际返航航程。
+	returnDistance, ok := m.targetDistanceFrom(base.BasePos(), uid, targetType)
+	if !ok {
+		return false
+	}
+	return targetDistance+returnDistance <= plane.RemainRange
 }
 
 // targetDistanceFrom 返回指定位置到目标当前位置的距离，并校验目标是否存活。
@@ -523,7 +538,7 @@ func (m *MissionManager) takeOffFromBase(
 		idx := (start + offset) % len(targetTypes)
 		targetType := targetTypes[idx]
 		aircraft := base.BaseAircraft()
-		targetRange := 0.0
+		requiredRange := 0.0
 		// 起飞目标同样优先「一波能带走」的敌舰，与在空飞机的重新分配保持一致
 		var prefer func(string) bool
 		if targetType == object.TypeShip {
@@ -534,16 +549,21 @@ func (m *MissionManager) takeOffFromBase(
 				return false
 			}
 			distance, exists := m.targetDistanceFrom(base.BasePos(), uid, targetType)
-			if !exists || !aircraft.CanTakeOffWithinRange(targetType, distance) {
+			if !exists {
 				return false
 			}
-			targetRange = distance
+			// 作战半径：机型航程必须覆盖往返距离，否则这架飞机出击后回不来。
+			roundTrip := distance * 2
+			if !aircraft.CanTakeOffWithinRange(targetType, roundTrip) {
+				return false
+			}
+			requiredRange = roundTrip
 			return true
 		}, prefer)
 		if !ok {
 			continue
 		}
-		plane := aircraft.TakeOffWithinRange(base, targetType, targetRange)
+		plane := aircraft.TakeOffWithinRange(base, targetType, requiredRange)
 		if plane == nil {
 			continue
 		}

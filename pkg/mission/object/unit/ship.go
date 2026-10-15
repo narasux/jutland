@@ -745,7 +745,6 @@ var AllShipNames = []string{}
 func NewShip(
 	uidGenerator *ShipUidGenerator, name string, pos objPos.MapPos, rotation float64, player faction.Player,
 ) *BattleShip {
-	// FIXME-P1 小黄鸭太 Bug 了，需要默认禁用一些武器
 	s := deepcopy.Copy(*ShipMap[name]).(BattleShip)
 	s.Uid = uidGenerator.Gen(s.TypeAbbr)
 	s.CurPos = pos

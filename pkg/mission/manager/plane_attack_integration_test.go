@@ -24,7 +24,8 @@ func TestBomberReleasesBeforeReturning(t *testing.T) {
 	}{
 		{name: "B-17G", planeName: "B-17G", enemyX: 100},
 		{name: "B6N2", planeName: "B6N2", enemyX: 100},
-		{name: "B6N2-full-range", planeName: "B6N2", enemyX: 220},
+		// 往返 190 仍在 B6N2 的 218 航程内，覆盖作战半径附近的长距离出击
+		{name: "B6N2-long-range", planeName: "B6N2", enemyX: 115},
 		{name: "D4Y3", planeName: "D4Y3", enemyX: 100},
 	}
 	for _, testCase := range testCases {
@@ -123,7 +124,9 @@ func testBomberReleasesBeforeReturning(t *testing.T, planeName string, enemyX fl
 	}
 }
 
-func TestAirfieldDoesNotLaunchBomberBeyondRange(t *testing.T) {
+// 目标单程可达但超出作战半径时不应起飞：B6N2 航程 218，距离 210 单程够、
+// 往返 420 不够，飞机出击后回不来，机场应保持待命。
+func TestAirfieldDoesNotLaunchBomberBeyondCombatRadius(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
 	t.Cleanup(func() { config.G = oldSettings })
@@ -138,7 +141,7 @@ func TestAirfieldDoesNotLaunchBomberBeyondRange(t *testing.T) {
 		Type:         objUnit.ShipTypeCruiser,
 		CurHP:        1000,
 		TotalHP:      1000,
-		CurPos:       objPos.New(260, 150),
+		CurPos:       objPos.New(230, 150),
 		BelongPlayer: faction.ComputerAlpha,
 	}
 	missionState := &state.MissionState{
@@ -163,7 +166,10 @@ func TestAirfieldDoesNotLaunchBomberBeyondRange(t *testing.T) {
 	refreshAlertTargetPlan(manager)
 	manager.updateAirfieldAlertLaunch()
 	if len(missionState.Arena.Planes) != 0 {
-		t.Fatalf("airfield launched %d bomber(s) against an out-of-range target", len(missionState.Arena.Planes))
+		t.Fatalf(
+			"airfield launched %d bomber(s) against a target beyond its combat radius",
+			len(missionState.Arena.Planes),
+		)
 	}
 }
 

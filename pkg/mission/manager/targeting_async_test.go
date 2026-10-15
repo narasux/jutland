@@ -187,8 +187,9 @@ func TestTakeOffFromBaseChoosesPlaneThatCanReachTarget(t *testing.T) {
 		Name: shortName, Type: objUnit.PlaneTypeDiveBomber, Range: 20,
 		Weapon: objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{}}},
 	}
+	// 航程 200 覆盖到 (80,0) 的往返距离 160；短腿机型（20）往返不够，仍被跳过。
 	objUnit.PlaneMap[longName] = &objUnit.Plane{
-		Name: longName, Type: objUnit.PlaneTypeDiveBomber, Range: 100,
+		Name: longName, Type: objUnit.PlaneTypeDiveBomber, Range: 200,
 		Weapon: objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{}}},
 	}
 	t.Cleanup(func() {
