@@ -75,7 +75,6 @@ func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid
 }
 
 // 更新战舰武器开火相关状态
-// TODO 开火逻辑优化：主炮/鱼雷向射程内最大的，生命值比例最少目标开火，副炮向最近的目标开火
 func (m *MissionManager) updateShipWeaponFire() {
 	m.rebuildCombatBuckets()
 	maxBulletDiameter := 0
@@ -86,74 +85,130 @@ func (m *MissionManager) updateShipWeaponFire() {
 		if !ship.Weapon.AnyReloaded() {
 			continue
 		}
-		inRangeEnemies := []objUnit.Hurtable{}
-
-		target := m.state.Arena.Ships[ship.AttackTarget]
-		// 锁定目标要在射程内，开了迷雾时还得当前可见。看不见就改打别的可见敌人。
-		if target != nil &&
-			ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange &&
-			m.state.SeenBy(ship.BelongPlayer, target.CurPos.MX, target.CurPos.MY) {
-			inRangeEnemies = append(inRangeEnemies, target)
-		} else {
-			m.combatBuckets.eachPlane(
-				ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToPlaneRange,
-				func(enemy *objUnit.Plane) bool {
-					if ship.BelongPlayer == enemy.BelongPlayer {
-						return false
-					}
-					if !m.state.SeenBy(ship.BelongPlayer, enemy.CurPos.MX, enemy.CurPos.MY) {
-						return false
-					}
-					if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToPlaneRange {
-						return false
-					}
-					inRangeEnemies = append(inRangeEnemies, enemy)
-					return false
-				},
-			)
-			m.combatBuckets.eachShip(
-				ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToShipRange,
-				func(enemy *objUnit.BattleShip) bool {
-					if ship.BelongPlayer == enemy.BelongPlayer || enemy.Uid == ship.AttackTarget {
-						return false
-					}
-					if !m.state.SeenBy(ship.BelongPlayer, enemy.CurPos.MX, enemy.CurPos.MY) {
-						return false
-					}
-					if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToShipRange {
-						return false
-					}
-					inRangeEnemies = append(inRangeEnemies, enemy)
-					return false
-				},
-			)
+		bullets := ship.FireAt(m.shipFireTargets(ship))
+		if len(bullets) == 0 {
+			continue
 		}
-
-		if total := len(inRangeEnemies); total != 0 {
-			// 射程内的敌人都会被攻击
-			enemy := inRangeEnemies[rand.Intn(total)]
-			bullets := ship.Fire(enemy)
-			if len(bullets) == 0 {
-				continue
-			}
-			// 镜头内的才统计
-			if m.state.View.Camera.Contains(ship.CurPos) {
-				for _, bt := range bullets {
-					if bt.Type == objBullet.TypeTorpedo {
-						isTorpedoLaunched = true
-					} else if bt.Type == objBullet.TypeRocket {
-						isRocketLaunched = true
-					} else {
-						// 只有炮弹才计算口径，鱼雷发射都是一个声音
-						maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
-					}
+		// 镜头内的才统计
+		if m.state.View.Camera.Contains(ship.CurPos) {
+			for _, bt := range bullets {
+				if bt.Type == objBullet.TypeTorpedo {
+					isTorpedoLaunched = true
+				} else if bt.Type == objBullet.TypeRocket {
+					isRocketLaunched = true
+				} else {
+					// 只有炮弹才计算口径，鱼雷发射都是一个声音
+					maxBulletDiameter = max(maxBulletDiameter, bt.Diameter)
 				}
 			}
-			m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
 		}
+		m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
 	}
 
 	m.weaponFirePlayer.PlayShipFire(maxBulletDiameter, isTorpedoLaunched, isRocketLaunched)
+}
+
+// shipFireTargets 按武器类别分层选敌：主炮 / 鱼雷 / 火箭集火射程内
+// 「舰种价值高且血量比例低」的敌舰，副炮打最近的敌舰，防空炮打最近的敌机。
+// 有明确 AttackTarget 指令且该目标有效时主 / 副炮尊重该目标；防空炮始终独立
+// 搜索空袭目标，避免点名对舰时整舰防空哑火。
+func (m *MissionManager) shipFireTargets(ship *objUnit.BattleShip) objUnit.FireTargets {
+	var primary, nearest *objUnit.BattleShip
+	nearestDistance := math.MaxFloat64
+	takeShipTarget := func(enemy *objUnit.BattleShip) {
+		if primary == nil || betterPrimaryTarget(enemy, primary) {
+			primary = enemy
+		}
+		if distance := ship.CurPos.Distance(enemy.CurPos); distance < nearestDistance {
+			nearest, nearestDistance = enemy, distance
+		}
+	}
+
+	target := m.state.Arena.Ships[ship.AttackTarget]
+	// 锁定目标要在射程内，开了迷雾时还得当前可见。看不见就改打别的可见敌人。
+	if target != nil &&
+		ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange &&
+		m.state.SeenBy(ship.BelongPlayer, target.CurPos.MX, target.CurPos.MY) {
+		takeShipTarget(target)
+	} else {
+		m.combatBuckets.eachShip(
+			ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToShipRange,
+			func(enemy *objUnit.BattleShip) bool {
+				if ship.BelongPlayer == enemy.BelongPlayer {
+					return false
+				}
+				if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToShipRange {
+					return false
+				}
+				if !m.state.SeenBy(ship.BelongPlayer, enemy.CurPos.MX, enemy.CurPos.MY) {
+					return false
+				}
+				takeShipTarget(enemy)
+				return false
+			},
+		)
+	}
+
+	var antiAircraft *objUnit.Plane
+	antiAircraftDistance := math.MaxFloat64
+	m.combatBuckets.eachPlane(
+		ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToPlaneRange,
+		func(enemy *objUnit.Plane) bool {
+			if ship.BelongPlayer == enemy.BelongPlayer {
+				return false
+			}
+			if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToPlaneRange {
+				return false
+			}
+			if !m.state.SeenBy(ship.BelongPlayer, enemy.CurPos.MX, enemy.CurPos.MY) {
+				return false
+			}
+			if distance := ship.CurPos.Distance(enemy.CurPos); distance < antiAircraftDistance {
+				antiAircraft, antiAircraftDistance = enemy, distance
+			}
+			return false
+		},
+	)
+
+	targets := objUnit.FireTargets{}
+	if primary != nil {
+		targets.Primary = primary
+	}
+	if nearest != nil {
+		targets.Secondary = nearest
+	}
+	if antiAircraft != nil {
+		targets.AntiAircraft = antiAircraft
+	}
+	return targets
+}
+
+// betterPrimaryTarget 判断 candidate 是否比 current 更适合作为主炮 / 鱼雷的集火目标：
+// 先比集火评分，再比舰种价值，最后比舰体大小与剩余血量，保证结果稳定可复现。
+func betterPrimaryTarget(candidate, current *objUnit.BattleShip) bool {
+	candidateScore, currentScore := primaryTargetScore(candidate), primaryTargetScore(current)
+	if candidateScore != currentScore {
+		return candidateScore > currentScore
+	}
+	candidateValue, currentValue := shipTargetingValue(candidate), shipTargetingValue(current)
+	if candidateValue != currentValue {
+		return candidateValue > currentValue
+	}
+	if candidate.TotalHP != current.TotalHP {
+		return candidate.TotalHP > current.TotalHP
+	}
+	return candidate.CurHP < current.CurHP
+}
+
+// primaryTargetScore 主炮 / 鱼雷的集火评分：舰种价值越高、已损失血量比例越大，
+// 分数越高。满血目标分数为 0，所以同等条件下优先收掉残血目标；全场满血时靠
+// 舰种价值选出「射程内最大」的目标，对应「最大的、生命值比例最少」。
+func primaryTargetScore(ship *objUnit.BattleShip) float64 {
+	value := shipTargetingValue(ship)
+	if ship.TotalHP <= 0 {
+		return value
+	}
+	return value * (1 - ship.CurHP/ship.TotalHP)
 }
 
 // updatePlaneAttackOrReturn 负责飞机出动、目标重分配和返航决策。

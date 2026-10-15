@@ -306,26 +306,69 @@ func (s *BattleShip) Attack(shipUid string) {
 	s.AttackTarget = shipUid
 }
 
-// Fire 向指定目标发射武器
-func (s *BattleShip) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
+// FireTargets 是战舰当拍各类武器各自选定的目标。字段为空表示该类武器本拍
+// 没有可用敌人，对应类别整类跳过。
+type FireTargets struct {
+	// Primary 主炮 / 鱼雷 / 火箭的集火目标（射程内最大且血量比例最低）
+	Primary Hurtable
+	// Secondary 副炮目标（射程内最近）
+	Secondary Hurtable
+	// AntiAircraft 防空炮目标（射程内最近的敌机）
+	AntiAircraft Hurtable
+}
+
+// Fire 向单一目标发射全部武器（Attacker 接口要求）。
+func (s *BattleShip) Fire(enemy Hurtable) []*objBullet.Bullet {
+	return s.FireAt(FireTargets{Primary: enemy, Secondary: enemy, AntiAircraft: enemy})
+}
+
+// FireAt 按武器类别向各自目标发射武器。
+// 高平两用炮保留跨类别回退：没有舰目标时主炮 / 副炮转打敌机，没有敌机时
+// 防空炮转打舰船；某门炮实际能否开火仍由武器自身按目标类型 / 射程 / 射界过滤。
+func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bullet) {
 	// 如果生命值为 0，那还 Fire 个锤子，直接返回
 	if s.CurHP <= 0 {
 		return
 	}
-	for _, gun := range s.Weapon.MainGuns {
-		shotBullets = append(shotBullets, gun.Fire(s, enemy)...)
+
+	mainTarget := targets.Primary
+	if mainTarget == nil {
+		mainTarget = targets.AntiAircraft
 	}
-	for _, gun := range s.Weapon.SecondaryGuns {
-		shotBullets = append(shotBullets, gun.Fire(s, enemy)...)
+	if mainTarget != nil {
+		for _, gun := range s.Weapon.MainGuns {
+			shotBullets = append(shotBullets, gun.Fire(s, mainTarget)...)
+		}
 	}
-	for _, gun := range s.Weapon.AntiAircraftGuns {
-		shotBullets = append(shotBullets, gun.Fire(s, enemy)...)
+
+	secondaryTarget := targets.Secondary
+	if secondaryTarget == nil {
+		secondaryTarget = targets.AntiAircraft
 	}
-	for _, tp := range s.Weapon.Torpedoes {
-		shotBullets = append(shotBullets, tp.Fire(s, enemy)...)
+	if secondaryTarget != nil {
+		for _, gun := range s.Weapon.SecondaryGuns {
+			shotBullets = append(shotBullets, gun.Fire(s, secondaryTarget)...)
+		}
 	}
-	for _, rocket := range s.Weapon.Rockets {
-		shotBullets = append(shotBullets, rocket.Fire(s, enemy)...)
+
+	antiAircraftTarget := targets.AntiAircraft
+	if antiAircraftTarget == nil {
+		antiAircraftTarget = targets.Primary
+	}
+	if antiAircraftTarget != nil {
+		for _, gun := range s.Weapon.AntiAircraftGuns {
+			shotBullets = append(shotBullets, gun.Fire(s, antiAircraftTarget)...)
+		}
+	}
+
+	// 鱼雷与火箭只能对舰，没有舰目标时整类跳过。
+	if targets.Primary != nil {
+		for _, tp := range s.Weapon.Torpedoes {
+			shotBullets = append(shotBullets, tp.Fire(s, targets.Primary)...)
+		}
+		for _, rocket := range s.Weapon.Rockets {
+			shotBullets = append(shotBullets, rocket.Fire(s, targets.Primary)...)
+		}
 	}
 	return shotBullets
 }
