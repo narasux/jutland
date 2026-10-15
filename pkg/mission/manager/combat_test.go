@@ -9,6 +9,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -20,13 +21,26 @@ func TestTorpedoBomberSkipsReleaseWhenPathCrossesLand(t *testing.T) {
 	config.G = config.NewDefaultGameSettings()
 	t.Cleanup(func() { config.G = oldSettings })
 
+	// 释放器需要能查到弹药类型（鱼雷射程按 80% 折算），这里注册一枚测试鱼雷，
+	// 避免依赖 configs 是否已加载。
+	const torpedoBulletName = "test-land-check-torpedo"
+	oldBullet, hadBullet := objBullet.Map[torpedoBulletName]
+	objBullet.Map[torpedoBulletName] = &objBullet.Bullet{Type: objBullet.TypeTorpedo}
+	t.Cleanup(func() {
+		if hadBullet {
+			objBullet.Map[torpedoBulletName] = oldBullet
+		} else {
+			delete(objBullet.Map, torpedoBulletName)
+		}
+	})
+
 	const planeName = "test-land-check-torpedo-bomber"
 	oldTemplate, hadTemplate := objUnit.PlaneMap[planeName]
 	objUnit.PlaneMap[planeName] = &objUnit.Plane{
 		Name: planeName,
 		Type: objUnit.PlaneTypeTorpedoBomber,
 		Weapon: objUnit.PlaneWeapon{
-			Torpedoes: []*objUnit.Releaser{{Range: 3}},
+			Torpedoes: []*objUnit.Releaser{{BulletName: torpedoBulletName, Range: 3}},
 		},
 	}
 	t.Cleanup(func() {
@@ -38,6 +52,7 @@ func TestTorpedoBomberSkipsReleaseWhenPathCrossesLand(t *testing.T) {
 	})
 
 	torpedo := &objUnit.Releaser{
+		BulletName:     torpedoBulletName,
 		Range:          3,
 		BulletSpeed:    0.25,
 		RightFiringArc: objUnit.FiringArc{Start: 0, End: 180},
