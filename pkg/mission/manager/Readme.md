@@ -247,13 +247,18 @@
 
 ### 舰船开火
 
-`updateShipWeaponFire()` 遍历所有舰船：
+`updateShipWeaponFire()` 遍历所有舰船，先由 `shipFireTargets()` 按武器类别分层选敌，
+再交给 `ship.FireAt(targets)` 开火：
 
-- 如果舰船已有 `AttackTarget`，且目标敌舰在 `MaxToShipRange` 内，则只把该目标加入候选。
-- 如果没有指定目标，则收集射程内敌机和敌舰。
-- 敌机使用 `MaxToPlaneRange` 判断。
-- 敌舰使用 `MaxToShipRange` 判断。
-- 候选不为空时随机选择一个目标并调用 `ship.Fire(enemy)`。
+- 敌舰使用 `MaxToShipRange` 判断，敌机使用 `MaxToPlaneRange` 判断，都要通过 `SeenBy` 可见性检查。
+- 主炮 / 鱼雷 / 火箭集火同一个主目标：`primaryTargetScore = 舰种价值 × 已损失血量比例`，
+  先比评分、再比舰种价值、最后比舰体大小与剩余血量，即「射程内最大、血量比例最低」。
+- 副炮打射程内最近的敌舰。
+- 防空炮独立搜索射程内最近的敌机；即使舰船被点名对舰，防空炮也不会哑火。
+- 如果舰船已有有效 `AttackTarget`（射程内且可见），主 / 副炮只打该点名目标，不走上面的评分与最近规则。
+- `BattleShip.FireAt()` 按类别派发；`Fire(enemy)` 仍保留为 `Attacker` 接口要求的单目标版本。
+  高平两用炮有跨类别回退：没有舰目标时主炮 / 副炮转打敌机，没有敌机时防空炮转打舰船，
+  某门炮能否开火最终仍由武器自身按目标类型 / 射程 / 射界过滤。
 - 生成的弹药加入 `Arena.ForwardingBullets`。
 - 只有开火舰船在当前相机内时，才统计音效。
 
