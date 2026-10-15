@@ -8,12 +8,12 @@ import (
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 )
 
-// 舰对空破片毁伤：非暴击单发伤害有上限（约四成血量），一发 127mm 舰炮弹
-// （伤害 120）不应直接击落满血 B-17G（115 HP）。
+// 舰对空破片毁伤：非暴击单发伤害有上限（约六成血量），一发大威力的 127mm
+// 舰炮弹（伤害 300）经减伤后仍达 150，也不应直接击落满血 B-17G（115 HP）。
 func TestPlaneHurtByShipShellSurvivesSingleHit(t *testing.T) {
 	b17 := &Plane{TotalHP: 115, CurHP: 115, DamageReduction: 0.5}
 	shell := &objBullet.Bullet{
-		Damage: 120, CriticalRate: 0,
+		Damage: 300, CriticalRate: 0,
 		ShooterObjType: object.TypeShip, TargetObjType: object.TypePlane,
 	}
 
@@ -23,8 +23,8 @@ func TestPlaneHurtByShipShellSurvivesSingleHit(t *testing.T) {
 		t.Fatalf("single 127mm shell should not destroy a full-HP B-17G, HP = %.2f", b17.CurHP)
 	}
 	lost := 115 - b17.CurHP
-	if lost > 115*0.4+1e-9 {
-		t.Fatalf("ship-shell fragment damage %.2f exceeds 40%% max HP cap", lost)
+	if math.Abs(lost-115*0.6) > 1e-9 {
+		t.Fatalf("ship-shell fragment damage %.2f should be capped at 60%% of max HP (%.2f)", lost, 115*0.6)
 	}
 }
 
