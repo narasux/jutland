@@ -387,9 +387,11 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 
 	// 路径就绪后的首帧处理（initSpeed >= 0 表示尚未处理过）
 	if i.initSpeed >= 0 {
-		// 恢复创建指令时的速度，确保不因路径切换而归零
+		// 恢复创建指令时的速度，确保不因路径切换而归零。
+		// 上限必须用乘过全局速度倍率的巡航速度：CurSpeed 的语义就是"已乘倍率"，
+		// 用未乘倍率的 MaxSpeed 会在"快"倍速下把舰船砍回半速再重新加速。
 		if i.initSpeed > 0 {
-			ship.CurSpeed = min(i.initSpeed, ship.MaxSpeed)
+			ship.CurSpeed = min(i.initSpeed, ship.CruiseSpeed())
 		}
 		// 标记首帧处理已完成，避免后续帧重复执行
 		i.initSpeed = -1

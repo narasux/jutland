@@ -325,3 +325,39 @@ func TestShipMovePathNoProgressMarksFailed(t *testing.T) {
 	require.GreaterOrEqual(t, ticks, blockedNoProgressMaxTicks-1)
 	require.False(t, mapCfg.Map.IsLand(ship.CurPos.MX, ship.CurPos.MY), "全程不应压进陆格")
 }
+
+// 路径就绪后的首帧按"乘过全局速度倍率的巡航速度"恢复航速。
+// 回归：旧实现用未乘倍率的 MaxSpeed 夹取，在「快」倍速下会把舰船砍回半速，
+// 再靠加速慢慢爬回去——舰船速度因此长期低于巡航速度，慢速鱼雷的提前量全错。
+func TestShipMovePathRestoresSpeedAtCruiseSpeed(t *testing.T) {
+	setupGameSettings(t)
+	config.G.SpeedMultiplier = 2
+
+	cells := make(grid.Cells, 20)
+	for y := range cells {
+		cells[y] = make([]int, 40)
+	}
+	mapCfg := &mapcfg.MapCfg{Cells: cells, Width: 40, Height: 20}
+
+	ship := &objUnit.BattleShip{
+		Uid: "ship", CurPos: objPos.NewR(10, 10),
+		MaxSpeed: 0.03, Acceleration: 0.001, TotalHP: 100, CurHP: 100,
+	}
+	misState := &state.MissionState{
+		Core: state.MissionCoreState{
+			MissionMD: metadata.MissionMetadata{MapCfg: mapCfg},
+		},
+		Arena: state.MissionArenaState{
+			Ships: map[string]*objUnit.BattleShip{ship.Uid: ship},
+		},
+	}
+
+	cruise := ship.CruiseSpeed()
+	require.InDelta(t, 0.06, cruise, 1e-9)
+
+	move := NewShipMovePath(ship.Uid, ship.CurPos, objPos.New(30, 10), cruise)
+	move.genPath(misState)
+	ship.CurSpeed = cruise
+	require.NoError(t, move.Exec(misState))
+	require.InDelta(t, cruise, ship.CurSpeed, 1e-9, "换路径后不该被砍到未乘倍率的速度")
+}

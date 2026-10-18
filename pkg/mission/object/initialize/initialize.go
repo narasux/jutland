@@ -356,24 +356,9 @@ func initShipMap() {
 			))
 		}
 		s.Weapon.HasAntiAircraftGun = len(s.Weapon.AntiAircraftGuns) > 0
-		// 鱼雷发射器
-		torpedoSlotCount := 0
-		for _, torpedoMD := range s.Weapon.TorpedoesMD {
-			if launcher := objUnit.TorpedoLauncherMap[torpedoMD.Name]; launcher != nil {
-				torpedoSlotCount += launcher.BulletCount
-			}
-		}
-		torpedoSlot := 0
-		for _, torpedoMD := range s.Weapon.TorpedoesMD {
-			launcher := objUnit.NewTorpedoLauncher(
-				torpedoMD.Name, torpedoMD.PosPercent,
-				objUnit.FiringArc{Start: torpedoMD.LeftFiringArc[0], End: torpedoMD.LeftFiringArc[1]},
-				objUnit.FiringArc{Start: torpedoMD.RightFiringArc[0], End: torpedoMD.RightFiringArc[1]},
-				torpedoSlot, torpedoSlotCount,
-			)
-			s.Weapon.Torpedoes = append(s.Weapon.Torpedoes, launcher)
-			torpedoSlot += launcher.BulletCount
-		}
+		// 鱼雷发射器：按舷别分组共用扇形，每组的扇面中心都是瞄准线，
+		// 侧舷齐射不会有一半鱼雷打到反侧。
+		s.Weapon.Torpedoes = newTorpedoLaunchers(s.Weapon.TorpedoesMD)
 		s.Weapon.HasTorpedo = len(s.Weapon.Torpedoes) > 0
 		// 火箭炮
 		for _, rocketMD := range s.Weapon.RocketsMD {
@@ -455,6 +440,82 @@ func initShipMap() {
 		objUnit.AllShipNames = append(objUnit.AllShipNames, s.Name)
 	}
 	log.Println("ships data loaded from json5 file")
+}
+
+// 鱼雷扇形的分组：能覆盖的舷别相同的发射器算一组。
+// 中轴（两舷都能打）一组，只打右舷的一组，只打左舷的一组。
+// 分组只能粗不能细：同一舷的发射器射界略有宽窄（如 shimakaze 的三座中轴五联装）
+// 也必须共用一张扇面，否则每座各排一张扇面，齐射会退化成几根鱼雷重叠在同一角度。
+const (
+	// torpedoFanSideBoth 两舷都能打的发射器（中轴 / 全向）
+	torpedoFanSideBoth = iota
+	// torpedoFanSideStarboard 只能打右舷的发射器
+	torpedoFanSideStarboard
+	// torpedoFanSidePort 只能打左舷的发射器
+	torpedoFanSidePort
+)
+
+// torpedoFanSideOf 按左右射界判断发射器属于哪一舷。
+// FiringArc 用 Start == End 表示该舷没有射界。
+func torpedoFanSideOf(md objUnit.WeaponMetadata) int {
+	right := md.RightFiringArc[0] != md.RightFiringArc[1]
+	left := md.LeftFiringArc[0] != md.LeftFiringArc[1]
+	switch {
+	case left && right:
+		return torpedoFanSideBoth
+	case right:
+		return torpedoFanSideStarboard
+	case left:
+		return torpedoFanSidePort
+	default:
+		// 两舷射界都写没了（配置错误）：按中轴处理。
+		return torpedoFanSideBoth
+	}
+}
+
+// newTorpedoLaunchers 按舷别把鱼雷发射器分组，再为每座分配组内航迹。
+// 同一舷的发射器共用一张以瞄准线为中心的扇面：航迹从中路往外排，第 m 座的第 t 根
+// 走航迹 t*组内座数 + m，于是每拍齐射（每座出一根）拿到的都是相邻航迹，
+// 并且总有一根落在瞄准线上。
+func newTorpedoLaunchers(mds []objUnit.WeaponMetadata) []*objUnit.TorpedoLauncher {
+	type fanGroup struct {
+		// launchers 组内发射器在 mds 中的下标，按配置顺序
+		launchers []int
+		// tracks 组内鱼雷管总数
+		tracks int
+	}
+
+	groups := map[int]*fanGroup{}
+	var order []*fanGroup
+	for idx, md := range mds {
+		launcher, ok := objUnit.TorpedoLauncherMap[md.Name]
+		if !ok {
+			log.Fatalf("torpedo launcher %s no found", md.Name)
+		}
+		side := torpedoFanSideOf(md)
+		group, ok := groups[side]
+		if !ok {
+			group = &fanGroup{}
+			groups[side] = group
+			order = append(order, group)
+		}
+		group.launchers = append(group.launchers, idx)
+		group.tracks += launcher.BulletCount
+	}
+
+	out := make([]*objUnit.TorpedoLauncher, len(mds))
+	for _, group := range order {
+		for track, idx := range group.launchers {
+			md := mds[idx]
+			out[idx] = objUnit.NewTorpedoLauncher(
+				md.Name, md.PosPercent,
+				objUnit.FiringArc{Start: md.LeftFiringArc[0], End: md.LeftFiringArc[1]},
+				objUnit.FiringArc{Start: md.RightFiringArc[0], End: md.RightFiringArc[1]},
+				track, len(group.launchers), group.tracks,
+			)
+		}
+	}
+	return out
 }
 
 func initCombatPower() {
