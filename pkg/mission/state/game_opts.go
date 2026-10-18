@@ -8,6 +8,8 @@ type GameOptions struct {
 	ForceDisplayState bool
 	// 展示伤害数值
 	DisplayDamageNumber bool
+	// 展示命中特效（命中舰体 / 落水 / 落陆）
+	DisplayHitEffects bool
 	// 视野缩放倍数
 	Zoom int
 }

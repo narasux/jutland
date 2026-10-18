@@ -569,9 +569,8 @@ func (m *MissionManager) updateAirfieldSelection() {
 			m.state.Interaction.FocusedShipUid = ""
 			m.state.Interaction.SelectedGroupID = object.GroupIDNone
 			m.state.Interaction.SelectedAirfieldUid = af.Uid
-			// 选中机场时自动展开战术面板并切到「地图 / 单位」页，直接展示机场信息卡
+			// 选中机场时自动展开战术面板，直接展示机场信息卡
 			m.state.UI.SidebarExpanded = true
-			m.sidebar.OpenUnitsTab()
 			return
 		}
 	}

@@ -89,6 +89,13 @@ type GameSettings struct {
 	// EnableMinimap 小地图总开关。默认开启：开局自动展开右上战术面板展示小地图；
 	// 关闭后依然可以点面板把手手动展开。
 	EnableMinimap bool `json:"enableMinimap"`
+	// DisplayHitEffects 命中特效总开关。关闭后炮弹命中舰体 / 落水 / 落陆都不再生成特效，
+	// 伤害数字与战舰状态不受影响。
+	DisplayHitEffects bool `json:"displayHitEffects"`
+	// DisplayDamageNumber 是否在命中位置显示伤害数字。
+	DisplayDamageNumber bool `json:"displayDamageNumber"`
+	// ForceDisplayState 是否常显战舰状态（HP 与武器装填）；关闭后仅在选中时显示。
+	ForceDisplayState bool `json:"forceDisplayState"`
 }
 
 // G 游戏设置全局变量
@@ -97,11 +104,14 @@ var G *GameSettings
 // NewDefaultGameSettings 创建默认游戏设置
 func NewDefaultGameSettings() *GameSettings {
 	return &GameSettings{
-		SpeedMultiplier:    SpeedStandardMultiplier,
-		Language:           "zh-Hans",
-		AI:                 DefaultAIStrategies(),
-		EnableLandAirfield: true,
-		EnableMinimap:      true,
+		SpeedMultiplier:     SpeedStandardMultiplier,
+		Language:            "zh-Hans",
+		AI:                  DefaultAIStrategies(),
+		EnableLandAirfield:  true,
+		EnableMinimap:       true,
+		DisplayHitEffects:   true,
+		DisplayDamageNumber: true,
+		ForceDisplayState:   true,
 	}
 }
 
@@ -210,7 +220,10 @@ func SaveGameSettings() error {
 	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n")
 	_, _ = file.WriteString("// aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用\n")
 	_, _ = file.WriteString("// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾\n")
-	_, _ = file.WriteString("// EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图\n\n")
+	_, _ = file.WriteString("// EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图\n")
+	_, _ = file.WriteString("// DisplayHitEffects: 命中特效总开关，默认开启；关闭后命中舰体 / 落水 / 落陆不再生成特效\n")
+	_, _ = file.WriteString("// DisplayDamageNumber: 是否显示命中伤害数字，默认开启\n")
+	_, _ = file.WriteString("// ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

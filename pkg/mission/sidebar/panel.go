@@ -1,7 +1,8 @@
 // Package sidebar 实现任务运行页右上角的停靠式下拉战术面板（参考红警 3 的小地图位置）。
 // 面板贴着屏幕顶缘与右缘（各留 12px 细缝保证镜头边缘滚动可用），从上方下拉展开，
-// 收起后只留底缘把手；由页签条划分为「地图 + 战舰信息」与「设置」两个页签，共用同一宽度；
-// 资金与己方舰数画在战舰名称同一行；底部单位信息在页签 1 内纵向堆叠并支持滚动。
+// 收起后只留底缘把手；顶部页签条现在只有一个「地图 / 单位」标题：显示类设置已迁到
+// 主菜单的游戏设置，侧栏不再提供第二个页签；
+// 资金与己方舰数画在战舰名称同一行；单位信息在标题下方纵向堆叠并支持滚动。
 package sidebar
 
 import (
@@ -20,7 +21,6 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/mission/unitpanel"
-	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -73,16 +73,7 @@ func unitRect(r rect) unitpanel.Rect {
 	return unitpanel.Rect{X: r.X, Y: r.Y, W: r.W, H: r.H}
 }
 
-// Tab 表示侧栏当前展示的页签。
-type Tab int
-
-const (
-	// TabBattle 展示小地图 + 战舰信息（可滚动）。
-	TabBattle Tab = iota
-	// TabSettings 展示两个游戏内显示选项。
-	TabSettings
-)
-
+// sidebarLayout 面板、把手、页签条与小地图的几何区域。
 type sidebarLayout struct {
 	Screen   layout.ScreenLayout
 	Panel    rect
@@ -99,7 +90,6 @@ type Panel struct {
 	// mapAspect 是地图实际宽高比（宽/高），用于让小地图保持地图原始比例。
 	mapAspect float64
 	layout    sidebarLayout
-	tab       Tab
 	scrollY   float64
 	units     *unitpanel.Panel
 	layoutKey sidebarLayoutKey
@@ -142,23 +132,11 @@ func (p *Panel) Update(ms *state.MissionState) []unitpanel.Action {
 		return nil
 	}
 
-	if leftPressed {
-		if newTab, ok := p.tabAt(sx, sy); ok {
-			if newTab != p.tab {
-				p.tab = newTab
-				p.scrollY = 0
-			}
-			return nil
-		}
-	}
-
-	switch p.tab {
-	case TabBattle:
-		return p.updateBattle(ms, sx, sy, leftPressed)
-	default:
-		p.updateSettings(ms, sx, sy, leftPressed)
+	// 页签条现在只剩「地图 / 单位」一个标题，点它只做消费，不再切页
+	if leftPressed && p.layout.TabBar.contains(sx, sy) {
 		return nil
 	}
+	return p.updateBattle(ms, sx, sy, leftPressed)
 }
 
 func (p *Panel) updateBattle(ms *state.MissionState, sx, sy int, leftPressed bool) []unitpanel.Action {
@@ -171,18 +149,6 @@ func (p *Panel) updateBattle(ms *state.MissionState, sx, sy int, leftPressed boo
 		p.scrollY = p.clampScroll(ms, p.scrollY)
 	}
 	return p.units.Update(ms, unitRect(p.layout.Viewport), p.scrollY)
-}
-
-// updateSettings 处理设置页签内两个复选框的点击。
-func (p *Panel) updateSettings(ms *state.MissionState, sx, sy int, leftPressed bool) {
-	if !leftPressed {
-		return
-	}
-	if p.settingsRowRect(0).contains(sx, sy) {
-		ms.UI.GameOpts.ForceDisplayState = !ms.UI.GameOpts.ForceDisplayState
-	} else if p.settingsRowRect(1).contains(sx, sy) {
-		ms.UI.GameOpts.DisplayDamageNumber = !ms.UI.GameOpts.DisplayDamageNumber
-	}
 }
 
 // clampScroll 将滚动偏移限制在内容可视范围内。
@@ -230,42 +196,14 @@ func (p *Panel) drawPanel(screen *ebiten.Image, ms *state.MissionState) {
 		panelBgColor, panelLineColor, theme.PanelBorderWidth,
 	)
 	p.drawTabBar(screen)
-	switch p.tab {
-	case TabBattle:
-		p.drawMinimap(screen, ms)
-		p.units.Draw(screen, ms, unitRect(ui.Viewport), p.scrollY)
-		p.drawScrollbar(screen, ms)
-	default:
-		p.drawSettings(screen, ms)
-	}
+	p.drawMinimap(screen, ms)
+	p.units.Draw(screen, ms, unitRect(ui.Viewport), p.scrollY)
+	p.drawScrollbar(screen, ms)
 }
 
-// tabAt 返回光标下方对应的页签；不在页签条内时返回 false。
-func (p *Panel) tabAt(sx, sy int) (Tab, bool) {
-	if !p.layout.TabBar.contains(sx, sy) {
-		return 0, false
-	}
-	half := p.layout.TabBar.W / 2
-	if float64(sx) < p.layout.TabBar.X+half {
-		return TabBattle, true
-	}
-	return TabSettings, true
-}
-
-// tabRect 返回页签条中第 index 个页签的几何区域。
-func (p *Panel) tabRect(index int) rect {
-	ui := p.layout
-	w := ui.TabBar.W / 2
-	return rect{X: ui.TabBar.X + float64(index)*w, Y: ui.TabBar.Y, W: w, H: ui.TabBar.H}
-}
-
-// OpenUnitsTab 把侧栏切到「地图 / 单位」页签（选中机场等展示型单位时由
-// manager 调用，配合 ms.UI.SidebarExpanded 让信息卡直接可见）。
-func (p *Panel) OpenUnitsTab() {
-	if p.tab != TabBattle {
-		p.tab = TabBattle
-		p.scrollY = 0
-	}
+// tabRect 返回页签条里标题的几何区域（页签条现在只有一个标题）。
+func (p *Panel) tabRect() rect {
+	return p.layout.TabBar
 }
 
 func (p *Panel) drawTabBar(screen *ebiten.Image) {
@@ -282,60 +220,20 @@ func (p *Panel) drawTabBar(screen *ebiten.Image) {
 		false,
 	)
 
-	labels := []string{tabLabel(TabBattle), tabLabel(TabSettings)}
-	for index, label := range labels {
-		area := p.tabRect(index)
-		active := Tab(index) == p.tab
-		fill, border, textColor := theme.ButtonIdle, theme.CardBorder, colorx.Silver
-		if active {
-			fill, border, textColor = color.RGBA{R: 58, G: 69, B: 55, A: 235}, colorx.Gold, colorx.White
-		}
-		theme.FillRoundedRect(
-			screen,
-			area.X+4,
-			area.Y+6,
-			area.W-8,
-			area.H-12,
-			theme.CornerRadius,
-			fill,
-			border,
-			theme.CardBorderWidth,
-		)
-		p.drawCenteredText(screen, label, area, theme.SizeBody, textColor)
-	}
-}
-
-func (p *Panel) drawSettings(screen *ebiten.Image, ms *state.MissionState) {
-	p.drawCheckboxRow(screen, 0, i18n.Text(i18n.MsgSidebarShowState), ms.UI.GameOpts.ForceDisplayState)
-	p.drawCheckboxRow(screen, 1, i18n.Text(i18n.MsgSidebarDamageNumbers), ms.UI.GameOpts.DisplayDamageNumber)
-}
-
-// settingsRowTop 是设置页签内容起始 Y。
-func (p *Panel) settingsRowTop() float64 {
-	return p.layout.TabBar.Y + p.layout.TabBar.H + 24
-}
-
-// settingsRowRect 返回第 index 个设置行的点击区域。
-func (p *Panel) settingsRowRect(index int) rect {
-	x := p.layout.Panel.X + 20
-	y := p.settingsRowTop() + float64(index)*44
-	return rect{X: x, Y: y, W: p.layout.Panel.W - 40, H: 40}
-}
-
-func (p *Panel) drawCheckboxRow(screen *ebiten.Image, index int, label string, checked bool) {
-	row := p.settingsRowRect(index)
-	boxSize := float32(18)
-	contentY := row.Y + 11
-	boxX, boxY := float32(row.X), float32(contentY)
-	textColor := lo.Ternary(checked, colorx.Gold, colorx.Silver)
-	borderColor := lo.Ternary(checked, colorx.Gold, panelLineColor)
-
-	vector.StrokeRect(screen, boxX, boxY, boxSize, boxSize, 2, borderColor, false)
-	if checked {
-		vector.StrokeLine(screen, boxX+4, boxY+9, boxX+8, boxY+14, 3, colorx.Gold, false)
-		vector.StrokeLine(screen, boxX+8, boxY+14, boxX+15, boxY+4, 3, colorx.Gold, false)
-	}
-	p.drawText(screen, label, row.X+34, contentY, 18, font.LocalizedUI(font.Kai), textColor)
+	// 页签条只剩一个标题：显示设置已迁到主菜单的游戏设置，不再有第二个页签
+	area := p.tabRect()
+	theme.FillRoundedRect(
+		screen,
+		area.X+4,
+		area.Y+6,
+		area.W-8,
+		area.H-12,
+		theme.CornerRadius,
+		color.RGBA{R: 58, G: 69, B: 55, A: 235},
+		colorx.Gold,
+		theme.CardBorderWidth,
+	)
+	p.drawCenteredText(screen, i18n.Text(i18n.MsgSidebarTabBattle), area, theme.SizeBody, colorx.White)
 }
 
 func (p *Panel) drawHandleFrame(screen *ebiten.Image, ms *state.MissionState) {
@@ -554,17 +452,9 @@ func (p *Panel) mapToSidebar(ms *state.MissionState, rx, ry float64) (float64, f
 		ui.Map.Y + ry/float64(ms.Core.MissionMD.MapCfg.Height)*ui.Map.H
 }
 
-func tabLabel(tab Tab) string {
-	if tab == TabSettings {
-		return i18n.Text(i18n.MsgSidebarTabSettings)
-	}
-	return i18n.Text(i18n.MsgSidebarTabBattle)
-}
-
 type sidebarLayoutKey struct {
 	width, height int
 	expanded      bool
-	tab           Tab
 	aspect        float64
 }
 
@@ -573,19 +463,18 @@ func (p *Panel) ensureLayout(ms *state.MissionState) sidebarLayout {
 		width:    ms.View.Layout.Width,
 		height:   ms.View.Layout.Height,
 		expanded: ms.UI.SidebarExpanded,
-		tab:      p.tab,
 		aspect:   p.mapAspect,
 	}
 	if p.layoutOK && p.layoutKey == key {
 		return p.layout
 	}
-	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.tab, p.mapAspect)
+	p.layout = calcLayout(ms.View.Layout, ms.UI.SidebarExpanded, p.mapAspect)
 	p.layoutKey = key
 	p.layoutOK = true
 	return p.layout
 }
 
-func calcLayout(screen layout.ScreenLayout, expanded bool, tab Tab, mapAspect float64) sidebarLayout {
+func calcLayout(screen layout.ScreenLayout, expanded bool, mapAspect float64) sidebarLayout {
 	panelW := math.Max(260, math.Min(float64(screen.Width)*0.24, 360))
 	// 面板停靠在屏幕右上角（参考红警 3）：贴着顶缘与右缘，只留细缝保证边缘滚动可用
 	panelX := float64(screen.Width) - panelMarginRight - panelW

@@ -165,6 +165,22 @@ func minimapFromSettings() bool {
 	return config.G == nil || config.G.EnableMinimap
 }
 
+// displayStateFromSettings 是否常显战舰状态。显示类开关默认打开，
+// 配置还没加载时同样按打开处理。
+func displayStateFromSettings() bool {
+	return config.G == nil || config.G.ForceDisplayState
+}
+
+// damageNumberFromSettings 是否显示命中伤害数值。默认打开。
+func damageNumberFromSettings() bool {
+	return config.G == nil || config.G.DisplayDamageNumber
+}
+
+// hitEffectsFromSettings 是否显示命中特效。默认打开。
+func hitEffectsFromSettings() bool {
+	return config.G == nil || config.G.DisplayHitEffects
+}
+
 // UsesFog 该玩家这一拍要不要跑迷雾。
 // 热路径先调用它：返回 false 时保持全图可见，不分配视野图，也不扫描单位。
 func (s *MissionState) UsesFog(player faction.Player) bool {
@@ -375,12 +391,12 @@ func NewMissionState(mission string, playerSide faction.Side) *MissionState {
 			ShowRallyLinePointUid: "",
 			RallySetFailedTick:    0,
 			GameOpts: GameOptions{
-				// 默认展示游戏单位的状态
-				ForceDisplayState: true,
+				// 显示类开关初值来自主菜单的游戏设置，局内不再提供切换入口
+				ForceDisplayState:   displayStateFromSettings(),
+				DisplayDamageNumber: damageNumberFromSettings(),
+				DisplayHitEffects:   hitEffectsFromSettings(),
 				// TODO 后续允许设置开启友军伤害，游戏性 up！但是如何解决敌人打死自己人？
 				FriendlyFire: false,
-				// 默认展示伤害数值
-				DisplayDamageNumber: true,
 				// 默认缩放 1 倍
 				Zoom: DefaultZoom(),
 			},

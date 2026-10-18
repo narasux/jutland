@@ -56,6 +56,12 @@ other = "Язык"
 other = "Туман войны"
 [SettingsMinimap]
 other = "Мини-карта"
+[SettingsHitEffects]
+other = "Эффекты попаданий"
+[SettingsDamageNumbers]
+other = "Числа урона"
+[SettingsShipState]
+other = "Состояние корабля"
 [SettingsOn]
 other = "Вкл."
 [SettingsOff]
@@ -293,14 +299,8 @@ other = "Союзный флот: {{.Ally}}    Вражеский флот: {{.E
 other = "Союзный флот: {{.Count}}"
 [SidebarEnemyFleet]
 other = "Вражеский флот: {{.Count}}"
-[SidebarShowState]
-other = "Показывать состояние"
-[SidebarDamageNumbers]
-other = "Числа урона"
 [SidebarTabBattle]
 other = "Карта / Юниты"
-[SidebarTabSettings]
-other = "Настройки"
 [AirfieldPanelTitle]
 other = "Аэродром"
 [AirfieldParkedCount]
@@ -429,8 +429,6 @@ other = "Союзники"
 other = "Противник"
 [MapFleetCount]
 other = "{{.Side}} ({{.Count}})"
-[OrderUnreachable]
-other = "Невозможно достичь этой точки"
 [RallyLandBlocked]
 other = "Нельзя назначить точку сбора на суше"
 [ReinforceShipArchive]

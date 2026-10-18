@@ -56,6 +56,12 @@ other = "言語"
 other = "戦場の霧"
 [SettingsMinimap]
 other = "ミニマップ"
+[SettingsHitEffects]
+other = "命中エフェクト"
+[SettingsDamageNumbers]
+other = "ダメージ表示"
+[SettingsShipState]
+other = "艦艇ステータス"
 [SettingsOn]
 other = "オン"
 [SettingsOff]
@@ -290,14 +296,8 @@ other = "味方艦隊：{{.Ally}}    敵艦隊：{{.Enemy}}"
 other = "味方艦隊：{{.Count}}"
 [SidebarEnemyFleet]
 other = "敵艦隊：{{.Count}}"
-[SidebarShowState]
-other = "状態表示"
-[SidebarDamageNumbers]
-other = "ダメージ表示"
 [SidebarTabBattle]
 other = "地図 / ユニット"
-[SidebarTabSettings]
-other = "設定"
 [AirfieldPanelTitle]
 other = "飛行場"
 [AirfieldParkedCount]
@@ -426,8 +426,6 @@ other = "味方"
 other = "敵"
 [MapFleetCount]
 other = "{{.Side}}（{{.Count}}）"
-[OrderUnreachable]
-other = "その地点には到達できません"
 [RallyLandBlocked]
 other = "陸上には集結地点を設定できません"
 [ReinforceShipArchive]

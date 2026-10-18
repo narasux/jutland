@@ -13,6 +13,7 @@ import (
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objExplosion "github.com/narasux/jutland/pkg/mission/object/explosion"
 	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -178,16 +179,234 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 	}
 }
 
-// drawExplosions 绘制火箭弹等局部爆炸效果
+// drawExplosions 绘制舰船之下的局部爆炸效果（水花 / 尘土 / 火箭空爆）
 func (d *Drawer) drawExplosions(screen *ebiten.Image, ms *state.MissionState) {
+	d.drawExplosionLayer(screen, ms, false)
+}
+
+// drawExplosionsOverShips 绘制压在舰船之上的命中火球：命中点就在舰体上，
+// 若与舰船同层会被舰体完全遮住。
+func (d *Drawer) drawExplosionsOverShips(screen *ebiten.Image, ms *state.MissionState) {
+	d.drawExplosionLayer(screen, ms, true)
+}
+
+// drawExplosionLayer 按种类把特效分到舰船下 / 舰船上两层绘制。
+func (d *Drawer) drawExplosionLayer(screen *ebiten.Image, ms *state.MissionState, overShips bool) {
 	for _, explosion := range ms.Arena.Explosions {
+		if explosion.Kind.OverShips() != overShips {
+			continue
+		}
 		if !ms.View.Camera.Contains(explosion.Pos) ||
 			ms.ConcealsEnemy(explosion.BelongPlayer, explosion.Pos.MX, explosion.Pos.MY) {
 			continue
 		}
-		explodeImg := textureImg.GetPlaneExplode(explosion.FrameHP())
-		explodeX, explodeY := ms.CameraPosToScreen(explosion.Pos)
-		drawImageCentered(screen, explodeImg, explodeX, explodeY, explosion.Rotation, ms.ZoomScale())
+		x, y := ms.CameraPosToScreen(explosion.Pos)
+		if explosion.Kind == objExplosion.KindRocketAirburst {
+			frame := textureImg.MaxPlaneExplodeState - 1 - explosion.Frame()
+			explodeImg := textureImg.GetPlaneExplode(float64(max(frame, 0)))
+			scale := explosion.Size * constants.MapBlockSize / planeExplodeImageSize * ms.ZoomScale()
+			drawImageCentered(screen, explodeImg, x, y, explosion.Rotation, scale)
+			continue
+		}
+		drawEffectParticles(screen, explosion, x, y, ms.ZoomScale())
+	}
+}
+
+// planeExplodeImageSize 飞机爆炸序列帧压到 1/4 后的边长。
+const planeExplodeImageSize = 64
+
+// 命中特效粒子：位置 = 中心 + 极坐标(angle, distance × 扩散进度)，尺寸与透明度随进度演化。
+// 与尾流同一套做法（白色柔圆 + ColorScale 缩放），只是把"每 tick 发射"换成了
+// "一次爆开的一组粒子"。
+type effectParticle struct {
+	angle float64
+	// distance 相对特效直径的比例（扩散到位时）
+	distance float64
+	// size 相对特效直径的比例
+	size float64
+	// sizeGrow 尺寸随进度增减的比例（负值表示收缩）
+	sizeGrow float64
+	// alpha 峰值透明度
+	alpha float64
+	// alphaPow 衰减指数
+	alphaPow float64
+	// rise 为 true 时先涨后落（烟），否则从 0 时刻就按衰减曲线走（水花 / 尘土 / 火星）
+	rise bool
+	// delay 进度小于该值时不显示（用于"先闪后烟"）
+	delay float64
+	// lean 沿弹道反方向的偏移（相对特效直径的比例）：烟往弹道后方拖，轮廓不再居中对称
+	lean float64
+	r    float32
+	g    float32
+	b    float32
+}
+
+// maxEffectParticles 单次命中特效的粒子上限。
+const maxEffectParticles = 24
+
+// effectRand 由种子与索引派生的确定性伪随机（0..1）。
+// 刻意不用全局 rand：命中特效不能挪动战斗随机序列，否则散布与暴击结果会变。
+func effectRand(seed uint32, index, salt uint32) float64 {
+	value := seed*1664525 + index*1013904223 + salt*2654435761
+	value ^= value >> 15
+	value *= 2246822519
+	value ^= value >> 13
+	return float64(value%100000) / 100000
+}
+
+// effectParticles 按特效种类生成粒子（写入调用方提供的缓冲区，避免每帧分配）。
+func effectParticles(e *objExplosion.Explosion, buf []effectParticle) []effectParticle {
+	seed := e.Seed
+	n := 0
+	add := func(p effectParticle) {
+		if n < len(buf) {
+			buf[n] = p
+			n++
+		}
+	}
+	switch e.Kind {
+	case objExplosion.KindSplash, objExplosion.KindTorpedoPlume:
+		plume := e.Kind == objExplosion.KindTorpedoPlume
+		foam := 9
+		spread, alphaScale := 0.45, 1.0
+		if plume {
+			foam, spread, alphaScale = 12, 0.6, 1.25
+		}
+		// 中心泡沫：水花的心，压暗压小
+		add(effectParticle{size: 0.34, sizeGrow: 0.4, alpha: 0.4 * alphaScale, alphaPow: 1.2, r: 0.88, g: 0.94, b: 1})
+		// 周围的泡沫团：贴着中心散开，不再往外甩"雪花"
+		for i := 0; i < foam; i++ {
+			add(effectParticle{
+				angle:    effectRand(seed, uint32(i), 1) * 2 * math.Pi,
+				distance: 0.12 + spread*effectRand(seed, uint32(i), 2),
+				size:     0.2 + 0.22*effectRand(seed, uint32(i), 3),
+				sizeGrow: 0.25 + 0.4*effectRand(seed, uint32(i), 4),
+				alpha:    (0.18 + 0.2*effectRand(seed, uint32(i), 5)) * alphaScale,
+				alphaPow: 1.1,
+				r:        0.8, g: 0.9, b: 1,
+			})
+		}
+	case objExplosion.KindDust:
+		for i := 0; i < 10; i++ {
+			add(effectParticle{
+				angle:    effectRand(seed, uint32(i), 21) * 2 * math.Pi,
+				distance: 0.1 + 0.5*effectRand(seed, uint32(i), 22),
+				size:     0.28 + 0.42*effectRand(seed, uint32(i), 23),
+				sizeGrow: 0.5 + 0.6*effectRand(seed, uint32(i), 24),
+				alpha:    0.2 + 0.28*effectRand(seed, uint32(i), 25),
+				alphaPow: 0.9,
+				rise:     true,
+				r:        0.82, g: 0.72, b: 0.56,
+			})
+		}
+		for i := 0; i < 5; i++ {
+			add(effectParticle{
+				angle:    effectRand(seed, uint32(i), 31) * 2 * math.Pi,
+				distance: 0.3 + 0.7*effectRand(seed, uint32(i), 32),
+				size:     0.09 + 0.1*effectRand(seed, uint32(i), 33),
+				sizeGrow: -0.02,
+				alpha:    0.5 + 0.4*effectRand(seed, uint32(i), 34),
+				alphaPow: 1.6,
+				r:        0.55, g: 0.46, b: 0.33,
+			})
+		}
+	default: // KindFlash：命中爆炸 = 短促亮核 + 破片火星 + 拖尾硝烟
+		// 硝烟是主体：颜色压暗（比海面还暗），轮廓靠随机距离拉开，不能是同心圆
+		for i := 0; i < 9; i++ {
+			add(effectParticle{
+				angle:    effectRand(seed, uint32(i), 41) * 2 * math.Pi,
+				distance: 0.2 + 0.9*effectRand(seed, uint32(i), 42),
+				size:     0.28 + 0.5*effectRand(seed, uint32(i), 43),
+				sizeGrow: 0.7 + 1.0*effectRand(seed, uint32(i), 44),
+				alpha:    0.3 + 0.3*effectRand(seed, uint32(i), 45),
+				alphaPow: 0.7,
+				rise:     true,
+				lean:     0.1 + 0.35*effectRand(seed, uint32(i), 46),
+				r:        0.2, g: 0.2, b: 0.21,
+			})
+		}
+		// 亮核：一闪而过，不留光晕
+		for i := 0; i < 2; i++ {
+			add(effectParticle{
+				angle:    effectRand(seed, uint32(i), 51) * 2 * math.Pi,
+				distance: 0.08 * effectRand(seed, uint32(i), 52),
+				size:     0.45 + 0.3*effectRand(seed, uint32(i), 53),
+				sizeGrow: 0.5,
+				alpha:    0.95,
+				alphaPow: 3.2,
+				r:        1, g: 0.84, b: 0.56,
+			})
+		}
+		// 白热中心：只有最初两帧
+		add(effectParticle{size: 0.22, sizeGrow: 0.3, alpha: 0.9, alphaPow: 3.6, r: 1, g: 0.96, b: 0.86})
+		// 破片火星：贴着亮核飞一小段就消失（飞太远会变成一圈小点，像撒了一把火星）
+		for i := 0; i < 8; i++ {
+			add(effectParticle{
+				angle:    effectRand(seed, uint32(i), 61) * 2 * math.Pi,
+				distance: 0.25 + 0.5*effectRand(seed, uint32(i), 62),
+				size:     0.07 + 0.08*effectRand(seed, uint32(i), 63),
+				sizeGrow: -0.03,
+				alpha:    0.65 + 0.35*effectRand(seed, uint32(i), 64),
+				alphaPow: 3.2,
+				r:        1, g: 0.72, b: 0.32,
+			})
+		}
+	}
+	return buf[:n]
+}
+
+// drawEffectParticles 按当前进度绘制一次命中特效的所有粒子。
+func drawEffectParticles(screen *ebiten.Image, e *objExplosion.Explosion, x, y, zoomScale float64) {
+	t := float64(e.Age) / float64(e.Life)
+	if t < 0 {
+		t = 0
+	}
+	if t > 1 {
+		t = 1
+	}
+	sizePx := e.Size * constants.MapBlockSize * zoomScale
+	if sizePx <= 0 {
+		return
+	}
+	circle := textureImg.EffectCircle()
+	imgScale := 1 / float64(textureImg.EffectCircleDiameter)
+
+	var buf [maxEffectParticles]effectParticle
+	for _, p := range effectParticles(e, buf[:]) {
+		if t < p.delay {
+			continue
+		}
+		env := 1.0
+		if p.alphaPow > 0 {
+			env = math.Pow(1-t, p.alphaPow)
+		}
+		if p.rise {
+			env *= math.Min(1, t/0.15)
+		}
+		alpha := p.alpha * env
+		if alpha <= 0.004 {
+			continue
+		}
+		// 扩散：从中心向外铺开，进度越大越远越大
+		dist := p.distance * sizePx * 0.5 * (0.35 + 0.65*t)
+		particleSize := p.size * sizePx * (1 + p.sizeGrow*t)
+		if particleSize <= 0 {
+			continue
+		}
+		px := x + math.Cos(p.angle)*dist
+		py := y + math.Sin(p.angle)*dist
+		if p.lean > 0 {
+			// 弹道方向是 (sin, -cos)；烟往反方向拖
+			rad := e.Rotation * math.Pi / 180
+			back := p.lean * sizePx * math.Min(1, t/0.5)
+			px -= math.Sin(rad) * back
+			py += math.Cos(rad) * back
+		}
+		// ColorScale 需要预乘 alpha，和尾流一致
+		drawImageCenteredColored(
+			screen, circle, px, py, 0, particleSize*imgScale,
+			p.r*float32(alpha), p.g*float32(alpha), p.b*float32(alpha), float32(alpha),
+		)
 	}
 }
 

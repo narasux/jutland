@@ -10,6 +10,7 @@ import (
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objExplosion "github.com/narasux/jutland/pkg/mission/object/explosion"
 	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
+	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/geometry"
@@ -743,8 +744,8 @@ func (m *MissionManager) updateShotBullets() {
 		}
 		// 迷失的弹药，要及时消亡（如鱼雷没命中）
 		if bt.Life <= 0 {
-			// TODO 其实还应该判断下，可能是 HitLand，后面再做吧
-			bt.HitObjType = object.TypeWater
+			bt.HitObjType = m.bulletFallObjType(bt)
+			arrivedBullets = append(arrivedBullets, bt)
 			continue
 		}
 		// 鱼雷碰撞到陆地，应该不再前进
@@ -761,7 +762,7 @@ func (m *MissionManager) updateShotBullets() {
 		// 越过瞄准点的吊射弹药落水：结算落点爆炸，不再前进（平射弹药 DangerSpace 无限，永不触发）
 		if bt.PassedAim() {
 			if !m.damageGroundPlanesNear(bt, "") {
-				bt.HitObjType = object.TypeWater
+				bt.HitObjType = m.bulletFallObjType(bt)
 			}
 			arrivedBullets = append(arrivedBullets, bt)
 			continue
@@ -772,7 +773,6 @@ func (m *MissionManager) updateShotBullets() {
 	// 继续塔塔开的，保留
 	m.state.Arena.ForwardingBullets = forwardingBullets
 	// 已经到达目标地点的，转换成爆炸 & 伤害数值
-	// TODO 支持命中爆炸
 	for _, bt := range arrivedBullets {
 		// 击中的是战舰 / 飞机，才会有伤害数值
 		if bt.HitObjType != object.TypeShip && bt.HitObjType != object.TypePlane {
@@ -802,4 +802,185 @@ func (m *MissionManager) updateShotBullets() {
 			m.state.UI.GameMarks[mark.ID] = mark
 		}
 	}
+
+	// 命中特效：与伤害数字同一批到达弹药，但落水 / 落陆也要出效果，故单独一段
+	if !m.state.UI.GameOpts.DisplayHitEffects {
+		return
+	}
+	spawned := 0
+	// 同一帧内落点挨得很近的命中合并成一个：一轮齐射打在同一条船上，
+	// 叠十几个相同的闪光只会糊成一团大亮斑。
+	spawnedPos := make([]objPos.MapPos, 0, maxHitEffectsPerFrame)
+	for _, bt := range arrivedBullets {
+		if spawned >= maxHitEffectsPerFrame || len(m.state.Arena.Explosions) >= maxLiveEffects {
+			break
+		}
+		kind, scale, life, ok := hitEffect(bt)
+		if !ok {
+			continue
+		}
+		// 落在舰体内的"落水"不画水花：炮弹在命中判定前一 tick 寿命耗尽、
+		// 或吊射越过瞄准点（而瞄准点就是目标舰）时都会落到舰体上，
+		// 这时候泛一圈白沫看着就像水花浮在舰上。
+		if (kind == objExplosion.KindSplash || kind == objExplosion.KindDust) &&
+			m.insideAnyHull(bt.CurPos) {
+			continue
+		}
+		duplicated := false
+		for _, pos := range spawnedPos {
+			if hitEffectMerged(pos, bt.CurPos) {
+				duplicated = true
+				break
+			}
+		}
+		if duplicated {
+			continue
+		}
+		m.effectSeq++
+		m.state.Arena.Explosions = append(m.state.Arena.Explosions, objExplosion.NewHitEffect(
+			kind, bt.CurPos.Copy(), bt.Rotation, scale, life, m.effectSeq, bt.BelongPlayer,
+		))
+		spawnedPos = append(spawnedPos, bt.CurPos)
+		spawned++
+	}
+}
+
+// hitEffectMerged 判断两个落点是否近到可以合并成一个特效（同帧齐射）。
+func hitEffectMerged(a, b objPos.MapPos) bool {
+	dx, dy := a.RX-b.RX, a.RY-b.RY
+	return dx*dx+dy*dy < hitEffectMergeDistance*hitEffectMergeDistance
+}
+
+// insideAnyHull 返回落点是否落在某条舰的舰体内。
+func (m *MissionManager) insideAnyHull(pos objPos.MapPos) bool {
+	inside := false
+	m.combatBuckets.eachShip(pos.RX, pos.RY, maxHullHitRadius, func(ship *objUnit.BattleShip) bool {
+		if geometry.IsPointInRotatedRectangle(
+			pos.RX, pos.RY,
+			ship.CurPos.RX, ship.CurPos.RY,
+			ship.Length/constants.MapBlockSize,
+			ship.Width/constants.MapBlockSize,
+			ship.CurRotation,
+		) {
+			inside = true
+			return true
+		}
+		return false
+	})
+	return inside
+}
+
+const (
+	// 命中特效的口径分档沿用对空命中率的三档：≤40mm / 41-155mm / >155mm
+	smallCaliberDiameter = 40
+	heavyCaliberDiameter = 155
+
+	// 命中爆炸的目标直径（地图格）：够看清是"打中了"，但远小于舰身
+	// （战舰身长约 2-3 格），不会像早期那样盖住整条船
+	smallHitCells  = 0.22
+	mediumHitCells = 0.34
+	heavyHitCells  = 0.5
+
+	// 命中爆炸的持续 tick 数（60 tick = 1 秒）：亮核只占前段，硝烟铺满整段
+	smallHitLife  = 20
+	mediumHitLife = 26
+	heavyHitLife  = 32
+
+	// 炸弹命中舰体：比最大口径炮弹更明显，但仍远小于舰身
+	bombHitCells = 0.7
+	bombHitLife  = 40
+
+	// 落水水花 / 落陆尘土的目标直径（地图格）按口径档位索引，见下方 splashCells / dustCells
+	// 炸弹落点比同口径炮弹更铺开
+	bombSplashCells = 0.8
+	// 鱼雷命中舰体：水下爆炸水柱
+	torpedoPlumeCells = 0.7
+
+	// 水花 / 尘土 / 水柱每帧停留 3 tick，20 帧播满约 1 秒 —— 水面涟漪散开得比闪光慢得多
+	// 炸弹落点 / 鱼雷水柱的播放 tick 数
+	bombSplashLife   = 60
+	torpedoPlumeLife = 60
+
+	// maxLiveEffects 同时存在的特效上限
+	maxLiveEffects = 200
+	// maxHitEffectsPerFrame 单帧最多生成的特效数
+	maxHitEffectsPerFrame = 10
+	// hitEffectMergeDistance 同一帧内落点间距小于该值（地图格）的命中合并成一个特效
+	hitEffectMergeDistance = 0.25
+)
+
+// 按口径档位（0 小 / 1 中 / 2 大）索引的尺寸与帧数：
+// 水花与尘土的小口径档为 0，表示不生成。
+var (
+	hitEffectCells = [3]float64{smallHitCells, mediumHitCells, heavyHitCells}
+	hitEffectLives = [3]int{smallHitLife, mediumHitLife, heavyHitLife}
+	splashCells    = [3]float64{0, 0.28, 0.45}
+	dustCells      = [3]float64{0, 0.4, 0.75}
+	splashLives    = [3]int{0, 60, 60}
+	dustLives      = [3]int{0, 60, 60}
+)
+
+// hitEffectTier 返回口径档位：0 小口径 / 1 中口径 / 2 大口径。
+func hitEffectTier(diameter int) int {
+	switch {
+	case diameter > heavyCaliberDiameter:
+		return 2
+	case diameter > smallCaliberDiameter:
+		return 1
+	default:
+		return 0
+	}
+}
+
+// hitEffect 返回到达弹药的命中特效参数；该弹种与落点没有对应表现时返回 false。
+// 纯函数，只读弹药类型、口径与落点，便于单测。
+func hitEffect(bt *objBullet.Bullet) (objExplosion.Kind, float64, int, bool) {
+	// 火箭空爆在发射阶段已有自己的效果，不重复生成
+	if bt.Type == objBullet.TypeRocket {
+		return objExplosion.KindFlash, 0, 0, false
+	}
+	tier := hitEffectTier(bt.Diameter)
+
+	switch bt.HitObjType {
+	case object.TypeShip, object.TypePlane:
+		// 鱼雷命中：水下爆炸水柱，不画水面火花
+		if bt.Type == objBullet.TypeTorpedo {
+			return objExplosion.KindTorpedoPlume, torpedoPlumeCells, torpedoPlumeLife, true
+		}
+		// 命中飞机不出特效：防空弹幕命中太频繁，飞机被击落时本来就有自己的爆炸动画，
+		// 再叠一层火光只会把空战画面糊住
+		if bt.HitObjType == object.TypePlane {
+			return objExplosion.KindFlash, 0, 0, false
+		}
+		cells, life := hitEffectCells[tier], hitEffectLives[tier]
+		if bt.Type == objBullet.TypeBomb {
+			cells, life = bombHitCells, bombHitLife
+		}
+		return objExplosion.KindFlash, cells, life, true
+	case object.TypeWater, object.TypeLand:
+		// 小口径防空弹落水 / 落陆不出效果：防空弹幕每秒可达数百次
+		if tier == 0 {
+			return objExplosion.KindFlash, 0, 0, false
+		}
+		kind, cells, life := objExplosion.KindSplash, splashCells[tier], splashLives[tier]
+		if bt.HitObjType == object.TypeLand {
+			kind, cells, life = objExplosion.KindDust, dustCells[tier], dustLives[tier]
+		}
+		if bt.Type == objBullet.TypeBomb {
+			cells, life = bombSplashCells, bombSplashLife
+		}
+		return kind, cells, life, true
+	}
+	return objExplosion.KindFlash, 0, 0, false
+}
+
+// bulletFallObjType 返回弹药落点的对象类型：落在海岸/陆地记 TypeLand，其余记 TypeWater。
+// 只有鱼雷会在飞行途中撞岸，炮弹与炸弹都是飞到寿命耗尽或越过瞄准点后按落点格判定，
+// 表现层据此区分水花与尘土。
+func (m *MissionManager) bulletFallObjType(bt *objBullet.Bullet) object.Type {
+	mapCfg := m.state.Core.MissionMD.MapCfg
+	if mapCfg != nil && mapCfg.Map.IsLand(bt.CurPos.MX, bt.CurPos.MY) {
+		return object.TypeLand
+	}
+	return object.TypeWater
 }

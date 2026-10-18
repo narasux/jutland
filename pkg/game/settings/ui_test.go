@@ -65,3 +65,26 @@ func TestMinimapSettingDefaultsToOpen(t *testing.T) {
 		t.Fatal("saved false should show the minimap switch closed")
 	}
 }
+
+// 命中特效 / 伤害数字 / 战舰状态默认显示为「开」，并跟随已保存的配置。
+func TestDisplaySwitchesFollowConfig(t *testing.T) {
+	previous := config.G
+	t.Cleanup(func() { config.G = previous })
+
+	config.G = nil
+	if !hitEffectsSetting() || !damageNumberSetting() || !displayStateSetting() {
+		t.Fatal("without settings the display switches should show open")
+	}
+
+	config.G = config.NewDefaultGameSettings()
+	if !hitEffectsSetting() || !damageNumberSetting() || !displayStateSetting() {
+		t.Fatal("default settings should show the display switches open")
+	}
+
+	config.G.DisplayHitEffects = false
+	config.G.DisplayDamageNumber = false
+	config.G.ForceDisplayState = false
+	if hitEffectsSetting() || damageNumberSetting() || displayStateSetting() {
+		t.Fatal("saved false should show the display switches closed")
+	}
+}
