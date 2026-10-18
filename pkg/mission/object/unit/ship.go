@@ -700,6 +700,50 @@ func (s *BattleShip) hullLandOverlap(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, r
 	return HullLandOverlapSamples(mapCfg, pos, rotation, s.Length)
 }
 
+// CruiseSpeed 返回乘过全局速度倍率的巡航速度，也就是舰船加速的上限。
+// CurSpeed 的语义同样是"已乘倍率"，任何拿它做上限或基准的地方都必须用这个函数，
+// 否则在"快"倍速下会把舰船速度按未乘倍率的值砍半。
+func (s *BattleShip) CruiseSpeed() float64 {
+	return s.MaxSpeed * gameSpeedMultiplier()
+}
+
+// cruiseAcceleration 返回乘过全局速度倍率的加速度。
+func (s *BattleShip) cruiseAcceleration() float64 {
+	return s.Acceleration * gameSpeedMultiplier()
+}
+
+// travelDistance 按"从当前航速继续匀加速、最多到巡航速度"估算 ticks 拍后的位移。
+// 舰船的 CurSpeed 会随加速 / 换航路不断变化，鱼雷这类慢速弹药的提前量必须算上
+// 这段加速，否则刚起步的目标会被整条扇面甩在身后。
+// 停着的舰船（CurSpeed 为 0：待命 / 已到阵位）不假设它会自己加速，位移按 0 算。
+func (s *BattleShip) travelDistance(ticks float64) float64 {
+	if ticks <= 0 || s.CurSpeed <= 0 {
+		return 0
+	}
+	speed, acceleration := s.CurSpeed, s.cruiseAcceleration()
+	cruise := s.CruiseSpeed()
+	if speed >= cruise || acceleration <= 0 {
+		return speed * ticks
+	}
+	rampTicks := (cruise - speed) / acceleration
+	if ticks <= rampTicks {
+		return speed*ticks + 0.5*acceleration*ticks*ticks
+	}
+	rampDistance := speed*rampTicks + 0.5*acceleration*rampTicks*rampTicks
+	return rampDistance + cruise*(ticks-rampTicks)
+}
+
+// LeadPosAt 目标保持当前航向、从当前航速继续加速时，ticks 拍之后的位置。
+// 用于慢速弹药的提前量：只取发射瞬间的航速会把落点算近。
+func (s *BattleShip) LeadPosAt(ticks float64) objPos.MapPos {
+	radians := s.CurRotation * math.Pi / 180
+	travelled := s.travelDistance(ticks)
+	return objPos.NewR(
+		s.CurPos.RX+math.Sin(radians)*travelled,
+		s.CurPos.RY-math.Cos(radians)*travelled,
+	)
+}
+
 // MoveTo 移动到指定位置。
 // arrive 表示已到达目标附近；blocked 表示下一步会踏进海岸/陆地格被拦停，
 // 需要上层从当前位置重新规划，调用方不应把 blocked 当作到达处理。
@@ -715,10 +759,9 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	}
 
 	// 应用全局速度倍率
-	multiplier := config.G.SpeedMultiplier
-	maxSpeed := s.MaxSpeed * multiplier
-	acceleration := s.Acceleration * multiplier
-	rotateSpeed := s.RotateSpeed * multiplier
+	maxSpeed := s.CruiseSpeed()
+	acceleration := s.cruiseAcceleration()
+	rotateSpeed := s.RotateSpeed * gameSpeedMultiplier()
 
 	// 未到达目标位置，逐渐加速
 	if s.CurSpeed < maxSpeed {
