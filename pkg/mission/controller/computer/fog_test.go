@@ -3,6 +3,8 @@ package computer
 import (
 	"testing"
 
+	"github.com/narasux/jutland/pkg/config"
+
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -51,7 +53,7 @@ func TestAttackOrderSearchesWhenNoEnemyVisible(t *testing.T) {
 	_, handler, snap := fogBattlefield(t)
 	handler.anchor = objPos.New(2, 2)
 
-	order := handler.makeAttack(nil, snap, snap.own)
+	order := handler.makeAttack(nil, snap, snap.own, config.DefaultAIStrategies())
 	if order == nil || !order.searching {
 		t.Fatalf("order = %+v, want a searching attack order", order)
 	}
@@ -75,7 +77,7 @@ func TestAttackOrderHeadsForContact(t *testing.T) {
 		"fresh": {RX: 18, RY: 6, ExpireTick: ms.Core.SimTick + 600},
 	}
 
-	order := handler.makeAttack(nil, snap, snap.own)
+	order := handler.makeAttack(nil, snap, snap.own, config.DefaultAIStrategies())
 	route, ok := handler.desiredRoute(snap.own[0], 0, order, routeAttack, snap)
 	if !ok {
 		t.Fatal("有接触时攻击组应该扑向接触点")
@@ -137,7 +139,7 @@ func TestAttackOrderStopsSearchingWithVisibleEnemy(t *testing.T) {
 	snap = handler.snapshot(ms)
 	handler.anchor = objPos.New(2, 2)
 
-	order := handler.makeAttack(nil, snap, snap.own)
+	order := handler.makeAttack(nil, snap, snap.own, config.DefaultAIStrategies())
 	if order == nil || order.searching {
 		t.Fatalf("order = %+v, want a normal attack order once the foe is visible", order)
 	}

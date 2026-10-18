@@ -1,6 +1,7 @@
 package computer
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 	"testing"
@@ -82,6 +83,7 @@ func TestGarrisonKeepsSurplusBattleshipsUnderDouble(t *testing.T) {
 }
 
 func TestAttackPressHysteresis(t *testing.T) {
+	useStrategies(t, config.AIStrategies{Attack: true, Defend: true})
 	own := makeShip("bb", faction.ComputerAlpha, objUnit.ShipTypeBattleShip, 0, 0)
 	own.TotalHP = 200
 	own.CurHP = 150
@@ -101,8 +103,12 @@ func TestAttackPressHysteresis(t *testing.T) {
 	}{
 		{99, 150, false, false},
 		{100, 150, true, false},
-		{85, 150, true, false},
-		{84, 150, false, true},
+		// 纸面兵力掉到 0.4 倍也不再退出：AntiShip 之和被护航舰的鱼雷爆发主导，
+		// 已经压上的小队只看真实战损。
+		{40, 150, true, false},
+		// 生命之和掉到对方的 0.85 倍以下才算打不动了。
+		{40, 120, false, true},
+		{100, 150, false, true},
 		{116, 173, true, false},
 	}
 	for i, step := range steps {
@@ -123,6 +129,138 @@ func TestAttackPressHysteresis(t *testing.T) {
 			t.Fatalf("step %d pressing=%v fellBack=%v, want %v %v",
 				i, handler.attack.pressing, handler.attack.fellBack, step.pressing, step.fellBack)
 		}
+	}
+}
+
+// TestAttackKeepsPressingAfterTheScreenIsSunk 复现珍珠港 1941 的整队掉头：
+// 8 艘战列舰（202 点 / 27.4 万生命）加 29 艘驱逐舰（493 点 / 6.6 万生命）对日军
+// 机动部队（431 点 / 30.6 万生命）。屏卫驱逐舰被清空时兵力比从 1.61 掉到 0.47，
+// 但战列舰本体几乎完好（生命之和仍有对方的 0.90 倍），整队不该掉头回初始泊位。
+func TestAttackKeepsPressingAfterTheScreenIsSunk(t *testing.T) {
+	useStrategies(t, config.AIStrategies{Attack: true, Defend: true})
+
+	var battleships []*objUnit.BattleShip
+	for i, spec := range []struct {
+		antiShip int
+		hp       float64
+	}{
+		{25, 31700}, {23, 35737}, {26, 33190}, {27, 37800},
+		{27, 34946}, {25, 31700}, {26, 33190}, {23, 35929},
+	} {
+		bb := makeShip(fmt.Sprintf("bb%d", i), faction.ComputerAlpha, objUnit.ShipTypeBattleShip, i, 0)
+		bb.TypeAbbr = "WaterDrop"
+		bb.TotalHP, bb.CurHP = spec.hp, spec.hp
+		bb.CombatPower.AntiShip = spec.antiShip
+		battleships = append(battleships, bb)
+	}
+	var screen []*objUnit.BattleShip
+	for i := 0; i < 29; i++ {
+		dd := makeShip(fmt.Sprintf("dd%02d", i), faction.ComputerAlpha, objUnit.ShipTypeDestroyer, i, 4)
+		dd.TotalHP, dd.CurHP = 2286, 2286
+		dd.CombatPower.AntiShip = 17
+		screen = append(screen, dd)
+	}
+	var enemies []*objUnit.BattleShip
+	for i, spec := range []struct {
+		antiShip int
+		hp       float64
+	}{
+		{44, 41300}, {44, 41300}, {31, 19500}, {34, 21900}, {45, 32105},
+		{45, 32105}, {21, 36600}, {21, 36600}, {23, 13200}, {23, 13200},
+		{16, 5925}, {19, 2490}, {19, 2490}, {19, 2490}, {19, 2490},
+	} {
+		foe := makeShip(fmt.Sprintf("foe%d", i), faction.HumanAlpha, objUnit.ShipTypeBattleShip, 60+i%5, 8+i/5)
+		foe.TotalHP, foe.CurHP = spec.hp, spec.hp
+		foe.CombatPower.AntiShip = spec.antiShip
+		enemies = append(enemies, foe)
+	}
+
+	handler := NewHandler(faction.ComputerAlpha)
+	all := append(append(append([]*objUnit.BattleShip{}, battleships...), screen...), enemies...)
+	handler.Handle(nil, newMission(0, all, nil))
+	if handler.attack == nil || !handler.attack.pressing {
+		t.Fatalf("全队在场时应该压上: %+v", handler.attack)
+	}
+
+	// 屏卫被清空，只剩 8 艘几乎完好的战列舰。
+	survivors := append(append([]*objUnit.BattleShip{}, battleships...), enemies...)
+	got := handler.Handle(nil, newMission(regroupInterval, survivors, nil))
+	if handler.attack == nil || !handler.attack.pressing || handler.attack.fellBack {
+		t.Fatalf("屏卫沉没后仍应压上: %+v", handler.attack)
+	}
+	move, ok := got[instr.GenInstrUid(instr.NameShipMove, "bb0")].(*instr.ShipMove)
+	if !ok {
+		t.Fatalf("压上时应该继续朝目标下航路: %v", keys(got))
+	}
+	// 目标是离小队重心最近的一团里对舰战力最高的 foe4。
+	if !strings.Contains(move.String(), "(64[64.00], 8[8.00])") {
+		t.Fatalf("航路 = %v, want 目标 foe4 (64, 8)", move)
+	}
+}
+
+// TestAttackAloneNeverFallsBack 锁定「只有进攻」的语义：没勾防守就没有后方，
+// 劣势时也不回初始泊位，一直朝目标压上。勾了防守才保留回锚点。
+func TestAttackAloneNeverFallsBack(t *testing.T) {
+	own := makeShip("bb", faction.ComputerAlpha, objUnit.ShipTypeBattleShip, 0, 0)
+	own.TypeAbbr = "WaterDrop"
+	own.TotalHP, own.CurHP = 30000, 30000
+	own.CombatPower.AntiShip = 25
+	var enemies []*objUnit.BattleShip
+	for i := 0; i < 4; i++ {
+		foe := makeShip(fmt.Sprintf("foe%d", i), faction.HumanAlpha, objUnit.ShipTypeBattleShip, 60+2*i, 0)
+		foe.TotalHP, foe.CurHP = 30000, 30000
+		foe.CombatPower.AntiShip = 25
+		enemies = append(enemies, foe)
+	}
+
+	useStrategies(t, config.AIStrategies{Attack: true})
+	got := func() map[string]instr.Instruction {
+		handler, out := decide([]*objUnit.BattleShip{own, enemies[0], enemies[1], enemies[2], enemies[3]}, nil)
+		if handler.attack == nil || !handler.attack.pressing {
+			t.Fatalf("只有进攻时应该一直压上: %+v", handler.attack)
+		}
+		return out
+	}()
+	move, ok := got[instr.GenInstrUid(instr.NameShipMove, "bb")].(*instr.ShipMove)
+	if !ok || !strings.Contains(move.String(), "(60[60.00], 0[0.00])") {
+		t.Fatalf("航路 = %v, want 最近的敌舰 (60, 0)", got)
+	}
+
+	useStrategies(t, config.AIStrategies{Attack: true, Defend: true})
+	handler, out := decide([]*objUnit.BattleShip{own, enemies[0], enemies[1], enemies[2], enemies[3]}, nil)
+	if handler.attack == nil || handler.attack.pressing {
+		t.Fatalf("勾了防守时劣势不该压上: %+v", handler.attack)
+	}
+	if _, ok := out[instr.GenInstrUid(instr.NameShipMove, "bb")]; ok {
+		t.Fatalf("勾了防守时不该下压上航路: %v", keys(out))
+	}
+}
+
+// TestNoRetreatInterruptWithoutDefend 锁定：没勾防守时单舰撤退打断不生效，
+// 否则受伤的舰会被送回初始泊位，而那里没有后方。
+func TestNoRetreatInterruptWithoutDefend(t *testing.T) {
+	own := makeShip("bb", faction.ComputerAlpha, objUnit.ShipTypeBattleShip, 0, 0)
+	own.CurHP = 30
+	own.CombatPower.AntiShip = 25
+	foes := []*objUnit.BattleShip{
+		makeShip("dd1", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 2, 0),
+		makeShip("dd2", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 4, 0),
+	}
+	foes[0].CombatPower.AntiShip = 19
+	foes[1].CombatPower.AntiShip = 19
+	ships := []*objUnit.BattleShip{own, foes[0], foes[1]}
+
+	useStrategies(t, config.AIStrategies{Attack: true})
+	handler, _ := decide(ships, nil)
+	if len(handler.retreatOrder) != 0 {
+		t.Fatalf("只有进攻时不该有撤退打断: %v", handler.retreatOrder)
+	}
+	assertMembers(t, "attack", handler.attack, "bb")
+
+	useStrategies(t, config.AIStrategies{Attack: true, Defend: true})
+	handler, _ = decide(ships, nil)
+	if len(handler.retreatOrder) != 1 || handler.retreatOrder[0] != "bb" {
+		t.Fatalf("勾了防守时受伤的战列舰应该回撤: %v", handler.retreatOrder)
 	}
 }
 
