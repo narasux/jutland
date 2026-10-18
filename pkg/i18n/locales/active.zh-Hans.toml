@@ -56,6 +56,12 @@ other = "语言"
 other = "战争迷雾"
 [SettingsMinimap]
 other = "小地图"
+[SettingsHitEffects]
+other = "命中特效"
+[SettingsDamageNumbers]
+other = "显示伤害数字"
+[SettingsShipState]
+other = "常显战舰状态"
 [SettingsOn]
 other = "开"
 [SettingsOff]
@@ -290,14 +296,8 @@ other = "我方舰队: {{.Ally}}    敌方舰队: {{.Enemy}}"
 other = "我方舰队: {{.Count}}"
 [SidebarEnemyFleet]
 other = "敌方舰队: {{.Count}}"
-[SidebarShowState]
-other = "状态显示"
-[SidebarDamageNumbers]
-other = "伤害数字"
 [SidebarTabBattle]
 other = "地图 / 单位"
-[SidebarTabSettings]
-other = "设置"
 [AirfieldPanelTitle]
 other = "机场"
 [AirfieldParkedCount]
@@ -426,8 +426,6 @@ other = "我"
 other = "敌"
 [MapFleetCount]
 other = "{{.Side}}（{{.Count}}）"
-[OrderUnreachable]
-other = "无法抵达"
 [RallyLandBlocked]
 other = "陆地不可设集结点"
 [ReinforceShipArchive]

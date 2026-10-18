@@ -63,3 +63,28 @@ func TestMinimapDefaultsToOpen(t *testing.T) {
 		t.Fatal("explicit false should keep the minimap closed")
 	}
 }
+
+// 命中特效 / 伤害数字 / 战舰状态默认打开；老配置文件里没写这些键时也要保持打开。
+func TestDisplayOptionsDefaultToOpen(t *testing.T) {
+	defaults := NewDefaultGameSettings()
+	if !defaults.DisplayHitEffects || !defaults.DisplayDamageNumber || !defaults.ForceDisplayState {
+		t.Fatalf("display options should default to open: %+v", defaults)
+	}
+
+	settings := *NewDefaultGameSettings()
+	if err := json5.Unmarshal([]byte(`{"language":"en"}`), &settings); err != nil {
+		t.Fatalf("decode defaults: %v", err)
+	}
+	if !settings.DisplayHitEffects || !settings.DisplayDamageNumber || !settings.ForceDisplayState {
+		t.Fatalf("missing display keys should stay open: %+v", settings)
+	}
+
+	settings = *NewDefaultGameSettings()
+	disabled := `{"displayHitEffects":false,"displayDamageNumber":false,"forceDisplayState":false}`
+	if err := json5.Unmarshal([]byte(disabled), &settings); err != nil {
+		t.Fatalf("decode disable: %v", err)
+	}
+	if settings.DisplayHitEffects || settings.DisplayDamageNumber || settings.ForceDisplayState {
+		t.Fatalf("explicit false should stay closed: %+v", settings)
+	}
+}

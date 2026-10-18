@@ -54,6 +54,8 @@ type MissionManager struct {
 	mapBlockPrewarmFocusH     int
 	mapBlockPrewarmSettled    bool
 	combatBuckets             combatIndex
+	// effectSeq 命中特效的确定性种子来源：不用全局随机数，避免影响战斗随机序列
+	effectSeq uint32
 
 	simTick                  int64
 	targetingPlan            targeting.Plan

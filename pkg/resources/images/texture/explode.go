@@ -30,7 +30,7 @@ func init() {
 	// 加载战舰爆炸图片
 	shipExplodeImgMap = map[int]*ebiten.Image{}
 	for hp := 0; hp < MaxShipExplodeState; hp++ {
-		// TODO 尝试加了另外三种爆炸效果，但是不协调（太亮太短）先不使用，后面考虑作为飞机的爆炸效果
+		// TODO explo_1 / explo_2 太亮太短，和整体画面不协调，暂不使用（命中闪光另用 effects/flash 合成）
 		imgPath := fmt.Sprintf("/textures/explode/explo_0_%d.png", hp)
 		if img, err = loader.LoadImage(imgPath); err != nil {
 			log.Fatalf("missing %s: %s", imgPath, err)

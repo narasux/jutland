@@ -56,6 +56,12 @@ other = "Language"
 other = "Fog of War"
 [SettingsMinimap]
 other = "Minimap"
+[SettingsHitEffects]
+other = "Hit effects"
+[SettingsDamageNumbers]
+other = "Damage numbers"
+[SettingsShipState]
+other = "Ship status"
 [SettingsOn]
 other = "On"
 [SettingsOff]
@@ -290,14 +296,8 @@ other = "Allied fleet: {{.Ally}}    Enemy fleet: {{.Enemy}}"
 other = "Allied fleet: {{.Count}}"
 [SidebarEnemyFleet]
 other = "Enemy fleet: {{.Count}}"
-[SidebarShowState]
-other = "Status display"
-[SidebarDamageNumbers]
-other = "Damage numbers"
 [SidebarTabBattle]
 other = "Map / Units"
-[SidebarTabSettings]
-other = "Settings"
 [AirfieldPanelTitle]
 other = "Airfield"
 [AirfieldParkedCount]
@@ -426,8 +426,6 @@ other = "Ally"
 other = "Enemy"
 [MapFleetCount]
 other = "{{.Side}} ({{.Count}})"
-[OrderUnreachable]
-other = "Cannot reach that position"
 [RallyLandBlocked]
 other = "Cannot set a rally point on land"
 [ReinforceShipArchive]

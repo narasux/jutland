@@ -7,6 +7,9 @@
 // aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用
 // EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾
 // EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图
+// DisplayHitEffects: 命中特效总开关，默认开启；关闭后命中舰体 / 落水 / 落陆不再生成特效
+// DisplayDamageNumber: 是否显示命中伤害数字，默认开启
+// ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示
 
 {
   "speedMultiplier": 1,
@@ -20,5 +23,8 @@
   },
   "enableLandAirfield": true,
   "enableFogOfWar": false,
-  "enableMinimap": false
+  "enableMinimap": false,
+  "displayHitEffects": true,
+  "displayDamageNumber": true,
+  "forceDisplayState": true
 }

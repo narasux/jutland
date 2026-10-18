@@ -63,7 +63,11 @@ type UI struct {
 	localAI       config.AIStrategies
 	localFog      bool
 	localMinimap  bool
-	backPressed   bool
+	// 命中特效 / 伤害数字 / 常显战舰状态：显示类开关，2026-10 从侧栏关卡设置迁入
+	localHitEffects    bool
+	localDamageNumbers bool
+	localShipState     bool
+	backPressed        bool
 }
 
 // New 创建设置界面
@@ -74,6 +78,10 @@ func New() *UI {
 		localAI:       config.EnabledAIStrategies(),
 		localFog:      fogSetting(),
 		localMinimap:  minimapSetting(),
+
+		localHitEffects:    hitEffectsSetting(),
+		localDamageNumbers: damageNumberSetting(),
+		localShipState:     displayStateSetting(),
 	}
 	s.buildUI()
 	return s
@@ -97,6 +105,10 @@ func (s *UI) Reset() {
 	s.localAI = config.EnabledAIStrategies()
 	s.localFog = fogSetting()
 	s.localMinimap = minimapSetting()
+
+	s.localHitEffects = hitEffectsSetting()
+	s.localDamageNumbers = damageNumberSetting()
+	s.localShipState = displayStateSetting()
 	s.backPressed = false
 	s.buildUI()
 }
@@ -129,6 +141,30 @@ func minimapSetting() bool {
 		return true
 	}
 	return config.G.EnableMinimap
+}
+
+// hitEffectsSetting 命中特效默认开启，配置还没加载时也按开启处理。
+func hitEffectsSetting() bool {
+	if config.G == nil {
+		return true
+	}
+	return config.G.DisplayHitEffects
+}
+
+// damageNumberSetting 伤害数字默认开启，配置还没加载时也按开启处理。
+func damageNumberSetting() bool {
+	if config.G == nil {
+		return true
+	}
+	return config.G.DisplayDamageNumber
+}
+
+// displayStateSetting 常显战舰状态默认开启，配置还没加载时也按开启处理。
+func displayStateSetting() bool {
+	if config.G == nil {
+		return true
+	}
+	return config.G.ForceDisplayState
 }
 
 // speedOptionIndex 返回当前 localValue 匹配的速度选项索引，不匹配时返回 -1
@@ -304,6 +340,51 @@ func (s *UI) buildUI() {
 	toggleRow.AddChild(toggleColumn(fogLabel, fogCombo))
 	toggleRow.AddChild(toggleColumn(minimapLabel, minimapCombo))
 
+	// 显示类开关同样并排成一行，避免继续加高整页：命中特效 / 伤害数字 / 战舰状态
+	toggleColumnFor := func(labelMsg i18n.MessageID, selected bool, apply func(bool)) *widget.Container {
+		label := widget.NewLabel(
+			widget.LabelOpts.Text(
+				i18n.Text(labelMsg),
+				labelFace,
+				&widget.LabelColor{Idle: colorx.White, Disabled: colorx.White},
+			),
+		)
+		choice := toggleOptions[0]
+		if selected {
+			choice = toggleOptions[1]
+		}
+		entries := make([]any, len(toggleOptions))
+		for idx := range toggleOptions {
+			entries[idx] = toggleOptions[idx]
+		}
+		combo := newSettingsCombo(
+			entries,
+			choice,
+			&comboFaceValue,
+			boxWidth,
+			func(entry any) string { return i18n.Text(entry.(toggleOption).Label) },
+			func(entry any) string { return i18n.Text(entry.(toggleOption).Label) },
+			func(entry any) { apply(entry.(toggleOption).Value) },
+		)
+		return toggleColumn(label, combo)
+	}
+
+	displayRow := widget.NewContainer(
+		widget.ContainerOpts.Layout(widget.NewRowLayout(
+			widget.RowLayoutOpts.Direction(widget.DirectionHorizontal),
+			widget.RowLayoutOpts.Spacing(40),
+		)),
+	)
+	displayRow.AddChild(toggleColumnFor(i18n.MsgSettingsHitEffects, s.localHitEffects, func(value bool) {
+		s.localHitEffects = value
+	}))
+	displayRow.AddChild(toggleColumnFor(i18n.MsgSettingsDamageNumbers, s.localDamageNumbers, func(value bool) {
+		s.localDamageNumbers = value
+	}))
+	displayRow.AddChild(toggleColumnFor(i18n.MsgSettingsShipState, s.localShipState, func(value bool) {
+		s.localShipState = value
+	}))
+
 	// ====== 按钮栏 ======
 	saveBtn := widget.NewButton(
 		widget.ButtonOpts.Image(normalBtnImage),
@@ -316,6 +397,9 @@ func (s *UI) buildUI() {
 			config.G.AI = s.localAI
 			config.G.EnableFogOfWar = s.localFog
 			config.G.EnableMinimap = s.localMinimap
+			config.G.DisplayHitEffects = s.localHitEffects
+			config.G.DisplayDamageNumber = s.localDamageNumbers
+			config.G.ForceDisplayState = s.localShipState
 			_ = config.SaveGameSettings()
 		}),
 	)
@@ -339,10 +423,11 @@ func (s *UI) buildUI() {
 	buttonRow.AddChild(cancelBtn)
 
 	// ====== 顶部内容（标题 + 速度倍率 + 选项按钮） ======
+	// 2026-10 起显示类开关增多，行距从 32 收到 24，给新增的一行开关腾出高度。
 	topContent := widget.NewContainer(
 		widget.ContainerOpts.Layout(widget.NewRowLayout(
 			widget.RowLayoutOpts.Direction(widget.DirectionVertical),
-			widget.RowLayoutOpts.Spacing(32),
+			widget.RowLayoutOpts.Spacing(24),
 		)),
 	)
 	topContent.AddChild(titleLabel)
@@ -351,6 +436,7 @@ func (s *UI) buildUI() {
 	topContent.AddChild(languageLabel)
 	topContent.AddChild(languageCombo)
 	topContent.AddChild(toggleRow)
+	topContent.AddChild(displayRow)
 	topContent.AddChild(s.strategyBox(&comboFaceValue, boxWidth))
 
 	// ====== 底部内容（操作按钮 + 提示） ======

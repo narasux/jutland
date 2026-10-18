@@ -5,13 +5,10 @@ import (
 	"math"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	"github.com/narasux/jutland/pkg/i18n"
-	objMark "github.com/narasux/jutland/pkg/mission/object/mark"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objWeapon "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
-	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/grid"
 )
 
@@ -353,7 +350,6 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	if i.status == Executing {
 		if ship, ok := s.Arena.Ships[i.shipUid]; ok {
 			ship.CurSpeed = 0
-			i.markUnreachable(s, ship)
 		}
 		i.failed = true
 		i.status = Executed
@@ -412,10 +408,10 @@ func (i *ShipMovePath) Exec(s *state.MissionState) error {
 	)
 	i.trackProgress(ship)
 	// 长时间既没有位移也没有转向：目标不可达（例如终点被陆地完全隔开），
-	// 结束机动并留下失败标记，交给 UI 提示，而不是让舰船永远磨在岸边。
+	// 结束机动并标记失败，而不是让舰船永远磨在岸边。
+	// 不再弹“无法抵达”提示：电脑舰队也会走这条路径，我方和敌方都不该被这个文字打扰。
 	if i.noProgressTicks >= blockedNoProgressMaxTicks {
 		ship.CurSpeed = 0
-		i.markUnreachable(s, ship)
 		i.failed = true
 		i.status = Executed
 		return nil
@@ -468,16 +464,6 @@ func (i *ShipMovePath) syncPathCursor(ship *objWeapon.BattleShip) {
 		}
 		minDist, i.curIdx = dist, idx
 	}
-}
-
-// markUnreachable 在舰船位置弹出“无法抵达”提示。
-// 机动失败时不再静默结束：玩家点了目标却看不到任何反应，最容易误判成“卡住”。
-func (i *ShipMovePath) markUnreachable(s *state.MissionState, ship *objWeapon.BattleShip) {
-	if s.UI.GameMarks == nil {
-		return
-	}
-	mark := objMark.NewText(ship.CurPos, i18n.Text(i18n.MsgOrderUnreachable), 20, colorx.Red, 90)
-	s.UI.GameMarks[mark.ID] = mark
 }
 
 // trackProgress 记录舰船是否仍在移动或转向。撞岸掉头时舰体持续转向，

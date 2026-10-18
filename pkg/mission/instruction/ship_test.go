@@ -269,7 +269,7 @@ func TestShipMovePathBeachedShipTurnsAroundInOneOrder(t *testing.T) {
 }
 
 // 目标在封闭水域（珍珠港内湾）时，寻路不可达必须快速结束并标记失败，
-// 供 UI 提示，而不是让舰船在岸边无限磨。
+// 而不是让舰船在岸边无限磨。失败时不再弹“无法抵达”提示。
 func TestShipMovePathUnreachableTargetMarksFailed(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")
@@ -291,7 +291,7 @@ func TestShipMovePathUnreachableTargetMarksFailed(t *testing.T) {
 	require.True(t, move.Executed(), "不可达目标也要正常收尾，不能永久滞留指令")
 	require.True(t, move.Failed(), "不可达目标必须标记失败")
 	require.Less(t, ticks, 120, "应在寻路结果回来后立刻结束，而不是原地磨")
-	require.NotEmpty(t, misState.UI.GameMarks, "失败时必须在舰船位置弹出提示，不能静默结束")
+	require.Empty(t, misState.UI.GameMarks, "机动失败不再弹“无法抵达”提示")
 }
 
 // 长时间既无位移也无转向（航点被地形彻底挡死、航向又已经对准）时必须结束机动

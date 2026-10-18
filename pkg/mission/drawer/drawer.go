@@ -74,6 +74,8 @@ func (d *Drawer) Draw(
 		d.drawDestroyedShips(screen, misState)
 		d.drawFlyingPlanes(screen, misState)
 		d.drawDestroyedPlanes(screen, misState)
+		// 命中火球压在舰船之上，否则会被舰体完全遮住
+		d.drawExplosionsOverShips(screen, misState)
 		// 用户行为
 		d.drawArrowOnMapWhenHover(screen, misState)
 		d.drawSelectedArea(screen, misState)
