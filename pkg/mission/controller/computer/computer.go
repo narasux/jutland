@@ -46,6 +46,9 @@ type fleetOrder struct {
 	needsReselect bool
 	pressing      bool
 	fellBack      bool
+	// relentless 表示这条进攻指令没有后方：没勾防守策略时，停止压上只会退回初始
+	// 泊位，目标暂时消失也不该让整队掉头，保持当前航路等下一次重选。
+	relentless bool
 	// 没有可见目标时转入搜索推进：整队朝最近的接触或未探索海面开。
 	// searchDest 是本轮编组算出来的推进点，全队共用，下一轮编组重算。
 	searching  bool
@@ -303,6 +306,11 @@ func (h *ComputerDecisionHandler) desiredRoute(
 		if order.pressing {
 			if route, ok := h.pursue(order, snap); ok {
 				return route, true
+			}
+			// 没有后方时目标暂时消失（刚被打沉、还没轮到重选）也不掉头回锚点，
+			// 保持当前航路继续压上，等重选给出新目标。
+			if order.relentless {
+				return shipRoute{}, false
 			}
 		}
 		// 中途发现了目标就退出搜索，交回阵位 / 追击逻辑。

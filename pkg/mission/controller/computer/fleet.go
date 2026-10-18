@@ -129,8 +129,15 @@ func hpRatio(ship *objUnit.BattleShip) float64 {
 }
 
 func (h *ComputerDecisionHandler) regroup(snap *battleSnapshot) map[string]instr.Instruction {
+	allowed := config.EnabledAIStrategies()
 	anchor, anchorOK := h.currentAnchor(snap)
-	h.planRetreats(snap, anchor, anchorOK)
+	if allowed.Defend {
+		h.planRetreats(snap, anchor, anchorOK)
+	} else {
+		// 没勾防守＝没有后方：撤退打断只会把受伤的舰船送回初始泊位等死，
+		// 那不是这些舰船该去的地方。
+		h.retreats, h.retreatOrder = map[string]objPos.MapPos{}, nil
+	}
 
 	roster := newFleetRoster(snap, h.retreats, anchor, anchorOK)
 	summons := roster.planSummons()
@@ -147,7 +154,6 @@ func (h *ComputerDecisionHandler) regroup(snap *battleSnapshot) map[string]instr
 		used[ship.Uid] = true
 	}
 
-	allowed := config.EnabledAIStrategies()
 	if allowed.Raid {
 		h.raid = h.assignRaid(snap, used)
 	} else {
@@ -173,7 +179,7 @@ func (h *ComputerDecisionHandler) regroup(snap *battleSnapshot) map[string]instr
 	prevAttack := h.attack
 	prevCounter := h.counter
 	if allowed.Attack {
-		h.attack = h.makeAttack(prevAttack, snap, remaining)
+		h.attack = h.makeAttack(prevAttack, snap, remaining, allowed)
 		h.counter = nil
 	} else {
 		h.attack = nil
@@ -406,7 +412,7 @@ func (h *ComputerDecisionHandler) assignRaid(
 }
 
 func (h *ComputerDecisionHandler) makeAttack(
-	prev *fleetOrder, snap *battleSnapshot, members []*objUnit.BattleShip,
+	prev *fleetOrder, snap *battleSnapshot, members []*objUnit.BattleShip, strategies config.AIStrategies,
 ) *fleetOrder {
 	if len(members) == 0 {
 		return nil
@@ -425,6 +431,11 @@ func (h *ComputerDecisionHandler) makeAttack(
 	order.pressing, order.fellBack = nextPress(
 		prev, powerOf(members), powerOf(local), hpSum(members), hpSum(local),
 	)
+	// 没勾防守＝没有要守的锚点：停止压上只会把整队送回初始泊位等死，
+	// 只有进攻时进攻指令一直压上。
+	if !strategies.Defend {
+		order.pressing, order.fellBack, order.relentless = true, false, true
+	}
 	return order
 }
 
@@ -432,7 +443,11 @@ func nextPress(prev *fleetOrder, own, enemy groupPower, ownHP, enemyHP float64) 
 	wasPressing := prev != nil && prev.pressing
 	fellBack := prev != nil && prev.fellBack
 	if wasPressing {
-		if scoreBelow(own, enemy, pressStop) || ownHP < pressStop*enemyHP {
+		// 已经压上的小队只看真实战损。AntiShip 之和会被护航舰的鱼雷爆发主导：珍珠港
+		// 29 艘驱逐舰合计 486 点，比 8 艘战列舰的 202 点还多，屏卫被清空时兵力比一步
+		// 掉到 0.84，而当时战列舰本体几乎完好（生命之和仍有对方的 1.2 倍）。按纸面
+		// 兵力比撤退会让整队在最不该掉头的时候掉头。
+		if ownHP < pressStop*enemyHP {
 			return false, true
 		}
 		return true, false
