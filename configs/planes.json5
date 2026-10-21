@@ -19,6 +19,7 @@
     timeCost: 5,
     tonnage: 3.315,
     range: 665,
+    flakVulnerability: 0.96,
     weapon: {
       guns: [
         // 机头整流罩（20mm B-20 三联装）
@@ -50,6 +51,7 @@
     timeCost: 4,
     tonnage: 3.36,
     range: 765,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 机头整流罩（20mm ShVAK 双联装同步机炮）
@@ -81,6 +83,7 @@
     timeCost: 5,
     tonnage: 3.204,
     range: 675,
+    flakVulnerability: 0.95,
     weapon: {
       guns: [
         // 桨毂（20mm ShVAK）
@@ -118,6 +121,7 @@
     timeCost: 5,
     tonnage: 2.697,
     range: 550,
+    flakVulnerability: 0.95,
     weapon: {
       guns: [
         // 桨毂（20mm ShVAK）
@@ -155,6 +159,7 @@
     timeCost: 4,
     tonnage: 2.935,
     range: 643,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 桨毂（20mm ShVAK）
@@ -192,6 +197,7 @@
     timeCost: 3,
     tonnage: 2.95,
     range: 700,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 桨毂（20mm ShVAK，穿过螺旋桨轴射击）
@@ -229,6 +235,7 @@
     timeCost: 4,
     tonnage: 3.355,
     range: 820,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 机头（12.7mm UBS，同步机枪）
@@ -267,6 +274,7 @@
     timeCost: 3,
     tonnage: 3.099,
     range: 580,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 机头（12.7mm UBS，发动机上方同步机枪）
@@ -305,6 +313,7 @@
     timeCost: 3,
     tonnage: 1.941,
     range: 700,
+    flakVulnerability: 0.94,
     weapon: {
       guns: [
         // 机翼（20mm ShVAK 双联装，固定前射）
@@ -343,6 +352,7 @@
     timeCost: 3,
     tonnage: 1.385,
     range: 510,
+    flakVulnerability: 0.96,
     weapon: {
       guns: [
         // 上翼（7.62mm PV-1 双联装，固定前射）
@@ -382,6 +392,7 @@
     timeCost: 9,
     tonnage: 7.536,
     range: 1315,
+    flakVulnerability: 0.54,
     weapon: {
       guns: [
         // 机头（7.62mm ShKAS 双联装，固定前射）
@@ -450,6 +461,7 @@
     timeCost: 18,
     tonnage: 18.58,
     range: 4100,
+    flakVulnerability: 0.31,
     weapon: {
       guns: [
         // 机鼻（12.7mm UBT，前向自卫）
@@ -511,6 +523,7 @@
     timeCost: 35,
     tonnage: 27.0,
     range: 3700,
+    flakVulnerability: 0.23,
     weapon: {
       guns: [
         // 机鼻（7.62mm ShKAS 双联装，前向）
@@ -600,6 +613,7 @@
     timeCost: 14,
     tonnage: 12.12,
     range: 2600,
+    flakVulnerability: 1.18,
     weapon: {
       guns: [
         // 机鼻（7.62mm ShKAS，固定前射）
@@ -655,6 +669,7 @@
     timeCost: 11,
     tonnage: 6.335,
     range: 800,
+    flakVulnerability: 1.06,
     weapon: {
       guns: [
         {
@@ -728,6 +743,7 @@
     timeCost: 10,
     tonnage: 6.36,
     range: 765,
+    flakVulnerability: 1.11,
     weapon: {
       guns: [
         // 机翼（23mm VYa-23 双联装，对舰扫射主火力）
@@ -804,6 +820,7 @@
     timeCost: 8,
     tonnage: 4.7,
     range: 1100,
+    flakVulnerability: 1.06,
     weapon: {
       guns: [
         // 机翼（7.62mm ShKAS 双联装 ×2，共 4 挺）
@@ -877,6 +894,7 @@
     timeCost: 3,
     tonnage: 2.76,
     range: 1150,
+    flakVulnerability: 1.08,
     weapon: {
       guns: [
         // 后座（7.62mm ShKAS，活动枪架，后半球自卫）
@@ -907,6 +925,7 @@
     timeCost: 3,
     tonnage: 4.245,
     range: 1600,
+    flakVulnerability: 1.18,
     weapon: {
       guns: [
         // 艇首（7.62mm PV-1，固定前射）
@@ -946,6 +965,7 @@
     timeCost: 7,
     tonnage: 5.87,
     range: 1778,
+    flakVulnerability: 0.96,
     weapon: {
       guns: [
         // 机翼（双联装 20mm，前向）
@@ -992,6 +1012,7 @@
     timeCost: 10,
     tonnage: 11.67,
     range: 1900,
+    flakVulnerability: 1.04,
     weapon: {
       guns: [
         // 翼根（双联装 20mm，前向）
@@ -1045,6 +1066,7 @@
     timeCost: 7,
     tonnage: 5.7,
     range: 1520,
+    flakVulnerability: 1.01,
     weapon: {
       guns: [
         // 机翼（三联装，每翼一组，前向）
@@ -1091,6 +1113,7 @@
     timeCost: 8,
     tonnage: 6.59,
     range: 1617,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         // 机翼（三联装，每翼一组，前向）
@@ -1137,6 +1160,7 @@
     timeCost: 4,
     tonnage: 3.367,
     range: 1360,
+    flakVulnerability: 1.00,
     weapon: {
       guns: [
         // 机翼（双联装，每翼一组，前向）
@@ -1174,6 +1198,7 @@
     timeCost: 4,
     tonnage: 3.2,
     range: 1550,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         // 机首（双联装 12.7mm，机首上侧，前向）
@@ -1217,6 +1242,7 @@
     timeCost: 9,
     tonnage: 13.6,
     range: 1900,
+    flakVulnerability: 1.11,
     weapon: {
       guns: [
         // 机腹（双联装 20mm M-2，固定前射）
@@ -1270,6 +1296,7 @@
     timeCost: 8,
     tonnage: 5.5,
     range: 2000,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机翼（三联装，每翼一组，前向）
@@ -1316,6 +1343,7 @@
     timeCost: 7,
     tonnage: 5.1,
     range: 1800,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机翼（双联装，每翼一组，前向）
@@ -1362,6 +1390,7 @@
     timeCost: 9,
     tonnage: 8.0,
     range: 1600,
+    flakVulnerability: 1.01,
     weapon: {
       guns: [
         // 机翼（四联装，每翼一组，前向）
@@ -1408,6 +1437,7 @@
     timeCost: 7,
     tonnage: 6.6,
     range: 1300,
+    flakVulnerability: 1.02,
     weapon: {
       guns: [
         // 机翼（四联装，每翼一组，前向）
@@ -1454,6 +1484,7 @@
     timeCost: 6,
     tonnage: 9.7,
     range: 1600,
+    flakVulnerability: 1.11,
     weapon: {
       guns: [
         // 机头下方炸弹舱炮架（双联装 20mm，固定前射）
@@ -1512,6 +1543,7 @@
     timeCost: 5,
     tonnage: 4.0,
     range: 1200,
+    flakVulnerability: 1.00,
     weapon: {
       guns: [
         // 机翼/机头（双联装，前向）
@@ -1549,6 +1581,7 @@
     timeCost: 9,
     tonnage: 7.9,
     range: 1600,
+    flakVulnerability: 1.03,
     weapon: {
       guns: [
         // 机鼻 20mm M2 机炮（前向）
@@ -1595,6 +1628,7 @@
     timeCost: 4,
     tonnage: 3.7,
     range: 1200,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机鼻 37mm M4 机炮（前向）
@@ -1647,6 +1681,7 @@
     timeCost: 10,
     tonnage: 7.6,
     range: 1900,
+    flakVulnerability: 0.54,
     weapon: {
       guns: [
         {
@@ -1709,6 +1744,7 @@
     timeCost: 8,
     tonnage: 4.245,
     range: 1595,
+    flakVulnerability: 0.53,
     weapon: {
       guns: [
         {
@@ -1772,6 +1808,7 @@
     timeCost: 44,
     tonnage: 31.3,
     range: 5200,
+    flakVulnerability: 0.17,
     weapon: {
       guns: [
         // 机背前炮塔（四联）
@@ -1880,6 +1917,7 @@
     timeCost: 25,
     tonnage: 15.9,
     range: 2300,
+    flakVulnerability: 0.37,
     weapon: {
       guns: [
         // 机鼻“全能机鼻”（四联装，前向）
@@ -1986,6 +2024,7 @@
     timeCost: 42,
     tonnage: 29.7,
     range: 3200,
+    flakVulnerability: 0.23,
     weapon: {
       guns: [
         // 颚部 Bendix 动力炮塔（双联，前向）
@@ -2111,6 +2150,7 @@
     timeCost: 41,
     tonnage: 29.5,
     range: 3700,
+    flakVulnerability: 0.20,
     weapon: {
       guns: [
         // 机鼻 Emerson 动力炮塔（双联，前向）
@@ -2215,6 +2255,7 @@
     timeCost: 11,
     tonnage: 12.3,
     range: 1800,
+    flakVulnerability: 0.37,
     weapon: {
       guns: [
         // 机鼻（双联装 7.62mm，前向）
@@ -2281,6 +2322,7 @@
     timeCost: 18,
     tonnage: 15.9,
     range: 2170,
+    flakVulnerability: 0.40,
     weapon: {
       guns: [
         // 机鼻（单装，前向）
@@ -2381,6 +2423,7 @@
     timeCost: 18,
     tonnage: 16.8,
     range: 1850,
+    flakVulnerability: 0.40,
     weapon: {
       guns: [
         // 机头（可活动，前向）
@@ -2474,6 +2517,7 @@
     timeCost: 9,
     tonnage: 7.8,
     range: 1600,
+    flakVulnerability: 1.12,
     weapon: {
       guns: [
         {
@@ -2523,6 +2567,7 @@
     timeCost: 6,
     tonnage: 4.624,
     range: 1200,
+    flakVulnerability: 1.12,
     weapon: {
       guns: [
         {
@@ -2567,6 +2612,7 @@
     timeCost: 3,
     tonnage: 4.08,
     range: 1755,
+    flakVulnerability: 1.04,
     weapon: {
       guns: [
         // 机翼（12.7mm M2，每翼一挺，固定前射）
@@ -2605,6 +2651,7 @@
     timeCost: 3,
     tonnage: 2.72,
     range: 1295,
+    flakVulnerability: 1.11,
     weapon: {
       guns: [
         // 机首（7.62mm M1919，固定前射）
@@ -2642,6 +2689,7 @@
     timeCost: 3,
     tonnage: 2.47,
     range: 1086,
+    flakVulnerability: 1.09,
     weapon: {
       guns: [
         // 机首（7.62mm AN/M2，固定前射）
@@ -2680,6 +2728,7 @@
     timeCost: 4,
     tonnage: 7.5,
     range: 2600,
+    flakVulnerability: 1.22,
     weapon: {}
   },
   // 德国空军 & 海军
@@ -2702,6 +2751,7 @@
     timeCost: 6,
     tonnage: 7.4,
     range: 1050,
+    flakVulnerability: 1.00,
     weapon: {
       guns: [
         // 机首（30mm MK 108，固定前射）
@@ -2753,6 +2803,7 @@
     timeCost: 6,
     tonnage: 7.13,
     range: 1050,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机首（30mm MK 108，固定前射）
@@ -2804,6 +2855,7 @@
     timeCost: 6,
     tonnage: 5.217,
     range: 2000,
+    flakVulnerability: 1.01,
     weapon: {
       guns: [
         // 桨毂（30mm MK 108，固定前射）
@@ -2848,6 +2900,7 @@
     timeCost: 5,
     tonnage: 4.84,
     range: 835,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 机首（13mm MG 131，固定前射）
@@ -2899,6 +2952,7 @@
     timeCost: 6,
     tonnage: 4.9,
     range: 900,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 机首（13mm MG 131，固定前射）
@@ -2964,6 +3018,7 @@
     timeCost: 5,
     tonnage: 2.8,
     range: 975,
+    flakVulnerability: 0.92,
     weapon: {
       guns: [
         // 前机身两侧（20mm MG 151/20，固定前射）
@@ -3002,6 +3057,7 @@
     timeCost: 6,
     tonnage: 4.3,
     range: 1100,
+    flakVulnerability: 0.96,
     weapon: {
       guns: [
         // 机首进气口周围（30mm MK 108，固定前射）
@@ -3054,6 +3110,7 @@
     timeCost: 3,
     tonnage: 2.232,
     range: 365,
+    flakVulnerability: 0.85,
     weapon: {
       rockets: [
         // 机鼻 24 管 R4M 对空火箭发射巢，前向齐射
@@ -3084,6 +3141,7 @@
     timeCost: 5,
     tonnage: 3.375,
     range: 1000,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         {
@@ -3125,6 +3183,7 @@
     timeCost: 5,
     tonnage: 3.2,
     range: 1000,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         {
@@ -3166,6 +3225,7 @@
     timeCost: 4,
     tonnage: 3,
     range: 850,
+    flakVulnerability: 0.96,
     weapon: {
       guns: [
         {
@@ -3207,6 +3267,7 @@
     timeCost: 3,
     tonnage: 2.665,
     range: 660,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         {
@@ -3254,6 +3315,7 @@
     timeCost: 3,
     tonnage: 2.2,
     range: 690,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         {
@@ -3289,6 +3351,7 @@
     timeCost: 3,
     tonnage: 4.309,
     range: 365,
+    flakVulnerability: 0.90,
     weapon: {
       guns: [
         // 翼根（30mm MK 108，固定前射）
@@ -3326,6 +3389,7 @@
     timeCost: 8,
     tonnage: 6.876,
     range: 1900,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         // 翼根（30mm MK 108，固定前射）
@@ -3363,6 +3427,7 @@
     timeCost: 8,
     tonnage: 9.6,
     range: 1550,
+    flakVulnerability: 1.05,
     weapon: {
       guns: [
         // 桨毂（30mm MK 103，固定前射）
@@ -3421,6 +3486,7 @@
     timeCost: 8,
     tonnage: 9.9,
     range: 2100,
+    flakVulnerability: 1.08,
     weapon: {
       guns: [
         // 机鼻（30mm MK 108，前向）
@@ -3479,6 +3545,7 @@
     timeCost: 8,
     tonnage: 11.244,
     range: 1690,
+    flakVulnerability: 1.08,
     weapon: {
       guns: [
         // 机首（20mm MG 151/20，固定前射）
@@ -3544,6 +3611,7 @@
     timeCost: 8,
     tonnage: 13.5,
     range: 1545,
+    flakVulnerability: 1.10,
     weapon: {
       guns: [
         // 翼根（20mm MG 151/20，固定前射）
@@ -3588,6 +3656,7 @@
     timeCost: 7,
     tonnage: 4.25,
     range: 1100,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         // 桨毂（30mm MK 108，固定前射）
@@ -3661,6 +3730,7 @@
     timeCost: 5,
     tonnage: 5.25,
     range: 700,
+    flakVulnerability: 0.55,
     weapon: {
       guns: [
         {
@@ -3747,6 +3817,7 @@
     timeCost: 4,
     tonnage: 4.25,
     range: 800,
+    flakVulnerability: 0.55,
     weapon: {
       guns: [
         {
@@ -3821,6 +3892,7 @@
     timeCost: 3,
     tonnage: 2.215,
     range: 855,
+    flakVulnerability: 0.52,
     weapon: {
       guns: [
         {
@@ -3886,10 +3958,11 @@
     rotateSpeed: 7,
     length: 12.64,
     width: 14.41,
-    fundsCost: 17,
-    timeCost: 8,
+    fundsCost: 28,
+    timeCost: 12,
     tonnage: 9.8,
     range: 1556,
+    flakVulnerability: 0.17,
     weapon: {
       guns: [],
       bombs: [
@@ -3933,6 +4006,7 @@
     timeCost: 15,
     tonnage: 16.7,
     range: 2800,
+    flakVulnerability: 0.25,
     weapon: {
       guns: [
         {
@@ -4001,6 +4075,7 @@
     timeCost: 11,
     tonnage: 8.85,
     range: 1500,
+    flakVulnerability: 0.31,
     weapon: {
       guns: [
         {
@@ -4101,10 +4176,11 @@
     rotateSpeed: 2,
     length: 20.4,
     width: 31.44,
-    fundsCost: 120,
-    timeCost: 44,
+    fundsCost: 102,
+    timeCost: 38,
     tonnage: 31,
     range: 5600,
+    flakVulnerability: 0.25,
     weapon: {
       guns: [
         {
@@ -4197,6 +4273,7 @@
     timeCost: 14,
     tonnage: 17.5,
     range: 4300,
+    flakVulnerability: 0.43,
     weapon: {
       guns: [
         {
@@ -4259,6 +4336,7 @@
     timeCost: 12,
     tonnage: 12.7,
     range: 1790,
+    flakVulnerability: 0.28,
     weapon: {
       guns: [
         {
@@ -4339,6 +4417,7 @@
     timeCost: 20,
     tonnage: 22.7,
     range: 3500,
+    flakVulnerability: 0.43,
     weapon: {
       guns: [
         {
@@ -4413,6 +4492,7 @@
     timeCost: 13,
     tonnage: 13.5,
     range: 2800,
+    flakVulnerability: 0.31,
     weapon: {
       guns: [
         {
@@ -4494,6 +4574,7 @@
     timeCost: 5,
     tonnage: 4.86,
     range: 1500,
+    flakVulnerability: 1.11,
     weapon: {
       guns: [
         // 机头 7.92mm MG 17 前射机枪
@@ -4542,6 +4623,7 @@
     timeCost: 3,
     tonnage: 3.72,
     range: 1080,
+    flakVulnerability: 1.09,
     weapon: {
       guns: [
         // 机首（7.92mm MG 17，固定前射）
@@ -4580,6 +4662,7 @@
     timeCost: 3,
     tonnage: 2.8,
     range: 360,
+    flakVulnerability: 0.94,
     weapon: {}
   },
   {
@@ -4600,6 +4683,7 @@
     timeCost: 3,
     tonnage: 1.675,
     range: 650,
+    flakVulnerability: 1.18,
     weapon: {}
   },
   // 法国空军 / 海军航空兵
@@ -4622,6 +4706,7 @@
     timeCost: 7,
     tonnage: 9.523,
     range: 1700,
+    flakVulnerability: 1.04,
     weapon: {
       guns: [
         // 机首（20mm HS.404，固定前射）
@@ -4673,6 +4758,7 @@
     timeCost: 4,
     tonnage: 3.76,
     range: 1220,
+    flakVulnerability: 1.09,
     weapon: {
       guns: [
         // 机腹（20mm HS.404，固定前射）
@@ -4718,6 +4804,7 @@
     timeCost: 15,
     tonnage: 11.989,
     range: 3450,
+    flakVulnerability: 0.56,
     weapon: {
       guns: [
         // 机翼（20mm MG 151，固定前射）
@@ -4785,6 +4872,7 @@
     timeCost: 4,
     tonnage: 2.835,
     range: 1200,
+    flakVulnerability: 0.55,
     weapon: {
       guns: [
         // 桨毂（20mm HS.404，固定前射）
@@ -4838,6 +4926,7 @@
     timeCost: 4,
     tonnage: 2.948,
     range: 1169,
+    flakVulnerability: 0.55,
     weapon: {
       guns: [
         // 机翼（7.5mm Darne，固定前射）
@@ -4891,6 +4980,7 @@
     timeCost: 11,
     tonnage: 15.094,
     range: 2100,
+    flakVulnerability: 0.43,
     weapon: {
       guns: [
         // 机首（7.5mm Darne，固定前射）
@@ -4978,6 +5068,7 @@
     timeCost: 8,
     tonnage: 4.9,
     range: 1350,
+    flakVulnerability: 1.07,
     weapon: {
       guns: [
         // 机首（20mm HS.404，固定前射）
@@ -5044,6 +5135,7 @@
     timeCost: 6,
     tonnage: 4.533,
     range: 1000,
+    flakVulnerability: 1.15,
     weapon: {
       guns: [
         // 机翼（7.5mm Darne，固定前射）
@@ -5097,6 +5189,7 @@
     timeCost: 3,
     tonnage: 3.5,
     range: 1100,
+    flakVulnerability: 1.16,
     weapon: {
       guns: [
         // 机首（7.5mm Darne，固定前射）
@@ -5136,6 +5229,7 @@
     timeCost: 6,
     tonnage: 4.72,
     range: 1960,
+    flakVulnerability: 1.01,
     weapon: {
       guns: [
         {
@@ -5192,6 +5286,7 @@
     timeCost: 5,
     tonnage: 2.733,
     range: 1920,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         {
@@ -5245,6 +5340,7 @@
     timeCost: 5,
     tonnage: 2.544,
     range: 2389,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         {
@@ -5292,6 +5388,7 @@
     timeCost: 5,
     tonnage: 2.424,
     range: 3350,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         {
@@ -5339,6 +5436,7 @@
     timeCost: 3,
     tonnage: 1.7,
     range: 1200,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         {
@@ -5374,6 +5472,7 @@
     timeCost: 8,
     tonnage: 4.088,
     range: 1778,
+    flakVulnerability: 0.96,
     weapon: {
       guns: [
         // 机首（30mm 五式，固定前射）
@@ -5448,6 +5547,7 @@
     timeCost: 3,
     tonnage: 3.87,
     range: 365,
+    flakVulnerability: 0.91,
     weapon: {
       guns: [
         // 机翼（30mm 五式，各 53 发，固定前射）
@@ -5485,6 +5585,7 @@
     timeCost: 6,
     tonnage: 4.928,
     range: 852,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         {
@@ -5548,6 +5649,7 @@
     timeCost: 7,
     tonnage: 4.886,
     range: 2055,
+    flakVulnerability: 1.00,
     weapon: {
       guns: [
         // 机翼（30mm 五式，固定前射）
@@ -5615,6 +5717,7 @@
     timeCost: 9,
     tonnage: 7.3,
     range: 2750,
+    flakVulnerability: 1.05,
     weapon: {
       guns: [
         // 机首（30mm 五式，固定前射）
@@ -5682,6 +5785,7 @@
     timeCost: 5,
     tonnage: 4.4,
     range: 1300,
+    flakVulnerability: 1.02,
     weapon: {
       guns: [
         // 机首（20mm 九九式，固定前射）
@@ -5726,6 +5830,7 @@
     timeCost: 6,
     tonnage: 3.435,
     range: 2519,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         {
@@ -5782,6 +5887,7 @@
     timeCost: 9,
     tonnage: 11.51,
     range: 1697,
+    flakVulnerability: 1.10,
     weapon: {
       guns: [
         // 机首（30mm 五式，固定前射）
@@ -5863,6 +5969,7 @@
     timeCost: 6,
     tonnage: 3.8,
     range: 1715,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         {
@@ -5920,6 +6027,7 @@
     timeCost: 7,
     tonnage: 4.657,
     range: 1520,
+    flakVulnerability: 0.51,
     weapon: {
       guns: [
         {
@@ -5969,6 +6077,7 @@
     timeCost: 7,
     tonnage: 3.65,
     range: 1472,
+    flakVulnerability: 0.54,
     weapon: {
       guns: [
         {
@@ -6032,6 +6141,7 @@
     timeCost: 10,
     tonnage: 5.7,
     range: 1852,
+    flakVulnerability: 1.05,
     weapon: {
       guns: [
         {
@@ -6081,6 +6191,7 @@
     timeCost: 8,
     tonnage: 5.2,
     range: 1746,
+    flakVulnerability: 1.08,
     weapon: {
       guns: [
         {
@@ -6124,6 +6235,7 @@
     timeCost: 7,
     tonnage: 3.8,
     range: 1992,
+    flakVulnerability: 1.10,
     weapon: {
       guns: [
         {
@@ -6164,6 +6276,7 @@
     timeCost: 4,
     tonnage: 3.9,
     range: 1176,
+    flakVulnerability: 1.06,
     weapon: {
       guns: [
         // 翼内（20mm 九九式二号，固定前射）
@@ -6211,6 +6324,7 @@
     timeCost: 3,
     tonnage: 4.1,
     range: 3371,
+    flakVulnerability: 1.07,
     weapon: {
       guns: [
         // 后座（7.7mm 九二式，后半球自卫）
@@ -6241,6 +6355,7 @@
     timeCost: 6,
     tonnage: 4.5,
     range: 5308,
+    flakVulnerability: 1.03,
     weapon: {}
   },
   {
@@ -6263,6 +6378,7 @@
     timeCost: 3,
     tonnage: 2.55,
     range: 740,
+    flakVulnerability: 1.06,
     weapon: {
       guns: [
         // 翼内（7.7mm 九七式，固定前射）
@@ -6309,6 +6425,7 @@
     timeCost: 3,
     tonnage: 4.0,
     range: 2089,
+    flakVulnerability: 1.10,
     weapon: {
       guns: [
         // 后座（7.7mm 九二式，后半球自卫）
@@ -6341,6 +6458,7 @@
     timeCost: 5,
     tonnage: 3.0,
     range: 820,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         {
@@ -6400,6 +6518,7 @@
     timeCost: 5,
     tonnage: 3.5,
     range: 970,
+    flakVulnerability: 1.02,
     weapon: {
       guns: [
         {
@@ -6446,6 +6565,7 @@
     timeCost: 6,
     tonnage: 4.853,
     range: 1287,
+    flakVulnerability: 1.09,
     weapon: {
       guns: [
         {
@@ -6525,6 +6645,7 @@
     timeCost: 3,
     tonnage: 4.536,
     range: 909,
+    flakVulnerability: 0.43,
     weapon: {
       guns: [
         {
@@ -6594,6 +6715,7 @@
     timeCost: 7,
     tonnage: 6,
     range: 1104,
+    flakVulnerability: 1.12,
     weapon: {
       guns: [
         {
@@ -6637,6 +6759,7 @@
     timeCost: 8,
     tonnage: 6.5,
     range: 2655,
+    flakVulnerability: 1.07,
     weapon: {
       guns: [
         {
@@ -6692,6 +6815,7 @@
     timeCost: 9,
     tonnage: 7.8,
     range: 1600,
+    flakVulnerability: 1.12,
     weapon: {
       guns: [
         {
@@ -6740,6 +6864,7 @@
     timeCost: 4,
     tonnage: 3.5,
     range: 879,
+    flakVulnerability: 1.14,
     weapon: {
       guns: [
         {
@@ -6786,6 +6911,7 @@
     timeCost: 3,
     tonnage: 3.651,
     range: 970,
+    flakVulnerability: 1.15,
     weapon: {
       guns: [
         // 机鼻（.303 维克斯 K，前向）
@@ -6825,6 +6951,7 @@
     timeCost: 4,
     tonnage: 3.61,
     range: 980,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
@@ -6881,6 +7008,7 @@
     timeCost: 4,
     tonnage: 2.93,
     range: 765,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
@@ -6930,6 +7058,7 @@
     timeCost: 3,
     tonnage: 2.4,
     range: 445,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
@@ -6966,6 +7095,7 @@
     timeCost: 3,
     tonnage: 2.3,
     range: 780,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
@@ -7002,6 +7132,7 @@
     timeCost: 3,
     tonnage: 2.4,
     range: 570,
+    flakVulnerability: 0.98,
     weapon: {
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
@@ -7039,6 +7170,7 @@
     timeCost: 6,
     tonnage: 3.24,
     range: 1100,
+    flakVulnerability: 0.51,
     weapon: {
       guns: [
         // 机首（双联 12.7mm Breda-SAFAT，同步射击）
@@ -7105,6 +7237,7 @@
     timeCost: 9,
     tonnage: 13.62,
     range: 1795,
+    flakVulnerability: 0.28,
     weapon: {
       guns: [
         // 机首（7.7mm，前射）
@@ -7184,6 +7317,7 @@
     timeCost: 7,
     tonnage: 10.1,
     range: 2750,
+    flakVulnerability: 0.31,
     weapon: {
       guns: [
         // 机首（12.7mm，前射）
@@ -7251,6 +7385,7 @@
     timeCost: 9,
     tonnage: 10.05,
     range: 2600,
+    flakVulnerability: 1.16,
     weapon: {
       guns: [
         // 机首（12.7mm，前射）
@@ -7317,6 +7452,7 @@
     timeCost: 3,
     tonnage: 2.42,
     range: 1120,
+    flakVulnerability: 1.07,
     weapon: {
       guns: [
         // 机首（2 挺 7.7mm 固定前射）
@@ -7360,6 +7496,7 @@
     timeCost: 3,
     tonnage: 2.4,
     range: 1000,
+    flakVulnerability: 1.10,
     weapon: {
       guns: [
         // 机首下（1 挺 7.7mm 固定前射）
@@ -7399,6 +7536,7 @@
     timeCost: 10,
     tonnage: 20,
     range: 3360,
+    flakVulnerability: 0.97,
     weapon: {
       guns: [
         {
@@ -7480,6 +7618,7 @@
     timeCost: 10,
     tonnage: 45,
     range: 5300,
+    flakVulnerability: 0.53,
     weapon: {
       guns: [
         {
@@ -7557,6 +7696,7 @@
     timeCost: 10,
     tonnage: 38,
     range: 4100,
+    flakVulnerability: 0.99,
     weapon: {
       guns: [
         {

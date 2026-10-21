@@ -35,9 +35,9 @@ const maxAirAttackersPerTarget = 4
 //   - 中口径高平两用炮（≤155mm）：76~155mm 弹靠少量直击与近炸破片；
 //   - 大口径舰炮（>155mm）：弹丸散布远大于机体，直击概率极低。
 //
-// 俯冲轰炸机贴舰俯冲时姿态与高度变化剧烈，防空弹幕难以构成提前量，
-// 命中率统一再降为三分之一。
-func aaHitChance(diameter int, planeType objUnit.PlaneType) float64 {
+// 机种 / 机型之间的差异由 Plane.FlakVulnerability 表达，取值见 planes.json5。
+// 调用点只在本文件的舰射分支，因此本判定不影响近炸 / 编程引信弹（走 HasAirburst）与空对空。
+func aaHitChance(diameter int, vulnerability float64) float64 {
 	var chance float64
 	switch {
 	case diameter <= 40:
@@ -47,11 +47,12 @@ func aaHitChance(diameter int, planeType objUnit.PlaneType) float64 {
 	default:
 		chance = 1.0 / 14
 	}
-	// 俯冲轰炸机、高空轰炸机收到放空炮火的伤害低一点
-	if planeType == objUnit.PlaneTypeDiveBomber || planeType == objUnit.PlaneTypeLevelBomber {
-		chance /= 3
+	// 未解析默认值的手工构造实例（vulnerability 为零值）按常规处理，
+	// 避免退化成"永远打不中"。
+	if vulnerability <= 0 {
+		vulnerability = 1
 	}
-	return chance
+	return chance * vulnerability
 }
 
 // damageGroundPlanesNear 落点爆炸波及范围内的地面飞机结算伤害，
@@ -650,7 +651,7 @@ func (m *MissionManager) updateShotBullets() {
 						return false
 					}
 					if bt.ShooterObjType == object.TypeShip {
-						if rand.Float64() >= aaHitChance(bt.Diameter, plane.Type) {
+						if rand.Float64() >= aaHitChance(bt.Diameter, plane.FlakVulnerability) {
 							return false
 						}
 					}

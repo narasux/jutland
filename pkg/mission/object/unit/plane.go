@@ -103,6 +103,10 @@ type Plane struct {
 	Range float64 `json:"range"`
 	// 视距（地图格）。0 表示按机种默认值。
 	SightRange float64 `json:"sightRange"`
+	// 对舰射防空火力的脆弱度（命中率乘数）：1 = 常规，<1 更难被打中，>1 更易被打中。
+	// 每个机型都在 planes.json5 里显式配置；漏配（0 或负数）按常规 1 处理。
+	// 仅影响舰射直射防空（aaHitChance）路径：近炸 / 编程引信弹与空对空都不走该判定。
+	FlakVulnerability float64 `json:"flakVulnerability"`
 	// 战机长度
 	Length float64 `json:"length"`
 	// 战机宽度
@@ -254,8 +258,14 @@ func (p *Plane) DetailLines(ctx DetailContext) []string {
 	)}
 	lines = append(lines, fmt.Sprintf(
 		"  Flight: progress %.2f, elapsed %.1f, height %.2f, cruising %t, onGround %t, sight %t, scout %t, forceReturn %t",
-		p.FlightPhaseProgress(), p.FlightPhaseElapsed, p.CurHeight,
-		p.IsCruising(), p.IsOnGround(), p.ProvidesSight(), p.ScoutManual, p.ForceReturn,
+		p.FlightPhaseProgress(),
+		p.FlightPhaseElapsed,
+		p.CurHeight,
+		p.IsCruising(),
+		p.IsOnGround(),
+		p.ProvidesSight(),
+		p.ScoutManual,
+		p.ForceReturn,
 	))
 	// 剩余航程归零或 ForceReturn 置位时飞机已经/即将返航，MustReturn 是两者的汇总。
 	lines = append(lines, fmt.Sprintf(
