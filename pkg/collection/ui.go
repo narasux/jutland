@@ -2223,7 +2223,10 @@ func (c *CollectionUI) drawPlaneCard(
 			i18n.MsgCollectionPlaneSpeed,
 			map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*objUnit.PlaneSpeedScale)},
 		),
-		i18n.Format(i18n.MsgCollectionRange, map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*14.4)}),
+		i18n.Format(
+			i18n.MsgCollectionRange,
+			map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*objUnit.PlaneRangeDisplayScale)},
+		),
 	}
 	for idx, line := range basicLines {
 		c.drawFittedText(

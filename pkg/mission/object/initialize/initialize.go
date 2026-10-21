@@ -297,8 +297,8 @@ func initPlaneMap() {
 		p.CurHP = p.TotalHP
 		// 折算移动速度（公里换成节）
 		p.MaxSpeed /= objUnit.PlaneSpeedScale
-		// 折算总航程
-		p.Range /= 8
+		// 折算总航程。出击与返航门槛按往返计算，系数越小续航越长。
+		p.Range /= objUnit.PlaneRangeScale
 		// 剩余航程
 		p.RemainRange = p.Range
 		p.SightRange = objUnit.ResolvePlaneSight(p.Type, p.SightRange)

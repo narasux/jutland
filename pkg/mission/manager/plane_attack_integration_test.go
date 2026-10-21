@@ -124,8 +124,8 @@ func testBomberReleasesBeforeReturning(t *testing.T, planeName string, enemyX fl
 	}
 }
 
-// 目标单程可达但超出作战半径时不应起飞：B6N2 航程 218，距离 210 单程够、
-// 往返 420 不够，飞机出击后回不来，机场应保持待命。
+// 目标单程可达但超出作战半径时不应起飞：B6N2 航程 436，距离 230 单程够、
+// 往返 460 不够，飞机出击后回不来，机场应保持待命。
 func TestAirfieldDoesNotLaunchBomberBeyondCombatRadius(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -141,7 +141,7 @@ func TestAirfieldDoesNotLaunchBomberBeyondCombatRadius(t *testing.T) {
 		Type:         objUnit.ShipTypeCruiser,
 		CurHP:        1000,
 		TotalHP:      1000,
-		CurPos:       objPos.New(230, 150),
+		CurPos:       objPos.New(250, 150),
 		BelongPlayer: faction.ComputerAlpha,
 	}
 	missionState := &state.MissionState{

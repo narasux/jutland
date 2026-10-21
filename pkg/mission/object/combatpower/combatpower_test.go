@@ -155,7 +155,8 @@ func TestPlaneFormationAndWeaponCapabilities(t *testing.T) {
 	}
 	base := objUnit.Plane{
 		TotalHP: 90, DamageReduction: 0.5,
-		MaxSpeed: 500.0 / 5400, RotateSpeed: 12, Acceleration: 0.05, Range: 1500.0 / 14.4,
+		MaxSpeed: 500.0 / 5400, RotateSpeed: 12, Acceleration: 0.05,
+		Range:  1500.0 / objUnit.PlaneRangeDisplayScale,
 		Weapon: objUnit.PlaneWeapon{Guns: []*objUnit.Gun{gun}},
 	}
 
