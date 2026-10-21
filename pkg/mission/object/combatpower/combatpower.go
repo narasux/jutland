@@ -25,8 +25,8 @@ const (
 	planeFormationSize = 10
 	// 舰炮配置以现实公里数填写，初始化时除以 2 转成运行时距离。
 	shipProjectionKilometersPerMapUnit = 2.0
-	// 飞机航程初始化时除以 14.4 转成运行时距离。
-	planeProjectionKilometersPerMapUnit = 14.4
+	// 飞机内部航程乘这个系数还原成投送距离 km，与 unit.PlaneRangeDisplayScale 同步。
+	planeProjectionKilometersPerMapUnit = objUnit.PlaneRangeDisplayScale
 	// 对舰口径效能以 127mm 为满值基准：这个口径以上才谈得上稳定破坏舰体结构。
 	caliberReference = 127.0
 	// 口径效能衰减指数，使 25mm 机炮约 0.32、40mm 约 0.45、76mm 约 0.70。
@@ -639,7 +639,7 @@ func planeMobility(plane *objUnit.Plane) float64 {
 	value := math.Pow(nonNegativeRatio(plane.MaxSpeed, 500.0/5400), 0.12) *
 		math.Pow(nonNegativeRatio(plane.RotateSpeed, 12), 0.08) *
 		math.Pow(nonNegativeRatio(plane.Acceleration, 0.05), 0.03) *
-		math.Pow(nonNegativeRatio(plane.Range, 1500.0/14.4), 0.05)
+		math.Pow(nonNegativeRatio(plane.Range, 1500.0/objUnit.PlaneRangeDisplayScale), 0.05)
 	return clamp(value, 0.75, 1.30)
 }
 

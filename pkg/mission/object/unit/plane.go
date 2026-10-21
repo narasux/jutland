@@ -76,6 +76,15 @@ func (t PlaneType) AttacksShips() bool {
 // 图鉴档案用它把内部速度还原回配置的 km/h。
 const PlaneSpeedScale = 3000 * 1.8 * 2
 
+// PlaneRangeScale 是 planes.json5 中 range 折算为内部航程的除数。
+// 出击与返航门槛都按往返计算，所以它同时决定作战半径：
+// 内部续航 = range / PlaneRangeScale，往返可达的出击半径 = 内部续航 / 2。
+const PlaneRangeScale = 4.0
+
+// PlaneRangeDisplayScale 把内部航程还原成图鉴与战力评估显示的数值。
+// 其中 1.8 是图鉴沿用的既有显示口径，改动除数时需同步保持该比例。
+const PlaneRangeDisplayScale = PlaneRangeScale * 1.8
+
 // Plane 战机
 type Plane struct {
 	// 名称
