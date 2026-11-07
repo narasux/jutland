@@ -136,6 +136,9 @@ type unitLayoutKey struct {
 	tab        Tab
 	focused    string
 	selected   string
+	// airfield 选中机场必须参与缓存键：机场面板与「未选中任何单位」的布局
+	// 在舰船/焦点字段上完全同值，缺了它会复用旧布局，导致信息卡画不出来。
+	airfield string
 }
 
 func (p *Panel) ensureLayout(ms *state.MissionState, region Rect, scrollY float64) panelLayout {
@@ -143,6 +146,7 @@ func (p *Panel) ensureLayout(ms *state.MissionState, region Rect, scrollY float6
 	key := unitLayoutKey{
 		x: region.X, y: region.Y, w: region.W, h: region.H,
 		scroll: scrollY, tab: p.tab, focused: ms.Interaction.FocusedShipUid, selected: selected,
+		airfield: ms.Interaction.SelectedAirfieldUid,
 	}
 	if p.layoutReady && p.layoutKey == key {
 		return p.layout
