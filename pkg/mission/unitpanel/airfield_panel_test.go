@@ -98,6 +98,41 @@ func TestAirfieldPanelActions(t *testing.T) {
 	}
 }
 
+// TestAirfieldSelectionInvalidatesLayoutCache 选中机场必须让布局缓存失效：
+// 「未选中任何单位」的空布局与机场布局在舰船/焦点字段上同值，若缓存键不含
+// 机场 uid，会复用空布局（Info 高度为 0），面板只剩标题、信息卡画不出来。
+func TestAirfieldSelectionInvalidatesLayoutCache(t *testing.T) {
+	region := Rect{X: 100, Y: 50, W: 280, H: 420}
+	ms := airfieldTestState("af-test")
+	panel := New()
+
+	// 先在未选中机场的状态下填充缓存（复现点机场前的空布局）
+	ms.Interaction.SelectedAirfieldUid = ""
+	panel.updateWithPointer(ms, region, 0, pointerInput{})
+	if panel.layout.Info.H != 0 {
+		t.Fatalf("empty selection should have no info section: %+v", panel.layout.Info)
+	}
+
+	// 选中机场：即使其它键值不变，也必须重算出信息卡
+	ms.Interaction.SelectedAirfieldUid = "af-test"
+	panel.updateWithPointer(ms, region, 0, pointerInput{})
+	if panel.layout.Info.H == 0 {
+		t.Fatal("airfield selection must recompute layout with an info card")
+	}
+	// 信息卡：起飞间隔 1 行 + 开关 1 行 + 节标题 1 行 + 表头 1 行 + 两机型 2 行 = 6 行
+	wantInfo := airfieldInfoPad + 6*airfieldLineH
+	if diff := panel.layout.Info.H - wantInfo; diff < -0.01 || diff > 0.01 {
+		t.Fatalf("info height = %v, want %v", panel.layout.Info.H, wantInfo)
+	}
+
+	// 取消选中：缓存同样要失效，回到空布局
+	ms.Interaction.SelectedAirfieldUid = ""
+	panel.updateWithPointer(ms, region, 0, pointerInput{})
+	if panel.layout.Info.H != 0 {
+		t.Fatalf("deselecting airfield should restore empty layout: %+v", panel.layout.Info)
+	}
+}
+
 // TestAirfieldSquadRowsMarkProducing 生产机型自动切换：待命 + 出击 < 上限
 // 才生产；指定机型满编后顺延到下一个未满编机型，全部满编则不标记。
 func TestAirfieldSquadRowsMarkProducing(t *testing.T) {
