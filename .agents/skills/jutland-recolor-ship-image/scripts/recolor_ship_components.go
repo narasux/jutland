@@ -125,8 +125,16 @@ func main() {
 	output := flag.String("output", "", "output PNG path")
 	source := flag.String("source-color", "", "exact source R,G,B to replace")
 	target := flag.String("target-color", "", "target R,G,B")
-	mode := flag.String("mode", "pixels", "pixels: match exact RGB anywhere in region; components: recolor whole connected components")
-	selection := flag.String("selection", "within", "components mode: keep components 'within' or 'intersect' the include boxes")
+	mode := flag.String(
+		"mode",
+		"pixels",
+		"pixels: match exact RGB anywhere in region; components: recolor whole connected components",
+	)
+	selection := flag.String(
+		"selection",
+		"within",
+		"components mode: keep components 'within' or 'intersect' the include boxes",
+	)
 
 	var includeBoxes boxFlags
 	var excludeBoxes boxFlags

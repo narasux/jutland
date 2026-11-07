@@ -581,7 +581,11 @@ func main() {
 	var removeBoxes boxFlags
 	flag.Var(&removeBoxes, "remove-box", "limit enclosed component removal to a box minX,minY,maxX,maxY; repeatable")
 	var excludeBoxes boxFlags
-	flag.Var(&excludeBoxes, "exclude-box", "protect a box minX,minY,maxX,maxY from enclosed component removal; repeatable")
+	flag.Var(
+		&excludeBoxes,
+		"exclude-box",
+		"protect a box minX,minY,maxX,maxY from enclosed component removal; repeatable",
+	)
 	maxArea := flag.Int(
 		"max-area",
 		0,

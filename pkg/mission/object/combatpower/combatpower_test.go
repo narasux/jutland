@@ -389,7 +389,17 @@ func TestGunEffectivenessAppliesCaliberToAntiShipOnly(t *testing.T) {
 			RightFiringArc: objUnit.FiringArc{Start: 0, End: 180},
 		}
 	}
-	mg, main := gunEffectiveness(mount("mg"), bullets, false, false), gunEffectiveness(mount("main"), bullets, false, false)
+	mg, main := gunEffectiveness(
+		mount("mg"),
+		bullets,
+		false,
+		false,
+	), gunEffectiveness(
+		mount("main"),
+		bullets,
+		false,
+		false,
+	)
 	if want := main * caliberEffectiveness(25); math.Abs(mg-want) > 1e-9 {
 		t.Fatalf("small caliber anti-ship effectiveness = %v, want %v", mg, want)
 	}

@@ -94,7 +94,13 @@ func TestHitEffectOnWaterAndLand(t *testing.T) {
 			}
 			kind, scale, life, ok := hitEffect(bt)
 			if ok != testCase.wantEffect {
-				t.Fatalf("hitEffect(%v, %dmm) spawned = %v, want %v", testCase.hitType, testCase.diameter, ok, testCase.wantEffect)
+				t.Fatalf(
+					"hitEffect(%v, %dmm) spawned = %v, want %v",
+					testCase.hitType,
+					testCase.diameter,
+					ok,
+					testCase.wantEffect,
+				)
 			}
 			if !ok {
 				return

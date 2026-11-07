@@ -72,7 +72,12 @@ func TestUpdateTargetPlanningConsumesBufferedPlan(t *testing.T) {
 			Arena: state.MissionArenaState{
 				Airfields: map[string]*objBuilding.Airfield{af.Uid: af},
 				Ships: map[string]*objUnit.BattleShip{
-					"enemy": {Uid: "enemy", CurHP: 100, CurPos: objPos.New(80, 80), BelongPlayer: faction.ComputerAlpha},
+					"enemy": {
+						Uid:          "enemy",
+						CurHP:        100,
+						CurPos:       objPos.New(80, 80),
+						BelongPlayer: faction.ComputerAlpha,
+					},
 				},
 			},
 		},

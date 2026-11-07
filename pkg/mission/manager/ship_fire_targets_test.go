@@ -188,7 +188,10 @@ func TestShipFireFallsBackToAirTargetsWithoutShips(t *testing.T) {
 
 	// 主炮与副炮都是高平两用，没有敌舰时一并转打敌机
 	if got := countAimedAt(bullets, enemyPlane.CurPos, 200); got != 2 {
-		t.Fatalf("dual-purpose main and secondary guns should engage the plane when no ship is in range: %s", describeBullets(bullets))
+		t.Fatalf(
+			"dual-purpose main and secondary guns should engage the plane when no ship is in range: %s",
+			describeBullets(bullets),
+		)
 	}
 	if got := countAimedAt(bullets, enemyPlane.CurPos, 40); got != 1 {
 		t.Fatalf("AA gun should engage the plane: %s", describeBullets(bullets))

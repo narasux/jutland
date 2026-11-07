@@ -144,8 +144,14 @@ func TestAttackKeepsPressingAfterTheScreenIsSunk(t *testing.T) {
 		antiShip int
 		hp       float64
 	}{
-		{25, 31700}, {23, 35737}, {26, 33190}, {27, 37800},
-		{27, 34946}, {25, 31700}, {26, 33190}, {23, 35929},
+		{25, 31700},
+		{23, 35737},
+		{26, 33190},
+		{27, 37800},
+		{27, 34946},
+		{25, 31700},
+		{26, 33190},
+		{23, 35929},
 	} {
 		bb := makeShip(fmt.Sprintf("bb%d", i), faction.ComputerAlpha, objUnit.ShipTypeBattleShip, i, 0)
 		bb.TypeAbbr = "WaterDrop"
@@ -165,9 +171,21 @@ func TestAttackKeepsPressingAfterTheScreenIsSunk(t *testing.T) {
 		antiShip int
 		hp       float64
 	}{
-		{44, 41300}, {44, 41300}, {31, 19500}, {34, 21900}, {45, 32105},
-		{45, 32105}, {21, 36600}, {21, 36600}, {23, 13200}, {23, 13200},
-		{16, 5925}, {19, 2490}, {19, 2490}, {19, 2490}, {19, 2490},
+		{44, 41300},
+		{44, 41300},
+		{31, 19500},
+		{34, 21900},
+		{45, 32105},
+		{45, 32105},
+		{21, 36600},
+		{21, 36600},
+		{23, 13200},
+		{23, 13200},
+		{16, 5925},
+		{19, 2490},
+		{19, 2490},
+		{19, 2490},
+		{19, 2490},
 	} {
 		foe := makeShip(fmt.Sprintf("foe%d", i), faction.HumanAlpha, objUnit.ShipTypeBattleShip, 60+i%5, 8+i/5)
 		foe.TotalHP, foe.CurHP = spec.hp, spec.hp
@@ -539,7 +557,8 @@ func TestCounterWaitsUntilEnemiesReachTheAnchor(t *testing.T) {
 
 	enemy.CurPos = objPos.New(8, 0)
 	handler, _ = decide([]*objUnit.BattleShip{own, enemy}, point)
-	if handler.attack != nil || handler.counter == nil || !handler.counter.pressing || handler.counter.targetUID != "foe" {
+	if handler.attack != nil || handler.counter == nil || !handler.counter.pressing ||
+		handler.counter.targetUID != "foe" {
 		t.Fatalf("near counter = %+v", handler.counter)
 	}
 }

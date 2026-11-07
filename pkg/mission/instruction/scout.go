@@ -293,7 +293,11 @@ func fleetHoldPoint(ms *state.MissionState, plane *objUnit.Plane, vision *state.
 	return objPos.NewR(sumX/float64(len(ships)), sumY/float64(len(ships)))
 }
 
-func visibleEnemyShips(ms *state.MissionState, plane *objUnit.Plane, vision *state.FactionVision) []*objUnit.BattleShip {
+func visibleEnemyShips(
+	ms *state.MissionState,
+	plane *objUnit.Plane,
+	vision *state.FactionVision,
+) []*objUnit.BattleShip {
 	ships := make([]*objUnit.BattleShip, 0)
 	for _, ship := range ms.Arena.Ships {
 		if ship.BelongPlayer == plane.BelongPlayer || ship.CurHP <= 0 {
