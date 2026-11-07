@@ -156,7 +156,6 @@ func (cfg *MapCfg) PreparedGrid() *grid.Grid {
 	if cfg.pathGrid == nil {
 		cfg.pathGrid = grid.NewGrid(cfg.Cells)
 		cfg.pathGrid.SetExtraCost(cfg.pathExtraCosts())
-		cfg.pathGrid.Prepare()
 	}
 	return cfg.pathGrid
 }
