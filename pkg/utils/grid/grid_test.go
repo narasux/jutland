@@ -81,6 +81,11 @@ func TestSearchLeavesShallowCellsUntouched(t *testing.T) {
 	}
 }
 
+// 堆开集与线性扫描参照实现的对照。
+// 网格 A* 的最优原始路径几乎总是平局（开放区任意单调楼梯代价相同），
+// 两种实现在平局里可以合法地选出不同的等代价航线，所以对照的是代价而非逐点路径。
+// 下半区加罚让最优代价唯一（绕下 18、绕上 8）：堆的弹出次序若出错选中下路，
+// 代价立刻对不上，测试照样能抓住。
 func TestHeapMatchesLinearOpenSet(t *testing.T) {
 	cells := make(Cells, 6)
 	for y := range cells {
@@ -89,18 +94,52 @@ func TestHeapMatchesLinearOpenSet(t *testing.T) {
 	cells[2][3] = W
 	cells[3][3] = W
 	g := NewGrid(cells)
+	costs := make([]float32, 6*8)
+	for y := 4; y < 6; y++ {
+		for x := 0; x < 8; x++ {
+			costs[y*8+x] = 10
+		}
+	}
+	g.SetExtraCost(costs)
 
 	start, goal := Point{1, 2}, Point{6, 3}
 	heapPath := g.Search(start, goal)
 	linearPath := searchLinear(g, start, goal)
-	if len(heapPath) == 0 || len(heapPath) != len(linearPath) {
+	if len(heapPath) == 0 || len(linearPath) == 0 {
 		t.Fatalf("heap %v linear %v", heapPath, linearPath)
 	}
-	for i := range heapPath {
-		if heapPath[i] != linearPath[i] {
-			t.Fatalf("heap %v linear %v", heapPath, linearPath)
-		}
+	heapCost := pathCost(g, start, heapPath)
+	linearCost := pathCost(g, start, linearPath)
+	// 绕上路是唯一最优（代价 8），绕下路被罚到 18+：两边都必须给出最优代价。
+	// 平局允许走不同的等代价走廊，但代价必须精确等于最优值。
+	if heapCost != 8 || linearCost != 8 {
+		t.Fatalf("heap cost %v path %v, linear cost %v path %v, want 8",
+			heapCost, heapPath, linearCost, linearPath)
 	}
+}
+
+// pathCost 沿合并后的航点折线按 segmentCheckStep 采样，累计与搜索一致的 stepCost。
+func pathCost(g *Grid, start Point, merged []Point) float64 {
+	total := 0.0
+	cur := start
+	for _, wp := range merged {
+		dx, dy := wp.X-cur.X, wp.Y-cur.Y
+		steps := int(math.Ceil(math.Hypot(float64(dx), float64(dy)) / segmentCheckStep))
+		prev := cur
+		for i := 1; i <= steps; i++ {
+			t := float64(i) / float64(steps)
+			cell := Point{
+				X: cur.X + int(math.Floor(t*float64(dx))),
+				Y: cur.Y + int(math.Floor(t*float64(dy))),
+			}
+			if cell != prev {
+				total += g.stepCost(prev, cell, 1)
+				prev = cell
+			}
+		}
+		cur = wp
+	}
+	return total
 }
 
 // searchLinear 用切片线性找最小开集，方便和堆实现对照。
@@ -148,7 +187,7 @@ func searchLinear(g *Grid, start, goal Point) []Point {
 			if _, ok := gScore[neighbor]; !ok || tentative < gScore[neighbor] {
 				cameFrom[neighbor] = cur.Point
 				gScore[neighbor] = tentative
-				openSet = append(openSet, Node{neighbor, tentative, tentative + g.heuristic(neighbor, goal)})
+				openSet = append(openSet, Node{neighbor, tentative, g.heuristic(neighbor, goal)})
 			}
 		}
 	}

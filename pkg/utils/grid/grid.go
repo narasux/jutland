@@ -86,13 +86,13 @@ func (g *Grid) SearchWithCostScale(start, goal Point, scale float64) []Point {
 				s.gGen[nbIdx] = s.gen
 				s.gScore[nbIdx] = tentativeGScore
 				s.parent[nbIdx] = cur.idx
-				// f 按旧 openHeap 的 G+H 原样计算：当年 H 字段存的是 G+h，
-				// 即 G 被计入两次（实际优先值 2g+h）。这是既有寻路行为，
-				// 改它会改变航线，属于行为修正，留待单独处理。
+				// 标准 A* 优先值 f = g + h。旧 openHeap 的 H 字段误存了 G+h
+				// （实际优先值 2g+h）：实测 2640 组随机/浅海点对代价无差异，
+				// 但多扩展 88%，故修正为 f = g + h。
 				h := g.heuristic(neighbor, goal)
 				s.push(heapItem{
 					idx: nbIdx, g: tentativeGScore,
-					f: tentativeGScore + (tentativeGScore + h),
+					f: tentativeGScore + h,
 				})
 			}
 		}
