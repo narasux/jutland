@@ -474,9 +474,9 @@ func torpedoFanSideOf(md objUnit.WeaponMetadata) int {
 }
 
 // newTorpedoLaunchers 按舷别把鱼雷发射器分组，再为每座分配组内航迹。
-// 同一舷的发射器共用一张以瞄准线为中心的扇面：航迹从中路往外排，第 m 座的第 t 根
-// 走航迹 t*组内座数 + m，于是每拍齐射（每座出一根）拿到的都是相邻航迹，
-// 并且总有一根落在瞄准线上。
+// 同一舷的发射器共用一张以瞄准线为中心的扇面：组内第 0 座每轮都压在瞄准线上，
+// 其余各座依次消费外侧航迹，于是每一轮齐射都从瞄准线往外放宽一档，正头对进的
+// 目标不会因为后几轮全部落在瞄准线外侧而漏掉。
 func newTorpedoLaunchers(mds []objUnit.WeaponMetadata) []*objUnit.TorpedoLauncher {
 	type fanGroup struct {
 		// launchers 组内发射器在 mds 中的下标，按配置顺序

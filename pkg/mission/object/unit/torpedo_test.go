@@ -80,22 +80,63 @@ func TestTorpedoFanFirstVolleyCoversTheAimLine(t *testing.T) {
 	}
 }
 
-// 整组航迹互不重复，跨度不超过该目标类型的扇面预算。
-func TestTorpedoFanTracksStayUniqueWithinSpan(t *testing.T) {
+// 每一轮齐射（每座出一根）都必须有一根压在瞄准线上，且同一轮里各管航迹不重复。
+// 回归：旧实现按整组航迹顺次外扩，第二轮起全落在上一轮外侧，瞄准线上只剩第一轮
+// 那一根，正头对进的目标会从后面几轮的缺口里穿过去。
+func TestTorpedoFanEveryVolleyCoversTheAimLine(t *testing.T) {
+	for mounts := 1; mounts <= 5; mounts++ {
+		for tubes := 1; tubes <= 5; tubes++ {
+			if mounts == 1 {
+				// 单座组只有逐根外扩，瞄准线由第一根负责。
+				continue
+			}
+			for shot := 0; shot < tubes; shot++ {
+				offsets := []float64{}
+				seen := map[float64]bool{}
+				for mount := 0; mount < mounts; mount++ {
+					launcher := &TorpedoLauncher{
+						FanTrack: mount, FanStride: mounts, FanTracks: mounts * tubes,
+						ShotCountBeforeReload: shot,
+					}
+					offset := launcher.fanAngleOffset(ShipTypeDestroyer, 0, 0)
+					if seen[offset] {
+						t.Fatalf("%d 座 x %d 管第 %d 轮航迹重复: %v", mounts, tubes, shot, offsets)
+					}
+					seen[offset] = true
+					offsets = append(offsets, offset)
+				}
+				hasCenter := false
+				for _, offset := range offsets {
+					if math.Abs(offset) < 1e-9 {
+						hasCenter = true
+					}
+				}
+				if !hasCenter {
+					t.Fatalf("%d 座 x %d 管第 %d 轮齐射 %v 没有瞄准线上的那一根",
+						mounts, tubes, shot, offsets)
+				}
+			}
+		}
+	}
+}
+
+// 整组航迹跨度不超过该目标类型的扇面预算，且扇面随轮次向外放宽。
+func TestTorpedoFanTracksStayWithinSpan(t *testing.T) {
 	const mounts, tubes = 2, 4
 	offsets := []float64{}
-	seen := map[float64]bool{}
-	for mount := 0; mount < mounts; mount++ {
-		launcher := &TorpedoLauncher{FanTrack: mount, FanStride: mounts, FanTracks: mounts * tubes}
-		for shot := 0; shot < tubes; shot++ {
-			launcher.ShotCountBeforeReload = shot
-			offset := launcher.fanAngleOffset(ShipTypeDestroyer, 0, 0)
-			if seen[offset] {
-				t.Fatalf("duplicate fan offset %v", offset)
+	volleyEdge := []float64{}
+	for shot := 0; shot < tubes; shot++ {
+		edge := 0.0
+		for mount := 0; mount < mounts; mount++ {
+			launcher := &TorpedoLauncher{
+				FanTrack: mount, FanStride: mounts, FanTracks: mounts * tubes,
+				ShotCountBeforeReload: shot,
 			}
-			seen[offset] = true
+			offset := launcher.fanAngleOffset(ShipTypeDestroyer, 0, 0)
 			offsets = append(offsets, offset)
+			edge = math.Max(edge, math.Abs(offset))
 		}
+		volleyEdge = append(volleyEdge, edge)
 	}
 
 	low, high := offsets[0], offsets[0]
@@ -108,13 +149,19 @@ func TestTorpedoFanTracksStayUniqueWithinSpan(t *testing.T) {
 	if high-low <= 0 {
 		t.Fatalf("fan span = %v, want a real spread", high-low)
 	}
+	// 每一轮的外缘只会比上一轮更宽（偶数座数时左右交替，可能连续两轮同宽）。
+	for i := 1; i < len(volleyEdge); i++ {
+		if volleyEdge[i] < volleyEdge[i-1] {
+			t.Fatalf("扇面随轮次收窄: %v", volleyEdge)
+		}
+	}
 }
 
 // 目标处的航迹间距按半个目标长度折算成角度，距离越远扇面越窄；
 // 没有目标尺寸 / 距离信息时退回目标类型的基础角。
 func TestTorpedoFanSpacingShrinksWithDistance(t *testing.T) {
-	// 3 管时扇面预算（24°/2）不收紧基础角，便于单独观察间距规则。
-	launcher := &TorpedoLauncher{FanTrack: 1, FanStride: 1, FanTracks: 3}
+	// 单座 3 管：第 2 根鱼雷走外侧第 1 号航迹，便于单独观察间距规则。
+	launcher := &TorpedoLauncher{FanTrack: 0, FanStride: 1, FanTracks: 3, ShotCountBeforeReload: 1}
 
 	near := launcher.fanAngleOffset(ShipTypeDestroyer, 0, 0)
 	if math.Abs(near-torpedoFanBaseAngleFast) > 1e-9 {
