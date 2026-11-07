@@ -1,9 +1,8 @@
 package grid
 
 import (
-	"container/heap"
 	"math"
-	"slices"
+	"sync"
 
 	"github.com/samber/lo"
 )
@@ -54,46 +53,69 @@ func (g *Grid) SearchWithCostScale(start, goal Point, scale float64) []Point {
 	if scale <= 0 {
 		scale = 1
 	}
+	width := len(g.cells[0])
 
-	openSet := &openHeap{}
-	heap.Init(openSet)
-	heap.Push(openSet, Node{start, 0, g.heuristic(start, goal)})
-	cameFrom := map[Point]Point{}
-	gScore := map[Point]float64{}
-	gScore[start] = 0
+	s := searchScratches.Get().(*searchScratch)
+	defer searchScratches.Put(s)
+	s.begin(width * len(g.cells))
 
-	for openSet.Len() > 0 {
-		cur := heap.Pop(openSet).(Node)
-		if known, ok := gScore[cur.Point]; ok && cur.G > known {
+	startIdx := int32(start.Y*width + start.X)
+	goalIdx := int32(goal.Y*width + goal.X)
+	s.gGen[startIdx] = s.gen
+	s.gScore[startIdx] = 0
+	s.push(heapItem{idx: startIdx, g: 0, f: g.heuristic(start, goal)})
+
+	var buf [8]Point
+	for len(s.heap) > 0 {
+		cur := s.pop()
+		// 陈旧条目：同格已有更小的 g（gGen 对上才说明是本次写的）
+		if s.gGen[cur.idx] == s.gen && cur.g > s.gScore[cur.idx] {
 			continue
 		}
-
-		if cur.Point == goal {
-			path := reconstructPath(cameFrom, start, cur.Point)
+		if cur.idx == goalIdx {
+			path := reconstructPath(s.parent, width, startIdx, goalIdx)
 			return g.mergePathWithCheckPoint(g.mergePathWithSameM(path))
 		}
 
-		neighbors := g.getNeighbors(cur.Point)
-		for _, neighbor := range neighbors {
-			tentativeGScore := gScore[cur.Point] + g.stepCost(cur.Point, neighbor, scale)
-			if _, ok := gScore[neighbor]; !ok || tentativeGScore < gScore[neighbor] {
-				cameFrom[neighbor] = cur.Point
-				gScore[neighbor] = tentativeGScore
-				heap.Push(openSet, Node{neighbor, tentativeGScore, tentativeGScore + g.heuristic(neighbor, goal)})
+		curPt := Point{X: int(cur.idx) % width, Y: int(cur.idx) / width}
+		n := g.getNeighbors(curPt, &buf)
+		for _, neighbor := range buf[:n] {
+			nbIdx := int32(neighbor.Y*width + neighbor.X)
+			tentativeGScore := s.gScore[cur.idx] + g.stepCost(curPt, neighbor, scale)
+			if s.gGen[nbIdx] != s.gen || tentativeGScore < s.gScore[nbIdx] {
+				s.gGen[nbIdx] = s.gen
+				s.gScore[nbIdx] = tentativeGScore
+				s.parent[nbIdx] = cur.idx
+				// f 按旧 openHeap 的 G+H 原样计算：当年 H 字段存的是 G+h，
+				// 即 G 被计入两次（实际优先值 2g+h）。这是既有寻路行为，
+				// 改它会改变航线，属于行为修正，留待单独处理。
+				h := g.heuristic(neighbor, goal)
+				s.push(heapItem{
+					idx: nbIdx, g: tentativeGScore,
+					f: tentativeGScore + (tentativeGScore + h),
+				})
 			}
 		}
 	}
 	return []Point{}
 }
 
-// reconstructPath 从 goal 沿 cameFrom 回溯到 start，再整体反转一次。
-// 旧实现每步前插（append 到切片头部）是 O(L²)，长路径重建会搬移数 MB 垃圾。
-func reconstructPath(cameFrom map[Point]Point, start, goal Point) []Point {
-	path := []Point{goal}
-	for p := goal; p != start; p = cameFrom[p] {
-		path = append(path, cameFrom[p])
+// reconstructPath 沿 parent 回溯生成从起点到终点的路径。
+// 先数长度再一次填好，O(L)（旧实现每步前插是 O(L²)）；
+// 返回值是新切片，不与 sync.Pool 复用的工作区共享底层数组。
+func reconstructPath(parent []int32, width int, startIdx, goalIdx int32) []Point {
+	n := 1
+	for idx := goalIdx; idx != startIdx; idx = parent[idx] {
+		n++
 	}
-	slices.Reverse(path)
+	path := make([]Point, n)
+	idx := goalIdx
+	for i := n - 1; i >= 0; i-- {
+		path[i] = Point{X: int(idx) % width, Y: int(idx) / width}
+		if i > 0 {
+			idx = parent[idx]
+		}
+	}
 	return path
 }
 
@@ -112,37 +134,45 @@ func (g *Grid) validateEndpoints(start, goal Point) bool {
 	return true
 }
 
-// 计算启发式函数值
+// 计算启发式函数值（热路径：每次入堆都调用，直接 if，不走 lo.Ternary）
 func (g *Grid) heuristic(a, b Point) float64 {
 	h := math.Abs(float64(a.X-b.X)) + math.Abs(float64(a.Y-b.Y))
-	return lo.Ternary(g.cells[a.Y][a.X] == SD, h+5, h)
+	if g.cells[a.Y][a.X] == SD {
+		return h + 5
+	}
+	return h
 }
 
-// 获取邻居。对角移动要求两个正交邻格均可通行，避免从两块陆地的夹角处斜穿，
+// neighborDirs 邻居方向与扩展顺序固定，保证堆的插入顺序与历史实现一致。
+var neighborDirs = [8]Point{
+	{-1, 0},
+	{1, 0},
+	{0, -1},
+	{0, 1},
+	{-1, -1},
+	{-1, 1},
+	{1, -1},
+	{1, 1},
+}
+
+// getNeighbors 把 p 的可通行邻居写入 buf 并返回数量（至多 8 个）。
+// 由调用方提供 buf，避免每次节点扩展都分配切片。
+// 对角移动要求两个正交邻格均可通行，避免从两块陆地的夹角处斜穿，
 // 否则合并后的直线路径段会切过陆地格，把舰体中心带进墙里。
-func (g *Grid) getNeighbors(p Point) []Point {
-	directions := []Point{
-		{-1, 0},
-		{1, 0},
-		{0, -1},
-		{0, 1},
-		{-1, -1},
-		{-1, 1},
-		{1, -1},
-		{1, 1},
-	}
-	var neighbors []Point
-	for _, dir := range directions {
+func (g *Grid) getNeighbors(p Point, buf *[8]Point) int {
+	n := 0
+	for _, dir := range neighborDirs {
 		x, y := p.X+dir.X, p.Y+dir.Y
 		if y >= 0 && y < len(g.cells) && x >= 0 && x < len(g.cells[0]) && g.cells[y][x] != W {
 			if dir.X != 0 && dir.Y != 0 &&
 				(g.cells[p.Y][x] == W || g.cells[y][p.X] == W) {
 				continue
 			}
-			neighbors = append(neighbors, Point{x, y})
+			buf[n] = Point{x, y}
+			n++
 		}
 	}
-	return neighbors
+	return n
 }
 
 // 合并路径（根据相同的斜率，即方向）
@@ -235,22 +265,83 @@ func (g *Grid) cellNearWall(x, y int) bool {
 // segmentCheckStep 线段校验的采样步长（格）。足够细以捕捉贴角掠过的路径段。
 const segmentCheckStep = 0.1
 
-type openHeap []Node
-
-func (h openHeap) Len() int { return len(h) }
-
-func (h openHeap) Less(i, j int) bool {
-	return h[i].G+h[i].H < h[j].G+h[j].H
+// heapItem 开集条目：idx 是行优先展平后的格子下标（地图规模远小于 int32 上限）。
+type heapItem struct {
+	idx int32
+	g   float64
+	f   float64
 }
 
-func (h openHeap) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
+// searchScratch 单次搜索的可复用工作区。
+// Grid 会被后台寻路线程并发搜索，工作区不能挂在 Grid 上，
+// 统一放 sync.Pool：搜索前 Get、结束后归还，摊销后每次搜索接近零分配。
+type searchScratch struct {
+	// gen 是本次搜索的代号；gGen 等于它才表示这一格是本次写的。
+	// 用代号代替“每次搜索把整张表清零”：大图一次清零就要几百微秒。
+	gen    uint32
+	gGen   []uint32
+	gScore []float64
+	parent []int32 // 回溯链：每格来路的下标
+	heap   []heapItem
+}
 
-func (h *openHeap) Push(x any) { *h = append(*h, x.(Node)) }
+var searchScratches = sync.Pool{New: func() any { return new(searchScratch) }}
 
-func (h *openHeap) Pop() any {
-	old := *h
-	n := len(old)
-	item := old[n-1]
-	*h = old[:n-1]
-	return item
+// begin 准备 n 格的工作区并切到新一代，O(1) 复位。
+func (s *searchScratch) begin(n int) {
+	if cap(s.gGen) < n {
+		s.gGen = make([]uint32, n)
+		s.gScore = make([]float64, n)
+		s.parent = make([]int32, n)
+	} else {
+		s.gGen = s.gGen[:n]
+		s.gScore = s.gScore[:n]
+		s.parent = s.parent[:n]
+	}
+	s.heap = s.heap[:0]
+	s.gen++
+	if s.gen == 0 { // 代号回绕：清零，避免把旧数据误判成本次写过
+		clear(s.gGen)
+		s.gen = 1
+	}
+}
+
+// push 入堆（上浮）。与 container/heap 的 up 同构，
+// 保持与旧实现完全相同的弹出序列，路径逐点不变。
+func (s *searchScratch) push(it heapItem) {
+	s.heap = append(s.heap, it)
+	i := len(s.heap) - 1
+	for i > 0 {
+		p := (i - 1) / 2
+		if s.heap[i].f >= s.heap[p].f {
+			break
+		}
+		s.heap[i], s.heap[p] = s.heap[p], s.heap[i]
+		i = p
+	}
+}
+
+// pop 弹出堆顶（与末尾交换后下沉）。与 container/heap 的 Pop 同构。
+func (s *searchScratch) pop() heapItem {
+	n := len(s.heap) - 1
+	s.heap[0], s.heap[n] = s.heap[n], s.heap[0]
+	i := 0
+	for {
+		l := 2*i + 1
+		if l >= n {
+			break
+		}
+		j := l
+		if r := l + 1; r < n && s.heap[r].f < s.heap[l].f {
+			j = r
+		}
+		if s.heap[j].f >= s.heap[i].f {
+			break
+		}
+		s.heap[i], s.heap[j] = s.heap[j], s.heap[i]
+		i = j
+	}
+	it := s.heap[n]
+	s.heap = s.heap[:n]
+	return it
 }
