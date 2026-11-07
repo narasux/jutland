@@ -74,8 +74,9 @@ type TorpedoLauncher struct {
 
 	// FanTrack 本发射器在所属扇形组里的序号（组内第几座发射器）
 	FanTrack int `json:"-"`
-	// FanStride 所属扇形组内的发射器数量。同一组的发射器交错分航迹：
-	// 第 m 座的第 t 根鱼雷走航迹 t*FanStride + m，使每拍齐射拿到相邻航迹。
+	// FanStride 所属扇形组内的发射器数量。同一组的发射器共用一张扇面：
+	// 第 0 座每轮都压在瞄准线上，其余各座按顺序消费外侧航迹，使每轮齐射都从
+	// 瞄准线往外放宽一档。
 	FanStride int `json:"-"`
 	// FanTracks 所属扇形组的鱼雷管总数，决定扇面步长与最大跨度。
 	FanTracks int `json:"-"`
@@ -224,9 +225,16 @@ func torpedoFanProfile(targetType ShipType) (float64, float64) {
 
 // fanAngleOffset 返回这一根鱼雷相对瞄准线的角度偏移。
 //
-// 组内航迹从中路往外排（倍数 0, +1, -1, +2, -2, …），所以不论管数奇偶，每拍齐射
-// 里总有一根压在瞄准线上——编号 0 的航迹就是瞄准线本身。旧实现按
-// (slot - (n-1)/2) 排，偶数组只有 ±半步，正对目标的航迹永远空缺。
+// 航迹从中路往外排（倍数 0, +1, -1, +2, -2, …），编号 0 的航迹就是瞄准线本身，
+// 所以不论管数奇偶，瞄准线上总有鱼雷。
+//
+// 单座组：整组只有这一条发射器，鱼雷按 0, +1, -1, +2, … 逐根向外放，一轮齐射
+// 就是一张对称扇面。
+//
+// 多座组：一轮齐射同时出好几根。若仍按整组航迹顺次外扩，从第二轮起这一轮的几根
+// 全落在上一轮外侧，瞄准线上只剩第一轮那一根，正头对进的目标会从后面几轮的缺口
+// 里穿过去。所以组内第 0 座每轮都压在瞄准线上，其余各座依次消费 +1, -1, +2, -2, …
+// 的航迹，每轮向外放宽一档。
 //
 // 步长取三者较小：目标类型的基础角、扇面最大跨度预算、以及“目标处的航迹间距为
 // 半个目标长度”对应的角度。目标越远角度越小，扇面不会在远距离散成一片。
@@ -238,18 +246,42 @@ func (lc *TorpedoLauncher) fanAngleOffset(
 	}
 
 	baseStep, maxSpan := torpedoFanProfile(targetType)
-	outermost := maxFanTrackMultiplier(lc.FanTracks)
+	outermost := lc.fanOutermost()
 	if outermost <= 0 {
 		return 0
 	}
-	step := min(baseStep, maxSpan/(2*float64(outermost)))
+	step := min(baseStep, maxSpan/(2*outermost))
 	if aimDistance > 0 && targetLengthCells > 0 {
 		interval := targetLengthCells * torpedoSpreadRatio
 		step = min(step, math.Atan2(interval, aimDistance)*180/math.Pi)
 	}
 
-	track := lc.FanTrack + lc.ShotCountBeforeReload*lc.FanStride
-	return fanTrackMultiplier(track) * step
+	return fanTrackMultiplier(lc.fanTrackIndex()) * step
+}
+
+// fanTrackIndex 本座这一根鱼雷走组内第几号航迹。
+//
+// 单座组逐根向外走；多座组固定第 0 座压瞄准线，其余各座按 +1, -1, +2, -2, …
+// 的顺序消费航迹，于是每一轮齐射都从瞄准线往外放宽一档。
+func (lc *TorpedoLauncher) fanTrackIndex() int {
+	shot := max(lc.ShotCountBeforeReload, 0)
+	if lc.FanStride <= 1 {
+		return shot
+	}
+	if lc.FanTrack <= 0 {
+		return 0
+	}
+	return 1 + shot*(lc.FanStride-1) + (lc.FanTrack - 1)
+}
+
+// fanOutermost 本组扇形最外缘航迹的倍数绝对值，用来把整张扇面收进跨度预算。
+func (lc *TorpedoLauncher) fanOutermost() float64 {
+	if lc.FanStride <= 1 {
+		return float64(maxFanTrackMultiplier(lc.FanTracks))
+	}
+	// 多座组：除压瞄准线的那一座，其余 (座数-1) 座每轮各消费一根航迹。
+	volleys := max(lc.FanTracks/lc.FanStride, 1)
+	return math.Ceil(float64(volleys*(lc.FanStride-1)) / 2)
 }
 
 // fanTrackMultiplier 航迹序号 → 以瞄准线为 0 的倍数：0, +1, -1, +2, -2, …
