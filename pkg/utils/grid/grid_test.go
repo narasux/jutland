@@ -19,7 +19,8 @@ func TestDiagonalNeighborsRequireBothOrthogonalOpen(t *testing.T) {
 	cells[2][1] = W
 	g := NewGrid(cells)
 
-	nbrs := g.getNeighbors(Point{X: 1, Y: 1})
+	var buf [8]Point
+	nbrs := buf[:g.getNeighbors(Point{X: 1, Y: 1}, &buf)]
 	// 只剩左右两个直行邻居，四个对角全被正交墙挡住
 	want := []Point{{X: 0, Y: 1}, {X: 2, Y: 1}}
 	if len(nbrs) != len(want) {
@@ -140,7 +141,9 @@ func searchLinear(g *Grid, start, goal Point) []Point {
 			return g.mergePathWithCheckPoint(g.mergePathWithSameM(path))
 		}
 
-		for _, neighbor := range g.getNeighbors(cur.Point) {
+		var buf [8]Point
+		nbCount := g.getNeighbors(cur.Point, &buf)
+		for _, neighbor := range buf[:nbCount] {
 			tentative := gScore[cur.Point] + g.stepCost(cur.Point, neighbor, 1)
 			if _, ok := gScore[neighbor]; !ok || tentative < gScore[neighbor] {
 				cameFrom[neighbor] = cur.Point
