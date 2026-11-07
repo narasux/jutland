@@ -18,11 +18,6 @@ type Point struct {
 	X, Y int
 }
 
-// IsValid 是否无效
-func (p *Point) IsValid() bool {
-	return p.X >= 0 || p.Y >= 0
-}
-
 // Node 节点
 // Point 坐标 X, Y
 // G 值（从起点到该点的代价）

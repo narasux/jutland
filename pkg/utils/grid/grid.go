@@ -3,14 +3,14 @@ package grid
 import (
 	"container/heap"
 	"math"
+	"slices"
 
 	"github.com/samber/lo"
 )
 
 // Grid 地图网格
 type Grid struct {
-	cells      Cells
-	jumpPoints [][]Point
+	cells Cells
 	// extraCost 每格额外通行代价（行优先展平），nil 表示所有格代价相同
 	extraCost []float32
 }
@@ -39,14 +39,6 @@ func (g *Grid) stepCost(from, to Point, scale float64) float64 {
 	return cost
 }
 
-// Prepare 按地形预计算跳点。起点和终点不参与，海图保持只读。
-func (g *Grid) Prepare() {
-	if g.jumpPoints != nil {
-		return
-	}
-	g.preProcess()
-}
-
 // Search 搜索可行路径（按基准代价）。
 func (g *Grid) Search(start, goal Point) []Point {
 	return g.SearchWithCostScale(start, goal, 1)
@@ -59,7 +51,6 @@ func (g *Grid) SearchWithCostScale(start, goal Point, scale float64) []Point {
 	if !g.validateEndpoints(start, goal) {
 		return []Point{}
 	}
-	g.Prepare()
 	if scale <= 0 {
 		scale = 1
 	}
@@ -78,11 +69,7 @@ func (g *Grid) SearchWithCostScale(start, goal Point, scale float64) []Point {
 		}
 
 		if cur.Point == goal {
-			path := []Point{cur.Point}
-			for cur.Point != start {
-				cur.Point = cameFrom[cur.Point]
-				path = append([]Point{cur.Point}, path...)
-			}
+			path := reconstructPath(cameFrom, start, cur.Point)
 			return g.mergePathWithCheckPoint(g.mergePathWithSameM(path))
 		}
 
@@ -95,17 +82,19 @@ func (g *Grid) SearchWithCostScale(start, goal Point, scale float64) []Point {
 				heap.Push(openSet, Node{neighbor, tentativeGScore, tentativeGScore + g.heuristic(neighbor, goal)})
 			}
 		}
-
-		if jp := g.jumpPoints[cur.Point.Y][cur.Point.X]; jp.IsValid() {
-			tentativeGScore := gScore[cur.Point] + g.stepCost(cur.Point, jp, scale)
-			if _, ok := gScore[jp]; !ok || tentativeGScore < gScore[jp] {
-				cameFrom[jp] = cur.Point
-				gScore[jp] = tentativeGScore
-				heap.Push(openSet, Node{jp, tentativeGScore, tentativeGScore + g.heuristic(jp, goal)})
-			}
-		}
 	}
 	return []Point{}
+}
+
+// reconstructPath 从 goal 沿 cameFrom 回溯到 start，再整体反转一次。
+// 旧实现每步前插（append 到切片头部）是 O(L²)，长路径重建会搬移数 MB 垃圾。
+func reconstructPath(cameFrom map[Point]Point, start, goal Point) []Point {
+	path := []Point{goal}
+	for p := goal; p != start; p = cameFrom[p] {
+		path = append(path, cameFrom[p])
+	}
+	slices.Reverse(path)
+	return path
 }
 
 // 检查起点和终点是否有效
@@ -245,51 +234,6 @@ func (g *Grid) cellNearWall(x, y int) bool {
 
 // segmentCheckStep 线段校验的采样步长（格）。足够细以捕捉贴角掠过的路径段。
 const segmentCheckStep = 0.1
-
-// 预处理
-func (g *Grid) preProcess() {
-	g.jumpPoints = make([][]Point, len(g.cells))
-	for idx := range g.jumpPoints {
-		g.jumpPoints[idx] = make([]Point, len(g.cells[0]))
-	}
-	// 垂直 / 水平四个方向
-	hvDirections := []Point{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
-	// 计算每个点的跳点
-	for y := range g.cells {
-		for x := range g.cells[y] {
-			if g.cells[y][x] != W {
-				for _, dir := range hvDirections {
-					jumpPoint := g.getJumpPoint(Point{x, y}, dir)
-					if jumpPoint.IsValid() {
-						g.jumpPoints[y][x] = jumpPoint
-					}
-				}
-			}
-		}
-	}
-}
-
-// 获取跳点
-func (g *Grid) getJumpPoint(p Point, direction Point) Point {
-	x, y := p.X+direction.X, p.Y+direction.Y
-
-	if y < 0 || y >= len(g.cells) || x < 0 || x >= len(g.cells[0]) || g.cells[y][x] == W {
-		return Point{-1, -1}
-	}
-	if direction.X != 0 && direction.Y != 0 {
-		if g.cells[p.Y][x] == O {
-			if jp := g.getJumpPoint(Point{x, y}, Point{direction.X, 0}); jp.IsValid() {
-				return Point{x, y}
-			}
-		}
-		if g.cells[y][p.X] == O {
-			if jp := g.getJumpPoint(Point{x, y}, Point{0, direction.Y}); jp.IsValid() {
-				return Point{x, y}
-			}
-		}
-	}
-	return g.getJumpPoint(Point{x, y}, direction)
-}
 
 type openHeap []Node
 

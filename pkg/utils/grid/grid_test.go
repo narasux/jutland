@@ -61,7 +61,6 @@ func TestSearchLeavesShallowCellsUntouched(t *testing.T) {
 	}
 	cells[2][3] = SD
 	g := NewGrid(cells)
-	g.Prepare()
 
 	first := g.Search(Point{1, 2}, Point{6, 2})
 	second := g.Search(Point{1, 2}, Point{6, 2})
@@ -89,7 +88,6 @@ func TestHeapMatchesLinearOpenSet(t *testing.T) {
 	cells[2][3] = W
 	cells[3][3] = W
 	g := NewGrid(cells)
-	g.Prepare()
 
 	start, goal := Point{1, 2}, Point{6, 3}
 	heapPath := g.Search(start, goal)
@@ -148,14 +146,6 @@ func searchLinear(g *Grid, start, goal Point) []Point {
 				cameFrom[neighbor] = cur.Point
 				gScore[neighbor] = tentative
 				openSet = append(openSet, Node{neighbor, tentative, tentative + g.heuristic(neighbor, goal)})
-			}
-		}
-		if jp := g.jumpPoints[cur.Point.Y][cur.Point.X]; jp.IsValid() {
-			tentative := gScore[cur.Point] + g.stepCost(cur.Point, jp, 1)
-			if _, ok := gScore[jp]; !ok || tentative < gScore[jp] {
-				cameFrom[jp] = cur.Point
-				gScore[jp] = tentative
-				openSet = append(openSet, Node{jp, tentative, tentative + g.heuristic(jp, goal)})
 			}
 		}
 	}
