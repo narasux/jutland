@@ -85,11 +85,19 @@ func main() {
 	var allowed boxFlags
 	var protected boxFlags
 	var protectedColors multiRGB
-	flag.Var(&allowed, "allowed-box", "box minX,minY,maxX,maxY where changes are allowed; repeatable; empty means anywhere")
+	flag.Var(
+		&allowed,
+		"allowed-box",
+		"box minX,minY,maxX,maxY where changes are allowed; repeatable; empty means anywhere",
+	)
 	flag.Var(&protected, "protected-box", "box minX,minY,maxX,maxY that must not change; repeatable")
 	flag.Var(&protectedColors, "protected-color", "exact R,G,B in the before image that must not change; repeatable")
 	maxAlphaChanges := flag.Int("max-alpha-changes", 0, "maximum number of pixels whose alpha may change")
-	maxProtectedChanges := flag.Int("max-protected-changes", 0, "maximum number of changed pixels inside protected boxes or with a protected color")
+	maxProtectedChanges := flag.Int(
+		"max-protected-changes",
+		0,
+		"maximum number of changed pixels inside protected boxes or with a protected color",
+	)
 	flag.Parse()
 
 	if *beforePath == "" || *afterPath == "" {

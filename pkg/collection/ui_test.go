@@ -443,7 +443,8 @@ func TestCollectionPlaneCardScaleUnified(t *testing.T) {
 	require.Greater(t, planes, 0)
 
 	// 倍率应取到约束边界：最大机型要么顶到框高、要么顶到框宽，否则说明缩放没等比贴合。
-	require.True(t,
+	require.True(
+		t,
 		math.Abs(maxDisplayH-boxH) < 1e-6 || math.Abs(maxDisplayW-boxW) < 1e-6,
 		"expected largest plane to touch a box edge: maxH=%.3f (box %.3f), maxW=%.3f (box %.3f)",
 		maxDisplayH, boxH, maxDisplayW, boxW,

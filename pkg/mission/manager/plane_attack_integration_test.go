@@ -120,7 +120,11 @@ func testBomberReleasesBeforeReturning(t *testing.T, planeName string, enemyX fl
 		}
 	}
 	if !released {
-		t.Fatalf("bomber did not release within test window: pos=%s target=%s", bomber.CurPos.String(), bomber.CurAttackTarget)
+		t.Fatalf(
+			"bomber did not release within test window: pos=%s target=%s",
+			bomber.CurPos.String(),
+			bomber.CurAttackTarget,
+		)
 	}
 }
 

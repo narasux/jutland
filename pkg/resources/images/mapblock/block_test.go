@@ -21,7 +21,13 @@ func TestWaterVariantsMatchMD5(t *testing.T) {
 				t.Fatalf("sea index (%d,%d) = %d, want %d", x, y, int(got)%seaBlockCount, int(want)%seaBlockCount)
 			}
 			if int(got)%deepSeaBlockCount != int(want)%deepSeaBlockCount {
-				t.Fatalf("deep sea index (%d,%d) = %d, want %d", x, y, int(got)%deepSeaBlockCount, int(want)%deepSeaBlockCount)
+				t.Fatalf(
+					"deep sea index (%d,%d) = %d, want %d",
+					x,
+					y,
+					int(got)%deepSeaBlockCount,
+					int(want)%deepSeaBlockCount,
+				)
 			}
 		}
 	}
