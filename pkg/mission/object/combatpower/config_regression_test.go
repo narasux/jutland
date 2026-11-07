@@ -109,25 +109,31 @@ func TestJapanese25mmRateMatchesHistory(t *testing.T) {
 	}
 }
 
-// TestWaterDropAndSwordfishShareIdenticalFirepower 固定报告过的“同武器、对舰对空差 7.5 倍”回归。
-// 水滴与巨型剑鱼都用 Impact 撞击炮，但水滴是 1 HP + 100% 减伤、剑鱼是 100000 HP，
-// 对舰 / 对空能力值曾把自身 EHP 和机动乘进去，于是同武器被拉开 7.5 倍。
-func TestWaterDropAndSwordfishShareIdenticalFirepower(t *testing.T) {
+// TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir 固定“水滴可对空、巨型剑鱼只能对舰”的区分。
+// 两者的撞击炮弹与射击参数一致，但对空能力必须解耦：水滴保留对空，剑鱼只打舰船；
+// 对舰 DPS 仍应一致，不能再被自身 EHP / 机动拉开。
+func TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir(t *testing.T) {
 	waterdrop, swordfish := objUnit.ShipMap["waterdrop"], objUnit.ShipMap["swordfish"]
 	if waterdrop == nil || swordfish == nil {
 		t.Fatal("waterdrop or swordfish not found")
 	}
 
-	if waterdrop.CombatPower.AntiShip != swordfish.CombatPower.AntiShip ||
-		waterdrop.CombatPower.AntiAir != swordfish.CombatPower.AntiAir {
-		t.Fatalf(
-			"waterdrop anti-ship/anti-air = %d/%d, swordfish = %d/%d: identical weapons must match",
-			waterdrop.CombatPower.AntiShip, waterdrop.CombatPower.AntiAir,
-			swordfish.CombatPower.AntiShip, swordfish.CombatPower.AntiAir,
-		)
+	impact, swordfishImpact := objUnit.GunMap["Impact"], objUnit.GunMap["SwordfishImpact"]
+	if impact == nil || swordfishImpact == nil {
+		t.Fatal("Impact or SwordfishImpact gun not found")
 	}
+	if !impact.AntiShip || !impact.AntiAircraft {
+		t.Fatalf("waterdrop Impact must be anti-ship and anti-air: %+v", impact)
+	}
+	if !swordfishImpact.AntiShip || swordfishImpact.AntiAircraft {
+		t.Fatalf("SwordfishImpact must be anti-ship only: %+v", swordfishImpact)
+	}
+
 	if waterdrop.CombatPower.AntiShip <= 0 || waterdrop.CombatPower.AntiAir <= 0 {
-		t.Fatalf("armed special ship must keep positive firepower: %+v", waterdrop.CombatPower)
+		t.Fatalf("waterdrop must keep positive anti-ship/anti-air: %+v", waterdrop.CombatPower)
+	}
+	if swordfish.CombatPower.AntiShip <= 0 || swordfish.CombatPower.AntiAir != 0 {
+		t.Fatalf("swordfish must be anti-ship only: %+v", swordfish.CombatPower)
 	}
 	if waterdrop.CombatPower.Details.AntiShipDPS != swordfish.CombatPower.Details.AntiShipDPS {
 		t.Fatalf(

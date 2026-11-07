@@ -78,6 +78,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 巨型剑鱼撞击（仅对舰）
+  {
+    name: "SwordfishImpact",
+    bulletName: "SE/GB/1/2048",
+    bulletCount: 3,
+    reloadTime: 0.001,
+    range: 1.5,
+    bulletSpread: 0,
+    bulletSpeed: 3000,
+    fundsCost: 100,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 中国
   // --------- 舰炮 ----------
   // 中国海军 79A 式双管 100mm 自动炮

@@ -4907,7 +4907,16 @@
     displayName: "Impact Ram",
     type: "Weapon",
     armaments: [],
-    description: "A fictional easter-egg weapon based on the \"Droplet\" probe impact from The Three-Body Problem, used as a special ramming weapon.",
+    description: "A fictional easter-egg weapon based on the \"Droplet\" probe impact from The Three-Body Problem, used as a special ramming weapon that can also engage aircraft.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SwordfishImpact",
+    displayName: "Giant Swordfish Impact",
+    type: "Weapon",
+    armaments: [],
+    description: "A ramming weapon used by the giant swordfish, with the same firing parameters as the Droplet impact. It can only engage surface ships and cannot attack aircraft.",
     author: "",
     links: [],
   },
@@ -9338,7 +9347,7 @@
     armaments: [
       {
         label: "Attack Method",
-        value: "Bow Ramming",
+        value: "Bow Ramming (anti-ship only)",
       },
     ],
     description: "Swordfish are large, highly migratory predatory fish named for their long, flat, sword-like bills. They inhabit tropical and temperate parts of the Atlantic, Pacific and Indian oceans, have streamlined bodies, and are powerful swimmers that slash at prey with their bills. In the game, this individual has grown into a biological vessel about 180 metres long.",
@@ -11680,7 +11689,7 @@
     armaments: [
       {
         label: "Attack Method",
-        value: "Ramming",
+        value: "Ramming (anti-air capable)",
       },
     ],
     description: "The Droplet is an alien probe from Liu Cixin's science-fiction novel The Three-Body Problem. Its perfectly smooth, extremely strong shell reflects electromagnetic radiation and remains near absolute zero. During the Doomsday Battle, a single Droplet destroys most of humanity's space fleet by repeatedly ramming its warships.",
