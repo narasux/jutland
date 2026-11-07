@@ -42048,7 +42048,7 @@
       ]
     }
   },
-  // 巨型剑鱼：复用水滴的极短射程主炮模拟撞击
+  // 巨型剑鱼：极短射程撞击主炮，只能对舰
   {
     name: "swordfish",
     nation: "special",
@@ -42068,7 +42068,7 @@
     weapon: {
       mainGuns: [
         {
-          name: "Impact",
+          name: "SwordfishImpact",
           posPercent: 0,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
