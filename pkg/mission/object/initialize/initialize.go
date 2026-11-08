@@ -79,9 +79,24 @@ func initBulletMap() {
 	}
 
 	for _, b := range bullets {
+		validateBulletGuidance(b)
 		objBullet.Map[b.Name] = &b
 	}
 	log.Println("bullets data loaded from json5 file")
+}
+
+// validateBulletGuidance 启动期校验制导参数：拼错模式或漏写转向速度会静默退化成
+// 普通弹药，必须在启动阶段直接报错，而不是等实战里发现鱼雷不拐弯。
+func validateBulletGuidance(b objBullet.Bullet) {
+	if b.Guidance == nil {
+		return
+	}
+	if b.Guidance.Mode != objBullet.GuidanceModePursuit {
+		log.Fatalf("bullet %q has unknown guidance mode %q", b.Name, b.Guidance.Mode)
+	}
+	if b.Guidance.TurnRate <= 0 {
+		log.Fatalf("bullet %q guidance turnRate must be positive", b.Name)
+	}
 }
 
 func initGunMap() {

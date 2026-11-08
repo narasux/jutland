@@ -178,3 +178,33 @@ func torpedoOffsetFromAim(bullet *objBullet.Bullet, target *objUnit.BattleShip) 
 	aim := bullet.CurPos.Angle(target.CurPos)
 	return math.Mod(bullet.CurPos.Angle(bullet.TargetPos)-aim+540, 360) - 180
 }
+
+// 本期落地的两款制导鱼雷必须在配置里显式开启制导；普通鱼雷保持无制导。
+func TestGuidedTorpedoConfig(t *testing.T) {
+	guided := map[string]float64{
+		"JP/TB/Kaiten/1944/Type1": 120,
+		"US/TB/324/1957/Mk44":     150,
+	}
+	for name, wantTurnRate := range guided {
+		bt := objBullet.Map[name]
+		if bt == nil {
+			t.Fatalf("bullet %q not found", name)
+		}
+		if !bt.IsGuided() {
+			t.Fatalf("bullet %q is not guided", name)
+		}
+		if bt.Guidance.Mode != objBullet.GuidanceModePursuit {
+			t.Fatalf("bullet %q mode = %q, want pursuit", name, bt.Guidance.Mode)
+		}
+		if bt.Guidance.TurnRate != wantTurnRate {
+			t.Fatalf("bullet %q turnRate = %v, want %v", name, bt.Guidance.TurnRate, wantTurnRate)
+		}
+	}
+
+	// 普通鱼雷不能被误加制导。
+	for _, name := range []string{"US/TB/533/1935/Mk15", "JP/TB/610/1933/Type93Mod1"} {
+		if bt := objBullet.Map[name]; bt != nil && bt.IsGuided() {
+			t.Fatalf("bullet %q should stay unguided", name)
+		}
+	}
+}

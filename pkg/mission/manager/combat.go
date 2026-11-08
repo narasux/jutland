@@ -5,6 +5,7 @@ import (
 	"math/rand"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/config"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -591,7 +592,9 @@ func beyondHitReach(bx, by, tx, ty, reach float64) bool {
 // 更新弹药状态
 func (m *MissionManager) updateShotBullets() {
 	for i := 0; i < len(m.state.Arena.ForwardingBullets); i++ {
-		m.state.Arena.ForwardingBullets[i].Forward()
+		bt := m.state.Arena.ForwardingBullets[i]
+		m.guideBullet(bt)
+		bt.Forward()
 	}
 	m.rebuildCombatBuckets()
 
@@ -844,6 +847,29 @@ func (m *MissionManager) updateShotBullets() {
 		spawnedPos = append(spawnedPos, bt.CurPos)
 		spawned++
 	}
+}
+
+// guideBullet 推进制导弹药的纯追踪：把弹头转向目标当前位置。
+// 目标被击沉 / 移除后保留最后一次已知位置，弹药继续朝该点飞行直到寿命结束。
+func (m *MissionManager) guideBullet(bt *objBullet.Bullet) {
+	// 无制导参数或没有记录目标（如尚未接入的机载制导）时保持直线飞行。
+	if !bt.IsGuided() || bt.TargetShipUid == "" {
+		return
+	}
+	if target, ok := m.state.Arena.Ships[bt.TargetShipUid]; ok && target != nil {
+		bt.GuidePos = target.CurPos
+	}
+	bt.SteerTowards(bt.GuidePos, homingTurnPerTick(bt.Guidance.TurnRate))
+}
+
+// homingTurnPerTick 把配置的「度/秒」换算成当前全局速度倍率下的「度/拍」。
+// 弹速会随倍率放大，转角也必须同比放大，转弯半径才不会跟着倍率变化。
+func homingTurnPerTick(turnRate float64) float64 {
+	multiplier := 1.0
+	if config.G != nil && config.G.SpeedMultiplier > 0 {
+		multiplier = config.G.SpeedMultiplier
+	}
+	return turnRate / float64(constants.MaxTPS) * multiplier
 }
 
 // hitEffectMerged 判断两个落点是否近到可以合并成一个特效（同帧齐射）。

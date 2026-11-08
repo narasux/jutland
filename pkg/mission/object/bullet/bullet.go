@@ -31,6 +31,22 @@ const (
 	TypeLaser Type = "laser"
 )
 
+// GuidanceMode 制导模式
+type GuidanceMode string
+
+const (
+	// GuidanceModePursuit 纯追踪（追尾）：每拍把弹头转向目标当前位置
+	GuidanceModePursuit GuidanceMode = "pursuit"
+)
+
+// Guidance 制导弹药的配置参数；缺省（nil）表示普通弹药。
+type Guidance struct {
+	// Mode 制导模式
+	Mode GuidanceMode `json:"mode"`
+	// TurnRate 最大转向角速度（度/秒，60 拍基准；运行时按全局速度倍率换算）
+	TurnRate float64 `json:"turnRate"`
+}
+
 type CriticalType int
 
 const (
@@ -103,8 +119,37 @@ type Bullet struct {
 	ProximityRadius float64
 	// 爆炸伤害半径，火箭弹与对空编程炮弹使用
 	BlastRadius float64
+	// 制导参数（来自弹药模板，nil 表示无制导）
+	Guidance *Guidance `json:"guidance"`
+	// 制导目标战舰 uid（仅制导弹药）
+	TargetShipUid string `json:"-"`
+	// 最后一次已知的目标位置；目标消失后按它继续飞行
+	GuidePos objPos.MapPos `json:"-"`
 	// 离上次留下炮弹或鱼雷尾迹又飞过的距离，单位是地图格
 	trailCarry float64
+}
+
+// IsGuided 是否制导弹药
+func (b *Bullet) IsGuided() bool {
+	return b.Guidance != nil
+}
+
+// SteerTowards 把弹头朝目标方向转一个受限制的角度（纯追踪）。
+// maxTurn 是这一拍允许的最大转角（度），<=0 表示直接对准。
+func (b *Bullet) SteerTowards(target objPos.MapPos, maxTurn float64) {
+	if b.Guidance == nil {
+		return
+	}
+	b.Rotation = turnTowards(b.Rotation, b.CurPos.Angle(target), maxTurn)
+}
+
+// turnTowards 沿最短方向把 current 转向 target，单次最多转 maxDelta 度。
+func turnTowards(current, target, maxDelta float64) float64 {
+	delta := math.Mod(target-current+540, 360) - 180
+	if maxDelta > 0 {
+		delta = max(-maxDelta, min(maxDelta, delta))
+	}
+	return math.Mod(current+delta+360, 360)
 }
 
 // HasAirburst 对空近炸破片：火箭弹及编程引信炮弹共用结算。

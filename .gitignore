@@ -45,3 +45,6 @@ jutland
 jutland.log
 
 .DS_Store
+
+# 本地计划文档
+plans/

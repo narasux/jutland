@@ -212,6 +212,8 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 	life := int(r.Range/bulletSpeed) + 5
 	if bulletType == objBullet.TypeTorpedo {
 		// 航空鱼雷只行驶到预计命中点附近，额外一帧确保到达后仍会结算碰撞。
+		// 注意：这里按直线距离给寿命。若将来给机载鱼雷加 guidance，必须改成按
+		// 射程 × 绕路系数计算，否则鱼雷投下后会在追上目标前就过期。
 		life = int(math.Ceil(sState.CurPos.Distance(targetPos)/bulletSpeed)) + 1
 	}
 

@@ -109,7 +109,7 @@
     bulletCount: 3,
     shotInterval: 1,
     reloadTime: 25,
-    range: 10,
+    range: 16,
     bulletSpeed: 50,
     fundsCost: 25
   },

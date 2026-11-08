@@ -156,7 +156,12 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     damage: 100,
     // 暴击率：造成暴击伤害的几率（击中弹药库之类）
     // 注：超级暴击率固定为暴击率的 1/10
-    criticalRate: 0.002
+    criticalRate: 0.002,
+    // 制导参数（可选）：不写＝普通直线弹药
+    // mode: pursuit 纯追踪（追尾）——每拍把弹头转向目标当前位置
+    // turnRate: 最大转向角速度（度/秒，60 拍基准），1x/2x 速度下自动换算
+    // 目前只有鱼雷使用；制导鱼雷的寿命会按射程放宽 1.5 倍（转弯会绕路）
+    guidance: { mode: "pursuit", turnRate: 150 }
   }
 ]
 ```
