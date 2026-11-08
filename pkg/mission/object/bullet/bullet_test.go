@@ -183,3 +183,44 @@ func colorOf(trails []*trail.Trail) color.Color {
 	}
 	return trails[0].Color
 }
+
+// 转向必须走最短弧：350° 到 10° 是向右 +20°，而不是向左 -340°。
+func TestTurnTowardsTakesShortestArc(t *testing.T) {
+	testCases := []struct {
+		name     string
+		current  float64
+		target   float64
+		maxDelta float64
+		want     float64
+	}{
+		{name: "clockwise wrap", current: 350, target: 10, maxDelta: 5, want: 355},
+		{name: "counter-clockwise wrap", current: 10, target: 350, maxDelta: 5, want: 5},
+		{name: "clamp to max delta", current: 0, target: 90, maxDelta: 2, want: 2},
+		{name: "reaches target when allowed", current: 0, target: 90, maxDelta: 200, want: 90},
+		{name: "zero delta aims directly", current: 0, target: 90, maxDelta: 0, want: 90},
+	}
+	for _, testCase := range testCases {
+		t.Run(testCase.name, func(t *testing.T) {
+			got := turnTowards(testCase.current, testCase.target, testCase.maxDelta)
+			if math.Abs(got-testCase.want) > 1e-9 {
+				t.Fatalf("turnTowards(%v, %v, %v) = %v, want %v",
+					testCase.current, testCase.target, testCase.maxDelta, got, testCase.want)
+			}
+		})
+	}
+}
+
+// 普通弹药不能被导引：没有 Guidance 时 SteerTowards 不改变朝向。
+func TestSteerTowardsRequiresGuidance(t *testing.T) {
+	bt := &Bullet{CurPos: objPos.NewR(0, 0), Rotation: 0}
+	bt.SteerTowards(objPos.NewR(10, 0), 10)
+	if bt.Rotation != 0 {
+		t.Fatalf("unguided rotation = %v, want 0", bt.Rotation)
+	}
+
+	bt.Guidance = &Guidance{Mode: GuidanceModePursuit, TurnRate: 180}
+	bt.SteerTowards(objPos.NewR(10, 0), 10)
+	if math.Abs(bt.Rotation-10) > 1e-9 {
+		t.Fatalf("guided rotation = %v, want 10", bt.Rotation)
+	}
+}

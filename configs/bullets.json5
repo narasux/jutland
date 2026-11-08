@@ -472,12 +472,14 @@
     criticalRate: 0.05
   },
   // 美国海军 12.75 英寸（324mm）Mk 44 反潜鱼雷（Mk 46 为 1966 年）
+  // 声自导鱼雷：纯追踪，转向约 2.5°/拍。
   {
     name: "US/TB/324/1957/Mk44",
     type: "torpedo",
     diameter: 324,
     damage: 1400,
-    criticalRate: 0.02
+    criticalRate: 0.02,
+    guidance: { mode: "pursuit", turnRate: 150 }
   },
   // --------- 炸弹 ----------
   // 炸弹
@@ -1081,7 +1083,10 @@
     type: "torpedo",
     diameter: 1350,
     damage: 24233,
-    criticalRate: 0.5
+    criticalRate: 0.5,
+    // 人操鱼雷由乘员持续修正航向：制导纯追踪，但转向较慢（约 2°/拍），
+    // 高速急转的目标仍有甩脱窗口。
+    guidance: { mode: "pursuit", turnRate: 120 }
   },
   // 日本海军 61cm 九三式一型酸素鱼雷（1933 设计／1935 服役，战斗部 490kg）
   {

@@ -17,6 +17,9 @@ import (
 // torpedoFireRangeRatio 预留 20% 最大射程作为敌舰规避缓冲，避免极限距离发射。
 const torpedoFireRangeRatio = 0.8
 
+// homingLifeRatio 制导弹药转弯会绕路，寿命按标称射程放宽，否则追不上目标就会中途过期。
+const homingLifeRatio = 1.5
+
 const (
 	// 鱼雷扇形按目标类型使用不同的基础角度和整舰最大跨度。
 	torpedoFanBaseAngleFast    = 4.0
@@ -175,11 +178,18 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	targetPos = rotateTargetPos(curPos, targetPos, fanAngleOffset)
 
 	// 注：鱼雷只有直射的情况，哪来的曲射？
-	return []*objBullet.Bullet{objBullet.New(
+	bt := objBullet.New(
 		lc.BulletName, curPos, targetPos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
 		enemy.ObjType(), bulletSpeed, life, 0,
-	)}
+	)
+	// 制导弹药记录目标身份与初始追踪点，寿命按绕路系数放宽。
+	if bt.IsGuided() {
+		bt.TargetShipUid = enemy.ID()
+		bt.GuidePos = targetPos
+		bt.Life = int(lc.Range/bulletSpeed*homingLifeRatio) + 5
+	}
+	return []*objBullet.Bullet{bt}
 }
 
 // torpedoLeadPoint 计算鱼雷的提前量落点：目标保持当前航向、从当前航速继续加速

@@ -284,3 +284,85 @@ func TestTorpedoLeadFollowsAcceleration(t *testing.T) {
 		t.Fatalf("倍率 2 时巡航速度 = %v, want 0.06", got)
 	}
 }
+
+// 制导弹药发射时必须记录目标身份与初始追踪点，寿命按绕路系数放宽；
+// 普通弹药保持原寿命与空目标，行为完全不变。
+func TestTorpedoFireRecordsHomingTargetOnlyForGuidedAmmo(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = oldSettings })
+
+	const guidedName, plainName = "test-guided-torpedo", "test-plain-torpedo"
+	oldGuided, hadGuided := objBullet.Map[guidedName]
+	oldPlain, hadPlain := objBullet.Map[plainName]
+	objBullet.Map[guidedName] = &objBullet.Bullet{
+		Type:     objBullet.TypeTorpedo,
+		Guidance: &objBullet.Guidance{Mode: objBullet.GuidanceModePursuit, TurnRate: 180},
+	}
+	objBullet.Map[plainName] = &objBullet.Bullet{Type: objBullet.TypeTorpedo}
+	t.Cleanup(func() {
+		if hadGuided {
+			objBullet.Map[guidedName] = oldGuided
+		} else {
+			delete(objBullet.Map, guidedName)
+		}
+		if hadPlain {
+			objBullet.Map[plainName] = oldPlain
+		} else {
+			delete(objBullet.Map, plainName)
+		}
+	})
+
+	shooter := &BattleShip{
+		Uid:          "shooter",
+		CurHP:        100,
+		Length:       128,
+		Width:        12.8,
+		CurPos:       objPos.NewR(10, 10),
+		BelongPlayer: faction.HumanAlpha,
+	}
+	target := &BattleShip{
+		Uid:          "target",
+		Type:         ShipTypeDestroyer,
+		CurHP:        100,
+		CurPos:       objPos.NewR(10, 4),
+		BelongPlayer: faction.ComputerAlpha,
+	}
+	newLauncher := func(name string) *TorpedoLauncher {
+		return &TorpedoLauncher{
+			BulletName:     name,
+			BulletCount:    1,
+			Range:          20,
+			BulletSpeed:    1,
+			RightFiringArc: FiringArc{Start: 0, End: 180},
+			LeftFiringArc:  FiringArc{Start: 180, End: 360},
+			FanStride:      1,
+			FanTracks:      1,
+		}
+	}
+
+	guided := newLauncher(guidedName).Fire(shooter, target)
+	if len(guided) != 1 {
+		t.Fatalf("guided launcher fired %d bullets, want 1", len(guided))
+	}
+	if !guided[0].IsGuided() || guided[0].TargetShipUid != target.Uid {
+		t.Fatalf("guided bullet target = %q, want %q", guided[0].TargetShipUid, target.Uid)
+	}
+	if guided[0].GuidePos != guided[0].TargetPos {
+		t.Fatalf("guide pos = %v, want launch aim point %v", guided[0].GuidePos, guided[0].TargetPos)
+	}
+	if wantLife := int(20/1.0*homingLifeRatio) + 5; guided[0].Life != wantLife {
+		t.Fatalf("guided life = %d, want %d", guided[0].Life, wantLife)
+	}
+
+	plain := newLauncher(plainName).Fire(shooter, target)
+	if len(plain) != 1 {
+		t.Fatalf("plain launcher fired %d bullets, want 1", len(plain))
+	}
+	if plain[0].IsGuided() || plain[0].TargetShipUid != "" {
+		t.Fatalf("plain bullet should stay unguided, got uid %q", plain[0].TargetShipUid)
+	}
+	if wantLife := int(20/1.0) + 5; plain[0].Life != wantLife {
+		t.Fatalf("plain life = %d, want %d", plain[0].Life, wantLife)
+	}
+}
