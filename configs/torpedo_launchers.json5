@@ -295,6 +295,17 @@
     bulletSpeed: 45,
     fundsCost: 80
   },
+  // 日本海军 53cm 单装潜艇鱼雷发射管（一〇年式；伊-168 等潜艇的固定艏/艉管）
+  {
+    name: "JP/533/1/Type6",
+    bulletName: "JP/TB/533/1921/Type6",
+    bulletCount: 1,
+    shotInterval: 1,
+    reloadTime: 30,
+    range: 17,
+    bulletSpeed: 45,
+    fundsCost: 25
+  },
   // 日本海军 45cm 单装鱼雷发射管（四四式四十五糎発射管，1911 年制式；潜艇侧对应一〇年式発射管）
   {
     name: "JP/450/1/Type44",

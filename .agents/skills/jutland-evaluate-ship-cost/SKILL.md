@@ -88,6 +88,7 @@ fundsCost  = max(5, combatCost, hullFloor)
 |---|---:|---:|---:|
 | torpedo_boat | 5 | 1.20 | 0.10 |
 | destroyer | 20 | 0.85 | 0.18 |
+| submarine | 20 | 0.85 | 0.18 |
 | frigate | 15 | 0.60 | 0.15 |
 | cruiser | 40 | 0.65 | 0.35 |
 | battleship | 230 | 0.55 | 0.80 |

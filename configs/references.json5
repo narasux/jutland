@@ -15202,4 +15202,136 @@
       },
     ],
   },
+  {
+    name: "i_168",
+    displayName: "伊-168",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x1 100mm/50 八八式",
+      },
+      {
+        label: "高炮",
+        value: "1x1 13.2mm 九三式",
+      },
+      {
+        label: "鱼雷",
+        value: "6x1 533mm（艏 4、艉 2）",
+      },
+    ],
+    description: "伊-168 原为伊-68，属海大 VI 型（KD6）巡潜潜艇，1934 年服役，1942 年改名。中途岛海战中，她避开警戒接近约克城号，发射鱼雷重创这艘航母，并击沉正在救援的驱逐舰哈曼号；约克城号随后沉没。1943 年 7 月，她在拉包尔附近被美军潜艇击沉。",
+    author: "Kolyadko 2010",
+    links: [
+      {
+        name: "Wikipedia - Japanese submarine I-168",
+        url: "https://en.wikipedia.org/wiki/Japanese_submarine_I-168",
+      },
+    ],
+  },
+  {
+    name: "uss_nautilus",
+    displayName: "鹦鹉螺",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x1 152mm/53 Mk XII",
+      },
+      {
+        label: "高炮",
+        value: "2x1 12.7mm M2",
+      },
+      {
+        label: "鱼雷",
+        value: "6x1 533mm（艏 4、艉 2）",
+      },
+    ],
+    description: "鹦鹉螺号原为 V-6，属独角鲸级大型巡潜潜艇，1930 年服役。1941 至 1942 年换装柴油电力推进，继续执行远洋巡潜任务。中途岛海战中，她攻击日本舰队并遭深水炸弹压制，幸存后继续执行侦察、炮击和运输任务，1945 年退役，次年被拆解。",
+    author: "Kolyadko 2010",
+    links: [
+      {
+        name: "维基百科 - 鹦鹉螺号潜艇 (SS-168)",
+        url: "https://zh.wikipedia.org/wiki/%E9%B8%9A%E9%B5%A1%E8%9E%BA%E8%99%9F%E6%BD%9B%E8%89%A6_(SS-168)",
+      },
+    ],
+  },
+  {
+    name: "u_boat_type_viic",
+    displayName: "U-VIIC 型",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "甲板炮",
+        value: "1x1 88mm SK C/35",
+      },
+      {
+        label: "高炮",
+        value: "1x1 20mm Flak 30",
+      },
+      {
+        label: "鱼雷",
+        value: "5x1 533mm（艏 4、艉 1）",
+      },
+    ],
+    description: "VII C 型是二战德国海军建造数量最多的 U 艇，1940 年起大批服役，活跃于大西洋破交作战。该型以水面柴油机航行，接近目标后发动鱼雷攻击，并用甲板炮处理受伤或落单的商船。1943 年盟军护航与航空反潜增强后，其损失急剧上升。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - VII级潜艇",
+        url: "https://zh.wikipedia.org/wiki/VII%E7%B4%9A%E6%BD%9B%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "US/152/53/MK12",
+    displayName: "152mm/53 单装潜艇甲板炮 Mk XII",
+    type: "武器",
+    armaments: [],
+    description: "美国海军 6 英寸/53 Mark XII 单装潜艇甲板炮，采用适合潜艇使用的湿式炮架。游戏中按 7 秒装填、20 千米射程与 820 米/秒初速表现。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 6-inch/53-caliber gun",
+        url: "https://en.wikipedia.org/wiki/6-inch/53-caliber_gun",
+      },
+    ],
+  },
+  {
+    name: "GER/88/45/SKC35",
+    displayName: "88mm/45 SK C/35 单装潜艇甲板炮",
+    type: "武器",
+    armaments: [],
+    description: "德国海军 8.8 厘米 SK C/35 单装潜艇甲板炮，是 VII 型 U 艇在 1943 年前的标准甲板武器。游戏中按 4 秒装填、11 千米射程与 700 米/秒初速表现。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 8.8 cm SK C/35 naval gun",
+        url: "https://en.wikipedia.org/wiki/8.8_cm_SK_C/35_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "JP/100/50/Type88",
+    displayName: "八八式 100mm/50 单装潜艇炮",
+    type: "武器",
+    armaments: [],
+    description: "日本海军 10 厘米/50 八八式单装舰炮，广泛用于巡潜潜艇的甲板炮。游戏中按 5 秒装填、14 千米射程与 885 米/秒初速表现。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 10 cm/50 Type 88 naval gun",
+        url: "https://en.wikipedia.org/wiki/10_cm/50_Type_88_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "JP/533/1/Type6",
+    displayName: "533mm 单装潜艇鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "日本海军 53cm 单装潜艇鱼雷发射管，对应一〇年式潜艇发射管，装备伊-168 等巡潜潜艇的固定艏管与艉管。游戏中按 30 秒装填、17 千米射程表现。",
+    author: "",
+    links: [],
+  },
 ]

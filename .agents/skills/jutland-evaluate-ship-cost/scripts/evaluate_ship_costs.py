@@ -13,6 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 COMBAT_BASE_COST = {
     "torpedo_boat": 5,
     "destroyer": 20,
+    "submarine": 20,
     "frigate": 15,
     "cruiser": 40,
     "battleship": 230,
@@ -23,6 +24,7 @@ COMBAT_BASE_COST = {
 COMBAT_POWER_FACTOR = {
     "torpedo_boat": 1.20,
     "destroyer": 0.85,
+    "submarine": 0.85,
     "frigate": 0.60,
     "cruiser": 0.65,
     "battleship": 0.55,
@@ -34,6 +36,7 @@ HULL_FLOOR_MULTIPLIER = {
     "default": 0.00,
     "torpedo_boat": 0.10,
     "destroyer": 0.18,
+    "submarine": 0.18,
     "frigate": 0.15,
     "cruiser": 0.35,
     "battleship": 0.80,

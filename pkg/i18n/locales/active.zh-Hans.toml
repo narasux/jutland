@@ -134,6 +134,8 @@ other = "货轮"
 other = "维修船"
 [ShipTypeTorpedoBoat]
 other = "鱼雷艇"
+[ShipTypeSubmarine]
+other = "潜艇"
 [PlaneTypeFighter]
 other = "战斗机"
 [PlaneTypeDiveBomber]

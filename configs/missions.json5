@@ -3149,6 +3149,12 @@
         belongPlayer: "P1"
       },
       {
+        name: "u_boat_type_viic",
+        pos: [26, 30],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
         name: "S_100",
         pos: [27, 29],
         rotation: 90,
@@ -3948,6 +3954,12 @@
         belongPlayer: "P1"
       },
       {
+        name: "uss_nautilus",
+        pos: [44, 49],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
         name: "PT_791",
         pos: [45, 49],
         rotation: 90,
@@ -4237,6 +4249,12 @@
       {
         name: "minekaze",
         pos: [24, 50],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "i_168",
+        pos: [25, 50],
         rotation: 90,
         belongPlayer: "P1"
       },

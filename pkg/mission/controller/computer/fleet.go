@@ -890,6 +890,7 @@ func pickAttackBuild(options []*objUnit.BattleShip, ownBB, enemyBB int) string {
 		objUnit.ShipTypeCruiser,
 		objUnit.ShipTypeDestroyer,
 		objUnit.ShipTypeFrigate,
+		objUnit.ShipTypeSubmarine,
 	}
 	if ownBB < enemyBB {
 		tiers = append([]objUnit.ShipType{objUnit.ShipTypeBattleShip}, tiers...)
@@ -1026,7 +1027,7 @@ func isAlwaysGarrison(shipType objUnit.ShipType) bool {
 func isCombat(shipType objUnit.ShipType) bool {
 	switch shipType {
 	case objUnit.ShipTypeBattleShip, objUnit.ShipTypeCruiser, objUnit.ShipTypeDestroyer,
-		objUnit.ShipTypeFrigate, objUnit.ShipTypeTorpedoBoat:
+		objUnit.ShipTypeFrigate, objUnit.ShipTypeTorpedoBoat, objUnit.ShipTypeSubmarine:
 		return true
 	default:
 		return false
@@ -1035,7 +1036,8 @@ func isCombat(shipType objUnit.ShipType) bool {
 
 func isSummonCombat(shipType objUnit.ShipType) bool {
 	switch shipType {
-	case objUnit.ShipTypeBattleShip, objUnit.ShipTypeCruiser, objUnit.ShipTypeDestroyer, objUnit.ShipTypeFrigate:
+	case objUnit.ShipTypeBattleShip, objUnit.ShipTypeCruiser, objUnit.ShipTypeDestroyer,
+		objUnit.ShipTypeFrigate, objUnit.ShipTypeSubmarine:
 		return true
 	default:
 		return false
@@ -1043,7 +1045,8 @@ func isSummonCombat(shipType objUnit.ShipType) bool {
 }
 
 func isRaidShip(shipType objUnit.ShipType) bool {
-	return shipType == objUnit.ShipTypeCruiser || shipType == objUnit.ShipTypeDestroyer
+	return shipType == objUnit.ShipTypeCruiser || shipType == objUnit.ShipTypeDestroyer ||
+		shipType == objUnit.ShipTypeSubmarine
 }
 
 func canSummonType(shipType objUnit.ShipType) bool {

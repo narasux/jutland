@@ -72,6 +72,7 @@ const (
 	MsgShipTypeCargo             MessageID = "ShipTypeCargo"
 	MsgShipTypeRepair            MessageID = "ShipTypeRepair"
 	MsgShipTypeTorpedoBoat       MessageID = "ShipTypeTorpedoBoat"
+	MsgShipTypeSubmarine         MessageID = "ShipTypeSubmarine"
 	MsgPlaneTypeFighter          MessageID = "PlaneTypeFighter"
 	MsgPlaneTypeDiveBomber       MessageID = "PlaneTypeDiveBomber"
 	MsgPlaneTypeLevelBomber      MessageID = "PlaneTypeLevelBomber"

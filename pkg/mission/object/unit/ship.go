@@ -40,6 +40,8 @@ const (
 	ShipTypeFrigate ShipType = "frigate"
 	// ShipTypeTorpedoBoat 鱼雷艇
 	ShipTypeTorpedoBoat ShipType = "torpedo_boat"
+	// ShipTypeSubmarine 潜艇（当前按水面舰艇机制使用）
+	ShipTypeSubmarine ShipType = "submarine"
 	// ShipTypeCargo 货轮
 	ShipTypeCargo ShipType = "cargo"
 	// ShipTypeRepair 维修船
@@ -69,6 +71,8 @@ func (t ShipType) ToDisplay() string {
 		return i18n.Text(i18n.MsgShipTypeRepair)
 	case ShipTypeTorpedoBoat:
 		return i18n.Text(i18n.MsgShipTypeTorpedoBoat)
+	case ShipTypeSubmarine:
+		return i18n.Text(i18n.MsgShipTypeSubmarine)
 	case ShipTypeDefault:
 		return i18n.Text(i18n.MsgShipTypeDefault)
 	}

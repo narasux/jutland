@@ -134,6 +134,8 @@ other = "Грузовое судно"
 other = "Ремонтное судно"
 [ShipTypeTorpedoBoat]
 other = "Торпедный катер"
+[ShipTypeSubmarine]
+other = "Подводная лодка"
 [PlaneTypeFighter]
 other = "Истребитель"
 [PlaneTypeDiveBomber]
