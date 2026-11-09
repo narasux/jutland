@@ -42065,6 +42065,53 @@
       ]
     }
   },
+  // MAS 500
+  {
+    name: "mas_500",
+    nation: "it",
+    type: "torpedo_boat",
+    typeAbbr: "TB",
+    year: 1941,
+    totalHP: 28,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 43,
+    acceleration: 2.5,
+    rotateSpeed: 6,
+    length: 17,
+    width: 4.4,
+    fundsCost: 20,
+    timeCost: 9,
+    weapon: {
+      mainGuns: [],
+      secondaryGuns: [],
+      antiAircraftGuns: [
+        // 舰艉 20mm/65 布雷达
+        {
+          name: "IT/20/65/1/M1932",
+          posPercent: -0.58,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 中段右舷 450mm 雷槽
+        {
+          name: "IT/450/1",
+          posPercent: 0.01,
+          rightFiringArc: [0, 30],
+          leftFiringArc: [360, 360]
+        },
+        // 中段左舷 450mm 雷槽
+        {
+          name: "IT/450/1",
+          posPercent: 0.01,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [330, 360]
+        }
+      ]
+    }
+  },
   // Lupo
   {
     name: "lupo",

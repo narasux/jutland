@@ -13397,6 +13397,33 @@
     ],
   },
   {
+    name: "mas_500",
+    displayName: "MAS 500",
+    type: "Motor Torpedo Boat",
+    armaments: [
+      {
+        label: "Anti-Aircraft Guns",
+        value: "1x1 20mm/65 Breda",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x1 450mm",
+      },
+    ],
+    description: "The MAS 500 was a class of 75 fast motor torpedo boats built for the Regia Marina between 1937 and 1941 and powered by two Isotta Fraschini Asso 1000 engines. The wooden hard-chine hulls were very fast in calm water but poor seaboats. Early series carried a 13.2 mm machine gun; the third and fourth series mounted a 20 mm Breda cannon, with two 450 mm torpedoes in side troughs and depth charges. The drawing shows a late-series boat with the 20 mm gun.",
+    author: "",
+    links: [
+      {
+        name: "Cults3D - MAS 500 Italian Torpedo Boat (1/300)",
+        url: "https://cults3d.com/en/3d-model/game/mas-500-italian-torpedo-boat-1-300",
+      },
+      {
+        name: "Wikipedia - MAS (motorboat)",
+        url: "https://en.wikipedia.org/wiki/MAS_(motorboat)",
+      },
+    ],
+  },
+  {
     name: "lupo",
     displayName: "Lupo",
     type: "Motor Torpedo Boat",
