@@ -13311,6 +13311,33 @@
     ],
   },
   {
+    name: "mas_500",
+    displayName: "MAS 500",
+    type: "Торпедный катер",
+    armaments: [
+      {
+        label: "Зенитное вооружение",
+        value: "1x1 20mm/65 Breda",
+      },
+      {
+        label: "Торпеды",
+        value: "2x1 450mm",
+      },
+    ],
+    description: "MAS 500 — серия из 75 быстроходных торпедных катеров, построенных для итальянского флота в 1937–1941 годах; на них ставили два двигателя Isotta Fraschini Asso 1000. Деревянный редановый корпус давал высокую скорость на спокойной воде, но мореходность была низкой. Первые серии несли 13,2-мм пулемёт, третья и четвёртая — 20-мм пушку Breda; по бортам размещались жёлоба с 450-мм торпедами, имелись и глубинные бомбы. На рисунке показан катер поздней серии с 20-мм орудием.",
+    author: "",
+    links: [
+      {
+        name: "Cults3D - MAS 500 Italian Torpedo Boat (1/300)",
+        url: "https://cults3d.com/en/3d-model/game/mas-500-italian-torpedo-boat-1-300",
+      },
+      {
+        name: "Wikipedia - MAS (motorboat)",
+        url: "https://en.wikipedia.org/wiki/MAS_(motorboat)",
+      },
+    ],
+  },
+  {
     name: "lupo",
     displayName: "Лупо",
     type: "Торпедный катер",

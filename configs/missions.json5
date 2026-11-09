@@ -2982,6 +2982,7 @@
           "P_6",
           "stefano_turr",
           "lupo",
+          "mas_500",
         ],
       },
       {
@@ -3635,6 +3636,12 @@
         rotation: 90,
         belongPlayer: "P1"
       },
+      {
+        name: "mas_500",
+        pos: [25, 39],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
       // === US CV ===
       {
         name: "america",
@@ -3949,19 +3956,19 @@
       },
       {
         name: "johnston",
-        pos: [44, 50],
+        pos: [45, 49],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "uss_nautilus",
-        pos: [44, 49],
+        pos: [44, 50],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "PT_791",
-        pos: [45, 49],
+        pos: [45, 51],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -4254,13 +4261,13 @@
       },
       {
         name: "i_168",
-        pos: [25, 50],
+        pos: [25, 51],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "T_14",
-        pos: [25, 51],
+        pos: [24, 52],
         rotation: 90,
         belongPlayer: "P1"
       },
