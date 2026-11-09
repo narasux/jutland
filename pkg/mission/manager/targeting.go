@@ -212,7 +212,7 @@ func shipTargetingValue(ship *objUnit.BattleShip) float64 {
 		return 0.85
 	case objUnit.ShipTypeCruiser:
 		return 0.60
-	case objUnit.ShipTypeDestroyer, objUnit.ShipTypeFrigate:
+	case objUnit.ShipTypeDestroyer, objUnit.ShipTypeFrigate, objUnit.ShipTypeSubmarine:
 		return 0.35
 	case objUnit.ShipTypeTorpedoBoat:
 		return 0.20

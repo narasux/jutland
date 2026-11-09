@@ -15169,4 +15169,136 @@
       },
     ],
   },
+  {
+    name: "i_168",
+    displayName: "伊168",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x1 100mm/50 八八式",
+      },
+      {
+        label: "対空砲",
+        value: "1x1 13.2mm 九三式",
+      },
+      {
+        label: "魚雷",
+        value: "6x1 533mm（艦首 4、艦尾 2）",
+      },
+    ],
+    description: "伊168は当初伊68として1934年に竣工した海大VI型（KD6）巡潜潜水艦で、1942年に改名された。ミッドウェー海戦では警戒網を避けてヨークタウンに接近し、魚雷で同空母を大破させ、救援中の駆逐艦ハマンを撃沈した。ヨークタウンは翌日沈没した。1943年7月、ラバウル付近で米潜水艦により撃沈された。",
+    author: "Kolyadko 2010",
+    links: [
+      {
+        name: "Wikipedia - 伊号第百六十八潜水艦",
+        url: "https://ja.wikipedia.org/wiki/%E4%BC%8A%E5%8F%B7%E7%AC%AC%E7%99%BE%E5%85%AD%E5%8D%81%E5%85%AB%E6%BD%9B%E6%B0%B4%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "uss_nautilus",
+    displayName: "ノーチラス",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x1 152mm/53 Mk XII",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 12.7mm M2",
+      },
+      {
+        label: "魚雷",
+        value: "6x1 533mm（艦首 4、艦尾 2）",
+      },
+    ],
+    description: "ノーチラスは当初 V-6 として建造されたナーワル級巡潜潜水艦で、1930年に就役した。1941-42年にディーゼル・エレクトリック推進へ換装し、遠洋巡潜任務を継続した。ミッドウェー海戦では日本艦隊を攻撃して激しい爆雷攻撃を受けたが生き残り、その後も偵察、砲撃、輸送任務に従事した。1945年に退役し、翌年解体された。",
+    author: "Kolyadko 2010",
+    links: [
+      {
+        name: "Wikipedia - ノーチラス (潜水艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%8E%E3%83%BC%E3%83%81%E3%83%A9%E3%82%B9_(%E6%BD%9C%E6%B0%B4%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "u_boat_type_viic",
+    displayName: "UボートVII C型",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "甲板砲",
+        value: "1x1 88mm SK C/35",
+      },
+      {
+        label: "対空砲",
+        value: "1x1 20mm Flak 30",
+      },
+      {
+        label: "魚雷",
+        value: "5x1 533mm（艦首 4、艦尾 1）",
+      },
+    ],
+    description: "VII C型は第二次世界大戦で最も多数建造されたドイツ海軍のUボートで、1940年から就役して大西洋の通商破壊戦の主力となった。水上ではディーゼル機関で航行し、目標に接近して魚雷攻撃を行い、甲板砲は損傷した商船や孤立した目標の撃沈に用いられた。1943年に連合軍の護衛艦艇と航空哨戒が強化されると損失は急増した。",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - UボートVII型",
+        url: "https://ja.wikipedia.org/wiki/U%E3%83%9C%E3%83%BC%E3%83%88VII%E5%9E%8B",
+      },
+    ],
+  },
+  {
+    name: "US/152/53/MK12",
+    displayName: "152mm/53 単装潜水艦甲板砲 Mk XII",
+    type: "兵器",
+    armaments: [],
+    description: "アメリカ海軍の6インチ/53 Mark XII 潜水艦用甲板砲。湿式砲架を備える。ゲーム内では装填7秒、射程20km、初速820m/sとして扱う。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 6-inch/53-caliber gun",
+        url: "https://en.wikipedia.org/wiki/6-inch/53-caliber_gun",
+      },
+    ],
+  },
+  {
+    name: "GER/88/45/SKC35",
+    displayName: "88mm/45 SK C/35 単装潜水艦甲板砲",
+    type: "兵器",
+    armaments: [],
+    description: "ドイツ海軍の8.8cm SK C/35 潜水艦甲板砲。1943年までのVII型Uボートの標準装備。ゲーム内では装填4秒、射程11km、初速700m/sとして扱う。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 8.8 cm SK C/35 naval gun",
+        url: "https://en.wikipedia.org/wiki/8.8_cm_SK_C/35_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "JP/100/50/Type88",
+    displayName: "八八式 100mm/50 単装潜水艦砲",
+    type: "兵器",
+    armaments: [],
+    description: "日本海軍の10cm/50 八八式単装砲。巡潜型潜水艦の甲板砲として広く使われた。ゲーム内では装填5秒、射程14km、初速885m/sとして扱う。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 10 cm/50 Type 88 naval gun",
+        url: "https://en.wikipedia.org/wiki/10_cm/50_Type_88_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "JP/533/1/Type6",
+    displayName: "533mm 単装潜水艦魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "日本海軍の53cm単装潜水艦魚雷発射管。一〇年式潜水艦発射管に対応し、伊168などの巡潜型潜水艦の固定艦首・艦尾管として装備された。ゲーム内では装填30秒、射程17kmとして扱う。",
+    author: "",
+    links: [],
+  },
 ]

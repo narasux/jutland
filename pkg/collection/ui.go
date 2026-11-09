@@ -44,6 +44,7 @@ const (
 	shipClassDestroyer  shipClassFilter = "destroyer"
 	shipClassFrigate    shipClassFilter = "frigate"
 	shipClassTorpedo    shipClassFilter = "torpedo_boat"
+	shipClassSubmarine  shipClassFilter = "submarine"
 	shipClassCargo      shipClassFilter = "cargo"
 	shipClassHospital   shipClassFilter = "hospital"
 	shipClassRepair     shipClassFilter = "repair"
@@ -64,6 +65,8 @@ func (f shipClassFilter) display() string {
 		return i18n.Text(i18n.MsgShipTypeFrigate)
 	case shipClassTorpedo:
 		return i18n.Text(i18n.MsgShipTypeTorpedoBoat)
+	case shipClassSubmarine:
+		return i18n.Text(i18n.MsgShipTypeSubmarine)
 	case shipClassCargo:
 		return i18n.Text(i18n.MsgShipTypeCargo)
 	case shipClassHospital:
@@ -79,8 +82,8 @@ func (f shipClassFilter) display() string {
 
 var shipClassFilters = []shipClassFilter{
 	shipClassAll, shipClassCarrier, shipClassBattleship, shipClassCruiser,
-	shipClassDestroyer, shipClassFrigate, shipClassTorpedo, shipClassCargo, shipClassHospital,
-	shipClassRepair, shipClassSpecial,
+	shipClassDestroyer, shipClassFrigate, shipClassSubmarine, shipClassTorpedo, shipClassCargo,
+	shipClassHospital, shipClassRepair, shipClassSpecial,
 }
 
 type planeTypeFilter string
@@ -1546,6 +1549,8 @@ func matchShipClass(shipType objUnit.ShipType, filter shipClassFilter) bool {
 		return shipType == objUnit.ShipTypeFrigate
 	case shipClassTorpedo:
 		return shipType == objUnit.ShipTypeTorpedoBoat
+	case shipClassSubmarine:
+		return shipType == objUnit.ShipTypeSubmarine
 	case shipClassCargo:
 		return shipType == objUnit.ShipTypeCargo
 	case shipClassHospital:

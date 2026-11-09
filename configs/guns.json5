@@ -911,6 +911,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 美国海军 6 英寸/53 Mark XII 单装潜艇甲板炮（鹦鹉螺号等；湿式炮架）
+  {
+    name: "US/152/53/MK12",
+    bulletName: "US/GB/152/1939",
+    bulletCount: 1,
+    reloadTime: 7,
+    range: 20,
+    bulletSpread: 80,
+    bulletSpeed: 820,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 美国海军 US/127/54/MK39 双联装舰炮
   {
     name: "US/127/54/2/MK39",
@@ -1485,6 +1498,19 @@
     fundsCost: 10,
     antiShip: true,
     antiAircraft: true
+  },
+  // 德国海军 8.8cm SK C/35 单装潜艇甲板炮（VII 型 U 艇）
+  {
+    name: "GER/88/45/SKC35",
+    bulletName: "GER/GB/88/1935",
+    bulletCount: 1,
+    reloadTime: 4,
+    range: 11,
+    bulletSpread: 80,
+    bulletSpeed: 700,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false
   },
   // 德国海军 GER/88/45 单装高射炮（第一次世界大战）
   {
@@ -2412,6 +2438,19 @@
     fundsCost: 4,
     antiShip: true,
     antiAircraft: true
+  },
+  // 日本海军 十一年式 10cm/50 单装潜艇炮（伊-168 等；Type 88）
+  {
+    name: "JP/100/50/Type88",
+    bulletName: "JP/GB/100/1933",
+    bulletCount: 1,
+    reloadTime: 5,
+    range: 14,
+    bulletSpread: 70,
+    bulletSpeed: 885,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: false
   },
   // 日本海军 九八式 8cm/60 高角炮（阿贺野级等；原误写 65 倍径）
   {

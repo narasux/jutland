@@ -46,7 +46,7 @@ func defaultShipSight(shipType ShipType) float64 {
 		return SightRangeTorpedoBoat
 	case ShipTypeFrigate:
 		return SightRangeFrigate
-	case ShipTypeDestroyer:
+	case ShipTypeDestroyer, ShipTypeSubmarine:
 		return SightRangeDestroyer
 	case ShipTypeCruiser:
 		return SightRangeCruiser

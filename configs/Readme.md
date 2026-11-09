@@ -370,8 +370,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // frigate 护卫舰
     // cargo 货轮
     // repair 维修船
+    // submarine 潜艇（当前按水面舰艇机制）
     // torpedo_boat 快艇
-    // submarine 潜艇（未来可期）
     type: "cruiser",
     // 视距（地图格）。0 或不写时用舰种默认值；有主炮时不超过主炮射程。
     // 单艘可写大于 0 的值覆盖默认。测试船 type 为 default 时不套用默认表。

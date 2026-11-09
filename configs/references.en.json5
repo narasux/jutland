@@ -15228,4 +15228,136 @@
       },
     ],
   },
+  {
+    name: "i_168",
+    displayName: "I-168",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Deck Gun",
+        value: "1x1 100mm/50 Type 88",
+      },
+      {
+        label: "Anti-aircraft Gun",
+        value: "1x1 13.2mm Type 93",
+      },
+      {
+        label: "Torpedoes",
+        value: "6x1 533mm (4 forward, 2 aft)",
+      },
+    ],
+    description: "I-168, originally I-68, was a Kaidai VI (KD6) cruiser submarine commissioned in 1934 and renamed in 1942. At Midway she closed on the damaged Yorktown, hit the carrier with torpedoes and sank the assisting destroyer Hammann; Yorktown went down the next day. An American submarine sank I-168 near Rabaul in July 1943.",
+    author: "Kolyadko 2010",
+    links: [
+      {
+        name: "Wikipedia - Japanese submarine I-168",
+        url: "https://en.wikipedia.org/wiki/Japanese_submarine_I-168",
+      },
+    ],
+  },
+  {
+    name: "uss_nautilus",
+    displayName: "Nautilus",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Deck Guns",
+        value: "2x1 152mm/53 Mk XII",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 12.7mm M2",
+      },
+      {
+        label: "Torpedoes",
+        value: "6x1 533mm (4 forward, 2 aft)",
+      },
+    ],
+    description: "Nautilus, originally V-6, was a Narwhal-class cruiser submarine commissioned in 1930. Re-engined with diesel-electric propulsion in 1941-42, she continued her long-range cruiser-submarine role. At Midway she attacked the Japanese fleet and was heavily depth-charged, then survived to carry out reconnaissance, bombardment and transport missions. She was decommissioned in 1945 and scrapped the following year.",
+    author: "Kolyadko 2010",
+    links: [
+      {
+        name: "Wikipedia - USS Nautilus (SS-168)",
+        url: "https://en.wikipedia.org/wiki/USS_Nautilus_(SS-168)",
+      },
+    ],
+  },
+  {
+    name: "u_boat_type_viic",
+    displayName: "Type VIIC U-boat",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Deck Gun",
+        value: "1x1 88mm SK C/35",
+      },
+      {
+        label: "Anti-aircraft Gun",
+        value: "1x1 20mm Flak 30",
+      },
+      {
+        label: "Torpedoes",
+        value: "5x1 533mm (4 forward, 1 aft)",
+      },
+    ],
+    description: "The Type VIIC was the most numerous German U-boat class of the Second World War, entering service from 1940 and bearing the main burden of the Atlantic campaign. Boats ran on the surface under diesel power, closed to torpedo range, and used the deck gun to finish off damaged or isolated merchantmen. Losses rose sharply after Allied escorts and aircraft closed the mid-Atlantic gap in 1943.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - Type VII submarine",
+        url: "https://en.wikipedia.org/wiki/Type_VII_submarine",
+      },
+    ],
+  },
+  {
+    name: "US/152/53/MK12",
+    displayName: "152mm/53 Single Submarine Deck Gun Mk XII",
+    type: "Weapon",
+    armaments: [],
+    description: "The U.S. Navy's 6-inch/53 Mark XII deck gun used a wet mount suited to submarine service. In game it is modelled with a 7-second reload, 20 km range and 820 m/s muzzle velocity.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 6-inch/53-caliber gun",
+        url: "https://en.wikipedia.org/wiki/6-inch/53-caliber_gun",
+      },
+    ],
+  },
+  {
+    name: "GER/88/45/SKC35",
+    displayName: "88mm/45 SK C/35 Single Submarine Deck Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "The German 8.8 cm SK C/35 was the standard deck gun of Type VII U-boats until 1943. In game it is modelled with a 4-second reload, 11 km range and 700 m/s muzzle velocity.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 8.8 cm SK C/35 naval gun",
+        url: "https://en.wikipedia.org/wiki/8.8_cm_SK_C/35_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "JP/100/50/Type88",
+    displayName: "100mm/50 Type 88 Single Submarine Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "The Japanese 10 cm/50 Type 88 was a single deck gun widely fitted to cruiser submarines. In game it is modelled with a 5-second reload, 14 km range and 885 m/s muzzle velocity.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 10 cm/50 Type 88 naval gun",
+        url: "https://en.wikipedia.org/wiki/10_cm/50_Type_88_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "JP/533/1/Type6",
+    displayName: "533mm Single Submarine Torpedo Tube",
+    type: "Weapon",
+    armaments: [],
+    description: "Japanese 53 cm single submarine torpedo tube, corresponding to the 10th Year Type submarine tube and fitted as fixed bow and stern tubes in cruiser submarines such as I-168. In game it is modelled with a 30-second reload and 17 km range.",
+    author: "",
+    links: [],
+  },
 ]

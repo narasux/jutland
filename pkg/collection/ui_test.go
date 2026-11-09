@@ -496,3 +496,11 @@ func TestPlaneRadarProjectionIsLabelledRange(t *testing.T) {
 	require.Equal(t, "投送", i18n.Text(projection.labelID(ship)))
 	require.Equal(t, "测试机 · 航程", radarTooltipLines(projection, plane, 100)[0])
 }
+
+func TestSubmarineShipClassFilter(t *testing.T) {
+	// 潜艇是独立图鉴分类，不能再落进驱逐舰筛选。
+	require.True(t, matchShipClass(objUnit.ShipTypeSubmarine, shipClassSubmarine))
+	require.True(t, matchShipClass(objUnit.ShipTypeSubmarine, shipClassAll))
+	require.False(t, matchShipClass(objUnit.ShipTypeDestroyer, shipClassSubmarine))
+	require.False(t, matchShipClass(objUnit.ShipTypeSubmarine, shipClassDestroyer))
+}

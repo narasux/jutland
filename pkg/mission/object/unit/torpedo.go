@@ -221,7 +221,7 @@ func torpedoLeadPoint(
 // torpedoFanProfile 返回目标类型对应的鱼雷扇形基础步长和最大总跨度。
 func torpedoFanProfile(targetType ShipType) (float64, float64) {
 	switch targetType {
-	case ShipTypeDestroyer, ShipTypeFrigate, ShipTypeTorpedoBoat:
+	case ShipTypeDestroyer, ShipTypeFrigate, ShipTypeTorpedoBoat, ShipTypeSubmarine:
 		return torpedoFanBaseAngleFast, torpedoFanMaxSpanFast
 	case ShipTypeBattleShip, ShipTypeAircraftCarrier,
 		ShipTypeCargo, ShipTypeRepair, ShipTypeHospital:

@@ -16031,6 +16031,103 @@
       ]
     }
   },
+  // --------- 潜艇 ----------
+  // 鹦鹉螺
+  {
+    name: "uss_nautilus",
+    nation: "us",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1942,
+    totalHP: 2770,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 17.4,
+    acceleration: 0.45,
+    rotateSpeed: 1.0,
+    length: 113,
+    width: 10.1,
+    fundsCost: 65,
+    timeCost: 25,
+    weapon: {
+      mainGuns: [
+        // 前甲板炮
+        {
+          name: "US/152/53/MK12",
+          posPercent: 0.31,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后甲板炮
+        {
+          name: "US/152/53/MK12",
+          posPercent: -0.14,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥前 12.7mm 机枪
+        {
+          name: "US/12.7/M2",
+          posPercent: 0.18,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后 12.7mm 机枪
+        {
+          name: "US/12.7/M2",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.73,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.73,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.69,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.69,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.78,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 6（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.78,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
   // --------- 鱼雷艇 ----------
   // PT-791
   {
@@ -18097,6 +18194,82 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
+      ]
+    }
+  },
+  // --------- 潜艇 ----------
+  // U-VIIC
+  {
+    name: "u_boat_type_viic",
+    nation: "de",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1940,
+    totalHP: 769,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 17.7,
+    acceleration: 0.7,
+    rotateSpeed: 1.6,
+    length: 67.2,
+    width: 6.2,
+    fundsCost: 50,
+    timeCost: 20,
+    weapon: {
+      mainGuns: [
+        // 甲板炮
+        {
+          name: "GER/88/45/SKC35",
+          posPercent: 0.23,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 指挥塔 20mm 高炮
+        {
+          name: "GER/20/65/C30",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.74,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.74,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.7,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.7,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5
+        {
+          name: "GER/533/1/C35",
+          posPercent: -0.93,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
       ]
     }
   },
@@ -33087,6 +33260,89 @@
           posPercent: -0.45,
           rightFiringArc: [45, 135],
           leftFiringArc: [225, 315]
+        }
+      ]
+    }
+  },
+  // --------- 潜艇 ----------
+  // 伊-168
+  {
+    name: "i_168",
+    nation: "jp",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1942,
+    totalHP: 1785,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 23,
+    acceleration: 0.65,
+    rotateSpeed: 1.4,
+    length: 98.4,
+    width: 8.2,
+    fundsCost: 55,
+    timeCost: 21,
+    weapon: {
+      mainGuns: [
+        // 甲板炮
+        {
+          name: "JP/100/50/Type88",
+          posPercent: 0.24,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥 13.2mm 机枪
+        {
+          name: "JP/13/Type93",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.9,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.9,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: -0.89,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 6（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: -0.89,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
         }
       ]
     }

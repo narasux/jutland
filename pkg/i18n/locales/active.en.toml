@@ -134,6 +134,8 @@ other = "Cargo Ship"
 other = "Repair Ship"
 [ShipTypeTorpedoBoat]
 other = "Torpedo Boat"
+[ShipTypeSubmarine]
+other = "Submarine"
 [PlaneTypeFighter]
 other = "Fighter"
 [PlaneTypeDiveBomber]
