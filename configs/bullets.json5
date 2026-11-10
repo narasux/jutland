@@ -38,10 +38,10 @@
   // 中国海军 250mm 65 式反潜火箭弹
   {
     name: "CN/RB/250/1965/Type65",
-    type: "rocket",
-    diameter: 250,
-    damage: 95,
-    criticalRate: 0.001
+    type: "depth_charge",
+    diameter: 300,
+    damage: 1800,
+    criticalRate: 0
   },
   // 中国海军 81 式 122mm 舰载火箭弹（仿苏 BM-21「冰雹」M-21OF；仅 516 九江舰对陆火力支援舰使用）
   {
@@ -479,6 +479,7 @@
     diameter: 324,
     damage: 1400,
     criticalRate: 0.02,
+    antiSubmarine: true,
     guidance: { mode: "pursuit", turnRate: 150 }
   },
   // --------- 炸弹 ----------
@@ -1516,5 +1517,30 @@
     diameter: 280,
     damage: 910,
     criticalRate: 0.03
+  },
+  // --------- 深水炸弹 ----------
+  // 英国 Mk VII 300 磅深水炸弹（1939 年；舰尾滚架 / 深弹发射炮）
+  {
+    name: "UK/DC/300/1939/MkVII",
+    type: "depth_charge",
+    diameter: 300,
+    damage: 2400,
+    criticalRate: 0
+  },
+  // 美国 Mk 6 / Mk 7 300 磅深水炸弹（1940 年）
+  {
+    name: "US/DC/300/1940/Mk6",
+    type: "depth_charge",
+    diameter: 300,
+    damage: 2200,
+    criticalRate: 0
+  },
+  // 日本 95 式 100kg 深水炸弹
+  {
+    name: "JP/DC/200/1935/Type95",
+    type: "depth_charge",
+    diameter: 200,
+    damage: 1500,
+    criticalRate: 0
   },
 ]

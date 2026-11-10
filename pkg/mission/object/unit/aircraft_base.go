@@ -54,6 +54,16 @@ func (s *BattleShip) BaseBelongPlayer() faction.Player { return s.BelongPlayer }
 // BaseAircraft 机库。
 func (s *BattleShip) BaseAircraft() *ShipAircraft { return &s.Aircraft }
 
+// HasAntiSubAircraft 机库是否编有能挂深弹的机型（决定基地是否派机反潜）。
+func (a *ShipAircraft) HasAntiSubAircraft() bool {
+	for _, group := range a.Groups {
+		if plane, ok := PlaneMap[group.Name]; ok && plane.HasAntiSubWeapon() {
+			return true
+		}
+	}
+	return false
+}
+
 // isBaseMissing 判断基地是否缺失（飞机所属航母已被击沉等）。
 // 注意：nil 的 *BattleShip 装入接口后接口值非 nil，必须按具体类型判空。
 func isBaseMissing(base AircraftBase) bool {

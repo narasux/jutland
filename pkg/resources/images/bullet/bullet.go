@@ -34,6 +34,12 @@ var bombDiameters = []int{1100, 850, 800, 660, 610, 470, 450, 380, 360, 350, 280
 // bombs 炸弹图片映射表
 var bombs = make(map[int]*ebiten.Image)
 
+// depthChargeDiameters 支持的深水炸弹直径列表
+var depthChargeDiameters = []int{200, 300}
+
+// depthCharges 深水炸弹图片映射表
+var depthCharges = make(map[int]*ebiten.Image)
+
 // rocketDiameters 支持的火箭弹直径列表
 var rocketDiameters = []int{55, 70, 82, 100, 120, 122, 127, 132, 200, 250}
 
@@ -89,6 +95,20 @@ func init() {
 		bombs[diameter] = zoomImg
 	}
 
+	// 加载深水炸弹图片（图片尺寸是实际显示的4倍）
+	for _, diameter := range depthChargeDiameters {
+		path := fmt.Sprintf("/bullets/depth_charges/%d.png", diameter)
+		img, err := loader.LoadImage(path)
+		if err != nil {
+			log.Fatalf("missing %s: %s", path, err)
+		}
+		opts := &ebiten.DrawImageOptions{Filter: ebiten.FilterLinear}
+		opts.GeoM.Scale(0.25, 0.25)
+		zoomImg := ebiten.NewImage(img.Bounds().Dx()/4, img.Bounds().Dy()/4)
+		zoomImg.DrawImage(img, opts)
+		depthCharges[diameter] = zoomImg
+	}
+
 	// 加载火箭弹图片（由 TGA 预先转换为透明底 PNG，加载时按1/4缩放）
 	for _, diameter := range rocketDiameters {
 		path := fmt.Sprintf("/bullets/rockets/%d.png", diameter)
@@ -129,6 +149,15 @@ func GetTorpedo(diameter int) *ebiten.Image {
 // GetBomb 获取炸弹弹药图片
 func GetBomb(diameter int) *ebiten.Image {
 	if img, ok := bombs[diameter]; ok {
+		return img
+	}
+	// 找不到就暴露出来
+	return NotFount
+}
+
+// GetDepthCharge 获取深水炸弹图片
+func GetDepthCharge(diameter int) *ebiten.Image {
+	if img, ok := depthCharges[diameter]; ok {
 		return img
 	}
 	// 找不到就暴露出来

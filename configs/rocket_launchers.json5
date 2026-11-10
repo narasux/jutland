@@ -33,9 +33,10 @@
     bulletSpread: 120,
     bulletSpeed: 520,
     proximityRadius: 0.25,
-    blastRadius: 0.75,
+    blastRadius: 0.9,
     fundsCost: 1,
-    antiShip: true,
+    antiShip: false,
+    antiSubmarine: true,
     antiAircraft: false
   },
   // 中国海军 81 式 122mm 舰载 50 管火箭炮（仿苏 BM-21「冰雹」M-21OF 弹；仅 516 九江舰对陆火力支援舰装备 5 座）
@@ -93,5 +94,44 @@
     fundsCost: 1,
     antiShip: false,
     antiAircraft: true
+  },
+  // --------- 深水炸弹 ----------
+  // 英国 Mk VII 深水炸弹舰尾滚架（5 发一槽，投掷距离约 4 格）
+  {
+    name: "UK/DC/5/MkVII",
+    bulletName: "UK/DC/300/1939/MkVII",
+    rocketCount: 5,
+    groupCount: 1,
+    shotInterval: 0.8,
+    groupInterval: 0.6,
+    reloadTime: 30,
+    range: 4,
+    bulletSpread: 80,
+    bulletSpeed: 120,
+    proximityRadius: 1.0,
+    blastRadius: 1.3,
+    fundsCost: 8,
+    antiShip: false,
+    antiSubmarine: true,
+    antiAircraft: false
+  },
+  // 美国 Mk 6 / Mk 7 深水炸弹舰尾滚架（5 发一槽）
+  {
+    name: "US/DC/5/Mk6",
+    bulletName: "US/DC/300/1940/Mk6",
+    rocketCount: 5,
+    groupCount: 1,
+    shotInterval: 0.8,
+    groupInterval: 0.6,
+    reloadTime: 28,
+    range: 4,
+    bulletSpread: 80,
+    bulletSpeed: 120,
+    proximityRadius: 1.0,
+    blastRadius: 1.3,
+    fundsCost: 8,
+    antiShip: false,
+    antiSubmarine: true,
+    antiAircraft: false
   },
 ]

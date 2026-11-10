@@ -77,6 +77,10 @@ type ShipWeapon struct {
 	// 最大射程（各类武器射程最大值）
 	MaxToShipRange  float64
 	MaxToPlaneRange float64
+	// 对水下潜艇的最大射程（反潜鱼雷 / 潜艇自身鱼雷）
+	MaxToSubmergedRange float64
+	// 是否装备可攻击水下潜艇的武器
+	HasAntiSubWeapon bool
 	// 拥有的武器情况
 	HasMainGun         bool
 	HasSecondaryGun    bool
@@ -202,6 +206,10 @@ type PlaneWeapon struct {
 	// 最大射程（各类武器射程最大值）
 	MaxToShipRange  float64
 	MaxToPlaneRange float64
+	// 对水下潜艇的最大射程（反潜鱼雷 / 潜艇自身鱼雷）
+	MaxToSubmergedRange float64
+	// 是否装备可攻击水下潜艇的武器
+	HasAntiSubWeapon bool
 }
 
 // AnyReloaded 是否还有机炮、未投放的炸弹或鱼雷、或能发射的火箭。

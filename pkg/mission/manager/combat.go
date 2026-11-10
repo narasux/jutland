@@ -97,7 +97,8 @@ func (m *MissionManager) updateShipWeaponFire() {
 			for _, bt := range bullets {
 				if bt.Type == objBullet.TypeTorpedo {
 					isTorpedoLaunched = true
-				} else if bt.Type == objBullet.TypeRocket {
+				} else if bt.Type == objBullet.TypeRocket || bt.Type == objBullet.TypeDepthCharge {
+					// 深弹按火箭发射音处理，不参与炮弹口径统计
 					isRocketLaunched = true
 				} else {
 					// 只有炮弹才计算口径，鱼雷发射都是一个声音
@@ -130,20 +131,21 @@ func (m *MissionManager) shipFireTargets(ship *objUnit.BattleShip) objUnit.FireT
 	target := m.state.Arena.Ships[ship.AttackTarget]
 	// 锁定目标要在射程内，开了迷雾时还得当前可见。看不见就改打别的可见敌人。
 	if target != nil &&
-		ship.CurPos.Distance(target.CurPos) < ship.Weapon.MaxToShipRange &&
-		m.state.SeenBy(ship.BelongPlayer, target.CurPos.MX, target.CurPos.MY) {
+		ship.CurPos.Distance(target.CurPos) < shipEngageRange(ship, target) &&
+		m.state.CanSeeShip(ship.BelongPlayer, target) {
 		takeShipTarget(target)
 	} else {
+		queryRange := max(ship.Weapon.MaxToShipRange, ship.Weapon.MaxToSubmergedRange)
 		m.combatBuckets.eachShip(
-			ship.CurPos.RX, ship.CurPos.RY, ship.Weapon.MaxToShipRange,
+			ship.CurPos.RX, ship.CurPos.RY, queryRange,
 			func(enemy *objUnit.BattleShip) bool {
 				if ship.BelongPlayer == enemy.BelongPlayer {
 					return false
 				}
-				if ship.CurPos.Distance(enemy.CurPos) > ship.Weapon.MaxToShipRange {
+				if ship.CurPos.Distance(enemy.CurPos) > shipEngageRange(ship, enemy) {
 					return false
 				}
-				if !m.state.SeenBy(ship.BelongPlayer, enemy.CurPos.MX, enemy.CurPos.MY) {
+				if !m.state.CanSeeShip(ship.BelongPlayer, enemy) {
 					return false
 				}
 				takeShipTarget(enemy)
@@ -184,6 +186,14 @@ func (m *MissionManager) shipFireTargets(ship *objUnit.BattleShip) objUnit.FireT
 		targets.AntiAircraft = antiAircraft
 	}
 	return targets
+}
+
+// shipEngageRange 返回本舰对目标可用的最大射程：水下目标只算反潜武器与潜艇鱼雷。
+func shipEngageRange(ship, target *objUnit.BattleShip) float64 {
+	if target.Submerged() {
+		return ship.Weapon.MaxToSubmergedRange
+	}
+	return ship.Weapon.MaxToShipRange
 }
 
 // betterPrimaryTarget 判断 candidate 是否比 current 更适合作为主炮 / 鱼雷的集火目标：
@@ -229,7 +239,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		}
 
 		if target := m.state.Arena.Ships[ship.AttackTarget]; target != nil &&
-			m.state.SeenBy(ship.BelongPlayer, target.CurPos.MX, target.CurPos.MY) {
+			m.state.CanSeeShip(ship.BelongPlayer, target) {
 			plane := ship.Aircraft.TakeOff(ship, object.TypeShip)
 			// 没有合适的飞机，那就跳过
 			if plane == nil {
@@ -415,7 +425,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 					if bombReleased || rocketLaunched || torpedoLaunched {
 						break
 					}
-					if bt.Type == objBullet.TypeBomb {
+					if bt.Type == objBullet.TypeBomb || bt.Type == objBullet.TypeDepthCharge {
 						bombReleased = true
 					} else if bt.Type == objBullet.TypeRocket {
 						rocketLaunched = true
@@ -449,10 +459,10 @@ func (m *MissionManager) preferredPlaneFireTarget(plane *objUnit.Plane) objUnit.
 	if plane.CurAttackTarget == "" {
 		return nil
 	}
-	if target := m.state.Arena.Planes[plane.CurAttackTarget]; target != nil && canPlaneFireAtTarget(plane, target) {
+	if target := m.state.Arena.Planes[plane.CurAttackTarget]; target != nil && m.canPlaneFireAtTarget(plane, target) {
 		return target
 	}
-	if target := m.state.Arena.Ships[plane.CurAttackTarget]; target != nil && canPlaneFireAtTarget(plane, target) {
+	if target := m.state.Arena.Ships[plane.CurAttackTarget]; target != nil && m.canPlaneFireAtTarget(plane, target) {
 		return target
 	}
 	return nil
@@ -469,7 +479,7 @@ func (m *MissionManager) planeFireCandidates(plane *objUnit.Plane) []objUnit.Hur
 		m.combatBuckets.eachPlane(
 			plane.CurPos.RX, plane.CurPos.RY, plane.Weapon.MaxToPlaneRange,
 			func(enemy *objUnit.Plane) bool {
-				if canPlaneFireAtTarget(plane, enemy) {
+				if m.canPlaneFireAtTarget(plane, enemy) {
 					candidates = append(candidates, enemy)
 				}
 				return false
@@ -479,7 +489,7 @@ func (m *MissionManager) planeFireCandidates(plane *objUnit.Plane) []objUnit.Hur
 		m.combatBuckets.eachShip(
 			plane.CurPos.RX, plane.CurPos.RY, plane.Weapon.MaxToShipRange,
 			func(enemy *objUnit.BattleShip) bool {
-				if canPlaneFireAtTarget(plane, enemy) {
+				if m.canPlaneFireAtTarget(plane, enemy) {
 					candidates = append(candidates, enemy)
 				}
 				return false
@@ -488,7 +498,7 @@ func (m *MissionManager) planeFireCandidates(plane *objUnit.Plane) []objUnit.Hur
 		m.combatBuckets.eachPlane(
 			plane.CurPos.RX, plane.CurPos.RY, plane.Weapon.MaxToShipRange,
 			func(enemy *objUnit.Plane) bool {
-				if canPlaneFireAtTarget(plane, enemy) {
+				if m.canPlaneFireAtTarget(plane, enemy) {
 					candidates = append(candidates, enemy)
 				}
 				return false
@@ -500,7 +510,7 @@ func (m *MissionManager) planeFireCandidates(plane *objUnit.Plane) []objUnit.Hur
 
 // canPlaneFireAtTarget 判断目标是否敌方、类型是否匹配，以及是否在对应武器最大射程内。
 // 射界与装填仍由具体武器在 Fire 阶段检查。
-func canPlaneFireAtTarget(plane *objUnit.Plane, target objUnit.Hurtable) bool {
+func (m *MissionManager) canPlaneFireAtTarget(plane *objUnit.Plane, target objUnit.Hurtable) bool {
 	if target == nil || target.Player() == plane.Player() {
 		return false
 	}
@@ -511,6 +521,15 @@ func canPlaneFireAtTarget(plane *objUnit.Plane, target objUnit.Hurtable) bool {
 	case object.TypeShip:
 		switch enemy := target.(type) {
 		case *objUnit.BattleShip:
+			// 被派去攻击的敌舰必须当前可见（水下潜艇只有被点亮才可见）
+			if !m.state.CanSeeShip(plane.BelongPlayer, enemy) {
+				return false
+			}
+			// 下潜潜艇只有带深弹的机型能打，普通轰炸机不会被派去俯冲
+			if enemy.Submerged() {
+				return plane.HasAntiSubWeapon() &&
+					plane.CurPos.Distance(enemy.CurPos) <= plane.Weapon.MaxToShipRange
+			}
 			return plane.CurPos.Distance(enemy.CurPos) <= plane.Weapon.MaxToShipRange
 		case *objUnit.Plane:
 			return plane.Type != objUnit.PlaneTypeTorpedoBomber && enemy.IsOnGround() &&
@@ -589,6 +608,54 @@ func beyondHitReach(bx, by, tx, ty, reach float64) bool {
 	return dx*dx+dy*dy > reach*reach
 }
 
+// depthChargeShouldExplode 深弹到瞄准点附近 / 越过瞄准点 / 寿命耗尽 / 直接砸中舰体时引爆。
+func (m *MissionManager) depthChargeShouldExplode(bt *objBullet.Bullet) bool {
+	if bt.Life <= 0 {
+		return true
+	}
+	if bt.ProximityRadius > 0 && bt.CurPos.Near(bt.TargetPos, bt.ProximityRadius) {
+		return true
+	}
+	radians := bt.Rotation * math.Pi / 180
+	along := (bt.CurPos.RX-bt.TargetPos.RX)*math.Sin(radians) -
+		(bt.CurPos.RY-bt.TargetPos.RY)*math.Cos(radians)
+	if along >= 0 {
+		return true
+	}
+	return m.insideAnyHull(bt.CurPos)
+}
+
+// resolveDepthChargeDamage 深弹落点 AoE：只结算潜艇。
+// 水面 / 过渡态潜艇按水面规则结算；完全下潜的还要求仍被本方探测到（盲炸无效）。
+func (m *MissionManager) resolveDepthChargeDamage(bt *objBullet.Bullet) {
+	hit := false
+	m.combatBuckets.eachShip(
+		bt.CurPos.RX, bt.CurPos.RY, bt.BlastRadius,
+		func(ship *objUnit.BattleShip) bool {
+			if ship.CurHP <= 0 || ship.Type != objUnit.ShipTypeSubmarine {
+				return false
+			}
+			if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
+				return false
+			}
+			if ship.Submerged() && !m.state.CanSeeShip(bt.BelongPlayer, ship) {
+				return false
+			}
+			if ship.CurPos.Distance(bt.CurPos) > bt.BlastRadius {
+				return false
+			}
+			ship.HurtBy(bt)
+			hit = true
+			return false
+		},
+	)
+	if hit {
+		bt.HitObjType = object.TypeShip
+	} else {
+		bt.HitObjType = object.TypeWater
+	}
+}
+
 // 更新弹药状态
 func (m *MissionManager) updateShotBullets() {
 	for i := 0; i < len(m.state.Arena.ForwardingBullets); i++ {
@@ -616,6 +683,12 @@ func (m *MissionManager) updateShotBullets() {
 				}
 				if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == ship.BelongPlayer {
 					return false
+				}
+				// 下潜潜艇：只有反潜弹药能命中，并且必须仍被本方探测到（盲射不结算）
+				if ship.Submerged() {
+					if !bt.CanHitSubmerged() || !m.state.CanSeeShip(bt.BelongPlayer, ship) {
+						return false
+					}
 				}
 
 				reach := targetHitRadius(ship.Length, ship.Width) + bt.Speed
@@ -737,6 +810,16 @@ func (m *MissionManager) updateShotBullets() {
 
 	arrivedBullets, forwardingBullets := []*objBullet.Bullet{}, []*objBullet.Bullet{}
 	for _, bt := range m.state.Arena.ForwardingBullets {
+		// 深水炸弹：独立引爆分支，不走通用命中结算（只伤潜艇）
+		if bt.Type == objBullet.TypeDepthCharge {
+			if m.depthChargeShouldExplode(bt) {
+				m.resolveDepthChargeDamage(bt)
+				arrivedBullets = append(arrivedBullets, bt)
+			} else {
+				forwardingBullets = append(forwardingBullets, bt)
+			}
+			continue
+		}
 		if bt.HasAirburst() {
 			if rocketShouldExplode(bt) {
 				resolveRocketDamage(bt)
@@ -857,7 +940,10 @@ func (m *MissionManager) guideBullet(bt *objBullet.Bullet) {
 		return
 	}
 	if target, ok := m.state.Arena.Ships[bt.TargetShipUid]; ok && target != nil {
-		bt.GuidePos = target.CurPos
+		// 失去探测后只飞最后已知点，不再读真实位置（否则会从航迹泄露潜艇位置）
+		if m.state.CanSeeShip(bt.BelongPlayer, target) {
+			bt.GuidePos = target.CurPos
+		}
 	}
 	bt.SteerTowards(bt.GuidePos, homingTurnPerTick(bt.Guidance.TurnRate))
 }
@@ -917,6 +1003,12 @@ const (
 	bombHitCells = 0.7
 	bombHitLife  = 40
 
+	// 深水炸弹落点：水柱要明显大于普通炮弹，才能看出"这一片被炸过"
+	depthChargePlumeCells  = 1.6
+	depthChargePlumeLife   = 50
+	depthChargeSplashCells = 2.4
+	depthChargeSplashLife  = 46
+
 	// 落水水花 / 落陆尘土的目标直径（地图格）按口径档位索引，见下方 splashCells / dustCells
 	// 炸弹落点比同口径炮弹更铺开
 	bombSplashCells = 0.8
@@ -962,6 +1054,13 @@ func hitEffectTier(diameter int) int {
 // hitEffect 返回到达弹药的命中特效参数；该弹种与落点没有对应表现时返回 false。
 // 纯函数，只读弹药类型、口径与落点，便于单测。
 func hitEffect(bt *objBullet.Bullet) (objExplosion.Kind, float64, int, bool) {
+	// 深水炸弹：命中潜艇用水下爆炸水柱，落水给一圈更大的水花
+	if bt.Type == objBullet.TypeDepthCharge {
+		if bt.HitObjType == object.TypeShip {
+			return objExplosion.KindTorpedoPlume, depthChargePlumeCells, depthChargePlumeLife, true
+		}
+		return objExplosion.KindSplash, depthChargeSplashCells, depthChargeSplashLife, true
+	}
 	// 火箭空爆在发射阶段已有自己的效果，不重复生成
 	if bt.Type == objBullet.TypeRocket {
 		return objExplosion.KindFlash, 0, 0, false

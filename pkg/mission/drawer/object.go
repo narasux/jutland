@@ -123,6 +123,50 @@ func drawUnitHitBox(screen *ebiten.Image, ms *state.MissionState, battleUnit obj
 	}
 }
 
+// drawSubmarineRevealBox 调试秘籍：用红色舰体框标注敌方潜艇，只做表现。
+func drawSubmarineRevealBox(screen *ebiten.Image, ms *state.MissionState, ship *objUnit.BattleShip) {
+	x, y := ms.CameraPosToScreen(ship.CurPos)
+	blockSize := ms.MapBlockDisplaySize()
+	corners := rotatedRectangleCorners(
+		x, y,
+		ship.Length/constants.MapBlockSize*blockSize,
+		ship.Width/constants.MapBlockSize*blockSize,
+		ship.CurRotation,
+	)
+	clr := color.RGBA{R: 255, G: 64, B: 64, A: 230}
+	for idx, corner := range corners {
+		next := corners[(idx+1)%len(corners)]
+		vector.StrokeLine(
+			screen,
+			float32(corner[0]), float32(corner[1]),
+			float32(next[0]), float32(next[1]),
+			2, clr, false,
+		)
+	}
+}
+
+// drawSonarRanges 绘制选中己方舰船的声呐/水听器半径（仅表现，不参与判定）。
+func (d *Drawer) drawSonarRanges(screen *ebiten.Image, ms *state.MissionState) {
+	selected := selectedShipSet(ms.Interaction.SelectedShips)
+	for _, ship := range ms.Arena.OrderedShips() {
+		if ship.CurHP <= 0 || !ms.View.Camera.Contains(ship.CurPos) {
+			continue
+		}
+		if _, ok := selected[ship.Uid]; !ok {
+			continue
+		}
+		radius := ship.SonarRange()
+		if radius <= 0 {
+			continue
+		}
+		x, y := ms.CameraPosToScreen(ship.CurPos)
+		vector.StrokeCircle(
+			screen, float32(x), float32(y),
+			float32(radius*ms.MapBlockDisplaySize()), 1, colorx.LightGreen, false,
+		)
+	}
+}
+
 // 绘制支援舰治疗范围圈（仅在选中己方医疗船或维修船时显示）
 func (d *Drawer) drawHospitalShipHealRange(screen *ebiten.Image, ms *state.MissionState) {
 	selected := selectedShipSet(ms.Interaction.SelectedShips)
@@ -444,14 +488,41 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	// 各舰仍在空中的飞机数（含出击、作战与返航）一次性统计，避免逐舰遍历飞机表
 	airbornePlaneCnt := airbornePlaneCounts(ms.Arena.Planes)
 	for _, s := range ms.Arena.OrderedShips() {
-		// 只有在屏幕中、且没有被当前玩家迷雾挡住的才渲染
-		if !ms.View.Camera.Contains(s.CurPos) || ms.ConcealsEnemy(s.BelongPlayer, s.CurPos.MX, s.CurPos.MY) {
+		if !ms.View.Camera.Contains(s.CurPos) {
+			continue
+		}
+		visible := ms.CanSeeShip(ms.Player.CurPlayer, s)
+		if !visible {
+			// 调试秘籍：未探测到的敌方潜艇只画红框，不画舰体
+			if ms.RevealsSubmarine(ms.Player.CurPlayer, s) {
+				drawSubmarineRevealBox(screen, ms, s)
+			}
 			continue
 		}
 
 		sImg, sImgScale := shipResource(s.CurrentTopImageName(), ms.UI.GameOpts.Zoom)
 		shipX, shipY := ms.CameraPosToScreen(s.CurPos)
-		drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
+		if ms.Player.RevealSubmarines && s.BelongPlayer != ms.Player.CurPlayer &&
+			s.Type == objUnit.ShipTypeSubmarine {
+			drawSubmarineRevealBox(screen, ms, s)
+		}
+		if s.BelongPlayer == ms.Player.CurPlayer && s.Submerged() {
+			// 己方潜艇：半透明 + 潜望镜标识，避免玩家找不到自己的艇
+			drawImageCenteredColored(screen, sImg, shipX, shipY, s.CurRotation, sImgScale, 1, 1, 1, 0.55)
+			vector.StrokeCircle(
+				screen, float32(shipX), float32(shipY),
+				float32(7*ms.ZoomScale()), 1.2, colorx.SkyBlue, false,
+			)
+		} else {
+			drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
+			// 被本方声呐点亮、但仍在水下的敌潜艇：加一圈接触提示
+			if s.BelongPlayer != ms.Player.CurPlayer && s.Submerged() {
+				vector.StrokeCircle(
+					screen, float32(shipX), float32(shipY),
+					float32(9*ms.ZoomScale()), 1.4, color.RGBA{R: 255, G: 96, B: 96, A: 220}, false,
+				)
+			}
+		}
 		if ms.UI.DebugFlags.ShowHitBoxes {
 			drawUnitHitBox(screen, ms, s)
 		}
@@ -610,13 +681,33 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 // 绘制消亡中的战舰
 func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState) {
 	for _, s := range ms.Arena.DestroyedShips {
-		if !ms.View.Camera.Contains(s.CurPos) || ms.ConcealsEnemy(s.BelongPlayer, s.CurPos.MX, s.CurPos.MY) {
+		if !ms.View.Camera.Contains(s.CurPos) || !ms.CanSeeShip(ms.Player.CurPlayer, s) {
 			continue
 		}
 
 		sImg, sImgScale := shipResource(s.CurrentTopImageName(), ms.UI.GameOpts.Zoom)
 		shipX, shipY := ms.CameraPosToScreen(s.CurPos)
-		drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
+		if ms.Player.RevealSubmarines && s.BelongPlayer != ms.Player.CurPlayer &&
+			s.Type == objUnit.ShipTypeSubmarine {
+			drawSubmarineRevealBox(screen, ms, s)
+		}
+		if s.BelongPlayer == ms.Player.CurPlayer && s.Submerged() {
+			// 己方潜艇：半透明 + 潜望镜标识，避免玩家找不到自己的艇
+			drawImageCenteredColored(screen, sImg, shipX, shipY, s.CurRotation, sImgScale, 1, 1, 1, 0.55)
+			vector.StrokeCircle(
+				screen, float32(shipX), float32(shipY),
+				float32(7*ms.ZoomScale()), 1.2, colorx.SkyBlue, false,
+			)
+		} else {
+			drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
+			// 被本方声呐点亮、但仍在水下的敌潜艇：加一圈接触提示
+			if s.BelongPlayer != ms.Player.CurPlayer && s.Submerged() {
+				vector.StrokeCircle(
+					screen, float32(shipX), float32(shipY),
+					float32(9*ms.ZoomScale()), 1.4, color.RGBA{R: 255, G: 96, B: 96, A: 220}, false,
+				)
+			}
+		}
 
 		// 绘制爆炸效果
 		explodeImg := textureImg.GetShipExplode(s.CurHP)

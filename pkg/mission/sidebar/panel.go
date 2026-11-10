@@ -19,6 +19,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/drawer"
 	md "github.com/narasux/jutland/pkg/mission/metadata"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/mission/unitpanel"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
@@ -354,7 +355,14 @@ func (p *Panel) drawMinimapBuildings(screen *ebiten.Image, ms *state.MissionStat
 
 func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {
 	for _, ship := range ms.Arena.OrderedShips() {
-		if ms.ConcealsEnemy(ship.BelongPlayer, ship.CurPos.MX, ship.CurPos.MY) {
+		if !ms.CanSeeShip(ms.Player.CurPlayer, ship) {
+			if ms.RevealsSubmarine(ms.Player.CurPlayer, ship) {
+				x, y := p.mapToSidebar(ms, ship.CurPos.RX, ship.CurPos.RY)
+				vector.StrokeRect(
+					screen, float32(x-5), float32(y-5), 10, 10, 2,
+					color.RGBA{R: 255, G: 64, B: 64, A: 230}, false,
+				)
+			}
 			continue
 		}
 		img := textureImg.GetAbbrShip(ship.TypeAbbr, ship.BelongPlayer != ms.Player.CurPlayer)
@@ -365,6 +373,13 @@ func (p *Panel) drawMinimapShips(screen *ebiten.Image, ms *state.MissionState) {
 		w, h := float64(img.Bounds().Dx())*0.7, float64(img.Bounds().Dy())*0.7
 		opts.GeoM.Translate(x-w/2, y-h/2)
 		screen.DrawImage(img, opts)
+		if ms.Player.RevealSubmarines && ship.BelongPlayer != ms.Player.CurPlayer &&
+			ship.Type == objUnit.ShipTypeSubmarine {
+			vector.StrokeRect(
+				screen, float32(x-6), float32(y-6), 12, 12, 2,
+				color.RGBA{R: 255, G: 64, B: 64, A: 230}, false,
+			)
+		}
 	}
 }
 

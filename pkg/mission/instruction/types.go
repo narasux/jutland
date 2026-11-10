@@ -13,6 +13,8 @@ const (
 	NameShipMove        = "ShipMove"
 	NameShipMovePath    = "ShipMovePath"
 	NameShipSummon      = "ShipSummon"
+	NameShipDive        = "ShipDive"
+	NameShipSurface     = "ShipSurface"
 	NamePlaneAttack     = "PlaneAttack"
 	NamePlaneReturn     = "PlaneReturn"
 	NamePlaneScout      = "PlaneScout"

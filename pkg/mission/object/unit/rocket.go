@@ -41,6 +41,8 @@ type RocketLauncher struct {
 	AntiShip bool `json:"antiShip"`
 	// 能否防空
 	AntiAircraft bool `json:"antiAircraft"`
+	// 能否攻击水下潜艇（深水炸弹 / 反潜火箭）
+	AntiSubmarine bool `json:"antiSubmarine"`
 	// 近炸触发半径
 	ProximityRadius float64 `json:"proximityRadius"`
 	// 造价
@@ -74,7 +76,7 @@ func (r *RocketLauncher) IsAvailableAntiType(objType object.Type) bool {
 	if r.AntiAircraft && objType == object.TypePlane {
 		return true
 	}
-	if r.AntiShip && objType == object.TypeShip {
+	if (r.AntiShip || r.AntiSubmarine) && objType == object.TypeShip {
 		return true
 	}
 	return false
@@ -133,6 +135,16 @@ func (r *RocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objB
 	targetPos := objPos.NewR(targetRx, targetRY)
 	if !r.InShotRange(sState.CurRotation, curPos, targetPos) {
 		return nil
+	}
+	if target, ok := enemy.(*BattleShip); ok {
+		// 普通火箭打不到下潜潜艇；深弹架 / 反潜火箭才行
+		if target.Submerged() && !r.AntiSubmarine {
+			return nil
+		}
+		// 纯反潜武器（深弹架 / 反潜火箭）只打潜艇，不朝水面舰倾泻
+		if r.AntiSubmarine && !r.AntiShip && target.Type != ShipTypeSubmarine {
+			return nil
+		}
 	}
 
 	distance := curPos.Distance(targetPos)

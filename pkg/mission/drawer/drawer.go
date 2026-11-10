@@ -70,6 +70,7 @@ func (d *Drawer) Draw(
 		d.drawObjectTrails(screen, misState)
 		d.drawExplosions(screen, misState)
 		d.drawHospitalShipHealRange(screen, misState)
+		d.drawSonarRanges(screen, misState)
 		d.drawBattleShips(screen, misState)
 		d.drawDestroyedShips(screen, misState)
 		d.drawFlyingPlanes(screen, misState)

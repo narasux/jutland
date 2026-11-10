@@ -2,6 +2,7 @@ package drawer
 
 import (
 	"fmt"
+	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -174,7 +175,15 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 	xOffset := float64(ms.View.Layout.Width-abbrMapWidth) / 2
 
 	for _, s := range ms.Arena.OrderedShips() {
-		if ms.ConcealsEnemy(s.BelongPlayer, s.CurPos.MX, s.CurPos.MY) {
+		if !ms.CanSeeShip(ms.Player.CurPlayer, s) {
+			if ms.RevealsSubmarine(ms.Player.CurPlayer, s) {
+				xIndex := s.CurPos.RX / float64(ms.Core.MissionMD.MapCfg.Width) * float64(abbrMapWidth)
+				yIndex := s.CurPos.RY / float64(ms.Core.MissionMD.MapCfg.Height) * float64(abbrMapHeight)
+				vector.StrokeRect(
+					screen, float32(xIndex+xOffset-5), float32(yIndex-5), 10, 10, 2,
+					color.RGBA{R: 255, G: 64, B: 64, A: 230}, false,
+				)
+			}
 			continue
 		}
 		sImg := textureImg.GetAbbrShip(s.TypeAbbr, s.BelongPlayer != ms.Player.CurPlayer)
@@ -186,6 +195,13 @@ func (d *Drawer) drawAbbrShips(screen *ebiten.Image, ms *state.MissionState) {
 		w, h := float64(sImg.Bounds().Dx()), float64(sImg.Bounds().Dy())
 		opts.GeoM.Translate(xIndex+xOffset-w/2, yIndex-h/2)
 		screen.DrawImage(sImg, opts)
+		if ms.Player.RevealSubmarines && s.BelongPlayer != ms.Player.CurPlayer &&
+			s.Type == objUnit.ShipTypeSubmarine {
+			vector.StrokeRect(
+				screen, float32(xIndex+xOffset-6), float32(yIndex-6), 12, 12, 2,
+				color.RGBA{R: 255, G: 64, B: 64, A: 230}, false,
+			)
+		}
 	}
 }
 

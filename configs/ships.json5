@@ -15669,6 +15669,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 美国 Mk 6 深弹架（全向投掷）
+        {
+          name: "US/DC/5/Mk6",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     },
   },
@@ -15907,6 +15916,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 美国 Mk 6 深弹架（全向投掷）
+        {
+          name: "US/DC/5/Mk6",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     },
   },
@@ -16047,6 +16065,11 @@
     rotateSpeed: 1.0,
     length: 113,
     width: 10.1,
+    sightRange: 12,
+    diveTime: 10,
+    surfaceTime: 8,
+    submergedSpeedRatio: 0.46,
+    defaultDiveState: "surface",
     fundsCost: 65,
     timeCost: 25,
     weapon: {
@@ -18213,6 +18236,11 @@
     rotateSpeed: 1.6,
     length: 67.2,
     width: 6.2,
+    sightRange: 12,
+    diveTime: 12,
+    surfaceTime: 9,
+    submergedSpeedRatio: 0.43,
+    defaultDiveState: "surface",
     fundsCost: 50,
     timeCost: 20,
     weapon: {
@@ -33280,6 +33308,11 @@
     rotateSpeed: 1.4,
     length: 98.4,
     width: 8.2,
+    sightRange: 12,
+    diveTime: 8,
+    surfaceTime: 8,
+    submergedSpeedRatio: 0.36,
+    defaultDiveState: "surface",
     fundsCost: 55,
     timeCost: 21,
     weapon: {
@@ -39138,6 +39171,15 @@
           posPercent: -0.22,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 英国 Mk VII 深弹架（全向投掷）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }

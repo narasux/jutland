@@ -76,7 +76,7 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			if ship.BelongPlayer == misState.Player.CurPlayer {
 				continue
 			}
-			if misState.ConcealsEnemy(ship.BelongPlayer, ship.CurPos.MX, ship.CurPos.MY) {
+			if !misState.CanSeeShip(misState.Player.CurPlayer, ship) {
 				continue
 			}
 			if geometry.IsPointInRotatedRectangle(
@@ -176,6 +176,15 @@ func (h *HumanInputHandler) handleShipMove(misState *state.MissionState) map[str
 			dx, dy := rand.Intn(7)-3, rand.Intn(7)-3
 			// 通过 ShipMove 指令实现散开行为
 			handleMove(shipUid, misState.Arena.Ships[shipUid].CurPos, dx, dy)
+		}
+	}
+
+	// 按下 D 切换选中潜艇的下潜/上浮（水面舰忽略；过渡中不响应）
+	if inpututil.IsKeyJustPressed(ebiten.KeyD) {
+		for _, shipUid := range misState.Interaction.SelectedShips {
+			if diveInstr := instr.NewDiveToggle(misState.Arena.Ships[shipUid]); diveInstr != nil {
+				instructions[diveInstr.Uid()] = diveInstr
+			}
 		}
 	}
 

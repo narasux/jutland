@@ -418,6 +418,8 @@
         }
       ],
       bombs: [
+
+
         // 弹舱（500kg 主弹 + 2 枚 100kg，近距俯冲投放）
         {
           name: "SU/BB/500/FAB500",
@@ -1704,6 +1706,14 @@
         }
       ],
       bombs: [
+
+        // 反潜深弹挂架
+        {
+          name: "US/DC/300/1940/Mk6",
+          posPercent: 0.1,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
         {
           name: "US/BB/907/AN-M66",
           posPercent: 0.3,
@@ -1716,12 +1726,6 @@
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
-        {
-          name: "US/BB/227/AN-M64",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        }
       ],
       releaseInterval: 0.2
     }
@@ -2197,9 +2201,11 @@
         }
       ],
       bombs: [
+
+        // 反潜深弹挂架
         {
-          name: "US/BB/907/LB/AN-M66",
-          posPercent: 0.3,
+          name: "US/DC/300/1940/Mk6",
+          posPercent: 0.1,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
@@ -2210,7 +2216,7 @@
           leftFiringArc: [340, 360]
         },
         {
-          name: "US/BB/454/LB/AN-M65",
+          name: "US/BB/907/LB/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
@@ -2232,7 +2238,7 @@
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
-        }
+        },
       ],
       releaseInterval: 0.2
     }
@@ -6668,9 +6674,11 @@
         }
       ],
       bombs: [
+
+        // 反潜深弹挂架
         {
-          name: "UK/BB/114",
-          posPercent: 0.3,
+          name: "UK/DC/300/1939/MkVII",
+          posPercent: 0.1,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
@@ -6691,7 +6699,7 @@
           posPercent: 0.3,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
-        }
+        },
       ],
       releaseInterval: 0.2
     }

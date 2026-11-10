@@ -274,6 +274,24 @@ func (p *Panel) drawBasicInfo(screen *ebiten.Image, ms *state.MissionState, ship
 	if len(ships) == 1 && p.hasTarget {
 		p.drawNavButton(screen, p.targetButtonRect(), theme.TriangleRight)
 	}
+	if len(ships) == 1 && ships[0].Type == objUnit.ShipTypeSubmarine {
+		p.drawDiveButton(screen, ms, ships[0])
+	}
+}
+
+// drawDiveButton 在「潜航状态」行右侧绘制下潜/上浮按钮。
+// 过渡态直接显示当前状态，且不提供点击（由命中区控制）。
+func (p *Panel) drawDiveButton(screen *ebiten.Image, ms *state.MissionState, ship *objUnit.BattleShip) {
+	area := p.computeDiveRect(ms, ship)
+	if area.W == 0 {
+		return
+	}
+	fill, border, textColor := buttonIdle, sectionBorder, colorx.Gold
+	if p.cursorAt(area) && !ship.DiveTransitioning() {
+		fill = buttonHover
+	}
+	p.drawRoundedRect(screen, area, theme.CornerRadius, fill, border)
+	p.drawCenteredText(screen, ship.DiveActionText(), area, theme.SizeCaption, textColor)
 }
 
 // infoGroupLayout 计算分组节的统一行高与内容起始 Y，供绘制与命中区共用同一几何。
@@ -309,6 +327,31 @@ func (p *Panel) computeTargetRect(ms *state.MissionState, ship *objUnit.BattleSh
 					Y: y + (info.lineH-20)/2,
 					W: 26,
 					H: 20,
+				}
+			}
+			y += info.lineH
+		}
+	}
+	return Rect{}
+}
+
+// computeDiveRect 定位「潜航状态」行右侧的下潜/上浮按钮。
+func (p *Panel) computeDiveRect(ms *state.MissionState, ship *objUnit.BattleShip) Rect {
+	groups := p.shipGroups(ms, ship)
+	info := p.infoGroupLayout(p.layout.Info, groups)
+	y := info.contentTop
+	diveLabel := i18n.Text(i18n.MsgUnitPanelDiveState)
+	for _, group := range groups {
+		if group.title != "" {
+			y += info.lineH
+		}
+		for _, item := range group.items {
+			if item.label == diveLabel {
+				return Rect{
+					X: p.layout.Info.X + p.layout.Info.W - 62,
+					Y: y + (info.lineH-15)/2,
+					W: 54,
+					H: 15,
 				}
 			}
 			y += info.lineH
@@ -363,8 +406,19 @@ func (p *Panel) shipGroups(ms *state.MissionState, ship *objUnit.BattleShip) []i
 			numeric: true,
 		},
 		{label: i18n.Text(i18n.MsgUnitPanelStatus), value: status},
-		{label: i18n.Text(i18n.MsgUnitPanelGroup), value: group, numeric: true},
 	}
+	if ship.Type == objUnit.ShipTypeSubmarine {
+		items = append(items,
+			infoItem{label: i18n.Text(i18n.MsgUnitPanelDiveState), value: ship.DiveStateText()},
+			infoItem{
+				label:   i18n.Text(i18n.MsgUnitPanelSonar),
+				value:   fmt.Sprintf("%.0f", ship.SonarRange()),
+				numeric: true,
+			},
+			infoItem{label: i18n.Text(i18n.MsgUnitPanelDetected), value: detectedText(ship)},
+		)
+	}
+	items = append(items, infoItem{label: i18n.Text(i18n.MsgUnitPanelGroup), value: group, numeric: true})
 	if ship.Aircraft.HasPlane {
 		aircraft := ship.Aircraft.Status(ship.Uid, ms.Arena.Planes).Total
 		items = append(items, infoItem{
@@ -430,6 +484,14 @@ func (p *Panel) drawInfoRow(screen *ebiten.Image, y, lineH, labelW float64, item
 		valueX = area.X + area.W - 12 - vw
 	}
 	p.drawText(screen, value, valueX, y, fontSize, valueFace, colorx.White)
+}
+
+// detectedText 己方潜艇当前是否被任一敌方声呐点亮。
+func detectedText(ship *objUnit.BattleShip) string {
+	if ship.DetectedByAny(objUnit.SimTick()) {
+		return i18n.Text(i18n.MsgUnitPanelDetected)
+	}
+	return i18n.Text(i18n.MsgUnitPanelNotDetected)
 }
 
 func focusedShipFromSlice(ships []*objUnit.BattleShip, uid string) *objUnit.BattleShip {

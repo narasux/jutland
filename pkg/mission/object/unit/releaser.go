@@ -40,6 +40,8 @@ type Releaser struct {
 	LeftFiringArc FiringArc
 	// 右射界 (0, 180]
 	RightFiringArc FiringArc
+	// 能否攻击下潜潜艇（深水炸弹）
+	AntiSubmarine bool `json:"antiSubmarine"`
 	// 是否已释放
 	Released bool
 }
@@ -71,6 +73,18 @@ func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos
 func (r *Releaser) targetAcceptable(enemy Hurtable) bool {
 	switch enemy.ObjType() {
 	case object.TypeShip:
+		ship, ok := enemy.(*BattleShip)
+		if !ok {
+			return true
+		}
+		// 纯反潜挂载（深弹）只对潜艇投放
+		if r.AntiSubmarine && ship.Type != ShipTypeSubmarine {
+			return false
+		}
+		// 普通炸弹 / 鱼雷打不到下潜潜艇
+		if ship.Submerged() {
+			return r.AntiSubmarine
+		}
 		return true
 	case object.TypePlane:
 		plane, ok := enemy.(*Plane)
@@ -238,5 +252,8 @@ func NewReleaser(name string, posPercent float64, leftFireArc, rightFireArc Firi
 	r.LeftFiringArc = leftFireArc
 	r.RightFiringArc = rightFireArc
 	r.BulletType = objBullet.GetType(r.BulletName)
+	if r.BulletType == objBullet.TypeDepthCharge {
+		r.AntiSubmarine = true
+	}
 	return &r
 }

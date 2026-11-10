@@ -2280,7 +2280,7 @@
       },
       {
         label: "Bombs (Level)",
-        value: "2000 lb x2 + 1000 lb x4 (about 3.6 t)",
+        value: "2000 lb x2 + 1000 lb x3 (about 3.2 t)",
       },
     ],
     description: "The Boeing B-17G Flying Fortress was the most-produced model of the B-17 family, entering service in 1943 and famed for its toughness and heavy defensive armament. Treated as a level bomber in game, armed with thirteen 12.7mm Browning M2 heavy machine guns (chin 2, cheek 2, dorsal 2, ball 2, waist 2, tail 2, radio 1) and four level-dropped bombs (2000 lb x2 + 1000 lb x4, about 3.6 t).",
@@ -2336,10 +2336,14 @@
       },
       {
         label: "Bombs (Level)",
-        value: "2000 lb x2 + 1000 lb x4 (about 3.6 t)",
+        value: "2000 lb x2 + 1000 lb x3 (about 3.2 t)",
       },
-    ],
-    description: "The Consolidated B-24D Liberator was a US four-engined heavy bomber entering service in 1942, with greater range and bombload than the B-17; the aircraft shown is B-24D \"Lady Be Good\" of the 514th Bomb Squadron, 376th Bomb Group. Treated as a level bomber in game, it carries ten 12.7mm Browning M2s (nose turret 2, dorsal 2, ball 2, waist 2, tail 2) and six level-dropped bombs (2000 lb x2 + 1000 lb x4, about 3.6 t).",
+          {
+        label: "Anti-submarine Bombs",
+        value: "4x 300 lb Mk 6 depth charges",
+      },
+],
+    description: "The Consolidated B-24D Liberator was a US four-engined heavy bomber entering service in 1942, with greater range and bombload than the B-17; the aircraft shown is B-24D \"Lady Be Good\" of the 514th Bomb Squadron, 376th Bomb Group. Treated as a level bomber in game, it carries ten 12.7mm Browning M2s (nose turret 2, dorsal 2, ball 2, waist 2, tail 2) and five level-dropped bombs (2000 lb x2 + 1000 lb x4, about 3.6 t).",
     author: "Unknown",
     links: [
       {
@@ -3454,7 +3458,11 @@
         label: "Torpedoes",
         value: "2x4 533mm",
       },
-    ],
+          {
+        label: "Depth Charges",
+        value: "1x5 Mk 6 depth charge rails",
+      },
+],
     description: "USS Hammann (DD-412) was a Sims-class destroyer that screened carriers at the Battle of the Coral Sea. At Midway she came alongside the damaged USS Yorktown to provide pumps, power, and damage-control support. Torpedoes from the Japanese submarine I-168 struck both ships, breaking Hammann in two and sinking her rapidly.",
     author: "Midnike",
     links: [
@@ -7554,7 +7562,11 @@
         label: "Torpedoes",
         value: "2x4 533mm",
       },
-    ],
+          {
+        label: "Depth Charges",
+        value: "1x5 Mk 6 depth charge rails",
+      },
+],
     description: "USS Porter (DD-356) led a class of large destroyer leaders designed to serve as squadron flagships with heavier guns and communications facilities. She fought in the Pacific during 1942. After being disabled during the Battle of the Santa Cruz Islands, Porter was abandoned and sunk by USS Shaw.",
     author: "Midnike",
     links: [
@@ -7940,7 +7952,11 @@
         label: "Torpedoes",
         value: "1x4 533mm",
       },
-    ],
+          {
+        label: "Depth Charges",
+        value: "1x5 Mk VII depth charge rails",
+      },
+],
     description: "HMS Gurkha was a Tribal-class destroyer commissioned in 1937. Armed with four twin 4.7-inch gun mounts, she was one of the most powerfully-armed destroyers of the early war period. She was sunk by German aircraft during the Norwegian campaign in April 1940.",
     author: "Niemczyk Piotr",
     links: [
@@ -7967,7 +7983,11 @@
         label: "Torpedoes",
         value: "2x5 533mm",
       },
-    ],
+          {
+        label: "Depth Charges",
+        value: "1x5 Mk VII depth charge rails",
+      },
+],
     description: "Skoryy represents the Soviet Project 30bis destroyers, the first large postwar destroyer series built for the Soviet Navy. The class combined conventional guns, torpedoes, and anti-submarine weapons in a robust design. Seventy ships were completed, forming an important part of Soviet and allied fleets during the early Cold War.",
     author: "Zustt",
     links: [
@@ -8160,6 +8180,10 @@
     displayName: "Helldiver",
     armaments: [
       {
+        label: "Anti-submarine Bombs",
+        value: "4x 300 lb Mk 6 depth charges",
+      },
+      {
         label: "Cannons (Forward)",
         value: "2 x 20mm",
       },
@@ -8169,7 +8193,7 @@
       },
       {
         label: "Bombs",
-        value: "1 x 2000lb, 2 x 500lb",
+        value: "1 x 2000lb, 1 x 500lb",
       },
     ],
     description: "The Curtiss SB2C-4 Helldiver was the successor to the SBD, entering service in 1943 with greater payload and speed but poor handling and deck characteristics and a high initial accident rate. In game it carries a 20 mm cannon, a twin 7.62 mm rear mount, and 907 kg and 227 kg bombs.",
@@ -8342,6 +8366,10 @@
     displayName: "Sea Otter Mk I",
     armaments: [
       {
+        label: "Anti-submarine Bombs",
+        value: "4x 300 lb Mk VII depth charges",
+      },
+      {
         label: "Machine Gun (Forward)",
         value: "1 x 7.7mm Vickers K",
       },
@@ -8351,10 +8379,10 @@
       },
       {
         label: "Bombs",
-        value: "4 x 250lb",
+        value: "3 x 250lb",
       },
     ],
-    description: "The Supermarine Sea Otter Mk I was the successor to the Walrus amphibian, entering production in 1943 for air-sea rescue, reconnaissance, and patrol, including catapult launches from ships. In game it is treated as a level bomber, with one bow and two rear 7.7 mm Vickers K guns plus four 250 lb bombs released from a standoff, not in a dive.",
+    description: "The Supermarine Sea Otter Mk I was the successor to the Walrus amphibian, entering production in 1943 for air-sea rescue, reconnaissance, and patrol, including catapult launches from ships. In game it is treated as a level bomber, with one bow and two rear 7.7 mm Vickers K guns plus three 250 lb bombs and a depth charge released from a standoff, not in a dive.",
     author: "Unknown",
     links: [
       {
@@ -9379,7 +9407,7 @@
         label: "Torpedo",
         value: "1 x 457mm Mk XII",
       },
-    ],
+],
     description: "The Fairey Swordfish Mk I was a carrier-based torpedo bomber used by the Royal Navy's Fleet Air Arm. Despite its low speed and biplane construction, its excellent low-speed handling contributed to the attack on Taranto and the pursuit of Bismarck. The game configuration carries two .303-inch machine guns and one Mark XII aerial torpedo.",
     author: "Unknown",
     links: [
@@ -9536,7 +9564,7 @@
         label: "Torpedo",
         value: "1 x Mk-13 570mm",
       },
-    ],
+],
     description: "The Grumman TBF-1 Avenger was the successor to the TBD, entering service in 1942 with a large payload, long range and good protection, able to carry either torpedoes or bombs, and remained in service after the war. In game it carries forward 12.7 mm and rear 7.62 mm machine guns and a Mark 13 aerial torpedo.",
     author: "",
     links: [
@@ -9566,7 +9594,7 @@
         label: "Torpedo",
         value: "1 x Mk-13 570mm",
       },
-    ],
+],
     description: "Grumman TBF-1 Avengers entered Royal Navy Fleet Air Arm service in 1943. Initially named Tarpon I, they were later redesignated Avenger Mk I and retained British-specific observer accommodations. In game this aircraft is a torpedo bomber carrying one forward 7.62mm gun, one dorsal 12.7mm gun, one ventral 7.62mm gun, and one Mk-13 aerial torpedo.",
     author: "Unknown",
     links: [

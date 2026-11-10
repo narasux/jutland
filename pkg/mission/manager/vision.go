@@ -35,7 +35,12 @@ func (m *MissionManager) stampPlayerVision(player faction.Player, vision *state.
 		if ship.BelongPlayer != player || ship.CurHP <= 0 || ship.SightRange <= 0 {
 			continue
 		}
-		vision.Stamp(ship.CurPos.RX, ship.CurPos.RY, ship.SightRange)
+		radius := ship.SightRange
+		// 下潜后只剩水听器：视野缩到声呐半径（探测判定另有独立 pass）
+		if ship.Submerged() {
+			radius = ship.SonarRange()
+		}
+		vision.Stamp(ship.CurPos.RX, ship.CurPos.RY, radius)
 	}
 	// 只算还在空中的飞机。甲板滑跑和着舰回收跟着载舰，不再单独照。
 	for _, plane := range m.state.Arena.Planes {
@@ -65,7 +70,7 @@ func (m *MissionManager) refreshContacts(player faction.Player, vision *state.Fa
 		if ship.BelongPlayer == player {
 			continue
 		}
-		if !vision.VisibleAt(ship.CurPos.MX, ship.CurPos.MY) {
+		if !m.state.CanSeeShip(player, ship) {
 			continue
 		}
 		if ship.CurHP <= 0 {
@@ -89,7 +94,7 @@ func (m *MissionManager) refreshContacts(player faction.Player, vision *state.Fa
 		}
 		contact, ok := vision.Contacts[ship.AttackTarget]
 		target := m.state.Arena.Ships[ship.AttackTarget]
-		if target != nil && target.CurHP > 0 && vision.VisibleAt(target.CurPos.MX, target.CurPos.MY) {
+		if target != nil && target.CurHP > 0 && m.state.CanSeeShip(player, target) {
 			continue
 		}
 		if !ok || contact.ExpireTick <= now {

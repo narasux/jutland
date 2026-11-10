@@ -132,7 +132,7 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 		if ship.CurHP <= 0 {
 			continue
 		}
-		if !m.opponentCanSee(ship.BelongPlayer, ship.CurPos.MX, ship.CurPos.MY) {
+		if !m.opponentCanSeeShip(ship.BelongPlayer, ship) {
 			continue
 		}
 		snapshot.EnemyShips = append(snapshot.EnemyShips, targeting.EnemyShip{
@@ -156,6 +156,21 @@ func (m *MissionManager) opponentCanSee(owner faction.Player, mx, my int) bool {
 			continue
 		}
 		if m.state.SeenBy(player, mx, my) {
+			return true
+		}
+	}
+	return false
+}
+
+// opponentCanSeeShip 敌方是否被任一对手看见：水面按迷雾规则，
+// 水下潜艇只认声呐探测记忆（探测独立于迷雾）。
+func (m *MissionManager) opponentCanSeeShip(owner faction.Player, ship *objUnit.BattleShip) bool {
+	if !ship.Submerged() {
+		return m.opponentCanSee(owner, ship.CurPos.MX, ship.CurPos.MY)
+	}
+	now := m.state.Core.SimTick
+	for player, detection := range ship.DetectedBy {
+		if player != owner && detection.UntilTick > now {
 			return true
 		}
 	}
@@ -550,6 +565,11 @@ func (m *MissionManager) takeOffFromBase(
 			}
 			distance, exists := m.targetDistanceFrom(base.BasePos(), uid, targetType)
 			if !exists {
+				return false
+			}
+			// 下潜潜艇只有带深弹的机库才派机，普通轰炸机不会被派去反潜
+			if target := m.state.Arena.Ships[uid]; target != nil &&
+				target.Submerged() && !aircraft.HasAntiSubAircraft() {
 				return false
 			}
 			// 作战半径：机型航程必须覆盖往返距离，否则这架飞机出击后回不来。

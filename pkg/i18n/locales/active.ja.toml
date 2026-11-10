@@ -136,6 +136,16 @@ other = "工作艦"
 other = "魚雷艇"
 [ShipTypeSubmarine]
 other = "潜水艦"
+[ShipDive]
+other = "潜航"
+[ShipSurface]
+other = "浮上"
+[ShipDiving]
+other = "潜航中"
+[ShipSubmerged]
+other = "潜水中"
+[ShipSurfacing]
+other = "浮上中"
 [PlaneTypeFighter]
 other = "戦闘機"
 [PlaneTypeDiveBomber]
@@ -356,6 +366,14 @@ other = "針路"
 other = "目標"
 [UnitPanelDistance]
 other = "距離"
+[UnitPanelDiveState]
+other = "潜航状態"
+[UnitPanelSonar]
+other = "ソナー"
+[UnitPanelDetected]
+other = "探知済み"
+[UnitPanelNotDetected]
+other = "未探知"
 [UnitPanelStatus]
 other = "状態"
 [UnitPanelGroup]
