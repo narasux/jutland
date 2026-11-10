@@ -208,3 +208,54 @@ func TestGuidedTorpedoConfig(t *testing.T) {
 		}
 	}
 }
+
+// 反潜射程是平衡拍板值（2026-11-10）：舰载深弹架 2 格、RBU 4 格、Mk44 8 格。
+// 配置里的 range 是公里数，初始化时统一 ÷2；这里锁住最终格数，避免改配置时算错。
+func TestASWWeaponRangesAfterScaling(t *testing.T) {
+	cases := []struct {
+		ship string
+		want float64
+	}{
+		{"gurkha", 2},     // 英 Mk VII 深弹架：配置 4 km
+		{"porter", 2},     // 美 Mk 6 深弹架：配置 4 km
+		{"hammann", 2},    // 同上
+		{"jiujiang", 4},   // RBU 反潜火箭：配置 8 km
+		{"long_beach", 8}, // Mk32 反潜鱼雷：配置 16 km
+	}
+	for _, tc := range cases {
+		ship, ok := objUnit.ShipMap[tc.ship]
+		if !ok {
+			t.Fatalf("ship template %s missing", tc.ship)
+		}
+		if math.Abs(ship.Weapon.MaxToSubmergedRange-tc.want) > 1e-9 {
+			t.Fatalf("%s MaxToSubmergedRange = %v, want %v", tc.ship, ship.Weapon.MaxToSubmergedRange, tc.want)
+		}
+		if !ship.Weapon.HasAntiSubWeapon {
+			t.Fatalf("%s should be flagged as anti-submarine capable", tc.ship)
+		}
+	}
+}
+
+// 三艘潜艇的水下航速按 Wikipedia 的实测值配置（2026-11-10）：
+// VIIC 7.6 kn、I-168 8.2 kn、Nautilus 8.0 kn；配置用“水面航速 × 倍率”表达。
+func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
+	cases := []struct {
+		ship string
+		want float64
+	}{
+		{"u_boat_type_viic", 7.6},
+		{"i_168", 8.2},
+		{"uss_nautilus", 8.0},
+	}
+	for _, tc := range cases {
+		ship, ok := objUnit.ShipMap[tc.ship]
+		if !ok {
+			t.Fatalf("ship template %s missing", tc.ship)
+		}
+		// MaxSpeed 初始化时已除以 ShipSpeedScale，这里还原成配置节数。
+		kn := ship.MaxSpeed * objUnit.ShipSpeedScale * ship.SubmergedSpeedRatio
+		if math.Abs(kn-tc.want) > 0.1 {
+			t.Fatalf("%s submerged speed = %.2f kn, want %.1f kn", tc.ship, kn, tc.want)
+		}
+	}
+}
