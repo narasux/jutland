@@ -224,3 +224,22 @@ func TestSteerTowardsRequiresGuidance(t *testing.T) {
 		t.Fatalf("guided rotation = %v, want 10", bt.Rotation)
 	}
 }
+
+func TestCanHitSubmergedByAmmoType(t *testing.T) {
+	cases := []struct {
+		name string
+		bt   Bullet
+		want bool
+	}{
+		{"depth charge", Bullet{Type: TypeDepthCharge}, true},
+		{"anti-submarine torpedo", Bullet{Type: TypeTorpedo, AntiSubmarine: true}, true},
+		{"submarine torpedo", Bullet{Type: TypeTorpedo, SubmarineLaunched: true}, true},
+		{"surface torpedo", Bullet{Type: TypeTorpedo}, false},
+		{"shell", Bullet{Type: TypeShell}, false},
+		{"bomb", Bullet{Type: TypeBomb}, false},
+		{"rocket", Bullet{Type: TypeRocket}, false},
+	}
+	for _, tc := range cases {
+		assert.Equal(t, tc.want, tc.bt.CanHitSubmerged(), tc.name)
+	}
+}

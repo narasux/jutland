@@ -76,3 +76,31 @@ func panelInteractionState() *state.MissionState {
 		Arena: state.MissionArenaState{Ships: map[string]*objUnit.BattleShip{}, Planes: map[string]*objUnit.Plane{}},
 	}
 }
+
+func TestSubmarineDiveButtonProducesToggleAction(t *testing.T) {
+	missionState := panelInteractionState()
+	sub := &objUnit.BattleShip{
+		Uid: "sub", CurHP: 1, TotalHP: 1, Type: objUnit.ShipTypeSubmarine,
+	}
+	missionState.Arena.Ships = map[string]*objUnit.BattleShip{sub.Uid: sub}
+	missionState.Interaction.SelectedShips = []string{sub.Uid}
+	missionState.Interaction.FocusedShipUid = sub.Uid
+	panel := New()
+	panel.updateWithPointer(missionState, testRegion, 0, pointerInput{})
+
+	button := panel.computeDiveRect(missionState, sub)
+	if button.W == 0 {
+		t.Fatal("submarine dive button rect is empty")
+	}
+	actions := panel.updateWithPointer(missionState, testRegion, 0, pointerInput{
+		X:           int(button.X + button.W/2),
+		Y:           int(button.Y + button.H/2),
+		JustPressed: true,
+	})
+	if len(actions) != 1 || actions[0].Kind != ActionToggleDive {
+		t.Fatalf("actions = %+v", actions)
+	}
+	if len(actions[0].ShipUids) != 1 || actions[0].ShipUids[0] != sub.Uid {
+		t.Fatalf("action ships = %+v", actions[0].ShipUids)
+	}
+}
