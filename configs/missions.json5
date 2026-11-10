@@ -6310,4 +6310,165 @@
       },
     ],
   }
+  ,
+  {
+    name: "ASWTest",
+    category: "test",
+    displayName: "反潜测试-威克岛",
+    displayNameEn: "ASW Test - Wake Island",
+    displayNameRu: "Противолодочное испытание — остров Уэйк",
+    displayNameJa: "対潜試験―ウェーク島",
+    initFunds: 10000,
+    initCameraPos: [
+      // P1
+      [32, 34],
+      // P2
+      [68, 64]
+    ],
+    mapName: "wake",
+    maxShipCount: 20,
+    description: "作战导调部第 1943 号反潜演习：我方 U 艇与一艘护航驱逐舰在威克岛环礁内与敌潜艇、敌驱逐舰对抗。演习目的：验证下潜隐身、声呐点亮、深水炸弹与反潜鱼雷的完整杀伤链——先让潜艇摸到无护航目标身边，再让反潜舰把接触咬住。注意：未探测到的下潜潜艇不会被盲炸命中，驱逐舰必须先用声呐点亮目标。",
+    descriptionEn: "Exercise 1943: a friendly U-boat and one escorting destroyer face hostile submarines and destroyers inside Wake atoll. The drill validates the full ASW kill chain - submerged stealth, sonar contact, depth charges and anti-submarine torpedoes. Let the boat close on unescorted targets, then have the escorts pin the contact. Blind depth-charge drops never damage an undetected submarine; the destroyer must light it up with sonar first.",
+    descriptionRu: "Учения 1943 года: дружественная подводная лодка и один эскортный эсминец против вражеских субмарин и эсминцев в лагуне Уэйка. Проверяется вся цепочка противолодочной борьбы: скрытность под водой, обнаружение гидролокатором, глубинные бомбы и противолодочные торпеды. Бомбометание по необнаруженной лодке не наносит урона — сначала её нужно засветить гидролокатором.",
+    descriptionJa: "特別演習1943：味方のUボートと護衛駆逐艦1隻が、ウェーク環礁内で敵潜水艦・敵駆逐艦と対峙する。潜航による隠密、ソナー探知、爆雷と対潜魚雷という対潜キルチェーンの検証が目的。未探知の潜航艦に爆雷を盲投しても効果はなく、まず駆逐艦がソナーで照準する必要がある。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // === 我方 ===
+      {
+        name: "u_boat_type_viic",
+        pos: [30, 34],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "gurkha",
+        pos: [30, 37],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      // === 敌方水面反潜舰 ===
+      {
+        name: "porter",
+        pos: [69, 64],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "hammann",
+        pos: [70, 66],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      // === 敌方潜艇 ===
+      {
+        name: "i_168",
+        pos: [66, 66],
+        rotation: 180,
+        belongPlayer: "P2"
+      },
+      {
+        name: "uss_nautilus",
+        pos: [69, 67],
+        rotation: 0,
+        belongPlayer: "P2"
+      }
+    ],
+  }
+  ,
+  {
+    name: "SubmarineTest",
+    category: "test",
+    displayName: "潜艇试验场-中途岛",
+    displayNameEn: "Submarine Range - Midway",
+    displayNameRu: "Полигон подлодок — Мидуэй",
+    displayNameJa: "潜水艦試験場―ミッドウェー",
+    initFunds: 10000,
+    initCameraPos: [
+      // P1：四个试验区正中间，上下左右滚动即可逐区查看
+      [125, 220],
+      // P2
+      [125, 220]
+    ],
+    mapName: "midway",
+    maxShipCount: 16,
+    description: "作战导调部第 1943-2 号潜艇试验场：中途岛以南的开阔海域划成四个互不干扰的试验区——西南「潜对潜」：我方 U 艇对敌方 I-168，用水听器找它、用直航鱼雷打它；西北「我猎潜」：我方两艘驱逐舰用声呐点亮敌方 Nautilus，贴近到 2 格投深弹；东北「敌猎潜」：我方 U 艇被敌方两艘驱逐舰追猎，下潜静默、绕后反击；东南「航空反潜」：埃塞克斯号派出 SB2C 深弹机，由随行护航驱逐舰点亮 Nautilus，再投弹猎杀。四个区相距 20 格以上，互不干扰；按 M 可看全图，按 D 切换下潜/上浮。",
+    descriptionEn: "Test Range 1943-2 south of Midway: four independent ASW zones. Southwest - submarine duel: your U-boat against I-168; find her with the hydrophone and fire straight-running torpedoes. Northwest - hunter: two friendly destroyers light up Nautilus with sonar, then close to 2 tiles and drop depth charges. Northeast - hunted: your U-boat is chased by two hostile destroyers; dive, stay quiet, then counter-attack. Southeast - air ASW: USS Essex sends SB2C depth-charge bombers; the escorting destroyer lights up Nautilus for them. Zones are 20+ tiles apart; press M for the full map and D to dive or surface.",
+    descriptionRu: "Полигон 1943-2 южнее Мидуэя: четыре независимые зоны. Юго-запад — дуэль подлодок: ваша U-бот против I-168; ищите её гидрофоном и стреляйте прямоходными торпедами. Северо-запад — охота: два дружественных эсминца засвечивают Nautilus гидролокатором и с 2 клеток сбрасывают глубинные бомбы. Северо-восток — вас преследуют два эсминца: погружайтесь, молчите и контратакуйте. Юго-восток — авиация: «Эссекс» поднимает SB2C с глубинными бомбами; цель подсвечивает эскортный эсминец. Зоны разделены 20+ клетками; M — карта, D — погружение/всплытие.",
+    descriptionJa: "試験場1943-2、ミッドウェー南方の四つの独立区画。南西「潜水艦対決」：味方Uボート対I-168。水中聴音で探し、直航魚雷で攻撃。北西「味方が狩る」：味方駆逐艦2隻がソナーでNautilusを探知し、2マスまで接近して爆雷を投下。北東「狩られる側」：敵駆逐艦2隻に追われるUボート。潜航して静かにし、反撃へ。南東「航空対潜」：エセックスからSB2C爆雷機を発進。護衛駆逐艦がNautilusを探知して攻撃を誘導する。各区画は20マス以上離れている。Mで全体図、Dで潜航/浮上。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initShips: [
+      // === 西南区「潜对潜」 ===
+      {
+        name: "u_boat_type_viic",
+        pos: [107, 235],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "i_168",
+        pos: [114, 235],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      // === 西北区「我猎潜」 ===
+      {
+        name: "gurkha",
+        pos: [107, 201],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "porter",
+        pos: [107, 208],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "uss_nautilus",
+        pos: [114, 205],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      // === 东北区「敌猎潜」 ===
+      {
+        name: "u_boat_type_viic",
+        pos: [137, 204],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "gurkha",
+        pos: [143, 201],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      {
+        name: "porter",
+        pos: [143, 208],
+        rotation: 270,
+        belongPlayer: "P2"
+      },
+      // === 东南区「航空反潜」 ===
+      {
+        name: "essex",
+        pos: [136, 235],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "gurkha",
+        pos: [136, 232],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "uss_nautilus",
+        pos: [146, 235],
+        rotation: 270,
+        belongPlayer: "P2"
+      }
+    ],
+  }
 ]
