@@ -162,3 +162,10 @@ rm -rf "$PYCACHE_DIR"
 make build
 go test ./pkg/mission/object/combatpower/ ./pkg/mission/object/unit/
 ```
+
+## 反潜能力（AntiSub）暂不参与定价
+
+潜艇与深弹落地后，`CombatPower.Details.AntiSubDPS` 只统计对水下目标有效的火力（潜艇自身鱼雷、反潜鱼雷、深弹架），**不并入 `Hull` / `Burst` / `Total`**，因此现有费用公式不会因为一艘船挂了深弹就涨价。评估带深弹的驱逐舰/护卫舰时：
+
+- 把 `antiSubDPS` 当作独立的“反潜专精”信息人工判断，不要把它加进 `hullPower`；
+- 若后续要把反潜纳入费用，先修改 `combatpower` 的 `buildPowerInfo` 口径，并同步本 skill 的 python 评估脚本，避免只改一边造成价格漂移。

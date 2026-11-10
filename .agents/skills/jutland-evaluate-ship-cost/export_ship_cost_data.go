@@ -22,6 +22,8 @@ type shipCostRecord struct {
 	Burst       int     `json:"burst"`
 	Projection  int     `json:"projection"`
 	EffectiveHP float64 `json:"effectiveHP"`
+	// AntiSubDPS 反潜火力：目前只导出，不进入 Hull/Burst/Total
+	AntiSubDPS float64 `json:"antiSubDPS"`
 }
 
 func main() {
@@ -44,6 +46,8 @@ func main() {
 			Burst:       ship.CombatPower.Burst,
 			Projection:  ship.CombatPower.Projection,
 			EffectiveHP: ship.CombatPower.Details.EffectiveHP,
+			// 反潜火力单独导出：目前不进入 Hull/Burst/Total，供费用评估时人工参考
+			AntiSubDPS: ship.CombatPower.Details.AntiSubDPS,
 		})
 	}
 	sort.Slice(records, func(i, j int) bool {

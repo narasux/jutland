@@ -88,9 +88,11 @@ python3 utils/turret_marker/server.py \
 
 1. **国家**：中国 `cn` → 苏联 `su` → 美国 `us` → 德国 `de` → 法国 `fr` → 日本 `jp` → 英国 `uk` → 意大利 `it` → 特殊 `special`。
    该顺序与 `pkg/mission/object/unit/types.go` 的 `AvailableNations()` 必须一致；新增国家时两处同步修改。
-2. **舰种**：航空母舰 `aircraft_carrier` → 战列舰 `battleship` → 重巡洋舰 → 轻巡洋舰 → 驱逐舰 `destroyer` → 护卫舰 `frigate` → 鱼雷艇 `torpedo_boat` → 其他。
+2. **舰种**：航空母舰 `aircraft_carrier` → 战列舰 `battleship` → 重巡洋舰 → 轻巡洋舰 → 驱逐舰 `destroyer` → 护卫舰 `frigate` → 鱼雷艇 `torpedo_boat` → 潜艇 `submarine` → 其他。
+   - 潜艇单独成段，横幅写 `// --------- 潜艇 ----------`，排在鱼雷艇段之后、其他（货轮/维修/医疗/测试）之前；段内按国家（见第 1 条）分组，同国按艇级代际逆序（例：`u_boat_type_viic` 在德国段、`i_168` 在日本段、`uss_nautilus` 在美国段）。
    - 巡洋舰共用 `type: "cruiser"`，按 `typeAbbr` 归段：`CA`/`CB` 属重巡洋舰段，`CL`/`CLAA`/`CM`/`CGN` 属轻巡洋舰段。
    - “其他”指 `cargo`、`repair`、`hospital` 与测试用 `default`，内部按 货轮 → 维修船 → 医疗船 → 测试单位。
+- 潜艇必须显式配置 `sightRange`（不配会被主炮射程封顶）与 `diveTime`/`surfaceTime`/`submergedSpeedRatio`/`defaultDiveState`；深弹/反潜挂载写在 `weapon.rockets`（纯反潜的火箭条目只伤潜艇，见 `configs/rocket_launchers.json5` 的 `UK/DC/5/MkVII`）。
 3. **舰级代际（逆序）**：越新锐越靠前。同一国家同一舰种内按舰级家族分段，家族之间按最新型号逆序，家族内部按代际逆序；**同一舰级的多艘舰不排序**，保持既有相对顺序。例：美国战列舰 `montana → lowa → south_dakota → … → south_carolina → connecticut → virginia → kentucky`；日本战列舰 `edo → satsuma → yamato → nagato → ise → fuso → kongo`。
    判断代际以该舰的舰级（见相邻条目的 `// <舰名>` 注释、references 的精细舰种、历史资料）为准，**不要用 `year` 字段直接排序**：`year` 是配置年份，同级改型、纸面方案和改装舰会互相矛盾。
 
