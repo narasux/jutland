@@ -1706,8 +1706,6 @@
         }
       ],
       bombs: [
-
-        // 反潜深弹挂架
         {
           name: "US/DC/300/1940/Mk6",
           posPercent: 0.1,
@@ -1722,7 +1720,13 @@
         },
         {
           name: "US/BB/227/AN-M64",
-          posPercent: 0.3,
+          posPercent: 0.45,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
+        {
+          name: "US/BB/227/AN-M64",
+          posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
@@ -2201,8 +2205,12 @@
         }
       ],
       bombs: [
-
-        // 反潜深弹挂架
+        {
+          name: "US/DC/300/1940/Mk6",
+          posPercent: 0.1,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
         {
           name: "US/DC/300/1940/Mk6",
           posPercent: 0.1,
@@ -2217,25 +2225,19 @@
         },
         {
           name: "US/BB/907/LB/AN-M66",
-          posPercent: 0.3,
+          posPercent: 0.35,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
           name: "US/BB/454/LB/AN-M65",
-          posPercent: 0.3,
+          posPercent: 0.45,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
           name: "US/BB/454/LB/AN-M65",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "US/BB/454/LB/AN-M65",
-          posPercent: 0.3,
+          posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
@@ -6674,8 +6676,12 @@
         }
       ],
       bombs: [
-
-        // 反潜深弹挂架
+        {
+          name: "UK/DC/300/1939/MkVII",
+          posPercent: 0.1,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        },
         {
           name: "UK/DC/300/1939/MkVII",
           posPercent: 0.1,
@@ -6684,19 +6690,13 @@
         },
         {
           name: "UK/BB/114",
-          posPercent: 0.3,
+          posPercent: 0.45,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },
         {
           name: "UK/BB/114",
-          posPercent: 0.3,
-          rightFiringArc: [0, 20],
-          leftFiringArc: [340, 360]
-        },
-        {
-          name: "UK/BB/114",
-          posPercent: 0.3,
+          posPercent: 0.5,
           rightFiringArc: [0, 20],
           leftFiringArc: [340, 360]
         },

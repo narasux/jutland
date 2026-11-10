@@ -2283,7 +2283,7 @@
         value: "2000 lb x2 + 1000 lb x3 (about 3.2 t)",
       },
     ],
-    description: "The Boeing B-17G Flying Fortress was the most-produced model of the B-17 family, entering service in 1943 and famed for its toughness and heavy defensive armament. Treated as a level bomber in game, armed with thirteen 12.7mm Browning M2 heavy machine guns (chin 2, cheek 2, dorsal 2, ball 2, waist 2, tail 2, radio 1) and four level-dropped bombs (2000 lb x2 + 1000 lb x4, about 3.6 t).",
+    description: "The Boeing B-17G Flying Fortress was the most-produced model of the B-17 family, entering service in 1943 and famed for its toughness and heavy defensive armament. Treated as a level bomber in game, armed with thirteen 12.7mm Browning M2 heavy machine guns (chin 2, cheek 2, dorsal 2, ball 2, waist 2, tail 2, radio 1) and four level-dropped bombs (2000 lb x2 + 1000 lb x2, about 2.7 t) plus two depth charges.",
     author: "Unknown",
     links: [
       {
@@ -2336,14 +2336,14 @@
       },
       {
         label: "Bombs (Level)",
-        value: "2000 lb x2 + 1000 lb x3 (about 3.2 t)",
+        value: "2000 lb x2 + 1000 lb x2 (about 2.7 t)",
       },
           {
         label: "Anti-submarine Bombs",
-        value: "4x 300 lb Mk 6 depth charges",
+        value: "2x 300 lb Mk 6 depth charges",
       },
 ],
-    description: "The Consolidated B-24D Liberator was a US four-engined heavy bomber entering service in 1942, with greater range and bombload than the B-17; the aircraft shown is B-24D \"Lady Be Good\" of the 514th Bomb Squadron, 376th Bomb Group. Treated as a level bomber in game, it carries ten 12.7mm Browning M2s (nose turret 2, dorsal 2, ball 2, waist 2, tail 2) and five level-dropped bombs (2000 lb x2 + 1000 lb x4, about 3.6 t).",
+    description: "The Consolidated B-24D Liberator was a US four-engined heavy bomber entering service in 1942, with greater range and bombload than the B-17; the aircraft shown is B-24D \"Lady Be Good\" of the 514th Bomb Squadron, 376th Bomb Group. Treated as a level bomber in game, it carries ten 12.7mm Browning M2s (nose turret 2, dorsal 2, ball 2, waist 2, tail 2) and four level-dropped bombs (2000 lb x2 + 1000 lb x2, about 2.7 t) plus two depth charges.",
     author: "Unknown",
     links: [
       {
@@ -8181,7 +8181,7 @@
     armaments: [
       {
         label: "Anti-submarine Bombs",
-        value: "4x 300 lb Mk 6 depth charges",
+        value: "1x 300 lb Mk 6 depth charge",
       },
       {
         label: "Cannons (Forward)",
@@ -8193,7 +8193,7 @@
       },
       {
         label: "Bombs",
-        value: "1 x 2000lb, 1 x 500lb",
+        value: "1 x 2000lb, 2 x 500lb",
       },
     ],
     description: "The Curtiss SB2C-4 Helldiver was the successor to the SBD, entering service in 1943 with greater payload and speed but poor handling and deck characteristics and a high initial accident rate. In game it carries a 20 mm cannon, a twin 7.62 mm rear mount, and 907 kg and 227 kg bombs.",
@@ -8367,7 +8367,7 @@
     armaments: [
       {
         label: "Anti-submarine Bombs",
-        value: "4x 300 lb Mk VII depth charges",
+        value: "2x 300 lb Mk VII depth charges",
       },
       {
         label: "Machine Gun (Forward)",
@@ -8379,10 +8379,10 @@
       },
       {
         label: "Bombs",
-        value: "3 x 250lb",
+        value: "2 x 250lb",
       },
     ],
-    description: "The Supermarine Sea Otter Mk I was the successor to the Walrus amphibian, entering production in 1943 for air-sea rescue, reconnaissance, and patrol, including catapult launches from ships. In game it is treated as a level bomber, with one bow and two rear 7.7 mm Vickers K guns plus three 250 lb bombs and a depth charge released from a standoff, not in a dive.",
+    description: "The Supermarine Sea Otter Mk I was the successor to the Walrus amphibian, entering production in 1943 for air-sea rescue, reconnaissance, and patrol, including catapult launches from ships. In game it is treated as a level bomber, with one bow and two rear 7.7 mm Vickers K guns plus two 250 lb bombs and two depth charges released from a standoff, not in a dive.",
     author: "Unknown",
     links: [
       {
