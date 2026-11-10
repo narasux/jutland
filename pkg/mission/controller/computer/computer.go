@@ -84,6 +84,8 @@ type ComputerDecisionHandler struct {
 	stations map[string]objPos.MapPos
 
 	routes map[string]routeMemory
+	// asw 是这一轮被指派去猎潜的反潜舰（uid）。只影响编组，不写任务状态。
+	asw map[string]bool
 }
 
 // NewHandler ...
@@ -119,6 +121,13 @@ func (h *ComputerDecisionHandler) Handle(
 		}
 	}
 	for uid, ins := range h.maintainPaths(tick, curInstructions, snap) {
+		out[uid] = ins
+	}
+	// 潜艇与反潜舰不进入水面编队，单独下发深度与航路
+	for uid, ins := range h.submarineInstructions(snap, tick) {
+		out[uid] = ins
+	}
+	for uid, ins := range h.aswInstructions(snap) {
 		out[uid] = ins
 	}
 	if len(out) == 0 {

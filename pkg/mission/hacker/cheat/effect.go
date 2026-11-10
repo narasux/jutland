@@ -225,3 +225,29 @@ func (c *Expelliarmus) Exec(misState *state.MissionState) string {
 }
 
 var _ Cheat = (*Expelliarmus)(nil)
+
+// ShowMeTheSubmarines 调试用：在地图上用红框暴露所有潜艇位置。
+// 只影响绘制，不改变探测与锁敌：没有声呐接触的潜艇依然不能被攻击。
+type ShowMeTheSubmarines struct{}
+
+func (c *ShowMeTheSubmarines) String() string {
+	return "reveal submarines"
+}
+
+func (c *ShowMeTheSubmarines) Desc() string {
+	return "Debug only: draw every submarine in a red box. Combat detection is unchanged."
+}
+
+func (c *ShowMeTheSubmarines) Match(cmd string) bool {
+	return isCommandEqual(c.String(), cmd)
+}
+
+func (c *ShowMeTheSubmarines) Exec(misState *state.MissionState) string {
+	misState.Player.RevealSubmarines = !misState.Player.RevealSubmarines
+	if misState.Player.RevealSubmarines {
+		return "Submarines revealed (visual only, detection unchanged)."
+	}
+	return "Submarine reveal disabled."
+}
+
+var _ Cheat = (*ShowMeTheSubmarines)(nil)

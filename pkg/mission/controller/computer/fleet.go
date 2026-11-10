@@ -14,10 +14,15 @@ import (
 )
 
 type battleSnapshot struct {
-	own    []*objUnit.BattleShip
-	enemy  []*objUnit.BattleShip
-	byUID  map[string]*objUnit.BattleShip
-	points []*objBuilding.ReinforcePoint
+	own   []*objUnit.BattleShip
+	enemy []*objUnit.BattleShip
+	// ownSubs / enemySubs 单独走潜艇 AI，不参与水面编队与择敌
+	ownSubs   []*objUnit.BattleShip
+	enemySubs []*objUnit.BattleShip
+	// subContacts 是反潜舰可用的潜艇接触（点亮中 + 搜索窗口内的最后位置）
+	subContacts []subContact
+	byUID       map[string]*objUnit.BattleShip
+	points      []*objBuilding.ReinforcePoint
 	// misState 这一拍的战场状态，迷雾下靠它查视野图和接触。
 	misState *state.MissionState
 }
@@ -30,11 +35,24 @@ func (h *ComputerDecisionHandler) snapshot(misState *state.MissionState) *battle
 		}
 		if ship.BelongPlayer == h.player {
 			snap.byUID[ship.Uid] = ship
-			snap.own = append(snap.own, ship)
-		} else if misState.SeenBy(h.player, ship.CurPos.MX, ship.CurPos.MY) {
-			// 迷雾关闭时 SeenBy 恒为真，候选和原来一样是全部活着的敌舰。
-			// 看不见的敌舰不进 byUID，追击和沉没判定就自然按「跟丢了」处理。
-			snap.byUID[ship.Uid] = ship
+			if ship.Type == objUnit.ShipTypeSubmarine {
+				snap.ownSubs = append(snap.ownSubs, ship)
+			} else {
+				snap.own = append(snap.own, ship)
+			}
+			continue
+		}
+		// 反潜接触独立于可见性：引发过探测的潜艇会留下可搜索的最后位置
+		if contact, ok := subContactFor(misState, h.player, ship); ok {
+			snap.subContacts = append(snap.subContacts, contact)
+		}
+		if !misState.CanSeeShip(h.player, ship) {
+			continue
+		}
+		snap.byUID[ship.Uid] = ship
+		if ship.Type == objUnit.ShipTypeSubmarine {
+			snap.enemySubs = append(snap.enemySubs, ship)
+		} else {
 			snap.enemy = append(snap.enemy, ship)
 		}
 	}
@@ -173,6 +191,12 @@ func (h *ComputerDecisionHandler) regroup(snap *battleSnapshot) map[string]instr
 		for _, uid := range h.scout.members {
 			used[uid] = true
 		}
+	}
+
+	// 有潜艇接触时，反潜舰离开水面编组专职猎潜
+	h.asw = h.selectASWHunters(snap, used)
+	for uid := range h.asw {
+		used[uid] = true
 	}
 
 	remaining := attackCandidates(snap, used)
@@ -334,6 +358,18 @@ func (h *ComputerDecisionHandler) assignScout(
 		}
 		candidates = append(candidates, ship)
 	}
+	// 反潜舰优先留在主力编队护航：只要还有别的袭击舰可选，就把它们排除在袭击队之外
+	if len(candidates) > 1 {
+		others := make([]*objUnit.BattleShip, 0, len(candidates))
+		for _, ship := range candidates {
+			if !ship.Weapon.HasAntiSubWeapon {
+				others = append(others, ship)
+			}
+		}
+		if len(others) > 0 {
+			candidates = others
+		}
+	}
 	sort.Slice(candidates, func(i, j int) bool {
 		return betterRaidShip(candidates[i], candidates[j])
 	})
@@ -394,6 +430,18 @@ func (h *ComputerDecisionHandler) assignRaid(
 			continue
 		}
 		candidates = append(candidates, ship)
+	}
+	// 反潜舰优先留在主力编队护航：只要还有别的袭击舰可选，就把它们排除在袭击队之外
+	if len(candidates) > 1 {
+		others := make([]*objUnit.BattleShip, 0, len(candidates))
+		for _, ship := range candidates {
+			if !ship.Weapon.HasAntiSubWeapon {
+				others = append(others, ship)
+			}
+		}
+		if len(others) > 0 {
+			candidates = others
+		}
 	}
 	sort.Slice(candidates, func(i, j int) bool {
 		return betterRaidShip(candidates[i], candidates[j])

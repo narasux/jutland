@@ -46,7 +46,7 @@ func TestCycleMissionWrapsWithinGivenCategory(t *testing.T) {
 	require.Equal(t, "PearlHarbor1941", cycleMission(classic, "Samar1944", 1))
 	require.Equal(t, "Samar1944", cycleMission(classic, "PearlHarbor1941", -1))
 	require.Equal(t, "MidwayFourCornersTest", cycleMission(tests, "TestAntiAircraft", 1))
-	require.Equal(t, "MidwayAllTypesDuelTest", cycleMission(tests, "TestAll", -1))
+	require.Equal(t, "SubmarineTest", cycleMission(tests, "TestAll", -1))
 }
 
 func TestStartMissionLoadingResetsPreviousMission(t *testing.T) {

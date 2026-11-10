@@ -54,5 +54,7 @@ func TestConfiguredMissionOrder(t *testing.T) {
 		"TestAntiAircraft",
 		"MidwayFourCornersTest",
 		"MidwayAllTypesDuelTest",
+		"ASWTest",
+		"SubmarineTest",
 	}, AvailableMissions(MissionCategoryTest))
 }
