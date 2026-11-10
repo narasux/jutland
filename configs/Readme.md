@@ -147,6 +147,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // torpedo 鱼雷
     // bomb 炸弹
     // rocket 火箭弹
+    // depth_charge 深水炸弹（只伤潜艇；水面舰普通鱼雷/炮弹打不到下潜潜艇）
     // laser 镭射
     type: "shell",
     // 口径
@@ -157,6 +158,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // 暴击率：造成暴击伤害的几率（击中弹药库之类）
     // 注：超级暴击率固定为暴击率的 1/10
     criticalRate: 0.002,
+    // 反潜弹药（可选）：true 时鱼雷可命中下潜潜艇；深水炸弹本身恒可反潜
+    antiSubmarine: false,
     // 制导参数（可选）：不写＝普通直线弹药
     // mode: pursuit 纯追踪（追尾）——每拍把弹头转向目标当前位置
     // turnRate: 最大转向角速度（度/秒，60 拍基准），1x/2x 速度下自动换算
@@ -305,6 +308,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     antiShip: false,
     // 是否具备防空能力
     antiAircraft: true,
+    // 是否具备反潜能力（深水炸弹 / 反潜火箭）：true 时只打潜艇，可命中下潜潜艇
+    antiSubmarine: false,
     // 近炸触发半径（地图格数）
     proximityRadius: 0.25,
     // 爆炸伤害半径（地图格数）
@@ -370,12 +375,21 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // frigate 护卫舰
     // cargo 货轮
     // repair 维修船
-    // submarine 潜艇（当前按水面舰艇机制）
+    // submarine 潜艇（可下潜：水下仅能用鱼雷，甲板炮/防空炮锁定）
     // torpedo_boat 快艇
     type: "cruiser",
     // 视距（地图格）。0 或不写时用舰种默认值；有主炮时不超过主炮射程。
     // 单艘可写大于 0 的值覆盖默认。测试船 type 为 default 时不套用默认表。
     sightRange: 0,
+    // 下潜耗时（秒），仅潜艇使用；0 或不写取默认 10 秒
+    diveTime: 0,
+    // 上浮耗时（秒），仅潜艇使用；0 或不写取默认 8 秒
+    surfaceTime: 0,
+    // 水下航速倍率（相对 maxSpeed），仅潜艇使用；0 或不写取 0.35
+    // 二战潜艇实测水下/水面航速比多在 0.36~0.46（例：VIIC 7.6/17.7 ≈ 0.43）
+    submergedSpeedRatio: 0.35,
+    // 入场深度状态：surface（默认）/ submerged，仅潜艇使用
+    defaultDiveState: "surface",
     // 类型缩写
     typeAbbr: "CL",
     // 初始生命值
@@ -715,6 +729,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     name: "US/BB/907/AN-M66",
     // 弹药名称（需确保在 bullets.json5 中存在）
     bulletName: "US/BB/2000/907",
+    // 是否反潜：深弹条目初始化时按弹药类型自动置位；航空深弹只会投给潜艇
+    // antiSubmarine: true,
     // 射程（地图格数）
     range: 1.5,
     // 弹药速度
