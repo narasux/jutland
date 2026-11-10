@@ -138,6 +138,8 @@ func initTorpedoLauncherMap() {
 	for _, lc := range torpedoLaunchers {
 		lc.Range /= 2
 		lc.BulletSpeed /= 600
+		// 弹药本身是反潜鱼雷（Mk44 等）：水面舰也能攻击下潜潜艇
+		lc.AntiSubmarine = objBullet.CanHitSubmergedByName(lc.BulletName)
 		objUnit.TorpedoLauncherMap[lc.Name] = &lc
 	}
 	log.Println("torpedo launchers data loaded from json5 file")
@@ -397,8 +399,18 @@ func initShipMap() {
 				}
 			}
 		}
+		// 潜艇的鱼雷管发射的鱼雷可以攻击下潜潜艇（D13/D18）
+		if s.Type == objUnit.ShipTypeSubmarine {
+			for _, torpedo := range s.Weapon.Torpedoes {
+				torpedo.SubmarineLaunched = true
+			}
+		}
 		for _, torpedo := range s.Weapon.Torpedoes {
 			s.Weapon.MaxToShipRange = max(s.Weapon.MaxToShipRange, torpedo.Range)
+			if torpedo.SubmarineLaunched || torpedo.AntiSubmarine {
+				s.Weapon.MaxToSubmergedRange = max(s.Weapon.MaxToSubmergedRange, torpedo.Range)
+				s.Weapon.HasAntiSubWeapon = true
+			}
 		}
 		for _, rocket := range s.Weapon.Rockets {
 			if rocket.AntiShip {
@@ -406,6 +418,10 @@ func initShipMap() {
 			}
 			if rocket.AntiAircraft {
 				s.Weapon.MaxToPlaneRange = max(s.Weapon.MaxToPlaneRange, rocket.Range)
+			}
+			if rocket.AntiSubmarine {
+				s.Weapon.MaxToSubmergedRange = max(s.Weapon.MaxToSubmergedRange, rocket.Range)
+				s.Weapon.HasAntiSubWeapon = true
 			}
 		}
 		mainGunRange := 0.0
@@ -416,6 +432,10 @@ func initShipMap() {
 		}
 		// 视距在武器折算之后定，主炮射程已经是地图格。
 		s.SightRange = objUnit.ResolveShipSight(s.Type, s.SightRange, mainGunRange)
+		// 潜艇下潜配置：补默认值、解析入场深度状态（非潜艇直接跳过）
+		if err := s.ResolveDiveConfig(); err != nil {
+			log.Fatal(err)
+		}
 		// 飞机相关状态
 		s.Aircraft.HasPlane = len(s.Aircraft.Groups) > 0
 		for i := 0; i < len(s.Aircraft.Groups); i++ {

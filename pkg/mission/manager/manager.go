@@ -205,6 +205,12 @@ func (m *MissionManager) handleUnitPanelActions(actions []unitpanel.Action) {
 					m.instructionSet.Add(instr.NewDisableAircraft(shipUid))
 				}
 			}
+		case unitpanel.ActionToggleDive:
+			for _, shipUid := range action.ShipUids {
+				if instruction := diveToggleInstruction(m.state, shipUid); instruction != nil {
+					m.instructionSet.Add(instruction)
+				}
+			}
 		case unitpanel.ActionToggleAirfield:
 			if af := m.state.Arena.Airfields[action.AirfieldUid]; af != nil {
 				af.Disabled = !af.Disabled
@@ -339,6 +345,9 @@ func (m *MissionManager) rebuildCombatBuckets() {
 
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
 func (m *MissionManager) updateCombatPhase() {
+	m.updateShipDiveStates()
+	// 声呐探测独立于迷雾，必须在刷新视野之前跑。
+	m.updateSubmarineDetection()
 	m.updateVision()
 	m.updateAutoScout()
 	m.updateTargetPlanning()

@@ -112,8 +112,10 @@ type CombatPowerDetails struct {
 	AntiAirDPS  float64
 	// AntiShipThreat / AntiAirThreat 是未取整的综合战力分量（含生存与机动），
 	// 只在航母折算舰载机时使用；图鉴的对舰 / 对空轴用的是不含生存的火力值。
-	AntiShipThreat          float64
-	AntiAirThreat           float64
+	AntiShipThreat float64
+	AntiAirThreat  float64
+	// AntiSubDPS 反潜（对下潜潜艇）火力，只做展示与费用评估，不并入 Total
+	AntiSubDPS              float64
 	MaxProjectionRange      float64
 	MaxProjectionDistanceKM float64
 	BurstDamage             float64

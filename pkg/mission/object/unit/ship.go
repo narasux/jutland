@@ -117,6 +117,14 @@ type BattleShip struct {
 	Width float64 `json:"width"`
 	// 视距（地图格）。0 表示按舰种默认值，初始化时再封顶到主炮射程。
 	SightRange float64 `json:"sightRange"`
+	// 下潜耗时（秒）；仅潜艇使用，0 时取默认值
+	DiveTime float64 `json:"diveTime"`
+	// 上浮耗时（秒）；仅潜艇使用，0 时取默认值
+	SurfaceTime float64 `json:"surfaceTime"`
+	// 水下航速倍率（相对水面最大速）；仅潜艇使用，0 时取默认值
+	SubmergedSpeedRatio float64 `json:"submergedSpeedRatio"`
+	// 入场深度状态：surface（默认）/ submerged
+	DefaultDiveState string `json:"defaultDiveState"`
 	// 尾流船体；空则只在中线按舰宽生成舰艏/舰艉两点
 	WakeHulls []WakeHull `json:"wakeHulls"`
 	// 生成时算好的尾流船体，尾流每拍只读这一份
@@ -146,6 +154,12 @@ type BattleShip struct {
 	CurRotation float64
 	// 当前速度
 	CurSpeed float64
+	// 当前深度状态（潜艇）
+	DiveState DiveState `json:"-"`
+	// 下潜/上浮剩余拍数
+	diveTicksLeft int64
+	// 各玩家最近一次声呐探测到本艇的记录（仅潜艇使用）
+	DetectedBy map[faction.Player]ShipDetection `json:"-"`
 	// 动画累计模拟帧
 	AnimationAge float64
 	// 上一次生成专用尾流时的采样步，用于避免每帧重复堆叠
@@ -194,6 +208,16 @@ func (s *BattleShip) DetailLines() []string {
 	lines = append(lines, fmt.Sprintf(
 		"  Player: %s, GroupID: %d, AttackTarget: %s", s.BelongPlayer, s.GroupID, s.AttackTarget,
 	))
+	if s.Type == ShipTypeSubmarine {
+		lines = append(lines, fmt.Sprintf(
+			"  Dive: %s, speedRatio: %.2f, ticksLeft: %d",
+			diveStateName(s.DiveState), s.DiveSpeedRatio(), s.diveTicksLeft,
+		))
+		lines = append(lines, fmt.Sprintf(
+			"  Sonar: %.0f, detected: %t",
+			s.SonarRange(), s.DetectedByAny(SimTick()),
+		))
+	}
 	now := SimTick()
 	for _, weaponType := range []WeaponType{
 		WeaponTypeMainGun, WeaponTypeSecondaryGun, WeaponTypeAntiAircraftGun,
@@ -204,10 +228,17 @@ func (s *BattleShip) DetailLines() []string {
 			continue
 		}
 		// RemainingMillis 是下一座可发射武器的剩余时间，配百分比更直观。
+		// 下潜锁定与玩家主动禁用是两件事，调试面板要能区分
+		lock := ""
+		if s.Submerged() && (weaponType == WeaponTypeMainGun ||
+			weaponType == WeaponTypeSecondaryGun ||
+			weaponType == WeaponTypeAntiAircraftGun) {
+			lock = ", dive-locked"
+		}
 		lines = append(lines, fmt.Sprintf(
-			"  %s: ready %d/%d, next %.2fs (%.0f%%), disabled %t",
+			"  %s: ready %d/%d, next %.2fs (%.0f%%), disabled %t%s",
 			weaponType, status.Ready, status.Equipped,
-			float64(status.RemainingMillis)/1000, status.Progress*100, status.Disabled,
+			float64(status.RemainingMillis)/1000, status.Progress*100, status.Disabled, lock,
 		))
 	}
 	return lines
@@ -335,11 +366,21 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 		return
 	}
 
+	// 水下只剩鱼雷：甲板炮/防空炮整类跳过，但不改玩家的 Disable 开关。
+	gunsBlocked := s.Submerged()
+	// 火炮打不到完全下潜的潜艇（深弹走独立结算分支）。
+	gunCannotHit := func(target Hurtable) bool {
+		if enemy, ok := target.(*BattleShip); ok {
+			return enemy.Submerged()
+		}
+		return false
+	}
+
 	mainTarget := targets.Primary
 	if mainTarget == nil {
 		mainTarget = targets.AntiAircraft
 	}
-	if mainTarget != nil {
+	if mainTarget != nil && !gunsBlocked && !gunCannotHit(mainTarget) {
 		for _, gun := range s.Weapon.MainGuns {
 			shotBullets = append(shotBullets, gun.Fire(s, mainTarget)...)
 		}
@@ -349,7 +390,7 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 	if secondaryTarget == nil {
 		secondaryTarget = targets.AntiAircraft
 	}
-	if secondaryTarget != nil {
+	if secondaryTarget != nil && !gunsBlocked && !gunCannotHit(secondaryTarget) {
 		for _, gun := range s.Weapon.SecondaryGuns {
 			shotBullets = append(shotBullets, gun.Fire(s, secondaryTarget)...)
 		}
@@ -359,7 +400,7 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 	if antiAircraftTarget == nil {
 		antiAircraftTarget = targets.Primary
 	}
-	if antiAircraftTarget != nil {
+	if antiAircraftTarget != nil && !gunsBlocked && !gunCannotHit(antiAircraftTarget) {
 		for _, gun := range s.Weapon.AntiAircraftGuns {
 			shotBullets = append(shotBullets, gun.Fire(s, antiAircraftTarget)...)
 		}
@@ -404,6 +445,10 @@ func (s *BattleShip) HurtBy(bullet *objBullet.Bullet) {
 
 // GenTrails 生成尾流
 func (s *BattleShip) GenTrails() []*objTrail.Trail {
+	// 水下不画尾流：尾流会直接泄露潜艇位置。
+	if s.Submerged() {
+		return nil
+	}
 	if s.CurSpeed <= 0 {
 		return nil
 	}
@@ -708,7 +753,7 @@ func (s *BattleShip) hullLandOverlap(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, r
 // CurSpeed 的语义同样是"已乘倍率"，任何拿它做上限或基准的地方都必须用这个函数，
 // 否则在"快"倍速下会把舰船速度按未乘倍率的值砍半。
 func (s *BattleShip) CruiseSpeed() float64 {
-	return s.MaxSpeed * gameSpeedMultiplier()
+	return s.MaxSpeed * s.DiveSpeedRatio() * gameSpeedMultiplier()
 }
 
 // cruiseAcceleration 返回乘过全局速度倍率的加速度。
@@ -770,6 +815,10 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	// 未到达目标位置，逐渐加速
 	if s.CurSpeed < maxSpeed {
 		s.CurSpeed = min(maxSpeed, s.CurSpeed+acceleration)
+	}
+	// 下潜会让巡航速度骤降：超速时必须主动减速，否则会一直保留下潜前的航速。
+	if s.CurSpeed > maxSpeed {
+		s.CurSpeed = max(maxSpeed, s.CurSpeed-acceleration)
 	}
 	// 到目标位置附近，逐渐减速
 	if nearGoal && s.CurPos.Near(targetPos, s.Length/constants.MapBlockSize*1.5) {

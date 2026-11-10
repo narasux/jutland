@@ -303,7 +303,7 @@ func visibleEnemyShips(
 		if ship.BelongPlayer == plane.BelongPlayer || ship.CurHP <= 0 {
 			continue
 		}
-		if vision.VisibleAt(ship.CurPos.MX, ship.CurPos.MY) {
+		if ms.CanSeeShip(plane.BelongPlayer, ship) {
 			ships = append(ships, ship)
 		}
 	}

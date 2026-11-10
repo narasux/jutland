@@ -72,6 +72,9 @@ type MissionPlayerState struct {
 	CurEnemy faction.Player
 	// 当前玩家本局忽略迷雾。只由 black sheep wall 置位，不改游戏设置。
 	IgnoreFog bool
+	// 仅调试用：在地图上用红框暴露所有潜艇位置。
+	// 只影响绘制，不改变探测/锁敌等战斗逻辑。
+	RevealSubmarines bool
 	// 各玩家的已探索和可见。迷雾关闭时保持 nil。
 	Visions map[faction.Player]*FactionVision
 }

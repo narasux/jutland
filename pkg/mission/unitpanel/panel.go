@@ -35,6 +35,8 @@ const (
 	ActionToggleWeapon
 	// ActionToggleAircraft 批量允许或禁止舰载机起飞。
 	ActionToggleAircraft
+	// ActionToggleDive 切换潜艇下潜/上浮。
+	ActionToggleDive
 	// ActionToggleAirfield 机场停用/启用（停用时不警戒起飞、不生产）。
 	ActionToggleAirfield
 	// ActionSetProducing 设置机场当前生产机型。
@@ -62,6 +64,7 @@ const (
 	hitPreviousFocus
 	hitNextFocus
 	hitCenterTarget
+	hitDiveToggle
 	hitAllWeapons
 	hitWeapon
 	hitAircraft
@@ -226,6 +229,16 @@ func (p *Panel) rebuildHits(ms *state.MissionState) {
 		} else {
 			p.hasTarget = false
 		}
+		// 潜艇：面板「下潜/上浮」按钮；过渡中不可点，避免计时器来回重置。
+		if ships[0].Type == objUnit.ShipTypeSubmarine {
+			if _, canToggle := ships[0].NextDiveState(); canToggle {
+				p.hits = append(p.hits, hitRegion{
+					Rect:    p.computeDiveRect(ms, ships[0]),
+					Kind:    hitDiveToggle,
+					ShipUid: ships[0].Uid,
+				})
+			}
+		}
 	}
 
 	if p.tab == TabAircraft {
@@ -269,6 +282,8 @@ func (p *Panel) activate(ms *state.MissionState, hit hitRegion) []Action {
 		return []Action{{Kind: ActionFocusShip, FocusUid: p.adjacentFocusUid(ms, 1)}}
 	case hitCenterTarget:
 		return []Action{{Kind: ActionCenterTarget, TargetUid: hit.ShipUid}}
+	case hitDiveToggle:
+		return []Action{{Kind: ActionToggleDive, ShipUids: []string{hit.ShipUid}}}
 	case hitAllWeapons:
 		return []Action{p.weaponAction(ms, objUnit.WeaponTypeAll)}
 	case hitWeapon:

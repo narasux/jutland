@@ -83,6 +83,10 @@ type TorpedoLauncher struct {
 	FanStride int `json:"-"`
 	// FanTracks 所属扇形组的鱼雷管总数，决定扇面步长与最大跨度。
 	FanTracks int `json:"-"`
+	// SubmarineLaunched 本发射器属于潜艇：发射的鱼雷可以攻击下潜潜艇
+	SubmarineLaunched bool `json:"-"`
+	// AntiSubmarine 弹药本身是反潜鱼雷（如 Mk44）：水面舰也能攻击下潜潜艇
+	AntiSubmarine bool `json:"-"`
 }
 
 var _ AttackWeapon = (*TorpedoLauncher)(nil)
@@ -148,6 +152,11 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 	if !lc.InShotRange(sState.CurRotation, curPos, targetPos) {
 		return
 	}
+	// 水面舰普通鱼雷打不到下潜潜艇；潜艇自身鱼雷与反潜鱼雷可以
+	if target, ok := enemy.(*BattleShip); ok && target.Submerged() &&
+		!lc.SubmarineLaunched && !lc.AntiSubmarine {
+		return
+	}
 
 	targetType := ShipTypeDefault
 	targetLengthCells := 0.0
@@ -183,6 +192,7 @@ func (lc *TorpedoLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*ob
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
 		enemy.ObjType(), bulletSpeed, life, 0,
 	)
+	bt.SubmarineLaunched = lc.SubmarineLaunched
 	// 制导弹药记录目标身份与初始追踪点，寿命按绕路系数放宽。
 	if bt.IsGuided() {
 		bt.TargetShipUid = enemy.ID()

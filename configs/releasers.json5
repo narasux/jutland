@@ -286,4 +286,26 @@
     range: 4,
     bulletSpeed: 35,
   },
+  // --------- 深水炸弹 ----------
+  // 英国 Mk VII 300 磅航空深弹（剑鱼 / 桑德兰等）
+  {
+    name: "UK/DC/300/1939/MkVII",
+    bulletName: "UK/DC/300/1939/MkVII",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  // 美国 Mk 6 300 磅航空深弹（B-24 / TBF 反潜巡逻）
+  {
+    name: "US/DC/300/1940/Mk6",
+    bulletName: "US/DC/300/1940/Mk6",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
+  // 日本 95 式 100kg 航空深弹（九七舰攻反潜）
+  {
+    name: "JP/DC/200/1935/Type95",
+    bulletName: "JP/DC/200/1935/Type95",
+    range: 1.5,
+    bulletSpeed: 30,
+  },
 ]

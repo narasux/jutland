@@ -29,6 +29,8 @@ const (
 	TypeRocket Type = "rocket"
 	// TypeLaser 镭射
 	TypeLaser Type = "laser"
+	// TypeDepthCharge 深水炸弹：落点 AoE，只伤潜艇
+	TypeDepthCharge Type = "depth_charge"
 )
 
 // GuidanceMode 制导模式
@@ -117,6 +119,10 @@ type Bullet struct {
 	HitObjType object.Type
 	// 近炸触发半径，火箭弹与对空编程炮弹使用
 	ProximityRadius float64
+	// 反潜弹药：鱼雷 / 深弹专用标记，可命中水下潜艇
+	AntiSubmarine bool `json:"antiSubmarine"`
+	// 由潜艇发射的鱼雷（水面舰普通鱼雷打不到下潜潜艇）
+	SubmarineLaunched bool `json:"-"`
 	// 爆炸伤害半径，火箭弹与对空编程炮弹使用
 	BlastRadius float64
 	// 制导参数（来自弹药模板，nil 表示无制导）
@@ -127,6 +133,19 @@ type Bullet struct {
 	GuidePos objPos.MapPos `json:"-"`
 	// 离上次留下炮弹或鱼雷尾迹又飞过的距离，单位是地图格
 	trailCarry float64
+}
+
+// CanHitSubmerged 能否命中完全下潜的潜艇。
+// 深弹恒真；鱼雷看是否为反潜鱼雷或潜艇自身发射；其余弹药一律打不到水下。
+func (b *Bullet) CanHitSubmerged() bool {
+	switch b.Type {
+	case TypeDepthCharge:
+		return true
+	case TypeTorpedo:
+		return b.AntiSubmarine || b.SubmarineLaunched
+	default:
+		return false
+	}
 }
 
 // IsGuided 是否制导弹药
@@ -213,6 +232,10 @@ func (b *Bullet) GenTrails() []*trail.Trail {
 	}
 	if b.Type == TypeRocket {
 		return b.genRocketTrails()
+	}
+	// 深水炸弹没有尾迹，避免在海上画出投弹落点
+	if b.Type == TypeDepthCharge {
+		return nil
 	}
 	// 刚刚发射的不添加尾流，镭射也没有尾流
 	if b.ForwardAge <= 10 || b.Type == TypeLaser {
@@ -322,6 +345,14 @@ func GetType(name string) Type {
 	return b.Type
 }
 
+// CanHitSubmergedByName 该名称的弹药能否命中下潜潜艇；供发射器初始化时缓存。
+func CanHitSubmergedByName(name string) bool {
+	if b, ok := Map[name]; ok {
+		return b.CanHitSubmerged()
+	}
+	return false
+}
+
 // GetImg 获取弹药图片
 func GetImg(btType Type, diameter int) *ebiten.Image {
 	switch btType {
@@ -333,6 +364,8 @@ func GetImg(btType Type, diameter int) *ebiten.Image {
 		return bulletImg.GetBomb(diameter)
 	case TypeRocket:
 		return bulletImg.GetRocket(diameter)
+	case TypeDepthCharge:
+		return bulletImg.GetDepthCharge(diameter)
 	case TypeLaser:
 		return bulletImg.GetLaser(diameter)
 	}

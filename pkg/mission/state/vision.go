@@ -5,6 +5,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
 // FactionVision 一个玩家的已探索和当前可见格子。
@@ -410,4 +411,36 @@ func (v *FactionVision) Stamp(rx, ry, radius float64) {
 			}
 		}
 	}
+}
+
+// RevealsSubmarine 调试秘籍是否应把一艘尚未被探测到的敌方潜艇画出来。
+// 只给绘制层用：返回 true 不代表任何玩家真的“看见”了它，战斗判定仍走 CanSeeShip。
+func (s *MissionState) RevealsSubmarine(player faction.Player, ship *objUnit.BattleShip) bool {
+	if !s.Player.RevealSubmarines || ship == nil {
+		return false
+	}
+	if ship.Type != objUnit.ShipTypeSubmarine || ship.BelongPlayer == player {
+		return false
+	}
+	return !s.CanSeeShip(player, ship)
+}
+
+// CanSeeShip 判断某个玩家是否看得见这艘船。
+// 己方恒可见；敌方水下潜艇只有被声呐点亮（DetectedBy 记忆未过期）才可见，
+// 其余敌方单位按迷雾规则（关迷雾时恒可见）。IgnoreFog 只揭开当前玩家。
+func (s *MissionState) CanSeeShip(player faction.Player, ship *objUnit.BattleShip) bool {
+	if ship == nil {
+		return false
+	}
+	if ship.BelongPlayer == player {
+		return true
+	}
+	if player == s.Player.CurPlayer && s.Player.IgnoreFog {
+		return true
+	}
+	if ship.Submerged() {
+		detection, ok := ship.Detection(player)
+		return ok && detection.UntilTick > s.Core.SimTick
+	}
+	return s.SeenBy(player, ship.CurPos.MX, ship.CurPos.MY)
 }

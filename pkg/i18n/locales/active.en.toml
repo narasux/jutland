@@ -136,6 +136,16 @@ other = "Repair Ship"
 other = "Torpedo Boat"
 [ShipTypeSubmarine]
 other = "Submarine"
+[ShipDive]
+other = "Dive"
+[ShipSurface]
+other = "Surface"
+[ShipDiving]
+other = "Diving"
+[ShipSubmerged]
+other = "Submerged"
+[ShipSurfacing]
+other = "Surfacing"
 [PlaneTypeFighter]
 other = "Fighter"
 [PlaneTypeDiveBomber]
@@ -356,6 +366,14 @@ other = "Heading"
 other = "Target"
 [UnitPanelDistance]
 other = "Distance"
+[UnitPanelDiveState]
+other = "Dive State"
+[UnitPanelSonar]
+other = "Sonar"
+[UnitPanelDetected]
+other = "Detected"
+[UnitPanelNotDetected]
+other = "Not detected"
 [UnitPanelStatus]
 other = "Status"
 [UnitPanelGroup]

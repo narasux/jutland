@@ -136,6 +136,16 @@ other = "Ремонтное судно"
 other = "Торпедный катер"
 [ShipTypeSubmarine]
 other = "Подводная лодка"
+[ShipDive]
+other = "Погружение"
+[ShipSurface]
+other = "Всплытие"
+[ShipDiving]
+other = "Погружается"
+[ShipSubmerged]
+other = "Под водой"
+[ShipSurfacing]
+other = "Всплывает"
 [PlaneTypeFighter]
 other = "Истребитель"
 [PlaneTypeDiveBomber]
@@ -359,6 +369,14 @@ other = "Курс"
 other = "Цель"
 [UnitPanelDistance]
 other = "Дистанция"
+[UnitPanelDiveState]
+other = "Состояние"
+[UnitPanelSonar]
+other = "Гидролокатор"
+[UnitPanelDetected]
+other = "Обнаружена"
+[UnitPanelNotDetected]
+other = "Не обнаружена"
 [UnitPanelStatus]
 other = "Статус"
 [UnitPanelGroup]

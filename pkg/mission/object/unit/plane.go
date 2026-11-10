@@ -422,12 +422,19 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	if p.CurHP <= 0 {
 		return
 	}
-	// 机炮不用记录射击时间
-	for i := 0; i < len(p.Weapon.Guns); i++ {
-		shotBullets = append(shotBullets, p.Weapon.Guns[i].Fire(p, enemy)...)
+	// 攻击下潜潜艇时只有深弹可用：机炮、火箭、普通炸弹/鱼雷都不落下
+	submergedTarget := false
+	if ship, ok := enemy.(*BattleShip); ok && ship.Submerged() {
+		submergedTarget = true
 	}
-	for i := 0; i < len(p.Weapon.Rockets); i++ {
-		shotBullets = append(shotBullets, p.Weapon.Rockets[i].Fire(p, enemy)...)
+	if !submergedTarget {
+		// 机炮不用记录射击时间
+		for i := 0; i < len(p.Weapon.Guns); i++ {
+			shotBullets = append(shotBullets, p.Weapon.Guns[i].Fire(p, enemy)...)
+		}
+		for i := 0; i < len(p.Weapon.Rockets); i++ {
+			shotBullets = append(shotBullets, p.Weapon.Rockets[i].Fire(p, enemy)...)
+		}
 	}
 	// 释放器类武器，有最小的释放间隔限制。
 	// 炸弹可攻击战舰与地面停放目标；鱼雷只能攻击战舰（无法在陆地使用）。
@@ -505,6 +512,21 @@ func (p *Plane) releaseGroups(enemy Hurtable) [2][]*Releaser {
 		return [2][]*Releaser{p.Weapon.Bombs, p.Weapon.Torpedoes}
 	}
 	return [2][]*Releaser{p.Weapon.Bombs, nil}
+}
+
+// HasAntiSubWeapon 是否挂载了可攻击下潜潜艇的深水炸弹。
+func (p *Plane) HasAntiSubWeapon() bool {
+	for _, bomb := range p.Weapon.Bombs {
+		if bomb != nil && bomb.AntiSubmarine {
+			return true
+		}
+	}
+	for _, torpedo := range p.Weapon.Torpedoes {
+		if torpedo != nil && torpedo.AntiSubmarine {
+			return true
+		}
+	}
+	return false
 }
 
 // isGroundHurtable 判断目标是否为地面飞机（停放或滑行中，可被炸弹攻击的地面目标）。

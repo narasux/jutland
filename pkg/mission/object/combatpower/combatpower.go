@@ -77,6 +77,10 @@ func CalculatePlane(plane *objUnit.Plane, bullets map[string]*objBullet.Bullet) 
 		}
 	}
 	for _, releaser := range plane.Weapon.Bombs {
+		// 反潜深弹只伤潜艇，不计入对舰战力，避免图鉴虚高。
+		if releaser.AntiSubmarine {
+			continue
+		}
 		effectiveness := weaponEffectiveness(
 			0.55, 0, releaser.Range, releaser.LeftFiringArc, releaser.RightFiringArc, false,
 		)
@@ -137,6 +141,8 @@ func CalculateShip(
 	}
 
 	acc := newPowerAccumulator()
+	// 反潜火力单独统计：只对下潜潜艇有效，不参与综合战力
+	antiSubDPS := 0.0
 	for _, guns := range [][]*objUnit.Gun{
 		ship.Weapon.MainGuns, ship.Weapon.SecondaryGuns, ship.Weapon.AntiAircraftGuns,
 	} {
@@ -161,6 +167,9 @@ func CalculateShip(
 			torpedoBurst(torpedo, bullets)*effectiveness,
 		)
 		acc.maxProjectionRange = max(acc.maxProjectionRange, torpedo.Range)
+		if torpedo.SubmarineLaunched {
+			antiSubDPS += torpedoDPS(torpedo, bullets) * effectiveness
+		}
 	}
 	for _, rocket := range ship.Weapon.Rockets {
 		dps := shipRocketDPS(rocket, bullets)
@@ -178,11 +187,19 @@ func CalculateShip(
 			)
 			acc.addAntiAir(rocket.Name, dps*effectiveness, shipRocketBurst(rocket, bullets)*effectiveness)
 		}
+		if rocket.AntiSubmarine {
+			effectiveness := weaponEffectiveness(
+				0.45, rocket.BulletSpread, rocket.Range,
+				rocket.LeftFiringArc, rocket.RightFiringArc, false,
+			)
+			antiSubDPS += dps * effectiveness
+		}
 		acc.maxProjectionRange = max(acc.maxProjectionRange, rocket.Range)
 	}
 
 	hull := buildPowerInfo(shipEHP(ship), shipMobility(ship), acc.maxProjectionRange, 1, acc)
 	hull.Details.MaxProjectionDistanceKM = acc.maxProjectionRange * shipProjectionKilometersPerMapUnit
+	hull.Details.AntiSubDPS = antiSubDPS
 	result := hull
 	result.Hull = hull.Total
 
