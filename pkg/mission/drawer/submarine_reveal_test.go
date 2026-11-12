@@ -67,3 +67,18 @@ func TestRevealSubmarinesToggleDoesNotDrawForVisibleSub(t *testing.T) {
 	require.True(t, ms.CanSeeShip(faction.HumanAlpha, sub))
 	require.False(t, ms.RevealsSubmarine(faction.HumanAlpha, sub))
 }
+
+// 己方潜艇应走潜航淡出和状态图标分支；常显开关打开/关闭都不能崩。
+func TestOwnSubmarineDiveRenderingDoesNotPanic(t *testing.T) {
+	ms, sub := revealTestState()
+	sub.BelongPlayer = faction.HumanAlpha
+	sub.CurPos = objPos.NewR(5, 5)
+	sub.DiveState = objUnit.DiveStateSurface
+	require.True(t, sub.StartDive())
+
+	ms.UI.GameOpts.ForceDisplayState = true
+	drawRevealScene(t, ms)
+
+	ms.UI.GameOpts.ForceDisplayState = false
+	drawRevealScene(t, ms)
+}

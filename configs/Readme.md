@@ -388,8 +388,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // 水下航速倍率（相对 maxSpeed），仅潜艇使用；0 或不写取 0.35
     // 二战潜艇实测水下/水面航速比多在 0.36~0.46（例：VIIC 7.6/17.7 ≈ 0.43）
     submergedSpeedRatio: 0.35,
-    // 入场深度状态：surface（默认）/ submerged，仅潜艇使用
-    defaultDiveState: "surface",
+    // 入场深度状态：submerged（默认）/ surface，仅潜艇使用
+    // 默认所有潜艇入场即水下；需要水面开局时显式写 surface
+    defaultDiveState: "submerged",
     // 类型缩写
     typeAbbr: "CL",
     // 初始生命值

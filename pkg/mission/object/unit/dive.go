@@ -77,6 +77,7 @@ func (s *BattleShip) StartDive() bool {
 	}
 	s.DiveState = DiveStateDiving
 	s.diveTicksLeft = ReloadTicks(s.diveTimeSeconds())
+	s.diveTotalTicks = s.diveTicksLeft
 	return true
 }
 
@@ -87,6 +88,7 @@ func (s *BattleShip) StartSurface() bool {
 	}
 	s.DiveState = DiveStateSurfacing
 	s.diveTicksLeft = ReloadTicks(s.surfaceTimeSeconds())
+	s.diveTotalTicks = s.diveTicksLeft
 	return true
 }
 
@@ -106,6 +108,33 @@ func (s *BattleShip) AdvanceDive() {
 		s.DiveState = DiveStateSurface
 	}
 	s.diveTicksLeft = 0
+	s.diveTotalTicks = 0
+}
+
+// DiveProgress 返回 0（水面）到 1（完全水下）的潜航进度，
+// 供下潜/上浮过渡动画与状态牌进度条使用。稳定态直接返回 0 或 1。
+func (s *BattleShip) DiveProgress() float64 {
+	if s.Type != ShipTypeSubmarine {
+		return 0
+	}
+	switch s.DiveState {
+	case DiveStateDiving:
+		if s.diveTotalTicks <= 0 {
+			return 1
+		}
+		progress := 1 - float64(s.diveTicksLeft)/float64(s.diveTotalTicks)
+		return min(1, max(0, progress))
+	case DiveStateSubmerged:
+		return 1
+	case DiveStateSurfacing:
+		if s.diveTotalTicks <= 0 {
+			return 0
+		}
+		progress := float64(s.diveTicksLeft) / float64(s.diveTotalTicks)
+		return min(1, max(0, progress))
+	default:
+		return 0
+	}
 }
 
 // DiveStateText 深度状态的本地化名称，供单位面板使用。
@@ -136,6 +165,7 @@ func (s *BattleShip) DiveActionText() string {
 }
 
 // ResolveDiveConfig 补齐潜艇下潜配置的默认值并解析入场深度状态。
+// 未配置时默认水下；水面开局需要在配置里显式写 surface。
 // 非潜艇不写入深度字段；配置非法时返回错误，由初始化阶段 Fatal。
 func (s *BattleShip) ResolveDiveConfig() error {
 	if s.Type != ShipTypeSubmarine {
@@ -151,10 +181,10 @@ func (s *BattleShip) ResolveDiveConfig() error {
 		s.SubmergedSpeedRatio = defaultSubmergedSpeedRatio
 	}
 	switch s.DefaultDiveState {
-	case "", "surface":
-		s.DiveState = DiveStateSurface
-	case "submerged":
+	case "", "submerged":
 		s.DiveState = DiveStateSubmerged
+	case "surface":
+		s.DiveState = DiveStateSurface
 	default:
 		return fmt.Errorf("ship %q has unknown defaultDiveState %q", s.Name, s.DefaultDiveState)
 	}

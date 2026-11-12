@@ -2,15 +2,18 @@ package drawer
 
 import (
 	"fmt"
+	"image"
 	"image/color"
 	"math"
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objExplosion "github.com/narasux/jutland/pkg/mission/object/explosion"
@@ -18,6 +21,7 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/resources/font"
+	diveImg "github.com/narasux/jutland/pkg/resources/images/dive"
 	planeImg "github.com/narasux/jutland/pkg/resources/images/plane"
 	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
@@ -28,6 +32,13 @@ import (
 // weaponIconBaseSize 武器图标在 1x（zoom=4）下的显示边长，
 // 与 resources/images/weapons 的 16px 资源档一致，用于计算整行图标宽度
 const weaponIconBaseSize = 16.0
+
+const (
+	// submarineSubmergedAlpha 完全下潜后的舰体透明度
+	submarineSubmergedAlpha = 0.55
+	// submarineSubmergedScale 完全下潜后的舰体缩放，配合淡出表现下沉
+	submarineSubmergedScale = 0.86
+)
 
 // closestResourceZoom 选择最接近目标显示倍率的资源档位。
 // 这样可以优先复用已有缓存图片，再用少量 GeoM 缩放补齐剩余比例
@@ -72,6 +83,18 @@ func weaponResource(
 	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom())
 	resourceZoom := closestResourceZoom(target, []int{1, 2, 4})
 	return weaponImg.Get(weapon, status, resourceZoom), target / float64(resourceZoom)
+}
+
+// diveResource 返回潜航状态图标、水下青色图标、过渡金色图标和残余绘制缩放比例。
+func diveResource(
+	diveState diveImg.State, sceneZoom int,
+) (icon, underwater, transition *ebiten.Image, scale float64) {
+	target := float64(state.NormalizeZoom(sceneZoom)) / float64(state.DefaultZoom())
+	resourceZoom := closestResourceZoom(target, []int{1, 2, 4})
+	return diveImg.Get(diveState, resourceZoom),
+		diveImg.GetUnderwater(diveState, resourceZoom),
+		diveImg.GetTransition(diveState, resourceZoom),
+		target / float64(resourceZoom)
 }
 
 // rotatedRectangleCorners 返回以屏幕坐标为中心、长度沿 Y 轴的旋转矩形四角。
@@ -145,9 +168,126 @@ func drawSubmarineRevealBox(screen *ebiten.Image, ms *state.MissionState, ship *
 	}
 }
 
+// submarineDepthVisual 按潜航进度返回舰体透明度与缩放：0=水面，1=完全水下。
+func submarineDepthVisual(ship *objUnit.BattleShip) (alpha, scale float64) {
+	progress := ship.DiveProgress()
+	return 1 - (1-submarineSubmergedAlpha)*progress, 1 - (1-submarineSubmergedScale)*progress
+}
+
+// diveBadgeLayout 潜航状态图标、过渡进度与尺寸；
+// 绘制和武器图标行居中共用同一份结果，避免两处算法漂移。
+type diveBadgeLayout struct {
+	visible  bool
+	state    diveImg.State
+	width    float64
+	scale    float64
+	progress float64
+}
+
+// diveStateIcon 把潜艇深度状态映射到对应图标。
+func diveStateIcon(diveState objUnit.DiveState) diveImg.State {
+	switch diveState {
+	case objUnit.DiveStateDiving:
+		return diveImg.Diving
+	case objUnit.DiveStateSubmerged:
+		return diveImg.Submerged
+	case objUnit.DiveStateSurfacing:
+		return diveImg.Surfacing
+	default:
+		return diveImg.Surface
+	}
+}
+
+// newDiveBadgeLayout 为潜艇生成潜航状态图标；非潜艇不显示。
+// 水面状态也保留图标，供选中/常显状态行使用。
+func newDiveBadgeLayout(ms *state.MissionState, ship *objUnit.BattleShip) diveBadgeLayout {
+	if ship == nil || ship.Type != objUnit.ShipTypeSubmarine {
+		return diveBadgeLayout{}
+	}
+	scale := ms.ZoomScale()
+	return diveBadgeLayout{
+		visible: true,
+		state:   diveStateIcon(ship.DiveState),
+		// 与武器图标同尺寸，方便并排放在同一条状态行里
+		width:    weaponIconBaseSize * scale,
+		scale:    scale,
+		progress: ship.DiveProgress(),
+	}
+}
+
+// drawDiveBadge 绘制潜航状态图标：
+// 下潜时金色底图被青色从下往上覆盖，上浮时金色底图被绿色从上往下覆盖；
+// 水下稳定态为青色，水面稳定态为绿色。
+func drawDiveBadge(screen *ebiten.Image, layout diveBadgeLayout, x, y float64, sceneZoom int) {
+	if !layout.visible {
+		return
+	}
+	icon, underwater, transition, iconScale := diveResource(layout.state, sceneZoom)
+	switch layout.state {
+	case diveImg.Submerged:
+		drawImageAtScale(screen, underwater, x, y, iconScale)
+	case diveImg.Diving:
+		// 入水：青色从底部往上覆盖整个金色图标
+		drawImageAtScale(screen, transition, x, y, iconScale)
+		drawDiveOverlayBottom(screen, underwater, layout.progress, x, y, iconScale)
+	case diveImg.Surfacing:
+		// 出水：绿色从顶部往下覆盖整个金色图标
+		drawImageAtScale(screen, transition, x, y, iconScale)
+		drawDiveOverlayTop(screen, icon, 1-layout.progress, x, y, iconScale)
+	default:
+		drawImageAtScale(screen, icon, x, y, iconScale)
+	}
+}
+
+// drawDiveOverlayBottom 把覆盖层底部按进度高度贴到图标底部，形成从下往上的填充。
+func drawDiveOverlayBottom(
+	screen, overlay *ebiten.Image, progress, x, y, scale float64,
+) {
+	if overlay == nil {
+		return
+	}
+	progress = min(1, max(0, progress))
+	bounds := overlay.Bounds()
+	height := bounds.Dy()
+	fillRows := int(math.Ceil(progress * float64(height)))
+	if fillRows <= 0 {
+		return
+	}
+	fillRows = min(fillRows, height)
+
+	sub := overlay.SubImage(image.Rect(
+		bounds.Min.X, bounds.Min.Y+height-fillRows, bounds.Max.X, bounds.Max.Y,
+	)).(*ebiten.Image)
+	drawImageAtScale(screen, sub, x, y+float64(height-fillRows)*scale, scale)
+}
+
+// drawDiveOverlayTop 把覆盖层顶部按进度高度贴到图标顶部，形成从上往下的填充。
+func drawDiveOverlayTop(
+	screen, overlay *ebiten.Image, progress, x, y, scale float64,
+) {
+	if overlay == nil {
+		return
+	}
+	progress = min(1, max(0, progress))
+	bounds := overlay.Bounds()
+	height := bounds.Dy()
+	fillRows := int(math.Ceil(progress * float64(height)))
+	if fillRows <= 0 {
+		return
+	}
+	fillRows = min(fillRows, height)
+
+	sub := overlay.SubImage(image.Rect(
+		bounds.Min.X, bounds.Min.Y, bounds.Max.X, bounds.Min.Y+fillRows,
+	)).(*ebiten.Image)
+	drawImageAtScale(screen, sub, x, y, scale)
+}
+
 // drawSonarRanges 绘制选中己方舰船的声呐/水听器半径（仅表现，不参与判定）。
 func (d *Drawer) drawSonarRanges(screen *ebiten.Image, ms *state.MissionState) {
 	selected := selectedShipSet(ms.Interaction.SelectedShips)
+	// 单选时才标注名称与格数；多选时逐舰标注会互相遮挡，也增加每帧文字测量开销
+	showLabel := len(selected) == 1
 	for _, ship := range ms.Arena.OrderedShips() {
 		if ship.CurHP <= 0 || !ms.View.Camera.Contains(ship.CurPos) {
 			continue
@@ -160,11 +300,39 @@ func (d *Drawer) drawSonarRanges(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 		x, y := ms.CameraPosToScreen(ship.CurPos)
+		radiusPx := radius * ms.MapBlockDisplaySize()
 		vector.StrokeCircle(
 			screen, float32(x), float32(y),
-			float32(radius*ms.MapBlockDisplaySize()), 1, colorx.LightGreen, false,
+			float32(radiusPx), 1, colorx.LightGreen, false,
 		)
+		// 在舰船下方标注「声呐 + 格数」，避免被误认为攻击或治疗范围。
+		// 声呐圈在默认缩放下常常大于屏幕，贴在圈边会跑到屏幕外，所以跟随舰船。
+		if showLabel {
+			halfLen := ship.Length / constants.MapBlockSize * ms.MapBlockDisplaySize() / 2
+			labelY := y + max(halfLen, 18*ms.ZoomScale()) + 4*ms.ZoomScale()
+			d.drawSonarLabel(screen, ms, x, labelY, radius)
+		}
 	}
+}
+
+// drawSonarLabel 在指定位置绘制声呐名称与半径；文字贴到屏幕下沿时上移，避免看不见。
+func (d *Drawer) drawSonarLabel(
+	screen *ebiten.Image, ms *state.MissionState, centerX, labelY, radius float64,
+) {
+	scale := ms.ZoomScale()
+	fontSize := 11 * scale
+	face := font.LocalizedUI(font.Kai)
+	label := fmt.Sprintf("%s %.0f", i18n.Text(i18n.MsgUnitPanelSonar), radius)
+	textFace := text.GoTextFace{Source: face, Size: fontSize}
+	textW, textH := text.Measure(label, &textFace, 0)
+	x := centerX - textW/2
+	y := labelY
+	if limit := float64(ms.View.Layout.Height) - textH - 2*scale; limit > 0 {
+		y = min(y, limit)
+	}
+	clr := color.RGBA{R: 160, G: 235, B: 160, A: 230}
+	d.drawText(screen, label, x+scale, y+scale, fontSize, face, color.RGBA{A: 180})
+	d.drawText(screen, label, x, y, fontSize, face, clr)
 }
 
 // 绘制支援舰治疗范围圈（仅在选中己方医疗船或维修船时显示）
@@ -506,12 +674,12 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			s.Type == objUnit.ShipTypeSubmarine {
 			drawSubmarineRevealBox(screen, ms, s)
 		}
-		if s.BelongPlayer == ms.Player.CurPlayer && s.Submerged() {
-			// 己方潜艇：半透明 + 潜望镜标识，避免玩家找不到自己的艇
-			drawImageCenteredColored(screen, sImg, shipX, shipY, s.CurRotation, sImgScale, 1, 1, 1, 0.55)
-			vector.StrokeCircle(
-				screen, float32(shipX), float32(shipY),
-				float32(7*ms.ZoomScale()), 1.2, colorx.SkyBlue, false,
+		if s.BelongPlayer == ms.Player.CurPlayer && s.Type == objUnit.ShipTypeSubmarine {
+			// 己方潜艇：随潜航进度淡出并轻微缩小，避免状态切换过于突兀
+			alpha, depthScale := submarineDepthVisual(s)
+			drawImageCenteredColored(
+				screen, sImg, shipX, shipY, s.CurRotation, sImgScale*depthScale,
+				1, 1, 1, float32(alpha),
 			)
 		} else {
 			drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)
@@ -527,12 +695,18 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			drawUnitHitBox(screen, ms, s)
 		}
 
-		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP，武器状态
+		// 如果战舰被选中 或 全局启用状态展示，则需要绘制 HP、武器与潜航状态
 		isShipSelected := false
 		if _, ok := selected[s.Uid]; ok {
 			isShipSelected = true
 		}
-		if (ms.UI.GameOpts.ForceDisplayState || isShipSelected) && s.BelongPlayer == ms.Player.CurPlayer {
+		var diveBadge diveBadgeLayout
+		if s.BelongPlayer == ms.Player.CurPlayer && s.Type == objUnit.ShipTypeSubmarine {
+			diveBadge = newDiveBadgeLayout(ms, s)
+		}
+		showStatusRow := (ms.UI.GameOpts.ForceDisplayState || isShipSelected) &&
+			s.BelongPlayer == ms.Player.CurPlayer
+		if showStatusRow {
 			sceneScale := ms.ZoomScale()
 			// 绘制当前生命值
 			hpImg := textureImg.GetHP(s.CurHP, s.TotalHP)
@@ -568,15 +742,32 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			default:
 				weaponInterstitialSpacing = 35.0
 			}
-			// 整行按实际格数居中，避免格数变化时图标行整体偏向一侧
-			weaponX := shipX -
-				(float64(weaponCnt-1)*weaponInterstitialSpacing+weaponIconBaseSize)*sceneScale/2
+			// 武器图标与潜航状态图标共用一行，按原宽度整体居中。
+			// 潜航图标占用原主炮位置，武器整体右移一格，给左上角编队号让出空间。
+			iconStep := weaponInterstitialSpacing * sceneScale
+			iconWidth := 0.0
+			if weaponCnt > 0 {
+				iconWidth = float64(weaponCnt-1)*iconStep + weaponIconBaseSize*sceneScale
+			}
+			rowWidth := iconWidth
+			diveSlot := 0.0
+			if diveBadge.visible {
+				diveSlot = diveBadge.width + 6*sceneScale
+				rowWidth += diveSlot
+			}
+			weaponX := shipX - rowWidth/2
+			if diveBadge.visible {
+				// 空出原潜航图标槽位，使图标落到主炮位置，武器再整体右移一格
+				weaponX += diveSlot
+				drawDiveBadge(screen, diveBadge, weaponX, shipY-60*sceneScale, ms.UI.GameOpts.Zoom)
+				weaponX += diveSlot
+			}
 
 			// drawWeaponIcon 在游标处绘制一张图标，然后统一右移一个间距，
-			// 保证无论战舰是否拥有主炮，图标都从第一个槽位开始依次排列。
+			// 保证武器图标在潜航图标之后按固定间距依次排列。
 			drawWeaponIcon := func(weaponIcon *ebiten.Image, weaponScale float64) {
 				drawImageAtScale(screen, weaponIcon, weaponX, shipY-60*sceneScale, weaponScale)
-				weaponX += weaponInterstitialSpacing * sceneScale
+				weaponX += iconStep
 			}
 
 			// 绘制主炮状态
@@ -666,6 +857,14 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 			}
 		}
+		// 常显状态关闭时，仍给下潜/上浮中的己方潜艇保留状态图标，
+		// 避免下潜后找不到自己的艇
+		if !showStatusRow && diveBadge.visible && s.DiveState != objUnit.DiveStateSurface {
+			drawDiveBadge(
+				screen, diveBadge, shipX-diveBadge.width/2, shipY-44*ms.ZoomScale(),
+				ms.UI.GameOpts.Zoom,
+			)
+		}
 
 		// 如果全局启用状态展示，则敌方战舰也要绘制 HP 值
 		if ms.UI.GameOpts.ForceDisplayState && s.BelongPlayer != ms.Player.CurPlayer {
@@ -691,12 +890,12 @@ func (d *Drawer) drawDestroyedShips(screen *ebiten.Image, ms *state.MissionState
 			s.Type == objUnit.ShipTypeSubmarine {
 			drawSubmarineRevealBox(screen, ms, s)
 		}
-		if s.BelongPlayer == ms.Player.CurPlayer && s.Submerged() {
-			// 己方潜艇：半透明 + 潜望镜标识，避免玩家找不到自己的艇
-			drawImageCenteredColored(screen, sImg, shipX, shipY, s.CurRotation, sImgScale, 1, 1, 1, 0.55)
-			vector.StrokeCircle(
-				screen, float32(shipX), float32(shipY),
-				float32(7*ms.ZoomScale()), 1.2, colorx.SkyBlue, false,
+		if s.BelongPlayer == ms.Player.CurPlayer && s.Type == objUnit.ShipTypeSubmarine {
+			// 己方潜艇：沿用潜航进度淡出与缩放
+			alpha, depthScale := submarineDepthVisual(s)
+			drawImageCenteredColored(
+				screen, sImg, shipX, shipY, s.CurRotation, sImgScale*depthScale,
+				1, 1, 1, float32(alpha),
 			)
 		} else {
 			drawImageCentered(screen, sImg, shipX, shipY, s.CurRotation, sImgScale)

@@ -6319,22 +6319,26 @@
     displayNameRu: "Противолодочное испытание — остров Уэйк",
     displayNameJa: "対潜試験―ウェーク島",
     initFunds: 10000,
+    // 引擎把 initCameraPos 当作初始视野左上角（见 state.Camera.Pos），不是视野中心。
+    // 我方两舰质心约 (30, 36)；镜头取其左上外侧 (24, 32)，
+    // 保证 1280x720 及以上分辨率下两舰都出现在开局画面内。
     initCameraPos: [
       // P1
-      [32, 34],
-      // P2
-      [68, 64]
+      [24, 32],
+      // P2：敌编队质心约 (100, 59)，镜头取左上外侧
+      [94, 56]
     ],
     mapName: "wake",
     maxShipCount: 20,
-    description: "作战导调部第 1943 号反潜演习：我方 U 艇与一艘护航驱逐舰在威克岛环礁内与敌潜艇、敌驱逐舰对抗。演习目的：验证下潜隐身、声呐点亮、深水炸弹与反潜鱼雷的完整杀伤链——先让潜艇摸到无护航目标身边，再让反潜舰把接触咬住。注意：未探测到的下潜潜艇不会被盲炸命中，驱逐舰必须先用声呐点亮目标。",
-    descriptionEn: "Exercise 1943: a friendly U-boat and one escorting destroyer face hostile submarines and destroyers inside Wake atoll. The drill validates the full ASW kill chain - submerged stealth, sonar contact, depth charges and anti-submarine torpedoes. Let the boat close on unescorted targets, then have the escorts pin the contact. Blind depth-charge drops never damage an undetected submarine; the destroyer must light it up with sonar first.",
-    descriptionRu: "Учения 1943 года: дружественная подводная лодка и один эскортный эсминец против вражеских субмарин и эсминцев в лагуне Уэйка. Проверяется вся цепочка противолодочной борьбы: скрытность под водой, обнаружение гидролокатором, глубинные бомбы и противолодочные торпеды. Бомбометание по необнаруженной лодке не наносит урона — сначала её нужно засветить гидролокатором.",
-    descriptionJa: "特別演習1943：味方のUボートと護衛駆逐艦1隻が、ウェーク環礁内で敵潜水艦・敵駆逐艦と対峙する。潜航による隠密、ソナー探知、爆雷と対潜魚雷という対潜キルチェーンの検証が目的。未探知の潜航艦に爆雷を盲投しても効果はなく、まず駆逐艦がソナーで照準する必要がある。",
+    description: "作战导调部第 1943 号反潜演习：我方 U 艇与一艘护航驱逐舰在威克岛环礁周边海域与敌潜艇、敌驱逐舰对抗。演习目的：验证下潜隐身、声呐点亮、深水炸弹与反潜鱼雷的完整杀伤链——先让潜艇摸到无护航目标身边，再让反潜舰把接触咬住。注意：未探测到的下潜潜艇不会被盲炸命中，驱逐舰必须先用声呐点亮目标。双方开场相距约 71 格（约 9.1km），留出展开与观察的时间。",
+    descriptionEn: "Exercise 1943: a friendly U-boat and one escorting destroyer face hostile submarines and destroyers in the waters around Wake atoll. The drill validates the full ASW kill chain - submerged stealth, sonar contact, depth charges and anti-submarine torpedoes. Let the boat close on unescorted targets, then have the escorts pin the contact. Blind depth-charge drops never damage an undetected submarine; the destroyer must light it up with sonar first. The two sides start about 71 tiles (roughly 9.1 km) apart, leaving time to deploy and observe.",
+    descriptionRu: "Учения 1943 года: дружественная подводная лодка и один эскортный эсминец против вражеских субмарин и эсминцев в водах вокруг атолла Уэйк. Проверяется вся цепочка противолодочной борьбы: скрытность под водой, обнаружение гидролокатором, глубинные бомбы и противолодочные торпеды. Бомбометание по необнаруженной лодке не наносит урона — сначала её нужно засветить гидролокатором. Стороны начинают примерно в 71 клетке (около 9,1 км) друг от друга, оставляя время на развёртывание и наблюдение.",
+    descriptionJa: "特別演習1943：味方のUボートと護衛駆逐艦1隻が、ウェーク環礁周辺の海域で敵潜水艦・敵駆逐艦と対峙する。潜航による隠密、ソナー探知、爆雷と対潜魚雷という対潜キルチェーンの検証が目的。未探知の潜航艦に爆雷を盲投しても効果はなく、まず駆逐艦がソナーで照準する必要がある。両軍は約71マス（約9.1km）離れて開始し、展開と観察の時間を確保する。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
       // === 我方 ===
+      // 我方编队在环礁西北外海，U 艇与护航驱逐舰南北相隔 3 格，舰首向东。
       {
         name: "u_boat_type_viic",
         pos: [30, 34],
@@ -6348,29 +6352,32 @@
         belongPlayer: "P1"
       },
       // === 敌方水面反潜舰 ===
+      // 敌编队移到威克岛环礁以东外海，与 P1 编队最近约 71 格（约 9.1km）；
+      // 环礁隔开双方直射视线，开局有足够时间展开与观察。
       {
         name: "porter",
-        pos: [69, 64],
+        pos: [100, 57],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
         name: "hammann",
-        pos: [70, 66],
+        pos: [102, 59],
         rotation: 270,
         belongPlayer: "P2"
       },
       // === 敌方潜艇 ===
+      // I-168 / Nautilus 在驱逐舰前方（西侧）展开，舰首向西接敌。
       {
         name: "i_168",
-        pos: [66, 66],
-        rotation: 180,
+        pos: [97, 60],
+        rotation: 270,
         belongPlayer: "P2"
       },
       {
         name: "uss_nautilus",
-        pos: [69, 67],
-        rotation: 0,
+        pos: [99, 61],
+        rotation: 270,
         belongPlayer: "P2"
       }
     ],
@@ -6384,88 +6391,94 @@
     displayNameRu: "Полигон подлодок — Мидуэй",
     displayNameJa: "潜水艦試験場―ミッドウェー",
     initFunds: 10000,
+    // 引擎把 initCameraPos 当作初始视野左上角；四个试验区相距较远，无法同屏显示。
+    // P1：东南「航空反潜」区两舰质心约 (165, 228)，镜头取其左上外侧 (159, 225)；
+    // 其余区滚动查看，按 M 看全图。
+    // P2：同一试验区内的敌潜艇（225, 230），镜头取左上外侧。
     initCameraPos: [
-      // P1：四个试验区正中间，上下左右滚动即可逐区查看
-      [125, 220],
+      // P1
+      [159, 225],
       // P2
-      [125, 220]
+      [219, 225]
     ],
     mapName: "midway",
     maxShipCount: 16,
-    description: "作战导调部第 1943-2 号潜艇试验场：中途岛以南的开阔海域划成四个互不干扰的试验区——西南「潜对潜」：我方 U 艇对敌方 I-168，用水听器找它、用直航鱼雷打它；西北「我猎潜」：我方两艘驱逐舰用声呐点亮敌方 Nautilus，贴近到 2 格投深弹；东北「敌猎潜」：我方 U 艇被敌方两艘驱逐舰追猎，下潜静默、绕后反击；东南「航空反潜」：埃塞克斯号派出 SB2C 深弹机，由随行护航驱逐舰点亮 Nautilus，再投弹猎杀。四个区相距 20 格以上，互不干扰；按 M 可看全图，按 D 切换下潜/上浮。",
-    descriptionEn: "Test Range 1943-2 south of Midway: four independent ASW zones. Southwest - submarine duel: your U-boat against I-168; find her with the hydrophone and fire straight-running torpedoes. Northwest - hunter: two friendly destroyers light up Nautilus with sonar, then close to 2 tiles and drop depth charges. Northeast - hunted: your U-boat is chased by two hostile destroyers; dive, stay quiet, then counter-attack. Southeast - air ASW: USS Essex sends SB2C depth-charge bombers; the escorting destroyer lights up Nautilus for them. Zones are 20+ tiles apart; press M for the full map and D to dive or surface.",
-    descriptionRu: "Полигон 1943-2 южнее Мидуэя: четыре независимые зоны. Юго-запад — дуэль подлодок: ваша U-бот против I-168; ищите её гидрофоном и стреляйте прямоходными торпедами. Северо-запад — охота: два дружественных эсминца засвечивают Nautilus гидролокатором и с 2 клеток сбрасывают глубинные бомбы. Северо-восток — вас преследуют два эсминца: погружайтесь, молчите и контратакуйте. Юго-восток — авиация: «Эссекс» поднимает SB2C с глубинными бомбами; цель подсвечивает эскортный эсминец. Зоны разделены 20+ клетками; M — карта, D — погружение/всплытие.",
-    descriptionJa: "試験場1943-2、ミッドウェー南方の四つの独立区画。南西「潜水艦対決」：味方Uボート対I-168。水中聴音で探し、直航魚雷で攻撃。北西「味方が狩る」：味方駆逐艦2隻がソナーでNautilusを探知し、2マスまで接近して爆雷を投下。北東「狩られる側」：敵駆逐艦2隻に追われるUボート。潜航して静かにし、反撃へ。南東「航空対潜」：エセックスからSB2C爆雷機を発進。護衛駆逐艦がNautilusを探知して攻撃を誘導する。各区画は20マス以上離れている。Mで全体図、Dで潜航/浮上。",
+    description: "作战导调部第 1943-2 号潜艇试验场：中途岛以南的开阔海域划成四个互不干扰的试验区——西南「潜对潜」：我方 U 艇对敌方 I-168，用水听器找它、用直航鱼雷打它；西北「我猎潜」：我方两艘驱逐舰用声呐点亮敌方 Nautilus，贴近到 2 格投深弹；东北「敌猎潜」：我方 U 艇被敌方两艘驱逐舰追猎，下潜静默、绕后反击；东南「航空反潜」：埃塞克斯号派出 SB2C 深弹机，由随行护航驱逐舰点亮 Nautilus，再投弹猎杀。四个区在海上拉开布置：区内双方开场相距约 60 格（约 7.7km），任意两区之间最近敌我距离至少 71 格（约 9.1km），避免开局即互相开火；开场镜头位于东南「航空反潜」区，按 M 可看全图，按 D 切换下潜/上浮。",
+    descriptionEn: "Test Range 1943-2 south of Midway: four independent ASW zones. Southwest - submarine duel: your U-boat against I-168; find her with the hydrophone and fire straight-running torpedoes. Northwest - hunter: two friendly destroyers light up Nautilus with sonar, then close to 2 tiles and drop depth charges. Northeast - hunted: your U-boat is chased by two hostile destroyers; dive, stay quiet, then counter-attack. Southeast - air ASW: USS Essex sends SB2C depth-charge bombers; the escorting destroyer lights up Nautilus for them. The four zones are spread out: opposing groups within a zone start about 60 tiles (roughly 7.7 km) apart, and the closest ships from different zones are at least 71 tiles (about 9.1 km) apart, so the drills do not merge at the start. The opening camera is on the southeast air-ASW zone; press M for the full map and D to dive or surface.",
+    descriptionRu: "Полигон 1943-2 южнее Мидуэя: четыре независимые зоны. Юго-запад — дуэль подлодок: ваша U-бот против I-168; ищите её гидрофоном и стреляйте прямоходными торпедами. Северо-запад — охота: два дружественных эсминца засвечивают Nautilus гидролокатором и с 2 клеток сбрасывают глубинные бомбы. Северо-восток — вас преследуют два эсминца: погружайтесь, молчите и контратакуйте. Юго-восток — авиация: «Эссекс» поднимает SB2C с глубинными бомбами; цель подсвечивает эскортный эсминец. Четыре зоны разнесены: внутри зоны стороны начинают примерно в 60 клетках (около 7,7 км) друг от друга, а ближайшие корабли из разных зон разделены как минимум 71 клеткой (около 9,1 км), чтобы бои не сливались в начале. Начальная камера стоит на юго-восточной зоне «авиация против подлодок»; M — карта, D — погружение/всплытие.",
+    descriptionJa: "試験場1943-2、ミッドウェー南方の四つの独立区画。南西「潜水艦対決」：味方Uボート対I-168。水中聴音で探し、直航魚雷で攻撃。北西「味方が狩る」：味方駆逐艦2隻がソナーでNautilusを探知し、2マスまで接近して爆雷を投下。北東「狩られる側」：敵駆逐艦2隻に追われるUボート。潜航して静かにし、反撃へ。南東「航空対潜」：エセックスからSB2C爆雷機を発進。護衛駆逐艦がNautilusを探知して攻撃を誘導する。四つの区画は海上に広く配置され、区内の両軍は約60マス（約7.7km）、区画間の最接近距離は71マス（約9.1km）以上離れて開始するため、開幕から交戦状態にはならない。開始時のカメラは南東「航空対潜」区画。Mで全体図、Dで潜航/浮上。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
-      // === 西南区「潜对潜」 ===
+      // 四个试验区按西南 / 西北 / 东北 / 东南铺开；区内双方沿东西向相距约 60 格，
+      // 任意两区之间最近敌我距离 ≥71 格，避免 AI 跨区接敌和开局即交火。
+      // === 西南区「潜对潜」：U 艇（西，30,230）对 I-168（东，90,230），相距 60 格 ===
       {
         name: "u_boat_type_viic",
-        pos: [107, 235],
+        pos: [30, 230],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "i_168",
-        pos: [114, 235],
+        pos: [90, 230],
         rotation: 270,
         belongPlayer: "P2"
       },
-      // === 西北区「我猎潜」 ===
+      // === 西北区「我猎潜」：两驱逐舰（西，30,181/187）对 Nautilus（东，90,184），最近 60 格 ===
       {
         name: "gurkha",
-        pos: [107, 201],
+        pos: [30, 181],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "porter",
-        pos: [107, 208],
+        pos: [30, 187],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "uss_nautilus",
-        pos: [114, 205],
+        pos: [90, 184],
         rotation: 270,
         belongPlayer: "P2"
       },
-      // === 东北区「敌猎潜」 ===
+      // === 东北区「敌猎潜」：U 艇（西，165,184）对两驱逐舰（东，225,181/187），最近 60 格 ===
       {
         name: "u_boat_type_viic",
-        pos: [137, 204],
+        pos: [165, 184],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "gurkha",
-        pos: [143, 201],
+        pos: [225, 181],
         rotation: 270,
         belongPlayer: "P2"
       },
       {
         name: "porter",
-        pos: [143, 208],
+        pos: [225, 187],
         rotation: 270,
         belongPlayer: "P2"
       },
-      // === 东南区「航空反潜」 ===
+      // === 东南区「航空反潜」：埃塞克斯 + 护航驱逐舰（西，165,226/230）对 Nautilus（东，225,230），最近 60 格 ===
       {
         name: "essex",
-        pos: [136, 235],
+        pos: [165, 230],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "gurkha",
-        pos: [136, 232],
+        pos: [165, 226],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "uss_nautilus",
-        pos: [146, 235],
+        pos: [225, 230],
         rotation: 270,
         belongPlayer: "P2"
       }

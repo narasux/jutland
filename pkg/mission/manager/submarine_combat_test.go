@@ -44,7 +44,9 @@ func TestSurfaceShipWithoutASWWeaponCannotEngageSubmerged(t *testing.T) {
 
 	require.Zero(t, battleship.Weapon.MaxToSubmergedRange)
 	require.Zero(t, shipEngageRange(battleship, sub), "没有反潜武器的战列舰点不亮也打不到水下潜艇")
-	require.Positive(t, shipEngageRange(battleship, newNamedShip(t, "u_boat_type_viic", faction.ComputerAlpha, 11, 10)),
+	surfaceSub := newNamedShip(t, "u_boat_type_viic", faction.ComputerAlpha, 11, 10)
+	surfaceSub.DiveState = objUnit.DiveStateSurface
+	require.Positive(t, shipEngageRange(battleship, surfaceSub),
 		"同一条船打浮航潜艇时仍按对舰射程")
 }
 

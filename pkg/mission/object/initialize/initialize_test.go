@@ -259,3 +259,20 @@ func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 		}
 	}
 }
+
+// 所有潜艇模板默认入场即水下；需要水面开局时必须显式配置 surface。
+func TestSubmarineTemplatesDefaultSubmerged(t *testing.T) {
+	count := 0
+	for name, ship := range objUnit.ShipMap {
+		if ship.Type != objUnit.ShipTypeSubmarine {
+			continue
+		}
+		count++
+		if ship.DiveState != objUnit.DiveStateSubmerged {
+			t.Fatalf("submarine %s default dive state = %v, want submerged", name, ship.DiveState)
+		}
+	}
+	if count == 0 {
+		t.Fatal("no submarine templates loaded")
+	}
+}

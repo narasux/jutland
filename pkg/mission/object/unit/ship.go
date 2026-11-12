@@ -123,7 +123,7 @@ type BattleShip struct {
 	SurfaceTime float64 `json:"surfaceTime"`
 	// 水下航速倍率（相对水面最大速）；仅潜艇使用，0 时取默认值
 	SubmergedSpeedRatio float64 `json:"submergedSpeedRatio"`
-	// 入场深度状态：surface（默认）/ submerged
+	// 入场深度状态：submerged（默认）/ surface
 	DefaultDiveState string `json:"defaultDiveState"`
 	// 尾流船体；空则只在中线按舰宽生成舰艏/舰艉两点
 	WakeHulls []WakeHull `json:"wakeHulls"`
@@ -158,6 +158,8 @@ type BattleShip struct {
 	DiveState DiveState `json:"-"`
 	// 下潜/上浮剩余拍数
 	diveTicksLeft int64
+	// 下潜/上浮过渡总拍数，用于计算过渡进度
+	diveTotalTicks int64
 	// 各玩家最近一次声呐探测到本艇的记录（仅潜艇使用）
 	DetectedBy map[faction.Player]ShipDetection `json:"-"`
 	// 动画累计模拟帧
