@@ -16069,7 +16069,7 @@
     diveTime: 10,
     surfaceTime: 8,
     submergedSpeedRatio: 0.46,
-    defaultDiveState: "surface",
+    defaultDiveState: "submerged",
     fundsCost: 65,
     timeCost: 25,
     weapon: {
@@ -18240,7 +18240,7 @@
     diveTime: 12,
     surfaceTime: 9,
     submergedSpeedRatio: 0.43,
-    defaultDiveState: "surface",
+    defaultDiveState: "submerged",
     fundsCost: 50,
     timeCost: 20,
     weapon: {
@@ -33312,7 +33312,7 @@
     diveTime: 8,
     surfaceTime: 8,
     submergedSpeedRatio: 0.36,
-    defaultDiveState: "surface",
+    defaultDiveState: "submerged",
     fundsCost: 55,
     timeCost: 21,
     weapon: {

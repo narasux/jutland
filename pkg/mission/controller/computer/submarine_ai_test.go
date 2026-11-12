@@ -44,17 +44,56 @@ func TestSubmarineAIDivesOnEnemyAndFires(t *testing.T) {
 	require.Equal(t, enemy.Uid, sub.AttackTarget, "应把最近敌舰设为攻击目标")
 }
 
-func TestSubmarineAISurfacesWhenNoEnemy(t *testing.T) {
+func TestSubmarineAIStaysSubmergedWhenNoEnemy(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Weapon.HasTorpedo = true
 
 	ms := newMission(0, []*objUnit.BattleShip{sub}, nil)
 	handler := NewHandler(faction.ComputerAlpha)
 	snap := handler.snapshot(ms)
 	out := handler.submarineInstructions(snap, 0)
 
+	require.Empty(t, out, "无敌情时没有可执行指令")
+	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid),
+		"无敌情时也应保持水下，不应为了赶路而上浮")
+}
+
+func TestSubmarineAIStaysSubmergedWhileApproaching(t *testing.T) {
+	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
+	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Weapon.HasTorpedo = true
+	sub.Weapon.MaxToSubmergedRange = 6
+	// 35 格：在 16 格接敌圈之外，属于“水下巡航接近”阶段
+	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 40, 5)
+
+	ms := newMission(0, []*objUnit.BattleShip{sub, enemy}, nil)
+	handler := NewHandler(faction.ComputerAlpha)
+	snap := handler.snapshot(ms)
+	out := handler.submarineInstructions(snap, 0)
+
+	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid),
+		"远距离接近时不应上浮")
+	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipDive, sub.Uid),
+		"已经在水下时不需要重复下潜")
+	require.NotEmpty(t, out, "应继续向敌舰靠拢")
+}
+
+func TestSubmarineAIGunOnlySurfacesForSurfaceTarget(t *testing.T) {
+	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
+	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Weapon.HasMainGun = true
+	sub.Weapon.MaxToShipRange = 12
+	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 15, 5)
+
+	ms := newMission(0, []*objUnit.BattleShip{sub, enemy}, nil)
+	handler := NewHandler(faction.ComputerAlpha)
+	snap := handler.snapshot(ms)
+	out := handler.submarineInstructions(snap, 0)
+
 	require.Contains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid),
-		"无敌情时应回到水面高速巡航")
+		"没有鱼雷的潜艇需要上浮才能用甲板炮攻击水面目标")
+	require.Equal(t, enemy.Uid, sub.AttackTarget)
 }
 
 func TestSubmarineAIRetreatsWhenDetected(t *testing.T) {
@@ -124,4 +163,35 @@ func TestASWHunterKeepsClosingWhenContactOutsideWeaponRange(t *testing.T) {
 	if len(out) == 0 {
 		t.Fatal("contact at 4 tiles is outside the 2-tile depth charge range: hunter must keep closing")
 	}
+}
+
+func TestSubmarineAIGunOnlyStaysSubmergedOutOfGunRange(t *testing.T) {
+	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
+	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Weapon.HasMainGun = true
+	sub.Weapon.MaxToShipRange = 5
+	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 15, 5)
+
+	ms := newMission(0, []*objUnit.BattleShip{sub, enemy}, nil)
+	handler := NewHandler(faction.ComputerAlpha)
+	snap := handler.snapshot(ms)
+	out := handler.submarineInstructions(snap, 0)
+
+	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid),
+		"还没进甲板炮射程时不应上浮")
+}
+
+func TestSubmarineAIDivesWhenSurfacedEvenWithoutEnemy(t *testing.T) {
+	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
+	sub.DiveState = objUnit.DiveStateSurface
+	sub.Weapon.HasTorpedo = true
+
+	ms := newMission(0, []*objUnit.BattleShip{sub}, nil)
+	handler := NewHandler(faction.ComputerAlpha)
+	snap := handler.snapshot(ms)
+	out := handler.submarineInstructions(snap, 0)
+
+	require.Contains(t, out, instr.GenInstrUid(instr.NameShipDive, sub.Uid),
+		"即使无敌情，AI 潜艇也应主动回到水下")
+	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid))
 }

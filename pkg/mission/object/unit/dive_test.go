@@ -85,3 +85,74 @@ func TestSubmergedShipDeceleratesToUnderwaterCruiseSpeed(t *testing.T) {
 	want := 0.03 * 0.35 * config.G.SpeedMultiplier
 	require.LessOrEqual(t, ship.CurSpeed, want+1e-9, "下潜后必须减速到水下巡航速度")
 }
+
+func TestDiveProgressTracksTransition(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = oldSettings })
+
+	ship := &BattleShip{
+		Type:        ShipTypeSubmarine,
+		CurHP:       100,
+		DiveTime:    1,
+		SurfaceTime: 1,
+	}
+	require.Zero(t, ship.DiveProgress(), "水面时应为 0")
+
+	require.True(t, ship.StartDive())
+	require.Zero(t, ship.DiveProgress(), "刚开始下潜时应仍为 0")
+	total := ship.diveTotalTicks
+	require.Positive(t, total)
+
+	for i := int64(0); i < total/2; i++ {
+		ship.AdvanceDive()
+	}
+	require.InDelta(t, 0.5, ship.DiveProgress(), 1.0/float64(total), "下潜中应随计时平滑增长")
+
+	for i := int64(0); i < total-total/2; i++ {
+		ship.AdvanceDive()
+	}
+	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.InDelta(t, 1.0, ship.DiveProgress(), 1e-9)
+
+	require.True(t, ship.StartSurface())
+	require.InDelta(t, 1.0, ship.DiveProgress(), 1e-9, "刚开始上浮时应仍为 1")
+	total = ship.diveTotalTicks
+	require.Positive(t, total)
+
+	for i := int64(0); i < total/2; i++ {
+		ship.AdvanceDive()
+	}
+	require.InDelta(t, 0.5, ship.DiveProgress(), 1.0/float64(total), "上浮中应随计时平滑减退")
+
+	for i := int64(0); i < total-total/2; i++ {
+		ship.AdvanceDive()
+	}
+	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.Zero(t, ship.DiveProgress())
+}
+
+func TestDiveProgressOnlyForSubmarines(t *testing.T) {
+	gunship := &BattleShip{Type: ShipTypeDestroyer, CurHP: 100, DiveState: DiveStateSubmerged}
+	require.Zero(t, gunship.DiveProgress())
+}
+
+func TestResolveDiveConfigDefaultsToSubmerged(t *testing.T) {
+	sub := &BattleShip{Type: ShipTypeSubmarine, CurHP: 100}
+	require.NoError(t, sub.ResolveDiveConfig())
+	require.Equal(t, DiveStateSubmerged, sub.DiveState, "未配置 defaultDiveState 时应默认水下")
+	require.InDelta(t, defaultDiveTimeSeconds, sub.DiveTime, 1e-9)
+	require.InDelta(t, defaultSurfaceTimeSeconds, sub.SurfaceTime, 1e-9)
+	require.InDelta(t, defaultSubmergedSpeedRatio, sub.SubmergedSpeedRatio, 1e-9)
+}
+
+func TestResolveDiveConfigKeepsExplicitSurface(t *testing.T) {
+	sub := &BattleShip{Type: ShipTypeSubmarine, CurHP: 100, DefaultDiveState: "surface"}
+	require.NoError(t, sub.ResolveDiveConfig())
+	require.Equal(t, DiveStateSurface, sub.DiveState, "显式 surface 仍应按水面开局")
+}
+
+func TestResolveDiveConfigRejectsUnknownState(t *testing.T) {
+	sub := &BattleShip{Type: ShipTypeSubmarine, CurHP: 100, DefaultDiveState: "periscope"}
+	require.Error(t, sub.ResolveDiveConfig())
+}
