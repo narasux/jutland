@@ -2608,19 +2608,6 @@
     antiShip: true,
     antiAircraft: true
   },
-  // 日本海军 单装 7.62 毫米机枪
-  {
-    name: "JP/7.62",
-    bulletName: "JP/GB/7.62/1925",
-    bulletCount: 1,
-    reloadTime: 0.05,
-    range: 1.5,
-    bulletSpread: 12,
-    bulletSpeed: 850,
-    fundsCost: 1,
-    antiShip: true,
-    antiAircraft: true
-  },
   // 英国
   // --------- 舰炮 ----------
   // 英国海军 UK/406/45 三联装舰炮

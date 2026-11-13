@@ -1070,13 +1070,6 @@
     damage: 0.11,
     criticalRate: 0
   },
-  {
-    name: "JP/GB/7.62/1925",
-    type: "shell",
-    diameter: 8,
-    damage: 0.1,
-    criticalRate: 0
-  },
   // --------- 鱼雷 ----------
   // 日本海军 回天一型人操鱼雷（基于九三式三型，战斗部 1550kg；1944 年 11 月首次实战）
   {

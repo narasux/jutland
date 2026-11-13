@@ -5768,15 +5768,6 @@
     links: [],
   },
   {
-    name: "JP/7.62",
-    displayName: "7.62mm Single AA Mount",
-    type: "Weapon",
-    armaments: [],
-    description: "The Japanese 7.62 mm single machine gun was a light single-mounted weapon used for close-range self-defence.",
-    author: "",
-    links: [],
-  },
-  {
     name: "JP/7.7/Type97",
     displayName: "7.7mm Fixed MG Type97",
     type: "Weapon",
