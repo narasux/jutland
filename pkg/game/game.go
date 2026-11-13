@@ -47,6 +47,10 @@ type Game struct {
 	curMissionPlayerSide faction.Side
 	// 任务管理
 	missionMgr *manager.MissionManager
+	// 结算时的成功 / 失败模式，战役总结背景使用
+	resultMode GameMode
+	// 胜负全屏图至少展示的帧数，防止战斗末尾的点击直接跳过
+	resultSplashTicks int
 	// 设置界面
 	settingUI *settings.UI
 	// 游戏图鉴界面
@@ -111,6 +115,9 @@ func (g *Game) Update() error {
 		return g.handleMissionSuccess()
 	case GameModeMissionFailed:
 		return g.handleMissionFailed()
+	case GameModeMissionReport:
+		g.handleMissionReport()
+		return nil
 	case GameModeCollection:
 		return g.handleGameCollection()
 	case GameModeGameSetting:
@@ -151,11 +158,20 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.missionMgr.Draw(screen)
 		g.objStates.LoadingInterface.MissionRunningDrawn = true
 	case GameModeMissionSuccess:
-		g.drawer.drawBackground(screen, bgImg.MissionSuccess)
+		g.drawer.drawBackgroundCover(screen, bgImg.MissionSuccess)
 		g.drawer.drawMissionResult(screen, i18n.Text(i18n.MsgMissionSuccess), colorx.Green)
 	case GameModeMissionFailed:
-		g.drawer.drawBackground(screen, bgImg.MissionFailed)
+		g.drawer.drawBackgroundCover(screen, bgImg.MissionFailed)
 		g.drawer.drawMissionResult(screen, i18n.Text(i18n.MsgMissionFailed), colorx.Red)
+	case GameModeMissionReport:
+		if g.resultMode == GameModeMissionSuccess {
+			g.drawer.drawBackgroundCover(screen, bgImg.MissionSuccess)
+		} else {
+			g.drawer.drawBackgroundCover(screen, bgImg.MissionFailed)
+		}
+		if g.missionMgr != nil {
+			g.missionMgr.DrawBattleReport(screen, true)
+		}
 	case GameModeCollection:
 		g.drawer.drawBackground(screen, bgImg.MissionWindow)
 		g.collectionUI.Draw(screen)

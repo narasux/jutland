@@ -41,10 +41,12 @@ func (m *MissionManager) updateBuildings() {
 			lo.Ternary(rp.BelongPlayer == m.state.Player.CurPlayer, m.state.Player.CurFunds, 50000),
 		); ship != nil {
 			m.state.Arena.PutShip(ship)
+			m.state.Stats.RecordShipBuilt(ship)
 			m.markTargetingDirty()
 			if rp.BelongPlayer == m.state.Player.CurPlayer {
 				fundsCost, _ := objUnit.GetShipCost(ship.Name)
 				m.state.Player.CurFunds -= fundsCost
+				m.state.Stats.RecordFundsSpent(fundsCost)
 			}
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围。
 			// 走寻路而不是直线指令：直线撞岸会被当作“已到达”而停在岸边，
@@ -86,9 +88,11 @@ func (m *MissionManager) updateBuildings() {
 			flying,
 		)
 		for _, planeName := range completed {
+			m.state.Stats.RecordPlaneBuilt(af.BelongPlayer, planeName)
 			if af.BelongPlayer == m.state.Player.CurPlayer {
 				fundsCost, _ := objUnit.GetPlaneCost(planeName)
 				m.state.Player.CurFunds -= fundsCost
+				m.state.Stats.RecordFundsSpent(fundsCost)
 			}
 			af.StockPlane(planeName)
 		}
@@ -118,6 +122,7 @@ func (m *MissionManager) updateBuildings() {
 				op.RemoveShip(uid)
 			} else if cargo.BelongPlayer == m.state.Player.CurPlayer && ship.Update() {
 				m.state.Player.CurFunds += int64(ship.FundYield)
+				m.state.Stats.RecordFundsEarned(int64(ship.FundYield))
 				mark := objMark.NewText(cargo.CurPos, text, fontSize, colorx.Gold, 50)
 				m.state.UI.GameMarks[mark.ID] = mark
 			}

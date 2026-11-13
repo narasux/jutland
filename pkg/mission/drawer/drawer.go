@@ -18,6 +18,13 @@ type Drawer struct {
 	mission string
 	abbrMap *ebiten.Image
 	fog     FogImageCache
+	// 详情页击杀筛选结果缓存；战报打开期间日志不变，避免每帧重新过滤。
+	eventLogCache struct {
+		ms      *state.MissionState
+		filter  state.BattleReportEventFilter
+		version uint64
+		log     []state.BattleLogEntry
+	}
 }
 
 // NewDrawer ...

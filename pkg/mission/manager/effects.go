@@ -129,6 +129,8 @@ func (m *MissionManager) updateMissionShips() {
 	for uid, ship := range m.state.Arena.Ships {
 		if ship.CurHP <= 0 {
 			m.markTargetingDirty()
+			// 在战舰离场前记账：残骸动画结束、机库清空后无法再反推真实损失
+			m.state.Stats.RecordShipLost(ship)
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			ship.CurHP = textureImg.MaxShipExplodeState
 
@@ -165,6 +167,7 @@ func (m *MissionManager) updateMissionPlanes() {
 	for uid, plane := range m.state.Arena.Planes {
 		if plane.CurHP <= 0 {
 			m.markTargetingDirty()
+			m.state.Stats.RecordPlaneLost(plane)
 			if base, ok := m.state.FindAircraftBase(plane.BelongShip); ok {
 				// 机场飞机损失：库存已在起飞时扣减，这里仅累计损失统计
 				if af, isAirfield := base.(*objBuilding.Airfield); isAirfield {

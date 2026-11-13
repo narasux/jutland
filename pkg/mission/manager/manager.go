@@ -112,6 +112,71 @@ func (m *MissionManager) DrawPreview(screen *ebiten.Image) {
 	m.drawer.Draw(screen, m.state, m.terminal)
 }
 
+// BattleReportLayout 返回当前屏幕尺寸下的战报面板布局。
+// pkg/game 与绘制层共用这份布局，保证按钮命中区域和画面一致。
+func (m *MissionManager) BattleReportLayout(withButtons bool) state.BattleReportLayout {
+	return state.CalcBattleReportLayout(
+		m.state.View.Layout.Width,
+		m.state.View.Layout.Height,
+		withButtons,
+	)
+}
+
+// DrawBattleReport 绘制结算 / 暂停实时战报。
+func (m *MissionManager) DrawBattleReport(screen *ebiten.Image, final bool) {
+	m.drawer.DrawBattleReport(screen, m.state, m.BattleReportLayout(final), final)
+}
+
+// BattleReportPage 返回战报当前页。
+func (m *MissionManager) BattleReportPage() state.BattleReportPage {
+	return m.state.UI.BattleReportPage
+}
+
+// ShiftBattleReportPage 在总览 / 舰艇 / 飞机 / 详情之间循环切换。
+func (m *MissionManager) ShiftBattleReportPage(delta int) {
+	m.SetBattleReportPage(m.state.UI.BattleReportPage.Shift(delta))
+}
+
+// SetBattleReportPage 切换到指定战报页。
+func (m *MissionManager) SetBattleReportPage(page state.BattleReportPage) {
+	if !page.Valid() {
+		return
+	}
+	if page != m.state.UI.BattleReportPage {
+		m.state.UI.BattleReportEventScroll = 0
+		m.state.UI.BattleReportShipScroll = [2]int{}
+		m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
+		m.state.UI.BattleReportScrollDragOffset = 0
+	}
+	m.state.UI.BattleReportPage = page
+}
+
+// finalizeBattleStats 在任务进入胜败状态后收尾本局统计。
+// 必须在 Game 切换模式前完成，保证结算页读到最终值。
+func (m *MissionManager) finalizeBattleStats() {
+	status := m.state.Core.MissionStatus
+	if status != state.MissionSuccess && status != state.MissionFailed {
+		return
+	}
+	if m.state.Stats.Finalized {
+		return
+	}
+	reason := state.BattleEndVictory
+	if status == state.MissionFailed {
+		reason = state.BattleEndDefeat
+		if m.state.Core.ConfirmQuitMission {
+			reason = state.BattleEndAborted
+		}
+	}
+	m.state.FinalizeBattleStats(reason)
+	m.state.UI.BattleReportPage = state.BattleReportPageOverview
+	m.state.UI.BattleReportEventScroll = 0
+	m.state.UI.BattleReportEventFilter = state.BattleReportEventFilterAll
+	m.state.UI.BattleReportShipScroll = [2]int{}
+	m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
+	m.state.UI.BattleReportScrollDragOffset = 0
+}
+
 // WarmupMapBlocks 分帧预热地图块缓存，并报告当前视野是否已经就绪。
 func (m *MissionManager) WarmupMapBlocks() bool {
 	return m.updateMapBlockPrewarm()
@@ -173,6 +238,7 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	}
 
 	m.updateMissionStatus()
+	m.finalizeBattleStats()
 
 	return m.state.Core.MissionStatus, nil
 }

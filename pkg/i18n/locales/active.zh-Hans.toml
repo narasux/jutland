@@ -46,6 +46,164 @@ other = "放弃"
 other = "确认放弃任务？"
 [Confirm]
 other = "确认"
+[BattleReportTitle]
+other = "战役总结"
+[BattleReportVictory]
+other = "胜利"
+[BattleReportDefeat]
+other = "失败"
+[BattleReportAborted]
+other = "中止"
+[BattleReportInProgress]
+other = "作战中"
+[BattleReportPlayer]
+other = "我方"
+[BattleReportEnemy]
+other = "敌方"
+[BattleReportShips]
+other = "舰艇"
+[BattleReportAircraft]
+other = "飞机"
+[BattleReportInitial]
+other = "初始"
+[BattleReportBuilt]
+other = "建造"
+[BattleReportLost]
+other = "损失"
+[BattleReportRemaining]
+other = "在役"
+[BattleReportTonnage]
+other = "损失吨位"
+[BattleReportInitialTonnage]
+other = "初始吨位"
+[BattleReportDamage]
+other = "造成伤害"
+[BattleReportFunds]
+other = "资金"
+[BattleReportExchange]
+other = "战损交换比 {{.Ratio}}"
+[BattleReportSurvival]
+other = "舰艇保存率 {{.Rate}}"
+[BattleReportSubtitle]
+other = "{{.Mission}} · 阵营 {{.Side}} · {{.Duration}}"
+[BattleReportBuiltShipsCard]
+other = "战时建造"
+[BattleReportShipLossesCard]
+other = "舰艇战损"
+[BattleReportEnemySunkCard]
+other = "击沉敌舰"
+[BattleReportPlaneLossesCard]
+other = "飞机损失"
+[BattleReportBuiltShipsSub]
+other = "初始编成 {{.Count}}"
+[BattleReportShipLossesSub]
+other = "沉没 {{.Tonnage}} t"
+[BattleReportEnemySunkSub]
+other = "吨位 {{.Tonnage}} t"
+[BattleReportPlaneLossesSub]
+other = "击落敌机 {{.Count}}"
+[BattleReportWithShip]
+other = "飞机损失含随舰沉没 {{.Count}}"
+[BattleReportBack]
+other = "返回任务选择"
+[BattleReportRetry]
+other = "重新挑战"
+[BattleReportLiveHint]
+other = "[Tab] 返回暂停  [Esc] 继续"
+[BattleReportNoLoss]
+other = "无损失"
+[BattleReportNoData]
+other = "—"
+[BattleReportPageOverview]
+other = "总览"
+[BattleReportPageShips]
+other = "舰艇"
+[BattleReportPagePlanes]
+other = "飞机"
+[BattleReportPageEvents]
+other = "详情"
+[BattleReportEventTitle]
+other = "战况详情"
+[BattleReportEventFilterAll]
+other = "全部"
+[BattleReportEventFilterKills]
+other = "击杀"
+[BattleReportEventCount]
+other = "共 {{.Count}} 条"
+[BattleReportEventEmpty]
+other = "暂无战况记录"
+[BattleReportEventScrollHint]
+other = "滚轮或拖动滚动条查看更早记录"
+[BattleReportActionHit]
+other = "命中"
+[BattleReportActionSunk]
+other = "击沉"
+[BattleReportActionSunkUnknown]
+other = "沉没"
+[BattleReportActionShotDown]
+other = "击落"
+[BattleReportActionLost]
+other = "损失"
+[BattleReportActionWithShip]
+other = "随舰损失"
+[BattleReportEventRow]
+other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportWithShipRow]
+other = "{{.Time}}  {{.Actor}} 随舰损失飞机 {{.Count}} 架"
+[BattleReportWeaponUnknown]
+other = "未知武器"
+[BattleReportWeaponLaser]
+other = "激光"
+[BattleReportWeaponRocket]
+other = "火箭弹"
+[BattleReportWeaponBombGeneric]
+other = "炸弹"
+[BattleReportWeaponBomb]
+other = "{{.Weight}}kg 炸弹"
+[BattleReportWeaponTorpedo]
+other = "{{.Diameter}}mm 鱼雷"
+[BattleReportWeaponAAGun]
+other = "{{.Diameter}}mm 防空炮"
+[BattleReportWeaponAircraftGun]
+other = "{{.Diameter}}mm 机炮"
+[BattleReportWeaponAircraftMG]
+other = "{{.Diameter}}mm 机枪"
+[BattleReportWeaponShell]
+other = "{{.Diameter}}mm 舰炮"
+[BattleReportEventTotalDamage]
+other = "（累计 {{.Damage}}）"
+[BattleReportEventTonnage]
+other = "，吨位 {{.Tonnage}} 吨"
+[BattleReportEventRepeat]
+other = "，共命中 {{.Count}} 次"
+[BattleReportEventDamage]
+other = "，造成 {{.Damage}} 伤害"
+[BattleReportEventUseWeapon]
+other = " 使用 {{.Weapon}}"
+[BattleReportOwnShips]
+other = "我方舰艇"
+[BattleReportEnemyShips]
+other = "敌方舰艇"
+[BattleReportOwnPlanes]
+other = "我方飞机"
+[BattleReportEnemyPlanes]
+other = "敌方飞机"
+[BattleReportActiveTonnage]
+other = "在役吨位"
+[BattleReportTotal]
+other = "合计"
+[BattleReportPageHint]
+other = "点击页签切换页面"
+[BattleReportShipClass]
+other = "舰级"
+[BattleReportPlaneType]
+other = "机型"
+[BattleReportReplenished]
+other = "补充"
+[BattleReportOther]
+other = "其他"
+[BattleReportNoRecords]
+other = "暂无记录"
 [SettingsTitle]
 other = "游戏设置"
 [SettingsSpeed]
