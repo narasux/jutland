@@ -147,6 +147,17 @@ type Plane struct {
 	RemainRange float64
 	// 当前攻击目标 (uid)
 	CurAttackTarget string
+	// 最近一次命中本机的攻击者，用于战况记录（击落 / 损失时读取）
+	LastAttackerName    string
+	LastAttackerType    string
+	LastAttackerPlayer  faction.Player
+	LastAttackerIsPlane bool
+	// ShotDown 是否被火力击落（用于区分击落与坠毁）
+	ShotDown bool
+	// LastHit 最近一次命中的武器与伤害
+	LastHit HitInfo
+	// DamageTaken 本局累计承受伤害
+	DamageTaken float64
 	// 玩家手动派出的侦察。自动侦察为 false。
 	ScoutManual bool
 	// 侦察任务结束（盘旋完毕或油尽）时置位，下一拍走现有返航。

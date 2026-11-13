@@ -179,6 +179,17 @@ type BattleShip struct {
 	BelongPlayer faction.Player
 	// 上次治疗的 Unix 毫秒时间戳，用于计算固定间隔（医疗船和维修船使用）
 	LastHealAt int64
+	// 最近一次命中本舰的攻击者，用于战况记录（击沉时读取）
+	LastAttackerName    string
+	LastAttackerType    string
+	LastAttackerPlayer  faction.Player
+	LastAttackerIsPlane bool
+	// SunkByHit 是否由最近一次命中直接打沉（用于区分击沉与普通沉没）
+	SunkByHit bool
+	// LastHit 最近一次命中的武器与伤害
+	LastHit HitInfo
+	// DamageTaken 本局累计承受伤害
+	DamageTaken float64
 }
 
 var _ Hurtable = (*BattleShip)(nil)
