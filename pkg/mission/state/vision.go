@@ -375,6 +375,26 @@ func (s *MissionState) ConcealsEnemy(owner faction.Player, mx, my int) bool {
 	return !s.SeenBy(s.Player.CurPlayer, mx, my)
 }
 
+// CanSeeShip 判断玩家能否看见某艘舰船。
+// 对水下潜艇独立于迷雾：只有声呐 / 水听器探测记忆在有效期内才可见；
+// 上浮与过渡态按普通迷雾规则。
+func (s *MissionState) CanSeeShip(player faction.Player, ship *objUnit.BattleShip) bool {
+	if ship == nil {
+		return false
+	}
+	if ship.BelongPlayer == player {
+		return true
+	}
+	if player == s.Player.CurPlayer && s.Player.IgnoreFog {
+		return true
+	}
+	if ship.Submerged() {
+		detection, ok := ship.Detection(player)
+		return ok && detection.UntilTick > s.Core.SimTick
+	}
+	return s.SeenBy(player, ship.CurPos.MX, ship.CurPos.MY)
+}
+
 // Stamp 把圆心 (rx, ry)、半径 radius 内的格子标为可见。
 // 用格子中心是否落在半径内，避免只看格子角点时圆被咬缺。
 func (v *FactionVision) Stamp(rx, ry, radius float64) {
@@ -423,24 +443,4 @@ func (s *MissionState) RevealsSubmarine(player faction.Player, ship *objUnit.Bat
 		return false
 	}
 	return !s.CanSeeShip(player, ship)
-}
-
-// CanSeeShip 判断某个玩家是否看得见这艘船。
-// 己方恒可见；敌方水下潜艇只有被声呐点亮（DetectedBy 记忆未过期）才可见，
-// 其余敌方单位按迷雾规则（关迷雾时恒可见）。IgnoreFog 只揭开当前玩家。
-func (s *MissionState) CanSeeShip(player faction.Player, ship *objUnit.BattleShip) bool {
-	if ship == nil {
-		return false
-	}
-	if ship.BelongPlayer == player {
-		return true
-	}
-	if player == s.Player.CurPlayer && s.Player.IgnoreFog {
-		return true
-	}
-	if ship.Submerged() {
-		detection, ok := ship.Detection(player)
-		return ok && detection.UntilTick > s.Core.SimTick
-	}
-	return s.SeenBy(player, ship.CurPos.MX, ship.CurPos.MY)
 }

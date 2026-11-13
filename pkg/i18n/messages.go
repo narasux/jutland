@@ -75,6 +75,7 @@ const (
 	MsgShipTypeSubmarine         MessageID = "ShipTypeSubmarine"
 	MsgShipDive                  MessageID = "ShipDive"
 	MsgShipSurface               MessageID = "ShipSurface"
+	MsgShipSurfaceAction         MessageID = "ShipSurfaceAction"
 	MsgShipDiving                MessageID = "ShipDiving"
 	MsgShipSubmerged             MessageID = "ShipSubmerged"
 	MsgShipSurfacing             MessageID = "ShipSurfacing"

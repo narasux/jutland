@@ -296,7 +296,7 @@ other = "Torpedo Boat"
 other = "Submarine"
 [ShipDive]
 other = "Dive"
-[ShipSurface]
+[ShipSurfaceAction]
 other = "Surface"
 [ShipDiving]
 other = "Diving"
@@ -304,6 +304,8 @@ other = "Diving"
 other = "Submerged"
 [ShipSurfacing]
 other = "Surfacing"
+[ShipSurface]
+other = "On surface"
 [PlaneTypeFighter]
 other = "Fighter"
 [PlaneTypeDiveBomber]

@@ -470,6 +470,10 @@ func initShipMap() {
 		// 检查伤害减免值不能超过 1
 		s.HorizontalDamageReduction = min(1, s.HorizontalDamageReduction)
 		s.VerticalDamageReduction = min(1, s.VerticalDamageReduction)
+		// 补齐潜艇下潜配置并解析入场深度
+		if err := s.ResolveDiveConfig(); err != nil {
+			log.Fatal(err)
+		}
 
 		objUnit.ShipMap[s.Name] = &s
 		objUnit.AllShipNames = append(objUnit.AllShipNames, s.Name)

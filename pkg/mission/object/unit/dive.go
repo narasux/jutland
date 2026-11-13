@@ -158,7 +158,7 @@ func (s *BattleShip) DiveActionText() string {
 	case DiveStateSurface:
 		return i18n.Text(i18n.MsgShipDive)
 	case DiveStateSubmerged:
-		return i18n.Text(i18n.MsgShipSurface)
+		return i18n.Text(i18n.MsgShipSurfaceAction)
 	default:
 		return s.DiveStateText()
 	}

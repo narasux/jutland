@@ -13,6 +13,16 @@ func sonarQueryRadius() float64 {
 // 只遍历水下潜艇，用邻域桶找敌方舰船/飞机；命中的写回 8 秒记忆。
 // 必须在 updateVision 之前执行，且先按这一拍的位置重建桶。
 func (m *MissionManager) updateSubmarineDetection() {
+	hasSubmarine := false
+	for _, ship := range m.state.Arena.Ships {
+		if ship.Type == objUnit.ShipTypeSubmarine && ship.CurHP > 0 {
+			hasSubmarine = true
+			break
+		}
+	}
+	if !hasSubmarine {
+		return
+	}
 	m.rebuildCombatBuckets()
 	now := m.state.Core.SimTick
 	memory := objUnit.ReloadTicks(objUnit.SubmarineDetectionMemorySeconds)

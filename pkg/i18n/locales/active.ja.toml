@@ -296,7 +296,7 @@ other = "魚雷艇"
 other = "潜水艦"
 [ShipDive]
 other = "潜航"
-[ShipSurface]
+[ShipSurfaceAction]
 other = "浮上"
 [ShipDiving]
 other = "潜航中"
@@ -304,6 +304,8 @@ other = "潜航中"
 other = "潜水中"
 [ShipSurfacing]
 other = "浮上中"
+[ShipSurface]
+other = "水面"
 [PlaneTypeFighter]
 other = "戦闘機"
 [PlaneTypeDiveBomber]
