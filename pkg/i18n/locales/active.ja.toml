@@ -46,6 +46,164 @@ other = "作戦放棄"
 other = "この作戦を放棄しますか？"
 [Confirm]
 other = "決定"
+[BattleReportTitle]
+other = "戦闘報告"
+[BattleReportVictory]
+other = "勝利"
+[BattleReportDefeat]
+other = "敗北"
+[BattleReportAborted]
+other = "中止"
+[BattleReportInProgress]
+other = "作戦中"
+[BattleReportPlayer]
+other = "味方"
+[BattleReportEnemy]
+other = "敵"
+[BattleReportShips]
+other = "艦艇"
+[BattleReportAircraft]
+other = "航空機"
+[BattleReportInitial]
+other = "初期"
+[BattleReportBuilt]
+other = "建造"
+[BattleReportLost]
+other = "損失"
+[BattleReportRemaining]
+other = "現役"
+[BattleReportTonnage]
+other = "損失トン数"
+[BattleReportInitialTonnage]
+other = "初期トン数"
+[BattleReportDamage]
+other = "与えた損害"
+[BattleReportFunds]
+other = "資金"
+[BattleReportExchange]
+other = "損害交換比 {{.Ratio}}"
+[BattleReportSurvival]
+other = "艦艇生存率 {{.Rate}}"
+[BattleReportSubtitle]
+other = "{{.Mission}} · 陣営 {{.Side}} · {{.Duration}}"
+[BattleReportBuiltShipsCard]
+other = "戦時建造"
+[BattleReportShipLossesCard]
+other = "艦艇損失"
+[BattleReportEnemySunkCard]
+other = "撃沈敵艦"
+[BattleReportPlaneLossesCard]
+other = "航空機損失"
+[BattleReportBuiltShipsSub]
+other = "初期編成 {{.Count}}"
+[BattleReportShipLossesSub]
+other = "沈没 {{.Tonnage}} t"
+[BattleReportEnemySunkSub]
+other = "トン数 {{.Tonnage}} t"
+[BattleReportPlaneLossesSub]
+other = "敵機撃墜 {{.Count}}"
+[BattleReportWithShip]
+other = "航空機損失には随艦沈没 {{.Count}} を含む"
+[BattleReportBack]
+other = "ミッション選択へ"
+[BattleReportRetry]
+other = "再挑戦"
+[BattleReportLiveHint]
+other = "[Tab] 一時停止へ  [Esc] 再開"
+[BattleReportNoLoss]
+other = "損失なし"
+[BattleReportNoData]
+other = "—"
+[BattleReportPageOverview]
+other = "概要"
+[BattleReportPageShips]
+other = "艦艇"
+[BattleReportPagePlanes]
+other = "航空機"
+[BattleReportPageEvents]
+other = "詳細"
+[BattleReportEventTitle]
+other = "戦況詳細"
+[BattleReportEventFilterAll]
+other = "全て"
+[BattleReportEventFilterKills]
+other = "撃破"
+[BattleReportEventCount]
+other = "全 {{.Count}} 件"
+[BattleReportEventEmpty]
+other = "戦況記録なし"
+[BattleReportEventScrollHint]
+other = "スクロールまたはバーのドラッグで過去の記録へ"
+[BattleReportActionHit]
+other = "命中"
+[BattleReportActionSunk]
+other = "撃沈"
+[BattleReportActionSunkUnknown]
+other = "沈没"
+[BattleReportActionShotDown]
+other = "撃墜"
+[BattleReportActionLost]
+other = "損失"
+[BattleReportActionWithShip]
+other = "随艦損失"
+[BattleReportEventRow]
+other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportWithShipRow]
+other = "{{.Time}}  {{.Actor}} 随艦損失 航空機 {{.Count}} 機"
+[BattleReportWeaponUnknown]
+other = "不明兵器"
+[BattleReportWeaponLaser]
+other = "レーザー"
+[BattleReportWeaponRocket]
+other = "ロケット弾"
+[BattleReportWeaponBombGeneric]
+other = "爆弾"
+[BattleReportWeaponBomb]
+other = "{{.Weight}}kg 爆弾"
+[BattleReportWeaponTorpedo]
+other = "{{.Diameter}}mm 魚雷"
+[BattleReportWeaponAAGun]
+other = "{{.Diameter}}mm 高射砲"
+[BattleReportWeaponAircraftGun]
+other = "{{.Diameter}}mm 機関砲"
+[BattleReportWeaponAircraftMG]
+other = "{{.Diameter}}mm 機関銃"
+[BattleReportWeaponShell]
+other = "{{.Diameter}}mm 砲"
+[BattleReportEventTotalDamage]
+other = "（累計 {{.Damage}}）"
+[BattleReportEventTonnage]
+other = "・{{.Tonnage}} t"
+[BattleReportEventRepeat]
+other = "（{{.Count}}回命中）"
+[BattleReportEventDamage]
+other = "、{{.Damage}}ダメージ"
+[BattleReportEventUseWeapon]
+other = "（{{.Weapon}}）"
+[BattleReportOwnShips]
+other = "味方艦艇"
+[BattleReportEnemyShips]
+other = "敵艦艇"
+[BattleReportOwnPlanes]
+other = "味方航空機"
+[BattleReportEnemyPlanes]
+other = "敵航空機"
+[BattleReportActiveTonnage]
+other = "現役トン数"
+[BattleReportTotal]
+other = "合計"
+[BattleReportPageHint]
+other = "タブをクリックして切り替え"
+[BattleReportShipClass]
+other = "艦級"
+[BattleReportPlaneType]
+other = "機種"
+[BattleReportReplenished]
+other = "補充"
+[BattleReportOther]
+other = "その他"
+[BattleReportNoRecords]
+other = "記録なし"
 [SettingsTitle]
 other = "ゲーム設定"
 [SettingsSpeed]

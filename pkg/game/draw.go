@@ -31,6 +31,19 @@ func NewDrawer() *Drawer {
 	}
 }
 
+// drawBackgroundCover 等比缩放铺满屏幕，超出部分居中裁掉，避免胜负图被拉伸变形。
+func (d *Drawer) drawBackgroundCover(screen *ebiten.Image, bg *ebiten.Image) {
+	w, h := float64(bg.Bounds().Dx()), float64(bg.Bounds().Dy())
+	scale := max(float64(screen.Bounds().Dx())/w, float64(screen.Bounds().Dy())/h)
+	opts := d.genDefaultDrawImageOptions()
+	opts.GeoM.Scale(scale, scale)
+	opts.GeoM.Translate(
+		(float64(screen.Bounds().Dx())-w*scale)/2,
+		(float64(screen.Bounds().Dy())-h*scale)/2,
+	)
+	screen.DrawImage(bg, opts)
+}
+
 // 绘制背景
 func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 	w, h := bg.Bounds().Dx(), bg.Bounds().Dy()

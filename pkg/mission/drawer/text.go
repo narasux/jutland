@@ -35,6 +35,17 @@ func (d *Drawer) drawPauseOverlay(screen *ebiten.Image, ms *state.MissionState) 
 		return
 	}
 
+	// 暂停界面 Tab 切换的实时战报：复用结算页渲染器，不画结算按钮。
+	if ms.UI.PauseStats {
+		d.DrawBattleReport(
+			screen,
+			ms,
+			state.CalcBattleReportLayout(ms.View.Layout.Width, ms.View.Layout.Height, false),
+			false,
+		)
+		return
+	}
+
 	ui := state.CalcPauseUILayout(ms.View.Layout)
 	vector.FillRect(
 		screen, 0, 0, float32(ms.View.Layout.Width), float32(ms.View.Layout.Height),

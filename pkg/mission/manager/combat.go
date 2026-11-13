@@ -69,7 +69,7 @@ func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid
 			return false
 		}
 		if bt.CurPos.Distance(plane.CurPos) <= bombBlastRadius {
-			plane.HurtBy(bt)
+			m.hurtPlane(plane, bt)
 			hit = true
 		}
 		return false
@@ -92,6 +92,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 		if len(bullets) == 0 {
 			continue
 		}
+		markBulletShooter(bullets, ship.Name, string(ship.Type))
 		// 镜头内的才统计
 		if m.state.View.Camera.Contains(ship.CurPos) {
 			for _, bt := range bullets {
@@ -418,6 +419,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 			if len(bullets) == 0 {
 				continue
 			}
+			markBulletShooter(bullets, plane.Name, string(plane.Type))
 			// 镜头内的才统计
 			if m.state.View.Camera.Contains(plane.CurPos) {
 				for _, bt := range bullets {
@@ -570,6 +572,7 @@ func (m *MissionManager) updatePlaneDefensiveFire(plane *objUnit.Plane) {
 			if len(bullets) == 0 {
 				return false
 			}
+			markBulletShooter(bullets, plane.Name, string(plane.Type))
 			m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
 			return true
 		},
@@ -712,7 +715,7 @@ func (m *MissionManager) updateShotBullets() {
 				) {
 					return false
 				}
-				ship.HurtBy(bt)
+				m.hurtShip(ship, bt)
 				bt.HitObjType = object.TypeShip
 				return true
 			})
@@ -743,7 +746,7 @@ func (m *MissionManager) updateShotBullets() {
 						plane.Width/constants.MapBlockSize,
 						plane.CurRotation,
 					) {
-						plane.HurtBy(bt)
+						m.hurtPlane(plane, bt)
 						bt.HitObjType = object.TypePlane
 						if bt.Plunge > 0 {
 							m.damageGroundPlanesNear(bt, plane.Uid)
@@ -792,7 +795,7 @@ func (m *MissionManager) updateShotBullets() {
 			if bt.CurPos.Distance(plane.CurPos) > bt.BlastRadius {
 				return false
 			}
-			plane.HurtBy(bt)
+			m.hurtPlane(plane, bt)
 			bt.HitObjType = object.TypePlane
 			return false
 		})
@@ -859,6 +862,11 @@ func (m *MissionManager) updateShotBullets() {
 
 	// 继续塔塔开的，保留
 	m.state.Arena.ForwardingBullets = forwardingBullets
+	// 到达弹药只结算一次：把本发弹药累计的实际伤害记到开火方，
+	// 包括暴击、溢出伤害与落点范围伤害。已到达弹药不会再飞，不会重复记账。
+	for _, bt := range arrivedBullets {
+		m.state.Stats.RecordDamage(bt.BelongPlayer, bt.RealDamage)
+	}
 	// 已经到达目标地点的，转换成爆炸 & 伤害数值
 	for _, bt := range arrivedBullets {
 		// 击中的是战舰 / 飞机，才会有伤害数值

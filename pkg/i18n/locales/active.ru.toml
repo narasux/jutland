@@ -46,6 +46,164 @@ other = "Прервать"
 other = "Прервать эту миссию?"
 [Confirm]
 other = "Подтвердить"
+[BattleReportTitle]
+other = "Итоги боя"
+[BattleReportVictory]
+other = "Победа"
+[BattleReportDefeat]
+other = "Поражение"
+[BattleReportAborted]
+other = "Прервано"
+[BattleReportInProgress]
+other = "В бою"
+[BattleReportPlayer]
+other = "Наши"
+[BattleReportEnemy]
+other = "Противник"
+[BattleReportShips]
+other = "Корабли"
+[BattleReportAircraft]
+other = "Самолёты"
+[BattleReportInitial]
+other = "Начально"
+[BattleReportBuilt]
+other = "Построено"
+[BattleReportLost]
+other = "Потери"
+[BattleReportRemaining]
+other = "В строю"
+[BattleReportTonnage]
+other = "Потоплено, т"
+[BattleReportInitialTonnage]
+other = "Начальный тоннаж"
+[BattleReportDamage]
+other = "Нанесённый урон"
+[BattleReportFunds]
+other = "Средства"
+[BattleReportExchange]
+other = "Соотношение потерь {{.Ratio}}"
+[BattleReportSurvival]
+other = "Сохранность кораблей {{.Rate}}"
+[BattleReportSubtitle]
+other = "{{.Mission}} · Сторона {{.Side}} · {{.Duration}}"
+[BattleReportBuiltShipsCard]
+other = "Построено в бою"
+[BattleReportShipLossesCard]
+other = "Потери кораблей"
+[BattleReportEnemySunkCard]
+other = "Потоплено врагов"
+[BattleReportPlaneLossesCard]
+other = "Потери авиации"
+[BattleReportBuiltShipsSub]
+other = "Изначально {{.Count}}"
+[BattleReportShipLossesSub]
+other = "Потоплено {{.Tonnage}} т"
+[BattleReportEnemySunkSub]
+other = "Тоннаж {{.Tonnage}} т"
+[BattleReportPlaneLossesSub]
+other = "Сбито врагов: {{.Count}}"
+[BattleReportWithShip]
+other = "В т.ч. на потопленных кораблях {{.Count}}"
+[BattleReportBack]
+other = "К выбору миссий"
+[BattleReportRetry]
+other = "Повторить"
+[BattleReportLiveHint]
+other = "[Tab] Назад  [Esc] Продолжить"
+[BattleReportNoLoss]
+other = "Без потерь"
+[BattleReportNoData]
+other = "—"
+[BattleReportPageOverview]
+other = "Обзор"
+[BattleReportPageShips]
+other = "Корабли"
+[BattleReportPagePlanes]
+other = "Самолёты"
+[BattleReportPageEvents]
+other = "Детали"
+[BattleReportEventTitle]
+other = "Детали боя"
+[BattleReportEventFilterAll]
+other = "Все"
+[BattleReportEventFilterKills]
+other = "Убито"
+[BattleReportEventCount]
+other = "Всего: {{.Count}}"
+[BattleReportEventEmpty]
+other = "Журнал пуст"
+[BattleReportEventScrollHint]
+other = "Прокрутите или перетащите полосу к ранним записям"
+[BattleReportActionHit]
+other = "попал в"
+[BattleReportActionSunk]
+other = "потопил"
+[BattleReportActionSunkUnknown]
+other = "затонул"
+[BattleReportActionShotDown]
+other = "сбил"
+[BattleReportActionLost]
+other = "потерян"
+[BattleReportActionWithShip]
+other = "потерял"
+[BattleReportEventRow]
+other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportWithShipRow]
+other = "{{.Time}}  {{.Actor}}: потеряно самолётов с кораблём — {{.Count}}"
+[BattleReportWeaponUnknown]
+other = " неизвестным оружием"
+[BattleReportWeaponLaser]
+other = " лазером"
+[BattleReportWeaponRocket]
+other = " ракетой"
+[BattleReportWeaponBombGeneric]
+other = " бомбой"
+[BattleReportWeaponBomb]
+other = " {{.Weight}}-кг бомбой"
+[BattleReportWeaponTorpedo]
+other = " {{.Diameter}}-мм торпедой"
+[BattleReportWeaponAAGun]
+other = " {{.Diameter}}-мм зенитным орудием"
+[BattleReportWeaponAircraftGun]
+other = " {{.Diameter}}-мм авиапушкой"
+[BattleReportWeaponAircraftMG]
+other = " {{.Diameter}}-мм пулемётом"
+[BattleReportWeaponShell]
+other = " {{.Diameter}}-мм орудием"
+[BattleReportEventTotalDamage]
+other = " (всего {{.Damage}})"
+[BattleReportEventTonnage]
+other = " · {{.Tonnage}} т"
+[BattleReportEventRepeat]
+other = " (попаданий: {{.Count}})"
+[BattleReportEventDamage]
+other = ", урон {{.Damage}}"
+[BattleReportEventUseWeapon]
+other = "{{.Weapon}}"
+[BattleReportOwnShips]
+other = "Наши корабли"
+[BattleReportEnemyShips]
+other = "Корабли противника"
+[BattleReportOwnPlanes]
+other = "Наши самолёты"
+[BattleReportEnemyPlanes]
+other = "Самолёты противника"
+[BattleReportActiveTonnage]
+other = "Тоннаж в строю"
+[BattleReportTotal]
+other = "Итого"
+[BattleReportPageHint]
+other = "Нажмите на вкладку для переключения"
+[BattleReportShipClass]
+other = "Класс"
+[BattleReportPlaneType]
+other = "Тип"
+[BattleReportReplenished]
+other = "Пополнено"
+[BattleReportOther]
+other = "Прочее"
+[BattleReportNoRecords]
+other = "Нет записей"
 [SettingsTitle]
 other = "Настройки игры"
 [SettingsSpeed]

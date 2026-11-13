@@ -43,11 +43,13 @@ func (m *MissionManager) updateMissionStatus() {
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.Core.MissionStatus = state.MissionPaused
 			m.state.Core.ConfirmQuitMission = false
+			m.state.UI.PauseStats = false
 		}
 		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
 	case state.MissionPaused:
 		if m.state.UI.DebugFlags.IsActive() {
-			// debug 模式下跳过确认面板，Q 直接退出，Esc 直接继续
+			// debug 模式下不展示暂停面板与实时战报，Q 直接退出，Esc 直接继续
+			m.state.UI.PauseStats = false
 			if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 				m.state.Core.MissionStatus = state.MissionFailed
 				m.state.Core.ConfirmQuitMission = true
@@ -58,6 +60,56 @@ func (m *MissionManager) updateMissionStatus() {
 				m.state.Core.ConfirmQuitMission = false
 				return
 			}
+			return
+		}
+
+		// 实时战报页独立处理输入，避免点击到被遮住的暂停按钮。
+		if m.state.UI.PauseStats {
+			if inpututil.IsKeyJustPressed(ebiten.KeyTab) {
+				m.state.UI.PauseStats = false
+				m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
+				m.state.UI.BattleReportScrollDragOffset = 0
+				return
+			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+				m.state.UI.PauseStats = false
+				m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
+				m.state.UI.BattleReportScrollDragOffset = 0
+				m.state.Core.MissionStatus = state.MissionRunning
+				m.state.Core.ConfirmQuitMission = false
+				return
+			}
+			sx, sy := ebiten.CursorPosition()
+			if _, dy := ebiten.Wheel(); dy != 0 {
+				m.ScrollBattleReportByWheel(dy, sx)
+			}
+			if m.UpdateBattleReportScrollDrag(sx, sy) {
+				return
+			}
+			if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
+				layout := state.CalcBattleReportLayout(
+					m.state.View.Layout.Width,
+					m.state.View.Layout.Height,
+					false,
+				)
+				if m.HandleBattleReportEventFilterClick(sx, sy) {
+					return
+				}
+				if page, ok := layout.PageAt(sx, sy); ok {
+					m.SetBattleReportPage(page)
+				}
+			}
+			return
+		}
+		// 确认放弃期间不允许打开实时战报，避免与退出确认互相遮挡。
+		if inpututil.IsKeyJustPressed(ebiten.KeyTab) && !m.state.Core.ConfirmQuitMission {
+			m.state.UI.PauseStats = true
+			m.state.UI.BattleReportPage = state.BattleReportPageOverview
+			m.state.UI.BattleReportEventScroll = 0
+			m.state.UI.BattleReportEventFilter = state.BattleReportEventFilterAll
+			m.state.UI.BattleReportShipScroll = [2]int{}
+			m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
+			m.state.UI.BattleReportScrollDragOffset = 0
 			return
 		}
 
@@ -80,6 +132,9 @@ func (m *MissionManager) updateMissionStatus() {
 			m.state.Core.ConfirmQuitMission,
 			input,
 		)
+		if m.state.Core.MissionStatus != state.MissionPaused {
+			m.state.UI.PauseStats = false
+		}
 		return
 	case state.MissionInMap:
 		// 退出全屏地图模式

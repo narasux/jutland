@@ -17,6 +17,8 @@ const (
 	GameModeMissionSuccess
 	// 任务结束 - 失败
 	GameModeMissionFailed
+	// 任务结束 - 战役总结
+	GameModeMissionReport
 	// 游戏图鉴
 	GameModeCollection
 	// 游戏设置

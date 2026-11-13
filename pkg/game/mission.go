@@ -165,6 +165,9 @@ func (g *Game) handleMissionLoading() error {
 // startMissionLoading 进入关卡加载状态，并重置加载界面与完成音效状态。
 func (g *Game) startMissionLoading() {
 	g.objStates.LoadingInterface.Reset()
+	if g.missionMgr != nil {
+		g.missionMgr.ClearBattleStats()
+	}
 	g.missionMgr = nil
 	g.mode = GameModeMissionLoading
 	g.player.Close()
@@ -183,29 +186,119 @@ func (g *Game) handleMissionRunning() error {
 		log.Fatal("failed to update mission: ", err)
 	}
 	if status == state.MissionSuccess {
-		g.mode = GameModeMissionSuccess
+		g.enterMissionSplash(GameModeMissionSuccess)
 	} else if status == state.MissionFailed {
-		g.mode = GameModeMissionFailed
+		g.enterMissionSplash(GameModeMissionFailed)
 	}
 	return nil
 }
 
-// 任务成功
+// resultSplashMinTicks 胜负全屏图至少展示的帧数，避免战斗末尾的点击直接跳过。
+const resultSplashMinTicks = 30
+
+// enterMissionSplash 进入胜负全屏图阶段，并记住成功 / 失败用于后续战报背景。
+func (g *Game) enterMissionSplash(mode GameMode) {
+	g.resultMode = mode
+	g.resultSplashTicks = 0
+	g.mode = mode
+}
+
+// 任务成功：先展示全屏胜利图，再进入战役总结。
 func (g *Game) handleMissionSuccess() error {
 	g.player.PlayLazy(audioRes.NewMissionSuccess)
-	if isAnyNextInput() {
-		g.mode = GameModeMenuSelect
-		g.player.Close()
+	return g.handleMissionSplash()
+}
+
+// 任务失败：先展示全屏失败图，再进入战役总结。
+func (g *Game) handleMissionFailed() error {
+	g.player.PlayLazy(audioRes.NewMissionFailed)
+	return g.handleMissionSplash()
+}
+
+// handleMissionSplash 等待玩家点击后跳转到战役总结。
+func (g *Game) handleMissionSplash() error {
+	// 防御：管理器缺失时退回旧行为，避免空指针。
+	if g.missionMgr == nil {
+		if isMouseButtonLeftJustPressed() {
+			g.mode = GameModeMenuSelect
+			g.player.Close()
+		}
+		return nil
+	}
+	if g.resultSplashTicks < resultSplashMinTicks {
+		g.resultSplashTicks++
+		return nil
+	}
+	if isMouseButtonLeftJustPressed() {
+		g.mode = GameModeMissionReport
 	}
 	return nil
 }
 
-// 任务失败
-func (g *Game) handleMissionFailed() error {
-	g.player.PlayLazy(audioRes.NewMissionFailed)
-	if isAnyNextInput() {
-		g.mode = GameModeMenuSelect
-		g.player.Close()
+// missionResultAction 结算页上的一次显式操作。
+type missionResultAction int
+
+const (
+	missionResultActionNone missionResultAction = iota
+	missionResultActionBack
+	missionResultActionRetry
+)
+
+// handleMissionReport 处理战役总结页的鼠标操作：
+// 点击页签切换总览 / 舰艇 / 飞机，点击按钮返回任务选择或重新挑战。
+// 结算流程不提供键盘快捷键。
+func (g *Game) handleMissionReport() {
+	// 防御：管理器缺失时退回旧行为，避免空指针。
+	if g.missionMgr == nil {
+		if isMouseButtonLeftJustPressed() {
+			g.mode = GameModeMenuSelect
+			g.player.Close()
+		}
+		return
 	}
-	return nil
+	sx, sy := ebiten.CursorPosition()
+	if _, dy := ebiten.Wheel(); dy != 0 {
+		g.missionMgr.ScrollBattleReportByWheel(dy, sx)
+	}
+	if g.missionMgr.UpdateBattleReportScrollDrag(sx, sy) {
+		return
+	}
+	if !isMouseButtonLeftJustPressed() {
+		return
+	}
+	layout := g.missionMgr.BattleReportLayout(true)
+	if g.missionMgr.HandleBattleReportEventFilterClick(sx, sy) {
+		return
+	}
+	if page, ok := layout.PageAt(sx, sy); ok {
+		g.missionMgr.SetBattleReportPage(page)
+		return
+	}
+	switch missionResultClickAction(layout, sx, sy) {
+	case missionResultActionBack:
+		g.leaveMissionResult()
+	case missionResultActionRetry:
+		g.startMissionLoading()
+	}
+}
+
+// leaveMissionResult 返回任务选择。
+func (g *Game) leaveMissionResult() {
+	if g.missionMgr != nil {
+		g.missionMgr.ClearBattleStats()
+	}
+	g.mode = GameModeMenuSelect
+	g.player.Close()
+}
+
+// missionResultClickAction 把鼠标点击位置映射为结算页操作。
+func missionResultClickAction(report state.BattleReportLayout, x, y int) missionResultAction {
+	switch {
+	case report.BackButton.Contains(x, y):
+		return missionResultActionBack
+	case report.RetryButton.Contains(x, y):
+		return missionResultActionRetry
+	default:
+		return missionResultActionNone
+	}
 }

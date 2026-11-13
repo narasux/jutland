@@ -46,6 +46,164 @@ other = "Abandon"
 other = "Abandon this mission?"
 [Confirm]
 other = "Confirm"
+[BattleReportTitle]
+other = "Battle Report"
+[BattleReportVictory]
+other = "Victory"
+[BattleReportDefeat]
+other = "Defeat"
+[BattleReportAborted]
+other = "Aborted"
+[BattleReportInProgress]
+other = "In progress"
+[BattleReportPlayer]
+other = "Our side"
+[BattleReportEnemy]
+other = "Enemy"
+[BattleReportShips]
+other = "Ships"
+[BattleReportAircraft]
+other = "Aircraft"
+[BattleReportInitial]
+other = "Initial"
+[BattleReportBuilt]
+other = "Built"
+[BattleReportLost]
+other = "Lost"
+[BattleReportRemaining]
+other = "Active"
+[BattleReportTonnage]
+other = "Tonnage lost"
+[BattleReportInitialTonnage]
+other = "Initial Tonnage"
+[BattleReportDamage]
+other = "Damage dealt"
+[BattleReportFunds]
+other = "Funds"
+[BattleReportExchange]
+other = "Exchange ratio {{.Ratio}}"
+[BattleReportSurvival]
+other = "Ship survival {{.Rate}}"
+[BattleReportSubtitle]
+other = "{{.Mission}} · Side {{.Side}} · {{.Duration}}"
+[BattleReportBuiltShipsCard]
+other = "Wartime built"
+[BattleReportShipLossesCard]
+other = "Ships lost"
+[BattleReportEnemySunkCard]
+other = "Enemy sunk"
+[BattleReportPlaneLossesCard]
+other = "Aircraft lost"
+[BattleReportBuiltShipsSub]
+other = "Started with {{.Count}}"
+[BattleReportShipLossesSub]
+other = "{{.Tonnage}} t sunk"
+[BattleReportEnemySunkSub]
+other = "{{.Tonnage}} t"
+[BattleReportPlaneLossesSub]
+other = "{{.Count}} enemy downed"
+[BattleReportWithShip]
+other = "{{.Count}} aircraft lost with ship"
+[BattleReportBack]
+other = "Back to missions"
+[BattleReportRetry]
+other = "Retry"
+[BattleReportLiveHint]
+other = "[Tab] Back  [Esc] Resume"
+[BattleReportNoLoss]
+other = "No losses"
+[BattleReportNoData]
+other = "—"
+[BattleReportPageOverview]
+other = "Overview"
+[BattleReportPageShips]
+other = "Ships"
+[BattleReportPagePlanes]
+other = "Aircraft"
+[BattleReportPageEvents]
+other = "Details"
+[BattleReportEventTitle]
+other = "Battle Details"
+[BattleReportEventFilterAll]
+other = "All"
+[BattleReportEventFilterKills]
+other = "Kills"
+[BattleReportEventCount]
+other = "{{.Count}} entries"
+[BattleReportEventEmpty]
+other = "No battle log yet"
+[BattleReportEventScrollHint]
+other = "Scroll or drag the bar for older entries"
+[BattleReportActionHit]
+other = "hit"
+[BattleReportActionSunk]
+other = "sank"
+[BattleReportActionSunkUnknown]
+other = "was lost"
+[BattleReportActionShotDown]
+other = "shot down"
+[BattleReportActionLost]
+other = "was lost"
+[BattleReportActionWithShip]
+other = "lost with ship"
+[BattleReportEventRow]
+other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportWithShipRow]
+other = "{{.Time}}  {{.Actor}}: {{.Count}} aircraft lost with ship"
+[BattleReportWeaponUnknown]
+other = "unknown weapon"
+[BattleReportWeaponLaser]
+other = "laser"
+[BattleReportWeaponRocket]
+other = "rocket"
+[BattleReportWeaponBombGeneric]
+other = "bomb"
+[BattleReportWeaponBomb]
+other = "{{.Weight}} kg bomb"
+[BattleReportWeaponTorpedo]
+other = "{{.Diameter}} mm torpedo"
+[BattleReportWeaponAAGun]
+other = "{{.Diameter}} mm AA gun"
+[BattleReportWeaponAircraftGun]
+other = "{{.Diameter}} mm aircraft gun"
+[BattleReportWeaponAircraftMG]
+other = "{{.Diameter}} mm MG"
+[BattleReportWeaponShell]
+other = "{{.Diameter}} mm gun"
+[BattleReportEventTotalDamage]
+other = " (total {{.Damage}})"
+[BattleReportEventTonnage]
+other = " · {{.Tonnage}} t"
+[BattleReportEventRepeat]
+other = " ({{.Count}} hits)"
+[BattleReportEventDamage]
+other = " for {{.Damage}} damage"
+[BattleReportEventUseWeapon]
+other = " with {{.Weapon}}"
+[BattleReportOwnShips]
+other = "Our Ships"
+[BattleReportEnemyShips]
+other = "Enemy Ships"
+[BattleReportOwnPlanes]
+other = "Our Aircraft"
+[BattleReportEnemyPlanes]
+other = "Enemy Aircraft"
+[BattleReportActiveTonnage]
+other = "Active Tonnage"
+[BattleReportTotal]
+other = "Total"
+[BattleReportPageHint]
+other = "Click a tab to switch pages"
+[BattleReportShipClass]
+other = "Ship class"
+[BattleReportPlaneType]
+other = "Aircraft type"
+[BattleReportReplenished]
+other = "Replenished"
+[BattleReportOther]
+other = "Other"
+[BattleReportNoRecords]
+other = "No records"
 [SettingsTitle]
 other = "Game Settings"
 [SettingsSpeed]
