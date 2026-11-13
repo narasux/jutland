@@ -106,6 +106,9 @@ type Bullet struct {
 
 	// 所属战舰/战机
 	Shooter string
+	// 发射者配置名与类型，发射瞬间记录，避免单位已离场后战报只能显示「—」
+	ShooterName string
+	ShooterType string
 	// 所属对象类型
 	ShooterObjType object.Type
 	// 所属阵营（玩家）

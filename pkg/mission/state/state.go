@@ -41,6 +41,8 @@ const (
 // MissionCoreState 任务核心状态
 type MissionCoreState struct {
 	Mission string
+	// 玩家在任务配置中选择的阵营（P1/P2，归一化后）
+	PlayerSide faction.Side
 	// 任务关卡状态
 	MissionStatus MissionStatus
 	// 是否正在确认放弃任务
@@ -141,6 +143,19 @@ type MissionUIState struct {
 	ShowRallyLinePointUid string
 	// 集结点设置失败计数器（用于短暂闪烁提示）
 	RallySetFailedTick int
+	// 暂停时是否显示实时战报（Tab 切换）
+	PauseStats bool
+	// 战报当前页（总览 / 舰艇明细 / 飞机明细 / 战况记录）
+	BattleReportPage BattleReportPage
+	// 战况记录页当前滚动偏移（0 为最新）
+	BattleReportEventScroll int
+	// 战况记录页筛选（全部 / 击杀）
+	BattleReportEventFilter BattleReportEventFilter
+	// 舰艇明细页左右两侧列表的滚动偏移（按行）
+	BattleReportShipScroll [2]int
+	// 当前正在拖动的战报滚动条，以及按下时相对滑块顶部的偏移
+	BattleReportScrollDrag       int
+	BattleReportScrollDragOffset float64
 	// 游戏选项
 	GameOpts GameOptions
 	// DebugFlags 调试标识
@@ -155,6 +170,8 @@ type MissionState struct {
 	Interaction MissionInteractionState
 	Arena       MissionArenaState
 	UI          MissionUIState
+	// Stats 本局战果累计，在事件发生点写入，结算页只读
+	Stats BattleStats
 }
 
 // fogOfWarFromSettings 开局拷贝设置。配置还没加载时视为关闭，避免任务里碰到空指针。
@@ -343,6 +360,7 @@ func NewMissionState(mission string, playerSide faction.Side) *MissionState {
 	ms := &MissionState{
 		Core: MissionCoreState{
 			Mission:            mission,
+			PlayerSide:         playerSide,
 			MissionStatus:      MissionRunning,
 			ConfirmQuitMission: false,
 			MissionMD:          missionMD,
@@ -405,6 +423,7 @@ func NewMissionState(mission string, playerSide faction.Side) *MissionState {
 			},
 		},
 	}
+	ms.recordInitialBattleStats()
 	ms.RefreshCameraSize()
 	if missionMD.MapCfg != nil {
 		ms.allocateVisions(missionMD.MapCfg.Width, missionMD.MapCfg.Height)
