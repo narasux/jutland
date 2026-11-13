@@ -5709,15 +5709,6 @@
     links: [],
   },
   {
-    name: "JP/7.62",
-    displayName: "7.62mm 単装機銃",
-    type: "兵器",
-    armaments: [],
-    description: "日本海軍の七・六二ミリ単装機銃。単装銃架に据えられ、近距離の自衛射撃に用いられた。",
-    author: "",
-    links: [],
-  },
-  {
     name: "JP/7.7/Type97",
     displayName: "九七式 7.7mm 固定機銃",
     type: "兵器",

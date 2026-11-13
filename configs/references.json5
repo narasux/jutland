@@ -10063,15 +10063,6 @@
     ],
   },
   {
-    name: "JP/7.62",
-    displayName: "7.62mm 单装机枪",
-    type: "武器",
-    armaments: [],
-    description: "日本海军 7.62mm 单装机枪，采用单装枪架，用于近距离自卫射击。",
-    author: "",
-    links: [],
-  },
-  {
     name: "GER/380/52/2/SKC34",
     displayName: "380mm/52 SK C/34 双联装舰炮",
     type: "武器",

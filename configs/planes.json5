@@ -6247,7 +6247,7 @@
     weapon: {
       guns: [
         {
-          name: "JP/7.62",
+          name: "JP/7.7/Type97",
           posPercent: 0,
           rightFiringArc: [100, 180],
           leftFiringArc: [180, 260]
