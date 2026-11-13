@@ -368,6 +368,12 @@ func trailHiddenByFog(ms *state.MissionState, trail *objTrail.Trail) bool {
 	if trail.BelongPlayer == "" {
 		return false
 	}
+	// 潜艇下潜后连旧尾流也不能泄露位置；能看见本舰时才按迷雾规则处理。
+	if owner, ok := ms.Arena.Ships[trail.OwnerUid]; ok {
+		if owner.Submerged() || !ms.CanSeeShip(ms.Player.CurPlayer, owner) {
+			return true
+		}
+	}
 	return ms.ConcealsEnemy(trail.BelongPlayer, trail.Pos.MX, trail.Pos.MY)
 }
 

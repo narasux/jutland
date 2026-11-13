@@ -295,15 +295,17 @@ other = "Торпедный катер"
 [ShipTypeSubmarine]
 other = "Подводная лодка"
 [ShipDive]
-other = "Погружение"
-[ShipSurface]
-other = "Всплытие"
+other = "Погрузиться"
+[ShipSurfaceAction]
+other = "Всплыть"
 [ShipDiving]
 other = "Погружается"
 [ShipSubmerged]
 other = "Под водой"
 [ShipSurfacing]
 other = "Всплывает"
+[ShipSurface]
+other = "На поверхности"
 [PlaneTypeFighter]
 other = "Истребитель"
 [PlaneTypeDiveBomber]

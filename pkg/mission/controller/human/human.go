@@ -51,7 +51,25 @@ func (h *HumanInputHandler) Handle(
 		return instructions
 	}
 	instructions = lo.Assign(instructions, h.handleShipMove(misState))
+	instructions = lo.Assign(instructions, h.handleDiveToggle(misState))
 
+	return instructions
+}
+
+// handleDiveToggle 按 D 键切换选中潜艇的下潜/上浮状态。
+// 只对潜艇生效；非潜艇、过渡态和已沉没的船由 NewDiveToggle 过滤。
+func (h *HumanInputHandler) handleDiveToggle(misState *state.MissionState) map[string]instr.Instruction {
+	instructions := map[string]instr.Instruction{}
+	if !inpututil.IsKeyJustPressed(ebiten.KeyD) {
+		return instructions
+	}
+	for _, shipUid := range misState.Interaction.SelectedShips {
+		instruction := instr.NewDiveToggle(misState.Arena.Ships[shipUid])
+		if instruction == nil {
+			continue
+		}
+		instructions[instruction.Uid()] = instruction
+	}
 	return instructions
 }
 

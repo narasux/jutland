@@ -130,7 +130,7 @@ func (m *MissionManager) shipFireTargets(ship *objUnit.BattleShip) objUnit.FireT
 	}
 
 	target := m.state.Arena.Ships[ship.AttackTarget]
-	// 锁定目标要在射程内，开了迷雾时还得当前可见。看不见就改打别的可见敌人。
+	// 锁定目标要在射程内，且当前看得见（水下潜艇只有被声呐点亮才可见）。
 	if target != nil &&
 		ship.CurPos.Distance(target.CurPos) < shipEngageRange(ship, target) &&
 		m.state.CanSeeShip(ship.BelongPlayer, target) {
@@ -713,6 +713,10 @@ func (m *MissionManager) updateShotBullets() {
 					ship.Width/constants.MapBlockSize,
 					ship.CurRotation,
 				) {
+					return false
+				}
+				// P3 先保证水下免疫普通弹药；反潜鱼雷 / 深弹在 P4 单独放行。
+				if ship.Submerged() {
 					return false
 				}
 				m.hurtShip(ship, bt)

@@ -40,7 +40,7 @@ const (
 	ShipTypeFrigate ShipType = "frigate"
 	// ShipTypeTorpedoBoat 鱼雷艇
 	ShipTypeTorpedoBoat ShipType = "torpedo_boat"
-	// ShipTypeSubmarine 潜艇（当前按水面舰艇机制使用）
+	// ShipTypeSubmarine 潜艇：水面 / 水下两状态舰艇
 	ShipTypeSubmarine ShipType = "submarine"
 	// ShipTypeCargo 货轮
 	ShipTypeCargo ShipType = "cargo"
@@ -111,20 +111,20 @@ type BattleShip struct {
 	Acceleration float64 `json:"acceleration"`
 	// 转向速度（度）
 	RotateSpeed float64 `json:"rotateSpeed"`
+	// 下潜耗时（秒）；仅潜艇使用，缺省 10
+	DiveTime float64 `json:"diveTime"`
+	// 上浮耗时（秒）；仅潜艇使用，缺省 8
+	SurfaceTime float64 `json:"surfaceTime"`
+	// 水下航速倍率（相对水面最大速）；仅潜艇使用，缺省 0.35
+	SubmergedSpeedRatio float64 `json:"submergedSpeedRatio"`
+	// 入场深度状态：surface / submerged（缺省 submerged）
+	DefaultDiveState string `json:"defaultDiveState"`
 	// 战舰长度
 	Length float64 `json:"length"`
 	// 战舰宽度
 	Width float64 `json:"width"`
 	// 视距（地图格）。0 表示按舰种默认值，初始化时再封顶到主炮射程。
 	SightRange float64 `json:"sightRange"`
-	// 下潜耗时（秒）；仅潜艇使用，0 时取默认值
-	DiveTime float64 `json:"diveTime"`
-	// 上浮耗时（秒）；仅潜艇使用，0 时取默认值
-	SurfaceTime float64 `json:"surfaceTime"`
-	// 水下航速倍率（相对水面最大速）；仅潜艇使用，0 时取默认值
-	SubmergedSpeedRatio float64 `json:"submergedSpeedRatio"`
-	// 入场深度状态：submerged（默认）/ surface
-	DefaultDiveState string `json:"defaultDiveState"`
 	// 尾流船体；空则只在中线按舰宽生成舰艏/舰艉两点
 	WakeHulls []WakeHull `json:"wakeHulls"`
 	// 生成时算好的尾流船体，尾流每拍只读这一份
@@ -424,8 +424,10 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 		for _, tp := range s.Weapon.Torpedoes {
 			shotBullets = append(shotBullets, tp.Fire(s, targets.Primary)...)
 		}
-		for _, rocket := range s.Weapon.Rockets {
-			shotBullets = append(shotBullets, rocket.Fire(s, targets.Primary)...)
+		if !s.Submerged() {
+			for _, rocket := range s.Weapon.Rockets {
+				shotBullets = append(shotBullets, rocket.Fire(s, targets.Primary)...)
+			}
 		}
 	}
 	return shotBullets
@@ -762,7 +764,7 @@ func (s *BattleShip) hullLandOverlap(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, r
 	return HullLandOverlapSamples(mapCfg, pos, rotation, s.Length)
 }
 
-// CruiseSpeed 返回乘过全局速度倍率的巡航速度，也就是舰船加速的上限。
+// CruiseSpeed 返回乘过全局速度倍率与当前深度状态的巡航速度，也就是舰船加速的上限。
 // CurSpeed 的语义同样是"已乘倍率"，任何拿它做上限或基准的地方都必须用这个函数，
 // 否则在"快"倍速下会把舰船速度按未乘倍率的值砍半。
 func (s *BattleShip) CruiseSpeed() float64 {
@@ -825,6 +827,15 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	acceleration := s.cruiseAcceleration()
 	rotateSpeed := s.RotateSpeed * gameSpeedMultiplier()
 
+	// 下潜 / 上浮导致巡航速度下降时，显式减速到新的上限，避免保持水面全速。
+	if s.CurSpeed > maxSpeed {
+		slowdown := acceleration * 10
+		if slowdown <= 0 {
+			s.CurSpeed = maxSpeed
+		} else {
+			s.CurSpeed = max(maxSpeed, s.CurSpeed-slowdown)
+		}
+	}
 	// 未到达目标位置，逐渐加速
 	if s.CurSpeed < maxSpeed {
 		s.CurSpeed = min(maxSpeed, s.CurSpeed+acceleration)
