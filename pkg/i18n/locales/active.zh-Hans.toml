@@ -19,7 +19,7 @@ other = "按空格、回车或鼠标左键开始"
 [MissionSuccess]
 other = "任务成功！"
 [MissionFailed]
-other = "任务失败..."
+other = "任务失败"
 [MissionStart]
 other = "开始任务"
 [MissionCategoryClassic]

@@ -19,7 +19,7 @@ other = "Нажмите пробел, Enter или левую кнопку мы�
 [MissionSuccess]
 other = "Миссия выполнена!"
 [MissionFailed]
-other = "Миссия провалена..."
+other = "Миссия провалена"
 [MissionStart]
 other = "Начать миссию"
 [MissionCategoryClassic]
