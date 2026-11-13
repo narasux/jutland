@@ -19,7 +19,7 @@ other = "Press Space, Enter, or left-click to start"
 [MissionSuccess]
 other = "Mission accomplished!"
 [MissionFailed]
-other = "Mission failed..."
+other = "Mission failed"
 [MissionStart]
 other = "Start Mission"
 [MissionCategoryClassic]

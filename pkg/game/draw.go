@@ -474,10 +474,20 @@ func (d *Drawer) drawMissionReady(screen *ebiten.Image) {
 
 // 绘制任务结果
 func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textColor color.Color) {
-	fontSize := float64(96)
+	screenW, screenH := float64(screen.Bounds().Dx()), float64(screen.Bounds().Dy())
 	resultFont := font.LocalizedUI(font.Hang)
-	posX := (float64(screen.Bounds().Dx()) - layout.CalcTextWidth(textStr, fontSize, resultFont)) / 7
-	posY := float64(screen.Bounds().Dy() / 8 * 7)
+	fontSize := 96.0
+	textWidth := layout.CalcTextWidth(textStr, fontSize, resultFont)
+	if maxWidth := screenW * 0.82; textWidth > maxWidth {
+		fontSize = max(28, fontSize*maxWidth/textWidth)
+		textWidth = layout.CalcTextWidth(textStr, fontSize, resultFont)
+	}
+
+	// 保持原来的大字号，但贴底摆放，不再用横带遮住画面中部。
+	bottomMargin := max(48.0, screenH*0.04)
+	posX := (screenW - textWidth) / 2
+	posY := screenH - bottomMargin - fontSize
+	d.drawText(screen, textStr, posX+4, posY+4, fontSize, resultFont, color.RGBA{A: 190})
 	d.drawText(screen, textStr, posX, posY, fontSize, resultFont, textColor)
 }
 

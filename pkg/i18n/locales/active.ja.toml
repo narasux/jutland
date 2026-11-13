@@ -19,7 +19,7 @@ other = "Space、Enter、または左クリックで開始"
 [MissionSuccess]
 other = "作戦成功！"
 [MissionFailed]
-other = "作戦失敗..."
+other = "作戦失敗"
 [MissionStart]
 other = "作戦開始"
 [MissionCategoryClassic]
