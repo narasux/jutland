@@ -3964,31 +3964,31 @@
         belongPlayer: "P1"
       },
       {
-        name: "uss_barb",
+        name: "uss_nautilus",
         pos: [44, 50],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "uss_tarpon",
+        name: "PT_791",
         pos: [45, 51],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "uss_sealion",
+        name: "uss_barb",
         pos: [44, 52],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "uss_nautilus",
+        name: "uss_sealion",
         pos: [45, 53],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "PT_791",
+        name: "uss_tarpon",
         pos: [44, 54],
         rotation: 90,
         belongPlayer: "P1"
