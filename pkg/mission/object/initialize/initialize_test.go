@@ -276,3 +276,16 @@ func TestSubmarineTemplatesDefaultSubmerged(t *testing.T) {
 		t.Fatal("no submarine templates loaded")
 	}
 }
+
+// 防空炮位里只能放能对空的炮。antiAircraft=false 的炮放进 AntiAircraftGuns 后
+// 不参与对空择敌（MaxToPlaneRange 不累计），防空射击时也会被类型判定挡掉，
+// 等于占着防空挂点却打不到飞机。
+func TestAntiAircraftGunsAreAACapable(t *testing.T) {
+	for name, ship := range objUnit.ShipMap {
+		for _, gun := range ship.Weapon.AntiAircraftGuns {
+			if !gun.AntiAircraft {
+				t.Errorf("%s 的防空炮位配了不能对空的 %s", name, gun.Name)
+			}
+		}
+	}
+}

@@ -75,6 +75,7 @@ func TestUSFloatplaneAssignments(t *testing.T) {
 		"baltimore":     "OS2U",
 		"alaska":        "OS2U",
 		"west_virginia": "OS2U",
+		"arkansas":      "OS2U",
 		// 1945 起：海鹰
 		"lowa":        "SC-1",
 		"montana":     "SC-1",
@@ -106,7 +107,7 @@ func TestUSFloatplaneAssignments(t *testing.T) {
 	// 弹射器位置是按舰船俯视图逐舰标注出来的，每艘一个 USCatapult_<舰名> 模板；
 	// 台数与朝向也要对得上：单台统一向左舷（launchAngle -60）。
 	singlePort := map[string]int{
-		"new_york": 1, "nevada": 1, "maryland": 1, "west_virginia": 1, "fargo": 1,
+		"new_york": 1, "nevada": 1, "maryland": 1, "west_virginia": 1, "fargo": 1, "arkansas": 1,
 	}
 	for name := range want {
 		ship := objUnit.ShipMap[name]
@@ -137,9 +138,8 @@ func TestUSFloatplaneAssignments(t *testing.T) {
 	}
 
 	// 这几艘根本没有航空设施，不该配水侦。
-	// 亚特兰大级设计即无弹射器；阿肯色 1944 状态是 AG-17 防空训练舰；
-	// 夏洛特是 CL-154 防空巡洋舰方案（同源的伍斯特级最终也没装）。
-	for _, name := range []string{"atlanta", "arkansas", "charlotte"} {
+	// 亚特兰大级设计即无弹射器；夏洛特是 CL-154 防空巡洋舰方案（同源的伍斯特级最终也没装）。
+	for _, name := range []string{"atlanta", "charlotte"} {
 		ship, ok := objUnit.ShipMap[name]
 		if !ok {
 			t.Errorf("缺少舰船 %s", name)

@@ -503,6 +503,10 @@
         label: "Anti-aircraft Guns",
         value: "24x1 20mm/70 Mk4",
       },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× OS2U",
+      },
     ],
     description: "USS Arkansas (BB-33), the second Wyoming-class battleship, entered service in 1912. Represented in her 1944 configuration, she displaced about 31,900 tons fully loaded, measured roughly 171 metres long, and could make 20.5 knots. She bombarded Normandy and Cherbourg, later supported the Iwo Jima and Okinawa landings, and was sunk during Operation Crossroads at Bikini Atoll in 1946.",
     author: "Redhorse, Karle94, David Latuch",
@@ -1342,7 +1346,7 @@
         value: "12x1 178mm/44 Mk2",
       },
       {
-        label: "Anti-aircraft Guns",
+        label: "Secondary Guns",
         value: "12x1 76mm/50 Mk3",
       },
       {
@@ -11637,7 +11641,7 @@
         value: "12x1 152mm/50 Mk6",
       },
       {
-        label: "Anti-aircraft Guns",
+        label: "Secondary Guns",
         value: "10x1 76mm/50 Mk3",
       },
       {
