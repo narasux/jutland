@@ -79,13 +79,22 @@ func torpedoReloadGate(launcher *TorpedoLauncher) reloadGate {
 		}
 		return laterReloadGate(reload, interval)
 	}
-	reload := reloadGate{
-		startAt:  launcher.ReloadStartAt,
-		duration: int64(launcher.ReloadTime * 1e3),
+	// 时间戳为 0 表示这根鱼雷管还没发射过：没有待装填的计时，不能当成
+	// “从 0 号时刻开始装填”，否则面板会凭空显示一段 ReloadTime 倒计时，
+	// 而且它按拍递减（1 拍 = 1/60 秒）却按毫秒显示，看起来就是每秒只走 0.06 秒。
+	reload := reloadGate{}
+	if launcher.ReloadStartAt > 0 {
+		reload = reloadGate{
+			startAt:  launcher.ReloadStartAt,
+			duration: int64(launcher.ReloadTime * 1e3),
+		}
 	}
-	interval := reloadGate{
-		startAt:  launcher.LatestFireAt,
-		duration: int64(launcher.ShotInterval * 1e3),
+	interval := reloadGate{}
+	if launcher.LatestFireAt > 0 {
+		interval = reloadGate{
+			startAt:  launcher.LatestFireAt,
+			duration: int64(launcher.ShotInterval * 1e3),
+		}
 	}
 	return laterReloadGate(reload, interval)
 }
@@ -114,9 +123,12 @@ func rocketReloadGate(launcher *RocketLauncher) reloadGate {
 		}
 		return laterReloadGate(reload, interval)
 	}
-	reload := reloadGate{
-		startAt:  launcher.ReloadStartAt,
-		duration: int64(launcher.ReloadTime * 1e3),
+	reload := reloadGate{}
+	if launcher.ReloadStartAt > 0 {
+		reload = reloadGate{
+			startAt:  launcher.ReloadStartAt,
+			duration: int64(launcher.ReloadTime * 1e3),
+		}
 	}
 	if launcher.ShotCountBeforeReload <= 0 {
 		return reload
@@ -126,9 +138,12 @@ func rocketReloadGate(launcher *RocketLauncher) reloadGate {
 	if launcher.ShotCountBeforeReload%launcher.groupSize() == 0 {
 		intervalSeconds = launcher.GroupInterval
 	}
-	interval := reloadGate{
-		startAt:  launcher.LatestFireAt,
-		duration: int64(intervalSeconds * 1e3),
+	interval := reloadGate{}
+	if launcher.LatestFireAt > 0 {
+		interval = reloadGate{
+			startAt:  launcher.LatestFireAt,
+			duration: int64(intervalSeconds * 1e3),
+		}
 	}
 	return laterReloadGate(reload, interval)
 }
