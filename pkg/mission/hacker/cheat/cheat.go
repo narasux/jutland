@@ -29,6 +29,6 @@ var DebugCheats = []Cheat{
 	&ShowPlaneHP{},
 	&ShowHitBoxes{},
 	&ShowAirfieldRunway{},
-	&ShowMeTheSubmarines{},
+	&RevealSubmarines{},
 	&DumpMissionState{},
 }
