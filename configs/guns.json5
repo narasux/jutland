@@ -3106,6 +3106,19 @@
   },
   // 意大利
   // --------- 舰炮 ----------
+  // 意大利海军 456mm/46 OTO 1942 年型双联装主炮（卡索内方案修订版，纸面设计）
+  {
+    name: "IT/456/46/2/M1942",
+    bulletName: "IT/GB/456/1942",
+    bulletCount: 2,
+    reloadTime: 24,
+    range: 43,
+    bulletSpread: 170,
+    bulletSpeed: 850,
+    fundsCost: 40,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 意大利海军 381mm/50 安萨尔多 1934 年型三联装主炮（维托里奥·维内托级）
   {
     name: "IT/381/50/3/M1934",
@@ -3181,6 +3194,19 @@
     bulletSpread: 105,
     bulletSpeed: 850,
     fundsCost: 8,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 意大利海军 152mm/45 OTO 1942 年型三联装副炮（卡索内方案修订版，纸面设计）
+  {
+    name: "IT/152/45/3/M1942",
+    bulletName: "IT/GB/152/1929",
+    bulletCount: 3,
+    reloadTime: 6.5,
+    range: 22,
+    bulletSpread: 85,
+    bulletSpeed: 850,
+    fundsCost: 6,
     antiShip: true,
     antiAircraft: false
   },
@@ -3381,6 +3407,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 意大利海军 65mm/64 安萨尔多 1939 年型双联装高炮（卡索内方案修订版）
+  {
+    name: "IT/65/64/2/M1939",
+    bulletName: "IT/GB/65/1939",
+    bulletCount: 2,
+    reloadTime: 2.5,
+    range: 7,
+    bulletSpread: 30,
+    bulletSpeed: 950,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 意大利海军 65mm/64 安萨尔多 1939 年型单装高炮（天鹰号飞行甲板以下舷台）
   {
     name: "IT/65/64/1/M1939",
@@ -3429,6 +3468,32 @@
     range: 3,
     bulletSpread: 40,
     bulletSpeed: 585,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 37mm/54 布雷达 1939 年型四联装高炮（卡索内方案修订版）
+  {
+    name: "IT/37/54/4/M1939",
+    bulletName: "IT/GB/37/1932",
+    bulletCount: 4,
+    reloadTime: 1.4,
+    range: 4,
+    bulletSpread: 35,
+    bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 意大利海军 37mm/44 布雷达 1933 年型双联装高炮（卡索内方案修订版）
+  {
+    name: "IT/37/44/2/M1933",
+    bulletName: "IT/GB/37/1932",
+    bulletCount: 2,
+    reloadTime: 1.5,
+    range: 3.5,
+    bulletSpread: 35,
+    bulletSpeed: 780,
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true

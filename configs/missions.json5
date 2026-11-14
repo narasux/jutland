@@ -2854,6 +2854,7 @@
           "lorraine",
           "bretagne",
           "courbet",
+          "imperatore_augusto",
           "littorio",
           "caio_duilio",
           "giulio_cesare",
@@ -3597,20 +3598,26 @@
         belongPlayer: "P1"
       },
       {
-        name: "littorio",
+        name: "imperatore_augusto",
         pos: [20, 35],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "caio_duilio",
+        name: "littorio",
         pos: [21, 36],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "giulio_cesare",
+        name: "caio_duilio",
         pos: [20, 37],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "giulio_cesare",
+        pos: [21, 38],
         rotation: 90,
         belongPlayer: "P1"
       },

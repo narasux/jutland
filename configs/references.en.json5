@@ -14121,6 +14121,20 @@
     ],
   },
   {
+    name: "IT/65/64/2/M1939",
+    displayName: "65mm/64 Twin AA Mount (Ansaldo Model 1939)",
+    type: "Weapon",
+    armaments: [],
+    description: "Italian Navy 65 mm/64 Ansaldo Model 1939 twin anti-aircraft mount from the revised Cassone design; the original single mount armed the carrier Aquila.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 65/64 Mod. 1939",
+        url: "https://it.wikipedia.org/wiki/65/64_Mod._1939",
+      },
+    ],
+  },
+  {
     name: "IT/65/64/1/M1939",
     displayName: "65mm Single AA Mount (Ansaldo Model 1939)",
     type: "Weapon",
@@ -14154,6 +14168,20 @@
       {
         name: "Wikipedia - 90/50 Mod. 1939",
         url: "https://it.wikipedia.org/wiki/90/50_Mod._1939",
+      },
+    ],
+  },
+  {
+    name: "IT/456/46/2/M1942",
+    displayName: "456mm/46 Twin Turret (OTO Model 1942)",
+    type: "Weapon",
+    armaments: [],
+    description: "Italian Navy 456 mm/46 OTO Model 1942 twin main battery, designed for the 1942 revision of Ferdinando Cassone’s 1921 battlecruiser study. Muzzle velocity about 850 m/s and maximum range about 43 km; the gun existed only on paper.",
+    author: "",
+    links: [
+      {
+        name: "Alternathistory - An Italian Yamato: Ferdinando Cassone’s battleship project",
+        url: "https://alternathistory.ru/yamato-po-italyanski-proekt-linkora-ferdinando-kassone/",
       },
     ],
   },
@@ -14196,6 +14224,20 @@
       {
         name: "Wikipedia - OTO/Ansaldo 320/44",
         url: "https://it.wikipedia.org/wiki/OTO/Ansaldo_320/44",
+      },
+    ],
+  },
+  {
+    name: "IT/152/45/3/M1942",
+    displayName: "152mm/45 Triple Turret (OTO Model 1942)",
+    type: "Weapon",
+    armaments: [],
+    description: "Italian Navy 152 mm/45 OTO Model 1942 triple secondary mount from the revised Cassone design, with a muzzle velocity of about 850 m/s; the gun existed only on paper.",
+    author: "",
+    links: [
+      {
+        name: "Alternathistory - An Italian Yamato: Ferdinando Cassone’s battleship project",
+        url: "https://alternathistory.ru/yamato-po-italyanski-proekt-linkora-ferdinando-kassone/",
       },
     ],
   },
@@ -14318,6 +14360,34 @@
       {
         name: "Wikipedia - OTO/Ansaldo 152/53",
         url: "https://it.wikipedia.org/wiki/OTO/Ansaldo_152/53",
+      },
+    ],
+  },
+  {
+    name: "IT/37/44/2/M1933",
+    displayName: "37mm/44 Twin AA Mount (Breda Model 1933)",
+    type: "Weapon",
+    armaments: [],
+    description: "Italian Navy 37 mm/44 Breda Model 1933 twin anti-aircraft mount, an older short-barrel type in the revised Cassone design with lower performance than the later 37/54 family.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Breda 37/54",
+        url: "https://it.wikipedia.org/wiki/Breda_37/54",
+      },
+    ],
+  },
+  {
+    name: "IT/37/54/4/M1939",
+    displayName: "37mm/54 Quad AA Mount (Breda Model 1939)",
+    type: "Weapon",
+    armaments: [],
+    description: "Italian Navy 37 mm/54 Breda Model 1939 quadruple anti-aircraft mount from the revised Cassone design, based on the Breda 37/54 family.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Breda 37/54",
+        url: "https://it.wikipedia.org/wiki/Breda_37/54",
       },
     ],
   },
@@ -15180,6 +15250,49 @@
         "url": "https://en.wikipedia.org/wiki/Yermolayev_Yer-2",
       },
     ]
+  },
+  {
+    name: "imperatore_augusto",
+    displayName: "Imperatore Augusto",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x2 456mm/46 OTO 1942",
+      },
+      {
+        label: "Secondary Battery",
+        value: "6x3 152mm/45 OTO 1942",
+      },
+      {
+        label: "Secondary Battery",
+        value: "8x2 135mm/45 OTO 1938",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x2 65mm/64 Ansaldo 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x4 37mm/54 Breda 1939",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 37mm/44 Breda 1933",
+      },
+    ],
+    description: "Imperatore Augusto descends from a large battlecruiser study published by the Italian engineer Ferdinando Cassone in Rivista Marittima in 1921. Cassone argued for a ship whose tonnage and main-battery caliber would outclass contemporary battleships in the Mediterranean, but the design was never laid down under the tonnage limits of the Washington Naval Treaty. The artwork depicts the 1942 revision, with the hull and superstructure rebuilt from the original drawings.",
+    author: "TheMasterDragon",
+    links: [
+      {
+        name: "Alternathistory - An Italian Yamato: Ferdinando Cassone's battleship project",
+        url: "https://alternathistory.ru/yamato-po-italyanski-proekt-linkora-ferdinando-kassone/",
+      },
+      {
+        name: "Wikipedia - Battlecruiser",
+        url: "https://en.wikipedia.org/wiki/Battlecruiser",
+      },
+    ],
   },
   {
     name: "littorio",
