@@ -59,12 +59,13 @@ func TestSubmarineAIStaysSubmergedWhenNoEnemy(t *testing.T) {
 		"无敌情时也应保持水下，不应为了赶路而上浮")
 }
 
+// AI 潜艇永远水下：远距离转场也不上浮，上浮只留给玩家手动操作。
 func TestSubmarineAIStaysSubmergedWhileApproaching(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
 	sub.Weapon.HasTorpedo = true
 	sub.Weapon.MaxToSubmergedRange = 6
-	// 35 格：在 16 格接敌圈之外，属于“水下巡航接近”阶段
+	// 35 格：远在接敌圈之外，属于水下巡航阶段
 	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 40, 5)
 
 	ms := newMission(0, []*objUnit.BattleShip{sub, enemy}, nil)
@@ -73,13 +74,32 @@ func TestSubmarineAIStaysSubmergedWhileApproaching(t *testing.T) {
 	out := handler.submarineInstructions(snap, 0)
 
 	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid),
-		"远距离接近时不应上浮")
+		"AI 潜艇不应为了赶路上浮")
 	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipDive, sub.Uid),
 		"已经在水下时不需要重复下潜")
 	require.NotEmpty(t, out, "应继续向敌舰靠拢")
 }
 
-func TestSubmarineAIGunOnlySurfacesForSurfaceTarget(t *testing.T) {
+// 被关卡配置成水面开局的 AI 潜艇，应当立刻回到水下。
+func TestSubmarineAIDivesWhenSurfacedWithDistantEnemy(t *testing.T) {
+	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
+	sub.DiveState = objUnit.DiveStateSurface
+	sub.Weapon.HasTorpedo = true
+	// 21 格：仍在水下巡航阶段
+	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 26, 5)
+
+	ms := newMission(0, []*objUnit.BattleShip{sub, enemy}, nil)
+	handler := NewHandler(faction.ComputerAlpha)
+	snap := handler.snapshot(ms)
+	out := handler.submarineInstructions(snap, 0)
+
+	require.Contains(t, out, instr.GenInstrUid(instr.NameShipDive, sub.Uid),
+		"AI 潜艇在水面时应立即下潜")
+	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid))
+}
+
+// 即使没有鱼雷、只能靠甲板炮，AI 潜艇也不上浮（甲板炮在水下不可用）。
+func TestSubmarineAIGunOnlyStaysSubmerged(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
 	sub.Weapon.HasMainGun = true
@@ -91,9 +111,8 @@ func TestSubmarineAIGunOnlySurfacesForSurfaceTarget(t *testing.T) {
 	snap := handler.snapshot(ms)
 	out := handler.submarineInstructions(snap, 0)
 
-	require.Contains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid),
-		"没有鱼雷的潜艇需要上浮才能用甲板炮攻击水面目标")
-	require.Equal(t, enemy.Uid, sub.AttackTarget)
+	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid),
+		"AI 潜艇永远保持水下，不为甲板炮上浮")
 }
 
 func TestSubmarineAIRetreatsWhenDetected(t *testing.T) {

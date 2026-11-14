@@ -73,10 +73,9 @@ func (h *ComputerDecisionHandler) shouldIssueRoute(
 	return desired.dest.Distance(mem.dest) > pathRefreshDistance
 }
 
-// submarineInstructions 驱动 AI 潜艇：默认保持水下接敌，
-// 进鱼雷射程后攻击，被点亮或残血保持深度撤离。
-// 现役潜艇都带鱼雷，水下即可完成攻击，不会为了赶路而主动上浮；
-// 只有完全没有鱼雷、必须靠甲板炮的潜艇才会在炮击距离内上浮。
+// submarineInstructions 驱动 AI 潜艇：全程保持水下接敌，进鱼雷射程后攻击，
+// 被点亮或残血时保持深度撤离。上浮只保留给玩家手动操作（用于赶路），
+// AI 潜艇不会为了转场主动出水。
 func (h *ComputerDecisionHandler) submarineInstructions(
 	snap *battleSnapshot, tick int64,
 ) map[string]instr.Instruction {
@@ -93,7 +92,6 @@ func (h *ComputerDecisionHandler) submarineInstructions(
 		detected := sub.DetectedByAny(tick)
 		lowHP := sub.TotalHP > 0 && sub.CurHP/sub.TotalHP <= subRetreatHPRatio
 
-		wantDepth := objUnit.DiveStateSubmerged
 		targetUID := ""
 		dest := objPos.MapPos{}
 		hasDest := false
@@ -116,18 +114,11 @@ func (h *ComputerDecisionHandler) submarineInstructions(
 				hasDest = true
 			}
 		default:
-			// 水下巡航：继续向最近敌舰靠拢，但不为了赶路而上浮
+			// 水下巡航：继续向最近敌舰靠拢
 			if nearest != nil {
 				dest = nearest.CurPos
 				hasDest = true
 			}
-		}
-
-		// 无鱼雷潜艇无法在水下攻击，只有进入甲板炮射程、且有可炮击的水面目标时才上浮；
-		// 撤离/残血时仍保持水下，避免把自己送到敌方炮口下。
-		if !detected && !lowHP && !sub.Weapon.HasTorpedo && sub.Weapon.HasMainGun &&
-			nearest != nil && !nearest.Submerged() && distance <= sub.Weapon.MaxToShipRange {
-			wantDepth = objUnit.DiveStateSurface
 		}
 
 		if targetUID != "" {
@@ -136,14 +127,11 @@ func (h *ComputerDecisionHandler) submarineInstructions(
 			sub.AttackTarget = ""
 		}
 
-		if next, ok := sub.NextDiveState(); ok && next == wantDepth {
-			if wantDepth == objUnit.DiveStateSubmerged {
-				di := instr.NewShipDive(sub.Uid)
-				out[di.Uid()] = di
-			} else {
-				di := instr.NewShipSurface(sub.Uid)
-				out[di.Uid()] = di
-			}
+		// AI 只下发下潜；已经在水下/下潜中时 NextDiveState 返回上浮，不会重复下发。
+		// 万一被关卡配置成水面开局，也会立即回到水下。
+		if next, ok := sub.NextDiveState(); ok && next == objUnit.DiveStateSubmerged {
+			di := instr.NewShipDive(sub.Uid)
+			out[di.Uid()] = di
 		}
 
 		if !hasDest {
