@@ -48,6 +48,8 @@ var (
 	DarkSilver = color.RGBA{R: 105, G: 105, B: 105, A: 255}
 	// LightGreen 浅绿色（半透明，用于医疗船治疗范围圈）
 	LightGreen = color.RGBA{R: 144, G: 238, B: 144, A: 100}
+	// SonarCyan 浅青色（低透明度，用于声呐覆盖轮廓，避免和油井的亮绿圈混淆）
+	SonarCyan = color.RGBA{R: 130, G: 235, B: 235, A: 82}
 )
 
 var clrMap = map[string]color.Color{
