@@ -229,7 +229,7 @@ func (p *Panel) rebuildHits(ms *state.MissionState) {
 		} else {
 			p.hasTarget = false
 		}
-		// 潜艇：面板「下潜/上浮」按钮；过渡中不可点，避免计时器来回重置。
+		// 潜艇：面板「下潜/上浮」按钮；过渡中也可点，按最后一次指令反向切换。
 		if ships[0].Type == objUnit.ShipTypeSubmarine {
 			if _, canToggle := ships[0].NextDiveState(); canToggle {
 				p.hits = append(p.hits, hitRegion{

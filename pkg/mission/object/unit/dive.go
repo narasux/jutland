@@ -2,6 +2,7 @@ package unit
 
 import (
 	"fmt"
+	"math"
 
 	"github.com/narasux/jutland/pkg/i18n"
 )
@@ -41,15 +42,16 @@ func (s *BattleShip) DiveTransitioning() bool {
 }
 
 // NextDiveState 返回按下「下潜/上浮」后的目标状态。
-// 非潜艇与过渡态都返回 false，避免无效指令与计时器抖动。
+// 过渡中也能随时反向切换，以最后一次指令为准：下潜中返回上浮、上浮中返回下潜。
+// 非潜艇返回 false。
 func (s *BattleShip) NextDiveState() (DiveState, bool) {
 	if s.Type != ShipTypeSubmarine {
 		return s.DiveState, false
 	}
 	switch s.DiveState {
-	case DiveStateSurface:
+	case DiveStateSurface, DiveStateSurfacing:
 		return DiveStateSubmerged, true
-	case DiveStateSubmerged:
+	case DiveStateSubmerged, DiveStateDiving:
 		return DiveStateSurface, true
 	}
 	return s.DiveState, false
@@ -70,26 +72,49 @@ func (s *BattleShip) DiveSpeedRatio() float64 {
 	}
 }
 
-// StartDive 开始下潜；非潜艇或非水面状态时拒绝。
+// StartDive 开始下潜；潜艇可以在任意时刻改主意：上浮中会直接掉头下潜。
+// 反向切换沿用当前潜航进度，按与完整下潜相同的速度回到水下；
+// 已经在水下或下潜中时返回 false，不重启计时。
 func (s *BattleShip) StartDive() bool {
-	if s.Type != ShipTypeSubmarine || s.DiveState != DiveStateSurface {
+	if s.Type != ShipTypeSubmarine {
 		return false
 	}
+	switch s.DiveState {
+	case DiveStateSurface, DiveStateSurfacing:
+	default:
+		return false
+	}
+	progress := s.DiveProgress()
 	s.DiveState = DiveStateDiving
-	s.diveTicksLeft = ReloadTicks(s.diveTimeSeconds())
-	s.diveTotalTicks = s.diveTicksLeft
+	s.diveTotalTicks = ReloadTicks(s.diveTimeSeconds())
+	s.diveTicksLeft = transitionTicksLeft(s.diveTotalTicks, 1-progress)
 	return true
 }
 
-// StartSurface 开始上浮；非潜艇或非水下状态时拒绝。
+// StartSurface 开始上浮；潜艇可以在任意时刻改主意：下潜中会直接掉头上浮。
+// 反向切换沿用当前潜航进度，按与完整上浮相同的速度回到水面；
+// 已经在水面或上浮中时返回 false，不重启计时。
 func (s *BattleShip) StartSurface() bool {
-	if s.Type != ShipTypeSubmarine || s.DiveState != DiveStateSubmerged {
+	if s.Type != ShipTypeSubmarine {
 		return false
 	}
+	switch s.DiveState {
+	case DiveStateSubmerged, DiveStateDiving:
+	default:
+		return false
+	}
+	progress := s.DiveProgress()
 	s.DiveState = DiveStateSurfacing
-	s.diveTicksLeft = ReloadTicks(s.surfaceTimeSeconds())
-	s.diveTotalTicks = s.diveTicksLeft
+	s.diveTotalTicks = ReloadTicks(s.surfaceTimeSeconds())
+	s.diveTicksLeft = transitionTicksLeft(s.diveTotalTicks, progress)
 	return true
+}
+
+// transitionTicksLeft 把“剩余比例”换算成剩余拍数。
+// 计时总量始终是一次完整下潜/上浮的拍数，所以中途反向不会改变切换速度。
+func transitionTicksLeft(total int64, remaining float64) int64 {
+	remaining = min(1, max(0, remaining))
+	return max(1, int64(math.Round(float64(total)*remaining)))
 }
 
 // AdvanceDive 推进过渡计时，由任务主循环每拍调用。
@@ -151,17 +176,16 @@ func (s *BattleShip) DiveStateText() string {
 	}
 }
 
-// DiveActionText 供面板按钮显示：水面时提示「下潜」，水下时提示「上浮」，
-// 过渡态直接显示当前状态。
+// DiveActionText 供面板按钮显示：按钮永远代表“最后一次指令”的反向，
+// 水面与上浮中提示「下潜」，水下与下潜中提示「上浮」。
 func (s *BattleShip) DiveActionText() string {
 	switch s.DiveState {
-	case DiveStateSurface:
+	case DiveStateSurface, DiveStateSurfacing:
 		return i18n.Text(i18n.MsgShipDive)
-	case DiveStateSubmerged:
+	case DiveStateSubmerged, DiveStateDiving:
 		return i18n.Text(i18n.MsgShipSurfaceAction)
-	default:
-		return s.DiveStateText()
 	}
+	return s.DiveStateText()
 }
 
 // ResolveDiveConfig 补齐潜艇下潜配置的默认值并解析入场深度状态。

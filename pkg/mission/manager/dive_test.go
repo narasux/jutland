@@ -19,19 +19,26 @@ func TestDiveToggleInstructionFollowsDiveState(t *testing.T) {
 	diving := &objUnit.BattleShip{
 		Uid: "diving", CurHP: 1, Type: objUnit.ShipTypeSubmarine, DiveState: objUnit.DiveStateDiving,
 	}
+	surfacing := &objUnit.BattleShip{
+		Uid: "surfacing", CurHP: 1, Type: objUnit.ShipTypeSubmarine,
+		DiveState: objUnit.DiveStateSurfacing,
+	}
 	gunship := &objUnit.BattleShip{Uid: "gunship", CurHP: 1, Type: objUnit.ShipTypeDestroyer}
 	ms := &state.MissionState{Arena: state.MissionArenaState{
 		Ships: map[string]*objUnit.BattleShip{
 			surface.Uid:   surface,
 			submerged.Uid: submerged,
 			diving.Uid:    diving,
+			surfacing.Uid: surfacing,
 			gunship.Uid:   gunship,
 		},
 	}}
 
 	require.IsType(t, &instr.ShipDive{}, diveToggleInstruction(ms, surface.Uid))
 	require.IsType(t, &instr.ShipSurface{}, diveToggleInstruction(ms, submerged.Uid))
-	require.Nil(t, diveToggleInstruction(ms, diving.Uid))
+	// 过渡中按最后一次指令反向：下潜中按下即为上浮，上浮中按下即为下潜。
+	require.IsType(t, &instr.ShipSurface{}, diveToggleInstruction(ms, diving.Uid))
+	require.IsType(t, &instr.ShipDive{}, diveToggleInstruction(ms, surfacing.Uid))
 	require.Nil(t, diveToggleInstruction(ms, gunship.Uid))
 	require.Nil(t, diveToggleInstruction(ms, "missing"))
 }

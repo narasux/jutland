@@ -280,14 +280,14 @@ func (p *Panel) drawBasicInfo(screen *ebiten.Image, ms *state.MissionState, ship
 }
 
 // drawDiveButton 在「潜航状态」行右侧绘制下潜/上浮按钮。
-// 过渡态直接显示当前状态，且不提供点击（由命中区控制）。
+// 按钮文案是下一步动作：过渡中也能点击反向切换。
 func (p *Panel) drawDiveButton(screen *ebiten.Image, ms *state.MissionState, ship *objUnit.BattleShip) {
 	area := p.computeDiveRect(ms, ship)
 	if area.W == 0 {
 		return
 	}
 	fill, border, textColor := buttonIdle, sectionBorder, colorx.Gold
-	if p.cursorAt(area) && !ship.DiveTransitioning() {
+	if p.cursorAt(area) {
 		fill = buttonHover
 	}
 	p.drawRoundedRect(screen, area, theme.CornerRadius, fill, border)

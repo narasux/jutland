@@ -863,9 +863,9 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				d.drawText(screen, textStr, posX, posY, fontSize, font.Hang, colorx.White)
 			}
 		}
-		// 常显状态关闭时，仍给下潜/上浮中的己方潜艇保留状态图标，
-		// 避免下潜后找不到自己的艇
-		if !showStatusRow && diveBadge.visible && s.DiveState != objUnit.DiveStateSurface {
+		// 常显状态关闭时，己方潜艇也常驻深度图标（水面与过渡态都显示），
+		// 图标跟随最后一次下潜/上浮指令，避免下潜后找不到自己的艇。
+		if !showStatusRow && diveBadge.visible {
 			drawDiveBadge(
 				screen, diveBadge, shipX-diveBadge.width/2, shipY-44*ms.ZoomScale(),
 				ms.UI.GameOpts.Zoom,
