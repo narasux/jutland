@@ -15297,8 +15297,12 @@
       },
     ],
     description: "I-168, originally I-68, was a Kaidai VI (KD6) cruiser submarine commissioned in 1934 and renamed in 1942. At Midway she closed on the damaged Yorktown, hit the carrier with torpedoes and sank the assisting destroyer Hammann; Yorktown went down the next day. An American submarine sank I-168 near Rabaul in July 1943.",
-    author: "Kolyadko 2010",
+    author: "midnike",
     links: [
+      {
+        name: "IJN Submarine I-168",
+        url: "https://www.deviantart.com/midnike/art/IJN-Submarine-I-168-563327086",
+      },
       {
         name: "Wikipedia - Japanese submarine I-168",
         url: "https://en.wikipedia.org/wiki/Japanese_submarine_I-168",
@@ -15324,8 +15328,12 @@
       },
     ],
     description: "Nautilus, originally V-6, was a Narwhal-class cruiser submarine commissioned in 1930. Re-engined with diesel-electric propulsion in 1941-42, she continued her long-range cruiser-submarine role. At Midway she attacked the Japanese fleet and was heavily depth-charged, then survived to carry out reconnaissance, bombardment and transport missions. She was decommissioned in 1945 and scrapped the following year.",
-    author: "Kolyadko 2010",
+    author: "midnike",
     links: [
+      {
+        name: "USN Submarine NAUTILUS, SS-168",
+        url: "https://www.deviantart.com/midnike/art/USN-Submarine-NAUTILUS%2C-SS-168-563334110",
+      },
       {
         name: "Wikipedia - USS Nautilus (SS-168)",
         url: "https://en.wikipedia.org/wiki/USS_Nautilus_(SS-168)",
@@ -15351,8 +15359,12 @@
       },
     ],
     description: "The Type VIIC was the most numerous German U-boat class of the Second World War, entering service from 1940 and bearing the main burden of the Atlantic campaign. Boats ran on the surface under diesel power, closed to torpedo range, and used the deck gun to finish off damaged or isolated merchantmen. Losses rose sharply after Allied escorts and aircraft closed the mid-Atlantic gap in 1943.",
-    author: "Unknown",
+    author: "Gemini Image",
     links: [
+      {
+        name: "Gemini Image",
+        url: "https://gemini.google.com",
+      },
       {
         name: "Wikipedia - Type VII submarine",
         url: "https://en.wikipedia.org/wiki/Type_VII_submarine",

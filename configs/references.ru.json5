@@ -15238,8 +15238,12 @@
       },
     ],
     description: "I-168, первоначально I-68, была крейсерской подводной лодкой типа Kaidai VI (KD6), вступившей в строй в 1934 году и переименованной в 1942 году. При Мидуэе она скрытно приблизилась к повреждённому Yorktown, поразила авианосец торпедами и потопила эсминец Hammann, оказывавший помощь; Yorktown затонул на следующий день. В июле 1943 года I-168 была потоплена американской подводной лодкой у Рабаула.",
-    author: "Kolyadko 2010",
+    author: "midnike",
     links: [
+      {
+        name: "IJN Submarine I-168",
+        url: "https://www.deviantart.com/midnike/art/IJN-Submarine-I-168-563327086",
+      },
       {
         name: "Wikipedia - Japanese submarine I-168",
         url: "https://en.wikipedia.org/wiki/Japanese_submarine_I-168",
@@ -15265,8 +15269,12 @@
       },
     ],
     description: "Nautilus, первоначально V-6, была большой крейсерской подводной лодкой типа Narwhal, вступившей в строй в 1930 году. В 1941-42 годах она получила дизель-электрическую установку и продолжила службу в роли океанской крейсерской подводной лодки. При Мидуэе лодка атаковала японский флот и подверглась тяжёлому бомбометанию, но уцелела и продолжила разведку, обстрелы и транспортные рейсы. В 1945 году выведена из строя, в следующем году разобрана.",
-    author: "Kolyadko 2010",
+    author: "midnike",
     links: [
+      {
+        name: "USN Submarine NAUTILUS, SS-168",
+        url: "https://www.deviantart.com/midnike/art/USN-Submarine-NAUTILUS%2C-SS-168-563334110",
+      },
       {
         name: "Wikipedia - USS Nautilus (SS-168)",
         url: "https://en.wikipedia.org/wiki/USS_Nautilus_(SS-168)",
@@ -15292,8 +15300,12 @@
       },
     ],
     description: "Тип VIIC был самым многочисленным классом немецких подводных лодок Второй мировой войны. С 1940 года эти лодки несли основную тяжесть битвы за Атлантику: шли в надводном положении под дизелями, сближались для торпедной атаки, а палубное орудие применяли для добивания повреждённых или одиночных судов. После усиления союзных эскортов и авиации в 1943 году потери резко возросли.",
-    author: "Unknown",
+    author: "Gemini Image",
     links: [
+      {
+        name: "Gemini Image",
+        url: "https://gemini.google.com",
+      },
       {
         name: "Wikipedia - Подводные лодки типа VII",
         url: "https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B4%D0%B2%D0%BE%D0%B4%D0%BD%D1%8B%D0%B5_%D0%BB%D0%BE%D0%B4%D0%BA%D0%B8_%D1%82%D0%B8%D0%BF%D0%B0_VII",
