@@ -483,10 +483,11 @@ func (d *Drawer) drawMissionResult(screen *ebiten.Image, textStr string, textCol
 		textWidth = layout.CalcTextWidth(textStr, fontSize, resultFont)
 	}
 
-	// 保持原来的大字号，但贴底摆放，不再用横带遮住画面中部。
-	bottomMargin := max(48.0, screenH*0.04)
-	posX := (screenW - textWidth) / 2
-	posY := screenH - bottomMargin - fontSize
+	// 横向回到旧版的左下角摆法，并留出最小安全边距，避免长文本贴边。
+	marginX := max(48.0, screenW*0.04)
+	posX := max(marginX, (screenW-textWidth)/7)
+	marginY := max(48.0, screenH*0.04)
+	posY := screenH - marginY - fontSize
 	d.drawText(screen, textStr, posX+4, posY+4, fontSize, resultFont, color.RGBA{A: 190})
 	d.drawText(screen, textStr, posX, posY, fontSize, resultFont, textColor)
 }

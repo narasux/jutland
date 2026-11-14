@@ -245,7 +245,7 @@ const (
 )
 
 // handleMissionReport 处理战役总结页的鼠标操作：
-// 点击页签切换总览 / 舰艇 / 飞机，点击按钮返回任务选择或重新挑战。
+// 点击页签切换总览 / 舰艇 / 飞机，点击按钮返回主界面或重开一局。
 // 结算流程不提供键盘快捷键。
 func (g *Game) handleMissionReport() {
 	// 防御：管理器缺失时退回旧行为，避免空指针。
@@ -282,7 +282,7 @@ func (g *Game) handleMissionReport() {
 	}
 }
 
-// leaveMissionResult 返回任务选择。
+// leaveMissionResult 返回主界面。
 func (g *Game) leaveMissionResult() {
 	if g.missionMgr != nil {
 		g.missionMgr.ClearBattleStats()

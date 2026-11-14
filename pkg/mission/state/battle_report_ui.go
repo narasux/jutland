@@ -300,11 +300,15 @@ func CalcBattleReportLayout(screenW, screenH int, withButtons bool) BattleReport
 		Scale:        scale,
 	}
 	if withButtons {
+		// 两个按钮居中并排：左侧是低频的重新挑战，右侧是主要操作返回主界面。
 		totalW := battleReportButtonW*2 + battleReportButtonGap
 		buttonX := battleReportPadX + (innerW-totalW)/2
 		layout.Buttons = rect(battleReportPadX, 696, innerW, battleReportButtonH)
-		layout.BackButton = rect(buttonX, 696, battleReportButtonW, battleReportButtonH)
 		layout.RetryButton = rect(
+			buttonX,
+			696, battleReportButtonW, battleReportButtonH,
+		)
+		layout.BackButton = rect(
 			buttonX+battleReportButtonW+battleReportButtonGap,
 			696, battleReportButtonW, battleReportButtonH,
 		)

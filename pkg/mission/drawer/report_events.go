@@ -11,6 +11,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
 	"github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -129,8 +130,12 @@ func (d *Drawer) drawBattleReportEventLog(
 			y := listY + float64(row)*rowH
 			dotX := panel.X + pad + 4*scale
 			dotY := y + rowH/2
+			dotPlayer := entry.ActorPlayer
+			if entry.Action == state.BattleLogPlaneLost {
+				dotPlayer = entry.TargetPlayer
+			}
 			dotClr := battleReportSubtitleClr
-			switch entry.ActorPlayer {
+			switch dotPlayer {
 			case ms.Player.CurPlayer:
 				dotClr = battleReportOwnClr
 			case ms.Player.CurEnemy:
@@ -140,7 +145,7 @@ func (d *Drawer) drawBattleReportEventLog(
 				screen, float32(dotX), float32(dotY), float32(max(2*scale, 2.5)), dotClr, false,
 			)
 
-			segments := battleReportEventSegments(entry)
+			segments := battleReportEventSegments(entry, ms.Player.CurPlayer)
 			line := battleReportSegmentsText(segments)
 			lineRect := state.BattleReportRect{
 				X: lineX, Y: y, W: lineW, H: rowH,
@@ -273,7 +278,9 @@ func appendBattleReportDamageSegments(
 
 // battleReportEventSegments 把一条战况拆成「前缀 / 动作 / 后缀」，
 // 击沉和击落动作单独用红色，其他部分保持正常文字颜色。
-func battleReportEventSegments(entry state.BattleLogEntry) []battleReportEventSegment {
+func battleReportEventSegments(
+	entry state.BattleLogEntry, ownPlayer faction.Player,
+) []battleReportEventSegment {
 	actor := battleReportCombatantText(entry.ActorName, entry.ActorType, entry.ActorIsPlane)
 	if entry.Action == state.BattleLogPlaneWithShip {
 		return []battleReportEventSegment{{
@@ -337,6 +344,20 @@ func battleReportEventSegments(entry state.BattleLogEntry) []battleReportEventSe
 		})
 	}
 
+	// 非战斗损失没有攻击者，原行只剩「— 损失 机型」，补上损失方的阵营。
+	if entry.Action == state.BattleLogPlaneLost {
+		if side := battleReportSideText(entry.TargetPlayer, ownPlayer); side != "" {
+			text := i18n.Format(i18n.MsgBattleReportEventLossRow, map[string]any{
+				"Time":   state.BattleReportDurationText(entry.Tick),
+				"Side":   side,
+				"Action": action,
+				"Target": target,
+				"Suffix": suffix,
+			})
+			return []battleReportEventSegment{{Text: text, Color: battleReportValueClr}}
+		}
+	}
+
 	row := i18n.Format(i18n.MsgBattleReportEventRow, map[string]any{
 		"Time":   state.BattleReportDurationText(entry.Tick),
 		"Actor":  actor,
@@ -363,6 +384,18 @@ func battleReportEventSegments(entry state.BattleLogEntry) []battleReportEventSe
 	segments = append(segments, battleReportEventSegment{Text: action, Color: actionColor})
 	segments = appendBattleReportDamageSegments(segments, rest, damageColor)
 	return segments
+}
+
+// battleReportSideText 把参战方换算成「我方 / 敌方」文案；未知方返回空串。
+func battleReportSideText(player, ownPlayer faction.Player) string {
+	switch {
+	case player == "":
+		return ""
+	case player == ownPlayer:
+		return i18n.Text(i18n.MsgBattleReportPlayer)
+	default:
+		return i18n.Text(i18n.MsgBattleReportEnemy)
+	}
 }
 
 // battleReportSegmentsText 拼接一行的完整文本，用于字号适配。

@@ -105,9 +105,9 @@ other = "击落敌机 {{.Count}}"
 [BattleReportWithShip]
 other = "飞机损失含随舰沉没 {{.Count}}"
 [BattleReportBack]
-other = "返回任务选择"
+other = "返回主界面"
 [BattleReportRetry]
-other = "重新挑战"
+other = "重开一局"
 [BattleReportLiveHint]
 other = "[Tab] 返回暂停  [Esc] 继续"
 [BattleReportNoLoss]
@@ -148,6 +148,8 @@ other = "损失"
 other = "随舰损失"
 [BattleReportEventRow]
 other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportEventLossRow]
+other = "{{.Time}}  {{.Side}} {{.Action}} {{.Target}}{{.Suffix}}"
 [BattleReportWithShipRow]
 other = "{{.Time}}  {{.Actor}} 随舰损失飞机 {{.Count}} 架"
 [BattleReportWeaponUnknown]
@@ -192,8 +194,6 @@ other = "敌方飞机"
 other = "在役吨位"
 [BattleReportTotal]
 other = "合计"
-[BattleReportPageHint]
-other = "点击页签切换页面"
 [BattleReportShipClass]
 other = "舰级"
 [BattleReportPlaneType]

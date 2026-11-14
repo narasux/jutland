@@ -114,3 +114,18 @@ func TestBattleReportDurationText(t *testing.T) {
 	require.Equal(t, "1:02:03", BattleReportDurationText(int64(3723*60)))
 	require.Equal(t, "00:00", BattleReportDurationText(-100))
 }
+
+// 结算页按钮居中并排：左侧是低频的重新挑战，右侧是主要操作返回主界面。
+func TestBattleReportButtonsCenterRetryLeftAndBackRight(t *testing.T) {
+	report := CalcBattleReportLayout(1920, 1080, true)
+	require.Equal(t, report.RetryButton.Y, report.BackButton.Y)
+	require.Less(t, report.RetryButton.X, report.BackButton.X)
+	require.InDelta(
+		t,
+		battleReportButtonGap*report.Scale,
+		report.BackButton.X-(report.RetryButton.X+report.RetryButton.W),
+		1e-6,
+	)
+	pairCenter := (report.RetryButton.X + report.BackButton.X + report.BackButton.W) / 2
+	require.InDelta(t, report.Panel.X+report.Panel.W/2, pairCenter, 1e-6)
+}
