@@ -29,7 +29,7 @@ func TestGunsCannotFireAtSubmergedSubmarine(t *testing.T) {
 	t.Cleanup(func() { config.G = oldSettings })
 
 	escort := newNamedShip(t, "gurkha", faction.HumanAlpha, 10, 10)
-	sub := newNamedShip(t, "u_boat_type_viic", faction.ComputerAlpha, 14, 10)
+	sub := newNamedShip(t, "u_331", faction.ComputerAlpha, 14, 10)
 	sub.DiveState = objUnit.DiveStateSubmerged
 
 	bullets := escort.FireAt(objUnit.FireTargets{Primary: sub, Secondary: sub, AntiAircraft: sub})
@@ -42,19 +42,19 @@ func TestGunsCannotFireAtSubmergedSubmarine(t *testing.T) {
 
 func TestSurfaceShipWithoutASWWeaponCannotEngageSubmerged(t *testing.T) {
 	battleship := newNamedShip(t, "lowa", faction.HumanAlpha, 10, 10)
-	sub := newNamedShip(t, "u_boat_type_viic", faction.ComputerAlpha, 12, 10)
+	sub := newNamedShip(t, "u_331", faction.ComputerAlpha, 12, 10)
 	sub.DiveState = objUnit.DiveStateSubmerged
 
 	require.Zero(t, battleship.Weapon.MaxToSubmergedRange)
 	require.Zero(t, shipEngageRange(battleship, sub), "没有反潜武器的战列舰点不亮也打不到水下潜艇")
-	surfaceSub := newNamedShip(t, "u_boat_type_viic", faction.ComputerAlpha, 11, 10)
+	surfaceSub := newNamedShip(t, "u_331", faction.ComputerAlpha, 11, 10)
 	surfaceSub.DiveState = objUnit.DiveStateSurface
 	require.Positive(t, shipEngageRange(battleship, surfaceSub),
 		"同一条船打浮航潜艇时仍按对舰射程")
 }
 
 func TestSubmarineCarriesAntiSubmarineTorpedoes(t *testing.T) {
-	sub := newNamedShip(t, "u_boat_type_viic", faction.HumanAlpha, 10, 10)
+	sub := newNamedShip(t, "u_331", faction.HumanAlpha, 10, 10)
 	require.True(t, sub.Weapon.HasAntiSubWeapon)
 	require.Positive(t, sub.Weapon.MaxToSubmergedRange, "潜艇自身鱼雷应计入对潜射程")
 	for _, torpedo := range sub.Weapon.Torpedoes {
@@ -71,8 +71,8 @@ func TestSubmarineTorpedoHitsDetectedSubmergedSubmarine(t *testing.T) {
 	objUnit.SetSimTick(1)
 	t.Cleanup(func() { config.G = oldSettings })
 
-	shooter := newNamedShip(t, "u_boat_type_viic", faction.HumanAlpha, 10, 10)
-	target := newNamedShip(t, "u_boat_type_viic", faction.ComputerAlpha, 14, 10)
+	shooter := newNamedShip(t, "u_331", faction.HumanAlpha, 10, 10)
+	target := newNamedShip(t, "u_331", faction.ComputerAlpha, 14, 10)
 	shooter.DiveState = objUnit.DiveStateSubmerged
 	target.DiveState = objUnit.DiveStateSubmerged
 	// 模拟水听器已经点亮目标，否则下潜潜艇按规则不可见、也不该被盲射命中。

@@ -10272,6 +10272,20 @@
     ],
   },
   {
+    name: "GER/20/65/2/C38",
+    displayName: "20mm/65 C/38 双联装高炮",
+    type: "武器",
+    armaments: [],
+    description: "德国海军 2 厘米 C/38 双联装高炮，65 倍径，装备于 XXI 型 U 艇指挥塔，用于近程防空。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 2 cm Flak 30/38/Flakvierling",
+        url: "https://en.wikipedia.org/wiki/2_cm_Flak_30/38/Flakvierling",
+      },
+    ],
+  },
+  {
     name: "GER/20/65/C30",
     displayName: "20mm/65 C/30 单装高炮",
     type: "武器",
@@ -15315,8 +15329,89 @@
     ],
   },
   {
-    name: "u_boat_type_viic",
-    displayName: "U-VIIC 型",
+    name: "u_2540",
+    displayName: "U-2540（XXI）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "高炮",
+        value: "2x2 20mm C/38",
+      },
+      {
+        label: "鱼雷",
+        value: "6x1 533mm（艏 6）",
+      },
+    ],
+    description: "XXI 型潜艇，1945 年 2 月服役，未执行战备巡逻。1945 年 5 月自沉，1957 年打捞，后以威廉·鲍姆号之名加入联邦德国海军，现作为博物馆艇保存在不来梅哈芬的德国海事博物馆。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "War History - Type XXI Electric Boat",
+        url: "https://warhistory.org/ja/article/type-xxi-electric-boat#google_vignette",
+      },
+      {
+        name: "维基百科 - 威廉·鲍姆号潜艇",
+        url: "https://zh.wikipedia.org/wiki/%E5%A8%81%E5%BB%89%C2%B7%E9%B2%8D%E5%A7%86%E5%8F%B7%E6%BD%9C%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "u_2323",
+    displayName: "U-2323（XXIII）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "鱼雷",
+        value: "2x1 533mm（艏 2）",
+      },
+    ],
+    description: "XXIII 型近海潜艇，1944 年 7 月服役。服役仅八天，就在基尔港入口的默尔滕奥特附近触雷沉没，2 名艇员丧生；残骸战后就地拆解。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Naval Encyclopedia - Type XXIII U-Boats",
+        url: "https://naval-encyclopedia.com/ww2/germany/type-xxiii-u-boats.php",
+      },
+      {
+        name: "维基百科 - XXIII级潜艇",
+        url: "https://zh.wikipedia.org/wiki/XXIII%E7%B4%9A%E6%BD%9B%E8%89%87",
+      },
+    ],
+  },
+  {
+    name: "u_47",
+    displayName: "U-47（VIIB）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "甲板炮",
+        value: "1x1 88mm SK C/35",
+      },
+      {
+        label: "高炮",
+        value: "1x1 20mm C/30",
+      },
+      {
+        label: "鱼雷",
+        value: "5x1 533mm（艏 4、艉 1）",
+      },
+    ],
+    description: "VIIB 型 U 艇，1938 年 12 月服役，由京特·普里恩指挥。1939 年 10 月潜入斯卡帕湾，击沉英国战列舰皇家橡树号；1941 年 3 月在北大西洋失踪，45 名艇员全数推定阵亡。",
+    author: "XBALPLUS & Nano Banana",
+    links: [
+      {
+        name: "Pinterest - U-47 Type VIIB",
+        url: "https://jp.pinterest.com/pin/774478467146175002/",
+      },
+      {
+        name: "维基百科 - U-47号潜艇 (1938年)",
+        url: "https://zh.wikipedia.org/wiki/U-47%E5%8F%B7%E6%BD%9C%E8%89%87_(1938%E5%B9%B4)",
+      },
+    ],
+  },
+  {
+    name: "u_331",
+    displayName: "U-331（VIIC）",
     type: "潜艇",
     armaments: [
       {
@@ -15332,7 +15427,7 @@
         value: "5x1 533mm（艏 4、艉 1）",
       },
     ],
-    description: "VII C 型是二战德国海军建造数量最多的 U 艇，1940 年起大批服役，活跃于大西洋破交作战。该型以水面柴油机航行，接近目标后发动鱼雷攻击，并用甲板炮处理受伤或落单的商船。1943 年盟军护航与航空反潜增强后，其损失急剧上升。",
+    description: "U-331 属 VII C 型，1941 年 3 月服役，由汉斯-迪特里希·冯·蒂森豪森指挥。1941 年 11 月 25 日在埃及近海用三枚鱼雷击沉英国战列舰巴勒姆号；1942 年 11 月 17 日在阿尔及尔以北被英军飞机重创，随后被鱼雷机击沉，32 名艇员丧生。",
     author: "Gemini Image",
     links: [
       {

@@ -16,7 +16,7 @@ import (
 // revealTestState 构造一艘未探测到的敌方潜艇，并开启调试暴露。
 func revealTestState() (*state.MissionState, *objUnit.BattleShip) {
 	sub := &objUnit.BattleShip{
-		Uid: "sub", Name: "u_boat_type_viic", BelongPlayer: faction.ComputerAlpha,
+		Uid: "sub", Name: "u_331", BelongPlayer: faction.ComputerAlpha,
 		CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
 		DiveState: objUnit.DiveStateSubmerged,
 		CurPos:    objPos.NewR(3, 3), CurRotation: 90,

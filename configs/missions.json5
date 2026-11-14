@@ -2722,9 +2722,9 @@
     descriptionJa: "艦隊司令部による1941年度総合即応検査「荒海」では、運用可能な全艦艇をダーウィン港に集結させる。超戦艦や正規空母から魚雷艇、貨物船、病院船まで、100隻を超える艦船が参加する大規模演習だ。各陣営の射撃管制、操艦、損傷モデルを総合的に検証する。七か所の増援地点を利用し、あらゆる艦種を呼び出して訓練できる。",
     initReinforcePoints: [
       {
-        pos: [1, 6],
+        pos: [1, 20],
         rotation: 90,
-        rallyPos: [10, 6],
+        rallyPos: [10, 20],
         belongPlayer: "P1",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -2741,9 +2741,9 @@
         ],
       },
       {
-        pos: [1, 20],
+        pos: [1, 30],
         rotation: 90,
-        rallyPos: [10, 20],
+        rallyPos: [10, 30],
         belongPlayer: "P1",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -2800,9 +2800,9 @@
         ],
       },
       {
-        pos: [1, 34],
+        pos: [1, 40],
         rotation: 90,
-        rallyPos: [10, 34],
+        rallyPos: [10, 40],
         belongPlayer: "P1",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -2860,9 +2860,9 @@
         ],
       },
       {
-        pos: [1, 48],
+        pos: [1, 50],
         rotation: 90,
-        rallyPos: [10, 48],
+        rallyPos: [10, 50],
         belongPlayer: "P1",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -2924,9 +2924,9 @@
         ],
       },
       {
-        pos: [1, 62],
+        pos: [1, 60],
         rotation: 90,
-        rallyPos: [10, 62],
+        rallyPos: [10, 60],
         belongPlayer: "P1",
         maxOncomingShip: 10,
         providedShipNames: [
@@ -2958,17 +2958,38 @@
           "dardo",
           "uss_barb",
           "uss_sealion",
-          "uss_tarpon"
+          "uss_tarpon",
+          "u_2540",
+          "u_2323",
+          "u_47"
         ],
       },
       {
-        pos: [1, 76],
+        pos: [1, 70],
         rotation: 90,
-        rallyPos: [10, 76],
+        rallyPos: [10, 70],
         belongPlayer: "P1",
         maxOncomingShip: 10,
         providedShipNames: [
           "jiujiang",
+        ],
+      },
+      {
+        pos: [1, 80],
+        rotation: 90,
+        rallyPos: [10, 80],
+        belongPlayer: "P1",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "uss_barb",
+          "uss_sealion",
+          "uss_tarpon",
+          "uss_nautilus",
+          "u_2540",
+          "u_2323",
+          "u_47",
+          "u_331",
+          "i_168",
         ],
       },
       {
@@ -3153,14 +3174,32 @@
         belongPlayer: "P1"
       },
       {
-        name: "u_boat_type_viic",
-        pos: [26, 30],
+        name: "u_2540",
+        pos: [28, 26],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "u_2323",
+        pos: [29, 27],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "u_47",
+        pos: [28, 28],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "u_331",
+        pos: [29, 29],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "S_100",
-        pos: [27, 29],
+        pos: [26, 34],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -6361,7 +6400,7 @@
       // === 我方 ===
       // 我方编队在环礁西北外海，U 艇与护航驱逐舰南北相隔 3 格，舰首向东。
       {
-        name: "u_boat_type_viic",
+        name: "u_331",
         pos: [30, 34],
         rotation: 90,
         belongPlayer: "P1"
@@ -6435,7 +6474,7 @@
       // 任意两区之间最近敌我距离 ≥71 格，避免 AI 跨区接敌和开局即交火。
       // === 西南区「潜对潜」：U 艇（西，30,230）对 I-168（东，90,230），相距 60 格 ===
       {
-        name: "u_boat_type_viic",
+        name: "u_331",
         pos: [30, 230],
         rotation: 90,
         belongPlayer: "P1"
@@ -6467,7 +6506,7 @@
       },
       // === 东北区「敌猎潜」：U 艇（西，165,184）对两驱逐舰（东，225,181/187），最近 60 格 ===
       {
-        name: "u_boat_type_viic",
+        name: "u_331",
         pos: [165, 184],
         rotation: 90,
         belongPlayer: "P1"
