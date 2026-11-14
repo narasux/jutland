@@ -81,7 +81,7 @@ func (m *MissionManager) updateMissionStatus() {
 			}
 			sx, sy := ebiten.CursorPosition()
 			if _, dy := ebiten.Wheel(); dy != 0 {
-				m.ScrollBattleReportByWheel(dy, sx)
+				m.ScrollBattleReportByWheel(dy, sx, sy)
 			}
 			if m.UpdateBattleReportScrollDrag(sx, sy) {
 				return
@@ -110,6 +110,7 @@ func (m *MissionManager) updateMissionStatus() {
 			m.state.UI.BattleReportShipScroll = [2]int{}
 			m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 			m.state.UI.BattleReportScrollDragOffset = 0
+			m.reportWheelAccum = 0
 			return
 		}
 

@@ -1,5 +1,9 @@
 package unit
 
+import (
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+)
+
 // HitInfo 最近一次命中使用的武器与实际伤害，供战报详情展示。
 type HitInfo struct {
 	// WeaponType shell / torpedo / bomb / rocket / laser
@@ -12,4 +16,6 @@ type HitInfo struct {
 	Weight int
 	// Damage 本次实际伤害
 	Damage float64
+	// Critical 本次命中的暴击类型：普通 / 三倍 / 十倍
+	Critical objBullet.CriticalType
 }

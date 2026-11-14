@@ -36,7 +36,12 @@ func TestScrollBattleReportEventsClamps(t *testing.T) {
 	manager.ScrollBattleReportEvents(-100)
 	require.Zero(t, manager.state.UI.BattleReportEventScroll)
 
-	manager.ScrollBattleReportEventsByWheel(-1)
+	layout := manager.BattleReportLayout(true)
+	manager.ScrollBattleReportByWheel(
+		-1,
+		int(layout.Content.X+layout.Content.W/2),
+		int(layout.Content.Y+layout.Content.H/2),
+	)
 	require.Greater(t, manager.state.UI.BattleReportEventScroll, 0)
 }
 
@@ -67,7 +72,8 @@ func TestScrollBattleReportShipsClamps(t *testing.T) {
 		Player: state.MissionPlayerState{
 			CurPlayer: faction.HumanAlpha, CurEnemy: faction.ComputerAlpha,
 		},
-		UI: state.MissionUIState{BattleReportPage: state.BattleReportPageShips},
+		View: state.MissionViewState{Layout: layout.ScreenLayout{Width: 1280, Height: 720}},
+		UI:   state.MissionUIState{BattleReportPage: state.BattleReportPageShips},
 	}}
 	manager.state.Stats = state.NewBattleStats()
 	own := &state.BattleSideStats{ShipsInitialByClass: map[string]int{}}
@@ -78,14 +84,18 @@ func TestScrollBattleReportShipsClamps(t *testing.T) {
 		faction.HumanAlpha: own,
 	}
 
-	manager.ScrollBattleReportByWheel(-1, 0)
+	reportLayout := manager.BattleReportLayout(true)
+	left := reportLayout.DetailSides[0]
+	leftX, leftY := int(left.X+left.W/2), int(left.Y+left.H/2)
+	manager.ScrollBattleReportByWheel(-1, leftX, leftY)
 	require.Greater(t, manager.state.UI.BattleReportShipScroll[0], 0)
 
-	manager.ScrollBattleReportByWheel(100, 0)
+	manager.ScrollBattleReportByWheel(100, leftX, leftY)
 	require.Zero(t, manager.state.UI.BattleReportShipScroll[0])
 
 	// 敌军没有舰级，右侧滚动保持为 0。
-	manager.ScrollBattleReportByWheel(-1, 10000)
+	right := reportLayout.DetailSides[1]
+	manager.ScrollBattleReportByWheel(-1, int(right.X+right.W/2), int(right.Y+right.H/2))
 	require.Zero(t, manager.state.UI.BattleReportShipScroll[1])
 }
 
@@ -284,4 +294,35 @@ func TestHandleBattleReportEventFilterClick(t *testing.T) {
 	)
 	require.True(t, hit)
 	require.Equal(t, state.BattleReportEventFilterAll, manager.state.UI.BattleReportEventFilter)
+}
+
+// 触控板按帧上报小数增量，滚轮必须先累加到标准刻度再翻行；
+// 否则每帧都会被兜底成 ±1 行，一次轻扫就滚出去很远。
+func TestScrollBattleReportWheelAccumulatesTrackpadDeltas(t *testing.T) {
+	manager := newEventReportManager(30)
+	layout := manager.BattleReportLayout(true)
+	x := int(layout.Content.X + layout.Content.W/2)
+	y := int(layout.Content.Y + layout.Content.H/2)
+
+	for idx := 0; idx < 3; idx++ {
+		manager.ScrollBattleReportByWheel(-0.25, x, y)
+		require.Zero(t, manager.state.UI.BattleReportEventScroll)
+	}
+	manager.ScrollBattleReportByWheel(-0.25, x, y)
+	require.Equal(t, reportWheelRowsPerUnit, manager.state.UI.BattleReportEventScroll)
+}
+
+func TestScrollBattleReportWheelIgnoresOutsidePanel(t *testing.T) {
+	manager := newEventReportManager(30)
+	manager.ScrollBattleReportByWheel(-1, 0, 0)
+	require.Zero(t, manager.state.UI.BattleReportEventScroll)
+}
+
+func TestBulletHitInfoRecordsCritical(t *testing.T) {
+	info := bulletHitInfo(&objBullet.Bullet{
+		Type:         objBullet.TypeShell,
+		Name:         "US/GB/127/1943",
+		CriticalType: objBullet.CriticalTypeThreeTimes,
+	})
+	require.Equal(t, objBullet.CriticalTypeThreeTimes, info.Critical)
 }

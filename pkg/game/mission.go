@@ -258,7 +258,7 @@ func (g *Game) handleMissionReport() {
 	}
 	sx, sy := ebiten.CursorPosition()
 	if _, dy := ebiten.Wheel(); dy != 0 {
-		g.missionMgr.ScrollBattleReportByWheel(dy, sx)
+		g.missionMgr.ScrollBattleReportByWheel(dy, sx, sy)
 	}
 	if g.missionMgr.UpdateBattleReportScrollDrag(sx, sy) {
 		return

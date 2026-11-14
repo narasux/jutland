@@ -12,6 +12,7 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
+	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
 // battleReportDetailLimit 飞机明细表最多展示的机型数；舰艇列表不再聚合，全部展示。
@@ -224,16 +225,25 @@ func (d *Drawer) drawBattleReportPlaneDetails(
 	)
 }
 
-// battleReportShipIcon 获取舰级对应的缩略图标；我方绿色，敌方蓝色。
+// battleReportShipIcon 获取舰级对应的缩略图标；配色与地图一致：我方绿色，敌方红色。
 func battleReportShipIcon(name string, own bool) *ebiten.Image {
 	abbr := "default"
 	if ship := objUnit.ShipMap[name]; ship != nil && ship.TypeAbbr != "" {
 		abbr = ship.TypeAbbr
 	}
-	if own {
-		return textureImg.GetAbbrShip(abbr, false)
+	return textureImg.GetAbbrShip(abbr, !own)
+}
+
+// battleReportDetailScrollStart 返回明细列表实际绘制的起始行。
+// 没有滚动条时固定从第一行开始；有滚动条时按状态偏移夹紧，
+// 保证绘制窗口与滚动条滑块位置一致。
+func battleReportDetailScrollStart(
+	scroll int, scrollbar state.BattleReportScrollbar, hasScrollbar bool,
+) int {
+	if !hasScrollbar {
+		return 0
 	}
-	return textureImg.GetAbbrShipBlue(abbr)
+	return min(max(0, scroll), scrollbar.MaxScroll)
 }
 
 // drawBattleReportDetailPanel 绘制单个阵营的舰级 / 机型明细表。
@@ -281,10 +291,7 @@ func (d *Drawer) drawBattleReportDetailPanel(
 	listBottom := totalY - 6*scale
 	visible := max(1, state.BattleReportDetailVisibleRows(rect.H, scale))
 	scrollbar, hasScrollbar := state.BattleReportDetailScrollbar(rect, len(rows), scroll, scale)
-	scroll = 0
-	if hasScrollbar {
-		scroll = min(max(0, scroll), scrollbar.MaxScroll)
-	}
+	scroll = battleReportDetailScrollStart(scroll, scrollbar, hasScrollbar)
 
 	// 右侧预留独立滚动条槽位，表格宽度与分隔线都到此为止。
 	contentW := innerW
@@ -351,6 +358,8 @@ func (d *Drawer) drawBattleReportDetailPanel(
 				icon := iconFor(row.Name)
 				iconSize := 18 * scale
 				opts := d.genDefaultDrawImageOptions()
+				// 缩略图素材朝上，战报里统一转 90 度让舰艏朝右。
+				ebutil.SetOptsCenterRotation(opts, icon, 90)
 				opts.GeoM.Scale(
 					iconSize/float64(icon.Bounds().Dx()),
 					iconSize/float64(icon.Bounds().Dy()),

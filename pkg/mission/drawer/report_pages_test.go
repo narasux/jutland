@@ -101,3 +101,13 @@ func TestBuildBattleShipDetailRowsDropsZeroCountRows(t *testing.T) {
 	require.Len(t, rows, 1)
 	require.Equal(t, "Real", rows[0].Name)
 }
+
+// 有滚动条时，绘制窗口必须使用状态里的偏移；否则滑块到了底部，
+// 列表仍然从第一行开始画（最大吨位的那批船一直占着屏幕）。
+func TestBattleReportDetailScrollStartKeepsScrolledWindow(t *testing.T) {
+	scrollbar := state.BattleReportScrollbar{MaxScroll: 12}
+	require.Equal(t, 0, battleReportDetailScrollStart(0, scrollbar, true))
+	require.Equal(t, 5, battleReportDetailScrollStart(5, scrollbar, true))
+	require.Equal(t, 12, battleReportDetailScrollStart(40, scrollbar, true))
+	require.Zero(t, battleReportDetailScrollStart(5, scrollbar, false))
+}
