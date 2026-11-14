@@ -149,7 +149,7 @@ func (m *MissionManager) SetBattleReportPage(page state.BattleReportPage) {
 	}
 	if page != m.state.UI.BattleReportPage {
 		m.state.UI.BattleReportEventScroll = 0
-		m.state.UI.BattleReportShipScroll = [2]int{}
+		m.state.UI.BattleReportDetailScroll = [2]int{}
 		m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 		m.state.UI.BattleReportScrollDragOffset = 0
 		m.reportWheelAccum = 0
@@ -178,7 +178,7 @@ func (m *MissionManager) finalizeBattleStats() {
 	m.state.UI.BattleReportPage = state.BattleReportPageOverview
 	m.state.UI.BattleReportEventScroll = 0
 	m.state.UI.BattleReportEventFilter = state.BattleReportEventFilterAll
-	m.state.UI.BattleReportShipScroll = [2]int{}
+	m.state.UI.BattleReportDetailScroll = [2]int{}
 	m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 	m.state.UI.BattleReportScrollDragOffset = 0
 	m.reportWheelAccum = 0

@@ -200,8 +200,6 @@ other = "舰级"
 other = "机型"
 [BattleReportReplenished]
 other = "补充"
-[BattleReportOther]
-other = "其他"
 [BattleReportNoRecords]
 other = "暂无记录"
 [SettingsTitle]

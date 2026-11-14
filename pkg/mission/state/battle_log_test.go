@@ -87,6 +87,15 @@ func TestBattleSideStatsShipClassCount(t *testing.T) {
 	require.Equal(t, 4, stats.ShipClassCount())
 }
 
+func TestBattleSideStatsPlaneTypeCount(t *testing.T) {
+	stats := BattleSideStats{
+		PlanesInitialByType: map[string]int{"F4F": 1, "SBD": 1},
+		PlanesBuiltByType:   map[string]int{"SBD": 1, "TBF": 1},
+		PlanesLostByType:    map[string]int{"F4F": 1, "Zero": 1},
+	}
+	require.Equal(t, 4, stats.PlaneTypeCount())
+}
+
 func TestBattleReportDetailViewportFitsThirteenRows(t *testing.T) {
 	scale := 1.9
 	panelH := 480 * scale

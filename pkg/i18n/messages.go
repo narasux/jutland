@@ -338,6 +338,5 @@ const (
 	MsgBattleReportShipClass         MessageID = "BattleReportShipClass"
 	MsgBattleReportPlaneType         MessageID = "BattleReportPlaneType"
 	MsgBattleReportReplenished       MessageID = "BattleReportReplenished"
-	MsgBattleReportOther             MessageID = "BattleReportOther"
 	MsgBattleReportNoRecords         MessageID = "BattleReportNoRecords"
 )
