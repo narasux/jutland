@@ -158,6 +158,8 @@ other = "unknown weapon"
 other = "laser"
 [BattleReportWeaponRocket]
 other = "rocket"
+[BattleReportWeaponDepthCharge]
+other = "depth charge"
 [BattleReportWeaponBombGeneric]
 other = "bomb"
 [BattleReportWeaponBomb]

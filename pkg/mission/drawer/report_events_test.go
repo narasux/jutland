@@ -6,6 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -73,4 +74,32 @@ func TestBattleReportPlaneLossRowShowsSide(t *testing.T) {
 	entry.TargetPlayer = faction.ComputerAlpha
 	enemyText := battleReportSegmentsText(battleReportEventSegments(entry, faction.HumanAlpha))
 	require.Contains(t, enemyText, "敌方")
+}
+
+// 深弹击沉行要写出投弹舰和「深水炸弹」，不能退化成未知武器或没有攻击者。
+func TestBattleReportDepthChargeSinkShowsWeapon(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	entry := state.BattleLogEntry{
+		Tick:         60,
+		ActorPlayer:  faction.HumanAlpha,
+		ActorName:    "gurkha",
+		ActorType:    string(objUnit.ShipTypeDestroyer),
+		TargetPlayer: faction.ComputerAlpha,
+		TargetName:   "nautilus",
+		TargetType:   string(objUnit.ShipTypeSubmarine),
+		Action:       state.BattleLogShipSunk,
+		Count:        1,
+		Hit: objUnit.HitInfo{
+			WeaponType: string(objBullet.TypeDepthCharge),
+			Damage:     1200,
+		},
+		TotalDamage: 2770,
+	}
+	text := battleReportSegmentsText(battleReportEventSegments(entry, faction.HumanAlpha))
+	require.Contains(t, text, i18n.Text(i18n.MsgBattleReportWeaponDepthCharge))
+	require.Contains(t, text, "gurkha")
+	require.NotContains(t, text, i18n.Text(i18n.MsgBattleReportWeaponUnknown))
 }

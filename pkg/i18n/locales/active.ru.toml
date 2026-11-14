@@ -158,6 +158,8 @@ other = " неизвестным оружием"
 other = " лазером"
 [BattleReportWeaponRocket]
 other = " ракетой"
+[BattleReportWeaponDepthCharge]
+other = " глубинной бомбой"
 [BattleReportWeaponBombGeneric]
 other = " бомбой"
 [BattleReportWeaponBomb]

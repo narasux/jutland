@@ -155,3 +155,39 @@ func TestDepthChargeRackCanFireAhead(t *testing.T) {
 	require.Len(t, bullets, 1, "舰艏正对目标时深弹架也应能投掷")
 	require.Equal(t, objBullet.TypeDepthCharge, bullets[0].Type)
 }
+
+// TestDepthChargeSinkRecordsShooter 深弹击沉潜艇时必须记录投弹方与武器，
+// 否则战报只剩「沉没 潜艇 X」，看不出是谁击沉的。
+func TestDepthChargeSinkRecordsShooter(t *testing.T) {
+	sub := &objUnit.BattleShip{
+		Uid: "sub", Name: "nautilus", CurHP: 50, TotalHP: 100,
+		Type:         objUnit.ShipTypeSubmarine,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
+	}
+	ms := depthChargeState(sub)
+	m := &MissionManager{state: ms}
+	m.rebuildCombatBuckets()
+
+	bt := newDepthCharge(objPos.NewR(10, 10), faction.HumanAlpha)
+	bt.Shooter = "dd"
+	bt.ShooterName = "gurkha"
+	bt.ShooterType = string(objUnit.ShipTypeDestroyer)
+	bt.ShooterObjType = object.TypeShip
+	m.resolveDepthChargeDamage(bt)
+
+	require.Zero(t, sub.CurHP, "深弹应击沉潜艇")
+	require.True(t, sub.SunkByHit)
+	require.Equal(t, "gurkha", sub.LastAttackerName)
+	require.Equal(t, string(objUnit.ShipTypeDestroyer), sub.LastAttackerType)
+	require.Equal(t, faction.HumanAlpha, sub.LastAttackerPlayer)
+	require.Equal(t, string(objBullet.TypeDepthCharge), sub.LastHit.WeaponType)
+	require.Positive(t, sub.DamageTaken)
+
+	// 击沉记录必须带上投弹方和武器，详情页才能渲染「驱逐舰 X 使用 深水炸弹 击沉 潜艇 Y」。
+	ms.Stats.RecordShipLost(sub)
+	require.Len(t, ms.Stats.BattleLog, 1)
+	sink := ms.Stats.BattleLog[0]
+	require.Equal(t, state.BattleLogShipSunk, sink.Action)
+	require.Equal(t, "gurkha", sink.ActorName)
+	require.Equal(t, string(objBullet.TypeDepthCharge), sink.Hit.WeaponType)
+}
