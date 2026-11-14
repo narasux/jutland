@@ -2400,6 +2400,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 日本海军 十一年式 14cm/40 炮（潜艇甲板炮；与三年式共用 14cm 弹，初速与射程较低）
+  {
+    name: "JP/140/40/Type11",
+    bulletName: "JP/GB/140/1914",
+    bulletCount: 1,
+    reloadTime: 6,
+    range: 15,
+    bulletSpread: 70,
+    bulletSpeed: 750,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 日本海军 八九式 12.7cm 高角炮
   {
     name: "JP/127/40/2/Type89/DP",

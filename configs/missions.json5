@@ -2990,6 +2990,8 @@
           "u_47",
           "u_331",
           "i_168",
+          "i_400",
+          "i_52",
         ],
       },
       {
@@ -3687,7 +3689,7 @@
       // === US CV ===
       {
         name: "america",
-        pos: [28, 45],
+        pos: [32, 43],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -4320,14 +4322,26 @@
         belongPlayer: "P1"
       },
       {
-        name: "i_168",
+        name: "T_14",
         pos: [25, 51],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "T_14",
+        name: "i_400",
         pos: [24, 52],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "i_52",
+        pos: [25, 53],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "i_168",
+        pos: [24, 54],
         rotation: 90,
         belongPlayer: "P1"
       },

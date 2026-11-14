@@ -5445,6 +5445,20 @@
     ],
   },
   {
+    name: "JP/140/40/Type11",
+    displayName: "140mm/40 Deck Mount Type11",
+    type: "Weapon",
+    armaments: [],
+    description: "The Japanese 14 cm/40 11th Year Type was a deck gun for large submarines, mounted on the I-400 and C3 classes. It fired the same 14 cm shell as the 3rd Year Type at lower muzzle velocity and shorter range.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - I-400-class submarine",
+        url: "https://en.wikipedia.org/wiki/I-400-class_submarine",
+      },
+    ],
+  },
+  {
     name: "JP/152/50/2/Type41",
     displayName: "152mm Twin Mount Type41",
     type: "Weapon",
@@ -15289,6 +15303,68 @@
       {
         name: "Wikipedia - Conte di Cavour-class battleship",
         url: "https://en.wikipedia.org/wiki/Conte_di_Cavour-class_battleship",
+      },
+    ],
+  },
+  {
+    name: "i_400",
+    displayName: "I-400",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Deck Gun",
+        value: "1x1 140mm/40 Type 11",
+      },
+      {
+        label: "Anti-aircraft Gun",
+        value: "3x3 + 1x1 25mm Type 96",
+      },
+      {
+        label: "Torpedoes",
+        value: "8x1 533mm (forward)",
+      },
+    ],
+    description: "I-400 was the lead boat of the I-400 class, completed in late 1944 and the largest submarine in the world at the time. She was designed to carry attack seaplanes for a raid on the Panama Canal, with a cylindrical hangar and catapult forward for three Seiran aircraft. Two sorties were prepared before the surrender; taken over by the U.S. Navy off Hawaii, she was scuttled as a target in 1946.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - I-400 seaplane carrier submarine (redrawn by Nano Banana)",
+        url: "https://www.pinterest.com/pin/365565694738124984/",
+      },
+      {
+        name: "Wikipedia - I-400-class submarine",
+        url: "https://en.wikipedia.org/wiki/I-400-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "i_52",
+    displayName: "I-52",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Deck Gun",
+        value: "1x1 140mm/40 Type 11",
+      },
+      {
+        label: "Anti-aircraft Gun",
+        value: "2x1 25mm Type 96",
+      },
+      {
+        label: "Torpedoes",
+        value: "6x1 533mm (4 forward, 2 aft)",
+      },
+    ],
+    description: "I-52 was a C3-type cruiser submarine commissioned in 1943 and fitted with radar and a snorkel for the transport runs between Japan and Germany. In June 1944, bound for France, she was found in mid-Atlantic by aircraft from an American escort carrier and sunk, one of the few Japanese submarines lost to air ASW in the open ocean.",
+    author: "Zustt",
+    links: [
+      {
+        name: "Shipbucket - IJN Submarine I-52",
+        url: "https://www.shipbucket.com/drawings/10890",
+      },
+      {
+        name: "Wikipedia - Japanese submarine I-52",
+        url: "https://en.wikipedia.org/wiki/Japanese_submarine_I-52_(1942)",
       },
     ],
   },
