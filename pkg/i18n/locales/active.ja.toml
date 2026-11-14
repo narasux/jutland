@@ -600,12 +600,22 @@ other = "状態"
 other = "目標"
 [UnitPanelGroupFleet]
 other = "集計"
-[MapSelf]
+[MapOwnFleet]
 other = "味方"
-[MapEnemy]
-other = "敵"
-[MapFleetCount]
-other = "{{.Side}}（{{.Count}}）"
+[MapEnemyIntel]
+other = "敵情"
+[MapShipCount]
+other = "{{.Count}} 隻"
+[MapContacts]
+other = "接触 {{.Count}}"
+[MapNoContacts]
+other = "接触なし"
+[MapLosses]
+other = "損失 {{.Ships}}{{.Tonnage}}"
+[MapKills]
+other = "戦果：撃沈 {{.Ships}}{{.Tonnage}}"
+[MapTonnageSuffix]
+other = " · {{.Tonnage}} t"
 [RallyLandBlocked]
 other = "陸上には集結地点を設定できません"
 [ReinforceShipArchive]

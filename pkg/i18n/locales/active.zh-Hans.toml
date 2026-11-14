@@ -600,12 +600,22 @@ other = "状态"
 other = "目标"
 [UnitPanelGroupFleet]
 other = "汇总"
-[MapSelf]
-other = "我"
-[MapEnemy]
-other = "敌"
-[MapFleetCount]
-other = "{{.Side}}（{{.Count}}）"
+[MapOwnFleet]
+other = "我方"
+[MapEnemyIntel]
+other = "敌情"
+[MapShipCount]
+other = "{{.Count}} 艘"
+[MapContacts]
+other = "接触 {{.Count}}"
+[MapNoContacts]
+other = "暂无接触"
+[MapLosses]
+other = "损失 {{.Ships}}{{.Tonnage}}"
+[MapKills]
+other = "战果：击沉 {{.Ships}}{{.Tonnage}}"
+[MapTonnageSuffix]
+other = " · {{.Tonnage}} t"
 [RallyLandBlocked]
 other = "陆地不可设集结点"
 [ReinforceShipArchive]
