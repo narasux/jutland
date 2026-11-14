@@ -2654,6 +2654,20 @@
     ],
   },
   {
+    name: "GER/20/65/2/C38",
+    displayName: "20mm/65 C/38 連装対空砲",
+    type: "兵器",
+    armaments: [],
+    description: "ドイツ海軍の 2cm C/38 連装高射砲。65口径で、XXI型Uボートの艦橋に装備され、近距離防空に用いられた。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 2 cm Flak 30/38/Flakvierling",
+        url: "https://en.wikipedia.org/wiki/2_cm_Flak_30/38/Flakvierling",
+      },
+    ],
+  },
+  {
     name: "GER/20/65/C30",
     displayName: "20mm/65 C/30 単装対空砲",
     type: "兵器",
@@ -15341,8 +15355,89 @@
     ],
   },
   {
-    name: "u_boat_type_viic",
-    displayName: "UボートVII C型",
+    name: "u_2540",
+    displayName: "U-2540（XXI）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "対空砲",
+        value: "2x2 20mm C/38",
+      },
+      {
+        label: "魚雷",
+        value: "6x1 533mm（艦首 6）",
+      },
+    ],
+    description: "XXI型潜水艦。1945年2月に就役したが、実戦哨戒には出ていない。1945年5月に自沈し、1957年に引き揚げられた。その後ヴィルヘルム・バウアーとして西ドイツ海軍に就役し、現在はブレーマーハーフェンのドイツ海事博物館で保存されている。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "War History - Type XXI Electric Boat",
+        url: "https://warhistory.org/ja/article/type-xxi-electric-boat#google_vignette",
+      },
+      {
+        name: "Wikipedia - ヴィルヘルム・バウアー (潜水艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A3%E3%83%AB%E3%83%98%E3%83%AB%E3%83%A0%E3%83%BB%E3%83%90%E3%82%A6%E3%82%A2%E3%83%BC_(%E6%BD%9C%E6%B0%B4%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "u_2323",
+    displayName: "U-2323（XXIII）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "魚雷",
+        value: "2x1 533mm（艦首 2）",
+      },
+    ],
+    description: "XXIII型沿岸潜水艦。1944年7月に就役したが、わずか8日後のキール港入口で機雷に触れて沈没し、乗員2名が死亡した。船体は戦後、その場で解体された。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Naval Encyclopedia - Type XXIII U-Boats",
+        url: "https://naval-encyclopedia.com/ww2/germany/type-xxiii-u-boats.php",
+      },
+      {
+        name: "Wikipedia - UボートXXIII型",
+        url: "https://ja.wikipedia.org/wiki/U%E3%83%9C%E3%83%BC%E3%83%88XXIII%E5%9E%8B",
+      },
+    ],
+  },
+  {
+    name: "u_47",
+    displayName: "U-47（VIIB）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "甲板砲",
+        value: "1x1 88mm SK C/35",
+      },
+      {
+        label: "対空砲",
+        value: "1x1 20mm C/30",
+      },
+      {
+        label: "魚雷",
+        value: "5x1 533mm（艦首 4、艦尾 1）",
+      },
+    ],
+    description: "VIIB型Uボート。1938年12月に就役し、ギュンター・プリーンが指揮した。1939年10月にスカパ・フローへ潜入してイギリス戦艦ロイヤル・オークを撃沈した。1941年3月に北大西洋で消息を絶ち、乗員45名全員が死亡したと推定されている。",
+    author: "XBALPLUS & Nano Banana",
+    links: [
+      {
+        name: "Pinterest - U-47 Type VIIB",
+        url: "https://jp.pinterest.com/pin/774478467146175002/",
+      },
+      {
+        name: "Wikipedia - U47 (潜水艦・2代)",
+        url: "https://ja.wikipedia.org/wiki/U47_(%E6%BD%9C%E6%B0%B4%E8%89%A6%E3%83%BB2%E4%BB%A3)",
+      },
+    ],
+  },
+  {
+    name: "u_331",
+    displayName: "U-331（VIIC）",
     type: "潜水艦",
     armaments: [
       {
@@ -15358,7 +15453,7 @@
         value: "5x1 533mm（艦首 4、艦尾 1）",
       },
     ],
-    description: "VII C型は第二次世界大戦で最も多数建造されたドイツ海軍のUボートで、1940年から就役して大西洋の通商破壊戦の主力となった。水上ではディーゼル機関で航行し、目標に接近して魚雷攻撃を行い、甲板砲は損傷した商船や孤立した目標の撃沈に用いられた。1943年に連合軍の護衛艦艇と航空哨戒が強化されると損失は急増した。",
+    description: "U-331はVII C型Uボート。1941年3月に就役し、ハンス＝ディートリヒ・フォン・ティーゼンハウゼンが指揮した。1941年11月25日、エジプト沖でイギリス戦艦バーラムを撃沈。1942年11月17日、アルジェ北方で英軍機の攻撃を受けて航行不能となり、雷撃機によって沈没した。乗員32名が死亡した。",
     author: "Gemini Image",
     links: [
       {

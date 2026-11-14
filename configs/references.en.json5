@@ -2654,6 +2654,20 @@
     ],
   },
   {
+    name: "GER/20/65/2/C38",
+    displayName: "20mm/65 C/38 Twin AA Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "German 2 cm C/38 twin anti-aircraft mount of 65 calibres, fitted to the bridge of Type XXI U-boats for short-range air defence.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 2 cm Flak 30/38/Flakvierling",
+        url: "https://en.wikipedia.org/wiki/2_cm_Flak_30/38/Flakvierling",
+      },
+    ],
+  },
+  {
     name: "GER/20/65/C30",
     displayName: "20mm/65 C/30 Single AA Mount",
     type: "Weapon",
@@ -15341,8 +15355,89 @@
     ],
   },
   {
-    name: "u_boat_type_viic",
-    displayName: "Type VIIC U-boat",
+    name: "u_2540",
+    displayName: "U-2540 (XXI)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x2 20mm C/38",
+      },
+      {
+        label: "Torpedoes",
+        value: "6x1 533mm (6 forward)",
+      },
+    ],
+    description: "A Type XXI U-boat commissioned in February 1945, U-2540 never went on a war patrol. She was scuttled in May 1945, raised in 1957, and later served with the West German navy as Wilhelm Bauer. She is preserved as a museum boat at the German Maritime Museum in Bremerhaven.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "War History - Type XXI Electric Boat",
+        url: "https://warhistory.org/ja/article/type-xxi-electric-boat#google_vignette",
+      },
+      {
+        name: "Wikipedia - German submarine Wilhelm Bauer",
+        url: "https://en.wikipedia.org/wiki/German_submarine_Wilhelm_Bauer",
+      },
+    ],
+  },
+  {
+    name: "u_2323",
+    displayName: "U-2323 (XXIII)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Torpedoes",
+        value: "2x1 533mm (2 forward)",
+      },
+    ],
+    description: "A Type XXIII coastal U-boat commissioned in July 1944, U-2323 was sunk by a mine only eight days later off Möltenort at the entrance to Kiel harbour. Two of her crew were killed; the wreck was broken up in situ after the war.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Naval Encyclopedia - Type XXIII U-Boats",
+        url: "https://naval-encyclopedia.com/ww2/germany/type-xxiii-u-boats.php",
+      },
+      {
+        name: "Wikipedia - German submarine U-2323",
+        url: "https://en.wikipedia.org/wiki/German_submarine_U-2323",
+      },
+    ],
+  },
+  {
+    name: "u_47",
+    displayName: "U-47 (VIIB)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Deck Gun",
+        value: "1x1 88mm SK C/35",
+      },
+      {
+        label: "Anti-aircraft Gun",
+        value: "1x1 20mm C/30",
+      },
+      {
+        label: "Torpedoes",
+        value: "5x1 533mm (4 forward, 1 aft)",
+      },
+    ],
+    description: "A Type VIIB U-boat commissioned in December 1938 under Günther Prien, U-47 penetrated Scapa Flow in October 1939 and sank the British battleship Royal Oak. She disappeared in the North Atlantic in March 1941; all 45 men aboard were presumed lost.",
+    author: "XBALPLUS & Nano Banana",
+    links: [
+      {
+        name: "Pinterest - U-47 Type VIIB",
+        url: "https://jp.pinterest.com/pin/774478467146175002/",
+      },
+      {
+        name: "Wikipedia - German submarine U-47 (1938)",
+        url: "https://en.wikipedia.org/wiki/German_submarine_U-47_(1938)",
+      },
+    ],
+  },
+  {
+    name: "u_331",
+    displayName: "U-331 (VIIC)",
     type: "Submarine",
     armaments: [
       {
@@ -15358,7 +15453,7 @@
         value: "5x1 533mm (4 forward, 1 aft)",
       },
     ],
-    description: "The Type VIIC was the most numerous German U-boat class of the Second World War, entering service from 1940 and bearing the main burden of the Atlantic campaign. Boats ran on the surface under diesel power, closed to torpedo range, and used the deck gun to finish off damaged or isolated merchantmen. Losses rose sharply after Allied escorts and aircraft closed the mid-Atlantic gap in 1943.",
+    description: "U-331 was a Type VIIC U-boat commissioned in March 1941 under Hans-Diedrich von Tiesenhausen. On 25 November 1941 she sank the British battleship Barham north of Sidi Barrani. Crippled by a Hudson bomber, she was sunk by Fleet Air Arm Albacores north of Algiers on 17 November 1942; 32 of her crew were killed.",
     author: "Gemini Image",
     links: [
       {
@@ -15366,8 +15461,8 @@
         url: "https://gemini.google.com",
       },
       {
-        name: "Wikipedia - Type VII submarine",
-        url: "https://en.wikipedia.org/wiki/Type_VII_submarine",
+        name: "Wikipedia - German submarine U-331",
+        url: "https://en.wikipedia.org/wiki/German_submarine_U-331",
       },
     ],
   },

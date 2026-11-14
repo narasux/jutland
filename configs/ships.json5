@@ -18586,13 +18586,139 @@
     }
   },
   // --------- 潜艇 ----------
-  // U-VIIC
+  // U-2540
   {
-    name: "u_boat_type_viic",
+    name: "u_2540",
     nation: "de",
     type: "submarine",
     typeAbbr: "SS",
-    year: 1940,
+    year: 1945,
+    totalHP: 1621,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 15.6,
+    acceleration: 0.55,
+    rotateSpeed: 1.2,
+    length: 76.7,
+    width: 8,
+    sightRange: 12,
+    diveTime: 9,
+    surfaceTime: 8,
+    submergedSpeedRatio: 1.1,
+    defaultDiveState: "submerged",
+    fundsCost: 60,
+    timeCost: 23,
+    weapon: {
+      antiAircraftGuns: [
+        // 指挥塔前部双联装 20mm 高炮
+        {
+          name: "GER/20/65/2/C38",
+          posPercent: 0.04,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 指挥塔后部双联装 20mm 高炮
+        {
+          name: "GER/20/65/2/C38",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.84,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.84,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 5（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.76,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 6（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.76,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        }
+      ]
+    }
+  },
+  // U-2323
+  {
+    name: "u_2323",
+    nation: "de",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1944,
+    totalHP: 234,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 9.7,
+    acceleration: 1.2,
+    rotateSpeed: 2.2,
+    length: 34.7,
+    width: 3,
+    sightRange: 12,
+    diveTime: 8,
+    surfaceTime: 7,
+    submergedSpeedRatio: 1.29,
+    defaultDiveState: "submerged",
+    fundsCost: 40,
+    timeCost: 16,
+    weapon: {
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        }
+      ]
+    }
+  },
+  // U-331
+  {
+    name: "u_331",
+    nation: "de",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1941,
     totalHP: 769,
     horizontalDamageReduction: 0,
     verticalDamageReduction: 0,
@@ -18605,6 +18731,86 @@
     diveTime: 12,
     surfaceTime: 9,
     submergedSpeedRatio: 0.43,
+    defaultDiveState: "submerged",
+    fundsCost: 50,
+    timeCost: 20,
+    weapon: {
+      mainGuns: [
+        // 甲板炮
+        {
+          name: "GER/88/45/SKC35",
+          posPercent: 0.23,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 指挥塔 20mm 高炮
+        {
+          name: "GER/20/65/C30",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.74,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.74,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.7,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.7,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5
+        {
+          name: "GER/533/1/C35",
+          posPercent: -0.93,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
+  // U-47
+  {
+    name: "u_47",
+    nation: "de",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1939,
+    totalHP: 753,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 17.9,
+    acceleration: 0.7,
+    rotateSpeed: 1.6,
+    length: 66.5,
+    width: 6.2,
+    sightRange: 12,
+    diveTime: 12,
+    surfaceTime: 9,
+    submergedSpeedRatio: 0.45,
     defaultDiveState: "submerged",
     fundsCost: 50,
     timeCost: 20,

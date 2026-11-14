@@ -243,7 +243,7 @@ func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 		ship string
 		want float64
 	}{
-		{"u_boat_type_viic", 7.6},
+		{"u_331", 7.6},
 		{"i_168", 8.2},
 		{"uss_nautilus", 8.0},
 	}

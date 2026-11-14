@@ -1603,6 +1603,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 GER/20/65/C38 双联装高炮（XXI 型 U 艇指挥塔炮座）
+  {
+    name: "GER/20/65/2/C38",
+    bulletName: "GER/GB/20/1940",
+    bulletCount: 2,
+    reloadTime: 0.2,
+    range: 4,
+    bulletSpread: 20,
+    bulletSpeed: 910,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 德国空军 20mm MG 151/20 四联装机炮
   {
     name: "GER/AIR/20/4/MG151",
