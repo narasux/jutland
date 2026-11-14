@@ -158,6 +158,8 @@ other = "未知武器"
 other = "激光"
 [BattleReportWeaponRocket]
 other = "火箭弹"
+[BattleReportWeaponDepthCharge]
+other = "深水炸弹"
 [BattleReportWeaponBombGeneric]
 other = "炸弹"
 [BattleReportWeaponBomb]

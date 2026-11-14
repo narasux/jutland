@@ -630,6 +630,7 @@ func (m *MissionManager) depthChargeShouldExplode(bt *objBullet.Bullet) bool {
 
 // resolveDepthChargeDamage 深弹落点 AoE：只结算潜艇。
 // 水面 / 过渡态潜艇按水面规则结算；完全下潜的还要求仍被本方探测到（盲炸无效）。
+// 走 hurtShip 而不是直接 HurtBy，保证战报能记下投弹方、武器与伤害。
 func (m *MissionManager) resolveDepthChargeDamage(bt *objBullet.Bullet) {
 	hit := false
 	m.combatBuckets.eachShip(
@@ -647,7 +648,7 @@ func (m *MissionManager) resolveDepthChargeDamage(bt *objBullet.Bullet) {
 			if ship.CurPos.Distance(bt.CurPos) > bt.BlastRadius {
 				return false
 			}
-			ship.HurtBy(bt)
+			m.hurtShip(ship, bt)
 			hit = true
 			return false
 		},

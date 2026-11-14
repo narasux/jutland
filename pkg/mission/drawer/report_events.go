@@ -537,6 +537,8 @@ func battleReportWeaponText(entry state.BattleLogEntry) string {
 		return i18n.Text(i18n.MsgBattleReportWeaponBombGeneric)
 	case string(objBullet.TypeRocket):
 		return i18n.Text(i18n.MsgBattleReportWeaponRocket)
+	case string(objBullet.TypeDepthCharge):
+		return i18n.Text(i18n.MsgBattleReportWeaponDepthCharge)
 	case string(objBullet.TypeLaser):
 		return i18n.Text(i18n.MsgBattleReportWeaponLaser)
 	}
