@@ -14121,6 +14121,20 @@
     ],
   },
   {
+    name: "IT/65/64/2/M1939",
+    displayName: "65mm/64 連装高射砲（アンサルド 1939年型）",
+    type: "兵器",
+    armaments: [],
+    description: "イタリア海軍の65mm/64アンサルド1939年型連装高射砲。カッソーネ案改訂版の装備で、原型は空母アクィラの単装砲。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 65/64 Mod. 1939",
+        url: "https://it.wikipedia.org/wiki/65/64_Mod._1939",
+      },
+    ],
+  },
+  {
     name: "IT/65/64/1/M1939",
     displayName: "65mm 単装高角砲（アンサルド 1939 年型）",
     type: "兵器",
@@ -14154,6 +14168,20 @@
       {
         name: "ウィキペディア - 90/50 Mod. 1939",
         url: "https://it.wikipedia.org/wiki/90/50_Mod._1939",
+      },
+    ],
+  },
+  {
+    name: "IT/456/46/2/M1942",
+    displayName: "456mm/46 連装主砲（OTO 1942年型）",
+    type: "兵器",
+    armaments: [],
+    description: "イタリア海軍の456mm/46 OTO 1942年型連装主砲。フェルディナンド・カッソーネが1921年に発表した大型巡洋戦艦案の1942年改訂版用で、初速約850m/s、最大射程約43km。図面上のみ存在した。",
+    author: "",
+    links: [
+      {
+        name: "Alternathistory - イタリア版大和：フェルディナンド・カッソーネの戦艦案",
+        url: "https://alternathistory.ru/yamato-po-italyanski-proekt-linkora-ferdinando-kassone/",
       },
     ],
   },
@@ -14196,6 +14224,20 @@
       {
         name: "ウィキペディア - OTO/Ansaldo 320/44",
         url: "https://it.wikipedia.org/wiki/OTO/Ansaldo_320/44",
+      },
+    ],
+  },
+  {
+    name: "IT/152/45/3/M1942",
+    displayName: "152mm/45 三連装副砲（OTO 1942年型）",
+    type: "兵器",
+    armaments: [],
+    description: "イタリア海軍の152mm/45 OTO 1942年型三連装副砲。カッソーネ案改訂版の装備で、初速約850m/s。図面上のみ存在した。",
+    author: "",
+    links: [
+      {
+        name: "Alternathistory - イタリア版大和：フェルディナンド・カッソーネの戦艦案",
+        url: "https://alternathistory.ru/yamato-po-italyanski-proekt-linkora-ferdinando-kassone/",
       },
     ],
   },
@@ -14318,6 +14360,34 @@
       {
         name: "ウィキペディア - OTO/Ansaldo 152/53",
         url: "https://it.wikipedia.org/wiki/OTO/Ansaldo_152/53",
+      },
+    ],
+  },
+  {
+    name: "IT/37/44/2/M1933",
+    displayName: "37mm/44 連装高射砲（ブレダ 1933年型）",
+    type: "兵器",
+    armaments: [],
+    description: "イタリア海軍の37mm/44ブレダ1933年型連装高射砲。カッソーネ案改訂版に含まれる旧式の短砲身型で、後の37/54系列より低性能。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Breda 37/54",
+        url: "https://it.wikipedia.org/wiki/Breda_37/54",
+      },
+    ],
+  },
+  {
+    name: "IT/37/54/4/M1939",
+    displayName: "37mm/54 四連装高射砲（ブレダ 1939年型）",
+    type: "兵器",
+    armaments: [],
+    description: "イタリア海軍の37mm/54ブレダ1939年型四連装高射砲。カッソーネ案改訂版の装備で、ブレダ37/54系列を基にしている。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Breda 37/54",
+        url: "https://it.wikipedia.org/wiki/Breda_37/54",
       },
     ],
   },
@@ -15180,6 +15250,49 @@
         "url": "https://en.wikipedia.org/wiki/Yermolayev_Yer-2",
       },
     ]
+  },
+  {
+    name: "imperatore_augusto",
+    displayName: "アウグスト皇帝",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x2 456mm/46 OTO 1942",
+      },
+      {
+        label: "副砲",
+        value: "6x3 152mm/45 OTO 1942",
+      },
+      {
+        label: "副砲",
+        value: "8x2 135mm/45 OTO 1938",
+      },
+      {
+        label: "対空砲",
+        value: "10x2 65mm/64 Ansaldo 1939",
+      },
+      {
+        label: "対空砲",
+        value: "10x4 37mm/54 Breda 1939",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 37mm/44 Breda 1933",
+      },
+    ],
+    description: "アウグスト皇帝は、イタリアの技術者フェルディナンド・カッソーネが1921年に『Rivista Marittima』で発表した大型巡洋戦艦案に由来する。カッソーネは地中海での作戦を想定し、同時代の戦艦を上回る排水量と主砲口径によって圧倒的な火力を得ようとしたが、ワシントン海軍軍縮条約の排水量制限のため起工されなかった。図の姿は1942年改訂版であり、艦体と上部構造は原図面に基づいて再現されている。",
+    author: "TheMasterDragon",
+    links: [
+      {
+        name: "Alternathistory - イタリア版大和：フェルディナンド・カッソーネの戦艦案",
+        url: "https://alternathistory.ru/yamato-po-italyanski-proekt-linkora-ferdinando-kassone/",
+      },
+      {
+        name: "Wikipedia - 巡洋戦艦",
+        url: "https://ja.wikipedia.org/wiki/%E5%B7%A1%E6%B4%8B%E6%88%A6%E8%89%A6",
+      },
+    ],
   },
   {
     name: "littorio",

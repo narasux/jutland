@@ -40695,6 +40695,358 @@
     }
   },
   // --------- 战列舰 ----------
+  // 奥古斯托皇帝：卡索内 1921 年大型巡洋舰方案的 1942 年修订版，456mm 双联装主炮
+  {
+    name: "imperatore_augusto",
+    nation: "it",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1942,
+    totalHP: 65000,
+    horizontalDamageReduction: 0.55,
+    verticalDamageReduction: 0.28,
+    maxSpeed: 31,
+    acceleration: 0.3,
+    rotateSpeed: 0.75,
+    length: 274.75,
+    width: 40,
+    fundsCost: 545,
+    timeCost: 111,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A（双联装）
+        {
+          name: "IT/456/46/2/M1942",
+          posPercent: 0.47,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B（双联装，背负）
+        {
+          name: "IT/456/46/2/M1942",
+          posPercent: 0.32,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 后主炮 X（双联装）
+        {
+          name: "IT/456/46/2/M1942",
+          posPercent: -0.39,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 后主炮 Y（双联装，背负）
+        {
+          name: "IT/456/46/2/M1942",
+          posPercent: -0.53,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+      ],
+      secondaryGuns: [
+        // 152mm/45 三联装副炮：前部右舷
+        {
+          name: "IT/152/45/3/M1942",
+          posPercent: 0.23,
+          rightFiringArc: [0, 135],
+          leftFiringArc: [360, 360]
+        },
+        // 152mm/45 三联装副炮：前部左舷
+        {
+          name: "IT/152/45/3/M1942",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [225, 360]
+        },
+        // 152mm/45 三联装副炮：前部中线
+        {
+          name: "IT/152/45/3/M1942",
+          posPercent: 0.2,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 152mm/45 三联装副炮：后部中线
+        {
+          name: "IT/152/45/3/M1942",
+          posPercent: -0.28,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 152mm/45 三联装副炮：后部右舷
+        {
+          name: "IT/152/45/3/M1942",
+          posPercent: -0.28,
+          rightFiringArc: [45, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 152mm/45 三联装副炮：后部左舷
+        {
+          name: "IT/152/45/3/M1942",
+          posPercent: -0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 315]
+        },
+      ],
+      antiAircraftGuns: [
+        // --------- 135mm/45 双联装高平炮 ----------
+        // 135mm/45 双联装高平炮：前部右舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 135mm/45 双联装高平炮：前部左舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.13,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 135mm/45 双联装高平炮：前部右舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 135mm/45 双联装高平炮：前部左舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: 0.07,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 135mm/45 双联装高平炮：后部右舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 135mm/45 双联装高平炮：后部左舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 135mm/45 双联装高平炮：后部右舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 135mm/45 双联装高平炮：后部左舷
+        {
+          name: "IT/135/45/2/M1938",
+          posPercent: -0.2,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // --------- 65mm/64 双联装高炮 ----------
+        // 65mm/64 双联装高炮：前部右舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: 0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 65mm/64 双联装高炮：前部左舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: 0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 65mm/64 双联装高炮：前部右舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 65mm/64 双联装高炮：前部左舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: 0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 65mm/64 双联装高炮：中部右舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: -0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 65mm/64 双联装高炮：中部左舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: -0.03,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 65mm/64 双联装高炮：后部右舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: -0.08,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 65mm/64 双联装高炮：后部左舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: -0.08,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 65mm/64 双联装高炮：后部右舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: -0.22,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 65mm/64 双联装高炮：后部左舷
+        {
+          name: "IT/65/64/2/M1939",
+          posPercent: -0.22,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // --------- 37mm/54 四联装高炮 ----------
+        // 37mm/54 四联装高炮：舰艏右舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: 0.71,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/54 四联装高炮：舰艏左舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: 0.71,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/54 四联装高炮：前部右舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: 0.39,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 37mm/54 四联装高炮：前部左舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: 0.39,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/54 四联装高炮：后部右舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: -0.46,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 37mm/54 四联装高炮：后部左舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: -0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/54 四联装高炮：舰艉右舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: -0.72,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/54 四联装高炮：舰艉左舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: -0.72,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/54 四联装高炮：舰艉右舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: -0.97,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/54 四联装高炮：舰艉左舷
+        {
+          name: "IT/37/54/4/M1939",
+          posPercent: -0.97,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // --------- 37mm/44 双联装高炮 ----------
+        // 37mm/44 双联装高炮：前部右舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 37mm/44 双联装高炮：前部左舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: 0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/44 双联装高炮：中部右舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 37mm/44 双联装高炮：中部左舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: 0.02,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/44 双联装高炮：中部右舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: -0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 37mm/44 双联装高炮：中部左舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: -0.06,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 37mm/44 双联装高炮：后部右舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: -0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 37mm/44 双联装高炮：后部左舷
+        {
+          name: "IT/37/44/2/M1933",
+          posPercent: -0.14,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ]
+    }
+  },
   // 利托里奥：维托里奥·维内托级战列舰首舰，1940 年 5 月服役
   {
     name: "littorio",
