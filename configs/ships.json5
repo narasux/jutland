@@ -29098,7 +29098,8 @@
     nation: "jp",
     type: "cruiser",
     typeAbbr: "CA",
-    year: 1935,
+    // 航空巡洋舰形态：1943 年 4 月完成航空改装，1944 年 10 月战沉于苏里高海峡
+    year: 1944,
     totalHP: 13600,
     horizontalDamageReduction: 0.25,
     verticalDamageReduction: 0.2,
