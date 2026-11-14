@@ -139,6 +139,9 @@ type MissionUIState struct {
 	SidebarExpanded bool
 	// 任一任务 UI 本帧是否占用鼠标输入
 	UIConsumesCursor bool
+	// 是否临时显示选中舰船的声呐/水听器覆盖范围（按住 V 时由输入层置位）。
+	// 只影响绘制，不改变探测判定。
+	ShowSonarRanges bool
 	// 显示集结线的增援点 Uid（游戏主地图中点击增援点时设置）
 	ShowRallyLinePointUid string
 	// 集结点设置失败计数器（用于短暂闪烁提示）

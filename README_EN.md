@@ -27,6 +27,7 @@ CPU / graphics card requirements are not very high, but too low will probably ca
 - Press the <kbd>X</kbd> key to move the **currently selected ship** to a random direction by a certain number of units (disperse).
 - **Submarines** start submerged. With submarines selected, press the <kbd>D</kbd> key to surface or dive. A submerged boat is fully hidden and can only fire torpedoes; diving and surfacing take 8-12 seconds. You can reverse mid-transition: the last order wins, depth progress carries over and the transition speed is unchanged. The icon above the hull shows the current dive state.
   - State machine, sonar detection, depth-charge trade-offs and AI behaviour: [Submarine design (zh)](docs/submarine/README.md)
+- Hold <kbd>V</kbd> (View) to temporarily show the merged sonar / hydrophone coverage outline of the **selected warships**; a single selected ship also shows its detection range label. Release to hide (no light-cyan outline is drawn by default).
 - Press the <kbd>B</kbd> key to view the reinforcement point information, consume funds and time, and summon warships to join the battlefield.
 - Press the <kbd>M</kbd> key to view the full thumbnail mode of the current level map (including both friendly and enemy warships).
 - Press the <kbd>←</kbd> <kbd>→</kbd> <kbd>↓</kbd> <kbd>↑</kbd> keys to move the **currently selected ship** one unit in the corresponding direction.

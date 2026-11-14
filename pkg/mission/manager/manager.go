@@ -192,6 +192,9 @@ func (m *MissionManager) WarmupMapBlocks() bool {
 // Update 更新一帧任务状态
 func (m *MissionManager) Update() (state.MissionStatus, error) {
 	status := m.state.Core.MissionStatus
+	// 声呐覆盖轮廓是按住 V 的临时覆盖层：默认不画，松开或离开运行状态立即隐藏。
+	m.state.UI.ShowSonarRanges = status == state.MissionRunning &&
+		ebiten.IsKeyPressed(ebiten.KeyV)
 	if status == state.MissionRunning {
 		actions := m.sidebar.Update(m.state)
 		m.state.UI.UIConsumesCursor = m.sidebar.ConsumesCursor(m.state)

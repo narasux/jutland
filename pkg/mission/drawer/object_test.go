@@ -40,6 +40,21 @@ func TestTrailHiddenByFog(t *testing.T) {
 		"trail without an owner stays as before")
 }
 
+// 声呐圈默认隐藏：未按住 V 时即使有选中舰船也必须立即返回，不能开始绘制。
+func TestSonarRangesHiddenByDefault(t *testing.T) {
+	ms := &state.MissionState{}
+	ms.View.Camera.Width = 10
+	ms.View.Camera.Height = 10
+	ms.Arena.PutShip(&objUnit.BattleShip{
+		Uid: "dd", Type: objUnit.ShipTypeDestroyer, CurHP: 100,
+	})
+	ms.Interaction.SelectedShips = []string{"dd"}
+
+	assert.NotPanics(t, func() {
+		(&Drawer{}).drawSonarRanges(nil, ms)
+	})
+}
+
 func TestRotatedRectangleCorners(t *testing.T) {
 	tests := []struct {
 		name     string

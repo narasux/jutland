@@ -283,13 +283,26 @@ func drawDiveOverlayTop(
 	drawImageAtScale(screen, sub, x, y, scale)
 }
 
-// drawSonarRanges 绘制选中己方舰船的声呐/水听器半径（仅表现，不参与判定）。
+// sonarPathOptions 返回声呐轮廓的描边参数。
+// vector.StrokePath 的零值 ColorScale 是白色，必须显式染成 SonarCyan。
+func sonarPathOptions() *vector.DrawPathOptions {
+	opts := &vector.DrawPathOptions{AntiAlias: true}
+	opts.ColorScale.ScaleWithColor(colorx.SonarCyan)
+	return opts
+}
+
+// drawSonarRanges 绘制选中己方舰船的声呐/水听器覆盖范围（仅表现，不参与判定）。
+// 默认不绘制：只有按住 V 时才临时显示，松开即隐藏。
+// 多选时只画所有探测圆的并集外轮廓，避免几十个圆圈叠成一团。
 func (d *Drawer) drawSonarRanges(screen *ebiten.Image, ms *state.MissionState) {
+	if !ms.UI.ShowSonarRanges {
+		return
+	}
+	screenW, screenH := float64(ms.View.Layout.Width), float64(ms.View.Layout.Height)
 	selected := selectedShipSet(ms.Interaction.SelectedShips)
-	// 单选时才标注名称与格数；多选时逐舰标注会互相遮挡，也增加每帧文字测量开销
-	showLabel := len(selected) == 1
+	disks := make([]sonarDisk, 0, len(selected))
 	for _, ship := range ms.Arena.OrderedShips() {
-		if ship.CurHP <= 0 || !ms.View.Camera.Contains(ship.CurPos) {
+		if ship.CurHP <= 0 || ship.BelongPlayer != ms.Player.CurPlayer {
 			continue
 		}
 		if _, ok := selected[ship.Uid]; !ok {
@@ -301,18 +314,56 @@ func (d *Drawer) drawSonarRanges(screen *ebiten.Image, ms *state.MissionState) {
 		}
 		x, y := ms.CameraPosToScreen(ship.CurPos)
 		radiusPx := radius * ms.MapBlockDisplaySize()
-		vector.StrokeCircle(
-			screen, float32(x), float32(y),
-			float32(radiusPx), 1, colorx.LightGreen, false,
-		)
-		// 在舰船下方标注「声呐 + 格数」，避免被误认为攻击或治疗范围。
-		// 声呐圈在默认缩放下常常大于屏幕，贴在圈边会跑到屏幕外，所以跟随舰船。
-		if showLabel {
-			halfLen := ship.Length / constants.MapBlockSize * ms.MapBlockDisplaySize() / 2
-			labelY := y + max(halfLen, 18*ms.ZoomScale()) + 4*ms.ZoomScale()
-			d.drawSonarLabel(screen, ms, x, labelY, radius)
+		// 完全在屏幕外的圆不参与绘制，但仍在屏幕内的圆要保留，
+		// 否则它会漏掉对相邻圆内部弧段的遮挡，并集边界会出现缺口。
+		if x+radiusPx < 0 || x-radiusPx > screenW ||
+			y+radiusPx < 0 || y-radiusPx > screenH {
+			continue
 		}
+		disks = append(disks, sonarDisk{x: x, y: y, radius: radiusPx})
 	}
+	arcs := sonarCoverageArcs(disks)
+	if len(arcs) == 0 {
+		return
+	}
+
+	var path vector.Path
+	for _, arc := range arcs {
+		startX := arc.x + arc.radius*math.Cos(arc.startAngle)
+		startY := arc.y + arc.radius*math.Sin(arc.startAngle)
+		path.MoveTo(float32(startX), float32(startY))
+		path.Arc(
+			float32(arc.x), float32(arc.y), float32(arc.radius),
+			float32(arc.startAngle), float32(arc.endAngle),
+			vector.Clockwise,
+		)
+	}
+	vector.StrokePath(
+		screen, &path,
+		&vector.StrokeOptions{
+			Width:    1,
+			LineCap:  vector.LineCapRound,
+			LineJoin: vector.LineJoinRound,
+		},
+		sonarPathOptions(),
+	)
+
+	// 单舰选中时才标注「声呐 + 格数」；多选时轮廓只表达整体覆盖范围。
+	if len(ms.Interaction.SelectedShips) != 1 {
+		return
+	}
+	ship := ms.Arena.Ships[ms.Interaction.SelectedShips[0]]
+	if ship == nil || ship.CurHP <= 0 || !ms.View.Camera.Contains(ship.CurPos) {
+		return
+	}
+	radius := ship.SonarRange()
+	if radius <= 0 {
+		return
+	}
+	x, y := ms.CameraPosToScreen(ship.CurPos)
+	halfLen := ship.Length / constants.MapBlockSize * ms.MapBlockDisplaySize() / 2
+	labelY := y + max(halfLen, 18*ms.ZoomScale()) + 4*ms.ZoomScale()
+	d.drawSonarLabel(screen, ms, x, labelY, radius)
 }
 
 // drawSonarLabel 在指定位置绘制声呐名称与半径；文字贴到屏幕下沿时上移，避免看不见。
@@ -330,7 +381,7 @@ func (d *Drawer) drawSonarLabel(
 	if limit := float64(ms.View.Layout.Height) - textH - 2*scale; limit > 0 {
 		y = min(y, limit)
 	}
-	clr := color.RGBA{R: 160, G: 235, B: 160, A: 230}
+	clr := color.RGBA{R: 170, G: 240, B: 240, A: 220}
 	d.drawText(screen, label, x+scale, y+scale, fontSize, face, color.RGBA{A: 180})
 	d.drawText(screen, label, x, y, fontSize, face, clr)
 }
