@@ -208,12 +208,10 @@ func (s *BattleShip) Detail() string {
 
 // DetailLines 生成调试用的多行信息：身份 / 归属与攻击目标，以及各类武器的
 // 就绪数与下一座装填进度（口径与单位面板一致，都读 SimTick）。
-// CurSpeed 已乘全局速度倍率，上限也要乘，避免“快”倍速下显示成超速。
+// CurSpeed 已乘全局速度倍率与当前深度状态，上限也必须同口径，避免在“快”倍速
+// 或水下超速的潜艇上显示成超速。
 func (s *BattleShip) DetailLines() []string {
-	maxSpeed := s.MaxSpeed
-	if config.G != nil {
-		maxSpeed *= config.G.SpeedMultiplier
-	}
+	maxSpeed := s.CruiseSpeed()
 	lines := []string{fmt.Sprintf(
 		"Ship %s(%s): Pos: %s, Rotation: %.2f, Speed: %.2f/%.2f, HP: %.2f/%.2f",
 		s.Name, s.Uid, s.CurPos.String(), s.CurRotation, s.CurSpeed, maxSpeed, s.CurHP, s.TotalHP,
@@ -769,6 +767,23 @@ func (s *BattleShip) hullLandOverlap(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, r
 // 否则在"快"倍速下会把舰船速度按未乘倍率的值砍半。
 func (s *BattleShip) CruiseSpeed() float64 {
 	return s.MaxSpeed * s.DiveSpeedRatio() * gameSpeedMultiplier()
+}
+
+// MaxSpeedKnots 水面最大航速（节），即 ships.json5 中配置的 maxSpeed。
+func (s *BattleShip) MaxSpeedKnots() float64 {
+	return s.MaxSpeed * ShipSpeedScale
+}
+
+// CruiseSpeedKnots 当前深度状态下的最大航速（节）。
+// 水下航速快于水面的潜艇（如 XXI 型）在水下时上限高于水面航速，
+// 面板必须用这个值做上限，否则会出现“当前航速超过最大航速”。
+func (s *BattleShip) CruiseSpeedKnots() float64 {
+	return s.MaxSpeed * s.DiveSpeedRatio() * ShipSpeedScale
+}
+
+// CurSpeedKnots 当前航速（节），抵消全局速度倍率，与配置和图鉴采用同一口径。
+func (s *BattleShip) CurSpeedKnots() float64 {
+	return s.baseCurSpeed() * ShipSpeedScale
 }
 
 // cruiseAcceleration 返回乘过全局速度倍率的加速度。

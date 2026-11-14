@@ -361,6 +361,10 @@ other = "Размеры"
 other = "Водоизмещение"
 [CollectionSpeed]
 other = "Скорость"
+[CollectionSpeedSurface]
+other = "Над водой"
+[CollectionSpeedSubmerged]
+other = "Под водой"
 [CollectionCost]
 other = "Стоимость"
 [CollectionHorizontalDR]

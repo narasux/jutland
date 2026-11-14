@@ -393,10 +393,12 @@ func (p *Panel) shipGroups(ms *state.MissionState, ship *objUnit.BattleShip) []i
 		{label: "HP", value: fmt.Sprintf("%.0f%%", ship.CurHP/ship.TotalHP*100), numeric: true},
 		{
 			label: i18n.Text(i18n.MsgUnitPanelSpeed),
+			// 上限跟随当前深度状态：水下航速高于水面的潜艇（如 XXI 型）不会出现
+			// “当前航速 > 最大航速”的读数。
 			value: fmt.Sprintf(
 				"%.1f / %.1f",
-				ship.CurSpeed*objUnit.ShipSpeedScale,
-				ship.MaxSpeed*objUnit.ShipSpeedScale,
+				ship.CurSpeedKnots(),
+				ship.CruiseSpeedKnots(),
 			),
 			numeric: true,
 		},
@@ -441,7 +443,7 @@ func (p *Panel) fleetGroup(ships []*objUnit.BattleShip) infoGroup {
 	var hpPercent, speed float64
 	for _, ship := range ships {
 		hpPercent += ship.CurHP / ship.TotalHP * 100
-		speed += ship.CurSpeed * objUnit.ShipSpeedScale
+		speed += ship.CurSpeedKnots()
 	}
 	focusName := i18n.Text(i18n.MsgUnitPanelNoTarget)
 	if ship := focusedShipFromSlice(ships, p.lastFocus); ship != nil {

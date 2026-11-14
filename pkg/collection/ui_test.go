@@ -318,6 +318,24 @@ func TestShipArchiveSpeedShowsConfiguredKnots(t *testing.T) {
 	require.Equal(t, "33 节", got[i18n.Text(i18n.MsgCollectionSpeed)])
 }
 
+func TestSubmarineArchiveShowsSurfaceAndSubmergedSpeed(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+
+	// XXI 型（U-2540）水下 17.16 节快于水面 15.6 节，图鉴必须分别给出两档航速，
+	// 不能只显示一档“速度”。
+	ship := objUnit.ShipMap["u_2540"]
+	require.NotNil(t, ship)
+	got := map[string]string{}
+	for _, item := range shipArchiveInfoItems(ship, nil) {
+		got[item.Label] = item.Value
+	}
+	require.Equal(t, "15.6 节", got[i18n.Text(i18n.MsgCollectionSpeedSurface)])
+	require.Equal(t, "17.2 节", got[i18n.Text(i18n.MsgCollectionSpeedSubmerged)])
+	require.NotContains(t, got, i18n.Text(i18n.MsgCollectionSpeed))
+}
+
 func TestCollectionScaleBarUsesFixedHundredMeters(t *testing.T) {
 	require.Equal(t, 100.0, collectionBlueprintScaleMeters)
 	require.InDelta(t, 2.0, collectionPixelsPerMeter(986, 493), 1e-9)

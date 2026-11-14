@@ -114,6 +114,37 @@ func TestOnlySubmarinesCanChangeDiveState(t *testing.T) {
 	require.InDelta(t, 1.0, gunship.DiveSpeedRatio(), 1e-9)
 }
 
+// TestSubmarineSpeedDisplayUsesCurrentDiveLimit 锁定潜艇航速展示口径：
+// 水下航速高于水面的艇（如 XXI 型）在水下时，展示上限必须取水下航速，
+// 否则单位面板会出现“当前航速 > 最大航速”。
+func TestSubmarineSpeedDisplayUsesCurrentDiveLimit(t *testing.T) {
+	previous := config.G
+	t.Cleanup(func() { config.G = previous })
+	config.G = &config.GameSettings{SpeedMultiplier: 2}
+
+	ship := &BattleShip{
+		Type:                ShipTypeSubmarine,
+		MaxSpeed:            9.7 / ShipSpeedScale,
+		SubmergedSpeedRatio: 1.29,
+		DiveState:           DiveStateSubmerged,
+	}
+	// CurSpeed 是世界系速度，已乘全局倍率。
+	ship.CurSpeed = ship.CruiseSpeed()
+
+	require.InDelta(t, 9.7, ship.MaxSpeedKnots(), 1e-9)
+	require.InDelta(t, 9.7*1.29, ship.SubmergedMaxSpeedKnots(), 1e-9)
+	require.InDelta(t, 9.7*1.29, ship.CruiseSpeedKnots(), 1e-9)
+	require.InDelta(t, 9.7*1.29, ship.CurSpeedKnots(), 1e-9)
+	require.LessOrEqual(t, ship.CurSpeedKnots(), ship.CruiseSpeedKnots()+1e-9)
+
+	ship.DiveState = DiveStateSurface
+	require.InDelta(t, 9.7, ship.CruiseSpeedKnots(), 1e-9)
+
+	// 非潜艇没有独立的水下档，静态档案回退到水面航速。
+	gunship := &BattleShip{MaxSpeed: 31.0 / ShipSpeedScale}
+	require.InDelta(t, 31.0, gunship.SubmergedMaxSpeedKnots(), 1e-9)
+}
+
 func TestSubmergedShipDeceleratesToUnderwaterCruiseSpeed(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

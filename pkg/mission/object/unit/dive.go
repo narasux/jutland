@@ -57,19 +57,33 @@ func (s *BattleShip) NextDiveState() (DiveState, bool) {
 	return s.DiveState, false
 }
 
+// submergedSpeedRatio 水下航速倍率（相对水面最大速），未配置时用默认值。
+func (s *BattleShip) submergedSpeedRatio() float64 {
+	if s.SubmergedSpeedRatio > 0 {
+		return s.SubmergedSpeedRatio
+	}
+	return defaultSubmergedSpeedRatio
+}
+
 // DiveSpeedRatio 当前深度状态下的航速倍率（相对水面最大速）。
 func (s *BattleShip) DiveSpeedRatio() float64 {
 	switch s.DiveState {
 	case DiveStateDiving, DiveStateSurfacing:
 		return diveTransitionSpeedRatio
 	case DiveStateSubmerged:
-		if s.SubmergedSpeedRatio > 0 {
-			return s.SubmergedSpeedRatio
-		}
-		return defaultSubmergedSpeedRatio
+		return s.submergedSpeedRatio()
 	default:
 		return 1
 	}
+}
+
+// SubmergedMaxSpeedKnots 水下最大航速（节），供图鉴等静态档案展示。
+// 非潜艇没有水下状态，直接返回水面最大航速。
+func (s *BattleShip) SubmergedMaxSpeedKnots() float64 {
+	if s.Type != ShipTypeSubmarine {
+		return s.MaxSpeedKnots()
+	}
+	return s.MaxSpeed * s.submergedSpeedRatio() * ShipSpeedScale
 }
 
 // StartDive 开始下潜；潜艇可以在任意时刻改主意：上浮中会直接掉头下潜。

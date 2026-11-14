@@ -358,6 +358,10 @@ other = "全長×幅"
 other = "排水量"
 [CollectionSpeed]
 other = "速力"
+[CollectionSpeedSurface]
+other = "水上速力"
+[CollectionSpeedSubmerged]
+other = "水中速力"
 [CollectionCost]
 other = "建造費"
 [CollectionHorizontalDR]

@@ -106,6 +106,8 @@ const (
 	MsgCollectionDimensions      MessageID = "CollectionDimensions"
 	MsgCollectionTonnage         MessageID = "CollectionTonnage"
 	MsgCollectionSpeed           MessageID = "CollectionSpeed"
+	MsgCollectionSpeedSurface    MessageID = "CollectionSpeedSurface"
+	MsgCollectionSpeedSubmerged  MessageID = "CollectionSpeedSubmerged"
 	MsgCollectionCost            MessageID = "CollectionCost"
 	MsgCollectionHorizontalDR    MessageID = "CollectionHorizontalDR"
 	MsgCollectionVerticalDR      MessageID = "CollectionVerticalDR"
