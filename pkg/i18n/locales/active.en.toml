@@ -600,12 +600,23 @@ other = "Status"
 other = "Target"
 [UnitPanelGroupFleet]
 other = "Summary"
-[MapSelf]
+[MapOwnFleet]
 other = "Ally"
-[MapEnemy]
+[MapEnemyIntel]
 other = "Enemy"
-[MapFleetCount]
-other = "{{.Side}} ({{.Count}})"
+[MapShipCount]
+one = "{{.Count}} ship"
+other = "{{.Count}} ships"
+[MapContacts]
+other = "Contacts {{.Count}}"
+[MapNoContacts]
+other = "No contacts"
+[MapLosses]
+other = "Losses: {{.Ships}}{{.Tonnage}}"
+[MapKills]
+other = "Kills: {{.Ships}}{{.Tonnage}}"
+[MapTonnageSuffix]
+other = " · {{.Tonnage}} t"
 [RallyLandBlocked]
 other = "Cannot set a rally point on land"
 [ReinforceShipArchive]

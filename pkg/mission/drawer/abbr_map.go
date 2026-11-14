@@ -1,20 +1,15 @@
 package drawer
 
 import (
-	"fmt"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
-	"github.com/narasux/jutland/pkg/i18n"
-	"github.com/narasux/jutland/pkg/mission/faction"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
-	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
-	shipImg "github.com/narasux/jutland/pkg/resources/images/ship"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
 	"github.com/narasux/jutland/pkg/utils/ebutil"
@@ -25,8 +20,8 @@ func (d *Drawer) drawAbbreviationMap(screen *ebiten.Image, ms *state.MissionStat
 	// 绘制左/右背景 + 居中展示缩略地图
 	d.drawAbbrMapAndBackground(screen, ms)
 	d.drawAbbrFog(screen, ms)
-	// 舰队概览
-	d.drawAbbrFleetOverview(screen, ms)
+	// 左右舰队态势摘要
+	d.drawAbbrSituationPanels(screen, ms)
 	// 绘制当前视野范围
 	d.drawAbbrCameraBox(screen, ms)
 	// 绘制建筑物
@@ -67,60 +62,6 @@ func (d *Drawer) drawAbbrMapAndBackground(screen *ebiten.Image, ms *state.Missio
 		colorx.Silver,
 		false,
 	)
-}
-
-func (d *Drawer) drawAbbrFleetOverview(screen *ebiten.Image, ms *state.MissionState) {
-	abbrMapWidth, abbrMapHeight := d.abbrMap.Bounds().Dx(), d.abbrMap.Bounds().Dy()
-	windowWidth := float64(ms.View.Layout.Width-abbrMapWidth) / 2
-
-	drawShips := func(player faction.Player, xOffset, yOffset, scaleX float64) {
-		fleet := ms.Fleet(player)
-
-		// 绘制敌我标识
-		side := i18n.Text(i18n.MsgMapEnemy)
-		if player == ms.Player.CurPlayer {
-			side = i18n.Text(i18n.MsgMapSelf)
-		}
-		d.drawText(
-			screen,
-			i18n.Format(i18n.MsgMapFleetCount, map[string]any{"Side": side, "Count": fleet.Total}),
-			xOffset-50, 20, 48, font.LocalizedUI(font.Hang), colorx.White,
-		)
-
-		for idx, cls := range fleet.Classes {
-			if yOffset > float64(abbrMapHeight)-110 {
-				d.drawText(
-					screen,
-					fmt.Sprintf("%d+ . . . . . .", len(fleet.Classes)-idx-1),
-					xOffset-50, yOffset, 20, font.LocalizedUI(font.Hang), colorx.White,
-				)
-				break
-			}
-
-			opts := d.genDefaultDrawImageOptions()
-			sImg := shipImg.GetSide(cls.Kind.Name, 1)
-			_, shipHeight := sImg.Bounds().Dx(), sImg.Bounds().Dy()
-
-			opts.GeoM.Scale(scaleX, 1)
-			opts.GeoM.Translate(xOffset-65*scaleX, yOffset)
-			screen.DrawImage(sImg, opts)
-			yOffset += float64(shipHeight) + 15
-
-			d.drawText(
-				screen,
-				i18n.Format(i18n.MsgItemCount, map[string]any{
-					"Name": objUnit.GetShipDisplayName(cls.Kind.Name), "Count": cls.Total,
-				}),
-				xOffset-50, yOffset, 20, font.LocalizedUI(font.Hang), colorx.White,
-			)
-			yOffset += 50
-		}
-	}
-
-	// 己方舰队概览
-	drawShips(ms.Player.CurPlayer, float64(windowWidth)/4, 80, 1)
-	// 敌方舰队概览
-	drawShips(ms.Player.CurEnemy, float64(abbrMapWidth)+float64(windowWidth)*1.6, 80, -1)
 }
 
 // 绘制当前视野范围

@@ -249,12 +249,26 @@ func (s *MissionState) FindAircraftBase(uid string) (objUnit.AircraftBase, bool)
 	return nil, false
 }
 
-// CountShips 对同类战舰进行计数
+// Fleet 按阵营统计舰队编成，不做可见性过滤。
 func (s *MissionState) Fleet(player faction.Player) Fleet {
 	ships := lo.Filter(lo.Values(s.Arena.Ships), func(ship *objUnit.BattleShip, _ int) bool {
 		return ship.BelongPlayer == player
 	})
+	return fleetFrom(player, ships)
+}
 
+// ContactFleet 返回当前玩家能确认的某方舰队编成。
+// 迷雾关闭时与 Fleet 等价；开启时只统计 CanSeeShip 通过的舰船，
+// 因此视野外的水面舰与未被探测的下潜潜艇都不会出现在编成里。
+func (s *MissionState) ContactFleet(owner faction.Player) Fleet {
+	ships := lo.Filter(lo.Values(s.Arena.Ships), func(ship *objUnit.BattleShip, _ int) bool {
+		return ship.BelongPlayer == owner && s.CanSeeShip(s.Player.CurPlayer, ship)
+	})
+	return fleetFrom(owner, ships)
+}
+
+// fleetFrom 把舰船列表按舰级聚合为舰队编成，并按吨位从大到小排序。
+func fleetFrom(player faction.Player, ships []*objUnit.BattleShip) Fleet {
 	classMap := map[string]ShipClass{}
 	for _, ship := range ships {
 		if cls, ok := classMap[ship.Name]; ok {
