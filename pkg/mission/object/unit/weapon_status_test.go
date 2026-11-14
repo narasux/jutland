@@ -106,3 +106,53 @@ func TestAnyReloadedSkipsDisabledAndReloadingGuns(t *testing.T) {
 		t.Fatal("ready gun was skipped")
 	}
 }
+
+// 从未发射过的鱼雷管必须是“已就绪”，不能按 0 号时间戳算出一段装填倒计时：
+// 那段时间戳是毫秒、面板传进来的是拍，倒计时会变成 1 拍只走 1 毫秒的假进度。
+func TestTorpedoReloadStatusKeepsUnfiredTubesReady(t *testing.T) {
+	if config.G == nil {
+		config.G = config.NewDefaultGameSettings()
+	}
+	weapon := ShipWeapon{Torpedoes: []*TorpedoLauncher{
+		{ReloadTime: 25, ShotInterval: 1, BulletCount: 1},
+		{ReloadTime: 25, ShotInterval: 1, BulletCount: 1},
+		{ReloadTime: 25, ShotInterval: 1, BulletCount: 1, ReloadStartTick: 600, LatestFireTick: 600},
+	}}
+
+	status := weapon.ReloadStatus(WeaponTypeTorpedo, 660)
+	if status.Ready != 2 || status.Equipped != 3 {
+		t.Fatalf("status = %+v, want 2/3 ready", status)
+	}
+	if status.RemainingMillis != 24_000 {
+		t.Fatalf("remaining = %dms, want 24000", status.RemainingMillis)
+	}
+	if math.Abs(status.Progress-0.04) > 1e-9 {
+		t.Fatalf("progress = %v, want 0.04", status.Progress)
+	}
+
+	status = weapon.ReloadStatus(WeaponTypeTorpedo, 1_200)
+	if status.RemainingMillis != 15_000 {
+		t.Fatalf("remaining = %dms, want 15000", status.RemainingMillis)
+	}
+
+	status = weapon.ReloadStatus(WeaponTypeTorpedo, 2_100)
+	if status.Ready != 3 || status.RemainingMillis != 0 || status.Progress != 1 {
+		t.Fatalf("status = %+v, want all tubes ready", status)
+	}
+}
+
+// 未发射的火箭发射器同样不应显示装填倒计时。
+func TestRocketReloadStatusKeepsUnfiredLaunchersReady(t *testing.T) {
+	weapon := ShipWeapon{Rockets: []*RocketLauncher{{
+		RocketCount:   6,
+		GroupCount:    3,
+		ShotInterval:  0.5,
+		GroupInterval: 4,
+		ReloadTime:    8,
+	}}}
+
+	status := weapon.ReloadStatus(WeaponTypeRocket, 120)
+	if status.Ready != 1 || status.RemainingMillis != 0 || status.Progress != 1 {
+		t.Fatalf("status = %+v, want ready launcher", status)
+	}
+}
