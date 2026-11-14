@@ -32,7 +32,7 @@ func TestRevealSubmarinesCheatOnlyTogglesRenderingFlag(t *testing.T) {
 	ms := &state.MissionState{
 		Player: state.MissionPlayerState{CurPlayer: faction.HumanAlpha},
 	}
-	cheat := &ShowMeTheSubmarines{}
+	cheat := &RevealSubmarines{}
 	if !cheat.Match("reveal submarines") {
 		t.Fatal("cheat command did not match")
 	}
