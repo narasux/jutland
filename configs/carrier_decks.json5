@@ -499,6 +499,25 @@
       approachLength: 3
     }
   },
+  // arkansas：舰体中部偏后的中线转台，单台向左舷弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_arkansas",
+    takeoffPoints: [
+      {
+        forward: 0.554,
+        lateral: 0,
+        runLength: 0.22,
+        launchAngle: -60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
   // astoria：舯部两舷各 1，横向弹射，返航舰侧水面回收
   {
     name: "USCatapult_astoria",

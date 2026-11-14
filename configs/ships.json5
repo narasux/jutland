@@ -10512,6 +10512,18 @@
         }
       ]
     },
+    // 弹射起飞的水上侦察机：开迷雾时由此起飞搜索，玩家也可以手动派出去点灯
+    aircraft: {
+      deck: "USCatapult_arkansas",
+      takeOffTime: 8,
+      groups: [
+        // 沃特 OS2U 翠鸟：美军战列舰标准弹射水侦
+        {
+          name: "OS2U",
+          maxCount: 2
+        }
+      ]
+    }
   },
   // 前无畏舰与无畏舰
   // 南卡罗来纳号（BB-26）
@@ -10845,9 +10857,7 @@
           posPercent: -0.47,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
+        },
         // 6 门 76mm/50 单装炮（两舷）
         {
           name: "US/76/50/MK3",
@@ -11107,8 +11117,6 @@
           rightFiringArc: [0, 0],
           leftFiringArc: [200, 340]
         },
-      ],
-      antiAircraftGuns: [
         // 76mm/50 单装炮
         // 两舷 6 门
         {
@@ -11426,9 +11434,7 @@
           posPercent: -0.67,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
-        }
-      ],
-      antiAircraftGuns: [
+        },
         // 3 门 57mm 6 磅炮：左右舷各 1 门 + 舰尾 1 门
         {
           name: "US/57/40",
@@ -31345,7 +31351,7 @@
         }
       ],
       secondaryGuns: [],
-      antiaircraftGuns: [
+      antiAircraftGuns: [
         // 前高炮 A
         {
           name: "JP/25/60/2/Type96",
