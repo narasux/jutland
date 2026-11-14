@@ -27,7 +27,7 @@ const (
 )
 
 var (
-	// imagesByZoom 按资源倍率缓存启动期生成的 16/32/64px 绿色图标。
+	// imagesByZoom 按资源倍率缓存启动期生成的 16/32/64px 绿色图标（仅水面与上浮状态）。
 	imagesByZoom = map[int]map[State]*ebiten.Image{
 		1: {},
 		2: {},
@@ -50,7 +50,7 @@ var (
 func init() {
 	log.Println("loading dive state icon resources...")
 
-	genZoomImages(loadSources("dive"), imagesByZoom)
+	genZoomImages(loadSources("dive", Surface, Surfacing), imagesByZoom)
 	genZoomImages(loadSources("dive/underwater", Diving, Submerged), underwaterImagesByZoom)
 	genZoomImages(loadSources("dive/transition", Diving, Surfacing), transitionImagesByZoom)
 
@@ -101,7 +101,8 @@ func genSizedImages(source, target map[State]*ebiten.Image, size int) {
 	}
 }
 
-// Get 获取深度状态图标；zoom 档位与武器图标一致（1→16px、2→32px、4→64px）。
+// Get 获取深度状态绿色图标；仅水面与上浮状态有该底图，其余状态返回 nil。
+// zoom 档位与武器图标一致（1→16px、2→32px、4→64px）。
 func Get(state State, zoom int) *ebiten.Image {
 	return get(imagesByZoom, state, zoom)
 }

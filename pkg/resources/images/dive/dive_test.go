@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// 四种深度状态的绿色图标、水下青色图标和过渡金色覆盖层都必须在启动期加载成功，
+// 水面与上浮的绿色图标、水下青色图标和过渡金色覆盖层都必须在启动期加载成功，
 // 且尺寸与武器图标档位一致。
 func TestGetAllStatesAndZooms(t *testing.T) {
 	getters := []struct {
@@ -17,7 +17,7 @@ func TestGetAllStatesAndZooms(t *testing.T) {
 	}{
 		{
 			name: "normal", get: Get,
-			states: []State{Surface, Submerged, Diving, Surfacing},
+			states: []State{Surface, Surfacing},
 		},
 		{name: "underwater", get: GetUnderwater, states: []State{Diving, Submerged}},
 		{name: "transition", get: GetTransition, states: []State{Diving, Surfacing}},
