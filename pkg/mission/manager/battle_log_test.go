@@ -48,9 +48,9 @@ func TestScrollBattleReportEventsClamps(t *testing.T) {
 func TestClearBattleStatsResetsReportData(t *testing.T) {
 	manager := &MissionManager{state: &state.MissionState{
 		UI: state.MissionUIState{
-			BattleReportPage:        state.BattleReportPageEvents,
-			BattleReportEventScroll: 7,
-			BattleReportShipScroll:  [2]int{3, 4},
+			BattleReportPage:         state.BattleReportPageEvents,
+			BattleReportEventScroll:  7,
+			BattleReportDetailScroll: [2]int{3, 4},
 		},
 	}}
 	manager.state.Stats = state.NewBattleStats()
@@ -64,7 +64,7 @@ func TestClearBattleStatsResetsReportData(t *testing.T) {
 	require.Equal(t, state.BattleReportPageOverview, manager.state.UI.BattleReportPage)
 	require.Zero(t, manager.state.UI.BattleReportEventScroll)
 	require.Equal(t, state.BattleReportEventFilterAll, manager.state.UI.BattleReportEventFilter)
-	require.Equal(t, [2]int{}, manager.state.UI.BattleReportShipScroll)
+	require.Equal(t, [2]int{}, manager.state.UI.BattleReportDetailScroll)
 }
 
 func TestScrollBattleReportShipsClamps(t *testing.T) {
@@ -88,15 +88,47 @@ func TestScrollBattleReportShipsClamps(t *testing.T) {
 	left := reportLayout.DetailSides[0]
 	leftX, leftY := int(left.X+left.W/2), int(left.Y+left.H/2)
 	manager.ScrollBattleReportByWheel(-1, leftX, leftY)
-	require.Greater(t, manager.state.UI.BattleReportShipScroll[0], 0)
+	require.Greater(t, manager.state.UI.BattleReportDetailScroll[0], 0)
 
 	manager.ScrollBattleReportByWheel(100, leftX, leftY)
-	require.Zero(t, manager.state.UI.BattleReportShipScroll[0])
+	require.Zero(t, manager.state.UI.BattleReportDetailScroll[0])
 
 	// 敌军没有舰级，右侧滚动保持为 0。
 	right := reportLayout.DetailSides[1]
 	manager.ScrollBattleReportByWheel(-1, int(right.X+right.W/2), int(right.Y+right.H/2))
-	require.Zero(t, manager.state.UI.BattleReportShipScroll[1])
+	require.Zero(t, manager.state.UI.BattleReportDetailScroll[1])
+}
+
+func TestScrollBattleReportPlanesClamps(t *testing.T) {
+	manager := &MissionManager{state: &state.MissionState{
+		Player: state.MissionPlayerState{
+			CurPlayer: faction.HumanAlpha, CurEnemy: faction.ComputerAlpha,
+		},
+		View: state.MissionViewState{Layout: layout.ScreenLayout{Width: 1280, Height: 720}},
+		UI:   state.MissionUIState{BattleReportPage: state.BattleReportPagePlanes},
+	}}
+	manager.state.Stats = state.NewBattleStats()
+	own := &state.BattleSideStats{PlanesInitialByType: map[string]int{}}
+	for idx := 0; idx < 30; idx++ {
+		own.PlanesInitialByType[fmt.Sprintf("Plane%02d", idx)] = 1
+	}
+	manager.state.Stats.Sides = map[faction.Player]*state.BattleSideStats{
+		faction.HumanAlpha: own,
+	}
+
+	reportLayout := manager.BattleReportLayout(true)
+	left := reportLayout.DetailSides[0]
+	leftX, leftY := int(left.X+left.W/2), int(left.Y+left.H/2)
+	manager.ScrollBattleReportByWheel(-1, leftX, leftY)
+	require.Greater(t, manager.state.UI.BattleReportDetailScroll[0], 0)
+
+	manager.ScrollBattleReportByWheel(100, leftX, leftY)
+	require.Zero(t, manager.state.UI.BattleReportDetailScroll[0])
+
+	// 敌军没有机型记录，右侧滚动保持为 0。
+	right := reportLayout.DetailSides[1]
+	manager.ScrollBattleReportByWheel(-1, int(right.X+right.W/2), int(right.Y+right.H/2))
+	require.Zero(t, manager.state.UI.BattleReportDetailScroll[1])
 }
 
 func TestHurtShipRecordsHitAndSink(t *testing.T) {
@@ -243,11 +275,33 @@ func TestBattleReportScrollbarDragMapping(t *testing.T) {
 		int(scrollbar.TrackX+1), int(scrollbar.TrackY+1),
 	)
 	require.True(t, ok)
-	require.Equal(t, state.BattleReportScrollDragShipsLeft, kind)
+	require.Equal(t, state.BattleReportScrollDragDetailLeft, kind)
 
 	manager.state.UI.BattleReportScrollDrag = kind
 	manager.dragBattleReportScrollTo(int(scrollbar.TrackY + scrollbar.TrackH - scrollbar.ThumbH))
-	require.Equal(t, scrollbar.MaxScroll, manager.state.UI.BattleReportShipScroll[0])
+	require.Equal(t, scrollbar.MaxScroll, manager.state.UI.BattleReportDetailScroll[0])
+
+	// 飞机页复用同一组明细滚动条：拖动目标与滚动状态都应走 DetailLeft。
+	manager.state.UI.BattleReportPage = state.BattleReportPagePlanes
+	manager.state.UI.BattleReportDetailScroll = [2]int{}
+	own.PlanesInitialByType = map[string]int{}
+	for idx := 0; idx < 30; idx++ {
+		own.PlanesInitialByType[fmt.Sprintf("Plane%02d", idx)] = 1
+	}
+	reportLayout = manager.BattleReportLayout(true)
+	scrollbar, ok = state.BattleReportDetailScrollbar(
+		reportLayout.DetailSides[0], own.PlaneTypeCount(), 0, reportLayout.Scale,
+	)
+	require.True(t, ok)
+	kind, _, ok = manager.battleReportScrollbarAt(
+		int(scrollbar.TrackX+1), int(scrollbar.TrackY+1),
+	)
+	require.True(t, ok)
+	require.Equal(t, state.BattleReportScrollDragDetailLeft, kind)
+
+	manager.state.UI.BattleReportScrollDrag = kind
+	manager.dragBattleReportScrollTo(int(scrollbar.TrackY + scrollbar.TrackH - scrollbar.ThumbH))
+	require.Equal(t, scrollbar.MaxScroll, manager.state.UI.BattleReportDetailScroll[0])
 }
 
 func TestCombatantInfoUsesBulletShooterSnapshot(t *testing.T) {

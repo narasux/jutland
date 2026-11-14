@@ -200,8 +200,6 @@ other = "Класс"
 other = "Тип"
 [BattleReportReplenished]
 other = "Пополнено"
-[BattleReportOther]
-other = "Прочее"
 [BattleReportNoRecords]
 other = "Нет записей"
 [SettingsTitle]

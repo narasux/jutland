@@ -36,7 +36,7 @@ func TestBuildBattleShipDetailRowsSortsByTonnage(t *testing.T) {
 	require.Equal(t, 4, rows[1].Remaining)
 }
 
-func TestBuildBattlePlaneDetailRowsSortsAndAggregates(t *testing.T) {
+func TestBuildBattlePlaneDetailRowsSortsAllTypes(t *testing.T) {
 	stats := state.BattleSideStats{
 		PlanesInitialByType: map[string]int{},
 		PlanesBuiltByType:   map[string]int{},
@@ -48,15 +48,48 @@ func TestBuildBattlePlaneDetailRowsSortsAndAggregates(t *testing.T) {
 		stats.PlanesLostByType[name] = 12 - idx
 	}
 	rows := buildBattlePlaneDetailRows(stats)
-	require.Len(t, rows, battleReportDetailLimit+1)
+	require.Len(t, rows, 12)
 	require.Equal(t, "P00", rows[0].Name)
 	require.Equal(t, 12, rows[0].Lost)
+	require.Equal(t, "P11", rows[11].Name)
+	require.Equal(t, 1, rows[11].Lost)
+	// 机型不再聚合到「其他」行，每一行都保留真实机型名。
+	for _, row := range rows {
+		require.NotEmpty(t, row.Name)
+	}
+}
 
-	other := rows[len(rows)-1]
-	require.Empty(t, other.Name)
-	// 后两名：P10（建造 10 / 损失 2）+ P11（建造 11 / 损失 1）
-	require.Equal(t, 21, other.Built)
-	require.Equal(t, 3, other.Lost)
+func TestBuildBattlePlaneDetailRowsDropsZeroCountRows(t *testing.T) {
+	stats := state.BattleSideStats{
+		PlanesInitialByType: map[string]int{"Real": 1, "Empty": 0},
+		PlanesBuiltByType:   map[string]int{"BuiltZero": 0},
+		PlanesLostByType:    map[string]int{"LostZero": 0},
+	}
+	rows := buildBattlePlaneDetailRows(stats)
+	require.Len(t, rows, 1)
+	require.Equal(t, "Real", rows[0].Name)
+}
+
+func TestBattleReportPlaneTypeAbbr(t *testing.T) {
+	objUnit.PlaneMap["TagFighter"] = &objUnit.Plane{
+		Name: "TagFighter", Type: objUnit.PlaneTypeFighter, TypeAbbr: "F",
+	}
+	objUnit.PlaneMap["TagLong"] = &objUnit.Plane{
+		Name: "TagLong", Type: objUnit.PlaneTypeScout, TypeAbbr: "SCOUT",
+	}
+	objUnit.PlaneMap["TagOther"] = &objUnit.Plane{
+		Name: "TagOther", Type: objUnit.PlaneTypeOther, TypeAbbr: "OTHER",
+	}
+	t.Cleanup(func() {
+		delete(objUnit.PlaneMap, "TagFighter")
+		delete(objUnit.PlaneMap, "TagLong")
+		delete(objUnit.PlaneMap, "TagOther")
+	})
+
+	require.Equal(t, "F", battleReportPlaneTypeAbbr("TagFighter"))
+	require.Equal(t, "SC", battleReportPlaneTypeAbbr("TagLong"))
+	require.Equal(t, "O", battleReportPlaneTypeAbbr("TagOther"))
+	require.Empty(t, battleReportPlaneTypeAbbr("MissingPlane"))
 }
 
 func TestDetailRowsMergeInitialBuiltAndLost(t *testing.T) {

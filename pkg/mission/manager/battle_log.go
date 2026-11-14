@@ -240,25 +240,34 @@ func (m *MissionManager) battleReportScrollbarAt(
 		}
 		return 0, state.BattleReportScrollbar{}, false
 	}
-	if m.state.UI.BattleReportPage != state.BattleReportPageShips {
+	if m.state.UI.BattleReportPage != state.BattleReportPageShips &&
+		m.state.UI.BattleReportPage != state.BattleReportPagePlanes {
 		return 0, state.BattleReportScrollbar{}, false
 	}
 	for side := 0; side < 2; side++ {
 		stats := m.battleReportSideStats(side)
 		scrollbar, ok := state.BattleReportDetailScrollbar(
-			layout.DetailSides[side], stats.ShipClassCount(),
-			m.state.UI.BattleReportShipScroll[side], layout.Scale,
+			layout.DetailSides[side], m.battleReportDetailTotal(stats),
+			m.state.UI.BattleReportDetailScroll[side], layout.Scale,
 		)
 		if !ok || !battleReportScrollbarHit(scrollbar, x, y, layout.Scale) {
 			continue
 		}
-		kind := state.BattleReportScrollDragShipsLeft
+		kind := state.BattleReportScrollDragDetailLeft
 		if side == 1 {
-			kind = state.BattleReportScrollDragShipsRight
+			kind = state.BattleReportScrollDragDetailRight
 		}
 		return kind, scrollbar, true
 	}
 	return 0, state.BattleReportScrollbar{}, false
+}
+
+// battleReportDetailTotal 返回当前明细页单侧列表的总行数。
+func (m *MissionManager) battleReportDetailTotal(stats state.BattleSideStats) int {
+	if m.state.UI.BattleReportPage == state.BattleReportPagePlanes {
+		return stats.PlaneTypeCount()
+	}
+	return stats.ShipClassCount()
 }
 
 // battleReportScrollbarHit 判定鼠标是否落在滚动条上，横向命中区略放宽。
@@ -305,17 +314,18 @@ func (m *MissionManager) currentBattleReportScrollbar(kind int) (state.BattleRep
 			layout.Content, total,
 			m.state.UI.BattleReportEventScroll, layout.Scale,
 		)
-	case state.BattleReportScrollDragShipsLeft, state.BattleReportScrollDragShipsRight:
-		if m.state.UI.BattleReportPage != state.BattleReportPageShips {
+	case state.BattleReportScrollDragDetailLeft, state.BattleReportScrollDragDetailRight:
+		page := m.state.UI.BattleReportPage
+		if page != state.BattleReportPageShips && page != state.BattleReportPagePlanes {
 			return state.BattleReportScrollbar{}, false
 		}
 		side := 0
-		if kind == state.BattleReportScrollDragShipsRight {
+		if kind == state.BattleReportScrollDragDetailRight {
 			side = 1
 		}
 		return state.BattleReportDetailScrollbar(
-			layout.DetailSides[side], m.battleReportSideStats(side).ShipClassCount(),
-			m.state.UI.BattleReportShipScroll[side], layout.Scale,
+			layout.DetailSides[side], m.battleReportDetailTotal(m.battleReportSideStats(side)),
+			m.state.UI.BattleReportDetailScroll[side], layout.Scale,
 		)
 	}
 	return state.BattleReportScrollbar{}, false
@@ -335,10 +345,10 @@ func (m *MissionManager) setBattleReportScroll(kind, value int) {
 	switch kind {
 	case state.BattleReportScrollDragEvents:
 		m.state.UI.BattleReportEventScroll = max(0, value)
-	case state.BattleReportScrollDragShipsLeft:
-		m.state.UI.BattleReportShipScroll[0] = max(0, value)
-	case state.BattleReportScrollDragShipsRight:
-		m.state.UI.BattleReportShipScroll[1] = max(0, value)
+	case state.BattleReportScrollDragDetailLeft:
+		m.state.UI.BattleReportDetailScroll[0] = max(0, value)
+	case state.BattleReportScrollDragDetailRight:
+		m.state.UI.BattleReportDetailScroll[1] = max(0, value)
 	}
 }
 
@@ -356,12 +366,12 @@ func (m *MissionManager) ScrollBattleReportByWheel(dy float64, cursorX, cursorY 
 			return
 		}
 		m.ScrollBattleReportEvents(m.consumeReportWheelRows(dy))
-	case state.BattleReportPageShips:
+	case state.BattleReportPageShips, state.BattleReportPagePlanes:
 		for side := range layout.DetailSides {
 			if !layout.DetailSides[side].Contains(cursorX, cursorY) {
 				continue
 			}
-			m.scrollBattleReportShip(m.consumeReportWheelRows(dy), side)
+			m.scrollBattleReportDetail(m.consumeReportWheelRows(dy), side)
 			return
 		}
 		m.reportWheelAccum = 0
@@ -389,8 +399,8 @@ func (m *MissionManager) consumeReportWheelRows(dy float64) int {
 	return max(-reportWheelMaxRowsPerEvent, min(rows, reportWheelMaxRowsPerEvent))
 }
 
-// scrollBattleReportShip 滚动一侧舰级列表，并按该侧舰级数夹紧。
-func (m *MissionManager) scrollBattleReportShip(rows, side int) {
+// scrollBattleReportDetail 滚动一侧舰级 / 机型列表，并按该侧行数夹紧。
+func (m *MissionManager) scrollBattleReportDetail(rows, side int) {
 	if side < 0 || side > 1 || rows == 0 {
 		return
 	}
@@ -400,14 +410,14 @@ func (m *MissionManager) scrollBattleReportShip(rows, side int) {
 	}
 	layout := m.BattleReportLayout(true)
 	visible := state.BattleReportDetailVisibleRows(layout.DetailSides[side].H, layout.Scale)
-	total := m.state.Stats.Side(player).ShipClassCount()
+	total := m.battleReportDetailTotal(m.state.Stats.Side(player))
 	maxScroll := max(0, total-visible)
 	if maxScroll == 0 {
-		m.state.UI.BattleReportShipScroll[side] = 0
+		m.state.UI.BattleReportDetailScroll[side] = 0
 		return
 	}
-	next := m.state.UI.BattleReportShipScroll[side] + rows
-	m.state.UI.BattleReportShipScroll[side] = min(max(0, next), maxScroll)
+	next := m.state.UI.BattleReportDetailScroll[side] + rows
+	m.state.UI.BattleReportDetailScroll[side] = min(max(0, next), maxScroll)
 }
 
 // ClearBattleStats 关闭结算后清空本局战果与详细战况，释放内存。
@@ -419,7 +429,7 @@ func (m *MissionManager) ClearBattleStats() {
 	m.state.UI.BattleReportPage = state.BattleReportPageOverview
 	m.state.UI.BattleReportEventScroll = 0
 	m.state.UI.BattleReportEventFilter = state.BattleReportEventFilterAll
-	m.state.UI.BattleReportShipScroll = [2]int{}
+	m.state.UI.BattleReportDetailScroll = [2]int{}
 	m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 	m.state.UI.BattleReportScrollDragOffset = 0
 }

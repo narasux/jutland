@@ -154,8 +154,8 @@ type MissionUIState struct {
 	BattleReportEventScroll int
 	// 战况记录页筛选（全部 / 击杀）
 	BattleReportEventFilter BattleReportEventFilter
-	// 舰艇明细页左右两侧列表的滚动偏移（按行）
-	BattleReportShipScroll [2]int
+	// 舰艇 / 飞机明细页左右两侧列表的滚动偏移（按行）
+	BattleReportDetailScroll [2]int
 	// 当前正在拖动的战报滚动条，以及按下时相对滑块顶部的偏移
 	BattleReportScrollDrag       int
 	BattleReportScrollDragOffset float64

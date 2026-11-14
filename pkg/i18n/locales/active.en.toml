@@ -200,8 +200,6 @@ other = "Ship class"
 other = "Aircraft type"
 [BattleReportReplenished]
 other = "Replenished"
-[BattleReportOther]
-other = "Other"
 [BattleReportNoRecords]
 other = "No records"
 [SettingsTitle]

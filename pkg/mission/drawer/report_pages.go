@@ -2,6 +2,7 @@ package drawer
 
 import (
 	"image/color"
+	"math"
 	"sort"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -15,11 +16,7 @@ import (
 	"github.com/narasux/jutland/pkg/utils/ebutil"
 )
 
-// battleReportDetailLimit 飞机明细表最多展示的机型数；舰艇列表不再聚合，全部展示。
-const battleReportDetailLimit = 10
-
 // battleReportDetailRow 明细页的一行（舰级或机型）。
-// Name 为空表示聚合出来的「其他」行。
 type battleReportDetailRow struct {
 	Name      string
 	Initial   int
@@ -30,6 +27,13 @@ type battleReportDetailRow struct {
 
 func (r battleReportDetailRow) total() int {
 	return r.Initial + r.Built + r.Lost
+}
+
+// battleReportRowBadge 明细行名前的标识：舰艇用缩略图，飞机用机型缩写标签。
+type battleReportRowBadge struct {
+	icon  func(string) *ebiten.Image
+	label func(string) string
+	color color.Color
 }
 
 // buildBattleShipDetailRows 汇总单阵营舰艇明细，按吨位降序返回全部舰级。
@@ -70,13 +74,17 @@ func buildBattleShipDetailRows(stats state.BattleSideStats) []battleReportDetail
 	return detail
 }
 
-// buildBattlePlaneDetailRows 汇总单阵营飞机明细，按损失降序，超过上限聚合为「其他」。
+// buildBattlePlaneDetailRows 汇总单阵营飞机明细，按损失降序返回全部机型。
 func buildBattlePlaneDetailRows(stats state.BattleSideStats) []battleReportDetailRow {
 	byName := detailRowsByName(
 		stats.PlanesInitialByType, stats.PlanesBuiltByType, stats.PlanesLostByType,
 	)
 	rows := make([]battleReportDetailRow, 0, len(byName))
 	for _, row := range byName {
+		// 没有初始 / 建造 / 损失记录的空行不占表格行。
+		if row.Initial+row.Built+row.Lost+row.Remaining == 0 {
+			continue
+		}
 		rows = append(rows, *row)
 	}
 	sort.Slice(rows, func(i, j int) bool {
@@ -88,7 +96,7 @@ func buildBattlePlaneDetailRows(stats state.BattleSideStats) []battleReportDetai
 		}
 		return rows[i].Name < rows[j].Name
 	})
-	return aggregateBattleReportDetailRows(rows)
+	return rows
 }
 
 // detailRowsByName 合并初始 / 建造 / 损失三张表，并计算在役数量。
@@ -117,23 +125,6 @@ func detailRowsByName(
 		row.Remaining = max(0, row.Initial+row.Built-row.Lost)
 	}
 	return byName
-}
-
-// aggregateBattleReportDetailRows 把超过上限的行合并成「其他」行。
-func aggregateBattleReportDetailRows(rows []battleReportDetailRow) []battleReportDetailRow {
-	if len(rows) <= battleReportDetailLimit {
-		return rows
-	}
-	out := make([]battleReportDetailRow, 0, battleReportDetailLimit+1)
-	out = append(out, rows[:battleReportDetailLimit]...)
-	other := battleReportDetailRow{}
-	for _, row := range rows[battleReportDetailLimit:] {
-		other.Initial += row.Initial
-		other.Built += row.Built
-		other.Lost += row.Lost
-		other.Remaining += row.Remaining
-	}
-	return append(out, other)
 }
 
 // battleShipDetailTotals 返回舰艇明细的合计行。
@@ -173,7 +164,9 @@ func (d *Drawer) drawBattleReportShipDetails(
 		buildBattleShipDetailRows(own),
 		battleShipDetailTotals(own),
 		objUnit.GetShipDisplayName,
-		func(name string) *ebiten.Image { return battleReportShipIcon(name, true) },
+		battleReportRowBadge{
+			icon: func(name string) *ebiten.Image { return battleReportShipIcon(name, true) },
+		},
 		scroll[0],
 		scale, bodyFont, monoFont,
 	)
@@ -185,7 +178,9 @@ func (d *Drawer) drawBattleReportShipDetails(
 		buildBattleShipDetailRows(enemy),
 		battleShipDetailTotals(enemy),
 		objUnit.GetShipDisplayName,
-		func(name string) *ebiten.Image { return battleReportShipIcon(name, false) },
+		battleReportRowBadge{
+			icon: func(name string) *ebiten.Image { return battleReportShipIcon(name, false) },
+		},
 		scroll[1],
 		scale, bodyFont, monoFont,
 	)
@@ -196,6 +191,7 @@ func (d *Drawer) drawBattleReportPlaneDetails(
 	screen *ebiten.Image,
 	report state.BattleReportLayout,
 	own, enemy state.BattleSideStats,
+	scroll [2]int,
 	scale float64,
 	bodyFont, monoFont *text.GoTextFaceSource,
 ) {
@@ -207,8 +203,11 @@ func (d *Drawer) drawBattleReportPlaneDetails(
 		buildBattlePlaneDetailRows(own),
 		battlePlaneDetailTotals(own),
 		objUnit.GetPlaneDisplayName,
-		nil,
-		0,
+		battleReportRowBadge{
+			label: battleReportPlaneTypeAbbr,
+			color: battleReportOwnClr,
+		},
+		scroll[0],
 		scale, bodyFont, monoFont,
 	)
 	d.drawBattleReportDetailPanel(
@@ -219,10 +218,30 @@ func (d *Drawer) drawBattleReportPlaneDetails(
 		buildBattlePlaneDetailRows(enemy),
 		battlePlaneDetailTotals(enemy),
 		objUnit.GetPlaneDisplayName,
-		nil,
-		0,
+		battleReportRowBadge{
+			label: battleReportPlaneTypeAbbr,
+			color: battleReportLostClr,
+		},
+		scroll[1],
 		scale, bodyFont, monoFont,
 	)
+}
+
+// battleReportPlaneTypeAbbr 返回机型缩写标签。
+// 标签宽度固定为两个字符，超长缩写截断，其他机型用 O，保证各行名称对齐。
+func battleReportPlaneTypeAbbr(name string) string {
+	plane := objUnit.PlaneMap[name]
+	if plane == nil {
+		return ""
+	}
+	if plane.Type == objUnit.PlaneTypeOther {
+		return "O"
+	}
+	abbr := []rune(plane.TypeAbbr)
+	if len(abbr) > 2 {
+		abbr = abbr[:2]
+	}
+	return string(abbr)
 }
 
 // battleReportShipIcon 获取舰级对应的缩略图标；配色与地图一致：我方绿色，敌方红色。
@@ -246,8 +265,49 @@ func battleReportDetailScrollStart(
 	return min(max(0, scroll), scrollbar.MaxScroll)
 }
 
+// drawBattleReportTypeTag 绘制机型缩写标签，返回它占用的宽度（含与名称的间距）。
+// 标签按两个字符的宽度固定，边框画成整数像素的实心矩形，避免缩放后四边粗细不均。
+func (d *Drawer) drawBattleReportTypeTag(
+	screen *ebiten.Image,
+	label string,
+	x, y, height, scale float64,
+	clr color.Color,
+	monoFont *text.GoTextFaceSource,
+) float64 {
+	if label == "" || height <= 0 || scale <= 0 {
+		return 0
+	}
+	fontSize := 11 * scale
+	// 等宽字体下两个字符就是固定标签宽度；单字符标签也占同样的宽度。
+	textW, _ := text.Measure("MM", &text.GoTextFace{Source: monoFont, Size: fontSize}, 0)
+	tagW := math.Round(max(height*1.15, textW+8*scale))
+	tagH := math.Round(height)
+	if tagW < 1 || tagH < 1 {
+		return 0
+	}
+	x, y = math.Round(x), math.Round(y)
+	border := float64(max(1, int(math.Round(scale))))
+	vector.FillRect(
+		screen, float32(x), float32(y), float32(tagW), float32(tagH),
+		clr, false,
+	)
+	innerW, innerH := tagW-2*border, tagH-2*border
+	if innerW > 0 && innerH > 0 {
+		vector.FillRect(
+			screen, float32(x+border), float32(y+border), float32(innerW), float32(innerH),
+			battleReportTagFill, false,
+		)
+	}
+	d.drawReportText(
+		screen, label,
+		state.BattleReportRect{X: x, Y: y, W: tagW, H: tagH},
+		fontSize, monoFont, clr, reportAlignCenter,
+	)
+	return tagW + 7*scale
+}
+
 // drawBattleReportDetailPanel 绘制单个阵营的舰级 / 机型明细表。
-// 舰艇列表超出可视行数时由 scroll 控制，滚动条绘制在右侧预留的独立槽位中，
+// 舰艇 / 飞机列表超出可视行数时由 scroll 控制，滚动条绘制在右侧预留的独立槽位中，
 // 表格分隔线只画到槽位之前，避免与滚动条重叠。
 func (d *Drawer) drawBattleReportDetailPanel(
 	screen *ebiten.Image,
@@ -256,7 +316,7 @@ func (d *Drawer) drawBattleReportDetailPanel(
 	rows []battleReportDetailRow,
 	totals battleReportDetailRow,
 	nameOf func(string) string,
-	iconFor func(string) *ebiten.Image,
+	badge battleReportRowBadge,
 	scroll int,
 	scale float64,
 	bodyFont, monoFont *text.GoTextFaceSource,
@@ -347,33 +407,40 @@ func (d *Drawer) drawBattleReportDetailPanel(
 			row := rows[idx]
 			y := rowsY + float64(idx-scroll)*rowH
 			name := nameOf(row.Name)
-			nameColor := battleReportValueClr
-			if row.Name == "" {
-				name = i18n.Text(i18n.MsgBattleReportOther)
-				nameColor = battleReportSubtitleClr
-			}
 			rowNameX := contentX
 			rowNameW := nameW
-			if iconFor != nil && row.Name != "" {
-				icon := iconFor(row.Name)
-				iconSize := 18 * scale
-				opts := d.genDefaultDrawImageOptions()
-				// 缩略图素材朝上，战报里统一转 90 度让舰艏朝右。
-				ebutil.SetOptsCenterRotation(opts, icon, 90)
-				opts.GeoM.Scale(
-					iconSize/float64(icon.Bounds().Dx()),
-					iconSize/float64(icon.Bounds().Dy()),
-				)
-				opts.GeoM.Translate(contentX, y+(rowH-iconSize)/2)
-				screen.DrawImage(icon, opts)
-				rowNameX += iconSize + 7*scale
-				rowNameW -= iconSize + 7*scale
+			if row.Name != "" {
+				switch {
+				case badge.icon != nil:
+					icon := badge.icon(row.Name)
+					iconSize := 18 * scale
+					opts := d.genDefaultDrawImageOptions()
+					// 缩略图素材朝上，战报里统一转 90 度让舰艏朝右。
+					ebutil.SetOptsCenterRotation(opts, icon, 90)
+					opts.GeoM.Scale(
+						iconSize/float64(icon.Bounds().Dx()),
+						iconSize/float64(icon.Bounds().Dy()),
+					)
+					opts.GeoM.Translate(contentX, y+(rowH-iconSize)/2)
+					screen.DrawImage(icon, opts)
+					rowNameX += iconSize + 7*scale
+					rowNameW -= iconSize + 7*scale
+				case badge.label != nil:
+					tagH := 16 * scale
+					leadingW := d.drawBattleReportTypeTag(
+						screen, badge.label(row.Name),
+						contentX, y+(rowH-tagH)/2, tagH, scale,
+						badge.color, monoFont,
+					)
+					rowNameX += leadingW
+					rowNameW -= leadingW
+				}
 			}
 			d.drawReportText(
 				screen, name,
-				state.BattleReportRect{X: rowNameX, Y: y, W: rowNameW, H: rowH},
+				state.BattleReportRect{X: rowNameX, Y: y, W: max(0, rowNameW), H: rowH},
 				fitReportFontSize(name, rowNameW-6*scale, 16*scale, bodyFont),
-				bodyFont, nameColor, reportAlignLeft,
+				bodyFont, battleReportValueClr, reportAlignLeft,
 			)
 			values := [4]int{row.Initial, row.Built, row.Lost, row.Remaining}
 			for col, value := range values {

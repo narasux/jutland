@@ -39,6 +39,7 @@ var (
 	battleReportTabFill     = color.RGBA{R: 18, G: 28, B: 34, A: 210}
 	battleReportTabActive   = color.RGBA{R: 68, G: 116, B: 138, A: 200}
 	battleReportTabBorder   = color.RGBA{R: 96, G: 116, B: 120, A: 190}
+	battleReportTagFill     = color.RGBA{R: 24, G: 38, B: 44, A: 255}
 	battleReportOverlay     = color.RGBA{R: 3, G: 8, B: 12, A: 200}
 )
 
@@ -156,13 +157,22 @@ func (d *Drawer) DrawBattleReport(
 			report,
 			own,
 			enemy,
-			ms.UI.BattleReportShipScroll,
+			ms.UI.BattleReportDetailScroll,
 			scale,
 			bodyFont,
 			monoFont,
 		)
 	case state.BattleReportPagePlanes:
-		d.drawBattleReportPlaneDetails(screen, report, own, enemy, scale, bodyFont, monoFont)
+		d.drawBattleReportPlaneDetails(
+			screen,
+			report,
+			own,
+			enemy,
+			ms.UI.BattleReportDetailScroll,
+			scale,
+			bodyFont,
+			monoFont,
+		)
 	case state.BattleReportPageEvents:
 		d.drawBattleReportEventLog(screen, report, ms, scale, bodyFont, monoFont)
 	default:

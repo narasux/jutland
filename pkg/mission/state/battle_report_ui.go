@@ -107,8 +107,8 @@ const (
 const (
 	BattleReportScrollDragNone = iota
 	BattleReportScrollDragEvents
-	BattleReportScrollDragShipsLeft
-	BattleReportScrollDragShipsRight
+	BattleReportScrollDragDetailLeft
+	BattleReportScrollDragDetailRight
 )
 
 // BattleReportScrollbar 战报列表滚动条的几何信息。
@@ -141,7 +141,7 @@ func BattleReportEventScrollbar(
 	}, true
 }
 
-// BattleReportDetailScrollbar 计算舰艇明细滚动条几何；列表不足一屏时返回 false。
+// BattleReportDetailScrollbar 计算舰艇 / 飞机明细滚动条几何；列表不足一屏时返回 false。
 func BattleReportDetailScrollbar(
 	panel BattleReportRect, total, scroll int, scale float64,
 ) (BattleReportScrollbar, bool) {

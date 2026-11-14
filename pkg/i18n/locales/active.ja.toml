@@ -200,8 +200,6 @@ other = "艦級"
 other = "機種"
 [BattleReportReplenished]
 other = "補充"
-[BattleReportOther]
-other = "その他"
 [BattleReportNoRecords]
 other = "記録なし"
 [SettingsTitle]

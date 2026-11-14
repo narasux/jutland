@@ -127,11 +127,23 @@ func (s *BattleStats) side(player faction.Player) *BattleSideStats {
 
 // ShipClassCount 返回有记录的舰级数量（初始 / 建造 / 损失任一表出现即算）。
 func (s BattleSideStats) ShipClassCount() int {
-	counts := make(map[string]int, len(s.ShipsInitialByClass)+len(s.ShipsBuiltByClass))
-	for _, rows := range []map[string]int{
+	return countRecordedNames(
 		s.ShipsInitialByClass, s.ShipsBuiltByClass, s.ShipsLostByClass,
-	} {
-		for name, count := range rows {
+	)
+}
+
+// PlaneTypeCount 返回有记录的机型数量（初始 / 建造 / 损失任一表出现即算）。
+func (s BattleSideStats) PlaneTypeCount() int {
+	return countRecordedNames(
+		s.PlanesInitialByType, s.PlanesBuiltByType, s.PlanesLostByType,
+	)
+}
+
+// countRecordedNames 返回多张计数表中出现过的非零名称数。
+func countRecordedNames(tables ...map[string]int) int {
+	counts := make(map[string]int)
+	for _, table := range tables {
+		for name, count := range table {
 			counts[name] += count
 		}
 	}
