@@ -32,6 +32,10 @@ const (
 	// 纹理创建变慢时靠时间片兜底，不让单帧开销失控。
 	mapBlockPrewarmTimeSlice = 3 * time.Millisecond
 	wheelZoomCooldownTicks   = 8
+	// reportWheelRowsPerUnit 是一个标准滚轮刻度在战报列表里滚动的行数。
+	reportWheelRowsPerUnit = 3
+	// reportWheelMaxRowsPerEvent 限制单次滚轮事件的最大行数，避免触控板惯性一下跳太远。
+	reportWheelMaxRowsPerEvent = 6
 )
 
 // MissionManager 任务管理器
@@ -46,6 +50,7 @@ type MissionManager struct {
 	weaponFirePlayer          *audioPlayer.WeaponFire
 	pinchWheelAccum           float64
 	wheelZoomCooldown         int
+	reportWheelAccum          float64
 	mapBlockPrewarmZoom       int
 	mapBlockPrewarmBurstTicks int
 	mapBlockPrewarmFocusX     int
@@ -147,6 +152,7 @@ func (m *MissionManager) SetBattleReportPage(page state.BattleReportPage) {
 		m.state.UI.BattleReportShipScroll = [2]int{}
 		m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 		m.state.UI.BattleReportScrollDragOffset = 0
+		m.reportWheelAccum = 0
 	}
 	m.state.UI.BattleReportPage = page
 }
@@ -175,6 +181,7 @@ func (m *MissionManager) finalizeBattleStats() {
 	m.state.UI.BattleReportShipScroll = [2]int{}
 	m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 	m.state.UI.BattleReportScrollDragOffset = 0
+	m.reportWheelAccum = 0
 }
 
 // WarmupMapBlocks 分帧预热地图块缓存，并报告当前视野是否已经就绪。
@@ -204,9 +211,12 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	case state.MissionInTerminal:
 		m.updateTerminal()
 	case state.MissionPaused:
-		m.updateGameOptions(false)
-		// 暂停时也可以移动相机
-		m.updateCameraPosition()
+		// 实时战报是整屏 UI：滚轮交给列表，不能再缩放或边缘移动背后的战场。
+		reportOpen := m.state.UI.PauseStats
+		m.updateGameOptions(reportOpen)
+		if !reportOpen {
+			m.updateCameraPosition()
+		}
 	}
 
 	if missionStatusRunsSimulation(status) {

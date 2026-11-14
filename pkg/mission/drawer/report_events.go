@@ -239,6 +239,38 @@ type battleReportEventSegment struct {
 // 动作占位符只在拼行时使用，不会出现在最终文本中。
 const battleReportActionMarker = "\x00"
 
+// 伤害数值占位符，用于把暴击伤害从整行里拆出来单独着色。
+const battleReportDamageMarker = "\x01"
+
+// battleReportDamageColor 返回伤害数值的暴击配色，与浮动伤害数字保持一致。
+func battleReportDamageColor(critical objBullet.CriticalType) color.Color {
+	switch critical {
+	case objBullet.CriticalTypeThreeTimes:
+		return colorx.Yellow
+	case objBullet.CriticalTypeTenTimes:
+		return colorx.Red
+	default:
+		return battleReportValueClr
+	}
+}
+
+// appendBattleReportDamageSegments 把带伤害标记的文本拆成「普通 / 伤害」两种颜色。
+func appendBattleReportDamageSegments(
+	segments []battleReportEventSegment, text string, damageColor color.Color,
+) []battleReportEventSegment {
+	for idx, part := range strings.Split(text, battleReportDamageMarker) {
+		if part == "" {
+			continue
+		}
+		clr := color.Color(battleReportValueClr)
+		if idx%2 == 1 {
+			clr = damageColor
+		}
+		segments = append(segments, battleReportEventSegment{Text: part, Color: clr})
+	}
+	return segments
+}
+
 // battleReportEventSegments 把一条战况拆成「前缀 / 动作 / 后缀」，
 // 击沉和击落动作单独用红色，其他部分保持正常文字颜色。
 func battleReportEventSegments(entry state.BattleLogEntry) []battleReportEventSegment {
@@ -282,7 +314,9 @@ func battleReportEventSegments(entry state.BattleLogEntry) []battleReportEventSe
 	damagePhrase := ""
 	if entry.Hit.WeaponType != "" {
 		damagePhrase = i18n.Format(i18n.MsgBattleReportEventDamage, map[string]any{
-			"Damage": battleReportDamageText(entry.Hit.Damage),
+			"Damage": battleReportDamageMarker +
+				battleReportDamageText(entry.Hit.Damage) +
+				battleReportDamageMarker,
 		})
 	}
 	if entry.TotalDamage > entry.Hit.Damage+0.5 {
@@ -312,11 +346,11 @@ func battleReportEventSegments(entry state.BattleLogEntry) []battleReportEventSe
 		"Damage": damagePhrase,
 		"Suffix": suffix,
 	})
+	damageColor := battleReportDamageColor(entry.Hit.Critical)
 	prefix, rest, ok := strings.Cut(row, battleReportActionMarker)
 	if !ok || action == "" {
-		return []battleReportEventSegment{
-			{Text: strings.ReplaceAll(row, battleReportActionMarker, action), Color: battleReportValueClr},
-		}
+		row = strings.ReplaceAll(row, battleReportActionMarker, action)
+		return appendBattleReportDamageSegments(nil, row, damageColor)
 	}
 
 	actionColor := battleReportValueClr
@@ -324,14 +358,10 @@ func battleReportEventSegments(entry state.BattleLogEntry) []battleReportEventSe
 		entry.Action == state.BattleLogPlaneShotDown {
 		actionColor = battleReportKillClr
 	}
-	segments := make([]battleReportEventSegment, 0, 3)
-	if prefix != "" {
-		segments = append(segments, battleReportEventSegment{Text: prefix, Color: battleReportValueClr})
-	}
+	segments := make([]battleReportEventSegment, 0, 5)
+	segments = appendBattleReportDamageSegments(segments, prefix, damageColor)
 	segments = append(segments, battleReportEventSegment{Text: action, Color: actionColor})
-	if rest != "" {
-		segments = append(segments, battleReportEventSegment{Text: rest, Color: battleReportValueClr})
-	}
+	segments = appendBattleReportDamageSegments(segments, rest, damageColor)
 	return segments
 }
 

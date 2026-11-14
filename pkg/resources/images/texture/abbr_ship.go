@@ -92,7 +92,6 @@ var (
 	shipIconOnce   sync.Once
 	shipIcons      map[string]*ebiten.Image
 	enemyShipIcons map[string]*ebiten.Image
-	blueShipIcons  map[string]*ebiten.Image
 )
 
 // GetAbbrShip 按舰种缩写（typeAbbr）获取缩略图，敌我使用不同配色。
@@ -109,25 +108,13 @@ func GetAbbrShip(typeAbbr string, isEnemy bool) *ebiten.Image {
 	return icons["default"]
 }
 
-// GetAbbrShipBlue 获取蓝色舰种图标，供战报等需要区分敌方配色的界面使用。
-func GetAbbrShipBlue(typeAbbr string) *ebiten.Image {
-	buildShipIcons()
-
-	if img, ok := blueShipIcons[typeAbbr]; ok {
-		return img
-	}
-	return blueShipIcons["default"]
-}
-
 func buildShipIcons() {
 	shipIconOnce.Do(func() {
 		shipIcons = make(map[string]*ebiten.Image, len(shipIconSpecs))
 		enemyShipIcons = make(map[string]*ebiten.Image, len(shipIconSpecs))
-		blueShipIcons = make(map[string]*ebiten.Image, len(shipIconSpecs))
 		for abbr, spec := range shipIconSpecs {
 			shipIcons[abbr] = ebiten.NewImageFromImage(renderShipIcon(spec, colorx.Green))
 			enemyShipIcons[abbr] = ebiten.NewImageFromImage(renderShipIcon(spec, colorx.Red))
-			blueShipIcons[abbr] = ebiten.NewImageFromImage(renderShipIcon(spec, colorx.Blue))
 		}
 	})
 }

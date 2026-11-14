@@ -48,6 +48,7 @@ func bulletHitInfo(bt *objBullet.Bullet) objUnit.HitInfo {
 		WeaponType: string(bt.Type),
 		Diameter:   bt.Diameter,
 		Caliber:    bulletCaliber(bt.Name),
+		Critical:   bt.CriticalType,
 	}
 	if bt.Type == objBullet.TypeBomb {
 		info.Weight = bulletBombWeight(bt.Name)
@@ -341,28 +342,56 @@ func (m *MissionManager) setBattleReportScroll(kind, value int) {
 	}
 }
 
-// ScrollBattleReportByWheel 按当前战报页与鼠标位置分发滚轮：
-// 详情页滚战记，舰艇页滚对应一侧的舰级列表。
-func (m *MissionManager) ScrollBattleReportByWheel(dy float64, cursorX int) {
+// ScrollBattleReportByWheel 按当前战报页与鼠标位置分发滚轮。
+// 只有指针落在对应列表面板内才滚动，避免在页签 / 页脚上误滚。
+func (m *MissionManager) ScrollBattleReportByWheel(dy float64, cursorX, cursorY int) {
 	if m.state == nil || dy == 0 {
 		return
 	}
+	layout := m.BattleReportLayout(true)
 	switch m.state.UI.BattleReportPage {
 	case state.BattleReportPageEvents:
-		m.ScrollBattleReportEventsByWheel(dy)
-	case state.BattleReportPageShips:
-		layout := m.BattleReportLayout(true)
-		side := 0
-		if float64(cursorX) >= layout.DetailSides[1].X {
-			side = 1
+		if !layout.Content.Contains(cursorX, cursorY) {
+			m.reportWheelAccum = 0
+			return
 		}
-		m.scrollBattleReportShip(dy, side)
+		m.ScrollBattleReportEvents(m.consumeReportWheelRows(dy))
+	case state.BattleReportPageShips:
+		for side := range layout.DetailSides {
+			if !layout.DetailSides[side].Contains(cursorX, cursorY) {
+				continue
+			}
+			m.scrollBattleReportShip(m.consumeReportWheelRows(dy), side)
+			return
+		}
+		m.reportWheelAccum = 0
 	}
 }
 
+// consumeReportWheelRows 把滚轮增量换算成列表行数。
+// 触控板会按帧上报小数增量，直接取整再兜底 ±1 会让一次轻扫滚出去很远；
+// 这里先累加到 1 个标准刻度，再按每刻度固定行数换算。
+func (m *MissionManager) consumeReportWheelRows(dy float64) int {
+	if dy == 0 {
+		return 0
+	}
+	// 反向滚动先丢弃上一方向的残余，避免转方向后要先把旧累积抵消。
+	if (dy > 0) != (m.reportWheelAccum >= 0) {
+		m.reportWheelAccum = 0
+	}
+	m.reportWheelAccum += dy
+	units := int(m.reportWheelAccum)
+	if units == 0 {
+		return 0
+	}
+	m.reportWheelAccum -= float64(units)
+	rows := -units * reportWheelRowsPerUnit
+	return max(-reportWheelMaxRowsPerEvent, min(rows, reportWheelMaxRowsPerEvent))
+}
+
 // scrollBattleReportShip 滚动一侧舰级列表，并按该侧舰级数夹紧。
-func (m *MissionManager) scrollBattleReportShip(dy float64, side int) {
-	if side < 0 || side > 1 {
+func (m *MissionManager) scrollBattleReportShip(rows, side int) {
+	if side < 0 || side > 1 || rows == 0 {
 		return
 	}
 	player := m.state.Player.CurPlayer
@@ -371,38 +400,14 @@ func (m *MissionManager) scrollBattleReportShip(dy float64, side int) {
 	}
 	layout := m.BattleReportLayout(true)
 	visible := state.BattleReportDetailVisibleRows(layout.DetailSides[side].H, layout.Scale)
-	rows := m.state.Stats.Side(player).ShipClassCount()
-	maxScroll := max(0, rows-visible)
+	total := m.state.Stats.Side(player).ShipClassCount()
+	maxScroll := max(0, total-visible)
 	if maxScroll == 0 {
 		m.state.UI.BattleReportShipScroll[side] = 0
 		return
 	}
-	step := int(math.Round(-dy * 3))
-	if step == 0 {
-		if dy > 0 {
-			step = -1
-		} else {
-			step = 1
-		}
-	}
-	next := m.state.UI.BattleReportShipScroll[side] + step
+	next := m.state.UI.BattleReportShipScroll[side] + rows
 	m.state.UI.BattleReportShipScroll[side] = min(max(0, next), maxScroll)
-}
-
-// ScrollBattleReportEventsByWheel 只在战况页响应滚轮。
-func (m *MissionManager) ScrollBattleReportEventsByWheel(dy float64) {
-	if m.state == nil || m.state.UI.BattleReportPage != state.BattleReportPageEvents || dy == 0 {
-		return
-	}
-	step := int(math.Round(-dy * 3))
-	if step == 0 {
-		if dy > 0 {
-			step = -1
-		} else {
-			step = 1
-		}
-	}
-	m.ScrollBattleReportEvents(step)
 }
 
 // ClearBattleStats 关闭结算后清空本局战果与详细战况，释放内存。
