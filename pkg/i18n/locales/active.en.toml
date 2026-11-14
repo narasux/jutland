@@ -358,6 +358,10 @@ other = "Size"
 other = "Tonnage"
 [CollectionSpeed]
 other = "Speed"
+[CollectionSpeedSurface]
+other = "Surface"
+[CollectionSpeedSubmerged]
+other = "Submerged"
 [CollectionCost]
 other = "Cost"
 [CollectionHorizontalDR]

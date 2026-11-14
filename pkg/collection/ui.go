@@ -1788,7 +1788,7 @@ func shipCollectionCostValue(ship *objUnit.BattleShip) string {
 
 func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []objRef.InfoItem {
 	// reference 只保留精细舰种名称，其余档案数据全部来自 ships.json5 初始化后的舰船对象。
-	return []objRef.InfoItem{
+	items := []objRef.InfoItem{
 		{Label: i18n.Text(i18n.MsgCollectionNationLabel), Value: ship.Nation.ToDisplay()},
 		{Label: i18n.Text(i18n.MsgCollectionTypeLabel), Value: shipTypeDisplayValue(ship, ref)},
 		{
@@ -1803,25 +1803,40 @@ func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []obj
 			}),
 		},
 		{Label: i18n.Text(i18n.MsgCollectionTonnage), Value: fmt.Sprintf("%.0f", ship.Tonnage)},
-		{
-			Label: i18n.Text(i18n.MsgCollectionSpeed),
-			Value: i18n.Format(
-				i18n.MsgValueKnots,
-				map[string]any{"Value": formatShipArchiveNumber(ship.MaxSpeed * objUnit.ShipSpeedScale)},
-			),
-		},
-		{
-			Label: i18n.Text(i18n.MsgCollectionCost),
-			Value: shipCollectionCostValue(ship),
-		},
-		{
+	}
+	// 潜艇水下航速可能高于水面（如 XXI 型），只给一档“速度”会误导，必须分开展示。
+	items = append(items, shipArchiveSpeedItems(ship)...)
+	return append(items,
+		objRef.InfoItem{Label: i18n.Text(i18n.MsgCollectionCost), Value: shipCollectionCostValue(ship)},
+		objRef.InfoItem{
 			Label: i18n.Text(i18n.MsgCollectionHorizontalDR),
 			Value: formatShipArchiveNumber(ship.HorizontalDamageReduction*100) + "%",
 		},
-		{
+		objRef.InfoItem{
 			Label: i18n.Text(i18n.MsgCollectionVerticalDR),
 			Value: formatShipArchiveNumber(ship.VerticalDamageReduction*100) + "%",
 		},
+	)
+}
+
+// shipArchiveSpeedItems 返回图鉴中的航速行。
+// 水面舰艇只有一档航速；潜艇同时给出水面与水下两档，避免水下更快时被误读。
+func shipArchiveSpeedItems(ship *objUnit.BattleShip) []objRef.InfoItem {
+	knotsItem := func(label i18n.MessageID, knots float64) objRef.InfoItem {
+		return objRef.InfoItem{
+			Label: i18n.Text(label),
+			Value: i18n.Format(
+				i18n.MsgValueKnots,
+				map[string]any{"Value": formatShipArchiveNumber(knots)},
+			),
+		}
+	}
+	if ship.Type != objUnit.ShipTypeSubmarine {
+		return []objRef.InfoItem{knotsItem(i18n.MsgCollectionSpeed, ship.MaxSpeedKnots())}
+	}
+	return []objRef.InfoItem{
+		knotsItem(i18n.MsgCollectionSpeedSurface, ship.MaxSpeedKnots()),
+		knotsItem(i18n.MsgCollectionSpeedSubmerged, ship.SubmergedMaxSpeedKnots()),
 	}
 }
 
@@ -1944,9 +1959,12 @@ func (c *CollectionUI) drawCompactInfoItems(
 	maxRows := max(1, int((card.Y+card.H-startY-10*scale)/lineHeight))
 	for idx, item := range items {
 		if idx >= maxRows {
-			if idx < len(items) {
+			// 省略号画在最后一条完整内容之后，不能覆盖它（否则会白白少显示一行）；
+			// 极矮窗口连省略号都放不下时直接省略。
+			ellipsisY := startY + float64(maxRows)*lineHeight
+			if ellipsisY+fontSize <= card.Y+card.H {
 				c.drawer.drawText(
-					screen, "…", card.X+20*scale, startY+float64(idx-1)*lineHeight,
+					screen, "…", card.X+20*scale, ellipsisY,
 					fontSize, font.LocalizedUI(font.Kai), colorx.White,
 				)
 			}
