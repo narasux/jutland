@@ -16056,6 +16056,365 @@
     }
   },
   // --------- 潜艇 ----------
+  // 巴伯
+  {
+    name: "uss_barb",
+    nation: "us",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1945,
+    totalHP: 1525,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 21,
+    acceleration: 0.55,
+    rotateSpeed: 1.15,
+    length: 95,
+    width: 8.3,
+    sightRange: 12,
+    diveTime: 9,
+    surfaceTime: 8,
+    submergedSpeedRatio: 0.43,
+    defaultDiveState: "submerged",
+    fundsCost: 58,
+    timeCost: 22,
+    weapon: {
+      mainGuns: [
+        // 后甲板 5 英寸炮
+        {
+          name: "US/127/25/MK10",
+          posPercent: -0.04,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥前 40mm 博福斯
+        {
+          name: "US/40/56",
+          posPercent: 0.3,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥 20mm 厄利孔 A
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥 20mm 厄利孔 B
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.76,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.76,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 5（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.72,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 6（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.72,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 7（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.82,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 8（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.82,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 9（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.86,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 10（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.86,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
+  // 海狮
+  {
+    name: "uss_sealion",
+    nation: "us",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1941,
+    totalHP: 1450,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 21,
+    acceleration: 0.55,
+    rotateSpeed: 1.15,
+    length: 94.6,
+    width: 8.2,
+    sightRange: 12,
+    diveTime: 11,
+    surfaceTime: 9,
+    submergedSpeedRatio: 0.42,
+    defaultDiveState: "submerged",
+    fundsCost: 56,
+    timeCost: 22,
+    weapon: {
+      mainGuns: [
+        // 后甲板 3 英寸炮
+        {
+          name: "US/76/50/MK22",
+          posPercent: -0.18,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥前 12.7mm 机枪 A
+        {
+          name: "US/12.7/M2",
+          posPercent: 0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥前 12.7mm 机枪 B
+        {
+          name: "US/12.7/M2",
+          posPercent: 0.33,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后 12.7mm 机枪 C
+        {
+          name: "US/12.7/M2",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后 12.7mm 机枪 D
+        {
+          name: "US/12.7/M2",
+          posPercent: 0.06,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.74,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.74,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.82,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 6（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.82,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 7（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.86,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 8（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.86,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
+  // 大海鲢
+  {
+    name: "uss_tarpon",
+    nation: "us",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1942,
+    totalHP: 1316,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 19.5,
+    acceleration: 0.5,
+    rotateSpeed: 1.1,
+    length: 90.8,
+    width: 7.6,
+    sightRange: 12,
+    diveTime: 12,
+    surfaceTime: 10,
+    submergedSpeedRatio: 0.42,
+    defaultDiveState: "submerged",
+    fundsCost: 55,
+    timeCost: 21,
+    weapon: {
+      mainGuns: [
+        // 后甲板 4 英寸炮
+        {
+          name: "US/102/50/MK9",
+          posPercent: -0.29,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥 7.62mm 机枪 A
+        {
+          name: "US/7.62/M2",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥 7.62mm 机枪 B
+        {
+          name: "US/7.62/M2",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.76,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.76,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.72,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.72,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 5（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.68,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 6（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: 0.68,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 7（左）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.84,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 8（右）
+        {
+          name: "US/533/1/Submerged",
+          posPercent: -0.84,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
   // 鹦鹉螺
   {
     name: "uss_nautilus",
