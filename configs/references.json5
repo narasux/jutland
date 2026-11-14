@@ -9792,6 +9792,20 @@
     ],
   },
   {
+    name: "JP/140/40/Type11",
+    displayName: "十一年式 14cm/40 潜艇甲板炮",
+    type: "武器",
+    armaments: [],
+    description: "日本海军 40 倍径十一年式 14cm 舰炮，作为大型潜艇的甲板炮使用，装备伊四百型与 C3 型。与三年式共用 14cm 炮弹，但初速与射程略低。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 伊四百型潛艦",
+        url: "https://zh.wikipedia.org/wiki/%E4%BC%8A%E5%9B%9B%E7%99%BE%E5%9E%8B%E6%BD%9B%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "JP/152/50/2/Type41",
     displayName: "四一式 15.2cm 双联装舰炮",
     type: "武器",
@@ -15263,6 +15277,68 @@
       {
         name: "维基百科 - 加富尔伯爵级战列舰",
         url: "https://zh.wikipedia.org/wiki/%E5%8A%A0%E5%AF%8C%E5%B0%94%E4%BC%AF%E7%88%B5%E7%BA%A7%E6%88%98%E5%88%97%E8%88%B0",
+      },
+    ],
+  },
+  {
+    name: "i_400",
+    displayName: "伊-400",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x1 140mm/40 十一年式",
+      },
+      {
+        label: "高炮",
+        value: "3x3 + 1x1 25mm 九六式",
+      },
+      {
+        label: "鱼雷",
+        value: "8x1 533mm（艏）",
+      },
+    ],
+    description: "伊-400 是伊四百型的一号艇，1944 年底竣工，是当时世界上最大的潜艇，为搭载水上攻击机奇袭巴拿马运河而设计，舰体前部设有圆柱形机库与弹射器，可携带三架晴岚。终战前仅完成两次出击准备；日本投降后该艇在夏威夷近海被美军接收，1946 年作为靶标自沉。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - I-400 潜水航母（Nano Banana 重绘）",
+        url: "https://www.pinterest.com/pin/365565694738124984/",
+      },
+      {
+        name: "维基百科 - 伊号第四百潜舰",
+        url: "https://zh.wikipedia.org/wiki/%E4%BC%8A%E8%99%9F%E7%AC%AC%E5%9B%9B%E7%99%BE%E6%BD%9B%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "i_52",
+    displayName: "伊-52",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x1 140mm/40 十一年式",
+      },
+      {
+        label: "高炮",
+        value: "2x1 25mm 九六式",
+      },
+      {
+        label: "鱼雷",
+        value: "6x1 533mm（艏 4、艉 2）",
+      },
+    ],
+    description: "伊-52 属 C3 型巡视潜艇，1943 年服役，为执行日德之间的物资运输任务加装了雷达与通气管。1944 年 6 月赴法国途中在大西洋中部被美军护航航母的舰载机发现并击沉，是少数在远洋被航空反潜击沉的日本潜艇。",
+    author: "Zustt",
+    links: [
+      {
+        name: "Shipbucket - IJN Submarine I-52",
+        url: "https://www.shipbucket.com/drawings/10890",
+      },
+      {
+        name: "维基百科 - Japanese submarine I-52",
+        url: "https://en.wikipedia.org/wiki/Japanese_submarine_I-52_(1942)",
       },
     ],
   },

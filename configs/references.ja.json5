@@ -5445,6 +5445,20 @@
     ],
   },
   {
+    name: "JP/140/40/Type11",
+    displayName: "十一年式 140mm/40 潜水艦甲板砲",
+    type: "兵器",
+    armaments: [],
+    description: "日本海軍の四〇口径十一年式十四糎砲。伊四百型やC3型などの大型潜水艦の甲板砲として搭載された。三年式と同じ十四糎砲弾を用いるが、初速と射程はやや小さい。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 伊四百型潜水艦",
+        url: "https://ja.wikipedia.org/wiki/%E4%BC%8A%E5%9B%9B%E7%99%BE%E5%9E%8B%E6%BD%9C%E6%B0%B4%E8%89%A6",
+      },
+    ],
+  },
+  {
     name: "JP/152/50/2/Type41",
     displayName: "四一式 152mm 連装砲",
     type: "兵器",
@@ -15289,6 +15303,68 @@
       {
         name: "ウィキペディア - コンテ・ディ・カヴール級戦艦",
         url: "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%BB%E3%83%87%E3%82%A3%E3%83%BB%E3%82%AB%E3%83%B4%E3%82%A9%E3%82%A6%E3%83%AB%E7%B4%9A%E6%88%A6%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "i_400",
+    displayName: "伊400",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x1 140mm/40 十一年式",
+      },
+      {
+        label: "対空砲",
+        value: "3x3 + 1x1 25mm 九六式",
+      },
+      {
+        label: "魚雷",
+        value: "8x1 533mm（艦首）",
+      },
+    ],
+    description: "伊400は伊四百型潜水艦の一番艦で、1944年末に竣工した当時世界最大の潜水艦である。パナマ運河を奇襲する水上攻撃機の母艦として計画され、艦首部に円筒形の格納筒とカタパルトを備えて晴嵐を三機搭載した。終戦までに二度の出撃準備が行われたのみで、日本降伏後はハワイ沖でアメリカ海軍に接収され、1946年に標的として処分された。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 伊400 潜水空母（Nano Banana による再作画）",
+        url: "https://www.pinterest.com/pin/365565694738124984/",
+      },
+      {
+        name: "ウィキペディア - 伊四百型潜水艦",
+        url: "https://ja.wikipedia.org/wiki/%E4%BC%8A%E5%9B%9B%E7%99%BE%E5%9E%8B%E6%BD%9C%E6%B0%B4%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "i_52",
+    displayName: "伊52",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x1 140mm/40 十一年式",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 25mm 九六式",
+      },
+      {
+        label: "魚雷",
+        value: "6x1 533mm（艦首 4、艦尾 2）",
+      },
+    ],
+    description: "伊52はC3型（丙型改）巡潜潜水艦で、1943年に就役した。日独間の輸送任務のためレーダーとシュノーケルを装備し、1944年6月にフランスへ向かう途中、大西洋中央部でアメリカの護衛空母の艦載機に発見され撃沈された。外洋で航空対潜攻撃により失われた数少ない日本の潜水艦である。",
+    author: "Zustt",
+    links: [
+      {
+        name: "Shipbucket - IJN Submarine I-52",
+        url: "https://www.shipbucket.com/drawings/10890",
+      },
+      {
+        name: "ウィキペディア - 伊号第五十二潜水艦",
+        url: "https://ja.wikipedia.org/wiki/%E4%BC%8A%E5%8F%B7%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E6%BD%9C%E6%B0%B4%E8%89%A6",
       },
     ],
   },

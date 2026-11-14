@@ -33865,6 +33865,223 @@
     }
   },
   // --------- 潜艇 ----------
+  // 伊-400
+  // TODO: 晴岚（M6A1）水上攻击机尚未编入——本作暂无水上机体系，先按无舰载机配置。
+  {
+    name: "i_400",
+    nation: "jp",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1944,
+    totalHP: 5223,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 18.7,
+    acceleration: 0.6,
+    rotateSpeed: 1.2,
+    length: 122,
+    width: 12,
+    sightRange: 12,
+    diveTime: 10,
+    surfaceTime: 10,
+    submergedSpeedRatio: 0.35,
+    defaultDiveState: "submerged",
+    fundsCost: 120,
+    timeCost: 30,
+    weapon: {
+      mainGuns: [
+        // 甲板炮（指挥塔后）
+        {
+          name: "JP/140/40/Type11",
+          posPercent: -0.05,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 前部平台 25mm 三联装 A
+        {
+          name: "JP/25/60/3/Type96",
+          posPercent: 0.26,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 舰桥前 25mm 三联装 B
+        {
+          name: "JP/25/60/3/Type96",
+          posPercent: 0.13,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥 25mm 单装 C
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0.05,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 后部甲板室 25mm 三联装 D
+        {
+          name: "JP/25/60/3/Type96",
+          posPercent: -0.25,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.92,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.92,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.9,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.9,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 5（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.88,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 6（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.88,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 7（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 8（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        }
+      ]
+    }
+  },
+  // 伊-52
+  {
+    name: "i_52",
+    nation: "jp",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1943,
+    totalHP: 2554,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 17.7,
+    acceleration: 0.62,
+    rotateSpeed: 1.3,
+    length: 108.65,
+    width: 9.1,
+    sightRange: 12,
+    diveTime: 9,
+    surfaceTime: 9,
+    submergedSpeedRatio: 0.37,
+    defaultDiveState: "submerged",
+    fundsCost: 60,
+    timeCost: 23,
+    weapon: {
+      mainGuns: [
+        // 甲板炮（指挥塔前）
+        {
+          name: "JP/140/40/Type11",
+          posPercent: 0.21,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥 25mm 单装 A
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 后甲板 25mm 单装 B
+        {
+          name: "JP/25/60/Type96",
+          posPercent: -0.33,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.9,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.9,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5（左）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: -0.89,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 6（右）
+        {
+          name: "JP/533/1/Type6",
+          posPercent: -0.89,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
   // 伊-168
   {
     name: "i_168",
