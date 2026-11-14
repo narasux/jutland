@@ -715,10 +715,6 @@ func (m *MissionManager) updateShotBullets() {
 				) {
 					return false
 				}
-				// P3 先保证水下免疫普通弹药；反潜鱼雷 / 深弹在 P4 单独放行。
-				if ship.Submerged() {
-					return false
-				}
 				m.hurtShip(ship, bt)
 				bt.HitObjType = object.TypeShip
 				return true
