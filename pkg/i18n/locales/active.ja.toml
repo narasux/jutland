@@ -105,9 +105,9 @@ other = "敵機撃墜 {{.Count}}"
 [BattleReportWithShip]
 other = "航空機損失には随艦沈没 {{.Count}} を含む"
 [BattleReportBack]
-other = "ミッション選択へ"
+other = "メインメニューへ"
 [BattleReportRetry]
-other = "再挑戦"
+other = "もう一度"
 [BattleReportLiveHint]
 other = "[Tab] 一時停止へ  [Esc] 再開"
 [BattleReportNoLoss]
@@ -148,6 +148,8 @@ other = "損失"
 other = "随艦損失"
 [BattleReportEventRow]
 other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportEventLossRow]
+other = "{{.Time}}  {{.Side}}の{{.Target}}を{{.Action}}{{.Suffix}}"
 [BattleReportWithShipRow]
 other = "{{.Time}}  {{.Actor}} 随艦損失 航空機 {{.Count}} 機"
 [BattleReportWeaponUnknown]
@@ -192,8 +194,6 @@ other = "敵航空機"
 other = "現役トン数"
 [BattleReportTotal]
 other = "合計"
-[BattleReportPageHint]
-other = "タブをクリックして切り替え"
 [BattleReportShipClass]
 other = "艦級"
 [BattleReportPlaneType]

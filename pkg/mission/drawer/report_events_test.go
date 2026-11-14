@@ -6,6 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/narasux/jutland/pkg/mission/faction"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -37,7 +38,7 @@ func TestBattleReportEventSegmentsColorsCriticalDamage(t *testing.T) {
 					Critical:   tc.critical,
 				},
 			}
-			segments := battleReportEventSegments(entry)
+			segments := battleReportEventSegments(entry, faction.HumanAlpha)
 			require.NotContains(t, battleReportSegmentsText(segments), battleReportDamageMarker)
 
 			found := false
@@ -51,4 +52,25 @@ func TestBattleReportEventSegmentsColorsCriticalDamage(t *testing.T) {
 			require.True(t, found, "伤害数字应出现在某一段里")
 		})
 	}
+}
+
+// 非战斗损失行要写清是哪一方的飞机，而不是只留一个「—」。
+func TestBattleReportPlaneLossRowShowsSide(t *testing.T) {
+	entry := state.BattleLogEntry{
+		Tick:          60,
+		TargetPlayer:  faction.HumanAlpha,
+		TargetName:    "F4F-3",
+		TargetType:    "fighter",
+		TargetIsPlane: true,
+		Action:        state.BattleLogPlaneLost,
+		Count:         1,
+	}
+	own := battleReportEventSegments(entry, faction.HumanAlpha)
+	ownText := battleReportSegmentsText(own)
+	require.Contains(t, ownText, "我方")
+	require.NotContains(t, ownText, "—")
+
+	entry.TargetPlayer = faction.ComputerAlpha
+	enemyText := battleReportSegmentsText(battleReportEventSegments(entry, faction.HumanAlpha))
+	require.Contains(t, enemyText, "敌方")
 }

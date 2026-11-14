@@ -105,7 +105,7 @@ other = "Сбито врагов: {{.Count}}"
 [BattleReportWithShip]
 other = "В т.ч. на потопленных кораблях {{.Count}}"
 [BattleReportBack]
-other = "К выбору миссий"
+other = "В главное меню"
 [BattleReportRetry]
 other = "Повторить"
 [BattleReportLiveHint]
@@ -148,6 +148,8 @@ other = "потерян"
 other = "потерял"
 [BattleReportEventRow]
 other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportEventLossRow]
+other = "{{.Time}}  {{.Target}} {{.Action}} ({{.Side}}){{.Suffix}}"
 [BattleReportWithShipRow]
 other = "{{.Time}}  {{.Actor}}: потеряно самолётов с кораблём — {{.Count}}"
 [BattleReportWeaponUnknown]
@@ -192,8 +194,6 @@ other = "Самолёты противника"
 other = "Тоннаж в строю"
 [BattleReportTotal]
 other = "Итого"
-[BattleReportPageHint]
-other = "Нажмите на вкладку для переключения"
 [BattleReportShipClass]
 other = "Класс"
 [BattleReportPlaneType]

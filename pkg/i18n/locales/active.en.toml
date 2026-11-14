@@ -105,9 +105,9 @@ other = "{{.Count}} enemy downed"
 [BattleReportWithShip]
 other = "{{.Count}} aircraft lost with ship"
 [BattleReportBack]
-other = "Back to missions"
+other = "Back to main menu"
 [BattleReportRetry]
-other = "Retry"
+other = "Restart"
 [BattleReportLiveHint]
 other = "[Tab] Back  [Esc] Resume"
 [BattleReportNoLoss]
@@ -148,6 +148,8 @@ other = "was lost"
 other = "lost with ship"
 [BattleReportEventRow]
 other = "{{.Time}}  {{.Actor}}{{.Weapon}} {{.Action}} {{.Target}}{{.Damage}}{{.Suffix}}"
+[BattleReportEventLossRow]
+other = "{{.Time}}  {{.Target}} {{.Action}} ({{.Side}}){{.Suffix}}"
 [BattleReportWithShipRow]
 other = "{{.Time}}  {{.Actor}}: {{.Count}} aircraft lost with ship"
 [BattleReportWeaponUnknown]
@@ -192,8 +194,6 @@ other = "Enemy Aircraft"
 other = "Active Tonnage"
 [BattleReportTotal]
 other = "Total"
-[BattleReportPageHint]
-other = "Click a tab to switch pages"
 [BattleReportShipClass]
 other = "Ship class"
 [BattleReportPlaneType]

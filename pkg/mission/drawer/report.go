@@ -510,7 +510,7 @@ func (d *Drawer) drawBattleReportSidePanel(
 	)
 }
 
-// drawBattleReportFooter 绘制交换比、保存率与翻页提示。
+// drawBattleReportFooter 绘制交换比与保存率。
 func (d *Drawer) drawBattleReportFooter(
 	screen *ebiten.Image,
 	report state.BattleReportLayout,
@@ -535,25 +535,11 @@ func (d *Drawer) drawBattleReportFooter(
 	survival := i18n.Format(i18n.MsgBattleReportSurvival, map[string]any{"Rate": rateText})
 	footer := exchange + "   ·   " + survival
 
-	pageHint := i18n.Text(i18n.MsgBattleReportPageHint)
-	pageHintSize := fitReportFontSize(pageHint, report.Footer.W*0.35, 15*scale, bodyFont)
-	pageHintWidth := layoutUtils.CalcTextWidth(pageHint, pageHintSize, font.ForText(pageHint, bodyFont))
-	pageHintRect := state.BattleReportRect{
-		X: report.Footer.X + report.Footer.W - pageHintWidth,
-		Y: report.Footer.Y,
-		W: pageHintWidth,
-		H: report.Footer.H,
-	}
-	d.drawReportText(
-		screen, pageHint, pageHintRect, pageHintSize,
-		bodyFont, battleReportSubtitleClr, reportAlignRight,
-	)
-
-	metricsWidth := report.Footer.W - pageHintWidth - 20*scale
+	// 交换比与保存率是次要信息：字号比正文小一档，颜色降到副标题级，避免抢视线。
 	d.drawReportText(
 		screen, footer, report.Footer,
-		fitReportFontSize(footer, metricsWidth, 20*scale, bodyFont),
-		bodyFont, battleReportTitleClr, reportAlignLeft,
+		fitReportFontSize(footer, report.Footer.W, 16*scale, bodyFont),
+		bodyFont, battleReportSubtitleClr, reportAlignLeft,
 	)
 }
 
