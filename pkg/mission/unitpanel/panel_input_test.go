@@ -104,3 +104,30 @@ func TestSubmarineDiveButtonProducesToggleAction(t *testing.T) {
 		t.Fatalf("action ships = %+v", actions[0].ShipUids)
 	}
 }
+
+// 下潜/上浮过渡中按钮仍然可点：以最后一次指令为准，随时反向。
+func TestSubmarineDiveButtonWorksDuringTransition(t *testing.T) {
+	missionState := panelInteractionState()
+	sub := &objUnit.BattleShip{
+		Uid: "sub", CurHP: 1, TotalHP: 1, Type: objUnit.ShipTypeSubmarine,
+		DiveState: objUnit.DiveStateDiving,
+	}
+	missionState.Arena.Ships = map[string]*objUnit.BattleShip{sub.Uid: sub}
+	missionState.Interaction.SelectedShips = []string{sub.Uid}
+	missionState.Interaction.FocusedShipUid = sub.Uid
+	panel := New()
+	panel.updateWithPointer(missionState, testRegion, 0, pointerInput{})
+
+	button := panel.computeDiveRect(missionState, sub)
+	if button.W == 0 {
+		t.Fatal("dive button should stay available while diving")
+	}
+	actions := panel.updateWithPointer(missionState, testRegion, 0, pointerInput{
+		X:           int(button.X + button.W/2),
+		Y:           int(button.Y + button.H/2),
+		JustPressed: true,
+	})
+	if len(actions) != 1 || actions[0].Kind != ActionToggleDive {
+		t.Fatalf("actions = %+v", actions)
+	}
+}

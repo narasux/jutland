@@ -1,11 +1,13 @@
 package unit
 
 import (
+	"math"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/i18n"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
@@ -27,10 +29,12 @@ func TestSubmarineDiveCycle(t *testing.T) {
 	require.Equal(t, DiveStateDiving, ship.DiveState)
 	require.True(t, ship.DiveTransitioning())
 	require.InDelta(t, diveTransitionSpeedRatio, ship.DiveSpeedRatio(), 1e-9)
-	// 过渡中不允许再次切换，避免计时器被重置
-	_, canToggle := ship.NextDiveState()
-	require.False(t, canToggle)
+	// 重复下潜不会重启计时，但随时可以反向（以最后一次指令为准）
 	require.False(t, ship.StartDive())
+	next, canToggle := ship.NextDiveState()
+	require.True(t, canToggle)
+	require.Equal(t, DiveStateSurface, next)
+	require.Equal(t, i18n.Text(i18n.MsgShipSurfaceAction), ship.DiveActionText())
 
 	for i := 0; i < 200 && ship.DiveState == DiveStateDiving; i++ {
 		ship.AdvanceDive()
@@ -47,6 +51,58 @@ func TestSubmarineDiveCycle(t *testing.T) {
 	}
 	require.Equal(t, DiveStateSurface, ship.DiveState)
 	require.InDelta(t, 1.0, ship.DiveSpeedRatio(), 1e-9)
+}
+
+// 过渡中反向切换：状态立即翻转，深度进度连续，剩余时间按同一速度折算。
+func TestSubmarineReversesMidTransition(t *testing.T) {
+	ship := &BattleShip{
+		Type:        ShipTypeSubmarine,
+		CurHP:       100,
+		DiveTime:    1,
+		SurfaceTime: 1,
+	}
+	require.True(t, ship.StartDive())
+	total := ship.diveTotalTicks
+
+	for i := int64(0); i < total/2; i++ {
+		ship.AdvanceDive()
+	}
+	progress := ship.DiveProgress()
+	require.InDelta(t, 0.5, progress, 1.0/float64(total))
+
+	// 下潜中按下上浮：立刻反向，深度进度不跳变
+	require.True(t, ship.StartSurface())
+	require.Equal(t, DiveStateSurfacing, ship.DiveState)
+	require.InDelta(t, progress, ship.DiveProgress(), 1.0/float64(total))
+	// 剩余时间按完整上浮耗时折算，切换速度不变
+	expectTicks := max(1, int64(math.Round(float64(ReloadTicks(ship.surfaceTimeSeconds()))*progress)))
+	require.Equal(t, expectTicks, ship.diveTicksLeft)
+
+	for i := int64(0); i < total; i++ {
+		ship.AdvanceDive()
+	}
+	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.Zero(t, ship.DiveProgress())
+
+	// 上浮中再按下潜：同样反向，并回到水下
+	require.True(t, ship.StartDive())
+	for i := int64(0); i < total; i++ {
+		ship.AdvanceDive()
+	}
+	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+
+	require.True(t, ship.StartSurface())
+	for i := int64(0); i < total/2; i++ {
+		ship.AdvanceDive()
+	}
+	require.True(t, ship.StartDive())
+	require.Equal(t, DiveStateDiving, ship.DiveState)
+	require.InDelta(t, 0.5, ship.DiveProgress(), 1.0/float64(total))
+	for i := int64(0); i < total; i++ {
+		ship.AdvanceDive()
+	}
+	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.InDelta(t, 1.0, ship.DiveProgress(), 1e-9)
 }
 
 func TestOnlySubmarinesCanChangeDiveState(t *testing.T) {

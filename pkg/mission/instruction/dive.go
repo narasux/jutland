@@ -85,8 +85,8 @@ func (i *ShipSurface) String() string {
 	return fmt.Sprintf("Surface ship %s", i.shipUid)
 }
 
-// NewDiveToggle 按潜艇当前深度生成下潜/上浮指令。
-// 非潜艇、过渡中或已沉没时返回 nil，避免无效指令与计时器抖动。
+// NewDiveToggle 按潜艇当前深度（含过渡态）生成下潜/上浮指令，
+// 过渡中按“最后一次指令为准”反向切换。非潜艇、已沉没时返回 nil。
 func NewDiveToggle(ship *objUnit.BattleShip) Instruction {
 	if ship == nil || ship.CurHP <= 0 {
 		return nil
