@@ -925,11 +925,11 @@
         label: "Light AA Guns",
         value: "2x4 + 10x1 20mm/65 Flak 30/C/38",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "4× Ar196",
-      },],
+      },
+    ],
     description: "Bismarck was the lead ship of Germany's largest class of battleships. On her first operation in May 1941, she sank the battlecruiser HMS Hood in the Denmark Strait. British aircraft damaged her steering, allowing pursuing battleships and cruisers to close and sink her after a sustained engagement on 27 May.",
     author: "Maomatic",
     links: [
@@ -1081,7 +1081,7 @@
       }
     ]
   },
-    {
+  {
     "name": "E13A",
     "displayName": "Jake",
     "type": "Reconnaissance Floatplane",
@@ -1233,11 +1233,11 @@
         label: "Anti-aircraft Guns",
         value: "16x2 20mm/70 Oerlikon",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "3× Walrus",
-      },],
+      },
+    ],
     description: "Cheshire represents an artistic interpretation of a late British wartime heavy-cruiser study associated with the cancelled Admiral concepts. Its aviation facilities, fire-control equipment, and large-caliber cruiser battery illustrate attempts to modernize reconnaissance and gunnery arrangements. The ship was not constructed and should be treated as a design reconstruction.",
     author: "Tzoli",
     links: [
@@ -2342,11 +2342,11 @@
         label: "Bombs (Level)",
         value: "2000 lb x2 + 1000 lb x2 (about 2.7 t)",
       },
-          {
+      {
         label: "Anti-submarine Bombs",
         value: "2x 300 lb Mk 6 depth charges",
       },
-],
+    ],
     description: "The Consolidated B-24D Liberator was a US four-engined heavy bomber entering service in 1942, with greater range and bombload than the B-17; the aircraft shown is B-24D \"Lady Be Good\" of the 514th Bomb Squadron, 376th Bomb Group. Treated as a level bomber in game, it carries ten 12.7mm Browning M2s (nose turret 2, dorsal 2, ball 2, waist 2, tail 2) and four level-dropped bombs (2000 lb x2 + 1000 lb x2, about 2.7 t) plus two depth charges.",
     author: "Unknown",
     links: [
@@ -3462,11 +3462,11 @@
         label: "Torpedoes",
         value: "2x4 533mm",
       },
-          {
+      {
         label: "Depth Charges",
         value: "1x5 Mk 6 depth charge rails",
       },
-],
+    ],
     description: "USS Hammann (DD-412) was a Sims-class destroyer that screened carriers at the Battle of the Coral Sea. At Midway she came alongside the damaged USS Yorktown to provide pumps, power, and damage-control support. Torpedoes from the Japanese submarine I-168 struck both ships, breaking Hammann in two and sinking her rapidly.",
     author: "Midnike",
     links: [
@@ -5857,11 +5857,11 @@
         label: "Torpedoes",
         value: "2x3 533mm",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "3× Walrus",
-      },],
+      },
+    ],
     description: "K-25 was one of several British cruiser studies explored during development of the Crown Colony class in the mid-1930s. The proposal examined fitting twin 5.25-inch dual-purpose turrets to a protected cruiser hull of roughly 8,000 tons. It remained a design study and was not selected for construction.",
     author: "Tzoli",
     links: [
@@ -6387,11 +6387,11 @@
         label: "Torpedoes",
         value: "4x3 533mm",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "2× Ar196",
-      },],
+      },
+    ],
     description: "Leipzig was the lead ship of a small class of German light cruisers completed between the world wars. She performed training, minelaying, and escort duties, and was severely damaged in a 1944 collision with Prinz Eugen. Loaded with chemical munitions after the war, Leipzig was scuttled in the North Sea in 1946.",
     author: "Unknown",
     links: [
@@ -6548,11 +6548,11 @@
         label: "Anti-aircraft Guns",
         value: "6x2 20mm/70 Oerlikon",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "4× Walrus",
-      },],
+      },
+    ],
     description: "Lioness is a fictional derivative of Britain's Lion-class battleship studies. The design trades gun caliber for a larger number of 14-inch weapons, seeking high volume of fire while retaining heavy protection and roughly 30-knot speed. It is an artistic design study rather than an approved Royal Navy construction project.",
     author: "TZoli",
     links: [
@@ -6688,11 +6688,11 @@
         label: "Torpedoes",
         value: "2x4 533mm",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "2× Ar196",
-      },],
+      },
+    ],
     description: "Admiral Graf Spee was the third Deutschland-class Panzerschiff, commissioned in 1936 and the only ship of the class fitted with a spherical rangefinder on her tower bridge. Her six 28 cm guns, high speed and very long cruising range were intended for commerce warfare. After her 1939 refit she sailed for the South Atlantic, sank several merchantmen, and was scuttled after the Battle of the River Plate in December 1939.",
     author: "Maomatic",
     links: [
@@ -7557,11 +7557,11 @@
         label: "Torpedoes",
         value: "2x4 533mm",
       },
-          {
+      {
         label: "Depth Charges",
         value: "1x5 Mk 6 depth charge rails",
       },
-],
+    ],
     description: "USS Porter (DD-356) led a class of large destroyer leaders designed to serve as squadron flagships with heavier guns and communications facilities. She fought in the Pacific during 1942. After being disabled during the Battle of the Santa Cruz Islands, Porter was abandoned and sunk by USS Shaw.",
     author: "Midnike",
     links: [
@@ -7674,11 +7674,11 @@
         label: "Torpedoes",
         value: "4x3 533mm",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "3× Ar196",
-      },],
+      },
+    ],
     description: "Prinz Eugen was the third Admiral Hipper-class heavy cruiser. She accompanied Bismarck during the Battle of the Denmark Strait and later operated in Norwegian and Baltic waters. Surrendered to the United States after the war, she survived two Operation Crossroads nuclear tests before capsizing at Kwajalein Atoll.",
     author: "Antonio Bonomi",
     links: [
@@ -7947,11 +7947,11 @@
         label: "Torpedoes",
         value: "1x4 533mm",
       },
-          {
+      {
         label: "Depth Charges",
         value: "1x5 Mk VII depth charge rails",
       },
-],
+    ],
     description: "HMS Gurkha was a Tribal-class destroyer commissioned in 1937. Armed with four twin 4.7-inch gun mounts, she was one of the most powerfully-armed destroyers of the early war period. She was sunk by German aircraft during the Norwegian campaign in April 1940.",
     author: "Niemczyk Piotr",
     links: [
@@ -7978,11 +7978,11 @@
         label: "Torpedoes",
         value: "2x5 533mm",
       },
-          {
+      {
         label: "Depth Charges",
         value: "1x5 Mk VII depth charge rails",
       },
-],
+    ],
     description: "Skoryy represents the Soviet Project 30bis destroyers, the first large postwar destroyer series built for the Soviet Navy. The class combined conventional guns, torpedoes, and anti-submarine weapons in a robust design. Seventy ships were completed, forming an important part of Soviet and allied fleets during the early Cold War.",
     author: "Zustt",
     links: [
@@ -8298,11 +8298,11 @@
         label: "Torpedoes",
         value: "2x3 533mm",
       },
-    
       {
         label: "Reconnaissance Seaplanes",
         value: "3× Ar196",
-      },],
+      },
+    ],
     description: "Scharnhorst was a fast German capital ship armed with nine 28 cm guns and, by 1943, a heavy anti-aircraft battery. After commerce-raiding operations and the Norwegian campaign she moved to northern waters to threaten the Arctic convoys. In December 1943, at the Battle of the North Cape, HMS Duke of York and accompanying forces caught and sank her; only 36 of her crew survived.",
     author: "Maomatic",
     links: [
@@ -8386,7 +8386,7 @@
       },
     ],
   },
-    {
+  {
     "name": "Walrus",
     "displayName": "Walrus Mk I",
     "type": "Reconnaissance Amphibian",
@@ -9402,7 +9402,7 @@
         label: "Torpedo",
         value: "1 x 457mm Mk XII",
       },
-],
+    ],
     description: "The Fairey Swordfish Mk I was a carrier-based torpedo bomber used by the Royal Navy's Fleet Air Arm. Despite its low speed and biplane construction, its excellent low-speed handling contributed to the attack on Taranto and the pursuit of Bismarck. The game configuration carries two .303-inch machine guns and one Mark XII aerial torpedo.",
     author: "Unknown",
     links: [
@@ -9559,7 +9559,7 @@
         label: "Torpedo",
         value: "1 x Mk-13 570mm",
       },
-],
+    ],
     description: "The Grumman TBF-1 Avenger was the successor to the TBD, entering service in 1942 with a large payload, long range and good protection, able to carry either torpedoes or bombs, and remained in service after the war. In game it carries forward 12.7 mm and rear 7.62 mm machine guns and a Mark 13 aerial torpedo.",
     author: "",
     links: [
@@ -9589,7 +9589,7 @@
         label: "Torpedo",
         value: "1 x Mk-13 570mm",
       },
-],
+    ],
     description: "Grumman TBF-1 Avengers entered Royal Navy Fleet Air Arm service in 1943. Initially named Tarpon I, they were later redesignated Avenger Mk I and retained British-specific observer accommodations. In game this aircraft is a torpedo bomber carrying one forward 7.62mm gun, one dorsal 12.7mm gun, one ventral 7.62mm gun, and one Mk-13 aerial torpedo.",
     author: "Unknown",
     links: [
@@ -13709,7 +13709,7 @@
       },
     ],
   },
-    {
+  {
     "name": "Ar196",
     "displayName": "Ar 196",
     "type": "Reconnaissance Floatplane",
