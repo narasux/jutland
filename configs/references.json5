@@ -15346,6 +15346,99 @@
     ],
   },
   {
+    name: "uss_barb",
+    displayName: "巴伯",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x1 127mm/25 Mk 10",
+      },
+      {
+        label: "高炮",
+        value: "1x1 40mm/56 博福斯、2x1 20mm/70 厄利孔",
+      },
+      {
+        label: "鱼雷",
+        value: "10x1 533mm（艏 6、艉 4）",
+      },
+    ],
+    description: "巴伯号属猫鲨级潜艇，1942 年 7 月服役。最初五次战巡在大西洋执行，1943 年秋转赴太平洋，此后七次战巡大多由弗拉基中校指挥：1944 年 9 月击沉日本航空母舰云鹰号，1945 年 1 月夜袭南坎湾锚地。最后一次战巡派爆破组在北海道登陆，炸毁一列火车，是二战中唯一在日本本土进行的陆上战斗。战后于 1954 年移交意大利，改名恩里科·塔佐利号，1972 年拆解。",
+    author: "ColosseumSB",
+    links: [
+      {
+        name: "USS Barb SS-220 (May 1945) - Measure 32/3SS-B",
+        url: "https://www.deviantart.com/colosseumsb/art/USS-Barb-SS-220-May-1945-Measure-32-3SS-B-842919666",
+      },
+      {
+        name: "维基百科 - 四带无须魮号潜艇 (SS-220)",
+        url: "https://zh.wikipedia.org/wiki/%E5%9B%9B%E5%B8%B6%E7%84%A1%E9%AC%9A%E9%AD%AE%E8%99%9F%E6%BD%9B%E8%89%A6_(SS-220)",
+      },
+    ],
+  },
+  {
+    name: "uss_sealion",
+    displayName: "海狮",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x1 76mm/50 Mk 22",
+      },
+      {
+        label: "高炮",
+        value: "4x1 12.7mm M2",
+      },
+      {
+        label: "鱼雷",
+        value: "8x1 533mm（艏 4、艉 4）",
+      },
+    ],
+    description: "海狮号属萨戈级潜艇，1939 年 11 月服役，隶属亚洲舰队潜艇第 17 分队。1941 年 12 月 10 日日军空袭甲米地海军船厂时，正在大修的她被两枚炸弹直接命中，机舱进水后坐沉在船坞旁，随后由美军自行炸毁，成为二战中第一艘被敌方行动摧毁的美国潜艇。",
+    author: "JediRhydon101st",
+    links: [
+      {
+        name: "USS Sealion SS-195 (December 1941)",
+        url: "https://www.deviantart.com/jedirhydon101st/art/USS-Sealion-878742491",
+      },
+      {
+        name: "维基百科 - USS Sealion (SS-195)",
+        url: "https://en.wikipedia.org/wiki/USS_Sealion_(SS-195)",
+      },
+    ],
+  },
+  {
+    name: "uss_tarpon",
+    displayName: "大海鲢",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x1 102mm/50 Mk 9",
+      },
+      {
+        label: "高炮",
+        value: "2x1 7.62mm M2",
+      },
+      {
+        label: "鱼雷",
+        value: "8x1 533mm（艏 6、艉 2）",
+      },
+    ],
+    description: "大海鲢号属鼠海豚级潜艇，1936 年服役，是 1930 年代美国海军按条约限制设计的第一批新型舰队潜艇。1942 年改装后主要在太平洋执行破交、侦察与救生任务，战争末期退出一线。1945 年 11 月退役，1957 年拖往拆船厂途中在哈特拉斯角外海沉没。",
+    author: "JediRhydon101st",
+    links: [
+      {
+        name: "USS Tarpon SS-175 (October 1942)",
+        url: "https://www.deviantart.com/jedirhydon101st/art/USS-Tarpon-878742681",
+      },
+      {
+        name: "维基百科 - USS Tarpon (SS-175)",
+        url: "https://en.wikipedia.org/wiki/USS_Tarpon_(SS-175)",
+      },
+    ],
+  },
+  {
     name: "US/152/53/MK12",
     displayName: "152mm/53 单装潜艇甲板炮 Mk XII",
     type: "武器",

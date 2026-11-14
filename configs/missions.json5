@@ -2955,7 +2955,10 @@
           "le_fantasque",
           "tramontana",
           "folgore",
-          "dardo"
+          "dardo",
+          "uss_barb",
+          "uss_sealion",
+          "uss_tarpon"
         ],
       },
       {
@@ -3961,14 +3964,32 @@
         belongPlayer: "P1"
       },
       {
-        name: "uss_nautilus",
+        name: "uss_barb",
         pos: [44, 50],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "PT_791",
+        name: "uss_tarpon",
         pos: [45, 51],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "uss_sealion",
+        pos: [44, 52],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "uss_nautilus",
+        pos: [45, 53],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "PT_791",
+        pos: [44, 54],
         rotation: 90,
         belongPlayer: "P1"
       },

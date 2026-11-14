@@ -15372,6 +15372,99 @@
     ],
   },
   {
+    name: "uss_barb",
+    displayName: "バーブ",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x1 127mm/25 Mk 10",
+      },
+      {
+        label: "対空砲",
+        value: "1x1 40mm/56 ボフォース、2x1 20mm/70 エリコン",
+      },
+      {
+        label: "魚雷",
+        value: "10x1 533mm（艦首 6、艦尾 4）",
+      },
+    ],
+    description: "バーブはガトー級潜水艦で、1942年7月に就役した。大西洋での5回の哨戒ののち1943年秋に太平洋へ移り、以後7回の哨戒の大半をフラッキー中佐の指揮で行った。1944年9月に日本の空母雲鷹を撃沈し、1945年1月には南坎湾の泊地を襲撃した。最後の哨戒では北海道に上陸した決死隊が列車を爆破し、日本本土における唯一の地上戦となった。1954年にイタリアへ譲渡されてエンリコ・タッツォーリと改名され、1972年に解体された。",
+    author: "ColosseumSB",
+    links: [
+      {
+        name: "USS Barb SS-220 (May 1945) - Measure 32/3SS-B",
+        url: "https://www.deviantart.com/colosseumsb/art/USS-Barb-SS-220-May-1945-Measure-32-3SS-B-842919666",
+      },
+      {
+        name: "Wikipedia - バーブ (潜水艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%83%96_(%E6%BD%9C%E6%B0%B4%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "uss_sealion",
+    displayName: "シーライオン",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x1 76mm/50 Mk 22",
+      },
+      {
+        label: "対空砲",
+        value: "4x1 12.7mm M2",
+      },
+      {
+        label: "魚雷",
+        value: "8x1 533mm（艦首 4、艦尾 4）",
+      },
+    ],
+    description: "シーライオンはサーゴ級潜水艦で、1939年11月に就役し、アジア艦隊第17潜水隊に配属された。1941年12月10日の日本軍によるキャビテ海軍工廠空襲の際、同地で整備中だった同艦は直撃弾2発を受けて機関室が浸水し、ドック脇で着底した。その後アメリカ軍によって爆破処分され、第二次世界大戦で敵の攻撃により失われた最初のアメリカ潜水艦となった。",
+    author: "JediRhydon101st",
+    links: [
+      {
+        name: "USS Sealion SS-195 (December 1941)",
+        url: "https://www.deviantart.com/jedirhydon101st/art/USS-Sealion-878742491",
+      },
+      {
+        name: "Wikipedia - シーライオン (SS-195)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%BC%E3%83%A9%E3%82%A4%E3%82%AA%E3%83%B3_(SS-195)",
+      },
+    ],
+  },
+  {
+    name: "uss_tarpon",
+    displayName: "ターポン",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x1 102mm/50 Mk 9",
+      },
+      {
+        label: "対空砲",
+        value: "2x1 7.62mm M2",
+      },
+      {
+        label: "魚雷",
+        value: "8x1 533mm（艦首 6、艦尾 2）",
+      },
+    ],
+    description: "ターポンはポーパス級潜水艦で、1936年3月に就役した。戦間期の条約制限下で設計された最初期の艦隊型潜水艦の一隻である。第二次世界大戦を通じて太平洋で通商破壊、偵察、搭乗員救助などに従事し、1945年に第一線を退いた。同年11月に退役し、1957年8月に解体のため曳航される途中、ハッテラス岬沖で沈没した。",
+    author: "JediRhydon101st",
+    links: [
+      {
+        name: "USS Tarpon SS-175 (October 1942)",
+        url: "https://www.deviantart.com/jedirhydon101st/art/USS-Tarpon-878742681",
+      },
+      {
+        name: "Wikipedia - ターポン (潜水艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%83%BC%E3%83%9D%E3%83%B3_(%E6%BD%9C%E6%B0%B4%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "US/152/53/MK12",
     displayName: "152mm/53 単装潜水艦甲板砲 Mk XII",
     type: "兵器",
