@@ -481,9 +481,10 @@ func initShipMap() {
 	log.Println("ships data loaded from json5 file")
 }
 
-// 鱼雷扇形的分组：能覆盖的舷别相同的发射器算一组。
-// 中轴（两舷都能打）一组，只打右舷的一组，只打左舷的一组。
-// 分组只能粗不能细：同一舷的发射器射界略有宽窄（如 shimakaze 的三座中轴五联装）
+// 鱼雷扇形的舷别分组：能覆盖的舷别相同的发射器先归到同一舷。
+// 中轴（两舷都能打）、只打右舷、只打左舷各成一类；同舷内再按射界是否重叠拆分，
+// 艏艉鱼雷管方向相反，不能共用一张扇面。
+// 同舷且同向的分组只能粗不能细：射界略有宽窄（如 shimakaze 的三座中轴五联装）
 // 也必须共用一张扇面，否则每座各排一张扇面，齐射会退化成几根鱼雷重叠在同一角度。
 const (
 	// torpedoFanSideBoth 两舷都能打的发射器（中轴 / 全向）
@@ -512,19 +513,37 @@ func torpedoFanSideOf(md objUnit.WeaponMetadata) int {
 	}
 }
 
-// newTorpedoLaunchers 按舷别把鱼雷发射器分组，再为每座分配组内航迹。
-// 同一舷的发射器共用一张以瞄准线为中心的扇面：组内第 0 座每轮都压在瞄准线上，
-// 其余各座依次消费外侧航迹，于是每一轮齐射都从瞄准线往外放宽一档，正头对进的
-// 目标不会因为后几轮全部落在瞄准线外侧而漏掉。
+// torpedoFanArcsOverlap 判断两座鱼雷发射器的射界是否存在共同方位。
+// 只有能同时转向同一目标的发射器才该共用一张扇面；射界用 [Start, End] 表示，
+// Start == End 视为该侧没有射界，鱼雷射界都不跨 360°，直接按闭区间求交即可。
+func torpedoFanArcsOverlap(a, b objUnit.WeaponMetadata) bool {
+	overlaps := func(x, y [2]float64) bool {
+		return x[0] != x[1] && y[0] != y[1] && x[0] <= y[1] && y[0] <= x[1]
+	}
+	return overlaps(a.LeftFiringArc, b.LeftFiringArc) ||
+		overlaps(a.LeftFiringArc, b.RightFiringArc) ||
+		overlaps(a.RightFiringArc, b.LeftFiringArc) ||
+		overlaps(a.RightFiringArc, b.RightFiringArc)
+}
+
+// newTorpedoLaunchers 按舷别和射界把鱼雷发射器分组，再为每座分配组内航迹。
+// 同一舷且能同时开火的发射器共用一张以瞄准线为中心的扇面：组内第 0 座每轮都压在
+// 瞄准线上，其余各座依次消费外侧航迹，于是每一轮齐射都从瞄准线往外放宽一档，
+// 正头对进的目标不会因为后几轮全部落在瞄准线外侧而漏掉。
+//
+// 艏艉鱼雷管（如潜艇）射界相反，必须各成一组：否则艏管占据组内靠前的航迹，
+// 朝正后方开火时只有艉管在射界内，整轮齐射都落在瞄准线外侧，正后方空出一大块。
 func newTorpedoLaunchers(mds []objUnit.WeaponMetadata) []*objUnit.TorpedoLauncher {
 	type fanGroup struct {
+		// head 组内首座发射器的配置，用来判断后续发射器是否与它同向
+		head objUnit.WeaponMetadata
 		// launchers 组内发射器在 mds 中的下标，按配置顺序
 		launchers []int
 		// tracks 组内鱼雷管总数
 		tracks int
 	}
 
-	groups := map[int]*fanGroup{}
+	groups := map[int][]*fanGroup{}
 	var order []*fanGroup
 	for idx, md := range mds {
 		launcher, ok := objUnit.TorpedoLauncherMap[md.Name]
@@ -532,10 +551,16 @@ func newTorpedoLaunchers(mds []objUnit.WeaponMetadata) []*objUnit.TorpedoLaunche
 			log.Fatalf("torpedo launcher %s no found", md.Name)
 		}
 		side := torpedoFanSideOf(md)
-		group, ok := groups[side]
-		if !ok {
-			group = &fanGroup{}
-			groups[side] = group
+		var group *fanGroup
+		for _, candidate := range groups[side] {
+			if torpedoFanArcsOverlap(candidate.head, md) {
+				group = candidate
+				break
+			}
+		}
+		if group == nil {
+			group = &fanGroup{head: md}
+			groups[side] = append(groups[side], group)
 			order = append(order, group)
 		}
 		group.launchers = append(group.launchers, idx)
