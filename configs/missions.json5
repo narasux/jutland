@@ -2735,9 +2735,13 @@
           "liberty",
           "norderney",
           "vulkan",
+          "mamiya",
+          "irako",
+          "kashino",
           "mercy",
           "peace_ark",
           "britannic",
+          "hikawa_maru",
         ],
       },
       {
@@ -3103,20 +3107,44 @@
         belongPlayer: "P1"
       },
       {
+        name: "hikawa_maru",
+        pos: [41, 42],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
         name: "liberty",
-        pos: [10, 12],
+        pos: [9, 12],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "norderney",
-        pos: [11, 12],
+        pos: [10, 12],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "vulkan",
-        pos: [12, 12],
+        pos: [11, 12],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "mamiya",
+        pos: [9, 9],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "irako",
+        pos: [10, 8],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "kashino",
+        pos: [11, 9],
         rotation: 90,
         belongPlayer: "P1"
       },

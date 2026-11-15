@@ -10088,6 +10088,20 @@
     ],
   },
   {
+    name: "JP/120/45/2/Type10",
+    displayName: "十年式 12cm 双联装高角炮",
+    type: "武器",
+    armaments: [],
+    description: "日本海军 45 倍径十年式 12cm 双联装高角炮，1921 年制式。与单装型共用弹药，主要用于小型舰艇的对空与对舰火力。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 四十五口径十年式十二糎高角砲",
+        url: "https://ja.wikipedia.org/wiki/%E5%9B%9B%E5%8D%81%E4%BA%94%E5%8F%A3%E5%BE%84%E5%8D%81%E5%B9%B4%E5%BC%8F%E5%8D%81%E4%BA%8C%E7%B3%8E%E9%AB%98%E8%A7%92%E7%A0%B2",
+      },
+    ],
+  },
+  {
     name: "JP/120/45/Type10",
     displayName: "十年式 12cm 单装舰炮",
     type: "武器",
@@ -10233,6 +10247,20 @@
     type: "武器",
     armaments: [],
     description: "日本海军九三式 13mm 四联装机枪，1933 年制式采用，是日本海军舰艇与航空机使用的近程防空武器，采用四联装枪架。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 九三式十三粍機銃",
+        url: "https://ja.wikipedia.org/wiki/%E4%B9%9D%E4%B8%89%E5%BC%8F%E5%8D%81%E4%B8%89%E7%B2%8D%E6%A9%9F%E9%8A%83",
+      },
+    ],
+  },
+  {
+    name: "JP/13/2/Type93",
+    displayName: "九三式 13mm 双联装机枪",
+    type: "武器",
+    armaments: [],
+    description: "日本海军九三式 13mm 双联装机枪，1933 年制式采用，为九三式 13mm 机枪的双联型号，用于舰艇与航空机的近程防空射击。",
     author: "",
     links: [
       {
@@ -15987,6 +16015,110 @@
       {
         name: "维基百科 - USS Tarpon (SS-175)",
         url: "https://en.wikipedia.org/wiki/USS_Tarpon_(SS-175)",
+      },
+    ],
+  },
+  {
+    name: "mamiya",
+    displayName: "间宫",
+    type: "给粮舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x1 140mm/50 三年式",
+      },
+      {
+        label: "高炮",
+        value: "2x1 76mm/40 三年式",
+      },
+    ],
+    description: "间宫号是旧日本海军第一艘专门设计的给粮舰，1924 年在川崎造船所完工。舰上设有大型冷藏库、食品加工间和烘焙设施，能为一万八千名官兵提供三周份的食品，因而被称为「海上浮动的银座」。太平洋战争期间它长期往返本土与前线基地，1944 年 12 月在南海被美国潜艇「海狮」号击沉。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 间宫号侧视/俯视图",
+        url: "https://jp.pinterest.com/pin/552183604293295413/",
+      },
+      {
+        name: "维基百科 - Japanese supply ship Mamiya",
+        url: "https://en.wikipedia.org/wiki/Japanese_supply_ship_Mamiya",
+      },
+    ],
+  },
+  {
+    name: "irako",
+    displayName: "伊良湖",
+    type: "给粮舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x2 120mm/45 十年式",
+      },
+      {
+        label: "高炮",
+        value: "10x1 25mm/60 九六式",
+      },
+    ],
+    description: "伊良湖号是间宫号的缩小改进型给粮舰，1941 年 12 月竣工，可为一万五千人提供两周份的食品。它长期往返日本本土、特鲁克、新加坡等地，也承担过兵员与弹药运输。1944 年 9 月在科隆湾遭美军舰载机空袭重创后自沉。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 伊良湖号侧视/俯视图",
+        url: "https://jp.pinterest.com/pin/547680004680700885/",
+      },
+      {
+        name: "维基百科 - Japanese supply ship Irako",
+        url: "https://en.wikipedia.org/wiki/Japanese_supply_ship_Irako",
+      },
+    ],
+  },
+  {
+    name: "kashino",
+    displayName: "坚野",
+    type: "给兵舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x1 120mm/45 十年式",
+      },
+      {
+        label: "机枪",
+        value: "2x2 13.2mm 九三式",
+      },
+    ],
+    description: "坚野号是旧日本海军为运送大和级战列舰 46 厘米主炮及炮塔而专门建造的运输舰，1940 年服役。舰体中部设有两座巨型货舱，可容纳整座炮塔；随着大和级建造计划调整，它被改装为弹药运输舰，1942 年 9 月在台湾东北海域被美国潜艇「石首鱼」号击沉。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 坚野号侧视/俯视图",
+        url: "https://jp.pinterest.com/pin/1075938167218177904/",
+      },
+      {
+        name: "维基百科 - Japanese munition ship Kashino",
+        url: "https://en.wikipedia.org/wiki/Japanese_munition_ship_Kashino",
+      },
+    ],
+  },
+  {
+    name: "hikawa_maru",
+    displayName: "冰川丸",
+    type: "医疗船",
+    armaments: [
+      {
+        label: "武装",
+        value: "无固定武装",
+      },
+    ],
+    description: "冰川丸是日本邮船 1930 年投入北太平洋航线的豪华客轮，1941 年 12 月被日本海军征用并改装为特设医院船。船体涂成白色并绘有绿色横带和红十字，战争期间多次躲过水雷和空袭，是少数幸存的大型日本客船。战后恢复客轮身份，1960 年退役后停泊在横滨山下公园作为博物馆船保存。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 冰川丸侧视/俯视图",
+        url: "https://jp.pinterest.com/pin/52987733110130550/",
+      },
+      {
+        name: "维基百科 - 冰川丸",
+        url: "https://zh.wikipedia.org/wiki/%E5%86%B0%E5%B7%9D%E4%B8%B8",
       },
     ],
   },
