@@ -120,6 +120,77 @@ func TestDrawFittedRussianShipNameRegistersFullNameTooltip(t *testing.T) {
 	require.Positive(t, ui.textHits[0].Rect.Dx())
 }
 
+func TestArmamentItemsUseTwoLineLayoutForWordWrappingLanguages(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	fontSize := 18.0
+	cases := []struct {
+		lang        i18n.Language
+		label       string
+		value       string
+		wantStacked bool
+	}{
+		{i18n.LanguageEnglish, "Dual-purpose Guns", "6x2 127mm/38 Mk12", true},
+		{i18n.LanguageRussian, "Универсальные орудия", "6x2 127mm/38 Mk12", true},
+		{i18n.LanguageJapanese, "両用砲", "6x2 127mm/38 Mk12", false},
+	}
+	for _, tc := range cases {
+		t.Run(string(tc.lang), func(t *testing.T) {
+			i18n.SetLanguage(string(tc.lang))
+			labelWidth := estimateCollectionTextWidth(tc.label, fontSize)
+			valueWidth := estimateCollectionTextWidth(tc.value, fontSize)
+			// 卡片宽度让数值在单行键值里放不下，但只有两行排版能完整容纳它。
+			card := collectionCard{W: valueWidth + labelWidth/2 + 54, H: 300}
+			ui := &CollectionUI{drawer: NewDrawer(), metrics: collectionMetrics{Scale: 1, Body: fontSize}}
+			screen := ebiten.NewImage(400, 320)
+
+			ui.drawArmamentItems(
+				screen, []objRef.InfoItem{{Label: tc.label, Value: tc.value}}, card, 58,
+			)
+
+			if tc.wantStacked {
+				require.Empty(t, ui.textHits)
+			} else {
+				require.Len(t, ui.textHits, 1)
+				require.Equal(t, []string{tc.label + "  " + tc.value}, ui.textHits[0].Lines)
+			}
+		})
+	}
+}
+
+func TestArmamentItemsPlaceValueOnSecondLine(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	i18n.SetLanguage(string(i18n.LanguageEnglish))
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	const (
+		fontSize = 18.0
+		startY   = 58.0
+	)
+	ui := &CollectionUI{drawer: NewDrawer(), metrics: collectionMetrics{Scale: 1, Body: fontSize}}
+	screen := ebiten.NewImage(200, 320)
+
+	ui.drawArmamentItems(
+		screen,
+		[]objRef.InfoItem{
+			{Label: "Dual-purpose Guns", Value: "6x2 127mm/38 Mk12"},
+			{Label: "Anti-aircraft Guns", Value: "12x4 40mm/60 Bofors"},
+		},
+		collectionCard{W: 120, H: 300},
+		startY,
+	)
+
+	require.Len(t, ui.textHits, 2)
+	valueGap := fontSize * 1.1
+	rowHeight := valueGap + fontSize*1.4
+	require.Equal(t, 34, ui.textHits[0].Rect.Min.X)
+	require.Equal(t, int(math.Floor(startY+valueGap)), ui.textHits[0].Rect.Min.Y)
+	require.Equal(t, int(math.Floor(startY+rowHeight+valueGap)), ui.textHits[1].Rect.Min.Y)
+	require.Equal(t, []string{"Dual-purpose Guns", "6x2 127mm/38 Mk12"}, ui.textHits[0].Lines)
+	require.Equal(t, []string{"Anti-aircraft Guns", "12x4 40mm/60 Bofors"}, ui.textHits[1].Lines)
+}
+
 func TestFitCollectionLinesAddsEllipsisWhenRowsOverflow(t *testing.T) {
 	fontSize := 18.0
 	textFont := font.LocalizedUI(font.Kai)
