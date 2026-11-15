@@ -8185,6 +8185,41 @@
     ],
   },
   {
+    name: "tashkent",
+    displayName: "タシュケント",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x2 130mm/50 B-2LM",
+      },
+      {
+        label: "副砲",
+        value: "1x2 76mm/55 34-K",
+      },
+      {
+        label: "対空兵装",
+        value: "6x1 37mm 61-K",
+      },
+      {
+        label: "魚雷",
+        value: "3x3 533mm",
+      },
+    ],
+    description: "タシュケントは、イタリアのリヴォルノで建造され1939年にソ連海軍へ引き渡された20И号計画型駆逐艦（嚮導駆逐艦）である。イタリア風の水色塗装から「青い巡洋艦」の愛称で呼ばれた。第二次世界大戦中は包囲下のセヴァストポリへ兵員と物資を運び続けたが、1942年7月2日にノヴォロシースク港内でドイツ軍爆撃機に撃沈された。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest — タシュケント（Nano Banana）",
+        url: "https://jp.pinterest.com/pin/287667494931617325/",
+      },
+      {
+        name: "ウィキペディア — タシュケント (駆逐艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%82%B7%E3%83%A5%E3%82%B1%E3%83%B3%E3%83%88_(%E9%A7%86%E9%80%90%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "rapid",
     displayName: "スコーリィ",
     type: "駆逐艦",
@@ -8212,6 +8247,64 @@
       {
         name: "ウィキペディア — スコーリィ",
         url: "https://en.wikipedia.org/wiki/Skory-class%20destroyer",
+      },
+    ],
+  },
+  {
+    name: "leningrad",
+    displayName: "レニングラード",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "5x1 130mm/50 B-13",
+      },
+      {
+        label: "副砲",
+        value: "2x1 76mm/55 34-K",
+      },
+      {
+        label: "魚雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "レニングラードは1号計画型嚮導駆逐艦の一番艦で、1936年にバルチック艦隊へ就役した。フランスの大型駆逐艦（コントル・トルピユール）を参考に、ソ連が初めて自主設計・建造した大型嚮導駆逐艦である。大戦中はクロンシュタットとレニングラードを基地に、船団護衛、機雷敷設、陸上射撃支援に従事した。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest — レニングラード（Nano Banana）",
+        url: "https://jp.pinterest.com/pin/841962092805523293/",
+      },
+      {
+        name: "ウィキペディア — レニングラード級駆逐艦",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%AC%E3%83%8B%E3%83%B3%E3%82%B0%E3%83%A9%E3%83%BC%E3%83%89%E7%B4%9A%E9%A7%86%E9%80%90%E8%89%A6",
+      },
+    ],
+  },
+  {
+    name: "novik",
+    displayName: "ノヴィーク",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x1 102mm/60 1911年型",
+      },
+      {
+        label: "魚雷",
+        value: "4x2 450mm",
+      },
+    ],
+    description: "ノヴィークは1913年に就役したロシア帝国海軍の駆逐艦で、当初は「水雷巡洋艦」に分類された。ロシアで初めて蒸気タービンを採用した大型駆逐艦であり、第一次世界大戦中はバルチック海で積極的に行動してドイツ駆逐艦を撃沈した。1923年に「ヤコフ・スヴェルドロフ」と改名され、1941年8月のタリン撤退中に機雷に触れて沈没した。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest — ノヴィーク（Nano Banana）",
+        url: "https://jp.pinterest.com/pin/753438212689322663/",
+      },
+      {
+        name: "ウィキペディア — ロシア駆逐艦ノヴィーク",
+        url: "https://en.wikipedia.org/wiki/Russian_destroyer_Novik",
       },
     ],
   },
@@ -9527,6 +9620,122 @@
     type: "兵器",
     armaments: [],
     description: "ソ連海軍の 533mm 単装魚雷発射管。潜水艦の艦首・艦尾発射管として用いられた。ソ連潜水艦の魚雷発射管には統一型式がなく、通常は艦級ごとに記述される。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/130/50/B13",
+    displayName: "130mm/50 単装砲（B-13）",
+    type: "兵器",
+    armaments: [],
+    description: "1936年型のソ連 130mm/50 単装砲 B-13。レニングラード級嚮導駆逐艦に搭載され、B-2LM 連装砲と弾薬を共用する。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 130 mm/50 B13 Pattern 1936",
+        url: "https://en.wikipedia.org/wiki/130_mm/50_B13_Pattern_1936",
+      },
+    ],
+  },
+  {
+    name: "SU/102/60/Ob1911",
+    displayName: "102mm/60 1911年型 単装砲",
+    type: "兵器",
+    armaments: [],
+    description: "オブホフ工場製のロシア 102mm/60 1911年型砲。駆逐艦ノヴィークの主砲である。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 102mm 60 caliber Pattern 1911",
+        url: "https://en.wikipedia.org/wiki/102mm_60_caliber_Pattern_1911",
+      },
+    ],
+  },
+  {
+    name: "SU/76/55/2/34K",
+    displayName: "76mm/55 34-K 連装高角砲",
+    type: "兵器",
+    armaments: [],
+    description: "1935年型のソ連 76.2mm/55 34-K 連装両用砲。嚮導駆逐艦タシュケントに搭載された。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 76 mm air defense gun M1935 (34-K)",
+        url: "https://en.wikipedia.org/wiki/76_mm_air_defense_gun_M1935_(34-K)",
+      },
+    ],
+  },
+  {
+    name: "SU/76/55/1/34K",
+    displayName: "76mm/55 34-K 単装高角砲",
+    type: "兵器",
+    armaments: [],
+    description: "1935年型のソ連 76.2mm/55 34-K 単装両用砲。レニングラード級嚮導駆逐艦に搭載された。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 76 mm air defense gun M1935 (34-K)",
+        url: "https://en.wikipedia.org/wiki/76_mm_air_defense_gun_M1935_(34-K)",
+      },
+    ],
+  },
+  {
+    name: "SU/37/67/61K",
+    displayName: "37mm 61-K 単装高角砲",
+    type: "兵器",
+    armaments: [],
+    description: "1939年型のソ連 37mm 61-K 単装自動高角砲。嚮導駆逐艦タシュケントの近接対空火器である。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 37 mm automatic air defense gun M1939 (61-K)",
+        url: "https://en.wikipedia.org/wiki/37_mm_automatic_air_defense_gun_M1939_(61-K)",
+      },
+    ],
+  },
+  {
+    name: "GER/150/48/TbtsKC36",
+    displayName: "150mm/48 TbtsK C/36 単装砲",
+    type: "兵器",
+    armaments: [],
+    description: "ドイツの 15cm/48 TbtsK C/36 単装砲。1936A型駆逐艦の主砲で、大戦中の駆逐艦主砲としては最大級である。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 15 cm TbtsK C/36 naval gun",
+        url: "https://en.wikipedia.org/wiki/15_cm_TbtsK_C/36_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "GER/37/83/SKC30",
+    displayName: "37mm/83 SK C/30 単装高角砲",
+    type: "兵器",
+    armaments: [],
+    description: "ドイツの 3.7cm/83 SK C/30 単装高角砲。駆逐艦や大型艦の舷側砲座に搭載された。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 3.7 cm SK C/30",
+        url: "https://en.wikipedia.org/wiki/3.7_cm_SK_C/30",
+      },
+    ],
+  },
+  {
+    name: "SU/533/4/1N",
+    displayName: "533mm 1-N 四連装魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "ソ連の 533mm 1-N 四連装魚雷発射管。レニングラード級嚮導駆逐艦に搭載された。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/450/2/M1912",
+    displayName: "450mm 1912年型 連装魚雷発射管",
+    type: "兵器",
+    armaments: [],
+    description: "ロシアの 450mm 1912年型 連装魚雷発射管。ノヴィークはこれを4基搭載していた。",
     author: "",
     links: [],
   },
@@ -12582,6 +12791,37 @@
       {
         name: "ウィキペディア — アントン・シュミット",
         url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%88%E3%83%B3%E3%83%BB%E3%82%B7%E3%83%A5%E3%83%9F%E3%83%83%E3%83%88_(%E9%A7%86%E9%80%90%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "z_25",
+    displayName: "Z25 オッシュ",
+    type: "駆逐艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "3x1 150mm/48 TbtsK C/36",
+      },
+      {
+        label: "対空兵装",
+        value: "5x1 37mm SK C/30 + 4x1 20mm Flak 38",
+      },
+      {
+        label: "魚雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "Z25 は1940年に就役したドイツの1936A型駆逐艦で、同型はノルウェー方面での任務から「ナルヴィク級」とも呼ばれる。ノルウェー作戦や1942年の「ツェルベルス」作戦に参加したが、主機の不調で1943年の大半を修理に費やし、1944年にバルト海へ移った。ドイツ海軍では本型を番号だけで呼び、「オッシュ」はフランス海軍で与えられた名前である。同艦は1961年に解体された。",
+    author: "Sam#28 & Nano Banana",
+    links: [
+      {
+        name: "Pinterest — Z25（Sam#28 & Nano Banana）",
+        url: "https://jp.pinterest.com/pin/759278818402561012/",
+      },
+      {
+        name: "ウィキペディア — Z25",
+        url: "https://ja.wikipedia.org/wiki/Z25_(%E9%A7%86%E9%80%90%E8%89%A6)",
       },
     ],
   },

@@ -6780,6 +6780,37 @@
     ],
   },
   {
+    name: "z_25",
+    displayName: "Z-25 霍什",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x1 150mm/48 TbtsK C/36",
+      },
+      {
+        label: "防空炮",
+        value: "5x1 37mm SK C/30 + 4x1 20mm Flak 38",
+      },
+      {
+        label: "鱼雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "Z-25 是德国海军 1936A 型驱逐舰，1940 年服役，该型因主要在挪威海域活动而常被称作“纳尔维克”级。她参加过挪威战役与 1942 年英吉利海峡的“瑟布鲁斯”行动，1943 年因主机故障长期停航，修复后于 1944 年调往波罗的海。德国海军只以舷号称呼本级舰；“霍什”（Hoche）是她在战后加入法国海军时获得的名字，1961 年拆解。",
+    author: "Sam#28 & Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Z-25 素材",
+        url: "https://jp.pinterest.com/pin/759278818402561012/",
+      },
+      {
+        name: "维基百科 - Z-25号驱逐舰",
+        url: "https://zh.wikipedia.org/wiki/Z-25%E5%8F%B7%E9%A9%B1%E9%80%90%E8%88%B0",
+      },
+    ],
+  },
+  {
     name: "v",
     displayName: "V",
     type: "驱逐舰",
@@ -6991,6 +7022,41 @@
     ],
   },
   {
+    name: "tashkent",
+    displayName: "塔什干",
+    type: "驱逐领舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "3x2 130mm/50 B-2LM",
+      },
+      {
+        label: "副炮",
+        value: "1x2 76mm/55 34-K",
+      },
+      {
+        label: "防空炮",
+        value: "6x1 37mm 61-K",
+      },
+      {
+        label: "鱼雷",
+        value: "3x3 533mm",
+      },
+    ],
+    description: "塔什干号是苏联海军 20И 型驱逐领舰，由意大利里窝那的奥托公司建造，1939 年交付黑海舰队。意大利风格的天蓝色涂装为她赢得“天蓝色巡洋舰”的绰号，也常被误认为轻巡洋舰。卫国战争期间她多次突破封锁，向被围困的塞瓦斯托波尔运送兵员与物资；1942 年 7 月 2 日在新罗西斯克港内被德军轰炸机击沉。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 素材来源",
+        url: "https://jp.pinterest.com/pin/287667494931617325/",
+      },
+      {
+        name: "Wikipedia - Soviet destroyer Tashkent",
+        url: "https://en.wikipedia.org/wiki/Soviet_destroyer_Tashkent",
+      },
+    ],
+  },
+  {
     name: "rapid",
     displayName: "快速",
     type: "驱逐舰",
@@ -7018,6 +7084,64 @@
       {
         name: "Wikipedia - Skory-class destroyer",
         url: "https://en.wikipedia.org/wiki/Skory-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "leningrad",
+    displayName: "列宁格勒",
+    type: "驱逐领舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "5x1 130mm/50 B-13",
+      },
+      {
+        label: "副炮",
+        value: "2x1 76mm/55 34-K",
+      },
+      {
+        label: "鱼雷",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "列宁格勒号是 1 型驱逐领舰的首舰，1936 年服役于波罗的海舰队，是苏联第一型自行设计建造的大型驱逐领舰，设计上参考了法国大型驱逐舰。卫国战争期间她以喀琅施塔得和列宁格勒为基地，执行护航、布雷与对岸火力支援任务，战后继续在波罗的海舰队服役。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 素材来源",
+        url: "https://jp.pinterest.com/pin/841962092805523293/",
+      },
+      {
+        name: "Wikipedia - Leningrad-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Leningrad-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "novik",
+    displayName: "诺维克",
+    type: "驱逐舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x1 102mm/60 1911 年式",
+      },
+      {
+        label: "鱼雷",
+        value: "4x2 450mm",
+      },
+    ],
+    description: "诺维克号是俄国海军 1913 年服役的驱逐舰，最初被归类为“水雷巡洋舰”，是俄国第一艘采用蒸汽轮机的大型驱逐舰。一战期间她在波罗的海多次出击并击沉德军驱逐舰；1923 年更名为“雅科夫·斯维尔德洛夫”号，1941 年 8 月在塔林撤退中触雷沉没。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 素材来源",
+        url: "https://jp.pinterest.com/pin/753438212689322663/",
+      },
+      {
+        name: "Wikipedia - Russian destroyer Novik",
+        url: "https://en.wikipedia.org/wiki/Russian_destroyer_Novik",
       },
     ],
   },
@@ -12382,6 +12506,122 @@
     type: "武器",
     armaments: [],
     description: "苏联海军 533 毫米单装鱼雷发射管，用于潜艇艏艉鱼雷管；苏联潜艇鱼雷管没有统一型号，一般按艇级记述。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/130/50/B13",
+    displayName: "130mm/50 单装舰炮（B-13）",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 130 毫米/50 倍径 B-13 单装舰炮，1936 年式，装备列宁格勒级驱逐领舰；与 B-2LM 双联装炮塔使用同一种弹药。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 130 mm/50 B13 Pattern 1936",
+        url: "https://en.wikipedia.org/wiki/130_mm/50_B13_Pattern_1936",
+      },
+    ],
+  },
+  {
+    name: "SU/102/60/Ob1911",
+    displayName: "102mm/60 单装舰炮（1911 年式）",
+    type: "武器",
+    armaments: [],
+    description: "俄国海军 102 毫米/60 倍径奥布霍夫工厂 1911 年式舰炮，是诺维克号驱逐舰的主炮。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 102mm 60 caliber Pattern 1911",
+        url: "https://en.wikipedia.org/wiki/102mm_60_caliber_Pattern_1911",
+      },
+    ],
+  },
+  {
+    name: "SU/76/55/2/34K",
+    displayName: "76mm/55 双联装高平炮（34-K）",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 76.2 毫米/55 倍径 34-K 双联装高平两用炮，1935 年式，装备塔什干号驱逐领舰。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 76 mm air defense gun M1935 (34-K)",
+        url: "https://en.wikipedia.org/wiki/76_mm_air_defense_gun_M1935_(34-K)",
+      },
+    ],
+  },
+  {
+    name: "SU/76/55/1/34K",
+    displayName: "76mm/55 单装高平炮（34-K）",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 76.2 毫米/55 倍径 34-K 单装高平两用炮，1935 年式，装备列宁格勒级驱逐领舰。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 76 mm air defense gun M1935 (34-K)",
+        url: "https://en.wikipedia.org/wiki/76_mm_air_defense_gun_M1935_(34-K)",
+      },
+    ],
+  },
+  {
+    name: "SU/37/67/61K",
+    displayName: "37mm 单装高射炮（61-K）",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 37 毫米 61-K 单装自动高射炮，1939 年式，是塔什干号驱逐领舰的轻型防空火力。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 37 mm automatic air defense gun M1939 (61-K)",
+        url: "https://en.wikipedia.org/wiki/37_mm_automatic_air_defense_gun_M1939_(61-K)",
+      },
+    ],
+  },
+  {
+    name: "GER/150/48/TbtsKC36",
+    displayName: "150mm/48 单装舰炮（TbtsK C/36）",
+    type: "武器",
+    armaments: [],
+    description: "德国海军 15 cm/48 TbtsK C/36 单装舰炮，1936A 型驱逐舰的主炮，也是当时驱逐舰上口径最大的主炮之一。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 15 cm TbtsK C/36 naval gun",
+        url: "https://en.wikipedia.org/wiki/15_cm_TbtsK_C/36_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "GER/37/83/SKC30",
+    displayName: "37mm/83 单装高射炮（SK C/30）",
+    type: "武器",
+    armaments: [],
+    description: "德国海军 3.7 cm/83 SK C/30 单装高射炮，装备驱逐舰与大型舰艇的舷侧炮位。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 3.7 cm SK C/30",
+        url: "https://en.wikipedia.org/wiki/3.7_cm_SK_C/30",
+      },
+    ],
+  },
+  {
+    name: "SU/533/4/1N",
+    displayName: "533mm 1-N 四联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 533 毫米 1-N 四联装鱼雷发射管，装备列宁格勒级驱逐领舰。",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/450/2/M1912",
+    displayName: "450mm 1912 年式双联装鱼雷发射管",
+    type: "武器",
+    armaments: [],
+    description: "俄国海军 450 毫米 1912 年式双联装鱼雷发射管，诺维克号驱逐舰装备 4 座。",
     author: "",
     links: [],
   },

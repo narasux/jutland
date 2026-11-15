@@ -130,6 +130,14 @@
     damage: 90,
     criticalRate: 0.001
   },
+  // 俄国海军 102mm/60 1911 年式奥布霍夫炮弹（诺维克号主炮）
+  {
+    name: "SU/GB/102/1911",
+    type: "shell",
+    diameter: 102,
+    damage: 60,
+    criticalRate: 0.001
+  },
   {
     name: "SU/GB/100/1940",
     type: "shell",
@@ -221,6 +229,14 @@
     diameter: 450,
     damage: 3400,
     criticalRate: 0.04
+  },
+  // 俄国海军 450mm 1912 年式鱼雷（诺维克号双联装鱼雷发射管用，战斗部约 100 kg）
+  {
+    name: "SU/TB/450/1912/M1912",
+    type: "torpedo",
+    diameter: 450,
+    damage: 2200,
+    criticalRate: 0.03
   },
   // --------- 炸弹 ----------
   {

@@ -8185,6 +8185,41 @@
     ],
   },
   {
+    name: "tashkent",
+    displayName: "Tashkent",
+    type: "Destroyer Leader",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x2 130mm/50 B-2LM",
+      },
+      {
+        label: "Secondary",
+        value: "1x2 76mm/55 34-K",
+      },
+      {
+        label: "Anti-Aircraft",
+        value: "6x1 37mm 61-K",
+      },
+      {
+        label: "Torpedoes",
+        value: "3x3 533mm",
+      },
+    ],
+    description: "Tashkent was a Project 20I destroyer leader built for the Soviet Navy in Italy and delivered by OTO at Livorno in 1939. Her Italian-style light blue paint earned her the nickname Blue Cruiser. During the Second World War she ran troops and supplies into besieged Sevastopol before German bombers sank her in Novorossiysk harbour on 2 July 1942.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest — Tashkent artwork",
+        url: "https://jp.pinterest.com/pin/287667494931617325/",
+      },
+      {
+        name: "Wikipedia — Soviet destroyer Tashkent",
+        url: "https://en.wikipedia.org/wiki/Soviet_destroyer_Tashkent",
+      },
+    ],
+  },
+  {
     name: "rapid",
     displayName: "Skoryy",
     type: "Destroyer",
@@ -8212,6 +8247,64 @@
       {
         name: "Wikipedia — Skoryy",
         url: "https://en.wikipedia.org/wiki/Skory-class%20destroyer",
+      },
+    ],
+  },
+  {
+    name: "leningrad",
+    displayName: "Leningrad",
+    type: "Destroyer Leader",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "5x1 130mm/50 B-13",
+      },
+      {
+        label: "Secondary",
+        value: "2x1 76mm/55 34-K",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "Leningrad was the lead ship of the Project 1 destroyer leaders, commissioned into the Baltic Fleet in 1936 as the first large destroyer leaders designed and built in the Soviet Union, with the French contre-torpilleurs as their model. She spent the war operating from Kronstadt and Leningrad on escort, minelaying and shore bombardment duties.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest — Leningrad artwork",
+        url: "https://jp.pinterest.com/pin/841962092805523293/",
+      },
+      {
+        name: "Wikipedia — Leningrad-class destroyer",
+        url: "https://en.wikipedia.org/wiki/Leningrad-class_destroyer",
+      },
+    ],
+  },
+  {
+    name: "novik",
+    displayName: "Novik",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x1 102mm/60 Pattern 1911",
+      },
+      {
+        label: "Torpedoes",
+        value: "4x2 450mm",
+      },
+    ],
+    description: "Novik was a destroyer of the Imperial Russian Navy commissioned in 1913 and originally rated as a mine cruiser. She was Russia's first large destroyer powered by steam turbines and fought actively in the Baltic during the First World War, sinking a German destroyer. Renamed Yakov Sverdlov in 1923, she struck a mine and sank in August 1941 during the Tallinn evacuation.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest — Novik artwork",
+        url: "https://jp.pinterest.com/pin/753438212689322663/",
+      },
+      {
+        name: "Wikipedia — Russian destroyer Novik",
+        url: "https://en.wikipedia.org/wiki/Russian_destroyer_Novik",
       },
     ],
   },
@@ -9527,6 +9620,122 @@
     type: "Weapon",
     armaments: [],
     description: "Soviet Navy 533 mm single torpedo tube, used as the bow and stern tubes of submarines; Soviet submarine tubes had no unified designation and are usually described by submarine class.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/130/50/B13",
+    displayName: "130mm/50 B-13 Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet 130 mm/50 calibre B-13 single gun mount of 1936, fitted to the Leningrad-class destroyer leaders and sharing ammunition with the B-2LM twin turret.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 130 mm/50 B13 Pattern 1936",
+        url: "https://en.wikipedia.org/wiki/130_mm/50_B13_Pattern_1936",
+      },
+    ],
+  },
+  {
+    name: "SU/102/60/Ob1911",
+    displayName: "102mm/60 Pattern 1911 Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "Imperial Russian 102 mm/60 calibre Obukhov Pattern 1911 gun, the main battery of the destroyer Novik.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 102mm 60 caliber Pattern 1911",
+        url: "https://en.wikipedia.org/wiki/102mm_60_caliber_Pattern_1911",
+      },
+    ],
+  },
+  {
+    name: "SU/76/55/2/34K",
+    displayName: "76mm/55 34-K Twin Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet 76.2 mm/55 calibre 34-K twin dual-purpose mount of 1935, fitted to the destroyer leader Tashkent.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 76 mm air defense gun M1935 (34-K)",
+        url: "https://en.wikipedia.org/wiki/76_mm_air_defense_gun_M1935_(34-K)",
+      },
+    ],
+  },
+  {
+    name: "SU/76/55/1/34K",
+    displayName: "76mm/55 34-K Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet 76.2 mm/55 calibre 34-K single dual-purpose mount of 1935, fitted to the Leningrad-class destroyer leaders.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 76 mm air defense gun M1935 (34-K)",
+        url: "https://en.wikipedia.org/wiki/76_mm_air_defense_gun_M1935_(34-K)",
+      },
+    ],
+  },
+  {
+    name: "SU/37/67/61K",
+    displayName: "37mm 61-K Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet 37 mm 61-K single automatic anti-aircraft gun of 1939, the light AA armament of the destroyer leader Tashkent.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 37 mm automatic air defense gun M1939 (61-K)",
+        url: "https://en.wikipedia.org/wiki/37_mm_automatic_air_defense_gun_M1939_(61-K)",
+      },
+    ],
+  },
+  {
+    name: "GER/150/48/TbtsKC36",
+    displayName: "150mm/48 TbtsK C/36 Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "German 15 cm/48 TbtsK C/36 single mount, the main battery of the Type 1936A destroyers and one of the heaviest destroyer guns of the war.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 15 cm TbtsK C/36 naval gun",
+        url: "https://en.wikipedia.org/wiki/15_cm_TbtsK_C/36_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "GER/37/83/SKC30",
+    displayName: "37mm/83 SK C/30 Single Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "German 3.7 cm/83 SK C/30 single anti-aircraft gun carried by destroyers and larger ships.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 3.7 cm SK C/30",
+        url: "https://en.wikipedia.org/wiki/3.7_cm_SK_C/30",
+      },
+    ],
+  },
+  {
+    name: "SU/533/4/1N",
+    displayName: "533mm 1-N Quadruple Torpedo Tubes",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet 533 mm 1-N quadruple torpedo tube mount carried by the Leningrad-class destroyer leaders.",
+    author: "",
+    links: [],
+  },
+  {
+    name: "SU/450/2/M1912",
+    displayName: "450mm Model 1912 Twin Torpedo Tubes",
+    type: "Weapon",
+    armaments: [],
+    description: "Imperial Russian 450 mm Model 1912 twin torpedo tube mount; Novik carried four of them.",
     author: "",
     links: [],
   },
@@ -12582,6 +12791,37 @@
       {
         name: "Wikipedia — Z22 Anton Schmitt",
         url: "https://en.wikipedia.org/wiki/German_destroyer_Z22_Anton_Schmitt",
+      },
+    ],
+  },
+  {
+    name: "z_25",
+    displayName: "Z25 Hoche",
+    type: "Destroyer",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "3x1 150mm/48 TbtsK C/36",
+      },
+      {
+        label: "Anti-Aircraft",
+        value: "5x1 37mm SK C/30 + 4x1 20mm Flak 38",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x4 533mm",
+      },
+    ],
+    description: "Z25 was a Type 1936A destroyer commissioned in 1940; the class is often called the Narvik class after its Norwegian operations. She took part in the Norwegian campaign and the 1942 Channel Dash, but engine problems kept her idle through much of 1943 before she moved to the Baltic in 1944. The Kriegsmarine knew the Type 1936A ships only by their numbers; Hoche was the name she received in French service, and she was scrapped in 1961.",
+    author: "Sam#28 & Nano Banana",
+    links: [
+      {
+        name: "Pinterest — Z25 artwork",
+        url: "https://jp.pinterest.com/pin/759278818402561012/",
+      },
+      {
+        name: "Wikipedia — German destroyer Z25",
+        url: "https://en.wikipedia.org/wiki/German_destroyer_Z25",
       },
     ],
   },
