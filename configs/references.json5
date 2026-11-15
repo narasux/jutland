@@ -6061,6 +6061,53 @@
     ],
   },
   {
+    name: "manchester",
+    displayName: "曼彻斯特",
+    type: "轻巡洋舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x3 152mm/50 Mk XXIII",
+      },
+      {
+        label: "高平炮",
+        value: "4x2 102mm/45 Mk XVI",
+      },
+      {
+        label: "高炮",
+        value: "2x4 40mm/39 Mk VIII（2磅砰砰炮）",
+      },
+      {
+        label: "高炮",
+        value: "2x4 12.7mm（MG Mk III）",
+      },
+      {
+        label: "高炮",
+        value: "4x1 20mm/70 厄利孔",
+      },
+      {
+        label: "鱼雷",
+        value: "2x3 533mm",
+      },
+      {
+        label: "水上侦察机",
+        value: "2x 海象式 Mk I（Walrus）",
+      },
+    ],
+    description: "曼彻斯特号是英国城级轻巡洋舰中格洛斯特级的二号舰，1938 年 8 月服役后编入东印度舰队。二战爆发后她先后参加挪威战役与斯帕蒂文托角海战，并长期执行大西洋与北极航线护航。1942 年 8 月在「基座行动」中为马耳他运送补给，于突尼斯凯利比亚附近被意大利 MS 鱼雷艇击伤，舰长判断难以在天亮前脱离险境而下令弃舰自沉；战后他因过早自沉被军事法庭判罚。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 曼彻斯特号轻巡洋舰",
+        url: "https://jp.pinterest.com/pin/774478467143010522/",
+      },
+      {
+        name: "维基百科 - 曼彻斯特号轻巡洋舰",
+        url: "https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%BD%BB%E6%96%AF%E7%89%B9%E5%8F%B7%E8%BD%BB%E5%B7%A1%E6%B4%8B%E8%88%B0_(15)",
+      },
+    ],
+  },
+  {
     name: "sverdlov",
     displayName: "斯维尔德洛夫",
     type: "轻巡洋舰",
@@ -11116,6 +11163,20 @@
       {
         name: "维基百科 - BL 8-inch Mk VIII naval gun",
         url: "https://en.wikipedia.org/wiki/BL_8-inch_Mk_VIII_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "UK/152/50/3/MK23",
+    displayName: "152mm/50 Mk XXIII 三联装舰炮",
+    type: "武器",
+    armaments: [],
+    description: "英国海军 6 英寸/50 倍径 Mk XXIII 舰炮的三联装炮塔，1930 年代后期起成为城级与皇冠殖民地级轻巡洋舰的标准主炮，射速约每分钟 6 至 8 发，单座炮塔备弹约 200 发。二战中皇家海军多数轻巡洋舰均以该型炮塔为主要对海火力。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - BL 6-inch Mk XXIII naval gun",
+        url: "https://en.wikipedia.org/wiki/BL_6-inch_Mk_XXIII_naval_gun",
       },
     ],
   },

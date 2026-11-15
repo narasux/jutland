@@ -2908,6 +2908,7 @@
           "worcester",
           "vickers",
           "k_25",
+          "manchester",
           "sverdlov",
           "kirov",
           "sevastopol",
@@ -3367,6 +3368,12 @@
       {
         name: "k_25",
         pos: [17, 28],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "manchester",
+        pos: [16, 29],
         rotation: 90,
         belongPlayer: "P1"
       },
