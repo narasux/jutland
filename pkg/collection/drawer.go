@@ -228,9 +228,14 @@ func (d *Drawer) drawCollectionCard(
 		screen, title, card.X+20*scale, card.Y+18*scale,
 		titleFontSize, font.LocalizedUI(font.Kai), color.RGBA{R: 230, G: 218, B: 194, A: 255},
 	)
+	// Zen Kaku Gothic 的基线更低，日文标题需要把分隔线再下移一点，避免文字压线。
+	separatorY := card.Y + 44*scale
+	if i18n.CurrentLanguage() == i18n.LanguageJapanese {
+		separatorY = card.Y + 52*scale
+	}
 	vector.StrokeLine(
-		screen, float32(card.X+20*scale), float32(card.Y+44*scale),
-		float32(card.X+card.W-20*scale), float32(card.Y+44*scale),
+		screen, float32(card.X+20*scale), float32(separatorY),
+		float32(card.X+card.W-20*scale), float32(separatorY),
 		1, color.RGBA{R: 214, G: 201, B: 178, A: 120}, false,
 	)
 }
