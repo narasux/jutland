@@ -5904,6 +5904,53 @@
     ],
   },
   {
+    name: "manchester",
+    displayName: "マンチェスター",
+    type: "軽巡洋艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x3 152mm/50 Mk XXIII",
+      },
+      {
+        label: "両用砲",
+        value: "4x2 102mm/45 Mk XVI",
+      },
+      {
+        label: "対空砲",
+        value: "2x4 40mm/39 Mk VIII（2ポンド・ポンポン砲）",
+      },
+      {
+        label: "対空砲",
+        value: "2x4 12.7mm（MG Mk III）",
+      },
+      {
+        label: "対空砲",
+        value: "4x1 20mm/70 エリコン",
+      },
+      {
+        label: "魚雷",
+        value: "2x3 533mm",
+      },
+      {
+        label: "水上偵察機",
+        value: "2× Walrus",
+      },
+    ],
+    description: "マンチェスターはタウン級軽巡洋艦グロスター型の二番艦で、1938年8月に就役して東インド艦隊に編入された。第二次大戦ではノルウェー作戦やスパルティヴェント岬沖海戦に参加し、大西洋と北極海の船団護衛に従事した。1942年8月、マルタ救援のペデスタル作戦に参加中、チュニジアのケリビア沖でイタリアのMS艇の雷撃を受けて航行不能となり、乗員によって自沈処分された。艦長は早すぎる自沈の責任を問われ、軍法会議にかけられた。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - マンチェスター",
+        url: "https://jp.pinterest.com/pin/774478467143010522/",
+      },
+      {
+        name: "ウィキペディア - マンチェスター (イギリス軽巡洋艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%B3%E3%83%81%E3%82%A7%E3%82%B9%E3%82%BF%E3%83%BC_(%E3%82%A4%E3%82%AE%E3%83%AA%E3%82%B9%E8%BB%BD%E5%B7%A1%E6%B4%8B%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "kaga",
     displayName: "加賀",
     type: "空母",
@@ -10191,6 +10238,20 @@
       {
         name: "ウィキペディア - BL 6-inch Mk XII naval gun",
         url: "https://en.wikipedia.org/wiki/BL_6-inch_Mk_XII_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "UK/152/50/3/MK23",
+    displayName: "152mm/50 Mk XXIII 三連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "英国の 6 インチ/50 Mk XXIII 艦砲を搭載する三連装砲塔。1930 年代後半からタウン級とクラウン・コロニー級軽巡洋艦の標準主砲となり、毎分 6〜8 発を発射でき、一基あたり約 200 発を搭載した。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - BL 6-inch Mk XXIII naval gun",
+        url: "https://en.wikipedia.org/wiki/BL_6-inch_Mk_XXIII_naval_gun",
       },
     ],
   },

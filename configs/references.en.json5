@@ -5904,6 +5904,53 @@
     ],
   },
   {
+    name: "manchester",
+    displayName: "Manchester",
+    type: "Light Cruiser",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x3 152mm/50 Mk XXIII",
+      },
+      {
+        label: "Dual-purpose Guns",
+        value: "4x2 102mm/45 Mk XVI",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x4 40mm/39 Mk VIII (2-pdr Pom-pom)",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x4 12.7mm (MG Mk III)",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "4x1 20mm/70 Oerlikon",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x3 533mm",
+      },
+      {
+        label: "Reconnaissance Seaplanes",
+        value: "2× Walrus",
+      },
+    ],
+    description: "Manchester was the second of the three Gloucester-class ships of the Town class, commissioned in August 1938 for the East Indies Station. In the Second World War she took part in the Norwegian campaign and the Battle of Cape Spartivento, escorted Atlantic and Arctic convoys, and in August 1942 helped cover Operation Pedestal, the Malta relief convoy. Torpedoed by Italian MS boats off Kelibia, she was abandoned and scuttled by her crew; her captain was later court-martialled for scuttling too early.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - HMS Manchester",
+        url: "https://jp.pinterest.com/pin/774478467143010522/",
+      },
+      {
+        name: "Wikipedia - HMS Manchester (15)",
+        url: "https://en.wikipedia.org/wiki/HMS_Manchester_(15)",
+      },
+    ],
+  },
+  {
     name: "kaga",
     displayName: "Kaga",
     type: "Aircraft Carrier",
@@ -10191,6 +10238,20 @@
       {
         name: "Wikipedia - BL 6-inch Mk XII naval gun",
         url: "https://en.wikipedia.org/wiki/BL_6-inch_Mk_XII_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "UK/152/50/3/MK23",
+    displayName: "152mm/50 Mk XXIII Triple Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "The triple turret mounting the British BL 6-inch/50 Mark XXIII naval gun, the standard main battery of the Town and Crown Colony classes from the late 1930s. The mount fired a 51 kg (112 lb) shell at roughly six to eight rounds per minute and carried about 200 rounds per turret.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - BL 6-inch Mk XXIII naval gun",
+        url: "https://en.wikipedia.org/wiki/BL_6-inch_Mk_XXIII_naval_gun",
       },
     ],
   },

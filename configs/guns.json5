@@ -2766,6 +2766,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 英国海军 UK/152/50 三联装舰炮（城级）
+  {
+    name: "UK/152/50/3/MK23",
+    bulletName: "UK/GB/152/1935",
+    bulletCount: 3,
+    reloadTime: 8,
+    range: 23,
+    bulletSpread: 100,
+    bulletSpeed: 840,
+    fundsCost: 5,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 英国海军 UK/152/50 双联装舰炮
   {
     name: "UK/152/50/2/MK23",
