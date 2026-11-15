@@ -76,6 +76,7 @@ func TestOoiTorpedoFanSurvivesNewShipCopy(t *testing.T) {
 // 每艘舰的首发鱼雷齐射都必须有一根压在瞄准线上，且每根都落在最内侧航迹范围内。
 // 回归：旧实现按 (槽位 - (管数-1)/2) 排扇形，porter 2x4 的首发是 −12° / +1.71°，
 // maury 右舷齐射是 −12.03° / +0.8°（有一根打到瞄准线反侧），正中那根永远空缺。
+// 舰首 / 舰尾也要检查：潜艇、战列舰的艏艉鱼雷管方向相反，不能共用一张扇面。
 func TestFirstTorpedoVolleyCoversTheAimLine(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -87,8 +88,8 @@ func TestFirstTorpedoVolleyCoversTheAimLine(t *testing.T) {
 		if ship == nil || !ship.Weapon.HasTorpedo {
 			continue
 		}
-		// 左右舷各试一次：只有射界覆盖该方位的发射器会开火。
-		for _, bearing := range []float64{90, 270} {
+		// 艏、左右舷、艉各试一次：只有射界覆盖该方位的发射器会开火。
+		for _, bearing := range []float64{0, 90, 180, 270} {
 			generator := objUnit.NewShipUidGenerator(faction.HumanAlpha)
 			shooter := objUnit.NewShip(generator, name, objPos.NewR(0, 0), 0, faction.HumanAlpha)
 			distance := 0.4 * shooter.Weapon.Torpedoes[0].Range
