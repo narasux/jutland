@@ -4705,8 +4705,8 @@
     rotateSpeed: 0.79,
     length: 252,
     width: 29,
-    fundsCost: 280,
-    timeCost: 100,
+    fundsCost: 235,
+    timeCost: 94,
     weapon: {
       mainGuns: [
         // 右前主炮 A
