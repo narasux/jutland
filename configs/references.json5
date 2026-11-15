@@ -4566,6 +4566,41 @@
     ],
   },
   {
+    name: "oktyabrskaya_revolutsiya",
+    displayName: "十月革命号",
+    type: "战列舰",
+    armaments: [
+      {
+        label: "主炮",
+        value: "4x3 305mm/52 1907 年式",
+      },
+      {
+        label: "副炮",
+        value: "16x1 120mm/50 1905 年式",
+      },
+      {
+        label: "高炮",
+        value: "6x1 76mm/40 Lender",
+      },
+      {
+        label: "高炮",
+        value: "6x1 45mm/46 21-K",
+      },
+    ],
+    description: "十月革命号原名「甘古特」，是沙俄海军甘古特级战列舰首舰，1925 年更名，1931—1934 年在波罗的海船厂完成大改，此后长期担任苏联波罗的海舰队主力。1941 年 9 月在列宁格勒被 Ju 88 命中三弹重创，修复后驻泊喀琅施塔得，用主炮支援陆上防御直至战争结束。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 十月革命号双视图",
+        url: "https://jp.pinterest.com/pin/620370917411066216/",
+      },
+      {
+        name: "维基百科 - 甘古特号战列舰",
+        url: "https://zh.wikipedia.org/wiki/%E7%94%98%E5%8F%A4%E7%89%B9%E5%8F%B7%E6%88%98%E5%88%97%E8%88%B0_(1911%E5%B9%B4)",
+      },
+    ],
+  },
+  {
     name: "atlanta",
     displayName: "亚特兰大",
     type: "防空巡洋舰",
@@ -11532,6 +11567,20 @@
     ],
   },
   {
+    name: "SU/305/52/3/MK3-12",
+    displayName: "305mm/52 三联装炮塔（МК-3-12）",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 305 毫米/52 倍径三联装炮塔，由沙俄 1907 年式舰炮配 MK-3-12 炮座组成，是甘古特级战列舰改装后唯一的的主炮，单座三管、射速约每分钟 1.5–2 发。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Obukhovskii 12-inch/52-caliber Pattern 1907 gun",
+        url: "https://en.wikipedia.org/wiki/Obukhovskii_12%22/52_Pattern_1907_gun",
+      },
+    ],
+  },
+  {
     name: "SU/250/55/3",
     displayName: "250mm/55 三联装舰炮",
     type: "武器",
@@ -11638,6 +11687,20 @@
     ],
   },
   {
+    name: "SU/120/50/1/P1905",
+    displayName: "120mm/50 单装副炮（1905 年式）",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 120 毫米/50 倍径维克斯式单装副炮，1905 年式，安装在甘古特级战列舰的舷侧炮廓内，全舰共 16 门。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 120 mm 50 caliber Pattern 1905",
+        url: "https://en.wikipedia.org/wiki/120_mm_50_caliber_Pattern_1905",
+      },
+    ],
+  },
+  {
     name: "SU/100/70/2/SM51",
     displayName: "100mm/70 SM-5-1 双联装高平两用炮",
     type: "武器",
@@ -11696,6 +11759,20 @@
     description: "苏联海军 100 毫米/50 倍径 Minizini 双联装高平两用炮，为意大利 1928/30 年型炮座的进口产品，装备基洛夫级巡洋舰。",
     author: "",
     links: [],
+  },
+  {
+    name: "SU/76/40/1/Lender",
+    displayName: "76mm/40 单装高炮（Lender）",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 76 毫米/40 倍径 Lender 1914/15 年式单装高射炮，是甘古特级战列舰 1930 年代改装后加装的中程防空武器。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 76 mm air-defense gun M1914/15",
+        url: "https://en.wikipedia.org/wiki/76_mm_air-defense_gun_M1914/15",
+      },
+    ],
   },
   {
     name: "SU/57/81/4/ZIF75",
@@ -15545,7 +15622,7 @@
     author: "Nano Banana",
     links: [
       {
-        name: "Pinterest - I-400 潜水航母（Nano Banana 重绘）",
+        name: "Pinterest - I-400 潜水航母",
         url: "https://www.pinterest.com/pin/365565694738124984/",
       },
       {

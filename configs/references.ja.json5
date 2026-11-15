@@ -8785,6 +8785,41 @@
     ],
   },
   {
+    name: "oktyabrskaya_revolutsiya",
+    displayName: "オクチャブリスカヤ・レヴォリューツィヤ",
+    type: "戦艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "4x3 305mm/52 1907年式",
+      },
+      {
+        label: "副砲",
+        value: "16x1 120mm/50 1905年式",
+      },
+      {
+        label: "対空砲",
+        value: "6x1 76mm/40 レンダー",
+      },
+      {
+        label: "対空砲",
+        value: "6x1 45mm/46 21-K",
+      },
+    ],
+    description: "オクチャブリスカヤ・レヴォリューツィヤはロシア初の弩級戦艦ガングート級の一番艦「ガングート」で、1925年に改名された。1931〜1934年の大改装で缶と煙突を更新し、船首楼を高め、甲板装甲を強化した。1941年9月のレニングラードでJu 88の爆弾3発を受けて大破、修理後はクロンシュタットから主砲で陸上戦線を支援し続けた。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest — オクチャブリスカヤ・レヴォリューツィヤ",
+        url: "https://jp.pinterest.com/pin/620370917411066216/",
+      },
+      {
+        name: "ウィキペディア — ガングート (戦艦)",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%82%B0%E3%83%BC%E3%83%88_(%E6%88%A6%E8%89%A6)",
+      },
+    ],
+  },
+  {
     name: "soryu",
     displayName: "蒼龍",
     type: "空母",
@@ -8985,6 +9020,20 @@
     links: [],
   },
   {
+    name: "SU/76/40/1/Lender",
+    displayName: "76mm/40 単装高角砲（レンダー）",
+    type: "兵器",
+    armaments: [],
+    description: "ソ連海軍の 76mm/40 口径レンダー 1914/15 年式単装高角砲。1930 年代の大改装でガングート級に搭載された中距離防空兵器である。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 76 mm air-defense gun M1914/15",
+        url: "https://en.wikipedia.org/wiki/76_mm_air-defense_gun_M1914/15",
+      },
+    ],
+  },
+  {
     name: "SU/100/56/2/MZ14",
     displayName: "100mm/56 MZ-14 Twin 両用砲架",
     type: "兵器",
@@ -9046,6 +9095,20 @@
       {
         name: "ウィキペディア - Б-2-ЛМ",
         url: "https://ru.wikipedia.org/wiki/Б-2-ЛМ",
+      },
+    ],
+  },
+  {
+    name: "SU/120/50/1/P1905",
+    displayName: "120mm/50 単装副砲（1905年式）",
+    type: "兵器",
+    armaments: [],
+    description: "ソ連海軍の 120mm/50 口径ビッカース式単装副砲（1905 年式）。ガングート級の舷側砲郭に計 16 門が搭載された。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 120 mm 50 caliber Pattern 1905",
+        url: "https://en.wikipedia.org/wiki/120_mm_50_caliber_Pattern_1905",
       },
     ],
   },
@@ -9208,6 +9271,20 @@
       {
         name: "ウィキペディア - 406-мм морское орудие Б-37",
         url: "https://ru.wikipedia.org/wiki/406-мм_морское_орудие_Б-37",
+      },
+    ],
+  },
+  {
+    name: "SU/305/52/3/MK3-12",
+    displayName: "305mm/52 三連装砲塔（MK-3-12）",
+    type: "兵器",
+    armaments: [],
+    description: "ソ連海軍の 305mm/52 口径三連装砲塔。オブホフ 1907 年式砲と MK-3-12 砲塔を組み合わせたもので、大改装後のガングート級唯一の主砲となった。1 基 3 門、発射速度は毎分約 1.5〜2 発。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Obukhovskii 12-inch/52-caliber Pattern 1907 gun",
+        url: "https://en.wikipedia.org/wiki/Obukhovskii_12%22/52_Pattern_1907_gun",
       },
     ],
   },
@@ -15571,7 +15648,7 @@
     author: "Nano Banana",
     links: [
       {
-        name: "Pinterest - 伊400 潜水空母（Nano Banana による再作画）",
+        name: "Pinterest - 伊400 潜水空母",
         url: "https://www.pinterest.com/pin/365565694738124984/",
       },
       {

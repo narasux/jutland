@@ -77,6 +77,14 @@
     damage: 3750,
     criticalRate: 0.03
   },
+  // 苏联海军 305mm/52 1907 年式主炮弹（甘古特级 470 kg 穿甲弹）
+  {
+    name: "SU/GB/305/1907",
+    type: "shell",
+    diameter: 305,
+    damage: 1600,
+    criticalRate: 0.01
+  },
   // 苏联海军 250mm/55 安萨尔多大型巡洋舰方案主炮弹（1936 年纸面设计，无实弹）
   {
     name: "SU/GB/250/1936",
@@ -114,11 +122,27 @@
     damage: 125,
     criticalRate: 0.002
   },
+  // 苏联海军 120mm/50 1905 年式维克斯副炮弹
+  {
+    name: "SU/GB/120/1905",
+    type: "shell",
+    diameter: 120,
+    damage: 90,
+    criticalRate: 0.001
+  },
   {
     name: "SU/GB/100/1940",
     type: "shell",
     diameter: 100,
     damage: 55,
+    criticalRate: 0.001
+  },
+  // 苏联海军 76mm/40 Lender 高射炮弹（1914/15 年式，甘古特级改装后副高炮）
+  {
+    name: "SU/GB/76/1914",
+    type: "shell",
+    diameter: 76,
+    damage: 35,
     criticalRate: 0.001
   },
   {
