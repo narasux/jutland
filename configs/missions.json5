@@ -1141,8 +1141,8 @@
       // === 盟军增援舰队的航空兵（架空）===
       // 史实：1942-02-19 达尔文附近没有盟军航母（TF 11 的列克星敦号正驶向拉包尔，
       // TF 17 的约克城号在太平洋方向）。本关沿用「盟军提前截获情报、增援舰队先期抵达」
-      // 的既有架空设定，把两艘约克城级编入驰援舰队，使盟军有能力对抗第一航空舰队。
-      // 资源替代：两艘均为 yorktown（约克城级），第二艘代同型舰。
+      // 的既有架空设定，把约克城号与企业号编入驰援舰队，使盟军有能力对抗第一航空舰队。
+      // 两舰均为约克城级：yorktown（约克城号）、enterprise（企业号）。
       // 舰位在主力编队西南侧（背向东北方向的日军），航向 90°，由防空巡洋舰掩护。
       {
         name: "yorktown",
@@ -1151,7 +1151,7 @@
         belongPlayer: "P1"
       },
       {
-        name: "yorktown",
+        name: "enterprise",
         pos: [33, 46],
         rotation: 90,
         belongPlayer: "P1"
@@ -1363,9 +1363,9 @@
       // 两军最近屏卫间距约 90 格（约 11.5km），最近航母间距约 110 格（约 14.1km）；双方最短航程俯冲轰炸机仍可抵达最近敌方屏卫。
 
       // === 美军：第 16 特混舰队（东北编队） ===
-      // Enterprise CV-6 -> yorktown：同属 Yorktown 级；第 16 特混舰队内侧，舰首约向西南。
+      // Enterprise CV-6：企业号（约克城级）；第 16 特混舰队内侧，舰首约向西南。
       {
-        name: "yorktown",
+        name: "enterprise",
         pos: [187, 76],
         rotation: 225,
         belongPlayer: "P1"
@@ -2023,9 +2023,9 @@
         rotation: 135,
         belongPlayer: "P1"
       },
-      // Washington BB-56 -> south_dakota：North Carolina 级未收录；以同任务、尺寸接近的快速战列舰替代。
+      // Washington BB-56：北卡罗来纳级；快速战列舰屏卫中央偏北。
       {
-        name: "south_dakota",
+        name: "washington",
         pos: [17, 16],
         rotation: 135,
         belongPlayer: "P1"
@@ -2815,6 +2815,7 @@
           "lowa",
           "lexington",
           "south_dakota",
+          "washington",
           "west_virginia",
           "maryland",
           "tennessee",
@@ -3886,44 +3887,50 @@
         belongPlayer: "P1"
       },
       {
-        name: "lexington",
+        name: "washington",
         pos: [34, 48],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "west_virginia",
+        name: "lexington",
         pos: [35, 49],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "maryland",
+        name: "west_virginia",
         pos: [34, 50],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "tennessee",
+        name: "maryland",
         pos: [35, 51],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "new_mexico",
+        name: "tennessee",
         pos: [34, 52],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "pennsylvania",
+        name: "new_mexico",
         pos: [35, 53],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "arizona",
+        name: "pennsylvania",
         pos: [34, 54],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "arizona",
+        pos: [35, 55],
         rotation: 90,
         belongPlayer: "P1"
       },

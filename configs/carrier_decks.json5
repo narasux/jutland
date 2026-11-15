@@ -1019,6 +1019,31 @@
       approachLength: 3
     }
   },
+  // washington：舰尾两舷各 1，横向弹射，返航舰侧水面回收
+  {
+    name: "USCatapult_washington",
+    takeoffPoints: [
+      {
+        forward: 0.893,
+        lateral: -0.25,
+        runLength: 0.22,
+        launchAngle: -60
+      },
+      {
+        forward: 0.893,
+        lateral: 0.25,
+        runLength: 0.22,
+        launchAngle: 60
+      }
+    ],
+    landing: {
+      mode: "sea",
+      forward: 0.5,
+      lateral: 1.1,
+      approachAngle: 0,
+      approachLength: 3
+    }
+  },
   // west_virginia：单台，左舷弹射，横向弹射，返航舰侧水面回收
   {
     name: "USCatapult_west_virginia",
