@@ -12485,6 +12485,53 @@
     ],
   },
   {
+    name: "enterprise",
+    displayName: "Enterprise",
+    type: "Aircraft Carrier",
+    armaments: [
+      {
+        label: "Dual-purpose Guns",
+        value: "8x1 127mm/38 Mk12",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x4 40mm/56 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "8x2 40mm/56 Bofors",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "50x1 20mm/70 Mk4",
+      },
+      {
+        label: "Fighters",
+        value: "36× F6F-3",
+      },
+      {
+        label: "Torpedo Bombers",
+        value: "18× TBF-1",
+      },
+      {
+        label: "Dive Bombers",
+        value: "36× SB2C-4",
+      },
+    ],
+    description: "USS Enterprise (CV-6), the second Yorktown-class carrier, was commissioned in 1938 and became the most decorated U.S. warship of World War II. She fought from Pearl Harbor through Midway, the Eastern Solomons, Santa Cruz, the Philippine Sea and Leyte Gulf. The drawing shows her early-1945 appearance, with torpedo bulges and a close-range battery of forty 40 mm Bofors and fifty 20 mm Oerlikons.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Nano Banana — USS Enterprise (CV-6)",
+        url: "https://jp.pinterest.com/pin/290130401003101606/",
+      },
+      {
+        name: "Wikipedia — Enterprise",
+        url: "https://en.wikipedia.org/wiki/USS_Enterprise_(CV-6)",
+      },
+    ],
+  },
+  {
     name: "yorktown",
     displayName: "Yorktown",
     type: "Aircraft Carrier",

@@ -12485,6 +12485,53 @@
     ],
   },
   {
+    name: "enterprise",
+    displayName: "エンタープライズ",
+    type: "空母",
+    armaments: [
+      {
+        label: "両用砲",
+        value: "8x1 127mm/38 Mk12",
+      },
+      {
+        label: "対空砲",
+        value: "6x4 40mm/56 Bofors",
+      },
+      {
+        label: "対空砲",
+        value: "8x2 40mm/56 Bofors",
+      },
+      {
+        label: "対空砲",
+        value: "50x1 20mm/70 Mk4",
+      },
+      {
+        label: "戦闘機",
+        value: "36× F6F-3",
+      },
+      {
+        label: "雷撃機",
+        value: "18× TBF-1",
+      },
+      {
+        label: "急降下爆撃機",
+        value: "36× SB2C-4",
+      },
+    ],
+    description: "USS エンタープライズ（CV-6）はヨークタウン級の2番艦で、1938年に就役した。第二次世界大戦で最も多くの殊勲を受けた米軍艦であり、真珠湾からミッドウェー、東ソロモン、サンタクルーズ、マリアナ、レイテ沖まで主要な空母戦に参加した。図は1945年初頭の状態で、魚雷防御隔壁と40mmボフォース40門、20mmエリコン50門の近接防空火力を備える。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Nano Banana — エンタープライズ (CV-6)",
+        url: "https://jp.pinterest.com/pin/290130401003101606/",
+      },
+      {
+        name: "ウィキペディア — エンタープライズ",
+        url: "https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%97%E3%83%A9%E3%82%A4%E3%82%BA_(CV-6)",
+      },
+    ],
+  },
+  {
     name: "yorktown",
     displayName: "ヨークタウン",
     type: "空母",
