@@ -4690,6 +4690,531 @@
       ]
     }
   },
+  // 企业
+  {
+    name: "enterprise",
+    nation: "us",
+    type: "aircraft_carrier",
+    typeAbbr: "CV",
+    year: 1945,
+    totalHP: 32060,
+    horizontalDamageReduction: 0.3,
+    verticalDamageReduction: 0.1,
+    maxSpeed: 32.5,
+    acceleration: 0.34,
+    rotateSpeed: 0.79,
+    length: 252,
+    width: 29,
+    fundsCost: 280,
+    timeCost: 100,
+    weapon: {
+      mainGuns: [
+        // 右前主炮 A
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.7,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左前主炮 A
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.697,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        // 右前主炮 B
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.63,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 左前主炮 B
+        {
+          name: "US/127/38/MK12",
+          posPercent: 0.632,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        // 右后主炮 A
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.751,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后主炮 A
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.748,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 350]
+        },
+        // 右后主炮 B
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.817,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后主炮 B
+        {
+          name: "US/127/38/MK12",
+          posPercent: -0.817,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 350]
+        },
+      ],
+      secondaryGuns: [
+        // 右前四联装 A
+        {
+          name: "US/40/56/4",
+          posPercent: 0.372,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右前四联装 B
+        {
+          name: "US/40/56/4",
+          posPercent: 0.327,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右舷中部四联装
+        {
+          name: "US/40/56/4",
+          posPercent: -0.172,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 右后四联装
+        {
+          name: "US/40/56/4",
+          posPercent: -0.35,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后四联装 A
+        {
+          name: "US/40/56/4",
+          posPercent: -0.435,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左后四联装 B
+        {
+          name: "US/40/56/4",
+          posPercent: -0.513,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 左前双联装
+        {
+          name: "US/40/56/2",
+          posPercent: 0.984,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前双联装 A
+        {
+          name: "US/40/56/2",
+          posPercent: 0.916,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前双联装 A
+        {
+          name: "US/40/56/2",
+          posPercent: 0.916,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右前双联装 B
+        {
+          name: "US/40/56/2",
+          posPercent: 0.809,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左前双联装 B
+        {
+          name: "US/40/56/2",
+          posPercent: 0.809,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部双联装
+        {
+          name: "US/40/56/2",
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左后双联装
+        {
+          name: "US/40/56/2",
+          posPercent: -0.872,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右后双联装
+        {
+          name: "US/40/56/2",
+          posPercent: -0.924,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+      ],
+      antiAircraftGuns: [
+        // 20mm 单装 — 右舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.546,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.542,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.516,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.511,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.494,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.482,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.469,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.454,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.367,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.341,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.318,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.293,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.265,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷前部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.2,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.172,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 右舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.14,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.113,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.088,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.068,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.068,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.045,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.042,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.024,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: 0.018,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.001,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.006,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.026,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.033,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.049,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.057,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷中部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.167,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.192,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.214,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.242,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 左舷后部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.338,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.366,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷后部
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.389,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.418,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.451,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.474,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.501,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.527,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.548,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.571,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.604,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 右舷舰尾
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.982,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷舰尾
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.984,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 20mm 单装 — 右舷舰尾
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.985,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 20mm 单装 — 左舷舰尾
+        {
+          name: "US/20/70/MK4",
+          posPercent: -0.986,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+      ]
+    },
+    aircraft: {
+      deck: "StraightDeckNoCatapult",
+      takeOffTime: 1.6,
+      groups: [
+        {
+          name: "F6F-3",
+          maxCount: 36
+        },
+        {
+          name: "TBF-1",
+          maxCount: 18
+        },
+        {
+          name: "SB2C-4",
+          maxCount: 36
+        },
+      ]
+    }
+  },
   // 约克城
   {
     name: "yorktown",

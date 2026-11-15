@@ -2755,6 +2755,7 @@
           "midway",
           "illinois",
           "kentucky_bb66",
+          "enterprise",
           "yorktown",
           "saratoga",
           "essex",
@@ -3830,32 +3831,38 @@
         belongPlayer: "P1"
       },
       {
-        name: "yorktown",
+        name: "enterprise",
         pos: [31, 50],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "princeton",
+        name: "yorktown",
         pos: [32, 51],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "card",
+        name: "princeton",
         pos: [31, 52],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "langley",
+        name: "card",
         pos: [32, 53],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
-        name: "wolverine",
+        name: "langley",
         pos: [31, 54],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "wolverine",
+        pos: [32, 55],
         rotation: 90,
         belongPlayer: "P1"
       },
