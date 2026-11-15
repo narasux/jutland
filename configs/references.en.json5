@@ -5347,6 +5347,20 @@
     ],
   },
   {
+    name: "JP/120/45/2/Type10",
+    displayName: "120mm Twin Mount Type10",
+    type: "Weapon",
+    armaments: [],
+    description: "The twin mounting of the Japanese 12 cm/45 10th Year Type high-angle gun, adopted in 1921. It shared ammunition with the single mount and served as anti-aircraft and surface armament on small vessels.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 四十五口径十年式十二糎高角砲",
+        url: "https://ja.wikipedia.org/wiki/%E5%9B%9B%E5%8D%81%E4%BA%94%E5%8F%A3%E5%BE%84%E5%8D%81%E5%B9%B4%E5%BC%8F%E5%8D%81%E4%BA%8C%E7%B3%8E%E9%AB%98%E8%A7%92%E7%A0%B2",
+      },
+    ],
+  },
+  {
     name: "JP/120/45/Type10",
     displayName: "120mm Single Mount Type10",
     type: "Weapon",
@@ -5385,6 +5399,20 @@
       {
         name: "Wikipedia - 五十口径三年式十二糎七砲",
         url: "https://ja.wikipedia.org/wiki/%E4%BA%94%E5%8D%81%E5%8F%A3%E5%BE%84%E4%B8%89%E5%B9%B4%E5%BC%8F%E5%8D%81%E4%BA%8C%E7%B3%8E%E4%B8%83%E7%A0%B2",
+      },
+    ],
+  },
+  {
+    name: "JP/13/2/Type93",
+    displayName: "13mm Twin MG Type93",
+    type: "Weapon",
+    armaments: [],
+    description: "The Japanese Type 93 13 mm twin machine gun, adopted in 1933, was the twin mounting of the navy's close-range anti-aircraft machine gun used on ships and aircraft.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 九三式十三粍機銃",
+        url: "https://ja.wikipedia.org/wiki/%E4%B9%9D%E4%B8%89%E5%BC%8F%E5%8D%81%E4%B8%89%E7%B2%8D%E6%A9%9F%E9%8A%83",
       },
     ],
   },
@@ -16013,6 +16041,110 @@
       {
         name: "Wikipedia - USS Tarpon (SS-175)",
         url: "https://en.wikipedia.org/wiki/USS_Tarpon_(SS-175)",
+      },
+    ],
+  },
+  {
+    name: "mamiya",
+    displayName: "Mamiya",
+    type: "Food Supply Ship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x1 140mm/50 3rd Year Type",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 76mm/40 3rd Year Type",
+      },
+    ],
+    description: "Mamiya was the Imperial Japanese Navy's first purpose-built food supply ship, completed by Kawasaki in 1924. Her refrigerated holds, food-processing rooms and bakeries could feed 18,000 men for three weeks, earning her the nickname 'the floating Ginza'. She shuttled between the home islands and forward bases until December 1944, when she was torpedoed and sunk in the South China Sea by USS Sealion.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Mamiya plan",
+        url: "https://jp.pinterest.com/pin/552183604293295413/",
+      },
+      {
+        name: "Wikipedia - Japanese supply ship Mamiya",
+        url: "https://en.wikipedia.org/wiki/Japanese_supply_ship_Mamiya",
+      },
+    ],
+  },
+  {
+    name: "irako",
+    displayName: "Irako",
+    type: "Food Supply Ship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x2 120mm/45 10th Year Type",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "10x1 25mm/60 Type 96",
+      },
+    ],
+    description: "Irako was a smaller follow-on to Mamiya, completed in December 1941 and capable of supplying 15,000 men for two weeks. She made repeated runs from Japan to Truk, Singapore and other bases and also carried troops and munitions. Damaged by US carrier aircraft at Coron Bay in September 1944, she was scuttled.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Irako plan",
+        url: "https://jp.pinterest.com/pin/547680004680700885/",
+      },
+      {
+        name: "Wikipedia - Japanese supply ship Irako",
+        url: "https://en.wikipedia.org/wiki/Japanese_supply_ship_Irako",
+      },
+    ],
+  },
+  {
+    name: "kashino",
+    displayName: "Kashino",
+    type: "Munition Ship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x1 120mm/45 10th Year Type",
+      },
+      {
+        label: "Machine Guns",
+        value: "2x2 13.2mm Type 93",
+      },
+    ],
+    description: "Kashino was built specifically to carry the Yamato-class battleships' 46 cm guns and turrets from the Kure Naval Arsenal to the building yards. Two enormous holds amidships could embark a complete turret. Reclassified as an ammunition transport after the battleship programme changed, she was torpedoed and sunk by USS Growler north-east of Formosa in September 1942.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Kashino plan",
+        url: "https://jp.pinterest.com/pin/1075938167218177904/",
+      },
+      {
+        name: "Wikipedia - Japanese munition ship Kashino",
+        url: "https://en.wikipedia.org/wiki/Japanese_munition_ship_Kashino",
+      },
+    ],
+  },
+  {
+    name: "hikawa_maru",
+    displayName: "Hikawa Maru",
+    type: "Hospital Ship",
+    armaments: [
+      {
+        label: "Armament",
+        value: "None",
+      },
+    ],
+    description: "Hikawa Maru was a NYK Line ocean liner on the North Pacific route from 1930. Requisitioned by the Imperial Japanese Navy in December 1941, she was converted into an auxiliary hospital ship, painted white with a green band and red crosses. She survived mines and air attacks and was one of the few large Japanese passenger ships to survive the war. She returned to civilian service and has been preserved as a museum ship at Yokohama since 1960.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Hikawa Maru plan",
+        url: "https://jp.pinterest.com/pin/52987733110130550/",
+      },
+      {
+        name: "Wikipedia - Hikawa Maru",
+        url: "https://en.wikipedia.org/wiki/Hikawa_Maru",
       },
     ],
   },

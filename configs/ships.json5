@@ -34818,6 +34818,238 @@
       ]
     }
   },
+  // --------- 其他 · 货轮 ----------
+  // 間宮
+  {
+    name: "mamiya",
+    nation: "jp",
+    type: "cargo",
+    typeAbbr: "Cargo",
+    year: 1924,
+    totalHP: 15820,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 19.2,
+    acceleration: 0.12,
+    rotateSpeed: 0.55,
+    length: 145,
+    width: 18.6,
+    fundsCost: 70,
+    timeCost: 26,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/140/50/Type3",
+          posPercent: 0.81,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 B
+        {
+          name: "JP/140/50/Type3",
+          posPercent: -0.82,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 左舷高炮 A
+        {
+          name: "JP/76/40/Type3",
+          posPercent: -0.4,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷高炮 A
+        {
+          name: "JP/76/40/Type3",
+          posPercent: -0.4,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        }
+      ]
+    }
+  },
+  // 伊良湖
+  {
+    name: "irako",
+    nation: "jp",
+    type: "cargo",
+    typeAbbr: "Cargo",
+    year: 1941,
+    totalHP: 11100,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 17.5,
+    acceleration: 0.12,
+    rotateSpeed: 0.55,
+    length: 145,
+    width: 19,
+    fundsCost: 60,
+    timeCost: 23,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/120/45/2/Type10",
+          posPercent: 0.79,
+          rightFiringArc: [0, 165],
+          leftFiringArc: [195, 360]
+        },
+        // 后主炮 B
+        {
+          name: "JP/120/45/2/Type10",
+          posPercent: -0.83,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [180, 345]
+        }
+      ],
+      antiAircraftGuns: [
+        // 左舷前高炮 A
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0.68,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前高炮 A
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0.68,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷前高炮 B
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷前高炮 B
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷中部高炮
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷中部高炮
+        {
+          name: "JP/25/60/Type96",
+          posPercent: 0,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后高炮 A
+        {
+          name: "JP/25/60/Type96",
+          posPercent: -0.34,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后高炮 A
+        {
+          name: "JP/25/60/Type96",
+          posPercent: -0.34,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 左舷后高炮 B
+        {
+          name: "JP/25/60/Type96",
+          posPercent: -0.68,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷后高炮 B
+        {
+          name: "JP/25/60/Type96",
+          posPercent: -0.68,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        }
+      ]
+    }
+  },
+  // 樫野
+  {
+    name: "kashino",
+    nation: "jp",
+    type: "cargo",
+    typeAbbr: "Cargo",
+    year: 1940,
+    totalHP: 11468,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 14,
+    acceleration: 0.1,
+    rotateSpeed: 0.5,
+    length: 137,
+    width: 19.9,
+    fundsCost: 60,
+    timeCost: 23,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "JP/120/45/Type10",
+          posPercent: 0.68,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        },
+        // 后主炮 B
+        {
+          name: "JP/120/45/Type10",
+          posPercent: -0.71,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      antiAircraftGuns: [
+        // 左舷机枪 A
+        {
+          name: "JP/13/2/Type93",
+          posPercent: 0.28,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 右舷机枪 A
+        {
+          name: "JP/13/2/Type93",
+          posPercent: 0.28,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        }
+      ]
+    }
+  },
+  // --------- 其他 · 医疗船 ----------
+  // 冰川丸
+  {
+    name: "hikawa_maru",
+    nation: "jp",
+    type: "hospital",
+    typeAbbr: "HS",
+    year: 1941,
+    totalHP: 17000,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 18.2,
+    acceleration: 0.12,
+    rotateSpeed: 0.55,
+    length: 163,
+    width: 20.1,
+    fundsCost: 145,
+    timeCost: 53,
+  },
   // 英国海军
   // --------- 航空母舰 ----------
   // 皇家方舟

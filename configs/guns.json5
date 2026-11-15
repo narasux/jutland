@@ -2491,6 +2491,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 日本海军 十年式 12cm 双联装高角炮
+  {
+    name: "JP/120/45/2/Type10",
+    bulletName: "JP/GB/120/1922",
+    bulletCount: 2,
+    reloadTime: 3,
+    range: 11,
+    bulletSpread: 60,
+    bulletSpeed: 825,
+    fundsCost: 4,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 日本海军 十年式 12cm 炮
   {
     name: "JP/120/45/Type10",
@@ -2639,6 +2652,19 @@
     name: "JP/13/4/Type93",
     bulletName: "JP/GB/13/1935",
     bulletCount: 4,
+    reloadTime: 0.05,
+    range: 2,
+    bulletSpread: 20,
+    bulletSpeed: 800,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 日本海军 九三式 13mm/76 双联装机枪
+  {
+    name: "JP/13/2/Type93",
+    bulletName: "JP/GB/13/1935",
+    bulletCount: 2,
     reloadTime: 0.05,
     range: 2,
     bulletSpread: 20,

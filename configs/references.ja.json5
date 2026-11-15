@@ -5347,6 +5347,20 @@
     ],
   },
   {
+    name: "JP/120/45/2/Type10",
+    displayName: "十年式 12cm 連装高角砲",
+    type: "武器",
+    armaments: [],
+    description: "日本海軍の45口径十年式12cm高角砲の連装型。単装型と弾薬を共用し、小型艦艇の主砲および対空火力として用いられた。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 四十五口径十年式十二糎高角砲",
+        url: "https://ja.wikipedia.org/wiki/%E5%9B%9B%E5%8D%81%E4%BA%94%E5%8F%A3%E5%BE%84%E5%8D%81%E5%B9%B4%E5%BC%8F%E5%8D%81%E4%BA%8C%E7%B3%8E%E9%AB%98%E8%A7%92%E7%A0%B2",
+      },
+    ],
+  },
+  {
     name: "JP/120/45/Type10",
     displayName: "十年式 120mm 単装砲",
     type: "兵器",
@@ -5385,6 +5399,20 @@
       {
         name: "ウィキペディア - 五十口径三年式十二糎七砲",
         url: "https://ja.wikipedia.org/wiki/%E4%BA%94%E5%8D%81%E5%8F%A3%E5%BE%84%E4%B8%89%E5%B9%B4%E5%BC%8F%E5%8D%81%E4%BA%8C%E7%B3%8E%E4%B8%83%E7%A0%B2",
+      },
+    ],
+  },
+  {
+    name: "JP/13/2/Type93",
+    displayName: "九三式 13mm 連装機銃",
+    type: "武器",
+    armaments: [],
+    description: "日本海軍の九三式13mm機銃の連装型。1933年に制式採用され、艦艇や航空機の近接防空用として使用された。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - 九三式十三粍機銃",
+        url: "https://ja.wikipedia.org/wiki/%E4%B9%9D%E4%B8%89%E5%BC%8F%E5%8D%81%E4%B8%89%E7%B2%8D%E6%A9%9F%E9%8A%83",
       },
     ],
   },
@@ -16013,6 +16041,110 @@
       {
         name: "Wikipedia - ターポン (潜水艦)",
         url: "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%83%BC%E3%83%9D%E3%83%B3_(%E6%BD%9C%E6%B0%B4%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "mamiya",
+    displayName: "間宮",
+    type: "給糧艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x1 140mm/50 三年式",
+      },
+      {
+        label: "高角砲",
+        value: "2x1 76mm/40 三年式",
+      },
+    ],
+    description: "間宮は大日本帝国海軍が初めて専用設計した給糧艦で、1924年に川崎造船所で竣工した。大型冷蔵庫や食品加工室、製パン設備を備え、1万8000人分・3週間の食糧を供給できたことから「洋上に浮かぶ銀座」と呼ばれた。太平洋戦争中は本土と前線基地を往復し、1944年12月に南シナ海で米潜水艦シーライオンの雷撃を受けて沈没した。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 間宮 側面・平面図",
+        url: "https://jp.pinterest.com/pin/552183604293295413/",
+      },
+      {
+        name: "ウィキペディア - Japanese supply ship Mamiya",
+        url: "https://en.wikipedia.org/wiki/Japanese_supply_ship_Mamiya",
+      },
+    ],
+  },
+  {
+    name: "irako",
+    displayName: "伊良湖",
+    type: "給糧艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x2 120mm/45 十年式",
+      },
+      {
+        label: "高角砲",
+        value: "10x1 25mm/60 九六式",
+      },
+    ],
+    description: "伊良湖は間宮の小型改良型として1941年12月に竣工した給糧艦で、1万5000人分・2週間の食糧を搭載できた。本土からトラック島やシンガポールなどへ繰り返し航海し、兵員や弾薬の輸送も担った。1944年9月、コロン湾で米空母艦載機の攻撃を受けて損傷し、自沈した。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 伊良湖 側面・平面図",
+        url: "https://jp.pinterest.com/pin/547680004680700885/",
+      },
+      {
+        name: "ウィキペディア - Japanese supply ship Irako",
+        url: "https://en.wikipedia.org/wiki/Japanese_supply_ship_Irako",
+      },
+    ],
+  },
+  {
+    name: "kashino",
+    displayName: "樫野",
+    type: "給兵艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x1 120mm/45 十年式",
+      },
+      {
+        label: "機銃",
+        value: "2x2 13.2mm 九三式",
+      },
+    ],
+    description: "樫野は大和型戦艦の46cm主砲と砲塔を呉海軍工廠から建造地へ輸送するために建造された特殊輸送艦で、1940年に就役した。船体中央の二つの巨大な貨物艙に砲塔一式を収められた。戦艦建造計画の変更後は弾薬輸送艦に改装され、1942年9月に台湾北東海域で米潜水艦グロウラーの雷撃を受けて沈没した。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 樫野 側面・平面図",
+        url: "https://jp.pinterest.com/pin/1075938167218177904/",
+      },
+      {
+        name: "ウィキペディア - 樫野 (給兵艦)",
+        url: "https://ja.wikipedia.org/wiki/%E6%A8%AB%E9%87%8E_(%E7%B5%A6%E5%85%B5%E8%89%A6)",
+      },
+    ],
+  },
+  {
+    name: "hikawa_maru",
+    displayName: "氷川丸",
+    type: "病院船",
+    armaments: [
+      {
+        label: "武装",
+        value: "なし",
+      },
+    ],
+    description: "氷川丸は1930年に日本郵船の北太平洋航路に就航した貨客船である。1941年12月に日本海軍に徴用され、特設病院船に改装された。船体は白色に緑の帯と赤十字を描いた病院船塗装となり、機雷や空襲を幾度も切り抜けて終戦まで生き残った。戦後は客船に戻り、1960年の引退後は横浜・山下公園で博物館船として保存されている。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 氷川丸 側面・平面図",
+        url: "https://jp.pinterest.com/pin/52987733110130550/",
+      },
+      {
+        name: "ウィキペディア - 氷川丸",
+        url: "https://ja.wikipedia.org/wiki/%E6%B0%B7%E5%B7%9D%E4%B8%B8",
       },
     ],
   },
