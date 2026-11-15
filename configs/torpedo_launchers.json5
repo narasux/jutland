@@ -34,6 +34,17 @@
     bulletSpeed: 50,
     fundsCost: 80
   },
+  // 苏联海军 533mm 四联装鱼雷发射管（1-Н 四联型；列宁格勒级驱逐领舰）
+  {
+    name: "SU/533/4/1N",
+    bulletName: "SU/TB/533/1932/53-27",
+    bulletCount: 4,
+    shotInterval: 1,
+    reloadTime: 64,
+    range: 18,
+    bulletSpeed: 50,
+    fundsCost: 70
+  },
   // 苏联海军 533mm 三联装鱼雷发射管（1-Н；7 型驱逐舰首装，26/26-бис 型巡洋舰同系，部分资料记作 39-Ю）
   {
     name: "SU/533/3/1N",
@@ -55,6 +66,17 @@
     range: 18,
     bulletSpeed: 50,
     fundsCost: 50
+  },
+  // 俄国海军 450mm 双联装鱼雷发射管（1912 年式；诺维克号装备 4 座）
+  {
+    name: "SU/450/2/M1912",
+    bulletName: "SU/TB/450/1912/M1912",
+    bulletCount: 2,
+    shotInterval: 1,
+    reloadTime: 40,
+    range: 15,
+    bulletSpeed: 44,
+    fundsCost: 20
   },
   // 美国
   // --------- 鱼雷 ----------

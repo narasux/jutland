@@ -2949,8 +2949,9 @@
           "akitsukaze",
           "kirizuki",
           "minekaze",
-          "z_11",
+          "z_25",
           "z_22",
+          "z_11",
           "v",
           "y",
           "ardent",
@@ -2959,6 +2960,9 @@
           "hero",
           "gurkha",
           "rapid",
+          "tashkent",
+          "leningrad",
+          "novik",
           "le_fantasque",
           "tramontana",
           "folgore",
@@ -3207,6 +3211,12 @@
       {
         name: "z_22",
         pos: [27, 29],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "z_25",
+        pos: [26, 30],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -3631,33 +3641,51 @@
         belongPlayer: "P1"
       },
       {
-        name: "P_6",
+        name: "tashkent",
         pos: [40, 26],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "leningrad",
+        pos: [39, 27],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "novik",
+        pos: [40, 28],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "P_6",
+        pos: [41, 25],
         rotation: 90,
         belongPlayer: "P1"
       },
       // Soviet SS
       {
         name: "su_k_class",
-        pos: [39, 27],
+        pos: [42, 26],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "su_l_class",
-        pos: [40, 28],
+        pos: [41, 27],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "su_shch_class",
-        pos: [39, 29],
+        pos: [42, 28],
         rotation: 90,
         belongPlayer: "P1"
       },
       {
         name: "su_m_class",
-        pos: [40, 30],
+        pos: [41, 29],
         rotation: 90,
         belongPlayer: "P1"
       },

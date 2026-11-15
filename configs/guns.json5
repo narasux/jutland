@@ -277,6 +277,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 苏联海军 SU/130/50 单装舰炮（B-13，1936 年式；列宁格勒级驱逐领舰、塔什干号同型炮塔的单装版）
+  {
+    name: "SU/130/50/B13",
+    bulletName: "SU/GB/130/1935",
+    bulletCount: 1,
+    reloadTime: 3,
+    range: 24,
+    bulletSpread: 70,
+    bulletSpeed: 870,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 苏联海军 SU/120/50 单装副炮（1905 年式维克斯炮，甘古特级舷侧炮廓炮）
   {
     name: "SU/120/50/1/P1905",
@@ -285,6 +298,19 @@
     reloadTime: 6,
     range: 14,
     bulletSpread: 100,
+    bulletSpeed: 823,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false
+  },
+  // 苏联海军 SU/102/60 单装舰炮（1911 年式奥布霍夫炮，诺维克号驱逐舰主炮）
+  {
+    name: "SU/102/60/Ob1911",
+    bulletName: "SU/GB/102/1911",
+    bulletCount: 1,
+    reloadTime: 4,
+    range: 14,
+    bulletSpread: 90,
     bulletSpeed: 823,
     fundsCost: 1,
     antiShip: true,
@@ -351,6 +377,32 @@
     range: 15,
     bulletSpread: 60,
     bulletSpeed: 880,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联海军 SU/76/55 双联装高炮（34-K，1935 年式；塔什干号副高炮）
+  {
+    name: "SU/76/55/2/34K",
+    bulletName: "SU/GB/76/1914",
+    bulletCount: 2,
+    reloadTime: 1.6,
+    range: 10,
+    bulletSpread: 40,
+    bulletSpeed: 800,
+    fundsCost: 3,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联海军 SU/76/55 单装高炮（34-K，1935 年式；列宁格勒级驱逐领舰、塔什干号副高炮）
+  {
+    name: "SU/76/55/1/34K",
+    bulletName: "SU/GB/76/1914",
+    bulletCount: 1,
+    reloadTime: 1.6,
+    range: 10,
+    bulletSpread: 45,
+    bulletSpeed: 800,
     fundsCost: 2,
     antiShip: true,
     antiAircraft: true
@@ -442,6 +494,19 @@
     range: 6,
     bulletSpread: 20,
     bulletSpeed: 820,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联海军 SU/37/67 单装高炮（61-K，1939 年式；塔什干号等舰的单装 37mm）
+  {
+    name: "SU/37/67/61K",
+    bulletName: "SU/GB/37/1946",
+    bulletCount: 1,
+    reloadTime: 0.6,
+    range: 6,
+    bulletSpread: 25,
+    bulletSpeed: 880,
     fundsCost: 1,
     antiShip: true,
     antiAircraft: true
@@ -1499,6 +1564,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 15 cm/48 TbtsK C/36 单装舰炮（1936A 型驱逐舰 Z-23 级主炮）
+  {
+    name: "GER/150/48/TbtsKC36",
+    bulletName: "GER/GB/150/1932",
+    bulletCount: 1,
+    reloadTime: 2.2,
+    range: 16,
+    bulletSpread: 85,
+    bulletSpeed: 835,
+    fundsCost: 7,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 德国海军 GER/127/45/SKC34 单裝舰炮
   {
     name: "GER/127/45/SKC34",
@@ -1600,6 +1678,19 @@
     bulletSpread: 16,
     bulletSpeed: 1000,
     fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 德国海军 3.7 cm/83 SK C/30 单装高炮（驱逐舰舷侧炮位）
+  {
+    name: "GER/37/83/SKC30",
+    bulletName: "GER/GB/37/1935",
+    bulletCount: 1,
+    reloadTime: 2,
+    range: 8,
+    bulletSpread: 18,
+    bulletSpeed: 1000,
+    fundsCost: 1,
     antiShip: true,
     antiAircraft: true
   },
