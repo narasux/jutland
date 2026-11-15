@@ -1885,7 +1885,7 @@ func (c *CollectionUI) drawShipCombat(screen *ebiten.Image, ship *objUnit.Battle
 	weaponW := card.W * 0.44
 	items := shipArmamentItems(ship)
 	weaponCard := collectionCard{X: card.X, Y: card.Y, W: weaponW, H: card.H}
-	c.drawCompactInfoItems(screen, items, weaponCard, card.Y+58*scale)
+	c.drawArmamentItems(screen, items, weaponCard, card.Y+58*scale)
 
 	radius := min(card.H*0.28, (card.W-weaponW)*0.30)
 	radius = max(48, radius)
@@ -1952,34 +1952,65 @@ func radarScaleNoteLines(note string, width, fontSize float64) []string {
 func (c *CollectionUI) drawCompactInfoItems(
 	screen *ebiten.Image, items []objRef.InfoItem, card collectionCard, startY float64,
 ) {
+	c.drawInfoItems(screen, items, card, startY, false)
+}
+
+func (c *CollectionUI) drawArmamentItems(
+	screen *ebiten.Image, items []objRef.InfoItem, card collectionCard, startY float64,
+) {
+	// 英文/俄文的武装数值带完整型号，单行键值会把数值挤成省略号，因此标签与数值各占一行。
+	c.drawInfoItems(screen, items, card, startY, i18n.CurrentLanguage().UsesWordWrapping())
+}
+
+func (c *CollectionUI) drawInfoItems(
+	screen *ebiten.Image, items []objRef.InfoItem, card collectionCard, startY float64, stacked bool,
+) {
 	// 这里不是完整表格，只是紧凑的键值排版，所以会对文本长度做保守截断。
 	fontSize := c.metrics.Body
-	lineHeight := fontSize * 1.35
+	rowHeight := fontSize * 1.35
+	valueGap := 0.0
+	if stacked {
+		// 标签与数值贴在一起，数值到下一项标签之间留出稍大的间隙，形成清晰的分组。
+		valueGap = fontSize * 1.1
+		rowHeight = valueGap + fontSize*1.4
+	}
 	scale := c.metrics.Scale
-	maxRows := max(1, int((card.Y+card.H-startY-10*scale)/lineHeight))
-	for idx, item := range items {
-		if idx >= maxRows {
-			// 省略号画在最后一条完整内容之后，不能覆盖它（否则会白白少显示一行）；
-			// 极矮窗口连省略号都放不下时直接省略。
-			ellipsisY := startY + float64(maxRows)*lineHeight
-			if ellipsisY+fontSize <= card.Y+card.H {
-				c.drawer.drawText(
-					screen, "…", card.X+20*scale, ellipsisY,
-					fontSize, font.LocalizedUI(font.Kai), colorx.White,
-				)
-			}
-			break
-		}
-		y := startY + float64(idx)*lineHeight
+	labelX := card.X + 20*scale
+	maxRows := max(1, int((card.Y+card.H-startY-10*scale)/rowHeight))
+	visibleItems := min(len(items), maxRows)
+	for idx, item := range items[:visibleItems] {
+		y := startY + float64(idx)*rowHeight
 		c.drawer.drawText(
-			screen, item.Label, card.X+20*scale, y,
+			screen, item.Label, labelX, y,
 			fontSize, font.LocalizedUI(font.Kai), color.RGBA{214, 201, 178, 255},
 		)
+		if stacked {
+			// 数值缩进一行，避免和下一项的标签混在一起。
+			valueX := labelX + 14*scale
+			c.drawFittedText(
+				screen, item.Value, valueX, y+valueGap,
+				card.X+card.W-16*scale-valueX, fontSize, font.LocalizedUI(font.Kai), colorx.White,
+				image.Point{}, []string{item.Label, item.Value},
+			)
+			continue
+		}
 		valueX := compactInfoValueX(item.Label, card, fontSize, scale)
 		maxWidth := card.X + card.W - 16*scale - valueX
 		c.drawFittedText(
 			screen, item.Value, valueX, y, maxWidth, fontSize, font.LocalizedUI(font.Kai), colorx.White,
 			image.Point{}, []string{item.Label + "  " + item.Value},
+		)
+	}
+	if visibleItems >= len(items) {
+		return
+	}
+	// 省略号画在最后一条完整内容之后，不能覆盖它（否则会白白少显示一行）；
+	// 极矮窗口连省略号都放不下时直接省略。
+	ellipsisY := startY + float64(visibleItems)*rowHeight
+	if ellipsisY+fontSize <= card.Y+card.H {
+		c.drawer.drawText(
+			screen, "…", labelX, ellipsisY,
+			fontSize, font.LocalizedUI(font.Kai), colorx.White,
 		)
 	}
 }
