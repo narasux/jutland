@@ -7109,6 +7109,122 @@
     ],
   },
   {
+    name: "su_k_class",
+    displayName: "K 级（XIV 系列）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "2x1 100mm/51 B-24",
+      },
+      {
+        label: "高炮",
+        value: "2x1 45mm/46 21-K",
+      },
+      {
+        label: "鱼雷",
+        value: "10x1 533mm（艏 6、艉 4）",
+      },
+    ],
+    description: "K 级（「巡洋潜艇」）是苏联海军二战中建造的最大潜艇，1939 至 1944 年共完成 11 艘。该级为远洋破交和舰队作战设计，艇体可携带 20 枚水雷；1942 年 7 月 K-21 在挪威外海对德国战列舰提尔皮茨号实施鱼雷攻击，成为该级最著名的一次行动。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 苏联 K 级（XIV 系列）潜艇",
+        url: "https://jp.pinterest.com/pin/496944140130958939/",
+      },
+      {
+        name: "维基百科 - K级潜艇",
+        url: "https://en.wikipedia.org/wiki/Soviet_K-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_m_class",
+    displayName: "M 级（XII 系列）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "高炮",
+        value: "1x1 45mm/46 21-K",
+      },
+      {
+        label: "鱼雷",
+        value: "2x1 533mm（艏）",
+      },
+    ],
+    description: "M 级（「小宝贝」）是苏联的战时小型近岸潜艇，为便于铁路运输而采用分段建造。第 XII 系列于 1936 至 1941 年完成 46 艘，因适航性与续航有限，主要活跃于黑海和波罗的海近岸，战争中损失惨重。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 苏联 M 级（XII 系列）潜艇",
+        url: "https://jp.pinterest.com/pin/496944140130958951/",
+      },
+      {
+        name: "维基百科 - M级潜艇",
+        url: "https://en.wikipedia.org/wiki/Soviet_M-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_l_class",
+    displayName: "L 级（XI 系列）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "主炮",
+        value: "1x1 100mm/51 B-24",
+      },
+      {
+        label: "高炮",
+        value: "1x1 45mm/46 21-K",
+      },
+      {
+        label: "鱼雷",
+        value: "6x1 533mm（艏）",
+      },
+    ],
+    description: "L 级（「列宁主义者」）源自英国 L 级潜艇，是苏联第一型批量建造的布雷潜艇，水雷存放在艇艉两舷的栅格舱内。第 XI 系列于 1935 至 1936 年在太平洋舰队服役，其中部分艇在战时经巴拿马运河调往北方舰队。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 苏联 L 级（XI 系列）潜艇",
+        url: "https://jp.pinterest.com/pin/496944140130958953/",
+      },
+      {
+        name: "维基百科 - L级潜艇",
+        url: "https://en.wikipedia.org/wiki/Leninets-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_shch_class",
+    displayName: "梭子鱼级（X 系列）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "高炮",
+        value: "2x1 45mm/46 21-K",
+      },
+      {
+        label: "鱼雷",
+        value: "6x1 533mm（艏 4、艉 2）",
+      },
+    ],
+    description: "梭子鱼级（Shch 型，俄语「Щука」意为梭子鱼）是苏联建造数量最多的潜艇，1932 至 1941 年共完成 88 艘。第 X 系列自 1935 年起建造，是该级产量最大的系列，广泛服役于波罗的海、黑海和北方舰队，战损率极高。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - 苏联 Shch 型（X 系列）潜艇",
+        url: "https://jp.pinterest.com/pin/496944140130958944/",
+      },
+      {
+        name: "维基百科 - 梭子鱼级潜艇",
+        url: "https://en.wikipedia.org/wiki/Shchuka-class_submarine",
+      },
+    ],
+  },
+  {
     name: "mercy",
     displayName: "仁慈",
     type: "医疗船",
@@ -11555,6 +11671,20 @@
       {
         name: "维基百科 - Б-34",
         url: "https://ru.wikipedia.org/wiki/Б-34",
+      },
+    ],
+  },
+  {
+    name: "SU/100/51/1/B24",
+    displayName: "100mm/51 B-24 单装潜艇甲板炮",
+    type: "武器",
+    armaments: [],
+    description: "苏联海军 100 毫米/51 倍径 B-24 单装舰炮，1930 年代为潜艇研制的通用甲板炮，可对舰和对空射击，装备 K 级、L 级等潜艇。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - Б-24",
+        url: "https://ru.wikipedia.org/wiki/Б-24",
       },
     ],
   },

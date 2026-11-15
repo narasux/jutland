@@ -7460,6 +7460,122 @@
     ],
   },
   {
+    name: "su_k_class",
+    displayName: "K型（XIV系列）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "2x1 100mm/51 B-24",
+      },
+      {
+        label: "高角砲",
+        value: "2x1 45mm/46 21-K",
+      },
+      {
+        label: "魚雷",
+        value: "10x1 533mm（艦首6・艦尾4）",
+      },
+    ],
+    description: "K型潜水艦（第14系列、通称「クルージング」）は第二次世界大戦中にソ連海軍が建造した最大の潜水艦で、1939～1944年に11隻が竣工した。外洋での通商破壊と艦隊作戦を想定し、バラストタンクのシュートから機雷を敷設できた。1942年7月にK-21が戦艦ティルピッツへ雷撃した事例が特に知られている。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - ソ連K型潜水艦（XIV系列）",
+        url: "https://jp.pinterest.com/pin/496944140130958939/",
+      },
+      {
+        name: "ウィキペディア - K型潜水艦",
+        url: "https://en.wikipedia.org/wiki/Soviet_K-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_m_class",
+    displayName: "M型（XII系列）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "高角砲",
+        value: "1x1 45mm/46 21-K",
+      },
+      {
+        label: "魚雷",
+        value: "2x1 533mm（艦首）",
+      },
+    ],
+    description: "M型潜水艦（「マリュートカ」）は鉄道輸送のため分割建造された小型沿岸潜水艦である。1936～1941年に完成したXII系列46隻は航続力が短く、黒海とバルト海の沿岸で運用され、大きな損失を出した。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - ソ連M型潜水艦（XII系列）",
+        url: "https://jp.pinterest.com/pin/496944140130958951/",
+      },
+      {
+        name: "ウィキペディア - M型潜水艦",
+        url: "https://en.wikipedia.org/wiki/Soviet_M-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_l_class",
+    displayName: "L型（XI系列）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "主砲",
+        value: "1x1 100mm/51 B-24",
+      },
+      {
+        label: "高角砲",
+        value: "1x1 45mm/46 21-K",
+      },
+      {
+        label: "魚雷",
+        value: "6x1 533mm（艦首）",
+      },
+    ],
+    description: "L型潜水艦（「レニネツ」）はイギリスL級に由来するソ連初の量産型敷設潜水艦で、艦尾両舷の区画に機雷を収めた。XI系列は1935～1936年に太平洋艦隊へ配備され、戦時には一部がパナマ運河経由で北方艦隊へ回航された。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - ソ連L型潜水艦（XI系列）",
+        url: "https://jp.pinterest.com/pin/496944140130958953/",
+      },
+      {
+        name: "ウィキペディア - L型潜水艦",
+        url: "https://en.wikipedia.org/wiki/Leninets-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_shch_class",
+    displayName: "Shch型（X系列）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "高角砲",
+        value: "2x1 45mm/46 21-K",
+      },
+      {
+        label: "魚雷",
+        value: "6x1 533mm（艦首4・艦尾2）",
+      },
+    ],
+    description: "Shch型（「シチューカ」）はソ連で最も多数建造された潜水艦で、1932～1941年に88隻が完成した。1935年から建造されたX系列は同型で最大の生産系列となり、バルト海・黒海・北方艦隊で運用され、損害も大きかった。",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - ソ連Shch型潜水艦（X系列）",
+        url: "https://jp.pinterest.com/pin/496944140130958944/",
+      },
+      {
+        name: "ウィキペディア - SC型潜水艦",
+        url: "https://en.wikipedia.org/wiki/Shchuka-class_submarine",
+      },
+    ],
+  },
+  {
     name: "peace_ark",
     displayName: "和平方舟",
     type: "病院船",
@@ -8888,6 +9004,20 @@
       {
         name: "ウィキペディア - Б-34",
         url: "https://ru.wikipedia.org/wiki/Б-34",
+      },
+    ],
+  },
+  {
+    name: "SU/100/51/1/B24",
+    displayName: "100mm/51 B-24 単装潜水艦用甲板砲",
+    type: "兵器",
+    armaments: [],
+    description: "ソ連海軍の 100mm/51 口径 B-24 単装甲板砲。1930 年代に潜水艦用の両用砲として開発され、水上・空中目標の双方を攻撃でき、K型・L型潜水艦などに搭載された。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア - Б-24",
+        url: "https://ru.wikipedia.org/wiki/Б-24",
       },
     ],
   },
