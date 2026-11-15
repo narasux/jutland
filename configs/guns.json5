@@ -147,6 +147,19 @@
     antiShip: true,
     antiAircraft: false,
   },
+  // 苏联海军 SU/305/52 三联装主炮（МК-3-12，甘古特级改装后使用）
+  {
+    name: "SU/305/52/3/MK3-12",
+    bulletName: "SU/GB/305/1907",
+    bulletCount: 3,
+    reloadTime: 30,
+    range: 26,
+    bulletSpread: 110,
+    bulletSpeed: 762,
+    fundsCost: 20,
+    antiShip: true,
+    antiAircraft: false,
+  },
   // 苏联海军 SU/250/55 三联装主炮（安萨尔多 1936 年大型巡洋舰方案，纸面设计）
   {
     name: "SU/250/55/3",
@@ -264,6 +277,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 苏联海军 SU/120/50 单装副炮（1905 年式维克斯炮，甘古特级舷侧炮廓炮）
+  {
+    name: "SU/120/50/1/P1905",
+    bulletName: "SU/GB/120/1905",
+    bulletCount: 1,
+    reloadTime: 6,
+    range: 14,
+    bulletSpread: 100,
+    bulletSpeed: 823,
+    fundsCost: 1,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 苏联海军 SU/100/70 双联装高平两用炮
   {
     name: "SU/100/70/2/SM51",
@@ -326,6 +352,19 @@
     bulletSpread: 60,
     bulletSpeed: 880,
     fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
+  // 苏联海军 SU/76/40 单装高炮（Lender 1914/15 年式，甘古特级改装后副高炮）
+  {
+    name: "SU/76/40/1/Lender",
+    bulletName: "SU/GB/76/1914",
+    bulletCount: 1,
+    reloadTime: 2.5,
+    range: 8,
+    bulletSpread: 50,
+    bulletSpeed: 730,
+    fundsCost: 1,
     antiShip: true,
     antiAircraft: true
   },

@@ -2832,10 +2832,11 @@
           "fuso",
           "ise",
           "nagato",
+          "slava",
+          "kremlin",
           "soviet_union",
           "soviet_union_nelsonski",
-          "kremlin",
-          "slava",
+          "oktyabrskaya_revolutsiya",
           "bismarck",
           "scharnhorst",
           "admiral_graf_spee",
@@ -3549,6 +3550,12 @@
       {
         name: "soviet_union_nelsonski",
         pos: [35, 28],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "oktyabrskaya_revolutsiya",
+        pos: [34, 29],
         rotation: 90,
         belongPlayer: "P1"
       },

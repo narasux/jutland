@@ -1189,6 +1189,256 @@
       ]
     }
   },
+  // 十月革命号（甘古特级战列舰，1930 年代大改后状态）
+  {
+    name: "oktyabrskaya_revolutsiya",
+    nation: "su",
+    type: "battleship",
+    typeAbbr: "BB",
+    year: 1941,
+    totalHP: 26900,
+    horizontalDamageReduction: 0.35,
+    verticalDamageReduction: 0.2,
+    maxSpeed: 22.5,
+    acceleration: 0.24,
+    rotateSpeed: 0.75,
+    length: 185,
+    width: 27,
+    fundsCost: 400,
+    timeCost: 92,
+    weapon: {
+      mainGuns: [
+        // 前主炮 A
+        {
+          name: "SU/305/52/3/MK3-12",
+          posPercent: 0.52,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 前主炮 B
+        {
+          name: "SU/305/52/3/MK3-12",
+          posPercent: 0.16,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 后主炮 C
+        {
+          name: "SU/305/52/3/MK3-12",
+          posPercent: -0.23,
+          rightFiringArc: [30, 150],
+          leftFiringArc: [210, 330]
+        },
+        // 后主炮 D
+        {
+          name: "SU/305/52/3/MK3-12",
+          posPercent: -0.6,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        }
+      ],
+      secondaryGuns: [
+        // 120mm 炮廓炮：左舷前部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.59,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 120mm 炮廓炮：右舷前部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.59,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 120mm 炮廓炮：左舷前部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.47,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [210, 360]
+        },
+        // 120mm 炮廓炮：右舷前部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.47,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [360, 360]
+        },
+        // 120mm 炮廓炮：左舷前部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.23,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 120mm 炮廓炮：右舷前部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.23,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 120mm 炮廓炮：左舷中部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.12,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 120mm 炮廓炮：右舷中部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: 0.12,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 120mm 炮廓炮：左舷中部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.15,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 120mm 炮廓炮：右舷中部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.15,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 120mm 炮廓炮：左舷中部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.24,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        // 120mm 炮廓炮：右舷中部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.24,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 120mm 炮廓炮：左舷后部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.58,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 345]
+        },
+        // 120mm 炮廓炮：右舷后部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.58,
+          rightFiringArc: [15, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 120mm 炮廓炮：左舷后部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.67,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 330]
+        },
+        // 120mm 炮廓炮：右舷后部
+        {
+          name: "SU/120/50/1/P1905",
+          posPercent: -0.67,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [360, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 76mm 高炮：左舷前部
+        {
+          name: "SU/76/40/1/Lender",
+          posPercent: 0.53,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [180, 360]
+        },
+        // 76mm 高炮：右舷前部
+        {
+          name: "SU/76/40/1/Lender",
+          posPercent: 0.53,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [210, 360]
+        },
+        // 76mm 高炮：右舷前部
+        {
+          name: "SU/76/40/1/Lender",
+          posPercent: 0.48,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 76mm 高炮：后部中线
+        {
+          name: "SU/76/40/1/Lender",
+          posPercent: -0.56,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 76mm 高炮：左舷后部
+        {
+          name: "SU/76/40/1/Lender",
+          posPercent: -0.61,
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 76mm 高炮：右舷后部
+        {
+          name: "SU/76/40/1/Lender",
+          posPercent: -0.61,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 330]
+        },
+        // 45mm 高炮：左舷前部
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.39,
+          rightFiringArc: [0, 90],
+          leftFiringArc: [210, 360]
+        },
+        // 45mm 高炮：右舷前部
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.39,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [270, 360]
+        },
+        // 45mm 高炮：右舷中部
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [270, 315]
+        },
+        // 45mm 高炮：左舷中部
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.03,
+          rightFiringArc: [45, 90],
+          leftFiringArc: [180, 360]
+        },
+        // 45mm 高炮：左舷后部
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.07,
+          rightFiringArc: [90, 150],
+          leftFiringArc: [180, 360]
+        },
+        // 45mm 高炮：右舷后部
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.07,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [210, 270]
+        }
+      ]
+    }
+  },
   // --------- 重巡洋舰 ----------
   // 斯大林格勒 X：82 型大型巡洋舰 X 方案（苏联，TZoli 图纸复原，四联装主炮全部前置）
   {

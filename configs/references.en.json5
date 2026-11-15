@@ -8785,6 +8785,41 @@
     ],
   },
   {
+    name: "oktyabrskaya_revolutsiya",
+    displayName: "Oktyabrskaya Revolutsiya",
+    type: "Battleship",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "4x3 305mm/52 M1907",
+      },
+      {
+        label: "Secondary Battery",
+        value: "16x1 120mm/50 M1905",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x1 76mm/40 Lender",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "6x1 45mm/46 21-K",
+      },
+    ],
+    description: "Oktyabrskaya Revolutsiya began life as Gangut, lead ship of Russia's first dreadnought class, and was renamed in 1925. Her 1931–1934 reconstruction replaced the boilers, trunked the funnels, raised the bow and strengthened the deck armour. In September 1941 she took three bomb hits at Leningrad, was repaired, and spent the rest of the war firing from Kronstadt in support of the besieged city.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Artwork source — Oktyabrskaya Revolutsiya",
+        url: "https://jp.pinterest.com/pin/620370917411066216/",
+      },
+      {
+        name: "Wikipedia — Russian battleship Gangut",
+        url: "https://en.wikipedia.org/wiki/Russian_battleship_Gangut",
+      },
+    ],
+  },
+  {
     name: "soryu",
     displayName: "Sōryū",
     type: "Aircraft Carrier",
@@ -8985,6 +9020,20 @@
     links: [],
   },
   {
+    name: "SU/76/40/1/Lender",
+    displayName: "76mm/40 Single Anti-aircraft Gun (Lender)",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet Navy 76 mm/40 calibre Lender Model 1914/15 single anti-aircraft gun, fitted to the Gangut-class battleships during their 1930s reconstruction as medium-range AA armament.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 76 mm air-defense gun M1914/15",
+        url: "https://en.wikipedia.org/wiki/76_mm_air-defense_gun_M1914/15",
+      },
+    ],
+  },
+  {
     name: "SU/100/56/2/MZ14",
     displayName: "100mm/56 MZ-14 Twin Dual-Purpose Mount",
     type: "Weapon",
@@ -9046,6 +9095,20 @@
       {
         name: "Wikipedia - Б-2-ЛМ",
         url: "https://ru.wikipedia.org/wiki/Б-2-ЛМ",
+      },
+    ],
+  },
+  {
+    name: "SU/120/50/1/P1905",
+    displayName: "120mm/50 Single Secondary Gun (M1905)",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet Navy 120 mm/50 calibre Vickers-pattern single secondary gun of the 1905 pattern, mounted in the casemates of the Gangut-class battleships, sixteen in all.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 120 mm 50 caliber Pattern 1905",
+        url: "https://en.wikipedia.org/wiki/120_mm_50_caliber_Pattern_1905",
       },
     ],
   },
@@ -9208,6 +9271,20 @@
       {
         name: "Wikipedia - 406-мм морское орудие Б-37",
         url: "https://ru.wikipedia.org/wiki/406-мм_морское_орудие_Б-37",
+      },
+    ],
+  },
+  {
+    name: "SU/305/52/3/MK3-12",
+    displayName: "305mm/52 Triple Turret (MK-3-12)",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet Navy 305 mm/52 calibre triple turret, pairing the Obukhovskii Pattern 1907 gun with the MK-3-12 mounting. It was the only main battery of the modernised Gangut class, with three guns per turret and a rate of fire of roughly 1.5–2 rounds per minute.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Obukhovskii 12-inch/52-caliber Pattern 1907 gun",
+        url: "https://en.wikipedia.org/wiki/Obukhovskii_12%22/52_Pattern_1907_gun",
       },
     ],
   },
@@ -15571,7 +15648,7 @@
     author: "Nano Banana",
     links: [
       {
-        name: "Pinterest - I-400 seaplane carrier submarine (redrawn by Nano Banana)",
+        name: "Pinterest - I-400 seaplane carrier submarine",
         url: "https://www.pinterest.com/pin/365565694738124984/",
       },
       {
