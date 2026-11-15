@@ -316,6 +316,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 苏联海军 SU/100/51 单装潜艇甲板炮（B-24，K 级与 L 级潜艇的前后甲板炮）
+  {
+    name: "SU/100/51/1/B24",
+    bulletName: "SU/GB/100/1940",
+    bulletCount: 1,
+    reloadTime: 2.2,
+    range: 15,
+    bulletSpread: 60,
+    bulletSpeed: 880,
+    fundsCost: 2,
+    antiShip: true,
+    antiAircraft: true
+  },
   // 苏联海军 SU/57/81/4/ZIF75 四联装高炮
   {
     name: "SU/57/81/4/ZIF75",

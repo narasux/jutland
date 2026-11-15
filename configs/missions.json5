@@ -2986,6 +2986,10 @@
           "uss_sealion",
           "uss_tarpon",
           "uss_nautilus",
+          "su_k_class",
+          "su_l_class",
+          "su_shch_class",
+          "su_m_class",
           "u_2540",
           "u_2323",
           "u_47",
@@ -3587,6 +3591,31 @@
       {
         name: "P_6",
         pos: [40, 26],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      // Soviet SS
+      {
+        name: "su_k_class",
+        pos: [39, 27],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "su_l_class",
+        pos: [40, 28],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "su_shch_class",
+        pos: [39, 29],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "su_m_class",
+        pos: [40, 30],
         rotation: 90,
         belongPlayer: "P1"
       },

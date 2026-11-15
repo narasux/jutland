@@ -7460,6 +7460,122 @@
     ],
   },
   {
+    name: "su_k_class",
+    displayName: "K-class (Series XIV)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "2x1 100mm/51 B-24",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 45mm/46 21-K",
+      },
+      {
+        label: "Torpedoes",
+        value: "10x1 533mm (6 bow, 4 stern)",
+      },
+    ],
+    description: "The K class, the Soviet 'cruiser' submarines, was the largest submarine type built for the Soviet Navy in World War II, with eleven boats completed between 1939 and 1944. Designed for ocean raiding and fleet support, they could also lay mines from the ballast-tank chutes. K-21's torpedo attack on the German battleship Tirpitz in July 1942 became the class's most famous action.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Soviet K-class (Series XIV) submarine",
+        url: "https://jp.pinterest.com/pin/496944140130958939/",
+      },
+      {
+        name: "Wikipedia - Soviet K-class submarine",
+        url: "https://en.wikipedia.org/wiki/Soviet_K-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_m_class",
+    displayName: "M-class (Series XII)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Anti-aircraft Guns",
+        value: "1x1 45mm/46 21-K",
+      },
+      {
+        label: "Torpedoes",
+        value: "2x1 533mm (bow)",
+      },
+    ],
+    description: "The M class (Malyutka, 'little one') was a small coastal submarine, built in sections so it could travel by rail. The 46 Series XII boats completed between 1936 and 1941 were confined by their short endurance to the Black and Baltic Seas, where losses were heavy.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Soviet M-class (Series XII) submarine",
+        url: "https://jp.pinterest.com/pin/496944140130958951/",
+      },
+      {
+        name: "Wikipedia - Soviet M-class submarine",
+        url: "https://en.wikipedia.org/wiki/Soviet_M-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_l_class",
+    displayName: "L-class (Series XI)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Main Battery",
+        value: "1x1 100mm/51 B-24",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "1x1 45mm/46 21-K",
+      },
+      {
+        label: "Torpedoes",
+        value: "6x1 533mm (bow)",
+      },
+    ],
+    description: "The L class (Leninets) descended from the British L class and was the Soviet Navy's first mass-produced minelaying submarine, stowing mines in stern galleries. The Series XI boats joined the Pacific Fleet in 1935-36, and some were transferred to the Northern Fleet through the Panama Canal during the war.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Soviet L-class (Series XI) submarine",
+        url: "https://jp.pinterest.com/pin/496944140130958953/",
+      },
+      {
+        name: "Wikipedia - Leninets-class submarine",
+        url: "https://en.wikipedia.org/wiki/Leninets-class_submarine",
+      },
+    ],
+  },
+  {
+    name: "su_shch_class",
+    displayName: "Shch-class (Series X)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Anti-aircraft Guns",
+        value: "2x1 45mm/46 21-K",
+      },
+      {
+        label: "Torpedoes",
+        value: "6x1 533mm (4 bow, 2 stern)",
+      },
+    ],
+    description: "The Shchuka class (Shch, 'pike') was the most numerous Soviet submarine type, with 88 boats completed between 1932 and 1941. The Series X boats, built from 1935, were the largest production series of the class and served with the Baltic, Black Sea and Northern Fleet forces, suffering heavy losses.",
+    author: "Nano Banana",
+    links: [
+      {
+        name: "Pinterest - Soviet Shch-class (Series X) submarine",
+        url: "https://jp.pinterest.com/pin/496944140130958944/",
+      },
+      {
+        name: "Wikipedia - Shchuka-class submarine",
+        url: "https://en.wikipedia.org/wiki/Shchuka-class_submarine",
+      },
+    ],
+  },
+  {
     name: "peace_ark",
     displayName: "Peace Ark",
     type: "Hospital Ship",
@@ -8888,6 +9004,20 @@
       {
         name: "Wikipedia - Б-34",
         url: "https://ru.wikipedia.org/wiki/Б-34",
+      },
+    ],
+  },
+  {
+    name: "SU/100/51/1/B24",
+    displayName: "100mm/51 B-24 Single Submarine Deck Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "Soviet Navy 100 mm/51 calibre B-24 single deck gun, developed in the 1930s as a dual-purpose submarine mounting able to engage surface and air targets, fitted to K-class and L-class submarines.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Б-24",
+        url: "https://ru.wikipedia.org/wiki/Б-24",
       },
     ],
   },

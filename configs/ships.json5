@@ -2262,6 +2262,358 @@
       ]
     }
   },
+  // --------- 潜艇 ----------
+  // K 级（XIV 系列）
+  {
+    name: "su_k_class",
+    nation: "su",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1940,
+    totalHP: 1490,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 22.5,
+    acceleration: 0.5,
+    rotateSpeed: 1.1,
+    length: 97.7,
+    width: 7.4,
+    sightRange: 12,
+    diveTime: 10,
+    surfaceTime: 8,
+    submergedSpeedRatio: 0.46,
+    defaultDiveState: "submerged",
+    fundsCost: 75,
+    timeCost: 28,
+    weapon: {
+      mainGuns: [
+        // 舰桥前 100mm 甲板炮
+        {
+          name: "SU/100/51/1/B24",
+          posPercent: 0.29,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        },
+        // 舰桥后 100mm 甲板炮
+        {
+          name: "SU/100/51/1/B24",
+          posPercent: -0.14,
+          rightFiringArc: [20, 180],
+          leftFiringArc: [180, 340]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥前 45mm 高炮
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.21,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 舰桥后 45mm 高炮
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.82,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.82,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 5（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 6（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 7（内管上）
+        {
+          name: "SU/533/1",
+          posPercent: -0.88,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 8（内管下）
+        {
+          name: "SU/533/1",
+          posPercent: -0.88,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 9（外管上）
+        {
+          name: "SU/533/1",
+          posPercent: -0.92,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 10（外管下）
+        {
+          name: "SU/533/1",
+          posPercent: -0.92,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
+  // M 级（XII 系列）
+  {
+    name: "su_m_class",
+    nation: "su",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1938,
+    totalHP: 206,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 14.1,
+    acceleration: 1.3,
+    rotateSpeed: 2.2,
+    length: 44.5,
+    width: 3.3,
+    sightRange: 12,
+    diveTime: 8,
+    surfaceTime: 7,
+    submergedSpeedRatio: 0.58,
+    defaultDiveState: "submerged",
+    fundsCost: 40,
+    timeCost: 16,
+    weapon: {
+      antiAircraftGuns: [
+        // 舰桥前 45mm 甲板炮
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.36,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 A
+        {
+          name: "SU/533/1",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 B
+        {
+          name: "SU/533/1",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        }
+      ]
+    }
+  },
+  // L 级（XI 系列）
+  {
+    name: "su_l_class",
+    nation: "su",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1936,
+    totalHP: 1051,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 14,
+    acceleration: 0.55,
+    rotateSpeed: 1.15,
+    length: 81,
+    width: 6.6,
+    sightRange: 12,
+    diveTime: 11,
+    surfaceTime: 9,
+    submergedSpeedRatio: 0.64,
+    defaultDiveState: "submerged",
+    fundsCost: 60,
+    timeCost: 23,
+    weapon: {
+      mainGuns: [
+        // 舰桥前 100mm 甲板炮
+        {
+          name: "SU/100/51/1/B24",
+          posPercent: 0.28,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [200, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 舰桥后 45mm 高炮
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.82,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.82,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 5（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 6（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        }
+      ]
+    }
+  },
+  // 梭子鱼级（X 系列）
+  {
+    name: "su_shch_class",
+    nation: "su",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1936,
+    totalHP: 577,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 12.5,
+    acceleration: 0.75,
+    rotateSpeed: 1.5,
+    length: 57,
+    width: 6.2,
+    sightRange: 12,
+    diveTime: 11,
+    surfaceTime: 9,
+    submergedSpeedRatio: 0.5,
+    defaultDiveState: "submerged",
+    fundsCost: 55,
+    timeCost: 21,
+    weapon: {
+      antiAircraftGuns: [
+        // 舰桥前 45mm 甲板炮
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: 0.23,
+          rightFiringArc: [0, 170],
+          leftFiringArc: [190, 360]
+        },
+        // 舰桥后 45mm 甲板炮
+        {
+          name: "SU/45/46/1/21K",
+          posPercent: -0.09,
+          rightFiringArc: [10, 180],
+          leftFiringArc: [180, 350]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.82,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.82,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（上）
+        {
+          name: "SU/533/1",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（下）
+        {
+          name: "SU/533/1",
+          posPercent: 0.78,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5
+        {
+          name: "SU/533/1",
+          posPercent: -0.86,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 6
+        {
+          name: "SU/533/1",
+          posPercent: -0.86,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
   // 美国海军
   // --------- 航空母舰 ----------
   // CVX-100 美利坚号，概念超级航母；舰载机暂不编入
