@@ -3,6 +3,8 @@ package manager
 import (
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/narasux/jutland/pkg/mission/faction"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
@@ -39,6 +41,23 @@ func TestUSCapitalShipsCarryFloatplaneScouts(t *testing.T) {
 	}
 	if checked == 0 {
 		t.Fatal("珍珠港关卡里没有可派侦察机的美国主力舰")
+	}
+}
+
+// TestAmidshipsCatapultsLaunchAbeam 验证两烟囱之间的弹射器向舷外弹射，而不是朝舰尾穿过烟囱。
+// 场景：manchester、bolzano、muzio_attendolo 的弹射器都夹在前后烟囱之间，180° 滑跑会撞上后烟囱。
+// 预期：三个甲板模板各恰有 1 个起飞点，LaunchAngle 为 90°（右舷正横）；失败意味着又回到朝舰尾的配置。
+// 覆盖：从 initialize 后的 DeckMap 读取三个模板，逐个断言模板存在、起飞点数量与 90° 航向。
+func TestAmidshipsCatapultsLaunchAbeam(t *testing.T) {
+	for _, name := range []string{
+		"UKCatapult_manchester",
+		"ITCatapult_bolzano",
+		"ITCatapult_muzio_attendolo",
+	} {
+		deck, ok := objUnit.DeckMap[name]
+		require.Truef(t, ok, "缺少 %s 甲板模板", name)
+		require.Lenf(t, deck.TakeoffPoints, 1, name)
+		require.Equalf(t, float64(90), deck.TakeoffPoints[0].LaunchAngle, name)
 	}
 }
 

@@ -137,11 +137,6 @@ func (m *MissionManager) BattleReportPage() state.BattleReportPage {
 	return m.state.UI.BattleReportPage
 }
 
-// ShiftBattleReportPage 在总览 / 舰艇 / 飞机 / 详情之间循环切换。
-func (m *MissionManager) ShiftBattleReportPage(delta int) {
-	m.SetBattleReportPage(m.state.UI.BattleReportPage.Shift(delta))
-}
-
 // SetBattleReportPage 切换到指定战报页。
 func (m *MissionManager) SetBattleReportPage(page state.BattleReportPage) {
 	if !page.Valid() {

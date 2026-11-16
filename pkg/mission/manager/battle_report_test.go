@@ -74,28 +74,25 @@ func TestFinalizeBattleStatsMapsMissionStatusToEndReason(t *testing.T) {
 	}
 }
 
-// TestBattleReportPageAccessors 验证战报页签按总览→舰艇→飞机→战况循环切换且拒绝非法页。
-// 场景：从舰艇页连续 Shift(1) 三次，再 Shift(-1) 回退，最后 SetBattleReportPage(9)。
-// 预期：依次到飞机、战况、总览，再回战况；非法页 9 被忽略，页面保持战况。
-// 覆盖：零值 MissionState 上调用 Set/Shift/BattleReportPage，断言四页顺序、回绕与 Valid 过滤。
+// TestBattleReportPageAccessors 验证战报页签只通过 SetBattleReportPage 切换且拒绝非法页。
+// 场景：零值 MissionState 上依次设置舰艇、飞机、战况、总览，最后 SetBattleReportPage(9)。
+// 预期：每次设置后 BattleReportPage 返回对应页；非法页 9 被忽略，页面保持总览。
+// 覆盖：调用 SetBattleReportPage/BattleReportPage，断言四页赋值顺序与 Valid 过滤。
 func TestBattleReportPageAccessors(t *testing.T) {
 	manager := &MissionManager{state: &state.MissionState{}}
 
 	manager.SetBattleReportPage(state.BattleReportPageShips)
 	require.Equal(t, state.BattleReportPageShips, manager.BattleReportPage())
 
-	manager.ShiftBattleReportPage(1)
+	manager.SetBattleReportPage(state.BattleReportPagePlanes)
 	require.Equal(t, state.BattleReportPagePlanes, manager.BattleReportPage())
 
-	manager.ShiftBattleReportPage(1)
+	manager.SetBattleReportPage(state.BattleReportPageEvents)
 	require.Equal(t, state.BattleReportPageEvents, manager.BattleReportPage())
 
-	manager.ShiftBattleReportPage(1)
+	manager.SetBattleReportPage(state.BattleReportPageOverview)
 	require.Equal(t, state.BattleReportPageOverview, manager.BattleReportPage())
 
-	manager.ShiftBattleReportPage(-1)
-	require.Equal(t, state.BattleReportPageEvents, manager.BattleReportPage())
-
 	manager.SetBattleReportPage(state.BattleReportPage(9))
-	require.Equal(t, state.BattleReportPageEvents, manager.BattleReportPage())
+	require.Equal(t, state.BattleReportPageOverview, manager.BattleReportPage())
 }
