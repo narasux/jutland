@@ -41,18 +41,6 @@ const (
 	battleReportPageCount
 )
 
-// Shift 在总览 / 舰艇 / 飞机 / 战况之间循环切换。
-func (p BattleReportPage) Shift(delta int) BattleReportPage {
-	count := int(battleReportPageCount)
-	if delta == 0 {
-		return p
-	}
-	if p < 0 || int(p) >= count {
-		p = BattleReportPageOverview
-	}
-	return BattleReportPage(((int(p)+delta)%count + count) % count)
-}
-
 // Valid 是否为有效页签。
 func (p BattleReportPage) Valid() bool {
 	return p >= 0 && int(p) < int(battleReportPageCount)

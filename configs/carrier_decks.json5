@@ -372,7 +372,8 @@
       approachLength: 3
     }
   },
-  // 博尔扎诺（特伦托级改进型重巡洋舰）：两烟囱之间中线单台弹射器，向舰尾方向弹射，
+  // 博尔扎诺（特伦托级改进型重巡洋舰）：两烟囱之间中线单台横向弹射器，向舷外弹射（本配置取右舷 +90°）；
+  // 朝舰尾滑跑会撞上后烟囱，因此不能取 180°。
   // 弹射点坐标按该舰俯视图标注（舰艏朝右的横向俯视图，posPercent -0.02 中线）
   {
     name: "ITCatapult_bolzano",
@@ -381,7 +382,7 @@
         forward: 0.508,
         lateral: 0.021,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: 90
       }
     ],
     landing: {
@@ -392,7 +393,8 @@
       approachLength: 3
     }
   },
-  // 穆齐奥·阿滕多洛（蒙特库科利级轻巡洋舰）：两烟囱之间中线单台弹射器，向舰尾方向弹射，
+  // 穆齐奥·阿滕多洛（蒙特库科利级轻巡洋舰）：两烟囱之间中线单台横向弹射器，向舷外弹射（本配置取右舷 +90°）；
+  // 朝舰尾滑跑会撞上后烟囱，因此不能取 180°。
   // 弹射点坐标按该舰俯视图标注（舰艏朝右的横向俯视图，posPercent 0.00 中线）
   {
     name: "ITCatapult_muzio_attendolo",
@@ -401,7 +403,7 @@
         forward: 0.499,
         lateral: 0.008,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: 90
       }
     ],
     landing: {
@@ -1612,7 +1614,9 @@
       approachLength: 3
     }
   },
-  // manchester（城级轻巡洋舰）：两烟囱之间中线单台弹射器，向舰尾方向弹射，
+  // manchester（城级轻巡洋舰）：两烟囱之间中线单台横向弹射器，向舷外弹射（本配置取右舷 +90°）。
+  // 该弹射器为固定横向布置，不能朝舰尾弹射，否则飞机滑跑会撞上后烟囱，
+  // 因此弹射航向取 +90°（右舷正横），而不是 180°。
   // 弹射点坐标按该舰俯视图标注（舰艏朝右的横向俯视图，posPercent 0.04 中线）
   {
     name: "UKCatapult_manchester",
@@ -1621,7 +1625,7 @@
         forward: 0.48,
         lateral: 0,
         runLength: 0.22,
-        launchAngle: 180
+        launchAngle: 90
       }
     ],
     landing: {
