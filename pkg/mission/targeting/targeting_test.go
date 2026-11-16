@@ -8,6 +8,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/object"
 )
 
+// TestBuildPlanCoversFourSpatialFleets 验证舰队覆盖：两个机场的对舰队列首批要覆盖四个方向的全部敌舰队。
+// 场景：4 个舰队分布在 (40,40)/(40,215)/(215,40)/(215,215)，各由相距 5-6 格的航母与战列舰组成（半径 20）。
+// 预期：ExpiresTick=30+180=210；左右基地对舰队列前 2 项 FleetID 去重后为 4，失败即有舰队无人攻击。
+// 覆盖：2 个 Available 12、Range 1000 的 Base 与 8 艘 EnemyShip，BuildPlan 后统计队列 FleetID 集合。
 func TestBuildPlanCoversFourSpatialFleets(t *testing.T) {
 	const (
 		leftBaseUID  = "left-airfield"
@@ -54,6 +58,10 @@ func TestBuildPlanCoversFourSpatialFleets(t *testing.T) {
 	}
 }
 
+// TestBuildPlanDoesNotMutateSnapshotOrder 验证 BuildPlan 只读 Snapshot，不在调用方切片上原地排序。
+// 场景：快照在后台与主线程间传递，敌机 z-plane（Threat 0.5、距 2）与 a-plane（Threat 0.8、距 1）乱序输入。
+// 预期：队列首项为评分更高的 a-plane，而 snapshot.EnemyPlanes[0] 仍为 z-plane，失败即后台规划篡改主线程数据。
+// 覆盖：单基地 Available 1、Range 1000 的 TypePlane 队列，BuildPlan 后断言 queue[0].UID 与原切片首元素。
 func TestBuildPlanDoesNotMutateSnapshotOrder(t *testing.T) {
 	snapshot := Snapshot{
 		Tick: 1,
@@ -76,8 +84,10 @@ func TestBuildPlanDoesNotMutateSnapshotOrder(t *testing.T) {
 	}
 }
 
-// 同一架敌机在基地对空队列里只能出现一次。重复写入会让一个基地的整个 CAP
-// 一起扑向同一架飞机（例如 4 艘航母各派 10 架零式围殴一架手动侦察机）。
+// TestBuildPlanDoesNotRepeatAirTargets 验证同一架敌机在同一基地的对空队列里只出现一次。
+// 场景：基地有 12 架可用 CAP，敌空域只有 2 架飞机；若去重失败，整个 CAP 会重复扑向同一目标。
+// 预期：队列长度等于敌机数 2，且每个 UID 只出现 1 次。
+// 覆盖：构造 1 个基地/2 架敌机，BuildPlan 后遍历队列统计 UID 次数。
 func TestBuildPlanDoesNotRepeatAirTargets(t *testing.T) {
 	snapshot := Snapshot{
 		Tick: 1,
@@ -107,6 +117,10 @@ func TestBuildPlanDoesNotRepeatAirTargets(t *testing.T) {
 	}
 }
 
+// TestBuildPlanSkipsOutOfRangeTargets 验证基地按 Group.Range 过滤可达目标，射程外的敌舰不进对舰队列。
+// 场景：short-range 基地射程 10，far-ship 在 (50,0) 距离 50；不过滤会让飞机起飞后永远追不上目标。
+// 预期：BaseQueues["short-range"][TypeShip] 长度为 0，失败意味着编队被派往不可达目标。
+// 覆盖：单基地（Pos 0,0、Available 1、Range 10）与单敌舰（Pos 50,0、Value 1），断言队列为空。
 func TestBuildPlanSkipsOutOfRangeTargets(t *testing.T) {
 	snapshot := Snapshot{
 		Tick: 1,
@@ -125,6 +139,10 @@ func TestBuildPlanSkipsOutOfRangeTargets(t *testing.T) {
 	}
 }
 
+// TestBuildPlanUsesLongestAvailableShipRange 验证同基地多机组按最大 Range 判可达，短腿机组不拖累远程。
+// 场景：mixed-range 基地同时有 Range 20 与 Range 100 的对舰机组，far-ship 在 (50,0)，只有远程组够得到。
+// 预期：队列非空且首项为 far-ship，失败意味着长航程机型被同基地短程机型过滤，永远拿不到远处目标。
+// 覆盖：两个 Available 1 的机组（20/100）与 Pos(50,0) 敌舰，BuildPlan 后断言 queue[0].UID。
 func TestBuildPlanUsesLongestAvailableShipRange(t *testing.T) {
 	snapshot := Snapshot{
 		Tick: 1,
@@ -147,6 +165,10 @@ func TestBuildPlanUsesLongestAvailableShipRange(t *testing.T) {
 	}
 }
 
+// TestBuildPlanUsesNearestReachableFleetRepresentative 验证代表舰优先取舰队内航程可达者，而不是单纯按价值。
+// 场景：基地射程 25，远航母在 (30,0)、Value 1 超程，近驱逐在 (10,0)、Value 0.35，两者相距 20 格同队。
+// 预期：队列首项为 near-destroyer，失败意味着队列指向飞机够不着的目标，出勤后只能空转。
+// 覆盖：单基地 Available 1、Range 25 的 TypeShip 机组与两艘敌舰，断言队列非空且 queue[0].UID。
 func TestBuildPlanUsesNearestReachableFleetRepresentative(t *testing.T) {
 	snapshot := Snapshot{
 		Tick: 1,
@@ -167,6 +189,10 @@ func TestBuildPlanUsesNearestReachableFleetRepresentative(t *testing.T) {
 	}
 }
 
+// TestBuildPlanFillsEveryReachableShipBase 验证覆盖分配后，每个有对舰能力且目标可达的基地都要独立填满队列。
+// 场景：primary(0,0) 与 secondary(8,0) 各 12 架、射程 100，同一艘 enemy 在 (12,0)，覆盖阶段只给一个基地归属。
+// 预期：两个基地的 TypeShip 队列都非空，失败意味着没分到舰队的航母/机场只能反复起飞战斗机。
+// 覆盖：两个 Base 与单艘 EnemyShip 的 Snapshot，BuildPlan 后遍历 snapshot.Bases 断言各队列长度大于 0。
 func TestBuildPlanFillsEveryReachableShipBase(t *testing.T) {
 	snapshot := Snapshot{
 		Tick: 1,

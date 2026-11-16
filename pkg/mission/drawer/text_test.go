@@ -13,9 +13,12 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-// 光标位置可能同时压住多个对象（例如战机正停在航母上方）。调试面板必须把
-// 命中的对象全部列出来，并且按 Uid 稳定排序：map 遍历顺序随机，不排序会让
-// 同一个位置的多行信息逐帧换序跳动。
+// TestCursorDebugLinesListEveryOverlappingUnitInStableOrder 验证光标下的重叠对象全部列出且按 Uid 稳定排序。
+// 场景：航母 akagi（Uid b-ship、200×40）与战机 A6M2（Uid a-plane、20×20）的 CurPos 同为 (10,10)，
+// map 遍历顺序随机会让同一位置的多行信息逐帧换序跳动；(60,60) 为无对象空海域。
+// 预期：重叠处同时含 "Plane A6M2(a-plane)" 与 "Ship akagi(b-ship)"，且飞机行排在舰船行之前；
+// 空海域返回 nil。
+// 覆盖：cursorDebugLines 汇总 Ships/Planes 命中、按 Unit.ID() 排序以及无命中返回 nil。
 func TestCursorDebugLinesListEveryOverlappingUnitInStableOrder(t *testing.T) {
 	ship := &objUnit.BattleShip{
 		Name: "akagi", Uid: "b-ship", CurHP: 100, TotalHP: 100,
@@ -42,15 +45,21 @@ func TestCursorDebugLinesListEveryOverlappingUnitInStableOrder(t *testing.T) {
 	assert.Nil(t, cursorDebugLines(ms, objPos.NewR(60, 60)), "空海域不应产生调试行")
 }
 
-// pkg/game 每帧最后在 (0,0) 用 Ebiten 点阵字体画 "VER x FPS y"，而且画在调试
-// 面板之上。面板起点必须低于那一行，否则第一行会被压住（字格 6x16，即高 16px）。
+// TestDebugPanelClearsVersionAndFPSLine 验证调试面板顶端让开每帧最后绘制的 "VER x FPS y" 行。
+// 场景：pkg/game 在 (0,0) 用 Ebiten 点阵字体（字格 6×16，即高 16px）画版本/FPS，且叠在调试面板之上；
+// 面板起点若低于 16px 会被压住第一行。
+// 预期：debugOriginY（当前 20.0）≥ fpsLineHeight（16.0），并留出 4px 余量。
+// 覆盖：直接断言调试面板起点常量与 FPS 行高的关系，不依赖 Ebiten 窗口。
 func TestDebugPanelClearsVersionAndFPSLine(t *testing.T) {
 	const fpsLineHeight = 16.0
 	assert.GreaterOrEqual(t, debugOriginY, fpsLineHeight)
 }
 
-// 飞机面板要能看出所属基地是航母、其他载机舰船还是陆地机场：
-// BelongShip 只是个随机 uuid，光看它认不出类型，也认不出是哪一艘。
+// TestPlaneBaseLabelResolvesBaseKind 验证飞行面板把 BelongShip 随机 uuid 解析成可读基地类型。
+// 场景：基地分别为航母 akagi(c001)（ShipTypeAircraftCarrier）、巡洋舰 tone(s002)、机场 af01@(103,156)，
+// 以及已不存在于 Ships/Airfields 的 uuid "sunk"；unit 包不能反向依赖 building，解析放在 drawer。
+// 预期：依次得到 "carrier akagi(c001)"、"ship tone(s002)"、"airfield@(103,156)(af01)"；缺失基地返回空串。
+// 覆盖：planeBaseLabel 经 FindAircraftBase 命中 BattleShip/Airfield 两条分支及缺失兜底。
 func TestPlaneBaseLabelResolvesBaseKind(t *testing.T) {
 	carrier := &objUnit.BattleShip{Uid: "c001", Name: "akagi", Type: objUnit.ShipTypeAircraftCarrier}
 	cruiser := &objUnit.BattleShip{Uid: "s002", Name: "tone", Type: objUnit.ShipTypeCruiser}
@@ -66,8 +75,11 @@ func TestPlaneBaseLabelResolvesBaseKind(t *testing.T) {
 	assert.Empty(t, planeBaseLabel(ms, &objUnit.Plane{BelongShip: "sunk"}), "基地已不存在时应返回空串")
 }
 
-// 释放器配置名很长（如 US/BB/907/LB/AN-M66），单行会横穿整个屏幕。
-// 折行必须保证：所有行都在宽度内、单词不丢、超长单词能被硬拆。
+// TestWrapDebugLinesFitsWidthAndKeepsContent 验证调试文本折行不超宽、不丢内容、保留空行且能硬拆超长单词。
+// 场景：以 len(s) 为等宽假字体、maxWidth=40 折行含 US/BB/907/LB/AN-M66 释放器身份行与空行的输入；
+// 另有单个词 "[1] "+95 个 "X"、maxWidth=20 的硬拆用例。
+// 预期：所有行 ≤40；连续空白归一后与原文逐字相同；空行保留；硬拆后每行 ≤20 且去空白比较不丢字符。
+// 覆盖：wrapDebugLines 的按单词换行、悬挂缩进、空行透传，以及 debugCutIndex 的 rune 级切分。
 func TestWrapDebugLinesFitsWidthAndKeepsContent(t *testing.T) {
 	// 等宽假字体：一个字符算 1 像素，便于断言。
 	measure := func(s string) float64 { return float64(len(s)) }

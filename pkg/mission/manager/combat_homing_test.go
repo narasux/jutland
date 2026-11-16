@@ -69,7 +69,10 @@ func advanceBullets(m *MissionManager, maxTicks int) {
 	}
 }
 
-// 制导鱼雷必须能从错误朝向拐到目标上：起手朝正北，目标在正东。
+// TestGuidedTorpedoCurvesToOffAxisTarget 验证纯追踪制导鱼雷能从错误朝向拐向目标。
+// 场景：鱼雷在 (10,10)、Rotation=0 朝正北，静止目标在正东 4 格 (14,10)；GuidanceModePursuit、TurnRate=180°/s、速度 0.08、寿命 400，最多推进 400 拍。
+// 预期：target.CurHP 从 100 降到 90（TotalHP=100、Damage=10），即转向后命中。
+// 覆盖：guideBullet 的纯追踪分支与 SteerTowards 逐拍修正弹头朝向。
 func TestGuidedTorpedoCurvesToOffAxisTarget(t *testing.T) {
 	m, target, _ := newHomingTestManager(true)
 
@@ -80,7 +83,10 @@ func TestGuidedTorpedoCurvesToOffAxisTarget(t *testing.T) {
 	}
 }
 
-// 同样的初始条件，普通鱼雷保持直线，不应命中侧面的目标。
+// TestUnguidedTorpedoKeepsStraightAndMisses 验证没有 Guidance 的普通鱼雷保持直线，不会拐弯命中侧面目标。
+// 场景：与制导用例相同的 (10,10)、Rotation=0 与 (14,10) 静止靶舰，但弹药 Guidance=nil，推进 100 拍。
+// 预期：target.CurHP 保持 100，且 bt.Rotation 始终为 0。
+// 覆盖：guideBullet 对 !IsGuided 的直航早退与无制导鱼雷弹道。
 func TestUnguidedTorpedoKeepsStraightAndMisses(t *testing.T) {
 	m, target, bt := newHomingTestManager(false)
 
@@ -94,7 +100,10 @@ func TestUnguidedTorpedoKeepsStraightAndMisses(t *testing.T) {
 	}
 }
 
-// 目标中途消失时，鱼雷继续飞向最后已知点，不 panic 也不重新搜索。
+// TestGuidedTorpedoKeepsLastKnownPointWhenTargetLost 验证目标消失后制导鱼雷继续飞向最后已知点，不 panic 也不重新搜索。
+// 场景：制导鱼雷锁定 (14,10) 的靶舰后，把靶舰从 Arena.Ships 删除，再推进 3 拍。
+// 预期：bt.GuidePos 仍等于删除前记录的 lastKnown，且 bt.Rotation 不为 0（仍在朝该点转向）。
+// 覆盖：guideBullet 对目标缺失的分支——只保留 GuidePos，不读真实位置（避免从航迹泄露潜艇）。
 func TestGuidedTorpedoKeepsLastKnownPointWhenTargetLost(t *testing.T) {
 	m, target, bt := newHomingTestManager(true)
 	lastKnown := bt.GuidePos
@@ -110,7 +119,10 @@ func TestGuidedTorpedoKeepsLastKnownPointWhenTargetLost(t *testing.T) {
 	}
 }
 
-// 1x/2x 速度下转弯半径必须一致：转角按全局倍率同比放大。
+// TestHomingTurnPerTickScalesWithSpeedMultiplier 验证 1x/2x 全局速度下每秒转角换算成每拍转角后转弯半径一致。
+// 场景：config.G 设为默认设置，SpeedMultiplier 分别为 SpeedStandardMultiplier=1.0 与 SpeedFastMultiplier=2.0，调用 homingTurnPerTick(180)。
+// 预期：标准档返回 180/60×1=3°/拍，快档返回 180/60×2=6°/拍（容差 1e-9）。
+// 覆盖：homingTurnPerTick 中 constants.MaxTPS=60 与 SpeedMultiplier 的换算，测试结束恢复 config.G。
 func TestHomingTurnPerTickScalesWithSpeedMultiplier(t *testing.T) {
 	oldSettings := config.G
 	t.Cleanup(func() { config.G = oldSettings })
@@ -129,7 +141,10 @@ func TestHomingTurnPerTickScalesWithSpeedMultiplier(t *testing.T) {
 	}
 }
 
-// 目标持续机动（向南加速脱离）时，制导鱼雷仍要能追上并命中。
+// TestGuidedTorpedoHitsMovingTarget 验证目标持续机动脱离时制导鱼雷仍能追上并命中。
+// 场景：初始布局同上，靶舰每拍 MoveTo 沿 (14,60) 航路向南加速脱离，最多 400 拍或弹药清空即止。
+// 预期：target.CurHP 小于 100，即鱼雷在目标移动中完成追踪命中。
+// 覆盖：guideBullet 逐拍更新 GuidePos 与纯追踪转向对机动目标的收敛。
 func TestGuidedTorpedoHitsMovingTarget(t *testing.T) {
 	m, target, _ := newHomingTestManager(true)
 	mapCfg := m.state.Core.MissionMD.MapCfg
@@ -146,8 +161,10 @@ func TestGuidedTorpedoHitsMovingTarget(t *testing.T) {
 	}
 }
 
-// 真实配置端到端：长滩的 Mk44 制导航迹必须能命中横穿目标。
-// 同时验证发射链路把目标 uid、初始追踪点和放宽后的寿命都写进了实弹。
+// TestLongBeachGuidedTorpedoHitsCrossingTarget 验证真实配置端到端：长滩的 Mk44 制导鱼雷能命中横穿目标。
+// 场景：pearl_harbor 地图上，long_beach 在 (60,150)，maury 在 (63,150) 以 90° 航向驶向 (103,150)（40 格）；长滩禁用主炮/副炮/防空炮，仅靠 324mm Mk32 发射管（射程 16、Mk44 turnRate=150°/s、伤害 1400）开火，跑 600 拍。
+// 预期：至少发射 1 条鱼雷，每条 IsGuided 且 TargetShipUid 指向 maury；maury.CurHP 低于开局值。
+// 覆盖：shipFireTargets→FireAt 的发射链路把目标 uid、初始 GuidePos 写入实弹，并对制导鱼雷按 homingLifeRatio=1.5 放宽寿命。
 func TestLongBeachGuidedTorpedoHitsCrossingTarget(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

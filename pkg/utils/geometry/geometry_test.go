@@ -19,6 +19,10 @@ import (
 |			| 2
 | 			| 3
 */
+// TestCalcAngleBetweenPoints 验证角度以正北为 0°、顺时针增大，覆盖八个方向。
+// 场景：炮塔、鱼雷管、飞机航向都用这套角度约定；若 0° 起点或旋转方向错了，所有射界判定会整体偏转。
+// 预期：(0,-1)=0°、(1,-1)=45°、(1,0)=90°、…、(-1,-1)=315°。
+// 覆盖：以原点为起点，逐个方向调用 geometry.CalcAngleBetweenPoints 并断言精确角度。
 func TestCalcAngleBetweenPoints(t *testing.T) {
 	assert.Equal(t, float64(0), geometry.CalcAngleBetweenPoints(0, 0, 0, -1))
 	assert.Equal(t, float64(45), geometry.CalcAngleBetweenPoints(0, 0, 1, -1))
@@ -30,6 +34,11 @@ func TestCalcAngleBetweenPoints(t *testing.T) {
 	assert.Equal(t, float64(315), geometry.CalcAngleBetweenPoints(0, 0, -1, -1))
 }
 
+// TestCalcDistance 验证两点距离按欧氏距离计算：轴向为整数，斜向为 √2 的整数倍。
+// 场景：单位间距计算（position.Distance）都走它；坐标含正负方向，斜向必须用勾股而非曼哈顿距离。
+// 预期：(0,0)→(1,0)/(0,1) 为 1；对角 (1,±1)/(2,±2)/(3,±3) 为 √2、2√2、3√2；
+// 浮点用 epsilon=0.01 的 InEpsilon 断言；失败表示射程/命中判定出现斜向偏差。
+// 覆盖：固定原点，取 dx,dy∈{±1,±2,±3} 的轴向与四象限对角点共 19 个断言。
 func TestCalcDistance(t *testing.T) {
 	assert.Equal(t, float64(0), geometry.CalcDistance(0, 0, 0, 0))
 	assert.Equal(t, float64(1), geometry.CalcDistance(0, 0, 1, 0))
@@ -61,6 +70,12 @@ func TestCalcDistance(t *testing.T) {
 	assert.InEpsilon(t, threeSqrtRootThree, geometry.CalcDistance(0, 0, -3, -3), epsilon)
 }
 
+// TestIsPointInRotatedRectangle 验证点在旋转矩形内部判定，且边界一律算外部。
+// 场景：矩形 length=10（Y 轴）、width=4（X 轴）、中心 (0,0)，用于光标选中、锁定与落点命中。
+// 预期：angle=0 时 (-1,4.9) 为真，(2.0,4.9) 与 (1.0,-5.0) 压在 x=±2、y=±5 边界为假；
+// 45° 时 (1,-1)、(3,-3) 为真，90° 时 (5,-1) 为假，135° 时 (2,2) 为真；
+// 失败表示旋转后命中范围偏移，或边界被算进内部导致擦边命中。
+// 覆盖：固定中心，用 7 个点覆盖内部、边界与 0/45/90/135 四种旋转角，逐条 assert.True/False。
 func TestIsPointInRotatedRect(t *testing.T) {
 	cx, cy := 0.0, 0.0 // 中心点坐标
 	assert.True(t, geometry.IsPointInRotatedRectangle(-1.0, 4.9, cx, cy, 10.0, 4.0, 0.0))
@@ -76,6 +91,14 @@ func TestIsPointInRotatedRect(t *testing.T) {
 	assert.True(t, geometry.IsPointInRotatedRectangle(2.0, 2.0, cx, cy, 10.0, 4.0, 135.0))
 }
 
+// TestIsSegmentIntersectRotatedRectangle 验证线段与旋转矩形相交（含边界）的判定。
+// 场景：弹道与视线遮挡依赖线段-矩形相交；矩形 length=10（Y 轴）、width=4（X 轴），
+// 中心 (0,0)，角度取 0/45/90/135，线段覆盖穿越、相切、内含与远离。
+// 预期：穿过矩形、端点在内或边上、与四边重合、过顶点、完全在矩形内均为 true；
+// 整段在矩形外（左侧、右上、旋转后的外侧）为 false；0.4×0.1 小矩形的竖线穿越也为 true；
+// 失败表示弹道会穿墙，或命中判定漏掉擦边/包含情形。
+// 覆盖：45 条断言分五组：0° 穿越/相切、旋转角、内部、边界重合/顶点、无交点；
+// 另补 0.4×0.1 与 2.914 见方的极小矩形。
 func TestIsSegmentIntersectRotatedRectangle(t *testing.T) {
 	cx, cy := 0.0, 0.0 // 中心点坐标
 
@@ -140,6 +163,11 @@ func TestIsSegmentIntersectRotatedRectangle(t *testing.T) {
 	assert.True(t, geometry.IsSegmentIntersectRotatedRectangle(30, 71, 30, 69, 30, 70, 2.9140625, 2.9140625, 0))
 }
 
+// TestCalcWeaponFireAngle 验证炮口提前量：按目标速度/朝向求拦截点，再换算 0..360 射击角。
+// 场景：炮弹速度 1（或 100），目标速度 1（或 20）沿 0/45/90/135/180/225/270/315 度移动。
+// 预期：追击斜向/轴向时角度等于目标航向 45/135/225/315/0/90/180；迎头时仍为 0/90/180；
+// 三角形拦截为 50.71° 与 86.81°（epsilon=0.01）；失败表示移动目标会被打偏。
+// 覆盖：固定炮位 (0,0)，覆盖追击斜向 4 例、轴向 3 例、迎头 3 例、三角形 2 例，只断言返回 angle。
 func TestCalcWeaponFireAngle(t *testing.T) {
 	// 追击（斜边）
 	angle, _, _ := geometry.CalcWeaponFireAngle(0, 0, 1, 10, -10, 1, 45)

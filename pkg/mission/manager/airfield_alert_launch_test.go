@@ -66,8 +66,10 @@ func updateAirfieldAlertLaunchWithTargetPlan(manager *MissionManager) {
 	manager.updateAirfieldAlertLaunch()
 }
 
-// TestAirfieldDisabledNoAlertLaunch 停用机场不自动起飞：敌舰在场也不响应；
-// 恢复启用后立即正常警戒起飞。
+// TestAirfieldDisabledNoAlertLaunch 验证停用机场不自动起飞，恢复启用后立即警戒起飞。
+// 场景：单机场库存 1 架 test-alert-bomber，af.Disabled=true 时场上放一艘 (90,90) 的敌舰，同步刷新目标计划后调用 updateAirfieldAlertLaunch；再置 Disabled=false 重跑。
+// 预期：停用期间 Arena.Planes 为 0；重新启用后为 1 架。
+// 覆盖：Airfield.CanAlertLaunch 的 !Disabled 前置判定与警戒起飞主循环。
 func TestAirfieldDisabledNoAlertLaunch(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -93,8 +95,10 @@ func TestAirfieldDisabledNoAlertLaunch(t *testing.T) {
 	}
 }
 
-// TestAirfieldAlertLaunchWithoutRadius 机场不设警戒范围：场上没有任何敌机 /
-// 敌舰时保持待命；远在全场另一端的敌舰出现即自动起飞攻击。
+// TestAirfieldAlertLaunchWithoutRadius 验证机场不设警戒范围：无敌人时待命，远处敌舰出现即起飞攻击。
+// 场景：单机场库存 1 架轰炸机；先无敌人同步刷新计划并更新，再在 (90,90)（距机场 (50,50) 约 56.6 格）加一艘敌舰重跑。
+// 预期：无敌人时 0 架起飞且库存 CurCount=1；敌舰出现后 1 架起飞、库存归 0，并生成一条 NamePlaneAttack 指令。
+// 覆盖：updateAirfieldAlertLaunch 消费 targetingPlan 的对舰队列，不按距离过滤。
 func TestAirfieldAlertLaunchWithoutRadius(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -138,9 +142,10 @@ func TestAirfieldAlertLaunchWithoutRadius(t *testing.T) {
 	}
 }
 
-// TestAirfieldAlertLaunchDecoupledTargets 对空 / 对舰两路择敌互不阻塞：
-// 地面停放 / 滑跑中的敌机不触发警戒；空中敌机在空时轰炸机照常出击敌舰，
-// 只有既无舰可打、又无机可拦时才保持待命。
+// TestAirfieldAlertLaunchDecoupledTargets 验证对空/对舰两路择敌互不阻塞。
+// 场景：单轰炸机机场分三种局面：(a) 滑跑中的敌机 + (90,90) 敌舰；(b) 巡航敌机 (52,52) + 敌舰；(c) 只有巡航敌机。
+// 预期：(a) 地面敌机不触发警戒，轰炸机照常起飞打舰，Planes=2（1 敌 + 1 我）；(b) 空中敌机不阻塞，库存归 0、Planes=2；(c) 轰炸机无机可拦且无舰可打，保持库存 1、Planes=1。
+// 覆盖：BuildPlan 只收录巡航敌机、takeOffFromBase 按编组 TargetType 分流、轰炸机不拦截制空目标。
 func TestAirfieldAlertLaunchDecoupledTargets(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -204,8 +209,10 @@ func TestAirfieldAlertLaunchDecoupledTargets(t *testing.T) {
 	}
 }
 
-// TestAirfieldAlertLaunchSplitByTargetType 战斗机 + 轰炸机混编机场：
-// 敌机与敌舰同时出现时，战斗机拦截敌机、轰炸机打击敌舰，一波同时升空。
+// TestAirfieldAlertLaunchSplitByTargetType 验证战斗机+轰炸机混编机场按目标类型分流，一波同时升空。
+// 场景：机场两组各 1 架（test-alert-fighter、test-alert-bomber），场上同时有 (52,52) 的巡航敌机与 (90,90) 的敌舰，同步刷新计划后跑一次 updateAirfieldAlertLaunch。
+// 预期：战斗机 1 架、轰炸机 1 架起飞，两组 CurCount 均为 0；PlaneAttack 指令同时包含 air-enemy 与 enemy-ship。
+// 覆盖：updateAirfieldAlertLaunch 每基地最多连发 2 架、takeOffFromBase 的目标类型轮转与指令按 targetType 分流。
 func TestAirfieldAlertLaunchSplitByTargetType(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

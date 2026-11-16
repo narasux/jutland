@@ -10,6 +10,11 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+// TestConsumeZoomInputLimitsMouseWheelToOneStep 验证鼠标滚轮每 8 帧最多产生 1 次缩放方向。
+// 场景：玩家滚动滚轮，Ebiten 连续给出 wheelY=12 的事件；同一帧序列里反复调用 consumeZoomInput。
+// 预期：首次返回 1，随后 wheelZoomCooldownTicks-1 帧返回 0，冷却结束再返回 1；
+// 失败意味着原始增量 12 被当成 12 档缩放，画面会瞬间跳变甚至越界。
+// 覆盖：固定 wheelY=12、magnification=0，逐帧调用并区分冷却中与冷却后的返回值。
 func TestConsumeZoomInputLimitsMouseWheelToOneStep(t *testing.T) {
 	manager := &MissionManager{}
 
@@ -26,6 +31,11 @@ func TestConsumeZoomInputLimitsMouseWheelToOneStep(t *testing.T) {
 	}
 }
 
+// TestConsumeZoomInputAccumulatesTrackpadMagnification 验证触控板捏合按累积量触发缩放步。
+// 场景：单次捏合事件 magnification=0.3，远小于 1 的阈值，需要连续两次事件才够一步。
+// 预期：第一次返回 0（只累加 0.6），第二次累加后超过 1.0 返回 1；失败则一次轻微捏合就缩放，
+// 触控板会过于灵敏，或累积量永远达不到阈值导致无法缩放。
+// 覆盖：固定 wheelY=0，连续两次 consumeZoomInput(0, 0.3) 并断言方向 0 → 1。
 func TestConsumeZoomInputAccumulatesTrackpadMagnification(t *testing.T) {
 	manager := &MissionManager{}
 
@@ -67,6 +77,11 @@ func pressGroup(manager *MissionManager, groupID object.GroupID, count int) {
 	}
 }
 
+// TestSelectShipsByGroupFirstPressOnlySelects 验证编组键首次按下只选中舰船、不移动相机。
+// 场景：编组 1 有 "one"(400,400) 与 "two"(620,500)，相机初始在 (10,10)；随后再按下另一个编组 2。
+// 预期：SelectedGroupID 切到所按编组、SelectedShips 收录该编组全部 2 艘，Camera.Target 仍为 nil、
+// Camera.Pos 与初始值完全一致；失败意味着按一下编组键画面就跳走，玩家会丢失当前视野。
+// 覆盖：newGroupSelectManager 构造状态，分别按 GroupID1 与 GroupID2 并逐项断言相机与选中集合。
 func TestSelectShipsByGroupFirstPressOnlySelects(t *testing.T) {
 	one := newGroupShip("one", object.GroupID1, 100, objPos.NewR(400, 400))
 	two := newGroupShip("two", object.GroupID1, 100, objPos.NewR(620, 500))
@@ -103,6 +118,12 @@ func TestSelectShipsByGroupFirstPressOnlySelects(t *testing.T) {
 	}
 }
 
+// TestRepeatedGroupPressTargetsFormationCenter 验证再次按下编组键会把相机定位到编队包围盒中心。
+// 场景：编组 1 两舰位于 (400,400) 与 (620,500)，第二次按下编组键时触发 centerCameraOn；
+// 之后继续连按 16 次，模拟玩家反复敲同一个编组键。
+// 预期：Camera.Target 等于 centeredCameraPos(ms, (510,450))，且按下当帧 Pos 不变（由逐帧推进）；
+// 连续 16 次重按目标始终不变。失败意味着定位点随按击次数在编队内乱跳或直接瞬移。
+// 覆盖：pressGroup 连按 2 次与 16 次两段，比较 *(Camera.Target) 与编队中心换算结果。
 func TestRepeatedGroupPressTargetsFormationCenter(t *testing.T) {
 	one := newGroupShip("one", object.GroupID1, 100, objPos.NewR(400, 400))
 	two := newGroupShip("two", object.GroupID1, 100, objPos.NewR(620, 500))
@@ -129,6 +150,12 @@ func TestRepeatedGroupPressTargetsFormationCenter(t *testing.T) {
 	}
 }
 
+// TestGroupPressIgnoresDestroyedShip 验证编队中心只统计存活舰船，沉船不参与包围盒。
+// 场景：编组 1 里 "alive"(400,400) 仍在，另一艘 "sunk" 的 CurHP=0 却停在 (700,600)；
+// 连按两次编组键后 formationCenter 需要跳过沉船。
+// 预期：Camera.Target 等于以 (400,400) 为中心的 centeredCameraPos，而不是两船中点 (550,500)；
+// 失败意味着沉船把镜头拖向残骸，编队定位偏离主力。
+// 覆盖：newGroupShip 分别造 100 HP 与 0 HP 的同编组舰，按 2 次后与单舰定位结果比较。
 func TestGroupPressIgnoresDestroyedShip(t *testing.T) {
 	alive := newGroupShip("alive", object.GroupID1, 100, objPos.NewR(400, 400))
 	sunk := newGroupShip("sunk", object.GroupID1, 0, objPos.NewR(700, 600))
@@ -142,6 +169,11 @@ func TestGroupPressIgnoresDestroyedShip(t *testing.T) {
 	}
 }
 
+// TestCameraMoveEasesTowardTargetAndSnaps 验证相机定位是单调收敛的缓动并在终点精确吸附。
+// 场景：单舰编组按两次设定 Target 后，逐帧调用 advanceCameraMove，最多观察 600 帧。
+// 预期：每帧到目标的距离不得增大；至少走 2 帧（排除瞬移）；收敛后 Pos 与 Target 完全相等、
+// Target 被清空。失败分别意味着相机远离目标抖动、定位退化成瞬移，或留下浮点差导致永不结束。
+// 覆盖：记录首次距离 prev 与帧数 frames，循环 advanceCameraMove 并比较 Distance，最后断言 Pos/Target。
 func TestCameraMoveEasesTowardTargetAndSnaps(t *testing.T) {
 	one := newGroupShip("one", object.GroupID1, 100, objPos.NewR(400, 400))
 	manager, ms := newGroupSelectManager(one)
@@ -177,6 +209,12 @@ func TestCameraMoveEasesTowardTargetAndSnaps(t *testing.T) {
 	}
 }
 
+// TestAreaSelectingCancelsCameraMove 验证框选期间会放弃正在进行的相机定位。
+// 场景：编组按键已设置 Camera.Target，此时玩家按住拖拽开始框选，IsAreaSelecting 置为 true，
+// 又调了一帧 advanceCameraMove。
+// 预期：返回 false 表示不再移动，且 Camera.Target 被清空；失败意味着镜头在框选时继续滑动，
+// 选区的地图坐标会随相机跳变，选中范围与玩家看到的框不一致。
+// 覆盖：按两次编组键制造定位目标，设置框选状态后断言返回值与 Target 均为空。
 func TestAreaSelectingCancelsCameraMove(t *testing.T) {
 	one := newGroupShip("one", object.GroupID1, 100, objPos.NewR(400, 400))
 	manager, ms := newGroupSelectManager(one)

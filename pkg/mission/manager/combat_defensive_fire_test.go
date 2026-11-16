@@ -13,9 +13,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-// 轰炸机自卫防空火力：对舰机型飞行途中遭遇射程内的空中敌机时，
-// 机炮/炮塔应开火还击（此前对空开火目标只来自 AttackObjType，
-// 轰炸机在空中纯挨打）。
+// TestShipAttackPlaneReturnsFireAtAirborneEnemy 验证对舰机型飞行途中会用机炮/炮塔还击射程内的空中敌机。
+// 场景：B-17G 在 (10,10)、CurAttackTarget="enemy-ship"，咬尾的 F6F-3 在正后方 (10,11) 且速度归零；对空机枪射程 1.25 格，FriendlyFire=false，跑一帧 updatePlaneWeaponFire。
+// 预期：ForwardingBullets 中至少 1 发 Shooter=bomber.Uid 且 TargetObjType=TypePlane；B-17G 的炸弹与鱼雷均未 Released。
+// 覆盖：updatePlaneDefensiveFire 的空中敌机扫描与还击，以及炸弹/鱼雷释放器不会对空投放（修复轰炸机纯挨打）。
 func TestShipAttackPlaneReturnsFireAtAirborneEnemy(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -65,7 +66,10 @@ func TestShipAttackPlaneReturnsFireAtAirborneEnemy(t *testing.T) {
 	}
 }
 
-// 敌机在对空火力射程之外时不应开火。
+// TestShipAttackPlaneKeepsSilentOutOfRange 验证敌机在自卫对空射程外时不开火。
+// 场景：B-17G 在 (10,10)，F6F-3 在正后方 4 格 (10,14)，速度归零，超过对空机枪 1.25 格射程。
+// 预期：ForwardingBullets 为 0。
+// 覆盖：updatePlaneDefensiveFire 的 MaxToPlaneRange 距离过滤。
 func TestShipAttackPlaneKeepsSilentOutOfRange(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -93,7 +97,10 @@ func TestShipAttackPlaneKeepsSilentOutOfRange(t *testing.T) {
 	}
 }
 
-// 己方飞机不应成为自卫火力目标。
+// TestShipAttackPlaneIgnoresFriendlyPlanes 验证己方飞机不会成为自卫火力目标。
+// 场景：B-17G 在 (10,10)，同阵营 F6F-3 在 (10,11)、距离 1 格且在射程内，速度归零。
+// 预期：ForwardingBullets 为 0（不做友军误伤）。
+// 覆盖：updatePlaneDefensiveFire 的 BelongPlayer 敌我判定。
 func TestShipAttackPlaneIgnoresFriendlyPlanes(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -121,9 +128,10 @@ func TestShipAttackPlaneIgnoresFriendlyPlanes(t *testing.T) {
 	}
 }
 
-// 每帧至多集火一个自卫目标：前后各有一架敌机在射程内（机颚/颊部炮塔
-// 覆盖正前方，机背/机腹/机尾炮塔覆盖正后方），本帧的自卫火力必须全部
-// 来自其中一架，另一架等下一帧再交战。
+// TestShipAttackPlaneEngagesSingleTargetPerFrame 验证每帧至多集火一个自卫目标。
+// 场景：B-17G 在 (10,10)，正前方 (10,9) 与正后方 (10,11) 各有一架速度归零的 F6F-3，均在 1.25 格射程内；跑一帧 updatePlaneWeaponFire。
+// 预期：至少一批自卫弹，且以第一发归属为准，所有自卫弹目标点距同一架敌机 ≤0.35 格、距另一架 >0.35 格（两机相距 2 格、散布 ≤0.12 格）。
+// 覆盖：updatePlaneDefensiveFire 中 eachPlane 命中即返回，保证一帧只交战一个目标；过滤 Shooter=bomber.Uid 排除敌机还击。
 func TestShipAttackPlaneEngagesSingleTargetPerFrame(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

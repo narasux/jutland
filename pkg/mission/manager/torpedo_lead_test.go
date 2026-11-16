@@ -59,9 +59,10 @@ func torpedoDuel(t *testing.T, course float64, presetCruise bool) (fired, damage
 	return fired, startHP - target.CurHP
 }
 
-// 目标刚接到命令、还在起步加速时，鱼雷提前量必须把这段加速算进去。
-// 只取发射瞬间的航速会把落点算近：横穿的目标会被整条扇面甩在身后，直行的目标
-// 反而永远打不到。回归：修复前正横与反向横穿两个场景都是 0 伤害。
+// TestTorpedoHitsCrossingTargetGettingUnderWay 验证目标刚起步加速时鱼雷提前量会把加速度算进去。
+// 场景：porter 在 (60,150) 只用鱼雷打 3 格外的 maury，目标航向 0°/180°、初始航速 0，400 拍内持续加速横穿。
+// 预期：至少发射 1 根鱼雷且目标掉血 >0；回归前提前量只取发射瞬间航速，正横与反向横穿都是 0 伤害。
+// 覆盖：真实 porter/maury 模板 + MoveTo 推进，经 shipFireTargets/FireAt/updateShotBullets 统计发射根数与掉血。
 func TestTorpedoHitsCrossingTargetGettingUnderWay(t *testing.T) {
 	for _, course := range []float64{0, 180} {
 		fired, damage := torpedoDuel(t, course, false)
@@ -74,7 +75,10 @@ func TestTorpedoHitsCrossingTargetGettingUnderWay(t *testing.T) {
 	}
 }
 
-// 已经在巡航的横穿目标同样要能打中。
+// TestTorpedoHitsCruisingCrossingTarget 验证已处于巡航速度的横穿目标同样能被鱼雷提前量命中。
+// 场景：与起步用例相同，但 maury 直接设为 CruiseSpeed，航向 0°/180°、在 3 格外横穿射击线。
+// 预期：至少 1 根鱼雷发射且目标掉血 >0；固定巡航速度这一稳定分支不能被起步加速修复漏掉。
+// 覆盖：torpedoDuel(presetCruise=true) 走真实 MoveTo 与 updateShotBullets，断言 fired、damage 两个返回值。
 func TestTorpedoHitsCruisingCrossingTarget(t *testing.T) {
 	for _, course := range []float64{0, 180} {
 		fired, damage := torpedoDuel(t, course, true)
@@ -84,10 +88,10 @@ func TestTorpedoHitsCruisingCrossingTarget(t *testing.T) {
 	}
 }
 
-// 沿瞄准线迎头冲来的目标，舰体长轴正对扇面，只有压在瞄准线上的鱼雷有机会命中；
-// 每一轮齐射都必须有一根压在瞄准线上，不能只有第一轮。
-// 回归：多座发射器按整组航迹顺次外扩时，第二轮起整轮都落在瞄准线外侧，
-// porter 的 8 根齐射只命中 1 根，正头对进的目标正好从缺口里穿过去。
+// TestMultiMountTorpedoVolleyCoversClosingTarget 验证多座发射器每一轮齐射都至少有一根鱼雷压在瞄准线上。
+// 场景：porter 双座四联装对沿瞄准线迎头冲来的 maury 打完整轮，目标在正东 3 格、航向 270°、巡航速度，共 240 拍。
+// 预期：发射 >0 且命中 ≥3；回归前第二轮起整轮落在瞄准线外侧，8 根齐射只中 1 根，正头对进的目标从缺口穿过。
+// 覆盖：torpedoClosingDuel 用真实 MoveTo/FireAt/updateShotBullets，按 HitObjType==TypeShip 统计命中根数。
 func TestMultiMountTorpedoVolleyCoversClosingTarget(t *testing.T) {
 	fired, hits := torpedoClosingDuel(t)
 	if fired == 0 {

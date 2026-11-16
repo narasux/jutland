@@ -15,6 +15,12 @@ func primeWakeEmission(ship *BattleShip) {
 	ship.wakeTrailInitialized = true
 }
 
+// TestSwordfishTrailsFollowTailAnimationWithoutPerTickStacking 验证剑鱼尾流跟随尾部动画步进，
+// 同一动画帧不重复生成。
+// 场景：剑鱼动画 8 帧、每 6 tick 换帧；尾流应只在动画步变化时生成左右两簇，而不是每帧堆叠。
+// 预期：首帧 2 条小圆尾流、位于舰尾左后方；同一步再次调用返回 nil；AnimationAge=24 切到右后方，
+// 且扩散率大于 0。
+// 覆盖：直接设置 AnimationAge/LastTrailAnimationStep，连续调用 GenTrails 断言数量/形状/位置/扩散。
 func TestSwordfishTrailsFollowTailAnimationWithoutPerTickStacking(t *testing.T) {
 	ship := &BattleShip{
 		TypeAbbr: "Swordfish",
@@ -60,6 +66,12 @@ func TestSwordfishTrailsFollowTailAnimationWithoutPerTickStacking(t *testing.T) 
 	}
 }
 
+// TestSurfaceShipWakeMatchesOriginalWhitePair 验证普通舰船默认生成前后两条白色尾流，
+// 尺寸/寿命/航迹长度符合设计。
+// 场景：驱逐/战列等没有自定义 WakeHulls 的舰船，航行时应保留原有“一前一后白沫”的观感。
+// 预期：2 条尾流、Color=nil（默认白）、OwnerUid=舰 UID；艏尾尺寸 0.6W/W；艏在舰前、艉在舰后；
+// 航迹长度=设计比例 × 航速/最大速度，寿命=wakeAlpha。
+// 覆盖：primeWakeEmission 后调用 GenTrails，逐项断言颜色/归属/尺寸/位置/寿命/长度。
 func TestSurfaceShipWakeMatchesOriginalWhitePair(t *testing.T) {
 	ship := &BattleShip{
 		Length:   128,
@@ -103,8 +115,14 @@ func TestSurfaceShipWakeMatchesOriginalWhitePair(t *testing.T) {
 	}
 }
 
-// TestSurfaceShipWakeIsVisibleBehindHull 锁定回归：尾流点必须能在寿命内走出舰体投影，
-// 否则尾流会整段被战舰贴图盖住，玩家在游戏中看不到任何尾流。
+// TestSurfaceShipWakeIsVisibleBehindHull 验证尾流点能在寿命内走出舰体投影，并且露出舰体后仍保持可见，
+// 否则整段尾流会被战舰贴图盖住、玩家看不到。
+// 场景：驱逐舰 118×11/36kn、战列舰 175×32/21kn、慢速战列舰 114×22/16kn、超战列舰 251×36/30kn
+// 全速航行；舰艏尾流点在 +0.25 舰长、舰艉点在 -0.20 舰长，走出舰体分别需要 0.75 / 0.30 舰长。
+// 预期：每舰生成 2 条尾流；世界航迹长度 ≥ 舰长 ×(走出比例 + 0.5 舰长可见尾迹)，
+// 且走出舰体那一刻剩余 life（= 透明度）≥ 10。
+// 覆盖：四型舰调用 primeWakeEmission + GenTrails，按 clearRatios{0.75, 0.30} 与 wantVisibleRatio=0.5
+// 逐条断言航迹长度与透明度。
 func TestSurfaceShipWakeIsVisibleBehindHull(t *testing.T) {
 	cases := []struct {
 		name          string
@@ -153,8 +171,14 @@ func TestSurfaceShipWakeIsVisibleBehindHull(t *testing.T) {
 	}
 }
 
-// TestSlowShipWakeStaysNarrowAndFaint 锁定低速观感：尾流点的寿命 / 尺寸扩散都随航速下降，
-// 不会因为低速时寿命变长而膨成又白又圆的泡沫团。
+// TestSlowShipWakeStaysNarrowAndFaint 验证低速航行时尾流寿命与尺寸扩散随航速收紧，
+// 不会因为寿命变长而膨成又白又圆的泡沫团。
+// 场景：同为 175×32 的战列舰，分别以 21kn 巡航与 4kn 慢速航行；低速时寿命衰减更慢，
+// 若不按航速收紧，尾流点会越漂越宽、越漂越白。
+// 预期：慢速的艏/艉尾流世界航迹长度都短于巡航；两条尾流 CurLife ≤ wakeAlpha=100；
+// 末端尺寸 CurSize + DiffusionRate×CurLife/LifeReductionRate 不超过 舰宽 ×(bowWakeEndWidth=2 /
+// sternWakeEndWidth=1.6)。
+// 覆盖：newShip 构造两种航速并 GenTrails，逐条比较航迹长度、透明度上限与末端尺寸。
 func TestSlowShipWakeStaysNarrowAndFaint(t *testing.T) {
 	newShip := func(knots float64) *BattleShip {
 		speed := knots / ShipSpeedScale
@@ -193,6 +217,11 @@ func TestSlowShipWakeStaysNarrowAndFaint(t *testing.T) {
 	}
 }
 
+// TestSurfaceShipWakeLengthIsIndependentOfGlobalSpeed 验证全局速度倍率只改变尾流寿命衰减速度，
+// 不改变世界空间长度。
+// 场景：玩家在 0.5x/1x/2x 之间切换；若尾流长度随倍率变化，慢速档会留下过短/过长的白带。
+// 预期：三档倍率下 CurSpeed*CurLife/(LifeReductionRate*multiplier) 一致。
+// 覆盖：遍历三档设置 config.G，构造同型舰生成尾流，比较归一化长度。
 func TestSurfaceShipWakeLengthIsIndependentOfGlobalSpeed(t *testing.T) {
 	previous := config.G
 	t.Cleanup(func() { config.G = previous })
@@ -224,6 +253,10 @@ func TestSurfaceShipWakeLengthIsIndependentOfGlobalSpeed(t *testing.T) {
 	}
 }
 
+// TestSurfaceShipWakeDoesNotStackAtLowSpeed 验证低速航行不会逐帧堆出大量尾流。
+// 场景：舰船以 0.003 格/帧爬行，100 帧只走 0.3 格；若每帧都按半舰艏半径采样，会生成上百组白点。
+// 预期：100 帧内生成尾流的帧数小于 10。
+// 覆盖：每帧移动后调用 GenTrails，统计非空次数。
 func TestSurfaceShipWakeDoesNotStackAtLowSpeed(t *testing.T) {
 	previous := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -254,6 +287,11 @@ func TestSurfaceShipWakeDoesNotStackAtLowSpeed(t *testing.T) {
 	}
 }
 
+// TestConfiguredWakeHullsEmitPerHull 验证三体舰按 WakeHulls 配置给每个船体生成独立尾流。
+// 场景：主舰体 + 左右副体，横向偏移 ±93.5；若只按一个船体生成，副体尾流会缺失或叠在中间。
+// 预期：6 条尾流（每船体前后各 1）；X 顺序为中心→右→左；主舰尾在飞行甲板之后；副体尺寸=28；
+// 副体航迹短于主舰且符合船体长度比例。
+// 覆盖：配置 3 个 WakeHull，生成后断言数量/顺序/位置/尺寸/长度。
 func TestConfiguredWakeHullsEmitPerHull(t *testing.T) {
 	ship := &BattleShip{
 		Length:   493,
@@ -303,6 +341,10 @@ func TestConfiguredWakeHullsEmitPerHull(t *testing.T) {
 	}
 }
 
+// TestSurfaceShipWakeLifetimeUsesMaxSpeed 验证尾流寿命/扩散按 MaxSpeed 计算，而不是当前航速。
+// 场景：同一艘船慢速与全速航行；若按当前速度算，慢速时尾流寿命会被拉长、扩散变快，看起来像泡沫团。
+// 预期：慢速/全速生成的对应尾流 LifeReductionRate、DiffusionRate 相同。
+// 覆盖：同型舰分别以 0.01/0.1 生成尾流，逐条比较两个衰减参数。
 func TestSurfaceShipWakeLifetimeUsesMaxSpeed(t *testing.T) {
 	newShip := func(speed float64) *BattleShip {
 		ship := &BattleShip{
@@ -334,6 +376,10 @@ func TestSurfaceShipWakeLifetimeUsesMaxSpeed(t *testing.T) {
 	}
 }
 
+// TestStoppedSwordfishResetsTrailAnimationStep 验证停船时动画计时与尾流步进复位。
+// 场景：剑鱼从航行到停船；若 AnimationAge 继续累加，下次起步会从中途帧开始，尾流也会跳步。
+// 预期：AdvanceAnimation 后 AnimationAge=0、LastTrailAnimationStep=-1。
+// 覆盖：构造 CurSpeed=0、已有 AnimationAge/LastTrailAnimationStep 的舰船，调用 AdvanceAnimation(1) 断言。
 func TestStoppedSwordfishResetsTrailAnimationStep(t *testing.T) {
 	ship := &BattleShip{
 		CurSpeed: 0,

@@ -11,8 +11,14 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
-// 回归：AI 的环形阵位/撤退点可能落在陆地上。直接下发会变成“永远到不了”的指令，
-// 舰船停在岸边水面、AI 认为没到位，于是每轮决策反复重下同一条指令。
+// TestNavigableDestSnapsLandTargetToWater 验证 AI 目标点落在陆地时按同域水域吸附。
+// 场景：pearl_harbor 地图上 ComputerAlpha 战列舰 bb 位于 (60,130)，AI 的环形阵位
+// (59,122) 是海岸格（前提断言 IsLand(59,122)）；另以水面 (60,130) 作对照。
+// 预期：吸附后的阵位不再落在陆格，且 WaterRegionAt 与舰船所在水域一致；水面目标
+// 原样返回（samePos）。修复前直接下发陆格会变成“永远到不了”，舰船停在岸边水面、
+// AI 认为没到位而每轮重下同一条指令。
+// 覆盖：mapcfg.GetByName("pearl_harbor") + 手搭 battleSnapshot，调用 navigableDest，
+// 用 IsLand / WaterRegionAt / samePos 断言两条分支。
 func TestNavigableDestSnapsLandTargetToWater(t *testing.T) {
 	mapCfg := mapcfg.GetByName("pearl_harbor")
 	if mapCfg == nil {

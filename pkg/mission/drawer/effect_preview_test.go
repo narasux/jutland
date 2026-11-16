@@ -1,3 +1,6 @@
+//go:build manual
+
+// 手工特效预览：go test -tags manual -run TestDumpHitEffectPreview ./pkg/mission/drawer
 package drawer
 
 import (
@@ -14,8 +17,14 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
-// TestDumpHitEffectPreview 用真实的粒子配方做离屏合成并输出 PNG，便于人工检查观感。
-// 默认跳过；需要时 JUTLAND_EFFECT_PREVIEW=1 运行，产物在 /tmp/effect_*.png。
+// TestDumpHitEffectPreview 验证命中特效的真实粒子配方可经离屏合成导出为 PNG 供人工检查。
+// 场景：仅在 JUTLAND_EFFECT_PREVIEW=1 时执行；cell=128、steps=8，依次渲染 flash_medium(Flash,0.34,26)、
+// flash_heavy(Flash,0.5,32)、splash_medium/heavy(Splash,0.45/0.8,60)、torpedo_plume(TorpedoPlume,1.2,60)、
+// dust_heavy(Dust,0.75,60)，每格同一 Seed=20261018、Age=Life*i/8，背景含驱逐舰尺寸参照（约 0.32×3.25 地图格）。
+// 预期：输出 /tmp/effect_<name>.png 共 6 张，每张 8 格展示同一次爆炸从 Age=0 到 Life 的时间演化；
+// 测试不做像素断言，尺寸、扩散、透明度与 lean 拖尾的观感由人工检查。
+// 覆盖：effectParticles 的 Flash / Splash+TorpedoPlume / Dust 分支、compositeEffect 复刻
+// drawEffectParticles 的扩散与预乘合成、compositeCircle/EffectCircleAlpha 以及 dumpPNG 导出；默认 t.Skip。
 func TestDumpHitEffectPreview(t *testing.T) {
 	if os.Getenv("JUTLAND_EFFECT_PREVIEW") == "" {
 		t.Skip("set JUTLAND_EFFECT_PREVIEW=1 to dump preview PNGs")

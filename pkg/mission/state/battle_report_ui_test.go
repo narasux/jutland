@@ -29,6 +29,10 @@ func requireInsideScreen(t *testing.T, rect BattleReportRect, screenW, screenH i
 	require.LessOrEqual(t, rect.Y+rect.H, float64(screenH)+eps)
 }
 
+// TestBattleReportLayoutFitsCommonScreens 验证四种常见分辨率下战报面板完整落在屏幕内且各区域不重叠。
+// 场景：结算页按 1280×760 设计尺寸缩放，需在 1920×1080、1280×720、1024×768、800×600 都不越界。
+// 预期：Scale>0、Panel 居中；卡片/页签互不重叠且 PageAt 命中自身；纵向 Cards→Sides→Note→Footer→按钮。
+// 覆盖：遍历四组尺寸，用 requireInsideRect/insideScreen/overlap 与 InDelta 断言所有子矩形与顺序。
 func TestBattleReportLayoutFitsCommonScreens(t *testing.T) {
 	sizes := []struct{ w, h int }{
 		{1920, 1080},
@@ -91,6 +95,10 @@ func TestBattleReportLayoutFitsCommonScreens(t *testing.T) {
 	}
 }
 
+// TestBattleReportLayoutButtonsOptional 验证 withButtons 分支：结算页给按钮，暂停统计页给提示且面板不跳变。
+// 场景：同一套 CalcBattleReportLayout 既画战斗结算，也画暂停实时统计，后者不能出现“返回主界面”按钮。
+// 预期：true 时 Back/Retry/Buttons 非空、Hint 为空；false 时三者 Empty、Hint 在 Panel 内，两者 Panel 相等。
+// 覆盖：1920×1080 下分别传 true/false，断言 Empty() 布尔值、Hint 包含关系与 Panel 相等。
 func TestBattleReportLayoutButtonsOptional(t *testing.T) {
 	withButtons := CalcBattleReportLayout(1920, 1080, true)
 	require.False(t, withButtons.BackButton.Empty())
@@ -107,6 +115,10 @@ func TestBattleReportLayoutButtonsOptional(t *testing.T) {
 	require.Equal(t, withButtons.Panel, noButtons.Panel)
 }
 
+// TestBattleReportDurationText 验证 BattleReportDurationText 按 60 TPS 把 SimTick 换算成作战时长文本。
+// 场景：页脚显示游戏内等效时长，暂停不推进 SimTick；需覆盖整分、跨分、跨小时与负 tick 输入。
+// 预期：0→00:00、59*60→00:59、61*60→01:01、3723*60→1:02:03、-100→00:00，跨小时才用 H:mm:ss。
+// 覆盖：五组 tick 直接断言字符串，避免 61 秒被写成 01:61 或负值出现 '-'。
 func TestBattleReportDurationText(t *testing.T) {
 	require.Equal(t, "00:00", BattleReportDurationText(0))
 	require.Equal(t, "00:59", BattleReportDurationText(59*60))
@@ -115,7 +127,11 @@ func TestBattleReportDurationText(t *testing.T) {
 	require.Equal(t, "00:00", BattleReportDurationText(-100))
 }
 
-// 结算页按钮居中并排：左侧是低频的重新挑战，右侧是主要操作返回主界面。
+// TestBattleReportButtonsCenterRetryLeftAndBackRight 验证结算页两个按钮同高、重试在左、返回在右且整体居中。
+// 场景：任务成功/失败结算页同时提供“重新挑战”和“返回主界面”；按钮错位或间距不符会让玩家误点。
+// 预期：RetryButton 与 BackButton 同 Y；Retry 在左；间距 = battleReportButtonGap*Scale；
+// 两按钮整体中心与面板中心重合。
+// 覆盖：用 1920x1080 布局计算 report，逐项断言 Y/X/间距/中心。
 func TestBattleReportButtonsCenterRetryLeftAndBackRight(t *testing.T) {
 	report := CalcBattleReportLayout(1920, 1080, true)
 	require.Equal(t, report.RetryButton.Y, report.BackButton.Y)

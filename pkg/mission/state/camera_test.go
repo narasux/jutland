@@ -6,6 +6,10 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
+// TestCameraContainsMargin 验证相机外扩判定：margin=0 取闭区间，margin=n 时四周各扩 n 格。
+// 场景：单位与特效裁剪依赖外扩判断，差一格会让贴边单位闪烁消失；相机取 Pos(10,20)、Width=5、Height=4。
+// 预期：内部点与四边在内；(9,22) margin=0 外、margin=1 内；margin=1 时 16/19/25 与角 (9,19) 在内。
+// 覆盖：15 个用例覆盖内部、四边、margin 界内外的 8/17/18/26 与外扩角，逐项断言 ContainsMargin。
 func TestCameraContainsMargin(t *testing.T) {
 	cam := &Camera{Pos: objPos.New(10, 20), Width: 5, Height: 4}
 

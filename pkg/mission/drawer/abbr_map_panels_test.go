@@ -9,6 +9,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+// TestFleetTypeRowsAggregateAndOrderByShipType 验证编成按舰种聚合，并按主力舰优先的权重排序。
+// 场景：态势栏过窄，不能逐舰级展开；同一舰种被拆在多个舰级条目里（两个驱逐舰条目各 2/1 艘）。
+// 预期：3 行依次为战列舰 1、巡洋舰 2、驱逐舰 3；失败意味着聚合漏加或排序权重错。
+// 覆盖：构造 Total=6、4 个 ShipClass（驱逐 2、战列 1、巡洋 2、驱逐 1），断言 []fleetTypeRow 完全相等。
 func TestFleetTypeRowsAggregateAndOrderByShipType(t *testing.T) {
 	fleet := state.Fleet{
 		Total: 6,
@@ -27,6 +31,10 @@ func TestFleetTypeRowsAggregateAndOrderByShipType(t *testing.T) {
 	}, fleetTypeRows(fleet))
 }
 
+// TestCalcAbbrSidePanelsStayInsideScreenAndOutsideMap 验证左右态势栏落在各自留白内，不压地图也不出屏。
+// 场景：全屏缩略地图居中，两侧留白随分辨率和地图宽度变化；留白不足时需降级为 compact 布局。
+// 预期：左栏宽 >0，左右外边距对称，左栏右缘 ≤ colW、右栏左缘 ≥ w-colW、右栏右缘 ≤ w，两栏同 Y 同宽。
+// 覆盖：表驱动 6 组 2560x1440 至 1024x768（含 abbrW 768/512），断言 Compact、对称、高度与边界。
 func TestCalcAbbrSidePanelsStayInsideScreenAndOutsideMap(t *testing.T) {
 	cases := []struct {
 		name    string
@@ -61,6 +69,10 @@ func TestCalcAbbrSidePanelsStayInsideScreenAndOutsideMap(t *testing.T) {
 	}
 }
 
+// TestCalcAbbrSidePanelsSkipsWhenNoRoom 验证地图占满屏幕宽度时返回零布局，调用方跳过绘制。
+// 场景：800 宽窗口加载 800 宽缩略地图，两侧留白 colW=0，panelW=-32，低于最小宽 80。
+// 预期：Left.W=0（零布局）；失败意味着会画出负宽面板或压住地图。
+// 覆盖：单次调用 calcAbbrSidePanels(800,900,800)，require.Zero 左栏宽度并带「地图占满屏幕」消息。
 func TestCalcAbbrSidePanelsSkipsWhenNoRoom(t *testing.T) {
 	require.Zero(t, calcAbbrSidePanels(800, 900, 800).Left.W, "地图占满屏幕时不画态势栏")
 }

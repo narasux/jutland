@@ -9,6 +9,10 @@ import (
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 )
 
+// TestGetPlaneTitleUsesNicknameThenCode 验证图鉴标题“昵称（编号）”的拼接/去重/兜底规则。
+// 场景：有昵称和数字编号（X-9）、纯占位名（F）、昵称已含编号（Ar 196/FF.33e/Fw 190A）、无 reference。
+// 预期：数字编号追加括号；占位名不追加；昵称已含编号不重复；无 reference 退回配置名。
+// 覆盖：逐条设置 reference 后调用 GetPlaneTitle 断言字符串。
 func TestGetPlaneTitleUsesNicknameThenCode(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
@@ -34,6 +38,10 @@ func TestGetPlaneTitleUsesNicknameThenCode(t *testing.T) {
 	require.Equal(t, "unknown-plane", GetPlaneTitle("unknown-plane"))
 }
 
+// TestGetPlaneTitleFollowsCurrentLanguage 验证图鉴标题跟随当前界面语言切换。
+// 场景：玩家在中文/日文之间切换，同一架 F4F-3 应显示对应语言的昵称，编号保持不变。
+// 预期：zh-Hans 返回“野猫（F4F-3-test）”，ja 返回“ワイルドキャット（F4F-3-test）”。
+// 覆盖：分别 SetLanguage 后调用 GetPlaneTitle，断言两种语言结果。
 func TestGetPlaneTitleFollowsCurrentLanguage(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })

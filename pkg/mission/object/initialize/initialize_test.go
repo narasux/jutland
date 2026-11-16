@@ -13,8 +13,10 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
-// NewShip 通过 deepcopy 复制舰船模板；鱼雷扇形的分组与航迹必须随实例保留，
-// 否则 ooi 等多发射器舰船进入战斗后又会把所有鱼雷打向同一点。
+// TestOoiTorpedoFanSurvivesNewShipCopy 验证 ooi 经 NewShip 深拷贝后仍保留鱼雷扇面分组与航迹。
+// 场景：默认 config.G 下复制 ooi 实例（左右舷各 5 座四联装、共 40 管），向正东 4 格的静止驱逐舰开火；旧实现复制后扇面分组丢失，多发射器会把鱼雷全打向同一点。
+// 预期：每座 FanTracks=20、FanStride=5 且组内 FanTrack 唯一，总管数 40；首轮齐射产生 5 个不同角度，并恰有一根落在瞄准线上。
+// 覆盖：遍历 Weapon.Torpedoes 校验分组字段与槽位去重，再用 shooter.Fire(target) 收集鱼雷 Rotation 和相对瞄准线偏移。
 func TestOoiTorpedoFanSurvivesNewShipCopy(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -73,10 +75,10 @@ func TestOoiTorpedoFanSurvivesNewShipCopy(t *testing.T) {
 	}
 }
 
-// 每艘舰的首发鱼雷齐射都必须有一根压在瞄准线上，且每根都落在最内侧航迹范围内。
-// 回归：旧实现按 (槽位 - (管数-1)/2) 排扇形，porter 2x4 的首发是 −12° / +1.71°，
-// maury 右舷齐射是 −12.03° / +0.8°（有一根打到瞄准线反侧），正中那根永远空缺。
-// 舰首 / 舰尾也要检查：潜艇、战列舰的艏艉鱼雷管方向相反，不能共用一张扇面。
+// TestFirstTorpedoVolleyCoversTheAimLine 验证所有带鱼雷模板的首发齐射都覆盖瞄准线且不越过最内侧航迹。
+// 场景：遍历 AllShipNames 中有鱼雷的舰船，在艏/右舷/艉/左舷 0°、90°、180°、270° 四个方位向 0.4×射程处的 104m×11m 驱逐舰开火；旧实现按 (槽位-(管数-1)/2) 排扇形，porter 2×4 首发为 −12°/+1.71°、maury 右舷为 −12.03°/+0.8°，正中那根永远空缺。
+// 预期：每轮齐射至少一根偏移 <1e-6° 压在瞄准线上，且所有偏移不超过 4.0°×ceil(齐射根数/2)；艏艉鱼雷管方向相反，也必须各自覆盖。
+// 覆盖：对每个模板、每个方位调用 NewShip + Fire(target)，按射界筛选后逐根收集鱼雷偏移并断言。
 func TestFirstTorpedoVolleyCoversTheAimLine(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -136,8 +138,10 @@ func TestFirstTorpedoVolleyCoversTheAimLine(t *testing.T) {
 	}
 }
 
-// 回归：所有任务的初始舰位中心点必须在可航行水面上（启动期校验会直接报错），
-// 舰体压岸只允许出现在有意的系泊位，并且数量、舰名要可追溯。
+// TestMissionInitShipsStayOnWater 验证所有任务初始舰中心点在水面，舰体压岸只允许出现在珍珠港系泊位。
+// 场景：遍历 metadata.AllMissions() 的 InitShips，用 MapCfg.Map.IsLand 检查中心格，并用 HullLandOverlapSamples 采样舰体；与启动期 validateMissionShipPlacement 的硬校验保持一致。
+// 预期：每个任务都有地图配置、每艘初始舰都有模板，中心点不得为 ChrCoast/ChrLand；舰体压岸集合只允许 PearlHarbor1941，其余任务出现即失败并打印舰名。
+// 覆盖：逐任务逐舰断言模板与中心格，累计 moored 映射后按任务名校验，最后 t.Logf 输出系泊位。
 func TestMissionInitShipsStayOnWater(t *testing.T) {
 	moored := map[string][]string{}
 	for _, mission := range metadata.AllMissions() {
@@ -180,7 +184,10 @@ func torpedoOffsetFromAim(bullet *objBullet.Bullet, target *objUnit.BattleShip) 
 	return math.Mod(bullet.CurPos.Angle(bullet.TargetPos)-aim+540, 360) - 180
 }
 
-// 本期落地的两款制导鱼雷必须在配置里显式开启制导；普通鱼雷保持无制导。
+// TestGuidedTorpedoConfig 验证两款制导鱼雷在配置中显式开启 pursuit 制导，普通鱼雷保持无制导。
+// 场景：本期落地的 JP/TB/Kaiten/1944/Type1 与 US/TB/324/1957/Mk44 分别要求 120°/s、150°/s 转向；对照 US/TB/533/1935/Mk15 与 JP/TB/610/1933/Type93Mod1 不得被误加制导。
+// 预期：两枚制导鱼雷存在且 IsGuided()、Guidance.Mode=GuidanceModePursuit、TurnRate 精确匹配；两枚普通鱼雷若存在则 IsGuided() 为 false。
+// 覆盖：查 objBullet.Map 逐字段断言引导参数，再对普通鱼雷做反例检查。
 func TestGuidedTorpedoConfig(t *testing.T) {
 	guided := map[string]float64{
 		"JP/TB/Kaiten/1944/Type1": 120,
@@ -210,8 +217,10 @@ func TestGuidedTorpedoConfig(t *testing.T) {
 	}
 }
 
-// 反潜射程是平衡拍板值（2026-11-10）：舰载深弹架 2 格、RBU 4 格、Mk44 8 格。
-// 配置里的 range 是公里数，初始化时统一 ÷2；这里锁住最终格数，避免改配置时算错。
+// TestASWWeaponRangesAfterScaling 验证反潜武器射程在初始化 ÷2 后落在拍板格数。
+// 场景：2026-11-10 平衡值：舰载深弹架 2 格（配置 4km）、RBU 4 格（8km）、Mk32 发射 Mk44 反潜鱼雷 8 格（16km），对应 gurkha/porter/hammann/jiujiang/long_beach。
+// 预期：五艘船的 MaxToSubmergedRange 精确等于 2/2/2/4/8，且 HasAntiSubWeapon=true；失败通常意味着配置公里数或初始化 Range/=2 换算被改错。
+// 覆盖：表驱动查 ShipMap 模板，用 1e-9 容差比较射程并检查反潜标记。
 func TestASWWeaponRangesAfterScaling(t *testing.T) {
 	cases := []struct {
 		ship string
@@ -237,8 +246,10 @@ func TestASWWeaponRangesAfterScaling(t *testing.T) {
 	}
 }
 
-// 三艘潜艇的水下航速按 Wikipedia 的实测值配置（2026-11-10）：
-// VIIC 7.6 kn、I-168 8.2 kn、Nautilus 8.0 kn；配置用“水面航速 × 倍率”表达。
+// TestSubmarineSubmergedSpeedMatchesHistory 验证三艘潜艇的水下航速符合历史实测值。
+// 场景：2026-11-10 采用 Wikipedia 数据：VIIC（u_331）7.6 kn、I-168 8.2 kn、Nautilus 8.0 kn；配置用“水面航速 × submergedSpeedRatio”表达。
+// 预期：MaxSpeed×ShipSpeedScale×SubmergedSpeedRatio 还原出的节数与目标值误差 ≤0.1 kn，避免水下航速倍率被误改。
+// 覆盖：表驱动查询 ShipMap，逐艘断言模板存在并按 0.1 容差比较。
 func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 	cases := []struct {
 		ship string
@@ -261,7 +272,10 @@ func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 	}
 }
 
-// 所有潜艇模板默认入场即水下；需要水面开局时必须显式配置 surface。
+// TestSubmarineTemplatesDefaultSubmerged 验证所有潜艇模板默认入场即水下。
+// 场景：遍历 ShipMap 中 Type=ShipTypeSubmarine 的模板；水面开局必须在配置里显式写 surface。
+// 预期：每艘潜艇 DiveState=DiveStateSubmerged，且至少加载到一艘潜艇；失败意味着某艘潜艇未配置 defaultDiveState 而 ResolveDiveConfig 没有补成水下，或配置误写了 surface。
+// 覆盖：按类型过滤全量模板计数，逐艘比较 DiveState 并在末尾检查 count>0。
 func TestSubmarineTemplatesDefaultSubmerged(t *testing.T) {
 	count := 0
 	for name, ship := range objUnit.ShipMap {
@@ -278,9 +292,10 @@ func TestSubmarineTemplatesDefaultSubmerged(t *testing.T) {
 	}
 }
 
-// 防空炮位里只能放能对空的炮。antiAircraft=false 的炮放进 AntiAircraftGuns 后
-// 不参与对空择敌（MaxToPlaneRange 不累计），防空射击时也会被类型判定挡掉，
-// 等于占着防空挂点却打不到飞机。
+// TestAntiAircraftGunsAreAACapable 验证 AntiAircraftGuns 槽位里只能放真正能对空的炮。
+// 场景：antiAircraft=false 的炮放进防空槽后不累计 MaxToPlaneRange，防空射击的类型判定也会跳过它，等于占着挂点却打不到飞机。
+// 预期：遍历所有舰船模板的防空炮位，每门 gun.AntiAircraft 都必须为 true；失败会报出舰名与炮名。
+// 覆盖：全量 ShipMap × Weapon.AntiAircraftGuns 双重循环，用 t.Errorf 汇总所有违规配置。
 func TestAntiAircraftGunsAreAACapable(t *testing.T) {
 	for name, ship := range objUnit.ShipMap {
 		for _, gun := range ship.Weapon.AntiAircraftGuns {

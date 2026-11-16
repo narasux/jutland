@@ -10,8 +10,10 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
-// TestSubmarineTestMissionSimulation 在真实关卡里跑若干拍，确认四区布置不炸、
-// 敌我潜艇入场即水下，且 AI 潜艇不会为了赶路而主动上浮。
+// TestSubmarineTestMissionSimulation 验证潜艇试验场四区能稳定跑真实 Update，且 AI 潜艇保持水下。
+// 场景：加载 SubmarineTest（P1）并 Resize(1280,720)，核对西南/东北 2 艘玩家 U-331、敌方 I-168 与 2 艘 Nautilus，随后连续跑 300 拍。
+// 预期：5 艘潜艇入场即 DiveStateSubmerged；300 拍内每拍 Update 无错误，敌方潜艇始终不因赶路切到 Surface。
+// 覆盖：New/Update 全流程与 Arena.Ships 清点，逐拍 require.NoError 并检查 DiveState（含最终状态）。
 func TestSubmarineTestMissionSimulation(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

@@ -14,6 +14,11 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
+// TestDestroyedLandingPlaneReleasesSlot 验证战机被击落后 updateMissionPlanes 会回收其着舰槽位。
+// 场景：航母 "carrier" 上两架飞机已用 RequestLanding 占住槽位 0/1，其中 "first" 的 CurHP 被扣到 0，
+// 下一帧 updateMissionPlanes 既要把残骸移出 Arena.Planes，也要取消它的回收预约。
+// 预期：Arena.Planes 中不再有 "first"；新申请降落的 "replacement" 拿到槽位 0 而不是 2。
+// 覆盖：构造 Ships/Planes 映射与 100x100 地图配置，断言残骸被移除且复用槽位返回值等于 0。
 func TestDestroyedLandingPlaneReleasesSlot(t *testing.T) {
 	ship := &objUnit.BattleShip{Uid: "carrier"}
 	first := &objUnit.Plane{
@@ -65,6 +70,12 @@ func newWakeTrail(ownerUID string) *objTrail.Trail {
 	return trail
 }
 
+// TestStoppedShipWakeFadesOutInsteadOfLeavingIsolatedDots 验证停船后的尾流会加速淡出并被回收。
+// 场景：战舰 CurSpeed=0 且原地不动，但战场上还留着一组 CurLife=100、LifeReductionRate=1 的尾流，
+// updateObjectTrails 发现船速为 0 后调用 BeginStopFade(stoppedShipWakeFadeFrames=30)。
+// 预期：首帧后 LifeReductionRate 大于 1（约 100/30），再推进 30 帧尾流全部消亡、Arena.Trails 清空；
+// 失败意味着停船尾流按原速率滞留，海面上会留下孤立的小圆点。
+// 覆盖：newWakeTrail 生成 owner 为 "ship" 的尾流，配置默认 GameSettings，循环 stoppedShipWakeFadeFrames 帧。
 func TestStoppedShipWakeFadesOutInsteadOfLeavingIsolatedDots(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -101,6 +112,11 @@ func TestStoppedShipWakeFadesOutInsteadOfLeavingIsolatedDots(t *testing.T) {
 	}
 }
 
+// TestMovingShipWakeKeepsNormalFade 验证航行中的战舰尾流不会套用停船加速淡出。
+// 场景：同一组尾流挂在 CurSpeed=0.1 的友方战舰 "ship" 上，updateObjectTrails 执行一帧。
+// 预期：trail.LifeReductionRate 保持 1；若大于 1 说明停船判定把航行中的船也算进去，
+// 尾流会在几帧内消失，看不到正常的航迹长度。
+// 覆盖：复用 newWakeTrail 与默认配置，只调用一次 updateObjectTrails 后断言速率等于 1。
 func TestMovingShipWakeKeepsNormalFade(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

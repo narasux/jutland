@@ -37,6 +37,10 @@ func newTestAirfield(t *testing.T, maxCount int64) *Airfield {
 	)
 }
 
+// TestAirfieldBaseGeometry 验证机场作为静态基地的几何契约。
+// 场景：跑道朝向 90°、长 6 格、宽 0.8 格，AircraftBase 接口按 MapBlockSize=128 换算像素。
+// 预期：Uid 自洽、速度恒 0、朝向 90°、长度 768、宽度 102.4；失败意味着共用基地几何或换算破裂。
+// 覆盖：断言 BaseUid/BaseSpeed/BaseRotation 与 6*128、0.8*128 两处精确值。
 func TestAirfieldBaseGeometry(t *testing.T) {
 	af := newTestAirfield(t, 3)
 	if af.BaseUid() != af.Uid || af.BaseSpeed() != 0 {
@@ -54,7 +58,10 @@ func TestAirfieldBaseGeometry(t *testing.T) {
 	}
 }
 
-// TestStockPlane 生产完成的飞机直接入库：不生成实体，满编后不再增加。
+// TestStockPlane 验证生产完成的飞机直接入库，不生成实体，满编后拒绝继续增加。
+// 场景：机场自动生产完成一架飞机，调用方只把机型名交给 StockPlane；机库按 Group.MaxCount 封顶。
+// 预期：CurCount 从 0 增到 2；满编后再入库不增加；未知机型名也不改变库存。
+// 覆盖：构造 MaxCount=2 的单机型机场，连续 StockPlane 两次、第三次、未知名，逐次断言 CurCount。
 func TestStockPlane(t *testing.T) {
 	af := newTestAirfield(t, 2)
 	if len(af.Aircraft.Groups) != 1 || af.Aircraft.Groups[0].CurCount != 0 {
@@ -77,7 +84,10 @@ func TestStockPlane(t *testing.T) {
 	}
 }
 
-// TestAirfieldTakeOffSpawnsOnRunway 与航母一致：起飞时在跑道起点刷新实体并扣减库存。
+// TestAirfieldTakeOffSpawnsOnRunway 验证机场起飞与航母一致：在跑道起点生成实体并扣减库存。
+// 场景：机场库存 1 架，警戒/玩家下令起飞；飞机应以滑跑阶段出现在跑道起点，而不是直接巡航。
+// 预期：TakeOff 返回非 nil、IsOnGround 为 true、CurCount 变为 0；库存耗尽后返回 nil。
+// 覆盖：StockPlane 后调用 Aircraft.TakeOff，断言阶段/库存，再调用一次断言拒绝。
 func TestAirfieldTakeOffSpawnsOnRunway(t *testing.T) {
 	af := newTestAirfield(t, 2)
 	af.StockPlane("F")
@@ -97,6 +107,10 @@ func TestAirfieldTakeOffSpawnsOnRunway(t *testing.T) {
 	}
 }
 
+// TestAirfieldProduction 验证自动生产首帧开工、次帧完工，且 Update 不负责入库。
+// 场景：容量 2 的 F 机型，资金 10、工时 0；连续两次 Update(100,nil) 推进单工位生产。
+// 预期：首帧 completed 为空，次帧返回 ["F"]，库存仍 0；满编后不再产出。
+// 覆盖：检查两次 Update 的完成列表与 CurCount，再入库 2 架验证容量拒绝生产。
 func TestAirfieldProduction(t *testing.T) {
 	af := newTestAirfield(t, 2)
 	if completed := af.Update(100, nil); len(completed) != 0 {
@@ -117,6 +131,10 @@ func TestAirfieldProduction(t *testing.T) {
 	}
 }
 
+// TestAirfieldProductionPaused 验证资金不足只暂停计时、不丢已累计进度。
+// 场景：F 资金 10、工时 0；先 Update(100) 开工，再 Update(0) 断资，最后 Update(100) 恢复。
+// 预期：断资帧无完工，恢复帧返回 1 个 "F"；失败意味着暂停清空进度或断资仍产出。
+// 覆盖：三次 Update 的 completed 长度依次为 0/0/1，覆盖 LastTickedAt 刷新与 ElapsedMs 累计。
 func TestAirfieldProductionPaused(t *testing.T) {
 	af := newTestAirfield(t, 2)
 
@@ -149,8 +167,10 @@ func registerTestBomber(t *testing.T, fundsCost, timeCost int64) {
 	})
 }
 
-// TestAirfieldSingleStationProduction 单工位生产：默认制造可制造序列第一位，
-// 同一时间只推进当前机型；切换机型后按新机型推进，其他机型保持不动。
+// TestAirfieldSingleStationProduction 验证单工位生产：默认制造序列第一位，同一时间只推进当前机型。
+// 场景：机库有 F/B 两型，CurProducing=F；玩家切换制造 B 后，F 进度应保留但不再推进。
+// 预期：默认 CurProducing=F；F 先完工 1 架；切 B 后 B 完工 1 架而 F 仍为 1；未知机型回退到第 0 组。
+// 覆盖：构造双机型机场，分两轮 Update+StockPlane，断言 CurProducing/两组 CurCount/ProducingGroupIdx。
 func TestAirfieldSingleStationProduction(t *testing.T) {
 	registerTestPlane(t, 10, 0)
 	registerTestBomber(t, 10, 0)
@@ -200,7 +220,10 @@ func TestAirfieldSingleStationProduction(t *testing.T) {
 	}
 }
 
-// TestAirfieldDisabled 停用机场：只停警戒起飞，生产照常推进；恢复启用后警戒恢复。
+// TestAirfieldDisabled 验证停用机场只停警戒起飞，生产照常推进，恢复后警戒恢复。
+// 场景：玩家停用机场避免自动出击，但仍希望它继续补充飞机；停用期间资金/生产不应被冻结。
+// 预期：Disabled=true 时 CanAlertLaunch 为 false，但 Update 仍能完工；恢复 false 后 CanAlertLaunch 为 true。
+// 覆盖：先测启用状态，再置 Disabled 跑两次 Update，最后恢复并断言。
 func TestAirfieldDisabled(t *testing.T) {
 	af := newTestAirfield(t, 2)
 	if !af.CanAlertLaunch() {
@@ -230,8 +253,10 @@ func TestAirfieldDisabled(t *testing.T) {
 	}
 }
 
-// TestAirfieldProductionCapacity 生产只补充损失：待命 + 出击 < 上限才生产
-// （起飞即计入容量，出击中不补；被击落恢复生产）。
+// TestAirfieldProductionCapacity 验证生产只补充损失：待命 + 出击 < MaxCount 才生产。
+// 场景：机库满编（2 架）不生产；起飞 1 架后待命 1 + 出击 1 = 2 仍不生产；被击落后待命 1 < 2 才恢复生产。
+// 预期：满编/满容量时 Update 不完工；损失后第二次 Update 完工 1 架。
+// 覆盖：手动改 CurCount 并用 flying map 表示出击数，分三段调用 Update 断言完工列表。
 func TestAirfieldProductionCapacity(t *testing.T) {
 	af := newTestAirfield(t, 2)
 
@@ -255,8 +280,10 @@ func TestAirfieldProductionCapacity(t *testing.T) {
 	}
 }
 
-// TestAirfieldProductionAutoSwitch 指定机型满编后自动顺延到下一个未满编
-// 机型；全部满编则停止生产。
+// TestAirfieldProductionAutoSwitch 验证指定机型满编后自动顺延到下一个未满编机型，全部满编则停产。
+// 场景：CurProducing=F 但 F 已满编、B 未满；机场应自动改产 B，而不是停在 F 上空转。
+// 预期：ProducingTargetIdx 返回 1；Update 推进 B 并完工；两组都满编后 target 为 -1、Update 不完工。
+// 覆盖：双机型各 MaxCount=2，先塞满 F，再 Update/StockPlane B，最后塞满 B 并断言。
 func TestAirfieldProductionAutoSwitch(t *testing.T) {
 	registerTestPlane(t, 10, 0)
 	registerTestBomber(t, 10, 0)
@@ -293,12 +320,11 @@ func TestAirfieldProductionAutoSwitch(t *testing.T) {
 	}
 }
 
-// TestAirfieldSetTakeoffPoints 验证跑道起飞点数配置：
-//   - 缺省（双点）同一 tick 可并行起飞两架；
-//   - SetTakeoffPoints(1) 退化为单机串行（同一 tick 只起飞一架，第二架因起飞点冷却被拒）；
-//   - SetTakeoffPoints(0) 是 no-op，不改动既有起飞模式。
-//
-// 用于重轰炸机（B-17/B-26）单架间隔起飞的需求。
+// TestAirfieldSetTakeoffPoints 验证跑道起飞点数配置：缺省双点并行、1 单机串行、0 no-op。
+// 场景：重轰炸机需要单架间隔起飞，轻型机保留双机并行；配置 0/负数表示沿用默认。
+// 预期：默认双点同一 tick 可起飞 2 架；SetTakeoffPoints(1) 后同 tick 只起飞 1 架；
+// SetTakeoffPoints(0) 不改动单点模式。
+// 覆盖：构造同一机场三次，分别用默认/1/0 设置，连续 TakeOff 并断言成功数与库存。
 func TestAirfieldSetTakeoffPoints(t *testing.T) {
 	const planeName = "test-takeoff-bomber"
 	oldTemplate, hadTemplate := objUnit.PlaneMap[planeName]

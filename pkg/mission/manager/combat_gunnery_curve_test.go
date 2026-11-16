@@ -95,7 +95,10 @@ func gunneryHitRate(t *testing.T, gun *objUnit.Gun, rangePercent float64, shots 
 	return float64(hits) / float64(shots)
 }
 
-// 原交界点（0.65R）两侧的命中率必须接近：这是本次改造的核心验收标准。
+// TestHitChanceHasNoCliffAtFormerSwitchRange 验证直射/曲射硬切换移除后 0.65R 两侧命中率不再断崖。
+// 场景：406mm 测试炮弹、19 格射程炮在 0.62R 与 0.68R 各打 600 发，目标横穿射击线并经真实 updateShotBullets 结算。
+// 预期：两侧命中率差 ≤0.25 且 0.68R ≤0.9；改造前在固定 0.65R 从 100% 硬切到 45%，正是本条要防的回归。
+// 覆盖：gunneryHitRate 逐发发射并推进至多 900 拍，按目标掉血统计命中率，断言交界差与远距上限。
 func TestHitChanceHasNoCliffAtFormerSwitchRange(t *testing.T) {
 	gun := gunneryCurveSetup(t)
 
@@ -114,7 +117,10 @@ func TestHitChanceHasNoCliffAtFormerSwitchRange(t *testing.T) {
 	}
 }
 
-// 近距离仍是平射（危险界不限制），命中率随距离单调不增。
+// TestHitChanceFallsWithRange 验证近距离平射必中、命中率随射程单调不增且远距受危险界压制。
+// 场景：同一门 19 格炮在 0.40R、0.65R、0.95R 各打 600 发，目标横穿射击线并经真实弹道结算。
+// 预期：0.40R 命中率 ≥0.95，且 close>mid≥far、0.95R ≤0.9；平射时危险界不限制，吊射只保留跨射带。
+// 覆盖：gunneryHitRate 的三档射程百分比采样，断言近距下限、单调关系与远距命中率上限。
 func TestHitChanceFallsWithRange(t *testing.T) {
 	gun := gunneryCurveSetup(t)
 
@@ -133,7 +139,10 @@ func TestHitChanceFallsWithRange(t *testing.T) {
 	}
 }
 
-// 落角随射程变陡、危险界随之收窄：炮弹自身的参数必须符合这条规律。
+// TestFiredShellPlungeFollowsRange 验证炮弹落角随射程按 smoothstep 连续变陡，危险界随之收窄。
+// 场景：同一门炮在 0.30R、0.50R、0.65R、0.95R 各发射一发，直接读取 Bullet.Plunge。
+// 预期：0.30R 仍为 0（平射），0.50R<0.65R<0.95R，0.95R 达到 1（完全吊射），中间段没有阈值跳变。
+// 覆盖：Gun.Fire→objBullet.PlungeForRange（0.50R 起过渡、0.65R 到顶）链路，逐档断言落角值。
 func TestFiredShellPlungeFollowsRange(t *testing.T) {
 	gun := gunneryCurveSetup(t)
 	shooter := newGunneryShooter()

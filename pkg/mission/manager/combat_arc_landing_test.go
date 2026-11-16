@@ -63,7 +63,10 @@ func newTestShell(plunge, startY, targetY float64) *objBullet.Bullet {
 	}
 }
 
-// 平射炮弹沿弹道扫掠，落点差一个舰身照样命中。
+// TestFlatShellUsesSweptCollision 验证平射炮弹按本拍弹道线段扫掠命中，落点差一个舰身也能打中。
+// 场景：0.4×0.1 格靶舰在 (10,10)，Plunge=0、速度 0.5 的炮弹从 y=12 瞄准 y=9（舰艏前方 1 格），推进 200 拍。
+// 预期：target.CurHP 从 100 降到 90，bt.HitObjType 为 TypeShip。
+// 覆盖：updateShotBullets 用 IsSegmentIntersectRotatedRectangle 做扫掠相交，平射 DangerSpace=+Inf 不限制。
 func TestFlatShellUsesSweptCollision(t *testing.T) {
 	target := newTestShip(10, 10)
 	// 瞄准点在舰艏前方 1 格，平射危险界不限制，扫过舰体即命中
@@ -79,7 +82,10 @@ func TestFlatShellUsesSweptCollision(t *testing.T) {
 	}
 }
 
-// 吊射炮弹的落点本身在舰体内，命中。
+// TestPlungingShellUsesLandingPoint 验证吊射炮弹的落点本身在舰体内时按落点命中。
+// 场景：靶舰在 (10,10)，Plunge=1 的炮弹从 y=12 瞄准 y=10（舰体中心），推进 200 拍。
+// 预期：target.CurHP 降到 90，bt.HitObjType 为 TypeShip。
+// 覆盖：吊射落点/扫掠相交分支与 DangerSpace=0.20/0.70≈0.286 格内的命中判定。
 func TestPlungingShellUsesLandingPoint(t *testing.T) {
 	target := newTestShip(10, 10)
 	bullet := newTestShell(1, 12, 10)
@@ -94,8 +100,10 @@ func TestPlungingShellUsesLandingPoint(t *testing.T) {
 	}
 }
 
-// 吊射落点擦着舰尾落水（危险界内），算跨射命中：炮弹会继续飞过瞄准点，
-// 中途扫到舰体就应该结算伤害。
+// TestPlungingShellStraddleWithinDangerSpaceHits 验证吊射落点擦着舰尾落水但仍在危险界内时算跨射命中。
+// 场景：舰尾在 y=9.8，Plunge=1 的炮弹从 y=12 瞄准 y=9.75，已落在舰体外 0.05 格，但小于危险界 0.286 格。
+// 预期：炮弹越过瞄准点后扫到舰体，target.CurHP 降到 90。
+// 覆盖：DangerSpace=0.20/(1×0.70)≈0.286 格内的跨射判定与 PassedAim 前的扫掠相交。
 func TestPlungingShellStraddleWithinDangerSpaceHits(t *testing.T) {
 	target := newTestShip(10, 10)
 	// 舰尾在 y = 9.8，落点 9.75 已经落在舰体之外，但在 0.286 格的危险界之内
@@ -108,7 +116,10 @@ func TestPlungingShellStraddleWithinDangerSpaceHits(t *testing.T) {
 	}
 }
 
-// 吊射打远一个舰身：超出危险界，判定脱靶并落水。
+// TestPlungingShellBeyondDangerSpaceMisses 验证吊射打远一个舰身、超出危险界时判定脱靶并落水。
+// 场景：靶舰在 (10,10)，Plunge=1 的炮弹从 y=12 瞄准 y=9.2，离舰心 0.8 格，大于危险界 0.286 格。
+// 预期：target.CurHP 保持 100，bt.HitObjType 为 TypeWater。
+// 覆盖：沿弹道方向 |along| > DangerSpace 的剔除与 PassedAim 的落水分支。
 func TestPlungingShellBeyondDangerSpaceMisses(t *testing.T) {
 	target := newTestShip(10, 10)
 	bullet := newTestShell(1, 12, 9.2)
@@ -123,7 +134,10 @@ func TestPlungingShellBeyondDangerSpaceMisses(t *testing.T) {
 	}
 }
 
-// 平射的沿弹道容差不受危险界限制：舰体离瞄准点 2 格仍然命中。
+// TestFlatShellIgnoresLargeRangeError 验证平射的沿弹道容差不受危险界限制，舰体离瞄准点 2 格仍命中。
+// 场景：靶舰在 (10,10)，Plunge=0 的炮弹从 y=14 瞄准 y=8（越过舰心 2 格），推进 200 拍。
+// 预期：弹道线段扫过舰体，target.CurHP 降到 90。
+// 覆盖：Plunge<=0 时 DangerSpace 返回 +Inf，平射不做打远/打近剔除。
 func TestFlatShellIgnoresLargeRangeError(t *testing.T) {
 	target := newTestShip(10, 10)
 	bullet := newTestShell(0, 14, 8)

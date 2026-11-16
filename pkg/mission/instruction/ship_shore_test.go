@@ -30,8 +30,14 @@ func hullLandOverlapAt(mapCfg *mapcfg.MapCfg, ship *objUnit.BattleShip) int {
 	return overlap
 }
 
-// 回归：珍珠港 1941 开局有若干舰是压着码头系泊的（舰体压岸、中心点在水面）。
-// 它们必须都能一次性脱离泊位驶向港外，不能出现“点了没反应 / 在岸边磨”。
+// TestShipMovePathPearlHarborBerthsCanEscape 验证珍珠港开局系泊舰都能一次性脱离泊位。
+// 场景：metadata.Get("PearlHarbor1941") 的 InitShips 逐艘按 md.Pos/md.Rotation 造舰，
+// 用 hullLandOverlapAt 采样中心线筛出舰体压岸的系泊舰（要求 ≥4 艘）；统一命令
+// 驶向港外主海域 (59.5,130.5)，每艘最多 14000 拍并让出后台寻路。
+// 预期：所有系泊舰都 Executed 且 !Failed，即“点了没反应 / 在岸边磨”不再出现；
+// 旧实现会因未吸附起终点或只校验中心线而卡住。
+// 覆盖：mapcfg.GetByName("pearl_harbor") + newBattleShip + NewShipMovePath +
+// runShipMovePath，统计 moored/escaped 并断言相等。
 func TestShipMovePathPearlHarborBerthsCanEscape(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")
@@ -64,8 +70,13 @@ func TestShipMovePathPearlHarborBerthsCanEscape(t *testing.T) {
 	require.Equal(t, moored, escaped, "系泊舰必须都能一次性脱离泊位")
 }
 
-// 回归：沿岸长距离机动必须走在深水里，全程舰体不压上岸。
-// 旧实现合并航线时只校验中心线，舰体偏离航线半个格就会切进陆格、顶着岸边磨。
+// TestShipMovePathCoastalTransitKeepsHullOffLand 验证沿岸长距离机动全程舰体不压岸。
+// 场景：珍珠港战列舰 HA/BB-14 在 (45.5,126.5)、航向 90°，目标 (90.5,126.5)；
+// 最多 9000 拍逐帧 Exec，每拍用 hullLandOverlapAt 采样中心线统计压岸拍数。
+// 预期：指令完成且不判 Failed，抵达目标 1 格内，landTicks=0。旧实现合并航线时
+// 只校验中心线，舰体偏离航线半个格就会切进陆格、顶着岸边磨。
+// 覆盖：mapcfg.GetByName("pearl_harbor") + NewShipMovePath + 手动推进循环，
+// 断言 Executed/!Failed/距离/landTicks。
 func TestShipMovePathCoastalTransitKeepsHullOffLand(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")

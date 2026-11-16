@@ -10,6 +10,10 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
+// TestAttackLeadSpeedUsesWeaponBallistics 验证对空提前量使用机炮初速，没有匹配武器时回退飞机速度。
+// 场景：战斗机用 0.1875 格/帧的机炮打飞机，玩家期望提前量按弹速算；对舰没有对舰武器时只能按机身速度。
+// 预期：TypePlane 返回 0.1875；TypeShip 返回 CurSpeed。
+// 覆盖：构造带 AntiAircraft 机炮的战斗机，分别查询两种目标类型。
 func TestAttackLeadSpeedUsesWeaponBallistics(t *testing.T) {
 	plane := &Plane{
 		Type:     PlaneTypeFighter,
@@ -29,6 +33,10 @@ func TestAttackLeadSpeedUsesWeaponBallistics(t *testing.T) {
 	}
 }
 
+// TestAttackLeadSpeedPrefersShipReleaseWeapon 验证对舰攻击优先使用投放武器（鱼雷/炸弹）的弹速。
+// 场景：鱼雷机同时有机炮和鱼雷，对舰提前量应按鱼雷速度而不是机炮速度，否则投雷点会偏。
+// 预期：TypeShip 返回鱼雷 BulletSpeed 0.1，而不是机炮 0.2。
+// 覆盖：构造带 AntiShip 机炮和鱼雷的飞机，调用 AttackLeadSpeed(TypeShip)。
 func TestAttackLeadSpeedPrefersShipReleaseWeapon(t *testing.T) {
 	plane := &Plane{
 		Type: PlaneTypeTorpedoBomber,
@@ -47,6 +55,10 @@ func TestAttackLeadSpeedPrefersShipReleaseWeapon(t *testing.T) {
 	}
 }
 
+// TestFighterPursuitAlignsNoseWithWeaponLeadPoint 验证战斗机追击时把机头对准武器提前点，保持在射界内。
+// 场景：敌机在正前方略偏上，战斗机需要用机炮提前量追踪；若只朝敌机当前位置转，会飞出机炮射界。
+// 预期：追击一帧后，敌机方位与机头夹角不超过 20°。
+// 覆盖：构造战斗机/敌机/提前点，调用 FighterPursuitStrategy.MoveTo，计算相对方位。
 func TestFighterPursuitAlignsNoseWithWeaponLeadPoint(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

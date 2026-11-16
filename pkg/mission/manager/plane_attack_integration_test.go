@@ -16,6 +16,14 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
+// TestBomberReleasesBeforeReturning 验证警戒起飞的轰炸机必须先投弹再进入返航/着舰流程。
+// 场景：机场在 (20,150) 只库存 1 架，敌巡洋舰在同一纬度 100 或 115 处（后者往返 190，
+// 用于覆盖接近作战半径的长距离出击），地图 300x300；覆盖 B-17G、B6N2、B6N2 远距、D4Y3 四个子用例。
+// 预期：起飞后 Arena.Planes 恰好 1 架且带有 PlaneAttack 指令、初始没有任何 Released 弹药；
+// 随后 5000 帧内至少 1 件炸弹/鱼雷/火箭被释放，若先进入 PlaneFlightPhaseLandingStaging 判失败，
+// 超时未释放也判失败。失败意味着飞机空手返航或被提前标记已投弹。
+// 覆盖：refreshAlertTargetPlan + updateAirfieldAlertLaunch 完成同步起飞，逐帧执行指令、
+// updatePlaneAttackOrReturn 与 updatePlaneWeaponFire，并检查 Bombs/Torpedoes/Rockets 的释放状态。
 func TestBomberReleasesBeforeReturning(t *testing.T) {
 	testCases := []struct {
 		name      string
@@ -128,8 +136,10 @@ func testBomberReleasesBeforeReturning(t *testing.T, planeName string, enemyX fl
 	}
 }
 
-// 目标单程可达但超出作战半径时不应起飞：B6N2 航程 436，距离 230 单程够、
-// 往返 460 不够，飞机出击后回不来，机场应保持待命。
+// TestAirfieldDoesNotLaunchBomberBeyondCombatRadius 验证机场不会为单程可达但超出作战半径的目标放飞轰炸机。
+// 场景：机场 (20,150) 库存 1 架 B6N2（航程 436 格），敌巡洋舰在 (250,150)，距离 230 格、往返 460 格。
+// 预期：refreshAlertTargetPlan + updateAirfieldAlertLaunch 后 Arena.Planes 仍为 0，机场保持待命。
+// 覆盖：真实 B6N2 模板与 300x300 地图，走 takeOffFromBase 的 CanTakeOffWithinRange(roundTrip) 过滤后断言起飞数。
 func TestAirfieldDoesNotLaunchBomberBeyondCombatRadius(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -177,6 +187,12 @@ func TestAirfieldDoesNotLaunchBomberBeyondCombatRadius(t *testing.T) {
 	}
 }
 
+// TestPearlHarborAirfieldHasReachableStrikeTargets 验证珍珠港 1941 中每个机场的对舰编组都有可达目标。
+// 场景：用 New("PearlHarbor1941", faction.SideP1) 载入真实任务配置，refreshAlertTargetPlan 同步构建
+// 目标计划，然后遍历所有机场的编组，只看 TargetType 为 TypeShip 且 CurCount>0 的打击编组。
+// 预期：targetingPlan.BaseQueues[机场UID][TypeShip] 非空；为空说明该编组航程覆盖不到任何敌舰，
+// 警戒起飞会一直待命，任务开局就有一批飞机永远不出动。
+// 覆盖：真实配置数据校验，逐个编组用队列长度断言，不构造任何测试专用模板。
 func TestPearlHarborAirfieldHasReachableStrikeTargets(t *testing.T) {
 	manager := New("PearlHarbor1941", faction.SideP1)
 	refreshAlertTargetPlan(manager)
@@ -194,6 +210,12 @@ func TestPearlHarborAirfieldHasReachableStrikeTargets(t *testing.T) {
 	}
 }
 
+// TestPearlHarborEveryStrikeBaseHasReachableTargets 验证珍珠港 1941 中每艘载机舰的打击编组同样有可达目标。
+// 场景：New("PearlHarbor1941", faction.SideP1) 建好任务后刷新目标计划，遍历 Arena.Ships 中
+// Aircraft.HasPlane 的舰船，逐个检查 TargetType 为 TypeShip 且 CurCount>0 的编组。
+// 预期：targetingPlan.BaseQueues[舰船UID][TypeShip] 非空；为空意味着该载机舰的舰载机
+// 起飞后无目标可打，会在甲板上空转，开局航空兵力被浪费。
+// 覆盖：真实任务配置下的基地队列非空断言，与机场用例互补，覆盖航母类载机基地。
 func TestPearlHarborEveryStrikeBaseHasReachableTargets(t *testing.T) {
 	manager := New("PearlHarbor1941", faction.SideP1)
 	refreshAlertTargetPlan(manager)

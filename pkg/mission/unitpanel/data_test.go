@@ -9,6 +9,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+// TestWeaponRowsHideUnequippedAndReportMixedState 验证武器行只为实际装备的类型生成，并按启用/禁用给出混合态。
+// 场景：两舰都装主炮但 b 关闭主炮；只有 a 装鱼雷且已关闭；未装备的类型不应出现在控制列表。
+// 预期：仅主炮、鱼雷 2 行，Toggle 分别为 mixed、disabled；失败意味着未装备类型混入或状态判断错。
+// 覆盖：panelTestState 构造 a（主炮+禁用鱼雷）、b（主炮+禁用主炮），weaponRows(ms,10_000) 断言行与状态。
 func TestWeaponRowsHideUnequippedAndReportMixedState(t *testing.T) {
 	first := &objUnit.BattleShip{
 		Uid: "a",
@@ -41,6 +45,10 @@ func TestWeaponRowsHideUnequippedAndReportMixedState(t *testing.T) {
 	}
 }
 
+// TestWeaponActionEnablesMixedSelectionAndIgnoresUnequipped 验证批量武器动作只作用于装备该武器的舰。
+// 场景：a 主炮开、b 主炮关、c 无武器；点击主炮开关时存在禁用，应整体转为启用。
+// 预期：Enable=true，ShipUids 为 [a,b] 共 2 个（不含 c）；失败意味着给无武器舰发指令或开关方向反了。
+// 覆盖：panelTestState(a,b,c)，New().weaponAction(ms,WeaponTypeMainGun)，断言 Enable 与 ShipUids 长度。
 func TestWeaponActionEnablesMixedSelectionAndIgnoresUnequipped(t *testing.T) {
 	first := &objUnit.BattleShip{Uid: "a", CurHP: 1, Weapon: objUnit.ShipWeapon{MainGuns: []*objUnit.Gun{{}}}}
 	second := &objUnit.BattleShip{
@@ -70,8 +78,10 @@ func panelTestState(ships ...*objUnit.BattleShip) *state.MissionState {
 	}
 }
 
-// TestShipSpeedRowUsesCurrentDiveStateLimit 锁定单位面板航速行：
-// 上限跟随当前深度状态，水下更快的潜艇不会显示成“当前航速 > 最大航速”。
+// TestShipSpeedRowUsesCurrentDiveStateLimit 验证单位面板航速行的上限跟随当前深度状态。
+// 场景：config.G.SpeedMultiplier=2；潜艇 U-2323 水面 9.7 节、SubmergedSpeedRatio=1.29，CurSpeed 是世界系速度（已乘全局倍率），旧实现会让水下更快的潜艇显示「当前航速 > 最大航速」。
+// 预期：潜航时航速行显示 "12.5 / 12.5"（9.7×1.29 四舍五入），切回水面显示 "9.7 / 9.7"；失败意味着上限仍按水面 MaxSpeed 计算，读数自相矛盾。
+// 覆盖：临时设置 config.G 并 Cleanup 恢复；panelTestState + New().shipGroups 取 speedRowValue，两态比较，CurSpeedKnots 会抵消全局倍率。
 func TestShipSpeedRowUsesCurrentDiveStateLimit(t *testing.T) {
 	previous := config.G
 	t.Cleanup(func() { config.G = previous })

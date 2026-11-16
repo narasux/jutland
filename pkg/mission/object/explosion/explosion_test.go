@@ -8,6 +8,10 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
+// TestHitEffectLifecycle 验证命中特效按 tick 计数，Age 达到 Life 即停止绘制。
+// 场景：NewHitEffect 创建 KindFlash，寿命 3 帧，连续调用 Update 三次。
+// 预期：创建时 IsAlive=true；三次后 IsAlive=false 且 Frame()=3。
+// 覆盖：断言存活、Age==Life 的死亡边界与帧号，锁死特效不会滞留。
 func TestHitEffectLifecycle(t *testing.T) {
 	e := NewHitEffect(KindFlash, objPos.NewR(1, 2), 90, 0.35, 3, 7, faction.HumanAlpha)
 	if !e.IsAlive() {
@@ -24,7 +28,10 @@ func TestHitEffectLifecycle(t *testing.T) {
 	}
 }
 
-// Life 至少为 1，避免零帧特效生成即过期。
+// TestNewHitEffectClampsLife 验证 Life=0 的命中特效被钳到 1 帧，避免生成即过期。
+// 场景：配置/调用方传入 Life=0；若直接使用，特效永远不会被绘制，命中反馈丢失。
+// 预期：Life=1，且 IsAlive 在第一帧为 true。
+// 覆盖：NewHitEffect(..., life=0, ...) 后断言 Life 与 IsAlive。
 func TestNewHitEffectClampsLife(t *testing.T) {
 	e := NewHitEffect(KindFlash, objPos.NewR(0, 0), 0, 0.22, 0, 17, faction.HumanAlpha)
 	if e.Life != 1 {
@@ -35,7 +42,10 @@ func TestNewHitEffectClampsLife(t *testing.T) {
 	}
 }
 
-// 只有命中闪光压在舰船之上：水花、尘土、鱼雷水柱都在海面 / 地面，画在舰体下才自然。
+// TestOverShipsByKind 验证只有命中闪光绘制在舰船之上，水花/尘土/鱼雷水柱/火箭空爆在舰体之下。
+// 场景：爆炸层按 Kind.OverShips 决定绘制顺序；水花画在舰体上会像船在冒水，尘土会盖住甲板。
+// 预期：KindFlash.OverShips=true；Splash/Dust/TorpedoPlume/RocketAirburst 都为 false。
+// 覆盖：逐 Kind 调用 OverShips 断言布尔值。
 func TestOverShipsByKind(t *testing.T) {
 	if !KindFlash.OverShips() {
 		t.Fatal("hit flash should be drawn over ships")
@@ -47,7 +57,10 @@ func TestOverShipsByKind(t *testing.T) {
 	}
 }
 
-// 运行时粒子方案：帧号就是 tick 数（序列帧只留给火箭空爆）。
+// TestFrameFollowsAge 验证运行时粒子特效的帧号等于已推进 tick 数。
+// 场景：非序列帧特效（水花）用 Age 驱动粒子，Frame 必须跟随 Age；若帧号不前进，粒子动画会停住。
+// 预期：Life=60 的特效推进 5 帧后 Frame()==5。
+// 覆盖：NewHitEffect 后循环 Update 5 次，断言 Frame。
 func TestFrameFollowsAge(t *testing.T) {
 	e := NewHitEffect(KindSplash, objPos.NewR(0, 0), 0, 0.5, 60, 11, faction.HumanAlpha)
 	for i := 0; i < 5; i++ {
@@ -58,6 +71,10 @@ func TestFrameFollowsAge(t *testing.T) {
 	}
 }
 
+// TestNewRocketUsesAirburstKindAndScale 验证火箭空爆固定使用空爆种类、尺寸与飞机爆炸帧寿命。
+// 场景：以 (3,4)、45°、ComputerAlpha 调 NewRocket，内部转调 NewHitEffect。
+// 预期：Kind=KindRocketAirburst、Size=0.8、Life=39；失败意味着复用了闪光/水花资源。
+// 覆盖：断言种类、RocketAirburstSize 与 MaxPlaneExplodeState 三个字段。
 func TestNewRocketUsesAirburstKindAndScale(t *testing.T) {
 	e := NewRocket(objPos.NewR(3, 4), 45, faction.ComputerAlpha)
 	if e.Kind != KindRocketAirburst {

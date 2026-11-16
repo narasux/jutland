@@ -88,7 +88,10 @@ func countAirAttackers(t *testing.T, m *MissionManager) (attackers, patrolling i
 	return attackers, patrolling
 }
 
-// 同一架敌机最多被 maxAirAttackersPerTarget 架飞机追击，多出来的战斗机转去巡逻。
+// TestAirTargetCapSendsSurplusFightersOnPatrol 验证同一架敌机最多被 maxAirAttackersPerTarget=4 架追击，多出的战斗机转巡逻。
+// 场景：基地队列只有 1 架可见敌机，7 架（4+3）己方战斗机同处 (5,5) 巡航，跑一帧 updatePlaneAttackOrReturn。
+// 预期：4 架拿到 PlaneAttack 指令，3 架拿到 PlanePatrol 指令。
+// 覆盖：nextTargetUIDForPlane 的 airTargetHasSlotFor 名额检查，以及无目标战斗机挂 PlanePatrol 的分支。
 func TestAirTargetCapSendsSurplusFightersOnPatrol(t *testing.T) {
 	const surplus = 3
 	manager, _ := newAirCapTestManager(t, maxAirAttackersPerTarget+surplus)
@@ -104,8 +107,10 @@ func TestAirTargetCapSendsSurplusFightersOnPatrol(t *testing.T) {
 	}
 }
 
-// 已经扑在同一架敌机上的超编飞机要拆开，否则旧存档里 20+ 架围殴一架侦察机的
-// 局面会一直保持下去（已有攻击指令的飞机不会主动放弃目标）。
+// TestUpdatePlaneAttackOrReturnReleasesSurplusAttackers 验证已经围在同一架敌机上的超编飞机要拆开重新分配。
+// 场景：5 架战斗机全部 CurAttackTarget=enemy 且已挂 PlaneAttack 指令（模拟旧存档 20+ 架围殴一架侦察机的围攻，此处用 5 架触发上限），跑一帧 updatePlaneAttackOrReturn。
+// 预期：attackers 回落到 maxAirAttackersPerTarget=4，patrolling=1（多出那架转巡逻）。
+// 覆盖：releaseSurplusAirAttackers 按 airAttackerCounts 回收名额，Remove 指令并清空 CurAttackTarget 后重新分配。
 func TestUpdatePlaneAttackOrReturnReleasesSurplusAttackers(t *testing.T) {
 	const fighters = 5
 	manager, enemyUid := newAirCapTestManager(t, fighters)
@@ -130,7 +135,10 @@ func TestUpdatePlaneAttackOrReturnReleasesSurplusAttackers(t *testing.T) {
 	}
 }
 
-// 巡逻中的战斗机等到新目标后要脱离巡逻、转入攻击。
+// TestPatrollingFighterLeavesPatrolForNewTarget 验证巡逻中的战斗机发现新目标后脱离巡逻转入攻击。
+// 场景：1 架战斗机在 (5,5)，先挂 PlanePatrol；基地队列有 1 架敌机，跑一帧 updatePlaneAttackOrReturn。
+// 预期：存在 PlaneAttack 指令，且 PlanePatrol 指令已被移除。
+// 覆盖：updatePlaneAttackOrReturn 的巡逻分支——拿到目标后 Remove(patrolUid) 并 Add(PlaneAttack)。
 func TestPatrollingFighterLeavesPatrolForNewTarget(t *testing.T) {
 	manager, _ := newAirCapTestManager(t, 1)
 	lone := manager.state.Arena.Planes["friendly-00"]
@@ -146,10 +154,10 @@ func TestPatrollingFighterLeavesPatrolForNewTarget(t *testing.T) {
 	}
 }
 
-// 滑跑中的飞机被「追击名额回收」拆掉指令后必须仍然被推进：
-// updatePlaneAttackOrReturn 只处理巡航机，还在滑跑（起飞阶段）的飞机全靠指令的起飞
-// 分支调用 UpdateTakeoff，一旦指令被拆掉就再也没有代码推进它，会永远停在原地不动
-// —— 机场上表现为「停在跑道上」，航母上表现为「卡在舰尾空中」。
+// TestSurplusAirAttackerReleaseKeepsTakingOffFightersMoving 验证名额回收不会拆掉滑跑中飞机的攻击指令，否则它们永远停在跑道/舰尾。
+// 场景：机场与航母各放飞 maxAirAttackersPerTarget+2=6 架仍处 PlaneFlightPhaseTakingOff 的战斗机，全部认领同一架敌机；先调 releaseSurplusAirAttackers，再执行 900 帧 instructionSet.ExecAll + updatePlaneAttackOrReturn。
+// 预期：回收后每架滑跑机仍保留 PlaneAttack 指令；900 帧后没有飞机仍处于 TakingOff（全部离地转巡航）。
+// 覆盖：releaseSurplusAirAttackers 跳过 !IsCruising 的飞机，以及攻击指令的 UpdateTakeoff 分支持续推滑跑（机场停跑道、航母卡舰尾的回归）。
 func TestSurplusAirAttackerReleaseKeepsTakingOffFightersMoving(t *testing.T) {
 	const fighterName = "cap-test-takeoff-fighter"
 	registerCapTestFighter(t, fighterName)

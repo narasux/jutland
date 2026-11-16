@@ -9,6 +9,10 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
+// TestExpectedDamageAndWeaponCycles 验证暴击期望伤害与火炮/鱼雷/火箭/投放器的 DPS 周期换算。
+// 场景：模板 Damage=100、暴击率 0.1 得期望 127；构造 2 发/4s 炮、4 发/75s 鱼雷、10 发三组火箭等。
+// 预期：炮 63.5；鱼雷按 75+3*1=78s 周期；舰载火箭按 5+7*0.2+2*1=8.4s；飞机挂载按 60s 窗口。
+// 覆盖：六处 1e-9 精度断言，覆盖暴击系数、连发间隔、组间间隔与评估窗口。
 func TestExpectedDamageAndWeaponCycles(t *testing.T) {
 	bullets := testBullets("test", 100, 0.1)
 
@@ -48,6 +52,10 @@ func TestExpectedDamageAndWeaponCycles(t *testing.T) {
 	}
 }
 
+// TestFiringArcCoverageMergesIntervals 验证左右射界按角度并集计算，重叠区不重复计数。
+// 场景：表驱动三组：180-360 与 0-180 首尾相接；100-300 与 0-200 半重叠；360-360 与 0-0 为空。
+// 预期：覆盖率分别为 1、300/360、0；失败意味着重叠角被重复累计或空射界产生非零。
+// 覆盖：每组 t.Run 以 1e-9 容差断言 firingArcCoverage，覆盖拼接、重叠、零长度三种边界。
 func TestFiringArcCoverageMergesIntervals(t *testing.T) {
 	tests := []struct {
 		name        string
@@ -82,6 +90,10 @@ func TestFiringArcCoverageMergesIntervals(t *testing.T) {
 	}
 }
 
+// TestEffectiveHP 验证舰船/飞机的有效生命公式与完全免伤时的固定上限。
+// 场景：舰 1000HP、水平减伤 0.5、垂直 0.25；飞机 90HP、减伤 0.5；另取双 100% 减伤的 1HP 单位。
+// 预期：舰 EHP=0.6*2000+0.4*1333.33≈1733.33；飞机=90/(3*0.5)=60；免伤取 10000000 且有限。
+// 覆盖：三组容差断言加 !Inf/!NaN 检查，锁死 6:4 权重、飞机三倍受伤与免伤分支。
 func TestEffectiveHP(t *testing.T) {
 	ship := &objUnit.BattleShip{
 		TotalHP: 1000, HorizontalDamageReduction: 0.5, VerticalDamageReduction: 0.25,
@@ -107,6 +119,10 @@ func TestEffectiveHP(t *testing.T) {
 	}
 }
 
+// TestAntiShipAndAntiAirIgnoreHullAndMobility 验证火力轴只由武器决定，生存与机动另行计分。
+// 场景：同一门 2 发/2s、射程 10 的双用途炮，分别装到 1HP 全免伤高速舰与 100000HP 低速舰。
+// 预期：两舰 AntiShip/AntiAir 完全相等，AntiShip=firepowerScore(60)=8；Survival/Total 仍不同。
+// 覆盖：比较两舰火力轴与生存/总战力，并用 gunDPS*gunEffectiveness=60 校验 firepowerScore。
 func TestAntiShipAndAntiAirIgnoreHullAndMobility(t *testing.T) {
 	bullets := testBullets("gun", 100, 0)
 	gun := &objUnit.Gun{
@@ -145,6 +161,10 @@ func TestAntiShipAndAntiAirIgnoreHullAndMobility(t *testing.T) {
 	}
 }
 
+// TestPlaneFormationAndWeaponCapabilities 验证飞机按 10 机编队放大，并区分战斗机与攻击机火力。
+// 场景：基座 90HP、减伤 0.5、1 发/1s 双用途炮、航程 1500，分别设为战斗机、俯冲轰炸机、鱼雷机。
+// 预期：战斗机编队 EHP=600、对空 DPS≈13.17、Survival=24、投送 1500km；攻击机保留对舰对空。
+// 覆盖：校验编队 EHP/DPS、Survival、Projection/Burst、单条对空贡献，并断言战斗机清空对舰。
 func TestPlaneFormationAndWeaponCapabilities(t *testing.T) {
 	bullets := testBullets("gun", 10, 0)
 	gun := &objUnit.Gun{
@@ -205,6 +225,10 @@ func TestPlaneFormationAndWeaponCapabilities(t *testing.T) {
 	}
 }
 
+// TestCarrierScalesStandardFormationByAircraftCount 验证航母按载机数缩放标准编队的航空战力。
+// 场景：飞机 FormationSize=10、AntiShip=100、AntiAir=50，航母无舰炮；载机数分别取 5、10、20。
+// 预期：AntiShip 35/70/140，AntiAir 18/35/70，Aviation 与 Total 30/60/119，DPS 3.5/7/14。
+// 覆盖：子测试断言三组火力/总战力/DPS、Hull 与投送为 0，且 plane 贡献的 Count 等于载机数。
 func TestCarrierScalesStandardFormationByAircraftCount(t *testing.T) {
 	plane := &objUnit.Plane{
 		Name: "plane", Range: 20,
@@ -261,9 +285,10 @@ func TestCarrierScalesStandardFormationByAircraftCount(t *testing.T) {
 	}
 }
 
-// TestShipProjectionUsesWeaponRangeOnly 锁定舰船投送射程的单位口径。
-// 舰船投送 = 自身武器射程（配置值/2 后的地图格），不并入舰载机航程（配置值/8 后的地图格）。
-// 两者混用会让挂着远程侦察机的舰船投送从 9~21 跳到 200+，把船只费用抬高一个量级。
+// TestShipProjectionUsesWeaponRangeOnly 验证舰船投送只取自身武器射程，不并入舰载机航程。
+// 场景：战舰挂远程侦察机时，若把飞机航程算进投送，投送会从 9~21 格跳到 200+，费用被抬高一个量级。
+// 预期：炮射程 9 的船投送 == projectionScore(9)；射程 21 的船投送更大；挂侦察机不改变射程 9 船的投送。
+// 覆盖：构造短程/远程/带侦察机三艘船，调用 CalculateShip 比较 Projection。
 func TestShipProjectionUsesWeaponRangeOnly(t *testing.T) {
 	bullets := testBullets("gun", 100, 0)
 	newShip := func(gunRange float64) *objUnit.BattleShip {
@@ -314,6 +339,10 @@ func TestShipProjectionUsesWeaponRangeOnly(t *testing.T) {
 	}
 }
 
+// TestPowerResultsAreFiniteAndNonNegative 验证极端参数下战力结果有限、非负且不会归零。
+// 场景：弹药 Damage=99999、暴击率 0.5（期望 234997.65），3 发/0.001s、射程 1.5，装在 1HP 免伤舰上。
+// 预期：Total/AntiShip/AntiAir/Survival/Mobility 均 ≥0 且 Total>0；空飞机 CalculatePlane 返回 0。
+// 覆盖：遍历 5 个整数字段查负值，另断言武装单位总战力非零与空对象零值。
 func TestPowerResultsAreFiniteAndNonNegative(t *testing.T) {
 	bullets := testBullets("impact", 99999, 0.5)
 	gun := &objUnit.Gun{
@@ -344,6 +373,10 @@ func TestPowerResultsAreFiniteAndNonNegative(t *testing.T) {
 	}
 }
 
+// TestWeightedTotalKeepsArmedUnitVisible 验证加权取整归零时保留最小战力 1。
+// 场景：weightedTotal(0,1) 只有 1 分对空；weightedTotal(0,0) 完全无火力。
+// 预期：前者返回 1，后者返回 0；失败意味着防空单位显示为 0 或空单位被强行记 1。
+// 覆盖：两次精确断言，覆盖有输入但取整归零、无输入不兜底两条分支。
 func TestWeightedTotalKeepsArmedUnitVisible(t *testing.T) {
 	if got := weightedTotal(0, 1); got != 1 {
 		t.Fatalf("weightedTotal(0, 1) = %d, want minimum visible power 1", got)
@@ -353,6 +386,10 @@ func TestWeightedTotalKeepsArmedUnitVisible(t *testing.T) {
 	}
 }
 
+// TestCaliberEffectivenessDiscountsSmallShells 验证对舰口径效能以 127mm 为满值并单调衰减。
+// 场景：分别计算 0、127、460、25、1mm，再比较 25/76/127mm 的效能大小。
+// 预期：0/127/460 为 1；25mm=pow(25/127,0.7)≈0.3207；1mm 触底 0.10；25<76<127。
+// 覆盖：五处容差/相等断言加一组单调比较，覆盖未知口径、满值、上限夹取与下限。
 func TestCaliberEffectivenessDiscountsSmallShells(t *testing.T) {
 	// 未知口径不做折算，127mm 及以上视为满值。
 	if got := caliberEffectiveness(0); got != 1 {
@@ -377,6 +414,10 @@ func TestCaliberEffectivenessDiscountsSmallShells(t *testing.T) {
 	}
 }
 
+// TestGunEffectivenessAppliesCaliberToAntiShipOnly 验证口径惩罚只作用于对舰，不影响对空。
+// 场景：同参数炮（1 发/5s、射程 10、散布 50）分别装 25mm 与 200mm 弹，计算对舰、对空效能。
+// 预期：对舰 mg=main*caliberEffectiveness(25)≈0.4*0.3207 且 mg<main；对空两者完全相等。
+// 覆盖：两次 1e-9 断言加 mg<main 比较，锁死口径仅在 antiAir=false 分支生效。
 func TestGunEffectivenessAppliesCaliberToAntiShipOnly(t *testing.T) {
 	bullets := map[string]*objBullet.Bullet{
 		"mg":   {Name: "mg", Damage: 2, Diameter: 25},

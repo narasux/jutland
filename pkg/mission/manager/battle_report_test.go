@@ -8,6 +8,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+// TestFinalizeBattleStatsMapsMissionStatusToEndReason 验证任务状态到战斗结束原因的映射与终局收尾。
+// 场景：MissionSuccess、普通失败、确认放弃的失败，以及 Running/Paused 共 5 种状态。
+// 预期：胜/败/放弃映射 Victory/Defeat/Aborted，写 EndTick=10 并切总览；运行/暂停不收尾且留在舰艇页。
+// 覆盖：表驱动设置状态/确认放弃/SimTick=10，断言 Finalized、EndReason、EndTick 与页面。
 func TestFinalizeBattleStatsMapsMissionStatusToEndReason(t *testing.T) {
 	tests := []struct {
 		name          string
@@ -70,6 +74,10 @@ func TestFinalizeBattleStatsMapsMissionStatusToEndReason(t *testing.T) {
 	}
 }
 
+// TestBattleReportPageAccessors 验证战报页签按总览→舰艇→飞机→战况循环切换且拒绝非法页。
+// 场景：从舰艇页连续 Shift(1) 三次，再 Shift(-1) 回退，最后 SetBattleReportPage(9)。
+// 预期：依次到飞机、战况、总览，再回战况；非法页 9 被忽略，页面保持战况。
+// 覆盖：零值 MissionState 上调用 Set/Shift/BattleReportPage，断言四页顺序、回绕与 Valid 过滤。
 func TestBattleReportPageAccessors(t *testing.T) {
 	manager := &MissionManager{state: &state.MissionState{}}
 

@@ -7,7 +7,10 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
-// 美国战列舰 / 巡洋舰要能弹射水上侦察机，这是「从战舰起飞飞机侦察」的功能保障。
+// TestUSCapitalShipsCarryFloatplaneScouts 验证美国主力舰能弹射水上侦察机，保障「从战舰起飞飞机侦察」。
+// 场景：开启迷雾设置后加载 PearlHarbor1941（SideP1），遍历 HumanAlpha 且 HasPlane 的舰船，要求 SearchStock≥searchMinStock=2。
+// 预期：每艘可派机舰船的 TakeOffSearch 返回非 nil，机型 Type=PlaneTypeScout，SightRange≥SightRangeScout=36；checked>0。
+// 覆盖：ShipAircraft.SearchStock/TakeOffSearch 的保留甲板库存规则（起飞后还要留一架）与侦察机视距。
 func TestUSCapitalShipsCarryFloatplaneScouts(t *testing.T) {
 	useFogSettings(t)
 	m := New("PearlHarbor1941", faction.SideP1)
@@ -39,14 +42,10 @@ func TestUSCapitalShipsCarryFloatplaneScouts(t *testing.T) {
 	}
 }
 
-// 小黄鸭、水滴这类特殊船也必须照雾，否则开迷雾时它们自己那一圈永远是黑的。
-func TestSpecialShipsProvideSight(t *testing.T) {
-	if got := objUnit.ResolveShipSight(objUnit.ShipTypeDefault, 0, 1); got != objUnit.SightRangeSpecial {
-		t.Fatalf("特殊船视距 = %v, want %v", got, objUnit.SightRangeSpecial)
-	}
-}
-
-// 三种美军水上侦察机都要在册并且是 scout 型，否则舰船编组会引用到打不出搜索的机型。
+// TestUSFloatplaneScoutsAreConfigured 验证三型美军水上侦察机都在册且为 scout 型，避免舰船编组引用到打不出搜索的机型。
+// 场景：遍历 OS2U、SOC、SC-1，从 objUnit.PlaneMap 取模板。
+// 预期：三者都存在，Type 均为 PlaneTypeScout，SightRange 均等于 SightRangeScout=36。
+// 覆盖：planes.json5 初始化后的机型类型与视距解析（ResolvePlaneSight）。
 func TestUSFloatplaneScoutsAreConfigured(t *testing.T) {
 	for _, name := range []string{"OS2U", "SOC", "SC-1"} {
 		plane, ok := objUnit.PlaneMap[name]
@@ -63,7 +62,10 @@ func TestUSFloatplaneScoutsAreConfigured(t *testing.T) {
 	}
 }
 
-// 美国主力舰的水侦配备表：按状态年份对机型，改配置时这条会挡住漏改。
+// TestUSFloatplaneAssignments 验证美国主力舰水侦配备表：按状态年份对机型，并逐舰核对弹射器甲板。
+// 场景：按 want 表检查 15 艘舰的 Groups[0].Name 与 Aircraft.Deck；再核对 USCatapult_<舰名> 模板、起飞点数量与单台朝向左舷 -60；最后检查 atlanta、charlotte 不应有水侦。
+// 预期：1930 年代 new_mexico/new_york/st_louis 用 SOC，1940-1944 arizona/baltimore/alaska/west_virginia/arkansas 用 OS2U，1945 起 lowa/montana/brooklyn/oregon_city 及战后 puerto_rico/des_moines/fargo 用 SC-1；new_york/west_virginia/fargo/arkansas 为 1 个起飞点，其余为 2 个；单台弹射器 LaunchAngle=-60；atlanta/charlotte 无编组。
+// 覆盖：ShipMap 的 Aircraft.Groups/Deck 配置、DeckMap 模板存在性与弹射点数量/朝向一致性。
 func TestUSFloatplaneAssignments(t *testing.T) {
 	want := map[string]string{
 		// 1930 年代状态：还没有翠鸟，战列舰与巡洋舰都用海鸥

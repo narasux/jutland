@@ -58,7 +58,10 @@ func maxTouchedY(path []grid.Point, start grid.Point) int {
 	return maxY
 }
 
-// 离岸距离场：陆格为 0，可航行格为到最近陆格的切比雪夫距离。
+// TestClearanceField 验证离岸距离场按切比雪夫距离填充：陆格 0，水面逐格递增。
+// 场景：coastMapCfg 为 12×8 地图，y=0 整行陆地，y≥1 为开阔水域；取 x=5 从岸到海心的五个采样点。
+// 预期：ClearanceAt(5,0..4) 依次为 0、1、2、3、4；失败会让 pathCellExtraCost 的贴岸代价整体偏移。
+// 覆盖：直接对 5 个坐标调用 ClearanceAt 并用 require.Equal 比较 int16 结果。
 func TestClearanceField(t *testing.T) {
 	cfg := coastMapCfg()
 	require.Equal(t, int16(0), cfg.ClearanceAt(5, 0), "陆地格离岸距离应为 0")
@@ -68,7 +71,10 @@ func TestClearanceField(t *testing.T) {
 	require.Equal(t, int16(4), cfg.ClearanceAt(5, 4))
 }
 
-// 贴岸代价要随舰体尺寸缩放：小艇可以贴着岸线走，大舰要绕到离岸更远的水域。
+// TestSearchCostScaleByShipSize 验证贴岸额外代价按舰体尺寸缩放：小艇贴岸直走，大舰绕到深水。
+// 场景：12×8 地图仅 y=0 是陆地，start=(1,1)、goal=(10,1)；pathCellExtraCost 给离岸 1 格 +2、2 格 +1，SearchWithCostScale 分别以 0.1（小艇）和 3（大舰）缩放。
+// 预期：0.1 倍路径最大 y=1（贴岸直线），3 倍路径最大 y≥3（离岸绕行）；缩放到 100 以及普通 GenPath 仍返回非空，证明代价只是软约束。
+// 覆盖：调用 PreparedGrid().SearchWithCostScale 两次并用 maxTouchedY（0.1 格采样）判断航线，再对 scale=100 与 GenPath 做可达性断言。
 func TestSearchCostScaleByShipSize(t *testing.T) {
 	cfg := coastMapCfg()
 	start, goal := grid.Point{X: 1, Y: 1}, grid.Point{X: 10, Y: 1}

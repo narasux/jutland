@@ -8,6 +8,10 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
+// TestSonarRangeByShipType 验证各舰种声呐/水听器半径，以及沉没舰不再提供声呐。
+// 场景：驱逐/护卫用护航声呐，巡洋/战列用主力声呐，航母用航母声呐，潜艇用水听器，货船/鱼雷艇没有。
+// 预期：各类型返回对应常量；CurHP=0 的驱逐舰返回 0。
+// 覆盖：表驱动遍历 8 种舰型，再补一个沉没舰用例。
 func TestSonarRangeByShipType(t *testing.T) {
 	cases := []struct {
 		shipType ShipType
@@ -31,6 +35,11 @@ func TestSonarRangeByShipType(t *testing.T) {
 	require.Zero(t, dead.SonarRange())
 }
 
+// TestSubmarineDetectionMemory 验证潜艇被声呐点亮后的记忆：到期失效、重复探测刷新位置/时间、可清除。
+// 场景：反潜舰探测到潜艇后，即使下一拍失去接触，也应记住最后位置一段时间；到期后不能再看见。
+// 预期：MarkDetected 后 UntilTick 前可见；到期不可见；再次探测刷新 LastPos/UntilTick；
+// ClearDetection 全部清除。
+// 覆盖：对同一艘潜艇依次调用 MarkDetected/DetectedByAny/Detection/ClearDetection 并断言。
 func TestSubmarineDetectionMemory(t *testing.T) {
 	sub := &BattleShip{Type: ShipTypeSubmarine, CurHP: 100}
 	pos := objPos.NewR(3.5, 4.5)
@@ -54,6 +63,10 @@ func TestSubmarineDetectionMemory(t *testing.T) {
 	require.False(t, sub.DetectedByAny(100))
 }
 
+// TestSubmergedShipEmitsNoWake 验证水下潜艇不生成尾流。
+// 场景：潜艇下潜后仍在移动；若继续画尾流会暴露位置，破坏潜艇隐蔽性。
+// 预期：GenTrails 返回 nil。
+// 覆盖：构造水下、有速度的潜艇，直接调用 GenTrails。
 func TestSubmergedShipEmitsNoWake(t *testing.T) {
 	sub := &BattleShip{
 		Type: ShipTypeSubmarine, CurHP: 100, CurSpeed: 0.03, MaxSpeed: 0.03,

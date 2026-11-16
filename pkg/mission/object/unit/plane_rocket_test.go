@@ -10,8 +10,13 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
-// 飞机火箭挂载按反类型标志过滤目标：对空挂载只能打空中目标，
-// 对海挂载只能打战舰（对空/对海挂载是两种独立配置）。
+// TestPlaneRocketLauncherAntiTypeGate 验证飞机火箭挂载按 AntiShip/AntiAircraft 标志过滤目标。
+// 场景：反舰挂载（AntiShip）与对空挂载（AntiAircraft）是两套独立配置，射击时可能拿到飞机也可能拿到战舰；
+// 若 Fire 不先过 IsAvailableAntiType，对空火箭会朝战舰打、反舰火箭会朝飞机打。
+// 预期：对空挂载对战舰返回 0 发、对正前方 0.5 格敌机返回 1 发且 TargetObjType=TypePlane；
+// 反舰挂载对敌机返回 0 发、对同一位置战舰返回 1 发且 TargetObjType=TypeShip。
+// 覆盖：注册 4 发、射程 4、射界 [0,25]/[335,360] 的 PlaneRocketLauncher，
+// 对空/反舰两种挂载分别 Fire 敌机与敌舰，断言发数与目标类型。
 func TestPlaneRocketLauncherAntiTypeGate(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

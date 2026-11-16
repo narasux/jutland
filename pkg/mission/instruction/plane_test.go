@@ -87,6 +87,12 @@ func execPlaneReturn(t *testing.T, instruction *PlaneReturn, missionState *state
 	}
 }
 
+// TestPlaneReturnRecoversOnlyAfterLandingDeck 验证航母只在 LandingDeck 完成后才入库。
+// 场景：航母长 128 在 (50,50) 朝北，1 架飞机在舰尾外侧返航，逐拍执行 PlaneReturn，
+// 待场段用 FlightPhaseEndPos 把飞机直接放到进近入口以缩短等待。
+// 预期：Staging/Approach 期间 CurCount 恒为 0，进入 Deck 后仍为 0，Executed 后
+// CurCount=1 且飞机从 Arena.Planes 移除。提前入库会让空中飞机凭空消失。
+// 覆盖：300 拍推待场、140 拍推进近、220 拍推着舰滑跑，每段都断言库存未变。
 func TestPlaneReturnRecoversOnlyAfterLandingDeck(t *testing.T) {
 	ms, ship, planes := newLandingTestState(t, "test-landing-plane", 1)
 	plane := planes[0]
@@ -146,6 +152,12 @@ func TestPlaneReturnRecoversOnlyAfterLandingDeck(t *testing.T) {
 	}
 }
 
+// TestPlaneReturnAllPlanesReachDeckBeforeRecovery 验证 32 架飞机分批返航都先着舰再回收。
+// 场景：航母以 0.055 速度每拍转 0.8° 边转向边前进，32 架飞机在同一拍下达返航，
+// 预算 2000 拍；甲板槽位与刹车段让回收排队进行。
+// 预期：所有飞机都在 LandingDeck 拍被记录，没有任何一架在其他阶段从 Arena 消失；
+// 结束时 Arena.Planes 为空、CurCount=32、reachedDeck 覆盖 32 架。
+// 覆盖：newLandingTestState 造 32 架 test-landing-batch，advanceLandingTestCarrier 模拟母舰机动。
 func TestPlaneReturnAllPlanesReachDeckBeforeRecovery(t *testing.T) {
 	// 着舰入口基线后移至 -5.5 舰长、进近与刹车段按实际路程推进后，
 	// 32 架两波次回收的整体时间线拉长，预算从 1200 帧放宽到 2000 帧。
@@ -190,6 +202,12 @@ func TestPlaneReturnAllPlanesReachDeckBeforeRecovery(t *testing.T) {
 	}
 }
 
+// TestPlaneReturnRecoversBatchNearMapBorders 验证航母贴四边时 32 架飞机仍能全部回收。
+// 场景：航母分别摆在左 (1,50)、右 (97,50)、上 (50,1)、下 (50,97)，朝向依次为
+// 90、270、180、0，舰长放大到 256，飞机围绕母舰散开且初始朝向为 (idx*47)%360。
+// 预期：四个子用例都在 1800 拍内清空 Arena.Planes、CurCount=32、每架都经过
+// LandingDeck；若有飞机在待场或进近阶段消失，说明贴边布局打乱了回收时序。
+// 覆盖：每个边界一个 t.Run，逐架下发 PlaneReturn 并核对 reachedDeck 与库存。
 func TestPlaneReturnRecoversBatchNearMapBorders(t *testing.T) {
 	const (
 		planeCount        = 32

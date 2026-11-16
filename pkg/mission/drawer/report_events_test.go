@@ -14,7 +14,11 @@ import (
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
-// 战报详情里的伤害数字要跟随暴击档位着色：普通白、三倍黄、十倍红。
+// TestBattleReportEventSegmentsColorsCriticalDamage 验证战报伤害数字按暴击档位着色：普通白、三倍黄、十倍红。
+// 场景：iowa 以 shell 命中 yamato（Tick=60、Count=1、Damage=123），分别使用 CriticalTypeNone /
+// ThreeTimes / TenTimes；伤害颜色由 battleReportDamageColor 决定，与浮动伤害数字保持一致。
+// 预期：文本中不残留内部占位符 \x01；含 "123" 的段颜色依次为 battleReportValueClr、colorx.Yellow、colorx.Red。
+// 覆盖：battleReportEventSegments 拆段 + battleReportSegmentsText 拼全文，逐档断言伤害段颜色与数字存在。
 func TestBattleReportEventSegmentsColorsCriticalDamage(t *testing.T) {
 	cases := []struct {
 		name     string
@@ -55,7 +59,11 @@ func TestBattleReportEventSegmentsColorsCriticalDamage(t *testing.T) {
 	}
 }
 
-// 非战斗损失行要写清是哪一方的飞机，而不是只留一个「—」。
+// TestBattleReportPlaneLossRowShowsSide 验证非战斗损失行写出损失方是「我方」还是「敌方」。
+// 场景：BattleLogPlaneLost 没有攻击者（ActorName 为空），Tick=60、F4F-3（fighter）、Count=1；
+// TargetPlayer 分别取 HumanAlpha（己方视角）与 ComputerAlpha。
+// 预期：己方损失行含「我方」且不含无攻击者占位符「—」；敌方损失行含「敌方」。
+// 覆盖：BattleLogPlaneLost 走 MsgBattleReportEventLossRow 分支、battleReportSideText 的两种阵营换算。
 func TestBattleReportPlaneLossRowShowsSide(t *testing.T) {
 	entry := state.BattleLogEntry{
 		Tick:          60,
@@ -76,7 +84,11 @@ func TestBattleReportPlaneLossRowShowsSide(t *testing.T) {
 	require.Contains(t, enemyText, "敌方")
 }
 
-// 深弹击沉行要写出投弹舰和「深水炸弹」，不能退化成未知武器或没有攻击者。
+// TestBattleReportDepthChargeSinkShowsWeapon 验证深弹击沉行写出投弹舰与「深水炸弹」，不退化未知武器。
+// 场景：中文语言下，gurkha（destroyer）以 TypeDepthCharge 击沉 nautilus（submarine），
+// Tick=60、Count=1、单发伤害 1200、TotalDamage=2770（大于单发伤害，追加累计伤害）。
+// 预期：文本含 MsgBattleReportWeaponDepthCharge 与 "gurkha"，且不出现 MsgBattleReportWeaponUnknown。
+// 覆盖：battleReportWeaponText 的 TypeDepthCharge 分支、带 Actor 的 BattleLogShipSunk 击杀行与 i18n 语言切换 Cleanup。
 func TestBattleReportDepthChargeSinkShowsWeapon(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	i18n.SetLanguage(string(i18n.LanguageZhHans))

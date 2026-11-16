@@ -15,9 +15,16 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
-// 回归（验收 5）：AI 编队锚点贴着海岸、环形阵位有一部分落在陆地上时，
-// 编队必须能各自到位并停下来，不能出现“船头长期顶岸、AI 每轮重下同一条指令”。
-// 修复前阵位不做陆地吸附，舰船只能停在岸边水面，AI 认为一直没到位而反复下单。
+// TestNearShoreAnchorFleetSettles 验证贴岸锚点的编队能各自吸附到水面阵位并停稳。
+// 场景：回归验收 5——pearl_harbor 锚点 (60,124) 紧贴 y=122/123 海岸线，6 艘舰
+// （2 战列舰、2 巡洋舰、2 驱逐舰）按 formationPos 间隔 2 格的环形阵位展开，并放一个
+// 增援集结点迫使 AI 走锚点外环形阵位；舰船用真实量级参数（长 180、MaxSpeed=21/1200、
+// 加速度 0.0002083、转向 0.375）。前提断言至少 1 个原始阵位落在陆格。
+// 预期：推进 2600 拍后，每艘舰都在某个经 navigableDest 吸附后的阵位 2 格内，
+// 中心点不在陆格，且最后 400 拍补发的移动指令不超过舰数；修复前阵位不吸附，
+// 舰船长期顶岸、AI 每轮重下同一条指令。
+// 覆盖：NewHandler + 手搭 MissionState/ReinforcePoint，循环 Handle/Exec 并每拍
+// 让出 1ms 等异步寻路，最后用 navigableDest/formationPos/IsLand 断言到位。
 func TestNearShoreAnchorFleetSettles(t *testing.T) {
 	previous := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -131,9 +138,14 @@ func TestNearShoreAnchorFleetSettles(t *testing.T) {
 		landSlots, totalTicks, lateIssues)
 }
 
-// 回归：近岸锚点的环形阵位必须落在可航行水面上（且与舰船同域）。
-// 修复前阵位直接取锚点 + 螺旋偏移，贴岸锚点会产出陆格阵位：
-// 舰船只能停在岸边水面，AI 认为一直没到位，于是反复重下同一条指令。
+// TestStationPosStaysOnWater 验证近岸锚点的 stationPos 阵位落在同域水面上。
+// 场景：pearl_harbor 锚点 (60,124)，战列舰 (60,130)，存在增援集结点（AI 使用
+// 锚点外环形阵位）；原始 formationPos(anchor,0..7) 至少有 1 个陆格（前提断言）。
+// 预期：stationPos 对 8 个槽位都返回 IsSea，且 WaterRegionAt 与舰船所在水域一致；
+// 修复前阵位直接取锚点 + 螺旋偏移，贴岸锚点会给出陆格，舰船只能停在岸边水面、
+// AI 认为没到位而反复重下。
+// 覆盖：NewHandler 固定 anchor/anchorFixed，snapshot 后逐槽调用 stationPos，
+// 用 IsSea 与 WaterRegionAt 断言。
 func TestStationPosStaysOnWater(t *testing.T) {
 	mapCfg := mapcfg.GetByName("pearl_harbor")
 	if mapCfg == nil {

@@ -7,6 +7,10 @@ import (
 	"github.com/narasux/jutland/pkg/config"
 )
 
+// TestShipWeaponReloadStatusUsesNextReadyMount 验证主炮装填状态取“最快就绪的那门”，并正确报告禁用。
+// 场景：3 门主炮装填进度不同，单位面板要显示最近可开火的一门及倒计时，而不是第一门/平均值。
+// 预期：Equipped=3、Ready=1、RemainingMillis=1000、Progress=0.5、Disabled=true。
+// 覆盖：构造 3 门不同 ReloadStartAt 的主炮，调用 ReloadStatus(now=10000) 断言字段。
 func TestShipWeaponReloadStatusUsesNextReadyMount(t *testing.T) {
 	now := int64(10_000)
 	weapon := ShipWeapon{
@@ -33,6 +37,10 @@ func TestShipWeaponReloadStatusUsesNextReadyMount(t *testing.T) {
 	}
 }
 
+// TestTorpedoReloadStatusAccountsForShotIntervalAndReload 验证鱼雷装填状态同时考虑发射间隔与整管装填。
+// 场景：一座发射器刚打完 4 根进入间隔，另一座在整管装填；面板应显示最近可再发射的时间。
+// 预期：Ready=0、RemainingMillis=500、Progress=0.5。
+// 覆盖：构造两座不同 LatestFireAt/ReloadTime 的发射器，调用 ReloadStatus(now=10000)。
 func TestTorpedoReloadStatusAccountsForShotIntervalAndReload(t *testing.T) {
 	now := int64(10_000)
 	weapon := ShipWeapon{Torpedoes: []*TorpedoLauncher{
@@ -61,6 +69,10 @@ func TestTorpedoReloadStatusAccountsForShotIntervalAndReload(t *testing.T) {
 	}
 }
 
+// TestRocketReloadStatusUsesGroupInterval 验证火箭炮按“组间隔”而不是单发间隔计算下一次可发射时间。
+// 场景：6 发 3 组、组间隔 4 秒、已打 2 发；面板应显示下一组剩余 3 秒，而不是 0.5 秒单发间隔。
+// 预期：RemainingMillis=3000、Progress=0.25。
+// 覆盖：构造带 ShotInterval/GroupInterval 的 RocketLauncher，调用 ReloadStatus(now=10000)。
 func TestRocketReloadStatusUsesGroupInterval(t *testing.T) {
 	weapon := ShipWeapon{Rockets: []*RocketLauncher{{
 		RocketCount:           6,
@@ -81,6 +93,10 @@ func TestRocketReloadStatusUsesGroupInterval(t *testing.T) {
 	}
 }
 
+// TestReloadStatusAllReady 验证全部武器就绪时状态为满进度、零倒计时。
+// 场景：副炮刚装填完/从未开火，面板应显示 1/1、100%、无倒计时，而不是残余进度。
+// 预期：Ready=1、Progress=1、RemainingMillis=0。
+// 覆盖：构造单门 ReloadStartAt=0/ReloadTime=1 的副炮，调用 ReloadStatus(now=10000)。
 func TestReloadStatusAllReady(t *testing.T) {
 	weapon := ShipWeapon{SecondaryGuns: []*Gun{{ReloadStartAt: 0, ReloadTime: 1}}}
 	status := weapon.ReloadStatus(WeaponTypeSecondaryGun, 10_000)
@@ -89,6 +105,10 @@ func TestReloadStatusAllReady(t *testing.T) {
 	}
 }
 
+// TestAnyReloadedSkipsDisabledAndReloadingGuns 验证 AnyReloaded 只为“未禁用且已装填”的炮返回 true。
+// 场景：AI/玩家按下开火键时先问 AnyReloaded；若把装填中或整组禁用的炮算作可开火，会空放/绕过禁用。
+// 预期：装填中 false；MainGunDisabled=true false；就绪且未禁用 true。
+// 覆盖：固定 SimTick=10，分别构造三种 ShipWeapon 调用 AnyReloaded。
 func TestAnyReloadedSkipsDisabledAndReloadingGuns(t *testing.T) {
 	if config.G == nil {
 		config.G = config.NewDefaultGameSettings()
@@ -107,8 +127,14 @@ func TestAnyReloadedSkipsDisabledAndReloadingGuns(t *testing.T) {
 	}
 }
 
-// 从未发射过的鱼雷管必须是“已就绪”，不能按 0 号时间戳算出一段装填倒计时：
-// 那段时间戳是毫秒、面板传进来的是拍，倒计时会变成 1 拍只走 1 毫秒的假进度。
+// TestTorpedoReloadStatusKeepsUnfiredTubesReady 验证从未发射过的鱼雷管按“已就绪”处理，
+// 不按 0 号时间戳算出一段虚假装填倒计时。
+// 场景：3 根鱼雷管，前两根从未发射（ReloadStartTick/LatestFireTick 均为 0），
+// 第三根在 tick 600 发射并进入 ReloadTime=25s 的整管装填；面板传入的是拍（tick 时钟），
+// 若把 0 号时间戳当装填起点，会得到 1 拍只走 1 毫秒的假进度。
+// 预期：now=660 拍时 Equipped=3、Ready=2、第三根剩余 1440 拍=24,000ms、Progress=0.04；
+// now=1200 拍时剩余 15,000ms；now=2100 拍时 3 根全部就绪、Progress=1。
+// 覆盖：构造三根鱼雷管，分别以 660/1200/2100 调用 ReloadStatus(WeaponTypeTorpedo)，断言 Ready/剩余时间/进度。
 func TestTorpedoReloadStatusKeepsUnfiredTubesReady(t *testing.T) {
 	if config.G == nil {
 		config.G = config.NewDefaultGameSettings()
@@ -141,7 +167,13 @@ func TestTorpedoReloadStatusKeepsUnfiredTubesReady(t *testing.T) {
 	}
 }
 
-// 未发射的火箭发射器同样不应显示装填倒计时。
+// TestRocketReloadStatusKeepsUnfiredLaunchersReady 验证未发射的火箭发射器按“已就绪”处理，
+// 同样不应显示装填倒计时。
+// 场景：1 座火箭发射器（6 发分 3 组、单发间隔 0.5s、组间隔 4s、整座装填 8s），
+// 但 ReloadStartTick/LatestFireTick/ShotCountBeforeReload 全为 0，表示一发都没打过。
+// 预期：ReloadStatus(WeaponTypeRocket, 120) 返回 Ready=1、RemainingMillis=0、Progress=1，
+// 而不是凭空显示 8s 的整座装填进度。
+// 覆盖：构造未发射的 RocketLauncher，调用一次 ReloadStatus 并断言三个字段。
 func TestRocketReloadStatusKeepsUnfiredLaunchersReady(t *testing.T) {
 	weapon := ShipWeapon{Rockets: []*RocketLauncher{{
 		RocketCount:   6,

@@ -39,8 +39,10 @@ func registerRadiusTestBomber(t *testing.T, planeName, bulletName string, planeR
 	})
 }
 
-// 在空飞机重新分配目标时，剩余航程不够「飞抵并返航」的敌舰必须被跳过，
-// 即使它单程就在航程之内。
+// TestNextTargetUIDForPlaneSkipsTargetBeyondCombatRadius 验证在空飞机重选目标时按「去程+回程」剩余航程过滤。
+// 场景：测试轰炸机航程 200、RemainRange=100，基地/飞机在 (50,50)，near 在 10 格外（往返 20）、far 在 70 格外（往返 140），队列游标从 far 开始。
+// 预期：先选中 near；队列只剩 far 时返回 false，交由返航流程处理，而不是接受单程可达但回不来的目标。
+// 覆盖：targetingPlan.BaseQueues 与 setTargetCursor 控制候选，nextTargetUIDForPlane 走 targetReachableByPlane 的往返距离判定。
 func TestNextTargetUIDForPlaneSkipsTargetBeyondCombatRadius(t *testing.T) {
 	const planeName = "radius-test-bomber"
 	const bulletName = "radius-test-bomb"
@@ -93,8 +95,10 @@ func TestNextTargetUIDForPlaneSkipsTargetBeyondCombatRadius(t *testing.T) {
 	}
 }
 
-// 起飞选目标时同样按作战半径校验：机型航程必须覆盖基地到目标的往返距离，
-// 否则机场/航母保持待命，等敌舰进入半径再放飞。
+// TestTakeOffFromBaseSkipsTargetBeyondCombatRadius 验证机场起飞前用机型航程校验基地到目标的往返距离。
+// 场景：100 航程测试轰炸机、机场 (50,50)，敌舰先在 (110,50) 距离 60（往返 120>100），再移到 (90,50) 距离 40（往返 80）。
+// 预期：第一次 takeOffFromBase 返回 false 不起飞；敌舰进入作战半径后才返回飞机、TypeShip 与 far。
+// 覆盖：真实 Airfield/StockPlane 与 BaseQueues，takeOffFromBase 内 CanTakeOffWithinRange(distance*2) 的过滤。
 func TestTakeOffFromBaseSkipsTargetBeyondCombatRadius(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

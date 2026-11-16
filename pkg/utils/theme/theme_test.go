@@ -10,8 +10,10 @@ import (
 	"github.com/narasux/jutland/pkg/resources/font"
 )
 
-// TestChevronDirectionsAreCongruent 校验四个方向的 V 形箭头折线形状一致，
-// 保证下拉把手与单位面板导航按钮使用同一套几何，不会出现形状差异。
+// TestChevronDirectionsAreCongruent 验证四个方向的 V 形箭头折线全等且尖端朝向正确。
+// 场景：以 size=12 的 TriangleUp 为基准，比较 TriangleDown/Left/Right 的三点两两距离；DrawChevron 供下拉把手与单位面板导航共用。
+// 预期：各方向排序后的三条边长与 up 基准误差 ≤1e-9；up 顶点 y=-size/2、left 顶点 x=-size/2，保证箭头方向不反转。
+// 覆盖：分别调用 chevronPoints 取 start/apex/end，经 sortedPairDistances 比较，再单独断言 up/left 的尖端坐标。
 func TestChevronDirectionsAreCongruent(t *testing.T) {
 	const size = 12.0
 	start, apex, end := chevronPoints(0, 0, size, TriangleUp)
@@ -52,7 +54,10 @@ func dist(a, b [2]float64) float64 {
 	return math.Hypot(a[0]-b[0], a[1]-b[1])
 }
 
-// TestPanelTokensAreDistinctEnsures共享色板的几组关键 token 语义不同，避免调色时误伤。
+// TestPanelTokensAreDistinct 验证共享色板中语义不同的关键 token 不会调成同一个颜色。
+// 场景：右侧 sidebar 与底部 unitpanel 共用 PanelBackground/CardBackground、ButtonIdle/Hover/Pressed、HandleFill/Hover、ProgressTrack/Fill、ButtonDisabled/Mixed。
+// 预期：PanelBackground×CardBackground、ButtonIdle×{Hover,Pressed}、HandleFill×Hover、ProgressTrack×Fill、ButtonDisabled×Mixed 六对颜色必须全部不相等；任一相等都说明面板层次或按钮状态在视觉上无法区分，调色时误伤。
+// 覆盖：对上述六对 color.RGBA token 做 == 比较，归入五个失败断言，每组失败给出对应语义的 Fatal。
 func TestPanelTokensAreDistinct(t *testing.T) {
 	if PanelBackground == CardBackground {
 		t.Fatal("panel background must differ from card background")
@@ -71,8 +76,10 @@ func TestPanelTokensAreDistinct(t *testing.T) {
 	}
 }
 
-// TestNumericFaceSupportsLatinDigitsForEveryLanguage保证数值在四种语言下都能用
-// 等宽字体渲染拉丁数字与单位，不依赖 CJK 字形，从而避免缺字。
+// TestNumericFaceSupportsLatinDigitsForEveryLanguage 验证四种语言下 Numeric() 都返回等宽拉丁字体。
+// 场景：依次切换到 zh-Hans、en、ru、ja，数值列只含拉丁数字与单位，不应依赖 CJK/西里尔字形而缺字。
+// 预期：每种语言的 Numeric() 都等于 font.JetbrainsMono；结束后恢复 zh-Hans，避免污染后续测试。
+// 覆盖：遍历四个 i18n.Language 调用 SetLanguage 和 Numeric，比较字体并在末尾重置。
 func TestNumericFaceSupportsLatinDigitsForEveryLanguage(t *testing.T) {
 	languages := []i18n.Language{
 		i18n.LanguageZhHans,
@@ -90,8 +97,10 @@ func TestNumericFaceSupportsLatinDigitsForEveryLanguage(t *testing.T) {
 	_ = i18n.SetLanguage(string(i18n.LanguageZhHans))
 }
 
-// TestColorContrastHandleForArrows校验把手填充与箭头前景的对比度，确保箭头仍可辨认。
-// 把手刻意弱化，但对比度仍需满足可读阈值。
+// TestColorContrastHandleForArrows 验证把手填充与箭头前景的对比度仍足以辨认箭头。
+// 场景：HandleFill (18,52,62,252) 与 HandleArrow (150,175,185,200) 被刻意弱化，但展开/收起箭头必须可读；按 WCAG 相对亮度公式计算对比度。
+// 预期：contrastRatio(HandleFill, HandleArrow) ≥ 2.5；失败说明调色后箭头会糊在把手里。
+// 覆盖：调用 contrastRatio，内部用 relativeLuminance 对 RGBA 做 sRGB 线性化后比较。
 func TestColorContrastHandleForArrows(t *testing.T) {
 	if ratio := contrastRatio(HandleFill, HandleArrow); ratio < 2.5 {
 		t.Fatalf("handle arrow contrast = %.2f, want at least 2.5", ratio)

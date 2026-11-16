@@ -27,8 +27,10 @@ func newBulletFallManager(bt *objBullet.Bullet) *MissionManager {
 	}
 }
 
-// 寿命耗尽的弹药按落点格判定落水还是落陆，而不是一律记成水面；
-// 且必须进入到达列表，表现层才有机会画水花 / 尘土。
+// TestBulletFallOnLandOrWater 验证寿命耗尽的弹药按落点格判定落陆/落水并移入到达列表。
+// 场景：小地图 "..L..."，127mm 炮弹 Life=1、Speed=0，分别位于海岸 x=2.5 与海面 x=5.5（y=0.5）。
+// 预期：HitObjType 分别为 TypeLand/TypeWater；ForwardingBullets 清空，表现层才有机会画尘土/水花。
+// 覆盖：updateShotBullets 的 Life<=0 分支与 bulletFallObjType 的 IsLand 判定，两个子用例逐项断言。
 func TestBulletFallOnLandOrWater(t *testing.T) {
 	testCases := []struct {
 		name string
@@ -63,7 +65,10 @@ func TestBulletFallOnLandOrWater(t *testing.T) {
 	}
 }
 
-// 吊射弹药越过瞄准点后的落点同样区分陆水（此前无条件记成水面）。
+// TestBulletPassedAimFallOnLandOrWater 验证吊射越过瞄准点后的落点同样区分陆水。
+// 场景：203mm 炮弹 Plunge=1（危险界 0.2/0.7≈0.286 格）、Rotation=90、瞄准点 x=0.5，弹体在海岸 x=2.5 与海面 x=5.5。
+// 预期：PassedAim 成立后 HitObjType 分别为 TypeLand/TypeWater 并被移出在飞列表；此前该分支无条件记 TypeWater。
+// 覆盖：updateShotBullets 的 PassedAim 分支与 bulletFallObjType，两个落点各断言一次。
 func TestBulletPassedAimFallOnLandOrWater(t *testing.T) {
 	testCases := []struct {
 		name string

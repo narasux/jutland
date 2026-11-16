@@ -10,6 +10,11 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
+// TestSnapshotSeparatesSubmarines 验证潜艇不进水面编队与水面择敌，走独立潜艇通道。
+// 场景：己方 1 艘潜艇在 (5,5)、1 艘驱逐舰在 (6,5)，敌方 1 艘已下潜并被点亮的
+// 潜艇在 (10,5)、1 艘驱逐舰在 (11,5)，第 50 拍做快照。
+// 预期：own/ownSubs、enemy/enemySubs 各 1 条，subContacts 1 条且 live=true。
+// 覆盖：enemySub 调 MarkDetected(ComputerAlpha, 100)，断言四组长度与接触状态。
 func TestSnapshotSeparatesSubmarines(t *testing.T) {
 	ownSub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	ownDD := makeShip("dd", faction.ComputerAlpha, objUnit.ShipTypeDestroyer, 6, 5)
@@ -29,6 +34,11 @@ func TestSnapshotSeparatesSubmarines(t *testing.T) {
 	require.True(t, snap.subContacts[0].live)
 }
 
+// TestSubmarineAIDivesOnEnemyAndFires 验证 AI 潜艇在 16 格接敌圈内下潜并锁定目标。
+// 场景：潜艇 DiveState 默认 0（水面）在 (5,5)，鱼雷对潜射程 6 格，敌驱逐舰在
+// (15,5) 距离 10 格，落在 subEngageRadius 内、还在 0.9 倍鱼雷射程 5.4 格外。
+// 预期：下发 ShipDive，AttackTarget 设为最近的 enemy，并补一条压上的航路。
+// 覆盖：submarineInstructions 返回值断言含下潜指令键，并检查 sub.AttackTarget。
 func TestSubmarineAIDivesOnEnemyAndFires(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.Weapon.MaxToSubmergedRange = 6
@@ -44,6 +54,10 @@ func TestSubmarineAIDivesOnEnemyAndFires(t *testing.T) {
 	require.Equal(t, enemy.Uid, sub.AttackTarget, "应把最近敌舰设为攻击目标")
 }
 
+// TestSubmarineAIStaysSubmergedWhenNoEnemy 验证无敌情时 AI 潜艇维持水下且不空转。
+// 场景：潜艇已是 DiveStateSubmerged、带鱼雷，场上没有任何敌舰。
+// 预期：本拍不产生任何指令，尤其不能出现 ShipSurface；没有目标就原地待机。
+// 覆盖：snapshot 后调用 submarineInstructions，断言 out 为空且不含上浮指令键。
 func TestSubmarineAIStaysSubmergedWhenNoEnemy(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
@@ -59,7 +73,13 @@ func TestSubmarineAIStaysSubmergedWhenNoEnemy(t *testing.T) {
 		"无敌情时也应保持水下，不应为了赶路而上浮")
 }
 
-// AI 潜艇永远水下：远距离转场也不上浮，上浮只留给玩家手动操作。
+// TestSubmarineAIStaysSubmergedWhileApproaching 验证 AI 潜艇远距离转场时保持水下。
+// 场景：ComputerAlpha 潜艇下潜于 (5,5)，带鱼雷、对潜射程 6 格；敌驱逐舰在 (40,5)，
+// 相距 35 格，远在 subEngageRadius=16 格的接敌圈之外。
+// 预期：submarineInstructions 不产生 ShipSurface（AI 不为赶路上浮）也不产生
+// ShipDive（已在水下），但仍下发非空航路继续向敌舰靠拢。上浮只保留给玩家手动操作。
+// 覆盖：第 0 拍 snapshot 后调用 submarineInstructions，用 require.NotContains /
+// NotEmpty 检查 NameShipSurface、NameShipDive 与指令集。
 func TestSubmarineAIStaysSubmergedWhileApproaching(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
@@ -80,7 +100,12 @@ func TestSubmarineAIStaysSubmergedWhileApproaching(t *testing.T) {
 	require.NotEmpty(t, out, "应继续向敌舰靠拢")
 }
 
-// 被关卡配置成水面开局的 AI 潜艇，应当立刻回到水下。
+// TestSubmarineAIDivesWhenSurfacedWithDistantEnemy 验证水面开局的 AI 潜艇立即回到水下。
+// 场景：潜艇 DiveStateSurface 位于 (5,5)，带鱼雷；敌驱逐舰在 (26,5)，距离 21 格，
+// 仍在 16 格接敌圈之外，属于水下巡航阶段。
+// 预期：本拍出现 ShipDive，且不出现 ShipSurface；水面状态不能作为 AI 潜艇的转场姿态。
+// 覆盖：snapshot 后调用 submarineInstructions，断言 NameShipDive 存在、
+// NameShipSurface 缺席（下潜由 NextDiveState 触发）。
 func TestSubmarineAIDivesWhenSurfacedWithDistantEnemy(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSurface
@@ -98,7 +123,13 @@ func TestSubmarineAIDivesWhenSurfacedWithDistantEnemy(t *testing.T) {
 	require.NotContains(t, out, instr.GenInstrUid(instr.NameShipSurface, sub.Uid))
 }
 
-// 即使没有鱼雷、只能靠甲板炮，AI 潜艇也不上浮（甲板炮在水下不可用）。
+// TestSubmarineAIGunOnlyStaysSubmerged 验证只有甲板炮的 AI 潜艇也不上浮。
+// 场景：潜艇已下潜于 (5,5)，Weapon.HasMainGun=true、对舰射程 12 格；敌驱逐舰在
+// (15,5)，距离 10 格，已在甲板炮射程内。
+// 预期：submarineInstructions 不下发 ShipSurface——甲板炮在水下不可用，AI 潜艇
+// 不应为了开炮破坏隐蔽。
+// 覆盖：第 0 拍 snapshot 后调用 submarineInstructions，断言指令集不含
+// NameShipSurface 的 GenInstrUid。
 func TestSubmarineAIGunOnlyStaysSubmerged(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
@@ -115,6 +146,12 @@ func TestSubmarineAIGunOnlyStaysSubmerged(t *testing.T) {
 		"AI 潜艇永远保持水下，不为甲板炮上浮")
 }
 
+// TestSubmarineAIRetreatsWhenDetected 验证被点亮的潜艇放弃攻击、保持深度撤离。
+// 场景：潜艇在 (5,5) 已被 HumanAlpha 点亮到第 100 拍，敌驱逐舰在 (9,5) 距离 4 格，
+// 第 10 拍决策时 detected 分支优先于接敌分支。
+// 预期：下发一条背向敌舰 12 格的撤离航路，AttackTarget 保持为空；
+// 仍在攻击说明潜艇会顶着声呐继续咬人。
+// 覆盖：MarkDetected 后 snapshot，断言指令非空且 AttackTarget 为空。
 func TestSubmarineAIRetreatsWhenDetected(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
@@ -130,6 +167,12 @@ func TestSubmarineAIRetreatsWhenDetected(t *testing.T) {
 	require.Empty(t, sub.AttackTarget, "撤离时不再咬住目标")
 }
 
+// TestASWHunterLeavesFleetAndChasesContact 验证反潜舰离开水面编队专职追击接触。
+// 场景：带深弹的驱逐舰 dd 在 (0,0)，8 格外有 1 艘被点亮到第 1000 拍的敌潜艇，
+// 第 10 拍先挑猎手再下发反潜航路。
+// 预期：selectASWHunters 选中 dd；aswInstructions 产出非空航路，并把
+// dd.AttackTarget 设为敌潜艇 uid。失败意味着反潜舰会留在编队里不响应接触。
+// 覆盖：Weapon.HasAntiSubWeapon=true，used 传空表，断言 hunters 与指令集。
 func TestASWHunterLeavesFleetAndChasesContact(t *testing.T) {
 	dd := makeShip("dd", faction.ComputerAlpha, objUnit.ShipTypeDestroyer, 0, 0)
 	dd.Weapon.HasAntiSubWeapon = true
@@ -150,6 +193,11 @@ func TestASWHunterLeavesFleetAndChasesContact(t *testing.T) {
 	require.Equal(t, enemySub.Uid, dd.AttackTarget)
 }
 
+// TestASWEngageDistanceFollowsWeaponRange 验证反潜贴近距离随自身反潜射程缩放。
+// 场景：对潜射程 2 格、对潜射程 8 格、未配置射程三种舰体。
+// 预期：aswEngageDistance 依次为 1.2、4.8、aswFallbackEngageRange=4.0；
+// 固定值会让 2 格深弹架永远停在射程外。
+// 覆盖：直接构造 BattleShip 只设 Weapon.MaxToSubmergedRange，用 InDelta 比较。
 func TestASWEngageDistanceFollowsWeaponRange(t *testing.T) {
 	rackShip := &objUnit.BattleShip{}
 	rackShip.Weapon.MaxToSubmergedRange = 2
@@ -163,7 +211,14 @@ func TestASWEngageDistanceFollowsWeaponRange(t *testing.T) {
 	require.InDelta(t, aswFallbackEngageRange, aswEngageDistance(noWeapon), 1e-9)
 }
 
-// 深弹架只有 2 格：接触在 4 格时反潜舰必须继续压上，不能停在旧的距离上。
+// TestASWHunterKeepsClosingWhenContactOutsideWeaponRange 验证 2 格深弹架的反潜舰继续压上。
+// 场景：HumanAlpha 潜艇在 (4,0) 下潜并被点亮到第 1000 拍；ComputerAlpha 驱逐舰 dd
+// 在 (0,0) 带反潜武器，MaxToSubmergedRange=2，aswEngageDistance 只有
+// max(1.0, 2*0.6)=1.2 格。
+// 预期：接触在 4 格外时 aswInstructions 必须下发航路继续接近；若沿用固定 4 格
+// 贴近距离，深弹架会永远停在射程外。
+// 覆盖：第 10 拍 snapshot，手动把 handler.asw 设为 {dd:true}，断言 aswInstructions
+// 返回非空；失败信息对应“停在旧距离”的回归。
 func TestASWHunterKeepsClosingWhenContactOutsideWeaponRange(t *testing.T) {
 	sub := makeShip("esub", faction.HumanAlpha, objUnit.ShipTypeSubmarine, 4, 0)
 	sub.DiveState = objUnit.DiveStateSubmerged
@@ -184,6 +239,11 @@ func TestASWHunterKeepsClosingWhenContactOutsideWeaponRange(t *testing.T) {
 	}
 }
 
+// TestSubmarineAIGunOnlyStaysSubmergedOutOfGunRange 验证只有甲板炮的潜艇在射程外不上浮。
+// 场景：潜艇已下潜、带主炮，对舰射程 5 格；敌驱逐舰在 (15,5) 距离 10 格，
+// 既在 16 格接敌圈内又在炮口 4.5 格之外。
+// 预期：潜艇继续水下压上，但不得出现 ShipSurface——水下开不了甲板炮。
+// 覆盖：snapshot 后调用 submarineInstructions，断言不含上浮指令键。
 func TestSubmarineAIGunOnlyStaysSubmergedOutOfGunRange(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSubmerged
@@ -200,6 +260,10 @@ func TestSubmarineAIGunOnlyStaysSubmergedOutOfGunRange(t *testing.T) {
 		"还没进甲板炮射程时不应上浮")
 }
 
+// TestSubmarineAIDivesWhenSurfacedEvenWithoutEnemy 验证水面开局的 AI 潜艇立即回到水下。
+// 场景：潜艇被关卡配成 DiveStateSurface、带鱼雷，场上没有任何敌舰可打。
+// 预期：本拍下发 ShipDive，且不含 ShipSurface；无敌情不该成为停在水面的理由。
+// 覆盖：snapshot 后调用 submarineInstructions，断言下潜键存在、上浮键缺席。
 func TestSubmarineAIDivesWhenSurfacedEvenWithoutEnemy(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	sub.DiveState = objUnit.DiveStateSurface

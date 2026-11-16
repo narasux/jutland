@@ -116,8 +116,10 @@ func describeBullets(bullets []*objBullet.Bullet) string {
 	return strings.Join(parts, "; ")
 }
 
-// 开火目标分层：主炮 / 鱼雷集火「舰种价值高且血量比例低」的敌舰，
-// 副炮打最近的敌舰，防空炮打最近的敌机，三类武器不再共用一个随机目标。
+// TestShipFireTargetsLayerByWeaponClass 验证开火目标按武器类别分层，不再共用一个随机目标。
+// 场景：测试舰在 (50,50) 带 200mm 主炮/副炮与 40mm 防空炮各一门、射程 30；敌舰为满血战列舰 big（评分 0）、残血巡洋舰 hurt（0.6×0.9=0.54）、满血驱逐舰 near（最近），另有敌机在 (52,50)，跑一帧 updateShipWeaponFire。
+// 预期：主炮 1 发 200mm 打 hurt，副炮 1 发 200mm 打 near，防空炮 1 发 40mm 打敌机；big 不被任何炮选中。
+// 覆盖：shipFireTargets 的 primaryTargetScore/betterPrimaryTarget 集火评分、副炮最近敌舰、防空炮最近敌机三层择敌。
 func TestShipFireTargetsLayerByWeaponClass(t *testing.T) {
 	registerFireLayerBullets(t)
 	shooter := newFireLayerShooter()
@@ -148,8 +150,10 @@ func TestShipFireTargetsLayerByWeaponClass(t *testing.T) {
 	}
 }
 
-// 明确 AttackTarget 指令优先：主 / 副炮都打点名的目标，
-// 即使别的敌舰评分更高、离得更近。
+// TestShipFireTargetsRespectExplicitAttackTarget 验证明确 AttackTarget 指令优先于评分与距离。
+// 场景：测试舰 AttackTarget="big"，场上仍有评分更高的残血巡洋舰 hurt 与更近的驱逐舰 near，跑一帧开火。
+// 预期：主炮与副炮各 1 发 200mm 全部打 big（共 2 发）；hurt 与 near 均无弹药瞄准。
+// 覆盖：shipFireTargets 对有效 AttackTarget 的优先采用，覆盖 betterPrimaryTarget 与最近目标规则。
 func TestShipFireTargetsRespectExplicitAttackTarget(t *testing.T) {
 	registerFireLayerBullets(t)
 	shooter := newFireLayerShooter()
@@ -174,7 +178,10 @@ func TestShipFireTargetsRespectExplicitAttackTarget(t *testing.T) {
 	}
 }
 
-// 高平两用炮跨类别回退：没有敌舰时主炮转打敌机，防空能力不丢。
+// TestShipFireFallsBackToAirTargetsWithoutShips 验证高平两用炮在无敌舰时跨类别回退打敌机，防空能力不丢。
+// 场景：测试舰主/副炮/防空炮均为 antiShip+antiAircraft，场上只有一架敌机在 (52,50)，跑一帧 updateShipWeaponFire。
+// 预期：主炮与副炮各 1 发 200mm 打敌机（共 2 发），防空炮 1 发 40mm 也打敌机。
+// 覆盖：BattleShip.FireAt 中 Primary/Secondary 为空时回退到 AntiAircraft 的高平两用逻辑。
 func TestShipFireFallsBackToAirTargetsWithoutShips(t *testing.T) {
 	registerFireLayerBullets(t)
 	shooter := newFireLayerShooter()
@@ -198,7 +205,10 @@ func TestShipFireFallsBackToAirTargetsWithoutShips(t *testing.T) {
 	}
 }
 
-// 高平两用炮反向回退：没有敌机时防空炮加打敌舰，不空转。
+// TestShipFireFallsBackToSurfaceTargetsWithoutPlanes 验证无敌机时防空炮反向回退打敌舰，不空转。
+// 场景：测试舰在 (50,50)，唯一敌舰驱逐舰在 (60,50)，场上无飞机，跑一帧开火。
+// 预期：防空炮 1 发 40mm 瞄准敌舰。
+// 覆盖：BattleShip.FireAt 中 AntiAircraft 为空时回退到 Primary（主/副炮目标）的分支。
 func TestShipFireFallsBackToSurfaceTargetsWithoutPlanes(t *testing.T) {
 	registerFireLayerBullets(t)
 	shooter := newFireLayerShooter()

@@ -28,6 +28,11 @@ func useDefaultSettings(t *testing.T) {
 	t.Cleanup(func() { config.G = oldSettings })
 }
 
+// TestCarrierFlightPhasePoints 验证航母起飞/着舰关键点相对舰体的坐标换算。
+// 场景：甲板中部直跑、舷侧弹射、舰体旋转 90° 三种配置；坐标换算错误会让飞机出生在舰体外面。
+// 预期：直跑起点/终点、带 lateral/LaunchAngle 的终点、着舰点/最终进近起点都符合公式；
+// 旋转 90° 后沿 +X 前移。
+// 覆盖：用 takeoffStartPos/takeoffRunPos/takeoffLandingPos/landingFinalStartOffset 逐点断言。
 func TestCarrierFlightPhasePoints(t *testing.T) {
 	ship := &BattleShip{
 		Length:      256,
@@ -68,6 +73,11 @@ func TestCarrierFlightPhasePoints(t *testing.T) {
 	requireClose(t, takeoffStartPos(ship, point).RY, 10)
 }
 
+// TestTakeoffUsesSmoothMonotonicAcceleration 验证起飞速度/视觉缩放单调不减，且首帧不突跳。
+// 场景：飞机从静止开始滑跑，玩家期望平滑加速到 MaxSpeed 并在离舰时恢复到 1x 视觉缩放。
+// 预期：速度/缩放不下降；首帧速度增量不超过 MaxSpeed*1%；100..150 帧内进入 Cruising；
+// 结束时速度=MaxSpeed、缩放=1。
+// 覆盖：每帧 UpdateTakeoff 记录速度/缩放/帧数，循环到 Cruising。
 func TestTakeoffUsesSmoothMonotonicAcceleration(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -119,6 +129,11 @@ func TestTakeoffUsesSmoothMonotonicAcceleration(t *testing.T) {
 	requireClose(t, plane.VisualScaleMultiplier(), 1)
 }
 
+// TestTakeoffRunStaysOnDeckWhileCarrierTurns 验证航母满舵转向时滑跑段仍锁定甲板弹射线，离舰速度/航向连续。
+// 场景：航母每帧 0.8° 转向，飞机从甲板中部滑跑并带 15° 弹射偏角；若按世界坐标滑跑会滑出甲板。
+// 预期：滑跑段位置/航向与 takeoffRunPos 一致；离舰速度相对末帧跳变不超过 0.03；
+// 单帧转角不超过 RotateSpeed；最终进入 Cruising。
+// 覆盖：每帧 moveTestCarrier 后 UpdateTakeoff，逐帧断言滑跑坐标/速度/转角，记录离舰帧。
 func TestTakeoffRunStaysOnDeckWhileCarrierTurns(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
