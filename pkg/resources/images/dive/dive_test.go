@@ -7,8 +7,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// 水面与上浮的绿色图标、水下青色图标和过渡金色覆盖层都必须在启动期加载成功，
-// 且尺寸与武器图标档位一致。
+// TestGetAllStatesAndZooms 验证潜艇深度图标的三种配色与三档缩放都能在启动期加载。
+// 场景：绿色 Get 覆盖 Surface/Surfacing，青色 GetUnderwater 覆盖 Diving/Submerged，金色 GetTransition 覆盖 Diving/Surfacing；每档缩放 1/2/4 对应 16/32/64px，与武器图标档位一致。
+// 预期：每个状态×缩放都返回非 nil，且图像边长严格等于 16×zoom；失败意味着 128px 源图缺失或 genZoomImages 的逐级减半被破坏。
+// 覆盖：三组 getter 表驱动遍历各自状态和 []int{1,2,4}，同时断言行宽与行高。
 func TestGetAllStatesAndZooms(t *testing.T) {
 	getters := []struct {
 		name   string

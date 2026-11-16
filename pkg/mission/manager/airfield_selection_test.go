@@ -8,8 +8,10 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
-// 点击命中判定：跑道又细又长，命中区域应为沿跑道轴的胶囊体，
-// 端头外 1 格、横向半宽外加余量。
+// TestHitAirfieldRunway 验证机场点击命中沿跑道轴 9.5 格、横向 1.2 格的判定边界。
+// 场景：复刻福特岛机场中心 (55,63)、朝向 45°、跑道 17×0.8 格，沿跑道轴与横向分别采样中心、前后端、侧偏和端外点。
+// 预期：中心与前后端命中；横向 1.1 格命中、1.5 格脱靶；沿轴 9.5 格（半长 8.5 再外扩 1）仍命中，11 格脱靶。
+// 覆盖：hitAirfieldRunway 的 along 投影（halfLength+1=9.5）与 perp 距离（max(0.4+0.8,1.2)=1.2）两条边界。
 func TestHitAirfieldRunway(t *testing.T) {
 	// 与珍珠港福特岛机场一致：中心 (55,63)，朝向 45°，跑道 17 x 0.8 格
 	af := objBuilding.NewAirfield(

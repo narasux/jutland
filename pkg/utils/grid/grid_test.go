@@ -5,7 +5,10 @@ import (
 	"testing"
 )
 
-// 对角移动要求两个正交邻格均可通行：贴着墙角不允许斜穿。
+// TestDiagonalNeighborsRequireBothOrthogonalOpen 验证对角移动要求两个正交邻格都开放，不能贴墙角斜穿。
+// 场景：3x3 网格上下正中是墙，中心格只剩左右直行；若允许斜穿，单位会切过墙的角。
+// 预期：中心格的邻居只有 (0,1)/(2,1)，四个对角邻居都被挡住。
+// 覆盖：构造 W 在 (1,0)/(1,2) 的网格，调用 getNeighbors 并逐点比较。
 func TestDiagonalNeighborsRequireBothOrthogonalOpen(t *testing.T) {
 	cells := make(Cells, 3)
 	for y := range cells {
@@ -33,8 +36,10 @@ func TestDiagonalNeighborsRequireBothOrthogonalOpen(t *testing.T) {
 	}
 }
 
-// 线段校验：擦过墙格的线段算受阻；合并出的直线段还必须留出一格余量，
-// 否则舰体偏离航线半个格（转向弧线、被拦停后重新起步）就会切进陆格。
+// TestSegmentBlockedKeepsOneCellClearance 验证线段校验会拦下擦墙线段，并保留一格余量。
+// 场景：舰体沿合并后的航点直线行驶，转向弧线/被拦停重启会偏离半个格；若只按格心判碰撞，会切进陆格。
+// 预期：擦过墙格 (2,2) 的线段受阻；离墙一格受阻；离墙两格以上放行。
+// 覆盖：5x6 网格放一堵墙，三组线段调用 segmentBlocked 断言。
 func TestSegmentBlockedKeepsOneCellClearance(t *testing.T) {
 	cells := make(Cells, 5)
 	for y := range cells {
@@ -55,6 +60,11 @@ func TestSegmentBlockedKeepsOneCellClearance(t *testing.T) {
 	}
 }
 
+// TestSearchLeavesShallowCellsUntouched 验证寻路不会改写网格里的浅海标记，重复搜索结果稳定。
+// 场景：5×8 网格仅 (3,2) 为浅海 SD，起点 (1,2)、终点 (6,2) 的直路正好经过它。
+// 预期：两次 Search 后 cells[2][3] 仍为 SD；两条合并路径非空且逐点一致；
+// 失败表示寻路污染地图数据（SD 被覆盖后浅海代价失效），或池化工作区残留导致结果漂移。
+// 覆盖：构造 5 行 × 8 列 Cells，设置 SD 后连续两次 Search(Point{1,2}, Point{6,2})，先比长度再逐点比。
 func TestSearchLeavesShallowCellsUntouched(t *testing.T) {
 	cells := make(Cells, 5)
 	for y := range cells {
@@ -81,11 +91,11 @@ func TestSearchLeavesShallowCellsUntouched(t *testing.T) {
 	}
 }
 
-// 堆开集与线性扫描参照实现的对照。
-// 网格 A* 的最优原始路径几乎总是平局（开放区任意单调楼梯代价相同），
-// 两种实现在平局里可以合法地选出不同的等代价航线，所以对照的是代价而非逐点路径。
-// 下半区加罚让最优代价唯一（绕下 18、绕上 8）：堆的弹出次序若出错选中下路，
-// 代价立刻对不上，测试照样能抓住。
+// TestHeapMatchesLinearOpenSet 验证堆开集 A* 与线性扫描参照实现给出相同最优代价。
+// 场景：开放区存在大量等代价平局，逐点路径可以不同，但最低代价必须一致；
+// 下半区加罚让最优路径唯一，堆弹出次序错误会立刻暴露。
+// 预期：两条路径非空，且 pathCost 都等于 8；若选中被罚的下路，代价会变成 18+。
+// 覆盖：6x8 网格放两堵墙、下半区加 10 代价，分别跑 Search 与 searchLinear，比较路径代价。
 func TestHeapMatchesLinearOpenSet(t *testing.T) {
 	cells := make(Cells, 6)
 	for y := range cells {
@@ -218,7 +228,10 @@ func touchedCells(path []Point, start Point) map[Point]bool {
 	return touched
 }
 
-// 额外代价是软约束：缩放它只改变航线选择，不会让原本可达的目标变得不可达。
+// TestSearchWithCostScaleSwitchesGap 验证额外代价缩放只改变航线选择，不会让可达目标不可达。
+// 场景：x=3 的墙只有 y=2（高代价 20）与 y=7（免费）两个缺口；缩放系数应让寻路在直路/绕路之间切换。
+// 预期：0.1 倍走 (3,2)；2 倍绕 (3,7)；100 倍仍能返回非空路径。
+// 覆盖：构造 9x7 网格与代价表，调用 SearchWithCostScale 三次，用 touchedCells 判断经过的缺口。
 func TestSearchWithCostScaleSwitchesGap(t *testing.T) {
 	cells := make(Cells, 9)
 	for y := range cells {
@@ -253,7 +266,10 @@ func TestSearchWithCostScaleSwitchesGap(t *testing.T) {
 	}
 }
 
-// 额外代价长度与网格不符时忽略，寻路退回只按距离计算。
+// TestSetExtraCostIgnoresMismatchedLength 验证代价表长度与网格不符时被忽略，寻路仍按距离工作。
+// 场景：配置/调用方传入错误长度的 ExtraCost（例如只给 3 个格）；若直接索引会越界或污染代价。
+// 预期：SetExtraCost 后 Search 仍返回非空路径。
+// 覆盖：4x4 空网格设置长度 3 的代价表，调用 Search(0,0)->(3,3) 断言路径非空。
 func TestSetExtraCostIgnoresMismatchedLength(t *testing.T) {
 	cells := make(Cells, 4)
 	for y := range cells {

@@ -8,8 +8,12 @@ import (
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 )
 
-// 舰对空破片毁伤：非暴击单发伤害有上限（约六成血量），一发大威力的 127mm
-// 舰炮弹（伤害 300）经减伤后仍达 150，也不应直接击落满血 B-17G（115 HP）。
+// TestPlaneHurtByShipShellSurvivesSingleHit 验证舰对空破片毁伤对非暴击单发有“六成血量”上限。
+// 场景：满血 B-17G（TotalHP=115、DamageReduction=0.5）挨一发大威力的 127mm 舰炮弹
+// （Damage=300、CriticalRate=0 即非暴击、ShooterObjType=TypeShip）；
+// 若无上限，300×(1-0.5)=150 会直接击落 115 HP 的重型轰炸机。
+// 预期：实扣 min(150, 115×0.6)=69，CurHP=46 > 0，单发不致命。
+// 覆盖：构造 B-17G 调用 HurtBy，断言未归零且 115-CurHP 精确等于 115×0.6。
 func TestPlaneHurtByShipShellSurvivesSingleHit(t *testing.T) {
 	b17 := &Plane{TotalHP: 115, CurHP: 115, DamageReduction: 0.5}
 	shell := &objBullet.Bullet{
@@ -28,7 +32,11 @@ func TestPlaneHurtByShipShellSurvivesSingleHit(t *testing.T) {
 	}
 }
 
-// 暴击代表直击要害（油箱/弹药舱），不受破片上限约束，可以直接击落。
+// TestPlaneHurtByShipShellCritBypassesCap 验证暴击不受舰对空破片上限约束，可以直接击落。
+// 场景：满血 B-17G（115 HP、减伤 0.5）挨 120 伤害舰炮弹，CriticalRate=1；
+// rand.Float64() 必然小于 0.1，触发 10 倍暴击，代表直击要害（油箱/弹药舱）。
+// 预期：暴击伤害 120×(1-0.5)×10=600，远超 115 HP，CurHP 归零。
+// 覆盖：构造必暴击弹调用 HurtBy，断言 CurHP==0。
 func TestPlaneHurtByShipShellCritBypassesCap(t *testing.T) {
 	b17 := &Plane{TotalHP: 115, CurHP: 115, DamageReduction: 0.5}
 	// CriticalRate 1 -> rand.Float64() 必然小于 0.1，必定触发 10 倍暴击
@@ -44,7 +52,12 @@ func TestPlaneHurtByShipShellCritBypassesCap(t *testing.T) {
 	}
 }
 
-// 空对空（战斗机/自卫机枪对空）伤害仍按 3 倍结算，不受舰对空破片上限影响。
+// TestPlaneHurtByAircraftBulletKeepsTripleDamage 验证空对空（战斗机/自卫机枪对空）伤害仍按 3 倍结算，
+// 不受舰对空破片上限影响。
+// 场景：满血 B-17G（115 HP、减伤 0.5）吃空对空机枪弹：Damage=0.25、CriticalRate=0、
+// ShooterObjType=TypePlane 且 TargetObjType=TypePlane；若误用舰对空分支，伤害会被 0.6 上限截断。
+// 预期：实扣 0.25×(1-0.5)×3=0.375，CurHP=114.625。
+// 覆盖：构造飞机对飞机弹药调用 HurtBy，断言 115-CurHP 精确等于 0.375。
 func TestPlaneHurtByAircraftBulletKeepsTripleDamage(t *testing.T) {
 	b17 := &Plane{TotalHP: 115, CurHP: 115, DamageReduction: 0.5}
 	bullet := &objBullet.Bullet{

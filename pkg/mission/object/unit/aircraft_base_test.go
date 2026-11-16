@@ -29,6 +29,11 @@ func (b *staticBase) BaseSpeed() float64               { return 0 }
 func (b *staticBase) BaseBelongPlayer() faction.Player { return faction.HumanAlpha }
 func (b *staticBase) BaseAircraft() *ShipAircraft      { return &b.aircraft }
 
+// TestIsBaseMissing 验证 nil 接口、nil 具体指针和有效基地三种判空语义。
+// 场景：飞机返航时母舰可能已被击沉，FindAircraftBase 返回的 AircraftBase 可能是 nil 接口，
+// 也可能是装进接口的 (*BattleShip)(nil)；直接 base == nil 会漏掉后者。
+// 预期：nil 接口和 nil 指针都返回 true，有效舰船返回 false。
+// 覆盖：分别传入 nil、(*BattleShip)(nil)、&BattleShip{...} 调用 isBaseMissing。
 func TestIsBaseMissing(t *testing.T) {
 	if !isBaseMissing(nil) {
 		t.Fatal("nil interface should be missing")
@@ -42,6 +47,10 @@ func TestIsBaseMissing(t *testing.T) {
 	}
 }
 
+// TestTakeoffFromStaticBase 验证陆地机场（静态基地）的起飞几何与航母共用一套契约。
+// 场景：机场跑道沿正北、起飞点 Forward=1；飞机应在跑道后端出生，滑跑后越过跑道前端爬升。
+// 预期：起飞点位于基地中心以南 3 格、航向 0；2000 帧内进入 Cruising、越过 y<47、速度为正。
+// 覆盖：用 staticBase 模拟机场，StartTakeoff 后断言出生点/航向/阶段，再循环 UpdateTakeoff。
 func TestTakeoffFromStaticBase(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -97,6 +106,10 @@ func TestTakeoffFromStaticBase(t *testing.T) {
 	}
 }
 
+// TestStaticBaseLandingGeometry 验证静态基地的着舰回收点/最终进近起点与航母几何一致。
+// 场景：机场跑道 Forward=0.5、ApproachLength=3；回收点应在跑道中点，进近起点在后方 3 个封顶基准长。
+// 预期：回收点 (50,50)，进近起点 y=62（基准长封顶 4 格 × 3）。
+// 覆盖：解析机场甲板后调用 carrierLandingDeckEndPos/landingFinalStartPos，断言坐标。
 func TestStaticBaseLandingGeometry(t *testing.T) {
 	// 静态基地的着陆几何应与航母一致：回收点在跑道中点，进近段起点在其后方
 	base := &staticBase{
@@ -127,8 +140,15 @@ func TestStaticBaseLandingGeometry(t *testing.T) {
 	}
 }
 
-// TestLongRunwayPhaseGeometryStaysNearBase 回归：超长跑道（陆地机场）的起飞滑跑
-// 与进近待场结构必须按封顶基准缩放，待场/进近点不得被放大到基地远端之外。
+// TestLongRunwayPhaseGeometryStaysNearBase 验证超长跑道（陆地机场）的起飞滑跑与进近待场结构
+// 按封顶基准缩放，待场/进近点不得被放大到基地远端之外。
+// 场景：与珍珠港关卡一致的 17 格跑道，机场中心 (55,63)、rotation 45，起飞点 Forward=1/RunLength=1、
+// 着舰 ApproachLength=3；若用跑道全长当基准，滑跑与待场/进近会被推到基地几十格之外。
+// 预期：起飞点仍在真实跑道端头（中心后方 8.5 格 → (48.99, 69.01)）；
+// takeoffRunLength 封顶为 maxPhaseUnitLength=4 格；500 帧内进入 Cruising；
+// 待场入口 landingGateLocalOffset(0) 与 landingFinalStartPos 距基地中心均 ≤ 30 格（5.5/3 个封顶基准长）。
+// 覆盖：注册 F 模板，构造 staticBase + LongRunwayDeck，StartTakeoff 断言位置/滑跑长度，
+// 循环 UpdateTakeoff 后断言阶段，再检查待场门与最终进近起点距离。
 func TestLongRunwayPhaseGeometryStaysNearBase(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

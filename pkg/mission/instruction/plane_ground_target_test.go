@@ -11,8 +11,15 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-// 轰炸机锁定的地面目标一旦升空（滑行结束起飞），指令应立即终止：
-// 炸弹无法攻击空中目标，持续追踪只会绕着机场空转。
+// TestPlaneAttackDisengagesWhenGroundTargetTakesOff 验证轰炸机锁定目标升空后立即脱离。
+// 场景：配置默认设置，注册 test-disengage-bomb 炸弹；SBD-3 俯冲轰炸机（巡航阶段，
+// 1 枚射程 1.5 / 弹速 0.4 的炸弹）锁定 FlightPhase=TakingOff 的敌机
+// ground-target-1，调用 NewPlaneAttack(bomber, object.TypePlane, target) 后执行一次。
+// 预期：指令马上 Executed，目标机不能继续被追着绕机场；炸弹无法攻击空中目标，
+// 应由调度重新分配或触发返航。
+// 覆盖：直接 Exec 后断言 i.Executed()。注意：本用例的目标仍在 TakingOff
+// （IsOnGround=true），且轰炸机未设 RemainRange（为 0），MustReturn() 会先结束
+// 指令，因此“目标真正升空即脱离”的分支实际未被覆盖，属于用例待补强点。
 func TestPlaneAttackDisengagesWhenGroundTargetTakesOff(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

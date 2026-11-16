@@ -11,6 +11,10 @@ import (
 // testRegion 是输入测试使用的滚动视口（原点为 0,0，局部坐标与屏幕坐标一致）。
 var testRegion = Rect{X: 0, Y: 0, W: 280, H: 480}
 
+// TestDefaultTabFollowsFocusedShipType 验证焦点舰切换时默认页签跟随舰种：航母进航空页，其余进武器页。
+// 场景：玩家先选航母看舰载机，再切到战列舰；不同舰种常用操作不同，需要自动切页。
+// 预期：航母焦点时 tab=TabAircraft，换战列舰后 tab=TabWeapons；失败意味着页签停在上一舰种。
+// 覆盖：两舰放入 Arena，先选 carrier 调 updateWithPointer 断言 tab，再改 Selected/Focused 为 battleship。
 func TestDefaultTabFollowsFocusedShipType(t *testing.T) {
 	missionState := panelInteractionState()
 	carrier := &objUnit.BattleShip{Uid: "carrier", CurHP: 1, Type: objUnit.ShipTypeAircraftCarrier}
@@ -32,6 +36,10 @@ func TestDefaultTabFollowsFocusedShipType(t *testing.T) {
 	}
 }
 
+// TestTargetButtonProducesExplicitCenterActionWithoutChangingFocus 验证「→」按钮只发一次居中且不改焦点舰。
+// 场景：焦点舰有攻击目标，信息卡「目标」行出现居中按钮；玩家点它把镜头移到目标，但选中仍应留在本舰。
+// 预期：actions 仅 1 条且 Kind=ActionCenterTarget、TargetUid=target，焦点仍为 ship；失败意味着焦点被切走。
+// 覆盖：panelInteractionState 加 ship（AttackTarget=target）与 target，取 targetButtonRect 中心 JustPressed。
 func TestTargetButtonProducesExplicitCenterActionWithoutChangingFocus(t *testing.T) {
 	missionState := panelInteractionState()
 	ship := &objUnit.BattleShip{Uid: "ship", CurHP: 1, AttackTarget: "target"}
@@ -55,6 +63,10 @@ func TestTargetButtonProducesExplicitCenterActionWithoutChangingFocus(t *testing
 	}
 }
 
+// TestAircraftActionIgnoresShipsWithoutAircraft 验证舰载机批量动作只收集 HasPlane 的舰，有禁用时转为允许。
+// 场景：编队里航母起飞被关闭、护航驱逐没有飞机；玩家点航空总开关，不能给无飞机舰发指令。
+// 预期：Enable=true，ShipUids 仅 [carrier]；失败意味着动作下发到无飞机舰或开关方向反了。
+// 覆盖：panelTestState(carrier,escort)，New().aircraftAction(ms)，断言 Enable、长度与首个 UID。
 func TestAircraftActionIgnoresShipsWithoutAircraft(t *testing.T) {
 	carrier := &objUnit.BattleShip{
 		Uid:      "carrier",
@@ -77,6 +89,10 @@ func panelInteractionState() *state.MissionState {
 	}
 }
 
+// TestSubmarineDiveButtonProducesToggleAction 验证潜艇「下潜/上浮」按钮命中后产生单个 ActionToggleDive。
+// 场景：选中一艘水面潜艇，信息区「潜航状态」行右侧出现按钮；点击应请求切换潜航状态。
+// 预期：按钮宽>0；actions 长度 1、Kind=ActionToggleDive、ShipUids=[sub]；失败意味着按钮为空或动作未带目标。
+// 覆盖：panelInteractionState 放入潜艇并聚焦，updateWithPointer 后取 computeDiveRect 中心点击并断言动作。
 func TestSubmarineDiveButtonProducesToggleAction(t *testing.T) {
 	missionState := panelInteractionState()
 	sub := &objUnit.BattleShip{
@@ -105,7 +121,10 @@ func TestSubmarineDiveButtonProducesToggleAction(t *testing.T) {
 	}
 }
 
-// 下潜/上浮过渡中按钮仍然可点：以最后一次指令为准，随时反向。
+// TestSubmarineDiveButtonWorksDuringTransition 验证潜航过渡中「下潜/上浮」按钮仍可点，以最后一次指令为准。
+// 场景：潜艇 sub 处于 DiveStateDiving，选中并聚焦；NextDiveState 对 Diving 返回 Surface，面板仍应注册 hitDiveToggle。
+// 预期：computeDiveRect 宽>0（过渡中不禁用按钮）；点击按钮中心只产生 1 条 ActionToggleDive；失败意味着过渡期间按钮消失或点击被吞。
+// 覆盖：panelInteractionState + sub（Diving），testRegion(0,0,280,480) 下 updateWithPointer，取 computeDiveRect 中心 JustPressed 点击并断言动作。
 func TestSubmarineDiveButtonWorksDuringTransition(t *testing.T) {
 	missionState := panelInteractionState()
 	sub := &objUnit.BattleShip{

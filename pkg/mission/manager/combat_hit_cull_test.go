@@ -13,6 +13,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+// TestDirectShellHitsCornerBeyondHalfLength 验证炮弹擦过舷侧角点时不能按半舰长提前剔除。
+// 场景：256×256 像素靶舰中心在 (10,10)，炮弹从 (10.99,10.99) 以 135°、速度 1 飞出，到舰心约 2.4 格。
+// 预期：距离超过半长 1 格加弹速 1 格，但小于对角线半径 1.414 加弹速；应命中并扣 10 HP。
+// 覆盖：先断言样本在半长外、对角线内，再跑 updateShotBullets，断言 CurHP=90 且命中类型为舰。
 func TestDirectShellHitsCornerBeyondHalfLength(t *testing.T) {
 	const (
 		speed    = 1.0
@@ -70,6 +74,10 @@ func TestDirectShellHitsCornerBeyondHalfLength(t *testing.T) {
 	}
 }
 
+// TestDirectShellIgnoresShipOutsideItsBuckets 验证空间桶粗筛不会误伤查询范围外的舰船。
+// 场景：炮弹在 (10.99,10.99)，近舰 (10,10)、远舰 (80,10)，同为 256×256；桶查询半径只有 1+3 格。
+// 预期：近舰沿 135° 弹道被命中剩 90 HP，远舰即使舰体朝向相同也保持 100 HP。
+// 覆盖：MissionState 同时放入 target/far 两舰与一发炮弹，断言双方 CurHP，证明远舰未进入桶查询。
 func TestDirectShellIgnoresShipOutsideItsBuckets(t *testing.T) {
 	const (
 		speed    = 1.0
@@ -126,6 +134,10 @@ func TestDirectShellIgnoresShipOutsideItsBuckets(t *testing.T) {
 	}
 }
 
+// TestDirectShellSkipsDistantShip 验证相距过远的炮弹不会命中舰船且继续留作飞行中弹药。
+// 场景：靶舰在 (10,10)，炮弹在 (50,50)、速度 1、寿命 10，两者相距约 56.6 格。
+// 预期：target 保持 100 HP，bullet.HitObjType 仍为 TypeNone，ForwardingBullets 仍保留这 1 发。
+// 覆盖：newShellImpactManager 只放入靶舰与炮弹，跑一拍 updateShotBullets 后断言 HP、命中类型与队列长度。
 func TestDirectShellSkipsDistantShip(t *testing.T) {
 	target := &objUnit.BattleShip{
 		Uid:          "target",

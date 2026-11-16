@@ -10,7 +10,10 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
-// 命中闪光按口径分三档，尺寸随口径单调增大。
+// TestHitEffectTiersByCaliber 验证命中闪光按 ≤40mm / 41–155mm / >155mm 三档分档，尺寸与持续帧数随口径单调增大。
+// 场景：分别用 20mm、127mm、460mm 三档炮弹命中舰体调用 hitEffect，并比较三档返回的 scale。
+// 预期：三档都返回 KindFlash；持续帧数分别为 smallHitLife=20、mediumHitLife=26、heavyHitLife=32，scale>0 且小<中<大。
+// 覆盖：hitEffectTier 的 40/155mm 分档边界、hitEffectCells / hitEffectLives 查表与舰体分支。
 func TestHitEffectTiersByCaliber(t *testing.T) {
 	testCases := []struct {
 		name     string
@@ -59,7 +62,10 @@ func TestHitEffectTiersByCaliber(t *testing.T) {
 	}
 }
 
-// 落水出水花、落陆出尘土，尺寸随口径增大；小口径防空弹两者都不生成。
+// TestHitEffectOnWaterAndLand 验证落水出水花、落陆出尘土，尺寸随口径增大，小口径防空弹两者都不生成。
+// 场景：20/127/460mm 炮弹分别打在 TypeWater 与 TypeLand 上调用 hitEffect；另比较 127mm 与 460mm 的水花尺寸。
+// 预期：20mm 落水、落陆均 ok=false；127/460mm 落水为 KindSplash、落陆为 KindDust，scale/life 为正，且 127mm 水花小于 460mm。
+// 覆盖：hitEffect 的 TypeWater/TypeLand 分支、小口径档 tier==0 不生成、splashCells / dustCells 与 60 tick 的 splashLives / dustLives 查表。
 func TestHitEffectOnWaterAndLand(t *testing.T) {
 	testCases := []struct {
 		name       string
@@ -124,7 +130,10 @@ func TestHitEffectOnWaterAndLand(t *testing.T) {
 	}
 }
 
-// 鱼雷与炸弹走专属表现，火箭空爆不重复生成。
+// TestHitEffectByAmmoType 验证鱼雷、炸弹、火箭与命中飞机的炮弹各自走专属表现，不重复叠加。
+// 场景：533mm 鱼雷命中舰船、1100mm 炸弹落水、127mm 火箭落水、20/127/460mm 炮弹命中飞机，逐一调用 hitEffect。
+// 预期：鱼雷返回 KindTorpedoPlume 且 OverShips 为 false；炸弹落水为 KindSplash 且 scale 大于 splashCells[2]=0.45；火箭与命中飞机的炮弹 ok=false。
+// 覆盖：TypeTorpedo/TypeBomb/TypeRocket 专属分支、命中飞机不生成火光、鱼雷水柱压在舰船下层的绘制层级。
 func TestHitEffectByAmmoType(t *testing.T) {
 	kind, scale, life, ok := hitEffect(&objBullet.Bullet{
 		Type: objBullet.TypeTorpedo, HitObjType: object.TypeShip, Diameter: 533,
@@ -166,7 +175,10 @@ func TestHitEffectByAmmoType(t *testing.T) {
 	}
 }
 
-// 开关打开时命中舰体生成火球，特效与伤害数字互不影响。
+// TestHitEffectSpawnsOnShipHit 验证命中舰体后按开关生成命中闪光，且与伤害数字开关解耦。
+// 场景：51.2×12.8 像素（0.4×0.1 格）靶舰在 (10,10)，10 伤害炮弹从 y=12 飞向 y=9；DisplayHitEffects=true、DisplayDamageNumber=false，推进 200 拍。
+// 预期：Arena.Explosions 恰好 1 个且 Kind 为 KindFlash；伤害数字关闭不影响特效生成。
+// 覆盖：updateShotBullets 伤害结算后的特效段、DisplayHitEffects 与 DisplayDamageNumber 两个开关的独立性。
 func TestHitEffectSpawnsOnShipHit(t *testing.T) {
 	target := newTestShip(10, 10)
 	m := newShellImpactManager(target, newTestShell(0, 12, 9))
@@ -183,7 +195,10 @@ func TestHitEffectSpawnsOnShipHit(t *testing.T) {
 	}
 }
 
-// 关闭命中特效后不再生成，但伤害结算照旧。
+// TestHitEffectToggleSuppressesSpawn 验证关闭 DisplayHitEffects 后不再生成命中特效，但伤害照常结算。
+// 场景：同一 51.2×12.8 像素靶舰与 10 伤害炮弹，DisplayHitEffects=false，resolveShell 推进 200 拍。
+// 预期：Explosions 为 0；target.CurHP 不再是 100（本发应扣到 90），证明关闭的只是表现层。
+// 覆盖：命中特效段提前 return 不影响此前 hurtShip 的伤害结算。
 func TestHitEffectToggleSuppressesSpawn(t *testing.T) {
 	target := newTestShip(10, 10)
 	m := newShellImpactManager(target, newTestShell(0, 12, 9))
@@ -199,7 +214,10 @@ func TestHitEffectToggleSuppressesSpawn(t *testing.T) {
 	}
 }
 
-// 落水与落陆的弹药分别生成水花与尘土。
+// TestFallSpawnsSplashOrDust 验证寿命耗尽的炮弹按落点格区分水花与尘土，而不是一律记成水面。
+// 场景：127mm 炮弹速度 0、寿命 1，落点分别在 x=5.5（水）与 x=2.5（默认地图 "..L..." 的陆地列），跑一帧 updateShotBullets。
+// 预期：两次各生成 1 个 Explosion，Kind 分别为 KindSplash 与 KindDust。
+// 覆盖：bulletFallObjType 的 Map.IsLand 判定与落水/落陆特效生成。
 func TestFallSpawnsSplashOrDust(t *testing.T) {
 	testCases := []struct {
 		name     string
@@ -231,7 +249,10 @@ func TestFallSpawnsSplashOrDust(t *testing.T) {
 	}
 }
 
-// 单帧生成数量有上限，防空弹幕下不会一次性堆出上百个特效。
+// TestHitEffectRespectsPerFrameCap 验证单帧命中特效数量有上限，防空弹幕不会一帧堆出上百个特效。
+// 场景：构造 maxHitEffectsPerFrame+2（12）发 127mm 炮弹，落点按 1 格间隔排开以避开 0.25 格合并，全部落在 24×2 的水面地图上，跑一帧 updateShotBullets。
+// 预期：Arena.Explosions 恰好 maxHitEffectsPerFrame=10 个。
+// 覆盖：特效循环里的 spawned 单帧计数上限。
 func TestHitEffectRespectsPerFrameCap(t *testing.T) {
 	// 落点彼此拉开 1 格以上，避免被合并规则吃掉
 	bullets := make([]*objBullet.Bullet, 0, maxHitEffectsPerFrame+2)
@@ -256,8 +277,10 @@ func TestHitEffectRespectsPerFrameCap(t *testing.T) {
 	}
 }
 
-// 同一帧内落点接近的命中（一轮齐射打在同一条船上）只出一个特效，
-// 否则十几个相同闪光会叠成一团大亮斑。
+// TestHitEffectMergesSalvoOnSameTarget 验证同帧落在同一舰体附近的齐射只生成一个特效，避免叠成大亮斑。
+// 场景：靶舰 HP 拉到 100000，8 发同参数 127mm 炮弹同帧命中同一舰体 (10,10)。
+// 预期：Explosions 恰好 1 个（落点间距小于 hitEffectMergeDistance=0.25 格被合并）。
+// 覆盖：hitEffectMerged 的 0.25 格距离判定与 spawnedPos 去重。
 func TestHitEffectMergesSalvoOnSameTarget(t *testing.T) {
 	target := newTestShip(10, 10)
 	target.TotalHP, target.CurHP = 100000, 100000
@@ -276,7 +299,10 @@ func TestHitEffectMergesSalvoOnSameTarget(t *testing.T) {
 	}
 }
 
-// 同时存在的特效到达上限后不再生成新的。
+// TestHitEffectRespectsLiveCap 验证同时存在的特效达到上限后不再追加。
+// 场景：Arena.Explosions 预置 maxLiveEffects=200 个元素，再让一发 10 伤害炮弹命中靶舰并推进 200 拍。
+// 预期：Explosions 仍为 200 个，不生成第 201 个。
+// 覆盖：特效循环的 len(Arena.Explosions) >= maxLiveEffects 存活上限。
 func TestHitEffectRespectsLiveCap(t *testing.T) {
 	target := newTestShip(10, 10)
 	m := newShellImpactManager(target, newTestShell(0, 12, 9))
@@ -290,7 +316,10 @@ func TestHitEffectRespectsLiveCap(t *testing.T) {
 	}
 }
 
-// 落点在舰体内的"落水"不出水花：舰体上泛白沫看着像水花浮在舰上。
+// TestWaterSplashSkippedInsideHull 验证落在舰体内的「落水」不再画水花，避免白沫浮在舰上。
+// 场景：127mm 炮弹速度 0、寿命 1，在 51.2×12.8 像素靶舰正中 (10,10) 寿命耗尽，落点类型被记成 TypeWater。
+// 预期：先确认 bt.HitObjType 为 TypeWater，但 Explosions 为 0（insideAnyHull 跳过水花/尘土）。
+// 覆盖：炮弹寿命耗尽落点判定与 insideAnyHull 舰体包含判断的回归。
 func TestWaterSplashSkippedInsideHull(t *testing.T) {
 	target := newTestShip(10, 10)
 	// 寿命 1 + 速度 0：本帧在舰体正中"寿命耗尽"，落点类型是水

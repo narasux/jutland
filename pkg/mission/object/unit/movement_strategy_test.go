@@ -8,10 +8,14 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
-// TestPlaneMovementSpeedNeverExceedsScaledMaxSpeed 固定“巡航 / 追击不超速”的契约：
-// 战斗机追踪与轰炸机巡航都不得超过 最大速度 × 全局速度倍率。
-// 调试面板上出现的“速度超过上限”只应来自起降阶段（滑跑 / 进近的世界系位移），
-// 不应出现在追击敌机时。CurSpeed 是世界系速度（已乘倍率），比较基准必须同样乘倍率。
+// TestPlaneMovementSpeedNeverExceedsScaledMaxSpeed 验证飞机巡航/追击速度不超过
+// 最大速度 × 全局速度倍率。
+// 场景：5 组策略/倍率——战斗机追击 0.5x/1x/2x、基础巡航 1x/2x；飞机 MaxSpeed=0.05、
+// Acceleration=0.01、RotateSpeed=8、初始 CurSpeed=0.05；敌机每帧绕圈（半径 0.5–6.5 格），
+// targetSpeed 在 0/0.03/0.04/0.06/10 间轮换，覆盖远距全速、咬尾减速、目标更快等分支。
+// 预期：600 帧内每帧 CurSpeed ≤ MaxSpeed×multiplier（0.025 / 0.05 / 0.1），且飞机确实移动过；
+// 调试面板的“超速”只应来自起降阶段（滑跑 / 进近的世界系位移），不应出现在追击敌机时。
+// 覆盖：表驱动 5 组，循环 600 帧调用 strategy.MoveTo 并逐帧断言速度上限，最后检查 moved。
 func TestPlaneMovementSpeedNeverExceedsScaledMaxSpeed(t *testing.T) {
 	oldSettings := config.G
 	t.Cleanup(func() { config.G = oldSettings })

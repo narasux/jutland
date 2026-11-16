@@ -76,6 +76,13 @@ func newAirfieldLandingTestStateWithStats(
 	}, airfield, plane
 }
 
+// TestPlaneReturnRecoversAtAirfield 验证陆地机场按 待场 → 进近 → 着舰 三段完成回收。
+// 场景：100x100 地图、静态机场在 (50,50) 跑道朝北长 6 格，飞机从 (50,54) 返航，
+// 每拍执行一次 PlaneReturn，逐段推进。
+// 预期：首拍进入 LandingStaging 且库存仍为 0；1500 拍内切到 LandingApproach、
+// 600 拍内切到 LandingDeck；2000 拍内 Executed，飞机移出 Arena、CurCount 变 1。
+// 覆盖：newAirfieldLandingTestState 注册 test-airfield-plane 模板（MaxCount=2），
+// 断言三个阶段的 FlightPhase 与最终回收计数。
 func TestPlaneReturnRecoversAtAirfield(t *testing.T) {
 	ms, airfield, plane := newAirfieldLandingTestState(t, "test-airfield-plane", 2)
 	returnInstr := NewPlaneReturn(plane.Uid)
@@ -128,8 +135,15 @@ func TestPlaneReturnRecoversAtAirfield(t *testing.T) {
 	}
 }
 
-// 宽转弯的重型轰炸机（RotateSpeed 只有 1~2°/帧）也必须能在陆地机场完成返航回收：
-// 入口容差按转弯能力放宽之前，它们会永远在待场与入口之间反复重引导。
+// TestPlaneReturnRecoversAtAirfieldForWideTurningHeavyBomber 验证宽转弯重轰炸机也能在机场回收。
+// 场景：test-heavy-bomber 用 B-17G/He177A 量级的运行期数值（MaxSpeed 0.0428、
+// 加速度 0.015、RotateSpeed 仅 1.5°/帧）；静态机场在 (50,50)、跑道朝北 6 格，
+// 飞机从 (50,54) 返航，最多推进 12000 拍走完 待场→进近→着舰 三段。
+// 预期：PlaneReturn Executed，机场 PlaneGroup.CurCount 从 0 变 1；入口容差按
+// landingGateToleranceScale（转弯半径/基准长度，gain 6、上限 8 倍）放宽之前，
+// 这类重机永远在 LandingStaging 与入口之间反复重引导。
+// 覆盖：newAirfieldLandingTestStateWithStats 注册模板（MaxCount=2）+ 循环 Exec，
+// 断言 Executed 与回收计数。
 func TestPlaneReturnRecoversAtAirfieldForWideTurningHeavyBomber(t *testing.T) {
 	// 数值取自 B-17G / He177A 一档的重型轰炸机。
 	stats := airfieldTestPlaneStats{maxSpeed: 0.0428, acceleration: 0.015, rotateSpeed: 1.5}

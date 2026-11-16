@@ -34,6 +34,12 @@ func newDepthChargeReleaser() *objUnit.Releaser {
 	}
 }
 
+// TestPlaneFireOnSubmergedDropsOnlyDepthCharges 验证对下潜潜艇开火时只投放深弹。
+// 场景：B-24D 反潜机位于 (10,10)、朝向 90°，挂载 1 枚 Mk6 深弹；U 艇在 (10.5,10) 且
+// DiveStateSubmerged，Plane.Fire 会走进 submergedTarget 分支，跳过机炮与火箭。
+// 预期：Fire 只返回 1 发弹药且类型为 TypeDepthCharge；若返回炸弹/鱼雷/炮弹，
+// 说明普通弹药被允许投向水下目标，反潜规则被绕过。
+// 覆盖：newASWPlane 搭配 newDepthChargeReleaser（AntiSubmarine=true），require.Len==1 并比对 Bullet.Type。
 func TestPlaneFireOnSubmergedDropsOnlyDepthCharges(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -55,7 +61,10 @@ func TestPlaneFireOnSubmergedDropsOnlyDepthCharges(t *testing.T) {
 	require.Equal(t, objBullet.TypeDepthCharge, bullets[0].Type)
 }
 
-// 普通轰炸机（无深弹）的释放器拒绝下潜目标。
+// TestReleaserRejectsSubmergedWithoutAntiSub 验证普通炸弹释放器不会被当成反潜挂载。
+// 场景：按 US/BB/1000/454 构造只装普通炸弹、AntiSubmarine 未置位的 Releaser，射程与左右投放射界照常填写。
+// 预期：AntiSubmarine 为 false；Releaser.targetAcceptable 对下潜潜艇只认该标记，普通轰炸机无法投弹。
+// 覆盖：直接断言 Releaser.AntiSubmarine，守住「无深弹也能反潜」的配置回归。
 func TestReleaserRejectsSubmergedWithoutAntiSub(t *testing.T) {
 	releaser := &objUnit.Releaser{
 		Name: "US/BB/1000/454", BulletName: "US/BB/1000/454",
@@ -67,6 +76,12 @@ func TestReleaserRejectsSubmergedWithoutAntiSub(t *testing.T) {
 	require.False(t, releaser.AntiSubmarine)
 }
 
+// TestCanPlaneFireAtSubmergedNeedsDepthChargeAndDetection 验证派机攻击下潜潜艇需同时满足“已点亮”与“带深弹”。
+// 场景：SimTick=100 时 U 艇在 (10.5,10) 下潜；一架带 Mk6 深弹的飞机与一架只挂普通炸弹的飞机
+// 都把 MaxToShipRange 设为 5，目标距离约 0.5 格，射程足够，只差可见性与弹种条件。
+// 预期：未 MarkDetected 时反潜机也返回 false；MarkDetected(HumanAlpha,200) 后普通轰炸机仍为 false；
+// 同一可见状态下反潜机才为 true。失败意味着飞机会盲攻潜艇或让普通轰炸机白白俯冲。
+// 覆盖：三种组合依次调用 canPlaneFireAtTarget，Sub 仅登记在 Arena.Ships，SimTick=100、探测到期时刻 200。
 func TestCanPlaneFireAtSubmergedNeedsDepthChargeAndDetection(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
@@ -95,7 +110,10 @@ func TestCanPlaneFireAtSubmergedNeedsDepthChargeAndDetection(t *testing.T) {
 	require.True(t, m.canPlaneFireAtTarget(aswPlane, sub))
 }
 
-// 反潜挂载只给不带鱼雷的轰炸机/巡逻机；鱼雷机保持纯鱼雷，避免"鱼雷 + 深弹"同挂。
+// TestPlaneASWLoadouts 验证反潜深弹只挂在无鱼雷的轰炸机/巡逻机上，鱼雷机保持纯鱼雷挂载。
+// 场景：从 PlaneMap 取 B-24D、SB2C-4、SeaOtter 三型反潜机，以及 TBF-1、TBF-1-UK、Swordfish 三型鱼雷机。
+// 预期：前者 HasAntiSubWeapon() 为 true；后者为 false 且 Weapon.Torpedoes 非空，避免「鱼雷+深弹」同挂。
+// 覆盖：六型真实配置模板逐个 require，检查 HasAntiSubWeapon 与 Torpedoes 是否为空。
 func TestPlaneASWLoadouts(t *testing.T) {
 	for _, name := range []string{"B-24D", "SB2C-4", "SeaOtter"} {
 		plane, ok := objUnit.PlaneMap[name]

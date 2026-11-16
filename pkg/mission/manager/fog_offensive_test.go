@@ -47,8 +47,10 @@ func countExplored(vision *state.FactionVision) int {
 	return count
 }
 
-// 侦察机起飞后不能被 updatePlaneAttackOrReturn 当成「没目标」直接叫返航，
-// 否则迷雾下的自动侦察和玩家手动侦察都是废的。
+// TestScoutKeepsFlyingWithoutAttackTarget 验证侦察机没有攻击目标时不会被 updatePlaneAttackOrReturn 误判返航。
+// 场景：迷雾开启，MidwayFourCornersTest 中挑出 ScoutStock≥2 的舰船或机场，起飞侦察机并保持 Cruising，登记 PlaneScout 指令后只跑一拍 updatePlaneAttackOrReturn。
+// 预期：不存在 PlaneReturn 指令且 PlaneScout 指令仍在；否则自动侦察和玩家手动侦察都会刚起飞就被叫回家。
+// 覆盖：TakeOffScout、PutPlane、GenInstrUid(NamePlaneScout) 与 instructionSet 查询，验证 scouting 分支的早退。
 func TestScoutKeepsFlyingWithoutAttackTarget(t *testing.T) {
 	useFogSettings(t)
 	m := New("MidwayFourCornersTest", faction.SideP1)
@@ -91,8 +93,10 @@ func TestScoutKeepsFlyingWithoutAttackTarget(t *testing.T) {
 	}
 }
 
-// 珍珠港 + 迷雾：电脑必须自己派飞机搜索、点亮我方舰队，然后发动进攻。
-// 回归「迷雾下敌人站着不动、不会进攻」。
+// TestComputerScoutsAndAttacksUnderFog 验证珍珠港迷雾下电脑会自行派机搜索、开图并攻击我方。
+// 场景：PearlHarbor1941 打开 EnableFogOfWar，循环至多 7200 拍（实测首次接触约 2750、首次伤害约 3490），逐拍执行命令/支援/战斗阶段。
+// 预期：至少出现 1 架 ComputerAlpha 飞机，HumanAlpha 舰船累计掉血 >0，且 ComputerAlpha 已探索格数达到起始的 2 倍。
+// 覆盖：countExplored 统计 FactionVision.Explored，stepMission 推进 updateCommandPhase/updateSupportPhase/updateCombatPhase，回归「迷雾下敌人不动不进攻」。
 func TestComputerScoutsAndAttacksUnderFog(t *testing.T) {
 	useFogSettings(t)
 	m := New("PearlHarbor1941", faction.SideP1)

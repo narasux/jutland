@@ -74,7 +74,10 @@ func newPreferTestManager(t *testing.T) *MissionManager {
 	}
 }
 
-// 在空轰炸机重新分配目标时，剩余载弹能一波带走的残血敌舰优先于游标轮转。
+// TestNextTargetUIDForPlanePrefersOneSalvoKillableShip 验证在空轰炸机重选目标时优先剩余载弹能一波击沉的残血舰。
+// 场景：测试轰炸机挂 1 枚 500 伤害炸弹、RemainRange=1000；wounded 100/3000、healthy 9000/9000，队列 [wounded, healthy]，游标先停在 healthy。
+// 预期：游标在 healthy 也先选 wounded；wounded 补满 9000 后回退游标顺序选 healthy；无载弹战斗机纯按游标选 wounded。
+// 覆盖：oneSalvoKillablePrefer(payloadDamage) 与 findTargetAtCursorWhere 的 prefer/fallback 分支，配合 setTargetCursor。
 func TestNextTargetUIDForPlanePrefersOneSalvoKillableShip(t *testing.T) {
 	registerPreferTestBomber(t)
 	manager := newPreferTestManager(t)
@@ -121,7 +124,10 @@ func TestNextTargetUIDForPlanePrefersOneSalvoKillableShip(t *testing.T) {
 	}
 }
 
-// 起飞分配目标时同样优先「一波能带走」的敌舰（按基地可出机型的最大载弹估算）。
+// TestTakeOffFromBasePrefersOneSalvoKillableShip 验证机场起飞分配目标时同样优先一波可带走的残血舰。
+// 场景：机场 (50,50) 库存 1 架 500 伤害测试轰炸机；wounded 100/3000 在 (60,50)、healthy 9000/9000 在 (70,50)，队列 [healthy, wounded]。
+// 预期：takeOffFromBase 返回飞机且目标为 wounded，而不是游标在前的 healthy；伤害按基地可出机型的最大单机载弹估算。
+// 覆盖：maxGroupPayloadDamage(aircraft, TypeShip) 配合 oneSalvoKillablePrefer 注入 peekTargetUIDWhere，使用真实 Airfield/StockPlane。
 func TestTakeOffFromBasePrefersOneSalvoKillableShip(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

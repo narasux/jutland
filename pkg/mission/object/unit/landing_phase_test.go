@@ -8,6 +8,10 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
+// TestLandingQueueAssignsStableSlotsAndReusesThem 验证着舰队列按申请顺序分配稳定槽位，取消后空位可复用。
+// 场景：多架飞机同时返航，航母着舰位有限；先到的飞机应先进入进近，复飞/取消后不能留下永久空洞。
+// 预期：首次申请依次得到 0..n；取消中间槽位后，新申请复用该槽位而不是继续递增。
+// 覆盖：连续申请 5 个槽位，取消第 2 个，再申请第 6 架，断言其复用槽位 1。
 func TestLandingQueueAssignsStableSlotsAndReusesThem(t *testing.T) {
 	aircraft := ShipAircraft{}
 	for idx, uid := range []string{"plane-a", "plane-b", "plane-c", "plane-d", "plane-e"} {
@@ -23,6 +27,10 @@ func TestLandingQueueAssignsStableSlotsAndReusesThem(t *testing.T) {
 	}
 }
 
+// TestLandingStagingTargetsAreSeparated 验证同一波次和相邻波次的待场点不会重叠。
+// 场景：多机在航母上方盘旋等待；若待场点重合，飞机模型会叠在一起并干扰进近排序。
+// 预期：相邻槽位横向错开，跨波次前后错开，最近两点的地图距离保持安全间隔。
+// 覆盖：计算 slot 0/1/下一波/最左槽位的待场点，转成航母局部坐标后断言横向比例与距离。
 func TestLandingStagingTargetsAreSeparated(t *testing.T) {
 	ship := &BattleShip{
 		Length:      256,
@@ -51,6 +59,10 @@ func TestLandingStagingTargetsAreSeparated(t *testing.T) {
 	}
 }
 
+// TestLandingStagingWavesReachApproachGates 验证首波和后续波的待场飞机都能飞到进近入口。
+// 场景：返航飞机被分配到第 0、1、3 波待场位，航母保持直航；所有飞机最终都应能进场而不是卡在盘旋。
+// 预期：在 800 帧内 UpdateLandingStaging 返回 true（已到达入口门）。
+// 覆盖：对三个代表性槽位启动待场，循环推进并断言 reachedGate。
 func TestLandingStagingWavesReachApproachGates(t *testing.T) {
 	useDefaultSettings(t)
 	for _, slot := range []int{0, landingApproachLanes, landingApproachLanes * 3} {
@@ -91,6 +103,10 @@ func TestLandingStagingWavesReachApproachGates(t *testing.T) {
 	}
 }
 
+// TestLandingStagingFeedsCurveWithoutSharpEntry 验证从待场切入进近圆弧时航向连续，不出现急拐。
+// 场景：飞机从航母四周八个方向进入待场，随后切入最终进近；入口切线不匹配时画面会瞬间甩头。
+// 预期：切入后首帧的实际运动方向与切入前机头夹角不超过 30°。
+// 覆盖：八个起始方位各跑一次待场到入口，比较 StartLandingApproach 前后的运动航向。
 func TestLandingStagingFeedsCurveWithoutSharpEntry(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -149,6 +165,11 @@ func TestLandingStagingFeedsCurveWithoutSharpEntry(t *testing.T) {
 	}
 }
 
+// TestLandingStagingEventuallyCapturesAcrossAircraftPerformanceRange 验证不同性能飞机/航母运动组合
+// 都能完成待场捕获。
+// 场景：从低速鱼雷机到高速机，航母静止/直航/转弯，玩家从任意方位返航；着舰逻辑不能只对某类机型成立。
+// 预期：所有组合在 900 帧内进入进近入口，失败数为 0。
+// 覆盖：7 种机速/转向 × 5 种航母运动 × 8 个进入角 × 12 个初始航向的矩阵循环。
 func TestLandingStagingEventuallyCapturesAcrossAircraftPerformanceRange(t *testing.T) {
 	useDefaultSettings(t)
 	performanceCases := []struct {
@@ -233,6 +254,10 @@ func TestLandingStagingEventuallyCapturesAcrossAircraftPerformanceRange(t *testi
 	}
 }
 
+// TestLandingStagingCapturesWhenCarrierSternIsNearMapBorder 验证航母贴地图边缘时待场点被夹取后仍可进场。
+// 场景：航母位于左/右/上/下边缘，舰尾待场点会超出地图；若无边界处理，飞机会追一个地图外的点。
+// 预期：待场点经 EnsureBorder 夹取后，各槽位/各初始航向仍能在 1200 帧内捕获入口。
+// 覆盖：四个边缘位置 × 6 个槽位 × 8 个航向，循环推进 UpdateLandingStaging。
 func TestLandingStagingCapturesWhenCarrierSternIsNearMapBorder(t *testing.T) {
 	useDefaultSettings(t)
 	mapCfg := &mapcfg.MapCfg{Width: 100, Height: 100}
@@ -315,6 +340,10 @@ func TestLandingStagingCapturesWhenCarrierSternIsNearMapBorder(t *testing.T) {
 	}
 }
 
+// TestLandingStagingMissedGateReturnsToLeadIn 验证飞机冲过入口门后回到 lead-in，而不是直接切入圆弧。
+// 场景：飞机速度过快或转弯半径过大，掠过入口点时位置已越过门限；若仍进入圆弧，会从错误方向横穿甲板。
+// 预期：UpdateLandingStaging 返回 false，landingStagingLeg 重置为 lead-in。
+// 覆盖：构造位于门后 0.4 个切线单位、航向沿切线的飞机，调用一次 Update 并断言阶段。
 func TestLandingStagingMissedGateReturnsToLeadIn(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -356,6 +385,10 @@ func TestLandingStagingMissedGateReturnsToLeadIn(t *testing.T) {
 	}
 }
 
+// TestLandingGateSpeedConvergesWithoutJump 验证进场前速度按每帧步长上限收敛，不会瞬间跳变。
+// 场景：飞机以巡航速度接近入口，需要在进入圆弧前减速到入口目标速度；直接赋值会让速度曲线出现断点。
+// 预期：每帧速度变化不超过 phaseSpeedStep 给出的上限。
+// 覆盖：从 lead-in 开始连续 30 帧 UpdateLandingStaging，逐帧比较速度差。
 func TestLandingGateSpeedConvergesWithoutJump(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -396,6 +429,10 @@ func TestLandingGateSpeedConvergesWithoutJump(t *testing.T) {
 	}
 }
 
+// TestLandingStagingSpeedUsesCarrierDistanceEnvelope 验证待场速度随距入口距离渐变，而不是固定值。
+// 场景：飞机离入口很远时应保持巡航速度，接近内圈时逐步减速；否则会在远处提前爬行或到门口急刹。
+// 预期：内圈边界速度等于 entrySpeed，外圈边界速度等于 MaxSpeed，且近处速度小于远处。
+// 覆盖：直接调用 landingStagingTargetSpeed 传入内/外圈距离，断言两档速度与单调性。
 func TestLandingStagingSpeedUsesCarrierDistanceEnvelope(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{Length: 128, CurSpeed: 0.04}
@@ -428,6 +465,10 @@ func TestLandingStagingSpeedUsesCarrierDistanceEnvelope(t *testing.T) {
 	}
 }
 
+// TestLandingApproachRejectsInvalidEntryPosition 验证飞机在航母侧方/前方时不能直接进入进近圆弧。
+// 场景：玩家手动点选着舰或 AI 复飞后位置异常，飞机可能位于舰艏一侧；若接受，会从错误方向切上甲板。
+// 预期：landingApproachEntryReady 返回 false。
+// 覆盖：构造航母侧前方 0.75 舰长处的飞机，调用入口检查并断言拒绝。
 func TestLandingApproachRejectsInvalidEntryPosition(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{Length: 128, CurPos: objPos.NewR(50, 50), CurSpeed: 0.04}
@@ -451,6 +492,10 @@ func TestLandingApproachRejectsInvalidEntryPosition(t *testing.T) {
 	}
 }
 
+// TestLandingStagingUpdateDoesNotAllocate 验证待场更新在热路径上零分配。
+// 场景：每帧每架返航飞机都会调用 UpdateLandingStaging；内部若创建切片/字符串，长时间空战会持续触发 GC。
+// 预期：1000 次 Update 的平均分配次数为 0。
+// 覆盖：用 testing.AllocsPerRun 包裹待场更新，断言 allocations 为 0。
 func TestLandingStagingUpdateDoesNotAllocate(t *testing.T) {
 	useDefaultSettings(t)
 	mapCfg := &mapcfg.MapCfg{Width: 100, Height: 100}
@@ -479,6 +524,10 @@ func TestLandingStagingUpdateDoesNotAllocate(t *testing.T) {
 	}
 }
 
+// TestLandingArcEndsTangentToDeck 验证进近圆弧终点与甲板中线相切，而不是斜着撞上甲板。
+// 场景：飞机从左侧进入最终进近，圆弧末段必须对准舰艏方向；否则着舰前会突然修正航向。
+// 预期：终点横向偏移为 0、切线横向分量为 0、切线朝舰艏为正。
+// 覆盖：启动进近后取 arc 参数 1.0 的点和切线，与 landingFinalStartOffset 比较。
 func TestLandingArcEndsTangentToDeck(t *testing.T) {
 	ship := &BattleShip{
 		Length:      128,
@@ -503,6 +552,11 @@ func TestLandingArcEndsTangentToDeck(t *testing.T) {
 	}
 }
 
+// TestLandingArcsAreMirroredAndMonotonic 验证左右进近圆弧镜像对称，且前进/收敛/转弯方向单调。
+// 场景：飞机从航母左右两舷进入，玩家期望两侧路径只是镜像，不应一侧绕远或反向转弯。
+// 预期：同一进度下 forward 相等、lateral 互为相反数；forward 不后退、|lateral| 不增大、半径恒定、
+// 转弯方向不反转。
+// 覆盖：左右各建一条 arc，按 0..1 采样 121 个点逐项断言。
 func TestLandingArcsAreMirroredAndMonotonic(t *testing.T) {
 	ship := &BattleShip{
 		Length:      128,
@@ -568,6 +622,10 @@ func TestLandingArcsAreMirroredAndMonotonic(t *testing.T) {
 	}
 }
 
+// TestLandingArcGeometryAcrossValidEntries 验证合法入口范围内都能生成参数合理的圆弧。
+// 场景：飞机在舰尾后方不同前后/左右偏移处进入进近，配置不能只对某一个入口点有效。
+// 预期：arc 构建成功，frames 在 [min,max] 内，sweepAngle 与 lateral 同号且 |sweep| < π。
+// 覆盖：3 个 forward × 4 个 lateral 的入口矩阵，逐个检查 arc 参数。
 func TestLandingArcGeometryAcrossValidEntries(t *testing.T) {
 	ship := &BattleShip{Length: 256, CurPos: objPos.NewR(50, 50)}
 	for _, forward := range []float64{-5.8, -5.5, -5.2} {
@@ -591,6 +649,10 @@ func TestLandingArcGeometryAcrossValidEntries(t *testing.T) {
 	}
 }
 
+// TestLandingApproachStartsAtCurrentSpeed 验证进入圆弧首帧不会把速度瞬移到目标值。
+// 场景：不同最大速度的飞机以入口速度开始进近；首帧若直接赋值，速度曲线会出现断点。
+// 预期：首帧速度相对入口目标速度偏差不超过 10%。
+// 覆盖：三种 MaxSpeed 各建一条 arc，StartLandingApproach 后 Update 一帧并比较速度。
 func TestLandingApproachStartsAtCurrentSpeed(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -631,6 +693,10 @@ func TestLandingApproachStartsAtCurrentSpeed(t *testing.T) {
 	}
 }
 
+// TestLandingApproachDeckTransitionIsContinuous 验证从圆弧切换到甲板滑跑时位置/速度/航向连续。
+// 场景：飞机完成进近、进入甲板减速段；若阶段切换重置位置或速度，画面上会瞬移/急停。
+// 预期：StartLandingDeck 当帧位置不变；下一帧速度相对圆弧末速偏差不超过 10%，航向偏差不超过 1°。
+// 覆盖：跑完 800 帧进近，记录末速/航向/位置，切换甲板后逐项断言。
 func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -684,6 +750,12 @@ func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 	}
 }
 
+// TestLandingDeckPlanMatchesArcExitSpeedAcrossAircraftSpeeds 验证甲板滑跑初速与圆弧出口速度一致。
+// 场景：不同最大速度的飞机完成进近后进入甲板；若两段各自算速度，接缝处会跳变。
+// 预期：landingArcExitSpeed 在 (0, relativeSpeed] 内；
+// StartLandingDeck 后 landingRunSpeed 等于 landingArcSpeed，
+// 滑跑总长等于舰长 × ApproachLength。
+// 覆盖：三种 MaxSpeed 各构建 arc/plan，切换甲板后逐字段断言。
 func TestLandingDeckPlanMatchesArcExitSpeedAcrossAircraftSpeeds(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{Length: 128, CurPos: objPos.NewR(50, 50)}
@@ -721,6 +793,10 @@ func TestLandingDeckPlanMatchesArcExitSpeedAcrossAircraftSpeeds(t *testing.T) {
 	}
 }
 
+// TestLandingDeckUsesLongMonotonicDecelerationAndScale 验证甲板段速度/视觉缩放单调递减并最终停在甲板中心。
+// 场景：飞机从进近末端滑跑到停机位，需要持续减速且模型逐渐缩小，不能中途加速或后退。
+// 预期：每帧速度不增、VisualScaleMultiplier 不增、forward 不后退；结束时 local=(0,0)、缩放为低空倍率。
+// 覆盖：跑完进近后进入甲板，循环 UpdateLandingDeck 逐帧断言，直到 finished。
 func TestLandingDeckUsesLongMonotonicDecelerationAndScale(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -782,9 +858,13 @@ func TestLandingDeckUsesLongMonotonicDecelerationAndScale(t *testing.T) {
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }
 
-// 最终进近刹车段的速度倍率决定飞机滞留降落阶段的时间：出口速度取最大速度的
-// landingApproachTargetSpeedRatio 时，3 个基准长的刹车段约需 2L/v 帧。
-// 这条测试防止倍率被调回低速，让飞机又在降落阶段磨蹭很久。
+// TestLandingDeckBrakingSegmentStaysShort 验证甲板刹车段不会因出口速度倍率被调低而磨蹭。
+// 场景：航母 Length=128、飞机 MaxSpeed=0.12，圆弧出口速度取 MaxSpeed×landingApproachTargetSpeedRatio(0.60)；
+// 最终进近刹车段约 3 个基准长，时长按 2L/v 与出口速度成反比。
+// 预期：圆弧进近在 800 帧内结束，随后甲板滑跑在 120 帧内完成（0.60 倍速理论约 83 帧；
+// 若倍率被调回 0.30 会涨到约 167 帧）。
+// 覆盖：从舰尾相对位置 (-3.5, 1.1)、航向 330、速度 0.08 启动进近，跑完进近后
+// 循环 UpdateLandingDeck，断言完成帧数 ≤ 120。
 func TestLandingDeckBrakingSegmentStaysShort(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -824,6 +904,11 @@ func TestLandingDeckBrakingSegmentStaysShort(t *testing.T) {
 	}
 }
 
+// TestLandingAnimationTracksMovingTurningCarrier 验证航母移动/转向时飞机仍能按相对坐标完成进近和甲板滑跑。
+// 场景：航母以 0.03 速度前进并每帧 0.25° 转向，飞机进近期间甲板一直在动；着舰逻辑必须跟踪相对位置。
+// 预期：FlightPhaseProgress 不倒退、单帧转角不超过 RotateSpeed；进近/甲板都能在有限帧内完成并落到相对 (0,
+// 0)。
+// 覆盖：每帧先 moveTestCarrier 再 Update，记录进度/航向，最后检查航母局部坐标。
 func TestLandingAnimationTracksMovingTurningCarrier(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -887,6 +972,10 @@ func TestLandingAnimationTracksMovingTurningCarrier(t *testing.T) {
 	requireClose(t, local.lateral, 0)
 }
 
+// TestLandingStagingCanCatchCarrierAtPlaneMaxSpeed 验证飞机最大速度等于航母速度时仍能通过待场加速追上。
+// 场景：飞机和航母同速，飞机在舰尾后方 3 格；若待场目标速度不超过航母，飞机永远追不上。
+// 预期：20 帧后 plane.CurSpeed 大于 ship.CurSpeed。
+// 覆盖：同速 0.12 起步，循环 20 帧 UpdateLandingStaging 并比较速度。
 func TestLandingStagingCanCatchCarrierAtPlaneMaxSpeed(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -914,6 +1003,10 @@ func TestLandingStagingCanCatchCarrierAtPlaneMaxSpeed(t *testing.T) {
 	}
 }
 
+// TestLandingHeadingDoesNotSnapWhenCarrierStartsTurning 验证航母突然满舵时飞机航向被低通滤波平滑，不甩头。
+// 场景：航母从直航突然以 0.8°/帧转向，目标航向中的 ω×r 项阶跃；直接赋值会让飞机单帧转数十度。
+// 预期：转向开始后 60 帧内单帧转角不超过 8°；随后仍能在 800 帧内完成进近并落到甲板中线。
+// 覆盖：先直航 30 帧，再满舵 60 帧记录最大单帧转角，最后继续推进直到 finished。
 func TestLandingHeadingDoesNotSnapWhenCarrierStartsTurning(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -980,6 +1073,10 @@ func moveTestCarrier(ship *BattleShip, rotationStep float64) {
 	)
 }
 
+// TestSeaLandingSplashdownIsBehindStern 验证水上飞机着舰溅落点在舰尾之后，而不是压在甲板上。
+// 场景：水上飞机/水上飞机母舰采用 LandingModeSea；最终溅落点若按甲板回收点计算，会显示在舰体内部。
+// 预期：splashForward 等于 -0.5 减 seaLandingSplashdownAftOfSternRatio；进度到该比例时视觉缩放为低空倍率。
+// 覆盖：构造 Sea 模式甲板，计算 splashForward 与 ratio，再设置进度断言 VisualScaleMultiplier。
 func TestSeaLandingSplashdownIsBehindStern(t *testing.T) {
 	ship := &BattleShip{Length: 128, Width: 24, CurPos: objPos.NewR(50, 50)}
 	sa := &ShipAircraft{}
@@ -1008,6 +1105,10 @@ func TestSeaLandingSplashdownIsBehindStern(t *testing.T) {
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }
 
+// TestLandingVisualScaleInterpolation 验证着舰过程中视觉缩放的分段线性插值。
+// 场景：飞机从进近到甲板滑跑，模型需要从 1x 逐渐缩到低空倍率；进近段保持原大小，甲板段按路程比例缩小。
+// 预期：进近阶段始终 1x；甲板段 40% 路程为 0.75x，达到 landingDeckScaleDistanceRatio 后保持低空倍率。
+// 覆盖：手动设置 FlightPhaseProgressValue 的 0/0.4/阈值/0.9/1.0，逐点断言 VisualScaleMultiplier。
 func TestLandingVisualScaleInterpolation(t *testing.T) {
 	ship := &BattleShip{Length: 128, CurPos: objPos.NewR(50, 50)}
 	plane := &Plane{CurPos: objPos.NewR(50, 52), FlightPhase: PlaneFlightPhaseCruising}
@@ -1034,8 +1135,12 @@ func TestLandingVisualScaleInterpolation(t *testing.T) {
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }
 
-// 宽转弯机型的入口容差必须随转弯半径放大：重机的 RotateSpeed 只有 1~2°/帧，
-// 用舰载机级别的固定容差会让它们在待场与入口之间无限重引导（永远进不了圆弧）。
+// TestLandingGateToleranceScaleGrowsWithTurnRadius 验证入口容差倍数随机型转弯半径单调放大，并在上限处封顶。
+// 场景：战斗机 RotateSpeed=6°/帧、MaxSpeed=0.05，重机只有 1.5°/帧、MaxSpeed=0.043，
+// 转弯半径 r=v/ω 分别约 0.48 / 1.64 格（0.12 / 0.41 个基准长度）；若用舰载机级别的固定容差，重机会在待场与入口之间无限重引导。
+// 预期：战斗机 scale ≥ 1 且重机 scale 严格更大；RotateSpeed=0（直线飞行）退回 1；
+// 极低转向能力（RotateSpeed=1、MaxSpeed=0.1）封顶在 landingGateToleranceMaxScale=8。
+// 覆盖：四种 Plane 调用 landingGateToleranceScale(p, 4.0)，比较倍数并断言下限/单调/退化/封顶。
 func TestLandingGateToleranceScaleGrowsWithTurnRadius(t *testing.T) {
 	useDefaultSettings(t)
 	const length = 4.0

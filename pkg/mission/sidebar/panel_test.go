@@ -15,6 +15,10 @@ func newTestPanel(mapAspect float64) *Panel {
 	return &Panel{mapAspect: mapAspect}
 }
 
+// TestExpandedPanelConsumesPanelHandleAndMinimap 验证展开态只在面板、把手、页签、小地图与单位区消费鼠标。
+// 场景：面板停靠右上角、高 86% 屏幕；玩家在面板下方或右缘 12px 细缝拖动镜头时不能被侧栏吞掉。
+// 预期：五个面板内点均 true；面板外、面板下方、右缘细缝均 false；失败意味着边缘滚动被阻断或面板漏点。
+// 覆盖：calcLayout(1280×720, 展开, aspect=1) 后逐个调用 consumesCursorAt，覆盖 5 个内点与 3 个外点。
 func TestExpandedPanelConsumesPanelHandleAndMinimap(t *testing.T) {
 	missionState := &state.MissionState{
 		Core: state.MissionCoreState{MissionStatus: state.MissionRunning},
@@ -52,6 +56,10 @@ func TestExpandedPanelConsumesPanelHandleAndMinimap(t *testing.T) {
 	}
 }
 
+// TestCollapsedPanelOnlyConsumesHandle 验证收起态面板高度/单位视口为 0，只有顶部把手消费鼠标。
+// 场景：玩家收起侧栏后，右上角大部分区域应还给战场，仅保留「下拉」把手。
+// 预期：Panel.H=0、Viewport.W=0，Handle.Y=16 贴近顶缘，把手中心 true、原面板坐标 false。
+// 覆盖：calcLayout(1280×720,false,1) 检查空面板/视口，再断言把手中心与 (Panel.X+10,Panel.Y+10) 的消费结果。
 func TestCollapsedPanelOnlyConsumesHandle(t *testing.T) {
 	missionState := &state.MissionState{
 		Core: state.MissionCoreState{MissionStatus: state.MissionRunning},
@@ -79,6 +87,10 @@ func TestCollapsedPanelOnlyConsumesHandle(t *testing.T) {
 	}
 }
 
+// TestCalcLayoutDockedPanelGeometry 验证展开面板停靠几何：宽度 260–360、贴顶贴右各留 12px、底部不出屏。
+// 场景：1280×720 下按屏幕 86% 取高，小地图与单位区必须在面板内依次排下。
+// 预期：W∈[260,360]、Y=12、右间隙=12、Y+H<720、Handle 在面板底、Viewport.H>0 且紧接小地图下 16px。
+// 覆盖：calcLayout(1280×720,true,1) 后断言宽度范围、四条几何关系及 viewport 与小地图的衔接。
 func TestCalcLayoutDockedPanelGeometry(t *testing.T) {
 	ui := calcLayout(layout.ScreenLayout{Width: 1280, Height: 720}, true, 1)
 	if ui.Panel.W < 260 || ui.Panel.W > 360 {
@@ -108,6 +120,10 @@ func TestCalcLayoutDockedPanelGeometry(t *testing.T) {
 	}
 }
 
+// TestCalcLayoutKeepsMapAspectForNonSquareMap 验证竖长地图的小地图保持比例，未触顶时用满内容宽度。
+// 场景：珍珠港等 128×192 地图投到 1280×1440 屏幕；若强行拉成正方形会变形。
+// 预期：Map.W/Map.H≈128/192，Map.W=Panel.W-32，X 在内容区居中（此处偏移 0）；失败意味着小地图变形或偏左。
+// 覆盖：calcLayout(1280×1440,true,128/192)，断言比例误差<1e-6、宽度为 maxW、X 居中。
 func TestCalcLayoutKeepsMapAspectForNonSquareMap(t *testing.T) {
 	const (
 		screenW = 1280.0
@@ -131,6 +147,10 @@ func TestCalcLayoutKeepsMapAspectForNonSquareMap(t *testing.T) {
 	}
 }
 
+// TestCalcLayoutCapsOversizedMapHeight 验证竖长地图高度超过屏幕 45% 时等比缩小，避免挤出下方单位区。
+// 场景：720 高窗口加载 128×192 地图，按面板宽度算出的小地图高 412.8px，超过上限 324px。
+// 预期：Map.H≤324 且宽高比仍为 128/192，Viewport.H>0；失败意味着小地图压扁单位面板或破坏比例。
+// 覆盖：calcLayout(1280×720,true,128/192)，断言 mapMaxHeightRatio 上限、比例误差与 viewport 高度。
 func TestCalcLayoutCapsOversizedMapHeight(t *testing.T) {
 	const screenH = 720.0
 	ui := calcLayout(layout.ScreenLayout{Width: 1280, Height: int(screenH)}, true, 128.0/192.0)
@@ -149,6 +169,10 @@ func TestCalcLayoutCapsOversizedMapHeight(t *testing.T) {
 	}
 }
 
+// TestCenterCameraAtMinimapCentersClickedPoint 验证点击小地图中心后相机把该点放到视野中心，并放弃自动定位。
+// 场景：玩家点小地图中央跳转视角；此前相机可能还有未完成的 Target 定位 (999,999)。
+// 预期：Camera.Pos.RX≈点击点-5.5（容差 1 格）且 ≥0，Target 清空；失败意味着落点偏移或抢相机。
+// 覆盖：128×192 地图、11×7 镜头与 stale target，点 Map 中心后反算 clickedRX 断言偏差/边界/清空。
 func TestCenterCameraAtMinimapCentersClickedPoint(t *testing.T) {
 	const (
 		screenW = 1280.0

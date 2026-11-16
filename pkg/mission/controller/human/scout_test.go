@@ -74,7 +74,14 @@ func newScoutTestState(ships ...*objUnit.BattleShip) *state.MissionState {
 	}
 }
 
-// 没有侦察机的航母，Shift + 右键也要派打击机去侦察，而不是让它自己开过去。
+// TestScoutOrderSendsBomberFromCarrierWithoutScout 验证无侦察机的航母仍用打击机执行侦察。
+// 场景：HumanAlpha 航母只带 4 架 torpedo bomber（CurCount=MaxCount=4，
+// TargetType=TypeShip），没有 PlaneTypeScout；对 (20,20) 调用 scoutAt。
+// 预期：scouted=true 且只有 1 条指令，类型为 *instr.PlaneScout；新飞机
+// Type=PlaneTypeTorpedoBomber、ScoutManual=true，UI.GameMarks[IDScout] 标出目标点。
+// 失败会让 Shift+右键退化成航母自身移动。
+// 覆盖：registerScoutTestPlane 注册 bomber-scout-order-test，newScoutTestCarrier /
+// newScoutTestState 选中航母，断言指令类型、飞机字段与侦察标记。
 func TestScoutOrderSendsBomberFromCarrierWithoutScout(t *testing.T) {
 	const bomber = "bomber-scout-order-test"
 	registerScoutTestPlane(t, bomber, objUnit.PlaneTypeTorpedoBomber, object.TypeShip)
@@ -110,7 +117,13 @@ func TestScoutOrderSendsBomberFromCarrierWithoutScout(t *testing.T) {
 	}
 }
 
-// 已经有手动侦察在飞时再次下单只改点，不重复起飞。
+// TestScoutOrderRetargetsFlyingScout 验证已有手动侦察在飞时只改点、不重复起飞。
+// 场景：航母带 2 架 scout，场上已有 1 架 ScoutManual=true 的 flying-scout；
+// 对 (20,20) 调用 scoutAt。
+// 预期：scouted=true 且恰好 1 条指令，Uid 为 NamePlaneScout/flying-scout；
+// Arena.Planes 仍只有 1 架，不能为同一次点击再起飞第二架。
+// 覆盖：newScoutTestCarrier 注册 scout-scout-order-test，Arena.PutPlane 预置在飞
+// 侦察机，断言指令 Uid 与飞机总数。
 func TestScoutOrderRetargetsFlyingScout(t *testing.T) {
 	const scout = "scout-scout-order-test"
 	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
@@ -139,8 +152,13 @@ func TestScoutOrderRetargetsFlyingScout(t *testing.T) {
 	}
 }
 
-// 有多个起飞点（弹射器）的航空战舰可以同时放出多架手动侦察机；
-// 名额占满后再次下单只改离点击点最近那架的目标点。
+// TestScoutOrderLaunchesUpToTakeoffPoints 验证航空战舰按起飞点数量派多架手动侦察机。
+// 场景：巡洋舰 cruiser 有 2 个起飞点（弹射器）和 4 架 scout；依次对 (20,20)、
+// (30,30) 下单，再对 (40,40) 下第三次单。
+// 预期：前两次各起飞 1 架，场上共 2 架（manualScoutLimit=TakeoffPointCount=2）；
+// 第三次名额已满，只生成 1 条改点指令（Uid 非空且未 Executed），不再起飞第三架。
+// 覆盖：newScoutTestCatapultShip 造双弹射器舰，连续调用 scoutAt，断言每次指令数、
+// 飞机总数与改点指令状态。
 func TestScoutOrderLaunchesUpToTakeoffPoints(t *testing.T) {
 	const scout = "scout-multi-order-test"
 	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
@@ -186,8 +204,14 @@ func manualScoutsOf(ms *state.MissionState, shipUid string) int {
 	return count
 }
 
-// 选中一个编队连续点击时应该一艘接一艘轮着派：还没派过的基地优先，
-// 而不是每次都用离点击点最近的那艘（派满名额后它就只能改点）。
+// TestScoutOrderRotatesAcrossSelectedBases 验证编队连续点击时轮流派机。
+// 场景：选中 near (4,4) 与 far (20,4) 两艘各带 2 架 scout 的航母；对 (4,4)
+// 连点三次。
+// 预期：第一次 near 起飞 1 架；第二次 near 名额已满，改为从未派过的 far 起飞 1 架；
+// 第三次两艘都满，只对最近那架改点，场上始终 2 架。
+// 覆盖：newScoutTestState 同时选中两舰，manualScoutsOf 统计各舰手动侦察机数，
+// 每轮 scoutAt 断言指令数与飞机总数；排序依据是 scoutPriorityNeverLaunched <
+// HasSlot < Retarget，同档取到点击点最近者。
 func TestScoutOrderRotatesAcrossSelectedBases(t *testing.T) {
 	const scout = "scout-rotation-order-test"
 	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
@@ -230,7 +254,13 @@ func TestScoutOrderRotatesAcrossSelectedBases(t *testing.T) {
 	}
 }
 
-// 「还没派过」优先于「还有名额」：刚派过一架的战列舰不该抢在没派过的航母前面。
+// TestScoutOrderPrefersNeverLaunchedBase 验证「还没派过」优先于「还有名额」。
+// 场景：航母 carrier 在 (30,30) 尚未派过；战列舰 battleship 在 (4,4) 有 2 个
+// 起飞点、已放飞 1 架（ScoutManual=true）；点击 (4,4) 更靠近战列舰。
+// 预期：指令从航母起飞（manualScoutsOf(carrier)=1），战列舰保持 1 架不动；
+// 若按距离优先，近处还有空位的战列舰会一直抢在航母前面。
+// 覆盖：newScoutTestCatapultShip 双弹射器 + 预置 battleship-scout，调用 scoutAt
+// 后分别统计两舰手动侦察机数。
 func TestScoutOrderPrefersNeverLaunchedBase(t *testing.T) {
 	const scout = "scout-priority-order-test"
 	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
@@ -262,8 +292,12 @@ func TestScoutOrderPrefersNeverLaunchedBase(t *testing.T) {
 	}
 }
 
-// 排在前面的基地这一拍什么都做不了（弹射器冷却、又没有在飞的侦察机）时，
-// 指令要顺延给下一个候选，不能白白吞掉这次点击。
+// TestScoutOrderFallsThroughToNextBase 验证前排基地无法响应时指令顺延。
+// 场景：cooling 航母在点击点旁，但 TakeOffTime=60 且已调用 TakeOffScout 起飞
+// 一架（弹射器冷却）；fresh 航母在 (20,4)，对 (4,4) 附近点击。
+// 预期：本次仍产生 1 条指令，从 fresh 起飞 1 架（manualScoutsOf(fresh)=1），
+// cooling 保持 0 架；不能白吞这次点击。
+// 覆盖：newScoutTestCarrier 预置冷却状态，scoutAt 后按舰统计手动侦察机数。
 func TestScoutOrderFallsThroughToNextBase(t *testing.T) {
 	const scout = "scout-fallthrough-order-test"
 	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
@@ -294,7 +328,13 @@ func TestScoutOrderFallsThroughToNextBase(t *testing.T) {
 	}
 }
 
-// 完成任务正在返航的侦察机不再占用改点名额，新下单要派新飞机。
+// TestScoutOrderSkipsReturningScout 验证返航中的侦察机不占改点名额。
+// 场景：航母带 2 架 scout，场上已有 1 架 ForceReturn=true、ScoutManual=true 的
+// returning-scout；对 (20,20) 下单。
+// 预期：产生 1 条新指令，且 Uid 不是 NamePlaneScout/returning-scout；返航机
+// 不再参与改点，应派新飞机。
+// 覆盖：Arena.PutPlane 预置返航机，scoutAt 后检查指令数量与 Uid；
+// manualScouts 用 MustReturn() 排除返航机。
 func TestScoutOrderSkipsReturningScout(t *testing.T) {
 	const scout = "scout-returning-order-test"
 	registerScoutTestPlane(t, scout, objUnit.PlaneTypeScout, object.TypeNone)
@@ -321,7 +361,13 @@ func TestScoutOrderSkipsReturningScout(t *testing.T) {
 	}
 }
 
-// 只有战斗机的基地派不出侦察机，但这次点击仍要被消费掉。
+// TestScoutOrderConsumesClickOnFighterOnlyBase 验证纯战斗机基地也消费 Shift+右键。
+// 场景：航母只带 4 架 fighter（TargetType=TypePlane，没有对地/侦察挂载），
+// 对 (20,20) 调用 scoutAt。
+// 预期：scouted=true 但 orders 为 0——点击不能漏给舰船移动；基地无法派侦察机
+// 也算一次侦察指令已被处理。
+// 覆盖：registerScoutTestPlane 注册 fighter-scout-order-test，newScoutTestCarrier
+// 后断言 scouted 与指令数。
 func TestScoutOrderConsumesClickOnFighterOnlyBase(t *testing.T) {
 	const fighter = "fighter-scout-order-test"
 	registerScoutTestPlane(t, fighter, objUnit.PlaneTypeFighter, object.TypePlane)
@@ -340,7 +386,10 @@ func TestScoutOrderConsumesClickOnFighterOnlyBase(t *testing.T) {
 	}
 }
 
-// 选中的全是普通战舰时，Shift + 右键仍走原来的移动逻辑。
+// TestScoutOrderLeavesPlainWarshipAlone 验证纯水面战舰不响应侦察点击。
+// 场景：只选中一艘没有舰载机的驱逐舰 dd (4,4)，对 (20,20) 调用 scoutAt。
+// 预期：scouted=false 且 orders 为 0，点击留给原有的舰船移动逻辑。
+// 覆盖：newScoutTestState 只放驱逐舰，直接调用 scoutAt 断言两个返回值。
 func TestScoutOrderLeavesPlainWarshipAlone(t *testing.T) {
 	destroyer := &objUnit.BattleShip{
 		Uid: "dd", Length: 60, Width: 8, CurPos: objPos.NewR(4, 4),

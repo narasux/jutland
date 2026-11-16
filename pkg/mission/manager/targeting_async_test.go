@@ -14,6 +14,12 @@ import (
 	"github.com/narasux/jutland/pkg/mission/targeting"
 )
 
+// TestNextTargetUIDSkipsDestroyedTargets 验证基地目标游标会跳过已从战场消失/已沉没的队列项。
+// 场景：目标计划里基地 "base" 的 TypeShip 队列依次是 "dead" 与 "alive"，
+// 但 Arena.Ships 只登记了 CurHP=10 的 "alive"，模拟计划生成后目标被击沉的情况。
+// 预期：nextTargetUID 返回 "alive" 且 ok=true，消费后 targetingDirty 变为 true 以便重算计划；
+// 失败意味着派机会锁定一个不存在的目标，飞机原地盘旋或直接飞向空海域。
+// 覆盖：手写 targeting.Plan 队列与 targetingCursors，调用一次 nextTargetUID 后检查返回值与脏标记。
 func TestNextTargetUIDSkipsDestroyedTargets(t *testing.T) {
 	manager := &MissionManager{
 		state: &state.MissionState{
@@ -45,6 +51,13 @@ func TestNextTargetUIDSkipsDestroyedTargets(t *testing.T) {
 	}
 }
 
+// TestUpdateTargetPlanningConsumesBufferedPlan 验证 updateTargetPlanning 只提交一个后台计划并消费其结果。
+// 场景：临时在 PlaneMap 注册俯冲轰炸机 "test-bomber"（带 1 个炸弹释放器），机场 (10,10) 库存 1 架、
+// 编组 TargetType=TypeShip、CurCount=1，敌舰在 (80,80)；simTick=1、targetingDirty=true，
+// targetingResults 是容量 1 的缓冲通道。
+// 预期：首次调用后 targetingBusy=true（同一时刻只跑一个后台任务）；2 秒内能从通道读到计划，
+// 且计划里该机场的 TypeShip 队列非空。失败意味着提交逻辑重复并发、主线程阻塞，或计划不含敌舰。
+// 覆盖：注册/清理模板，手工接收 targetingResults 回填 targetingPlan，最后检查 BaseQueues 长度。
 func TestUpdateTargetPlanningConsumesBufferedPlan(t *testing.T) {
 	oldTemplate, hadTemplate := objUnit.PlaneMap["test-bomber"]
 	objUnit.PlaneMap["test-bomber"] = &objUnit.Plane{
@@ -103,6 +116,12 @@ func TestUpdateTargetPlanningConsumesBufferedPlan(t *testing.T) {
 	}
 }
 
+// TestTakeOffFromBaseRotatesTargetTypes 验证机场起飞会在不同打击目标类型之间轮转。
+// 场景：同一个机场混编 "rotate-fighter"（战斗机，目标类型 Plane）与 "rotate-bomber"
+// （俯冲轰炸机，目标类型 Ship），两者各有 1 架库存；目标计划同时给出 TypePlane 与 TypeShip 队列。
+// 预期：第一次 takeOffFromBase 返回 object.TypePlane，第二次返回 object.TypeShip；
+// 失败意味着 takeoffTypeCursors 不推进，所有架次都扑向同一类目标，空袭或制空会失衡。
+// 覆盖：临时注册两种模板并在 Cleanup 中还原，连续两次调用 takeOffFromBase(airfield,nil) 比较返回类型。
 func TestTakeOffFromBaseRotatesTargetTypes(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -179,6 +198,12 @@ func TestTakeOffFromBaseRotatesTargetTypes(t *testing.T) {
 	}
 }
 
+// TestTakeOffFromBaseChoosesPlaneThatCanReachTarget 验证派机时按“往返航程”挑选能返航的机型。
+// 场景：机场在 (0,0)，编组里 "rotate-short" 航程 20、"rotate-long" 航程 200，均为俯冲轰炸机；
+// 敌舰在 (80,0)，单程 80、往返 160，目标计划只给出 TypeShip 队列。
+// 预期：takeOffFromBase 返回长航程编组的飞机、类型为 TypeShip、目标 UID 为 "far-enemy"；
+// 失败意味着短航程机型被派出去后无法返航，或者反过来有航程足够的机型却不敢起飞。
+// 覆盖：临时注册两档 Range 模板，断言 plane.Name=="rotate-long" 与返回的 targetType/targetUID/ok。
 func TestTakeOffFromBaseChoosesPlaneThatCanReachTarget(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

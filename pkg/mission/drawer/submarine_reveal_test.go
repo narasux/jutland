@@ -45,6 +45,10 @@ func drawRevealScene(t *testing.T, ms *state.MissionState) {
 	})
 }
 
+// TestRevealSubmarinesDrawsRedBoxForUndetectedSub 验证调试开关只给未探测敌潜艇加红框，不改战斗可见性。
+// 场景：敌潜艇 u_331 下潜于 (3,3)，玩家无声呐记忆；开启 Player.RevealSubmarines 后重绘一帧。
+// 预期：关闭时 CanSeeShip=false；开启后 RevealsSubmarine=true 且仍不可见；失败意味着秘籍泄露视野。
+// 覆盖：revealTestState 构造 SimTick=1 的潜航潜艇，两次 drawRevealScene 后断言两个可见性判断。
 func TestRevealSubmarinesDrawsRedBoxForUndetectedSub(t *testing.T) {
 	ms, sub := revealTestState()
 	drawRevealScene(t, ms)
@@ -57,6 +61,10 @@ func TestRevealSubmarinesDrawsRedBoxForUndetectedSub(t *testing.T) {
 	require.False(t, ms.CanSeeShip(faction.HumanAlpha, sub))
 }
 
+// TestRevealSubmarinesToggleDoesNotDrawForVisibleSub 验证已可见的水面潜艇不再叠加红框分支。
+// 场景：潜艇上浮且 FogOfWar=false，玩家本来就能看见；此时秘籍开关仍开着。
+// 预期：CanSeeShip=true 且 RevealsSubmarine=false；失败意味着可见潜艇被重复标注，红框盖住舰体。
+// 覆盖：把 revealTestState 的潜艇改为 DiveStateSurface、关闭迷雾、打开 RevealSubmarines，断言两项判断。
 func TestRevealSubmarinesToggleDoesNotDrawForVisibleSub(t *testing.T) {
 	ms, sub := revealTestState()
 	// 潜艇浮出水面：按普通迷雾规则可见，不再需要红框
@@ -68,7 +76,10 @@ func TestRevealSubmarinesToggleDoesNotDrawForVisibleSub(t *testing.T) {
 	require.False(t, ms.RevealsSubmarine(faction.HumanAlpha, sub))
 }
 
-// 己方潜艇应走潜航淡出和状态图标分支；常显开关打开/关闭都不能崩。
+// TestOwnSubmarineDiveRenderingDoesNotPanic 验证己方潜艇的潜航表现与状态图标在常显开关两态下都能绘制。
+// 场景：把 revealTestState 的 u_331 改为己方、位置 (5,5)，StartDive() 从水面进入 DiveStateDiving；200×200 屏幕、相机 10×10，ForceDisplayState 先 true 后 false 各画一帧。
+// 预期：drawBattleShips 两次都正常返回，覆盖己方潜艇的潜航淡出、潜航状态牌，以及状态行在 ForceDisplayState 开/关下的两种分支；失败意味着下潜过渡表现让绘制崩溃。
+// 覆盖：revealTestState + StartDive 断言成功，再调 drawRevealScene（Drawer.drawBattleShips 外包 require.NotPanics）两遍，不做像素校验。
 func TestOwnSubmarineDiveRenderingDoesNotPanic(t *testing.T) {
 	ms, sub := revealTestState()
 	sub.BelongPlayer = faction.HumanAlpha

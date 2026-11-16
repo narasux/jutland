@@ -15,6 +15,10 @@ import (
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
+// TestHasAirburst 验证对空近炸只在有爆炸半径且目标为飞机时启用。
+// 场景：BlastRadius=0.32 的弹药依次把目标设为 plane、ship，再在 plane 下把半径清零。
+// 预期：仅 (0.32, plane) 返回 true，ship 与零半径均 false；失败意味着对舰炮弹误触发空爆。
+// 覆盖：三次调用 HasAirburst，锁死半径大于 0 与目标类型两个条件的与逻辑。
 func TestHasAirburst(t *testing.T) {
 	bt := &Bullet{BlastRadius: 0.32, TargetObjType: object.TypePlane}
 	assert.True(t, bt.HasAirburst())
@@ -27,6 +31,10 @@ func TestHasAirburst(t *testing.T) {
 	assert.False(t, bt.HasAirburst())
 }
 
+// TestNewCopiesTemplateByValue 验证 New 按值拷贝弹药模板，实例修改不回写全局 Map。
+// 场景：注册 Damage=42、Diameter=127 模板，从 (3,4) 向 (5,6) 发射后把实例 Damage 改为 99。
+// 预期：模板仍为 42；实例保留 Name/Type/Diameter，CurPos、Plunge、Speed、Life、阵营取发射参数。
+// 覆盖：Cleanup 恢复 Map；断言模板与实例 10 处字段，防共享指针串改同型弹药。
 func TestNewCopiesTemplateByValue(t *testing.T) {
 	const name = "test/shallow-copy"
 	original, existed := Map[name]
@@ -72,7 +80,10 @@ func TestNewCopiesTemplateByValue(t *testing.T) {
 	assert.Equal(t, faction.HumanAlpha, b.BelongPlayer)
 }
 
-// 落角必须随射程单调不减，且近距离完全是平射。
+// TestPlungeForRangeIsMonotonic 验证落角随射程百分比单调不减，近距离为平射。
+// 场景：炮弹按射程从近到远计算落角；若出现回落，弹道会在中段突然变平，命中/危险界计算随之跳变。
+// 预期：射程 0 与 PlungeRangeStart 落角为 0；射程 1 为 1；0..1 采样全程不减且在 [0,1]。
+// 覆盖：断言三个端点，再以 0.02 步长遍历并比较相邻值。
 func TestPlungeForRangeIsMonotonic(t *testing.T) {
 	if got := PlungeForRange(0); got != 0 {
 		t.Fatalf("plunge at 0 range = %v, want 0", got)
@@ -96,7 +107,10 @@ func TestPlungeForRangeIsMonotonic(t *testing.T) {
 	}
 }
 
-// 危险界随落角收窄：平射不限制，吊射收敛到几十米。
+// TestDangerSpaceShrinksWithPlunge 验证危险界随落角增大而收窄：平射无限，垂直吊射最小。
+// 场景：平射炮弹沿瞄准线有很长危险界；大落角炮弹只在一个短区间内可命中，超过即落水。
+// 预期：Plunge=0 返回 +Inf；Plunge=1 返回 dangerHeight/dangerTanRef；中等落角大于垂直落角。
+// 覆盖：构造三颗不同 Plunge 的 Bullet，调用 DangerSpace 断言端点与单调性。
 func TestDangerSpaceShrinksWithPlunge(t *testing.T) {
 	flat := &Bullet{Plunge: 0}
 	if !math.IsInf(flat.DangerSpace(), 1) {
@@ -112,7 +126,10 @@ func TestDangerSpaceShrinksWithPlunge(t *testing.T) {
 	}
 }
 
-// 平射弹药永远不算越过瞄准点，吊射弹药越过一个危险界即落水。
+// TestPassedAimOnlyForPlunging 验证只有吊射弹药会在越过瞄准点一个危险界后判定落水。
+// 场景：平射炮弹沿地面飞行，不应“越过”瞄准点；大落角炮弹在瞄准点后方一个危险界即落水。
+// 预期：Plunge=0 永远 false；Plunge=1 在瞄准点后方 9 格为 true；距瞄准点 0.01 格时为 false。
+// 覆盖：构造三颗 Bullet，设置 TargetPos/CurPos，调用 PassedAim 断言。
 func TestPassedAimOnlyForPlunging(t *testing.T) {
 	flat := &Bullet{Plunge: 0, Rotation: 0, TargetPos: objPos.NewR(10, 10), CurPos: objPos.NewR(10, 1)}
 	if flat.PassedAim() {
@@ -128,6 +145,10 @@ func TestPassedAimOnlyForPlunging(t *testing.T) {
 	}
 }
 
+// TestShellTrailWaitsForHalfCell 验证炮弹尾迹按累计 0.5 格采样且前 10 拍不生成。
+// 场景：TypeShell、Speed=0.2、ForwardAge=11；连续三次调用 GenTrails，不推进年龄。
+// 预期：前两次累计 0.2/0.4 格返回 nil，第三次 0.6 格生成 1 条矩形尾迹，余量 0.1。
+// 覆盖：断言前两次长度为 0、第三次长度为 1 且 Shape=TrailShapeRect。
 func TestShellTrailWaitsForHalfCell(t *testing.T) {
 	bt := &Bullet{
 		Type:       TypeShell,
@@ -150,6 +171,10 @@ func TestShellTrailWaitsForHalfCell(t *testing.T) {
 	}
 }
 
+// TestRocketTrailAlternatesEveryThirdTick 验证火箭尾迹每 3 拍一个圆点并交替尾焰/灰烟。
+// 场景：TypeRocket、Speed=0.4、CurPos=(1,1)，把 ForwardAge 依次设为 2/3/4/6 调用 GenTrails。
+// 预期：2、4 拍无尾迹；3 拍为 1 个 Orange 尾焰；6 拍为 1 个 DarkSilver 烟点。
+// 覆盖：断言数量与颜色，覆盖模 3 取点和奇偶颜色分支。
 func TestRocketTrailAlternatesEveryThirdTick(t *testing.T) {
 	bt := &Bullet{
 		Type:       TypeRocket,
@@ -184,7 +209,10 @@ func colorOf(trails []*trail.Trail) color.Color {
 	return trails[0].Color
 }
 
-// 转向必须走最短弧：350° 到 10° 是向右 +20°，而不是向左 -340°。
+// TestTurnTowardsTakesShortestArc 验证转向走最短弧并受单帧最大转角限制。
+// 场景：炮弹/鱼雷从 350° 追 10° 时，应向右 +20° 而不是向左 -340°；大角度差要按 maxDelta 分帧转。
+// 预期：顺时针跨 0° 得 355；逆时针得 5；0→90 且 maxDelta=2 得 2；maxDelta 足够时到 90；maxDelta=0 直指目标。
+// 覆盖：表驱动五组 (current,target,maxDelta)，调用 turnTowards 断言结果。
 func TestTurnTowardsTakesShortestArc(t *testing.T) {
 	testCases := []struct {
 		name     string
@@ -210,7 +238,10 @@ func TestTurnTowardsTakesShortestArc(t *testing.T) {
 	}
 }
 
-// 普通弹药不能被导引：没有 Guidance 时 SteerTowards 不改变朝向。
+// TestSteerTowardsRequiresGuidance 验证没有 Guidance 的普通弹药不会被转向，有制导才按最大转角转向。
+// 场景：普通炮弹/炸弹应保持发射朝向；制导鱼雷/导弹才允许朝目标修正。
+// 预期：无 Guidance 时 Rotation 保持 0；加 Pursuit/TurnRate=180 后朝 (10,0) 转到 10°。
+// 覆盖：同一颗 Bullet 先无制导调用一次，再加 Guidance 调用一次，分别断言 Rotation。
 func TestSteerTowardsRequiresGuidance(t *testing.T) {
 	bt := &Bullet{CurPos: objPos.NewR(0, 0), Rotation: 0}
 	bt.SteerTowards(objPos.NewR(10, 0), 10)
@@ -225,6 +256,10 @@ func TestSteerTowardsRequiresGuidance(t *testing.T) {
 	}
 }
 
+// TestCanHitSubmergedByAmmoType 验证能否命中下潜潜艇由弹药类型与反潜标记决定。
+// 场景：表驱动 7 组：深弹、反潜鱼雷、潜艇鱼雷、普通鱼雷、炮弹、炸弹、火箭。
+// 预期：仅前三种返回 true，其余 false；失败意味着深弹失效或炮弹误伤水下目标。
+// 覆盖：逐项 assert.Equal 覆盖 Type 分支与 AntiSubmarine/SubmarineLaunched 两个标记。
 func TestCanHitSubmergedByAmmoType(t *testing.T) {
 	cases := []struct {
 		name string

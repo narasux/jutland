@@ -7,6 +7,10 @@ import (
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 )
 
+// TestReleaseClearsOwnerAndStopFade 验证尾迹对象池复用时清零归属与停船淡出状态。
+// 场景：circle 尾迹设 OwnerUid="ship" 并 BeginStopFade(10)，Release 后 New 一条 rect 尾迹。
+// 预期：New 复用同一指针，stopFade=false、OwnerUid=""，且 Pos=(3,4)、Shape=rect 来自新参数。
+// 覆盖：先断言淡出已置位，再断言池命中、旧状态清空与新字段生效。
 func TestReleaseClearsOwnerAndStopFade(t *testing.T) {
 	first := New(
 		objPos.NewR(1, 2), textureImg.TrailShapeCircle,

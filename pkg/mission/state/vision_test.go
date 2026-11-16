@@ -6,6 +6,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 )
 
+// TestStampLeavesCellsOutsideRadiusDark 验证 Stamp 只点亮半径内格子，Visible 每拍清空但 Explored 保留。
+// 场景：16×16 图上以 (5.2,5.2) 半径 2 照亮，(5,5) 在圆内、(9,5) 在圆外；帧末 CommitExplored 再 ClearVisible。
+// 预期：Stamp 后 (5,5) 可见、(9,5) 不可见；清空后 (5,5) 不可见但已探索，(9,5) 仍未被探索。
+// 覆盖：NewFactionVision(16,16) 上依次调用 Stamp/CommitExplored/ClearVisible，断言 VisibleAt 与 ExploredAt。
 func TestStampLeavesCellsOutsideRadiusDark(t *testing.T) {
 	vision := NewFactionVision(16, 16)
 	vision.Stamp(5.2, 5.2, 2)
@@ -28,6 +32,10 @@ func TestStampLeavesCellsOutsideRadiusDark(t *testing.T) {
 	}
 }
 
+// TestAllocateVisionsSkipsWhenFogDisabled 验证 allocateVisions 只在开启迷雾时建图，关闭时 Visions 保持 nil。
+// 场景：NewMissionState 在地图配置就绪后按 MapCfg 宽高调用；无雾任务不应产生任何视野分配与每拍扫描。
+// 预期：默认调用后 Player.Visions 为 nil；置 Core.FogOfWar=true 后 HumanAlpha/ComputerAlpha 均非 nil。
+// 覆盖：同一个空 MissionState 上前后两次 allocateVisions(8,8)，断言 map 的 nil 与两侧条目。
 func TestAllocateVisionsSkipsWhenFogDisabled(t *testing.T) {
 	ms := &MissionState{}
 	ms.allocateVisions(8, 8)
@@ -42,8 +50,10 @@ func TestAllocateVisionsSkipsWhenFogDisabled(t *testing.T) {
 	}
 }
 
-// 未知海面的边界必须按渲染分辨率渐变。按格读 Explored 会让边界在格线上
-// 一步跳 80 的暗度，主视图上就是一圈像被啃过的锯齿阶梯。
+// TestShadeEdgeIsSmoothAcrossCells 验证已探索/未知海面的蒙层边界按渲染分辨率渐变，而不是按格跳变。
+// 场景：视野边缘横跨一格时，若按格读取 Explored，边界会在格线上一步跳 80 点暗度，主视图出现锯齿硬边。
+// 预期：同一行相邻渲染像素的最大暗度差不超过 (shadeUnknown-shadeExplored)/2。
+// 覆盖：32x32 视野照亮 (16,16) 半径 5，第二拍只提交探索；扫描第 16 行渲染像素并记录最大差值。
 func TestShadeEdgeIsSmoothAcrossCells(t *testing.T) {
 	vision := NewFactionVision(32, 32)
 	vision.BeginFrame()
@@ -75,8 +85,11 @@ func TestShadeEdgeIsSmoothAcrossCells(t *testing.T) {
 	}
 }
 
-// 已探索的海面重新被照亮时，光圈的软边不能比已探索的暗度更黑，
-// 否则视野边缘会多出一圈比周围更暗的黑环。
+// TestShadeKeepsExploredSeaFromGoingDarker 验证已探索海面重新被照亮时，软边不会比已探索基准更黑。
+// 场景：视野从 (16,16) 前移到 (17,16)，光圈软边压在已探索海面上；
+// 若插值把 alpha 推高，边缘会出现更暗的黑环。
+// 预期：四角都已探索的渲染像素 alpha <= shadeExplored；任何像素 alpha <= shadeUnknown。
+// 覆盖：连续两拍 Stamp 制造软边，遍历全部渲染像素，用 fullExploredAround 判断四角并断言 alpha。
 func TestShadeKeepsExploredSeaFromGoingDarker(t *testing.T) {
 	vision := NewFactionVision(32, 32)
 	// 先停着照一片，再往前挪一格，制造出软边压在已探索海面上的情形。
@@ -121,8 +134,11 @@ func fullExploredAround(v *FactionVision, cx, cy int) bool {
 	return true
 }
 
-// 蒙层的三个基准状态不能串：看得见完全透明，看过但这一拍看不见是 shadeExplored，
-// 从没看过是 shadeUnknown。查表合成后这三个值必须精确落在格心像素上。
+// TestShadeBaseLevels 验证蒙层三个基准状态（可见/已探索不可见/未知）精确落在格心像素上。
+// 场景：某一格当前可见应完全透明，曾经看过但本拍不可见应为 shadeExplored，从未探索应为 shadeUnknown；
+// 三个值串了会让已探索区域变黑或未知区域透出地图。
+// 预期：格心像素 alpha 分别等于 0、shadeExplored、shadeUnknown。
+// 覆盖：先照亮 (8,8)，第二拍改照 (24,24)，读取三格中心像素断言。
 func TestShadeBaseLevels(t *testing.T) {
 	vision := NewFactionVision(32, 32)
 	vision.BeginFrame()

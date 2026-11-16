@@ -16,6 +16,10 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
+// TestTorpedoBomberSkipsReleaseWhenPathCrossesLand 验证鱼雷机发现陆地挡在投放航迹上时改派目标而不投雷。
+// 场景：飞机在 (0,0.5)、目标在 (2,0.5)，地图首行 "SCSSSSSSSS" 的 x=1 为海岸；另一艘敌舰在 (9,1)。
+// 预期：有陆地时 TorpedoPathCrossesLand 为 true、全海为 false；开火流程不投雷，改派到 alternate-target。
+// 覆盖：注册测试鱼雷与机型，构造射程 3 的鱼雷与攻击指令，断言未释放、无弹药、目标已改派。
 func TestTorpedoBomberSkipsReleaseWhenPathCrossesLand(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

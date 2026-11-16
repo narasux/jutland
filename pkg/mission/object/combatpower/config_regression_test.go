@@ -16,9 +16,11 @@ const (
 	minCheckedShips = 100
 )
 
-// TestAntiShipTopContributionIsNotAutocannon 防止机炮再次主导对舰输出。
-// 只要这艘船还有非机炮的对舰手段（主炮、副炮、鱼雷、舰载机），
-// 对舰第一贡献就不应该是口径 ≤45mm 的机炮。
+// TestAntiShipTopContributionIsNotAutocannon 验证机炮不会再主导对舰输出。
+// 场景：遍历 objUnit.AllShipNames/ShipMap，只看仍有非机炮对舰手段（主炮、副炮、鱼雷、舰载机）的舰船；
+// 口径 ≤45mm（autocannonDiameter）且能在 GunMap/BulletMap 中解析到弹丸的武器视为机炮。
+// 预期：每艘入选舰的 AntiShipContributions[0] 都不是机炮；入选样本不得少于 100 艘（minCheckedShips）。
+// 覆盖：按真实 configs 计算出的贡献排序第一项 + 样本量下限，防止机炮重新占据榜首。
 func TestAntiShipTopContributionIsNotAutocannon(t *testing.T) {
 	checked := 0
 	for _, name := range objUnit.AllShipNames {
@@ -43,8 +45,11 @@ func TestAntiShipTopContributionIsNotAutocannon(t *testing.T) {
 	}
 }
 
-// TestReportedCarrierAntiShipOutputIsNotGunDriven 固定“航母对舰主要贡献是机炮”的回归用例。
-// 加贺曾出现 25mm/60 机炮占对舰输出 41%、舰载机只排第二的情况。
+// TestReportedCarrierAntiShipOutputIsNotGunDriven 验证航母对舰主要贡献不是机炮，并固定加贺 41% 的回归场景。
+// 场景：加贺曾出现 25mm/60 机炮占对舰输出 41%、舰载机只排第二；用例直接读取真实 configs 的 kaga，
+// 按 Aircraft.Groups 区分舰载机贡献与 ≤45mm 机炮贡献（autocannonShareLimit=15%）。
+// 预期：舰载机 DPS 必须严格大于机炮 DPS，且机炮占 AntiShipContributions 总和的比例 <15%。
+// 覆盖：kaga 的 AntiShipContributions 分类求和、空输出保护与份额阈值断言。
 func TestReportedCarrierAntiShipOutputIsNotGunDriven(t *testing.T) {
 	const autocannonShareLimit = 15.0
 
@@ -78,10 +83,12 @@ func TestReportedCarrierAntiShipOutputIsNotGunDriven(t *testing.T) {
 	}
 }
 
-// TestJapanese25mmRateMatchesHistory 固定九六式 25mm 机炮的每管射速。
-// 该炮史实循环射速约 220 发/分（≈3.7 发/秒），是二战主要参战国里最慢的 25mm 级
-// 防空炮；配置里曾出现单装 750 发/分、双联/三联 1200 发/分的数值，比同级高 3~5 倍。
-// 单装、双联、三联共用同一门炮，每管射速必须一致。
+// TestJapanese25mmRateMatchesHistory 验证九六式 25mm 机炮每管射速符合史实。
+// 场景：该炮史实循环射速约 220 发/分（≈3.7 发/秒），是二战主要参战国最慢的 25mm 级防空炮；
+// 配置曾出现单装 750 发/分、双联/三联 1200 发/分，比同级高 3~5 倍。
+// 预期：JP/25/60/Type96、JP/25/60/2/Type96、JP/25/60/3/Type96 的 1/ReloadTime 均在 3.0~4.2 发/秒，
+// 且双联/三联每管射速与单装完全相等（当前 reloadTime 均为 0.27s，即 3.70 发/秒）。
+// 覆盖：GunMap 三型炮的射速区间 + 单装/多联每管射速一致性。
 func TestJapanese25mmRateMatchesHistory(t *testing.T) {
 	const minRate, maxRate = 3.0, 4.2
 
@@ -109,9 +116,12 @@ func TestJapanese25mmRateMatchesHistory(t *testing.T) {
 	}
 }
 
-// TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir 固定“水滴可对空、巨型剑鱼只能对舰”的区分。
-// 两者的撞击炮弹与射击参数一致，但对空能力必须解耦：水滴保留对空，剑鱼只打舰船；
-// 对舰 DPS 仍应一致，不能再被自身 EHP / 机动拉开。
+// TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir 验证“水滴可对空、巨型剑鱼只能对舰”的撞击武器区分。
+// 场景：waterdrop（1HP、水平/垂直免伤 100%）与 swordfish（100000HP、无减伤）使用同一撞击炮弹
+// （SE/GB/1/2048、3 发、0.001s、1.5 射程），但 Impact 对空、SwordfishImpact 仅对舰。
+// 预期：Impact 的 AntiShip/AntiAircraft 均为 true，SwordfishImpact 仅 AntiShip；水滴对舰对空战力为正，
+// 剑鱼 AntiAir=0 且对舰为正；两舰 Details.AntiShipDPS 相等；水滴 Survival/Total 均高于剑鱼。
+// 覆盖：GunMap 两门撞击炮能力位、CombatPower 对舰/对空轴、有效对舰 DPS 相等与免伤舰体生存排序。
 func TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir(t *testing.T) {
 	waterdrop, swordfish := objUnit.ShipMap["waterdrop"], objUnit.ShipMap["swordfish"]
 	if waterdrop == nil || swordfish == nil {

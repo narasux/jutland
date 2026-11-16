@@ -7,6 +7,10 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
+// TestDamageFlagTextKeepsSmallDamageVisible 验证伤害飘字取整规则不会把小额伤害显示为 0。
+// 场景：分别调用 DamageFlagText(12.9) 与 DamageFlagText(0.4)，再用前者创建文字标记。
+// 预期：12.9 截断得 "12"，0.4 保留两位小数得 "0.40"；NewText 的 Text="12" 且 Img=nil。
+// 覆盖：两次字符串断言加 NewText 字段断言，确认走直接绘制文字而非图片标记。
 func TestDamageFlagTextKeepsSmallDamageVisible(t *testing.T) {
 	if got := DamageFlagText(12.9); got != "12" {
 		t.Fatalf("damage text = %q, want 12", got)

@@ -34,6 +34,10 @@ func newDepthCharge(pos objPos.MapPos, player faction.Player) *objBullet.Bullet 
 	}
 }
 
+// TestDepthChargeOnlyDamagesSubmarines 验证深弹只对潜艇结算，且下潜潜艇需被本方点亮。
+// 场景：SimTick=100，深弹在 (10,10)、半径 1.3；下潜 sub1 被点亮至 110，浮航 sub2 距 0.5，驱逐舰距 0.8。
+// 预期：sub1/sub2 均掉血，驱逐舰保持 100 HP；说明类型过滤、探测记忆与半径判定同时生效。
+// 覆盖：depthChargeState 放三舰并 rebuildCombatBuckets，调 resolveDepthChargeDamage 后断言各自 CurHP。
 func TestDepthChargeOnlyDamagesSubmarines(t *testing.T) {
 	submerged := &objUnit.BattleShip{
 		Uid: "sub1", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
@@ -61,6 +65,10 @@ func TestDepthChargeOnlyDamagesSubmarines(t *testing.T) {
 	require.Equal(t, 100.0, destroyer.CurHP, "深弹不伤水面舰")
 }
 
+// TestDepthChargeBlindFireDoesNotDamage 验证未探测到水下潜艇时深弹盲炸不结算伤害。
+// 场景：sub 在 (10,10) 完全下潜且 DetectedBy 为空，HumanAlpha 的深弹在同一点引爆。
+// 预期：resolveDepthChargeDamage 因 CanSeeShip 为 false 跳过该艇，CurHP 保持 100。
+// 覆盖：仅含一艘潜艇的 Arena，重建桶后调用落点结算，断言血量不变。
 func TestDepthChargeBlindFireDoesNotDamage(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
@@ -77,6 +85,10 @@ func TestDepthChargeBlindFireDoesNotDamage(t *testing.T) {
 	require.Equal(t, 100.0, sub.CurHP, "未被探测时盲炸不结算")
 }
 
+// TestDepthChargeShouldExplodeTriggers 验证深弹近炸、越过瞄准点与寿命耗尽三类引爆条件。
+// 场景：深弹近炸半径 1.0、Rotation=90、目标 (10,10)，依次放在目标点、(7,10)、(11,10) 与 Life=0 的位置。
+// 预期：目标点因距离≤1 引爆；未到且未过点时返回 false；越过瞄准点沿弹道 along≥0；寿命归零也引爆。
+// 覆盖：空白 depthChargeState 上调 depthChargeShouldExplode，逐个切换 CurPos/Life/TargetPos 断言 true/false。
 func TestDepthChargeShouldExplodeTriggers(t *testing.T) {
 	ms := depthChargeState()
 	m := &MissionManager{state: ms}
@@ -105,6 +117,10 @@ func TestDepthChargeShouldExplodeTriggers(t *testing.T) {
 	require.True(t, m.depthChargeShouldExplode(bt))
 }
 
+// TestDepthChargePipelineThroughShotBullets 验证深弹走通用 updateShotBullets 分支完成飞行、引爆与移除。
+// 场景：3000 HP 下潜潜艇被点亮至 500 拍，深弹以速度 0.03、寿命 40、近炸半径 1.0 进入弹药队列。
+// 预期：通用弹药循环识别 TypeDepthCharge 并调用结算，潜艇掉血，已引爆的深弹从 ForwardingBullets 移除。
+// 覆盖：构造带 Shooter/BlastRadius/Target 的深弹，执行一次 updateShotBullets 后断言 CurHP<3000 且队列为空。
 func TestDepthChargePipelineThroughShotBullets(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 3000, TotalHP: 3000, Type: objUnit.ShipTypeSubmarine,
@@ -131,6 +147,10 @@ func TestDepthChargePipelineThroughShotBullets(t *testing.T) {
 	require.Empty(t, ms.Arena.ForwardingBullets, "深弹引爆后不应继续飞行")
 }
 
+// TestDepthChargeRackCanFireAhead 验证舰艏正对目标时前方深弹架仍能按左右射界投放。
+// 场景：驱逐舰在 (10,10)、航向 90，潜艇在正前方 (11.5,10)；深弹架位置 -0.86，左右射界合为全周。
+// 预期：launcher.Fire 返回 1 发弹药且类型为 TypeDepthCharge，证明前方目标未被射界或目标门槛过滤。
+// 覆盖：重置 config.G 消除速度倍率影响，用 NewRocketLauncher("UK/DC/5/MkVII") 构造后断言弹药数量与类型。
 func TestDepthChargeRackCanFireAhead(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -156,8 +176,10 @@ func TestDepthChargeRackCanFireAhead(t *testing.T) {
 	require.Equal(t, objBullet.TypeDepthCharge, bullets[0].Type)
 }
 
-// TestDepthChargeSinkRecordsShooter 深弹击沉潜艇时必须记录投弹方与武器，
-// 否则战报只剩「沉没 潜艇 X」，看不出是谁击沉的。
+// TestDepthChargeSinkRecordsShooter 验证深弹击沉潜艇时记录投弹方与武器，战报能显示「谁用什么击沉」。
+// 场景：nautilus 50/100 在 (10,10)，gurkha 的 Mk6 深弹以 Shooter=dd、ShooterName=gurkha、ShooterObjType=TypeShip 在同点结算，随后 Stats.RecordShipLost。
+// 预期：HP 归零、SunkByHit=true，LastAttackerName/Type/Player 与 LastHit.WeaponType=depth_charge 完整；战报 1 条 ShipSunk 且 ActorName=gurkha、Hit.WeaponType=depth_charge。
+// 覆盖：resolveDepthChargeDamage 的击杀字段写入与 RecordShipLost 的战报生成，回归「只剩沉没潜艇、无投弹方」。
 func TestDepthChargeSinkRecordsShooter(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", Name: "nautilus", CurHP: 50, TotalHP: 100,

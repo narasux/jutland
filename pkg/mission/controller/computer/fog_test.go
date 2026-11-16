@@ -11,7 +11,13 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-// 迷雾里舰队推进时，最近一次看见敌人的位置优先，别被未探索海面带走。
+// TestSearchAdvancePrefersLiveContact 验证迷雾搜索推进优先选未过期接触。
+// 场景：24x24 FactionVision 只 Stamp(2,2,2) 并 CommitExplored，Contacts 里
+// "stale" 在 (20,20)、ExpireTick=0，"fresh" 在 (9,4)、ExpireTick=100；第 10 拍从
+// 舰队位置 (2,2) 求推进点。
+// 预期：searchAdvancePoint 返回 ok，且推进点为 (9,4) 而不是已过期的 (20,20)；
+// 失败会把舰队带向早已失效的旧接触。
+// 覆盖：直接调用 searchAdvancePoint，用 got.Near(objPos.New(9,4), 0.01) 断言。
 func TestSearchAdvancePrefersLiveContact(t *testing.T) {
 	vision := state.NewFactionVision(24, 24)
 	vision.Stamp(2, 2, 2)
@@ -48,7 +54,13 @@ func fogBattlefield(t *testing.T) (*state.MissionState, *ComputerDecisionHandler
 	return ms, handler, handler.snapshot(ms)
 }
 
-// 迷雾下没有可见目标时，攻击组必须转入搜索推进，而不是回锚点罚站。
+// TestAttackOrderSearchesWhenNoEnemyVisible 验证迷雾下无可见敌舰时攻击组转入搜索推进。
+// 场景：fogBattlefield 造 24x24 视野图，只点亮 (2,2) 半径 2；己方护卫舰在 (2,2)，
+// 敌舰 foe 在 (20,20) 的雾里，FogOfWar=true，锚点固定 (2,2)。
+// 预期：makeAttack 返回 order.searching=true；desiredRoute(routeAttack) 返回 ok，
+// 且推进点距舰船 ≥1 格（不会回锚点罚站）。
+// 覆盖：config.DefaultAIStrategies() 下调用 makeAttack / desiredRoute，检查 searching
+// 与 route.dest 距离。
 func TestAttackOrderSearchesWhenNoEnemyVisible(t *testing.T) {
 	_, handler, snap := fogBattlefield(t)
 	handler.anchor = objPos.New(2, 2)
@@ -68,7 +80,11 @@ func TestAttackOrderSearchesWhenNoEnemyVisible(t *testing.T) {
 	}
 }
 
-// 有接触时直接扑最近一次看见敌人的位置。
+// TestAttackOrderHeadsForContact 验证有接触时攻击组直扑最近一次看见敌人的位置。
+// 场景：fogBattlefield 中注入两个接触："stale" 在 (20,20)、ExpireTick=0；
+// "fresh" 在 (18,6)、ExpireTick=SimTick+600；锚点 (2,2)。
+// 预期：desiredRoute(routeAttack) 的 dest 为 (18,6)，与过期接触无关。
+// 覆盖：makeAttack 后调用 desiredRoute，用 route.dest.Near((18,6), 0.01) 断言。
 func TestAttackOrderHeadsForContact(t *testing.T) {
 	ms, handler, snap := fogBattlefield(t)
 	handler.anchor = objPos.New(2, 2)
@@ -87,7 +103,13 @@ func TestAttackOrderHeadsForContact(t *testing.T) {
 	}
 }
 
-// 连接触都没有时，朝未探索海面的重心推，而不是各自找最近的前线散开。
+// TestSearchAdvanceFallsBackToUnexploredCentroid 验证无接触时朝未探索海面重心推进。
+// 场景：fogBattlefield 的 24x24 视野图仍有未探索格，舰队在 (2,2)；先无接触求点，
+// 再注入过期接触，最后把起点放在重心本身上。
+// 预期：前两次都返回 vision.UnexploredCentroid()（过期接触不参与）；站在重心时
+// 退到最近的前线格，避免原地不动。
+// 覆盖：直接调用 searchAdvancePoint，断言与 UnexploredCentroid 的 Near 关系及
+// 重心起点时返回值不同。
 func TestSearchAdvanceFallsBackToUnexploredCentroid(t *testing.T) {
 	ms, _, _ := fogBattlefield(t)
 	vision := ms.Player.Visions[faction.ComputerAlpha]
@@ -116,6 +138,11 @@ func TestSearchAdvanceFallsBackToUnexploredCentroid(t *testing.T) {
 	}
 }
 
+// TestSnapshotKeepsUnseenEnemyOut 验证迷雾下 AI 快照不包含看不见的敌舰。
+// 场景：24x24 视野图只点亮以 (2,2) 为圆心、半径 2 的区域，敌舰 foe 在 (20,20)；
+// 随后把 foe 挪进 (3,2)，正好落进刚才点亮的区域。
+// 预期：雾里的 foe 既不在 snap.enemy 也不在 snap.byUID；挪进可见区后两者都出现。
+// 覆盖：fogBattlefield 打开 FogOfWar、只给 ComputerAlpha 建视野，前后两次 snapshot 对比。
 func TestSnapshotKeepsUnseenEnemyOut(t *testing.T) {
 	ms, handler, snap := fogBattlefield(t)
 	if len(snap.enemy) != 0 {
@@ -132,7 +159,12 @@ func TestSnapshotKeepsUnseenEnemyOut(t *testing.T) {
 	}
 }
 
-// 看见了敌人就不再搜索推进，交回正常的阵位 / 追击逻辑。
+// TestAttackOrderStopsSearchingWithVisibleEnemy 验证看见敌人后退出搜索推进。
+// 场景：fogBattlefield 中把敌舰 foe 从 (20,20) 挪到 (3,2)，正好落在 (2,2) 半径 2
+// 的已点亮区域内；重新 snapshot 后锚点仍为 (2,2)。
+// 预期：makeAttack 返回的 order.searching=false，交回正常阵位 / 追击逻辑；
+// 失败意味着有可见目标仍整队向未探索海面推进。
+// 覆盖：snapshot 前后对比，断言 order 非 nil 且 searching 为 false。
 func TestAttackOrderStopsSearchingWithVisibleEnemy(t *testing.T) {
 	ms, handler, snap := fogBattlefield(t)
 	ms.Arena.Ships["foe"].CurPos = objPos.New(3, 2)

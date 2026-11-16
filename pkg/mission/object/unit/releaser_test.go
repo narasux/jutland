@@ -11,6 +11,12 @@ import (
 	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
+// TestAerialTorpedoCanAttackShorelineTargetWithoutRunningFarPastIt
+// 验证空投鱼雷打贴岸目标时不会因目标身后的陆地而拒投，
+// 也不会把鱼雷寿命算得过长而冲上岸。
+// 场景：目标在 (1.5,0.5)，身后 (2.0,0.5) 是陆地；若用整条路径检测陆地会误判，若寿命按射程算会撞岸。
+// 预期：pathCrossesLand 返回 false；Fire 生成 1 枚鱼雷；Life 按到目标距离+1 帧，最大行程小于到岸距离。
+// 覆盖：构造 5 格海岸地图、贴岸目标，调用 pathCrossesLand/Fire 并断言弹道参数。
 func TestAerialTorpedoCanAttackShorelineTargetWithoutRunningFarPastIt(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

@@ -1,3 +1,6 @@
+//go:build manual
+
+// 手工截图验收：JUTLAND_UNITPANEL_CAPTURE_DIR=... go test -tags manual -run TestCaptureUnitPanelScenarios ./pkg/mission/unitpanel
 package unitpanel
 
 import (
@@ -46,6 +49,11 @@ func (*renderTestGame) Draw(*ebiten.Image) {}
 
 func (*renderTestGame) Layout(_, _ int) (int, int) { return 1280, 720 }
 
+// TestMain 验证截图测试入口：仅在显式环境变量下启动 Ebiten 主循环，否则直接跑普通测试。
+// 场景：设置了 JUTLAND_UNITPANEL_RENDER_TEST 或 JUTLAND_UNITPANEL_CAPTURE_DIR 时，绘制必须跑在游戏循环线程；
+// 未设置时 CI/无窗口环境应正常执行其余测试。
+// 预期：两变量为空则 os.Exit(m.Run())；否则 RunGame 持续出帧，测试完成后以测试码退出。
+// 覆盖：后台 goroutine 跑 m.Run，经 renderEndCh 通知 Update 返回 Termination，另设 SetRunnableOnUnfocused。
 func TestMain(m *testing.M) {
 	if os.Getenv(renderTestEnv) == "" && os.Getenv(captureDirEnv) == "" {
 		os.Exit(m.Run())
@@ -64,6 +72,10 @@ func TestMain(m *testing.M) {
 	os.Exit(<-codeCh)
 }
 
+// TestCaptureUnitPanelScenarios 验证截图验收流程能按三种场景绘制单位面板并导出 PNG。
+// 场景：未设 JUTLAND_UNITPANEL_CAPTURE_DIR 时跳过；设置后借 Ebiten 主循环绘制，避免后台窗口暂停 Draw。
+// 预期：未设目录 t.Skip；设置后为 3 个场景各生成 <name>.png，绘制与编码不报错；失败意味着渲染或面板绘制崩溃。
+// 覆盖：1280 战列舰、1280 航母、1920 双舰三场景，region 宽 280，runOnRenderFrame 内 Draw 并 png.Encode。
 func TestCaptureUnitPanelScenarios(t *testing.T) {
 	captureDir := os.Getenv(captureDirEnv)
 	if captureDir == "" {

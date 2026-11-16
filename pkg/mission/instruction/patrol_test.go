@@ -49,7 +49,14 @@ func newPatrolTestState(t *testing.T, offsetX float64) (*state.MissionState, *ob
 	return ms, plane
 }
 
-// 没有目标的战斗机绕着基地盘旋等下一个目标，不返航。
+// TestPlanePatrolCirclesBase 验证无目标的战斗机绕基地盘旋而不返航。
+// 场景：fighter-patrol-test 型号（MaxSpeed 0.08、RotateSpeed 20、RemainRange 200）
+// 位于航母 carrier (10,10) 东侧 6 格处，NewPlanePatrol 后推进 600 拍。
+// 预期：指令不结束、ForceReturn=false；飞机至少一次进入距基地 3 格内、全程不
+// 超过 8 格，绕基地方位角累计 ≥180°，RemainRange 相比初始值下降（空中盘旋耗油）。
+// 失败意味着 CAP 会在无目标时直接返航或原地悬停。
+// 覆盖：newPatrolTestState(t, 6) + NewPlanePatrol + 600 次 Exec，逐拍累计
+// base.CurPos.Angle(plane.CurPos) 并检查距离与燃油。
 func TestPlanePatrolCirclesBase(t *testing.T) {
 	ms, plane := newPatrolTestState(t, 6)
 	base := ms.Arena.Ships["carrier"]
@@ -91,7 +98,13 @@ func TestPlanePatrolCirclesBase(t *testing.T) {
 	}
 }
 
-// 燃油耗尽或基地沉没后巡逻结束，交给 updatePlaneAttackOrReturn 换返航指令。
+// TestPlanePatrolEndsOnReturnConditions 验证 ForceReturn 与基地沉没结束巡逻。
+// 场景：两段子场景——(1) 飞机 ForceReturn=true 后执行巡逻；(2) 从 Arena.Ships
+// 删除 carrier 后执行巡逻。
+// 预期：第一段立即 Executed；第二段同样 Executed 且 plane.ForceReturn=true，
+// 把飞机交给 updatePlaneAttackOrReturn / PlaneReturn 按坠毁处理。
+// 覆盖：newPatrolTestState(t, 6) + NewPlanePatrol 两次，分别断言 Executed 与
+// ForceReturn。
 func TestPlanePatrolEndsOnReturnConditions(t *testing.T) {
 	ms, plane := newPatrolTestState(t, 6)
 	order := NewPlanePatrol(plane.Uid)
@@ -127,7 +140,14 @@ func withPatrolIntel(
 	}
 }
 
-// 有敌舰接触时，巡逻圆心前出到基地朝敌一侧，而不是死守基地上空。
+// TestPlanePatrolCenterAdvancesTowardEnemyContact 验证有接触时巡逻圆心向敌前出。
+// 场景：withPatrolIntel 把 SimTick 设为 100、地图 256x256，HumanAlpha 视野里
+// 敌接触在基地 (10,10) 正东 80 格 (90,10)、ExpireTick=1000；战斗机在基地上，
+// 推进 900 拍。
+// 预期：飞机在基地朝东 patrolForwardOffset=10 格、半径 patrolRadius=2.5 的
+// 圆上盘旋，距基地落在 10±2.5±1 即 6.5~13.5 格，且 RX>基地 RX（不会停在西侧）。
+// 覆盖：newPatrolTestState(t,0) + withPatrolIntel + 900 次 Exec，断言最终距离
+// 区间与东西方向。
 func TestPlanePatrolCenterAdvancesTowardEnemyContact(t *testing.T) {
 	ms, plane := newPatrolTestState(t, 0)
 	base := ms.Arena.Ships["carrier"]
@@ -153,7 +173,13 @@ func TestPlanePatrolCenterAdvancesTowardEnemyContact(t *testing.T) {
 	}
 }
 
-// 没有敌舰接触时朝地图中心前出，让 CAP 面向双方相向展开的方向。
+// TestPlanePatrolCenterFallsBackToMapCenter 验证无接触时朝地图中心前出。
+// 场景：withPatrolIntel 给 256x256 地图但不给任何接触，基地在 (10,10)、地图中心
+// (128,128) 在其东南；推进 900 拍。
+// 预期：巡逻圆心沿基地→地图中心方向前出 10 格，飞机距基地仍在 6.5~13.5 格，
+// 且 RX>基地 RX；这样 CAP 面向双方相向展开的方向，而不是死守基地上空。
+// 覆盖：newPatrolTestState(t,0) + withPatrolIntel(nil) + 900 次 Exec，断言距离
+// 区间与 RX 方向。
 func TestPlanePatrolCenterFallsBackToMapCenter(t *testing.T) {
 	ms, plane := newPatrolTestState(t, 0)
 	base := ms.Arena.Ships["carrier"]
@@ -176,7 +202,12 @@ func TestPlanePatrolCenterFallsBackToMapCenter(t *testing.T) {
 	}
 }
 
-// 过期的敌舰接触不能作为前出方向。
+// TestPlanePatrolCenterIgnoresExpiredContact 验证过期接触不参与巡逻前出方向。
+// 场景：withPatrolIntel 把 SimTick 推到 100，接触点在 (250,10)、ExpireTick 在
+// 调用前按初始 SimTick=10 记为 9；基地在 (10,10)，地图 256x256。
+// 预期：patrolCenter 忽略该接触，改用地图中心 (128,128)，因基地在西北角，
+// 返回圆心 RX>10 且 RY>10（东南方向）；若采用过期接触，圆心会朝正东。
+// 覆盖：直接调用 NewPlanePatrol(...).patrolCenter(ms, plane, base)，断言坐标方向。
 func TestPlanePatrolCenterIgnoresExpiredContact(t *testing.T) {
 	ms, plane := newPatrolTestState(t, 0)
 	withPatrolIntel(ms, map[string]state.Contact{

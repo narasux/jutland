@@ -4,9 +4,10 @@ import (
 	"testing"
 )
 
-// 舰对空命中率按弹药口径分级：小口径速射防空炮最高，中口径次之，
-// >155mm 主炮客串防空直击概率最低。机种差异不再硬编码在本函数里，
-// 而是乘上飞机自身的 FlakVulnerability，故这里统一以常规脆弱度 1 为基准。
+// TestAaHitChanceCaliberTiers 验证舰对空命中率按弹药口径分三档，且 40/155/156mm 边界归属正确。
+// 场景：固定 FlakVulnerability=1，比较 20mm、127mm、203mm，再逐个检查 40、41/127/155、156mm 的档位。
+// 预期：20mm=1/5、127mm=1/9、203mm=1/14 且严格递减；40mm 仍小口径，41~155mm 中口径，156mm 起大口径。
+// 覆盖：aaHitChance 的 ≤40/≤155/>155 分支与三个命中率常数，精确比较浮点值而不只比大小。
 func TestAaHitChanceCaliberTiers(t *testing.T) {
 	small := aaHitChance(20, 1)
 	medium := aaHitChance(127, 1)
@@ -43,8 +44,10 @@ func TestAaHitChanceCaliberTiers(t *testing.T) {
 	}
 }
 
-// 脆弱度作为命中率乘数线性生效；零值与负数（未解析默认值的手工构造实例）
-// 退化回常规，避免出现“永远打不中”。
+// TestAaHitChanceScalesWithVulnerability 验证命中率对飞机 FlakVulnerability 线性缩放，零值与负值回退常规。
+// 场景：以 127mm、脆弱度 1 的 1/9 为基准，分别取 1/3、2、0、-0.5 计算 aaHitChance。
+// 预期：1/3 精确等于 base/3，2 精确翻倍；0 与 -0.5 都回退成 base，避免手工构造实例永远打不中。
+// 覆盖：aaHitChance 的 vulnerability<=0 兜底与 chance*vulnerability 乘法路径，逐值断言。
 func TestAaHitChanceScalesWithVulnerability(t *testing.T) {
 	base := aaHitChance(127, 1)
 

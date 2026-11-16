@@ -12,8 +12,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-// 炸弹/曲射炮弹落点爆炸应波及半径内的所有地面飞机（跑道/甲板滑跑中），
-// 空中目标与友方地面目标（友军伤害关闭时）不受波及。
+// TestBombBlastDamagesNearbyGroundPlanes 验证炸弹落点 1 格半径内波及所有地面飞机，空中与友军不受影响。
+// 场景：30 伤害炸弹在 (10,10) 引爆，附近有 0.3 格内 TakingOff 的敌机、1.5 格外敌机、0.28 格但 Cruising 的敌机，以及 0.3 格内 ComputerAlpha 友机；FriendlyFire=false。
+// 预期：damageGroundPlanesNear 返回 true；近处地面敌机掉血，远处、空中与同阵营地面机保持 100 HP。
+// 覆盖：bombBlastRadius=1.0 的距离过滤、IsOnGround 与 FriendlyFire 判定，断言四架飞机的 CurHP。
 func TestBombBlastDamagesNearbyGroundPlanes(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()

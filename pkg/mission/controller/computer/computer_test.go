@@ -10,6 +10,13 @@ import (
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
+// TestOrdersWaitForTheirOwnFrame 验证电脑召唤只在 60 拍的编组轮上计算。
+// 场景：场上只有 1 艘敌战列舰和 1 个集结点，决策按 8/30/60 三档错开轮转：
+// 8 拍只做沉船标记，30 拍没有到期的编组或航路任务，都不该重新召唤。
+// 预期：SimTick=0 与 60 各下 1 条召唤，8、30 拍返回空；失败说明召唤被挂到了
+// 错误的轮转档，增援会在不该出现的拍子反复排队。
+// 覆盖：makeTemplate("bb", 战列舰, 对舰 20, TimeCost 10) 配集结点 rp(0,0)，
+// 依次断言 summonNames 数量为 1、0、0、1。
 func TestOrdersWaitForTheirOwnFrame(t *testing.T) {
 	useTemplates(t, makeTemplate("bb", objUnit.ShipTypeBattleShip, 20, 0, 0, 0, 10))
 	enemy := makeShip("foe", faction.HumanAlpha, objUnit.ShipTypeBattleShip, 2, 0)
@@ -35,6 +42,12 @@ func TestOrdersWaitForTheirOwnFrame(t *testing.T) {
 	}
 }
 
+// TestPathMaintenanceIsStaggered 验证同组航路按成员序号错开、目标未动就不重下。
+// 场景：两艘己方护卫舰 a(10,10)、b(12,10) 编入进攻组，敌驱逐舰在 (50,10)；
+// 航路每 30 拍只轮到序号匹配的一艘，避免整队同时挤进只有 2 个工人的寻路线程。
+// 预期：0 拍只给 a 下 ShipMove，29 拍只给 b 下 ShipMovePath；30 拍敌舰未动、
+// 与上次目的地相距不到 8 格时不刷新；敌舰东移 9 格到 (59,10) 后 90 拍才重下 a 的航路。
+// 覆盖：TypeAbbr="WaterDrop" 让 a 走直线指令、b 走异步寻路，逐拍断言指令键集合。
 func TestPathMaintenanceIsStaggered(t *testing.T) {
 	first := makeShip("a", faction.ComputerAlpha, objUnit.ShipTypeFrigate, 10, 10)
 	first.TypeAbbr = "WaterDrop"
@@ -79,6 +92,12 @@ func TestPathMaintenanceIsStaggered(t *testing.T) {
 	}
 }
 
+// TestSunkTargetIsMarkedWithoutPathing 验证目标沉没时先标重选、当拍不乱下航路。
+// 场景：进攻组已锁定 foe，随后 foe 从 Ships 表消失；8 拍是沉船检查拍但不重建编组，
+// 30 拍才是下一轮航路与重选拍。
+// 预期：8 拍返回空且 attack.needsReselect=true；补入敌舰 next 后 30 拍
+// needsReselect 清零、targetUID="next"。失败意味着整组会继续开向已沉目标。
+// 覆盖：own(a) 对舰 10、foe 对舰 10、next 对舰 1；直接断言 attack 的两个字段。
 func TestSunkTargetIsMarkedWithoutPathing(t *testing.T) {
 	own := makeShip("a", faction.ComputerAlpha, objUnit.ShipTypeFrigate, 0, 0)
 	own.CombatPower.AntiShip = 10

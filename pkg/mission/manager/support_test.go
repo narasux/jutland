@@ -10,6 +10,13 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
+// TestSupportShipHealing 验证医疗船/维修船按 3 格范围、5 秒间隔治疗友军并生成治疗标记。
+// 场景：分别用 ShipTypeHospital 与 ShipTypeRepair 跑子测试；支援舰在 (10,10)、尺寸 30x12 且满血，
+// 周围放受损友舰 (12,10) 40/100、满血友舰 (11,10)、敌舰 (11,11) 40/100，以及 10 格外的友舰 (20,10)。
+// 预期：受损友舰被治满（单次 healAmount=30*12/6=60），满血舰、敌舰、范围外舰血量不变；
+// LastHealAt 非 0 表示已进入冷却，UI.GameMarks 恰好 1 个；5 秒内再次调用不会重复治疗。
+// 失败意味着支援舰会给敌方或远处单位回血、一次治疗溢出，或无视冷却连刷治疗标记。
+// 覆盖：MissionManager.updateHospitalShipHealing 两轮调用，断言 HP、时间戳与标记数量。
 func TestSupportShipHealing(t *testing.T) {
 	for _, supportType := range []objUnit.ShipType{
 		objUnit.ShipTypeHospital,

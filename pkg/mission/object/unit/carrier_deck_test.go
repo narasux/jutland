@@ -24,6 +24,10 @@ func registerTestPlane(t *testing.T, name string, planeType PlaneType) {
 	})
 }
 
+// TestLandingConfigForSlotAlternatesSeaSides 验证水上飞机着舰位按槽位交替分配到左右舷，甲板模式不受影响。
+// 场景：水上飞机母舰/无甲板舰用 LandingModeSea 回收飞机，多机同时着舰需要左右分舷避免叠在一起。
+// 预期：slot0 在左舷、slot1 在右舷，横向幅度为配置值；配置幅度过小时回落到默认 1.1；Deck 模式两个槽位相同。
+// 覆盖：分别用 Sea/窄 Sea/Deck 三套甲板调用 landingConfigForSlot(0/1)，断言 Lateral 符号与绝对值。
 func TestLandingConfigForSlotAlternatesSeaSides(t *testing.T) {
 	sa := &ShipAircraft{}
 	sa.ResolveDeck(&CarrierDeck{
@@ -63,6 +67,10 @@ func TestLandingConfigForSlotAlternatesSeaSides(t *testing.T) {
 	requireClose(t, deckRight.Lateral, 0.15)
 }
 
+// TestSeaLandingTouchdownUsesOppositeSides 验证水上着舰的实际溅落点落在舰尾左右两舷，且前后位置一致。
+// 场景：绘制与回收逻辑都调用 takeoffLandingPos 计算触点；若两个槽位都落在同侧，多机会重叠。
+// 预期：左槽 lateral<0、右槽>0，两侧绝对值相等，forward 都为 0（舰尾回收点）。
+// 覆盖：解析 Sea 甲板后对 slot0/1 调用 takeoffLandingPos，断言符号/对称性/纵向位置。
 func TestSeaLandingTouchdownUsesOppositeSides(t *testing.T) {
 	ship := &BattleShip{
 		Length:      256,
@@ -93,6 +101,11 @@ func TestSeaLandingTouchdownUsesOppositeSides(t *testing.T) {
 	requireClose(t, math.Abs(left.lateral), math.Abs(right.lateral))
 }
 
+// TestDeckValidateNormalizesFields 验证 CarrierDeck.Validate 把配置中的越界值夹到合法范围并补默认值。
+// 场景：手写 carrier_decks.json5 时 Forward 可能 >1、Lateral 超舷、RunLength 为 0/负、Landing.Mode 拼错。
+// 预期：Forward 夹到 [0,1]、Lateral 夹到 [-0.5,0.5]；RunLength/TakeOffTime/ApproachLength 补默认或下限；
+// 未知 Mode 回退 Deck，Sea 模式保留。
+// 覆盖：构造含多组越界字段的甲板，Validate 后逐项断言；再测 Sea 短进近段。
 func TestDeckValidateNormalizesFields(t *testing.T) {
 	deck := &CarrierDeck{
 		Name: "normalize-test",
@@ -131,6 +144,11 @@ func TestDeckValidateNormalizesFields(t *testing.T) {
 	requireClose(t, seaDeck.Landing.ApproachLength, minApproachLength)
 }
 
+// TestTakeOffUsesIndependentPointCooldowns 验证双弹射器各自独立冷却，同一时刻每个点只服务一架。
+// 场景：航母两条弹射器同时放飞；若共用一个冷却计时，第二架会被第一架挡住，出击效率异常。
+// 预期：同一 tick 两架从不同点起飞、库存 -2；第三架被两个冷却挡住；只释放点 0 后第四架从点 0 起飞，
+// 随后再次被挡。
+// 覆盖：构造双点 6s 冷却甲板，连续 TakeOff 并手动回拨单点计时，断言数量/位置/库存。
 func TestTakeOffUsesIndependentPointCooldowns(t *testing.T) {
 	useDefaultSettings(t)
 	registerTestPlane(t, "test-deck-fighter", PlaneTypeFighter)
@@ -202,6 +220,12 @@ func TestTakeOffUsesIndependentPointCooldowns(t *testing.T) {
 	}
 }
 
+// TestTakeOffRoutesPlaneTypesToWhitelistedPoints 验证按机型白名单选择弹射位，
+// 白名单不可用时回退到无白名单备用点。
+// 场景：短跑道只供战斗机、长跑道供轰炸机/鱼雷机；配置 TakeoffPoint.PlaneTypes 后，机种必须走对应点。
+// 预期：对舰先出俯冲轰炸机走长点，对空出战斗机走短点；长点冷却时鱼雷机回退到备用点；
+// 长点恢复后仍优先白名单点。
+// 覆盖：三点甲板 + 三种机型，逐步 TakeOff 并比较出生点与机名。
 func TestTakeOffRoutesPlaneTypesToWhitelistedPoints(t *testing.T) {
 	useDefaultSettings(t)
 	registerTestPlane(t, "test-route-fighter", PlaneTypeFighter)
@@ -303,6 +327,10 @@ func TestTakeOffRoutesPlaneTypesToWhitelistedPoints(t *testing.T) {
 	}
 }
 
+// TestTakeOffWithinRangeSkipsShortRangeGroups 验证按目标距离起飞时跳过航程不足的机组。
+// 场景：目标距航母 80 格，机库同时有航程 20 和 100 的俯冲轰炸机；短航程机起飞后无法抵达/返航。
+// 预期：TakeOffWithinRange 只返回长航程机组。
+// 覆盖：构造两组同类型不同 Range 的飞机，调用 TakeOffWithinRange(80) 断言机名。
 func TestTakeOffWithinRangeSkipsShortRangeGroups(t *testing.T) {
 	useDefaultSettings(t)
 	const shortName = "test-range-short"
@@ -342,6 +370,11 @@ func TestTakeOffWithinRangeSkipsShortRangeGroups(t *testing.T) {
 	}
 }
 
+// TestStartTakeoffAppliesLaunchAngle 验证弹射位 LaunchAngle 叠加到舰体航向，并从配置的舷侧位置出生。
+// 场景：斜角甲板/侧舷弹射器让飞机斜着离舰；若忽略 LaunchAngle，飞机航向会与跑道方向不一致。
+// 预期：CurRotation = normalize(舰体航向 + LaunchAngle)，CurPos 在 takeoffStartPos 附近，
+// FlightPhase 为 TakingOff。
+// 覆盖：舰体 30° + LaunchAngle -90°，调用 StartTakeoff 后逐项断言。
 func TestStartTakeoffAppliesLaunchAngle(t *testing.T) {
 	useDefaultSettings(t)
 	ship := &BattleShip{
@@ -367,6 +400,10 @@ func TestStartTakeoffAppliesLaunchAngle(t *testing.T) {
 	}
 }
 
+// TestNewShipKeepsTakeoffDeckAfterCopy 验证 NewShip 深拷贝模板后仍保留已解析的甲板指针，飞机可以正常起飞。
+// 场景：initShipMap 先给模板舰 ResolveDeck，再 deepcopy 生成局内舰；deepcopy 不复制未导出字段。
+// 预期：新舰 HasPlane 为 true、Aircraft.deck 非 nil、TakeOff 成功、库存 4→3。
+// 覆盖：注册模板舰和 DeckMap，NewShip 后检查 deck/起飞/库存。
 func TestNewShipKeepsTakeoffDeckAfterCopy(t *testing.T) {
 	useDefaultSettings(t)
 	registerTestPlane(t, "test-newship-fighter", PlaneTypeFighter)

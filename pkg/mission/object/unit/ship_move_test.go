@@ -21,7 +21,12 @@ func newCoastMapCfg() *mapcfg.MapCfg {
 	return &mapcfg.MapCfg{Map: rows, Cells: rows.ToGridCells(), Width: 8, Height: 3}
 }
 
-// 从水里朝陆地格直线开：必须被拦停（blocked），位置和速度都不能变。
+// TestMoveToBlocksEnteringLand 验证从水里朝陆地格直线开必须被拦停，位置和速度都不能变。
+// 场景：8×3 海岸地图（中间行 (3,1)/(4,1) 为海岸格 C，其余浅海 S）；舰船中心在 (2.5,1.5)
+// 即 (2,1) 水面格，航向 90（正东）、CurSpeed=MaxSpeed=0.02，目标 (4.5,1.5) 正在海岸格另一侧。
+// 预期：200 帧内某一帧 MoveTo 返回 blocked=true；拦停时中心点仍在水中（Map.IsLand(MX,MY)=false，
+// 紧贴岸边），CurSpeed 归零；未拦停的帧 arrive 均为 false。
+// 覆盖：循环 200 次 MoveTo(mapCfg, (4.5,1.5), false)，记录 blocked 并断言中心点未压陆、速度清零。
 func TestMoveToBlocksEnteringLand(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -54,7 +59,11 @@ func TestMoveToBlocksEnteringLand(t *testing.T) {
 	require.Equal(t, 0.0, ship.CurSpeed)
 }
 
-// 已经搁浅（中心点在海岸格上）的舰船允许移动，用于退出搁浅；换 WaterDrop 特例不受影响。
+// TestMoveToAllowsStrandedEscape 验证已经搁浅（中心点在海岸格上）的舰船允许移动，用于退出搁浅。
+// 场景：舰船中心压在 (3.5,1.5) 即 (3,1) 海岸格上，航向 270（正西）朝 (2.5,1.5) 水面后退，
+// 调用时传入 stranded=true；WaterDrop 特例走另一条分支（见 TestMoveToWaterDropCanCrossLand）。
+// 预期：首帧 MoveTo 返回 blocked=false、arrive=false；持续后退 100 帧内中心点离开海岸格回到水面。
+// 覆盖：调用 MoveTo(mapCfg, (2.5,1.5), true) 断言未拦停，再循环直到 Map.IsLand 为 false。
 func TestMoveToAllowsStrandedEscape(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -82,6 +91,10 @@ func TestMoveToAllowsStrandedEscape(t *testing.T) {
 	require.False(t, blocked)
 }
 
+// TestMoveToWaterDropCanCrossLand 验证 WaterDrop 特例可以穿越陆地。
+// 场景：小黄鸭/水滴这类特殊单位不遵守舰船地形限制；若统一按陆地阻挡，它们会被卡在岸上。
+// 预期：从 (2.5,1.5) 朝东越过海岸格移动，blocked 为 false。
+// 覆盖：构造 WaterDrop 舰船和 8x3 海岸地图，调用 MoveTo 并断言未被拦。
 func TestMoveToWaterDropCanCrossLand(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -102,9 +115,13 @@ func TestMoveToWaterDropCanCrossLand(t *testing.T) {
 	require.False(t, blocked, "可上陆的特殊船不受地形限制")
 }
 
-// 搁浅舰只能朝目标点靠近：朝着远离目标的方向开必须被拦停，否则舰体会在陆地上
-// 横向漂移（实测会沿珍珠港岸线一路漂进另一片不连通的港湾，之后寻路必然失败）。
-// 转向不受限制：原地转到目标方向后必须能退出来。
+// TestMoveToStrandedShipOnlyApproachesTarget 验证搁浅舰只能朝目标点靠近，朝远离目标的方向开必须被拦停。
+// 场景：中心点压在 (3,1) 海岸格、目标在正西 (2.5,1.5)；若允许随意移动，舰体会在陆地上横向漂移
+// （实测会沿珍珠港岸线一路漂进另一片不连通的港湾，之后寻路必然失败）。转向不受限制：
+// 原地转到目标方向后必须能退出来。
+// 预期：航向 90（正东、远离目标）时 blocked=true 且 CurPos.RX 保持 3.5 不变；
+// 原地转向 270 后 blocked=false，RX < 3.5，真正向水面移动。
+// 覆盖：同一艘搁浅舰两次 MoveTo(mapCfg, target, true)，断言 blocked 与位置变化。
 func TestMoveToStrandedShipOnlyApproachesTarget(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -135,8 +152,13 @@ func TestMoveToStrandedShipOnlyApproachesTarget(t *testing.T) {
 	require.Less(t, ship.CurPos.RX, 3.5, "应真正向水面移动")
 }
 
-// 舰体已经压上岸的舰船（系泊位、擦岸）不允许把压岸程度进一步加深，
-// 但仍必须能平移与退出来，否则系泊中的战舰会被永久锁死在岸边。
+// TestMoveToMooredShipCannotPushDeeperIntoLand 验证舰体已经压上岸的舰船不允许把压岸程度进一步加深，
+// 但仍必须能平移与退出来。
+// 场景：10×6 地图 y=2 整行海岸；舰船中心 (5.5,3.206) 在水面，Length=210、Width=33，
+// 舰艏朝正北已经压进 (5,2) 海岸格（hullLandOverlap > 0），像系泊位或擦岸状态。
+// 预期：朝岸里 (5.5,1.0) 移动 blocked=true 且 CurPos.RY 保持 3.206；
+// 掉头航向 180 朝外海 (5.5,5.5) 移动 blocked=false 且 RY > 3.206；否则系泊中的战舰会被永久锁死在岸边。
+// 覆盖：先断言前提（中心点在水面、压岸采样 > 0），再两次 MoveTo(stranded=true) 断言拦停与可退出。
 func TestMoveToMooredShipCannotPushDeeperIntoLand(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
@@ -179,8 +201,14 @@ func TestMoveToMooredShipCannotPushDeeperIntoLand(t *testing.T) {
 	require.Greater(t, ship.CurPos.RY, 3.206)
 }
 
-// HullLandOverlapSamples 是启动期配置校验与运行期阻挡判定共用的舰体压岸采样：
-// 完全在水面时为 0，舰艏压上岸时必须 > 0（按半长采样，不能把整舰长当半长）。
+// TestHullLandOverlapSamples 验证 HullLandOverlapSamples 的舰体压岸采样：
+// 完全在水面时为 0，舰艏或舰艉压上岸时必须 > 0，且按传入的半长采样。
+// 场景：该函数是启动期配置校验与运行期阻挡判定共用的采样；8×3 地图 x=3、x=4 为海岸格，
+// 全长参数分别取 block×2（256px → 半长 1 格）与 block/2（64px → 半长 0.25 格）。
+// 预期：开阔水面 (1,0.5) 朝东 → 0；从 (2.3,1.5) 朝东（半长 1 格 → 舰艏到 x=3.3）→ > 0；
+// 中心在水面但舰艉压岸 (4.8,1.5) → > 0；同一位置改传 block/2 的短半长 → 0。
+// 覆盖：四次调用 HullLandOverlapSamples(cfg, pos, rotation, halfLength)，
+// 断言全水面为 0、压岸 > 0、短半长不压岸为 0。
 func TestHullLandOverlapSamples(t *testing.T) {
 	cfg := newCoastMapCfg()
 	// 8x3 地图，x=3、x=4 是海岸格；半长 1 格 = 1 个 MapBlockSize

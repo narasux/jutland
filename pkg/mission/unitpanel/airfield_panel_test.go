@@ -43,6 +43,10 @@ func airfieldTestState(uid string) *state.MissionState {
 	return ms
 }
 
+// TestAirfieldPanelLayoutStacksSections 验证机场面板只有信息卡（无视图/系统页签），并生成 1 开关 + 2 生产行。
+// 场景：选中驻有 F4F-3/SBD-3 的机场；机场没有舰体视图与武器页签，布局需改排为单卡。
+// 预期：Visual/Systems 高 0、Info 高 140、contentHeight>Header；hits 恰 3 个且顺序为开关、F4F-3、SBD-3。
+// 覆盖：airfieldTestState + region(100,50,280,420)，查分区高度、3 个 hit 的 Kind/Uid/PlaneName 与 Info 容差。
 func TestAirfieldPanelLayoutStacksSections(t *testing.T) {
 	region := Rect{X: 100, Y: 50, W: 280, H: 420}
 	ms := airfieldTestState("af-test")
@@ -78,7 +82,10 @@ func TestAirfieldPanelLayoutStacksSections(t *testing.T) {
 	}
 }
 
-// TestAirfieldPanelActions 机场开关与生产机型行的点击产出对应类型化动作。
+// TestAirfieldPanelActions 验证机场面板的点击命中会转换为带机场 uid 的类型化动作。
+// 场景：选中驻有 F4F-3(4/6) 与 SBD-3(6/6) 的 af-test，面板按 region(100,50,280,420) 重建 hits；hits[0] 是机场状态开关，hits[2] 是 SBD-3 生产行。
+// 预期：activate(hits[0]) 只返回 1 条 ActionToggleAirfield（AirfieldUid=af-test）；activate(hits[2]) 只返回 1 条 ActionSetProducing（PlaneName=SBD-3）；失败意味着开关与选机型点错目标或动作重复。
+// 覆盖：updateWithPointer 生成 hits 后直接调用 activate 两次，逐字段断言 actions 长度、Kind、AirfieldUid、PlaneName。
 func TestAirfieldPanelActions(t *testing.T) {
 	region := Rect{X: 100, Y: 50, W: 280, H: 420}
 	ms := airfieldTestState("af-test")
@@ -98,9 +105,10 @@ func TestAirfieldPanelActions(t *testing.T) {
 	}
 }
 
-// TestAirfieldSelectionInvalidatesLayoutCache 选中机场必须让布局缓存失效：
-// 「未选中任何单位」的空布局与机场布局在舰船/焦点字段上同值，若缓存键不含
-// 机场 uid，会复用空布局（Info 高度为 0），面板只剩标题、信息卡画不出来。
+// TestAirfieldSelectionInvalidatesLayoutCache 验证选中机场必须让布局缓存失效。
+// 场景：机场面板与「未选中任何单位」的布局在舰船/焦点字段上同值；先以 SelectedAirfieldUid="" 填充缓存（Info.H=0），再选中 af-test，最后取消选中。
+// 预期：空选中 Info.H=0；选中后即使其它键值不变也要重算，Info.H=airfieldInfoPad(8)+6*airfieldLineH(22)=140；取消选中回到 0；失败意味着缓存键缺 airfield 字段会复用空布局，面板只剩标题、信息卡画不出来。
+// 覆盖：同一个 Panel 连续三次 updateWithPointer（ensureLayout 用 unitLayoutKey 缓存），断言三次 Info.H，容差 ±0.01。
 func TestAirfieldSelectionInvalidatesLayoutCache(t *testing.T) {
 	region := Rect{X: 100, Y: 50, W: 280, H: 420}
 	ms := airfieldTestState("af-test")
@@ -133,8 +141,10 @@ func TestAirfieldSelectionInvalidatesLayoutCache(t *testing.T) {
 	}
 }
 
-// TestAirfieldSquadRowsMarkProducing 生产机型自动切换：待命 + 出击 < 上限
-// 才生产；指定机型满编后顺延到下一个未满编机型，全部满编则不标记。
+// TestAirfieldSquadRowsMarkProducing 验证生产机型标记：待命+出击 < 上限才生产，指定机型满编后自动顺延。
+// 场景：af-test 的 F4F-3 为 4/6、SBD-3 为 6/6，CurProducing 却指定已满编的 SBD-3，应顺延到未满编的 F4F-3。
+// 预期：rows[0](F4F-3).Producing=true、rows[1](SBD-3)=false，Progress 落在 0–100；把 F4F-3 也补到 6/6 后两组都不标记，airfieldCapacityFull(rows)=true；失败意味着满编机型仍在吞生产或容量判断失效。
+// 覆盖：airfieldSquadRows 两次调用 + airfieldCapacityFull，断言 Producing、Progress 区间与满编提示。
 func TestAirfieldSquadRowsMarkProducing(t *testing.T) {
 	ms := airfieldTestState("af-test")
 	af := ms.Arena.Airfields["af-test"]
@@ -159,8 +169,10 @@ func TestAirfieldSquadRowsMarkProducing(t *testing.T) {
 	}
 }
 
-// TestAirfieldFundsLowHint 资金不足提示：己方机场未满编且资金低于当前机型
-// 单价时提示（停用不影响生产，照常提示）；满编 / 敌方机场不提示。
+// TestAirfieldFundsLowHint 验证资金不足提示：己方机场未满编且资金低于当前生产机型单价时提示。
+// 场景：临时把 PlaneMap["F4F-3"] 覆盖为 FundsCost=10、TimeCost=4（结束还原或删除）；af-test 的 F4F-3 为 4/6、SBD-3 满编，生产目标顺延到 F4F-3，玩家资金 5。
+// 预期：资金 5<10 提示；15 不提示；Disabled=true 时仍提示（停用不影响生产，照常开工）；F4F-3 补到 6/6 满编不提示；机场改为 ComputerAlpha 时不按玩家资金提示；失败意味着用错机型单价或给敌方机场提示。
+// 覆盖：依次修改 CurFunds/Disabled/CurCount/BelongPlayer 共五次调用 fundsLow，断言 true/false，Cleanup 还原 PlaneMap 原值。
 func TestAirfieldFundsLowHint(t *testing.T) {
 	// 覆盖机型费用模板：F4F-3 单价 10（原模板可能不存在或费用不同）
 	oldTemplate, hadTemplate := objUnit.PlaneMap["F4F-3"]
@@ -207,6 +219,10 @@ func TestAirfieldFundsLowHint(t *testing.T) {
 	}
 }
 
+// TestAirfieldSquadRowsCountFlyingPlanes 验证机队行按 BelongShip 统计空中飞机，库存/出击/损失分列。
+// 场景：机场驻 F4F-3 与 SBD-3，Arena.Planes 中有 1 架 F4F-3 仍在空，F4F-3 已损失 2 架。
+// 预期：F4F-3 行 Stock4 Max6 Flying1 Lost2，SBD-3 行 Flying0 Lost0；失败意味着空中数串机场或损失对不上。
+// 覆盖：airfieldTestState 构造 Groups 与 Losses，airfieldSquadRows 返回后断言行数、Name 与四个计数。
 func TestAirfieldSquadRowsCountFlyingPlanes(t *testing.T) {
 	ms := airfieldTestState("af-test")
 	rows := airfieldSquadRows(ms, ms.Arena.Airfields["af-test"])

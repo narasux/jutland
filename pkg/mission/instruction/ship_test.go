@@ -23,6 +23,12 @@ func setupGameSettings(t *testing.T) {
 	t.Cleanup(func() { config.G = oldSettings })
 }
 
+// TestShipMovePathDoesNotReturnToPositionAtCommandTime 验证寻路不再把下令时位置当首航点。
+// 场景：40x20 全水面地图，玩家在 (10,10) 下令让位于 (11,10) 的舰开往 (30,10)，
+// genPath 后直接检查生成的航点列表。
+// 预期：path 只有终点 (30,10) 一个点。若把 commandPos 也塞进航路，舰船会先掉头
+// 开回 1 格外的旧位置，表现为点击后先倒退再前进。
+// 覆盖：make(grid.Cells) 全 0 海图，调用 NewShipMovePath 与 genPath，Equal 比较整条 path。
 func TestShipMovePathDoesNotReturnToPositionAtCommandTime(t *testing.T) {
 	cells := make(grid.Cells, 20)
 	for y := range cells {
@@ -48,7 +54,13 @@ func TestShipMovePathDoesNotReturnToPositionAtCommandTime(t *testing.T) {
 	require.Equal(t, []objPos.MapPos{targetPos}, move.path)
 }
 
-// 起终点吸附到同一格（点击就在本格内）时，退化为对精确目标点的直线逼近。
+// TestShipMovePathSinglePointPath 验证起终点吸附到同一格时退化为精确点直线逼近。
+// 场景：NewShipMovePath("ship", (10,10), (10.4,10.3)) 后直接 applyPoints 传入
+// 单个格点 (10,10)——模拟寻路起终点吸附到同一格。
+// 预期：path 只含精确点击点 (10.4,10.3)，status 变为 Ready；不能改写成格心
+// (10.5,10.5)，否则近距离微调会先开向格心再折返。
+// 覆盖：直接调用 applyPoints([]grid.Point{{X:10, Y:10}})，Equal 比较 path 与
+// objPos.NewR(10.4,10.3)，并检查 status==Ready。
 func TestShipMovePathSinglePointPath(t *testing.T) {
 	move := NewShipMovePath("ship", objPos.New(10, 10), objPos.NewR(10.4, 10.3), 0)
 	move.applyPoints([]grid.Point{{X: 10, Y: 10}})
@@ -56,7 +68,12 @@ func TestShipMovePathSinglePointPath(t *testing.T) {
 	require.Equal(t, Ready, move.status)
 }
 
-// 直线移动被地形拦停时指令要正常收尾，不能永久滞留指令集。
+// TestShipMoveBlockedFinishesInstruction 验证被地形拦停时移动指令正常收尾。
+// 场景：8x3 地图 "SSSSSSSS"/"SSSCCSSS"/"SSSSSSSS"，(3,1)、(4,1) 是海岸格；
+// 舰船在 (2.5,1.5) 朝正东、速度 0.02，命令开往 (5.5,1.5)，逐拍 Exec 最多 500 拍。
+// 预期：move.Executed()=true，且结束时中心点不在陆格；旧行为可能永久滞留指令集
+// 或把舰船中心压进陆地。
+// 覆盖：调用 NewShipMove 后循环 Exec，断言 Executed 与 mapCfg.Map.IsLand 为 false。
 func TestShipMoveBlockedFinishesInstruction(t *testing.T) {
 	setupGameSettings(t)
 	rows := mapcfg.MapData{
@@ -90,8 +107,15 @@ func TestShipMoveBlockedFinishesInstruction(t *testing.T) {
 	require.False(t, mapCfg.Map.IsLand(ship.CurPos.MX, ship.CurPos.MY), "拦停时中心点不应压进陆地格")
 }
 
-// 回归：中心点压在海岸格上的搁浅舰，重新下达移动指令后必须能退出搁浅并继续机动。
-// 场景复现 2026-10-02 珍珠港存档：pennsylvania 卡死在 (51,88) 海岸格上。
+// TestShipMovePathRecoversStrandedShipOnPearlHarbor 验证珍珠港搁浅舰能退出海岸格。
+// 场景：复现 2026-10-02 珍珠港存档——pennsylvania（Uid "HA/BB-8"）中心点卡在
+// 海岸格 (51,88)，实坐标 (51.5248,88.1437)、航向 295.525°、MaxSpeed 0.0175、
+// 转向 0.325；命令开往 (40.5,80.5)，先 genPath 再逐拍 Exec，最多 6000 拍。
+// 预期：genPath 后 status=Ready（吸附起终点后可寻路）；执行完成、至少有一拍
+// 中心点离开陆格，最终距目标 ≤1.0 格且不是触发放弃分支；寻路 Preparing 时
+// 每次让出 1ms 等后台结果。
+// 覆盖：mapcfg.GetByName("pearl_harbor") 前提断言 IsLand(51,88)，NewShipMovePath
+// + genPath + 手动推进 Exec，断言 Ready/Executed/escapeTick/距离。
 func TestShipMovePathRecoversStrandedShipOnPearlHarbor(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")
@@ -193,9 +217,14 @@ func runShipMovePath(t *testing.T, misState *state.MissionState, move *ShipMoveP
 	return maxTicks
 }
 
-// 回归：中心点压在海岸格上的搁浅舰，走真实异步寻路（不预先 genPath）也必须能退回水中。
-// 旧实现把未吸附的起终点直接交给 Grid.Search，起点是陆格 → 寻路判为无效 →
-// 指令第一拍就结束、舰船一动不动（玩家点击毫无反应）。
+// TestShipMovePathStrandedShipEscapesWithAsyncSearch 验证真实异步寻路下搁浅舰也能脱困。
+// 场景：珍珠港海岸格 (59,122) 上的战列舰 HA/BB-9 位于 (59.5,122.5)，目标
+// (59.5,140.5)；不预先 genPath，由 NewShipMovePath 提交后台寻路，runShipMovePath
+// 推进最多 6000 拍、Preparing 时每拍睡 1ms。
+// 预期：指令完成且不判 Failed，中心点离开陆格并抵达目标 1 格内。旧实现把未吸附的
+// 起终点交给 Grid.Search，起点是陆格 → 判无效 → 第一拍就结束、舰船一动不动。
+// 覆盖：newBattleShip + newShipMoveState + runShipMovePath，断言 Executed、
+// !Failed、!IsLand、距离 ≤1.0，并 t.Logf 记录耗时。
 func TestShipMovePathStrandedShipEscapesWithAsyncSearch(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")
@@ -216,8 +245,14 @@ func TestShipMovePathStrandedShipEscapesWithAsyncSearch(t *testing.T) {
 	t.Logf("搁浅恢复耗时 %d 拍（%.1fs）", ticks, float64(ticks)/60)
 }
 
-// 右键点在海岸格上：目标必须吸附到同域水面，舰船停在岸边水面并正常完成。
-// 旧实现把原始陆格点当末段航点，舰船会主动往岸上开、撞停后放弃。
+// TestShipMovePathGoalOnCoastStopsOnWater 验证右键点在海岸格时目标吸附到同域水面。
+// 场景：珍珠港战列舰 HA/BB-10 在 (59.5,124.5) 航向 90°，点击 (59.5,122.5)，
+// 前提断言 (59,122) 是海岸格；异步推进最多 6000 拍。
+// 预期：目标经 prepareTarget 吸附后，指令完成且不判 Failed，舰船停在非陆格，
+// 最终距原始点击点 ≤2.0 格。旧实现把原始陆格当末段航点，舰船会主动往岸上开、
+// 撞停后放弃。
+// 覆盖：mapcfg.GetByName("pearl_harbor") + NewShipMovePath + runShipMovePath，
+// 断言 Executed/!Failed/!IsLand/距离，并记录拍数。
 func TestShipMovePathGoalOnCoastStopsOnWater(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")
@@ -238,9 +273,16 @@ func TestShipMovePathGoalOnCoastStopsOnWater(t *testing.T) {
 	t.Logf("岸边点击停靠耗时 %d 拍", ticks)
 }
 
-// 回归：舰艏顶岸被拦停后，单次指令内必须完成掉头脱离。
-// 旧实现累计受阻 80 拍（1.3s）就放弃，而战列舰掉头需要 400 拍以上，
-// 玩家必须反复右键下单（实测 3 次、19 秒）才能把船挪出来。
+// TestShipMovePathBeachedShipTurnsAroundInOneOrder 验证顶岸舰单次指令内完成掉头脱离。
+// 场景：珍珠港战列舰 HA/BB-11 在 (59.5,123.5) 朝正北；先朝岸线 (59.5,100.5)
+// MoveTo 直到 blocked（最多 2000 拍），确认 CurSpeed=0 后改令开往 (59.5,133.5)，
+// 最多推进 6000 拍。
+// 预期：指令完成且不判 Failed，最终距目标 ≤1.0，且离开起点 >8 格。旧实现累计
+// 受阻 80 拍（约 1.3s）就放弃，而战列舰掉头需要 400 拍以上，玩家实测要下 3 次
+// 指令、耗 19 秒才能挪出；现有 blockedNoProgressMaxTicks=240 只惩罚“既无位移
+// 也无转向”。
+// 覆盖：mapcfg.GetByName("pearl_harbor") + 预顶岸 + NewShipMovePath +
+// runShipMovePath，断言 Executed/!Failed/距离/离岸距离。
 func TestShipMovePathBeachedShipTurnsAroundInOneOrder(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")
@@ -268,8 +310,13 @@ func TestShipMovePathBeachedShipTurnsAroundInOneOrder(t *testing.T) {
 	t.Logf("贴岸掉头耗时 %d 拍（%.1fs）", ticks, float64(ticks)/60)
 }
 
-// 目标在封闭水域（珍珠港内湾）时，寻路不可达必须快速结束并标记失败，
-// 而不是让舰船在岸边无限磨。失败时不再弹“无法抵达”提示。
+// TestShipMovePathUnreachableTargetMarksFailed 验证封闭水域目标快速失败且不再弹提示。
+// 场景：珍珠港内湾 (58,121) 是水面，但与主海域 (59,140) 不在同一 WaterRegion；
+// 战列舰 HA/BB-12 在主海域 (59.5,140.5)，目标 (58.5,121.5)，最多推进 600 拍。
+// 预期：指令正常 Executed，Failed=true，且在 120 拍内结束（寻路结果返回即失败），
+// UI.GameMarks 为空——不再生成“无法抵达”提示。
+// 覆盖：mapcfg.GetByName("pearl_harbor") 断言 IsSea(58,121) 与水域不连通，
+// NewShipMovePath + runShipMovePath，断言 Executed/Failed/拍数/GameMarks。
 func TestShipMovePathUnreachableTargetMarksFailed(t *testing.T) {
 	setupGameSettings(t)
 	mapCfg := mapcfg.GetByName("pearl_harbor")
@@ -294,8 +341,16 @@ func TestShipMovePathUnreachableTargetMarksFailed(t *testing.T) {
 	require.Empty(t, misState.UI.GameMarks, "机动失败不再弹“无法抵达”提示")
 }
 
-// 长时间既无位移也无转向（航点被地形彻底挡死、航向又已经对准）时必须结束机动
-// 并标记失败：这条规则替代了旧的“累计受阻 80 拍放弃”，用来兜住真正不可达的机动。
+// TestShipMovePathNoProgressMarksFailed 验证长时间无位移无转向的机动标记失败。
+// 场景：内联构造的 8x4 地图（避免 EnsureBorder 夹 RY）中 (3,1)、(4,1) 是海岸；
+// 战列舰 HA/BB-13 在 (2.9,1.5) 朝正东、MaxSpeed 0.02；目标 (5.5,1.5) 本身是
+// 水面，但手工把 path 设为陆格 (4.5,1.5)、status=Ready、initSpeed=-1，舰船航向
+// 已对准正东、既不会转向也过不去。
+// 预期：最多 1000 拍内 Executed 且 Failed=true，耗时 ≥ blockedNoProgressMaxTicks-1
+// （240 拍），全程中心点不压进陆格。该规则替代旧的“累计受阻 80 拍放弃”，专门
+// 兜住真正不可达的机动。
+// 覆盖：rows.ToGridCells() 手工地图 + newShipMoveState + runShipMovePath，
+// 断言 Executed/Failed/ticks/IsLand。
 func TestShipMovePathNoProgressMarksFailed(t *testing.T) {
 	setupGameSettings(t)
 	// 四行地图：避免 EnsureBorder 把 RY 夹到边界，干扰“位置是否变化”的判断。
@@ -326,9 +381,15 @@ func TestShipMovePathNoProgressMarksFailed(t *testing.T) {
 	require.False(t, mapCfg.Map.IsLand(ship.CurPos.MX, ship.CurPos.MY), "全程不应压进陆格")
 }
 
-// 路径就绪后的首帧按"乘过全局速度倍率的巡航速度"恢复航速。
-// 回归：旧实现用未乘倍率的 MaxSpeed 夹取，在「快」倍速下会把舰船砍回半速，
-// 再靠加速慢慢爬回去——舰船速度因此长期低于巡航速度，慢速鱼雷的提前量全错。
+// TestShipMovePathRestoresSpeedAtCruiseSpeed 验证换路径首帧按倍率后的巡航速度恢复航速。
+// 场景：config.G.SpeedMultiplier=2，舰船 MaxSpeed=0.03，CruiseSpeed()=0.06；
+// 以巡航速度 0.06 创建 NewShipMovePath，genPath 后把 CurSpeed 设为 0.06，
+// 执行首帧。
+// 预期：CurSpeed 仍为 0.06（InDelta 1e-9），不被未乘倍率的 MaxSpeed=0.03 夹半。
+// 旧实现用 MaxSpeed 做上限，在“快”倍速下把舰船砍回半速再慢慢加速，导致航速长期
+// 低于巡航速度、慢速鱼雷提前量全错。
+// 覆盖：40x20 全水面网格 + NewShipMovePath/genPath + 单次 Exec，断言
+// CruiseSpeed 与 CurSpeed。
 func TestShipMovePathRestoresSpeedAtCruiseSpeed(t *testing.T) {
 	setupGameSettings(t)
 	config.G.SpeedMultiplier = 2
