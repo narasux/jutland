@@ -9,3 +9,12 @@ repos:
         types: [go]
         language: golang
         pass_filenames: false
+      # 每次提交前跑全量单测；测试失败会直接阻止 commit。
+      # Ebiten 测试需要可用的图形会话，无 GUI 的 CI 请配合 xvfb 运行。
+      - id: test
+        name: run unit tests
+        entry: go test -count=1 ./...
+        language: system
+        always_run: true
+        pass_filenames: false
+        require_serial: true
