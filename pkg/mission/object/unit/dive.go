@@ -22,8 +22,6 @@ const (
 )
 
 const (
-	// diveTransitionSpeedRatio 过渡态航速倍率（相对水面最大速）。
-	diveTransitionSpeedRatio = 0.5
 	// defaultSubmergedSpeedRatio 未配置时的水下航速倍率。
 	defaultSubmergedSpeedRatio = 0.35
 	// defaultDiveTimeSeconds / defaultSurfaceTimeSeconds 未配置时的切换耗时。
@@ -65,12 +63,11 @@ func (s *BattleShip) submergedSpeedRatio() float64 {
 	return defaultSubmergedSpeedRatio
 }
 
-// DiveSpeedRatio 当前深度状态下的航速倍率（相对水面最大速）。
+// DiveSpeedRatio 当前深度状态下的目标航速倍率（相对水面最大速）。
+// 过渡期的实际航速由 diveSpeedStep 按剩余时间逐拍逼近这个目标，不再固定为中间档。
 func (s *BattleShip) DiveSpeedRatio() float64 {
 	switch s.DiveState {
-	case DiveStateDiving, DiveStateSurfacing:
-		return diveTransitionSpeedRatio
-	case DiveStateSubmerged:
+	case DiveStateDiving, DiveStateSubmerged:
 		return s.submergedSpeedRatio()
 	default:
 		return 1
@@ -102,6 +99,11 @@ func (s *BattleShip) StartDive() bool {
 	s.DiveState = DiveStateDiving
 	s.diveTotalTicks = ReloadTicks(s.diveTimeSeconds())
 	s.diveTicksLeft = transitionTicksLeft(s.diveTotalTicks, 1-progress)
+	s.diveSpeedStep = transitionSpeedStep(
+		s.CurSpeed,
+		s.MaxSpeed*s.submergedSpeedRatio()*gameSpeedMultiplier(),
+		s.diveTicksLeft,
+	)
 	return true
 }
 
@@ -121,7 +123,21 @@ func (s *BattleShip) StartSurface() bool {
 	s.DiveState = DiveStateSurfacing
 	s.diveTotalTicks = ReloadTicks(s.surfaceTimeSeconds())
 	s.diveTicksLeft = transitionTicksLeft(s.diveTotalTicks, progress)
+	s.diveSpeedStep = transitionSpeedStep(
+		s.CurSpeed,
+		s.MaxSpeed*gameSpeedMultiplier(),
+		s.diveTicksLeft,
+	)
 	return true
+}
+
+// transitionSpeedStep 把“当前航速到目标航速的差值”摊到剩余过渡拍数上。
+// 下潜/上浮的航速变化只由过渡时长和速度差决定，不使用舰船配置的加速度。
+func transitionSpeedStep(current, target float64, ticks int64) float64 {
+	if ticks <= 0 {
+		return 0
+	}
+	return math.Abs(target-current) / float64(ticks)
 }
 
 // transitionTicksLeft 把“剩余比例”换算成剩余拍数。
@@ -148,6 +164,7 @@ func (s *BattleShip) AdvanceDive() {
 	}
 	s.diveTicksLeft = 0
 	s.diveTotalTicks = 0
+	s.diveSpeedStep = 0
 }
 
 // DiveProgress 返回 0（水面）到 1（完全水下）的潜航进度，

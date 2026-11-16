@@ -160,6 +160,8 @@ type BattleShip struct {
 	diveTicksLeft int64
 	// 下潜/上浮过渡总拍数，用于计算过渡进度
 	diveTotalTicks int64
+	// 下潜/上浮期间每拍按“速度差 / 剩余拍数”计算出的航速变化量
+	diveSpeedStep float64
 	// 各玩家最近一次声呐探测到本艇的记录（仅潜艇使用）
 	DetectedBy map[faction.Player]ShipDetection `json:"-"`
 	// 动画累计模拟帧
@@ -842,22 +844,27 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	acceleration := s.cruiseAcceleration()
 	rotateSpeed := s.RotateSpeed * gameSpeedMultiplier()
 
-	// 下潜 / 上浮导致巡航速度下降时，显式减速到新的上限，避免保持水面全速。
-	if s.CurSpeed > maxSpeed {
-		slowdown := acceleration * 10
-		if slowdown <= 0 {
-			s.CurSpeed = maxSpeed
-		} else {
-			s.CurSpeed = max(maxSpeed, s.CurSpeed-slowdown)
+	// 下潜 / 上浮期间按“过渡时长 + 速度差”逐拍逼近目标航速，不使用配置加速度。
+	if s.DiveTransitioning() && s.diveSpeedStep > 0 {
+		s.CurSpeed = moveSpeedToward(s.CurSpeed, maxSpeed, s.diveSpeedStep)
+	} else {
+		// 非过渡状态：巡航速度下降时显式减速到新的上限，避免长期超速。
+		if s.CurSpeed > maxSpeed {
+			slowdown := acceleration * 10
+			if slowdown <= 0 {
+				s.CurSpeed = maxSpeed
+			} else {
+				s.CurSpeed = max(maxSpeed, s.CurSpeed-slowdown)
+			}
 		}
-	}
-	// 未到达目标位置，逐渐加速
-	if s.CurSpeed < maxSpeed {
-		s.CurSpeed = min(maxSpeed, s.CurSpeed+acceleration)
-	}
-	// 下潜会让巡航速度骤降：超速时必须主动减速，否则会一直保留下潜前的航速。
-	if s.CurSpeed > maxSpeed {
-		s.CurSpeed = max(maxSpeed, s.CurSpeed-acceleration)
+		// 未到达目标位置，逐渐加速
+		if s.CurSpeed < maxSpeed {
+			s.CurSpeed = min(maxSpeed, s.CurSpeed+acceleration)
+		}
+		// 巡航速度骤降时，超速必须主动减速，否则会一直保留变化前的航速。
+		if s.CurSpeed > maxSpeed {
+			s.CurSpeed = max(maxSpeed, s.CurSpeed-acceleration)
+		}
 	}
 	// 到目标位置附近，逐渐减速
 	if nearGoal && s.CurPos.Near(targetPos, s.Length/constants.MapBlockSize*1.5) {

@@ -11,11 +11,11 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 )
 
-// TestSubmarineDiveCycle 验证潜艇水面→下潜→水下→上浮→水面的完整循环与航速档位。
-// 场景：玩家命令潜艇下潜/上浮，过渡期间应降速、重复命令不应重启计时，且可随时反向。
-// 预期：状态按 Diving/Submerged/Surfacing/Surface 迁移；过渡速度比固定；水下速度比 = 配置值；
+// TestSubmarineDiveCycle 验证潜艇水面→下潜→水下→上浮→水面的完整循环与目标航速档位。
+// 场景：玩家命令潜艇下潜/上浮，过渡期间应朝新状态的目标航速变化、重复命令不应重启计时，且可随时反向。
+// 预期：状态按 Diving/Submerged/Surfacing/Surface 迁移；下潜中目标比=水下速度比，上浮中目标比=1；
 // 动作文案随状态切换。
-// 覆盖：从水面开始 StartDive，推进到 Submerged，再 StartSurface 推进回 Surface，逐步断言状态/速度比/文案。
+// 覆盖：从水面开始 StartDive，推进到 Submerged，再 StartSurface 推进回 Surface，逐步断言状态/目标速度比/文案。
 func TestSubmarineDiveCycle(t *testing.T) {
 	ship := &BattleShip{
 		Type:                ShipTypeSubmarine,
@@ -33,7 +33,7 @@ func TestSubmarineDiveCycle(t *testing.T) {
 	require.True(t, ship.StartDive())
 	require.Equal(t, DiveStateDiving, ship.DiveState)
 	require.True(t, ship.DiveTransitioning())
-	require.InDelta(t, diveTransitionSpeedRatio, ship.DiveSpeedRatio(), 1e-9)
+	require.InDelta(t, 0.35, ship.DiveSpeedRatio(), 1e-9)
 	// 重复下潜不会重启计时，但随时可以反向（以最后一次指令为准）
 	require.False(t, ship.StartDive())
 	next, canToggle := ship.NextDiveState()
@@ -50,7 +50,7 @@ func TestSubmarineDiveCycle(t *testing.T) {
 
 	require.True(t, ship.StartSurface())
 	require.Equal(t, DiveStateSurfacing, ship.DiveState)
-	require.InDelta(t, diveTransitionSpeedRatio, ship.DiveSpeedRatio(), 1e-9)
+	require.InDelta(t, 1.0, ship.DiveSpeedRatio(), 1e-9)
 	for i := 0; i < 200 && ship.DiveState == DiveStateSurfacing; i++ {
 		ship.AdvanceDive()
 	}
@@ -164,6 +164,66 @@ func TestSubmarineSpeedDisplayUsesCurrentDiveLimit(t *testing.T) {
 	// 非潜艇没有独立的水下档，静态档案回退到水面航速。
 	gunship := &BattleShip{MaxSpeed: 31.0 / ShipSpeedScale}
 	require.InDelta(t, 31.0, gunship.SubmergedMaxSpeedKnots(), 1e-9)
+}
+
+// TestSubmarineDiveSpeedRampsByTransitionTime 验证下潜/上浮期间航速按过渡时长和速度差线性变化，不使用配置加速度。
+// 场景：潜艇水面巡航 0.03、DiveTime/SurfaceTime=1 秒（60 拍）、SubmergedSpeedRatio=0.35、Acceleration=0；
+// 下潜时每拍先 MoveTo 再 AdvanceDive，观察首拍、中点和终点。
+// 预期：首拍仍接近水面航速且大于水下巡航；30 拍后约为两端中点；60 拍后状态 Submerged 且航速≈0.0105；
+// 随后上浮时航速逐拍回升，60 拍后回到 0.03。失败说明过渡仍走配置加速度或瞬间改速。
+// 覆盖：StartDive/MoveTo/AdvanceDive 记录首拍、中点、终点；再 StartSurface 循环到水面断言终点航速。
+func TestSubmarineDiveSpeedRampsByTransitionTime(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = oldSettings })
+
+	mapCfg := newCoastMapCfg()
+	ship := &BattleShip{
+		Type:                ShipTypeSubmarine,
+		CurHP:               100,
+		CurPos:              objPos.NewR(0.5, 0.5),
+		CurRotation:         90,
+		MaxSpeed:            0.03,
+		Acceleration:        0,
+		RotateSpeed:         10,
+		DiveTime:            1,
+		SurfaceTime:         1,
+		SubmergedSpeedRatio: 0.35,
+	}
+	target := objPos.NewR(7.5, 0.5)
+	ship.CurSpeed = ship.CruiseSpeed()
+	surfaceSpeed := ship.CurSpeed
+	submergedSpeed := ship.MaxSpeed * ship.SubmergedSpeedRatio * config.G.SpeedMultiplier
+
+	require.True(t, ship.StartDive())
+	total := ship.diveTicksLeft
+	require.Equal(t, int64(60), total)
+
+	var firstTick, midpoint float64
+	for i := int64(0); i < total; i++ {
+		ship.MoveTo(mapCfg, target, false)
+		if i == 0 {
+			firstTick = ship.CurSpeed
+		}
+		if i == total/2-1 {
+			midpoint = ship.CurSpeed
+		}
+		ship.AdvanceDive()
+	}
+	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.Less(t, firstTick, surfaceSpeed, "首拍不能仍是水面全速")
+	require.Greater(t, firstTick, submergedSpeed, "首拍不能直接跳到水下航速")
+	require.InDelta(t, (surfaceSpeed+submergedSpeed)/2, midpoint, 1e-6)
+	require.InDelta(t, submergedSpeed, ship.CurSpeed, 1e-9)
+
+	require.True(t, ship.StartSurface())
+	total = ship.diveTicksLeft
+	for i := int64(0); i < total; i++ {
+		ship.MoveTo(mapCfg, target, false)
+		ship.AdvanceDive()
+	}
+	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.InDelta(t, surfaceSpeed, ship.CurSpeed, 1e-9)
 }
 
 // TestSubmergedShipDeceleratesToUnderwaterCruiseSpeed 验证下潜后舰船减速到水下巡航速度。
