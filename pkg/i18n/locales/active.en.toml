@@ -106,8 +106,6 @@ other = "{{.Count}} enemy downed"
 other = "{{.Count}} aircraft lost with ship"
 [BattleReportBack]
 other = "Back to main menu"
-[BattleReportRetry]
-other = "Restart"
 [BattleReportLiveHint]
 other = "[Tab] Back  [Esc] Resume"
 [BattleReportNoLoss]

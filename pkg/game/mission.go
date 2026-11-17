@@ -241,11 +241,10 @@ type missionResultAction int
 const (
 	missionResultActionNone missionResultAction = iota
 	missionResultActionBack
-	missionResultActionRetry
 )
 
 // handleMissionReport 处理战役总结页的鼠标操作：
-// 点击页签切换总览 / 舰艇 / 飞机，点击按钮返回主界面或重开一局。
+// 点击页签切换总览 / 舰艇 / 飞机，点击按钮返回主界面。
 // 结算流程不提供键盘快捷键。
 func (g *Game) handleMissionReport() {
 	// 防御：管理器缺失时退回旧行为，避免空指针。
@@ -280,8 +279,6 @@ func (g *Game) handleMissionReport() {
 	switch missionResultClickAction(layout, sx, sy) {
 	case missionResultActionBack:
 		g.leaveMissionResult()
-	case missionResultActionRetry:
-		g.startMissionLoading()
 	}
 }
 
@@ -299,8 +296,6 @@ func missionResultClickAction(report state.BattleReportLayout, x, y int) mission
 	switch {
 	case report.BackButton.Contains(x, y):
 		return missionResultActionBack
-	case report.RetryButton.Contains(x, y):
-		return missionResultActionRetry
 	default:
 		return missionResultActionNone
 	}

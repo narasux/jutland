@@ -106,8 +106,6 @@ other = "击落敌机 {{.Count}}"
 other = "飞机损失含随舰沉没 {{.Count}}"
 [BattleReportBack]
 other = "返回主界面"
-[BattleReportRetry]
-other = "重开一局"
 [BattleReportLiveHint]
 other = "[Tab] 返回暂停  [Esc] 继续"
 [BattleReportNoLoss]

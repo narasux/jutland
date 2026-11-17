@@ -8,10 +8,10 @@ import (
 	"github.com/narasux/jutland/pkg/mission/state"
 )
 
-// TestMissionResultClickActionMapsButtons 验证结算页点击坐标只映射到返回/重试按钮。
-// 场景：1920×1080 战报布局下点返回、重试按钮中心，以及面板左上角内 4px 的空白处。
-// 预期：依次得到 missionResultActionBack、Retry、None；失败意味着按钮错位或空白区误触。
-// 覆盖：CalcBattleReportLayout(1920,1080,true) 后取矩形中心，断言三种点击结果。
+// TestMissionResultClickActionMapsButtons 验证结算页点击坐标只映射到返回按钮。
+// 场景：1920×1080 战报布局下点返回按钮中心，以及面板左上角内 4px 的空白处。
+// 预期：依次得到 missionResultActionBack、None；失败意味着按钮错位或空白区误触。
+// 覆盖：CalcBattleReportLayout(1920,1080,true) 后取矩形中心，断言两种点击结果。
 func TestMissionResultClickActionMapsButtons(t *testing.T) {
 	report := state.CalcBattleReportLayout(1920, 1080, true)
 	center := func(rect state.BattleReportRect) (int, int) {
@@ -20,9 +20,6 @@ func TestMissionResultClickActionMapsButtons(t *testing.T) {
 
 	backX, backY := center(report.BackButton)
 	require.Equal(t, missionResultActionBack, missionResultClickAction(report, backX, backY))
-
-	retryX, retryY := center(report.RetryButton)
-	require.Equal(t, missionResultActionRetry, missionResultClickAction(report, retryX, retryY))
 
 	require.Equal(
 		t,

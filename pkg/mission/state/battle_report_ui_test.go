@@ -62,14 +62,13 @@ func TestBattleReportLayoutFitsCommonScreens(t *testing.T) {
 			}
 			for _, rect := range []BattleReportRect{
 				report.Title, report.Subtitle, report.Badge, report.Content,
-				report.Note, report.Footer, report.BackButton, report.RetryButton,
+				report.Note, report.Footer, report.BackButton,
 				report.Sides[0], report.Sides[1],
 				report.DetailSides[0], report.DetailSides[1],
 			} {
 				requireInsideRect(t, rect, report.Panel)
 			}
 			require.False(t, battleReportRectsOverlap(report.Title, report.Badge))
-			require.False(t, battleReportRectsOverlap(report.BackButton, report.RetryButton))
 			require.InDelta(t, (float64(size.w)-report.Panel.W)/2, report.Panel.X, 1e-6)
 			require.InDelta(t, (float64(size.h)-report.Panel.H)/2, report.Panel.Y, 1e-6)
 
@@ -111,20 +110,18 @@ func TestBattleReportLayoutFitsCommonScreens(t *testing.T) {
 	}
 }
 
-// TestBattleReportLayoutButtonsOptional 验证 withButtons 分支：结算页给按钮，暂停统计页给提示且面板不跳变。
+// TestBattleReportLayoutButtonsOptional 验证 withButtons 分支：结算页给返回按钮，暂停统计页给提示且面板不跳变。
 // 场景：同一套 CalcBattleReportLayout 既画战斗结算，也画暂停实时统计，后者不能出现“返回主界面”按钮。
-// 预期：true 时 Back/Retry/Buttons 非空、Hint 为空；false 时三者 Empty、Hint 在 Panel 内，两者 Panel 相等。
-// 覆盖：1920×1080 下分别传 true/false，断言 Empty() 布尔值、Hint 包含关系与 Panel 相等。
+// 预期：true 时 Back/Buttons 非空、Hint 为空；false 时三者 Empty、Hint 在 Panel 内，两者 Panel 相等。
+// 覆盖：1920×1080 下分别传 true/false，断言 Empty() 布尔值与 Panel 相等。
 func TestBattleReportLayoutButtonsOptional(t *testing.T) {
 	withButtons := CalcBattleReportLayout(1920, 1080, true)
 	require.False(t, withButtons.BackButton.Empty())
-	require.False(t, withButtons.RetryButton.Empty())
 	require.False(t, withButtons.Buttons.Empty())
 	require.True(t, withButtons.Hint.Empty())
 
 	noButtons := CalcBattleReportLayout(1920, 1080, false)
 	require.True(t, noButtons.BackButton.Empty())
-	require.True(t, noButtons.RetryButton.Empty())
 	require.True(t, noButtons.Buttons.Empty())
 	require.False(t, noButtons.Hint.Empty())
 	requireInsideRect(t, noButtons.Hint, noButtons.Panel)
@@ -143,23 +140,27 @@ func TestBattleReportDurationText(t *testing.T) {
 	require.Equal(t, "00:00", BattleReportDurationText(-100))
 }
 
-// TestBattleReportButtonsCenterRetryLeftAndBackRight 验证结算页两个按钮同高、重试在左、返回在右且整体居中。
-// 场景：任务成功/失败结算页同时提供“重新挑战”和“返回主界面”；按钮错位或间距不符会让玩家误点。
-// 预期：RetryButton 与 BackButton 同 Y；Retry 在左；间距 = battleReportButtonGap*Scale；
-// 两按钮整体中心与面板中心重合。
-// 覆盖：用 1920x1080 布局计算 report，逐项断言 Y/X/间距/中心。
-func TestBattleReportButtonsCenterRetryLeftAndBackRight(t *testing.T) {
+// TestBattleReportBackButtonAnchoredBottomRight 验证结算页唯一的返回按钮贴齐面板右下角且尺寸固定。
+// 场景：结算页只剩“返回主界面”这一个次要操作，需让出底部居中位置并靠右下角，避免抢走战报主体视线。
+// 预期：按钮右边界 = 面板右边界 - battleReportPadX*Scale，下边界 = 面板下边界 - battleReportButtonBottomGap*Scale，
+// 宽高分别等于 battleReportButtonW/H * Scale；失败意味着按钮漂移或尺寸回退。
+// 覆盖：用 1920x1080 布局计算 report，逐项断言右边界、下边界与宽高。
+func TestBattleReportBackButtonAnchoredBottomRight(t *testing.T) {
 	report := CalcBattleReportLayout(1920, 1080, true)
-	require.Equal(t, report.RetryButton.Y, report.BackButton.Y)
-	require.Less(t, report.RetryButton.X, report.BackButton.X)
 	require.InDelta(
 		t,
-		battleReportButtonGap*report.Scale,
-		report.BackButton.X-(report.RetryButton.X+report.RetryButton.W),
+		report.Panel.X+report.Panel.W-battleReportPadX*report.Scale,
+		report.BackButton.X+report.BackButton.W,
 		1e-6,
 	)
-	pairCenter := (report.RetryButton.X + report.BackButton.X + report.BackButton.W) / 2
-	require.InDelta(t, report.Panel.X+report.Panel.W/2, pairCenter, 1e-6)
+	require.InDelta(
+		t,
+		report.Panel.Y+report.Panel.H-battleReportButtonBottomGap*report.Scale,
+		report.BackButton.Y+report.BackButton.H,
+		1e-6,
+	)
+	require.InDelta(t, battleReportButtonW*report.Scale, report.BackButton.W, 1e-6)
+	require.InDelta(t, battleReportButtonH*report.Scale, report.BackButton.H, 1e-6)
 }
 
 // TestBattleReportTrendChartRectsSwitchLayout 验证趋势页两种模式使用不同的图表排布。
