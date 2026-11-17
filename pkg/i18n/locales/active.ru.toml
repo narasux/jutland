@@ -106,8 +106,6 @@ other = "Сбито врагов: {{.Count}}"
 other = "В т.ч. на потопленных кораблях {{.Count}}"
 [BattleReportBack]
 other = "В главное меню"
-[BattleReportRetry]
-other = "Повторить"
 [BattleReportLiveHint]
 other = "[Tab] Назад  [Esc] Продолжить"
 [BattleReportNoLoss]

@@ -53,7 +53,7 @@ const (
 )
 
 // DrawBattleReport 绘制战役总结面板。
-// final 为 true 时是结算页（含返回 / 重试按钮），false 时为暂停实时统计。
+// final 为 true 时是结算页（右下角含返回按钮），false 时为暂停实时统计。
 func (d *Drawer) DrawBattleReport(
 	screen *ebiten.Image,
 	ms *state.MissionState,
@@ -197,10 +197,6 @@ func (d *Drawer) DrawBattleReport(
 		d.drawReportButton(
 			screen, report.BackButton,
 			i18n.Text(i18n.MsgBattleReportBack), scale, bodyFont,
-		)
-		d.drawReportButton(
-			screen, report.RetryButton,
-			i18n.Text(i18n.MsgBattleReportRetry), scale, bodyFont,
 		)
 		return
 	}
@@ -556,7 +552,7 @@ func (d *Drawer) drawBattleReportFooter(
 	)
 }
 
-// drawReportButton 绘制底部按钮，悬停时高亮边框。
+// drawReportButton 绘制右下角返回按钮，悬停时提亮底色与描边。
 func (d *Drawer) drawReportButton(
 	screen *ebiten.Image,
 	rect state.BattleReportRect,
@@ -570,19 +566,21 @@ func (d *Drawer) drawReportButton(
 	sx, sy := ebiten.CursorPosition()
 	hovered := rect.Contains(sx, sy)
 	fill, border := battleReportButtonFill, battleReportButtonBrd
+	strokeW := float32(max(1, 1.5*scale))
 	if hovered {
 		fill, border = battleReportHoverFill, battleReportHoverBrd
+		strokeW = float32(max(1, 2*scale))
 	}
 	vector.FillRect(
 		screen, float32(rect.X), float32(rect.Y), float32(rect.W), float32(rect.H), fill, false,
 	)
 	vector.StrokeRect(
 		screen, float32(rect.X), float32(rect.Y), float32(rect.W), float32(rect.H),
-		float32(max(1, 2*scale)), border, false,
+		strokeW, border, false,
 	)
 	d.drawReportText(
 		screen, label, rect,
-		fitReportFontSize(label, rect.W-18*scale, 18*scale, textFont),
+		fitReportFontSize(label, rect.W-28*scale, 16*scale, textFont),
 		textFont, colorx.White, reportAlignCenter,
 	)
 }

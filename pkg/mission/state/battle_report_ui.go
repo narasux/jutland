@@ -10,20 +10,20 @@ import (
 // 战报面板的设计尺寸（1280×760 基准），实际布局按屏幕尺寸整体缩放。
 // 结算页现在独占一屏，比首版弹窗宽得多，可以容纳双方分栏与完整明细。
 const (
-	battleReportDesignW      = 1280.0
-	battleReportDesignH      = 760.0
-	battleReportMaxScale     = 3
-	battleReportScreenMargin = 32.0
-	battleReportPadX         = 40.0
-	battleReportBadgeW       = 120.0
-	battleReportBadgeH       = 34.0
-	battleReportTabW         = 92.0
-	battleReportTabH         = 34.0
-	battleReportTabGap       = 8.0
-	battleReportButtonW      = 220.0
-	battleReportButtonH      = 46.0
-	battleReportButtonGap    = 20.0
-	battleReportCardGap      = 16.0
+	battleReportDesignW         = 1280.0
+	battleReportDesignH         = 760.0
+	battleReportMaxScale        = 3
+	battleReportScreenMargin    = 32.0
+	battleReportPadX            = 40.0
+	battleReportBadgeW          = 120.0
+	battleReportBadgeH          = 34.0
+	battleReportTabW            = 92.0
+	battleReportTabH            = 34.0
+	battleReportTabGap          = 8.0
+	battleReportButtonW         = 176.0
+	battleReportButtonH         = 40.0
+	battleReportButtonBottomGap = 24.0
+	battleReportCardGap         = 16.0
 )
 
 // BattleReportPage 战报面板当前页。
@@ -216,7 +216,6 @@ type BattleReportLayout struct {
 	Footer       BattleReportRect
 	Buttons      BattleReportRect
 	BackButton   BattleReportRect
-	RetryButton  BattleReportRect
 	Hint         BattleReportRect
 	Scale        float64
 }
@@ -248,7 +247,7 @@ func (l BattleReportLayout) TrendChartRects(mode BattleReportTrendMode) []Battle
 }
 
 // CalcBattleReportLayout 根据屏幕尺寸计算战报面板布局。
-// withButtons 为 true 时是结算页（含返回 / 重试按钮），false 时是暂停实时统计。
+// withButtons 为 true 时是结算页（含返回按钮），false 时是暂停实时统计。
 func CalcBattleReportLayout(screenW, screenH int, withButtons bool) BattleReportLayout {
 	availW := float64(screenW) - 2*battleReportScreenMargin
 	availH := float64(screenH) - 2*battleReportScreenMargin
@@ -349,17 +348,13 @@ func CalcBattleReportLayout(screenW, screenH int, withButtons bool) BattleReport
 		Scale:        scale,
 	}
 	if withButtons {
-		// 两个按钮居中并排：左侧是低频的重新挑战，右侧是主要操作返回主界面。
-		totalW := battleReportButtonW*2 + battleReportButtonGap
-		buttonX := battleReportPadX + (innerW-totalW)/2
-		layout.Buttons = rect(battleReportPadX, 696, innerW, battleReportButtonH)
-		layout.RetryButton = rect(
-			buttonX,
-			696, battleReportButtonW, battleReportButtonH,
-		)
+		// 结算页只保留返回主界面按钮，作为次要操作贴在面板右下角。
+		buttonX := battleReportPadX + innerW - battleReportButtonW
+		buttonY := battleReportDesignH - battleReportButtonBottomGap - battleReportButtonH
+		layout.Buttons = rect(battleReportPadX, buttonY, innerW, battleReportButtonH)
 		layout.BackButton = rect(
-			buttonX+battleReportButtonW+battleReportButtonGap,
-			696, battleReportButtonW, battleReportButtonH,
+			buttonX,
+			buttonY, battleReportButtonW, battleReportButtonH,
 		)
 	} else {
 		layout.Hint = rect(battleReportPadX, 696, innerW, 28)

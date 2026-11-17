@@ -106,8 +106,6 @@ other = "敵機撃墜 {{.Count}}"
 other = "航空機損失には随艦沈没 {{.Count}} を含む"
 [BattleReportBack]
 other = "メインメニューへ"
-[BattleReportRetry]
-other = "もう一度"
 [BattleReportLiveHint]
 other = "[Tab] 一時停止へ  [Esc] 再開"
 [BattleReportNoLoss]

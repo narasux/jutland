@@ -292,7 +292,6 @@ const (
 	MsgBattleReportPlaneLossesSub  MessageID = "BattleReportPlaneLossesSub"
 	MsgBattleReportWithShip        MessageID = "BattleReportWithShip"
 	MsgBattleReportBack            MessageID = "BattleReportBack"
-	MsgBattleReportRetry           MessageID = "BattleReportRetry"
 	MsgBattleReportLiveHint        MessageID = "BattleReportLiveHint"
 	MsgBattleReportNoLoss          MessageID = "BattleReportNoLoss"
 	MsgBattleReportNoData          MessageID = "BattleReportNoData"
