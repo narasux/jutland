@@ -13,6 +13,7 @@ var Cheats = []Cheat{
 	// 效果类
 	&AngelicaSinensis{},
 	&BlackSheepWall{},
+	&LetMeSeeTheBadKids{},
 	&BathtubWar{},
 	&WhoIsCallingTheFleet{},
 	&DoNotDie{},
@@ -29,6 +30,5 @@ var DebugCheats = []Cheat{
 	&ShowPlaneHP{},
 	&ShowHitBoxes{},
 	&ShowAirfieldRunway{},
-	&RevealSubmarines{},
 	&DumpMissionState{},
 }

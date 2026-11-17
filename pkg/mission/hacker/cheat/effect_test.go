@@ -33,20 +33,20 @@ func TestBlackSheepWallRevealsOnlyCurrentPlayer(t *testing.T) {
 	}
 }
 
-// TestRevealSubmarinesCheatOnlyTogglesRenderingFlag 验证 reveal submarines 只开关绘制标记，可反复切换。
-// 场景：调试时用红框暴露潜艇位置；它不能清迷雾（IgnoreFog 保持 false），否则会掩盖真实视野。
-// 预期：Match("reveal submarines")=true 而 Match("reveal submarine")=false；首次 Exec 后
+// TestLetMeSeeTheBadKidsCheatOnlyTogglesRenderingFlag 验证 let me see the bad kids 只开关绘制标记，可反复切换。
+// 场景：普通秘籍用红框暴露潜艇位置；它不能清迷雾（IgnoreFog 保持 false），否则会掩盖真实视野。
+// 预期：Match("let me see the bad kids")=true 而 Match("let me see bad kids")=false；首次 Exec 后
 // RevealSubmarines=true 且 IgnoreFog 仍为 false；再次 Exec 翻回 false。
 // 覆盖：构造 CurPlayer=HumanAlpha 的 MissionState，连续两次 Exec，断言精确匹配与标记翻转。
-func TestRevealSubmarinesCheatOnlyTogglesRenderingFlag(t *testing.T) {
+func TestLetMeSeeTheBadKidsCheatOnlyTogglesRenderingFlag(t *testing.T) {
 	ms := &state.MissionState{
 		Player: state.MissionPlayerState{CurPlayer: faction.HumanAlpha},
 	}
-	cheat := &RevealSubmarines{}
-	if !cheat.Match("reveal submarines") {
+	cheat := &LetMeSeeTheBadKids{}
+	if !cheat.Match("let me see the bad kids") {
 		t.Fatal("cheat command did not match")
 	}
-	if cheat.Match("reveal submarine") {
+	if cheat.Match("let me see bad kids") {
 		t.Fatal("cheat command should match the exact phrase")
 	}
 
@@ -56,7 +56,7 @@ func TestRevealSubmarinesCheatOnlyTogglesRenderingFlag(t *testing.T) {
 	}
 	// 只影响绘制：探测相关状态不能被改动
 	if ms.Player.IgnoreFog {
-		t.Fatal("reveal submarines must not clear fog")
+		t.Fatal("let me see the bad kids must not clear fog")
 	}
 
 	cheat.Exec(ms)

@@ -226,28 +226,28 @@ func (c *Expelliarmus) Exec(misState *state.MissionState) string {
 
 var _ Cheat = (*Expelliarmus)(nil)
 
-// RevealSubmarines 调试用：在地图上用红框暴露所有潜艇位置。
+// LetMeSeeTheBadKids 让我瞧瞧坏孩子在哪里 -> 在地图上用红框暴露所有潜艇位置。
 // 只影响绘制，不改变探测与锁敌：没有声呐接触的潜艇依然不能被攻击。
-type RevealSubmarines struct{}
+type LetMeSeeTheBadKids struct{}
 
-func (c *RevealSubmarines) String() string {
-	return "reveal submarines"
+func (c *LetMeSeeTheBadKids) String() string {
+	return "let me see the bad kids"
 }
 
-func (c *RevealSubmarines) Desc() string {
-	return "Debug only: draw every submarine in a red box. Combat detection is unchanged."
+func (c *LetMeSeeTheBadKids) Desc() string {
+	return "Draw every submarine in a red box (visual only, detection unchanged)."
 }
 
-func (c *RevealSubmarines) Match(cmd string) bool {
+func (c *LetMeSeeTheBadKids) Match(cmd string) bool {
 	return isCommandEqual(c.String(), cmd)
 }
 
-func (c *RevealSubmarines) Exec(misState *state.MissionState) string {
+func (c *LetMeSeeTheBadKids) Exec(misState *state.MissionState) string {
 	misState.Player.RevealSubmarines = !misState.Player.RevealSubmarines
 	if misState.Player.RevealSubmarines {
-		return "Submarines revealed (visual only, detection unchanged)."
+		return "Bad kids spotted (visual only, detection unchanged)."
 	}
-	return "Submarine reveal disabled."
+	return "Bad kids are hiding again."
 }
 
-var _ Cheat = (*RevealSubmarines)(nil)
+var _ Cheat = (*LetMeSeeTheBadKids)(nil)
