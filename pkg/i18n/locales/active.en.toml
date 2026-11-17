@@ -120,6 +120,8 @@ other = "Overview"
 other = "Ships"
 [BattleReportPagePlanes]
 other = "Aircraft"
+[BattleReportPageTrends]
+other = "Charts"
 [BattleReportPageEvents]
 other = "Details"
 [BattleReportEventTitle]
@@ -204,6 +206,44 @@ other = "Aircraft type"
 other = "Replenished"
 [BattleReportNoRecords]
 other = "No records"
+[BattleReportTrendTitle]
+other = "Battle Charts"
+[BattleReportTrendModeCurrent]
+other = "Current"
+[BattleReportTrendModeCumulative]
+other = "Build & Loss"
+[BattleReportTrendShipsCurrentTitle]
+other = "Ships in Service"
+[BattleReportTrendPlanesCurrentTitle]
+other = "Aircraft in Service"
+[BattleReportTrendTonnageCurrentTitle]
+other = "Tonnage in Service"
+[BattleReportTrendShipsTitle]
+other = "Ship Construction / Losses"
+[BattleReportTrendPlanesTitle]
+other = "Aircraft Construction / Losses"
+[BattleReportTrendTonnageTitle]
+other = "Cumulative Tonnage Lost"
+[BattleReportTrendDamageTitle]
+other = "Cumulative Damage"
+[BattleReportTrendOwnBuilt]
+other = "Our build"
+[BattleReportTrendOwnLost]
+other = "Our losses"
+[BattleReportTrendEnemyBuilt]
+other = "Enemy build"
+[BattleReportTrendEnemyLost]
+other = "Enemy losses"
+[BattleReportTrendUnitShips]
+other = "ships"
+[BattleReportTrendUnitPlanes]
+other = "aircraft"
+[BattleReportTrendUnitTonnage]
+other = "t"
+[BattleReportTrendEmpty]
+other = "No trend data yet"
+[BattleReportTrendTooltipTime]
+other = "{{.Time}}"
 [SettingsTitle]
 other = "Game Settings"
 [SettingsSpeed]

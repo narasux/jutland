@@ -31,7 +31,7 @@ func requireInsideScreen(t *testing.T, rect BattleReportRect, screenW, screenH i
 
 // TestBattleReportLayoutFitsCommonScreens 验证四种常见分辨率下战报面板完整落在屏幕内且各区域不重叠。
 // 场景：结算页按 1280×760 设计尺寸缩放，需在 1920×1080、1280×720、1024×768、800×600 都不越界。
-// 预期：Scale>0、Panel 居中；卡片/页签互不重叠且 PageAt 命中自身；纵向 Cards→Sides→Note→Footer→按钮。
+// 预期：Scale>0、Panel 居中；卡片/页签/趋势图互不重叠且 PageAt 命中自身；纵向 Cards→Sides→Note→Footer→按钮。
 // 覆盖：遍历四组尺寸，用 requireInsideRect/insideScreen/overlap 与 InDelta 断言所有子矩形与顺序。
 func TestBattleReportLayoutFitsCommonScreens(t *testing.T) {
 	sizes := []struct{ w, h int }{
@@ -91,6 +91,22 @@ func TestBattleReportLayoutFitsCommonScreens(t *testing.T) {
 			requireInsideRect(t, report.DetailSides[1], report.Content)
 			require.False(t, battleReportRectsOverlap(report.Sides[0], report.Sides[1]))
 			require.False(t, battleReportRectsOverlap(report.DetailSides[0], report.DetailSides[1]))
+
+			// 趋势页：顶部说明条、模式按钮与 2×2 图表都必须在内容区内且互不重叠。
+			requireInsideRect(t, report.TrendHeader, report.Content)
+			for idx, mode := range report.TrendModes {
+				requireInsideRect(t, mode, report.TrendHeader)
+				if idx > 0 {
+					require.False(t, battleReportRectsOverlap(report.TrendModes[idx-1], mode))
+				}
+			}
+			for idx, chart := range report.TrendCharts {
+				requireInsideRect(t, chart, report.Content)
+				require.False(t, battleReportRectsOverlap(chart, report.TrendHeader))
+				for prev := 0; prev < idx; prev++ {
+					require.False(t, battleReportRectsOverlap(report.TrendCharts[prev], chart))
+				}
+			}
 		})
 	}
 }
@@ -144,4 +160,35 @@ func TestBattleReportButtonsCenterRetryLeftAndBackRight(t *testing.T) {
 	)
 	pairCenter := (report.RetryButton.X + report.BackButton.X + report.BackButton.W) / 2
 	require.InDelta(t, report.Panel.X+report.Panel.W/2, pairCenter, 1e-6)
+}
+
+// TestBattleReportTrendChartRectsSwitchLayout 验证趋势页两种模式使用不同的图表排布。
+// 场景：累计模式需要四张图（2×2）；当前兵力只有舰艇 / 飞机 / 吨位三张，第三张应横跨整行，
+// 否则右下会留下一块空白，吨位曲线也失去更长的横轴。
+// 预期：累计返回 4 个矩形且等于 TrendCharts；当前返回 3 个，第三块 X/W 覆盖前一行左右两张，
+// Y/H 与第二行一致，三个矩形互不重叠。
+// 覆盖：1920×1080 布局下调用 TrendChartRects 两次，用 Equal/InDelta/overlap 断言数量与几何。
+func TestBattleReportTrendChartRectsSwitchLayout(t *testing.T) {
+	report := CalcBattleReportLayout(1920, 1080, true)
+	cumulative := report.TrendChartRects(BattleReportTrendModeCumulative)
+	require.Equal(t, report.TrendCharts[:], cumulative)
+
+	current := report.TrendChartRects(BattleReportTrendModeCurrent)
+	require.Len(t, current, 3)
+	require.Equal(t, report.TrendCharts[0], current[0])
+	require.Equal(t, report.TrendCharts[1], current[1])
+	require.Equal(t, report.TrendCharts[2].Y, current[2].Y)
+	require.Equal(t, report.TrendCharts[2].H, current[2].H)
+	require.InDelta(t, report.TrendCharts[0].X, current[2].X, 1e-9)
+	require.InDelta(
+		t,
+		report.TrendCharts[1].X+report.TrendCharts[1].W-report.TrendCharts[0].X,
+		current[2].W,
+		1e-9,
+	)
+	for idx := range current {
+		for prev := 0; prev < idx; prev++ {
+			require.False(t, battleReportRectsOverlap(current[prev], current[idx]))
+		}
+	}
 }

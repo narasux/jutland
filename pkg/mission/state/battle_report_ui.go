@@ -36,6 +36,8 @@ const (
 	BattleReportPageShips
 	// BattleReportPagePlanes 飞机明细
 	BattleReportPagePlanes
+	// BattleReportPageTrends 趋势曲线
+	BattleReportPageTrends
 	// BattleReportPageEvents 战况记录
 	BattleReportPageEvents
 	battleReportPageCount
@@ -90,6 +92,22 @@ const (
 	// BattleReportEventFilterKills 只显示击沉和击落。
 	BattleReportEventFilterKills
 )
+
+// BattleReportTrendMode 趋势页的展示模式。
+type BattleReportTrendMode int
+
+const (
+	// BattleReportTrendModeCurrent 当前兵力：在役舰艇 / 飞机 / 吨位，可升可降。
+	BattleReportTrendModeCurrent BattleReportTrendMode = iota
+	// BattleReportTrendModeCumulative 建造与损失累计曲线。
+	BattleReportTrendModeCumulative
+	battleReportTrendModeCount
+)
+
+// Valid 是否为有效的趋势模式。
+func (m BattleReportTrendMode) Valid() bool {
+	return m >= 0 && int(m) < int(battleReportTrendModeCount)
+}
 
 // 战报滚动条拖动目标。
 const (
@@ -178,15 +196,21 @@ func (r BattleReportRect) Empty() bool {
 // BattleReportLayout 保存战报面板各区域的共享布局，
 // 绘制、命中测试与测试断言都读同一份计算结果。
 type BattleReportLayout struct {
-	Panel        BattleReportRect
-	Title        BattleReportRect
-	Subtitle     BattleReportRect
-	Badge        BattleReportRect
-	Tabs         [4]BattleReportRect
-	Cards        [4]BattleReportRect
-	Sides        [2]BattleReportRect
-	DetailSides  [2]BattleReportRect
-	Content      BattleReportRect
+	Panel       BattleReportRect
+	Title       BattleReportRect
+	Subtitle    BattleReportRect
+	Badge       BattleReportRect
+	Tabs        [5]BattleReportRect
+	Cards       [4]BattleReportRect
+	Sides       [2]BattleReportRect
+	DetailSides [2]BattleReportRect
+	Content     BattleReportRect
+	// TrendHeader 趋势页顶部说明区
+	TrendHeader BattleReportRect
+	// TrendCharts 趋势页四张曲线图的 2×2 布局（当前兵力模式只用前三格，第三张横跨整行）
+	TrendCharts [4]BattleReportRect
+	// TrendModes 趋势页「当前兵力 / 建造与损失」切换按钮
+	TrendModes   [2]BattleReportRect
 	EventFilters [2]BattleReportRect
 	Note         BattleReportRect
 	Footer       BattleReportRect
@@ -205,6 +229,22 @@ func (l BattleReportLayout) PageAt(x, y int) (BattleReportPage, bool) {
 		}
 	}
 	return BattleReportPageOverview, false
+}
+
+// TrendChartRects 返回当前趋势模式实际绘制的图表区域。
+// 累计模式用 2×2 四张图；当前兵力只有舰艇 / 飞机 / 吨位三张，
+// 第三张横跨两列，给吨位曲线更长的横轴。
+func (l BattleReportLayout) TrendChartRects(mode BattleReportTrendMode) []BattleReportRect {
+	if mode == BattleReportTrendModeCumulative {
+		return l.TrendCharts[:]
+	}
+	wide := BattleReportRect{
+		X: l.TrendCharts[0].X,
+		Y: l.TrendCharts[2].Y,
+		W: l.TrendCharts[1].X + l.TrendCharts[1].W - l.TrendCharts[0].X,
+		H: l.TrendCharts[2].H,
+	}
+	return []BattleReportRect{l.TrendCharts[0], l.TrendCharts[1], wide}
 }
 
 // CalcBattleReportLayout 根据屏幕尺寸计算战报面板布局。
@@ -236,7 +276,7 @@ func CalcBattleReportLayout(screenW, screenH int, withButtons bool) BattleReport
 	tabsW := float64(battleReportPageCount)*battleReportTabW +
 		float64(battleReportPageCount-1)*battleReportTabGap
 	tabsX := battleReportPadX + innerW - battleReportBadgeW - 16 - tabsW
-	tabs := [4]BattleReportRect{}
+	tabs := [5]BattleReportRect{}
 	for idx := range tabs {
 		tabs[idx] = rect(
 			tabsX+float64(idx)*(battleReportTabW+battleReportTabGap),
@@ -264,6 +304,24 @@ func CalcBattleReportLayout(screenW, screenH int, withButtons bool) BattleReport
 		rect(battleReportPadX+sideW+sideGap, 136, sideW, 480),
 	}
 
+	// 趋势页：顶部说明条 + 2×2 曲线图。图高固定，保证四张图的坐标轴刻度对齐。
+	trendGap := 16.0
+	trendTop, trendH := 172.0, 214.0
+	trendW := (innerW - trendGap) / 2
+	trendCharts := [4]BattleReportRect{
+		rect(battleReportPadX, trendTop, trendW, trendH),
+		rect(battleReportPadX+trendW+trendGap, trendTop, trendW, trendH),
+		rect(battleReportPadX, trendTop+trendH+trendGap, trendW, trendH),
+		rect(battleReportPadX+trendW+trendGap, trendTop+trendH+trendGap, trendW, trendH),
+	}
+	// 模式切换按钮放在说明条右侧；按钮宽度固定，保证两种语言下都能完整显示。
+	modeW, modeH, modeGap := 112.0, 24.0, 6.0
+	modeX := battleReportPadX + innerW - modeW*2 - modeGap
+	trendModes := [2]BattleReportRect{
+		rect(modeX, 138, modeW, modeH),
+		rect(modeX+modeW+modeGap, 138, modeW, modeH),
+	}
+
 	filterW, filterH, filterGap := 58.0, 22.0, 6.0
 	filtersW := 2*filterW + filterGap
 	filtersX := battleReportDesignW - 18 - 220 - 12 - filtersW
@@ -282,6 +340,9 @@ func CalcBattleReportLayout(screenW, screenH int, withButtons bool) BattleReport
 		Sides:        sides,
 		DetailSides:  detailSides,
 		Content:      rect(battleReportPadX, 128, innerW, 496),
+		TrendHeader:  rect(battleReportPadX, 136, innerW, 28),
+		TrendCharts:  trendCharts,
+		TrendModes:   trendModes,
 		EventFilters: filterRects,
 		Note:         rect(battleReportPadX, 630, innerW, 24),
 		Footer:       rect(battleReportPadX, 660, innerW, 30),

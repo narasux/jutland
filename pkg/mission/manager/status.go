@@ -95,6 +95,9 @@ func (m *MissionManager) updateMissionStatus() {
 				if m.HandleBattleReportEventFilterClick(sx, sy) {
 					return
 				}
+				if m.HandleBattleReportTrendModeClick(sx, sy) {
+					return
+				}
 				if page, ok := layout.PageAt(sx, sy); ok {
 					m.SetBattleReportPage(page)
 				}
@@ -108,6 +111,7 @@ func (m *MissionManager) updateMissionStatus() {
 			m.state.UI.BattleReportEventScroll = 0
 			m.state.UI.BattleReportEventFilter = state.BattleReportEventFilterAll
 			m.state.UI.BattleReportDetailScroll = [2]int{}
+			m.state.UI.BattleReportTrendMode = state.BattleReportTrendModeCurrent
 			m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 			m.state.UI.BattleReportScrollDragOffset = 0
 			m.reportWheelAccum = 0

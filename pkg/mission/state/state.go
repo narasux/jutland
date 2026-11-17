@@ -156,6 +156,8 @@ type MissionUIState struct {
 	BattleReportEventFilter BattleReportEventFilter
 	// 舰艇 / 飞机明细页左右两侧列表的滚动偏移（按行）
 	BattleReportDetailScroll [2]int
+	// 趋势页展示模式（当前兵力 / 累计建造与损失）
+	BattleReportTrendMode BattleReportTrendMode
 	// 当前正在拖动的战报滚动条，以及按下时相对滑块顶部的偏移
 	BattleReportScrollDrag       int
 	BattleReportScrollDragOffset float64
