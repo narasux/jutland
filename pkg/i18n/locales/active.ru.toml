@@ -120,6 +120,8 @@ other = "Обзор"
 other = "Корабли"
 [BattleReportPagePlanes]
 other = "Самолёты"
+[BattleReportPageTrends]
+other = "Графики"
 [BattleReportPageEvents]
 other = "Детали"
 [BattleReportEventTitle]
@@ -204,6 +206,44 @@ other = "Тип"
 other = "Пополнено"
 [BattleReportNoRecords]
 other = "Нет записей"
+[BattleReportTrendTitle]
+other = "Графики боя"
+[BattleReportTrendModeCurrent]
+other = "Текущие"
+[BattleReportTrendModeCumulative]
+other = "Динамика"
+[BattleReportTrendShipsCurrentTitle]
+other = "Корабли в строю"
+[BattleReportTrendPlanesCurrentTitle]
+other = "Самолёты в строю"
+[BattleReportTrendTonnageCurrentTitle]
+other = "Тоннаж в строю"
+[BattleReportTrendShipsTitle]
+other = "Постройка / потери кораблей"
+[BattleReportTrendPlanesTitle]
+other = "Постройка / потери самолётов"
+[BattleReportTrendTonnageTitle]
+other = "Суммарные потери тоннажа"
+[BattleReportTrendDamageTitle]
+other = "Суммарный урон"
+[BattleReportTrendOwnBuilt]
+other = "Наши построены"
+[BattleReportTrendOwnLost]
+other = "Наши потери"
+[BattleReportTrendEnemyBuilt]
+other = "Построены врагом"
+[BattleReportTrendEnemyLost]
+other = "Потери врага"
+[BattleReportTrendUnitShips]
+other = "шт."
+[BattleReportTrendUnitPlanes]
+other = "шт."
+[BattleReportTrendUnitTonnage]
+other = "т"
+[BattleReportTrendEmpty]
+other = "Нет данных для графика"
+[BattleReportTrendTooltipTime]
+other = "{{.Time}}"
 [SettingsTitle]
 other = "Настройки игры"
 [SettingsSpeed]

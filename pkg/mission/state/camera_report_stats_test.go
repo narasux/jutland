@@ -33,15 +33,21 @@ func TestCameraContainsClosedBounds(t *testing.T) {
 }
 
 // TestBattleReportPageValid 验证战报页签的有效范围。
-// 场景：面板页签由鼠标点击，只接受总览、舰艇、飞机、战况四页；越界值可能来自旧状态或错误索引。
-// 预期：0..3 为 true，-1/4 为 false；失败意味着绘制或点击命中会落到不存在的页。
-// 覆盖：遍历四个合法页与 -1、4 两个越界值，断言 Valid。
+// 场景：面板页签由鼠标点击，只接受总览、舰艇、飞机、趋势、战况五页；越界值可能来自旧状态或错误索引。
+// 预期：0..4 为 true，-1/5 为 false；失败意味着绘制或点击命中会落到不存在的页。
+// 覆盖：遍历五个合法页与 -1、5 两个越界值，断言 Valid。
 func TestBattleReportPageValid(t *testing.T) {
-	for _, page := range []BattleReportPage{BattleReportPageOverview, BattleReportPageShips, BattleReportPagePlanes, BattleReportPageEvents} {
+	for _, page := range []BattleReportPage{
+		BattleReportPageOverview,
+		BattleReportPageShips,
+		BattleReportPagePlanes,
+		BattleReportPageTrends,
+		BattleReportPageEvents,
+	} {
 		require.True(t, page.Valid(), page)
 	}
 	require.False(t, BattleReportPage(-1).Valid())
-	require.False(t, BattleReportPage(4).Valid())
+	require.False(t, BattleReportPage(5).Valid())
 }
 
 // TestRecordPlaneBuiltAggregatesBySideAndType 验证飞机完工统计按阵营累计总数与机型计数。

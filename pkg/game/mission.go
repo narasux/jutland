@@ -270,6 +270,9 @@ func (g *Game) handleMissionReport() {
 	if g.missionMgr.HandleBattleReportEventFilterClick(sx, sy) {
 		return
 	}
+	if g.missionMgr.HandleBattleReportTrendModeClick(sx, sy) {
+		return
+	}
 	if page, ok := layout.PageAt(sx, sy); ok {
 		g.missionMgr.SetBattleReportPage(page)
 		return

@@ -174,6 +174,7 @@ func (m *MissionManager) finalizeBattleStats() {
 	m.state.UI.BattleReportEventScroll = 0
 	m.state.UI.BattleReportEventFilter = state.BattleReportEventFilterAll
 	m.state.UI.BattleReportDetailScroll = [2]int{}
+	m.state.UI.BattleReportTrendMode = state.BattleReportTrendModeCurrent
 	m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 	m.state.UI.BattleReportScrollDragOffset = 0
 	m.reportWheelAccum = 0
@@ -243,6 +244,8 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 			m.updateShipGroups()
 		}
 		m.updateCombatPhase()
+		// 本拍所有记账完成后采样一次趋势点；秒级节流由统计层负责。
+		m.state.Stats.SampleBattleTimeline(m.simTick)
 	}
 
 	m.updateMissionStatus()

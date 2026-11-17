@@ -173,6 +173,8 @@ func (d *Drawer) DrawBattleReport(
 			bodyFont,
 			monoFont,
 		)
+	case state.BattleReportPageTrends:
+		d.drawBattleReportTrends(screen, report, ms, scale, bodyFont, monoFont)
 	case state.BattleReportPageEvents:
 		d.drawBattleReportEventLog(screen, report, ms, scale, bodyFont, monoFont)
 	default:
@@ -218,10 +220,11 @@ func (d *Drawer) drawBattleReportTabs(
 	scale float64,
 	bodyFont *text.GoTextFaceSource,
 ) {
-	labels := [4]string{
+	labels := [5]string{
 		i18n.Text(i18n.MsgBattleReportPageOverview),
 		i18n.Text(i18n.MsgBattleReportPageShips),
 		i18n.Text(i18n.MsgBattleReportPagePlanes),
+		i18n.Text(i18n.MsgBattleReportPageTrends),
 		i18n.Text(i18n.MsgBattleReportPageEvents),
 	}
 	sx, sy := ebiten.CursorPosition()

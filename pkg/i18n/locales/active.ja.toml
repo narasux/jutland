@@ -120,6 +120,8 @@ other = "概要"
 other = "艦艇"
 [BattleReportPagePlanes]
 other = "航空機"
+[BattleReportPageTrends]
+other = "グラフ"
 [BattleReportPageEvents]
 other = "詳細"
 [BattleReportEventTitle]
@@ -204,6 +206,44 @@ other = "機種"
 other = "補充"
 [BattleReportNoRecords]
 other = "記録なし"
+[BattleReportTrendTitle]
+other = "戦況グラフ"
+[BattleReportTrendModeCurrent]
+other = "現在兵力"
+[BattleReportTrendModeCumulative]
+other = "建造 / 損失"
+[BattleReportTrendShipsCurrentTitle]
+other = "現役艦艇"
+[BattleReportTrendPlanesCurrentTitle]
+other = "現役航空機"
+[BattleReportTrendTonnageCurrentTitle]
+other = "現役トン数"
+[BattleReportTrendShipsTitle]
+other = "艦艇の建造 / 損失"
+[BattleReportTrendPlanesTitle]
+other = "航空機の建造 / 損失"
+[BattleReportTrendTonnageTitle]
+other = "累計損失トン数"
+[BattleReportTrendDamageTitle]
+other = "累計ダメージ"
+[BattleReportTrendOwnBuilt]
+other = "味方建造"
+[BattleReportTrendOwnLost]
+other = "味方損失"
+[BattleReportTrendEnemyBuilt]
+other = "敵建造"
+[BattleReportTrendEnemyLost]
+other = "敵損失"
+[BattleReportTrendUnitShips]
+other = "隻"
+[BattleReportTrendUnitPlanes]
+other = "機"
+[BattleReportTrendUnitTonnage]
+other = "トン"
+[BattleReportTrendEmpty]
+other = "トレンドデータなし"
+[BattleReportTrendTooltipTime]
+other = "{{.Time}}"
 [SettingsTitle]
 other = "ゲーム設定"
 [SettingsSpeed]

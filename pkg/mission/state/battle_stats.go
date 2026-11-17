@@ -88,6 +88,9 @@ type BattleStats struct {
 	BattleLog []BattleLogEntry
 	// BattleLogVersion 战况日志版本号；追加或合并时递增，供界面缓存筛选结果
 	BattleLogVersion uint64
+	// Timeline 双方累计战果的时间采样，结算页曲线图只读。
+	// 按固定间隔采样并自适应抽稀，避免长时间战斗无限增长。
+	Timeline []BattleTimelineSample
 }
 
 // NewBattleSideStats 创建带初始化计数表的单方战果。
@@ -431,6 +434,8 @@ func (s *MissionState) recordInitialBattleStats() {
 			s.Stats.RecordInitialPlanes(airfield.BelongPlayer, group.Name, int(group.CurCount))
 		}
 	}
+	// 开局补一个 0 时刻采样点，曲线从原点开始；之后按秒采样。
+	s.Stats.sampleTimeline(s.Stats.StartTick, true)
 }
 
 // FinalizeBattleStats 结算收尾：写入结束时间与原因，并补记失去基地的在空飞机。
@@ -451,4 +456,6 @@ func (s *MissionState) FinalizeBattleStats(reason BattleEndReason) {
 		}
 		s.Stats.RecordPlaneLost(plane)
 	}
+	// 结算时强制补最后一个采样点，曲线终点与 EndTick 对齐。
+	s.Stats.sampleTimeline(s.Stats.EndTick, true)
 }

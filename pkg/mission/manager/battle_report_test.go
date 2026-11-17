@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
 // TestFinalizeBattleStatsMapsMissionStatusToEndReason 验证任务状态到战斗结束原因的映射与终局收尾。
@@ -95,4 +96,37 @@ func TestBattleReportPageAccessors(t *testing.T) {
 
 	manager.SetBattleReportPage(state.BattleReportPage(9))
 	require.Equal(t, state.BattleReportPageOverview, manager.BattleReportPage())
+}
+
+// TestHandleBattleReportTrendModeClick 验证趋势页模式按钮只在趋势页生效，并写入对应模式。
+// 场景：趋势页提供「当前兵力 / 建造与损失」两个按钮；其它页签也有相同坐标区域，
+// 点击不能被误消费，否则会把页签点击吞掉。
+// 预期：趋势页点击累计模式按钮返回 true 且模式变为 Cumulative；点击空白返回 false；
+// 切到总览页后点击同一位置返回 false，模式保持 Cumulative。
+// 覆盖：1920×1080 布局下用 TrendModes[1] 中心与面板空白坐标调用，
+// 断言返回值与 UI.BattleReportTrendMode。
+func TestHandleBattleReportTrendModeClick(t *testing.T) {
+	manager := &MissionManager{state: &state.MissionState{
+		View: state.MissionViewState{
+			Layout: layout.ScreenLayout{Width: 1920, Height: 1080},
+		},
+		UI: state.MissionUIState{BattleReportPage: state.BattleReportPageTrends},
+	}}
+	report := manager.BattleReportLayout(true)
+	cumulative := report.TrendModes[int(state.BattleReportTrendModeCumulative)]
+
+	require.True(t, manager.HandleBattleReportTrendModeClick(
+		int(cumulative.X+cumulative.W/2), int(cumulative.Y+cumulative.H/2),
+	))
+	require.Equal(t, state.BattleReportTrendModeCumulative, manager.state.UI.BattleReportTrendMode)
+
+	require.False(t, manager.HandleBattleReportTrendModeClick(
+		int(report.Panel.X+report.Panel.W/2), int(report.Footer.Y),
+	))
+
+	manager.state.UI.BattleReportPage = state.BattleReportPageOverview
+	require.False(t, manager.HandleBattleReportTrendModeClick(
+		int(cumulative.X+cumulative.W/2), int(cumulative.Y+cumulative.H/2),
+	))
+	require.Equal(t, state.BattleReportTrendModeCumulative, manager.state.UI.BattleReportTrendMode)
 }

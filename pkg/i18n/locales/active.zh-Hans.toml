@@ -120,6 +120,8 @@ other = "总览"
 other = "舰艇"
 [BattleReportPagePlanes]
 other = "飞机"
+[BattleReportPageTrends]
+other = "曲线"
 [BattleReportPageEvents]
 other = "详情"
 [BattleReportEventTitle]
@@ -204,6 +206,44 @@ other = "机型"
 other = "补充"
 [BattleReportNoRecords]
 other = "暂无记录"
+[BattleReportTrendTitle]
+other = "战况曲线"
+[BattleReportTrendModeCurrent]
+other = "当前兵力"
+[BattleReportTrendModeCumulative]
+other = "建造 / 损失"
+[BattleReportTrendShipsCurrentTitle]
+other = "在役舰艇"
+[BattleReportTrendPlanesCurrentTitle]
+other = "在役飞机"
+[BattleReportTrendTonnageCurrentTitle]
+other = "在役吨位"
+[BattleReportTrendShipsTitle]
+other = "舰艇建造 / 损失"
+[BattleReportTrendPlanesTitle]
+other = "飞机建造 / 损失"
+[BattleReportTrendTonnageTitle]
+other = "累计吨位损失"
+[BattleReportTrendDamageTitle]
+other = "累计伤害"
+[BattleReportTrendOwnBuilt]
+other = "我方建造"
+[BattleReportTrendOwnLost]
+other = "我方损失"
+[BattleReportTrendEnemyBuilt]
+other = "敌方建造"
+[BattleReportTrendEnemyLost]
+other = "敌方损失"
+[BattleReportTrendUnitShips]
+other = "艘"
+[BattleReportTrendUnitPlanes]
+other = "架"
+[BattleReportTrendUnitTonnage]
+other = "吨"
+[BattleReportTrendEmpty]
+other = "暂无趋势数据"
+[BattleReportTrendTooltipTime]
+other = "{{.Time}}"
 [SettingsTitle]
 other = "游戏设置"
 [SettingsSpeed]

@@ -189,6 +189,25 @@ func (m *MissionManager) HandleBattleReportEventFilterClick(x, y int) bool {
 	return false
 }
 
+// HandleBattleReportTrendModeClick 处理趋势页「当前兵力 / 建造与损失」模式切换。
+func (m *MissionManager) HandleBattleReportTrendModeClick(x, y int) bool {
+	if m.state == nil || m.state.UI.BattleReportPage != state.BattleReportPageTrends {
+		return false
+	}
+	layout := m.BattleReportLayout(true)
+	for idx, rect := range layout.TrendModes {
+		if !rect.Contains(x, y) {
+			continue
+		}
+		mode := state.BattleReportTrendMode(idx)
+		if mode.Valid() {
+			m.state.UI.BattleReportTrendMode = mode
+		}
+		return true
+	}
+	return false
+}
+
 // UpdateBattleReportScrollDrag 处理战报滚动条的按下 / 拖动 / 释放。
 // 返回 true 表示本次鼠标事件已被滚动条消费，调用方不要再处理页签或按钮点击。
 func (m *MissionManager) UpdateBattleReportScrollDrag(x, y int) bool {
@@ -430,6 +449,7 @@ func (m *MissionManager) ClearBattleStats() {
 	m.state.UI.BattleReportEventScroll = 0
 	m.state.UI.BattleReportEventFilter = state.BattleReportEventFilterAll
 	m.state.UI.BattleReportDetailScroll = [2]int{}
+	m.state.UI.BattleReportTrendMode = state.BattleReportTrendModeCurrent
 	m.state.UI.BattleReportScrollDrag = state.BattleReportScrollDragNone
 	m.state.UI.BattleReportScrollDragOffset = 0
 }
