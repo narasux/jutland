@@ -8,12 +8,10 @@ import (
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/common/constants"
-	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objExplosion "github.com/narasux/jutland/pkg/mission/object/explosion"
@@ -347,43 +345,6 @@ func (d *Drawer) drawSonarRanges(screen *ebiten.Image, ms *state.MissionState) {
 		},
 		sonarPathOptions(),
 	)
-
-	// 单舰选中时才标注「声呐 + 格数」；多选时轮廓只表达整体覆盖范围。
-	if len(ms.Interaction.SelectedShips) != 1 {
-		return
-	}
-	ship := ms.Arena.Ships[ms.Interaction.SelectedShips[0]]
-	if ship == nil || ship.CurHP <= 0 || !ms.View.Camera.Contains(ship.CurPos) {
-		return
-	}
-	radius := ship.SonarRange()
-	if radius <= 0 {
-		return
-	}
-	x, y := ms.CameraPosToScreen(ship.CurPos)
-	halfLen := ship.Length / constants.MapBlockSize * ms.MapBlockDisplaySize() / 2
-	labelY := y + max(halfLen, 18*ms.ZoomScale()) + 4*ms.ZoomScale()
-	d.drawSonarLabel(screen, ms, x, labelY, radius)
-}
-
-// drawSonarLabel 在指定位置绘制声呐名称与半径；文字贴到屏幕下沿时上移，避免看不见。
-func (d *Drawer) drawSonarLabel(
-	screen *ebiten.Image, ms *state.MissionState, centerX, labelY, radius float64,
-) {
-	scale := ms.ZoomScale()
-	fontSize := 11 * scale
-	face := font.LocalizedUI(font.Kai)
-	label := fmt.Sprintf("%s %.0f", i18n.Text(i18n.MsgUnitPanelSonar), radius)
-	textFace := text.GoTextFace{Source: face, Size: fontSize}
-	textW, textH := text.Measure(label, &textFace, 0)
-	x := centerX - textW/2
-	y := labelY
-	if limit := float64(ms.View.Layout.Height) - textH - 2*scale; limit > 0 {
-		y = min(y, limit)
-	}
-	clr := color.RGBA{R: 170, G: 240, B: 240, A: 220}
-	d.drawText(screen, label, x+scale, y+scale, fontSize, face, color.RGBA{A: 180})
-	d.drawText(screen, label, x, y, fontSize, face, clr)
 }
 
 // 绘制支援舰治疗范围圈（仅在选中己方医疗船或维修船时显示）
