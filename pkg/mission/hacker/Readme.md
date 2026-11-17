@@ -281,6 +281,13 @@ Enter 的详细流程：
 - 不修改游戏设置，电脑一侧的迷雾保持原样。
 - 设置关闭时迷雾本来就不计算，这条秘籍只留下标记。
 
+`LetMeSeeTheBadKids`
+
+- 命令：`let me see the bad kids`
+- 切换当前玩家的 `RevealSubmarines`，在地图上用红框暴露所有潜艇位置。
+- 只影响绘制：`CanSeeShip`、锁敌与 AI 判定不变，没有声呐接触的潜艇依然不能被攻击。
+- 再输入一次关闭红框。
+
 `BathtubWar`
 
 - 命令：`bathtub war`

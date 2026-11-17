@@ -238,7 +238,7 @@
 
 - `ASWTest`（反潜测试-威克岛）：玩家 VIIC + gurkha；敌方 porter、hammann、I-168、Nautilus。覆盖下潜隐身 → 声呐点亮 → 深弹/反潜鱼雷 → 潜艇对潜。
 - `SubmarineTest`（潜艇试验场-中途岛）：四个互不交火的试验区——西南潜对潜、西北我猎潜、东北敌猎潜、东南航空反潜。相机起点在东南区，按 <kbd>M</kbd> 看全图。
-- 调试秘籍 `reveal submarines`（再输一次关闭）：主地图画红色舰体框，小地图/全图画红方块；**只影响绘制**，`CanSeeShip`、锁敌、AI 全部不变。属于 `DebugCheats`，终端输 `debug` 可见，普通 `help` 不显示。
+- 普通秘籍 `let me see the bad kids`（再输一次关闭）：主地图画红色舰体框，小地图/全图画红方块；**只影响绘制**，`CanSeeShip`、锁敌、AI 全部不变。属于 `Cheats`，终端 `help` 可见。
 - 终端入口：<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd>。
 
 ---
@@ -259,6 +259,7 @@
 | 2026-11-14 | **下潜/上浮可随时反向**：以最后一次指令为准，深度进度连续，完整一次仍是 8~12 秒 |
 | 2026-11-14 | 深度图标常驻（关闭常显状态时也显示），跟随最后一次指令 |
 | 2026-11-14 | 秘籍类型名 `ShowMeTheSubmarines` → `RevealSubmarines`（`ShowMeThe*` 只用于发资源/生成对象） |
+| 2026-11-17 | 找潜艇秘籍改名 `let me see the bad kids`，从 `DebugCheats` 移入普通 `Cheats` |
 
 不做（本期范围外）：Z 轴/真实深度、潜望镜战、声呐网、狼群战术、AI 建造潜艇、现代反潜（拖曳声呐/直升机/声呐浮标）、机载反潜鱼雷、潜艇战役剧情。
 

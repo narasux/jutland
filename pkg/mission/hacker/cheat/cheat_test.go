@@ -119,12 +119,12 @@ func TestShowMeTheShipMatchesConfiguredNameOnly(t *testing.T) {
 // TestCheatDescriptionsAndStringStayNonEmpty 验证所有作弊命令的 String/Desc 可用于终端帮助列表。
 // 场景：终端 help 逐条打印命令与说明；空字符串会让玩家看到空白行，无法发现命令。
 // 预期：五条代表性命令的 String/Desc 都非空，且 String 能被自身 Match 命中。
-// 覆盖：表驱动 ShowMeTheMoney/DebugAll/RevealSubmarines/BlackSheepWall/ShowMeTheShip 的元数据。
+// 覆盖：表驱动 ShowMeTheMoney/DebugAll/LetMeSeeTheBadKids/BlackSheepWall/ShowMeTheShip 的元数据。
 func TestCheatDescriptionsAndStringStayNonEmpty(t *testing.T) {
 	cheats := []Cheat{
 		&ShowMeTheMoney{},
 		&DebugAll{},
-		&RevealSubmarines{},
+		&LetMeSeeTheBadKids{},
 		&BlackSheepWall{},
 	}
 	for _, cheat := range cheats {
