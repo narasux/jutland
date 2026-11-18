@@ -518,17 +518,17 @@ func TestShipArchiveYearAnnotatesIncompletePaperAndFictional(t *testing.T) {
 }
 
 // TestSubmarineArchiveShowsSurfaceAndSubmergedSpeed 验证潜艇档案分列水面与水下航速。
-// 场景：XXI 型 u_2540 水下 17.16 节快于水面 15.6 节，只给一档「速度」会误导玩家。
+// 场景：XXI 型 u_2502 水下 17.16 节快于水面 15.6 节，只给一档「速度」会误导玩家。
 // 预期：水面行「15.6 节」、水下行「17.2 节」，且不再出现通用 MsgCollectionSpeed 行。
-// 覆盖：切到 zh-Hans，取真实 u_2540，遍历档案项建 map，断言两档数值并排除通用速度键。
+// 覆盖：切到 zh-Hans，取真实 u_2502，遍历档案项建 map，断言两档数值并排除通用速度键。
 func TestSubmarineArchiveShowsSurfaceAndSubmergedSpeed(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
 	i18n.SetLanguage(string(i18n.LanguageZhHans))
 
-	// XXI 型（U-2540）水下 17.16 节快于水面 15.6 节，图鉴必须分别给出两档航速，
+	// XXI 型（U-2502）水下 17.16 节快于水面 15.6 节，图鉴必须分别给出两档航速，
 	// 不能只显示一档“速度”。
-	ship := objUnit.ShipMap["u_2540"]
+	ship := objUnit.ShipMap["u_2502"]
 	require.NotNil(t, ship)
 	got := map[string]string{}
 	for _, item := range shipArchiveInfoItems(ship, nil) {

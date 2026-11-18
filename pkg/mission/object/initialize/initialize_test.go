@@ -247,7 +247,7 @@ func TestASWWeaponRangesAfterScaling(t *testing.T) {
 }
 
 // TestSubmarineSubmergedSpeedMatchesHistory 验证三艘潜艇的水下航速符合历史实测值。
-// 场景：2026-11-10 采用 Wikipedia 数据：VIIC（u_331）7.6 kn、I-168 8.2 kn、Nautilus 8.0 kn；配置用“水面航速 × submergedSpeedRatio”表达。
+// 场景：2026-11-10 采用 Wikipedia 数据：VIIC（u_96）7.6 kn、I-168 8.2 kn、Nautilus 8.0 kn；配置用“水面航速 × submergedSpeedRatio”表达。
 // 预期：MaxSpeed×ShipSpeedScale×SubmergedSpeedRatio 还原出的节数与目标值误差 ≤0.1 kn，避免水下航速倍率被误改。
 // 覆盖：表驱动查询 ShipMap，逐艘断言模板存在并按 0.1 容差比较。
 func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
@@ -255,7 +255,7 @@ func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 		ship string
 		want float64
 	}{
-		{"u_331", 7.6},
+		{"u_96", 7.6},
 		{"i_168", 8.2},
 		{"uss_nautilus", 8.0},
 	}

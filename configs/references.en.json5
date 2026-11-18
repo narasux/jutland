@@ -2575,6 +2575,20 @@
     ],
   },
   {
+    name: "GER/105/45/SKC32",
+    displayName: "105mm/45 SK C/32 Single Submarine Deck Gun",
+    type: "Weapon",
+    armaments: [],
+    description: "The German 10.5 cm SK C/32 was the standard deck gun of Type IX ocean-going U-boats. In game it is modelled with a 4-second reload, 12 km range and 780 m/s muzzle velocity.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 10.5 cm SK C/32 naval gun",
+        url: "https://en.wikipedia.org/wiki/10.5_cm_SK_C/32_naval_gun",
+      },
+    ],
+  },
+  {
     name: "GER/105/40/SKL40",
     displayName: "105mm/40 SK L/40 Single Mount",
     type: "Weapon",
@@ -16170,8 +16184,8 @@
     ],
   },
   {
-    name: "u_2540",
-    displayName: "U-2540 (XXI)",
+    name: "u_2502",
+    displayName: "U-2502 (XXI)",
     type: "Submarine",
     armaments: [
       {
@@ -16183,16 +16197,12 @@
         value: "6x1 533mm (6 forward)",
       },
     ],
-    description: "A Type XXI U-boat commissioned in February 1945, U-2540 never went on a war patrol. She was scuttled in May 1945, raised in 1957, and later served with the West German navy as Wilhelm Bauer. She is preserved as a museum boat at the German Maritime Museum in Bremerhaven.",
-    author: "Nano Banana",
+    description: "U-2502 was a Type XXI U-boat commissioned on 19 July 1944 under Kapitänleutnant Gert Mannesmann. She conducted no war patrols, surrendered at Horten in Norway on 9 May 1945, and was sunk by the Allies in Operation Deadlight on 2 January 1946.",
+    author: "Unknown",
     links: [
       {
-        name: "War History - Type XXI Electric Boat",
-        url: "https://warhistory.org/ja/article/type-xxi-electric-boat#google_vignette",
-      },
-      {
-        name: "Wikipedia - German submarine Wilhelm Bauer",
-        url: "https://en.wikipedia.org/wiki/German_submarine_Wilhelm_Bauer",
+        name: "Wikipedia - German submarine U-2502",
+        url: "https://en.wikipedia.org/wiki/German_submarine_U-2502",
       },
     ],
   },
@@ -16216,6 +16226,33 @@
       {
         name: "Wikipedia - German submarine U-2323",
         url: "https://en.wikipedia.org/wiki/German_submarine_U-2323",
+      },
+    ],
+  },
+  {
+    name: "u_505",
+    displayName: "U-505 (IXC)",
+    type: "Submarine",
+    armaments: [
+      {
+        label: "Deck Gun",
+        value: "1x1 105mm SK C/32",
+      },
+      {
+        label: "Anti-aircraft Guns",
+        value: "1x1 37mm SK C/30, 1x1 20mm C/30",
+      },
+      {
+        label: "Torpedoes",
+        value: "6x1 533mm (4 forward, 2 aft)",
+      },
+    ],
+    description: "U-505 was a Type IXC ocean-going U-boat commissioned in August 1941 and commanded at various times by Axel-Olaf Loewe and Harald Lange. In twelve patrols she sank eight ships; on 4 June 1944 she was captured off West Africa by US Navy Task Group 22.3, yielding Enigma material. She has been preserved at the Museum of Science and Industry in Chicago since 1954.",
+    author: "Unknown",
+    links: [
+      {
+        name: "Wikipedia - German submarine U-505",
+        url: "https://en.wikipedia.org/wiki/German_submarine_U-505",
       },
     ],
   },
@@ -16251,8 +16288,8 @@
     ],
   },
   {
-    name: "u_331",
-    displayName: "U-331 (VIIC)",
+    name: "u_96",
+    displayName: "U-96 (VIIC)",
     type: "Submarine",
     armaments: [
       {
@@ -16261,23 +16298,19 @@
       },
       {
         label: "Anti-aircraft Gun",
-        value: "1x1 20mm Flak 30",
+        value: "1x1 20mm C/30",
       },
       {
         label: "Torpedoes",
         value: "5x1 533mm (4 forward, 1 aft)",
       },
     ],
-    description: "U-331 was a Type VIIC U-boat commissioned in March 1941 under Hans-Diedrich von Tiesenhausen. On 25 November 1941 she sank the British battleship Barham north of Sidi Barrani. Crippled by a Hudson bomber, she was sunk by Fleet Air Arm Albacores north of Algiers on 17 November 1942; 32 of her crew were killed.",
-    author: "Gemini Image",
+    description: "U-96 was a Type VIIC U-boat commissioned in September 1940 under Heinrich Lehmann-Willenbrock. In eleven patrols she sank 27 ships and damaged four; the laughing sawfish on her conning tower became the emblem of the 9th U-boat Flotilla. She is best known through Lothar-Günther Buchheim's novel Das Boot and its film adaptation. U-96 was sunk by American bombs at Wilhelmshaven on 30 March 1945 with no loss of her crew.",
+    author: "Unknown",
     links: [
       {
-        name: "Gemini Image",
-        url: "https://gemini.google.com",
-      },
-      {
-        name: "Wikipedia - German submarine U-331",
-        url: "https://en.wikipedia.org/wiki/German_submarine_U-331",
+        name: "Wikipedia - German submarine U-96 (1940)",
+        url: "https://en.wikipedia.org/wiki/German_submarine_U-96_(1940)",
       },
     ],
   },

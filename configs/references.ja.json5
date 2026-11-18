@@ -2575,6 +2575,20 @@
     ],
   },
   {
+    name: "GER/105/45/SKC32",
+    displayName: "105mm/45 SK C/32 単装潜水艦甲板砲",
+    type: "兵器",
+    armaments: [],
+    description: "ドイツ海軍の10.5cm SK C/32単装潜水艦甲板砲（45口径）。IX型遠洋Uボートの標準甲板砲。ゲームでは4秒装填、12km射程、初速780m/sとして表現。",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - 10.5 cm SK C/32 naval gun",
+        url: "https://en.wikipedia.org/wiki/10.5_cm_SK_C/32_naval_gun",
+      },
+    ],
+  },
+  {
     name: "GER/105/40/SKL40",
     displayName: "105mm/40 SK L/40 単装砲",
     type: "兵器",
@@ -16170,8 +16184,8 @@
     ],
   },
   {
-    name: "u_2540",
-    displayName: "U-2540（XXI）",
+    name: "u_2502",
+    displayName: "U-2502（XXI）",
     type: "潜水艦",
     armaments: [
       {
@@ -16183,16 +16197,12 @@
         value: "6x1 533mm（艦首 6）",
       },
     ],
-    description: "XXI型潜水艦。1945年2月に就役したが、実戦哨戒には出ていない。1945年5月に自沈し、1957年に引き揚げられた。その後ヴィルヘルム・バウアーとして西ドイツ海軍に就役し、現在はブレーマーハーフェンのドイツ海事博物館で保存されている。",
-    author: "Nano Banana",
+    description: "U-2502はXXI型Uボート。1944年7月19日に就役し、ゲルト・マンネスマンが指揮した。実戦哨戒には出ず、1945年5月9日にノルウェーのホルテンで降伏。1946年1月2日、オペレーション・デッドライトによりアイルランド沖で撃沈された。",
+    author: "不明",
     links: [
       {
-        name: "War History - Type XXI Electric Boat",
-        url: "https://warhistory.org/ja/article/type-xxi-electric-boat#google_vignette",
-      },
-      {
-        name: "Wikipedia - ヴィルヘルム・バウアー (潜水艦)",
-        url: "https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A3%E3%83%AB%E3%83%98%E3%83%AB%E3%83%A0%E3%83%BB%E3%83%90%E3%82%A6%E3%82%A2%E3%83%BC_(%E6%BD%9C%E6%B0%B4%E8%89%A6)",
+        name: "Wikipedia - UボートXXI型",
+        url: "https://ja.wikipedia.org/wiki/U%E3%83%9C%E3%83%BC%E3%83%88XXI%E5%9E%8B",
       },
     ],
   },
@@ -16216,6 +16226,33 @@
       {
         name: "Wikipedia - UボートXXIII型",
         url: "https://ja.wikipedia.org/wiki/U%E3%83%9C%E3%83%BC%E3%83%88XXIII%E5%9E%8B",
+      },
+    ],
+  },
+  {
+    name: "u_505",
+    displayName: "U-505（IXC）",
+    type: "潜水艦",
+    armaments: [
+      {
+        label: "甲板砲",
+        value: "1x1 105mm SK C/32",
+      },
+      {
+        label: "対空砲",
+        value: "1x1 37mm SK C/30、1x1 20mm C/30",
+      },
+      {
+        label: "魚雷",
+        value: "6x1 533mm（艦首 4、艦尾 2）",
+      },
+    ],
+    description: "U-505はIXC型遠洋Uボート。1941年8月に就役し、アクセル＝オーラフ・レーヴェ、ハラルト・ランゲらが指揮した。12回の哨戒で8隻を撃沈。1944年6月4日に西アフリカ沖でアメリカ海軍第22.3任務群に捕獲され、エニグマ暗号機と暗号表が押収された。1954年からシカゴ科学産業博物館で保存・展示されている。",
+    author: "不明",
+    links: [
+      {
+        name: "Wikipedia - U505 (潜水艦)",
+        url: "https://ja.wikipedia.org/wiki/U505_(%E6%BD%9C%E6%B0%B4%E8%89%A6)",
       },
     ],
   },
@@ -16251,8 +16288,8 @@
     ],
   },
   {
-    name: "u_331",
-    displayName: "U-331（VIIC）",
+    name: "u_96",
+    displayName: "U-96（VIIC）",
     type: "潜水艦",
     armaments: [
       {
@@ -16261,23 +16298,19 @@
       },
       {
         label: "対空砲",
-        value: "1x1 20mm Flak 30",
+        value: "1x1 20mm C/30",
       },
       {
         label: "魚雷",
         value: "5x1 533mm（艦首 4、艦尾 1）",
       },
     ],
-    description: "U-331はVII C型Uボート。1941年3月に就役し、ハンス＝ディートリヒ・フォン・ティーゼンハウゼンが指揮した。1941年11月25日、エジプト沖でイギリス戦艦バーラムを撃沈。1942年11月17日、アルジェ北方で英軍機の攻撃を受けて航行不能となり、雷撃機によって沈没した。乗員32名が死亡した。",
-    author: "Gemini Image",
+    description: "U-96はVIIC型Uボート。1940年9月に就役し、ハインリヒ・レーマン・ヴィレンブロックが指揮した。11回の作戦で27隻を撃沈し、4隻を損傷させた。司令塔の「笑うノコギリエイ」は第9潜水隊群のエンブレムとなった。ロタール＝ギュンター・ブーフハイムの小説『Uボート』とその映画化で知られる。1945年3月30日、ウィルヘルムスハーフェンで米軍の爆撃により沈没し、乗員の犠牲はなかった。",
+    author: "不明",
     links: [
       {
-        name: "Gemini Image",
-        url: "https://gemini.google.com",
-      },
-      {
-        name: "Wikipedia - UボートVII型",
-        url: "https://ja.wikipedia.org/wiki/U%E3%83%9C%E3%83%BC%E3%83%88VII%E5%9E%8B",
+        name: "Wikipedia - U96 (潜水艦・2代)",
+        url: "https://ja.wikipedia.org/wiki/U96_(%E6%BD%9C%E6%B0%B4%E8%89%A6%E3%83%BB2%E4%BB%A3)",
       },
     ],
   },

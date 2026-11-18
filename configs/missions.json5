@@ -2972,7 +2972,7 @@
           "uss_barb",
           "uss_sealion",
           "uss_tarpon",
-          "u_2540",
+          "u_2502",
           "u_2323",
           "u_47"
         ],
@@ -3002,10 +3002,11 @@
           "su_l_class",
           "su_shch_class",
           "su_m_class",
-          "u_2540",
+          "u_2502",
           "u_2323",
           "u_47",
-          "u_331",
+          "u_96",
+          "u_505",
           "i_168",
           "i_400",
           "i_52",
@@ -3223,7 +3224,7 @@
         belongPlayer: "P1"
       },
       {
-        name: "u_2540",
+        name: "u_2502",
         pos: [28, 26],
         rotation: 90,
         belongPlayer: "P1"
@@ -3241,8 +3242,14 @@
         belongPlayer: "P1"
       },
       {
-        name: "u_331",
+        name: "u_96",
         pos: [29, 29],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "u_505",
+        pos: [30, 28],
         rotation: 90,
         belongPlayer: "P1"
       },
@@ -6534,7 +6541,7 @@
       // === 我方 ===
       // 我方编队在环礁西北外海，U 艇与护航驱逐舰南北相隔 3 格，舰首向东。
       {
-        name: "u_331",
+        name: "u_96",
         pos: [30, 34],
         rotation: 90,
         belongPlayer: "P1"
@@ -6608,7 +6615,7 @@
       // 任意两区之间最近敌我距离 ≥71 格，避免 AI 跨区接敌和开局即交火。
       // === 西南区「潜对潜」：U 艇（西，30,230）对 I-168（东，90,230），相距 60 格 ===
       {
-        name: "u_331",
+        name: "u_96",
         pos: [30, 230],
         rotation: 90,
         belongPlayer: "P1"
@@ -6640,7 +6647,7 @@
       },
       // === 东北区「敌猎潜」：U 艇（西，165,184）对两驱逐舰（东，225,181/187），最近 60 格 ===
       {
-        name: "u_331",
+        name: "u_96",
         pos: [165, 184],
         rotation: 90,
         belongPlayer: "P1"
