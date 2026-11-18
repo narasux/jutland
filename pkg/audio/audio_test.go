@@ -2,6 +2,7 @@ package audio
 
 import (
 	"bytes"
+	"math"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -44,5 +45,46 @@ func TestShortVoicePoolCapsAtEight(t *testing.T) {
 	play()
 	if len(voices.players) != maxConcurrentShortSounds {
 		t.Fatalf("players = %d, want the cap to hold", len(voices.players))
+	}
+}
+
+// TestAudioVolumesClamp 验证 BGM 与战场音效音量分别夹到 [0,1]，NaN 视为静音。
+// 场景：设置页两个滑杆或手写配置可能传入 -0.5 / 1.5 / NaN，而 audio.Player.SetVolume 只接受 [0,1]。
+// 预期：两通道负数与 NaN 得到 0、超过 1 得到 1，且设置 BGM 不改变音效值；失败说明非法音量进入播放器或两通道串线。
+// 覆盖：保存并恢复两个全局音量，依次 SetBGMVolume(-0.5/1.5/NaN)、SetEffectsVolume(-0.5/0.25/1.5/NaN) 后逐次断言 getter。
+func TestAudioVolumesClamp(t *testing.T) {
+	previousBGM, previousEffects := BGMVolume(), EffectsVolume()
+	t.Cleanup(func() {
+		SetBGMVolume(previousBGM)
+		SetEffectsVolume(previousEffects)
+	})
+
+	SetEffectsVolume(0.25)
+	SetBGMVolume(-0.5)
+	if got := BGMVolume(); got != 0 {
+		t.Fatalf("negative BGM volume = %v, want 0", got)
+	}
+	if got := EffectsVolume(); got != 0.25 {
+		t.Fatalf("BGM change must not touch effects volume, got %v", got)
+	}
+	SetBGMVolume(1.5)
+	if got := BGMVolume(); got != 1 {
+		t.Fatalf("oversized BGM volume = %v, want 1", got)
+	}
+	SetBGMVolume(math.NaN())
+	if got := BGMVolume(); got != 0 {
+		t.Fatalf("NaN BGM volume = %v, want 0", got)
+	}
+	SetEffectsVolume(-0.5)
+	if got := EffectsVolume(); got != 0 {
+		t.Fatalf("negative effects volume = %v, want 0", got)
+	}
+	SetEffectsVolume(1.5)
+	if got := EffectsVolume(); got != 1 {
+		t.Fatalf("oversized effects volume = %v, want 1", got)
+	}
+	SetEffectsVolume(math.NaN())
+	if got := EffectsVolume(); got != 0 {
+		t.Fatalf("NaN effects volume = %v, want 0", got)
 	}
 }

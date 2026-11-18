@@ -18,6 +18,20 @@ const (
 	SpeedFastMultiplier = 2.00
 )
 
+// 战舰水面尾流的可调范围。1.0 表示保持原始观感，0 或缺失时按 1.0 处理。
+const (
+	WakeTrailLengthMin    = 0.40
+	WakeTrailLengthMax    = 2.50
+	WakeTrailWidthMin     = 0.40
+	WakeTrailWidthMax     = 2.00
+	WakeTrailOpacityMin   = 0.20
+	WakeTrailOpacityMax   = 1.50
+	WakeTrailDefaultScale = 1.00
+)
+
+// DefaultAudioVolume 默认音频音量，1.0 表示不衰减。
+const DefaultAudioVolume = 1.00
+
 var BaseDir = detectBaseDir()
 
 // detectBaseDir 兼容从仓库子目录启动的 Go 测试，同时保留从可执行文件旁加载资源的能力。
@@ -73,6 +87,41 @@ func DefaultAIStrategies() AIStrategies {
 	return AIStrategies{Attack: true, Defend: true, Counter: true, Raid: true, Scout: true}
 }
 
+// WakeTrailSettings 战舰水面尾流的观感参数，1.0 为原始值。
+type WakeTrailSettings struct {
+	// Length 尾流航迹长度倍率；越大尾流拖得越远。
+	Length float64 `json:"length"`
+	// Width 尾流宽度倍率；越大尾流扩散得越宽。
+	Width float64 `json:"width"`
+	// Opacity 尾流浓度倍率；越大尾流越白、越显眼。
+	Opacity float64 `json:"opacity"`
+}
+
+// DefaultWakeTrailSettings 返回原始尾流观感。
+func DefaultWakeTrailSettings() WakeTrailSettings {
+	return WakeTrailSettings{
+		Length:  WakeTrailDefaultScale,
+		Width:   WakeTrailDefaultScale,
+		Opacity: WakeTrailDefaultScale,
+	}
+}
+
+func normalizeWakeScale(value, minValue, maxValue float64) float64 {
+	if math.IsNaN(value) || value <= 0 {
+		return WakeTrailDefaultScale
+	}
+	return min(max(value, minValue), maxValue)
+}
+
+// Normalize 把三个尾流参数夹到可用范围；0/NaN 视为未配置并回退到 1.0。
+func (w WakeTrailSettings) Normalize() WakeTrailSettings {
+	return WakeTrailSettings{
+		Length:  normalizeWakeScale(w.Length, WakeTrailLengthMin, WakeTrailLengthMax),
+		Width:   normalizeWakeScale(w.Width, WakeTrailWidthMin, WakeTrailWidthMax),
+		Opacity: normalizeWakeScale(w.Opacity, WakeTrailOpacityMin, WakeTrailOpacityMax),
+	}
+}
+
 // GameSettings 游戏设置配置
 type GameSettings struct {
 	// SpeedMultiplier 全局速度倍率，影响战舰、炮弹、鱼雷、飞机等移动速度
@@ -80,6 +129,11 @@ type GameSettings struct {
 	SpeedMultiplier float64 `json:"speedMultiplier"`
 	// Language 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja。
 	Language string `json:"language"`
+	// BGMVolume 背景音乐音量，范围 0.00 ~ 1.00；0 为静音，字段缺失时按 1.00 处理。
+	// 使用指针区分「旧配置没写」和「玩家显式静音」。
+	BGMVolume *float64 `json:"bgmVolume"`
+	// EffectsVolume 战场音效（火炮 / 鱼雷 / 爆炸等）音量，范围同上。
+	EffectsVolume *float64 `json:"effectsVolume"`
 	// AI 电脑舰队允许使用的策略。
 	AI AIStrategies `json:"aiStrategies"`
 	// EnableLandAirfield 陆地机场功能总开关，false 时所有任务不生成机场
@@ -96,6 +150,8 @@ type GameSettings struct {
 	DisplayDamageNumber bool `json:"displayDamageNumber"`
 	// ForceDisplayState 是否常显战舰状态（HP 与武器装填）；关闭后仅在选中时显示。
 	ForceDisplayState bool `json:"forceDisplayState"`
+	// WakeTrail 战舰水面尾流的长度 / 宽度 / 浓度自定义参数。
+	WakeTrail WakeTrailSettings `json:"wakeTrail"`
 }
 
 // G 游戏设置全局变量
@@ -103,7 +159,7 @@ var G *GameSettings
 
 // NewDefaultGameSettings 创建默认游戏设置
 func NewDefaultGameSettings() *GameSettings {
-	return &GameSettings{
+	settings := &GameSettings{
 		SpeedMultiplier:     SpeedStandardMultiplier,
 		Language:            "zh-Hans",
 		AI:                  DefaultAIStrategies(),
@@ -112,7 +168,11 @@ func NewDefaultGameSettings() *GameSettings {
 		DisplayHitEffects:   true,
 		DisplayDamageNumber: true,
 		ForceDisplayState:   true,
+		WakeTrail:           DefaultWakeTrailSettings(),
 	}
+	settings.SetBGMVolume(DefaultAudioVolume)
+	settings.SetEffectsVolume(DefaultAudioVolume)
+	return settings
 }
 
 // EnabledAIStrategies 返回当前设置里的电脑策略。设置还没加载时五种都算开启。
@@ -121,6 +181,56 @@ func EnabledAIStrategies() AIStrategies {
 		return DefaultAIStrategies()
 	}
 	return G.AI
+}
+
+// ResolvedWakeTrail 返回校验后的尾流参数；设置未加载或字段缺失时使用原始观感。
+func (s *GameSettings) ResolvedWakeTrail() WakeTrailSettings {
+	if s == nil {
+		return DefaultWakeTrailSettings()
+	}
+	return s.WakeTrail.Normalize()
+}
+
+func normalizeAudioVolume(value float64) float64 {
+	if math.IsNaN(value) {
+		return 0
+	}
+	return min(max(value, 0), 1)
+}
+
+func resolvedAudioVolume(value *float64) float64 {
+	if value == nil {
+		return DefaultAudioVolume
+	}
+	return normalizeAudioVolume(*value)
+}
+
+// ResolvedBGMVolume 返回校验后的背景音乐音量；字段缺失时使用默认值。
+func (s *GameSettings) ResolvedBGMVolume() float64 {
+	if s == nil {
+		return DefaultAudioVolume
+	}
+	return resolvedAudioVolume(s.BGMVolume)
+}
+
+// ResolvedEffectsVolume 返回校验后的战场音效音量；字段缺失时使用默认值。
+func (s *GameSettings) ResolvedEffectsVolume() float64 {
+	if s == nil {
+		return DefaultAudioVolume
+	}
+	return resolvedAudioVolume(s.EffectsVolume)
+}
+
+// SetBGMVolume 写入并夹紧背景音乐音量；显式 0 表示静音。
+func (s *GameSettings) SetBGMVolume(value float64) {
+	value = normalizeAudioVolume(value)
+	s.BGMVolume = &value
+}
+
+// SetEffectsVolume 写入并夹紧战场音效音量；显式 0 表示静音。
+func (s *GameSettings) SetEffectsVolume(value float64) {
+	value = normalizeAudioVolume(value)
+	s.EffectsVolume = &value
 }
 
 func normalizeSpeedMultiplier(value float64) float64 {
@@ -145,6 +255,9 @@ func (s *GameSettings) validate() {
 	default:
 		s.Language = "zh-Hans"
 	}
+	s.WakeTrail = s.WakeTrail.Normalize()
+	s.SetBGMVolume(s.ResolvedBGMVolume())
+	s.SetEffectsVolume(s.ResolvedEffectsVolume())
 }
 
 // LoadGameSettings 加载游戏设置配置文件
@@ -217,13 +330,19 @@ func SaveGameSettings() error {
 	)
 	_, _ = file.WriteString("// 范围: 0.50 ~ 2.00，默认值: 1.00\n\n")
 	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n")
+	_, _ = file.WriteString("// bgmVolume: 背景音乐音量 0.00 ~ 1.00，0 为静音，默认 1.00\n")
+	_, _ = file.WriteString("// effectsVolume: 战场音效（火炮 / 鱼雷 / 爆炸等）音量 0.00 ~ 1.00，默认 1.00\n")
 	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n")
 	_, _ = file.WriteString("// aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用\n")
 	_, _ = file.WriteString("// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾\n")
 	_, _ = file.WriteString("// EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图\n")
 	_, _ = file.WriteString("// DisplayHitEffects: 命中特效总开关，默认开启；关闭后命中舰体 / 落水 / 落陆不再生成特效\n")
 	_, _ = file.WriteString("// DisplayDamageNumber: 是否显示命中伤害数字，默认开启\n")
-	_, _ = file.WriteString("// ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示\n\n")
+	_, _ = file.WriteString("// ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示\n")
+	_, _ = file.WriteString(
+		"// wakeTrail: 战舰水面尾流参数，length 航迹长度 0.40~2.50、width 宽度 0.40~2.00、" +
+			"opacity 浓度 0.20~1.50，默认均为 1.00\n\n",
+	)
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

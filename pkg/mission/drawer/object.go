@@ -405,6 +405,17 @@ func (d *Drawer) drawObjectTrails(screen *ebiten.Image, ms *state.MissionState) 
 		scale := textureImg.TrailDrawScale(trail.Shape, trail.CurSize) * ms.ZoomScale()
 		x, y := ms.CameraPosToScreen(trail.Pos)
 		red, green, blue, alpha := textureImg.TrailColorScale(trail.Color, trail.CurLife)
+		// AlphaScale 是舰船尾流的浓度设置；普通炮弹/鱼雷尾流默认为 1。
+		alphaScale := trail.AlphaScale
+		if alphaScale <= 0 {
+			alphaScale = 1
+		}
+		if alphaScale != 1 {
+			alpha = min(alpha*float32(alphaScale), 1)
+			red = min(red*float32(alphaScale), alpha)
+			green = min(green*float32(alphaScale), alpha)
+			blue = min(blue*float32(alphaScale), alpha)
+		}
 		drawImageCenteredColored(screen, trailImg, x, y, trail.Rotation, scale, red, green, blue, alpha)
 	}
 }

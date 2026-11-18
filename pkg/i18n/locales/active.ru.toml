@@ -712,3 +712,32 @@ other = "{{.Label}}: {{.Value}}"
 other = "{{.Name}} × {{.Count}}"
 [TypeSlash]
 other = "{{.Abbr}} / {{.Type}}"
+[SettingsReset]
+other = "Сбросить настройки"
+[SettingsResetTitle]
+other = "Сбросить настройки"
+[SettingsResetMessage]
+other = "Все настройки будут сброшены к значениям по умолчанию и сохранены. Продолжить?"
+[SettingsConfirmReset]
+other = "Сбросить"
+[SettingsBGMVolume]
+other = "Музыка"
+[SettingsEffectsVolume]
+other = "Звуки боя"
+[SettingsLandAirfield]
+other = "Наземные аэродромы"
+[SettingsWakeLength]
+other = "Длина следа"
+[SettingsWakeWidth]
+other = "Ширина следа"
+[SettingsWakeOpacity]
+other = "Плотность следа"
+
+[SettingsTabGame]
+other = "Игра"
+[SettingsTabAV]
+other = "Звук и видео"
+[SettingsGameHint]
+other = "Темп боя, язык, обзор и интерфейс"
+[SettingsAVHint]
+other = "Эффекты боя, громкость и кильватер"

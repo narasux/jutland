@@ -707,3 +707,32 @@ other = "{{.Label}}: {{.Value}}"
 other = "{{.Name}} x {{.Count}}"
 [TypeSlash]
 other = "{{.Abbr}} / {{.Type}}"
+[SettingsReset]
+other = "Restore Defaults"
+[SettingsResetTitle]
+other = "Restore defaults"
+[SettingsResetMessage]
+other = "All settings will be reset to defaults and saved immediately. Continue?"
+[SettingsConfirmReset]
+other = "Restore"
+[SettingsBGMVolume]
+other = "Music"
+[SettingsEffectsVolume]
+other = "Battle SFX"
+[SettingsLandAirfield]
+other = "Land airfields"
+[SettingsWakeLength]
+other = "Wake length"
+[SettingsWakeWidth]
+other = "Wake width"
+[SettingsWakeOpacity]
+other = "Wake opacity"
+
+[SettingsTabGame]
+other = "Game"
+[SettingsTabAV]
+other = "Audio & Visual"
+[SettingsGameHint]
+other = "Battle pace, language, visibility and HUD"
+[SettingsAVHint]
+other = "Combat feedback, volume and ship wake"

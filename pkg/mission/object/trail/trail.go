@@ -29,6 +29,8 @@ type Trail struct {
 	Rotation float64
 	// 颜色（nil 为默认白色）
 	Color color.Color
+	// AlphaScale 绘制时的额外不透明度倍率（1.0 为原始浓度）。0 按 1.0 处理。
+	AlphaScale float64
 
 	stopFade bool
 }
@@ -61,6 +63,7 @@ func New(
 		Delay:             delay,
 		Rotation:          rotation,
 		Color:             clr,
+		AlphaScale:        1,
 	}
 	return t
 }

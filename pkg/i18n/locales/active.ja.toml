@@ -706,3 +706,32 @@ other = "{{.Label}}：{{.Value}}"
 other = "{{.Name}} × {{.Count}}"
 [TypeSlash]
 other = "{{.Abbr}} / {{.Type}}"
+[SettingsReset]
+other = "初期設定に戻す"
+[SettingsResetTitle]
+other = "初期設定に戻す"
+[SettingsResetMessage]
+other = "すべての設定を初期値に戻して保存します。よろしいですか？"
+[SettingsConfirmReset]
+other = "戻す"
+[SettingsBGMVolume]
+other = "BGM"
+[SettingsEffectsVolume]
+other = "戦場効果音"
+[SettingsLandAirfield]
+other = "陸上飛行場"
+[SettingsWakeLength]
+other = "航跡の長さ"
+[SettingsWakeWidth]
+other = "航跡の幅"
+[SettingsWakeOpacity]
+other = "航跡の濃度"
+
+[SettingsTabGame]
+other = "ゲーム"
+[SettingsTabAV]
+other = "映像と音声"
+[SettingsGameHint]
+other = "戦闘テンポ・言語・視界・HUD"
+[SettingsAVHint]
+other = "戦闘エフェクト・音量・航跡"
