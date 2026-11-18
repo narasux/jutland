@@ -20746,13 +20746,13 @@
     }
   },
   // --------- 潜艇 ----------
-  // U-2540
+  // U-2502
   {
-    name: "u_2540",
+    name: "u_2502",
     nation: "de",
     type: "submarine",
     typeAbbr: "SS",
-    year: 1945,
+    year: 1944,
     historical: "real",
     totalHP: 1621,
     horizontalDamageReduction: 0,
@@ -20874,13 +20874,108 @@
       ]
     }
   },
-  // U-331
+  // U-505
   {
-    name: "u_331",
+    name: "u_505",
     nation: "de",
     type: "submarine",
     typeAbbr: "SS",
     year: 1941,
+    historical: "real",
+    totalHP: 1120,
+    horizontalDamageReduction: 0,
+    verticalDamageReduction: 0,
+    maxSpeed: 18.3,
+    acceleration: 0.6,
+    rotateSpeed: 1.4,
+    length: 76.8,
+    width: 6.8,
+    sightRange: 12,
+    diveTime: 14,
+    surfaceTime: 10,
+    submergedSpeedRatio: 0.4,
+    defaultDiveState: "submerged",
+    fundsCost: 55,
+    timeCost: 21,
+    weapon: {
+      mainGuns: [
+        // 甲板炮（指挥塔前方）
+        {
+          name: "GER/105/45/SKC32",
+          posPercent: 0.12,
+          rightFiringArc: [0, 150],
+          leftFiringArc: [210, 360]
+        }
+      ],
+      antiAircraftGuns: [
+        // 指挥塔后部 37mm 高炮
+        {
+          name: "GER/37/83/SKC30",
+          posPercent: -0.02,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 指挥塔前部 20mm 高炮
+        {
+          name: "GER/20/65/C30",
+          posPercent: 0.03,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ],
+      torpedoes: [
+        // 艏部鱼雷 1（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 2（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.86,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 3（上）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艏部鱼雷 4（下）
+        {
+          name: "GER/533/1/C35",
+          posPercent: 0.8,
+          rightFiringArc: [0, 10],
+          leftFiringArc: [350, 360]
+        },
+        // 艉部鱼雷 5
+        {
+          name: "GER/533/1/C35",
+          posPercent: -0.9,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        },
+        // 艉部鱼雷 6
+        {
+          name: "GER/533/1/C35",
+          posPercent: -0.9,
+          rightFiringArc: [170, 180],
+          leftFiringArc: [180, 190]
+        }
+      ]
+    }
+  },
+  // U-96
+  {
+    name: "u_96",
+    nation: "de",
+    type: "submarine",
+    typeAbbr: "SS",
+    year: 1940,
     historical: "real",
     totalHP: 769,
     horizontalDamageReduction: 0,
@@ -20888,7 +20983,7 @@
     maxSpeed: 17.7,
     acceleration: 0.7,
     rotateSpeed: 1.6,
-    length: 67.2,
+    length: 67.1,
     width: 6.2,
     sightRange: 12,
     diveTime: 12,

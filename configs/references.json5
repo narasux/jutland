@@ -10619,6 +10619,20 @@
     ],
   },
   {
+    name: "GER/105/45/SKC32",
+    displayName: "105mm/45 SK C/32 单装潜艇甲板炮",
+    type: "武器",
+    armaments: [],
+    description: "德国海军 10.5 厘米 SK C/32 单装潜艇甲板炮，45 倍径，是 IX 型远洋 U 艇的标准甲板武器。游戏中按 4 秒装填、12 千米射程与 780 米/秒初速表现。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 10.5 cm SK C/32 naval gun",
+        url: "https://en.wikipedia.org/wiki/10.5_cm_SK_C/32_naval_gun",
+      },
+    ],
+  },
+  {
     name: "GER/105/40/SKL40",
     displayName: "105mm/40 SK L/40 单装舰炮",
     type: "武器",
@@ -16144,8 +16158,8 @@
     ],
   },
   {
-    name: "u_2540",
-    displayName: "U-2540（XXI）",
+    name: "u_2502",
+    displayName: "U-2502（XXI）",
     type: "潜艇",
     armaments: [
       {
@@ -16157,16 +16171,12 @@
         value: "6x1 533mm（艏 6）",
       },
     ],
-    description: "XXI 型潜艇，1945 年 2 月服役，未执行战备巡逻。1945 年 5 月自沉，1957 年打捞，后以威廉·鲍姆号之名加入联邦德国海军，现作为博物馆艇保存在不来梅哈芬的德国海事博物馆。",
-    author: "Nano Banana",
+    description: "U-2502 属 XXI 型，1944 年 7 月 19 日服役，艇长格特·曼内斯曼。该艇未执行战备巡逻，1945 年 5 月 9 日在挪威霍滕港投降；战后被押往斯卡帕湾，1946 年 1 月 2 日在“死亡之光”行动中于爱尔兰近海被击沉。",
+    author: "未知",
     links: [
       {
-        name: "War History - Type XXI Electric Boat",
-        url: "https://warhistory.org/ja/article/type-xxi-electric-boat#google_vignette",
-      },
-      {
-        name: "维基百科 - 威廉·鲍姆号潜艇",
-        url: "https://zh.wikipedia.org/wiki/%E5%A8%81%E5%BB%89%C2%B7%E9%B2%8D%E5%A7%86%E5%8F%B7%E6%BD%9C%E8%89%A6",
+        name: "维基百科 - XXI级潜艇",
+        url: "https://zh.wikipedia.org/wiki/XXI%E7%B4%9A%E6%BD%9B%E8%89%A6",
       },
     ],
   },
@@ -16190,6 +16200,33 @@
       {
         name: "维基百科 - XXIII级潜艇",
         url: "https://zh.wikipedia.org/wiki/XXIII%E7%B4%9A%E6%BD%9B%E8%89%87",
+      },
+    ],
+  },
+  {
+    name: "u_505",
+    displayName: "U-505（IXC）",
+    type: "潜艇",
+    armaments: [
+      {
+        label: "甲板炮",
+        value: "1x1 105mm SK C/32",
+      },
+      {
+        label: "高炮",
+        value: "1x1 37mm SK C/30、1x1 20mm C/30",
+      },
+      {
+        label: "鱼雷",
+        value: "6x1 533mm（艏 4、艉 2）",
+      },
+    ],
+    description: "U-505 属 IXC 型远洋潜艇，1941 年 8 月服役，历任艇长包括阿克塞尔-奥拉夫·勒韦与哈拉尔德·朗格。该艇执行 12 次战巡，击沉 8 艘商船（约 4.5 万吨）；1944 年 6 月 4 日在西非近海被美国海军第 22.3 特遣队俘获，艇上密码机与密码表被缴获。1954 年起作为博物馆艇保存在芝加哥科学与工业博物馆。",
+    author: "未知",
+    links: [
+      {
+        name: "维基百科 - U-505号潜艇",
+        url: "https://zh.wikipedia.org/wiki/U-505%E5%8F%B7%E6%BD%9C%E8%89%87",
       },
     ],
   },
@@ -16225,8 +16262,8 @@
     ],
   },
   {
-    name: "u_331",
-    displayName: "U-331（VIIC）",
+    name: "u_96",
+    displayName: "U-96（VIIC）",
     type: "潜艇",
     armaments: [
       {
@@ -16235,23 +16272,19 @@
       },
       {
         label: "高炮",
-        value: "1x1 20mm Flak 30",
+        value: "1x1 20mm C/30",
       },
       {
         label: "鱼雷",
         value: "5x1 533mm（艏 4、艉 1）",
       },
     ],
-    description: "U-331 属 VII C 型，1941 年 3 月服役，由汉斯-迪特里希·冯·蒂森豪森指挥。1941 年 11 月 25 日在埃及近海用三枚鱼雷击沉英国战列舰巴勒姆号；1942 年 11 月 17 日在阿尔及尔以北被英军飞机重创，随后被鱼雷机击沉，32 名艇员丧生。",
-    author: "Gemini Image",
+    description: "U-96 属 VII C 型，1940 年 9 月服役，首任艇长海因里希·莱曼-维伦布罗克。该艇执行 11 次战巡，击沉 27 艘商船（约 18.1 万吨），并因随艇采访的洛塔尔-京特·布赫海姆所著小说《从海底出击》及同名电影闻名；艇桥上的「笑面锯鳐」后来成为第 9 潜艇支队的队徽。1945 年 3 月 30 日在威廉港被美军空袭炸沉，艇员无一阵亡。",
+    author: "未知",
     links: [
       {
-        name: "Gemini Image",
-        url: "https://gemini.google.com",
-      },
-      {
-        name: "维基百科 - VII级潜艇",
-        url: "https://zh.wikipedia.org/wiki/VII%E7%B4%9A%E6%BD%9B%E8%89%A6",
+        name: "维基百科 - U-96号潜艇 (1940年)",
+        url: "https://zh.wikipedia.org/wiki/U-96%E5%8F%B7%E6%BD%9C%E8%89%87_(1940%E5%B9%B4)",
       },
     ],
   },

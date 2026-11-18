@@ -10,7 +10,7 @@ import (
 
 // 本关用到的模板类型（不依赖 ShipMap，避免测试包再去加载整套资源配置）
 var submarineTestShipTypes = map[string]string{
-	"u_331":        "submarine",
+	"u_96":         "submarine",
 	"i_168":        "submarine",
 	"uss_nautilus": "submarine",
 	"gurkha":       "destroyer",
