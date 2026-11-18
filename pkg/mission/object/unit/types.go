@@ -89,6 +89,54 @@ func AvailableNations() []Nation {
 	}
 }
 
+// HistoricalStatus 单位的历史属性，图鉴用来区分史实、未完工、仅试验机、少量生产、图纸与架空设计。
+type HistoricalStatus string
+
+const (
+	// HistoricalStatusReal 史实：实际建成并进入量产/服役，包含战时改装。
+	HistoricalStatusReal HistoricalStatus = "real"
+	// HistoricalStatusIncomplete 未完工：已开工或下水，但从未建成服役。
+	HistoricalStatusIncomplete HistoricalStatus = "incomplete"
+	// HistoricalStatusPrototype 仅试验机：只有原型/试作/预生产机，未进入量产或服役。
+	HistoricalStatusPrototype HistoricalStatus = "prototype"
+	// HistoricalStatusLimited 少量生产：小批量生产并投入使用，但未形成大批量装备。
+	HistoricalStatusLimited HistoricalStatus = "limited"
+	// HistoricalStatusPaper 图纸：真实历史方案，从未开工建造。
+	HistoricalStatusPaper HistoricalStatus = "paper"
+	// HistoricalStatusFictional 架空：游戏原创、架空改型或幻想单位。
+	HistoricalStatusFictional HistoricalStatus = "fictional"
+)
+
+// IsValid 判断历史属性是否为受支持的取值。
+func (s HistoricalStatus) IsValid() bool {
+	return s == HistoricalStatusReal ||
+		s == HistoricalStatusIncomplete ||
+		s == HistoricalStatusPrototype ||
+		s == HistoricalStatusLimited ||
+		s == HistoricalStatusPaper ||
+		s == HistoricalStatusFictional
+}
+
+// ToDisplay 历史属性展示用名称。
+func (s HistoricalStatus) ToDisplay() string {
+	switch s {
+	case HistoricalStatusReal:
+		return i18n.Text(i18n.MsgCollectionHistoricalReal)
+	case HistoricalStatusIncomplete:
+		return i18n.Text(i18n.MsgCollectionHistoricalIncomplete)
+	case HistoricalStatusPrototype:
+		return i18n.Text(i18n.MsgCollectionHistoricalPrototype)
+	case HistoricalStatusLimited:
+		return i18n.Text(i18n.MsgCollectionHistoricalLimited)
+	case HistoricalStatusPaper:
+		return i18n.Text(i18n.MsgCollectionHistoricalPaper)
+	case HistoricalStatusFictional:
+		return i18n.Text(i18n.MsgCollectionHistoricalFictional)
+	default:
+		return i18n.Text(i18n.MsgCollectionHistoricalUnknown)
+	}
+}
+
 // CombatPowerInfo 单位的静态战力评估，仅用于图鉴与平衡分析。
 type CombatPowerInfo struct {
 	// FormationSize 表示本条战力覆盖的单位数量：舰船为 1，飞机为 10 架标准编队。

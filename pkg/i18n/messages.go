@@ -377,3 +377,14 @@ const (
 	MsgBattleReportTrendEmpty               MessageID = "BattleReportTrendEmpty"
 	MsgBattleReportTrendTooltipTime         MessageID = "BattleReportTrendTooltipTime"
 )
+
+const (
+	MsgCollectionHistoricalReal       MessageID = "CollectionHistoricalReal"
+	MsgCollectionHistoricalIncomplete MessageID = "CollectionHistoricalIncomplete"
+	MsgCollectionHistoricalPrototype  MessageID = "CollectionHistoricalPrototype"
+	MsgCollectionHistoricalLimited    MessageID = "CollectionHistoricalLimited"
+	MsgCollectionHistoricalPaper      MessageID = "CollectionHistoricalPaper"
+	MsgCollectionHistoricalFictional  MessageID = "CollectionHistoricalFictional"
+	MsgCollectionHistoricalUnknown    MessageID = "CollectionHistoricalUnknown"
+	MsgCollectionYearWithHistorical   MessageID = "CollectionYearWithHistorical"
+)

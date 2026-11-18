@@ -422,6 +422,22 @@ other = "Relative power (normalized by P95 of current filter results)"
 other = "History and Sources"
 [CollectionNoHistory]
 other = "No historical record available"
+[CollectionHistoricalReal]
+other = "Real"
+[CollectionHistoricalIncomplete]
+other = "Incomplete"
+[CollectionHistoricalPrototype]
+other = "Prototype"
+[CollectionHistoricalLimited]
+other = "Limited production"
+[CollectionHistoricalPaper]
+other = "Paper"
+[CollectionHistoricalFictional]
+other = "Fictional"
+[CollectionHistoricalUnknown]
+other = "Unknown"
+[CollectionYearWithHistorical]
+other = "{{.Year}} ({{.Status}})"
 [CollectionAssetAuthor]
 other = "Asset author: {{.Author}}"
 [CollectionBasicData]

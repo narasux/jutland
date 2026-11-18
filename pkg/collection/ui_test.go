@@ -464,6 +464,59 @@ func TestShipArchiveSpeedShowsConfiguredKnots(t *testing.T) {
 	require.Equal(t, "33 节", got[i18n.Text(i18n.MsgCollectionSpeed)])
 }
 
+// TestFormatCollectionYearAnnotatesOnlyNonReal 验证年份文本只对图纸与架空追加括号备注。
+// 场景：史实舰不标注，未建成方案标“图纸”，架空单位标“架空”，缺年份则用 -- 占位。
+// 预期：1945/real → “1945”；0/real → “--”；1939/incomplete → “1939（未完工）”；1945/prototype → “1945（仅试验机）”；1943/limited → “1943（少量生产）”；1939/paper → “1939（图纸）”；2030/fictional → “2030（架空）”。
+// 覆盖：表驱动 real、incomplete、prototype、limited、paper、fictional 与 0 年七组输入，切 zh-Hans 后比较 formatCollectionYear 返回值。
+func TestFormatCollectionYearAnnotatesOnlyNonReal(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+
+	cases := []struct {
+		year   int
+		status objUnit.HistoricalStatus
+		want   string
+	}{
+		{1945, objUnit.HistoricalStatusReal, "1945"},
+		{0, objUnit.HistoricalStatusReal, "--"},
+		{1939, objUnit.HistoricalStatusIncomplete, "1939（未完工）"},
+		{1945, objUnit.HistoricalStatusPrototype, "1945（仅试验机）"},
+		{1943, objUnit.HistoricalStatusLimited, "1943（少量生产）"},
+		{1939, objUnit.HistoricalStatusPaper, "1939（图纸）"},
+		{2030, objUnit.HistoricalStatusFictional, "2030（架空）"},
+	}
+	for _, tc := range cases {
+		require.Equal(t, tc.want, formatCollectionYear(tc.year, tc.status))
+	}
+}
+
+// TestShipArchiveYearAnnotatesIncompletePaperAndFictional 验证舰船档案的年份行使用括号备注。
+// 场景：格拉夫·齐柏林已下水但未完工，斯大林格勒 X 是图纸方案，江户是架空战列舰，衣阿华是史实战列舰。
+// 预期：年份行分别为 1943（未完工）、1948（图纸）、1951（架空）、1945；失败意味着状态又变成独立徽标或漏标。
+// 覆盖：切 zh-Hans，遍历四艘真实模板的 shipArchiveInfoItems，按年份标签取 Value 后断言。
+func TestShipArchiveYearAnnotatesIncompletePaperAndFictional(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+
+	yearValue := func(name string) string {
+		ship := objUnit.ShipMap[name]
+		require.NotNil(t, ship)
+		for _, item := range shipArchiveInfoItems(ship, nil) {
+			if item.Label == i18n.Text(i18n.MsgCollectionYear) {
+				return item.Value
+			}
+		}
+		t.Fatalf("%s has no year item", name)
+		return ""
+	}
+	require.Equal(t, "1943（未完工）", yearValue("graf_zeppelin"))
+	require.Equal(t, "1948（图纸）", yearValue("stalingrad_x"))
+	require.Equal(t, "1951（架空）", yearValue("edo"))
+	require.Equal(t, "1945", yearValue("lowa"))
+}
+
 // TestSubmarineArchiveShowsSurfaceAndSubmergedSpeed 验证潜艇档案分列水面与水下航速。
 // 场景：XXI 型 u_2540 水下 17.16 节快于水面 15.6 节，只给一档「速度」会误导玩家。
 // 预期：水面行「15.6 节」、水下行「17.2 节」，且不再出现通用 MsgCollectionSpeed 行。

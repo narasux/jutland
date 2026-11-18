@@ -255,6 +255,9 @@ func initPlaneMap() {
 	}
 
 	for _, p := range planes {
+		if !p.Historical.IsValid() {
+			log.Fatalf("plane %q has invalid historical status %q", p.Name, p.Historical)
+		}
 		// 机关炮
 		for _, gunMD := range p.Weapon.GunsMD {
 			p.Weapon.Guns = append(p.Weapon.Guns, objUnit.NewGun(
@@ -346,6 +349,9 @@ func initShipMap() {
 	}
 
 	for _, s := range ships {
+		if !s.Historical.IsValid() {
+			log.Fatalf("ship %q has invalid historical status %q", s.Name, s.Historical)
+		}
 		// 主炮
 		for _, gunMD := range s.Weapon.MainGunsMD {
 			s.Weapon.MainGuns = append(s.Weapon.MainGuns, objUnit.NewGun(
