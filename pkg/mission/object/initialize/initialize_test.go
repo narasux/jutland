@@ -305,3 +305,35 @@ func TestAntiAircraftGunsAreAACapable(t *testing.T) {
 		}
 	}
 }
+
+// TestAllUnitsHaveHistoricalStatus 验证全部舰船与飞机都显式标注合法的历史属性。
+// 场景：图鉴新增史实 / 图纸 / 架空徽标，配置漏写或把 fictional 拼错会让徽标显示未知或默认成史实。
+// 预期：ShipMap 与 PlaneMap 均非空，且每一项 Historical 都是三个受支持取值之一；失败时输出对象名与原始值。
+// 覆盖：遍历初始化后的全量 ShipMap / PlaneMap，调用 HistoricalStatus.IsValid 并统计条目数。
+func TestAllUnitsHaveHistoricalStatus(t *testing.T) {
+	if len(objUnit.ShipMap) == 0 || len(objUnit.PlaneMap) == 0 {
+		t.Fatal("ship or plane map is empty")
+	}
+	for name, ship := range objUnit.ShipMap {
+		if !ship.Historical.IsValid() {
+			t.Errorf("ship %s historical status = %q, want real/paper/fictional", name, ship.Historical)
+		}
+	}
+	for name, plane := range objUnit.PlaneMap {
+		if !plane.Historical.IsValid() {
+			t.Errorf("plane %s historical status = %q, want real/paper/fictional", name, plane.Historical)
+		}
+	}
+}
+
+// TestEveryPlaneHasYear 验证全部飞机都配置了服役年份，供图鉴基础数据展示。
+// 场景：planes.json5 曾漏掉 Fulmar 与 Swordfish 的 year，飞机卡片的年份行只能显示 --。
+// 预期：PlaneMap 中每一架飞机的 Year 都大于 0；失败会列出缺失年份的机名。
+// 覆盖：遍历初始化后的全量 PlaneMap，逐架断言 Year > 0。
+func TestEveryPlaneHasYear(t *testing.T) {
+	for name, plane := range objUnit.PlaneMap {
+		if plane.Year <= 0 {
+			t.Errorf("plane %s year = %d, want > 0", name, plane.Year)
+		}
+	}
+}

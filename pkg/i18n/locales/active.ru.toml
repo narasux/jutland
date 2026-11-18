@@ -425,6 +425,22 @@ other = "Относительная мощь (нормирована по P95 т
 other = "История и источники"
 [CollectionNoHistory]
 other = "Исторические сведения отсутствуют"
+[CollectionHistoricalReal]
+other = "Реальный"
+[CollectionHistoricalIncomplete]
+other = "Недостроен"
+[CollectionHistoricalPrototype]
+other = "Опытный"
+[CollectionHistoricalLimited]
+other = "Малая серия"
+[CollectionHistoricalPaper]
+other = "Проект"
+[CollectionHistoricalFictional]
+other = "Вымысел"
+[CollectionHistoricalUnknown]
+other = "Неизвестно"
+[CollectionYearWithHistorical]
+other = "{{.Year}} ({{.Status}})"
 [CollectionAssetAuthor]
 other = "Автор изображения: {{.Author}}"
 [CollectionBasicData]

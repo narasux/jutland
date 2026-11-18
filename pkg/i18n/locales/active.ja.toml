@@ -422,6 +422,22 @@ other = "相対戦力（現在の抽出結果のP95で正規化）"
 other = "艦歴・出典"
 [CollectionNoHistory]
 other = "艦歴資料はありません"
+[CollectionHistoricalReal]
+other = "史実"
+[CollectionHistoricalIncomplete]
+other = "未完成"
+[CollectionHistoricalPrototype]
+other = "試作機"
+[CollectionHistoricalLimited]
+other = "少数生産"
+[CollectionHistoricalPaper]
+other = "図面"
+[CollectionHistoricalFictional]
+other = "架空"
+[CollectionHistoricalUnknown]
+other = "不明"
+[CollectionYearWithHistorical]
+other = "{{.Year}}（{{.Status}}）"
 [CollectionAssetAuthor]
 other = "画像作者：{{.Author}}"
 [CollectionBasicData]

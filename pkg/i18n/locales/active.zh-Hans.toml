@@ -422,6 +422,22 @@ other = "相对能力（按当前筛选结果 P95 归一化）"
 other = "历史与来源"
 [CollectionNoHistory]
 other = "暂无历史资料"
+[CollectionHistoricalReal]
+other = "史实"
+[CollectionHistoricalIncomplete]
+other = "未完工"
+[CollectionHistoricalPrototype]
+other = "仅试验机"
+[CollectionHistoricalLimited]
+other = "少量生产"
+[CollectionHistoricalPaper]
+other = "图纸"
+[CollectionHistoricalFictional]
+other = "架空"
+[CollectionHistoricalUnknown]
+other = "未知"
+[CollectionYearWithHistorical]
+other = "{{.Year}}（{{.Status}}）"
 [CollectionAssetAuthor]
 other = "素材原作者：{{.Author}}"
 [CollectionBasicData]

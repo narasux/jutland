@@ -14,7 +14,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/pkg/browser"
-	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/i18n"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
@@ -1786,6 +1785,21 @@ func shipCollectionCostValue(ship *objUnit.BattleShip) string {
 	})
 }
 
+// formatCollectionYear 返回档案中的年份文本；未完工、仅试验机、少量生产、图纸与架空单位在年份后加括号备注。
+// 史实单位只显示年份，避免每个史实单位都多出一段无信息量的标注。
+func formatCollectionYear(year int, status objUnit.HistoricalStatus) string {
+	yearText := "--"
+	if year != 0 {
+		yearText = fmt.Sprintf("%d", year)
+	}
+	if status == "" || status == objUnit.HistoricalStatusReal {
+		return yearText
+	}
+	return i18n.Format(i18n.MsgCollectionYearWithHistorical, map[string]any{
+		"Year": yearText, "Status": status.ToDisplay(),
+	})
+}
+
 func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []objRef.InfoItem {
 	// reference 只保留精细舰种名称，其余档案数据全部来自 ships.json5 初始化后的舰船对象。
 	items := []objRef.InfoItem{
@@ -1793,7 +1807,7 @@ func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []obj
 		{Label: i18n.Text(i18n.MsgCollectionTypeLabel), Value: shipTypeDisplayValue(ship, ref)},
 		{
 			Label: i18n.Text(i18n.MsgCollectionYear),
-			Value: lo.Ternary(ship.Year == 0, "--", fmt.Sprintf("%d", ship.Year)),
+			Value: formatCollectionYear(ship.Year, ship.Historical),
 		},
 		{
 			Label: i18n.Text(i18n.MsgCollectionDimensions),
@@ -2261,18 +2275,18 @@ func (c *CollectionUI) drawPlaneCard(
 	c.drawPlaneSectionTitle(screen, x, sectionY, width, scale, i18n.Text(i18n.MsgCollectionBasicData))
 	bodyFont := font.LocalizedUI(font.Kai)
 	basicLines := []string{
+		i18n.Text(i18n.MsgCollectionYear) + " " + formatCollectionYear(plane.Year, plane.Historical),
 		i18n.Format(i18n.MsgCollectionDurability, map[string]any{"Value": fmt.Sprintf("%.0f", plane.TotalHP)}),
 		i18n.Format(
 			i18n.MsgCollectionDamageReduction,
 			map[string]any{"Value": fmt.Sprintf("%.0f", plane.DamageReduction*100)},
 		),
-		i18n.Format(i18n.MsgLabelValue, map[string]any{
-			"Label": i18n.Text(i18n.MsgCollectionDimensions),
-			"Value": i18n.Format(i18n.MsgValueLengthWidth, map[string]any{
+		i18n.Text(i18n.MsgCollectionDimensions) + " " + i18n.Format(
+			i18n.MsgValueLengthWidth, map[string]any{
 				"Length": formatShipArchiveNumber(plane.Length),
 				"Width":  formatShipArchiveNumber(plane.Width),
-			}),
-		}),
+			},
+		),
 		i18n.Format(
 			i18n.MsgCollectionPlaneSpeed,
 			map[string]any{"Value": fmt.Sprintf("%.0f", plane.MaxSpeed*objUnit.PlaneSpeedScale)},
@@ -2282,9 +2296,10 @@ func (c *CollectionUI) drawPlaneCard(
 			map[string]any{"Value": fmt.Sprintf("%.0f", plane.Range*objUnit.PlaneRangeDisplayScale)},
 		),
 	}
+	// 6 行基础数据（含年份）需要比原 5 行更紧的行距，才能在武器小节前完整放下。
 	for idx, line := range basicLines {
 		c.drawFittedText(
-			screen, line, float64(x)+px(22), float64(sectionY)+px(34+float64(idx)*22),
+			screen, line, float64(x)+px(22), float64(sectionY)+px(28+float64(idx)*20),
 			float64(width)-px(44), px(18), bodyFont, colorx.White, screenOffset, nil,
 		)
 	}

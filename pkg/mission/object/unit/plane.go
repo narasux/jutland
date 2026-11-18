@@ -98,6 +98,8 @@ type Plane struct {
 
 	// 服役年份
 	Year int `json:"year"`
+	// 历史属性：史实 / 图纸 / 架空
+	Historical HistoricalStatus `json:"historical"`
 	// 初始生命值
 	TotalHP float64 `json:"totalHP"`
 	// 伤害减免（0.7 -> 仅受到击中的 30% 伤害)

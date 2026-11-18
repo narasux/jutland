@@ -397,6 +397,12 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     defaultDiveState: "submerged",
     // 类型缩写
     typeAbbr: "CL",
+    // 历史属性，图鉴会在年份后显示对应备注：
+    // real 史实（实际建成或服役，含战时改装舰）
+    // incomplete 未完工（已开工或下水，但从未建成服役）
+    // paper 图纸（真实历史方案，从未开工建造）
+    // fictional 架空（游戏原创、架空改型或幻想单位）
+    historical: "real",
     // 初始生命值
     // 推荐值：满载排水量（单位：吨）
     totalHP: 1000,
@@ -623,6 +629,13 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     typeAbbr: "F",
     // 服役年份
     year: 1940,
+    // 历史属性，图鉴会在年份后显示对应备注：
+    // real 史实（大批量生产并广泛服役）
+    // prototype 仅试验机（只有原型/试作/预生产机，未量产服役）
+    // limited 少量生产（小批量生产并投入使用，未形成大批量装备）
+    // paper 图纸（真实历史方案，从未造出原型机）
+    // fictional 架空（游戏原创、架空改型或幻想单位）
+    historical: "real",
     // 初始生命值
     totalHP: 35,
     // 伤害减免（0.7 -> 仅受到击中的 70% 伤害)
