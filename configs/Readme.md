@@ -768,15 +768,44 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 
 ```json5
 {
-  // 全局速度倍率
-  // 影响战舰、炮弹、鱼雷、飞机等移动/转向速度
-  // 可选值: 慢=0.50 / 标准=1.00 / 快=2.00
-  // 范围: 0.50 ~ 2.00，默认值: 1.00
+  // 全局速度倍率；影响战舰、炮弹、鱼雷、飞机等移动/转向速度
+  // 可选值: 慢=0.50 / 标准=1.00 / 快=2.00，默认值: 1.00
   "speedMultiplier": 1.00,
   // 游戏界面语言；当前正式启用 zh-Hans / en / ru / ja
   "language": "zh-Hans",
-  // 小地图总开关；默认开启，开启时开局自动展开右上战术面板显示小地图
-  "enableMinimap": true
+  // 背景音乐音量，范围 0.00 ~ 1.00；0 为静音，默认值: 1.00
+  "bgmVolume": 1.00,
+  // 战场音效（火炮 / 鱼雷 / 爆炸等）音量，范围 0.00 ~ 1.00；0 为静音，默认值: 1.00
+  "effectsVolume": 1.00,
+  // 电脑舰队可用策略；false 时对局中不使用对应策略
+  "aiStrategies": {
+    "attack": true,
+    "defend": true,
+    "counter": true,
+    "raid": true,
+    "scout": true
+  },
+  // 陆地机场功能总开关；false 时所有任务不生成机场
+  "enableLandAirfield": true,
+  // 战争迷雾总开关；关闭时不计算迷雾
+  "enableFogOfWar": false,
+  // 小地图总开关；开启时开局自动展开右上战术面板显示小地图
+  "enableMinimap": true,
+  // 命中特效总开关；关闭后命中舰体 / 落水 / 落陆不再生成特效
+  "displayHitEffects": true,
+  // 是否显示命中伤害数字
+  "displayDamageNumber": true,
+  // 是否常显战舰状态（HP / 武器装填）；关闭后仅选中时显示
+  "forceDisplayState": true,
+  // 战舰水面尾流自定义参数；1.00 为原始观感
+  "wakeTrail": {
+    // 航迹长度倍率，范围 0.40 ~ 2.50
+    "length": 1.00,
+    // 尾流宽度倍率，范围 0.40 ~ 2.00
+    "width": 1.00,
+    // 尾流浓度倍率，范围 0.20 ~ 1.50
+    "opacity": 1.00
+  }
 }
 ```
 

@@ -39,27 +39,20 @@ func TestForTextFallsBackForCJKContent(t *testing.T) {
 	require.Same(t, ZenKakuGothicNew, ForText("日本語インターフェース 艦戦闘機", JetbrainsMono))
 }
 
-// TestLanguageSelectorCoversSettingsText 验证设置页语言选择器的三字体复合覆盖所有选项文字。
-// 场景：下拉项含「慢/标准/快」和四种语言名；复合字体缺任一字形就会显示方块。
-// 预期：Kai+ZenKakuGothicNew+GolosText 的 Cmap 至少有一个覆盖每个 rune；
-// LanguageSelectorFace(22) 返回非 nil。
-// 覆盖：逐字符串逐 rune 查三个 GoTextFaceSource 的内部 Face.Cmap，用 require.Truef 报告缺失字形。
-func TestLanguageSelectorCoversSettingsText(t *testing.T) {
-	sources := []*text.GoTextFaceSource{Kai, ZenKakuGothicNew, GolosText}
-	for _, value := range []string{"慢", "标准", "快", "中文", "English", "Русский", "日本語"} {
-		for _, r := range value {
-			covered := false
-			for _, source := range sources {
-				face := source.UnsafeInternal().(*goTextFont.Face)
-				if _, ok := face.Cmap.Lookup(r); ok {
-					covered = true
-					break
-				}
-			}
-			require.Truef(t, covered, "no selector font covers %q in %q", r, value)
+// TestForLanguageCoversNativeNames 验证四种语言自称都能被各自界面字体完整覆盖。
+// 场景：语言下拉每项用自己的字体渲染；若字体缺字（如楷体缺「語」），单词内会回退混排。
+// 预期：中文由 Kai 覆盖、英文由 JetBrains Mono、俄文由 Golos、日文由 Zen Kaku 覆盖，
+// 失败说明语言下拉会出现缺字或同词混排。
+// 覆盖：遍历 SupportedLanguages，取 ForLanguage(lang, Kai) 的内部 Cmap 查 NativeName 的每个 rune。
+func TestForLanguageCoversNativeNames(t *testing.T) {
+	for _, lang := range i18n.SupportedLanguages() {
+		source := ForLanguage(lang, Kai)
+		face := source.UnsafeInternal().(*goTextFont.Face)
+		for _, r := range lang.NativeName() {
+			_, ok := face.Cmap.Lookup(r)
+			require.Truef(t, ok, "%s is missing %q in %q", FontToStr(source), r, lang.NativeName())
 		}
 	}
-	require.NotNil(t, LanguageSelectorFace(22))
 }
 
 // TestLocalizedUIFontsContainDropdownArrow 验证四种界面字体都含下拉箭头 U+2193（↓）。

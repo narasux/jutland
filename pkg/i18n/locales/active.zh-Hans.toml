@@ -706,3 +706,32 @@ other = "{{.Label}}：{{.Value}}"
 other = "{{.Name}} x {{.Count}}"
 [TypeSlash]
 other = "{{.Abbr}} / {{.Type}}"
+[SettingsReset]
+other = "恢复默认"
+[SettingsResetTitle]
+other = "恢复默认设置"
+[SettingsResetMessage]
+other = "将把全部设置恢复为默认值并立即保存，是否继续？"
+[SettingsConfirmReset]
+other = "确认恢复"
+[SettingsBGMVolume]
+other = "背景音乐"
+[SettingsEffectsVolume]
+other = "战场音效"
+[SettingsLandAirfield]
+other = "陆地机场"
+[SettingsWakeLength]
+other = "尾流长度"
+[SettingsWakeWidth]
+other = "尾流宽度"
+[SettingsWakeOpacity]
+other = "尾流浓度"
+
+[SettingsTabGame]
+other = "游戏"
+[SettingsTabAV]
+other = "视听"
+[SettingsGameHint]
+other = "战斗节奏、语言、视野与界面"
+[SettingsAVHint]
+other = "战斗反馈、音量与战舰尾流"

@@ -487,12 +487,13 @@ func (s *BattleShip) GenTrails() []*objTrail.Trail {
 	sinVal := math.Sin(s.CurRotation * math.Pi / 180)
 	cosVal := math.Cos(s.CurRotation * math.Pi / 180)
 	hulls := s.resolvedWakeHulls()
-	if !s.shouldEmitHullWake(hulls) {
+	wake := resolvedWakeTrail()
+	if !s.shouldEmitHullWake(hulls, wake.Width) {
 		return nil
 	}
 	trails := make([]*objTrail.Trail, 0, len(hulls)*2)
 	for _, hull := range hulls {
-		trails = append(trails, s.emitHullWake(hull, sinVal, cosVal)...)
+		trails = append(trails, s.emitHullWake(hull, sinVal, cosVal, wake)...)
 	}
 	return trails
 }
@@ -549,7 +550,7 @@ func (s *BattleShip) hullWakeLength(hull WakeHull) float64 {
 // shouldEmitHullWake 按实际航程控制普通水面尾流采样频率。
 // 低速时舰体每帧只移动非常短的距离，若仍逐帧生成舰艏、舰艉圆点，
 // 会在舰尾叠成两个高亮白点；这里至少移动半个最小尾流圆半径才重新采样。
-func (s *BattleShip) shouldEmitHullWake(hulls []WakeHull) bool {
+func (s *BattleShip) shouldEmitHullWake(hulls []WakeHull, widthScale float64) bool {
 	if len(hulls) == 0 {
 		return false
 	}
@@ -564,7 +565,7 @@ func (s *BattleShip) shouldEmitHullWake(hulls []WakeHull) bool {
 	for _, hull := range hulls {
 		spacing = min(
 			spacing,
-			hull.Width*bowWakeStartWidth/(2*constants.MapBlockSize),
+			hull.Width*bowWakeStartWidth*widthScale/(2*constants.MapBlockSize),
 		)
 	}
 	if s.CurPos.Distance(s.lastWakeEmitPos) < spacing {
@@ -581,6 +582,11 @@ func (s *BattleShip) baseCurSpeed() float64 {
 		multiplier = max(config.G.SpeedMultiplier, 0.001)
 	}
 	return s.CurSpeed / multiplier
+}
+
+// resolvedWakeTrail 返回当前生效的尾流参数；配置未加载时保持原始观感。
+func resolvedWakeTrail() config.WakeTrailSettings {
+	return config.G.ResolvedWakeTrail()
 }
 
 // 战舰水面尾流的几何与寿命参数。
@@ -623,7 +629,9 @@ func hullWakeParams(trailLength, width, startWidthRatio, endWidthRatio, speed fl
 	return life, lifeReduction, diffusion
 }
 
-func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objTrail.Trail {
+func (s *BattleShip) emitHullWake(
+	hull WakeHull, sinVal, cosVal float64, wake config.WakeTrailSettings,
+) []*objTrail.Trail {
 	lengthCells := s.Length / constants.MapBlockSize
 	lateralCells := hull.Lateral / constants.MapBlockSize
 
@@ -635,36 +643,41 @@ func (s *BattleShip) emitHullWake(hull WakeHull, sinVal, cosVal float64) []*objT
 	backPos.AddRx(sinVal*lengthCells*hull.Back + cosVal*lateralCells)
 	backPos.SubRy(cosVal*lengthCells*hull.Back - sinVal*lateralCells)
 
-	wakeLength := s.hullWakeLength(hull)
+	wakeLength := s.hullWakeLength(hull) * wake.Length
 	// 用最大航速作为统一寿命基准，保证低速起步点不会因为寿命过长而
 	// 被高速航行甩在原地；实际航迹长度仍自然随当前航速缩短。
 	referenceSpeed := s.MaxSpeed
 	if referenceSpeed <= 0 {
 		referenceSpeed = s.baseCurSpeed()
 	}
+	bowStartWidth := bowWakeStartWidth * wake.Width
+	bowEndWidth := bowWakeEndWidth * wake.Width
+	sternStartWidth := sternWakeStartWidth * wake.Width
+	sternEndWidth := sternWakeEndWidth * wake.Width
 	bowLife, bowLifeReduction, bowDiffusion := hullWakeParams(
-		wakeLength*bowWakeTrailRatio, hull.Width, bowWakeStartWidth, bowWakeEndWidth, referenceSpeed,
+		wakeLength*bowWakeTrailRatio, hull.Width, bowStartWidth, bowEndWidth, referenceSpeed,
 	)
 	sternLife, sternLifeReduction, sternDiffusion := hullWakeParams(
-		wakeLength*sternWakeTrailRatio, hull.Width, sternWakeStartWidth, sternWakeEndWidth, referenceSpeed,
+		wakeLength*sternWakeTrailRatio, hull.Width, sternStartWidth, sternEndWidth, referenceSpeed,
 	)
 
 	trails := []*objTrail.Trail{
 		objTrail.New(
 			frontPos, textureImg.TrailShapeCircle,
-			hull.Width*bowWakeStartWidth, bowDiffusion,
+			hull.Width*bowStartWidth, bowDiffusion,
 			bowLife, bowLifeReduction,
 			0, 0, nil,
 		),
 		objTrail.New(
 			backPos, textureImg.TrailShapeCircle,
-			hull.Width*sternWakeStartWidth, sternDiffusion,
+			hull.Width*sternStartWidth, sternDiffusion,
 			sternLife, sternLifeReduction,
 			0, 0, nil,
 		),
 	}
 	for _, trail := range trails {
 		trail.OwnerUid = s.Uid
+		trail.AlphaScale = wake.Opacity
 	}
 	return trails
 }

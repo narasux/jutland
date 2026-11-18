@@ -81,6 +81,7 @@ func New() *Game {
 			DisableDefaultFocus: true,
 		},
 	}
+	g.settingUI.SetWindowHost(g.ui)
 	g.selectMissionCategory(metadata.MissionCategoryClassic)
 	g.collectionUI = collection.New()
 	g.init()
@@ -229,6 +230,10 @@ func (g *Game) handleUIEscape() bool {
 		g.player.Close()
 		return true
 	case GameModeGameSetting:
+		// 二次确认弹窗打开时，Esc 只关闭弹窗，不退出设置页。
+		if g.settingUI.CancelConfirm() {
+			return true
+		}
 		g.settingUI.Reset()
 		g.mode = GameModeMenuSelect
 		return true
@@ -368,6 +373,7 @@ func (g *Game) startCollectionBGM() {
 
 // 游戏设置
 func (g *Game) handleGameSetting() error {
+	g.settingUI.Update()
 	if g.settingUI.BackPressed() {
 		g.applyLanguage(config.G.Language)
 		g.settingUI.Reset()

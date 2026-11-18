@@ -395,3 +395,54 @@ func TestStoppedSwordfishResetsTrailAnimationStep(t *testing.T) {
 		t.Fatalf("stopped animation state=%v/%d, want 0/-1", ship.AnimationAge, ship.LastTrailAnimationStep)
 	}
 }
+
+// TestWakeTrailTuningScalesShipWake 验证设置页的尾流长度/宽度/浓度会作用到舰船尾流。
+// 场景：默认值生成一组 128×20、0.1 格/帧的尾流后，把 config.G.WakeTrail 改成
+// Length=2、Width=1.5、Opacity=0.5；玩家期望尾迹拖长一倍、变宽一半、变淡一半。
+// 预期：新尾流的 world 航迹长度是基准的 2 倍，艏/艉初始尺寸是基准的 1.5 倍，
+// AlphaScale=0.5；失败说明设置只写进配置、没有传给 GenTrails。
+// 覆盖：两次 primeWakeEmission + GenTrails，比较 CurLife/LifeReductionRate/CurSize/AlphaScale。
+func TestWakeTrailTuningScalesShipWake(t *testing.T) {
+	previous := config.G
+	t.Cleanup(func() { config.G = previous })
+
+	newShip := func() *BattleShip {
+		ship := &BattleShip{
+			Length:   128,
+			Width:    20,
+			MaxSpeed: 0.1,
+			CurSpeed: 0.1,
+			CurPos:   objPos.NewR(10, 10),
+		}
+		primeWakeEmission(ship)
+		return ship
+	}
+
+	config.G = config.NewDefaultGameSettings()
+	baseShip := newShip()
+	base := baseShip.GenTrails()
+	if len(base) != 2 {
+		t.Fatalf("default trails=%d, want 2", len(base))
+	}
+
+	config.G.WakeTrail = config.WakeTrailSettings{Length: 2, Width: 1.5, Opacity: 0.5}
+	tunedShip := newShip()
+	tuned := tunedShip.GenTrails()
+	if len(tuned) != 2 {
+		t.Fatalf("tuned trails=%d, want 2", len(tuned))
+	}
+
+	baseLength := baseShip.CurSpeed * base[0].CurLife / base[0].LifeReductionRate
+	tunedLength := tunedShip.CurSpeed * tuned[0].CurLife / tuned[0].LifeReductionRate
+	if math.Abs(tunedLength-2*baseLength) > 1e-9 {
+		t.Fatalf("tuned wake length=%v cells, want %v", tunedLength, 2*baseLength)
+	}
+	for idx := range base {
+		if math.Abs(tuned[idx].CurSize-1.5*base[idx].CurSize) > 1e-9 {
+			t.Fatalf("trail %d tuned size=%v, want %v", idx, tuned[idx].CurSize, 1.5*base[idx].CurSize)
+		}
+		if tuned[idx].AlphaScale != 0.5 {
+			t.Fatalf("trail %d alpha scale=%v, want 0.5", idx, tuned[idx].AlphaScale)
+		}
+	}
+}

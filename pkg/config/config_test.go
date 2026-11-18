@@ -240,3 +240,168 @@ func TestSaveGameSettingsRoundTripsAndRemovesTemp(t *testing.T) {
 	require.False(t, G.DisplayDamageNumber)
 	require.False(t, G.ForceDisplayState)
 }
+
+// TestWakeTrailSettingsDefaultAndClamp 验证尾流参数缺省为 1.0，非法值按范围夹紧。
+// 场景：旧 game_settings.json5 没有 wakeTrail 节，或玩家手写 0、NaN、超大倍率。
+// 预期：零值/NaN 三项都回退 1.0；0.1 与 9.0 分别被夹到 Length/Width/Opacity 的上下限。
+// 覆盖：表驱动 Normalize 五种输入，逐项断言 Length/Width/Opacity，并检查默认设置本身。
+func TestWakeTrailSettingsDefaultAndClamp(t *testing.T) {
+	defaults := NewDefaultGameSettings()
+	require.Equal(t, DefaultWakeTrailSettings(), defaults.WakeTrail)
+
+	cases := []struct {
+		name string
+		in   WakeTrailSettings
+		want WakeTrailSettings
+	}{
+		{
+			name: "missing fields fall back to one",
+			in:   WakeTrailSettings{},
+			want: DefaultWakeTrailSettings(),
+		},
+		{
+			name: "NaN falls back to one",
+			in:   WakeTrailSettings{Length: math.NaN(), Width: math.NaN(), Opacity: math.NaN()},
+			want: DefaultWakeTrailSettings(),
+		},
+		{
+			name: "below range clamps",
+			in:   WakeTrailSettings{Length: 0.1, Width: 0.1, Opacity: 0.1},
+			want: WakeTrailSettings{
+				Length: WakeTrailLengthMin, Width: WakeTrailWidthMin, Opacity: WakeTrailOpacityMin,
+			},
+		},
+		{
+			name: "above range clamps",
+			in:   WakeTrailSettings{Length: 9, Width: 9, Opacity: 9},
+			want: WakeTrailSettings{
+				Length: WakeTrailLengthMax, Width: WakeTrailWidthMax, Opacity: WakeTrailOpacityMax,
+			},
+		},
+		{
+			name: "valid values pass through",
+			in:   WakeTrailSettings{Length: 1.6, Width: 1.4, Opacity: 0.8},
+			want: WakeTrailSettings{Length: 1.6, Width: 1.4, Opacity: 0.8},
+		},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			require.Equal(t, tc.want, tc.in.Normalize())
+		})
+	}
+}
+
+// TestValidateNormalizesWakeTrail 验证 Load/Save 共用的 validate 会写回尾流默认值与范围。
+// 场景：GameSettings 由测试或旧配置直接构造，WakeTrail 零值不能原样进入游戏循环。
+// 预期：validate 后 WakeTrail 等于 DefaultWakeTrailSettings；越界长度被夹到 2.50。
+// 覆盖：先构造零值设置，再构造只有 Length=9 的设置，各调用一次 validate 后断言字段。
+func TestValidateNormalizesWakeTrail(t *testing.T) {
+	settings := &GameSettings{SpeedMultiplier: SpeedStandardMultiplier, Language: "zh-Hans"}
+	settings.validate()
+	require.Equal(t, DefaultWakeTrailSettings(), settings.WakeTrail)
+
+	settings = &GameSettings{
+		SpeedMultiplier: SpeedStandardMultiplier,
+		Language:        "zh-Hans",
+		WakeTrail:       WakeTrailSettings{Length: 9},
+	}
+	settings.validate()
+	require.Equal(t, WakeTrailLengthMax, settings.WakeTrail.Length)
+	require.Equal(t, WakeTrailDefaultScale, settings.WakeTrail.Width)
+	require.Equal(t, WakeTrailDefaultScale, settings.WakeTrail.Opacity)
+}
+
+// TestSaveGameSettingsRoundTripsWakeTrail 验证尾流参数能写入并原样读回配置文件。
+// 场景：玩家在设置页把长度/宽度/浓度调成非默认值后保存，下次启动应继续生效。
+// 预期：Load 后三项与保存前完全一致；失败说明 wakeTrail 没有序列化或被 validate 改写。
+// 覆盖：临时配置目录构造 Length=1.8/Width=0.7/Opacity=1.2，Save 后清空 G 再 Load 断言三项。
+func TestSaveGameSettingsRoundTripsWakeTrail(t *testing.T) {
+	_, cleanup := withTempConfigDir(t)
+	defer cleanup()
+
+	G = &GameSettings{
+		SpeedMultiplier: SpeedStandardMultiplier,
+		Language:        "zh-Hans",
+		AI:              DefaultAIStrategies(),
+		EnableMinimap:   true,
+		WakeTrail:       WakeTrailSettings{Length: 1.8, Width: 0.7, Opacity: 1.2},
+	}
+	require.NoError(t, SaveGameSettings())
+
+	G = nil
+	LoadGameSettings()
+	require.NotNil(t, G)
+	require.Equal(t, WakeTrailSettings{Length: 1.8, Width: 0.7, Opacity: 1.2}, G.WakeTrail)
+}
+
+// TestAudioVolumesDefaultAndClamp 验证 BGM/战场音效音量缺省为 1.0、显式 0 保持静音、越界值夹紧。
+// 场景：旧 game_settings.json5 没有 bgmVolume/effectsVolume（指针 nil），玩家也可能把任一滑杆拖到 0 或手写 2.0。
+// 预期：nil 回退 1.00、NaN 视为静音 0、显式 0 保留、负数夹到 0、大于 1 夹到 1，两条通道互不影响。
+// 覆盖：表驱动六种输入分别走 ResolvedBGMVolume 与 ResolvedEffectsVolume，并检查默认设置、validate 写回与交叉赋值。
+func TestAudioVolumesDefaultAndClamp(t *testing.T) {
+	floatPtr := func(value float64) *float64 { return &value }
+
+	defaults := NewDefaultGameSettings()
+	require.Equal(t, DefaultAudioVolume, defaults.ResolvedBGMVolume())
+	require.Equal(t, DefaultAudioVolume, defaults.ResolvedEffectsVolume())
+	require.NotNil(t, defaults.BGMVolume)
+	require.NotNil(t, defaults.EffectsVolume)
+
+	settings := &GameSettings{SpeedMultiplier: SpeedStandardMultiplier, Language: "zh-Hans"}
+	settings.validate()
+	require.NotNil(t, settings.BGMVolume, "validate should materialize the default BGM volume")
+	require.NotNil(t, settings.EffectsVolume, "validate should materialize the default effects volume")
+	require.Equal(t, DefaultAudioVolume, settings.ResolvedBGMVolume())
+	require.Equal(t, DefaultAudioVolume, settings.ResolvedEffectsVolume())
+
+	for _, tc := range []struct {
+		name string
+		in   *float64
+		want float64
+	}{
+		{name: "missing keeps default", in: nil, want: DefaultAudioVolume},
+		{name: "negative clamps to mute", in: floatPtr(-0.2), want: 0},
+		{name: "explicit mute stays", in: floatPtr(0), want: 0},
+		{name: "valid passes through", in: floatPtr(0.35), want: 0.35},
+		{name: "above one clamps", in: floatPtr(1.5), want: 1},
+		{name: "NaN mutes", in: floatPtr(math.NaN()), want: 0},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			require.Equal(t, tc.want, (&GameSettings{BGMVolume: tc.in}).ResolvedBGMVolume())
+			require.Equal(t, tc.want, (&GameSettings{EffectsVolume: tc.in}).ResolvedEffectsVolume())
+		})
+	}
+
+	settings = &GameSettings{}
+	settings.SetBGMVolume(0)
+	settings.SetEffectsVolume(0.6)
+	require.Equal(t, 0.0, settings.ResolvedBGMVolume())
+	require.Equal(t, 0.6, settings.ResolvedEffectsVolume())
+}
+
+// TestSaveGameSettingsRoundTripsAudioVolumes 验证 BGM/战场音效音量（含显式静音 0）能写入并原样读回。
+// 场景：玩家把 BGM 拖到 0、战场音效调到 0.6 保存；若把 0 当作“未配置”，重启后会突然恢复满音量。
+// 预期：Load 后两个指针非 nil，BGM=0、Effects=0.6；失败说明音量未序列化或被 validate 改写。
+// 覆盖：withTempConfigDir 下写入 BGM=0 / Effects=0.6，Save 后清空 G 再 Load 断言两个 Resolved 值。
+func TestSaveGameSettingsRoundTripsAudioVolumes(t *testing.T) {
+	_, cleanup := withTempConfigDir(t)
+	defer cleanup()
+
+	G = &GameSettings{
+		SpeedMultiplier: SpeedStandardMultiplier,
+		Language:        "zh-Hans",
+		AI:              DefaultAIStrategies(),
+		EnableMinimap:   true,
+	}
+	G.SetBGMVolume(0)
+	G.SetEffectsVolume(0.6)
+	require.NoError(t, SaveGameSettings())
+
+	G = nil
+	LoadGameSettings()
+	require.NotNil(t, G)
+	require.NotNil(t, G.BGMVolume)
+	require.NotNil(t, G.EffectsVolume)
+	require.Equal(t, 0.0, G.ResolvedBGMVolume())
+	require.Equal(t, 0.6, G.ResolvedEffectsVolume())
+}
