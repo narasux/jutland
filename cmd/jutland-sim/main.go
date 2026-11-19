@@ -417,14 +417,19 @@ func cmdCompare(args []string) error {
 	if err := fs.Parse(flagArgs); err != nil {
 		return err
 	}
-	if len(pos) < 2 {
-		return fmt.Errorf("compare requires two run ids")
+	if len(pos) < 1 {
+		return fmt.Errorf("compare requires a run id (or two run ids)")
 	}
 	paths, err := sim.ResolvePaths(*out)
 	if err != nil {
 		return err
 	}
-	info, err := sim.WriteComparison(paths, strings.TrimSpace(pos[0]), strings.TrimSpace(pos[1]))
+	var info sim.CompareOutput
+	if len(pos) >= 2 {
+		info, err = sim.WriteComparison(paths, strings.TrimSpace(pos[0]), strings.TrimSpace(pos[1]))
+	} else {
+		info, err = sim.WriteComparisonToPrevious(paths, strings.TrimSpace(pos[0]))
+	}
 	if err != nil {
 		return err
 	}
