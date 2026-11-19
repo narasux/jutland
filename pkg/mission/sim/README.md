@@ -138,7 +138,8 @@ jutland-sim evaluation reports/suites/full-evaluation-<stamp>.json
 
 `testdata/suite-full.json5` is the reference F0/F1/F2/F3 matrix. The aggregate
 page shows per-run green/yellow/red counts, findings/diagnostics, shots,
-hit%, mission success and enemy ships sunk, plus links to each report.
+hit%, mission success and enemy ships sunk, plus links to each report. F2 smoke
+reds are counted separately from balance reds.
 
 ## Previous-run diff (P9, first pass)
 
