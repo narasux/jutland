@@ -172,6 +172,20 @@ func buildAIContext(result *Result, manifest Manifest) string {
 			item.Status,
 		)
 	}
+	if result.PreviousDiff != nil {
+		b.WriteString("\n## 2.1 Previous diff\n\n")
+		fmt.Fprintf(&b, "- previous: `%s`\n", result.PreviousDiff.ARun)
+		b.WriteString("| metric | prev | this | delta | delta% |\n|---|---:|---:|---:|---:|\n")
+		for _, m := range result.PreviousDiff.Metrics {
+			fmt.Fprintf(&b, "| %s | %v | %v | %v | %v%% |\n", m.Name, m.A, m.B, m.Delta, m.DeltaPct)
+		}
+		for _, f := range result.PreviousDiff.FindingsAdded {
+			fmt.Fprintf(&b, "- finding added: `%s`\n", f.ID)
+		}
+		for _, f := range result.PreviousDiff.FindingsGone {
+			fmt.Fprintf(&b, "- finding gone: `%s`\n", f.ID)
+		}
+	}
 	b.WriteString("\n## 3. Findings\n\n")
 	for _, finding := range result.Findings {
 		fmt.Fprintf(&b, "### %s [%s/%s] %s\n\n", finding.ID, finding.Kind, finding.Severity, finding.Title)
