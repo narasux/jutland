@@ -79,7 +79,13 @@ per-scenario multi-run means (shots/losses/p99), finding lifecycle
 
 `jutland-sim llm-package <run>` copies only `analysis-context.md`,
 findings/metrics/diagnostics/changes and `llm-prompt.md` into
-`reports/llm/<run>/`, plus a token estimate; HTML/CSV are excluded. It is a deterministic aggregation step; no external LLM
+`reports/llm/<run>/`, plus a token estimate; HTML/CSV are excluded.
+
+`jutland-sim llm-review <run>` calls DeepSeek's OpenAI-compatible endpoint
+(`https://api.deepseek.com/chat/completions`, model `deepseek-chat`) using
+`DEEPSEEK_API_KEY`. `--dry-run` writes `ai/llm-request.json` without a network
+call. Output: `reports/llm/<run>/llm-review.md` + `llm-review.json` (content,
+model, token usage). The endpoint is fixed in code; the key is never logged. It is a deterministic aggregation step; no external LLM
 call is made.
 
 ## Suite manifests (P9)
