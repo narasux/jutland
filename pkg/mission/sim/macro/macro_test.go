@@ -92,6 +92,10 @@ func TestRunMacroPearlHarbor(t *testing.T) {
 	require.GreaterOrEqual(t, metrics["enemy_sunk_by_aircraft"], 0.0)
 	require.LessOrEqual(t, metrics["own_sunk_by_aircraft"], metrics["own_sunk"])
 	require.LessOrEqual(t, metrics["enemy_sunk_by_aircraft"], metrics["enemy_sunk"])
+	// 空中火力按阵营拆分：四个指标必须存在且非负（本任务双方都有飞机）。
+	for _, name := range []string{"own_plane_shots", "own_plane_hits", "enemy_plane_shots", "enemy_plane_hits"} {
+		require.GreaterOrEqual(t, metrics[name], 0.0, name)
+	}
 	for _, finding := range result.Findings {
 		require.NotEqual(t, "F3-NO-SHOTS", finding.ID)
 	}

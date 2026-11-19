@@ -95,6 +95,28 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 			}
 		}
 	}
+	// 空中火力按阵营拆分：飞机是否真的开火，比只看沉没数更能定位空袭问题。
+	ownPlaneShots, ownPlaneHits, enemyPlaneShots, enemyPlaneHits := 0, 0, 0, 0
+	for _, shot := range recorder.Shots {
+		if !shot.ShooterIsPlane {
+			continue
+		}
+		if shot.ShooterPlayer == faction.HumanAlpha {
+			ownPlaneShots++
+		} else {
+			enemyPlaneShots++
+		}
+	}
+	for _, hit := range recorder.Hits {
+		if !hit.ShooterIsPlane {
+			continue
+		}
+		if hit.ShooterPlayer == faction.HumanAlpha {
+			ownPlaneHits++
+		} else {
+			enemyPlaneHits++
+		}
+	}
 	ownPlanesLost, enemyPlanesLost := 0, 0
 	for _, loss := range recorder.Losses {
 		if loss.TargetPlayer == faction.HumanAlpha {
@@ -173,6 +195,10 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		{Group: "损失", Name: "enemy_tonnage", Value: round3(enemyTonnage), Unit: "t"},
 		{Group: "空中", Name: "own_aircraft_losses", Value: float64(ownPlanesLost), Unit: "planes"},
 		{Group: "空中", Name: "enemy_aircraft_losses", Value: float64(enemyPlanesLost), Unit: "planes"},
+		{Group: "空中", Name: "own_plane_shots", Value: float64(ownPlaneShots), Unit: "shots"},
+		{Group: "空中", Name: "own_plane_hits", Value: float64(ownPlaneHits), Unit: "hits"},
+		{Group: "空中", Name: "enemy_plane_shots", Value: float64(enemyPlaneShots), Unit: "shots"},
+		{Group: "空中", Name: "enemy_plane_hits", Value: float64(enemyPlaneHits), Unit: "hits"},
 		{Group: "空中", Name: "own_sunk_by_aircraft", Value: float64(ownSunkByAir), Unit: "ships"},
 		{Group: "空中", Name: "enemy_sunk_by_aircraft", Value: float64(enemySunkByAir), Unit: "ships"},
 		{Group: "经济", Name: "funds", Value: float64(ms.Player.CurFunds), Unit: "funds"},
