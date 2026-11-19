@@ -64,8 +64,9 @@ func TestRunMacroSeedsAggregatesSequentialRuns(t *testing.T) {
 
 // TestRunMacroPearlHarbor 验证 F3 能通过生产任务状态和双方 AI 跑出真实射击/损失。
 // 场景：testdata/macro-pearl.json5，PearlHarbor1941，playerSide=P1，6000 tick；AI 双方 computer controller。
-// 预期：Fidelity=F3、ticks<=6000、shots>0、hits>0、own/enemy sunk 有数据；不要求任务结束（可能 timeout）。
-// 覆盖：LoadScenario -> 覆盖 MaxTicks -> RunMacro，按 metric 名断言射击与损失；不启动 UI/窗口。
+// 预期：Fidelity=F3、ticks<=6000、shots>0、hits>0、own/enemy sunk 有数据，且双方被空袭击沉的舰数
+// 在 [0, 总沉没数] 内（飞机击杀归因不能超过总损失）；不要求任务结束（可能 timeout）。
+// 覆盖：LoadScenario -> 覆盖 MaxTicks -> RunMacro，按 metric 名断言射击、损失与 own/enemy_sunk_by_aircraft 上界；不启动 UI/窗口。
 func TestRunMacroPearlHarbor(t *testing.T) {
 	sc, err := sim.LoadScenario(filepath.Join("..", "testdata", "macro-pearl.json5"))
 	if err != nil {
@@ -86,6 +87,11 @@ func TestRunMacroPearlHarbor(t *testing.T) {
 	require.Greater(t, metrics["shots"], 0.0)
 	require.Greater(t, metrics["hits"], 0.0)
 	require.Greater(t, metrics["own_sunk"]+metrics["enemy_sunk"], 0.0)
+	// 空袭归因：两个指标必须存在，且不能超过对应的总沉没数。
+	require.GreaterOrEqual(t, metrics["own_sunk_by_aircraft"], 0.0)
+	require.GreaterOrEqual(t, metrics["enemy_sunk_by_aircraft"], 0.0)
+	require.LessOrEqual(t, metrics["own_sunk_by_aircraft"], metrics["own_sunk"])
+	require.LessOrEqual(t, metrics["enemy_sunk_by_aircraft"], metrics["enemy_sunk"])
 	for _, finding := range result.Findings {
 		require.NotEqual(t, "F3-NO-SHOTS", finding.ID)
 	}
