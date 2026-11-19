@@ -100,8 +100,8 @@ call is made.
 ]}
 ```
 
-It writes each run through the normal report pipeline and a suite summary under
-`reports/suites/`. F1/F2/F3 steps need game resources/Ebiten; F0-only suites run
+It writes each run through the normal report pipeline, a suite summary and an
+aggregate `*-evaluation.html/md/json` under `reports/suites/`. F1/F2/F3 steps need game resources/Ebiten; F0-only suites run
 without a simulation window. `make sim-suite` remains the shell-based smoke loop.
 
 ## Local CI / periodic analysis
@@ -127,6 +127,18 @@ run `manager.Update` + `Draw` and report rendered-frame p50/p95/p99/max. It
 requires a working window/graphics session and is not a CI gate.
 
 `tools/sim-periodic.sh` is suitable for cron/launchd; it does not schedule itself.
+
+## Full evaluation
+
+```bash
+jutland-suite suite full-evaluation
+# or regenerate an overview
+jutland-sim evaluation reports/suites/full-evaluation-<stamp>.json
+```
+
+`testdata/suite-full.json5` is the reference F0/F1/F2/F3 matrix. The aggregate
+page shows per-run green/yellow/red counts, findings/diagnostics, shots,
+hit%, mission success and enemy ships sunk, plus links to each report.
 
 ## Previous-run diff (P9, first pass)
 

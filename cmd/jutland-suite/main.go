@@ -96,6 +96,8 @@ func cmdSuite(args []string) error {
 			case sim.ModeShot:
 				runSc.Runs = step.Runs
 				result, err = sim.RunShot(&runSc, time.Now())
+			case sim.ModePenetration:
+				result, err = sim.RunPenetration(&runSc, time.Now())
 			case sim.ModeDuel:
 				result, err = duel.RunDuel(&runSc, time.Now())
 			case sim.ModeMacro:
@@ -120,6 +122,11 @@ func cmdSuite(args []string) error {
 		return err
 	}
 	fmt.Printf("suite: %s\n", summary)
+	evaluation, err := sim.WriteEvaluation(paths, summary)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("evaluation: %s\n", evaluation)
 	return nil
 }
 
