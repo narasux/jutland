@@ -213,3 +213,28 @@ func TestDepthChargeSinkRecordsShooter(t *testing.T) {
 	require.Equal(t, "gurkha", sink.ActorName)
 	require.Equal(t, string(objBullet.TypeDepthCharge), sink.Hit.WeaponType)
 }
+
+// TestDepthChargeSkipsShooterHullOnLaunch 验证深弹从投弹舰舰内出发时不会把本方舰体当成直接命中而原地引爆。
+// 场景：porter 在 (10,10)、u_96 在 (14,10)；深弹起点就在本舰坐标，既未接近瞄准点也未越过目标，
+// 修复前 insideAnyHull 会命中投弹舰自身，深弹在舰尾自爆、对 1 格外潜艇永远差 0.06 格打不中。
+// 预期：起点在本舰舰体内时 depthChargeShouldExplode 返回 false（继续飞行）；
+// 把同一条深弹移到目标潜艇坐标时返回 true，说明其他舰体仍可触发直接引爆。
+// 覆盖：depthChargeState 放 porter + u_96 并 rebuildCombatBuckets，切换 CurPos 分别断言 false/true。
+func TestDepthChargeSkipsShooterHullOnLaunch(t *testing.T) {
+	destroyer := newNamedShip(t, "porter", faction.HumanAlpha, 10, 10)
+	sub := newNamedShip(t, "u_96", faction.ComputerAlpha, 14, 10)
+
+	ms := depthChargeState(destroyer, sub)
+	m := &MissionManager{state: ms}
+	m.rebuildCombatBuckets()
+
+	bt := newDepthCharge(destroyer.CurPos.Copy(), faction.HumanAlpha)
+	bt.Shooter = destroyer.Uid
+	bt.Rotation = 90
+	bt.TargetPos = sub.CurPos.Copy()
+	bt.Life = 100
+	require.False(t, m.depthChargeShouldExplode(bt), "深弹在本舰舰体内不应立即引爆")
+
+	bt.CurPos = sub.CurPos.Copy()
+	require.True(t, m.depthChargeShouldExplode(bt), "深弹落在其他舰体上应直接引爆")
+}

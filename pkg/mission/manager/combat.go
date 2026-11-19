@@ -632,7 +632,8 @@ func (m *MissionManager) depthChargeShouldExplode(bt *objBullet.Bullet) bool {
 	if along >= 0 {
 		return true
 	}
-	return m.insideAnyHull(bt.CurPos)
+	// 深弹从投弹舰舰尾投放，起点就在本方舰体内；不能把自己当成「直接砸中舰体」。
+	return m.insideAnyHull(bt.CurPos, bt.Shooter)
 }
 
 // resolveDepthChargeDamage 深弹落点 AoE：只结算潜艇。
@@ -928,7 +929,7 @@ func (m *MissionManager) updateShotBullets() {
 		// 或吊射越过瞄准点（而瞄准点就是目标舰）时都会落到舰体上，
 		// 这时候泛一圈白沫看着就像水花浮在舰上。
 		if (kind == objExplosion.KindSplash || kind == objExplosion.KindDust) &&
-			m.insideAnyHull(bt.CurPos) {
+			m.insideAnyHull(bt.CurPos, "") {
 			continue
 		}
 		duplicated := false
@@ -982,10 +983,13 @@ func hitEffectMerged(a, b objPos.MapPos) bool {
 	return dx*dx+dy*dy < hitEffectMergeDistance*hitEffectMergeDistance
 }
 
-// insideAnyHull 返回落点是否落在某条舰的舰体内。
-func (m *MissionManager) insideAnyHull(pos objPos.MapPos) bool {
+// insideAnyHull 返回落点是否落在某条舰的舰体内，ignoreUID 用于排除指定的舰（如投弹者自己）。
+func (m *MissionManager) insideAnyHull(pos objPos.MapPos, ignoreUID string) bool {
 	inside := false
 	m.combatBuckets.eachShip(pos.RX, pos.RY, maxHullHitRadius, func(ship *objUnit.BattleShip) bool {
+		if ship.Uid == ignoreUID {
+			return false
+		}
 		if geometry.IsPointInRotatedRectangle(
 			pos.RX, pos.RY,
 			ship.CurPos.RX, ship.CurPos.RY,
