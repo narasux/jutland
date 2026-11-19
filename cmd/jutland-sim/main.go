@@ -53,6 +53,8 @@ func run(args []string) error {
 		return cmdCompare(args[1:])
 	case "watch":
 		return cmdWatch(args[1:])
+	case "archive":
+		return cmdArchive(args[1:])
 	case "version":
 		fmt.Print(version.GetVersion())
 		return nil
@@ -447,6 +449,34 @@ func cmdWatch(args []string) error {
 	return sim.RunWatch(context.Background(), paths, sim.WatchOptions{
 		Interval: *interval, Limit: *limit, Once: *once, Writer: os.Stdout,
 	})
+}
+
+func cmdArchive(args []string) error {
+	fs := flag.NewFlagSet("archive", flag.ContinueOnError)
+	out := fs.String("out", "", "override report directory")
+	keep := fs.Int("keep", 50, "number of newest runs to keep")
+	dryRun := fs.Bool("dry-run", false, "print the archive plan without moving files")
+	flagArgs, _ := cliutil.Split(args, "dry-run")
+	if err := fs.Parse(flagArgs); err != nil {
+		return err
+	}
+	paths, err := sim.ResolvePaths(*out)
+	if err != nil {
+		return err
+	}
+	result, err := sim.ArchiveRuns(paths, sim.ArchiveOptions{Keep: *keep, DryRun: *dryRun})
+	if err != nil {
+		return err
+	}
+	fmt.Printf("kept:    %d\n", len(result.Kept))
+	fmt.Printf("moved:   %d\n", len(result.Moved))
+	if result.ArchiveDir != "" {
+		fmt.Printf("archive: %s\n", result.ArchiveDir)
+	}
+	if *dryRun {
+		fmt.Println("dry-run: no files moved")
+	}
+	return nil
 }
 
 func cmdValidate(args []string) error {
