@@ -53,6 +53,8 @@ func run(args []string) error {
 		return cmdCompare(args[1:])
 	case "compare-record":
 		return cmdCompareRecord(args[1:])
+	case "llm-package":
+		return cmdLLMPackage(args[1:])
 	case "watch":
 		return cmdWatch(args[1:])
 	case "archive":
@@ -501,6 +503,28 @@ func cmdCompareRecord(args []string) error {
 	}
 	fmt.Printf("compare: %s\n", info.Markdown)
 	fmt.Printf("json:    %s\n", info.JSON)
+	return nil
+}
+
+func cmdLLMPackage(args []string) error {
+	fs := flag.NewFlagSet("llm-package", flag.ContinueOnError)
+	out := fs.String("out", "", "override report directory")
+	flagArgs, pos := cliutil.Split(args)
+	if err := fs.Parse(flagArgs); err != nil {
+		return err
+	}
+	if len(pos) < 1 {
+		return fmt.Errorf("llm-package requires a run id")
+	}
+	paths, err := sim.ResolvePaths(*out)
+	if err != nil {
+		return err
+	}
+	dir, err := sim.WriteLLMPackage(paths, strings.TrimSpace(pos[0]))
+	if err != nil {
+		return err
+	}
+	fmt.Printf("package: %s\n", dir)
 	return nil
 }
 
