@@ -39,6 +39,11 @@ type ScenarioSummary struct {
 	MeanOwnSunk   float64 `json:"meanOwnSunk"`
 	MeanEnemySunk float64 `json:"meanEnemySunk"`
 	MeanP99MS     float64 `json:"meanP99Ms"`
+	// Own/EnemySunkMin/Max 暴露均值掩盖的极端 run；样本不足时均值不能当统计结论。
+	OwnSunkMin   float64 `json:"ownSunkMin"`
+	OwnSunkMax   float64 `json:"ownSunkMax"`
+	EnemySunkMin float64 `json:"enemySunkMin"`
+	EnemySunkMax float64 `json:"enemySunkMax"`
 }
 
 // AnalysisBrief is a cross-run, LLM-ready brief derived from history/result files.
@@ -93,6 +98,8 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 	scores := map[string]*ScoreGroup{}
 	type scenarioAgg struct {
 		runs, shots, ownSunk, enemySunk, p99 float64
+		ownMin, ownMax, enemyMin, enemyMax   float64
+		hasOwn, hasEnemy                     bool
 	}
 	scenarios := map[string]*scenarioAgg{}
 	for _, entry := range entries {
@@ -145,8 +152,22 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 					agg.shots += row.Value
 				case "own_sunk":
 					agg.ownSunk += row.Value
+					if !agg.hasOwn || row.Value < agg.ownMin {
+						agg.ownMin = row.Value
+					}
+					if !agg.hasOwn || row.Value > agg.ownMax {
+						agg.ownMax = row.Value
+					}
+					agg.hasOwn = true
 				case "enemy_sunk":
 					agg.enemySunk += row.Value
+					if !agg.hasEnemy || row.Value < agg.enemyMin {
+						agg.enemyMin = row.Value
+					}
+					if !agg.hasEnemy || row.Value > agg.enemyMax {
+						agg.enemyMax = row.Value
+					}
+					agg.hasEnemy = true
 				case "tick_p99_ms":
 					agg.p99 += row.Value
 				}
@@ -200,6 +221,8 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 			MeanOwnSunk:   roundBaseline3(agg.ownSunk / agg.runs),
 			MeanEnemySunk: roundBaseline3(agg.enemySunk / agg.runs),
 			MeanP99MS:     roundBaseline3(agg.p99 / agg.runs),
+			OwnSunkMin:    agg.ownMin, OwnSunkMax: agg.ownMax,
+			EnemySunkMin: agg.enemyMin, EnemySunkMax: agg.enemyMax,
 		})
 	}
 	sort.Slice(brief.ScenarioSummaries, func(i, j int) bool {
@@ -271,11 +294,32 @@ func analysisMarkdown(brief AnalysisBrief) string {
 	if len(brief.ScenarioSummaries) == 0 {
 		b.WriteString("无。\n\n")
 	} else {
-		b.WriteString("| scenario | runs | mean shots | mean own sunk | mean enemy sunk | mean p99 ms |\n|---|---|---|---|---|---|\n")
+		b.WriteString(
+			"| scenario | runs | mean shots | own sunk (min~max) | enemy sunk (min~max) | mean p99 ms |\n" +
+				"|---|---|---|---|---|---|\n",
+		)
+		smallSample := make([]string, 0)
 		for _, s := range brief.ScenarioSummaries {
-			fmt.Fprintf(&b, "| %s | %d | %.1f | %.1f | %.1f | %.3f |\n", s.Scenario, s.Runs, s.MeanShots, s.MeanOwnSunk, s.MeanEnemySunk, s.MeanP99MS)
+			fmt.Fprintf(
+				&b,
+				"| %s | %d | %.1f | %.1f (%.1f~%.1f) | %.1f (%.1f~%.1f) | %.3f |\n",
+				s.Scenario, s.Runs, s.MeanShots,
+				s.MeanOwnSunk, s.OwnSunkMin, s.OwnSunkMax,
+				s.MeanEnemySunk, s.EnemySunkMin, s.EnemySunkMax,
+				s.MeanP99MS,
+			)
+			if s.Runs < 3 {
+				smallSample = append(smallSample, s.Scenario)
+			}
 		}
 		b.WriteString("\n")
+		if len(smallSample) > 0 {
+			fmt.Fprintf(
+				&b,
+				"- 样本不足（runs < 3）：%s。均值只作方向参考，不能当统计结论。\n\n",
+				strings.Join(smallSample, "、"),
+			)
+		}
 	}
 	b.WriteString("## 最近 Runs\n\n| started | fidelity | green | red | findings | ms |\n|---|---|---|---|---|---|\n")
 	for _, run := range brief.RecentRuns {
