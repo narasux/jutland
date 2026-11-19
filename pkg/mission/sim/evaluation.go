@@ -29,6 +29,7 @@ type EvaluationRow struct {
 	Red         int                `json:"red"`
 	Findings    int                `json:"findings"`
 	Diagnostics int                `json:"diagnostics"`
+	Smoke       bool               `json:"smoke"`
 	Metrics     map[string]float64 `json:"metrics"`
 	RedItems    []string           `json:"redItems,omitempty"`
 	FindingIDs  []string           `json:"findingIds,omitempty"`
@@ -43,6 +44,8 @@ type EvaluationReport struct {
 	Runs          int             `json:"runs"`
 	Fidelity      map[string]int  `json:"fidelity"`
 	Status        map[string]int  `json:"status"`
+	SmokeRed      int             `json:"smokeRed"`
+	BalanceRed    int             `json:"balanceRed"`
 	Rows          []EvaluationRow `json:"rows"`
 	Missing       []string        `json:"missing,omitempty"`
 }
@@ -60,8 +63,8 @@ a{color:#155eef;text-decoration:none}
 </style></head><body>
 <h1>Jutland 仿真评估</h1>
 <p class="small">suite <code>{{.Report.Suite}}</code> · {{.Report.Runs}} runs · generated {{.GeneratedAt}}</p>
-<section><h2>总览</h2><table><tr><th>绿</th><th>黄</th><th>红</th><th>Findings</th><th>Diagnostics</th></tr>
-<tr><td class="green">{{index .Report.Status "green"}}</td><td class="yellow">{{index .Report.Status "yellow"}}</td><td class="red">{{index .Report.Status "red"}}</td><td>{{.Findings}}</td><td>{{.Diagnostics}}</td></tr></table>
+<section><h2>总览</h2><table><tr><th>绿</th><th>黄</th><th>红</th><th>红(smoke/balance)</th><th>Findings</th><th>Diagnostics</th></tr>
+<tr><td class="green">{{index .Report.Status "green"}}</td><td class="yellow">{{index .Report.Status "yellow"}}</td><td class="red">{{index .Report.Status "red"}}</td><td>{{.Report.SmokeRed}} / {{.Report.BalanceRed}}</td><td>{{.Findings}}</td><td>{{.Diagnostics}}</td></tr></table>
 <p class="small">Fidelity: {{range $k,$v := .Report.Fidelity}}{{$k}}={{$v}} {{end}}</p></section>
 <section><h2>Runs</h2><table><thead><tr><th>run</th><th>scenario</th><th>fidelity</th><th>mode</th><th>green</th><th>yellow</th><th>red</th><th>findings</th><th>diag</th><th>shots</th><th>hit%</th><th>success</th><th>enemy sunk</th><th>p99ms</th></tr></thead><tbody>
 {{range .Report.Rows}}<tr><td><a href="../runs/{{.RunID}}/report.html">{{.RunID}}</a></td><td>{{.Scenario}}</td><td>{{.Fidelity}}</td><td>{{.Mode}}</td><td class="green">{{.Green}}</td><td class="yellow">{{.Yellow}}</td><td class="red">{{.Red}}</td><td>{{.Findings}}</td><td>{{.Diagnostics}}</td><td>{{index .Metrics "shots"}}</td><td>{{index .Metrics "hit_rate"}}</td><td>{{index .Metrics "kill_rate"}}</td><td>{{index .Metrics "tick_p99_ms"}}</td></tr>{{end}}
@@ -94,10 +97,12 @@ func WriteEvaluation(paths Paths, summaryPath string) (string, error) {
 			report.Missing = append(report.Missing, run.RunID)
 			continue
 		}
+		smoke := result.Fidelity == "F2" ||
+			strings.Contains(strings.ToLower(strings.Join(result.DataQuality, " ")), "smoke")
 		row := EvaluationRow{
 			RunID: run.RunID, Scenario: result.Scenario.Name, Fidelity: result.Fidelity,
 			Mode: result.Scenario.Mode, Seed: result.Seed, Findings: len(result.Findings),
-			Diagnostics: len(result.Diagnostics), ReportHTML: run.ReportHTML,
+			Diagnostics: len(result.Diagnostics), Smoke: smoke, ReportHTML: run.ReportHTML,
 			Metrics: map[string]float64{},
 		}
 		for _, item := range result.Scorecard {
@@ -108,9 +113,23 @@ func WriteEvaluation(paths Paths, summaryPath string) (string, error) {
 				row.Yellow++
 			case "red":
 				row.Red++
+				label := "balance"
+				if row.Smoke {
+					report.SmokeRed++
+					label = "smoke"
+				} else {
+					report.BalanceRed++
+				}
 				row.RedItems = append(
 					row.RedItems,
-					fmt.Sprintf("%s/%s=%s (target %s)", item.Dimension, item.Metric, item.Value, item.Target),
+					fmt.Sprintf(
+						"[%s] %s/%s=%s (target %s)",
+						label,
+						item.Dimension,
+						item.Metric,
+						item.Value,
+						item.Target,
+					),
 				)
 			}
 			report.Status[item.Status]++
@@ -159,8 +178,18 @@ func WriteEvaluation(paths Paths, summaryPath string) (string, error) {
 func writeEvaluationMarkdown(path string, report EvaluationReport, findings, diagnostics int) error {
 	var b strings.Builder
 	fmt.Fprintf(&b, "# Jutland 仿真评估：%s\n\n", report.Suite)
-	fmt.Fprintf(&b, "- runs: %d\n- green: %d\n- yellow: %d\n- red: %d\n- findings: %d\n- diagnostics: %d\n\n",
-		report.Runs, report.Status["green"], report.Status["yellow"], report.Status["red"], findings, diagnostics)
+	fmt.Fprintf(
+		&b,
+		"- runs: %d\n- green: %d\n- yellow: %d\n- red: %d (smoke %d / balance %d)\n- findings: %d\n- diagnostics: %d\n\n",
+		report.Runs,
+		report.Status["green"],
+		report.Status["yellow"],
+		report.Status["red"],
+		report.SmokeRed,
+		report.BalanceRed,
+		findings,
+		diagnostics,
+	)
 	b.WriteString(
 		"| run | scenario | fidelity | mode | green | yellow | red | findings | diag | shots | hit% | success | enemy sunk | p99ms |\n",
 	)
