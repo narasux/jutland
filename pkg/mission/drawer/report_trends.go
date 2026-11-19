@@ -558,7 +558,6 @@ func (d *Drawer) drawBattleReportTrends(
 			)
 		}
 	}
-
 }
 
 // drawBattleReportTrendModes 绘制「当前兵力 / 建造与损失」切换按钮。

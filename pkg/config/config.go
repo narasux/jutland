@@ -338,15 +338,15 @@ func SaveGameSettings() error {
 	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n")
 	_, _ = file.WriteString("// aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用\n")
 	_, _ = file.WriteString("// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾\n")
+	_, _ = file.WriteString("// EnablePenetration: 实验性穿甲伤害开关，默认关闭；开启后按弹药穿深/舰体装甲缩放伤害\n")
 	_, _ = file.WriteString("// EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图\n")
 	_, _ = file.WriteString("// DisplayHitEffects: 命中特效总开关，默认开启；关闭后命中舰体 / 落水 / 落陆不再生成特效\n")
 	_, _ = file.WriteString("// DisplayDamageNumber: 是否显示命中伤害数字，默认开启\n")
 	_, _ = file.WriteString("// ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示\n")
 	_, _ = file.WriteString(
 		"// wakeTrail: 战舰水面尾流参数，length 航迹长度 0.40~2.50、width 宽度 0.40~2.00、" +
-			"opacity 浓度 0.20~1.50，默认均为 1.00\n",
+			"opacity 浓度 0.20~1.50，默认均为 1.00\n\n",
 	)
-	_, _ = file.WriteString("// EnablePenetration: 实验性穿甲伤害开关，默认关闭；开启后按弹药穿深/舰体装甲缩放伤害\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")
