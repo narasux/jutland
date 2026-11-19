@@ -4,6 +4,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+
+	"github.com/narasux/jutland/pkg/common/constants"
 )
 
 // nowMillis is the combat-path wall clock. Production uses real time; a
@@ -31,6 +33,15 @@ func SetNowMillis(fn func() int64) (restore func()) {
 // NowMillis returns the current combat-path wall clock in milliseconds.
 func NowMillis() int64 {
 	return nowMillis()
+}
+
+// SimClockMillis 返回按模拟拍推进的毫秒时钟，供无头 runner 注入 SetNowMillis。
+// 固定墙钟会让航母起飞冷却、损管回血等计时永远停在第一拍；这里把 60 拍折算成一秒，
+// 既保持同 seed 可复现，又让计时按模拟时间而不是真实耗时前进。
+func SimClockMillis(baseMS int64) func() int64 {
+	return func() int64 {
+		return baseMS + SimTick()*1000/int64(constants.MaxTPS)
+	}
 }
 
 // SetPlaneUIDGenerator replaces the aircraft ID source and returns a restore

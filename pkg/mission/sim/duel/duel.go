@@ -290,7 +290,7 @@ func runDuelTrial(sc *sim.Scenario, spec *sim.DuelSpec, seed int64) (trial, erro
 
 	restoreRand := objUnit.SetRandSource(rand.New(rand.NewSource(seed)))
 	defer restoreRand()
-	restoreClock := objUnit.SetNowMillis(func() int64 { return 1_700_000_000_000 })
+	restoreClock := objUnit.SetNowMillis(objUnit.SimClockMillis(1_700_000_000_000))
 	defer restoreClock()
 	uidSeq := 0
 	restoreUID := objUnit.SetPlaneUIDGenerator(func() string {
