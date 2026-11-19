@@ -146,6 +146,26 @@
   </table>
 </section>
 
+{{if .Result.PreviousDiff}}
+<section>
+  <h2>与上次对比</h2>
+  <p class="small">基准：<code>{{.Result.PreviousDiff.ARun}}</code> → 本次 <code>{{.Result.PreviousDiff.BRun}}</code></p>
+  {{if .Result.PreviousDiff.Metrics}}
+  <table>
+    <thead><tr><th>分组</th><th>指标</th><th>A</th><th>B</th><th>Delta</th><th>Delta%</th></tr></thead>
+    <tbody>
+      {{range .Result.PreviousDiff.Metrics}}
+      <tr><td>{{.Group}}</td><td>{{.Name}}</td><td>{{.A}} {{.Unit}}</td><td>{{.B}} {{.Unit}}</td><td>{{.Delta}}</td><td>{{.DeltaPct}}%</td></tr>
+      {{end}}
+    </tbody>
+  </table>
+  {{end}}
+  {{if .Result.PreviousDiff.ScoreChanges}}<p class="small">记分卡变化：{{range .Result.PreviousDiff.ScoreChanges}}<span class="tag">{{.}}</span>{{end}}</p>{{end}}
+  {{if .Result.PreviousDiff.FindingsAdded}}<p class="small">新增 finding：{{range .Result.PreviousDiff.FindingsAdded}}<span class="tag">{{.ID}}</span>{{end}}</p>{{end}}
+  {{if .Result.PreviousDiff.FindingsGone}}<p class="small">消失 finding：{{range .Result.PreviousDiff.FindingsGone}}<span class="tag">{{.ID}}</span>{{end}}</p>{{end}}
+</section>
+{{end}}
+
 {{if .Charts}}
 <section>
   <h2>图表</h2>

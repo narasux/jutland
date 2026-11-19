@@ -67,6 +67,10 @@ func buildSummary(result *Result, manifest Manifest) string {
 	for _, row := range result.Metrics {
 		fmt.Fprintf(&b, "| %s | %s | %v %s | %s |\n", row.Group, row.Name, row.Value, row.Unit, row.CI)
 	}
+	if result.PreviousDiff != nil {
+		b.WriteString("\n")
+		b.WriteString(previousDiffMarkdown(result.PreviousDiff))
+	}
 	if len(result.Diagnostics) > 0 {
 		b.WriteString("\n## 诊断\n\n")
 		b.WriteString(diagnosticsMarkdown(result.Diagnostics))
@@ -242,3 +246,36 @@ const llmPrompt = `你是 Jutland 的平衡/质量分析助手。只使用提供
 
 如果 dirty=true，归因到 commit 时降低置信度，优先看 worktree_hash/config_hash。
 `
+
+func previousDiffMarkdown(diff *CompareReport) string {
+	if diff == nil {
+		return ""
+	}
+	var b strings.Builder
+	fmt.Fprintf(&b, "## 与上次对比\n\n- 基准：`%s`\n- 本次：`%s`\n\n", diff.ARun, diff.BRun)
+	if len(diff.Metrics) > 0 {
+		b.WriteString("| 分组 | 指标 | A | B | Delta | Delta% |\n|---|---|---:|---:|---:|---:|\n")
+		for _, m := range diff.Metrics {
+			fmt.Fprintf(&b, "| %s | %s | %v | %v | %v | %v%% |\n", m.Group, m.Name, m.A, m.B, m.Delta, m.DeltaPct)
+		}
+		b.WriteString("\n")
+	}
+	if len(diff.ScoreChanges) > 0 {
+		fmt.Fprintf(&b, "记分卡变化：%s\n\n", strings.Join(diff.ScoreChanges, "; "))
+	}
+	if len(diff.FindingsAdded) > 0 {
+		ids := make([]string, 0, len(diff.FindingsAdded))
+		for _, f := range diff.FindingsAdded {
+			ids = append(ids, f.ID)
+		}
+		fmt.Fprintf(&b, "新增 finding：%s\n\n", strings.Join(ids, ", "))
+	}
+	if len(diff.FindingsGone) > 0 {
+		ids := make([]string, 0, len(diff.FindingsGone))
+		for _, f := range diff.FindingsGone {
+			ids = append(ids, f.ID)
+		}
+		fmt.Fprintf(&b, "消失 finding：%s\n\n", strings.Join(ids, ", "))
+	}
+	return b.String()
+}

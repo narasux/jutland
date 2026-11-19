@@ -64,6 +64,7 @@ func WriteReport(paths Paths, result *Result, scenarioPath, command string) (Rep
 		result.StartedAt = time.Now()
 	}
 	result.Diagnostics = mergeDiagnostics(result.Diagnostics, RunDiagnostics(result))
+	result.PreviousDiff = PreviousComparison(paths, result)
 	gameGit := CollectGitInfo("")
 	labGit := CollectGitInfo(paths.Home)
 	runID := uniqueRunID(paths.Reports, result.StartedAt, result.Scenario.Slug(), gameGit.CommitShort)
