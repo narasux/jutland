@@ -1820,7 +1820,8 @@ func shipArchiveInfoItems(ship *objUnit.BattleShip, ref *objRef.Reference) []obj
 	}
 	// 潜艇水下航速可能高于水面（如 XXI 型），只给一档“速度”会误导，必须分开展示。
 	items = append(items, shipArchiveSpeedItems(ship)...)
-	return append(items,
+	return append(
+		items,
 		objRef.InfoItem{Label: i18n.Text(i18n.MsgCollectionCost), Value: shipCollectionCostValue(ship)},
 		objRef.InfoItem{
 			Label: i18n.Text(i18n.MsgCollectionHorizontalDR),

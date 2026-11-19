@@ -7,7 +7,7 @@ import (
 
 // updateShipDiveStates 推进所有潜艇的下潜/上浮计时，由战斗阶段每拍调用。
 func (m *MissionManager) updateShipDiveStates() {
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		ship.AdvanceDive()
 	}
 }

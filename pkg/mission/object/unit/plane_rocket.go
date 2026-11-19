@@ -3,7 +3,6 @@ package unit
 import (
 	"log"
 	"math"
-	"math/rand"
 
 	"github.com/mohae/deepcopy"
 
@@ -118,13 +117,17 @@ func (r *PlaneRocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []
 	radius := float64(r.BulletSpread) / constants.MapBlockSize * rangePercent
 
 	pos := targetPos.Copy()
-	pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
-	pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
+	pos.AddRx(float64(RandIntn(3)-1) * RandFloat64() * radius)
+	pos.AddRy(float64(RandIntn(3)-1) * RandFloat64() * radius)
 	bt := objBullet.New(
 		r.BulletName, curPos, pos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
 		enemy.ObjType(), bulletSpeed, life, 0,
 	)
+	bt.WeaponName = r.Name
+	bt.TargetUID = enemy.ID()
+	bt.FireDistance = distance
+	bt.FireRangeRatio = rangePercent
 	bt.ProximityRadius = r.ProximityRadius
 	bt.BlastRadius = r.BlastRadius
 	bullets = append(bullets, bt)

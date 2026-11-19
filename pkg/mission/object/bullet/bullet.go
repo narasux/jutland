@@ -109,6 +109,15 @@ type Bullet struct {
 	// 发射者配置名与类型，发射瞬间记录，避免单位已离场后战报只能显示「—」
 	ShooterName string
 	ShooterType string
+	// 发射武器名称，供 observer / 报告按武器归因
+	WeaponName string
+	// 目标 UID（发射瞬间记录），用于 AoE 时区分被动目标与瞄准目标
+	TargetUID string
+	// 发射瞬间到提前量落点的距离与射程比例
+	FireDistance   float64
+	FireRangeRatio float64
+	// 本次命中类型：空 = direct，blast / depth_charge / airburst 由结算路径写入
+	HitKind string
 	// 所属对象类型
 	ShooterObjType object.Type
 	// 所属阵营（玩家）

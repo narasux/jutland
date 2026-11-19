@@ -2,7 +2,6 @@ package building
 
 import (
 	"slices"
-	"time"
 
 	"github.com/google/uuid"
 
@@ -25,10 +24,10 @@ type OncomingShip struct {
 // Update ...
 func (s *OncomingShip) Update() (finished bool) {
 	if s.StartedAt == 0 {
-		s.StartedAt = time.Now().UnixMilli()
+		s.StartedAt = objUnit.NowMillis()
 		return false
 	}
-	s.Progress = float64(time.Now().UnixMilli()-s.StartedAt) / float64(s.TimeCost) / 10
+	s.Progress = float64(objUnit.NowMillis()-s.StartedAt) / float64(s.TimeCost) / 10
 	return s.Progress >= 100
 }
 
@@ -145,10 +144,10 @@ type LoadingOilShip struct {
 // Update ...
 func (s *LoadingOilShip) Update() (finished bool) {
 	if s.StartedAt == 0 {
-		s.StartedAt = time.Now().UnixMilli()
+		s.StartedAt = objUnit.NowMillis()
 		return false
 	}
-	s.Progress = float64(time.Now().UnixMilli()-s.StartedAt) / float64(s.TimeCost) / 10
+	s.Progress = float64(objUnit.NowMillis()-s.StartedAt) / float64(s.TimeCost) / 10
 
 	// 如果进度到达 100，重置并返回 true
 	if s.Progress >= 100 {

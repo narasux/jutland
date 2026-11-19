@@ -33,6 +33,27 @@ func bucketRings(radius float64) int {
 }
 
 func (idx *combatIndex) rebuild(ships map[string]*objUnit.BattleShip, planes map[string]*objUnit.Plane) {
+	idx.reset()
+	for _, ship := range ships {
+		idx.addShip(ship)
+	}
+	for _, plane := range planes {
+		idx.addPlane(plane)
+	}
+}
+
+// rebuildOrdered 使用按 UID 排好的切片重建，桶内顺序因此稳定；游戏主循环用它。
+func (idx *combatIndex) rebuildOrdered(ships []*objUnit.BattleShip, planes []*objUnit.Plane) {
+	idx.reset()
+	for _, ship := range ships {
+		idx.addShip(ship)
+	}
+	for _, plane := range planes {
+		idx.addPlane(plane)
+	}
+}
+
+func (idx *combatIndex) reset() {
 	if idx.ships == nil {
 		idx.ships = map[uint64][]*objUnit.BattleShip{}
 		idx.planes = map[uint64][]*objUnit.Plane{}
@@ -47,14 +68,16 @@ func (idx *combatIndex) rebuild(ships map[string]*objUnit.BattleShip, planes map
 			idx.planes[key] = list[:0]
 		}
 	}
-	for _, ship := range ships {
-		key := combatCellKey(combatBucket(ship.CurPos.RX), combatBucket(ship.CurPos.RY))
-		idx.ships[key] = append(idx.ships[key], ship)
-	}
-	for _, plane := range planes {
-		key := combatCellKey(combatBucket(plane.CurPos.RX), combatBucket(plane.CurPos.RY))
-		idx.planes[key] = append(idx.planes[key], plane)
-	}
+}
+
+func (idx *combatIndex) addShip(ship *objUnit.BattleShip) {
+	key := combatCellKey(combatBucket(ship.CurPos.RX), combatBucket(ship.CurPos.RY))
+	idx.ships[key] = append(idx.ships[key], ship)
+}
+
+func (idx *combatIndex) addPlane(plane *objUnit.Plane) {
+	key := combatCellKey(combatBucket(plane.CurPos.RX), combatBucket(plane.CurPos.RY))
+	idx.planes[key] = append(idx.planes[key], plane)
 }
 
 // eachShip 访问可能落在半径内的船。回调返回 true 时停止。

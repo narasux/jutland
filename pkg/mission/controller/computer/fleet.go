@@ -29,7 +29,7 @@ type battleSnapshot struct {
 
 func (h *ComputerDecisionHandler) snapshot(misState *state.MissionState) *battleSnapshot {
 	snap := &battleSnapshot{byUID: map[string]*objUnit.BattleShip{}, misState: misState}
-	for _, ship := range misState.Arena.Ships {
+	for _, ship := range misState.Arena.OrderedShips() {
 		if ship == nil || ship.CurHP <= 0 {
 			continue
 		}
@@ -56,7 +56,7 @@ func (h *ComputerDecisionHandler) snapshot(misState *state.MissionState) *battle
 			snap.enemy = append(snap.enemy, ship)
 		}
 	}
-	for _, point := range misState.Arena.ReinforcePoints {
+	for _, point := range misState.Arena.OrderedReinforcePoints() {
 		if point == nil || point.BelongPlayer != h.player {
 			continue
 		}

@@ -14,7 +14,7 @@ func sonarQueryRadius() float64 {
 // 必须在 updateVision 之前执行，且先按这一拍的位置重建桶。
 func (m *MissionManager) updateSubmarineDetection() {
 	hasSubmarine := false
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if ship.Type == objUnit.ShipTypeSubmarine && ship.CurHP > 0 {
 			hasSubmarine = true
 			break
@@ -27,7 +27,7 @@ func (m *MissionManager) updateSubmarineDetection() {
 	now := m.state.Core.SimTick
 	memory := objUnit.ReloadTicks(objUnit.SubmarineDetectionMemorySeconds)
 
-	for _, sub := range m.state.Arena.Ships {
+	for _, sub := range m.state.Arena.OrderedShips() {
 		if sub.Type != objUnit.ShipTypeSubmarine || sub.CurHP <= 0 {
 			continue
 		}

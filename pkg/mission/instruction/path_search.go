@@ -2,6 +2,7 @@ package instruction
 
 import (
 	"sync"
+	"sync/atomic"
 
 	"github.com/narasux/jutland/pkg/utils/grid"
 )
@@ -25,6 +26,17 @@ type pathSearchPool struct {
 
 var pathSearches = newPathSearchPool()
 
+// syncPathSearch makes pathfinding run inline instead of on the worker pool.
+// Headless simulation enables it so instruction creation cannot race worker
+// scheduling; the game keeps the async pool.
+var syncPathSearch atomic.Bool
+
+// SetSyncPathSearch toggles inline pathfinding and returns a restore func.
+func SetSyncPathSearch(sync bool) (restore func()) {
+	old := syncPathSearch.Swap(sync)
+	return func() { syncPathSearch.Store(old) }
+}
+
 func newPathSearchPool() *pathSearchPool {
 	pool := &pathSearchPool{wake: make(chan struct{}, 1)}
 	for range pathSearchWorkers {
@@ -34,6 +46,10 @@ func newPathSearchPool() *pathSearchPool {
 }
 
 func (p *pathSearchPool) submit(job pathSearchJob) {
+	if syncPathSearch.Load() {
+		job.reply <- job.grid.SearchWithCostScale(job.start, job.goal, job.costScale)
+		return
+	}
 	p.mu.Lock()
 	p.pending = append(p.pending, job)
 	p.mu.Unlock()

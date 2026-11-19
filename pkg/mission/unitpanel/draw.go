@@ -410,7 +410,8 @@ func (p *Panel) shipGroups(ms *state.MissionState, ship *objUnit.BattleShip) []i
 		{label: i18n.Text(i18n.MsgUnitPanelStatus), value: status},
 	}
 	if ship.Type == objUnit.ShipTypeSubmarine {
-		items = append(items,
+		items = append(
+			items,
 			infoItem{label: i18n.Text(i18n.MsgUnitPanelDiveState), value: ship.DiveStateText()},
 			infoItem{
 				label:   i18n.Text(i18n.MsgUnitPanelSonar),

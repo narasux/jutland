@@ -1,0 +1,14 @@
+{
+  schemaVersion: 1,
+  name: "macro-pearl-1941",
+  description: "F3 完整战斗 smoke：PearlHarbor1941，双方 computer controller，长时限 headless 完整任务。",
+  mode: "macro",
+  seed: 1,
+  runs: 1,
+  maxTicks: 12000,
+  macro: {
+    mission: "PearlHarbor1941",
+    playerSide: "P1",
+    maxTicks: 12000,
+  },
+}

@@ -1,0 +1,24 @@
+{
+  schemaVersion: 1,
+  name: "duel-sub-vs-frigate",
+  description: "F2 合同作战 smoke：下潜潜艇 vs 水面护卫舰，验证鱼雷/反潜可见性。",
+  mode: "duel",
+  seed: 13,
+  runs: 1,
+  maxTicks: 3600,
+  environment: {
+    map: "open_sea",
+    speedMultiplier: 1.0,
+  },
+  duel: {
+    shooterFleet: [
+      { ship: "su_k_class", count: 1 },
+    ],
+    targetFleet: [
+      { ship: "jiujiang", count: 1, initialHP: 1000 },
+    ],
+    distance: 5,
+    doctrine: "auto",
+    maxTicks: 3600,
+  },
+}

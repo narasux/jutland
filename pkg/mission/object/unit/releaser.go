@@ -223,6 +223,7 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 	if bulletType == objBullet.TypeBomb {
 		plunge = 1
 	}
+	distance := sState.CurPos.Distance(targetPos)
 	life := int(r.Range/bulletSpeed) + 5
 	if bulletType == objBullet.TypeTorpedo {
 		// 航空鱼雷只行驶到预计命中点附近，额外一帧确保到达后仍会结算碰撞。
@@ -231,11 +232,18 @@ func (r *Releaser) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.
 		life = int(math.Ceil(sState.CurPos.Distance(targetPos)/bulletSpeed)) + 1
 	}
 
-	return []*objBullet.Bullet{objBullet.New(
+	bt := objBullet.New(
 		r.BulletName, sState.CurPos, targetPos,
 		shooter.ID(), shooter.ObjType(), shooter.Player(),
 		enemy.ObjType(), bulletSpeed, life, plunge,
-	)}
+	)
+	bt.WeaponName = r.Name
+	bt.TargetUID = enemy.ID()
+	bt.FireDistance = distance
+	if r.Range > 0 {
+		bt.FireRangeRatio = distance / r.Range
+	}
+	return []*objBullet.Bullet{bt}
 }
 
 // ReleaserMap 保存按配置名称索引的炸弹和航空鱼雷释放器模板。

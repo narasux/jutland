@@ -2,8 +2,7 @@ package manager
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
+	"sort"
 
 	"github.com/samber/lo"
 
@@ -34,7 +33,7 @@ func (m *MissionManager) updateGameMarks() {
 // 更新建筑物
 func (m *MissionManager) updateBuildings() {
 	// 增援点当然算是建筑物！
-	for _, rp := range m.state.Arena.ReinforcePoints {
+	for _, rp := range m.state.Arena.OrderedReinforcePoints() {
 		if ship := rp.Update(
 			m.state.Arena.ShipUidGenerators[rp.BelongPlayer],
 			// FIXME 目前电脑玩家先不限制金钱
@@ -51,7 +50,7 @@ func (m *MissionManager) updateBuildings() {
 			// 战舰移动到集结点 & 随机散开 [-3, 3] 的范围。
 			// 走寻路而不是直线指令：直线撞岸会被当作“已到达”而停在岸边，
 			// 之后再也不会重试；抖动落点落在陆格上时退回集结点本身。
-			x, y := rand.Intn(7)-3, rand.Intn(7)-3
+			x, y := objUnit.RandIntn(7)-3, objUnit.RandIntn(7)-3
 			targetPos := objPos.New(rp.RallyPos.MX+x, rp.RallyPos.MY+y)
 			if m.state.Core.MissionMD.MapCfg.Map.IsLand(targetPos.MX, targetPos.MY) {
 				targetPos = rp.RallyPos
@@ -77,7 +76,7 @@ func (m *MissionManager) updateBuildings() {
 			byName[plane.Name]++
 		}
 	}
-	for _, af := range m.state.Arena.Airfields {
+	for _, af := range m.state.Arena.OrderedAirfields() {
 		flying := flyingByField[af.Uid]
 		if flying == nil {
 			flying = map[string]int64{}
@@ -100,9 +99,9 @@ func (m *MissionManager) updateBuildings() {
 
 	// 油井当然算是建筑物！
 	fontSize := float64(24)
-	for _, op := range m.state.Arena.OilPlatforms {
+	for _, op := range m.state.Arena.OrderedOilPlatforms() {
 		text := fmt.Sprintf("+%d $", op.Yield)
-		for _, ship := range m.state.Arena.Ships {
+		for _, ship := range m.state.Arena.OrderedShips() {
 			if ship.Type != objUnit.ShipTypeCargo || ship.BelongPlayer != m.state.Player.CurPlayer {
 				continue
 			}
@@ -115,7 +114,13 @@ func (m *MissionManager) updateBuildings() {
 			}
 		}
 
-		for uid, ship := range op.LoadingOilShips {
+		loadingUIDs := make([]string, 0, len(op.LoadingOilShips))
+		for uid := range op.LoadingOilShips {
+			loadingUIDs = append(loadingUIDs, uid)
+		}
+		sort.Strings(loadingUIDs)
+		for _, uid := range loadingUIDs {
+			ship := op.LoadingOilShips[uid]
 			// 如果货轮不在了，需要及时移除掉
 			cargo, ok := m.state.Arena.Ships[uid]
 			if !ok {
@@ -132,10 +137,11 @@ func (m *MissionManager) updateBuildings() {
 
 // 更新支援舰治疗逻辑
 // 医疗船和维修船自动治疗范围内同阵营战舰（含自身），显示绿色浮动文字
-// 注意：治疗间隔不受 config.G.SpeedMultiplier 影响，使用 time.Now() 而非帧计数
+// 注意：治疗间隔不受 config.G.SpeedMultiplier 影响，使用 unit.NowMillis() 而非帧计数
+// （无头模拟可通过 SetNowMillis 注入固定/推进时钟）
 func (m *MissionManager) updateHospitalShipHealing() {
-	now := time.Now().UnixMilli()
-	for _, ship := range m.state.Arena.Ships {
+	now := objUnit.NowMillis()
+	for _, ship := range m.state.Arena.OrderedShips() {
 		// 只有存活的医疗船或维修船才能治疗
 		if (ship.Type != objUnit.ShipTypeHospital && ship.Type != objUnit.ShipTypeRepair) ||
 			ship.CurHP <= 0 {
@@ -146,7 +152,7 @@ func (m *MissionManager) updateHospitalShipHealing() {
 			continue
 		}
 		// 遍历同阵营战舰目标
-		for _, target := range m.state.Arena.Ships {
+		for _, target := range m.state.Arena.OrderedShips() {
 			// 目标必须是同阵营、存活且未满血
 			if target.BelongPlayer != ship.BelongPlayer || target.CurHP <= 0 || target.CurHP >= target.TotalHP {
 				continue

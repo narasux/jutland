@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt vet golines gofumpt turret-marker
+.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-perf sim-suite golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -28,6 +28,22 @@ build: tidy
 # run unittest
 test: tidy
 	go test ./...
+
+# local simulation CI: unit tests + vet + build
+sim-ci:
+	bash tools/sim-ci.sh
+
+# periodic trend/analysis from the private lab history
+sim-periodic:
+	bash tools/sim-periodic.sh
+
+# p99 gate over the newest F3 run
+sim-perf:
+	bash tools/perf-gate.sh
+
+# run a small F0/F1/F3 suite, then trend/analyze
+sim-suite:
+	bash tools/sim-suite.sh
 
 # build game package
 pack:

@@ -1,0 +1,22 @@
+{
+  schemaVersion: 1,
+  name: "duel-jiujiang",
+  description: "F1 单舰对射：同型 100mm 护卫舰，4 格距离，真实 ShipMap/GunMap/BulletMap。",
+  mode: "duel",
+  seed: 7,
+  runs: 1,
+  maxTicks: 1800,
+  environment: {
+    map: "open_sea",
+    speedMultiplier: 1.0,
+  },
+  duel: {
+    shooterShip: "jiujiang",
+    targetShip: "jiujiang",
+    distance: 4,
+    shooterRotation: 90,
+    targetRotation: 270,
+    targetInitialHP: 500,
+    maxTicks: 1800,
+  },
+}
