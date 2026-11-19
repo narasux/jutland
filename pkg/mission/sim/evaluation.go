@@ -23,6 +23,8 @@ type EvaluationRow struct {
 	Findings    int                `json:"findings"`
 	Diagnostics int                `json:"diagnostics"`
 	Metrics     map[string]float64 `json:"metrics"`
+	RedItems    []string           `json:"redItems,omitempty"`
+	FindingIDs  []string           `json:"findingIds,omitempty"`
 	ReportHTML  string             `json:"reportHtml"`
 }
 
@@ -57,6 +59,10 @@ a{color:#155eef;text-decoration:none}
 <section><h2>Runs</h2><table><thead><tr><th>run</th><th>scenario</th><th>fidelity</th><th>mode</th><th>green</th><th>yellow</th><th>red</th><th>findings</th><th>diag</th><th>shots</th><th>hit%</th><th>success</th><th>enemy sunk</th><th>p99ms</th></tr></thead><tbody>
 {{range .Report.Rows}}<tr><td><a href="../runs/{{.RunID}}/report.html">{{.RunID}}</a></td><td>{{.Scenario}}</td><td>{{.Fidelity}}</td><td>{{.Mode}}</td><td class="green">{{.Green}}</td><td class="yellow">{{.Yellow}}</td><td class="red">{{.Red}}</td><td>{{.Findings}}</td><td>{{.Diagnostics}}</td><td>{{index .Metrics "shots"}}</td><td>{{index .Metrics "hit_rate"}}</td><td>{{index .Metrics "kill_rate"}}</td><td>{{index .Metrics "tick_p99_ms"}}</td></tr>{{end}}
 </tbody></table></section>
+<section><h2>红项与 Finding</h2><ul>
+{{range .Report.Rows}}{{if .RedItems}}<li><a href="../runs/{{.RunID}}/report.html">{{.RunID}}</a><ul>{{range .RedItems}}<li class="red">{{.}}</li>{{end}}</ul></li>{{end}}{{end}}
+{{range .Report.Rows}}{{range .FindingIDs}}<li>{{.}}</li>{{end}}{{end}}
+</ul></section>
 {{if .Report.Missing}}<section><h2>Missing</h2><ul>{{range .Report.Missing}}<li>{{.}}</li>{{end}}</ul></section>{{end}}
 </body></html>`))
 
@@ -95,6 +101,10 @@ func WriteEvaluation(paths Paths, summaryPath string) (string, error) {
 				row.Yellow++
 			case "red":
 				row.Red++
+				row.RedItems = append(
+					row.RedItems,
+					fmt.Sprintf("%s/%s=%s (target %s)", item.Dimension, item.Metric, item.Value, item.Target),
+				)
 			}
 			report.Status[item.Status]++
 		}
@@ -102,6 +112,9 @@ func WriteEvaluation(paths Paths, summaryPath string) (string, error) {
 			if m, ok := metricMap(result.Metrics)[name]; ok {
 				row.Metrics[name] = m.Value
 			}
+		}
+		for _, finding := range result.Findings {
+			row.FindingIDs = append(row.FindingIDs, finding.ID+": "+finding.Title)
 		}
 		report.Fidelity[result.Fidelity]++
 		findings += len(result.Findings)
@@ -165,6 +178,19 @@ func writeEvaluationMarkdown(path string, report EvaluationReport, findings, dia
 			row.Metrics["enemy_sunk"],
 			row.Metrics["tick_p99_ms"],
 		)
+	}
+	b.WriteString("\n## 红项与 Finding\n\n")
+	for _, row := range report.Rows {
+		if len(row.RedItems) == 0 && len(row.FindingIDs) == 0 {
+			continue
+		}
+		fmt.Fprintf(&b, "### %s\n\n", row.RunID)
+		for _, item := range row.RedItems {
+			fmt.Fprintf(&b, "- RED %s\n", item)
+		}
+		for _, item := range row.FindingIDs {
+			fmt.Fprintf(&b, "- finding %s\n", item)
+		}
 	}
 	if len(report.Missing) > 0 {
 		fmt.Fprintf(&b, "\n## Missing\n\n- %s\n", strings.Join(report.Missing, "\n- "))
