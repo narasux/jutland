@@ -87,6 +87,7 @@ func TestWriteReportCreatesHumanAndAIViews(t *testing.T) {
 		filepath.Join(out.Dir, "manifest.json"),
 		filepath.Join(out.Dir, "checksums.sha256"),
 		filepath.Join(out.Dir, "ai", "findings.json"),
+		filepath.Join(out.Dir, "ai", "changes.json"),
 		filepath.Join(out.Dir, "charts", "hit_rate_vs_range.svg"),
 		filepath.Join(paths.Reports, "history.jsonl"),
 		filepath.Join(paths.Reports, "index.html"),
@@ -129,6 +130,17 @@ func TestWriteReportCreatesHumanAndAIViews(t *testing.T) {
 	}
 	if manifest.RunID != out.RunID || manifest.SimHome != home || !manifest.Mock {
 		t.Fatalf("manifest = %+v", manifest)
+	}
+	var changes map[string]any
+	changesData, err := os.ReadFile(filepath.Join(out.Dir, "ai", "changes.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(changesData, &changes); err != nil {
+		t.Fatal(err)
+	}
+	if changes["note"] != "P1 合成数据" {
+		t.Fatalf("changes note = %v", changes["note"])
 	}
 	if manifest.ScenarioPath != "built-in:demo-report" {
 		t.Fatalf("ScenarioPath = %q", manifest.ScenarioPath)

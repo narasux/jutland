@@ -141,7 +141,9 @@ func WriteReport(paths Paths, result *Result, scenarioPath, command string) (Rep
 		return ReportOutput{}, err
 	}
 	if err := writeJSON(filepath.Join(runDir, "ai", "changes.json"), map[string]any{
-		"mock": result.Mock, "note": "P1 合成数据", "commit": gameGit.Commit,
+		"mock": result.Mock, "note": changeNote(result), "fidelity": result.Fidelity,
+		"scenario": result.Scenario.Name, "seed": result.Seed, "runs": result.Runs,
+		"commit": gameGit.Commit, "branch": gameGit.Branch,
 		"dirty": gameGit.Dirty, "worktreeHash": gameGit.WorktreeHash, "configHash": manifest.ConfigHash,
 	}); err != nil {
 		return ReportOutput{}, err
@@ -652,3 +654,24 @@ tr:last-child td{border-bottom:0}a{color:#2d6cdf;text-decoration:none}.tag{displ
 </tr>{{else}}<tr><td colspan="6" class="muted">还没有 run；先执行 <code>jutland-sim demo</code>。</td></tr>{{end}}
 </tbody></table></div>
 </main></body></html>`))
+
+func changeNote(result *Result) string {
+	if result == nil {
+		return "无结果"
+	}
+	if result.Mock {
+		return "P1 合成数据"
+	}
+	switch result.Fidelity {
+	case "F0":
+		return "F0 纯伤害/穿深台"
+	case "F1":
+		return "F1 真实配置对射"
+	case "F2":
+		return "F2 合同作战"
+	case "F3":
+		return "F3 AI vs AI 完整任务"
+	default:
+		return "未知保真度"
+	}
+}
