@@ -57,6 +57,8 @@ func run(args []string) error {
 		return cmdLLMPackage(args[1:])
 	case "llm-review":
 		return cmdLLMReview(args[1:])
+	case "evaluation":
+		return cmdEvaluation(args[1:])
 	case "watch":
 		return cmdWatch(args[1:])
 	case "archive":
@@ -559,6 +561,28 @@ func cmdLLMReview(args []string) error {
 	} else {
 		fmt.Printf("review: %s\n", result)
 	}
+	return nil
+}
+
+func cmdEvaluation(args []string) error {
+	fs := flag.NewFlagSet("evaluation", flag.ContinueOnError)
+	out := fs.String("out", "", "override report directory")
+	flagArgs, pos := cliutil.Split(args)
+	if err := fs.Parse(flagArgs); err != nil {
+		return err
+	}
+	if len(pos) < 1 {
+		return fmt.Errorf("evaluation requires a suite summary JSON")
+	}
+	paths, err := sim.ResolvePaths(*out)
+	if err != nil {
+		return err
+	}
+	html, err := sim.WriteEvaluation(paths, strings.TrimSpace(pos[0]))
+	if err != nil {
+		return err
+	}
+	fmt.Printf("evaluation: %s\n", html)
 	return nil
 }
 

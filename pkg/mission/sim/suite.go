@@ -71,7 +71,7 @@ func (s *SuiteSpec) Validate() error {
 			return fmt.Errorf("steps[%d].scenario is required", i)
 		}
 		switch step.Mode {
-		case ModeShot, ModeDuel, ModeMacro:
+		case ModeShot, ModePenetration, ModeDuel, ModeMacro:
 		default:
 			return fmt.Errorf("steps[%d].mode %q is not supported by suite runner", i, step.Mode)
 		}
