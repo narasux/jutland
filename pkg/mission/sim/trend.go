@@ -41,6 +41,8 @@ type TrendData struct {
 	GeneratedAt   time.Time    `json:"generatedAt"`
 	Points        []TrendPoint `json:"points"`
 	Summary       TrendSummary `json:"summary"`
+	// Frame 来自 frame/history.jsonl：渲染帧 p99 门禁的最近结果与均值。
+	Frame FrameTrend `json:"frame"`
 }
 
 // TrendOutput lists the generated trend files.
@@ -123,6 +125,14 @@ func WriteTrend(paths Paths, limit int) (TrendOutput, error) {
 		entries = entries[len(entries)-limit:]
 	}
 	data := BuildTrend(entries)
+	frames, err := LoadFrameHistory(paths.Reports)
+	if err != nil {
+		return TrendOutput{}, err
+	}
+	if len(frames) > 50 {
+		frames = frames[len(frames)-50:]
+	}
+	data.Frame = BuildFrameTrend(frames)
 	labels := make([]string, 0, len(data.Points))
 	green := make([]float64, 0, len(data.Points))
 	red := make([]float64, 0, len(data.Points))
@@ -185,7 +195,20 @@ func trendMarkdown(data TrendData) string {
 		data.Summary.Red,
 	)
 	fmt.Fprintf(&b, "- new findings: %d\n", data.Summary.NewFindings)
-	fmt.Fprintf(&b, "- avg runtime: %.0f ms\n\n", data.Summary.AvgRuntime)
+	fmt.Fprintf(&b, "- avg runtime: %.0f ms\n", data.Summary.AvgRuntime)
+	if data.Frame.Samples > 0 {
+		status := "pass"
+		if !data.Frame.LatestPass {
+			status = "fail"
+		}
+		fmt.Fprintf(
+			&b,
+			"- frame gate: latest p99 %.3f ms (%s，预算 %.1f ms)，avg %.3f ms，worst %.3f ms，samples %d\n",
+			data.Frame.LatestP99MS, status, data.Frame.BudgetMS,
+			data.Frame.AvgP99MS, data.Frame.WorstP99MS, data.Frame.Samples,
+		)
+	}
+	b.WriteString("\n")
 	b.WriteString("| started | fidelity | commit | green | red | findings | ms |\n")
 	b.WriteString("|---|---|---|---|---|---|---|\n")
 	for _, p := range data.Points {
@@ -207,6 +230,7 @@ a{color:#2d6cdf;text-decoration:none}.grid{display:grid;grid-template-columns:re
 </style></head><body><main>
 <h1>Jutland simulation trend</h1><p class="muted">最近 {{.Summary.Runs}} 次 run；生成于 {{.GeneratedAt.Format "2006-01-02 15:04:05"}}。索引：<a href="index.html">index.html</a> · 分析：<a href="ai/analysis-brief.md">analysis-brief.md</a></p>
 <div class="grid"><div class="card"><h2>记分卡趋势</h2>{{.ScoreSVG}}</div><div class="card"><h2>耗时趋势</h2>{{.RuntimeSVG}}</div></div>
+{{if .Frame.Samples}}<div class="card"><h2>渲染帧门禁</h2><p>latest p99 {{printf "%.3f" .Frame.LatestP99MS}} ms · avg {{printf "%.3f" .Frame.AvgP99MS}} ms · worst {{printf "%.3f" .Frame.WorstP99MS}} ms · budget {{printf "%.1f" .Frame.BudgetMS}} ms · samples {{.Frame.Samples}} · {{if .Frame.LatestPass}}<span style="color:#2f9e6f">pass</span>{{else}}<span style="color:#b23a48">fail</span>{{end}}</p></div>{{end}}
 <div class="card"><h2>汇总</h2><p>green {{.Summary.Green}} · yellow {{.Summary.Yellow}} · red {{.Summary.Red}} · new findings {{.Summary.NewFindings}} · avg {{printf "%.0f" .Summary.AvgRuntime}} ms</p></div>
 <div class="card"><h2>Runs</h2><table><thead><tr><th>时间</th><th>fidelity</th><th>commit</th><th>green</th><th>red</th><th>findings</th><th>ms</th></tr></thead><tbody>
 {{range .Points}}<tr><td>{{.StartedAt}}</td><td>{{.Fidelity}}</td><td><code>{{.Commit}}</code></td><td>{{.Green}}</td><td>{{.Red}}</td><td>{{.NewFinding}}</td><td>{{.RuntimeMS}}</td></tr>{{else}}<tr><td colspan="7" class="muted">还没有 run。</td></tr>{{end}}

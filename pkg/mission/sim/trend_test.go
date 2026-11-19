@@ -1,10 +1,12 @@
 package sim
 
 import (
+	"encoding/json"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 )
@@ -44,4 +46,38 @@ not-json
 	md, err := os.ReadFile(out.MD)
 	require.NoError(t, err)
 	require.Contains(t, string(md), "runs: 2")
+}
+
+// TestWriteTrendIncludesFrameGate 验证 frame/history.jsonl 会同时进入 trend.md/html/ai JSON。
+// 场景：reports 目录既有一次仿真 run，又有一条渲染帧门禁记录（p99 15ms、预算 16.7ms 通过）；
+// 定期运行需要把仿真趋势与真实渲染帧门禁放在同一份 trend 里看。
+// 预期：trend.md 含 "frame gate: latest p99 15.000 ms (pass"，trend.html 含「渲染帧门禁」，
+// ai/trend.json 的 frame.samples=1、latestP99Ms=15、latestPass=true。
+// 覆盖：写 history.jsonl + AppendFrameHistory 后调用 WriteTrend，分别读 md/html/json 断言。
+func TestWriteTrendIncludesFrameGate(t *testing.T) {
+	dir := t.TempDir()
+	history := `{"runId":"r1","startedAt":"2026-11-19 10:00:00","fidelity":"F1","scorecard":{"green":3,"red":1},"findings":{"new":0},"runtimeMs":10}
+`
+	require.NoError(t, os.WriteFile(filepath.Join(dir, "history.jsonl"), []byte(history), 0o644))
+	entry := NewFrameHistoryEntry(
+		FrameReport{Frames: 60, P99MS: 15, Budget: 16.7, Pass: true},
+		"abc", false, time.Date(2026, 11, 20, 6, 0, 0, 0, time.UTC),
+	)
+	require.NoError(t, AppendFrameHistory(dir, entry))
+
+	out, err := WriteTrend(Paths{Reports: dir}, 10)
+	require.NoError(t, err)
+	md, err := os.ReadFile(out.MD)
+	require.NoError(t, err)
+	require.Contains(t, string(md), "frame gate: latest p99 15.000 ms (pass")
+	html, err := os.ReadFile(out.HTML)
+	require.NoError(t, err)
+	require.Contains(t, string(html), "渲染帧门禁")
+	payload, err := os.ReadFile(out.AIJSON)
+	require.NoError(t, err)
+	var trend TrendData
+	require.NoError(t, json.Unmarshal(payload, &trend))
+	require.Equal(t, 1, trend.Frame.Samples)
+	require.InDelta(t, 15, trend.Frame.LatestP99MS, 1e-9)
+	require.True(t, trend.Frame.LatestPass)
 }

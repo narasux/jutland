@@ -73,6 +73,11 @@ go run ./cmd/jutland-sim run --mock demo-report
 new findings, fidelity and runtime; `index.html` links to it. This is the first
 periodic/LLM-analysis building block, not yet a scheduler.
 
+The rendered-frame gate (`make sim-frame-gate` / `jutland-frame`) appends each
+result to `reports/frame/history.jsonl` when `JUTLAND_SIM_HOME` is set; trend
+adds a 渲染帧门禁 line/card with latest/avg/worst p99 and the pass status, so real
+frame-time regressions show up next to the simulation runs.
+
 `jutland-sim analyze [--limit N]` writes `ai/analysis-brief.md` and
 `ai/analysis-brief.json`: recurring findings, recurring red scorecards,
 per-scenario multi-run means (shots/losses/p99), finding lifecycle
