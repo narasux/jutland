@@ -55,6 +55,8 @@ func run(args []string) error {
 		return cmdCompareRecord(args[1:])
 	case "llm-package":
 		return cmdLLMPackage(args[1:])
+	case "llm-review":
+		return cmdLLMReview(args[1:])
 	case "watch":
 		return cmdWatch(args[1:])
 	case "archive":
@@ -530,6 +532,33 @@ func cmdLLMPackage(args []string) error {
 		return err
 	}
 	fmt.Printf("package: %s\n", dir)
+	return nil
+}
+
+func cmdLLMReview(args []string) error {
+	fs := flag.NewFlagSet("llm-review", flag.ContinueOnError)
+	out := fs.String("out", "", "override report directory")
+	dryRun := fs.Bool("dry-run", false, "write request JSON without calling the API")
+	flagArgs, pos := cliutil.Split(args, "dry-run")
+	if err := fs.Parse(flagArgs); err != nil {
+		return err
+	}
+	if len(pos) < 1 {
+		return fmt.Errorf("llm-review requires a run id")
+	}
+	paths, err := sim.ResolvePaths(*out)
+	if err != nil {
+		return err
+	}
+	result, err := sim.ReviewRun(paths, strings.TrimSpace(pos[0]), *dryRun)
+	if err != nil {
+		return err
+	}
+	if result == "" {
+		fmt.Println("dry-run: request written to ai/llm-request.json")
+	} else {
+		fmt.Printf("review: %s\n", result)
+	}
 	return nil
 }
 
