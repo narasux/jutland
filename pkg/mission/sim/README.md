@@ -101,6 +101,22 @@ requires a working window/graphics session and is not a CI gate.
 
 `tools/sim-periodic.sh` is suitable for cron/launchd; it does not schedule itself.
 
+## In-game debug recording (P8, partial)
+
+```bash
+JUTLAND_DEBUG_RECORD_DIR="$JUTLAND_SIM_HOME/reports/recordings" ./jutland
+```
+
+The game writes `<mission>/record-<timestamp>.jsonl` with `shot/hit/sink/loss`
+envelopes. Default is off; the game keeps the observer nil. Compare a recording
+to a simulation run:
+
+```bash
+go run ./cmd/jutland-sim compare-record <record.jsonl> <run-id>
+```
+
+This is an event-level calibration aid, not a full replay.
+
 ## Archive (P9)
 
 `jutland-sim archive --keep N` moves older `reports/runs/*` into

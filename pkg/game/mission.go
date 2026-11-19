@@ -154,6 +154,7 @@ func (g *Game) handleMissionLoading() error {
 	}
 	if g.missionMgr == nil {
 		g.missionMgr = manager.New(g.curMission, g.currentMissionPlayerSide())
+		g.attachDebugRecorder()
 	}
 	if !g.missionMgr.WarmupMapBlocks() {
 		return nil
@@ -164,6 +165,7 @@ func (g *Game) handleMissionLoading() error {
 
 // startMissionLoading 进入关卡加载状态，并重置加载界面与完成音效状态。
 func (g *Game) startMissionLoading() {
+	g.closeDebugRecorder()
 	g.objStates.LoadingInterface.Reset()
 	if g.missionMgr != nil {
 		g.missionMgr.ClearBattleStats()

@@ -51,6 +51,8 @@ func run(args []string) error {
 		return cmdPerf(args[1:])
 	case "compare":
 		return cmdCompare(args[1:])
+	case "compare-record":
+		return cmdCompareRecord(args[1:])
 	case "watch":
 		return cmdWatch(args[1:])
 	case "archive":
@@ -476,6 +478,29 @@ func cmdArchive(args []string) error {
 	if *dryRun {
 		fmt.Println("dry-run: no files moved")
 	}
+	return nil
+}
+
+func cmdCompareRecord(args []string) error {
+	fs := flag.NewFlagSet("compare-record", flag.ContinueOnError)
+	out := fs.String("out", "", "override report directory")
+	flagArgs, pos := cliutil.Split(args)
+	if err := fs.Parse(flagArgs); err != nil {
+		return err
+	}
+	if len(pos) < 2 {
+		return fmt.Errorf("compare-record requires <recording.jsonl> <run>")
+	}
+	paths, err := sim.ResolvePaths(*out)
+	if err != nil {
+		return err
+	}
+	info, err := sim.WriteRecordingComparison(paths, strings.TrimSpace(pos[0]), strings.TrimSpace(pos[1]))
+	if err != nil {
+		return err
+	}
+	fmt.Printf("compare: %s\n", info.Markdown)
+	fmt.Printf("json:    %s\n", info.JSON)
 	return nil
 }
 

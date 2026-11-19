@@ -21,6 +21,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/manager"
 	"github.com/narasux/jutland/pkg/mission/metadata"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
+	"github.com/narasux/jutland/pkg/mission/observer"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	"github.com/narasux/jutland/pkg/resources/font"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -47,6 +48,8 @@ type Game struct {
 	curMissionPlayerSide faction.Side
 	// 任务管理
 	missionMgr *manager.MissionManager
+	// 调试战斗录制；默认 nil
+	debugRecord *observer.StreamRecorder
 	// 结算时的成功 / 失败模式，战役总结背景使用
 	resultMode GameMode
 	// 胜负全屏图至少展示的帧数，防止战斗末尾的点击直接跳过
@@ -393,6 +396,7 @@ func (g *Game) applyLanguage(value string) {
 
 // 游戏结束
 func (g *Game) handleGameEnd() error {
+	g.closeDebugRecorder()
 	// 播放游戏结束的 BGM
 	g.player.PlayLazy(audioRes.NewGameEndBackground)
 	if isAnyNextInput() {
