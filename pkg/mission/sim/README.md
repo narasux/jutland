@@ -82,6 +82,22 @@ findings/metrics/diagnostics/changes and `llm-prompt.md` into
 `reports/llm/<run>/`, plus a token estimate; HTML/CSV are excluded. It is a deterministic aggregation step; no external LLM
 call is made.
 
+## Suite manifests (P9)
+
+`jutland-suite suite <manifest>` runs JSON5 steps under the lab `suites/` dir:
+
+```json5
+{ name: "smoke", steps: [
+  { mode: "shot", scenario: "shot-f0", runs: 100 },
+  { mode: "duel", scenario: "duel-jiujiang", seeds: [1, 3] },
+  { mode: "macro", scenario: "macro-pearl", seeds: [1, 3], ticks: 12000 },
+]}
+```
+
+It writes each run through the normal report pipeline and a suite summary under
+`reports/suites/`. F1/F2/F3 steps need game resources/Ebiten; F0-only suites run
+without a simulation window. `make sim-suite` remains the shell-based smoke loop.
+
 ## Local CI / periodic analysis
 
 ```bash
