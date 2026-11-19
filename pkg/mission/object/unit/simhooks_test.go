@@ -51,3 +51,21 @@ func TestPlaneUIDGeneratorHook(t *testing.T) {
 		t.Fatal("plane UID generator was not restored")
 	}
 }
+
+// TestSimClockMillisAdvancesWithTicks 验证无头时钟按模拟拍推进，而不是锁在固定墙钟。
+// 场景：航母起飞冷却读 NowMillis；固定时钟会让整场只起飞一架，之后所有起飞点永久冷却。
+// 预期：基准 1000ms 下，SimTick=0 返回 1000，SimTick=60 返回 2000，SimTick=90 返回 2500。
+// 覆盖：安装 SimClockMillis(1000) 后依次 SetSimTick(0/60/90) 断言 NowMillis，Cleanup 恢复 SimTick。
+func TestSimClockMillisAdvancesWithTicks(t *testing.T) {
+	oldTick := SimTick()
+	t.Cleanup(func() { SetSimTick(oldTick) })
+	restore := SetNowMillis(SimClockMillis(1000))
+	defer restore()
+
+	SetSimTick(0)
+	require.Equal(t, int64(1000), NowMillis())
+	SetSimTick(60)
+	require.Equal(t, int64(2000), NowMillis())
+	SetSimTick(90)
+	require.Equal(t, int64(2500), NowMillis())
+}
