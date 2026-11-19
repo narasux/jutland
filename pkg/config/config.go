@@ -140,6 +140,9 @@ type GameSettings struct {
 	EnableLandAirfield bool `json:"enableLandAirfield"`
 	// EnableFogOfWar 战争迷雾总开关。关闭时任务不建视野图，逻辑与全图可见一致。
 	EnableFogOfWar bool `json:"enableFogOfWar"`
+	// EnablePenetration 实验性穿甲伤害总开关。默认关闭；开启后按弹药穿深/舰体装甲
+	// 计算伤害倍率，未穿透会显著减伤，过穿会略微增伤。
+	EnablePenetration bool `json:"enablePenetration"`
 	// EnableMinimap 小地图总开关。默认开启：开局自动展开右上战术面板展示小地图；
 	// 关闭后依然可以点面板把手手动展开。
 	EnableMinimap bool `json:"enableMinimap"`
@@ -341,8 +344,9 @@ func SaveGameSettings() error {
 	_, _ = file.WriteString("// ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示\n")
 	_, _ = file.WriteString(
 		"// wakeTrail: 战舰水面尾流参数，length 航迹长度 0.40~2.50、width 宽度 0.40~2.00、" +
-			"opacity 浓度 0.20~1.50，默认均为 1.00\n\n",
+			"opacity 浓度 0.20~1.50，默认均为 1.00\n",
 	)
+	_, _ = file.WriteString("// EnablePenetration: 实验性穿甲伤害开关，默认关闭；开启后按弹药穿深/舰体装甲缩放伤害\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

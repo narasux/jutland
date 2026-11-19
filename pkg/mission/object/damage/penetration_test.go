@@ -39,3 +39,24 @@ func TestResolvePenetrationZeroArmor(t *testing.T) {
 		t.Fatalf("zero armor = %+v", result)
 	}
 }
+
+// TestPenetrationMultiplier 验证实验穿甲倍率的未穿/穿透/过穿边界。
+// 场景：ratio=0（下限）、0.5（部分穿）、1（刚好穿）、3（过穿封顶）。
+// 预期：0.2、0.6、1.0、1.35；失败说明伤害映射发生跳变或没有封顶。
+// 覆盖：四个比例点，浮点容差断言。
+func TestPenetrationMultiplier(t *testing.T) {
+	cases := []struct {
+		ratio float64
+		want  float64
+	}{
+		{0, 0.2},
+		{0.5, 0.6},
+		{1, 1},
+		{3, 1.35},
+	}
+	for _, tc := range cases {
+		if got := PenetrationMultiplier(tc.ratio); math.Abs(got-tc.want) > 1e-9 {
+			t.Fatalf("ratio %v = %v, want %v", tc.ratio, got, tc.want)
+		}
+	}
+}
