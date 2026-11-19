@@ -43,6 +43,7 @@ func TestWriteAnalysisBriefAggregatesHistory(t *testing.T) {
 	require.Equal(t, 2, brief.Runs)
 	require.Len(t, brief.RecurringFindings, 1)
 	require.Equal(t, "F3-NO-SHOTS", brief.RecurringFindings[0].ID)
+	require.True(t, brief.RecurringFindings[0].Fixed)
 	require.Len(t, brief.RedScorecards, 1)
 	require.Equal(t, "status", brief.RedScorecards[0].Metric)
 	require.Len(t, brief.ScenarioSummaries, 1)
