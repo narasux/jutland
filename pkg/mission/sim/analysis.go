@@ -88,6 +88,8 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 		brief.Until = entries[len(entries)-1].StartedAt
 	}
 	findings := map[string]*FindingGroup{}
+	findingScenario := map[string]string{}
+	latestByScenario := map[string]string{}
 	scores := map[string]*ScoreGroup{}
 	type scenarioAgg struct {
 		runs, shots, ownSunk, enemySunk, p99 float64
@@ -108,10 +110,14 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 		if err != nil {
 			continue
 		}
+		if result.Scenario.Name != "" {
+			latestByScenario[result.Scenario.Name] = entry.StartedAt
+		}
 		for _, finding := range result.Findings {
 			if finding.Status == "fixed" || finding.Status == "noise" {
 				continue
 			}
+			findingScenario[finding.ID] = result.Scenario.Name
 			group := findings[finding.ID]
 			if group == nil {
 				group = &FindingGroup{
@@ -159,13 +165,12 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 			group.Count++
 		}
 	}
-	if len(entries) > 0 {
-		latest := entries[len(entries)-1]
-		for id, group := range findings {
-			if group.LastSeen != latest.StartedAt {
-				group.Fixed = true
-				findings[id] = group
-			}
+	for id, group := range findings {
+		scenario := findingScenario[id]
+		latest := latestByScenario[scenario]
+		if latest != "" && group.LastSeen != latest {
+			group.Fixed = true
+			findings[id] = group
 		}
 	}
 	for _, group := range findings {

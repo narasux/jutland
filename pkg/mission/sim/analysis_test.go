@@ -10,9 +10,9 @@ import (
 )
 
 // TestWriteAnalysisBriefAggregatesHistory 验证跨 run 分析简报聚合 finding 与红色指标。
-// 场景：history 中一条 run，result.json 含一个 high finding 与一个 red scorecard；另一条 run 缺失 result 也要跳过。
-// 预期：生成 analysis-brief.md/json；JSON 中 RecurringFindings/RedScorecards 各 1，Prompt 非空，md 含 finding ID。
-// 覆盖：临时 reports 目录写 history.jsonl + runs/r1/result.json，调用 WriteAnalysisBrief 断言产物与聚合。
+// 场景：r1 含 high finding + red scorecard；r2 同场景但无 finding，用来判断 r1 finding 已修复。
+// 预期：RecurringFindings/RedScorecards 各 1；F3-NO-SHOTS 的 Fixed=true；Prompt 非空，md 含 finding ID。
+// 覆盖：临时 reports 目录写两条 history 与 r1/r2 result.json，验证按场景最新 run 判定 fixed。
 func TestWriteAnalysisBriefAggregatesHistory(t *testing.T) {
 	dir := t.TempDir()
 	runDir := filepath.Join(dir, "runs", "r1")
@@ -30,6 +30,12 @@ func TestWriteAnalysisBriefAggregatesHistory(t *testing.T) {
 	data, err := json.Marshal(result)
 	require.NoError(t, err)
 	require.NoError(t, os.WriteFile(filepath.Join(runDir, "result.json"), data, 0o644))
+	r2Dir := filepath.Join(dir, "runs", "r2")
+	require.NoError(t, os.MkdirAll(r2Dir, 0o755))
+	r2 := Result{SchemaVersion: 1, Scenario: Scenario{Name: "f3-test"}}
+	r2Data, err := json.Marshal(r2)
+	require.NoError(t, err)
+	require.NoError(t, os.WriteFile(filepath.Join(r2Dir, "result.json"), r2Data, 0o644))
 	history := `{"runId":"r1","startedAt":"2026-11-19 10:00:00","fidelity":"F3","scorecard":{"green":1,"red":1},"findings":{"new":1},"runtimeMs":10,"report":"runs/r1/report.html"}
 {"runId":"r2","startedAt":"2026-11-19 11:00:00","fidelity":"F3","scorecard":{"green":1},"findings":{},"runtimeMs":10,"report":"runs/r2/report.html"}
 `
