@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 )
@@ -50,4 +51,42 @@ func TestWriteComparisonDiffsRuns(t *testing.T) {
 	md, err := os.ReadFile(out.Markdown)
 	require.NoError(t, err)
 	require.Contains(t, string(md), "F-NEW")
+}
+
+// TestWriteComparisonToPreviousUsesHistory 验证单 run compare 会找同 scenario 的上一条历史。
+// 场景：r1 10:00、r2 11:00，均为 scenario=s；history 两条；只传 r2。
+// 预期：生成 compare/r1__r2.md，A/B runId 正确；找不到前序时返回错误。
+// 覆盖：LoadHistory + 同 scenario 回溯 + WriteComparison。
+func TestWriteComparisonToPreviousUsesHistory(t *testing.T) {
+	dir := t.TempDir()
+	writeRun := func(run, started string, value float64) {
+		runDir := filepath.Join(dir, "runs", run)
+		require.NoError(t, os.MkdirAll(runDir, 0o755))
+		result := Result{
+			Scenario:  Scenario{Name: "s"},
+			StartedAt: mustTime(t, started),
+			Metrics:   []MetricRow{{Name: "shots", Value: value}},
+		}
+		payload, err := json.Marshal(result)
+		require.NoError(t, err)
+		require.NoError(t, os.WriteFile(filepath.Join(runDir, "result.json"), payload, 0o644))
+	}
+	writeRun("r1", "2026-11-19T10:00:00+08:00", 10)
+	writeRun("r2", "2026-11-19T11:00:00+08:00", 20)
+	history := `{"runId":"r1","startedAt":"2026-11-19 10:00:00"}
+{"runId":"r2","startedAt":"2026-11-19 11:00:00"}
+`
+	require.NoError(t, os.WriteFile(filepath.Join(dir, "history.jsonl"), []byte(history), 0o644))
+	out, err := WriteComparisonToPrevious(Paths{Reports: dir}, "r2")
+	require.NoError(t, err)
+	require.Contains(t, out.Markdown, "r1__r2")
+	_, err = WriteComparisonToPrevious(Paths{Reports: dir}, "r1")
+	require.Error(t, err)
+}
+
+func mustTime(t *testing.T, value string) time.Time {
+	t.Helper()
+	parsed, err := time.Parse(time.RFC3339, value)
+	require.NoError(t, err)
+	return parsed
 }

@@ -237,3 +237,35 @@ func firstNonEmpty(values ...string) string {
 func roundCompare(v float64) float64 {
 	return float64(int(v*1000+0.5)) / 1000
 }
+
+// WriteComparisonToPrevious compares a run to the most recent earlier run of
+// the same scenario in history.jsonl. It returns an error when no predecessor
+// exists (for example the first run of a scenario).
+func WriteComparisonToPrevious(paths Paths, runArg string) (CompareOutput, error) {
+	target, targetID, err := loadComparisonRun(paths, runArg)
+	if err != nil {
+		return CompareOutput{}, err
+	}
+	history, err := LoadHistory(paths.Reports)
+	if err != nil {
+		return CompareOutput{}, err
+	}
+	for i := len(history) - 1; i >= 0; i-- {
+		entry := history[i]
+		if entry.RunID == targetID {
+			continue
+		}
+		prev, prevID, err := loadComparisonRun(paths, entry.RunID)
+		if err != nil {
+			continue
+		}
+		if prev.Scenario.Name != target.Scenario.Name {
+			continue
+		}
+		if prev.StartedAt.After(target.StartedAt) {
+			continue
+		}
+		return WriteComparison(paths, prevID, targetID)
+	}
+	return CompareOutput{}, fmt.Errorf("no previous run for scenario %q", target.Scenario.Name)
+}

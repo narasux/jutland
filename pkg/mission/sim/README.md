@@ -154,6 +154,7 @@ Compare two runs (metrics delta, scorecard changes, findings added/gone):
 
 ```bash
 go run ./cmd/jutland-sim compare <runA> <runB>
+go run ./cmd/jutland-sim compare <runB>       # vs previous same-scenario run
 ```
 
 Output goes to `reports/compare/<a>__<b>.md` and `.json`.
