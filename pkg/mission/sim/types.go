@@ -110,6 +110,7 @@ type Result struct {
 	StartedAt     time.Time       `json:"startedAt"`
 	DurationMS    int64           `json:"durationMs"`
 	Scorecard     []ScorecardItem `json:"scorecard"`
+	PreviousDiff  *CompareReport  `json:"previousDiff,omitempty"`
 	Metrics       []MetricRow     `json:"metrics"`
 	Findings      []Finding       `json:"findings"`
 	Diagnostics   []Diagnostic    `json:"diagnostics"`

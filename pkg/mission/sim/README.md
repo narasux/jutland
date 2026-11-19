@@ -127,6 +127,13 @@ requires a working window/graphics session and is not a CI gate.
 
 `tools/sim-periodic.sh` is suitable for cron/launchd; it does not schedule itself.
 
+## Previous-run diff (P9, first pass)
+
+Every report now tries to find the previous same-scenario run before writing
+history. If found, `result.json.previousDiff` is embedded and the HTML/Markdown
+reports show metric deltas, scorecard changes, added findings and gone findings.
+The first run of a scenario has no diff section.
+
 ## In-game debug recording (P8, partial)
 
 ```bash

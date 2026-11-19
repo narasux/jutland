@@ -50,16 +50,8 @@ type CompareOutput struct {
 	JSON     string
 }
 
-// WriteComparison reads two runs and writes compare/<a>__<b>.{md,json}.
-func WriteComparison(paths Paths, aArg, bArg string) (CompareOutput, error) {
-	a, aID, err := loadComparisonRun(paths, aArg)
-	if err != nil {
-		return CompareOutput{}, err
-	}
-	b, bID, err := loadComparisonRun(paths, bArg)
-	if err != nil {
-		return CompareOutput{}, err
-	}
+// BuildComparison compares two in-memory results.
+func BuildComparison(a, b *Result, aID, bID string) CompareReport {
 	report := CompareReport{
 		SchemaVersion: 1, GeneratedAt: time.Now(), ARun: aID, BRun: bID,
 		AMeta: a.Scenario.Name, BMeta: b.Scenario.Name,
@@ -123,6 +115,20 @@ func WriteComparison(paths Paths, aArg, bArg string) (CompareOutput, error) {
 		}
 	}
 	sort.Strings(report.ScoreChanges)
+	return report
+}
+
+// WriteComparison reads two runs and writes compare/<a>__<b>.{md,json}.
+func WriteComparison(paths Paths, aArg, bArg string) (CompareOutput, error) {
+	a, aID, err := loadComparisonRun(paths, aArg)
+	if err != nil {
+		return CompareOutput{}, err
+	}
+	b, bID, err := loadComparisonRun(paths, bArg)
+	if err != nil {
+		return CompareOutput{}, err
+	}
+	report := BuildComparison(a, b, aID, bID)
 	dir := filepath.Join(paths.Reports, "compare")
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return CompareOutput{}, err
@@ -141,6 +147,31 @@ func WriteComparison(paths Paths, aArg, bArg string) (CompareOutput, error) {
 		return CompareOutput{}, err
 	}
 	return CompareOutput{Markdown: mdPath, JSON: jsonPath}, nil
+}
+
+// PreviousComparison finds the previous same-scenario result before target and
+// builds an in-memory diff for embedding in the target report.
+func PreviousComparison(paths Paths, target *Result) *CompareReport {
+	if target == nil {
+		return nil
+	}
+	history, err := LoadHistory(paths.Reports)
+	if err != nil {
+		return nil
+	}
+	for i := len(history) - 1; i >= 0; i-- {
+		entry := history[i]
+		prev, prevID, err := loadComparisonRun(paths, entry.RunID)
+		if err != nil || prev.Scenario.Name != target.Scenario.Name {
+			continue
+		}
+		if !prev.StartedAt.Before(target.StartedAt) {
+			continue
+		}
+		report := BuildComparison(prev, target, prevID, "this-run")
+		return &report
+	}
+	return nil
 }
 
 func loadComparisonRun(paths Paths, arg string) (*Result, string, error) {
