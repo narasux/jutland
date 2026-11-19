@@ -75,7 +75,11 @@ periodic/LLM-analysis building block, not yet a scheduler.
 `jutland-sim analyze [--limit N]` writes `ai/analysis-brief.md` and
 `ai/analysis-brief.json`: recurring findings, recurring red scorecards,
 per-scenario multi-run means (shots/losses/p99), finding lifecycle
-(first/last/fixed), recent runs and an LLM prompt. It is a deterministic aggregation step; no external LLM
+(first/last/fixed), recent runs and an LLM prompt.
+
+`jutland-sim llm-package <run>` copies only `analysis-context.md`,
+findings/metrics/diagnostics/changes and `llm-prompt.md` into
+`reports/llm/<run>/`, plus a token estimate; HTML/CSV are excluded. It is a deterministic aggregation step; no external LLM
 call is made.
 
 ## Local CI / periodic analysis
