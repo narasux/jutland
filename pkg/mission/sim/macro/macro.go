@@ -78,13 +78,21 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		damage += hit.AppliedDamage
 	}
 	ownSunk, enemySunk, ownTonnage, enemyTonnage := 0, 0, 0.0, 0.0
+	// 空袭归因：只统计击杀者是飞机的沉没，用来区分舰载机与水面火力的战果。
+	ownSunkByAir, enemySunkByAir := 0, 0
 	for _, sink := range recorder.Sinks {
 		if sink.TargetPlayer == faction.HumanAlpha {
 			ownSunk++
 			ownTonnage += sink.Tonnage
+			if sink.KillerIsPlane {
+				ownSunkByAir++
+			}
 		} else {
 			enemySunk++
 			enemyTonnage += sink.Tonnage
+			if sink.KillerIsPlane {
+				enemySunkByAir++
+			}
 		}
 	}
 	ownPlanesLost, enemyPlanesLost := 0, 0
@@ -165,6 +173,8 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		{Group: "损失", Name: "enemy_tonnage", Value: round3(enemyTonnage), Unit: "t"},
 		{Group: "空中", Name: "own_aircraft_losses", Value: float64(ownPlanesLost), Unit: "planes"},
 		{Group: "空中", Name: "enemy_aircraft_losses", Value: float64(enemyPlanesLost), Unit: "planes"},
+		{Group: "空中", Name: "own_sunk_by_aircraft", Value: float64(ownSunkByAir), Unit: "ships"},
+		{Group: "空中", Name: "enemy_sunk_by_aircraft", Value: float64(enemySunkByAir), Unit: "ships"},
 		{Group: "经济", Name: "funds", Value: float64(ms.Player.CurFunds), Unit: "funds"},
 		{Group: "经济", Name: "funds_spent", Value: float64(ms.Stats.FundsSpent), Unit: "funds"},
 		{Group: "经济", Name: "funds_earned", Value: float64(ms.Stats.FundsEarned), Unit: "funds"},
