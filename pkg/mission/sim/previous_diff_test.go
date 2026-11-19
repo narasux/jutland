@@ -36,6 +36,9 @@ func TestWriteReportEmbedsPreviousDiff(t *testing.T) {
 	html, err := os.ReadFile(second.ReportHTML)
 	require.NoError(t, err)
 	require.Contains(t, string(html), "与上次对比")
+	ai, err := os.ReadFile(second.AIContext)
+	require.NoError(t, err)
+	require.Contains(t, string(ai), "Previous diff")
 
 	var result Result
 	payload, err := os.ReadFile(filepath.Join(second.Dir, "result.json"))
