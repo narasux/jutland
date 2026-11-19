@@ -29,7 +29,8 @@ P2 (separate package, already wired into production):
 
 P3 hooks (production defaults unchanged; headless runner wires them in P4):
 
-- `unit.SetNowMillis` for carrier takeoff / healing / construction;
+- `unit.SetNowMillis` for carrier takeoff / healing / construction; duel 和 macro runner
+  都用 `unit.SimClockMillis` 把它接到 `unit.SimTick()` 上，冷却按模拟拍推进而不是真实耗时；
 - `unit.SetPlaneUIDGenerator` for deterministic aircraft IDs;
 - `unit.SetRandSource` for seeded fire spread / criticals / AA;
 - ordered ship/plane fire and removal loops, ordered `combatIndex` buckets,
