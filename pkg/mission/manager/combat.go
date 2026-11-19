@@ -2,7 +2,6 @@ package manager
 
 import (
 	"math"
-	"math/rand"
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
@@ -60,6 +59,7 @@ func aaHitChance(diameter int, vulnerability float64) float64 {
 // excludeUid 用于排除已被直接命中的目标；返回是否造成伤害。
 func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid string) bool {
 	m.rebuildCombatBuckets()
+	bt.HitKind = "blast"
 	hit := false
 	m.combatBuckets.eachPlane(bt.CurPos.RX, bt.CurPos.RY, bombBlastRadius, func(plane *objUnit.Plane) bool {
 		if plane.Uid == excludeUid || !plane.IsOnGround() {
@@ -84,7 +84,7 @@ func (m *MissionManager) updateShipWeaponFire() {
 	isTorpedoLaunched := false
 	isRocketLaunched := false
 
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if !ship.Weapon.AnyReloaded() {
 			continue
 		}
@@ -107,10 +107,13 @@ func (m *MissionManager) updateShipWeaponFire() {
 				}
 			}
 		}
+		m.observeShots(bullets)
 		m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
 	}
 
-	m.weaponFirePlayer.PlayShipFire(maxBulletDiameter, isTorpedoLaunched, isRocketLaunched)
+	if !m.headless {
+		m.weaponFirePlayer.PlayShipFire(maxBulletDiameter, isTorpedoLaunched, isRocketLaunched)
+	}
 }
 
 // shipFireTargets 按武器类别分层选敌：主炮 / 鱼雷 / 火箭集火射程内
@@ -233,7 +236,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 	attackers := m.airAttackerCounts()
 	m.releaseSurplusAirAttackers(attackers)
 
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		// 战舰上没有飞机的，跳过
 		if !ship.Aircraft.HasPlane {
 			continue
@@ -263,7 +266,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		}
 	}
 
-	for _, plane := range m.state.Arena.Planes {
+	for _, plane := range m.state.Arena.OrderedPlanes() {
 		if !plane.IsCruising() {
 			continue
 		}
@@ -337,7 +340,7 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 // 滑跑中的飞机已经认领目标，也计入名额，避免同一架敌机在它起飞的几秒里被反复超额分配。
 func (m *MissionManager) airAttackerCounts() map[string]int {
 	counts := make(map[string]int)
-	for _, plane := range m.state.Arena.Planes {
+	for _, plane := range m.state.Arena.OrderedPlanes() {
 		if plane.CurHP <= 0 || plane.CurAttackTarget == "" || !plane.IsCruising() {
 			continue
 		}
@@ -359,7 +362,7 @@ func (m *MissionManager) airAttackerCounts() map[string]int {
 // 拆掉之后没有任何指令会再调用 UpdateTakeoff，飞机会永远停在跑道上不动
 // （实测 900 帧后仍停在跑道、速度为 0）。它们离地后由下一拍回收名额。
 func (m *MissionManager) releaseSurplusAirAttackers(attackers map[string]int) {
-	for _, plane := range m.state.Arena.Planes {
+	for _, plane := range m.state.Arena.OrderedPlanes() {
 		if plane.CurHP <= 0 || plane.CurAttackTarget == "" || !plane.IsCruising() {
 			continue
 		}
@@ -377,7 +380,7 @@ func (m *MissionManager) releaseSurplusAirAttackers(attackers map[string]int) {
 // 消费对空 / 对舰基地队列。无计划时保持待命，不在主循环扫描全场敌人。
 func (m *MissionManager) updateAirfieldAlertLaunch() {
 	attackers := m.airAttackerCounts()
-	for _, af := range m.state.Arena.Airfields {
+	for _, af := range m.state.Arena.OrderedAirfields() {
 		if !af.CanAlertLaunch() {
 			continue
 		}
@@ -400,7 +403,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 	m.rebuildCombatBuckets()
 	bombReleased, rocketLaunched, torpedoLaunched := false, false, false
 
-	for _, plane := range m.state.Arena.Planes {
+	for _, plane := range m.state.Arena.OrderedPlanes() {
 		if !plane.IsCruising() {
 			continue
 		}
@@ -420,6 +423,7 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 				continue
 			}
 			markBulletShooter(bullets, plane.Name, string(plane.Type))
+			m.observeShots(bullets)
 			// 镜头内的才统计
 			if m.state.View.Camera.Contains(plane.CurPos) {
 				for _, bt := range bullets {
@@ -440,7 +444,9 @@ func (m *MissionManager) updatePlaneWeaponFire() {
 		}
 	}
 
-	m.weaponFirePlayer.PlayPlaneFire(bombReleased, rocketLaunched, torpedoLaunched)
+	if !m.headless {
+		m.weaponFirePlayer.PlayPlaneFire(bombReleased, rocketLaunched, torpedoLaunched)
+	}
 }
 
 // planeFireTarget 优先返回飞机当前追击目标；目标不在射程内或缺失时再选择其他候选。
@@ -453,7 +459,7 @@ func (m *MissionManager) planeFireTarget(plane *objUnit.Plane) objUnit.Hurtable 
 	if len(candidates) == 0 {
 		return nil
 	}
-	return candidates[rand.Intn(len(candidates))]
+	return candidates[objUnit.RandIntn(len(candidates))]
 }
 
 // preferredPlaneFireTarget 优先返回当前追击目标，前提是目标有效且位于武器最大射程内。
@@ -573,6 +579,7 @@ func (m *MissionManager) updatePlaneDefensiveFire(plane *objUnit.Plane) {
 				return false
 			}
 			markBulletShooter(bullets, plane.Name, string(plane.Type))
+			m.observeShots(bullets)
 			m.state.Arena.ForwardingBullets = append(m.state.Arena.ForwardingBullets, bullets...)
 			return true
 		},
@@ -583,7 +590,7 @@ func (m *MissionManager) updatePlaneDefensiveFire(plane *objUnit.Plane) {
 // 若没有其他敌舰，则保留原指令，等飞离陆地后再尝试投放。
 func (m *MissionManager) retargetTorpedoBomber(plane *objUnit.Plane, skippedTargetUid string) {
 	targets := []objUnit.Hurtable{}
-	for _, enemy := range m.state.Arena.Ships {
+	for _, enemy := range m.state.Arena.OrderedShips() {
 		if plane.BelongPlayer == enemy.BelongPlayer || enemy.Uid == skippedTargetUid {
 			continue
 		}
@@ -593,7 +600,7 @@ func (m *MissionManager) retargetTorpedoBomber(plane *objUnit.Plane, skippedTarg
 		return
 	}
 
-	enemy := targets[rand.Intn(len(targets))]
+	enemy := targets[objUnit.RandIntn(len(targets))]
 	plane.CurAttackTarget = enemy.ID()
 	m.instructionSet.Add(instr.NewPlaneAttack(plane.Uid, enemy.ObjType(), enemy.ID()))
 }
@@ -633,6 +640,7 @@ func (m *MissionManager) depthChargeShouldExplode(bt *objBullet.Bullet) bool {
 // 走 hurtShip 而不是直接 HurtBy，保证战报能记下投弹方、武器与伤害。
 func (m *MissionManager) resolveDepthChargeDamage(bt *objBullet.Bullet) {
 	hit := false
+	bt.HitKind = "depth_charge"
 	m.combatBuckets.eachShip(
 		bt.CurPos.RX, bt.CurPos.RY, bt.BlastRadius,
 		func(ship *objUnit.BattleShip) bool {
@@ -731,7 +739,7 @@ func (m *MissionManager) updateShotBullets() {
 						return false
 					}
 					if bt.ShooterObjType == object.TypeShip {
-						if rand.Float64() >= aaHitChance(bt.Diameter, plane.FlakVulnerability) {
+						if objUnit.RandFloat64() >= aaHitChance(bt.Diameter, plane.FlakVulnerability) {
 							return false
 						}
 					}
@@ -786,6 +794,7 @@ func (m *MissionManager) updateShotBullets() {
 
 	// resolveRocketDamage 处理火箭及对空编程炮弹的近炸破片范围伤害。
 	resolveRocketDamage := func(bt *objBullet.Bullet) {
+		bt.HitKind = "airburst"
 		m.combatBuckets.eachPlane(bt.CurPos.RX, bt.CurPos.RY, bt.BlastRadius, func(plane *objUnit.Plane) bool {
 			if bt.Shooter == plane.Uid {
 				return false
@@ -807,7 +816,7 @@ func (m *MissionManager) updateShotBullets() {
 			m.state.Arena.Explosions,
 			objExplosion.NewRocket(bt.CurPos.Copy(), bt.Rotation, bt.BelongPlayer),
 		)
-		if m.state.View.Camera.Contains(bt.CurPos) {
+		if !m.headless && m.state.View.Camera.Contains(bt.CurPos) {
 			m.weaponFirePlayer.PlayRocketExplode()
 		}
 	}

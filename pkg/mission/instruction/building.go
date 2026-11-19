@@ -2,9 +2,10 @@ package instruction
 
 import (
 	"fmt"
-	"math/rand"
 
 	"github.com/pkg/errors"
+
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 
 	"github.com/narasux/jutland/pkg/mission/state"
 )
@@ -34,7 +35,7 @@ func (i *ShipSummon) Exec(s *state.MissionState) error {
 	}
 	// 如果没指定，就随机来一个
 	if i.shipName == "" {
-		idx := rand.Intn(len(rp.ProvidedShipNames))
+		idx := objUnit.RandIntn(len(rp.ProvidedShipNames))
 		i.shipName = rp.ProvidedShipNames[idx]
 	}
 	rp.Summon(i.shipName)

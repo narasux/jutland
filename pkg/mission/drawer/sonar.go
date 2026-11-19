@@ -95,7 +95,8 @@ func addAngleRange(ranges *[]angleRange, start, end float64) {
 		return
 	}
 	if start > end {
-		*ranges = append(*ranges,
+		*ranges = append(
+			*ranges,
 			angleRange{start: start, end: sonarTwoPi},
 			angleRange{start: 0, end: end},
 		)

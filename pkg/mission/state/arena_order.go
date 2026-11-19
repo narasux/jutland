@@ -6,6 +6,7 @@ import (
 
 	"github.com/samber/lo"
 
+	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
 
@@ -107,4 +108,43 @@ func (a *MissionArenaState) OrderedPlanes() []*objUnit.Plane {
 		slices.SortFunc(a.orderedPlanes, planeUIDOrder)
 	}
 	return a.orderedPlanes
+}
+
+func reinforcePointUIDOrder(a, b *objBuilding.ReinforcePoint) int {
+	return strings.Compare(a.Uid, b.Uid)
+}
+
+func oilPlatformUIDOrder(a, b *objBuilding.OilPlatform) int {
+	return strings.Compare(a.Uid, b.Uid)
+}
+
+func airfieldUIDOrder(a, b *objBuilding.Airfield) int {
+	return strings.Compare(a.Uid, b.Uid)
+}
+
+// OrderedReinforcePoints 返回按 UID 排好的增援点。
+func (a *MissionArenaState) OrderedReinforcePoints() []*objBuilding.ReinforcePoint {
+	if len(a.orderedReinforcePoints) != len(a.ReinforcePoints) {
+		a.orderedReinforcePoints = lo.Values(a.ReinforcePoints)
+		slices.SortFunc(a.orderedReinforcePoints, reinforcePointUIDOrder)
+	}
+	return a.orderedReinforcePoints
+}
+
+// OrderedOilPlatforms 返回按 UID 排好的油井。
+func (a *MissionArenaState) OrderedOilPlatforms() []*objBuilding.OilPlatform {
+	if len(a.orderedOilPlatforms) != len(a.OilPlatforms) {
+		a.orderedOilPlatforms = lo.Values(a.OilPlatforms)
+		slices.SortFunc(a.orderedOilPlatforms, oilPlatformUIDOrder)
+	}
+	return a.orderedOilPlatforms
+}
+
+// OrderedAirfields 返回按 UID 排好的机场。
+func (a *MissionArenaState) OrderedAirfields() []*objBuilding.Airfield {
+	if len(a.orderedAirfields) != len(a.Airfields) {
+		a.orderedAirfields = lo.Values(a.Airfields)
+		slices.SortFunc(a.orderedAirfields, airfieldUIDOrder)
+	}
+	return a.orderedAirfields
 }

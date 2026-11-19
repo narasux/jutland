@@ -125,8 +125,11 @@ type MissionArenaState struct {
 	// 飞机
 	Planes map[string]*objUnit.Plane
 	// 按 UID 排好的绘制名单。只在增删时更新。
-	orderedShips  []*objUnit.BattleShip
-	orderedPlanes []*objUnit.Plane
+	orderedShips           []*objUnit.BattleShip
+	orderedPlanes          []*objUnit.Plane
+	orderedReinforcePoints []*objBuilding.ReinforcePoint
+	orderedOilPlatforms    []*objBuilding.OilPlatform
+	orderedAirfields       []*objBuilding.Airfield
 	// 正在前进的弹药信息（炮弹 / 鱼雷）
 	ForwardingBullets []*objBullet.Bullet
 }

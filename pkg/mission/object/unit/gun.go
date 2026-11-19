@@ -3,7 +3,6 @@ package unit
 import (
 	"log"
 	"math"
-	"math/rand"
 
 	"github.com/mohae/deepcopy"
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -134,14 +133,18 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 
 	for i := 0; i < g.BulletCount; i++ {
 		pos := targetPos.Copy()
-		// rand.Intn(3) - 1 算方向，rand.Float64() 算距离
-		pos.AddRx(float64(rand.Intn(3)-1) * rand.Float64() * radius)
-		pos.AddRy(float64(rand.Intn(3)-1) * rand.Float64() * radius)
+		// RandIntn(3) - 1 算方向，RandFloat64() 算距离
+		pos.AddRx(float64(RandIntn(3)-1) * RandFloat64() * radius)
+		pos.AddRy(float64(RandIntn(3)-1) * RandFloat64() * radius)
 		bt := objBullet.New(
 			g.BulletName, curPos, pos,
 			shooter.ID(), shooter.ObjType(), shooter.Player(),
 			enemy.ObjType(), bulletSpeed, life, plunge,
 		)
+		bt.WeaponName = g.Name
+		bt.TargetUID = enemy.ID()
+		bt.FireDistance = distance
+		bt.FireRangeRatio = rangePercent
 		g.applyAirburst(bt, enemy.ObjType())
 		bullets = append(bullets, bt)
 	}

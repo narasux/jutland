@@ -1,6 +1,8 @@
 package manager
 
 import (
+	"sort"
+
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -46,6 +48,14 @@ func (m *MissionManager) updateTargetPlanning() {
 	}
 
 	snapshot := m.buildTargetingSnapshot()
+	if m.syncTargeting {
+		m.targetingPlan = targeting.BuildPlan(snapshot)
+		m.clampTargetingCursors()
+		m.targetingBusy = false
+		m.targetingDirty = false
+		m.targetingLastRequestTick = m.simTick
+		return
+	}
 	m.targetingBusy = true
 	m.targetingDirty = false
 	m.targetingLastRequestTick = m.simTick
@@ -59,6 +69,15 @@ func (m *MissionManager) updateTargetPlanning() {
 	}()
 }
 
+// SetSyncTargeting 让目标规划在当前 tick 内同步完成。
+// 游戏默认 false，保持后台规划；headless 模拟开启，消除 goroutine 完成时机差异。
+func (m *MissionManager) SetSyncTargeting(sync bool) {
+	m.syncTargeting = sync
+	if sync {
+		m.targetingBusy = false
+	}
+}
+
 // buildTargetingSnapshot 复制主线程状态，生成后台规划所需的不可变输入。
 func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 	snapshot := targeting.Snapshot{
@@ -69,7 +88,7 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 		EnemyPlanes: make([]targeting.EnemyPlane, 0, len(m.state.Arena.Planes)),
 	}
 
-	for _, airfield := range m.state.Arena.Airfields {
+	for _, airfield := range m.state.Arena.OrderedAirfields() {
 		if !airfield.Aircraft.HasPlane {
 			continue
 		}
@@ -86,7 +105,7 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 			Groups: groups,
 		})
 	}
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if ship.CurHP <= 0 || !ship.Aircraft.HasPlane {
 			continue
 		}
@@ -98,7 +117,7 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 		})
 	}
 
-	for _, plane := range m.state.Arena.Planes {
+	for _, plane := range m.state.Arena.OrderedPlanes() {
 		if plane.CurHP <= 0 {
 			continue
 		}
@@ -128,7 +147,7 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 			Pos:        targeting.Point{X: plane.CurPos.RX, Y: plane.CurPos.RY},
 		})
 	}
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if ship.CurHP <= 0 {
 			continue
 		}
@@ -142,6 +161,17 @@ func (m *MissionManager) buildTargetingSnapshot() targeting.Snapshot {
 			Value:  shipTargetingValue(ship),
 		})
 	}
+	// 快照来自 map；按 UID 排序后，后台/同步规划不受插入顺序影响。
+	sort.Slice(snapshot.Bases, func(i, j int) bool { return snapshot.Bases[i].UID < snapshot.Bases[j].UID })
+	sort.Slice(snapshot.Planes, func(i, j int) bool { return snapshot.Planes[i].UID < snapshot.Planes[j].UID })
+	sort.Slice(
+		snapshot.EnemyShips,
+		func(i, j int) bool { return snapshot.EnemyShips[i].UID < snapshot.EnemyShips[j].UID },
+	)
+	sort.Slice(
+		snapshot.EnemyPlanes,
+		func(i, j int) bool { return snapshot.EnemyPlanes[i].UID < snapshot.EnemyPlanes[j].UID },
+	)
 	return snapshot
 }
 

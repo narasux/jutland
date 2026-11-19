@@ -2,7 +2,6 @@ package manager
 
 import (
 	"math"
-	"math/rand"
 
 	"github.com/narasux/jutland/pkg/audio"
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -10,6 +9,7 @@ import (
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	"github.com/narasux/jutland/pkg/mission/object/trail"
+	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	textureImg "github.com/narasux/jutland/pkg/resources/images/texture"
 	"github.com/narasux/jutland/pkg/utils/colorx"
@@ -125,23 +125,35 @@ func (m *MissionManager) updateExplosions() {
 // 更新局内战舰
 func (m *MissionManager) updateMissionShips() {
 	audioPlayQuota := 2
-	// 如果战舰 HP 为 0，则需要走消亡流程
-	for uid, ship := range m.state.Arena.Ships {
+	// 如果战舰 HP 为 0，则需要走消亡流程。
+	// 按 UID 遍历；先记账再统一 RemoveShip，避免在有序切片上边遍历边删除。
+	var removeUIDs []string
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if ship.CurHP <= 0 {
 			m.markTargetingDirty()
 			// 在战舰离场前记账：残骸动画结束、机库清空后无法再反推真实损失
+			planesLost := 0
+			for idx := range ship.Aircraft.Groups {
+				if count := int(ship.Aircraft.Groups[idx].CurCount); count > 0 {
+					planesLost += count
+				}
+			}
 			m.state.Stats.RecordShipLost(ship)
+			m.observeSink(ship, planesLost)
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			ship.CurHP = textureImg.MaxShipExplodeState
 
-			if audioPlayQuota > 0 && m.state.View.Camera.Contains(ship.CurPos) {
+			if !m.headless && audioPlayQuota > 0 && m.state.View.Camera.Contains(ship.CurPos) {
 				audio.PlayAudioToEnd(audioRes.NewShipExplode())
 				audioPlayQuota--
 			}
 
 			m.state.Arena.DestroyedShips = append(m.state.Arena.DestroyedShips, ship)
-			m.state.Arena.RemoveShip(uid)
+			removeUIDs = append(removeUIDs, ship.Uid)
 		}
+	}
+	for _, uid := range removeUIDs {
+		m.state.Arena.RemoveShip(uid)
 	}
 
 	// 消亡中的战舰会逐渐掉血到 0
@@ -163,28 +175,34 @@ func (m *MissionManager) updateMissionShips() {
 
 // 更新局内战机
 func (m *MissionManager) updateMissionPlanes() {
-	// 如果战机 HP 为 0，则需要走消亡流程
-	for uid, plane := range m.state.Arena.Planes {
+	// 如果战机 HP 为 0，则需要走消亡流程。
+	// 与战舰相同：按 UID 遍历，先记账再统一 RemovePlane。
+	var removeUIDs []string
+	for _, plane := range m.state.Arena.OrderedPlanes() {
 		if plane.CurHP <= 0 {
 			m.markTargetingDirty()
 			m.state.Stats.RecordPlaneLost(plane)
+			m.observeLoss(plane)
 			if base, ok := m.state.FindAircraftBase(plane.BelongShip); ok {
 				// 机场飞机损失：库存已在起飞时扣减，这里仅累计损失统计
 				if af, isAirfield := base.(*objBuilding.Airfield); isAirfield {
 					af.RecordLoss(plane.Name)
 				}
-				base.BaseAircraft().CancelLanding(uid)
+				base.BaseAircraft().CancelLanding(plane.Uid)
 			}
 			// 这里做了取巧，复用 CurHP 用于后续渲染爆炸效果
 			plane.CurHP = textureImg.MaxPlaneExplodeState
 
 			// 随机决定坠落偏转方向和幅度，存储在 RemainRange 中（借用该字段）
 			// 范围 [-0.5, 0.5]，正值右偏，负值左偏
-			plane.RemainRange = rand.Float64() - 0.5
+			plane.RemainRange = objUnit.RandFloat64() - 0.5
 
 			m.state.Arena.DestroyedPlanes = append(m.state.Arena.DestroyedPlanes, plane)
-			m.state.Arena.RemovePlane(uid)
+			removeUIDs = append(removeUIDs, plane.Uid)
 		}
+	}
+	for _, uid := range removeUIDs {
+		m.state.Arena.RemovePlane(uid)
 	}
 
 	mapCfg := m.state.Core.MissionMD.MapCfg

@@ -1,0 +1,24 @@
+{
+  schemaVersion: 1,
+  name: "duel-asw-porter-vs-sub",
+  description: "F2 反潜 smoke：Porter 深弹 vs 下潜潜艇，验证声呐探测/深弹落点。",
+  mode: "duel",
+  seed: 17,
+  runs: 1,
+  maxTicks: 3600,
+  environment: {
+    map: "open_sea",
+    speedMultiplier: 1.0,
+  },
+  duel: {
+    shooterFleet: [
+      { ship: "porter", count: 1 },
+    ],
+    targetFleet: [
+      { ship: "su_k_class", count: 1, initialHP: 800 },
+    ],
+    distance: 1,
+    doctrine: "auto",
+    maxTicks: 3600,
+  },
+}

@@ -94,12 +94,29 @@ func (m *MissionManager) hurtShip(ship *objUnit.BattleShip, bt *objBullet.Bullet
 	ship.LastAttackerPlayer = bt.BelongPlayer
 	ship.LastAttackerIsPlane = isPlane
 
+	beforeHP := ship.CurHP
 	beforeDamage := bt.RealDamage
 	ship.HurtBy(bt)
+	applied := bt.RealDamage - beforeDamage
+	effective := math.Min(applied, beforeHP)
+	overkill := applied - effective
 	info := bulletHitInfo(bt)
-	info.Damage = bt.RealDamage - beforeDamage
+	info.Damage = applied
 	ship.LastHit = info
 	ship.DamageTaken += info.Damage
+	m.observeHit(
+		bt,
+		ship.Uid,
+		ship.Name,
+		string(ship.Type),
+		ship.BelongPlayer,
+		false,
+		beforeHP,
+		ship.CurHP,
+		applied,
+		effective,
+		overkill,
+	)
 	if ship.CurHP <= 0 {
 		ship.SunkByHit = true
 		return
@@ -130,12 +147,29 @@ func (m *MissionManager) hurtPlane(plane *objUnit.Plane, bt *objBullet.Bullet) {
 	plane.LastAttackerPlayer = bt.BelongPlayer
 	plane.LastAttackerIsPlane = isPlane
 
+	beforeHP := plane.CurHP
 	beforeDamage := bt.RealDamage
 	plane.HurtBy(bt)
+	applied := bt.RealDamage - beforeDamage
+	effective := math.Min(applied, beforeHP)
+	overkill := applied - effective
 	info := bulletHitInfo(bt)
-	info.Damage = bt.RealDamage - beforeDamage
+	info.Damage = applied
 	plane.LastHit = info
 	plane.DamageTaken += info.Damage
+	m.observeHit(
+		bt,
+		plane.Uid,
+		plane.Name,
+		string(plane.Type),
+		plane.BelongPlayer,
+		true,
+		beforeHP,
+		plane.CurHP,
+		applied,
+		effective,
+		overkill,
+	)
 	if plane.CurHP <= 0 {
 		plane.ShotDown = true
 		return

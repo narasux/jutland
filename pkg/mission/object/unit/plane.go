@@ -3,11 +3,9 @@ package unit
 import (
 	"fmt"
 	"log"
-	"math/rand"
 	"strconv"
 	"strings"
 
-	"github.com/google/uuid"
 	"github.com/mohae/deepcopy"
 
 	"github.com/narasux/jutland/pkg/config"
@@ -576,7 +574,7 @@ func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
 
 	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
 	criticalType := objBullet.CriticalTypeNone
-	randVal := rand.Float64()
+	randVal := RandFloat64()
 	if randVal < bullet.CriticalRate/10 {
 		realDamage *= 10
 		criticalType = objBullet.CriticalTypeTenTimes
@@ -651,7 +649,7 @@ func NewPlane(
 	}
 	p := deepcopy.Copy(*plane).(Plane)
 
-	p.Uid = uuid.New().String()
+	p.Uid = NextPlaneUID()
 	p.CurSpeed = p.MaxSpeed
 	p.CurPos = curPos
 	p.CurRotation = rotation

@@ -10,33 +10,41 @@ import (
 	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 )
 
-// 计算下一帧任务状态
-func (m *MissionManager) updateMissionStatus() {
-	calcNextStatusByShips := func(curStatus state.MissionStatus) state.MissionStatus {
-		// 还有战舰在沉没，游戏继续
-		if len(m.state.Arena.DestroyedShips) != 0 {
-			return curStatus
-		}
-		// 检查所有战舰，判定胜利 / 失败
-		anySelfShip, anyEnemyShip := false, false
-		for _, ship := range m.state.Arena.Ships {
-			if ship.BelongPlayer == m.state.Player.CurPlayer {
-				anySelfShip = true
-			} else {
-				anyEnemyShip = true
-			}
-		}
-		// 自己的船都没了，失败
-		if !anySelfShip && len(m.state.Arena.DestroyedShips) == 0 {
-			return state.MissionFailed
-		}
-		// 敌人都不存在，胜利
-		if !anyEnemyShip && len(m.state.Arena.DestroyedShips) == 0 {
-			return state.MissionSuccess
-		}
+// calcNextStatusByShips 根据双方存活舰船计算下一帧状态；沉没动画未结束时保持当前状态。
+func (m *MissionManager) calcNextStatusByShips(curStatus state.MissionStatus) state.MissionStatus {
+	// 还有战舰在沉没，游戏继续
+	if len(m.state.Arena.DestroyedShips) != 0 {
 		return curStatus
 	}
+	// 检查所有战舰，判定胜利 / 失败
+	anySelfShip, anyEnemyShip := false, false
+	for _, ship := range m.state.Arena.OrderedShips() {
+		if ship.BelongPlayer == m.state.Player.CurPlayer {
+			anySelfShip = true
+		} else {
+			anyEnemyShip = true
+		}
+	}
+	// 自己的船都没了，失败
+	if !anySelfShip {
+		return state.MissionFailed
+	}
+	// 敌人都不存在，胜利
+	if !anyEnemyShip {
+		return state.MissionSuccess
+	}
+	return curStatus
+}
 
+// 计算下一帧任务状态
+func (m *MissionManager) updateMissionStatus() {
+	if m.headless {
+		switch m.state.Core.MissionStatus {
+		case state.MissionRunning, state.MissionInMap, state.MissionInBuilding:
+			m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
+		}
+		return
+	}
 	switch m.state.Core.MissionStatus {
 	case state.MissionRunning:
 		// 暂停游戏
@@ -45,7 +53,7 @@ func (m *MissionManager) updateMissionStatus() {
 			m.state.Core.ConfirmQuitMission = false
 			m.state.UI.PauseStats = false
 		}
-		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
+		m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
 	case state.MissionPaused:
 		if m.state.UI.DebugFlags.IsActive() {
 			// debug 模式下不展示暂停面板与实时战报，Q 直接退出，Esc 直接继续
@@ -146,7 +154,7 @@ func (m *MissionManager) updateMissionStatus() {
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.Core.MissionStatus = state.MissionRunning
 		}
-		m.state.Core.MissionStatus = calcNextStatusByShips(m.state.Core.MissionStatus)
+		m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
 	case state.MissionInTerminal:
 		// 退出终端模式
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {

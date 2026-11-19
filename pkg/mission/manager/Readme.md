@@ -222,7 +222,7 @@
 `updateHospitalShipHealing()` 更新医疗船和维修船治疗：
 
 - 只处理存活的医疗船或维修船。
-- 治疗间隔使用真实时间 `time.Now().UnixMilli()`，固定为 5000ms，不受游戏速度倍率影响。
+- 治疗间隔使用 `unit.NowMillis()`，固定为 5000ms，不受游戏速度倍率影响；无头模拟可通过 `SetNowMillis` 注入模拟时钟。
 - 目标必须同阵营、存活、未满血、位于 `HospitalShipEffectRange` 内。
 - 治疗量为 `ship.Length * ship.Width / 6`，不会超过目标最大 HP。
 - 治疗时生成绿色浮动文字。
@@ -422,7 +422,7 @@
 
 - 当飞机 `CurHP <= 0` 时，从 `Arena.Planes` 移入 `Arena.DestroyedPlanes`。
 - 进入消亡队列时，把 `CurHP` 设置为 `textureImg.MaxPlaneExplodeState`。
-- 使用 `RemainRange = rand.Float64() - 0.5` 临时保存坠落旋转偏转。
+- 使用 `RemainRange = unit.RandFloat64() - 0.5` 临时保存坠落旋转偏转（无头模拟可注入 seeded RNG）。
 - 消亡中的飞机每帧 `CurHP -= 1`。
 - 速度每帧减少 `MaxSpeed / 60`，直到 0。
 - 如果仍有速度，会按当前旋转保持惯性前进，并限制在地图边界内。

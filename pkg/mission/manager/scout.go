@@ -10,10 +10,10 @@ func (m *MissionManager) updateAutoScout() {
 	if m.state == nil || !m.state.Core.FogOfWar || m.instructionSet == nil {
 		return
 	}
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		m.launchAutoScout(&ship.Aircraft, ship)
 	}
-	for _, field := range m.state.Arena.Airfields {
+	for _, field := range m.state.Arena.OrderedAirfields() {
 		m.launchAutoScout(&field.Aircraft, field)
 	}
 }

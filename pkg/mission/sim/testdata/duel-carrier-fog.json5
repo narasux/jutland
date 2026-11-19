@@ -1,0 +1,25 @@
+{
+  schemaVersion: 1,
+  name: "duel-carrier-fog",
+  description: "F2 合同作战 smoke：Enterprise 舰载机 vs 单艘驱逐舰，验证起飞/投弹/防空。",
+  mode: "duel",
+  seed: 11,
+  runs: 1,
+  maxTicks: 6000,
+  environment: {
+    map: "open_sea",
+    fog: true,
+    speedMultiplier: 1.0,
+  },
+  duel: {
+    shooterFleet: [
+      { ship: "enterprise", count: 1 },
+    ],
+    targetFleet: [
+      { ship: "jiujiang", count: 1, initialHP: 5000 },
+    ],
+    distance: 5,
+    doctrine: "auto",
+    maxTicks: 6000,
+  },
+}

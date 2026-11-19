@@ -27,7 +27,12 @@ go.work
 # custom
 raw_resources/
 /scripts
-tools/
+# local simulation helper scripts (keep only the documented ones)
+tools/*
+!tools/sim-ci.sh
+!tools/sim-periodic.sh
+!tools/perf-gate.sh
+!tools/sim-suite.sh
 bin/
 
 ideas.md
@@ -43,8 +48,17 @@ openspec
 
 jutland
 jutland.log
+/jutland-sim
+/jutland-duel
+/jutland-macro
 
 .DS_Store
 
 # 本地计划文档
 plans/
+
+# 本地模拟/平衡报告（生成物、体积大，不提交）
+/reports/
+
+# 本地模拟实验数据（场景/golden/基线），推荐放私有仓库并用 JUTLAND_SIM_HOME 指向
+/sim/

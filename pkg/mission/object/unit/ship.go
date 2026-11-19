@@ -3,7 +3,6 @@ package unit
 import (
 	"fmt"
 	"math"
-	"math/rand"
 	"strings"
 
 	"github.com/mohae/deepcopy"
@@ -14,6 +13,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objDamage "github.com/narasux/jutland/pkg/mission/object/damage"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objRef "github.com/narasux/jutland/pkg/mission/object/reference"
 	objTrail "github.com/narasux/jutland/pkg/mission/object/trail"
@@ -439,17 +439,16 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 func (s *BattleShip) HurtBy(bullet *objBullet.Bullet) {
 	// 平射打水平装甲带，吊射打垂直装甲带；按弹道落角连续过渡，
 	// 避免在某条固定射程上装甲带与伤害系数突变。
-	reduction := s.HorizontalDamageReduction*(1-bullet.Plunge) + s.VerticalDamageReduction*bullet.Plunge
-	realDamage := bullet.Damage * (1 - reduction)
-
-	// 暴击伤害的机制，一发大口径可能直接起飞，支持多段暴击
+	realDamage, criticalMultiplier := objDamage.ResolveShip(
+		bullet.Damage,
+		s.HorizontalDamageReduction, s.VerticalDamageReduction,
+		bullet.Plunge, bullet.CriticalRate, RandFloat64(),
+	)
 	criticalType := objBullet.CriticalTypeNone
-	randVal := rand.Float64()
-	if randVal < bullet.CriticalRate/10 {
-		realDamage *= 10
+	switch criticalMultiplier {
+	case 10:
 		criticalType = objBullet.CriticalTypeTenTimes
-	} else if randVal < bullet.CriticalRate {
-		realDamage *= 3
+	case 3:
 		criticalType = objBullet.CriticalTypeThreeTimes
 	}
 

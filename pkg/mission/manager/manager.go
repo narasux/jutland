@@ -14,7 +14,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/hacker"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/object"
-	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
+	"github.com/narasux/jutland/pkg/mission/observer"
 	"github.com/narasux/jutland/pkg/mission/sidebar"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/mission/targeting"
@@ -61,12 +61,18 @@ type MissionManager struct {
 	combatBuckets             combatIndex
 	// effectSeq 命中特效的确定性种子来源：不用全局随机数，避免影响战斗随机序列
 	effectSeq uint32
+	// combatObserver 可选的只读战斗事件接收器；默认 nil，游戏路径不产生额外分配。
+	combatObserver observer.Observer
+	// headless 跳过输入/相机/音频；由 SetSimulationOptions 开启。
+	headless     bool
+	skipCommands bool
 
 	simTick                  int64
 	targetingPlan            targeting.Plan
 	targetingResults         chan targeting.Plan
 	targetingBusy            bool
 	targetingDirty           bool
+	syncTargeting            bool
 	targetingLastRequestTick int64
 	targetingCursors         map[string]map[object.Type]int
 	takeoffTypeCursors       map[string]int
@@ -219,37 +225,37 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	}
 
 	if missionStatusRunsSimulation(status) {
-		m.simTick++
-		m.state.Core.SimTick = m.simTick
-		objUnit.SetSimTick(m.simTick)
-		m.updateCommandPhase()
-		switch status {
-		case state.MissionRunning:
-			// 是否响应鼠标边缘滚动由 getNextCameraPosInGameMode 内部判断；
-			// 这里必须每帧调用，否则鼠标停在 UI 面板上时进行中的相机定位会卡住。
-			m.updateCameraPosition()
-		case state.MissionInMap:
-			m.updateCameraPosition()
-		case state.MissionInBuilding:
-			m.updateReinforcePoints()
-		}
-		m.updateSupportPhase()
-		m.updateMapBlockPrewarm()
-		if status == state.MissionRunning {
-			if !m.state.UI.UIConsumesCursor {
-				m.updateSelectedShips()
-			} else {
-				m.state.Interaction.IsAreaSelecting = false
-			}
-			m.updateShipGroups()
-		}
-		m.updateCombatPhase()
+		m.advanceSimulationTick(
+			func() {
+				switch status {
+				case state.MissionRunning:
+					// 是否响应鼠标边缘滚动由 getNextCameraPosInGameMode 内部判断；
+					// 这里必须每帧调用，否则鼠标停在 UI 面板上时进行中的相机定位会卡住。
+					m.updateCameraPosition()
+				case state.MissionInMap:
+					m.updateCameraPosition()
+				case state.MissionInBuilding:
+					m.updateReinforcePoints()
+				}
+			},
+			func() {
+				m.updateMapBlockPrewarm()
+				if status == state.MissionRunning {
+					if !m.state.UI.UIConsumesCursor {
+						m.updateSelectedShips()
+					} else {
+						m.state.Interaction.IsAreaSelecting = false
+					}
+					m.updateShipGroups()
+				}
+			},
+		)
 		// 本拍所有记账完成后采样一次趋势点；秒级节流由统计层负责。
 		m.state.Stats.SampleBattleTimeline(m.simTick)
+	} else {
+		m.updateMissionStatus()
+		m.finalizeBattleStats()
 	}
-
-	m.updateMissionStatus()
-	m.finalizeBattleStats()
 
 	return m.state.Core.MissionStatus, nil
 }
@@ -417,7 +423,7 @@ func getAdjacentZooms(zoom int) []int {
 }
 
 func (m *MissionManager) rebuildCombatBuckets() {
-	m.combatBuckets.rebuild(m.state.Arena.Ships, m.state.Arena.Planes)
+	m.combatBuckets.rebuildOrdered(m.state.Arena.OrderedShips(), m.state.Arena.OrderedPlanes())
 }
 
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
@@ -428,7 +434,9 @@ func (m *MissionManager) updateCombatPhase() {
 	m.updateVision()
 	m.updateAutoScout()
 	m.updateTargetPlanning()
-	m.weaponFirePlayer.Update()
+	if !m.headless {
+		m.weaponFirePlayer.Update()
+	}
 	m.updateAirfieldAlertLaunch()
 	m.updateShipWeaponFire()
 	m.updatePlaneAttackOrReturn()

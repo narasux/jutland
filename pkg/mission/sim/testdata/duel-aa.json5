@@ -1,0 +1,24 @@
+{
+  schemaVersion: 1,
+  name: "duel-aa-carrier-vs-bismarck",
+  description: "F2 防空 smoke：Enterprise 舰载机攻击 Bismarck，统计飞机损失。",
+  mode: "duel",
+  seed: 19,
+  runs: 1,
+  maxTicks: 12000,
+  environment: {
+    map: "open_sea",
+    speedMultiplier: 1.0,
+  },
+  duel: {
+    shooterFleet: [
+      { ship: "enterprise", count: 1, initialHP: 100000 },
+    ],
+    targetFleet: [
+      { ship: "bismarck", count: 1, initialHP: 50000 },
+    ],
+    distance: 5,
+    doctrine: "auto",
+    maxTicks: 12000,
+  },
+}

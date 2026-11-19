@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Result.Scenario.Name}} · Jutland simulation report</title>
+<style>
+  :root {
+    --bg: #f5f7fa; --card: #ffffff; --ink: #172033; --muted: #5b6675;
+    --line: #dce3ec; --green: #1f8a5b; --yellow: #b7791f; --red: #b23a48;
+    --blue: #2d6cdf; --shadow: 0 1px 2px rgba(16,24,40,.06), 0 8px 24px rgba(16,24,40,.05);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif; }
+  main { max-width: 1180px; margin: 0 auto; padding: 28px 22px 56px; }
+  header, section, .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+  header { padding: 26px 28px; margin-bottom: 18px; }
+  section { padding: 22px 24px; margin: 18px 0; }
+  h1 { margin: 4px 0 8px; font-size: 28px; letter-spacing: -.02em; }
+  h2 { margin: 0 0 14px; font-size: 18px; }
+  h3 { margin: 0 0 4px; font-size: 15px; }
+  p { margin: 6px 0; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .eyebrow { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .14em; }
+  .meta { color: var(--muted); font-size: 12px; display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .banner { margin-top: 14px; padding: 9px 12px; border-radius: 8px; font-size: 12px; }
+  .mock { background: #fff7e6; border: 1px solid #f2d39a; color: #7a4b00; }
+  .dirty { background: #fff4f2; border: 1px solid #efc2bd; color: #7a2e28; }
+  .dirty ul { margin: 4px 0 0 18px; padding: 0; }
+  .clean { color: var(--green); }
+  nav { display: flex; gap: 14px; flex-wrap: wrap; margin: 12px 0 0; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .card { padding: 16px 16px 10px; }
+  .card .desc { color: var(--muted); font-size: 12px; min-height: 34px; }
+  .echart { width: 100%; height: 300px; }
+  .chart-fallback { display: none; }
+  .chart-fallback svg { width: 100%; height: auto; display: block; }
+  .no-echarts .echart { display: none; }
+  .no-echarts .chart-fallback { display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; background: #fafbfc; }
+  tr:last-child td { border-bottom: 0; }
+  code { background: #f1f4f8; border-radius: 4px; padding: 1px 5px; font-size: 12px; }
+  .status { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+  .status-green { background: #e7f5ed; color: var(--green); }
+  .status-yellow { background: #fff6df; color: var(--yellow); }
+  .status-red { background: #fdecee; color: var(--red); }
+  .finding { border-left: 3px solid var(--line); padding: 6px 0 6px 14px; margin: 14px 0; }
+  .finding.high { border-color: var(--red); }
+  .finding.medium { border-color: var(--yellow); }
+  .finding.low { border-color: var(--green); }
+  .tag { display: inline-block; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 7px; margin-right: 6px; }
+  .muted { color: var(--muted); }
+  .small { font-size: 12px; }
+  footer { color: var(--muted); font-size: 12px; margin-top: 24px; text-align: center; }
+  @media print {
+    body { background: #fff; }
+    main { max-width: none; padding: 0; }
+    header, section, .card { box-shadow: none; border-color: #ccc; break-inside: avoid; }
+    nav, .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="eyebrow">Jutland · simulation report</div>
+  <h1>{{.Result.Scenario.Name}}</h1>
+  {{if .Result.Scenario.Description}}<p class="muted">{{.Result.Scenario.Description}}</p>{{end}}
+  <div class="meta">
+    <span><b>{{.StartedAt}}</b></span>
+    <span>耗时 <b>{{.Manifest.DurationMS}} ms</b></span>
+    <span>Seed <b>{{.Result.Seed}}</b> · Runs <b>{{.Result.Runs}}</b></span>
+    <span>Fidelity <b>{{.Manifest.Fidelity}}</b></span>
+  </div>
+  <div class="meta">
+    {{if .Git.Available}}
+      <span>commit <b>{{.Git.CommitShort}}</b>{{if .Git.Branch}} · {{.Git.Branch}}{{end}}</span>
+      {{if .Git.Subject}}<span>{{.Git.Subject}}</span>{{end}}
+    {{else}}
+      <span>commit <b>{{if .Git.Commit}}{{.Git.Commit}}{{else}}unknown{{end}}</b> · git 不可用</span>
+    {{end}}
+    <span>Go <b>{{.Manifest.GoVersion}}</b></span>
+    <span>报告 <b>{{.Manifest.EChartsSource}}</b></span>
+  </div>
+  {{if .Mock}}<div class="banner mock">P1 MOCK：本报告使用合成数据，只用于确认版式、字段与阅读动线，不代表真实战斗结果。</div>{{end}}
+  {{if .Git.Available}}
+    {{if .Git.Dirty}}
+      <div class="banner dirty">
+        工作区有未提交改动（{{.Git.DirtyCount}} 个文件）· worktree {{.Git.WorktreeHash}}
+        <ul>
+          {{range .Git.DirtyFiles}}<li><code>{{.Status}}</code> {{.Path}}</li>{{end}}
+        </ul>
+        {{if .Git.DirtyTruncated}}<div class="small">仅显示前 {{len .Git.DirtyFiles}} 个，完整列表见 manifest.json。</div>{{end}}
+        <div class="small">结果可能无法从 commit 精确复现。</div>
+      </div>
+    {{else}}
+      <div class="meta clean">工作区 clean</div>
+    {{end}}
+  {{else}}
+    <div class="banner dirty">无法确认工作区状态（git 不可用）：{{.Git.Error}}</div>
+  {{end}}
+  <nav>
+    <a href="summary.md">summary.md</a>
+    <a href="ai/analysis-context.md">AI context</a>
+    <a href="ai/findings.json">findings.json</a>
+    <a href="result.json">result.json</a>
+    <a href="manifest.json">manifest.json</a>
+    <a href="replay.json">replay.json</a>
+    <a href="checksums.sha256">checksums</a>
+  </nav>
+</header>
+
+<section>
+  <h2>记分卡</h2>
+  <table>
+    <thead><tr><th>维度</th><th>指标</th><th>结果</th><th>目标带</th><th>状态</th></tr></thead>
+    <tbody>
+      {{range .Result.Scorecard}}
+      <tr>
+        <td>{{.Dimension}}</td><td>{{.Metric}}</td><td><b>{{.Value}}</b></td><td>{{.Target}}</td>
+        <td><span class="status status-{{.Status}}">{{.Status}}</span></td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>关键指标</h2>
+  <table>
+    <thead><tr><th>分组</th><th>指标</th><th>值</th><th>CI</th><th>Baseline</th><th>Delta</th></tr></thead>
+    <tbody>
+      {{range .Result.Metrics}}
+      <tr>
+        <td>{{.Group}}</td><td>{{.Name}}</td><td>{{.Value}} {{.Unit}}</td><td>{{.CI}}</td>
+        <td>{{if .Baseline}}{{.Baseline}}{{else}}—{{end}}</td><td>{{if .Delta}}{{.Delta}}{{else}}—{{end}}</td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</section>
+
+{{if .Charts}}
+<section>
+  <h2>图表</h2>
+  <div class="grid">
+    {{range .Charts}}
+    <div class="card">
+      <h3>{{.Title}}</h3>
+      <div class="desc">{{.Description}}</div>
+      <div class="echart" id="{{.ID}}"></div>
+      <div class="chart-fallback">{{.SVG}}</div>
+    </div>
+    {{end}}
+  </div>
+</section>
+{{end}}
+
+<section>
+  <h2>Findings</h2>
+  {{if .Result.Findings}}
+  {{range .Result.Findings}}
+  <div class="finding {{.Severity}}">
+    <div><span class="tag">{{.Kind}}</span><span class="tag">{{.Severity}}</span><span class="tag">{{.Status}}</span><b>{{.Title}}</b></div>
+    <p>{{.Summary}}</p>
+    <div class="small muted">confidence {{printf "%.2f" .Confidence}} · {{.ID}}</div>
+    {{if .Evidence}}<ul class="small">{{range .Evidence}}<li><code>{{.Metric}}</code> = {{.Value}}{{if .Baseline}} (baseline {{.Baseline}}, delta {{.Delta}}){{end}}{{if .CI}} · CI {{.CI}}{{end}}</li>{{end}}</ul>{{end}}
+    {{if .SuggestedExperiment}}<p class="small">建议实验：{{.SuggestedExperiment}}</p>{{end}}
+    {{if .Repro}}<p class="small">复现：<code>{{.Repro}}</code></p>{{end}}
+  </div>
+  {{end}}
+  {{else}}
+  <p class="muted">本 run 没有触发 finding。</p>
+  {{end}}
+</section>
+
+<section>
+  <h2>数据质量与警告</h2>
+  <ul>
+    {{range .Result.DataQuality}}<li>{{.}}</li>{{end}}
+    {{range .Result.Diagnostics}}<li><span class="tag">{{.Severity}}</span><b>{{.ID}}</b> {{.Message}}</li>{{end}}
+  </ul>
+</section>
+
+<section>
+  <h2>复现与附录</h2>
+  <p class="small">场景：<code>{{.Manifest.ScenarioPath}}</code></p>
+  <p class="small">lab：<code>{{.Manifest.SimHome}}</code>{{if .Manifest.LabCommit}} · lab commit <code>{{.Manifest.LabCommit}}</code>{{end}}</p>
+  <p class="small">命令：<code>{{.Manifest.Command}}</code></p>
+  <p class="small">AI 视图：<a href="ai/analysis-context.md">analysis-context.md</a> · <a href="ai/llm-prompt.md">llm-prompt.md</a></p>
+</section>
+
+<footer>Generated by jutland-sim · {{.Manifest.Fidelity}} · schema v{{.Manifest.SchemaVersion}}</footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.min.js"
+        integrity="sha384-C2iskrW/uPW46KzOjrvJIQo4YkV8lkD+QS0CrDN18IIPIpT/g2USu8bTP3nvmIAD"
+        crossorigin="anonymous"
+        onerror="document.documentElement.classList.add('no-echarts')"></script>
+<script>
+(function () {
+  if (!window.echarts) {
+    document.documentElement.classList.add('no-echarts');
+    return;
+  }
+  var options = {{.EChartsJSON}};
+  if (options.exchange && options.exchange.series && options.exchange.series[0]) {
+    options.exchange.series[0].label = {
+      show: true,
+      formatter: function (p) { return Number(p.value[2]).toFixed(2); }
+    };
+  }
+  Object.keys(options).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) { return; }
+    try {
+      var chart = echarts.init(el, null, { renderer: 'svg' });
+      chart.setOption(options[id]);
+      window.addEventListener('resize', function () { chart.resize(); });
+    } catch (e) {
+      document.documentElement.classList.add('no-echarts');
+    }
+  });
+})();
+</script>
+<noscript><style>.echart{display:none}.chart-fallback{display:block}</style></noscript>
+</body>
+</html>

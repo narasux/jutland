@@ -31,7 +31,7 @@ func (m *MissionManager) updateVision() {
 
 func (m *MissionManager) stampPlayerVision(player faction.Player, vision *state.FactionVision) {
 	// 活着的舰船按自己的视距盖格。软边蒙层由格级并集统一合成，这里不用逐源处理。
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if ship.BelongPlayer != player || ship.CurHP <= 0 || ship.SightRange <= 0 {
 			continue
 		}
@@ -43,14 +43,14 @@ func (m *MissionManager) stampPlayerVision(player faction.Player, vision *state.
 		vision.Stamp(ship.CurPos.RX, ship.CurPos.RY, radius)
 	}
 	// 只算还在空中的飞机。甲板滑跑和着舰回收跟着载舰，不再单独照。
-	for _, plane := range m.state.Arena.Planes {
+	for _, plane := range m.state.Arena.OrderedPlanes() {
 		if plane.BelongPlayer != player || !plane.ProvidesSight() || plane.SightRange <= 0 {
 			continue
 		}
 		vision.Stamp(plane.CurPos.RX, plane.CurPos.RY, plane.SightRange)
 	}
 	// 停用只关起飞和生产，机场本身仍照固定半径。
-	for _, airfield := range m.state.Arena.Airfields {
+	for _, airfield := range m.state.Arena.OrderedAirfields() {
 		if airfield.BelongPlayer != player {
 			continue
 		}
@@ -66,7 +66,7 @@ func (m *MissionManager) refreshContacts(player faction.Player, vision *state.Fa
 	ttl := objUnit.ReloadTicks(30)
 	// 这一拍还看得见的敌舰刷新位置，并把记忆再延长 30 秒任务时间。
 	// 看得见它沉了就立刻忘掉，不把沉船留在接触里。
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if ship.BelongPlayer == player {
 			continue
 		}
@@ -88,7 +88,7 @@ func (m *MissionManager) refreshContacts(player faction.Player, vision *state.Fa
 		}
 	}
 	// 锁定跟着接触走。目标还活着并且看得见就保留；接触没了就清掉锁定。
-	for _, ship := range m.state.Arena.Ships {
+	for _, ship := range m.state.Arena.OrderedShips() {
 		if ship.BelongPlayer != player || ship.AttackTarget == "" {
 			continue
 		}

@@ -2,6 +2,7 @@ package computer
 
 import (
 	"math"
+	"sort"
 
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	"github.com/narasux/jutland/pkg/mission/state"
@@ -33,7 +34,13 @@ func nearestContact(vision *state.FactionVision, origin objPos.MapPos, now int64
 	best := math.MaxFloat64
 	var pos objPos.MapPos
 	found := false
-	for _, contact := range vision.Contacts {
+	uids := make([]string, 0, len(vision.Contacts))
+	for uid := range vision.Contacts {
+		uids = append(uids, uid)
+	}
+	sort.Strings(uids)
+	for _, uid := range uids {
+		contact := vision.Contacts[uid]
 		if contact.ExpireTick <= now {
 			continue
 		}

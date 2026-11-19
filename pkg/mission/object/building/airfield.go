@@ -1,8 +1,6 @@
 package building
 
 import (
-	"time"
-
 	"github.com/google/uuid"
 
 	"github.com/narasux/jutland/pkg/common/constants"
@@ -216,7 +214,7 @@ func (a *Airfield) Update(curFunds int64, flying map[string]int64) []string {
 		return completed
 	}
 	fundsCost, timeCost := objUnit.GetPlaneCost(group.Name)
-	timeNow := time.Now().UnixMilli()
+	timeNow := objUnit.NowMillis()
 	producing := a.Production[group.Name]
 	// 资金不足：暂停计时，保留现有进度
 	if curFunds < fundsCost {

@@ -1,0 +1,24 @@
+{
+  schemaVersion: 1,
+  name: "duel-fleet-2v1",
+  description: "F1 多舰平台对射：2 艘 100mm 护卫舰 vs 1 艘同型，focus doctrine，5 个 seed。",
+  mode: "duel",
+  seed: 7,
+  runs: 5,
+  maxTicks: 2400,
+  environment: {
+    map: "open_sea",
+    speedMultiplier: 1.0,
+  },
+  duel: {
+    shooterFleet: [
+      { ship: "jiujiang", count: 2 },
+    ],
+    targetFleet: [
+      { ship: "jiujiang", count: 1, initialHP: 800 },
+    ],
+    distance: 4,
+    doctrine: "focus",
+    maxTicks: 2400,
+  },
+}

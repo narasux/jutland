@@ -1,0 +1,20 @@
+{
+  schemaVersion: 1,
+  name: "penetration-127mm",
+  description: "F0 穿甲矩阵：127mm AP 穿深 120mm，装甲 20..200mm，0°/60° 入射。",
+  mode: "penetration",
+  seed: 1,
+  runs: 1,
+  maxTicks: 1,
+  penetration: {
+    ammoName: "127mm AP",
+    penetrationMM: 120,
+    armorMin: 20,
+    armorMax: 200,
+    angleMin: 0,
+    angleMax: 60,
+    steps: 10,
+    referenceArmor: 100,
+    referenceAngle: 0,
+  },
+}

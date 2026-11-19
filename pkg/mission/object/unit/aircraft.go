@@ -2,7 +2,6 @@ package unit
 
 import (
 	"slices"
-	"time"
 
 	"github.com/narasux/jutland/pkg/mission/object"
 )
@@ -180,7 +179,7 @@ func (sa *ShipAircraft) TakeOffScout(base AircraftBase) *Plane {
 		return nil
 	}
 	sa.ensureTakeoffPointTimes()
-	timeNow := time.Now().UnixMilli()
+	timeNow := NowMillis()
 	for idx, point := range sa.deck.TakeoffPoints {
 		// 这个起飞点还在冷却就换下一个，避免两架挤在同一个点。
 		cooldown := sa.takeOffCooldown(point)
@@ -331,7 +330,7 @@ func (sa *ShipAircraft) takeOff(
 	}
 	sa.ensureTakeoffPointTimes()
 
-	timeNow := time.Now().UnixMilli()
+	timeNow := NowMillis()
 	for idx, point := range sa.deck.TakeoffPoints {
 		// 判断起飞冷却，冷却中该弹射器被占用
 		cooldown := sa.takeOffCooldown(point)
