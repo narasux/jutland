@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -50,6 +51,8 @@ func run(args []string) error {
 		return cmdPerf(args[1:])
 	case "compare":
 		return cmdCompare(args[1:])
+	case "watch":
+		return cmdWatch(args[1:])
 	case "version":
 		fmt.Print(version.GetVersion())
 		return nil
@@ -422,6 +425,28 @@ func cmdCompare(args []string) error {
 	fmt.Printf("compare: %s\n", info.Markdown)
 	fmt.Printf("json:    %s\n", info.JSON)
 	return nil
+}
+
+func cmdWatch(args []string) error {
+	fs := flag.NewFlagSet("watch", flag.ContinueOnError)
+	out := fs.String("out", "", "override report directory")
+	interval := fs.Duration("interval", 10*time.Minute, "refresh interval")
+	limit := fs.Int("limit", 50, "history window size")
+	once := fs.Bool("once", false, "run one refresh and exit")
+	flagArgs, _ := cliutil.Split(args, "once")
+	if err := fs.Parse(flagArgs); err != nil {
+		return err
+	}
+	paths, err := sim.ResolvePaths(*out)
+	if err != nil {
+		return err
+	}
+	if err := sim.ValidateLayout(paths); err != nil {
+		return err
+	}
+	return sim.RunWatch(context.Background(), paths, sim.WatchOptions{
+		Interval: *interval, Limit: *limit, Once: *once, Writer: os.Stdout,
+	})
 }
 
 func cmdValidate(args []string) error {
