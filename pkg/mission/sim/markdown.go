@@ -67,6 +67,10 @@ func buildSummary(result *Result, manifest Manifest) string {
 	for _, row := range result.Metrics {
 		fmt.Fprintf(&b, "| %s | %s | %v %s | %s |\n", row.Group, row.Name, row.Value, row.Unit, row.CI)
 	}
+	if len(result.Diagnostics) > 0 {
+		b.WriteString("\n## 诊断\n\n")
+		b.WriteString(diagnosticsMarkdown(result.Diagnostics))
+	}
 	b.WriteString("\n## Findings\n\n")
 	for _, finding := range result.Findings {
 		fmt.Fprintf(

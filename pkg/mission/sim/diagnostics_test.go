@@ -55,3 +55,19 @@ func TestRunDiagnosticsCleanResult(t *testing.T) {
 	}
 	require.Empty(t, RunDiagnostics(result))
 }
+
+// TestBuildSummaryIncludesDiagnostics 验证 Markdown 摘要包含诊断段。
+// 场景：Result 带一条 DIAG-ZERO-SHOTS，buildSummary 生成人类摘要。
+// 预期：summary 含 "## 诊断" 和诊断 ID；失败说明诊断只进 JSON 不进摘要。
+// 覆盖：buildSummary 的 Diagnostics 分支。
+func TestBuildSummaryIncludesDiagnostics(t *testing.T) {
+	result := &Result{
+		Scenario: Scenario{Name: "s"},
+		Diagnostics: []Diagnostic{{
+			ID: "DIAG-ZERO-SHOTS", Severity: "high", Message: "no shots",
+		}},
+	}
+	summary := buildSummary(result, Manifest{})
+	require.Contains(t, summary, "## 诊断")
+	require.Contains(t, summary, "DIAG-ZERO-SHOTS")
+}
