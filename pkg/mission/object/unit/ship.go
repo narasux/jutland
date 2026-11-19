@@ -107,6 +107,8 @@ type BattleShip struct {
 	HorizontalDamageReduction float64 `json:"horizontalDamageReduction"`
 	// 垂直伤害减免
 	VerticalDamageReduction float64 `json:"verticalDamageReduction"`
+	// ArmorMM 运行时装甲厚度，默认由水平/垂直减伤折算；穿甲开关关闭时不参与伤害。
+	ArmorMM float64 `json:"-"`
 	// 最大速度
 	MaxSpeed float64 `json:"maxSpeed"`
 	// 加速度
@@ -444,6 +446,10 @@ func (s *BattleShip) HurtBy(bullet *objBullet.Bullet) {
 		s.HorizontalDamageReduction, s.VerticalDamageReduction,
 		bullet.Plunge, bullet.CriticalRate, RandFloat64(),
 	)
+	if config.G != nil && config.G.EnablePenetration && bullet.PenetrationMM > 0 && s.ArmorMM > 0 {
+		pen := objDamage.ResolvePenetration(bullet.PenetrationMM, s.ArmorMM, bullet.Plunge*60)
+		realDamage *= objDamage.PenetrationMultiplier(pen.Ratio)
+	}
 	criticalType := objBullet.CriticalTypeNone
 	switch criticalMultiplier {
 	case 10:
@@ -948,6 +954,7 @@ func NewShip(
 	s.Uid = uidGenerator.Gen(s.TypeAbbr)
 	s.CurPos = pos
 	s.CurRotation = rotation
+	s.ArmorMM = 100 + 300*max(s.HorizontalDamageReduction, s.VerticalDamageReduction)
 	s.LastTrailAnimationStep = -1
 	s.BelongPlayer = player
 	// 战舰默认不编组

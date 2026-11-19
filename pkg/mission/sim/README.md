@@ -107,12 +107,15 @@ requires a working window/graphics session and is not a CI gate.
 the live history and rewrites `index.html`. It is opt-in and non-destructive
 (no delete); `make sim-archive` always starts with `--dry-run`.
 
-## Penetration matrix (P10, contract only)
+## Penetration matrix (P10, opt-in)
 
 `jutland-sim penetration penetration-127mm` runs a pure geometric AP/HE matrix
 (`penetrationMM` vs angle-adjusted armor). It writes the usual F0 report and a
-`穿透包线` chart. This is an analysis contract, **not wired into production
-`HurtBy`**; no gameplay damage behavior changes.
+`穿透包线` chart.
+
+Production `HurtBy` has an **opt-in** experimental hook: set
+`enablePenetration: true` in `configs/game_settings.json5`. Defaults to false;
+when false, damage is byte-for-byte the old `ResolveShip` path.
 
 ## Baselines (P8)
 

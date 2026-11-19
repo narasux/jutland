@@ -82,6 +82,8 @@ type Bullet struct {
 	Type Type `json:"type"`
 	// 口径
 	Diameter int `json:"diameter"`
+	// PenetrationMM 运行时穿深，默认由口径折算；穿甲开关关闭时不参与伤害。
+	PenetrationMM float64 `json:"-"`
 	// 伤害数值
 	Damage float64 `json:"damage"`
 	// 暴击概率（理论上口径越大越容易被暴击，但是暴击率不应该太高）
@@ -334,6 +336,9 @@ func New(
 	b.TargetPos = targetPos
 	b.Plunge = plunge
 	b.TargetObjType = targetObjectType
+	if b.PenetrationMM <= 0 {
+		b.PenetrationMM = float64(b.Diameter) * 1.5
+	}
 
 	b.Rotation = curPos.Angle(targetPos)
 	b.Speed = speed

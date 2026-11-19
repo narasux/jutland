@@ -13,6 +13,7 @@
 // DisplayDamageNumber: 是否显示命中伤害数字，默认开启
 // ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示
 // wakeTrail: 战舰水面尾流参数，length 航迹长度 0.40~2.50、width 宽度 0.40~2.00、opacity 浓度 0.20~1.50，默认均为 1.00
+// EnablePenetration: 实验性穿甲伤害开关，默认关闭；开启后按弹药穿深/舰体装甲缩放伤害
 
 {
   "speedMultiplier": 1,
@@ -36,5 +37,6 @@
     "length": 1,
     "width": 1,
     "opacity": 1
-  }
+  },
+  "enablePenetration": false
 }

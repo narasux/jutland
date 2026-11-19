@@ -37,3 +37,15 @@ func ResolvePenetration(penetrationMM, armorMM, impactAngleDeg float64) Penetrat
 		Penetrated: ratio >= 1, Overmatch: ratio >= 1.5,
 	}
 }
+
+// PenetrationMultiplier maps a penetration/effective-armor ratio to damage.
+// Experimental gameplay hook; the default simulation does not use it.
+func PenetrationMultiplier(ratio float64) float64 {
+	if ratio <= 0 {
+		return 0.2
+	}
+	if ratio < 1 {
+		return 0.2 + 0.8*ratio
+	}
+	return math.Min(1.35, 1+0.25*(ratio-1))
+}
