@@ -6,6 +6,7 @@
     { mode: "shot", scenario: "shot-f0", runs: 100 },
     { mode: "penetration", scenario: "penetration-127mm" },
     { mode: "duel", scenario: "duel-jiujiang", seeds: [1, 3] },
+    { mode: "duel", scenario: "duel-aa", seeds: [1, 3] },
     { mode: "duel", scenario: "duel-carrier", seeds: [1, 3] },
     { mode: "duel", scenario: "duel-carrier-fog", seeds: [1, 3] },
     { mode: "duel", scenario: "duel-sub", seeds: [1, 3] },
