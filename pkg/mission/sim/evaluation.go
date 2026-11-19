@@ -11,6 +11,13 @@ import (
 )
 
 // EvaluationRow is one run in the cross-fidelity evaluation.
+func (r EvaluationRow) Metric(name string) string {
+	if value, ok := r.Metrics[name]; ok {
+		return fmt.Sprintf("%v", value)
+	}
+	return "—"
+}
+
 type EvaluationRow struct {
 	RunID       string             `json:"runId"`
 	Scenario    string             `json:"scenario"`
@@ -172,11 +179,11 @@ func writeEvaluationMarkdown(path string, report EvaluationReport, findings, dia
 			row.Red,
 			row.Findings,
 			row.Diagnostics,
-			row.Metrics["shots"],
-			row.Metrics["hit_rate"],
-			row.Metrics["mission_success"],
-			row.Metrics["enemy_sunk"],
-			row.Metrics["tick_p99_ms"],
+			row.Metric("shots"),
+			row.Metric("hit_rate"),
+			row.Metric("mission_success"),
+			row.Metric("enemy_sunk"),
+			row.Metric("tick_p99_ms"),
 		)
 	}
 	b.WriteString("\n## 红项与 Finding\n\n")
