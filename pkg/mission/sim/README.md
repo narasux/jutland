@@ -85,14 +85,18 @@ export JUTLAND_SIM_HOME="$HOME/jutland-sim-lab"
 make sim-periodic    # trend + ai/analysis-brief
 make sim-watch       # refresh trend/analyze every 10m (Ctrl-C to stop)
 make sim-archive     # dry-run old-run archive; remove --dry-run after review
+make sim-frame       # rendered-frame p99 (opens a temporary window)
 make sim-perf        # check newest F3 tick_p99_ms against 16.7ms
 make sim-suite       # F0 + F1 + F3 (3 seeds), then trend/analyze
 # SIM_MACRO_PARALLEL=1 runs the F3 seeds as separate processes
 ```
 
 `sim-perf` reads the newest F3 `result.json`; `tick_p99_ms` is headless
-simulation wall time, not the rendered game frame. It is a regression proxy,
-not a full p99 frame-time gate.
+simulation wall time, not the rendered game frame. It is a regression proxy.
+
+`make sim-frame` uses `cmd/jutland-frame` to open a temporary 1280x720 window,
+run `manager.Update` + `Draw` and report rendered-frame p50/p95/p99/max. It
+requires a working window/graphics session and is not a CI gate.
 
 `tools/sim-periodic.sh` is suitable for cron/launchd; it does not schedule itself.
 

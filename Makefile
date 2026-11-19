@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-perf sim-suite golines gofumpt turret-marker
+.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-perf sim-suite golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -44,6 +44,10 @@ sim-watch:
 # move old runs out of reports/runs (dry-run first)
 sim-archive:
 	go run ./cmd/jutland-sim archive --keep "$${SIM_KEEP_RUNS:-50}" --dry-run
+
+# rendered-frame p99 (opens a temporary window; not for headless CI)
+sim-frame:
+	go run ./cmd/jutland-frame --frames "$${SIM_FRAME_COUNT:-300}" --budget-ms "$${SIM_FRAME_BUDGET_MS:-16.7}"
 
 # p99 gate over the newest F3 run
 sim-perf:
