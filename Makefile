@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-perf sim-suite golines gofumpt turret-marker
+.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-perf sim-suite golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -40,6 +40,10 @@ sim-periodic:
 # periodic trend/analysis until interrupted
 sim-watch:
 	go run ./cmd/jutland-sim watch --interval "$${SIM_WATCH_INTERVAL:-10m}"
+
+# move old runs out of reports/runs (dry-run first)
+sim-archive:
+	go run ./cmd/jutland-sim archive --keep "$${SIM_KEEP_RUNS:-50}" --dry-run
 
 # p99 gate over the newest F3 run
 sim-perf:

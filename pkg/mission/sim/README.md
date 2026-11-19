@@ -84,6 +84,7 @@ make sim-ci          # go test + vet + build
 export JUTLAND_SIM_HOME="$HOME/jutland-sim-lab"
 make sim-periodic    # trend + ai/analysis-brief
 make sim-watch       # refresh trend/analyze every 10m (Ctrl-C to stop)
+make sim-archive     # dry-run old-run archive; remove --dry-run after review
 make sim-perf        # check newest F3 tick_p99_ms against 16.7ms
 make sim-suite       # F0 + F1 + F3 (3 seeds), then trend/analyze
 # SIM_MACRO_PARALLEL=1 runs the F3 seeds as separate processes
@@ -94,6 +95,13 @@ simulation wall time, not the rendered game frame. It is a regression proxy,
 not a full p99 frame-time gate.
 
 `tools/sim-periodic.sh` is suitable for cron/launchd; it does not schedule itself.
+
+## Archive (P9)
+
+`jutland-sim archive --keep N` moves older `reports/runs/*` into
+`reports/archive/<timestamp>/runs/`, writes the archived `history.jsonl`, trims
+the live history and rewrites `index.html`. It is opt-in and non-destructive
+(no delete); `make sim-archive` always starts with `--dry-run`.
 
 ## Penetration matrix (P10, contract only)
 
