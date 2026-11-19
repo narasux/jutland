@@ -9,10 +9,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TestWriteAnalysisBriefAggregatesHistory 验证跨 run 分析简报聚合 finding 与红色指标。
-// 场景：r1 含 high finding + red scorecard；r2 同场景但无 finding，用来判断 r1 finding 已修复。
-// 预期：RecurringFindings/RedScorecards 各 1；F3-NO-SHOTS 的 Fixed=true；Prompt 非空，md 含 finding ID。
-// 覆盖：临时 reports 目录写两条 history 与 r1/r2 result.json，验证按场景最新 run 判定 fixed。
+// TestWriteAnalysisBriefAggregatesHistory 验证跨 run 分析简报聚合 finding、红色指标与场景样本波动。
+// 场景：r1 含 high finding + red scorecard + own_sunk=10/enemy_sunk=5；r2 同场景无 finding 且
+// own_sunk=20/enemy_sunk=7，用来判断 r1 finding 已修复，同时让场景汇总出现 min/max 与样本不足提示。
+// 预期：RecurringFindings/RedScorecards 各 1；F3-NO-SHOTS 的 Fixed=true；场景汇总 runs=2、
+// own sunk 10~20、enemy sunk 5~7；Prompt 非空，md 含 finding ID 与「样本不足（runs < 3）」。
+// 覆盖：临时 reports 目录写两条 history 与 r1/r2 result.json（含 metrics），断言 JSON 汇总与 md 文案。
 func TestWriteAnalysisBriefAggregatesHistory(t *testing.T) {
 	dir := t.TempDir()
 	runDir := filepath.Join(dir, "runs", "r1")
@@ -26,13 +28,23 @@ func TestWriteAnalysisBriefAggregatesHistory(t *testing.T) {
 		Scorecard: []ScorecardItem{{
 			Dimension: "任务", Metric: "status", Target: "success", Status: "red",
 		}},
+		Metrics: []MetricRow{
+			{Group: "损失", Name: "own_sunk", Value: 10, Unit: "ships"},
+			{Group: "损失", Name: "enemy_sunk", Value: 5, Unit: "ships"},
+		},
 	}
 	data, err := json.Marshal(result)
 	require.NoError(t, err)
 	require.NoError(t, os.WriteFile(filepath.Join(runDir, "result.json"), data, 0o644))
 	r2Dir := filepath.Join(dir, "runs", "r2")
 	require.NoError(t, os.MkdirAll(r2Dir, 0o755))
-	r2 := Result{SchemaVersion: 1, Scenario: Scenario{Name: "f3-test"}}
+	r2 := Result{
+		SchemaVersion: 1, Scenario: Scenario{Name: "f3-test"},
+		Metrics: []MetricRow{
+			{Group: "损失", Name: "own_sunk", Value: 20, Unit: "ships"},
+			{Group: "损失", Name: "enemy_sunk", Value: 7, Unit: "ships"},
+		},
+	}
 	r2Data, err := json.Marshal(r2)
 	require.NoError(t, err)
 	require.NoError(t, os.WriteFile(filepath.Join(r2Dir, "result.json"), r2Data, 0o644))
@@ -54,8 +66,17 @@ func TestWriteAnalysisBriefAggregatesHistory(t *testing.T) {
 	require.Equal(t, "status", brief.RedScorecards[0].Metric)
 	require.Len(t, brief.ScenarioSummaries, 1)
 	require.Equal(t, "f3-test", brief.ScenarioSummaries[0].Scenario)
+	summary := brief.ScenarioSummaries[0]
+	require.Equal(t, 2, summary.Runs)
+	require.InDelta(t, 15, summary.MeanOwnSunk, 1e-9)
+	require.InDelta(t, 10, summary.OwnSunkMin, 1e-9)
+	require.InDelta(t, 20, summary.OwnSunkMax, 1e-9)
+	require.InDelta(t, 6, summary.MeanEnemySunk, 1e-9)
+	require.InDelta(t, 5, summary.EnemySunkMin, 1e-9)
+	require.InDelta(t, 7, summary.EnemySunkMax, 1e-9)
 	require.NotEmpty(t, brief.Prompt)
 	md, err := os.ReadFile(out.Markdown)
 	require.NoError(t, err)
 	require.Contains(t, string(md), "F3-NO-SHOTS")
+	require.Contains(t, string(md), "样本不足（runs < 3）：f3-test")
 }
