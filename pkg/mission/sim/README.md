@@ -83,6 +83,7 @@ call is made.
 make sim-ci          # go test + vet + build
 export JUTLAND_SIM_HOME="$HOME/jutland-sim-lab"
 make sim-periodic    # trend + ai/analysis-brief
+make sim-watch       # refresh trend/analyze every 10m (Ctrl-C to stop)
 make sim-perf        # check newest F3 tick_p99_ms against 16.7ms
 make sim-suite       # F0 + F1 + F3 (3 seeds), then trend/analyze
 # SIM_MACRO_PARALLEL=1 runs the F3 seeds as separate processes
