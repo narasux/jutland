@@ -1,0 +1,8 @@
+{
+  schemaVersion: 1,
+  name: "suite-f0",
+  description: "F0-only suite smoke: one shot scenario, 5 runs.",
+  steps: [
+    { mode: "shot", scenario: "shot-f0", runs: 5 }
+  ]
+}

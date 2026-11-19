@@ -20,6 +20,7 @@ const (
 type Paths struct {
 	Home      string
 	Scenarios string
+	Suites    string
 	Golden    string
 	Baselines string
 	Reports   string
@@ -93,6 +94,7 @@ func resolvePaths(home, outOverride string) (Paths, error) {
 	return Paths{
 		Home:      home,
 		Scenarios: filepath.Join(home, "scenarios"),
+		Suites:    filepath.Join(home, "suites"),
 		Golden:    filepath.Join(home, "golden"),
 		Baselines: filepath.Join(home, "baselines"),
 		Reports:   reports,
@@ -130,6 +132,7 @@ func EnsureLayout(paths Paths) error {
 	dirs := []string{
 		paths.Home,
 		paths.Scenarios,
+		paths.Suites,
 		paths.Golden,
 		paths.Baselines,
 		paths.Notes,
@@ -138,6 +141,9 @@ func EnsureLayout(paths Paths) error {
 		filepath.Join(paths.Reports, "runs"),
 	}
 	for _, dir := range dirs {
+		if strings.TrimSpace(dir) == "" {
+			continue
+		}
 		if err := os.MkdirAll(dir, 0o755); err != nil {
 			return fmt.Errorf("create %s: %w", dir, err)
 		}
