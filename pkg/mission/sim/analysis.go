@@ -17,8 +17,10 @@ type FindingGroup struct {
 	Severity   string `json:"severity"`
 	Title      string `json:"title"`
 	Count      int    `json:"count"`
+	FirstSeen  string `json:"firstSeen"`
 	LastSeen   string `json:"lastSeen"`
 	LastStatus string `json:"lastStatus"`
+	Fixed      bool   `json:"fixed"`
 }
 
 // ScoreGroup is a red scorecard row aggregated across the window.
@@ -118,6 +120,9 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 				findings[finding.ID] = group
 			}
 			group.Count++
+			if group.FirstSeen == "" {
+				group.FirstSeen = entry.StartedAt
+			}
 			group.LastSeen = entry.StartedAt
 			group.LastStatus = finding.Status
 		}
@@ -152,6 +157,15 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 				scores[key] = group
 			}
 			group.Count++
+		}
+	}
+	if len(entries) > 0 {
+		latest := entries[len(entries)-1]
+		for id, group := range findings {
+			if group.LastSeen != latest.StartedAt {
+				group.Fixed = true
+				findings[id] = group
+			}
 		}
 	}
 	for _, group := range findings {
@@ -232,9 +246,9 @@ func analysisMarkdown(brief AnalysisBrief) string {
 	if len(brief.RecurringFindings) == 0 {
 		b.WriteString("无。\n\n")
 	} else {
-		b.WriteString("| count | severity | id | title | last |\n|---|---|---|---|---|\n")
+		b.WriteString("| count | severity | id | title | first | last | fixed |\n|---|---|---|---|---|---|---|\n")
 		for _, f := range brief.RecurringFindings {
-			fmt.Fprintf(&b, "| %d | %s | `%s` | %s | %s |\n", f.Count, f.Severity, f.ID, f.Title, f.LastSeen)
+			fmt.Fprintf(&b, "| %d | %s | `%s` | %s | %s | %s | %t |\n", f.Count, f.Severity, f.ID, f.Title, f.FirstSeen, f.LastSeen, f.Fixed)
 		}
 		b.WriteString("\n")
 	}
