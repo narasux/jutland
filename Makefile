@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-perf sim-suite golines gofumpt turret-marker
+.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-gate sim-perf sim-suite golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -48,6 +48,10 @@ sim-archive:
 # rendered-frame p99 (opens a temporary window; not for headless CI)
 sim-frame:
 	go run ./cmd/jutland-frame --frames "$${SIM_FRAME_COUNT:-300}" --budget-ms "$${SIM_FRAME_BUDGET_MS:-16.7}"
+
+# rendered-frame p99 gate (requires GUI)
+sim-frame-gate:
+	JUTLAND_SIM_HOME="$${JUTLAND_SIM_HOME:?}" ./tools/frame-gate.sh
 
 # p99 gate over the newest F3 run
 sim-perf:

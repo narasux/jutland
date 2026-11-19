@@ -113,6 +113,7 @@ make sim-periodic    # trend + ai/analysis-brief
 make sim-watch       # refresh trend/analyze every 10m (Ctrl-C to stop)
 make sim-archive     # dry-run old-run archive; remove --dry-run after review
 make sim-frame       # rendered-frame p99 (opens a temporary window)
+make sim-frame-gate  # same, writes reports/frame/latest.json and fails over budget
 make sim-perf        # check newest F3 tick_p99_ms against 16.7ms
 make sim-suite       # F0 + F1 + F3 (3 seeds), then trend/analyze
 # SIM_MACRO_PARALLEL=1 runs the F3 seeds as separate processes
