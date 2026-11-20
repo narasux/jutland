@@ -31,23 +31,29 @@ type EvaluationRow struct {
 	Diagnostics int                `json:"diagnostics"`
 	Smoke       bool               `json:"smoke"`
 	Metrics     map[string]float64 `json:"metrics"`
-	RedItems    []string           `json:"redItems,omitempty"`
-	FindingIDs  []string           `json:"findingIds,omitempty"`
-	ReportHTML  string             `json:"reportHtml"`
+	// FindingsByKind 按 bug/data/balance 拆分，避免数据类 finding 淹没真正的 bug。
+	FindingsByKind map[string]int `json:"findingsByKind,omitempty"`
+	RedItems       []string       `json:"redItems,omitempty"`
+	FindingIDs     []string       `json:"findingIds,omitempty"`
+	ReportHTML     string         `json:"reportHtml"`
 }
 
 // EvaluationReport aggregates a suite into a human/AI overview.
 type EvaluationReport struct {
-	SchemaVersion int             `json:"schemaVersion"`
-	Suite         string          `json:"suite"`
-	GeneratedAt   time.Time       `json:"generatedAt"`
-	Runs          int             `json:"runs"`
-	Fidelity      map[string]int  `json:"fidelity"`
-	Status        map[string]int  `json:"status"`
-	SmokeRed      int             `json:"smokeRed"`
-	BalanceRed    int             `json:"balanceRed"`
-	Rows          []EvaluationRow `json:"rows"`
-	Missing       []string        `json:"missing,omitempty"`
+	SchemaVersion int            `json:"schemaVersion"`
+	Suite         string         `json:"suite"`
+	GeneratedAt   time.Time      `json:"generatedAt"`
+	Runs          int            `json:"runs"`
+	Fidelity      map[string]int `json:"fidelity"`
+	Status        map[string]int `json:"status"`
+	SmokeRed      int            `json:"smokeRed"`
+	BalanceRed    int            `json:"balanceRed"`
+	// BugFindings 只统计 Kind=bug 的 finding；门禁用它判断是否真的坏了。
+	BugFindings     int             `json:"bugFindings"`
+	DataFindings    int             `json:"dataFindings"`
+	BalanceFindings int             `json:"balanceFindings"`
+	Rows            []EvaluationRow `json:"rows"`
+	Missing         []string        `json:"missing,omitempty"`
 }
 
 var evalTemplate = template.Must(template.New("eval").Parse(`<!doctype html>
@@ -64,7 +70,7 @@ a{color:#155eef;text-decoration:none}
 <h1>Jutland 仿真评估</h1>
 <p class="small">suite <code>{{.Report.Suite}}</code> · {{.Report.Runs}} runs · generated {{.GeneratedAt}}</p>
 <section><h2>总览</h2><table><tr><th>绿</th><th>黄</th><th>红</th><th>红(smoke/balance)</th><th>Findings</th><th>Diagnostics</th></tr>
-<tr><td class="green">{{index .Report.Status "green"}}</td><td class="yellow">{{index .Report.Status "yellow"}}</td><td class="red">{{index .Report.Status "red"}}</td><td>{{.Report.SmokeRed}} / {{.Report.BalanceRed}}</td><td>{{.Findings}}</td><td>{{.Diagnostics}}</td></tr></table>
+<tr><td class="green">{{index .Report.Status "green"}}</td><td class="yellow">{{index .Report.Status "yellow"}}</td><td class="red">{{index .Report.Status "red"}}</td><td>{{.Report.SmokeRed}} / {{.Report.BalanceRed}}</td><td>{{.Findings}} <span class="small">(bug {{.Report.BugFindings}} / data {{.Report.DataFindings}} / balance {{.Report.BalanceFindings}})</span></td><td>{{.Diagnostics}}</td></tr></table>
 <p class="small">Fidelity: {{range $k,$v := .Report.Fidelity}}{{$k}}={{$v}} {{end}}</p></section>
 <section><h2>Runs</h2><table><thead><tr><th>run</th><th>scenario</th><th>fidelity</th><th>mode</th><th>green</th><th>yellow</th><th>red</th><th>findings</th><th>diag</th><th>shots</th><th>hit%</th><th>success</th><th>enemy sunk</th><th>p99ms</th></tr></thead><tbody>
 {{range .Report.Rows}}<tr><td><a href="../runs/{{.RunID}}/report.html">{{.RunID}}</a></td><td>{{.Scenario}}</td><td>{{.Fidelity}}</td><td>{{.Mode}}</td><td class="green">{{.Green}}</td><td class="yellow">{{.Yellow}}</td><td class="red">{{.Red}}</td><td>{{.Findings}}</td><td>{{.Diagnostics}}</td><td>{{index .Metrics "shots"}}</td><td>{{index .Metrics "hit_rate"}}</td><td>{{index .Metrics "kill_rate"}}</td><td>{{index .Metrics "tick_p99_ms"}}</td></tr>{{end}}
@@ -141,6 +147,18 @@ func WriteEvaluation(paths Paths, summaryPath string) (EvaluationReport, string,
 		}
 		for _, finding := range result.Findings {
 			row.FindingIDs = append(row.FindingIDs, finding.ID+": "+finding.Title)
+			if row.FindingsByKind == nil {
+				row.FindingsByKind = map[string]int{}
+			}
+			row.FindingsByKind[finding.Kind]++
+			switch finding.Kind {
+			case "bug":
+				report.BugFindings++
+			case "balance":
+				report.BalanceFindings++
+			default:
+				report.DataFindings++
+			}
 		}
 		report.Fidelity[result.Fidelity]++
 		findings += len(result.Findings)
@@ -188,6 +206,9 @@ func EvaluationGateError(report EvaluationReport) error {
 	if report.SmokeRed > 0 {
 		return fmt.Errorf("evaluation has %d smoke red item(s)", report.SmokeRed)
 	}
+	if report.BugFindings > 0 {
+		return fmt.Errorf("evaluation has %d bug finding(s)", report.BugFindings)
+	}
 	return nil
 }
 
@@ -196,7 +217,8 @@ func writeEvaluationMarkdown(path string, report EvaluationReport, findings, dia
 	fmt.Fprintf(&b, "# Jutland 仿真评估：%s\n\n", report.Suite)
 	fmt.Fprintf(
 		&b,
-		"- runs: %d\n- green: %d\n- yellow: %d\n- red: %d (smoke %d / balance %d)\n- findings: %d\n- diagnostics: %d\n\n",
+		"- runs: %d\n- green: %d\n- yellow: %d\n- red: %d (smoke %d / balance %d)\n"+
+			"- findings: %d (bug %d / data %d / balance %d)\n- diagnostics: %d\n\n",
 		report.Runs,
 		report.Status["green"],
 		report.Status["yellow"],
@@ -204,6 +226,9 @@ func writeEvaluationMarkdown(path string, report EvaluationReport, findings, dia
 		report.SmokeRed,
 		report.BalanceRed,
 		findings,
+		report.BugFindings,
+		report.DataFindings,
+		report.BalanceFindings,
 		diagnostics,
 	)
 	b.WriteString(

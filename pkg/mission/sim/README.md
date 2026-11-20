@@ -106,8 +106,10 @@ prints the generated plist without touching the system.
 ### CI gate
 
 `make sim-gate` (or `jutland-suite suite <manifest> --fail-on-red`) turns a suite into
-a pass/fail check: missing runs or smoke red items fail the command, while balance reds
-stay informational. To gate an existing summary without re-running the suite:
+a pass/fail check: missing runs, smoke red items or `bug` findings fail the command,
+while `data`/`balance` findings and balance reds stay informational. The evaluation
+splits findings into bug/data/balance counts so timeout-style data noise does not
+masquerade as a real bug. To gate an existing summary without re-running the suite:
 
 ```bash
 jutland-sim evaluation "$JUTLAND_SIM_HOME/reports/suites/<suite>.json" --fail-on-red
