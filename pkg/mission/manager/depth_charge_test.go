@@ -42,7 +42,7 @@ func TestDepthChargeOnlyDamagesSubmarines(t *testing.T) {
 	submerged := &objUnit.BattleShip{
 		Uid: "sub1", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
 		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	surfaced := &objUnit.BattleShip{
 		Uid: "sub2", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
@@ -66,14 +66,14 @@ func TestDepthChargeOnlyDamagesSubmarines(t *testing.T) {
 }
 
 // TestDepthChargeBlindFireDoesNotDamage 验证未探测到水下潜艇时深弹盲炸不结算伤害。
-// 场景：sub 在 (10,10) 完全下潜且 DetectedBy 为空，HumanAlpha 的深弹在同一点引爆。
+// 场景：sub 在 (10,10) 完全下潜且 Submarine.DetectedBy 为空，HumanAlpha 的深弹在同一点引爆。
 // 预期：resolveDepthChargeDamage 因 CanSeeShip 为 false 跳过该艇，CurHP 保持 100。
 // 覆盖：仅含一艘潜艇的 Arena，重建桶后调用落点结算，断言血量不变。
 func TestDepthChargeBlindFireDoesNotDamage(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
 		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	ms := depthChargeState(sub)
 	m := &MissionManager{state: ms}
@@ -125,7 +125,7 @@ func TestDepthChargePipelineThroughShotBullets(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 3000, TotalHP: 3000, Type: objUnit.ShipTypeSubmarine,
 		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	sub.MarkDetected(faction.HumanAlpha, 500, sub.CurPos)
 	ms := depthChargeState(sub)
@@ -164,7 +164,7 @@ func TestDepthChargeRackCanFireAhead(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
 		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(11.5, 10),
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	launcher := objUnit.NewRocketLauncher(
 		"UK/DC/5/MkVII", -0.86,
@@ -178,7 +178,7 @@ func TestDepthChargeRackCanFireAhead(t *testing.T) {
 
 // TestDepthChargeSinkRecordsShooter 验证深弹击沉潜艇时记录投弹方与武器，战报能显示「谁用什么击沉」。
 // 场景：nautilus 50/100 在 (10,10)，gurkha 的 Mk6 深弹以 Shooter=dd、ShooterName=gurkha、ShooterObjType=TypeShip 在同点结算，随后 Stats.RecordShipLost。
-// 预期：HP 归零、SunkByHit=true，LastAttackerName/Type/Player 与 LastHit.WeaponType=depth_charge 完整；战报 1 条 ShipSunk 且 ActorName=gurkha、Hit.WeaponType=depth_charge。
+// 预期：HP 归零、Damage.KilledByHit=true，Damage.LastAttackerName/Type/Player 与 Damage.LastHit.WeaponType=depth_charge 完整；战报 1 条 ShipSunk 且 ActorName=gurkha、Hit.WeaponType=depth_charge。
 // 覆盖：resolveDepthChargeDamage 的击杀字段写入与 RecordShipLost 的战报生成，回归「只剩沉没潜艇、无投弹方」。
 func TestDepthChargeSinkRecordsShooter(t *testing.T) {
 	sub := &objUnit.BattleShip{
@@ -198,12 +198,12 @@ func TestDepthChargeSinkRecordsShooter(t *testing.T) {
 	m.resolveDepthChargeDamage(bt)
 
 	require.Zero(t, sub.CurHP, "深弹应击沉潜艇")
-	require.True(t, sub.SunkByHit)
-	require.Equal(t, "gurkha", sub.LastAttackerName)
-	require.Equal(t, string(objUnit.ShipTypeDestroyer), sub.LastAttackerType)
-	require.Equal(t, faction.HumanAlpha, sub.LastAttackerPlayer)
-	require.Equal(t, string(objBullet.TypeDepthCharge), sub.LastHit.WeaponType)
-	require.Positive(t, sub.DamageTaken)
+	require.True(t, sub.Damage.KilledByHit)
+	require.Equal(t, "gurkha", sub.Damage.LastAttackerName)
+	require.Equal(t, string(objUnit.ShipTypeDestroyer), sub.Damage.LastAttackerType)
+	require.Equal(t, faction.HumanAlpha, sub.Damage.LastAttackerPlayer)
+	require.Equal(t, string(objBullet.TypeDepthCharge), sub.Damage.LastHit.WeaponType)
+	require.Positive(t, sub.Damage.DamageTaken)
 
 	// 击沉记录必须带上投弹方和武器，详情页才能渲染「驱逐舰 X 使用 深水炸弹 击沉 潜艇 Y」。
 	ms.Stats.RecordShipLost(sub)

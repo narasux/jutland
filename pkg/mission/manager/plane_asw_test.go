@@ -54,7 +54,7 @@ func TestPlaneFireOnSubmergedDropsOnlyDepthCharges(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
 		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10.5, 10),
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	bullets := plane.Fire(sub)
 	require.Len(t, bullets, 1)
@@ -86,7 +86,7 @@ func TestCanPlaneFireAtSubmergedNeedsDepthChargeAndDetection(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
 		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10.5, 10),
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	aswPlane := newASWPlane(newDepthChargeReleaser())
 	aswPlane.CurPos = objPos.NewR(10, 10)

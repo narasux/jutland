@@ -25,14 +25,14 @@ func TestDetailSpeedUsesSameSpeedMultiplier(t *testing.T) {
 	config.G = &config.GameSettings{SpeedMultiplier: 2}
 
 	plane := &Plane{
-		Name:        "A6M2",
-		Uid:         "p",
-		MaxSpeed:    533.0 / PlaneSpeedScale,
-		CurSpeed:    533.0 / PlaneSpeedScale * 2,
-		CurHP:       26,
-		TotalHP:     26,
-		FlightPhase: PlaneFlightPhaseCruising,
-		CurPos:      objPos.NewR(10, 20),
+		Name:     "A6M2",
+		Uid:      "p",
+		MaxSpeed: 533.0 / PlaneSpeedScale,
+		CurSpeed: 533.0 / PlaneSpeedScale * 2,
+		CurHP:    26,
+		TotalHP:  26,
+		Flight:   FlightState{Phase: PlaneFlightPhaseCruising},
+		CurPos:   objPos.NewR(10, 20),
 	}
 	got := plane.Detail()
 	if want := fmt.Sprintf("Speed: %.2f/%.2f", plane.CurSpeed, plane.MaxSpeed*2); !strings.Contains(got, want) {
@@ -43,7 +43,7 @@ func TestDetailSpeedUsesSameSpeedMultiplier(t *testing.T) {
 	}
 
 	// 待场进近的速度是世界系位移，允许高于设计上限；阶段字段必须能区分出来。
-	plane.FlightPhase = PlaneFlightPhaseLandingStaging
+	plane.Flight.Phase = PlaneFlightPhaseLandingStaging
 	plane.CurSpeed = 0.09
 	got = plane.Detail()
 	if !strings.Contains(got, "Phase: landing_staging") {
@@ -215,7 +215,10 @@ func TestPlaneDetailLinesGateTorpedoOnGroundTargets(t *testing.T) {
 			}},
 		},
 	}
-	grounded := &Plane{Name: "A6M2", Uid: "g", CurPos: objPos.NewR(10, 10.5), FlightPhase: PlaneFlightPhaseTakingOff}
+	grounded := &Plane{
+		Name: "A6M2", Uid: "g", CurPos: objPos.NewR(10, 10.5),
+		Flight: FlightState{Phase: PlaneFlightPhaseTakingOff},
+	}
 
 	joined := strings.Join(plane.DetailLines(DetailContext{Enemy: grounded}), "\n")
 	if !strings.Contains(joined, "targetOK false") {

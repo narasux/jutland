@@ -37,6 +37,39 @@ const (
 	landingTurnRateSmoothingRate = 0.08
 )
 
+// LandingState 飞机着舰引导、进近减速与最终刹车状态。
+type LandingState struct {
+	// Slot 当前飞机在所属航母舰尾入口中的分散槽位
+	Slot int
+	// onWater 本次降落是否为舷侧着水回收（水上飞机）
+	onWater bool
+	// stagingLeg 当前正在飞向切线引导点或圆弧入口
+	stagingLeg landingStagingLeg
+	// carrierRotation 上一模拟帧的航母航向
+	carrierRotation float64
+	// carrierTurnRate 航母当前每模拟帧的转向弧度
+	carrierTurnRate float64
+	// displayTurnRate 降落机头合成使用的低通转向速率
+	displayTurnRate float64
+	// scaleCompleteRatio 直线进近段降到最低视觉倍率时的路程比例
+	scaleCompleteRatio float64
+	// arc 最终进近使用的航母局部坐标圆弧
+	arc landingApproachArc
+	// 圆弧进近段的等减速计划状态（相对航母速度，单位为地图坐标每模拟帧）
+	arcSpeed       float64
+	arcExitSpeed   float64
+	arcTotalLength float64
+	arcDistance    float64
+	arcDecel       float64
+	// 最终直线进近段的等减速刹车计划状态
+	runSpeed       float64
+	runTotalLength float64
+	runDistance    float64
+	runDecel       float64
+	// 最终直线进近方向的航母局部单位向量
+	runTangent carrierLocalOffset
+}
+
 // landingStagingLeg 是 landing_staging 内部的两段引导，不对外增加飞行阶段。
 type landingStagingLeg uint8
 
@@ -50,26 +83,26 @@ const (
 // StartLandingStaging 将返航飞机导向地图范围内可达的舰尾进近通道。
 func (p *Plane) StartLandingStaging(_ *mapcfg.MapCfg, base AircraftBase, slot int) {
 	p.CurAttackTarget = ""
-	p.FlightPhase = PlaneFlightPhaseLandingStaging
-	p.FlightPhaseStartPos = p.CurPos.Copy()
-	p.FlightPhaseElapsed = 0
-	p.FlightPhaseProgressValue = 0
-	p.FlightVisualScaleStart = 1
-	p.FlightVisualScaleEnd = 1
-	p.LandingSlot = slot
+	p.Flight.Phase = PlaneFlightPhaseLandingStaging
+	p.Flight.StartPos = p.CurPos.Copy()
+	p.Flight.Elapsed = 0
+	p.Flight.Progress = 0
+	p.Flight.VisualScaleStart = 1
+	p.Flight.VisualScaleEnd = 1
+	p.Landing.Slot = slot
 	// 着水回收的舰船（水上飞机母舰），飞机最终降落在舰侧水面而非甲板
-	p.landingOnWater = base.BaseAircraft().landingOnWater()
-	p.landingStagingLeg = landingStagingLegLeadIn
-	p.landingCarrierRotation = base.BaseRotation()
-	p.landingCarrierTurnRate = 0
-	p.landingDisplayTurnRate = 0
+	p.Landing.onWater = base.BaseAircraft().landingOnWater()
+	p.Landing.stagingLeg = landingStagingLegLeadIn
+	p.Landing.carrierRotation = base.BaseRotation()
+	p.Landing.carrierTurnRate = 0
+	p.Landing.displayTurnRate = 0
 	p.resetLandingRunPlan()
 	p.updateLandingStagingEndPos(base)
 }
 
 // StartLandingApproach 开始单向定半径圆弧进近，并建立空中减速计划。
 func (p *Plane) StartLandingApproach(base AircraftBase) {
-	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
+	landing := base.BaseAircraft().landingConfigForSlot(p.Landing.Slot)
 	length := phaseUnitInMapBlocks(base)
 	local := planeCarrierLocalOffset(p, base)
 	arc, ok := buildLandingApproachArc(
@@ -81,19 +114,19 @@ func (p *Plane) StartLandingApproach(base AircraftBase) {
 	if !ok {
 		return
 	}
-	p.landingArc = arc
-	p.landingCarrierRotation = base.BaseRotation()
+	p.Landing.arc = arc
+	p.Landing.carrierRotation = base.BaseRotation()
 	p.resetLandingRunPlan()
 	// 以当前实际相对速度为初速建立圆弧段等减速计划，保证与入口引导速度连续
 	entry := p.landingRelativeSpeed(base)
 	p.startLandingArcPlan(base, entry)
-	p.FlightPhase = PlaneFlightPhaseLandingApproach
-	p.FlightPhaseStartPos = p.CurPos.Copy()
-	p.FlightPhaseEndPos = landingFinalStartPos(base, landing)
-	p.FlightPhaseElapsed = 0
-	p.FlightPhaseProgressValue = 0
-	p.FlightVisualScaleStart = 1
-	p.FlightVisualScaleEnd = 1
+	p.Flight.Phase = PlaneFlightPhaseLandingApproach
+	p.Flight.StartPos = p.CurPos.Copy()
+	p.Flight.EndPos = landingFinalStartPos(base, landing)
+	p.Flight.Elapsed = 0
+	p.Flight.Progress = 0
+	p.Flight.VisualScaleStart = 1
+	p.Flight.VisualScaleEnd = 1
 }
 
 // startLandingArcPlan 按运动学 v²=v0²-2aL 建立圆弧段等减速计划。
@@ -101,60 +134,60 @@ func (p *Plane) startLandingArcPlan(base AircraftBase, entry float64) {
 	multiplier := max(gameSpeedMultiplier(), 0.001)
 	entry = max(entry, p.MaxSpeed*multiplier*landingMinRelativeSpeedRatio)
 	exit := min(entry, p.MaxSpeed*multiplier*landingApproachTargetSpeedRatio)
-	total := max(p.landingArc.radius*math.Abs(p.landingArc.sweepAngle)*
+	total := max(p.Landing.arc.radius*math.Abs(p.Landing.arc.sweepAngle)*
 		phaseUnitInMapBlocks(base), 0.001)
 	// 单帧减速量：a = (v0²-vt²)/(2L)，恰好在线段末端降到出口速度
 	decel := (entry*entry - exit*exit) / (2 * total)
 
-	p.landingArcSpeed = entry
-	p.landingArcExitSpeed = exit
-	p.landingArcTotalLength = total
-	p.landingArcDistance = 0
-	p.landingArcDecel = decel
+	p.Landing.arcSpeed = entry
+	p.Landing.arcExitSpeed = exit
+	p.Landing.arcTotalLength = total
+	p.Landing.arcDistance = 0
+	p.Landing.arcDecel = decel
 }
 
 // StartLandingDeck 初始化最终直线进近与着舰回收阶段。
 func (p *Plane) StartLandingDeck(base AircraftBase) {
-	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
+	landing := base.BaseAircraft().landingConfigForSlot(p.Landing.Slot)
 	length := phaseUnitInMapBlocks(base)
 	// 圆弧出口速度作为刹车段初速，两段速度天然连续
-	entry := p.landingArcSpeed
+	entry := p.Landing.arcSpeed
 	if entry <= 0 {
 		entry = p.landingRelativeSpeed(base)
 	}
 	entry = max(entry, p.MaxSpeed*gameSpeedMultiplier()*landingMinRelativeSpeedRatio)
 	total := max(length*landing.ApproachLength, 0.001)
 
-	p.landingOnWater = base.BaseAircraft().landingOnWater()
-	p.landingScaleCompleteRatio = landingScaleCompleteRatio(base, landing)
-	p.landingRunTangent = landingApproachTangent(landing)
-	p.landingRunSpeed = entry
-	p.landingRunTotalLength = total
-	p.landingRunDistance = 0
-	p.landingRunDecel = entry * entry / (2 * total)
+	p.Landing.onWater = base.BaseAircraft().landingOnWater()
+	p.Landing.scaleCompleteRatio = landingScaleCompleteRatio(base, landing)
+	p.Landing.runTangent = landingApproachTangent(landing)
+	p.Landing.runSpeed = entry
+	p.Landing.runTotalLength = total
+	p.Landing.runDistance = 0
+	p.Landing.runDecel = entry * entry / (2 * total)
 
 	currentScale := p.VisualScaleMultiplier()
-	p.FlightPhase = PlaneFlightPhaseLandingDeck
-	p.FlightPhaseStartPos = p.CurPos.Copy()
-	p.FlightPhaseEndPos = carrierLandingDeckEndPos(base, landing)
-	p.FlightPhaseElapsed = 0
-	p.FlightPhaseProgressValue = 0
-	p.FlightVisualScaleStart = currentScale
-	p.FlightVisualScaleEnd = planeLowAltitudeVisualScale
+	p.Flight.Phase = PlaneFlightPhaseLandingDeck
+	p.Flight.StartPos = p.CurPos.Copy()
+	p.Flight.EndPos = carrierLandingDeckEndPos(base, landing)
+	p.Flight.Elapsed = 0
+	p.Flight.Progress = 0
+	p.Flight.VisualScaleStart = currentScale
+	p.Flight.VisualScaleEnd = planeLowAltitudeVisualScale
 }
 
 // resetLandingRunPlan 清空最终直线段与圆弧段的减速计划状态。
 func (p *Plane) resetLandingRunPlan() {
-	p.landingArcSpeed = 0
-	p.landingArcExitSpeed = 0
-	p.landingArcTotalLength = 0
-	p.landingArcDistance = 0
-	p.landingArcDecel = 0
-	p.landingRunSpeed = 0
-	p.landingRunTotalLength = 0
-	p.landingRunDistance = 0
-	p.landingRunDecel = 0
-	p.landingRunTangent = carrierLocalOffset{}
+	p.Landing.arcSpeed = 0
+	p.Landing.arcExitSpeed = 0
+	p.Landing.arcTotalLength = 0
+	p.Landing.arcDistance = 0
+	p.Landing.arcDecel = 0
+	p.Landing.runSpeed = 0
+	p.Landing.runTotalLength = 0
+	p.Landing.runDistance = 0
+	p.Landing.runDecel = 0
+	p.Landing.runTangent = carrierLocalOffset{}
 }
 
 // UpdateLandingStaging 推进舰尾入口阶段，返回是否进入最终进近捕获范围。
@@ -162,11 +195,11 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 	if p.CurHP <= 0 {
 		return false
 	}
-	p.FlightPhaseElapsed += gameSpeedMultiplier()
+	p.Flight.Elapsed += gameSpeedMultiplier()
 	p.updateLandingCarrierTurnRate(base)
 	length := phaseUnitInMapBlocks(base)
-	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
-	gate := landingGateLocalOffset(p.LandingSlot)
+	landing := base.BaseAircraft().landingConfigForSlot(p.Landing.Slot)
+	gate := landingGateLocalOffset(p.Landing.Slot)
 	plannedArc, ok := buildLandingApproachArc(gate, base, p.MaxSpeed, landing)
 	if !ok {
 		return false
@@ -174,15 +207,15 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 	leadIn := landingLeadInLocalOffset(plannedArc)
 	gatePos := carrierRelativePos2D(base, length*gate.forward, length*gate.lateral)
 	leadInPos := carrierRelativePos2D(base, length*leadIn.forward, length*leadIn.lateral)
-	entrySpeed := landingArcEntryTargetSpeed(plannedArc, base, p.landingCarrierTurnRate)
+	entrySpeed := landingArcEntryTargetSpeed(plannedArc, base, p.Landing.carrierTurnRate)
 
 	// 先捕获切线后方的 lead-in，再沿切线进入 gate；两段都绑定航母当前姿态。
 	// 捕获半径随 lead-in 的世界运动速度放大：快速机动的入口下方机会形成
 	// 尾随平衡，飞机悬停距离与目标运动速度成正比，固定半径会永远差一点。
-	previousLeg := p.landingStagingLeg
-	previousTarget := p.FlightPhaseEndPos
+	previousLeg := p.Landing.stagingLeg
+	previousTarget := p.Flight.EndPos
 	leadInMotion := 0.0
-	if previousLeg == p.landingStagingLeg {
+	if previousLeg == p.Landing.stagingLeg {
 		leadInMotion = previousTarget.Distance(leadInPos)
 	}
 	captureRadius := max(
@@ -190,23 +223,23 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 		0.5,
 		leadInMotion*landingLeadInMotionCaptureFrames,
 	)
-	if p.landingStagingLeg == landingStagingLegLeadIn &&
+	if p.Landing.stagingLeg == landingStagingLegLeadIn &&
 		p.CurPos.Near(leadInPos, captureRadius) {
-		p.landingStagingLeg = landingStagingLegGate
+		p.Landing.stagingLeg = landingStagingLegGate
 	}
-	if p.landingStagingLeg == landingStagingLegGate {
-		p.FlightPhaseEndPos = gatePos
+	if p.Landing.stagingLeg == landingStagingLegGate {
+		p.Flight.EndPos = gatePos
 	} else {
-		p.FlightPhaseEndPos = leadInPos
+		p.Flight.EndPos = leadInPos
 	}
 
 	// lead-in 会随航母平移和转向。复用上一帧目标可估算其世界速度，避免低速机追不上移动入口。
 	targetMotion := 0.0
-	aimPos := p.FlightPhaseEndPos
-	if previousLeg == p.landingStagingLeg {
+	aimPos := p.Flight.EndPos
+	if previousLeg == p.Landing.stagingLeg {
 		targetMotion = previousTarget.Distance(leadInPos)
 		aimPos = leadInPos
-		if p.landingStagingLeg == landingStagingLegGate {
+		if p.Landing.stagingLeg == landingStagingLegGate {
 			targetMotion = previousTarget.Distance(gatePos)
 		} else {
 			// lead-in 随航母平移与转向，世界系追踪容易与旋转入口形成尾随平衡。
@@ -235,7 +268,7 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 			aimPos = objPos.NewR(leadInPos.RX+leadForward, leadInPos.RY+leadLateral)
 		}
 	}
-	if p.landingStagingLeg == landingStagingLegGate {
+	if p.Landing.stagingLeg == landingStagingLegGate {
 		p.executeLandingGateMovement(base, plannedArc)
 	} else {
 		carrierDistance := p.CurPos.Distance(base.BasePos())
@@ -253,7 +286,7 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 			p.approachSpeed(targetSpeed),
 		)
 	}
-	if p.landingStagingLeg != landingStagingLegGate {
+	if p.Landing.stagingLeg != landingStagingLegGate {
 		return false
 	}
 	if landingApproachEntryReady(p, base, gate) {
@@ -267,8 +300,8 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 		(current.lateral-gate.lateral)*tangent.lateral > landingGateMissDistanceRatio
 	// 错过入口或穿越中线时返回远端重新建立切线，禁止从舰侧强行接入圆弧。
 	if passedGate || current.lateral*gate.lateral <= 0 {
-		p.landingStagingLeg = landingStagingLegLeadIn
-		p.FlightPhaseEndPos = leadInPos
+		p.Landing.stagingLeg = landingStagingLegLeadIn
+		p.Flight.EndPos = leadInPos
 	}
 	return false
 }
@@ -276,14 +309,14 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 // updateLandingStagingEndPos 初始化 landing_staging 的远端切线引导目标。
 func (p *Plane) updateLandingStagingEndPos(base AircraftBase) {
 	length := phaseUnitInMapBlocks(base)
-	gate := landingGateLocalOffset(p.LandingSlot)
-	arc, ok := buildLandingApproachArc(gate, base, p.MaxSpeed, base.BaseAircraft().landingConfigForSlot(p.LandingSlot))
+	gate := landingGateLocalOffset(p.Landing.Slot)
+	arc, ok := buildLandingApproachArc(gate, base, p.MaxSpeed, base.BaseAircraft().landingConfigForSlot(p.Landing.Slot))
 	if !ok {
-		p.FlightPhaseEndPos = base.BaseAircraft().landingStagingTarget(nil, base, p.LandingSlot)
+		p.Flight.EndPos = base.BaseAircraft().landingStagingTarget(nil, base, p.Landing.Slot)
 		return
 	}
 	target := landingLeadInLocalOffset(arc)
-	p.FlightPhaseEndPos = carrierRelativePos2D(base, length*target.forward, length*target.lateral)
+	p.Flight.EndPos = carrierRelativePos2D(base, length*target.forward, length*target.lateral)
 }
 
 // landingStagingTargetSpeed 根据距 gate 入口的径向距离，在远端追赶速度和入口速度之间平滑插值。
@@ -321,13 +354,13 @@ func (p *Plane) landingRelativeSpeed(base AircraftBase) float64 {
 // 并维护机头合成使用的低通转向速率。
 func (p *Plane) updateLandingCarrierTurnRate(base AircraftBase) {
 	// 使用最短角差跨越 0/360 度，结果以“每模拟帧弧度”保存供 omega×r 使用。
-	delta := math.Mod(base.BaseRotation()-p.landingCarrierRotation+540, 360) - 180
+	delta := math.Mod(base.BaseRotation()-p.Landing.carrierRotation+540, 360) - 180
 	turnRate := delta * math.Pi / 180
-	p.landingCarrierRotation = base.BaseRotation()
+	p.Landing.carrierRotation = base.BaseRotation()
 	// 原始转向速率保留给 staging 自由飞行的速度合成；机头航向只用于表现，
 	// 使用低通后的速率，使转向起止时机头的偏航变化连续平滑。
-	p.landingCarrierTurnRate = turnRate
-	p.landingDisplayTurnRate += (turnRate - p.landingDisplayTurnRate) *
+	p.Landing.carrierTurnRate = turnRate
+	p.Landing.displayTurnRate += (turnRate - p.Landing.displayTurnRate) *
 		min(1, landingTurnRateSmoothingRate*gameSpeedMultiplier())
 }
 
@@ -337,20 +370,20 @@ func (p *Plane) UpdateLandingApproach(base AircraftBase) bool {
 		return false
 	}
 	p.updateLandingCarrierTurnRate(base)
-	p.FlightPhaseElapsed += gameSpeedMultiplier()
+	p.Flight.Elapsed += gameSpeedMultiplier()
 
 	// 按距离积分推进：每帧先前进再按等减速运动学反算下一帧速度，
 	// v² = v² - 2aL 保证离散累计距离与速度计划一致，末端平滑收敛不出跳变
-	step := min(p.landingArcSpeed, max(p.landingArcTotalLength-p.landingArcDistance, 0))
-	p.landingArcDistance += step
-	timeProgress := clamp01(p.landingArcDistance / max(p.landingArcTotalLength, 0.001))
-	p.FlightPhaseProgressValue = timeProgress
-	p.landingArcSpeed = max(
-		p.landingArcExitSpeed,
-		math.Sqrt(max(0, p.landingArcSpeed*p.landingArcSpeed-2*p.landingArcDecel*step)),
+	step := min(p.Landing.arcSpeed, max(p.Landing.arcTotalLength-p.Landing.arcDistance, 0))
+	p.Landing.arcDistance += step
+	timeProgress := clamp01(p.Landing.arcDistance / max(p.Landing.arcTotalLength, 0.001))
+	p.Flight.Progress = timeProgress
+	p.Landing.arcSpeed = max(
+		p.Landing.arcExitSpeed,
+		math.Sqrt(max(0, p.Landing.arcSpeed*p.Landing.arcSpeed-2*p.Landing.arcDecel*step)),
 	)
 
-	arcPos := landingArcPoint(p.landingArc, timeProgress)
+	arcPos := landingArcPoint(p.Landing.arc, timeProgress)
 	// 机头航向使用低通转向速率合成：位置已硬绑定随舰旋转的圆弧，
 	// 若跟随含原始 omega×r 的合成航向，转向起止时机会瞬间甩动数十度。
 	p.advanceLandingAnimation(
@@ -358,10 +391,10 @@ func (p *Plane) UpdateLandingApproach(base AircraftBase) bool {
 		arcPos.forward,
 		arcPos.lateral,
 		landingArcWorldRotation(
-			p.landingArc,
+			p.Landing.arc,
 			base,
 			timeProgress,
-			p.landingDisplayTurnRate,
+			p.Landing.displayTurnRate,
 		),
 	)
 	return timeProgress >= 1
@@ -373,22 +406,22 @@ func (p *Plane) UpdateLandingDeck(base AircraftBase) bool {
 		return false
 	}
 	p.updateLandingCarrierTurnRate(base)
-	p.FlightPhaseElapsed += gameSpeedMultiplier()
+	p.Flight.Elapsed += gameSpeedMultiplier()
 
 	// 等减速刹车：每帧按剩余距离反算速度（v² = v² - 2aL），最后一步恰好停在着舰点
-	step := min(p.landingRunSpeed, max(p.landingRunTotalLength-p.landingRunDistance, 0))
-	p.landingRunDistance += step
-	timeProgress := clamp01(p.landingRunDistance / max(p.landingRunTotalLength, 0.001))
-	p.landingRunSpeed = math.Sqrt(max(0, p.landingRunSpeed*p.landingRunSpeed-2*p.landingRunDecel*step))
-	p.FlightPhaseProgressValue = timeProgress
+	step := min(p.Landing.runSpeed, max(p.Landing.runTotalLength-p.Landing.runDistance, 0))
+	p.Landing.runDistance += step
+	timeProgress := clamp01(p.Landing.runDistance / max(p.Landing.runTotalLength, 0.001))
+	p.Landing.runSpeed = math.Sqrt(max(0, p.Landing.runSpeed*p.Landing.runSpeed-2*p.Landing.runDecel*step))
+	p.Flight.Progress = timeProgress
 
 	// 起点 = 最终进近段起点（舰长单位局部坐标），沿进近方向前进已滑跑距离
-	landing := base.BaseAircraft().landingConfigForSlot(p.LandingSlot)
+	landing := base.BaseAircraft().landingConfigForSlot(p.Landing.Slot)
 	end := landingFinalStartOffset(base, landing)
 	length := phaseUnitInMapBlocks(base)
-	forwardRatio := end.forward + p.landingRunTangent.forward*(p.landingRunDistance/length)
-	lateralRatio := end.lateral + p.landingRunTangent.lateral*(p.landingRunDistance/length)
-	p.FlightPhaseEndPos = carrierLandingDeckEndPos(base, landing)
+	forwardRatio := end.forward + p.Landing.runTangent.forward*(p.Landing.runDistance/length)
+	lateralRatio := end.lateral + p.Landing.runTangent.lateral*(p.Landing.runDistance/length)
+	p.Flight.EndPos = carrierLandingDeckEndPos(base, landing)
 	// 与圆弧段一致，机头航向使用低通转向速率合成，转向时机头贴合甲板进近线
 	p.advanceLandingAnimation(
 		base,
@@ -396,11 +429,11 @@ func (p *Plane) UpdateLandingDeck(base AircraftBase) bool {
 		lateralRatio,
 		landingRunWorldRotation(
 			base,
-			p.LandingSlot,
+			p.Landing.Slot,
 			forwardRatio,
 			lateralRatio,
-			p.landingRunSpeed,
-			p.landingDisplayTurnRate,
+			p.Landing.runSpeed,
+			p.Landing.displayTurnRate,
 		),
 	)
 	return timeProgress >= 1
@@ -462,9 +495,9 @@ func (p *Plane) executeLandingGateMovement(base AircraftBase, arc landingApproac
 	// 与圆弧阶段相同，最终世界速度由航母平移、飞机相对速度和航母旋转速度组成。
 	velocity := carrierLocalOffset{
 		forward: base.BaseSpeed() + tangent.forward*arc.relativeSpeed + correction.forward -
-			p.landingCarrierTurnRate*current.lateral*length,
+			p.Landing.carrierTurnRate*current.lateral*length,
 		lateral: tangent.lateral*arc.relativeSpeed + correction.lateral +
-			p.landingCarrierTurnRate*current.forward*length,
+			p.Landing.carrierTurnRate*current.forward*length,
 	}
 	targetRotation := normalizeAngle(
 		base.BaseRotation() + math.Atan2(velocity.lateral, velocity.forward)*180/math.Pi,
@@ -474,9 +507,9 @@ func (p *Plane) executeLandingGateMovement(base AircraftBase, arc landingApproac
 	// 飞机必须跟得上，所以上限以不含修正项的运动学速度为基准给一点余量。
 	kinematic := carrierLocalOffset{
 		forward: base.BaseSpeed() + tangent.forward*arc.relativeSpeed -
-			p.landingCarrierTurnRate*current.lateral*length,
+			p.Landing.carrierTurnRate*current.lateral*length,
 		lateral: tangent.lateral*arc.relativeSpeed +
-			p.landingCarrierTurnRate*current.forward*length,
+			p.Landing.carrierTurnRate*current.forward*length,
 	}
 	targetSpeed := min(
 		math.Hypot(velocity.forward, velocity.lateral),
@@ -513,15 +546,15 @@ func executeLandingMovementOnHeading(p *Plane, targetRotation, speed float64) {
 // GenWaterWakeTrails 为着水滑跑中的水上飞机生成水面尾流（泡沫 + 水痕）。
 // 仅在舷侧着水降落的触水段（低空缩放完成之后）产生，甲板降落不产生水尾流。
 func (p *Plane) GenWaterWakeTrails() []*objTrail.Trail {
-	if !p.landingOnWater || p.FlightPhase != PlaneFlightPhaseLandingDeck {
+	if !p.Landing.onWater || p.Flight.Phase != PlaneFlightPhaseLandingDeck {
 		return nil
 	}
 	// 低空缩放完成后视为已触水；触水前保持空中无尾流
-	if p.FlightPhaseProgressValue < p.landingScaleCompleteAt() {
+	if p.Flight.Progress < p.landingScaleCompleteAt() {
 		return nil
 	}
 	// 节流：每 3 个模拟帧生成一次，避免尾流过密
-	if int(p.FlightPhaseElapsed)%3 != 0 {
+	if int(p.Flight.Elapsed)%3 != 0 {
 		return nil
 	}
 

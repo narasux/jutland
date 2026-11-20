@@ -30,7 +30,7 @@
 |---|---|---|---|
 | 水面 `Surface` | 100% | 甲板炮 / 防空炮 / 鱼雷 | 普通迷雾规则 |
 | 下潜中 `Diving` | 50% | 同水面（可被打，无无敌帧） | 同水面 |
-| 水下 `Submerged` | `submergedSpeedRatio`（各艇 0.36~0.46） | 仅鱼雷 | **完全隐身**，仅声呐可探测 |
+| 水下 `Submerged` | `submarine.submergedSpeedRatio`（各艇 0.36~0.46） | 仅鱼雷 | **完全隐身**，仅声呐可探测 |
 | 上浮中 `Surfacing` | 50% | 同水面 | 同水面 |
 
 切换规则：
@@ -184,7 +184,7 @@
 | I-168 | 日 | 1785 | 23 kn | 8.3 kn（0.36） | 8s / 8s | 6 管 533mm（6.8 格） | 100mm + 13.2mm | 55 / 21s |
 | Nautilus | 美 | 2770 | 17.4 kn | 8.0 kn（0.46） | 10s / 8s | 6 管 533mm（4.8 格） | 2×152mm + 12.7mm | 65 / 25s |
 
-- 三艇视距均为 12 格，下潜后缩到 7 格；入场默认水下（`defaultDiveState: "submerged"`）。
+- 三艇视距均为 12 格，下潜后缩到 7 格；入场默认水下（`submarine.defaultDiveState: "submerged"`）。
 - 水下航速取自 Wikipedia：[Type VII](https://en.wikipedia.org/wiki/Type_VII_submarine)、[I-168](https://en.wikipedia.org/wiki/Japanese_submarine_I-168)、[USS Nautilus](https://en.wikipedia.org/wiki/USS_Nautilus_(SS-168))。
 - 过渡态统一 50% 航速，不计入上表。
 

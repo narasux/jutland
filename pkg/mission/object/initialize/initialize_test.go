@@ -247,8 +247,8 @@ func TestASWWeaponRangesAfterScaling(t *testing.T) {
 }
 
 // TestSubmarineSubmergedSpeedMatchesHistory 验证三艘潜艇的水下航速符合历史实测值。
-// 场景：2026-11-10 采用 Wikipedia 数据：VIIC（u_96）7.6 kn、I-168 8.2 kn、Nautilus 8.0 kn；配置用“水面航速 × submergedSpeedRatio”表达。
-// 预期：MaxSpeed×ShipSpeedScale×SubmergedSpeedRatio 还原出的节数与目标值误差 ≤0.1 kn，避免水下航速倍率被误改。
+// 场景：2026-11-10 采用 Wikipedia 数据：VIIC（u_96）7.6 kn、I-168 8.2 kn、Nautilus 8.0 kn；配置用“水面航速 × submarine.submergedSpeedRatio”表达。
+// 预期：MaxSpeed×ShipSpeedScale×Submarine.SubmergedSpeedRatio 还原出的节数与目标值误差 ≤0.1 kn，避免水下航速倍率被误改。
 // 覆盖：表驱动查询 ShipMap，逐艘断言模板存在并按 0.1 容差比较。
 func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 	cases := []struct {
@@ -265,7 +265,7 @@ func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 			t.Fatalf("ship template %s missing", tc.ship)
 		}
 		// MaxSpeed 初始化时已除以 ShipSpeedScale，这里还原成配置节数。
-		kn := ship.MaxSpeed * objUnit.ShipSpeedScale * ship.SubmergedSpeedRatio
+		kn := ship.MaxSpeed * objUnit.ShipSpeedScale * ship.Submarine.SubmergedSpeedRatio
 		if math.Abs(kn-tc.want) > 0.1 {
 			t.Fatalf("%s submerged speed = %.2f kn, want %.1f kn", tc.ship, kn, tc.want)
 		}
@@ -274,7 +274,7 @@ func TestSubmarineSubmergedSpeedMatchesHistory(t *testing.T) {
 
 // TestSubmarineTemplatesDefaultSubmerged 验证所有潜艇模板默认入场即水下。
 // 场景：遍历 ShipMap 中 Type=ShipTypeSubmarine 的模板；水面开局必须在配置里显式写 surface。
-// 预期：每艘潜艇 DiveState=DiveStateSubmerged，且至少加载到一艘潜艇；失败意味着某艘潜艇未配置 defaultDiveState 而 ResolveDiveConfig 没有补成水下，或配置误写了 surface。
+// 预期：每艘潜艇 DiveState=DiveStateSubmerged，且至少加载到一艘潜艇；失败意味着某艘潜艇未配置 submarine.defaultDiveState 而 ResolveDiveConfig 没有补成水下，或配置误写了 surface。
 // 覆盖：按类型过滤全量模板计数，逐艘比较 DiveState 并在末尾检查 count>0。
 func TestSubmarineTemplatesDefaultSubmerged(t *testing.T) {
 	count := 0
@@ -283,8 +283,8 @@ func TestSubmarineTemplatesDefaultSubmerged(t *testing.T) {
 			continue
 		}
 		count++
-		if ship.DiveState != objUnit.DiveStateSubmerged {
-			t.Fatalf("submarine %s default dive state = %v, want submerged", name, ship.DiveState)
+		if ship.Submarine.DiveState != objUnit.DiveStateSubmerged {
+			t.Fatalf("submarine %s default dive state = %v, want submerged", name, ship.Submarine.DiveState)
 		}
 	}
 	if count == 0 {

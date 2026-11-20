@@ -30,7 +30,7 @@ func (sa *ShipAircraft) Status(shipUid string, planes map[string]*Plane) Aircraf
 			if plane.BelongShip != shipUid || plane.Name != group.Name {
 				continue
 			}
-			switch plane.FlightPhase {
+			switch plane.Flight.Phase {
 			case PlaneFlightPhaseLandingStaging,
 				PlaneFlightPhaseLandingApproach,
 				PlaneFlightPhaseLandingDeck:

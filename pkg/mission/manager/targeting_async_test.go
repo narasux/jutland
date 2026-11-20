@@ -161,7 +161,10 @@ func TestTakeOffFromBaseRotatesTargetTypes(t *testing.T) {
 	)
 	airfield.StockPlane(fighterName)
 	airfield.StockPlane(bomberName)
-	enemyPlane := &objUnit.Plane{Uid: "enemy-plane", CurHP: 10, FlightPhase: objUnit.PlaneFlightPhaseCruising}
+	enemyPlane := &objUnit.Plane{
+		Uid: "enemy-plane", CurHP: 10,
+		Flight: objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
+	}
 	enemyShip := &objUnit.BattleShip{Uid: "enemy-ship", CurHP: 10}
 	manager := &MissionManager{
 		state: &state.MissionState{

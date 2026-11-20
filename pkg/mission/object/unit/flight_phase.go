@@ -58,6 +58,26 @@ const (
 	maxPhaseUnitLength = 4.0
 )
 
+// FlightState 飞机当前飞行阶段及其进度插值状态。
+type FlightState struct {
+	// Phase 当前飞行阶段（起飞 / 巡航 / 降落）
+	Phase PlaneFlightPhase
+	// StartPos 当前阶段起点
+	StartPos objPos.MapPos
+	// EndPos 当前阶段终点
+	EndPos objPos.MapPos
+	// Elapsed 当前阶段已经经过的模拟帧数
+	Elapsed float64
+	// StartSpeed 当前阶段开始时的速度
+	StartSpeed float64
+	// Progress 当前阶段进度
+	Progress float64
+	// VisualScaleStart 当前阶段起始视觉倍率（相对常规飞机 2 倍绘制）
+	VisualScaleStart float64
+	// VisualScaleEnd 当前阶段结束视觉倍率（相对常规飞机 2 倍绘制）
+	VisualScaleEnd float64
+}
+
 // carrierLengthInMapBlocks 将基地长度换算为地图坐标长度，并避免零长度参与比例计算。
 // 返回值是基地的物理长度（如跑道/甲板的实际跨度），用于起飞点等物理位置绑定。
 func carrierLengthInMapBlocks(base AircraftBase) float64 {
@@ -101,46 +121,60 @@ func takeoffRunPos(base AircraftBase, point TakeoffPoint, distance float64) objP
 	)
 }
 
+// TakeoffState 飞机滑跑起飞阶段的状态。
+type TakeoffState struct {
+	// runLength 滑跑段长度（地图坐标）；滑跑结束后进入直线爬升段
+	runLength float64
+	// point 弹射点配置副本：滑跑段绑定甲板推进，每帧按舰体当前姿态重算滑跑线
+	point TakeoffPoint
+	// totalLength 起飞阶段计划总距离（滑跑 + 爬升，地图坐标）
+	totalLength float64
+	// distance 已飞行距离（地图坐标）
+	distance float64
+	// climbHeading 离舰瞬间合成的世界速度航向，爬升段机头以转向速率平滑过渡到该航向
+	climbHeading float64
+}
+
 // StartTakeoff 从指定起飞点滑跑起飞，弹射航向 = 基地航向 + 偏转角。
 // 滑跑起点绑定基地真实长度的跑道端头；滑跑与爬升距离按基准长度（封顶 4 格）
 // 缩放，超长跑道不必以 45% 巡航速度爬完整条跑道，离地段之后沿跑道方向爬升。
 func (p *Plane) StartTakeoff(base AircraftBase, point TakeoffPoint) {
 	unit := phaseUnitInMapBlocks(base)
 	launchRotation := normalizeAngle(base.BaseRotation() + point.LaunchAngle)
-	p.takeoffPoint = point
-	p.takeoffRunLength = unit * point.RunLength
-	p.takeoffTotalLength = unit * max(point.RunLength, takeoffClimbLength)
-	p.takeoffDistance = 0
-	p.takeoffClimbHeading = launchRotation
+	p.Takeoff.point = point
+	p.Takeoff.runLength = unit * point.RunLength
+	p.Takeoff.totalLength = unit * max(point.RunLength, takeoffClimbLength)
+	p.Takeoff.distance = 0
+	p.Takeoff.climbHeading = launchRotation
 
 	p.CurPos = takeoffStartPos(base, point)
 	p.CurRotation = launchRotation
-	p.FlightPhase = PlaneFlightPhaseTakingOff
-	p.FlightPhaseStartPos = p.CurPos.Copy()
-	p.FlightPhaseElapsed = 0
-	p.FlightPhaseProgressValue = 0
-	p.FlightVisualScaleStart = planeLowAltitudeVisualScale
-	p.FlightVisualScaleEnd = 1
+	p.Flight.Phase = PlaneFlightPhaseTakingOff
+	p.Flight.StartPos = p.CurPos.Copy()
+	p.Flight.Elapsed = 0
+	p.Flight.Progress = 0
+	p.Flight.VisualScaleStart = planeLowAltitudeVisualScale
+	p.Flight.VisualScaleEnd = 1
 	p.CurSpeed = max(base.BaseSpeed(), p.MaxSpeed*gameSpeedMultiplier()*takeoffInitialSpeedRatio)
-	p.FlightPhaseStartSpeed = p.CurSpeed
+	p.Flight.StartSpeed = p.CurSpeed
 }
 
 // IsCruising 返回飞机是否处于可正常接敌 / 开火的巡航阶段。
 func (p *Plane) IsCruising() bool {
-	return p.FlightPhase == "" || p.FlightPhase == PlaneFlightPhaseCruising
+	return p.Flight.Phase == "" || p.Flight.Phase == PlaneFlightPhaseCruising
 }
 
 // FinishTakeoff 切换到巡航阶段。
 func (p *Plane) FinishTakeoff() {
-	p.FlightPhase = PlaneFlightPhaseCruising
-	p.FlightPhaseProgressValue = 1
-	p.FlightVisualScaleStart = 1
-	p.FlightVisualScaleEnd = 1
+	p.Flight.Phase = PlaneFlightPhaseCruising
+	p.Flight.Progress = 1
+	p.Flight.VisualScaleStart = 1
+	p.Flight.VisualScaleEnd = 1
 }
 
 // IsOnGround 返回飞机是否处于地面（跑道/甲板滑跑阶段），可被投弹等地面攻击。
 func (p *Plane) IsOnGround() bool {
-	return p.FlightPhase == PlaneFlightPhaseTakingOff
+	return p.Flight.Phase == PlaneFlightPhaseTakingOff
 }
 
 // UpdateTakeoff 分两段推进：滑跑段绑定甲板沿弹射线加速，基地移动或转向时
@@ -148,7 +182,7 @@ func (p *Plane) IsOnGround() bool {
 // 爬升段沿当前航向直线飞行，机头以转向速率平滑过渡到合成航向，飞完爬升
 // 距离后进入巡航。载舰缺失（已被击沉等）时退化为自由直线飞行。
 func (p *Plane) UpdateTakeoff(mapCfg *mapcfg.MapCfg, base AircraftBase) bool {
-	if p.FlightPhase != PlaneFlightPhaseTakingOff {
+	if p.Flight.Phase != PlaneFlightPhaseTakingOff {
 		return p.IsCruising()
 	}
 	if p.CurHP <= 0 {
@@ -157,25 +191,25 @@ func (p *Plane) UpdateTakeoff(mapCfg *mapcfg.MapCfg, base AircraftBase) bool {
 
 	multiplier := gameSpeedMultiplier()
 	maxSpeed := p.MaxSpeed * multiplier
-	startSpeed := min(p.FlightPhaseStartSpeed, maxSpeed)
-	if p.takeoffDistance < p.takeoffRunLength {
+	startSpeed := min(p.Flight.StartSpeed, maxSpeed)
+	if p.Takeoff.distance < p.Takeoff.runLength {
 		// 滑跑段：S 曲线起步平缓，相对甲板的加速目标为离舰速度而非全速
-		p.FlightPhaseElapsed += multiplier
-		timeProgress := clamp01(p.FlightPhaseElapsed / takeoffAccelerationFrames)
+		p.Flight.Elapsed += multiplier
+		timeProgress := clamp01(p.Flight.Elapsed / takeoffAccelerationFrames)
 		runSpeed := startSpeed +
 			(maxSpeed*takeoffLiftoffSpeedRatio-startSpeed)*smoothstep(timeProgress)
-		p.takeoffDistance += runSpeed
+		p.Takeoff.distance += runSpeed
 		if isBaseMissing(base) {
 			p.forward(mapCfg, p.CurRotation, runSpeed)
 		} else {
-			nextPos := takeoffRunPos(base, p.takeoffPoint, p.takeoffDistance)
+			nextPos := takeoffRunPos(base, p.Takeoff.point, p.Takeoff.distance)
 			// 显示速度取世界系位移，与巡航阶段的速度语义保持一致
 			distance := p.CurPos.Distance(nextPos)
 			p.CurPos = nextPos
 			p.CurSpeed = distance
-			p.CurRotation = normalizeAngle(base.BaseRotation() + p.takeoffPoint.LaunchAngle)
+			p.CurRotation = normalizeAngle(base.BaseRotation() + p.Takeoff.point.LaunchAngle)
 			p.RemainRange -= distance
-			if p.takeoffDistance >= p.takeoffRunLength {
+			if p.Takeoff.distance >= p.Takeoff.runLength {
 				p.liftoff(base, runSpeed)
 			}
 		}
@@ -185,13 +219,13 @@ func (p *Plane) UpdateTakeoff(mapCfg *mapcfg.MapCfg, base AircraftBase) bool {
 			p.CurSpeed, maxSpeed, maxSpeed*takeoffClimbSpeedStepRate*multiplier,
 		)
 		p.CurRotation = rotateAngleToward(
-			p.CurRotation, p.takeoffClimbHeading, p.RotateSpeed*multiplier,
+			p.CurRotation, p.Takeoff.climbHeading, p.RotateSpeed*multiplier,
 		)
 		p.forward(mapCfg, p.CurRotation, p.CurSpeed)
-		p.takeoffDistance += p.CurSpeed
+		p.Takeoff.distance += p.CurSpeed
 	}
-	p.FlightPhaseProgressValue = clamp01(p.takeoffDistance / max(p.takeoffTotalLength, 0.001))
-	if p.FlightPhaseProgressValue >= 1 {
+	p.Flight.Progress = clamp01(p.Takeoff.distance / max(p.Takeoff.totalLength, 0.001))
+	if p.Flight.Progress >= 1 {
 		p.FinishTakeoff()
 		return true
 	}
@@ -203,21 +237,21 @@ func (p *Plane) UpdateTakeoff(mapCfg *mapcfg.MapCfg, base AircraftBase) bool {
 // 沿弹射方向 (cos, sin)；爬升段机头从弹射航向以转向速率过渡到合成航向，
 // 保证离舰瞬间速度大小与方向都不发生突跳。
 func (p *Plane) liftoff(base AircraftBase, runSpeed float64) {
-	launchRadians := p.takeoffPoint.LaunchAngle * math.Pi / 180
+	launchRadians := p.Takeoff.point.LaunchAngle * math.Pi / 180
 	velocity := carrierLocalOffset{
 		forward: base.BaseSpeed() + math.Cos(launchRadians)*runSpeed,
 		lateral: math.Sin(launchRadians) * runSpeed,
 	}
 	p.CurSpeed = math.Hypot(velocity.forward, velocity.lateral)
-	p.takeoffClimbHeading = normalizeAngle(
+	p.Takeoff.climbHeading = normalizeAngle(
 		base.BaseRotation() + math.Atan2(velocity.lateral, velocity.forward)*180/math.Pi,
 	)
 }
 
 // landingScaleCompleteAt 返回直线进近段降到最低视觉倍率时的路程比例。
 func (p *Plane) landingScaleCompleteAt() float64 {
-	if p.landingScaleCompleteRatio > 0 {
-		return p.landingScaleCompleteRatio
+	if p.Landing.scaleCompleteRatio > 0 {
+		return p.Landing.scaleCompleteRatio
 	}
 	return landingDeckScaleDistanceRatio
 }
@@ -227,21 +261,21 @@ func (p *Plane) VisualScaleMultiplier() float64 {
 	if p.IsCruising() {
 		return 1
 	}
-	if p.FlightVisualScaleStart <= 0 && p.FlightVisualScaleEnd <= 0 {
+	if p.Flight.VisualScaleStart <= 0 && p.Flight.VisualScaleEnd <= 0 {
 		return 1
 	}
 	progress := p.FlightPhaseProgress()
-	if p.FlightPhase == PlaneFlightPhaseLandingDeck {
+	if p.Flight.Phase == PlaneFlightPhaseLandingDeck {
 		// 着舰段按实际滑跑路程缩放：到达触舰/触水路程后降到最低视觉倍率
 		progress = smoothstep(clamp01(progress / p.landingScaleCompleteAt()))
 	}
-	return p.FlightVisualScaleStart + (p.FlightVisualScaleEnd-p.FlightVisualScaleStart)*progress
+	return p.Flight.VisualScaleStart + (p.Flight.VisualScaleEnd-p.Flight.VisualScaleStart)*progress
 }
 
 // FlightPhaseProgress 返回当前阶段进度，范围 [0, 1]。
 // 各飞行阶段由各自推进逻辑按实际飞行距离 / 时间维护进度值。
 func (p *Plane) FlightPhaseProgress() float64 {
-	return clamp01(p.FlightPhaseProgressValue)
+	return clamp01(p.Flight.Progress)
 }
 
 // approachSpeed 将当前速度向目标速度推进一步，并复用统一的单帧变速限制。

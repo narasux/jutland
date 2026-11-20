@@ -37,10 +37,10 @@ func TestSubmarineTestMissionSimulation(t *testing.T) {
 	require.Len(t, enemySubs, 3, "敌方的 I-168 与两艘 Nautilus 都应入场")
 
 	for _, sub := range playerSubs {
-		require.Equal(t, objUnit.DiveStateSubmerged, sub.DiveState, "玩家潜艇入场即水下")
+		require.Equal(t, objUnit.DiveStateSubmerged, sub.Submarine.DiveState, "玩家潜艇入场即水下")
 	}
 	for _, sub := range enemySubs {
-		require.Equal(t, objUnit.DiveStateSubmerged, sub.DiveState, "敌方潜艇入场即水下")
+		require.Equal(t, objUnit.DiveStateSubmerged, sub.Submarine.DiveState, "敌方潜艇入场即水下")
 	}
 
 	// 现役潜艇都带鱼雷，AI 在接近阶段不需要上浮；跑一段接近过程确认不会被拉回水面。
@@ -48,12 +48,12 @@ func TestSubmarineTestMissionSimulation(t *testing.T) {
 		_, err := m.Update()
 		require.NoError(t, err)
 		for _, sub := range enemySubs {
-			require.NotEqual(t, objUnit.DiveStateSurface, sub.DiveState,
+			require.NotEqual(t, objUnit.DiveStateSurface, sub.Submarine.DiveState,
 				"AI 潜艇不应为了赶路而上浮")
 		}
 	}
 
 	for _, sub := range enemySubs {
-		require.NotEqual(t, objUnit.DiveStateSurface, sub.DiveState, "敌方潜艇应保持水下")
+		require.NotEqual(t, objUnit.DiveStateSurface, sub.Submarine.DiveState, "敌方潜艇应保持水下")
 	}
 }

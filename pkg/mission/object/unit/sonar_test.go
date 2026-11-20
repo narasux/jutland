@@ -70,7 +70,7 @@ func TestSubmarineDetectionMemory(t *testing.T) {
 func TestSubmergedShipEmitsNoWake(t *testing.T) {
 	sub := &BattleShip{
 		Type: ShipTypeSubmarine, CurHP: 100, CurSpeed: 0.03, MaxSpeed: 0.03,
-		DiveState: DiveStateSubmerged,
+		Submarine: SubmarineState{DiveState: DiveStateSubmerged},
 	}
 	require.Nil(t, sub.GenTrails(), "水下不画尾流，避免泄露位置")
 }

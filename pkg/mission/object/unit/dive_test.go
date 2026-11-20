@@ -18,20 +18,22 @@ import (
 // 覆盖：从水面开始 StartDive，推进到 Submerged，再 StartSurface 推进回 Surface，逐步断言状态/目标速度比/文案。
 func TestSubmarineDiveCycle(t *testing.T) {
 	ship := &BattleShip{
-		Type:                ShipTypeSubmarine,
-		TotalHP:             100,
-		CurHP:               100,
-		MaxSpeed:            0.03,
-		DiveTime:            1,
-		SurfaceTime:         1,
-		SubmergedSpeedRatio: 0.35,
+		Type:     ShipTypeSubmarine,
+		TotalHP:  100,
+		CurHP:    100,
+		MaxSpeed: 0.03,
+		Submarine: SubmarineState{
+			DiveTime:            1,
+			SurfaceTime:         1,
+			SubmergedSpeedRatio: 0.35,
+		},
 	}
-	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.Equal(t, DiveStateSurface, ship.Submarine.DiveState)
 	require.InDelta(t, 1.0, ship.DiveSpeedRatio(), 1e-9)
 	require.False(t, ship.Submerged())
 
 	require.True(t, ship.StartDive())
-	require.Equal(t, DiveStateDiving, ship.DiveState)
+	require.Equal(t, DiveStateDiving, ship.Submarine.DiveState)
 	require.True(t, ship.DiveTransitioning())
 	require.InDelta(t, 0.35, ship.DiveSpeedRatio(), 1e-9)
 	// 重复下潜不会重启计时，但随时可以反向（以最后一次指令为准）
@@ -41,39 +43,41 @@ func TestSubmarineDiveCycle(t *testing.T) {
 	require.Equal(t, DiveStateSurface, next)
 	require.Equal(t, i18n.Text(i18n.MsgShipSurfaceAction), ship.DiveActionText())
 
-	for i := 0; i < 200 && ship.DiveState == DiveStateDiving; i++ {
+	for i := 0; i < 200 && ship.Submarine.DiveState == DiveStateDiving; i++ {
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.Equal(t, DiveStateSubmerged, ship.Submarine.DiveState)
 	require.True(t, ship.Submerged())
 	require.InDelta(t, 0.35, ship.DiveSpeedRatio(), 1e-9)
 
 	require.True(t, ship.StartSurface())
-	require.Equal(t, DiveStateSurfacing, ship.DiveState)
+	require.Equal(t, DiveStateSurfacing, ship.Submarine.DiveState)
 	require.InDelta(t, 1.0, ship.DiveSpeedRatio(), 1e-9)
-	for i := 0; i < 200 && ship.DiveState == DiveStateSurfacing; i++ {
+	for i := 0; i < 200 && ship.Submarine.DiveState == DiveStateSurfacing; i++ {
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.Equal(t, DiveStateSurface, ship.Submarine.DiveState)
 	require.InDelta(t, 1.0, ship.DiveSpeedRatio(), 1e-9)
 }
 
 // TestSubmarineReversesMidTransition 验证过渡中反向切换：状态立即翻转，深度进度连续，剩余时间按同一速度折算。
-// 场景：潜艇 DiveTime=1s、SurfaceTime=1s（一轮完整过渡 ReloadTicks(1)=60 拍），从水面 StartDive 后
+// 场景：潜艇 Submarine.DiveTime=1s、Submarine.SurfaceTime=1s（一轮完整过渡 ReloadTicks(1)=60 拍），从水面 StartDive 后
 // 推进 total/2=30 拍，DiveProgress≈0.5；此时玩家按上浮，之后又在上浮中按下潜、下潜中按上浮。
 // 预期：StartSurface 立即把状态切成 Surfacing，DiveProgress 仍≈0.5（不跳变）；
-// diveTicksLeft = round(完整上浮 60 拍 × 0.5)=30；推进后回到 Surface 且进度 0；
+// Submarine.diveTicksLeft = round(完整上浮 60 拍 × 0.5)=30；推进后回到 Surface 且进度 0；
 // 再次反向可依次回到 Submerged（进度 1）、Diving（进度 0.5）并最终停在 Submerged。
 // 覆盖：单艘潜艇反复调用 StartDive/StartSurface/AdvanceDive，断言状态、剩余拍数与 DiveProgress（容差 1/total）。
 func TestSubmarineReversesMidTransition(t *testing.T) {
 	ship := &BattleShip{
-		Type:        ShipTypeSubmarine,
-		CurHP:       100,
-		DiveTime:    1,
-		SurfaceTime: 1,
+		Type:  ShipTypeSubmarine,
+		CurHP: 100,
+		Submarine: SubmarineState{
+			DiveTime:    1,
+			SurfaceTime: 1,
+		},
 	}
 	require.True(t, ship.StartDive())
-	total := ship.diveTotalTicks
+	total := ship.Submarine.diveTotalTicks
 
 	for i := int64(0); i < total/2; i++ {
 		ship.AdvanceDive()
@@ -83,16 +87,16 @@ func TestSubmarineReversesMidTransition(t *testing.T) {
 
 	// 下潜中按下上浮：立刻反向，深度进度不跳变
 	require.True(t, ship.StartSurface())
-	require.Equal(t, DiveStateSurfacing, ship.DiveState)
+	require.Equal(t, DiveStateSurfacing, ship.Submarine.DiveState)
 	require.InDelta(t, progress, ship.DiveProgress(), 1.0/float64(total))
 	// 剩余时间按完整上浮耗时折算，切换速度不变
 	expectTicks := max(1, int64(math.Round(float64(ReloadTicks(ship.surfaceTimeSeconds()))*progress)))
-	require.Equal(t, expectTicks, ship.diveTicksLeft)
+	require.Equal(t, expectTicks, ship.Submarine.diveTicksLeft)
 
 	for i := int64(0); i < total; i++ {
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.Equal(t, DiveStateSurface, ship.Submarine.DiveState)
 	require.Zero(t, ship.DiveProgress())
 
 	// 上浮中再按下潜：同样反向，并回到水下
@@ -100,19 +104,19 @@ func TestSubmarineReversesMidTransition(t *testing.T) {
 	for i := int64(0); i < total; i++ {
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.Equal(t, DiveStateSubmerged, ship.Submarine.DiveState)
 
 	require.True(t, ship.StartSurface())
 	for i := int64(0); i < total/2; i++ {
 		ship.AdvanceDive()
 	}
 	require.True(t, ship.StartDive())
-	require.Equal(t, DiveStateDiving, ship.DiveState)
+	require.Equal(t, DiveStateDiving, ship.Submarine.DiveState)
 	require.InDelta(t, 0.5, ship.DiveProgress(), 1.0/float64(total))
 	for i := int64(0); i < total; i++ {
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.Equal(t, DiveStateSubmerged, ship.Submarine.DiveState)
 	require.InDelta(t, 1.0, ship.DiveProgress(), 1e-9)
 }
 
@@ -131,8 +135,8 @@ func TestOnlySubmarinesCanChangeDiveState(t *testing.T) {
 
 // TestSubmarineSpeedDisplayUsesCurrentDiveLimit 验证潜艇航速展示口径随当前下潜状态切换：
 // 水下时展示上限必须取水下航速。
-// 场景：全局 SpeedMultiplier=2；潜艇（如 XXI 型）MaxSpeed=9.7 节、SubmergedSpeedRatio=1.29、
-// DiveState=Submerged，CurSpeed 取 CruiseSpeed（世界系速度，已乘倍率）；
+// 场景：全局 SpeedMultiplier=2；潜艇（如 XXI 型）MaxSpeed=9.7 节、Submarine.SubmergedSpeedRatio=1.29、
+// Submarine.DiveState=Submerged，CurSpeed 取 CruiseSpeed（世界系速度，已乘倍率）；
 // 水下航速高于水面的艇若仍按水面 9.7 节展示，单位面板会出现“当前航速 > 最大航速”。
 // 预期：MaxSpeedKnots=9.7；SubmergedMaxSpeedKnots=CruiseSpeedKnots=CurSpeedKnots=9.7×1.29=12.513；
 // CurSpeedKnots ≤ CruiseSpeedKnots；切回 Surface 后 CruiseSpeedKnots 回到 9.7；
@@ -144,10 +148,12 @@ func TestSubmarineSpeedDisplayUsesCurrentDiveLimit(t *testing.T) {
 	config.G = &config.GameSettings{SpeedMultiplier: 2}
 
 	ship := &BattleShip{
-		Type:                ShipTypeSubmarine,
-		MaxSpeed:            9.7 / ShipSpeedScale,
-		SubmergedSpeedRatio: 1.29,
-		DiveState:           DiveStateSubmerged,
+		Type:     ShipTypeSubmarine,
+		MaxSpeed: 9.7 / ShipSpeedScale,
+		Submarine: SubmarineState{
+			SubmergedSpeedRatio: 1.29,
+			DiveState:           DiveStateSubmerged,
+		},
 	}
 	// CurSpeed 是世界系速度，已乘全局倍率。
 	ship.CurSpeed = ship.CruiseSpeed()
@@ -158,7 +164,7 @@ func TestSubmarineSpeedDisplayUsesCurrentDiveLimit(t *testing.T) {
 	require.InDelta(t, 9.7*1.29, ship.CurSpeedKnots(), 1e-9)
 	require.LessOrEqual(t, ship.CurSpeedKnots(), ship.CruiseSpeedKnots()+1e-9)
 
-	ship.DiveState = DiveStateSurface
+	ship.Submarine.DiveState = DiveStateSurface
 	require.InDelta(t, 9.7, ship.CruiseSpeedKnots(), 1e-9)
 
 	// 非潜艇没有独立的水下档，静态档案回退到水面航速。
@@ -167,7 +173,7 @@ func TestSubmarineSpeedDisplayUsesCurrentDiveLimit(t *testing.T) {
 }
 
 // TestSubmarineDiveSpeedRampsByTransitionTime 验证下潜/上浮期间航速按过渡时长和速度差线性变化，不使用配置加速度。
-// 场景：潜艇水面巡航 0.03、DiveTime/SurfaceTime=1 秒（60 拍）、SubmergedSpeedRatio=0.35、Acceleration=0；
+// 场景：潜艇水面巡航 0.03、Submarine.DiveTime/SurfaceTime=1 秒（60 拍）、Submarine.SubmergedSpeedRatio=0.35、Acceleration=0；
 // 下潜时每拍先 MoveTo 再 AdvanceDive，观察首拍、中点和终点。
 // 预期：首拍仍接近水面航速且大于水下巡航；30 拍后约为两端中点；60 拍后状态 Submerged 且航速≈0.0105；
 // 随后上浮时航速逐拍回升，60 拍后回到 0.03。失败说明过渡仍走配置加速度或瞬间改速。
@@ -179,24 +185,26 @@ func TestSubmarineDiveSpeedRampsByTransitionTime(t *testing.T) {
 
 	mapCfg := newCoastMapCfg()
 	ship := &BattleShip{
-		Type:                ShipTypeSubmarine,
-		CurHP:               100,
-		CurPos:              objPos.NewR(0.5, 0.5),
-		CurRotation:         90,
-		MaxSpeed:            0.03,
-		Acceleration:        0,
-		RotateSpeed:         10,
-		DiveTime:            1,
-		SurfaceTime:         1,
-		SubmergedSpeedRatio: 0.35,
+		Type:         ShipTypeSubmarine,
+		CurHP:        100,
+		CurPos:       objPos.NewR(0.5, 0.5),
+		CurRotation:  90,
+		MaxSpeed:     0.03,
+		Acceleration: 0,
+		RotateSpeed:  10,
+		Submarine: SubmarineState{
+			DiveTime:            1,
+			SurfaceTime:         1,
+			SubmergedSpeedRatio: 0.35,
+		},
 	}
 	target := objPos.NewR(7.5, 0.5)
 	ship.CurSpeed = ship.CruiseSpeed()
 	surfaceSpeed := ship.CurSpeed
-	submergedSpeed := ship.MaxSpeed * ship.SubmergedSpeedRatio * config.G.SpeedMultiplier
+	submergedSpeed := ship.MaxSpeed * ship.Submarine.SubmergedSpeedRatio * config.G.SpeedMultiplier
 
 	require.True(t, ship.StartDive())
-	total := ship.diveTicksLeft
+	total := ship.Submarine.diveTicksLeft
 	require.Equal(t, int64(60), total)
 
 	var firstTick, midpoint float64
@@ -210,25 +218,25 @@ func TestSubmarineDiveSpeedRampsByTransitionTime(t *testing.T) {
 		}
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.Equal(t, DiveStateSubmerged, ship.Submarine.DiveState)
 	require.Less(t, firstTick, surfaceSpeed, "首拍不能仍是水面全速")
 	require.Greater(t, firstTick, submergedSpeed, "首拍不能直接跳到水下航速")
 	require.InDelta(t, (surfaceSpeed+submergedSpeed)/2, midpoint, 1e-6)
 	require.InDelta(t, submergedSpeed, ship.CurSpeed, 1e-9)
 
 	require.True(t, ship.StartSurface())
-	total = ship.diveTicksLeft
+	total = ship.Submarine.diveTicksLeft
 	for i := int64(0); i < total; i++ {
 		ship.MoveTo(mapCfg, target, false)
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.Equal(t, DiveStateSurface, ship.Submarine.DiveState)
 	require.InDelta(t, surfaceSpeed, ship.CurSpeed, 1e-9)
 }
 
 // TestSubmergedShipDeceleratesToUnderwaterCruiseSpeed 验证下潜后舰船减速到水下巡航速度。
 // 场景：潜艇已处于 Submerged 状态，仍按水面全速向目标移动；若不减速，水下单位会以水面速度暴露/逃脱。
-// 预期：移动 30 帧后 CurSpeed 不超过 MaxSpeed × SubmergedSpeedRatio × 全局速度倍率。
+// 预期：移动 30 帧后 CurSpeed 不超过 MaxSpeed × Submarine.SubmergedSpeedRatio × 全局速度倍率。
 // 覆盖：构造水下潜艇和海岸地图，循环 MoveTo 后断言速度上限。
 func TestSubmergedShipDeceleratesToUnderwaterCruiseSpeed(t *testing.T) {
 	oldSettings := config.G
@@ -237,16 +245,18 @@ func TestSubmergedShipDeceleratesToUnderwaterCruiseSpeed(t *testing.T) {
 
 	mapCfg := newCoastMapCfg()
 	ship := &BattleShip{
-		Type:                ShipTypeSubmarine,
-		CurHP:               100,
-		CurPos:              objPos.NewR(0.5, 0.5),
-		CurRotation:         90,
-		CurSpeed:            0.03,
-		MaxSpeed:            0.03,
-		Acceleration:        0.001,
-		RotateSpeed:         10,
-		DiveState:           DiveStateSubmerged,
-		SubmergedSpeedRatio: 0.35,
+		Type:         ShipTypeSubmarine,
+		CurHP:        100,
+		CurPos:       objPos.NewR(0.5, 0.5),
+		CurRotation:  90,
+		CurSpeed:     0.03,
+		MaxSpeed:     0.03,
+		Acceleration: 0.001,
+		RotateSpeed:  10,
+		Submarine: SubmarineState{
+			DiveState:           DiveStateSubmerged,
+			SubmergedSpeedRatio: 0.35,
+		},
 	}
 	target := objPos.NewR(7.5, 0.5)
 	for i := 0; i < 30; i++ {
@@ -268,16 +278,18 @@ func TestDiveProgressTracksTransition(t *testing.T) {
 	t.Cleanup(func() { config.G = oldSettings })
 
 	ship := &BattleShip{
-		Type:        ShipTypeSubmarine,
-		CurHP:       100,
-		DiveTime:    1,
-		SurfaceTime: 1,
+		Type:  ShipTypeSubmarine,
+		CurHP: 100,
+		Submarine: SubmarineState{
+			DiveTime:    1,
+			SurfaceTime: 1,
+		},
 	}
 	require.Zero(t, ship.DiveProgress(), "水面时应为 0")
 
 	require.True(t, ship.StartDive())
 	require.Zero(t, ship.DiveProgress(), "刚开始下潜时应仍为 0")
-	total := ship.diveTotalTicks
+	total := ship.Submarine.diveTotalTicks
 	require.Positive(t, total)
 
 	for i := int64(0); i < total/2; i++ {
@@ -288,12 +300,12 @@ func TestDiveProgressTracksTransition(t *testing.T) {
 	for i := int64(0); i < total-total/2; i++ {
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSubmerged, ship.DiveState)
+	require.Equal(t, DiveStateSubmerged, ship.Submarine.DiveState)
 	require.InDelta(t, 1.0, ship.DiveProgress(), 1e-9)
 
 	require.True(t, ship.StartSurface())
 	require.InDelta(t, 1.0, ship.DiveProgress(), 1e-9, "刚开始上浮时应仍为 1")
-	total = ship.diveTotalTicks
+	total = ship.Submarine.diveTotalTicks
 	require.Positive(t, total)
 
 	for i := int64(0); i < total/2; i++ {
@@ -304,47 +316,56 @@ func TestDiveProgressTracksTransition(t *testing.T) {
 	for i := int64(0); i < total-total/2; i++ {
 		ship.AdvanceDive()
 	}
-	require.Equal(t, DiveStateSurface, ship.DiveState)
+	require.Equal(t, DiveStateSurface, ship.Submarine.DiveState)
 	require.Zero(t, ship.DiveProgress())
 }
 
 // TestDiveProgressOnlyForSubmarines 验证非潜艇即使带着 DiveState 也不会返回下潜进度。
-// 场景：配置错误或调试代码把驱逐舰的 DiveState 设成 Submerged；绘制/UI 不应因此把舰体画成半透明。
+// 场景：配置错误或调试代码把驱逐舰的 Submarine.DiveState 设成 Submerged；绘制/UI 不应因此把舰体画成半透明。
 // 预期：DiveProgress 返回 0。
 // 覆盖：构造带 Submerged 状态的驱逐舰，直接断言返回值为 0。
 func TestDiveProgressOnlyForSubmarines(t *testing.T) {
-	gunship := &BattleShip{Type: ShipTypeDestroyer, CurHP: 100, DiveState: DiveStateSubmerged}
+	gunship := &BattleShip{
+		Type: ShipTypeDestroyer, CurHP: 100,
+		Submarine: SubmarineState{DiveState: DiveStateSubmerged},
+	}
 	require.Zero(t, gunship.DiveProgress())
 }
 
 // TestResolveDiveConfigDefaultsToSubmerged 验证潜艇未配置下潜字段时使用默认值。
-// 场景：老配置/新潜艇只写了类型，没有 defaultDiveState、下潜时间、上浮时间或速度比。
-// 预期：默认水下开局，DiveTime/SurfaceTime/SubmergedSpeedRatio 都填充为默认常量。
+// 场景：老配置/新潜艇只写了类型，submarine 块为空（没有深度、下潜时间、上浮时间或速度比）。
+// 预期：默认水下开局，Submarine.DiveTime/SurfaceTime/SubmergedSpeedRatio 都填充为默认常量。
 // 覆盖：空配置潜艇调用 ResolveDiveConfig，逐字段断言默认值。
 func TestResolveDiveConfigDefaultsToSubmerged(t *testing.T) {
 	sub := &BattleShip{Type: ShipTypeSubmarine, CurHP: 100}
 	require.NoError(t, sub.ResolveDiveConfig())
-	require.Equal(t, DiveStateSubmerged, sub.DiveState, "未配置 defaultDiveState 时应默认水下")
-	require.InDelta(t, defaultDiveTimeSeconds, sub.DiveTime, 1e-9)
-	require.InDelta(t, defaultSurfaceTimeSeconds, sub.SurfaceTime, 1e-9)
-	require.InDelta(t, defaultSubmergedSpeedRatio, sub.SubmergedSpeedRatio, 1e-9)
+	require.Equal(t, DiveStateSubmerged, sub.Submarine.DiveState, "未配置 submarine.defaultDiveState 时应默认水下")
+	require.InDelta(t, defaultDiveTimeSeconds, sub.Submarine.DiveTime, 1e-9)
+	require.InDelta(t, defaultSurfaceTimeSeconds, sub.Submarine.SurfaceTime, 1e-9)
+	require.InDelta(t, defaultSubmergedSpeedRatio, sub.Submarine.SubmergedSpeedRatio, 1e-9)
 }
 
 // TestResolveDiveConfigKeepsExplicitSurface 验证配置显式写 surface 时按水面开局。
-// 场景：需要水面航行的潜艇（例如历史任务中的布雷/侦察）在 ships.json5 写 defaultDiveState: "surface"。
+// 场景：需要水面航行的潜艇（例如历史任务中的布雷/侦察）在 ships.json5 的 submarine 块写 defaultDiveState: "surface"。
 // 预期：ResolveDiveConfig 不覆盖显式值，DiveState 保持 Surface。
-// 覆盖：构造 DefaultDiveState="surface" 的潜艇，调用后断言状态。
+// 覆盖：构造 Submarine.DefaultDiveState="surface" 的潜艇，调用后断言状态。
 func TestResolveDiveConfigKeepsExplicitSurface(t *testing.T) {
-	sub := &BattleShip{Type: ShipTypeSubmarine, CurHP: 100, DefaultDiveState: "surface"}
+	sub := &BattleShip{
+		Type: ShipTypeSubmarine, CurHP: 100,
+		Submarine: SubmarineState{DefaultDiveState: "surface"},
+	}
 	require.NoError(t, sub.ResolveDiveConfig())
-	require.Equal(t, DiveStateSurface, sub.DiveState, "显式 surface 仍应按水面开局")
+	require.Equal(t, DiveStateSurface, sub.Submarine.DiveState, "显式 surface 仍应按水面开局")
 }
 
 // TestResolveDiveConfigRejectsUnknownState 验证非法 defaultDiveState 在启动期报错。
 // 场景：配置写成 "periscope" 等未实现状态；若静默接受，运行时会落到未定义分支。
 // 预期：ResolveDiveConfig 返回 error，由初始化流程终止并提示配置错误。
-// 覆盖：构造 DefaultDiveState="periscope" 的潜艇，断言返回错误。
+// 覆盖：构造 Submarine.DefaultDiveState="periscope" 的潜艇，断言返回错误。
 func TestResolveDiveConfigRejectsUnknownState(t *testing.T) {
-	sub := &BattleShip{Type: ShipTypeSubmarine, CurHP: 100, DefaultDiveState: "periscope"}
+	sub := &BattleShip{
+		Type: ShipTypeSubmarine, CurHP: 100,
+		Submarine: SubmarineState{DefaultDiveState: "periscope"},
+	}
 	require.Error(t, sub.ResolveDiveConfig())
 }

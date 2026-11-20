@@ -99,7 +99,7 @@ func TestTakeoffUsesSmoothMonotonicAcceleration(t *testing.T) {
 	firstSpeedStep := 0.0
 	cfg := &mapcfg.MapCfg{Width: 100, Height: 100}
 	frames := 0
-	for frames < 180 && plane.FlightPhase != PlaneFlightPhaseCruising {
+	for frames < 180 && plane.Flight.Phase != PlaneFlightPhaseCruising {
 		plane.UpdateTakeoff(cfg, ship)
 		if frames == 0 {
 			firstSpeedStep = plane.CurSpeed - initialSpeed
@@ -115,7 +115,7 @@ func TestTakeoffUsesSmoothMonotonicAcceleration(t *testing.T) {
 		frames++
 	}
 
-	if plane.FlightPhase != PlaneFlightPhaseCruising {
+	if plane.Flight.Phase != PlaneFlightPhaseCruising {
 		t.Fatalf("takeoff did not reach cruising phase")
 	}
 	// 慢加速起步（initial 0.04、120 帧 S 曲线）下完整起飞约 110~140 帧
@@ -159,18 +159,18 @@ func TestTakeoffRunStaysOnDeckWhileCarrierTurns(t *testing.T) {
 	speedAtLastRunFrame := 0.0
 	reachedClimb := false
 	for range 200 {
-		if plane.FlightPhase != PlaneFlightPhaseTakingOff {
+		if plane.Flight.Phase != PlaneFlightPhaseTakingOff {
 			break
 		}
 		moveTestCarrier(ship, 0.8)
 		plane.UpdateTakeoff(nil, ship)
-		if plane.takeoffDistance < plane.takeoffRunLength {
+		if plane.Takeoff.distance < plane.Takeoff.runLength {
 			requireClose(
 				t,
 				plane.CurRotation,
 				normalizeAngle(ship.CurRotation+point.LaunchAngle),
 			)
-			expected := takeoffRunPos(ship, point, plane.takeoffDistance)
+			expected := takeoffRunPos(ship, point, plane.Takeoff.distance)
 			if plane.CurPos.Distance(expected) > 1e-6 {
 				t.Fatalf(
 					"takeoff run left the deck line: %s, want near %s",
@@ -214,7 +214,7 @@ func TestTakeoffRunStaysOnDeckWhileCarrierTurns(t *testing.T) {
 	if !reachedClimb {
 		t.Fatal("takeoff never left the run segment")
 	}
-	if plane.FlightPhase != PlaneFlightPhaseCruising {
-		t.Fatalf("flight phase = %s, want %s", plane.FlightPhase, PlaneFlightPhaseCruising)
+	if plane.Flight.Phase != PlaneFlightPhaseCruising {
+		t.Fatalf("flight phase = %s, want %s", plane.Flight.Phase, PlaneFlightPhaseCruising)
 	}
 }

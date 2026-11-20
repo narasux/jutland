@@ -162,7 +162,7 @@ func TestAirfieldAlertLaunchDecoupledTargets(t *testing.T) {
 			Uid:          "air-enemy",
 			CurHP:        10,
 			CurPos:       objPos.New(52, 52),
-			FlightPhase:  objUnit.PlaneFlightPhaseCruising,
+			Flight:       objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
 			BelongPlayer: faction.ComputerAlpha,
 		}
 	}
@@ -173,7 +173,7 @@ func TestAirfieldAlertLaunchDecoupledTargets(t *testing.T) {
 		Uid:          "ground-enemy",
 		CurHP:        10,
 		CurPos:       objPos.New(52, 52),
-		FlightPhase:  objUnit.PlaneFlightPhaseTakingOff,
+		Flight:       objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseTakingOff},
 		BelongPlayer: faction.ComputerAlpha,
 	}
 	manager.state.Arena.Ships[enemyShip.Uid] = enemyShip
@@ -263,7 +263,7 @@ func TestAirfieldAlertLaunchSplitByTargetType(t *testing.T) {
 		Uid:          "air-enemy",
 		CurHP:        10,
 		CurPos:       objPos.New(52, 52),
-		FlightPhase:  objUnit.PlaneFlightPhaseCruising,
+		Flight:       objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
 		BelongPlayer: faction.ComputerAlpha,
 	}
 	updateAirfieldAlertLaunchWithTargetPlan(manager)

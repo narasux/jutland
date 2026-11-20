@@ -253,11 +253,13 @@ func (s *BattleStats) RecordShipLost(ship *objUnit.BattleShip) {
 	actorPlayer, actorName, actorType, actorIsPlane := faction.Player(""), "", "", false
 	hit := objUnit.HitInfo{}
 	totalDamage := 0.0
-	if ship.SunkByHit {
-		actorPlayer, actorName, actorType = ship.LastAttackerPlayer, ship.LastAttackerName, ship.LastAttackerType
-		actorIsPlane = ship.LastAttackerIsPlane
-		hit = ship.LastHit
-		totalDamage = ship.DamageTaken
+	if ship.Damage.KilledByHit {
+		actorPlayer = ship.Damage.LastAttackerPlayer
+		actorName = ship.Damage.LastAttackerName
+		actorType = ship.Damage.LastAttackerType
+		actorIsPlane = ship.Damage.LastAttackerIsPlane
+		hit = ship.Damage.LastHit
+		totalDamage = ship.Damage.DamageTaken
 	}
 	s.RecordBattleLog(BattleLogEntry{
 		Tick:         now,
@@ -307,12 +309,14 @@ func (s *BattleStats) RecordPlaneLost(plane *objUnit.Plane) {
 	hit := objUnit.HitInfo{}
 	totalDamage := 0.0
 	action := BattleLogPlaneLost
-	if plane.ShotDown {
+	if plane.Damage.KilledByHit {
 		action = BattleLogPlaneShotDown
-		actorPlayer, actorName, actorType = plane.LastAttackerPlayer, plane.LastAttackerName, plane.LastAttackerType
-		actorIsPlane = plane.LastAttackerIsPlane
-		hit = plane.LastHit
-		totalDamage = plane.DamageTaken
+		actorPlayer = plane.Damage.LastAttackerPlayer
+		actorName = plane.Damage.LastAttackerName
+		actorType = plane.Damage.LastAttackerType
+		actorIsPlane = plane.Damage.LastAttackerIsPlane
+		hit = plane.Damage.LastHit
+		totalDamage = plane.Damage.DamageTaken
 	}
 	s.RecordBattleLog(BattleLogEntry{
 		Tick:          now,

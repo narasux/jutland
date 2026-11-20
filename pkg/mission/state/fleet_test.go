@@ -80,7 +80,7 @@ func TestContactFleetSkipsUndetectedSubmarine(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub-1", Name: "u-boat", BelongPlayer: faction.ComputerAlpha,
 		CurPos: objPos.NewR(5.5, 5.5), Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	ms.Arena.Ships = map[string]*objUnit.BattleShip{sub.Uid: sub}
 	// 视野格全亮：水面舰会可见，但下潜且未探测的潜艇不应计入接触。

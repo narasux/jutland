@@ -13,7 +13,7 @@ import (
 
 // TestPlaneAttackDisengagesWhenGroundTargetTakesOff 验证轰炸机锁定目标升空后立即脱离。
 // 场景：配置默认设置，注册 test-disengage-bomb 炸弹；SBD-3 俯冲轰炸机（巡航阶段，
-// 1 枚射程 1.5 / 弹速 0.4 的炸弹）锁定 FlightPhase=TakingOff 的敌机
+// 1 枚射程 1.5 / 弹速 0.4 的炸弹）锁定 Flight.Phase=TakingOff 的敌机
 // ground-target-1，调用 NewPlaneAttack(bomber, object.TypePlane, target) 后执行一次。
 // 预期：指令马上 Executed，目标机不能继续被追着绕机场；炸弹无法攻击空中目标，
 // 应由调度重新分配或触发返航。
@@ -42,7 +42,7 @@ func TestPlaneAttackDisengagesWhenGroundTargetTakesOff(t *testing.T) {
 		Type:         objUnit.PlaneTypeDiveBomber,
 		TotalHP:      100,
 		CurHP:        100,
-		FlightPhase:  objUnit.PlaneFlightPhaseCruising,
+		Flight:       objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
 		BelongPlayer: faction.ComputerAlpha,
 		Weapon: objUnit.PlaneWeapon{
 			Bombs: []*objUnit.Releaser{{BulletName: bulletName, Range: 1.5, BulletSpeed: 0.4}},
@@ -52,7 +52,7 @@ func TestPlaneAttackDisengagesWhenGroundTargetTakesOff(t *testing.T) {
 		Uid:          "ground-target-1",
 		TotalHP:      100,
 		CurHP:        100,
-		FlightPhase:  objUnit.PlaneFlightPhaseTakingOff,
+		Flight:       objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseTakingOff},
 		BelongPlayer: faction.HumanAlpha,
 	}
 	ms := &state.MissionState{

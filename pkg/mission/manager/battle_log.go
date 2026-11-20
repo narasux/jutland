@@ -89,10 +89,10 @@ func (m *MissionManager) hurtShip(ship *objUnit.BattleShip, bt *objBullet.Bullet
 		return
 	}
 	name, actorType, isPlane := m.combatantInfo(bt)
-	ship.LastAttackerName = name
-	ship.LastAttackerType = actorType
-	ship.LastAttackerPlayer = bt.BelongPlayer
-	ship.LastAttackerIsPlane = isPlane
+	ship.Damage.LastAttackerName = name
+	ship.Damage.LastAttackerType = actorType
+	ship.Damage.LastAttackerPlayer = bt.BelongPlayer
+	ship.Damage.LastAttackerIsPlane = isPlane
 
 	beforeHP := ship.CurHP
 	beforeDamage := bt.RealDamage
@@ -102,8 +102,8 @@ func (m *MissionManager) hurtShip(ship *objUnit.BattleShip, bt *objBullet.Bullet
 	overkill := applied - effective
 	info := bulletHitInfo(bt)
 	info.Damage = applied
-	ship.LastHit = info
-	ship.DamageTaken += info.Damage
+	ship.Damage.LastHit = info
+	ship.Damage.DamageTaken += info.Damage
 	m.observeHit(
 		bt,
 		ship.Uid,
@@ -118,7 +118,7 @@ func (m *MissionManager) hurtShip(ship *objUnit.BattleShip, bt *objBullet.Bullet
 		overkill,
 	)
 	if ship.CurHP <= 0 {
-		ship.SunkByHit = true
+		ship.Damage.KilledByHit = true
 		return
 	}
 	m.state.Stats.RecordBattleLog(state.BattleLogEntry{
@@ -142,10 +142,10 @@ func (m *MissionManager) hurtPlane(plane *objUnit.Plane, bt *objBullet.Bullet) {
 		return
 	}
 	name, actorType, isPlane := m.combatantInfo(bt)
-	plane.LastAttackerName = name
-	plane.LastAttackerType = actorType
-	plane.LastAttackerPlayer = bt.BelongPlayer
-	plane.LastAttackerIsPlane = isPlane
+	plane.Damage.LastAttackerName = name
+	plane.Damage.LastAttackerType = actorType
+	plane.Damage.LastAttackerPlayer = bt.BelongPlayer
+	plane.Damage.LastAttackerIsPlane = isPlane
 
 	beforeHP := plane.CurHP
 	beforeDamage := bt.RealDamage
@@ -155,8 +155,8 @@ func (m *MissionManager) hurtPlane(plane *objUnit.Plane, bt *objBullet.Bullet) {
 	overkill := applied - effective
 	info := bulletHitInfo(bt)
 	info.Damage = applied
-	plane.LastHit = info
-	plane.DamageTaken += info.Damage
+	plane.Damage.LastHit = info
+	plane.Damage.DamageTaken += info.Damage
 	m.observeHit(
 		bt,
 		plane.Uid,
@@ -171,7 +171,7 @@ func (m *MissionManager) hurtPlane(plane *objUnit.Plane, bt *objBullet.Bullet) {
 		overkill,
 	)
 	if plane.CurHP <= 0 {
-		plane.ShotDown = true
+		plane.Damage.KilledByHit = true
 		return
 	}
 	m.state.Stats.RecordBattleLog(state.BattleLogEntry{

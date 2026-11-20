@@ -189,7 +189,7 @@ func TestHurtShipRecordsHitAndSink(t *testing.T) {
 		Shooter: "a", ShooterObjType: object.TypeShip,
 		BelongPlayer: faction.HumanAlpha, Damage: 1000,
 	})
-	require.True(t, target.SunkByHit)
+	require.True(t, target.Damage.KilledByHit)
 	manager.state.Stats.RecordShipLost(target)
 
 	require.Len(t, manager.state.Stats.BattleLog, 2)
@@ -242,7 +242,7 @@ func TestHurtPlaneRecordsHitAndShotDown(t *testing.T) {
 		Shooter: "a", ShooterObjType: object.TypePlane,
 		BelongPlayer: faction.ComputerAlpha, Damage: 1000,
 	})
-	require.True(t, target.ShotDown)
+	require.True(t, target.Damage.KilledByHit)
 	manager.state.Stats.RecordPlaneLost(target)
 
 	require.Len(t, manager.state.Stats.BattleLog, 2)

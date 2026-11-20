@@ -199,7 +199,7 @@ func (m *MissionManager) opponentCanSeeShip(owner faction.Player, ship *objUnit.
 		return m.opponentCanSee(owner, ship.CurPos.MX, ship.CurPos.MY)
 	}
 	now := m.state.Core.SimTick
-	for player, detection := range ship.DetectedBy {
+	for player, detection := range ship.Submarine.DetectedBy {
 		if player != owner && detection.UntilTick > now {
 			return true
 		}

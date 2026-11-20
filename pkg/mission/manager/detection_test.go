@@ -29,7 +29,8 @@ func newDetectionState(sub, detector *objUnit.BattleShip) *state.MissionState {
 func TestSubmarineDetectionByEscortSonar(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged, CurPos: objPos.NewR(10, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+		CurPos:    objPos.NewR(10, 10),
 	}
 	dd := &objUnit.BattleShip{
 		Uid: "dd", CurHP: 100, Type: objUnit.ShipTypeDestroyer,
@@ -57,7 +58,8 @@ func TestSubmarineDetectionByEscortSonar(t *testing.T) {
 func TestSubmarineDetectionRadiusByShipType(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged, CurPos: objPos.NewR(10, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+		CurPos:    objPos.NewR(10, 10),
 	}
 	// 巡洋舰声呐 4 格，6 格处探不到
 	ca := &objUnit.BattleShip{
@@ -81,7 +83,8 @@ func TestSubmarineDetectionRadiusByShipType(t *testing.T) {
 func TestSubmarineDetectionByPlaneAndSurfacingClears(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 100, Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged, CurPos: objPos.NewR(10, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+		CurPos:    objPos.NewR(10, 10),
 	}
 	ms := newDetectionState(sub, nil)
 	ms.Arena.Planes = map[string]*objUnit.Plane{
@@ -95,7 +98,7 @@ func TestSubmarineDetectionByPlaneAndSurfacingClears(t *testing.T) {
 	require.True(t, ms.CanSeeShip(faction.ComputerAlpha, sub), "2 格内飞机目视应点亮")
 
 	// 上浮后清空所有探测记忆
-	sub.DiveState = objUnit.DiveStateSurface
+	sub.Submarine.DiveState = objUnit.DiveStateSurface
 	m.updateSubmarineDetection()
 	require.False(t, sub.DetectedByAny(ms.Core.SimTick))
 }

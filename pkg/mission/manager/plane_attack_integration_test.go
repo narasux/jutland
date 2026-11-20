@@ -117,7 +117,7 @@ func testBomberReleasesBeforeReturning(t *testing.T, planeName string, enemyX fl
 		if released {
 			break
 		}
-		if bomber.FlightPhase == objUnit.PlaneFlightPhaseLandingStaging {
+		if bomber.Flight.Phase == objUnit.PlaneFlightPhaseLandingStaging {
 			t.Fatalf(
 				"bomber returned before releasing: frame=%d pos=%s hp=%.1f remainRange=%.1f",
 				frame,

@@ -82,7 +82,7 @@ func newAirfieldLandingTestStateWithStats(
 // 预期：首拍进入 LandingStaging 且库存仍为 0；1500 拍内切到 LandingApproach、
 // 600 拍内切到 LandingDeck；2000 拍内 Executed，飞机移出 Arena、CurCount 变 1。
 // 覆盖：newAirfieldLandingTestState 注册 test-airfield-plane 模板（MaxCount=2），
-// 断言三个阶段的 FlightPhase 与最终回收计数。
+// 断言三个阶段的 Flight.Phase 与最终回收计数。
 func TestPlaneReturnRecoversAtAirfield(t *testing.T) {
 	ms, airfield, plane := newAirfieldLandingTestState(t, "test-airfield-plane", 2)
 	returnInstr := NewPlaneReturn(plane.Uid)
@@ -95,28 +95,28 @@ func TestPlaneReturnRecoversAtAirfield(t *testing.T) {
 
 	// 巡航返航：进入着陆等待段
 	exec()
-	if plane.FlightPhase != objUnit.PlaneFlightPhaseLandingStaging {
-		t.Fatalf("phase = %s, want %s", plane.FlightPhase, objUnit.PlaneFlightPhaseLandingStaging)
+	if plane.Flight.Phase != objUnit.PlaneFlightPhaseLandingStaging {
+		t.Fatalf("phase = %s, want %s", plane.Flight.Phase, objUnit.PlaneFlightPhaseLandingStaging)
 	}
 	if airfield.Aircraft.Groups[0].CurCount != 0 {
 		t.Fatal("CurCount should not change while waiting")
 	}
 
 	// 推进等待段至进入圆弧（机场等待门在 5.5 个跑道长之后，路程较长）
-	for frame := 0; frame < 1500 && plane.FlightPhase == objUnit.PlaneFlightPhaseLandingStaging; frame++ {
+	for frame := 0; frame < 1500 && plane.Flight.Phase == objUnit.PlaneFlightPhaseLandingStaging; frame++ {
 		exec()
 	}
-	if plane.FlightPhase != objUnit.PlaneFlightPhaseLandingApproach {
+	if plane.Flight.Phase != objUnit.PlaneFlightPhaseLandingApproach {
 		t.Fatalf("phase = %s, want %s (pos=%s rotation=%.2f)",
-			plane.FlightPhase, objUnit.PlaneFlightPhaseLandingApproach,
+			plane.Flight.Phase, objUnit.PlaneFlightPhaseLandingApproach,
 			plane.CurPos.String(), plane.CurRotation)
 	}
 	// 推进最终进近段
-	for frame := 0; frame < 600 && plane.FlightPhase == objUnit.PlaneFlightPhaseLandingApproach; frame++ {
+	for frame := 0; frame < 600 && plane.Flight.Phase == objUnit.PlaneFlightPhaseLandingApproach; frame++ {
 		exec()
 	}
-	if plane.FlightPhase != objUnit.PlaneFlightPhaseLandingDeck {
-		t.Fatalf("phase = %s, want %s", plane.FlightPhase, objUnit.PlaneFlightPhaseLandingDeck)
+	if plane.Flight.Phase != objUnit.PlaneFlightPhaseLandingDeck {
+		t.Fatalf("phase = %s, want %s", plane.Flight.Phase, objUnit.PlaneFlightPhaseLandingDeck)
 	}
 	// 推进着舰滑跑（刹车段 = 3 个跑道长，路程较长）
 	for frame := 0; frame < 2000 && !returnInstr.Executed(); frame++ {
@@ -157,7 +157,7 @@ func TestPlaneReturnRecoversAtAirfieldForWideTurningHeavyBomber(t *testing.T) {
 		}
 	}
 	if !returnInstr.Executed() {
-		t.Fatalf("重型轰炸机未能完成着舰，phase = %s pos = %s", plane.FlightPhase, plane.CurPos.String())
+		t.Fatalf("重型轰炸机未能完成着舰，phase = %s pos = %s", plane.Flight.Phase, plane.CurPos.String())
 	}
 	if airfield.Aircraft.Groups[0].CurCount != 1 {
 		t.Fatalf("CurCount = %d, want 1 after airfield recovery", airfield.Aircraft.Groups[0].CurCount)

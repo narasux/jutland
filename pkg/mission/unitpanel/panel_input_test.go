@@ -129,7 +129,7 @@ func TestSubmarineDiveButtonWorksDuringTransition(t *testing.T) {
 	missionState := panelInteractionState()
 	sub := &objUnit.BattleShip{
 		Uid: "sub", CurHP: 1, TotalHP: 1, Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateDiving,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateDiving},
 	}
 	missionState.Arena.Ships = map[string]*objUnit.BattleShip{sub.Uid: sub}
 	missionState.Interaction.SelectedShips = []string{sub.Uid}

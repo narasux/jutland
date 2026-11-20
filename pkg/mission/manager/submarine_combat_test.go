@@ -36,7 +36,7 @@ func TestGunsCannotFireAtSubmergedSubmarine(t *testing.T) {
 
 	escort := newNamedShip(t, "gurkha", faction.HumanAlpha, 10, 10)
 	sub := newNamedShip(t, "u_96", faction.ComputerAlpha, 14, 10)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 
 	bullets := escort.FireAt(objUnit.FireTargets{Primary: sub, Secondary: sub, AntiAircraft: sub})
 	for _, bt := range bullets {
@@ -56,12 +56,12 @@ func TestGunsCannotFireAtSubmergedSubmarine(t *testing.T) {
 func TestSurfaceShipWithoutASWWeaponCannotEngageSubmerged(t *testing.T) {
 	battleship := newNamedShip(t, "lowa", faction.HumanAlpha, 10, 10)
 	sub := newNamedShip(t, "u_96", faction.ComputerAlpha, 12, 10)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 
 	require.Zero(t, battleship.Weapon.MaxToSubmergedRange)
 	require.Zero(t, shipEngageRange(battleship, sub), "没有反潜武器的战列舰点不亮也打不到水下潜艇")
 	surfaceSub := newNamedShip(t, "u_96", faction.ComputerAlpha, 11, 10)
-	surfaceSub.DiveState = objUnit.DiveStateSurface
+	surfaceSub.Submarine.DiveState = objUnit.DiveStateSurface
 	require.Positive(t, shipEngageRange(battleship, surfaceSub),
 		"同一条船打浮航潜艇时仍按对舰射程")
 }
@@ -94,8 +94,8 @@ func TestSubmarineTorpedoHitsDetectedSubmergedSubmarine(t *testing.T) {
 
 	shooter := newNamedShip(t, "u_96", faction.HumanAlpha, 10, 10)
 	target := newNamedShip(t, "u_96", faction.ComputerAlpha, 14, 10)
-	shooter.DiveState = objUnit.DiveStateSubmerged
-	target.DiveState = objUnit.DiveStateSubmerged
+	shooter.Submarine.DiveState = objUnit.DiveStateSubmerged
+	target.Submarine.DiveState = objUnit.DiveStateSubmerged
 	// 模拟水听器已经点亮目标，否则下潜潜艇按规则不可见、也不该被盲射命中。
 	target.MarkDetected(faction.HumanAlpha, 1000, target.CurPos)
 	shooter.Attack(target.Uid)

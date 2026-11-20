@@ -28,7 +28,8 @@ func TestNewDiveToggleChoosesDirectionFromSubmarineState(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			sub := &objUnit.BattleShip{
-				Uid: "sub", Type: objUnit.ShipTypeSubmarine, CurHP: 100, DiveState: tc.state,
+				Uid: "sub", Type: objUnit.ShipTypeSubmarine, CurHP: 100,
+				Submarine: objUnit.SubmarineState{DiveState: tc.state},
 			}
 			instr := NewDiveToggle(sub)
 			require.NotNil(t, instr)
@@ -73,7 +74,7 @@ func TestShipDiveInstructionExecSetsSubmarineState(t *testing.T) {
 	require.False(t, instr.Executed())
 	require.NoError(t, instr.Exec(ms))
 	require.True(t, instr.Executed())
-	require.Equal(t, objUnit.DiveStateDiving, sub.DiveState)
+	require.Equal(t, objUnit.DiveStateDiving, sub.Submarine.DiveState)
 	require.Equal(t, "Dive ship sub", instr.String())
 	require.Equal(t, GenInstrUid(NameShipDive, sub.Uid), instr.Uid())
 }
@@ -85,7 +86,7 @@ func TestShipDiveInstructionExecSetsSubmarineState(t *testing.T) {
 func TestShipSurfaceInstructionExecSetsSubmarineState(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", Type: objUnit.ShipTypeSubmarine, CurHP: 100,
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	ms := &state.MissionState{Arena: state.MissionArenaState{
 		Ships: map[string]*objUnit.BattleShip{sub.Uid: sub},
@@ -95,7 +96,7 @@ func TestShipSurfaceInstructionExecSetsSubmarineState(t *testing.T) {
 	require.False(t, instr.Executed())
 	require.NoError(t, instr.Exec(ms))
 	require.True(t, instr.Executed())
-	require.Equal(t, objUnit.DiveStateSurfacing, sub.DiveState)
+	require.Equal(t, objUnit.DiveStateSurfacing, sub.Submarine.DiveState)
 	require.Equal(t, "Surface ship sub", instr.String())
 	require.Equal(t, GenInstrUid(NameShipSurface, sub.Uid), instr.Uid())
 }
