@@ -119,7 +119,7 @@ func TestPlaneAttackKeepsTrackingUntilBombsAllReleased(t *testing.T) {
 	}
 }
 
-// TestPlaneAttackDisengagesAfterSingleTorpedo 验证鱼雷机一次通场投一雷即脱离。
+// TestPlaneAttackDisengagesAfterSingleTorpedo 验证未配置齐射的鱼雷机一次通场投一雷即脱离。
 // 场景：test-run-torpedo-bomber 模板带 1 枚炸弹 + 2 枚鱼雷；创建指令前就把
 // Bombs[0].Released 置 true（模拟炸弹舱已空），敌巡洋舰在 (80,50)。
 // 预期：首拍不结束（快照里炸弹已投完，不触发炸弹脱离，继续为鱼雷通场跟踪）；
@@ -143,5 +143,65 @@ func TestPlaneAttackDisengagesAfterSingleTorpedo(t *testing.T) {
 	}
 	if plane.CurAttackTarget != "" {
 		t.Fatalf("target = %q, want cleared after the torpedo release", plane.CurAttackTarget)
+	}
+}
+
+// TestPlaneAttackDisengagesWithOnlyInapplicableBombs 验证混合挂载轰炸机不会因反潜深弹无法对水面舰投放而一直绕圈。
+// 场景：SB2C 一类挂载同时带普通炸弹与反潜深弹；对水面舰攻击时深弹的 targetAcceptable 为 false，
+// 旧实现要求“所有炸弹都 Released”才脱离，剩余深弹永远投不出去，飞机会在目标舰上方反复盘旋。
+// 预期：普通炸弹投完后立即 Executed 并清空目标，不等待无法投放的深弹。
+// 覆盖：newShipAttackTestState 构造 2 枚炸弹（第 1 枚 AntiSubmarine=true），首拍不脱离，
+// 将普通炸弹置 Released 后再执行一次，断言 Executed 与 CurAttackTarget。
+func TestPlaneAttackDisengagesWithOnlyInapplicableBombs(t *testing.T) {
+	ms, plane := newShipAttackTestState(t, "test-mixed-asw-bomber", 2, 0)
+	plane.Weapon.Bombs[0].AntiSubmarine = true
+
+	i := NewPlaneAttack(plane.Uid, object.TypeShip, "enemy-ship")
+	execPlaneAttack(t, i, ms)
+	if i.Executed() {
+		t.Fatal("attack instruction ended before the droppable bomb was released")
+	}
+
+	// 普通炸弹已投放，只剩对水面舰不适用（AntiSubmarine）的深弹。
+	plane.Weapon.Bombs[1].Released = true
+	execPlaneAttack(t, i, ms)
+	if !i.Executed() {
+		t.Fatal("bomber should disengage when only inapplicable anti-sub bombs remain")
+	}
+	if plane.CurAttackTarget != "" {
+		t.Fatalf("target = %q, want cleared after the droppable salvo", plane.CurAttackTarget)
+	}
+}
+
+// TestPlaneAttackWithSalvoDropsWholeTorpedoWave 验证配置齐射的鱼雷机投完本波鱼雷才脱离。
+// 场景：A 攻击机挂 4 枚鱼雷、SalvoSize=2；若沿用默认“一雷脱离”，第一次齐射后就掉头，
+// 剩余 2 枚鱼雷还要再绕一圈，正是玩家反馈的多次暴露问题。
+// 预期：投出前 2 枚后仍跟踪目标；4 枚全部投完后才 Executed 并清空目标。
+// 覆盖：newShipAttackTestState 构造 0 炸弹 + 4 鱼雷，设置 SalvoSize=2，分两次置 Released 后断言。
+func TestPlaneAttackWithSalvoDropsWholeTorpedoWave(t *testing.T) {
+	ms, plane := newShipAttackTestState(t, "test-salvo-torpedo-bomber", 0, 4)
+	plane.Weapon.SalvoSize = 2
+
+	i := NewPlaneAttack(plane.Uid, object.TypeShip, "enemy-ship")
+	execPlaneAttack(t, i, ms)
+
+	plane.Weapon.Torpedoes[0].Released = true
+	plane.Weapon.Torpedoes[1].Released = true
+	execPlaneAttack(t, i, ms)
+	if i.Executed() {
+		t.Fatal("salvo torpedo bomber disengaged after only half of its torpedoes")
+	}
+	if plane.CurAttackTarget != "enemy-ship" {
+		t.Fatalf("target = %q, want to keep tracking for the rest of the salvo", plane.CurAttackTarget)
+	}
+
+	plane.Weapon.Torpedoes[2].Released = true
+	plane.Weapon.Torpedoes[3].Released = true
+	execPlaneAttack(t, i, ms)
+	if !i.Executed() {
+		t.Fatal("salvo torpedo bomber should disengage after the whole torpedo wave")
+	}
+	if plane.CurAttackTarget != "" {
+		t.Fatalf("target = %q, want cleared after the torpedo wave", plane.CurAttackTarget)
 	}
 }

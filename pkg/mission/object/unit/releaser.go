@@ -68,6 +68,12 @@ func (r *Releaser) InShotRange(shipCurRotation float64, curPos, targetPos objPos
 	return r.inRange(curPos, targetPos) && r.inArc(shipCurRotation, curPos, targetPos)
 }
 
+// CanDropOn 返回该释放器能否对目标投放（不检查是否已释放）。
+// 反潜深弹只对潜艇、普通炸弹/鱼雷打不到下潜潜艇等门槛都在这里统一判断。
+func (r *Releaser) CanDropOn(enemy Hurtable) bool {
+	return r != nil && enemy != nil && r.targetAcceptable(enemy)
+}
+
 // targetAcceptable 目标是否满足投放门槛：战舰始终可攻击；地面飞机（停放/滑行）
 // 只能被炸弹攻击（鱼雷无法在陆地使用）。
 func (r *Releaser) targetAcceptable(enemy Hurtable) bool {

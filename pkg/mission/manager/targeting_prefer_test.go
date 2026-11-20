@@ -5,6 +5,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
+	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -76,7 +77,7 @@ func newPreferTestManager(t *testing.T) *MissionManager {
 
 // TestNextTargetUIDForPlanePrefersOneSalvoKillableShip 验证在空轰炸机重选目标时优先剩余载弹能一波击沉的残血舰。
 // 场景：测试轰炸机挂 1 枚 500 伤害炸弹、RemainRange=1000；wounded 100/3000、healthy 9000/9000，队列 [wounded, healthy]，游标先停在 healthy。
-// 预期：游标在 healthy 也先选 wounded；wounded 补满 9000 后回退游标顺序选 healthy；无载弹战斗机纯按游标选 wounded。
+// 预期：游标在 healthy 也先选 wounded；wounded 补满 9000 后回退游标顺序选 healthy；载弹不足以一波带走的飞机纯按游标选 wounded。
 // 覆盖：oneSalvoKillablePrefer(payloadDamage) 与 findTargetAtCursorWhere 的 prefer/fallback 分支，配合 setTargetCursor。
 func TestNextTargetUIDForPlanePrefersOneSalvoKillableShip(t *testing.T) {
 	registerPreferTestBomber(t)
@@ -107,7 +108,7 @@ func TestNextTargetUIDForPlanePrefersOneSalvoKillableShip(t *testing.T) {
 		t.Fatalf("target = %q ok=%v, want healthy (cursor order fallback)", uid, ok)
 	}
 
-	// 没有剩余载弹的飞机不做偏好，纯按游标轮转
+	// 载弹伤害不足以一波带走的飞机不做偏好，纯按游标轮转
 	manager.setTargetCursor("base", object.TypeShip, 0)
 	plain := &objUnit.Plane{
 		Uid:          "fighter",
@@ -117,10 +118,43 @@ func TestNextTargetUIDForPlanePrefersOneSalvoKillableShip(t *testing.T) {
 		BelongPlayer: faction.HumanAlpha,
 		CurPos:       objPos.NewR(50, 50),
 		RemainRange:  1000,
+		Weapon:       objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{}}},
 	}
 	uid, ok = manager.nextTargetUIDForPlane(plain, map[string]int{})
 	if !ok || uid != "wounded" {
-		t.Fatalf("target = %q ok=%v, want wounded (no payload, cursor order)", uid, ok)
+		t.Fatalf("target = %q ok=%v, want wounded (not one-salvo-killable, cursor order)", uid, ok)
+	}
+}
+
+// TestUpdatePlaneAttackOrReturnReturnsPlaneWithoutPayload 验证只剩不可投放弹药的飞机直接返航而不是继续绕圈。
+// 场景：飞机只挂 1 枚反潜深弹、普通炸弹已投完，目标队列里只有两艘水面敌舰；若仍分配水面目标，
+// PlaneAttack 每拍都投不出任何东西，飞机会在舰上方永久盘旋。
+// 预期：updatePlaneAttackOrReturn 不添加 PlaneAttack，而是添加 PlaneReturn 指令。
+// 覆盖：newPreferTestManager 的 [wounded, healthy] 队列 + 仅深弹飞机，直接跑一帧后检查指令集。
+func TestUpdatePlaneAttackOrReturnReturnsPlaneWithoutPayload(t *testing.T) {
+	registerPreferTestBomber(t)
+	manager := newPreferTestManager(t)
+	manager.instructionSet = NewInstructionSet()
+
+	plane := &objUnit.Plane{
+		Uid:          "asw-bomber",
+		Name:         preferTestPlaneName,
+		Type:         objUnit.PlaneTypeDiveBomber,
+		BelongShip:   "base",
+		BelongPlayer: faction.HumanAlpha,
+		CurPos:       objPos.NewR(50, 50),
+		RemainRange:  1000,
+		Weapon:       objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{AntiSubmarine: true}}},
+	}
+	manager.state.Arena.Planes = map[string]*objUnit.Plane{plane.Uid: plane}
+
+	manager.updatePlaneAttackOrReturn()
+
+	if manager.instructionSet.Exists(instr.GenInstrUid(instr.NamePlaneAttack, plane.Uid)) {
+		t.Fatal("plane without usable payload must not receive a surface attack instruction")
+	}
+	if !manager.instructionSet.Exists(instr.GenInstrUid(instr.NamePlaneReturn, plane.Uid)) {
+		t.Fatal("plane without usable payload should be sent home instead of circling the target")
 	}
 }
 
@@ -172,5 +206,44 @@ func TestTakeOffFromBasePrefersOneSalvoKillableShip(t *testing.T) {
 	}
 	if targetType != object.TypeShip || targetUID != "wounded" {
 		t.Fatalf("target = %q (%v), want wounded ship (killable in one salvo)", targetUID, targetType)
+	}
+}
+
+// TestNextTargetUIDForPlaneSkipsSurfaceTargetWithoutPayload 验证只剩反潜弹的飞机不会再接水面舰任务。
+// 场景：飞机只挂 1 枚 AntiSubmarine 深弹（普通炸弹已投完），目标队列里只有两艘水面敌舰；
+// 若仍把水面舰分配给飞机，PlaneAttack 无法投放任何弹药，飞机会在舰上方永久盘旋。
+// 预期：nextTargetUIDForPlane 返回 ok=false，交由 updatePlaneAttackOrReturn 触发返航。
+// 覆盖：复用 newPreferTestManager 的 [wounded, healthy] 队列，构造仅深弹机并断言无目标；
+// 同一测试里用仅普通炸弹机做对照，确认过滤只针对不可投放的挂载。
+func TestNextTargetUIDForPlaneSkipsSurfaceTargetWithoutPayload(t *testing.T) {
+	registerPreferTestBomber(t)
+	manager := newPreferTestManager(t)
+
+	aswPlane := &objUnit.Plane{
+		Uid:          "asw-bomber",
+		Name:         preferTestPlaneName,
+		Type:         objUnit.PlaneTypeDiveBomber,
+		BelongShip:   "base",
+		BelongPlayer: faction.HumanAlpha,
+		CurPos:       objPos.NewR(50, 50),
+		RemainRange:  1000,
+		Weapon:       objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{AntiSubmarine: true}}},
+	}
+	if uid, ok := manager.nextTargetUIDForPlane(aswPlane, map[string]int{}); ok {
+		t.Fatalf("target = %q ok=true, want no surface target for anti-sub-only loadout", uid)
+	}
+
+	bombPlane := &objUnit.Plane{
+		Uid:          "bomb-bomber",
+		Name:         preferTestPlaneName,
+		Type:         objUnit.PlaneTypeDiveBomber,
+		BelongShip:   "base",
+		BelongPlayer: faction.HumanAlpha,
+		CurPos:       objPos.NewR(50, 50),
+		RemainRange:  1000,
+		Weapon:       objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{}}},
+	}
+	if uid, ok := manager.nextTargetUIDForPlane(bombPlane, map[string]int{}); !ok || uid == "" {
+		t.Fatal("bomber with a droppable bomb should still receive a surface target")
 	}
 }

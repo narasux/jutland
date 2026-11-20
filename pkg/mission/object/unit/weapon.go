@@ -192,6 +192,9 @@ type PlaneWeapon struct {
 	RocketsMD []WeaponMetadata `json:"rockets"`
 	// 最小释放间隔（秒）
 	ReleaseInterval float64 `json:"releaseInterval"`
+	// SalvoSize 单次释放动作每组最多投放的挂载数；0/1 表示每次一枚。
+	// 小型攻击机/俯冲轰炸机可用 2 缩短暴露在防空火力中的通场次数。
+	SalvoSize int `json:"salvoSize"`
 	// 最近释放时间
 	LatestReleaseTick int64
 	LatestReleaseAt   int64

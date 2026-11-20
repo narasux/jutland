@@ -7823,7 +7823,8 @@
           leftFiringArc: [335, 360]
         }
       ],
-      releaseInterval: 0.3
+      releaseInterval: 0.05,
+      salvoSize: 2
     }
   },
   // --------- 鱼雷轰炸机 ----------
@@ -7914,7 +7915,8 @@
           leftFiringArc: [335, 360]
         }
       ],
-      releaseInterval: 0.3
+      releaseInterval: 0.05,
+      salvoSize: 2
     }
   },
 ]

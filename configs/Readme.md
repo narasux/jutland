@@ -712,7 +712,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         },
       ],
       // 释放间隔（单位：秒，炸弹/鱼雷两次投放之间的最小间隔）
-      releaseInterval: 5
+      releaseInterval: 5,
+      // 单次释放动作每组最多投放的挂载数；0 或不写等于 1
+      // 小型攻击机/俯冲轰炸机可设为 2，减少反复通场暴露在防空火力中的时间
+      salvoSize: 2
     }
   }
 ]
