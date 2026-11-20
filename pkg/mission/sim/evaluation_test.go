@@ -36,7 +36,7 @@ func TestWriteEvaluationAggregatesSuite(t *testing.T) {
 	summaryPath := filepath.Join(dir, "suites", "full.json")
 	require.NoError(t, os.MkdirAll(filepath.Dir(summaryPath), 0o755))
 	require.NoError(t, os.WriteFile(summaryPath, suitePayload, 0o644))
-	out, err := WriteEvaluation(Paths{Reports: dir}, summaryPath)
+	_, out, err := WriteEvaluation(Paths{Reports: dir}, summaryPath)
 	require.NoError(t, err)
 	html, err := os.ReadFile(out)
 	require.NoError(t, err)
@@ -50,4 +50,35 @@ func TestWriteEvaluationAggregatesSuite(t *testing.T) {
 	require.NoError(t, err)
 	require.NoError(t, json.Unmarshal(raw, &report))
 	require.Equal(t, 1, report.Runs)
+}
+
+// TestEvaluationGateError 验证评测门禁只拦「缺 run」和「smoke 红」，balance 红放行。
+// 场景：CI 里跑完整 suite 后需要明确的退出码；缺 run 表示报告链断了，
+// smoke 红（F2 合同作战/冒烟）表示引擎或场景真的坏了，都必须失败；
+// balance 红是「可能需要重新平衡」的信号，不应阻断提交流程。
+// 预期：干净报告返回 nil；Missing 非空返回含 missing 的错误；SmokeRed>0 返回含 smoke red 的错误；
+// 只有 BalanceRed>0 时返回 nil。
+// 覆盖：表驱动 4 个 EvaluationReport，调用 EvaluationGateError 断言错误存在性与关键字。
+func TestEvaluationGateError(t *testing.T) {
+	cases := []struct {
+		name    string
+		report  EvaluationReport
+		wantErr string
+	}{
+		{name: "clean", report: EvaluationReport{Status: map[string]int{"green": 6}}},
+		{name: "missing", report: EvaluationReport{Missing: []string{"r9"}}, wantErr: "missing"},
+		{name: "smoke red", report: EvaluationReport{SmokeRed: 2}, wantErr: "smoke red"},
+		{name: "balance only", report: EvaluationReport{BalanceRed: 3}},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			err := EvaluationGateError(tc.report)
+			if tc.wantErr == "" {
+				require.NoError(t, err)
+				return
+			}
+			require.Error(t, err)
+			require.Contains(t, err.Error(), tc.wantErr)
+		})
+	}
 }

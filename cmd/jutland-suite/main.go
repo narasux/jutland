@@ -35,6 +35,7 @@ func run(args []string) error {
 func cmdSuite(args []string) error {
 	fs := flag.NewFlagSet("suite", flag.ContinueOnError)
 	out := fs.String("out", "", "override report directory")
+	failOnRed := fs.Bool("fail-on-red", false, "exit non-zero on missing runs or smoke red items")
 	flagArgs, pos := cliutil.Split(args)
 	if err := fs.Parse(flagArgs); err != nil {
 		return err
@@ -122,11 +123,17 @@ func cmdSuite(args []string) error {
 		return err
 	}
 	fmt.Printf("suite: %s\n", summary)
-	evaluation, err := sim.WriteEvaluation(paths, summary)
+	report, evaluation, err := sim.WriteEvaluation(paths, summary)
 	if err != nil {
 		return err
 	}
 	fmt.Printf("evaluation: %s\n", evaluation)
+	if *failOnRed {
+		if err := sim.EvaluationGateError(report); err != nil {
+			return err
+		}
+		fmt.Println("gate: pass (no missing runs or smoke red items)")
+	}
 	return nil
 }
 
@@ -135,6 +142,9 @@ const usage = `jutland-suite - JSON5 simulation suite runner
 Requires JUTLAND_SIM_HOME. F1/F2/F3 steps import game resources/Ebiten.
 
 Commands:
-  suite <manifest> [--out DIR]
+  suite <manifest> [--out DIR] [--fail-on-red]
   help
+
+--fail-on-red turns the suite into a CI gate: it fails on missing runs or smoke
+red items (balance reds stay informational).
 `

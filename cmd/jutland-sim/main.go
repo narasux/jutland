@@ -567,6 +567,7 @@ func cmdLLMReview(args []string) error {
 func cmdEvaluation(args []string) error {
 	fs := flag.NewFlagSet("evaluation", flag.ContinueOnError)
 	out := fs.String("out", "", "override report directory")
+	failOnRed := fs.Bool("fail-on-red", false, "exit non-zero on missing runs or smoke red items")
 	flagArgs, pos := cliutil.Split(args)
 	if err := fs.Parse(flagArgs); err != nil {
 		return err
@@ -578,11 +579,17 @@ func cmdEvaluation(args []string) error {
 	if err != nil {
 		return err
 	}
-	html, err := sim.WriteEvaluation(paths, strings.TrimSpace(pos[0]))
+	report, html, err := sim.WriteEvaluation(paths, strings.TrimSpace(pos[0]))
 	if err != nil {
 		return err
 	}
 	fmt.Printf("evaluation: %s\n", html)
+	if *failOnRed {
+		if err := sim.EvaluationGateError(report); err != nil {
+			return err
+		}
+		fmt.Println("gate: pass (no missing runs or smoke red items)")
+	}
 	return nil
 }
 
