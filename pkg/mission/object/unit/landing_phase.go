@@ -310,7 +310,12 @@ func (p *Plane) UpdateLandingStaging(_ *mapcfg.MapCfg, base AircraftBase) bool {
 func (p *Plane) updateLandingStagingEndPos(base AircraftBase) {
 	length := phaseUnitInMapBlocks(base)
 	gate := landingGateLocalOffset(p.Landing.Slot)
-	arc, ok := buildLandingApproachArc(gate, base, p.MaxSpeed, base.BaseAircraft().landingConfigForSlot(p.Landing.Slot))
+	arc, ok := buildLandingApproachArc(
+		gate,
+		base,
+		p.MaxSpeed,
+		base.BaseAircraft().landingConfigForSlot(p.Landing.Slot),
+	)
 	if !ok {
 		p.Flight.EndPos = base.BaseAircraft().landingStagingTarget(nil, base, p.Landing.Slot)
 		return
