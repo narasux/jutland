@@ -83,3 +83,54 @@ func TestEvaluationGateError(t *testing.T) {
 		})
 	}
 }
+
+// TestWriteEvaluationIncludesPenetrationMatrix 验证穿甲场景会汇总进评测的穿甲矩阵。
+// 场景：suite 里包含一个 F0 penetration 场景（穿深 305mm、参考比值 2.03、最大可穿 400mm、9 个 AP 点），
+// 这类 run 没有 shots/hit%，如果只留在 runs 表里会全是横杠，定稿穿甲数值时无法横向比较。
+// 预期：EvaluationReport.Penetration 有 1 行且字段与 metrics 一致；
+// Markdown 含「穿甲矩阵」表头与数值，HTML 同样包含矩阵小节。
+// 覆盖：临时 reports 目录写 penetration run 的 result.json + suite summary，调用 WriteEvaluation 后断言 JSON/md/html。
+func TestWriteEvaluationIncludesPenetrationMatrix(t *testing.T) {
+	dir := t.TempDir()
+	runDir := filepath.Join(dir, "runs", "p1")
+	require.NoError(t, os.MkdirAll(runDir, 0o755))
+	result := Result{
+		SchemaVersion: 1,
+		Scenario:      Scenario{Name: "pen-203", Mode: ModePenetration},
+		Metrics: []MetricRow{
+			{Group: "穿甲", Name: "penetration_mm", Value: 305},
+			{Group: "穿甲", Name: "reference_armor", Value: 150},
+			{Group: "穿甲", Name: "reference_ratio", Value: 2.033},
+			{Group: "矩阵", Name: "max_penetrated_armor", Value: 400},
+			{Group: "矩阵", Name: "ap_penetrated", Value: 9},
+		},
+	}
+	payload, err := json.Marshal(result)
+	require.NoError(t, err)
+	require.NoError(t, os.WriteFile(filepath.Join(runDir, "result.json"), payload, 0o644))
+
+	suite := SuiteSummary{Name: "pen", Runs: []SuiteRunResult{{RunID: "p1"}}}
+	suitePayload, err := json.Marshal(suite)
+	require.NoError(t, err)
+	summaryPath := filepath.Join(dir, "suites", "pen.json")
+	require.NoError(t, os.MkdirAll(filepath.Dir(summaryPath), 0o755))
+	require.NoError(t, os.WriteFile(summaryPath, suitePayload, 0o644))
+
+	report, out, err := WriteEvaluation(Paths{Reports: dir}, summaryPath)
+	require.NoError(t, err)
+	require.Len(t, report.Penetration, 1)
+	pen := report.Penetration[0]
+	require.Equal(t, "pen-203", pen.Scenario)
+	require.InDelta(t, 305, pen.PenetrationMM, 1e-9)
+	require.InDelta(t, 150, pen.ReferenceArmor, 1e-9)
+	require.InDelta(t, 400, pen.MaxPenetratedArmor, 1e-9)
+	require.Equal(t, 9, pen.APPenetrated)
+
+	md, err := os.ReadFile(filepath.Join(dir, "suites", "pen-evaluation.md"))
+	require.NoError(t, err)
+	require.Contains(t, string(md), "## 穿甲矩阵")
+	require.Contains(t, string(md), "| pen-203 | 305.0 | 150.0 | 2.03 | 400.0 | 9 |")
+	html, err := os.ReadFile(out)
+	require.NoError(t, err)
+	require.Contains(t, string(html), "穿甲矩阵")
+}

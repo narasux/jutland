@@ -196,9 +196,14 @@ jutland-sim evaluation reports/suites/full-evaluation-<stamp>.json
 ```
 
 `testdata/suite-full.json5` is the reference F0/F1/F2/F3 matrix. The aggregate
-page shows per-run green/yellow/red counts, findings/diagnostics, shots,
-hit%, mission success and enemy ships sunk, plus links to each report. F2 smoke
-reds are counted separately from balance reds.
+page shows per-run green/yellow/red counts, findings/diagnostics (split into
+bug/data/balance), shots, hit%, mission success and enemy ships sunk, plus links to
+each report. F2 smoke reds are counted separately from balance reds.
+
+`penetration` steps (pure geometric F0 scenarios) get their own 穿甲矩阵 section:
+scenario, penetration mm, reference armor mm, reference ratio, the largest armor it
+can penetrate and how many AP sample points penetrate. This makes shell-vs-armor
+tradeoffs comparable across calibers without reading each run report.
 
 ## Previous-run diff (P9, first pass)
 

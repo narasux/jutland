@@ -38,6 +38,17 @@ type EvaluationRow struct {
 	ReportHTML     string         `json:"reportHtml"`
 }
 
+// PenetrationSummary is one penetration-scenario row in the suite evaluation.
+type PenetrationSummary struct {
+	Scenario           string  `json:"scenario"`
+	RunID              string  `json:"runId"`
+	PenetrationMM      float64 `json:"penetrationMm"`
+	ReferenceArmor     float64 `json:"referenceArmor"`
+	ReferenceRatio     float64 `json:"referenceRatio"`
+	MaxPenetratedArmor float64 `json:"maxPenetratedArmor"`
+	APPenetrated       int     `json:"apPenetrated"`
+}
+
 // EvaluationReport aggregates a suite into a human/AI overview.
 type EvaluationReport struct {
 	SchemaVersion int            `json:"schemaVersion"`
@@ -49,11 +60,12 @@ type EvaluationReport struct {
 	SmokeRed      int            `json:"smokeRed"`
 	BalanceRed    int            `json:"balanceRed"`
 	// BugFindings 只统计 Kind=bug 的 finding；门禁用它判断是否真的坏了。
-	BugFindings     int             `json:"bugFindings"`
-	DataFindings    int             `json:"dataFindings"`
-	BalanceFindings int             `json:"balanceFindings"`
-	Rows            []EvaluationRow `json:"rows"`
-	Missing         []string        `json:"missing,omitempty"`
+	BugFindings     int                  `json:"bugFindings"`
+	DataFindings    int                  `json:"dataFindings"`
+	BalanceFindings int                  `json:"balanceFindings"`
+	Rows            []EvaluationRow      `json:"rows"`
+	Penetration     []PenetrationSummary `json:"penetration,omitempty"`
+	Missing         []string             `json:"missing,omitempty"`
 }
 
 var evalTemplate = template.Must(template.New("eval").Parse(`<!doctype html>
@@ -75,6 +87,9 @@ a{color:#155eef;text-decoration:none}
 <section><h2>Runs</h2><table><thead><tr><th>run</th><th>scenario</th><th>fidelity</th><th>mode</th><th>green</th><th>yellow</th><th>red</th><th>findings</th><th>diag</th><th>shots</th><th>hit%</th><th>success</th><th>enemy sunk</th><th>p99ms</th></tr></thead><tbody>
 {{range .Report.Rows}}<tr><td><a href="../runs/{{.RunID}}/report.html">{{.RunID}}</a></td><td>{{.Scenario}}</td><td>{{.Fidelity}}</td><td>{{.Mode}}</td><td class="green">{{.Green}}</td><td class="yellow">{{.Yellow}}</td><td class="red">{{.Red}}</td><td>{{.Findings}}</td><td>{{.Diagnostics}}</td><td>{{index .Metrics "shots"}}</td><td>{{index .Metrics "hit_rate"}}</td><td>{{index .Metrics "kill_rate"}}</td><td>{{index .Metrics "tick_p99_ms"}}</td></tr>{{end}}
 </tbody></table></section>
+{{if .Report.Penetration}}<section><h2>穿甲矩阵</h2><table><thead><tr><th>scenario</th><th>穿深 mm</th><th>参考装甲 mm</th><th>参考比值</th><th>最大可穿装甲 mm</th><th>AP 穿透点</th></tr></thead><tbody>
+{{range .Report.Penetration}}<tr><td><a href="../runs/{{.RunID}}/report.html">{{.Scenario}}</a></td><td>{{printf "%.1f" .PenetrationMM}}</td><td>{{printf "%.1f" .ReferenceArmor}}</td><td>{{printf "%.2f" .ReferenceRatio}}</td><td>{{printf "%.1f" .MaxPenetratedArmor}}</td><td>{{.APPenetrated}}</td></tr>{{end}}
+</tbody></table></section>{{end}}
 <section><h2>红项与 Finding</h2><ul>
 {{range .Report.Rows}}{{if .RedItems}}<li><a href="../runs/{{.RunID}}/report.html">{{.RunID}}</a><ul>{{range .RedItems}}<li class="red">{{.}}</li>{{end}}</ul></li>{{end}}{{end}}
 {{range .Report.Rows}}{{range .FindingIDs}}<li>{{.}}</li>{{end}}{{end}}
@@ -140,10 +155,26 @@ func WriteEvaluation(paths Paths, summaryPath string) (EvaluationReport, string,
 			}
 			report.Status[item.Status]++
 		}
-		for _, name := range []string{"shots", "hit_rate", "mission_success", "enemy_sunk", "own_sunk", "tick_p99_ms"} {
-			if m, ok := metricMap(result.Metrics)[name]; ok {
+		metricIndex := metricMap(result.Metrics)
+		for _, name := range []string{
+			"shots", "hit_rate", "mission_success", "enemy_sunk", "own_sunk", "tick_p99_ms",
+			"penetration_mm", "reference_armor", "reference_ratio", "max_penetrated_armor", "ap_penetrated",
+		} {
+			if m, ok := metricIndex[name]; ok {
 				row.Metrics[name] = m.Value
 			}
+		}
+		// 穿甲场景（F0 纯几何）单独汇总成矩阵，避免在 shots/hit% 列全是横杠。
+		if result.Scenario.Mode == ModePenetration {
+			report.Penetration = append(report.Penetration, PenetrationSummary{
+				Scenario:           result.Scenario.Name,
+				RunID:              run.RunID,
+				PenetrationMM:      metricIndex["penetration_mm"].Value,
+				ReferenceArmor:     metricIndex["reference_armor"].Value,
+				ReferenceRatio:     metricIndex["reference_ratio"].Value,
+				MaxPenetratedArmor: metricIndex["max_penetrated_armor"].Value,
+				APPenetrated:       int(metricIndex["ap_penetrated"].Value),
+			})
 		}
 		for _, finding := range result.Findings {
 			row.FindingIDs = append(row.FindingIDs, finding.ID+": "+finding.Title)
@@ -255,6 +286,25 @@ func writeEvaluationMarkdown(path string, report EvaluationReport, findings, dia
 			row.Metric("enemy_sunk"),
 			row.Metric("tick_p99_ms"),
 		)
+	}
+	if len(report.Penetration) > 0 {
+		b.WriteString("\n## 穿甲矩阵\n\n")
+		b.WriteString(
+			"| scenario | 穿深 mm | 参考装甲 mm | 参考比值 | 最大可穿装甲 mm | AP 穿透点 |\n" +
+				"|---|---:|---:|---:|---:|---:|\n",
+		)
+		for _, pen := range report.Penetration {
+			fmt.Fprintf(
+				&b,
+				"| %s | %.1f | %.1f | %.2f | %.1f | %d |\n",
+				pen.Scenario,
+				pen.PenetrationMM,
+				pen.ReferenceArmor,
+				pen.ReferenceRatio,
+				pen.MaxPenetratedArmor,
+				pen.APPenetrated,
+			)
+		}
 	}
 	b.WriteString("\n## 红项与 Finding\n\n")
 	for _, row := range report.Rows {
