@@ -9,6 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/narasux/jutland/pkg/mission/sim"
+	"github.com/narasux/jutland/pkg/mission/state"
 )
 
 // TestRunMacroSameSeedDeterministic 验证 F3 同 seed 两次运行在同步寻路下指标一致。
@@ -121,4 +122,32 @@ func deterministicScorecard(rows []sim.ScorecardItem) []sim.ScorecardItem {
 		out = append(out, row)
 	}
 	return out
+}
+
+// TestMacroObjectiveMet 验证可选任务目标（坚持到第 N 拍）的判定规则。
+// 场景：engine 只认「全歼/被全灭」，而防守型任务需要「坚持到 N 拍」这类目标；
+// 判定必须区分提前胜利、中途全灭、以及仍在运行但未到目标拍数。
+// 预期：success 恒为 true；failed 恒为 false；running 时 ticks>=surviveTicks 才为 true；
+// surviveTicks<=0 视为未配置并返回 false。
+// 覆盖：表驱动 6 组 (status, ticks, surviveTicks)，调用 macroObjectiveMet 断言布尔值。
+func TestMacroObjectiveMet(t *testing.T) {
+	cases := []struct {
+		name         string
+		status       state.MissionStatus
+		ticks        int64
+		surviveTicks int64
+		want         bool
+	}{
+		{name: "success early", status: state.MissionSuccess, ticks: 1000, surviveTicks: 12000, want: true},
+		{name: "failed early", status: state.MissionFailed, ticks: 1000, surviveTicks: 12000, want: false},
+		{name: "running just below", status: state.MissionRunning, ticks: 11999, surviveTicks: 12000, want: false},
+		{name: "running at limit", status: state.MissionRunning, ticks: 12000, surviveTicks: 12000, want: true},
+		{name: "running past limit", status: state.MissionRunning, ticks: 20000, surviveTicks: 12000, want: true},
+		{name: "no objective", status: state.MissionRunning, ticks: 12000, surviveTicks: 0, want: false},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			require.Equal(t, tc.want, macroObjectiveMet(tc.status, tc.ticks, tc.surviveTicks))
+		})
+	}
 }

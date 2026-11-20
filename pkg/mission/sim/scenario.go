@@ -88,11 +88,19 @@ type PenetrationSpec struct {
 	ReferenceAngle float64 `json:"referenceAngle,omitempty"`
 }
 
+// MacroObjective 是叠加在引擎「全歼」胜负之上的可选评估目标，不改变任务状态。
+// 例如珍珠港防守方永远无法全歼日军，但可以问「能否坚持到第 N 拍」。
+type MacroObjective struct {
+	// SurviveTicks 要求本方在指定拍数前不被全灭（或提前达成任务成功）。
+	SurviveTicks int64 `json:"surviveTicks,omitempty"`
+}
+
 // MacroSpec defines an AI-vs-AI full mission run.
 type MacroSpec struct {
-	Mission    string `json:"mission"`
-	PlayerSide string `json:"playerSide,omitempty"` // P1 | P2
-	MaxTicks   int    `json:"maxTicks,omitempty"`
+	Mission    string          `json:"mission"`
+	PlayerSide string          `json:"playerSide,omitempty"` // P1 | P2
+	MaxTicks   int             `json:"maxTicks,omitempty"`
+	Objective  *MacroObjective `json:"objective,omitempty"`
 }
 
 // DuelShip is one ship group in a duel fleet.
@@ -283,6 +291,9 @@ func (s *Scenario) Validate() error {
 		}
 		if s.Macro.MaxTicks < 1 || s.Macro.MaxTicks > 216000 {
 			return fmt.Errorf("macro.maxTicks must be between 1 and 216000")
+		}
+		if s.Macro.Objective != nil && s.Macro.Objective.SurviveTicks < 1 {
+			return fmt.Errorf("macro.objective.surviveTicks must be positive")
 		}
 	}
 	if s.Mode == ModeDuel {
