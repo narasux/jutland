@@ -88,6 +88,18 @@ Set `SIM_NIGHTLY_SUITE=small` for the quick `tools/sim-suite.sh` matrix, and
 `SIM_NIGHTLY_ARCHIVE=1` to move runs older than `SIM_KEEP_RUNS` (default 100) to the
 archive after the run.
 
+Gating and exploratory coverage are separate suites: `full-evaluation` is the clean
+gate (F0/F1/F2 + Pearl Harbor F3), while `f3-coverage` runs ASW/SubmarineTest missions
+that are expected to stall under AI-vs-AI. The nightly job runs the rendered-frame
+gate first (it needs a clean GUI session), then the gate suite, then the coverage
+suites from `SIM_NIGHTLY_EXTRA_SUITES` (default `f3-coverage`) without letting their
+yellow/timeout results block the run.
+
+Ebiten/GLFW initialization fails in bursts on some machines; the nightly script
+retries a step only when it crashed (exit code >= 2, e.g. a GUI-init panic), never on
+a semantic gate failure (exit 1). Tune with `SIM_NIGHTLY_ATTEMPTS` (default 3) and
+`SIM_NIGHTLY_RETRY_WAIT` (default 15s).
+
 To schedule it daily at 10:00 local time, install the per-user launchd job
 explicitly (nothing is installed by default):
 
