@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-gate sim-perf sim-suite sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
+.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-gate sim-perf sim-suite sim-gate sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -60,6 +60,10 @@ sim-perf:
 # run a small F0/F1/F3 suite, then trend/analyze
 sim-suite:
 	bash tools/sim-suite.sh
+
+# CI gate: full suite must have no missing runs and no smoke red items
+sim-gate:
+	go run ./cmd/jutland-suite suite "$${SIM_SUITE:-full-evaluation}" --fail-on-red
 
 # nightly lab run: suite + rendered-frame gate + trend/analyze
 sim-nightly:

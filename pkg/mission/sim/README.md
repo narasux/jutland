@@ -99,6 +99,19 @@ Knobs: `SIM_SCHEDULE_HOUR`/`SIM_SCHEDULE_MINUTE` for the schedule,
 `$JUTLAND_SIM_HOME/reports/scheduler.log`. `tools/install-scheduler.sh --dry-run`
 prints the generated plist without touching the system.
 
+### CI gate
+
+`make sim-gate` (or `jutland-suite suite <manifest> --fail-on-red`) turns a suite into
+a pass/fail check: missing runs or smoke red items fail the command, while balance reds
+stay informational. To gate an existing summary without re-running the suite:
+
+```bash
+jutland-sim evaluation "$JUTLAND_SIM_HOME/reports/suites/<suite>.json" --fail-on-red
+```
+
+F1/F2/F3 steps need an Ebiten-capable session, so run the gate on a machine with a
+graphical login rather than a headless server.
+
 `jutland-sim analyze [--limit N]` writes `ai/analysis-brief.md` and
 `ai/analysis-brief.json`: recurring findings, recurring red scorecards,
 per-scenario multi-run means (shots/losses/p99), finding lifecycle

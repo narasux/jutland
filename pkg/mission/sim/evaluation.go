@@ -77,14 +77,14 @@ a{color:#155eef;text-decoration:none}
 </body></html>`))
 
 // WriteEvaluation reads a suite summary and writes an aggregate evaluation.
-func WriteEvaluation(paths Paths, summaryPath string) (string, error) {
+func WriteEvaluation(paths Paths, summaryPath string) (EvaluationReport, string, error) {
 	data, err := os.ReadFile(summaryPath)
 	if err != nil {
-		return "", err
+		return EvaluationReport{}, "", err
 	}
 	var suite SuiteSummary
 	if err := json.Unmarshal(data, &suite); err != nil {
-		return "", fmt.Errorf("parse suite summary: %w", err)
+		return EvaluationReport{}, "", fmt.Errorf("parse suite summary: %w", err)
 	}
 	report := EvaluationReport{
 		SchemaVersion: 1, Suite: suite.Name, GeneratedAt: time.Now(), Runs: len(suite.Runs),
@@ -153,26 +153,42 @@ func WriteEvaluation(paths Paths, summaryPath string) (string, error) {
 	htmlPath := filepath.Join(dir, base+"-evaluation.html")
 	jsonPath := filepath.Join(dir, base+"-evaluation.json")
 	if err := writeEvaluationMarkdown(mdPath, report, findings, diagnostics); err != nil {
-		return "", err
+		return report, "", err
 	}
 	var html strings.Builder
 	if err := evalTemplate.Execute(&html, map[string]any{
 		"Report": report, "GeneratedAt": report.GeneratedAt.Format("2006-01-02 15:04:05"),
 		"Findings": findings, "Diagnostics": diagnostics,
 	}); err != nil {
-		return "", err
+		return report, "", err
 	}
 	if err := os.WriteFile(htmlPath, []byte(html.String()), 0o644); err != nil {
-		return "", err
+		return report, "", err
 	}
 	payload, err := json.MarshalIndent(report, "", "  ")
 	if err != nil {
-		return "", err
+		return report, "", err
 	}
 	if err := os.WriteFile(jsonPath, append(payload, '\n'), 0o644); err != nil {
-		return "", err
+		return report, "", err
 	}
-	return htmlPath, nil
+	return report, htmlPath, nil
+}
+
+// EvaluationGateError turns an evaluation into a CI gate result.
+// 缺 run 或 smoke 红项说明引擎/场景真的坏了，直接失败；balance 红项是待评审的平衡信号，
+// 只保留在报告里，不阻断 CI。这样夜间/提交前门禁不会被“需要重新平衡”的提示卡住。
+func EvaluationGateError(report EvaluationReport) error {
+	if len(report.Missing) > 0 {
+		return fmt.Errorf(
+			"evaluation missing %d run(s): %s",
+			len(report.Missing), strings.Join(report.Missing, ", "),
+		)
+	}
+	if report.SmokeRed > 0 {
+		return fmt.Errorf("evaluation has %d smoke red item(s)", report.SmokeRed)
+	}
+	return nil
 }
 
 func writeEvaluationMarkdown(path string, report EvaluationReport, findings, diagnostics int) error {
