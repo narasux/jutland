@@ -18,7 +18,7 @@ func revealTestState() (*state.MissionState, *objUnit.BattleShip) {
 	sub := &objUnit.BattleShip{
 		Uid: "sub", Name: "u_96", BelongPlayer: faction.ComputerAlpha,
 		CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 		CurPos:    objPos.NewR(3, 3), CurRotation: 90,
 		Length: 67.2, Width: 6.2,
 	}
@@ -68,7 +68,7 @@ func TestRevealSubmarinesDrawsRedBoxForUndetectedSub(t *testing.T) {
 func TestRevealSubmarinesToggleDoesNotDrawForVisibleSub(t *testing.T) {
 	ms, sub := revealTestState()
 	// 潜艇浮出水面：按普通迷雾规则可见，不再需要红框
-	sub.DiveState = objUnit.DiveStateSurface
+	sub.Submarine.DiveState = objUnit.DiveStateSurface
 	ms.Core.FogOfWar = false
 	ms.Player.RevealSubmarines = true
 
@@ -84,7 +84,7 @@ func TestOwnSubmarineDiveRenderingDoesNotPanic(t *testing.T) {
 	ms, sub := revealTestState()
 	sub.BelongPlayer = faction.HumanAlpha
 	sub.CurPos = objPos.NewR(5, 5)
-	sub.DiveState = objUnit.DiveStateSurface
+	sub.Submarine.DiveState = objUnit.DiveStateSurface
 	require.True(t, sub.StartDive())
 
 	ms.UI.GameOpts.ForceDisplayState = true

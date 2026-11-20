@@ -56,7 +56,7 @@ func (i *PlanePatrol) Exec(ms *state.MissionState) error {
 		return nil
 	}
 	mapCfg := ms.Core.MissionMD.MapCfg
-	if plane.FlightPhase == objUnit.PlaneFlightPhaseTakingOff {
+	if plane.Flight.Phase == objUnit.PlaneFlightPhaseTakingOff {
 		plane.UpdateTakeoff(mapCfg, base)
 		return nil
 	}

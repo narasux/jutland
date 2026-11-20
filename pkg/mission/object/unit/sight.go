@@ -88,7 +88,7 @@ func (p *Plane) ProvidesSight() bool {
 	if p == nil || p.CurHP <= 0 {
 		return false
 	}
-	switch p.FlightPhase {
+	switch p.Flight.Phase {
 	case PlaneFlightPhaseCruising, PlaneFlightPhaseLandingStaging, PlaneFlightPhaseLandingApproach, "":
 		return true
 	default:

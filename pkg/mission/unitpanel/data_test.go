@@ -79,7 +79,7 @@ func panelTestState(ships ...*objUnit.BattleShip) *state.MissionState {
 }
 
 // TestShipSpeedRowUsesCurrentDiveStateLimit 验证单位面板航速行的上限跟随当前深度状态。
-// 场景：config.G.SpeedMultiplier=2；潜艇 U-2323 水面 9.7 节、SubmergedSpeedRatio=1.29，CurSpeed 是世界系速度（已乘全局倍率），旧实现会让水下更快的潜艇显示「当前航速 > 最大航速」。
+// 场景：config.G.SpeedMultiplier=2；潜艇 U-2323 水面 9.7 节、Submarine.SubmergedSpeedRatio=1.29，CurSpeed 是世界系速度（已乘全局倍率），旧实现会让水下更快的潜艇显示「当前航速 > 最大航速」。
 // 预期：潜航时航速行显示 "12.5 / 12.5"（9.7×1.29 四舍五入），切回水面显示 "9.7 / 9.7"；失败意味着上限仍按水面 MaxSpeed 计算，读数自相矛盾。
 // 覆盖：临时设置 config.G 并 Cleanup 恢复；panelTestState + New().shipGroups 取 speedRowValue，两态比较，CurSpeedKnots 会抵消全局倍率。
 func TestShipSpeedRowUsesCurrentDiveStateLimit(t *testing.T) {
@@ -89,13 +89,15 @@ func TestShipSpeedRowUsesCurrentDiveStateLimit(t *testing.T) {
 
 	// U-2323：水面 9.7 节，水下倍率 1.29（约 12.5 节）。
 	ship := &objUnit.BattleShip{
-		Uid:                 "sub",
-		Type:                objUnit.ShipTypeSubmarine,
-		TotalHP:             100,
-		CurHP:               100,
-		MaxSpeed:            9.7 / objUnit.ShipSpeedScale,
-		SubmergedSpeedRatio: 1.29,
-		DiveState:           objUnit.DiveStateSubmerged,
+		Uid:      "sub",
+		Type:     objUnit.ShipTypeSubmarine,
+		TotalHP:  100,
+		CurHP:    100,
+		MaxSpeed: 9.7 / objUnit.ShipSpeedScale,
+		Submarine: objUnit.SubmarineState{
+			SubmergedSpeedRatio: 1.29,
+			DiveState:           objUnit.DiveStateSubmerged,
+		},
 		// CurSpeed 是世界系速度，已乘全局倍率。
 		CurSpeed: 9.7 * 1.29 / objUnit.ShipSpeedScale * 2,
 	}
@@ -104,7 +106,7 @@ func TestShipSpeedRowUsesCurrentDiveStateLimit(t *testing.T) {
 		t.Fatalf("submerged speed row = %q, want submerged cruise limit", got)
 	}
 
-	ship.DiveState = objUnit.DiveStateSurface
+	ship.Submarine.DiveState = objUnit.DiveStateSurface
 	ship.CurSpeed = 9.7 / objUnit.ShipSpeedScale * 2
 	if got := speedRowValue(t, New().shipGroups(ms, ship)); got != "9.7 / 9.7" {
 		t.Fatalf("surface speed row = %q, want surface speed", got)

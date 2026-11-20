@@ -79,8 +79,8 @@ func TestTakeoffFromStaticBase(t *testing.T) {
 
 	// 起飞点位于跑道后端：前后偏移 = 6*(0.5-1) = -3 格，rotation 0（朝北）时
 	// 正 forward 指向 RY 减小方向，故后端位于中心以南 y = 50 + 3 = 53
-	if plane.FlightPhase != PlaneFlightPhaseTakingOff {
-		t.Fatalf("phase = %s, want %s", plane.FlightPhase, PlaneFlightPhaseTakingOff)
+	if plane.Flight.Phase != PlaneFlightPhaseTakingOff {
+		t.Fatalf("phase = %s, want %s", plane.Flight.Phase, PlaneFlightPhaseTakingOff)
 	}
 	if plane.CurPos.RX < 49.99 || plane.CurPos.RX > 50.01 ||
 		plane.CurPos.RY < 52.99 || plane.CurPos.RY > 53.01 {
@@ -96,7 +96,7 @@ func TestTakeoffFromStaticBase(t *testing.T) {
 	}
 	if !plane.IsCruising() {
 		t.Fatalf("phase = %s, want %s (pos=%s)",
-			plane.FlightPhase, PlaneFlightPhaseCruising, plane.CurPos.String())
+			plane.Flight.Phase, PlaneFlightPhaseCruising, plane.CurPos.String())
 	}
 	if plane.CurPos.RY >= 47 {
 		t.Fatalf("plane should climb north of runway start, pos = %s", plane.CurPos.String())
@@ -145,7 +145,7 @@ func TestStaticBaseLandingGeometry(t *testing.T) {
 // 场景：与珍珠港关卡一致的 17 格跑道，机场中心 (55,63)、rotation 45，起飞点 Forward=1/RunLength=1、
 // 着舰 ApproachLength=3；若用跑道全长当基准，滑跑与待场/进近会被推到基地几十格之外。
 // 预期：起飞点仍在真实跑道端头（中心后方 8.5 格 → (48.99, 69.01)）；
-// takeoffRunLength 封顶为 maxPhaseUnitLength=4 格；500 帧内进入 Cruising；
+// Takeoff.runLength 封顶为 maxPhaseUnitLength=4 格；500 帧内进入 Cruising；
 // 待场入口 landingGateLocalOffset(0) 与 landingFinalStartPos 距基地中心均 ≤ 30 格（5.5/3 个封顶基准长）。
 // 覆盖：注册 F 模板，构造 staticBase + LongRunwayDeck，StartTakeoff 断言位置/滑跑长度，
 // 循环 UpdateTakeoff 后断言阶段，再检查待场门与最终进近起点距离。
@@ -191,15 +191,15 @@ func TestLongRunwayPhaseGeometryStaysNearBase(t *testing.T) {
 		t.Fatalf("takeoff start should sit on the real runway threshold, pos = %s", plane.CurPos.String())
 	}
 	// 滑跑距离按封顶基准（4 格）而非跑道全长
-	if plane.takeoffRunLength != maxPhaseUnitLength {
-		t.Fatalf("takeoff run length = %f, want %f", plane.takeoffRunLength, maxPhaseUnitLength)
+	if plane.Takeoff.runLength != maxPhaseUnitLength {
+		t.Fatalf("takeoff run length = %f, want %f", plane.Takeoff.runLength, maxPhaseUnitLength)
 	}
 	// 推进至巡航：起飞全程应在 500 帧内完成（约 8 秒）
 	for frame := 0; frame < 500 && !plane.IsCruising(); frame++ {
 		plane.UpdateTakeoff(nil, base)
 	}
 	if !plane.IsCruising() {
-		t.Fatalf("takeoff did not finish within 500 frames, phase = %s", plane.FlightPhase)
+		t.Fatalf("takeoff did not finish within 500 frames, phase = %s", plane.Flight.Phase)
 	}
 
 	// 待场入口与最终进近段起点距基地中心不超过 30 格（5.5/3 个封顶基准长）

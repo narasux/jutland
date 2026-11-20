@@ -115,14 +115,8 @@ type BattleShip struct {
 	Acceleration float64 `json:"acceleration"`
 	// 转向速度（度）
 	RotateSpeed float64 `json:"rotateSpeed"`
-	// 下潜耗时（秒）；仅潜艇使用，缺省 10
-	DiveTime float64 `json:"diveTime"`
-	// 上浮耗时（秒）；仅潜艇使用，缺省 8
-	SurfaceTime float64 `json:"surfaceTime"`
-	// 水下航速倍率（相对水面最大速）；仅潜艇使用，缺省 0.35
-	SubmergedSpeedRatio float64 `json:"submergedSpeedRatio"`
-	// 入场深度状态：surface / submerged（缺省 submerged）
-	DefaultDiveState string `json:"defaultDiveState"`
+	// 潜艇专属配置与状态；其他舰种保持零值
+	Submarine SubmarineState `json:"submarine"`
 	// 战舰长度
 	Length float64 `json:"length"`
 	// 战舰宽度
@@ -158,16 +152,6 @@ type BattleShip struct {
 	CurRotation float64
 	// 当前速度
 	CurSpeed float64
-	// 当前深度状态（潜艇）
-	DiveState DiveState `json:"-"`
-	// 下潜/上浮剩余拍数
-	diveTicksLeft int64
-	// 下潜/上浮过渡总拍数，用于计算过渡进度
-	diveTotalTicks int64
-	// 下潜/上浮期间每拍按“速度差 / 剩余拍数”计算出的航速变化量
-	diveSpeedStep float64
-	// 各玩家最近一次声呐探测到本艇的记录（仅潜艇使用）
-	DetectedBy map[faction.Player]ShipDetection `json:"-"`
 	// 动画累计模拟帧
 	AnimationAge float64
 	// 上一次生成专用尾流时的采样步，用于避免每帧重复堆叠
@@ -185,17 +169,8 @@ type BattleShip struct {
 	BelongPlayer faction.Player
 	// 上次治疗的 Unix 毫秒时间戳，用于计算固定间隔（医疗船和维修船使用）
 	LastHealAt int64
-	// 最近一次命中本舰的攻击者，用于战况记录（击沉时读取）
-	LastAttackerName    string
-	LastAttackerType    string
-	LastAttackerPlayer  faction.Player
-	LastAttackerIsPlane bool
-	// SunkByHit 是否由最近一次命中直接打沉（用于区分击沉与普通沉没）
-	SunkByHit bool
-	// LastHit 最近一次命中的武器与伤害
-	LastHit HitInfo
-	// DamageTaken 本局累计承受伤害
-	DamageTaken float64
+	// 受到伤害与最近攻击者记录（与飞机共用）
+	Damage DamageState
 }
 
 var _ Hurtable = (*BattleShip)(nil)
@@ -228,7 +203,7 @@ func (s *BattleShip) DetailLines() []string {
 	if s.Type == ShipTypeSubmarine {
 		lines = append(lines, fmt.Sprintf(
 			"  Dive: %s, speedRatio: %.2f, ticksLeft: %d",
-			diveStateName(s.DiveState), s.DiveSpeedRatio(), s.diveTicksLeft,
+			diveStateName(s.Submarine.DiveState), s.DiveSpeedRatio(), s.Submarine.diveTicksLeft,
 		))
 		lines = append(lines, fmt.Sprintf(
 			"  Sonar: %.0f, detected: %t",
@@ -865,8 +840,8 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	rotateSpeed := s.RotateSpeed * gameSpeedMultiplier()
 
 	// 下潜 / 上浮期间按“过渡时长 + 速度差”逐拍逼近目标航速，不使用配置加速度。
-	if s.DiveTransitioning() && s.diveSpeedStep > 0 {
-		s.CurSpeed = moveSpeedToward(s.CurSpeed, maxSpeed, s.diveSpeedStep)
+	if s.DiveTransitioning() && s.Submarine.diveSpeedStep > 0 {
+		s.CurSpeed = moveSpeedToward(s.CurSpeed, maxSpeed, s.Submarine.diveSpeedStep)
 	} else {
 		// 非过渡状态：巡航速度下降时显式减速到新的上限，避免长期超速。
 		if s.CurSpeed > maxSpeed {

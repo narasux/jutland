@@ -373,7 +373,7 @@ func TestTakeOffWithinRangeSkipsShortRangeGroups(t *testing.T) {
 // TestStartTakeoffAppliesLaunchAngle 验证弹射位 LaunchAngle 叠加到舰体航向，并从配置的舷侧位置出生。
 // 场景：斜角甲板/侧舷弹射器让飞机斜着离舰；若忽略 LaunchAngle，飞机航向会与跑道方向不一致。
 // 预期：CurRotation = normalize(舰体航向 + LaunchAngle)，CurPos 在 takeoffStartPos 附近，
-// FlightPhase 为 TakingOff。
+// Flight.Phase 为 TakingOff。
 // 覆盖：舰体 30° + LaunchAngle -90°，调用 StartTakeoff 后逐项断言。
 func TestStartTakeoffAppliesLaunchAngle(t *testing.T) {
 	useDefaultSettings(t)
@@ -395,8 +395,8 @@ func TestStartTakeoffAppliesLaunchAngle(t *testing.T) {
 		t.Fatalf("takeoff start = %s, want near %s",
 			plane.CurPos.String(), expectedStart.String())
 	}
-	if plane.FlightPhase != PlaneFlightPhaseTakingOff {
-		t.Fatalf("flight phase = %s, want %s", plane.FlightPhase, PlaneFlightPhaseTakingOff)
+	if plane.Flight.Phase != PlaneFlightPhaseTakingOff {
+		t.Fatalf("flight phase = %s, want %s", plane.Flight.Phase, PlaneFlightPhaseTakingOff)
 	}
 }
 

@@ -52,7 +52,7 @@ func TestCanSeeShipSubmergedRequiresDetection(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		BelongPlayer: faction.ComputerAlpha, CurHP: 100,
 		CurPos: objPos.NewR(5.5, 5.5), Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	// 视野格全亮也不该看见水下潜艇
 	ms.Player.Visions[faction.HumanAlpha].Visible[5*16+5] = 1
@@ -76,7 +76,7 @@ func TestCanSeeShipIgnoreFogRevealsAll(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		BelongPlayer: faction.HumanBeta, CurHP: 100,
 		CurPos: objPos.NewR(1.5, 1.5), Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	require.True(t, ms.CanSeeShip(faction.HumanAlpha, sub))
 	// 秘籍只揭开当前玩家，电脑仍要靠探测
@@ -93,7 +93,7 @@ func TestRevealsSubmarineIsVisualOnly(t *testing.T) {
 	sub := &objUnit.BattleShip{
 		BelongPlayer: faction.ComputerAlpha, CurHP: 100,
 		CurPos: objPos.NewR(4.5, 4.5), Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 
 	// 秘籍没开：不可见、也不暴露
@@ -108,7 +108,7 @@ func TestRevealsSubmarineIsVisualOnly(t *testing.T) {
 	// 己方潜艇、水面/未下潜潜艇不需要红框
 	own := &objUnit.BattleShip{
 		BelongPlayer: faction.HumanAlpha, CurHP: 100, Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSubmerged,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	require.False(t, ms.RevealsSubmarine(faction.HumanAlpha, own))
 

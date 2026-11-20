@@ -106,7 +106,7 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 	base, _ := missionState.FindAircraftBase(attacker.BelongShip)
 	mapCfg := missionState.Core.MissionMD.MapCfg
 	// 起飞阶段沿跑道 / 甲板弹射线滑跑，不立即转向接敌。
-	if attacker.FlightPhase == objUnit.PlaneFlightPhaseTakingOff {
+	if attacker.Flight.Phase == objUnit.PlaneFlightPhaseTakingOff {
 		// 滑跑阶段也要先认领目标，让空中追击名额统计得到这架飞机，
 		// 否则同一架敌机会在滑跑的几秒里被反复超额分配。
 		attacker.CurAttackTarget = i.targetUid
@@ -230,7 +230,7 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	}
 
 	mapCfg := missionState.Core.MissionMD.MapCfg
-	switch plane.FlightPhase {
+	switch plane.Flight.Phase {
 	case objUnit.PlaneFlightPhaseTakingOff:
 		plane.UpdateTakeoff(mapCfg, base)
 	case "", objUnit.PlaneFlightPhaseCruising:

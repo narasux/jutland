@@ -42,7 +42,7 @@ func newAirCapTestManager(t *testing.T, fighters int) (*MissionManager, string) 
 	enemy := &objUnit.Plane{
 		Uid: "enemy-plane", Name: fighterName, Type: objUnit.PlaneTypeFighter,
 		CurHP: 20, RemainRange: 100, BelongPlayer: faction.ComputerAlpha,
-		CurPos: objPos.NewR(5, 5), FlightPhase: objUnit.PlaneFlightPhaseCruising,
+		CurPos: objPos.NewR(5, 5), Flight: objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
 	}
 	planes := map[string]*objUnit.Plane{enemy.Uid: enemy}
 	for idx := 0; idx < fighters; idx++ {
@@ -51,7 +51,7 @@ func newAirCapTestManager(t *testing.T, fighters int) (*MissionManager, string) 
 			Uid: uid, Name: fighterName, Type: objUnit.PlaneTypeFighter,
 			CurHP: 20, RemainRange: 100, BelongPlayer: faction.HumanAlpha,
 			BelongShip: "carrier", CurPos: objPos.NewR(5, 5),
-			FlightPhase: objUnit.PlaneFlightPhaseCruising,
+			Flight: objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
 		}
 	}
 	manager := &MissionManager{
@@ -233,7 +233,7 @@ func TestSurplusAirAttackerReleaseKeepsTakingOffFightersMoving(t *testing.T) {
 			enemy := &objUnit.Plane{
 				Uid: "cap-enemy", Name: fighterName, Type: objUnit.PlaneTypeFighter,
 				CurHP: 20, RemainRange: 100, BelongPlayer: faction.ComputerAlpha,
-				CurPos: objPos.NewR(60, 60), FlightPhase: objUnit.PlaneFlightPhaseCruising,
+				CurPos: objPos.NewR(60, 60), Flight: objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
 			}
 			missionState.Arena.Planes = map[string]*objUnit.Plane{enemy.Uid: enemy}
 			manager := &MissionManager{
@@ -247,8 +247,8 @@ func TestSurplusAirAttackerReleaseKeepsTakingOffFightersMoving(t *testing.T) {
 				if plane == nil {
 					t.Fatalf("第 %d 架未能起飞（起飞点/库存不足）", idx)
 				}
-				if plane.FlightPhase != objUnit.PlaneFlightPhaseTakingOff {
-					t.Fatalf("起飞的飞机应处于滑跑阶段, got %s", plane.FlightPhase)
+				if plane.Flight.Phase != objUnit.PlaneFlightPhaseTakingOff {
+					t.Fatalf("起飞的飞机应处于滑跑阶段, got %s", plane.Flight.Phase)
 				}
 				manager.state.Arena.PutPlane(plane)
 				// 起飞时认领同一架敌机，触发名额上限
@@ -271,7 +271,7 @@ func TestSurplusAirAttackerReleaseKeepsTakingOffFightersMoving(t *testing.T) {
 				manager.updatePlaneAttackOrReturn()
 			}
 			for _, plane := range takingOff {
-				if plane.FlightPhase == objUnit.PlaneFlightPhaseTakingOff {
+				if plane.Flight.Phase == objUnit.PlaneFlightPhaseTakingOff {
 					t.Fatalf("飞机 %s 900 帧后仍在滑跑, speed=%.5f", plane.Uid, plane.CurSpeed)
 				}
 			}

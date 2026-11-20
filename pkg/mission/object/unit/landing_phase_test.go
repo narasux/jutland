@@ -94,7 +94,7 @@ func TestLandingStagingWavesReachApproachGates(t *testing.T) {
 			t.Fatalf(
 				"staging slot %d never reached its recovery gate: leg=%v local=%+v heading=%.2f speed=%.3f",
 				slot,
-				plane.landingStagingLeg,
+				plane.Landing.stagingLeg,
 				local,
 				plane.CurRotation,
 				plane.CurSpeed,
@@ -241,7 +241,7 @@ func TestLandingStagingEventuallyCapturesAcrossAircraftPerformanceRange(t *testi
 								entryAngle,
 								rotation,
 								plane.CurPos.Distance(ship.CurPos),
-								plane.landingStagingLeg == landingStagingLegGate,
+								plane.Landing.stagingLeg == landingStagingLegGate,
 							)
 						}
 					}
@@ -342,7 +342,7 @@ func TestLandingStagingCapturesWhenCarrierSternIsNearMapBorder(t *testing.T) {
 
 // TestLandingStagingMissedGateReturnsToLeadIn 验证飞机冲过入口门后回到 lead-in，而不是直接切入圆弧。
 // 场景：飞机速度过快或转弯半径过大，掠过入口点时位置已越过门限；若仍进入圆弧，会从错误方向横穿甲板。
-// 预期：UpdateLandingStaging 返回 false，landingStagingLeg 重置为 lead-in。
+// 预期：UpdateLandingStaging 返回 false，Landing.stagingLeg 重置为 lead-in。
 // 覆盖：构造位于门后 0.4 个切线单位、航向沿切线的飞机，调用一次 Update 并断言阶段。
 func TestLandingStagingMissedGateReturnsToLeadIn(t *testing.T) {
 	useDefaultSettings(t)
@@ -376,12 +376,12 @@ func TestLandingStagingMissedGateReturnsToLeadIn(t *testing.T) {
 		RemainRange: 1000,
 	}
 	plane.StartLandingStaging(nil, ship, 0)
-	plane.landingStagingLeg = landingStagingLegGate
+	plane.Landing.stagingLeg = landingStagingLegGate
 	if plane.UpdateLandingStaging(nil, ship) {
 		t.Fatal("plane entered landing arc after missing the gate")
 	}
-	if plane.landingStagingLeg != landingStagingLegLeadIn {
-		t.Fatalf("staging leg = %v, want lead-in reset", plane.landingStagingLeg)
+	if plane.Landing.stagingLeg != landingStagingLegLeadIn {
+		t.Fatalf("staging leg = %v, want lead-in reset", plane.Landing.stagingLeg)
 	}
 }
 
@@ -542,8 +542,8 @@ func TestLandingArcEndsTangentToDeck(t *testing.T) {
 	}
 	plane.StartLandingApproach(ship)
 
-	end := landingArcPoint(plane.landingArc, 1)
-	tangent := landingArcTangent(plane.landingArc, 1)
+	end := landingArcPoint(plane.Landing.arc, 1)
+	tangent := landingArcTangent(plane.Landing.arc, 1)
 	requireClose(t, end.forward, landingFinalStartOffset(ship, ship.Aircraft.landingConfig()).forward)
 	requireClose(t, end.lateral, 0)
 	requireClose(t, tangent.lateral, 0)
@@ -578,16 +578,16 @@ func TestLandingArcsAreMirroredAndMonotonic(t *testing.T) {
 	left.StartLandingApproach(ship)
 	right.StartLandingApproach(ship)
 
-	previousForward := right.landingArc.start.forward
-	previousLateral := math.Abs(right.landingArc.start.lateral)
+	previousForward := right.Landing.arc.start.forward
+	previousLateral := math.Abs(right.Landing.arc.start.lateral)
 	previousHeading := math.Atan2(
-		landingArcTangent(right.landingArc, 0).lateral,
-		landingArcTangent(right.landingArc, 0).forward,
+		landingArcTangent(right.Landing.arc, 0).lateral,
+		landingArcTangent(right.Landing.arc, 0).forward,
 	)
 	for frame := 0; frame <= 120; frame++ {
 		progress := float64(frame) / 120
-		leftPos := landingArcPoint(left.landingArc, progress)
-		rightPos := landingArcPoint(right.landingArc, progress)
+		leftPos := landingArcPoint(left.Landing.arc, progress)
+		rightPos := landingArcPoint(right.Landing.arc, progress)
 		if math.Abs(leftPos.forward-rightPos.forward) > 1e-9 ||
 			math.Abs(leftPos.lateral+rightPos.lateral) > 1e-9 {
 			t.Fatalf(
@@ -604,14 +604,14 @@ func TestLandingArcsAreMirroredAndMonotonic(t *testing.T) {
 			t.Fatalf("landing arc lateral error did not converge: %v -> %v", previousLateral, rightPos.lateral)
 		}
 		radius := math.Hypot(
-			rightPos.forward-right.landingArc.center.forward,
-			rightPos.lateral-right.landingArc.center.lateral,
+			rightPos.forward-right.Landing.arc.center.forward,
+			rightPos.lateral-right.Landing.arc.center.lateral,
 		)
-		if math.Abs(radius-right.landingArc.radius) > 1e-9 {
-			t.Fatalf("landing arc radius changed: got %v want %v", radius, right.landingArc.radius)
+		if math.Abs(radius-right.Landing.arc.radius) > 1e-9 {
+			t.Fatalf("landing arc radius changed: got %v want %v", radius, right.Landing.arc.radius)
 		}
 
-		tangent := landingArcTangent(right.landingArc, progress)
+		tangent := landingArcTangent(right.Landing.arc, progress)
 		heading := math.Atan2(tangent.lateral, tangent.forward)
 		if frame > 0 && normalizeRadians(heading-previousHeading) < -1e-9 {
 			t.Fatalf("landing arc reversed turn direction at frame %d", frame)
@@ -715,16 +715,16 @@ func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 		RemainRange:  100,
 	}
 	plane.StartLandingApproach(ship)
-	if plane.landingArcTotalLength <= 0 || plane.landingArcExitSpeed <= 0 {
+	if plane.Landing.arcTotalLength <= 0 || plane.Landing.arcExitSpeed <= 0 {
 		t.Fatalf("landing approach plan invalid: total=%v exit=%v",
-			plane.landingArcTotalLength, plane.landingArcExitSpeed)
+			plane.Landing.arcTotalLength, plane.Landing.arcExitSpeed)
 	}
 	for range 800 {
 		if plane.UpdateLandingApproach(ship) {
 			break
 		}
 	}
-	approachSpeed := plane.landingArcSpeed
+	approachSpeed := plane.Landing.arcSpeed
 	approachRotation := plane.CurRotation
 	deckStart := plane.CurPos.Copy()
 
@@ -734,11 +734,11 @@ func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 	}
 	plane.UpdateLandingDeck(ship)
 	// 圆弧末端存在被剩余距离钳制的显示速度尾步，这里校验运动学计划速度的连续性
-	if speedDelta := math.Abs(plane.landingRunSpeed-approachSpeed) / max(approachSpeed, 0.001); speedDelta > 0.1 {
+	if speedDelta := math.Abs(plane.Landing.runSpeed-approachSpeed) / max(approachSpeed, 0.001); speedDelta > 0.1 {
 		t.Fatalf(
 			"landing speed jumped at deck transition: approach=%v deck=%v",
 			approachSpeed,
-			plane.landingRunSpeed,
+			plane.Landing.runSpeed,
 		)
 	}
 	if rotationDelta := angleDifference(plane.CurRotation, approachRotation); rotationDelta > 1 {
@@ -752,8 +752,8 @@ func TestLandingApproachDeckTransitionIsContinuous(t *testing.T) {
 
 // TestLandingDeckPlanMatchesArcExitSpeedAcrossAircraftSpeeds 验证甲板滑跑初速与圆弧出口速度一致。
 // 场景：不同最大速度的飞机完成进近后进入甲板；若两段各自算速度，接缝处会跳变。
-// 预期：landingArcExitSpeed 在 (0, relativeSpeed] 内；
-// StartLandingDeck 后 landingRunSpeed 等于 landingArcSpeed，
+// 预期：Landing.arcExitSpeed 在 (0, relativeSpeed] 内；
+// StartLandingDeck 后 Landing.runSpeed 等于 Landing.arcSpeed，
 // 滑跑总长等于舰长 × ApproachLength。
 // 覆盖：三种 MaxSpeed 各构建 arc/plan，切换甲板后逐字段断言。
 func TestLandingDeckPlanMatchesArcExitSpeedAcrossAircraftSpeeds(t *testing.T) {
@@ -767,28 +767,28 @@ func TestLandingDeckPlanMatchesArcExitSpeedAcrossAircraftSpeeds(t *testing.T) {
 			t.Fatal("failed to build test landing arc")
 		}
 		plane := &Plane{MaxSpeed: maxSpeed, CurHP: 100}
-		plane.landingArc = arc
+		plane.Landing.arc = arc
 		plane.startLandingArcPlan(ship, arc.relativeSpeed)
-		if plane.landingArcExitSpeed <= 0 ||
-			plane.landingArcExitSpeed > arc.relativeSpeed+1e-9 {
+		if plane.Landing.arcExitSpeed <= 0 ||
+			plane.Landing.arcExitSpeed > arc.relativeSpeed+1e-9 {
 			t.Fatalf(
 				"arc exit speed = %v, want within (0, %.4f]",
-				plane.landingArcExitSpeed,
+				plane.Landing.arcExitSpeed,
 				arc.relativeSpeed,
 			)
 		}
 		plane.StartLandingDeck(ship)
-		if plane.landingRunSpeed != plane.landingArcSpeed {
+		if plane.Landing.runSpeed != plane.Landing.arcSpeed {
 			t.Fatalf(
 				"deck entry speed %v != arc speed %v for max speed %.3f",
-				plane.landingRunSpeed,
-				plane.landingArcSpeed,
+				plane.Landing.runSpeed,
+				plane.Landing.arcSpeed,
 				maxSpeed,
 			)
 		}
 		expectedTotal := length * ship.Aircraft.landingConfig().ApproachLength
-		if plane.landingRunTotalLength != expectedTotal {
-			t.Fatalf("deck run length = %v, want %v", plane.landingRunTotalLength, expectedTotal)
+		if plane.Landing.runTotalLength != expectedTotal {
+			t.Fatalf("deck run length = %v, want %v", plane.Landing.runTotalLength, expectedTotal)
 		}
 	}
 }
@@ -1098,40 +1098,40 @@ func TestSeaLandingSplashdownIsBehindStern(t *testing.T) {
 	sternForward := -0.5
 	requireClose(t, splashForward, sternForward-seaLandingSplashdownAftOfSternRatio)
 
-	plane := &Plane{CurPos: objPos.NewR(50, 52), FlightPhase: PlaneFlightPhaseCruising}
+	plane := &Plane{CurPos: objPos.NewR(50, 52), Flight: FlightState{Phase: PlaneFlightPhaseCruising}}
 	plane.StartLandingDeck(ship)
-	requireClose(t, plane.landingScaleCompleteRatio, ratio)
-	plane.FlightPhaseProgressValue = ratio
+	requireClose(t, plane.Landing.scaleCompleteRatio, ratio)
+	plane.Flight.Progress = ratio
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }
 
 // TestLandingVisualScaleInterpolation 验证着舰过程中视觉缩放的分段线性插值。
 // 场景：飞机从进近到甲板滑跑，模型需要从 1x 逐渐缩到低空倍率；进近段保持原大小，甲板段按路程比例缩小。
 // 预期：进近阶段始终 1x；甲板段 40% 路程为 0.75x，达到 landingDeckScaleDistanceRatio 后保持低空倍率。
-// 覆盖：手动设置 FlightPhaseProgressValue 的 0/0.4/阈值/0.9/1.0，逐点断言 VisualScaleMultiplier。
+// 覆盖：手动设置 Flight.Progress 的 0/0.4/阈值/0.9/1.0，逐点断言 VisualScaleMultiplier。
 func TestLandingVisualScaleInterpolation(t *testing.T) {
 	ship := &BattleShip{Length: 128, CurPos: objPos.NewR(50, 50)}
-	plane := &Plane{CurPos: objPos.NewR(50, 52), FlightPhase: PlaneFlightPhaseCruising}
+	plane := &Plane{CurPos: objPos.NewR(50, 52), Flight: FlightState{Phase: PlaneFlightPhaseCruising}}
 
 	plane.StartLandingApproach(ship)
 	requireClose(t, plane.VisualScaleMultiplier(), 1)
-	plane.FlightPhaseProgressValue = 0.5
+	plane.Flight.Progress = 0.5
 	requireClose(t, plane.VisualScaleMultiplier(), 1)
-	plane.FlightPhaseProgressValue = 1
+	plane.Flight.Progress = 1
 	requireClose(t, plane.VisualScaleMultiplier(), 1)
 
 	plane.StartLandingDeck(ship)
 	requireClose(t, plane.VisualScaleMultiplier(), 1)
 
 	// 着舰段进度为线性路程比例：80% 路程处降到最低视觉倍率
-	plane.FlightPhaseProgressValue = 0.4
+	plane.Flight.Progress = 0.4
 	requireClose(t, plane.VisualScaleMultiplier(), 0.75)
 
-	plane.FlightPhaseProgressValue = landingDeckScaleDistanceRatio
+	plane.Flight.Progress = landingDeckScaleDistanceRatio
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
-	plane.FlightPhaseProgressValue = 0.9
+	plane.Flight.Progress = 0.9
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
-	plane.FlightPhaseProgressValue = 1
+	plane.Flight.Progress = 1
 	requireClose(t, plane.VisualScaleMultiplier(), planeLowAltitudeVisualScale)
 }
 

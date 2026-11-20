@@ -178,14 +178,16 @@ func TestAirbornePlaneCounts(t *testing.T) {
 // TestSubmarineDepthVisualEndpoints 验证潜航淡出的两端取值：水面全不透明，下潜完成用固定透明度与缩放。
 // 场景：submarineDepthVisual 按 ship.DiveProgress() 线性插值，水面状态 progress=0、Submerged 状态 progress=1。
 // 预期：水面 alpha=1.0、scale=1.0；水下 alpha=submarineSubmergedAlpha(0.55)、scale=submarineSubmergedScale(0.86)；失败意味着潜航时舰体不变淡或缩放过量。
-// 覆盖：一艘 BattleShip 依次把 DiveState 改为 Surface/Submerged，两次调用后各用 1e-9 容差断言 alpha 与 scale。
+// 覆盖：一艘 BattleShip 依次把 Submarine.DiveState 改为 Surface/Submerged，两次调用后各用 1e-9 容差断言 alpha 与 scale。
 func TestSubmarineDepthVisualEndpoints(t *testing.T) {
-	ship := &objUnit.BattleShip{Type: objUnit.ShipTypeSubmarine, DiveState: objUnit.DiveStateSurface}
+	ship := &objUnit.BattleShip{
+		Type: objUnit.ShipTypeSubmarine, Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSurface},
+	}
 	alpha, scale := submarineDepthVisual(ship)
 	assert.InDelta(t, 1.0, alpha, 1e-9)
 	assert.InDelta(t, 1.0, scale, 1e-9)
 
-	ship.DiveState = objUnit.DiveStateSubmerged
+	ship.Submarine.DiveState = objUnit.DiveStateSubmerged
 	alpha, scale = submarineDepthVisual(ship)
 	assert.InDelta(t, submarineSubmergedAlpha, alpha, 1e-9)
 	assert.InDelta(t, submarineSubmergedScale, scale, 1e-9)
@@ -226,7 +228,10 @@ func TestDiveBadgeLayoutStates(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ship := &objUnit.BattleShip{Type: tt.shipType, DiveState: tt.state, CurHP: 100}
+			ship := &objUnit.BattleShip{
+				Type: tt.shipType, CurHP: 100,
+				Submarine: objUnit.SubmarineState{DiveState: tt.state},
+			}
 			layout := newDiveBadgeLayout(ms, ship)
 			assert.Equal(t, tt.visible, layout.visible)
 			if !tt.visible {

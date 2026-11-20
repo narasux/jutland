@@ -89,7 +89,7 @@ func execPlaneReturn(t *testing.T, instruction *PlaneReturn, missionState *state
 
 // TestPlaneReturnRecoversOnlyAfterLandingDeck 验证航母只在 LandingDeck 完成后才入库。
 // 场景：航母长 128 在 (50,50) 朝北，1 架飞机在舰尾外侧返航，逐拍执行 PlaneReturn，
-// 待场段用 FlightPhaseEndPos 把飞机直接放到进近入口以缩短等待。
+// 待场段用 Flight.EndPos 把飞机直接放到进近入口以缩短等待。
 // 预期：Staging/Approach 期间 CurCount 恒为 0，进入 Deck 后仍为 0，Executed 后
 // CurCount=1 且飞机从 Arena.Planes 移除。提前入库会让空中飞机凭空消失。
 // 覆盖：300 拍推待场、140 拍推进近、220 拍推着舰滑跑，每段都断言库存未变。
@@ -99,40 +99,40 @@ func TestPlaneReturnRecoversOnlyAfterLandingDeck(t *testing.T) {
 	returnInstr := NewPlaneReturn(plane.Uid)
 
 	execPlaneReturn(t, returnInstr, ms)
-	if plane.FlightPhase != objUnit.PlaneFlightPhaseLandingStaging {
-		t.Fatalf("phase = %s, want %s", plane.FlightPhase, objUnit.PlaneFlightPhaseLandingStaging)
+	if plane.Flight.Phase != objUnit.PlaneFlightPhaseLandingStaging {
+		t.Fatalf("phase = %s, want %s", plane.Flight.Phase, objUnit.PlaneFlightPhaseLandingStaging)
 	}
 	if ship.Aircraft.Groups[0].CurCount != 0 {
 		t.Fatalf("plane recovered while waiting")
 	}
 
-	plane.CurPos = plane.FlightPhaseEndPos.Copy()
+	plane.CurPos = plane.Flight.EndPos.Copy()
 	plane.CurRotation = 0
-	for frame := 0; frame < 300 && plane.FlightPhase == objUnit.PlaneFlightPhaseLandingStaging; frame++ {
+	for frame := 0; frame < 300 && plane.Flight.Phase == objUnit.PlaneFlightPhaseLandingStaging; frame++ {
 		execPlaneReturn(t, returnInstr, ms)
 		if ship.Aircraft.Groups[0].CurCount != 0 {
 			t.Fatalf("plane recovered while aligning with landing approach")
 		}
 	}
-	if plane.FlightPhase != objUnit.PlaneFlightPhaseLandingApproach {
+	if plane.Flight.Phase != objUnit.PlaneFlightPhaseLandingApproach {
 		t.Fatalf(
 			"phase = %s, want %s (pos=%s rotation=%.2f slot=%d)",
-			plane.FlightPhase,
+			plane.Flight.Phase,
 			objUnit.PlaneFlightPhaseLandingApproach,
 			plane.CurPos.String(),
 			plane.CurRotation,
-			plane.LandingSlot,
+			plane.Landing.Slot,
 		)
 	}
 
-	for frame := 0; frame < 140 && plane.FlightPhase == objUnit.PlaneFlightPhaseLandingApproach; frame++ {
+	for frame := 0; frame < 140 && plane.Flight.Phase == objUnit.PlaneFlightPhaseLandingApproach; frame++ {
 		execPlaneReturn(t, returnInstr, ms)
 		if ship.Aircraft.Groups[0].CurCount != 0 {
 			t.Fatalf("plane recovered during final approach")
 		}
 	}
-	if plane.FlightPhase != objUnit.PlaneFlightPhaseLandingDeck {
-		t.Fatalf("phase = %s, want %s", plane.FlightPhase, objUnit.PlaneFlightPhaseLandingDeck)
+	if plane.Flight.Phase != objUnit.PlaneFlightPhaseLandingDeck {
+		t.Fatalf("phase = %s, want %s", plane.Flight.Phase, objUnit.PlaneFlightPhaseLandingDeck)
 	}
 	if ship.Aircraft.Groups[0].CurCount != 0 {
 		t.Fatalf("plane recovered before deck landing")
@@ -179,9 +179,9 @@ func TestPlaneReturnAllPlanesReachDeckBeforeRecovery(t *testing.T) {
 			if returns[idx].Executed() {
 				continue
 			}
-			phaseBefore := plane.FlightPhase
+			phaseBefore := plane.Flight.Phase
 			execPlaneReturn(t, returns[idx], ms)
-			if plane.FlightPhase == objUnit.PlaneFlightPhaseLandingDeck {
+			if plane.Flight.Phase == objUnit.PlaneFlightPhaseLandingDeck {
 				reachedDeck[plane.Uid] = true
 			}
 			if _, exists := ms.Arena.Planes[plane.Uid]; !exists &&
@@ -278,9 +278,9 @@ func TestPlaneReturnRecoversBatchNearMapBorders(t *testing.T) {
 					if returns[idx].Executed() {
 						continue
 					}
-					phaseBefore := plane.FlightPhase
+					phaseBefore := plane.Flight.Phase
 					execPlaneReturn(t, returns[idx], ms)
-					if plane.FlightPhase == objUnit.PlaneFlightPhaseLandingDeck {
+					if plane.Flight.Phase == objUnit.PlaneFlightPhaseLandingDeck {
 						reachedDeck[plane.Uid] = true
 					}
 					if _, exists := ms.Arena.Planes[plane.Uid]; !exists &&

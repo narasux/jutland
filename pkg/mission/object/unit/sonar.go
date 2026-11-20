@@ -50,32 +50,32 @@ func (s *BattleShip) SonarRange() float64 {
 
 // Detection 返回指定玩家对本体（潜艇）的探测记录。
 func (s *BattleShip) Detection(player faction.Player) (ShipDetection, bool) {
-	if len(s.DetectedBy) == 0 {
+	if len(s.Submarine.DetectedBy) == 0 {
 		return ShipDetection{}, false
 	}
-	d, ok := s.DetectedBy[player]
+	d, ok := s.Submarine.DetectedBy[player]
 	return d, ok
 }
 
 // MarkDetected 记录一次探测；同一玩家重复探测只刷新到期时间与位置。
 func (s *BattleShip) MarkDetected(player faction.Player, untilTick int64, pos objPos.MapPos) {
-	if s.DetectedBy == nil {
-		s.DetectedBy = map[faction.Player]ShipDetection{}
+	if s.Submarine.DetectedBy == nil {
+		s.Submarine.DetectedBy = map[faction.Player]ShipDetection{}
 	}
-	s.DetectedBy[player] = ShipDetection{UntilTick: untilTick, LastPos: pos}
+	s.Submarine.DetectedBy[player] = ShipDetection{UntilTick: untilTick, LastPos: pos}
 }
 
 // ClearDetection 清空所有探测记忆（上浮 / 过渡态时调用）。
 func (s *BattleShip) ClearDetection() {
-	if len(s.DetectedBy) == 0 {
+	if len(s.Submarine.DetectedBy) == 0 {
 		return
 	}
-	clear(s.DetectedBy)
+	clear(s.Submarine.DetectedBy)
 }
 
 // DetectedByAny 是否有任一玩家在当前拍点亮本艇。
 func (s *BattleShip) DetectedByAny(now int64) bool {
-	for _, d := range s.DetectedBy {
+	for _, d := range s.Submarine.DetectedBy {
 		if d.UntilTick > now {
 			return true
 		}

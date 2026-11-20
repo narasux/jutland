@@ -90,7 +90,7 @@ func TestObserverReceivesShotHitSinkAndLoss(t *testing.T) {
 
 // TestObserverNilKeepsGamePathNoop 验证未接 observer 时四条路径都不 panic 且不改变目标状态。
 // 场景：普通游戏路径不调用 SetObserver；炮弹仍要正常结算命中，只是不产生事件。
-// 预期：hurtShip 仍把目标打到 0、设置 SunkByHit；observeShots/observeSink/observeLoss 可安全调用。
+// 预期：hurtShip 仍把目标打到 0、设置 Damage.KilledByHit；observeShots/observeSink/observeLoss 可安全调用。
 // 覆盖：不设置 observer，构造一个 10HP 目标与 20 伤害炮弹，调用四条观察路径并断言目标状态。
 func TestObserverNilKeepsGamePathNoop(t *testing.T) {
 	m := &MissionManager{state: &state.MissionState{}}
@@ -110,7 +110,7 @@ func TestObserverNilKeepsGamePathNoop(t *testing.T) {
 	m.observeLoss(&objUnit.Plane{Uid: "p", Name: "F4F"})
 
 	require.Zero(t, ship.CurHP)
-	require.True(t, ship.SunkByHit)
+	require.True(t, ship.Damage.KilledByHit)
 }
 
 // TestObserverHitKindAndFriendlyFire 验证 AoE 命中类型与友军伤害标记会传到 observer。

@@ -40,7 +40,7 @@ func TestBattleLogCoalescesRepeatedHits(t *testing.T) {
 // TestRecordShipLostLogsAttackerAndAircraft 验证沉船战报同时记录攻击者、吨位与随舰飞机数量。
 // 场景：航母 Carrier（20000 吨）被 Enemy BB 击沉，机库剩 F4F 3 架未起飞，结算页需分开显示。
 // 预期：BattleLog 两条：ShipSunk 带 Actor=Enemy BB/ComputerAlpha 与 Tonnage=20000，PlaneWithShip Count=3。
-// 覆盖：SunkByHit、LastAttackerName/Player 齐全的 BattleShip 调 RecordShipLost，逐字段断言两条记录。
+// 覆盖：Damage.KilledByHit、Damage.LastAttackerName/Player 齐全的 BattleShip 调 RecordShipLost，逐字段断言两条记录。
 func TestRecordShipLostLogsAttackerAndAircraft(t *testing.T) {
 	stats := NewBattleStats()
 	ship := &objUnit.BattleShip{
@@ -49,7 +49,9 @@ func TestRecordShipLostLogsAttackerAndAircraft(t *testing.T) {
 		Aircraft: objUnit.ShipAircraft{Groups: []objUnit.PlaneGroup{
 			{Name: "F4F", CurCount: 3},
 		}},
-		LastAttackerName: "Enemy BB", LastAttackerPlayer: faction.ComputerAlpha, SunkByHit: true,
+		Damage: objUnit.DamageState{
+			LastAttackerName: "Enemy BB", LastAttackerPlayer: faction.ComputerAlpha, KilledByHit: true,
+		},
 	}
 	stats.RecordShipLost(ship)
 
@@ -66,15 +68,17 @@ func TestRecordShipLostLogsAttackerAndAircraft(t *testing.T) {
 }
 
 // TestRecordPlaneLostLogsShotDownOrLoss 验证 RecordPlaneLost 区分被击落与坠毁，只在击落时记录攻击者。
-// 场景：F4F 被 A6M 击落（ShotDown、LastAttackerIsPlane），SBD 无攻击者坠毁，两种损失都会进日志。
+// 场景：F4F 被 A6M 击落（Damage.KilledByHit、Damage.LastAttackerIsPlane），SBD 无攻击者坠毁，两种损失都会进日志。
 // 预期：首条 Action=PlaneShotDown、Actor=A6M、Target=F4F；次条 Action=PlaneLost 且 Actor 为空。
 // 覆盖：两架 Plane 依次调 RecordPlaneLost，断言两条日志的 Action、ActorName、TargetName 与 TargetIsPlane。
 func TestRecordPlaneLostLogsShotDownOrLoss(t *testing.T) {
 	stats := NewBattleStats()
 	plane := &objUnit.Plane{
 		Name: "F4F", BelongPlayer: faction.HumanAlpha,
-		LastAttackerName: "A6M", LastAttackerPlayer: faction.ComputerAlpha,
-		LastAttackerIsPlane: true, ShotDown: true,
+		Damage: objUnit.DamageState{
+			LastAttackerName: "A6M", LastAttackerPlayer: faction.ComputerAlpha,
+			LastAttackerIsPlane: true, KilledByHit: true,
+		},
 	}
 	stats.RecordPlaneLost(plane)
 	require.Len(t, stats.BattleLog, 1)
@@ -85,7 +89,9 @@ func TestRecordPlaneLostLogsShotDownOrLoss(t *testing.T) {
 
 	crash := &objUnit.Plane{
 		Name: "SBD", BelongPlayer: faction.HumanAlpha,
-		LastAttackerName: "A6M", LastAttackerPlayer: faction.ComputerAlpha,
+		Damage: objUnit.DamageState{
+			LastAttackerName: "A6M", LastAttackerPlayer: faction.ComputerAlpha,
+		},
 	}
 	stats.RecordPlaneLost(crash)
 	require.Len(t, stats.BattleLog, 2)

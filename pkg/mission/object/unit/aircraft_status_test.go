@@ -12,12 +12,12 @@ func TestAircraftStatusClassifiesFlightPhasesAndLosses(t *testing.T) {
 		{Name: "bomber", MaxCount: 6, CurCount: 2},
 	}}
 	planes := map[string]*Plane{
-		"f1": {Name: "fighter", BelongShip: "carrier", FlightPhase: PlaneFlightPhaseTakingOff},
-		"f2": {Name: "fighter", BelongShip: "carrier", FlightPhase: PlaneFlightPhaseCruising},
-		"f3": {Name: "fighter", BelongShip: "carrier", FlightPhase: PlaneFlightPhaseLandingStaging},
-		"f4": {Name: "fighter", BelongShip: "carrier", FlightPhase: PlaneFlightPhaseLandingDeck},
-		"b1": {Name: "bomber", BelongShip: "carrier", FlightPhase: ""},
-		"x1": {Name: "fighter", BelongShip: "other", FlightPhase: PlaneFlightPhaseCruising},
+		"f1": {Name: "fighter", BelongShip: "carrier", Flight: FlightState{Phase: PlaneFlightPhaseTakingOff}},
+		"f2": {Name: "fighter", BelongShip: "carrier", Flight: FlightState{Phase: PlaneFlightPhaseCruising}},
+		"f3": {Name: "fighter", BelongShip: "carrier", Flight: FlightState{Phase: PlaneFlightPhaseLandingStaging}},
+		"f4": {Name: "fighter", BelongShip: "carrier", Flight: FlightState{Phase: PlaneFlightPhaseLandingDeck}},
+		"b1": {Name: "bomber", BelongShip: "carrier", Flight: FlightState{Phase: ""}},
+		"x1": {Name: "fighter", BelongShip: "other", Flight: FlightState{Phase: PlaneFlightPhaseCruising}},
 	}
 
 	status := aircraft.Status("carrier", planes)

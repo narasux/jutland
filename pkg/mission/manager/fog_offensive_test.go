@@ -78,7 +78,7 @@ func TestScoutKeepsFlyingWithoutAttackTarget(t *testing.T) {
 	if plane == nil {
 		t.Fatal("TakeOffScout 失败")
 	}
-	plane.FlightPhase = objUnit.PlaneFlightPhaseCruising
+	plane.Flight.Phase = objUnit.PlaneFlightPhaseCruising
 	m.state.Arena.PutPlane(plane)
 	scoutUid := instr.GenInstrUid(instr.NamePlaneScout, plane.Uid)
 	m.instructionSet.Add(instr.NewPlaneScout(plane.Uid, plane.CurPos, false))

@@ -127,11 +127,11 @@ func (m *MissionManager) observeSink(ship *objUnit.BattleShip, planesLost int) {
 	killerName, killerType := "", ""
 	killerPlayer := faction.Player("")
 	killerIsPlane := false
-	if ship.SunkByHit {
-		killerPlayer = ship.LastAttackerPlayer
-		killerName = ship.LastAttackerName
-		killerType = ship.LastAttackerType
-		killerIsPlane = ship.LastAttackerIsPlane
+	if ship.Damage.KilledByHit {
+		killerPlayer = ship.Damage.LastAttackerPlayer
+		killerName = ship.Damage.LastAttackerName
+		killerType = ship.Damage.LastAttackerType
+		killerIsPlane = ship.Damage.LastAttackerIsPlane
 	}
 	m.combatObserver.OnSink(observer.Sink{
 		Tick:          objUnit.SimTick(),
@@ -141,7 +141,7 @@ func (m *MissionManager) observeSink(ship *objUnit.BattleShip, planesLost int) {
 		TargetPlayer:  ship.BelongPlayer,
 		Tonnage:       ship.Tonnage,
 		Carrier:       ship.Type == objUnit.ShipTypeAircraftCarrier,
-		DamageTaken:   ship.DamageTaken,
+		DamageTaken:   ship.Damage.DamageTaken,
 		KillerName:    killerName,
 		KillerType:    killerType,
 		KillerPlayer:  killerPlayer,
@@ -159,11 +159,11 @@ func (m *MissionManager) observeLoss(plane *objUnit.Plane) {
 	killerName, killerType := "", ""
 	killerPlayer := faction.Player("")
 	killerIsPlane := false
-	if plane.ShotDown {
-		killerPlayer = plane.LastAttackerPlayer
-		killerName = plane.LastAttackerName
-		killerType = plane.LastAttackerType
-		killerIsPlane = plane.LastAttackerIsPlane
+	if plane.Damage.KilledByHit {
+		killerPlayer = plane.Damage.LastAttackerPlayer
+		killerName = plane.Damage.LastAttackerName
+		killerType = plane.Damage.LastAttackerType
+		killerIsPlane = plane.Damage.LastAttackerIsPlane
 	}
 	m.combatObserver.OnLoss(observer.Loss{
 		Tick:          objUnit.SimTick(),
@@ -172,8 +172,8 @@ func (m *MissionManager) observeLoss(plane *objUnit.Plane) {
 		TargetType:    string(plane.Type),
 		TargetPlayer:  plane.BelongPlayer,
 		BelongShip:    plane.BelongShip,
-		ShotDown:      plane.ShotDown,
-		DamageTaken:   plane.DamageTaken,
+		ShotDown:      plane.Damage.KilledByHit,
+		DamageTaken:   plane.Damage.DamageTaken,
 		KillerName:    killerName,
 		KillerType:    killerType,
 		KillerPlayer:  killerPlayer,

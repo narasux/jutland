@@ -147,80 +147,19 @@ type Plane struct {
 	RemainRange float64
 	// 当前攻击目标 (uid)
 	CurAttackTarget string
-	// 最近一次命中本机的攻击者，用于战况记录（击落 / 损失时读取）
-	LastAttackerName    string
-	LastAttackerType    string
-	LastAttackerPlayer  faction.Player
-	LastAttackerIsPlane bool
-	// ShotDown 是否被火力击落（用于区分击落与坠毁）
-	ShotDown bool
-	// LastHit 最近一次命中的武器与伤害
-	LastHit HitInfo
-	// DamageTaken 本局累计承受伤害
-	DamageTaken float64
+	// 受到伤害与最近攻击者记录（与战舰共用）
+	Damage DamageState
 	// 玩家手动派出的侦察。自动侦察为 false。
 	ScoutManual bool
 	// 侦察任务结束（盘旋完毕或油尽）时置位，下一拍走现有返航。
 	// 搜索中的飞机发现可打目标转去攻击时会清掉。
 	ForceReturn bool
-	// 飞行阶段（起飞 / 巡航 / 降落）
-	FlightPhase PlaneFlightPhase
-	// 当前飞行阶段起点
-	FlightPhaseStartPos objPos.MapPos
-	// 当前飞行阶段终点
-	FlightPhaseEndPos objPos.MapPos
-	// 当前阶段已经经过的模拟帧数
-	FlightPhaseElapsed float64
-	// 当前阶段开始时的速度
-	FlightPhaseStartSpeed float64
-	// 无法直接通过固定起止点计算时使用的阶段进度
-	FlightPhaseProgressValue float64
-	// 当前飞行阶段起始视觉倍率（相对常规飞机 2 倍绘制）
-	FlightVisualScaleStart float64
-	// 当前飞行阶段结束视觉倍率（相对常规飞机 2 倍绘制）
-	FlightVisualScaleEnd float64
-	// 当前飞机在所属航母舰尾入口中的分散槽位
-	LandingSlot int
-	// 最终进近使用的航母局部坐标圆弧，仅在局内运行时初始化。
-	landingArc landingApproachArc
-	// 当前正在飞向切线引导点或圆弧入口。
-	landingStagingLeg landingStagingLeg
-	// 上一模拟帧的航母航向，用于计算移动着舰航线的切向速度。
-	landingCarrierRotation float64
-	// 航母当前每模拟帧的转向弧度。
-	landingCarrierTurnRate float64
-	// 本次降落是否为舷侧着水回收（水上飞机）。
-	landingOnWater bool
-	// 直线进近段降到最低视觉倍率（触舰/触水）时的路程比例。
-	landingScaleCompleteRatio float64
-	// 起飞滑跑段长度（地图坐标）；滑跑结束后进入直线爬升段缓慢加满速度。
-	takeoffRunLength float64
-	// 弹射点配置副本：滑跑段绑定甲板推进，每帧按舰体当前姿态重算滑跑线。
-	takeoffPoint TakeoffPoint
-	// 起飞阶段计划总距离（滑跑 + 爬升，地图坐标）与已飞行距离。
-	takeoffTotalLength float64
-	takeoffDistance    float64
-	// 离舰瞬间合成的世界速度航向，爬升段机头以转向速率平滑过渡到该航向。
-	takeoffClimbHeading float64
-	// 降落机头合成使用的航母转向速率低通值。玩家满舵时舰体角速度是阶跃信号，
-	// 直接合成机头航向会让进近中的飞机在两三帧内甩动数十度；
-	// 滤波后阶跃被摊成数十帧的平滑偏航，机头始终贴合随舰旋转的进近航线。
-	landingDisplayTurnRate float64
-
-	// 圆弧进近段的等减速计划状态（相对航母速度，单位为地图坐标每模拟帧）。
-	landingArcSpeed       float64
-	landingArcExitSpeed   float64
-	landingArcTotalLength float64
-	landingArcDistance    float64
-	landingArcDecel       float64
-	// 最终直线进近段的等减速刹车计划状态。
-	landingRunSpeed       float64
-	landingRunTotalLength float64
-	landingRunDistance    float64
-	landingRunDecel       float64
-	// 最终直线进近方向的航母局部单位向量。
-	landingRunTangent carrierLocalOffset
-
+	// 飞行阶段与阶段进度
+	Flight FlightState
+	// 滑跑起飞状态
+	Takeoff TakeoffState
+	// 着舰引导、进近减速与最终刹车状态
+	Landing LandingState
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
 	// 所属基地（uid）：可以是航母，也可以是陆地机场
@@ -273,13 +212,13 @@ func (p *Plane) DetailLines(ctx DetailContext) []string {
 	}
 	lines := []string{fmt.Sprintf(
 		"Plane %s(%s): Pos: %s, Rotation: %.2f, Phase: %s, Speed: %.2f/%.2f, HP: %.2f/%.2f, AttackTarget: %s",
-		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.FlightPhase,
+		p.Name, p.Uid, p.CurPos.String(), p.CurRotation, p.Flight.Phase,
 		p.CurSpeed, maxSpeed, p.CurHP, p.TotalHP, p.CurAttackTarget,
 	)}
 	lines = append(lines, fmt.Sprintf(
 		"  Flight: progress %.2f, elapsed %.1f, height %.2f, cruising %t, onGround %t, sight %t, scout %t, forceReturn %t",
 		p.FlightPhaseProgress(),
-		p.FlightPhaseElapsed,
+		p.Flight.Elapsed,
 		p.CurHeight,
 		p.IsCruising(),
 		p.IsOnGround(),
@@ -290,7 +229,7 @@ func (p *Plane) DetailLines(ctx DetailContext) []string {
 	// 剩余航程归零或 ForceReturn 置位时飞机已经/即将返航，MustReturn 是两者的汇总。
 	lines = append(lines, fmt.Sprintf(
 		"  Fuel: %.2f/%.2f, MustReturn: %t, LandingSlot: %d",
-		p.RemainRange, p.Range, p.MustReturn(), p.LandingSlot,
+		p.RemainRange, p.Range, p.MustReturn(), p.Landing.Slot,
 	))
 	// 所属基地单独一行：可读标识带完整 uuid，和 Fuel 挤在一起会折成两行。
 	lines = append(lines, "  Base: "+p.baseDetail(ctx.BaseLabel))
@@ -655,10 +594,10 @@ func NewPlane(
 	p.CurRotation = rotation
 	p.BelongPlayer = player
 	p.BelongShip = shipUid
-	p.FlightPhase = PlaneFlightPhaseCruising
-	p.FlightVisualScaleStart = 1
-	p.FlightVisualScaleEnd = 1
-	p.LandingSlot = -1
+	p.Flight.Phase = PlaneFlightPhaseCruising
+	p.Flight.VisualScaleStart = 1
+	p.Flight.VisualScaleEnd = 1
+	p.Landing.Slot = -1
 
 	// 根据飞机类型初始化移动策略
 	p.movementStrategy = NewMovementStrategy(p.Type)

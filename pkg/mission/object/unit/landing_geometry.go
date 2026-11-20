@@ -340,15 +340,15 @@ func landingApproachEntryReady(p *Plane, base AircraftBase, gate carrierLocalOff
 		return false
 	}
 	arc, ok := buildLandingApproachArc(
-		start, base, p.MaxSpeed, base.BaseAircraft().landingConfigForSlot(p.LandingSlot),
+		start, base, p.MaxSpeed, base.BaseAircraft().landingConfigForSlot(p.Landing.Slot),
 	)
 	if !ok {
 		return false
 	}
-	entrySpeed := landingArcEntryTargetSpeed(arc, base, p.landingCarrierTurnRate)
+	entrySpeed := landingArcEntryTargetSpeed(arc, base, p.Landing.carrierTurnRate)
 	// 航向容差与圆弧段机头合成使用同一低通转向速率，保证进入圆弧前后
 	// 机头目标航向连续；速度容差仍用原始速率，反映真实的相对闭合速度。
-	targetRotation := landingArcWorldRotation(arc, base, 0, p.landingDisplayTurnRate)
+	targetRotation := landingArcWorldRotation(arc, base, 0, p.Landing.displayTurnRate)
 	if angleDifferenceDegrees(p.CurRotation, targetRotation) > landingGateHeadingTolerance*scale {
 		return false
 	}

@@ -205,7 +205,7 @@ func newDiveBadgeLayout(ms *state.MissionState, ship *objUnit.BattleShip) diveBa
 	scale := ms.ZoomScale()
 	return diveBadgeLayout{
 		visible: true,
-		state:   diveStateIcon(ship.DiveState),
+		state:   diveStateIcon(ship.Submarine.DiveState),
 		// 与武器图标同尺寸，方便并排放在同一条状态行里
 		width:    weaponIconBaseSize * scale,
 		scale:    scale,

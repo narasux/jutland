@@ -81,7 +81,7 @@ func (i *PlaneScout) Exec(ms *state.MissionState) error {
 	base, _ := ms.FindAircraftBase(plane.BelongShip)
 	mapCfg := ms.Core.MissionMD.MapCfg
 	// 还在滑跑或爬升时先把起飞飞完，不改航向。
-	if plane.FlightPhase == objUnit.PlaneFlightPhaseTakingOff {
+	if plane.Flight.Phase == objUnit.PlaneFlightPhaseTakingOff {
 		plane.UpdateTakeoff(mapCfg, base)
 		return nil
 	}

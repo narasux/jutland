@@ -19,7 +19,7 @@ func TestSnapshotSeparatesSubmarines(t *testing.T) {
 	ownSub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
 	ownDD := makeShip("dd", faction.ComputerAlpha, objUnit.ShipTypeDestroyer, 6, 5)
 	enemySub := makeShip("esub", faction.HumanAlpha, objUnit.ShipTypeSubmarine, 10, 5)
-	enemySub.DiveState = objUnit.DiveStateSubmerged
+	enemySub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	enemySub.MarkDetected(faction.ComputerAlpha, 100, enemySub.CurPos)
 	enemyDD := makeShip("edd", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 11, 5)
 
@@ -35,7 +35,7 @@ func TestSnapshotSeparatesSubmarines(t *testing.T) {
 }
 
 // TestSubmarineAIDivesOnEnemyAndFires 验证 AI 潜艇在 16 格接敌圈内下潜并锁定目标。
-// 场景：潜艇 DiveState 默认 0（水面）在 (5,5)，鱼雷对潜射程 6 格，敌驱逐舰在
+// 场景：潜艇 Submarine.DiveState 默认 0（水面）在 (5,5)，鱼雷对潜射程 6 格，敌驱逐舰在
 // (15,5) 距离 10 格，落在 subEngageRadius 内、还在 0.9 倍鱼雷射程 5.4 格外。
 // 预期：下发 ShipDive，AttackTarget 设为最近的 enemy，并补一条压上的航路。
 // 覆盖：submarineInstructions 返回值断言含下潜指令键，并检查 sub.AttackTarget。
@@ -60,7 +60,7 @@ func TestSubmarineAIDivesOnEnemyAndFires(t *testing.T) {
 // 覆盖：snapshot 后调用 submarineInstructions，断言 out 为空且不含上浮指令键。
 func TestSubmarineAIStaysSubmergedWhenNoEnemy(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	sub.Weapon.HasTorpedo = true
 
 	ms := newMission(0, []*objUnit.BattleShip{sub}, nil)
@@ -82,7 +82,7 @@ func TestSubmarineAIStaysSubmergedWhenNoEnemy(t *testing.T) {
 // NotEmpty 检查 NameShipSurface、NameShipDive 与指令集。
 func TestSubmarineAIStaysSubmergedWhileApproaching(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	sub.Weapon.HasTorpedo = true
 	sub.Weapon.MaxToSubmergedRange = 6
 	// 35 格：远在接敌圈之外，属于水下巡航阶段
@@ -108,7 +108,7 @@ func TestSubmarineAIStaysSubmergedWhileApproaching(t *testing.T) {
 // NameShipSurface 缺席（下潜由 NextDiveState 触发）。
 func TestSubmarineAIDivesWhenSurfacedWithDistantEnemy(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
-	sub.DiveState = objUnit.DiveStateSurface
+	sub.Submarine.DiveState = objUnit.DiveStateSurface
 	sub.Weapon.HasTorpedo = true
 	// 21 格：仍在水下巡航阶段
 	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 26, 5)
@@ -132,7 +132,7 @@ func TestSubmarineAIDivesWhenSurfacedWithDistantEnemy(t *testing.T) {
 // NameShipSurface 的 GenInstrUid。
 func TestSubmarineAIGunOnlyStaysSubmerged(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	sub.Weapon.HasMainGun = true
 	sub.Weapon.MaxToShipRange = 12
 	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 15, 5)
@@ -154,7 +154,7 @@ func TestSubmarineAIGunOnlyStaysSubmerged(t *testing.T) {
 // 覆盖：MarkDetected 后 snapshot，断言指令非空且 AttackTarget 为空。
 func TestSubmarineAIRetreatsWhenDetected(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	sub.MarkDetected(faction.HumanAlpha, 100, sub.CurPos)
 	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 9, 5)
 
@@ -177,7 +177,7 @@ func TestASWHunterLeavesFleetAndChasesContact(t *testing.T) {
 	dd := makeShip("dd", faction.ComputerAlpha, objUnit.ShipTypeDestroyer, 0, 0)
 	dd.Weapon.HasAntiSubWeapon = true
 	enemySub := makeShip("esub", faction.HumanAlpha, objUnit.ShipTypeSubmarine, 8, 0)
-	enemySub.DiveState = objUnit.DiveStateSubmerged
+	enemySub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	enemySub.MarkDetected(faction.ComputerAlpha, 1000, enemySub.CurPos)
 
 	ms := newMission(10, []*objUnit.BattleShip{dd, enemySub}, nil)
@@ -221,7 +221,7 @@ func TestASWEngageDistanceFollowsWeaponRange(t *testing.T) {
 // 返回非空；失败信息对应“停在旧距离”的回归。
 func TestASWHunterKeepsClosingWhenContactOutsideWeaponRange(t *testing.T) {
 	sub := makeShip("esub", faction.HumanAlpha, objUnit.ShipTypeSubmarine, 4, 0)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	sub.MarkDetected(faction.ComputerAlpha, 1000, sub.CurPos)
 
 	dd := makeShip("dd", faction.ComputerAlpha, objUnit.ShipTypeDestroyer, 0, 0)
@@ -246,7 +246,7 @@ func TestASWHunterKeepsClosingWhenContactOutsideWeaponRange(t *testing.T) {
 // 覆盖：snapshot 后调用 submarineInstructions，断言不含上浮指令键。
 func TestSubmarineAIGunOnlyStaysSubmergedOutOfGunRange(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
-	sub.DiveState = objUnit.DiveStateSubmerged
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
 	sub.Weapon.HasMainGun = true
 	sub.Weapon.MaxToShipRange = 5
 	enemy := makeShip("enemy", faction.HumanAlpha, objUnit.ShipTypeDestroyer, 15, 5)
@@ -266,7 +266,7 @@ func TestSubmarineAIGunOnlyStaysSubmergedOutOfGunRange(t *testing.T) {
 // 覆盖：snapshot 后调用 submarineInstructions，断言下潜键存在、上浮键缺席。
 func TestSubmarineAIDivesWhenSurfacedEvenWithoutEnemy(t *testing.T) {
 	sub := makeShip("sub", faction.ComputerAlpha, objUnit.ShipTypeSubmarine, 5, 5)
-	sub.DiveState = objUnit.DiveStateSurface
+	sub.Submarine.DiveState = objUnit.DiveStateSurface
 	sub.Weapon.HasTorpedo = true
 
 	ms := newMission(0, []*objUnit.BattleShip{sub}, nil)

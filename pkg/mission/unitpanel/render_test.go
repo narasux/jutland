@@ -159,14 +159,14 @@ func captureState(ships []*objUnit.BattleShip) *state.MissionState {
 			continue
 		}
 		planes["fighter-active"] = &objUnit.Plane{
-			Name:        "F6F-3",
-			BelongShip:  ship.Uid,
-			FlightPhase: objUnit.PlaneFlightPhaseCruising,
+			Name:       "F6F-3",
+			BelongShip: ship.Uid,
+			Flight:     objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseCruising},
 		}
 		planes["fighter-return"] = &objUnit.Plane{
-			Name:        "F6F-3",
-			BelongShip:  ship.Uid,
-			FlightPhase: objUnit.PlaneFlightPhaseLandingApproach,
+			Name:       "F6F-3",
+			BelongShip: ship.Uid,
+			Flight:     objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseLandingApproach},
 		}
 	}
 	return &state.MissionState{

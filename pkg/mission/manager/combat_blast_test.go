@@ -37,7 +37,7 @@ func TestBombBlastDamagesNearbyGroundPlanes(t *testing.T) {
 		return &objUnit.Plane{
 			Uid: uid, TotalHP: 100, CurHP: 100,
 			CurPos:       objPos.NewR(x, y),
-			FlightPhase:  objUnit.PlaneFlightPhaseTakingOff,
+			Flight:       objUnit.FlightState{Phase: objUnit.PlaneFlightPhaseTakingOff},
 			BelongPlayer: player,
 		}
 	}
@@ -45,7 +45,7 @@ func TestBombBlastDamagesNearbyGroundPlanes(t *testing.T) {
 	enemyNear := newGroundPlane("enemy-near", 10.3, 10, faction.HumanAlpha)
 	enemyFar := newGroundPlane("enemy-far", 11.5, 10, faction.HumanAlpha)
 	enemyAir := newGroundPlane("enemy-air", 10.2, 10.2, faction.HumanAlpha)
-	enemyAir.FlightPhase = objUnit.PlaneFlightPhaseCruising
+	enemyAir.Flight.Phase = objUnit.PlaneFlightPhaseCruising
 	friendlyNear := newGroundPlane("friendly-near", 9.7, 10, faction.ComputerAlpha)
 
 	missionState := &state.MissionState{

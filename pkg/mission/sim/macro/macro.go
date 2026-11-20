@@ -73,8 +73,8 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 					sh.CurPos.RX,
 					sh.CurPos.RY,
 					sh.AttackTarget,
-					sh.DiveState,
-					len(sh.DetectedBy),
+					sh.Submarine.DiveState,
+					len(sh.Submarine.DetectedBy),
 				)
 			}
 		}

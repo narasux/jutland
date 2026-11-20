@@ -433,7 +433,7 @@ func runDuelTrial(sc *sim.Scenario, spec *sim.DuelSpec, seed int64) (trial, erro
 					ship.Name,
 					ship.CurHP,
 					ship.AttackTarget,
-					ship.DetectedBy,
+					ship.Submarine.DetectedBy,
 					len(recorder.Shots),
 				)
 			}

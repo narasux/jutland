@@ -18,14 +18,16 @@ import (
 func TestDiveToggleInstructionFollowsDiveState(t *testing.T) {
 	surface := &objUnit.BattleShip{Uid: "surface", CurHP: 1, Type: objUnit.ShipTypeSubmarine}
 	submerged := &objUnit.BattleShip{
-		Uid: "submerged", CurHP: 1, Type: objUnit.ShipTypeSubmarine, DiveState: objUnit.DiveStateSubmerged,
+		Uid: "submerged", CurHP: 1, Type: objUnit.ShipTypeSubmarine,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
 	}
 	diving := &objUnit.BattleShip{
-		Uid: "diving", CurHP: 1, Type: objUnit.ShipTypeSubmarine, DiveState: objUnit.DiveStateDiving,
+		Uid: "diving", CurHP: 1, Type: objUnit.ShipTypeSubmarine,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateDiving},
 	}
 	surfacing := &objUnit.BattleShip{
 		Uid: "surfacing", CurHP: 1, Type: objUnit.ShipTypeSubmarine,
-		DiveState: objUnit.DiveStateSurfacing,
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSurfacing},
 	}
 	gunship := &objUnit.BattleShip{Uid: "gunship", CurHP: 1, Type: objUnit.ShipTypeDestroyer}
 	ms := &state.MissionState{Arena: state.MissionArenaState{
@@ -64,5 +66,5 @@ func TestToggleDiveActionQueuesAndExecutesInstruction(t *testing.T) {
 	require.NotNil(t, missionManager.instructionSet.Get(instr.GenInstrUid(instr.NameShipDive, sub.Uid)))
 
 	missionManager.instructionSet.ExecAll(missionState)
-	require.Equal(t, objUnit.DiveStateDiving, sub.DiveState)
+	require.Equal(t, objUnit.DiveStateDiving, sub.Submarine.DiveState)
 }

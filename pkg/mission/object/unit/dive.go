@@ -5,6 +5,7 @@ import (
 	"math"
 
 	"github.com/narasux/jutland/pkg/i18n"
+	"github.com/narasux/jutland/pkg/mission/faction"
 )
 
 // DiveState 潜艇深度状态。水面与水下是稳定态，下潜中/上浮中是过渡态。
@@ -29,14 +30,37 @@ const (
 	defaultSurfaceTimeSeconds = 8
 )
 
+// SubmarineState 潜艇专属的下潜配置与运行状态；非潜艇保持零值。
+type SubmarineState struct {
+	// 下潜耗时（秒）；仅潜艇使用，缺省 10
+	DiveTime float64 `json:"diveTime"`
+	// 上浮耗时（秒）；仅潜艇使用，缺省 8
+	SurfaceTime float64 `json:"surfaceTime"`
+	// 水下航速倍率（相对水面最大速）；仅潜艇使用，缺省 0.35
+	SubmergedSpeedRatio float64 `json:"submergedSpeedRatio"`
+	// 入场深度状态：surface / submerged（缺省 submerged）
+	DefaultDiveState string `json:"defaultDiveState"`
+
+	// 当前深度状态
+	DiveState DiveState `json:"-"`
+	// 下潜/上浮剩余拍数
+	diveTicksLeft int64
+	// 下潜/上浮过渡总拍数，用于计算过渡进度
+	diveTotalTicks int64
+	// 下潜/上浮期间每拍按“速度差 / 剩余拍数”计算出的航速变化量
+	diveSpeedStep float64
+	// 各玩家最近一次声呐探测到本艇的记录
+	DetectedBy map[faction.Player]ShipDetection `json:"-"`
+}
+
 // Submerged 是否处于完全水下：只能用鱼雷，甲板炮/防空炮锁定。
 func (s *BattleShip) Submerged() bool {
-	return s.DiveState == DiveStateSubmerged
+	return s.Submarine.DiveState == DiveStateSubmerged
 }
 
 // DiveTransitioning 是否正在下潜/上浮；过渡期按水面规则处理。
 func (s *BattleShip) DiveTransitioning() bool {
-	return s.DiveState == DiveStateDiving || s.DiveState == DiveStateSurfacing
+	return s.Submarine.DiveState == DiveStateDiving || s.Submarine.DiveState == DiveStateSurfacing
 }
 
 // NextDiveState 返回按下「下潜/上浮」后的目标状态。
@@ -44,21 +68,21 @@ func (s *BattleShip) DiveTransitioning() bool {
 // 非潜艇返回 false。
 func (s *BattleShip) NextDiveState() (DiveState, bool) {
 	if s.Type != ShipTypeSubmarine {
-		return s.DiveState, false
+		return s.Submarine.DiveState, false
 	}
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateSurface, DiveStateSurfacing:
 		return DiveStateSubmerged, true
 	case DiveStateSubmerged, DiveStateDiving:
 		return DiveStateSurface, true
 	}
-	return s.DiveState, false
+	return s.Submarine.DiveState, false
 }
 
 // submergedSpeedRatio 水下航速倍率（相对水面最大速），未配置时用默认值。
 func (s *BattleShip) submergedSpeedRatio() float64 {
-	if s.SubmergedSpeedRatio > 0 {
-		return s.SubmergedSpeedRatio
+	if s.Submarine.SubmergedSpeedRatio > 0 {
+		return s.Submarine.SubmergedSpeedRatio
 	}
 	return defaultSubmergedSpeedRatio
 }
@@ -66,7 +90,7 @@ func (s *BattleShip) submergedSpeedRatio() float64 {
 // DiveSpeedRatio 当前深度状态下的目标航速倍率（相对水面最大速）。
 // 过渡期的实际航速由 diveSpeedStep 按剩余时间逐拍逼近这个目标，不再固定为中间档。
 func (s *BattleShip) DiveSpeedRatio() float64 {
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateDiving, DiveStateSubmerged:
 		return s.submergedSpeedRatio()
 	default:
@@ -90,19 +114,19 @@ func (s *BattleShip) StartDive() bool {
 	if s.Type != ShipTypeSubmarine {
 		return false
 	}
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateSurface, DiveStateSurfacing:
 	default:
 		return false
 	}
 	progress := s.DiveProgress()
-	s.DiveState = DiveStateDiving
-	s.diveTotalTicks = ReloadTicks(s.diveTimeSeconds())
-	s.diveTicksLeft = transitionTicksLeft(s.diveTotalTicks, 1-progress)
-	s.diveSpeedStep = transitionSpeedStep(
+	s.Submarine.DiveState = DiveStateDiving
+	s.Submarine.diveTotalTicks = ReloadTicks(s.diveTimeSeconds())
+	s.Submarine.diveTicksLeft = transitionTicksLeft(s.Submarine.diveTotalTicks, 1-progress)
+	s.Submarine.diveSpeedStep = transitionSpeedStep(
 		s.CurSpeed,
 		s.MaxSpeed*s.submergedSpeedRatio()*gameSpeedMultiplier(),
-		s.diveTicksLeft,
+		s.Submarine.diveTicksLeft,
 	)
 	return true
 }
@@ -114,19 +138,19 @@ func (s *BattleShip) StartSurface() bool {
 	if s.Type != ShipTypeSubmarine {
 		return false
 	}
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateSubmerged, DiveStateDiving:
 	default:
 		return false
 	}
 	progress := s.DiveProgress()
-	s.DiveState = DiveStateSurfacing
-	s.diveTotalTicks = ReloadTicks(s.surfaceTimeSeconds())
-	s.diveTicksLeft = transitionTicksLeft(s.diveTotalTicks, progress)
-	s.diveSpeedStep = transitionSpeedStep(
+	s.Submarine.DiveState = DiveStateSurfacing
+	s.Submarine.diveTotalTicks = ReloadTicks(s.surfaceTimeSeconds())
+	s.Submarine.diveTicksLeft = transitionTicksLeft(s.Submarine.diveTotalTicks, progress)
+	s.Submarine.diveSpeedStep = transitionSpeedStep(
 		s.CurSpeed,
 		s.MaxSpeed*gameSpeedMultiplier(),
-		s.diveTicksLeft,
+		s.Submarine.diveTicksLeft,
 	)
 	return true
 }
@@ -152,19 +176,19 @@ func (s *BattleShip) AdvanceDive() {
 	if !s.DiveTransitioning() {
 		return
 	}
-	s.diveTicksLeft--
-	if s.diveTicksLeft > 0 {
+	s.Submarine.diveTicksLeft--
+	if s.Submarine.diveTicksLeft > 0 {
 		return
 	}
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateDiving:
-		s.DiveState = DiveStateSubmerged
+		s.Submarine.DiveState = DiveStateSubmerged
 	case DiveStateSurfacing:
-		s.DiveState = DiveStateSurface
+		s.Submarine.DiveState = DiveStateSurface
 	}
-	s.diveTicksLeft = 0
-	s.diveTotalTicks = 0
-	s.diveSpeedStep = 0
+	s.Submarine.diveTicksLeft = 0
+	s.Submarine.diveTotalTicks = 0
+	s.Submarine.diveSpeedStep = 0
 }
 
 // DiveProgress 返回 0（水面）到 1（完全水下）的潜航进度，
@@ -173,20 +197,20 @@ func (s *BattleShip) DiveProgress() float64 {
 	if s.Type != ShipTypeSubmarine {
 		return 0
 	}
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateDiving:
-		if s.diveTotalTicks <= 0 {
+		if s.Submarine.diveTotalTicks <= 0 {
 			return 1
 		}
-		progress := 1 - float64(s.diveTicksLeft)/float64(s.diveTotalTicks)
+		progress := 1 - float64(s.Submarine.diveTicksLeft)/float64(s.Submarine.diveTotalTicks)
 		return min(1, max(0, progress))
 	case DiveStateSubmerged:
 		return 1
 	case DiveStateSurfacing:
-		if s.diveTotalTicks <= 0 {
+		if s.Submarine.diveTotalTicks <= 0 {
 			return 0
 		}
-		progress := float64(s.diveTicksLeft) / float64(s.diveTotalTicks)
+		progress := float64(s.Submarine.diveTicksLeft) / float64(s.Submarine.diveTotalTicks)
 		return min(1, max(0, progress))
 	default:
 		return 0
@@ -195,7 +219,7 @@ func (s *BattleShip) DiveProgress() float64 {
 
 // DiveStateText 深度状态的本地化名称，供单位面板使用。
 func (s *BattleShip) DiveStateText() string {
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateDiving:
 		return i18n.Text(i18n.MsgShipDiving)
 	case DiveStateSubmerged:
@@ -210,7 +234,7 @@ func (s *BattleShip) DiveStateText() string {
 // DiveActionText 供面板按钮显示：按钮永远代表“最后一次指令”的反向，
 // 水面与上浮中提示「下潜」，水下与下潜中提示「上浮」。
 func (s *BattleShip) DiveActionText() string {
-	switch s.DiveState {
+	switch s.Submarine.DiveState {
 	case DiveStateSurface, DiveStateSurfacing:
 		return i18n.Text(i18n.MsgShipDive)
 	case DiveStateSubmerged, DiveStateDiving:
@@ -226,36 +250,36 @@ func (s *BattleShip) ResolveDiveConfig() error {
 	if s.Type != ShipTypeSubmarine {
 		return nil
 	}
-	if s.DiveTime <= 0 {
-		s.DiveTime = defaultDiveTimeSeconds
+	if s.Submarine.DiveTime <= 0 {
+		s.Submarine.DiveTime = defaultDiveTimeSeconds
 	}
-	if s.SurfaceTime <= 0 {
-		s.SurfaceTime = defaultSurfaceTimeSeconds
+	if s.Submarine.SurfaceTime <= 0 {
+		s.Submarine.SurfaceTime = defaultSurfaceTimeSeconds
 	}
-	if s.SubmergedSpeedRatio <= 0 {
-		s.SubmergedSpeedRatio = defaultSubmergedSpeedRatio
+	if s.Submarine.SubmergedSpeedRatio <= 0 {
+		s.Submarine.SubmergedSpeedRatio = defaultSubmergedSpeedRatio
 	}
-	switch s.DefaultDiveState {
+	switch s.Submarine.DefaultDiveState {
 	case "", "submerged":
-		s.DiveState = DiveStateSubmerged
+		s.Submarine.DiveState = DiveStateSubmerged
 	case "surface":
-		s.DiveState = DiveStateSurface
+		s.Submarine.DiveState = DiveStateSurface
 	default:
-		return fmt.Errorf("ship %q has unknown defaultDiveState %q", s.Name, s.DefaultDiveState)
+		return fmt.Errorf("ship %q has unknown defaultDiveState %q", s.Name, s.Submarine.DefaultDiveState)
 	}
 	return nil
 }
 
 func (s *BattleShip) diveTimeSeconds() float64 {
-	if s.DiveTime > 0 {
-		return s.DiveTime
+	if s.Submarine.DiveTime > 0 {
+		return s.Submarine.DiveTime
 	}
 	return defaultDiveTimeSeconds
 }
 
 func (s *BattleShip) surfaceTimeSeconds() float64 {
-	if s.SurfaceTime > 0 {
-		return s.SurfaceTime
+	if s.Submarine.SurfaceTime > 0 {
+		return s.Submarine.SurfaceTime
 	}
 	return defaultSurfaceTimeSeconds
 }
