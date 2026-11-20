@@ -31,8 +31,11 @@ raw_resources/
 tools/*
 !tools/sim-ci.sh
 !tools/sim-periodic.sh
+!tools/sim-suite.sh
+!tools/sim-nightly.sh
 !tools/perf-gate.sh
 !tools/frame-gate.sh
+!tools/install-scheduler.sh
 !tools/sim-suite.sh
 bin/
 

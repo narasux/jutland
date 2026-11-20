@@ -78,6 +78,27 @@ result to `reports/frame/history.jsonl` when `JUTLAND_SIM_HOME` is set; trend
 adds a 渲染帧门禁 line/card with latest/avg/worst p99 and the pass status, so real
 frame-time regressions show up next to the simulation runs.
 
+## Nightly run (optional)
+
+`make sim-nightly` runs the small suite (`shot` + one duel + three macro seeds),
+then the rendered-frame gate (skipped when no graphical session is available),
+then `trend`/`analyze`. It requires `JUTLAND_SIM_HOME`.
+
+To schedule it daily at 10:00 local time, install the per-user launchd job
+explicitly (nothing is installed by default):
+
+```bash
+export JUTLAND_SIM_HOME="$HOME/jutland-sim-lab"
+make sim-schedule-install     # writes ~/Library/LaunchAgents/com.jutland.sim-periodic.plist
+make sim-schedule-status
+make sim-schedule-uninstall
+```
+
+Knobs: `SIM_SCHEDULE_HOUR`/`SIM_SCHEDULE_MINUTE` for the schedule,
+`SIM_SCHEDULE_FRAME=0` to skip the frame gate. Output goes to
+`$JUTLAND_SIM_HOME/reports/scheduler.log`. `tools/install-scheduler.sh --dry-run`
+prints the generated plist without touching the system.
+
 `jutland-sim analyze [--limit N]` writes `ai/analysis-brief.md` and
 `ai/analysis-brief.json`: recurring findings, recurring red scorecards,
 per-scenario multi-run means (shots/losses/p99), finding lifecycle
