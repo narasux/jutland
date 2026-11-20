@@ -1566,7 +1566,8 @@
     type: "depth_charge",
     diameter: 300,
     damage: 2400,
-    criticalRate: 0
+    criticalRate: 0,
+    blastRadius: 1.3
   },
   // 美国 Mk 6 / Mk 7 300 磅深水炸弹（1940 年）
   {
@@ -1574,7 +1575,8 @@
     type: "depth_charge",
     diameter: 300,
     damage: 2200,
-    criticalRate: 0
+    criticalRate: 0,
+    blastRadius: 1.3
   },
   // 日本 95 式 100kg 深水炸弹
   {
@@ -1582,6 +1584,7 @@
     type: "depth_charge",
     diameter: 200,
     damage: 1500,
-    criticalRate: 0
+    criticalRate: 0,
+    blastRadius: 0.9
   },
 ]
