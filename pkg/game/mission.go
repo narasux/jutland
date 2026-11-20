@@ -245,10 +245,14 @@ const (
 	missionResultActionBack
 )
 
-// handleMissionReport 处理战役总结页的鼠标操作：
-// 点击页签切换总览 / 舰艇 / 飞机，点击按钮返回主界面。
-// 结算流程不提供键盘快捷键。
+// handleMissionReport 处理战役总结页的操作：
+// 点击页签切换总览 / 舰艇 / 飞机 / 曲线 / 详情，点击按钮或按 Esc 返回主界面。
 func (g *Game) handleMissionReport() {
+	// 战报页允许直接 Esc 退出，不必精确点中「返回主界面」按钮。
+	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		g.leaveMissionResult()
+		return
+	}
 	// 防御：管理器缺失时退回旧行为，避免空指针。
 	if g.missionMgr == nil {
 		if isMouseButtonLeftJustPressed() {
