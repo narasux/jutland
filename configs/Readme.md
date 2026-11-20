@@ -160,6 +160,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     criticalRate: 0.002,
     // 反潜弹药（可选）：true 时鱼雷可命中下潜潜艇；深水炸弹本身恒可反潜
     antiSubmarine: false,
+    // 爆炸伤害半径（地图格，可选）：深水炸弹 / 火箭弹等 AoE 弹药使用；
+    // 深水炸弹必须大于 0，否则落点结算会因半径 0 直接跳过，表现为投弹无伤害
+    blastRadius: 0,
     // 制导参数（可选）：不写＝普通直线弹药
     // mode: pursuit 纯追踪（追尾）——每拍把弹头转向目标当前位置
     // turnRate: 最大转向角速度（度/秒，60 拍基准），1x/2x 速度下自动换算

@@ -238,3 +238,48 @@ func TestDepthChargeSkipsShooterHullOnLaunch(t *testing.T) {
 	bt.CurPos = sub.CurPos.Copy()
 	require.True(t, m.depthChargeShouldExplode(bt), "深弹落在其他舰体上应直接引爆")
 }
+
+// TestAirDroppedDepthChargeDealsDamage 验证机载深弹从弹药模板继承爆炸半径并真正结算伤害。
+// 场景：飞机投下 US/DC/300/1940/Mk6；旧配置漏写 blastRadius，弹体半径 0，
+// resolveDepthChargeDamage 的 eachShip(radius=0) 直接跳过，表现为有水花但潜艇不掉血。
+// 预期：New 出的深弹 BlastRadius=1.3；潜艇被本方点亮后，落点结算使 CurHP 下降。
+// 覆盖：用真实弹药模板构造深弹（不手填 BlastRadius），rebuildCombatBuckets 后调用 resolveDepthChargeDamage。
+func TestAirDroppedDepthChargeDealsDamage(t *testing.T) {
+	sub := &objUnit.BattleShip{
+		Uid: "sub", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+	}
+	ms := depthChargeState(sub)
+	sub.MarkDetected(faction.HumanAlpha, ms.Core.SimTick+10, sub.CurPos)
+
+	m := &MissionManager{state: ms}
+	m.rebuildCombatBuckets()
+
+	bt := objBullet.New(
+		"US/DC/300/1940/Mk6", sub.CurPos, sub.CurPos,
+		"plane", object.TypePlane, faction.HumanAlpha, object.TypeShip,
+		0, 10, 1,
+	)
+	require.InDelta(t, 1.3, bt.BlastRadius, 1e-9, "机载深弹应从模板继承爆炸半径")
+
+	m.resolveDepthChargeDamage(bt)
+	require.Less(t, sub.CurHP, 100.0, "机载深弹命中点附近应结算伤害")
+}
+
+// TestAirDroppedDepthChargeTemplatesHaveBlastRadius 验证三种机载深弹模板都配置了爆炸半径。
+// 场景：B-24D / SB2C-4 / SeaOtter 的深弹分别引用英、美、日三套弹药，漏配任意一套都会让该机种投弹无伤害。
+// 预期：三套深弹模板的 BlastRadius 都大于 0，300 磅为 1.3、日本 200kg 为 0.9。
+// 覆盖：遍历 objBullet.Map 的三个真实名称，用 InDelta 断言半径数值。
+func TestAirDroppedDepthChargeTemplatesHaveBlastRadius(t *testing.T) {
+	cases := map[string]float64{
+		"UK/DC/300/1939/MkVII":  1.3,
+		"US/DC/300/1940/Mk6":    1.3,
+		"JP/DC/200/1935/Type95": 0.9,
+	}
+	for name, want := range cases {
+		bt := objBullet.Map[name]
+		require.NotNil(t, bt, "深弹 %s 应已加载", name)
+		require.InDelta(t, want, bt.BlastRadius, 1e-9, "深弹 %s 的爆炸半径", name)
+	}
+}
