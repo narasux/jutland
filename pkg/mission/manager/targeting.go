@@ -365,8 +365,17 @@ func (m *MissionManager) nextTargetUID(baseUID string, targetType object.Type) (
 func (m *MissionManager) nextTargetUIDForPlane(plane *objUnit.Plane, attackers map[string]int) (string, bool) {
 	targetType := plane.AttackObjType()
 	accept := func(uid string) bool {
-		return m.airTargetHasSlotFor(targetType, uid, attackers) &&
-			m.targetReachableByPlane(plane, uid, targetType)
+		if !m.airTargetHasSlotFor(targetType, uid, attackers) ||
+			!m.targetReachableByPlane(plane, uid, targetType) {
+			return false
+		}
+		// 对舰任务要求至少还有一件能对该舰投放的弹药；只剩反潜深弹的飞机
+		// 不应再被派去水面舰上方盘旋，交给调用方转返航。
+		if targetType == object.TypeShip {
+			target := m.state.Arena.Ships[uid]
+			return target != nil && plane.HasUsableOrdnanceFor(target)
+		}
+		return true
 	}
 	var prefer func(string) bool
 	if targetType == object.TypeShip {

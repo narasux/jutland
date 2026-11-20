@@ -391,16 +391,22 @@ func (p *Plane) Fire(enemy Hurtable) (shotBullets []*objBullet.Bullet) {
 	canRelease := enemy.ObjType() == object.TypeShip || isGroundHurtable(enemy)
 	if canRelease {
 		if ticksReady(p.Weapon.LatestReleaseTick, p.Weapon.ReleaseInterval) {
+			salvo := max(1, p.Weapon.SalvoSize)
+			releasedAny := false
 			for _, releasers := range p.releaseGroups(enemy) {
-				for i := 0; i < len(releasers); i++ {
+				released := 0
+				for i := 0; i < len(releasers) && released < salvo; i++ {
 					if bullets := releasers[i].Fire(p, enemy); len(bullets) > 0 {
 						shotBullets = append(shotBullets, bullets...)
-						p.Weapon.LatestReleaseTick = SimTick()
-						if p.Weapon.LatestReleaseTick == 0 {
-							p.Weapon.LatestReleaseTick = 1
-						}
-						break
+						released++
+						releasedAny = true
 					}
+				}
+			}
+			if releasedAny {
+				p.Weapon.LatestReleaseTick = SimTick()
+				if p.Weapon.LatestReleaseTick == 0 {
+					p.Weapon.LatestReleaseTick = 1
 				}
 			}
 		}
@@ -462,6 +468,35 @@ func (p *Plane) releaseGroups(enemy Hurtable) [2][]*Releaser {
 		return [2][]*Releaser{p.Weapon.Bombs, p.Weapon.Torpedoes}
 	}
 	return [2][]*Releaser{p.Weapon.Bombs, nil}
+}
+
+// HasUsableOrdnanceFor 返回飞机是否还有能对目标投放的炸弹、鱼雷或火箭。
+// 混合挂载时不能只看「还有没有未投弹」：反潜深弹对水面舰、普通炸弹对下潜潜艇
+// 都无法投放，这类挂载不应让飞机继续接敌或阻塞返航。
+func (p *Plane) HasUsableOrdnanceFor(enemy Hurtable) bool {
+	if p == nil || enemy == nil {
+		return false
+	}
+	for _, bomb := range p.Weapon.Bombs {
+		if bomb != nil && !bomb.Released && bomb.CanDropOn(enemy) {
+			return true
+		}
+	}
+	for _, torpedo := range p.Weapon.Torpedoes {
+		if torpedo != nil && !torpedo.Released && torpedo.CanDropOn(enemy) {
+			return true
+		}
+	}
+	// 机炮/火箭打不到完全下潜的潜艇；反舰/防空火箭按目标类型筛。
+	if ship, ok := enemy.(*BattleShip); ok && ship.Submerged() {
+		return false
+	}
+	for _, rocket := range p.Weapon.Rockets {
+		if rocket != nil && !rocket.Exhausted() && rocket.IsAvailableAntiType(enemy.ObjType()) {
+			return true
+		}
+	}
+	return false
 }
 
 // HasAntiSubWeapon 是否挂载了可攻击下潜潜艇的深水炸弹。

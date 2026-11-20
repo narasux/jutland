@@ -79,6 +79,7 @@ func TestNextTargetUIDForPlaneSkipsTargetBeyondCombatRadius(t *testing.T) {
 		Uid: "bomber", Name: planeName, Type: objUnit.PlaneTypeDiveBomber,
 		BelongShip: "base", BelongPlayer: faction.HumanAlpha,
 		CurPos: objPos.NewR(50, 50), RemainRange: 100,
+		Weapon: objUnit.PlaneWeapon{Bombs: []*objUnit.Releaser{{BulletName: bulletName}}},
 	}
 
 	// 剩余 100：far 单程 70 够、往返 140 不够 → 只能选 near

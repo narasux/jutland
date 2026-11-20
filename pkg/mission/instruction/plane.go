@@ -19,8 +19,9 @@ type PlaneAttack struct {
 	targetUid     string
 	status        InstrStatus
 	// 投放-脱离（Hit-and-Run）相关字段：
-	// 飞机攻击战舰时，炸弹要整舱投完才脱离（一次通场把载弹全部投给同一目标），
-	// 鱼雷保持一次通场投一雷即脱离；脱离后由 daemon 分配下一个目标或安排返航。
+	// 飞机攻击战舰时，能对该目标投放的炸弹要整舱投完才脱离（一次通场把可用载弹
+	// 全部投给同一目标）；鱼雷默认一次通场投一雷即脱离，配置 SalvoSize > 1 的
+	// 机型会先把本波鱼雷投完。脱离后由 daemon 分配下一个目标或安排返航。
 	// 通过快照比对方式检测武器释放进度。
 	releaserSnapshot []bool // 指令创建时各释放器（炸弹+鱼雷）的 Released 状态快照
 	snapshotTaken    bool   // 标记是否已拍摄快照，避免重复拍摄覆盖初始状态
@@ -59,36 +60,48 @@ func (i *PlaneAttack) takeReleaserSnapshot(plane *objUnit.Plane) {
 }
 
 // shouldDisengage 判断本次攻击是否已完成投放、应该脱离：
-//   - 炸弹：指令开始时还有未投的炸弹，且现在全部投完，才算完成一次完整投弹，
-//     中途不脱离，保证整舱投给同一个目标（中途脱离会让飞机每次通场只丢一枚）；
-//   - 鱼雷：任一鱼雷新释放即脱离，鱼雷机一次通场只投一雷。
+//   - 炸弹：指令开始时还有能对该目标投放的炸弹，且这类炸弹现在全部投完，
+//     才算完成一次完整投弹；中途不脱离，保证整舱投给同一个目标。反潜深弹对
+//     水面舰、普通炸弹对下潜潜艇不可投放，不能计入“待投完”的炸弹，否则
+//     SB2C 这类混合挂载会在目标上方永远绕圈。
+//   - 鱼雷：未配置齐射时，任一能对目标投放的鱼雷新释放即脱离；
+//     配置齐射时投完本波可投放鱼雷再脱离。
 //
-// 指令开始时炸弹就已投完（如纯鱼雷机后续通场），不走炸弹脱离，避免刚接敌就掉头。
-func (i *PlaneAttack) shouldDisengage(plane *objUnit.Plane) bool {
+// 没有可再投放的弹药（只剩对目标不适用的挂载）时直接结束本次攻击。
+func (i *PlaneAttack) shouldDisengage(plane *objUnit.Plane, enemy objUnit.Hurtable) bool {
 	if !i.snapshotTaken {
 		return false
 	}
-	idx := 0
-	bombsPendingAtStart, bombsAllReleased := false, true
-	for _, b := range plane.Weapon.Bombs {
+	bombsPendingAtStart, bombsAllReleased, bombsApplicable := false, true, false
+	for idx, b := range plane.Weapon.Bombs {
+		if b == nil || !b.CanDropOn(enemy) {
+			continue
+		}
+		bombsApplicable = true
 		if idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] {
 			bombsPendingAtStart = true
 		}
 		if !b.Released {
 			bombsAllReleased = false
 		}
-		idx++
 	}
-	if bombsPendingAtStart && bombsAllReleased {
+	if bombsApplicable && bombsPendingAtStart && bombsAllReleased {
 		return true
 	}
-	for _, t := range plane.Weapon.Torpedoes {
-		if idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] && t.Released {
-			return true
+
+	// 默认一次通场只投一雷；配置了齐射的机型（如 A）要把本波鱼雷投完，
+	// 否则第一次齐射就会脱离，剩余鱼雷又要再绕一圈。
+	if plane.Weapon.SalvoSize <= 1 {
+		idx := len(plane.Weapon.Bombs)
+		for _, t := range plane.Weapon.Torpedoes {
+			if t != nil && t.CanDropOn(enemy) &&
+				idx < len(i.releaserSnapshot) && !i.releaserSnapshot[idx] && t.Released {
+				return true
+			}
+			idx++
 		}
-		idx++
 	}
-	return false
+	return !plane.HasUsableOrdnanceFor(enemy)
 }
 
 // Exec 执行飞机攻击指令。
@@ -117,8 +130,10 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		i.status = Executed
 		return nil
 	}
-	// 如果必须返航，则判定已经完成
+	// 如果必须返航，则判定已经完成；同时清空目标，避免返航途中仍被统计为
+	// 正在追击该目标，或被其他调度逻辑重新接回攻击流程。
 	if attacker.MustReturn() {
+		attacker.CurAttackTarget = ""
 		i.status = Executed
 		return nil
 	}
@@ -161,7 +176,7 @@ func (i *PlaneAttack) Exec(missionState *state.MissionState) error {
 		// 首次执行时拍摄快照，记录此刻各释放器的状态作为基准线
 		i.takeReleaserSnapshot(attacker)
 		// 炸弹投完 / 鱼雷新释放时脱离目标
-		if i.shouldDisengage(attacker) {
+		if i.shouldDisengage(attacker, enemy) {
 			attacker.CurAttackTarget = ""
 			i.status = Executed
 			return nil
