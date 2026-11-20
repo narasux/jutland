@@ -61,7 +61,9 @@ type AnalysisBrief struct {
 	RedScorecards     []ScoreGroup      `json:"redScorecards"`
 	ScenarioSummaries []ScenarioSummary `json:"scenarioSummaries"`
 	RecentRuns        []TrendPoint      `json:"recentRuns"`
-	Prompt            string            `json:"prompt"`
+	// Frame 来自 frame/history.jsonl：渲染帧门禁最近结果；没有样本时 Samples=0。
+	Frame  FrameTrend `json:"frame"`
+	Prompt string     `json:"prompt"`
 }
 
 // AnalysisOutput lists generated analysis files.
@@ -231,6 +233,14 @@ func WriteAnalysisBrief(paths Paths, limit int) (AnalysisOutput, error) {
 	if len(brief.RecentRuns) > 10 {
 		brief.RecentRuns = brief.RecentRuns[len(brief.RecentRuns)-10:]
 	}
+	frames, err := LoadFrameHistory(paths.Reports)
+	if err != nil {
+		return AnalysisOutput{}, err
+	}
+	if len(frames) > 50 {
+		frames = frames[len(frames)-50:]
+	}
+	brief.Frame = BuildFrameTrend(frames)
 	aiDir := filepath.Join(paths.Reports, "ai")
 	if err := os.MkdirAll(aiDir, 0o755); err != nil {
 		return AnalysisOutput{}, err
@@ -320,6 +330,25 @@ func analysisMarkdown(brief AnalysisBrief) string {
 				strings.Join(smallSample, "、"),
 			)
 		}
+	}
+	b.WriteString("## 渲染帧门禁\n\n")
+	if brief.Frame.Samples == 0 {
+		b.WriteString("无样本（尚未运行 `make sim-frame-gate`）。\n\n")
+	} else {
+		status := "pass"
+		if !brief.Frame.LatestPass {
+			status = "fail"
+		}
+		fmt.Fprintf(
+			&b,
+			"- latest p99 %.3f ms（%s，预算 %.1f ms）\n- avg %.3f ms / worst %.3f ms / samples %d\n\n",
+			brief.Frame.LatestP99MS,
+			status,
+			brief.Frame.BudgetMS,
+			brief.Frame.AvgP99MS,
+			brief.Frame.WorstP99MS,
+			brief.Frame.Samples,
+		)
 	}
 	b.WriteString("## 最近 Runs\n\n| started | fidelity | green | red | findings | ms |\n|---|---|---|---|---|---|\n")
 	for _, run := range brief.RecentRuns {
