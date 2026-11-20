@@ -588,7 +588,7 @@ func cmdEvaluation(args []string) error {
 		if err := sim.EvaluationGateError(report); err != nil {
 			return err
 		}
-		fmt.Println("gate: pass (no missing runs or smoke red items)")
+		fmt.Println("gate: pass (no missing runs, smoke reds or bug findings)")
 	}
 	return nil
 }

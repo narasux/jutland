@@ -57,8 +57,8 @@ func TestWriteEvaluationAggregatesSuite(t *testing.T) {
 // smoke 红（F2 合同作战/冒烟）表示引擎或场景真的坏了，都必须失败；
 // balance 红是「可能需要重新平衡」的信号，不应阻断提交流程。
 // 预期：干净报告返回 nil；Missing 非空返回含 missing 的错误；SmokeRed>0 返回含 smoke red 的错误；
-// 只有 BalanceRed>0 时返回 nil。
-// 覆盖：表驱动 4 个 EvaluationReport，调用 EvaluationGateError 断言错误存在性与关键字。
+// BugFindings>0 返回含 bug finding 的错误；只有 BalanceRed/BalanceFindings 时返回 nil。
+// 覆盖：表驱动 5 个 EvaluationReport，调用 EvaluationGateError 断言错误存在性与关键字。
 func TestEvaluationGateError(t *testing.T) {
 	cases := []struct {
 		name    string
@@ -68,7 +68,8 @@ func TestEvaluationGateError(t *testing.T) {
 		{name: "clean", report: EvaluationReport{Status: map[string]int{"green": 6}}},
 		{name: "missing", report: EvaluationReport{Missing: []string{"r9"}}, wantErr: "missing"},
 		{name: "smoke red", report: EvaluationReport{SmokeRed: 2}, wantErr: "smoke red"},
-		{name: "balance only", report: EvaluationReport{BalanceRed: 3}},
+		{name: "bug finding", report: EvaluationReport{BugFindings: 1}, wantErr: "bug finding"},
+		{name: "balance only", report: EvaluationReport{BalanceRed: 3, BalanceFindings: 2, DataFindings: 4}},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
