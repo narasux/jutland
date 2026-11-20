@@ -336,6 +336,17 @@ go run ./cmd/jutland-macro macro macro-pearl --runs 3 --ticks 12000
 metrics; multi-seed results add a success-rate scorecard row. The CLI suite uses
 separate processes for parallel seeds.
 
+`macro.objective.surviveTicks` adds an optional evaluation objective on top of the
+engine's annihilation rule: the side is judged by whether it stays alive until that
+tick (or wins early). It is a simulation-level overlay — mission status is unchanged;
+with the objective configured the report adds an `objective_met` metric and a 目标
+scorecard row. This lets defender-style missions be scored without redesigning the
+game's victory rules:
+
+```json5
+macro: { mission: "PearlHarbor1941", playerSide: "P1", objective: { surviveTicks: 12000 } }
+```
+
 F3 reports add mission status, ship/tonnage/aircraft losses, funds and a fleet
 survival chart. The 12k-tick sample ends in a real mission success; single seed,
 so it is not yet a statistical balance conclusion. Headless pathfinding runs

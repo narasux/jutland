@@ -230,6 +230,41 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		{Group: "初始", Name: "own_ships", Value: float64(initialOwn), Unit: "ships"},
 		{Group: "初始", Name: "enemy_ships", Value: float64(initialEnemy), Unit: "ships"},
 	}
+	dataQuality := []string{
+		"F3 完整战斗：生产任务状态 + 双方 computer controller + 任务/增援/经济。",
+		"无人类输入、无 UI/相机/音频；单 seed，不是统计结论。",
+		"任务名与玩家侧来自场景；同 seed 走 seeded RNG/稳定 ID/同步 targeting。",
+		"headless 寻路为同步执行；F3 同 seed 12000 tick 的指标/记分卡/ Findings 已可复现。",
+		"tick_p99_ms 是 headless 模拟 tick 的墙钟 p99，不是游戏帧时间；用于回归门禁，不包含绘制/音频。",
+	}
+	// 可选任务目标：在引擎「全歼」胜负之外，按场景要求判断本方是否坚持到指定拍数。
+	if spec.Objective != nil && spec.Objective.SurviveTicks > 0 {
+		met := macroObjectiveMet(status, m.SimulationTick(), spec.Objective.SurviveTicks)
+		objectiveStatus := "red"
+		objectiveValue := 0.0
+		if met {
+			objectiveStatus = "green"
+			objectiveValue = 1
+		}
+		scorecard = append(scorecard, sim.ScorecardItem{
+			Dimension: "目标",
+			Metric:    "survive",
+			Value: fmt.Sprintf(
+				"%d / %d ticks",
+				m.SimulationTick(),
+				spec.Objective.SurviveTicks,
+			),
+			Target: "met",
+			Status: objectiveStatus,
+		})
+		metrics = append(metrics, sim.MetricRow{
+			Group: "目标", Name: "objective_met", Value: objectiveValue, Unit: "bool",
+		})
+		dataQuality = append(dataQuality, fmt.Sprintf(
+			"objective: 要求坚持到第 %d 拍；仿真层评估，不改变任务状态。",
+			spec.Objective.SurviveTicks,
+		))
+	}
 	findings := make([]sim.Finding, 0)
 	if shots == 0 {
 		findings = append(findings, sim.Finding{
@@ -267,13 +302,7 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		Charts: sim.Charts{
 			Survival: survivalCurve(recorder.Sinks, initialOwn, m.SimulationTick()),
 		},
-		DataQuality: []string{
-			"F3 完整战斗：生产任务状态 + 双方 computer controller + 任务/增援/经济。",
-			"无人类输入、无 UI/相机/音频；单 seed，不是统计结论。",
-			"任务名与玩家侧来自场景；同 seed 走 seeded RNG/稳定 ID/同步 targeting。",
-			"headless 寻路为同步执行；F3 同 seed 12000 tick 的指标/记分卡/ Findings 已可复现。",
-			"tick_p99_ms 是 headless 模拟 tick 的墙钟 p99，不是游戏帧时间；用于回归门禁，不包含绘制/音频。",
-		},
+		DataQuality: dataQuality,
 	}, nil
 }
 
@@ -360,4 +389,21 @@ func zeroStatus(value int) string {
 
 func round3(v float64) float64 {
 	return float64(int(v*1000+0.5)) / 1000
+}
+
+// macroObjectiveMet 判断可选任务目标是否达成。
+// 提前全歼敌人（success）视为达成；中途全灭（failed）视为失败；
+// 其余状态（running/暂停）要求运行拍数达到 surviveTicks。
+func macroObjectiveMet(status state.MissionStatus, ticks, surviveTicks int64) bool {
+	if surviveTicks <= 0 {
+		return false
+	}
+	switch status {
+	case state.MissionSuccess:
+		return true
+	case state.MissionFailed:
+		return false
+	default:
+		return ticks >= surviveTicks
+	}
 }

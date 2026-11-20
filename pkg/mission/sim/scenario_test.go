@@ -166,3 +166,33 @@ func TestLoadScenarioParsesEnablePenetration(t *testing.T) {
 	disabled := write("pen-off.json5", "")
 	require.False(t, disabled.Environment.EnablePenetration)
 }
+
+// TestLoadScenarioParsesMacroObjective 验证 F3 场景可以配置可选的坚持目标，并拒绝非法拍数。
+// 场景：防守型任务需要「坚持到 N 拍」这种叠加目标；未配置时不能悄悄启用，
+// surviveTicks<=0 的配置必须在加载阶段报错而不是当成 0 拍即达成。
+// 预期：surviveTicks=9000 解析进 Macro.Objective；未写 objective 时为 nil；
+// objective.surviveTicks=0 的加载返回包含 surviveTicks 的错误。
+// 覆盖：三个临时 JSON5，分别 LoadScenario 断言指针/数值或错误文本。
+func TestLoadScenarioParsesMacroObjective(t *testing.T) {
+	dir := t.TempDir()
+	write := func(name, extra string) string {
+		t.Helper()
+		path := filepath.Join(dir, name)
+		body := `{ name: "` + name + `", mode: "macro", macro: { mission: "PearlHarbor1941", playerSide: "P1", maxTicks: 12000` + extra + ` } }`
+		require.NoError(t, os.WriteFile(path, []byte(body), 0o644))
+		return path
+	}
+
+	sc, err := LoadScenario(write("objective.json5", `, objective: { surviveTicks: 9000 }`))
+	require.NoError(t, err)
+	require.NotNil(t, sc.Macro.Objective)
+	require.Equal(t, int64(9000), sc.Macro.Objective.SurviveTicks)
+
+	plain, err := LoadScenario(write("plain.json5", ""))
+	require.NoError(t, err)
+	require.Nil(t, plain.Macro.Objective)
+
+	_, err = LoadScenario(write("bad.json5", `, objective: { surviveTicks: 0 }`))
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "surviveTicks")
+}
