@@ -7791,25 +7791,25 @@
       ],
       bombs: [
         {
-          name: "US/BB/907/AN-M66",
+          name: "SE/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/BB/907/AN-M66",
+          name: "SE/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/BB/907/AN-M66",
+          name: "SE/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/BB/907/AN-M66",
+          name: "SE/BB/907/AN-M66",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
@@ -7883,25 +7883,25 @@
       ],
       torpedoes: [
         {
-          name: "US/AST/570/Mk13",
+          name: "SE/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/AST/570/Mk13",
+          name: "SE/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/AST/570/Mk13",
+          name: "SE/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
         },
         {
-          name: "US/AST/570/Mk13",
+          name: "SE/AST/570/Mk13",
           posPercent: 0.3,
           rightFiringArc: [0, 90],
           leftFiringArc: [270, 360]
