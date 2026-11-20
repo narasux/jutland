@@ -65,6 +65,13 @@ type Hit struct {
 	Critical        int            `json:"critical"`
 	FriendlyFire    bool           `json:"friendlyFire"`
 	Killed          bool           `json:"killed"`
+	// 以下字段仅在 config.G.EnablePenetration 打开且命中舰船时填充；未启用时保持零值。
+	PenetrationMM    float64 `json:"penetrationMm,omitempty"`
+	ArmorMM          float64 `json:"armorMm,omitempty"`
+	EffectiveArmorMM float64 `json:"effectiveArmorMm,omitempty"`
+	PenetrationRatio float64 `json:"penetrationRatio,omitempty"`
+	Penetrated       bool    `json:"penetrated,omitempty"`
+	Overmatch        bool    `json:"overmatch,omitempty"`
 }
 
 // Sink is a ship removed from the arena.

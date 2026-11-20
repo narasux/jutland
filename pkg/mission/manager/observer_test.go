@@ -5,6 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
@@ -241,4 +242,54 @@ func BenchmarkObserveShotsRecorder(b *testing.B) {
 		recorder.Reset()
 		m.observeShots(bullets)
 	}
+}
+
+// TestObserverHitCarriesPenetrationWhenEnabled 验证穿甲开关打开时命中事件带几何穿甲结果。
+// 场景：enablePenetration=true，300mm 穿深弹以 0° 落角命中 ArmorMM=150 的舰船；
+// 新机制的 A/B 报告需要区分「打穿/未穿」，否则只能看总伤害，无法归因到具体命中。
+// 预期：Hit 的 PenetrationMM=300、ArmorMM=150、EffectiveArmorMM=150、Ratio=2、
+// Penetrated/Overmatch=true；关闭开关后再次命中，ArmorMM/Ratio 保持零值（不回填实验模型数据）。
+// 覆盖：直接调用 hurtShip 两次（config.G 开/关），分别断言 Recorder.Hits 的穿甲字段。
+func TestObserverHitCarriesPenetrationWhenEnabled(t *testing.T) {
+	oldG := config.G
+	t.Cleanup(func() { config.G = oldG })
+	config.G = &config.GameSettings{EnablePenetration: true}
+
+	ship := &objUnit.BattleShip{
+		Uid: "target", Name: "Target", Type: objUnit.ShipTypeDestroyer,
+		CurHP: 1000, BelongPlayer: faction.ComputerAlpha, ArmorMM: 150,
+	}
+	recorder := &observer.Recorder{}
+	m := &MissionManager{state: &state.MissionState{}}
+	m.state.Stats = state.NewBattleStats()
+	m.state.Arena.Ships = map[string]*objUnit.BattleShip{"target": ship}
+	m.SetObserver(recorder)
+
+	fire := func() *objBullet.Bullet {
+		bt := &objBullet.Bullet{
+			Name: "TEST/AP/300", Type: objBullet.TypeShell, Damage: 10, PenetrationMM: 300,
+			Shooter: "a", ShooterName: "Attacker", ShooterObjType: object.TypeShip,
+			BelongPlayer: faction.HumanAlpha, TargetObjType: object.TypeShip,
+		}
+		m.hurtShip(ship, bt)
+		return bt
+	}
+
+	fire()
+	require.Len(t, recorder.Hits, 1)
+	hit := recorder.Hits[0]
+	require.Equal(t, 300.0, hit.PenetrationMM)
+	require.Equal(t, 150.0, hit.ArmorMM)
+	require.Equal(t, 150.0, hit.EffectiveArmorMM)
+	require.InDelta(t, 2.0, hit.PenetrationRatio, 1e-9)
+	require.True(t, hit.Penetrated)
+	require.True(t, hit.Overmatch)
+
+	config.G.EnablePenetration = false
+	fire()
+	require.Len(t, recorder.Hits, 2)
+	disabled := recorder.Hits[1]
+	require.Zero(t, disabled.ArmorMM)
+	require.Zero(t, disabled.PenetrationRatio)
+	require.False(t, disabled.Penetrated)
 }

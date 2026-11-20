@@ -67,6 +67,8 @@ func RunDuel(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 
 	var shots, hits, friendly, ownSinks, enemySinks, wins, losses int
 	var planeShots, planeHits, planeKills, aircraftLosses, subShots, aswShots int
+	var penetrationHits, penetratedHits int
+	var penetrationRatioSum float64
 	var applied, effective, overkill float64
 	var ownLostCost, enemyLostCost float64
 	ttks := make([]float64, 0, runs)
@@ -97,6 +99,14 @@ func RunDuel(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 			applied += hit.AppliedDamage
 			effective += hit.EffectiveDamage
 			overkill += hit.Overkill
+			// ArmorMM 非零代表这条命中带穿甲信息（observer 只在开关打开时回填）。
+			if hit.ArmorMM > 0 {
+				penetrationHits++
+				penetrationRatioSum += hit.PenetrationRatio
+				if hit.Penetrated {
+					penetratedHits++
+				}
+			}
 		}
 		for _, sink := range t.recorder.Sinks {
 			cost := t.costByUID[sink.TargetUID]
@@ -210,6 +220,22 @@ func RunDuel(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		{Group: "空中", Name: "aircraft_losses", Value: float64(aircraftLosses), Unit: "planes"},
 		{Group: "水下", Name: "sub_shots", Value: float64(subShots), Unit: "shots"},
 		{Group: "水下", Name: "asw_shots", Value: float64(aswShots), Unit: "shots"},
+	}
+	// 穿甲指标只在开关打开、命中带穿甲信息时出现，避免普通对射报告里全是 0。
+	if penetrationHits > 0 {
+		metrics = append(
+			metrics,
+			sim.MetricRow{
+				Group: "穿甲", Name: "penetration_hits", Value: float64(penetrationHits), Unit: "hits",
+			},
+			sim.MetricRow{
+				Group: "穿甲", Name: "penetrated_hits", Value: float64(penetratedHits), Unit: "hits",
+			},
+			sim.MetricRow{
+				Group: "穿甲", Name: "penetration_ratio_mean",
+				Value: round3(penetrationRatioSum / float64(penetrationHits)), Unit: "x",
+			},
+		)
 	}
 	findings := make([]sim.Finding, 0)
 	prefix := "F1"

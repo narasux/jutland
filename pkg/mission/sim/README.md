@@ -274,6 +274,11 @@ global game settings for the duration of a run and restored afterwards, so a sce
 can A/B a mechanic (e.g. the opt-in penetration model) without touching
 `configs/game_settings.json5`.
 
+With `enablePenetration` on, observer `Hit` events carry the same geometric result
+(`penetrationMm`, `armorMm`, `effectiveArmorMm`, `penetrationRatio`, `penetrated`,
+`overmatch`), and duel reports add `penetration_hits`, `penetrated_hits` and
+`penetration_ratio_mean` so the A/B can be attributed to individual hits.
+
 ### F2 combined-arms smoke (P6, partial)
 
 `testdata/duel-carrier.json5` exercises carrier sortie/aircraft weapons,

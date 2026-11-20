@@ -1,9 +1,11 @@
 package manager
 
 import (
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	objDamage "github.com/narasux/jutland/pkg/mission/object/damage"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/observer"
 )
@@ -68,7 +70,18 @@ func (m *MissionManager) observeHit(
 	if kind == "" {
 		kind = "direct"
 	}
-	m.combatObserver.OnHit(observer.Hit{
+	// 穿甲开关打开时，用与 HurtBy 完全相同的几何模型回填命中信息；
+	// 关闭时保持零值，避免报告把「实验模型的假设」当成实际结算结果。
+	var penetration objDamage.PenetrationResult
+	hasPenetration := false
+	if !targetIsPlane && bt.PenetrationMM > 0 &&
+		config.G != nil && config.G.EnablePenetration {
+		if ship := m.state.Arena.Ships[targetUID]; ship != nil && ship.ArmorMM > 0 {
+			penetration = objDamage.ResolvePenetration(bt.PenetrationMM, ship.ArmorMM, bt.Plunge*60)
+			hasPenetration = true
+		}
+	}
+	hit := observer.Hit{
 		Tick:            objUnit.SimTick(),
 		ShooterUID:      bt.Shooter,
 		ShooterName:     bt.ShooterName,
@@ -93,7 +106,16 @@ func (m *MissionManager) observeHit(
 		Critical:        int(bt.CriticalType),
 		FriendlyFire:    bt.BelongPlayer == targetPlayer,
 		Killed:          hpAfter <= 0,
-	})
+	}
+	if hasPenetration {
+		hit.PenetrationMM = penetration.PenetrationMM
+		hit.ArmorMM = penetration.ArmorMM
+		hit.EffectiveArmorMM = penetration.EffectiveArmorMM
+		hit.PenetrationRatio = penetration.Ratio
+		hit.Penetrated = penetration.Penetrated
+		hit.Overmatch = penetration.Overmatch
+	}
+	m.combatObserver.OnHit(hit)
 }
 
 // observeSink emits after RecordShipLost, before CurHP is reused for the
