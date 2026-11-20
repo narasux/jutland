@@ -337,3 +337,72 @@ func TestEveryPlaneHasYear(t *testing.T) {
 		}
 	}
 }
+
+// TestSpecialPlanesUseDedicatedLongRangeOrdnance 验证彩蛋机 A/B 使用独立远距释放器且史实机射程不变。
+// 场景：攻击机 A 的鱼雷、轰炸机 B 的炸弹原先复用 TBF-1/TBD-1-UK 的 US/AST/570/Mk13 与
+// SBD-3/SB2C-4 的 US/BB/907/AN-M66；要提高 A/B 投放距离又不想顺带增强史实机，只能给它们
+// 各挂一条 SE 专用释放器。若改回共用条，A/B 会退回 3 格 / 1.5 格投放；若直接改共用条，
+// TBF-1 / SBD-3 会被一起增强。
+// 预期：A 的 4 个鱼雷释放器都是 SE/AST/570/Mk13、Range=6、仍投 US/TB/570/1938/Mk13；
+// B 的 4 个炸弹释放器都是 SE/BB/907/AN-M66、Range=4.5、仍投 US/BB/2000/907；
+// TBF-1 的 US/AST/570/Mk13 与 SBD-3 的 US/BB/907/AN-M66 保持 3 与 1.5。
+// 覆盖：从 PlaneMap 取 A/B/TBF-1/SBD-3，逐挂载断言 Name/Range/BulletName；失败输出实际三元组。
+func TestSpecialPlanesUseDedicatedLongRangeOrdnance(t *testing.T) {
+	plane := func(name string) *objUnit.Plane {
+		t.Helper()
+		p, ok := objUnit.PlaneMap[name]
+		if !ok {
+			t.Fatalf("plane %s missing from PlaneMap", name)
+		}
+		return p
+	}
+	findReleaser := func(releasers []*objUnit.Releaser, name string) *objUnit.Releaser {
+		for _, r := range releasers {
+			if r.Name == name {
+				return r
+			}
+		}
+		return nil
+	}
+
+	attackPlane := plane("A")
+	if len(attackPlane.Weapon.Torpedoes) != 4 {
+		t.Fatalf("A torpedoes = %d, want 4", len(attackPlane.Weapon.Torpedoes))
+	}
+	for _, torpedo := range attackPlane.Weapon.Torpedoes {
+		if torpedo.Name != "SE/AST/570/Mk13" ||
+			math.Abs(torpedo.Range-6) > 1e-9 ||
+			torpedo.BulletName != "US/TB/570/1938/Mk13" {
+			t.Errorf(
+				"A torpedo = (%s, %.2f, %s), want (SE/AST/570/Mk13, 6.00, US/TB/570/1938/Mk13)",
+				torpedo.Name, torpedo.Range, torpedo.BulletName,
+			)
+		}
+	}
+
+	bomber := plane("B")
+	if len(bomber.Weapon.Bombs) != 4 {
+		t.Fatalf("B bombs = %d, want 4", len(bomber.Weapon.Bombs))
+	}
+	for _, bomb := range bomber.Weapon.Bombs {
+		if bomb.Name != "SE/BB/907/AN-M66" ||
+			math.Abs(bomb.Range-4.5) > 1e-9 ||
+			bomb.BulletName != "US/BB/2000/907" {
+			t.Errorf(
+				"B bomb = (%s, %.2f, %s), want (SE/BB/907/AN-M66, 4.50, US/BB/2000/907)",
+				bomb.Name, bomb.Range, bomb.BulletName,
+			)
+		}
+	}
+
+	if shared := findReleaser(plane("TBF-1").Weapon.Torpedoes, "US/AST/570/Mk13"); shared == nil {
+		t.Error("TBF-1 missing shared torpedo US/AST/570/Mk13")
+	} else if math.Abs(shared.Range-3) > 1e-9 {
+		t.Errorf("TBF-1 shared torpedo range = %.2f, want 3.00", shared.Range)
+	}
+	if shared := findReleaser(plane("SBD-3").Weapon.Bombs, "US/BB/907/AN-M66"); shared == nil {
+		t.Error("SBD-3 missing shared bomb US/BB/907/AN-M66")
+	} else if math.Abs(shared.Range-1.5) > 1e-9 {
+		t.Errorf("SBD-3 shared bomb range = %.2f, want 1.50", shared.Range)
+	}
+}
