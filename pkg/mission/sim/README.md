@@ -2,6 +2,8 @@
 
 Headless simulation workspace, scenario loading and report rendering.
 
+User-facing guide (capabilities, commands, workflow): [docs/simulation/README.md](../../docs/simulation/README.md).
+
 ## Status (P1–P4)
 
 This package currently implements the **report/reporting skeleton** and a synthetic
