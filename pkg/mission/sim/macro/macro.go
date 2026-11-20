@@ -6,6 +6,7 @@ package macro
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"sort"
 	"time"
 
@@ -57,6 +58,25 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		tickDurations = append(tickDurations, time.Since(tickStart))
 		if err != nil {
 			return nil, err
+		}
+		// MACRO_DEBUG 每 3000 拍打印一次存活舰船，用于定位 F3 僵持（谁停在原地、
+		// 谁还有目标、潜艇是否仍被探测）。默认关闭，不影响正式结果。
+		if os.Getenv("MACRO_DEBUG") != "" && tick%3000 == 0 {
+			fmt.Printf("DBGM t=%d status=%s ships=%d\n", tick, status, len(m.State().Arena.Ships))
+			for _, sh := range m.State().Arena.Ships {
+				fmt.Printf(
+					"  %s %s p=%v hp=%.0f pos=(%.1f,%.1f) atk=%q dive=%v det=%d\n",
+					sh.Uid,
+					sh.Name,
+					sh.BelongPlayer,
+					sh.CurHP,
+					sh.CurPos.RX,
+					sh.CurPos.RY,
+					sh.AttackTarget,
+					sh.DiveState,
+					len(sh.DetectedBy),
+				)
+			}
 		}
 		if status != state.MissionRunning {
 			break
