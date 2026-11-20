@@ -73,6 +73,12 @@ CPU / 显卡要求木有很高，但过低估计会卡帧（因为目前有些�
 make build && ./jutland
 ```
 
+### 仿真与平衡评估
+
+仓库自带一套不启动游戏窗口的仿真/平衡评估工具（F0 纯公式 → F3 AI vs AI 完整任务），
+可以跑可复现实验并产出 HTML / AI 报告、趋势与回归门禁。功能说明与命令见
+[仿真与平衡评估指南](docs/simulation/README.md)。
+
 ## 参考资料
 
 - [Ebiten Engine](https://ebitengine.org/)
