@@ -2,16 +2,21 @@
 
 Headless simulation workspace, scenario loading and report rendering.
 
-User-facing guide (capabilities, commands, workflow): [docs/simulation/README.md](../../docs/simulation/README.md).
+User-facing guide (capabilities, commands, workflow): [docs/simulation/README.md](../../../docs/simulation/README.md).
 
-## Status (P1–P4)
+## Status
 
-This package currently implements the **report/reporting skeleton** and a synthetic
-demo run (`Mock: true`). P2's production observer is in `pkg/mission/observer`;
-the headless runner that consumes it lands in P3/P4.
+The package implements the full simulation stack behind the CLI tools: F0 shot and
+penetration benches, F1/F2 duels, F3 AI-vs-AI missions, suite evaluation, trend and
+analysis briefs, baselines, the rendered-frame gate and the nightly workflow. F1–F3
+import the game's unit/config initialization and need an Ebiten-capable session (no
+window is opened); F0 runs without it. Known limitations are documented in the
+[user guide](../../../docs/simulation/README.md).
 
 Implemented:
 
+- F0–F3 runners (`jutland-sim shot`/`penetration`, `jutland-duel`, `jutland-macro`)
+  and the suite driver (`jutland-suite`);
 - required `JUTLAND_SIM_HOME` (no default, empty/whitespace is an error);
 - `init` lab skeleton, scenario JSON5 parsing/validation;
 - run metadata: time, commit, branch, dirty worktree, worktree hash;
@@ -21,7 +26,7 @@ Implemented:
 - `manifest.json`, `result.json`, `replay.json`, `checksums.sha256`;
 - append-only `reports/history.jsonl` and `reports/index.html`.
 
-P2 (separate package, already wired into production):
+Observer (separate package, already wired into production):
 
 - `pkg/mission/observer` defines `Shot`, `Hit`, `Sink`, `Loss` and a `Recorder`;
 - `MissionManager.SetObserver` attaches it; default is nil;
@@ -29,7 +34,7 @@ P2 (separate package, already wired into production):
   (including AoE/friendly fire); sink/loss events from the removal loops;
 - observer-disabled benchmark: 10 bullets ~1.4 ns, 0 allocs/op.
 
-P3 hooks (production defaults unchanged; headless runner wires them in P4):
+Determinism hooks (production defaults unchanged; the runners set them per run):
 
 - `unit.SetNowMillis` for carrier takeoff / healing / construction; duel 和 macro runner
   都用 `unit.SimClockMillis` 把它接到 `unit.SimTick()` 上，冷却按模拟拍推进而不是真实耗时；
@@ -68,12 +73,13 @@ go run ./cmd/jutland-sim run --mock demo-report
 
 `JUTLAND_SIM_REPORT_DIR` optionally overrides the report directory; `--out` wins.
 
-## Trend (P9, partial)
+## Trend
 
 `jutland-sim trend [--limit N]` reads `reports/history.jsonl` and writes
 `trend.html`, `trend.md` and `ai/trend.json`. It shows per-run scorecard counts,
-new findings, fidelity and runtime; `index.html` links to it. This is the first
-periodic/LLM-analysis building block, not yet a scheduler.
+new findings, fidelity and runtime; `index.html` links to it. `tools/sim-periodic.sh`
+wraps the same refresh for cron/launchd, and `make sim-schedule-install` installs the
+opt-in daily launchd job.
 
 The rendered-frame gate (`make sim-frame-gate` / `jutland-frame`) appends each
 result to `reports/frame/history.jsonl` when `JUTLAND_SIM_HOME` is set; trend
@@ -82,10 +88,11 @@ frame-time regressions show up next to the simulation runs.
 
 ## Nightly run (optional)
 
-`make sim-nightly` runs the `full-evaluation` suite with `--fail-on-red` (missing runs
-or smoke red items fail the job), then the rendered-frame gate (skipped when no
-graphical session is available), then `trend`/`analyze`; the failing report is still
-generated because trend/analyze always run. It requires `JUTLAND_SIM_HOME`.
+`make sim-nightly` runs the rendered-frame gate first (it needs a clean graphical
+session), then the `full-evaluation` suite with `--fail-on-red` (missing runs, smoke
+reds or bug findings fail the job), then the coverage suites, then `trend`/`analyze`;
+the failing report is still generated because trend/analyze always run. It requires
+`JUTLAND_SIM_HOME`.
 Set `SIM_NIGHTLY_SUITE=small` for the quick `tools/sim-suite.sh` matrix, and
 `SIM_NIGHTLY_ARCHIVE=1` to move runs older than `SIM_KEEP_RUNS` (default 100) to the
 archive after the run.
@@ -149,7 +156,7 @@ call. Output: `reports/llm/<run>/llm-review.md` + `llm-review.json` (content,
 model, token usage). The endpoint is fixed in code; the key is never logged. It is a deterministic aggregation step; no external LLM
 call is made.
 
-## Suite manifests (P9)
+## Suite manifests
 
 `jutland-suite suite <manifest>` runs JSON5 steps under the lab `suites/` dir:
 
@@ -207,14 +214,14 @@ scenario, penetration mm, reference armor mm, reference ratio, the largest armor
 can penetrate and how many AP sample points penetrate. This makes shell-vs-armor
 tradeoffs comparable across calibers without reading each run report.
 
-## Previous-run diff (P9, first pass)
+## Previous-run diff
 
 Every report now tries to find the previous same-scenario run before writing
 history. If found, `result.json.previousDiff` is embedded and the HTML/Markdown
 reports show metric deltas, scorecard changes, added findings and gone findings.
 The first run of a scenario has no diff section.
 
-## In-game debug recording (P8, partial)
+## In-game debug recording
 
 ```bash
 JUTLAND_DEBUG_RECORD_DIR="$JUTLAND_SIM_HOME/reports/recordings" ./jutland
@@ -230,14 +237,14 @@ go run ./cmd/jutland-sim compare-record <record.jsonl> <run-id>
 
 This is an event-level calibration aid, not a full replay.
 
-## Archive (P9)
+## Archive
 
 `jutland-sim archive --keep N` moves older `reports/runs/*` into
 `reports/archive/<timestamp>/runs/`, writes the archived `history.jsonl`, trims
 the live history and rewrites `index.html`. It is opt-in and non-destructive
 (no delete); `make sim-archive` always starts with `--dry-run`.
 
-## Penetration matrix (P10, opt-in)
+## Penetration matrix (opt-in)
 
 `jutland-sim penetration penetration-127mm` runs a pure geometric AP/HE matrix
 (`penetrationMM` vs angle-adjusted armor). It writes the usual F0 report and a
@@ -247,7 +254,7 @@ Production `HurtBy` has an **opt-in** experimental hook: set
 `enablePenetration: true` in `configs/game_settings.json5`. Defaults to false;
 when false, damage is byte-for-byte the old `ResolveShip` path.
 
-## Baselines (P8)
+## Baselines
 
 A lab-owned baseline is a JSON metric snapshot under `$JUTLAND_SIM_HOME/baselines/`:
 
@@ -274,7 +281,7 @@ Snapshot a run without hand-editing JSON:
 go run ./cmd/jutland-sim baseline <run-id> --name f0-auto --tolerance 'mean_applied_damage=1,kill_rate=1'
 ```
 
-## F0 damage bench (P4)
+## F0 damage bench
 
 `shot` mode uses the pure `pkg/mission/object/damage` formula and does not import
 Ebiten or load game resources. A scenario defines target HP/armor, base damage,
@@ -289,7 +296,7 @@ go run ./cmd/jutland-sim shot shot-f0 --runs 100
 The report is `mock: false` with `fidelity: F0`; F0 only validates damage formulas
 and known answers, not hit rate, ship configuration or map/AI behavior.
 
-### F1 real-config duel (P4)
+### F1 real-config duel
 
 `jutland-duel` runs one single-ship duel through the production `FireAt` /
 `updateShotBullets` path using real `ShipMap`/`GunMap`/`BulletMap`:
@@ -318,7 +325,7 @@ With `enablePenetration` on, observer `Hit` events carry the same geometric resu
 `overmatch`), and duel reports add `penetration_hits`, `penetrated_hits` and
 `penetration_ratio_mean` so the A/B can be attributed to individual hits.
 
-### F2 combined-arms smoke (P6, partial)
+### F2 combined-arms smoke
 
 `testdata/duel-carrier.json5` exercises carrier sortie/aircraft weapons,
 `testdata/duel-sub.json5` a submerged submarine vs a surface ship,
@@ -328,7 +335,7 @@ With `enablePenetration` on, observer `Hit` events carry the same geometric resu
 and add plane/sub metrics. Map support is available via optional `duel.terrain`
 ASCII rows.
 
-### F3 full AI-vs-AI mission (P7, partial)
+### F3 full AI-vs-AI mission
 
 `testdata/macro-pearl.json5` runs `PearlHarbor1941` with both sides on the
 production computer controller, full mission state, task/economy and headless
@@ -355,8 +362,8 @@ macro: { mission: "PearlHarbor1941", playerSide: "P1", objective: { surviveTicks
 ```
 
 F3 reports add mission status, ship/tonnage/aircraft losses, funds and a fleet
-survival chart. The 12k-tick sample ends in a real mission success; single seed,
-so it is not yet a statistical balance conclusion. Headless pathfinding runs
+survival chart. The 12k-tick sample ends with a real mission outcome; single seed,
+so it is not a statistical balance conclusion. Headless pathfinding runs
 inline; F3 same-seed 12000-tick metrics are reproducible (covered by macro tests).
 
 ## Report layout
@@ -381,7 +388,7 @@ $JUTLAND_SIM_HOME/reports/
 
 - `report.html` uses ECharts 6.1.0 from jsDelivr with SRI; if CDN fails, the static
   SVG fallback is shown via the `no-echarts` CSS class.
-- Archived runs will default to a local ECharts asset in a later phase; P1 uses CDN.
+- Reports load ECharts from the CDN; the static SVG fallback keeps them readable offline.
 - Scenario/golden/baseline/history data belongs in the private lab repo, not this one.
   The game repo only keeps tool code plus small smoke testdata.
 - Metrics in `demo` mode are synthetic. Do not use them for balance decisions.
