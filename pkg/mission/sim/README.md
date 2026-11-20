@@ -269,6 +269,11 @@ Multi-ship/fleet sample: `testdata/duel-fleet.json5` (2v1, focus doctrine, 5 see
 F1 reports include win rate, exchange ratio, TTK, cost lost and a fleet-survival
 chart; AI context remains table-oriented.
 
+`environment.speedMultiplier` and `environment.enablePenetration` are written into the
+global game settings for the duration of a run and restored afterwards, so a scenario
+can A/B a mechanic (e.g. the opt-in penetration model) without touching
+`configs/game_settings.json5`.
+
 ### F2 combined-arms smoke (P6, partial)
 
 `testdata/duel-carrier.json5` exercises carrier sortie/aircraft weapons,

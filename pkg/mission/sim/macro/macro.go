@@ -9,7 +9,6 @@ import (
 	"sort"
 	"time"
 
-	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
@@ -27,9 +26,8 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 	if sc.Mode != sim.ModeMacro {
 		return nil, fmt.Errorf("scenario mode is %q, want macro", sc.Mode)
 	}
-	if config.G == nil {
-		config.G = config.NewDefaultGameSettings()
-	}
+	restoreEnv := sim.ApplyEnvironment(sc)
+	defer restoreEnv()
 	spec := sc.Macro
 	oldTick := objUnit.SimTick()
 	objUnit.SetSimTick(0)
