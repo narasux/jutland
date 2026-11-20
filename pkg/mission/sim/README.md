@@ -114,8 +114,9 @@ graphical login rather than a headless server.
 
 `jutland-sim analyze [--limit N]` writes `ai/analysis-brief.md` and
 `ai/analysis-brief.json`: recurring findings, recurring red scorecards,
-per-scenario multi-run means (shots/losses/p99), finding lifecycle
-(first/last/fixed), recent runs and an LLM prompt.
+per-scenario multi-run means with min~max spread and a small-sample warning,
+the latest rendered-frame gate, finding lifecycle (first/last/fixed), recent runs
+and an LLM prompt.
 
 `jutland-sim llm-package <run>` copies only `analysis-context.md`,
 findings/metrics/diagnostics/changes and `llm-prompt.md` into
