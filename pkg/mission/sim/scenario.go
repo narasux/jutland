@@ -38,6 +38,8 @@ type Environment struct {
 	Fog             bool    `json:"fog"`
 	FriendlyFire    bool    `json:"friendlyFire"`
 	SpeedMultiplier float64 `json:"speedMultiplier"`
+	// EnablePenetration 按局开启生产穿甲伤害模型（默认关闭），用于 A/B 评估新机制。
+	EnablePenetration bool `json:"enablePenetration"`
 }
 
 // UnitSpec is a single ship or aircraft in a scenario.

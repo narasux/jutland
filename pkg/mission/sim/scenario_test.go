@@ -5,6 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 // TestLoadScenarioAppliesDefaults 验证 JSON5 场景的默认值、slug 与稳定 hash。
@@ -140,4 +142,27 @@ func TestResolveScenarioPath(t *testing.T) {
 	if _, err := ResolveScenarioPath(paths, " "); err == nil {
 		t.Fatal("empty scenario path should error")
 	}
+}
+
+// TestLoadScenarioParsesEnablePenetration 验证场景可以按局开启生产穿甲伤害开关。
+// 场景：穿甲伤害是实验性机制（默认关闭）；旧场景没有该字段时不能悄悄打开，
+// 新场景显式写 environment.enablePenetration: true 时才生效。
+// 预期：写 true 的场景解析为 true；省略字段的场景为 false。
+// 覆盖：两个临时 JSON5，LoadScenario 后断言 Environment.EnablePenetration。
+func TestLoadScenarioParsesEnablePenetration(t *testing.T) {
+	dir := t.TempDir()
+	write := func(name, extra string) *Scenario {
+		t.Helper()
+		path := filepath.Join(dir, name)
+		body := `{ name: "` + name + `", mode: "duel", duel: { shooterShip: "jiujiang", targetShip: "jiujiang" }` + extra + ` }`
+		require.NoError(t, os.WriteFile(path, []byte(body), 0o644))
+		sc, err := LoadScenario(path)
+		require.NoError(t, err)
+		return sc
+	}
+
+	enabled := write("pen-on.json5", `, environment: { enablePenetration: true }`)
+	require.True(t, enabled.Environment.EnablePenetration)
+	disabled := write("pen-off.json5", "")
+	require.False(t, disabled.Environment.EnablePenetration)
 }

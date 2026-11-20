@@ -51,6 +51,8 @@ func RunDuel(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 	if config.G == nil {
 		config.G = config.NewDefaultGameSettings()
 	}
+	restoreEnv := sim.ApplyEnvironment(sc)
+	defer restoreEnv()
 	runs := max(sc.Runs, 1)
 	start := time.Now()
 	trials := make([]trial, 0, runs)
