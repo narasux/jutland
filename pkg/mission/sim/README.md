@@ -80,9 +80,13 @@ frame-time regressions show up next to the simulation runs.
 
 ## Nightly run (optional)
 
-`make sim-nightly` runs the small suite (`shot` + one duel + three macro seeds),
-then the rendered-frame gate (skipped when no graphical session is available),
-then `trend`/`analyze`. It requires `JUTLAND_SIM_HOME`.
+`make sim-nightly` runs the `full-evaluation` suite with `--fail-on-red` (missing runs
+or smoke red items fail the job), then the rendered-frame gate (skipped when no
+graphical session is available), then `trend`/`analyze`; the failing report is still
+generated because trend/analyze always run. It requires `JUTLAND_SIM_HOME`.
+Set `SIM_NIGHTLY_SUITE=small` for the quick `tools/sim-suite.sh` matrix, and
+`SIM_NIGHTLY_ARCHIVE=1` to move runs older than `SIM_KEEP_RUNS` (default 100) to the
+archive after the run.
 
 To schedule it daily at 10:00 local time, install the per-user launchd job
 explicitly (nothing is installed by default):
