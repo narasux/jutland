@@ -6,7 +6,7 @@ import (
 
 // HitInfo 最近一次命中使用的武器与实际伤害，供战报详情展示。
 type HitInfo struct {
-	// WeaponType shell / torpedo / bomb / rocket / laser
+	// WeaponType shell / torpedo / bomb / rocket / laser / ram
 	WeaponType string
 	// Diameter 口径整数（旧字段；精确值优先看 Caliber）
 	Diameter int

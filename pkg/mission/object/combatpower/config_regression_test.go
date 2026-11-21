@@ -116,27 +116,25 @@ func TestJapanese25mmRateMatchesHistory(t *testing.T) {
 	}
 }
 
-// TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir 验证“水滴可对空、巨型剑鱼只能对舰”的撞击武器区分。
-// 场景：waterdrop（1HP、水平/垂直免伤 100%）与 swordfish（100000HP、无减伤）使用同一撞击炮弹
-// （SE/GB/1/2048、3 发、0.001s、1.5 射程），但 Impact 对空、SwordfishImpact 仅对舰。
-// 预期：Impact 的 AntiShip/AntiAircraft 均为 true，SwordfishImpact 仅 AntiShip；水滴对舰对空战力为正，
-// 剑鱼 AntiAir=0 且对舰为正；两舰 Details.AntiShipDPS 相等；水滴 Survival/Total 均高于剑鱼。
-// 覆盖：GunMap 两门撞击炮能力位、CombatPower 对舰/对空轴、有效对舰 DPS 相等与免伤舰体生存排序。
-func TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir(t *testing.T) {
+// TestWaterDropAndSwordfishRamProfilesDifferInAntiAir 验证“水滴可撞机、巨大剑鱼只能撞舰”的特殊单位差异。
+// 场景：waterdrop（1HP、水平/垂直免伤 100%）与 swordfish（100000HP、无减伤）都配置了
+// 撞击（水滴 10000000、剑鱼 300000，均 2s 冷却、alwaysOn），但只有水滴 canHitPlanes=true。
+// 预期：两舰对舰战力均为正且水滴有效对舰 DPS 高于剑鱼；水滴对空战力为正，剑鱼 AntiAir=0；
+// 水滴生存与综合战力高于只有高 HP 的剑鱼。
+// 覆盖：ShipMap 的 ram 配置位、CombatPower 对舰/对空轴、撞击贡献 DPS 与免伤舰体生存排序。
+func TestWaterDropAndSwordfishRamProfilesDifferInAntiAir(t *testing.T) {
 	waterdrop, swordfish := objUnit.ShipMap["waterdrop"], objUnit.ShipMap["swordfish"]
 	if waterdrop == nil || swordfish == nil {
 		t.Fatal("waterdrop or swordfish not found")
 	}
-
-	impact, swordfishImpact := objUnit.GunMap["Impact"], objUnit.GunMap["SwordfishImpact"]
-	if impact == nil || swordfishImpact == nil {
-		t.Fatal("Impact or SwordfishImpact gun not found")
+	if !waterdrop.Ram.Enabled() || !swordfish.Ram.Enabled() {
+		t.Fatalf("both special ships need ram enabled: %+v / %+v", waterdrop.Ram, swordfish.Ram)
 	}
-	if !impact.AntiShip || !impact.AntiAircraft {
-		t.Fatalf("waterdrop Impact must be anti-ship and anti-air: %+v", impact)
+	if !waterdrop.Ram.AlwaysOn || !swordfish.Ram.AlwaysOn {
+		t.Fatalf("special ram must ignore the game setting: %+v / %+v", waterdrop.Ram, swordfish.Ram)
 	}
-	if !swordfishImpact.AntiShip || swordfishImpact.AntiAircraft {
-		t.Fatalf("SwordfishImpact must be anti-ship only: %+v", swordfishImpact)
+	if !waterdrop.Ram.CanHitPlanes || swordfish.Ram.CanHitPlanes {
+		t.Fatalf("only waterdrop can ram planes: %+v / %+v", waterdrop.Ram, swordfish.Ram)
 	}
 
 	if waterdrop.CombatPower.AntiShip <= 0 || waterdrop.CombatPower.AntiAir <= 0 {
@@ -145,9 +143,9 @@ func TestWaterDropAndSwordfishRamWeaponsDifferInAntiAir(t *testing.T) {
 	if swordfish.CombatPower.AntiShip <= 0 || swordfish.CombatPower.AntiAir != 0 {
 		t.Fatalf("swordfish must be anti-ship only: %+v", swordfish.CombatPower)
 	}
-	if waterdrop.CombatPower.Details.AntiShipDPS != swordfish.CombatPower.Details.AntiShipDPS {
+	if waterdrop.CombatPower.Details.AntiShipDPS <= swordfish.CombatPower.Details.AntiShipDPS {
 		t.Fatalf(
-			"effective anti-ship DPS differs: %v vs %v",
+			"waterdrop ram must out-damage swordfish: %v vs %v",
 			waterdrop.CombatPower.Details.AntiShipDPS, swordfish.CombatPower.Details.AntiShipDPS,
 		)
 	}
@@ -186,4 +184,24 @@ func gunBulletDiameter(gunName string) int {
 		return 0
 	}
 	return bullet.Diameter
+}
+
+// TestDerivedRamStaysOutOfCombatPower 验证按舰种推导的默认撞击不进入静态战力。
+// 场景：yamato 未显式配置 ram，初始化时会拿到 Derived=true 的默认撞击；
+// 体验开关默认关闭，若默认撞击计入战力，会改变 AI 估值与造价。
+// 预期：yamato.Ram.Derived=true 且 damage>0；AntiShipContributions 中没有名为 Ram 的贡献。
+// 覆盖：加载后的 ShipMap 配置与 CalculateShip 的贡献明细；失败说明默认撞击污染了战力。
+func TestDerivedRamStaysOutOfCombatPower(t *testing.T) {
+	yamato := objUnit.ShipMap["yamato"]
+	if yamato == nil {
+		t.Fatal("yamato not found")
+	}
+	if !yamato.Ram.Derived || yamato.Ram.Damage <= 0 {
+		t.Fatalf("yamato should have a derived ram profile: %+v", yamato.Ram)
+	}
+	for _, contribution := range yamato.CombatPower.Details.AntiShipContributions {
+		if contribution.Name == "Ram" {
+			t.Fatalf("derived ram must not enter combat power: %+v", contribution)
+		}
+	}
 }

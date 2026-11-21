@@ -133,6 +133,8 @@ type BattleShip struct {
 	TimeCost int64 `json:"timeCost"`
 	// 吨位
 	Tonnage float64 `json:"tonnage"`
+	// 冲角 / 撞击能力；零值表示不能撞击
+	Ram RamConfig `json:"ram"`
 	// 武器
 	Weapon ShipWeapon `json:"weapon"`
 	// 舰载机联队
@@ -171,6 +173,8 @@ type BattleShip struct {
 	LastHealAt int64
 	// 受到伤害与最近攻击者记录（与飞机共用）
 	Damage DamageState
+	// 撞击冷却：目标 UID -> 可再次结算的游戏拍
+	ramCooldownUntil map[string]int64
 }
 
 var _ Hurtable = (*BattleShip)(nil)
@@ -931,6 +935,7 @@ func NewShip(
 	s.CurRotation = rotation
 	s.ArmorMM = 100 + 300*max(s.HorizontalDamageReduction, s.VerticalDamageReduction)
 	s.LastTrailAnimationStep = -1
+	s.ramCooldownUntil = nil
 	s.BelongPlayer = player
 	// 战舰默认不编组
 	s.GroupID = object.GroupIDNone

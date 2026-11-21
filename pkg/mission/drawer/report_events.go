@@ -292,6 +292,21 @@ func battleReportEventSegments(
 			Color: battleReportValueClr,
 		}}
 	}
+	if entry.Action == state.BattleLogShipSelfHit {
+		weapon := battleReportWeaponText(entry)
+		damage := battleReportDamageMarker +
+			battleReportDamageText(entry.Hit.Damage) + battleReportDamageMarker
+		text := i18n.Format(i18n.MsgBattleReportSelfHitRow, map[string]any{
+			"Time":   state.BattleReportDurationText(entry.Tick),
+			"Actor":  actor,
+			"Weapon": weapon,
+			"Damage": damage,
+		})
+		return appendBattleReportDamageSegments(
+			nil, text, battleReportDamageColor(entry.Hit.Critical),
+		)
+	}
+
 	target := battleReportCombatantText(entry.TargetName, entry.TargetType, entry.TargetIsPlane)
 
 	action := ""
@@ -537,6 +552,8 @@ func battleReportWeaponText(entry state.BattleLogEntry) string {
 		return i18n.Text(i18n.MsgBattleReportWeaponBombGeneric)
 	case string(objBullet.TypeRocket):
 		return i18n.Text(i18n.MsgBattleReportWeaponRocket)
+	case string(objBullet.TypeRam):
+		return i18n.Text(i18n.MsgBattleReportWeaponRam)
 	case string(objBullet.TypeDepthCharge):
 		return i18n.Text(i18n.MsgBattleReportWeaponDepthCharge)
 	case string(objBullet.TypeLaser):

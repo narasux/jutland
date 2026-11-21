@@ -35,7 +35,10 @@ const (
 	controlPadX   = 36
 	strategyCount = 5
 
-	maxSettingsRows = 7
+	// gameSettingsRows 是游戏页的设置行数；新增/删除行时必须同步，
+	// 否则卡片高度仍按旧行数计算，最后一行会和页脚一起溢出。
+	gameSettingsRows = 8
+	maxSettingsRows  = gameSettingsRows
 )
 
 type speedOption struct {
@@ -185,6 +188,7 @@ type UI struct {
 	localAI            config.AIStrategies
 	localFog           bool
 	localMinimap       bool
+	localRam           bool
 	localLand          bool
 	// 命中特效 / 伤害数字 / 常显战舰状态：显示类开关，2026-10 从侧栏关卡设置迁入
 	localHitEffects    bool
@@ -265,6 +269,7 @@ func (s *UI) loadFromSettings(settings *config.GameSettings) {
 	s.localAI = settings.AI
 	s.localFog = settings.EnableFogOfWar
 	s.localMinimap = settings.EnableMinimap
+	s.localRam = settings.EnableRamming
 	s.localLand = settings.EnableLandAirfield
 	s.localHitEffects = settings.DisplayHitEffects
 	s.localDamageNumbers = settings.DisplayDamageNumber
@@ -676,6 +681,13 @@ func (s *UI) buildRows(
 			s.settingRow(
 				i18n.MsgSettingsMinimap,
 				s.toggleCombo(s.localMinimap, func(v bool) { s.localMinimap = v }, comboFace, boxWidth, boxHeight),
+				labelFace,
+			),
+		)
+		rows.AddChild(
+			s.settingRow(
+				i18n.MsgSettingsRamming,
+				s.toggleCombo(s.localRam, func(v bool) { s.localRam = v }, comboFace, boxWidth, boxHeight),
 				labelFace,
 			),
 		)
@@ -1107,6 +1119,7 @@ func (s *UI) save() {
 	config.G.AI = s.localAI
 	config.G.EnableFogOfWar = s.localFog
 	config.G.EnableMinimap = s.localMinimap
+	config.G.EnableRamming = s.localRam
 	config.G.EnableLandAirfield = s.localLand
 	config.G.DisplayHitEffects = s.localHitEffects
 	config.G.DisplayDamageNumber = s.localDamageNumbers

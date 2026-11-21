@@ -4943,20 +4943,11 @@
     ],
   },
   {
-    name: "Impact",
-    displayName: "衝角",
+    name: "Ram",
+    displayName: "体当たり",
     type: "兵器",
     armaments: [],
-    description: "『三体』に登場する「水滴」探査機の衝突に由来する架空のイースターエッグ兵器。航空機にも使える特殊な体当たり兵器として扱う。",
-    author: "",
-    links: [],
-  },
-  {
-    name: "SwordfishImpact",
-    displayName: "巨大メカジキ突撃",
-    type: "兵器",
-    armaments: [],
-    description: "巨大メカジキが剣状の吻で敵艦に体当たりする専用兵器。水滴の体当たりと同じ射撃性能を持つが、対艦攻撃のみで航空機には使えない。",
+    description: "艦首による体当たりのダメージは、接近速度・角度・双方のトン数・目標のダメージ軽減で決まる。通常艦は設定スイッチに従い、水滴などの常時有効な特殊単位だけが航空機にも体当たりできる。",
     author: "",
     links: [],
   },
@@ -9912,7 +9903,7 @@
   },
   {
     name: "swordfish",
-    displayName: "巨大メカジキ",
+    displayName: "巨大のメカジキ",
     type: "生体艦船",
     armaments: [
       {

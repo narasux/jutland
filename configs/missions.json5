@@ -6689,5 +6689,60 @@
         belongPlayer: "P2"
       }
     ],
-  }
+  },
+  // 撞击测试：P1 四类普通战舰 + Monterey，对 P2 四种靶舰与不还手的翻车鱼
+  {
+    name: "RamTest",
+    category: "test",
+    displayName: "撞击测试场",
+    displayNameEn: "Ramming Test Range",
+    displayNameRu: "Полигон для тарана",
+    displayNameJa: "体当たり試験場",
+    initFunds: 5000,
+    initCameraPos: [
+      [94, 58],
+      [102, 58]
+    ],
+    mapName: "darwin",
+    maxShipCount: 20,
+    description: "撞击测试场：P1 初始为战列舰、巡洋舰、驱逐舰、护卫舰与 Monterey 各一艘，P2 为同排的 Yamato、Baltimore、Johnston、九江与不还手的翻车鱼。先在设置页打开「撞击系统（体验）」，选择 P1 后全速撞向目标；P2 靶舰会开火还击，翻车鱼可用来观察无减伤目标的裸伤害。增援点可召唤水滴与巨大剑鱼对照 alwaysOn 行为。",
+    descriptionEn: "Ramming test range: P1 starts with one battleship, cruiser, destroyer, frigate and Monterey; P2 fields Yamato, Baltimore, Johnston, Jiujiang and a harmless ocean sunfish in the same rows. Enable Ramming in Settings, pick P1, and drive into the targets at full speed. The P2 targets shoot back; the sunfish shows raw damage without armor. The reinforcement point can summon the Droplet and Giant Swordfish to compare alwaysOn behaviour.",
+    descriptionRu: "Полигон для тарана: у P1 по одному линкору, крейсеру, эсминцу, фрегату и Monterey; у P2 в тех же рядах Yamato, Baltimore, Johnston, Jiujiang и безобидная рыба-луна. Включите таран в настройках, выберите P1 и идите на полной скорости. Корабли P2 стреляют в ответ; рыба-луна показывает чистый урон без брони. В точке подкрепления можно вызвать «Каплю» и гигантскую рыбу-меч для проверки alwaysOn.",
+    descriptionJa: "体当たり試験場：P1 は戦艦・巡洋艦・駆逐艦・フリゲート・Monterey を各1隻、P2 は同じ列に Yamato・Baltimore・Johnston・九江・反撃しないマンボウを配置。設定で「体当たり」を有効にし、P1 を選んで全速で突撃する。P2 は反撃するが、マンボウは装甲なしの素のダメージ確認に使える。増援地点から水滴と巨大メカジキを呼び、alwaysOn の挙動も比較できる。",
+    initReinforcePoints: [
+      {
+        pos: [88, 50],
+        rotation: 90,
+        rallyPos: [92, 54],
+        belongPlayer: "P1",
+        maxOncomingShip: 10,
+        providedShipNames: [
+          "yamato",
+          "baltimore",
+          "johnston",
+          "jiujiang",
+          "monterey_m_6",
+          "swordfish",
+          "waterdrop",
+          "molamola",
+        ],
+      },
+    ],
+    initOilPlatforms: [],
+    initAirfields: [],
+    initShips: [
+      // P1 撞击方：四类普通战舰 + 显式配置的 Monterey，全部朝东
+      { name: "yamato", pos: [92, 50], rotation: 90, belongPlayer: "P1" },
+      { name: "baltimore", pos: [92, 54], rotation: 90, belongPlayer: "P1" },
+      { name: "johnston", pos: [92, 58], rotation: 90, belongPlayer: "P1" },
+      { name: "jiujiang", pos: [92, 62], rotation: 90, belongPlayer: "P1" },
+      { name: "monterey_m_6", pos: [92, 66], rotation: 90, belongPlayer: "P1" },
+      // P2 靶舰：重甲 / 中甲 / 无甲 / 无武器巨舰；朝东背对 P1，减少还击干扰
+      { name: "yamato", pos: [102, 50], rotation: 90, belongPlayer: "P2" },
+      { name: "baltimore", pos: [102, 54], rotation: 90, belongPlayer: "P2" },
+      { name: "johnston", pos: [102, 58], rotation: 90, belongPlayer: "P2" },
+      { name: "jiujiang", pos: [102, 62], rotation: 90, belongPlayer: "P2" },
+      { name: "molamola", pos: [102, 66], rotation: 90, belongPlayer: "P2" },
+    ],
+  },
 ]

@@ -429,6 +429,8 @@ func (m *MissionManager) rebuildCombatBuckets() {
 // updateCombatPhase 更新武器开火、弹药、尾流和单位消亡状态
 func (m *MissionManager) updateCombatPhase() {
 	m.updateShipDiveStates()
+	// 撞击接触在移动之后、开火之前结算：本拍被撞沉的舰船不再开火。
+	m.updateShipContacts()
 	// 声呐探测独立于迷雾，必须在刷新视野之前跑。
 	m.updateSubmarineDetection()
 	m.updateVision()

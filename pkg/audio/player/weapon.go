@@ -8,14 +8,17 @@ import (
 const (
 	rocketSpawnAudioCooldownTick   = 18
 	rocketExplodeAudioCooldownTick = 12
+	ramImpactAudioCooldownTick     = 10
 	rocketSpawnVolume              = 0.10
 	rocketExplodeVolume            = 0.08
+	ramImpactVolume                = 0.35
 )
 
 // WeaponFire 统一管理武器发射相关短音效，并对高频音效做冷却去重。
 type WeaponFire struct {
 	rocketSpawnAudioCD   int
 	rocketExplodeAudioCD int
+	ramImpactAudioCD     int
 }
 
 // NewWeaponFire 创建武器发射音效播放器。
@@ -30,6 +33,9 @@ func (p *WeaponFire) Update() {
 	}
 	if p.rocketExplodeAudioCD > 0 {
 		p.rocketExplodeAudioCD--
+	}
+	if p.ramImpactAudioCD > 0 {
+		p.ramImpactAudioCD--
 	}
 }
 
@@ -72,4 +78,13 @@ func (p *WeaponFire) PlayRocketExplode() {
 	}
 	baseAudio.PlayAudioToEndWithVolume(audioRes.NewRocketExplode(), rocketExplodeVolume)
 	p.rocketExplodeAudioCD = rocketExplodeAudioCooldownTick
+}
+
+// PlayRamImpact 播放撞击音效，带冷却避免多舰同时接触时叠音。
+func (p *WeaponFire) PlayRamImpact() {
+	if p.ramImpactAudioCD > 0 {
+		return
+	}
+	baseAudio.PlayAudioToEndWithVolume(audioRes.NewRocketExplode(), ramImpactVolume)
+	p.ramImpactAudioCD = ramImpactAudioCooldownTick
 }

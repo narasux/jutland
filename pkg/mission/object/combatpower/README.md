@@ -57,6 +57,14 @@ DPS = 炮弹数 × 单发期望伤害 / ReloadTime
 DPS = 炮弹数 × 单发期望伤害 / 发射周期
 ```
 
+撞击（接触武器，按 0.5 的接触/角度/速度折扣估算）：
+
+```text
+DPS = ram.Damage × 0.5 / max(ram.Cooldown, 1)
+爆发 = ram.Damage × 0.5
+canHitPlanes=true 时同样计入 AntiAir
+```
+
 舰载分组火箭：
 
 ```text

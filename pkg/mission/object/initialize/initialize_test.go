@@ -12,6 +12,7 @@ import (
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
+	bulletImg "github.com/narasux/jutland/pkg/resources/images/bullet"
 )
 
 // TestOoiTorpedoFanSurvivesNewShipCopy 验证 ooi 经 NewShip 深拷贝后仍保留鱼雷扇面分组与航迹。
@@ -509,5 +510,21 @@ func TestSpecialPlanesUseDedicatedLongRangeOrdnance(t *testing.T) {
 		t.Error("SBD-3 missing shared bomb US/BB/907/AN-M66")
 	} else if math.Abs(shared.Range-1.5) > 1e-9 {
 		t.Errorf("SBD-3 shared bomb range = %.2f, want 1.50", shared.Range)
+	}
+}
+
+// TestEveryConfiguredShellHasImage 验证 bullets.json5 中每种炮弹都有对应口径素材。
+// 场景：蒙特雷的 US/GB/254/1890 使用 254mm 口径，而 shellDiameters 曾漏登记 254，
+// GetShell 会返回红色 NotFount 占位图；其他配置炮弹也可能后续新增类似口径。
+// 预期：遍历 BulletMap 的所有 shell，GetShell(diameter) 都不等于 NotFount。
+// 覆盖：以配置驱动全量口径检查，失败会直接打印弹药名与口径。
+func TestEveryConfiguredShellHasImage(t *testing.T) {
+	for name, bullet := range objBullet.Map {
+		if bullet.Type != objBullet.TypeShell {
+			continue
+		}
+		if img := bulletImg.GetShell(bullet.Diameter); img == bulletImg.NotFount {
+			t.Fatalf("shell %q diameter %d has no image asset", name, bullet.Diameter)
+		}
 	}
 }

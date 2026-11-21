@@ -160,6 +160,8 @@ other = " лазером"
 other = " ракетой"
 [BattleReportWeaponDepthCharge]
 other = " глубинной бомбой"
+[BattleReportWeaponRam]
+other = " тараном"
 [BattleReportWeaponBombGeneric]
 other = " бомбой"
 [BattleReportWeaponBomb]
@@ -184,6 +186,8 @@ other = " (попаданий: {{.Count}})"
 other = ", урон {{.Damage}}"
 [BattleReportEventUseWeapon]
 other = "{{.Weapon}}"
+[BattleReportSelfHitRow]
+other = "{{.Time}}  {{.Actor}} {{.Weapon}}: самоурон {{.Damage}}"
 [BattleReportOwnShips]
 other = "Наши корабли"
 [BattleReportEnemyShips]
@@ -258,6 +262,8 @@ other = "Эффекты попаданий"
 other = "Числа урона"
 [SettingsShipState]
 other = "Состояние корабля"
+[SettingsRamming]
+other = "Таран (эксперим.)"
 [SettingsOn]
 other = "Вкл."
 [SettingsOff]

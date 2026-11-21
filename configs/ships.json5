@@ -13540,6 +13540,13 @@
     width: 17.98,
     fundsCost: 255,
     timeCost: 85,
+    // 1890 年代冲角舰：受游戏设置里的撞击开关控制
+    ram: {
+      damage: 1800,
+      cooldown: 4,
+      selfDamageRatio: 0.25,
+      minSpeed: 4,
+    },
     weapon: {
       mainGuns: [
         // 前主炮塔：双联装 305mm/35
@@ -46691,19 +46698,18 @@
     width: 36,
     fundsCost: 20,
     timeCost: 9,
-    weapon: {
-      mainGuns: [
-        // 前半球朝向但射程极短的炮模拟撞击
-        {
-          name: "Impact",
-          posPercent: 0,
-          rightFiringArc: [0, 90],
-          leftFiringArc: [270, 360]
-        }
-      ]
-    }
+    // 撞击特殊单位：无视游戏设置里的撞击开关，始终可撞舰 / 撞机
+    // 水滴是整舰动能命中，伤害要能压过 500 万 HP 的翻车鱼等高血量目标
+    ram: {
+      damage: 10000000,
+      cooldown: 2,
+      selfDamageRatio: 0,
+      minSpeed: 10,
+      canHitPlanes: true,
+      alwaysOn: true,
+    },
   },
-  // 巨型剑鱼：极短射程撞击主炮，只能对舰
+  // 巨大剑鱼：舰艏撞击，只能对舰；无视撞击开关
   {
     name: "swordfish",
     nation: "special",
@@ -46721,15 +46727,13 @@
     width: 76,
     fundsCost: 500,
     timeCost: 100,
-    weapon: {
-      mainGuns: [
-        {
-          name: "SwordfishImpact",
-          posPercent: 0,
-          rightFiringArc: [0, 90],
-          leftFiringArc: [270, 360]
-        }
-      ]
+    // 撞击特殊单位：无视游戏设置里的撞击开关，始终可撞舰
+    ram: {
+      damage: 300000,
+      cooldown: 2,
+      selfDamageRatio: 0,
+      minSpeed: 5,
+      alwaysOn: true,
     },
     animation: {
       topFrames: [

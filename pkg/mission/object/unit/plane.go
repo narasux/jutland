@@ -539,8 +539,11 @@ func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
 	if bullet.ShooterObjType == object.TypeShip {
 		// 舰对空：舰炮弹丸对飞机以破片/近炸毁伤为主，单发毁伤有上限
 		// （约六成血量），避免驱逐舰一发 127mm 舰炮弹直接击落满血重型轰炸机；
-		// 暴击代表直击要害（油箱/弹药舱），不受此限制
-		realDamage = min(realDamage, p.TotalHP*0.6)
+		// 暴击代表直击要害（油箱/弹药舱），不受此限制。
+		// 撞击是整舰动能命中，只跳过该上限，不算空对空加成。
+		if bullet.Type != objBullet.TypeRam {
+			realDamage = min(realDamage, p.TotalHP*0.6)
+		}
 	} else {
 		// 空对空：飞机比较脆，所以伤害要再额外乘以 3
 		realDamage *= 3

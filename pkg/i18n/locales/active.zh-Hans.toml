@@ -160,6 +160,8 @@ other = "激光"
 other = "火箭弹"
 [BattleReportWeaponDepthCharge]
 other = "深水炸弹"
+[BattleReportWeaponRam]
+other = "撞击"
 [BattleReportWeaponBombGeneric]
 other = "炸弹"
 [BattleReportWeaponBomb]
@@ -184,6 +186,8 @@ other = "，共命中 {{.Count}} 次"
 other = "，造成 {{.Damage}} 伤害"
 [BattleReportEventUseWeapon]
 other = " 使用 {{.Weapon}}"
+[BattleReportSelfHitRow]
+other = "{{.Time}}  {{.Actor}} {{.Weapon}}反作用自伤 {{.Damage}}"
 [BattleReportOwnShips]
 other = "我方舰艇"
 [BattleReportEnemyShips]
@@ -258,6 +262,8 @@ other = "命中特效"
 other = "显示伤害数字"
 [SettingsShipState]
 other = "常显战舰状态"
+[SettingsRamming]
+other = "撞击系统（体验）"
 [SettingsOn]
 other = "开"
 [SettingsOff]

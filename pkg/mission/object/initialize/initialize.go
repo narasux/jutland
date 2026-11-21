@@ -9,6 +9,7 @@ import (
 	"github.com/mohae/deepcopy"
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/metadata"
@@ -352,6 +353,19 @@ func initShipMap() {
 		if !s.Historical.IsValid() {
 			log.Fatalf("ship %q has invalid historical status %q", s.Name, s.Historical)
 		}
+		// 撞击：显式配置优先；未配置的普通战舰按舰种 / 吨位 / 装甲推导默认能力。
+		// 默认能力仍受游戏设置开关控制，特殊单位用 ram.alwaysOn 绕过。
+		if s.Ram.Damage < 0 {
+			log.Fatalf("ship %q ram.damage must be >= 0", s.Name)
+		}
+		if !s.Ram.Enabled() {
+			if profile, ok := objUnit.DefaultRamProfile(
+				s.Type, s.TotalHP, s.HorizontalDamageReduction, s.VerticalDamageReduction,
+			); ok {
+				s.Ram = profile
+			}
+		}
+		s.Ram.Normalize()
 		// 主炮
 		for _, gunMD := range s.Weapon.MainGunsMD {
 			s.Weapon.MainGuns = append(s.Weapon.MainGuns, objUnit.NewGun(
@@ -435,6 +449,13 @@ func initShipMap() {
 			if gun != nil && gun.AntiShip {
 				mainGunRange = max(mainGunRange, gun.Range)
 			}
+		}
+		// 撞击是接触武器，但需要让 AI 的目标筛选覆盖到「贴脸」距离；
+		// 舰长折算成格再加半格余量，避免 AI 把撞击舰当成没有对舰手段。
+		if s.Ram.Enabled() {
+			s.Weapon.MaxToShipRange = max(
+				s.Weapon.MaxToShipRange, s.Length/constants.MapBlockSize+0.5,
+			)
 		}
 		// 视距在武器折算之后定，主炮射程已经是地图格。
 		s.SightRange = objUnit.ResolveShipSight(s.Type, s.SightRange, mainGunRange)

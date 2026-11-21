@@ -115,3 +115,32 @@ func TestBattleReportDepthChargeSinkShowsWeapon(t *testing.T) {
 	require.Contains(t, text, "gurkha")
 	require.NotContains(t, text, i18n.Text(i18n.MsgBattleReportWeaponUnknown))
 }
+
+// TestBattleReportSelfHitRow 验证撞击反作用自伤在战况详情中单独成行。
+// 场景：中文语言下，Yamato 撞击后自伤 450，记录 Action=BattleLogShipSelfHit、
+// Hit.WeaponType=ram、Tick=60。
+// 预期：行文本含 Yamato、「自伤」与 450，且不出现「未知武器」；失败说明自伤仍只扣血不入详情。
+// 覆盖：battleReportEventSegments 的 SelfHit 分支、TypeRam 武器文案与伤害片段渲染。
+func TestBattleReportSelfHitRow(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	entry := state.BattleLogEntry{
+		Tick:         60,
+		ActorPlayer:  faction.HumanAlpha,
+		ActorName:    "Yamato",
+		ActorType:    string(objUnit.ShipTypeBattleShip),
+		TargetPlayer: faction.HumanAlpha,
+		TargetName:   "Yamato",
+		TargetType:   string(objUnit.ShipTypeBattleShip),
+		Action:       state.BattleLogShipSelfHit,
+		Count:        1,
+		Hit:          objUnit.HitInfo{WeaponType: string(objBullet.TypeRam), Damage: 450},
+	}
+	text := battleReportSegmentsText(battleReportEventSegments(entry, faction.HumanAlpha))
+	require.Contains(t, text, "Yamato")
+	require.Contains(t, text, "自伤")
+	require.Contains(t, text, "450")
+	require.NotContains(t, text, i18n.Text(i18n.MsgBattleReportWeaponUnknown))
+}
