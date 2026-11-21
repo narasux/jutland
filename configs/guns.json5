@@ -1564,6 +1564,19 @@
     antiShip: true,
     antiAircraft: true
   },
+  // 德国海军 15 cm/48 TbtsK C/36 双联装舰炮（1936A 型驱逐舰 Z-25 1944 年前主炮）
+  {
+    name: "GER/150/48/2/TbtsKC36",
+    bulletName: "GER/GB/150/1932",
+    bulletCount: 2,
+    reloadTime: 2.2,
+    range: 16,
+    bulletSpread: 85,
+    bulletSpeed: 835,
+    fundsCost: 14,
+    antiShip: true,
+    antiAircraft: false
+  },
   // 德国海军 15 cm/48 TbtsK C/36 单装舰炮（1936A 型驱逐舰 Z-23 级主炮）
   {
     name: "GER/150/48/TbtsKC36",

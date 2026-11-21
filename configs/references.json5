@@ -3743,7 +3743,7 @@
       },
     ],
     description: "空想号是法国海军空想级大型驱逐舰首舰，1936 年服役。该级为对抗意大利高速轻巡而设计，试航中创下常规舰体的高速纪录。本作采用 1943 年波士顿改装后的状态，拆除后部鱼雷管并换装博福斯与厄利孔防空炮。",
-    author: "AI 增强生成",
+    author: "Nano Banana",
     links: [
       {
         name: "AI 增强生成素材（用户提供）",
@@ -6876,11 +6876,11 @@
     armaments: [
       {
         label: "主炮",
-        value: "3x1 150mm/48 TbtsK C/36",
+        value: "1x2 + 2x1 150mm/48 TbtsK C/36",
       },
       {
         label: "防空炮",
-        value: "5x1 37mm SK C/30 + 4x1 20mm Flak 38",
+        value: "6x1 37mm SK C/30 + 8x1 20mm Flak 38",
       },
       {
         label: "鱼雷",
@@ -6888,12 +6888,8 @@
       },
     ],
     description: "Z-25 是德国海军 1936A 型驱逐舰，1940 年服役，该型因主要在挪威海域活动而常被称作“纳尔维克”级。她参加过挪威战役与 1942 年英吉利海峡的“瑟布鲁斯”行动，1943 年因主机故障长期停航，修复后于 1944 年调往波罗的海。德国海军只以舷号称呼本级舰；“霍什”（Hoche）是她在战后加入法国海军时获得的名字，1961 年拆解。",
-    author: "Sam#28 & Nano Banana",
+    author: "未知",
     links: [
-      {
-        name: "Pinterest - Z-25 霍什",
-        url: "https://jp.pinterest.com/pin/759278818402561012/",
-      },
       {
         name: "维基百科 - Z-25号驱逐舰",
         url: "https://zh.wikipedia.org/wiki/Z-25%E5%8F%B7%E9%A9%B1%E9%80%90%E8%88%B0",
@@ -12689,6 +12685,20 @@
     type: "武器",
     armaments: [],
     description: "德国海军 15 cm/48 TbtsK C/36 单装舰炮，1936A 型驱逐舰的主炮，也是当时驱逐舰上口径最大的主炮之一。",
+    author: "",
+    links: [
+      {
+        name: "维基百科 - 15 cm TbtsK C/36 naval gun",
+        url: "https://en.wikipedia.org/wiki/15_cm_TbtsK_C/36_naval_gun",
+      },
+    ],
+  },
+  {
+    name: "GER/150/48/2/TbtsKC36",
+    displayName: "150mm/48 双联装舰炮（TbtsK C/36）",
+    type: "武器",
+    armaments: [],
+    description: "德国海军 15 cm/48 TbtsK C/36 双联装舰炮，1944 年状态的 Z-25 前主炮；同一炮座内并列两门 15 cm 炮。",
     author: "",
     links: [
       {
