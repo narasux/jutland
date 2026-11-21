@@ -14,7 +14,8 @@ import (
 	"github.com/narasux/jutland/pkg/utils/geometry"
 )
 
-// RocketLauncher 防空火箭炮，按分组逐发抛出大量直射火箭弹。
+// RocketLauncher 火箭/深弹发射器，按分组抛出大量直射弹药；
+// SalvoSize > 1 时同一次发射动作会齐投多枚。
 type RocketLauncher struct {
 	// 火箭炮名称
 	Name string `json:"name"`
@@ -22,6 +23,8 @@ type RocketLauncher struct {
 	BulletName string `json:"bulletName"`
 	// 单轮装填火箭弹数量
 	RocketCount int `json:"rocketCount"`
+	// 单次齐射投放数量；0/1 表示每次一枚
+	SalvoSize int `json:"salvoSize"`
 	// 分组数量
 	GroupCount int `json:"groupCount"`
 	// 组内单发发射间隔（单位: s）
@@ -114,9 +117,17 @@ func (r *RocketLauncher) InShotRange(shipCurRotation float64, curPos, targetPos 
 	return r.LeftFiringArc.Contains(rotation) || r.RightFiringArc.Contains(rotation)
 }
 
-// Fire 发射下一枚火箭弹；每组按单发间隔逐发打完
+// Fire 发射一次火箭弹；SalvoSize > 1 时同一次调用齐投多枚，否则逐发打完
 func (r *RocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bullet) {
 	if r.Disable || !r.Reloaded() || !r.IsAvailableAntiType(enemy.ObjType()) {
+		return nil
+	}
+	// 齐投数量受本次装填剩余弹数限制，默认 0/1 保持逐发发射。
+	salvo := max(1, r.SalvoSize)
+	if remain := r.RocketCount - r.ShotCountBeforeReload; salvo > remain {
+		salvo = remain
+	}
+	if salvo <= 0 {
 		return nil
 	}
 
@@ -151,23 +162,25 @@ func (r *RocketLauncher) Fire(shooter Attacker, enemy Hurtable) (bullets []*objB
 	rangePercent := distance / r.Range
 	radius := float64(r.BulletSpread) / constants.MapBlockSize * rangePercent
 
-	pos := targetPos.Copy()
-	pos.AddRx(float64(RandIntn(3)-1) * RandFloat64() * radius)
-	pos.AddRy(float64(RandIntn(3)-1) * RandFloat64() * radius)
-	bt := objBullet.New(
-		r.BulletName, curPos, pos,
-		shooter.ID(), shooter.ObjType(), shooter.Player(),
-		enemy.ObjType(), bulletSpeed, life, 0,
-	)
-	bt.WeaponName = r.Name
-	bt.TargetUID = enemy.ID()
-	bt.FireDistance = distance
-	bt.FireRangeRatio = rangePercent
-	bt.ProximityRadius = r.ProximityRadius
-	bt.BlastRadius = r.BlastRadius
-	bullets = append(bullets, bt)
+	for i := 0; i < salvo; i++ {
+		pos := targetPos.Copy()
+		pos.AddRx(float64(RandIntn(3)-1) * RandFloat64() * radius)
+		pos.AddRy(float64(RandIntn(3)-1) * RandFloat64() * radius)
+		bt := objBullet.New(
+			r.BulletName, curPos, pos,
+			shooter.ID(), shooter.ObjType(), shooter.Player(),
+			enemy.ObjType(), bulletSpeed, life, 0,
+		)
+		bt.WeaponName = r.Name
+		bt.TargetUID = enemy.ID()
+		bt.FireDistance = distance
+		bt.FireRangeRatio = rangePercent
+		bt.ProximityRadius = r.ProximityRadius
+		bt.BlastRadius = r.BlastRadius
+		bullets = append(bullets, bt)
+	}
 
-	r.ShotCountBeforeReload++
+	r.ShotCountBeforeReload += salvo
 	r.LatestFireTick = SimTick()
 	if r.LatestFireTick == 0 {
 		r.LatestFireTick = 1

@@ -3,6 +3,7 @@ package initialize
 import (
 	"fmt"
 	"math"
+	"strings"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/config"
@@ -218,8 +219,8 @@ func TestGuidedTorpedoConfig(t *testing.T) {
 }
 
 // TestASWWeaponRangesAfterScaling 验证反潜武器射程在初始化 ÷2 后落在拍板格数。
-// 场景：2026-11-10 平衡值：舰载深弹架 2 格（配置 4km）、RBU 4 格（8km）、Mk32 发射 Mk44 反潜鱼雷 8 格（16km），对应 gurkha/porter/hammann/jiujiang/long_beach。
-// 预期：五艘船的 MaxToSubmergedRange 精确等于 2/2/2/4/8，且 HasAntiSubWeapon=true；失败通常意味着配置公里数或初始化 Range/=2 换算被改错。
+// 场景：2026-11-21 平衡值：美/英深弹架 2 格（4km）、日本 95 式 3 格（6km）、RBU 4 格（8km）、Mk32 发射 Mk44 反潜鱼雷 8 格（16km）。
+// 预期：六艘代表舰的 MaxToSubmergedRange 精确等于 2/2/2/3/4/8，且 HasAntiSubWeapon=true；失败通常意味着配置公里数或初始化 Range/=2 换算被改错。
 // 覆盖：表驱动查 ShipMap 模板，用 1e-9 容差比较射程并检查反潜标记。
 func TestASWWeaponRangesAfterScaling(t *testing.T) {
 	cases := []struct {
@@ -229,6 +230,7 @@ func TestASWWeaponRangesAfterScaling(t *testing.T) {
 		{"gurkha", 2},     // 英 Mk VII 深弹架：配置 4 km
 		{"porter", 2},     // 美 Mk 6 深弹架：配置 4 km
 		{"hammann", 2},    // 同上
+		{"shimakaze", 3},  // 日 95 式深弹架：配置 6 km
 		{"jiujiang", 4},   // RBU 反潜火箭：配置 8 km
 		{"long_beach", 8}, // Mk32 反潜鱼雷：配置 16 km
 	}
@@ -243,6 +245,109 @@ func TestASWWeaponRangesAfterScaling(t *testing.T) {
 		if !ship.Weapon.HasAntiSubWeapon {
 			t.Fatalf("%s should be flagged as anti-submarine capable", tc.ship)
 		}
+	}
+}
+
+// TestAllDestroyersHaveAntiSubWeapon 验证所有驱逐舰都至少挂载一种可攻击下潜潜艇的武器。
+// 场景：2026-11-21 统一补充按国别的 5 发深弹架后，新增或改版驱逐舰若漏挂深弹，会在反潜遭遇战中只能挨打。
+// 预期：ShipMap 中每个 type=destroyer 的模板 HasAntiSubWeapon=true，且 MaxToSubmergedRange≥2 格；
+// 失败会列出缺失反潜能力的舰名，避免只凭初始化不报错就认为配置完整。
+// 覆盖：遍历 AllShipNames 筛选驱逐舰（不依赖手写名单），断言反潜标记与 2 格射程下限，并检查至少命中 27 艘。
+func TestAllDestroyersHaveAntiSubWeapon(t *testing.T) {
+	checked := 0
+	for _, name := range objUnit.AllShipNames {
+		ship, ok := objUnit.ShipMap[name]
+		if !ok || ship.Type != objUnit.ShipTypeDestroyer {
+			continue
+		}
+		checked++
+		if !ship.Weapon.HasAntiSubWeapon {
+			t.Errorf("destroyer %s has no anti-submarine weapon", name)
+		}
+		if ship.Weapon.MaxToSubmergedRange < 2 {
+			t.Errorf("destroyer %s anti-sub range = %v, want >= 2", name, ship.Weapon.MaxToSubmergedRange)
+		}
+	}
+	if checked < 27 {
+		t.Fatalf("checked %d destroyers, want at least 27", checked)
+	}
+}
+
+// TestASWSalvoWeapons 验证 65 式反潜火箭与刺猬弹按配置同帧齐投。
+// 场景：普通深弹架逐发投放，九江 65 式五管与美英刺猬弹则需要在一次发射动作中投出整轮弹药。
+// 预期：jiujiang 的最大 salvoSize=5；johnston/v/y 的最大 salvoSize=24；且 salvoSize≤rocketCount。
+// 覆盖：从 ShipMap 取四艘代表舰，遍历 AntiSubmarine 火箭取最大 salvoSize 并断言。
+func TestASWSalvoWeapons(t *testing.T) {
+	cases := []struct {
+		ship string
+		want int
+	}{
+		{"jiujiang", 5},
+		{"johnston", 24},
+		{"v", 24},
+		{"y", 24},
+		{"shimakaze", 2},
+		{"akitsukaze", 2},
+		{"kirizuki", 2},
+	}
+	for _, tc := range cases {
+		ship, ok := objUnit.ShipMap[tc.ship]
+		if !ok {
+			t.Fatalf("ship template %s missing", tc.ship)
+		}
+		got := 0
+		for _, rocket := range ship.Weapon.Rockets {
+			if rocket.AntiSubmarine && rocket.SalvoSize > got {
+				got = rocket.SalvoSize
+			}
+			if rocket.SalvoSize > rocket.RocketCount {
+				t.Errorf("%s rocket %s salvoSize=%d > rocketCount=%d", tc.ship, rocket.Name, rocket.SalvoSize, rocket.RocketCount)
+			}
+		}
+		if got != tc.want {
+			t.Errorf("%s max salvoSize = %d, want %d", tc.ship, got, tc.want)
+		}
+	}
+}
+
+// TestLateWarDestroyersHaveExtraASW 验证 1943 年后驱逐舰比标准配置多一套反潜挂载。
+// 场景：晚期美英驱逐舰常用双滚架，日本驱逐舰另配 Y 炮；若只保留单座 5 发架，晚期舰与早期舰的反潜爆发没有区别。
+// 预期：Year>=1943 的驱逐舰至少 2 个 AntiSubmarine 火箭；日本舰至少一个 salvoSize=2 的 Y 炮，其他国家至少 2 座 /DC/5/ 滚架。
+// 覆盖：遍历 ShipMap 筛出 8 艘晚期驱逐舰，统计反潜发射器、滚架数与 Y 炮齐射数，逐项断言。
+func TestLateWarDestroyersHaveExtraASW(t *testing.T) {
+	checked := 0
+	for name, ship := range objUnit.ShipMap {
+		if ship.Type != objUnit.ShipTypeDestroyer || ship.Year < 1943 {
+			continue
+		}
+		checked++
+		antiSub, dcRacks := 0, 0
+		yGun := false
+		for _, rocket := range ship.Weapon.Rockets {
+			if !rocket.AntiSubmarine {
+				continue
+			}
+			antiSub++
+			if strings.Contains(rocket.Name, "/DC/5/") {
+				dcRacks++
+			}
+			if rocket.SalvoSize == 2 {
+				yGun = true
+			}
+		}
+		if antiSub < 2 {
+			t.Errorf("%s has %d anti-submarine launchers, want >= 2", name, antiSub)
+		}
+		if ship.Nation == objUnit.NationJP {
+			if !yGun {
+				t.Errorf("%s has no 2-round Y-gun salvo", name)
+			}
+		} else if dcRacks < 2 {
+			t.Errorf("%s has %d five-round depth charge racks, want >= 2", name, dcRacks)
+		}
+	}
+	if checked != 8 {
+		t.Fatalf("checked %d late-war destroyers, want 8", checked)
 	}
 }
 

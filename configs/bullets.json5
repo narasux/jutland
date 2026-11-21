@@ -1587,4 +1587,58 @@
     criticalRate: 0,
     blastRadius: 0.9
   },
+  // 德国 WB 300kg 深水炸弹（Wasserbombe；舰尾滚架 / 发射器）
+  {
+    name: "DE/DC/300/1940/WB",
+    type: "depth_charge",
+    diameter: 300,
+    damage: 2600,
+    criticalRate: 0,
+    blastRadius: 1.3
+  },
+  // 法国 Guiraud 200kg 深水炸弹（1930 年代制式）
+  {
+    name: "FR/DC/200/1935/Guiraud",
+    type: "depth_charge",
+    diameter: 200,
+    damage: 1800,
+    criticalRate: 0,
+    blastRadius: 1.0
+  },
+  // 苏联 BB-1 135kg 深水炸弹（1930 年代制式）
+  {
+    name: "SU/DC/200/1940/BB1",
+    type: "depth_charge",
+    diameter: 200,
+    damage: 1700,
+    criticalRate: 0,
+    blastRadius: 1.0
+  },
+  // 意大利 B TG 100kg 深水炸弹
+  {
+    name: "IT/DC/200/1940/BTG",
+    type: "depth_charge",
+    diameter: 200,
+    damage: 1500,
+    criticalRate: 0,
+    blastRadius: 0.9
+  },
+  // 英国刺猬弹（Hedgehog，65 磅接触引信深弹；24 发齐射，用 200mm 深弹贴图）
+  {
+    name: "UK/DC/30/1942/Hedgehog",
+    type: "depth_charge",
+    diameter: 200,
+    damage: 450,
+    criticalRate: 0,
+    blastRadius: 0.35
+  },
+  // 美国 Mk 10 刺猬弹（英国 Hedgehog 的许可生产型）
+  {
+    name: "US/DC/30/1942/Mk10",
+    type: "depth_charge",
+    diameter: 200,
+    damage: 450,
+    criticalRate: 0,
+    blastRadius: 0.35
+  },
 ]

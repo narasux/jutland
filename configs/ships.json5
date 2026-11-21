@@ -2468,6 +2468,22 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "SU/DC/5/BB1",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 第二座 5 发深弹架（1943 年后双架配置）
+        {
+          name: "SU/DC/5/BB1",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -2585,6 +2601,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "SU/DC/5/BB1",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -2675,6 +2700,15 @@
           rightFiringArc: [45, 150],
           leftFiringArc: [210, 315]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "SU/DC/5/BB1",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -2756,6 +2790,15 @@
           posPercent: -0.61,
           rightFiringArc: [30, 160],
           leftFiringArc: [200, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "SU/DC/5/BB1",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
@@ -17606,6 +17649,29 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "US/DC/5/Mk6",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 第二座 5 发深弹架（1943 年后双架配置）
+        {
+          name: "US/DC/5/Mk6",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 刺猬弹（24 发同帧齐投，舰艏前方）
+        {
+          name: "US/DC/24/Mk10",
+          posPercent: 0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -17833,6 +17899,15 @@
           posPercent: -0.35,
           rightFiringArc: [0, 0],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "US/DC/5/Mk6",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     },
@@ -18081,6 +18156,15 @@
           posPercent: -0.4,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "US/DC/5/Mk6",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
@@ -20519,6 +20603,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "DE/DC/5/WB",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -20636,6 +20729,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "DE/DC/5/WB",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -20789,6 +20891,15 @@
           posPercent: -0.24,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "DE/DC/5/WB",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
@@ -25277,7 +25388,22 @@
           leftFiringArc: [200, 340]
         },
       ],
-      rockets: []
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "FR/DC/5/Guiraud",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 第二座 5 发深弹架（1943 年后双架配置）
+        {
+          name: "FR/DC/5/Guiraud",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
     }
   },
   // 日本海军
@@ -35769,6 +35895,22 @@
           rightFiringArc: [45, 150],
           leftFiringArc: [210, 315]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "JP/DC/5/Type95",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 94 式 Y 炮（两舷各投 1 发，2 发同帧齐射）
+        {
+          name: "JP/DC/2/Type94",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -35854,7 +35996,22 @@
           leftFiringArc: [210, 315]
         }
       ],
-      rockets: []
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "JP/DC/5/Type95",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 94 式 Y 炮（两舷各投 1 发，2 发同帧齐射）
+        {
+          name: "JP/DC/2/Type94",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
     }
   },
   // 岛风
@@ -35958,7 +36115,22 @@
           leftFiringArc: [210, 330]
         }
       ],
-      rockets: []
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "JP/DC/5/Type95",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 94 式 Y 炮（两舷各投 1 发，2 发同帧齐射）
+        {
+          name: "JP/DC/2/Type94",
+          posPercent: -0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
+      ]
     }
   },
   // 夕云
@@ -36018,6 +36190,15 @@
           posPercent: -0.2,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "JP/DC/5/Type95",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
@@ -36095,6 +36276,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "JP/DC/5/Type95",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -36171,6 +36361,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "JP/DC/5/Type95",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -36245,6 +36444,15 @@
           posPercent: -0.45,
           rightFiringArc: [45, 135],
           leftFiringArc: [225, 315]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "JP/DC/5/Type95",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
@@ -42607,6 +42815,29 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 第二座 5 发深弹架（1943 年后双架配置）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 刺猬弹（24 发同帧齐投，舰艏前方）
+        {
+          name: "UK/DC/24/Hedgehog",
+          posPercent: 0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -42703,6 +42934,29 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 第二座 5 发深弹架（1943 年后双架配置）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.74,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        },
+        // 刺猬弹（24 发同帧齐投，舰艏前方）
+        {
+          name: "UK/DC/24/Hedgehog",
+          posPercent: 0.55,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -42914,6 +43168,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         },
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -42996,6 +43259,15 @@
           posPercent: -0.40,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
@@ -43081,6 +43353,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -43150,6 +43431,15 @@
           posPercent: -0.44,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "UK/DC/5/MkVII",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
@@ -45853,6 +46143,15 @@
           rightFiringArc: [30, 135],
           leftFiringArc: [225, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "IT/DC/5/BTG",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -45935,6 +46234,15 @@
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "IT/DC/5/BTG",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
+        }
       ]
     }
   },
@@ -46016,6 +46324,15 @@
           posPercent: -0.44,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
+        }
+      ],
+      rockets: [
+        // 5 发深弹架（舰尾滚架，全向投掷）
+        {
+          name: "IT/DC/5/BTG",
+          posPercent: -0.86,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [180, 360]
         }
       ]
     }
