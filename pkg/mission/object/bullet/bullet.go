@@ -29,6 +29,8 @@ const (
 	TypeRocket Type = "rocket"
 	// TypeLaser 镭射
 	TypeLaser Type = "laser"
+	// TypeRam 撞击事件载体：不飞行，只用于复用伤害结算与战报链路
+	TypeRam Type = "ram"
 	// TypeDepthCharge 深水炸弹：落点 AoE，只伤潜艇
 	TypeDepthCharge Type = "depth_charge"
 )

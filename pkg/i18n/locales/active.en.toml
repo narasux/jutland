@@ -160,6 +160,8 @@ other = "laser"
 other = "rocket"
 [BattleReportWeaponDepthCharge]
 other = "depth charge"
+[BattleReportWeaponRam]
+other = "ram"
 [BattleReportWeaponBombGeneric]
 other = "bomb"
 [BattleReportWeaponBomb]
@@ -184,6 +186,8 @@ other = " ({{.Count}} hits)"
 other = " for {{.Damage}} damage"
 [BattleReportEventUseWeapon]
 other = " with {{.Weapon}}"
+[BattleReportSelfHitRow]
+other = "{{.Time}}  {{.Actor}} {{.Weapon}} self-damage {{.Damage}}"
 [BattleReportOwnShips]
 other = "Our Ships"
 [BattleReportEnemyShips]
@@ -258,6 +262,8 @@ other = "Hit effects"
 other = "Damage numbers"
 [SettingsShipState]
 other = "Ship status"
+[SettingsRamming]
+other = "Ramming (experimental)"
 [SettingsOn]
 other = "On"
 [SettingsOff]

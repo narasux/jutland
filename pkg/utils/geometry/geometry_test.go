@@ -202,3 +202,46 @@ func TestCalcWeaponFireAngle(t *testing.T) {
 	angle, _, _ = geometry.CalcWeaponFireAngle(0, 0, 100, 100, 10, 20, 45)
 	assert.InEpsilon(t, float64(86.81), angle, epsilon)
 }
+
+// TestRotatedRectContact 验证旋转矩形接触检测的接触判定、法线与近似接触点。
+// 场景：舰船撞击需要判断两艘舰的 OBB 是否接触；长度 2、宽度 0.4（地图格），
+// 覆盖正面对撞、并排擦碰、T 字、45° 斜撞与明显分离，角度取 0/45/90/180。
+// 预期：正撞 depth≈0.1、法线从 B 指向 A 且沿 -Y；并排法线沿 -X；T 字与 45° 接触为 true；
+// 分离与仅边界相切为 false；所有接触的 depth>0、法线为单位向量。
+// 覆盖：五个几何场景 + 单位法线断言，验证 SAT 的四个投影轴与法线定向；
+// 失败表示撞击会在未接触/擦碰时误触发，或接触点落到错误一侧。
+func TestRotatedRectContact(t *testing.T) {
+	t.Run("head-on", func(t *testing.T) {
+		ct := geometry.RotatedRectContact(0, 0, 2, 0.4, 0, 0, 1.9, 2, 0.4, 180)
+		assert.True(t, ct.OK)
+		assert.InDelta(t, 0.1, ct.Depth, 1e-9)
+		assert.InDelta(t, 0, ct.NormalX, 1e-9)
+		assert.InDelta(t, -1, ct.NormalY, 1e-9)
+		assert.InDelta(t, 0, ct.PointX, 1e-9)
+		assert.InDelta(t, 0.95, ct.PointY, 1e-9)
+	})
+	t.Run("side-by-side", func(t *testing.T) {
+		ct := geometry.RotatedRectContact(0, 0, 2, 0.4, 0, 0.2, 0, 2, 0.4, 0)
+		assert.True(t, ct.OK)
+		assert.InDelta(t, 0.2, ct.Depth, 1e-9)
+		assert.InDelta(t, -1, ct.NormalX, 1e-9)
+		assert.InDelta(t, 0, ct.NormalY, 1e-9)
+	})
+	t.Run("t-bone", func(t *testing.T) {
+		ct := geometry.RotatedRectContact(0, 0, 2, 0.4, 0, 0, 1.1, 2, 0.4, 90)
+		assert.True(t, ct.OK)
+		assert.Greater(t, ct.Depth, 0.0)
+		assert.InDelta(t, 1, math.Hypot(ct.NormalX, ct.NormalY), 1e-9)
+	})
+	t.Run("diagonal", func(t *testing.T) {
+		ct := geometry.RotatedRectContact(0, 0, 2, 0.4, 0, 0, 1.2, 2, 0.4, 45)
+		assert.True(t, ct.OK)
+		assert.Greater(t, ct.Depth, 0.0)
+	})
+	t.Run("separated", func(t *testing.T) {
+		ct := geometry.RotatedRectContact(0, 0, 2, 0.4, 0, 0, 3, 2, 0.4, 180)
+		assert.False(t, ct.OK)
+		ct = geometry.RotatedRectContact(0, 0, 2, 0.4, 0, 0, 2, 2, 0.4, 180)
+		assert.False(t, ct.OK)
+	})
+}

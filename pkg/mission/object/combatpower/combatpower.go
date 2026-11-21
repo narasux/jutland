@@ -5,6 +5,7 @@ import (
 	"math"
 	"sort"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 )
@@ -27,6 +28,8 @@ const (
 	shipProjectionKilometersPerMapUnit = 2.0
 	// 飞机内部航程乘这个系数还原成投送距离 km，与 unit.PlaneRangeDisplayScale 同步。
 	planeProjectionKilometersPerMapUnit = objUnit.PlaneRangeDisplayScale
+	// ramPowerFactor 把撞击的静态估算折到「接触机会 × 角度 × 速度」后的期望值。
+	ramPowerFactor = 0.5
 	// 对舰口径效能以 127mm 为满值基准：这个口径以上才谈得上稳定破坏舰体结构。
 	caliberReference = 127.0
 	// 口径效能衰减指数，使 25mm 机炮约 0.32、40mm 约 0.45、76mm 约 0.70。
@@ -195,6 +198,18 @@ func CalculateShip(
 			antiSubDPS += dps * effectiveness
 		}
 		acc.maxProjectionRange = max(acc.maxProjectionRange, rocket.Range)
+	}
+
+	// 撞击是接触武器：DPS 按冷却折算，投送距离只算贴脸接触距离。
+	// 按舰种推导的默认撞击（Derived）只服务于体验开关，不进静态战力与费用。
+	if ship.Ram.Damage > 0 && !ship.Ram.Derived {
+		dps := ship.Ram.Damage * ramPowerFactor / max(ship.Ram.Cooldown, 1)
+		burst := ship.Ram.Damage * ramPowerFactor
+		acc.addAntiShip("Ram", dps, burst)
+		if ship.Ram.CanHitPlanes {
+			acc.addAntiAir("Ram", dps, burst)
+		}
+		acc.maxProjectionRange = max(acc.maxProjectionRange, ship.Length/constants.MapBlockSize)
 	}
 
 	hull := buildPowerInfo(shipEHP(ship), shipMobility(ship), acc.maxProjectionRange, 1, acc)

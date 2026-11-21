@@ -446,6 +446,33 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     timeCost: 12,
     // 吨位
     tonnage: 8000,
+    // 可选：冲角 / 撞击能力；不写表示该舰不能撞击。
+    // 撞击伤害由基础伤害、接近速度、角度、双方吨位与目标减伤共同决定。
+    ram: {
+      // 满速正撞同吨位目标的基础伤害；0 表示没有撞击能力（负值启动时报错）
+      damage: 1800,
+      // 同一对舰船的撞击冷却（秒），默认 3
+      cooldown: 4,
+      // 撞击方按基础伤害承受的反作用比例，0~1，默认 0.1
+      selfDamageRatio: 0.25,
+      // 有效撞击的最低接近速度（节），默认 3
+      minSpeed: 4,
+      // 舰艏撞击判定的半角（度），默认 60
+      bowArc: 60,
+      // 是否允许撞击飞机，默认 false；仅特殊单位（水滴）开启
+      canHitPlanes: false,
+      // 是否无视游戏设置里的撞击总开关，默认 false；特殊单位（水滴 / 巨大剑鱼）开启
+      alwaysOn: false,
+    },
+    // 未显式配置 ram 的普通战舰，初始化时会按舰种推导默认撞击（仍受 enableRamming 控制）：
+    // 舰种      伤害系数（× totalHP）  自伤基数  冷却（秒）
+    // battleship       0.30            0.15      4
+    // cruiser          0.24            0.22      4
+    // destroyer        0.30            0.30      5
+    // frigate          0.26            0.28      5
+    // 实际伤害 = totalHP × 系数 × (1 + 0.5 × 装甲)，自伤比 = 基数 × (1 - 0.35 × 装甲)，
+    // 装甲取水平/垂直减伤的最大值（上限 0.9）。航母 / 货轮 / 维修船 / 医疗船 / 潜艇 /
+    // 鱼雷艇不推导默认撞击。推导出的默认撞击不进入静态战力与费用。
     // 可选：俯视逐帧动画；静止时使用 idleTopFrame
     animation: {
       topFrames: ["swordfish_01", "swordfish_02", "swordfish_03"],
@@ -814,6 +841,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   "enableLandAirfield": true,
   // 战争迷雾总开关；关闭时不计算迷雾
   "enableFogOfWar": false,
+  // 撞击系统总开关，默认 false；只影响普通战舰的 ram 配置，
+  // ram.alwaysOn=true 的特殊单位（水滴 / 巨大剑鱼）不受影响
+  "enableRamming": false,
   // 小地图总开关；开启时开局自动展开右上战术面板显示小地图
   "enableMinimap": true,
   // 命中特效总开关；关闭后命中舰体 / 落水 / 落陆不再生成特效

@@ -8,14 +8,6 @@
     damage: 81000,
     criticalRate: 0.25
   },
-  // 撞击专用（用炮弹模拟）
-  {
-    name: "SE/GB/1/2048",
-    type: "shell",
-    diameter: 1,
-    damage: 99999,
-    criticalRate: 0.5
-  },
   // 中国
   // --------- 炮弹 ----------
   // 中国海军 100mm 舰炮弹

@@ -1036,6 +1036,9 @@ const (
 	bombSplashCells = 0.8
 	// 鱼雷命中舰体：水下爆炸水柱
 	torpedoPlumeCells = 0.7
+	// 撞击命中：整舰动能冲击，闪光要明显大于普通大口径炮弹
+	ramHitCells = 1.4
+	ramHitLife  = 36
 
 	// 水花 / 尘土 / 水柱每帧停留 3 tick，20 帧播满约 1 秒 —— 水面涟漪散开得比闪光慢得多
 	// 炸弹落点 / 鱼雷水柱的播放 tick 数
@@ -1086,6 +1089,10 @@ func hitEffect(bt *objBullet.Bullet) (objExplosion.Kind, float64, int, bool) {
 	// 火箭空爆在发射阶段已有自己的效果，不重复生成
 	if bt.Type == objBullet.TypeRocket {
 		return objExplosion.KindFlash, 0, 0, false
+	}
+	// 撞击：整舰冲击的大闪光
+	if bt.Type == objBullet.TypeRam {
+		return objExplosion.KindFlash, ramHitCells, ramHitLife, true
 	}
 	tier := hitEffectTier(bt.Diameter)
 

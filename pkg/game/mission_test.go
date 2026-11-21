@@ -48,8 +48,8 @@ func TestOtherMissionCategoryTogglesBothWays(t *testing.T) {
 }
 
 // TestCycleMissionWrapsWithinGivenCategory 验证 cycleMission 在分类内首尾循环而不越界。
-// 场景：classic 共 10 关，Samar1944 在末位 +1、PearlHarbor1941 在首位 -1；test 共 6 关同理。
-// 预期：得到 PearlHarbor1941、Samar1944、MidwayFourCornersTest、SubmarineTest。
+// 场景：classic 共 10 关，Samar1944 在末位 +1、PearlHarbor1941 在首位 -1；test 共 7 关同理。
+// 预期：得到 PearlHarbor1941、Samar1944、MidwayFourCornersTest、RamTest。
 // 覆盖：分别取 AvailableMissions(classic/test)，用 ±1 偏移调用四次并断言结果。
 func TestCycleMissionWrapsWithinGivenCategory(t *testing.T) {
 	classic := metadata.AvailableMissions(metadata.MissionCategoryClassic)
@@ -58,7 +58,7 @@ func TestCycleMissionWrapsWithinGivenCategory(t *testing.T) {
 	require.Equal(t, "PearlHarbor1941", cycleMission(classic, "Samar1944", 1))
 	require.Equal(t, "Samar1944", cycleMission(classic, "PearlHarbor1941", -1))
 	require.Equal(t, "MidwayFourCornersTest", cycleMission(tests, "TestAntiAircraft", 1))
-	require.Equal(t, "SubmarineTest", cycleMission(tests, "TestAll", -1))
+	require.Equal(t, "RamTest", cycleMission(tests, "TestAll", -1))
 }
 
 // TestStartMissionLoadingResetsPreviousMission 验证开始新关卡会丢弃旧管理器并复位加载界面。

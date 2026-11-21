@@ -187,3 +187,86 @@ func CalcWeaponFireAngle(
 
 	return math.Mod(angleRad*180/math.Pi+90+360, 360), targetX, targetY
 }
+
+// RectContact 两个旋转矩形的接触信息。
+type RectContact struct {
+	// OK 是否接触
+	OK bool
+	// Depth 最小平移深度（地图格）
+	Depth float64
+	// NormalX / NormalY 从 B 指向 A 的单位法线
+	NormalX, NormalY float64
+	// PointX / PointY 近似接触点（地图格）
+	PointX, PointY float64
+}
+
+// RotatedRectContact 用分离轴判断两个旋转矩形是否接触，并返回近似接触点。
+// 长度 / 宽度使用地图格口径，角度为度（0 朝上，顺时针）。
+func RotatedRectContact(
+	ax, ay, aLen, aWid, aRot float64,
+	bx, by, bLen, bWid, bRot float64,
+) RectContact {
+	a := rotatedRect{cx: ax, cy: ay, hl: aLen / 2, hw: aWid / 2, rot: aRot}
+	b := rotatedRect{cx: bx, cy: by, hl: bLen / 2, hw: bWid / 2, rot: bRot}
+
+	axes := [4][2]float64{
+		rectForward(a), rectRight(a),
+		rectForward(b), rectRight(b),
+	}
+	minOverlap := math.MaxFloat64
+	best := axes[0]
+	for _, axis := range axes {
+		minA, maxA := projectRect(a, axis)
+		minB, maxB := projectRect(b, axis)
+		overlap := min(maxA, maxB) - max(minA, minB)
+		if overlap <= 0 {
+			return RectContact{}
+		}
+		if overlap < minOverlap {
+			minOverlap, best = overlap, axis
+		}
+	}
+
+	// 法线固定从 B 指向 A，后续撞击判定直接使用。
+	if (ax-bx)*best[0]+(ay-by)*best[1] < 0 {
+		best[0], best[1] = -best[0], -best[1]
+	}
+	pax, pay := closestPointOnRect(a, bx, by)
+	pbx, pby := closestPointOnRect(b, ax, ay)
+	return RectContact{
+		OK: true, Depth: minOverlap,
+		NormalX: best[0], NormalY: best[1],
+		PointX: (pax + pbx) / 2, PointY: (pay + pby) / 2,
+	}
+}
+
+type rotatedRect struct {
+	cx, cy, hl, hw, rot float64
+}
+
+func rectForward(r rotatedRect) [2]float64 {
+	s, c := math.Sin(r.rot*math.Pi/180), math.Cos(r.rot*math.Pi/180)
+	return [2]float64{s, -c}
+}
+
+func rectRight(r rotatedRect) [2]float64 {
+	s, c := math.Sin(r.rot*math.Pi/180), math.Cos(r.rot*math.Pi/180)
+	return [2]float64{c, s}
+}
+
+func projectRect(r rotatedRect, axis [2]float64) (float64, float64) {
+	f, right := rectForward(r), rectRight(r)
+	extent := math.Abs(f[0]*axis[0]+f[1]*axis[1])*r.hl +
+		math.Abs(right[0]*axis[0]+right[1]*axis[1])*r.hw
+	center := r.cx*axis[0] + r.cy*axis[1]
+	return center - extent, center + extent
+}
+
+// closestPointOnRect 返回矩形上离给定世界坐标最近的点。
+func closestPointOnRect(r rotatedRect, x, y float64) (float64, float64) {
+	f, right := rectForward(r), rectRight(r)
+	dx, dy := x-r.cx, y-r.cy
+	localF := min(max(dx*f[0]+dy*f[1], -r.hl), r.hl)
+	localR := min(max(dx*right[0]+dy*right[1], -r.hw), r.hw)
+	return r.cx + f[0]*localF + right[0]*localR, r.cy + f[1]*localF + right[1]*localR
+}

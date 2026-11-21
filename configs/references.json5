@@ -75,7 +75,7 @@
   },
   {
     name: "swordfish",
-    displayName: "巨型剑鱼",
+    displayName: "巨大剑鱼",
     type: "生物舰船",
     armaments: [
       {
@@ -9184,20 +9184,11 @@
     ],
   },
   {
-    name: "Impact",
-    displayName: "水滴撞击",
+    name: "Ram",
+    displayName: "撞击",
     type: "武器",
     armaments: [],
-    description: "虚构彩蛋武器，取自《三体》中三体人的「水滴」探测器撞击，游戏中作为可对空的特殊撞击武器使用。",
-    author: "",
-    links: [],
-  },
-  {
-    name: "SwordfishImpact",
-    displayName: "巨型剑鱼撞击",
-    type: "武器",
-    armaments: [],
-    description: "巨型剑鱼以剑状吻部撞击敌舰的专用武器，射击参数与水滴撞击一致，但只能对舰，无法攻击飞机。",
+    description: "舰艏撞击造成的伤害由接近速度、撞击角度、双方吨位与目标减伤共同决定。普通战舰的撞击受游戏设置开关控制；水滴等始终开启的特殊单位不受影响，并可用撞击攻击飞机。",
     author: "",
     links: [],
   },

@@ -145,16 +145,16 @@ func TestDisplaySwitchesFollowConfig(t *testing.T) {
 }
 
 // TestSettingsMetricsKeepFooterOnScreen 验证设置页排版在 800×600 等矮屏下仍完整落在屏幕内。
-// 场景：游戏与视听两个页签都是 7 行，卡片按 7 行预留高度，页脚位于卡片下方；标题/标签/页脚都可能把内容顶出屏幕。
+// 场景：游戏页 8 行、视听页 7 行，卡片按 8 行预留高度，页脚位于卡片下方；标题/标签/页脚都可能把内容顶出屏幕。
 // 预期：卡片左右不越界，页脚底部不超过屏幕高度，且单行控件宽度能放进卡片内容区。
-// 覆盖：800×600、1024×768、1920×1080 三种 ScreenLayout × 6/7 行调用 newSettingsMetrics，断言几何边界。
+// 覆盖：800×600、1024×768、1920×1080 三种 ScreenLayout × 7/8 行调用 newSettingsMetrics，断言几何边界。
 func TestSettingsMetricsKeepFooterOnScreen(t *testing.T) {
 	for _, screen := range []layout.ScreenLayout{
 		{Width: 800, Height: 600},
 		{Width: 1024, Height: 768},
 		{Width: 1920, Height: 1080},
 	} {
-		for _, rows := range []int{6, 7} {
+		for _, rows := range []int{7, 8} {
 			m := newSettingsMetrics(screen, rows)
 			if m.panelX < 0 || m.panelX+m.panelW > screen.Width {
 				t.Fatalf(
@@ -192,6 +192,7 @@ func TestLoadFromSettingsRestoresDefaults(t *testing.T) {
 		localAI:            config.AIStrategies{Attack: true},
 		localFog:           true,
 		localMinimap:       false,
+		localRam:           true,
 		localLand:          false,
 		localHitEffects:    false,
 		localDamageNumbers: false,
@@ -212,8 +213,11 @@ func TestLoadFromSettingsRestoresDefaults(t *testing.T) {
 	if ui.localAI != config.DefaultAIStrategies() {
 		t.Fatalf("AI = %+v, want all enabled", ui.localAI)
 	}
-	if ui.localFog || !ui.localMinimap || !ui.localLand {
-		t.Fatalf("fog/minimap/land = %v/%v/%v, want false/true/true", ui.localFog, ui.localMinimap, ui.localLand)
+	if ui.localFog || !ui.localMinimap || ui.localRam || !ui.localLand {
+		t.Fatalf(
+			"fog/minimap/ram/land = %v/%v/%v/%v, want false/true/false/true",
+			ui.localFog, ui.localMinimap, ui.localRam, ui.localLand,
+		)
 	}
 	if !ui.localHitEffects || !ui.localDamageNumbers || !ui.localShipState {
 		t.Fatalf(
@@ -227,9 +231,9 @@ func TestLoadFromSettingsRestoresDefaults(t *testing.T) {
 }
 
 // TestSaveWritesAllLocalValues 验证设置页保存会把所有页签的本地值写回配置并持久化。
-// 场景：玩家在游戏/视听两个页签分别改动速度、语言、机场、AI、迷雾、小地图、战舰状态、BGM/战场音效、命中/伤害开关和尾流参数。
+// 场景：玩家在游戏/视听两个页签分别改动速度、语言、机场、AI、迷雾、小地图、撞击开关、战舰状态、BGM/战场音效、命中/伤害开关和尾流参数。
 // 预期：config.G 与重新 Load 的配置文件都得到这些值；失败说明某个 local 字段漏写或 wakeTrail 未序列化。
-// 覆盖：临时 ConfigBaseDir + 手工填充 UI local 字段，调用 save 后逐项断言 config.G，再 Load 断言持久化结果。
+// 覆盖：临时 ConfigBaseDir + 手工填充 UI local 字段（含 localRam=true），调用 save 后逐项断言 config.G，再 Load 断言持久化结果。
 func TestSaveWritesAllLocalValues(t *testing.T) {
 	previousDir, previousSettings := config.ConfigBaseDir, config.G
 	previousBGM, previousEffects := audio.BGMVolume(), audio.EffectsVolume()
@@ -249,6 +253,7 @@ func TestSaveWritesAllLocalValues(t *testing.T) {
 		localAI:            config.AIStrategies{Attack: true, Scout: true},
 		localFog:           true,
 		localMinimap:       false,
+		localRam:           true,
 		localLand:          false,
 		localHitEffects:    false,
 		localDamageNumbers: false,
@@ -269,6 +274,7 @@ func TestSaveWritesAllLocalValues(t *testing.T) {
 	require.Equal(t, config.AIStrategies{Attack: true, Scout: true}, config.G.AI)
 	require.True(t, config.G.EnableFogOfWar)
 	require.False(t, config.G.EnableMinimap)
+	require.True(t, config.G.EnableRamming)
 	require.False(t, config.G.EnableLandAirfield)
 	require.False(t, config.G.DisplayHitEffects)
 	require.False(t, config.G.DisplayDamageNumber)
@@ -280,6 +286,7 @@ func TestSaveWritesAllLocalValues(t *testing.T) {
 	require.Equal(t, config.SpeedFastMultiplier, config.G.SpeedMultiplier)
 	require.Equal(t, 0.2, config.G.ResolvedBGMVolume())
 	require.Equal(t, 0.6, config.G.ResolvedEffectsVolume())
+	require.True(t, config.G.EnableRamming)
 	require.Equal(t, config.WakeTrailSettings{Length: 1.8, Width: 0.7, Opacity: 1.2}, config.G.WakeTrail)
 }
 
@@ -306,6 +313,7 @@ func TestRestoreDefaultsSavesAndCloses(t *testing.T) {
 		localAI:            config.AIStrategies{Attack: true},
 		localFog:           true,
 		localMinimap:       false,
+		localRam:           true,
 		localLand:          false,
 		localHitEffects:    false,
 		localDamageNumbers: false,
@@ -315,6 +323,7 @@ func TestRestoreDefaultsSavesAndCloses(t *testing.T) {
 	ui.restoreDefaults()
 
 	require.True(t, ui.backPressed, "restore should close the settings page")
+	require.False(t, ui.localRam)
 	require.Equal(t, config.NewDefaultGameSettings(), config.G)
 	require.Equal(t, config.DefaultAudioVolume, audio.BGMVolume())
 	require.Equal(t, config.DefaultAudioVolume, audio.EffectsVolume())

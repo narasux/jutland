@@ -160,6 +160,8 @@ other = "レーザー"
 other = "ロケット弾"
 [BattleReportWeaponDepthCharge]
 other = "爆雷"
+[BattleReportWeaponRam]
+other = "体当たり"
 [BattleReportWeaponBombGeneric]
 other = "爆弾"
 [BattleReportWeaponBomb]
@@ -184,6 +186,8 @@ other = "（{{.Count}}回命中）"
 other = "、{{.Damage}}ダメージ"
 [BattleReportEventUseWeapon]
 other = "（{{.Weapon}}）"
+[BattleReportSelfHitRow]
+other = "{{.Time}}  {{.Actor}} {{.Weapon}}の反動で自損 {{.Damage}}"
 [BattleReportOwnShips]
 other = "味方艦艇"
 [BattleReportEnemyShips]
@@ -258,6 +262,8 @@ other = "命中エフェクト"
 other = "ダメージ表示"
 [SettingsShipState]
 other = "艦艇ステータス"
+[SettingsRamming]
+other = "体当たり（試験）"
 [SettingsOn]
 other = "オン"
 [SettingsOff]

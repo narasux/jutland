@@ -11,6 +11,8 @@ type BattleLogAction string
 const (
 	// BattleLogShipHit 舰艇命中舰艇。
 	BattleLogShipHit BattleLogAction = "shipHit"
+	// BattleLogShipSelfHit 撞击反作用造成的自伤（攻击者与目标同一艘舰）。
+	BattleLogShipSelfHit BattleLogAction = "shipSelfHit"
 	// BattleLogShipSunk 舰艇被击沉。
 	BattleLogShipSunk BattleLogAction = "shipSunk"
 	// BattleLogPlaneHit 飞机被命中但未损失。

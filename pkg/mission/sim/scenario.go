@@ -40,6 +40,8 @@ type Environment struct {
 	SpeedMultiplier float64 `json:"speedMultiplier"`
 	// EnablePenetration 按局开启生产穿甲伤害模型（默认关闭），用于 A/B 评估新机制。
 	EnablePenetration bool `json:"enablePenetration"`
+	// EnableRamming 按局开启普通战舰的撞击（默认关闭）；alwaysOn 特殊单位不受影响。
+	EnableRamming bool `json:"enableRamming"`
 }
 
 // UnitSpec is a single ship or aircraft in a scenario.
