@@ -297,6 +297,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     bulletName: "JP/RB/120/1944",
     // 单轮装填火箭弹数量
     rocketCount: 21,
+    // 单次齐射投放数量；0/1 表示每次一枚，等于 rocketCount 时整轮同帧齐投
+    // 反潜火箭（65 式）与刺猬弹使用该字段，普通火箭通常不写
+    salvoSize: 1,
     // 分组数量，21 发 / 3 组即每组 7 发
     groupCount: 3,
     // 组内单发发射间隔（单位：秒）
