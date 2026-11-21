@@ -4307,7 +4307,7 @@
       },
     ],
     description: "Le Fantasque was the lead ship of the French Navy's Le Fantasque-class large destroyers, commissioned in 1936. Designed to counter fast Italian light cruisers, the class set a speed record for conventionally hulled ships during trials. This entry represents her Boston refit of 1943, when the aft torpedo tubes were removed and Bofors and Oerlikon anti-aircraft guns were installed.",
-    author: "AI-enhanced generation",
+    author: "Nano Banana",
     links: [
       {
         name: "AI-enhanced source (user supplied)",
@@ -9722,6 +9722,20 @@
     ],
   },
   {
+    name: "GER/150/48/2/TbtsKC36",
+    displayName: "150mm/48 TbtsK C/36 Twin Mount",
+    type: "Weapon",
+    armaments: [],
+    description: "German 15 cm/48 TbtsK C/36 twin mount, the forward main battery of Z25 in her 1944 configuration; two 15 cm guns on a single mount.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia — 15 cm TbtsK C/36 naval gun",
+        url: "https://en.wikipedia.org/wiki/15_cm_TbtsK_C/36_naval_gun",
+      },
+    ],
+  },
+  {
     name: "GER/37/83/SKC30",
     displayName: "37mm/83 SK C/30 Single Mount",
     type: "Weapon",
@@ -12905,11 +12919,11 @@
     armaments: [
       {
         label: "Main Battery",
-        value: "3x1 150mm/48 TbtsK C/36",
+        value: "1x2 + 2x1 150mm/48 TbtsK C/36",
       },
       {
         label: "Anti-Aircraft",
-        value: "5x1 37mm SK C/30 + 4x1 20mm Flak 38",
+        value: "6x1 37mm SK C/30 + 8x1 20mm Flak 38",
       },
       {
         label: "Torpedoes",
@@ -12917,12 +12931,8 @@
       },
     ],
     description: "Z25 was a Type 1936A destroyer commissioned in 1940; the class is often called the Narvik class after its Norwegian operations. She took part in the Norwegian campaign and the 1942 Channel Dash, but engine problems kept her idle through much of 1943 before she moved to the Baltic in 1944. The Kriegsmarine knew the Type 1936A ships only by their numbers; Hoche was the name she received in French service, and she was scrapped in 1961.",
-    author: "Sam#28 & Nano Banana",
+    author: "Unknown",
     links: [
-      {
-        name: "Pinterest - Z25 Hoche",
-        url: "https://jp.pinterest.com/pin/759278818402561012/",
-      },
       {
         name: "Wikipedia — German destroyer Z25",
         url: "https://en.wikipedia.org/wiki/German_destroyer_Z25",

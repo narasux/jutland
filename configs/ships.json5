@@ -20659,10 +20659,10 @@
     timeCost: 44,
     weapon: {
       mainGuns: [
-        // 前主炮 A
+        // 前主炮 A（双联装 15cm）
         {
-          name: "GER/150/48/TbtsKC36",
-          posPercent: 0.64,
+          name: "GER/150/48/2/TbtsKC36",
+          posPercent: 0.63,
           rightFiringArc: [0, 150],
           leftFiringArc: [210, 360]
         },
@@ -20670,15 +20670,15 @@
         {
           name: "GER/150/48/TbtsKC36",
           posPercent: -0.6,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
+          rightFiringArc: [5, 180],
+          leftFiringArc: [180, 355]
         },
         // 后主炮 C
         {
           name: "GER/150/48/TbtsKC36",
           posPercent: -0.72,
-          rightFiringArc: [45, 180],
-          leftFiringArc: [180, 315]
+          rightFiringArc: [30, 180],
+          leftFiringArc: [180, 330]
         }
       ],
       secondaryGuns: [],
@@ -20686,59 +20686,91 @@
         // 舰桥两侧 37mm 高炮
         {
           name: "GER/37/83/SKC30",
-          posPercent: 0.54,
+          posPercent: 0.53,
           rightFiringArc: [0, 0],
-          leftFiringArc: [210, 360]
+          leftFiringArc: [220, 360]
         },
         {
           name: "GER/37/83/SKC30",
-          posPercent: 0.54,
-          rightFiringArc: [0, 150],
+          posPercent: 0.53,
+          rightFiringArc: [0, 140],
           leftFiringArc: [360, 360]
         },
         // 烟囱两侧 37mm 高炮
         {
           name: "GER/37/83/SKC30",
-          posPercent: -0.01,
+          posPercent: -0.02,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "GER/37/83/SKC30",
-          posPercent: -0.01,
+          posPercent: -0.02,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
-        // 后部平台 37mm 高炮
+        // 后部平台 37mm 高炮（中线）
+        {
+          name: "GER/37/83/SKC30",
+          posPercent: -0.44,
+          rightFiringArc: [5, 180],
+          leftFiringArc: [180, 355]
+        },
         {
           name: "GER/37/83/SKC30",
           posPercent: -0.53,
-          rightFiringArc: [30, 180],
-          leftFiringArc: [180, 330]
+          rightFiringArc: [5, 180],
+          leftFiringArc: [180, 355]
         },
-        // 前部 20mm 机炮
+        // 舰桥前部 20mm 机炮
         {
           name: "GER/20/65/C38",
-          posPercent: -0.09,
+          posPercent: 0.57,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [200, 360]
+        },
+        {
+          name: "GER/20/65/C38",
+          posPercent: 0.57,
+          rightFiringArc: [0, 160],
+          leftFiringArc: [360, 360]
+        },
+        // 舰桥后部 20mm 机炮
+        {
+          name: "GER/20/65/C38",
+          posPercent: 0.43,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "GER/20/65/C38",
-          posPercent: -0.09,
+          posPercent: 0.43,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         },
-        // 后部 20mm 机炮
+        // 烟囱两侧 20mm 机炮
         {
           name: "GER/20/65/C38",
-          posPercent: -0.45,
+          posPercent: -0.1,
           rightFiringArc: [0, 0],
           leftFiringArc: [180, 360]
         },
         {
           name: "GER/20/65/C38",
-          posPercent: -0.45,
+          posPercent: -0.1,
+          rightFiringArc: [0, 180],
+          leftFiringArc: [360, 360]
+        },
+        // 后部平台 20mm 机炮
+        {
+          name: "GER/20/65/C38",
+          posPercent: -0.46,
+          rightFiringArc: [0, 0],
+          leftFiringArc: [180, 360]
+        },
+        {
+          name: "GER/20/65/C38",
+          posPercent: -0.46,
           rightFiringArc: [0, 180],
           leftFiringArc: [360, 360]
         }
@@ -20747,14 +20779,14 @@
         // 中轴鱼雷 A
         {
           name: "GER/533/4/C34",
-          posPercent: 0.14,
+          posPercent: 0.11,
           rightFiringArc: [45, 135],
           leftFiringArc: [225, 315]
         },
         // 中轴鱼雷 B
         {
           name: "GER/533/4/C34",
-          posPercent: -0.23,
+          posPercent: -0.24,
           rightFiringArc: [30, 150],
           leftFiringArc: [210, 330]
         }

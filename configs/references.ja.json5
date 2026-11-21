@@ -4307,7 +4307,7 @@
       },
     ],
     description: "ル・ファンタスクはフランス海軍の大型駆逐艦ル・ファンタスク級の一番艦で、1936年に就役した。高速なイタリア軽巡洋艦に対抗するため設計され、公試では通常船体の速度記録を樹立した。本作は1943年のボストン改装後の状態で、後部魚雷発射管を撤去し、BoforsとOerlikonの対空火器を装備している。",
-    author: "AI 強化生成",
+    author: "Nano Banana",
     links: [
       {
         name: "AI 強化生成素材（ユーザー提供）",
@@ -9722,6 +9722,20 @@
     ],
   },
   {
+    name: "GER/150/48/2/TbtsKC36",
+    displayName: "150mm/48 TbtsK C/36 連装砲",
+    type: "兵器",
+    armaments: [],
+    description: "ドイツの 15cm/48 TbtsK C/36 連装砲。1944年状態の Z25 の前部主砲で、1 基に 2 門を並べる。",
+    author: "",
+    links: [
+      {
+        name: "ウィキペディア — 15 cm TbtsK C/36 naval gun",
+        url: "https://en.wikipedia.org/wiki/15_cm_TbtsK_C/36_naval_gun",
+      },
+    ],
+  },
+  {
     name: "GER/37/83/SKC30",
     displayName: "37mm/83 SK C/30 単装高角砲",
     type: "兵器",
@@ -12905,11 +12919,11 @@
     armaments: [
       {
         label: "主砲",
-        value: "3x1 150mm/48 TbtsK C/36",
+        value: "1x2 + 2x1 150mm/48 TbtsK C/36",
       },
       {
         label: "対空兵装",
-        value: "5x1 37mm SK C/30 + 4x1 20mm Flak 38",
+        value: "6x1 37mm SK C/30 + 8x1 20mm Flak 38",
       },
       {
         label: "魚雷",
@@ -12917,12 +12931,8 @@
       },
     ],
     description: "Z25 は1940年に就役したドイツの1936A型駆逐艦で、同型はノルウェー方面での任務から「ナルヴィク級」とも呼ばれる。ノルウェー作戦や1942年の「ツェルベルス」作戦に参加したが、主機の不調で1943年の大半を修理に費やし、1944年にバルト海へ移った。ドイツ海軍では本型を番号だけで呼び、「オッシュ」はフランス海軍で与えられた名前である。同艦は1961年に解体された。",
-    author: "Sam#28 & Nano Banana",
+    author: "不明",
     links: [
-      {
-        name: "Pinterest - Z25 オッシュ",
-        url: "https://jp.pinterest.com/pin/759278818402561012/",
-      },
       {
         name: "ウィキペディア — Z25",
         url: "https://ja.wikipedia.org/wiki/Z25_(%E9%A7%86%E9%80%90%E8%89%A6)",
