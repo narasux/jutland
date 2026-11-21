@@ -6515,70 +6515,75 @@
   {
     name: "ASWTest",
     category: "test",
-    displayName: "反潜测试-威克岛",
-    displayNameEn: "ASW Test - Wake Island",
-    displayNameRu: "Противолодочное испытание — остров Уэйк",
-    displayNameJa: "対潜試験―ウェーク島",
+    displayName: "后期反潜试验场-威克岛",
+    displayNameEn: "Late-War ASW Range - Wake Island",
+    displayNameRu: "Полигон поздней ПЛО — остров Уэйк",
+    displayNameJa: "後期対潜試験場―ウェーク島",
     initFunds: 10000,
     // 引擎把 initCameraPos 当作初始视野左上角（见 state.Camera.Pos），不是视野中心。
-    // 我方两舰质心约 (30, 36)；镜头取其左上外侧 (24, 32)，
-    // 保证 1280x720 及以上分辨率下两舰都出现在开局画面内。
+    // 三个试验区：北「美系后期」、西南「英系后期」、东「日系后期」。
+    // 开场镜头对准北区 P1 约翰斯顿 (18,18)，取左上外侧 (12,14)；
+    // P2 的 I-168 在 (50,18)，镜头取 (44,14)。其余区按 M 查看。
     initCameraPos: [
       // P1
-      [24, 32],
-      // P2：敌编队质心约 (100, 59)，镜头取左上外侧
-      [94, 56]
+      [12, 14],
+      // P2
+      [44, 14]
     ],
     mapName: "wake",
     maxShipCount: 20,
-    description: "作战导调部第 1943 号反潜演习：我方 U 艇与一艘护航驱逐舰在威克岛环礁周边海域与敌潜艇、敌驱逐舰对抗。演习目的：验证下潜隐身、声呐点亮、深水炸弹与反潜鱼雷的完整杀伤链——先让潜艇摸到无护航目标身边，再让反潜舰把接触咬住。注意：未探测到的下潜潜艇不会被盲炸命中，驱逐舰必须先用声呐点亮目标。双方开场相距约 71 格（约 9.1km），留出展开与观察的时间。",
-    descriptionEn: "Exercise 1943: a friendly U-boat and one escorting destroyer face hostile submarines and destroyers in the waters around Wake atoll. The drill validates the full ASW kill chain - submerged stealth, sonar contact, depth charges and anti-submarine torpedoes. Let the boat close on unescorted targets, then have the escorts pin the contact. Blind depth-charge drops never damage an undetected submarine; the destroyer must light it up with sonar first. The two sides start about 71 tiles (roughly 9.1 km) apart, leaving time to deploy and observe.",
-    descriptionRu: "Учения 1943 года: дружественная подводная лодка и один эскортный эсминец против вражеских субмарин и эсминцев в водах вокруг атолла Уэйк. Проверяется вся цепочка противолодочной борьбы: скрытность под водой, обнаружение гидролокатором, глубинные бомбы и противолодочные торпеды. Бомбометание по необнаруженной лодке не наносит урона — сначала её нужно засветить гидролокатором. Стороны начинают примерно в 71 клетке (около 9,1 км) друг от друга, оставляя время на развёртывание и наблюдение.",
-    descriptionJa: "特別演習1943：味方のUボートと護衛駆逐艦1隻が、ウェーク環礁周辺の海域で敵潜水艦・敵駆逐艦と対峙する。潜航による隠密、ソナー探知、爆雷と対潜魚雷という対潜キルチェーンの検証が目的。未探知の潜航艦に爆雷を盲投しても効果はなく、まず駆逐艦がソナーで照準する必要がある。両軍は約71マス（約9.1km）離れて開始し、展開と観察の時間を確保する。",
+    description: "纯测试关卡，不复原历史。作战导调部第 1943-3 号后期反潜试验场：威克岛环礁外海划出三个互不干扰的试验区——北区「美系后期」：约翰斯顿号（双深弹架 + 24 发刺猬弹）对 I-168；西南区「英系后期」：V 号、Y 号（双深弹架 + 刺猬弹）对 Nautilus；东区「日系后期」：岛风号（3 格 95 式深弹架 + 94 式 Y 炮）对 U-96。三区分别验证美英的高爆发齐射和日本的 3 格深弹。区内双方开场相距约 32～37 格（约 4.1～4.7km），区与区之间最近敌我距离约 60 格（约 7.7km），避免跨区交火；开场镜头在北区约翰斯顿号，按 M 可看全图。未探测到的下潜潜艇不会被盲炸命中，驱逐舰必须先用声呐点亮。",
+    descriptionEn: "A pure test scenario, not a historical reconstruction. Exercise 1943-3: a late-war ASW range in the waters around Wake atoll, split into three independent zones. North - U.S. late war: USS Johnston (two depth-charge racks plus a 24-round Hedgehog) against I-168. Southwest - British late war: HMS V and HMS Y (two racks plus Hedgehog each) against Nautilus. East - Japanese late war: Shimakaze (3-tile Type 95 depth-charge rack plus a Type 94 Y-gun) against U-96. The zones validate the U.S./British high-burst salvo pattern and the Japanese 3-tile depth charge. Opposing groups within a zone start about 32-37 tiles (roughly 4.1-4.7 km) apart, and the closest ships from different zones are about 60 tiles (roughly 7.7 km) apart, so the drills do not merge at the start. The opening camera is on Johnston in the north zone; press M for the full map. Blind depth-charge drops never damage an undetected submarine; the destroyer must light it up with sonar first.",
+    descriptionRu: "Чисто испытательный сценарий, не историческая реконструкция. Учения 1943-3: полигон поздней ПЛО у атолла Уэйк, три независимые зоны. Север — поздний американский эсминец: USS Johnston (две батареи глубинных бомб и 24-зарядный «Хеджхог») против I-168. Юго-запад — поздние британские: HMS V и HMS Y (по две батареи и «Хеджхог») против Nautilus. Восток — поздний японский: Shimakaze (3-клеточная батарея Тип 95 и Y-бомбомёт Тип 94) против U-96. Проверяются высокая плотность залпа США/Британии и 3-клеточная дистанция японских глубинных бомб. Внутри зоны стороны начинают в 32–37 клетках (около 4,1–4,7 км), ближайшие корабли из разных зон — около 60 клеток (около 7,7 км), поэтому зоны не сливаются. Начальная камера — на Johnston в северной зоне; M — вся карта. Бомбометание по необнаруженной подлодке не наносит урона — сначала её нужно засветить гидролокатором.",
+    descriptionJa: "史実再現ではない純粋な試験シナリオ。演習1943-3：ウェーク環礁沖の後期対潜試験場。三つの独立区画に分かれる。北「米国後期」：ジョンストン（深爆雷架2基＋24発ヘッジホッグ）対I-168。南西「英国後期」：V、Y（各深爆雷架2基＋ヘッジホッグ）対ノーチラス。東「日本後期」：島風（3マス95式爆雷架＋94式Y砲）対U-96。米英の高火力斉射と日本の3マス爆雷を検証する。区内の両軍は約32～37マス（約4.1～4.7km）、区画間の最接近は約60マス（約7.7km）で、開幕から交戦しない。開始カメラは北区のジョンストン。Mで全体図。未探知の潜航艦への爆雷は無効で、先にソナーで照準する必要がある。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
-      // === 我方 ===
-      // 我方编队在环礁西北外海，U 艇与护航驱逐舰南北相隔 3 格，舰首向东。
+      // 三个试验区沿威克岛环礁外侧铺开；区内双方相距 32～37 格，
+      // 区间最近敌我距离约 60 格，避免 AI 跨区接敌和开局即交火。
+      // === 北区「美系后期」：约翰斯顿（西，18,18）对 I-168（东，50,18），相距 32 格 ===
       {
-        name: "u_96",
-        pos: [30, 34],
+        name: "johnston",
+        pos: [18, 18],
         rotation: 90,
         belongPlayer: "P1"
       },
-      {
-        name: "gurkha",
-        pos: [30, 37],
-        rotation: 90,
-        belongPlayer: "P1"
-      },
-      // === 敌方水面反潜舰 ===
-      // 敌编队移到威克岛环礁以东外海，与 P1 编队最近约 71 格（约 9.1km）；
-      // 环礁隔开双方直射视线，开局有足够时间展开与观察。
-      {
-        name: "porter",
-        pos: [100, 57],
-        rotation: 270,
-        belongPlayer: "P2"
-      },
-      {
-        name: "hammann",
-        pos: [102, 59],
-        rotation: 270,
-        belongPlayer: "P2"
-      },
-      // === 敌方潜艇 ===
-      // I-168 / Nautilus 在驱逐舰前方（西侧）展开，舰首向西接敌。
       {
         name: "i_168",
-        pos: [97, 60],
+        pos: [50, 18],
         rotation: 270,
         belongPlayer: "P2"
+      },
+      // === 西南区「英系后期」：V / Y（西，18,108/114）对 Nautilus（东，55,111），最近约 37 格 ===
+      {
+        name: "v",
+        pos: [18, 108],
+        rotation: 90,
+        belongPlayer: "P1"
+      },
+      {
+        name: "y",
+        pos: [18, 114],
+        rotation: 90,
+        belongPlayer: "P1"
       },
       {
         name: "uss_nautilus",
-        pos: [99, 61],
+        pos: [55, 111],
         rotation: 270,
+        belongPlayer: "P2"
+      },
+      // === 东区「日系后期」：岛风（北，110,25）对 U-96（南，110,62），相距 37 格 ===
+      {
+        name: "shimakaze",
+        pos: [110, 25],
+        rotation: 180,
+        belongPlayer: "P1"
+      },
+      {
+        name: "u_96",
+        pos: [110, 62],
+        rotation: 0,
         belongPlayer: "P2"
       }
     ],

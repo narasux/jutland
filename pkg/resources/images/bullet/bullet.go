@@ -34,14 +34,14 @@ var bombDiameters = []int{1100, 850, 800, 660, 610, 470, 450, 380, 360, 350, 280
 // bombs 炸弹图片映射表
 var bombs = make(map[int]*ebiten.Image)
 
-// depthChargeDiameters 支持的深水炸弹直径列表
-var depthChargeDiameters = []int{200, 300}
+// depthChargeDiameters 支持的深水炸弹/反潜火箭弹体列表（30 = 刺猬弹，250 = 65 式反潜火箭）
+var depthChargeDiameters = []int{30, 200, 250, 300}
 
 // depthCharges 深水炸弹图片映射表
 var depthCharges = make(map[int]*ebiten.Image)
 
 // rocketDiameters 支持的火箭弹直径列表
-var rocketDiameters = []int{55, 70, 82, 100, 120, 122, 127, 132, 200, 250}
+var rocketDiameters = []int{55, 70, 82, 100, 120, 122, 127, 132, 200}
 
 // rockets 火箭弹图片映射表
 var rockets = make(map[int]*ebiten.Image)

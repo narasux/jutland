@@ -35,11 +35,11 @@
     criticalRate: 0.001
   },
   // --------- 火箭弹 ----------
-  // 中国海军 250mm 65 式反潜火箭弹
+  // 中国海军 250mm 65 式反潜火箭弹（反潜火箭，使用 250 专用火箭弹贴图）
   {
     name: "CN/RB/250/1965/Type65",
     type: "depth_charge",
-    diameter: 300,
+    diameter: 250,
     damage: 1800,
     criticalRate: 0
   },
@@ -1623,20 +1623,20 @@
     criticalRate: 0,
     blastRadius: 0.9
   },
-  // 英国刺猬弹（Hedgehog，65 磅接触引信深弹；24 发齐射，用 200mm 深弹贴图）
+  // 英国刺猬弹（Hedgehog，65 磅 / 约 30kg 接触引信深弹；24 发齐射，专用小弹体贴图）
   {
     name: "UK/DC/30/1942/Hedgehog",
     type: "depth_charge",
-    diameter: 200,
+    diameter: 30,
     damage: 450,
     criticalRate: 0,
     blastRadius: 0.35
   },
-  // 美国 Mk 10 刺猬弹（英国 Hedgehog 的许可生产型）
+  // 美国 Mk 10 刺猬弹（英国 Hedgehog 的许可生产型，共用 30kg 弹体贴图）
   {
     name: "US/DC/30/1942/Mk10",
     type: "depth_charge",
-    diameter: 200,
+    diameter: 30,
     damage: 450,
     criticalRate: 0,
     blastRadius: 0.35
