@@ -124,6 +124,13 @@ func TestGameSettingsValidateNormalizesSpeedAndLanguage(t *testing.T) {
 		{name: "slow upper bound", speed: 0.75, language: "ru", want: SpeedSlowMultiplier, wantLang: "ru"},
 		{name: "standard interior", speed: 1.2, language: "ja", want: SpeedStandardMultiplier, wantLang: "ja"},
 		{
+			name:     "traditional chinese",
+			speed:    1.2,
+			language: "zh-Hant",
+			want:     SpeedStandardMultiplier,
+			wantLang: "zh-Hant",
+		},
+		{
 			name:     "standard upper bound",
 			speed:    1.5,
 			language: "zh-Hans",

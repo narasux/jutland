@@ -127,7 +127,7 @@ type GameSettings struct {
 	// SpeedMultiplier 全局速度倍率，影响战舰、炮弹、鱼雷、飞机等移动速度
 	// 可选值为 0.50 / 1.00 / 2.00
 	SpeedMultiplier float64 `json:"speedMultiplier"`
-	// Language 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja。
+	// Language 游戏界面语言，当前正式启用 zh-Hans / zh-Hant / en / ru / ja。
 	Language string `json:"language"`
 	// BGMVolume 背景音乐音量，范围 0.00 ~ 1.00；0 为静音，字段缺失时按 1.00 处理。
 	// 使用指针区分「旧配置没写」和「玩家显式静音」。
@@ -257,7 +257,7 @@ func normalizeSpeedMultiplier(value float64) float64 {
 func (s *GameSettings) validate() {
 	s.SpeedMultiplier = normalizeSpeedMultiplier(s.SpeedMultiplier)
 	switch s.Language {
-	case "zh-Hans", "en", "ru", "ja":
+	case "zh-Hans", "zh-Hant", "en", "ru", "ja":
 	default:
 		s.Language = "zh-Hans"
 	}
@@ -335,7 +335,7 @@ func SaveGameSettings() error {
 			"影响战舰、炮弹、鱼雷、飞机等移动/转向速度\n",
 	)
 	_, _ = file.WriteString("// 范围: 0.50 ~ 2.00，默认值: 1.00\n\n")
-	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja\n")
+	_, _ = file.WriteString("// Language: 游戏界面语言，当前正式启用 zh-Hans / zh-Hant / en / ru / ja\n")
 	_, _ = file.WriteString("// bgmVolume: 背景音乐音量 0.00 ~ 1.00，0 为静音，默认 1.00\n")
 	_, _ = file.WriteString("// effectsVolume: 战场音效（火炮 / 鱼雷 / 爆炸等）音量 0.00 ~ 1.00，默认 1.00\n")
 	_, _ = file.WriteString("// EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场\n")

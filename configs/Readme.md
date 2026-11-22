@@ -212,11 +212,12 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
 
 ## 图鉴引用配置（references.json5 / references.LOCALE.json5）
 
-图鉴引用按语言拆分为四个同结构文件：`references.json5` 为简体中文，
-`references.en.json5`、`references.ru.json5`、`references.ja.json5` 分别为英文、俄文和日文。
-四个文件必须保持完全一致的 `name` 集合和武装条目数量；
+图鉴引用按语言拆分为五个同结构文件：`references.json5` 为简体中文，
+`references.zh-Hant.json5`、`references.en.json5`、`references.ru.json5`、`references.ja.json5`
+分别为繁体中文、英文、俄文和日文。
+五个文件必须保持完全一致的 `name` 集合和武装条目数量；
 `name`、武器数量、口径、型号及素材作者署名属于稳定数据，不应在翻译时改变。
-运行时会按“当前语言 → 英文 → 简体中文”的顺序读取对应条目。
+运行时会按各语言的回退顺序读取对应条目：繁体中文 → 简体中文 → 英文，英文 → 简体中文，俄语/日语 → 英文 → 简体中文。
 
 舰船/飞机图鉴的 `links` 按固定顺序排列：第一项为素材来源，第二项为当前语言维基百科条目（缺失时回退英文）；
 武器等其他条目可以没有链接。链接标题统一写作“来源站点 - 对象名”，例如 `Pinterest - 企业号（CV-6）`；
@@ -807,9 +808,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     displayName: "达尔文港",
     // 英文展示用名称；英文界面使用
     displayNameEn: "Darwin Harbour",
-    // 俄文、日文展示用名称；缺失时按 ru/ja → en → zh-Hans 回退
+    // 其他语言展示用名称；缺失时按 zh-Hant → zh-Hans → en、ru/ja → en → zh-Hans 回退
     displayNameRu: "Порт-Дарвин",
     displayNameJa: "ダーウィン港",
+    displayNameZhHant: "達爾文港",
     // 地图资源名称
     source: "darwin"
   }
@@ -823,7 +825,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   // 全局速度倍率；影响战舰、炮弹、鱼雷、飞机等移动/转向速度
   // 可选值: 慢=0.50 / 标准=1.00 / 快=2.00，默认值: 1.00
   "speedMultiplier": 1.00,
-  // 游戏界面语言；当前正式启用 zh-Hans / en / ru / ja
+  // 游戏界面语言；当前正式启用 zh-Hans / zh-Hant / en / ru / ja
   "language": "zh-Hans",
   // 背景音乐音量，范围 0.00 ~ 1.00；0 为静音，默认值: 1.00
   "bgmVolume": 1.00,
@@ -878,9 +880,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     displayName: "默认",
     // 英文展示用名称；英文界面使用
     displayNameEn: "Default",
-    // 俄文、日文展示用名称；缺失时按 ru/ja → en → zh-Hans 回退
+    // 其他语言展示用名称；缺失时按 zh-Hant → zh-Hans → en、ru/ja → en → zh-Hans 回退
     displayNameRu: "По умолчанию",
     displayNameJa: "デフォルト",
+    displayNameZhHant: "預設",
     // 初始资金
     initFunds: 10000,
     // 初始相机视角位置，按 [P1 坐标, P2 坐标] 配置（均需在地图范围内）
@@ -896,9 +899,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     description: "默认关卡",
     // 英文关卡描述；英文界面使用
     descriptionEn: "Default mission",
-    // 俄文、日文关卡描述；缺失时按 ru/ja → en → zh-Hans 回退
+    // 其他语言关卡描述；缺失时按 zh-Hant → zh-Hans → en、ru/ja → en → zh-Hans 回退
     descriptionRu: "Стандартная миссия",
     descriptionJa: "デフォルト作戦",
+    descriptionZhHant: "預設關卡",
     // 增援点信息
     initReinforcePoints: [
       {

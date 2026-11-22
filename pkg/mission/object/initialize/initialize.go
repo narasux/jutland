@@ -625,6 +625,7 @@ func initReferenceMap() {
 		Filename string
 	}{
 		{i18n.LanguageZhHans, "references.json5"},
+		{i18n.LanguageZhHant, "references.zh-Hant.json5"},
 		{i18n.LanguageEnglish, "references.en.json5"},
 		{i18n.LanguageRussian, "references.ru.json5"},
 		{i18n.LanguageJapanese, "references.ja.json5"},

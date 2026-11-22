@@ -5,8 +5,27 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 )
+
+// TestGetLocalizesTraditionalChineseMissionMetadata 验证关卡名称与描述跟随 zh-Hant 切换。
+// 场景：设置页切到繁体中文后进入任务选择页；PearlHarbor1941 在 missions.json5 中配置了简繁英俄日五套名称与描述。
+// 预期：zh-Hant 返回「珍珠港襲擊-1941」且描述含「珍珠港內」，en 返回英文名；失败表示新字段未进入 displayNames/descriptions 映射。
+// 覆盖：SetLanguage 依次切 zh-Hant/en，调用 Get 后断言 DisplayName 与 Description，Cleanup 复位原语言。
+func TestGetLocalizesTraditionalChineseMissionMetadata(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	i18n.SetLanguage(string(i18n.LanguageZhHant))
+	md := Get("PearlHarbor1941")
+	require.Equal(t, "珍珠港襲擊-1941", md.DisplayName)
+	require.Contains(t, md.Description, "珍珠港內")
+
+	i18n.SetLanguage(string(i18n.LanguageEnglish))
+	md = Get("PearlHarbor1941")
+	require.Equal(t, "Attack on Pearl Harbor - 1941", md.DisplayName)
+}
 
 // TestAvailableMissionsFiltersCategoriesAndPreservesOrder 验证任务列表按分类过滤且保持配置顺序。
 // 场景：构造乱序 map（classic-third/first/second 与 test），order 为 first、test、second、third。

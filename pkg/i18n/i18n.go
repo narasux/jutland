@@ -17,6 +17,7 @@ type Language string
 
 const (
 	LanguageZhHans   Language = "zh-Hans"
+	LanguageZhHant   Language = "zh-Hant"
 	LanguageEnglish  Language = "en"
 	LanguageRussian  Language = "ru"
 	LanguageJapanese Language = "ja"
@@ -33,6 +34,7 @@ type localizerState struct {
 var (
 	enabledLanguages = []Language{
 		LanguageZhHans,
+		LanguageZhHant,
 		LanguageEnglish,
 		LanguageRussian,
 		LanguageJapanese,
@@ -72,6 +74,8 @@ func (l Language) NativeName() string {
 		return "Русский"
 	case LanguageJapanese:
 		return "日本語"
+	case LanguageZhHant:
+		return "繁體中文"
 	default:
 		return "中文"
 	}
@@ -81,6 +85,8 @@ func (l Language) NativeName() string {
 func FallbackLanguages(lang Language) []Language {
 	lang = NormalizeLanguage(string(lang))
 	switch lang {
+	case LanguageZhHant:
+		return []Language{LanguageZhHant, LanguageZhHans, LanguageEnglish}
 	case LanguageEnglish:
 		return []Language{LanguageEnglish, LanguageZhHans}
 	case LanguageRussian:
@@ -92,7 +98,7 @@ func FallbackLanguages(lang Language) []Language {
 	}
 }
 
-// LocalizedValue 按目标语言、英文、简体中文的顺序读取本地化值。
+// LocalizedValue 按目标语言的回退顺序读取本地化值（繁体中文回退简体中文，其余回退英文、简体中文）。
 func LocalizedValue(values map[Language]string) string {
 	for _, lang := range FallbackLanguages(CurrentLanguage()) {
 		if value := values[lang]; value != "" {

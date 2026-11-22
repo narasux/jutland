@@ -56,6 +56,15 @@ func (d *Drawer) drawBackground(screen *ebiten.Image, bg *ebiten.Image) {
 	screen.DrawImage(bg, opts)
 }
 
+// centeredButtonTextY 按实际字体的 ascent/descent 把单行按钮文字垂直居中，避免不同字体固定 +10px 时偏下。
+func centeredButtonTextY(
+	textStr string, buttonY, buttonH, fontSize float64, textFont *text.GoTextFaceSource,
+) float64 {
+	face := &text.GoTextFace{Source: font.ForText(textStr, textFont), Size: fontSize}
+	metrics := face.Metrics()
+	return buttonY + (buttonH-(metrics.HAscent+metrics.HDescent))/2
+}
+
 func (d *Drawer) drawMissionSelect(
 	screen *ebiten.Image,
 	curMission string,
@@ -251,7 +260,10 @@ func (d *Drawer) drawMissionSelect(
 		borderColor,
 		false,
 	)
-	d.drawText(screen, startText, startX+(buttonW-startTW)/2, startY+10, 22, startFont, startColor)
+	d.drawText(
+		screen, startText, startX+(buttonW-startTW)/2,
+		centeredButtonTextY(startText, startY, buttonH, 22, startFont), 22, startFont, startColor,
+	)
 
 	// 返回按钮
 	backX := screenW/2 + 28
@@ -273,7 +285,10 @@ func (d *Drawer) drawMissionSelect(
 		backBorderColor,
 		false,
 	)
-	d.drawText(screen, backText, backX+(buttonW-backTW)/2, backY+10, 22, backFont, backColor)
+	d.drawText(
+		screen, backText, backX+(buttonW-backTW)/2,
+		centeredButtonTextY(backText, backY, buttonH, 22, backFont), 22, backFont, backColor,
+	)
 
 	// 阵营选择：配置层选择 P1/P2，进入关卡后再映射到 HA/CA。
 	sideFont := font.LocalizedUI(font.Hang)
@@ -291,7 +306,10 @@ func (d *Drawer) drawMissionSelect(
 	sideY := startY
 
 	if showSideLabel {
-		d.drawText(screen, sideLabel, sideX, sideY+10, sideFontSize, sideFont, labelClr)
+		d.drawText(
+			screen, sideLabel, sideX,
+			centeredButtonTextY(sideLabel, sideY, buttonH, sideFontSize, sideFont), sideFontSize, sideFont, labelClr,
+		)
 		sideX += sideLabelW + 12
 	}
 
@@ -318,7 +336,7 @@ func (d *Drawer) drawMissionSelect(
 			screen,
 			text,
 			button.X+(button.W-textW)/2,
-			button.Y+10,
+			centeredButtonTextY(text, button.Y, button.H, sideFontSize, sideFont),
 			sideFontSize,
 			sideFont,
 			textColor,
@@ -364,7 +382,7 @@ func (d *Drawer) drawMissionSelect(
 			screen,
 			text,
 			button.X+(button.W-textW)/2,
-			button.Y+10,
+			centeredButtonTextY(text, button.Y, button.H, categoryFontSize, categoryFont),
 			categoryFontSize,
 			categoryFont,
 			textColor,

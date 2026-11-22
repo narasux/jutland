@@ -86,6 +86,8 @@ type MapCfg struct {
 	DisplayNameRu string `json:"displayNameRu"`
 	// 日文展示名称
 	DisplayNameJa string `json:"displayNameJa"`
+	// 繁体中文展示名称
+	DisplayNameZhHant string `json:"displayNameZhHant"`
 	// 原始素材名
 	Source string `json:"source"`
 	// 地图数据
@@ -110,6 +112,7 @@ type MapCfg struct {
 func (cfg *MapCfg) LocalizedDisplayName() string {
 	return i18n.LocalizedValue(map[i18n.Language]string{
 		i18n.LanguageZhHans:   cfg.DisplayName,
+		i18n.LanguageZhHant:   cfg.DisplayNameZhHant,
 		i18n.LanguageEnglish:  cfg.DisplayNameEn,
 		i18n.LanguageRussian:  cfg.DisplayNameRu,
 		i18n.LanguageJapanese: cfg.DisplayNameJa,

@@ -188,10 +188,10 @@ func TestEveryConfiguredGermanBombHasLocalizedReference(t *testing.T) {
 	}
 }
 
-// TestLocalizedReferencesUseCompleteDescriptions 验证 ja/ru 图鉴描述与英文完整度一致且无模板残留。
-// 场景：加载 en/ja/ru 三份图鉴，逐条比较描述是否存在，并核对 hakuryu 与日文链接名。
-// 预期：三语条目数相同，ja/ru 描述有无与 en 一致；无「に関する参考情報です」等模板套话。
-// 覆盖：hakuryu 日文含 G-15/大鳳、俄文含 G-15/Taihō；日文链接名不含 "Wikipedia —"。
+// TestLocalizedReferencesUseCompleteDescriptions 验证 ja/ru/zh-Hant 图鉴描述与英文完整度一致且无模板残留。
+// 场景：加载 en/ja/ru/zh-Hant 四份图鉴，逐条比较描述是否存在，并核对 hakuryu 与日文链接名。
+// 预期：四语条目数相同，ja/ru/zh-Hant 描述有无与 en 一致；无「に関する参考情報です」等模板套话。
+// 覆盖：hakuryu 日文含 G-15/大鳳、俄文含 G-15/Taihō、繁体含 G-15/大鳳；日文链接名不含 "Wikipedia —"。
 func TestLocalizedReferencesUseCompleteDescriptions(t *testing.T) {
 	loadLocale := func(t *testing.T, locale string) map[string]Reference {
 		t.Helper()
@@ -208,13 +208,16 @@ func TestLocalizedReferencesUseCompleteDescriptions(t *testing.T) {
 	english := loadLocale(t, "en")
 	japanese := loadLocale(t, "ja")
 	russian := loadLocale(t, "ru")
+	traditional := loadLocale(t, "zh-Hant")
 	require.Len(t, japanese, len(english))
 	require.Len(t, russian, len(english))
+	require.Len(t, traditional, len(english))
 
 	for name, enRef := range english {
 		for locale, ref := range map[string]Reference{
-			"ja": japanese[name],
-			"ru": russian[name],
+			"ja":      japanese[name],
+			"ru":      russian[name],
+			"zh-Hant": traditional[name],
 		} {
 			require.Equal(
 				t,
@@ -235,6 +238,8 @@ func TestLocalizedReferencesUseCompleteDescriptions(t *testing.T) {
 	require.Contains(t, japanese["hakuryu"].Description, "大鳳")
 	require.Contains(t, russian["hakuryu"].Description, "G-15")
 	require.Contains(t, russian["hakuryu"].Description, "Taihō")
+	require.Contains(t, traditional["hakuryu"].Description, "G-15")
+	require.Contains(t, traditional["hakuryu"].Description, "大鳳")
 
 	for _, ref := range japanese {
 		for _, link := range ref.Links {

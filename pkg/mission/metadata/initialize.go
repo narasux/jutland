@@ -24,6 +24,7 @@ type rawMissionMetadata struct {
 	DisplayNameEn       string                          `json:"displayNameEn"`
 	DisplayNameRu       string                          `json:"displayNameRu"`
 	DisplayNameJa       string                          `json:"displayNameJa"`
+	DisplayNameZhHant   string                          `json:"displayNameZhHant"`
 	InitFunds           int64                           `json:"initFunds"`
 	InitCameraPos       [2][2]int                       `json:"initCameraPos"`
 	MapName             string                          `json:"mapName"`
@@ -32,6 +33,7 @@ type rawMissionMetadata struct {
 	DescriptionEn       string                          `json:"descriptionEn"`
 	DescriptionRu       string                          `json:"descriptionRu"`
 	DescriptionJa       string                          `json:"descriptionJa"`
+	DescriptionZhHant   string                          `json:"descriptionZhHant"`
 	InitShips           []rawInitShipMetadata           `json:"initShips"`
 	InitReinforcePoints []rawInitReinforcePointMetadata `json:"initReinforcePoints"`
 	InitOilPlatforms    []rawInitOilPlatformMetadata    `json:"initOilPlatforms"`
@@ -279,6 +281,7 @@ func init() {
 			InitCameraPositions: initCameraPositions,
 			displayNames: map[i18n.Language]string{
 				i18n.LanguageZhHans:   md.DisplayName,
+				i18n.LanguageZhHant:   md.DisplayNameZhHant,
 				i18n.LanguageEnglish:  md.DisplayNameEn,
 				i18n.LanguageRussian:  md.DisplayNameRu,
 				i18n.LanguageJapanese: md.DisplayNameJa,
@@ -289,6 +292,7 @@ func init() {
 			Description:  md.Description,
 			descriptions: map[i18n.Language]string{
 				i18n.LanguageZhHans:   md.Description,
+				i18n.LanguageZhHant:   md.DescriptionZhHant,
 				i18n.LanguageEnglish:  md.DescriptionEn,
 				i18n.LanguageRussian:  md.DescriptionRu,
 				i18n.LanguageJapanese: md.DescriptionJa,

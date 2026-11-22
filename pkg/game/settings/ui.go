@@ -821,7 +821,7 @@ func (s *UI) languageCombo(boxWidth, boxHeight int) *widget.ComboButton {
 	return combo
 }
 
-// languageNameFace 返回语言自称应使用的字体：中文楷体、英文 JetBrains、俄文 Golos、日文 Zen Kaku。
+// languageNameFace 返回语言自称应使用的字体：简体中文楷体、繁体中文 jf open 粉圓、英文 JetBrains、俄文 Golos、日文 Zen Kaku。
 func (s *UI) languageNameFace(lang i18n.Language) *text.Face {
 	return newFace(s.metrics.buttonSize, font.ForLanguage(lang, font.Kai))
 }

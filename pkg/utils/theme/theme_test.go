@@ -76,13 +76,14 @@ func TestPanelTokensAreDistinct(t *testing.T) {
 	}
 }
 
-// TestNumericFaceSupportsLatinDigitsForEveryLanguage 验证四种语言下 Numeric() 都返回等宽拉丁字体。
-// 场景：依次切换到 zh-Hans、en、ru、ja，数值列只含拉丁数字与单位，不应依赖 CJK/西里尔字形而缺字。
+// TestNumericFaceSupportsLatinDigitsForEveryLanguage 验证五种语言下 Numeric() 都返回等宽拉丁字体。
+// 场景：依次切换到 zh-Hans、zh-Hant、en、ru、ja，数值列只含拉丁数字与单位，不应依赖 CJK/西里尔字形而缺字。
 // 预期：每种语言的 Numeric() 都等于 font.JetbrainsMono；结束后恢复 zh-Hans，避免污染后续测试。
-// 覆盖：遍历四个 i18n.Language 调用 SetLanguage 和 Numeric，比较字体并在末尾重置。
+// 覆盖：遍历五个 i18n.Language 调用 SetLanguage 和 Numeric，比较字体并在末尾重置。
 func TestNumericFaceSupportsLatinDigitsForEveryLanguage(t *testing.T) {
 	languages := []i18n.Language{
 		i18n.LanguageZhHans,
+		i18n.LanguageZhHant,
 		i18n.LanguageEnglish,
 		i18n.LanguageRussian,
 		i18n.LanguageJapanese,

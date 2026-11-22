@@ -101,7 +101,7 @@ func Body() *text.GoTextFaceSource {
 	return font.LocalizedUI(font.Kai)
 }
 
-// Numeric 返回纯数字/单位列所需的字体。数值只含拉丁数字与单位，四种语言共用
+// Numeric 返回纯数字/单位列所需的字体。数值只含拉丁数字与单位，五种语言共用
 // 等宽字体即可清晰对齐；若值含 CJK/西里尔字形则由调用方回退到 Body()。
 func Numeric() *text.GoTextFaceSource {
 	return font.JetbrainsMono

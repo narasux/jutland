@@ -16,7 +16,7 @@ import (
 
 // TestUIHasNoHardcodedChineseStrings 验证 UI 包的非测试源码中没有硬编码中文字符串。
 // 场景：界面文案迁移到 i18n 后，若 pkg/game、sidebar、unitpanel 等仍写字面量「任务选择」，
-// 切到 en/ru/ja 时会残留中文。
+// 切到 en/ru/ja/zh-Hant 时会残留中文。
 // 预期：6 个 UI 目录的字符串字面量都不含汉字；失败会打印违规字符串与文件路径，
 // 说明该文案绕过了消息目录，切语言时不会翻译。
 // 覆盖：从仓库根递归解析 pkg/game、collection、sidebar、unitpanel、drawer、object/unit 的 .go，

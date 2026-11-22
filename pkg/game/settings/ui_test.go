@@ -34,7 +34,7 @@ func TestSpeedOptionsOnlyExposeThreePresets(t *testing.T) {
 }
 
 // TestClosedControlsShareTheWidestLabel 验证关闭态下拉宽度取所有候选标签的最宽者再加内边距。
-// 场景：22px 下候选含 5/5、三档速度文案（当前语言字体）和四种语言 NativeName（各自语言字体）；
+// 场景：22px 下候选含 5/5、三档速度文案（当前语言字体）和五种语言 NativeName（各自语言字体）；
 // 切换选中语言后宽度会变化，不同字体不能混用测量。
 // 预期：closedControlWidth = max(速度类文案宽, 各语言 NativeName 宽) + controlPadX，而不是硬编码“标准”。
 // 覆盖：用 comboFace 量 5/5 与 speedOptions，用 ForLanguage 的字体逐个量 NativeName，取最大值后与函数返回值比较。
@@ -56,9 +56,10 @@ func TestClosedControlsShareTheWidestLabel(t *testing.T) {
 	}
 }
 
-// TestLanguageNameFaceUsesNativeFont 验证语言自称按语言选字体，中文使用楷体。
-// 场景：语言下拉每个选项和关闭态都用该语言自己的字体；中文若继续用日文字体会与周围楷体不一致。
-// 预期：zh-Hans→Kai、en→JetbrainsMono、ru→GolosText、ja→ZenKakuGothicNew，失败说明又退回单一复合字体。
+// TestLanguageNameFaceUsesNativeFont 验证语言自称按语言选字体，中日文使用对应字体。
+// 场景：语言下拉每个选项和关闭态都用该语言自己的字体；繁体中文若继续用简体楷体会缺字。
+// 预期：zh-Hans→Kai、zh-Hant→OpenHuninn、en→JetbrainsMono、ru→GolosText、ja→ZenKakuGothicNew，
+// 失败说明又退回单一复合字体。
 // 覆盖：构造 buttonSize=22 的 UI，逐个语言调用 languageNameFace，断言 *text.GoTextFace 的 Source 指针。
 func TestLanguageNameFaceUsesNativeFont(t *testing.T) {
 	ui := &UI{metrics: settingsMetrics{buttonSize: 22}}
@@ -67,6 +68,7 @@ func TestLanguageNameFaceUsesNativeFont(t *testing.T) {
 		want *text.GoTextFaceSource
 	}{
 		{i18n.LanguageZhHans, font.Kai},
+		{i18n.LanguageZhHant, font.OpenHuninn},
 		{i18n.LanguageEnglish, font.JetbrainsMono},
 		{i18n.LanguageRussian, font.GolosText},
 		{i18n.LanguageJapanese, font.ZenKakuGothicNew},

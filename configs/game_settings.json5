@@ -2,7 +2,7 @@
 // SpeedMultiplier: 全局速度倍率（慢=0.50 / 标准=1.00 / 快=2.00），影响战舰、炮弹、鱼雷、飞机等移动/转向速度
 // 范围: 0.50 ~ 2.00，默认值: 1.00
 
-// Language: 游戏界面语言，当前正式启用 zh-Hans / en / ru / ja
+// Language: 游戏界面语言，当前正式启用 zh-Hans / zh-Hant / en / ru / ja
 // bgmVolume: 背景音乐音量 0.00 ~ 1.00，0 为静音，默认 1.00
 // effectsVolume: 战场音效（火炮 / 鱼雷 / 爆炸等）音量 0.00 ~ 1.00，默认 1.00
 // EnableLandAirfield: 陆地机场功能总开关，false 时所有任务不生成机场

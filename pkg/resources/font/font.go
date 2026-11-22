@@ -34,6 +34,9 @@ var (
 
 	// ZenKakuGothicNew 日语界面字体
 	ZenKakuGothicNew *text.GoTextFaceSource
+
+	// OpenHuninn 繁体中文界面字体（jf open 粉圓）
+	OpenHuninn *text.GoTextFaceSource
 )
 
 var fontStrMap map[*text.GoTextFaceSource]string
@@ -57,6 +60,8 @@ func ForLanguage(lang i18n.Language, chinese *text.GoTextFaceSource) *text.GoTex
 		return GolosText
 	case i18n.LanguageJapanese:
 		return ZenKakuGothicNew
+	case i18n.LanguageZhHant:
+		return OpenHuninn
 	default:
 		return chinese
 	}
@@ -71,6 +76,8 @@ func LocalizedTitle(chinese *text.GoTextFaceSource) *text.GoTextFaceSource {
 		return GolosText
 	case i18n.LanguageJapanese:
 		return ZenKakuGothicNew
+	case i18n.LanguageZhHant:
+		return OpenHuninn
 	default:
 		return chinese
 	}
@@ -93,6 +100,9 @@ func ForText(value string, preferred *text.GoTextFaceSource) *text.GoTextFaceSou
 	if hasHan {
 		if i18n.CurrentLanguage() == i18n.LanguageJapanese {
 			return ZenKakuGothicNew
+		}
+		if i18n.CurrentLanguage() == i18n.LanguageZhHant {
+			return OpenHuninn
 		}
 		if preferred == Hang {
 			return Hang
@@ -147,6 +157,11 @@ func init() {
 		log.Fatalf("missing %s: %s", fontPath, err)
 	}
 
+	fontPath = "/jf_open_huninn.ttf"
+	if OpenHuninn, err = loader.LoadFont(fontPath); err != nil {
+		log.Fatalf("missing %s: %s", fontPath, err)
+	}
+
 	fontStrMap = map[*text.GoTextFaceSource]string{
 		Hang:                "hang",
 		Kai:                 "kai",
@@ -156,6 +171,7 @@ func init() {
 		JetbrainsMonoItalic: "jetbrains_mono_italic",
 		GolosText:           "golos_text",
 		ZenKakuGothicNew:    "zen_kaku_gothic_new",
+		OpenHuninn:          "jf_open_huninn",
 	}
 
 	log.Println("font resources loaded")

@@ -228,16 +228,22 @@ func (d *Drawer) drawCollectionCard(
 		screen, title, card.X+20*scale, card.Y+18*scale,
 		titleFontSize, font.LocalizedUI(font.Kai), color.RGBA{R: 230, G: 218, B: 194, A: 255},
 	)
-	// Zen Kaku Gothic 的基线更低，日文标题需要把分隔线再下移一点，避免文字压线。
-	separatorY := card.Y + 44*scale
-	if i18n.CurrentLanguage() == i18n.LanguageJapanese {
-		separatorY = card.Y + 52*scale
-	}
+	// Zen Kaku Gothic 的上伸部更高，日文标题基线更低，分隔线需要下移避免压字。
+	separatorY := collectionCardSeparatorY(card.Y, scale, i18n.CurrentLanguage())
 	vector.StrokeLine(
 		screen, float32(card.X+20*scale), float32(separatorY),
 		float32(card.X+card.W-20*scale), float32(separatorY),
 		1, color.RGBA{R: 214, G: 201, B: 178, A: 120}, false,
 	)
+}
+
+// collectionCardSeparatorY 返回卡片标题分隔线的纵坐标；高上伸部的日文字体需要比中文多下移 8px。
+func collectionCardSeparatorY(cardY, scale float64, lang i18n.Language) float64 {
+	offset := 44.0
+	if lang == i18n.LanguageJapanese {
+		offset = 52.0
+	}
+	return cardY + offset*scale
 }
 
 func (d *Drawer) drawCollectionLines(

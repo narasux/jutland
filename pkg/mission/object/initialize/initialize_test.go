@@ -303,7 +303,13 @@ func TestASWSalvoWeapons(t *testing.T) {
 				got = rocket.SalvoSize
 			}
 			if rocket.SalvoSize > rocket.RocketCount {
-				t.Errorf("%s rocket %s salvoSize=%d > rocketCount=%d", tc.ship, rocket.Name, rocket.SalvoSize, rocket.RocketCount)
+				t.Errorf(
+					"%s rocket %s salvoSize=%d > rocketCount=%d",
+					tc.ship,
+					rocket.Name,
+					rocket.SalvoSize,
+					rocket.RocketCount,
+				)
 			}
 		}
 		if got != tc.want {

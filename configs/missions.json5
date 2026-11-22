@@ -7,6 +7,7 @@
     displayNameEn: "Attack on Pearl Harbor - 1941",
     displayNameRu: "Нападение на Пёрл-Харбор — 1941",
     displayNameJa: "真珠湾攻撃―1941年",
+    displayNameZhHant: "珍珠港襲擊-1941",
     // 初始资金 5000：珍珠港没有油井收入，初始资金是机场自动生产的唯一经济来源
     initFunds: 5000,
     initCameraPos: [
@@ -21,6 +22,7 @@
     descriptionEn: "At about 07:55 on 7 December 1941, the U.S. Pacific Fleet at Pearl Harbor came under attack. This scenario places eight battleships, eight cruisers, and twenty-nine destroyers in their opening historical berth relationships. The Japanese carrier striking force and its close surface escort enter from the open water at the lower right. Missing ship assets use same-class substitutes first, then ships of the same category and similar displacement; every substitution is documented in the configuration comments.",
     descriptionRu: "Около 07:55 7 декабря 1941 года Тихоокеанский флот США в Пёрл-Харборе подвергся внезапному удару. В сценарии восемь линкоров, восемь крейсеров и двадцать девять эсминцев размещены с сохранением исторического взаимного расположения на стоянках. Японское авианосное соединение с ближним охранением входит из открытой воды в правом нижнем углу карты. Отсутствующие корабли заменены прежде всего однотипными, затем кораблями той же категории и близкого водоизмещения; каждая замена отмечена в комментариях конфигурации.",
     descriptionJa: "1941年12月7日午前7時55分頃、真珠湾の米太平洋艦隊は日本海軍第一航空艦隊の奇襲を受けた。本シナリオでは攻撃開始時の係留関係に基づき、戦艦8隻、巡洋艦8隻、駆逐艦29隻を港内に配置する。日本の空母機動部隊と近接護衛部隊はマップ右下の外洋から港へ向かう。未収録艦は同型艦を優先し、次に同じ艦種で排水量の近い艦を代用し、各代用を設定コメントに記した。",
+    descriptionZhHant: "1941 年 12 月 7 日約 07:55，珍珠港內的美國太平洋艦隊遭到日本第一航空艦隊突襲。本關按襲擊開始時的歷史泊位關係部署港內 8 艘戰列艦、8 艘巡洋艦和 29 艘驅逐艦；日本航艦機動部隊及其近接護航艦隊從地圖右下方開放水域駛向港區。受現有艦船資源限制，缺失艦型均按同級優先、其次同類別近似噸位替代，並在配置註釋中逐艦註明。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     // 陆地机场：福特岛机场（美军，历史上驻有陆军航空队与海军巡逻机部队；
@@ -533,6 +535,7 @@
     displayNameEn: "Defense of Manila Bay - 1941",
     displayNameRu: "Оборона Манильского залива — 1941",
     displayNameJa: "マニラ湾防衛戦―1941年",
+    displayNameZhHant: "馬尼拉灣防衛戰-1941",
     initFunds: 0,
     initCameraPos: [
       // P1
@@ -546,6 +549,7 @@
     descriptionEn: "At 04:00 on 8 December 1941, Manila receives warning that war has begun across the Pacific. This scenario is explicitly alternate history: the main striking force of the U.S. Asiatic Fleet has not dispersed south as planned and instead meets a compressed Japanese Third Fleet and light-carrier force inside Manila Bay. Command Houston, Marblehead, Langley, and their destroyers in defense of the bay approaches. The opposing order of battle, distances, and Japanese entry into the bay are gameplay abstractions; missing ships use same-class or same-nation, same-category substitutes.",
     descriptionRu: "8 декабря 1941 года в 04:00 Манила получает известие о начале войны на Тихом океане. Этот сценарий является явно обозначенной альтернативной историей: основные ударные силы Азиатского флота США не ушли на юг по довоенному плану, а встречают в Манильском заливе условно сведённые силы японского Третьего флота и лёгкого авианосца. Командуйте «Хьюстоном», «Марблхедом», «Лэнгли» и эсминцами, защищая подступы к заливу. Состав сторон, дистанции и вход японских кораблей в залив упрощены для игры; отсутствующие корабли заменены однотипными или близкими кораблями той же страны и категории.",
     descriptionJa: "1941年12月8日04時00分、マニラに太平洋戦争勃発の警報が届く。本シナリオは明確な仮想戦であり、戦前計画どおり南方へ分散しなかった米アジア艦隊の主力が、マニラ湾内へ進入する日本第三艦隊と軽空母兵力の圧縮編成を迎撃する。ヒューストン、マーブルヘッド、ラングレーと駆逐艦を指揮し、湾口を防衛せよ。両軍の編成、距離、日本艦隊の湾内進入はゲーム上の近似であり、未収録艦は同型艦または同国・同艦種の近似艦で代用している。",
+    descriptionZhHant: "1941 年 12 月 8 日 04:00，馬尼拉收到太平洋戰爭爆發的警報。本關是一場明確的架空推演：假設未按戰前計劃南撤的美國亞洲艦隊主力仍留在馬尼拉灣，並在近海迎擊由日本第三艦隊與輕型航艦兵力組成的突入編隊。指揮休斯敦、馬布林黑德、蘭利及驅逐艦防守灣口。雙方編成、距離與日軍進入灣內均為玩法壓縮；缺失艦船使用同級或同國同艦種近似資源替代。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -706,6 +710,7 @@
     displayNameEn: "Wake Island - 1941",
     displayNameRu: "Остров Уэйк — 1941",
     displayNameJa: "ウェーク島―1941年",
+    displayNameZhHant: "威克島-1941",
     initFunds: 5500,
     initCameraPos: [
       // P1
@@ -719,6 +724,7 @@
     descriptionEn: "On 8 December 1941, Japan attacked Wake Island while the strike on Pearl Harbor was still unfolding. The atoll was a vital American outpost in the central Pacific, defended by Marines and coastal guns. This scenario imagines Allied carrier reinforcements arriving before the second Japanese assault. Yorktown and South Dakota form a task force west of Wake to meet Hiryū, Sōryū, and the advancing Japanese surface force.",
     descriptionRu: "8 декабря 1941 года, пока продолжался налёт на Пёрл-Харбор, Япония атаковала остров Уэйк. Этот атолл был важным американским опорным пунктом в центральной части Тихого океана, защищённым морской пехотой и береговыми батареями. В данном сценарии авианосное подкрепление союзников прибывает до второго японского штурма. «Йорктаун» и «Саут Дакота» формируют соединение к западу от Уэйка, чтобы встретить «Хирю», «Сорю» и наступающие японские надводные силы.",
     descriptionJa: "1941年12月8日、真珠湾攻撃が続く中、日本軍はウェーク島への攻撃を開始した。この環礁は中部太平洋におけるアメリカの重要拠点であり、海兵隊と沿岸砲台が守備していた。本作戦では日本軍の第二次攻撃より先に、連合軍の空母増援が到着する。ヨークタウンとサウスダコタを中核とする任務部隊を率い、飛龍、蒼龍および接近する日本水上部隊を迎撃せよ。",
+    descriptionZhHant: "1941 年 12 月 8 日，日本聯合艦隊在偷襲珍珠港的同時發動了對威克島的進攻，威克島是美軍在太平洋中部的重要前哨，素有「太平洋的直布羅陀」之稱島上駐有約 450 名海軍陸戰隊員與六門 5 英寸岸防炮，戰略地位極為重要日軍以金龍丸號特設巡洋艦率兩艘驅逐艦先行試探，遭遇美軍頑強抵抗，首輪進攻受挫12 月 23 日，日軍增派飛龍、蒼龍號航艦及重型水面艦艇發動第二輪猛攻，威克島最終淪陷本關設定為盟軍航艦援軍提前抵達的架空劇本——約克城號與南達科他號率領特混艦隊在威克島以西海域佈陣，與日軍南下主力展開正面交鋒太平洋戰爭的第一場航艦對決，將在北太平洋的環礁海域上演。",
     initReinforcePoints: [
       {
         pos: [1, 20],
@@ -929,6 +935,7 @@
     displayNameEn: "Darwin Harbour - 1942",
     displayNameRu: "Порт-Дарвин — 1942",
     displayNameJa: "ダーウィン港―1942年",
+    displayNameZhHant: "達爾文港-1942",
     initFunds: 6000,
     initCameraPos: [
       // P1（含两艘约克城级航母与两艘防空巡洋舰后的舰队质心）
@@ -942,6 +949,7 @@
     descriptionEn: "On 19 February 1942, Japanese carrier aircraft launched the first major air raid against Darwin, the key Allied naval base in northern Australia. In this alternate battle, Allied intelligence gives South Dakota, two Yorktown-class carriers and a cruiser force time to establish three defensive lines outside the harbour. Akagi, Kaga, Hiryū, and Sōryū now approach from the northeast with the First Air Fleet. Hold Darwin Harbour and destroy the attacking force.",
     descriptionRu: "19 февраля 1942 года японская палубная авиация нанесла первый крупный удар по Дарвину — главной базе союзников на севере Австралии. В этом альтернативном сражении разведка успела предупредить союзников, и линкор «Саут Дакота», два авианосца типа «Йорктаун» и крейсера развернули три оборонительных рубежа у входа в гавань. С северо-востока приближается Первый воздушный флот с авианосцами «Акаги», «Кага», «Хирю» и «Сорю». Удержите порт Дарвин и уничтожьте атакующую группировку.",
     descriptionJa: "1942年2月19日、日本海軍の艦載機部隊はオーストラリア北部の連合軍重要拠点ダーウィンを大規模に空襲した。本作戦では連合軍が事前に情報をつかみ、戦艦サウスダコタ、ヨークタウン級空母二隻と巡洋艦部隊が港外に三重の防衛線を展開している。北東からは赤城、加賀、飛龍、蒼龍を中核とする第一航空艦隊が接近中だ。ダーウィン港を守り、敵攻撃部隊を撃滅せよ。",
+    descriptionZhHant: "1942 年 2 月 19 日，日軍出動 242 架戰機對澳大利亞達爾文港發動大規模空襲，史稱「澳大利亞的珍珠港」——這是二戰期間對澳大利亞本土最猛烈的軍事打擊日軍以赤城、加賀、飛龍、蒼龍四艘航艦為核心的第一航空戰隊自帛琉起航，意圖摧毀盟軍在西南太平洋最重要的海軍支點盟軍事先截獲情報，緊急調派南達科他號戰列艦、兩艘約克城級航艦與巡洋艦隊馳援達爾文，在港外緊急佈設三道海上防線，以逸待勞迎擊日軍南下編隊本關即為這一虛構歷史轉折點：盟軍主力艦隊搶先抵達達爾文港海域，與從東北方向逼近的日軍機動部隊展開正面決戰你的使命——指揮盟軍艦隊守住達爾文港，殲滅來犯之敵。",
     initReinforcePoints: [
       {
         pos: [1, 20],
@@ -1276,6 +1284,7 @@
     displayNameEn: "Battle of Midway - 1942",
     displayNameRu: "Битва за Мидуэй — 1942",
     displayNameJa: "ミッドウェー海戦―1942年",
+    displayNameZhHant: "中途島之戰-1942",
     initFunds: 5000,
     initCameraPos: [
       // P1
@@ -1289,6 +1298,7 @@
     descriptionEn: "At 05:45 on 4 June 1942, a Midway PBY sighted the Japanese First Air Fleet 180 nautical miles to the northwest, while U.S. Task Forces 16 and 17 waited to the northeast. This scenario uses that moment as its historical anchor and compresses a carrier battle fought across hundreds of miles into a 256×256 grid. Command Yorktown, Enterprise, Hornet, and their screens against Akagi, Kaga, Sōryū, Hiryū, and their close escort. Missing assets use same-class or same-category substitutes; distances and formation spacing are gameplay approximations, not exact historical positions.",
     descriptionRu: "4 июня 1942 года в 05:45 патрульный самолёт PBY с Мидуэя обнаружил Первый воздушный флот Японии в 180 морских милях к северо-западу, а американские оперативные соединения 16 и 17 ожидали к северо-востоку. Сценарий использует этот момент как историческую точку отсчёта и сжимает авианосное сражение, проходившее на сотнях миль, до сетки 256×256. Командуйте «Йорктауном», «Энтерпрайзом», «Хорнетом» и их охранением против «Акаги», «Каги», «Сорю», «Хирю» и ближнего эскорта. Отсутствующие корабли заменены однотипными или близкими по категории; дистанции и интервалы построения являются игровым приближением.",
     descriptionJa: "1942年6月4日05時45分、ミッドウェーのPBY哨戒機は北西180海里に日本海軍第一航空艦隊を発見し、北東には米第16・第17任務部隊が待機していた。本シナリオはこの時刻を歴史上の基準とし、数百海里に及ぶ空母戦を256×256グリッドへ圧縮する。ヨークタウン、エンタープライズ、ホーネットと護衛部隊を指揮し、赤城、加賀、蒼龍、飛龍および近接護衛部隊を迎撃せよ。未収録艦は同型艦または同艦種の近似艦で代用し、両軍の距離と隊形間隔は史実の正確な艦位ではなくゲーム上の近似である。",
+    descriptionZhHant: "1942 年 6 月 4 日 05:45，中途島的 PBY 巡邏機在西北 180 海里發現日本第一航空艦隊；東北方向，美軍第 16 與第 17 特混艦隊已進入伏擊陣位。本關以此為時間錨點，將數百海里的航艦戰壓縮到 256×256 網格：指揮約克城、企業和大黃蜂三艘航艦及其護航艦隊，迎戰赤城、加賀、蒼龍、飛龍及近接護航艦隊。現有資源缺失時採用同級艦或同類別近似艦替代；雙方距離和隊形間隔為可玩性近似，不代表史實艦位。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     // 中途岛陆地机场（美军）：沙岛（陆军航空队重/中轰炸机）与东岛（海军陆战队/
@@ -1705,6 +1715,7 @@
     displayNameEn: "Island Chain Encounter - 1942",
     displayNameRu: "Встречный бой у островной цепи — 1942",
     displayNameJa: "島嶼群遭遇戦―1942年",
+    displayNameZhHant: "島鏈遭遇戰-1942",
     initFunds: 0,
     initCameraPos: [
       // P1
@@ -1718,6 +1729,7 @@
     descriptionEn: "At 16:00 on 15 September 1942, in a fictional time frame, U.S. and Japanese surface forces meet in the east-west channel of an unnamed island chain. This is not a historical reconstruction: the fictional map has no real-world scale anchor, so the fleets use the gameplay scale of a 128×128 grid, 16.384 km square. Command New Mexico, three cruisers, and four destroyers eastward, using the islands for cover against Kongo's surface group. There are no reinforcements or oil platforms, and every ship name directly references an existing game asset rather than a historical order of battle.",
     descriptionRu: "15 сентября 1942 года в 16:00, в рамках вымышленного эпизода, американские и японские надводные силы встречаются в проливе, идущем с запада на восток через безымянную цепь островов. Это не историческая реконструкция: у вымышленной карты нет реального масштабного ориентира, поэтому флотилии размещены в игровом масштабе сетки 128×128, то есть квадрата 16,384 км. Ведите «Нью-Мексико», три крейсера и четыре эсминца на восток, используя острова как укрытие против соединения «Конго». Подкреплений и нефтяных платформ нет; все названия кораблей напрямую ссылаются на имеющиеся игровые ресурсы, а не на исторический боевой состав.",
     descriptionJa: "1942年9月15日16時00分という架空の時刻設定で、米日両軍の水上部隊が無名の島嶼群を東西に抜ける水道で遭遇する。本シナリオは史実の再現ではない。架空地図には実在地形の尺度基準がないため、128×128グリッド、すなわち一辺16.384kmのゲーム上の尺度で艦隊を配置した。ニューメキシコ、巡洋艦3隻、駆逐艦4隻を率いて東進し、島影を利用して金剛の水上部隊を撃破せよ。増援点と油井はなく、艦名はすべて既存ゲーム資源を直接使用しており、史実の編成を示すものではない。",
+    descriptionZhHant: "1942 年 9 月 15 日 16:00（架空時間錨點），美日兩支水面艦隊在無名島鏈的東西水道相遇。本關不是歷史復原；地圖沒有真實地理尺寸錨點，艦隊按 128×128 網格（16.384 千米見方）的玩法尺度佈置。指揮新墨西哥號、三艘巡洋艦和四艘驅逐艦向東突破，利用島嶼遮蔽火力並擊敗金剛號水面編隊。無增援、無油井，艦名均直接使用現有資源，不代表史實編成。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -1843,6 +1855,7 @@
     displayNameEn: "Intercept off Guam - 1944",
     displayNameRu: "Перехват у Гуама — 1944",
     displayNameJa: "グアム沖迎撃―1944年",
+    displayNameZhHant: "關島外海截擊-1944",
     initFunds: 0,
     initCameraPos: [
       // P1
@@ -1856,6 +1869,7 @@
     descriptionEn: "On 16 June 1944, Honolulu, Pennsylvania, Idaho, and several destroyers were bombarding Guam's west coast while the Japanese Mobile Fleet approached the Marianas. Using about 13:00 as its scenario clock, this mission branches into an alternate engagement: a Japanese surface detachment reaches Guam first and forces the bombardment group into a close-range action. The map is an artistic western-coast sector whose runway landmark is about 1.49 times historical logical scale; positions, engagement distance, and formation spacing are gameplay approximations.",
     descriptionRu: "16 июня 1944 года крейсер «Гонолулу», линкоры «Пенсильвания» и «Айдахо» и несколько эсминцев обстреливали западный берег Гуама, пока японский Мобильный флот приближался к Марианским островам. Сценарий использует примерно 13:00 как игровую отметку времени и развивает альтернативную ветвь: японский надводный отряд первым выходит к Гуаму и вынуждает группу обстрела принять ближний бой. Карта является художественным фрагментом западного побережья; логический масштаб ориентира-взлётной полосы примерно в 1,49 раза больше исторического, а позиции, дистанция боя и интервалы построения являются игровым приближением.",
     descriptionJa: "1944年6月16日、巡洋艦ホノルル、戦艦ペンシルベニアとアイダホ、数隻の駆逐艦がグアム西岸を砲撃し、日本の機動部隊はマリアナ諸島へ接近していた。本シナリオは13時頃をゲーム上の時刻基準とし、この史実から分岐して日本水上部隊が先にグアム沖へ到着し、砲撃部隊に近距離海戦を強いる架空展開を描く。マップは西岸を描いた芸術的な局地図で、滑走路の論理尺度は史実のおよそ1.49倍であり、艦位・交戦距離・隊形間隔はゲーム上の近似である。",
+    descriptionZhHant: "1944 年 6 月 16 日，火奴魯魯號巡洋艦、賓夕法尼亞號與愛達荷號戰列艦及數艘驅逐艦正在炮擊關島西岸；與此同時，日本機動艦隊正駛向馬里亞納。本關以約 13:00 作為遊戲快照，從這一史實構造架空分支：一支日軍水面分隊搶先抵達關島外海，迫使炮擊編隊轉入近距離海戰。地圖為西岸藝術化區域性，跑道地標的邏輯尺度約為史實的 1.49 倍，艦位、交戰距離與編隊間隔均為可玩性近似。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -1973,6 +1987,7 @@
     displayNameEn: "Battle off Saipan - 1944",
     displayNameRu: "Сражение у Сайпана — 1944",
     displayNameJa: "サイパン沖海戦―1944年",
+    displayNameZhHant: "塞班島海戰-1944",
     initFunds: 0,
     initCameraPos: [
       // P1
@@ -1986,6 +2001,7 @@
     descriptionEn: "At 07:20 on 19 June 1944, U.S. combat air patrols intercepted Japanese aircraft over Guam as the Battle of the Philippine Sea opened. Task Force 58 guarded the Saipan landings from the east while Ozawa's First Mobile Fleet attacked from much farther west. This scenario compresses a carrier battle fought across hundreds of nautical miles into a 128×128 grid and imagines the two main fleets closing for direct action. For gameplay, the initial layout is reversed, with the U.S. fleet in the upper left and the Japanese fleet in the lower right, closing along the diagonal. Command the U.S. carriers, fast battleships, and screen to stop the breakthrough. Same-class and similar-role substitutes are identified in the configuration comments; positions and formation spacing are gameplay approximations.",
     descriptionRu: "19 июня 1944 года в 07:20 американские истребители перехватили японские самолёты над Гуамом — началась битва в Филиппинском море. Оперативное соединение 58 прикрывало высадку на Сайпане с востока, а Первый мобильный флот Одзавы наносил удар с далёкого запада. Сценарий сжимает авианосное сражение, проходившее на сотнях морских миль, до сетки 128×128 и условно сводит главные силы в прямом бою. Для игрового процесса начальная расстановка развёрнута: американский флот находится слева вверху, японский — справа внизу, и оба сближаются по диагонали. Командуйте американскими авианосцами, быстроходными линкорами и охранением и остановите прорыв. Замены однотипными и близкими по роли кораблями отмечены в комментариях; позиции и интервалы являются игровым приближением.",
     descriptionJa: "1944年6月19日07時20分、米軍戦闘空中哨戒隊がグアム上空で日本機を迎撃し、マリアナ沖海戦が本格的に始まった。第58任務部隊は東側からサイパン上陸作戦を守り、小沢治三郎中将の第一機動艦隊ははるか西方から航空攻撃を開始した。本シナリオは数百海里に及ぶ空母戦を128×128グリッドへ圧縮し、両主力艦隊が直接交戦する架空の展開として描く。ゲーム上の都合により初期配置を反転し、米艦隊を左上、日本艦隊を右下に置いて対角線上で接近させる。米空母、高速戦艦、護衛部隊を指揮して突破を阻止せよ。同型艦・同任務艦による代用は設定コメントに明記し、艦位と隊形間隔はゲーム上の近似である。",
+    descriptionZhHant: "1944 年 6 月 19 日 07:20，美軍戰鬥空中巡邏隊在關島上空迎擊日機，菲律賓海海戰由此全面展開。第 58 特混艦隊守在塞班島以西，掩護仍在進行的登陸作戰；小澤治三郎的第一機動艦隊則從更西方發動航空突擊。本關將雙方相隔數百海里的航艦戰壓縮到 128×128 網格，並以雙方主力艦隊直接接敵的架空方式呈現。為適配地圖玩法，初始部署反轉為美軍在左上、日軍在右下，雙方沿對角線相向接近。指揮美軍航艦、快速戰列艦和護航艦隊阻止日軍突破；同級艦與近似艦替代均在配置註釋中說明，艦位和編隊間距不代表史實精確位置。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -2188,6 +2204,7 @@
     displayNameEn: "Palau Islands - 1944",
     displayNameRu: "Острова Палау — 1944",
     displayNameJa: "パラオ諸島―1944年",
+    displayNameZhHant: "帛琉群島-1944",
     initFunds: 8000,
     initCameraPos: [
       // P1
@@ -2201,6 +2218,7 @@
     descriptionEn: "In September 1944, Operation Stalemate targeted Peleliu and Angaur in the Palau Islands. This naval scenario shifts the campaign offshore: Yorktown and Saratoga approach from the west with South Dakota, Iowa, cruisers, and destroyers, while Taihō and Hiryū lead a Japanese carrier force around the southeast. Yamato and Fusō cover the flanks with heavy surface units. The battle for Palau will decide control of the sea lanes toward the Philippines.",
     descriptionRu: "В сентябре 1944 года целью операции «Стейлмейт» стали острова Пелелиу и Ангаур в архипелаге Палау. В этом морском варианте кампании «Йорктаун» и «Саратога» подходят с запада вместе с линкорами «Саут Дакота» и «Айова», крейсерами и эсминцами. На юго-востоке японское авианосное соединение ведут «Тайхо» и «Хирю», а его фланги прикрывают тяжёлые силы с «Ямато» и «Фусо». Исход боя за Палау определит контроль над морскими путями к Филиппинам.",
     descriptionJa: "1944年9月、ステイルメイト作戦はパラオ諸島のペリリュー島とアンガウル島を目標として開始された。本作戦では戦場を沖合へ移し、ヨークタウンとサラトガがサウスダコタ、アイオワ、巡洋艦、駆逐艦を伴って西方から接近する。南東では大鳳と飛龍が日本空母部隊を率い、大和と扶桑を含む水上部隊が両翼を援護する。パラオ沖海戦の勝敗がフィリピンへ続く海上交通路の支配を決する。",
+    descriptionZhHant: "1944 年 9 月，美軍發動「僵持行動」——目標是奪取帛琉群島的佩萊利烏島和安加爾島，佩萊利烏戰役成為太平洋戰爭中最為慘烈的兩棲攻堅戰之一，美軍預計四天攻克，實際激戰兩個多月本關為海戰劇本：美軍約克城號、薩拉託加號雙航艦特混編隊從西側逼近帛琉群島，麾下南達科他號、愛荷華號戰列艦及大量巡洋艦、驅逐艦組成強大水面火力叢集日本聯合艦隊大鳳號、飛龍號雙航艦機動部隊從東南方向迂迴，大和號、扶桑號超級戰列艦率領巡洋艦隊護衛兩翼，意圖截斷美軍補給線兩支重兵集團即將在帛琉海域展開大規模航艦對決——勝負將決定菲律賓戰役的走向與太平洋戰場的力量天平。",
     initReinforcePoints: [
       {
         pos: [1, 42],
@@ -2416,6 +2434,7 @@
     displayNameEn: "Battle off Samar - 1944",
     displayNameRu: "Сражение у острова Самар — 1944",
     displayNameJa: "サマール沖海戦―1944年",
+    displayNameZhHant: "薩馬島海戰-1944",
     initFunds: 0,
     initCameraPos: [
       // P1
@@ -2429,6 +2448,7 @@
     descriptionEn: "At 06:50 on 25 October 1944, Vice Admiral Takeo Kurita's Center Force appeared northwest of Taffy 3 off Samar. Command six escort carriers, three destroyers, and four destroyer escorts withdrawing east while aircraft, smoke, and torpedoes hold back four battleships, eight cruisers, and eleven destroyers bound for Leyte Gulf. The historical contact range of about 15 nautical miles is compressed to about 3.8 km on this 128×128 schematic map; positions, spacing, and coastline are gameplay approximations. Missing ships use same-class substitutes first, then vessels of the same category and similar size.",
     descriptionRu: "25 октября 1944 года в 06:50 Центральное соединение вице-адмирала Такэо Куриты внезапно появилось к северо-западу от «Таффи 3» у острова Самар. Командуйте шестью эскортными авианосцами, тремя эсминцами и четырьмя эскортными миноносцами, отходящими на восток, и задержите авиацией, дымовыми завесами и торпедами четыре линкора, восемь крейсеров и одиннадцать эсминцев, идущих к заливу Лейте. Историческая дистанция контакта около 15 морских миль сжата здесь примерно до 3,8 км на схематической сетке 128×128; позиции, интервалы и береговая линия являются игровым приближением. Отсутствующие корабли заменены прежде всего однотипными, затем близкими по классу и размерам.",
     descriptionJa: "1944年10月25日06時50分、栗田健男中将の中央部隊はサマール島沖で「タフィ3」の北西に突如出現した。護衛空母6隻、駆逐艦3隻、護衛駆逐艦4隻を率いて東へ退避し、艦載機・煙幕・魚雷でレイテ湾へ向かう戦艦4隻、巡洋艦8隻、駆逐艦11隻を阻止せよ。史実の接触距離約15海里は、この128×128の概略マップ上で約3.8kmに圧縮されており、艦位・隊形間隔・海岸線はゲーム上の近似である。未収録艦は同型艦を優先し、次いで同艦種で寸法の近い艦を代用する。",
+    descriptionZhHant: "1944 年 10 月 25 日 06:50，慄田健男的中央艦隊在薩馬島外突然出現在‘塔菲 3’西北方。指揮 6 艘護航航艦、3 艘驅逐艦與 4 艘護航驅逐艦向東撤退，以艦載機、煙幕和魚雷阻止 4 艘戰列艦、8 艘巡洋艦及 11 艘驅逐艦突入萊特灣。史實接觸距離約 15 海里，本關壓縮到約 3.8 公里並置入 128×128 的概略地圖；艦位、編隊間距和岸線均為玩法近似。缺失艦船優先採用同級艦，其次採用同艦種且尺寸相近的資源替代。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -2707,6 +2727,7 @@
     displayNameEn: "A Lot of Ships",
     displayNameRu: "Очень много кораблей",
     displayNameJa: "とてもたくさんの船",
+    displayNameZhHant: "非常多船",
     initFunds: 10000,
     initCameraPos: [
       // P1
@@ -2720,6 +2741,7 @@
     descriptionEn: "Fleet Command's 1941 full readiness inspection, code-named Rough Sea, gathers every active combatant in Darwin Harbour. More than one hundred vessels take part, from super-battleships and fleet carriers to torpedo boats, cargo ships, and hospital ships. The exercise checks fire-control systems, maneuvering, and damage models across all factions. Seven reinforcement points are open so commanders can call in every ship category for training.",
     descriptionRu: "Полная проверка боевой готовности флота 1941 года под кодовым названием «Бурное море» собирает в гавани Дарвина все доступные боевые единицы. В учениях участвует более ста судов: от сверхлинкоров и эскадренных авианосцев до торпедных катеров, транспортов и госпитальных судов. Проверяются системы управления огнём, маневрирование и модели повреждений всех фракций. Открыты семь точек подкрепления, позволяющие вызвать для обучения корабль любой категории.",
     descriptionJa: "艦隊司令部による1941年度総合即応検査「荒海」では、運用可能な全艦艇をダーウィン港に集結させる。超戦艦や正規空母から魚雷艇、貨物船、病院船まで、100隻を超える艦船が参加する大規模演習だ。各陣営の射撃管制、操艦、損傷モデルを総合的に検証する。七か所の増援地点を利用し、あらゆる艦種を呼び出して訓練できる。",
+    descriptionZhHant: "艦隊司令部 1941 年度全面戰備檢驗——代號「怒海」，達爾文港海域集結了盟軍與軸心兩大陣營全部現役作戰艦艇，從超級戰列艦到魚雷快艇、從艦隊航艦到醫療船，超過百艘的各型艦艇參演演習目標：逐艦檢驗火控系統、航行效能與損傷模型在跨陣營環境下的適配性全部七個增援點開放，可召喚涵蓋所有類別的戰艦進行補充——這是對聯合艦隊戰備狀態的全面檢驗，也是各位指揮官熟悉全系艦船的最佳練兵場。",
     initReinforcePoints: [
       {
         pos: [1, 20],
@@ -4596,6 +4618,7 @@
     displayNameEn: "Anti-air Test - Wake Island",
     displayNameRu: "Испытание ПВО — остров Уэйк",
     displayNameJa: "対空試験―ウェーク島",
+    displayNameZhHant: "防空測試-威克島",
     initFunds: 10000,
     initCameraPos: [
       // P1
@@ -4609,6 +4632,7 @@
     descriptionEn: "Special Exercise 1941: the test ship Duck is deployed in the central waters of Wake Island for an extreme anti-air survival trial. Sixteen hostile carriers encircle the area from eight directions and will launch repeated saturation strikes. The objective is to evaluate interception efficiency and survivability under maximum air pressure. Launch fighters carefully, manage recovery cycles, and keep the ship alive through the attack waves.",
     descriptionRu: "Особые учения 1941 года: испытательный корабль «Утка» развёрнут в центральных водах острова Уэйк для предельной проверки противовоздушной обороны. Шестнадцать вражеских авианосцев окружают район с восьми направлений и будут наносить повторные массированные удары. Задача — оценить эффективность перехвата и живучесть под максимальным давлением авиации. Расчётливо поднимайте истребители, управляйте циклами посадки и сохраните корабль во всех волнах атак.",
     descriptionJa: "特別演習1941：試験艦ダックをウェーク島中央海域に配置し、極限状態での対空生存試験を実施する。16隻の敵空母が八方向から海域を包囲し、反復飽和攻撃を仕掛けてくる。本演習の目的は、最大規模の航空攻撃下における迎撃効率と生存性の評価である。戦闘機の発艦と収容周期を適切に管理し、すべての攻撃波を耐え抜け。",
+    descriptionZhHant: "作戰導調部第 1941 號特別演習：極限防空生存測試實驗艦「小黃鴨」號被部署於威克島中央海域，執行高難度防空壓力測試——十六艘敵對航艦從八個方向完成環形包圍，艦載機編隊將發起多波次飽和空襲演習目的：驗證新一代艦載防空火控系統在極限空襲密度下的攔截效率與生存能力小黃鴨號可自由排程艦載機升空攔截，防空火力自動響應——彈藥與燃油消耗將是前所未有的考驗，請合理調配每架戰機的出擊與回收節奏。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -4734,6 +4758,7 @@
     displayNameEn: "Land Airfields vs Aircraft Carriers",
     displayNameRu: "Наземные аэродромы против авианосцев",
     displayNameJa: "陸上飛行場 vs 航空母艦",
+    displayNameZhHant: "陸地機場 vs 航空母艦",
     initFunds: 10000,
     initCameraPos: [
       // P1
@@ -4747,6 +4772,7 @@
     descriptionEn: "A pure test scenario, not a historical reconstruction. On the 256×256 Midway map, the player controls both land airfields: the left hosts Japanese, German, and Italian aircraft and the right hosts every U.S., British, French, and Soviet aircraft type. Four computer enemy fleets occupy the sea corners: the two left-hand fleets use Japanese ships and the two right-hand fleets use U.S. ships. Each fleet has two carriers, two battleships, one cruiser, and one destroyer, for 24 enemy ships in total, including eight carriers. The player fleet starts in the center with two battleships, three cruisers, and six destroyers. The current runtime initializes only HA and CA, so all four computer fleets belong to CA; nationality is represented by ship, carrier-aircraft, and airfield aircraft types. No reinforcements or oil platforms.",
     descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. На карте Мидуэя 256×256 игрок контролирует оба наземных аэродрома: левый занят японскими, немецкими и итальянскими самолётами, правый — всеми типами американских, британских, французских и советских самолётов. В четырёх морских углах развёрнуты четыре компьютерных вражеских соединения: два левых используют японские корабли, два правых — американские. В каждом соединении два авианосца, два линкора, один крейсер и один эсминец: всего 24 вражеских корабля, включая восемь авианосцев. Флот игрока начинает в центре: два линкора, три крейсера и шесть эсминцев. Текущая версия инициализирует только стороны HA и CA, поэтому все компьютерные соединения относятся к CA; национальные различия выражены типами кораблей, палубной авиации и аэродромных самолётов. Подкреплений и нефтяных платформ нет.",
     descriptionJa: "史実再現ではなく純粋な試験シナリオである。256×256の中途島マップでは、自軍が左右両方の陸上飛行場を管理する。左側には日本機、ドイツ機とイタリア機、右側には米国機、英国機、フランス機、ソ連機の全機種を配置する。海面四隅には四個のコンピューター敵艦隊を置き、左側二隊は日本艦艇、右側二隊は米国艦艇とする。各隊は空母2隻、戦艦2隻、巡洋艦1隻、駆逐艦1隻で、敵艦艇は合計24隻、うち空母8隻である。自軍艦隊はマップ中央に戦艦2隻、巡洋艦3隻、駆逐艦6隻で開始する。現行ランタイムはHAとCAのみを初期化するため、四個のコンピューター艦隊はすべてCA所属となる。国家の違いは艦船、空母航空隊、飛行場機種で表現する。増援と油井はない。",
+    descriptionZhHant: "純測試關卡，不復原歷史。中途島 256×256 地圖上，我方控制左右兩座陸地機場：左側駐日本、德國和義大利機群，右側駐美國、英國、法國和蘇聯的全部現役機型。海面四角各有一支電腦敵方艦隊，左側兩支使用日本艦船，右側兩支使用美國艦船；每隊均含 2 艘航艦、2 艘戰列艦、1 艘巡洋艦和 1 艘驅逐艦，四隊合計 24 艘戰艦，其中 8 艘航艦。玩家艦隊位於地圖正中，含 2 艘戰列艦、3 艘巡洋艦和 6 艘驅逐艦。目前執行時只初始化 HA/CA 兩方，因此四個電腦編隊統一歸屬 CA；國家差異只體現在艦船、艦載機和機場機型。無增援、無油井。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initAirfields: [
@@ -5520,6 +5546,7 @@
     displayNameEn: "Sea and Air All-Types Duel - Midway",
     displayNameRu: "Дуэль всех типов в море и воздухе — Мидуэй",
     displayNameJa: "海空全機種対決―ミッドウェー",
+    displayNameZhHant: "海空全機型對決-中途島",
     initFunds: 10000,
     initCameraPos: [
       // P1：同盟国航母队列质心
@@ -5533,6 +5560,7 @@
     descriptionEn: "A pure test scenario, not a historical reconstruction. It reuses the Midway map and both airfield positions of the third test scenario but swaps their ownership: the left airfield [103, 156] belongs to P2 and hosts every Axis (Japanese, German, Italian) type, while the right [161, 166] belongs to P1 and hosts every Allied (U.S., British, French, Soviet) type, eight of each, including the seaplane and torpedo types the previous test missed. The sea holds no other warships, only carriers: 31 Axis (16 Japanese, 10 German, 5 Italian) thirty tiles from the left edge against 31 Allied (11 U.S., 15 British, 5 French) thirty tiles from the right edge, both columns staggered one tile apart with every bow facing the map centre. P1 is the player side (right column), opening camera at [225, 128]. The columns start about 193 tiles (roughly 24.7 km) apart, so short-range types must wait for the fleets to close. Both airfields list every type of their faction; the factionless 2024 special test aircraft are excluded, and aircraft added later must also be added here. No reinforcements and no oil platforms.",
     descriptionRu: "Чисто испытательный сценарий, а не историческая реконструкция. Используются карта Мидуэй и координаты обоих аэродромов третьего испытательного сценария, но их принадлежность меняется: левый аэродром [103, 156] переходит к P2 и принимает все типы стран Оси (Япония, Германия, Италия), правый [161, 166] остаётся у P1 и принимает все типы союзников (США, Великобритания, Франция, СССР) по восемь машин каждого типа, включая пропущенные ранее гидросамолёты и торпедоносцы. Других кораблей нет: 31 авианосец Оси (16 японских, 10 немецких, 5 итальянских) в тридцати клетках от левого края против 31 авианосца союзников (11 американских, 15 британских, 5 французских) в тридцати клетках от правого; оба строя идут в шахматном порядке с шагом в одну клетку, носы развёрнуты к центру карты. P1 — сторона игрока (правый строй), начальная камера на [225, 128]. Строй отделяют около 193 клеток (примерно 24,7 км), поэтому самолёты с малой дальностью ждут сближения флотов. Оба аэродрома содержат все типы своей стороны; внефракционные специальные машины 2024 года не включены, а новые самолёты нужно добавлять на оба аэродрома. Подкреплений и нефтяных платформ нет.",
     descriptionJa: "史実再現ではなく純粋な試験シナリオ。第三試験シナリオの中途島マップと両陸上飛行場の座標を流用し、所属だけを入れ替える。左飛行場[103, 156]はP2所属となり枢軸国（日本・ドイツ・イタリア）の全機種を、右飛行場[161, 166]はP1所属となり連合国（米国・英国・フランス・ソ連）の全機種を各8機ずつ収容する（第三試験で漏れていた水上偵察機・雷撃機を含む）。海上には他の軍艦を置かず、空母のみを出す。左端から30マスに枢軸国空母31隻（日本16・ドイツ10・イタリア5）、右端から30マスに連合国空母31隻（米国11・英国15・フランス5）を、1マス刻みの千鳥配置で並べ、艦首はすべてマップ中央へ向ける。P1がプレイヤー側（右列）で、初期カメラは[225, 128]。両列は約193マス（約24.7km）離れており、航続距離の短い機種は接近を待たねば敵に届かない。両飛行場は自陣営の全機種を収録する。国籍を持たない2024年の特殊試験機は収録せず、今後追加される航空機も本シナリオの飛行場へ追加すること。増援と油井はない。",
+    descriptionZhHant: "純測試關卡，不復原歷史。沿用第三個測試關卡的中途島地圖與兩座機場座標，但對調歸屬：左機場 [103, 156] 屬 P2，駐全部軸心國（日本、德國、義大利）機型；右機場 [161, 166] 屬 P1，駐全部同盟國（美國、英國、法國、蘇聯）機型，每型 8 架（含前一測試關漏收的水上偵察機/魚雷機）。海面上雙方只有航艦：軸心國 31 艘（日本 16、德國 10、義大利 5）距左邊緣 30 格，同盟國 31 艘（美國 11、英國 15、法國 5）距右邊緣 30 格，兩列交錯 1 格排開，艦首一律朝地圖中央。P1 為玩家方（右側），初始鏡頭對準 [225, 128]。兩列相距約 193 格（≈24.7 km），航程不足的機型要等雙方接近後才能出擊。兩座機場收錄各自陣營全部機型；無國籍的 2024 特殊測試機不收錄，後續新增飛機需同步補進本關。無增援、無油井。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initAirfields: [
@@ -6519,6 +6547,7 @@
     displayNameEn: "Late-War ASW Range - Wake Island",
     displayNameRu: "Полигон поздней ПЛО — остров Уэйк",
     displayNameJa: "後期対潜試験場―ウェーク島",
+    displayNameZhHant: "後期反潛試驗場-威克島",
     initFunds: 10000,
     // 引擎把 initCameraPos 当作初始视野左上角（见 state.Camera.Pos），不是视野中心。
     // 三个试验区：北「美系后期」、西南「英系后期」、东「日系后期」。
@@ -6536,6 +6565,7 @@
     descriptionEn: "A pure test scenario, not a historical reconstruction. Exercise 1943-3: a late-war ASW range in the waters around Wake atoll, split into three independent zones. North - U.S. late war: USS Johnston (two depth-charge racks plus a 24-round Hedgehog) against I-168. Southwest - British late war: HMS V and HMS Y (two racks plus Hedgehog each) against Nautilus. East - Japanese late war: Shimakaze (3-tile Type 95 depth-charge rack plus a Type 94 Y-gun) against U-96. The zones validate the U.S./British high-burst salvo pattern and the Japanese 3-tile depth charge. Opposing groups within a zone start about 32-37 tiles (roughly 4.1-4.7 km) apart, and the closest ships from different zones are about 60 tiles (roughly 7.7 km) apart, so the drills do not merge at the start. The opening camera is on Johnston in the north zone; press M for the full map. Blind depth-charge drops never damage an undetected submarine; the destroyer must light it up with sonar first.",
     descriptionRu: "Чисто испытательный сценарий, не историческая реконструкция. Учения 1943-3: полигон поздней ПЛО у атолла Уэйк, три независимые зоны. Север — поздний американский эсминец: USS Johnston (две батареи глубинных бомб и 24-зарядный «Хеджхог») против I-168. Юго-запад — поздние британские: HMS V и HMS Y (по две батареи и «Хеджхог») против Nautilus. Восток — поздний японский: Shimakaze (3-клеточная батарея Тип 95 и Y-бомбомёт Тип 94) против U-96. Проверяются высокая плотность залпа США/Британии и 3-клеточная дистанция японских глубинных бомб. Внутри зоны стороны начинают в 32–37 клетках (около 4,1–4,7 км), ближайшие корабли из разных зон — около 60 клеток (около 7,7 км), поэтому зоны не сливаются. Начальная камера — на Johnston в северной зоне; M — вся карта. Бомбометание по необнаруженной подлодке не наносит урона — сначала её нужно засветить гидролокатором.",
     descriptionJa: "史実再現ではない純粋な試験シナリオ。演習1943-3：ウェーク環礁沖の後期対潜試験場。三つの独立区画に分かれる。北「米国後期」：ジョンストン（深爆雷架2基＋24発ヘッジホッグ）対I-168。南西「英国後期」：V、Y（各深爆雷架2基＋ヘッジホッグ）対ノーチラス。東「日本後期」：島風（3マス95式爆雷架＋94式Y砲）対U-96。米英の高火力斉射と日本の3マス爆雷を検証する。区内の両軍は約32～37マス（約4.1～4.7km）、区画間の最接近は約60マス（約7.7km）で、開幕から交戦しない。開始カメラは北区のジョンストン。Mで全体図。未探知の潜航艦への爆雷は無効で、先にソナーで照準する必要がある。",
+    descriptionZhHant: "純測試關卡，不復原歷史。作戰導調部第 1943-3 號後期反潛試驗場：威克島環礁外海劃出三個互不干擾的試驗區——北區「美系後期」：約翰斯頓號（雙深彈架 + 24 發刺蝟彈）對 I-168；西南區「英系後期」：V 號、Y 號（雙深彈架 + 刺蝟彈）對 Nautilus；東區「日系後期」：島風號（3 格 95 式深彈架 + 94 式 Y 炮）對 U-96。三區分別驗證美英的高爆發齊射和日本的 3 格深彈。區內雙方開場相距約 32～37 格（約 4.1～4.7km），區與區之間最近敵我距離約 60 格（約 7.7km），避免跨區交火；開場鏡頭在北區約翰斯頓號，按 M 可看全圖。未探測到的下潛潛艇不會被盲炸命中，驅逐艦必須先用聲納點亮。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -6596,6 +6626,7 @@
     displayNameEn: "Submarine Range - Midway",
     displayNameRu: "Полигон подлодок — Мидуэй",
     displayNameJa: "潜水艦試験場―ミッドウェー",
+    displayNameZhHant: "潛艇試驗場-中途島",
     initFunds: 10000,
     // 引擎把 initCameraPos 当作初始视野左上角；四个试验区相距较远，无法同屏显示。
     // P1：东南「航空反潜」区两舰质心约 (165, 228)，镜头取其左上外侧 (159, 225)；
@@ -6613,6 +6644,7 @@
     descriptionEn: "Test Range 1943-2 south of Midway: four independent ASW zones. Southwest - submarine duel: your U-boat against I-168; find her with the hydrophone and fire straight-running torpedoes. Northwest - hunter: two friendly destroyers light up Nautilus with sonar, then close to 2 tiles and drop depth charges. Northeast - hunted: your U-boat is chased by two hostile destroyers; dive, stay quiet, then counter-attack. Southeast - air ASW: USS Essex sends SB2C depth-charge bombers; the escorting destroyer lights up Nautilus for them. The four zones are spread out: opposing groups within a zone start about 60 tiles (roughly 7.7 km) apart, and the closest ships from different zones are at least 71 tiles (about 9.1 km) apart, so the drills do not merge at the start. The opening camera is on the southeast air-ASW zone; press M for the full map and D to dive or surface.",
     descriptionRu: "Полигон 1943-2 южнее Мидуэя: четыре независимые зоны. Юго-запад — дуэль подлодок: ваша U-бот против I-168; ищите её гидрофоном и стреляйте прямоходными торпедами. Северо-запад — охота: два дружественных эсминца засвечивают Nautilus гидролокатором и с 2 клеток сбрасывают глубинные бомбы. Северо-восток — вас преследуют два эсминца: погружайтесь, молчите и контратакуйте. Юго-восток — авиация: «Эссекс» поднимает SB2C с глубинными бомбами; цель подсвечивает эскортный эсминец. Четыре зоны разнесены: внутри зоны стороны начинают примерно в 60 клетках (около 7,7 км) друг от друга, а ближайшие корабли из разных зон разделены как минимум 71 клеткой (около 9,1 км), чтобы бои не сливались в начале. Начальная камера стоит на юго-восточной зоне «авиация против подлодок»; M — карта, D — погружение/всплытие.",
     descriptionJa: "試験場1943-2、ミッドウェー南方の四つの独立区画。南西「潜水艦対決」：味方Uボート対I-168。水中聴音で探し、直航魚雷で攻撃。北西「味方が狩る」：味方駆逐艦2隻がソナーでNautilusを探知し、2マスまで接近して爆雷を投下。北東「狩られる側」：敵駆逐艦2隻に追われるUボート。潜航して静かにし、反撃へ。南東「航空対潜」：エセックスからSB2C爆雷機を発進。護衛駆逐艦がNautilusを探知して攻撃を誘導する。四つの区画は海上に広く配置され、区内の両軍は約60マス（約7.7km）、区画間の最接近距離は71マス（約9.1km）以上離れて開始するため、開幕から交戦状態にはならない。開始時のカメラは南東「航空対潜」区画。Mで全体図、Dで潜航/浮上。",
+    descriptionZhHant: "作戰導調部第 1943-2 號潛艇試驗場：中途島以南的開闊海域劃成四個互不干擾的試驗區——西南「潛對潛」：我方 U 艇對敵方 I-168，用水聽器找它、用直航魚雷打它；西北「我獵潛」：我方兩艘驅逐艦用聲納點亮敵方 Nautilus，貼近到 2 格投深彈；東北「敵獵潛」：我方 U 艇被敵方兩艘驅逐艦追獵，下潛靜默、繞後反擊；東南「航空反潛」：埃塞克斯號派出 SB2C 深彈機，由隨行護航驅逐艦點亮 Nautilus，再投彈獵殺。四個區在海上拉開佈置：區內雙方開場相距約 60 格（約 7.7km），任意兩區之間最近敵我距離至少 71 格（約 9.1km），避免開局即互相開火；開場鏡頭位於東南「航空反潛」區，按 M 可看全圖，按 D 切換下潛/上浮。",
     initReinforcePoints: [],
     initOilPlatforms: [],
     initShips: [
@@ -6698,6 +6730,7 @@
     displayNameEn: "Ramming Test Range",
     displayNameRu: "Полигон для тарана",
     displayNameJa: "体当たり試験場",
+    displayNameZhHant: "撞擊測試場",
     initFunds: 5000,
     initCameraPos: [
       [94, 58],
@@ -6709,6 +6742,7 @@
     descriptionEn: "Ramming test range: P1 starts with one battleship, cruiser, destroyer, frigate and Monterey; P2 fields Yamato, Baltimore, Johnston, Jiujiang and a harmless ocean sunfish in the same rows. Enable Ramming in Settings, pick P1, and drive into the targets at full speed. The P2 targets shoot back; the sunfish shows raw damage without armor. The reinforcement point can summon the Droplet and Giant Swordfish to compare alwaysOn behaviour.",
     descriptionRu: "Полигон для тарана: у P1 по одному линкору, крейсеру, эсминцу, фрегату и Monterey; у P2 в тех же рядах Yamato, Baltimore, Johnston, Jiujiang и безобидная рыба-луна. Включите таран в настройках, выберите P1 и идите на полной скорости. Корабли P2 стреляют в ответ; рыба-луна показывает чистый урон без брони. В точке подкрепления можно вызвать «Каплю» и гигантскую рыбу-меч для проверки alwaysOn.",
     descriptionJa: "体当たり試験場：P1 は戦艦・巡洋艦・駆逐艦・フリゲート・Monterey を各1隻、P2 は同じ列に Yamato・Baltimore・Johnston・九江・反撃しないマンボウを配置。設定で「体当たり」を有効にし、P1 を選んで全速で突撃する。P2 は反撃するが、マンボウは装甲なしの素のダメージ確認に使える。増援地点から水滴と巨大メカジキを呼び、alwaysOn の挙動も比較できる。",
+    descriptionZhHant: "撞擊測試場：P1 初始為戰列艦、巡洋艦、驅逐艦、護衛艦與 Monterey 各一艘，P2 為同排的 Yamato、Baltimore、Johnston、九江與不還手的翻車魚。先在設定頁開啟「撞擊系統（體驗）」，選擇 P1 後全速撞向目標；P2 靶艦會開火還擊，翻車魚可用來觀察無減傷目標的裸傷害。增援點可召喚水滴與巨大劍魚對照 alwaysOn 行為。",
     initReinforcePoints: [
       {
         pos: [88, 50],

@@ -14,10 +14,10 @@ import (
 )
 
 // TestDefaultAndFallbackLanguage 验证语言切换的默认值与非法输入回退。
-// 场景：设置页依次选 zh-Hans/en/ru/ja，配置文件也可能写入 "invalid" 这类历史脏值。
-// 预期：非法值回退到 zh-Hans；MsgMenuMissionSelect 依次输出 任务选择/Mission Select/
+// 场景：设置页依次选 zh-Hans/zh-Hant/en/ru/ja，配置文件也可能写入 "invalid" 这类历史脏值。
+// 预期：非法值回退到 zh-Hans；MsgMenuMissionSelect 依次输出 任务选择/任務選擇/Mission Select/
 // Выбор миссии/ミッション選択；失败表示 NormalizeLanguage 或默认目录失效。
-// 覆盖：SetLanguage 五次调用后断言 CurrentLanguage 与 Text，Cleanup 复位 zh-Hans。
+// 覆盖：SetLanguage 六次调用后断言 CurrentLanguage 与 Text，Cleanup 复位 zh-Hans。
 func TestDefaultAndFallbackLanguage(t *testing.T) {
 	t.Cleanup(func() {
 		SetLanguage(string(LanguageZhHans))
@@ -27,6 +27,8 @@ func TestDefaultAndFallbackLanguage(t *testing.T) {
 	require.Equal(t, LanguageZhHans, SetLanguage("invalid"))
 	require.Equal(t, "任务选择", Text(MsgMenuMissionSelect))
 	require.Equal(t, "资金: 123", Format(MsgSidebarFunds, map[string]any{"Funds": 123}))
+	require.Equal(t, LanguageZhHant, SetLanguage("zh-Hant"))
+	require.Equal(t, "任務選擇", Text(MsgMenuMissionSelect))
 	require.Equal(t, LanguageEnglish, SetLanguage("en"))
 	require.Equal(t, "Mission Select", Text(MsgMenuMissionSelect))
 	require.Equal(t, LanguageRussian, SetLanguage("ru"))
@@ -35,11 +37,17 @@ func TestDefaultAndFallbackLanguage(t *testing.T) {
 	require.Equal(t, "ミッション選択", Text(MsgMenuMissionSelect))
 }
 
-// TestFallbackLanguageOrder 验证各语言的查找顺序为 自身 → 英文 → 简体中文，且无重复。
-// 场景：俄语/日语目录缺词时先用英文兜底，英文也缺才落到中文；中文只需查自己。
-// 预期：ru→[ru,en,zh-Hans]、ja→[ja,en,zh-Hans]、en→[en,zh-Hans]、zh-Hans→[zh-Hans]。
-// 覆盖：对四种 Language 调用 FallbackLanguages，用 require.Equal 比较完整切片的元素与顺序。
+// TestFallbackLanguageOrder 验证各语言的查找顺序且无重复。
+// 场景：繁体中文缺词时先回退简体中文，再回退英文；俄语/日语缺词时先用英文兜底，英文也缺才落到中文；中文只需查自己。
+// 预期：zh-Hant→[zh-Hant,zh-Hans,en]、ru→[ru,en,zh-Hans]、ja→[ja,en,zh-Hans]、
+// en→[en,zh-Hans]、zh-Hans→[zh-Hans]。
+// 覆盖：对五种 Language 调用 FallbackLanguages，用 require.Equal 比较完整切片的元素与顺序。
 func TestFallbackLanguageOrder(t *testing.T) {
+	require.Equal(
+		t,
+		[]Language{LanguageZhHant, LanguageZhHans, LanguageEnglish},
+		FallbackLanguages(LanguageZhHant),
+	)
 	require.Equal(t, []Language{LanguageRussian, LanguageEnglish, LanguageZhHans}, FallbackLanguages(LanguageRussian))
 	require.Equal(
 		t,
@@ -103,8 +111,8 @@ other = "{{.Count}} ships"
 	require.Equal(t, "2 ships", other)
 }
 
-// TestEnabledCatalogsMatchDeclaredMessageIDs 验证四语言 TOML 与 messages.go 的消息 ID 双向一致。
-// 场景：新增/改名文案时容易只补中文或漏删旧键，四个目录必须覆盖代码引用的全部 ID。
+// TestEnabledCatalogsMatchDeclaredMessageIDs 验证五语言 TOML 与 messages.go 的消息 ID 双向一致。
+// 场景：新增/改名文案时容易只补中文或漏删旧键，五个目录必须覆盖代码引用的全部 ID。
 // 预期：每个 SupportedLanguages 目录既不缺 declared 的 ID，也不含未声明的键；失败指出缺失/多余消息。
 // 覆盖：go/ast 扫描 messages.go 收集字符串常量，逐语言解码 locales/active.<lang>.toml 后双向比对。
 func TestEnabledCatalogsMatchDeclaredMessageIDs(t *testing.T) {

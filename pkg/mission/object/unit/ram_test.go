@@ -36,8 +36,24 @@ func TestRamConfigNormalizeDefaultsAndClamps(t *testing.T) {
 		},
 		{
 			name: "custom-valid",
-			in:   RamConfig{Damage: 300000, Cooldown: 2, SelfDamageRatio: 0, MinSpeed: 10, BowArc: 45, CanHitPlanes: true, AlwaysOn: true},
-			want: RamConfig{Damage: 300000, Cooldown: 2, SelfDamageRatio: 0, MinSpeed: 10, BowArc: 45, CanHitPlanes: true, AlwaysOn: true},
+			in: RamConfig{
+				Damage:          300000,
+				Cooldown:        2,
+				SelfDamageRatio: 0,
+				MinSpeed:        10,
+				BowArc:          45,
+				CanHitPlanes:    true,
+				AlwaysOn:        true,
+			},
+			want: RamConfig{
+				Damage:          300000,
+				Cooldown:        2,
+				SelfDamageRatio: 0,
+				MinSpeed:        10,
+				BowArc:          45,
+				CanHitPlanes:    true,
+				AlwaysOn:        true,
+			},
 		},
 	}
 	for _, tc := range cases {

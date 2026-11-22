@@ -8,10 +8,10 @@ import (
 	"github.com/narasux/jutland/pkg/i18n"
 )
 
-// TestHistoricalStatusDisplayAndValidation 验证历史属性的取值校验与四语言徽标文案。
+// TestHistoricalStatusDisplayAndValidation 验证历史属性的取值校验与五语言徽标文案。
 // 场景：图鉴会根据 HistoricalStatus 显示史实 / 图纸 / 架空，配置解析出未知字符串时不能静默当成史实。
-// 预期：real/incomplete/prototype/limited/paper/fictional 均合法；空字符串与 "legendary" 非法；四种语言下六个状态分别输出对应译名。
-// 覆盖：表驱动六个合法状态 × zh-Hans/en/ja/ru，逐项比较 ToDisplay，并单独断言 IsValid 的合法与非法分支。
+// 预期：real/incomplete/prototype/limited/paper/fictional 均合法；空字符串与 "legendary" 非法；五种语言下六个状态分别输出对应译名。
+// 覆盖：表驱动六个合法状态 × zh-Hans/zh-Hant/en/ja/ru，逐项比较 ToDisplay，并单独断言 IsValid 的合法与非法分支。
 func TestHistoricalStatusDisplayAndValidation(t *testing.T) {
 	previousLanguage := i18n.CurrentLanguage()
 	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
@@ -42,6 +42,12 @@ func TestHistoricalStatusDisplayAndValidation(t *testing.T) {
 		{HistoricalStatusLimited, i18n.LanguageEnglish, "Limited production"},
 		{HistoricalStatusPaper, i18n.LanguageEnglish, "Paper"},
 		{HistoricalStatusFictional, i18n.LanguageEnglish, "Fictional"},
+		{HistoricalStatusReal, i18n.LanguageZhHant, "史實"},
+		{HistoricalStatusIncomplete, i18n.LanguageZhHant, "未完工"},
+		{HistoricalStatusPrototype, i18n.LanguageZhHant, "僅試驗機"},
+		{HistoricalStatusLimited, i18n.LanguageZhHant, "少量生產"},
+		{HistoricalStatusPaper, i18n.LanguageZhHant, "圖紙"},
+		{HistoricalStatusFictional, i18n.LanguageZhHant, "架空"},
 		{HistoricalStatusReal, i18n.LanguageJapanese, "史実"},
 		{HistoricalStatusIncomplete, i18n.LanguageJapanese, "未完成"},
 		{HistoricalStatusPrototype, i18n.LanguageJapanese, "試作機"},
