@@ -253,6 +253,7 @@
   },
   // --------- 齐射深弹 ----------
   // 英国刺猬弹（Hedgehog）：24 发同帧齐投，弹着点覆盖舰艏前方一个圆
+  // 射程 4 格（8 km）：比普通深弹远，但仍短于潜艇鱼雷 4.8~6.8 格，保留贴近投弹的风险。
   {
     name: "UK/DC/24/Hedgehog",
     bulletName: "UK/DC/30/1942/Hedgehog",
@@ -262,9 +263,10 @@
     shotInterval: 0,
     groupInterval: 0,
     reloadTime: 35,
-    range: 4,
+    range: 8,
     bulletSpread: 90,
-    bulletSpeed: 120,
+    // 300 / 4000 = 0.075 格/拍，4 格约 0.9 秒到达；避免 24 发齐投后长时间悬空。
+    bulletSpeed: 300,
     proximityRadius: 0.35,
     blastRadius: 0.35,
     fundsCost: 12,
@@ -282,9 +284,9 @@
     shotInterval: 0,
     groupInterval: 0,
     reloadTime: 33,
-    range: 4,
+    range: 8,
     bulletSpread: 90,
-    bulletSpeed: 120,
+    bulletSpeed: 300,
     proximityRadius: 0.35,
     blastRadius: 0.35,
     fundsCost: 12,

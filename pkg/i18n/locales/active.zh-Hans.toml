@@ -162,6 +162,10 @@ other = "火箭弹"
 other = "深水炸弹"
 [BattleReportWeaponRam]
 other = "撞击"
+[BattleReportWeaponHedgehog]
+other = "刺猬弹"
+[BattleReportWeaponASWRocket]
+other = "反潜火箭"
 [BattleReportWeaponBombGeneric]
 other = "炸弹"
 [BattleReportWeaponBomb]

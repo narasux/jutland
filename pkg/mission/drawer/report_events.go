@@ -504,6 +504,19 @@ func battleReportCaliberText(entry state.BattleLogEntry) string {
 	return ""
 }
 
+// battleReportDepthChargeWeapon 按发射器名区分普通深弹、刺猬弹与反潜火箭。
+// 战报的 WeaponType 都是 depth_charge，单看类型无法分辨 24 发齐射与 5 发滚架。
+func battleReportDepthChargeWeapon(weaponName string) i18n.MessageID {
+	switch {
+	case strings.Contains(weaponName, "Hedgehog"), strings.Contains(weaponName, "Mk10"):
+		return i18n.MsgBattleReportWeaponHedgehog
+	case strings.Contains(weaponName, "Type65"):
+		return i18n.MsgBattleReportWeaponASWRocket
+	default:
+		return i18n.MsgBattleReportWeaponDepthCharge
+	}
+}
+
 // battleReportWeaponText 根据弹药类型和发射平台生成「203mm 舰炮 / 533mm 鱼雷」等武器描述。
 func battleReportWeaponText(entry state.BattleLogEntry) string {
 	if entry.Hit.WeaponType == "" {
@@ -555,7 +568,7 @@ func battleReportWeaponText(entry state.BattleLogEntry) string {
 	case string(objBullet.TypeRam):
 		return i18n.Text(i18n.MsgBattleReportWeaponRam)
 	case string(objBullet.TypeDepthCharge):
-		return i18n.Text(i18n.MsgBattleReportWeaponDepthCharge)
+		return i18n.Text(battleReportDepthChargeWeapon(entry.Hit.WeaponName))
 	case string(objBullet.TypeLaser):
 		return i18n.Text(i18n.MsgBattleReportWeaponLaser)
 	}

@@ -162,6 +162,10 @@ other = " ракетой"
 other = " глубинной бомбой"
 [BattleReportWeaponRam]
 other = " тараном"
+[BattleReportWeaponHedgehog]
+other = " бомбой «Хеджхог»"
+[BattleReportWeaponASWRocket]
+other = " противолодочной ракетой"
 [BattleReportWeaponBombGeneric]
 other = " бомбой"
 [BattleReportWeaponBomb]

@@ -46,6 +46,7 @@ func markBulletShooter(bullets []*objBullet.Bullet, name, unitType string) {
 func bulletHitInfo(bt *objBullet.Bullet) objUnit.HitInfo {
 	info := objUnit.HitInfo{
 		WeaponType: string(bt.Type),
+		WeaponName: bt.WeaponName,
 		Diameter:   bt.Diameter,
 		Caliber:    bulletCaliber(bt.Name),
 		Critical:   bt.CriticalType,

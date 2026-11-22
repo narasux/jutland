@@ -62,6 +62,38 @@ func TestHitEffectTiersByCaliber(t *testing.T) {
 	}
 }
 
+// TestHedgehogHitEffectIsSmallerThanDepthCharge 验证刺猬弹使用更小的水柱 / 水花，避免 24 发齐投糊成一片白。
+// 场景：刺猬弹一次同帧投 24 发；若每发沿用普通深弹的 1.6 格水柱 / 2.4 格水花，整片海面会被白色特效淹没。
+// 预期：命中舰体为 KindTorpedoPlume 且 scale/life 小于普通深弹；落水为 KindSplash 且 scale/life 小于普通深弹。
+// 覆盖：构造 WeaponName=UK/DC/24/Hedgehog 的 TypeDepthCharge，分别命中舰体与水面，断言 kind 与两组上限。
+func TestHedgehogHitEffectIsSmallerThanDepthCharge(t *testing.T) {
+	hit := &objBullet.Bullet{
+		Type: objBullet.TypeDepthCharge, WeaponName: "UK/DC/24/Hedgehog",
+		HitObjType: object.TypeShip, Diameter: 30,
+	}
+	kind, scale, life, ok := hitEffect(hit)
+	if !ok || kind != objExplosion.KindTorpedoPlume {
+		t.Fatalf("hedgehog hit effect = (%v, %v, %v, %v), want torpedo plume", kind, scale, life, ok)
+	}
+	if scale >= depthChargePlumeCells || life >= depthChargePlumeLife {
+		t.Fatalf("hedgehog plume = (%.2f, %d), want smaller than (%.2f, %d)",
+			scale, life, depthChargePlumeCells, depthChargePlumeLife)
+	}
+
+	miss := &objBullet.Bullet{
+		Type: objBullet.TypeDepthCharge, WeaponName: "UK/DC/24/Hedgehog",
+		HitObjType: object.TypeWater, Diameter: 30,
+	}
+	kind, scale, life, ok = hitEffect(miss)
+	if !ok || kind != objExplosion.KindSplash {
+		t.Fatalf("hedgehog splash effect = (%v, %v, %v, %v), want splash", kind, scale, life, ok)
+	}
+	if scale >= depthChargeSplashCells || life >= depthChargeSplashLife {
+		t.Fatalf("hedgehog splash = (%.2f, %d), want smaller than (%.2f, %d)",
+			scale, life, depthChargeSplashCells, depthChargeSplashLife)
+	}
+}
+
 // TestHitEffectOnWaterAndLand 验证落水出水花、落陆出尘土，尺寸随口径增大，小口径防空弹两者都不生成。
 // 场景：20/127/460mm 炮弹分别打在 TypeWater 与 TypeLand 上调用 hitEffect；另比较 127mm 与 460mm 的水花尺寸。
 // 预期：20mm 落水、落陆均 ok=false；127/460mm 落水为 KindSplash、落陆为 KindDust，scale/life 为正，且 127mm 水花小于 460mm。

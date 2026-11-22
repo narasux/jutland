@@ -162,6 +162,10 @@ other = "ロケット弾"
 other = "爆雷"
 [BattleReportWeaponRam]
 other = "体当たり"
+[BattleReportWeaponHedgehog]
+other = "ヘッジホッグ"
+[BattleReportWeaponASWRocket]
+other = "対潜ロケット"
 [BattleReportWeaponBombGeneric]
 other = "爆弾"
 [BattleReportWeaponBomb]

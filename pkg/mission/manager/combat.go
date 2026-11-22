@@ -2,6 +2,7 @@ package manager
 
 import (
 	"math"
+	"strings"
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
@@ -1031,6 +1032,13 @@ const (
 	depthChargeSplashCells = 2.4
 	depthChargeSplashLife  = 46
 
+	// 刺猬弹 24 发同帧齐投；若每发都画 2.4 格深弹水花，整片海面会糊成白色。
+	// 命中水柱和水花都明显缩小、缩短，保留落点覆盖感即可。
+	hedgehogPlumeCells  = 0.8
+	hedgehogPlumeLife   = 26
+	hedgehogSplashCells = 0.55
+	hedgehogSplashLife  = 20
+
 	// 落水水花 / 落陆尘土的目标直径（地图格）按口径档位索引，见下方 splashCells / dustCells
 	// 炸弹落点比同口径炮弹更铺开
 	bombSplashCells = 0.8
@@ -1076,11 +1084,23 @@ func hitEffectTier(diameter int) int {
 	}
 }
 
+// isHedgehogDepthCharge 判断是否为刺猬弹；战报和特效都按发射器名区分。
+func isHedgehogDepthCharge(bt *objBullet.Bullet) bool {
+	return bt.Type == objBullet.TypeDepthCharge &&
+		(strings.Contains(bt.WeaponName, "Hedgehog") || strings.Contains(bt.WeaponName, "Mk10"))
+}
+
 // hitEffect 返回到达弹药的命中特效参数；该弹种与落点没有对应表现时返回 false。
 // 纯函数，只读弹药类型、口径与落点，便于单测。
 func hitEffect(bt *objBullet.Bullet) (objExplosion.Kind, float64, int, bool) {
 	// 深水炸弹：命中潜艇用水下爆炸水柱，落水给一圈更大的水花
 	if bt.Type == objBullet.TypeDepthCharge {
+		if isHedgehogDepthCharge(bt) {
+			if bt.HitObjType == object.TypeShip {
+				return objExplosion.KindTorpedoPlume, hedgehogPlumeCells, hedgehogPlumeLife, true
+			}
+			return objExplosion.KindSplash, hedgehogSplashCells, hedgehogSplashLife, true
+		}
 		if bt.HitObjType == object.TypeShip {
 			return objExplosion.KindTorpedoPlume, depthChargePlumeCells, depthChargePlumeLife, true
 		}

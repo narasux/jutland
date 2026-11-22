@@ -8,6 +8,8 @@ import (
 type HitInfo struct {
 	// WeaponType shell / torpedo / bomb / rocket / laser / ram
 	WeaponType string
+	// WeaponName 发射器/投放器配置名，用于战报区分深弹、刺猬弹与反潜火箭
+	WeaponName string
 	// Diameter 口径整数（旧字段；精确值优先看 Caliber）
 	Diameter int
 	// Caliber 弹药配置中的精确口径文本，例如 7.62 / 12.7 / 203

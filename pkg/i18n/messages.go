@@ -347,6 +347,8 @@ const (
 	MsgBattleReportWeaponRocket      MessageID = "BattleReportWeaponRocket"
 	MsgBattleReportWeaponDepthCharge MessageID = "BattleReportWeaponDepthCharge"
 	MsgBattleReportWeaponRam         MessageID = "BattleReportWeaponRam"
+	MsgBattleReportWeaponHedgehog    MessageID = "BattleReportWeaponHedgehog"
+	MsgBattleReportWeaponASWRocket   MessageID = "BattleReportWeaponASWRocket"
 	MsgBattleReportWeaponLaser       MessageID = "BattleReportWeaponLaser"
 	MsgBattleReportWeaponUnknown     MessageID = "BattleReportWeaponUnknown"
 	MsgBattleReportOwnShips          MessageID = "BattleReportOwnShips"

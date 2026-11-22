@@ -162,6 +162,10 @@ other = "rocket"
 other = "depth charge"
 [BattleReportWeaponRam]
 other = "ram"
+[BattleReportWeaponHedgehog]
+other = "Hedgehog"
+[BattleReportWeaponASWRocket]
+other = "anti-submarine rocket"
 [BattleReportWeaponBombGeneric]
 other = "bomb"
 [BattleReportWeaponBomb]

@@ -220,8 +220,8 @@ func TestGuidedTorpedoConfig(t *testing.T) {
 }
 
 // TestASWWeaponRangesAfterScaling 验证反潜武器射程在初始化 ÷2 后落在拍板格数。
-// 场景：2026-11-21 平衡值：美/英深弹架 2 格（4km）、日本 95 式 3 格（6km）、RBU 4 格（8km）、Mk32 发射 Mk44 反潜鱼雷 8 格（16km）。
-// 预期：六艘代表舰的 MaxToSubmergedRange 精确等于 2/2/2/3/4/8，且 HasAntiSubWeapon=true；失败通常意味着配置公里数或初始化 Range/=2 换算被改错。
+// 场景：2026-11-22 平衡值：美/英深弹架 2 格（4km）、日本 95 式 3 格（6km）、刺猬弹/RBU 4 格（8km）、Mk32 发射 Mk44 反潜鱼雷 8 格（16km）。
+// 预期：七艘代表舰的 MaxToSubmergedRange 精确等于 2/2/2/3/4/4/8，且 HasAntiSubWeapon=true；失败通常意味着配置公里数或初始化 Range/=2 换算被改错。
 // 覆盖：表驱动查 ShipMap 模板，用 1e-9 容差比较射程并检查反潜标记。
 func TestASWWeaponRangesAfterScaling(t *testing.T) {
 	cases := []struct {
@@ -232,6 +232,7 @@ func TestASWWeaponRangesAfterScaling(t *testing.T) {
 		{"porter", 2},     // 美 Mk 6 深弹架：配置 4 km
 		{"hammann", 2},    // 同上
 		{"shimakaze", 3},  // 日 95 式深弹架：配置 6 km
+		{"johnston", 4},   // 美 Mk 10 刺猬弹：配置 8 km
 		{"jiujiang", 4},   // RBU 反潜火箭：配置 8 km
 		{"long_beach", 8}, // Mk32 反潜鱼雷：配置 16 km
 	}

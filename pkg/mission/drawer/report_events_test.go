@@ -144,3 +144,32 @@ func TestBattleReportSelfHitRow(t *testing.T) {
 	require.Contains(t, text, "450")
 	require.NotContains(t, text, i18n.Text(i18n.MsgBattleReportWeaponUnknown))
 }
+
+// TestBattleReportDistinguishesDepthChargeVariants 验证战报按发射器名区分普通深弹、刺猬弹和反潜火箭。
+// 场景：三类弹药 WeaponType 都是 depth_charge；旧实现统一显示「深水炸弹」，24 发刺猬弹命中也会被误读成普通深弹。
+// 预期：Hedgehog/Mk10 显示刺猬弹，Type65 显示反潜火箭，MkVII/Type94 仍显示深水炸弹；空发射器名回退普通深弹。
+// 覆盖：表驱动构造 WeaponName，调用 battleReportWeaponText 并与对应 i18n 文案比较。
+func TestBattleReportDistinguishesDepthChargeVariants(t *testing.T) {
+	previousLanguage := i18n.CurrentLanguage()
+	i18n.SetLanguage(string(i18n.LanguageZhHans))
+	t.Cleanup(func() { i18n.SetLanguage(string(previousLanguage)) })
+
+	cases := []struct {
+		weaponName string
+		want       i18n.MessageID
+	}{
+		{"UK/DC/24/Hedgehog", i18n.MsgBattleReportWeaponHedgehog},
+		{"US/DC/24/Mk10", i18n.MsgBattleReportWeaponHedgehog},
+		{"CN/250/5/Type65", i18n.MsgBattleReportWeaponASWRocket},
+		{"UK/DC/5/MkVII", i18n.MsgBattleReportWeaponDepthCharge},
+		{"JP/DC/2/Type94", i18n.MsgBattleReportWeaponDepthCharge},
+		{"", i18n.MsgBattleReportWeaponDepthCharge},
+	}
+	for _, tc := range cases {
+		entry := state.BattleLogEntry{Hit: objUnit.HitInfo{
+			WeaponType: string(objBullet.TypeDepthCharge),
+			WeaponName: tc.weaponName,
+		}}
+		require.Equal(t, i18n.Text(tc.want), battleReportWeaponText(entry))
+	}
+}
