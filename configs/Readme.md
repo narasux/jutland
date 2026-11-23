@@ -202,6 +202,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     antiShip: true,
     // 是否对空
     antiAircraft: true,
+    // 注：对空且弹径 ≤ 40mm 的自动炮会在初始化时自动获得反鱼雷能力，
+    //     射击来袭航迹会穿过本舰的鱼雷；整舰每 1 秒最多组织一次拦截，
+    //     且一次只动用一座炮。无需额外配置字段。
     // 对空近炸触发半径（地图格）；仅编程引信弹药填写，二战直射炮省略
     proximityRadius: 0.20,
     // 对空爆炸伤害半径（地图格）；进入近炸后对半径内飞机结算伤害

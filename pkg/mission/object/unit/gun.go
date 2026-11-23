@@ -35,6 +35,8 @@ type Gun struct {
 	AntiShip bool `json:"antiShip"`
 	// 能否防空
 	AntiAircraft bool `json:"antiAircraft"`
+	// 能否拦截航行中的鱼雷。小口径自动炮由初始化阶段按口径推导，不写进配置。
+	AntiTorpedo bool `json:"-"`
 	// 对空近炸触发半径（地图格）；0 表示二战式直射命中
 	ProximityRadius float64 `json:"proximityRadius"`
 	// 对空爆炸伤害半径（地图格）；仅对空编程弹药使用
@@ -64,6 +66,9 @@ func (g *Gun) IsAvailableAntiType(objType object.Type) bool {
 		return true
 	}
 	if g.AntiShip && objType == object.TypeShip {
+		return true
+	}
+	if g.AntiTorpedo && objType == object.TypeTorpedo {
 		return true
 	}
 	return false
@@ -146,6 +151,10 @@ func (g *Gun) Fire(shooter Attacker, enemy Hurtable) (bullets []*objBullet.Bulle
 		bt.FireDistance = distance
 		bt.FireRangeRatio = rangePercent
 		g.applyAirburst(bt, enemy.ObjType())
+		// 反鱼雷炮弹直接记住目标鱼雷，命中结算时不需要再遍历全场弹药。
+		if torpedo, ok := enemy.(*TorpedoTarget); ok {
+			bt.TargetTorpedo = torpedo.Bullet
+		}
 		bullets = append(bullets, bt)
 	}
 

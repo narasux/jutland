@@ -8,6 +8,7 @@ import (
 
 	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
@@ -337,6 +338,53 @@ func rotateTargetPos(origin, target objPos.MapPos, degrees float64) objPos.MapPo
 		origin.RX+math.Sin(radians)*distance,
 		origin.RY-math.Cos(radians)*distance,
 	)
+}
+
+// TorpedoTarget 把航行中的鱼雷包装成武器可选中的目标。
+// 反鱼雷机炮复用 Gun.Fire 的提前量、射程与射界计算，无需为鱼雷另写一套弹道。
+type TorpedoTarget struct {
+	Bullet *objBullet.Bullet
+}
+
+var _ Hurtable = (*TorpedoTarget)(nil)
+
+// ID 鱼雷没有独立 UID，反鱼雷弹按 TargetTorpedo 指针结算，这里仅满足接口。
+func (t *TorpedoTarget) ID() string {
+	return "torpedo"
+}
+
+// Detail 调试信息。
+func (t *TorpedoTarget) Detail() string {
+	return "torpedo " + t.Bullet.Name
+}
+
+// Player 鱼雷所属阵营。
+func (t *TorpedoTarget) Player() faction.Player {
+	return t.Bullet.BelongPlayer
+}
+
+// MovementState 鱼雷的直线航迹，供提前量计算。
+func (t *TorpedoTarget) MovementState() UnitMovementState {
+	return UnitMovementState{
+		CurPos:      t.Bullet.CurPos.Copy(),
+		CurRotation: t.Bullet.Rotation,
+		CurSpeed:    t.Bullet.Speed,
+	}
+}
+
+// GeometricSize 鱼雷不作为舰体命中框使用，返回零值。
+func (t *TorpedoTarget) GeometricSize() UnitGeometricSize {
+	return UnitGeometricSize{}
+}
+
+// ObjType 鱼雷目标类型。
+func (t *TorpedoTarget) ObjType() object.Type {
+	return object.TypeTorpedo
+}
+
+// HurtBy 标记鱼雷被击毁。
+func (t *TorpedoTarget) HurtBy(_ *objBullet.Bullet) {
+	t.Bullet.HitObjType = object.TypeTorpedo
 }
 
 // TorpedoLauncherMap 保存按配置名称索引的鱼雷发射器模板。

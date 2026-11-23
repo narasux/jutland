@@ -145,6 +145,8 @@ type Bullet struct {
 	Guidance *Guidance `json:"guidance"`
 	// 制导目标战舰 uid（仅制导弹药）
 	TargetShipUid string `json:"-"`
+	// 反鱼雷弹药锁定的鱼雷；只有 TargetObjType == TypeTorpedo 的炮弹会用到
+	TargetTorpedo *Bullet `json:"-"`
 	// 最后一次已知的目标位置；目标消失后按它继续飞行
 	GuidePos objPos.MapPos `json:"-"`
 	// 离上次留下炮弹或鱼雷尾迹又飞过的距离，单位是地图格

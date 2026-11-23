@@ -100,6 +100,10 @@ func validateBulletGuidance(b objBullet.Bullet) {
 	}
 }
 
+// antiTorpedoMaxCaliber 可参与反鱼雷的最大口径（mm）。
+// 只有小口径自动炮具备足够的射速与俯角去扫射贴近水面的鱼雷。
+const antiTorpedoMaxCaliber = 40
+
 func initGunMap() {
 	file, err := os.Open(filepath.Join(config.ConfigBaseDir, "guns.json5"))
 	if err != nil {
@@ -117,6 +121,10 @@ func initGunMap() {
 	for _, g := range guns {
 		g.Range /= 2
 		g.BulletSpeed /= 4000
+		// 反鱼雷能力由「对空 + 小口径」推导，不新增配置字段。
+		if b, ok := objBullet.Map[g.BulletName]; ok {
+			g.AntiTorpedo = g.AntiAircraft && b.Diameter <= antiTorpedoMaxCaliber
+		}
 		objUnit.GunMap[g.Name] = &g
 	}
 	log.Println("guns data loaded from json5 file")
@@ -416,6 +424,9 @@ func initShipMap() {
 				}
 				if gun.AntiAircraft {
 					s.Weapon.MaxToPlaneRange = max(s.Weapon.MaxToPlaneRange, gun.Range)
+				}
+				if gun.AntiTorpedo {
+					s.Weapon.MaxToTorpedoRange = max(s.Weapon.MaxToTorpedoRange, gun.Range)
 				}
 			}
 		}

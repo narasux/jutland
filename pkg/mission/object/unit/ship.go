@@ -166,6 +166,8 @@ type BattleShip struct {
 	GroupID object.GroupID
 	// 攻击目标（敌舰 Uid）
 	AttackTarget string
+	// antiTorpedoReadyTick 整舰反鱼雷火控下一次可组织拦截的拍
+	antiTorpedoReadyTick int64
 
 	// 所属阵营（玩家）
 	BelongPlayer faction.Player
@@ -346,6 +348,18 @@ type FireTargets struct {
 	Secondary Hurtable
 	// AntiAircraft 防空炮目标（射程内最近的敌机）
 	AntiAircraft Hurtable
+	// AntiTorpedo 反鱼雷目标（来袭航迹会穿过本舰的鱼雷）
+	AntiTorpedo Hurtable
+}
+
+// AntiTorpedoFireInterval 整舰反鱼雷火控的组织间隔（秒）。
+// 不是单炮装填：炮座越多不代表能同时扫更多鱼雷，否则战列舰的防空炮数量
+// 会直接变成鱼雷免疫。具体开火的那座炮仍受自身装填限制。
+const AntiTorpedoFireInterval = 1.0
+
+// AntiTorpedoReady 整舰反鱼雷火控是否已冷却完毕。
+func (s *BattleShip) AntiTorpedoReady() bool {
+	return SimTick() >= s.antiTorpedoReadyTick
 }
 
 // Fire 向单一目标发射全部武器（Attacker 接口要求）。
@@ -370,6 +384,36 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 			return enemy.Submerged()
 		}
 		return false
+	}
+
+	// 反鱼雷优先：能拦鱼雷的小口径炮先消耗本拍装填，再轮到舰船 / 飞机。
+	// 整舰每 AntiTorpedoFireInterval 秒只组织一次拦截，且一次只动用一座炮：
+	// 否则战列舰十几座防空炮会轮流扫同一条鱼雷，反鱼雷效率随炮座数量线性膨胀，
+	// 等于给大舰发鱼雷免疫。打不了鱼雷的炮在 IsAvailableAntiType 处直接返回，
+	// 不影响后续目标。
+	if torpedoTarget := targets.AntiTorpedo; torpedoTarget != nil && !gunsBlocked &&
+		s.AntiTorpedoReady() {
+		fireOneMount := func(guns []*Gun) bool {
+			for _, gun := range guns {
+				bullets := gun.Fire(s, torpedoTarget)
+				if len(bullets) > 0 {
+					shotBullets = append(shotBullets, bullets...)
+					return true
+				}
+			}
+			return false
+		}
+		fired := fireOneMount(s.Weapon.AntiAircraftGuns)
+		if !fired {
+			fired = fireOneMount(s.Weapon.SecondaryGuns)
+		}
+		if !fired {
+			fired = fireOneMount(s.Weapon.MainGuns)
+		}
+		if fired {
+			next := max(SimTick(), 1)
+			s.antiTorpedoReadyTick = next + ReloadTicks(AntiTorpedoFireInterval)
+		}
 	}
 
 	mainTarget := targets.Primary

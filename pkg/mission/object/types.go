@@ -30,4 +30,6 @@ const (
 	TypeWater
 	// TypeLand 陆地
 	TypeLand
+	// TypeTorpedo 航行中的鱼雷（机炮可拦截的目标）
+	TypeTorpedo
 )

@@ -56,6 +56,18 @@ func aaHitChance(diameter int, vulnerability float64) float64 {
 	return chance * vulnerability
 }
 
+const (
+	// antiTorpedoThreatCorridor 鱼雷航迹到本舰中心的横向距离上限（地图格）。
+	// 只有真正朝本舰来的鱼雷才值得消耗防空炮装填，擦身而过的不管。
+	antiTorpedoThreatCorridor = 0.35
+	// antiTorpedoHitChance 单发炮弹穿过鱼雷命中框时的击毁概率。
+	// 鱼雷是海面小目标，即使弹丸扫过航迹也不保证引爆；这是反鱼雷强度的主调参点。
+	antiTorpedoHitChance = 0.05
+	// 鱼雷命中框（地图格）：约 10m × 4m，比舰体小一个数量级。
+	torpedoHitLengthCells = 0.08
+	torpedoHitWidthCells  = 0.03
+)
+
 // damageGroundPlanesNear 落点爆炸波及范围内的地面飞机结算伤害，
 // excludeUid 用于排除已被直接命中的目标；返回是否造成伤害。
 func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid string) bool {
@@ -81,6 +93,7 @@ func (m *MissionManager) damageGroundPlanesNear(bt *objBullet.Bullet, excludeUid
 // 更新战舰武器开火相关状态
 func (m *MissionManager) updateShipWeaponFire() {
 	m.rebuildCombatBuckets()
+	m.rebuildAntiTorpedoCandidates()
 	maxBulletDiameter := 0
 	isTorpedoLaunched := false
 	isRocketLaunched := false
@@ -190,7 +203,85 @@ func (m *MissionManager) shipFireTargets(ship *objUnit.BattleShip) objUnit.FireT
 	if antiAircraft != nil {
 		targets.AntiAircraft = antiAircraft
 	}
+	if ship.AntiTorpedoReady() {
+		if torpedo := m.nearestThreatTorpedo(ship); torpedo != nil {
+			m.antiTorpedoTarget.Bullet = torpedo
+			targets.AntiTorpedo = &m.antiTorpedoTarget
+		}
+	}
 	return targets
+}
+
+// antiTorpedoCandidate 预存鱼雷航向，逐舰择敌时不再重复算三角函数。
+type antiTorpedoCandidate struct {
+	bullet   *objBullet.Bullet
+	forwardX float64
+	forwardY float64
+}
+
+// rebuildAntiTorpedoCandidates 收集本拍仍在航行的鱼雷。
+// 每拍只遍历一次全部弹药，逐舰择敌时只在这份小列表里查找。
+func (m *MissionManager) rebuildAntiTorpedoCandidates() {
+	m.antiTorpedoCandidates = m.antiTorpedoCandidates[:0]
+	for _, bt := range m.state.Arena.ForwardingBullets {
+		if bt.Type != objBullet.TypeTorpedo ||
+			bt.HitObjType != object.TypeNone || bt.Life <= 0 {
+			continue
+		}
+		radians := bt.Rotation * math.Pi / 180
+		m.antiTorpedoCandidates = append(m.antiTorpedoCandidates, antiTorpedoCandidate{
+			bullet:   bt,
+			forwardX: math.Sin(radians),
+			forwardY: -math.Cos(radians),
+		})
+	}
+}
+
+// nearestThreatTorpedo 返回朝本舰航迹驶来、且在本舰反鱼雷射程内的最近鱼雷。
+func (m *MissionManager) nearestThreatTorpedo(ship *objUnit.BattleShip) *objBullet.Bullet {
+	maxRange := ship.Weapon.MaxToTorpedoRange
+	if maxRange <= 0 || len(m.antiTorpedoCandidates) == 0 {
+		return nil
+	}
+
+	var nearest *objBullet.Bullet
+	nearestDistanceSq := math.MaxFloat64
+	maxRangeSq := maxRange * maxRange
+	for _, candidate := range m.antiTorpedoCandidates {
+		torpedo := candidate.bullet
+		if torpedo.BelongPlayer == ship.BelongPlayer {
+			continue
+		}
+		dx, dy := ship.CurPos.RX-torpedo.CurPos.RX, ship.CurPos.RY-torpedo.CurPos.RY
+		distanceSq := dx*dx + dy*dy
+		if distanceSq > maxRangeSq || distanceSq >= nearestDistanceSq {
+			continue
+		}
+		if !torpedoOnCollisionCourseWithForward(dx, dy, candidate.forwardX, candidate.forwardY) {
+			continue
+		}
+		nearest, nearestDistanceSq = torpedo, distanceSq
+	}
+	return nearest
+}
+
+// torpedoOnCollisionCourse 判断鱼雷是否仍在本舰前方、且直线航迹会从本舰中心附近穿过。
+func torpedoOnCollisionCourse(shipPos objPos.MapPos, torpedo *objBullet.Bullet) bool {
+	radians := torpedo.Rotation * math.Pi / 180
+	return torpedoOnCollisionCourseWithForward(
+		shipPos.RX-torpedo.CurPos.RX,
+		shipPos.RY-torpedo.CurPos.RY,
+		math.Sin(radians), -math.Cos(radians),
+	)
+}
+
+// torpedoOnCollisionCourseWithForward 是航迹判定的核心：
+// dx / dy 为鱼雷指向本舰的位移，forward 为鱼雷单位航向。
+func torpedoOnCollisionCourseWithForward(dx, dy, forwardX, forwardY float64) bool {
+	if dx*forwardX+dy*forwardY <= 0 {
+		return false
+	}
+	return math.Abs(dx*forwardY-dy*forwardX) <= antiTorpedoThreatCorridor
 }
 
 // shipEngageRange 返回本舰对目标可用的最大射程：水下目标只算反潜武器与潜艇鱼雷。
@@ -767,6 +858,36 @@ func (m *MissionManager) updateShotBullets() {
 					return false
 				},
 			)
+		case object.TypeTorpedo:
+			torpedo := bt.TargetTorpedo
+			if torpedo == nil || torpedo == bt ||
+				torpedo.HitObjType != object.TypeNone || torpedo.Life <= 0 {
+				return false
+			}
+			if !m.state.UI.GameOpts.FriendlyFire && bt.BelongPlayer == torpedo.BelongPlayer {
+				return false
+			}
+			reach := bt.Speed + torpedo.Speed +
+				0.5*math.Hypot(torpedoHitLengthCells, torpedoHitWidthCells)
+			if beyondHitReach(bt.CurPos.RX, bt.CurPos.RY, torpedo.CurPos.RX, torpedo.CurPos.RY, reach) {
+				return false
+			}
+			if !geometry.IsSegmentIntersectRotatedRectangle(
+				prevRX, prevRY,
+				bt.CurPos.RX, bt.CurPos.RY,
+				torpedo.CurPos.RX, torpedo.CurPos.RY,
+				torpedoHitLengthCells, torpedoHitWidthCells,
+				torpedo.Rotation,
+			) {
+				return false
+			}
+			// 弹丸扫过航迹只代表「有机会」，是否引爆由单发概率决定。
+			if objUnit.RandFloat64() >= antiTorpedoHitChance {
+				return false
+			}
+			torpedo.HitObjType = object.TypeTorpedo
+			bt.HitObjType = object.TypeTorpedo
+			return true
 		default:
 			return false
 		}
@@ -825,6 +946,12 @@ func (m *MissionManager) updateShotBullets() {
 
 	arrivedBullets, forwardingBullets := []*objBullet.Bullet{}, []*objBullet.Bullet{}
 	for _, bt := range m.state.Arena.ForwardingBullets {
+		// 已被其他弹药摧毁的目标（如被机炮拦下的鱼雷）直接进入到达列表，
+		// 不能继续推进，也不能重复结算。
+		if bt.HitObjType != object.TypeNone {
+			arrivedBullets = append(arrivedBullets, bt)
+			continue
+		}
 		// 深水炸弹：独立引爆分支，不走通用命中结算（只伤潜艇）
 		if bt.Type == objBullet.TypeDepthCharge {
 			if m.depthChargeShouldExplode(bt) {
@@ -872,8 +999,19 @@ func (m *MissionManager) updateShotBullets() {
 		forwardingBullets = append(forwardingBullets, bt)
 	}
 
+	// 反鱼雷炮弹可能在鱼雷已经推进过本拍之后才命中它：这里统一把本拍
+	// 新标记为已命中的弹药移入到达列表，避免被拦截的鱼雷再存活一帧。
+	keptBullets := forwardingBullets[:0]
+	for _, bt := range forwardingBullets {
+		if bt.HitObjType != object.TypeNone {
+			arrivedBullets = append(arrivedBullets, bt)
+			continue
+		}
+		keptBullets = append(keptBullets, bt)
+	}
+
 	// 继续塔塔开的，保留
-	m.state.Arena.ForwardingBullets = forwardingBullets
+	m.state.Arena.ForwardingBullets = keptBullets
 	// 到达弹药只结算一次：把本发弹药累计的实际伤害记到开火方，
 	// 包括暴击、溢出伤害与落点范围伤害。已到达弹药不会再飞，不会重复记账。
 	for _, bt := range arrivedBullets {
@@ -1044,6 +1182,9 @@ const (
 	bombSplashCells = 0.8
 	// 鱼雷命中舰体：水下爆炸水柱
 	torpedoPlumeCells = 0.7
+	// 反鱼雷机炮击毁鱼雷：海面小水花
+	interceptSplashCells = 0.5
+	interceptSplashLife  = 30
 	// 撞击命中：整舰动能冲击，闪光要明显大于普通大口径炮弹
 	ramHitCells = 1.4
 	ramHitLife  = 36
@@ -1117,6 +1258,9 @@ func hitEffect(bt *objBullet.Bullet) (objExplosion.Kind, float64, int, bool) {
 	tier := hitEffectTier(bt.Diameter)
 
 	switch bt.HitObjType {
+	case object.TypeTorpedo:
+		// 被机炮拦截的鱼雷只在水面炸出一团小水花
+		return objExplosion.KindSplash, interceptSplashCells, interceptSplashLife, true
 	case object.TypeShip, object.TypePlane:
 		// 鱼雷命中：水下爆炸水柱，不画水面火花
 		if bt.Type == objBullet.TypeTorpedo {
