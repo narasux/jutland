@@ -83,6 +83,26 @@ func weaponResource(
 	return weaponImg.Get(weapon, status, resourceZoom), target / float64(resourceZoom)
 }
 
+// rocketKindPresent 判断舰上是否有反潜火箭（antiSub=true）或普通火箭（antiSub=false）。
+func rocketKindPresent(rockets []*objUnit.RocketLauncher, antiSub bool) bool {
+	for _, rocket := range rockets {
+		if rocket.AntiSubmarine == antiSub {
+			return true
+		}
+	}
+	return false
+}
+
+// rocketKindReloaded 判断该类火箭是否至少有一座已装填。
+func rocketKindReloaded(rockets []*objUnit.RocketLauncher, antiSub bool) bool {
+	for _, rocket := range rockets {
+		if rocket.AntiSubmarine == antiSub && rocket.Reloaded() {
+			return true
+		}
+	}
+	return false
+}
+
 // diveResource 返回潜航状态图标、水下青色图标、过渡金色图标和残余绘制缩放比例。
 func diveResource(
 	diveState diveImg.State, sceneZoom int,
@@ -748,13 +768,16 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 			// 渲染武器状态时候的 X 方向间隙大小
 			var weaponInterstitialSpacing float64
 			hasPlane := s.Aircraft.HasPlane
+			hasASWRocket := rocketKindPresent(s.Weapon.Rockets, true)
+			hasRegularRocket := rocketKindPresent(s.Weapon.Rockets, false)
 			weaponCnt := len(lo.Filter(
 				[]bool{
 					s.Weapon.HasMainGun,
 					s.Weapon.HasSecondaryGun,
 					s.Weapon.HasAntiAircraftGun,
 					s.Weapon.HasTorpedo,
-					s.Weapon.HasRocket,
+					hasASWRocket,
+					hasRegularRocket,
 					hasPlane,
 				},
 				func(b bool, _ int) bool {
@@ -762,6 +785,8 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				},
 			))
 			switch weaponCnt {
+			case 7:
+				weaponInterstitialSpacing = 8.0
 			case 6, 5:
 				weaponInterstitialSpacing = 12.0
 			case 4:
@@ -857,16 +882,31 @@ func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 
-			// 绘制火箭炮发射器状态
-			if s.Weapon.HasRocket {
+			// 绘制普通火箭发射器状态
+			if hasRegularRocket {
 				status := weaponImg.WeaponStatusReloading
 				if s.Weapon.RocketDisabled {
 					status = weaponImg.WeaponStatusDisabled
-				} else if s.Weapon.RocketLauncherReloaded() {
+				} else if rocketKindReloaded(s.Weapon.Rockets, false) {
 					status = weaponImg.WeaponStatusLoaded
 				}
 
 				weaponIcon, weaponScale := weaponResource(weaponImg.WeaponTypeRocket, status, ms.UI.GameOpts.Zoom)
+				drawWeaponIcon(weaponIcon, weaponScale)
+			}
+
+			// 绘制反潜深弹状态；与普通火箭分开计数，避免深弹显示成火箭图标
+			if hasASWRocket {
+				status := weaponImg.WeaponStatusReloading
+				if s.Weapon.RocketDisabled {
+					status = weaponImg.WeaponStatusDisabled
+				} else if rocketKindReloaded(s.Weapon.Rockets, true) {
+					status = weaponImg.WeaponStatusLoaded
+				}
+
+				weaponIcon, weaponScale := weaponResource(
+					weaponImg.WeaponTypeDepthCharge, status, ms.UI.GameOpts.Zoom,
+				)
 				drawWeaponIcon(weaponIcon, weaponScale)
 			}
 

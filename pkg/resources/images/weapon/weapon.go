@@ -21,6 +21,8 @@ const (
 	WeaponTypeAntiAircraftGun WeaponType = "antiaircraft_gun"
 	WeaponTypeTorpedo         WeaponType = "torpedo"
 	WeaponTypeRocket          WeaponType = "rocket"
+	// WeaponTypeDepthCharge 反潜深弹 / 反潜火箭发射器，与普通火箭图标区分
+	WeaponTypeDepthCharge WeaponType = "depth_charge"
 	// WeaponTypePlane 舰载机，复用武器图标槽位展示航空状态
 	WeaponTypePlane WeaponType = "plane"
 )
@@ -55,6 +57,7 @@ func loadWeaponIcons(cache map[string]*ebiten.Image) {
 		WeaponTypeAntiAircraftGun,
 		WeaponTypeTorpedo,
 		WeaponTypeRocket,
+		WeaponTypeDepthCharge,
 		WeaponTypePlane,
 	}
 
