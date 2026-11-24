@@ -333,6 +333,10 @@ func (m *MissionManager) updatePlaneAttackOrReturn() {
 		if !ship.Aircraft.HasPlane {
 			continue
 		}
+		// 潜艇没浮出水面时弹射器在水下，本拍不派机，省掉一次目标筛选。
+		if !objUnit.CanOperateAircraft(ship) {
+			continue
+		}
 
 		if target := m.state.Arena.Ships[ship.AttackTarget]; target != nil &&
 			m.state.CanSeeShip(ship.BelongPlayer, target) {

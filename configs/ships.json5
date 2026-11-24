@@ -36465,8 +36465,7 @@
     }
   },
   // --------- 潜艇 ----------
-  // 伊-400
-  // TODO: 晴岚（M6A1）水上攻击机尚未编入——本作暂无水上机体系，先按无舰载机配置。
+  // 伊-400：艇艏弹射器放飞晴岚，返航时在艇侧水面着水回收（浮航状态才能起降）
   {
     name: "i_400",
     nation: "jp",
@@ -36488,6 +36487,16 @@
       surfaceTime: 10,
       submergedSpeedRatio: 0.35,
       defaultDiveState: "submerged",
+    },
+    aircraft: {
+      deck: "BowSingleCatapultSeaplaneTender",
+      takeOffTime: 10,
+      groups: [
+        {
+          name: "M6A1",
+          maxCount: 3
+        }
+      ]
     },
     fundsCost: 120,
     timeCost: 30,

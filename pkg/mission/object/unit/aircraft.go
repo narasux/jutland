@@ -178,6 +178,10 @@ func (sa *ShipAircraft) TakeOffScout(base AircraftBase) *Plane {
 	if sa.Disable || sa.deck == nil || len(sa.deck.TakeoffPoints) == 0 {
 		return nil
 	}
+	// 同上：潜艇没浮出水面就不能弹射侦察机。
+	if !CanOperateAircraft(base) {
+		return nil
+	}
 	sa.ensureTakeoffPointTimes()
 	timeNow := NowMillis()
 	for idx, point := range sa.deck.TakeoffPoints {
@@ -326,6 +330,10 @@ func (sa *ShipAircraft) takeOff(
 		return nil
 	}
 	if sa.deck == nil || len(sa.deck.TakeoffPoints) == 0 {
+		return nil
+	}
+	// 潜艇下潜时弹射器在水下，不能放飞新机；已经出击的飞机不受影响。
+	if !CanOperateAircraft(base) {
 		return nil
 	}
 	sa.ensureTakeoffPointTimes()

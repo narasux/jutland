@@ -64,6 +64,26 @@ func (a *ShipAircraft) HasAntiSubAircraft() bool {
 	return false
 }
 
+// CanOperateAircraft 判断基地当前能否起降飞机。
+// 潜艇只有在浮航状态才能弹射和水面回收：下潜、上浮、下潜过渡中都按不可用处理，
+// 保证「浮出水面才能起飞 / 收回返航机」的设定；航母与陆地机场恒为可用。
+func CanOperateAircraft(base AircraftBase) bool {
+	if base == nil {
+		return false
+	}
+	ship, ok := base.(*BattleShip)
+	if !ok {
+		return true
+	}
+	if ship == nil {
+		return false
+	}
+	if ship.Type != ShipTypeSubmarine {
+		return true
+	}
+	return ship.Submarine.DiveState == DiveStateSurface
+}
+
 // isBaseMissing 判断基地是否缺失（飞机所属航母已被击沉等）。
 // 注意：nil 的 *BattleShip 装入接口后接口值非 nil，必须按具体类型判空。
 func isBaseMissing(base AircraftBase) bool {

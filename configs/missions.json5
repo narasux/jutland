@@ -4864,6 +4864,10 @@
             maxCount: 8,
           },
           {
+            name: "M6A1",
+            maxCount: 8,
+          },
+          {
             name: "C6N1",
             maxCount: 8,
           },
@@ -5651,6 +5655,10 @@
           },
           {
             name: "B7A2",
+            maxCount: 8,
+          },
+          {
+            name: "M6A1",
             maxCount: 8,
           },
           {

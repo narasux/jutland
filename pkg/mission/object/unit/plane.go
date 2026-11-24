@@ -3,6 +3,7 @@ package unit
 import (
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 	"strings"
 
@@ -576,6 +577,57 @@ func (p *Plane) HurtBy(bullet *objBullet.Bullet) {
 func (p *Plane) MoveTo(mapCfg *mapcfg.MapCfg, targetPos, enemyPos objPos.MapPos, targetSpeed float64) {
 	// 委托给移动策略处理
 	p.movementStrategy.MoveTo(p, mapCfg, targetPos, enemyPos, targetSpeed)
+}
+
+const (
+	// recoveryHoldRadius 是返航飞机在基地附近等待回收的盘旋半径（地图格）。
+	// 取 2 格：贴着潜艇上浮位置绕圈，又不会和艇体重叠。
+	recoveryHoldRadius = 2.0
+	// recoveryHoldApproachSpan 是「先飞向基地再盘旋」的判定距离，取盘旋半径的两倍。
+	recoveryHoldApproachSpan = recoveryHoldRadius * 2
+	// recoveryHoldLookahead 是盘旋瞄准点在切向前方的距离（地图格）。
+	recoveryHoldLookahead = 1.0
+	// recoveryHoldRadialGain 把盘旋半径误差折算成瞄准点的外向/内向偏移比例。
+	recoveryHoldRadialGain = 0.8
+)
+
+// HoldNearBase 让返航飞机在基地附近盘旋等待回收。
+// 潜艇下潜时艇侧水面不能降落，返航机只能绕艇位烧油等上浮：盘旋照常消耗航程，
+// 油尽由调用方按弃机处理。离基地还远时先直飞基地，进入盘旋圈后再绕圈。
+func (p *Plane) HoldNearBase(mapCfg *mapcfg.MapCfg, base AircraftBase) {
+	// 退回到巡航：艇重新上浮后由返航指令重新分配回收槽位，从待场引导重来。
+	p.Flight.Phase = PlaneFlightPhaseCruising
+	center := base.BasePos()
+	if p.CurPos.Distance(center) > recoveryHoldApproachSpan {
+		p.MoveTo(mapCfg, center, p.CurPos, 0)
+		return
+	}
+	p.OrbitAround(mapCfg, center, recoveryHoldRadius)
+}
+
+// OrbitAround 让飞机绕着 center 以 radius 为半径盘旋。
+// 瞄准点由顺时针切向分量与半径误差的径向修正合成：半径偏小时朝外偏、偏大时朝内偏，
+// 飞机按自身转向与速度自然收敛到一条圆航线，而不是在圆心原地悬停。
+func (p *Plane) OrbitAround(mapCfg *mapcfg.MapCfg, center objPos.MapPos, radius float64) {
+	dx, dy := p.CurPos.RX-center.RX, p.CurPos.RY-center.RY
+	distance := math.Hypot(dx, dy)
+	if distance < 1e-6 {
+		// 正好压在圆心上时方位角没有意义，先朝正北飞出去，下一拍自然进入圆周。
+		dx, dy, distance = 0, -1, 1
+	}
+	// 单位径向（圆心 -> 飞机）与顺时针切向（地图坐标 y 向下）。
+	radialX, radialY := dx/distance, dy/distance
+	tangentX, tangentY := -radialY, radialX
+	radialCorrection := recoveryHoldRadialGain * (radius - distance)
+	p.MoveTo(
+		mapCfg,
+		objPos.NewR(
+			p.CurPos.RX+recoveryHoldLookahead*(tangentX+radialCorrection*radialX),
+			p.CurPos.RY+recoveryHoldLookahead*(tangentY+radialCorrection*radialY),
+		),
+		p.CurPos,
+		0,
+	)
 }
 
 // MustReturn 必须返航

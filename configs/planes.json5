@@ -6375,6 +6375,51 @@
       ]
     }
   },
+  {
+    // 晴岚（M6A1 晴岚11型），1944 年服役，伊四百型潜艇搭载的专用水上攻击机
+    // 主翼与浮筒可折叠塞进艇上圆筒机库，由弹射器起飞、返航后在水面降落吊回；
+    // 速度/航程取维基百科规格表 474 km/h、1190 km，机长 11.64 m、翼展 12.26 m、全重 4.04 t
+    // 仅配置 1 枚 450mm 九一式航空鱼雷与后座 1 挺 13mm 二式机枪；
+    // 250kg 炸弹与 800kg 特制炸弹未配置，故不写入描述
+    name: "M6A1",
+    nation: "jp",
+    type: "torpedo_bomber",
+    typeAbbr: "TB",
+    year: 1944,
+    historical: "real",
+    totalHP: 46,
+    damageReduction: 0.5,
+    maxSpeed: 474,
+    acceleration: 22,
+    rotateSpeed: 7,
+    length: 11.64,
+    width: 12.26,
+    fundsCost: 12,
+    timeCost: 6,
+    tonnage: 4.04,
+    range: 1190,
+    flakVulnerability: 1.10,
+    weapon: {
+      guns: [
+        // 后座（13mm 二式，后半球自卫）
+        {
+          name: "JP/13/Type93",
+          posPercent: 0,
+          rightFiringArc: [100, 180],
+          leftFiringArc: [180, 260]
+        }
+      ],
+      torpedoes: [
+        // 机腹（450mm 九一式三型航空鱼雷，贴水投放）
+        {
+          name: "JP/AST/450/1943/Type91Mod3",
+          posPercent: 0.3,
+          rightFiringArc: [0, 20],
+          leftFiringArc: [340, 360]
+        }
+      ]
+    }
+  },
   // --------- 侦察机 ----------
   {
     // 瑞云（E16A1 瑞云11型），1944 年 2 月服役，E13A 的后继双座水侦

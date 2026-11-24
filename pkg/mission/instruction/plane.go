@@ -248,9 +248,31 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 	switch plane.Flight.Phase {
 	case objUnit.PlaneFlightPhaseTakingOff:
 		plane.UpdateTakeoff(mapCfg, base)
-	case "", objUnit.PlaneFlightPhaseCruising:
-		slot := base.BaseAircraft().RequestLanding(plane.Uid)
-		plane.StartLandingStaging(mapCfg, base, slot)
+		return nil
+	case objUnit.PlaneFlightPhaseLandingDeck:
+		// 已经进入着水滑跑段，落地由这一拍完成，不再中途改判。
+		if !plane.UpdateLandingDeck(base) {
+			return nil
+		}
+		i.recoverPlane(missionState, base, plane)
+		return nil
+	}
+
+	// 走到这里是还在空中、尚未落到水面的返航机（巡航 / 待场引导 / 最后进近）。
+	// 潜艇在返航途中下潜时艇侧水面不能降落，只能退回巡航在艇位附近盘旋等它上浮；
+	// 盘旋照常消耗航程，等不到上浮就地弃机（水面迫降被视为损失）。
+	if !objUnit.CanOperateAircraft(base) {
+		if plane.RemainRange <= 0 {
+			plane.CurHP = 0
+			i.status = Executed
+			return nil
+		}
+		base.BaseAircraft().CancelLanding(plane.Uid)
+		plane.HoldNearBase(mapCfg, base)
+		return nil
+	}
+
+	switch plane.Flight.Phase {
 	case objUnit.PlaneFlightPhaseLandingStaging:
 		if plane.UpdateLandingStaging(mapCfg, base) {
 			plane.StartLandingApproach(base)
@@ -259,11 +281,9 @@ func (i *PlaneReturn) Exec(missionState *state.MissionState) error {
 		if plane.UpdateLandingApproach(base) {
 			plane.StartLandingDeck(base)
 		}
-	case objUnit.PlaneFlightPhaseLandingDeck:
-		if !plane.UpdateLandingDeck(base) {
-			return nil
-		}
-		i.recoverPlane(missionState, base, plane)
+	default:
+		slot := base.BaseAircraft().RequestLanding(plane.Uid)
+		plane.StartLandingStaging(mapCfg, base, slot)
 	}
 	return nil
 }

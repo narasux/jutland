@@ -1041,6 +1041,28 @@
     ],
   },
   {
+    name: "M6A1",
+    displayName: "Seiran",
+    armaments: [
+      {
+        label: "Machine Gun (Rear)",
+        value: "1 x 13mm Type 2",
+      },
+      {
+        label: "Torpedo",
+        value: "1 x Type 91 450mm",
+      },
+    ],
+    description: "The Aichi M6A1 Seiran was a floatplane attack bomber built for the I-400-class submarines and accepted in 1944. Its wings and floats folded into the cylindrical deck hangar; it was catapulted from the surfaced boat and hoisted back aboard after landing on the water. Planned for a raid on the Panama Canal, it saw no combat before the surrender. Maximum speed about 474 km/h, range about 1,190 km, length 11.64 m, span 12.26 m. In game it is classed as a torpedo bomber with one 450 mm Type 91 Model 3 aerial torpedo and a single rear 13 mm Type 2 machine gun; the 250 kg and 800 kg bombs are not configured and not recorded here.",
+    author: "",
+    links: [
+      {
+        name: "Wikipedia - Aichi M6A",
+        url: "https://en.wikipedia.org/wiki/Aichi_M6A",
+      },
+    ],
+  },
+  {
     name: "C6N1",
     displayName: "Myrt",
     armaments: [
@@ -16076,6 +16098,10 @@
       {
         label: "Torpedoes",
         value: "8x1 533mm (forward)",
+      },
+      {
+        label: "Carrier Aircraft",
+        value: "3 x M6A1 Seiran",
       },
     ],
     description: "I-400 was the lead boat of the I-400 class, completed in late 1944 and the largest submarine in the world at the time. She was designed to carry attack seaplanes for a raid on the Panama Canal, with a cylindrical hangar and catapult forward for three Seiran aircraft. Two sorties were prepared before the surrender; taken over by the U.S. Navy off Hawaii, she was scuttled as a target in 1946.",
