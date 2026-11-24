@@ -83,8 +83,10 @@ func (m *MissionManager) consumeZoomInput(wheelY, magnification float64) int {
 func (m *MissionManager) updateInstructions() {
 	// 已经执行完的指令，就不再需要
 	m.instructionSet.RemoveExecuted()
+	// 托管开关由 Hacker 终端秘籍写入；这里把它对账到玩家侧处理器。
+	m.syncPlayerAIControl()
 	// 逐个读取各个用户的输入，更新指令
-	m.instructionSet.Assign(m.playerAlphaHandler.Handle(m.instructionSet.Items(), m.state))
+	m.instructionSet.Assign(m.activePlayerHandler().Handle(m.instructionSet.Items(), m.state))
 	m.instructionSet.Assign(m.playerBetaHandler.Handle(m.instructionSet.Items(), m.state))
 }
 
@@ -457,6 +459,10 @@ func (m *MissionManager) updateReinforcePoints() {
 	shipIndex = (shipIndex + shipCount) % shipCount
 
 	rp.CurSelectedShipIndex = shipIndex
+	// 托管期间只保留浏览：召唤、取消和改集结点都由 AI 接管。
+	if m.state.Core.PlayerAIControl {
+		return
+	}
 
 	// 确定增援的战舰
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
@@ -535,6 +541,10 @@ func (m *MissionManager) updateRallyLineClick() {
 // updateRallyPointRightClick 在主地图中右键设置当前选中增援点的集合点。
 func (m *MissionManager) updateRallyPointRightClick() {
 	if m.state.Core.MissionStatus != state.MissionRunning || m.state.UI.ShowRallyLinePointUid == "" {
+		return
+	}
+	// 托管期间集结点是 AI 的锚点，玩家不能再用右键改它。
+	if m.state.Core.PlayerAIControl {
 		return
 	}
 

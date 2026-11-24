@@ -20,6 +20,7 @@ var Cheats = []Cheat{
 	&YouHaveBetrayedTheWorkingClass{},
 	&AbandonDarkness{},
 	&Expelliarmus{},
+	&HelpMeAISama{},
 }
 
 // DebugCheats 调试秘籍表

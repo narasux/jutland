@@ -1,8 +1,10 @@
 package manager
 
 import (
+	"github.com/narasux/jutland/pkg/mission/faction"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
+	"github.com/narasux/jutland/pkg/mission/state"
 )
 
 // updateAutoScout 电脑基地在迷雾开启时自动派一架侦察机。玩家基地默认不自动派。
@@ -20,8 +22,8 @@ func (m *MissionManager) updateAutoScout() {
 
 func (m *MissionManager) launchAutoScout(aircraft *objUnit.ShipAircraft, base objUnit.AircraftBase) {
 	owner := base.BaseBelongPlayer()
-	// 玩家基地默认不自动派。这一侧迷雾被关掉时也不派，因为没有未探索可揭。
-	if owner == m.state.Player.CurPlayer || !m.state.UsesFog(owner) {
+	// 玩家基地默认不自动派；AI 托管时按电脑侧同样规则自动派。
+	if !shouldAutoScout(m.state, owner) {
 		return
 	}
 	// 起飞后甲板上还要留一架。天上已经有一架自动搜索就不再派。
@@ -41,6 +43,15 @@ func (m *MissionManager) launchAutoScout(aircraft *objUnit.ShipAircraft, base ob
 		}
 	}
 	m.instructionSet.Add(instr.NewPlaneScout(plane.Uid, point, false))
+}
+
+// shouldAutoScout 判断某个阵营的基地这一拍是否该自动派搜索机。
+// 玩家侧只有交给 AI 托管时才自动派；迷雾关闭时没有未探索海面，不派。
+func shouldAutoScout(ms *state.MissionState, owner faction.Player) bool {
+	if ms == nil || !ms.UsesFog(owner) {
+		return false
+	}
+	return owner != ms.Player.CurPlayer || ms.Core.PlayerAIControl
 }
 
 // countAutoScouts 数这个基地已经有几架自动搜索机在天上。

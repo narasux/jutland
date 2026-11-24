@@ -53,6 +53,9 @@ type MissionCoreState struct {
 	SimTick int64
 	// 本局是否启用迷雾，开局从游戏设置拷贝。关闭时不建视野图。
 	FogOfWar bool
+	// PlayerAIControl 玩家侧是否交由电脑 AI 托管。
+	// 由 Hacker 终端秘籍翻转；MissionManager 每拍据此创建/丢弃玩家侧 AI 处理器。
+	PlayerAIControl bool
 }
 
 // MissionViewState 任务视图状态

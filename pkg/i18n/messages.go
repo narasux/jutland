@@ -23,6 +23,7 @@ const (
 	MsgMissionStats              MessageID = "MissionStats"
 	MsgMissionBattleStats        MessageID = "MissionBattleStats"
 	MsgMissionPaused             MessageID = "MissionPaused"
+	MsgMissionAITakeoverActive   MessageID = "MissionAITakeoverActive"
 	MsgMissionDebugPauseHint     MessageID = "MissionDebugPauseHint"
 	MsgMissionResume             MessageID = "MissionResume"
 	MsgMissionAbandon            MessageID = "MissionAbandon"

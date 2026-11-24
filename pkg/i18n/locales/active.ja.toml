@@ -36,6 +36,8 @@ other = "初期資金 {{.Funds}}  |  艦隊上限 {{.ShipLimit}}  |  油田 {{.O
 other = "味方 {{.AllyShips}}隻  対  敵 {{.EnemyShips}}隻  |  増援地点 味方{{.AllyPoints}} 敵{{.EnemyPoints}}"
 [MissionPaused]
 other = "一時停止"
+[MissionAITakeoverActive]
+other = "AI に委任中"
 [MissionDebugPauseHint]
 other = "一時停止中 | [Q] 終了  [Esc] 再開"
 [MissionResume]

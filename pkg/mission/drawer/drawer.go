@@ -90,6 +90,7 @@ func (d *Drawer) Draw(
 		d.drawMarks(screen, misState)
 		d.drawRallyLine(screen, misState)
 		d.drawPauseOverlay(screen, misState)
+		d.drawAITakeoverBadge(screen, misState)
 		// 调试信息
 		d.drawDebugPrint(screen, misState)
 	}

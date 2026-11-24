@@ -42,6 +42,10 @@ func (h *HumanInputHandler) Handle(
 	if misState.Core.MissionStatus != state.MissionRunning {
 		return instructions
 	}
+	// AI 托管期间玩家只观察；这里再做一道闸门，避免未来新增入口绕过 manager 的处理器路由。
+	if misState.Core.PlayerAIControl {
+		return instructions
+	}
 
 	// Shift + 右键是侦察指令：一旦选中列表里有航空基地，这次点击就被侦察消费，
 	// 不能再落回下面的舰船移动 / 攻击，免得航母自己冲向目标点。

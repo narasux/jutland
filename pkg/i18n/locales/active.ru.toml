@@ -36,6 +36,8 @@ other = "Начальные средства {{.Funds}}  |  Лимит флот�
 other = "Союзники: {{.AllyShips}}  противник: {{.EnemyShips}}  |  Точки подкрепления: {{.AllyPoints}} / {{.EnemyPoints}}"
 [MissionPaused]
 other = "Пауза"
+[MissionAITakeoverActive]
+other = "ИИ управляет"
 [MissionDebugPauseHint]
 other = "Игра приостановлена | [Q] Выход  [Esc] Продолжить"
 [MissionResume]

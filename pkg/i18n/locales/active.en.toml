@@ -36,6 +36,8 @@ other = "Starting funds {{.Funds}}  |  Fleet limit {{.ShipLimit}}  |  Oil platfo
 other = "Allied {{.AllyShips}} ships vs Enemy {{.EnemyShips}} ships  |  Allied reinforcements {{.AllyPoints}}  Enemy reinforcements {{.EnemyPoints}}"
 [MissionPaused]
 other = "Mission Paused"
+[MissionAITakeoverActive]
+other = "AI in command"
 [MissionDebugPauseHint]
 other = "Mission paused | [Q] Quit  [Esc] Resume"
 [MissionResume]

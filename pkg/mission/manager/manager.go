@@ -41,13 +41,15 @@ const (
 
 // MissionManager 任务管理器
 type MissionManager struct {
-	state                     *state.MissionState
-	drawer                    *drawer.Drawer
-	sidebar                   *sidebar.Panel
-	terminal                  *hacker.Terminal
-	instructionSet            *InstructionSet
-	playerAlphaHandler        controller.InputHandler
-	playerBetaHandler         controller.InputHandler
+	state              *state.MissionState
+	drawer             *drawer.Drawer
+	sidebar            *sidebar.Panel
+	terminal           *hacker.Terminal
+	instructionSet     *InstructionSet
+	playerAlphaHandler controller.InputHandler
+	playerBetaHandler  controller.InputHandler
+	// playerAlphaAuto 玩家侧托管处理器；nil 表示当前未托管。
+	playerAlphaAuto           controller.InputHandler
 	weaponFirePlayer          *audioPlayer.WeaponFire
 	pinchWheelAccum           float64
 	wheelZoomCooldown         int
@@ -268,6 +270,14 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 // handleUnitPanelActions 将 UI 动作转换为相机操作或游戏指令。
 func (m *MissionManager) handleUnitPanelActions(actions []unitpanel.Action) {
 	for _, action := range actions {
+		// AI 托管期间玩家只观察：保留聚焦和相机，其余控制类动作全部忽略。
+		if m.state.Core.PlayerAIControl {
+			switch action.Kind {
+			case unitpanel.ActionFocusShip, unitpanel.ActionCenterTarget:
+			default:
+				continue
+			}
+		}
 		switch action.Kind {
 		case unitpanel.ActionFocusShip:
 			if ship := m.state.Arena.Ships[action.FocusUid]; ship != nil {

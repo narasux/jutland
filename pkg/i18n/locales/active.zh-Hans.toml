@@ -36,6 +36,8 @@ other = "初始资金 {{.Funds}}  |  舰队上限 {{.ShipLimit}}  |  油井 {{.O
 other = "我方 {{.AllyShips}} 舰  vs  敌方 {{.EnemyShips}} 舰  |  我方增援点 {{.AllyPoints}}  敌方增援点 {{.EnemyPoints}}"
 [MissionPaused]
 other = "任务暂停"
+[MissionAITakeoverActive]
+other = "AI 托管中"
 [MissionDebugPauseHint]
 other = "游戏已暂停 | [Q] 退出  [Esc] 继续"
 [MissionResume]

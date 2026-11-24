@@ -126,6 +126,7 @@ func TestCheatDescriptionsAndStringStayNonEmpty(t *testing.T) {
 		&DebugAll{},
 		&LetMeSeeTheBadKids{},
 		&BlackSheepWall{},
+		&HelpMeAISama{},
 	}
 	for _, cheat := range cheats {
 		require.NotEmpty(t, strings.TrimSpace(cheat.String()))
