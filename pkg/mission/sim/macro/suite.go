@@ -104,6 +104,14 @@ func aggregateResults(sc *sim.Scenario, results []*sim.Result) *sim.Result {
 		outFindings = append(outFindings, findings[key])
 	}
 	sort.Slice(outFindings, func(i, j int) bool { return outFindings[i].ID < outFindings[j].ID })
+	battleReport := base.BattleReport
+	if battleReport != nil {
+		copied := *battleReport
+		copied.Note = fmt.Sprintf(
+			"multi-seed 聚合：战报明细来自最后一局 seed %d。", base.Seed,
+		)
+		battleReport = &copied
+	}
 	return &sim.Result{
 		SchemaVersion: base.SchemaVersion,
 		Mock:          base.Mock,
@@ -119,6 +127,8 @@ func aggregateResults(sc *sim.Scenario, results []*sim.Result) *sim.Result {
 		Charts:        aggregateCharts(results),
 		DataQuality: append(append([]string{}, base.DataQuality...),
 			fmt.Sprintf("multi-seed: %d sequential seeds from %d；数值与生存率曲线为均值。", len(results), sc.Seed)),
+		BattleReport: battleReport,
+		BattleLog:    base.BattleLog,
 	}
 }
 

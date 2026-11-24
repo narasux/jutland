@@ -71,6 +71,8 @@ func (m *MissionManager) UpdateHeadless() (state.MissionStatus, error) {
 		return status, nil
 	}
 	m.advanceSimulationTick(nil, nil)
+	// 与游戏主循环一致：本拍记账完成后采样一次战况趋势，供结算页曲线使用。
+	m.state.Stats.SampleBattleTimeline(m.simTick)
 	return m.state.Core.MissionStatus, nil
 }
 

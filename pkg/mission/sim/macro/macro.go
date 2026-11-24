@@ -287,6 +287,9 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 			Confidence: 0.98,
 		})
 	}
+	battleReport, battleLog := buildBattleReport(
+		ms, spec.PlayerSide, status, m.SimulationTick(),
+	)
 	return &sim.Result{
 		SchemaVersion: 1,
 		Mock:          false,
@@ -302,7 +305,9 @@ func RunMacro(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 		Charts: sim.Charts{
 			Survival: survivalCurve(recorder.Sinks, initialOwn, m.SimulationTick()),
 		},
-		DataQuality: dataQuality,
+		DataQuality:  dataQuality,
+		BattleReport: battleReport,
+		BattleLog:    battleLog,
 	}, nil
 }
 

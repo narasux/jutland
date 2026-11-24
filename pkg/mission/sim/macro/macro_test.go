@@ -61,6 +61,8 @@ func TestRunMacroSeedsAggregatesSequentialRuns(t *testing.T) {
 	_, ok := metrics["mission_success"]
 	require.True(t, ok)
 	require.Contains(t, result.DataQuality[len(result.DataQuality)-1], "multi-seed")
+	require.NotNil(t, result.BattleReport)
+	require.Contains(t, result.BattleReport.Note, "最后一局")
 }
 
 // TestRunMacroPearlHarbor 验证 F3 能通过生产任务状态和双方 AI 跑出真实射击/损失。
@@ -100,6 +102,11 @@ func TestRunMacroPearlHarbor(t *testing.T) {
 	for _, finding := range result.Findings {
 		require.NotEqual(t, "F3-NO-SHOTS", finding.ID)
 	}
+	// 战报导出：总览卡、趋势采样和完整战况必须随 F3 结果一起返回。
+	require.NotNil(t, result.BattleReport)
+	require.Len(t, result.BattleReport.Cards, 4)
+	require.NotEmpty(t, result.BattleReport.Trend)
+	require.NotEmpty(t, result.BattleLog)
 }
 
 func deterministicMetrics(rows []sim.MetricRow) []sim.MetricRow {

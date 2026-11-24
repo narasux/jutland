@@ -167,6 +167,13 @@ func WriteReport(paths Paths, result *Result, scenarioPath, command string) (Rep
 			return ReportOutput{}, err
 		}
 	}
+	if len(result.BattleLog) > 0 {
+		if err := writeBattleLog(
+			filepath.Join(runDir, "battle-log.jsonl"), result.BattleLog,
+		); err != nil {
+			return ReportOutput{}, err
+		}
+	}
 	files, err := collectFiles(runDir)
 	if err != nil {
 		return ReportOutput{}, err
@@ -332,6 +339,69 @@ func buildCharts(result *Result) ([]ChartView, map[string]any) {
 		}
 	}
 
+	if result.BattleReport != nil && len(result.BattleReport.Trend) > 0 {
+		trend := result.BattleReport.Trend
+		labels := make([]string, 0, len(trend))
+		ownShips := make([]float64, 0, len(trend))
+		enemyShips := make([]float64, 0, len(trend))
+		ownPlanes := make([]float64, 0, len(trend))
+		enemyPlanes := make([]float64, 0, len(trend))
+		ownShipLost := make([]float64, 0, len(trend))
+		enemyShipLost := make([]float64, 0, len(trend))
+		ownPlaneLost := make([]float64, 0, len(trend))
+		enemyPlaneLost := make([]float64, 0, len(trend))
+		for _, point := range trend {
+			labels = append(labels, fmt.Sprintf("%dm", point.Minute))
+			ownShips = append(ownShips, float64(point.OwnShips))
+			enemyShips = append(enemyShips, float64(point.EnemyShips))
+			ownPlanes = append(ownPlanes, float64(point.OwnPlanes))
+			enemyPlanes = append(enemyPlanes, float64(point.EnemyPlanes))
+			ownShipLost = append(ownShipLost, float64(point.OwnLost))
+			enemyShipLost = append(enemyShipLost, float64(point.EnemyLost))
+			ownPlaneLost = append(ownPlaneLost, float64(point.OwnPlaneLost))
+			enemyPlaneLost = append(enemyPlaneLost, float64(point.EnemyPlaneLost))
+		}
+		battleCharts := []struct {
+			id, title, description, file string
+			series                       []SVGSeries
+		}{
+			{
+				id: "chart-battle-ships", title: "在役舰艇",
+				description: "F3 战报：双方在役舰艇数随战斗分钟变化。",
+				file:        "battle_ships.svg",
+				series: []SVGSeries{
+					{Name: "我方舰艇", Color: svgAPColor, Values: ownShips},
+					{Name: "敌方舰艇", Color: svgArmorColor, Values: enemyShips},
+				},
+			},
+			{
+				id: "chart-battle-planes", title: "在役飞机",
+				description: "F3 战报：双方在役飞机数随战斗分钟变化。",
+				file:        "battle_planes.svg",
+				series: []SVGSeries{
+					{Name: "我方飞机", Color: "#1f8a5b", Values: ownPlanes},
+					{Name: "敌方飞机", Color: svgHEColor, Values: enemyPlanes},
+				},
+			},
+			{
+				id: "chart-battle-losses", title: "累计损失",
+				description: "F3 战报：双方累计舰艇/飞机损失，数值为采样点累计值。",
+				file:        "battle_losses.svg",
+				series: []SVGSeries{
+					{Name: "我方舰艇损失", Color: svgAPColor, Values: ownShipLost},
+					{Name: "敌方舰艇损失", Color: svgArmorColor, Values: enemyShipLost},
+					{Name: "我方飞机损失", Color: "#1f8a5b", Values: ownPlaneLost},
+					{Name: "敌方飞机损失", Color: svgHEColor, Values: enemyPlaneLost},
+				},
+			},
+		}
+		for _, chart := range battleCharts {
+			view, option := makeLineChart(chart.id, chart.title, chart.description, chart.file, labels, chart.series)
+			views = append(views, view)
+			options[chart.id] = option
+		}
+	}
+
 	if len(charts.Exchange) > 0 && len(charts.ExchangeRows) > 0 && len(charts.ExchangeCols) > 0 {
 		exchangeValues := map[string]float64{}
 		rowIndex := map[string]int{}
@@ -452,6 +522,38 @@ func buildCharts(result *Result) ([]ChartView, map[string]any) {
 	return views, options
 }
 
+func makeLineChart(
+	id, title, description, file string, labels []string, series []SVGSeries,
+) (ChartView, map[string]any) {
+	svg := lineChartSVG(title, labels, series, 720, 300, 0)
+	names := make([]string, 0, len(series))
+	echartsSeries := make([]any, 0, len(series))
+	for _, line := range series {
+		names = append(names, line.Name)
+		echartsSeries = append(echartsSeries, map[string]any{
+			"name":      line.Name,
+			"type":      "line",
+			"data":      line.Values,
+			"itemStyle": map[string]any{"color": line.Color},
+		})
+	}
+	return ChartView{
+			ID:          id,
+			Title:       title,
+			Description: description,
+			File:        file,
+			SVG:         template.HTML(svg),
+		}, map[string]any{
+			"animation": false,
+			"tooltip":   map[string]any{"trigger": "axis"},
+			"legend":    map[string]any{"data": names, "top": 0, "left": "center"},
+			"grid":      map[string]any{"left": 48, "right": 18, "top": 48, "bottom": 30},
+			"xAxis":     map[string]any{"type": "category", "data": labels},
+			"yAxis":     map[string]any{"type": "value", "min": 0},
+			"series":    echartsSeries,
+		}
+}
+
 func maxFloat(values []float64) float64 {
 	m := 0.0
 	for _, v := range values {
@@ -502,6 +604,19 @@ func writeJSON(path string, value any) error {
 	}
 	data = append(data, '\n')
 	return writeFile(path, data)
+}
+
+// writeBattleLog 把完整战况写成 JSONL，一行一个事件，便于外部脚本过滤。
+func writeBattleLog(path string, events []BattleReportEvent) error {
+	var builder strings.Builder
+	encoder := json.NewEncoder(&builder)
+	encoder.SetEscapeHTML(false)
+	for _, event := range events {
+		if err := encoder.Encode(event); err != nil {
+			return fmt.Errorf("marshal battle log %s: %w", path, err)
+		}
+	}
+	return writeFile(path, []byte(builder.String()))
 }
 
 func collectFiles(root string) ([]string, error) {

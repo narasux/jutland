@@ -116,6 +116,10 @@ type Result struct {
 	Diagnostics   []Diagnostic    `json:"diagnostics"`
 	Charts        Charts          `json:"charts"`
 	DataQuality   []string        `json:"dataQuality"`
+	// BattleReport 是 F3 完整战报；其他保真度没有该字段。
+	BattleReport *BattleReport `json:"battleReport,omitempty"`
+	// BattleLog 保留完整战况用于写出 battle-log.jsonl，不进入 result.json。
+	BattleLog []BattleReportEvent `json:"-"`
 }
 
 // Manifest is the run's provenance and path record.

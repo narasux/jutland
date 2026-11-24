@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"regexp"
 	"strings"
 	"testing"
 	"time"
@@ -165,6 +166,147 @@ func TestWriteReportCreatesHumanAndAIViews(t *testing.T) {
 	}
 
 	verifyChecksums(t, out.Dir)
+}
+
+// TestWriteReportRendersBattleReportAndFullLog 验证 F3 战报会进入 HTML/summary，完整战况另写 JSONL。
+// 场景：游戏内战报包含总览、舰艇明细、关键战果和滚动战况；仿真报告只给一张生存率曲线时
+// 无法复盘具体击沉过程，因此 F3 需要把这些区块一起渲染，并把全量日志留在 run 目录。
+// 预期：HTML 含战报总览/舰艇明细/关键战果/战况记录/在役舰艇图；summary 含「## 战报」；
+// battle-log.jsonl 一行一个事件且被 checksums 收录；result.json 有 battleReport 但没有完整 battleLog。
+// 覆盖：临时 lab + 带 BattleReport/BattleLog 的 F3 result 调 WriteReport，逐文件断言并校验 checksums。
+func TestWriteReportRendersBattleReportAndFullLog(t *testing.T) {
+	home := t.TempDir()
+	paths := Paths{
+		Home:      home,
+		Scenarios: filepath.Join(home, "scenarios"),
+		Golden:    filepath.Join(home, "golden"),
+		Baselines: filepath.Join(home, "baselines"),
+		Reports:   filepath.Join(home, "reports"),
+		Notes:     filepath.Join(home, "notes"),
+	}
+	if err := EnsureLayout(paths); err != nil {
+		t.Fatal(err)
+	}
+	sc := DefaultDemoScenario()
+	at := time.Date(2026, 11, 23, 10, 0, 0, 0, time.FixedZone("CST", 8*3600))
+	result := GenerateDemoResult(&sc, at)
+	result.Fidelity = "F3"
+	result.BattleReport = &BattleReport{
+		Side: "P2", Status: "success", EndReason: "victory", Ticks: 600,
+		Cards: []BattleReportCard{
+			{Label: "舰艇损失", Value: "1", Sub: "500 吨"},
+			{Label: "敌方被击沉", Value: "1", Sub: "30,000 吨"},
+		},
+		Own: BattleReportSide{
+			Label:          "我方",
+			ShipsLine:      "2 / 0 / 1 / 1",
+			PlanesLine:     "10 / 0 / 2 / 8",
+			PlanesWithShip: "1",
+			InitialTonnage: "1,000",
+			SunkTonnage:    "500",
+			ActiveTonnage:  "500",
+			DamageDealt:    "1,234",
+			Funds:          "100 → 85 (+5 / -20)",
+		},
+		Enemy: BattleReportSide{
+			Label:          "敌方",
+			ShipsLine:      "1 / 0 / 1 / 0",
+			PlanesLine:     "0 / 0 / 0 / 0",
+			PlanesWithShip: "0",
+			InitialTonnage: "30,000",
+			SunkTonnage:    "30,000",
+			ActiveTonnage:  "0",
+			DamageDealt:    "500",
+			Funds:          "无数据",
+		},
+		OwnShipRows: []BattleReportDetailRow{{Name: "加贺", Initial: 1, Lost: 1}},
+		Kills: []BattleReportEvent{{
+			Tick: 10, Time: "00:10", Side: "我方", SideClass: "side-own",
+			Summary: "航空母舰 加贺 610mm 鱼雷 击沉 战列舰 亚利桑那，吨位 30,000 吨", Kill: true,
+		}},
+		KillsTotal: 1,
+		Events: []BattleReportEvent{{
+			Tick: 20, Time: "00:20", Side: "我方", SideClass: "side-own",
+			Summary: "航空母舰 加贺 127mm 防空炮 击落 战斗机 零式，造成 0.52 伤害",
+		}},
+		EventsTotal: 12, EventsOmitted: 11,
+		Exchange: "2.00x", Survival: "50.0%",
+		Trend: []BattleReportTrendPoint{
+			{Minute: 0, OwnShips: 2, EnemyShips: 1, OwnPlanes: 10},
+			{Minute: 10, OwnShips: 1, EnemyShips: 0, OwnPlanes: 8},
+		},
+	}
+	result.BattleLog = []BattleReportEvent{{
+		Tick: 10, Time: "00:10", Summary: "航空母舰 加贺 610mm 鱼雷 击沉 战列舰 亚利桑那", Kill: true,
+	}}
+	out, err := WriteReport(paths, result, "built-in:battle-report", "jutland-macro macro battle-report")
+	if err != nil {
+		t.Fatalf("WriteReport() error = %v", err)
+	}
+
+	html, err := os.ReadFile(out.ReportHTML)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{
+		"战报总览", "舰艇明细", "关键战果", "战况记录", "battle-log.jsonl",
+		"在役舰艇", "航空母舰 加贺 610mm 鱼雷 击沉",
+	} {
+		if !strings.Contains(string(html), want) {
+			t.Fatalf("report.html missing %q", want)
+		}
+	}
+	assertUniqueHTMLIDs(t, string(html))
+	summary, err := os.ReadFile(out.Summary)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{"## 战报", "关键战果", "完整战况：12 条"} {
+		if !strings.Contains(string(summary), want) {
+			t.Fatalf("summary.md missing %q", want)
+		}
+	}
+	logPath := filepath.Join(out.Dir, "battle-log.jsonl")
+	logData, err := os.ReadFile(logPath)
+	if err != nil {
+		t.Fatalf("battle-log.jsonl: %v", err)
+	}
+	if lines := strings.Count(strings.TrimSpace(string(logData)), "\n") + 1; lines != 1 {
+		t.Fatalf("battle-log.jsonl lines = %d, want 1", lines)
+	}
+	if !strings.Contains(string(logData), "航空母舰 加贺 610mm 鱼雷 击沉") {
+		t.Fatalf("battle-log.jsonl missing kill event")
+	}
+	resultData, err := os.ReadFile(filepath.Join(out.Dir, "result.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var resultJSON map[string]any
+	if err := json.Unmarshal(resultData, &resultJSON); err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := resultJSON["battleReport"]; !ok {
+		t.Fatalf("result.json missing battleReport")
+	}
+	if _, ok := resultJSON["battleLog"]; ok {
+		t.Fatalf("result.json should not embed full battleLog")
+	}
+	verifyChecksums(t, out.Dir)
+}
+
+// assertUniqueHTMLIDs 保证报告里的 id 不重复。图表容器与章节曾共用 battle-ships，
+// 导致 ECharts 把图初始化到 section 上而显示空白，必须由渲染层回归测试兜住。
+func assertUniqueHTMLIDs(t *testing.T, html string) {
+	t.Helper()
+	seen := map[string]int{}
+	for _, match := range regexp.MustCompile(`id="([^"]+)"`).FindAllStringSubmatch(html, -1) {
+		seen[match[1]]++
+	}
+	for id, count := range seen {
+		if count > 1 {
+			t.Fatalf("duplicate HTML id %q (%d)", id, count)
+		}
+	}
 }
 
 func verifyChecksums(t *testing.T, dir string) {

@@ -41,6 +41,26 @@
   .chart-fallback svg { width: 100%; height: auto; display: block; }
   .no-echarts .echart { display: none; }
   .no-echarts .chart-fallback { display: block; }
+  .battle-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 6px 0 18px; }
+  .battle-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fafbfc; }
+  .battle-card .battle-label { color: var(--muted); font-size: 12px; }
+  .battle-card .battle-value { font-size: 26px; font-weight: 650; line-height: 1.25; }
+  .battle-card .battle-sub { color: var(--muted); font-size: 12px; }
+  .battle-sides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .battle-sides .card { padding: 14px 16px; }
+  .battle-sides h3 { margin-bottom: 8px; }
+  .battle-sides table td:first-child { color: var(--muted); width: 44%; }
+  .battle-sides table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .battle-note { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+  .event-scroll { max-height: 560px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; }
+  .event-scroll table { margin: 0; }
+  .event-scroll thead th { position: sticky; top: 0; z-index: 1; }
+  .event-time { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .side-own { color: var(--green); }
+  .side-enemy { color: var(--red); }
+  .act-kill { color: var(--red); font-weight: 600; }
+  .kill-row td { background: #fff8f8; }
+  @media (max-width: 860px) { .battle-cards, .battle-sides { grid-template-columns: 1fr; } }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { color: var(--muted); font-weight: 600; background: #fafbfc; }
@@ -112,6 +132,7 @@
     <a href="result.json">result.json</a>
     <a href="manifest.json">manifest.json</a>
     <a href="replay.json">replay.json</a>
+    {{if .Result.BattleLog}}<a href="battle-log.jsonl">battle-log.jsonl</a>{{end}}
     <a href="checksums.sha256">checksums</a>
   </nav>
 </header>
@@ -130,6 +151,149 @@
     </tbody>
   </table>
 </section>
+
+{{with .Result.BattleReport}}
+<section id="battle-overview">
+  <h2>战报总览</h2>
+  {{if .Note}}<p class="battle-note">{{.Note}}</p>{{end}}
+  <div class="battle-cards">
+    {{range .Cards}}
+    <div class="battle-card">
+      <div class="battle-label">{{.Label}}</div>
+      <div class="battle-value">{{.Value}}</div>
+      <div class="battle-sub">{{.Sub}}</div>
+    </div>
+    {{end}}
+  </div>
+  <div class="battle-sides">
+    <div class="card">
+      <h3 class="side-own">{{.Own.Label}}</h3>
+      <table>
+        <tr><td>舰艇（初始 / 建造 / 损失 / 在役）</td><td>{{.Own.ShipsLine}}</td></tr>
+        <tr><td>飞机（初始 / 建造 / 损失 / 在役）</td><td>{{.Own.PlanesLine}}</td></tr>
+        <tr><td>其中随舰损失飞机</td><td>{{.Own.PlanesWithShip}}</td></tr>
+        <tr><td>初始吨位</td><td>{{.Own.InitialTonnage}}</td></tr>
+        <tr><td>损失吨位</td><td>{{.Own.SunkTonnage}}</td></tr>
+        <tr><td>在役吨位</td><td>{{.Own.ActiveTonnage}}</td></tr>
+        <tr><td>造成伤害</td><td>{{.Own.DamageDealt}}</td></tr>
+        <tr><td>资金</td><td>{{.Own.Funds}}</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3 class="side-enemy">{{.Enemy.Label}}</h3>
+      <table>
+        <tr><td>舰艇（初始 / 建造 / 损失 / 在役）</td><td>{{.Enemy.ShipsLine}}</td></tr>
+        <tr><td>飞机（初始 / 建造 / 损失 / 在役）</td><td>{{.Enemy.PlanesLine}}</td></tr>
+        <tr><td>其中随舰损失飞机</td><td>{{.Enemy.PlanesWithShip}}</td></tr>
+        <tr><td>初始吨位</td><td>{{.Enemy.InitialTonnage}}</td></tr>
+        <tr><td>损失吨位</td><td>{{.Enemy.SunkTonnage}}</td></tr>
+        <tr><td>在役吨位</td><td>{{.Enemy.ActiveTonnage}}</td></tr>
+        <tr><td>造成伤害</td><td>{{.Enemy.DamageDealt}}</td></tr>
+        <tr><td>资金</td><td>{{.Enemy.Funds}}</td></tr>
+      </table>
+    </div>
+  </div>
+  <p class="battle-note">飞机损失含随舰沉没的飞机（我方 {{.Own.PlanesWithShip}} 架 / 敌方 {{.Enemy.PlanesWithShip}} 架）；关键指标里的 own/enemy_aircraft_losses 只统计独立损失事件。</p>
+  <div class="meta">
+    <span>场景侧 <b>{{.Side}}</b></span>
+    <span>结果 <b>{{.Status}}</b></span>
+    {{if .EndReason}}<span>结束原因 <b>{{.EndReason}}</b></span>{{end}}
+    <span>时长 <b>{{.Ticks}} ticks</b></span>
+    <span>交换比 <b>{{.Exchange}}</b></span>
+    <span>我方保存率 <b>{{.Survival}}</b></span>
+  </div>
+</section>
+
+<section id="battle-ships">
+  <h2>舰艇明细</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 class="side-own">我方舰艇</h3>
+      {{if .OwnShipRows}}
+      <table>
+        <thead><tr><th>舰级</th><th>初始</th><th>建造</th><th>损失</th><th>在役</th></tr></thead>
+        <tbody>
+        {{range .OwnShipRows}}<tr><td>{{.Name}}</td><td>{{.Initial}}</td><td>{{.Built}}</td><td>{{.Lost}}</td><td>{{.Remaining}}</td></tr>{{end}}
+        </tbody>
+      </table>
+      {{else}}<p class="muted">无记录。</p>{{end}}
+    </div>
+    <div class="card">
+      <h3 class="side-enemy">敌方舰艇</h3>
+      {{if .EnemyShipRows}}
+      <table>
+        <thead><tr><th>舰级</th><th>初始</th><th>建造</th><th>损失</th><th>在役</th></tr></thead>
+        <tbody>
+        {{range .EnemyShipRows}}<tr><td>{{.Name}}</td><td>{{.Initial}}</td><td>{{.Built}}</td><td>{{.Lost}}</td><td>{{.Remaining}}</td></tr>{{end}}
+        </tbody>
+      </table>
+      {{else}}<p class="muted">无记录。</p>{{end}}
+    </div>
+  </div>
+</section>
+
+<section id="battle-planes">
+  <h2>飞机明细</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 class="side-own">我方飞机</h3>
+      {{if .OwnPlaneRows}}
+      <table>
+        <thead><tr><th>机型</th><th>初始</th><th>建造</th><th>损失</th><th>在役</th></tr></thead>
+        <tbody>
+        {{range .OwnPlaneRows}}<tr><td>{{.Name}}</td><td>{{.Initial}}</td><td>{{.Built}}</td><td>{{.Lost}}</td><td>{{.Remaining}}</td></tr>{{end}}
+        </tbody>
+      </table>
+      {{else}}<p class="muted">无记录。</p>{{end}}
+    </div>
+    <div class="card">
+      <h3 class="side-enemy">敌方飞机</h3>
+      {{if .EnemyPlaneRows}}
+      <table>
+        <thead><tr><th>机型</th><th>初始</th><th>建造</th><th>损失</th><th>在役</th></tr></thead>
+        <tbody>
+        {{range .EnemyPlaneRows}}<tr><td>{{.Name}}</td><td>{{.Initial}}</td><td>{{.Built}}</td><td>{{.Lost}}</td><td>{{.Remaining}}</td></tr>{{end}}
+        </tbody>
+      </table>
+      {{else}}<p class="muted">无记录。</p>{{end}}
+    </div>
+  </div>
+</section>
+
+<section id="battle-kills">
+  <h2>关键战果</h2>
+  <p class="battle-note">击沉 / 击落 / 随舰损失，最新在前；共 {{.KillsTotal}} 条{{if .KillsOmitted}}，显示最近 {{len .Kills}} 条，较早 {{.KillsOmitted}} 条见 <a href="battle-log.jsonl">battle-log.jsonl</a>{{end}}。</p>
+  {{if .Kills}}
+  <div class="event-scroll">
+    <table>
+      <thead><tr><th>时间</th><th>阵营</th><th>战况</th></tr></thead>
+      <tbody>
+      {{range .Kills}}
+      <tr class="kill-row"><td class="event-time">{{.Time}}</td><td><span class="{{.SideClass}}">{{.Side}}</span></td><td>{{.Summary}}</td></tr>
+      {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}<p class="muted">本局没有击沉 / 击落记录。</p>{{end}}
+</section>
+
+<section id="battle-events">
+  <h2>战况记录</h2>
+  <p class="battle-note">命中 / 击沉 / 击落 / 损失，最新在前；共 {{.EventsTotal}} 条{{if .EventsOmitted}}，显示最近 {{len .Events}} 条，较早 {{.EventsOmitted}} 条见 <a href="battle-log.jsonl">battle-log.jsonl</a>{{end}}。</p>
+  {{if .Events}}
+  <div class="event-scroll">
+    <table>
+      <thead><tr><th>时间</th><th>阵营</th><th>战况</th></tr></thead>
+      <tbody>
+      {{range .Events}}
+      <tr><td class="event-time">{{.Time}}</td><td><span class="{{.SideClass}}">{{.Side}}</span></td><td>{{.Summary}}</td></tr>
+      {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}<p class="muted">本局没有战况记录。</p>{{end}}
+</section>
+{{end}}
 
 <section>
   <h2>关键指标</h2>
@@ -167,7 +331,7 @@
 {{end}}
 
 {{if .Charts}}
-<section>
+<section id="charts">
   <h2>图表</h2>
   <div class="grid">
     {{range .Charts}}

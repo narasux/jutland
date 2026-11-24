@@ -63,6 +63,54 @@ func buildSummary(result *Result, manifest Manifest) string {
 		status := map[string]string{"green": "🟢", "yellow": "🟡", "red": "🔴"}[item.Status]
 		fmt.Fprintf(&b, "| %s | %s | %s | %s | %s |\n", item.Dimension, item.Metric, item.Value, item.Target, status)
 	}
+	if result.BattleReport != nil {
+		report := result.BattleReport
+		b.WriteString("\n## 战报\n\n")
+		if report.Note != "" {
+			fmt.Fprintf(&b, "> %s\n\n", report.Note)
+		}
+		fmt.Fprintf(
+			&b,
+			"- 结果：%s · 时长 %d ticks · 场景侧 %s\n",
+			report.Status, report.Ticks, report.Side,
+		)
+		fmt.Fprintf(
+			&b,
+			"- 我方：舰艇 %s；飞机 %s；损失吨位 %s；造成伤害 %s\n",
+			report.Own.ShipsLine, report.Own.PlanesLine,
+			report.Own.SunkTonnage, report.Own.DamageDealt,
+		)
+		fmt.Fprintf(
+			&b,
+			"- 敌方：舰艇 %s；飞机 %s；损失吨位 %s；造成伤害 %s\n",
+			report.Enemy.ShipsLine, report.Enemy.PlanesLine,
+			report.Enemy.SunkTonnage, report.Enemy.DamageDealt,
+		)
+		fmt.Fprintf(
+			&b,
+			"- 随舰损失飞机：我方 %s 架 / 敌方 %s 架\n",
+			report.Own.PlanesWithShip, report.Enemy.PlanesWithShip,
+		)
+		fmt.Fprintf(
+			&b,
+			"- 交换比：%s · 我方保存率：%s · 资金：%s\n",
+			report.Exchange, report.Survival, report.Own.Funds,
+		)
+		fmt.Fprintf(
+			&b,
+			"- 关键战果：%d 条；完整战况：%d 条（[battle-log.jsonl](battle-log.jsonl)）\n",
+			report.KillsTotal, report.EventsTotal,
+		)
+		if len(report.Kills) > 0 {
+			b.WriteString("\n### 关键战果（最新 10 条）\n\n")
+			for idx, event := range report.Kills {
+				if idx >= 10 {
+					break
+				}
+				fmt.Fprintf(&b, "- `%s` %s %s\n", event.Time, event.Side, event.Summary)
+			}
+		}
+	}
 	b.WriteString("\n## 关键指标\n\n| 分组 | 指标 | 值 | CI |\n|---|---|---|---|\n")
 	for _, row := range result.Metrics {
 		fmt.Fprintf(&b, "| %s | %s | %v %s | %s |\n", row.Group, row.Name, row.Value, row.Unit, row.CI)
@@ -90,8 +138,9 @@ func buildSummary(result *Result, manifest Manifest) string {
 			fmt.Fprintf(&b, "  - 复现：`%s`\n", finding.Repro)
 		}
 	}
+	battleTrend := result.BattleReport != nil && len(result.BattleReport.Trend) > 0
 	if len(result.Charts.HitRate) > 0 || len(result.Charts.Survival) > 0 ||
-		len(result.Charts.Exchange) > 0 || len(result.Charts.Penetration) > 0 {
+		len(result.Charts.Exchange) > 0 || len(result.Charts.Penetration) > 0 || battleTrend {
 		b.WriteString("\n## 图表\n\n")
 		if len(result.Charts.HitRate) > 0 {
 			b.WriteString("![命中/减伤](charts/hit_rate_vs_range.svg)\n\n")
@@ -102,6 +151,11 @@ func buildSummary(result *Result, manifest Manifest) string {
 			} else {
 				b.WriteString("![击沉概率](charts/survival_curve.svg)\n\n")
 			}
+		}
+		if battleTrend {
+			b.WriteString("![在役舰艇](charts/battle_ships.svg)\n\n")
+			b.WriteString("![在役飞机](charts/battle_planes.svg)\n\n")
+			b.WriteString("![累计损失](charts/battle_losses.svg)\n\n")
 		}
 		if len(result.Charts.Exchange) > 0 {
 			b.WriteString("![交换矩阵](charts/exchange_matrix.svg)\n\n")
