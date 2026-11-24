@@ -24,6 +24,8 @@
 - 逐发 `Shot`、逐次 `Hit`、`Sink`、`Loss` 事件（observer，生产默认关闭、仿真开启）。
 - 命中率、应用/有效伤害、过杀、TTK、胜率、交换比、成本损失。
 - 兵种归因：飞机射击/命中/击沉、飞机损失、潜艇射击、ASW 射击、被空袭击沉的舰船。
+- F3 战报：双方总览（舰艇/飞机初始、建造、损失、在役，吨位、伤害、资金）、舰艇/飞机明细、
+  关键战果、完整战况记录，以及在役兵力和累计损失曲线；完整战况写入 `battle-log.jsonl`。
 - 穿甲（实验开关打开时）：每发命中的穿深/装甲/比值/是否穿透/过穿，duel 汇总为
   `penetration_hits`、`penetrated_hits`、`penetration_ratio_mean`。
 - 性能：headless 每 tick 墙钟 p50/p95/p99（用于回归），以及真实渲染帧 p99。
@@ -38,6 +40,7 @@ $JUTLAND_SIM_HOME/reports/runs/<runId>/
 ├── summary.md             # 关键表 + 记分卡
 ├── result.json            # 机器可读的完整结果（指标/记分卡/findings/图表数据）
 ├── replay.json            # 复现所需的命令、seed、commit、场景路径
+├── battle-log.jsonl       # F3 完整战况：一行一个命中/击沉/击落/损失事件
 ├── manifest.json          # 元数据与文件列表
 ├── checksums.sha256
 └── ai/
@@ -45,6 +48,9 @@ $JUTLAND_SIM_HOME/reports/runs/<runId>/
     ├── metrics.json / findings.json / diagnostics.json / changes.json
     └── llm-prompt.md
 ```
+
+F3 的 `report.html` 在图表之外还包含「战报总览 / 舰艇明细 / 飞机明细 / 关键战果 / 战况记录」；
+其中战况记录默认显示最近 400 条，完整日志见 `battle-log.jsonl`。
 
 套件还会在 `reports/suites/` 下生成 `*-evaluation.html/md/json`：逐 run 红绿、findings 分级
 （bug/data/balance）、穿甲矩阵等。`reports/` 下还有：
@@ -148,6 +154,7 @@ make sim-gate         # 完整 full-evaluation + --fail-on-red（CI 门禁）
 make sim-nightly      # 帧门禁 + 门禁套件 + 覆盖套件 + trend/analyze
 make sim-perf         # 最新 F3 run 的 tick p99 门禁
 make sim-frame        # 跑 300 帧渲染帧 p99 并打印结果（需图形会话）
+make sim-frame-zoom   # 逐档 1/2/4/8/16 测渲染帧 p99（需图形会话）
 make sim-frame-gate   # 渲染帧门禁并写入 frame/history.jsonl
 make sim-periodic     # 只刷新 trend/analyze（可被 cron 调用）
 make sim-watch        # 按间隔循环刷新
@@ -259,6 +266,9 @@ make sim-schedule-uninstall
 - **真实渲染帧 p99**：`make sim-frame-gate`，打开临时窗口跑 300 帧，结果追加到
   `reports/frame/history.jsonl` 并进入 trend/分析简报。预算默认 16.7ms；需要可用的图形会话，
   锁屏或初始化失败时夜间任务会跳过并记录日志。
+- **按缩放档位测渲染**：`make sim-frame-zoom`，或 `jutland-frame --zoom 1 --warmup 120`。
+  默认 `jutland-frame` 固定在 4 档，不模拟缩放切换；`--zoom` 可选 1/2/4/8/16，`--warmup`
+  先跑不记样的帧以排除地图块缩放缓存预热的一次性开销。
 
 ## 8. 基线、对比与复现
 
@@ -274,6 +284,7 @@ make sim-schedule-uninstall
 - **F1/F2/F3 需要可用的图形会话**：会初始化 Ebiten（不开窗口）。无 GUI 的 CI 需要 xvfb 等虚拟显示；
   本机锁屏状态下偶发 Ebiten 初始化崩溃，夜间脚本会重试并跳过帧门禁。
 - **单 seed 不等于统计结论**：多 seed 只是样本；简报会对 `runs < 3` 的场景给出「样本不足」提示。
+- **F3 战报是单局明细**：`--runs N` 的聚合指标是均值，但战报/战况来自最后一局，报告会标注来源 seed。
 - **F2/F3 的 smoke 场景是机制冒烟，不是平衡结论**：例如珍珠港是历史性单方面袭击，正确的评估口径
   是「进攻方能否达成全歼」或「防守方能否坚持 N 拍」，见 `plans/` 下的设计记录与 lab notes。
 - **穿甲模型是实验性的**：默认关闭，只有场景显式 `enablePenetration: true` 时才参与伤害；

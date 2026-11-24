@@ -181,6 +181,7 @@ make sim-periodic    # trend + ai/analysis-brief
 make sim-watch       # refresh trend/analyze every 10m (Ctrl-C to stop)
 make sim-archive     # dry-run old-run archive; remove --dry-run after review
 make sim-frame       # rendered-frame p99 (opens a temporary window)
+make sim-frame-zoom  # rendered-frame p99 per map zoom (1/2/4/8/16)
 make sim-frame-gate  # same, writes reports/frame/latest.json and fails over budget
 make sim-perf        # check newest F3 tick_p99_ms against 16.7ms
 make sim-suite       # F0 + F1 + F3 (3 seeds), then trend/analyze
@@ -193,6 +194,11 @@ simulation wall time, not the rendered game frame. It is a regression proxy.
 `make sim-frame` uses `cmd/jutland-frame` to open a temporary 1280x720 window,
 run `manager.Update` + `Draw` and report rendered-frame p50/p95/p99/max. It
 requires a working window/graphics session and is not a CI gate.
+
+`--zoom 1|2|4|8|16` fixes the map zoom (default 4); `--warmup N` skips the
+first N rendered frames so map-block prewarm does not dominate the sample.
+`make sim-frame-zoom` sweeps all five levels. The regular frame gate does not
+simulate a zoom change, so zoom-transition hitches still need a dedicated run.
 
 `tools/sim-periodic.sh` is suitable for cron/launchd; it does not schedule itself.
 
@@ -362,7 +368,10 @@ macro: { mission: "PearlHarbor1941", playerSide: "P1", objective: { surviveTicks
 ```
 
 F3 reports add mission status, ship/tonnage/aircraft losses, funds and a fleet
-survival chart. The 12k-tick sample ends with a real mission outcome; single seed,
+survival chart. They also export the in-game battle report: overview, per-side
+ship/plane detail, key kills, the recent event log, and current-force/cumulative-loss
+charts. The complete event log is written to `battle-log.jsonl`; multi-seed runs mark
+the report as coming from the last seed. The 12k-tick sample ends with a real mission outcome; single seed,
 so it is not a statistical balance conclusion. Headless pathfinding runs
 inline; F3 same-seed 12000-tick metrics are reproducible (covered by macro tests).
 
@@ -380,6 +389,7 @@ $JUTLAND_SIM_HOME/reports/
     ├── manifest.json
     ├── checksums.sha256
     ├── replay.json
+    ├── battle-log.jsonl   # F3 full log, one event per line
     ├── ai/
     └── charts/
 ```
