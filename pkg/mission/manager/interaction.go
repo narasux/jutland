@@ -191,8 +191,25 @@ func (m *MissionManager) getNextCameraPosInGameMode() *objPos.MapPos {
 	return &pos
 }
 
-// 更新选择的战舰列表
-func (m *MissionManager) updateSelectedShips() {
+// updateShipSelectionForTick 处理本拍的选中集更新。
+// groupID 是本拍按下的编组键（没按数字键时为 GroupIDNone）：编组键属于键盘输入，
+// 即使光标停在侧栏 / 单位面板上（UIConsumesCursor）也必须生效，面板只挡鼠标框选。
+func (m *MissionManager) updateShipSelectionForTick(groupID object.GroupID) {
+	// 光标被面板占用时不能开始或继续拖框，同时把上一帧遗留的框选状态复位。
+	if m.state.UI.UIConsumesCursor {
+		m.state.Interaction.IsAreaSelecting = false
+	} else {
+		m.updateAreaSelectedShips()
+	}
+	// 正在分组（按住左 Ctrl）时数字键用于写入编组，不在这里切换选中。
+	if !m.state.Interaction.IsGrouping && groupID != object.GroupIDNone {
+		m.selectShipsByGroup(groupID)
+	}
+	m.normalizeSelectedShips()
+}
+
+// updateAreaSelectedShips 用鼠标框选刷新选中的战舰列表；光标被面板占用时不会走到这里。
+func (m *MissionManager) updateAreaSelectedShips() {
 	if m.state.Core.MissionStatus != state.MissionRunning {
 		return
 	}
@@ -206,14 +223,11 @@ func (m *MissionManager) updateSelectedShips() {
 			}
 		}
 	}
-	// 正在分组中，不可用
-	if !m.state.Interaction.IsGrouping {
-		// 通过分组选中战舰
-		if groupID := action.GetGroupIDByPressedKey(); groupID != object.GroupIDNone {
-			m.selectShipsByGroup(groupID)
-		}
-	}
+}
 
+// normalizeSelectedShips 剔除已沉没的战舰、稳定选中集顺序，并补齐焦点舰。
+// 框选、编组键、沉船清理都依赖它给出稳定顺序，因此每拍都要跑，不受光标是否被 UI 占用影响。
+func (m *MissionManager) normalizeSelectedShips() {
 	// 检查选中的战舰，如果已经被摧毁，则要去掉，并保持面板展示顺序稳定。
 	selectedShips := m.state.Interaction.SelectedShips[:0]
 	for _, uid := range m.state.Interaction.SelectedShips {

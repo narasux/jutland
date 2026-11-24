@@ -6,6 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 
 	audioPlayer "github.com/narasux/jutland/pkg/audio/player"
+	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
 	"github.com/narasux/jutland/pkg/mission/controller/computer"
 	"github.com/narasux/jutland/pkg/mission/controller/human"
@@ -248,11 +249,8 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 			func() {
 				m.updateMapBlockPrewarm()
 				if status == state.MissionRunning {
-					if !m.state.UI.UIConsumesCursor {
-						m.updateSelectedShips()
-					} else {
-						m.state.Interaction.IsAreaSelecting = false
-					}
+					// 编组键是键盘输入：光标停在侧栏 / 单位面板上时也要能切换编队。
+					m.updateShipSelectionForTick(action.GetGroupIDByPressedKey())
 					m.updateShipGroups()
 				}
 			},

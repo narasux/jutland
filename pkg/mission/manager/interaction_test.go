@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"slices"
 	"testing"
 
 	"github.com/narasux/jutland/pkg/mission/faction"
@@ -263,5 +264,73 @@ func TestGameCameraCornerPanMovesBothAxesWithZoomScaledStep(t *testing.T) {
 				tc.zoom, pos.RX, pos.RY, tc.wantX, tc.wantY,
 			)
 		}
+	}
+}
+
+// TestGroupKeySelectionWorksWhilePanelConsumesCursor 验证光标停在面板上时编组键仍能切换编队。
+// 场景：侧栏展开、鼠标停在小地图上（UIConsumesCursor=true），玩家用键盘按编组键 1；
+// 旧实现把编组键处理写在“光标未被 UI 占用”的分支里，面板一挡住光标数字键就完全失效。
+// 预期：选中集变成编队 1 的两艘舰并按舰名稳定排序为 one/two，焦点补齐为 one，
+// 面板占用时遗留的框选状态被复位；按住 Ctrl（IsGrouping）时数字键只写编组、不切换选中。
+// 失败意味着面板又把键盘输入一起挡掉了，或者编组模式下误切了选中集。
+// 覆盖：cameraTestState + 编队 1 两舰与编队 2 一舰，表驱动“面板占用 / 光标空闲 / 编组中”
+// 三种状态，调用 updateShipSelectionForTick(GroupID1) 后断言选中集、焦点与 IsAreaSelecting。
+// 注：按下的数字键由 Update 传给本函数，真实按键检测与接线无法在无窗口测试里注入，需手动验证。
+func TestGroupKeySelectionWorksWhilePanelConsumesCursor(t *testing.T) {
+	for _, tc := range []struct {
+		name           string
+		consumesCursor bool
+		grouping       bool
+		wantSelected   []string
+		wantFocused    string
+	}{
+		{
+			name:           "panel consumes cursor",
+			consumesCursor: true,
+			wantSelected:   []string{"one", "two"},
+			wantFocused:    "one",
+		},
+		{
+			name:         "free cursor",
+			wantSelected: []string{"one", "two"},
+			wantFocused:  "one",
+		},
+		{
+			name:           "grouping mode",
+			consumesCursor: true,
+			grouping:       true,
+			wantSelected:   nil,
+			wantFocused:    "",
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			one := newGroupShip("one", object.GroupID1, 100, objPos.NewR(400, 400))
+			two := newGroupShip("two", object.GroupID1, 100, objPos.NewR(620, 500))
+			other := newGroupShip("other", object.GroupID2, 100, objPos.NewR(300, 300))
+
+			ms := cameraTestState()
+			ms.Core.MissionStatus = state.MissionRunning
+			ms.Player.CurPlayer = faction.HumanAlpha
+			ms.UI.UIConsumesCursor = tc.consumesCursor
+			ms.Interaction.IsGrouping = tc.grouping
+			// 模拟上一帧遗留的框选：面板接管光标时必须复位，否则选区卡在拖动状态。
+			ms.Interaction.IsAreaSelecting = tc.consumesCursor
+			ms.Arena.Ships = map[string]*objUnit.BattleShip{
+				one.Uid: one, two.Uid: two, other.Uid: other,
+			}
+			manager := &MissionManager{state: ms}
+
+			manager.updateShipSelectionForTick(object.GroupID1)
+
+			if got := ms.Interaction.SelectedShips; !slices.Equal(got, tc.wantSelected) {
+				t.Fatalf("selected ships = %v, want %v", got, tc.wantSelected)
+			}
+			if ms.Interaction.FocusedShipUid != tc.wantFocused {
+				t.Fatalf("focused ship = %q, want %q", ms.Interaction.FocusedShipUid, tc.wantFocused)
+			}
+			if ms.Interaction.IsAreaSelecting {
+				t.Fatal("area selecting not reset while UI consumes cursor")
+			}
+		})
 	}
 }
