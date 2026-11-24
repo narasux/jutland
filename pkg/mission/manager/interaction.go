@@ -104,9 +104,7 @@ func (m *MissionManager) updateCameraPosition() {
 		if m.state.View.Camera.Pos.MEqual(*nextPos) {
 			m.state.Core.MissionStatus = state.MissionRunning
 		}
-		m.state.View.Camera.Pos.AssignRxy(
-			snapCameraCoord(m.state, nextPos.RX), snapCameraCoord(m.state, nextPos.RY),
-		)
+		m.state.View.Camera.Pos.AssignRxy(nextPos.RX, nextPos.RY)
 		return
 	}
 
@@ -121,18 +119,9 @@ func (m *MissionManager) updateCameraPosition() {
 		return
 	}
 
-	m.state.View.Camera.Pos.AssignRxy(
-		snapCameraCoord(m.state, nextPos.RX), snapCameraCoord(m.state, nextPos.RY),
-	)
-}
-
-// snapCameraCoord 把相机坐标剪到移动速度的整数倍，避免出现黑边。
-func snapCameraCoord(ms *state.MissionState, value float64) float64 {
-	moveSpeed := ms.View.Camera.BaseMoveSpeed
-	if moveSpeed <= 0 {
-		return value
-	}
-	return float64(int(value/moveSpeed)) * moveSpeed
+	// 直接写入，不再把坐标截断到移动步长的整数倍：相机可能停在缩放锚点、
+	// 平滑定位产生的任意小数位，截断会让滚屏第一帧多跳最多一个步长。
+	m.state.View.Camera.Pos.AssignRxy(nextPos.RX, nextPos.RY)
 }
 
 // 计算下一帧相机位置（全屏地图模式）
@@ -167,29 +156,30 @@ func (m *MissionManager) getNextCameraPosInGameMode() *objPos.MapPos {
 	}
 	pos := m.state.View.Camera.Pos.Copy()
 	// TODO 支持在游戏设置内修改相机移动速度
-	moveSpeed := m.state.View.Camera.BaseMoveSpeed
+	// 按当前缩放换算步长，避免放大后滚屏一次跨掉半个屏幕、缩小后又慢得几乎不动。
+	step := m.state.CameraScrollStep()
 
 	switch action.DetectCursorHoverOnGameMap(m.state.View.Layout) {
 	case action.HoverScreenLeft:
-		pos.SubRx(moveSpeed)
+		pos.SubRx(step)
 	case action.HoverScreenRight:
-		pos.AddRx(moveSpeed)
+		pos.AddRx(step)
 	case action.HoverScreenTop:
-		pos.SubRy(moveSpeed)
+		pos.SubRy(step)
 	case action.HoverScreenBottom:
-		pos.AddRy(moveSpeed)
+		pos.AddRy(step)
 	case action.HoverScreenTopLeft:
-		pos.SubRx(moveSpeed)
-		pos.SubRy(moveSpeed)
+		pos.SubRx(step)
+		pos.SubRy(step)
 	case action.HoverScreenTopRight:
-		pos.AddRx(moveSpeed)
-		pos.SubRy(moveSpeed)
+		pos.AddRx(step)
+		pos.SubRy(step)
 	case action.HoverScreenBottomLeft:
-		pos.SubRx(moveSpeed)
-		pos.AddRy(moveSpeed)
+		pos.SubRx(step)
+		pos.AddRy(step)
 	case action.HoverScreenBottomRight:
-		pos.AddRx(moveSpeed)
-		pos.AddRy(moveSpeed)
+		pos.AddRx(step)
+		pos.AddRy(step)
 	default:
 		// DoNothing
 		return nil

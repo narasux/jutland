@@ -38,6 +38,14 @@ func (s *MissionState) MapBlockDisplaySize() float64 {
 	return float64(constants.MapBlockSize) * s.ZoomScale()
 }
 
+// CameraScrollStep 返回边缘滚屏每帧移动的地图格数。
+// BaseMoveSpeed 以默认缩放档位为基准，这里按缩放等比换算，
+// 使不同缩放档位下屏幕上的滚屏速度一致（默认档位时等于 BaseMoveSpeed）。
+func (s *MissionState) CameraScrollStep() float64 {
+	zoom := NormalizeZoom(s.UI.GameOpts.Zoom)
+	return s.View.Camera.BaseMoveSpeed * float64(defaultZoom) / float64(zoom)
+}
+
 // CameraPosToScreen 将地图坐标转换为主战场屏幕坐标
 func (s *MissionState) CameraPosToScreen(pos objPos.MapPos) (float64, float64) {
 	blockSize := s.MapBlockDisplaySize()

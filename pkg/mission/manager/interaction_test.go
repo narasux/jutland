@@ -229,3 +229,39 @@ func TestAreaSelectingCancelsCameraMove(t *testing.T) {
 		t.Fatalf("camera target not cleared while area selecting: %+v", ms.View.Camera.Target)
 	}
 }
+
+// TestGameCameraCornerPanMovesBothAxesWithZoomScaledStep 验证光标压在屏幕左上角时两轴同时滚屏，
+// 且步长按缩放换算、小数位原样保留。
+// 场景：测试进程里 Ebiten 尚未开局，CursorPosition 固定返回 (0,0)，正好是屏幕左上角；
+// 相机停在 (10.125,10.125)（不是 0.25 的整数倍，模拟刚缩放或平滑定位之后的停留位置），
+// BaseMoveSpeed=0.25，地图 1000x1000、视野 33x19 不会碰边界。
+// 旧实现有两处问题：0 < x 让左上角退化成 HoverScreenTop，只滚竖直轴；
+// updateCameraPosition 又把新坐标截断到 BaseMoveSpeed 的整数倍，第一帧会多跳一段。
+// 预期：1x 档（zoom=4）相机到 (9.875,9.875)，4x 档（zoom=16）到 (10.0625,10.0625)；
+// 失败意味着角落掉了一个滚屏轴、步长没跟缩放走，或坐标被截断回步长整数倍。
+// 覆盖：表驱动 zoom=4/16 两档，调用 updateCameraPosition 后比较 Camera.Pos 的 RX/RY。
+func TestGameCameraCornerPanMovesBothAxesWithZoomScaledStep(t *testing.T) {
+	for _, tc := range []struct {
+		zoom         int
+		wantX, wantY float64
+	}{
+		{zoom: 4, wantX: 9.875, wantY: 9.875},
+		{zoom: 16, wantX: 10.0625, wantY: 10.0625},
+	} {
+		ms := cameraTestState()
+		ms.UI.GameOpts.Zoom = tc.zoom
+		ms.View.Camera.BaseMoveSpeed = 0.25
+		ms.View.Camera.Pos = objPos.NewR(10.125, 10.125)
+		manager := &MissionManager{state: ms}
+
+		manager.updateCameraPosition()
+
+		pos := ms.View.Camera.Pos
+		if pos.RX != tc.wantX || pos.RY != tc.wantY {
+			t.Fatalf(
+				"zoom %d: camera pos = (%v,%v), want (%v,%v)",
+				tc.zoom, pos.RX, pos.RY, tc.wantX, tc.wantY,
+			)
+		}
+	}
+}

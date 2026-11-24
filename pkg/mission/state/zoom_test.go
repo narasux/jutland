@@ -148,3 +148,29 @@ func TestRefreshCameraSizeScalesTileCount(t *testing.T) {
 	require.Equal(t, 96, cells[4])
 	require.Greater(t, cells[1], cells[16]*10, "zoom 1 应比 zoom 16 多一个数量级")
 }
+
+// TestCameraScrollStepKeepsScreenSpeedConstant 验证边缘滚屏在各缩放档位下的屏幕速度一致。
+// 场景：BaseMoveSpeed 是“每帧移动多少地图格”，同一数值在不同缩放下对应的像素位移相差 16 倍
+// （1x 档 1 格约 32px，4x 档 1 格约 512px）；直接拿它滚屏会出现放大后一帧跨过半个屏幕、
+// 缩小后又几乎不动，这正是玩家在角落滚屏时感到“卡”的诱因之一。
+// 预期：CameraScrollStep×MapBlockDisplaySize 在所有档位都等于 MapBlockSize×BaseMoveSpeed（32px），
+// 且默认档位下步长恰好等于 BaseMoveSpeed；失败意味着滚屏速度又绑回了地图格而不是屏幕像素。
+// 覆盖：表驱动 AvailableZooms 五档，断言像素步长在 1e-9 内等于 32；再单独断言默认档位步长。
+func TestCameraScrollStepKeepsScreenSpeedConstant(t *testing.T) {
+	const baseMoveSpeed = 0.25
+	// 每帧滚屏像素 = MapBlockSize(128) × BaseMoveSpeed(0.25)
+	const wantPixelsPerTick = 32.0
+
+	for _, zoom := range AvailableZooms {
+		ms := newZoomTestState()
+		ms.UI.GameOpts.Zoom = zoom
+		ms.View.Camera.BaseMoveSpeed = baseMoveSpeed
+
+		pixelsPerTick := ms.CameraScrollStep() * ms.MapBlockDisplaySize()
+		require.InDelta(t, wantPixelsPerTick, pixelsPerTick, 1e-9, "zoom %d 屏幕滚屏步长", zoom)
+
+		if zoom == DefaultZoom() {
+			require.InDelta(t, baseMoveSpeed, ms.CameraScrollStep(), 1e-9, "默认档位应等于 BaseMoveSpeed")
+		}
+	}
+}

@@ -11,6 +11,37 @@ import (
 	"github.com/narasux/jutland/pkg/utils/layout"
 )
 
+// edgeScrollZone 是屏幕四边触发相机滚屏的判定带宽度（像素）。
+// 四条边共用同一宽度，角落区域是相邻两条判定带的交集：只有同时进入两条带才斜向滚屏。
+const edgeScrollZone = 50
+
+// HoverTypeAt 按光标屏幕坐标判定边缘滚屏动作，w、h 为战场逻辑尺寸。
+// 纯函数，不读 Ebiten 输入，方便覆盖角落、判定带边界这些容易出错的点。
+func HoverTypeAt(x, y, w, h int) CursorHoverType {
+	left, right := x < edgeScrollZone, x > w-edgeScrollZone
+	top, bottom := y < edgeScrollZone, y > h-edgeScrollZone
+
+	switch {
+	case top && left:
+		return HoverScreenTopLeft
+	case top && right:
+		return HoverScreenTopRight
+	case bottom && left:
+		return HoverScreenBottomLeft
+	case bottom && right:
+		return HoverScreenBottomRight
+	case top:
+		return HoverScreenTop
+	case bottom:
+		return HoverScreenBottom
+	case left:
+		return HoverScreenLeft
+	case right:
+		return HoverScreenRight
+	}
+	return HoverScreenMiddle
+}
+
 // 探测游戏地图上的鼠标悬停动作
 func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 	// FIXME 还没想好如何在选择的时候移动地图，先禁用
@@ -18,51 +49,7 @@ func DetectCursorHoverOnGameMap(misLayout layout.ScreenLayout) CursorHoverType {
 		return DoNothing
 	}
 	x, y := ebiten.CursorPosition()
-	w, h := misLayout.Width, misLayout.Height
-	rightEdgeWidth := 50
-
-	// Hover 上侧
-	if y < 5 {
-		// Hover 左侧 3/10
-		if 0 < x && x < w/10*3 {
-			return HoverScreenTopLeft
-		}
-		// Hover 右侧 3/10
-		if w/10*7 < x && x < w {
-			return HoverScreenTopRight
-		}
-		// Hover 中间 4/10
-		return HoverScreenTop
-	}
-
-	// Hover 下侧
-	if y > h-50 {
-		// Hover 左侧 3/10
-		if x < w/10*3 {
-			return HoverScreenBottomLeft
-		}
-		// Hover 右侧 3/10
-		if w/10*7 < x {
-			return HoverScreenBottomRight
-		}
-		// Hover 中间 4/10
-		return HoverScreenBottom
-	}
-
-	// Hover 左侧
-	if x < 5 {
-		return HoverScreenLeft
-	}
-	// Hover 右侧
-	if x > w-rightEdgeWidth {
-		return HoverScreenRight
-	}
-
-	// Hover 在中间
-	if 5 < x && x < w-rightEdgeWidth && 5 < y && y < h-5 {
-		return HoverScreenMiddle
-	}
-	return DoNothing
+	return HoverTypeAt(x, y, misLayout.Width, misLayout.Height)
 }
 
 // 游戏地图上的选区
