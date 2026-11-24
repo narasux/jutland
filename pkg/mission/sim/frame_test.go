@@ -43,7 +43,7 @@ func TestBuildFrameReportPercentiles(t *testing.T) {
 func TestFrameHistoryRoundTrip(t *testing.T) {
 	dir := t.TempDir()
 	first := NewFrameHistoryEntry(
-		FrameReport{Frames: 60, P50MS: 1, P95MS: 3, P99MS: 4, MaxMS: 6, Budget: 16.7, Pass: true},
+		FrameReport{Frames: 60, Zoom: 2, P50MS: 1, P95MS: 3, P99MS: 4, MaxMS: 6, Budget: 16.7, Pass: true},
 		"abc1234", true, time.Date(2026, 11, 20, 6, 0, 0, 0, time.UTC),
 	)
 	second := NewFrameHistoryEntry(
@@ -62,6 +62,7 @@ func TestFrameHistoryRoundTrip(t *testing.T) {
 	require.Len(t, entries, 2)
 	require.Equal(t, "abc1234", entries[0].Commit)
 	require.True(t, entries[0].Dirty)
+	require.Equal(t, 2, entries[0].Zoom)
 	require.Equal(t, "def5678", entries[1].Commit)
 	require.False(t, entries[1].Pass)
 	require.InDelta(t, 20, entries[1].P99MS, 1e-9)

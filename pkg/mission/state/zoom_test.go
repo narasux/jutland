@@ -119,3 +119,32 @@ func TestStepZoomAtScreenPointStopsAtLimits(t *testing.T) {
 		})
 	}
 }
+
+// TestRefreshCameraSizeScalesTileCount 验证相机视野格数随缩小档位快速增长。
+// 场景：主战场每帧按相机 Width/Height 逐格调用 DrawImage；1280x720 下
+// zoom 1 的格数接近 zoom 4 的 11 倍，这是缩小地图时绘制变慢的主要来源。
+// 预期：各档位的 Width/Height 与 blockSize 换算一致；zoom 1 的格数显著大于 zoom 16。
+// 覆盖：表驱动 1/2/4/8/16，调用 RefreshCameraSize 后断言 Width/Height，并比较极值格数。
+func TestRefreshCameraSizeScalesTileCount(t *testing.T) {
+	expected := map[int][2]int{
+		1:  {41, 24},
+		2:  {21, 13},
+		4:  {11, 7},
+		8:  {6, 4},
+		16: {4, 3},
+	}
+	cells := map[int]int{}
+	for _, zoom := range AvailableZooms {
+		ms := newZoomTestState()
+		ms.UI.GameOpts.Zoom = zoom
+		ms.RefreshCameraSize()
+		want := expected[zoom]
+		require.Equal(t, want[0], ms.View.Camera.Width, "zoom %d width", zoom)
+		require.Equal(t, want[1], ms.View.Camera.Height, "zoom %d height", zoom)
+		// 绘制循环使用 <= Width/<= Height，多一个边界格。
+		cells[zoom] = (ms.View.Camera.Width + 1) * (ms.View.Camera.Height + 1)
+	}
+	require.Equal(t, 1050, cells[1])
+	require.Equal(t, 96, cells[4])
+	require.Greater(t, cells[1], cells[16]*10, "zoom 1 应比 zoom 16 多一个数量级")
+}

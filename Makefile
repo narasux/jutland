@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-gate sim-perf sim-suite sim-gate sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
+.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-zoom sim-frame-gate sim-perf sim-suite sim-gate sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -48,6 +48,13 @@ sim-archive:
 # rendered-frame p99 (opens a temporary window; not for headless CI)
 sim-frame:
 	go run ./cmd/jutland-frame --frames "$${SIM_FRAME_COUNT:-300}" --budget-ms "$${SIM_FRAME_BUDGET_MS:-16.7}"
+
+# rendered-frame p99 per map zoom (requires GUI); warmup excludes prewarm frames
+sim-frame-zoom:
+	for z in 1 2 4 8 16; do \
+		echo "zoom $$z"; \
+		go run ./cmd/jutland-frame --frames "$${SIM_FRAME_COUNT:-300}" --warmup "$${SIM_FRAME_WARMUP:-120}" --zoom $$z --budget-ms "$${SIM_FRAME_BUDGET_MS:-16.7}"; \
+	done
 
 # rendered-frame p99 gate (requires GUI)
 sim-frame-gate:

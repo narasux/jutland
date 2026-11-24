@@ -11,7 +11,10 @@ import (
 
 // FrameReport is a rendered-frame p99 summary.
 type FrameReport struct {
-	Frames int     `json:"frames"`
+	Frames int `json:"frames"`
+	// Zoom / Warmup 记录本次渲染采样的缩放档位与预热帧数，0 表示旧的门禁默认值。
+	Zoom   int     `json:"zoom,omitempty"`
+	Warmup int     `json:"warmup,omitempty"`
 	P50MS  float64 `json:"p50Ms"`
 	P95MS  float64 `json:"p95Ms"`
 	P99MS  float64 `json:"p99Ms"`
@@ -52,6 +55,7 @@ type FrameHistoryEntry struct {
 	RecordedAt time.Time `json:"recordedAt"`
 	Commit     string    `json:"commit"`
 	Dirty      bool      `json:"dirty"`
+	Zoom       int       `json:"zoom,omitempty"`
 	Frames     int       `json:"frames"`
 	P50MS      float64   `json:"p50Ms"`
 	P95MS      float64   `json:"p95Ms"`
@@ -64,7 +68,7 @@ type FrameHistoryEntry struct {
 // NewFrameHistoryEntry converts a gate result into a history record.
 func NewFrameHistoryEntry(report FrameReport, commit string, dirty bool, at time.Time) FrameHistoryEntry {
 	return FrameHistoryEntry{
-		RecordedAt: at, Commit: commit, Dirty: dirty,
+		RecordedAt: at, Commit: commit, Dirty: dirty, Zoom: report.Zoom,
 		Frames: report.Frames, P50MS: report.P50MS, P95MS: report.P95MS,
 		P99MS: report.P99MS, MaxMS: report.MaxMS, BudgetMS: report.Budget, Pass: report.Pass,
 	}
