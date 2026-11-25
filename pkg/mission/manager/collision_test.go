@@ -11,6 +11,7 @@ import (
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/state"
+	"github.com/narasux/jutland/pkg/resources/mapcfg"
 )
 
 // TestRamSettingOnlyGatesNormalShips 验证撞击开关只影响普通战舰，alwaysOn 特殊单位始终可撞。
@@ -271,15 +272,17 @@ func TestHighSpeedRamSweepsThroughTarget(t *testing.T) {
 }
 
 // TestShipContactSeparatesAndSlowsHeadOn 验证敌舰接触会按吨位分离并产生正撞掉速。
-// 场景：开启撞击，两艘 4000 吨、200m 长的驱逐舰中心距 0.75 格（最小平移深度 0.1875 格），
-// 撞击舰以 13.6 节舰艏正撞静止目标；碰撞响应与撞击伤害在同一拍结算。
+// 场景：开启撞击伤害与舰体碰撞检查，两艘 4000 吨、200m 长的驱逐舰中心距 0.75 格
+// （最小平移深度 0.1875 格），撞击舰以 13.6 节舰艏正撞静止目标。
 // 预期：一拍后两舰不再接触（中心距约 0.9375 格），撞击舰航速降到 20%，
 // 静止目标保持不动；失败说明碰撞响应没有推开舰体，或掉速把航速清成 0。
-// 覆盖：resolveShipContact 的法线方向、吨位权重、单拍分离上限与 applyContactSpeedLoss。
+// 覆盖：resolveShipContact 的法线方向、吨位权重、单拍分离上限与 applyContactSpeedLoss；
+// 舰体碰撞开关关闭时掉速/分离不生效另由 TestShipCollisionSeparatesEnemyHullsOnlyWhenEnabled 覆盖。
 func TestShipContactSeparatesAndSlowsHeadOn(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
 	config.G.EnableRamming = true
+	config.G.EnableShipCollision = true
 	objUnit.SetSimTick(0)
 	t.Cleanup(func() {
 		config.G = oldSettings
@@ -355,4 +358,234 @@ func TestRamSelfDamageAppearsInBattleLog(t *testing.T) {
 	require.Equal(t, faction.HumanAlpha, selfHit.ActorPlayer)
 	require.Equal(t, "ram", selfHit.Hit.WeaponType)
 	require.InDelta(t, 450, selfHit.Hit.Damage, 1e-9)
+}
+
+// TestShipCollisionSeparatesEnemyHullsOnlyWhenEnabled 验证舰体碰撞开关控制敌方舰船分离，
+// 且分离不依赖撞击伤害开关。
+// 场景：两艘不同阵营舰船 OBB 重叠；先关闭舰体碰撞检查调用一次，再打开后调用一次。
+// 预期：关闭时双方位置完全不变；打开后双方被推开、不再接触，但撞击伤害关闭所以 HP 不变。
+// 覆盖：同一对舰连续两次 updateShipContacts，比较前后 CurPos 与 shipRectContactAt，断言 HP 未变。
+func TestShipCollisionSeparatesEnemyHullsOnlyWhenEnabled(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	config.G.EnableRamming = false
+	config.G.EnableShipCollision = false
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	a := ramTestShip("a-collision", faction.HumanAlpha, 10, 10, 0, 1800, false)
+	b := ramTestShip("b-collision", faction.ComputerAlpha, 10, 9.25, 90, 0, false)
+	m := newRamTestMission(a, b)
+	beforeA, beforeB := a.CurPos.Copy(), b.CurPos.Copy()
+
+	m.updateShipContacts()
+	require.Equal(t, beforeA, a.CurPos, "collision check off must not move ships")
+	require.Equal(t, beforeB, b.CurPos, "collision check off must not move ships")
+
+	config.G.EnableShipCollision = true
+	m.updateShipContacts()
+	require.NotEqual(t, beforeA, a.CurPos, "enemy hulls must separate when enabled")
+	require.NotEqual(t, beforeB, b.CurPos, "enemy hulls must separate when enabled")
+	require.False(t, shipRectContactAt(a, a.CurPos.RX, a.CurPos.RY, b).OK)
+	require.Equal(t, 4000.0, a.CurHP, "collision separation must not deal ram damage")
+	require.Equal(t, 4000.0, b.CurHP, "collision separation must not deal ram damage")
+}
+
+// TestShipCollisionSkipsFriendlyHulls 验证舰体碰撞检查只作用于不同阵营，友军仍可穿行。
+// 场景：关闭撞击伤害、打开舰体碰撞检查，两艘同阵营舰船 OBB 重叠。
+// 预期：双方位置与 HP 都不变，仍保持接触；失败说明友军被误分离，AI 编队会互相顶开。
+// 覆盖：同阵营一对舰调用 updateShipContacts，比较 CurPos、CurHP 与 contact 结果。
+func TestShipCollisionSkipsFriendlyHulls(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	config.G.EnableRamming = false
+	config.G.EnableShipCollision = true
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	a := ramTestShip("a-friendly-collision", faction.HumanAlpha, 10, 10, 0, 0, false)
+	b := ramTestShip("b-friendly-collision", faction.HumanAlpha, 10, 9.25, 90, 0, false)
+	m := newRamTestMission(a, b)
+	beforeA, beforeB := a.CurPos.Copy(), b.CurPos.Copy()
+
+	m.updateShipContacts()
+	require.Equal(t, beforeA, a.CurPos, "friendly hulls must keep passing through")
+	require.Equal(t, beforeB, b.CurPos, "friendly hulls must keep passing through")
+	require.True(t, shipRectContactAt(a, a.CurPos.RX, a.CurPos.RY, b).OK)
+	require.Equal(t, 4000.0, a.CurHP)
+	require.Equal(t, 4000.0, b.CurHP)
+}
+
+// TestRamAndCollisionSwitchesAreIndependent 验证撞击伤害与舰体碰撞可以分别开关。
+// 场景：同一对重叠敌舰，先只开撞击伤害（碰撞检查关），再只开舰体碰撞检查（撞击伤害关）。
+// 预期：只开撞击伤害时目标掉血但双方位置不变；只开舰体碰撞时双方分开但都不掉血。
+// 覆盖：两组独立状态各调用一次 updateShipContacts，分别断言 CurHP 与 CurPos。
+func TestRamAndCollisionSwitchesAreIndependent(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	ramA := ramTestShip("a-ram-only", faction.HumanAlpha, 10, 10, 0, 1800, false)
+	ramB := ramTestShip("b-ram-only", faction.ComputerAlpha, 10, 9.25, 90, 0, false)
+	config.G.EnableRamming = true
+	config.G.EnableShipCollision = false
+	ramMission := newRamTestMission(ramA, ramB)
+	beforeRamA, beforeRamB := ramA.CurPos.Copy(), ramB.CurPos.Copy()
+	ramMission.updateShipContacts()
+	require.InDelta(t, 2200, ramB.CurHP, 1e-9, "ram damage must still apply")
+	require.Equal(t, beforeRamA, ramA.CurPos, "ram-only mode must not separate hulls")
+	require.Equal(t, beforeRamB, ramB.CurPos, "ram-only mode must not separate hulls")
+
+	collisionA := ramTestShip("a-collision-only", faction.HumanAlpha, 10, 10, 0, 1800, false)
+	collisionB := ramTestShip("b-collision-only", faction.ComputerAlpha, 10, 9.25, 90, 0, false)
+	config.G.EnableRamming = false
+	config.G.EnableShipCollision = true
+	collisionMission := newRamTestMission(collisionA, collisionB)
+	beforeCollisionA, beforeCollisionB := collisionA.CurPos.Copy(), collisionB.CurPos.Copy()
+	collisionMission.updateShipContacts()
+	require.Equal(t, 4000.0, collisionB.CurHP, "collision-only mode must not deal ram damage")
+	require.NotEqual(t, beforeCollisionA, collisionA.CurPos, "collision-only mode must separate hulls")
+	require.NotEqual(t, beforeCollisionB, collisionB.CurPos, "collision-only mode must separate hulls")
+}
+
+// TestShipCollisionSeparatesDeepOverlapOverTicks 验证深穿透不会被一拍弹开：
+// 单拍单舰位移被 maxContactSeparation 截断，剩余重叠留到后续拍继续处理。
+// 场景：两艘同向 200m 等质量舰中心相距 0.5 格，沿舰长方向重叠 1.0625 格（超过 2 倍上限），
+// 关闭撞击伤害、只开舰体碰撞检查。
+// 预期：第一拍每舰理论位移 1.0625/2=0.53125 被截断到 0.5 格，两舰仍接触；
+// 第二拍后完全分离。失败说明深穿透被一拍弹开，或上限没有生效。
+// 覆盖：连续两次 updateShipContacts，断言 CurPos.RY 位移恰为 maxContactSeparation，
+// 并用 shipRectContactAt 断言第一拍仍接触、第二拍已分离。
+func TestShipCollisionSeparatesDeepOverlapOverTicks(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	config.G.EnableRamming = false
+	config.G.EnableShipCollision = true
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	a := ramTestShip("a-deep", faction.HumanAlpha, 10, 10, 0, 0, false)
+	b := ramTestShip("b-deep", faction.ComputerAlpha, 10, 9.5, 0, 0, false)
+	// 加宽舰体，让 SAT 的最小平移方向落在舰长方向（深度 0.5625 > 0.5），
+	// 而不是先沿较窄的舰宽分开。
+	a.Width, b.Width = 400, 400
+	m := newRamTestMission(a, b)
+
+	m.updateShipContacts()
+	// 每舰理论位移 0.53125 超过上限，本拍只走 0.5。
+	require.InDelta(t, 10+maxContactSeparation, a.CurPos.RY, 1e-9)
+	require.InDelta(t, 9.5-maxContactSeparation, b.CurPos.RY, 1e-9)
+	require.True(t, shipRectContactAt(a, a.CurPos.RX, a.CurPos.RY, b).OK)
+
+	m.updateShipContacts()
+	require.False(t, shipRectContactAt(a, a.CurPos.RX, a.CurPos.RY, b).OK)
+}
+
+// TestShipCollisionDistributesByMass 验证分离位移按吨位反比分配，重舰几乎不动。
+// 场景：8000 吨与 2000 吨的两艘敌舰 OBB 重叠，开启舰体碰撞检查。
+// 预期：两舰位移比接近 1:4（轻舰走 4 倍距离），而不是各走一半。
+// 覆盖：调用一次 updateShipContacts，用位移长度比断言质量分配。
+func TestShipCollisionDistributesByMass(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	config.G.EnableRamming = false
+	config.G.EnableShipCollision = true
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	heavy := ramTestShip("a-heavy", faction.HumanAlpha, 10, 10, 0, 0, false)
+	light := ramTestShip("b-light", faction.ComputerAlpha, 10, 9.25, 90, 0, false)
+	heavy.Tonnage, heavy.TotalHP = 8000, 8000
+	light.Tonnage, light.TotalHP = 2000, 2000
+	heavyStart, lightStart := heavy.CurPos.Copy(), light.CurPos.Copy()
+	newRamTestMission(heavy, light).updateShipContacts()
+
+	heavyShift := heavy.CurPos.Distance(heavyStart)
+	lightShift := light.CurPos.Distance(lightStart)
+	require.Greater(t, heavyShift, 0.0)
+	require.Greater(t, lightShift, 0.0)
+	require.InDelta(t, 4, lightShift/heavyShift, 0.01)
+}
+
+// TestShipCollisionRejectsPushOntoLand 验证分离候选位置会把舰体推上岸时整对取消，
+// 不会只推开其中一方或把船顶进陆地。
+// 场景：8×3 地图 x=5 整列为陆地；两艘 200m 舰中心在 x=4.8/4.9 的水面，横向重叠 0.2125 格；
+// 分离会把右侧舰（b）向东推过 x=5，而左侧舰（a）的分离方向仍在水面。
+// 预期：b 的位移被放弃、位置与调用前完全一致；a 仍被推开；两舰舰体都不压上岸。
+// 覆盖：设置 Core.MissionMD.MapCfg 后调用 updateShipContacts，比较 CurPos，并用
+// HullLandOverlapSamples 断言两舰的压岸采样数都为 0。
+func TestShipCollisionRejectsPushOntoLand(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	config.G.EnableRamming = false
+	config.G.EnableShipCollision = true
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	rows := mapcfg.MapData{"SSSSSLSS", "SSSSSLSS", "SSSSSLSS"}
+	a := ramTestShip("a-coast", faction.HumanAlpha, 4.8, 1.5, 0, 0, false)
+	b := ramTestShip("b-coast", faction.ComputerAlpha, 4.9, 1.5, 0, 0, false)
+	a.Length, b.Length = 200, 200
+	m := newRamTestMission(a, b)
+	m.state.Core.MissionMD.MapCfg = &mapcfg.MapCfg{
+		Map: rows, Cells: rows.ToGridCells(), Width: 8, Height: 3,
+	}
+	beforeA, beforeB := a.CurPos.Copy(), b.CurPos.Copy()
+
+	m.updateShipContacts()
+	require.Equal(t, beforeB, b.CurPos, "blocked ship must keep position instead of being pushed onto land")
+	require.NotEqual(t, beforeA, a.CurPos, "the other ship must still be separated")
+	require.Zero(
+		t,
+		objUnit.HullLandOverlapSamples(m.state.Core.MissionMD.MapCfg, a.CurPos, a.CurRotation, a.Length),
+		"separation must not push a ship onto land",
+	)
+	require.Zero(
+		t,
+		objUnit.HullLandOverlapSamples(m.state.Core.MissionMD.MapCfg, b.CurPos, b.CurRotation, b.Length),
+		"separation must not push a ship onto land",
+	)
+}
+
+// TestShipCollisionSkipsSubmergedSubmarine 验证舰体碰撞检查不会把水下潜艇当水面障碍推开。
+// 场景：关闭撞击伤害、打开舰体碰撞检查，敌方潜艇完全下潜并与水面舰 OBB 重叠。
+// 预期：双方位置都不变；失败意味着潜艇会被水面舰的分离逻辑顶动，或水下隐身被碰撞暴露。
+// 覆盖：设置 DiveStateSubmerged 后调用 updateShipContacts，比较 CurPos。
+func TestShipCollisionSkipsSubmergedSubmarine(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	config.G.EnableRamming = false
+	config.G.EnableShipCollision = true
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	surface := ramTestShip("a-surface", faction.HumanAlpha, 10, 10, 0, 0, false)
+	sub := ramTestShip("b-sub-collision", faction.ComputerAlpha, 10, 9.25, 90, 0, false)
+	sub.Submarine.DiveState = objUnit.DiveStateSubmerged
+	beforeSurface, beforeSub := surface.CurPos.Copy(), sub.CurPos.Copy()
+	newRamTestMission(surface, sub).updateShipContacts()
+	require.Equal(t, beforeSurface, surface.CurPos)
+	require.Equal(t, beforeSub, sub.CurPos)
 }

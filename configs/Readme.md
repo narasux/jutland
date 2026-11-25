@@ -204,8 +204,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // 是否对空
     antiAircraft: true,
     // 注：对空且弹径 ≤ 40mm 的自动炮会在初始化时自动获得反鱼雷能力，
-    //     射击来袭航迹会穿过本舰的鱼雷；整舰每 1 秒最多组织一次拦截，
-    //     且一次只动用一座炮。无需额外配置字段。
+    //     射击本舰反鱼雷射程内最近的敌方鱼雷（不要求航迹指向本舰）；
+    //     整舰按舰种火控间隔组织拦截（驱逐 0.5s / 巡洋 1s / 主力舰 1.5s），
+    //     一次只动用一座炮，单发引爆概率再乘鱼雷战斗部系数。无需额外配置字段。
     // 对空近炸触发半径（地图格）；仅编程引信弹药填写，二战直射炮省略
     proximityRadius: 0.20,
     // 对空爆炸伤害半径（地图格）；进入近炸后对半径内飞机结算伤害
@@ -848,10 +849,13 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   "enableLandAirfield": true,
   // 战争迷雾总开关；关闭时不计算迷雾
   "enableFogOfWar": false,
-  // 撞击系统总开关，默认 false；只影响普通战舰的 ram 配置，
+  // 撞击伤害总开关，默认 false；只影响普通战舰的 ram 配置，
   // ram.alwaysOn=true 的特殊单位（水滴 / 巨大剑鱼）不受影响。
-  // 注意：敌方舰船的碰撞分离 / 掉速不依赖该开关，关闭时仍会互相阻挡。
+  // 注意：敌方舰船的碰撞分离 / 掉速由 enableShipCollision 控制，与本开关无关。
   "enableRamming": false,
+  // 舰体碰撞检查总开关，默认 true；开启后不同阵营水面舰船接触时互相推开并掉速，
+  // 友军仍保持穿行
+  "enableShipCollision": true,
   // 小地图总开关；开启时开局自动展开右上战术面板显示小地图
   "enableMinimap": true,
   // 命中特效总开关；关闭后命中舰体 / 落水 / 落陆不再生成特效

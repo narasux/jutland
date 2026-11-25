@@ -269,7 +269,9 @@ other = "Числа урона"
 [SettingsShipState]
 other = "Состояние корабля"
 [SettingsRamming]
-other = "Таран (эксперим.)"
+other = "Урон тарана"
+[SettingsShipCollision]
+other = "Столкновения корпусов"
 [SettingsOn]
 other = "Вкл."
 [SettingsOff]

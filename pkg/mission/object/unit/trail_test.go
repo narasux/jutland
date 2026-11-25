@@ -15,6 +15,41 @@ func primeWakeEmission(ship *BattleShip) {
 	ship.wakeTrailInitialized = true
 }
 
+// TestObserveWakeRestDetectsInPlaceTurnAndResetsWhileMoving 验证停船原地转向检测会跨 0/360 取最短夹角，
+// 并在重新航行后清除停船状态。
+// 场景：舰船在 0° 停船，先转 5° 再转 90°；随后以 0.1 格/拍重新航行，再在 350° 停船后转到 10°。
+// 预期：首次采样 false；5° false；90° true；航行时调用返回 false；重新停船后先记录新航向并返回 false，
+// 跨北向转到 10°（最短夹角 20°）返回 true。
+// 覆盖：直接构造 BattleShip 修改 CurSpeed/CurRotation，表驱动断言 ObserveWakeRest(8) 的返回值。
+func TestObserveWakeRestDetectsInPlaceTurnAndResetsWhileMoving(t *testing.T) {
+	ship := &BattleShip{CurSpeed: 0, CurRotation: 0}
+	if ship.ObserveWakeRest(8) {
+		t.Fatal("first stationary sample should only record heading")
+	}
+	ship.CurRotation = 5
+	if ship.ObserveWakeRest(8) {
+		t.Fatal("5-degree turn should stay below the 8-degree threshold")
+	}
+	ship.CurRotation = 90
+	if !ship.ObserveWakeRest(8) {
+		t.Fatal("90-degree in-place turn was not detected")
+	}
+
+	ship.CurSpeed = 0.1
+	if ship.ObserveWakeRest(8) {
+		t.Fatal("moving ship should not report an in-place turn")
+	}
+	ship.CurSpeed = 0
+	ship.CurRotation = 350
+	if ship.ObserveWakeRest(8) {
+		t.Fatal("first sample after re-stopping should only record heading")
+	}
+	ship.CurRotation = 10
+	if !ship.ObserveWakeRest(8) {
+		t.Fatal("20-degree turn across north was not detected")
+	}
+}
+
 // TestSwordfishTrailsFollowTailAnimationWithoutPerTickStacking 验证剑鱼尾流跟随尾部动画步进，
 // 同一动画帧不重复生成。
 // 场景：剑鱼动画 8 帧、每 6 tick 换帧；尾流应只在动画步变化时生成左右两簇，而不是每帧堆叠。

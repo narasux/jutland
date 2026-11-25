@@ -147,16 +147,16 @@ func TestDisplaySwitchesFollowConfig(t *testing.T) {
 }
 
 // TestSettingsMetricsKeepFooterOnScreen 验证设置页排版在 800×600 等矮屏下仍完整落在屏幕内。
-// 场景：游戏页 8 行、视听页 7 行，卡片按 8 行预留高度，页脚位于卡片下方；标题/标签/页脚都可能把内容顶出屏幕。
+// 场景：游戏页 9 行、视听页 7 行，卡片按 9 行预留高度，页脚位于卡片下方；标题/标签/页脚都可能把内容顶出屏幕。
 // 预期：卡片左右不越界，页脚底部不超过屏幕高度，且单行控件宽度能放进卡片内容区。
-// 覆盖：800×600、1024×768、1920×1080 三种 ScreenLayout × 7/8 行调用 newSettingsMetrics，断言几何边界。
+// 覆盖：800×600、1024×768、1920×1080 三种 ScreenLayout × 7/9 行调用 newSettingsMetrics，断言几何边界。
 func TestSettingsMetricsKeepFooterOnScreen(t *testing.T) {
 	for _, screen := range []layout.ScreenLayout{
 		{Width: 800, Height: 600},
 		{Width: 1024, Height: 768},
 		{Width: 1920, Height: 1080},
 	} {
-		for _, rows := range []int{7, 8} {
+		for _, rows := range []int{7, 9} {
 			m := newSettingsMetrics(screen, rows)
 			if m.panelX < 0 || m.panelX+m.panelW > screen.Width {
 				t.Fatalf(
@@ -183,7 +183,7 @@ func TestSettingsMetricsKeepFooterOnScreen(t *testing.T) {
 // TestLoadFromSettingsRestoresDefaults 验证「恢复默认」读取默认设置后清掉全部本地改动。
 // 场景：玩家已把速度、语言、背景音乐/战场音效、迷雾、AI、显示开关和尾流参数都改成非默认值，随后点击恢复默认。
 // 预期：localValue=标准速度、语言 zh-Hans、BGM/战场音效回到默认 1.0、AI 全开、迷雾关闭、
-// 小地图/显示/机场全开，尾流三项回到 1.0；失败意味着恢复默认只重置了部分页签。
+// 小地图/显示/机场/舰体碰撞全开、撞击关闭，尾流三项回到 1.0；失败意味着恢复默认只重置了部分页签。
 // 覆盖：先手工填充 UI 的全部 local 字段，再 loadFromSettings(NewDefaultGameSettings) 后逐项断言。
 func TestLoadFromSettingsRestoresDefaults(t *testing.T) {
 	ui := &UI{
@@ -195,6 +195,7 @@ func TestLoadFromSettingsRestoresDefaults(t *testing.T) {
 		localFog:           true,
 		localMinimap:       false,
 		localRam:           true,
+		localShipCollision: true,
 		localLand:          false,
 		localHitEffects:    false,
 		localDamageNumbers: false,
@@ -215,10 +216,10 @@ func TestLoadFromSettingsRestoresDefaults(t *testing.T) {
 	if ui.localAI != config.DefaultAIStrategies() {
 		t.Fatalf("AI = %+v, want all enabled", ui.localAI)
 	}
-	if ui.localFog || !ui.localMinimap || ui.localRam || !ui.localLand {
+	if ui.localFog || !ui.localMinimap || ui.localRam || !ui.localShipCollision || !ui.localLand {
 		t.Fatalf(
-			"fog/minimap/ram/land = %v/%v/%v/%v, want false/true/false/true",
-			ui.localFog, ui.localMinimap, ui.localRam, ui.localLand,
+			"fog/minimap/ram/collision/land = %v/%v/%v/%v/%v, want false/true/false/true/true",
+			ui.localFog, ui.localMinimap, ui.localRam, ui.localShipCollision, ui.localLand,
 		)
 	}
 	if !ui.localHitEffects || !ui.localDamageNumbers || !ui.localShipState {
@@ -233,9 +234,9 @@ func TestLoadFromSettingsRestoresDefaults(t *testing.T) {
 }
 
 // TestSaveWritesAllLocalValues 验证设置页保存会把所有页签的本地值写回配置并持久化。
-// 场景：玩家在游戏/视听两个页签分别改动速度、语言、机场、AI、迷雾、小地图、撞击开关、战舰状态、BGM/战场音效、命中/伤害开关和尾流参数。
+// 场景：玩家在游戏/视听两个页签分别改动速度、语言、机场、AI、迷雾、小地图、撞击/舰体碰撞开关、战舰状态、BGM/战场音效、命中/伤害开关和尾流参数。
 // 预期：config.G 与重新 Load 的配置文件都得到这些值；失败说明某个 local 字段漏写或 wakeTrail 未序列化。
-// 覆盖：临时 ConfigBaseDir + 手工填充 UI local 字段（含 localRam=true），调用 save 后逐项断言 config.G，再 Load 断言持久化结果。
+// 覆盖：临时 ConfigBaseDir + 手工填充 UI local 字段（含 localRam/localShipCollision=true），调用 save 后逐项断言 config.G，再 Load 断言持久化结果。
 func TestSaveWritesAllLocalValues(t *testing.T) {
 	previousDir, previousSettings := config.ConfigBaseDir, config.G
 	previousBGM, previousEffects := audio.BGMVolume(), audio.EffectsVolume()
@@ -256,6 +257,7 @@ func TestSaveWritesAllLocalValues(t *testing.T) {
 		localFog:           true,
 		localMinimap:       false,
 		localRam:           true,
+		localShipCollision: true,
 		localLand:          false,
 		localHitEffects:    false,
 		localDamageNumbers: false,
@@ -277,6 +279,7 @@ func TestSaveWritesAllLocalValues(t *testing.T) {
 	require.True(t, config.G.EnableFogOfWar)
 	require.False(t, config.G.EnableMinimap)
 	require.True(t, config.G.EnableRamming)
+	require.True(t, config.G.EnableShipCollision)
 	require.False(t, config.G.EnableLandAirfield)
 	require.False(t, config.G.DisplayHitEffects)
 	require.False(t, config.G.DisplayDamageNumber)
@@ -289,11 +292,12 @@ func TestSaveWritesAllLocalValues(t *testing.T) {
 	require.Equal(t, 0.2, config.G.ResolvedBGMVolume())
 	require.Equal(t, 0.6, config.G.ResolvedEffectsVolume())
 	require.True(t, config.G.EnableRamming)
+	require.True(t, config.G.EnableShipCollision)
 	require.Equal(t, config.WakeTrailSettings{Length: 1.8, Width: 0.7, Opacity: 1.2}, config.G.WakeTrail)
 }
 
 // TestRestoreDefaultsSavesAndCloses 验证确认恢复会立即写回默认值、持久化并退出设置页。
-// 场景：玩家把速度、语言、BGM/战场音效、迷雾、显示开关和尾流都改成非默认值，在二次确认弹窗点「确认恢复」。
+// 场景：玩家把速度、语言、BGM/战场音效、迷雾、撞击/舰体碰撞、显示开关和尾流都改成非默认值，在二次确认弹窗点「确认恢复」。
 // 预期：config.G 整个结构等于默认设置、音频两通道回到 1.0、backPressed=true，重新 Load 后仍为默认。
 // 覆盖：临时 ConfigBaseDir + 先污染 config.G/UI local 字段，调用 restoreDefaults 后整体比较，再 Load 断言持久化。
 func TestRestoreDefaultsSavesAndCloses(t *testing.T) {
@@ -316,6 +320,7 @@ func TestRestoreDefaultsSavesAndCloses(t *testing.T) {
 		localFog:           true,
 		localMinimap:       false,
 		localRam:           true,
+		localShipCollision: true,
 		localLand:          false,
 		localHitEffects:    false,
 		localDamageNumbers: false,
@@ -326,6 +331,7 @@ func TestRestoreDefaultsSavesAndCloses(t *testing.T) {
 
 	require.True(t, ui.backPressed, "restore should close the settings page")
 	require.False(t, ui.localRam)
+	require.True(t, ui.localShipCollision)
 	require.Equal(t, config.NewDefaultGameSettings(), config.G)
 	require.Equal(t, config.DefaultAudioVolume, audio.BGMVolume())
 	require.Equal(t, config.DefaultAudioVolume, audio.EffectsVolume())

@@ -269,7 +269,9 @@ other = "Damage numbers"
 [SettingsShipState]
 other = "Ship status"
 [SettingsRamming]
-other = "Ramming (experimental)"
+other = "Ramming damage"
+[SettingsShipCollision]
+other = "Hull collision"
 [SettingsOn]
 other = "On"
 [SettingsOff]

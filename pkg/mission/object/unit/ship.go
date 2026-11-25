@@ -162,6 +162,10 @@ type BattleShip struct {
 	lastWakeEmitPos objPos.MapPos
 	// 是否已经记录过普通水面尾流位置
 	wakeTrailInitialized bool
+	// 停船后旧尾流淡出的状态：用于识别原地转向并加快淡出
+	wakeResting bool
+	// 停船开始淡出时的航向（度）
+	wakeRestRotation float64
 	// 分组ID
 	GroupID object.GroupID
 	// 攻击目标（敌舰 Uid）
@@ -355,12 +359,9 @@ type FireTargets struct {
 	AntiTorpedo Hurtable
 }
 
-// AntiTorpedoFireInterval 整舰反鱼雷火控的组织间隔（秒）。
-// 不是单炮装填：炮座越多不代表能同时扫更多鱼雷，否则战列舰的防空炮数量
-// 会直接变成鱼雷免疫。具体开火的那座炮仍受自身装填限制。
-const AntiTorpedoFireInterval = 1.0
-
 // AntiTorpedoReady 整舰反鱼雷火控是否已冷却完毕。
+// 间隔由舰种决定（见 DefaultAntiTorpedoProfile），不是单炮装填：炮座越多
+// 不代表能同时扫更多鱼雷，否则战列舰的防空炮数量会直接变成鱼雷免疫。
 func (s *BattleShip) AntiTorpedoReady() bool {
 	return SimTick() >= s.antiTorpedoReadyTick
 }
@@ -390,16 +391,21 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 	}
 
 	// 反鱼雷优先：能拦鱼雷的小口径炮先消耗本拍装填，再轮到舰船 / 飞机。
-	// 整舰每 AntiTorpedoFireInterval 秒只组织一次拦截，且一次只动用一座炮：
-	// 否则战列舰十几座防空炮会轮流扫同一条鱼雷，反鱼雷效率随炮座数量线性膨胀，
-	// 等于给大舰发鱼雷免疫。打不了鱼雷的炮在 IsAvailableAntiType 处直接返回，
-	// 不影响后续目标。
+	// 整舰按舰种的火控间隔组织拦截，且一次只动用一座炮：否则战列舰十几座
+	// 防空炮会轮流扫同一条鱼雷，反鱼雷效率随炮座数量线性膨胀，等于给大舰发
+	// 鱼雷免疫。打不了鱼雷的炮在 IsAvailableAntiType 处直接返回，不影响后续目标。
 	if torpedoTarget := targets.AntiTorpedo; torpedoTarget != nil && !gunsBlocked &&
 		s.AntiTorpedoReady() {
+		profile := DefaultAntiTorpedoProfile(s.Type)
 		fireOneMount := func(guns []*Gun) bool {
 			for _, gun := range guns {
 				bullets := gun.Fire(s, torpedoTarget)
 				if len(bullets) > 0 {
+					// 火控质量烙在炮弹上：命中结算只看炮弹与鱼雷，
+					// 不再回头查发射舰（此时发射舰可能已被击沉）。
+					for _, bt := range bullets {
+						bt.AntiTorpedoChance = profile.HitChance
+					}
 					shotBullets = append(shotBullets, bullets...)
 					return true
 				}
@@ -415,7 +421,7 @@ func (s *BattleShip) FireAt(targets FireTargets) (shotBullets []*objBullet.Bulle
 		}
 		if fired {
 			next := max(SimTick(), 1)
-			s.antiTorpedoReadyTick = next + ReloadTicks(AntiTorpedoFireInterval)
+			s.antiTorpedoReadyTick = next + ReloadTicks(profile.FireInterval)
 		}
 	}
 
@@ -578,6 +584,20 @@ func (s *BattleShip) hullWakeLength(hull WakeHull) float64 {
 		return s.Length
 	}
 	return s.Length * span
+}
+
+// ObserveWakeRest 在每拍尾流更新时记录停船起始航向，并返回舰体是否已原地转向超过 threshold 度。
+// 重新航行后停船状态会清除，下一次停船重新取航向；供管理器在转向时加快旧尾迹淡出。
+func (s *BattleShip) ObserveWakeRest(threshold float64) bool {
+	if s.CurSpeed > 0 {
+		s.wakeResting = false
+		return false
+	}
+	if !s.wakeResting {
+		s.wakeResting = true
+		s.wakeRestRotation = s.CurRotation
+	}
+	return angleDifferenceDegrees(s.wakeRestRotation, s.CurRotation) > threshold
 }
 
 // shouldEmitHullWake 按实际航程控制普通水面尾流采样频率。
@@ -808,6 +828,41 @@ func HullLandOverlapSamples(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, rotation, 
 // hullLandOverlap 沿本舰中心线采样，返回压进陆格的采样点数。
 func (s *BattleShip) hullLandOverlap(mapCfg *mapcfg.MapCfg, pos objPos.MapPos, rotation float64) int {
 	return HullLandOverlapSamples(mapCfg, pos, rotation, s.Length)
+}
+
+// CollisionShiftTarget 返回舰体沿 (dx, dy) 平移后的候选位置。
+// 候选位置会夹到地图边界；非水陆两栖舰不允许把压岸程度变得更深。
+// 碰撞分离先对双方调用本函数校验，再一起应用，避免只推开一方。
+func (s *BattleShip) CollisionShiftTarget(
+	mapCfg *mapcfg.MapCfg, dx, dy float64,
+) (objPos.MapPos, bool) {
+	if math.IsNaN(dx) || math.IsNaN(dy) {
+		return objPos.MapPos{}, false
+	}
+	next := s.CurPos.Copy()
+	next.AssignRxy(next.RX+dx, next.RY+dy)
+	if mapCfg == nil || mapCfg.Width <= 0 || mapCfg.Height <= 0 {
+		return next, true
+	}
+	next.EnsureBorder(float64(mapCfg.Width)-0.5, float64(mapCfg.Height)-0.5)
+	if !s.CanOnLand() &&
+		s.hullLandOverlap(mapCfg, next, s.CurRotation) >
+			s.hullLandOverlap(mapCfg, s.CurPos, s.CurRotation) {
+		return objPos.MapPos{}, false
+	}
+	return next, true
+}
+
+// ApplyCollisionShift 应用一次已校验的碰撞位移。
+// 尾流采样位置同步平移：碰撞推挤不是本舰航行，不能在舷侧盖出横向尾迹。
+func (s *BattleShip) ApplyCollisionShift(dx, dy float64) {
+	if dx == 0 && dy == 0 {
+		return
+	}
+	s.CurPos.AssignRxy(s.CurPos.RX+dx, s.CurPos.RY+dy)
+	if s.wakeTrailInitialized {
+		s.lastWakeEmitPos.AssignRxy(s.lastWakeEmitPos.RX+dx, s.lastWakeEmitPos.RY+dy)
+	}
 }
 
 // CruiseSpeed 返回乘过全局速度倍率与当前深度状态的巡航速度，也就是舰船加速的上限。

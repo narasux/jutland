@@ -305,6 +305,9 @@
 `unit.PlaneRangeScale`（当前 4）折算成内部续航，因此**往返可达的出击半径 = range / 4 / 2 = range / 8**。
 调整这个系数会同时改变所有机型的续航与出击半径；图鉴显示通过 `unit.PlaneRangeDisplayScale` 保持不变。
 
+> 空战 AI 的分层（CAP/护航/波次）与轰炸机自卫火力改造方案见
+> [docs/air-combat/README.md](../../../docs/air-combat/README.md)。
+
 ### 异步攻击目标调度
 
 目标候选、舰队聚类、评分和基地目标队列由 `pkg/mission/targeting` 在后台计算。

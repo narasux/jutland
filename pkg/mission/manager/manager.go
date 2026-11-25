@@ -15,6 +15,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/hacker"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
 	"github.com/narasux/jutland/pkg/mission/object"
+	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
 	"github.com/narasux/jutland/pkg/mission/observer"
 	"github.com/narasux/jutland/pkg/mission/sidebar"
@@ -64,7 +65,7 @@ type MissionManager struct {
 	mapBlockPrewarmSettled    bool
 	combatBuckets             combatIndex
 	// antiTorpedoCandidates 本拍仍在航行的鱼雷，逐舰择敌时复用，避免扫描全部弹药。
-	antiTorpedoCandidates []antiTorpedoCandidate
+	antiTorpedoCandidates []*objBullet.Bullet
 	// antiTorpedoTarget 逐舰复用的鱼雷目标包装，避免每帧每舰堆分配。
 	antiTorpedoTarget objUnit.TorpedoTarget
 	// effectSeq 命中特效的确定性种子来源：不用全局随机数，避免影响战斗随机序列

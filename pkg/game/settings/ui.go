@@ -37,7 +37,7 @@ const (
 
 	// gameSettingsRows 是游戏页的设置行数；新增/删除行时必须同步，
 	// 否则卡片高度仍按旧行数计算，最后一行会和页脚一起溢出。
-	gameSettingsRows = 8
+	gameSettingsRows = 9
 	maxSettingsRows  = gameSettingsRows
 )
 
@@ -154,12 +154,23 @@ func newSettingsMetrics(screen layout.ScreenLayout, rows int) settingsMetrics {
 	m.handle = max(m.handle, 10)
 	m.sliderW = max(m.controlW-m.valueW-m.valueGap, int(math.Round(80*scale)))
 
-	m.panelH = m.panelPad*2 + m.hintH + m.sectionGap +
-		rows*m.rowH + (rows-1)*m.rowGap
-
+	// 行数增加后，800×600 这类矮屏可能放不下；先按设计行高铺开，
+	// 超出屏幕时再逐像素压缩行高（控件高度是下限），避免页脚被挤出屏幕。
+	panelHeight := func() int {
+		return m.panelPad*2 + m.hintH + m.sectionGap +
+			rows*m.rowH + (rows-1)*m.rowGap
+	}
 	gap := int(math.Round(16 * scale))
+	m.panelH = panelHeight()
 	blockH := m.titleH + gap + m.tabH + gap + m.panelH + gap + m.footerH
 	startY := max(int(math.Round(24*scale)), (sh-blockH)/2)
+	minRowH := m.controlH + 2
+	for startY+blockH > sh && m.rowH > minRowH {
+		m.rowH--
+		m.panelH = panelHeight()
+		blockH = m.titleH + gap + m.tabH + gap + m.panelH + gap + m.footerH
+		startY = max(int(math.Round(24*scale)), (sh-blockH)/2)
+	}
 	m.titleY = startY
 	m.tabsY = m.titleY + m.titleH + gap
 	m.panelY = m.tabsY + m.tabH + gap
@@ -189,6 +200,7 @@ type UI struct {
 	localFog           bool
 	localMinimap       bool
 	localRam           bool
+	localShipCollision bool
 	localLand          bool
 	// 命中特效 / 伤害数字 / 常显战舰状态：显示类开关，2026-10 从侧栏关卡设置迁入
 	localHitEffects    bool
@@ -270,6 +282,7 @@ func (s *UI) loadFromSettings(settings *config.GameSettings) {
 	s.localFog = settings.EnableFogOfWar
 	s.localMinimap = settings.EnableMinimap
 	s.localRam = settings.EnableRamming
+	s.localShipCollision = settings.EnableShipCollision
 	s.localLand = settings.EnableLandAirfield
 	s.localHitEffects = settings.DisplayHitEffects
 	s.localDamageNumbers = settings.DisplayDamageNumber
@@ -681,6 +694,19 @@ func (s *UI) buildRows(
 			s.settingRow(
 				i18n.MsgSettingsMinimap,
 				s.toggleCombo(s.localMinimap, func(v bool) { s.localMinimap = v }, comboFace, boxWidth, boxHeight),
+				labelFace,
+			),
+		)
+		rows.AddChild(
+			s.settingRow(
+				i18n.MsgSettingsShipCollision,
+				s.toggleCombo(
+					s.localShipCollision,
+					func(v bool) { s.localShipCollision = v },
+					comboFace,
+					boxWidth,
+					boxHeight,
+				),
 				labelFace,
 			),
 		)
@@ -1120,6 +1146,7 @@ func (s *UI) save() {
 	config.G.EnableFogOfWar = s.localFog
 	config.G.EnableMinimap = s.localMinimap
 	config.G.EnableRamming = s.localRam
+	config.G.EnableShipCollision = s.localShipCollision
 	config.G.EnableLandAirfield = s.localLand
 	config.G.DisplayHitEffects = s.localHitEffects
 	config.G.DisplayDamageNumber = s.localDamageNumbers

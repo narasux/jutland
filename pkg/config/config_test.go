@@ -222,6 +222,7 @@ func TestSaveGameSettingsRoundTripsAndRemovesTemp(t *testing.T) {
 		AI:                  AIStrategies{Attack: true, Scout: true},
 		EnableLandAirfield:  false,
 		EnableFogOfWar:      true,
+		EnableShipCollision: true,
 		EnableMinimap:       false,
 		DisplayHitEffects:   false,
 		DisplayDamageNumber: false,
@@ -242,6 +243,7 @@ func TestSaveGameSettingsRoundTripsAndRemovesTemp(t *testing.T) {
 	require.False(t, G.AI.Defend)
 	require.False(t, G.EnableLandAirfield)
 	require.True(t, G.EnableFogOfWar)
+	require.True(t, G.EnableShipCollision)
 	require.False(t, G.EnableMinimap)
 	require.False(t, G.DisplayHitEffects)
 	require.False(t, G.DisplayDamageNumber)

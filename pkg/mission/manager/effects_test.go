@@ -112,6 +112,63 @@ func TestStoppedShipWakeFadesOutInsteadOfLeavingIsolatedDots(t *testing.T) {
 	}
 }
 
+// TestStoppedTurningShipWakeFadesFasterThanIdleStop 验证停船后原地转向会把旧尾迹更快淡掉。
+// 场景：战舰 CurSpeed=0，海面留着 CurLife=100、LifeReductionRate=1 的尾迹；首帧按停船 30 帧淡出，
+// 随后舰体原地转到 90°，旧尾迹若继续按 30 帧淡出会悬在转开的舷侧，看起来像脱节的白条。
+// 预期：转向后 LifeReductionRate 从约 100/30 提升到约 100/12，再推进 12 帧尾迹全部回收；
+// 失败意味着舰体转完时旧航迹还留在原地。
+// 覆盖：同一组 Ships/Trails 连续调用 updateObjectTrails，先断言停船速率，再改 CurRotation 断言提速与回收。
+func TestStoppedTurningShipWakeFadesFasterThanIdleStop(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = oldSettings })
+
+	trail := newWakeTrail("ship")
+	ship := &objUnit.BattleShip{
+		Uid:          "ship",
+		CurHP:        100,
+		TotalHP:      100,
+		CurSpeed:     0,
+		CurPos:       objPos.NewR(10, 10),
+		CurRotation:  0,
+		BelongPlayer: faction.HumanAlpha,
+	}
+	manager := &MissionManager{
+		state: &state.MissionState{
+			Arena: state.MissionArenaState{
+				Ships:  map[string]*objUnit.BattleShip{"ship": ship},
+				Trails: []*objTrail.Trail{trail},
+			},
+		},
+	}
+
+	manager.updateObjectTrails()
+	idleRate := trail.LifeReductionRate
+	if idleRate <= 1 || idleRate > 100.0/stoppedShipTurningWakeFadeFrames {
+		t.Fatalf("idle stop fade rate = %v, want about 100/%d", idleRate, stoppedShipWakeFadeFrames)
+	}
+
+	ship.CurRotation = 90
+	manager.updateObjectTrails()
+	if trail.LifeReductionRate <= idleRate {
+		t.Fatalf(
+			"turning stop fade rate = %v, want faster than idle %v", trail.LifeReductionRate, idleRate,
+		)
+	}
+	if trail.LifeReductionRate < 100.0/stoppedShipTurningWakeFadeFrames-0.5 {
+		t.Fatalf(
+			"turning stop fade rate = %v, want at least about 100/%d",
+			trail.LifeReductionRate, stoppedShipTurningWakeFadeFrames,
+		)
+	}
+	for range stoppedShipTurningWakeFadeFrames {
+		manager.updateObjectTrails()
+	}
+	if len(manager.state.Arena.Trails) != 0 {
+		t.Fatalf("turning stop wake trails = %d, want 0", len(manager.state.Arena.Trails))
+	}
+}
+
 // TestMovingShipWakeKeepsNormalFade 验证航行中的战舰尾流不会套用停船加速淡出。
 // 场景：同一组尾流挂在 CurSpeed=0.1 的友方战舰 "ship" 上，updateObjectTrails 执行一帧。
 // 预期：trail.LifeReductionRate 保持 1；若大于 1 说明停船判定把航行中的船也算进去，

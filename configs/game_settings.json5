@@ -9,7 +9,8 @@
 // aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用
 // EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾
 // EnablePenetration: 实验性穿甲伤害开关，默认关闭；开启后按弹药穿深/舰体装甲缩放伤害
-// EnableRamming: 撞击系统开关，默认关闭；只影响普通战舰，水滴/巨大剑鱼始终开启
+// EnableRamming: 撞击伤害开关，默认关闭；只影响普通战舰，水滴/巨大剑鱼始终开启
+// EnableShipCollision: 舰体碰撞检查开关，默认开启；开启后不同阵营舰船不再重叠，友军仍可穿行
 // EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图
 // DisplayHitEffects: 命中特效总开关，默认开启；关闭后命中舰体 / 落水 / 落陆不再生成特效
 // DisplayDamageNumber: 是否显示命中伤害数字，默认开启
@@ -32,6 +33,7 @@
   "enableFogOfWar": false,
   "enablePenetration": false,
   "enableRamming": true,
+  "enableShipCollision": true,
   "enableMinimap": true,
   "displayHitEffects": true,
   "displayDamageNumber": true,

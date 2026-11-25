@@ -15,21 +15,38 @@ import (
 	"github.com/narasux/jutland/pkg/utils/colorx"
 )
 
-const stoppedShipWakeFadeFrames = 30
+const (
+	// stoppedShipWakeFadeFrames 停船后原地不动时，旧尾迹的淡出帧数。
+	stoppedShipWakeFadeFrames = 30
+	// stoppedShipTurningWakeFadeFrames 停船后原地转向时，旧尾迹必须更快淡出：
+	// 舰体绕中心旋转会把舰艉甩开，几十帧前留下的笔直尾迹会悬在舷侧，
+	// 看起来像一条与舰体脱节的白色药丸，而不是航迹。
+	stoppedShipTurningWakeFadeFrames = 12
+	// stoppedShipTurningFadeDegrees 停船后航向变化超过该角度即视为原地转向。
+	stoppedShipTurningFadeDegrees = 8
+)
 
 // 更新尾流状态（战舰，鱼雷，炮弹）
 func (m *MissionManager) updateObjectTrails() {
-	stationaryShips := map[string]bool{}
+	// 停船并原地转向的舰船需要加快旧尾迹淡出；记录每艘停船舰的淡出帧数。
+	stationaryShips := make(map[string]float64, len(m.state.Arena.Ships))
 	for uid, ship := range m.state.Arena.Ships {
-		if ship.CurSpeed <= 0 {
-			stationaryShips[uid] = true
+		turning := ship.ObserveWakeRest(stoppedShipTurningFadeDegrees)
+		if ship.CurSpeed > 0 {
+			continue
 		}
+		frames := float64(stoppedShipWakeFadeFrames)
+		if turning {
+			frames = stoppedShipTurningWakeFadeFrames
+		}
+		stationaryShips[uid] = frames
 	}
 	for i := 0; i < len(m.state.Arena.Trails); i++ {
 		trail := m.state.Arena.Trails[i]
 		if trail.OwnerUid != "" {
-			_, exists := m.state.Arena.Ships[trail.OwnerUid]
-			if !exists || stationaryShips[trail.OwnerUid] {
+			if frames, exists := stationaryShips[trail.OwnerUid]; exists {
+				trail.BeginStopFade(frames)
+			} else if _, exists := m.state.Arena.Ships[trail.OwnerUid]; !exists {
 				trail.BeginStopFade(stoppedShipWakeFadeFrames)
 			}
 		}

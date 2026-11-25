@@ -57,12 +57,9 @@ func aaHitChance(diameter int, vulnerability float64) float64 {
 }
 
 const (
-	// antiTorpedoThreatCorridor 鱼雷航迹到本舰中心的横向距离上限（地图格）。
-	// 只有真正朝本舰来的鱼雷才值得消耗防空炮装填，擦身而过的不管。
-	antiTorpedoThreatCorridor = 0.35
-	// antiTorpedoHitChance 单发炮弹穿过鱼雷命中框时的击毁概率。
-	// 鱼雷是海面小目标，即使弹丸扫过航迹也不保证引爆；这是反鱼雷强度的主调参点。
-	antiTorpedoHitChance = 0.05
+	// antiTorpedoBaseHitChance 未标注火控质量的手写炮弹使用的单发引爆概率。
+	// 正常射击由发射舰按舰种写入 AntiTorpedoChance（见 unit.DefaultAntiTorpedoProfile）。
+	antiTorpedoBaseHitChance = 0.05
 	// 鱼雷命中框（地图格）：约 10m × 4m，比舰体小一个数量级。
 	torpedoHitLengthCells = 0.08
 	torpedoHitWidthCells  = 0.03
@@ -204,19 +201,12 @@ func (m *MissionManager) shipFireTargets(ship *objUnit.BattleShip) objUnit.FireT
 		targets.AntiAircraft = antiAircraft
 	}
 	if ship.AntiTorpedoReady() {
-		if torpedo := m.nearestThreatTorpedo(ship); torpedo != nil {
+		if torpedo := m.nearestEnemyTorpedo(ship); torpedo != nil {
 			m.antiTorpedoTarget.Bullet = torpedo
 			targets.AntiTorpedo = &m.antiTorpedoTarget
 		}
 	}
 	return targets
-}
-
-// antiTorpedoCandidate 预存鱼雷航向，逐舰择敌时不再重复算三角函数。
-type antiTorpedoCandidate struct {
-	bullet   *objBullet.Bullet
-	forwardX float64
-	forwardY float64
 }
 
 // rebuildAntiTorpedoCandidates 收集本拍仍在航行的鱼雷。
@@ -228,60 +218,41 @@ func (m *MissionManager) rebuildAntiTorpedoCandidates() {
 			bt.HitObjType != object.TypeNone || bt.Life <= 0 {
 			continue
 		}
-		radians := bt.Rotation * math.Pi / 180
-		m.antiTorpedoCandidates = append(m.antiTorpedoCandidates, antiTorpedoCandidate{
-			bullet:   bt,
-			forwardX: math.Sin(radians),
-			forwardY: -math.Cos(radians),
-		})
+		m.antiTorpedoCandidates = append(m.antiTorpedoCandidates, bt)
 	}
 }
 
-// nearestThreatTorpedo 返回朝本舰航迹驶来、且在本舰反鱼雷射程内的最近鱼雷。
-func (m *MissionManager) nearestThreatTorpedo(ship *objUnit.BattleShip) *objBullet.Bullet {
+// nearestEnemyTorpedo 返回本舰反鱼雷射程内最近的敌方鱼雷。
+//
+// 不再判断「航迹是否穿过本舰」：机炮手看到贴水鱼雷就打，不再区分这枚雷是冲
+// 自己还是冲旁边的友舰。于是护航舰会顺手替主力舰挡雷，驱逐舰转向规避时也不会
+// 因为航迹偏离本舰而突然停火。代价只是一次拦截机会可能打在一枚本来擦身而过
+// 的鱼雷上。
+func (m *MissionManager) nearestEnemyTorpedo(ship *objUnit.BattleShip) *objBullet.Bullet {
 	maxRange := ship.Weapon.MaxToTorpedoRange
 	if maxRange <= 0 || len(m.antiTorpedoCandidates) == 0 {
 		return nil
 	}
 
 	var nearest *objBullet.Bullet
-	nearestDistanceSq := math.MaxFloat64
-	maxRangeSq := maxRange * maxRange
-	for _, candidate := range m.antiTorpedoCandidates {
-		torpedo := candidate.bullet
+	nearestDistanceSq := maxRange * maxRange
+	for _, torpedo := range m.antiTorpedoCandidates {
 		if torpedo.BelongPlayer == ship.BelongPlayer {
 			continue
 		}
 		dx, dy := ship.CurPos.RX-torpedo.CurPos.RX, ship.CurPos.RY-torpedo.CurPos.RY
 		distanceSq := dx*dx + dy*dy
-		if distanceSq > maxRangeSq || distanceSq >= nearestDistanceSq {
+		if distanceSq > nearestDistanceSq {
 			continue
 		}
-		if !torpedoOnCollisionCourseWithForward(dx, dy, candidate.forwardX, candidate.forwardY) {
+		// 射界都转不过去的雷不打：否则最近的那枚会把火控卡住，
+		// 直到它自己漂出射程才轮到真正冲本舰来的鱼雷。
+		if !ship.CanBearAntiTorpedo(torpedo.CurPos) {
 			continue
 		}
 		nearest, nearestDistanceSq = torpedo, distanceSq
 	}
 	return nearest
-}
-
-// torpedoOnCollisionCourse 判断鱼雷是否仍在本舰前方、且直线航迹会从本舰中心附近穿过。
-func torpedoOnCollisionCourse(shipPos objPos.MapPos, torpedo *objBullet.Bullet) bool {
-	radians := torpedo.Rotation * math.Pi / 180
-	return torpedoOnCollisionCourseWithForward(
-		shipPos.RX-torpedo.CurPos.RX,
-		shipPos.RY-torpedo.CurPos.RY,
-		math.Sin(radians), -math.Cos(radians),
-	)
-}
-
-// torpedoOnCollisionCourseWithForward 是航迹判定的核心：
-// dx / dy 为鱼雷指向本舰的位移，forward 为鱼雷单位航向。
-func torpedoOnCollisionCourseWithForward(dx, dy, forwardX, forwardY float64) bool {
-	if dx*forwardX+dy*forwardY <= 0 {
-		return false
-	}
-	return math.Abs(dx*forwardY-dy*forwardX) <= antiTorpedoThreatCorridor
 }
 
 // shipEngageRange 返回本舰对目标可用的最大射程：水下目标只算反潜武器与潜艇鱼雷。
@@ -889,8 +860,16 @@ func (m *MissionManager) updateShotBullets() {
 			) {
 				return false
 			}
-			// 弹丸扫过航迹只代表「有机会」，是否引爆由单发概率决定。
-			if objUnit.RandFloat64() >= antiTorpedoHitChance {
+			// 弹丸扫过航迹只代表「有机会」，是否引爆由单发概率决定：
+			// 发射舰火控质量（按舰种） × 鱼雷战斗部诱爆系数（轻雷好打、重雷难打）。
+			chance := bt.AntiTorpedoChance
+			if chance <= 0 {
+				chance = antiTorpedoBaseHitChance
+			}
+			// 一发炮弹只掷一次骰：命中框只有 0.08 格长，同一发弹可能在连续两拍
+			// 都压在同一条鱼雷上，重复掷骰会让实际概率翻倍，也让调参失真。
+			bt.TargetTorpedo = nil
+			if objUnit.RandFloat64() >= chance*torpedo.TorpedoDetonationFactor() {
 				return false
 			}
 			torpedo.HitObjType = object.TypeTorpedo

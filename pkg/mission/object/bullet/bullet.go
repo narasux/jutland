@@ -147,6 +147,9 @@ type Bullet struct {
 	TargetShipUid string `json:"-"`
 	// 反鱼雷弹药锁定的鱼雷；只有 TargetObjType == TypeTorpedo 的炮弹会用到
 	TargetTorpedo *Bullet `json:"-"`
+	// AntiTorpedoChance 反鱼雷炮弹的单发引爆概率，发射时由发射舰火控写入；
+	// 0 表示未标注（手写测试弹），结算时回落到管理端默认值
+	AntiTorpedoChance float64 `json:"-"`
 	// 最后一次已知的目标位置；目标消失后按它继续飞行
 	GuidePos objPos.MapPos `json:"-"`
 	// 离上次留下炮弹或鱼雷尾迹又飞过的距离，单位是地图格
@@ -176,6 +179,25 @@ func (b *Bullet) IsASWRocket() bool {
 // IsGuided 是否制导弹药
 func (b *Bullet) IsGuided() bool {
 	return b.Guidance != nil
+}
+
+const (
+	// torpedoDetonationRefDamage 鱼雷诱爆系数的基准战斗部伤害。
+	torpedoDetonationRefDamage = 4500.0
+	// torpedoDetonationFactorMin/Max 诱爆系数的上下限，避免极端战斗部把
+	// 反鱼雷概率放大到必中或压到归零。
+	torpedoDetonationFactorMin = 0.45
+	torpedoDetonationFactorMax = 2.2
+)
+
+// TorpedoDetonationFactor 返回鱼雷被单发机炮诱爆的相对难易（1 为基准）。
+// 战斗部越大，鱼雷越难被一发小口径弹引爆：航空雷 / 轻型反潜雷明显好拦，
+// 610mm 氧气雷与回天这类重雷更难。只用于反鱼雷结算。
+func (b *Bullet) TorpedoDetonationFactor() float64 {
+	if b.Damage <= 0 {
+		return 1
+	}
+	return min(torpedoDetonationFactorMax, max(torpedoDetonationFactorMin, torpedoDetonationRefDamage/b.Damage))
 }
 
 // SteerTowards 把弹头朝目标方向转一个受限制的角度（纯追踪）。

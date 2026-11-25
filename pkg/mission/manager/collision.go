@@ -22,19 +22,30 @@ import (
 const ramContactCellSize = 2.0
 
 // maxContactSeparation 单舰单拍的最大分离位移（地图格）。
-// 深穿透时不要一拍瞬移出去；常规接触（0.2~0.5 格）一到两拍即可推开。
+// 深穿透时分多拍推开，避免把船瞬间弹到另一侧。
 const maxContactSeparation = 0.5
 
 // contactSpeedKeep 舰艏正撞后保留的航速比例：正撞几乎停船，擦碰只掉少量航速。
 const contactSpeedKeep = 0.2
 
 // updateShipContacts 检测敌方舰船之间的接触：结算撞击伤害，并做碰撞分离与掉速。
-// 碰撞响应与 enableRamming 无关：即使关闭撞击伤害，舰船也不会再互相穿过。
+// 碰撞响应由 enableShipCollision 单独控制，与 enableRamming 无关：关闭撞击伤害时
+// 舰船仍会互相阻挡，关闭碰撞检查时只结算撞击伤害、舰体可继续重叠。
 // 友军不参与：不检测、不阻挡、不分离，保持现有的穿行行为。
 func (m *MissionManager) updateShipContacts() {
 	ships := m.state.Arena.OrderedShips()
 	if len(ships) == 0 {
 		return
+	}
+	ramActive := m.anyRamActive(ships)
+	collisionActive := shipCollisionActive()
+	if !ramActive && !collisionActive {
+		return
+	}
+	// 每艘舰每拍只处理一次分离，避免同一艘船被多对接触连续推走。
+	var separated map[string]struct{}
+	if collisionActive {
+		separated = make(map[string]struct{}, 8)
 	}
 
 	buckets := make(map[uint64][]*objUnit.BattleShip, len(ships))
@@ -71,22 +82,24 @@ func (m *MissionManager) updateShipContacts() {
 					}
 					// 先按撞击瞬间的航速结算伤害，再掉速 / 分离；
 					// 否则正撞会先把自己减到最低速，低于 minSpeed 而漏掉伤害。
-					var beganA, beganB bool
-					if a.Ram.Enabled() {
-						beganA = a.RamContactBegan(b.Uid)
+					// 接触开始标记同时服务撞击伤害与碰撞掉速，所以即使只开碰撞也要记录。
+					beganA := a.RamContactBegan(b.Uid)
+					beganB := b.RamContactBegan(a.Uid)
+					if ramActive {
+						m.tryRamShip(a, b, ct.PointX, ct.PointY, ct.NormalX, ct.NormalY, beganA)
+						m.tryRamShip(b, a, ct.PointX, ct.PointY, -ct.NormalX, -ct.NormalY, beganB)
 					}
-					if b.Ram.Enabled() {
-						beganB = b.RamContactBegan(a.Uid)
+					if collisionActive && a.CurHP > 0 && b.CurHP > 0 {
+						m.resolveShipContact(a, b, ct, beganA, beganB, separated)
 					}
-					m.tryRamShip(a, b, ct.PointX, ct.PointY, ct.NormalX, ct.NormalY, beganA)
-					m.tryRamShip(b, a, ct.PointX, ct.PointY, -ct.NormalX, -ct.NormalY, beganB)
-					m.resolveShipContact(a, b, ct, beganA, beganB)
 				}
 			}
 		}
 	}
 
-	m.updateShipPlaneContacts(ships)
+	if ramActive {
+		m.updateShipPlaneContacts(ships)
+	}
 }
 
 // updateShipPlaneContacts 处理 canHitPlanes 特殊单位（水滴）的撞机。
@@ -218,21 +231,30 @@ func ramSettingActive(ship *objUnit.BattleShip) bool {
 	return config.G != nil && config.G.EnableRamming
 }
 
-// ramMass 碰撞分离使用的质量代理：优先吨位，其次总血量，缺失时按 1。
-func ramMass(ship *objUnit.BattleShip) float64 {
-	if ship.Tonnage > 0 {
-		return ship.Tonnage
+// shipCollisionActive 舰体碰撞检查是否开启；与撞击伤害开关相互独立。
+// 默认开启：配置尚未加载时也按开启处理，避免旧配置缺少字段时舰体重新穿行。
+func shipCollisionActive() bool {
+	if config.G == nil {
+		return true
 	}
-	if ship.TotalHP > 0 {
-		return ship.TotalHP
+	return config.G.EnableShipCollision
+}
+
+// anyRamActive 本拍是否存在可结算撞击的舰船；用于跳过无关的接触/撞机遍历。
+func (m *MissionManager) anyRamActive(ships []*objUnit.BattleShip) bool {
+	for _, ship := range ships {
+		if contactShipAlive(ship) && ramSettingActive(ship) {
+			return true
+		}
 	}
-	return 1
+	return false
 }
 
 // resolveShipContact 处理一次接触的物理响应：掉速 + 按吨位分离。
 // 掉速只在接触开始那一拍施加，持续重叠时不会把航速逐拍乘到 0。
 func (m *MissionManager) resolveShipContact(
 	a, b *objUnit.BattleShip, ct geometry.RectContact, beganA, beganB bool,
+	separated map[string]struct{},
 ) {
 	if beganA {
 		applyContactSpeedLoss(a, ct.NormalX, ct.NormalY)
@@ -240,17 +262,7 @@ func (m *MissionManager) resolveShipContact(
 	if beganB {
 		applyContactSpeedLoss(b, -ct.NormalX, -ct.NormalY)
 	}
-	if ct.Depth <= 0 {
-		return
-	}
-	massA, massB := ramMass(a), ramMass(b)
-	total := massA + massB
-	if total <= 0 {
-		total = 1
-	}
-	// 法线从 B 指向 A：A 沿法线推出，B 沿反方向推出；大舰的位移更小。
-	m.shiftShipOutOfContact(a, ct.NormalX, ct.NormalY, min(ct.Depth*massB/total, maxContactSeparation))
-	m.shiftShipOutOfContact(b, -ct.NormalX, -ct.NormalY, min(ct.Depth*massA/total, maxContactSeparation))
+	m.trySeparateShips(a, b, separated)
 }
 
 // applyContactSpeedLoss 吃掉舰船朝对方运动的那部分航速。
@@ -268,25 +280,71 @@ func applyContactSpeedLoss(ship *objUnit.BattleShip, nx, ny float64) {
 	ship.CurSpeed *= 1 - (1-contactSpeedKeep)*into
 }
 
-// shiftShipOutOfContact 把舰船沿法线推开 dist 格；会把舰体推上岸或推出地图时放弃这次位移。
-func (m *MissionManager) shiftShipOutOfContact(ship *objUnit.BattleShip, nx, ny, dist float64) {
-	if dist <= 0 {
+// trySeparateShips 对一对接触舰船做一次位置分离。
+// 同一艘舰每拍只分离一次，余下的接触留到下一拍处理，避免多对接触叠加推挤。
+func (m *MissionManager) trySeparateShips(
+	a, b *objUnit.BattleShip, separated map[string]struct{},
+) {
+	if _, done := separated[a.Uid]; done {
 		return
 	}
-	next := ship.CurPos
-	next.AddRx(nx * dist)
-	next.AddRy(ny * dist)
-	if mapCfg := m.state.Core.MissionMD.MapCfg; mapCfg != nil {
-		next.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
-		if !ship.CanOnLand() {
-			before := objUnit.HullLandOverlapSamples(mapCfg, ship.CurPos, ship.CurRotation, ship.Length)
-			after := objUnit.HullLandOverlapSamples(mapCfg, next, ship.CurRotation, ship.Length)
-			if after > before {
-				return
-			}
+	if _, done := separated[b.Uid]; done {
+		return
+	}
+	if !m.separateShips(a, b) {
+		return
+	}
+	separated[a.Uid] = struct{}{}
+	separated[b.Uid] = struct{}{}
+}
+
+// separateShips 用当前重叠深度沿接触法线把双方推开，位移按吨位反比分配。
+// 只修正位置，不结算伤害；掉速在 resolveShipContact 里单独处理。
+// 某一边会被推上岸时只放弃该舰的位移，另一边仍可正常分开。
+func (m *MissionManager) separateShips(a, b *objUnit.BattleShip) bool {
+	ct := shipRectContactAt(a, a.CurPos.RX, a.CurPos.RY, b)
+	if !ct.OK || ct.Depth <= 0 || math.IsNaN(ct.Depth) {
+		return false
+	}
+	massA, massB := shipCollisionMass(a), shipCollisionMass(b)
+	totalMass := massA + massB
+	if totalMass <= 0 {
+		return false
+	}
+	// 法线从 B 指向 A：A 沿法线推出，B 沿反方向推出；大舰的位移更小。
+	shiftA := min(ct.Depth*massB/totalMass, maxContactSeparation)
+	shiftB := min(ct.Depth*massA/totalMass, maxContactSeparation)
+
+	mapCfg := m.state.Core.MissionMD.MapCfg
+	moved := false
+	if nextA, ok := a.CollisionShiftTarget(mapCfg, ct.NormalX*shiftA, ct.NormalY*shiftA); ok {
+		dx, dy := nextA.RX-a.CurPos.RX, nextA.RY-a.CurPos.RY
+		// 边界夹取可能把位移方向改反；只接受真正朝远离对方方向的位移。
+		if dx*ct.NormalX+dy*ct.NormalY > 0 {
+			a.ApplyCollisionShift(dx, dy)
+			moved = true
 		}
 	}
-	ship.CurPos = next
+	if nextB, ok := b.CollisionShiftTarget(mapCfg, -ct.NormalX*shiftB, -ct.NormalY*shiftB); ok {
+		dx, dy := nextB.RX-b.CurPos.RX, nextB.RY-b.CurPos.RY
+		if dx*(-ct.NormalX)+dy*(-ct.NormalY) > 0 {
+			b.ApplyCollisionShift(dx, dy)
+			moved = true
+		}
+	}
+	return moved
+}
+
+// shipCollisionMass 返回分离用的质量代理：优先用 Tonnage，缺失时回退 TotalHP。
+func shipCollisionMass(ship *objUnit.BattleShip) float64 {
+	mass := ship.Tonnage
+	if mass <= 0 || math.IsNaN(mass) || math.IsInf(mass, 0) {
+		mass = ship.TotalHP
+	}
+	if mass <= 0 || math.IsNaN(mass) || math.IsInf(mass, 0) {
+		mass = 1
+	}
+	return mass
 }
 
 // tryRamShip 对单个方向做舰艏、角度、接近速度与冷却判定，通过后结算撞击。

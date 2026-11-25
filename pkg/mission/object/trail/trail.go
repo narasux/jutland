@@ -88,8 +88,10 @@ func (t *Trail) Update() {
 }
 
 // BeginStopFade 让舰船停下后残留的整组尾流在指定帧数内同步淡出。
+// 允许用更短的帧数再次调用：停船后原地转向时，旧航迹需要在转完之前淡掉，
+// 否则舰艉转开后会留下一条悬在舷侧的直尾迹。
 func (t *Trail) BeginStopFade(frames float64) {
-	if t.stopFade || t.CurLife <= 0 {
+	if t.CurLife <= 0 {
 		return
 	}
 	t.stopFade = true

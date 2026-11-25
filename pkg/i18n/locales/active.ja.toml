@@ -269,7 +269,9 @@ other = "ダメージ表示"
 [SettingsShipState]
 other = "艦艇ステータス"
 [SettingsRamming]
-other = "体当たり（試験）"
+other = "体当たりダメージ"
+[SettingsShipCollision]
+other = "艦体衝突判定"
 [SettingsOn]
 other = "オン"
 [SettingsOff]

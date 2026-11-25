@@ -269,7 +269,9 @@ other = "顯示傷害數字"
 [SettingsShipState]
 other = "持續顯示戰艦狀態"
 [SettingsRamming]
-other = "撞擊系統（實驗）"
+other = "撞擊傷害"
+[SettingsShipCollision]
+other = "艦體碰撞檢查"
 [SettingsOn]
 other = "開"
 [SettingsOff]

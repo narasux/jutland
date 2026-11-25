@@ -44,6 +44,7 @@ const (
 	MsgSettingsDamageNumbers     MessageID = "SettingsDamageNumbers"
 	MsgSettingsShipState         MessageID = "SettingsShipState"
 	MsgSettingsRamming           MessageID = "SettingsRamming"
+	MsgSettingsShipCollision     MessageID = "SettingsShipCollision"
 	MsgSettingsOn                MessageID = "SettingsOn"
 	MsgSettingsOff               MessageID = "SettingsOff"
 	MsgSettingsSave              MessageID = "SettingsSave"

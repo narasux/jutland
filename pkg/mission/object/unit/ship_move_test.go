@@ -305,3 +305,55 @@ func TestMoveToReachesEastAndSouthMapEdge(t *testing.T) {
 		})
 	}
 }
+
+// TestCollisionShiftTargetRejectsLandPush 验证碰撞分离候选位置把舰体中心推上陆地时会被拒绝，
+// 朝外海的方向仍然可用。
+// 场景：8×3 地图 x=5 整列为陆地，200m 舰中心在 (4.9,1.5) 的水面，向东 0.2 格会进入陆格；
+// 碰撞分离若接受该位置，舰体会被顶上岸。
+// 预期：向东 (0.2,0) 返回 ok=false；向西 (-0.2,0) 返回 ok=true 且 RX=4.7；
+// 失败说明分离只做了几何计算，没有复用舰体压岸检查。
+// 覆盖：CollisionShiftTarget 两次调用，断言拒绝/接受与返回坐标。
+func TestCollisionShiftTargetRejectsLandPush(t *testing.T) {
+	rows := mapcfg.MapData{"SSSSSLSS", "SSSSSLSS", "SSSSSLSS"}
+	mapCfg := &mapcfg.MapCfg{Map: rows, Cells: rows.ToGridCells(), Width: 8, Height: 3}
+	ship := &BattleShip{
+		CurPos:      objPos.NewR(4.9, 1.5),
+		CurRotation: 0,
+		Length:      200,
+		Width:       40,
+	}
+	require.False(t, mapCfg.Map.IsLand(ship.CurPos.MX, ship.CurPos.MY), "前提：中心点应在水面")
+
+	if _, ok := ship.CollisionShiftTarget(mapCfg, 0.2, 0); ok {
+		t.Fatal("collision shift onto land must be rejected")
+	}
+	next, ok := ship.CollisionShiftTarget(mapCfg, -0.2, 0)
+	if !ok {
+		t.Fatal("collision shift away from land must be accepted")
+	}
+	require.InDelta(t, 4.7, next.RX, 1e-9)
+}
+
+// TestApplyCollisionShiftKeepsWakeSamplingAnchor 验证碰撞推挤会同步平移尾流采样锚点，
+// 避免把“被推开”误当成自航而在舷侧生成横向尾迹。
+// 场景：舰船已初始化尾流采样点 (4.8,5.1) 与当前位置 (5,5)，被碰撞沿 (+0.2,+0.3) 推开。
+// 预期：CurPos 与 lastWakeEmitPos 都平移相同向量，MX/MY 同步更新；失败意味着下一拍
+// 尾流距离判定会把 0.36 格的碰撞位移当成航行，立刻盖出一组横向白点。
+// 覆盖：直接调用 ApplyCollisionShift，断言两个位置与整数格坐标。
+func TestApplyCollisionShiftKeepsWakeSamplingAnchor(t *testing.T) {
+	ship := &BattleShip{
+		CurPos:               objPos.NewR(5, 5),
+		lastWakeEmitPos:      objPos.NewR(4.8, 5.1),
+		wakeTrailInitialized: true,
+	}
+	ship.ApplyCollisionShift(0.2, 0.3)
+
+	require.InDelta(t, 5.2, ship.CurPos.RX, 1e-9)
+	require.InDelta(t, 5.3, ship.CurPos.RY, 1e-9)
+	require.Equal(t, 5, ship.CurPos.MX)
+	require.Equal(t, 5, ship.CurPos.MY)
+	require.InDelta(t, 5.0, ship.lastWakeEmitPos.RX, 1e-9)
+	require.InDelta(t, 5.4, ship.lastWakeEmitPos.RY, 1e-9)
+	require.Equal(t, 5, ship.lastWakeEmitPos.MX)
+	require.Equal(t, 5, ship.lastWakeEmitPos.MY)
+}

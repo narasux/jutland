@@ -143,9 +143,12 @@ type GameSettings struct {
 	// EnablePenetration 实验性穿甲伤害总开关。默认关闭；开启后按弹药穿深/舰体装甲
 	// 计算伤害倍率，未穿透会显著减伤，过穿会略微增伤。
 	EnablePenetration bool `json:"enablePenetration"`
-	// EnableRamming 撞击系统总开关。默认关闭；只影响普通战舰的 `ram` 配置，
+	// EnableRamming 撞击伤害总开关。默认关闭；只影响普通战舰的 `ram` 配置，
 	// 配置了 `ram.alwaysOn` 的特殊单位（水滴 / 巨大剑鱼）不受此开关影响。
 	EnableRamming bool `json:"enableRamming"`
+	// EnableShipCollision 舰体碰撞检查总开关。默认开启；开启后不同阵营的
+	// 水面舰船接触时会互相推开并掉速，不再重叠。友军仍保持穿行。
+	EnableShipCollision bool `json:"enableShipCollision"`
 	// EnableMinimap 小地图总开关。默认开启：开局自动展开右上战术面板展示小地图；
 	// 关闭后依然可以点面板把手手动展开。
 	EnableMinimap bool `json:"enableMinimap"`
@@ -171,6 +174,7 @@ func NewDefaultGameSettings() *GameSettings {
 		AI:                  DefaultAIStrategies(),
 		EnableLandAirfield:  true,
 		EnableMinimap:       true,
+		EnableShipCollision: true,
 		DisplayHitEffects:   true,
 		DisplayDamageNumber: true,
 		ForceDisplayState:   true,
@@ -342,7 +346,8 @@ func SaveGameSettings() error {
 	_, _ = file.WriteString("// aiStrategies: 电脑可用策略，attack/defend/counter/raid/scout 为 false 时对局中不使用\n")
 	_, _ = file.WriteString("// EnableFogOfWar: 战争迷雾总开关，默认关闭；关闭时不计算迷雾\n")
 	_, _ = file.WriteString("// EnablePenetration: 实验性穿甲伤害开关，默认关闭；开启后按弹药穿深/舰体装甲缩放伤害\n")
-	_, _ = file.WriteString("// EnableRamming: 撞击系统开关，默认关闭；只影响普通战舰，水滴/巨大剑鱼始终开启\n")
+	_, _ = file.WriteString("// EnableRamming: 撞击伤害开关，默认关闭；只影响普通战舰，水滴/巨大剑鱼始终开启\n")
+	_, _ = file.WriteString("// EnableShipCollision: 舰体碰撞检查开关，默认开启；开启后不同阵营舰船不再重叠，友军仍可穿行\n")
 	_, _ = file.WriteString("// EnableMinimap: 小地图总开关，默认开启；开启时开局自动展开战术面板显示小地图\n")
 	_, _ = file.WriteString("// DisplayHitEffects: 命中特效总开关，默认开启；关闭后命中舰体 / 落水 / 落陆不再生成特效\n")
 	_, _ = file.WriteString("// DisplayDamageNumber: 是否显示命中伤害数字，默认开启\n")
