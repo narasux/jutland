@@ -1,13 +1,15 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
+# 受限沙箱内请用 `make commit`：它会为 pre-commit 和 Go 选择可写缓存。
 repos:
   - repo: local
     hooks:
+      # 只格式化已暂存的 Go 文件，避免提交时重写工作区里无关的改动。
       - id: format
         name: format code
-        entry: make fmt
+        entry: make fmt-staged
         types: [go]
-        language: golang
+        language: system
         pass_filenames: false
       # 每次提交前跑全量单测；测试失败会直接阻止 commit。
       # Ebiten 测试需要可用的图形会话，无 GUI 的 CI 请配合 xvfb 运行。

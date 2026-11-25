@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt commit vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-zoom sim-frame-gate sim-perf sim-suite sim-gate sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
+.PHONY: tidy build pack test commit fmt fmt-staged vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-zoom sim-frame-gate sim-perf sim-suite sim-gate sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -131,6 +131,13 @@ fmt: golines gofumpt
 	$(GOLINES) ./ -m 119 -w --base-formatter gofmt --no-reformat-tags
 	$(GOFUMPT) -l -w .
 
+# format only staged Go files; used by the pre-commit format hook
+fmt-staged: golines gofumpt
+	@set -e; git diff --cached --name-only --diff-filter=ACMR -- '*.go' | while IFS= read -r f; do \
+		[ -z "$$f" ] || $(GOLINES) -m 119 -w --base-formatter gofmt --no-reformat-tags "$$f"; \
+		[ -z "$$f" ] || $(GOFUMPT) -l -w "$$f"; \
+	done
+
 vet:
 	go vet ./...
 
@@ -143,11 +150,11 @@ GOLINES ?= $(LOCALBIN)/golines
 GOFUMPT ?= $(LOCALBIN)/gofumpt
 
 golines: $(GOLINES)
-$(GOLINES): $(LOCALBIN)
+$(GOLINES): | $(LOCALBIN)
 	GOBIN=$(LOCALBIN) go install github.com/segmentio/golines@v0.13.0
 
 gofumpt: $(GOFUMPT)
-$(GOFUMPT): $(LOCALBIN)
+$(GOFUMPT): | $(LOCALBIN)
 	GOBIN=$(LOCALBIN) go install mvdan.cc/gofumpt@v0.10.0
 
 # launch the browser-based ship turret position marker

@@ -42,7 +42,8 @@
 - 单元测试：`make test`
 - 构建：`make build`
 - 运行：`make build && ./jutland`
-- 提交前钩子：`.pre-commit-config.yaml` 会在每次 commit 前执行 `go test -count=1 ./...`；测试失败会阻止提交，不要用 `--no-verify` 绕过。
+- 提交：`make commit MSG="fix: xxx"` 或 `make commit MSG_FILE=/tmp/msg.txt`（受限沙箱内使用，见下）
+- 提交前钩子：`.pre-commit-config.yaml` 会先运行 `make fmt-staged`（只格式化已暂存的 Go 文件），再执行 `go test -count=1 ./...`；任一失败都会阻止提交，不要用 `--no-verify` 绕过。
 
 注意：
 
@@ -50,6 +51,8 @@
 - Ebiten 通常需要 CGO 和本机图形/音频环境。CI 或无 GUI 环境中，优先运行 `go test ./...`；不要假设可以启动游戏窗口。
 - pre-commit 的测试钩子同样受 Ebiten 图形环境限制：无 GUI 的终端/CI 需要先提供可用的图形会话（Linux 可用 xvfb），否则 Ebiten 初始化失败会被误判为测试失败。
 - 提交请用 `make commit MSG_FILE=<消息文件>`（或 `make commit MSG="<消息>"`）：pre-commit 钩子缓存默认在 `~/.cache/pre-commit`，受限沙箱（如 DSH workspace-write）不可写，直接 `git commit` 会要求额外授权；该目标在 `~/.cache` 不可写时把 `PRE_COMMIT_HOME` 退回 `/tmp/jutland-pre-commit`，并把 `GOCACHE` 设为 `/tmp/jutland-gocache`（可直接用 `PRE_COMMIT_HOME=... GOCACHE=...` 覆盖）。
+- `format` 钩子只处理已暂存的 Go 文件；如果它改写了格式，提交会被中止，重新 `git add` 后再 `make commit` 即可。
+- 新增 Go 依赖时 `go mod download` 仍会写 `~/go/pkg/mod`；受限沙箱可临时 `GOMODCACHE=/tmp/jutland-modcache`。
 - `make fmt` 依赖 `golines` 和 `gofumpt`，如果本机缺失，不要改用大范围手动格式化；说明未能执行即可。
 
 ## Go 编码约定
