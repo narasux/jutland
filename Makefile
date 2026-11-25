@@ -1,4 +1,4 @@
-.PHONY: tidy build pack test fmt vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-zoom sim-frame-gate sim-perf sim-suite sim-gate sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
+.PHONY: tidy build pack test fmt commit vet sim-ci sim-periodic sim-watch sim-archive sim-frame sim-frame-zoom sim-frame-gate sim-perf sim-suite sim-gate sim-nightly sim-schedule-install sim-schedule-uninstall sim-schedule-status golines gofumpt turret-marker
 
 ifdef VERSION
     VERSION=${VERSION}
@@ -112,6 +112,20 @@ pack:
 
 	# clean pack dir
 	rm -rf ./jutland-${VERSION}
+
+# 提交并跑 pre-commit 钩子。钩子缓存默认在 ~/.cache/pre-commit；受限沙箱（如
+# DSH workspace-write）下该目录写不进去，直接 git commit 会要求更高权限，因此
+# 探测写入失败时退回 /tmp。GOCACHE 同理指向临时目录。
+# 用法：make commit MSG_FILE=/tmp/msg.txt 或 make commit MSG="fix: xxx"
+PRE_COMMIT_HOME ?= $(shell d="$$HOME/.cache/pre-commit"; p="$$d/.write-probe-$$$$"; \
+	mkdir -p "$$d" 2>/dev/null && touch "$$p" 2>/dev/null && rm -f "$$p" \
+	&& echo "$$d" || echo /tmp/jutland-pre-commit)
+GOCACHE ?= /tmp/jutland-gocache
+
+commit:
+	@test -n "$(MSG_FILE)$(MSG)" || (echo "Usage: make commit MSG_FILE=path/to/msg.txt | MSG='message'" && exit 1)
+	PRE_COMMIT_HOME="$(PRE_COMMIT_HOME)" GOCACHE="$(GOCACHE)" \
+		git commit $(if $(MSG_FILE),-F "$(MSG_FILE)",-m "$(MSG)")
 
 fmt: golines gofumpt
 	$(GOLINES) ./ -m 119 -w --base-formatter gofmt --no-reformat-tags

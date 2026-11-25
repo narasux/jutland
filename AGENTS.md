@@ -49,7 +49,7 @@
 - 以 `go.mod` 中的 Go 版本为准。
 - Ebiten 通常需要 CGO 和本机图形/音频环境。CI 或无 GUI 环境中，优先运行 `go test ./...`；不要假设可以启动游戏窗口。
 - pre-commit 的测试钩子同样受 Ebiten 图形环境限制：无 GUI 的终端/CI 需要先提供可用的图形会话（Linux 可用 xvfb），否则 Ebiten 初始化失败会被误判为测试失败。
-- 测试钩子继承当前 shell 的 `GOCACHE`；如果默认缓存目录不可写（受限沙箱/CI），先 `export GOCACHE=/tmp/jutland-gocache` 再提交。
+- 提交请用 `make commit MSG_FILE=<消息文件>`（或 `make commit MSG="<消息>"`）：pre-commit 钩子缓存默认在 `~/.cache/pre-commit`，受限沙箱（如 DSH workspace-write）不可写，直接 `git commit` 会要求额外授权；该目标在 `~/.cache` 不可写时把 `PRE_COMMIT_HOME` 退回 `/tmp/jutland-pre-commit`，并把 `GOCACHE` 设为 `/tmp/jutland-gocache`（可直接用 `PRE_COMMIT_HOME=... GOCACHE=...` 覆盖）。
 - `make fmt` 依赖 `golines` 和 `gofumpt`，如果本机缺失，不要改用大范围手动格式化；说明未能执行即可。
 
 ## Go 编码约定
