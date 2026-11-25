@@ -27,13 +27,16 @@
     criticalRate: 0.001
   },
   // --------- 火箭弹 ----------
-  // 中国海军 250mm 65 式反潜火箭弹（反潜火箭，使用 250 专用火箭弹贴图）
+  // 中国海军 250mm 65 式反潜火箭深弹（RBU-1200 仿制型；按火箭弹飞行，落点按深弹 AoE 结算，只伤潜艇；
+  // 贴图与刺猬弹同放 depth_charges/250.png）
   {
     name: "CN/RB/250/1965/Type65",
-    type: "depth_charge",
+    type: "rocket",
     diameter: 250,
     damage: 1800,
-    criticalRate: 0
+    criticalRate: 0,
+    // 火箭深弹：由反潜火箭发射器投放，可命中下潜潜艇
+    antiSubmarine: true
   },
   // 中国海军 81 式 122mm 舰载火箭弹（仿苏 BM-21「冰雹」M-21OF；仅 516 九江舰对陆火力支援舰使用）
   {

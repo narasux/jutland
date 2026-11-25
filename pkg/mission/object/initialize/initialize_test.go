@@ -520,6 +520,58 @@ func TestSpecialPlanesUseDedicatedLongRangeOrdnance(t *testing.T) {
 	}
 }
 
+// TestEveryConfiguredRocketHasDisplayImage 验证 bullets.json5 中每种火箭弹都能取到显示贴图。
+// 场景：65 式 250mm 反潜火箭的贴图与刺猬弹同放在 depth_charges/250.png，若 GetImgOf 没有把
+// 火箭深弹路由到深弹贴图，drawShotBullets 会画出红色 NotFount 占位图。
+// 预期：遍历 BulletMap 的所有 rocket，GetImgOf 都不等于 NotFount。
+// 覆盖：以配置驱动全量检查，普通火箭走 rockets/、反潜火箭走 depth_charges/，失败会打印弹药名与口径。
+func TestEveryConfiguredRocketHasDisplayImage(t *testing.T) {
+	for name, bullet := range objBullet.Map {
+		if bullet.Type != objBullet.TypeRocket {
+			continue
+		}
+		if img := objBullet.GetImgOf(bullet); img == bulletImg.NotFount {
+			t.Fatalf("rocket %q diameter %d has no image asset", name, bullet.Diameter)
+		}
+	}
+}
+
+// TestType65ASWRocketKeepsRocketType 验证 65 式 250mm 反潜火箭保持火箭弹类型、250mm 口径和深弹贴图。
+// 场景：该弹曾在反潜改造中被写成 type=depth_charge、diameter=300，导致 250mm 火箭按 300 磅深弹
+// 绘制并套用大号水花；现在弹体按 rocket 飞行，但贴图与刺猬弹同放 depth_charges/。
+// 预期：BulletMap 中 Type=TypeRocket、Diameter=250、CanHitSubmerged=true，GetImgOf 返回
+// depth_charges/250 贴图；RocketLauncherMap 的 CN/250/5/Type65 仍指向该弹且 AntiSubmarine=true。
+// 覆盖：读取初始化后的弹药与发射器全局映射，断言类型、口径、反潜能力、贴图路由与弹种引用。
+func TestType65ASWRocketKeepsRocketType(t *testing.T) {
+	bullet := objBullet.Map["CN/RB/250/1965/Type65"]
+	if bullet == nil {
+		t.Fatal("CN/RB/250/1965/Type65 missing from BulletMap")
+	}
+	if bullet.Type != objBullet.TypeRocket {
+		t.Fatalf("Type65 bullet type = %q, want %q", bullet.Type, objBullet.TypeRocket)
+	}
+	if bullet.Diameter != 250 {
+		t.Fatalf("Type65 bullet diameter = %d, want 250", bullet.Diameter)
+	}
+	if !bullet.CanHitSubmerged() {
+		t.Fatal("Type65 ASW rocket should hit submerged submarines")
+	}
+	if img := objBullet.GetImgOf(bullet); img != bulletImg.GetDepthCharge(250) {
+		t.Fatal("Type65 ASW rocket should reuse depth_charges/250.png with Hedgehog")
+	}
+
+	launcher := objUnit.RocketLauncherMap["CN/250/5/Type65"]
+	if launcher == nil {
+		t.Fatal("CN/250/5/Type65 missing from RocketLauncherMap")
+	}
+	if launcher.BulletName != "CN/RB/250/1965/Type65" {
+		t.Fatalf("Type65 launcher bullet = %q, want CN/RB/250/1965/Type65", launcher.BulletName)
+	}
+	if !launcher.AntiSubmarine {
+		t.Fatal("Type65 launcher should stay anti-submarine")
+	}
+}
+
 // TestEveryConfiguredShellHasImage 验证 bullets.json5 中每种炮弹都有对应口径素材。
 // 场景：蒙特雷的 US/GB/254/1890 使用 254mm 口径，而 shellDiameters 曾漏登记 254，
 // GetShell 会返回红色 NotFount 占位图；其他配置炮弹也可能后续新增类似口径。

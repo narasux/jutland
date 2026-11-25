@@ -65,6 +65,40 @@ func TestDepthChargeOnlyDamagesSubmarines(t *testing.T) {
 	require.Equal(t, 100.0, destroyer.CurHP, "深弹不伤水面舰")
 }
 
+// TestDepthChargeBlastHitsEverySubmarineInRadius 验证普通深弹一次落点会结算半径内所有潜艇，而不是只打瞄准目标。
+// 场景：Mk6 300 磅深弹在 (10,10) 引爆，BlastRadius=1.3；两艘下潜潜艇分别在 (10,10) 与 (10.8,10)，
+// 都被 HumanAlpha 点亮至 110；另有一艘水面驱逐舰在 (10.3,10)。
+// 预期：两艘潜艇都掉血、驱逐舰保持 100 HP；失败意味着普通深弹退回单目标直击，或 AoE 只结算瞄准艇。
+// 覆盖：depthChargeState 放三舰并 rebuildCombatBuckets，调 resolveDepthChargeDamage 后逐舰断言 CurHP。
+func TestDepthChargeBlastHitsEverySubmarineInRadius(t *testing.T) {
+	aimed := &objUnit.BattleShip{
+		Uid: "aimed", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+	}
+	nearby := &objUnit.BattleShip{
+		Uid: "nearby", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeSubmarine,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10.8, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+	}
+	destroyer := &objUnit.BattleShip{
+		Uid: "dd", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeDestroyer,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10.3, 10),
+	}
+	ms := depthChargeState(aimed, nearby, destroyer)
+	aimed.MarkDetected(faction.HumanAlpha, ms.Core.SimTick+10, aimed.CurPos)
+	nearby.MarkDetected(faction.HumanAlpha, ms.Core.SimTick+10, nearby.CurPos)
+
+	m := &MissionManager{state: ms}
+	m.rebuildCombatBuckets()
+	bt := newDepthCharge(objPos.NewR(10, 10), faction.HumanAlpha)
+	m.resolveDepthChargeDamage(bt)
+
+	require.Less(t, aimed.CurHP, 100.0, "瞄准点上的潜艇应受伤")
+	require.Less(t, nearby.CurHP, 100.0, "爆炸半径内的另一艘潜艇也应受伤")
+	require.Equal(t, 100.0, destroyer.CurHP, "普通深弹仍只结算潜艇")
+}
+
 // TestDepthChargeBlindFireDoesNotDamage 验证未探测到水下潜艇时深弹盲炸不结算伤害。
 // 场景：sub 在 (10,10) 完全下潜且 Submarine.DetectedBy 为空，HumanAlpha 的深弹在同一点引爆。
 // 预期：resolveDepthChargeDamage 因 CanSeeShip 为 false 跳过该艇，CurHP 保持 100。
@@ -145,6 +179,44 @@ func TestDepthChargePipelineThroughShotBullets(t *testing.T) {
 
 	require.Less(t, sub.CurHP, 3000.0, "深弹应通过通用弹药循环结算到潜艇")
 	require.Empty(t, ms.Arena.ForwardingBullets, "深弹引爆后不应继续飞行")
+}
+
+// TestASWRocketPipelineOnlyDamagesSubmarines 验证 65 式火箭深弹按火箭弹飞行，但落点仍走深弹 AoE 且只伤潜艇。
+// 场景：3000 HP 下潜潜艇被点亮至 500 拍，艇旁 0.3 格停一艘 100 HP 敌驱逐舰；250mm 火箭弹以
+// TypeRocket + AntiSubmarine 进入弹药队列，近炸半径 0.25、爆炸半径 0.9，起点即瞄准点。
+// 预期：潜艇掉血、驱逐舰保持 100 HP、弹药从 ForwardingBullets 移除；失败意味着火箭深弹退回普通火箭直击，
+// 或把水面舰也纳入落点 AoE。
+// 覆盖：构造带反潜标记的火箭实例执行一次 updateShotBullets，断言双方 CurHP 与队列长度，覆盖
+// TypeRocket 的深弹引爆分支。
+func TestASWRocketPipelineOnlyDamagesSubmarines(t *testing.T) {
+	sub := &objUnit.BattleShip{
+		Uid: "sub", CurHP: 3000, TotalHP: 3000, Type: objUnit.ShipTypeSubmarine,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+	}
+	sub.MarkDetected(faction.HumanAlpha, 500, sub.CurPos)
+	escort := &objUnit.BattleShip{
+		Uid: "escort", CurHP: 100, TotalHP: 100, Type: objUnit.ShipTypeDestroyer,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10.3, 10),
+	}
+	ms := depthChargeState(sub, escort)
+	ms.Core.SimTick = 100
+
+	bt := &objBullet.Bullet{
+		Name: "CN/RB/250/1965/Type65", Type: objBullet.TypeRocket, AntiSubmarine: true,
+		Damage: 1000, CurPos: objPos.NewR(10, 10), TargetPos: objPos.NewR(10, 10),
+		ProximityRadius: 0.25, BlastRadius: 0.9, Speed: 0.03, Life: 40,
+		Shooter: "shooter", ShooterObjType: object.TypeShip,
+		BelongPlayer: faction.HumanAlpha, TargetObjType: object.TypeShip,
+	}
+	ms.Arena.ForwardingBullets = []*objBullet.Bullet{bt}
+
+	m := &MissionManager{state: ms}
+	m.updateShotBullets()
+
+	require.Less(t, sub.CurHP, 3000.0, "火箭深弹应在落点 AoE 中伤到潜艇")
+	require.Equal(t, 100.0, escort.CurHP, "火箭深弹不应伤到水面舰")
+	require.Empty(t, ms.Arena.ForwardingBullets, "火箭深弹引爆后不应继续飞行")
 }
 
 // TestDepthChargeRackCanFireAhead 验证舰艏正对目标时前方深弹架仍能按左右射界投放。

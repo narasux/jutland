@@ -714,7 +714,7 @@ func beyondHitReach(bx, by, tx, ty, reach float64) bool {
 	return dx*dx+dy*dy > reach*reach
 }
 
-// depthChargeShouldExplode 深弹到瞄准点附近 / 越过瞄准点 / 寿命耗尽 / 直接砸中舰体时引爆。
+// depthChargeShouldExplode 深弹 / 火箭深弹到瞄准点附近 / 越过瞄准点 / 寿命耗尽 / 直接砸中舰体时引爆。
 func (m *MissionManager) depthChargeShouldExplode(bt *objBullet.Bullet) bool {
 	if bt.Life <= 0 {
 		return true
@@ -729,10 +729,14 @@ func (m *MissionManager) depthChargeShouldExplode(bt *objBullet.Bullet) bool {
 		return true
 	}
 	// 深弹从投弹舰舰尾投放，起点就在本方舰体内；不能把自己当成「直接砸中舰体」。
+	// 火箭深弹从发射器前方出管，也不靠砸中舰体引爆，交给近炸 / 越过瞄准点 / 寿命判定。
+	if bt.Type != objBullet.TypeDepthCharge {
+		return false
+	}
 	return m.insideAnyHull(bt.CurPos, bt.Shooter)
 }
 
-// resolveDepthChargeDamage 深弹落点 AoE：只结算潜艇。
+// resolveDepthChargeDamage 深弹 / 火箭深弹落点 AoE：只结算潜艇。
 // 水面 / 过渡态潜艇按水面规则结算；完全下潜的还要求仍被本方探测到（盲炸无效）。
 // 走 hurtShip 而不是直接 HurtBy，保证战报能记下投弹方、武器与伤害。
 func (m *MissionManager) resolveDepthChargeDamage(bt *objBullet.Bullet) {
@@ -956,8 +960,8 @@ func (m *MissionManager) updateShotBullets() {
 			arrivedBullets = append(arrivedBullets, bt)
 			continue
 		}
-		// 深水炸弹：独立引爆分支，不走通用命中结算（只伤潜艇）
-		if bt.Type == objBullet.TypeDepthCharge {
+		// 深水炸弹 / 火箭深弹：独立引爆分支，不走通用命中结算（只伤潜艇）
+		if bt.Type == objBullet.TypeDepthCharge || bt.IsASWRocket() {
 			if m.depthChargeShouldExplode(bt) {
 				m.resolveDepthChargeDamage(bt)
 				arrivedBullets = append(arrivedBullets, bt)
@@ -1181,6 +1185,12 @@ const (
 	hedgehogSplashCells = 0.55
 	hedgehogSplashLife  = 20
 
+	// 250mm 65 式火箭深弹：弹体是火箭，战斗部比 300 磅深弹小，落点效果取两者之间
+	aswRocketPlumeCells  = 1.0
+	aswRocketPlumeLife   = 40
+	aswRocketSplashCells = 1.2
+	aswRocketSplashLife  = 40
+
 	// 落水水花 / 落陆尘土的目标直径（地图格）按口径档位索引，见下方 splashCells / dustCells
 	// 炸弹落点比同口径炮弹更铺开
 	bombSplashCells = 0.8
@@ -1250,6 +1260,13 @@ func hitEffect(bt *objBullet.Bullet) (objExplosion.Kind, float64, int, bool) {
 			return objExplosion.KindTorpedoPlume, depthChargePlumeCells, depthChargePlumeLife, true
 		}
 		return objExplosion.KindSplash, depthChargeSplashCells, depthChargeSplashLife, true
+	}
+	// 火箭深弹：飞行和尾迹按火箭弹，落点仍是深弹水柱 / 水花，但不套用 300 磅深弹的尺寸
+	if bt.IsASWRocket() {
+		if bt.HitObjType == object.TypeShip {
+			return objExplosion.KindTorpedoPlume, aswRocketPlumeCells, aswRocketPlumeLife, true
+		}
+		return objExplosion.KindSplash, aswRocketSplashCells, aswRocketSplashLife, true
 	}
 	// 火箭空爆在发射阶段已有自己的效果，不重复生成
 	if bt.Type == objBullet.TypeRocket {

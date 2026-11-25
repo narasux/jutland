@@ -82,7 +82,10 @@ func RunDuel(sc *sim.Scenario, startedAt time.Time) (*sim.Result, error) {
 			if shot.ShooterType == string(objUnit.ShipTypeSubmarine) {
 				subShots++
 			}
-			if shot.AmmoType == string(objBullet.TypeDepthCharge) {
+			// 深弹与 65 式火箭深弹都算反潜投射；后者按 rocket 类型飞行
+			if shot.AmmoType == string(objBullet.TypeDepthCharge) ||
+				(shot.AmmoType == string(objBullet.TypeRocket) &&
+					strings.Contains(shot.WeaponName, "Type65")) {
 				aswShots++
 			}
 		}

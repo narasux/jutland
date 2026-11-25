@@ -257,8 +257,8 @@ func TestSteerTowardsRequiresGuidance(t *testing.T) {
 }
 
 // TestCanHitSubmergedByAmmoType 验证能否命中下潜潜艇由弹药类型与反潜标记决定。
-// 场景：表驱动 7 组：深弹、反潜鱼雷、潜艇鱼雷、普通鱼雷、炮弹、炸弹、火箭。
-// 预期：仅前三种返回 true，其余 false；失败意味着深弹失效或炮弹误伤水下目标。
+// 场景：表驱动 8 组：深弹、反潜鱼雷、潜艇鱼雷、普通鱼雷、炮弹、炸弹、普通火箭、反潜火箭。
+// 预期：深弹、反潜鱼雷、潜艇鱼雷、反潜火箭返回 true，其余 false；失败意味着反潜火箭失效或普通火箭误伤水下目标。
 // 覆盖：逐项 assert.Equal 覆盖 Type 分支与 AntiSubmarine/SubmarineLaunched 两个标记。
 func TestCanHitSubmergedByAmmoType(t *testing.T) {
 	cases := []struct {
@@ -272,7 +272,8 @@ func TestCanHitSubmergedByAmmoType(t *testing.T) {
 		{"surface torpedo", Bullet{Type: TypeTorpedo}, false},
 		{"shell", Bullet{Type: TypeShell}, false},
 		{"bomb", Bullet{Type: TypeBomb}, false},
-		{"rocket", Bullet{Type: TypeRocket}, false},
+		{"regular rocket", Bullet{Type: TypeRocket}, false},
+		{"anti-submarine rocket", Bullet{Type: TypeRocket, AntiSubmarine: true}, true},
 	}
 	for _, tc := range cases {
 		assert.Equal(t, tc.want, tc.bt.CanHitSubmerged(), tc.name)

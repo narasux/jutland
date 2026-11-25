@@ -135,7 +135,7 @@ type Bullet struct {
 	HitObjType object.Type
 	// 近炸触发半径，火箭弹与对空编程炮弹使用
 	ProximityRadius float64
-	// 反潜弹药：鱼雷 / 深弹专用标记，可命中水下潜艇
+	// 反潜弹药：鱼雷 / 火箭深弹专用标记，可命中水下潜艇
 	AntiSubmarine bool `json:"antiSubmarine"`
 	// 由潜艇发射的鱼雷（水面舰普通鱼雷打不到下潜潜艇）
 	SubmarineLaunched bool `json:"-"`
@@ -154,16 +154,23 @@ type Bullet struct {
 }
 
 // CanHitSubmerged 能否命中完全下潜的潜艇。
-// 深弹恒真；鱼雷看是否为反潜鱼雷或潜艇自身发射；其余弹药一律打不到水下。
+// 深弹恒真；火箭深弹与鱼雷看反潜标记，潜艇自身鱼雷恒真；其余弹药一律打不到水下。
 func (b *Bullet) CanHitSubmerged() bool {
 	switch b.Type {
 	case TypeDepthCharge:
 		return true
+	case TypeRocket:
+		return b.AntiSubmarine
 	case TypeTorpedo:
 		return b.AntiSubmarine || b.SubmarineLaunched
 	default:
 		return false
 	}
+}
+
+// IsASWRocket 是否为火箭深弹（反潜火箭）：按火箭弹飞行并画尾迹，落点按深弹 AoE 结算。
+func (b *Bullet) IsASWRocket() bool {
+	return b.Type == TypeRocket && b.AntiSubmarine
 }
 
 // IsGuided 是否制导弹药
@@ -391,6 +398,14 @@ func GetImg(btType Type, diameter int) *ebiten.Image {
 		return bulletImg.GetLaser(diameter)
 	}
 	return bulletImg.NotFount
+}
+
+// GetImgOf 获取弹药显示图片；火箭深弹与刺猬弹等深弹共用 depth_charges 贴图目录。
+func GetImgOf(b *Bullet) *ebiten.Image {
+	if b.IsASWRocket() {
+		return bulletImg.GetDepthCharge(b.Diameter)
+	}
+	return GetImg(b.Type, b.Diameter)
 }
 
 var BulletImgWidthMap = map[string]int{}

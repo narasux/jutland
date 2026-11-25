@@ -94,6 +94,46 @@ func TestHedgehogHitEffectIsSmallerThanDepthCharge(t *testing.T) {
 	}
 }
 
+// TestASWRocketHitEffectIsSmallerThanDepthCharge 验证火箭深弹使用自己的落点特效，不套用 300 磅深弹的大水花。
+// 场景：250mm 65 式火箭深弹以 TypeRocket + AntiSubmarine 命中潜艇 / 落水；整枚弹若按 TypeDepthCharge
+// 结算，会画出 1.6 格水柱 / 2.4 格水花，与 300mm 深弹混为一谈。
+// 预期：命中舰体为 KindTorpedoPlume 且 scale/life 小于普通深弹；落水为 KindSplash 且 scale/life 小于
+// 普通深弹、大于刺猬弹；水花仍压在舰船下层。
+// 覆盖：hitEffect 的 IsASWRocket 分支、aswRocketPlumeCells/Life 与 aswRocketSplashCells/Life。
+func TestASWRocketHitEffectIsSmallerThanDepthCharge(t *testing.T) {
+	hit := &objBullet.Bullet{
+		Type: objBullet.TypeRocket, AntiSubmarine: true,
+		HitObjType: object.TypeShip, Diameter: 250,
+	}
+	kind, scale, life, ok := hitEffect(hit)
+	if !ok || kind != objExplosion.KindTorpedoPlume {
+		t.Fatalf("ASW rocket hit effect = (%v, %v, %v, %v), want torpedo plume", kind, scale, life, ok)
+	}
+	if scale >= depthChargePlumeCells || life >= depthChargePlumeLife {
+		t.Fatalf("ASW rocket plume = (%.2f, %d), want smaller than (%.2f, %d)",
+			scale, life, depthChargePlumeCells, depthChargePlumeLife)
+	}
+
+	miss := &objBullet.Bullet{
+		Type: objBullet.TypeRocket, AntiSubmarine: true,
+		HitObjType: object.TypeWater, Diameter: 250,
+	}
+	kind, scale, life, ok = hitEffect(miss)
+	if !ok || kind != objExplosion.KindSplash {
+		t.Fatalf("ASW rocket splash effect = (%v, %v, %v, %v), want splash", kind, scale, life, ok)
+	}
+	if scale >= depthChargeSplashCells || life >= depthChargeSplashLife {
+		t.Fatalf("ASW rocket splash = (%.2f, %d), want smaller than (%.2f, %d)",
+			scale, life, depthChargeSplashCells, depthChargeSplashLife)
+	}
+	if scale <= hedgehogSplashCells {
+		t.Fatalf("ASW rocket splash = %.2f, want larger than hedgehog %.2f", scale, hedgehogSplashCells)
+	}
+	if kind.OverShips() {
+		t.Fatal("ASW rocket splash is a water effect and should stay under ships")
+	}
+}
+
 // TestHitEffectOnWaterAndLand 验证落水出水花、落陆出尘土，尺寸随口径增大，小口径防空弹两者都不生成。
 // 场景：20/127/460mm 炮弹分别打在 TypeWater 与 TypeLand 上调用 hitEffect；另比较 127mm 与 460mm 的水花尺寸。
 // 预期：20mm 落水、落陆均 ok=false；127/460mm 落水为 KindSplash、落陆为 KindDust，scale/life 为正，且 127mm 水花小于 460mm。
