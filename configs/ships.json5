@@ -19,6 +19,13 @@
     width: 10.8,
     fundsCost: 40,
     timeCost: 16,
+    ram: {
+      damage: 442.52,
+      cooldown: 5,
+      selfDamageRatio: 0.28,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -145,6 +152,13 @@
     width: 36,
     fundsCost: 820,
     timeCost: 147,
+    ram: {
+      damage: 41067,
+      cooldown: 4,
+      selfDamageRatio: 0.1185,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -452,6 +466,13 @@
     width: 40,
     fundsCost: 750,
     timeCost: 138,
+    ram: {
+      damage: 31648.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1185,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -808,6 +829,13 @@
     width: 34,
     fundsCost: 575,
     timeCost: 115,
+    ram: {
+      damage: 21388.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -1000,6 +1028,13 @@
     width: 36,
     fundsCost: 625,
     timeCost: 121,
+    ram: {
+      damage: 25769.025,
+      cooldown: 4,
+      selfDamageRatio: 0.1211,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -1213,6 +1248,13 @@
     width: 27,
     fundsCost: 400,
     timeCost: 92,
+    ram: {
+      damage: 9482.25,
+      cooldown: 4,
+      selfDamageRatio: 0.1316,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -1465,6 +1507,13 @@
     width: 26.5,
     fundsCost: 220,
     timeCost: 80,
+    ram: {
+      damage: 6765.12,
+      cooldown: 4,
+      selfDamageRatio: 0.1954,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -1646,6 +1695,13 @@
     width: 26.5,
     fundsCost: 255,
     timeCost: 92,
+    ram: {
+      damage: 6987.84,
+      cooldown: 4,
+      selfDamageRatio: 0.1954,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -1876,6 +1932,13 @@
     width: 28,
     fundsCost: 265,
     timeCost: 95,
+    ram: {
+      damage: 7497.36,
+      cooldown: 4,
+      selfDamageRatio: 0.1938,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -2208,6 +2271,13 @@
     width: 22,
     fundsCost: 210,
     timeCost: 76,
+    ram: {
+      damage: 4512.768,
+      cooldown: 4,
+      selfDamageRatio: 0.2,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -2319,6 +2389,13 @@
     width: 18,
     fundsCost: 150,
     timeCost: 54,
+    ram: {
+      damage: 2481.6,
+      cooldown: 4,
+      selfDamageRatio: 0.2046,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -2435,6 +2512,13 @@
     width: 13,
     fundsCost: 120,
     timeCost: 44,
+    ram: {
+      damage: 969,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -2505,6 +2589,13 @@
     width: 13.7,
     fundsCost: 150,
     timeCost: 55,
+    ram: {
+      damage: 1252.5,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -2631,6 +2722,13 @@
     width: 11.7,
     fundsCost: 110,
     timeCost: 41,
+    ram: {
+      damage: 807.9,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -2730,6 +2828,13 @@
     width: 9.5,
     fundsCost: 65,
     timeCost: 25,
+    ram: {
+      damage: 479.1,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -6580,6 +6685,13 @@
     width: 37,
     fundsCost: 710,
     timeCost: 132,
+    ram: {
+      damage: 26966.25,
+      cooldown: 4,
+      selfDamageRatio: 0.1211,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -7360,6 +7472,13 @@
     width: 33,
     fundsCost: 620,
     timeCost: 121,
+    ram: {
+      damage: 21750,
+      cooldown: 4,
+      selfDamageRatio: 0.1237,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -7937,6 +8056,13 @@
     width: 33,
     fundsCost: 545,
     timeCost: 111,
+    ram: {
+      damage: 16905,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -8570,6 +8696,13 @@
     width: 33,
     fundsCost: 560,
     timeCost: 114,
+    ram: {
+      damage: 16464,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -9105,6 +9238,13 @@
     width: 35,
     fundsCost: 480,
     timeCost: 102,
+    ram: {
+      damage: 14175,
+      cooldown: 4,
+      selfDamageRatio: 0.1237,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -9652,6 +9792,13 @@
     width: 33,
     fundsCost: 455,
     timeCost: 99,
+    ram: {
+      damage: 12842.655,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -9968,6 +10115,13 @@
     width: 30,
     fundsCost: 440,
     timeCost: 97,
+    ram: {
+      damage: 12197.325,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10274,6 +10428,13 @@
     width: 32,
     fundsCost: 430,
     timeCost: 96,
+    ram: {
+      damage: 13016.52,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -10519,6 +10680,13 @@
     width: 39,
     fundsCost: 580,
     timeCost: 115,
+    ram: {
+      damage: 21024,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -11005,6 +11173,13 @@
     width: 32,
     fundsCost: 420,
     timeCost: 95,
+    ram: {
+      damage: 12934.44,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -11290,6 +11465,13 @@
     width: 32,
     fundsCost: 415,
     timeCost: 94,
+    ram: {
+      damage: 12865.32,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -11511,6 +11693,13 @@
     width: 33,
     fundsCost: 435,
     timeCost: 97,
+    ram: {
+      damage: 11507.1,
+      cooldown: 4,
+      selfDamageRatio: 0.1279,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A（三联装）
@@ -11966,6 +12155,13 @@
     width: 32,
     fundsCost: 375,
     timeCost: 89,
+    ram: {
+      damage: 11280,
+      cooldown: 4,
+      selfDamageRatio: 0.1316,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -12233,6 +12429,13 @@
     width: 32,
     fundsCost: 385,
     timeCost: 90,
+    ram: {
+      damage: 11005.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1343,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -12589,6 +12792,13 @@
     width: 24,
     fundsCost: 340,
     timeCost: 85,
+    ram: {
+      damage: 6077.865,
+      cooldown: 4,
+      selfDamageRatio: 0.1343,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 4 座双联装 305mm/45 Mark 5 主炮（背负式）
@@ -12784,6 +12994,13 @@
     width: 24,
     fundsCost: 340,
     timeCost: 85,
+    ram: {
+      damage: 5988.774,
+      cooldown: 4,
+      selfDamageRatio: 0.1363,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 2 座双联装 305mm/45 Mark 5 主炮
@@ -13032,6 +13249,13 @@
     width: 23,
     fundsCost: 335,
     timeCost: 85,
+    ram: {
+      damage: 5455.866,
+      cooldown: 4,
+      selfDamageRatio: 0.1363,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 2 座双联装 305mm/40 Mark 3 主炮
@@ -13281,6 +13505,13 @@
     width: 22,
     fundsCost: 290,
     timeCost: 85,
+    ram: {
+      damage: 4279.05,
+      cooldown: 4,
+      selfDamageRatio: 0.1384,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 2 座双联装 330mm/35 Mark 2 主炮（双层炮塔）
@@ -13449,6 +13680,13 @@
     width: 15.24,
     fundsCost: 255,
     timeCost: 85,
+    ram: {
+      damage: 1064.25,
+      cooldown: 4,
+      selfDamageRatio: 0.1395,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮塔：双联装 305mm/40 Mark 3
@@ -13630,6 +13868,13 @@
     width: 32,
     fundsCost: 385,
     timeCost: 130,
+    ram: {
+      damage: 12069.6,
+      cooldown: 4,
+      selfDamageRatio: 0.1931,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14158,6 +14403,13 @@
     width: 28,
     fundsCost: 315,
     timeCost: 112,
+    ram: {
+      damage: 9814.446,
+      cooldown: 4,
+      selfDamageRatio: 0.1931,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14559,6 +14811,13 @@
     width: 23,
     fundsCost: 285,
     timeCost: 102,
+    ram: {
+      damage: 5997.858,
+      cooldown: 4,
+      selfDamageRatio: 0.1931,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -14830,6 +15089,13 @@
     width: 22,
     fundsCost: 215,
     timeCost: 77,
+    ram: {
+      damage: 4991.4,
+      cooldown: 4,
+      selfDamageRatio: 0.1931,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15137,6 +15403,13 @@
     width: 22,
     fundsCost: 210,
     timeCost: 76,
+    ram: {
+      damage: 4802.742,
+      cooldown: 4,
+      selfDamageRatio: 0.1931,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15478,6 +15751,13 @@
     width: 19,
     fundsCost: 160,
     timeCost: 58,
+    ram: {
+      damage: 3494.988,
+      cooldown: 4,
+      selfDamageRatio: 0.1969,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15691,6 +15971,13 @@
     width: 20,
     fundsCost: 160,
     timeCost: 58,
+    ram: {
+      damage: 3576.96,
+      cooldown: 4,
+      selfDamageRatio: 0.1969,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -15939,6 +16226,13 @@
     width: 20,
     fundsCost: 150,
     timeCost: 54,
+    ram: {
+      damage: 3194.1,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16116,6 +16410,13 @@
     width: 19,
     fundsCost: 155,
     timeCost: 56,
+    ram: {
+      damage: 3228.096,
+      cooldown: 4,
+      selfDamageRatio: 0.1969,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16310,6 +16611,13 @@
     width: 22,
     fundsCost: 120,
     timeCost: 44,
+    ram: {
+      damage: 4183.2,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16365,6 +16673,13 @@
     width: 17,
     fundsCost: 115,
     timeCost: 42,
+    ram: {
+      damage: 2779.8,
+      cooldown: 4,
+      selfDamageRatio: 0.2162,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -16420,6 +16735,13 @@
     width: 22,
     fundsCost: 205,
     timeCost: 74,
+    ram: {
+      damage: 4968,
+      cooldown: 4,
+      selfDamageRatio: 0.1969,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -16563,6 +16885,13 @@
     width: 20,
     fundsCost: 185,
     timeCost: 67,
+    ram: {
+      damage: 3915,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -16778,6 +17107,13 @@
     width: 19,
     fundsCost: 190,
     timeCost: 68,
+    ram: {
+      damage: 3154.8,
+      cooldown: 4,
+      selfDamageRatio: 0.2046,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         {
@@ -16937,6 +17273,13 @@
     width: 16,
     fundsCost: 155,
     timeCost: 56,
+    ram: {
+      damage: 1953.6,
+      cooldown: 4,
+      selfDamageRatio: 0.2046,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17120,6 +17463,13 @@
     width: 19,
     fundsCost: 165,
     timeCost: 60,
+    ram: {
+      damage: 3598.29,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17271,6 +17621,13 @@
     width: 19,
     fundsCost: 170,
     timeCost: 61,
+    ram: {
+      damage: 3456,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17519,6 +17876,13 @@
     width: 12,
     fundsCost: 105,
     timeCost: 39,
+    ram: {
+      damage: 750,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17700,6 +18064,13 @@
     width: 11,
     fundsCost: 95,
     timeCost: 35,
+    ram: {
+      damage: 673.8,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17805,6 +18176,13 @@
     width: 11,
     fundsCost: 105,
     timeCost: 39,
+    ram: {
+      damage: 685.8,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -17937,6 +18315,13 @@
     width: 11,
     fundsCost: 100,
     timeCost: 37,
+    ram: {
+      damage: 555,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -18063,6 +18448,13 @@
     width: 10,
     fundsCost: 95,
     timeCost: 35,
+    ram: {
+      damage: 630,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19187,6 +19579,13 @@
     width: 36,
     fundsCost: 670,
     timeCost: 127,
+    ram: {
+      damage: 20119.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1211,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19498,6 +19897,13 @@
     width: 30,
     fundsCost: 545,
     timeCost: 111,
+    ram: {
+      damage: 13716,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -19842,6 +20248,13 @@
     width: 22,
     fundsCost: 385,
     timeCost: 90,
+    ram: {
+      damage: 5647.05,
+      cooldown: 4,
+      selfDamageRatio: 0.1316,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20103,6 +20516,13 @@
     width: 22,
     fundsCost: 260,
     timeCost: 93,
+    ram: {
+      damage: 5122.56,
+      cooldown: 4,
+      selfDamageRatio: 0.1954,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20403,6 +20823,13 @@
     width: 16,
     fundsCost: 195,
     timeCost: 70,
+    ram: {
+      damage: 2312.352,
+      cooldown: 4,
+      selfDamageRatio: 0.2031,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20513,6 +20940,13 @@
     width: 11,
     fundsCost: 120,
     timeCost: 42,
+    ram: {
+      damage: 957,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20640,6 +21074,13 @@
     width: 12,
     fundsCost: 125,
     timeCost: 48,
+    ram: {
+      damage: 1024.5,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -20766,6 +21207,13 @@
     width: 12,
     fundsCost: 120,
     timeCost: 44,
+    ram: {
+      damage: 1080,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A（双联装 15cm）
@@ -22429,6 +22877,13 @@
     width: 36,
     fundsCost: 560,
     timeCost: 114,
+    ram: {
+      damage: 18750,
+      cooldown: 4,
+      selfDamageRatio: 0.1237,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -22694,6 +23149,13 @@
     width: 33,
     fundsCost: 480,
     timeCost: 103,
+    ram: {
+      damage: 16800,
+      cooldown: 4,
+      selfDamageRatio: 0.1237,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 B（超射）
@@ -22908,6 +23370,13 @@
     width: 33,
     fundsCost: 560,
     timeCost: 113,
+    ram: {
+      damage: 18448.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1237,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23130,6 +23599,13 @@
     width: 33,
     fundsCost: 480,
     timeCost: 103,
+    ram: {
+      damage: 16761.75,
+      cooldown: 4,
+      selfDamageRatio: 0.1237,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23294,6 +23770,13 @@
     width: 31,
     fundsCost: 440,
     timeCost: 98,
+    ram: {
+      damage: 12780,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -23457,6 +23940,13 @@
     width: 27,
     fundsCost: 380,
     timeCost: 90,
+    ram: {
+      damage: 8812.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1316,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -23906,6 +24396,13 @@
     width: 27,
     fundsCost: 390,
     timeCost: 92,
+    ram: {
+      damage: 9376.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1316,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -24198,6 +24695,13 @@
     width: 27,
     fundsCost: 375,
     timeCost: 89,
+    ram: {
+      damage: 8978.229,
+      cooldown: 4,
+      selfDamageRatio: 0.1321,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 主炮 A
@@ -24446,6 +24950,13 @@
     width: 19,
     fundsCost: 165,
     timeCost: 60,
+    ram: {
+      damage: 3208.23,
+      cooldown: 4,
+      selfDamageRatio: 0.2084,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -24719,6 +25230,13 @@
     width: 18,
     fundsCost: 170,
     timeCost: 62,
+    ram: {
+      damage: 3017.784,
+      cooldown: 4,
+      selfDamageRatio: 0.2046,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -24866,6 +25384,13 @@
     width: 18,
     fundsCost: 140,
     timeCost: 52,
+    ram: {
+      damage: 2249.856,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -25126,6 +25651,13 @@
     width: 16,
     fundsCost: 120,
     timeCost: 44,
+    ram: {
+      damage: 1491.36,
+      cooldown: 4,
+      selfDamageRatio: 0.22,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -25268,6 +25800,13 @@
     width: 12,
     fundsCost: 135,
     timeCost: 49,
+    ram: {
+      damage: 1148.1,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -28604,6 +29143,13 @@
     width: 41,
     fundsCost: 955,
     timeCost: 164,
+    ram: {
+      damage: 40950,
+      cooldown: 4,
+      selfDamageRatio: 0.1185,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29196,6 +29742,13 @@
     width: 41,
     fundsCost: 730,
     timeCost: 135,
+    ram: {
+      damage: 32760,
+      cooldown: 4,
+      selfDamageRatio: 0.1185,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -29634,6 +30187,13 @@
     width: 39,
     fundsCost: 600,
     timeCost: 118,
+    ram: {
+      damage: 27731.25,
+      cooldown: 4,
+      selfDamageRatio: 0.1211,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30133,6 +30693,13 @@
     width: 35,
     fundsCost: 455,
     timeCost: 99,
+    ram: {
+      damage: 15747.375,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -30615,6 +31182,13 @@
     width: 34,
     fundsCost: 385,
     timeCost: 97,
+    ram: {
+      damage: 13691.304,
+      cooldown: 4,
+      selfDamageRatio: 0.1311,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 一号主炮
@@ -31041,6 +31615,13 @@
     width: 33,
     fundsCost: 430,
     timeCost: 96,
+    ram: {
+      damage: 14095.44,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -31435,6 +32016,13 @@
     width: 31,
     fundsCost: 415,
     timeCost: 94,
+    ram: {
+      damage: 13176,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -31816,6 +32404,13 @@
     width: 22,
     fundsCost: 200,
     timeCost: 72,
+    ram: {
+      damage: 3564,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -32171,6 +32766,13 @@
     width: 21,
     fundsCost: 200,
     timeCost: 72,
+    ram: {
+      damage: 3672,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -32518,6 +33120,13 @@
     width: 21,
     fundsCost: 205,
     timeCost: 74,
+    ram: {
+      damage: 3749.49,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -32851,6 +33460,13 @@
     width: 22,
     fundsCost: 220,
     timeCost: 79,
+    ram: {
+      damage: 4243.86,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -33240,6 +33856,13 @@
     width: 22,
     fundsCost: 215,
     timeCost: 77,
+    ram: {
+      damage: 4179.33,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -33545,6 +34168,13 @@
     width: 18,
     fundsCost: 160,
     timeCost: 58,
+    ram: {
+      damage: 3078.24,
+      cooldown: 4,
+      selfDamageRatio: 0.2046,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -33732,6 +34362,13 @@
     width: 17,
     fundsCost: 155,
     timeCost: 56,
+    ram: {
+      damage: 2742.54,
+      cooldown: 4,
+      selfDamageRatio: 0.2084,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -33878,6 +34515,13 @@
     width: 17,
     fundsCost: 135,
     timeCost: 49,
+    ram: {
+      damage: 2835.42,
+      cooldown: 4,
+      selfDamageRatio: 0.2084,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -34043,6 +34687,13 @@
     width: 15,
     fundsCost: 145,
     timeCost: 53,
+    ram: {
+      damage: 1989.18,
+      cooldown: 4,
+      selfDamageRatio: 0.2084,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -34368,6 +35019,13 @@
     width: 14,
     fundsCost: 120,
     timeCost: 44,
+    ram: {
+      damage: 1409.94,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -34533,6 +35191,13 @@
     width: 12,
     fundsCost: 120,
     timeCost: 44,
+    ram: {
+      damage: 1120.644,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -34645,6 +35310,13 @@
     width: 14,
     fundsCost: 125,
     timeCost: 46,
+    ram: {
+      damage: 1577.52,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -34862,6 +35534,13 @@
     width: 14,
     fundsCost: 125,
     timeCost: 46,
+    ram: {
+      damage: 1493.1,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -35080,6 +35759,13 @@
     width: 14,
     fundsCost: 120,
     timeCost: 44,
+    ram: {
+      damage: 1386,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -35224,6 +35910,13 @@
     width: 14,
     fundsCost: 195,
     timeCost: 70,
+    ram: {
+      damage: 1689.84,
+      cooldown: 4,
+      selfDamageRatio: 0.22,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -35568,6 +36261,13 @@
     width: 14,
     fundsCost: 190,
     timeCost: 68,
+    ram: {
+      damage: 1656,
+      cooldown: 4,
+      selfDamageRatio: 0.22,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -35708,6 +36408,13 @@
     width: 12,
     fundsCost: 110,
     timeCost: 40,
+    ram: {
+      damage: 1113.84,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -35800,6 +36507,13 @@
     width: 12,
     fundsCost: 100,
     timeCost: 37,
+    ram: {
+      damage: 1074,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 舰首主炮 No.1
@@ -35939,6 +36653,13 @@
     width: 11.2,
     fundsCost: 125,
     timeCost: 46,
+    ram: {
+      damage: 997.2,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -36039,6 +36760,13 @@
     width: 11.2,
     fundsCost: 145,
     timeCost: 53,
+    ram: {
+      damage: 997.2,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -36158,6 +36886,13 @@
     width: 11,
     fundsCost: 115,
     timeCost: 42,
+    ram: {
+      damage: 756,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -36228,6 +36963,13 @@
     width: 11,
     fundsCost: 115,
     timeCost: 42,
+    ram: {
+      damage: 747,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -36313,6 +37055,13 @@
     width: 11,
     fundsCost: 115,
     timeCost: 42,
+    ram: {
+      damage: 790.5,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -36398,6 +37147,13 @@
     width: 9,
     fundsCost: 95,
     timeCost: 35,
+    ram: {
+      damage: 502.8,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 舰首主炮 No.1
@@ -39530,6 +40286,13 @@
     width: 37,
     fundsCost: 695,
     timeCost: 130,
+    ram: {
+      damage: 27626.25,
+      cooldown: 4,
+      selfDamageRatio: 0.1159,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -39874,6 +40637,13 @@
     width: 34,
     fundsCost: 570,
     timeCost: 114,
+    ram: {
+      damage: 20212.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -40095,6 +40865,13 @@
     width: 31,
     fundsCost: 465,
     timeCost: 100,
+    ram: {
+      damage: 16125.84,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -40502,6 +41279,13 @@
     width: 32,
     fundsCost: 475,
     timeCost: 102,
+    ram: {
+      damage: 13965,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -41133,6 +41917,13 @@
     width: 32,
     fundsCost: 495,
     timeCost: 104,
+    ram: {
+      damage: 17430.525,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -41370,6 +42161,13 @@
     width: 28,
     fundsCost: 435,
     timeCost: 97,
+    ram: {
+      damage: 12765,
+      cooldown: 4,
+      selfDamageRatio: 0.1343,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -41631,6 +42429,13 @@
     width: 28,
     fundsCost: 415,
     timeCost: 94,
+    ram: {
+      damage: 11390.4,
+      cooldown: 4,
+      selfDamageRatio: 0.1363,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -41897,6 +42702,13 @@
     width: 25,
     fundsCost: 190,
     timeCost: 68,
+    ram: {
+      damage: 5644.08,
+      cooldown: 4,
+      selfDamageRatio: 0.1938,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -42161,6 +42973,13 @@
     width: 24,
     fundsCost: 265,
     timeCost: 95,
+    ram: {
+      damage: 5796,
+      cooldown: 4,
+      selfDamageRatio: 0.1969,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -42307,6 +43126,13 @@
     width: 16,
     fundsCost: 145,
     timeCost: 53,
+    ram: {
+      damage: 2138.4,
+      cooldown: 4,
+      selfDamageRatio: 0.2046,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -42420,6 +43246,13 @@
     width: 19,
     fundsCost: 150,
     timeCost: 54,
+    ram: {
+      damage: 2244,
+      cooldown: 4,
+      selfDamageRatio: 0.2046,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -42587,6 +43420,13 @@
     width: 19,
     fundsCost: 150,
     timeCost: 55,
+    ram: {
+      damage: 3145.5,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -42755,6 +43595,13 @@
     width: 12,
     fundsCost: 85,
     timeCost: 32,
+    ram: {
+      damage: 660,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -42875,6 +43722,13 @@
     width: 12,
     fundsCost: 90,
     timeCost: 34,
+    ram: {
+      damage: 930,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -42994,6 +43848,13 @@
     width: 11,
     fundsCost: 90,
     timeCost: 34,
+    ram: {
+      damage: 567.3,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A（双联装）
@@ -43088,6 +43949,13 @@
     width: 10,
     fundsCost: 75,
     timeCost: 28,
+    ram: {
+      damage: 405,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -43214,6 +44082,13 @@
     width: 10,
     fundsCost: 90,
     timeCost: 34,
+    ram: {
+      damage: 402,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -43306,6 +44181,13 @@
     width: 10,
     fundsCost: 95,
     timeCost: 35,
+    ram: {
+      damage: 543,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -43399,6 +44281,13 @@
     width: 8,
     fundsCost: 65,
     timeCost: 25,
+    ram: {
+      damage: 322.5,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -43853,6 +44742,13 @@
     width: 40,
     fundsCost: 545,
     timeCost: 111,
+    ram: {
+      damage: 24862.5,
+      cooldown: 4,
+      selfDamageRatio: 0.1211,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A（双联装）
@@ -44206,6 +45102,13 @@
     width: 32.9,
     fundsCost: 520,
     timeCost: 108,
+    ram: {
+      damage: 16892.1375,
+      cooldown: 4,
+      selfDamageRatio: 0.1264,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A（三联装）
@@ -44447,6 +45350,13 @@
     width: 28,
     fundsCost: 430,
     timeCost: 96,
+    ram: {
+      damage: 10574.64,
+      cooldown: 4,
+      selfDamageRatio: 0.129,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A（三联装）
@@ -44695,6 +45605,13 @@
     width: 28.6,
     fundsCost: 435,
     timeCost: 96,
+    ram: {
+      damage: 10388.7,
+      cooldown: 4,
+      selfDamageRatio: 0.13,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A（三联装）
@@ -44871,6 +45788,13 @@
     width: 28,
     fundsCost: 250,
     timeCost: 91,
+    ram: {
+      damage: 7497.36,
+      cooldown: 4,
+      selfDamageRatio: 0.1938,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -45299,6 +46223,13 @@
     width: 21,
     fundsCost: 195,
     timeCost: 71,
+    ram: {
+      damage: 3645,
+      cooldown: 4,
+      selfDamageRatio: 0.2007,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -45523,6 +46454,13 @@
     width: 21,
     fundsCost: 170,
     timeCost: 62,
+    ram: {
+      damage: 3732.288,
+      cooldown: 4,
+      selfDamageRatio: 0.2015,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -45677,6 +46615,13 @@
     width: 18.9,
     fundsCost: 150,
     timeCost: 54,
+    ram: {
+      damage: 3118.08,
+      cooldown: 4,
+      selfDamageRatio: 0.2015,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -45790,6 +46735,13 @@
     width: 16.6,
     fundsCost: 125,
     timeCost: 47,
+    ram: {
+      damage: 2396.0016,
+      cooldown: 4,
+      selfDamageRatio: 0.2031,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -45951,6 +46903,13 @@
     width: 15.5,
     fundsCost: 115,
     timeCost: 42,
+    ram: {
+      damage: 1752.408,
+      cooldown: 4,
+      selfDamageRatio: 0.2123,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 前主炮 A
@@ -46074,6 +47033,13 @@
     width: 12,
     fundsCost: 95,
     timeCost: 35,
+    ram: {
+      damage: 660,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 舰首主炮 No.1
@@ -46189,6 +47155,13 @@
     width: 9,
     fundsCost: 90,
     timeCost: 34,
+    ram: {
+      damage: 627,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 舰首主炮
@@ -46280,6 +47253,13 @@
     width: 10,
     fundsCost: 90,
     timeCost: 34,
+    ram: {
+      damage: 645,
+      cooldown: 5,
+      selfDamageRatio: 0.3,
+      minSpeed: 4,
+      bowArc: 60,
+    },
     weapon: {
       mainGuns: [
         // 舰首主炮

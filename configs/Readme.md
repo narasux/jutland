@@ -468,7 +468,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
       // 是否无视游戏设置里的撞击总开关，默认 false；特殊单位（水滴 / 巨大剑鱼）开启
       alwaysOn: false,
     },
-    // 未显式配置 ram 的普通战舰，初始化时会按舰种推导默认撞击（仍受 enableRamming 控制）：
+    // 未显式配置 ram 的普通战舰，初始化时会按舰种推导默认撞击（仍受 enableRamming 控制）；
+    // 这只是新舰/漏配时的兜底，存量的战列 / 巡洋 / 驱逐 / 护卫舰已在 ships.json5 逐舰显式配置：
     // 舰种      伤害系数（× totalHP）  自伤基数  冷却（秒）
     // battleship       0.30            0.15      4
     // cruiser          0.24            0.22      4
@@ -476,7 +477,7 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     // frigate          0.26            0.28      5
     // 实际伤害 = totalHP × 系数 × (1 + 0.5 × 装甲)，自伤比 = 基数 × (1 - 0.35 × 装甲)，
     // 装甲取水平/垂直减伤的最大值（上限 0.9）。航母 / 货轮 / 维修船 / 医疗船 / 潜艇 /
-    // 鱼雷艇不推导默认撞击。推导出的默认撞击不进入静态战力与费用。
+    // 鱼雷艇不推导默认撞击。推导出的默认撞击不进入静态战力与费用，显式配置会进入。
     // 可选：俯视逐帧动画；静止时使用 idleTopFrame
     animation: {
       topFrames: ["swordfish_01", "swordfish_02", "swordfish_03"],
@@ -847,7 +848,8 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   // 战争迷雾总开关；关闭时不计算迷雾
   "enableFogOfWar": false,
   // 撞击系统总开关，默认 false；只影响普通战舰的 ram 配置，
-  // ram.alwaysOn=true 的特殊单位（水滴 / 巨大剑鱼）不受影响
+  // ram.alwaysOn=true 的特殊单位（水滴 / 巨大剑鱼）不受影响。
+  // 注意：敌方舰船的碰撞分离 / 掉速不依赖该开关，关闭时仍会互相阻挡。
   "enableRamming": false,
   // 小地图总开关；开启时开局自动展开右上战术面板显示小地图
   "enableMinimap": true,

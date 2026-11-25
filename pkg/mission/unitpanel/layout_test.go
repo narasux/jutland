@@ -93,8 +93,8 @@ func assertRectInside(t *testing.T, inner, outer Rect) {
 
 // TestInfoGroupsFitInfoColumn 验证单舰信息分组只压成一节、行高可读，且「→」居中按钮落在 Info 分区内。
 // 场景：bismarck 选中并聚焦，TotalHP 10000/CurHP 8200、MaxSpeed 0.05、CurSpeed 0.035、航向 65°、AttackTarget=target；信息行需与右侧目标按钮共处在 280×420 面板。
-// 预期：shipGroups 只返回 1 个紧凑分组；infoGroupLayout 的 lineH 落在 [10,24]（实际 infoLineH=17）；hasTarget=true 且 targetButtonRect 完全包含在 layout.Info 内；失败意味着行高被压扁或按钮越界点不到。
-// 覆盖：updateWithPointer + calcLayout 后断言分组数、行高区间与 hasTarget，再用 assertRectInside 检查按钮四边。
+// 预期：shipGroups 只返回 1 个紧凑分组；infoGroupLayout 的 lineH 落在 [10,24]（实际 infoLineH=17）；hasTarget=true 且 targetButtonRect 完全包含在 layout.Info 内，按钮高度不超过单行高度减 2（旧实现 20px 高会顶到上下两行）；失败意味着行高被压扁、按钮越界点不到或箭头再次压到相邻数字。
+// 覆盖：updateWithPointer + calcLayout 后断言分组数、行高区间、hasTarget 与按钮高度，再用 assertRectInside 检查按钮四边。
 func TestInfoGroupsFitInfoColumn(t *testing.T) {
 	ms := &state.MissionState{
 		Core: state.MissionCoreState{MissionStatus: state.MissionRunning},
@@ -129,7 +129,11 @@ func TestInfoGroupsFitInfoColumn(t *testing.T) {
 	if !panel.hasTarget {
 		t.Fatal("attack-target ship should expose the center-target button")
 	}
-	assertRectInside(t, panel.targetButtonRect(), panel.layout.Info)
+	button := panel.targetButtonRect()
+	assertRectInside(t, button, panel.layout.Info)
+	if button.H > content.lineH-2 {
+		t.Fatalf("target button height = %.1f, want <= %.1f to stay inside one row", button.H, content.lineH-2)
+	}
 }
 
 // TestFleetGroupIsSingleSection 验证多选舰队只汇总成一个分组节，便于阅读。

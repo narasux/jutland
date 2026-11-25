@@ -21,11 +21,19 @@ import (
 // 舰体通常只有 1~2 格长，用炮弹的 8 格桶会把大量不相邻的船放进同一候选集。
 const ramContactCellSize = 2.0
 
-// updateShipContacts 检测敌方舰船之间的接触并结算撞击。
+// maxContactSeparation 单舰单拍的最大分离位移（地图格）。
+// 深穿透时不要一拍瞬移出去；常规接触（0.2~0.5 格）一到两拍即可推开。
+const maxContactSeparation = 0.5
+
+// contactSpeedKeep 舰艏正撞后保留的航速比例：正撞几乎停船，擦碰只掉少量航速。
+const contactSpeedKeep = 0.2
+
+// updateShipContacts 检测敌方舰船之间的接触：结算撞击伤害，并做碰撞分离与掉速。
+// 碰撞响应与 enableRamming 无关：即使关闭撞击伤害，舰船也不会再互相穿过。
 // 友军不参与：不检测、不阻挡、不分离，保持现有的穿行行为。
 func (m *MissionManager) updateShipContacts() {
 	ships := m.state.Arena.OrderedShips()
-	if !m.anyRamActive(ships) {
+	if len(ships) == 0 {
 		return
 	}
 
@@ -61,8 +69,18 @@ func (m *MissionManager) updateShipContacts() {
 					if !ok {
 						continue
 					}
-					m.tryRamShip(a, b, ct.PointX, ct.PointY, ct.NormalX, ct.NormalY)
-					m.tryRamShip(b, a, ct.PointX, ct.PointY, -ct.NormalX, -ct.NormalY)
+					// 先按撞击瞬间的航速结算伤害，再掉速 / 分离；
+					// 否则正撞会先把自己减到最低速，低于 minSpeed 而漏掉伤害。
+					var beganA, beganB bool
+					if a.Ram.Enabled() {
+						beganA = a.RamContactBegan(b.Uid)
+					}
+					if b.Ram.Enabled() {
+						beganB = b.RamContactBegan(a.Uid)
+					}
+					m.tryRamShip(a, b, ct.PointX, ct.PointY, ct.NormalX, ct.NormalY, beganA)
+					m.tryRamShip(b, a, ct.PointX, ct.PointY, -ct.NormalX, -ct.NormalY, beganB)
+					m.resolveShipContact(a, b, ct, beganA, beganB)
 				}
 			}
 		}
@@ -200,18 +218,81 @@ func ramSettingActive(ship *objUnit.BattleShip) bool {
 	return config.G != nil && config.G.EnableRamming
 }
 
-func (m *MissionManager) anyRamActive(ships []*objUnit.BattleShip) bool {
-	for _, ship := range ships {
-		if contactShipAlive(ship) && ramSettingActive(ship) {
-			return true
+// ramMass 碰撞分离使用的质量代理：优先吨位，其次总血量，缺失时按 1。
+func ramMass(ship *objUnit.BattleShip) float64 {
+	if ship.Tonnage > 0 {
+		return ship.Tonnage
+	}
+	if ship.TotalHP > 0 {
+		return ship.TotalHP
+	}
+	return 1
+}
+
+// resolveShipContact 处理一次接触的物理响应：掉速 + 按吨位分离。
+// 掉速只在接触开始那一拍施加，持续重叠时不会把航速逐拍乘到 0。
+func (m *MissionManager) resolveShipContact(
+	a, b *objUnit.BattleShip, ct geometry.RectContact, beganA, beganB bool,
+) {
+	if beganA {
+		applyContactSpeedLoss(a, ct.NormalX, ct.NormalY)
+	}
+	if beganB {
+		applyContactSpeedLoss(b, -ct.NormalX, -ct.NormalY)
+	}
+	if ct.Depth <= 0 {
+		return
+	}
+	massA, massB := ramMass(a), ramMass(b)
+	total := massA + massB
+	if total <= 0 {
+		total = 1
+	}
+	// 法线从 B 指向 A：A 沿法线推出，B 沿反方向推出；大舰的位移更小。
+	m.shiftShipOutOfContact(a, ct.NormalX, ct.NormalY, min(ct.Depth*massB/total, maxContactSeparation))
+	m.shiftShipOutOfContact(b, -ct.NormalX, -ct.NormalY, min(ct.Depth*massA/total, maxContactSeparation))
+}
+
+// applyContactSpeedLoss 吃掉舰船朝对方运动的那部分航速。
+// 正撞（运动方向与接触法线几乎相反）保留 contactSpeedKeep，擦碰只损失少量航速。
+func applyContactSpeedLoss(ship *objUnit.BattleShip, nx, ny float64) {
+	if ship.CurSpeed <= 0 {
+		return
+	}
+	sin, cos := math.Sin(ship.CurRotation*math.Pi/180), math.Cos(ship.CurRotation*math.Pi/180)
+	into := sin*(-nx) + (-cos)*(-ny)
+	if into <= 0 {
+		return
+	}
+	into = min(into, 1)
+	ship.CurSpeed *= 1 - (1-contactSpeedKeep)*into
+}
+
+// shiftShipOutOfContact 把舰船沿法线推开 dist 格；会把舰体推上岸或推出地图时放弃这次位移。
+func (m *MissionManager) shiftShipOutOfContact(ship *objUnit.BattleShip, nx, ny, dist float64) {
+	if dist <= 0 {
+		return
+	}
+	next := ship.CurPos
+	next.AddRx(nx * dist)
+	next.AddRy(ny * dist)
+	if mapCfg := m.state.Core.MissionMD.MapCfg; mapCfg != nil {
+		next.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
+		if !ship.CanOnLand() {
+			before := objUnit.HullLandOverlapSamples(mapCfg, ship.CurPos, ship.CurRotation, ship.Length)
+			after := objUnit.HullLandOverlapSamples(mapCfg, next, ship.CurRotation, ship.Length)
+			if after > before {
+				return
+			}
 		}
 	}
-	return false
+	ship.CurPos = next
 }
 
 // tryRamShip 对单个方向做舰艏、角度、接近速度与冷却判定，通过后结算撞击。
+// began 表示本拍是该次接触的第一拍：持续重叠不再重复掉血。
 func (m *MissionManager) tryRamShip(
-	attacker, target *objUnit.BattleShip, px, py, nx, ny float64,
+	attacker, target *objUnit.BattleShip, px, py, nx, ny float64, began bool,
 ) {
 	if !ramSettingActive(attacker) || target.CurHP <= 0 || target.Submerged() {
 		return
@@ -225,7 +306,7 @@ func (m *MissionManager) tryRamShip(
 		return
 	}
 	closing := ramClosingSpeed(attacker, target, nx, ny)
-	if closing < attacker.Ram.MinSpeed || !attacker.RamReady(target.Uid) {
+	if !began || closing < attacker.Ram.MinSpeed || !attacker.RamReady(target.Uid) {
 		return
 	}
 	res := objDamage.ResolveRam(
@@ -237,7 +318,8 @@ func (m *MissionManager) tryRamShip(
 		return
 	}
 	attacker.MarkRamHit(target.Uid)
-	bt := m.newRamBullet(attacker, target.Uid, object.TypeShip, px, py, res.BaseDamage, "ram")
+	ix, iy := ramImpactPoint(attacker, px, py)
+	bt := m.newRamBullet(attacker, target.Uid, object.TypeShip, ix, iy, res.BaseDamage, "ram")
 	m.hurtShip(target, bt)
 	bt.HitObjType = object.TypeShip
 	m.recordRamHit(bt, target.TotalHP)
@@ -249,6 +331,9 @@ func (m *MissionManager) tryRamPlane(
 	attacker *objUnit.BattleShip, plane *objUnit.Plane, px, py, nx, ny float64,
 ) {
 	if !ramSettingActive(attacker) || plane.CurHP <= 0 {
+		return
+	}
+	if !attacker.RamContactBegan(plane.Uid) {
 		return
 	}
 	originX, originY := ramContactOrigin(attacker)
@@ -271,7 +356,8 @@ func (m *MissionManager) tryRamPlane(
 		return
 	}
 	attacker.MarkRamHit(plane.Uid)
-	bt := m.newRamBullet(attacker, plane.Uid, object.TypePlane, px, py, res.BaseDamage, "ram")
+	ix, iy := ramImpactPoint(attacker, px, py)
+	bt := m.newRamBullet(attacker, plane.Uid, object.TypePlane, ix, iy, res.BaseDamage, "ram")
 	m.hurtPlane(plane, bt)
 	bt.HitObjType = object.TypePlane
 	m.recordRamHit(bt, plane.TotalHP)
@@ -376,6 +462,20 @@ func contactInBow(ship *objUnit.BattleShip, originX, originY, px, py float64) bo
 	s, c := math.Sin(ship.CurRotation*math.Pi/180), math.Cos(ship.CurRotation*math.Pi/180)
 	forward := (px-originX)*s + (py-originY)*-c
 	return forward > ship.Length/constants.MapBlockSize*0.25
+}
+
+// ramImpactPoint 把撞击表现锚点夹到撞击舰的舰艏。
+// SAT 接触点在深穿透或高速扫掠后会落到舰体中段甚至目标中心，
+// 按原坐标画闪光 / 伤害数字会看起来「没撞上」；这里保留接触点的横向偏移，
+// 纵向固定在舰艏内 90% 半长处。
+func ramImpactPoint(ship *objUnit.BattleShip, px, py float64) (float64, float64) {
+	s, c := math.Sin(ship.CurRotation*math.Pi/180), math.Cos(ship.CurRotation*math.Pi/180)
+	dx, dy := px-ship.CurPos.RX, py-ship.CurPos.RY
+	halfLen := ship.Length / constants.MapBlockSize / 2
+	halfWid := ship.Width / constants.MapBlockSize / 2
+	lateral := min(max(dx*c+dy*s, -halfWid), halfWid)
+	return ship.CurPos.RX + s*halfLen*0.9 + c*lateral,
+		ship.CurPos.RY - c*halfLen*0.9 + s*lateral
 }
 
 // ramBearing 返回撞击舰航向与「参考中心 -> 目标」方位的夹角（度）。

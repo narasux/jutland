@@ -52,6 +52,19 @@ func (s *BattleShip) RamReady(targetUID string) bool {
 	return SimTick() >= s.ramCooldownUntil[targetUID]
 }
 
+// RamContactBegan 记录本拍与目标存在接触，并返回这次接触是否刚开始。
+// 上一拍仍处于接触时返回 false（同一拍重复调用也算持续接触），
+// 因此持续重叠的两舰只会在接触开始的那一拍结算一次撞击。
+func (s *BattleShip) RamContactBegan(targetUID string) bool {
+	tick := SimTick()
+	if s.ramContactTick == nil {
+		s.ramContactTick = map[string]int64{}
+	}
+	prev, ok := s.ramContactTick[targetUID]
+	s.ramContactTick[targetUID] = tick
+	return !ok || prev < tick-1
+}
+
 // MarkRamHit 记录一次撞击，在配置的冷却时间内不再对同一目标结算。
 func (s *BattleShip) MarkRamHit(targetUID string) {
 	if s.ramCooldownUntil == nil {

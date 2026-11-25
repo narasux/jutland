@@ -177,6 +177,9 @@ type BattleShip struct {
 	Damage DamageState
 	// 撞击冷却：目标 UID -> 可再次结算的游戏拍
 	ramCooldownUntil map[string]int64
+	// 接触记录：目标 UID -> 最近一次检测到接触的游戏拍。
+	// 用于保证「一次持续接触只结算一次撞击」，而不是按冷却反复掉血。
+	ramContactTick map[string]int64
 }
 
 var _ Hurtable = (*BattleShip)(nil)
@@ -980,6 +983,7 @@ func NewShip(
 	s.ArmorMM = 100 + 300*max(s.HorizontalDamageReduction, s.VerticalDamageReduction)
 	s.LastTrailAnimationStep = -1
 	s.ramCooldownUntil = nil
+	s.ramContactTick = nil
 	s.BelongPlayer = player
 	// 战舰默认不编组
 	s.GroupID = object.GroupIDNone

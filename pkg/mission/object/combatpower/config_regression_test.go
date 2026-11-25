@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
+	"github.com/narasux/jutland/pkg/mission/object/combatpower"
 	// 注册初始化顺序，用真实 configs 校验战力结果。
 	_ "github.com/narasux/jutland/pkg/mission/object/initialize"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -186,22 +187,42 @@ func gunBulletDiameter(gunName string) int {
 	return bullet.Diameter
 }
 
-// TestDerivedRamStaysOutOfCombatPower 验证按舰种推导的默认撞击不进入静态战力。
-// 场景：yamato 未显式配置 ram，初始化时会拿到 Derived=true 的默认撞击；
-// 体验开关默认关闭，若默认撞击计入战力，会改变 AI 估值与造价。
-// 预期：yamato.Ram.Derived=true 且 damage>0；AntiShipContributions 中没有名为 Ram 的贡献。
-// 覆盖：加载后的 ShipMap 配置与 CalculateShip 的贡献明细；失败说明默认撞击污染了战力。
-func TestDerivedRamStaysOutOfCombatPower(t *testing.T) {
+// TestExplicitRamEntersCombatPowerButDerivedDoesNot 验证显式撞击进入战力、推导撞击不进战力。
+// 场景：ships.json5 中 yamato 已显式配置 ram（Derived=false）；再复制一份 yamato，
+// 把 ram 换成 DefaultRamProfile 推导值（Derived=true），其余配置完全相同。
+// 预期：显式版 AntiShipContributions 含 "Ram"；推导版不含。失败说明逐舰数据没被读取，
+// 或推导值重新污染了 AI 估值与造价。
+// 覆盖：加载后的 ShipMap["yamato"] 与 CalculateShip 的贡献明细，对比两种 ram 来源。
+func TestExplicitRamEntersCombatPowerButDerivedDoesNot(t *testing.T) {
 	yamato := objUnit.ShipMap["yamato"]
 	if yamato == nil {
 		t.Fatal("yamato not found")
 	}
-	if !yamato.Ram.Derived || yamato.Ram.Damage <= 0 {
-		t.Fatalf("yamato should have a derived ram profile: %+v", yamato.Ram)
+	if yamato.Ram.Derived || yamato.Ram.Damage <= 0 {
+		t.Fatalf("yamato should have explicit ram config: %+v", yamato.Ram)
 	}
-	for _, contribution := range yamato.CombatPower.Details.AntiShipContributions {
-		if contribution.Name == "Ram" {
-			t.Fatalf("derived ram must not enter combat power: %+v", contribution)
+	hasRam := func(info objUnit.CombatPowerInfo) bool {
+		for _, contribution := range info.Details.AntiShipContributions {
+			if contribution.Name == "Ram" {
+				return true
+			}
 		}
+		return false
+	}
+	if !hasRam(yamato.CombatPower) {
+		t.Fatal("explicit ram must enter combat power")
+	}
+
+	derived := *yamato
+	profile, ok := objUnit.DefaultRamProfile(
+		derived.Type, derived.TotalHP,
+		derived.HorizontalDamageReduction, derived.VerticalDamageReduction,
+	)
+	if !ok {
+		t.Fatal("yamato type should have a derived ram profile")
+	}
+	derived.Ram = profile
+	if hasRam(combatpower.CalculateShip(&derived, objUnit.PlaneMap, objBullet.Map)) {
+		t.Fatalf("derived ram must not enter combat power: %+v", derived.Ram)
 	}
 }

@@ -15,9 +15,10 @@ import (
 
 // TestRamSettingOnlyGatesNormalShips 验证撞击开关只影响普通战舰，alwaysOn 特殊单位始终可撞。
 // 场景：config.G.EnableRamming=false；普通舰（alwaysOn=false）与特殊舰（alwaysOn=true）
-// 分别以 13.6 节舰艏撞向横向目标，位置使两舰 OBB 重叠 0.18 格。
+// 分别以 13.6 节舰艏撞向横向目标；碰撞响应会先把两舰分开，所以打开开关后
+// 重新摆回重叠位置并隔一拍再检测。
 // 预期：普通舰目标 HP 不变；打开开关后目标掉 1800；特殊舰在开关关闭时也能撞掉 1800。
-// 覆盖：三种组合共三次 updateShipContacts，断言目标 CurHP；失败说明开关泄到了特殊单位，
+// 覆盖：开关两态 + 重置接触状态 + alwaysOn 绕过；失败说明开关泄到了特殊单位，
 // 或普通战舰在默认关闭时仍然造成撞击伤害。
 func TestRamSettingOnlyGatesNormalShips(t *testing.T) {
 	oldSettings := config.G
@@ -35,7 +36,14 @@ func TestRamSettingOnlyGatesNormalShips(t *testing.T) {
 	m.updateShipContacts()
 	require.Equal(t, 4000.0, normalTarget.CurHP, "normal ram must stay off by default")
 
+	// 碰撞响应已把两舰推开：先记录一次无接触，再摆回重叠，避免被当成持续接触。
+	objUnit.SetSimTick(1)
+	normalAttacker.CurPos, normalTarget.CurPos = objPos.NewR(10, 10), objPos.NewR(10, 20)
+	m.updateShipContacts()
 	config.G.EnableRamming = true
+	objUnit.SetSimTick(3)
+	normalAttacker.CurPos, normalTarget.CurPos = objPos.NewR(10, 10), objPos.NewR(10, 9.25)
+	normalAttacker.CurSpeed = 13.6 / objUnit.ShipSpeedScale
 	m.updateShipContacts()
 	require.InDelta(t, 2200, normalTarget.CurHP, 1e-9, "enabled normal ram must deal 1800")
 
@@ -46,11 +54,13 @@ func TestRamSettingOnlyGatesNormalShips(t *testing.T) {
 	require.InDelta(t, 2200, specialTarget.CurHP, 1e-9, "alwaysOn ram must ignore the setting")
 }
 
-// TestRamCooldownBlocksRepeatedContact 验证同一对舰船在冷却内只结算一次撞击。
-// 场景：开启撞击，两舰持续重叠；同一帧连续调用两次 updateShipContacts，再推进 4.1 秒。
-// 预期：第二次调用目标 HP 不变；推进过冷却后再次掉 1800。
-// 覆盖：SimTick 0/241 两次调用与冷却边界；失败说明重叠时每拍都会扣血，TTK 会被压到不可控。
-func TestRamCooldownBlocksRepeatedContact(t *testing.T) {
+// TestRamDamagesOncePerContinuousContact 验证持续重叠只在接触开始那一拍结算一次撞击。
+// 场景：开启撞击，两舰持续重叠 120 拍；每拍都把位置摆回重叠，模拟被碰撞响应推开后
+// 仍贴在一起摩擦的情况。随后分开、度过 4 秒冷却，再次接触。
+// 预期：120 拍内目标只掉一次 1800；冷却结束并重新接触后再掉一次。
+// 覆盖：RamContactBegan 的接触开始判定、冷却边界与重新接触；失败说明重叠时仍会
+// 按冷却反复掉血，或分开后无法再次撞击。
+func TestRamDamagesOncePerContinuousContact(t *testing.T) {
 	oldSettings := config.G
 	config.G = config.NewDefaultGameSettings()
 	config.G.EnableRamming = true
@@ -63,13 +73,21 @@ func TestRamCooldownBlocksRepeatedContact(t *testing.T) {
 	attacker := ramTestShip("a-cooldown", faction.HumanAlpha, 10, 10, 0, 1800, false)
 	target := ramTestShip("b-cooldown", faction.ComputerAlpha, 10, 9.25, 90, 4000, false)
 	m := newRamTestMission(attacker, target)
-	m.updateShipContacts()
-	m.updateShipContacts()
-	require.InDelta(t, 2200, target.CurHP, 1e-9)
+	for tick := int64(0); tick < 120; tick++ {
+		objUnit.SetSimTick(tick)
+		attacker.CurPos, target.CurPos = objPos.NewR(10, 10), objPos.NewR(10, 9.25)
+		m.updateShipContacts()
+		require.InDelta(t, 2200, target.CurHP, 1e-9, "continuous overlap must not tick damage")
+	}
 
-	objUnit.SetSimTick(objUnit.ReloadTicks(attacker.Ram.Cooldown) + 1)
+	objUnit.SetSimTick(objUnit.ReloadTicks(attacker.Ram.Cooldown) + 120)
+	attacker.CurPos, target.CurPos = objPos.NewR(10, 10), objPos.NewR(10, 20)
 	m.updateShipContacts()
-	require.InDelta(t, 400, target.CurHP, 1e-9)
+	attacker.CurSpeed = 13.6 / objUnit.ShipSpeedScale
+	objUnit.SetSimTick(objUnit.ReloadTicks(attacker.Ram.Cooldown) + 122)
+	attacker.CurPos, target.CurPos = objPos.NewR(10, 10), objPos.NewR(10, 9.25)
+	m.updateShipContacts()
+	require.InDelta(t, 400, target.CurHP, 1e-9, "separated and cooled down pair may ram again")
 }
 
 // TestRamSkipsFriendlyAndSubmergedShips 验证友军与水下潜艇不会参与撞击接触。
@@ -207,7 +225,14 @@ func TestDerivedRamOnlyWhenSettingEnabled(t *testing.T) {
 	m.updateShipContacts()
 	require.Equal(t, 4000.0, target.CurHP)
 
+	// 碰撞响应已分开两舰；摆回重叠并隔一拍，确保这是一次新的接触。
+	objUnit.SetSimTick(1)
+	attacker.CurPos, target.CurPos = objPos.NewR(10, 10), objPos.NewR(10, 20)
+	m.updateShipContacts()
 	config.G.EnableRamming = true
+	objUnit.SetSimTick(3)
+	attacker.CurPos, target.CurPos = objPos.NewR(10, 10), objPos.NewR(10, 9.25)
+	attacker.CurSpeed = 13.6 / objUnit.ShipSpeedScale
 	m.updateShipContacts()
 	require.InDelta(t, 2848, target.CurHP, 1e-9)
 
@@ -243,6 +268,55 @@ func TestHighSpeedRamSweepsThroughTarget(t *testing.T) {
 	m := newRamTestMission(attacker, target)
 	m.updateShipContacts()
 	require.Less(t, target.CurHP, 5000000.0)
+}
+
+// TestShipContactSeparatesAndSlowsHeadOn 验证敌舰接触会按吨位分离并产生正撞掉速。
+// 场景：开启撞击，两艘 4000 吨、200m 长的驱逐舰中心距 0.75 格（最小平移深度 0.1875 格），
+// 撞击舰以 13.6 节舰艏正撞静止目标；碰撞响应与撞击伤害在同一拍结算。
+// 预期：一拍后两舰不再接触（中心距约 0.9375 格），撞击舰航速降到 20%，
+// 静止目标保持不动；失败说明碰撞响应没有推开舰体，或掉速把航速清成 0。
+// 覆盖：resolveShipContact 的法线方向、吨位权重、单拍分离上限与 applyContactSpeedLoss。
+func TestShipContactSeparatesAndSlowsHeadOn(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	config.G.EnableRamming = true
+	objUnit.SetSimTick(0)
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+
+	attacker := ramTestShip("a-separate", faction.HumanAlpha, 10, 10, 0, 1800, false)
+	target := ramTestShip("b-separate", faction.ComputerAlpha, 10, 9.25, 90, 0, false)
+	target.CurSpeed = 0
+	before := attacker.CurPos.Distance(target.CurPos)
+	m := newRamTestMission(attacker, target)
+	m.updateShipContacts()
+
+	after := attacker.CurPos.Distance(target.CurPos)
+	require.Greater(t, after, before, "contact must separate the hulls")
+	require.Greater(t, attacker.CurPos.RY, 10.0, "attacker must be pushed away from the target")
+	require.Less(t, target.CurPos.RY, 9.25, "target must be pushed away from the attacker")
+	_, stillTouching := contactBetweenShips(attacker, target)
+	require.False(t, stillTouching, "one tick of separation must clear a shallow contact")
+	require.InDelta(t, 13.6*0.2/objUnit.ShipSpeedScale, attacker.CurSpeed, 1e-9)
+	require.Zero(t, target.CurSpeed, "stationary target must not be accelerated by separation")
+}
+
+// TestRamImpactPointStaysOnAttackerBow 验证撞击表现锚点落在撞击舰舰艏而不是接触点原坐标。
+// 场景：撞击舰舰长 200m（半长 0.78125 格）、宽 40m，航向正北；接触点取在舰体后方
+// 0.4 格、横向偏右 0.2 格（模拟高速扫掠 / 深穿透后 SAT 接触点落到舰体中段）。
+// 预期：返回点相对中心的前向投影等于 0.9 × 半舰长，横向偏移被夹到半舰宽 0.15625 格；
+// 失败说明撞击闪光 / 伤害数字仍会画到舰体中部或目标中心。
+// 覆盖：ramImpactPoint 的纵向固定与横向夹取，不验证像素绘制。
+func TestRamImpactPointStaysOnAttackerBow(t *testing.T) {
+	ship := ramTestShip("a-impact", faction.HumanAlpha, 10, 10, 0, 1800, false)
+	x, y := ramImpactPoint(ship, 10.2, 10.4)
+
+	const halfLen, halfWid = 200.0 / 128 / 2, 40.0 / 128 / 2
+	forward := (y-10.0)*-1 + (x-10.0)*0
+	require.InDelta(t, 0.9*halfLen, forward, 1e-9)
+	require.InDelta(t, halfWid, x-10.0, 1e-9)
 }
 
 // TestRamSelfDamageAppearsInBattleLog 验证撞击反作用伤害写入战况详情。

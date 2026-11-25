@@ -40,6 +40,10 @@ var (
 // navChevronSize 是导航按钮 V 形箭头的开口半宽。
 const navChevronSize = 5.0
 
+// targetChevronSize 是「目标」行内联按钮的箭头开口半宽。
+// 该按钮只有 infoLineH（17px）高，沿用导航按钮的尺寸会顶到上下两行的数字。
+const targetChevronSize = 4.0
+
 // Draw 将单位信息内容绘制到滚动视口 region 内，并按 scrollY 上移。
 // 内容先绘制到离屏缓冲再整体贴回屏幕，从而把滚动溢出的部分裁剪在视口内。
 func (p *Panel) Draw(screen *ebiten.Image, ms *state.MissionState, region Rect, scrollY float64) {
@@ -193,8 +197,8 @@ func (p *Panel) drawFocusList(screen *ebiten.Image, ms *state.MissionState, ship
 		theme.Body(),
 		colorx.Silver,
 	)
-	p.drawNavButton(screen, p.previousFocusRect(), theme.TriangleLeft)
-	p.drawNavButton(screen, p.nextFocusRect(), theme.TriangleRight)
+	p.drawNavButton(screen, p.previousFocusRect(), theme.TriangleLeft, navChevronSize)
+	p.drawNavButton(screen, p.nextFocusRect(), theme.TriangleRight, navChevronSize)
 	for _, entry := range p.visibleFocusShips(ships, ms.Interaction.FocusedShipUid) {
 		selected := entry.Ship.Uid == ms.Interaction.FocusedShipUid
 		fill := color.RGBA{A: 0}
@@ -272,7 +276,7 @@ func (p *Panel) drawBasicInfo(screen *ebiten.Image, ms *state.MissionState, ship
 	}
 
 	if len(ships) == 1 && p.hasTarget {
-		p.drawNavButton(screen, p.targetButtonRect(), theme.TriangleRight)
+		p.drawNavButton(screen, p.targetButtonRect(), theme.TriangleRight, targetChevronSize)
 	}
 	if len(ships) == 1 && ships[0].Type == objUnit.ShipTypeSubmarine {
 		p.drawDiveButton(screen, ms, ships[0])
@@ -322,11 +326,13 @@ func (p *Panel) computeTargetRect(ms *state.MissionState, ship *objUnit.BattleSh
 		}
 		for _, item := range group.items {
 			if item.label == targetLabel {
+				// 按钮压在单行内：上下各留 1px，避免边框/箭头碰到相邻行的数字。
+				const buttonH = infoLineH - 2
 				return Rect{
-					X: p.layout.Info.X + p.layout.Info.W - 40,
-					Y: y + (info.lineH-20)/2,
-					W: 26,
-					H: 20,
+					X: p.layout.Info.X + p.layout.Info.W - 36,
+					Y: y + (info.lineH-buttonH)/2,
+					W: 22,
+					H: buttonH,
 				}
 			}
 			y += info.lineH
@@ -627,7 +633,9 @@ func toggleDotFill(state toggleState) color.Color {
 }
 
 // drawNavButton 绘制小巧的上一艘/下一艘导航按钮，使用矢量 V 形箭头，避免字体缺失字形导致空白。
-func (p *Panel) drawNavButton(screen *ebiten.Image, area Rect, dir theme.TriangleDir) {
+func (p *Panel) drawNavButton(
+	screen *ebiten.Image, area Rect, dir theme.TriangleDir, chevronSize float64,
+) {
 	fill, border := toggleFill, toggleBorder
 	if p.cursorAt(area) {
 		fill = toggleHoverFill
@@ -636,7 +644,7 @@ func (p *Panel) drawNavButton(screen *ebiten.Image, area Rect, dir theme.Triangl
 		}
 	}
 	p.drawRoundedRect(screen, area, theme.CornerRadius, fill, border)
-	theme.DrawChevron(screen, area.X+area.W/2, area.Y+area.H/2, navChevronSize, dir, theme.HandleArrow)
+	theme.DrawChevron(screen, area.X+area.W/2, area.Y+area.H/2, chevronSize, dir, theme.HandleArrow)
 }
 
 // drawAircraft 绘制单一表头、各机型数据、合计行和起飞总开关。
