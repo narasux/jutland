@@ -409,14 +409,16 @@ func battleWeaponText(entry state.BattleLogEntry) string {
 		}
 		return "炸弹"
 	case string(objBullet.TypeRocket):
+		// 火箭深弹按 rocket 类型飞行，靠发射器名与普通火箭区分
+		if strings.Contains(entry.Hit.WeaponName, "Type65") {
+			return "反潜火箭"
+		}
 		return "火箭弹"
 	case string(objBullet.TypeDepthCharge):
 		switch {
 		case strings.Contains(entry.Hit.WeaponName, "Hedgehog"),
 			strings.Contains(entry.Hit.WeaponName, "Mk10"):
 			return "刺猬弹"
-		case strings.Contains(entry.Hit.WeaponName, "Type65"):
-			return "反潜火箭"
 		default:
 			return "深水炸弹"
 		}

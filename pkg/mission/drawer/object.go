@@ -1063,7 +1063,7 @@ func (d *Drawer) drawShotBullets(screen *ebiten.Image, ms *state.MissionState) {
 			continue
 		}
 
-		img := objBullet.GetImg(b.Type, b.Diameter)
+		img := objBullet.GetImgOf(b)
 
 		rotation := b.Rotation
 		offsetX, offsetY := 0.0, 0.0
