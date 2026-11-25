@@ -110,6 +110,36 @@ func TestPlaneScoutCirclesInsteadOfHovering(t *testing.T) {
 	}
 }
 
+// TestPlaneScoutLoiterConsumesRange 验证到达侦察点后的盘旋照常扣减剩余航程。
+// 场景：newLoiterTestState 的 scout-loiter-test（RemainRange=80、MaxSpeed=0.1）
+// 已停在侦察点 (3,3)，第 10 拍下达手动侦察；首拍进入盘旋窗口（ReloadTicks(30)
+// 远未结束），再逐拍推进 120 拍，期间不会触发返航。
+// 预期：结束时 RemainRange 比首拍后少约 120 拍 × 0.1 的盘旋航程；失败意味着
+// 盘旋又变回原地绕圈不扣航程，侦察机可以无限期停在目标点。
+// 覆盖：记录首拍 Exec 后的 RemainRange，循环 120 次 Exec 后断言降幅落在
+// (11.5, 12.5)，同时确认未置 ForceReturn、指令未结束，排除返航造成的降幅。
+func TestPlaneScoutLoiterConsumesRange(t *testing.T) {
+	point := objPos.New(3, 3)
+	ms, plane := newLoiterTestState(t, point)
+	order := NewPlaneScout(plane.Uid, point, true)
+	if err := order.Exec(ms); err != nil {
+		t.Fatal(err)
+	}
+	start := plane.RemainRange
+	for range 120 {
+		ms.Core.SimTick++
+		if err := order.Exec(ms); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if plane.ForceReturn || order.Executed() {
+		t.Fatal("盘旋窗口内不该返航，否则无法确认航程降幅来自盘旋")
+	}
+	if drop := start - plane.RemainRange; drop < 11.5 || drop > 12.5 {
+		t.Fatalf("盘旋 120 拍应消耗约 12 格航程，实际 %v", drop)
+	}
+}
+
 // TestTrackFleetHoldsOutsideAntiAir 验证侦察机在敌舰防空圈外 2 格安全边处保持距离。
 // 场景：24x24 视野图上敌舰在 (10,10)、对空射程 6 格；侦察机先在 (10,16.5)
 // 即 6.5 格处，再退到 (10,22) 即 12 格处。

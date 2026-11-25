@@ -131,7 +131,8 @@ func (i *PlaneScout) Exec(ms *state.MissionState) error {
 	}
 	if ms.Core.SimTick < i.loiterUntil {
 		// 飞机到了点位也不能停下，绕着侦察点盘旋，保持视野扫过整片区域。
-		i.orbit(plane, mapCfg)
+		// 盘旋是真实飞行，和飞向目标、返航一样照常消耗航程，不能白绕。
+		i.orbitAt(plane, i.point, mapCfg)
 		return nil
 	}
 	// 自动侦察盘旋结束后换下一段：先揭未探索，没有就去最远的已探索海面。
@@ -188,16 +189,8 @@ func (i *PlaneScout) evade(ms *state.MissionState, plane *objUnit.Plane) bool {
 	return true
 }
 
-// orbit 让飞机绕着侦察点盘旋。盘旋只是原地绕圈，不额外消耗任务航程：
-// 侦察续航沿用到达前的预算。否则每段 30 秒盘旋要飞掉几十格航程，
-// 侦察机会提前返航、开图范围缩水。
-func (i *PlaneScout) orbit(plane *objUnit.Plane, mapCfg *mapcfg.MapCfg) {
-	remainRange := plane.RemainRange
-	i.orbitAt(plane, i.point, mapCfg)
-	plane.RemainRange = remainRange
-}
-
-// orbitAt 让飞机绕着 center 盘旋。瞄准点由顺时针切向分量与半径误差的径向修正合成：
+// orbitAt 让飞机绕着 center 盘旋。盘旋是真实飞行，和飞向目标、返航一样
+// 按飞行距离扣减剩余航程；瞄准点由顺时针切向分量与半径误差的径向修正合成：
 // 半径偏小时朝外偏、偏大时朝内偏，飞机按自身转向与速度自然收敛到一条圆航线，
 // 而不是在圆心原地悬停。
 func (i *PlaneScout) orbitAt(plane *objUnit.Plane, center objPos.MapPos, mapCfg *mapcfg.MapCfg) {
