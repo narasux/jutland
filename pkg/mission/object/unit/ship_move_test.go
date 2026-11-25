@@ -224,3 +224,84 @@ func TestHullLandOverlapSamples(t *testing.T) {
 	require.Greater(t, HullLandOverlapSamples(cfg, objPos.NewR(2.3, 1.5), 90, block*2), 0)
 	require.Equal(t, 0, HullLandOverlapSamples(cfg, objPos.NewR(2.3, 1.5), 90, block/2))
 }
+
+// TestMoveToReachesEastAndSouthMapEdge 验证战舰能开到地图最东 / 最南一格的格心，
+// 而不是在边界夹取时被弹回。
+// 场景：8×3 全浅海地图，东边缘子用例舰船 (6.5,1.5) 航向 90、目标 (7.5,1.5)；
+// 南边缘子用例舰船 (2.5,1.5) 航向 180、目标 (2.5,2.5)；第三个子用例把目标点在
+// 地图外 (8.4,1.5)，模拟玩家点到界外。前两者是最后一个边缘格的格心，
+// 边界夹取必须允许中心推进到 Width-0.5 / Height-0.5，界外目标则夹到该上界。
+// 预期：200 拍内 MoveTo 返回 arrive=true，坐标沿航向单调不减，不会出现
+// 从 6.5 被夹回 6.0 或从 1.5 被夹回 1.0 的反向跳变，最终距目标 ≤0.6。
+// 覆盖：表驱动三个方向，逐拍断言轴坐标不倒退并累计 arrive，最终断言距离；
+// 修复前夹取上界是 Width-2 / Height-2，舰船会被弹回并在边缘空转、永远到不了目标。
+func TestMoveToReachesEastAndSouthMapEdge(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() { config.G = oldSettings })
+
+	rows := mapcfg.MapData{
+		"SSSSSSSS",
+		"SSSSSSSS",
+		"SSSSSSSS",
+	}
+	mapCfg := &mapcfg.MapCfg{Map: rows, Cells: rows.ToGridCells(), Width: 8, Height: 3}
+
+	axisValue := func(isX bool, pos objPos.MapPos) float64 {
+		if isX {
+			return pos.RX
+		}
+		return pos.RY
+	}
+	tests := []struct {
+		name        string
+		start       objPos.MapPos
+		target      objPos.MapPos
+		checkTarget objPos.MapPos
+		rotation    float64
+		isX         bool
+	}{
+		{
+			name: "east edge", start: objPos.NewR(6.5, 1.5), target: objPos.NewR(7.5, 1.5),
+			checkTarget: objPos.NewR(7.5, 1.5), rotation: 90, isX: true,
+		},
+		{
+			name: "south edge", start: objPos.NewR(2.5, 1.5), target: objPos.NewR(2.5, 2.5),
+			checkTarget: objPos.NewR(2.5, 2.5), rotation: 180, isX: false,
+		},
+		{
+			name: "east beyond edge", start: objPos.NewR(6.5, 1.5), target: objPos.NewR(8.4, 1.5),
+			checkTarget: objPos.NewR(7.5, 1.5), rotation: 90, isX: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ship := &BattleShip{
+				CurHP:        100,
+				CurPos:       tt.start,
+				CurRotation:  tt.rotation,
+				CurSpeed:     0.02,
+				MaxSpeed:     0.02,
+				Acceleration: 0.001,
+				RotateSpeed:  10,
+			}
+			prev := axisValue(tt.isX, ship.CurPos)
+			arrived := false
+			for tick := 0; tick < 200; tick++ {
+				arrive, blocked := ship.MoveTo(mapCfg, tt.target, false)
+				require.False(t, blocked)
+				if arrive {
+					arrived = true
+					break
+				}
+				cur := axisValue(tt.isX, ship.CurPos)
+				require.GreaterOrEqual(t, cur+1e-9, prev,
+					"第 %d 拍坐标从 %.2f 倒退到 %.2f，说明边界夹取把舰船弹回去了", tick, prev, cur)
+				prev = cur
+			}
+			require.True(t, arrived, "舰船应在 200 拍内抵达边缘格心，实际位置 %s", ship.CurPos.String())
+			require.LessOrEqual(t, ship.CurPos.Distance(tt.checkTarget), 0.6+1e-9)
+			require.Greater(t, axisValue(tt.isX, ship.CurPos), axisValue(tt.isX, tt.start))
+		})
+	}
+}

@@ -871,6 +871,13 @@ func (s *BattleShip) LeadPosAt(ticks float64) objPos.MapPos {
 	)
 }
 
+// shipMapBorder 返回舰船中心可抵达的地图坐标上界：最后一格的格心。
+// 寻路网格的航点就落在格心（Width-0.5），若像旧实现那样把上界设成 Width-2，
+// 最后一列 / 行永远到不了：舰船会被夹取逻辑弹回上一格，顶着边缘空转。
+func shipMapBorder(mapCfg *mapcfg.MapCfg) (float64, float64) {
+	return float64(mapCfg.Width) - 0.5, float64(mapCfg.Height) - 0.5
+}
+
 // MoveTo 移动到指定位置。
 // arrive 表示已到达目标附近；blocked 表示下一步会踏进海岸/陆地格被拦停，
 // 需要上层从当前位置重新规划，调用方不应把 blocked 当作到达处理。
@@ -879,8 +886,13 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	if s.CurHP <= 0 {
 		return true, false
 	}
-	// 差不多到目标位置即可，不要强求准确，否则需要微调，视觉效果不佳
-	if s.CurPos.Near(targetPos, 0.6) {
+	// 先把目标夹到地图内，保证界外 / 贴边的点击也有可达的终点可判定 arrival。
+	borderX, borderY := shipMapBorder(mapCfg)
+	targetPos.EnsureBorder(borderX, borderY)
+	// 差不多到目标位置即可，不要强求准确，否则需要微调，视觉效果不佳。
+	// 搁浅舰即使离目标够近也不能算到达：它必须继续挪回水面，否则会停在陆格上。
+	if s.CurPos.Near(targetPos, 0.6) &&
+		(s.CanOnLand() || !mapCfg.Map.IsLand(s.CurPos.MX, s.CurPos.MY)) {
 		s.CurSpeed = 0
 		return true, false
 	}
@@ -932,8 +944,8 @@ func (s *BattleShip) MoveTo(mapCfg *mapcfg.MapCfg, targetPos objPos.MapPos, near
 	// 这一步是否让舰体更靠近目标。必须在边界夹取之前判断，
 	// 否则贴边地图上夹取产生的假位移会把“向目标靠近”误判成远离。
 	approachingTarget := nextPos.Distance(targetPos) < s.CurPos.Distance(targetPos)
-	// 防止出边界
-	nextPos.EnsureBorder(float64(mapCfg.Width-2), float64(mapCfg.Height-2))
+	// 防止出边界；上界与寻路航点一致，最后一格仍可正常抵达
+	nextPos.EnsureBorder(borderX, borderY)
 	// 普通舰船撞岸即停：中心点还在水里时，不允许下一步踏进海岸/陆地格，
 	// 否则寻路只认中心点，一旦压进海岸格就再也寻不出路（搁浅锁死）。
 	// 特殊船舶（飞起来的那些）不受限制。

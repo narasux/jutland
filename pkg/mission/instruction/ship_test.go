@@ -422,3 +422,31 @@ func TestShipMovePathRestoresSpeedAtCruiseSpeed(t *testing.T) {
 	require.NoError(t, move.Exec(misState))
 	require.InDelta(t, cruise, ship.CurSpeed, 1e-9, "换路径后不该被砍到未乘倍率的速度")
 }
+
+// TestShipMovePathReachesEastEdgeCell 验证异步寻路能把战舰送到地图最东一格的格心，
+// 并让指令正常收尾。
+// 场景：8×3 全浅海地图（最后一列 x=7 仍是水面），战列舰在 (6.5,1.5) 航向 90，
+// NewShipMovePath 目标 (7.5,1.5)，runShipMovePath 最多推进 600 拍。
+// 预期：指令 Executed 且 Failed=false，最终位置距目标 ≤0.6；修复前 MoveTo 把中心
+// 夹回 Width-2=6，舰船顶着边界 240 拍后被判无进展失败，AI 每轮重下同一条指令。
+// 覆盖：异步寻路 + 真实 MoveTo 推进，断言 Executed、!Failed 与最终距离，并记录耗时。
+func TestShipMovePathReachesEastEdgeCell(t *testing.T) {
+	setupGameSettings(t)
+	rows := mapcfg.MapData{
+		"SSSSSSSS",
+		"SSSSSSSS",
+		"SSSSSSSS",
+	}
+	mapCfg := &mapcfg.MapCfg{Map: rows, Cells: rows.ToGridCells(), Width: 8, Height: 3}
+	ship := newBattleShip("edge-ship", objPos.NewR(6.5, 1.5), 90)
+	misState := newShipMoveState(mapCfg, ship)
+
+	target := objPos.NewR(7.5, 1.5)
+	move := NewShipMovePath(ship.Uid, ship.CurPos, target, ship.CurSpeed)
+	ticks := runShipMovePath(t, misState, move, 600)
+
+	require.True(t, move.Executed(), "指令应完成")
+	require.False(t, move.Failed(), "东边缘的格心是可达水面，不应判定失败")
+	require.LessOrEqual(t, ship.CurPos.Distance(target), 0.6+1e-9, "应抵达边缘格心")
+	t.Logf("东边缘格心抵达耗时 %d 拍，最终位置 %s", ticks, ship.CurPos.String())
+}
