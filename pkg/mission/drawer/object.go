@@ -699,12 +699,31 @@ func airbornePlaneCounts(planes map[string]*objUnit.Plane) map[string]int {
 	return counts
 }
 
+// shipDrawOrder 返回舰船的绘制顺序：下潜潜艇全部排在前面。
+// OrderedShips 只按 UID 排序，不区分水深层级；若不单独提出下潜潜艇，
+// 潜艇会因为 UID 排在后面而画在水面舰之上，看起来像浮在水面上。
+// 同一层级内保持入参顺序（UID 顺序），保证绘制稳定不闪烁。
+func shipDrawOrder(ships []*objUnit.BattleShip) []*objUnit.BattleShip {
+	ordered := make([]*objUnit.BattleShip, 0, len(ships))
+	for _, s := range ships {
+		if s.Submerged() {
+			ordered = append(ordered, s)
+		}
+	}
+	for _, s := range ships {
+		if !s.Submerged() {
+			ordered = append(ordered, s)
+		}
+	}
+	return ordered
+}
+
 // 绘制战舰
 func (d *Drawer) drawBattleShips(screen *ebiten.Image, ms *state.MissionState) {
 	selected := selectedShipSet(ms.Interaction.SelectedShips)
 	// 各舰仍在空中的飞机数（含出击、作战与返航）一次性统计，避免逐舰遍历飞机表
 	airbornePlaneCnt := airbornePlaneCounts(ms.Arena.Planes)
-	for _, s := range ms.Arena.OrderedShips() {
+	for _, s := range shipDrawOrder(ms.Arena.OrderedShips()) {
 		if !ms.View.Camera.Contains(s.CurPos) {
 			continue
 		}

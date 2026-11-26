@@ -258,3 +258,24 @@ func TestDrawDiveOverlays(t *testing.T) {
 		}
 	})
 }
+
+// TestShipDrawOrderPutsSubmergedSubmarinesFirst 验证下潜潜艇排在绘制顺序最前，其余舰船保持入参顺序。
+// 场景：OrderedShips 只按 UID 排序、不区分水深层级；潜艇 UID 靠后时会画在水面舰之上，
+// 看上去像浮在水面上，这是玩家实际看到的渲染错误。
+// 预期：输入 [水面舰 a, 下潜潜艇 b, 浮航潜艇 c, 水面舰 d] 时输出 b, a, c, d；
+// 失败意味着下潜潜艇仍会被排到水面舰之后（又被画在上面），或同层级顺序被打乱导致闪烁。
+// 覆盖：构造两种 DiveState 的四艘舰，断言输出指针顺序，未下潜的潜艇不算最前。
+func TestShipDrawOrderPutsSubmergedSubmarinesFirst(t *testing.T) {
+	surfaceA := &objUnit.BattleShip{Uid: "a"}
+	submerged := &objUnit.BattleShip{
+		Uid: "b", Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+	}
+	surfaced := &objUnit.BattleShip{
+		Uid: "c", Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSurface},
+	}
+	surfaceD := &objUnit.BattleShip{Uid: "d"}
+
+	got := shipDrawOrder([]*objUnit.BattleShip{surfaceA, submerged, surfaced, surfaceD})
+	want := []*objUnit.BattleShip{submerged, surfaceA, surfaced, surfaceD}
+	assert.Equal(t, want, got)
+}
