@@ -85,7 +85,14 @@ func New() *Game {
 		},
 	}
 	g.settingUI.SetWindowHost(g.ui)
-	g.selectMissionCategory(metadata.MissionCategoryClassic)
+	initialCategory := metadata.MissionCategoryClassic
+	if config.G != nil &&
+		len(config.G.TutorialCompleted) == 0 &&
+		len(metadata.AvailableMissions(metadata.MissionCategoryTutorial)) > 0 {
+		// 首次启动优先把玩家带到教学列表；已经完成过教学的玩家仍从经典关卡开始。
+		initialCategory = metadata.MissionCategoryTutorial
+	}
+	g.selectMissionCategory(initialCategory)
 	g.collectionUI = collection.New()
 	g.init()
 	return g

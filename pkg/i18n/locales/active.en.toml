@@ -766,3 +766,41 @@ other = "Audio & Visual"
 other = "Battle pace, language, visibility and HUD"
 [SettingsAVHint]
 other = "Combat feedback, volume and ship wake"
+
+[MissionCategoryTutorial]
+other = "Tutorial"
+[TutorialStart]
+other = "Start Tutorial"
+[TutorialStats]
+other = "{{.Steps}} steps"
+[TutorialProgress]
+other = "Tutorial {{.Current}} / {{.Total}}"
+[TutorialNext]
+other = "Next"
+[TutorialSkip]
+other = "Skip"
+[TutorialExit]
+other = "Exit"
+[TutorialBackToTutorials]
+other = "Back to tutorials"
+[TutorialCompleted]
+other = "Chapter complete"
+[TutorialCompletedBody]
+other = "Nice work. Return to the tutorial list to pick the next chapter."
+[TutorialHold]
+other = "Hold"
+[TutorialMouseLeft]
+other = "Left mouse"
+[TutorialMouseRight]
+other = "Right mouse"
+[TutorialMouseDrag]
+other = "Drag"
+[TutorialMouseWheel]
+other = "Wheel"
+
+[TutorialStatsDone]
+other = "{{.Steps}} steps · Completed"
+[TutorialRestart]
+other = "Replay chapter"
+[TutorialStuckHint]
+other = "Stuck? Try again, or click Skip."

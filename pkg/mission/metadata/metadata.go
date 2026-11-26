@@ -11,17 +11,20 @@ import (
 type MissionCategory string
 
 const (
-	MissionCategoryClassic MissionCategory = "classic"
-	MissionCategoryTest    MissionCategory = "test"
+	MissionCategoryClassic  MissionCategory = "classic"
+	MissionCategoryTutorial MissionCategory = "tutorial"
+	MissionCategoryTest     MissionCategory = "test"
 )
 
 // MissionMetadata 任务元配置
 type MissionMetadata struct {
-	Name         string
-	DisplayName  string
-	Category     MissionCategory
-	MapCfg       *mapcfg.MapCfg
-	displayNames map[i18n.Language]string
+	Name        string
+	DisplayName string
+	Category    MissionCategory
+	// TutorialScript 教学任务使用的脚本 ID；非教学任务为空。
+	TutorialScript string
+	MapCfg         *mapcfg.MapCfg
+	displayNames   map[i18n.Language]string
 	// 最大战舰数量
 	MaxShipCount int
 	// 初始资金

@@ -9,9 +9,11 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/i18n"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
+	"github.com/narasux/jutland/pkg/mission/tutorial"
 	"github.com/narasux/jutland/pkg/resources/font"
 	abbrMapImg "github.com/narasux/jutland/pkg/resources/images/abbrmap"
 	bgImg "github.com/narasux/jutland/pkg/resources/images/background"
@@ -73,6 +75,7 @@ func (d *Drawer) drawMissionSelect(
 	states *objStates,
 ) {
 	screenW, screenH := float64(screen.Bounds().Dx()), float64(screen.Bounds().Dy())
+	isTutorial := category == metadata.MissionCategoryTutorial
 	abbrMap := d.getAbbrMap(curMission)
 
 	// 暖色系（参照图鉴卡片）
@@ -152,10 +155,18 @@ func (d *Drawer) drawMissionSelect(
 	)
 
 	curY += 22
-	// 数据行
+	// 数据行：教学页展示步骤数，不展示舰队/资金统计。
 	dataLine := i18n.Format(i18n.MsgMissionStats, map[string]any{
 		"Funds": misMD.InitFunds, "ShipLimit": misMD.MaxShipCount, "OilPlatforms": misMD.OilPlatformCount,
 	})
+	if isTutorial {
+		steps := tutorial.StepCount(curMission)
+		messageID := i18n.MsgTutorialStats
+		if config.IsTutorialCompleted(curMission) {
+			messageID = i18n.MsgTutorialStatsDone
+		}
+		dataLine = i18n.Format(messageID, map[string]any{"Steps": steps})
+	}
 	statsFontSize := 19.0
 	statsLineHeight := 28.0
 	statsMaxWidth := cardW - 2*pad
@@ -168,21 +179,22 @@ func (d *Drawer) drawMissionSelect(
 	}
 
 	curY += float64(len(dataLines))*statsLineHeight + 4
-	// 战力对比
-	allyStats, enemyStats := misMD.StatsForPlayerSide(playerSide)
-	battleLine := i18n.Format(i18n.MsgMissionBattleStats, map[string]any{
-		"AllyShips": allyStats.ShipCount, "EnemyShips": enemyStats.ShipCount,
-		"AllyPoints": allyStats.ReinforceCount, "EnemyPoints": enemyStats.ReinforceCount,
-	})
-	battleLines := wrapText(battleLine, statsMaxWidth, statsFontSize)
-	for idx, line := range battleLines {
-		d.drawText(
-			screen, line, panelX, curY+float64(idx)*statsLineHeight,
-			statsFontSize, font.LocalizedUI(font.Kai), bodyClr,
-		)
+	if !isTutorial {
+		// 战力对比
+		allyStats, enemyStats := misMD.StatsForPlayerSide(playerSide)
+		battleLine := i18n.Format(i18n.MsgMissionBattleStats, map[string]any{
+			"AllyShips": allyStats.ShipCount, "EnemyShips": enemyStats.ShipCount,
+			"AllyPoints": allyStats.ReinforceCount, "EnemyPoints": enemyStats.ReinforceCount,
+		})
+		battleLines := wrapText(battleLine, statsMaxWidth, statsFontSize)
+		for idx, line := range battleLines {
+			d.drawText(
+				screen, line, panelX, curY+float64(idx)*statsLineHeight,
+				statsFontSize, font.LocalizedUI(font.Kai), bodyClr,
+			)
+		}
+		curY += float64(len(battleLines))*statsLineHeight + 14
 	}
-
-	curY += float64(len(battleLines))*statsLineHeight + 14
 	// 描述区
 	descFontSize := 18.0
 	descLineHeight := 28.0
@@ -202,6 +214,9 @@ func (d *Drawer) drawMissionSelect(
 	// 底部控件（卡片下方）
 	arrowSize := 36.0
 	startText := i18n.Text(i18n.MsgMissionStart)
+	if isTutorial {
+		startText = i18n.Text(i18n.MsgTutorialStart)
+	}
 	startFont := font.LocalizedUI(font.Hang)
 	startTW := layout.CalcTextWidth(startText, 22, startFont)
 	backText := i18n.Text(i18n.MsgBack)
@@ -291,64 +306,79 @@ func (d *Drawer) drawMissionSelect(
 	)
 
 	// 阵营选择：配置层选择 P1/P2，进入关卡后再映射到 HA/CA。
-	sideFont := font.LocalizedUI(font.Hang)
-	sideFontSize := 20.0
-	sideButtonW := 54.0
-	sideButtonGap := 6.0
-	sideLabel := i18n.Text(i18n.MsgMissionPlayerSide)
-	sideLabelW := layout.CalcTextWidth(sideLabel, sideFontSize, sideFont)
-	showSideLabel := screenW >= 900
-	sideSelectorW := sideButtonW*2 + sideButtonGap
-	if showSideLabel {
-		sideSelectorW += sideLabelW + 12
-	}
-	sideX := screenW - sideSelectorW - 50
-	sideY := startY
+	// 教学任务固定使用 P1，不展示阵营按钮。
+	var sideP1Button, sideP2Button clickableArea
+	if !isTutorial {
+		sideFont := font.LocalizedUI(font.Hang)
+		sideFontSize := 20.0
+		sideButtonW := 54.0
+		sideButtonGap := 6.0
+		sideLabel := i18n.Text(i18n.MsgMissionPlayerSide)
+		sideLabelW := layout.CalcTextWidth(sideLabel, sideFontSize, sideFont)
+		showSideLabel := screenW >= 900
+		sideSelectorW := sideButtonW*2 + sideButtonGap
+		if showSideLabel {
+			sideSelectorW += sideLabelW + 12
+		}
+		sideX := screenW - sideSelectorW - 50
+		sideY := startY
 
-	if showSideLabel {
-		d.drawText(
-			screen, sideLabel, sideX,
-			centeredButtonTextY(sideLabel, sideY, buttonH, sideFontSize, sideFont), sideFontSize, sideFont, labelClr,
-		)
-		sideX += sideLabelW + 12
-	}
+		if showSideLabel {
+			d.drawText(
+				screen,
+				sideLabel,
+				sideX,
+				centeredButtonTextY(
+					sideLabel,
+					sideY,
+					buttonH,
+					sideFontSize,
+					sideFont,
+				),
+				sideFontSize,
+				sideFont,
+				labelClr,
+			)
+			sideX += sideLabelW + 12
+		}
 
-	drawSideButton := func(text string, side faction.Side, x float64) clickableArea {
-		button := clickableArea{X: x, Y: sideY, W: sideButtonW, H: buttonH}
-		textW := layout.CalcTextWidth(text, sideFontSize, sideFont)
-		textColor, buttonBorderColor := bodyClr, subtitleClr
-		if playerSide == side {
-			vector.FillRect(
+		drawSideButton := func(text string, side faction.Side, x float64) clickableArea {
+			button := clickableArea{X: x, Y: sideY, W: sideButtonW, H: buttonH}
+			textW := layout.CalcTextWidth(text, sideFontSize, sideFont)
+			textColor, buttonBorderColor := bodyClr, subtitleClr
+			if playerSide == side {
+				vector.FillRect(
+					screen,
+					float32(button.X), float32(button.Y), float32(button.W), float32(button.H),
+					color.RGBA{R: 68, G: 116, B: 138, A: 90}, false,
+				)
+				textColor, buttonBorderColor = colorx.SkyBlue, colorx.SkyBlue
+			} else if isHoverArea(button) {
+				textColor, buttonBorderColor = colorx.White, colorx.SkyBlue
+			}
+			vector.StrokeRect(
 				screen,
 				float32(button.X), float32(button.Y), float32(button.W), float32(button.H),
-				color.RGBA{R: 68, G: 116, B: 138, A: 90}, false,
+				1, buttonBorderColor, false,
 			)
-			textColor, buttonBorderColor = colorx.SkyBlue, colorx.SkyBlue
-		} else if isHoverArea(button) {
-			textColor, buttonBorderColor = colorx.White, colorx.SkyBlue
+			d.drawText(
+				screen,
+				text,
+				button.X+(button.W-textW)/2,
+				centeredButtonTextY(text, button.Y, button.H, sideFontSize, sideFont),
+				sideFontSize,
+				sideFont,
+				textColor,
+			)
+			return button
 		}
-		vector.StrokeRect(
-			screen,
-			float32(button.X), float32(button.Y), float32(button.W), float32(button.H),
-			1, buttonBorderColor, false,
+		sideP1Button = drawSideButton(string(faction.SideP1), faction.SideP1, sideX)
+		sideP2Button = drawSideButton(
+			string(faction.SideP2),
+			faction.SideP2,
+			sideX+sideButtonW+sideButtonGap,
 		)
-		d.drawText(
-			screen,
-			text,
-			button.X+(button.W-textW)/2,
-			centeredButtonTextY(text, button.Y, button.H, sideFontSize, sideFont),
-			sideFontSize,
-			sideFont,
-			textColor,
-		)
-		return button
 	}
-	sideP1Button := drawSideButton(string(faction.SideP1), faction.SideP1, sideX)
-	sideP2Button := drawSideButton(
-		string(faction.SideP2),
-		faction.SideP2,
-		sideX+sideButtonW+sideButtonGap,
-	)
 
 	// 左下角任务分类切换
 	categoryFont := font.LocalizedUI(font.Hang)
@@ -394,23 +424,29 @@ func (d *Drawer) drawMissionSelect(
 		metadata.MissionCategoryClassic,
 		50,
 	)
+	tutorialButton := drawCategoryButton(
+		i18n.Text(i18n.MsgMissionCategoryTutorial),
+		metadata.MissionCategoryTutorial,
+		classicButton.X+classicButton.W+8,
+	)
 	testButton := drawCategoryButton(
 		i18n.Text(i18n.MsgMissionCategoryTest),
 		metadata.MissionCategoryTest,
-		classicButton.X+classicButton.W+8,
+		tutorialButton.X+tutorialButton.W+8,
 	)
 
 	// 同步 UI 点击热区（基于实际屏幕尺寸，避免与 ebiten.WindowSize() 不一致）
 	if states != nil {
 		states.MissionSelectUI = &missionSelectUI{
-			LeftArrow:     leftArrow,
-			RightArrow:    rightArrow,
-			SideP1Button:  sideP1Button,
-			SideP2Button:  sideP2Button,
-			StartButton:   startBtn,
-			BackButton:    backBtn,
-			ClassicButton: classicButton,
-			TestButton:    testButton,
+			LeftArrow:      leftArrow,
+			RightArrow:     rightArrow,
+			SideP1Button:   sideP1Button,
+			SideP2Button:   sideP2Button,
+			StartButton:    startBtn,
+			BackButton:     backBtn,
+			ClassicButton:  classicButton,
+			TutorialButton: tutorialButton,
+			TestButton:     testButton,
 		}
 	}
 }

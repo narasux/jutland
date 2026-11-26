@@ -161,6 +161,8 @@ type GameSettings struct {
 	ForceDisplayState bool `json:"forceDisplayState"`
 	// WakeTrail 战舰水面尾流的长度 / 宽度 / 浓度自定义参数。
 	WakeTrail WakeTrailSettings `json:"wakeTrail"`
+	// TutorialCompleted 已完成的教学任务名称；用于任务选择页标记和首次引导。
+	TutorialCompleted []string `json:"tutorialCompleted"`
 }
 
 // G 游戏设置全局变量
@@ -179,6 +181,7 @@ func NewDefaultGameSettings() *GameSettings {
 		DisplayDamageNumber: true,
 		ForceDisplayState:   true,
 		WakeTrail:           DefaultWakeTrailSettings(),
+		TutorialCompleted:   []string{},
 	}
 	settings.SetBGMVolume(DefaultAudioVolume)
 	settings.SetEffectsVolume(DefaultAudioVolume)
@@ -311,6 +314,34 @@ func LoadGameSettings() {
 	log.Printf("[INFO] Game settings loaded: SpeedMultiplier=%.2f Language=%s", G.SpeedMultiplier, G.Language)
 }
 
+// IsTutorialCompleted 判断教学任务是否已完成。
+func IsTutorialCompleted(mission string) bool {
+	if G == nil {
+		return false
+	}
+	for _, name := range G.TutorialCompleted {
+		if name == mission {
+			return true
+		}
+	}
+	return false
+}
+
+// MarkTutorialCompleted 记录教学任务完成并写回设置文件。
+func MarkTutorialCompleted(mission string) error {
+	if mission == "" {
+		return nil
+	}
+	if G == nil {
+		G = NewDefaultGameSettings()
+	}
+	if IsTutorialCompleted(mission) {
+		return nil
+	}
+	G.TutorialCompleted = append(G.TutorialCompleted, mission)
+	return SaveGameSettings()
+}
+
 // SaveGameSettings 保存游戏设置到配置文件
 // 使用临时文件+重命名保证原子性写入
 // 保存前会执行校验
@@ -354,8 +385,9 @@ func SaveGameSettings() error {
 	_, _ = file.WriteString("// ForceDisplayState: 是否常显战舰状态（HP / 武器装填），默认开启；关闭后仅选中时显示\n")
 	_, _ = file.WriteString(
 		"// wakeTrail: 战舰水面尾流参数，length 航迹长度 0.40~2.50、width 宽度 0.40~2.00、" +
-			"opacity 浓度 0.20~1.50，默认均为 1.00\n\n",
+			"opacity 浓度 0.20~1.50，默认均为 1.00\n",
 	)
+	_, _ = file.WriteString("// tutorialCompleted: 已完成的教学任务名称\n\n")
 
 	// 编码并写入配置
 	data, err := json5.MarshalIndent(G, "", "  ")

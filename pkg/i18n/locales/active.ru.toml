@@ -771,3 +771,41 @@ other = "Звук и видео"
 other = "Темп боя, язык, обзор и интерфейс"
 [SettingsAVHint]
 other = "Эффекты боя, громкость и кильватер"
+
+[MissionCategoryTutorial]
+other = "Обучение"
+[TutorialStart]
+other = "Начать обучение"
+[TutorialStats]
+other = "Шагов: {{.Steps}}"
+[TutorialProgress]
+other = "Обучение {{.Current}} / {{.Total}}"
+[TutorialNext]
+other = "Далее"
+[TutorialSkip]
+other = "Пропустить"
+[TutorialExit]
+other = "Выход"
+[TutorialBackToTutorials]
+other = "К списку обучения"
+[TutorialCompleted]
+other = "Глава завершена"
+[TutorialCompletedBody]
+other = "Отличная работа. Вернитесь к списку обучения, чтобы выбрать следующую главу."
+[TutorialHold]
+other = "Удерживайте"
+[TutorialMouseLeft]
+other = "Левая кнопка"
+[TutorialMouseRight]
+other = "Правая кнопка"
+[TutorialMouseDrag]
+other = "Перетащите"
+[TutorialMouseWheel]
+other = "Колесо"
+
+[TutorialStatsDone]
+other = "Шагов: {{.Steps}} · Завершено"
+[TutorialRestart]
+other = "Повторить главу"
+[TutorialStuckHint]
+other = "Не получается? Попробуйте ещё раз или нажмите «Пропустить»."

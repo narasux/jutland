@@ -414,3 +414,20 @@ func TestSaveGameSettingsRoundTripsAudioVolumes(t *testing.T) {
 	require.Equal(t, 0.0, G.ResolvedBGMVolume())
 	require.Equal(t, 0.6, G.ResolvedEffectsVolume())
 }
+
+// TestTutorialCompletedLookup 验证教学完成进度按任务名查询且不受其他任务影响。
+// 场景：设置里只记录 TutorialBasicControls，查询同一任务、另一个任务和非教学任务。
+// 预期：IsTutorialCompleted 只对已记录任务返回 true；失败意味着任务选择页会把所有教学都标成已完成。
+// 覆盖：临时替换全局 G，直接设置 TutorialCompleted 后查询三个名称，Cleanup 恢复旧指针。
+func TestTutorialCompletedLookup(t *testing.T) {
+	previous := G
+	t.Cleanup(func() { G = previous })
+
+	G = NewDefaultGameSettings()
+	require.False(t, IsTutorialCompleted("TutorialBasicControls"))
+
+	G.TutorialCompleted = []string{"TutorialBasicControls"}
+	require.True(t, IsTutorialCompleted("TutorialBasicControls"))
+	require.False(t, IsTutorialCompleted("TutorialFormation"))
+	require.False(t, IsTutorialCompleted("PearlHarbor1941"))
+}

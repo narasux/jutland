@@ -115,14 +115,15 @@ func (i *loadingInterface) Reset() {
 
 // 关卡选择界面 UI
 type missionSelectUI struct {
-	LeftArrow     clickableArea
-	RightArrow    clickableArea
-	SideP1Button  clickableArea
-	SideP2Button  clickableArea
-	StartButton   clickableArea
-	BackButton    clickableArea
-	ClassicButton clickableArea
-	TestButton    clickableArea
+	LeftArrow      clickableArea
+	RightArrow     clickableArea
+	SideP1Button   clickableArea
+	SideP2Button   clickableArea
+	StartButton    clickableArea
+	BackButton     clickableArea
+	ClassicButton  clickableArea
+	TutorialButton clickableArea
+	TestButton     clickableArea
 }
 
 type clickableArea struct {

@@ -6787,4 +6787,164 @@
       { name: "molamola", pos: [102, 66], rotation: 90, belongPlayer: "P2" },
     ],
   },
+
+  // 教学关卡：一章一个任务，脚本见 configs/tutorials.json5。
+  {
+    name: "TutorialBasicControls",
+    category: "tutorial",
+    tutorialScript: "basic-controls",
+    displayName: "基础操作",
+    displayNameEn: "Basic Controls",
+    displayNameRu: "Основы управления",
+    displayNameJa: "基本操作",
+    displayNameZhHant: "基礎操作",
+    initFunds: 0,
+    initCameraPos: [
+      // P1：达尔文港西北开阔水域的视野左上角
+      [14, 29],
+      // 教学任务固定使用 P1，P2 行留同值
+      [14, 29]
+    ],
+    mapName: "darwin",
+    maxShipCount: 8,
+    description: "从选中舰队开始，依次学会移动、缩放、全图和暂停。教学任务不会开火，也不会触发胜负结算。",
+    descriptionEn: "Start by selecting your fleet, then learn movement, zoom, the full map, and pause. Tutorial missions do not fire or trigger win/loss resolution.",
+    descriptionRu: "Начните с выбора флота, затем освойте движение, масштаб, карту и паузу. В учебных миссиях нет стрельбы и не срабатывает победа или поражение.",
+    descriptionJa: "艦隊の選択から始め、移動・ズーム・全体図・ポーズを学びます。教学ミッションでは射撃も勝敗判定も発生しません。",
+    descriptionZhHant: "從選中艦隊開始，依序學會移動、縮放、全圖和暫停。教學任務不會開火，也不會觸發勝負結算。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initAirfields: [],
+    initShips: [
+      { name: "johnston", pos: [15, 32], rotation: 90, belongPlayer: "P1" },
+      { name: "johnston", pos: [16, 30], rotation: 90, belongPlayer: "P1" },
+      { name: "baltimore", pos: [18, 31], rotation: 90, belongPlayer: "P1" }
+    ]
+  },
+  {
+    name: "TutorialFormation",
+    category: "tutorial",
+    tutorialScript: "formation",
+    displayName: "编队与机动",
+    displayNameEn: "Formation and Maneuver",
+    displayNameRu: "Строй и манёвр",
+    displayNameJa: "編隊と機動",
+    displayNameZhHant: "編隊與機動",
+    initFunds: 0,
+    initCameraPos: [
+      // P1：达尔文港西北开阔水域的视野左上角
+      [14, 29],
+      [14, 29]
+    ],
+    mapName: "darwin",
+    maxShipCount: 10,
+    description: "学会用 Ctrl+数字编组、按数字选中编队，并用 X 和方向键调整队形。教学任务不会开火。",
+    descriptionEn: "Learn to group ships with Ctrl plus a number, recall the group with the number key, and adjust the formation with X and the arrow keys. Tutorial missions do not fire.",
+    descriptionRu: "Научитесь создавать группы через Ctrl и цифру, вызывать их цифрой и менять строй через X и стрелки. В учебных миссиях нет стрельбы.",
+    descriptionJa: "Ctrl+数字で編成し、数字キーで呼び出し、X と矢印キーで隊形を調整します。教学ミッションでは射撃はありません。",
+    descriptionZhHant: "學會用 Ctrl+數字編組、按數字選中編隊，並用 X 和方向鍵調整隊形。教學任務不會開火。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initAirfields: [],
+    initShips: [
+      { name: "johnston", pos: [15, 30], rotation: 90, belongPlayer: "P1" },
+      { name: "baltimore", pos: [16, 32], rotation: 90, belongPlayer: "P1" },
+      { name: "atlanta", pos: [17, 30], rotation: 90, belongPlayer: "P1" },
+      { name: "porter", pos: [18, 32], rotation: 90, belongPlayer: "P1" },
+      { name: "johnston", pos: [19, 30], rotation: 90, belongPlayer: "P1" }
+    ]
+  },
+  {
+    name: "TutorialSubmarine",
+    category: "tutorial",
+    tutorialScript: "submarine",
+    displayName: "潜艇操作",
+    displayNameEn: "Submarine Controls",
+    displayNameRu: "Управление подлодкой",
+    displayNameJa: "潜水艦の操作",
+    displayNameZhHant: "潛艇操作",
+    initFunds: 0,
+    initCameraPos: [
+      [14, 29],
+      [14, 29]
+    ],
+    mapName: "darwin",
+    maxShipCount: 4,
+    description: "认识潜艇的两种深度：按 D 上浮或下潜，按住 V 查看声呐覆盖范围。水下完全隐身，但只能发射鱼雷。",
+    descriptionEn: "Learn the submarine's two depth states: press D to surface or dive, and hold V to inspect sonar coverage. A submerged boat is hidden but can only fire torpedoes.",
+    descriptionRu: "Освойте два состояния глубины: D — всплыть или погрузиться, удерживайте V, чтобы увидеть зону гидролокатора. В подводном положении лодка скрыта, но может стрелять только торпедами.",
+    descriptionJa: "潜水艦の二つの深度状態を学びます。D で浮上・潜航、V を押したままにするとソナー範囲を確認できます。潜航中は完全に隠れますが、魚雷しか使えません。",
+    descriptionZhHant: "認識潛艇的兩種深度：按 D 上浮或下潛，按住 V 查看聲納覆蓋範圍。水下完全隱身，但只能發射魚雷。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initAirfields: [],
+    initShips: [
+      { name: "u_96", pos: [18, 31], rotation: 90, belongPlayer: "P1" }
+    ]
+  },
+  {
+    name: "TutorialAviation",
+    category: "tutorial",
+    tutorialScript: "aviation",
+    displayName: "航空侦察",
+    displayNameEn: "Aerial Scouting",
+    displayNameRu: "Воздушная разведка",
+    displayNameJa: "航空偵察",
+    displayNameZhHant: "航空偵察",
+    initFunds: 0,
+    initCameraPos: [
+      [14, 29],
+      [14, 29]
+    ],
+    mapName: "darwin",
+    maxShipCount: 4,
+    description: "选中航母后，按住 Shift 再右键点击海面，派出一架侦察机。航母和陆地机场都使用同一套侦察操作。",
+    descriptionEn: "Select the carrier, hold Shift, and right-click the sea to launch a scout plane. Carriers and land airfields share the same scouting controls.",
+    descriptionRu: "Выберите авианосец, удерживайте Shift и щёлкните правой кнопкой по морю, чтобы поднять разведчик. Авианосцы и наземные аэродромы используют одни и те же команды.",
+    descriptionJa: "空母を選択し、Shift を押しながら海上で右クリックすると偵察機を発進させます。空母も陸上飛行場も同じ操作です。",
+    descriptionZhHant: "選中航艦後，按住 Shift 再按滑鼠右鍵點擊海面，派出一架偵察機。航艦和陸地機場都使用同一套偵察操作。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initAirfields: [],
+    initShips: [
+      { name: "essex", pos: [17, 31], rotation: 90, belongPlayer: "P1" }
+    ]
+  },
+  {
+    name: "TutorialReinforce",
+    category: "tutorial",
+    tutorialScript: "reinforce",
+    displayName: "增援与经济",
+    displayNameEn: "Reinforcements and Economy",
+    displayNameRu: "Подкрепления и экономика",
+    displayNameJa: "増援と経済",
+    displayNameZhHant: "增援與經濟",
+    initFunds: 1000,
+    initCameraPos: [
+      [14, 29],
+      [14, 29]
+    ],
+    mapName: "darwin",
+    maxShipCount: 8,
+    description: "按 B 打开增援页：上下方向键选增援点、左右方向键选舰船、Enter 召唤、Backspace 取消，Esc 返回战场。召唤会消耗资金和时间。",
+    descriptionEn: "Press B to open reinforcements: up/down selects a point, left/right selects a ship, Enter summons, Backspace cancels, and Esc returns. Summoning costs funds and time.",
+    descriptionRu: "Нажмите B, чтобы открыть подкрепления: вверх/вниз — точка, влево/вправо — корабль, Enter — вызов, Backspace — отмена, Esc — назад. Вызов стоит денег и времени.",
+    descriptionJa: "B で増援画面を開きます。上下で増援地点、左右で艦船、Enter で召唤、Backspace で取消、Esc で戦場に戻ります。召唤には資金と時間が必要です。",
+    descriptionZhHant: "按 B 開啟增援頁：上下方向鍵選增援點、左右方向鍵選艦船、Enter 召喚、Backspace 取消，Esc 返回戰場。召喚會消耗資金和時間。",
+    initReinforcePoints: [
+      {
+        pos: [18, 31],
+        rotation: 90,
+        rallyPos: [19, 32],
+        belongPlayer: "P1",
+        maxOncomingShip: 3,
+        providedShipNames: ["johnston", "baltimore"]
+      }
+    ],
+    initOilPlatforms: [],
+    initAirfields: [],
+    initShips: [
+      { name: "johnston", pos: [15, 30], rotation: 90, belongPlayer: "P1" }
+    ]
+  },
 ]

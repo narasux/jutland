@@ -1,10 +1,12 @@
 package manager
 
 import (
+	"log"
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/narasux/jutland/pkg/audio"
 	audioPlayer "github.com/narasux/jutland/pkg/audio/player"
 	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/controller"
@@ -14,6 +16,7 @@ import (
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/hacker"
 	instr "github.com/narasux/jutland/pkg/mission/instruction"
+	"github.com/narasux/jutland/pkg/mission/metadata"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBullet "github.com/narasux/jutland/pkg/mission/object/bullet"
 	objUnit "github.com/narasux/jutland/pkg/mission/object/unit"
@@ -21,7 +24,9 @@ import (
 	"github.com/narasux/jutland/pkg/mission/sidebar"
 	"github.com/narasux/jutland/pkg/mission/state"
 	"github.com/narasux/jutland/pkg/mission/targeting"
+	"github.com/narasux/jutland/pkg/mission/tutorial"
 	"github.com/narasux/jutland/pkg/mission/unitpanel"
+	audioRes "github.com/narasux/jutland/pkg/resources/audio"
 	mapBlockImg "github.com/narasux/jutland/pkg/resources/images/mapblock"
 	"github.com/narasux/jutland/pkg/utils/magnify"
 )
@@ -44,6 +49,8 @@ const (
 // MissionManager 任务管理器
 type MissionManager struct {
 	state              *state.MissionState
+	tutorial           *tutorial.Controller
+	tutorialStep       int
 	drawer             *drawer.Drawer
 	sidebar            *sidebar.Panel
 	terminal           *hacker.Terminal
@@ -105,6 +112,14 @@ func New(mission string, playerSide faction.Side) *MissionManager {
 		targetingCursors:   map[string]map[object.Type]int{},
 		takeoffTypeCursors: map[string]int{},
 	}
+	if manager.state.Core.MissionMD.Category == metadata.MissionCategoryTutorial {
+		ctrl, err := tutorial.New(mission, manager.state)
+		if err != nil {
+			log.Fatal("failed to create tutorial controller: ", err)
+		}
+		manager.tutorial = ctrl
+		manager.tutorialStep = ctrl.StepIndex()
+	}
 	return manager
 }
 
@@ -125,11 +140,55 @@ func (m *MissionManager) Resize(width, height int) {
 func (m *MissionManager) Draw(screen *ebiten.Image) {
 	m.drawer.Draw(screen, m.state, m.terminal)
 	m.sidebar.Draw(screen, m.state)
+	if m.tutorial != nil {
+		m.drawer.DrawTutorial(screen, m.state, m.tutorial.View())
+	}
 }
 
 // DrawPreview 绘制开始任务前的战场预览，不激活任务侧栏。
 func (m *MissionManager) DrawPreview(screen *ebiten.Image) {
 	m.drawer.Draw(screen, m.state, m.terminal)
+}
+
+// playTutorialStepSound 教学步骤变化时播放一次 UI 点击音。
+func (m *MissionManager) playTutorialStepSound() {
+	if m.tutorial == nil {
+		return
+	}
+	step := m.tutorial.StepIndex()
+	if step == m.tutorialStep {
+		return
+	}
+	m.tutorialStep = step
+	audio.PlayAudioToEnd(audioRes.NewMenuButtonClick())
+}
+
+// TutorialExitRequested 教学是否已请求离开当前任务回到教学列表。
+func (m *MissionManager) TutorialExitRequested() bool {
+	return m.tutorial != nil && m.tutorial.ExitRequested()
+}
+
+// TutorialExitKind 教学结束方式；普通任务或未结束时返回 tutorial.ExitNone。
+func (m *MissionManager) TutorialExitKind() tutorial.ExitKind {
+	if m.tutorial == nil {
+		return tutorial.ExitNone
+	}
+	return m.tutorial.ExitKind()
+}
+
+// TutorialActive 当前任务是否为教学任务。
+func (m *MissionManager) TutorialActive() bool {
+	return m.tutorial != nil
+}
+
+// TutorialCompleted 教学是否以“正常完成”结束。
+func (m *MissionManager) TutorialCompleted() bool {
+	return m.tutorial != nil && m.tutorial.ExitKind() == tutorial.ExitCompleted
+}
+
+// TutorialRestartRequested 教学是否请求重玩当前章节。
+func (m *MissionManager) TutorialRestartRequested() bool {
+	return m.tutorial != nil && m.tutorial.RestartRequested()
 }
 
 // BattleReportLayout 返回当前屏幕尺寸下的战报面板布局。
@@ -202,6 +261,13 @@ func (m *MissionManager) WarmupMapBlocks() bool {
 
 // Update 更新一帧任务状态
 func (m *MissionManager) Update() (state.MissionStatus, error) {
+	defer m.playTutorialStepSound()
+	if m.tutorial != nil && m.tutorial.HandleInput(m.state) {
+		// 信息卡 / 卡片按钮这一帧独占输入，战场保持冻结。
+		m.state.UI.ShowSonarRanges = false
+		m.state.UI.UIConsumesCursor = false
+		return m.state.Core.MissionStatus, nil
+	}
 	status := m.state.Core.MissionStatus
 	// 声呐覆盖轮廓是按住 V 的临时覆盖层：默认不画，松开或离开运行状态立即隐藏。
 	m.state.UI.ShowSonarRanges = status == state.MissionRunning &&
@@ -261,6 +327,9 @@ func (m *MissionManager) Update() (state.MissionStatus, error) {
 	} else {
 		m.updateMissionStatus()
 		m.finalizeBattleStats()
+	}
+	if m.tutorial != nil {
+		m.tutorial.Observe(m.state)
 	}
 
 	return m.state.Core.MissionStatus, nil

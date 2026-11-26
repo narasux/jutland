@@ -8,6 +8,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/narasux/jutland/pkg/audio"
+	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/manager"
 	"github.com/narasux/jutland/pkg/mission/metadata"
@@ -18,7 +19,11 @@ import (
 // 任务选择
 func (g *Game) handleMissionSelect() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeyTab) {
-		g.selectMissionCategory(otherMissionCategory(g.curMissionCategory))
+		direction := 1
+		if ebiten.IsKeyPressed(ebiten.KeyShift) {
+			direction = -1
+		}
+		g.selectMissionCategory(nextMissionCategory(g.curMissionCategory, direction))
 		return nil
 	}
 
@@ -28,15 +33,21 @@ func (g *Game) handleMissionSelect() error {
 			g.selectMissionCategory(metadata.MissionCategoryClassic)
 			return nil
 		}
+		if isHoverArea(ui.TutorialButton) {
+			g.selectMissionCategory(metadata.MissionCategoryTutorial)
+			return nil
+		}
 		if isHoverArea(ui.TestButton) {
 			g.selectMissionCategory(metadata.MissionCategoryTest)
 			return nil
 		}
-		if isHoverArea(ui.SideP1Button) && g.selectMissionPlayerSide(faction.SideP1) {
-			return nil
-		}
-		if isHoverArea(ui.SideP2Button) && g.selectMissionPlayerSide(faction.SideP2) {
-			return nil
+		if g.curMissionCategory != metadata.MissionCategoryTutorial {
+			if isHoverArea(ui.SideP1Button) && g.selectMissionPlayerSide(faction.SideP1) {
+				return nil
+			}
+			if isHoverArea(ui.SideP2Button) && g.selectMissionPlayerSide(faction.SideP2) {
+				return nil
+			}
 		}
 	}
 
@@ -86,11 +97,29 @@ func (g *Game) handleMissionSelect() error {
 	return nil
 }
 
-func otherMissionCategory(category metadata.MissionCategory) metadata.MissionCategory {
-	if category == metadata.MissionCategoryTest {
-		return metadata.MissionCategoryClassic
+var missionCategoryOrder = []metadata.MissionCategory{
+	metadata.MissionCategoryClassic,
+	metadata.MissionCategoryTutorial,
+	metadata.MissionCategoryTest,
+}
+
+// nextMissionCategory 按方向切换到下一个非空任务分类。
+func nextMissionCategory(category metadata.MissionCategory, direction int) metadata.MissionCategory {
+	if direction == 0 {
+		direction = 1
 	}
-	return metadata.MissionCategoryTest
+	index := lo.IndexOf(missionCategoryOrder, category)
+	if index < 0 {
+		index = 0
+	}
+	count := len(missionCategoryOrder)
+	for step := 1; step <= count; step++ {
+		candidate := missionCategoryOrder[((index+direction*step)%count+count)%count]
+		if len(metadata.AvailableMissions(candidate)) > 0 {
+			return candidate
+		}
+	}
+	return category
 }
 
 func cycleMission(missions []string, current string, offset int) string {
@@ -187,12 +216,43 @@ func (g *Game) handleMissionRunning() error {
 	if err != nil {
 		log.Fatal("failed to update mission: ", err)
 	}
+	if g.missionMgr.TutorialRestartRequested() {
+		g.startMissionLoading()
+		return nil
+	}
+	if g.missionMgr.TutorialExitRequested() {
+		g.leaveTutorial()
+		return nil
+	}
 	if status == state.MissionSuccess {
 		g.enterMissionSplash(GameModeMissionSuccess)
 	} else if status == state.MissionFailed {
 		g.enterMissionSplash(GameModeMissionFailed)
 	}
 	return nil
+}
+
+// leaveTutorial 结束教学并回到教学列表，不进入胜负图或战役总结。
+func (g *Game) leaveTutorial() {
+	completed := g.missionMgr != nil && g.missionMgr.TutorialCompleted()
+	if g.missionMgr != nil {
+		g.missionMgr.ClearBattleStats()
+	}
+	g.missionMgr = nil
+	if completed && g.curMissionCategory == metadata.MissionCategoryTutorial {
+		if err := config.MarkTutorialCompleted(g.curMission); err != nil {
+			log.Printf("[WARN] failed to save tutorial progress: %v", err)
+		}
+	}
+	if g.objStates != nil && g.objStates.LoadingInterface != nil {
+		g.objStates.LoadingInterface.Reset()
+	}
+	if g.player != nil {
+		g.player.Close()
+		g.player.PlayLazy(audioRes.NewMenuBackground)
+	}
+	g.closeDebugRecorder()
+	g.mode = GameModeMissionSelect
 }
 
 // resultSplashMinTicks 胜负全屏图至少展示的帧数，避免战斗末尾的点击直接跳过。

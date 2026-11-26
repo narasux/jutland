@@ -21,6 +21,7 @@ type rawMissionMetadata struct {
 	Name                string                          `json:"name"`
 	DisplayName         string                          `json:"displayName"`
 	Category            string                          `json:"category"`
+	TutorialScript      string                          `json:"tutorialScript"`
 	DisplayNameEn       string                          `json:"displayNameEn"`
 	DisplayNameRu       string                          `json:"displayNameRu"`
 	DisplayNameJa       string                          `json:"displayNameJa"`
@@ -45,10 +46,12 @@ func normalizeMissionCategory(raw string) (MissionCategory, error) {
 	if category == "" {
 		return MissionCategoryClassic, nil
 	}
-	if category != MissionCategoryClassic && category != MissionCategoryTest {
+	switch category {
+	case MissionCategoryClassic, MissionCategoryTutorial, MissionCategoryTest:
+		return category, nil
+	default:
 		return "", fmt.Errorf("unknown mission category %q", raw)
 	}
-	return category, nil
 }
 
 type rawInitShipMetadata struct {
@@ -278,6 +281,7 @@ func init() {
 			Name:                md.Name,
 			DisplayName:         md.DisplayName,
 			Category:            category,
+			TutorialScript:      md.TutorialScript,
 			InitCameraPositions: initCameraPositions,
 			displayNames: map[i18n.Language]string{
 				i18n.LanguageZhHans:   md.DisplayName,

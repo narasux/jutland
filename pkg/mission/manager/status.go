@@ -39,9 +39,11 @@ func (m *MissionManager) calcNextStatusByShips(curStatus state.MissionStatus) st
 // 计算下一帧任务状态
 func (m *MissionManager) updateMissionStatus() {
 	if m.headless {
-		switch m.state.Core.MissionStatus {
-		case state.MissionRunning, state.MissionInMap, state.MissionInBuilding:
-			m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
+		if m.tutorial == nil {
+			switch m.state.Core.MissionStatus {
+			case state.MissionRunning, state.MissionInMap, state.MissionInBuilding:
+				m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
+			}
 		}
 		return
 	}
@@ -53,12 +55,20 @@ func (m *MissionManager) updateMissionStatus() {
 			m.state.Core.ConfirmQuitMission = false
 			m.state.UI.PauseStats = false
 		}
-		m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
+		if m.tutorial == nil {
+			m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
+		}
 	case state.MissionPaused:
 		if m.state.UI.DebugFlags.IsActive() {
 			// debug 模式下不展示暂停面板与实时战报，Q 直接退出，Esc 直接继续
 			m.state.UI.PauseStats = false
 			if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
+				if m.tutorial != nil {
+					m.tutorial.Abort()
+					m.state.Core.MissionStatus = state.MissionRunning
+					m.state.Core.ConfirmQuitMission = false
+					return
+				}
 				m.state.Core.MissionStatus = state.MissionFailed
 				m.state.Core.ConfirmQuitMission = true
 				return
@@ -113,7 +123,7 @@ func (m *MissionManager) updateMissionStatus() {
 			return
 		}
 		// 确认放弃期间不允许打开实时战报，避免与退出确认互相遮挡。
-		if inpututil.IsKeyJustPressed(ebiten.KeyTab) && !m.state.Core.ConfirmQuitMission {
+		if m.tutorial == nil && inpututil.IsKeyJustPressed(ebiten.KeyTab) && !m.state.Core.ConfirmQuitMission {
 			m.state.UI.PauseStats = true
 			m.state.UI.BattleReportPage = state.BattleReportPageOverview
 			m.state.UI.BattleReportEventScroll = 0
@@ -145,6 +155,14 @@ func (m *MissionManager) updateMissionStatus() {
 			m.state.Core.ConfirmQuitMission,
 			input,
 		)
+		if m.tutorial != nil && m.state.Core.MissionStatus == state.MissionFailed {
+			// 教学里的“放弃”是退出教学，不进入失败图 / 战役总结。
+			m.tutorial.Abort()
+			m.state.Core.MissionStatus = state.MissionRunning
+			m.state.Core.ConfirmQuitMission = false
+			m.state.UI.PauseStats = false
+			return
+		}
 		if m.state.Core.MissionStatus != state.MissionPaused {
 			m.state.UI.PauseStats = false
 		}
@@ -154,7 +172,9 @@ func (m *MissionManager) updateMissionStatus() {
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 			m.state.Core.MissionStatus = state.MissionRunning
 		}
-		m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
+		if m.tutorial == nil {
+			m.state.Core.MissionStatus = m.calcNextStatusByShips(m.state.Core.MissionStatus)
+		}
 	case state.MissionInTerminal:
 		// 退出终端模式
 		if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
@@ -188,8 +208,9 @@ func (m *MissionManager) updateMissionStatus() {
 		)
 	}
 
-	// 按下 LeftCtrl，LeftShift 的同时按下 ` 键开启终端
-	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
+	// 按下 LeftCtrl，LeftShift 的同时按下 ` 键开启终端；教学任务禁用秘籍。
+	if m.tutorial == nil &&
+		ebiten.IsKeyPressed(ebiten.KeyControlLeft) &&
 		ebiten.IsKeyPressed(ebiten.KeyShiftLeft) &&
 		inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
 		m.state.Core.MissionStatus = state.MissionInTerminal

@@ -28,30 +28,32 @@ func TestGetLocalizesTraditionalChineseMissionMetadata(t *testing.T) {
 }
 
 // TestAvailableMissionsFiltersCategoriesAndPreservesOrder 验证任务列表按分类过滤且保持配置顺序。
-// 场景：构造乱序 map（classic-third/first/second 与 test），order 为 first、test、second、third。
-// 预期：classic 返回 first/second/third，test 返回 test；失败意味着顺序随机漂移或分类泄漏。
-// 覆盖：两组 require.Equal 精确比较切片元素与顺序，覆盖跨分类穿插。
+// 场景：构造乱序 map（classic-third/first/second、tutorial 与 test），order 为 first、test、tutorial、second、third。
+// 预期：classic 返回 first/second/third，tutorial 返回 tutorial，test 返回 test；失败意味着顺序随机漂移或分类泄漏。
+// 覆盖：三组 require.Equal 精确比较切片元素与顺序，覆盖跨分类穿插。
 func TestAvailableMissionsFiltersCategoriesAndPreservesOrder(t *testing.T) {
 	metadata := map[string]MissionMetadata{
 		"classic-third":  {Name: "classic-third", Category: MissionCategoryClassic},
 		"classic-first":  {Name: "classic-first", Category: MissionCategoryClassic},
 		"classic-second": {Name: "classic-second", Category: MissionCategoryClassic},
+		"tutorial":       {Name: "tutorial", Category: MissionCategoryTutorial},
 		"test":           {Name: "test", Category: MissionCategoryTest},
 	}
-	order := []string{"classic-first", "test", "classic-second", "classic-third"}
+	order := []string{"classic-first", "test", "tutorial", "classic-second", "classic-third"}
 
 	require.Equal(t, []string{
 		"classic-first",
 		"classic-second",
 		"classic-third",
 	}, availableMissions(metadata, order, MissionCategoryClassic))
+	require.Equal(t, []string{"tutorial"}, availableMissions(metadata, order, MissionCategoryTutorial))
 	require.Equal(t, []string{"test"}, availableMissions(metadata, order, MissionCategoryTest))
 }
 
 // TestNormalizeMissionCategory 验证任务分类缺省值与非法值校验。
-// 场景：分别传入空串、合法 "test"、未知 "training"。
-// 预期：空串归一为 classic，"test" 保留，"training" 返回含 unknown mission category 的错误。
-// 覆盖：两次 NoError+Equal 和一次 ErrorContains，覆盖缺省、合法、非法三条分支。
+// 场景：分别传入空串、合法 "test"/"tutorial"、未知 "training"。
+// 预期：空串归一为 classic，"test"/"tutorial" 保留，"training" 返回含 unknown mission category 的错误。
+// 覆盖：三次 NoError+Equal 和一次 ErrorContains，覆盖缺省、两个合法值、非法值四条分支。
 func TestNormalizeMissionCategory(t *testing.T) {
 	category, err := normalizeMissionCategory("")
 	require.NoError(t, err)
@@ -61,14 +63,18 @@ func TestNormalizeMissionCategory(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, MissionCategoryTest, category)
 
+	category, err = normalizeMissionCategory("tutorial")
+	require.NoError(t, err)
+	require.Equal(t, MissionCategoryTutorial, category)
+
 	_, err = normalizeMissionCategory("training")
 	require.ErrorContains(t, err, "unknown mission category")
 }
 
 // TestConfiguredMissionOrder 验证 missions.json5 初始化后的关卡分类与顺序稳定。
-// 场景：包 init 加载配置后，分别调用 AvailableMissions(classic) 与 (test)。
-// 预期：classic 返回 10 关（PearlHarbor1941 至 Samar1944），test 返回 TestAll 等 7 关。
-// 覆盖：两组完整切片相等断言，防止配置顺序被改、关卡误分类或漏注册。
+// 场景：包 init 加载配置后，分别调用 AvailableMissions(classic)、tutorial 与 test。
+// 预期：classic 返回 10 关，tutorial 返回 TutorialBasicControls 等 5 关，test 返回 TestAll 等 7 关。
+// 覆盖：三组完整切片相等断言，防止配置顺序被改、关卡误分类或漏注册。
 func TestConfiguredMissionOrder(t *testing.T) {
 	require.Equal(t, []string{
 		"PearlHarbor1941",
@@ -82,6 +88,13 @@ func TestConfiguredMissionOrder(t *testing.T) {
 		"Palau1944",
 		"Samar1944",
 	}, AvailableMissions(MissionCategoryClassic))
+	require.Equal(t, []string{
+		"TutorialBasicControls",
+		"TutorialFormation",
+		"TutorialSubmarine",
+		"TutorialAviation",
+		"TutorialReinforce",
+	}, AvailableMissions(MissionCategoryTutorial))
 	require.Equal(t, []string{
 		"TestAll",
 		"TestAntiAircraft",

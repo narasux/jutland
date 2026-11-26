@@ -765,3 +765,41 @@ other = "映像と音声"
 other = "戦闘テンポ・言語・視界・HUD"
 [SettingsAVHint]
 other = "戦闘エフェクト・音量・航跡"
+
+[MissionCategoryTutorial]
+other = "チュートリアル"
+[TutorialStart]
+other = "チュートリアルを開始"
+[TutorialStats]
+other = "{{.Steps}} ステップ"
+[TutorialProgress]
+other = "チュートリアル {{.Current}} / {{.Total}}"
+[TutorialNext]
+other = "次へ"
+[TutorialSkip]
+other = "スキップ"
+[TutorialExit]
+other = "終了"
+[TutorialBackToTutorials]
+other = "チュートリアル一覧へ"
+[TutorialCompleted]
+other = "チャプター完了"
+[TutorialCompletedBody]
+other = "よくできました。チュートリアル一覧に戻って次のチャプターを選べます。"
+[TutorialHold]
+other = "押したまま"
+[TutorialMouseLeft]
+other = "左ボタン"
+[TutorialMouseRight]
+other = "右ボタン"
+[TutorialMouseDrag]
+other = "ドラッグ"
+[TutorialMouseWheel]
+other = "ホイール"
+
+[TutorialStatsDone]
+other = "{{.Steps}} ステップ · 完了"
+[TutorialRestart]
+other = "この章をやり直す"
+[TutorialStuckHint]
+other = "まだ？もう一度試すか「スキップ」を押してください。"

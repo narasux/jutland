@@ -765,3 +765,41 @@ other = "视听"
 other = "战斗节奏、语言、视野与界面"
 [SettingsAVHint]
 other = "战斗反馈、音量与战舰尾流"
+
+[MissionCategoryTutorial]
+other = "教学"
+[TutorialStart]
+other = "开始教学"
+[TutorialStats]
+other = "{{.Steps}} 个步骤"
+[TutorialProgress]
+other = "教学 {{.Current}} / {{.Total}}"
+[TutorialNext]
+other = "下一步"
+[TutorialSkip]
+other = "跳过"
+[TutorialExit]
+other = "退出"
+[TutorialBackToTutorials]
+other = "返回教学列表"
+[TutorialCompleted]
+other = "本章完成"
+[TutorialCompletedBody]
+other = "做得不错。返回教学列表，选择下一章继续。"
+[TutorialHold]
+other = "按住"
+[TutorialMouseLeft]
+other = "左键"
+[TutorialMouseRight]
+other = "右键"
+[TutorialMouseDrag]
+other = "拖动"
+[TutorialMouseWheel]
+other = "滚轮"
+
+[TutorialStatsDone]
+other = "{{.Steps}} 个步骤 · 已完成"
+[TutorialRestart]
+other = "重玩本章"
+[TutorialStuckHint]
+other = "还没完成？再试一次，或点「跳过」。"
