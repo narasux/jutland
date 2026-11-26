@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/config"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/metadata"
@@ -275,16 +276,18 @@ func TestAllDestroyersHaveAntiSubWeapon(t *testing.T) {
 	}
 }
 
-// TestASWSalvoWeapons 验证 65 式反潜火箭与刺猬弹按配置同帧齐投。
-// 场景：普通深弹架逐发投放，九江 65 式五管与美英刺猬弹则需要在一次发射动作中投出整轮弹药。
-// 预期：jiujiang 的最大 salvoSize=5；johnston/v/y 的最大 salvoSize=24；且 salvoSize≤rocketCount。
-// 覆盖：从 ShipMap 取四艘代表舰，遍历 AntiSubmarine 火箭取最大 salvoSize 并断言。
+// TestASWSalvoWeapons 验证反潜齐射只保留刺猬弹与日式 Y 炮，65 式反潜火箭改为逐发投放。
+// 场景：65 式五管一度配置成同帧齐投，后按史实改为每枚间隔 1 秒逐发出管；刺猬弹 24 发与
+// Y 炮双发仍需在一次发射动作中投出整轮弹药，配置漏写会让齐射退化成逐发。
+// 预期：jiujiang 的最大 salvoSize=0（不齐射）；johnston/v/y 为 24；shimakaze/akitsukaze/kirizuki
+// 为 2；且所有反潜火箭 salvoSize≤rocketCount。失败意味着 65 式又回到齐射，或齐射配置被改坏。
+// 覆盖：从 ShipMap 取七艘代表舰，遍历 AntiSubmarine 火箭取最大 salvoSize 并逐舰断言。
 func TestASWSalvoWeapons(t *testing.T) {
 	cases := []struct {
 		ship string
 		want int
 	}{
-		{"jiujiang", 5},
+		{"jiujiang", 0},
 		{"johnston", 24},
 		{"v", 24},
 		{"y", 24},
@@ -315,6 +318,50 @@ func TestASWSalvoWeapons(t *testing.T) {
 		if got != tc.want {
 			t.Errorf("%s max salvoSize = %d, want %d", tc.ship, got, tc.want)
 		}
+	}
+}
+
+// TestType65PacingAndDispersion 验证 65 式反潜火箭按 1 秒间隔逐发投放，且落点散布大于爆炸半径。
+// 场景：65 式一度配置成同帧五连齐射、散布只有 40；散布半径小于爆炸半径时，落点无论怎么飘
+// 都仍在杀伤圈内，表现为「几乎必中」。现在取 230 / 0.5 的组合，最远距离单发命中率约 50%。
+// 预期：jiujiang 的 CN/250/5/Type65 满足 salvoSize<=1、shotInterval=1、rocketCount=5，
+// 且最大有效射程（Range/2 格）处的散布半径大于 blastRadius。失败意味着又回到齐射，
+// 或散布被调小到落点必然落在爆炸半径内（命中率回到 100%）。
+// 覆盖：从 ShipMap["jiujiang"] 按名字取出该发射器，断言节奏、备弹数，并按
+// bulletSpread/MapBlockSize*rangePercent 复算散布半径与 blastRadius 比较。
+func TestType65PacingAndDispersion(t *testing.T) {
+	ship, ok := objUnit.ShipMap["jiujiang"]
+	if !ok {
+		t.Fatal("ship template jiujiang missing")
+	}
+	var launcher *objUnit.RocketLauncher
+	for _, rocket := range ship.Weapon.Rockets {
+		if rocket.Name == "CN/250/5/Type65" {
+			launcher = rocket
+			break
+		}
+	}
+	if launcher == nil {
+		t.Fatal("jiujiang 应装备 CN/250/5/Type65")
+	}
+	if launcher.SalvoSize > 1 {
+		t.Errorf("salvoSize = %d, want <= 1（65 式应按单发投放，不齐射）", launcher.SalvoSize)
+	}
+	if math.Abs(launcher.ShotInterval-1.0) > 1e-9 {
+		t.Errorf("shotInterval = %v, want 1（每枚间隔 1 秒）", launcher.ShotInterval)
+	}
+	if launcher.RocketCount != 5 {
+		t.Errorf("rocketCount = %d, want 5（一轮 5 发）", launcher.RocketCount)
+	}
+	// 最大有效交战距离按射程的一半估算，rangePercent 与 RocketLauncher.Fire 的算法一致。
+	maxRangeCells := launcher.Range / 2
+	rangePercent := maxRangeCells / launcher.Range
+	spreadRadius := float64(launcher.BulletSpread) / constants.MapBlockSize * rangePercent
+	if spreadRadius <= launcher.BlastRadius {
+		t.Errorf(
+			"spreadRadius = %.3f 格不应小于等于 blastRadius = %.3f 格（否则落点必然落在杀伤圈内）",
+			spreadRadius, launcher.BlastRadius,
+		)
 	}
 }
 

@@ -707,12 +707,47 @@ func (m *MissionManager) depthChargeShouldExplode(bt *objBullet.Bullet) bool {
 	return m.insideAnyHull(bt.CurPos, bt.Shooter)
 }
 
+// 深弹 / 火箭深弹落点的距离衰减：爆心满额，向外线性递减。
+const (
+	// depthChargeBlastCoreRatio 全额伤害核心区的半径占比。半径 30% 以内按满额结算，
+	// 对应"潜艇几乎就坐在深弹上"的情况。
+	depthChargeBlastCoreRatio = 0.3
+	// depthChargeBlastMinFactor 爆炸边缘（半径处）保留的伤害比例。取 0.35 而不是 0，
+	// 让擦边的潜艇仍吃得到伤害，也避免"刚好在半径内 / 外"出现伤害跳变。
+	depthChargeBlastMinFactor = 0.35
+)
+
+// depthChargeBlastFactor 返回爆心距 distance（地图格）处的伤害系数。
+// 核心区（distance <= radius*core）满额；核心区外线性衰减到半径处的 minFactor。
+// radius 非法时按满额处理，避免异常数据把伤害静默清零。
+func depthChargeBlastFactor(distance, radius float64) float64 {
+	if radius <= 0 || math.IsNaN(radius) || math.IsInf(radius, 0) {
+		return 1
+	}
+	// 负数距离或 NaN 都按爆心处理，不让脏数据算出 NaN 伤害。
+	if !(distance > 0) {
+		return 1
+	}
+	t := distance / radius
+	if t <= depthChargeBlastCoreRatio {
+		return 1
+	}
+	if t >= 1 {
+		return depthChargeBlastMinFactor
+	}
+	fall := (t - depthChargeBlastCoreRatio) / (1 - depthChargeBlastCoreRatio)
+	return 1 - (1-depthChargeBlastMinFactor)*fall
+}
+
 // resolveDepthChargeDamage 深弹 / 火箭深弹落点 AoE：只结算潜艇。
 // 水面 / 过渡态潜艇按水面规则结算；完全下潜的还要求仍被本方探测到（盲炸无效）。
 // 走 hurtShip 而不是直接 HurtBy，保证战报能记下投弹方、武器与伤害。
 func (m *MissionManager) resolveDepthChargeDamage(bt *objBullet.Bullet) {
 	hit := false
 	bt.HitKind = "depth_charge"
+	// HurtBy 按 bt.Damage 结算，这里按爆心距临时缩放，让同一枚深弹对距离不同的潜艇
+	// 造成不同伤害；结算完必须还原，避免污染弹体后续的战报与统计。
+	baseDamage := bt.Damage
 	m.combatBuckets.eachShip(
 		bt.CurPos.RX, bt.CurPos.RY, bt.BlastRadius,
 		func(ship *objUnit.BattleShip) bool {
@@ -725,14 +760,17 @@ func (m *MissionManager) resolveDepthChargeDamage(bt *objBullet.Bullet) {
 			if ship.Submerged() && !m.state.CanSeeShip(bt.BelongPlayer, ship) {
 				return false
 			}
-			if ship.CurPos.Distance(bt.CurPos) > bt.BlastRadius {
+			distance := ship.CurPos.Distance(bt.CurPos)
+			if distance > bt.BlastRadius {
 				return false
 			}
+			bt.Damage = baseDamage * depthChargeBlastFactor(distance, bt.BlastRadius)
 			m.hurtShip(ship, bt)
 			hit = true
 			return false
 		},
 	)
+	bt.Damage = baseDamage
 	if hit {
 		bt.HitObjType = object.TypeShip
 	} else {

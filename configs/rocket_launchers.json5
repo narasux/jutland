@@ -25,17 +25,19 @@
     name: "CN/250/5/Type65",
     bulletName: "CN/RB/250/1965/Type65",
     rocketCount: 5,
-    // 五管齐射：5 枚火箭同帧出管，而不是按 0.08s 间隔逐发
-    salvoSize: 5,
+    // 五管逐发投放：每枚间隔 1 秒，不齐射。
+    // 散布半径 = bulletSpread / 128 * 距离比例（最大射程 4 格时 = bulletSpread / 256）。
+    // 命中率由「散布半径 vs 爆炸半径」决定：半径小于爆炸半径时落点必然落在杀伤圈内。
+    // 这里 230 / 0.5 的组合让最远距离散布半径 0.90 格、命中率约 50%，同时不把落点撒得过开。
     groupCount: 1,
-    shotInterval: 0,
+    shotInterval: 1,
     groupInterval: 0,
     reloadTime: 45,
     range: 8,
-    bulletSpread: 120,
+    bulletSpread: 230,
     bulletSpeed: 520,
     proximityRadius: 0.25,
-    blastRadius: 0.9,
+    blastRadius: 0.5,
     fundsCost: 1,
     antiShip: false,
     antiSubmarine: true,

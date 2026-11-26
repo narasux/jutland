@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"math"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -354,4 +355,65 @@ func TestAirDroppedDepthChargeTemplatesHaveBlastRadius(t *testing.T) {
 		require.NotNil(t, bt, "深弹 %s 应已加载", name)
 		require.InDelta(t, want, bt.BlastRadius, 1e-9, "深弹 %s 的爆炸半径", name)
 	}
+}
+
+// TestDepthChargeBlastFactorFallsOffWithDistance 验证深弹落点的伤害系数随爆心距线性衰减。
+// 场景：半径 1.0 时分别取爆心 0、核心区边界 0.3、核心区外中点 0.65、爆炸边缘 1.0、半径外 2.0，
+// 外加 radius=0 与 distance=NaN 两种脏数据；这些正是 resolveDepthChargeDamage 逐目标缩放的输入。
+// 预期：0 与 0.3 处为 1，0.65 处为 0.675，1.0 与 2.0 处回落到 depthChargeBlastMinFactor=0.35，
+// radius=0 和 NaN 距离按满额 1；失败说明衰减曲线、核心区边界或异常兜底被改动。
+// 覆盖：表驱动 7 组输入，用 InDelta(1e-9) 断言 depthChargeBlastFactor 的返回值。
+func TestDepthChargeBlastFactorFallsOffWithDistance(t *testing.T) {
+	cases := []struct {
+		name     string
+		distance float64
+		radius   float64
+		want     float64
+	}{
+		{name: "爆心", distance: 0, radius: 1, want: 1},
+		{name: "核心区边界", distance: 0.3, radius: 1, want: 1},
+		{name: "核心区外中点", distance: 0.65, radius: 1, want: 0.675},
+		{name: "爆炸边缘", distance: 1, radius: 1, want: depthChargeBlastMinFactor},
+		{name: "半径外", distance: 2, radius: 1, want: depthChargeBlastMinFactor},
+		{name: "零半径按满额", distance: 0.5, radius: 0, want: 1},
+		{name: "NaN 距离按满额", distance: math.NaN(), radius: 1, want: 1},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			require.InDelta(t, tc.want, depthChargeBlastFactor(tc.distance, tc.radius), 1e-9)
+		})
+	}
+}
+
+// TestDepthChargeDamageFallsOffWithDistance 验证一次深弹落点对半径内不同距离的潜艇给出不同伤害。
+// 场景：Mk6 深弹 Damage=1000、BlastRadius=1.3 在 (10,10) 引爆；两艘下潜潜艇分别在爆心 (10,10)
+// 与 (10.8,10)，都被点亮，初始 HP 均为 4000；旧实现给半径内所有目标同样的 1000。
+// 预期：爆心艇掉 1000，0.8 格外的艇掉约 707.14（系数 0.7071429），且结算后 bt.Damage 还原为 1000；
+// 失败意味着伤害仍不随距离衰减，或临时缩放的弹体伤害没有被还原。
+// 覆盖：断言两艇各自掉血量与 bt.Damage 还原，并对照 depthChargeBlastFactor(0.8,1.3) 的乘积。
+func TestDepthChargeDamageFallsOffWithDistance(t *testing.T) {
+	center := &objUnit.BattleShip{
+		Uid: "center", CurHP: 4000, TotalHP: 4000, Type: objUnit.ShipTypeSubmarine,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+	}
+	edge := &objUnit.BattleShip{
+		Uid: "edge", CurHP: 4000, TotalHP: 4000, Type: objUnit.ShipTypeSubmarine,
+		BelongPlayer: faction.ComputerAlpha, CurPos: objPos.NewR(10.8, 10),
+		Submarine: objUnit.SubmarineState{DiveState: objUnit.DiveStateSubmerged},
+	}
+	ms := depthChargeState(center, edge)
+	center.MarkDetected(faction.HumanAlpha, ms.Core.SimTick+10, center.CurPos)
+	edge.MarkDetected(faction.HumanAlpha, ms.Core.SimTick+10, edge.CurPos)
+
+	m := &MissionManager{state: ms}
+	m.rebuildCombatBuckets()
+	bt := newDepthCharge(objPos.NewR(10, 10), faction.HumanAlpha)
+	m.resolveDepthChargeDamage(bt)
+
+	require.InDelta(t, 1000.0, 4000-center.CurHP, 1e-9, "爆心应吃到满额伤害")
+	require.InDelta(t, 1000.0*depthChargeBlastFactor(0.8, 1.3), 4000-edge.CurHP, 1e-9,
+		"0.8 格外的潜艇应吃到衰减后的伤害")
+	require.Less(t, 4000-edge.CurHP, 4000-center.CurHP, "远目标的伤害必须小于爆心")
+	require.InDelta(t, 1000.0, bt.Damage, 1e-9, "结算后必须还原弹体伤害")
 }
