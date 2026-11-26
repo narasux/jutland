@@ -280,27 +280,41 @@ func TestCanHitSubmergedByAmmoType(t *testing.T) {
 	}
 }
 
-// TestTorpedoDetonationFactor 验证鱼雷诱爆系数随战斗部变重而下降，并夹在上下限内。
-// 场景：表驱动航空雷 3400 伤害、基准 4500、重雷 6250、回天 24233、超轻 1000、零伤害。
-// 预期：3400 → 1.32、4500 → 1、6250 → 0.72、24233 与 1000 分别夹到 0.45 与 2.2，
-// 零伤害回落 1；失败意味着航空雷不再比舰载重雷更好拦截，或极端数值把概率放大到必中/归零。
-// 覆盖：TorpedoDetonationFactor 的比值分支、Damage<=0 分支与 min/max 夹紧。
+// TestTorpedoDetonationFactor 验证鱼雷诱爆系数随战斗部变重而下降、航空雷再乘投放修正，并夹在上下限内。
+// 场景：表驱动航空雷 3400 伤害、基准 4500、重雷 6250、回天 24233、超轻 1000、零伤害，
+// 其中 3400 / 4800 / 1000 / 回天 / 零伤害各加一组飞机投放的对照。
+// 预期：舰载档 3400 → 1.32、4500 → 1、6250 → 0.72、24233 与 1000 分别夹到 0.45 与 2.2，
+// 零伤害回落 1；同为 4800 伤害时飞机投放 1.40625 高于舰载 0.9375，飞机投放的 3400 为 1.985，
+// 飞机投放的 1000 与回天仍落在上下限；失败意味着航空雷不再比同战斗部舰载雷更好拦截，
+// 或投放修正在夹紧之后才生效导致上限被突破。
+// 覆盖：TorpedoDetonationFactor 的比值分支、ShooterObjType==TypePlane 乘 1.5 的分支、
+// Damage<=0 早退分支与 min/max 夹紧。
 func TestTorpedoDetonationFactor(t *testing.T) {
 	cases := []struct {
 		name   string
 		damage float64
+		plane  bool
 		want   float64
 	}{
-		{"air torpedo 3400", 3400, 1.3235294117647058},
-		{"reference 4500", 4500, 1},
-		{"heavy type 93", 6250, 0.72},
-		{"kaiten clamps low", 24233, torpedoDetonationFactorMin},
-		{"tiny clamps high", 1000, torpedoDetonationFactorMax},
-		{"unknown damage", 0, 1},
+		{"air torpedo 3400", 3400, false, 1.3235294117647058},
+		{"air dropped 3400", 3400, true, 1.9852941176470587},
+		{"reference 4500", 4500, false, 1},
+		{"ship mk15 4800", 4800, false, 0.9375},
+		{"air mk13 4800", 4800, true, 1.40625},
+		{"heavy type 93", 6250, false, 0.72},
+		{"kaiten clamps low", 24233, false, torpedoDetonationFactorMin},
+		{"kaiten air clamps low", 24233, true, torpedoDetonationFactorMin},
+		{"tiny clamps high", 1000, false, torpedoDetonationFactorMax},
+		{"tiny air clamps high", 1000, true, torpedoDetonationFactorMax},
+		{"unknown damage", 0, false, 1},
+		{"unknown damage air", 0, true, 1},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			bt := &Bullet{Type: TypeTorpedo, Damage: tc.damage}
+			if tc.plane {
+				bt.ShooterObjType = object.TypePlane
+			}
 			assert.InDelta(t, tc.want, bt.TorpedoDetonationFactor(), 1e-9)
 		})
 	}

@@ -418,9 +418,18 @@ func antiTorpedoProbeShip(uid string, shipType objUnit.ShipType, player faction.
 // 统计鱼雷被机炮拦下的次数。随机源每次按固定种子重设，结果可复现。
 func antiTorpedoInterceptTrials(t *testing.T, shipType objUnit.ShipType, trials int) int {
 	t.Helper()
+	return antiTorpedoInterceptTrialsFor(t, shipType, "US/TB/533/1935/Mk15", object.TypeShip, trials)
+}
+
+// antiTorpedoInterceptTrialsFor 按指定鱼雷模板与投放来源跑 trials 次直冲测试。
+// 种子固定，同一组参数重复运行结果一致，便于把「航空雷 vs 舰载雷」的差值当断言。
+func antiTorpedoInterceptTrialsFor(
+	t *testing.T, shipType objUnit.ShipType, torpName string, shooterType object.Type, trials int,
+) int {
+	t.Helper()
 	intercepted := 0
 	for i := 0; i < trials; i++ {
-		intercepted += runAntiTorpedoInterceptTrial(t, shipType, int64(i*7919+13))
+		intercepted += runAntiTorpedoInterceptTrialFor(t, shipType, torpName, shooterType, int64(i*7919+13))
 	}
 	return intercepted
 }
@@ -428,16 +437,27 @@ func antiTorpedoInterceptTrials(t *testing.T, shipType objUnit.ShipType, trials 
 // runAntiTorpedoInterceptTrial 跑单次直冲测试，返回鱼雷是否被拦下。
 func runAntiTorpedoInterceptTrial(t *testing.T, shipType objUnit.ShipType, seed int64) int {
 	t.Helper()
+	return runAntiTorpedoInterceptTrialFor(t, shipType, "US/TB/533/1935/Mk15", object.TypeShip, seed)
+}
+
+// runAntiTorpedoInterceptTrialFor 用指定鱼雷模板与投放来源跑单次直冲测试，返回是否被拦下。
+func runAntiTorpedoInterceptTrialFor(
+	t *testing.T, shipType objUnit.ShipType, torpName string, shooterType object.Type, seed int64,
+) int {
+	t.Helper()
 	restoreRand := objUnit.SetRandSource(rand.New(rand.NewSource(seed)))
 	defer restoreRand()
 
-	torpTpl := objBullet.Map["US/TB/533/1935/Mk15"]
+	torpTpl, ok := objBullet.Map[torpName]
+	if !ok {
+		t.Fatalf("torpedo template %q not loaded", torpName)
+	}
 	torpedo := &objBullet.Bullet{
 		Name: torpTpl.Name, Type: objBullet.TypeTorpedo,
 		Diameter: torpTpl.Diameter, Damage: torpTpl.Damage, CriticalRate: torpTpl.CriticalRate,
 		CurPos: objPos.NewR(58, 150), TargetPos: objPos.NewR(50, 150),
 		Rotation: 270, Speed: 0.075, Life: 400,
-		BelongPlayer: faction.ComputerAlpha, ShooterObjType: object.TypeShip,
+		BelongPlayer: faction.ComputerAlpha, ShooterObjType: shooterType,
 		TargetObjType: object.TypeShip,
 	}
 	shooter := antiTorpedoProbeShip("probe", shipType, faction.HumanAlpha)
@@ -498,6 +518,45 @@ func TestAntiTorpedoDestroyerOutperformsBattleship(t *testing.T) {
 	if battleshipRate < 0.01 || battleshipRate > 0.15 {
 		t.Fatalf("战列舰拦截率 %.1f%% 不在 1%%~15%% 的预期区间（只该是最后一道近防）",
 			100*battleshipRate)
+	}
+}
+
+// TestAntiTorpedoAirTorpedoIsEasierThanShipTorpedo 验证同战斗部下航空鱼雷比舰载鱼雷更容易被机炮拦下。
+// 场景：Mk13 570mm 鱼雷（4800 伤害）分别按飞机投放与舰载发射两种来源，从 8 格外直冲同一艘
+// 驱逐舰测试舰，各用同一组 120 个固定种子跑一遍；两种来源只差 TorpedoDetonationFactor 的 1.5 倍。
+// 预期：航空雷拦截率至少比舰载雷高 5 个百分点，航空雷不超过 55%、舰载雷不低于 5%，
+// 即航空雷更好拦但仍有突防机会；失败意味着投放修正没生效，或航空雷被放大到接近必拦。
+// 覆盖：TorpedoDetonationFactor 的 ShooterObjType==TypePlane 分支，经真实
+// updateShipWeaponFire / updateShotBullets 结算成拦截率。
+func TestAntiTorpedoAirTorpedoIsEasierThanShipTorpedo(t *testing.T) {
+	oldSettings := config.G
+	config.G = config.NewDefaultGameSettings()
+	t.Cleanup(func() {
+		config.G = oldSettings
+		objUnit.SetSimTick(0)
+	})
+	registerAntiTorpedoShell(t)
+
+	const (
+		trials   = 120
+		mk13Name = "US/TB/570/1938/Mk13"
+	)
+	shipHits := antiTorpedoInterceptTrialsFor(t, objUnit.ShipTypeDestroyer, mk13Name, object.TypeShip, trials)
+	airHits := antiTorpedoInterceptTrialsFor(t, objUnit.ShipTypeDestroyer, mk13Name, object.TypePlane, trials)
+	shipRate := float64(shipHits) / trials
+	airRate := float64(airHits) / trials
+
+	// 用于平衡观测：-v 时打印实测拦截率，调参后可直接对比 docs/anti-torpedo/README.md。
+	t.Logf("驱逐舰拦截率：航空雷 %.1f%% / 舰载雷 %.1f%%", 100*airRate, 100*shipRate)
+
+	if airRate < shipRate+0.05 {
+		t.Fatalf("航空雷拦截率 %.1f%% 没有明显高于舰载雷 %.1f%%", 100*airRate, 100*shipRate)
+	}
+	if airRate > 0.55 {
+		t.Fatalf("航空雷拦截率 %.1f%% 过高，航空雷不该接近必拦", 100*airRate)
+	}
+	if shipRate < 0.05 {
+		t.Fatalf("舰载雷拦截率 %.1f%% 过低，驱逐舰不该对鱼雷无还手之力", 100*shipRate)
 	}
 }
 

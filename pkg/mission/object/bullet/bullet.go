@@ -188,16 +188,24 @@ const (
 	// 反鱼雷概率放大到必中或压到归零。
 	torpedoDetonationFactorMin = 0.45
 	torpedoDetonationFactorMax = 2.2
+	// torpedoAirDropFactor 空中投放鱼雷的诱爆修正：入水姿态不稳、航速低于同代
+	// 舰载雷、航迹更长，自卫火控的拦截窗口也更大，因此比同战斗部的舰载雷好拦。
+	torpedoAirDropFactor = 1.5
 )
 
 // TorpedoDetonationFactor 返回鱼雷被单发机炮诱爆的相对难易（1 为基准）。
-// 战斗部越大，鱼雷越难被一发小口径弹引爆：航空雷 / 轻型反潜雷明显好拦，
-// 610mm 氧气雷与回天这类重雷更难。只用于反鱼雷结算。
+// 战斗部越大，鱼雷越难被一发小口径弹引爆：轻型反潜雷明显好拦，610mm 氧气雷
+// 与回天这类重雷更难；航空鱼雷在同战斗部的基础上再乘 torpedoAirDropFactor。
+// 只用于反鱼雷结算。
 func (b *Bullet) TorpedoDetonationFactor() float64 {
 	if b.Damage <= 0 {
 		return 1
 	}
-	return min(torpedoDetonationFactorMax, max(torpedoDetonationFactorMin, torpedoDetonationRefDamage/b.Damage))
+	factor := torpedoDetonationRefDamage / b.Damage
+	if b.ShooterObjType == object.TypePlane {
+		factor *= torpedoAirDropFactor
+	}
+	return min(torpedoDetonationFactorMax, max(torpedoDetonationFactorMin, factor))
 }
 
 // SteerTowards 把弹头朝目标方向转一个受限制的角度（纯追踪）。
