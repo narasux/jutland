@@ -872,7 +872,9 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
     "width": 1.00,
     // 尾流浓度倍率，范围 0.20 ~ 1.50
     "opacity": 1.00
-  }
+  },
+  // 已完成的教学任务名称；用于任务选择页标记和首次启动引导
+  "tutorialCompleted": []
 }
 ```
 
@@ -883,8 +885,10 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   {
     // 任务关卡名称（不可重复）
     name: "default",
-    // 任务分类：classic（经典）或 test（测试）；缺省时按 classic 处理
+    // 任务分类：classic（经典）、tutorial（教学）或 test（测试）；缺省时按 classic 处理
     category: "classic",
+    // 教学脚本 ID；仅 category=tutorial 时使用，对应 configs/tutorials.json5 的 id
+    // tutorialScript: "basic-controls",
     // 分类内显示顺序沿用本数组中的书写顺序
     // 展示用名称
     displayName: "默认",
@@ -1005,3 +1009,41 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
   }
 ]
 ```
+
+## 教学脚本（tutorials.json5）
+
+教学任务在 `missions.json5` 中使用 `category: "tutorial"` 和 `tutorialScript` 指向本文件；每个教学 mission 必须有对应脚本，否则启动期报错。
+
+```json5
+[
+  {
+    id: "basic-controls",
+    mission: "TutorialBasicControls",
+    // title / titleEn / titleRu / titleJa / titleZhHant
+    steps: [
+      {
+        id: "select-fleet",
+        // info: 信息卡冻结战场；guided: 实时等待动作；free: 自由练习
+        mode: "guided",
+        // title / titleEn / titleRu / titleJa / titleZhHant
+        // body / bodyEn / bodyRu / bodyJa / bodyZhHant
+        // 语义动作，见 pkg/mission/tutorial/actions.go
+        hint: { actions: ["select-area"] },
+        // 可选：地图目标点 [x, y]；绘制脉冲圈提示右键/Shift+右键点哪里
+        target: [20, 31],
+        // 进入步骤时执行：clear-selection / select-player-fleet / open-sidebar / close-sidebar
+        setup: ["clear-selection"],
+        // 完成条件：selectedShips / shipMoved / groupAssigned / groupSelected /
+        // diveState / sonarVisible / mapOpened / mapReturned / paused / resumed /
+        // zoomChanged / cameraMoved / scoutLaunched / reinforceOpened /
+        // reinforceSummoned / reinforceCanceled / reinforceClosed / sidebarExpanded /
+        // terminalOpened / manual
+        completion: { kind: "selectedShips", min: 1 },
+        allowSkip: true
+      }
+    ]
+  }
+]
+```
+
+`info` 步骤用 `manual` 完成；`guided` 步骤必须使用可检测的状态条件，避免卡住。文案缺失、未知动作/完成条件、脚本与任务不匹配都会在启动期失败。
