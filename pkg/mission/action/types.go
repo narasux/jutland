@@ -45,10 +45,21 @@ type SelectedArea struct {
 	StartX, StartY, CurX, CurY int
 }
 
+// Bounds 返回选区在地图坐标下的轴对齐包围盒
+func (a *SelectedArea) Bounds() (left, top, right, bottom float64) {
+	left, right = min(a.StartAt.RX, a.CurAt.RX), max(a.StartAt.RX, a.CurAt.RX)
+	top, bottom = min(a.StartAt.RY, a.CurAt.RY), max(a.StartAt.RY, a.CurAt.RY)
+	return
+}
+
 // Contain 判断某个位置是否在选中区域内
 func (a *SelectedArea) Contain(pos objPos.MapPos) bool {
-	topLeftX, topLeftY := min(a.StartAt.RX, a.CurAt.RX), min(a.StartAt.RY, a.CurAt.RY)
-	bottomRightX, bottomRightY := max(a.StartAt.RX, a.CurAt.RX), max(a.StartAt.RY, a.CurAt.RY)
+	left, top, right, bottom := a.Bounds()
+	return pos.RX >= left && pos.RX <= right && pos.RY >= top && pos.RY <= bottom
+}
 
-	return pos.RX >= topLeftX && pos.RX <= bottomRightX && pos.RY >= topLeftY && pos.RY <= bottomRightY
+// Overlaps 判断选区与给定的轴对齐矩形是否重叠（含边界）
+func (a *SelectedArea) Overlaps(left, top, right, bottom float64) bool {
+	areaLeft, areaTop, areaRight, areaBottom := a.Bounds()
+	return areaRight >= left && areaLeft <= right && areaBottom >= top && areaTop <= bottom
 }

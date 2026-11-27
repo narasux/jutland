@@ -4,6 +4,7 @@ import (
 	"slices"
 	"testing"
 
+	"github.com/narasux/jutland/pkg/mission/action"
 	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
@@ -332,5 +333,38 @@ func TestGroupKeySelectionWorksWhilePanelConsumesCursor(t *testing.T) {
 				t.Fatal("area selecting not reset while UI consumes cursor")
 			}
 		})
+	}
+}
+
+// TestSelectShipsInAreaIncludesHullTouchedByBox 验证框边只压住舰体上沿时也能选中窄驱逐舰。
+// 场景：教学第 2 章的两排舰队，驱逐舰 rotation=90（长度 115、宽度 11，舰体只有约 0.09 格高）；
+// 玩家自上而下拖框，下沿停在 y=31.99——已经压住舰体上沿，但比舰体中心 32 还高一点就松手；
+// 另一组把下沿停在 31.9（离中心 0.1 格），只靠框选容差命中。
+// 预期：两种下沿都只选中这艘己方驱逐舰，2 格外的僚舰和同位置的敌舰不被选中；失败意味着判定
+// 只认中心点或容差失效，玩家框住整排船却只选中一部分，教学第 2 章会卡在「选中编队」。
+// 覆盖：selectShipsInArea 直接传入覆盖两排的 area 与 3 艘 BattleShip，断言压边与容差两组都命中，
+// 超范围的僚舰与敌方舰被排除；并先断言选区不含舰体中心，确保覆盖的是包围盒相交分支。
+func TestSelectShipsInAreaIncludesHullTouchedByBox(t *testing.T) {
+	newShip := func(uid string, pos objPos.MapPos, player faction.Player) *objUnit.BattleShip {
+		return &objUnit.BattleShip{
+			Uid: uid, Name: uid, CurHP: 100, CurPos: pos, CurRotation: 90,
+			Length: 115, Width: 11, BelongPlayer: player,
+		}
+	}
+	touched := newShip("touched", objPos.New(17, 32), faction.HumanAlpha)
+	farAway := newShip("far", objPos.New(17, 35), faction.HumanAlpha)
+	enemy := newShip("enemy", objPos.New(17, 32), faction.ComputerAlpha)
+	ships := map[string]*objUnit.BattleShip{
+		touched.Uid: touched, farAway.Uid: farAway, enemy.Uid: enemy,
+	}
+
+	for _, bottom := range []float64{31.99, 31.9} {
+		area := &action.SelectedArea{StartAt: objPos.New(15, 29), CurAt: objPos.NewR(20, bottom)}
+		if area.Contain(touched.CurPos) {
+			t.Fatalf("test setup: box ending at %.2f must not contain the hull center", bottom)
+		}
+		if got := selectShipsInArea(area, ships, faction.HumanAlpha); !slices.Equal(got, []string{touched.Uid}) {
+			t.Fatalf("box ending at %.2f selected %v, want only %q", bottom, got, touched.Uid)
+		}
 	}
 }

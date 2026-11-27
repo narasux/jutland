@@ -9,7 +9,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/samber/lo"
 
+	"github.com/narasux/jutland/pkg/common/constants"
 	"github.com/narasux/jutland/pkg/mission/action"
+	"github.com/narasux/jutland/pkg/mission/faction"
 	"github.com/narasux/jutland/pkg/mission/object"
 	objBuilding "github.com/narasux/jutland/pkg/mission/object/building"
 	objPos "github.com/narasux/jutland/pkg/mission/object/position"
@@ -213,16 +215,47 @@ func (m *MissionManager) updateAreaSelectedShips() {
 	if m.state.Core.MissionStatus != state.MissionRunning {
 		return
 	}
-	// 选择一个区域中的所有战舰
 	if area := action.DetectCursorSelectArea(m.state); area != nil {
-		m.state.Interaction.SelectedShips = []string{}
-		for _, ship := range m.state.Arena.Ships {
-			// 被鼠标划区区域选中的我方战舰
-			if ship.BelongPlayer == m.state.Player.CurPlayer && area.Contain(ship.CurPos) {
-				m.state.Interaction.SelectedShips = append(m.state.Interaction.SelectedShips, ship.Uid)
-			}
+		m.state.Interaction.SelectedShips = selectShipsInArea(
+			area, m.state.Arena.Ships, m.state.Player.CurPlayer,
+		)
+	}
+}
+
+// shipSelectionPadding 框选命中判定给舰体外扩的容差（地图格）。
+// 默认缩放下驱逐舰舰体只有十来像素高，玩家把框拖到刚压住舰体就松手时，
+// 只按中心点判定会漏选；0.15 格约等于一艘驱逐舰的舰体高度，不会串到相邻纵列。
+const shipSelectionPadding = 0.15
+
+// selectShipsInArea 返回选区覆盖的指定玩家舰船：
+// 舰体中心落在选区内，或舰体包围盒（含容差）与选区重叠都算命中。
+func selectShipsInArea(
+	area *action.SelectedArea, ships map[string]*objUnit.BattleShip, player faction.Player,
+) []string {
+	selected := make([]string, 0, len(ships))
+	for _, ship := range ships {
+		if ship.BelongPlayer != player {
+			continue
+		}
+		left, top, right, bottom := shipSelectionBounds(ship)
+		if area.Contain(ship.CurPos) || area.Overlaps(left, top, right, bottom) {
+			selected = append(selected, ship.Uid)
 		}
 	}
+	return selected
+}
+
+// shipSelectionBounds 返回战舰舰体（按朝向旋转后）在地图坐标下的轴对齐包围盒，外扩框选容差。
+func shipSelectionBounds(ship *objUnit.BattleShip) (left, top, right, bottom float64) {
+	// 未旋转的舰体长度沿 Y 轴、宽度沿 X 轴，见 geometry.IsPointInRotatedRectangle。
+	halfLength := ship.Length / constants.MapBlockSize / 2
+	halfWidth := ship.Width / constants.MapBlockSize / 2
+	radians := ship.CurRotation * math.Pi / 180
+	sin, cos := math.Abs(math.Sin(radians)), math.Abs(math.Cos(radians))
+	halfX := halfLength*sin + halfWidth*cos + shipSelectionPadding
+	halfY := halfLength*cos + halfWidth*sin + shipSelectionPadding
+	return ship.CurPos.RX - halfX, ship.CurPos.RY - halfY,
+		ship.CurPos.RX + halfX, ship.CurPos.RY + halfY
 }
 
 // normalizeSelectedShips 剔除已沉没的战舰、稳定选中集顺序，并补齐焦点舰。
