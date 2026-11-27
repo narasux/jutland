@@ -73,7 +73,7 @@ func TestNormalizeMissionCategory(t *testing.T) {
 
 // TestConfiguredMissionOrder 验证 missions.json5 初始化后的关卡分类与顺序稳定。
 // 场景：包 init 加载配置后，分别调用 AvailableMissions(classic)、tutorial 与 test。
-// 预期：classic 返回 10 关，tutorial 返回 TutorialBasicControls 等 5 关，test 返回 TestAll 等 7 关。
+// 预期：classic 返回 10 关，tutorial 返回 TutorialBasicControls 等 6 关，test 返回 TestAll 等 7 关。
 // 覆盖：三组完整切片相等断言，防止配置顺序被改、关卡误分类或漏注册。
 func TestConfiguredMissionOrder(t *testing.T) {
 	require.Equal(t, []string{
@@ -94,6 +94,7 @@ func TestConfiguredMissionOrder(t *testing.T) {
 		"TutorialSubmarine",
 		"TutorialAviation",
 		"TutorialReinforce",
+		"TutorialCombat",
 	}, AvailableMissions(MissionCategoryTutorial))
 	require.Equal(t, []string{
 		"TestAll",

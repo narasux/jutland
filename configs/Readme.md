@@ -1031,13 +1031,16 @@ PYTHONPYCACHEPREFIX=/tmp/jutland_pycache python3 -m py_compile \
         hint: { actions: ["select-area"] },
         // 可选：地图目标点 [x, y]；绘制脉冲圈提示右键/Shift+右键点哪里
         target: [20, 31],
-        // 进入步骤时执行：clear-selection / select-player-fleet / open-sidebar / close-sidebar
+        // 进入步骤时执行：clear-selection / select-player-fleet / open-sidebar / close-sidebar /
+        // focus-airfield / disarm-enemy / order-air-strike
         setup: ["clear-selection"],
         // 完成条件：selectedShips / shipMoved / groupAssigned / groupSelected /
         // diveState / sonarVisible / mapOpened / mapReturned / paused / resumed /
         // zoomChanged / cameraMoved / scoutLaunched / reinforceOpened /
         // reinforceSummoned / reinforceCanceled / reinforceClosed / sidebarExpanded /
-        // terminalOpened / manual
+        // terminalOpened / airfieldProduction / enemyHit / planeShotDown / airStrike / manual
+        // enemyHit 可选 weapon（shell / torpedo / bomb / rocket）与 actor（ship / plane）筛选，
+        // 只统计进入步骤后的战况；planeShotDown 只统计我方击落敌机。
         completion: { kind: "selectedShips", min: 1 },
         allowSkip: true
       }

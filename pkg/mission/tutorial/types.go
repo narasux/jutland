@@ -72,6 +72,14 @@ const (
 	CompletionSidebarExpanded CompletionKind = "sidebarExpanded"
 	// CompletionTerminalOpened 进入 Hacker 终端。
 	CompletionTerminalOpened CompletionKind = "terminalOpened"
+	// CompletionAirfieldProduction 陆地机场切换了生产机型。
+	CompletionAirfieldProduction CompletionKind = "airfieldProduction"
+	// CompletionEnemyHit 我方命中敌方舰船（可按武器类型 / 攻击者类型筛选）。
+	CompletionEnemyHit CompletionKind = "enemyHit"
+	// CompletionPlaneShotDown 我方击落一架敌机（防空炮或战斗机皆可）。
+	CompletionPlaneShotDown CompletionKind = "planeShotDown"
+	// CompletionAirStrike 我方舰载机已受命攻击敌方舰船。
+	CompletionAirStrike CompletionKind = "airStrike"
 )
 
 func (k CompletionKind) Valid() bool {
@@ -82,7 +90,8 @@ func (k CompletionKind) Valid() bool {
 		CompletionPaused, CompletionResumed, CompletionZoomChanged,
 		CompletionCameraMoved, CompletionScoutLaunched, CompletionReinforceOpened,
 		CompletionReinforceSummoned, CompletionReinforceCanceled, CompletionReinforceClosed,
-		CompletionSidebarExpanded, CompletionTerminalOpened:
+		CompletionSidebarExpanded, CompletionTerminalOpened, CompletionAirfieldProduction,
+		CompletionEnemyHit, CompletionPlaneShotDown, CompletionAirStrike:
 		return true
 	default:
 		return false
@@ -149,11 +158,18 @@ const (
 	SetupOpenSidebar SetupAction = "open-sidebar"
 	// SetupCloseSidebar 收起右侧战术面板。
 	SetupCloseSidebar SetupAction = "close-sidebar"
+	// SetupFocusAirfield 把镜头直接居中到己方陆地机场，用于讲解机场面板。
+	SetupFocusAirfield SetupAction = "focus-airfield"
+	// SetupDisarmEnemy 关闭敌方舰船的全部武器，让教学靶舰不还击。
+	SetupDisarmEnemy SetupAction = "disarm-enemy"
+	// SetupOrderAirStrike 让己方航母先对最近敌舰下达空袭指令，便于演示舰载机出击。
+	SetupOrderAirStrike SetupAction = "order-air-strike"
 )
 
 func (s SetupAction) Valid() bool {
 	switch s {
-	case SetupClearSelection, SetupSelectPlayerFleet, SetupOpenSidebar, SetupCloseSidebar:
+	case SetupClearSelection, SetupSelectPlayerFleet, SetupOpenSidebar, SetupCloseSidebar,
+		SetupFocusAirfield, SetupDisarmEnemy, SetupOrderAirStrike:
 		return true
 	default:
 		return false
@@ -166,4 +182,8 @@ type Completion struct {
 	Min      int
 	Distance float64
 	Group    int
+	// Weapon 命中武器类型（shell / torpedo / bomb / rocket），仅 enemyHit 使用；空表示不限。
+	Weapon string
+	// Actor 攻击者类型（ship / plane），仅 enemyHit 使用；空表示不限。
+	Actor string
 }

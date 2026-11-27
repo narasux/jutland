@@ -21,7 +21,19 @@ type UILayout struct {
 	Next   Rect
 	Skip   Rect
 	Exit   Rect
+	// Toggle 是收起 / 展开把手的可点击区域。
+	Toggle Rect
+	// Collapsed 表示本次布局是收起态：Card 只剩底部窄条，其余区域为零值。
+	Collapsed bool
 }
+
+const (
+	// tutorialToggleW / tutorialToggleH 是收起/展开把手的胶囊尺寸。
+	tutorialToggleW = 132.0
+	tutorialToggleH = 22.0
+	// tutorialCollapsedH 是收起后底部窄条的高度。
+	tutorialCollapsedH = 34.0
+)
 
 func clamp(value, low, high float64) float64 {
 	if value < low {
@@ -33,8 +45,19 @@ func clamp(value, low, high float64) float64 {
 	return value
 }
 
-// CalcLayout 按屏幕逻辑尺寸计算步骤卡布局。
-func CalcLayout(screenW, screenH float64) UILayout {
+// CalcLayout 按屏幕逻辑尺寸计算步骤卡布局；collapsed 为 true 时只给底部窄条和把手。
+func CalcLayout(screenW, screenH float64, collapsed bool) UILayout {
+	if collapsed {
+		barW := clamp(screenW*0.4, 360, 640)
+		barX := (screenW - barW) / 2
+		barY := screenH - tutorialCollapsedH
+		return UILayout{
+			Card:      Rect{X: barX, Y: barY, W: barW, H: tutorialCollapsedH},
+			Toggle:    Rect{X: barX + barW - 36, Y: barY + 5, W: 26, H: tutorialCollapsedH - 10},
+			Collapsed: true,
+		}
+	}
+
 	cardW := clamp(screenW*0.56, 600, 960)
 	cardH := 196.0
 	if screenH < 720 {
@@ -71,5 +94,12 @@ func CalcLayout(screenW, screenH float64) UILayout {
 		Next:   next,
 		Skip:   skip,
 		Exit:   exit,
+		// 把手骑在卡片上缘中央，像抽屉标签一样提示「可以收起」。
+		Toggle: Rect{
+			X: cardX + cardW/2 - tutorialToggleW/2,
+			Y: cardY - tutorialToggleH/2,
+			W: tutorialToggleW,
+			H: tutorialToggleH,
+		},
 	}
 }

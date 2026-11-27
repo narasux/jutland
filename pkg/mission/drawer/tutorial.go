@@ -33,8 +33,18 @@ func (d *Drawer) DrawTutorial(screen *ebiten.Image, ms *state.MissionState, view
 	if ms.Core.MissionStatus == state.MissionPaused && ms.UI.PauseStats {
 		return
 	}
+	// 目标点脉冲圈：教学脚本配了 target 时标出该点，避免玩家在开阔海面 / 靶舰群中找错位置。
+	if view.Target != nil && !view.Finished {
+		d.drawTutorialTarget(screen, ms, *view.Target)
+	}
 
-	ui := tutorial.CalcLayout(float64(ms.View.Layout.Width), float64(ms.View.Layout.Height))
+	ui := tutorial.CalcLayout(
+		float64(ms.View.Layout.Width), float64(ms.View.Layout.Height), ms.UI.TutorialCardCollapsed,
+	)
+	if ms.UI.TutorialCardCollapsed {
+		d.drawCollapsedTutorialCard(screen, ms, ui, view)
+		return
+	}
 	card := ui.Card
 	vector.FillRect(
 		screen,
@@ -46,6 +56,8 @@ func (d *Drawer) DrawTutorial(screen *ebiten.Image, ms *state.MissionState, view
 		float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
 		2, color.RGBA{R: 116, G: 168, B: 178, A: 236}, false,
 	)
+	// 把手骑在卡片上缘，提示可以像侧栏一样收起。
+	d.drawTutorialToggle(screen, ui.Toggle, false)
 
 	titleFont := font.LocalizedUI(font.Hang)
 	bodyFont := font.LocalizedUI(font.Kai)
@@ -111,6 +123,64 @@ func (d *Drawer) DrawTutorial(screen *ebiten.Image, ms *state.MissionState, view
 }
 
 // drawTutorialTarget 在目标点画脉冲圈，避免玩家在开阔海面上找不到该点哪里。
+// drawCollapsedTutorialCard 绘制收起态：底部窄条 + 展开把手。
+func (d *Drawer) drawCollapsedTutorialCard(
+	screen *ebiten.Image, ms *state.MissionState, ui tutorial.UILayout, view tutorial.View,
+) {
+	card := ui.Card
+	vector.FillRect(
+		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
+		color.RGBA{R: 8, G: 20, B: 26, A: 232}, false,
+	)
+	vector.StrokeRect(
+		screen, float32(card.X), float32(card.Y), float32(card.W), float32(card.H),
+		2, color.RGBA{R: 116, G: 168, B: 178, A: 236}, false,
+	)
+
+	label := i18n.Format(i18n.MsgTutorialProgress, map[string]any{
+		"Current": view.StepIndex,
+		"Total":   view.StepCount,
+	})
+	if view.Title != "" {
+		label += "  ·  " + view.Title
+	}
+	textFont := font.ForText(label, font.LocalizedUI(font.Kai))
+	size := 15.0
+	avail := ui.Toggle.X - (card.X + 14) - 8
+	for size > 11 && layout.CalcTextWidth(label, size, textFont) > avail {
+		size--
+	}
+	d.drawText(
+		screen, label, card.X+14, card.Y+(card.H-size)/2-2, size, textFont,
+		color.RGBA{R: 224, G: 232, B: 226, A: 255},
+	)
+	d.drawTutorialToggle(screen, ui.Toggle, true)
+}
+
+// drawTutorialToggle 绘制收起 / 展开把手：展开时箭头朝下，收起时朝上。
+func (d *Drawer) drawTutorialToggle(screen *ebiten.Image, rect tutorial.Rect, collapsed bool) {
+	border := color.RGBA{R: 116, G: 168, B: 178, A: 236}
+	fill := color.RGBA{R: 8, G: 20, B: 26, A: 240}
+	if sx, sy := ebiten.CursorPosition(); rect.Contains(sx, sy) {
+		fill = color.RGBA{R: 26, G: 50, B: 58, A: 245}
+	}
+	vector.FillRect(
+		screen, float32(rect.X), float32(rect.Y), float32(rect.W), float32(rect.H), fill, false,
+	)
+	vector.StrokeRect(screen, float32(rect.X), float32(rect.Y), float32(rect.W), float32(rect.H), 1, border, false)
+
+	arrow := color.RGBA{R: 220, G: 232, B: 230, A: 255}
+	cx, cy := float32(rect.X+rect.W/2), float32(rect.Y+rect.H/2)
+	const half = 6.0
+	if collapsed {
+		vector.StrokeLine(screen, cx-half, cy+3, cx, cy-3, 2, arrow, true)
+		vector.StrokeLine(screen, cx, cy-3, cx+half, cy+3, 2, arrow, true)
+		return
+	}
+	vector.StrokeLine(screen, cx-half, cy-3, cx, cy+3, 2, arrow, true)
+	vector.StrokeLine(screen, cx, cy+3, cx+half, cy-3, 2, arrow, true)
+}
+
 func (d *Drawer) drawTutorialTarget(screen *ebiten.Image, ms *state.MissionState, target objPos.MapPos) {
 	x, y := ms.CameraPosToScreen(target)
 	if x < 0 || y < 0 || x > float64(screen.Bounds().Dx()) || y > float64(screen.Bounds().Dy()) {

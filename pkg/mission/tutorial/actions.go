@@ -85,7 +85,7 @@ var actionSpecs = map[ActionID]ActionSpec{
 		Tokens: []Token{{Kind: TokenKey, Label: "Esc"}},
 	},
 	ActionResume: {
-		Tokens: []Token{{Kind: TokenKey, Label: "Enter"}},
+		Tokens: []Token{{Kind: TokenKey, Label: "Esc"}},
 	},
 	ActionReinforce: {
 		Tokens: []Token{{Kind: TokenKey, Label: "B"}},

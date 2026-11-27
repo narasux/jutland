@@ -2,6 +2,7 @@ package tutorial
 
 import (
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -34,10 +35,21 @@ type Controller struct {
 	exit             ExitKind
 	restartRequested bool
 	stepStartedAt    time.Time
-	baseline         snapshot
+	// sonarHeldSince 声呐步骤里 V 开始按住的时刻；松开即清零。
+	sonarHeldSince time.Time
+	baseline       snapshot
 }
 
 const tutorialStuckHintDelay = 12 * time.Second
+
+// tutorialSonarHoldTime 声呐步骤要求连续按住 V 的时长。
+// 声呐范围只在按住时显示，若按下第一帧就判定完成，玩家还没看清范围就已翻页。
+const tutorialSonarHoldTime = 1500 * time.Millisecond
+
+// tutorialMinStepTime 指引步骤的最短展示时间。
+// 有些完成条件在同一帧就能满足（例如靠近即自动开火的战斗步骤），若立刻翻页，
+// 玩家来不及读完卡片；统一给一个短暂的停留时间。
+const tutorialMinStepTime = 2500 * time.Millisecond
 
 // View 绘制层需要的只读教学视图。
 type View struct {
@@ -55,13 +67,18 @@ type View struct {
 }
 
 type snapshot struct {
-	selected          map[string]objPos.MapPos
-	groups            map[string]object.GroupID
-	diveStates        map[string]objUnit.DiveState
-	status            state.MissionStatus
-	zoom              int
-	camera            objPos.MapPos
-	scoutCount        int
+	selected   map[string]objPos.MapPos
+	groups     map[string]object.GroupID
+	diveStates map[string]objUnit.DiveState
+	status     state.MissionStatus
+	zoom       int
+	camera     objPos.MapPos
+	// scoutUIDs 进入步骤时已在场的手动侦察机（含仍在滑跑的），只用来判断“本步骤又派出了一架”。
+	scoutUIDs map[string]struct{}
+	// airfieldProduction 进入步骤时己方机场的制造机型，用于判定玩家切换了生产机型。
+	airfieldProduction map[string]string
+	// tick 进入步骤时的模拟帧号，战况日志只统计此后的命中。
+	tick              int64
 	reinforceOncoming int
 }
 
@@ -128,13 +145,50 @@ func (c *Controller) HandleInput(ms *state.MissionState) bool {
 	if c.exit != ExitNone {
 		return true
 	}
-	layout := CalcLayout(float64(ms.View.Layout.Width), float64(ms.View.Layout.Height))
+	layout := CalcLayout(
+		float64(ms.View.Layout.Width), float64(ms.View.Layout.Height), ms.UI.TutorialCardCollapsed,
+	)
 	sx, sy := ebiten.CursorPosition()
 	leftClick := inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
 	rightClick := inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonRight)
 	nextPressed := inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
 		inpututil.IsKeyJustPressed(ebiten.KeySpace)
 	escPressed := inpututil.IsKeyJustPressed(ebiten.KeyEscape)
+
+	// 收起 / 展开把手优先处理：它只改变卡片形态，不推进步骤。
+	if leftClick && layout.Toggle.Contains(sx, sy) {
+		ms.UI.TutorialCardCollapsed = !ms.UI.TutorialCardCollapsed
+		return true
+	}
+	if ms.UI.TutorialCardCollapsed {
+		// 收起态只剩底部窄条：点它展开；回车/空格仍能推进信息卡与完成卡。
+		if leftClick && layout.Card.Contains(sx, sy) {
+			ms.UI.TutorialCardCollapsed = false
+			return true
+		}
+		if c.finished {
+			if nextPressed || escPressed {
+				c.exit = ExitCompleted
+			}
+			return true
+		}
+		step := c.currentStep()
+		if step == nil {
+			c.exit = ExitAborted
+			return true
+		}
+		if nextPressed && step.Mode != ModeGuided {
+			c.advance(ms)
+			return true
+		}
+		if step.Mode == ModeInfo && escPressed {
+			c.exit = ExitAborted
+			return true
+		}
+		// 信息卡仍冻结战场；操作步骤继续放行，玩家收起卡片后照常操作。
+		return step.Mode == ModeInfo || step.Mode == ModeScripted
+	}
+
 	clickNext := leftClick && layout.Next.Contains(sx, sy)
 	clickSkip := leftClick && layout.Skip.Contains(sx, sy)
 	clickExit := leftClick && layout.Exit.Contains(sx, sy)
@@ -202,6 +256,9 @@ func (c *Controller) Observe(ms *state.MissionState) {
 	if step == nil || step.Mode != ModeGuided {
 		return
 	}
+	if time.Since(c.stepStartedAt) < tutorialMinStepTime {
+		return
+	}
 	if c.completionMet(step.Completion, ms) {
 		c.advance(ms)
 	}
@@ -265,6 +322,7 @@ func (c *Controller) advance(ms *state.MissionState) {
 func (c *Controller) enterStep(index int, ms *state.MissionState) {
 	c.stepIndex = index
 	c.stepStartedAt = time.Now()
+	c.sonarHeldSince = time.Time{}
 	if index < 0 || index >= len(c.script.Steps) {
 		c.finished = true
 		return
@@ -295,19 +353,68 @@ func applySetup(ms *state.MissionState, setup SetupAction) {
 		ms.Interaction.SelectedGroupID = object.GroupIDNone
 	case SetupOpenSidebar:
 		ms.UI.SidebarExpanded = true
+	case SetupOrderAirStrike:
+		// 教学演示：替玩家给航母指定最近的敌舰，航母会自动派机攻击。
+		for _, ship := range ms.Arena.Ships {
+			if ship.BelongPlayer != ms.Player.CurPlayer ||
+				ship.Type != objUnit.ShipTypeAircraftCarrier || !ship.Aircraft.HasPlane {
+				continue
+			}
+			var target *objUnit.BattleShip
+			bestDistance := math.MaxFloat64
+			for _, enemy := range ms.Arena.Ships {
+				if enemy.BelongPlayer == ms.Player.CurPlayer || enemy.CurHP <= 0 {
+					continue
+				}
+				if distance := ship.CurPos.Distance(enemy.CurPos); distance < bestDistance {
+					bestDistance, target = distance, enemy
+				}
+			}
+			if target != nil {
+				ship.Attack(target.Uid)
+			}
+		}
+	case SetupDisarmEnemy:
+		// 教学靶舰不还击：直接关闭敌方舰船的全部武器。
+		for _, ship := range ms.Arena.Ships {
+			if ship.BelongPlayer != ms.Player.CurPlayer {
+				ship.DisableWeapon(objUnit.WeaponTypeAll)
+			}
+		}
 	case SetupCloseSidebar:
 		ms.UI.SidebarExpanded = false
+	case SetupFocusAirfield:
+		// 教学步骤专用：把镜头直接摆到己方机场，省得玩家自己找跑道。
+		for _, airfield := range ms.Arena.Airfields {
+			if airfield.BelongPlayer != ms.Player.CurPlayer {
+				continue
+			}
+			ms.View.Camera.Target = nil
+			ms.View.Camera.Pos.AssignRxy(
+				airfield.Pos.RX-float64(ms.View.Camera.Width)/2,
+				airfield.Pos.RY-float64(ms.View.Camera.Height)/2,
+			)
+			// 测试用的最小状态可能没有地图元数据，此时不做边界约束。
+			borderX, borderY := 0.0, 0.0
+			if ms.Core.MissionMD.MapCfg != nil {
+				borderX, borderY = ms.CameraPosBorder()
+			}
+			ms.View.Camera.Pos.EnsureBorder(borderX, borderY)
+			break
+		}
 	}
 }
 
 func capture(ms *state.MissionState) snapshot {
 	s := snapshot{
-		selected:   make(map[string]objPos.MapPos, len(ms.Interaction.SelectedShips)),
-		groups:     make(map[string]object.GroupID, len(ms.Interaction.SelectedShips)),
-		diveStates: make(map[string]objUnit.DiveState, len(ms.Interaction.SelectedShips)),
-		status:     ms.Core.MissionStatus,
-		zoom:       ms.UI.GameOpts.Zoom,
-		camera:     ms.View.Camera.Pos,
+		selected:           make(map[string]objPos.MapPos, len(ms.Interaction.SelectedShips)),
+		groups:             make(map[string]object.GroupID, len(ms.Interaction.SelectedShips)),
+		diveStates:         make(map[string]objUnit.DiveState, len(ms.Interaction.SelectedShips)),
+		scoutUIDs:          make(map[string]struct{}, len(ms.Arena.Planes)),
+		airfieldProduction: make(map[string]string, len(ms.Arena.Airfields)),
+		status:             ms.Core.MissionStatus,
+		zoom:               ms.UI.GameOpts.Zoom,
+		camera:             ms.View.Camera.Pos,
 	}
 	for _, uid := range ms.Interaction.SelectedShips {
 		ship := ms.Arena.Ships[uid]
@@ -320,7 +427,12 @@ func capture(ms *state.MissionState) snapshot {
 	}
 	for _, plane := range ms.Arena.Planes {
 		if plane.ScoutManual && plane.CurHP > 0 {
-			s.scoutCount++
+			s.scoutUIDs[plane.Uid] = struct{}{}
+		}
+	}
+	for _, airfield := range ms.Arena.Airfields {
+		if airfield.BelongPlayer == ms.Player.CurPlayer {
+			s.airfieldProduction[airfield.Uid] = airfield.CurProducing
 		}
 	}
 	for _, rp := range ms.Arena.ReinforcePoints {
@@ -396,7 +508,7 @@ func (c *Controller) completionMet(completion Completion, ms *state.MissionState
 		}
 		return false
 	case CompletionSonarVisible:
-		return ms.UI.ShowSonarRanges
+		return c.sonarHeldLongEnough(ms)
 	case CompletionMapOpened:
 		return ms.Core.MissionStatus == state.MissionInMap
 	case CompletionMapReturned:
@@ -413,13 +525,18 @@ func (c *Controller) completionMet(completion Completion, ms *state.MissionState
 	case CompletionCameraMoved:
 		return ms.View.Camera.Pos.Distance(c.baseline.camera) >= 0.5
 	case CompletionScoutLaunched:
-		count := 0
+		// 本步骤新派出、且已经离舰的侦察机：刚下单时飞机还在甲板滑跑，
+		// 若这一帧就判定完成，玩家还没看到起飞就翻页了。
+		// 用 UID 而非数量，避免步骤开始时在空的侦察机返航后基线失效。
 		for _, plane := range ms.Arena.Planes {
-			if plane.ScoutManual && plane.CurHP > 0 {
-				count++
+			if !plane.ScoutManual || plane.CurHP <= 0 || plane.IsOnGround() {
+				continue
+			}
+			if _, existed := c.baseline.scoutUIDs[plane.Uid]; !existed {
+				return true
 			}
 		}
-		return count > c.baseline.scoutCount
+		return false
 	case CompletionReinforceOpened:
 		return ms.Core.MissionStatus == state.MissionInBuilding
 	case CompletionReinforceSummoned:
@@ -433,7 +550,109 @@ func (c *Controller) completionMet(completion Completion, ms *state.MissionState
 		return ms.UI.SidebarExpanded
 	case CompletionTerminalOpened:
 		return ms.Core.MissionStatus == state.MissionInTerminal
+	case CompletionAirfieldProduction:
+		for _, airfield := range ms.Arena.Airfields {
+			if airfield.BelongPlayer != ms.Player.CurPlayer {
+				continue
+			}
+			if prev, ok := c.baseline.airfieldProduction[airfield.Uid]; ok && airfield.CurProducing != prev {
+				return true
+			}
+		}
+		return false
+	case CompletionEnemyHit:
+		return c.enemyHitSinceBaseline(ms, completion)
+	case CompletionPlaneShotDown:
+		return c.planeShotDownSinceBaseline(ms)
+	case CompletionAirStrike:
+		return c.airStrikeOrdered(ms)
 	default:
 		return false
 	}
+}
+
+// sonarHeldLongEnough 判断 V 是否已连续按住足够久；松开立即清零，短暂误触不算完成。
+func (c *Controller) sonarHeldLongEnough(ms *state.MissionState) bool {
+	if !ms.UI.ShowSonarRanges {
+		c.sonarHeldSince = time.Time{}
+		return false
+	}
+	if c.sonarHeldSince.IsZero() {
+		c.sonarHeldSince = time.Now()
+		return false
+	}
+	return time.Since(c.sonarHeldSince) >= tutorialSonarHoldTime
+}
+
+// battleLogSince 返回进入步骤之后新增的战况记录。
+// 战况日志按时间追加，从尾部往前找到第一条越过基线的记录即可。
+func (c *Controller) battleLogSince(ms *state.MissionState) []state.BattleLogEntry {
+	log := ms.Stats.BattleLog
+	start := len(log)
+	for start > 0 && log[start-1].Tick > c.baseline.tick {
+		start--
+	}
+	if start == len(log) {
+		return nil
+	}
+	return log[start:]
+}
+
+// enemyHitSinceBaseline 判断步骤开始后我方是否命中敌方舰船。
+// weapon / actor 为空表示不筛选；命中与击沉都算。
+func (c *Controller) enemyHitSinceBaseline(ms *state.MissionState, completion Completion) bool {
+	player := ms.Player.CurPlayer
+	for _, entry := range c.battleLogSince(ms) {
+		if entry.ActorPlayer != player || entry.TargetPlayer == player || entry.TargetIsPlane {
+			continue
+		}
+		if entry.Action != state.BattleLogShipHit && entry.Action != state.BattleLogShipSunk {
+			continue
+		}
+		if completion.Weapon != "" && entry.Hit.WeaponType != completion.Weapon {
+			continue
+		}
+		switch completion.Actor {
+		case "ship":
+			if entry.ActorIsPlane {
+				continue
+			}
+		case "plane":
+			if !entry.ActorIsPlane {
+				continue
+			}
+		}
+		return true
+	}
+	return false
+}
+
+// planeShotDownSinceBaseline 判断步骤开始后我方是否击落过敌机。
+func (c *Controller) planeShotDownSinceBaseline(ms *state.MissionState) bool {
+	player := ms.Player.CurPlayer
+	for _, entry := range c.battleLogSince(ms) {
+		if entry.Action != state.BattleLogPlaneShotDown {
+			continue
+		}
+		if entry.ActorPlayer != player || !entry.TargetIsPlane || entry.TargetPlayer == player {
+			continue
+		}
+		return true
+	}
+	return false
+}
+
+// airStrikeOrdered 判断我方是否有舰载机已受命攻击敌方舰船。
+func (c *Controller) airStrikeOrdered(ms *state.MissionState) bool {
+	player := ms.Player.CurPlayer
+	for _, plane := range ms.Arena.Planes {
+		if plane.BelongPlayer != player || plane.CurAttackTarget == "" {
+			continue
+		}
+		if target := ms.Arena.Ships[plane.CurAttackTarget]; target != nil &&
+			target.BelongPlayer != player && target.CurHP > 0 {
+			return true
+		}
+	}
+	return false
 }

@@ -55,6 +55,8 @@ type rawCompletion struct {
 	Min      int     `json:"min"`
 	Distance float64 `json:"distance"`
 	Group    int     `json:"group"`
+	Weapon   string  `json:"weapon"`
+	Actor    string  `json:"actor"`
 }
 
 var (
@@ -153,6 +155,8 @@ func buildStep(scriptID string, raw rawStep) Step {
 			Min:      raw.Completion.Min,
 			Distance: raw.Completion.Distance,
 			Group:    raw.Completion.Group,
+			Weapon:   raw.Completion.Weapon,
+			Actor:    raw.Completion.Actor,
 		},
 		AllowSkip: raw.AllowSkip == nil || *raw.AllowSkip,
 	}
@@ -176,6 +180,17 @@ func buildStep(scriptID string, raw rawStep) Step {
 	}
 	if step.Completion.Distance < 0 {
 		log.Fatalf("%s distance must be >= 0", prefix)
+	}
+	if !validHitWeapon(step.Completion.Weapon) {
+		log.Fatalf("%s has invalid completion weapon %q", prefix, step.Completion.Weapon)
+	}
+	if step.Completion.Actor != "" && step.Completion.Actor != "ship" && step.Completion.Actor != "plane" {
+		log.Fatalf("%s has invalid completion actor %q", prefix, step.Completion.Actor)
+	}
+	if step.Completion.Weapon != "" || step.Completion.Actor != "" {
+		if step.Completion.Kind != CompletionEnemyHit {
+			log.Fatalf("%s uses weapon/actor with %q completion", prefix, step.Completion.Kind)
+		}
 	}
 	if step.Completion.Kind == CompletionSelectedShips && step.Completion.Min == 0 {
 		step.Completion.Min = 1
@@ -210,6 +225,16 @@ func buildStep(scriptID string, raw rawStep) Step {
 		step.Setup = append(step.Setup, action)
 	}
 	return step
+}
+
+// validHitWeapon 判断 enemyHit 的武器筛选是否合法；空字符串表示不限。
+func validHitWeapon(weapon string) bool {
+	switch weapon {
+	case "", "shell", "torpedo", "bomb", "rocket":
+		return true
+	default:
+		return false
+	}
 }
 
 func validateLocalized(value Localized, name string) {

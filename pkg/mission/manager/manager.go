@@ -263,8 +263,9 @@ func (m *MissionManager) WarmupMapBlocks() bool {
 func (m *MissionManager) Update() (state.MissionStatus, error) {
 	defer m.playTutorialStepSound()
 	if m.tutorial != nil && m.tutorial.HandleInput(m.state) {
-		// 信息卡 / 卡片按钮这一帧独占输入，战场保持冻结。
-		m.state.UI.ShowSonarRanges = false
+		// 信息卡 / 卡片按钮这一帧独占输入，战场保持冻结；声呐覆盖层仍跟随 V，
+		// 让玩家在完成卡或教学卡上继续查看范围，而不是松手前就被清掉。
+		m.state.UI.ShowSonarRanges = ebiten.IsKeyPressed(ebiten.KeyV)
 		m.state.UI.UIConsumesCursor = false
 		return m.state.Core.MissionStatus, nil
 	}

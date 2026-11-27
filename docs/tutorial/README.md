@@ -83,7 +83,7 @@
 
 - `mode`：`info`（信息卡，冻结）、`guided`（实时，等动作）、`scripted`（自动演示，后置）、`free`（练习，按钮结束）。
 - `actions` 是语义 ID（`select-area`、`move`、`group`、`dive`、`map`…），由代码映射成键帽，不把 `ebiten.Key` 写进配置。
-- `setup` 只放安全动作：`clear-selection`、`select-player-fleet`、`focus-camera`、`open-sidebar`、`close-sidebar`。`clear-selection` 要同时清 `SelectedShips`、`FocusedShipUid`、`SelectedGroupID`。
+- `setup` 只放安全动作：`clear-selection`、`select-player-fleet`、`focus-airfield`、`open-sidebar`、`close-sidebar`。`clear-selection` 要同时清 `SelectedShips`、`FocusedShipUid`、`SelectedGroupID`。
 - 步骤文案放 `tutorials.json5`，每种语言一个字段；UI 框架文案（页签、下一步、跳过、完成）放 i18n，五套 TOML 一次补齐。
 
 启动期 `log.Fatal` 校验：脚本/任务一一对应、mission 必须是 tutorial、step id 唯一、mode/completion/action/setup 已知、所需舰种/机场/增援点存在。
@@ -179,8 +179,9 @@ MissionManager.Update
 | 1. 基础操作 | `darwin` 开阔水域，3 艘 P1 舰 | 框选、右键移动、滚轮缩放、M 全图、Esc 暂停/继续 |
 | 2. 编队与机动 | `darwin` 开阔水域，5 艘 P1 舰 | Ctrl+数字编队、数字键选队、X 散开、方向键微调 |
 | 3. 潜艇操作 | `darwin` 开阔水域，1 艘潜艇 | D 上浮/下潜、V 声呐范围、水下限制 |
-| 4. 航空侦察 | `darwin` 开阔水域，1 艘航母 | 选中航母、Shift+右键派侦察机 |
+| 4. 航空侦察 | `darwin` 近岸水域，1 艘航母 + 1 艘战列舰 + 北岸机场 | 选中航母 / 战列舰、Shift+右键派侦察机（含战舰水上侦察机）、机场面板切换生产机型 |
 | 5. 增援与经济 | `darwin` 开阔水域，增援点 + 资金 | B 增援页、左右选舰、Enter 召唤、Backspace 取消、Esc 返回 |
+| 6. 火力打击 | `darwin` 近岸海域，巡洋舰 + 驱逐舰 + 航母，不还击的运输舰靶船 + 敌岸基机场 | 对舰鱼雷、对舰火炮、对空拦截、舰载机空袭；右键指定目标、单位面板开关武器 |
 
 后续可做：陆地机场生产、撞击/碰撞/迷雾规则信息卡、Hacker 彩蛋章节。
 

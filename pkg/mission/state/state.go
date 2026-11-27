@@ -143,6 +143,8 @@ type MissionUIState struct {
 	GameMarks map[objMark.ID]*objMark.Mark
 	// 右侧任务侧栏是否展开
 	SidebarExpanded bool
+	// 教学步骤卡是否收起成底部窄条（点把手切换，避免遮挡增援 / 全图等界面）
+	TutorialCardCollapsed bool
 	// 任一任务 UI 本帧是否占用鼠标输入
 	UIConsumesCursor bool
 	// 是否临时显示选中舰船的声呐/水听器覆盖范围（按住 V 时由输入层置位）。

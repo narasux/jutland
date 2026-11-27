@@ -6898,16 +6898,32 @@
     ],
     mapName: "darwin",
     maxShipCount: 4,
-    description: "选中航母后，按住 Shift 再右键点击海面，派出一架侦察机。航母和陆地机场都使用同一套侦察操作。",
-    descriptionEn: "Select the carrier, hold Shift, and right-click the sea to launch a scout plane. Carriers and land airfields share the same scouting controls.",
-    descriptionRu: "Выберите авианосец, удерживайте Shift и щёлкните правой кнопкой по морю, чтобы поднять разведчик. Авианосцы и наземные аэродромы используют одни и те же команды.",
-    descriptionJa: "空母を選択し、Shift を押しながら海上で右クリックすると偵察機を発進させます。空母も陸上飛行場も同じ操作です。",
-    descriptionZhHant: "選中航艦後，按住 Shift 再按滑鼠右鍵點擊海面，派出一架偵察機。航艦和陸地機場都使用同一套偵察操作。",
+    description: "选中航母或战列舰后，按住 Shift 再右键点击海面，派出一架侦察机。航母、战舰水侦和陆地机场共用同一套侦察操作。",
+    descriptionEn: "Select the carrier or a battleship, hold Shift, and right-click the sea to launch a scout plane. Carriers, warship floatplanes, and land airfields share the same scouting controls.",
+    descriptionRu: "Выберите авианосец или линкор, удерживайте Shift и щёлкните правой кнопкой по морю, чтобы поднять разведчик. Авианосцы, гидросамолёты кораблей и наземные аэродромы используют одни и те же команды.",
+    descriptionJa: "空母または戦艦を選択し、Shift を押しながら海上で右クリックすると偵察機を発進させます。空母・水上機・陸上飛行場は同じ操作です。",
+    descriptionZhHant: "選中航艦或戰艦後，按住 Shift 再按滑鼠右鍵點擊海面，派出一架偵察機。航艦、戰艦水偵和陸地機場共用同一套偵察操作。",
     initReinforcePoints: [],
     initOilPlatforms: [],
-    initAirfields: [],
+    initAirfields: [
+      {
+        // 达尔文北岸机场：跑道横贯海岸陆地，用于教学里演示机场面板与生产机型切换。
+        pos: [70, 22],
+        rotation: 90,
+        runwayLength: 9,
+        runwayWidth: 1,
+        belongPlayer: "P1",
+        takeoffPoints: 2,
+        takeOffTime: 2.5,
+        planeGroups: [
+          { name: "F4F-3", maxCount: 8 },
+          { name: "SBD-3", maxCount: 6 }
+        ]
+      }
+    ],
     initShips: [
-      { name: "essex", pos: [17, 31], rotation: 90, belongPlayer: "P1" }
+      { name: "essex", pos: [17, 31], rotation: 90, belongPlayer: "P1" },
+      { name: "south_dakota", pos: [15, 34], rotation: 90, belongPlayer: "P1" }
     ]
   },
   {
@@ -6945,6 +6961,58 @@
     initAirfields: [],
     initShips: [
       { name: "johnston", pos: [15, 30], rotation: 90, belongPlayer: "P1" }
+    ]
+  },
+  {
+    name: "TutorialCombat",
+    category: "tutorial",
+    tutorialScript: "combat",
+    displayName: "火力打击",
+    displayNameEn: "Firepower",
+    displayNameRu: "Огневая мощь",
+    displayNameJa: "火力攻撃",
+    displayNameZhHant: "火力打擊",
+    initFunds: 0,
+    initCameraPos: [
+      [56, 21],
+      [56, 21]
+    ],
+    mapName: "darwin",
+    maxShipCount: 20,
+    description: "靶舰是不还击的运输舰：先看鱼雷命中，再看舰炮、舰载机空袭和防空拦截。右键敌舰可指定目标，单位面板可以开关武器。",
+    descriptionEn: "The targets are transports that will not shoot back. Watch torpedoes land first, then naval guns, an air strike, and anti-air interception. Right-click an enemy to focus fire; the unit panel toggles weapons.",
+    descriptionRu: "Цели — транспорты, которые не отведут огонь. Сначала торпеды, затем орудия, авиаудар и перехват ПВО. Правый клик по врагу задаёт цель, панель юнита включает и выключает оружие.",
+    descriptionJa: "標的は反撃しない輸送船です。まず魚雷の命中、続いて艦砲・艦載機の空襲・対空迎撃を確認します。敵を右クリックで目標指定、ユニットパネルで武器のオン・オフができます。",
+    descriptionZhHant: "靶艦是不還擊的運輸艦：先看魚雷命中，再看艦炮、艦載機空襲和防空攔截。右鍵敵艦可指定目標，單位面板可以開關武器。",
+    initReinforcePoints: [],
+    initOilPlatforms: [],
+    initAirfields: [
+      {
+        // 敌方岸基机场：持续派出舰攻机，供玩家练习防空拦截。
+        pos: [70, 22],
+        rotation: 90,
+        runwayLength: 9,
+        runwayWidth: 1,
+        belongPlayer: "P2",
+        takeoffPoints: 2,
+        takeOffTime: 2.5,
+        planeGroups: [
+          { name: "D3A1", maxCount: 8 }
+        ]
+      }
+    ],
+    initShips: [
+      // P1：巡洋舰（炮击 / 防空）+ 驱逐舰（鱼雷）+ 航母（空袭）
+      { name: "atlanta", pos: [59, 24], rotation: 90, belongPlayer: "P1" },
+      { name: "johnston", pos: [61, 26], rotation: 90, belongPlayer: "P1" },
+      { name: "essex", pos: [57, 22], rotation: 90, belongPlayer: "P1" },
+      // P2：不还击的运输舰靶船
+      { name: "mamiya", pos: [62, 28], rotation: 270, belongPlayer: "P2" },
+      { name: "irako", pos: [66, 26], rotation: 270, belongPlayer: "P2" },
+      { name: "kashino", pos: [60, 29], rotation: 270, belongPlayer: "P2" },
+      { name: "mamiya", pos: [64, 27], rotation: 270, belongPlayer: "P2" },
+      { name: "irako", pos: [67, 29], rotation: 270, belongPlayer: "P2" },
+      { name: "kashino", pos: [68, 29], rotation: 270, belongPlayer: "P2" }
     ]
   },
 ]
